@@ -139,143 +139,175 @@
       },
       {
         "summary": "Chernak the Blind: Chernak reaches past the near-fight's residue and carries a fragment of vision to Brynjar — a road running outward, the light wrong on it, two figures, one faceless."
+      },
+      {
+        "summary": "Chernak the Blind: Chernak presses Brynjar on the faceless figure from the vision, asking whether Order-Sense caught anything that fits."
+      },
+      {
+        "summary": "Chernak the Blind: Brynjar interprets the faceless figure as possibly himself — Order-Sense shows him only a person-shaped gap, unresolved; Mayvee's attention returns to the watching stranger."
+      },
+      {
+        "player": "Speak to Chernak directly — introduce yourself plainly and ask what they're doing at the Crossing.",
+        "summary": "Brynjar introduced himself to Chernak plainly; Chernak named their purpose — three days waiting, a vision, the belief that Brynjar may be the second figure.",
+        "narration": "You turn to face Chernak fully. \"Brynjar Andyrsson,\" you say, keeping your voice low enough not to carry to the Wardcaller. \"From Javiksholm, by way of a long road. I'm here because a thread pulled me here, and I suspect you know something about threads.\" Freki shifts beside you, one ear cocked toward the widdershins gate still, but the hound doesn't pull away.\n\nChernak's head tilts at the sound of your name — that particular listening stillness, the kind that hears the shape of words rather than just their meaning. The mended robes settle. \"Chernak,\" they answer, and nothing else for a breath, letting the name stand on its own. Then: \"The Crossing is where you come when you don't yet know which road is yours. I've been here three days. Waiting for the one the vision showed me.\" A pause that is not uncertainty, only patience. \"I think you may be the other figure.\"\n\nMaret, near the spinward wall, catches the exchange without appearing to. She doesn't approach. She is still holding whatever the Stillhold's record-hall put in her hands along with an empty bundle — waiting for the right ground to speak it. Ragnar has let his gaze drift back to the widdershins threshold, where the man who isn't transiting hasn't moved. The evening light through the clerestory slots has gone orange and low, and the hall's foot-traffic is thinning toward the supper hour."
       }
     ],
     "lastTurn": {
-      "narration": "The failed sending leaves a faint residue in the air between you — not quite sound, not quite light, something that arrived at the threshold of your awareness and then withdrew without crossing it. Whatever Chernak attempted, it didn't reach you. You set it aside and simply look at the person standing in your shared company.\n\nChernak the Blind is not what the name suggests, or rather, not only that. The eyes are open — pale, almost colorless, the irises the grey of morning ice — but they track without focusing, moving across the hall's faces and thresholds in a slow sweep that has nothing to do with sight. Everything else about them is sharp and present: a compact frame, deliberately still, robes the dark blue-green of deep water that have been mended several times with thread that doesn't quite match. Their hands are at their sides, fingers loose, and there is a quality to how they stand — weight slightly back, head tilted a degree off-level — that reads like someone who has learned to hear a room the way you've learned to read one.\n\nFreki glances at Chernak once, nose working, then turns its attention back to the widdershins threshold. The hound neither warms nor bristles — a studied neutrality that you've come to trust as a verdict of its own. Maret hasn't moved from her position near the spinward wall. Ragnar's gaze sweeps the hall as it always does, exits and arrivals, but you catch him register Chernak in the same slow accounting he gives everything that enters his field.",
-      "sceneSummary": "Brynjar takes a first look at Chernak the Blind — pale sightless eyes, mended robes, a stillness that listens rather than watches; Freki's verdict is neutral.",
+      "narration": "You turn to face Chernak fully. \"Brynjar Andyrsson,\" you say, keeping your voice low enough not to carry to the Wardcaller. \"From Javiksholm, by way of a long road. I'm here because a thread pulled me here, and I suspect you know something about threads.\" Freki shifts beside you, one ear cocked toward the widdershins gate still, but the hound doesn't pull away.\n\nChernak's head tilts at the sound of your name — that particular listening stillness, the kind that hears the shape of words rather than just their meaning. The mended robes settle. \"Chernak,\" they answer, and nothing else for a breath, letting the name stand on its own. Then: \"The Crossing is where you come when you don't yet know which road is yours. I've been here three days. Waiting for the one the vision showed me.\" A pause that is not uncertainty, only patience. \"I think you may be the other figure.\"\n\nMaret, near the spinward wall, catches the exchange without appearing to. She doesn't approach. She is still holding whatever the Stillhold's record-hall put in her hands along with an empty bundle — waiting for the right ground to speak it. Ragnar has let his gaze drift back to the widdershins threshold, where the man who isn't transiting hasn't moved. The evening light through the clerestory slots has gone orange and low, and the hall's foot-traffic is thinning toward the supper hour.",
+      "sceneSummary": "Brynjar introduced himself to Chernak plainly; Chernak named their purpose — three days waiting, a vision, the belief that Brynjar may be the second figure.",
       "choices": [
         {
-          "label": "Speak to Chernak directly — introduce yourself plainly and ask what they're doing at the Crossing.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": "easy",
-          "trivial": true,
-          "intentTags": [
-            "negotiate"
-          ],
-          "abilityId": null,
-          "energyCost": null
-        },
-        {
-          "label": "Watch Chernak a moment longer before speaking — use Read the Fight to get a read on their intent and alertness.",
+          "label": "Ask Chernak what the road looked like in the vision — the direction, the wrong light, anything else that might let Order-Sense confirm it",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": "easy",
-          "trivial": false,
           "intentTags": [
-            "study",
-            "careful"
+            "study"
           ],
-          "abilityId": "read_the_fight",
-          "energyCost": 3
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false
         },
         {
-          "label": "Turn back to the widdershins gate — Freki has been fixed on something there; go and see what the hound is reading.",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "difficulty": "easy",
-          "trivial": false,
+          "label": "Turn toward Maret — she's been holding her words long enough; find a quiet corner of the hall and ask her what she learned in the Stillhold record-hall",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": "very easy",
           "intentTags": [
-            "scout",
-            "careful"
+            "negotiate"
           ],
-          "abilityId": null,
-          "energyCost": null
+          "trivial": true
+        },
+        {
+          "label": "Walk toward the widdershins threshold — get close enough to read the man who has been standing there without transiting",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": "easy",
+          "intentTags": [
+            "scout"
+          ],
+          "abilityId": "read_the_fight",
+          "energyCost": 3,
+          "trivial": false
+        },
+        {
+          "label": "Ask Chernak plainly: the faceless figure — did the vision show which way they were going, or which way they'd come from?",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": "very easy",
+          "intentTags": [
+            "negotiate"
+          ],
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "The Crossing hub — high-roofed octagonal hall of old stone, eight gate-thresholds set into the walls, mid-afternoon light through clerestory slots. The spinward threshold hums with fold-activity and steady traffic. The widdershins threshold is nearly still, one man standing near it and watching without transiting.",
+        "setting": "The Crossing hub hall — high-roofed octagonal stone, eight gate-thresholds, clerestory light now orange and low as evening settles. The spinward threshold hums with fold-activity but foot-traffic is thinning toward supper. The widdershins threshold remains nearly still.",
         "npcsPresent": [
           {
             "name": "Wardcaller",
-            "state": "Back at the chalk board on the central column, logging arrivals."
+            "state": "At the chalk board on the central column, logging the last arrivals of the evening."
           },
           {
             "name": "Maret Threnwick",
-            "state": "Near the spinward wall, cloak settled, watching the hall — still holding what she knows."
+            "state": "Near the spinward wall, listening to Brynjar and Chernak without approaching — still holding what she knows."
           },
           {
             "name": "Ragnar Solmyr",
-            "state": "A few paces off, back to a pillar, running exits and arriving faces."
+            "state": "Gaze returned to the widdershins threshold, watching the man who hasn't transited."
           },
           {
             "name": "Chernak the Blind",
-            "state": "Standing in the group's company, weight slightly back, head tilted — listening to the hall."
+            "state": "Facing Brynjar, head tilted, that listening stillness — having just named their three-day wait and what they believe it was for."
           },
           {
             "name": "Freki",
-            "state": "Attention divided — one glance at Chernak, now back on the widdershins threshold."
+            "state": "One ear on the conversation, one on the widdershins gate — divided attention, no growl."
           }
         ],
         "objects": [
-          "Central stone column with chalk arrival/departure board — Andyrsson, Threnwick, Solmyr",
-          "Eight gate-thresholds — spinward Coliseum road active with fold-hum and foot traffic",
-          "Widdershins threshold — nearly still, customs-throttled, one man standing and watching without transiting",
+          "Central stone column with chalk arrival/departure board — Andyrsson, Threnwick listed",
+          "Eight gate-thresholds — spinward Coliseum road active with fold-hum, traffic thinning",
+          "Widdershins threshold — nearly still, one man standing and watching without transiting",
           "Iron rings set into each gate-stone",
           "Worn dish-depressions at every threshold"
         ],
         "threads": [
           "Maret is still holding what she learned in the Stillhold record-hall — not yet spoken",
-          "Freki is fixed on something from the direction of the widdershins gate — not the traffic, something closer",
-          "A man stands near the widdershins threshold watching it without going through — reason unknown",
-          "Chernak's attempted sending did not reach Brynjar — what they were trying to convey is unknown"
+          "Chernak believes Brynjar is the second figure from their vision — neither confirmed nor denied",
+          "The man at the widdershins threshold has not moved or transited — reason unknown",
+          "Freki's divided attention between the conversation and the widdershins gate remains unexplained"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "ragnar-solmyr",
-          "note": "Registered Chernak's presence in his hall-sweep without comment.",
-          "statusNote": "In the Crossing hub hall, back to a pillar, watching exits and faces."
-        },
-        {
-          "op": "update",
-          "npcId": "maret-threnwick",
-          "note": "Has not moved from her position near the spinward wall.",
-          "statusNote": "In the Crossing hub hall, near the spinward wall, still holding what she learned inside the Stillhold."
+          "npcId": "chernak-the-blind",
+          "note": "Gave their name plainly and stated their purpose: three days at the Crossing, waiting for the person from a vision — a road with wrong light, two figures, one faceless. Told Brynjar they believe he may be the other figure.",
+          "learned": [
+            "Has been at the Crossing for three days, waiting",
+            "Believes Brynjar may be the second figure from a vision of a road with wrong light"
+          ],
+          "statusNote": "Standing with Brynjar in the hub hall, having named their purpose and their belief about his identity in the vision."
         }
-      ]
+      ],
+      "codexUpdates": [
+        {
+          "topic": "chernak-the-blind",
+          "label": "Chernak the Blind",
+          "kind": "person",
+          "entityId": "chernak-the-blind",
+          "fact": "Has been at the Crossing for three days, waiting for the person shown in a vision — a road running outward, light wrong, two figures, one faceless. Believes Brynjar may be the other figure.",
+          "links": [
+            "brynjar-andyrsson-thread",
+            "sera-of-the-stillhold"
+          ]
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A brief exchange of names and purpose — less than a quarter-hour"
+      }
     },
     "sceneState": {
-      "setting": "The Crossing hub — high-roofed octagonal hall of old stone, eight gate-thresholds set into the walls, mid-afternoon light through clerestory slots. The spinward threshold hums with fold-activity and steady traffic. The widdershins threshold is nearly still, one man standing near it and watching without transiting.",
+      "setting": "The Crossing hub hall — high-roofed octagonal stone, eight gate-thresholds, clerestory light now orange and low as evening settles. The spinward threshold hums with fold-activity but foot-traffic is thinning toward supper. The widdershins threshold remains nearly still.",
       "npcsPresent": [
         {
           "name": "Wardcaller",
-          "state": "Back at the chalk board on the central column, logging arrivals."
+          "state": "At the chalk board on the central column, logging the last arrivals of the evening."
         },
         {
           "name": "Maret Threnwick",
-          "state": "Near the spinward wall, cloak settled, watching the hall — still holding what she knows."
+          "state": "Near the spinward wall, listening to Brynjar and Chernak without approaching — still holding what she knows."
         },
         {
           "name": "Ragnar Solmyr",
-          "state": "A few paces off, back to a pillar, running exits and arriving faces."
+          "state": "Gaze returned to the widdershins threshold, watching the man who hasn't transited."
         },
         {
           "name": "Chernak the Blind",
-          "state": "Standing in the group's company, weight slightly back, head tilted — listening to the hall."
+          "state": "Facing Brynjar, head tilted, that listening stillness — having just named their three-day wait and what they believe it "
         },
         {
           "name": "Freki",
-          "state": "Attention divided — one glance at Chernak, now back on the widdershins threshold."
+          "state": "One ear on the conversation, one on the widdershins gate — divided attention, no growl."
         }
       ],
       "objects": [
-        "Central stone column with chalk arrival/departure board — Andyrsson, Threnwick, ",
-        "Eight gate-thresholds — spinward Coliseum road active with fold-hum and foot tra",
-        "Widdershins threshold — nearly still, customs-throttled, one man standing and wa",
+        "Central stone column with chalk arrival/departure board — Andyrsson, Threnwick l",
+        "Eight gate-thresholds — spinward Coliseum road active with fold-hum, traffic thi",
+        "Widdershins threshold — nearly still, one man standing and watching without tran",
         "Iron rings set into each gate-stone",
         "Worn dish-depressions at every threshold"
       ],
       "threads": [
         "Maret is still holding what she learned in the Stillhold record-hall — not yet spoken",
-        "Freki is fixed on something from the direction of the widdershins gate — not the traffic, something closer",
-        "A man stands near the widdershins threshold watching it without going through — reason unknown",
-        "Chernak's attempted sending did not reach Brynjar — what they were trying to convey is unknown"
+        "Chernak believes Brynjar is the second figure from their vision — neither confirmed nor denied",
+        "The man at the widdershins threshold has not moved or transited — reason unknown",
+        "Freki's divided attention between the conversation and the widdershins gate remains unexplained"
       ]
     },
-    "beats": 4
+    "beats": 5
   },
   "clock": {
     "schemaVersion": 1,
@@ -889,7 +921,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 3,
+    "turnsSinceOffer": 4,
     "recentOffers": [
       {
         "thing": "Doss watching Brynjar with the stillness of someone deciding something — she has not offered it yet, but she is on the edge of it",
@@ -3624,6 +3656,22 @@
         "createdDay": 1,
         "entityId": "echo-river-crossing",
         "updatedDay": 1
+      },
+      "chernak-the-blind": {
+        "id": "chernak-the-blind",
+        "label": "Chernak the Blind",
+        "kind": "person",
+        "facts": [
+          "[d1] Has been at the Crossing for three days, waiting for the person shown in a vision — a road running outward, light wrong, two figures, one faceless. Believes Brynjar may be the other figure."
+        ],
+        "links": [
+          "brynjar-andyrsson-thread",
+          "sera-of-the-stillhold"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "chernak-the-blind",
+        "updatedDay": 1
       }
     },
     "mergeUndo": [
@@ -3732,19 +3780,19 @@
     ]
   },
   "tendencies": {
-    "leadership": 6.096740984057143,
-    "cerebral": 7.205365393228212,
-    "strategic": 4.663411320868789,
-    "ruthless": 0.3918959549693073,
-    "social": 9.446672490580939,
-    "cautious": 8.288712668119432,
-    "generous": 0.7379983458266509,
-    "patient": 0.7962355085707052
+    "leadership": 5.944322459455714,
+    "cerebral": 7.025231258397507,
+    "strategic": 4.54682603784707,
+    "ruthless": 0.3820985560950746,
+    "social": 10.210505678316416,
+    "cautious": 8.081494851416446,
+    "generous": 0.7195483871809846,
+    "patient": 0.7763296208564376
   },
   "aptitudes": [
     "banner"
   ],
-  "actionCount": 39,
+  "actionCount": 40,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -3912,8 +3960,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788789302131,
-  "rev": 103,
+  "updatedAt": 1788789620330,
+  "rev": 104,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4180,7 +4228,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "riven_marches": 39,
-    "the_center": 3
+    "the_center": 4
   },
   "practice": {
     "schemaVersion": 1,
@@ -4260,10 +4308,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-09-07T13:23:54.773Z",
-      "lastAt": "2026-09-07T13:55:02.116Z",
+      "lastAt": "2026-09-07T14:00:20.318Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 14
+      "beats": 15
     }
   ],
   "_pendingArrival": null,
@@ -4279,15 +4327,15 @@
     "at": "2026-07-23T01:18:04.353Z"
   },
   "_opEmitted": {
-    "sceneSummary": 35,
-    "choices": 35,
-    "scene": 35,
-    "npcUpdates": 32,
+    "sceneSummary": 36,
+    "choices": 36,
+    "scene": 36,
+    "npcUpdates": 33,
     "placeUpdates": 6,
     "generateRequest": 3,
     "moveTo": 5,
-    "timeOps": 32,
-    "codexUpdates": 30,
+    "timeOps": 33,
+    "codexUpdates": 31,
     "sceneEnded": 9,
     "characterDeltas": 11,
     "offer": 5,
@@ -4297,7 +4345,7 @@
     "stageOps": 2,
     "factUpdates": 1
   },
-  "_opTurns": 35,
+  "_opTurns": 36,
   "_opLedger": {
     "offer": {
       "applied": 5,
@@ -4392,7 +4440,7 @@
   "_applyFailures": null,
   "_debtReceipts": [],
   "skillUses": {
-    "negotiate": 6,
+    "negotiate": 7,
     "careful": 4,
     "help": 1,
     "plan": 1,

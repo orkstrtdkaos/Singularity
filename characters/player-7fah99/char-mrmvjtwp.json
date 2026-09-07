@@ -8,7 +8,7 @@
   "whyHere": "You were sent, or you were seeded, or you simply wanted to see something finish inside a single lifetime.",
   "background": "warden",
   "level": 2,
-  "xp": 163,
+  "xp": 165,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -42,7 +42,7 @@
     }
   ],
   "alignment": {
-    "death_life": 0.3893336834610618,
+    "death_life": 0.39986699928800873,
     "destruction_creation": 0.027135000000000003,
     "spectrumId": -0.05
   },
@@ -50,7 +50,7 @@
   "maxHealth": 43,
   "health": 43,
   "maxEnergy": 113,
-  "energy": 80,
+  "energy": 75,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -74,7 +74,155 @@
     "Aelyn asked Branch what it had been watching since the margin — Branch named it: small light, not sun-light, and said it knows Aelyn specifically. Deni confirmed she had seen it too. The scene ends on the eastern tree-line, the light steady between the trunks, patient as something that does not need to hurry."
   ],
   "currentLocationId": "gen-quickwood-margin",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "gen-quickwood-margin",
+    "turns": [
+      {
+        "player": "Turn Lifesense toward the light — read the life-shape of what is watching",
+        "summary": "Lifesense finds nothing in the Reaching Light — no life-heat, no vigor — the craft has no hold on what it is.",
+        "narration": "You breathe out, slow, and let Lifesense unfurl — the restrained kind, a careful opening rather than a reach. The Quickwood responds: you feel the canopy overhead in its slow, cold-sap weight, the birches and root-tangled ground teeming with dormant life just beginning to stir. Earthworms in the mud beneath your boots. A roosting bird a hundred feet hubward. Branch, knee-high beside you, a small and growing warmth. Deni, solid and warm to your left.\n\nAnd then the eastern tree-line, where the light waits.\n\nYou turn the craft that way. It slips. Not blocked — that would feel like a wall. This is more like trying to count ripples on still water when the water itself has no temperature, no current, nothing the craft can settle into. Lifesense reads life. What stands between the trunks in the pale, steady radiance has no heat to give, no vigor to measure, no breath thinning and thickening with effort. The craft finds nothing it recognizes, and comes back to you empty.\n\nDeni doesn't look at you. She's still watching the tree-line, one hand resting on her pack-strap. \"Get anything?\" Her voice is level — the kind of question that already expects a complicated answer. Branch is very still beside you, buds half-closed, facing east."
+      }
+    ],
+    "lastTurn": {
+      "narration": "You breathe out, slow, and let Lifesense unfurl — the restrained kind, a careful opening rather than a reach. The Quickwood responds: you feel the canopy overhead in its slow, cold-sap weight, the birches and root-tangled ground teeming with dormant life just beginning to stir. Earthworms in the mud beneath your boots. A roosting bird a hundred feet hubward. Branch, knee-high beside you, a small and growing warmth. Deni, solid and warm to your left.\n\nAnd then the eastern tree-line, where the light waits.\n\nYou turn the craft that way. It slips. Not blocked — that would feel like a wall. This is more like trying to count ripples on still water when the water itself has no temperature, no current, nothing the craft can settle into. Lifesense reads life. What stands between the trunks in the pale, steady radiance has no heat to give, no vigor to measure, no breath thinning and thickening with effort. The craft finds nothing it recognizes, and comes back to you empty.\n\nDeni doesn't look at you. She's still watching the tree-line, one hand resting on her pack-strap. \"Get anything?\" Her voice is level — the kind of question that already expects a complicated answer. Branch is very still beside you, buds half-closed, facing east.",
+      "sceneSummary": "Lifesense finds nothing in the Reaching Light — no life-heat, no vigor — the craft has no hold on what it is.",
+      "choices": [
+        {
+          "label": "Let Prism Sight open instead — read whether the light leaves heat-traces or bends the air around it",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Branch directly — root-sense what the light is made of, through the ground if not the air",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study",
+            "help"
+          ],
+          "abilityId": "speaking_grove",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Deni what she has actually seen — when it first appeared, whether it has ever moved",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -3,
+        "xp": 0
+      },
+      "scene": {
+        "setting": "The Kept Road Northeast inside the Quickwood margin — early-spring dawn, canopy closed overhead, pale diffuse light through bare branches. The party has stopped on the road, facing the eastern tree-line where the Reaching Light holds steady between the trunks.",
+        "npcsPresent": [
+          {
+            "name": "Deni Cors",
+            "state": "standing to Aelyn's left, one hand on her pack-strap, watching the eastern tree-line without looking away"
+          },
+          {
+            "name": "Branch",
+            "state": "very still beside Aelyn, knee-high, buds half-closed, facing east"
+          }
+        ],
+        "objects": [
+          "the Reaching Light — pale, steady radiance between the eastern trunks",
+          "boot-tracks in the melt-mud ahead on the road"
+        ],
+        "threads": [
+          "Lifesense found nothing in the light — no life, no heat, no vigor; the craft has no hold on what it is",
+          "the boot-tracks ahead have stopped or left the road",
+          "Deni is waiting for an answer"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "deni-cors",
+          "name": "Deni Cors",
+          "note": "Watched Aelyn try Lifesense on the light and waited without comment; asked plainly whether anything came through",
+          "statusNote": "Standing on the Kept Road inside the Quickwood margin, watching the eastern light"
+        },
+        {
+          "op": "update",
+          "npcId": "branch",
+          "name": "Branch",
+          "note": "Gone still and buds half-closed, facing east while Aelyn worked Lifesense — has not spoken",
+          "statusNote": "On the Kept Road, very still, facing the Reaching Light"
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "the-reaching-light",
+          "label": "The Reaching Light",
+          "kind": "mystery",
+          "fact": "Lifesense finds nothing in the light — no life-heat, no vigor, nothing the craft can settle into. It is not blocked; it simply has no life-signature to read. Whatever it is, it does not register as living.",
+          "links": [
+            "gen-quickwood-margin",
+            "aelyn-inner-frequency",
+            "aelyn-father"
+          ]
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "a brief stop on the road to attempt Lifesense on the eastern light"
+      },
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "The Kept Road Northeast inside the Quickwood margin — early-spring dawn, canopy closed overhead, pale diffuse light through bare branches. The party has stopped on the road, facing the eastern tree-line where the Reaching Light holds steady between the trunks.",
+      "npcsPresent": [
+        {
+          "name": "Deni Cors",
+          "state": "standing to Aelyn's left, one hand on her pack-strap, watching the eastern tree-line without looking away"
+        },
+        {
+          "name": "Branch",
+          "state": "very still beside Aelyn, knee-high, buds half-closed, facing east"
+        }
+      ],
+      "objects": [
+        "the Reaching Light — pale, steady radiance between the eastern trunks",
+        "boot-tracks in the melt-mud ahead on the road"
+      ],
+      "threads": [
+        "Lifesense found nothing in the light — no life, no heat, no vigor; the craft has no hold on what it is",
+        "the boot-tracks ahead have stopped or left the road",
+        "Deni is waiting for an answer"
+      ]
+    },
+    "beats": 1
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 2,
@@ -394,7 +542,8 @@
         "[d2] Observed Aelyn press a hand to Branch's shoulder and hold still — catalogued it without comment; still waiting to walk.",
         "[d2] Fell into step northeast without being asked — same road, same direction, practical economy of company.",
         "[d2] Watched Aelyn use Speaking Grove on the birch without comment; shifted to watching the tree-line after hearing 'tracks stopped'; offered a practical read — we'd see sign at the hollow crossing either way.",
-        "[d2] Confirmed she had been watching the eastern light since the margin — said nothing until Branch named it"
+        "[d2] Confirmed she had been watching the eastern light since the margin — said nothing until Branch named it",
+        "[d2] Watched Aelyn try Lifesense on the light and waited without comment; asked plainly whether anything came through"
       ],
       "knownFacts": [
         "Hub-registered pack-runner, south circuit",
@@ -410,7 +559,7 @@
       "sex": "female",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Walking northeast with Aelyn inside the Quickwood canopy; now stopped on the road watching the eastern tree-line",
+      "statusNote": "Standing on the Kept Road inside the Quickwood margin, watching the eastern light",
       "domains": {
         "primary": "rootkin"
       },
@@ -419,7 +568,7 @@
         "locationId": "gen-quickwood-margin",
         "day": 2
       },
-      "met": 7
+      "met": 8
     }
   },
   "placeMemory": {
@@ -720,7 +869,7 @@
         "lastOutcome": "progress"
       }
     },
-    "turnsSinceOffer": 3,
+    "turnsSinceOffer": 4,
     "latentArcs": {
       "heartwood-hollowing": {
         "id": "heartwood-hollowing",
@@ -5124,6 +5273,24 @@
         "createdDay": 2,
         "entityId": "deni-cors",
         "updatedDay": 2
+      },
+      "the-reaching-light": {
+        "id": "the-reaching-light",
+        "label": "The Reaching Light",
+        "kind": "lore",
+        "facts": [
+          "[d2] Since the first pale stars of early-spring showed through the Quickwood canopy, a light has held its station at the eastern tree-line — not the warm amber of ne",
+          "[d2] Lifesense finds nothing in the light — no life-heat, no vigor, nothing the craft can settle into. It is not blocked; it simply has no life-signature to read. Whatever it is, it does not register as living."
+        ],
+        "links": [
+          "gen-quickwood-margin",
+          "aelyn-inner-frequency",
+          "aelyn-father"
+        ],
+        "aliases": [],
+        "createdDay": 2,
+        "entityId": "the-reaching-light",
+        "updatedDay": 2
       }
     },
     "mergeUndo": [
@@ -5190,18 +5357,18 @@
     "deferredMysteries": []
   },
   "tendencies": {
-    "cerebral": 14.27465576622822,
-    "cautious": 10.34288427125281,
-    "generous": 0.42102495477947843,
-    "social": 4.859360489156556,
-    "strategic": 6.433094552911327,
-    "devotion": 3.291570571562992,
-    "patient": 1.7545926640623632
+    "cerebral": 14.917789372072514,
+    "cautious": 10.08431216447149,
+    "generous": 0.41049933090999147,
+    "social": 4.737876476927642,
+    "strategic": 6.272267189088543,
+    "devotion": 3.2092813072739172,
+    "patient": 1.710727847460804
   },
   "aptitudes": [
     "scholar"
   ],
-  "actionCount": 72,
+  "actionCount": 73,
   "grantsVersion": 1,
   "reconcileVersion": 48,
   "gallery": [
@@ -5239,8 +5406,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20mid-twenties%20with%20light%20blonde%2C%20faintly%20wavy%20hair%20cut%20in%20curtain%20bangs%2C%20the%20rest%20falling%20to%20the%20small%20of%20her%20back%20%E2%80%94%20usually%20worn%20in%20a%20french%20braid%20with%20the%20bangs%20left%20loose.%20Dark%20nature-green%20tank%20to%2C%20full-body%20character%20portrait%2C%20named%20Aelyn%20Kantoro%2C%20of%20the%20rootkin%2C%20warden%2C%20carrying%20Traveler's%20Pack%2C%20Her%20mother%20dies%2C%20and%20she%20decides%20to%20go%20to%20the%20nanite%20world%2C%20to%20figure%20out%20why%20she%20is%20different%20than%20the%20pure%20nature%20peop%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=73420&nologo=true",
-  "updatedAt": 1788814905484,
-  "rev": 133,
+  "updatedAt": 1788815028407,
+  "rev": 135,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -5298,12 +5465,52 @@
         }
       }
     },
-    "arc": {},
+    "arc": {
+      "the-reaching-light": {
+        "id": "the-reaching-light",
+        "name": "The Reaching Light",
+        "scale": "local",
+        "pressure": "patient, accumulating",
+        "tendency": "Since the first pale stars of early-spring showed through the Quickwood canopy, a light has held its station at the eastern tree-line — not the warm amber of new growth, not the green-gold the Quickwood breathes in morning, but a steady, cooler radiance, the color of something that remembers rather than blooms. It has been there long enough that the nesting wrens have stopped alarming at it. The margin's own life-disposition does not repel it; if anything the new-growth pulse of strong creation seems to be what drew it here, as though it followed a thread specific and thin — Aelyn's thread, not the party's. Branch reads it as neither predatory nor lost. It is waiting with the patience of a thing that has waited before and will wait again, and it knows how to be still in a way that living things only learn from grief or from very long purpose. It does not approach. It does not speak. It does not need to, yet. The Quickwood margin is a threshold — life pressing hard into form, creation at its most generative — and the light chose this threshold deliberately, as though it would meet Aelyn in a place where new things are still possible.",
+        "crossesRegions": [
+          "the_quickwood"
+        ],
+        "hingeNpcs": [
+          "aelyn",
+          "branch"
+        ],
+        "ifIgnored": "The light withdraws before the party leaves the margin — not in defeat, but with the care of something that will not force itself. The Quickwood's creation-pulse closes over the gap it left. Weeks or seasons later, Aelyn begins finding small signs — a pattern in frost on glass, a bird that lands on her specifically and tilts its head, a dream with no image but that same cool color — that the light is still tracking, still patient, still unwilling to reach through anyone but her. Whatever it carries for Aelyn does not expire; it only recedes into a longer waiting. The story it arrived with stays unspoken inside it, and Aelyn walks forward not knowing what recognized her.",
+        "ifEngaged": "The light's story is not a threat and not a gift — it is a witness account. It knew someone Aelyn came from, or someone she is becoming toward; the Quickwood margin with its strong life-and-creation grain is the only place that disposition can be spoken aloud without the telling warping it. Approached, it does not surge or brighten; it steadies further, the way a held breath releases. It will speak only to Aelyn, in a register Branch can hear but not translate — not because it excludes Branch, but because the language it carries is specific: it is the grammar of Aelyn's own origin or lineage or possible future, whichever of those three has been most suppressed. What it reveals is a function of reveal — surfacing what has been concealed about who Aelyn is inside the world's generative logic — but the Quickwood's creation-disposition means the revelation does not close a door, it opens one: Aelyn learns not only what she is but what she could make of it. The light, having passed what it carried, does not linger. It dims from the tree-line the way a held note resolves, and the spring canopy grows in over the space it held.",
+        "schemaVersion": 1,
+        "_gen": {
+          "entityId": "the-reaching-light",
+          "type": "arc",
+          "birthWeight": 2,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": "R+",
+          "provenance": {
+            "playerKey": "player-7fah99",
+            "characterId": "char-mrmvjtwp",
+            "locationId": "gen-quickwood-margin",
+            "day": 2,
+            "worldDay": null,
+            "hint": "A point of pale, steady radiance — not sunlight — has been watching from the eastern tree-line since the Quickwood margi",
+            "why": "R49 — a mystery must arrive with its story, not as a hook: The Reaching Light"
+          },
+          "attentionHistory": [],
+          "createdDay": 2,
+          "repaired": true,
+          "stubbed": false,
+          "romanceEligible": true
+        }
+      }
+    },
     "creature": {},
     "item": {}
   },
   "regionsKnown": {
-    "the_quickwood": 73
+    "the_quickwood": 74
   },
   "opLossPending": false,
   "establishedFacts": [
@@ -5410,7 +5617,7 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "lifesense": 10,
+      "lifesense": 11,
       "the_speaking_grove": 11,
       "prism_sight": 1,
       "speaking_grove": 1
@@ -5481,10 +5688,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-09-07T20:52:08.629Z",
-      "lastAt": "2026-09-07T21:01:45.461Z",
+      "lastAt": "2026-09-07T21:03:48.399Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 7
+      "beats": 8
     }
   ],
   "livingCurrentAccess": [
@@ -5647,21 +5854,21 @@
   },
   "_intentAsked": null,
   "_opEmitted": {
-    "sceneSummary": 20,
-    "choices": 20,
-    "scene": 20,
+    "sceneSummary": 21,
+    "choices": 21,
+    "scene": 21,
     "questUpdates": 5,
-    "codexUpdates": 11,
-    "timeOps": 19,
-    "sceneEnded": 6,
-    "characterDeltas": 5,
-    "npcUpdates": 16,
+    "codexUpdates": 12,
+    "timeOps": 20,
+    "sceneEnded": 7,
+    "characterDeltas": 6,
+    "npcUpdates": 17,
     "offer": 2,
     "_engineClosedScene": 1,
     "stageOps": 1,
     "generateRequest": 1
   },
-  "_opTurns": 20,
+  "_opTurns": 21,
   "knownPlaces": [
     "gen-quickwood-margin"
   ],
@@ -5685,7 +5892,7 @@
     "travel": 4,
     "careful": 8,
     "scout": 5,
-    "study": 4,
+    "study": 5,
     "comfort": 1,
     "negotiate": 1,
     "investigate": 1

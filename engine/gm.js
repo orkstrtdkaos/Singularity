@@ -585,10 +585,36 @@ export function refusalSignal(turn, { narration = null } = {}) {
  *  needs — recording what the fiction already established, or correcting what the game got wrong.
  *  ⚠️ `characterDeltas`, `newEncounter`, `deathOps`, `bandOps`, `discovery` and the unlocks are ALL absent
  *  on purpose: those are PLAY, and play happens on a beat. ⬜ Widening this is a decision, not a fix. */
-export const ASK_OPS = ["holdingOps", "factUpdates", "npcUpdates", "codexUpdates", "placeUpdates",
-  "questUpdates", "stageOps", "debtOps", "partyOps", "standingOps", "delegateOps", "projectOps"];
 
 export const SALVAGEABLE_OPS = ["holdingOps", "debtOps", "partyOps", "choices", "questUpdates", "stageOps", "standingOps", "npcUpdates", "placeUpdates", "codexUpdates", "deeds", "ledgerEvents", "encounterOps", "projectOps", "deathOps", "bandOps", "characterDeltas", "scene", "timeOps", "moveTo", "stateOps", "itemUpdates", "gambitOps", "markDefiningMoment", "markTeacher", "offerPromotion", "offerAcquisition", "offerIntent", "generateRequest", "imagePrompt", "unlockSubstrate", "unlockPrecursor", "factUpdates", "discovery", "newEncounter", "newAbility", "delegateOps", "arcOps", "adoptSchool", "offer", "deriveItem", "intentsHeard"];
+
+/** ⛔ THE ASK CHANNEL MAY MAKE EVERY REPAIR A TURN CAN MAKE (Erik 2026-09-07: "I want that GM to be able to fix
+ *  everything — no more holding back what it can do"). It carried TWELVE ops while the turn contract has forty-two,
+ *  and the thirty it lacked included `characterDeltas` — where `inventoryAdd` lives — so it could not hand anyone a
+ *  shield however plainly they asked. It would narrate the fix, emit the op, and the filter below would drop it.
+ *  ⚠️ WHAT IS EXCLUDED IS NOT HELD BACK, IT IS THE STORY ADVANCING, which this channel has never done: moving the
+ *  player, opening a scene, starting a fight or ending a life in answer to a QUESTION. That is a ruling Erik can
+ *  reverse in one line — `ASK_FORBIDDEN` is the whole list — but it will not happen silently. */
+/** ⛔ WHAT A QUESTION MAY NOT DO. Two kinds, and neither is "held back" arbitrarily:
+ *  · THE STORY ADVANCING — scene, choices, moveTo, newEncounter, deathOps: a question must not move the player, open
+ *    a scene, start a fight or end a life.
+ *  · WHAT A CHARACTER EARNS — deeds, ledgerEvents, discovery, and the two substrate unlocks. §94: "a chat box that
+ *    can move health, energy or xp is where an exploit lives", and three people play here.
+ *  ⚑ GEAR IS NEITHER: it is a thing the fiction already gave them, so it passes (via the sanitised delta below). */
+export const ASK_FORBIDDEN = ["scene", "choices", "moveTo", "newEncounter", "deathOps", "imagePrompt", "intentsHeard",
+  "deeds", "ledgerEvents", "discovery", "unlockSubstrate", "unlockPrecursor"];
+
+/** ⛔ THE ONE OP THAT IS BOTH. `characterDeltas` carries `inventoryAdd` — the shield Erik is asking for — and health,
+ *  energy and xp, which §94 forbids from a chat box. ⚑ SO IT IS ADMITTED AND STRIPPED: inventory passes, play does
+ *  not, and what was dropped is RETURNED so the channel can say so out loud. PURE. */
+export const ASK_DELTA_KEEP = ["inventoryAdd", "inventoryRemove", "equip", "unequip", "itemRename"];
+export function sanitizeAskDeltas(deltas) {
+  if (!deltas || typeof deltas !== "object") return { kept: null, dropped: [] };
+  const kept = {}, dropped = [];
+  for (const [k, v] of Object.entries(deltas)) { if (ASK_DELTA_KEEP.includes(k)) kept[k] = v; else dropped.push(k); }
+  return { kept: Object.keys(kept).length ? kept : null, dropped };
+}
+export const ASK_OPS = SALVAGEABLE_OPS.filter(op => !ASK_FORBIDDEN.includes(op));
 
 export function salvageOps(raw) {
   const out = {};
@@ -856,9 +882,15 @@ export async function gmAsk(ctx, question, { call = callClaude } = {}) {   // `c
   const sys = `You are the Game Master of SINGULARITY answering an OUT-OF-CHARACTER question from the player. This is a meta channel for TALKING, and it is also THE PLACE A PLAYER COMES TO GET SOMETHING FIXED. The story does not advance here and no dice are rolled — there is no beat, no encounter, no damage. But it is NOT read-only: when the player asks you to record or correct something on your op list, you DO IT HERE. Sending them somewhere else for a thing you can do is the one wrong answer in this channel.
 - Answer helpfully about: the current scene, what the CHARACTER would plausibly know or remember, the world's lore as provided, how the game's mechanics work (d100 vs shown chance, spectrum alignment, reputation from deeds, energy, quests), and what the choices on offer would generally entail.
 - NEVER reveal GM-EYES-ONLY content, hidden truths, NPC secrets, or true odds beyond what the character's sense already showed. If asked, say the character doesn't know that yet — finding out is play.
-- REPAIR REQUESTS ARE WELCOME HERE AND THIS CHANNEL CAN MAKE THEM. You have a NARROW op surface: holdingOps,
-factUpdates, npcUpdates, codexUpdates, placeUpdates, questUpdates, stageOps, debtOps, partyOps, standingOps,
-delegateOps, projectOps. YOU DO NOT DECLINE STATE HERE EITHER — if the player asks you to record or correct
+- REPAIR REQUESTS ARE WELCOME HERE AND THIS CHANNEL CAN MAKE THEM. You have the FULL repair surface — every op a
+normal turn can emit EXCEPT the ones that would advance the story (no scene, no choices, no moveTo, no newEncounter,
+no deathOps, and nothing a character EARNS — no deeds, no xp, no discoveries). That includes GEAR AND ITEMS:
+characterDeltas.inventoryAdd puts a thing in their hands (that op is stripped to inventory only — health, energy and
+xp are not yours to move from here, and asking will simply drop those fields), itemUpdates
+corrects one they already have, deriveItem splits or renames one. It also includes crafts (newAbility), state
+(stateOps), bands, arcs, deeds, time, schools and the substrate unlocks.
+⛔ IF SOMEONE SAYS THEIR SHIELD, ARMOUR OR WEAPON IS MISSING FROM THEIR SHEET, GIVE IT TO THEM — that is exactly what
+this channel is for, and refusing it or promising it "next turn" is the one wrong answer here. YOU DO NOT DECLINE STATE HERE EITHER — if the player asks you to record or correct
 something these channels cover, EMIT THE OP. Never send them to a repair panel, a settings screen or "a normal
 in-character turn" for something on that list.
 - BUT THE BAR IS EXPLICIT REQUEST, AND IT IS HIGH. Emit ops ONLY when the player is plainly asking you to record
@@ -887,7 +919,15 @@ Any op key not on the list above is ignored, so do not reach for one.`;
       const v = parsed.ops[k];
       if (Array.isArray(v) ? v.length : (v && typeof v === "object" && Object.keys(v).length)) ops[k] = v;
     }
-    return { ok: true, text: String(parsed.text || raw), ...(Object.keys(ops).length ? { ops } : {}) };
+    // ⛔ §94 STANDS INSIDE THE WIDENED SURFACE: gear passes, play does not, and the drop is SAID rather than silent —
+    // a filter nobody can see is exactly how this channel's last failure hid for two versions.
+    let dropNote = "";
+    if (ops.characterDeltas) {
+      const { kept, dropped } = sanitizeAskDeltas(ops.characterDeltas);
+      if (kept) ops.characterDeltas = kept; else delete ops.characterDeltas;
+      if (dropped.length) dropNote = `\n\n— *${dropped.join(", ")} cannot be changed from here: what a character earns is earned in play. Everything else was applied.*`;
+    }
+    return { ok: true, text: String(parsed.text || raw) + dropNote, ...(Object.keys(ops).length ? { ops } : {}) };
   } catch (err) {
     return { ok: false, error: err.message };
   }

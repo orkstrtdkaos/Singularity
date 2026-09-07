@@ -127,7 +127,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.410";
+const APP_VERSION = "1.9.411";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14015,7 +14015,7 @@ function wireSkillBattlePanel() {
   // saved before the narrator was ever called.
   const escBtn = document.getElementById("sb-escape");
   if (escBtn) {
-    escBtn.onclick = () => { sbSetBusy(false); renderPlay(character?.activeScene?.lastTurn || null, { aside: "You carried on without the telling. What the engine decided stands." }); renderSkillBattle(sbLastRound); };
+    escBtn.onclick = () => { sbNoteFailure("escape-pressed", new Error("the player had to press Continue anyway")); sbSetBusy(false); renderPlay(character?.activeScene?.lastTurn || null, { aside: "You carried on without the telling. What the engine decided stands." }); renderSkillBattle(sbLastRound); };
     setTimeout(() => { const b = document.getElementById("sb-escape"); if (b && sbBusy) b.hidden = false; }, SB_ESCAPE_AFTER_MS);
   }
   const yl = document.getElementById("sb-yield"); if (yl) yl.onclick = () => sbEnd(skillBattleRound(enc.state, enc.def, {}, { character, content: CONTENT, rules: CONTENT.rules, sb, steps, party: seatParty(), yield: true }));
@@ -14028,6 +14028,30 @@ function wireSkillBattlePanel() {
  * released, the player is told, and the screen is redrawn. That covers the awaits I found, the ones I did not, and the
  * ones added later. ⛑ AND IT IS SAFE TO RELEASE: every fight step SAVES its mechanical result before it calls the
  * narrator, so the only thing an early release can cost is prose. */
+/** ⛔ THE FIGHT WRITES DOWN HOW IT FAILED. Three freezes in one evening and the only evidence was a photograph of a
+ *  spinner; the save on disk always predated the freeze. This puts the failure ON THE CHARACTER, so it syncs with the
+ *  next save and can be read rather than inferred. ⚠️ Never prose, capped at 5, and it never throws — a diagnostic
+ *  that can break the thing it is diagnosing is worse than none. */
+function sbNoteFailure(step, err, extra = {}) {
+  try {
+    const enc = character?.activeEncounter;
+    const t = enc?.state?.turn || {};
+    const row = {
+      at: new Date().toISOString(), step,
+      version: typeof APP_VERSION === "string" ? APP_VERSION : null,
+      defId: enc?.defId || null, phase: t.phase || null, senseDone: !!t.senseDone,
+      sel: { sense: (t.sel?.sense || []).length, action: (t.sel?.action || []).length, bonus: (t.sel?.bonus || []).length },
+      busy: sbBusy, label: sbBusyLabel || null,
+      message: String(err?.message || err || "").slice(0, 200),   // prose-cap-ok: an exception message in a diagnostic, not narration
+      where: String(err?.stack || "").split("\n").slice(1, 3).map(l => l.trim().slice(0, 120)),   // prose-cap-ok: a stack frame is an identifier and a path — a word-boundary cut would make it LESS legible
+      ...extra,
+    };
+    character._fightLog = [...(character._fightLog || []), row].slice(-5);
+    saveCharacter(character);
+    console.error("[fight] recorded a failure:", row);
+  } catch { /* a diagnostic must never be the thing that breaks */ }
+}
+
 const SB_WATCHDOG_MS = 60000;      // generous: a slow model is not a hang. Past this, nothing is coming.
 const SB_ESCAPE_AFTER_MS = 8000;   // and the player gets a way out long before that
 let _sbWatchdog = null;
@@ -14040,6 +14064,7 @@ function sbSetBusy(on, label = "") {
     _sbWatchdog = null;
     if (!sbBusy) return;
     console.error("[fight] watchdog: the turn never released the screen — freeing it");
+    sbNoteFailure("watchdog", new Error("the turn never released the screen"));
     sbBusy = false; sbBusyLabel = "";
     try { renderPlay(character?.activeScene?.lastTurn || null, { aside: "The narrator never answered. Your turn is yours again \u2014 what the engine decided already stands." }); } catch { /* the redraw below is what matters */ }
     try { renderSkillBattle(sbLastRound); } catch { /* nothing left to do but let the player act */ }
@@ -14097,12 +14122,14 @@ async function sbResolveSense() {
   } catch (err) {
     // ⚑ THE READ ALREADY HAPPENED AND IS SAVED — only the narration failed, so say so and let the turn go on.
     console.warn("[fight] the sense narration did not land:", err?.message || err);
+    sbNoteFailure("sense-narration", err);
     renderPlay(character.activeScene?.lastTurn || null, { aside: `${t?.senseLine || "You read them."} (The narrator did not answer \u2014 the read stands; carry on with your action.)` });
   }
   } catch (err) {
     // ⛔ THE WEDGE ITSELF: a throw before the call used to leave the spinner up forever. Now it SAYS what happened and
     // hands the turn back at the action step — an error you can act on beats a spinner you cannot.
     console.error("[fight] the sense step failed:", err);
+    sbNoteFailure("sense-step", err);
     const t2 = sbTurn(); if (t2) { t2.senseDone = true; t2.phase = "action"; }
     try { saveCharacter(character); } catch { /* best effort */ }
     renderPlay(character.activeScene?.lastTurn || null, { aside: `The read did not resolve (${esc(String(err?.message || err).slice(0, 80))}). Your turn is still yours \u2014 choose your action.` });
@@ -14244,10 +14271,12 @@ async function sbExecuteTurn() {
     else renderPlay(character.activeScene?.lastTurn || null, { aside: sbLastRoundReceipt });
   } catch (err) {
     console.warn("[fight] the turn narration did not land:", err?.message || err);
+    sbNoteFailure("turn-narration", err);
     renderPlay(character.activeScene?.lastTurn || null, { aside: `${sbLastRoundReceipt || "The turn resolved."} (The narrator did not answer \u2014 the turn stands.)` });
   }
   } catch (err) {
     console.error("[fight] the turn failed to resolve:", err);
+    sbNoteFailure("turn-step", err);
     renderPlay(character.activeScene?.lastTurn || null, { aside: `The turn did not resolve (${esc(String(err?.message || err).slice(0, 80))}). Nothing was lost \u2014 try it again.` });
   }
   finally { sbSetBusy(false); sbQuickBeat = ""; renderSkillBattle(sbLastRound); }

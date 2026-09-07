@@ -6569,12 +6569,27 @@ console.log("\n── §94 · repair requests are welcome here AND this channel 
     && /HYPOTHETICAL/.test(gm94));
 
   // ── THE SURFACE
-  check("§94: ⚠️ the surface is NARROW — the repair channels, and `holdingOps` among them (Erik's case)",
-    Array.isArray(G94.ASK_OPS) && G94.ASK_OPS.includes("holdingOps") && G94.ASK_OPS.length <= 14);
-  check("§94: ⛔ …and PLAY is not on it — a chat box that can move health, energy or xp is where an exploit lives",
-    ["characterDeltas", "newEncounter", "deathOps", "bandOps", "discovery", "unlockPrecursor", "unlockSubstrate", "deeds", "ledgerEvents"]
-      .every(k => !G94.ASK_OPS.includes(k)),
+  // ⚑ ERIK 2026-09-07 WIDENED THIS: "I want that GM to be able to fix everything — no more holding back what it can
+  // do." It carried 12 of the turn's 42 ops and could not reach `characterDeltas`, where `inventoryAdd` lives — so it
+  // could not hand anyone the shield they were asking for. It is derived from the turn's contract now.
+  check("§94: ⚑ the surface is EVERY REPAIR — derived from the turn's own ops, so a new one is askable by construction",
+    Array.isArray(G94.ASK_OPS) && G94.ASK_OPS.includes("holdingOps") && G94.ASK_OPS.includes("itemUpdates")
+    && G94.ASK_OPS.length >= 25 && /ASK_OPS = SALVAGEABLE_OPS\.filter/.test(gm94));
+  // ⛔ AND §94'S OWN RULING STANDS INSIDE THE WIDER SURFACE, asserted more strictly than before: it used to hold by
+  // keeping `characterDeltas` off the list; it now holds through the SANITISER, which is the thing that actually
+  // decides — so a delta arriving by any route is still stripped of play.
+  check("§94: ⛔ …and PLAY is STILL not on it — a chat box that can move health, energy or xp is where an exploit lives",
+    ["newEncounter", "deathOps", "discovery", "unlockPrecursor", "unlockSubstrate", "deeds", "ledgerEvents"]
+      .every(k => !G94.ASK_OPS.includes(k))
+    && (() => { const r = G94.sanitizeAskDeltas({ inventoryAdd: [{ name: "a shield" }], xp: 500, health: 20, energy: 9 });
+      return !!r.kept.inventoryAdd && !("xp" in r.kept) && !("health" in r.kept) && !("energy" in r.kept)
+        && ["xp", "health", "energy"].every(k => r.dropped.includes(k)); })(),
     G94.ASK_OPS.join(", "));
+  check("§94: ⚑ …and the gear a player is owed DOES pass, which is the whole point of widening it",
+    (() => { const r = G94.sanitizeAskDeltas({ inventoryAdd: [{ name: "a shield" }], equip: "shield" });
+      return !!r.kept.inventoryAdd && r.kept.equip === "shield" && r.dropped.length === 0; })());
+  check("§94: ⛔ …and a drop is SAID, never silent — a filter nobody can see is how this channel's last failure hid",
+    /cannot be changed from here: what a character earns is earned in play/.test(gm94) && /dropNote/.test(gm94));
 
   // ── ⚠️ PROSE IS STILL THE DEFAULT AND THE SAFE READ
   check("§94: ⚠️ a plain-prose reply is unchanged — only a well-formed op block changes anything",
@@ -8916,7 +8931,7 @@ console.log("\n── §135 · a watchdog does not need to know what broke ─�
     /await raceTimeout\(callClaude\(/.test(code) && (code.match(/await runGMOrTimeout\(/g) || []).length === 2
     && !/await callClaude\(/.test(code.split("async function sbExecuteTurn")[1] || ""));
   check("§135: ⚑ AND THE PLAYER IS NEVER TRAPPED — a way out appears after a few seconds and costs only the telling",
-    /id="sb-escape"/.test(app) && /SB_ESCAPE_AFTER_MS/.test(code) && /escBtn\.onclick = \(\) => \{ sbSetBusy\(false\)/.test(code)
+    /id="sb-escape"/.test(app) && /SB_ESCAPE_AFTER_MS/.test(code) && /escBtn\.onclick = \(\) => \{ sbNoteFailure\("escape-pressed"[\s\S]{0,120}sbSetBusy\(false\)/.test(code)
     && /b\.hidden = false;/.test(code));
   check("§135: …and it is not named `esc` — that is the escaping helper, and shadowing it inside a render is its own bug",
     !/const esc = document\.getElementById\("sb-escape"\)/.test(code) && /const escBtn = document\.getElementById\("sb-escape"\)/.test(code));
@@ -8999,6 +9014,41 @@ console.log("\n── §136 · what you were given cannot be what you spent ─�
     }
   }
   check("§136: ⛔ …and after the repair NO real save still counts a by-right craft against its breadth", stillWrong.length === 0, stillWrong.join(" · "));
+}
+
+/* ═════ §137 — THE ASK CHANNEL MAY FIX EVERYTHING IT CAN REACH, AND THE FIGHT WRITES DOWN HOW IT FAILED ═════ */
+// ⛔ Erik 2026-09-07: "the gm isn't giving him his shield and armor and weapons… I want that GM to be able to fix
+// everything — no more holding back what it can do." MEASURED: ASK_OPS carried TWELVE of the turn's forty-two, and
+// the thirty it lacked included `characterDeltas`, where `inventoryAdd` lives — so the channel could not hand anyone a
+// shield however plainly they asked. It narrated the fix, emitted the op, and the filter dropped it: the words land
+// and the state does not, which is the refusal failure one layer lower.
+console.log("\n── §137 · if someone says their armour is missing, give it to them ──");
+{
+  const GM = await import("../engine/gm.js");
+  const gm = rd("engine/gm.js"), app = rd("app.js");
+  check("§137: ⛔ THE ASK CHANNEL CAN REACH GEAR — inventory, items, derived items, crafts and state are all askable now",
+    ["characterDeltas", "itemUpdates", "deriveItem", "newAbility", "stateOps", "bandOps", "arcOps"].every(o => GM.ASK_OPS.includes(o))
+    && GM.ASK_OPS.length >= 25,
+    `${GM.ASK_OPS.length} of ${GM.SALVAGEABLE_OPS.length}`);
+  check("§137: ⚑ …it is DERIVED from the turn's own contract, so a new op is askable by construction and cannot be forgotten",
+    /export const ASK_OPS = SALVAGEABLE_OPS\.filter\(op => !ASK_FORBIDDEN\.includes\(op\)\);/.test(gm)
+    && GM.ASK_OPS.length === GM.SALVAGEABLE_OPS.length - GM.ASK_FORBIDDEN.filter(o => GM.SALVAGEABLE_OPS.includes(o)).length);
+  check("§137: ⛔ …and what is excluded is THE STORY ADVANCING, not a repair — no scene, no choices, no moveTo, no new fight, no death from a QUESTION",
+    ["scene", "choices", "moveTo", "newEncounter", "deathOps"].every(o => GM.ASK_FORBIDDEN.includes(o) && !GM.ASK_OPS.includes(o)));
+  check("§137: ⚑ …and the prompt SAYS it can give gear, because a channel that can do a thing and does not know it is the same as one that cannot",
+    /IF SOMEONE SAYS THEIR SHIELD, ARMOUR OR WEAPON IS MISSING FROM THEIR SHEET, GIVE IT TO THEM/.test(gm)
+    && /characterDeltas\.inventoryAdd puts a thing in their hands/.test(gm));
+  check("§137: …and the ops still go through applyTurn — the same applier a beat uses, never a second copy",
+    /applyTurn\(\{ \.\.\.result\.ops, narration: "" \}, null, null\);/.test(app));
+  // ⛔ AND THE FIGHT RECORDS ITS OWN FAILURES, because three freezes produced no evidence but a photograph.
+  check("§137: ⛔ THE FIGHT WRITES DOWN HOW IT FAILED, onto the save, so the next freeze can be READ instead of inferred",
+    /function sbNoteFailure\(step, err, extra = \{\}\)/.test(app) && /character\._fightLog = \[\.\.\.\(character\._fightLog \|\| \[\]\), row\]\.slice\(-5\);/.test(app));
+  for (const step of ["watchdog", "sense-step", "sense-narration", "turn-step", "turn-narration", "escape-pressed"])
+    check(`§137: …including ${step}`, new RegExp(`sbNoteFailure\\("${step}"`).test(app));
+  check("§137: ⚑ …and it records the STATE that matters — the phase, whether the sense locked, and what was selected",
+    /phase: t\.phase \|\| null, senseDone: !!t\.senseDone/.test(app) && /sel: \{ sense:/.test(app) && /version: typeof APP_VERSION/.test(app));
+  check("§137: ⛔ …and a diagnostic can never break the thing it is diagnosing",
+    /catch \{ \/\* a diagnostic must never be the thing that breaks \*\/ \}/.test(app));
 }
 
 /* ══════════ REPORT ══════════ */

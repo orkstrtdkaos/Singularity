@@ -110,7 +110,152 @@
     "Maret agreed to speak at the Marchward — the group set north for the Crow and Thistle, Stillhold walls shrinking behind them."
   ],
   "currentLocationId": "the_stillhold",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "the_stillhold",
+    "turns": [
+      {
+        "player": "Ask Ragnar where the nearest way gate is I have unfinished business to attend to",
+        "summary": "Ragnar named the nearest way gate — back through the Marchward, north up the waystone track, half a morning from the Wardhouse. The question of what waits on the other side was left open.",
+        "narration": "The scrub north of the Stillhold is quiet — pale chalk dust on your boots, Maret a few paces off watching the road south with the particular stillness of someone who has just finished something dangerous and is waiting to feel the relief of it. Ragnar stands close enough that you don't need to raise your voice.\n\n\"Ragnar.\" You keep it plain. \"The nearest way gate — where is it from here? I have unfinished business.\"\n\nHe looks at you for a moment, the jawbone necklace catching the thin spring light. Then he points hubward, northwest by the road's own bending. \"Back through the Marchward, then north up the waystone track. You passed the gate-marker yesterday — the broken stone with the iron ring hammered into it. Half a morning's walk from the Wardhouse, maybe less if you move.\" His eyes drop briefly to Freki, then back up. \"What's waiting for you on the other side?\"\n\nMaret glances over at that — the question hanging in the dry air between the three of you, the Stillhold walls a grey smudge to the south and the chalk road stretching north toward the Marchward and whatever comes after it."
+      }
+    ],
+    "lastTurn": {
+      "narration": "The scrub north of the Stillhold is quiet — pale chalk dust on your boots, Maret a few paces off watching the road south with the particular stillness of someone who has just finished something dangerous and is waiting to feel the relief of it. Ragnar stands close enough that you don't need to raise your voice.\n\n\"Ragnar.\" You keep it plain. \"The nearest way gate — where is it from here? I have unfinished business.\"\n\nHe looks at you for a moment, the jawbone necklace catching the thin spring light. Then he points hubward, northwest by the road's own bending. \"Back through the Marchward, then north up the waystone track. You passed the gate-marker yesterday — the broken stone with the iron ring hammered into it. Half a morning's walk from the Wardhouse, maybe less if you move.\" His eyes drop briefly to Freki, then back up. \"What's waiting for you on the other side?\"\n\nMaret glances over at that — the question hanging in the dry air between the three of you, the Stillhold walls a grey smudge to the south and the chalk road stretching north toward the Marchward and whatever comes after it.",
+      "sceneSummary": "Ragnar named the nearest way gate — back through the Marchward, north up the waystone track, half a morning from the Wardhouse. The question of what waits on the other side was left open.",
+      "choices": [
+        {
+          "label": "Tell him plainly — Kjotve Olafsson, a blood oath, and a village called Javiksholm",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": "easy",
+          "intentTags": [
+            "negotiate",
+            "lead"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Give nothing away — say only that it's personal, and ask if either of them want to travel with you toward the Marchward",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": "easy",
+          "intentTags": [
+            "careful",
+            "lead"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Turn to Maret first — she has something to say, and whatever she learned in the record-hall may change your route",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": "very easy",
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Start walking north toward the Marchward and let them decide whether to follow",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": "very easy",
+          "intentTags": [
+            "travel"
+          ],
+          "trivial": true
+        }
+      ],
+      "scene": {
+        "setting": "Open elder scrub a mile north of the Stillhold walls. Chalk road runs south toward the gate, north back toward the Marchward. Midday light, thin and bright, early spring — mud drying at the road's edges, patches of new green in the scrub.",
+        "npcsPresent": [
+          {
+            "name": "Ragnar Solmyr",
+            "state": "Standing close, watching Brynjar after answering, jaw easy, waiting for what comes next"
+          },
+          {
+            "name": "Maret Threnwick",
+            "state": "Standing a few paces off, watching the road south — turned slightly at Ragnar's question"
+          },
+          {
+            "name": "Freki",
+            "state": "Sitting at Brynjar's heel, watching Maret"
+          }
+        ],
+        "objects": [
+          "chalk road",
+          "broken stone waymarker with iron ring (half a morning north)",
+          "elder scrub",
+          "pale spring light"
+        ],
+        "threads": [
+          "Ragnar's question — what's waiting on the other side of the way gate — is open in the air",
+          "Maret has something from the record-hall she won't say on the open road"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "ragnar-solmyr",
+          "note": "Named the nearest way gate: back through the Marchward, north up the waystone track from the Wardhouse — the broken stone with the iron ring. Asked what is waiting on the other side.",
+          "learned": [
+            "The nearest way gate is half a morning north of the Marchward Wardhouse, marked by a broken stone with an iron ring"
+          ],
+          "statusNote": "Standing in the scrub north of the Stillhold with Brynjar and Maret; asked what is waiting at the way gate"
+        },
+        {
+          "op": "update",
+          "npcId": "maret-threnwick",
+          "note": "Glanced over at Ragnar's question — still waiting to speak what she learned inside",
+          "statusNote": "Standing in the elder scrub north of the Stillhold, delivery done, holding what she learned inside — waiting for cover before she speaks it"
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "the-marchward",
+          "label": "The Marchward",
+          "kind": "place",
+          "fact": "The nearest way gate is half a morning north of the Marchward Wardhouse, marked by a broken stone with an iron ring hammered into it — on the waystone track heading hubward from the town.",
+          "links": [
+            "brynjar-andyrsson-thread",
+            "ragnar-solmyr"
+          ]
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A short exchange standing in the scrub"
+      }
+    },
+    "sceneState": {
+      "setting": "Open elder scrub a mile north of the Stillhold walls. Chalk road runs south toward the gate, north back toward the Marchward. Midday light, thin and bright, early spring — mud drying at the road's edges, patches of new green in the scrub.",
+      "npcsPresent": [
+        {
+          "name": "Ragnar Solmyr",
+          "state": "Standing close, watching Brynjar after answering, jaw easy, waiting for what comes next"
+        },
+        {
+          "name": "Maret Threnwick",
+          "state": "Standing a few paces off, watching the road south — turned slightly at Ragnar's question"
+        },
+        {
+          "name": "Freki",
+          "state": "Sitting at Brynjar's heel, watching Maret"
+        }
+      ],
+      "objects": [
+        "chalk road",
+        "broken stone waymarker with iron ring (half a morning north)",
+        "elder scrub",
+        "pale spring light"
+      ],
+      "threads": [
+        "Ragnar's question — what's waiting on the other side of the way gate — is open in the air",
+        "Maret has something from the record-hall she won't say on the open road"
+      ]
+    },
+    "beats": 1
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
@@ -313,7 +458,6 @@
       },
       "relationship": 2,
       "history": [
-        "[d1] Fell in beside Brynjar without argument when the call south was made. Named the four-mile distance to the Stillhold approach and estimated Sera's lead at two hours.",
         "[d1] Matched Brynjar's pace for four miles without complaint. Standing at right shoulder now, watchful, not crowding.",
         "[d1] Standing at Brynjar's right shoulder through the introduction — present but not crowding the exchange. Maret's angle toward him has eased slightly as Brynjar spoke.",
         "[d1] Held his quiet at Brynjar's shoulder through Maret's explanation — present, listening, not crowding the exchange.",
@@ -322,17 +466,18 @@
         "[d1] Gave Brynjar a Marcher read on route-knowledge: not watching, but planning — someone inside the thing, or close enough that the difference doesn't matter. Eyes still south toward the Stillhold.",
         "[d1] Waited in easy quiet through the hour — patient, unhurried, a brief exchange about the mud and the weather, then silence. Watching now as Maret comes back through the gate.",
         "[d1] Held quiet on his stone through Maret's return — watching with interest, no comment.",
-        "[d1] Unfolded from his stone and fell into step without being asked — quiet, watching south by habit."
+        "[d1] Unfolded from his stone and fell into step without being asked — quiet, watching south by habit.",
+        "[d1] Named the nearest way gate: back through the Marchward, north up the waystone track from the Wardhouse — the broken stone with the iron ring. Asked what is waiting on the other side."
       ],
       "knownFacts": [
-        "Identified Brynjar's collarbone gap as a liability against a patient opponent",
         "Offered it as professional courtesy, not threat",
         "Movement at the south fork before dawn — two people, direction south toward Stillhold road",
         "Stillhold sends quiet operatives out — not travelers; they don't check in at Wardhouses",
         "The Marchers call whatever they carry a 'binding' — a cord, a knot, a mark; not a weapon",
         "At least one person dropped a trail they couldn't explain after encountering something like the shimmer",
         "The heavier follower left Sera's trail at the waypost junction and entered the ash copse — a position with a clear line of sight to the road",
-        "Route-knowledge before a delivery means someone already knew the debt existed, the cord was moving, and the road it would take — planning, not surveillance; inside information, not hired eyes."
+        "Route-knowledge before a delivery means someone already knew the debt existed, the cord was moving, and the road it would take — planning, not surveillance; inside information, not hired eyes.",
+        "The nearest way gate is half a morning north of the Marchward Wardhouse, marked by a broken stone with an iron ring"
       ],
       "skillsObserved": [
         "ground-reading",
@@ -345,7 +490,7 @@
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "Walking north with the group on the Stillhold approach road.",
+      "statusNote": "Standing in the scrub north of the Stillhold with Brynjar and Maret; asked what is waiting at the way gate",
       "domains": {
         "primary": "marcher"
       },
@@ -357,7 +502,7 @@
       "aliases": [
         "Redline Warrior"
       ],
-      "met": 7
+      "met": 8
     },
     "sera": {
       "id": "sera",
@@ -705,7 +850,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 3,
     "recentOffers": [
       {
         "thing": "Doss watching Brynjar with the stillness of someone deciding something — she has not offered it yet, but she is on the edge of it",
@@ -3116,7 +3261,8 @@
           "[d1] Three bills posted: a filled labor posting for road-clearing east toward the Stillhold; a waygate truce-law notice requiring all arrivals to present at the Wardhouse within the hour with arms checked; and a missing-person posting for Sera of the Stillhold — grey cloak, dark braid, last seen at the…",
           "[d?] you have walked here",
           "[d1] All arrivals must present at the Wardhouse within the hour by truce-law; arms are checked on the rack inside. The duty officer logs names, origins, and any declaration of blood business.",
-          "[d1] The Wardhouse posts a weekly night-watch vacancy for travelers without permanent standing — meal, floor space, and a half-copper per watch. Road-clearing east toward the Stillhold is already taken."
+          "[d1] The Wardhouse posts a weekly night-watch vacancy for travelers without permanent standing — meal, floor space, and a half-copper per watch. Road-clearing east toward the Stillhold is already taken.",
+          "[d1] The nearest way gate is half a morning north of the Marchward Wardhouse, marked by a broken stone with an iron ring hammered into it — on the waystone track heading hubward from the town."
         ],
         "links": [
           "the-redline",
@@ -3124,7 +3270,8 @@
           "riven-marches",
           "brynjar-andyrsson-thread",
           "sera-of-the-stillhold",
-          "halvra-stenn"
+          "halvra-stenn",
+          "ragnar-solmyr"
         ],
         "aliases": [
           "Marchward Notice Board",
@@ -3520,19 +3667,19 @@
     ]
   },
   "tendencies": {
-    "leadership": 6.2269551547251645,
-    "cerebral": 6.244529474530521,
-    "strategic": 4.403591618508604,
-    "ruthless": 0.4678842982793399,
-    "social": 9.091485464179009,
-    "cautious": 8.760937579922802,
-    "generous": 0.8810956933593749,
-    "patient": 0.9506249999999999
+    "leadership": 6.071281275857035,
+    "cerebral": 6.088416237667258,
+    "strategic": 4.293501828045889,
+    "ruthless": 0.4561871908223564,
+    "social": 8.864198327574533,
+    "cautious": 8.541914140424732,
+    "generous": 0.8590683010253904,
+    "patient": 0.9268593749999999
   },
   "aptitudes": [
     "banner"
   ],
-  "actionCount": 32,
+  "actionCount": 33,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -3684,8 +3831,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788788511630,
-  "rev": 91,
+  "updatedAt": 1788788588765,
+  "rev": 92,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3951,7 +4098,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 35
+    "riven_marches": 36
   },
   "practice": {
     "schemaVersion": 1,
@@ -4031,10 +4178,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-09-07T13:23:54.773Z",
-      "lastAt": "2026-09-07T13:41:51.626Z",
+      "lastAt": "2026-09-07T13:43:08.757Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 7
+      "beats": 8
     }
   ],
   "_pendingArrival": null,
@@ -4050,15 +4197,15 @@
     "at": "2026-07-23T01:18:04.353Z"
   },
   "_opEmitted": {
-    "sceneSummary": 28,
-    "choices": 28,
-    "scene": 28,
-    "npcUpdates": 26,
+    "sceneSummary": 29,
+    "choices": 29,
+    "scene": 29,
+    "npcUpdates": 27,
     "placeUpdates": 5,
     "generateRequest": 3,
     "moveTo": 3,
-    "timeOps": 27,
-    "codexUpdates": 25,
+    "timeOps": 28,
+    "codexUpdates": 26,
     "sceneEnded": 8,
     "characterDeltas": 10,
     "offer": 4,
@@ -4068,7 +4215,7 @@
     "stageOps": 2,
     "factUpdates": 1
   },
-  "_opTurns": 28,
+  "_opTurns": 29,
   "_opLedger": {
     "offer": {
       "applied": 4,
@@ -4166,7 +4313,8 @@
     "guard": 1,
     "sustain": 1,
     "study": 1,
-    "travel": 1
+    "travel": 1,
+    "ask": 1
   },
   "aptitudeEarnCount": {
     "banner": 1

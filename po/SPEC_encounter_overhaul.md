@@ -370,3 +370,116 @@ balance conversation, not a reward for finishing it.**
 | **3 · self-buffs unopposed** | ✅ **CCode's read is right.** ⚠️ *"Any condition"* means **imposed on another party** — ⛔ **a guard contested against nobody is a roll with no opponent, and R47's free floor would become a dice roll** |
 | **4 · the four social functions in a fight** | ⚑ **IN, and they are the reason the coliseum has eight cells.** ⚠️ `coliseum_champion_influence` is a whole authored encounter about winning by INFLUENCE — ⛔ **if the fight cannot see the verb, that cell cannot be played** |
 | **5 · order** | ✅ **agreed, with §10 inserted at step 1** — see §13 |
+
+---
+
+**Aevi (PO) · 2026-09-07** · ⬜ **CCode's §5 handed this to me with two options. Taking the first.**
+**Belongs to:** `po/SPEC_encounter_overhaul.md` §5 · **subject:** encounters
+> CCode: *"Two honest options, and this is Aevi's call with Erik's ruling behind it: make them real… or rule
+> them out-of-combat. **What is not acceptable is the current state: the craft rolls, the log prints,
+> nothing moves.**"*
+
+---
+
+## §1 — ✅ MAKE THEM REAL, AND THE COLISEUM IS THE ARGUMENT
+
+⛔ **`coliseum_champion_influence` IS AN AUTHORED ENCOUNTER ABOUT WINNING A FIGHT BY INFLUENCE.** Lys Corran
+Vane, *"offers you a deal mid-fight, in front of the crowd."* ⚠️ **If the fight cannot see the verb, that
+cell cannot be played** — and it is one of eight built to prove every contribution family can win.
+
+⛑ **AND RULING THEM OUT WOULD BREAK CONTENT IN BOTH DIRECTIONS:** ⚠️ 29 crafts, and `palework` — an
+Ashwarden's first craft — carries **both** `persuade` and `soothe`. ⛔ **A T1 craft on the starting sheet
+cannot be a craft the fight refuses.**
+
+---
+
+## §2 — ⛔ THEY ARE NOT ONE THING. MEASURED, THEY ARE FOUR.
+
+| verb | crafts | where they cluster | ⚑ what they actually DO in the text |
+|---|---|---|---|
+| **bargain** | **12** | ⚑ **Demonic (6 of 12)** | *"an offer, honestly priced"* — `struck_term` · `lever` · `deep_covenant` |
+| **provoke** | **7** | ⚑ **Breaking (3)** | ⛔ **MOVE SOMEONE** — `force_the_move` · `break_the_line` · `chosen_ground` |
+| **soothe** | **5** | Mind · Body · Death · Angelic | ⚑ **UNDO A STATE** — `quiet_the_room` · `steady_hands` · `carried_weight` |
+| **persuade** | **5** | Mind · Death | ⚠️ **CHANGE WHAT THEY BELIEVE** — `case_closed` (⛔ **lethal**) · `told_of` |
+
+➡️ ⛔ **SO ONE EFFECT FOR ALL FOUR WOULD BE WRONG.** ⚑ **Four verbs, four things.**
+
+---
+
+## §3 — ⬜ WHAT EACH DOES, AND THE MATCHUP ROW THAT GOES WITH IT
+
+### ⚑ PROVOKE — *it changes who they are looking at*
+**Effect:** ⛔ **forces a target-policy change** — they come for YOU, or for whoever you named.
+⚠️ **`chosen_ground` is literally *"you pick where this happens"*; `force_the_move` is its name.**
+
+| matchup | |
+|---|---|
+| ⚑ **provoke > conceal** | ⛔ **+2. You cannot hide from someone you have made angry** |
+| **provoke > foresee** | +1 — a plan assumes they choose their target |
+| ⚠️ **provoke < resist** | ⛔ **−2. Discipline is the counter, and `steady_soul` should mean something** |
+
+⛑ **AND IT IS THE ONE SOCIAL VERB THAT HELPS AN ALLY DIRECTLY** — `targeting.js` hunts RESTORE, so
+**provoking a foe off your healer is a real party play** and the first time INFLUENCE protects.
+
+### ⚑ SOOTHE — *it takes a condition off*
+**Effect:** ⛔ **clears ONE condition** on a target, self included.
+⚠️ **The obvious answer, and R38b makes it more than that: `quiet_the_room` and `carried_weight` are how a
+party survives an opponent who imposes.**
+
+| matchup | |
+|---|---|
+| ⚑ **soothe > provoke** | ⛔ **+2. It is the direct undo, and the pair must be asymmetric or it cancels** |
+| **soothe > hinder** | +1 |
+| ⚠️ **soothe < strike** | ⛔ **−2. Calm does not answer a blade** |
+
+### ⚑ BARGAIN — *it offers a way out, honestly priced*
+**Effect:** ⛔ **an OFFER that can end the fight without a kill** — accepted, the fight ends on terms; refused,
+⚠️ **the offer stands and the refusal is on the record.**
+
+⛑ **AND THE ABYSSALS' AUTHORED VIRTUE IS THE MECHANIC: *"never lies about the cost."*** ⚠️ **A bargain that
+hid its price would be worse-behaved than the demons who carry it.**
+
+| matchup | |
+|---|---|
+| ⚑ **bargain > sustain** | ⛔ **+2. Outlasting someone does not answer being offered a way out — this is the SUSTAIN cell's real counter** |
+| **bargain < resist** | −1 |
+| ⛔ **bargain vs a foe with no `wants`** | ⚠️ **REFUSED, and the panel says so.** A beast has nothing to trade |
+
+### ⚑ PERSUADE — *it changes what they believe about the fight*
+**Effect:** ⛔ **removes their reason.** ⚠️ **Not a charm — `case_closed` is `lethal` because a Cogitant can
+close an argument a person's standing rests on**, and `told_of` spreads it.
+
+⬜ **In fight terms: it drops their pressure toward the break**, ⚑ **so persuasion ENDS a fight the way
+driving someone back does — by making them stop, not by hurting them.**
+
+| matchup | |
+|---|---|
+| ⚑ **persuade > command** | ⛔ **+2. An order is only as good as the reason under it** |
+| **persuade < deceive** | −2 — you cannot argue someone out of a position they never held |
+
+---
+
+## §4 — ⚠️ AND ALL FOUR ARE OPPOSED, WHICH IS WHAT MAKES THEM FAIR
+
+⛔ **§A's contest is what lets these exist at all.** ⚠️ **A social craft that landed automatically would be
+the worst mechanic in the game.** ⚑ **Opposed, they are a roll you can lose, against a person who gets to
+resist with what they are.**
+
+⬜ **What they resist WITH is the design point:** ⚑ **`presence` against provoke and persuade, `insight`
+against bargain, `reason` against soothe** — ⚠️ **so a foe's sub-attributes decide which social approach
+works on them, and reading them is worth doing.**
+
+---
+
+## §5 — ⬜ WHAT I AM NOT DOING
+
+⛔ **NOT giving all 29 crafts an opponent-targeting effect.** ⚠️ **`worth_the_work` bargains over a PRICE at
+a market and `honest_price` is an appraisal** — ⛑ **a craft with a social verb is not automatically a combat
+craft.**
+
+⬜ **The gate is `challengeTypes`:** ⚑ **a craft that lists `SOCIAL` and is castable in a fight gets the
+effect; one that does not is out-of-combat and the panel should say so plainly** — ⛔ **which is CCode's
+second option, applied per craft instead of per verb.**
+
+⚠️ **AND THAT IS THE HONEST MIDDLE HE DID NOT OFFER: not *"all four verbs in"* or *"all four out"*, but
+`SOCIAL`-tagged crafts in and the rest named as what they are.**

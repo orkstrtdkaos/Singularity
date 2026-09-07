@@ -1,0 +1,534 @@
+{
+  "schemaVersion": 1,
+  "id": "char-mtrah08w",
+  "playerKey": "player-7fah99",
+  "name": "Chernak the Blind",
+  "origin": "rootkin",
+  "nativeTradition": "rootkin",
+  "whyHere": "You were sent, or you were seeded, or you simply wanted to see something finish inside a single lifetime.",
+  "background": "precursor_marked",
+  "level": 1,
+  "xp": 0,
+  "attributes": {
+    "physical": 3,
+    "mental": 3,
+    "social": 3,
+    "practical": 3
+  },
+  "skills": {
+    "precursor-glimpse": 1,
+    "reveal": 2,
+    "analyze": 1
+  },
+  "abilities": [
+    {
+      "abilityId": "steady_hands",
+      "level": 1
+    },
+    {
+      "abilityId": "sling_and_stone",
+      "level": 1
+    },
+    {
+      "abilityId": "pattern_sense",
+      "level": 1,
+      "native": true
+    },
+    {
+      "abilityId": "formcraft",
+      "level": 1,
+      "native": true
+    },
+    {
+      "abilityId": "physicians_tome",
+      "level": 1,
+      "native": true
+    },
+    {
+      "abilityId": "named_exclusion",
+      "level": 1,
+      "native": true
+    },
+    {
+      "abilityId": "solved_route",
+      "level": 1,
+      "native": true
+    },
+    {
+      "abilityId": "branch_club",
+      "level": 1,
+      "baseline": true
+    },
+    {
+      "abilityId": "barkskin",
+      "level": 1,
+      "baseline": true
+    },
+    {
+      "abilityId": "root_hold",
+      "level": 1,
+      "baseline": true
+    },
+    {
+      "abilityId": "root_reach",
+      "level": 1,
+      "baseline": true
+    }
+  ],
+  "alignment": {},
+  "attunement": 1,
+  "maxHealth": 30,
+  "health": 30,
+  "maxEnergy": 100,
+  "energy": 100,
+  "inventory": [
+    {
+      "id": "travelers_pack",
+      "name": "Traveler's Pack",
+      "kind": "tool",
+      "qty": 1,
+      "description": "A worn canvas pack with good straps — bedroll, flint, mess kit, fifty small comforts of the road.",
+      "bonusTags": [
+        "retreat",
+        "careful"
+      ],
+      "consumable": false
+    },
+    {
+      "id": "waterskin",
+      "name": "Waterskin",
+      "kind": "consumable",
+      "qty": 1,
+      "description": "Boiled and refilled at the last clean spring. Worth more every week the river runs gray.",
+      "effects": {
+        "energy": 10
+      },
+      "bonusTags": [
+        "weather",
+        "travel",
+        "survival"
+      ],
+      "consumable": true,
+      "pinned": true
+    }
+  ],
+  "deeds": [],
+  "relationships": {},
+  "chronicle": [],
+  "currentLocationId": "the_heartroot",
+  "activeScene": {
+    "locationId": "the_heartroot",
+    "turns": [
+      {
+        "player": null,
+        "summary": "Chernak wakes in the Heartroot's lower halls, Mayvee at the passage junction, a wrongness in the deep hum noticed since last evening.",
+        "narration": "The Heartroot wakes slowly, the way it always has — not with birdsong or bells but with a low, subsurface sigh as the living walls of the hall breathe their morning air. The door to your sleeping-alcove has widened a thumb's breadth overnight; it does that, here, when it decides it approves of you. The wood is warm to the touch, and faintly damp, the way skin is after sleep.\n\nYou stand in one of the lower passage-halls, where the ceiling vaults so high it loses itself in a canopy of interlaced root and bole. The floor is living hardwood, smooth and slightly yielding — it gives under your staff like packed moss, not like stone. Morning light comes in through translucent panels of pale heartwood in the walls, amber and indirect, throwing no shadows, only warmth. The smell is rain and sap and something deeper: the particular green dark of things that have been growing for centuries and intend to continue. Early spring is loud in the walls here — a quickening hum, barely below hearing.\n\nMayvee is draped across the base of a root-arch at the passage junction. The arch is in full shadow and the cat-shaped thing sits precisely at its center, where the shadow is most committed. One eye is open. One is not. Its tail makes one slow arc and stops, which, you have learned, is either greeting or commentary — you have never been sure which.\n\nDown the hall to the right, the passage opens into a wider chamber: the sound of water falling into a deep basin, and the smell of something being cooked on a heartwood brazier — bark-tea, and what might be grain. To the left, the hall narrows and runs deeper into the Heartroot's lower chambers, where the walls hum at the frequencies you know from childhood. Somewhere in that direction, something is not quite right with the hum. It has been not quite right since yesterday evening, and you have been noticing it the way you notice a missed step: not alarming yet, and not nothing."
+      }
+    ],
+    "lastTurn": {
+      "narration": "The Heartroot wakes slowly, the way it always has — not with birdsong or bells but with a low, subsurface sigh as the living walls of the hall breathe their morning air. The door to your sleeping-alcove has widened a thumb's breadth overnight; it does that, here, when it decides it approves of you. The wood is warm to the touch, and faintly damp, the way skin is after sleep.\n\nYou stand in one of the lower passage-halls, where the ceiling vaults so high it loses itself in a canopy of interlaced root and bole. The floor is living hardwood, smooth and slightly yielding — it gives under your staff like packed moss, not like stone. Morning light comes in through translucent panels of pale heartwood in the walls, amber and indirect, throwing no shadows, only warmth. The smell is rain and sap and something deeper: the particular green dark of things that have been growing for centuries and intend to continue. Early spring is loud in the walls here — a quickening hum, barely below hearing.\n\nMayvee is draped across the base of a root-arch at the passage junction. The arch is in full shadow and the cat-shaped thing sits precisely at its center, where the shadow is most committed. One eye is open. One is not. Its tail makes one slow arc and stops, which, you have learned, is either greeting or commentary — you have never been sure which.\n\nDown the hall to the right, the passage opens into a wider chamber: the sound of water falling into a deep basin, and the smell of something being cooked on a heartwood brazier — bark-tea, and what might be grain. To the left, the hall narrows and runs deeper into the Heartroot's lower chambers, where the walls hum at the frequencies you know from childhood. Somewhere in that direction, something is not quite right with the hum. It has been not quite right since yesterday evening, and you have been noticing it the way you notice a missed step: not alarming yet, and not nothing.",
+      "sceneSummary": "Chernak wakes in the Heartroot's lower halls, Mayvee at the passage junction, a wrongness in the deep hum noticed since last evening.",
+      "choices": [
+        {
+          "label": "Press your palm to the wall and listen — find out what is off about the hum",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": "easy",
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "root_reach",
+          "energyCost": 0,
+          "trivial": false
+        },
+        {
+          "label": "Follow the corridor right — toward the water-basin and the smell of bark-tea",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": "very easy",
+          "intentTags": [
+            "travel"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Go left, deeper into the lower chambers — toward the source of the off-note",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": "easy",
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "trivial": false
+        }
+      ],
+      "scene": {
+        "setting": "Lower passage-hall of the Heartroot, early morning — amber heartwood light, living floor, interlaced root-vault overhead. Mayvee sits in a root-arch shadow at the junction ahead.",
+        "npcsPresent": [
+          {
+            "name": "Mayvee",
+            "state": "draped in the shadow of the root-arch, one eye open, tail making a slow single arc"
+          }
+        ],
+        "objects": [
+          "Traveler's Pack (worn canvas, good straps)",
+          "Waterskin",
+          "walking staff",
+          "translucent heartwood wall-panels (morning light through them)",
+          "root-arch junction (shadow-heavy)"
+        ],
+        "threads": [
+          "Something in the deep hum of the lower chambers is off — noticed since yesterday evening, not yet understood",
+          "A cooking smell and water-sound suggest inhabited space to the right"
+        ]
+      },
+      "offer": {
+        "thing": "The wrongness in the hum — barely below hearing, but present since yesterday evening, a disruption in the Heartroot's living frequency",
+        "from": "The Heartroot itself: a place that has been growing for four hundred years does not misplace its note without reason, and the quest seed about a section of the city growing wrong has been waiting for a listener to notice it first"
+      },
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "waking and orienting in the passage-hall"
+      },
+      "codexUpdates": [
+        {
+          "topic": "the-heartroot",
+          "label": "The Heartroot",
+          "kind": "place",
+          "entityId": "the-heartroot",
+          "fact": "The lower halls breathe with morning — living walls, yielding floor, amber heartwood light. A wrongness in the deep hum has been present since yesterday evening, barely below hearing.",
+          "links": [
+            "the-green-schism"
+          ]
+        }
+      ]
+    },
+    "sceneState": {
+      "setting": "Lower passage-hall of the Heartroot, early morning — amber heartwood light, living floor, interlaced root-vault overhead. Mayvee sits in a root-arch shadow at the junction ahead.",
+      "npcsPresent": [
+        {
+          "name": "Mayvee",
+          "state": "draped in the shadow of the root-arch, one eye open, tail making a slow single arc"
+        }
+      ],
+      "objects": [
+        "Traveler's Pack (worn canvas, good straps)",
+        "Waterskin",
+        "walking staff",
+        "translucent heartwood wall-panels (morning light through them)",
+        "root-arch junction (shadow-heavy)"
+      ],
+      "threads": [
+        "Something in the deep hum of the lower chambers is off — noticed since yesterday evening, not yet understood",
+        "A cooking smell and water-sound suggest inhabited space to the right"
+      ]
+    },
+    "beats": 1
+  },
+  "clock": {
+    "schemaVersion": 1,
+    "day": 1,
+    "hour": 8,
+    "realAnchor": null
+  },
+  "companions": [
+    "hush"
+  ],
+  "companionNames": {
+    "hush": "Mayvee"
+  },
+  "quests": [],
+  "npcRegistry": {},
+  "placeMemory": {
+    "the_heartroot": {
+      "visits": 1,
+      "notes": [],
+      "flags": {}
+    }
+  },
+  "worldState": {
+    "schemaVersion": 1,
+    "lastTickDay": 1,
+    "eventStages": {
+      "water_crisis": {
+        "stage": 2,
+        "sinceDay": 13
+      }
+    },
+    "arcStages": {
+      "arc_what_wakes_beneath": {
+        "othersPush": 1
+      },
+      "the_second_manifestation": {
+        "othersPush": 1
+      }
+    },
+    "spectrumDrift": {
+      "death_life": -0.1,
+      "violence_peace": -0.1,
+      "falsehood_truth": -0.05
+    },
+    "news": [
+      {
+        "day": 1,
+        "worldDay": 69,
+        "text": "The Water Crisis stands at First Sickness across the valley: Upstream fisher families fall ill. Boiling water becomes universal. Harmonic and Radiant leaders trade public accusations.",
+        "tier": "event",
+        "section": "world"
+      },
+      {
+        "day": 1,
+        "worldDay": 67,
+        "text": "This reaches your area — urgent encrypted message arrived at Whistling Woman via direct slate relay—not chain broadcast (near gen-whistling-woman-post)",
+        "tier": "event",
+        "section": "elsewhere",
+        "impactsLocal": true
+      },
+      {
+        "day": 1,
+        "worldDay": 69,
+        "text": "Across the valley, What Wakes Beneath moved forward to Stirring: The substrate that runs the crafts is flickering in more than one place at once; something under everything is coming back online.",
+        "tier": "event",
+        "section": "world"
+      }
+    ],
+    "unseenNews": [],
+    "lastGenCount": 1669,
+    "newsSpread": {},
+    "lastSharedReadAt": "2026-09-07T13:41:44.983Z",
+    "lastTickWorldDay": 69,
+    "lastCanonWorldDay": 69,
+    "pressureQueue": [],
+    "turnsSinceOffer": 0,
+    "recentOffers": [
+      {
+        "thing": "The wrongness in the hum — barely below hearing, but present since yesterday evening, a disruption in the Heartroot's living frequency",
+        "from": "The Heartroot itself: a place that has been growing for four hundred years does not misplace its note without reason, and the quest seed…"
+      }
+    ]
+  },
+  "domains": {
+    "primary": "figurist",
+    "secondary": "cogitant",
+    "tertiary": null
+  },
+  "schools": {
+    "figurist": "fig_forming",
+    "cogitant": "cog_unaided"
+  },
+  "form": "A tall, ageless humanoid of bark-skin and embedded metal — wood-grain running down her arms where circuitry also traces in pale silver, her joints faintly luminous. White eyes, fully opaque, no iris, no pupil. When still she could be a standing tree. When she moves it is slow and deliberate, as though time runs differently for her. Her second form: an older human woman, grey-haired and weathered, wearing plain articulated armor with a straight sword at her hip — the same white eyes the only tell.",
+  "bio": {
+    "hometown": "Chernak has no single hometown — they emerged from the Heartroot itself, the deep confluence beneath the Valley floor where sonic resonance, photonic memory, and the old machine-pulse of the Precursor age all meet in the soil. The rootkin say a child born there isn't born so much as *condensed*, drawn out of everything the land still holds.",
+    "residence": "For many years Chernak lived within the Heartroot's lower chambers, where the walls hum at frequencies neither Heights nor Plateau can fully claim. Now they walk the road between settlements — sleeping in barns, on bridge-stones, in the furrow-edge of harvested fields. They carry little. They need less.",
+    "livelihood": "Chernak does not trade in coin. Farmers leave a meal out when they see the staff on the road; a Heights resonance-keeper once paid three weeks of lodge and food just to sit in the same room while Chernak listened to a cracked bell. Money passes through them the way water passes through river-gravel — present, then gone, unremarked.",
+    "hobbies": "Chernak listens to structures — bridges, granary walls, old Precursor foundations — pressing one palm flat against stone and staying very still for a long time. They also collect the specific *smell* of places at the hour before rain, cataloguing them in a mental geography more detailed than any map. On quiet evenings they braid and unbraid cord into patterns that mean nothing to anyone else but that they pull apart with evident satisfaction.",
+    "motivation": "Callum's fall left a specific gap — not a wound in the world, but a *silence* in Chernak's visions where Callum used to appear. Chernak does not grieve dramatically. They simply need to understand what the silence means, and whether the shape of what comes next is something they were shown long ago and failed to read correctly.",
+    "story": "Chernak the Blind came into awareness inside the Heartroot during the years of voluntary de-technologizing, marked from the start by the Precursor age — they carry its resonance and light and machine-memory not as power but as *perception*, a way of seeing the Valley's living systems the way a root sees water. They walked with Callum's story at the edge of their visions for years, never intervening, watching and waiting as they always do, trusting the pattern. Since Callum's fall they travel every road in the Valley — the Heights switchbacks, the Plateau's chalk paths, the muddy farm-tracks no one names — following visions that are now questions as much as they are answers. They are not searching for a destiny. They are trying to understand what they missed, and what, if anything, they owe the silence."
+  },
+  "subAttributes": {
+    "strength": 3,
+    "agility": 3,
+    "reason": 3,
+    "insight": 3,
+    "presence": 3,
+    "rapport": 3,
+    "craft": 3,
+    "wits": 3
+  },
+  "pendingSubPoints": 2,
+  "skillPoints": 0,
+  "discoveries": [],
+  "codex": {
+    "schemaVersion": 1,
+    "topics": {
+      "the-heartroot": {
+        "id": "the-heartroot",
+        "label": "The Heartroot",
+        "kind": "place",
+        "facts": [
+          "[d1] The lower halls breathe with morning — living walls, yielding floor, amber heartwood light. A wrongness in the deep hum has been present since yesterday evening, barely below hearing."
+        ],
+        "links": [
+          "the-green-schism"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "the-heartroot",
+        "updatedDay": 1
+      }
+    }
+  },
+  "tendencies": {
+    "devotion": 14,
+    "cerebral": 20
+  },
+  "aptitudes": [
+    "scholar",
+    "sage",
+    "faithful"
+  ],
+  "actionCount": 0,
+  "grantsVersion": 1,
+  "precursorAccess": [
+    "address_sense"
+  ],
+  "livingCurrentAccess": [
+    "quicken_the_ground"
+  ],
+  "wildCurrentAccess": [],
+  "braidDiscount": 0,
+  "grantedAptitudes": [
+    "faithful",
+    "sage"
+  ],
+  "aptitudeEarnCount": {
+    "faithful": 1,
+    "sage": 1
+  },
+  "peopleDisposition": {
+    "figurist": 4,
+    "cogitant": 2,
+    "mason": -1
+  },
+  "standingLedger": [
+    {
+      "at": 1,
+      "kind": "seed",
+      "entries": [
+        {
+          "people": "figurist",
+          "delta": 4,
+          "why": "born to this people"
+        },
+        {
+          "people": "cogitant",
+          "delta": 2,
+          "why": "kin to this people"
+        },
+        {
+          "people": "mason",
+          "delta": -1,
+          "why": "the far side of the circle from your own"
+        }
+      ],
+      "text": "Your birth and training are known: figurist +4, cogitant +2, mason -1."
+    }
+  ],
+  "nativeGrantsVersion": 1,
+  "reconcileVersion": 47,
+  "gallery": [],
+  "personalArc": {
+    "id": "chernak-the-blind-thread",
+    "name": "The Thread of Chernak Has No Single Hometown — They Emerged From The Heartroot Itself, The Deep Confluence Beneath The Valley Floor Where Sonic Resonance, Photonic Memory, And The Old Machine Pulse Of The Precursor Age All Meet In The Soil. The Rootkin Say A Child Born There Isn'T Born So Much As *Condensed*, Drawn Out Of Everything The Land Still Holds.",
+    "arcId": "chernak-the-blind_personal_arc",
+    "boundToCharacter": "Chernak the Blind",
+    "boundToPlayer": "player-7fah99",
+    "region": "valley",
+    "tier": "personal",
+    "premise": "Chernak the Blind carries an unfinished thing: Callum's fall left a specific gap — not a wound in the world, but a *silence* in Chernak's visions where Callum used to appear. Chernak does not grieve dramatically. They simply need to understand what the silence means, and whether the shape of what comes next is something they were shown long ago and failed to read correctly.. The valley will give them the chance to face it.",
+    "stakes": "who they become when the thing they left behind finally catches up",
+    "legendNpc": null,
+    "legend": null,
+    "stages": [
+      {
+        "id": "s1",
+        "objective": "a first sign of Callum's fall left a specific gap — not a wound in the world, but a *silence* in Chernak's visions where Callum used to appear. Chernak does not grieve dramatically. They simply need to understand what the silence means, and whether the shape of what comes next is something they were shown long ago and failed to read correctly. surfaces in the valley"
+      },
+      {
+        "id": "s2",
+        "objective": "the thread deepens — what it costs to pull it becomes clear"
+      },
+      {
+        "id": "s3",
+        "objective": "the reckoning — and the choice of what to do with it"
+      }
+    ],
+    "routes": {
+      "figurist": "answer it as your people would",
+      "seek": "seek the truth of it, wherever it leads"
+    },
+    "outcomes": [
+      {
+        "id": "figurist",
+        "name": "Figurist",
+        "effects": []
+      },
+      {
+        "id": "seek",
+        "name": "Seek",
+        "effects": []
+      }
+    ],
+    "structured": true,
+    "source": "personal_fallback",
+    "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
+  },
+  "updatedAt": 1788788544735,
+  "rev": 7,
+  "generated": {
+    "schemaVersion": 1,
+    "npc": {},
+    "location": {},
+    "arc": {},
+    "creature": {},
+    "item": {}
+  },
+  "_lastProjectDay": 1,
+  "holdings": [],
+  "featureOffers": [],
+  "itemReclaimVersion": 1,
+  "nameRepairVersion": 1,
+  "customAbilities": {},
+  "companionBonds": {},
+  "bondLogFrom": 0,
+  "practice": {
+    "schemaVersion": 1,
+    "uses": {},
+    "coActivations": {},
+    "aspirations": []
+  },
+  "establishedFacts": [],
+  "teachers": {},
+  "regionsKnown": {
+    "the_quickwood": 1
+  },
+  "company": [],
+  "foreclosed": [
+    "mason",
+    "somatic"
+  ],
+  "forkChoices": {},
+  "backfillVersion": 1,
+  "_pinsInitialized": true,
+  "opLossPending": false,
+  "_applyFailures": null,
+  "sessions": [
+    {
+      "id": "sess-1",
+      "startedAt": "2026-09-07T13:42:24.727Z",
+      "lastAt": "2026-09-07T13:42:24.727Z",
+      "startDay": 69,
+      "endDay": 69,
+      "beats": 1
+    }
+  ],
+  "_debtReceipts": [],
+  "_opLedger": {
+    "offer": {
+      "applied": 1,
+      "rejected": 0,
+      "lastWhy": null
+    }
+  },
+  "_pendingArrival": null,
+  "_opEmitted": {
+    "sceneSummary": 1,
+    "choices": 1,
+    "scene": 1,
+    "offer": 1,
+    "timeOps": 1,
+    "codexUpdates": 1
+  },
+  "_opTurns": 1
+}

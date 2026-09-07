@@ -179,3 +179,21 @@ Long Fields content commit (`c2abf5c4`), I cannot read from here: CI logs need a
 count content as source. **The shape:** Aevi's pushes go up through an API and never run the local hook, so CI is the
 first place her reds appear, and they stay red until my next landing regenerates and re-baselines. Two ways out, either
 is fine: paste the `FAIL` line from a red run into po/, or push content through me and I land it under the hook.
+
+## 12 · Erik — how the UI is looking, measured (v1.9.403)
+
+Served the repo locally, loaded a copy of Silas into a sandboxed browser (no sync token, no API key — nothing could
+push or call), and listed every element that pokes past a 375px phone viewport on six screens.
+
+| screen | at 375px |
+|---|---|
+| Settings | ⛔ four selects overflowed (the page scrolled to 496 wide) — *How crowded the world is* (mine, 455px), time mode, scene art, plainness. **Fixed at the shared input rule.** |
+| Play | ⛔ the whole page was 618 wide in portrait: the 600px scene banner set the stacked column's minimum width. **Fixed at the grid** (`min-width: 0` on the layout's children); the banner keeps its bleed. |
+| Play, the input row | ⛔ uncovered by the first fix: the row did not wrap, so the Act / Ask GM chips were squeezed to 2px (invisible) and ⚙ Plan sat off the edge. **Fixed: the row wraps; the chips never shrink.** |
+| Character sheet | ✅ fits |
+| Holdings | ✅ fits — five cards, every hold with a picture, staffing on the line |
+| Manage popup | ✅ fits (343 wide), every verb present: hands, guard, keeper, hand over, features, rename, give up |
+| Chronicle · Codex | ✅ fit |
+
+Your own screenshots are landscape, where the two-column layout was already fine; portrait is where these two bit. §127
+pins both rules. What I could not judge from here is the art itself and the reading feel — that is yours.

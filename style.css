@@ -16,7 +16,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: var(--bg); color: var(--ink); font-family: var(--font); line-height: 1.6; }
 button { font-family: var(--font-ui); cursor: pointer; }
-input, select, textarea { font-family: var(--font-ui); background: var(--panel2); color: var(--ink); border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; font-size: 14px; }
+input, select, textarea { font-family: var(--font-ui); background: var(--panel2); color: var(--ink); border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; font-size: 14px; max-width: 100%; box-sizing: border-box; }   /* 2026-09-06 measured at 375px: four Settings selects sized to their longest option ran the page to 496 wide — a select never exceeds its container */
 input:focus, textarea:focus { outline: 1px solid var(--accent); }
 
 .boot { padding: 4rem; text-align: center; color: var(--ink-dim); font-style: italic; }
@@ -30,6 +30,7 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 #sticky-back[hidden] { display: none; }
 #sticky-back .sticky-back-btn { font-size: 13px; padding: 5px 12px; }
 .layout { display: grid; grid-template-columns: 280px 1fr; gap: 16px; align-items: start; }
+.layout > * { min-width: 0; }   /* 2026-09-06 measured at 375px: a grid item's minimum width is its widest content, and the 600px scene banner made the stacked play page 618 wide; with this the 1fr column can shrink and the banner's percentage width resolves against the real column */
 @media (max-width: 800px) {
   .layout { grid-template-columns: 1fr; }
   .sheet { position: static; }
@@ -799,8 +800,9 @@ img[data-lightbox] { cursor: zoom-in; }
 .choice:disabled { opacity: .5; cursor: default; }
 .choice .sense { display: block; font-size: 12px; color: var(--accent2); font-style: italic; margin-top: 2px; }
 .choice .ability-tag { color: var(--accent); font-size: 12px; }
-.freeform { display: flex; gap: 8px; margin-top: 12px; }
-.freeform input { flex: 1; }
+.freeform { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }   /* 2026-09-06 measured at 375px: nowrap squeezed the Act / Ask GM chips to 2px and pushed ⚙ Plan off the edge */
+.freeform input { flex: 1 1 160px; min-width: 0; }
+.freeform .mode-chips { flex: 0 0 auto; }   /* the chips are the mode — they never shrink to nothing */
 .freeform button, .btn { background: var(--accent); color: #16130c; border: none; border-radius: 6px; padding: 8px 16px; font-size: 14px; font-weight: 600; }
 .freeform button:disabled, .btn:disabled { opacity: .5; cursor: default; }
 .btn.secondary { background: var(--panel2); color: var(--ink); border: 1px solid var(--border); }

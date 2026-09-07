@@ -8506,6 +8506,22 @@ console.log("\n── §126 · your save did not go up, and you are told so ─�
   check("§126: …and the turn never waits on the network — the call is not awaited", !/await backupSaves\(character, profile\)/.test(app));
 }
 
+/* ═════ §127 — THE PHONE PAGE DOES NOT SCROLL SIDEWAYS (measured at 375px on six screens, 2026-09-06) ═════ */
+// ⛔ Erik: "how is our UI looking?" Measured with a copy of Silas in a sandboxed browser: four Settings selects ran the
+// page to 496 wide, and the 600px scene banner ran the stacked play page to 618. Both were one rule each, at the cause.
+console.log("\n── §127 · a select never exceeds its container; a grid column may shrink below its widest picture ──");
+{
+  const css = rd("style.css");
+  check("§127: ⛔ THE SHARED INPUT RULE caps every input, select and textarea at its container, border-box",
+    /input, select, textarea \{[^}]*max-width: 100%;[^}]*box-sizing: border-box;[^}]*\}/.test(css));
+  check("§127: ⛔ A GRID ITEM MAY SHRINK BELOW ITS WIDEST CONTENT — the stacked play column no longer takes the banner's intrinsic width",
+    /\.layout > \* \{ min-width: 0; \}/.test(css) && /\.layout \{ display: grid; grid-template-columns: 280px 1fr;/.test(css));
+  check("§127: …the play input row WRAPS on a phone, and the Act / Ask GM chips never shrink to nothing",
+    /\.freeform \{ display: flex; flex-wrap: wrap;/.test(css) && /\.freeform \.mode-chips \{ flex: 0 0 auto; \}/.test(css) && /\.freeform input \{ flex: 1 1 160px; min-width: 0; \}/.test(css));
+  check("§127: …and the banner keeps its bleed — the fix was the column, not a cap on the picture",
+    /\.scene-banner \{ width: calc\(100% \+ 48px\);/.test(css) && !/^img \{[^}]*max-width/m.test(css));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

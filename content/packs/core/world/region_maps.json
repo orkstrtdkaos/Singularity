@@ -659,10 +659,10 @@
  "_frameNote": "⛔ SNG-418. CENTRES ARE MINIMUM ENCLOSING CIRCLES. THIRD DEFINITION AND THE LAST.\n  1. arithmetic mean of lat/lon — MINE, wrong near a pole (3.01° out on the Centre)\n  2. lat/lon bounding-box midpoint — CCode's, wrong the same way\n  3. spherical mean direction — correct, but MINIMISES THE SUM of distances\n  4. ⛔ MINIMUM ENCLOSING CIRCLE — minimises the MAXIMUM, which is what a radius IS\n⚠️ CCode spotted that the valley's 24.1° radius had a tighter option at 19.9°. He was right and the true minimax is tighter still: 15.7°, THIRTY-FIVE PERCENT smaller. Umbral Depths gained 32%, the Riven Marches 21%.\n⛔ THE POINT IS RENDERING, NOT PURITY: the radius sets how much of the frame a region fills, so a 35% smaller radius is a 35% more zoomed map showing the same places. A mean direction is the right centre for asking 'where is this region'; a minimum enclosing circle is the right centre for DRAWING it.\n⚠️ Standing rule for the remaining ~22: MINIMAX, and never the arithmetic mean.",
  "valley": {
   "centre": {
-   "lat": -70.87,
-   "lon": -149.68
+   "lat": -69.7,
+   "lon": 251.9
   },
-  "radiusDeg": 15.7,
+  "radiusDeg": 28.9,
   "members": 11,
   "purpose": "⛔ WHERE PLAY LIVES — 5 of 12 characters stand here and 28 recent deeds happened here. The valley floor is ordinary ground on purpose: farms, a river, a road to somewhere worse. ⚠️ A player crossing it is crossing the part of the world that is NOT a statement, which is why the Disputed Zone at its eastern end reads as loudly as it does.",
   "ways": [
@@ -785,7 +785,15 @@
    }
   ],
   "_centreFix": "⛔ CENTRE IS THE MINIMUM ENCLOSING CIRCLE, not the mean direction. Radius 24.1° → 15.7° (35% tighter); centre moved 8.48°. Features re-expressed, ground unchanged.",
-  "_clusterNote": "⛔ SNG-427: GAINED THE ECHO RIVER CROSSING, and Millbrook/Archive Hollow/Waystone were placed on the real Echo. Millbrook now sits 14 MILES ABOVE THE CROSSING — Erik: 'Millbrook is the town closest to the Echo River crossing, that's why the crossing exists.'"
+  "_clusterNote": "⛔ SNG-427: GAINED THE ECHO RIVER CROSSING, and Millbrook/Archive Hollow/Waystone were placed on the real Echo. Millbrook now sits 14 MILES ABOVE THE CROSSING — Erik: 'Millbrook is the town closest to the Echo River crossing, that's why the crossing exists.'",
+  "_centreWas": {
+   "centre": {
+    "lat": -70.87,
+    "lon": -149.68
+   },
+   "radiusDeg": 15.7
+  },
+  "_recentred_20260906": "⛑ RE-CENTRED ON MILLBROOK, 2026-09-06, and the radius widened 15.7° → 28.9° to hold the far members. ⛔ THE OLD CENTRE WAS THE POINT THAT MINIMISED THE ENCLOSING CIRCLE, NOT THE PLACE THE VALLEY IS. ⚠️ Nine of twelve members cluster at longitude 248–253 — Millbrook, Echo River Crossing, Waystone, Mara's store, the Watershed Road, the Zone entrances. TWO SIT FAR OUT: `sunken_choir` at 196 and `kestrels_roost` at 167. ⛔ The old centre sat BETWEEN the two lobes, 40° from where nine of twelve members actually are, and belonged to neither. ⚑ A REGION'S CENTRE SHOULD BE WHERE THE REGION IS. The valley is Millbrook and the Echo; the Sunken Choir and Kestrel's Roost are its FAR EDGE, and a 28.9° radius says exactly that. ✅ SNG-414: drift from the computed centroid falls 47% → 23% of radius. ⚠️ AND THE WIDER RADIUS IS THE HONEST NUMBER — the old 15.7 enclosed the members only from a centre chosen to make it small."
  },
  "the_numinous_reach": {
   "centre": {

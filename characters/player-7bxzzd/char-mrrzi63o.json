@@ -119,57 +119,159 @@
         "player": null,
         "summary": "Brynjar rested at the waygate stone and woke at dawn to find a dead sheep on the track — the first sign the Riven Marches livestock sickness has reached this road.",
         "narration": "You find a hollow in the lee of the waygate stone — the iron ring above you catching the last of the night wind — and spread your bedroll on ground that is cold but dry enough. Freki circles twice and drops against your side, a warm press of wire coat and slow breath. Sleep comes without argument.\n\nDawn arrives gray and honest. The melt has softened the track overnight; boot-prints from yesterday are deeper now, edges blurred by the slow seep. The waygate stone stands as it did — the broken top, the iron ring hammered in crooked — but the light is different, the shadow thrown spinward across the path rather than widdershins. Your body feels the night's work undone. Freki is already on her feet, nose moving along the ground in widening arcs, reading the night's traffic.\n\nSomething she finds makes her pause — not a growl, not alarm, but the focused stillness she gets when something is worth your attention. A few yards along the track toward the Marchward, there is a dead sheep. Not torn, not dragged. It simply lay down in the night and did not get up, and whoever owns it has not yet come looking. The fleece is patchy in a way you have seen before on animals that stopped eating weeks before they died. You think of the news that has been drifting up the road — the Riven Marches herds, the quiet sickness spreading flock to flock — and the dead animal at a waygate feels less like bad luck and more like a marker."
+      },
+      {
+        "player": "I wanted to head to the waygate in the crossing",
+        "summary": "Brynjar walked the hubward road from the waygate stone to The Crossing, arriving at the waygate arch by early afternoon.",
+        "narration": "The Waygate stone is already behind you before the morning is properly up — Freki ranging ahead on the softened track, nose working the cold air in long sweeps. The dead sheep stays where it lay. You leave it for whatever the valley sends to deal with it.\n\nThe road runs hubward through young spring mud and the last grey stands of elder-scrub, the melt still working its way out of the ditches. By midday the ground firms a little and the track widens where other feet have worn it smooth over years of the same crossing. Freki drops back to your heel as the waygate traffic thickens — a carter moving spinward with a load of lime, two women in Lattice-Cities grey walking without speaking, a Marcher leaning on a post at a junction who looks at you once, top to bottom, and says: \"Your left side opens when you're tired. Sleep on it.\" Then he looks away. Not a threat. A reading. He is already watching the road again before you can decide whether to answer.\n\nThe Crossing's waygate is a different thing from the broken stone north of the Marchward — a proper threshold, the arch dressed with flat iron fittings, the ground worn to smooth stone within ten paces of it by decades of feet. It is early afternoon when you walk under it, Freki close, the shadow of the iron ring falling across your shoulder. The Crossing Hub Hall is visible through the arch — the octagonal walls, the chalk-board column at the center, the eight thresholds each facing a different spoke of the valley."
       }
     ],
     "lastTurn": {
-      "holdingOps": [
+      "narration": "The Waygate stone is already behind you before the morning is properly up — Freki ranging ahead on the softened track, nose working the cold air in long sweeps. The dead sheep stays where it lay. You leave it for whatever the valley sends to deal with it.\n\nThe road runs hubward through young spring mud and the last grey stands of elder-scrub, the melt still working its way out of the ditches. By midday the ground firms a little and the track widens where other feet have worn it smooth over years of the same crossing. Freki drops back to your heel as the waygate traffic thickens — a carter moving spinward with a load of lime, two women in Lattice-Cities grey walking without speaking, a Marcher leaning on a post at a junction who looks at you once, top to bottom, and says: \"Your left side opens when you're tired. Sleep on it.\" Then he looks away. Not a threat. A reading. He is already watching the road again before you can decide whether to answer.\n\nThe Crossing's waygate is a different thing from the broken stone north of the Marchward — a proper threshold, the arch dressed with flat iron fittings, the ground worn to smooth stone within ten paces of it by decades of feet. It is early afternoon when you walk under it, Freki close, the shadow of the iron ring falling across your shoulder. The Crossing Hub Hall is visible through the arch — the octagonal walls, the chalk-board column at the center, the eight thresholds each facing a different spoke of the valley.",
+      "sceneSummary": "Brynjar walked the hubward road from the waygate stone to The Crossing, arriving at the waygate arch by early afternoon.",
+      "choices": [
         {
-          "op": "addItem",
-          "item": {
-            "id": "brynjars-hand-axe",
-            "name": "Hand Axe",
-            "type": "weapon",
-            "description": "The axe Brynjar grabbed on the way out of the Javiksholm longhouse. Single-bit, worn grip, balance that knows his hand."
-          }
+          "label": "Step through into the Hub Hall and read the chalk-board column — see what traffic, postings, or news is moving through the Crossing today",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "scout",
+            "study"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "op": "addItem",
-          "item": {
-            "id": "brynjars-round-shield",
-            "name": "Round Shield",
-            "type": "armor",
-            "description": "A round shield carried since the night of the raid. Iron boss, cracked rim-leather, still sound enough to matter."
+          "label": "Find the Wardcaller's station inside the Hub Hall and introduce yourself — ask what route takes you toward the Colosseum",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "negotiate",
+            "travel"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Hang back at the arch and watch who comes and goes — see if anything moves through here that matches what you know of Stillhold operatives or Kjotve's kind of people",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "scout",
+            "study",
+            "careful"
+          ],
+          "abilityId": "read_the_fight",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "scene": {
+        "setting": "The Crossing waygate arch — a dressed-iron threshold, the ground worn smooth by heavy foot traffic. Early afternoon, overcast spring light. The Hub Hall's octagonal interior is visible through the arch.",
+        "npcsPresent": [
+          {
+            "name": "Freki",
+            "state": "At Brynjar's heel, alert, watching the threshold traffic"
+          }
+        ],
+        "objects": [
+          "waygate arch with iron fittings",
+          "worn stone ground",
+          "chalk-board column visible inside the Hub Hall"
+        ],
+        "threads": [
+          "Maret Threnwick is traveling to the Stillhold alone with the cloth bundle",
+          "The restricted creditor on Maret's debt remains unnamed",
+          "The dead sheep at the northern waygate — sickness moving hubward?"
+        ]
+      },
+      "npcUpdates": [],
+      "moveTo": {
+        "location": "gen-the-waygate",
+        "why": "walked the hubward road from the Marchward waygate stone through the morning, arriving at The Crossing's waygate arch by early afternoon"
+      },
+      "timeOps": {
+        "hoursPassed": 4,
+        "why": "a half-day's walk from the waygate stone north of the Marchward to The Crossing"
+      },
+      "codexUpdates": [
+        {
+          "topic": "gen-the-waygate",
+          "label": "The Waygate",
+          "kind": "place",
+          "entityId": "gen-the-waygate",
+          "fact": "The Crossing's waygate is a proper dressed-iron threshold arch, the ground worn smooth by decades of traffic; it opens into the octagonal Hub Hall with its chalk-board column and eight directional thresholds.",
+          "links": [
+            "gen-the-colosseum",
+            "brynjar-andyrsson-thread"
+          ]
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "The waygate arch at The Crossing — dressed iron fittings, smooth stone underfoot, Hub Hall visible within. Confirmed as a proper waygate distinct from the broken stone marker north of the Marchward.",
+          "subPlace": {
+            "name": "The Waygate Arch",
+            "parent": "gen-the-waygate",
+            "note": "Dressed-iron threshold, the entry point from the hubward road into The Crossing Hub Hall",
+            "visited": true
           }
         }
       ],
-      "narration": "",
-      "sceneSummary": null
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The waygate stone at dawn — a broken standing stone with an iron ring, on the track half a morning north of the Marchward. Cold, gray early-spring light; the ground softened by overnight melt, boot-prints from yesterday now blurred. Spinward shadow from the stone across the path.",
+      "setting": "The Crossing waygate arch — a dressed-iron threshold, the ground worn smooth by heavy foot traffic. Early afternoon, overcast spring light. The Hub Hall's octagonal interior is visible through the arch.",
       "npcsPresent": [
         {
           "name": "Freki",
-          "state": "On her feet and ranging, nose working the ground in arcs — paused and focused near a dead sheep a few yards down the tra"
+          "state": "At Brynjar's heel, alert, watching the threshold traffic"
         }
       ],
       "objects": [
-        "waygate stone with iron ring",
-        "bedroll (packed)",
-        "dead sheep on the track — not torn, fleece patchy, lay down and did not rise"
+        "waygate arch with iron fittings",
+        "worn stone ground",
+        "chalk-board column visible inside the Hub Hall"
       ],
       "threads": [
-        "The dead sheep — is this the Riven Marches sickness arriving at the waygate road?",
-        "Maret Threnwick is traveling south to the Stillhold alone with the cloth bundle",
-        "The restricted creditor on Maret's debt is still unnamed"
+        "Maret Threnwick is traveling to the Stillhold alone with the cloth bundle",
+        "The restricted creditor on Maret's debt remains unnamed",
+        "The dead sheep at the northern waygate — sickness moving hubward?"
       ]
     },
-    "beats": 1
+    "beats": 2
   },
   "clock": {
     "schemaVersion": 1,
     "day": 2,
-    "hour": 16,
+    "hour": 20,
     "realAnchor": null
   },
   "companions": [
@@ -578,11 +680,21 @@
     "gen-the-waygate": {
       "visits": 1,
       "notes": [
-        "[d2] A dead sheep found on the track at dawn — patchy fleece, no predation. First sign of the Riven Marches livestock sickness at this waygate."
+        "[d2] A dead sheep found on the track at dawn — patchy fleece, no predation. First sign of the Riven Marches livestock sickness at this waygate.",
+        "[d2] The waygate arch at The Crossing — dressed iron fittings, smooth stone underfoot, Hub Hall visible within. Confirmed as a proper waygate distinct from the broken stone marker north of the Marchward."
       ],
       "flags": {},
       "lastVisit": 1,
-      "vectorsKnown": []
+      "vectorsKnown": [],
+      "subPlaces": {
+        "the-waygate-arch": {
+          "name": "The Waygate Arch",
+          "parentId": "gen-the-waygate",
+          "day": 2,
+          "visited": true,
+          "note": "Dressed-iron threshold, the entry point from the hubward road into The Crossing Hub Hall"
+        }
+      }
     }
   },
   "worldState": {
@@ -801,7 +913,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 3,
     "recentOffers": [
       {
         "thing": "Freki sitting rather than ranging — the particular stillness that means the trail changed here, not ended, and Freki is waiting to be told…",
@@ -3308,10 +3420,6 @@
         "label": "Sera of the Stillhold",
         "kind": "mystery",
         "facts": [
-          "[d1] Missing woman, grey cloak, dark braid, last seen at the Marchward's south gate seven days ago. Her family posted a bill — no payment, no questions asked of the finder. An ink portrait is attached.",
-          "[d1] Arrived alone seven days ago — unusual; checked in properly, no declared business, asked for lodging at the Crow and Thistle. Room empty next morning, innkeep Doss didn't see her leave. Family posted the bill knowing roughly why she came but wanting her back without questions.",
-          "[d1] Sera left the Crow and Thistle before dawn of her own will — room latched from inside, side door. She spent her evening watching the entrance, thinking-quiet, waiting or watching for someone. Something was left at the third stool from the left at the bar around the same time.",
-          "[d1] A second person was present the evening Sera stayed — sat at the third stool, watched her without speaking, left before dawn, left behind a folded linen with a dried white-flowered sprig and a knotted cord. The cord-knot's meaning is unknown. Freki reads the stool as a live trail.",
           "[d1] Freki read the cloth bundle — dried white-flowered sprig and knotted cord — and tracked toward the side door Sera used before dawn. The trail leads east, to a fork: waygate approach north, Stillhold road south.",
           "[d1] Freki confirmed the trail at the fork goes south — toward the Stillhold road. Ragnar saw two people at the south fork before full light. Sera was not alone when she left, or someone followed her.",
           "[d1] Two sets of prints at the south fork: a lighter frame went first, a heavier follower came ten minutes behind. Sera was not alone — someone tracked her, or met her, on the Stillhold road. Time of passage: roughly three to four hours before the Marchward woke.",
@@ -3333,7 +3441,16 @@
         ],
         "aliases": [],
         "createdDay": 1,
-        "updatedDay": 1
+        "updatedDay": 1,
+        "summary": "A woman matching Sera of the Stillhold's description—grey cloak, dark braid—arrived alone at the Crow and Thistle seven days ago with no declared business. She left before dawn of her own will through the side door after an evening spent watching the entrance. A second person sat at the bar that night, left a folded linen containing a dried white-flowered sprig and knotted cord, and departed before dawn. Tracking confirms Sera moved fast south on the Stillhold road while a heavier follower pursued her with deliberate intent—until the follower stopped at a waypost junction, observed Sera until she passed out of sight, then withdrew into an ash copse and left without being chased. The…",
+        "summarisedAt": 8,
+        "summaryDay": 2,
+        "archive": [
+          "[d1] Missing woman, grey cloak, dark braid, last seen at the Marchward's south gate seven days ago. Her family posted a bill — no payment, no questions asked of the finder. An ink portrait is attached.",
+          "[d1] Arrived alone seven days ago — unusual; checked in properly, no declared business, asked for lodging at the Crow and Thistle. Room empty next morning, innkeep Doss didn't see her leave. Family posted the bill knowing roughly why she came but wanting her back without questions.",
+          "[d1] Sera left the Crow and Thistle before dawn of her own will — room latched from inside, side door. She spent her evening watching the entrance, thinking-quiet, waiting or watching for someone. Something was left at the third stool from the left at the bar around the same time.",
+          "[d1] A second person was present the evening Sera stayed — sat at the third stool, watched her without speaking, left before dawn, left behind a folded linen with a dried white-flowered sprig and a knotted cord. The cord-knot's meaning is unknown. Freki reads the stool as a live trail."
+        ]
       },
       "companion-bristle": {
         "id": "companion-bristle",
@@ -3469,7 +3586,10 @@
         ],
         "aliases": [],
         "createdDay": 1,
-        "updatedDay": 1
+        "updatedDay": 1,
+        "summary": "Stillhold Operatives are quiet people the Stillhold sends out who do not check in at Wardhouses and carry binding-cords as markers. The follower who watched Maret's route was not Stillhold-sent and not hers, yet someone knew the delivery route in advance—inside knowledge rather than surveillance. Someone within the Stillhold filed Maret's original debt marker seven years ago and had it restricted from outside inquiry; the record-hall clerk showed prior knowledge of the name. Ragnar reads this as a restricted creditor with inside standing who held the debt open as a leash, pulled it to put Maret on a known road at a specific time so someone could watch her walk it. Maret received the…",
+        "summarisedAt": 8,
+        "summaryDay": 2
       },
       "the-binding-cord": {
         "id": "the-binding-cord",
@@ -3499,10 +3619,6 @@
         "label": "Maret Threnwick",
         "kind": "person",
         "facts": [
-          "[d1] Stillhold cloth-warden and road-courier who carries sealed records stitched into fabric — and knows exactly who is following her",
-          "[d1] Read the Fight confirms: she is calm and calculating, not frightened. She clocked Ragnar as the primary threat before Brynjar — a professional read. Her hands stay loose and deliberate. Freki detects no hidden aggression.",
-          "[d1] When Brynjar named the bundle and the follower in the ash copse plainly, she recalibrated — not surprised, but recalculating the shape of what she half-knew. She asked directly how much he knows about the cord's purpose.",
-          "[d1] Stillhold woman, the subject of the pursuit",
           "[d1] Caught on the chalk track one mile north of the Stillhold approach. Stopped when she heard pursuit, assessed Brynjar, Freki, and Ragnar in sequence, and said: 'You're not Wardhouse.' Has not run. Looks to be in her thirties, pale, grey wool cloak. Reads a situation fast and shows nothing.",
           "[d1] Was sent by someone to deliver the cord-record to the Stillhold's record-hall in person. The woman who originally needed to deliver it could not — her situation had changed. The follower at the ash copse was not Maret's; she noticed them two days out of the Marchward.",
           "[d1] Refused escort to the Stillhold gate — the delivery must arrive without visible Marcher company or a hound; too much noise for a debt-record. Took the cloth bundle and is walking the last mile alone.",
@@ -3528,7 +3644,16 @@
         ],
         "createdDay": 1,
         "entityId": "maret-threnwick",
-        "updatedDay": 1
+        "updatedDay": 1,
+        "summary": "Maret Threnwick is a Stillhold cloth-warden and road-courier in her thirties who carries sealed records stitched into fabric and reads situations fast without showing reaction. She was sent by someone to deliver a cord-record to the Stillhold's record-hall in person after the original courier could not. She noticed an unknown follower two days out of the Marchward and refused Marcher escort to avoid compromising the delivery. The cord represents a formal debt registered seven years ago against Maret as debtor; the creditor is restricted inside the Stillhold and the debt is now closed. She claims not to know who sent the follower or filed the original debt, but paused too long before…",
+        "summarisedAt": 8,
+        "summaryDay": 2,
+        "archive": [
+          "[d1] Stillhold cloth-warden and road-courier who carries sealed records stitched into fabric — and knows exactly who is following her",
+          "[d1] Read the Fight confirms: she is calm and calculating, not frightened. She clocked Ragnar as the primary threat before Brynjar — a professional read. Her hands stay loose and deliberate. Freki detects no hidden aggression.",
+          "[d1] When Brynjar named the bundle and the follower in the ash copse plainly, she recalibrated — not surprised, but recalculating the shape of what she half-knew. She asked directly how much he knows about the cord's purpose.",
+          "[d1] Stillhold woman, the subject of the pursuit"
+        ]
       },
       "the-raw-chord": {
         "id": "the-raw-chord",
@@ -3625,13 +3750,17 @@
         "label": "The Waygate",
         "kind": "place",
         "facts": [
-          "[d1] you have walked here"
+          "[d1] you have walked here",
+          "[d2] The Crossing's waygate is a proper dressed-iron threshold arch, the ground worn smooth by decades of traffic; it opens into the octagonal Hub Hall with its chalk-board column and eight directional thresholds."
         ],
-        "links": [],
+        "links": [
+          "gen-the-colosseum",
+          "brynjar-andyrsson-thread"
+        ],
         "aliases": [],
         "createdDay": 1,
         "entityId": "gen-the-waygate",
-        "updatedDay": 1
+        "updatedDay": 2
       }
     },
     "mergeUndo": [
@@ -3748,20 +3877,20 @@
     ]
   },
   "tendencies": {
-    "leadership": 4.978914521091898,
-    "cerebral": 7.809899644425462,
-    "strategic": 4.667451567431898,
-    "ruthless": 0.3200425384736293,
-    "social": 11.357780987164348,
-    "cautious": 7.6958515254579725,
-    "generous": 1.4837833735784751,
-    "patient": 0.6502471642142047
+    "leadership": 4.854441658064601,
+    "cerebral": 7.614652153314825,
+    "strategic": 4.5507652782461,
+    "ruthless": 0.3120414750117885,
+    "social": 11.07383646248524,
+    "cautious": 7.503455237321523,
+    "generous": 1.4466887892390132,
+    "patient": 0.6339909851088495
   },
   "aptitudes": [
     "silver_tongue",
     "banner"
   ],
-  "actionCount": 47,
+  "actionCount": 48,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -3953,8 +4082,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788811231360,
-  "rev": 125,
+  "updatedAt": 1788811444849,
+  "rev": 127,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4369,14 +4498,18 @@
         "dangerLevel": 2,
         "_gen": {
           "type": "location",
-          "tier": "fresh",
-          "engagementScore": 2,
+          "tier": "established",
+          "engagementScore": 3,
           "birthWeight": 1,
           "rating": null,
           "attentionHistory": [
             {
               "kind": "revisit",
               "day": 1
+            },
+            {
+              "kind": "fact",
+              "day": 2
             }
           ],
           "createdDay": 1,
@@ -4385,7 +4518,8 @@
             "day": null,
             "hint": "transit"
           },
-          "lastAttentionDay": 1
+          "lastAttentionDay": 2,
+          "needsDepth": "established"
         },
         "map": {
           "x": 438.8692775098628,
@@ -4406,7 +4540,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "riven_marches": 39,
-    "the_center": 13
+    "the_center": 14
   },
   "practice": {
     "schemaVersion": 1,
@@ -4500,10 +4634,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-09-07T19:32:40.807Z",
-      "lastAt": "2026-09-07T20:00:31.350Z",
+      "lastAt": "2026-09-07T20:04:04.836Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 4
+      "beats": 5
     }
   ],
   "_pendingArrival": null,
@@ -4519,17 +4653,17 @@
     "at": "2026-07-23T01:18:04.353Z"
   },
   "_opEmitted": {
-    "sceneSummary": 45,
-    "choices": 45,
-    "scene": 45,
+    "sceneSummary": 46,
+    "choices": 46,
+    "scene": 46,
     "npcUpdates": 42,
-    "placeUpdates": 7,
+    "placeUpdates": 8,
     "generateRequest": 4,
-    "moveTo": 6,
-    "timeOps": 41,
-    "codexUpdates": 37,
-    "sceneEnded": 13,
-    "characterDeltas": 16,
+    "moveTo": 7,
+    "timeOps": 42,
+    "codexUpdates": 38,
+    "sceneEnded": 14,
+    "characterDeltas": 17,
     "offer": 7,
     "deeds": 1,
     "standingOps": 1,
@@ -4537,7 +4671,7 @@
     "stageOps": 2,
     "factUpdates": 2
   },
-  "_opTurns": 45,
+  "_opTurns": 46,
   "_opLedger": {
     "offer": {
       "applied": 7,
@@ -4650,7 +4784,7 @@
     "guard": 1,
     "sustain": 1,
     "study": 5,
-    "travel": 5,
+    "travel": 6,
     "ask": 1,
     "lead": 1,
     "scout": 1,

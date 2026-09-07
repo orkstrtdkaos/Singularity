@@ -127,7 +127,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.407";
+const APP_VERSION = "1.9.408";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -13726,7 +13726,7 @@ function skillBattlePanel() {
             </div>`;
           } catch { return ""; }
         })()}
-        ${split.folded.length ? `<div class="hint">${esc(split.folded.map(a => String(a.name).split(" ")[0]).join(", "))} ${split.folded.length === 1 ? "is" : "are"} in the melee — fighting, not narrated.</div>` : ""}
+        ${split.folded.length ? `<div class="hint" title="They act for themselves — you never choose their moves — and the narrator tells what each of them did">${esc(split.folded.map(a => String(a.name).split(" ")[0]).join(", "))} ${split.folded.length === 1 ? "is" : "are"} in the melee — acting for themselves, and narrated with you.</div>` : ""}
         ${split.withdrawn.length ? `<div class="hint">${split.withdrawn.map(a => `${esc(String(a.name).split(" ")[0])} ${esc(a.withdrawal?.manner || "is clear of it")}`).join(" · ")}</div>` : ""}
         ${(() => {
           // ⛔ CCODE-311 — THE MISSING QUESTION, ASKED. A craft that catches a blow for someone has to
@@ -14009,6 +14009,12 @@ function wireSkillBattlePanel() {
   const yl = document.getElementById("sb-yield"); if (yl) yl.onclick = () => sbEnd(skillBattleRound(enc.state, enc.def, {}, { character, content: CONTENT, rules: CONTENT.rules, sb, steps, party: seatParty(), yield: true }));
 }
 
+/** ⛔ A NARRATION CALL THAT NEVER ANSWERS MUST NOT WEDGE A FIGHT. `runGM` has no deadline of its own, and in a fight
+ *  the mechanics have ALREADY resolved and saved by the time it is made — so the narration is the only thing at risk,
+ *  and the mechanical receipt stands in for it. 45s is long enough for a slow model and short enough to be a hiccup. */
+const GM_FIGHT_DEADLINE_MS = 45000;
+function runGMOrTimeout(args) { return raceTimeout(runGM(args), GM_FIGHT_DEADLINE_MS, "GM_TIMEOUT"); }
+
 /** CCODE-45 · GM CALL #1 — resolve the SENSE step, then narrate what you sensed and what they did. Skipping the
  *  sense costs nothing and skips the call. Either way the step then LOCKS and we move to the action. */
 async function sbResolveSense() {
@@ -14019,6 +14025,10 @@ async function sbResolveSense() {
   turn.senseDone = true;
   if (!decl) { turn.phase = "action"; saveCharacter(character); renderSkillBattle(sbLastRound); return; }
   sbBusy = true; sbBusyLabel = `Reading ${enc.def?.opponent?.name || "them"}…`; sbQuickBeat = ""; renderSkillBattle(sbLastRound);
+  // ⛔ EVERYTHING FROM HERE IS GUARDED. This stretch used to run OUTSIDE the try, so one throw in `playTurn` or the
+  // logging left `sbBusy` set forever: every control disabled, a spinner that never stops, and no way to proceed
+  // (Erik, mid-fight: "my battle seems to have gotten stuck when I locked in the sense step"). A hiccup never blocks play.
+  try {
   // ✅ 2026-09-05: the sense step is `playTurn` with only a sense — the harness plays the same step through the same function.
   const played = playTurn(character, enc.def, { sense: decl, content: CONTENT, rules: CONTENT.rules, sb, steps, seenTendency: sbLastPlayerFn, rng: Math.random,
     day: absoluteWorldDay(), catalog: fullCatalog(), party: seatParty() });
@@ -14044,10 +14054,22 @@ async function sbResolveSense() {
   const nm = enc.def?.opponent?.name || "your opponent";
   const shaped = turn.text.sense ? ` The player describes it: "${turn.text.sense}"` : "";
   try {
-    const result = await runGM({ resolution: null, playerInput: `(SENSE STEP of a fight turn against ${nm}. Mechanically: ${t.senseLine}${shaped} Narrate ONLY this beat — what the character perceives, and what ${nm} is doing as they read them. Two or three sentences. Do NOT resolve the fight or narrate an attack; the player has not acted yet.)` });
+    const result = await runGMOrTimeout({ resolution: null, playerInput: `(SENSE STEP of a fight turn against ${nm}. Mechanically: ${t.senseLine}${shaped} Narrate ONLY this beat — what the character perceives, and what ${nm} is doing as they read them. Two or three sentences. Do NOT resolve the fight or narrate an attack; the player has not acted yet.)` });
     if (result) renderPlay(result.turn, { aside: t.senseLine });
     else renderPlay(character.activeScene?.lastTurn || null, { aside: t.senseLine });
-  } catch { renderPlay(character.activeScene?.lastTurn || null, { aside: t.senseLine }); }
+  } catch (err) {
+    // ⚑ THE READ ALREADY HAPPENED AND IS SAVED — only the narration failed, so say so and let the turn go on.
+    console.warn("[fight] the sense narration did not land:", err?.message || err);
+    renderPlay(character.activeScene?.lastTurn || null, { aside: `${t?.senseLine || "You read them."} (The narrator did not answer \u2014 the read stands; carry on with your action.)` });
+  }
+  } catch (err) {
+    // ⛔ THE WEDGE ITSELF: a throw before the call used to leave the spinner up forever. Now it SAYS what happened and
+    // hands the turn back at the action step — an error you can act on beats a spinner you cannot.
+    console.error("[fight] the sense step failed:", err);
+    const t2 = sbTurn(); if (t2) { t2.senseDone = true; t2.phase = "action"; }
+    try { saveCharacter(character); } catch { /* best effort */ }
+    renderPlay(character.activeScene?.lastTurn || null, { aside: `The read did not resolve (${esc(String(err?.message || err).slice(0, 80))}). Your turn is still yours \u2014 choose your action.` });
+  }
   finally { sbBusy = false; sbBusyLabel = ""; renderSkillBattle(sbLastRound); }
 }
 
@@ -14080,6 +14102,8 @@ async function sbExecuteTurn() {
   if (!aDecl) { turn.phase = "action"; saveCharacter(character); renderSkillBattle(sbLastRound); return; }
   const bDecl = turn.bonusEarned ? sbDeclFromSel(turn.sel.bonus, skills, sbIntensity) : null;
   sbBusy = true; sbBusyLabel = "Resolving the turn…"; sbQuickBeat = ""; renderSkillBattle(sbLastRound);
+  // ⛔ GUARDED FOR THE SAME REASON AS THE SENSE STEP — the flag must not be able to outlive a failure.
+  try {
   const beats = [];
   if (turn.senseLine) beats.push(turn.senseLine);
   // ACTION — ticks the turn's effects only if there is no bonus step after it.
@@ -14156,13 +14180,39 @@ async function sbExecuteTurn() {
       { task: "combat-quick-beat", maxTokens: 160 });
     if (quick) { sbQuickBeat = String(quick).trim(); renderPlay(character.activeScene?.lastTurn || null, { aside: sbQuickBeat }); }
   } catch { /* a grace, never a gate */ }
+  // ⛔ THE FOLDED ALLIES ARE PART OF WHAT HAPPENED, AND THE GM WAS NEVER TOLD (Erik: "the intent was that she and coil
+  // act for themselves but get NARRATED IN DETAIL"). R36a folds them so three allies do not become three turns — a
+  // MECHANICAL device — and their names reached the receipt and stopped there. ⚑ The fold is unchanged; the prose gets
+  // them back. Their contribution families say what each is actually doing, so the narration is specific rather than
+  // a wave at "your companions".
+  const foldedLine = (() => {
+    try {
+      const folded = rr?.party?.folded || [];
+      if (!folded.length) return "";
+      const seat = alliesOf(character, { catalog: fullCatalog(), fnIndex: FN_INDEX, party: seatParty(), companions: CONTENT.companions || {}, npcs: CONTENT.npcs || {}, company: character.company || [] });
+      const who = folded.map(f => {
+        const a = seat.find(x => x.id === f.id);
+        const fams = (a?.contributions || []).join(", ");
+        return `${f.name}${fams ? ` (${fams})` : ""}`;
+      }).join("; ");
+      return `Fighting alongside, acting for themselves this turn: ${who}. Their help is ALREADY in the numbers above — do not re-resolve it — but NARRATE WHAT EACH OF THEM DID, in detail, as part of this beat. They are people in the fight, not scenery.`;
+    } catch { return ""; }
+  })();
+  if (foldedLine) beats.push(foldedLine);
   // GM call #2 — the WHOLE turn, in order.
   const shaped = ["sense", "action", "bonus"].filter(k => turn.text[k]).map(k => `${k}: "${turn.text[k]}"`).join("; ");
   try {
-    const result = await runGM({ resolution: null, playerInput: `(A full fight TURN against ${nm} has resolved. The engine already decided everything below \u2014 it is what HAPPENED and is not negotiable:\n${beats.map(b => `- ${b}`).join("\n")}\n${shaped ? `The player shaped it: ${shaped}\n` : ""}Narrate this ONE turn as a single continuous beat \u2014 the read, then the blow${bDecl ? ", then the opening they took" : ""}, and what ${nm} did through all of it. End with where the two of you now stand, because that sets up the next turn.)` });
+    const result = await runGMOrTimeout({ resolution: null, playerInput: `(A full fight TURN against ${nm} has resolved. The engine already decided everything below \u2014 it is what HAPPENED and is not negotiable:\n${beats.map(b => `- ${b}`).join("\n")}\n${shaped ? `The player shaped it: ${shaped}\n` : ""}Narrate this ONE turn as a single continuous beat \u2014 the read, then the blow${bDecl ? ", then the opening they took" : ""}, and what ${nm} did through all of it. End with where the two of you now stand, because that sets up the next turn.)` });
     if (result) renderPlay(result.turn, { aside: sbLastRoundReceipt });
     else renderPlay(character.activeScene?.lastTurn || null, { aside: sbLastRoundReceipt });
-  } catch { renderPlay(character.activeScene?.lastTurn || null, { aside: sbLastRoundReceipt }); }
+  } catch (err) {
+    console.warn("[fight] the turn narration did not land:", err?.message || err);
+    renderPlay(character.activeScene?.lastTurn || null, { aside: `${sbLastRoundReceipt || "The turn resolved."} (The narrator did not answer \u2014 the turn stands.)` });
+  }
+  } catch (err) {
+    console.error("[fight] the turn failed to resolve:", err);
+    renderPlay(character.activeScene?.lastTurn || null, { aside: `The turn did not resolve (${esc(String(err?.message || err).slice(0, 80))}). Nothing was lost \u2014 try it again.` });
+  }
   finally { sbBusy = false; sbBusyLabel = ""; sbQuickBeat = ""; renderSkillBattle(sbLastRound); }
 }
 

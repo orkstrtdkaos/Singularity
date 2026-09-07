@@ -20705,8 +20705,12 @@ await (async () => {
     check("CCODE-276: …and clicking one persists the swap on the ENCOUNTER state, not just the render",
       /enc\.state\.broughtForward = /.test(appSrc276));
     // ⚠️ the folded and the withdrawn must be NAMED in the panel — "two others are helping" is a number
+    // ⚠️ THE PROPERTY IS IN THE TITLE — BY NAME, NOT COUNTED — and this pinned a SENTENCE instead. Erik 2026-09-07:
+    // "the intent was that she and coil act for themselves but get narrated in detail", so the clause that said
+    // "not narrated" is gone and the names remain, which is what this check was always about.
     check("CCODE-276: the folded and the withdrawn are shown by name, not counted",
-      has("in the melee — fighting, not narrated") && has("withdrawal?.manner"));
+      has("split.folded.map(a => String(a.name).split(\" \")[0]).join(\", \")") && has("in the melee") && !has("${split.folded.length} allies")
+      && has("withdrawal?.manner"));
 
     // ⛔ THE RECEIPT LINES. A silent bonus makes the party stop existing at the moment it mattered.
     check("CCODE-276: the round log says the folded party added to the blow, and names them",

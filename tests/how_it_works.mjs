@@ -8852,6 +8852,44 @@ console.log("\n── §133 · remembered, not charged ──");
     /next = stragglerCall\(next, me, id, choice, \{ at \}\);/.test(app) && /choice === "guard"\) \{ next = mergeStrike/.test(app));
 }
 
+/* ═════ §134 — A FIGHT CANNOT WEDGE, AND THE ONES FIGHTING BESIDE YOU ARE NARRATED (Erik 2026-09-07, mid-fight) ═════ */
+// ⛔ "My battle seems to have gotten stuck when I locked in the sense step. How am I supposed to proceed?" — the spinner
+// read "Reading a hollow-pace…" forever. MEASURED: `sbBusy = true` was set and then a page of work ran OUTSIDE the try
+// — playTurn, the payoff, the log, the save — while the `finally` that clears the flag was attached only to the GM call.
+// One throw in that stretch disabled every control behind a spinner that could never stop. ⚑ A hiccup never blocks play.
+// ⛔ AND: "am I supposed to act for Vessin? the intent was that she and coil act for themselves but get narrated in
+// detail." The row said "fighting, not narrated", which was honest about a fold that reached the receipt as names only.
+console.log("\n── §134 · a spinner you cannot escape is worse than an error, and a fold is not a silence ──");
+{
+  const app = rd("app.js");
+  // ⚠️ STRIP THE COMMENTS BEFORE JUDGING CODE — the third time today a check read its own explanation as a defect.
+  const decomment = (t) => t.replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
+  const body = (name) => { const i = app.indexOf(`async function ${name}(`); if (i < 0) return ""; const j = app.indexOf("\n}", i); return decomment(app.slice(i, j)); };
+  for (const fn of ["sbResolveSense", "sbExecuteTurn"]) {
+    const b = body(fn);
+    const flagAt = b.indexOf("sbBusy = true");
+    const tryAt = b.indexOf("try {", flagAt);
+    const between = flagAt >= 0 && tryAt > flagAt ? b.slice(flagAt, tryAt) : "";
+    check(`§134: ⛔ ${fn} CANNOT LEAVE THE SPINNER UP — nothing but the render runs between setting the flag and the try`,
+      flagAt >= 0 && tryAt > flagAt && !/playTurn|skillBattleRound|saveCharacter|sbLogRound|applyRoundToCharacter/.test(between),
+      between.replace(/\s+/g, " ").slice(0, 110));
+    check(`§134: …and its finally clears the flag, so no failure can outlive the turn`,
+      /finally \{ sbBusy = false;/.test(b) && (b.match(/catch \(err\)/g) || []).length >= 2);
+  }
+  check("§134: ⛔ AND A SILENT NETWORK FAILS LOUDLY — both fight narrations carry a deadline, because a call that never answers is indistinguishable from a wedged app",
+    /function runGMOrTimeout\(args\) \{ return raceTimeout\(runGM\(args\), GM_FIGHT_DEADLINE_MS/.test(app) && (app.match(/await runGMOrTimeout\(/g) || []).length === 2);
+  check("§134: ⚑ …and a failure SAYS what happened and hands the turn back — an error you can act on beats a spinner you cannot",
+    /Your turn is still yours \\u2014 choose your action/.test(app) && /Nothing was lost \\u2014 try it again/.test(app));
+  // ⛔ THE FOLD IS MECHANICAL, NOT NARRATIVE. Erik never acts for them; the narrator tells what they did.
+  check("§134: ⛔ THE FOLDED ALLIES ARE NAMED TO THE GM, with what each brings, and told to narrate them in detail",
+    /rr\?\.party\?\.folded/.test(app) && /NARRATE WHAT EACH OF THEM DID, in detail/.test(app) && /Their help is ALREADY in the numbers above \u2014 do not re-resolve it/.test(app)
+    && /if \(foldedLine\) beats\.push\(foldedLine\);/.test(app));
+  check("§134: ⚑ …and the screen stops saying the opposite — they act for themselves, and they are narrated with you",
+    /acting for themselves, and narrated with you/.test(app) && !/fighting, not narrated/.test(app));
+  check("§134: ⛔ …and NOBODY ACTS FOR THEM — no control anywhere picks a folded ally's move",
+    !/declareFor|actFor\(|chooseForAlly|data-ally-declare/.test(app));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

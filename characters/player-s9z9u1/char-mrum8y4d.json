@@ -223,155 +223,268 @@
         "player": "Walk together to inspect the  ull stone.",
         "summary": "At the Hub crossing's heart, Loki examined the Null Stone with Kael and Vessin—an ordinary pale stone that refuses to explain itself, older than the gates and untouched since before the Transition.",
         "narration": "You cross the Hub crossing toward the Null Stone with Kael at your shoulder and Vessin trailing close enough to read the ground. The stone sits at the chamber's heart like a weight that refuses to settle—pale, worn smooth by uncounted arrivals, utterly ordinary except for the way eyes slide away from it and then snap back.\n\nKael moves with the ease of someone who has stood here before and knows where the eye wants to go. 'Most people avoid looking straight at it,' they say without judgment. 'The Crossing's heart. Nobody knows what it does or why it won't break. Older than the gates. Older than the Transition.' They stop a pace away, feet planted as if respecting a boundary that isn't marked.\n\nVessin stands to your left, shoulders set steady, examining it with the same methodical patience she brought to the waygate. Cy skitters ahead of you in precise spirals, its lens irising open and closed, open and closed. After three full circuits it falls still. The lens catches afternoon light and throws it back, and then Cy turns toward you with a click that reads almost like frustration.\n\nFrom the western arch, Veln Ashpause has not moved. But you feel the weight of their attention shift—not toward the stone, but toward you, watching to see what you will do here."
+      },
+      {
+        "player": "Follow Cy's lead—watch where its attention goes and what it does next with the stone",
+        "summary": "At the Hub crossing, Loki sent Cy to read the Null Stone—and the construct found what Prism Sight could not: a concealed seam running through its face, too precise to be natural breakage.",
+        "narration": "Cy descends from your shoulder with the deliberate precision of something that has examined every stone in a radius you cannot guess. Its legs carry it toward the Null Stone in a path that seems to bend around the eye's pull—as if it knows exactly where NOT to look to stay on course. The lens irises sharp.\n\nIt reaches the stone's base and moves along the perimeter, clicking softly. The sound is neither inspection nor alarm—it is the rhythm of something reading. Its legs trace the curve where the pale surface meets the worn floor, and twice it stops, reversing a pace or two as though disagreeing with its own findings.\n\nVessin watches without comment. Kael has gone very still. The relay courier at the desk has not looked up.\n\nCy arrives at a spot roughly opposite where you stand—facing the stone's far face—and stops. Its lamp flickers. For a moment, the light catches something you had not seen before: a hairline discontinuity in the stone's surface, running vertically from base to what would be the stone's crown. Not a crack. Too precise. Too *placed*.\n\nCy touches the seam with one foreleg and holds. Its lens opens wide. The click-pattern changes—faster, almost agitated. It does not attempt to pry or wedge. It simply *holds*, as though asking the stone a question it expects the stone itself to answer."
       }
     ],
     "lastTurn": {
-      "narration": "You cross the Hub crossing toward the Null Stone with Kael at your shoulder and Vessin trailing close enough to read the ground. The stone sits at the chamber's heart like a weight that refuses to settle—pale, worn smooth by uncounted arrivals, utterly ordinary except for the way eyes slide away from it and then snap back.\n\nKael moves with the ease of someone who has stood here before and knows where the eye wants to go. 'Most people avoid looking straight at it,' they say without judgment. 'The Crossing's heart. Nobody knows what it does or why it won't break. Older than the gates. Older than the Transition.' They stop a pace away, feet planted as if respecting a boundary that isn't marked.\n\nVessin stands to your left, shoulders set steady, examining it with the same methodical patience she brought to the waygate. Cy skitters ahead of you in precise spirals, its lens irising open and closed, open and closed. After three full circuits it falls still. The lens catches afternoon light and throws it back, and then Cy turns toward you with a click that reads almost like frustration.\n\nFrom the western arch, Veln Ashpause has not moved. But you feel the weight of their attention shift—not toward the stone, but toward you, watching to see what you will do here.",
-      "sceneSummary": "At the Hub crossing's heart, Loki examined the Null Stone with Kael and Vessin—an ordinary pale stone that refuses to explain itself, older than the gates and untouched since before the Transition.",
+      "narration": "Cy descends from your shoulder with the deliberate precision of something that has examined every stone in a radius you cannot guess. Its legs carry it toward the Null Stone in a path that seems to bend around the eye's pull—as if it knows exactly where NOT to look to stay on course. The lens irises sharp.\n\nIt reaches the stone's base and moves along the perimeter, clicking softly. The sound is neither inspection nor alarm—it is the rhythm of something reading. Its legs trace the curve where the pale surface meets the worn floor, and twice it stops, reversing a pace or two as though disagreeing with its own findings.\n\nVessin watches without comment. Kael has gone very still. The relay courier at the desk has not looked up.\n\nCy arrives at a spot roughly opposite where you stand—facing the stone's far face—and stops. Its lamp flickers. For a moment, the light catches something you had not seen before: a hairline discontinuity in the stone's surface, running vertically from base to what would be the stone's crown. Not a crack. Too precise. Too *placed*.\n\nCy touches the seam with one foreleg and holds. Its lens opens wide. The click-pattern changes—faster, almost agitated. It does not attempt to pry or wedge. It simply *holds*, as though asking the stone a question it expects the stone itself to answer.",
+      "sceneSummary": "At the Hub crossing, Loki sent Cy to read the Null Stone—and the construct found what Prism Sight could not: a concealed seam running through its face, too precise to be natural breakage.",
       "choices": [
         {
-          "label": "Touch the stone and use See the Made Thing—read its construction for any seam, joint, or hidden purpose",
+          "label": "Walk around to Cy's side and examine the seam it found—use See the Made Thing to read what that precision means",
           "attribute": "mental",
           "subAttribute": "reason",
-          "axes": {},
-          "difficulty": "hard",
+          "axes": {
+            "falsehood_truth": 0.2
+          },
+          "difficulty": "normal",
+          "opposedDifficulty": null,
           "intentTags": [
             "study",
-            "craft"
+            "careful"
           ],
           "abilityId": "see_the_made_thing",
           "energyCost": 2,
-          "trivial": false
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ask Kael plainly: what happens if someone tries to move it, or if it ever shows wear",
+          "label": "Ask Cy directly what it detected—demand the reason for the agitation, plainly",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": "easy",
+          "opposedDifficulty": null,
           "intentTags": [
-            "negotiate"
+            "ask"
           ],
           "abilityId": null,
-          "trivial": true
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Turn and walk directly to Veln Ashpause—ask them outright what they know and why they're watching",
+          "label": "Step back and watch the stone—wait to see if Cy's attention draws anyone else's notice, or if something changes",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "mechanical_spiritual": -0.1
+          },
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "wait",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Offer Kael your hand or a nod—invite them closer to see what the construct found, and gauge their reaction",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {},
-          "difficulty": "hard",
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
           "intentTags": [
-            "confront"
-          ],
-          "abilityId": null,
-          "trivial": false
-        },
-        {
-          "label": "Follow Cy's lead—watch where its attention goes and what it does next with the stone",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": "easy",
-          "intentTags": [
-            "study",
             "help"
           ],
           "abilityId": null,
-          "trivial": true
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
+      "delegateOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": null,
+      "stageOps": [],
       "scene": {
-        "setting": "The Hub crossing—a vast circular chamber where five waygate arches converge. Pale stone worn smooth by uncounted arrivals. Afternoon light falls through high windows in slanting bars. The Null Stone rests at the chamber's center, drawing the eye and sliding it away. The hum of the gates underlies everything.",
+        "setting": "The Hub crossing—a vast circular chamber where five waygate arches converge. Pale stone worn smooth by uncounted arrivals. Afternoon light falls through high windows in slanting bars. The Null Stone rests at the chamber's center, its far face now showing a hairline seam running vertically, too precise to be natural. The hum of the gates underlies everything.",
         "npcsPresent": [
           {
             "name": "Veln Ashpause",
-            "state": "Standing by the western arch, utterly motionless, grey-coated, attention now sharpened toward Loki as the Null Stone is approached"
+            "state": "Standing by the western arch, utterly motionless, grey-coated, watching Loki and Cy with an expression of terrible sympathy unchanged"
           },
           {
             "name": "Kael",
-            "state": "Standing a pace back from the Null Stone, feet planted as if respecting an unmarked boundary, offering what knowledge they carry about it"
+            "state": "Standing near the Null Stone, now very still, watching Cy's examination with full attention"
           },
           {
             "name": "Vessin Tallow-bark",
-            "state": "Standing to Loki's left, examining the stone with methodical patience, shoulders steady"
+            "state": "Standing to Loki's left, watching Cy work without comment, shoulders steady"
           },
           {
             "name": "A courier",
-            "state": "At the relay desk near the center, still unaware—checking a slate, preparing to send word"
+            "state": "At the relay desk near the center, checking a slate, still unaware of Cy's discovery"
           },
           {
             "name": "Two merchants",
-            "state": "By a carved bench, conducting quiet business"
+            "state": "By a carved bench, conducting quiet business, oblivious to the moment at the stone"
           }
         ],
         "objects": [
-          "The Null Stone at the center—pale, worn smooth, refusing the eye",
+          "The Null Stone at the center—pale, worn smooth, now revealing a hairline seam on its far face",
           "Five waygate arches (wood, metal, and grown-thing)",
           "Pale worn stone floor",
           "Carved bench",
           "A slate at the relay desk",
-          "High windows letting afternoon light fall in slanting bars"
+          "High windows letting afternoon light fall in slanting bars",
+          "Cy—perched at the stone's base, foreleg touching the seam, lens open wide"
         ],
         "threads": [
-          "What is the Null Stone and why does it resist being read?",
-          "What does Veln Ashpause know, and will they speak?",
-          "Why is Cy frustrated with the stone—what did it detect?",
-          "The man in the lower Annex and his connection to the waygate tampering",
+          "What is the seam in the Null Stone, and what was it made to conceal or contain?",
+          "Why does Cy detect something in this stone that Prism Sight could not?",
+          "What does Veln Ashpause know about this moment, and will they speak?",
+          "Will Cy's agitation draw the attention of others in the chamber?",
+          "The man in the lower Annex and his connection to the waygate tampering—still unresolved",
           "Tessvel Cairn's personal offer awaiting an answer"
         ]
       },
-      "offer": {
-        "thing": "Cy's evident frustration with the Null Stone—the precision-mechanism that reads Precursor work like no one else can is encountering something it cannot parse",
-        "from": "The machine companion's own nature: it maintains what was left behind, and this stone refuses to be known in the way Cy knows things"
-      }
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "cy",
+          "name": "Cy",
+          "role": "Companion — a Precursor maintenance-thing that has adopted you as its assignment",
+          "learned": [
+            "Detected a hairline seam in the Null Stone's face—precise, placed, and concealed by the stone's ordinary appearance",
+            "Moved to the seam with deliberate attention and held contact while its lens opened to full width"
+          ],
+          "note": "Cy's agitation suggests the seam represents something outside its ordinary maintenance parameters—a structure it recognizes as significant, possibly compromised or tampered."
+        },
+        {
+          "op": "update",
+          "npcId": "kael",
+          "name": "Kael",
+          "role": "Road-warden; a traveler who moves between the reaches and carries true news",
+          "learned": [
+            "Went very still when Cy found the seam—a reaction of recognition, not surprise"
+          ],
+          "note": "Kael knows something about the Null Stone beyond what they stated plainly: that it is older than the gates, older than the Transition. Their stillness suggests the seam is meaningful to them."
+        }
+      ],
+      "intentsHeard": [],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "discovery": null,
+      "codexUpdates": [
+        {
+          "topic": "the-null-stone-seam",
+          "label": "The Null Stone's Seam",
+          "kind": "mystery",
+          "entityId": "the-crossing",
+          "fact": "The Null Stone at the hub of the Crossing conceals a hairline seam running vertically through its face—too precise to be natural breakage. Cy detected it through direct contact; Prism Sight could not resolve it. The seam's placement and precision suggest deliberate construction or concealment.",
+          "links": [
+            "the-crossing",
+            "cy-s-construction",
+            "halfex"
+          ]
+        }
+      ],
+      "holdingOps": [],
+      "debtOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": {},
+      "moveTo": null,
+      "stateOps": [
+        {
+          "op": "correctAbilityRank",
+          "id": "better_story",
+          "to": 2,
+          "why": "better_story sits at rank 2 per the ABILITY LAW and the character's own learned abilities — the practice flag was a stale report; correcting to reflect actual rank"
+        }
+      ],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": "A small brass construct, all articulated segments and precise legs, holds a single foreleg against a hairline seam in pale stone—its lens wide open, the afternoon light catching the discontinuity it has revealed. Behind it, a tall figure in grey stands motionless by a distant arch, watching.",
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Hub crossing—a vast circular chamber where five waygate arches converge. Pale stone worn smooth by uncounted arrivals. Afternoon light falls through high windows in slanting bars. The Null Stone rests at the chamber's center, drawing the eye and sliding it away. The hum of the gates underlies everything.",
+      "setting": "The Hub crossing—a vast circular chamber where five waygate arches converge. Pale stone worn smooth by uncounted arrivals. Afternoon light falls through high windows in slanting bars. The Null Stone rests at the chamber's center, its far face now showing a hairline seam running vertically, too precise to be natural. The hum of the gates underlies everything.",
       "npcsPresent": [
         {
           "name": "Veln Ashpause",
-          "state": "Standing by the western arch, utterly motionless, grey-coated, attention now sharpened toward Loki as the Null Stone is "
+          "state": "Standing by the western arch, utterly motionless, grey-coated, watching Loki and Cy with an expression of terrible sympa"
         },
         {
           "name": "Kael",
-          "state": "Standing a pace back from the Null Stone, feet planted as if respecting an unmarked boundary, offering what knowledge th"
+          "state": "Standing near the Null Stone, now very still, watching Cy's examination with full attention"
         },
         {
           "name": "Vessin Tallow-bark",
-          "state": "Standing to Loki's left, examining the stone with methodical patience, shoulders steady"
+          "state": "Standing to Loki's left, watching Cy work without comment, shoulders steady"
         },
         {
           "name": "A courier",
-          "state": "At the relay desk near the center, still unaware—checking a slate, preparing to send word"
+          "state": "At the relay desk near the center, checking a slate, still unaware of Cy's discovery"
         },
         {
           "name": "Two merchants",
-          "state": "By a carved bench, conducting quiet business"
+          "state": "By a carved bench, conducting quiet business, oblivious to the moment at the stone"
         }
       ],
       "objects": [
-        "The Null Stone at the center—pale, worn smooth, refusing the eye",
+        "The Null Stone at the center—pale, worn smooth, now revealing a hairline seam on",
         "Five waygate arches (wood, metal, and grown-thing)",
         "Pale worn stone floor",
         "Carved bench",
         "A slate at the relay desk",
-        "High windows letting afternoon light fall in slanting bars"
+        "High windows letting afternoon light fall in slanting bars",
+        "Cy—perched at the stone's base, foreleg touching the seam, lens open wide"
       ],
       "threads": [
-        "What is the Null Stone and why does it resist being read?",
-        "What does Veln Ashpause know, and will they speak?",
-        "Why is Cy frustrated with the stone—what did it detect?",
-        "The man in the lower Annex and his connection to the waygate tampering",
-        "Tessvel Cairn's personal offer awaiting an answer"
+        "What is the seam in the Null Stone, and what was it made to conceal or contain?",
+        "Why does Cy detect something in this stone that Prism Sight could not?",
+        "What does Veln Ashpause know about this moment, and will they speak?",
+        "Will Cy's agitation draw the attention of others in the chamber?",
+        "The man in the lower Annex and his connection to the waygate tampering—still unresolved"
       ]
     },
-    "beats": 8
+    "beats": 9
   },
   "clock": {
     "schemaVersion": 1,
     "day": 3,
-    "hour": 16,
+    "hour": 17,
     "realAnchor": null
   },
   "companions": [
@@ -905,7 +1018,8 @@
       "relationship": 1,
       "history": [
         "[d3] Recognized Loki at the Hub crossing and introduced themselves by name after being asked. Offered a straightforward choice about their own business versus sightseeing together. Carries knowledge of the water-crisis and moves downhill routes faster than official channels.",
-        "[d3] Revealed their business at the Crossing is finished—carrying the water-crisis warning downhill through the relay network. Offered to show Loki and Vessin the inner sites of the Crossing (the Twelve Mouths, the Common Table, the Made Arch)."
+        "[d3] Revealed their business at the Crossing is finished—carrying the water-crisis warning downhill through the relay network. Offered to show Loki and Vessin the inner sites of the Crossing (the Twelve Mouths, the Common Table, the Made Arch).",
+        "[d3] Kael knows something about the Null Stone beyond what they stated plainly: that it is older than the gates, older than the Transition. Their stillness suggests the seam is meaningful to them."
       ],
       "knownFacts": [
         "Carries word of the water-crisis moving downhill faster than any official channel can track",
@@ -913,7 +1027,8 @@
         "Knows the Null Stone, the Twelve Mouths, and the Made Arch as sites within the Crossing",
         "Carries word through the relay network, which moves faster than official channels",
         "Has already passed their warning; the work is complete",
-        "Knows the inner sites of the Crossing and who gathers at them"
+        "Knows the inner sites of the Crossing and who gathers at them",
+        "Went very still when Cy found the seam—a reaction of recognition, not surprise"
       ],
       "skillsObserved": [
         "Reads travelers by bearing and gait",
@@ -929,7 +1044,7 @@
         "locationId": "the_crossing",
         "day": 3
       },
-      "met": 2
+      "met": 3
     }
   },
   "placeMemory": {
@@ -1317,7 +1432,7 @@
     "lastSharedReadAt": "2026-09-07T22:27:40.544Z",
     "lastTickWorldDay": 69,
     "lastCanonWorldDay": 69,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "The threshold itself — the moment when you could have crossed and did not, a choice witnessed by Cy and held in the small machine's…",
@@ -5599,10 +5714,16 @@
         "label": "The Crossing",
         "kind": "place",
         "facts": [
-          "[d3] you have walked here"
+          "[d3] you have walked here",
+          "[d3] The Null Stone at the hub of the Crossing conceals a hairline seam running vertically through its face—too precise to be natural breakage. Cy detected it through direct contact; Prism Sight could not resolve it. The seam's placement and precision suggest deliberate construction or concealment."
         ],
-        "links": [],
-        "aliases": [],
+        "links": [
+          "cy-s-construction",
+          "halfex"
+        ],
+        "aliases": [
+          "The Null Stone's Seam"
+        ],
         "createdDay": 3,
         "entityId": "the-crossing",
         "updatedDay": 3
@@ -5752,17 +5873,17 @@
     ]
   },
   "tendencies": {
-    "devotion": 1.355976861361459,
-    "cerebral": 9.660832047922446,
-    "social": 14.567688611631727,
-    "strategic": 6.4971628214361505,
-    "cautious": 5.762733367698709,
-    "amorous": 16.687150328337964,
-    "generous": 2.9627684698450825,
-    "ruthless": 0.7058160233764211,
-    "risky": 0.5768246947314037,
-    "patient": 0.1575204507910824,
-    "deception": 0.18336196388932613
+    "devotion": 1.3220774398274224,
+    "cerebral": 10.419311246724384,
+    "social": 14.203496396340933,
+    "strategic": 6.334733750900247,
+    "cautious": 5.6186650335062405,
+    "amorous": 16.269971570129513,
+    "generous": 3.8886992580989554,
+    "ruthless": 0.6881706227920106,
+    "risky": 0.5624040773631186,
+    "patient": 0.15358243952130535,
+    "deception": 0.17877791479209298
   },
   "aptitudes": [
     "silver_tongue",
@@ -5773,7 +5894,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 151,
+  "actionCount": 152,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -6304,8 +6425,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788822529827,
-  "rev": 568,
+  "updatedAt": 1788822628330,
+  "rev": 569,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -7167,7 +7288,7 @@
     "the_gearlands": 33,
     "umbral_depths": 54,
     "the_quickwood": 101,
-    "the_center": 13
+    "the_center": 14
   },
   "opLossPending": false,
   "sessions": [
@@ -7238,10 +7359,10 @@
     {
       "id": "sess-9",
       "startedAt": "2026-09-07T19:42:14.907Z",
-      "lastAt": "2026-09-07T23:08:49.818Z",
+      "lastAt": "2026-09-07T23:10:28.321Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 19
+      "beats": 20
     }
   ],
   "establishedFacts": [
@@ -7285,19 +7406,19 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 178,
-    "choices": 178,
-    "characterDeltas": 71,
-    "scene": 178,
+    "sceneSummary": 179,
+    "choices": 179,
+    "characterDeltas": 72,
+    "scene": 179,
     "placeUpdates": 21,
-    "codexUpdates": 101,
+    "codexUpdates": 102,
     "timeOps": 162,
     "offer": 17,
     "generateRequest": 6,
-    "sceneEnded": 53,
-    "npcUpdates": 146,
+    "sceneEnded": 54,
+    "npcUpdates": 147,
     "moveTo": 6,
-    "gambitApt": 17,
+    "gambitApt": 18,
     "deeds": 2,
     "questUpdates": 17,
     "standingOps": 1,
@@ -7306,10 +7427,11 @@
     "encounterOps": 8,
     "ledgerEvents": 2,
     "newEncounter": 2,
-    "imagePrompt": 7,
-    "scene_ended": 1
+    "imagePrompt": 8,
+    "scene_ended": 1,
+    "stateOps": 1
   },
-  "_opTurns": 178,
+  "_opTurns": 179,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1.75
@@ -7880,8 +8002,8 @@
     "rapport": 3,
     "retreat": 1,
     "ask": 1,
-    "help": 1,
-    "study": 1,
+    "help": 2,
+    "study": 2,
     "investigate": 1
   },
   "aptitudeEarnCount": {

@@ -139,3 +139,43 @@ as the load note. If you do not, tell me which device and I will measure.
   half again per other relay post you keep, and up to double while a network waygate stands within two days — climbing
   over twenty passes "as word gets out". Said in the news when it begins and when word is out; shown in the Holdings
   ledger's net. Numbers are mine to price, yours to turn (`holdStore.relay`).
+
+## 10 · Aevi — charge-holders acting on world days: the engine facts for the spec (v1.9.402)
+
+Erik: *"send people on trades and missions, build and expand the territory, and go on missions themselves… just like you
+can."* v2 §2 lands this as SNG-366's territory. What the engine holds today, so the spec can name what it reads:
+
+| already real | where |
+|---|---|
+| keeping vs **charge**, read from trust (own standing, or a voucher's less one; bar `chargeStanding` 6) | `holdings.delegateScope` / `trustOf` — said on the GM's holdings line |
+| delegated work advancing on world days (assignments, completions, R37 growth) | `worldtick.advanceDelegatedWork`, `worldState.assignments` |
+| a caravan from a hold — carriers, a road, hazards, arrival | `caravan.sendCaravan` / `tickCaravans` — today only the PLAYER sends one (holdingOps `caravan`) |
+| features built, ground claimed, keepers appointed — the player's verbs | `addFeature`, `addHolding`, `appointKeeper` (holdingOps / the Holdings tab) |
+| a hold's own ledger: what it makes, sells, owes, earns in runner fees | `holdingLedger`, `serviceIncome` |
+
+What a charge-holder ACTING would need, in the shape the tick already has — one act per pass at most, chosen from what
+the hold can do, said in the news, and forbiddable by the player:
+
+1. **Send a caravan** when the store is at `fullAt` and a market the keeper knows is within a road's reach — the same
+   `sendCaravan` the player uses, carriers drawn from the hold's own hands, never the garrison.
+2. **Build a feature** the fiction has already named (the `inferFeatures` offers that sit unanswered) — a charge-holder
+   answers the offer; a keeper waits for you.
+3. **Claim adjacent ground** when the hold is thriving and its people exceed its quarters — `addHolding` with the
+   charge-holder as steward of the new one, which is how *"my people's people"* becomes territory.
+4. **Go themselves** — an assignment on world days with the charge-holder as the traveller, exactly as a companion
+   errand runs; the hold is UNKEPT while they are away, which is the cost that keeps it a decision.
+
+Rulings still open from v2 §6, as I priced them: **Q2** the voucher's fall costs 1 standing per slip (`vouchFallCost`);
+**Q3** succession — a keeper vouching for their own replacement — is not built; **Q4** the floor is the CONDITION,
+not the store (a raid still takes the goods). A spec that names the four acts, the one-per-pass cadence and the
+player's forbid is enough for me to build; the numbers are mine to price and Erik's to turn.
+
+## 11 · Aevi and Erik — CI on Aevi's pushes
+
+Each commit runs three workflows (the suite, an advisory typecheck, the Pages deploy). **The suite failed on four of
+Aevi's commits today and passed on every one of mine.** Three were the §70 ratchet (a `spec_ready` spec naming engine
+exports raises a count that may only fall; flipping the spec to *built* brought it down — done). The fourth, the
+Long Fields content commit (`c2abf5c4`), I cannot read from here: CI logs need a token, and the version rule does not
+count content as source. **The shape:** Aevi's pushes go up through an API and never run the local hook, so CI is the
+first place her reds appear, and they stay red until my next landing regenerates and re-baselines. Two ways out, either
+is fine: paste the `FAIL` line from a red run into po/, or push content through me and I land it under the hook.

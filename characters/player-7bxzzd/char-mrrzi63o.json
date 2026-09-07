@@ -125,15 +125,21 @@
       "holdingOps": [
         {
           "op": "addItem",
-          "itemName": "Hand-axe",
-          "itemType": "weapon",
-          "description": "The axe Brynjar grabbed on his way out of the Javiksholm longhouse the night of the raid. Well-used, well-kept."
+          "item": {
+            "id": "brynjars-hand-axe",
+            "name": "Hand Axe",
+            "type": "weapon",
+            "description": "The axe Brynjar grabbed on the way out of the Javiksholm longhouse. Single-bit, worn grip, balance that knows his hand."
+          }
         },
         {
           "op": "addItem",
-          "itemName": "Shield",
-          "itemType": "armor",
-          "description": "The shield Brynjar grabbed on his way out of the Javiksholm longhouse the night of the raid. Scored but sound."
+          "item": {
+            "id": "brynjars-round-shield",
+            "name": "Round Shield",
+            "type": "armor",
+            "description": "A round shield carried since the night of the raid. Iron boss, cracked rim-leather, still sound enough to matter."
+          }
         }
       ],
       "narration": "",
@@ -163,7 +169,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 2,
-    "hour": 15,
+    "hour": 16,
     "realAnchor": null
   },
   "companions": [
@@ -795,7 +801,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "Freki sitting rather than ranging — the particular stillness that means the trail changed here, not ended, and Freki is waiting to be told…",
@@ -3947,8 +3953,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788811179289,
-  "rev": 123,
+  "updatedAt": 1788811231360,
+  "rev": 125,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4494,10 +4500,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-09-07T19:32:40.807Z",
-      "lastAt": "2026-09-07T19:59:39.275Z",
+      "lastAt": "2026-09-07T20:00:31.350Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 3
+      "beats": 4
     }
   ],
   "_pendingArrival": null,

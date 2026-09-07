@@ -18,7 +18,7 @@ import { canRaiseBand, raiseBand } from "./melee.js";   // R49: the fellowship t
 import { worldPosForGenerated } from "./worldmap.js";
 import { grantMartialKit, retiredBaselineIds } from "./martial.js";
 import { applyLadderGrants } from "./ladder.js";
-import { credit } from "./purse.js";   // R48: the purse has ONE door in, and it records an origin
+import { credit, debit } from "./purse.js";   // R48: the purse has ONE door in, and it records an origin · step 48: and one door out
 import { mergeCodexTopics, ensureCodex, applyCodexUpdates, foldTopicsByIdPrefix } from "./codex.js";   // step 43: the named fold
 import { mergeRecovery, mergeReceiptLine } from "./recovery.js";   // step 41: the Settings door's merge, run where every copy passes
 import { SNAPSHOTS } from "./recovery_snapshots.js";              // step 41: the overwritten branch, as a diff
@@ -1147,6 +1147,8 @@ export const CHARACTER_STEPS = [
     // `strained` only because `unstewardedHoldings` wiped their keepers (§72). Erik: "they should have only
     // grown." 22 passes under constant keepers reaches `thriving` and stays there.
     apply: (c, ctx) => {
+      // ⛔ SILAS ONLY (Erik 2026-09-07: "an error that went to all saves"). The 880 is computed from SILAS's Threshold Post over a span only his save lived through, and the `thriving` restore below repairs a keeper bug that happened to HIS holds.
+      if (c?.id !== "char-mrhs8286") return {};
       const notes = [];
       const cur = ctx?.rules?.economy?.holdStore?.upkeepCurrency || "crystal";
       const r = credit(c, cur, 880, { origin: "arrears" });
@@ -1175,6 +1177,8 @@ export const CHARACTER_STEPS = [
     // copy of a derived value — this project's most-repeated defect — and a character with a different ledger
     // would be paid Silas's arrears. ⚠️ The RATE is the ruling; the COUNT is the character's own.
     apply: (c, ctx) => {
+      // ⛔ SILAS ONLY (Erik 2026-09-07: "an error that went to all saves"). The COUNT is the character's own, which is why this looked safe — but R48 is a one-time SETTLEMENT for a span that only Silas played through, not a standing rate, so on anyone else it is a windfall for deeds the world already paid for.
+      if (c?.id !== "char-mrhs8286") return {};
       const deeds = Array.isArray(c.deeds) ? c.deeds.length : 0;
       if (!deeds) return {};
       const perDeed = 8;
@@ -1236,6 +1240,8 @@ export const CHARACTER_STEPS = [
     // it. ⚠️ The contingents are the roles the FICTION assigned, in the engine's own eight families
     // (FUNCTION_FAMILIES), not a vocabulary I invented for them.
     apply: (c, ctx) => {
+      // ⛔ SILAS ONLY (Erik 2026-09-07: "an error that went to all saves"). The Fell Pell is Pell's forge, the Fellowship is the band the fiction named around Silas, and the rename is his hold. Another character's save gained a wife's workshop it had no story for.
+      if (c?.id !== "char-mrhs8286") return {};
       const notes = [], warnings = [];
       const locs = ctx?.content?.locations || {};
 
@@ -1637,6 +1643,43 @@ export const CHARACTER_STEPS = [
         notes.push("The Threshold Post stands where it was built: the ridge north of the Hub's gate, overlooking the crossroads. The road north to the Whistling Woman is the gate you made.");
       }
       return notes.length ? { notes } : {};
+    }
+  },
+  {
+    version: 48, id: "silas-only-grants-revoked", playerFacing: true,
+    // ⛔ WHAT THE UNGATED STEPS ALREADY GAVE, TAKEN BACK — on every save that is not Silas's. Steps 35, 36 and 38 are
+    // gated now; this is for the copies that ran them before the gate. ⚠️ THE COIN COMES BACK ONLY AS FAR AS THE PURSE
+    // STILL HOLDS IT: a player who spent it keeps what they spent, because the error is mine and the fair direction of a
+    // wrong number is the player's way. ⚑ AND CONDITIONS ARE LEFT ALONE — step 35 set every hold to `thriving`, and taking
+    // a rung back from a place someone has built on since would be a second error on top of the first. It is said instead.
+    apply: (c) => {
+      if (!c || c.id === "char-mrhs8286" || c._silasGrantsRevoked) return {};
+      const ranThem = (Number(c.reconcileVersion) || 0) >= 35;
+      const took = [];
+      // the forge and the fellowship — Silas's story by name, unmistakable on another sheet
+      const before = (c.holdings || []).length;
+      c.holdings = (c.holdings || []).filter(h => !(h && h.id === "the-fell-pell"));
+      if ((c.holdings || []).length < before) took.push("The Fell Pell");
+      const bandsBefore = (c.bands || []).length;
+      c.bands = (c.bands || []).filter(b => !(b && /fell pell/i.test(String(b.name || ""))));
+      if ((c.bands || []).length < bandsBefore) took.push("the Fellowship of the Fell Pell");
+      // the arrears — what those steps would have paid this character, never more than the purse holds
+      // ⛔ THE PURSE HAS ONE DOOR OUT, and §95 caught my first cut writing the field directly. `debit` also refuses to
+      // overdraw, which is the floor I had hand-rolled: take back only what is still there, never a crystal more.
+      let coin = 0;
+      if (ranThem) {
+        const granted = 880 + 8 * (Array.isArray(c.deeds) ? c.deeds.length : 0);
+        const have = Math.max(0, Number(c.purse?.crystal) || 0);
+        const take = Math.min(have, granted);
+        if (take > 0 && debit(c, "crystal", take, {})?.ok) coin = take;
+      }
+      if (!took.length && !coin) { c._silasGrantsRevoked = true; return {}; }
+      c._silasGrantsRevoked = true;
+      const parts = [];
+      if (took.length) parts.push(took.join(" and "));
+      if (coin) parts.push(`${coin} crystal`);
+      console.log(`[reconcile] silas-only-grants-revoked: ${parts.join(" · ")}`);
+      return { notes: [`${parts.join(" and ")} came to you by a fault in the world's bookkeeping — they belonged to another story, and they are gone from your sheet. Nothing you earned was touched, and anything already spent stays spent.`] };
     }
   },
   // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content

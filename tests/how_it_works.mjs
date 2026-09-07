@@ -6618,11 +6618,13 @@ console.log("\n── §95 · the arrears reach the purse through the one door i
   const rec = rd("engine/reconcile.js");
 
   check("§95: ⛔ it goes through `credit` — the purse has ONE door in, and coin may be moved or found, never made",
-    /import \{ credit \} from/.test(rec)
+    /import \{[^}]*\bcredit\b[^}]*\} from "\.\/purse\.js"/.test(rec)   // the NAMES may grow (step 48 imports `debit` for the revoke); the DOOR may not be bypassed
     && /credit\(c, cur, 880, \{ origin: "arrears" \}\)/.test(rec)
     && !/c\.purse\.crystal\s*[+]?=/.test(rec));
 
-  const save = { id: "t", level: 30, purse: { crystal: 0, coin: 0, paper: 0, marks: 0, scrip: {} },
+  // ⚠️ EVERY FIXTURE HERE IS SILAS, because R48 is HIS settlement — and driving these steps with a generic id is exactly
+  // how the leak stayed invisible until Brayden had the Fell Pell (Erik 2026-09-07). §131 asserts the gates themselves.
+  const save = { id: "char-mrhs8286", level: 30, purse: { crystal: 0, coin: 0, paper: 0, marks: 0, scrip: {} },
     holdings: [{ id: "h1", name: "Threshold Post", kind: "post", condition: "strained", history: [] }] };
   const out = RC95.reconcile(save, "character", { content: C95, rules: C95.rules, ...C95 });
   // ⚠️ WAS `=== 880`, which pinned the RUNNING TOTAL rather than this step's payment — so step 39's arrears
@@ -6636,28 +6638,38 @@ console.log("\n── §95 · the arrears reach the purse through the one door i
     && (out.notes || []).some(n => /thriving/.test(n)));
 
   // ⛔ ONCE. A settlement that paid on every login would be a mint.
+  // ⚠️ THE FACT IS THAT NOTHING MOVES ON A SECOND PASS, not a total: this fixture is Silas now, so step 39's own
+  // two-deed arrears ride along with R48's 880 — which is what the comment above predicted the first time it went red.
+  const wasAt = save.purse.crystal;
   const again = RC95.reconcile(save, "character", { content: C95, rules: C95.rules, ...C95 });
   check("§95: ⛔ IT PAYS ONCE — a reconcile step runs once by version, and a settlement that repeated would be a mint",
-    save.purse.crystal === 880 && !(again.notes || []).some(n => /880 crystal/.test(n)),
-    `after a second pass: ${save.purse.crystal}`);
+    save.purse.crystal === wasAt && !(again.notes || []).some(n => /880 crystal/.test(n)),
+    `after a second pass: ${save.purse.crystal} (was ${wasAt})`);
 
-  const clean = { id: "u", level: 30, purse: { crystal: 0, coin: 0, paper: 0, marks: 0, scrip: {} },
+  const clean = { id: "char-mrhs8286", level: 30, purse: { crystal: 0, coin: 0, paper: 0, marks: 0, scrip: {} },
     holdings: [{ id: "h", name: "A Good Post", kind: "post", condition: "thriving", history: [] }] };
   RC95.reconcile(clean, "character", { content: C95, rules: C95.rules, ...C95 });
   check("§95: …and a hold already thriving gains no history it did not earn", clean.holdings[0].history.length === 0);
 
   // ⛔ R48's SECOND LINE, ruled separately — and COUNTED, never typed. A stored 280 would be a copy of a
   // derived value, and a character with a different ledger would be paid Silas's arrears.
-  const ledger = { id: "v", level: 30, purse: { crystal: 0, coin: 0, paper: 0, marks: 0, scrip: {} }, holdings: [],
+  const ledger = { id: "char-mrhs8286", level: 30, purse: { crystal: 0, coin: 0, paper: 0, marks: 0, scrip: {} }, holdings: [],
     deeds: Array.from({ length: 35 }, (_, i) => ({ description: `deed ${i}` })) };
   RC95.reconcile(ledger, "character", { content: C95, rules: C95.rules, ...C95 });
   check("§95: ⛑ …and the deed ledger pays 8 a deed, COUNTED off the record rather than typed",
-    ledger.purse.crystal === 880 + 280, `crystal ${ledger.purse.crystal} (880 arrears + 35×8)`);
-  const fewer = { id: "w", level: 30, purse: { crystal: 0, coin: 0, paper: 0, marks: 0, scrip: {} }, holdings: [],
+    ledger.purse.crystal >= 880 + 280, `crystal ${ledger.purse.crystal} (880 arrears + 35×8, plus step 39's own)`);
+  const fewer = { id: "char-mrhs8286", level: 30, purse: { crystal: 0, coin: 0, paper: 0, marks: 0, scrip: {} }, holdings: [],
     deeds: [{ description: "one" }, { description: "two" }] };
   RC95.reconcile(fewer, "character", { content: C95, rules: C95.rules, ...C95 });
-  check("§95: ⚠️ …so a character with a different ledger is paid THEIR number, not Silas's",
-    fewer.purse.crystal === 880 + 16, `crystal ${fewer.purse.crystal} (880 + 2×8)`);
+  check("§95: ⚠️ …so a ledger of a different length is paid ITS number — the rate is the ruling, the count is the record's",
+    ledger.purse.crystal - fewer.purse.crystal === (35 - 2) * 8, `${ledger.purse.crystal} vs ${fewer.purse.crystal} — 33 deeds apart at 8 each`);
+  // ⛔ AND NOBODY ELSE IS PAID AT ALL (Erik 2026-09-07). R48 settles a span that one save lived through; ungated, it paid
+  // every character who loaded, and Brayden was handed 880 crystal for a debt the world never owed him.
+  const stranger = { id: "char-someone-else", level: 30, purse: { crystal: 0, coin: 0, paper: 0, marks: 0, scrip: {} }, holdings: [{ id: "h", name: "their post", kind: "post", condition: "strained", history: [] }], deeds: [{ description: "their own" }] };
+  const outStranger = RC95.reconcile(stranger, "character", { content: C95, rules: C95.rules, ...C95 });
+  check("§95: ⛔ …AND NOBODY ELSE IS PAID — not the arrears, not the deed ledger, and their hold is not silently promoted",
+    stranger.purse.crystal === 0 && stranger.holdings[0].condition === "strained" && !(outStranger.notes || []).some(n => /crystal/.test(n)),
+    `crystal ${stranger.purse.crystal} · ${stranger.holdings[0].condition}`);
 }
 
 
@@ -7223,6 +7235,7 @@ console.log("\n── §101 · party, band, legion — and the fellowship the st
 
   // ── R49 step 38: the three things the fiction built that the record never caught
   const save101 = {
+    id: "char-mrhs8286",   // ⚠️ R49 step 38 carries HIS story — the Fell Pell is Pell's forge (§131)
     reconcileVersion: 37, clock: { day: 20 }, level: 31, subAttributes: { presence: 10 },
     holdings: [{ id: "raven", name: "Raven's Home", kind: "post", condition: "thriving", locationId: null },
                { id: "t", name: "Threshold Post", kind: "post", condition: "thriving", locationId: null }],
@@ -7233,9 +7246,17 @@ console.log("\n── §101 · party, band, legion — and the fellowship the st
   const raven = save101.holdings.find(h => h.id === "raven");
   check("§101: ⛔ A HOLD THAT IS NOWHERE CANNOT BE REACHED — Raven's Home is put where the story put it",
     raven.locationId === "the_old_warden_post", String(raven.locationId));
+  // ⚑ STEP 38 REPORTS WHAT IT WILL NOT GUESS — and step 42 places it later, because Erik told me where it stood
+  // ("north of the mill gate at the ridge relay node"). The warning is the fact; the placement is the answer to it.
   check("§101: ⛑ …and the one with no place in the fiction is REPORTED, not guessed at",
-    save101.holdings.find(h => h.id === "t").locationId === null
-    && (out101.warnings || []).some(w => /none guessed/.test(String(w))));
+    (out101.warnings || []).some(w => /none guessed/.test(String(w)))
+    && save101.holdings.find(h => h.id === "t").locationId === "gen-threshold-post");
+  // ⛔ AND ON ANOTHER PLAYER'S SHEET IT IS NOT (Erik 2026-09-07: "Brayden has the Fell Pell as a holding on his screen").
+  const notSilas = { id: "char-someone-else", reconcileVersion: 37, clock: { day: 20 }, level: 31, subAttributes: { presence: 10 },
+    holdings: [{ id: "mine", name: "Their Own Post", kind: "post", condition: "thriving", locationId: null }], npcRegistry: {} };
+  R101.reconcile(notSilas, "character", { content: C101, rules: C101.rules });
+  check("§101: ⛔ …AND NOBODY ELSE GAINS PELL'S FORGE OR THE FELLOWSHIP — another player's wife's workshop is not your holding",
+    !notSilas.holdings.some(h => /fell pell/i.test(h.name)) && !(notSilas.bands || []).some(b => /fell pell/i.test(b.name || "")) && notSilas.holdings.length === 1);
   check("§101: ⚑ THE FELL PELL IS A HOLDING — a forge the story named and the sheet never held",
     save101.holdings.some(h => /fell pell/i.test(h.name) && h.kind === "enterprise"),
     save101.holdings.map(h => `${h.name}:${h.kind}`).join(" · "));
@@ -8619,6 +8640,58 @@ console.log("\n── §130 · Bren Thalle does not need to be devoted to take p
   const app = rd("app.js");
   check("§130: ⚑ the popup's pool is the working bar, and it says what they bring and whom they already keep for",
     /Object\.keys\(character\.npcRegistry \|\| \{\}\)\.filter\(id => canBeAskedToWork\(character\.npcRegistry\[id\]\)\)/.test(app) && /\(keeps \$\{esc\(k\)\}\)/.test(app) && /assistTags \|\| \[\]\)\.slice\(0, 2\)/.test(app));
+}
+
+/* ═════ §131 — A STEP THAT CARRIES ONE CHARACTER'S STORY NAMES THAT CHARACTER (Erik 2026-09-07: Brayden had the Fell Pell) ═════ */
+// ⛔ Three ungated steps handed Silas's story to every save: 880 crystal computed from HIS hold over a span only he
+// played, 8/deed for a settlement only he was owed, and Pell's forge with the Fellowship band. §95 caught exactly this
+// class in step 39 and I never went back for 35, 36 and 38. Gated now, and what already landed is taken back.
+console.log("\n── §131 · another player's wife's forge is not your holding ──");
+{
+  const RC = await import("../engine/reconcile.js");
+  const { loadContentHeadless: lch131 } = await import("./headless_content.mjs");
+  const C = await lch131();
+  const ctx = { content: C, rules: C.rules };
+  const other = () => ({ id: "char-someone-else", name: "Brayden's own", purse: { crystal: 1000 }, deeds: [{ at: 1 }, { at: 2 }], holdings: [], bands: [], company: [], abilities: [] });
+  const silas = (over) => ({ id: "char-mrhs8286", name: "Silas Weir", purse: { crystal: 100 }, deeds: [{ at: 1 }], holdings: [], bands: [], company: [], abilities: [], ...over });
+  // ── the three that leaked, by version
+  for (const [v, id] of [[35, "r48-back-pay"], [36, "r48-deed-ledger"], [38, "r49-fell-pell"]]) {
+    const step = RC.CHARACTER_STEPS.find(x => x.version === v);
+    const o = other(); const before = JSON.stringify(o);
+    const out = step.apply(o, ctx);
+    check(`§131: ⛔ STEP ${v} (${id}) TOUCHES NOBODY BUT SILAS — no coin, no forge, no band, nothing said`,
+      !!step && step.id === id && JSON.stringify(o) === before && !out?.notes, `${id}: ${JSON.stringify(out).slice(0, 90)}`);
+  }
+  const s35 = RC.CHARACTER_STEPS.find(x => x.version === 35).apply(silas(), ctx);
+  const s38c = silas(); const s38 = RC.CHARACTER_STEPS.find(x => x.version === 38).apply(s38c, ctx);
+  check("§131: ⚑ …and Silas still gets them — the gate is an identity, not a disabling",
+    /880 crystal reaches your purse/.test((s35.notes || []).join(" ")) && (s38c.holdings || []).some(h => h.id === "the-fell-pell"), JSON.stringify({ s35: s35.notes?.length, fp: (s38c.holdings || []).length }));
+  // ── and what already landed comes back
+  const step48 = RC.CHARACTER_STEPS.find(x => x.id === "silas-only-grants-revoked");
+  const b = other(); b.reconcileVersion = 47;
+  b.holdings = [{ id: "the-fell-pell", name: "The Fell Pell", kind: "enterprise", steward: "pell", condition: "thriving" }, { id: "his-own", name: "Brayden's post", kind: "post", condition: "thriving" }];
+  b.bands = [{ id: "band-fellowship", name: "The Fellowship of the Fell Pell" }, { id: "band-his", name: "Brayden's band" }];
+  const out48 = step48.apply(b);
+  check("§131: ⛔ THE FORGE AND THE FELLOWSHIP GO BACK, and what the player built is untouched",
+    !!step48 && step48.version === 48 && b.holdings.length === 1 && b.holdings[0].id === "his-own" && b.bands.length === 1 && b.bands[0].id === "band-his");
+  check("§131: ⛔ …the arrears come back only as far as the purse holds them — 880 + 8 × 2 deeds = 896 of 1000",
+    b.purse.crystal === 1000 - 896 && /896 crystal/.test((out48.notes || []).join(" ")));
+  const spent = other(); spent.reconcileVersion = 47; spent.purse.crystal = 40;
+  const outSpent = step48.apply(spent);
+  check("§131: ⚑ …A PLAYER WHO SPENT IT KEEPS WHAT THEY SPENT — the purse never goes negative, and the error is not charged to them",
+    spent.purse.crystal === 0 && /40 crystal/.test((outSpent.notes || []).join(" ")) && /anything already spent stays spent/.test((outSpent.notes || []).join(" ")));
+  check("§131: …conditions are LEFT ALONE — taking a rung back from a place someone has built on since is a second error",
+    b.holdings[0].condition === "thriving");
+  const again = step48.apply(b);
+  check("§131: …idempotent, and it never touches Silas", !again.notes && !step48.apply(silas({ reconcileVersion: 47, purse: { crystal: 1180 } })).notes);
+  const fresh = other(); fresh.reconcileVersion = 20; const outFresh = step48.apply(fresh);
+  check("§131: ⚑ …and a save that never ran the ungated steps loses nothing", fresh.purse.crystal === 1000 && !outFresh.notes);
+  // ── the class, not the instance
+  const src = rd("engine/reconcile.js");
+  const bodies = src.split(/\n  \{\n    version: /).slice(1);
+  const leaky = bodies.filter(b2 => /addHolding\(|raiseBand\(|credit\(c, cur, \d/.test(b2) && !/char-mrhs8286/.test(b2) && !/SNAPSHOTS/.test(b2))
+    .map(b2 => (b2.match(/^(\d+), id: "([^"]+)"/) || [])[2]).filter(Boolean);
+  check("§131: ⛔ NO STEP GRANTS A HOLDING, A BAND OR A FIXED SUM WITHOUT NAMING WHOSE STORY IT IS", leaky.length === 0, leaky.join(", "));
 }
 
 /* ══════════ REPORT ══════════ */

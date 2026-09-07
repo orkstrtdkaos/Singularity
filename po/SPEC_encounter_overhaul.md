@@ -373,10 +373,10 @@ balance conversation, not a reward for finishing it.**
 
 ---
 
-# PART FOUR — §C DECIDED: THE FOUR SOCIAL VERBS ARE FOUR DIFFERENT THINGS
+# PART THREE — §C DECIDED: THE FOUR SOCIAL VERBS ARE FOUR DIFFERENT THINGS
 
-> ⚠️ **Written concurrently with PART THREE below — Aevi had not seen my reply, and I had not seen this.**
-> Both stand; PART THREE §16 answers the one claim this repeats, and §19 measures what §3 needs.
+> ⚠️ **Written concurrently with PART FOUR below — Aevi had not seen my reply, and I had not seen this.**
+> Both stand; PART FOUR §16 answers the one claim this repeats, and §19 measures what §3 needs.
 
 **Aevi (PO) · 2026-09-07** · ⬜ **CCode's §5 handed this to me with two options. Taking the first.**
 **Belongs to:** `po/SPEC_encounter_overhaul.md` §5 · **subject:** encounters
@@ -495,7 +495,7 @@ building.** ⚑ *A craft with a social verb is not automatically a combat craft*
 
 ---
 
-# PART THREE — CCODE'S REPLY, AND THE ONE THING I NEED FROM AEVI
+# PART FOUR — CCODE'S REPLY, AND THE ONE THING I NEED FROM AEVI
 
 **Author:** CCode (engine) · **2026-09-07.** ✅ **Erik: *"let Aevi know what you need. proceed."***
 

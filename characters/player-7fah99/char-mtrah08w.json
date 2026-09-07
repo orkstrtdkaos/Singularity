@@ -8,7 +8,7 @@
   "whyHere": "You were sent, or you were seeded, or you simply wanted to see something finish inside a single lifetime.",
   "background": "precursor_marked",
   "level": 1,
-  "xp": 7,
+  "xp": 9,
   "attributes": {
     "physical": 3,
     "mental": 3,
@@ -82,7 +82,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 90,
+  "energy": 85,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -125,65 +125,72 @@
         "player": "Back away — refuse the fight",
         "summary": "Chernak backs away from a near-fight at the Common Table and settles in the crowded space.",
         "narration": "You step back from the threshold of whatever that was about to become. The man across from you — broad through the shoulders, jaw set, one hand still resting on the hilt he has not drawn — reads your retreat correctly and does not follow. A fight refused is not a fight lost, and he knows it, even if the watching faces around you make a short disappointed sound before returning to their cups.\n\nThe Crossing absorbs the moment without ceremony. Someone else's argument fills the air two tables over. Mayvee, who had gone very still against your ankle during the confrontation, resumes its usual business of being a shape at the edge of your vision — present, unreadable, unimpressed. It does not comfort you. It never does.\n\nThe Common Table opens ahead of you: long benches, the smell of something boiled with last autumn's dried herbs, early-spring mud tracked in on a dozen boots. The place is crowded for midday, which tells you the road outside is busier than the season usually warrants. People travel when they are worried, and the water-talk from the far end of the room — boiling required, someone's cousin upstream is sick — confirms what you have already heard. The first melt is running gray in places.\n\nYou find a gap on the bench near the far wall and settle. Through one palm pressed briefly to the table's boards you catch the faint hum the Crossing always carries — all things, none of them ruling. Outside the narrow window the sky has shifted, a quick squall moving through, and the light goes briefly silver and cold before settling back to ordinary pale noon."
+      },
+      {
+        "summary": "Brynjar Andyrsson: Brynjar logged the group's arrival with the Wardcaller; learned the Coliseum road is open and traveled, the Hundred Markets road has a customs trouble at the march-line, and that the Wardcaller…"
+      },
+      {
+        "player": "a vision comes for brinjal, spoken in tongues, but told to him and he can understand  ",
+        "summary": "Chernak attempts to carry a vision to Brynjar — and finds nothing arrives.",
+        "narration": "The vision does not come.\n\nYou feel the familiar sensation of something trying to form — a pressure at the base of your skull, a faint narrowing of the room's noise the way it does before a genuine waking-dream surfaces — but it stalls. The Common Table stays the Common Table: boiled herbs, mud-tracked floor, the broad-shouldered man still watching you from three paces off, Brynjar somewhere in the crowd behind you. Whatever wanted to reach Brynjar today found something in its way, or found Brynjar the wrong shape to receive it, or simply found you too unsettled by the near-fight's residue to carry it cleanly through. The channel does not open.\n\nMayvee places itself squarely between your feet, which is the closest it comes to commentary."
       }
     ],
     "lastTurn": {
-      "narration": "You step back from the threshold of whatever that was about to become. The man across from you — broad through the shoulders, jaw set, one hand still resting on the hilt he has not drawn — reads your retreat correctly and does not follow. A fight refused is not a fight lost, and he knows it, even if the watching faces around you make a short disappointed sound before returning to their cups.\n\nThe Crossing absorbs the moment without ceremony. Someone else's argument fills the air two tables over. Mayvee, who had gone very still against your ankle during the confrontation, resumes its usual business of being a shape at the edge of your vision — present, unreadable, unimpressed. It does not comfort you. It never does.\n\nThe Common Table opens ahead of you: long benches, the smell of something boiled with last autumn's dried herbs, early-spring mud tracked in on a dozen boots. The place is crowded for midday, which tells you the road outside is busier than the season usually warrants. People travel when they are worried, and the water-talk from the far end of the room — boiling required, someone's cousin upstream is sick — confirms what you have already heard. The first melt is running gray in places.\n\nYou find a gap on the bench near the far wall and settle. Through one palm pressed briefly to the table's boards you catch the faint hum the Crossing always carries — all things, none of them ruling. Outside the narrow window the sky has shifted, a quick squall moving through, and the light goes briefly silver and cold before settling back to ordinary pale noon.",
-      "sceneSummary": "Chernak backs away from a near-fight at the Common Table and settles in the crowded space.",
+      "narration": "The vision does not come.\n\nYou feel the familiar sensation of something trying to form — a pressure at the base of your skull, a faint narrowing of the room's noise the way it does before a genuine waking-dream surfaces — but it stalls. The Common Table stays the Common Table: boiled herbs, mud-tracked floor, the broad-shouldered man still watching you from three paces off, Brynjar somewhere in the crowd behind you. Whatever wanted to reach Brynjar today found something in its way, or found Brynjar the wrong shape to receive it, or simply found you too unsettled by the near-fight's residue to carry it cleanly through. The channel does not open.\n\nMayvee places itself squarely between your feet, which is the closest it comes to commentary.",
+      "sceneSummary": "Chernak attempts to carry a vision to Brynjar — and finds nothing arrives.",
       "choices": [
         {
-          "label": "Press your palm to the table and listen — find the pattern beneath the water-talk and the worry",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": "easy",
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "pattern_sense",
-          "energyCost": 3,
-          "trivial": false
-        },
-        {
-          "label": "Approach the broad-shouldered man — find out what he actually wanted",
+          "label": "Find Brynjar in the crowd and tell him plainly what you felt trying to form",
           "attribute": "social",
           "subAttribute": "rapport",
-          "difficulty": "normal",
-          "intentTags": [
-            "negotiate"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Find whoever is talking about the sick families upstream and listen carefully",
-          "attribute": "social",
-          "subAttribute": "presence",
           "difficulty": "easy",
           "intentTags": [
-            "scout"
+            "help"
           ],
           "trivial": true
         },
         {
-          "label": "Step back outside into the squall — let the Crossing's edges show themselves in the weather",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Read the broad-shouldered man — use Pattern-Sense to understand what that almost-fight was actually about",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": "normal",
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "pattern_sense",
+          "energyCost": 3
+        },
+        {
+          "label": "Press one palm flat against the Common Table's central post and listen — something in this place is humming",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": "normal",
+          "intentTags": [
+            "study",
+            "careful"
+          ]
+        },
+        {
+          "label": "Step outside into the pale post-squall light — let the channel settle before trying again",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "difficulty": "very easy",
           "intentTags": [
-            "travel"
+            "careful"
           ],
           "trivial": true
         }
       ],
       "scene": {
-        "setting": "The Common Table, a long communal hall 140 m from the Crossing's centre. Midday, early spring. A quick squall has passed through and left the light pale and cold. Mud on the floor, close-packed benches, the smell of boiled dried herbs. Crowded for the hour.",
+        "setting": "The Common Table, long communal hall 140 m from the Crossing's centre. Midday, early spring. Pale, cold light after a squall. Mud on the floor, close-packed benches, boiled-herb smell.",
         "npcsPresent": [
           {
-            "name": "broad-shouldered man",
-            "state": "Standing a few paces off, hand no longer on his hilt, watching Chernak without pressing"
+            "name": "Broad-shouldered man",
+            "state": "Standing a few paces off, watching Chernak without pressing"
           },
           {
             "name": "Mayvee",
-            "state": "Settled back at the edge of Chernak's vision, no longer rigid"
+            "state": "Planted between Chernak's feet, still as a fact"
           }
         ],
         "objects": [
@@ -194,49 +201,27 @@
         ],
         "threads": [
           "Near-fight with the broad-shouldered man — cause unknown, not pursued",
-          "Water-crisis talk from the far end of the room — sick families upstream",
-          "The Crossing's general tension: people traveling because they are worried"
+          "Water-crisis talk from the far end of the room",
+          "Vision attempted for Brynjar — nothing arrived; channel blocked or timing wrong",
+          "Brynjar is somewhere in the crowd after logging arrival with the Wardcaller"
         ]
       },
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a brief confrontation and settling in"
-      },
-      "placeUpdates": [
-        {
-          "note": "Common Table is crowded at midday with worried travelers; water-crisis talk circulating openly",
-          "subPlace": {
-            "name": "The Common Table",
-            "parent": "The Crossing",
-            "note": "Long communal hall — 140 m from the Crossing's centre. Benches, boiled food, mud-tracked floor.",
-            "visited": true
-          }
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "the-crossing",
-          "label": "The Crossing",
-          "kind": "place",
-          "entityId": "the-crossing",
-          "fact": "The Common Table is the main communal hall — crowded, all-people, and currently alive with water-crisis worry. Travelers come when they are afraid.",
-          "links": [
-            "the-heartroot"
-          ]
-        }
-      ],
-      "sceneEnded": false
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "xp": 0
+      }
     },
     "sceneState": {
-      "setting": "The Common Table, a long communal hall 140 m from the Crossing's centre. Midday, early spring. A quick squall has passed through and left the light pale and cold. Mud on the floor, close-packed benches, the smell of boiled dried herbs. Crowded for the hour.",
+      "setting": "The Common Table, long communal hall 140 m from the Crossing's centre. Midday, early spring. Pale, cold light after a squall. Mud on the floor, close-packed benches, boiled-herb smell.",
       "npcsPresent": [
         {
-          "name": "broad-shouldered man",
-          "state": "Standing a few paces off, hand no longer on his hilt, watching Chernak without pressing"
+          "name": "Broad-shouldered man",
+          "state": "Standing a few paces off, watching Chernak without pressing"
         },
         {
           "name": "Mayvee",
-          "state": "Settled back at the edge of Chernak's vision, no longer rigid"
+          "state": "Planted between Chernak's feet, still as a fact"
         }
       ],
       "objects": [
@@ -247,16 +232,17 @@
       ],
       "threads": [
         "Near-fight with the broad-shouldered man — cause unknown, not pursued",
-        "Water-crisis talk from the far end of the room — sick families upstream",
-        "The Crossing's general tension: people traveling because they are worried"
+        "Water-crisis talk from the far end of the room",
+        "Vision attempted for Brynjar — nothing arrived; channel blocked or timing wrong",
+        "Brynjar is somewhere in the crowd after logging arrival with the Wardcaller"
       ]
     },
-    "beats": 1
+    "beats": 2
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 12,
+    "hour": 13,
     "realAnchor": null
   },
   "companions": [
@@ -372,7 +358,7 @@
         "locationId": "the_crossing"
       }
     ],
-    "turnsSinceOffer": 3,
+    "turnsSinceOffer": 4,
     "recentOffers": [
       {
         "thing": "The wrongness in the hum — barely below hearing, but present since yesterday evening, a disruption in the Heartroot's living frequency",
@@ -450,17 +436,17 @@
     }
   },
   "tendencies": {
-    "devotion": 12.97603125,
-    "cerebral": 19.4878125,
-    "strategic": 0.9506249999999999,
-    "cautious": 2
+    "devotion": 12.65163046875,
+    "cerebral": 21.0006171875,
+    "strategic": 0.9268593749999999,
+    "cautious": 1.95
   },
   "aptitudes": [
     "scholar",
     "sage",
     "faithful"
   ],
-  "actionCount": 3,
+  "actionCount": 4,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -583,8 +569,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788788988253,
-  "rev": 23,
+  "updatedAt": 1788789182569,
+  "rev": 25,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -613,7 +599,7 @@
   "teachers": {},
   "regionsKnown": {
     "the_quickwood": 3,
-    "the_center": 1
+    "the_center": 2
   },
   "company": [],
   "foreclosed": [
@@ -629,10 +615,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-09-07T13:42:24.727Z",
-      "lastAt": "2026-09-07T13:49:48.248Z",
+      "lastAt": "2026-09-07T13:53:02.567Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 4
+      "beats": 5
     }
   ],
   "_debtReceipts": [],
@@ -667,19 +653,22 @@
     "investigate": 1,
     "travel": 1,
     "careful": 1,
-    "retreat": 1
+    "retreat": 1,
+    "meditate": 1,
+    "study": 1
   },
   "_opEmitted": {
-    "sceneSummary": 3,
-    "choices": 3,
-    "scene": 3,
+    "sceneSummary": 4,
+    "choices": 4,
+    "scene": 4,
     "npcUpdates": 2,
     "codexUpdates": 3,
     "placeUpdates": 2,
     "timeOps": 2,
-    "sceneEnded": 1
+    "sceneEnded": 1,
+    "characterDeltas": 1
   },
-  "_opTurns": 3,
+  "_opTurns": 4,
   "_pendingIntent": null,
   "knownPlaces": [
     "the_crossing"
@@ -721,5 +710,6 @@
       },
       "stakes": "Losing means waking bruised and lighter, not dead. Victory or a clean break keeps everything."
     }
-  }
+  },
+  "sharedSceneId": "the_crossing--2026-09-07T13-49-02-525Z"
 }

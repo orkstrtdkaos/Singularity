@@ -87,6 +87,10 @@
       "abilityId": "maintained_veil",
       "level": 1,
       "native": true
+    },
+    {
+      "abilityId": "veil_stroke",
+      "level": 1
     }
   ],
   "alignment": {
@@ -189,39 +193,26 @@
         "player": "Enter the Waygate and arrive at the crossing. The hub where all Waygates land, just outside The Crosssroads.",
         "summary": "Loki traveled via the Quickwood Eaves waygate and arrived at the Hub crossing outside The Crossing.",
         "narration": "You turn from the Deepwood threshold and walk back toward the living waygate. The trees seem to release their attention as you move—not hostile, simply indifferent now that you've declined the crossing. Cy clicks in rhythm with your steps, lens irising open and closed in what might be satisfaction.\n\nThe waygate stands among the eaves-trees as it did when you arrived, the latticed wood grown smooth by centuries of passage. You step into the threshold. The light shifts—green to grey to the particular stillness that lives inside the gate-structure—and for a moment you are nowhere, held in the fold between places.\n\nThen the air changes temperature. You step out onto stone.\n\nThe Hub crossing opens around you: a vast circular chamber where five waygate arches converge, each one a living frame of different wood or metal or grown-thing, all of them humming at a frequency just below hearing. The floor beneath your boots is pale stone, worn smooth by uncounted arrivals. Morning light falls through high windows—the sun here is where it should be, not filtered green through the Deepwood canopy. The Crossing lies just beyond the archway to the east, its towers visible through the stone portal. Cy's clicks grow more elaborate, almost musical—it has returned to a place it understands, where the old works still hum their maintenance songs.\n\nYou are not alone. A handful of people move through the Hub with the ease of those who know these paths—a courier checking a slate, two merchants speaking in low voices near a carved bench, and by the western arch, a figure in grey standing utterly still, watching the gates with the particular patience of someone who has all the time the world requires."
+      },
+      {
+        "player": "Walk over to the lone traveler and say Hi.",
+        "summary": "Loki arrived at the Hub crossing via the Quickwood Eaves waygate and greeted the road-warden, who recognized them by name.",
+        "narration": "You cross the Hub's pale stone toward the figure in grey by the western arch. The sound of the gates fades under your footsteps—five waygate arches humming at the edge of hearing, and you moving through it like moving through water. The grey-coated figure doesn't turn until you're close enough to speak.\n\n'Hi,' you say.\n\nThey turn slowly. You recognize them now—the road-warden you met days ago on the road west of the Waygate Path, the one who carries true news and warns families downhill of what's coming. Their face is weathered, lined in the way of someone who spends seasons on open ground. Grey-streaked hair, coat faded to brown. Eyes that read roads and people with the same steady attention.\n\nThey nod—a small, genuine motion. 'Loki,' they say, and their voice carries the same unhurried certainty it did by the fire. 'I didn't expect to find you here. The Hub's not usually a place the road-bound pause.' They glance at Cy, who has positioned itself precisely at your ankle and is making a low, approving click. 'Still carrying your assignment, I see.'\n\nThe courier near the chamber's center has glanced your way once and returned to their slate. The merchants by the bench are oblivious. The grey figure by the western arch—Veln Ashpause—has not moved."
       }
     ],
     "lastTurn": {
-      "narration": "You turn from the Deepwood threshold and walk back toward the living waygate. The trees seem to release their attention as you move—not hostile, simply indifferent now that you've declined the crossing. Cy clicks in rhythm with your steps, lens irising open and closed in what might be satisfaction.\n\nThe waygate stands among the eaves-trees as it did when you arrived, the latticed wood grown smooth by centuries of passage. You step into the threshold. The light shifts—green to grey to the particular stillness that lives inside the gate-structure—and for a moment you are nowhere, held in the fold between places.\n\nThen the air changes temperature. You step out onto stone.\n\nThe Hub crossing opens around you: a vast circular chamber where five waygate arches converge, each one a living frame of different wood or metal or grown-thing, all of them humming at a frequency just below hearing. The floor beneath your boots is pale stone, worn smooth by uncounted arrivals. Morning light falls through high windows—the sun here is where it should be, not filtered green through the Deepwood canopy. The Crossing lies just beyond the archway to the east, its towers visible through the stone portal. Cy's clicks grow more elaborate, almost musical—it has returned to a place it understands, where the old works still hum their maintenance songs.\n\nYou are not alone. A handful of people move through the Hub with the ease of those who know these paths—a courier checking a slate, two merchants speaking in low voices near a carved bench, and by the western arch, a figure in grey standing utterly still, watching the gates with the particular patience of someone who has all the time the world requires.",
-      "sceneSummary": "Loki traveled via the Quickwood Eaves waygate and arrived at the Hub crossing outside The Crossing.",
+      "narration": "You cross the Hub's pale stone toward the figure in grey by the western arch. The sound of the gates fades under your footsteps—five waygate arches humming at the edge of hearing, and you moving through it like moving through water. The grey-coated figure doesn't turn until you're close enough to speak.\n\n'Hi,' you say.\n\nThey turn slowly. You recognize them now—the road-warden you met days ago on the road west of the Waygate Path, the one who carries true news and warns families downhill of what's coming. Their face is weathered, lined in the way of someone who spends seasons on open ground. Grey-streaked hair, coat faded to brown. Eyes that read roads and people with the same steady attention.\n\nThey nod—a small, genuine motion. 'Loki,' they say, and their voice carries the same unhurried certainty it did by the fire. 'I didn't expect to find you here. The Hub's not usually a place the road-bound pause.' They glance at Cy, who has positioned itself precisely at your ankle and is making a low, approving click. 'Still carrying your assignment, I see.'\n\nThe courier near the chamber's center has glanced your way once and returned to their slate. The merchants by the bench are oblivious. The grey figure by the western arch—Veln Ashpause—has not moved.",
+      "sceneSummary": "Loki arrived at the Hub crossing via the Quickwood Eaves waygate and greeted the road-warden, who recognized them by name.",
       "choices": [
         {
-          "label": "Approach the still figure by the western arch and ask what they're watching for.",
+          "label": "Ask them what brought them to the Hub—it's not a place road-wardens usually stop",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
           "axes": {},
-          "difficulty": "normal",
+          "difficulty": "very easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "approach",
-            "wary"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Head toward the eastern portal to enter The Crossing—you have people to find and questions to ask.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": "trivial",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "travel",
-            "direct"
+            "ask"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -230,15 +221,46 @@
           "emergenceId": null
         },
         {
-          "label": "Ask the courier at the slate desk about recent movements through the gates—who has come through, who has left.",
+          "label": "Tell them you're heading back to the city, and ask if they've heard anything new about the water crisis moving downhill",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "ask"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Prism Sight to read the last hour of light-history in this chamber—something about the grey figure by the western arch is pulling at you",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask the road-warden plainly: who is the grey figure watching the gates, and why do they seem to know something about you",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "study",
-            "inquire"
+            "ask"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -248,38 +270,28 @@
         }
       ],
       "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
+      "characterDeltas": {},
       "ledgerEvents": [],
       "questUpdates": [],
       "standingOps": [],
-      "delegateOps": [],
-      "arcOps": [],
-      "adoptSchool": null,
-      "offer": {
-        "thing": "A figure in grey standing by the western arch, watching the gates with absolute stillness and patience.",
-        "from": "The Hub crossing itself — a place of convergence where travelers arrive and depart, and where watchers naturally gather"
-      },
-      "stageOps": [],
       "scene": {
         "setting": "The Hub crossing — a vast circular chamber where five waygate arches converge, pale stone worn smooth by uncounted arrivals. Morning light falls through high windows. The Crossing's towers visible through the eastern portal. The sound of the gates is a hum just below hearing.",
         "npcsPresent": [
           {
+            "name": "A lone traveler (road-warden)",
+            "state": "Standing by the western arch, turning to face Loki after being greeted; speaking with recognition and unhurried certainty"
+          },
+          {
+            "name": "Veln Ashpause (Hourkeeper)",
+            "state": "Standing by the western arch, utterly still, watching the gates — has not moved"
+          },
+          {
             "name": "A courier",
-            "state": "Checking a slate near the center of the chamber"
+            "state": "Checking a slate near the center of the chamber; glanced at Loki briefly, returned attention to slate"
           },
           {
             "name": "Two merchants",
-            "state": "Speaking in low voices by a carved bench"
-          },
-          {
-            "name": "A figure in grey",
-            "state": "Standing by the western arch, utterly still, watching the gates"
+            "state": "Speaking in low voices by a carved bench; unaware of Loki"
           }
         ],
         "objects": [
@@ -289,75 +301,55 @@
           "A slate at the courier's desk"
         ],
         "threads": [
-          "Who is the grey figure and what are they watching for?",
-          "Why does Cy find the Hub's frequency musical—is there something here it recognizes?",
+          "Who is the grey figure by the western arch and what is their foreknowledge of Loki",
+          "What brought the road-warden to the Hub",
           "The man in the lower Annex who hired the striker is still unnamed",
           "Tessvel Cairn awaits an answer about the personal offer"
         ]
       },
-      "npcUpdates": [],
-      "intentsHeard": [],
-      "factUpdates": [],
-      "placeUpdates": [
+      "npcUpdates": [
         {
-          "note": "Loki arrived at the Hub crossing via waygate from the Quickwood Eaves",
-          "subPlace": {
-            "name": "The Hub Crossing",
-            "parent": "The Crossing",
-            "note": "A vast circular chamber where five waygate arches converge; the hub of the network. Pale stone worn by uncounted arrivals.",
-            "visited": true
-          }
+          "op": "update",
+          "npcId": "lone-traveler-eastfork-warning",
+          "name": "A lone traveler (road-warden)",
+          "pronouns": "they/them",
+          "note": "Recognized Loki at the Hub crossing and greeted them by name. Noted that the Hub is not a place road-wardens usually pause. Observed Cy's presence with familiarity.",
+          "learned": [
+            "The road-warden has traveled to the Hub crossing and paused there",
+            "They know Loki by sight and name after their brief meeting on the road"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the Hub crossing, speaking with Loki"
+        },
+        {
+          "op": "update",
+          "npcId": "veln-ashpause",
+          "note": "Still standing by the western arch, utterly still, watching the gates. Has not acknowledged Loki's arrival.",
+          "status": "active",
+          "statusNote": "At the Hub crossing by the western arch, watching silently"
         }
       ],
-      "discovery": null,
-      "codexUpdates": [],
-      "holdingOps": [],
-      "debtOps": [],
-      "partyOps": [],
-      "generateRequest": [],
-      "encounterOps": [],
-      "projectOps": [],
-      "bandOps": [],
-      "deathOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": {
-        "hoursPassed": 1.5,
-        "why": "A journey through the waygate from the Quickwood Eaves to the Hub crossing — the transit itself is swift, but the walk to and through the gate consumed the early part of the morning"
-      },
-      "moveTo": {
-        "location": "the-hub-crossing",
-        "why": "Traveled via waygate from the Quickwood Eaves and arrived at the Hub crossing, the convergence point of all gates"
-      },
-      "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": null,
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
       "sceneEnded": false
     },
     "sceneState": {
       "setting": "The Hub crossing — a vast circular chamber where five waygate arches converge, pale stone worn smooth by uncounted arrivals. Morning light falls through high windows. The Crossing's towers visible through the eastern portal. The sound of the gates is a hum just below hearing.",
       "npcsPresent": [
         {
+          "name": "A lone traveler (road-warden)",
+          "state": "Standing by the western arch, turning to face Loki after being greeted; speaking with recognition and unhurried certaint"
+        },
+        {
+          "name": "Veln Ashpause (Hourkeeper)",
+          "state": "Standing by the western arch, utterly still, watching the gates — has not moved"
+        },
+        {
           "name": "A courier",
-          "state": "Checking a slate near the center of the chamber"
+          "state": "Checking a slate near the center of the chamber; glanced at Loki briefly, returned attention to slate"
         },
         {
           "name": "Two merchants",
-          "state": "Speaking in low voices by a carved bench"
-        },
-        {
-          "name": "A figure in grey",
-          "state": "Standing by the western arch, utterly still, watching the gates"
+          "state": "Speaking in low voices by a carved bench; unaware of Loki"
         }
       ],
       "objects": [
@@ -367,18 +359,18 @@
         "A slate at the courier's desk"
       ],
       "threads": [
-        "Who is the grey figure and what are they watching for?",
-        "Why does Cy find the Hub's frequency musical—is there something here it recognizes?",
+        "Who is the grey figure by the western arch and what is their foreknowledge of Loki",
+        "What brought the road-warden to the Hub",
         "The man in the lower Annex who hired the striker is still unnamed",
         "Tessvel Cairn awaits an answer about the personal offer"
       ]
     },
-    "beats": 2
+    "beats": 3
   },
   "clock": {
     "schemaVersion": 1,
     "day": 3,
-    "hour": 12,
+    "hour": 13,
     "realAnchor": null
   },
   "companions": [
@@ -862,17 +854,18 @@
       "history": [
         "[d3] Met on the bearing toward the Waygate on deep night of day 3. Offered warning about the eastern fork flood and the stone ford crossing, and shared their evening fire freely — no price, no trade, only the gift of knowing.",
         "[d3] Offered broth freely and warned of the water-problem moving downhill from the eastern fork. They carry news from the relay and move it faster — warning families before the wells run bad. Moving with purpose toward the spinward reach.",
-        "[d3] Shared broth and fire. Exchanged names—they told Loki theirs, and Loki gave their own. They carry word of the water-crisis downhill faster than any relay, warning families before the wells run bad. Moving spinward with purpose and gratitude given honestly."
+        "[d3] Shared broth and fire. Exchanged names—they told Loki theirs, and Loki gave their own. They carry word of the water-crisis downhill faster than any relay, warning families before the wells run bad. Moving spinward with purpose and gratitude given honestly.",
+        "[d3] Recognized Loki at the Hub crossing and greeted them by name. Noted that the Hub is not a place road-wardens usually pause. Observed Cy's presence with familiarity."
       ],
       "knownFacts": [
-        "The Quickwood Eaves gate is clear",
-        "The eastern fork of the March is swollen past normal crossing from the melt",
         "There is a stone ford two reaches spinward from the main pass — less direct but passable",
         "The upstream water is running wrong in colour and flow — the melt-season is pushing it fast downhill",
         "The relay carries this news, but the relay moves slow; the traveler moves faster",
         "A family three reaches spinward has kin in the city and sent word asking if the problem has reached the well-country yet — it hasn't, but will",
         "This person carries the crisis as their own burden—they do not only relay it, they warn against it with the weight of someone who knows what it means.",
-        "They ask questions that root for truth, not for advantage, and they recognize the same when they meet it."
+        "They ask questions that root for truth, not for advantage, and they recognize the same when they meet it.",
+        "The road-warden has traveled to the Hub crossing and paused there",
+        "They know Loki by sight and name after their brief meeting on the road"
       ],
       "skillsObserved": [
         "Reads travelers by bearing and gait",
@@ -886,12 +879,12 @@
       "sex": "unknown",
       "gender": "unknown",
       "pronouns": "they/them",
-      "statusNote": "Moving spinward along the road, carrying word to families waiting for news. Active and unhurried.",
+      "statusNote": "At the Hub crossing, speaking with Loki",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 3
       },
-      "met": 3
+      "met": 4
     }
   },
   "placeMemory": {
@@ -1279,7 +1272,7 @@
     "lastSharedReadAt": "2026-09-07T22:27:40.544Z",
     "lastTickWorldDay": 69,
     "lastCanonWorldDay": 69,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Vessin's unplanned detail — she was in the lower Annex this morning, and she saw the man",
@@ -4794,7 +4787,7 @@
     "wits": 4
   },
   "pendingSubPoints": 0,
-  "skillPoints": 2,
+  "skillPoints": 0,
   "discoveries": [],
   "codex": {
     "schemaVersion": 1,
@@ -5726,17 +5719,17 @@
     ]
   },
   "tendencies": {
-    "devotion": 1.5784273028616636,
-    "cerebral": 8.946706610811479,
-    "social": 14.8529907669067,
-    "strategic": 6.398982263546093,
-    "cautious": 6.7081201352910655,
-    "amorous": 19.424707335167707,
-    "generous": 2.342239222938819,
-    "ruthless": 0.8216064107288717,
-    "risky": 0.6714538227553052,
-    "patient": 0.18336196388932613,
-    "deception": 0.21344282366194153
+    "devotion": 1.538966620290122,
+    "cerebral": 8.723038945541191,
+    "social": 15.481665997734032,
+    "strategic": 6.23900770695744,
+    "cautious": 6.5404171319087885,
+    "amorous": 18.939089651788514,
+    "generous": 2.2836832423653486,
+    "ruthless": 0.8010662504606499,
+    "risky": 0.6546674771864225,
+    "patient": 0.17877791479209298,
+    "deception": 0.208106753070393
   },
   "aptitudes": [
     "silver_tongue",
@@ -5747,7 +5740,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 145,
+  "actionCount": 146,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -5810,6 +5803,136 @@
   "nativeGrantsVersion": 2,
   "reconcileVersion": 48,
   "gallery": [
+    {
+      "kind": "ability",
+      "prompt": "Veil Stroke",
+      "url": "https://image.pollinations.ai/prompt/Veil%20Stroke%3A%20Thin%20the%20veil%20to%20a%20membrane%20where%20a%20target%20is%20standing%20until%20something%20reaches%20through%20%E2%80%94%20a%20claw%20opens%20them%20shoulder%20to%20hip%2C%20a%20mouth%20takes%20a%20hand%2C%20acid%20comes%20through%20and%20does%20not%20stop%20eating.%20The%20Numinous%20first%20offense%2C%20and%20NOT%20the%20common%20one%3A%20most%20of%20the%20tradi%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20abyssal%20tradition%3A%20deep%20red%2C%20char-black%2C%20ember-orange%3B%20horned%20architecture%2C%20bargain-marks%2C%20appetite%20made%20stone%3B%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%3B%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20deep%20red%2C%20char-black%2C%20ember-orange%2C%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%2C%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack?width=1024&height=512&seed=2558&nologo=true",
+      "caption": "Veil Stroke",
+      "worldDay": 69,
+      "at": "2026-09-07T22:49:29.414Z",
+      "subjectKind": "ability",
+      "subjectId": "veil_stroke"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Raise the Alarm",
+      "url": "https://image.pollinations.ai/prompt/Raise%20the%20Alarm%3A%20Call%20for%20help%2C%20alert%2C%20rally%20whoever's%20near%20%E2%80%94%20defense%20by%20numbers.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=74341&nologo=true",
+      "caption": "Raise the Alarm",
+      "worldDay": 69,
+      "at": "2026-09-07T22:48:48.597Z",
+      "subjectKind": "ability",
+      "subjectId": "raise_alarm"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Struck Term",
+      "url": "https://image.pollinations.ai/prompt/Struck%20Term%3A%20Name%20a%20real%20exchange%20to%20someone%20who%20wants%20something%20%E2%80%94%20a%20passage%2C%20a%20name%2C%20a%20wound%20closed%20%E2%80%94%20with%20a%20real%20cost%20attached%3B%20if%20they%20accept%2C%20they%20get%20it%20and%20pay%2C%20and%20the%20price%20can%20be%20blood.%20The%20Bargainers'%20first%20offense%2C%20and%20the%20only%20attack%20on%20the%20circle%20you%20cannot%20ma%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20abyssal%20tradition%3A%20deep%20red%2C%20char-black%2C%20ember-orange%3B%20horned%20architecture%2C%20bargain-marks%2C%20appetite%20made%20stone%3B%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%3B%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20deep%20red%2C%20char-black%2C%20ember-orange%2C%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%2C%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack?width=1024&height=512&seed=77732&nologo=true",
+      "caption": "Struck Term",
+      "worldDay": 69,
+      "at": "2026-09-07T22:48:13.083Z",
+      "subjectKind": "ability",
+      "subjectId": "struck_term"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Read Hunger",
+      "url": "https://image.pollinations.ai/prompt/Read%20Hunger%3A%20The%20Abyssal%20Choir's%20first%20craft%2C%20and%20the%20reason%20they%20survive%20down%20there.%20You%20do%20not%20negotiate%20with%20an%20appetite%20you%20have%20not%20read.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20abyssal%20tradition%3A%20deep%20red%2C%20char-black%2C%20ember-orange%3B%20horned%20architecture%2C%20bargain-marks%2C%20appetite%20made%20stone%3B%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%3B%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20deep%20red%2C%20char-black%2C%20ember-orange%2C%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%2C%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack?width=1024&height=512&seed=28821&nologo=true",
+      "caption": "Read Hunger",
+      "worldDay": 69,
+      "at": "2026-09-07T22:47:41.492Z",
+      "subjectKind": "ability",
+      "subjectId": "the_read_hunger"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Offered Lesser",
+      "url": "https://image.pollinations.ai/prompt/Offered%20Lesser%3A%20The%20Abyssal%20Choir's%20turning-craft.%20Everything%20down%20there%20wants%20something%3B%20almost%20nothing%20insists%20on%20wanting%20THIS.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20abyssal%20tradition%3A%20deep%20red%2C%20char-black%2C%20ember-orange%3B%20horned%20architecture%2C%20bargain-marks%2C%20appetite%20made%20stone%3B%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%3B%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20deep%20red%2C%20char-black%2C%20ember-orange%2C%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%2C%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack?width=1024&height=512&seed=56109&nologo=true",
+      "caption": "Offered Lesser",
+      "worldDay": 69,
+      "at": "2026-09-07T22:46:51.786Z",
+      "subjectKind": "ability",
+      "subjectId": "offered_lesser"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Useful Absence",
+      "url": "https://image.pollinations.ai/prompt/Useful%20Absence%3A%20Make%20one%20object%20stop%20being%20noticed%20%E2%80%94%20a%20key%20on%20a%20hook%2C%20a%20door%20in%20a%20corridor%2C%20a%20name%20on%20a%20list%2C%20a%20crate%20in%20a%20yard.%20Present%2C%20unremarked%2C%20skipped%20by%20every%20casual%20accounting.%20The%20Veilwrights'%20hiding-craft%2C%20which%20hides%20by%20omission%20rather%20than%20cover.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20veilwright%20tradition%3A%20mirror-silver%2C%20shifting%20hues%2C%20nothing%20fixed%3B%20mirrors%2C%20masks%2C%20surfaces%20that%20aren't%20where%20they%20seem%3B%20reflected%20and%20doubled%20%E2%80%94%20you%20can't%20trust%20the%20source%3B%20beautiful%2C%20untrustworthy%2C%20nothing%20quite%20where%20it%20appears%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20mirror-silver%2C%20shifting%20hues%2C%20nothing%20fixed%2C%20reflected%20and%20doubled%2C%20beautiful%2C%20untrustworthy%2C%20nothing%20quite%20where%20it%20appears?width=1024&height=512&seed=52023&nologo=true",
+      "caption": "Useful Absence",
+      "worldDay": 69,
+      "at": "2026-09-07T22:46:26.238Z",
+      "subjectKind": "ability",
+      "subjectId": "useful_absence"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Wrong Wound",
+      "url": "https://image.pollinations.ai/prompt/Wrong%20Wound%3A%20Sell%20a%20feint%20with%20your%20whole%20body%20%E2%80%94%20a%20glance%2C%20a%20shifted%20weight%2C%20a%20half-drawn%20weapon%20on%20the%20wrong%20side%20%E2%80%94%20and%20their%20defence%20goes%20where%20you%20sent%20it%2C%20so%20your%20next%20blow%20lands%20unopposed.%20The%20Veilwrights'%20first%20offense%3A%20the%20wound%20is%20ordinary%2C%20the%20LIE%20put%20it%20there.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20veilwright%20tradition%3A%20mirror-silver%2C%20shifting%20hues%2C%20nothing%20fixed%3B%20mirrors%2C%20masks%2C%20surfaces%20that%20aren't%20where%20they%20seem%3B%20reflected%20and%20doubled%20%E2%80%94%20you%20can't%20trust%20the%20source%3B%20beautiful%2C%20untrustworthy%2C%20nothing%20quite%20where%20it%20appears%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20mirror-silver%2C%20shifting%20hues%2C%20nothing%20fixed%2C%20reflected%20and%20doubled%2C%20beautiful%2C%20untrustworthy%2C%20nothing%20quite%20where%20it%20appears?width=1024&height=512&seed=34818&nologo=true",
+      "caption": "Wrong Wound",
+      "worldDay": 69,
+      "at": "2026-09-07T22:45:16.759Z",
+      "subjectKind": "ability",
+      "subjectId": "wrong_wound"
+    },
+    {
+      "kind": "ability",
+      "prompt": "False Door",
+      "url": "https://image.pollinations.ai/prompt/False%20Door%3A%20Make%20a%20passage%20appear%20where%20one%20isn't%20%E2%80%94%20move%20through%20what%20appears%20to%20be%20solid.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20veilwright%20tradition%3A%20mirror-silver%2C%20shifting%20hues%2C%20nothing%20fixed%3B%20mirrors%2C%20masks%2C%20surfaces%20that%20aren't%20where%20they%20seem%3B%20reflected%20and%20doubled%20%E2%80%94%20you%20can't%20trust%20the%20source%3B%20beautiful%2C%20untrustworthy%2C%20nothing%20quite%20where%20it%20appears%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20mirror-silver%2C%20shifting%20hues%2C%20nothing%20fixed%2C%20reflected%20and%20doubled%2C%20beautiful%2C%20untrustworthy%2C%20nothing%20quite%20where%20it%20appears?width=1024&height=512&seed=66189&nologo=true",
+      "caption": "False Door",
+      "worldDay": 69,
+      "at": "2026-09-07T22:44:17.209Z",
+      "subjectKind": "ability",
+      "subjectId": "false_door"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Kept Dark",
+      "url": "https://image.pollinations.ai/prompt/Kept%20Dark%3A%20%E2%9B%94%20HUSH%20LENDS%20YOU%20ITS%20OWN%20CONCEALMENT.%20For%20one%20scene%20you%20and%20what%20you%20carry%20read%20as%20ABSENCE%20rather%20than%20presence.%20%E2%9A%A0%EF%B8%8F%20The%20dark%20does%20not%20merely%20hide%20you%20%E2%80%94%20IT%20DECLINES%20TO%20HAVE%20CONTAINED%20YOU%20AT%20ALL.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20umbral%20tradition%3A%20near-black%2C%20cold%20indigo%2C%20faint%20bioluminescent%20teal%3B%20wet%20stone%2C%20unlit%20passages%2C%20soft%20cloth%3B%20no%20light%20source%20%E2%80%94%20form%20implied%20by%20touch%2C%20edges%20felt%20not%20lit%3B%20soft-footed%2C%20sensed-in-the-dark%2C%20quiet%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20near-black%2C%20cold%20indigo%2C%20faint%20bioluminescent%20teal%2C%20no%20light%20source%2C%20soft-footed%2C%20sensed-in-the-dark%2C%20quiet?width=1024&height=512&seed=24986&nologo=true",
+      "caption": "Kept Dark",
+      "worldDay": 69,
+      "at": "2026-09-07T22:43:08.232Z",
+      "subjectKind": "ability",
+      "subjectId": "the_kept_dark"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Shielding Word",
+      "url": "https://image.pollinations.ai/prompt/Shielding%20Word%3A%20Interpose%20a%20spoken%20certainty%20between%20harm%20and%20a%20person%20%E2%80%94%20the%20Seraphic%20ward.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20seraphic%20tradition%3A%20gold%2C%20white%2C%20tier-on-tier%20brightness%3B%20tiered%20spires%2C%20choral%20height%2C%20mercy-from-above%3B%20radiant%20from%20above%2C%20unbearable%20choral%20certainty%3B%20administered%20mercy%2C%20height%2C%20certainty%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20gold%2C%20white%2C%20tier-on-tier%20brightness%2C%20radiant%20from%20above%2C%20unbearable%20choral%20certainty%2C%20administered%20mercy%2C%20height%2C%20certainty?width=1024&height=512&seed=98483&nologo=true",
+      "caption": "Shielding Word",
+      "worldDay": 69,
+      "at": "2026-09-07T22:42:16.166Z",
+      "subjectKind": "ability",
+      "subjectId": "shielding_word"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Swallowed Word",
+      "url": "https://image.pollinations.ai/prompt/Swallowed%20Word%3A%20%E2%9B%94%20TAKE%20AWAY%20WHAT%20SOUND%20TRAVELS%20THROUGH.%20A%20voice%20needs%20air%20to%20move%20it%3B%20the%20void%20has%20none%2C%20and%20an%20Unlit%20can%20put%20a%20piece%20of%20that%20back.%20%E2%9A%A0%EF%B8%8F%20They%20speak%20and%20the%20sound%20goes%20nowhere%20%E2%80%94%20not%20muffled%2C%20not%20quietened%3A%20THERE%20IS%20NOTHING%20FOR%20IT%20TO%20CROSS.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20umbral%20tradition%3A%20near-black%2C%20cold%20indigo%2C%20faint%20bioluminescent%20teal%3B%20wet%20stone%2C%20unlit%20passages%2C%20soft%20cloth%3B%20no%20light%20source%20%E2%80%94%20form%20implied%20by%20touch%2C%20edges%20felt%20not%20lit%3B%20soft-footed%2C%20sensed-in-the-dark%2C%20quiet%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20near-black%2C%20cold%20indigo%2C%20faint%20bioluminescent%20teal%2C%20no%20light%20source%2C%20soft-footed%2C%20sensed-in-the-dark%2C%20quiet?width=1024&height=512&seed=93608&nologo=true",
+      "caption": "Swallowed Word",
+      "worldDay": 69,
+      "at": "2026-09-07T22:41:20.902Z",
+      "subjectKind": "ability",
+      "subjectId": "swallowed_word"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Made Truth",
+      "url": "https://image.pollinations.ai/prompt/Made%20Truth%3A%20Make%20a%20reality%20so%20complete%20it%20functions%20as%20real%20%E2%80%94%20not%20illusion%2C%20a%20working%20alternative.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20veilwright%20tradition%3A%20mirror-silver%2C%20shifting%20hues%2C%20nothing%20fixed%3B%20mirrors%2C%20masks%2C%20surfaces%20that%20aren't%20where%20they%20seem%3B%20reflected%20and%20doubled%20%E2%80%94%20you%20can't%20trust%20the%20source%3B%20beautiful%2C%20untrustworthy%2C%20nothing%20quite%20where%20it%20appears%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20mirror-silver%2C%20shifting%20hues%2C%20nothing%20fixed%2C%20reflected%20and%20doubled%2C%20beautiful%2C%20untrustworthy%2C%20nothing%20quite%20where%20it%20appears?width=1024&height=512&seed=16764&nologo=true",
+      "caption": "Made Truth",
+      "worldDay": 69,
+      "at": "2026-09-07T22:40:07.399Z",
+      "subjectKind": "ability",
+      "subjectId": "made_truth"
+    },
+    {
+      "kind": "npc",
+      "prompt": "Vessin of the Long Bough, cinematic still, a held beat",
+      "url": "https://image.pollinations.ai/prompt/Vessin%20of%20the%20Long%20Bough%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=3346&nologo=true",
+      "caption": "Vessin of the Long Bough",
+      "worldDay": 69,
+      "at": "2026-09-07T22:37:14.389Z",
+      "subjectKind": "moment",
+      "subjectId": "solo:cap:vessin of the long bough"
+    },
     {
       "kind": "beast",
       "prompt": "A low cloud of orange sparks that drifts like it's thinking, settling on anything that will catch. Blazeborn radiance bled loose and gone stupid.",
@@ -6140,8 +6263,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788820136436,
-  "rev": 540,
+  "updatedAt": 1788821564169,
+  "rev": 562,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -7003,7 +7126,7 @@
     "the_gearlands": 33,
     "umbral_depths": 54,
     "the_quickwood": 101,
-    "the_center": 7
+    "the_center": 8
   },
   "opLossPending": false,
   "sessions": [
@@ -7074,10 +7197,10 @@
     {
       "id": "sess-9",
       "startedAt": "2026-09-07T19:42:14.907Z",
-      "lastAt": "2026-09-07T22:28:56.423Z",
+      "lastAt": "2026-09-07T22:52:44.149Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 13
+      "beats": 14
     }
   ],
   "establishedFacts": [
@@ -7121,17 +7244,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 172,
-    "choices": 172,
+    "sceneSummary": 173,
+    "choices": 173,
     "characterDeltas": 69,
-    "scene": 172,
+    "scene": 173,
     "placeUpdates": 21,
     "codexUpdates": 99,
     "timeOps": 160,
     "offer": 14,
     "generateRequest": 6,
-    "sceneEnded": 49,
-    "npcUpdates": 141,
+    "sceneEnded": 50,
+    "npcUpdates": 142,
     "moveTo": 6,
     "gambitApt": 14,
     "deeds": 2,
@@ -7145,7 +7268,7 @@
     "imagePrompt": 5,
     "scene_ended": 1
   },
-  "_opTurns": 172,
+  "_opTurns": 173,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1.75
@@ -7607,30 +7730,30 @@
     "the-taken-from-the-city: no-such-quest"
   ],
   "_suggestCache": {
-    "level": 6,
+    "level": 7,
     "picks": [
       {
-        "abilityId": "ordinary_face",
-        "why": "Appetite-Sense is 8/10 of the way there, and this character lives in social infiltration — but right now they can only *talk* their way through a room (Harmonic Voice, Better Story, Falsecraft); Ordinary Face lets them *be* the person who belongs there before they open their mouth, completing the deceptive social loop they already play constantly.",
+        "abilityId": "appetite_sense",
+        "why": "This is the craft they declared they were building toward, now at 9/10 progress and fully reachable — it reads the true want under the presented want, which is the exact gap between their current social/cerebral kit (See the Made Thing, Descent, Prism Sight) and the deeper layer of every room they walk into. The aspiration is done; this completes it.",
         "fit": "aspiration"
       },
       {
+        "abilityId": "the_read_want",
+        "why": "If they split their two points, Read Want pairs with Appetite-Sense to give them a layered want-reading suite — Appetite-Sense for the deep hunger, Read Want for the surface request in active conversation. For a charmer-orator whose highest-use crafts are all about reading situations (See the Made Thing 28, Prism Sight 10), this deepens the signature they actually play.",
+        "fit": "strength"
+      },
+      {
         "abilityId": "calm_word",
-        "why": "With silver_tongue, orator, and charmer all stamped into their identity, and amorous/social as the dominant behavioural registers, the one gap in their people-craft is de-escalation — they can charm, deceive, and orate, but they have no way to pull a moment back from the edge of violence without relying on the same influence tools; Calming Word is a distinct, portable mercy that fills exactly that gap.",
+        "why": "This character has no de-escalation tool — they can misdirect, veil, and story their way through rooms, but when a moment tips toward violence they have nothing to pull it back. Calm Word fills that gap cleanly, and for someone this amorous and social it will come up constantly.",
         "fit": "gap"
       },
       {
-        "abilityId": "useful_absence",
-        "why": "They own Misdirect and False Target but almost never reach for them — what they actually *do* is make things disappear from notice (Falsecraft, Prism Sight, Umbracraft all point the same direction); Useful Absence is the object-level version of the invisibility instinct they already apply to people and realities, and it deepens the stealth-of-perception signature they genuinely use.",
-        "fit": "synergy"
-      },
-      {
-        "abilityId": "blend_in",
-        "why": "A cerebral-social character who is already misdirecting, falsecrafting, and voice-charming their way through encounters has no crowd-level concealment — Blend In is the passive anchor that makes all their active social tools safer to deploy, and it costs nothing in discipline (no new method to learn) while covering the one moment where they're currently exposed: a room full of people who haven't been individually worked yet.",
+        "abilityId": "ordinary_face",
+        "why": "They run a deep illusion/influence kit (Misdirect, Falsecraft, Maintained Veil, False Target) but have no way to simply become the person a place wouldn't remark on — Ordinary Face is the missing entry-craft in that family, cheap at 1pt, and a natural reach for a cautious social operator who prefers not to be the most interesting person in the room.",
         "fit": "gap"
       }
     ],
-    "note": "Two of these (Ordinary Face, Blend In) layer into the Appetite-Sense aspiration's infiltration core; Calming Word and Useful Absence fill the one crack in an otherwise formidable social-deception kit — the inability to *stop* something rather than redirect it."
+    "note": "With exactly 2pt, the clearest path is Appetite-Sense alone (fulfilling the stated aspiration outright) — or a 1+1 split if Appetite-Sense can wait one more level. Either way, the aspiration should come first."
   },
   "worldEvents": [],
   "authorEdits": [
@@ -7652,7 +7775,19 @@
     "the_descent_path": "https://image.pollinations.ai/prompt/The%20Descent%20Path%3A%20Find%20or%20make%20the%20passage%20to%20the%20below%20%E2%80%94%20the%20literal%20underground%2C%20the%20hidden%20layer%2C%20the%20place%20others%20don't%20know%20to%20reach.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20abyssal%20tradition%3A%20deep%20red%2C%20char-black%2C%20ember-orange%3B%20horned%20architecture%2C%20bargain-marks%2C%20appetite%20made%20stone%3B%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%3B%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=26427&nologo=true",
     "quiet_step": "https://image.pollinations.ai/prompt/Quiet%20Step%3A%20Move%20unseen%20and%20unheard%3B%20scout%2C%20shadow%2C%20and%20slip%20away.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20umbral%20tradition%3A%20near-black%2C%20cold%20indigo%2C%20faint%20bioluminescent%20teal%3B%20wet%20stone%2C%20unlit%20passages%2C%20soft%20cloth%3B%20no%20light%20source%20%E2%80%94%20form%20implied%20by%20touch%2C%20edges%20felt%20not%20lit%3B%20soft-footed%2C%20sensed-in-the-dark%2C%20quiet%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20near-black%2C%20cold%20indigo%2C%20faint%20bioluminescent%20teal%2C%20no%20light%20source%2C%20soft-footed%2C%20sensed-in-the-dark%2C%20quiet?width=1024&height=512&seed=9306&nologo=true",
     "wayfinding": "https://image.pollinations.ai/prompt/Wayfinding%3A%20Read%20trails%2C%20weather-sign%2C%20and%20country%20to%20track%2C%20navigate%2C%20and%20estimate%20what%20passed%20and%20when.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20horizon%20tradition%3A%20road-dust%2C%20open-sky%20blue%2C%20tent-canvas%3B%20tents%2C%20roads%2C%20distance%20itself%20as%20home%3B%20wide%20horizon%20light%2C%20always-moving%3B%20no%20fixed%20anything%20%E2%80%94%20distance%20as%20home%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20road-dust%2C%20open-sky%20blue%2C%20tent-canvas%2C%20wide%20horizon%20light%2C%20always-moving%2C%20no%20fixed%20anything?width=1024&height=512&seed=47875&nologo=true",
-    "rivercraft": "https://image.pollinations.ai/prompt/Rivercraft%3A%20Boats%2C%20currents%2C%20crossings%2C%20and%20weather-sense%20%E2%80%94%20the%20water-roads%20of%20the%20valley%20and%20what%20moves%20on%20them.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20horizon%20tradition%3A%20road-dust%2C%20open-sky%20blue%2C%20tent-canvas%3B%20tents%2C%20roads%2C%20distance%20itself%20as%20home%3B%20wide%20horizon%20light%2C%20always-moving%3B%20no%20fixed%20anything%20%E2%80%94%20distance%20as%20home%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20road-dust%2C%20open-sky%20blue%2C%20tent-canvas%2C%20wide%20horizon%20light%2C%20always-moving%2C%20no%20fixed%20anything?width=1024&height=512&seed=98519&nologo=true"
+    "rivercraft": "https://image.pollinations.ai/prompt/Rivercraft%3A%20Boats%2C%20currents%2C%20crossings%2C%20and%20weather-sense%20%E2%80%94%20the%20water-roads%20of%20the%20valley%20and%20what%20moves%20on%20them.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20horizon%20tradition%3A%20road-dust%2C%20open-sky%20blue%2C%20tent-canvas%3B%20tents%2C%20roads%2C%20distance%20itself%20as%20home%3B%20wide%20horizon%20light%2C%20always-moving%3B%20no%20fixed%20anything%20%E2%80%94%20distance%20as%20home%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20road-dust%2C%20open-sky%20blue%2C%20tent-canvas%2C%20wide%20horizon%20light%2C%20always-moving%2C%20no%20fixed%20anything?width=1024&height=512&seed=98519&nologo=true",
+    "made_truth": "https://image.pollinations.ai/prompt/Made%20Truth%3A%20Make%20a%20reality%20so%20complete%20it%20functions%20as%20real%20%E2%80%94%20not%20illusion%2C%20a%20working%20alternative.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20veilwright%20tradition%3A%20mirror-silver%2C%20shifting%20hues%2C%20nothing%20fixed%3B%20mirrors%2C%20masks%2C%20surfaces%20that%20aren't%20where%20they%20seem%3B%20reflected%20and%20doubled%20%E2%80%94%20you%20can't%20trust%20the%20source%3B%20beautiful%2C%20untrustworthy%2C%20nothing%20quite%20where%20it%20appears%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20mirror-silver%2C%20shifting%20hues%2C%20nothing%20fixed%2C%20reflected%20and%20doubled%2C%20beautiful%2C%20untrustworthy%2C%20nothing%20quite%20where%20it%20appears?width=1024&height=512&seed=16764&nologo=true",
+    "swallowed_word": "https://image.pollinations.ai/prompt/Swallowed%20Word%3A%20%E2%9B%94%20TAKE%20AWAY%20WHAT%20SOUND%20TRAVELS%20THROUGH.%20A%20voice%20needs%20air%20to%20move%20it%3B%20the%20void%20has%20none%2C%20and%20an%20Unlit%20can%20put%20a%20piece%20of%20that%20back.%20%E2%9A%A0%EF%B8%8F%20They%20speak%20and%20the%20sound%20goes%20nowhere%20%E2%80%94%20not%20muffled%2C%20not%20quietened%3A%20THERE%20IS%20NOTHING%20FOR%20IT%20TO%20CROSS.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20umbral%20tradition%3A%20near-black%2C%20cold%20indigo%2C%20faint%20bioluminescent%20teal%3B%20wet%20stone%2C%20unlit%20passages%2C%20soft%20cloth%3B%20no%20light%20source%20%E2%80%94%20form%20implied%20by%20touch%2C%20edges%20felt%20not%20lit%3B%20soft-footed%2C%20sensed-in-the-dark%2C%20quiet%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20near-black%2C%20cold%20indigo%2C%20faint%20bioluminescent%20teal%2C%20no%20light%20source%2C%20soft-footed%2C%20sensed-in-the-dark%2C%20quiet?width=1024&height=512&seed=93608&nologo=true",
+    "shielding_word": "https://image.pollinations.ai/prompt/Shielding%20Word%3A%20Interpose%20a%20spoken%20certainty%20between%20harm%20and%20a%20person%20%E2%80%94%20the%20Seraphic%20ward.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20seraphic%20tradition%3A%20gold%2C%20white%2C%20tier-on-tier%20brightness%3B%20tiered%20spires%2C%20choral%20height%2C%20mercy-from-above%3B%20radiant%20from%20above%2C%20unbearable%20choral%20certainty%3B%20administered%20mercy%2C%20height%2C%20certainty%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20gold%2C%20white%2C%20tier-on-tier%20brightness%2C%20radiant%20from%20above%2C%20unbearable%20choral%20certainty%2C%20administered%20mercy%2C%20height%2C%20certainty?width=1024&height=512&seed=98483&nologo=true",
+    "the_kept_dark": "https://image.pollinations.ai/prompt/Kept%20Dark%3A%20%E2%9B%94%20HUSH%20LENDS%20YOU%20ITS%20OWN%20CONCEALMENT.%20For%20one%20scene%20you%20and%20what%20you%20carry%20read%20as%20ABSENCE%20rather%20than%20presence.%20%E2%9A%A0%EF%B8%8F%20The%20dark%20does%20not%20merely%20hide%20you%20%E2%80%94%20IT%20DECLINES%20TO%20HAVE%20CONTAINED%20YOU%20AT%20ALL.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20umbral%20tradition%3A%20near-black%2C%20cold%20indigo%2C%20faint%20bioluminescent%20teal%3B%20wet%20stone%2C%20unlit%20passages%2C%20soft%20cloth%3B%20no%20light%20source%20%E2%80%94%20form%20implied%20by%20touch%2C%20edges%20felt%20not%20lit%3B%20soft-footed%2C%20sensed-in-the-dark%2C%20quiet%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20near-black%2C%20cold%20indigo%2C%20faint%20bioluminescent%20teal%2C%20no%20light%20source%2C%20soft-footed%2C%20sensed-in-the-dark%2C%20quiet?width=1024&height=512&seed=24986&nologo=true",
+    "false_door": "https://image.pollinations.ai/prompt/False%20Door%3A%20Make%20a%20passage%20appear%20where%20one%20isn't%20%E2%80%94%20move%20through%20what%20appears%20to%20be%20solid.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20veilwright%20tradition%3A%20mirror-silver%2C%20shifting%20hues%2C%20nothing%20fixed%3B%20mirrors%2C%20masks%2C%20surfaces%20that%20aren't%20where%20they%20seem%3B%20reflected%20and%20doubled%20%E2%80%94%20you%20can't%20trust%20the%20source%3B%20beautiful%2C%20untrustworthy%2C%20nothing%20quite%20where%20it%20appears%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20mirror-silver%2C%20shifting%20hues%2C%20nothing%20fixed%2C%20reflected%20and%20doubled%2C%20beautiful%2C%20untrustworthy%2C%20nothing%20quite%20where%20it%20appears?width=1024&height=512&seed=66189&nologo=true",
+    "wrong_wound": "https://image.pollinations.ai/prompt/Wrong%20Wound%3A%20Sell%20a%20feint%20with%20your%20whole%20body%20%E2%80%94%20a%20glance%2C%20a%20shifted%20weight%2C%20a%20half-drawn%20weapon%20on%20the%20wrong%20side%20%E2%80%94%20and%20their%20defence%20goes%20where%20you%20sent%20it%2C%20so%20your%20next%20blow%20lands%20unopposed.%20The%20Veilwrights'%20first%20offense%3A%20the%20wound%20is%20ordinary%2C%20the%20LIE%20put%20it%20there.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20veilwright%20tradition%3A%20mirror-silver%2C%20shifting%20hues%2C%20nothing%20fixed%3B%20mirrors%2C%20masks%2C%20surfaces%20that%20aren't%20where%20they%20seem%3B%20reflected%20and%20doubled%20%E2%80%94%20you%20can't%20trust%20the%20source%3B%20beautiful%2C%20untrustworthy%2C%20nothing%20quite%20where%20it%20appears%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20mirror-silver%2C%20shifting%20hues%2C%20nothing%20fixed%2C%20reflected%20and%20doubled%2C%20beautiful%2C%20untrustworthy%2C%20nothing%20quite%20where%20it%20appears?width=1024&height=512&seed=34818&nologo=true",
+    "useful_absence": "https://image.pollinations.ai/prompt/Useful%20Absence%3A%20Make%20one%20object%20stop%20being%20noticed%20%E2%80%94%20a%20key%20on%20a%20hook%2C%20a%20door%20in%20a%20corridor%2C%20a%20name%20on%20a%20list%2C%20a%20crate%20in%20a%20yard.%20Present%2C%20unremarked%2C%20skipped%20by%20every%20casual%20accounting.%20The%20Veilwrights'%20hiding-craft%2C%20which%20hides%20by%20omission%20rather%20than%20cover.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20veilwright%20tradition%3A%20mirror-silver%2C%20shifting%20hues%2C%20nothing%20fixed%3B%20mirrors%2C%20masks%2C%20surfaces%20that%20aren't%20where%20they%20seem%3B%20reflected%20and%20doubled%20%E2%80%94%20you%20can't%20trust%20the%20source%3B%20beautiful%2C%20untrustworthy%2C%20nothing%20quite%20where%20it%20appears%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20mirror-silver%2C%20shifting%20hues%2C%20nothing%20fixed%2C%20reflected%20and%20doubled%2C%20beautiful%2C%20untrustworthy%2C%20nothing%20quite%20where%20it%20appears?width=1024&height=512&seed=52023&nologo=true",
+    "offered_lesser": "https://image.pollinations.ai/prompt/Offered%20Lesser%3A%20The%20Abyssal%20Choir's%20turning-craft.%20Everything%20down%20there%20wants%20something%3B%20almost%20nothing%20insists%20on%20wanting%20THIS.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20abyssal%20tradition%3A%20deep%20red%2C%20char-black%2C%20ember-orange%3B%20horned%20architecture%2C%20bargain-marks%2C%20appetite%20made%20stone%3B%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%3B%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20deep%20red%2C%20char-black%2C%20ember-orange%2C%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%2C%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack?width=1024&height=512&seed=56109&nologo=true",
+    "the_read_hunger": "https://image.pollinations.ai/prompt/Read%20Hunger%3A%20The%20Abyssal%20Choir's%20first%20craft%2C%20and%20the%20reason%20they%20survive%20down%20there.%20You%20do%20not%20negotiate%20with%20an%20appetite%20you%20have%20not%20read.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20abyssal%20tradition%3A%20deep%20red%2C%20char-black%2C%20ember-orange%3B%20horned%20architecture%2C%20bargain-marks%2C%20appetite%20made%20stone%3B%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%3B%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20deep%20red%2C%20char-black%2C%20ember-orange%2C%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%2C%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack?width=1024&height=512&seed=28821&nologo=true",
+    "struck_term": "https://image.pollinations.ai/prompt/Struck%20Term%3A%20Name%20a%20real%20exchange%20to%20someone%20who%20wants%20something%20%E2%80%94%20a%20passage%2C%20a%20name%2C%20a%20wound%20closed%20%E2%80%94%20with%20a%20real%20cost%20attached%3B%20if%20they%20accept%2C%20they%20get%20it%20and%20pay%2C%20and%20the%20price%20can%20be%20blood.%20The%20Bargainers'%20first%20offense%2C%20and%20the%20only%20attack%20on%20the%20circle%20you%20cannot%20ma%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20abyssal%20tradition%3A%20deep%20red%2C%20char-black%2C%20ember-orange%3B%20horned%20architecture%2C%20bargain-marks%2C%20appetite%20made%20stone%3B%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%3B%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20deep%20red%2C%20char-black%2C%20ember-orange%2C%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%2C%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack?width=1024&height=512&seed=77732&nologo=true",
+    "raise_alarm": "https://image.pollinations.ai/prompt/Raise%20the%20Alarm%3A%20Call%20for%20help%2C%20alert%2C%20rally%20whoever's%20near%20%E2%80%94%20defense%20by%20numbers.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=74341&nologo=true",
+    "veil_stroke": "https://image.pollinations.ai/prompt/Veil%20Stroke%3A%20Thin%20the%20veil%20to%20a%20membrane%20where%20a%20target%20is%20standing%20until%20something%20reaches%20through%20%E2%80%94%20a%20claw%20opens%20them%20shoulder%20to%20hip%2C%20a%20mouth%20takes%20a%20hand%2C%20acid%20comes%20through%20and%20does%20not%20stop%20eating.%20The%20Numinous%20first%20offense%2C%20and%20NOT%20the%20common%20one%3A%20most%20of%20the%20tradi%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20abyssal%20tradition%3A%20deep%20red%2C%20char-black%2C%20ember-orange%3B%20horned%20architecture%2C%20bargain-marks%2C%20appetite%20made%20stone%3B%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%3B%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20deep%20red%2C%20char-black%2C%20ember-orange%2C%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%2C%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack?width=1024&height=512&seed=2558&nologo=true"
   },
   "portraitPinned": true,
   "placeEdges": {
@@ -7701,7 +7836,7 @@
     "prepare": 1,
     "careful": 2,
     "woo": 1,
-    "rapport": 1,
+    "rapport": 2,
     "retreat": 1
   },
   "aptitudeEarnCount": {
@@ -7782,5 +7917,28 @@
         "|     property 'activeEncounter' -> object with constructor 'Object'"
       ]
     }
+  ],
+  "sharedSceneId": null,
+  "promptCompositions": {},
+  "likeness": {
+    "moment:solo:cap:vessin of the long bough": {
+      "keeps": [
+        {
+          "url": "https://image.pollinations.ai/prompt/Vessin%20of%20the%20Long%20Bough%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=3346&nologo=true",
+          "prompt": "Vessin of the Long Bough, cinematic still, a held beat",
+          "note": null,
+          "seedKey": "solo:cap:vessin of the long bough#r1",
+          "at": 69
+        }
+      ]
+    }
+  },
+  "sceneImages": {
+    "solo:cap:vessin of the long bough": "https://image.pollinations.ai/prompt/Vessin%20of%20the%20Long%20Bough%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=3346&nologo=true"
+  },
+  "boostedCrafts": [
+    "veil_stroke",
+    "better_story",
+    "wrong_reality"
   ]
 }

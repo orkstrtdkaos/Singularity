@@ -130,7 +130,11 @@ export function mergeBeat(scene, beat) {
     label: smartClamp(String(beat.label || ""), 120), // SNG-152
     degree: beat.degree || null,
     summary: smartClamp(String(beat.summary || ""), 200), // SNG-152
-    at: beat.at
+    at: beat.at,
+    // ⛔ THE KIND OF A BEAT MUST SURVIVE THE MERGE. This whitelist is right — it is what keeps another player's prose
+    // clamped — but it silently dropped `unheard`, so an intent the party did not follow arrived in the log looking
+    // like any other action and nothing downstream could tell them apart (SPEC_intent_heard_and_unheard §2).
+    ...(beat.unheard ? { unheard: true } : {}),
   }].slice(-CAPS.beats);
   return { ...scene, beats, turn: nextTurn(scene, beat.by), updatedAt: beat.at };
 }

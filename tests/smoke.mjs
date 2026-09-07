@@ -12,7 +12,7 @@ import { newClock, readClock, advanceClock, getWorldEpoch, absoluteWorldDay, wor
 import { companionBonus, companionsForGM, activeCompanions, partnerAdjacentNpcs, noteCompanionWitnessed, companionMemoryForGM } from "../engine/companions.js";
 import { applyQuestUpdates, questsForGM, slugify, resolveQuest, dedupeQuests, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, threadTouched, traditionArcForGM, npcQuestsForGM, practicedTraditions, traditionArcBeat, structuredQuestRecord, normalizeProse } from "../engine/quests.js";
 import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, touchSession, endSession, sessionLog, buildSessionPrompt, authorshipStats, crossCharacterAuthorship } from "../engine/chronicle.js";
-import { sanitizeScene, buildTurnContext, sanitizeIntent, narrativeRegister, ratingRegister, renderSceneHistory, tierParts, bluntnessDirective, suggestNextCrafts, generateBio } from "../engine/gm.js";
+import { SALVAGEABLE_OPS, sanitizeScene, buildTurnContext, sanitizeIntent, narrativeRegister, ratingRegister, renderSceneHistory, tierParts, bluntnessDirective, suggestNextCrafts, generateBio } from "../engine/gm.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, findExistingNpc, prettifyNpcName, relationshipBand, advanceBond, relationshipLabel, isPartnerAdjacent, knownPeopleAt, npcPortraitTier, backfillNpcGender } from "../engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
 import { initWorldState, runWorldTick, advanceGeneratedOffscreen, applyWantOutcome, offscreenPopulation, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, worldArcsForGM, effectiveEpicStatus, applyEpicArcPush, resolveEpicClash, applyEpicClashOutcome } from "../engine/worldtick.js";
@@ -10567,7 +10567,10 @@ await (async () => {
   check("SNG-251 §2c: gm.js no longer states the blanket 'does NOT grant new power' ban that left earned power nowhere to live",
     !/does NOT grant new power/.test(gmSrc251) && /no UNEARNED power/.test(gmSrc251));
   check("SNG-251: the op TRIPLE agrees — prompt contract, handler, and salvageable vocab all know deriveItem (seam_op_vocab_triples)",
-    /"deriveItem":/.test(gmSrc251) && /"deriveItem"\]/.test(gmSrc251) && /deriveItem\(character, op,/.test(appSrc251));
+    // ⚠️ MEMBERSHIP, NOT POSITION. This read `/"deriveItem"\]/` — true only while deriveItem happened to be LAST in
+    // SALVAGEABLE_OPS, so appending a new op broke a statement that was still true. Importing the constant asserts the
+    // real property and is stronger besides: a mention in a comment could satisfy the regex, and cannot satisfy this.
+    /"deriveItem":/.test(gmSrc251) && SALVAGEABLE_OPS.includes("deriveItem") && /deriveItem\(character, op,/.test(appSrc251));
 
   // §2b — the image re-mints. Half of what Erik reported.
   const evolving = { inventory: [{ name: "Spear", kind: "weapon", qty: 1, description: "A plain ash spear.", image: "http://old/pic.png" }] };

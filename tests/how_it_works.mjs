@@ -4827,7 +4827,7 @@ console.log("\n── §70 · per-rank source · the revised kill cost · ongoin
   // growthFor as CONTEXT for what it proposes. The derived count is a proxy — the hard half is the declared builds: field
   // — and a new unbuilt spec raises the proxy without anything being stale. The population grew; the baseline moves with
   // it, and the reason is written here rather than the number quietly nudged.
-  const BASELINE_DERIVED = 11;   // 2026-09-07 (10→11): SPEC_hold_costs_crafts_and_hiring.md — Aevi, spec_ready, naming addFeature/improveHolding/setCrew/setGarrison as the exports it prices; BUILT the same morning (§128–§130) — flips to built and comes down when she marks it   // 2026-09-06 (12→10): Aevi flipped SPEC_holdings_screen, SPEC_npc_presence_cadence and DESIGN_codex_admission_and_summaries to `built` — the ratchet tightens to what is measured   // 2026-09-06 (11→12): SPEC_holdings_screen.md — Aevi, landed today, UNBUILT (CCode round 2), naming ensureHoldingImage/renameHolding/holdingSentence as the exports it asks to CHANGE — the next landing builds it and the count comes back down   // 2026-09-06 (10→11): SPEC_codex_summaries_and_merging.md — Aevi, landed today, UNBUILT, naming codex readers as context for the summaries it asks for   // 2026-09-06 (9→10): SPEC_npc_presence_cadence.md — Aevi, landed today, UNBUILT, naming npcsPresent/attentionByTier/worldRoster as context for the roster it asks for; the population grew, nothing went stale, and `declaredStale` is still 0   // 2026-09-05 (5): SPEC_quest_snapshot.md landed unbuilt, naming ringDistance/meaningDensity as context   // (4): SPEC_companion_becomes_person.md, same case   // (3): SPEC_party_mode_phase2.md, same case   // (2): four more specs landed unbuilt with the brief   // measured 2026-09-04 after the eight were marked: the still-open specs that name existing exports as context
+  const BASELINE_DERIVED = 12;   // 2026-09-07 (11→12): SPEC_intent_heard_and_unheard.md — Aevi, spec_ready, naming stateIntent/growBond as the exports it answers; BUILT the same day (§133) — flips to built and comes down when she marks it   // 2026-09-07 (10→11): SPEC_hold_costs_crafts_and_hiring.md — Aevi, spec_ready, naming addFeature/improveHolding/setCrew/setGarrison as the exports it prices; BUILT the same morning (§128–§130) — flips to built and comes down when she marks it   // 2026-09-06 (12→10): Aevi flipped SPEC_holdings_screen, SPEC_npc_presence_cadence and DESIGN_codex_admission_and_summaries to `built` — the ratchet tightens to what is measured   // 2026-09-06 (11→12): SPEC_holdings_screen.md — Aevi, landed today, UNBUILT (CCode round 2), naming ensureHoldingImage/renameHolding/holdingSentence as the exports it asks to CHANGE — the next landing builds it and the count comes back down   // 2026-09-06 (10→11): SPEC_codex_summaries_and_merging.md — Aevi, landed today, UNBUILT, naming codex readers as context for the summaries it asks for   // 2026-09-06 (9→10): SPEC_npc_presence_cadence.md — Aevi, landed today, UNBUILT, naming npcsPresent/attentionByTier/worldRoster as context for the roster it asks for; the population grew, nothing went stale, and `declaredStale` is still 0   // 2026-09-05 (5): SPEC_quest_snapshot.md landed unbuilt, naming ringDistance/meaningDensity as context   // (4): SPEC_companion_becomes_person.md, same case   // (3): SPEC_party_mode_phase2.md, same case   // (2): four more specs landed unbuilt with the brief   // measured 2026-09-04 after the eight were marked: the still-open specs that name existing exports as context
   check(`§70: ratchet — \`spec_ready\` specs naming an existing engine export = ${derivedStale.length} (baseline ${BASELINE_DERIVED}) — may only go DOWN`,
     derivedStale.length <= BASELINE_DERIVED, derivedStale.map(r => `${r.f}:${r.named.slice(0, 3).join(",")}`).join(" · "));
   const built70 = rows70.filter(r => r.status === "built" || r.status === "part_built");
@@ -8715,7 +8715,7 @@ console.log("\n── §132 · the fight belongs to everyone, and the leader nev
     ["a leader, taken and passed", /data-pp-take|data-pp-pass/],
     ["an intent, stated and restated", /stateIntent\(sc, me, text\)/],
     ["joining and leaving the shared fight", /joinFight\(sc, me\)[\s\S]{0,400}leaveFight\(sc, me\)/],
-    ["the straggler's three choices", /data-pp-call=\"wait\"[\s\S]{0,600}data-pp-call=\"skip\"[\s\S]{0,600}data-pp-call=\"gm\"/],
+    ["the straggler's three choices", /data-pp-call=\"wait\"[\s\S]{0,600}data-pp-call=\"guard\"[\s\S]{0,600}data-pp-call=\"gm\"/],   // ⚠️ the ENGINE's words — "skip" was mine, and the button was dead (§133)
     ["the lock, at the one declaration choke point", /function sbDeclare[\s\S]{0,1600}lockMyDeclaration\(/],
     ["the round advancing when all have spoken", /allLocked\(sc\)\) \? advanceRound\(sc\)/],
     ["the pool derived, never stored", /sharedPool\(sharedScene\)/],
@@ -8768,8 +8768,11 @@ console.log("\n── §132 · the fight belongs to everyone, and the leader nev
     P.heldRounds(held).c === 1 && P.heldRounds(P.stragglerCall(held, "a", "c", "wait")).c === 2 && /HELD FOR: Cade \(2\u00d7\)/.test(P.partyBlockForGM(P.stragglerCall(held, "a", "c", "wait"), "b") || ""));
   check("§132: ⛔ …and only the LEADER may call it — a member cannot move the party past someone else",
     P.stragglerCall(next, "b", "c", "skip") === next);
-  check("§132: ⚑ SKIP MEANS THEY GUARD — the app writes a PROTECT lock and a zero strike, never a strike nobody chose",
-    /family: \"PROTECT\", name: \"guards\"/.test(app) && /choice === \"skip\" \? 0 : foldedStrikeFor\(id\)/.test(app));
+  // ⚠️ THE ENGINE'S `stragglerCall("guard")` WRITES THE PROTECT LOCK ITSELF — the app adds only the zero strike, and my
+  // first cut both sent a word the engine did not know AND duplicated the lock. §133 asserts the vocabulary as a class.
+  check("§132: ⚑ SKIP MEANS THEY GUARD — the engine locks the guard, the app adds a ZERO strike, never a strike nobody chose",
+    /choice === "guard"\) \{ next = mergeStrike\(next, \{ by: id, at, amount: 0/.test(app)
+    && /family: "PROTECT", name: "They guard"/.test(rd("engine/party.js")));
   check("§132: ⚑ …and LET THE GM PLAY THEM is R36 — their own sheet acts, from the presence they wrote at join",
     /function foldedStrikeFor/.test(app) && /m\?\.presence\?\.level/.test(app));
 
@@ -8781,6 +8784,72 @@ console.log("\n── §132 · the fight belongs to everyone, and the leader nev
     && /el\.remove\(\); document\.body\.style\.paddingBottom = "";/.test(app));
   check("§132: ⚑ …and the panel is its own node, so a 20-second poll never wipes what someone is typing",
     /renderPartyPanel\(\);   \/\/ \u26d1 the panel is its own node/.test(app) || /renderPartyPanel\(\);/.test(app) && /document\.body\.appendChild\(el\)/.test(app));
+}
+
+/* ═════ §133 — THE INTENT THAT WAS HEARD, AND THE ONE THAT WAS NOT (SPEC_intent_heard_and_unheard) ═════ */
+// ⛔ Aevi withdrew the penalty half of her own §3d and she is right: "a player who is charged for being overruled
+// stops stating intents, and the leader loses the briefing that makes the leader model work at all." Same fact,
+// opposite effect on whether the feature gets used. ⚑ So: being listened to is a small positive bond; being overruled
+// is REMEMBERED and costs nothing. There is no negative case in this mechanic anywhere, and §133 asserts that.
+console.log("\n── §133 · remembered, not charged ──");
+{
+  const PB = await import("../engine/partybond.js");
+  const P = await import("../engine/party.js");
+  const app = rd("app.js");
+  // ⛔ STRIP THE COMMENTS BEFORE GREPPING FOR A PROPERTY. This module explains at length why it is NOT `growBond` and
+  // why nothing may lower a bond — so those words are all in the file, in prose. A check that reads them is testing
+  // the documentation, which is how both of these first went red against code that was correct.
+  const pb = rd("engine/partybond.js").replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
+  const me = () => ({ id: "lead", name: "Ana", partyBonds: {} });
+  // ── §3: heard is a nudge, once per scene per pair, positive only
+  const c = me();
+  const n1 = PB.noteHeard(c, { by: "b", name: "Bo", sceneId: "s1" });
+  const n2 = PB.noteHeard(c, { by: "b", name: "Bo", sceneId: "s1" });
+  const n3 = PB.noteHeard(c, { by: "b", name: "Bo", sceneId: "s2" });
+  check("§133: ⚑ BEING LISTENED TO COUNTS — a small nudge between the two characters, ONCE per scene per pair",
+    n1 && n1.to === 0.25 && n2 === null && n3.to === 0.5 && PB.partyBondOf(c, "b").score === 0.5, JSON.stringify({ n1, n2, n3 }));
+  check("§133: ⛔ …AND THERE IS NO NEGATIVE CASE ANYWHERE IN THE MECHANIC — no writer in the module can lower a party bond",
+    // ⚠️ THE PROPERTY IS ARITHMETIC, so test arithmetic — the first cut matched `toLowerCase` and called it a penalty.
+    !/-\s*grow|score\s*-\s|-=|Math\.max\(\s*-|Math\.min\(\s*-/.test(pb) && /Math\.min\(CAP/.test(pb) && !/noteUnheard|chargeIntent|dropBond|penalty/i.test(pb),
+    (pb.match(/-=|score\s*-\s|Math\.max\(\s*-/) || [""])[0]);
+  const capped = { id: "lead", partyBonds: { b: { score: 10, name: "Bo", heardIn: [] } } };
+  PB.noteHeard(capped, { by: "b", sceneId: "s9" });
+  check("§133: …it clamps like every other bond, and never touches yourself",
+    capped.partyBonds.b.score === 10 && PB.noteHeard(me(), { by: "lead", sceneId: "s1" }) === null);
+  // ⛔ AND IT IS NOT `growBond` (Aevi's Q3) — a player must never grant another player ability RANKS.
+  check("§133: ⛔ A PARTY BOND IS ITS OWN THING — it never touches companionBonds, which drive stage-taught craft ranks",
+    !/companionBonds|syncStageTaughtRanks|growBond/.test(pb) && /partyBonds/.test(pb));
+  // ── §2: unheard is a beat, attributed, and it moves no number
+  const intents = [{ by: "b", name: "Bo", text: "look behind the shrine" }, { by: "c", name: "Cade", text: "watch the woman by the fire" }];
+  check("§133: ⛔ THE UNHEARD ARE FOUND BY WHAT THE GM REPORTED — by name or by id, and an empty report means nobody was heard",
+    PB.unheardOf(intents, ["Bo"]).map(i => i.by).join() === "c" && PB.unheardOf(intents, ["c"]).map(i => i.by).join() === "b"
+    && PB.unheardOf(intents, []).length === 2 && PB.unheardOf(intents, ["Bo", "Cade"]).length === 0);
+  const beat = PB.unheardBeat(intents[1]);
+  check("§133: ⚑ …AND IT BECOMES A BEAT, attributed to whoever wanted it, in the shared log, moving NO number",
+    beat.by === "c" && beat.unheard === true && /Cade had wanted to watch the woman by the fire, and the party did not\./.test(beat.summary)
+    && !("amount" in beat) && !("bond" in beat) && !("standing" in beat), beat.summary);
+  const sc = P.mergeBeat(P.addMember(P.newSharedScene("millbrook", { id: "lead", name: "Ana" }, "t0"), { id: "c", name: "Cade" }), beat);
+  check("§133: …and it merges like any other beat — the shared record, seen by everyone", sc.beats.length === 1 && sc.beats[0].unheard === true);
+  // ── the wiring: reported by the GM, settled on the leader's turn, and safe when the report is absent
+  check("§133: ⛔ THE TRIGGER IS REPORTED, NOT GUESSED — the GM says whose intent the party actually followed",
+    /"intentsHeard"/.test(rd("engine/gm.js")) && /Never list someone to be kind/.test(rd("engine/gm.js")));
+  check("§133: ⚑ …settled on the LEADER'S turn, because the leader's turn IS the party's decision",
+    /function settleIntents/.test(app) && /leaderOf\(sharedScene\) !== character\.id\) return;/.test(app) && /if \(sharedScene && turn\.sceneSummary\) settleIntents\(turn\);/.test(app));
+  check("§133: ⛔ …and an ABSENT report means nobody was heard — the safe failure, because a word-overlap guess would manufacture grudges",
+    /Array\.isArray\(turn\?\.intentsHeard\) \? turn\.intentsHeard : \[\]/.test(app));
+  check("§133: ⚑ …and the panel shows what a pair is worth, without ever showing a penalty",
+    /partyBondOf\(character, m\.characterId\)/.test(app) && !/pp-penalty|lost standing/.test(app));
+  // ── §5: Aevi withdrew the countdown, and the manual call stands
+  check("§133: ⛑ THE STRAGGLER CALL IS THE LEADER'S, NOT A CLOCK'S — no timer was built, per Aevi's withdrawal",
+    !/setTimeout\([^)]*resolv|countdown|resolving in \d+s/i.test(app));
+  // ⛔ AND THE BUG THIS SPEC'S READING FOUND: the panel spoke a word the engine does not know, so the button was DEAD.
+  const choices = (rd("engine/party.js").match(/STRAGGLER_CHOICES = \[([^\]]*)\]/) || [])[1] || "";
+  const known = choices.split(",").map(x => x.trim().replace(/["']/g, "")).filter(Boolean);
+  const used = [...app.matchAll(/data-pp-call="(\w+)"/g)].map(m => m[1]);   // ⚠️ bare quotes: the markup is a template literal
+  check("§133: ⛔ EVERY STRAGGLER BUTTON SPEAKS A WORD THE ENGINE KNOWS — a control that sends an unknown choice is a DEAD control",
+    used.length >= 3 && used.every(u => known.includes(u)), `panel: ${used.join(",")} · engine: ${known.join(",")}`);
+  check("§133: …and the engine's own door does the locking for a guard — the caller does not duplicate it",
+    /next = stragglerCall\(next, me, id, choice, \{ at \}\);/.test(app) && /choice === "guard"\) \{ next = mergeStrike/.test(app));
 }
 
 /* ══════════ REPORT ══════════ */

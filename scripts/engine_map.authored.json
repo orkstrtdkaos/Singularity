@@ -445,5 +445,10 @@
     "purpose": "Diffs of save branches the sync overwrote, carried in code so reconcile step 41 can merge them into every copy of the save at its next load — a committed save file loses the race against an open tab; a step runs inside it.",
     "playerVisibleSurface": "The reconcile note on load: what was recovered — items, people, topics, facts, holdings — and that nothing was removed.",
     "whatMakesItFire": "Step 41 on any character whose id matches an entry's forId; mergeRecovery is idempotent, so a copy already whole gets no note."
+  },
+  "partybond.js": {
+    "purpose": "What one player's character feels about another's — and it only goes up. SPEC_intent_heard_and_unheard §3: being listened to is a small positive bond between the two characters; being overruled costs nothing at all, because a player charged for being overruled stops stating intents and the leader loses the briefing the whole model runs on.",
+    "playerVisibleSurface": "The party panel shows a heart and the score beside anyone whose suggestion you have taken; the turn says so when it moves. An unfollowed intent appears as a beat in the shared log, attributed, moving nothing.",
+    "whatMakesItFire": "The leader's own turn, when the GM reports which intents the party actually followed (`turn.intentsHeard`). Once per scene per pair. There is no writer anywhere in the module that lowers a bond."
   }
 }

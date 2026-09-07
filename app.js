@@ -93,6 +93,7 @@ import { ensureFacts, applyFactUpdates, factsForGM } from "./engine/facts.js";
 import { notePerception, perceivedVectors, vectorSummary } from "./engine/vectors.js";
 import { tierPrice, isCrossClass, tierOf, classColor, classLabel, gateFor, meetsLearnGate, meetsRank3Gate, breadthUsed, breadthCap, atCapacity, skillGraphModel, skillPointCost, learnPointCost, forkPending, forkPaths, chosenFork, setFork, rankExpression, abilityTier } from "./engine/skilltree.js";
 import { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, setEncounterState, partyBlockForGM, fetchScene, listScenesAt, pushSceneWithMerge, scenePath, lastSceneError, setLeader, leaderOf, stateIntent, intentsOf, stragglerCall, STRAGGLER_CHOICES, heldRounds, openSharedEncounter, closeSharedEncounter, sharedPool, mergeStrike, RESOLVE_ORDER, lockDeclaration, allLocked, unlockedFighters, resolveOrder, advanceRound, joinFight, leaveFight, fightersOf } from "./engine/party.js";
+import { noteHeard, unheardOf, unheardBeat, partyBondOf } from "./engine/partybond.js";   // SPEC_intent_heard_and_unheard: heard is a nudge, unheard is a thread
 import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, intensityOptions } from "./engine/intensity.js";
 import { noteCoUseAndRefresh, refreshEvolvingItems, evolvedItemsForGM, currentStage } from "./engine/evolution.js";
 import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
@@ -126,7 +127,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.406";
+const APP_VERSION = "1.9.407";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4340,6 +4341,7 @@ function renderPartyPanel() {
       ${on ? `<span class="pp-tag${lk ? " pp-locked" : " pp-waiting"}">${lk ? "locked in" : "choosing\u2026"}</span>` : ""}
       ${held[m.characterId] ? `<span class="hint">held \u00d7${held[m.characterId]}</span>` : ""}
       ${wnt ? `<div class="pp-intent">wants: ${esc(wnt.text)}</div>` : ""}
+      ${(() => { const b = partyBondOf(character, m.characterId); return b.score > 0 ? `<span class="hint" title="They have been listened to, and it counts between your characters">\u2661 ${b.score}</span>` : ""; })()}
       ${iLead && !isLead ? `<button class="opt pp-mini" data-pp-pass="${esc(m.characterId)}" title="Hand them the lead">Pass the lead</button>` : ""}
     </div>`;
   }).join("");
@@ -4351,7 +4353,7 @@ function renderPartyPanel() {
       <div class="pp-head">${esc(stragglers.map(partyNameOf).join(", "))} ${stragglers.length === 1 ? "has" : "have"} not locked in</div>
       <div class="opt-row" style="gap:6px;flex-wrap:wrap">
         <button class="opt pp-mini" data-pp-call="wait" title="Hold the round. Repeatable, and it is counted">Wait</button>
-        <button class="opt pp-mini" data-pp-call="skip" title="They guard \u2014 still in the fight, still targetable, and not a strike nobody chose">Skip (they guard)</button>
+        <button class="opt pp-mini" data-pp-call="guard" title="They guard \u2014 still in the fight, still targetable, and not a strike nobody chose">Skip (they guard)</button>
         <button class="opt pp-mini" data-pp-call="gm" title="Their character acts from their own sheet (R36)">Let the GM play them</button>
       </div>
     </div>` : "";
@@ -4429,15 +4431,16 @@ function callStragglers(choice) {
   partySceneOr(sc => {
     let next = sc;
     for (const id of ids) {
-      next = stragglerCall(next, me, id, choice);
-      if (choice === "wait") continue;
       const at = new Date().toISOString() + "#" + id;   // the key this member's round is filed under
-      const decl = choice === "skip"
-        ? { family: "PROTECT", name: "guards", label: `${partyNameOf(id)} guards \u2014 nobody chose a strike for them` }
-        : { family: "HARM", name: "acts", label: `${partyNameOf(id)} acts from their own sheet` };
-      next = lockDeclaration(next, id, decl, { at });
-      const amount = choice === "skip" ? 0 : foldedStrikeFor(id);
-      next = mergeStrike(next, { by: id, at, amount, name: partyNameOf(id), label: decl.label });
+      // ⛔ `stragglerCall` IS THE ENGINE'S DOOR AND IT DOES THE LOCKING ITSELF for "guard" — my first cut sent "skip",
+      // which is not one of STRAGGLER_CHOICES, so the button did nothing at all, and then duplicated the lock on top.
+      next = stragglerCall(next, me, id, choice, { at });
+      if (choice === "wait") continue;
+      if (choice === "guard") { next = mergeStrike(next, { by: id, at, amount: 0, name: partyNameOf(id), label: "holds their guard" }); continue; }
+      // "gm" — the engine records that it is played from their sheet; the fold is the caller's, which is R36's shape
+      const label = `${partyNameOf(id)} acts from their own sheet`;
+      next = lockDeclaration(next, id, { family: "HARM", name: "acts", label }, { at });
+      next = mergeStrike(next, { by: id, at, amount: foldedStrikeFor(id), name: partyNameOf(id), label });
     }
     return next;
   }).then(() => maybeAdvancePartyRound());
@@ -4511,6 +4514,39 @@ function catchUpParty() {
     aside: beats.map(b => `${b.name}: ${b.label}${b.degree ? ` (${b.degree.replace("_", " ")})` : ""} — ${b.summary}`).join("; ")
   });
   if (draft) { const fi = document.getElementById("freeform-input"); if (fi) fi.value = draft; }
+}
+
+/** ⛔ SPEC_intent_heard_and_unheard — WHAT HAPPENS TO WHAT PEOPLE WANTED. Only on the leader's turn, because only
+ *  then is a turn the PARTY's decision. ⚑ HEARD: a small positive bond between the two characters, once per scene per
+ *  pair. ⚑ UNHEARD: a beat, automatic (Aevi's Q1 — "making the leader acknowledge it would turn a record into an
+ *  apology"), attributed, shared, and IT MOVES NO NUMBER. ⛔ There is no negative case in this mechanic anywhere.
+ *  ⚠️ AND THE TRIGGER IS REPORTED, NOT GUESSED: `turn.intentsHeard` comes from the GM, which is already told what
+ *  everyone is reaching for. Absent, nobody was heard — and that is the SAFE way for it to fail, because inventing a
+ *  match from word overlap would manufacture grudges out of coincidence. */
+function settleIntents(turn) {
+  if (!sharedScene || leaderOf(sharedScene) !== character.id) return;   // the leader's turn is the party's decision
+  const mine = intentsOf(sharedScene).filter(i => i.by !== character.id);
+  if (!mine.length) return;
+  const heard = Array.isArray(turn?.intentsHeard) ? turn.intentsHeard : [];
+  const nudges = [];
+  for (const i of mine) {
+    if (unheardOf([i], heard).length) continue;   // this one WAS heard
+    const n = noteHeard(character, { by: i.by, name: i.name, sceneId: character.sharedSceneId, rules: CONTENT.rules });
+    if (n) nudges.push(n);
+  }
+  const unheard = unheardOf(mine, heard);
+  if (nudges.length) { saveCharacter(character); }
+  if (unheard.length) {
+    // ⚑ ONE BEAT EACH, IN THE SHARED LOG — a thread the GM may pick up a scene later, not a debt anyone pays.
+    pushSceneWithMerge(character.sharedSceneId, sc => unheard.reduce((acc, i) => {
+      const b = unheardBeat(i);
+      return b ? mergeBeat(acc, b) : acc;
+    }, sc)).then(next => { if (next) { sharedScene = next; seenBeats = next.beats.length; renderPartyPanel(); } });
+  }
+  if (nudges.length) {
+    const said = nudges.map(n => `${n.name} (${n.from} \u2192 ${n.to})`).join(", ");
+    renderPlay(character.activeScene?.lastTurn || null, { aside: `They were listened to, and it counts between you: ${said}.` });
+  }
 }
 
 /** Publish my beat to the shared scene (fire-and-forget; solo play never blocks). */
@@ -7413,6 +7449,8 @@ function applyTurn(turn, resolution, playerWords = null) {
   turn.sceneSummary = coerceSceneSummary(turn.sceneSummary, turn.narration);
   // party: publish this beat to the shared scene (fire-and-forget)
   if (sharedScene && turn.sceneSummary) publishPartyBeat(resolution?.action?.label || "acted", resolution?.degree ?? null, turn.sceneSummary);
+  // ⛔ SPEC_intent_heard_and_unheard — settled on the LEADER'S turn, because the leader's turn IS the party's decision.
+  if (sharedScene && turn.sceneSummary) settleIntents(turn);
   // chronicle + scene persistence
   if (turn.sceneSummary) {
     sceneTurns.push({ player: playerWords || null, summary: turn.sceneSummary, narration: turn.narration || "" }); // SNG-081: keep the player's half

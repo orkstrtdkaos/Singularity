@@ -70,14 +70,15 @@
   "chronicle": [
     "Aelyn left the Heartroot with Caelum Kantoro's name, the kept thread settled in her sternum, and Branch's word — family — fresh in her journal. The deep grain quest's receiving is complete; she faces northeast as the first evening of her new life begins.",
     "Aelyn and Branch left the Heartroot at dawn, the kept thread orienting northeast — the road toward the Quickwood's margin stretches ahead into the melt-mud and early spring.",
-    "Aelyn asked the canopy about the boot-tracks ahead — they have stopped, or left the road; the wood could not say which. Branch's attention holds on the eastern tree-line, a separate question entirely."
+    "Aelyn asked the canopy about the boot-tracks ahead — they have stopped, or left the road; the wood could not say which. Branch's attention holds on the eastern tree-line, a separate question entirely.",
+    "Aelyn asked Branch what it had been watching since the margin — Branch named it: small light, not sun-light, and said it knows Aelyn specifically. Deni confirmed she had seen it too. The scene ends on the eastern tree-line, the light steady between the trunks, patient as something that does not need to hurry."
   ],
   "currentLocationId": "gen-quickwood-margin",
   "activeScene": null,
   "clock": {
     "schemaVersion": 1,
     "day": 2,
-    "hour": 6,
+    "hour": 7,
     "realAnchor": null
   },
   "companions": [
@@ -276,12 +277,19 @@
           ]
         }
       ],
-      "stageIndex": 0,
-      "completedStages": [],
-      "progress": [],
+      "stageIndex": 1,
+      "completedStages": [
+        "s1"
+      ],
+      "progress": [
+        "The light has been identified — present since the margin, patient, and specifically oriented toward Aelyn. Branch named it: 'Knows you. Not me. You.' The first word across the distance has not yet been spoken, but the distance is closing.",
+        "Codex: an entity of pure fabricated substrate is aware of Aelyn specifically — and something in its behavior toward her is wrong for a predator: it protects where it should consume.",
+        "↳ Branch identified the eastern light as something that specifically knows Aelyn — not her companions — and Deni confirmed it has been present and watching since the margin, consistent with a…"
+      ],
       "aliases": [],
       "startedAt": "2026-09-06T00:52:50.590Z",
-      "startedWorldDay": 68
+      "startedWorldDay": 68,
+      "stageStartedAt": 72
     }
   ],
   "npcRegistry": {
@@ -385,7 +393,8 @@
         "[d2] Gave Aelyn road-knowledge unprompted — canopy closes a quarter-mile in, hollow crossing ahead, firmer ground past the bowl country. Named the older boot-tracks ahead of both of them as notable but delivered it without alarm.",
         "[d2] Observed Aelyn press a hand to Branch's shoulder and hold still — catalogued it without comment; still waiting to walk.",
         "[d2] Fell into step northeast without being asked — same road, same direction, practical economy of company.",
-        "[d2] Watched Aelyn use Speaking Grove on the birch without comment; shifted to watching the tree-line after hearing 'tracks stopped'; offered a practical read — we'd see sign at the hollow crossing either way."
+        "[d2] Watched Aelyn use Speaking Grove on the birch without comment; shifted to watching the tree-line after hearing 'tracks stopped'; offered a practical read — we'd see sign at the hollow crossing either way.",
+        "[d2] Confirmed she had been watching the eastern light since the margin — said nothing until Branch named it"
       ],
       "knownFacts": [
         "Hub-registered pack-runner, south circuit",
@@ -393,14 +402,15 @@
         "The kept road is good past the margin — canopy then hollow crossing then firmer ground into the march",
         "On her last circuit four days back she saw nothing unusual, but noted older boot-tracks moving northeast at purpose ahead of Aelyn's",
         "Aelyn attempted something subtle with Branch that Deni didn't fully understand",
-        "Boot-tracks ahead have stopped or left the road, per the canopy's answer"
+        "Boot-tracks ahead have stopped or left the road, per the canopy's answer",
+        "The light has been present since the Quickwood margin; Deni noted it early and chose to wait before speaking"
       ],
       "skillsObserved": [],
       "status": "active",
       "sex": "female",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Walking northeast with Aelyn inside the Quickwood canopy, a half-pace behind her left shoulder.",
+      "statusNote": "Walking northeast with Aelyn inside the Quickwood canopy; now stopped on the road watching the eastern tree-line",
       "domains": {
         "primary": "rootkin"
       },
@@ -409,7 +419,7 @@
         "locationId": "gen-quickwood-margin",
         "day": 2
       },
-      "met": 6
+      "met": 7
     }
   },
   "placeMemory": {
@@ -710,7 +720,7 @@
         "lastOutcome": "progress"
       }
     },
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 3,
     "latentArcs": {
       "heartwood-hollowing": {
         "id": "heartwood-hollowing",
@@ -4981,13 +4991,17 @@
           "[d2] The road into the Quickwood is kept and shows recent traffic — someone has passed through in the last day or two. The substrate of the valley felt less even here at dawn on day 2.",
           "[d2] A hub-registered pack-runner (Deni Cors, south circuit) travels the kept road northeast — it is a regular route, not wilderness.",
           "[d2] Deni Cors reports the road is kept well past the margin — canopy closes tight a quarter-mile in, then a hollow crossing, then firmer ground into the bowl country at the march's edge. Older boot-tracks ahead of Aelyn's, moving northeast at purpose, were noted by Deni four days prior.",
-          "[d2] Speaking Grove into the Quickwood canopy (a birch, sap-slow in early spring) returns partial answers — the wood is connected but not attended the way the Heartroot is. The boot-tracks ahead have stopped or stepped off the road; the canopy could not distinguish which."
+          "[d2] Speaking Grove into the Quickwood canopy (a birch, sap-slow in early spring) returns partial answers — the wood is connected but not attended the way the Heartroot is. The boot-tracks ahead have stopped or stepped off the road; the canopy could not distinguish which.",
+          "[d2] The Reaching Light — A point of pale, steady radiance — not sunlight — has been watching from the eastern tree-line since the Quickwood margin. Branch says it knows Aelyn specifically, not Branch, not Deni. It is patient. It does not approach."
         ],
         "links": [
           "the-root-that-remembers",
           "aelyn-father",
           "deni-cors",
-          "speaking-grove"
+          "speaking-grove",
+          "aelyn-inner-frequency",
+          "the-deep-woven",
+          "heartroot"
         ],
         "aliases": [],
         "createdDay": 2,
@@ -5172,21 +5186,22 @@
         },
         "relinked": []
       }
-    ]
+    ],
+    "deferredMysteries": []
   },
   "tendencies": {
-    "cerebral": 13.615031555105867,
-    "cautious": 10.608086432054165,
-    "generous": 0.4318204664404907,
-    "social": 4.983959476058006,
-    "strategic": 6.598045695293669,
-    "devotion": 3.375969816987684,
-    "patient": 1.7995822195511417
+    "cerebral": 14.27465576622822,
+    "cautious": 10.34288427125281,
+    "generous": 0.42102495477947843,
+    "social": 4.859360489156556,
+    "strategic": 6.433094552911327,
+    "devotion": 3.291570571562992,
+    "patient": 1.7545926640623632
   },
   "aptitudes": [
     "scholar"
   ],
-  "actionCount": 71,
+  "actionCount": 72,
   "grantsVersion": 1,
   "reconcileVersion": 48,
   "gallery": [
@@ -5224,8 +5239,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20mid-twenties%20with%20light%20blonde%2C%20faintly%20wavy%20hair%20cut%20in%20curtain%20bangs%2C%20the%20rest%20falling%20to%20the%20small%20of%20her%20back%20%E2%80%94%20usually%20worn%20in%20a%20french%20braid%20with%20the%20bangs%20left%20loose.%20Dark%20nature-green%20tank%20to%2C%20full-body%20character%20portrait%2C%20named%20Aelyn%20Kantoro%2C%20of%20the%20rootkin%2C%20warden%2C%20carrying%20Traveler's%20Pack%2C%20Her%20mother%20dies%2C%20and%20she%20decides%20to%20go%20to%20the%20nanite%20world%2C%20to%20figure%20out%20why%20she%20is%20different%20than%20the%20pure%20nature%20peop%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=73420&nologo=true",
-  "updatedAt": 1788814809412,
-  "rev": 132,
+  "updatedAt": 1788814905484,
+  "rev": 133,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -5288,7 +5303,7 @@
     "item": {}
   },
   "regionsKnown": {
-    "the_quickwood": 72
+    "the_quickwood": 73
   },
   "opLossPending": false,
   "establishedFacts": [
@@ -5466,10 +5481,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-09-07T20:52:08.629Z",
-      "lastAt": "2026-09-07T21:00:09.402Z",
+      "lastAt": "2026-09-07T21:01:45.461Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 6
+      "beats": 7
     }
   ],
   "livingCurrentAccess": [
@@ -5632,19 +5647,21 @@
   },
   "_intentAsked": null,
   "_opEmitted": {
-    "sceneSummary": 19,
-    "choices": 19,
-    "scene": 19,
-    "questUpdates": 4,
-    "codexUpdates": 10,
-    "timeOps": 18,
-    "sceneEnded": 5,
+    "sceneSummary": 20,
+    "choices": 20,
+    "scene": 20,
+    "questUpdates": 5,
+    "codexUpdates": 11,
+    "timeOps": 19,
+    "sceneEnded": 6,
     "characterDeltas": 5,
-    "npcUpdates": 15,
+    "npcUpdates": 16,
     "offer": 2,
-    "_engineClosedScene": 1
+    "_engineClosedScene": 1,
+    "stageOps": 1,
+    "generateRequest": 1
   },
-  "_opTurns": 19,
+  "_opTurns": 20,
   "knownPlaces": [
     "gen-quickwood-margin"
   ],
@@ -5668,7 +5685,7 @@
     "travel": 4,
     "careful": 8,
     "scout": 5,
-    "study": 3,
+    "study": 4,
     "comfort": 1,
     "negotiate": 1,
     "investigate": 1

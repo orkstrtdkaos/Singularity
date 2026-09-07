@@ -8,7 +8,7 @@
   "whyHere": "You put down the blade, or you were sent away from it, or you are looking for a line worth holding that isn't theirs.",
   "background": "war_leader",
   "level": 1,
-  "xp": 43,
+  "xp": 45,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -45,7 +45,7 @@
   "maxHealth": 46,
   "health": 46,
   "maxEnergy": 108,
-  "energy": 65,
+  "energy": 60,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -71,14 +71,6 @@
       },
       "consumable": true,
       "pinned": true
-    },
-    {
-      "id": null,
-      "name": "Cloth Bundle",
-      "kind": "quest",
-      "qty": 1,
-      "description": "Folded pale linen containing a dried white-flowered sprig and a length of cord knotted in an unrecognized pattern. Left at the Crow and Thistle's third stool the night Sera was present. Freki read it as a live trail heading east.",
-      "consumable": false
     }
   ],
   "deeds": [
@@ -258,178 +250,178 @@
         "player": "Answer honestly: very little — name what you know and what you don't, and ask her to fill the gap",
         "summary": "On the chalk track one mile north of the Stillhold, Brynjar caught Maret Threnwick, read her stance, named the bundle and the follower plainly, and told her honestly how little he knew — and she answered in kind: the cord is a debt-record, she was sent to carry it to the Stillhold's record-hall, the follower was not hers, and she noticed them two days out of the Marchward.",
         "narration": "You tell her the truth: you know almost nothing. A knotted cord left at a waystation bar. A follower who stopped pursuing and started watching. A woman who didn't run when she could have. That's the sum of it — and you say so without dressing it up.\n\nMaret is quiet for a moment. The chalk track holds that particular morning silence of a place not yet decided, and she uses all of it. Then she exhales — not relief, exactly, but something that was coiled coming loose by a notch.\n\n\"The cord is a record,\" she says. \"Not a weapon, not a marker. The Stillhold keeps its law in knots — what was owed, what was settled, what can't be said aloud. This one names a debt that the record-hall requires in person.\" She glances at the pack where you named the bundle. \"I was sent to carry it in. The woman who left it at the inn — she couldn't. Her situation had changed.\" A pause, measured and deliberate. \"The follower you saw wasn't mine. I noticed them two days out of the Marchward. They stopped at the junction because they'd seen enough, or because someone told them to.\" She doesn't say which she thinks it is.\n\nRagnar holds his quiet at your shoulder, and Freki settles back from its forward lean — whatever it was reading in her has resolved. Maret looks south toward the grey smudge of walls, then back at you. The question she doesn't ask sits plainly in the space between you: *what are you going to do with this?*"
+      },
+      {
+        "player": "Offer to walk her the last mile in — two sets of eyes on the road if the follower sent word ahead",
+        "summary": "Brynjar offered to walk Maret the last mile in — she refused: too much noise, too much Marcher, and the delivery needs to arrive quietly. She took the bundle and set herself for the gate alone.",
+        "narration": "You make the offer plainly: walk her the last mile in, two sets of eyes on the road, no obligation beyond that. It's a reasonable thing to say. Maret listens to all of it.\n\nShe shakes her head once — not unkind, but final. \"I go in alone.\" Her voice carries the particular flatness of someone who has already thought through every version of this and arrived at the same answer each time. \"Two strangers at the Stillhold gate with a Marcher on my shoulder and a hound at my heel draws exactly the kind of attention a debt-record delivery is not supposed to draw.\" She glances briefly at Ragnar, then back to you. \"The Stillhold doesn't like noise. And whatever the cord says when the record-hall reads it, that conversation needs to happen quietly.\"\n\nShe reaches out and takes the cloth bundle from you — or waits for you to produce it, hand flat, no grab, no urgency. The gesture is practiced: this is a woman who handles things carefully and has for a long time. \"You've done something real today,\" she says. \"Named the follower. Carried this far enough that I didn't have to argue with someone who meant me worse.\" She wraps the cloth around the cord with a small, firm fold. \"But the gate is mine to walk.\"\n\nRagnar says nothing at your right shoulder. The chalk track holds the silence. Freki watches Maret with its ears soft — no threat-read, just attention. One mile south, the Stillhold's grey walls sit solid and still in the overcast morning light.\n\n*− Cloth Bundle — taken from you.*"
       }
     ],
     "lastTurn": {
-      "narration": "You tell her the truth: you know almost nothing. A knotted cord left at a waystation bar. A follower who stopped pursuing and started watching. A woman who didn't run when she could have. That's the sum of it — and you say so without dressing it up.\n\nMaret is quiet for a moment. The chalk track holds that particular morning silence of a place not yet decided, and she uses all of it. Then she exhales — not relief, exactly, but something that was coiled coming loose by a notch.\n\n\"The cord is a record,\" she says. \"Not a weapon, not a marker. The Stillhold keeps its law in knots — what was owed, what was settled, what can't be said aloud. This one names a debt that the record-hall requires in person.\" She glances at the pack where you named the bundle. \"I was sent to carry it in. The woman who left it at the inn — she couldn't. Her situation had changed.\" A pause, measured and deliberate. \"The follower you saw wasn't mine. I noticed them two days out of the Marchward. They stopped at the junction because they'd seen enough, or because someone told them to.\" She doesn't say which she thinks it is.\n\nRagnar holds his quiet at your shoulder, and Freki settles back from its forward lean — whatever it was reading in her has resolved. Maret looks south toward the grey smudge of walls, then back at you. The question she doesn't ask sits plainly in the space between you: *what are you going to do with this?*",
-      "sceneSummary": "On the chalk track one mile north of the Stillhold, Brynjar caught Maret Threnwick, read her stance, named the bundle and the follower plainly, and told her honestly how little he knew — and she answered in kind: the cord is a debt-record, she was sent to carry it to the Stillhold's record-hall, the follower was not hers, and she noticed them two days out of the Marchward.",
+      "narration": "You make the offer plainly: walk her the last mile in, two sets of eyes on the road, no obligation beyond that. It's a reasonable thing to say. Maret listens to all of it.\n\nShe shakes her head once — not unkind, but final. \"I go in alone.\" Her voice carries the particular flatness of someone who has already thought through every version of this and arrived at the same answer each time. \"Two strangers at the Stillhold gate with a Marcher on my shoulder and a hound at my heel draws exactly the kind of attention a debt-record delivery is not supposed to draw.\" She glances briefly at Ragnar, then back to you. \"The Stillhold doesn't like noise. And whatever the cord says when the record-hall reads it, that conversation needs to happen quietly.\"\n\nShe reaches out and takes the cloth bundle from you — or waits for you to produce it, hand flat, no grab, no urgency. The gesture is practiced: this is a woman who handles things carefully and has for a long time. \"You've done something real today,\" she says. \"Named the follower. Carried this far enough that I didn't have to argue with someone who meant me worse.\" She wraps the cloth around the cord with a small, firm fold. \"But the gate is mine to walk.\"\n\nRagnar says nothing at your right shoulder. The chalk track holds the silence. Freki watches Maret with its ears soft — no threat-read, just attention. One mile south, the Stillhold's grey walls sit solid and still in the overcast morning light.\n\n*− Cloth Bundle — taken from you.*",
+      "sceneSummary": "Brynjar offered to walk Maret the last mile in — she refused: too much noise, too much Marcher, and the delivery needs to arrive quietly. She took the bundle and set herself for the gate alone.",
       "choices": [
         {
-          "label": "Offer to walk her the last mile in — two sets of eyes on the road if the follower sent word ahead",
+          "label": "Hand over the bundle cleanly and let her go — but ask the one question you still need answered: who sent the follower",
           "attribute": "social",
           "subAttribute": "rapport",
-          "difficulty": "easy",
-          "intentTags": [
-            "help",
-            "negotiate"
-          ],
-          "abilityId": null,
-          "trivial": false
-        },
-        {
-          "label": "Ask who sent her — name the woman who left the bundle at the inn if that opens anything",
-          "attribute": "social",
-          "subAttribute": "insight",
           "difficulty": "normal",
           "intentTags": [
-            "study",
-            "negotiate"
+            "negotiate",
+            "careful"
           ],
-          "abilityId": null,
           "trivial": false
         },
         {
-          "label": "Hand her the cloth bundle now — it's hers to carry in, not yours to hold",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Step back and read the road south with Order-Sense — see whether the approach to the gate has a structure that would mark where a watcher could be posted ahead",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": "easy",
+          "intentTags": [
+            "scout",
+            "study"
+          ],
+          "abilityId": "order_sense",
+          "trivial": false
+        },
+        {
+          "label": "Let her go without another word — watch until she reaches the gate, then decide with Ragnar what to do next",
+          "attribute": "mental",
+          "subAttribute": "wits",
           "difficulty": "very easy",
           "intentTags": [
-            "help"
+            "careful",
+            "guard"
           ],
-          "abilityId": null,
           "trivial": true
         }
       ],
-      "scene": {
-        "setting": "The chalk Stillhold track, one mile north of the Stillhold approach. Flat road between elder scrub, spring mud soft in the ruts. Overcast morning light. The Stillhold's grey walls visible as a smudge one mile south.",
-        "npcsPresent": [
-          {
-            "name": "Maret Threnwick",
-            "state": "Standing on the track facing Brynjar, shoulders fractionally less guarded than before. Has told him the cord is a debt-record, named the unknown follower, and is now waiting to see what he does with it."
-          },
-          {
-            "name": "Ragnar Solmyr",
-            "state": "At Brynjar's right shoulder. Still. Listening."
-          },
-          {
-            "name": "Freki",
-            "state": "Settled back from its forward lean, ears still up but no longer braced — reading Maret as resolved."
-          }
-        ],
-        "objects": [
-          "Cloth bundle in Brynjar's pack — dried white-flowered sprig, knotted cord debt-record",
-          "Sera's footprints in the chalk mud behind her",
-          "Elder scrub on both verges, first spring bud showing",
-          "Stillhold walls visible as a grey smudge one mile south"
-        ],
-        "threads": [
-          "The identity and intent of the follower who watched from the ash copse remains open — not hers, but whose?",
-          "Maret has not asked for the bundle yet, but the question of who carries it in is unresolved",
-          "The Stillhold approach is one mile south — what Brynjar does at the gate is still undecided",
-          "The woman who left the bundle at the inn and could not deliver it herself — her situation 'had changed'; what changed is unsaid"
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryRemove": [
+          "Cloth Bundle"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "maret-threnwick",
-          "note": "Told Brynjar the cord is a debt-record — the Stillhold keeps its law in knots. She was sent to carry it to the record-hall. The woman who left it at the inn couldn't deliver it herself; her situation had changed. The follower at the junction was not Maret's, and she'd noticed them two days out of the Marchward.",
+          "note": "Refused Brynjar's offer to walk her in — too much noise for a debt-record delivery. Took the cloth bundle and is preparing to go to the gate alone.",
           "learned": [
-            "The cord is a Stillhold debt-record — law kept in knots, not text",
-            "She was sent by someone to carry the bundle to the record-hall in person",
-            "The woman who left the bundle at the Crow and Thistle could not deliver it herself — her situation had changed",
-            "The follower was not Maret's — she noticed them two days out of the Marchward"
+            "Refused escort to the gate — a delivery this sensitive must arrive without visible Marcher company or a hound"
           ],
-          "relationshipDelta": 1,
-          "statusNote": "Standing on the chalk track a mile north of the Stillhold approach, having told Brynjar the cord's purpose. Waiting to see what he does next."
+          "statusNote": "Standing on the chalk track one mile north of the Stillhold gate, bundle in hand, preparing to walk the last mile alone.",
+          "carries": [
+            "Cloth Bundle"
+          ]
         },
         {
           "op": "update",
           "npcId": "ragnar-solmyr",
-          "note": "Held his quiet at Brynjar's shoulder through Maret's explanation — present, listening, not crowding the exchange.",
+          "note": "Held his quiet through Maret's refusal — no comment, no move.",
           "statusNote": "At Brynjar's right shoulder on the chalk track, one mile north of the Stillhold approach."
         }
       ],
+      "scene": {
+        "setting": "The chalk Stillhold track, one mile north of the Stillhold approach. Flat road between elder scrub, spring mud soft in the ruts. Overcast morning light. The Stillhold's grey walls visible as a grey smudge one mile south.",
+        "npcsPresent": [
+          {
+            "name": "Maret Threnwick",
+            "state": "Bundle in hand, refusal delivered, facing south — ready to walk the last mile alone."
+          },
+          {
+            "name": "Ragnar Solmyr",
+            "state": "At Brynjar's right shoulder, still, watching Maret without comment."
+          },
+          {
+            "name": "Freki",
+            "state": "Watching Maret with ears soft — no threat-read, just attention."
+          }
+        ],
+        "objects": [
+          "Cloth bundle now in Maret's hands — dried white-flowered sprig, knotted cord debt-record",
+          "Sera's footprints in the chalk mud behind her",
+          "Elder scrub on both verges, first spring bud showing",
+          "Stillhold walls visible as a grey smudge one mile south"
+        ],
+        "threads": [
+          "The identity and intent of the follower who watched from the ash copse remains open — not hers, but whose?",
+          "Maret is about to walk the last mile to the Stillhold gate alone — what Brynjar does now, stay or follow, is unresolved",
+          "The woman who originally needed to deliver the bundle and could not — her situation 'had changed'; what changed is unsaid",
+          "Whether a watcher has been posted ahead at the approach is unknown"
+        ]
+      },
       "codexUpdates": [
         {
-          "topic": "the-binding-cord",
-          "label": "The Binding Cord",
-          "kind": "lore",
-          "fact": "The cord is a Stillhold debt-record — the Stillhold keeps its law in knots rather than text. A cord carried to the record-hall closes a named debt. This one required a delivery in person that the original bearer could no longer make.",
+          "topic": "maret-threnwick",
+          "label": "Maret Threnwick",
+          "kind": "person",
+          "entityId": "maret-threnwick",
+          "fact": "Refused escort to the Stillhold gate — the delivery must arrive without visible Marcher company or a hound; too much noise for a debt-record. Took the cloth bundle and is walking the last mile alone.",
           "links": [
-            "maret-threnwick",
+            "the-binding-cord",
             "the-stillhold",
             "brynjar-andyrsson-thread",
             "stillhold-operatives"
           ]
         },
         {
-          "topic": "maret-threnwick",
-          "label": "Maret Threnwick",
-          "kind": "person",
-          "entityId": "maret-threnwick",
-          "fact": "Was sent by someone to deliver the cord-record to the Stillhold's record-hall in person. The woman who originally needed to deliver it could not — her situation had changed. The follower at the ash copse was not Maret's; she noticed them two days out of the Marchward.",
-          "links": [
-            "the-binding-cord",
-            "the-stillhold",
-            "stillhold-operatives",
-            "brynjar-andyrsson-thread"
-          ]
-        },
-        {
-          "topic": "stillhold-operatives",
-          "label": "Stillhold Operatives",
-          "kind": "faction",
-          "fact": "The follower at the ash copse junction was not Maret's — someone else's, with their own purpose for watching her route. Maret noticed them two days out of the Marchward, meaning the observation began well before Brynjar joined the trail.",
+          "topic": "the-binding-cord",
+          "label": "The Binding Cord",
+          "kind": "mystery",
+          "fact": "The cloth bundle containing the cord-record has been handed to Maret and is now in her care. Whether the debt it names is intact or already compromised remains open.",
           "links": [
             "maret-threnwick",
-            "the-binding-cord",
             "the-stillhold",
+            "sera-of-the-stillhold",
             "brynjar-andyrsson-thread"
           ]
         }
       ],
-      "sceneEnded": false,
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a brief exchange on the chalk track"
-      }
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The cloth bundle from the Crow and Thistle has been handed to Maret Threnwick, who is carrying it to the Stillhold's record-hall alone.",
+          "subjectId": "maret-threnwick"
+        }
+      ]
     },
     "sceneState": {
-      "setting": "The chalk Stillhold track, one mile north of the Stillhold approach. Flat road between elder scrub, spring mud soft in the ruts. Overcast morning light. The Stillhold's grey walls visible as a smudge one mile south.",
+      "setting": "The chalk Stillhold track, one mile north of the Stillhold approach. Flat road between elder scrub, spring mud soft in the ruts. Overcast morning light. The Stillhold's grey walls visible as a grey smudge one mile south.",
       "npcsPresent": [
         {
           "name": "Maret Threnwick",
-          "state": "Standing on the track facing Brynjar, shoulders fractionally less guarded than before. Has told her the cord is a debt-r"
+          "state": "Bundle in hand, refusal delivered, facing south — ready to walk the last mile alone."
         },
         {
           "name": "Ragnar Solmyr",
-          "state": "At Brynjar's right shoulder. Still. Listening."
+          "state": "At Brynjar's right shoulder, still, watching Maret without comment."
         },
         {
           "name": "Freki",
-          "state": "Settled back from its forward lean, ears still up but no longer braced — reading Maret as resolved."
+          "state": "Watching Maret with ears soft — no threat-read, just attention."
         }
       ],
       "objects": [
-        "Cloth bundle in Brynjar's pack — dried white-flowered sprig, knotted cord debt-r",
+        "Cloth bundle now in Maret's hands — dried white-flowered sprig, knotted cord deb",
         "Sera's footprints in the chalk mud behind her",
         "Elder scrub on both verges, first spring bud showing",
         "Stillhold walls visible as a grey smudge one mile south"
       ],
       "threads": [
         "The identity and intent of the follower who watched from the ash copse remains open — not hers, but whose?",
-        "Maret has not asked for the bundle yet, but the question of who carries it in is unresolved",
-        "The Stillhold approach is one mile south — what Brynjar does at the gate is still undecided",
-        "The woman who left the bundle at the inn and could not deliver it herself — her situation 'had changed'; what changed is unsaid"
+        "Maret is about to walk the last mile to the Stillhold gate alone — what Brynjar does now, stay or follow, is unresolved",
+        "The woman who originally needed to deliver the bundle and could not — her situation 'had changed'; what changed is unsaid",
+        "Whether a watcher has been posted ahead at the approach is unknown"
       ]
     },
-    "beats": 1
+    "beats": 2
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 11,
+    "hour": 12,
     "realAnchor": null
   },
   "companions": [
@@ -627,7 +619,6 @@
       },
       "relationship": 2,
       "history": [
-        "[d1] Read the lighter footprints on sight — identified fast movement versus deliberate, noted same gait for fleeing and purposeful travel. Walking at Brynjar's shoulder.",
         "[d1] Confirmed Brynjar's read of the heavier prints — named it plainly as someone who knew Sera was ahead of them.",
         "[d1] Watched Brynjar's failed read of the shimmer without crowding it; checked the fact plainly and waited.",
         "[d1] Named what he knows of Stillhold operatives — quiet people carrying binding-cords, not weapons. Linked the knotted cord in the bundle to the same talk. Mentioned a man who dropped an inexplicable trail.",
@@ -636,7 +627,8 @@
         "[d1] Fell in beside Brynjar without argument when the call south was made. Named the four-mile distance to the Stillhold approach and estimated Sera's lead at two hours.",
         "[d1] Matched Brynjar's pace for four miles without complaint. Standing at right shoulder now, watchful, not crowding.",
         "[d1] Standing at Brynjar's right shoulder through the introduction — present but not crowding the exchange. Maret's angle toward him has eased slightly as Brynjar spoke.",
-        "[d1] Held his quiet at Brynjar's shoulder through Maret's explanation — present, listening, not crowding the exchange."
+        "[d1] Held his quiet at Brynjar's shoulder through Maret's explanation — present, listening, not crowding the exchange.",
+        "[d1] Held his quiet through Maret's refusal — no comment, no move."
       ],
       "knownFacts": [
         "Reads fighting stances on sight",
@@ -671,7 +663,7 @@
       "aliases": [
         "Redline Warrior"
       ],
-      "met": 1
+      "met": 2
     },
     "sera": {
       "id": "sera",
@@ -1016,7 +1008,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 6,
+    "turnsSinceOffer": 7,
     "recentOffers": [
       {
         "thing": "Doss watching Brynjar with the stillness of someone deciding something — she has not offered it yet, but she is on the edge of it",
@@ -3655,7 +3647,8 @@
         "kind": "mystery",
         "facts": [
           "[d1] The Marchers' word for what Stillhold operatives carry — a cord or knot, not a weapon. May be connected to the shimmer pressed into the heavier follower's heel-strike. The cloth bundle's knotted cord may be an example of this craft.",
-          "[d1] The cord is a Stillhold debt-record — the Stillhold keeps its law in knots rather than text. A cord carried to the record-hall closes a named debt. This one required a delivery in person that the original bearer could no longer make."
+          "[d1] The cord is a Stillhold debt-record — the Stillhold keeps its law in knots rather than text. A cord carried to the record-hall closes a named debt. This one required a delivery in person that the original bearer could no longer make.",
+          "[d1] The cloth bundle containing the cord-record has been handed to Maret and is now in her care. Whether the debt it names is intact or already compromised remains open."
         ],
         "links": [
           "stillhold-operatives",
@@ -3678,7 +3671,8 @@
           "[d1] When Brynjar named the bundle and the follower in the ash copse plainly, she recalibrated — not surprised, but recalculating the shape of what she half-knew. She asked directly how much he knows about the cord's purpose.",
           "[d1] Stillhold woman, the subject of the pursuit",
           "[d1] Caught on the chalk track one mile north of the Stillhold approach. Stopped when she heard pursuit, assessed Brynjar, Freki, and Ragnar in sequence, and said: 'You're not Wardhouse.' Has not run. Looks to be in her thirties, pale, grey wool cloak. Reads a situation fast and shows nothing.",
-          "[d1] Was sent by someone to deliver the cord-record to the Stillhold's record-hall in person. The woman who originally needed to deliver it could not — her situation had changed. The follower at the ash copse was not Maret's; she noticed them two days out of the Marchward."
+          "[d1] Was sent by someone to deliver the cord-record to the Stillhold's record-hall in person. The woman who originally needed to deliver it could not — her situation had changed. The follower at the ash copse was not Maret's; she noticed them two days out of the Marchward.",
+          "[d1] Refused escort to the Stillhold gate — the delivery must arrive without visible Marcher company or a hound; too much noise for a debt-record. Took the cloth bundle and is walking the last mile alone."
         ],
         "links": [
           "the-stillhold",
@@ -3818,17 +3812,18 @@
     ]
   },
   "tendencies": {
-    "leadership": 7.248498340926586,
-    "cerebral": 6.1340052569053825,
-    "strategic": 4.04709641754765,
-    "ruthless": 0.5446415584428731,
-    "social": 7.341327660055557,
-    "cautious": 6.904718381783808
+    "leadership": 7.0672858824034215,
+    "cerebral": 5.980655125482747,
+    "strategic": 3.9459190071089583,
+    "ruthless": 0.5310255194818012,
+    "social": 8.157794468554169,
+    "cautious": 6.7321004222392125,
+    "generous": 1
   },
   "aptitudes": [
     "banner"
   ],
-  "actionCount": 26,
+  "actionCount": 27,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -3882,6 +3877,16 @@
   "nativeGrantsVersion": 1,
   "reconcileVersion": 47,
   "gallery": [
+    {
+      "kind": "holding",
+      "prompt": "The Fell Pell",
+      "url": "https://image.pollinations.ai/prompt/The%20Fell%20Pell%3A%20a%20working%20enterprise%2C%20steady%2C%20kept%20up%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=26713&nologo=true",
+      "caption": "The Fell Pell",
+      "worldDay": 69,
+      "at": "2026-09-07T13:29:03.773Z",
+      "subjectKind": "holding",
+      "subjectId": "the-fell-pell"
+    },
     {
       "kind": "npc",
       "prompt": "Maret Threnwick",
@@ -3970,8 +3975,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788787434786,
-  "rev": 84,
+  "updatedAt": 1788788179207,
+  "rev": 86,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4237,7 +4242,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 29
+    "riven_marches": 30
   },
   "practice": {
     "schemaVersion": 1,
@@ -4273,6 +4278,12 @@
       "text": "Brynjar has sworn a blood oath to kill Kjotve Olafsson with honor — spoken aloud in the Marchward square on World-day 20.",
       "day": 1,
       "subjectId": "kjotve-olafsson"
+    },
+    {
+      "id": "maret-threnwick",
+      "text": "The cloth bundle from the Crow and Thistle has been handed to Maret Threnwick, who is carrying it to the Stillhold's record-hall alone.",
+      "day": 1,
+      "subjectId": "maret-threnwick"
     }
   ],
   "teachers": {},
@@ -4311,10 +4322,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-09-07T13:23:54.773Z",
-      "lastAt": "2026-09-07T13:23:54.773Z",
+      "lastAt": "2026-09-07T13:36:19.194Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 1
+      "beats": 2
     }
   ],
   "_pendingArrival": null,
@@ -4330,24 +4341,25 @@
     "at": "2026-07-23T01:18:04.353Z"
   },
   "_opEmitted": {
-    "sceneSummary": 22,
-    "choices": 22,
-    "scene": 22,
-    "npcUpdates": 20,
+    "sceneSummary": 23,
+    "choices": 23,
+    "scene": 23,
+    "npcUpdates": 21,
     "placeUpdates": 5,
     "generateRequest": 3,
     "moveTo": 3,
     "timeOps": 22,
-    "codexUpdates": 20,
+    "codexUpdates": 21,
     "sceneEnded": 6,
-    "characterDeltas": 7,
+    "characterDeltas": 8,
     "offer": 3,
     "deeds": 1,
     "standingOps": 1,
     "questUpdates": 3,
-    "stageOps": 2
+    "stageOps": 2,
+    "factUpdates": 1
   },
-  "_opTurns": 22,
+  "_opTurns": 23,
   "_opLedger": {
     "offer": {
       "applied": 3,
@@ -4421,7 +4433,8 @@
       "store": {
         "raw_material": 4
       },
-      "lastFeatureOfferCount": 1669
+      "lastFeatureOfferCount": 1669,
+      "image": "https://image.pollinations.ai/prompt/The%20Fell%20Pell%3A%20a%20working%20enterprise%2C%20steady%2C%20kept%20up%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=26713&nologo=true"
     }
   ],
   "_lastProjectDay": 1,
@@ -4437,8 +4450,9 @@
   "_applyFailures": null,
   "_debtReceipts": [],
   "skillUses": {
-    "negotiate": 1,
-    "careful": 1
+    "negotiate": 2,
+    "careful": 1,
+    "help": 1
   },
   "aptitudeEarnCount": {
     "banner": 1

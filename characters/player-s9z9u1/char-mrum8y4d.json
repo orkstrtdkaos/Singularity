@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 6,
-  "xp": 589,
+  "xp": 594,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -78,6 +78,10 @@
     {
       "abilityId": "descent",
       "level": 2
+    },
+    {
+      "abilityId": "wayfinding",
+      "level": 1
     }
   ],
   "alignment": {
@@ -92,7 +96,7 @@
   "maxHealth": 63,
   "health": 63,
   "maxEnergy": 141,
-  "energy": 47,
+  "energy": 33,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -169,14 +173,19 @@
         "player": "Head toward the Waygate now—move while the crew arrival is still small confusion",
         "summary": "Left the Half-Cathedral at dawn with Vessin; moved openly toward the Waygate while the scaffold crew's arrival still covered the departure.",
         "narration": "You and Vessin move while the yard is still half-chaos—crew arriving in clusters, calling measurements, nobody tracking who passes through the outer archway. The morning has that quality where five more people are visible but the crowd hasn't yet compacted into something watchful.\n\nVessin walks two paces ahead, pack riding high on her shoulders, moving at the steady pace of someone who has already calculated the hours ahead. You follow with Cy clicking softly at your shoulder, its lens catching the weak spring light. The Half-Cathedral recedes behind you—its open nave settling into memory, that alcove on the eastern landing already becoming something you carry rather than something you occupy.\n\nThe path narrows as you leave the yard, threading between the old stonework and the younger settlements that cluster at Grovehome's edges. Vendors are setting up stalls for the midday trade. A baker's apprentice calls out fresh bread. Water runs in runnels from the melt, cutting new channels in the soft earth. Nobody stops you. Nobody marks you as anything but travelers passing through.\n\nVessin doesn't speak, but her shoulders settle lower as the Half-Cathedral's shadow falls away. You can read it in her stride—the visible world is smaller than the one behind you, and that is something like relief."
+      },
+      {
+        "player": "Use Wayfinder g to ease the journey through the waygate and to the crossing.",
+        "summary": "Loki navigated the Waygate Path with Wayfinding, reading the land's passage and easing the journey—Vessin and Cy followed as the path leaned toward the Quickwood Eaves gate.",
+        "narration": "The Waygate Path opens beneath spring-soft sky, the way ahead narrowing between high walls of pale stone that catch the weak light. Vessin sets a steady rhythm, and you let Wayfinding settle into your bones — the craft moves through you like recognition, not effort. The ground speaks: water-channels new with melt, the weight of passage, the stone's own memory of where feet have found purchase for centuries.\n\nCy clicks approval at your shoulder. The path resolves itself — not simpler, but *legible*. You read the shortcuts the land offers: a stone ford where the water shallows, a switchback that saves a third of the climbing, the precise moment where the Waygate Path begins to lean toward the Quickwood Eaves gate rather than the open road. Vessin follows where you lead, and the hours compress into something manageable. Your energy holds steady even as the day pulls long.\n\nBy late afternoon the stone lightens, moss thickens at the edges, and the air begins to smell green in a way that promises the Quickwood is close. The Waygate Path has done its work — you've read it cleanly, and the road ahead is no longer distant. The gate stands somewhere ahead in the failing light, patient and waiting."
       }
     ],
     "lastTurn": {
-      "narration": "You and Vessin move while the yard is still half-chaos—crew arriving in clusters, calling measurements, nobody tracking who passes through the outer archway. The morning has that quality where five more people are visible but the crowd hasn't yet compacted into something watchful.\n\nVessin walks two paces ahead, pack riding high on her shoulders, moving at the steady pace of someone who has already calculated the hours ahead. You follow with Cy clicking softly at your shoulder, its lens catching the weak spring light. The Half-Cathedral recedes behind you—its open nave settling into memory, that alcove on the eastern landing already becoming something you carry rather than something you occupy.\n\nThe path narrows as you leave the yard, threading between the old stonework and the younger settlements that cluster at Grovehome's edges. Vendors are setting up stalls for the midday trade. A baker's apprentice calls out fresh bread. Water runs in runnels from the melt, cutting new channels in the soft earth. Nobody stops you. Nobody marks you as anything but travelers passing through.\n\nVessin doesn't speak, but her shoulders settle lower as the Half-Cathedral's shadow falls away. You can read it in her stride—the visible world is smaller than the one behind you, and that is something like relief.",
-      "sceneSummary": "Left the Half-Cathedral at dawn with Vessin; moved openly toward the Waygate while the scaffold crew's arrival still covered the departure.",
+      "narration": "The Waygate Path opens beneath spring-soft sky, the way ahead narrowing between high walls of pale stone that catch the weak light. Vessin sets a steady rhythm, and you let Wayfinding settle into your bones — the craft moves through you like recognition, not effort. The ground speaks: water-channels new with melt, the weight of passage, the stone's own memory of where feet have found purchase for centuries.\n\nCy clicks approval at your shoulder. The path resolves itself — not simpler, but *legible*. You read the shortcuts the land offers: a stone ford where the water shallows, a switchback that saves a third of the climbing, the precise moment where the Waygate Path begins to lean toward the Quickwood Eaves gate rather than the open road. Vessin follows where you lead, and the hours compress into something manageable. Your energy holds steady even as the day pulls long.\n\nBy late afternoon the stone lightens, moss thickens at the edges, and the air begins to smell green in a way that promises the Quickwood is close. The Waygate Path has done its work — you've read it cleanly, and the road ahead is no longer distant. The gate stands somewhere ahead in the failing light, patient and waiting.",
+      "sceneSummary": "Loki navigated the Waygate Path with Wayfinding, reading the land's passage and easing the journey—Vessin and Cy followed as the path leaned toward the Quickwood Eaves gate.",
       "choices": [
         {
-          "label": "Push ahead hard—Vessin matches a faster pace and you cover ground quickly.",
+          "label": "Press on toward the gate through the last of the daylight—reach it before full dark.",
           "attribute": "physical",
           "subAttribute": "agility",
           "axes": {},
@@ -193,7 +202,24 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Vessin what she read in the man with the crooked jaw—what else did that moment show her?",
+          "label": "Find shelter and camp here—rest before the gate, knowing what waits on the far side.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "careful",
+            "endure"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Vessin what she knows about the Crossroads before you reach it—what waits, what's watched.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
@@ -209,35 +235,19 @@
           "emergenceId": null
         },
         {
-          "label": "Use Prism Sight on the path ahead—read what the light holds about who has passed this way recently.",
+          "label": "Step closer to the gate's edge and read it with Prism Sight—what does the stone remember about recent passage?",
           "attribute": "mental",
-          "subAttribute": "reason",
+          "subAttribute": "insight",
           "axes": {},
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
             "study",
-            "scout"
+            "careful"
           ],
           "abilityId": "prism_sight",
           "energyCost": 3,
           "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Watch Vessin move and note what you can read—is she faster on open ground, or does she slow in crowds?",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         }
@@ -245,7 +255,7 @@
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
+        "energy": -10,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
@@ -259,38 +269,50 @@
       "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "The path leading outward from Grovehome's yard—narrow, winding between old stonework and settled houses, spring melt-water running in channels through soft earth. Early midday: vendors setting up market stalls, the Half-Cathedral's shadow receding behind, the road ahead still quiet.",
+        "setting": "The Waygate Path, late afternoon in failing spring light—stone walls narrowing toward the gate ahead, moss thickening at the path's edges, melt-water still running in channels beneath. The air turns green and smells of the Quickwood beyond. No sound but your own passage and the distant hum of the gate's stone.",
         "npcsPresent": [
           {
             "name": "Vessin Tallow-bark",
-            "state": "Walking two paces ahead, pack shouldered, moving at a steady measured pace toward the Waygate; shoulders settling lower now that the cathedral's shadow is gone."
+            "state": "Walking ahead at a measured pace, following where Loki leads—pack steady on shoulders, eyes on the path ahead, shoulders lower than before. Reading the land like someone who trusts the work."
           }
         ],
         "objects": [
-          "The path beneath—soft from spring melt, marked by fresh water-channels",
-          "Market stalls at the settlement edges—vendors arranging goods",
-          "Cy at shoulder—clicking softly, lens catching the weak spring light"
+          "The Waygate Path beneath—pale stone worn smooth by centuries, moss at the margins, water-channels still flowing with melt",
+          "Cy at shoulder—clicking softly, lens bright and attentive",
+          "The gate ahead—visible now as a shimmer of change in the stone, not yet close enough to read clearly"
         ],
         "threads": [
-          "The man in the lower Annex—employer named, still not confronted",
-          "What the Crossroads will show and what it answers",
-          "Whether Vessin's read of the morning goes deeper than what she has already said"
+          "The man in the lower Annex—still not confronted, still the open question between here and the Crossroads",
+          "What the Crossing will show and what answers wait there",
+          "Vessin's relationship to the wider threads—what she knows that she hasn't yet said"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "vessin-tallow-bark",
-          "name": "Vessin Tallow-bark",
-          "role": "Lone traveler; reader of falsecrafts",
-          "note": "Left the Half-Cathedral alcove at dawn before the scaffold crew arrived—shoulders settling lower now that the cathedral is behind, reading the open road with the same appraising eye she brought to everything else. Moving toward the Waygate without question or hesitation.",
-          "statusNote": "Moving toward the Waygate with Loki; steady pace, focused ahead"
+          "note": "Followed Loki's wayfinding without question—shoulders settling lower as the path clarified and the journey eased. Moving steady toward the gate.",
+          "statusNote": "On the Waygate Path, moving toward the Quickwood Eaves gate, evening approaching. Steady and focused ahead."
         }
       ],
       "factUpdates": [],
-      "placeUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "The Waygate Path is passable and legible—melt-water channels, moss thickening, stone worn and known. The gate ahead is accessible by late afternoon of day 2."
+        }
+      ],
       "discovery": null,
-      "codexUpdates": [],
+      "codexUpdates": [
+        {
+          "topic": "gen-the-waygate-path",
+          "label": "The Waygate Path",
+          "kind": "place",
+          "fact": "The path reads clearly to Wayfinding—shortcuts visible, water-fords passable, the passage eased by recognition of the land's own memory. The Quickwood Eaves gate lies ahead, reached by late afternoon of day 2.",
+          "links": [
+            "the-crossing"
+          ]
+        }
+      ],
       "holdingOps": [],
       "debtOps": [],
       "partyOps": [],
@@ -303,13 +325,10 @@
       "unlockPrecursor": null,
       "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 1.5,
-        "why": "traveling from the Half-Cathedral yard at Grovehome toward the Waygate—a slow, careful pace through settled ground"
+        "hoursPassed": 7,
+        "why": "traveled the Waygate Path from morning through late afternoon, reading the land with Wayfinding to ease the route"
       },
-      "moveTo": {
-        "location": "The Waygate Path",
-        "why": "Left the Half-Cathedral and Grovehome's yard; walking toward the Waygate on the outward path"
-      },
+      "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
@@ -325,30 +344,30 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The path leading outward from Grovehome's yard—narrow, winding between old stonework and settled houses, spring melt-water running in channels through soft earth. Early midday: vendors setting up market stalls, the Half-Cathedral's shadow receding behind, the road ahead still quiet.",
+      "setting": "The Waygate Path, late afternoon in failing spring light—stone walls narrowing toward the gate ahead, moss thickening at the path's edges, melt-water still running in channels beneath. The air turns green and smells of the Quickwood beyond. No sound but your own passage and the distant hum of the gate's stone.",
       "npcsPresent": [
         {
           "name": "Vessin Tallow-bark",
-          "state": "Walking two paces ahead, pack shouldered, moving at a steady measured pace toward the Waygate; shoulders settling lower "
+          "state": "Walking ahead at a measured pace, following where Loki leads—pack steady on shoulders, eyes on the path ahead, shoulders"
         }
       ],
       "objects": [
-        "The path beneath—soft from spring melt, marked by fresh water-channels",
-        "Market stalls at the settlement edges—vendors arranging goods",
-        "Cy at shoulder—clicking softly, lens catching the weak spring light"
+        "The Waygate Path beneath—pale stone worn smooth by centuries, moss at the margin",
+        "Cy at shoulder—clicking softly, lens bright and attentive",
+        "The gate ahead—visible now as a shimmer of change in the stone, not yet close en"
       ],
       "threads": [
-        "The man in the lower Annex—employer named, still not confronted",
-        "What the Crossroads will show and what it answers",
-        "Whether Vessin's read of the morning goes deeper than what she has already said"
+        "The man in the lower Annex—still not confronted, still the open question between here and the Crossroads",
+        "What the Crossing will show and what answers wait there",
+        "Vessin's relationship to the wider threads—what she knows that she hasn't yet said"
       ]
     },
-    "beats": 3
+    "beats": 4
   },
   "clock": {
     "schemaVersion": 1,
     "day": 2,
-    "hour": 14,
+    "hour": 21,
     "realAnchor": null
   },
   "companions": [
@@ -990,7 +1009,9 @@
     },
     "gen-the-waygate-path": {
       "visits": 1,
-      "notes": [],
+      "notes": [
+        "[d2] The Waygate Path is passable and legible—melt-water channels, moss thickening, stone worn and known. The gate ahead is accessible by late afternoon of day 2."
+      ],
       "flags": {},
       "lastVisit": 2,
       "vectorsKnown": []
@@ -1163,7 +1184,7 @@
     "lastSharedReadAt": "2026-09-07T19:37:41.155Z",
     "lastTickWorldDay": 69,
     "lastCanonWorldDay": 69,
-    "turnsSinceOffer": 48,
+    "turnsSinceOffer": 49,
     "recentOffers": [
       {
         "thing": "Cy said 'this unit has not descended in some time' — the hollow precision of that phrasing is a door. Whatever is in the deprecated…",
@@ -4645,7 +4666,7 @@
     "wits": 4
   },
   "pendingSubPoints": 0,
-  "skillPoints": 1,
+  "skillPoints": 0,
   "discoveries": [],
   "codex": {
     "schemaVersion": 1,
@@ -5426,9 +5447,12 @@
         "label": "The Waygate Path",
         "kind": "place",
         "facts": [
-          "[d2] you have walked here"
+          "[d2] you have walked here",
+          "[d2] The path reads clearly to Wayfinding—shortcuts visible, water-fords passable, the passage eased by recognition of the land's own memory. The Quickwood Eaves gate lies ahead, reached by late afternoon of day 2."
         ],
-        "links": [],
+        "links": [
+          "the-crossing"
+        ],
         "aliases": [],
         "createdDay": 2,
         "entityId": "gen-the-waygate-path",
@@ -5505,17 +5529,17 @@
     ]
   },
   "tendencies": {
-    "devotion": 1.8844832196398158,
-    "cerebral": 10.681466576603226,
-    "social": 16.654062653609678,
-    "strategic": 6.614099288381071,
-    "cautious": 4.62877668785106,
-    "amorous": 22.139204578601994,
-    "generous": 2.7963977206983546,
-    "ruthless": 0.9809153018070631,
-    "risky": 0.8016482352093962,
-    "patient": 0.21891571657635028,
-    "deception": 0.2548292333858097
+    "devotion": 1.8373711391488203,
+    "cerebral": 10.414429912188146,
+    "social": 16.237711087269435,
+    "strategic": 7.4487468061715445,
+    "cautious": 4.513057270654783,
+    "amorous": 21.585724464136945,
+    "generous": 2.726487777680896,
+    "ruthless": 0.9563924192618865,
+    "risky": 0.7816070293291613,
+    "patient": 0.21344282366194153,
+    "deception": 0.24845850255116445
   },
   "aptitudes": [
     "silver_tongue",
@@ -5526,7 +5550,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 138,
+  "actionCount": 139,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -5589,6 +5613,36 @@
   "nativeGrantsVersion": 1,
   "reconcileVersion": 47,
   "gallery": [
+    {
+      "kind": "ability",
+      "prompt": "Rivercraft",
+      "url": "https://image.pollinations.ai/prompt/Rivercraft%3A%20Boats%2C%20currents%2C%20crossings%2C%20and%20weather-sense%20%E2%80%94%20the%20water-roads%20of%20the%20valley%20and%20what%20moves%20on%20them.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20horizon%20tradition%3A%20road-dust%2C%20open-sky%20blue%2C%20tent-canvas%3B%20tents%2C%20roads%2C%20distance%20itself%20as%20home%3B%20wide%20horizon%20light%2C%20always-moving%3B%20no%20fixed%20anything%20%E2%80%94%20distance%20as%20home%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20road-dust%2C%20open-sky%20blue%2C%20tent-canvas%2C%20wide%20horizon%20light%2C%20always-moving%2C%20no%20fixed%20anything?width=1024&height=512&seed=98519&nologo=true",
+      "caption": "Rivercraft",
+      "worldDay": 69,
+      "at": "2026-09-07T19:47:36.545Z",
+      "subjectKind": "ability",
+      "subjectId": "rivercraft"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Wayfinding",
+      "url": "https://image.pollinations.ai/prompt/Wayfinding%3A%20Read%20trails%2C%20weather-sign%2C%20and%20country%20to%20track%2C%20navigate%2C%20and%20estimate%20what%20passed%20and%20when.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20horizon%20tradition%3A%20road-dust%2C%20open-sky%20blue%2C%20tent-canvas%3B%20tents%2C%20roads%2C%20distance%20itself%20as%20home%3B%20wide%20horizon%20light%2C%20always-moving%3B%20no%20fixed%20anything%20%E2%80%94%20distance%20as%20home%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20road-dust%2C%20open-sky%20blue%2C%20tent-canvas%2C%20wide%20horizon%20light%2C%20always-moving%2C%20no%20fixed%20anything?width=1024&height=512&seed=47875&nologo=true",
+      "caption": "Wayfinding",
+      "worldDay": 69,
+      "at": "2026-09-07T19:47:22.797Z",
+      "subjectKind": "ability",
+      "subjectId": "wayfinding"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Quiet Step",
+      "url": "https://image.pollinations.ai/prompt/Quiet%20Step%3A%20Move%20unseen%20and%20unheard%3B%20scout%2C%20shadow%2C%20and%20slip%20away.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20umbral%20tradition%3A%20near-black%2C%20cold%20indigo%2C%20faint%20bioluminescent%20teal%3B%20wet%20stone%2C%20unlit%20passages%2C%20soft%20cloth%3B%20no%20light%20source%20%E2%80%94%20form%20implied%20by%20touch%2C%20edges%20felt%20not%20lit%3B%20soft-footed%2C%20sensed-in-the-dark%2C%20quiet%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20near-black%2C%20cold%20indigo%2C%20faint%20bioluminescent%20teal%2C%20no%20light%20source%2C%20soft-footed%2C%20sensed-in-the-dark%2C%20quiet?width=1024&height=512&seed=9306&nologo=true",
+      "caption": "Quiet Step",
+      "worldDay": 69,
+      "at": "2026-09-07T19:46:51.097Z",
+      "subjectKind": "ability",
+      "subjectId": "quiet_step"
+    },
     {
       "kind": "location",
       "prompt": "The Waygate Path",
@@ -5837,8 +5891,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788810248196,
-  "rev": 451,
+  "updatedAt": 1788810547891,
+  "rev": 459,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -6694,7 +6748,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 97
+    "the_quickwood": 98
   },
   "opLossPending": false,
   "sessions": [
@@ -6765,10 +6819,10 @@
     {
       "id": "sess-9",
       "startedAt": "2026-09-07T19:42:14.907Z",
-      "lastAt": "2026-09-07T19:44:08.178Z",
+      "lastAt": "2026-09-07T19:49:07.871Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 2
+      "beats": 3
     }
   ],
   "establishedFacts": [
@@ -6804,21 +6858,25 @@
       "lastWhy": null
     }
   },
-  "_pendingArrival": null,
+  "_pendingArrival": {
+    "ref": "the crossing",
+    "name": "The Crossing",
+    "destId": "the_crossing"
+  },
   "_opEmitted": {
-    "sceneSummary": 162,
-    "choices": 162,
-    "characterDeltas": 62,
-    "scene": 162,
-    "placeUpdates": 17,
-    "codexUpdates": 94,
-    "timeOps": 151,
+    "sceneSummary": 163,
+    "choices": 163,
+    "characterDeltas": 63,
+    "scene": 163,
+    "placeUpdates": 18,
+    "codexUpdates": 95,
+    "timeOps": 152,
     "offer": 11,
     "generateRequest": 6,
-    "sceneEnded": 39,
-    "npcUpdates": 134,
+    "sceneEnded": 40,
+    "npcUpdates": 135,
     "moveTo": 4,
-    "gambitApt": 4,
+    "gambitApt": 5,
     "deeds": 1,
     "questUpdates": 17,
     "standingOps": 1,
@@ -6830,7 +6888,7 @@
     "imagePrompt": 1,
     "scene_ended": 1
   },
-  "_opTurns": 162,
+  "_opTurns": 163,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1.25
@@ -6846,7 +6904,8 @@
       "prism_sight": 10,
       "harmonic_voice": 6,
       "hunters_strike": 3,
-      "descent": 8
+      "descent": 8,
+      "wayfinding": 1
     },
     "coActivations": {
       "falsecraft+the_wrong_reality": 1,
@@ -6864,7 +6923,7 @@
       {
         "abilityId": "appetite_sense",
         "since": "2026-07-21T18:16:21.011Z",
-        "progress": 8
+        "progress": 9
       }
     ],
     "lastUsed": {
@@ -6876,7 +6935,8 @@
       "prism_sight": 33,
       "harmonic_voice": 32,
       "hunters_strike": 32,
-      "descent": 33
+      "descent": 33,
+      "wayfinding": 69
     }
   },
   "teachers": {},
@@ -7160,30 +7220,30 @@
     "the-taken-from-the-city: no-such-quest"
   ],
   "_suggestCache": {
-    "level": 5,
+    "level": 6,
     "picks": [
       {
-        "abilityId": "afterimage",
-        "why": "You already live in misdirection and false realities — Afterimage is the physical expression of the same logic: you vanish and leave a decoy where you stood, which is exactly how a social-cerebral illusionist escapes when The Misdirect alone isn't enough. It closes the gap between 'I confused them' and 'I am already gone.'",
-        "fit": "synergy"
+        "abilityId": "ordinary_face",
+        "why": "Appetite-Sense is 8/10 of the way there, and this character lives in social infiltration — but right now they can only *talk* their way through a room (Harmonic Voice, Better Story, Falsecraft); Ordinary Face lets them *be* the person who belongs there before they open their mouth, completing the deceptive social loop they already play constantly.",
+        "fit": "aspiration"
       },
       {
-        "abilityId": "mediators_tongue",
-        "why": "With social 17, silver_tongue, and The Better Story as your second most-used craft, you are already the character who talks rooms down — but you have no dedicated de-escalation or deal-finding tool. Mediator's Tongue formalises what you're already doing and gives it mechanical teeth in arbitration and negotiation scenes where The Better Story reshapes narrative but can't split a contested deal.",
+        "abilityId": "calm_word",
+        "why": "With silver_tongue, orator, and charmer all stamped into their identity, and amorous/social as the dominant behavioural registers, the one gap in their people-craft is de-escalation — they can charm, deceive, and orate, but they have no way to pull a moment back from the edge of violence without relying on the same influence tools; Calming Word is a distinct, portable mercy that fills exactly that gap.",
         "fit": "gap"
       },
       {
-        "abilityId": "stillness_field",
-        "why": "You own Harmonic Voice but have built nothing around it — Stillness Field is the Harmonic craft that fits a cerebral, cautious operator: it doesn't fight, it controls the information space, silencing a room's edge so a conversation can't be overheard or a pursuit loses your sound. It also begins to make Harmonic Voice feel like a school rather than an orphaned pick.",
+        "abilityId": "useful_absence",
+        "why": "They own Misdirect and False Target but almost never reach for them — what they actually *do* is make things disappear from notice (Falsecraft, Prism Sight, Umbracraft all point the same direction); Useful Absence is the object-level version of the invisibility instinct they already apply to people and realities, and it deepens the stealth-of-perception signature they genuinely use.",
         "fit": "synergy"
       },
       {
         "abilityId": "blend_in",
-        "why": "The False Target and Umbracraft sit completely unused, which suggests you avoid direct confrontation and prefer to simply not be the target at all — Blend In is the purest expression of that instinct, and it stacks cleanly under your existing Falsecraft and Misdirect without requiring physical capability you don't lean on.",
+        "why": "A cerebral-social character who is already misdirecting, falsecrafting, and voice-charming their way through encounters has no crowd-level concealment — Blend In is the passive anchor that makes all their active social tools safer to deploy, and it costs nothing in discipline (no new method to learn) while covering the one moment where they're currently exposed: a room full of people who haven't been individually worked yet.",
         "fit": "gap"
       }
     ],
-    "note": "Your two aspirations (The Ended Threat, Appetite-Sense) aren't reachable yet — this level is about deepening your social-illusionist identity while the aspiration path matures."
+    "note": "Two of these (Ordinary Face, Blend In) layer into the Appetite-Sense aspiration's infiltration core; Calming Word and Useful Absence fill the one crack in an otherwise formidable social-deception kit — the inability to *stop* something rather than redirect it."
   },
   "worldEvents": [],
   "authorEdits": [
@@ -7202,7 +7262,10 @@
     "descent": "https://image.pollinations.ai/prompt/Descent%3A%20The%20demonic-pole%20mastery%3A%20appetite%20named%2C%20bargains%20struck%2C%20the%20refusal%20to%20pretend%20that%20want%20is%20not%20the%20engine.%20Not%20evil%20%E2%80%94%20the%20honest%20hunger.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20abyssal%20tradition%3A%20deep%20red%2C%20char-black%2C%20ember-orange%3B%20horned%20architecture%2C%20bargain-marks%2C%20appetite%20made%20stone%3B%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%3B%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=7511&nologo=true",
     "the_choir_sustains": "https://image.pollinations.ai/prompt/The%20Choir%20Sustains%3A%20Sustain%20through%20communion%20with%20the%20choir%20%E2%80%94%20when%20you%20begin%20to%20fail%2C%20the%20deep%20holds%20what%20the%20above%20has%20exhausted.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20abyssal%20tradition%3A%20deep%20red%2C%20char-black%2C%20ember-orange%3B%20horned%20architecture%2C%20bargain-marks%2C%20appetite%20made%20stone%3B%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%3B%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=15923&nologo=true",
     "the_offered_price": "https://image.pollinations.ai/prompt/The%20Offered%20Price%3A%20Name%20the%20true%20price%20of%20a%20thing%20someone%20wants%20%E2%80%94%20exactly%2C%20honestly%2C%20with%20nothing%20hidden.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20abyssal%20tradition%3A%20deep%20red%2C%20char-black%2C%20ember-orange%3B%20horned%20architecture%2C%20bargain-marks%2C%20appetite%20made%20stone%3B%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%3B%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=56460&nologo=true",
-    "the_descent_path": "https://image.pollinations.ai/prompt/The%20Descent%20Path%3A%20Find%20or%20make%20the%20passage%20to%20the%20below%20%E2%80%94%20the%20literal%20underground%2C%20the%20hidden%20layer%2C%20the%20place%20others%20don't%20know%20to%20reach.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20abyssal%20tradition%3A%20deep%20red%2C%20char-black%2C%20ember-orange%3B%20horned%20architecture%2C%20bargain-marks%2C%20appetite%20made%20stone%3B%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%3B%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=26427&nologo=true"
+    "the_descent_path": "https://image.pollinations.ai/prompt/The%20Descent%20Path%3A%20Find%20or%20make%20the%20passage%20to%20the%20below%20%E2%80%94%20the%20literal%20underground%2C%20the%20hidden%20layer%2C%20the%20place%20others%20don't%20know%20to%20reach.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20abyssal%20tradition%3A%20deep%20red%2C%20char-black%2C%20ember-orange%3B%20horned%20architecture%2C%20bargain-marks%2C%20appetite%20made%20stone%3B%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%3B%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=26427&nologo=true",
+    "quiet_step": "https://image.pollinations.ai/prompt/Quiet%20Step%3A%20Move%20unseen%20and%20unheard%3B%20scout%2C%20shadow%2C%20and%20slip%20away.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20umbral%20tradition%3A%20near-black%2C%20cold%20indigo%2C%20faint%20bioluminescent%20teal%3B%20wet%20stone%2C%20unlit%20passages%2C%20soft%20cloth%3B%20no%20light%20source%20%E2%80%94%20form%20implied%20by%20touch%2C%20edges%20felt%20not%20lit%3B%20soft-footed%2C%20sensed-in-the-dark%2C%20quiet%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20near-black%2C%20cold%20indigo%2C%20faint%20bioluminescent%20teal%2C%20no%20light%20source%2C%20soft-footed%2C%20sensed-in-the-dark%2C%20quiet?width=1024&height=512&seed=9306&nologo=true",
+    "wayfinding": "https://image.pollinations.ai/prompt/Wayfinding%3A%20Read%20trails%2C%20weather-sign%2C%20and%20country%20to%20track%2C%20navigate%2C%20and%20estimate%20what%20passed%20and%20when.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20horizon%20tradition%3A%20road-dust%2C%20open-sky%20blue%2C%20tent-canvas%3B%20tents%2C%20roads%2C%20distance%20itself%20as%20home%3B%20wide%20horizon%20light%2C%20always-moving%3B%20no%20fixed%20anything%20%E2%80%94%20distance%20as%20home%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20road-dust%2C%20open-sky%20blue%2C%20tent-canvas%2C%20wide%20horizon%20light%2C%20always-moving%2C%20no%20fixed%20anything?width=1024&height=512&seed=47875&nologo=true",
+    "rivercraft": "https://image.pollinations.ai/prompt/Rivercraft%3A%20Boats%2C%20currents%2C%20crossings%2C%20and%20weather-sense%20%E2%80%94%20the%20water-roads%20of%20the%20valley%20and%20what%20moves%20on%20them.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20horizon%20tradition%3A%20road-dust%2C%20open-sky%20blue%2C%20tent-canvas%3B%20tents%2C%20roads%2C%20distance%20itself%20as%20home%3B%20wide%20horizon%20light%2C%20always-moving%3B%20no%20fixed%20anything%20%E2%80%94%20distance%20as%20home%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20road-dust%2C%20open-sky%20blue%2C%20tent-canvas%2C%20wide%20horizon%20light%2C%20always-moving%2C%20no%20fixed%20anything?width=1024&height=512&seed=98519&nologo=true"
   },
   "portraitPinned": true,
   "placeEdges": {
@@ -7266,10 +7329,12 @@
   "skillUses": {
     "plan": 1,
     "discuss": 1,
-    "travel": 1,
-    "scout": 1
+    "travel": 2,
+    "scout": 1,
+    "prepare": 1
   },
   "aptitudeEarnCount": {
     "faithful": 1
-  }
+  },
+  "_pendingIntent": null
 }

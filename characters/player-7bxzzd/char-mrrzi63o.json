@@ -8,7 +8,7 @@
   "whyHere": "You put down the blade, or you were sent away from it, or you are looking for a line worth holding that isn't theirs.",
   "background": "war_leader",
   "level": 1,
-  "xp": 67,
+  "xp": 72,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -45,7 +45,7 @@
   "maxHealth": 46,
   "health": 46,
   "maxEnergy": 108,
-  "energy": 34,
+  "energy": 29,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -110,8 +110,183 @@
     "Maret agreed to speak at the Marchward — the group set north for the Crow and Thistle, Stillhold walls shrinking behind them.",
     "Brynjar, Maret, Ragnar, and Freki walked north from the Stillhold to the Marchward's edge; Maret will speak what she learned from the record-hall by firelight."
   ],
-  "currentLocationId": "the_marchward",
-  "activeScene": null,
+  "currentLocationId": "the_crossing",
+  "activeScene": {
+    "locationId": "the_crossing",
+    "turns": [
+      {
+        "player": "Travel to the crossroads via this waygate",
+        "summary": "Brynjar, Maret, Ragnar, and Freki stepped through the Marchward's waygate and arrived at The Crossing hub.",
+        "narration": "The waygate anchor-stone sits at the north end of the Marchward's neutral ground — a block of dark granite with an iron ring driven through its crown, the ring worn smooth by more hands than anyone here has counted. Freki presses close to your left knee as you approach it, not afraid, just attentive, reading the thing the way she reads a doorway. Maret and Ragnar fall in half a step behind you. The stone hums when your palm finds the ring — not loud, not warm, just present, like a sleeping thing that knows it is being woken.\n\nYou speak the destination plainly, the way Marchward custom demands of anyone using the truce-gate: \"The Crossing.\" The air folds. There is no flash, no wind, only the brief wrongness of being somewhere else before you have walked there — the stone still in your hand, and then not, and then the light is different and the ground underfoot is different and the iron ring is gone.\n\nThe Crossing opens around you. A broad hub-space, high-roofed in old stone, gates in every face of the octagonal hall — some lit, some dark, one churning with that same fold-hum you just stepped through. The floor is worn to a dish at every threshold. Travelers move through without ceremony, heads down or watching the gates with the careful respect of people who know the fold is not obligated to carry them gently. A Wardcaller in grey-green stands at the central column, logging departures on a chalk-board. Freki's nose drops immediately to the stone — a year of crossings pressed into the floor, and she is reading every one."
+      }
+    ],
+    "lastTurn": {
+      "narration": "The waygate anchor-stone sits at the north end of the Marchward's neutral ground — a block of dark granite with an iron ring driven through its crown, the ring worn smooth by more hands than anyone here has counted. Freki presses close to your left knee as you approach it, not afraid, just attentive, reading the thing the way she reads a doorway. Maret and Ragnar fall in half a step behind you. The stone hums when your palm finds the ring — not loud, not warm, just present, like a sleeping thing that knows it is being woken.\n\nYou speak the destination plainly, the way Marchward custom demands of anyone using the truce-gate: \"The Crossing.\" The air folds. There is no flash, no wind, only the brief wrongness of being somewhere else before you have walked there — the stone still in your hand, and then not, and then the light is different and the ground underfoot is different and the iron ring is gone.\n\nThe Crossing opens around you. A broad hub-space, high-roofed in old stone, gates in every face of the octagonal hall — some lit, some dark, one churning with that same fold-hum you just stepped through. The floor is worn to a dish at every threshold. Travelers move through without ceremony, heads down or watching the gates with the careful respect of people who know the fold is not obligated to carry them gently. A Wardcaller in grey-green stands at the central column, logging departures on a chalk-board. Freki's nose drops immediately to the stone — a year of crossings pressed into the floor, and she is reading every one.",
+      "sceneSummary": "Brynjar, Maret, Ragnar, and Freki stepped through the Marchward's waygate and arrived at The Crossing hub.",
+      "choices": [
+        {
+          "label": "Find the Wardcaller and log your arrival — ask what roads out of the Crossing are open and watched.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": "easy",
+          "intentTags": [
+            "negotiate",
+            "careful"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Let Freki work the floor and watch which gates she lingers at — see if she reads anything off the travelers coming through.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": "easy",
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Pull Maret aside to a quiet wall and let her say what she learned in the Stillhold record-hall — she has held it long enough.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": "very easy",
+          "intentTags": [
+            "negotiate",
+            "careful"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Read the hall — the gates, the traffic, the chalk-board — and get a sense of who else passed through recently.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": "easy",
+          "intentTags": [
+            "study",
+            "scout"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false
+        }
+      ],
+      "scene": {
+        "setting": "The Crossing hub — a high-roofed octagonal hall of old stone, gates in every wall, floor worn to dishes at every threshold. Mid-afternoon light filters through clerestory slots in the vault. Travelers cross without ceremony.",
+        "npcsPresent": [
+          {
+            "name": "Wardcaller (unnamed)",
+            "state": "Standing at the central column, logging arrivals and departures on a chalk-board."
+          },
+          {
+            "name": "Maret Threnwick",
+            "state": "Just through the gate, settling her grey cloak, watching the hall with quiet attention."
+          },
+          {
+            "name": "Ragnar Solmyr",
+            "state": "Two steps behind Brynjar, eyes already on the exits, shoulders loose."
+          },
+          {
+            "name": "Freki",
+            "state": "Nose to the stone floor, reading the scent-record of every traveler who passed through."
+          }
+        ],
+        "objects": [
+          "Central stone column with chalk arrival/departure board",
+          "Eight gate-thresholds — some lit with the fold-hum, some dark",
+          "Iron rings set into each gate-stone",
+          "Worn dish-depressions at every threshold"
+        ],
+        "threads": [
+          "Maret is holding what she learned in the Stillhold record-hall — she has not spoken it yet",
+          "The Crossing's traffic is visible and unread",
+          "The road onward is unclear — no destination named beyond this hub"
+        ]
+      },
+      "moveTo": {
+        "location": "the_crossing",
+        "why": "stepped through the Marchward waygate, arriving at The Crossing hub"
+      },
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "waygate transit — a brief fold, not a march"
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "maret-threnwick",
+          "note": "Passed through the Marchward waygate with Brynjar and arrived at The Crossing. Still holding what she learned in the record-hall.",
+          "statusNote": "At The Crossing hub with Brynjar's group; carrying information from the Stillhold record-hall not yet spoken aloud."
+        },
+        {
+          "op": "update",
+          "npcId": "ragnar-solmyr",
+          "note": "Passed through the waygate with Brynjar, now reading the hall's exits on arrival.",
+          "statusNote": "At The Crossing hub with Brynjar's group; scanning exits."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "the-crossing",
+          "label": "The Crossing",
+          "kind": "place",
+          "fact": "An octagonal hub-hall of old stone with eight waygate thresholds — some active, some dark. Floor worn to dishes at every gate. A Wardcaller in grey-green logs arrivals and departures at the central column. Reached from the Marchward by waygate fold in under an hour.",
+          "links": [
+            "the-marchward",
+            "brynjar-andyrsson-thread"
+          ]
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "Brynjar arrived at The Crossing via the Marchward waygate, Day 1 afternoon, with Maret Threnwick, Ragnar Solmyr, and Freki.",
+          "subPlace": {
+            "name": "The Crossing Hub Hall",
+            "parent": "the_crossing",
+            "note": "Octagonal stone hall, eight waygate thresholds, central chalk-board column. The Wardcaller's station.",
+            "visited": true
+          }
+        }
+      ],
+      "offer": {
+        "thing": "Maret's eyes have tracked to one of the dark gates — not the lit ones, the one in the north face that hasn't hummed in what looks like months. She hasn't said anything about it yet.",
+        "from": "Maret's learned stillness under pressure and her habit of noting things she doesn't immediately name — something in this hall caught her attention the way the record-hall did"
+      }
+    },
+    "sceneState": {
+      "setting": "The Crossing hub — a high-roofed octagonal hall of old stone, gates in every wall, floor worn to dishes at every threshold. Mid-afternoon light filters through clerestory slots in the vault. Travelers cross without ceremony.",
+      "npcsPresent": [
+        {
+          "name": "Wardcaller (unnamed)",
+          "state": "Standing at the central column, logging arrivals and departures on a chalk-board."
+        },
+        {
+          "name": "Maret Threnwick",
+          "state": "Just through the gate, settling her grey cloak, watching the hall with quiet attention."
+        },
+        {
+          "name": "Ragnar Solmyr",
+          "state": "Two steps behind Brynjar, eyes already on the exits, shoulders loose."
+        },
+        {
+          "name": "Freki",
+          "state": "Nose to the stone floor, reading the scent-record of every traveler who passed through."
+        }
+      ],
+      "objects": [
+        "Central stone column with chalk arrival/departure board",
+        "Eight gate-thresholds — some lit with the fold-hum, some dark",
+        "Iron rings set into each gate-stone",
+        "Worn dish-depressions at every threshold"
+      ],
+      "threads": [
+        "Maret is holding what she learned in the Stillhold record-hall — she has not spoken it yet",
+        "The Crossing's traffic is visible and unread",
+        "The road onward is unclear — no destination named beyond this hub"
+      ]
+    },
+    "beats": 1
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
@@ -314,7 +489,6 @@
       },
       "relationship": 2,
       "history": [
-        "[d1] Held his quiet at Brynjar's shoulder through Maret's explanation — present, listening, not crowding the exchange.",
         "[d1] Held his quiet through Maret's refusal — no comment, no move.",
         "[d1] Held position at Brynjar's shoulder through the exchange and Maret's departure — present, watchful, no comment.",
         "[d1] Gave Brynjar a Marcher read on route-knowledge: not watching, but planning — someone inside the thing, or close enough that the difference doesn't matter. Eyes still south toward the Stillhold.",
@@ -323,7 +497,8 @@
         "[d1] Unfolded from his stone and fell into step without being asked — quiet, watching south by habit.",
         "[d1] Named the nearest way gate: back through the Marchward, north up the waystone track from the Wardhouse — the broken stone with the iron ring. Asked what is waiting on the other side.",
         "[d1] Recognized Kjotve Olafsson's name and reputation. Called out the back-strike as dishonorable by Marcher standards. Warned Brynjar that Kjotve doesn't travel alone. Offered, implicitly, that this is a job needing a second.",
-        "[d1] Fell into step on Brynjar's left without being asked — old road habit; watching the tree-line at camp"
+        "[d1] Fell into step on Brynjar's left without being asked — old road habit; watching the tree-line at camp",
+        "[d1] Passed through the waygate with Brynjar, now reading the hall's exits on arrival."
       ],
       "knownFacts": [
         "The Marchers call whatever they carry a 'binding' — a cord, a knot, a mark; not a weapon",
@@ -346,19 +521,19 @@
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "Camped at the Marchward's edge with Brynjar and Maret; watching perimeter",
+      "statusNote": "At The Crossing hub with Brynjar's group; scanning exits.",
       "domains": {
         "primary": "marcher"
       },
       "domainsSource": "derived",
       "lastSeen": {
-        "locationId": "the_stillhold",
+        "locationId": "the_marchward",
         "day": 1
       },
       "aliases": [
         "Redline Warrior"
       ],
-      "met": 10
+      "met": 11
     },
     "sera": {
       "id": "sera",
@@ -419,7 +594,8 @@
       "notes": [
         "[d1] Brynjar arrived in the Marchward on World-day 20, early morning. First impressions: Redline warrior on bench near Wardhouse, Stillhold woman in grey, waygate anchor-stone visible but avoided by locals.",
         "[d1] The east fork outside the Crow and Thistle side door — muddy, boot-prints visible in the melt. Freki's trail confirms the south branch leads toward the Stillhold road; Ragnar saw two people here before dawn.",
-        "[d1] Sera caught on the chalk track one mile north of the Stillhold approach — first contact made here on Day 1 morning."
+        "[d1] Sera caught on the chalk track one mile north of the Stillhold approach — first contact made here on Day 1 morning.",
+        "[d1] Brynjar arrived at The Crossing via the Marchward waygate, Day 1 afternoon, with Maret Threnwick, Ragnar Solmyr, and Freki."
       ],
       "flags": {},
       "subPlaces": {
@@ -470,7 +646,7 @@
       },
       "vectorsKnown": [],
       "_containmentNotes": [
-        "\"One-Mile Mark (Stillhold Approach)\" was placed in the_stillhold (the fiction named it), not the_marchward"
+        "\"The Crossing Hub Hall\" was placed in the_crossing (the fiction named it), not the_marchward"
       ],
       "lastVisit": 1
     },
@@ -491,6 +667,22 @@
       "vectorsKnown": [
         "violence_peace"
       ]
+    },
+    "the_crossing": {
+      "visits": 2,
+      "notes": [],
+      "flags": {},
+      "subPlaces": {
+        "the-crossing-hub-hall": {
+          "name": "The Crossing Hub Hall",
+          "parentId": "the_crossing",
+          "day": 1,
+          "visited": true,
+          "note": "Octagonal stone hall, eight waygate thresholds, central chalk-board column. The Wardcaller's station."
+        }
+      },
+      "lastVisit": 1,
+      "vectorsKnown": []
     }
   },
   "worldState": {
@@ -707,7 +899,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 0,
     "recentOffers": [
       {
         "thing": "Doss watching Brynjar with the stillness of someone deciding something — she has not offered it yet, but she is on the edge of it",
@@ -724,6 +916,10 @@
       {
         "thing": "Maret's eyes go briefly to Ragnar when she arrives — not suspicion, assessment — and then back to Brynjar, and she says, quietly: 'The…",
         "from": "Maret's fear: that the cipher is already known to the follower's backer, meaning the records are compromised whether she delivers them or…"
+      },
+      {
+        "thing": "Maret's eyes have tracked to one of the dark gates — not the lit ones, the one in the north face that hasn't hummed in what looks like…",
+        "from": "Maret's learned stillness under pressure and her habit of noting things she doesn't immediately name — something in this hall caught her…"
       }
     ],
     "latentArcs": {
@@ -3418,6 +3614,22 @@
         "createdDay": 1,
         "entityId": "the-raw-chord",
         "updatedDay": 1
+      },
+      "echo-river-crossing": {
+        "id": "echo-river-crossing",
+        "label": "The Crossing",
+        "kind": "place",
+        "facts": [
+          "[d1] An octagonal hub-hall of old stone with eight waygate thresholds — some active, some dark. Floor worn to dishes at every gate. A Wardcaller in grey-green logs arrivals and departures at the central column. Reached from the Marchward by waygate fold in under an hour."
+        ],
+        "links": [
+          "the-marchward",
+          "brynjar-andyrsson-thread"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "echo-river-crossing",
+        "updatedDay": 1
       }
     },
     "mergeUndo": [
@@ -3526,19 +3738,19 @@
     ]
   },
   "tendencies": {
-    "leadership": 6.746511762861593,
-    "cerebral": 5.787800685932437,
-    "strategic": 4.081510175286122,
-    "ruthless": 0.43366294827550256,
-    "social": 9.40152853515054,
-    "cautious": 8.12015712974126,
-    "generous": 0.8166518036622618,
-    "patient": 0.8810956933593749
+    "leadership": 6.577848968790053,
+    "cerebral": 5.643105668784126,
+    "strategic": 3.979472420903969,
+    "ruthless": 0.42282137456861496,
+    "social": 9.166490321771777,
+    "cautious": 7.917153201497729,
+    "generous": 0.7962355085707052,
+    "patient": 0.8590683010253904
   },
   "aptitudes": [
     "banner"
   ],
-  "actionCount": 35,
+  "actionCount": 36,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -3592,6 +3804,14 @@
   "nativeGrantsVersion": 1,
   "reconcileVersion": 47,
   "gallery": [
+    {
+      "kind": "location",
+      "prompt": "The Crossing",
+      "url": "https://image.pollinations.ai/prompt/The%20Crossing%3A%20Every%20axis%20crosses%20here%20at%20nothing%2C%20and%20the%20result%20is%20not%20grey%20%E2%80%94%20it%20is%20CROWDED.%20The%20Crossing%20leans%20toward%20no%20pole%2C%20which%20is%20precisely%20why%20it%20can%20hold%20them%20all%3A%20an%20Umbral%20and%20a%20Blazeborn%20drink%20at%20the%20same%20table%20because%20neither%20has%20the%20standing%20to%20make%20the%20other%20leave.%20The%20poles%20are%20lonely%20places.%20The%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=24144&nologo=true",
+      "caption": "The Crossing",
+      "worldDay": 69,
+      "at": "2026-09-07T13:48:33.348Z"
+    },
     {
       "kind": "location",
       "prompt": "The Marchward",
@@ -3698,8 +3918,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788788801146,
-  "rev": 96,
+  "updatedAt": 1788788913350,
+  "rev": 99,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3965,7 +4185,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 38
+    "riven_marches": 39
   },
   "practice": {
     "schemaVersion": 1,
@@ -4045,10 +4265,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-09-07T13:23:54.773Z",
-      "lastAt": "2026-09-07T13:46:41.129Z",
+      "lastAt": "2026-09-07T13:48:33.341Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 10
+      "beats": 11
     }
   ],
   "_pendingArrival": null,
@@ -4064,28 +4284,28 @@
     "at": "2026-07-23T01:18:04.353Z"
   },
   "_opEmitted": {
-    "sceneSummary": 31,
-    "choices": 31,
-    "scene": 31,
-    "npcUpdates": 29,
-    "placeUpdates": 5,
+    "sceneSummary": 32,
+    "choices": 32,
+    "scene": 32,
+    "npcUpdates": 30,
+    "placeUpdates": 6,
     "generateRequest": 3,
-    "moveTo": 4,
-    "timeOps": 29,
-    "codexUpdates": 27,
+    "moveTo": 5,
+    "timeOps": 30,
+    "codexUpdates": 28,
     "sceneEnded": 9,
     "characterDeltas": 10,
-    "offer": 4,
+    "offer": 5,
     "deeds": 1,
     "standingOps": 1,
     "questUpdates": 4,
     "stageOps": 2,
     "factUpdates": 1
   },
-  "_opTurns": 31,
+  "_opTurns": 32,
   "_opLedger": {
     "offer": {
-      "applied": 4,
+      "applied": 5,
       "rejected": 0,
       "lastWhy": null
     }
@@ -4111,11 +4331,13 @@
   ],
   "knownPlaces": [
     "the_stillhold",
-    "the_marchward"
+    "the_marchward",
+    "the_crossing"
   ],
   "locationImages": {
     "the_stillhold": "https://image.pollinations.ai/prompt/The%20Stillhold%3A%20A%20walled%20city%20of%20absolute%20peace%20%E2%80%94%20no%20violence%20in%20living%20memory%2C%20no%20weapons%2C%20no%20raised%20voices.%20Beautiful%2C%20ordered%2C%20and%20subtly%20WRONG.%20What%20rides%20with%20the%20peace%20here%20is%20FALSEHOOD%3A%20the%20stillness%20rests%20on%20something%20no%20one%20is%20allowed%20to%20say%2C%20a%20load-bearing%20untruth%20so%20old%20it%20has%20become%20the%20air.%20The%20peace%20i%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=78311&nologo=true",
-    "the_marchward": "https://image.pollinations.ai/prompt/The%20Marchward%3A%20The%20habitable%20border-town%20between%20the%20Redline%20and%20the%20Stillhold%20%E2%80%94%20where%20the%20violence-pole%20and%20the%20peace-pole%20both%20run%20moderate%20and%20TRUTH%20runs%20high%2C%20because%20a%20place%20that%20touches%20both%20extremes%20learns%20to%20speak%20plainly%20or%20die.%20The%20natural%20base%20for%20exploring%20the%20Reach%3A%20warriors%20and%20peace-keepers%20drink%20at%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=31569&nologo=true"
+    "the_marchward": "https://image.pollinations.ai/prompt/The%20Marchward%3A%20The%20habitable%20border-town%20between%20the%20Redline%20and%20the%20Stillhold%20%E2%80%94%20where%20the%20violence-pole%20and%20the%20peace-pole%20both%20run%20moderate%20and%20TRUTH%20runs%20high%2C%20because%20a%20place%20that%20touches%20both%20extremes%20learns%20to%20speak%20plainly%20or%20die.%20The%20natural%20base%20for%20exploring%20the%20Reach%3A%20warriors%20and%20peace-keepers%20drink%20at%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=31569&nologo=true",
+    "the_crossing": "https://image.pollinations.ai/prompt/The%20Crossing%3A%20Every%20axis%20crosses%20here%20at%20nothing%2C%20and%20the%20result%20is%20not%20grey%20%E2%80%94%20it%20is%20CROWDED.%20The%20Crossing%20leans%20toward%20no%20pole%2C%20which%20is%20precisely%20why%20it%20can%20hold%20them%20all%3A%20an%20Umbral%20and%20a%20Blazeborn%20drink%20at%20the%20same%20table%20because%20neither%20has%20the%20standing%20to%20make%20the%20other%20leave.%20The%20poles%20are%20lonely%20places.%20The%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=24144&nologo=true"
   },
   "itemReclaimVersion": 1,
   "nameRepairVersion": 1,
@@ -4182,7 +4404,7 @@
     "guard": 1,
     "sustain": 1,
     "study": 1,
-    "travel": 2,
+    "travel": 3,
     "ask": 1,
     "lead": 1
   },

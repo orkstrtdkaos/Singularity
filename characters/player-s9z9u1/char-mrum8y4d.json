@@ -7,8 +7,8 @@
   "nativeTradition": "enginewright",
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
-  "level": 6,
-  "xp": 599,
+  "level": 7,
+  "xp": 604,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -87,16 +87,16 @@
   "alignment": {
     "mechanical_spiritual": -0.034,
     "falsehood_truth": -0.005936940750000001,
-    "spectrumId": -0.13294917035536263,
+    "spectrumId": -0.1263017118375945,
     "value": -0.07300000000000001,
     "demonic_angelic": -0.020000000000000004,
     "dark_light": -0.015
   },
-  "attunement": 6,
-  "maxHealth": 63,
-  "health": 63,
-  "maxEnergy": 141,
-  "energy": 29,
+  "attunement": 7,
+  "maxHealth": 68,
+  "health": 68,
+  "maxEnergy": 146,
+  "energy": 146,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -134,6 +134,21 @@
       "spread": [],
       "day": 1,
       "worldDay": 24
+    },
+    {
+      "at": "2026-09-07T19:57:18.079Z",
+      "locationId": "the_crossing",
+      "communityId": "horizon",
+      "description": "Carried a genuine thanks to a road-warden who holds the water-crisis and the suffering it brings as their own burden to warn against.",
+      "tags": [
+        "mercy",
+        "recognition"
+      ],
+      "weight": 1,
+      "spread": [],
+      "_bonusApplied": 0.15,
+      "day": 3,
+      "worldDay": 69
     }
   ],
   "relationships": {},
@@ -153,203 +168,15 @@
     "The regulator closed and the veil thinned — Loki glimpsed the mesh beneath the valley, then came up from the deep. On the road to the Slow Orchard, a stranger is planting a tree for a child not yet born and invites help with the digging.",
     "At the braided confluence in the Disputed Zone, a hired stranger came at Loki with a fabricated charge — that Loki had pulled something sealed loose from the Deep and was carrying it out. The name behind it: a man in the lower Annex, who paid in coin. Veln Ashpause watched from the brush without surprise. The question is answered; the person who set it in motion is not yet named.",
     "In the dry storage alcove of the Half-Cathedral's eastern tower, deep in early-spring night, Loki and Vessin Tallow-bark came to rest — she named what she wanted and had it, and afterward lay quiet in the candlelight and said the night was worth not knowing what morning brings.",
-    "Loki and Vessin slipped out of the alcove in the grey dawn and crossed the empty nave before the scaffold crew filled the landing — stepping into the yard with the Half-Cathedral at their backs and the man with the crooked jaw still the open thread between them."
+    "Loki and Vessin slipped out of the alcove in the grey dawn and crossed the empty nave before the scaffold crew filled the landing — stepping into the yard with the Half-Cathedral at their backs and the man with the crooked jaw still the open thread between them.",
+    "Shared broth and thanks with a road-warden who carries word of the water-crisis moving downhill faster than any official channel. Exchanged names and parted on the spinward road, heading toward the Waygate Path."
   ],
-  "currentLocationId": "the_crossing",
-  "activeScene": {
-    "locationId": "the_crossing",
-    "turns": [
-      {
-        "player": null,
-        "summary": "A lone traveler on the road ahead offers warning about the flooded eastern fork and shares their evening fire freely—no price asked, no trade offered, only the gift of knowing where the stone ford lies.",
-        "narration": "The road curves through a copse of thin willows, and the night opens enough to let starlight through. You and Vessin have made good distance since the Half-Cathedral — the eastern tower is long behind, and the pace has eased into the steady measure of people who have slept rough and are not in immediate trouble.\n\nA fire glows ahead, small and careful. As you draw nearer, you can make out a figure — someone sitting cross-legged beside the coals, working at something in their lap with methodical hands. They look up at the sound of your approach, and there is no alarm in the movement, only assessment. A traveler's assessment.\n\nThe person is older, weathered the way the road weathers things — grey-streaked hair, a coat that has been many colors and is now all of them fading to brown. They're tending a small pot of something that smells like broth and root-vegetable, and they gesture to the fire's edge with an ease that speaks to many such encounters.\n\n\"You're heading toward the Waygate, or somewhere on that bearing,\" they say. Not a question. Their voice carries the flat, observant tone of someone who reads the road like other people read faces. \"Fair warning: the Quickwood Eaves gate is clear enough, but the March beyond it — the space between here and the low forest proper — the melt has left the eastern fork swollen past its normal crossing. There's a stone ford two reaches spinward from the main pass if you know to look for it, but if you don't, you'll add a day and half to your journey skirting the water.\"\n\nThey lift the pot slightly. \"You want a bowl? There's enough, and you look like you've been moving without stopping long enough to think about it.\""
-      },
-      {
-        "player": "Take the bowl and ask them what drew them onto this road in the first place — a traveler this observant usually has their own thread running.",
-        "summary": "Loki and Vessin share broth and fire with a road-warden who carries news of a water-problem moving down the March—the same problem whose upstream source remains unknown to them both.",
-        "narration": "You take the bowl from the traveler's weathered hands—the broth is still steaming, and it smells of root-vegetable and something green you don't have a name for. Vessin settles beside the fire, and you settle across from the traveler, the heat of the coals between you.\n\n\"What drew you onto this road?\" you ask. It's a simple question, the kind travelers ask each other when the night is old enough for honesty. The traveler nods slowly, as if you've asked something they've been holding the shape of for a while.\n\n\"Same thing that draws most of us,\" they say, and their voice is quiet, made for the small hours. \"News that needs carrying. There's a family three reaches spinward from the main crossing—they've got kin in the city, and word came through the relay that the water upstream is running wrong. They want to know if it's reached the wells here yet.\" The traveler's eyes stay on the fire. \"It hasn't. But it will. The melt is coming fast this year, and the colour in the eastern fork isn't natural.\"\n\nVessin shifts slightly. You catch the small movement—a recognition of something she's already heard whispered in the lower Annex.\n\n\"So you're warning people before it reaches them,\" you say.\n\n\"Someone has to,\" the traveler replies. \"The relay nodes move slow. The road moves faster.\""
-      }
-    ],
-    "lastTurn": {
-      "narration": "You take the bowl from the traveler's weathered hands—the broth is still steaming, and it smells of root-vegetable and something green you don't have a name for. Vessin settles beside the fire, and you settle across from the traveler, the heat of the coals between you.\n\n\"What drew you onto this road?\" you ask. It's a simple question, the kind travelers ask each other when the night is old enough for honesty. The traveler nods slowly, as if you've asked something they've been holding the shape of for a while.\n\n\"Same thing that draws most of us,\" they say, and their voice is quiet, made for the small hours. \"News that needs carrying. There's a family three reaches spinward from the main crossing—they've got kin in the city, and word came through the relay that the water upstream is running wrong. They want to know if it's reached the wells here yet.\" The traveler's eyes stay on the fire. \"It hasn't. But it will. The melt is coming fast this year, and the colour in the eastern fork isn't natural.\"\n\nVessin shifts slightly. You catch the small movement—a recognition of something she's already heard whispered in the lower Annex.\n\n\"So you're warning people before it reaches them,\" you say.\n\n\"Someone has to,\" the traveler replies. \"The relay nodes move slow. The road moves faster.\"",
-      "sceneSummary": "Loki and Vessin share broth and fire with a road-warden who carries news of a water-problem moving down the March—the same problem whose upstream source remains unknown to them both.",
-      "choices": [
-        {
-          "label": "Ask the traveler if they've heard anything about the city—about the lower Annex, the man with the crooked jaw, anything that connects to the person who hired the aggressor at the confluence.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "ask",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Thank them plainly and eat, watching how Vessin reads what was just said—she saw the lower Annex this morning and has a sharper eye for pattern than most.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "observe",
-            "careful"
-          ],
-          "abilityId": "prism_sight",
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Stay quiet and let the traveler keep talking—people who carry news like this usually have more, and they'll share it if the silence doesn't demand it.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": "very easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "wait",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        }
-      ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "standingOps": [],
-      "delegateOps": [],
-      "arcOps": [],
-      "adoptSchool": null,
-      "offer": null,
-      "stageOps": [],
-      "scene": {
-        "setting": "Deep night, early spring. A copse of thin willows along the road toward the Waygate. Starlight breaks through the canopy. A small careful fire glows at the center. The air holds the damp-cold of the melt-season. Loki and Vessin are seated by the fire with a lone traveler.",
-        "npcsPresent": [
-          {
-            "name": "A lone traveler",
-            "state": "Seated cross-legged by the fire, now watching Loki across the coals after naming what drew them onto the road—a runner of news about water-problems moving downhill."
-          }
-        ],
-        "objects": [
-          "A small careful fire with coals still live",
-          "A pot of root-vegetable broth, simmering",
-          "A bowl in Loki's hands, still warm and steaming",
-          "A traveler's bedroll, rolled and set aside",
-          "A walking staff, worn smooth from long use, propped nearby"
-        ],
-        "threads": [
-          "The traveler's news about the upstream water-problem — the same crisis Loki glimpsed in the regulator",
-          "Whether this traveler knows anything about the lower Annex or the man with the crooked jaw",
-          "Vessin's recognition of something in what was said — she knows the lower Annex, and her small movement read as understanding"
-        ]
-      },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "a-lone-traveler",
-          "name": "A lone traveler",
-          "note": "Offered broth freely and warned of the water-problem moving downhill from the eastern fork. They carry news from the relay and move it faster — warning families before the wells run bad. Moving with purpose toward the spinward reach.",
-          "learned": [
-            "The upstream water is running wrong in colour and flow — the melt-season is pushing it fast downhill",
-            "The relay carries this news, but the relay moves slow; the traveler moves faster",
-            "A family three reaches spinward has kin in the city and sent word asking if the problem has reached the well-country yet — it hasn't, but will",
-            "The traveler is a news-carrier by trade and by habit — moving true information into places before crisis reaches them"
-          ],
-          "skillsObserved": [
-            "Reads travelers by bearing and assessment",
-            "Moves with steady purpose on a known route",
-            "Carries news and shapes it for the people who need it"
-          ]
-        }
-      ],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "discovery": null,
-      "codexUpdates": [
-        {
-          "topic": "the-water-crisis",
-          "label": "The Water Crisis",
-          "kind": "event",
-          "fact": "The upstream water is running wrong in colour and flow — the melt-season is pushing it fast downhill. The relay carries this news slow; the road-warden carries it faster. A family three reaches spinward has sent word asking if it has reached the well-country yet — the answer is not yet, but the problem is moving.",
-          "links": [
-            "the-crossing",
-            "the-quickwood-eaves",
-            "gen-the-waygate-path"
-          ]
-        }
-      ],
-      "holdingOps": [],
-      "debtOps": [],
-      "partyOps": [],
-      "generateRequest": [],
-      "encounterOps": [],
-      "projectOps": [],
-      "bandOps": [],
-      "deathOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "The time spent approaching the fire, greeting the traveler, and settling with the broth — a brief rest at the warmth before moving on."
-      },
-      "moveTo": null,
-      "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": null,
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "sceneEnded": false
-    },
-    "sceneState": {
-      "setting": "Deep night, early spring. A copse of thin willows along the road toward the Waygate. Starlight breaks through the canopy. A small careful fire glows at the center. The air holds the damp-cold of the melt-season. Loki and Vessin are seated by the fire with a lone traveler.",
-      "npcsPresent": [
-        {
-          "name": "A lone traveler",
-          "state": "Seated cross-legged by the fire, now watching Loki across the coals after naming what drew them onto the road—a runner o"
-        }
-      ],
-      "objects": [
-        "A small careful fire with coals still live",
-        "A pot of root-vegetable broth, simmering",
-        "A bowl in Loki's hands, still warm and steaming",
-        "A traveler's bedroll, rolled and set aside",
-        "A walking staff, worn smooth from long use, propped nearby"
-      ],
-      "threads": [
-        "The traveler's news about the upstream water-problem — the same crisis Loki glimpsed in the regulator",
-        "Whether this traveler knows anything about the lower Annex or the man with the crooked jaw",
-        "Vessin's recognition of something in what was said — she knows the lower Annex, and her small movement read as understanding"
-      ]
-    },
-    "beats": 2
-  },
+  "currentLocationId": "gen-the-waygate-path",
+  "activeScene": null,
   "clock": {
     "schemaVersion": 1,
     "day": 3,
-    "hour": 1,
+    "hour": 3,
     "realAnchor": null
   },
   "companions": [
@@ -826,10 +653,11 @@
         "locationId": "the_crossing",
         "day": 3
       },
-      "relationship": 0,
+      "relationship": 1,
       "history": [
         "[d3] Met on the bearing toward the Waygate on deep night of day 3. Offered warning about the eastern fork flood and the stone ford crossing, and shared their evening fire freely — no price, no trade, only the gift of knowing.",
-        "[d3] Offered broth freely and warned of the water-problem moving downhill from the eastern fork. They carry news from the relay and move it faster — warning families before the wells run bad. Moving with purpose toward the spinward reach."
+        "[d3] Offered broth freely and warned of the water-problem moving downhill from the eastern fork. They carry news from the relay and move it faster — warning families before the wells run bad. Moving with purpose toward the spinward reach.",
+        "[d3] Shared broth and fire. Exchanged names—they told Loki theirs, and Loki gave their own. They carry word of the water-crisis downhill faster than any relay, warning families before the wells run bad. Moving spinward with purpose and gratitude given honestly."
       ],
       "knownFacts": [
         "The Quickwood Eaves gate is clear",
@@ -837,7 +665,9 @@
         "There is a stone ford two reaches spinward from the main pass — less direct but passable",
         "The upstream water is running wrong in colour and flow — the melt-season is pushing it fast downhill",
         "The relay carries this news, but the relay moves slow; the traveler moves faster",
-        "A family three reaches spinward has kin in the city and sent word asking if the problem has reached the well-country yet — it hasn't, but will"
+        "A family three reaches spinward has kin in the city and sent word asking if the problem has reached the well-country yet — it hasn't, but will",
+        "This person carries the crisis as their own burden—they do not only relay it, they warn against it with the weight of someone who knows what it means.",
+        "They ask questions that root for truth, not for advantage, and they recognize the same when they meet it."
       ],
       "skillsObserved": [
         "Reads travelers by bearing and gait",
@@ -851,12 +681,12 @@
       "sex": "unknown",
       "gender": "unknown",
       "pronouns": "they/them",
-      "statusNote": "Camped by the fire on the road, heading away from the Waygate — moving spinward.",
+      "statusNote": "Moving spinward along the road, carrying word to families waiting for news. Active and unhurried.",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 3
       },
-      "met": 2
+      "met": 3
     }
   },
   "placeMemory": {
@@ -1031,12 +861,12 @@
       }
     },
     "gen-the-waygate-path": {
-      "visits": 1,
+      "visits": 2,
       "notes": [
         "[d2] The Waygate Path is passable and legible—melt-water channels, moss thickening, stone worn and known. The gate ahead is accessible by late afternoon of day 2."
       ],
       "flags": {},
-      "lastVisit": 2,
+      "lastVisit": 3,
       "vectorsKnown": []
     },
     "the_crossing": {
@@ -1214,12 +1044,8 @@
     "lastSharedReadAt": "2026-09-07T19:49:27.782Z",
     "lastTickWorldDay": 69,
     "lastCanonWorldDay": 69,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "Cy has tilted its lens toward the sapling's root ball without being asked — the beginning of an assessment it hasn't been told to make",
-        "from": "Cy's compulsion to assess and repair things, which runs ahead of any instruction"
-      },
       {
         "thing": "The marker stake Ossivyn drove in is unlabeled — but Ossivyn's own fear is that the child the tree is for will never be told it exists…",
         "from": "Ossivyn's own fear: that the child the tree is planted for will never be told it exists — and the unlabeled stake is that fear made iron."
@@ -1235,6 +1061,10 @@
       {
         "thing": "A lone traveler who knows the road and shares freely — warning of the eastern fork flood, the stone ford location, and a meal offered…",
         "from": "The Disputed Zone March itself — this is the country between reaches, and it holds its own people who move through it steadily, reading…"
+      },
+      {
+        "thing": "The traveler's name and their readiness to share the road without condition or price—a small grace that costs nothing and means everything.",
+        "from": "A road-warden whose entire livelihood is the carrying of true news; they saw in Loki a person who asked the right question and answered it…"
       }
     ],
     "wantProgress": {
@@ -4711,8 +4541,8 @@
     "craft": 4,
     "wits": 4
   },
-  "pendingSubPoints": 0,
-  "skillPoints": 0,
+  "pendingSubPoints": 1,
+  "skillPoints": 2,
   "discoveries": [],
   "codex": {
     "schemaVersion": 1,
@@ -5528,10 +5358,16 @@
         "label": "A lone traveler",
         "kind": "person",
         "facts": [
-          "[d3] Road-warden; one who moves between the reaches and carries true news freely"
+          "[d3] Road-warden; one who moves between the reaches and carries true news freely",
+          "[d3] The traveler's name was exchanged at the fire on the road west of the Waygate Path—they have given it freely and without condition, as they give all their service freely."
         ],
-        "links": [],
-        "aliases": [],
+        "links": [
+          "gen-the-waygate-path",
+          "water-crisis-pressureholt"
+        ],
+        "aliases": [
+          "lone-traveler-eastfork-warning"
+        ],
         "createdDay": 3,
         "entityId": "lone-traveler-eastfork-warning",
         "updatedDay": 3
@@ -5607,17 +5443,17 @@
     ]
   },
   "tendencies": {
-    "devotion": 1.7914368606700999,
-    "cerebral": 10.154069164383442,
-    "social": 15.8317683100877,
-    "strategic": 7.262528136017256,
-    "cautious": 5.4002308388884135,
-    "amorous": 22.04608135253352,
-    "generous": 2.6583255832388732,
-    "ruthless": 0.9324826087803393,
-    "risky": 0.7620668535959322,
-    "patient": 0.208106753070393,
-    "deception": 0.24224703998738534
+    "devotion": 1.7466509391533473,
+    "cerebral": 9.900217435273856,
+    "social": 16.435974102335507,
+    "strategic": 7.0809649326168245,
+    "cautious": 5.265225067916203,
+    "amorous": 21.49492931872018,
+    "generous": 2.5918674436579012,
+    "ruthless": 0.9091705435608308,
+    "risky": 0.7430151822560339,
+    "patient": 0.20290408424363318,
+    "deception": 0.2361908639877007
   },
   "aptitudes": [
     "silver_tongue",
@@ -5628,7 +5464,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 140,
+  "actionCount": 141,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -5691,6 +5527,14 @@
   "nativeGrantsVersion": 1,
   "reconcileVersion": 47,
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "A moment of parting on the grey road in the earliest light—the traveler turning spinward with their bedroll and their burden of news, Loki and Vessin turning the other way toward the Waygate Path, the",
+      "url": "https://image.pollinations.ai/prompt/A%20moment%20of%20parting%20on%20the%20grey%20road%20in%20the%20earliest%20light%E2%80%94the%20traveler%20turning%20spinward%20with%20their%20bedroll%20and%20their%20burden%20of%20news%2C%20Loki%20and%20Vessin%20turning%20the%20other%20way%20toward%20the%20Waygate%20Path%2C%20the%20gap%20between%20them%20opening%20with%20the%20quiet%20finality%20of%20two%20roads%20diverging%20under%20a%20fading%20night%20sky.%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=66927&nologo=true",
+      "caption": "Shared broth and thanks with a road-warden who carries word of the water-crisis moving dow",
+      "worldDay": 69,
+      "at": "2026-09-07T19:57:18.112Z"
+    },
     {
       "kind": "location",
       "prompt": "The Crossing",
@@ -5977,8 +5821,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788810916231,
-  "rev": 463,
+  "updatedAt": 1788811038112,
+  "rev": 467,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -6786,14 +6630,18 @@
         "dangerLevel": 1,
         "_gen": {
           "type": "location",
-          "tier": "fresh",
-          "engagementScore": 2,
+          "tier": "established",
+          "engagementScore": 4,
           "birthWeight": 1,
           "rating": null,
           "attentionHistory": [
             {
               "kind": "revisit",
               "day": 2
+            },
+            {
+              "kind": "revisit",
+              "day": 3
             }
           ],
           "createdDay": 2,
@@ -6802,7 +6650,8 @@
             "day": null,
             "hint": "transit"
           },
-          "lastAttentionDay": 2
+          "lastAttentionDay": 3,
+          "needsDepth": "established"
         },
         "map": {
           "x": 690.1729698429842,
@@ -6835,7 +6684,7 @@
     "the_gearlands": 33,
     "umbral_depths": 54,
     "the_quickwood": 98,
-    "the_center": 2
+    "the_center": 3
   },
   "opLossPending": false,
   "sessions": [
@@ -6906,10 +6755,10 @@
     {
       "id": "sess-9",
       "startedAt": "2026-09-07T19:42:14.907Z",
-      "lastAt": "2026-09-07T19:55:16.216Z",
+      "lastAt": "2026-09-07T19:57:18.079Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 5
+      "beats": 6
     }
   ],
   "establishedFacts": [
@@ -6940,27 +6789,27 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 13,
+      "applied": 14,
       "rejected": 0,
       "lastWhy": null
     }
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 165,
-    "choices": 165,
-    "characterDeltas": 65,
-    "scene": 165,
+    "sceneSummary": 166,
+    "choices": 166,
+    "characterDeltas": 66,
+    "scene": 166,
     "placeUpdates": 18,
-    "codexUpdates": 97,
-    "timeOps": 154,
-    "offer": 12,
+    "codexUpdates": 98,
+    "timeOps": 155,
+    "offer": 13,
     "generateRequest": 6,
-    "sceneEnded": 42,
-    "npcUpdates": 137,
-    "moveTo": 4,
-    "gambitApt": 7,
-    "deeds": 1,
+    "sceneEnded": 43,
+    "npcUpdates": 138,
+    "moveTo": 5,
+    "gambitApt": 8,
+    "deeds": 2,
     "questUpdates": 17,
     "standingOps": 1,
     "factUpdates": 4,
@@ -6968,13 +6817,13 @@
     "encounterOps": 7,
     "ledgerEvents": 1,
     "newEncounter": 1,
-    "imagePrompt": 1,
+    "imagePrompt": 2,
     "scene_ended": 1
   },
-  "_opTurns": 165,
+  "_opTurns": 166,
   "customAbilities": {},
   "companionBonds": {
-    "coil": 1.25
+    "coil": 1.75
   },
   "practice": {
     "schemaVersion": 1,
@@ -7292,6 +7141,11 @@
         "text": "Spoke a true thing in the shape the Unlit could hear — and the elder of the Deep acknowledged it.",
         "weight": 1,
         "day": 1
+      },
+      {
+        "text": "Carried a genuine thanks to a road-warden who holds the water-crisis and the suffering it brings as their own burden to warn against.",
+        "weight": 1,
+        "day": 3
       }
     ]
   },
@@ -7413,14 +7267,25 @@
   "skillUses": {
     "plan": 1,
     "discuss": 1,
-    "travel": 2,
+    "travel": 3,
     "scout": 1,
     "prepare": 1,
     "careful": 1,
-    "woo": 1
+    "woo": 1,
+    "rapport": 1
   },
   "aptitudeEarnCount": {
     "faithful": 1
   },
-  "_pendingIntent": null
+  "_pendingIntent": null,
+  "bondLog": [
+    {
+      "companionId": "coil",
+      "kind": "deed",
+      "delta": 0.5,
+      "day": 3,
+      "worldDay": 69,
+      "actionCount": 140
+    }
+  ]
 }

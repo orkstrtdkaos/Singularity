@@ -23,7 +23,7 @@
   },
   "abilities": [
     {
-      "abilityId": "the_misdirect",
+      "abilityId": "misdirect",
       "level": 1
     },
     {
@@ -41,17 +41,17 @@
       "native": true
     },
     {
-      "abilityId": "the_wrong_reality",
+      "abilityId": "wrong_reality",
       "level": 1,
       "native": true
     },
     {
-      "abilityId": "the_better_story",
+      "abilityId": "better_story",
       "level": 2,
       "native": true
     },
     {
-      "abilityId": "the_false_target",
+      "abilityId": "false_target",
       "level": 1,
       "native": true
     },
@@ -78,26 +78,6 @@
     {
       "abilityId": "descent",
       "level": 2
-    },
-    {
-      "abilityId": "brace",
-      "level": 1,
-      "baseline": true
-    },
-    {
-      "abilityId": "strike_basic",
-      "level": 1,
-      "baseline": true
-    },
-    {
-      "abilityId": "break_away",
-      "level": 1,
-      "baseline": true
-    },
-    {
-      "abilityId": "raise_alarm",
-      "level": 1,
-      "baseline": true
     }
   ],
   "alignment": {
@@ -179,22 +159,43 @@
         "player": null,
         "summary": "Dawn at the Half-Cathedral yard: Vessin names the man with the crooked jaw as the employer behind the confluence strike, and the thread pulls tight.",
         "narration": "Dawn breaks grey and gradual over Grovehome's yard. The Half-Cathedral looms behind you, its unfinished towers black against the lightening sky—still and patient the way stone learns to be. The scaffold crew hasn't arrived yet; the yard is yours and Vessin's alone, the grass wet to mid-boot from the melt-water running off the eaves.\n\nVessin stands three paces from you, pack shouldered, one hand testing the buckles the way someone does when they're checking that the weight is honest. She doesn't look at you directly—that's not her way—but you catch the line of her jaw, the bruise of sleeplessness under one eye. The night bought what it bought. Morning is a different negotiation.\n\n\"The man with the crooked jaw,\" she says quietly. \"Grey coat, split seam on the left shoulder. He was pricing something in the lower Annex yesterday morning. Routing component—the kind someone wants moved without the posting board knowing about it.\" She turns now, meeting your eyes for two clear seconds. \"He hired the striker at the confluence. I'm certain of it.\"\n\nBehind her, the half-cathedral's south transept catches the first real light—stone ribcage opening to a sky that's slowly, slowly turning blue. Cy clicks somewhere near your feet, a sound like a lock turning inward. Patient. Waiting for what you decide about the next move."
+      },
+      {
+        "player": "Vessin.. we must make a detour to the Crossroads.  We need to go back and go through the Waygate.",
+        "summary": "Loki proposes a detour to the Crossroads via the Waygate; Vessin assesses the cost and agrees to move fast rather than quiet.",
+        "narration": "You turn to Vessin as the yard settles into proper morning—the first scaffold crew members arriving at the yard's far edge, calling to each other. She's watching the Half-Cathedral's south face, her jaw set in that appraising way that means she's already three moves ahead.\n\n\"We need to detour,\" you say plainly. \"The Waygate. Crossroads.\"\n\nShe doesn't ask why. That's not how Vessin operates—she assesses the cost, not the reasoning. Her eyes move from the cathedral to you, and you watch her recalculate the route, the time, what it changes. The bristle of movement around the scaffold crew doesn't touch her focus.\n\n\"The man in the lower Annex knows you're moving,\" she says. It's not a refusal. It's a statement of fact being weighed. \"Going Waygate-bound makes that obvious. Not subtle.\" A pause. Cy clicks softly at your shoulder, a small serrated sound of observation. \"But it's the fast route through if you need to move fast. Three days to the Crossroads instead of two weeks rambling through the Disputed Zone.\" She shifts her pack's weight, testing the decision. \"Alright. We go Waygate. You know the way from here?\"\n\nThe morning is already warming. The Half-Cathedral's open nave catches the rising light, and somewhere in the scaffold above, someone shouts a measurement."
       }
     ],
     "lastTurn": {
-      "narration": "Dawn breaks grey and gradual over Grovehome's yard. The Half-Cathedral looms behind you, its unfinished towers black against the lightening sky—still and patient the way stone learns to be. The scaffold crew hasn't arrived yet; the yard is yours and Vessin's alone, the grass wet to mid-boot from the melt-water running off the eaves.\n\nVessin stands three paces from you, pack shouldered, one hand testing the buckles the way someone does when they're checking that the weight is honest. She doesn't look at you directly—that's not her way—but you catch the line of her jaw, the bruise of sleeplessness under one eye. The night bought what it bought. Morning is a different negotiation.\n\n\"The man with the crooked jaw,\" she says quietly. \"Grey coat, split seam on the left shoulder. He was pricing something in the lower Annex yesterday morning. Routing component—the kind someone wants moved without the posting board knowing about it.\" She turns now, meeting your eyes for two clear seconds. \"He hired the striker at the confluence. I'm certain of it.\"\n\nBehind her, the half-cathedral's south transept catches the first real light—stone ribcage opening to a sky that's slowly, slowly turning blue. Cy clicks somewhere near your feet, a sound like a lock turning inward. Patient. Waiting for what you decide about the next move.",
-      "sceneSummary": "Dawn at the Half-Cathedral yard: Vessin names the man with the crooked jaw as the employer behind the confluence strike, and the thread pulls tight.",
+      "narration": "You turn to Vessin as the yard settles into proper morning—the first scaffold crew members arriving at the yard's far edge, calling to each other. She's watching the Half-Cathedral's south face, her jaw set in that appraising way that means she's already three moves ahead.\n\n\"We need to detour,\" you say plainly. \"The Waygate. Crossroads.\"\n\nShe doesn't ask why. That's not how Vessin operates—she assesses the cost, not the reasoning. Her eyes move from the cathedral to you, and you watch her recalculate the route, the time, what it changes. The bristle of movement around the scaffold crew doesn't touch her focus.\n\n\"The man in the lower Annex knows you're moving,\" she says. It's not a refusal. It's a statement of fact being weighed. \"Going Waygate-bound makes that obvious. Not subtle.\" A pause. Cy clicks softly at your shoulder, a small serrated sound of observation. \"But it's the fast route through if you need to move fast. Three days to the Crossroads instead of two weeks rambling through the Disputed Zone.\" She shifts her pack's weight, testing the decision. \"Alright. We go Waygate. You know the way from here?\"\n\nThe morning is already warming. The Half-Cathedral's open nave catches the rising light, and somewhere in the scaffold above, someone shouts a measurement.",
+      "sceneSummary": "Loki proposes a detour to the Crossroads via the Waygate; Vessin assesses the cost and agrees to move fast rather than quiet.",
       "choices": [
         {
-          "label": "Ask Vessin what she wants to do about it—whether she means to go after him, or hand the name to someone with authority.",
+          "label": "Head toward the Waygate now—move while the crew arrival is still small confusion",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "travel",
+            "scout"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Vessin what she thinks the man in the lower Annex will do once he knows you're headed for the Crossroads",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "ask",
-            "negotiate"
+            "scout"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -203,15 +204,14 @@
           "emergenceId": null
         },
         {
-          "label": "Go to the lower Annex now, while the morning is still quiet, and find the man with the crooked jaw—Prism Sight can read his movements from the light-traces.",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Use Prism Sight on the Half-Cathedral's yard and scaffold crew—read whether anyone here is watching you with foreknowledge, the way Veln Ashpause watched at the confluence",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {},
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "scout",
-            "travel"
+            "scout"
           ],
           "abilityId": "prism_sight",
           "energyCost": 3,
@@ -220,32 +220,15 @@
           "emergenceId": null
         },
         {
-          "label": "Name what you know—that a hired striker doesn't act alone, that someone is moving pieces deliberately, and ask Vessin if she knows anyone in the Annex who could confirm this man's errands and associations.",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Move out—but take the long way to the Waygate through the Rootkin's deeper paths, not the quick road",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "axes": {},
-          "difficulty": "normal",
+          "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "plan",
-            "ask"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Vessin plainly: what did she see in you last night, underneath everything, that made her read something Precursor-touched—and does she think that's what the man in the grey coat is after.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "ask",
-            "risky"
+            "travel",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -255,13 +238,7 @@
         }
       ],
       "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
+      "characterDeltas": {},
       "ledgerEvents": [],
       "questUpdates": [],
       "standingOps": [],
@@ -271,22 +248,27 @@
       "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "The Half-Cathedral's south yard, grey dawn, early spring—wet grass and the smell of stone warming to light. The unfinished cathedral looms behind, its towers mismatched, its nave open to the sky. The scaffold crew has not yet arrived.",
+        "setting": "The Half-Cathedral's south yard, early morning—grey light warming to gold, scaffold crew arriving and settling into work. The cathedral's open nave rises behind, its stone warm to the touch now. Wet grass and spring melt-water still running from the eaves.",
         "npcsPresent": [
           {
             "name": "Vessin Tallow-bark",
-            "state": "Pack shouldered, standing with deliberate distance, having just named the man with the crooked jaw as the striker's employer. Composed but tired—the night cost something."
+            "state": "Pack shouldered, standing with Loki at the yard's edge—having assessed the Waygate detour and accepted it. Watching the Half-Cathedral's south face with that appraising look that reads three moves ahead. Testing the decision with a steady jaw."
+          },
+          {
+            "name": "Scaffold crew",
+            "state": "Arriving in small groups, calling measurements, settling into morning work—noise and movement at the yard's far edge, not yet thick enough to be cover but building."
           }
         ],
         "objects": [
-          "The Half-Cathedral itself—ribcage of stone, always scaffolded, never finished",
-          "Drop-cloth and canvas still folded in the alcove above, if you cared to check",
-          "Wet grass and the smell of spring melt-water"
+          "The Half-Cathedral itself—ribcage of stone, mismatched towers, open nave",
+          "Vessin's pack, shouldered and ready",
+          "Loki's Traveler's Pack",
+          "Cy, clicking softly at shoulder—present and observing"
         ],
         "threads": [
-          "The man with the crooked jaw—now named as the one who hired the striker, now the open question of what he wants and why he wants it",
-          "What Vessin read under your surface—Precursor-touched at a structural level—and whether that is the target",
-          "The lower Annex as the place to find him, and what else might be moving there"
+          "The man in the lower Annex—named as the striker's employer, still not confronted",
+          "Whether moving toward the Waygate makes Loki obviously targetable",
+          "What the Crossroads will show, and whether going there answers the question under it all"
         ]
       },
       "npcUpdates": [
@@ -294,30 +276,33 @@
           "op": "update",
           "npcId": "vessin-tallow-bark",
           "name": "Vessin Tallow-bark",
-          "role": "Lone traveler; reader of falsecrafts; the person who read something Precursor-touched under your surface",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Emerged from the alcove in grey dawn light, named the man with the crooked jaw as the one who hired the striker at the confluence. The night is closed; morning is a different negotiation. She is tired in a way that reads honest.",
-          "learned": [],
-          "skillsObserved": [],
+          "role": "Lone traveler; reader of falsecrafts",
+          "note": "Assesses the Waygate detour—reads it as fast and obvious, not quiet. Agrees to move. Does not ask why. Appraising the cost of visibility while the scaffold crew arrives.",
+          "learned": [
+            "Chooses speed over stealth when the choice is named—will move directly toward the Crossroads rather than hedge the path"
+          ],
           "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "In the Half-Cathedral yard at dawn, pack shouldered, ready to move. The bargain held through the night; what comes next is unspoken."
+          "statusNote": "Standing in the Half-Cathedral yard at dawn, pack ready, moving with Loki toward the Waygate"
         }
       ],
       "factUpdates": [],
       "placeUpdates": [],
       "discovery": null,
       "codexUpdates": [],
+      "holdingOps": [],
+      "debtOps": [],
       "partyOps": [],
       "generateRequest": [],
       "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "deathOps": [],
       "newEncounter": null,
       "unlockPrecursor": null,
       "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 8,
-        "why": "Slept in the dry storage alcove from late night to grey dawn—the full rest the story moved through."
+        "hoursPassed": 0.5,
+        "why": "a brief exchange in the yard as the crew arrives—enough to name the detour and agree to move"
       },
       "moveTo": null,
       "stateOps": [],
@@ -335,25 +320,30 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Half-Cathedral's south yard, grey dawn, early spring—wet grass and the smell of stone warming to light. The unfinished cathedral looms behind, its towers mismatched, its nave open to the sky. The scaffold crew has not yet arrived.",
+      "setting": "The Half-Cathedral's south yard, early morning—grey light warming to gold, scaffold crew arriving and settling into work. The cathedral's open nave rises behind, its stone warm to the touch now. Wet grass and spring melt-water still running from the eaves.",
       "npcsPresent": [
         {
           "name": "Vessin Tallow-bark",
-          "state": "Pack shouldered, standing with deliberate distance, having just named the man with the crooked jaw as the striker's empl"
+          "state": "Pack shouldered, standing with Loki at the yard's edge—having assessed the Waygate detour and accepted it. Watching the "
+        },
+        {
+          "name": "Scaffold crew",
+          "state": "Arriving in small groups, calling measurements, settling into morning work—noise and movement at the yard's far edge, no"
         }
       ],
       "objects": [
-        "The Half-Cathedral itself—ribcage of stone, always scaffolded, never finished",
-        "Drop-cloth and canvas still folded in the alcove above, if you cared to check",
-        "Wet grass and the smell of spring melt-water"
+        "The Half-Cathedral itself—ribcage of stone, mismatched towers, open nave",
+        "Vessin's pack, shouldered and ready",
+        "Loki's Traveler's Pack",
+        "Cy, clicking softly at shoulder—present and observing"
       ],
       "threads": [
-        "The man with the crooked jaw—now named as the one who hired the striker, now the open question of what he wants and why he wants it",
-        "What Vessin read under your surface—Precursor-touched at a structural level—and whether that is the target",
-        "The lower Annex as the place to find him, and what else might be moving there"
+        "The man in the lower Annex—named as the striker's employer, still not confronted",
+        "Whether moving toward the Waygate makes Loki obviously targetable",
+        "What the Crossroads will show, and whether going there answers the question under it all"
       ]
     },
-    "beats": 1
+    "beats": 2
   },
   "clock": {
     "schemaVersion": 1,
@@ -773,7 +763,7 @@
     "traveler-woman": {
       "id": "traveler-woman",
       "name": "Vessin Tallow-bark",
-      "role": "Lone traveler; reader of falsecrafts; the person who read something Precursor-touched under your sur",
+      "role": "Lone traveler; reader of falsecrafts",
       "description": "Grey-green practical coat, hair pinned back in a way that has half come undone. Dry, careful voice. Appraising eyes that price things before deciding.",
       "firstMet": {
         "locationId": "grovehome",
@@ -781,7 +771,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Held two seconds when Descent named the bargain — want on both sides, access on demand — then said yes and lost the last of the composure she had been holding. Came apart entirely when the pace changed. The bargain is sealed.",
         "[d2] Came apart completely at the finish — cried out once, rode the waves with her forehead against the stone, breath now evening out. The composure is absent. She has not moved away.",
         "[d2] Came down from the finish slowly, said nothing through the long easing, then reached for her trousers and said she should find them — dry, precise, quieter than usual. Composure returning in stages.",
         "[d2] Dressed slowly with hands and kisses — stood still under it, kissed back with precision, said 'scaffold crew' dry and quiet and reached for her coat.",
@@ -790,23 +779,24 @@
         "[d2] Read Loki's conclusion from expression alone — named the key distinction (crew comes from the yard) before being told. Composure fully restored; operating in appraiser-mode.",
         "[d2] Heard the Prism Sight conclusion before it was spoken — named the operative detail (scaffold crew knows the building) and reached for her pack.",
         "[d2] Left the alcove with Loki through the empty nave — now standing in the yard, offering what she knows about the lower Annex and the man with the crooked jaw.",
-        "[d2] Emerged from the alcove in grey dawn light, named the man with the crooked jaw as the one who hired the striker at the confluence. The night is closed; morning is a different negotiation. She is tired in a way that reads honest."
+        "[d2] Emerged from the alcove in grey dawn light, named the man with the crooked jaw as the one who hired the striker at the confluence. The night is closed; morning is a different negotiation. She is tired in a way that reads honest.",
+        "[d2] Assesses the Waygate detour—reads it as fast and obvious, not quiet. Agrees to move. Does not ask why. Appraising the cost of visibility while the scaffold crew arrives."
       ],
       "knownFacts": [
-        "Said yes to the Descent bargain — a standing offer between them, want named on both sides, access on demand. She named it with one word and the composure stepped aside.",
         "Descent can bind a genuine bargain between them — she recognized the shape of it and agreed without deflection.",
         "Accepts unhurried care after the finish — stands still for a palm along her spine in a way she stood still for nothing else.",
         "Someone stood on the landing above for eleven minutes in the night — not lost, not accidental.",
         "Someone was on the landing for eleven minutes during the night — she now knows this too.",
         "Cy's acoustics assessment: the alcove carries sound to the landing.",
         "The listener descended, not climbed — either scaffold crew or a deliberate visitor still in the building.",
-        "The listener on the landing carried a shuttered lamp — prepared for a dark stairwell wait."
+        "The listener on the landing carried a shuttered lamp — prepared for a dark stairwell wait.",
+        "Chooses speed over stealth when the choice is named—will move directly toward the Crossroads rather than hedge the path"
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "In the Half-Cathedral yard at dawn, pack shouldered, ready to move. The bargain held through the night; what comes next is unspoken.",
+      "statusNote": "Standing in the Half-Cathedral yard at dawn, pack ready, moving with Loki toward the Waygate",
       "domains": {
         "primary": "rootkin"
       },
@@ -824,7 +814,7 @@
       "_portraitTier": "devoted",
       "bondType": "romantic",
       "bondStage": "together",
-      "met": 1
+      "met": 2
     }
   },
   "placeMemory": {
@@ -1015,88 +1005,6 @@
     },
     "news": [
       {
-        "day": 1,
-        "worldDay": 31,
-        "text": "Tessvel Cairn has hit trouble — A routing memo Tessvel filed on day 28 used the deprecated valve-classification shorthand rather than the current standard, and a senior clerk flagged it — not loudly, but it is now sitting in a correction queue with her name on it, which is exactly the kind of mark she cannot afford.",
-        "tier": "event"
-      },
-      {
-        "day": 1,
-        "worldDay": 31,
-        "text": "Something has been building in unspooling: A key sequence in the primary record is being quietly re-threaded by someone who made an error years ago and cannot bear to have it discovered.",
-        "tier": "event"
-      },
-      {
-        "day": 1,
-        "worldDay": 32,
-        "text": "This reaches your area — Sorel, Radiant archivist, arrives on the ridgeline and confirms the mound on the northeast-by-east bearing — she was with the Council survey team until markers were moved; the interval she recorded ma (near gen-the-lower-chamber)",
-        "tier": "event",
-        "impactsLocal": true
-      },
-      {
-        "day": 1,
-        "worldDay": 32,
-        "text": "This reaches your area — Sorel, Radiant archivist and water-accountability office witness, commits to the investigation of the upstream pre-Transition structure and joins Cellaceron's party moving northeast-by-east into the D (near gen-object-object)",
-        "tier": "event",
-        "impactsLocal": true
-      },
-      {
-        "day": 1,
-        "worldDay": 32,
-        "text": "This reaches your area — The Council's secondary purification system is not yet complete — they are racing the preparation order's timeline with infrastructure that may not be ready. (near gen-object-object)",
-        "tier": "event",
-        "impactsLocal": true
-      },
-      {
-        "day": 1,
-        "worldDay": 32,
-        "text": "This reaches your area — The Council's secondary purification system is incomplete without the authentication sequence housed at the upstream structure. Whoever reaches it first determines the valley's response to the prepara (near gen-object-object)",
-        "tier": "event",
-        "impactsLocal": true
-      },
-      {
-        "day": 1,
-        "worldDay": 32,
-        "text": "Vessa Torquen: Vessa spent the night cross-referencing Loki's movement patterns against her pressure-drop logs and found a recurring anomaly at junction 7-C that aligns too precisely with Loki's presence to be coincidental — she has not written it down yet, but she has circled the timestamp three times. — and that thread has run its course.",
-        "tier": "event"
-      },
-      {
-        "day": 1,
-        "worldDay": 32,
-        "text": "Ossivyn Tallow: Ossivyn finished tamping the soil around the root base and drove a single iron marker stake into the ground beside it — small, unlabeled, meant only to let someone find the spot again in a season or a decade.",
-        "tier": "ambient"
-      },
-      {
-        "day": 1,
-        "worldDay": 32,
-        "text": "Word reaches you: Veln Ashpause was killed at the braided confluence below the rise in the Disputed Zone. (near millbrook)",
-        "tier": "event"
-      },
-      {
-        "day": 2,
-        "worldDay": 33,
-        "text": "Ossivyn Tallow: Ossivyn finished tamping the last of the root-soil and drove the marker stake; the planting itself is done, and she has begun the small daily ritual of checking soil moisture that will now define her mornings for the foreseeable future.",
-        "tier": "ambient"
-      },
-      {
-        "day": 2,
-        "worldDay": 33,
-        "text": "Standing Unlit: Standing Unlit was given a secondary post deeper into the outer chamber's far alcove, a quiet acknowledgment from the elder that their vigilance during the recent visit had been noted.",
-        "tier": "ambient"
-      },
-      {
-        "day": 2,
-        "worldDay": 38,
-        "text": "Word reaches you that Two senior scholars are each separately drafting arguments that the other's methodology is fundamentally unsound, and the students loyal to each have begun refusing to share research. — settled, it seems, without you.",
-        "tier": "event"
-      },
-      {
-        "day": 2,
-        "worldDay": 36,
-        "text": "Word reaches you: The veil at The Thinning sealed itself in anger after a failed bridge-attempt; it will not open to further crossing for some time (near the thinning)",
-        "tier": "event"
-      },
-      {
         "day": 2,
         "worldDay": 37,
         "text": "Word reaches you: The sealed veil at The Thinning opened and a messenger crossed through, delivering a document that voids Hoss's resource-assignment to Crestfall Notch. (near the thinning)",
@@ -1137,14 +1045,118 @@
         "worldDay": 38,
         "text": "Standing Unlit has hit trouble — A petitioner arrived at the outer chamber with a legitimate token of passage and Standing Unlit, uncertain of its authenticity, turned them away — and the error has been noted by someone further inside who expected that petitioner to arrive.",
         "tier": "event"
+      },
+      {
+        "day": 2,
+        "worldDay": 69,
+        "text": "Word reaches you that A border-warden has been quietly waving through a particular kind of traveler for months, telling herself each time it is a one-time mercy — and the cumulative passage has changed something about… — settled, it seems, without you.",
+        "tier": "event",
+        "section": "world"
+      },
+      {
+        "day": 2,
+        "worldDay": 69,
+        "text": "Word reaches you that Two workshops that have shared a single critical tool by informal rotation for a generation are both now mid-project simultaneously, and neither will yield first. — settled, it seems, without you.",
+        "tier": "event",
+        "section": "world"
+      },
+      {
+        "day": 2,
+        "worldDay": 67,
+        "text": "This reaches your area — urgent encrypted message arrived at Whistling Woman via direct slate relay—not chain broadcast (near gen-whistling-woman-post)",
+        "tier": "event",
+        "section": "elsewhere",
+        "impactsLocal": true
+      },
+      {
+        "day": 2,
+        "worldDay": 69,
+        "text": "The One Called Loki turned The Final Argument back at The Proof-Halls. The Final Argument learned something, which is worse for everyone else.",
+        "tier": "event",
+        "section": "world",
+        "kind": "clash",
+        "winnerId": "the_one_called_loki",
+        "loserId": "the_final_argument",
+        "outcome": "stopped",
+        "locationId": "the_proof_halls",
+        "arcId": "arc_block_bleed"
+      },
+      {
+        "day": 2,
+        "worldDay": 69,
+        "text": "The Appetite broke Halvex Coil, the Rewriter at The Service Ways — a stranger, and now an enemy. Halvex Coil is out of the reckoning while the wound holds.",
+        "tier": "event",
+        "section": "world",
+        "kind": "clash",
+        "winnerId": "the_appetite",
+        "loserId": "halvex_coil",
+        "outcome": "wounded",
+        "abilityId": "ki_thorns",
+        "locationId": "the_service_ways"
+      },
+      {
+        "day": 2,
+        "worldDay": 69,
+        "text": "Word from The Service Ways — Halvex Coil, the Rewriter: removing an inefficiency that was a person.",
+        "tier": "murmur",
+        "section": "world"
+      },
+      {
+        "day": 2,
+        "worldDay": 69,
+        "text": "Word from Radiant Plateau — Edge District — Overseer Grael of the Edge District: noticing a name that should not be there.",
+        "tier": "murmur",
+        "section": "world"
+      },
+      {
+        "day": 2,
+        "worldDay": 69,
+        "text": "Word from The Maw — The Hollow King of the Wild Half: cataloguing what he has been given.",
+        "tier": "murmur",
+        "section": "world"
+      },
+      {
+        "day": 2,
+        "worldDay": 69,
+        "text": "Sister Alder, the Ward That Does Not Break has not been seen at home in a long while — whatever is happening has all of them.",
+        "tier": "murmur",
+        "section": "world"
+      },
+      {
+        "day": 2,
+        "worldDay": 69,
+        "text": "Maren Ossitide, Who Buried the Drowned Year has not been seen at home in a long while — whatever is happening has all of them.",
+        "tier": "murmur",
+        "section": "world"
+      },
+      {
+        "day": 2,
+        "worldDay": 69,
+        "text": "The Final Argument has dug in over The Bleeding Grammar.",
+        "tier": "murmur",
+        "section": "world"
+      },
+      {
+        "day": 2,
+        "worldDay": 69,
+        "text": "Sable: Sable has moved deeper into the Unlit Deep without resistance, following the pull that brought her willingly — she has passed the last threshold where light from the surface can be felt, and has not turned back.",
+        "tier": "ambient",
+        "section": "world"
+      },
+      {
+        "day": 2,
+        "worldDay": 69,
+        "text": "The Scouring Hand: Something peripheral — a small settlement at the edge of known land — has gone silent in a way that leaves no ruin, no bodies, no mark of cause: only absence, as though it had simply been subtracted.",
+        "tier": "event",
+        "section": "world"
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 931,
-    "lastSharedReadAt": "2026-08-07T19:49:31.851Z",
-    "lastTickWorldDay": 38,
-    "lastCanonWorldDay": 38,
-    "turnsSinceOffer": 46,
+    "lastGenCount": 1675,
+    "lastSharedReadAt": "2026-09-07T19:37:41.155Z",
+    "lastTickWorldDay": 69,
+    "lastCanonWorldDay": 69,
+    "turnsSinceOffer": 47,
     "recentOffers": [
       {
         "thing": "Cy said 'this unit has not descended in some time' — the hollow precision of that phrasing is a door. Whatever is in the deprecated…",
@@ -1191,6 +1203,30 @@
         "status": "active",
         "updatedWorldDay": 38,
         "lastOutcome": "stall"
+      },
+      "taken-person": {
+        "progress": 1,
+        "status": "active",
+        "updatedWorldDay": 69,
+        "lastOutcome": "progress"
+      },
+      "the-stranger-aggressor": {
+        "progress": 0,
+        "status": "active",
+        "updatedWorldDay": 69,
+        "lastOutcome": "stall"
+      },
+      "hourkeeper-confluence": {
+        "progress": 0,
+        "status": "active",
+        "updatedWorldDay": 69,
+        "lastOutcome": "stall"
+      },
+      "the_scouring_hand": {
+        "progress": 1,
+        "status": "active",
+        "updatedWorldDay": 69,
+        "lastOutcome": "progress"
       }
     },
     "latentArcs": {
@@ -1200,11 +1236,11 @@
         "kind": "shortage",
         "premise": "The shallow wells that sustain the scattered settlements are dropping faster each season than anyone has yet admitted aloud.",
         "cause": "The Palelands' sparse, chalky soil has always demanded more water to work than it naturally holds, and the settlements were founded at the margins of what the…",
-        "stage": 21,
+        "stage": 37,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
-        "lastMovedCount": 931,
+        "lastMovedCount": 1675,
         "surfacedAtCount": 663
       },
       "arc-valley-granary-rot": {
@@ -1213,11 +1249,11 @@
         "kind": "rot",
         "premise": "A slow fungal bloom is working through the oldest grain stores, and the steward responsible has been quietly discarding the worst sacks rather than reporting the loss.",
         "cause": "The valley's mild, damp winters make its granaries prone to moisture, and the current steward was appointed for loyalty rather than knowledge of grain-keeping.",
-        "stage": 21,
+        "stage": 37,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
-        "lastMovedCount": 931,
+        "lastMovedCount": 1675,
         "surfacedAtCount": 663
       },
       "arc-inheritance-dispute": {
@@ -1238,11 +1274,11 @@
         "kind": "rot",
         "premise": "A key sequence in the primary record is being quietly re-threaded by someone who made an error years ago and cannot bear to have it discovered.",
         "cause": "Unspooling's knowledge is stored in physical cordage whose integrity depends entirely on the honesty of the hands that maintain it.",
-        "stage": 16,
+        "stage": 32,
         "seededAtCount": 758,
         "surfaced": true,
         "fate": "growing",
-        "lastMovedCount": 931,
+        "lastMovedCount": 1675,
         "surfacedAtCount": 760
       },
       "unmade-threshold-compact": {
@@ -1251,11 +1287,11 @@
         "kind": "decision",
         "premise": "A border-warden has been quietly waving through a particular kind of traveler for months, telling herself each time it is a one-time mercy — and the cumulative passage has changed something about…",
         "cause": "The Unmade is a place defined by what has been stripped away or refused form; its wardens hold authority through discretion, and discretion exercised…",
-        "stage": 0,
+        "stage": 2,
         "seededAtCount": 931,
         "surfaced": false,
-        "fate": "growing",
-        "lastMovedCount": 931
+        "fate": "resolved",
+        "lastMovedCount": 1675
       },
       "making-tool-debt": {
         "id": "making-tool-debt",
@@ -1263,11 +1299,35 @@
         "kind": "feud",
         "premise": "Two workshops that have shared a single critical tool by informal rotation for a generation are both now mid-project simultaneously, and neither will yield first.",
         "cause": "The Making runs on the assumption that production schedules will never perfectly collide — a assumption that has always been quietly true and is now, for the…",
-        "stage": 0,
+        "stage": 3,
         "seededAtCount": 931,
         "surfaced": false,
+        "fate": "resolved",
+        "lastMovedCount": 1675
+      },
+      "unmade-grief-hoarding": {
+        "id": "unmade-grief-hoarding",
+        "regionId": "the_unmade",
+        "kind": "shortage",
+        "premise": "Certain materials or substances needed for whatever work the Unmade does are being quietly stockpiled by one practitioner at the expense of communal supply, because she no longer trusts the…",
+        "cause": "The Unmade is a place where things are taken apart, and grief for what is lost has no formal channel — it is expected to simply disperse, as everything else…",
+        "stage": 0,
+        "seededAtCount": 1675,
+        "surfaced": false,
         "fate": "growing",
-        "lastMovedCount": 931
+        "lastMovedCount": 1675
+      },
+      "making-apprentice-sabotage": {
+        "id": "making-apprentice-sabotage",
+        "regionId": "the_making",
+        "kind": "rot",
+        "premise": "A run of subtle flaws has begun appearing in work passing through one bench — small enough to escape immediate notice, deep enough to fail later — and the cause is a senior apprentice who has been…",
+        "cause": "The two workshops already contesting the shared tool have each told their apprentices, in different words, that the other side cannot be trusted — and one…",
+        "stage": 0,
+        "seededAtCount": 1675,
+        "surfaced": false,
+        "fate": "growing",
+        "lastMovedCount": 1675
       }
     },
     "arcStages": {
@@ -1279,212 +1339,238 @@
       }
     },
     "pressureQueue": [],
-    "offscreenCursor": 4,
+    "offscreenCursor": 8,
     "retrievalWanted": [],
     "arcRetrievals": [],
     "careIdle": {
       "sister_alder": {
-        "arc_what_wakes_beneath": 1,
-        "arc_the_poles_pull": 1
+        "arc_what_wakes_beneath": 0,
+        "arc_the_poles_pull": 2,
+        "arc_manifestation_storm": 1
       },
       "halvex_coil": {
-        "arc_manifestation_storm": 1
+        "arc_manifestation_storm": 0,
+        "arc_what_wakes_beneath": 1
       },
       "overseer_grael": {
-        "arc_the_poles_pull": 1
+        "arc_the_poles_pull": 2
       },
       "maren_ossitide": {
-        "arc_the_poles_pull": 1
+        "arc_the_poles_pull": 2
       },
       "the_hollow_king": {
-        "arc_what_wakes_beneath": 1
+        "arc_what_wakes_beneath": 2
       },
       "cinder_vael": {
-        "arc_what_wakes_beneath": 1,
-        "arc_block_bleed": 1
-      },
-      "the_last_walker": {
-        "arc_the_poles_pull": 1,
+        "arc_what_wakes_beneath": 2,
+        "arc_block_bleed": 0,
         "arc_manifestation_storm": 1
       },
+      "the_last_walker": {
+        "arc_the_poles_pull": 0,
+        "arc_manifestation_storm": 2,
+        "arc_green_schism": 1
+      },
       "neth_the_stayed": {
-        "arc_green_schism": 1,
-        "arc_the_poles_pull": 1
+        "arc_green_schism": 2,
+        "arc_the_poles_pull": 2
       },
       "morvane_the_harvest": {
-        "arc_what_wakes_beneath": 1
+        "arc_what_wakes_beneath": 2
       },
       "halcyon_the_finished": {
         "arc_manifestation_storm": 0
       },
       "vessa_truename": {
         "arc_the_poles_pull": 0,
-        "arc_block_bleed": 1
+        "arc_block_bleed": 2
       },
       "thornmother_sealed": {},
       "the_last_choirmistress": {
-        "arc_manifestation_storm": 1
+        "arc_manifestation_storm": 2
       },
       "the_unbodied_choir_master": {},
       "sunwrack_valen": {},
       "ember_who_banks_the_fire": {
-        "arc_manifestation_storm": 1
+        "arc_manifestation_storm": 2
       },
       "the_deep_lantern": {
-        "arc_manifestation_storm": 1
+        "arc_manifestation_storm": 2
       },
       "the_starless": {
-        "arc_manifestation_storm": 1
+        "arc_manifestation_storm": 2
       },
       "the_weeping_archive": {
-        "arc_block_bleed": 1
+        "arc_block_bleed": 2
       },
       "the_raw_chord": {},
       "the_cogitant_ninefold": {
-        "arc_block_bleed": 1
+        "arc_block_bleed": 2
       },
       "harrow_the_hollowing": {
-        "arc_manifestation_storm": 1
-      },
-      "the_last_mercy": {
+        "arc_manifestation_storm": 0,
         "arc_what_wakes_beneath": 1
       },
+      "the_last_mercy": {
+        "arc_what_wakes_beneath": 0,
+        "arc_manifestation_storm": 1
+      },
       "the_scouring_hand": {
-        "arc_the_poles_pull": 1
+        "arc_the_poles_pull": 0,
+        "arc_what_wakes_beneath": 1
       },
       "the_edge_that_holds": {
-        "arc_block_bleed": 1,
-        "arc_green_schism": 1
+        "arc_block_bleed": 2,
+        "arc_green_schism": 2
       },
       "the_ender_who_forgot": {
-        "arc_manifestation_storm": 1
+        "arc_manifestation_storm": 2
       },
       "keeper_the_unsaid": {
-        "arc_block_bleed": 1
+        "arc_block_bleed": 2
       },
       "the_lidded_calm": {
-        "arc_what_wakes_beneath": 1,
-        "arc_green_schism": 1
+        "arc_what_wakes_beneath": 0,
+        "arc_green_schism": 2,
+        "arc_the_poles_pull": 1
       },
       "the_unbending_witness": {
-        "arc_block_bleed": 1,
-        "arc_manifestation_storm": 1
+        "arc_block_bleed": 2,
+        "arc_manifestation_storm": 2
       },
       "the_last_seraph": {
-        "arc_the_poles_pull": 1
+        "arc_the_poles_pull": 2
       },
       "the_burning_certainty": {},
       "the_clockmother": {
-        "arc_manifestation_storm": 1,
-        "arc_block_bleed": 1
+        "arc_manifestation_storm": 2,
+        "arc_block_bleed": 2
       },
       "the_hour_hoarder": {
-        "arc_manifestation_storm": 1
+        "arc_manifestation_storm": 0,
+        "arc_what_wakes_beneath": 1
       },
       "the_hundred_hands": {
-        "arc_what_wakes_beneath": 1,
-        "arc_green_schism": 1
+        "arc_what_wakes_beneath": 0,
+        "arc_green_schism": 2,
+        "arc_the_poles_pull": 1
       },
       "the_appetite": {
-        "arc_what_wakes_beneath": 1
+        "arc_what_wakes_beneath": 2
       },
       "the_ninefold_ascendant": {
-        "arc_manifestation_storm": 1
+        "arc_manifestation_storm": 0,
+        "arc_what_wakes_beneath": 1
       },
       "the_one_who_stayed_embodied": {
-        "arc_what_wakes_beneath": 1
+        "arc_what_wakes_beneath": 0,
+        "arc_the_poles_pull": 1
       },
       "the_glad_dissolution": {
-        "arc_manifestation_storm": 1,
-        "arc_the_poles_pull": 1
-      },
-      "the_still_lattice": {
-        "arc_manifestation_storm": 1
-      },
-      "the_final_argument": {
+        "arc_manifestation_storm": 2,
+        "arc_the_poles_pull": 0,
         "arc_block_bleed": 1
       },
+      "the_still_lattice": {
+        "arc_manifestation_storm": 0,
+        "arc_the_poles_pull": 1
+      },
+      "the_final_argument": {
+        "arc_block_bleed": 0,
+        "arc_the_poles_pull": 1
+      },
       "the_kind_liar": {
-        "arc_manifestation_storm": 1
+        "arc_manifestation_storm": 2
       },
       "the_cornerstone": {
-        "arc_manifestation_storm": 1,
-        "arc_green_schism": 1,
-        "arc_what_wakes_beneath": 1
+        "arc_manifestation_storm": 2,
+        "arc_green_schism": 2,
+        "arc_what_wakes_beneath": 0,
+        "arc_block_bleed": 1
       },
       "the_open_figure": {
-        "arc_block_bleed": 1,
-        "arc_the_poles_pull": 1
+        "arc_block_bleed": 2,
+        "arc_the_poles_pull": 2
       },
       "the_farwalker": {
-        "arc_what_wakes_beneath": 1
-      },
-      "the_gate_that_gapes": {
-        "arc_what_wakes_beneath": 1
-      },
-      "first_flame_ateph": {
+        "arc_what_wakes_beneath": 0,
         "arc_manifestation_storm": 1
       },
+      "the_gate_that_gapes": {
+        "arc_what_wakes_beneath": 2
+      },
+      "first_flame_ateph": {
+        "arc_manifestation_storm": 2
+      },
       "the_first_moot": {
-        "arc_the_poles_pull": 1
+        "arc_the_poles_pull": 0,
+        "arc_green_schism": 1
       },
       "the_oathbreaker_sel": {
-        "arc_the_poles_pull": 1
+        "arc_the_poles_pull": 0,
+        "arc_what_wakes_beneath": 1
       },
       "the_nine_year_master": {},
       "prodigal_gearheart": {
-        "arc_manifestation_storm": 1,
-        "arc_what_wakes_beneath": 1
+        "arc_manifestation_storm": 2,
+        "arc_what_wakes_beneath": 0,
+        "arc_block_bleed": 1
       },
       "the_edge_seeker": {
-        "arc_what_wakes_beneath": 1
+        "arc_what_wakes_beneath": 2
       },
       "the_lost_chord_seeker": {
-        "arc_what_wakes_beneath": 1
+        "arc_what_wakes_beneath": 2
       },
       "the_undefeated": {
         "arc_the_poles_pull": 0
       },
       "the_doubting_lattice": {
-        "arc_the_poles_pull": 1
+        "arc_the_poles_pull": 0,
+        "arc_block_bleed": 1
       },
       "the_apostate_choir": {
-        "arc_manifestation_storm": 1
+        "arc_manifestation_storm": 2
       },
       "the_two_who_are_one": {
-        "arc_manifestation_storm": 1,
-        "arc_block_bleed": 1
+        "arc_manifestation_storm": 2,
+        "arc_block_bleed": 2
       },
       "iselde_the_wanderer": {
-        "arc_green_schism": 1,
-        "arc_block_bleed": 1,
-        "arc_the_poles_pull": 1
+        "arc_green_schism": 2,
+        "arc_block_bleed": 2,
+        "arc_the_poles_pull": 2
       },
       "the_unravelled_mind": {
-        "arc_block_bleed": 1
+        "arc_block_bleed": 0,
+        "arc_the_poles_pull": 1
       },
       "the_hundred_faces": {},
       "the_long_grudge": {},
       "the_archive_that_walks": {
-        "arc_block_bleed": 1,
-        "arc_manifestation_storm": 1
+        "arc_block_bleed": 2,
+        "arc_manifestation_storm": 2
       },
       "the_bridgewright": {
-        "arc_manifestation_storm": 1,
-        "arc_the_poles_pull": 1
+        "arc_manifestation_storm": 2,
+        "arc_the_poles_pull": 0,
+        "arc_block_bleed": 1
       },
       "the_war_ender": {
         "arc_the_poles_pull": 0
       },
       "the_penitent_maw": {
-        "arc_what_wakes_beneath": 1
+        "arc_what_wakes_beneath": 0,
+        "arc_the_poles_pull": 1
       },
       "the_pattern_prophet": {
-        "arc_what_wakes_beneath": 1,
-        "arc_block_bleed": 1
+        "arc_what_wakes_beneath": 0,
+        "arc_block_bleed": 2,
+        "arc_manifestation_storm": 1
       },
       "the_unbound_churn": {
-        "arc_the_poles_pull": 1
+        "arc_the_poles_pull": 0,
+        "arc_block_bleed": 1
       },
       "the_one_called_zeus": {},
       "the_one_called_loki": {},
@@ -1493,45 +1579,45 @@
     },
     "careHeld": {
       "sister_alder": {
-        "arc_what_wakes_beneath": 0,
+        "arc_what_wakes_beneath": 1,
         "arc_the_poles_pull": 0,
-        "arc_manifestation_storm": 1
+        "arc_manifestation_storm": 0
       },
       "halvex_coil": {
         "arc_manifestation_storm": 0,
-        "arc_what_wakes_beneath": 1,
+        "arc_what_wakes_beneath": 0,
         "arc_block_bleed": 1
       },
       "overseer_grael": {
         "arc_the_poles_pull": 0,
-        "arc_block_bleed": 1
+        "arc_block_bleed": 2
       },
       "maren_ossitide": {
         "arc_the_poles_pull": 0,
-        "arc_what_wakes_beneath": 1
+        "arc_what_wakes_beneath": 2
       },
       "the_hollow_king": {
         "arc_what_wakes_beneath": 0,
-        "arc_the_poles_pull": 1
+        "arc_the_poles_pull": 2
       },
       "cinder_vael": {
         "arc_what_wakes_beneath": 0,
-        "arc_block_bleed": 0,
-        "arc_manifestation_storm": 1
+        "arc_block_bleed": 1,
+        "arc_manifestation_storm": 0
       },
       "the_last_walker": {
-        "arc_the_poles_pull": 0,
+        "arc_the_poles_pull": 1,
         "arc_manifestation_storm": 0,
-        "arc_green_schism": 1
+        "arc_green_schism": 0
       },
       "neth_the_stayed": {
         "arc_green_schism": 0,
         "arc_the_poles_pull": 0,
-        "arc_what_wakes_beneath": 1
+        "arc_what_wakes_beneath": 2
       },
       "morvane_the_harvest": {
         "arc_what_wakes_beneath": 0,
-        "arc_the_poles_pull": 1
+        "arc_the_poles_pull": 2
       },
       "halcyon_the_finished": {
         "arc_manifestation_storm": 1
@@ -1541,252 +1627,252 @@
         "arc_block_bleed": 0
       },
       "thornmother_sealed": {
-        "arc_green_schism": 1,
-        "arc_the_poles_pull": 1
+        "arc_green_schism": 2,
+        "arc_the_poles_pull": 2
       },
       "the_last_choirmistress": {
         "arc_manifestation_storm": 0,
-        "arc_what_wakes_beneath": 1
+        "arc_what_wakes_beneath": 2
       },
       "the_unbodied_choir_master": {
-        "arc_what_wakes_beneath": 1,
-        "arc_manifestation_storm": 1
+        "arc_what_wakes_beneath": 2,
+        "arc_manifestation_storm": 2
       },
       "sunwrack_valen": {
-        "arc_the_poles_pull": 1,
-        "arc_what_wakes_beneath": 1
+        "arc_the_poles_pull": 2,
+        "arc_what_wakes_beneath": 2
       },
       "ember_who_banks_the_fire": {
         "arc_manifestation_storm": 0,
-        "arc_the_poles_pull": 1
+        "arc_the_poles_pull": 2
       },
       "the_deep_lantern": {
         "arc_manifestation_storm": 0,
-        "arc_the_poles_pull": 1
+        "arc_the_poles_pull": 2
       },
       "the_starless": {
         "arc_manifestation_storm": 0,
-        "arc_the_poles_pull": 1,
-        "arc_green_schism": 1
+        "arc_the_poles_pull": 2,
+        "arc_green_schism": 2
       },
       "the_weeping_archive": {
         "arc_block_bleed": 0,
-        "arc_the_poles_pull": 1
+        "arc_the_poles_pull": 2
       },
       "the_raw_chord": {
-        "arc_the_poles_pull": 1,
-        "arc_manifestation_storm": 1
+        "arc_the_poles_pull": 2,
+        "arc_manifestation_storm": 2
       },
       "the_cogitant_ninefold": {
         "arc_block_bleed": 0,
-        "arc_what_wakes_beneath": 1
+        "arc_what_wakes_beneath": 2
       },
       "harrow_the_hollowing": {
-        "arc_manifestation_storm": 0,
-        "arc_what_wakes_beneath": 1,
-        "arc_the_poles_pull": 1
+        "arc_manifestation_storm": 1,
+        "arc_what_wakes_beneath": 0,
+        "arc_the_poles_pull": 2
       },
       "the_last_mercy": {
-        "arc_what_wakes_beneath": 0,
-        "arc_manifestation_storm": 1
+        "arc_what_wakes_beneath": 1,
+        "arc_manifestation_storm": 0
       },
       "the_scouring_hand": {
-        "arc_the_poles_pull": 0,
-        "arc_manifestation_storm": 1,
-        "arc_what_wakes_beneath": 1
+        "arc_the_poles_pull": 1,
+        "arc_manifestation_storm": 2,
+        "arc_what_wakes_beneath": 0
       },
       "the_edge_that_holds": {
         "arc_block_bleed": 0,
         "arc_green_schism": 0,
-        "arc_the_poles_pull": 1
+        "arc_the_poles_pull": 2
       },
       "the_ender_who_forgot": {
         "arc_manifestation_storm": 0,
-        "arc_the_poles_pull": 1
+        "arc_the_poles_pull": 2
       },
       "keeper_the_unsaid": {
         "arc_block_bleed": 0,
-        "arc_the_poles_pull": 1
+        "arc_the_poles_pull": 2
       },
       "the_lidded_calm": {
-        "arc_what_wakes_beneath": 0,
+        "arc_what_wakes_beneath": 1,
         "arc_green_schism": 0,
-        "arc_the_poles_pull": 1
+        "arc_the_poles_pull": 0
       },
       "the_unbending_witness": {
         "arc_block_bleed": 0,
         "arc_manifestation_storm": 0,
-        "arc_the_poles_pull": 1
+        "arc_the_poles_pull": 2
       },
       "the_last_seraph": {
         "arc_the_poles_pull": 0,
-        "arc_what_wakes_beneath": 1
+        "arc_what_wakes_beneath": 2
       },
       "the_burning_certainty": {
-        "arc_what_wakes_beneath": 1,
-        "arc_the_poles_pull": 1
+        "arc_what_wakes_beneath": 2,
+        "arc_the_poles_pull": 2
       },
       "the_clockmother": {
         "arc_manifestation_storm": 0,
         "arc_block_bleed": 0,
-        "arc_what_wakes_beneath": 1
+        "arc_what_wakes_beneath": 2
       },
       "the_hour_hoarder": {
-        "arc_manifestation_storm": 0,
-        "arc_what_wakes_beneath": 1
+        "arc_manifestation_storm": 1,
+        "arc_what_wakes_beneath": 0
       },
       "the_hundred_hands": {
-        "arc_what_wakes_beneath": 0,
+        "arc_what_wakes_beneath": 1,
         "arc_green_schism": 0,
-        "arc_the_poles_pull": 1
+        "arc_the_poles_pull": 0
       },
       "the_appetite": {
         "arc_what_wakes_beneath": 0,
-        "arc_the_poles_pull": 1
+        "arc_the_poles_pull": 2
       },
       "the_ninefold_ascendant": {
-        "arc_manifestation_storm": 0,
-        "arc_the_poles_pull": 1,
-        "arc_what_wakes_beneath": 1
+        "arc_manifestation_storm": 1,
+        "arc_the_poles_pull": 2,
+        "arc_what_wakes_beneath": 0
       },
       "the_one_who_stayed_embodied": {
-        "arc_what_wakes_beneath": 0,
-        "arc_the_poles_pull": 1
+        "arc_what_wakes_beneath": 1,
+        "arc_the_poles_pull": 0
       },
       "the_glad_dissolution": {
         "arc_manifestation_storm": 0,
-        "arc_the_poles_pull": 0,
-        "arc_block_bleed": 1
+        "arc_the_poles_pull": 1,
+        "arc_block_bleed": 0
       },
       "the_still_lattice": {
-        "arc_manifestation_storm": 0,
-        "arc_block_bleed": 1,
-        "arc_the_poles_pull": 1
+        "arc_manifestation_storm": 1,
+        "arc_block_bleed": 2,
+        "arc_the_poles_pull": 0
       },
       "the_final_argument": {
         "arc_block_bleed": 0,
-        "arc_the_poles_pull": 1
+        "arc_the_poles_pull": 0
       },
       "the_kind_liar": {
         "arc_manifestation_storm": 0,
-        "arc_the_poles_pull": 1
+        "arc_the_poles_pull": 2
       },
       "the_cornerstone": {
         "arc_manifestation_storm": 0,
         "arc_green_schism": 0,
-        "arc_what_wakes_beneath": 0,
-        "arc_block_bleed": 1
+        "arc_what_wakes_beneath": 1,
+        "arc_block_bleed": 0
       },
       "the_open_figure": {
         "arc_block_bleed": 0,
         "arc_the_poles_pull": 0,
-        "arc_manifestation_storm": 1
+        "arc_manifestation_storm": 2
       },
       "the_farwalker": {
-        "arc_what_wakes_beneath": 0,
-        "arc_manifestation_storm": 1
+        "arc_what_wakes_beneath": 1,
+        "arc_manifestation_storm": 0
       },
       "the_gate_that_gapes": {
         "arc_what_wakes_beneath": 0,
-        "arc_manifestation_storm": 1
+        "arc_manifestation_storm": 2
       },
       "first_flame_ateph": {
         "arc_manifestation_storm": 0,
-        "arc_the_poles_pull": 1
+        "arc_the_poles_pull": 2
       },
       "the_first_moot": {
-        "arc_the_poles_pull": 0,
-        "arc_green_schism": 1
+        "arc_the_poles_pull": 1,
+        "arc_green_schism": 0
       },
       "the_oathbreaker_sel": {
-        "arc_the_poles_pull": 0,
-        "arc_what_wakes_beneath": 1
+        "arc_the_poles_pull": 1,
+        "arc_what_wakes_beneath": 0
       },
       "the_nine_year_master": {
-        "arc_manifestation_storm": 1
+        "arc_manifestation_storm": 2
       },
       "prodigal_gearheart": {
         "arc_manifestation_storm": 0,
-        "arc_what_wakes_beneath": 0,
-        "arc_block_bleed": 1
+        "arc_what_wakes_beneath": 1,
+        "arc_block_bleed": 0
       },
       "the_edge_seeker": {
         "arc_what_wakes_beneath": 0,
-        "arc_manifestation_storm": 1
+        "arc_manifestation_storm": 2
       },
       "the_lost_chord_seeker": {
         "arc_what_wakes_beneath": 0,
-        "arc_manifestation_storm": 1
+        "arc_manifestation_storm": 2
       },
       "the_undefeated": {
         "arc_the_poles_pull": 1
       },
       "the_doubting_lattice": {
-        "arc_the_poles_pull": 0,
-        "arc_block_bleed": 1
+        "arc_the_poles_pull": 1,
+        "arc_block_bleed": 0
       },
       "the_apostate_choir": {
         "arc_manifestation_storm": 0,
-        "arc_what_wakes_beneath": 1
+        "arc_what_wakes_beneath": 2
       },
       "the_two_who_are_one": {
         "arc_manifestation_storm": 0,
         "arc_block_bleed": 0,
-        "arc_the_poles_pull": 1
+        "arc_the_poles_pull": 2
       },
       "iselde_the_wanderer": {
         "arc_green_schism": 0,
         "arc_block_bleed": 0,
         "arc_the_poles_pull": 0,
-        "arc_manifestation_storm": 1
+        "arc_manifestation_storm": 2
       },
       "the_unravelled_mind": {
-        "arc_block_bleed": 0,
-        "arc_the_poles_pull": 1
+        "arc_block_bleed": 1,
+        "arc_the_poles_pull": 0
       },
       "the_hundred_faces": {
-        "arc_manifestation_storm": 1
+        "arc_manifestation_storm": 2
       },
       "the_long_grudge": {
-        "arc_what_wakes_beneath": 1
+        "arc_what_wakes_beneath": 2
       },
       "the_archive_that_walks": {
         "arc_block_bleed": 0,
         "arc_manifestation_storm": 0,
-        "arc_the_poles_pull": 1
+        "arc_the_poles_pull": 2
       },
       "the_bridgewright": {
         "arc_manifestation_storm": 0,
-        "arc_the_poles_pull": 0,
-        "arc_block_bleed": 1
+        "arc_the_poles_pull": 1,
+        "arc_block_bleed": 0
       },
       "the_war_ender": {
         "arc_the_poles_pull": 1
       },
       "the_penitent_maw": {
-        "arc_what_wakes_beneath": 0,
-        "arc_the_poles_pull": 1
+        "arc_what_wakes_beneath": 1,
+        "arc_the_poles_pull": 0
       },
       "the_pattern_prophet": {
-        "arc_what_wakes_beneath": 0,
+        "arc_what_wakes_beneath": 1,
         "arc_block_bleed": 0,
-        "arc_manifestation_storm": 1
+        "arc_manifestation_storm": 0
       },
       "the_unbound_churn": {
-        "arc_the_poles_pull": 0,
-        "arc_block_bleed": 1
+        "arc_the_poles_pull": 1,
+        "arc_block_bleed": 0
       },
       "the_one_called_zeus": {
-        "arc_the_poles_pull": 1
+        "arc_the_poles_pull": 2
       },
       "the_one_called_loki": {
-        "arc_block_bleed": 1
+        "arc_block_bleed": 2
       },
       "the_one_called_athena": {
-        "arc_what_wakes_beneath": 1
+        "arc_what_wakes_beneath": 2
       },
       "the_one_called_ares": {
-        "arc_the_poles_pull": 1
+        "arc_the_poles_pull": 2
       }
     },
     "figureTenure": {
@@ -1809,11 +1895,16 @@
         "sinceDay": 38,
         "wins": 0,
         "losses": 0,
-        "deeds": 3,
+        "deeds": 4,
         "deedLog": [
           {
             "by": "arcContestWon",
             "worldDay": 38,
+            "playerInvolved": false
+          },
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
             "playerInvolved": false
           }
         ]
@@ -1822,12 +1913,17 @@
         "tier": "heroic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0,
-        "deeds": 3,
+        "losses": 1,
+        "deeds": 4,
         "deedLog": [
           {
             "by": "arcContestWon",
             "worldDay": 38,
+            "playerInvolved": false
+          },
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
             "playerInvolved": false
           }
         ]
@@ -1837,11 +1933,16 @@
         "sinceDay": 38,
         "wins": 0,
         "losses": 0,
-        "deeds": 3,
+        "deeds": 4,
         "deedLog": [
           {
             "by": "arcContestWon",
             "worldDay": 38,
+            "playerInvolved": false
+          },
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
             "playerInvolved": false
           }
         ]
@@ -1849,13 +1950,18 @@
       "sunwrack_valen": {
         "tier": "legendary",
         "sinceDay": 38,
-        "wins": 0,
-        "losses": 0,
-        "deeds": 3,
+        "wins": 1,
+        "losses": 1,
+        "deeds": 6,
         "deedLog": [
           {
             "by": "arcContestWon",
             "worldDay": 38,
+            "playerInvolved": false
+          },
+          {
+            "by": "arcContestWon",
+            "worldDay": 69,
             "playerInvolved": false
           }
         ]
@@ -1898,11 +2004,16 @@
         "sinceDay": 38,
         "wins": 0,
         "losses": 0,
-        "deeds": 3,
+        "deeds": 4,
         "deedLog": [
           {
             "by": "guardIntercept",
             "worldDay": 38,
+            "playerInvolved": false
+          },
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
             "playerInvolved": false
           }
         ]
@@ -1912,11 +2023,21 @@
         "sinceDay": 38,
         "wins": 0,
         "losses": 0,
-        "deeds": 3,
+        "deeds": 7,
         "deedLog": [
           {
             "by": "strikeSurvived",
             "worldDay": 38,
+            "playerInvolved": false
+          },
+          {
+            "by": "strikeSurvived",
+            "worldDay": 69,
+            "playerInvolved": false
+          },
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
             "playerInvolved": false
           }
         ]
@@ -1924,8 +2045,26 @@
       "sister_alder": {
         "tier": "epic",
         "sinceDay": 38,
-        "wins": 0,
-        "losses": 0
+        "wins": 1,
+        "losses": 0,
+        "deeds": 7,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          },
+          {
+            "by": "arcContestWon",
+            "worldDay": 69,
+            "playerInvolved": false
+          },
+          {
+            "by": "stageMoved",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "overseer_grael": {
         "tier": "heroic",
@@ -1937,7 +2076,20 @@
         "tier": "epic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 2,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          },
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_hollow_king": {
         "tier": "epic",
@@ -1949,13 +2101,39 @@
         "tier": "heroic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 4,
+        "deedLog": [
+          {
+            "by": "guardIntercept",
+            "worldDay": 69,
+            "playerInvolved": false
+          },
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "neth_the_stayed": {
         "tier": "epic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 2,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          },
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "morvane_the_harvest": {
         "tier": "epic",
@@ -1967,13 +2145,29 @@
         "tier": "epic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 1,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "vessa_truename": {
         "tier": "heroic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 1,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "thornmother_sealed": {
         "tier": "legendary",
@@ -1985,25 +2179,54 @@
         "tier": "epic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 2,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          },
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_unbodied_choir_master": {
         "tier": "legendary",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 1
       },
       "the_deep_lantern": {
         "tier": "epic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 1,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_weeping_archive": {
         "tier": "epic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 1,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_raw_chord": {
         "tier": "legendary",
@@ -2015,7 +2238,20 @@
         "tier": "heroic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 2,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          },
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "harrow_the_hollowing": {
         "tier": "legendary",
@@ -2027,13 +2263,34 @@
         "tier": "epic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 2,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          },
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_scouring_hand": {
         "tier": "legendary",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 1,
+        "deeds": 1,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_ender_who_forgot": {
         "tier": "epic",
@@ -2045,25 +2302,67 @@
         "tier": "heroic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 1,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_lidded_calm": {
         "tier": "epic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 2,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          },
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_unbending_witness": {
         "tier": "epic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 1,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_last_seraph": {
         "tier": "epic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 2,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          },
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_burning_certainty": {
         "tier": "legendary",
@@ -2075,7 +2374,20 @@
         "tier": "epic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 2,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          },
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_hour_hoarder": {
         "tier": "epic",
@@ -2087,55 +2399,147 @@
         "tier": "epic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 2,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          },
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_appetite": {
         "tier": "epic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "arcContestWon",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_one_who_stayed_embodied": {
         "tier": "heroic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 2,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          },
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_still_lattice": {
         "tier": "legendary",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 1,
+        "deeds": 1,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_final_argument": {
         "tier": "epic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "strikeSurvived",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_kind_liar": {
         "tier": "heroic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 1,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_cornerstone": {
         "tier": "epic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 2,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          },
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_open_figure": {
         "tier": "heroic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 1,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_farwalker": {
         "tier": "epic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 2,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          },
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_gate_that_gapes": {
         "tier": "epic",
@@ -2147,13 +2551,29 @@
         "tier": "epic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 1,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_first_moot": {
         "tier": "heroic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 1,
+        "deeds": 1,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_oathbreaker_sel": {
         "tier": "heroic",
@@ -2171,7 +2591,20 @@
         "tier": "heroic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 2,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          },
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_edge_seeker": {
         "tier": "heroic",
@@ -2189,31 +2622,81 @@
         "tier": "heroic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 1,
+        "deeds": 1,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_apostate_choir": {
         "tier": "heroic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 2,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          },
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_two_who_are_one": {
         "tier": "heroic",
         "sinceDay": 38,
-        "wins": 0,
-        "losses": 0
+        "wins": 1,
+        "losses": 0,
+        "deeds": 6,
+        "deedLog": [
+          {
+            "by": "arcContestWon",
+            "worldDay": 69,
+            "playerInvolved": false
+          },
+          {
+            "by": "stageMoved",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "iselde_the_wanderer": {
         "tier": "heroic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 1,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_unravelled_mind": {
         "tier": "heroic",
         "sinceDay": 38,
-        "wins": 0,
-        "losses": 0
+        "wins": 1,
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "arcContestWon",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_hundred_faces": {
         "tier": "heroic",
@@ -2225,61 +2708,166 @@
         "tier": "heroic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 2,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          },
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_archive_that_walks": {
         "tier": "epic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 1,
+        "deeds": 1,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_bridgewright": {
         "tier": "heroic",
         "sinceDay": 38,
-        "wins": 0,
-        "losses": 0
+        "wins": 1,
+        "losses": 0,
+        "deeds": 6,
+        "deedLog": [
+          {
+            "by": "arcContestWon",
+            "worldDay": 69,
+            "playerInvolved": false
+          },
+          {
+            "by": "stageMoved",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_war_ender": {
         "tier": "heroic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 1,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_penitent_maw": {
         "tier": "heroic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 2,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          },
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_pattern_prophet": {
         "tier": "heroic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 2,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          },
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_unbound_churn": {
         "tier": "heroic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 1,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_one_called_zeus": {
         "tier": "heroic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 1,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_one_called_loki": {
         "tier": "heroic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 3,
+        "deedLog": [
+          {
+            "by": "strikeLanded",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_one_called_athena": {
         "tier": "heroic",
         "sinceDay": 38,
         "wins": 0,
-        "losses": 0
+        "losses": 0,
+        "deeds": 2,
+        "deedLog": [
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          },
+          {
+            "by": "heldThroughCrisis",
+            "worldDay": 69,
+            "playerInvolved": false
+          }
+        ]
       },
       "the_one_called_ares": {
         "tier": "heroic",
@@ -2303,7 +2891,7 @@
         "spread": 0
       },
       "the_pattern_prophet": {
-        "deeds": 0,
+        "deeds": 2,
         "losses": 1,
         "wins": 0,
         "deaths": 0,
@@ -2316,8 +2904,8 @@
         "spread": 0
       },
       "halvex_coil": {
-        "deeds": 3,
-        "losses": 0,
+        "deeds": 4,
+        "losses": 1,
         "wins": 1,
         "deaths": 0,
         "retrieved": 0,
@@ -2329,7 +2917,7 @@
         "spread": 0
       },
       "maren_ossitide": {
-        "deeds": 0,
+        "deeds": 2,
         "losses": 1,
         "wins": 0,
         "deaths": 0,
@@ -2342,7 +2930,7 @@
         "spread": 0
       },
       "the_one_called_athena": {
-        "deeds": 0,
+        "deeds": 2,
         "losses": 1,
         "wins": 0,
         "deaths": 0,
@@ -2355,8 +2943,8 @@
         "spread": 0
       },
       "the_glad_dissolution": {
-        "deeds": 3,
-        "losses": 0,
+        "deeds": 4,
+        "losses": 1,
         "wins": 1,
         "deaths": 0,
         "retrieved": 0,
@@ -2368,7 +2956,7 @@
         "spread": 0
       },
       "the_doubting_lattice": {
-        "deeds": 3,
+        "deeds": 4,
         "losses": 0,
         "wins": 1,
         "deaths": 0,
@@ -2381,7 +2969,7 @@
         "spread": 0
       },
       "the_cornerstone": {
-        "deeds": 0,
+        "deeds": 2,
         "losses": 1,
         "wins": 0,
         "deaths": 0,
@@ -2394,9 +2982,9 @@
         "spread": 0
       },
       "sunwrack_valen": {
-        "deeds": 3,
-        "losses": 0,
-        "wins": 1,
+        "deeds": 6,
+        "losses": 1,
+        "wins": 2,
         "deaths": 0,
         "retrieved": 0,
         "stageMoves": 0,
@@ -2407,7 +2995,7 @@
         "spread": 0
       },
       "the_deep_lantern": {
-        "deeds": 0,
+        "deeds": 1,
         "losses": 1,
         "wins": 0,
         "deaths": 0,
@@ -2420,7 +3008,7 @@
         "spread": 0
       },
       "the_weeping_archive": {
-        "deeds": 0,
+        "deeds": 1,
         "losses": 1,
         "wins": 0,
         "deaths": 0,
@@ -2446,7 +3034,7 @@
         "spread": 0
       },
       "first_flame_ateph": {
-        "deeds": 0,
+        "deeds": 1,
         "losses": 1,
         "wins": 0,
         "deaths": 0,
@@ -2459,7 +3047,7 @@
         "spread": 0
       },
       "vessa_truename": {
-        "deeds": 0,
+        "deeds": 1,
         "losses": 1,
         "wins": 0,
         "deaths": 0,
@@ -2472,7 +3060,7 @@
         "spread": 0
       },
       "the_one_who_stayed_embodied": {
-        "deeds": 0,
+        "deeds": 2,
         "losses": 1,
         "wins": 0,
         "deaths": 0,
@@ -2485,7 +3073,7 @@
         "spread": 0
       },
       "the_war_ender": {
-        "deeds": 0,
+        "deeds": 1,
         "losses": 1,
         "wins": 0,
         "deaths": 0,
@@ -2511,7 +3099,7 @@
         "spread": 0
       },
       "the_penitent_maw": {
-        "deeds": 0,
+        "deeds": 2,
         "losses": 1,
         "wins": 0,
         "deaths": 0,
@@ -2524,7 +3112,7 @@
         "spread": 0
       },
       "the_one_called_zeus": {
-        "deeds": 0,
+        "deeds": 1,
         "losses": 1,
         "wins": 0,
         "deaths": 0,
@@ -2537,7 +3125,7 @@
         "spread": 0
       },
       "the_edge_that_holds": {
-        "deeds": 3,
+        "deeds": 4,
         "losses": 0,
         "wins": 0,
         "deaths": 0,
@@ -2550,7 +3138,7 @@
         "spread": 0
       },
       "ember_who_banks_the_fire": {
-        "deeds": 3,
+        "deeds": 7,
         "losses": 0,
         "wins": 0,
         "deaths": 0,
@@ -2563,8 +3151,424 @@
         "spread": 0
       },
       "the_first_moot": {
+        "deeds": 1,
+        "losses": 2,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "sister_alder": {
+        "deeds": 7,
+        "losses": 0,
+        "wins": 1,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 1,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "neth_the_stayed": {
+        "deeds": 2,
+        "losses": 0,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_last_choirmistress": {
+        "deeds": 2,
+        "losses": 0,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_cogitant_ninefold": {
+        "deeds": 2,
+        "losses": 0,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_last_mercy": {
+        "deeds": 2,
+        "losses": 0,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_lidded_calm": {
+        "deeds": 2,
+        "losses": 0,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_last_seraph": {
+        "deeds": 2,
+        "losses": 0,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_clockmother": {
+        "deeds": 2,
+        "losses": 0,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_hundred_hands": {
+        "deeds": 2,
+        "losses": 0,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_farwalker": {
+        "deeds": 2,
+        "losses": 0,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "prodigal_gearheart": {
+        "deeds": 2,
+        "losses": 0,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_apostate_choir": {
+        "deeds": 2,
+        "losses": 0,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_long_grudge": {
+        "deeds": 2,
+        "losses": 0,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_unbodied_choir_master": {
         "deeds": 0,
         "losses": 1,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_unravelled_mind": {
+        "deeds": 3,
+        "losses": 0,
+        "wins": 1,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_still_lattice": {
+        "deeds": 1,
+        "losses": 1,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_final_argument": {
+        "deeds": 3,
+        "losses": 0,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_one_called_loki": {
+        "deeds": 3,
+        "losses": 0,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_archive_that_walks": {
+        "deeds": 1,
+        "losses": 1,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_undefeated": {
+        "deeds": 1,
+        "losses": 1,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_two_who_are_one": {
+        "deeds": 6,
+        "losses": 0,
+        "wins": 1,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 1,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_bridgewright": {
+        "deeds": 6,
+        "losses": 0,
+        "wins": 1,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 1,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_scouring_hand": {
+        "deeds": 1,
+        "losses": 1,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_last_walker": {
+        "deeds": 4,
+        "losses": 0,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 1,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_appetite": {
+        "deeds": 3,
+        "losses": 0,
+        "wins": 1,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "halcyon_the_finished": {
+        "deeds": 1,
+        "losses": 0,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_open_figure": {
+        "deeds": 1,
+        "losses": 0,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "iselde_the_wanderer": {
+        "deeds": 1,
+        "losses": 0,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "keeper_the_unsaid": {
+        "deeds": 1,
+        "losses": 0,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_unbending_witness": {
+        "deeds": 1,
+        "losses": 0,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_kind_liar": {
+        "deeds": 1,
+        "losses": 0,
+        "wins": 0,
+        "deaths": 0,
+        "retrieved": 0,
+        "stageMoves": 0,
+        "guards": 0,
+        "protectedDeaths": 0,
+        "negWeight": 0,
+        "totalWeight": 0,
+        "spread": 0
+      },
+      "the_unbound_churn": {
+        "deeds": 1,
+        "losses": 0,
         "wins": 0,
         "deaths": 0,
         "retrieved": 0,
@@ -2579,79 +3583,79 @@
     "epicArcPushes": {
       "cinder_vael": {
         "arcId": "arc_manifestation_storm",
-        "push": 4.356000000000001
+        "push": 5.060151661714286
       },
       "the_pattern_prophet": {
         "arcId": "arc_manifestation_storm",
-        "push": -0.15
+        "push": -1.03
       },
       "the_unbodied_choir_master": {
         "arcId": "arc_manifestation_storm",
-        "push": 2.9920000000000004
+        "push": 4.082909090909091
       },
       "the_raw_chord": {
         "arcId": "arc_manifestation_storm",
-        "push": 2.8160000000000007
+        "push": 4.0448
       },
       "the_farwalker": {
         "arcId": "arc_manifestation_storm",
-        "push": 0.528
+        "push": -1.2320000000000002
       },
       "the_edge_seeker": {
         "arcId": "arc_manifestation_storm",
-        "push": 0.264
+        "push": 0.3792
       },
       "the_lost_chord_seeker": {
         "arcId": "arc_manifestation_storm",
-        "push": 0.264
+        "push": 0.3792
       },
       "sister_alder": {
         "arcId": "arc_manifestation_storm",
-        "push": -1.056
+        "push": -5.896000000000001
       },
       "halcyon_the_finished": {
         "arcId": "arc_manifestation_storm",
-        "push": -1.056
+        "push": -2.9683737600000004
       },
       "the_last_mercy": {
         "arcId": "arc_manifestation_storm",
-        "push": -1.056
+        "push": -4.5760000000000005
       },
       "the_scouring_hand": {
         "arcId": "arc_manifestation_storm",
-        "push": -2.4640000000000004
+        "push": -5.96
       },
       "the_open_figure": {
         "arcId": "arc_manifestation_storm",
-        "push": -0.528
+        "push": -1.57111296
       },
       "iselde_the_wanderer": {
         "arcId": "arc_manifestation_storm",
-        "push": -0.264
+        "push": -0.78555648
       },
       "the_gate_that_gapes": {
         "arcId": "arc_manifestation_storm",
-        "push": 1.584
+        "push": 2.2752
       },
       "the_nine_year_master": {
         "arcId": "arc_manifestation_storm",
-        "push": 0.264
+        "push": 0.3792
       },
       "the_hundred_faces": {
         "arcId": "arc_manifestation_storm",
-        "push": 0.264
+        "push": 0.3792
       },
       "halvex_coil": {
         "arcId": "arc_what_wakes_beneath",
-        "push": 5.648
+        "push": 2.204820699428571
       },
       "maren_ossitide": {
         "arcId": "arc_what_wakes_beneath",
-        "push": -0.6
+        "push": -4.4399999999999995
       },
       "the_one_called_athena": {
         "arcId": "arc_what_wakes_beneath",
-        "push": null
+        "push": -0.96
       },
       "sunwrack_valen": {
         "arcId": "arc_what_wakes_beneath",
@@ -2659,7 +3663,7 @@
       },
       "harrow_the_hollowing": {
         "arcId": "arc_what_wakes_beneath",
-        "push": 2.9920000000000004
+        "push": 3.4976000000000003
       },
       "the_ninefold_ascendant": {
         "arcId": "arc_what_wakes_beneath",
@@ -2667,87 +3671,87 @@
       },
       "the_oathbreaker_sel": {
         "arcId": "arc_what_wakes_beneath",
-        "push": 0.528
+        "push": 0.6336
       },
       "neth_the_stayed": {
         "arcId": "arc_what_wakes_beneath",
-        "push": -1.056
+        "push": -4.896
       },
       "the_last_choirmistress": {
         "arcId": "arc_what_wakes_beneath",
-        "push": -1.056
+        "push": -4.896
       },
       "the_cogitant_ninefold": {
         "arcId": "arc_what_wakes_beneath",
-        "push": -0.528
+        "push": -2.448
       },
       "the_last_seraph": {
         "arcId": "arc_what_wakes_beneath",
-        "push": -1.056
+        "push": -4.896
       },
       "the_clockmother": {
         "arcId": "arc_what_wakes_beneath",
-        "push": -1.056
+        "push": -4.896
       },
       "the_apostate_choir": {
         "arcId": "arc_what_wakes_beneath",
-        "push": -0.264
+        "push": -1.224
       },
       "the_long_grudge": {
         "arcId": "arc_what_wakes_beneath",
-        "push": -0.264
+        "push": -1.224
       },
       "the_burning_certainty": {
         "arcId": "arc_what_wakes_beneath",
-        "push": 2.9920000000000004
+        "push": 3.9904000000000006
       },
       "the_hour_hoarder": {
         "arcId": "arc_what_wakes_beneath",
-        "push": 1.056
+        "push": 1.2672
       },
       "the_glad_dissolution": {
         "arcId": "arc_block_bleed",
-        "push": 0.7392000000000001
+        "push": 0.3984821739130435
       },
       "the_doubting_lattice": {
         "arcId": "arc_block_bleed",
-        "push": 0.7392000000000001
+        "push": -0.2638732799999999
       },
       "the_cornerstone": {
         "arcId": "arc_block_bleed",
-        "push": -1.1785714285714286
+        "push": -2.9385714285714286
       },
       "the_unbound_churn": {
         "arcId": "arc_block_bleed",
-        "push": 0.264
+        "push": -0.23753663999999997
       },
       "overseer_grael": {
         "arcId": "arc_block_bleed",
-        "push": -0.528
+        "push": -0.9118345508571428
       },
       "the_still_lattice": {
         "arcId": "arc_block_bleed",
-        "push": -2.2880000000000007
+        "push": -5.715186194285715
       },
       "the_bridgewright": {
         "arcId": "arc_block_bleed",
-        "push": -0.264
+        "push": -1.64322576
       },
       "the_one_called_loki": {
         "arcId": "arc_block_bleed",
-        "push": null
+        "push": 0.3840827245714285
       },
       "prodigal_gearheart": {
         "arcId": "arc_block_bleed",
-        "push": -0.264
+        "push": -1.1440000000000001
       },
       "the_deep_lantern": {
         "arcId": "arc_the_poles_pull",
-        "push": -0.6
+        "push": -2.7885235199999996
       },
       "the_weeping_archive": {
         "arcId": "arc_the_poles_pull",
-        "push": -0.6
+        "push": -2.7885235199999996
       },
       "the_starless": {
         "arcId": "arc_the_poles_pull",
@@ -2755,107 +3759,107 @@
       },
       "first_flame_ateph": {
         "arcId": "arc_the_poles_pull",
-        "push": -0.3
+        "push": -1.3942617599999998
       },
       "vessa_truename": {
         "arcId": "arc_the_poles_pull",
-        "push": -0.3
+        "push": -1.30307328
       },
       "the_one_who_stayed_embodied": {
         "arcId": "arc_the_poles_pull",
-        "push": -0.3
+        "push": -1.1800000000000002
       },
       "the_war_ender": {
         "arcId": "arc_the_poles_pull",
-        "push": -0.3
+        "push": -1.30307328
       },
       "the_penitent_maw": {
         "arcId": "arc_the_poles_pull",
-        "push": -0.15
+        "push": -1.03
       },
       "the_one_called_zeus": {
         "arcId": "arc_the_poles_pull",
-        "push": null
+        "push": -0.5471308799999999
       },
       "the_hollow_king": {
         "arcId": "arc_the_poles_pull",
-        "push": 1.056
+        "push": 1.5168
       },
       "morvane_the_harvest": {
         "arcId": "arc_the_poles_pull",
-        "push": 1.056
+        "push": 1.5168
       },
       "thornmother_sealed": {
         "arcId": "arc_the_poles_pull",
-        "push": 2.9920000000000004
+        "push": 6
       },
       "the_ender_who_forgot": {
         "arcId": "arc_the_poles_pull",
-        "push": 1.584
+        "push": 2.2752
       },
       "the_lidded_calm": {
         "arcId": "arc_the_poles_pull",
-        "push": 1.056
+        "push": -0.7040000000000002
       },
       "ember_who_banks_the_fire": {
         "arcId": "arc_the_poles_pull",
-        "push": -1.056
+        "push": -3.2445235199999996
       },
       "the_edge_that_holds": {
         "arcId": "arc_the_poles_pull",
-        "push": -1.056
+        "push": -3.2445235199999996
       },
       "keeper_the_unsaid": {
         "arcId": "arc_the_poles_pull",
-        "push": -0.528
+        "push": -1.6222617599999998
       },
       "the_unbending_witness": {
         "arcId": "arc_the_poles_pull",
-        "push": -1.056
+        "push": -3.2445235199999996
       },
       "the_hundred_hands": {
         "arcId": "arc_the_poles_pull",
-        "push": -1.056
+        "push": -2.8160000000000003
       },
       "the_kind_liar": {
         "arcId": "arc_the_poles_pull",
-        "push": -0.264
+        "push": -0.8111308799999999
       },
       "the_undefeated": {
         "arcId": "arc_the_poles_pull",
-        "push": -0.264
+        "push": -0.6047178260869566
       },
       "the_two_who_are_one": {
         "arcId": "arc_the_poles_pull",
-        "push": -0.264
+        "push": -1.7686099199999998
       },
       "the_archive_that_walks": {
         "arcId": "arc_the_poles_pull",
-        "push": -0.528
+        "push": -1.271384347826087
       },
       "the_one_called_ares": {
         "arcId": "arc_the_poles_pull",
-        "push": null
+        "push": 0.1152
       },
       "the_appetite": {
         "arcId": "arc_the_poles_pull",
-        "push": 1.056
+        "push": 1.5168
       },
       "the_final_argument": {
         "arcId": "arc_the_poles_pull",
-        "push": 1.056
+        "push": 0.3523033234285714
       },
       "the_unravelled_mind": {
         "arcId": "arc_the_poles_pull",
-        "push": 0.264
+        "push": 1.1441895771428572
       },
       "the_first_moot": {
         "arcId": "arc_green_schism",
-        "push": -0.3
+        "push": -0.6407178260869566
       },
       "the_last_walker": {
         "arcId": "arc_green_schism",
-        "push": -0.528
+        "push": -1.02953664
       }
     },
     "figureExposure": {
@@ -2864,78 +3868,101 @@
         "knownTo": "ember_who_banks_the_fire",
         "worldDay": 38,
         "untilDay": 218
+      },
+      "the_starless": {
+        "arcId": "arc_the_poles_pull",
+        "knownTo": "ember_who_banks_the_fire",
+        "worldDay": 69,
+        "untilDay": 249
       }
     },
     "arcContests": {
+      "arc_what_wakes_beneath": {
+        "duels": 1,
+        "proWins": 0,
+        "conWins": 1,
+        "fought": 3,
+        "worked": 19
+      },
       "arc_manifestation_storm": {
         "duels": 1,
-        "proWins": 1,
+        "proWins": 0,
         "conWins": 0,
         "fought": 2,
         "worked": 14
-      },
-      "arc_what_wakes_beneath": {
-        "duels": 1,
-        "proWins": 1,
-        "conWins": 0,
-        "fought": 3,
-        "worked": 15
       },
       "arc_block_bleed": {
         "duels": 1,
         "proWins": 1,
         "conWins": 0,
-        "fought": 3,
-        "worked": 7
+        "fought": 2,
+        "worked": 5
       },
       "arc_the_poles_pull": {
-        "duels": 3,
-        "proWins": 3,
-        "conWins": 0,
-        "fought": 11,
-        "worked": 22
+        "duels": 2,
+        "proWins": 1,
+        "conWins": 1,
+        "fought": 8,
+        "worked": 26
       },
       "arc_green_schism": {
-        "duels": 1,
-        "proWins": 1,
+        "duels": 0,
+        "proWins": 0,
         "conWins": 0,
-        "fought": 2,
+        "fought": 0,
         "worked": 2
       }
     },
-    "arcChallenges": [],
+    "arcChallenges": [
+      {
+        "defender": "halvex_coil",
+        "defenderName": "Halvex Coil, the Rewriter",
+        "challenger": "the_appetite",
+        "challengerName": "The Appetite",
+        "outcome": "wounded",
+        "tier": "legendary"
+      }
+    ],
     "arcCasualties": [],
     "arcStrikes": [
+      {
+        "arcId": "arc_block_bleed",
+        "kind": "quiet",
+        "target": "the_final_argument",
+        "sender": "the_one_called_loki",
+        "outcome": "stopped",
+        "targetTier": "epic"
+      },
       {
         "arcId": "arc_the_poles_pull",
         "kind": "quiet",
         "target": "ember_who_banks_the_fire",
-        "sender": "the_hollow_king",
+        "sender": "the_starless",
         "outcome": "guarded",
-        "guard": "the_edge_that_holds"
+        "guard": "the_last_walker"
       }
     ],
     "arcVacancies": {
-      "arc_what_wakes_beneath": 17,
-      "arc_the_poles_pull": 18,
       "arc_manifestation_storm": 23,
-      "arc_block_bleed": 15,
-      "arc_green_schism": 6
+      "arc_the_poles_pull": 17,
+      "arc_what_wakes_beneath": 13,
+      "arc_green_schism": 8,
+      "arc_block_bleed": 18
     },
     "arcStageSeen": {
-      "arc_manifestation_storm": 4,
-      "arc_what_wakes_beneath": 4,
+      "arc_manifestation_storm": 1,
+      "arc_what_wakes_beneath": 1,
       "arc_block_bleed": 1,
-      "arc_the_poles_pull": 4,
+      "arc_the_poles_pull": 1,
       "arc_green_schism": 1
     },
     "personalCoverage": {
-      "lived": 70,
-      "onThePage": 70,
-      "neglected": 0
+      "lived": 51,
+      "onThePage": 51,
+      "neglected": 19
     },
     "strikeCoverage": {
-      "traditions": 29,
+      "traditions": 26,
       "withDisposition": 24,
       "crusadeTraditions": 7,
       "eitherTraditions": 9,
@@ -2953,361 +3980,413 @@
     },
     "personalBeats": [
       {
-        "id": "sister_alder",
-        "name": "Sister Alder, the Ward That Does Not Break",
-        "pursuit": "going where she is needed and arriving late"
-      },
-      {
         "id": "halvex_coil",
         "name": "Halvex Coil, the Rewriter",
-        "pursuit": "patching a district into silence"
+        "pursuit": "removing an inefficiency that was a person",
+        "locationId": "the_service_ways"
       },
       {
         "id": "overseer_grael",
         "name": "Overseer Grael of the Edge District",
-        "pursuit": "noticing a name that should not be there"
-      },
-      {
-        "id": "maren_ossitide",
-        "name": "Maren Ossitide, Who Buried the Drowned Year",
-        "pursuit": "keeping a garden that needs no attending"
+        "pursuit": "noticing a name that should not be there",
+        "locationId": "radiant_plateau_edge"
       },
       {
         "id": "the_hollow_king",
         "name": "The Hollow King of the Wild Half",
-        "pursuit": "waiting to be asked"
+        "pursuit": "cataloguing what he has been given",
+        "locationId": "the_maw"
       },
       {
         "id": "cinder_vael",
         "name": "Cinder Vael, the Wright Who Would Not Stop",
-        "pursuit": "arguing with a smith about a tolerance nobody else can measure"
+        "pursuit": "arguing with Halcyon by letter, for twenty years, about finishing",
+        "locationId": "the_ceaseless"
       },
       {
         "id": "the_last_walker",
         "name": "The Last Walker of the Sealed Wood",
-        "pursuit": "carving in green wood, which cracks"
-      },
-      {
-        "id": "neth_the_stayed",
-        "name": "Neth, Who Has Buried More Than She Has Known",
-        "pursuit": "writing down the names of the ones she reached in time"
+        "pursuit": "not choosing, publicly, again",
+        "locationId": "the_greenward"
       },
       {
         "id": "morvane_the_harvest",
         "name": "Morvane of the Harvest Hand",
-        "pursuit": "walking a village she has not judged yet"
+        "pursuit": "refusing an invitation",
+        "locationId": "the_long_grey"
       },
       {
         "id": "halcyon_the_finished",
         "name": "Halcyon, Who Built One Perfect Thing",
-        "pursuit": "turning down a commission"
+        "pursuit": "teaching one student very slowly",
+        "locationId": "the_forge_eternal"
       },
       {
         "id": "vessa_truename",
         "name": "Vessa Who Trades in True Names",
-        "pursuit": "drinking alone and being poor company"
+        "pursuit": "drinking alone and being poor company",
+        "locationId": "the_bargain_gate"
       },
       {
         "id": "thornmother_sealed",
         "name": "The Thornmother of the Closing Wood",
-        "pursuit": "tending a grove nobody is allowed into"
-      },
-      {
-        "id": "the_last_choirmistress",
-        "name": "The Last Choirmistress",
-        "pursuit": "writing down a word she is not sure she heard"
+        "pursuit": "counting what the wood has lost each season",
+        "locationId": "the_heartroot"
       },
       {
         "id": "the_unbodied_choir_master",
         "name": "The Choirmaster Who Would Not Return",
-        "pursuit": "losing an argument with his own remaining body"
+        "pursuit": "gathering the willing",
+        "locationId": "the_thinning"
       },
       {
         "id": "sunwrack_valen",
         "name": "Valen Sunwrack, Who Left No Shadow Standing",
-        "pursuit": "a brother he burned out of a house and has not spoken to since"
+        "pursuit": "refusing sleep",
+        "locationId": "the_blaze"
       },
       {
         "id": "ember_who_banks_the_fire",
         "name": "Ember, Who Banks the Fire",
-        "pursuit": "teaching a child to carry flame safely"
+        "pursuit": "teaching a neighbour's child to carry flame safely",
+        "locationId": "glasshome"
       },
       {
         "id": "the_deep_lantern",
         "name": "The Deep Lantern, Who Walks Where Light Won't",
-        "pursuit": "leaving a lamp where one was needed last week"
+        "pursuit": "leaving a lamp where one was needed last week",
+        "locationId": "the_underlight"
       },
       {
         "id": "the_starless",
         "name": "The Starless One",
-        "pursuit": "sitting where nothing is seen"
+        "pursuit": "sitting where nothing is seen",
+        "locationId": "the_slow_stair"
       },
       {
         "id": "the_weeping_archive",
         "name": "The Weeping Archive",
-        "pursuit": "pressing flowers, which is keeping a small grief"
+        "pursuit": "carrying something she has not put down",
+        "locationId": "the_grief_house"
       },
       {
         "id": "the_raw_chord",
         "name": "The Raw Chord",
-        "pursuit": "playing something no one can sit through"
-      },
-      {
-        "id": "the_cogitant_ninefold",
-        "name": "The Cogitant Ninefold",
-        "pursuit": "being disappointed by an easy opponent"
+        "pursuit": "apologising to someone she overwhelmed",
+        "locationId": "the_wellspring_deep"
       },
       {
         "id": "harrow_the_hollowing",
         "name": "Harrow, Who Makes People Into Mechanisms",
-        "pursuit": "improving a mechanism that was not asked to be improved"
-      },
-      {
-        "id": "the_last_mercy",
-        "name": "The Last Mercy",
-        "pursuit": "an apprentice she has not yet told what the work costs"
+        "pursuit": "studying a person as a system",
+        "locationId": "pressureholt"
       },
       {
         "id": "the_scouring_hand",
         "name": "The Scouring Hand",
-        "pursuit": "finding a fault in a thing that had none"
+        "pursuit": "finding a fault in a thing that had none",
+        "locationId": "the_scour"
       },
       {
         "id": "the_edge_that_holds",
         "name": "Kesh Ardent, the Edge That Holds",
-        "pursuit": "whittling, and giving the results away"
+        "pursuit": "standing a watch nobody assigned him",
+        "locationId": "the_redline"
       },
       {
         "id": "the_ender_who_forgot",
         "name": "The Ender Who Forgot Why",
-        "pursuit": "ending something and not remembering why"
+        "pursuit": "ending something and not remembering why",
+        "locationId": "the_marchward"
       },
       {
         "id": "keeper_the_unsaid",
         "name": "The Keeper of the Unsaid",
-        "pursuit": "keeping a peace by keeping a secret"
-      },
-      {
-        "id": "the_lidded_calm",
-        "name": "The Lidded Calm",
-        "pursuit": "quieting a room that was arguing usefully"
+        "pursuit": "keeping a peace by keeping a secret",
+        "locationId": "the_stillhold"
       },
       {
         "id": "the_unbending_witness",
         "name": "Seraphine the Unbending Witness",
-        "pursuit": "losing a friendship over it and not regretting it out loud"
-      },
-      {
-        "id": "the_last_seraph",
-        "name": "The Last Seraph of the Pre-Transition Choir",
-        "pursuit": "tending a chapter that no longer meets"
+        "pursuit": "long walks, alone, in weather",
+        "locationId": "the_unblinking_stone"
       },
       {
         "id": "the_burning_certainty",
         "name": "The Burning Certainty",
-        "pursuit": "being certain, publicly and at length"
-      },
-      {
-        "id": "the_clockmother",
-        "name": "The Clockmother, Who Keeps the Deep Hour",
-        "pursuit": "repairing clocks that are not hers"
+        "pursuit": "testing someone against the higher law",
+        "locationId": "choirheight"
       },
       {
         "id": "the_hour_hoarder",
         "name": "The Hour-Hoarder",
-        "pursuit": "counting what it has cost"
-      },
-      {
-        "id": "the_hundred_hands",
-        "name": "The Hundred Hands",
-        "pursuit": "teaching a body to know something"
+        "pursuit": "returning to the kept hour",
+        "locationId": "the_stopped"
       },
       {
         "id": "the_appetite",
         "name": "The Appetite",
-        "pursuit": "looking for a hunger that will hold"
+        "pursuit": "being briefly, genuinely satisfied and finding it unbearable",
+        "locationId": "the_appetite_halls"
       },
       {
         "id": "the_ninefold_ascendant",
-        "name": "The Ninefold Ascendant",
-        "pursuit": "forgetting what a hand was for"
-      },
-      {
-        "id": "the_one_who_stayed_embodied",
-        "name": "The One Who Stayed Embodied",
-        "pursuit": "cooking, deliberately and slowly"
+        "name": "The Unbodied",
+        "pursuit": "shedding a little more body",
+        "locationId": "the_cogitarium"
       },
       {
         "id": "the_glad_dissolution",
         "name": "The Glad Dissolution",
-        "pursuit": "making something and letting it go"
+        "pursuit": "making something and letting it go",
+        "locationId": "the_churn_edge"
       },
       {
         "id": "the_still_lattice",
         "name": "The Still Lattice",
-        "pursuit": "correcting a configuration nobody asked about"
+        "pursuit": "disliking a season for changing",
+        "locationId": "the_grand_lattice"
       },
       {
         "id": "the_final_argument",
         "name": "The Final Argument",
-        "pursuit": "proving a thing that did not need proving"
+        "pursuit": "finding the room colder afterward",
+        "locationId": "the_proof_halls"
       },
       {
         "id": "the_kind_liar",
         "name": "The Kind Liar",
-        "pursuit": "checking whether the kindness held"
-      },
-      {
-        "id": "the_cornerstone",
-        "name": "The Cornerstone",
-        "pursuit": "laying something that will not move"
+        "pursuit": "weighing when a kind lie became a cruel one",
+        "locationId": "the_kindly_court"
       },
       {
         "id": "the_open_figure",
         "name": "The Open Figure",
-        "pursuit": "opening a pattern someone had closed"
-      },
-      {
-        "id": "the_farwalker",
-        "name": "The Farwalker",
-        "pursuit": "mapping a route she will not use"
+        "pursuit": "opening a pattern someone had closed",
+        "locationId": "the_untethered"
       },
       {
         "id": "the_gate_that_gapes",
         "name": "The Gate That Gapes",
-        "pursuit": "counting the ways still shut"
+        "pursuit": "opening a way and not looking through",
+        "locationId": "the_unlanded"
       },
       {
         "id": "first_flame_ateph",
         "name": "Ateph of the First Flame",
-        "pursuit": "watching what her gift became"
+        "pursuit": "watching other people's fires",
+        "locationId": "the_lensward"
       },
       {
         "id": "the_first_moot",
         "name": "The One Who Called the First Moot",
-        "pursuit": "keeping a silence from settling"
+        "pursuit": "keeping a silence from settling",
+        "locationId": "grovehome"
       },
       {
         "id": "the_oathbreaker_sel",
         "name": "Sel Who Broke the Warding",
-        "pursuit": "doing an unasked kindness"
+        "pursuit": "not asking for forgiveness",
+        "locationId": "the_mercy_house"
       },
       {
         "id": "the_nine_year_master",
         "name": "The Nine-Year Master",
-        "pursuit": "training against her own strong side"
-      },
-      {
-        "id": "prodigal_gearheart",
-        "name": "Gearheart, Who Built at Twelve What Masters Couldn't",
-        "pursuit": "failing to match it"
+        "pursuit": "being bored by an easy win",
+        "locationId": "the_great_coliseum"
       },
       {
         "id": "the_edge_seeker",
         "name": "The One Who Walks Toward the Edge",
-        "pursuit": "going further than last time"
+        "pursuit": "going further than last time",
+        "locationId": "the_unlanded"
       },
       {
         "id": "the_lost_chord_seeker",
         "name": "Seeker of the Lost Chord",
-        "pursuit": "describing it badly to someone kind"
+        "pursuit": "listening for it in ordinary sound",
+        "locationId": "wellspring"
       },
       {
         "id": "the_undefeated",
         "name": "Saehara the Undefeated",
-        "pursuit": "winning again and being disappointed"
+        "pursuit": "losing on purpose and being caught",
+        "locationId": "the_great_coliseum"
       },
       {
         "id": "the_doubting_lattice",
         "name": "The One Who Doubts the Proof",
-        "pursuit": "introducing a small disorder"
-      },
-      {
-        "id": "the_apostate_choir",
-        "name": "The Apostate of the Choir",
-        "pursuit": "singing anyway"
+        "pursuit": "introducing a small disorder",
+        "locationId": "the_unplanned_room"
       },
       {
         "id": "the_two_who_are_one",
         "name": "The Two Who Are One",
-        "pursuit": "refusing to be separated for convenience"
+        "pursuit": "they garden; it is the only thing they do separately",
+        "locationId": "the_grief_house"
       },
       {
         "id": "iselde_the_wanderer",
         "name": "Iselde Wend, She Who Reads the Long Roads",
-        "pursuit": "belonging nowhere on purpose"
+        "pursuit": "belonging nowhere on purpose",
+        "locationId": "the_wayhouse"
       },
       {
         "id": "the_unravelled_mind",
         "name": "The Unravelled Mind",
-        "pursuit": "losing it mid-sentence"
+        "pursuit": "losing it mid-sentence",
+        "locationId": "the_cogitarium"
       },
       {
         "id": "the_hundred_faces",
         "name": "The One With a Hundred Faces",
-        "pursuit": "forgetting which one is hers"
-      },
-      {
-        "id": "the_long_grudge",
-        "name": "The One Who Has Not Forgotten",
-        "pursuit": "counting the debt"
+        "pursuit": "forgetting which one is hers",
+        "locationId": "the_hall_of_mirrors"
       },
       {
         "id": "the_archive_that_walks",
         "name": "The Archive That Walks",
-        "pursuit": "carrying it further"
+        "pursuit": "memorising a true thing nobody wants",
+        "locationId": "the_told_ground"
       },
       {
         "id": "the_bridgewright",
         "name": "The One Who Bridged the Unbridgeable",
-        "pursuit": "checking an old span"
+        "pursuit": "building something that will outlast the argument",
+        "locationId": "the_weighing_yard"
       },
       {
         "id": "the_war_ender",
         "name": "The One Who Ended the Long War",
-        "pursuit": "sitting with whoever will not take it"
-      },
-      {
-        "id": "the_penitent_maw",
-        "name": "The Penitent Maw",
-        "pursuit": "accounting, honestly, for the first time"
-      },
-      {
-        "id": "the_pattern_prophet",
-        "name": "The One Who Reads the Coming Shape",
-        "pursuit": "waiting to be understood in time"
+        "pursuit": "the ones who would not take the door out, whose names he keeps",
+        "locationId": "the_stillhold"
       },
       {
         "id": "the_unbound_churn",
         "name": "The Unbound",
-        "pursuit": "leaving somewhere good"
+        "pursuit": "being free and briefly lonely",
+        "locationId": "the_wend"
       },
       {
         "id": "the_one_called_zeus",
         "name": "The One Called Zeus",
-        "pursuit": "keeping bees, badly, and starting again each spring"
+        "pursuit": "a follower who has never once used the name, and whom he trusts most",
+        "locationId": "the_wayhouse"
       },
       {
         "id": "the_one_called_loki",
         "name": "The One Called Loki",
-        "pursuit": "counting the two"
-      },
-      {
-        "id": "the_one_called_athena",
-        "name": "The One Called Athena",
-        "pursuit": "being consulted too late and answering anyway"
+        "pursuit": "the two who walked away glad, whose names he keeps",
+        "locationId": "the_wayhouse"
       },
       {
         "id": "the_one_called_ares",
         "name": "The One Called Ares",
-        "pursuit": "turning down work he could do well"
+        "pursuit": "turning down work he could do well",
+        "locationId": "the_wayhouse"
       }
     ],
-    "neglectedLives": [],
+    "neglectedLives": [
+      {
+        "id": "sister_alder",
+        "name": "Sister Alder, the Ward That Does Not Break",
+        "arcId": "arc_what_wakes_beneath"
+      },
+      {
+        "id": "maren_ossitide",
+        "name": "Maren Ossitide, Who Buried the Drowned Year",
+        "arcId": "arc_what_wakes_beneath"
+      },
+      {
+        "id": "neth_the_stayed",
+        "name": "Neth, Who Has Buried More Than She Has Known",
+        "arcId": "arc_what_wakes_beneath"
+      },
+      {
+        "id": "the_last_choirmistress",
+        "name": "The Last Choirmistress",
+        "arcId": "arc_what_wakes_beneath"
+      },
+      {
+        "id": "the_cogitant_ninefold",
+        "name": "Rethe, Who Is Becoming the Engine",
+        "arcId": "arc_what_wakes_beneath"
+      },
+      {
+        "id": "the_last_mercy",
+        "name": "The Last Mercy",
+        "arcId": "arc_what_wakes_beneath"
+      },
+      {
+        "id": "the_lidded_calm",
+        "name": "The Lidded Calm",
+        "arcId": "arc_what_wakes_beneath"
+      },
+      {
+        "id": "the_last_seraph",
+        "name": "The Last Seraph of the Pre-Transition Choir",
+        "arcId": "arc_what_wakes_beneath"
+      },
+      {
+        "id": "the_clockmother",
+        "name": "The Clockmother, Who Keeps the Deep Hour",
+        "arcId": "arc_what_wakes_beneath"
+      },
+      {
+        "id": "the_hundred_hands",
+        "name": "The Hundred Hands",
+        "arcId": "arc_what_wakes_beneath"
+      },
+      {
+        "id": "the_one_who_stayed_embodied",
+        "name": "The One Who Stayed Embodied",
+        "arcId": "arc_what_wakes_beneath"
+      },
+      {
+        "id": "the_cornerstone",
+        "name": "The Cornerstone",
+        "arcId": "arc_what_wakes_beneath"
+      },
+      {
+        "id": "the_farwalker",
+        "name": "The Farwalker",
+        "arcId": "arc_what_wakes_beneath"
+      },
+      {
+        "id": "prodigal_gearheart",
+        "name": "Gearheart, Who Built at Twelve What Masters Couldn't",
+        "arcId": "arc_what_wakes_beneath"
+      },
+      {
+        "id": "the_apostate_choir",
+        "name": "The Apostate of the Choir",
+        "arcId": "arc_what_wakes_beneath"
+      },
+      {
+        "id": "the_long_grudge",
+        "name": "The One Who Has Not Forgotten",
+        "arcId": "arc_what_wakes_beneath"
+      },
+      {
+        "id": "the_penitent_maw",
+        "name": "The Penitent Maw",
+        "arcId": "arc_what_wakes_beneath"
+      },
+      {
+        "id": "the_pattern_prophet",
+        "name": "The One Who Reads the Coming Shape",
+        "arcId": "arc_what_wakes_beneath"
+      },
+      {
+        "id": "the_one_called_athena",
+        "name": "The One Called Athena",
+        "arcId": "arc_what_wakes_beneath"
+      }
+    ],
     "figureTier": {},
     "outOfAction": {
       "sister_alder": 0,
-      "halvex_coil": 0,
+      "halvex_coil": 1,
       "overseer_grael": 0,
       "maren_ossitide": 0,
       "the_hollow_king": 0,
@@ -3345,7 +4424,7 @@
       "the_one_who_stayed_embodied": 0,
       "the_glad_dissolution": 0,
       "the_still_lattice": 0,
-      "the_final_argument": 0,
+      "the_final_argument": 1,
       "the_kind_liar": 0,
       "the_cornerstone": 0,
       "the_open_figure": 0,
@@ -3380,9 +4459,24 @@
     "deedSourcesSeen": {
       "arcContestWon": 0,
       "guardIntercept": 0,
-      "strikeSurvived": 0
+      "strikeSurvived": 0,
+      "heldThroughCrisis": 0,
+      "stageMoved": 0,
+      "strikeLanded": 0
     },
-    "careShifts": [],
+    "careShifts": [
+      {
+        "id": "the_final_argument",
+        "name": "The Final Argument",
+        "changes": [
+          {
+            "kind": "hardened",
+            "arcId": "arc_block_bleed",
+            "to": 3
+          }
+        ]
+      }
+    ],
     "arcStandings": {
       "risen": [],
       "fallen": []
@@ -3396,54 +4490,123 @@
     },
     "arcBirths": [],
     "arcNetPush": {
-      "arc_manifestation_storm": 6.757999999999999,
-      "arc_what_wakes_beneath": 19.336,
-      "arc_block_bleed": -2.780171428571429,
-      "arc_the_poles_pull": 7.497999999999997,
-      "arc_green_schism": -0.8280000000000001
+      "arc_manifestation_storm": -7.039182447376625,
+      "arc_what_wakes_beneath": -6.286379300571428,
+      "arc_block_bleed": -12.071662955229815,
+      "arc_the_poles_pull": -11.228968633341612,
+      "arc_green_schism": -1.6702544660869565
     },
     "offscreenBacklog": {
       "unlit-elder": {
-        "days": 5,
-        "since": 38,
-        "want": null
-      },
-      "taken-person": {
-        "days": 5,
-        "since": 38,
-        "want": null
-      },
-      "hourkeeper-confluence": {
-        "days": 5,
-        "since": 38,
-        "want": null
-      },
-      "the-stranger-aggressor": {
-        "days": 5,
+        "days": 36,
         "since": 38,
         "want": null
       },
       "traveler-woman": {
-        "days": 5,
+        "days": 36,
         "since": 38,
         "want": null
       },
       "veln-ashpause": {
-        "days": 5,
+        "days": 36,
         "since": 38,
         "want": null
       },
       "vessin-of-the-long-bough": {
-        "days": 5,
+        "days": 36,
         "since": 38,
         "want": null
       },
       "vessin-tallow-bark": {
-        "days": 5,
+        "days": 36,
         "since": 38,
         "want": null
+      },
+      "tessvel-cairn": {
+        "days": 31,
+        "since": 69,
+        "want": null
+      },
+      "ossivyn-tallow": {
+        "days": 31,
+        "since": 69,
+        "want": null
+      },
+      "standing-unlit": {
+        "days": 31,
+        "since": 69,
+        "want": null
       }
-    }
+    },
+    "newsSpread": {},
+    "epicStatus": {
+      "the_final_argument": {
+        "status": "stopped",
+        "stoppedUntilDay": 72,
+        "stoppedBy": "the_one_called_loki"
+      },
+      "halvex_coil": {
+        "status": "wounded",
+        "woundedUntilDay": 77,
+        "woundedBy": "the_appetite"
+      }
+    },
+    "unavenged": {
+      "the_final_argument": {
+        "by": "the_one_called_loki",
+        "byName": "The One Called Loki",
+        "sinceDay": 69,
+        "winsAt": 0
+      },
+      "halvex_coil": {
+        "by": "the_appetite",
+        "byName": "The Appetite",
+        "sinceDay": 69,
+        "winsAt": 1
+      }
+    },
+    "arcTurnings": [
+      {
+        "arcId": "arc_what_wakes_beneath",
+        "from": 4,
+        "to": 1,
+        "by": [
+          "sister_alder"
+        ]
+      },
+      {
+        "arcId": "arc_manifestation_storm",
+        "from": 4,
+        "to": 1,
+        "by": []
+      },
+      {
+        "arcId": "arc_the_poles_pull",
+        "from": 4,
+        "to": 1,
+        "by": [
+          "the_two_who_are_one",
+          "the_bridgewright"
+        ]
+      }
+    ],
+    "tierLostFor": {},
+    "figuresDormant": 0,
+    "figureCares": {
+      "the_final_argument": [
+        {
+          "arcId": "arc_the_poles_pull",
+          "dir": 1,
+          "weight": 2
+        },
+        {
+          "arcId": "arc_block_bleed",
+          "dir": -1,
+          "weight": 3
+        }
+      ]
+    },
+    "lastEpicOffscreenDay": 69
   },
   "domains": {
     "primary": "veilwright",
@@ -3552,7 +4715,7 @@
           "[d1] When offered the choice between flirtation and work, she answered the flattery precisely and then put Loki to work — she did not ask him to leave, and she said 'nobody else has asked' about the variance with faint weight.",
           "[d1] She felt the seam of The Wrong Reality and named it as a procedural question rather than reacting with offense or acceptance — she is more resistant to social-lattice work than the dense substrate around her, and she knows something was off even if she cannot classify what.",
           "[d1] She has documented the variance on forty-one dates and withheld the log from senior wrights — not as defiance but as epistemic discipline: she does not share conclusions she cannot yet support. When Loki claimed independent methodology, she asked to see it applied to the four spike entries. She is…",
-          "[d1] She has tested the four spike entries against schedule correlation, maintenance windows, and weather-linked intake variance and found nothing fitting — the pattern has no ordinary cause she can name",
+          "[d1] She has tested the four spike entries against schedule correlation, maintenance windows, and weather-linked intake variance and found nothing fitting — the pattern has no ordinary cause she can name…",
           "[d1] Received a direct romantic proposition with genuine charm — went still, colored, confirmed channel access, and asked for time rather than refusing. The interest registered.",
           "[d1] [while away] Tessvel reorganized the Eastern Intake's backlog of unsequenced notices dating three weeks prior, completing the task in half the expected time and leaving a brief, unsolicited margin annotation on the pressure-routing schedule pointing out a filing inconsistency — her way of…",
           "[d1] Said 'time, not a refusal' to the personal offer — classified it as pending rather than rejected; confirmed lower routing channel access by end-of-shift and said she knows where to find Loki.",
@@ -3675,7 +4838,7 @@
           "terminus-seals-beneath-the-valley",
           "the-unlit",
           "unlit-elder",
-          "the-taken-from-the-city",
+          "the-taken-person",
           "ring-form-residue-at-eastern-intake",
           "standing-unlit",
           "the-seam-beside-the-bracket"
@@ -3735,7 +4898,7 @@
         ],
         "links": [
           "the-unlit",
-          "the-taken-from-the-city",
+          "the-taken-person",
           "the-unlit-deep",
           "ring-form-residue-at-eastern-intake"
         ],
@@ -3746,36 +4909,14 @@
         "entityId": "unlit-elder",
         "updatedDay": 1
       },
-      "the-taken-from-the-city": {
-        "id": "the-taken-from-the-city",
-        "label": "The Taken From the City",
-        "kind": "mystery",
-        "facts": [
-          "[d1] The person came willingly — the elder was explicit. The city sent no one to retrieve them, which the elder reads as proof the city knows this. The person is in the inner chamber and has chosen the doctrine. The elder permits Loki to ask whether they wish to be found.",
-          "[d1] The person accepted Loki's honest framing — name, purpose, no coercion — and said 'You can ask it.' The elder's permitted question has not yet been put, but the ground for it is clear.",
-          "[d1] The cup beside them was made here from local clay — someone in the Unlit Deep is making things by hand. The taken person is fed from a deep water source and kept freely. They are not being starved or pressured into doctrine; they came with a full stomach and are staying the same way.",
-          "[d1] Their name is Sable. They do not wish to be found. They left the city because the city makes everything — objects, people, hours — legible and purposeful, and they could not breathe inside that. The choice to come to the Unlit Deep was entirely their own.",
-          "[d1] Before leaving, Loki offered Sable a frame for what they chose — the difference between hiding and arriving somewhere the light does not follow. Sable said they had not expected that. The parting was settled and unhostile. No promise of return was made; no door was closed."
-        ],
-        "links": [
-          "the-unlit",
-          "unlit-elder",
-          "the-unlit-deep"
-        ],
-        "aliases": [
-          "Sable — The Taken From the City"
-        ],
-        "createdDay": 1,
-        "updatedDay": 1,
-        "entityId": "the-taken-person"
-      },
       "taken-person": {
         "id": "taken-person",
         "label": "The Taken Person",
         "kind": "person",
         "facts": [
           "[d1] The person who came willingly from the city to the Unlit Deep",
-          "[d1] The person is in the inner chamber — seated against the far wall, knees drawn up, calm and unhurried. They have been there long enough to warm the stone at their back. A cup, recently set down, is beside them. They are not afraid. They heard Loki enter and turned toward the sound — waiting, the…"
+          "[d1] The person is in the inner chamber — seated against the far wall, knees drawn up, calm and unhurried. They have been there long enough to warm the stone at their back. A cup, recently set down, is beside them. They are not afraid. They heard Loki enter and turned toward the sound — waiting, the…",
+          "[d2] [while away] Sable has moved deeper into the Unlit Deep without resistance, following the pull that brought her willingly — she has passed the last threshold where light from the surface can be felt, and has not turned back."
         ],
         "links": [
           "the-unlit",
@@ -3783,11 +4924,12 @@
           "unlit-elder"
         ],
         "aliases": [
-          "The Taken From the City"
+          "The Taken From the City",
+          "Sable"
         ],
         "createdDay": 1,
         "entityId": "taken-person",
-        "updatedDay": 1
+        "updatedDay": 2
       },
       "the-creature-at-the-threshold": {
         "id": "the-creature-at-the-threshold",
@@ -3850,7 +4992,7 @@
           "unlit-elder",
           "halvex",
           "cy-s-construction",
-          "the-taken-from-the-city",
+          "the-taken-person",
           "the-unlit"
         ],
         "aliases": [
@@ -3901,7 +5043,8 @@
           "[d1] Halvex cut a notation system into the wall of the deep corridor — not standard glyphs, something between language and diagram. The records begin at the base of the stair and run continuously along the left wall. Cy said only 'the records begin here' and has not elaborated.",
           "[d1] Not operational logs — a working journal. Observation, question, hypothesis, revision, over a long period. Halvex was trying to determine when the regulator was built and by whom, and kept arriving at the same answer: it predates every record they could find, including the records that were…",
           "[d1] Halvex's own words, preserved through Cy: the regulator does not measure the water — it measures the question of the water. Whether the water is ready to carry what it was prepared to carry. The counter records how long the question has gone unasked, not how long the light has burned. Halvex was…",
-          "[d1] Halvex was working toward understanding what 'authority to answer' meant in the regulator's question — that was the unsolved part when their records stop. The question has two parts: whether the water is prepared, and whether the right person is present."
+          "[d1] Halvex was working toward understanding what 'authority to answer' meant in the regulator's question — that was the unsolved part when their records stop. The question has two parts: whether the water is prepared, and whether the right person is present.",
+          "[d1] The passage below the Unlit's chamber ends in a horizontal corridor older than anything above — walls precisely jointed, a continuous band of notation cut into the left wall at eye height in a system between language and diagram, and a pre-Transition regulator housing at the far end still showing…"
         ],
         "links": [
           "loki-thread",
@@ -3909,15 +5052,17 @@
           "the-seam-beside-the-bracket",
           "halvex-corridor",
           "cy-construction",
-          "the-taken-from-the-city",
+          "the-taken-person",
           "cy-s-construction",
           "the-water-crisis"
         ],
         "aliases": [
-          "Halvex's Wall Records"
+          "Halvex's Wall Records",
+          "Halvex's Corridor"
         ],
         "createdDay": 1,
-        "updatedDay": 1
+        "updatedDay": 1,
+        "summarisedAt": 0
       },
       "cy": {
         "id": "cy",
@@ -3932,7 +5077,7 @@
           "the-seam-beside-the-bracket",
           "unlit-elder",
           "the-unlit-deep",
-          "the-taken-from-the-city",
+          "the-taken-person",
           "terminus-seals-beneath-the-valley"
         ],
         "aliases": [
@@ -3940,23 +5085,6 @@
         ],
         "createdDay": 1,
         "entityId": "cy",
-        "updatedDay": 1
-      },
-      "halvex-corridor": {
-        "id": "halvex-corridor",
-        "label": "Halvex's Corridor",
-        "kind": "place",
-        "facts": [
-          "[d1] The passage below the Unlit's chamber ends in a horizontal corridor older than anything above — walls precisely jointed, a continuous band of notation cut into the left wall at eye height in a system between language and diagram, and a pre-Transition regulator housing at the far end still showing…"
-        ],
-        "links": [
-          "cy-construction",
-          "the-seam-beside-the-bracket",
-          "the-unlit-deep",
-          "the-water-crisis"
-        ],
-        "aliases": [],
-        "createdDay": 1,
         "updatedDay": 1
       },
       "the-regulator-question": {
@@ -4036,13 +5164,16 @@
         "label": "The Hourkeeper",
         "kind": "person",
         "facts": [
-          "[d1] An Hourkeeper present at the confluence — watching Loki with foreknowledge"
+          "[d1] An Hourkeeper present at the confluence — watching Loki with foreknowledge",
+          "[d2] [while away] Veln Ashpause continues her ordinary rounds, carrying the foreknowledge quietly; the moment she is drawn toward has not yet announced itself, and she does nothing to hasten it."
         ],
         "links": [],
-        "aliases": [],
+        "aliases": [
+          "Veln Ashpause"
+        ],
         "createdDay": 1,
         "entityId": "hourkeeper-confluence",
-        "updatedDay": 1
+        "updatedDay": 2
       },
       "hourkeepers": {
         "id": "hourkeepers",
@@ -4077,13 +5208,14 @@
         "label": "Hired Stranger",
         "kind": "person",
         "facts": [
-          "[d1] A hired striker, working a debt"
+          "[d1] A hired striker, working a debt",
+          "[d2] [while away] The hired stranger has waited out these weeks in a waystation, debt still unresolved, target still unlocked — they have not moved on the job, but they have not abandoned it either."
         ],
         "links": [],
         "aliases": [],
         "createdDay": 1,
         "entityId": "the-stranger-aggressor",
-        "updatedDay": 1
+        "updatedDay": 2
       },
       "the-annex-sender": {
         "id": "the-annex-sender",
@@ -4098,7 +5230,7 @@
         "links": [
           "the-passage-below",
           "the-water-crisis",
-          "the-taken-from-the-city",
+          "the-taken-person",
           "vessin-tallow-bark",
           "ring-form-residue-at-eastern-intake",
           "grovehome",
@@ -4224,7 +5356,7 @@
         ],
         "links": [
           "vessin-tallow-bark",
-          "the-taken-from-the-city"
+          "the-taken-person"
         ],
         "aliases": [],
         "createdDay": 2,
@@ -4244,6 +5376,42 @@
         ],
         "aliases": [],
         "createdDay": 2,
+        "updatedDay": 2
+      },
+      "the-taken-person": {
+        "id": "the-taken-person",
+        "label": "The Taken From the City",
+        "kind": "mystery",
+        "facts": [
+          "[d1] The person came willingly — the elder was explicit. The city sent no one to retrieve them, which the elder reads as proof the city knows this. The person is in the inner chamber and has chosen the doctrine. The elder permits Loki to ask whether they wish to be found.",
+          "[d1] The person accepted Loki's honest framing — name, purpose, no coercion — and said 'You can ask it.' The elder's permitted question has not yet been put, but the ground for it is clear.",
+          "[d1] The cup beside them was made here from local clay — someone in the Unlit Deep is making things by hand. The taken person is fed from a deep water source and kept freely. They are not being starved or pressured into doctrine; they came with a full stomach and are staying the same way.",
+          "[d1] Their name is Sable. They do not wish to be found. They left the city because the city makes everything — objects, people, hours — legible and purposeful, and they could not breathe inside that. The choice to come to the Unlit Deep was entirely their own.",
+          "[d1] Before leaving, Loki offered Sable a frame for what they chose — the difference between hiding and arriving somewhere the light does not follow. Sable said they had not expected that. The parting was settled and unhostile. No promise of return was made; no door was closed."
+        ],
+        "links": [
+          "the-unlit",
+          "unlit-elder",
+          "the-unlit-deep"
+        ],
+        "aliases": [
+          "Sable — The Taken From the City"
+        ],
+        "createdDay": 1,
+        "updatedDay": 1,
+        "entityId": "the-taken-person"
+      },
+      "the-scouring-hand": {
+        "id": "the-scouring-hand",
+        "label": "The Scouring Hand",
+        "kind": "person",
+        "facts": [
+          "[d2] [while away] Something peripheral — a small settlement at the edge of known land — has gone silent in a way that leaves no ruin, no bodies, no mark of cause: only absence, as though it had simply been subtracted."
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 2,
+        "entityId": "the-scouring-hand",
         "updatedDay": 2
       }
     },
@@ -4306,30 +5474,39 @@
         },
         "relinked": []
       }
+    ],
+    "swept": [
+      {
+        "from": "halvex-corridor",
+        "label": "Halvex's Corridor",
+        "to": "halvex",
+        "moved": 1
+      }
     ]
   },
   "tendencies": {
-    "devotion": 1.9823623612253158,
-    "cerebral": 11.23625675382325,
-    "social": 17.519066565269878,
-    "strategic": 4.880051848395605,
-    "cautious": 4.869193097016237,
-    "amorous": 23.289104093203942,
-    "generous": 2.9416412578023454,
-    "ruthless": 1.031863565346023,
-    "risky": 0.8432854545266496,
-    "patient": 0.23028609238800818,
-    "deception": 0.268064939787834
+    "devotion": 1.9328033021946829,
+    "cerebral": 10.955350334977668,
+    "social": 17.08108990113813,
+    "strategic": 5.758050552185715,
+    "cautious": 4.747463269590831,
+    "amorous": 22.706876490873842,
+    "generous": 2.868100226357287,
+    "ruthless": 1.0060669762123724,
+    "risky": 0.8222033181634834,
+    "patient": 0.22452894007830798,
+    "deception": 0.2613633162931382
   },
   "aptitudes": [
     "silver_tongue",
     "scholar",
     "orator",
+    "faithful",
     "charmer",
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 136,
+  "actionCount": 137,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -4390,7 +5567,7 @@
     }
   ],
   "nativeGrantsVersion": 1,
-  "reconcileVersion": 30,
+  "reconcileVersion": 47,
   "gallery": [
     {
       "kind": "portrait",
@@ -4632,8 +5809,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1786132193652,
-  "rev": 446,
+  "updatedAt": 1788810134930,
+  "rev": 450,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5193,7 +6370,14 @@
           "createdDay": 1,
           "repaired": false,
           "stubbed": false,
-          "romanceEligible": true
+          "romanceEligible": true,
+          "offscreen": [
+            {
+              "worldDay": 69,
+              "note": "Veln Ashpause continues her ordinary rounds, carrying the foreknowledge quietly; the moment she is drawn toward has not yet announced itself, and she does nothing to hasten it.",
+              "outcome": "stall"
+            }
+          ]
         },
         "peopleSource": "generated",
         "domainsSource": "generated",
@@ -5412,6 +6596,11 @@
         "map": {
           "x": 96.11510228365859,
           "y": 400
+        },
+        "worldPos": {
+          "colatitude": 91.505,
+          "longitude": 359.677,
+          "depth": -5
         }
       }
     },
@@ -5434,7 +6623,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 95
+    "the_quickwood": 96
   },
   "opLossPending": false,
   "sessions": [
@@ -5501,6 +6690,14 @@
       "startDay": 38,
       "endDay": 38,
       "beats": 1
+    },
+    {
+      "id": "sess-9",
+      "startedAt": "2026-09-07T19:42:14.907Z",
+      "lastAt": "2026-09-07T19:42:14.907Z",
+      "startDay": 69,
+      "endDay": 69,
+      "beats": 1
     }
   ],
   "establishedFacts": [
@@ -5538,19 +6735,19 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 160,
-    "choices": 160,
+    "sceneSummary": 161,
+    "choices": 161,
     "characterDeltas": 61,
-    "scene": 160,
+    "scene": 161,
     "placeUpdates": 17,
     "codexUpdates": 94,
-    "timeOps": 149,
+    "timeOps": 150,
     "offer": 11,
     "generateRequest": 6,
-    "sceneEnded": 37,
-    "npcUpdates": 132,
+    "sceneEnded": 38,
+    "npcUpdates": 133,
     "moveTo": 3,
-    "gambitApt": 2,
+    "gambitApt": 3,
     "deeds": 1,
     "questUpdates": 17,
     "standingOps": 1,
@@ -5562,7 +6759,7 @@
     "imagePrompt": 1,
     "scene_ended": 1
   },
-  "_opTurns": 160,
+  "_opTurns": 161,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1.25
@@ -5870,7 +7067,7 @@
     "lastDeployDay": 31,
     "lastBeat": "witness_power"
   },
-  "syncedAt": 1784928643641,
+  "syncedAt": 1786132193652,
   "_applyFailures": null,
   "companionMemory": {
     "coil": [
@@ -5947,5 +7144,54 @@
     "craft": 4
   },
   "companyCapacity": 9,
-  "equipmentBonusCap": 4
+  "equipmentBonusCap": 4,
+  "itemReclaimVersion": 1,
+  "nameRepairVersion": 1,
+  "bondLogFrom": null,
+  "purse": {
+    "crystal": 884,
+    "coin": 0,
+    "paper": 0,
+    "marks": 0,
+    "scrip": {}
+  },
+  "holdings": [
+    {
+      "id": "the-fell-pell",
+      "kind": "enterprise",
+      "name": "The Fell Pell",
+      "locationId": "millbrook",
+      "steward": null,
+      "obligation": "the fellowship's work, and the road drainage it promised",
+      "condition": "holding",
+      "claimedDay": 2,
+      "lastMovedWorldCount": 1675,
+      "history": [],
+      "describedAs": "forge",
+      "owner": "pell",
+      "neglectPasses": 1,
+      "store": {
+        "raw_material": 4
+      },
+      "lastFeatureOfferCount": 1675
+    }
+  ],
+  "_lastProjectDay": 2,
+  "featureOffers": [
+    {
+      "holdingId": "the-fell-pell",
+      "holdingName": "The Fell Pell",
+      "kind": "forge",
+      "why": "the record reads: “forge”",
+      "from": "its own record"
+    }
+  ],
+  "_debtReceipts": [],
+  "skillUses": {
+    "plan": 1,
+    "discuss": 1
+  },
+  "aptitudeEarnCount": {
+    "faithful": 1
+  }
 }

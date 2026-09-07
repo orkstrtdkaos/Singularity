@@ -280,6 +280,13 @@
   },
   "bondStage": {
    "type": "string"
+  },
+  "questSeeds": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "description": "⚑ SNG-167 §2 — AN ERRAND THIS PERSON WOULD ACTUALLY ASK FOR, drawn from their own `wants` and `fears`. ⛔ 'A LOCATION can start an arc and a PERSON cannot… that is backwards: the memorable arcs start with SOMEONE, not somewhere.' ⚠️ Read by `npcQuestSeedBlock` and offered to the GM under rule 10b when that person is present. ⛔ NOT a hook the world hands them — R49's shape one layer down: a seed that names no objective is a nebulous hook. ⬜ Absent is fine; the `want` is the derived fallback, and 41 of 48 still rely on it."
   }
  },
  "_schemaGap_20260905": "⛔ THE SCHEMA DECLARED 25 PROPERTIES AND KNEW ABOUT NONE OF THE WORK OF THE LAST TWO WEEKS. Added 22: level, subAttributes, abilities, assistTags, domains, sex, romanceEligible, physicality, intimacyNotes, gear, inventory, practice, closed, people, teaches, canStrike, status, statusNote, image, aliases, bondType, bondStage. ⚠️ BOTH AUTHORED SHEETS (Pell, Veth) CARRIED TEN UNDECLARED FIELDS INCLUDING `abilities` — the sheet itself. ⛔ `additionalProperties` is unset, so JSON Schema defaults PERMISSIVE and nothing ever failed: THE VALIDATOR HAS NEVER CHECKED A SINGLE FIELD THAT MATTERS FOR COMBAT. Pell could have carried `abilties: []` and passed. ⬜ DELIBERATELY STILL PERMISSIVE — closing it would red-line 43 existing files at once. ⚠️ The value here is that a typo in `abilityId` or a rank of 5 now FAILS, and that the fields are DOCUMENTED where an author will look. ⚑ ASKED BY ERIK 2026-09-05: 'make sure the sheet schemas are sufficient for all the new updates we just made to holds, etc.' They were not.",

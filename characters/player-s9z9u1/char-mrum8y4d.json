@@ -8,11 +8,11 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 7,
-  "xp": 604,
+  "xp": 606,
   "attributes": {
     "physical": 4,
     "mental": 4,
-    "social": 4,
+    "social": 5,
     "practical": 4
   },
   "skills": {
@@ -96,7 +96,7 @@
   "maxHealth": 68,
   "health": 68,
   "maxEnergy": 146,
-  "energy": 146,
+  "energy": 141,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -172,7 +172,247 @@
     "Shared broth and thanks with a road-warden who carries word of the water-crisis moving downhill faster than any official channel. Exchanged names and parted on the spinward road, heading toward the Waygate Path."
   ],
   "currentLocationId": "gen-the-waygate-path",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "gen-the-waygate-path",
+    "turns": [
+      {
+        "player": "Go to the crossing through the Waygate.",
+        "summary": "The Waygate to the Crossing has altered—the passage that opened before is now locked by a pattern that will not resolve.",
+        "narration": "You step toward the gate as deep night clings to the Waygate Path. Vessin is two paces ahead, reading the stones by starlight. The passage is clear—you have walked it before; you know its shape.\n\nBut the gate itself is closed.\n\nNot locked. Not barred. The lattice of shifting marks that resolves the passage for those who read its order has resolved *wrong*. The pattern you saw clear the last time is now fractured, doubled—two valid reads overlaying each other, neither one settling. The stone hums faintly, a sound at the edge of hearing. Cy's lens irises and clicks once, sharp and troubled. The mechanism is still, but the lock is *changing*.\n\nVessin stops. Her hand moves to the falsecraft's familiar shape—the lie-reading stance, eyes narrowed. \"The gate wasn't like this,\" she says quietly. It is not a question. Behind you, the road you came by is open and dark. Ahead, the Waygate Path continues forward into shadow, but the crossing through is sealed by something that cannot be simply walked around."
+      }
+    ],
+    "lastTurn": {
+      "narration": "You step toward the gate as deep night clings to the Waygate Path. Vessin is two paces ahead, reading the stones by starlight. The passage is clear—you have walked it before; you know its shape.\n\nBut the gate itself is closed.\n\nNot locked. Not barred. The lattice of shifting marks that resolves the passage for those who read its order has resolved *wrong*. The pattern you saw clear the last time is now fractured, doubled—two valid reads overlaying each other, neither one settling. The stone hums faintly, a sound at the edge of hearing. Cy's lens irises and clicks once, sharp and troubled. The mechanism is still, but the lock is *changing*.\n\nVessin stops. Her hand moves to the falsecraft's familiar shape—the lie-reading stance, eyes narrowed. \"The gate wasn't like this,\" she says quietly. It is not a question. Behind you, the road you came by is open and dark. Ahead, the Waygate Path continues forward into shadow, but the crossing through is sealed by something that cannot be simply walked around.",
+      "sceneSummary": "The Waygate to the Crossing has altered—the passage that opened before is now locked by a pattern that will not resolve.",
+      "choices": [
+        {
+          "label": "Study the gate with See the Made Thing. You know how falsecrafts fail; this one is still working. The question is why it changed.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "mechanical_spiritual": -0.1
+          },
+          "difficulty": "hard",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study",
+            "craft"
+          ],
+          "abilityId": "see_the_made_thing",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Vessin directly what she sees. She was in the lower Annex this morning watching a man in a grey coat. Coincidence is something you learned to read in this work.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "ask"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Try the gate yourself—read the pattern as if it were a falsecraft lock, and look for the thread that opens it. If someone broke it, they left a way.",
+          "attribute": "mental",
+          "subAttribute": "craft",
+          "axes": {
+            "falsehood_truth": 0.2
+          },
+          "difficulty": "very hard",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study",
+            "craft",
+            "careful"
+          ],
+          "abilityId": "falsecraft",
+          "energyCost": 6,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Turn back toward Grovehome and take the longer road. This gate is not opening tonight, and you do not know who or what changed it.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "travel",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [
+        {
+          "what": "The Waygate to the Crossing has been altered. The lock resolves with doubled patterns—two valid reads overlaying, neither settling. The passage is sealed.",
+          "tags": [
+            "gate-sealed",
+            "interference",
+            "precursor-mechanism",
+            "contested-passage"
+          ],
+          "visibility": "witnessed",
+          "spectrumDeltas": {},
+          "impactsLocal": false
+        }
+      ],
+      "questUpdates": [],
+      "standingOps": [],
+      "delegateOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": null,
+      "stageOps": [],
+      "scene": {
+        "setting": "The Waygate Path at deep night—the starlit stone of the passage, the gate ahead dark and humming faintly. The lattice of marks that opens the way is locked in a doubled pattern. The road behind lies open into shadow.",
+        "npcsPresent": [
+          {
+            "name": "Vessin Tallow-bark",
+            "state": "Standing two paces forward, reading the gate with the careful stance of someone checking a falsecraft's work. Eyes narrowed. Hand resting near her coat. Quiet and alert."
+          },
+          {
+            "name": "Cy",
+            "state": "At Loki's side, lens irised, clicking once sharply—the precise sound of a mechanism troubled by something it does not understand."
+          }
+        ],
+        "objects": [
+          "The Waygate lattice—stone marks shifting subtly in starlight, resolving into two overlaying patterns neither one settling",
+          "The Traveler's Pack on Loki's back",
+          "The Waterskin at belt"
+        ],
+        "threads": [
+          "Who changed the gate, and when—this was not like this before",
+          "The man in the grey coat with the crooked jaw, still unnamed and still moving through the story",
+          "Why now, why this passage, why doubled and not simply closed"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "vessin-tallow-bark",
+          "name": "Vessin Tallow-bark",
+          "role": "Lone traveler; reader of falsecrafts",
+          "sex": "female",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "Stopped at the gate and read it as wrong. Named plainly that it was not like this before. Standing ready and careful.",
+          "skillsObserved": [
+            "reads gates and false patterns",
+            "stays calm at tampered mechanics"
+          ],
+          "relationshipDelta": 0,
+          "statusNote": "At the Waygate Path with Loki, facing the sealed passage. Alert and steady."
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The Waygate to the Crossing has been altered—the lattice lock now resolves with two valid but overlaying patterns, neither settling cleanly. The passage is sealed and the mechanism hums faintly. This is deliberate interference, not decay.",
+          "subjectId": "the_crossing"
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "The Waygate lattice is locked in a doubled pattern—two valid reads overlaying, neither resolving. The passage to the Crossing is sealed. This is recent and deliberate.",
+          "flag": {
+            "gateState": "doubled-lock"
+          }
+        }
+      ],
+      "discovery": null,
+      "codexUpdates": [
+        {
+          "topic": "the-annex-sender",
+          "label": "The Man in the Lower Annex",
+          "kind": "mystery",
+          "fact": "The Waygate to the Crossing has been sealed by deliberate interference—a doubled pattern lock. The timeline connects to the morning the man was seen watching the posting board. This is no longer a local problem.",
+          "links": [
+            "gen-the-waygate-path",
+            "the_crossing",
+            "the-taken-person",
+            "water-crisis-pressureholt"
+          ]
+        }
+      ],
+      "holdingOps": [],
+      "debtOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "A short span—you reached the gate and it took only minutes to see what was wrong"
+      },
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": "Deep night on the Waygate Path: a woman and a traveler standing before a gate of stone marked with shifting lattice work. The marks glow faintly with starlight, overlaying into two patterns that do not resolve. Behind them, the road opens dark. Ahead, the passage is sealed. A small brass mechanism clicks in the darkness—a sound of troubled precision.",
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "The Waygate Path at deep night—the starlit stone of the passage, the gate ahead dark and humming faintly. The lattice of marks that opens the way is locked in a doubled pattern. The road behind lies open into shadow.",
+      "npcsPresent": [
+        {
+          "name": "Vessin Tallow-bark",
+          "state": "Standing two paces forward, reading the gate with the careful stance of someone checking a falsecraft's work. Eyes narro"
+        },
+        {
+          "name": "Cy",
+          "state": "At Loki's side, lens irised, clicking once sharply—the precise sound of a mechanism troubled by something it does not un"
+        }
+      ],
+      "objects": [
+        "The Waygate lattice—stone marks shifting subtly in starlight, resolving into two",
+        "The Traveler's Pack on Loki's back",
+        "The Waterskin at belt"
+      ],
+      "threads": [
+        "Who changed the gate, and when—this was not like this before",
+        "The man in the grey coat with the crooked jaw, still unnamed and still moving through the story",
+        "Why now, why this passage, why doubled and not simply closed"
+      ]
+    },
+    "beats": 1
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 3,
@@ -599,7 +839,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Came down from the finish slowly, said nothing through the long easing, then reached for her trousers and said she should find them — dry, precise, quieter than usual. Composure returning in stages.",
         "[d2] Dressed slowly with hands and kisses — stood still under it, kissed back with precision, said 'scaffold crew' dry and quiet and reached for her coat.",
         "[d2] Heard Cy's report alongside Loki — said eleven minutes is not someone who got lost. Appraiser's composure mostly restored.",
         "[d2] Received Cy's report on the listener — four hours seventeen minutes of engagement, eleven of them overheard. Responded with contained composure and named the right question: intentional surveillance or accidental witness.",
@@ -608,7 +847,8 @@
         "[d2] Left the alcove with Loki through the empty nave — now standing in the yard, offering what she knows about the lower Annex and the man with the crooked jaw.",
         "[d2] Emerged from the alcove in grey dawn light, named the man with the crooked jaw as the one who hired the striker at the confluence. The night is closed; morning is a different negotiation. She is tired in a way that reads honest.",
         "[d2] Assesses the Waygate detour—reads it as fast and obvious, not quiet. Agrees to move. Does not ask why. Appraising the cost of visibility while the scaffold crew arrives.",
-        "[d2] Left the Half-Cathedral alcove at dawn before the scaffold crew arrived—shoulders settling lower now that the cathedral is behind, reading the open road with the same appraising eye she brought to everything else. Moving toward the Waygate without question or hesitation."
+        "[d2] Left the Half-Cathedral alcove at dawn before the scaffold crew arrived—shoulders settling lower now that the cathedral is behind, reading the open road with the same appraising eye she brought to everything else. Moving toward the Waygate without question or hesitation.",
+        "[d3] Stopped at the gate and read it as wrong. Named plainly that it was not like this before. Standing ready and careful."
       ],
       "knownFacts": [
         "Descent can bind a genuine bargain between them — she recognized the shape of it and agreed without deflection.",
@@ -620,18 +860,21 @@
         "The listener on the landing carried a shuttered lamp — prepared for a dark stairwell wait.",
         "Chooses speed over stealth when the choice is named—will move directly toward the Crossroads rather than hedge the path"
       ],
-      "skillsObserved": [],
+      "skillsObserved": [
+        "reads gates and false patterns",
+        "stays calm at tampered mechanics"
+      ],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Moving toward the Waygate with Loki; steady pace, focused ahead",
+      "statusNote": "At the Waygate Path with Loki, facing the sealed passage. Alert and steady.",
       "domains": {
         "primary": "rootkin"
       },
       "domainsSource": "derived",
       "lastSeen": {
-        "locationId": "grovehome",
-        "day": 2
+        "locationId": "gen-the-waygate-path",
+        "day": 3
       },
       "_filledFromGenerate": true,
       "_mergedFrom": "vessin-tallow-bark",
@@ -642,7 +885,7 @@
       "_portraitTier": "devoted",
       "bondType": "romantic",
       "bondStage": "together",
-      "met": 3
+      "met": 4
     },
     "lone-traveler-eastfork-warning": {
       "id": "lone-traveler-eastfork-warning",
@@ -863,9 +1106,12 @@
     "gen-the-waygate-path": {
       "visits": 2,
       "notes": [
-        "[d2] The Waygate Path is passable and legible—melt-water channels, moss thickening, stone worn and known. The gate ahead is accessible by late afternoon of day 2."
+        "[d2] The Waygate Path is passable and legible—melt-water channels, moss thickening, stone worn and known. The gate ahead is accessible by late afternoon of day 2.",
+        "[d3] The Waygate lattice is locked in a doubled pattern—two valid reads overlaying, neither resolving. The passage to the Crossing is sealed. This is recent and deliberate."
       ],
-      "flags": {},
+      "flags": {
+        "gateState": "doubled-lock"
+      },
       "lastVisit": 3,
       "vectorsKnown": []
     },
@@ -1044,7 +1290,7 @@
     "lastSharedReadAt": "2026-09-07T19:49:27.782Z",
     "lastTickWorldDay": 69,
     "lastCanonWorldDay": 69,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "The marker stake Ossivyn drove in is unlabeled — but Ossivyn's own fear is that the child the tree is for will never be told it exists…",
@@ -4536,12 +4782,12 @@
     "agility": 4,
     "reason": 4,
     "insight": 4,
-    "presence": 3,
+    "presence": 4,
     "rapport": 5,
     "craft": 4,
     "wits": 4
   },
-  "pendingSubPoints": 1,
+  "pendingSubPoints": 0,
   "skillPoints": 2,
   "discoveries": [],
   "codex": {
@@ -5133,21 +5379,22 @@
           "[d1] A man in the lower Annex hired the stranger at the confluence — told them Loki had pulled something sealed from the Deep and was carrying it out. The charge was fabricated well enough to buy a hired blade. His name and appearance are not yet known.",
           "[d2] Vessin was in the lower Annex this morning, pricing a routing component someone wanted moved quietly. A man in a grey coat with a split seam on the left shoulder was watching the posting board when she left. This is the first partial physical description of the person who hired the aggressor.",
           "[d2] Vessin's four-second profile: long face, jaw healed crooked on the right side, hair pulled back and not fresh. Grey coat with the split seam on the left shoulder — already known from context, now confirmed on his person. Did not touch the posting board, only read it. Left through the lower passage…",
-          "[d2] The listener on the eastern tower landing carried a shuttered lamp — not moving by memory but prepared for a dark wait. They knew the building well enough to plan for the stairwell's darkness. Scaffold crew knows the building; but the crew comes up from the yard, not down from above."
+          "[d2] The listener on the eastern tower landing carried a shuttered lamp — not moving by memory but prepared for a dark wait. They knew the building well enough to plan for the stairwell's darkness. Scaffold crew knows the building; but the crew comes up from the yard, not down from above.",
+          "[d3] The Waygate to the Crossing has been sealed by deliberate interference—a doubled pattern lock. The timeline connects to the morning the man was seen watching the posting board. This is no longer a local problem."
         ],
         "links": [
-          "the-passage-below",
-          "the-water-crisis",
-          "the-taken-person",
           "vessin-tallow-bark",
           "ring-form-residue-at-eastern-intake",
           "grovehome",
           "the-half-cathedral",
-          "prism-sight-deep-read"
+          "prism-sight-deep-read",
+          "gen-the-waygate-path",
+          "the-crossing",
+          "water-crisis-pressureholt"
         ],
         "aliases": [],
         "createdDay": 1,
-        "updatedDay": 2
+        "updatedDay": 3
       },
       "grovehome": {
         "id": "grovehome",
@@ -5443,17 +5690,17 @@
     ]
   },
   "tendencies": {
-    "devotion": 1.7466509391533473,
-    "cerebral": 9.900217435273856,
-    "social": 16.435974102335507,
-    "strategic": 7.0809649326168245,
-    "cautious": 5.265225067916203,
-    "amorous": 21.49492931872018,
-    "generous": 2.5918674436579012,
-    "ruthless": 0.9091705435608308,
-    "risky": 0.7430151822560339,
-    "patient": 0.20290408424363318,
-    "deception": 0.2361908639877007
+    "devotion": 1.7029846656745136,
+    "cerebral": 9.65271199939201,
+    "social": 16.02507474977712,
+    "strategic": 6.903940809301404,
+    "cautious": 5.133594441218298,
+    "amorous": 20.957556085752177,
+    "generous": 2.5270707575664537,
+    "ruthless": 0.88644127997181,
+    "risky": 0.724439802699633,
+    "patient": 0.19783148213754234,
+    "deception": 0.23028609238800818
   },
   "aptitudes": [
     "silver_tongue",
@@ -5464,7 +5711,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 141,
+  "actionCount": 142,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -5821,8 +6068,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788811038112,
-  "rev": 467,
+  "updatedAt": 1788811362778,
+  "rev": 471,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -6683,7 +6930,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 98,
+    "the_quickwood": 99,
     "the_center": 3
   },
   "opLossPending": false,
@@ -6755,10 +7002,10 @@
     {
       "id": "sess-9",
       "startedAt": "2026-09-07T19:42:14.907Z",
-      "lastAt": "2026-09-07T19:57:18.079Z",
+      "lastAt": "2026-09-07T20:02:42.769Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 6
+      "beats": 7
     }
   ],
   "establishedFacts": [
@@ -6785,6 +7032,12 @@
       "text": "The seam door in the outer chamber of the Unlit Deep opened fully when Loki pressed it with full intent while the creatures from below were present — a passage descends into cold dark beyond it.",
       "day": 1,
       "subjectId": "the-seam-beside-the-bracket"
+    },
+    {
+      "id": "the_crossing",
+      "text": "The Waygate to the Crossing has been altered—the lattice lock now resolves with two valid but overlaying patterns, neither settling cleanly. The passage is sealed and the mechanism hums faintly. This is deliberate interference, not decay.",
+      "day": 3,
+      "subjectId": "the_crossing"
     }
   ],
   "_opLedger": {
@@ -6794,33 +7047,37 @@
       "lastWhy": null
     }
   },
-  "_pendingArrival": null,
+  "_pendingArrival": {
+    "ref": "the crossing",
+    "name": "The Crossing",
+    "destId": "the_crossing"
+  },
   "_opEmitted": {
-    "sceneSummary": 166,
-    "choices": 166,
-    "characterDeltas": 66,
-    "scene": 166,
-    "placeUpdates": 18,
-    "codexUpdates": 98,
-    "timeOps": 155,
+    "sceneSummary": 167,
+    "choices": 167,
+    "characterDeltas": 67,
+    "scene": 167,
+    "placeUpdates": 19,
+    "codexUpdates": 99,
+    "timeOps": 156,
     "offer": 13,
     "generateRequest": 6,
-    "sceneEnded": 43,
-    "npcUpdates": 138,
+    "sceneEnded": 44,
+    "npcUpdates": 139,
     "moveTo": 5,
-    "gambitApt": 8,
+    "gambitApt": 9,
     "deeds": 2,
     "questUpdates": 17,
     "standingOps": 1,
-    "factUpdates": 4,
+    "factUpdates": 5,
     "stageOps": 7,
     "encounterOps": 7,
-    "ledgerEvents": 1,
+    "ledgerEvents": 2,
     "newEncounter": 1,
-    "imagePrompt": 2,
+    "imagePrompt": 3,
     "scene_ended": 1
   },
-  "_opTurns": 166,
+  "_opTurns": 167,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1.75
@@ -7267,7 +7524,7 @@
   "skillUses": {
     "plan": 1,
     "discuss": 1,
-    "travel": 3,
+    "travel": 4,
     "scout": 1,
     "prepare": 1,
     "careful": 1,

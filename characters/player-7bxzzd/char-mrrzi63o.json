@@ -8,7 +8,7 @@
   "whyHere": "You put down the blade, or you were sent away from it, or you are looking for a line worth holding that isn't theirs.",
   "background": "war_leader",
   "level": 1,
-  "xp": 80,
+  "xp": 82,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -39,13 +39,13 @@
   "alignment": {
     "spectrum": -0.03,
     "falsehood_truth": 0.082901375,
-    "spectrumId": -0.05
+    "spectrumId": -0.0475
   },
   "attunement": 1,
   "maxHealth": 46,
   "health": 46,
   "maxEnergy": 108,
-  "energy": 17,
+  "energy": 12,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -150,59 +150,69 @@
         "player": "Speak to Chernak directly — introduce yourself plainly and ask what they're doing at the Crossing.",
         "summary": "Brynjar introduced himself to Chernak plainly; Chernak named their purpose — three days waiting, a vision, the belief that Brynjar may be the second figure.",
         "narration": "You turn to face Chernak fully. \"Brynjar Andyrsson,\" you say, keeping your voice low enough not to carry to the Wardcaller. \"From Javiksholm, by way of a long road. I'm here because a thread pulled me here, and I suspect you know something about threads.\" Freki shifts beside you, one ear cocked toward the widdershins gate still, but the hound doesn't pull away.\n\nChernak's head tilts at the sound of your name — that particular listening stillness, the kind that hears the shape of words rather than just their meaning. The mended robes settle. \"Chernak,\" they answer, and nothing else for a breath, letting the name stand on its own. Then: \"The Crossing is where you come when you don't yet know which road is yours. I've been here three days. Waiting for the one the vision showed me.\" A pause that is not uncertainty, only patience. \"I think you may be the other figure.\"\n\nMaret, near the spinward wall, catches the exchange without appearing to. She doesn't approach. She is still holding whatever the Stillhold's record-hall put in her hands along with an empty bundle — waiting for the right ground to speak it. Ragnar has let his gaze drift back to the widdershins threshold, where the man who isn't transiting hasn't moved. The evening light through the clerestory slots has gone orange and low, and the hall's foot-traffic is thinning toward the supper hour."
+      },
+      {
+        "player": "I’ll leave Chernak and ask around where the colosseum is then, I’ll head there and sign up to fight",
+        "summary": "Brynjar asked around the hub hall and learned the Great Coliseum is eleven days outward and spinward — sign-up cannot be done from the Crossing.",
+        "narration": "The Wardcaller barely glances up when you ask. 'Spinward gate, then outward — eleven days at a road pace, more if the mud holds.' He makes a mark on his board and returns to his ledger. Someone near the pillar gives you the same answer with a shrug and a thumb pointed at the active threshold. Eleven days. You had imagined something closer, a building at the edge of town, a gate you could push through tonight. The Crossing holds too carefully to no side to have an arena of its own.\n\nYou circle the hall twice, asking at the benches and near the spinward threshold, but the answers are all the same shape: the Great Coliseum sits eleven days outward and spinward, and registration — if registration is even the word for how you enter — happens there and nowhere else. One traveler, a woman with road-dust still on her collar, tells you the gates open to challengers during the active season, which runs through spring into summer. She does not know the entry terms precisely. Nobody here does.\n\nMaret is still standing near the spinward wall when you come back around. She has watched the whole circuit without comment, but when you pass close enough she speaks quietly: 'Eleven days is a long walk to find a closed gate.' Ragnar, still at his post by the pillar, says nothing — but he has heard, and his gaze flicks to you once before returning to the widdershins threshold and the man who still has not moved.\n\nFreki presses against your knee. The clerestory light has gone copper-orange and is fading fast. Chernak has gone quiet again, that listening stillness, waiting on whatever you do next."
       }
     ],
     "lastTurn": {
-      "narration": "You turn to face Chernak fully. \"Brynjar Andyrsson,\" you say, keeping your voice low enough not to carry to the Wardcaller. \"From Javiksholm, by way of a long road. I'm here because a thread pulled me here, and I suspect you know something about threads.\" Freki shifts beside you, one ear cocked toward the widdershins gate still, but the hound doesn't pull away.\n\nChernak's head tilts at the sound of your name — that particular listening stillness, the kind that hears the shape of words rather than just their meaning. The mended robes settle. \"Chernak,\" they answer, and nothing else for a breath, letting the name stand on its own. Then: \"The Crossing is where you come when you don't yet know which road is yours. I've been here three days. Waiting for the one the vision showed me.\" A pause that is not uncertainty, only patience. \"I think you may be the other figure.\"\n\nMaret, near the spinward wall, catches the exchange without appearing to. She doesn't approach. She is still holding whatever the Stillhold's record-hall put in her hands along with an empty bundle — waiting for the right ground to speak it. Ragnar has let his gaze drift back to the widdershins threshold, where the man who isn't transiting hasn't moved. The evening light through the clerestory slots has gone orange and low, and the hall's foot-traffic is thinning toward the supper hour.",
-      "sceneSummary": "Brynjar introduced himself to Chernak plainly; Chernak named their purpose — three days waiting, a vision, the belief that Brynjar may be the second figure.",
+      "narration": "The Wardcaller barely glances up when you ask. 'Spinward gate, then outward — eleven days at a road pace, more if the mud holds.' He makes a mark on his board and returns to his ledger. Someone near the pillar gives you the same answer with a shrug and a thumb pointed at the active threshold. Eleven days. You had imagined something closer, a building at the edge of town, a gate you could push through tonight. The Crossing holds too carefully to no side to have an arena of its own.\n\nYou circle the hall twice, asking at the benches and near the spinward threshold, but the answers are all the same shape: the Great Coliseum sits eleven days outward and spinward, and registration — if registration is even the word for how you enter — happens there and nowhere else. One traveler, a woman with road-dust still on her collar, tells you the gates open to challengers during the active season, which runs through spring into summer. She does not know the entry terms precisely. Nobody here does.\n\nMaret is still standing near the spinward wall when you come back around. She has watched the whole circuit without comment, but when you pass close enough she speaks quietly: 'Eleven days is a long walk to find a closed gate.' Ragnar, still at his post by the pillar, says nothing — but he has heard, and his gaze flicks to you once before returning to the widdershins threshold and the man who still has not moved.\n\nFreki presses against your knee. The clerestory light has gone copper-orange and is fading fast. Chernak has gone quiet again, that listening stillness, waiting on whatever you do next.",
+      "sceneSummary": "Brynjar asked around the hub hall and learned the Great Coliseum is eleven days outward and spinward — sign-up cannot be done from the Crossing.",
       "choices": [
         {
-          "label": "Ask Chernak what the road looked like in the vision — the direction, the wrong light, anything else that might let Order-Sense confirm it",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": "easy",
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 3,
-          "trivial": false
-        },
-        {
-          "label": "Turn toward Maret — she's been holding her words long enough; find a quiet corner of the hall and ask her what she learned in the Stillhold record-hall",
+          "label": "Ask Maret to speak now — what did the record-hall tell her?",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": "very easy",
           "intentTags": [
-            "negotiate"
+            "ask"
           ],
           "trivial": true
         },
         {
-          "label": "Walk toward the widdershins threshold — get close enough to read the man who has been standing there without transiting",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Tell Ragnar you mean to reach the Coliseum — ask if he knows the road or the entry terms",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": "very easy",
+          "intentTags": [
+            "ask"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Study the man at the widdershins threshold with Read the Fight — see whether something is about to happen",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "difficulty": "easy",
           "intentTags": [
-            "scout"
+            "study",
+            "careful"
           ],
           "abilityId": "read_the_fight",
           "energyCost": 3,
           "trivial": false
         },
         {
-          "label": "Ask Chernak plainly: the faceless figure — did the vision show which way they were going, or which way they'd come from?",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Decide to leave for the Coliseum at first light — eleven days is eleven days, and standing here does not shorten it",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "difficulty": "very easy",
           "intentTags": [
-            "negotiate"
+            "plan",
+            "travel"
           ],
           "trivial": true
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "xp": 0
+      },
       "scene": {
-        "setting": "The Crossing hub hall — high-roofed octagonal stone, eight gate-thresholds, clerestory light now orange and low as evening settles. The spinward threshold hums with fold-activity but foot-traffic is thinning toward supper. The widdershins threshold remains nearly still.",
+        "setting": "The Crossing hub hall — high-roofed octagonal stone, eight gate-thresholds, clerestory light now copper-orange and nearly gone as evening settles fully. The spinward threshold hums with fold-activity but foot-traffic is thinning toward supper. The widdershins threshold remains nearly still.",
         "npcsPresent": [
           {
             "name": "Wardcaller",
@@ -210,23 +220,23 @@
           },
           {
             "name": "Maret Threnwick",
-            "state": "Near the spinward wall, listening to Brynjar and Chernak without approaching — still holding what she knows."
+            "state": "Near the spinward wall, watching Brynjar after his circuit of the hall — still holding what she knows from the record-hall."
           },
           {
             "name": "Ragnar Solmyr",
-            "state": "Gaze returned to the widdershins threshold, watching the man who hasn't transited."
+            "state": "Back to his pillar, gaze on the widdershins threshold and the man who has not moved."
           },
           {
             "name": "Chernak the Blind",
-            "state": "Facing Brynjar, head tilted, that listening stillness — having just named their three-day wait and what they believe it was for."
+            "state": "Gone quiet again — that listening stillness, waiting."
           },
           {
             "name": "Freki",
-            "state": "One ear on the conversation, one on the widdershins gate — divided attention, no growl."
+            "state": "Pressed against Brynjar's knee, one ear on the widdershins gate."
           }
         ],
         "objects": [
-          "Central stone column with chalk arrival/departure board — Andyrsson, Threnwick listed",
+          "Central stone column with chalk arrival/departure board — Andyrsson, Threnwick logged",
           "Eight gate-thresholds — spinward Coliseum road active with fold-hum, traffic thinning",
           "Widdershins threshold — nearly still, one man standing and watching without transiting",
           "Iron rings set into each gate-stone",
@@ -236,41 +246,42 @@
           "Maret is still holding what she learned in the Stillhold record-hall — not yet spoken",
           "Chernak believes Brynjar is the second figure from their vision — neither confirmed nor denied",
           "The man at the widdershins threshold has not moved or transited — reason unknown",
-          "Freki's divided attention between the conversation and the widdershins gate remains unexplained"
+          "Freki's divided attention between the conversation and the widdershins gate remains unexplained",
+          "The Great Coliseum is eleven days outward and spinward — sign-up must happen there"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "chernak-the-blind",
-          "note": "Gave their name plainly and stated their purpose: three days at the Crossing, waiting for the person from a vision — a road with wrong light, two figures, one faceless. Told Brynjar they believe he may be the other figure.",
-          "learned": [
-            "Has been at the Crossing for three days, waiting",
-            "Believes Brynjar may be the second figure from a vision of a road with wrong light"
-          ],
-          "statusNote": "Standing with Brynjar in the hub hall, having named their purpose and their belief about his identity in the vision."
+          "npcId": "maret-threnwick",
+          "note": "Watched Brynjar's circuit of the hall quietly; remarked that eleven days is a long walk to find a closed gate.",
+          "statusNote": "Standing near the spinward wall in the hub hall, still holding what she learned inside the Stillhold record-hall."
+        },
+        {
+          "op": "update",
+          "npcId": "ragnar-solmyr",
+          "note": "Heard Brynjar's inquiry about the Coliseum; glanced at him once then returned attention to the widdershins threshold.",
+          "statusNote": "At his pillar in the hub hall, watching the widdershins threshold and the unmoving man there."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "chernak-the-blind",
-          "label": "Chernak the Blind",
-          "kind": "person",
-          "entityId": "chernak-the-blind",
-          "fact": "Has been at the Crossing for three days, waiting for the person shown in a vision — a road running outward, light wrong, two figures, one faceless. Believes Brynjar may be the other figure.",
+          "topic": "the-great-coliseum",
+          "label": "The Great Coliseum",
+          "kind": "place",
+          "fact": "Eleven days outward and spinward from the Crossing. Sign-up for challengers happens at the gates there, not at the Crossing. Gates open to challengers during active season — spring through summer.",
           "links": [
-            "brynjar-andyrsson-thread",
-            "sera-of-the-stillhold"
+            "brynjar-andyrsson-thread"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange of names and purpose — less than a quarter-hour"
+        "why": "A quick circuit of the hall asking around about the Coliseum."
       }
     },
     "sceneState": {
-      "setting": "The Crossing hub hall — high-roofed octagonal stone, eight gate-thresholds, clerestory light now orange and low as evening settles. The spinward threshold hums with fold-activity but foot-traffic is thinning toward supper. The widdershins threshold remains nearly still.",
+      "setting": "The Crossing hub hall — high-roofed octagonal stone, eight gate-thresholds, clerestory light now copper-orange and nearly gone as evening settles fully. The spinward threshold hums with fold-activity but foot-traffic is thinning toward supper. The widdershins threshold remains nearly still.",
       "npcsPresent": [
         {
           "name": "Wardcaller",
@@ -278,19 +289,19 @@
         },
         {
           "name": "Maret Threnwick",
-          "state": "Near the spinward wall, listening to Brynjar and Chernak without approaching — still holding what she knows."
+          "state": "Near the spinward wall, watching Brynjar after her circuit of the hall — still holding what she knows from the record-ha"
         },
         {
           "name": "Ragnar Solmyr",
-          "state": "Gaze returned to the widdershins threshold, watching the man who hasn't transited."
+          "state": "Back to his pillar, gaze on the widdershins threshold and the man who has not moved."
         },
         {
           "name": "Chernak the Blind",
-          "state": "Facing Brynjar, head tilted, that listening stillness — having just named their three-day wait and what they believe it "
+          "state": "Gone quiet again — that listening stillness, waiting."
         },
         {
           "name": "Freki",
-          "state": "One ear on the conversation, one on the widdershins gate — divided attention, no growl."
+          "state": "Pressed against Brynjar's knee, one ear on the widdershins gate."
         }
       ],
       "objects": [
@@ -304,10 +315,11 @@
         "Maret is still holding what she learned in the Stillhold record-hall — not yet spoken",
         "Chernak believes Brynjar is the second figure from their vision — neither confirmed nor denied",
         "The man at the widdershins threshold has not moved or transited — reason unknown",
-        "Freki's divided attention between the conversation and the widdershins gate remains unexplained"
+        "Freki's divided attention between the conversation and the widdershins gate remains unexplained",
+        "The Great Coliseum is eleven days outward and spinward — sign-up must happen there"
       ]
     },
-    "beats": 5
+    "beats": 6
   },
   "clock": {
     "schemaVersion": 1,
@@ -511,7 +523,6 @@
       },
       "relationship": 2,
       "history": [
-        "[d1] Gave Brynjar a Marcher read on route-knowledge: not watching, but planning — someone inside the thing, or close enough that the difference doesn't matter. Eyes still south toward the Stillhold.",
         "[d1] Waited in easy quiet through the hour — patient, unhurried, a brief exchange about the mud and the weather, then silence. Watching now as Maret comes back through the gate.",
         "[d1] Held quiet on his stone through Maret's return — watching with interest, no comment.",
         "[d1] Unfolded from his stone and fell into step without being asked — quiet, watching south by habit.",
@@ -520,7 +531,8 @@
         "[d1] Fell into step on Brynjar's left without being asked — old road habit; watching the tree-line at camp",
         "[d1] Passed through the waygate with Brynjar, now reading the hall's exits on arrival.",
         "[d1] Took a position with his back to a pillar — watching exits and arriving faces. Said nothing during the log-in. Did his work.",
-        "[d1] Registered Chernak's presence in his hall-sweep without comment."
+        "[d1] Registered Chernak's presence in his hall-sweep without comment.",
+        "[d1] Heard Brynjar's inquiry about the Coliseum; glanced at him once then returned attention to the widdershins threshold."
       ],
       "knownFacts": [
         "The Marchers call whatever they carry a 'binding' — a cord, a knot, a mark; not a weapon",
@@ -543,7 +555,7 @@
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "In the Crossing hub hall, back to a pillar, watching exits and faces.",
+      "statusNote": "At his pillar in the hub hall, watching the widdershins threshold and the unmoving man there.",
       "domains": {
         "primary": "marcher"
       },
@@ -555,7 +567,7 @@
       "aliases": [
         "Redline Warrior"
       ],
-      "met": 13
+      "met": 14
     },
     "sera": {
       "id": "sera",
@@ -921,7 +933,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 4,
+    "turnsSinceOffer": 5,
     "recentOffers": [
       {
         "thing": "Doss watching Brynjar with the stillness of someone deciding something — she has not offered it yet, but she is on the edge of it",
@@ -3672,6 +3684,21 @@
         "createdDay": 1,
         "entityId": "chernak-the-blind",
         "updatedDay": 1
+      },
+      "the-great-coliseum": {
+        "id": "the-great-coliseum",
+        "label": "The Great Coliseum",
+        "kind": "place",
+        "facts": [
+          "[d1] Eleven days outward and spinward from the Crossing. Sign-up for challengers happens at the gates there, not at the Crossing. Gates open to challengers during active season — spring through summer."
+        ],
+        "links": [
+          "brynjar-andyrsson-thread"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "the-great-coliseum",
+        "updatedDay": 1
       }
     },
     "mergeUndo": [
@@ -3780,19 +3807,19 @@
     ]
   },
   "tendencies": {
-    "leadership": 5.944322459455714,
-    "cerebral": 7.025231258397507,
-    "strategic": 4.54682603784707,
-    "ruthless": 0.3820985560950746,
-    "social": 10.210505678316416,
-    "cautious": 8.081494851416446,
-    "generous": 0.7195483871809846,
-    "patient": 0.7763296208564376
+    "leadership": 5.795714397969321,
+    "cerebral": 6.849600476937569,
+    "strategic": 5.433155386900893,
+    "ruthless": 0.37254609219269774,
+    "social": 9.955243036358505,
+    "cautious": 7.879457480131035,
+    "generous": 0.70155967750146,
+    "patient": 0.7569213803350267
   },
   "aptitudes": [
     "banner"
   ],
-  "actionCount": 40,
+  "actionCount": 41,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -3960,8 +3987,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788789620330,
-  "rev": 104,
+  "updatedAt": 1788789768686,
+  "rev": 108,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4228,7 +4255,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "riven_marches": 39,
-    "the_center": 4
+    "the_center": 5
   },
   "practice": {
     "schemaVersion": 1,
@@ -4308,13 +4335,17 @@
     {
       "id": "sess-4",
       "startedAt": "2026-09-07T13:23:54.773Z",
-      "lastAt": "2026-09-07T14:00:20.318Z",
+      "lastAt": "2026-09-07T14:02:48.669Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 15
+      "beats": 16
     }
   ],
-  "_pendingArrival": null,
+  "_pendingArrival": {
+    "ref": "the colosseum",
+    "name": "The Colosseum",
+    "destId": null
+  },
   "syncedAt": 1784774056885,
   "schools": {
     "marcher": "mar_plain",
@@ -4327,17 +4358,17 @@
     "at": "2026-07-23T01:18:04.353Z"
   },
   "_opEmitted": {
-    "sceneSummary": 36,
-    "choices": 36,
-    "scene": 36,
-    "npcUpdates": 33,
+    "sceneSummary": 37,
+    "choices": 37,
+    "scene": 37,
+    "npcUpdates": 34,
     "placeUpdates": 6,
     "generateRequest": 3,
     "moveTo": 5,
-    "timeOps": 33,
-    "codexUpdates": 31,
+    "timeOps": 34,
+    "codexUpdates": 32,
     "sceneEnded": 9,
-    "characterDeltas": 11,
+    "characterDeltas": 12,
     "offer": 5,
     "deeds": 1,
     "standingOps": 1,
@@ -4345,7 +4376,7 @@
     "stageOps": 2,
     "factUpdates": 1
   },
-  "_opTurns": 36,
+  "_opTurns": 37,
   "_opLedger": {
     "offer": {
       "applied": 5,
@@ -4447,15 +4478,16 @@
     "guard": 1,
     "sustain": 1,
     "study": 3,
-    "travel": 3,
+    "travel": 4,
     "ask": 1,
     "lead": 1,
-    "scout": 1
+    "scout": 1,
+    "prepare": 1
   },
   "aptitudeEarnCount": {
     "banner": 1
   },
   "_intentAsked": null,
   "_pendingIntent": null,
-  "sharedSceneId": "the_crossing--2026-09-07T13-49-02-525Z"
+  "sharedSceneId": null
 }

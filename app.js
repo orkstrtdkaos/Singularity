@@ -128,7 +128,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.413";
+const APP_VERSION = "1.9.414";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14173,6 +14173,10 @@ async function sbExecuteTurn() {
   if (!aDecl) { turn.phase = "action"; saveCharacter(character); renderSkillBattle(sbLastRound); return; }
   const bDecl = turn.bonusEarned ? sbDeclFromSel(turn.sel.bonus, skills, sbIntensity) : null;
   sbSetBusy(true, "Resolving the turn…"); sbQuickBeat = ""; renderSkillBattle(sbLastRound);
+  // ⛔ DID THE ROUND ACTUALLY LAND? Declared OUT here because only the CATCH needs it, and the catch cannot see
+  // inside the try. Without this the failure path could not tell a turn that never happened from one that already
+  // hit — and it told the player "nothing was lost" for both (Erik: "stuck striking it over and over").
+  let roundLanded = false;
   // ⛔ GUARDED FOR THE SAME REASON AS THE SENSE STEP — the flag must not be able to outlive a failure.
   try {
   const beats = [];
@@ -14212,6 +14216,7 @@ async function sbExecuteTurn() {
   };
   applyRR(rr, aDecl, "Action");
   saveCharacter(character);
+  roundLanded = true;   // ⛔ SET AFTER THE SAVE, so it means "this is on disk", not "this was attempted".
   let ended = rr.ended, endRR = rr;
   // SNG-271 (Erik's own fight log) — A DOWNED PLAYER STILL TOOK THEIR BONUS ACTION.
   //
@@ -14284,7 +14289,16 @@ async function sbExecuteTurn() {
   } catch (err) {
     console.error("[fight] the turn failed to resolve:", err);
     sbNoteFailure("turn-step", err);
-    renderPlay(character.activeScene?.lastTurn || null, { aside: `The turn did not resolve (${esc(String(err?.message || err).slice(0, 80))}). Nothing was lost \u2014 try it again.` });
+    // ⛔ A FAILURE AFTER THE SAVE IS NOT A FAILED TURN — it is a turn whose TAIL failed, and the round already stands.
+    // Releasing the turn here is what returns the player to the sense step; without it the phase stays on `action`
+    // and the only control on screen is another strike, forever. ⚠️ And the old message said "nothing was lost"
+    // whichever it was, which is how a fight becomes unreadable.
+    if (roundLanded) {
+      try { character.activeEncounter.state.turn = sbFreshTurn(); saveCharacter(character); } catch { /* best effort */ }
+      renderPlay(character.activeScene?.lastTurn || null, { aside: `Your action STOOD \u2014 it is in the log and on your sheet. What came after it did not (${esc(String(err?.message || err).slice(0, 80))}). The next round is yours.` });
+    } else {
+      renderPlay(character.activeScene?.lastTurn || null, { aside: `The turn did not resolve (${esc(String(err?.message || err).slice(0, 80))}). Nothing was lost \u2014 try it again.` });
+    }
   }
   finally { sbSetBusy(false); sbQuickBeat = ""; renderSkillBattle(sbLastRound); }
 }

@@ -794,6 +794,20 @@ console.log("\n── §10 · the known gaps — these go RED when FIXED ──"
     check("§10: ⛔ releaseHolding is no longer a bare filter — the gap closed (§61) and stays closed",
       /export function releaseHolding/.test(hold) && !/character\.holdings = \(character\.holdings \|\| \[\]\)\.filter\(x => x\.id !== id\)/.test(rd("app.js")));
   }
+  // ⛔ ERIK 2026-09-07: "the fight mechanics are so broken right now I can't tell what happened." One measured
+  // cause: a craft CANNOT shut a step, because the flag that would do it is written in one vocabulary and asked
+  // for in another. ⚠️ I told Erik a blind was refreshing on him and that the refresh rule was his to rule —
+  // wrong, and it would have had him rule on a mechanic that cannot run. Asserted OPEN so the day someone
+  // unifies the words, this goes RED and they are made to read the ruling in po/SPEC_encounter_overhaul.md §6.
+  {
+    const peJ = rj("content/packs/core/rules/skill_battle_system.json").engine.persistentEffects;
+    const authored = new Set(Object.values(peJ.byFunction || {}).map(d => d.deniesPhase).filter(Boolean));
+    const asked = new Set();
+    for (const m of (rd("app.js") + rd("engine/skill_battle.js")).matchAll(/phaseDenie[dr]\([^,]+,[^,]+,\s*"([a-z]+)"/g)) asked.add(m[1]);
+    gap("§10: deniesPhase is inert — nothing asks for a phase in the vocabulary the data is written in",
+      authored.size > 0 && asked.size > 0 && ![...authored].some(a => asked.has(a)),
+      `authored: ${[...authored].join(", ")} · asked: ${[...asked].join(", ")}`);
+  }
   gap("§10: method (psionics / song / blade) is still recorded nowhere",
     abilities.every(a => a.method == null));
 }
@@ -9100,7 +9114,11 @@ console.log("\n── §138 · the beast yielded six times ──");
   // ⛔ AND A STEP TAKEN AWAY MUST SAY WHY. `deniesPhase` shut his sense step and the screen said only "Blinded".
   const SBM = await import("../engine/skill_battle.js");
   const fx = [{ side: "player", deniesPhase: "sense", label: "the hollow-pace's blinding", roundsLeft: 2, kind: "blind" }];
-  check("§138: ⛔ THE ENGINE CAN SAY WHICH EFFECT SHUT THE STEP, not merely that one did",
+  // ⛔ THIS CHECK USED TO HAND `phaseDenier` AN EFFECT IT BUILT ITSELF — so it proved the READER works while
+  // nothing in play can call it with a value it recognises. That is the fifth door (the READ door passed by the
+  // test alone), in a gate I wrote the same week I wrote the memory warning about it. The reader check stays,
+  // because the reader is genuinely correct; what is ADDED is the question it was avoiding — §10's gap, below.
+  check("§138: the denial READER is correct in isolation — it names the effect, and only for the phase asked",
     typeof SBM.phaseDenier === "function" && SBM.phaseDenier(fx, "player", "sense")?.label === "the hollow-pace's blinding"
     && SBM.phaseDenier(fx, "player", "action") === null && SBM.phaseDenied(fx, "player", "sense") === true);
   check("§138: ⚑ …and the screen says WHAT did it and HOW LONG, because a step that vanishes with no reason reads as a bug",
@@ -9165,6 +9183,36 @@ console.log("\n── §139 · the gates are a network whether or not you are st
   check("§139: ⛔ …and the network is REAL in the routing, not only in the prose — the gates shorten a long walk to the hub",
     far.length >= 50 && shortened.length >= far.length * 0.75 && halved.length >= far.length / 2,
     JSON.stringify({ far: far.length, shortened: shortened.length, muchShorter: halved.length }));
+}
+
+/* ═════ §140 — A FAILURE AFTER THE SAVE IS NOT A FAILED TURN (Erik: "stuck striking it over and over") ═════ */
+// ⛔ MEASURED: `sbExecuteTurn` resolves the round, APPLIES it, and SAVES — and only twenty-odd lines later resets
+// the turn. Anything that threw in between skipped the reset, so `phase` stayed on "action" and the only control
+// on screen was another strike, forever. ⚠️ AND THE CATCH SAID "Nothing was lost — try it again" while health,
+// effects and the opponent's pool had all moved. That is both halves of Erik's report in one window: stuck
+// striking, and unable to tell what happened.
+// ⛑ The house rule already in this file is *settle and save before you tell*; this is its other half — a failure
+// in the TELLING must never be reported as a failure of the DEED.
+console.log("\n── §140 · a failed tail releases the turn, and says which it was ──");
+{
+  const app = rd("app.js");
+  const i = app.indexOf("async function sbExecuteTurn() {");
+  const body = app.slice(i, app.indexOf("\n/**", i));
+  check("§140: the executor knows whether the round LANDED — a flag the catch can actually see",
+    i > 0 && /let roundLanded = false;/.test(body)
+    && body.indexOf("let roundLanded = false;") < body.indexOf("try {"), "declared outside the try");
+  check("§140: ⛔ …set AFTER the save, so it means \"this is on disk\", not \"this was attempted\"",
+    /saveCharacter\(character\);\s*\r?\n\s*roundLanded = true;/.test(body));
+  check("§140: ⛔ THE TURN IS RELEASED when the round already stood — otherwise the phase never leaves \"action\"",
+    /if \(roundLanded\) \{/.test(body)
+    && /if \(roundLanded\) \{[\s\S]{0,400}state\.turn = sbFreshTurn\(\)/.test(body));
+  check("§140: ⛔ …and it STOPS CLAIMING nothing was lost when something was",
+    /Your action STOOD/.test(body) && /Nothing was lost/.test(body)
+    && body.indexOf("Your action STOOD") < body.indexOf("Nothing was lost", body.indexOf("if (roundLanded)")),
+    "both messages exist and the truthful one is on the landed branch");
+  // ⚑ AND THE UNLANDED BRANCH KEEPS THE OLD, TRUE MESSAGE — a turn that never happened really did lose nothing.
+  check("§140: ⚑ …while a turn that never resolved still says so, and does NOT burn the round",
+    /\} else \{[\s\S]{0,300}Nothing was lost/.test(body));
 }
 
 /* ══════════ REPORT ══════════ */

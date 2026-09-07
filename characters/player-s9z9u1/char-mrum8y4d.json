@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 7,
-  "xp": 614,
+  "xp": 617,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -95,17 +95,17 @@
   ],
   "alignment": {
     "mechanical_spiritual": -0.034,
-    "falsehood_truth": -0.005936940750000001,
+    "falsehood_truth": 0.04406305925,
     "spectrumId": -0.1263017118375945,
     "value": -0.07300000000000001,
     "demonic_angelic": -0.020000000000000004,
-    "dark_light": -0.015
+    "dark_light": 0.035
   },
   "attunement": 7,
   "maxHealth": 68,
   "health": 68,
   "maxEnergy": 146,
-  "energy": 114,
+  "energy": 108,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -213,39 +213,26 @@
         "player": "Ask Kael what business brought them here—and whether you can help finish it",
         "summary": "At the Hub crossing, Kael reveals their business is already finished—carrying warning of the water crisis downhill through the relay network. They offer to show Loki the Crossing's inner sites, while Veln Ashpause watches from the western arch.",
         "narration": "Kael's weathered face settles into something that reads like gratitude—not the reflexive kind, but the sort that comes from someone recognizing a genuine offer. 'My business here is simple enough,' they say, and there's a note of finality in it. 'Word needs to reach the Reach-wardens about the water moving wrong downhill. The official channels are slow; I carry it faster.' They pause, glancing toward the Null Stone at the chamber's center, then back to you. 'It's already done. I came here to pass the word through the Crossing's relay network—the kind that doesn't wait for bureaucracy. By tomorrow, settlements spinward will know what I know.'\n\nThere's no hesitation in them, no sense that this errand requires help. It's the work of someone who has done this before, who knows exactly how the message moves through the Crossing and beyond. 'You can't speed it up,' Kael says plainly. 'But you could walk the Crossing with me if you wanted. Show you the Twelve Mouths, the Common Table, the Made Arch—the places the peoples gather when they come here. It's not every day you get to see the center like this, and...' they trail off, glancing toward Veln Ashpause, who has not moved, 'it might help you figure out what that Hourkeeper wants before they decide you need to know.'\n\nVessin has shifted closer, her practical coat catching the slanting light. She doesn't speak, but there's a question in how she's watching you—whether you're staying or moving, and what the grey-coated figure by the arch means either way."
+      },
+      {
+        "player": "Use Prism Sight on Veln Ashpause from here—read the light around them for what they're carrying",
+        "summary": "At the Hub crossing, Loki reads Veln Ashpause's light-history and glimpses something wrong—the Hourkeeper seems to exist in two moments at once.",
+        "narration": "You hold your ground near the Null Stone and let your sight sharpen—the Prism Sight unfolds like a lens opening, drawing the thin shimmer of light-history from the air around Veln Ashpause. Afternoon sun through the high windows catches the grey coat in slanting bars, and for a moment the light-traces bloom.\n\nWhat you read is fragmentary—the Prism Sight works on still places, and the Hub crossing is a place of constant arrival and departure. But what catches is this: Veln has been here since dawn, unmoved. The light-trace shows them in exactly this posture for hours, a grey pillar of absolute stillness. More than that—the trace shows *arrival*. Not an hour of standing, but a moment of appearing, and then nothing changing. As if they *stepped* into this spot fully formed, ready.\n\nBut the harder part, the thing that makes your breath catch: in the traces of light around them, you catch *layers*. A moment that was present, and a moment that hasn't happened yet, existing in the same space. It's the kind of interference pattern you'd see if someone were occupying two positions on the same timeline, which is not how light works. Which is not how *anything* works.\n\nVeln's expression doesn't shift. But their attention on you sharpens infinitesimally—as though they felt the moment your sight touched whatever it is they're carrying."
       }
     ],
     "lastTurn": {
-      "narration": "Kael's weathered face settles into something that reads like gratitude—not the reflexive kind, but the sort that comes from someone recognizing a genuine offer. 'My business here is simple enough,' they say, and there's a note of finality in it. 'Word needs to reach the Reach-wardens about the water moving wrong downhill. The official channels are slow; I carry it faster.' They pause, glancing toward the Null Stone at the chamber's center, then back to you. 'It's already done. I came here to pass the word through the Crossing's relay network—the kind that doesn't wait for bureaucracy. By tomorrow, settlements spinward will know what I know.'\n\nThere's no hesitation in them, no sense that this errand requires help. It's the work of someone who has done this before, who knows exactly how the message moves through the Crossing and beyond. 'You can't speed it up,' Kael says plainly. 'But you could walk the Crossing with me if you wanted. Show you the Twelve Mouths, the Common Table, the Made Arch—the places the peoples gather when they come here. It's not every day you get to see the center like this, and...' they trail off, glancing toward Veln Ashpause, who has not moved, 'it might help you figure out what that Hourkeeper wants before they decide you need to know.'\n\nVessin has shifted closer, her practical coat catching the slanting light. She doesn't speak, but there's a question in how she's watching you—whether you're staying or moving, and what the grey-coated figure by the arch means either way.",
-      "sceneSummary": "At the Hub crossing, Kael reveals their business is already finished—carrying warning of the water crisis downhill through the relay network. They offer to show Loki the Crossing's inner sites, while Veln Ashpause watches from the western arch.",
+      "narration": "You hold your ground near the Null Stone and let your sight sharpen—the Prism Sight unfolds like a lens opening, drawing the thin shimmer of light-history from the air around Veln Ashpause. Afternoon sun through the high windows catches the grey coat in slanting bars, and for a moment the light-traces bloom.\n\nWhat you read is fragmentary—the Prism Sight works on still places, and the Hub crossing is a place of constant arrival and departure. But what catches is this: Veln has been here since dawn, unmoved. The light-trace shows them in exactly this posture for hours, a grey pillar of absolute stillness. More than that—the trace shows *arrival*. Not an hour of standing, but a moment of appearing, and then nothing changing. As if they *stepped* into this spot fully formed, ready.\n\nBut the harder part, the thing that makes your breath catch: in the traces of light around them, you catch *layers*. A moment that was present, and a moment that hasn't happened yet, existing in the same space. It's the kind of interference pattern you'd see if someone were occupying two positions on the same timeline, which is not how light works. Which is not how *anything* works.\n\nVeln's expression doesn't shift. But their attention on you sharpens infinitesimally—as though they felt the moment your sight touched whatever it is they're carrying.",
+      "sceneSummary": "At the Hub crossing, Loki reads Veln Ashpause's light-history and glimpses something wrong—the Hourkeeper seems to exist in two moments at once.",
       "choices": [
         {
-          "label": "Walk the Crossing with Kael and Vessin—learn the sites and see who gathers there",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "travel",
-            "scout"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Approach Veln Ashpause directly—ask what an Hourkeeper knows about you",
+          "label": "Walk directly to Veln and ask them plainly what they know—no craft, no misdirection",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {},
-          "difficulty": "normal",
+          "difficulty": "hard",
           "opposedDifficulty": null,
           "intentTags": [
-            "study",
-            "negotiate"
+            "confront"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -254,14 +241,15 @@
           "emergenceId": null
         },
         {
-          "label": "Use Prism Sight on Veln Ashpause from here—read the light around them for what they're carrying",
+          "label": "Use Prism Sight again, more deliberately this time—push through the interference and try to see what moment Veln is standing in",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
-          "difficulty": "normal",
+          "difficulty": "very hard",
           "opposedDifficulty": null,
           "intentTags": [
-            "study"
+            "study",
+            "risky"
           ],
           "abilityId": "prism_sight",
           "energyCost": 3,
@@ -270,14 +258,15 @@
           "emergenceId": null
         },
         {
-          "label": "Stay with Kael and Vessin but decline the tour—ask if you can help carry the message downhill instead",
+          "label": "Step back toward Vessin and Kael—relay what you read in the light, and let them help you decide whether to approach",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "help"
+            "help",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -289,7 +278,7 @@
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
+        "energy": -3,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
@@ -299,71 +288,79 @@
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
-      "offer": {
-        "thing": "Kael's direct offer to walk the Crossing's inner sites—a genuine chance to see how the center moves and who gathers there",
-        "from": "Kael's nature as a road-warden who carries warning and knows the Crossing well, and the unresolved presence of Veln Ashpause watching"
-      },
+      "adoptSchool": null,
+      "offer": null,
+      "stageOps": [],
       "scene": {
-        "setting": "The Hub crossing—a vast circular chamber where five waygate arches converge. Pale stone worn smooth by uncounted arrivals. Afternoon light falls through high windows in slanting bars, turning the hum of the gates into something almost visible. The Null Stone rests at the chamber's center, a pillar of nothing that draws the eye and slides it away at once.",
+        "setting": "The Hub crossing—a vast circular chamber where five waygate arches converge. Pale stone worn smooth by uncounted arrivals. Afternoon light falls through high windows in slanting bars, painting the air with gold. The Null Stone rests at the chamber's center, drawing the eye and sliding it away. The hum of the gates underlies everything.",
         "npcsPresent": [
           {
+            "name": "Veln Ashpause",
+            "state": "Standing by the western arch, utterly motionless, grey-coated, fixed attention now sharpened toward Loki after the Prism Sight touched them"
+          },
+          {
             "name": "Kael",
-            "state": "Standing with Loki and Vessin, their weathered face settled into the ease of someone whose errand is finished and who is now offering a choice to companions"
+            "state": "Standing with Loki and Vessin, weathered and patient, awaiting an answer"
           },
           {
             "name": "Vessin Tallow-bark",
-            "state": "Shifted closer during the exchange, practical coat catching the light, watching Loki with a question in her bearing—wondering whether to stay or move"
-          },
-          {
-            "name": "Veln Ashpause",
-            "state": "Standing by the western arch, utterly motionless, grey-coated, fixed attention on Loki; expression unchanged"
+            "state": "Shifted closer, practical coat catching light, watching Loki with steady attention"
           },
           {
             "name": "A courier",
-            "state": "Still at the relay desk near the center, unaware of the conversation—checking a slate, preparing to send word downhill"
+            "state": "At the relay desk near the center, still unaware—checking a slate, preparing to send word"
           },
           {
             "name": "Two merchants",
-            "state": "Speaking in low voices by a carved bench, conducting business that has nothing to do with what passes by the arch"
+            "state": "By a carved bench, conducting quiet business"
           }
         ],
         "objects": [
           "Five waygate arches (wood, metal, and grown-thing)",
           "Pale worn stone floor",
-          "The Null Stone at the center (a pillar of nothing)",
+          "The Null Stone at the center",
           "Carved bench",
           "A slate at the relay desk",
           "High windows letting afternoon light fall in slanting bars"
         ],
         "threads": [
-          "What does Veln Ashpause know about Loki, and will they speak if approached directly?",
-          "What does Prism Sight reveal about the Hourkeeper's light-history?",
-          "Will Loki walk the Crossing's inner sites with Kael, or pursue the mystery of the grey-coated watcher first?",
+          "What does Veln Ashpause know about Loki, and will they speak if approached?",
+          "What does the layered light-trace around Veln mean—are they standing in two moments at once?",
+          "Will Loki walk the Crossing's inner sites with Kael, or pursue the mystery of the grey-coated watcher?",
           "The man in the lower Annex remains unidentified—his connection to the waygate tampering still unsolved",
-          "Tessvel Cairn awaits an answer about the personal offer",
-          "The regulator's three downstream states: signal sent, terminus warden decision, relay record logged"
+          "Tessvel Cairn awaits an answer about the personal offer"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "kael",
-          "note": "Revealed their business at the Crossing is finished—carrying the water-crisis warning downhill through the relay network. Offered to show Loki and Vessin the inner sites of the Crossing (the Twelve Mouths, the Common Table, the Made Arch).",
+          "npcId": "veln-ashpause",
+          "name": "Veln Ashpause",
+          "role": "Hourkeeper",
+          "note": "Loki read the light-history around them and glimpsed a layered trace—as if Veln exists in two moments at once. Their attention sharpened when the reading touched them.",
           "learned": [
-            "Carries word through the relay network, which moves faster than official channels",
-            "Has already passed their warning; the work is complete",
-            "Knows the inner sites of the Crossing and who gathers at them"
+            "They have stood in this exact spot, unmoved, since dawn—as if they stepped into it fully formed",
+            "The light-traces show an impossible interference pattern: Veln occupying two positions on the same timeline"
           ],
-          "relationshipDelta": 1,
-          "status": "active",
-          "statusNote": "Standing at the Hub crossing, offering to walk the inner sites with Loki and Vessin"
+          "relationshipDelta": 0
         }
       ],
       "intentsHeard": [],
       "factUpdates": [],
       "placeUpdates": [],
       "discovery": null,
-      "codexUpdates": [],
+      "codexUpdates": [
+        {
+          "topic": "hourkeeper-confluence",
+          "label": "The Hourkeeper",
+          "kind": "person",
+          "entityId": "veln-ashpause",
+          "fact": "Veln Ashpause's light-history reads as layered—existing in two moments at once. They arrived at the Hub crossing at dawn and have stood unmoved since, as if stepping into readiness fully formed.",
+          "links": [
+            "the-crossing"
+          ]
+        }
+      ],
       "holdingOps": [],
       "debtOps": [],
       "partyOps": [],
@@ -376,14 +373,14 @@
       "unlockPrecursor": null,
       "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "A brief conversation standing at the Hub crossing, noon moving toward afternoon"
+        "hoursPassed": 0,
+        "why": "A moment of reading and realization—no time passes"
       },
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": null,
+      "imagePrompt": "Afternoon light through high windows catches Veln Ashpause's grey coat in slanting bars—but the light-traces shimmer impossibly, showing the Hourkeeper in two positions at once, a figure occupying the same space across two different moments of time.",
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
@@ -395,46 +392,46 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Hub crossing—a vast circular chamber where five waygate arches converge. Pale stone worn smooth by uncounted arrivals. Afternoon light falls through high windows in slanting bars, turning the hum of the gates into something almost visible. The Null Stone rests at the chamber's center, a pillar of nothing that draws the eye and slides it away at once.",
+      "setting": "The Hub crossing—a vast circular chamber where five waygate arches converge. Pale stone worn smooth by uncounted arrivals. Afternoon light falls through high windows in slanting bars, painting the air with gold. The Null Stone rests at the chamber's center, drawing the eye and sliding it away. The hum of the gates underlies everything.",
       "npcsPresent": [
         {
+          "name": "Veln Ashpause",
+          "state": "Standing by the western arch, utterly motionless, grey-coated, fixed attention now sharpened toward Loki after the Prism"
+        },
+        {
           "name": "Kael",
-          "state": "Standing with Loki and Vessin, their weathered face settled into the ease of someone whose errand is finished and who is"
+          "state": "Standing with Loki and Vessin, weathered and patient, awaiting an answer"
         },
         {
           "name": "Vessin Tallow-bark",
-          "state": "Shifted closer during the exchange, practical coat catching the light, watching Loki with a question in his bearing—wond"
-        },
-        {
-          "name": "Veln Ashpause",
-          "state": "Standing by the western arch, utterly motionless, grey-coated, fixed attention on Loki; expression unchanged"
+          "state": "Shifted closer, practical coat catching light, watching Loki with steady attention"
         },
         {
           "name": "A courier",
-          "state": "Still at the relay desk near the center, unaware of the conversation—checking a slate, preparing to send word downhill"
+          "state": "At the relay desk near the center, still unaware—checking a slate, preparing to send word"
         },
         {
           "name": "Two merchants",
-          "state": "Speaking in low voices by a carved bench, conducting business that has nothing to do with what passes by the arch"
+          "state": "By a carved bench, conducting quiet business"
         }
       ],
       "objects": [
         "Five waygate arches (wood, metal, and grown-thing)",
         "Pale worn stone floor",
-        "The Null Stone at the center (a pillar of nothing)",
+        "The Null Stone at the center",
         "Carved bench",
         "A slate at the relay desk",
         "High windows letting afternoon light fall in slanting bars"
       ],
       "threads": [
-        "What does Veln Ashpause know about Loki, and will they speak if approached directly?",
-        "What does Prism Sight reveal about the Hourkeeper's light-history?",
-        "Will Loki walk the Crossing's inner sites with Kael, or pursue the mystery of the grey-coated watcher first?",
+        "What does Veln Ashpause know about Loki, and will they speak if approached?",
+        "What does the layered light-trace around Veln mean—are they standing in two moments at once?",
+        "Will Loki walk the Crossing's inner sites with Kael, or pursue the mystery of the grey-coated watcher?",
         "The man in the lower Annex remains unidentified—his connection to the waygate tampering still unsolved",
         "Tessvel Cairn awaits an answer about the personal offer"
       ]
     },
-    "beats": 6
+    "beats": 7
   },
   "clock": {
     "schemaVersion": 1,
@@ -797,10 +794,13 @@
       "relationship": 0,
       "history": [
         "[d1] Appeared from the brush during the encounter — fixed Loki with a look of helpless foreknowledge and has said nothing.",
-        "[d3] Now identified by the road-warden. Present at the Hub crossing, watching the waygate arches with fixed attention on Loki. Arrived this morning asking after someone matching Loki's description. Does not move; does not explain."
+        "[d3] Now identified by the road-warden. Present at the Hub crossing, watching the waygate arches with fixed attention on Loki. Arrived this morning asking after someone matching Loki's description. Does not move; does not explain.",
+        "[d3] Loki read the light-history around them and glimpsed a layered trace—as if Veln exists in two moments at once. Their attention sharpened when the reading touched them."
       ],
       "knownFacts": [
-        "They have pre-remembered something about Loki's situation — they will not say what, and cannot stop knowing it."
+        "They have pre-remembered something about Loki's situation — they will not say what, and cannot stop knowing it.",
+        "They have stood in this exact spot, unmoved, since dawn—as if they stepped into it fully formed",
+        "The light-traces show an impossible interference pattern: Veln occupying two positions on the same timeline"
       ],
       "skillsObserved": [],
       "status": "active",
@@ -820,7 +820,7 @@
       "people": "human",
       "peopleSource": "generated",
       "appearance": "A human woman, late fifties, with the pale-olive complexion of someone who lives under canopy rather than sky. The grey coat falls to mid-calf, unmarked, unweathered, impossibly clean for the Orchard's mud-season — early spring has not touched it. Her hair is cut short and practical, silver at the temples, darker beneath. She carries no visible instrument of timekeeping; her hands are the instruments, folded at her waist, utterly still. Her eyes are already somewhere past you.",
-      "met": 1
+      "met": 2
     },
     "the-stranger-aggressor": {
       "id": "the-stranger-aggressor",
@@ -1382,7 +1382,7 @@
     "lastSharedReadAt": "2026-09-07T22:27:40.544Z",
     "lastTickWorldDay": 69,
     "lastCanonWorldDay": 69,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "The traveler's name and their readiness to share the road without condition or price—a small grace that costs nothing and means everything.",
@@ -5415,7 +5415,8 @@
           "[d1] An Hourkeeper present at the confluence — watching Loki with foreknowledge",
           "[d1] Hourkeeper of the Confluence — she holds the moment before the moment, says nothing of what she carries, and the grey coat has never needed washing because nothing reaches it",
           "[d2] [while away] Veln Ashpause continues her ordinary rounds, carrying the foreknowledge quietly; the moment she is drawn toward has not yet announced itself, and she does nothing to hasten it.",
-          "[d3] An Hourkeeper—a person who perceives time differently from ordinary measure. Past, present, and future are not always certain in which direction they look. Arrived at the Hub crossing this morning asking after someone matching Loki's description. Does not offer explanation but watches with…"
+          "[d3] An Hourkeeper—a person who perceives time differently from ordinary measure. Past, present, and future are not always certain in which direction they look. Arrived at the Hub crossing this morning asking after someone matching Loki's description. Does not offer explanation but watches with…",
+          "[d3] Veln Ashpause's light-history reads as layered—existing in two moments at once. They arrived at the Hub crossing at dawn and have stood unmoved since, as if stepping into readiness fully formed."
         ],
         "links": [
           "the-crossing"
@@ -5832,17 +5833,17 @@
     ]
   },
   "tendencies": {
-    "devotion": 1.4264056398279648,
-    "cerebral": 8.085030425164966,
-    "social": 15.324327270618516,
-    "strategic": 5.782682783890756,
-    "cautious": 6.062046935120272,
-    "amorous": 17.553872797725667,
-    "generous": 3.1166532227167205,
-    "ruthless": 0.7424757642355515,
-    "risky": 0.6067846887378343,
-    "patient": 0.16570198636800254,
-    "deception": 0.19288569508410378
+    "devotion": 1.3907454988322656,
+    "cerebral": 8.882904664535841,
+    "social": 14.941219088853053,
+    "strategic": 5.6381157142934875,
+    "cautious": 5.910495761742266,
+    "amorous": 17.115025977782526,
+    "generous": 3.0387368921488025,
+    "ruthless": 0.7239138701296627,
+    "risky": 0.5916150715193884,
+    "patient": 0.16155943670880246,
+    "deception": 0.18806355270700117
   },
   "aptitudes": [
     "silver_tongue",
@@ -5853,7 +5854,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 149,
+  "actionCount": 150,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -6384,8 +6385,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788822262364,
-  "rev": 566,
+  "updatedAt": 1788822421696,
+  "rev": 567,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -7247,7 +7248,7 @@
     "the_gearlands": 33,
     "umbral_depths": 54,
     "the_quickwood": 101,
-    "the_center": 11
+    "the_center": 12
   },
   "opLossPending": false,
   "sessions": [
@@ -7318,10 +7319,10 @@
     {
       "id": "sess-9",
       "startedAt": "2026-09-07T19:42:14.907Z",
-      "lastAt": "2026-09-07T23:04:22.352Z",
+      "lastAt": "2026-09-07T23:07:01.685Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 17
+      "beats": 18
     }
   ],
   "establishedFacts": [
@@ -7365,19 +7366,19 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 176,
-    "choices": 176,
-    "characterDeltas": 70,
-    "scene": 176,
+    "sceneSummary": 177,
+    "choices": 177,
+    "characterDeltas": 71,
+    "scene": 177,
     "placeUpdates": 21,
-    "codexUpdates": 100,
-    "timeOps": 161,
+    "codexUpdates": 101,
+    "timeOps": 162,
     "offer": 16,
     "generateRequest": 6,
-    "sceneEnded": 52,
-    "npcUpdates": 145,
+    "sceneEnded": 53,
+    "npcUpdates": 146,
     "moveTo": 6,
-    "gambitApt": 16,
+    "gambitApt": 17,
     "deeds": 2,
     "questUpdates": 17,
     "standingOps": 1,
@@ -7386,10 +7387,10 @@
     "encounterOps": 8,
     "ledgerEvents": 2,
     "newEncounter": 2,
-    "imagePrompt": 6,
+    "imagePrompt": 7,
     "scene_ended": 1
   },
-  "_opTurns": 176,
+  "_opTurns": 177,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1.75
@@ -7402,7 +7403,7 @@
       "the_wrong_reality": 5,
       "the_misdirect": 2,
       "the_better_story": 11,
-      "prism_sight": 10,
+      "prism_sight": 11,
       "harmonic_voice": 8,
       "hunters_strike": 3,
       "descent": 8,
@@ -7435,7 +7436,7 @@
       "the_wrong_reality": 32,
       "the_misdirect": 31,
       "the_better_story": 32,
-      "prism_sight": 33,
+      "prism_sight": 69,
       "harmonic_voice": 69,
       "hunters_strike": 32,
       "descent": 33,
@@ -7960,7 +7961,8 @@
     "rapport": 3,
     "retreat": 1,
     "ask": 1,
-    "help": 1
+    "help": 1,
+    "study": 1
   },
   "aptitudeEarnCount": {
     "faithful": 1
@@ -8063,5 +8065,6 @@
     "veil_stroke",
     "better_story",
     "wrong_reality"
-  ]
+  ],
+  "precursorAxes": []
 }

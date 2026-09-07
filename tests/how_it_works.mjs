@@ -9103,6 +9103,63 @@ console.log("\n── §138 · the beast yielded six times ──");
     && /Your senses are shut by \$\{turn\.senseBlind\.label\}/.test(app));
 }
 
+/* ═════ §139 — A NARRATOR WITH NO FACT INVENTS ONE: THE WAYGATES ARE A NETWORK, AND A QUESTION IS TOLD SO ═════ */
+// ⛔ The GM told Erik: "the waygates in this world aren't a transit network with a hub at the Crossroads — they're
+// fixed points… it doesn't route onward to the Crossing… Loki would reach it by WALKING hubward." ⚑ Every clause is
+// the opposite of this world: 26 network gates, `the_crossing` flagged `waygateHub`, and a hop that beats a
+// thirty-four-day walk by three days.
+// ⚠️ THE CAUSE WAS ABSENCE: the waygate block is turn-only AND only when standing at a gate (smoke 148's ruling, which
+// is right — no turn should carry a gate paragraph it did not need), so the ASK channel, where he asked, had NO waygate
+// fact at all. A narrator with no fact does not say "I don't know"; it says something confident, and it closed his goal.
+console.log("\n── §139 · the gates are a network whether or not you are standing on one ──");
+{
+  const W = await import("../engine/waygate.js");
+  const { loadContentHeadless: lch139 } = await import("./headless_content.mjs");
+  const C = await lch139();
+  const c = JSON.parse(rd("characters/player-s9z9u1/char-mrum8y4d.json"));
+  const L = { ...C.locations, ...(c.generated?.location || {}) };
+  const hub = W.hubWaygate(L);
+  check("§139: the world really is a network with a hub — the fixture is not vacuous",
+    !!hub && hub.id === "the_crossing" && Object.values(L).filter(W.isNetworkGate).length >= 20);
+  const away = W.waygateTruthForGM({ ...c, currentLocationId: "millbrook" }, L);
+  check("§139: ⛔ A QUESTION IS ANSWERED FROM FACT — away from any gate the GM is told the gates ARE a network and where the hub is",
+    !!away && /They ARE a network/.test(away) && /is its HUB/.test(away), String(away).slice(0, 80));
+  check("§139: ⛔ …and it is told the three things it got WRONG, in as many words",
+    /NEVER tell the character the waygates are isolated landmarks/.test(away)
+    && /do not connect onward/.test(away) && /must be reached overland. All three are false/.test(away));
+  check("§139: ⚑ …and where the nearest gate they KNOW is, so the answer is a direction rather than a refusal",
+    /the nearest they know is /.test(away) && /that is a direction, not a refusal/.test(away));
+  check("§139: …and the hub's own article is not doubled — this text goes straight into the narrator's mouth", !/the The /.test(away));
+  // ⛔ AND SMOKE 148'S RULING IS UNTOUCHED: the TURN still carries a gate paragraph only when standing at one.
+  check("§139: ⛔ THE TURN BLOCK IS UNCHANGED — no per-turn waygate spam; the truth is the ASK channel's own line",
+    W.waygateBlockForGM({ ...c, currentLocationId: "millbrook" }, L) === null
+    && !!W.waygateBlockForGM({ ...c, currentLocationId: hub.id }, L));
+  const reg = rd("engine/gm_registry.js");
+  check("§139: ⚑ …and it is wired to the ASK view only, as its own row",
+    /key: "waygateTruthDetail"[\s\S]{0,220}views: \["ask"\]/.test(reg) && /waygateTruthForGM\(env\.character, env\.CONTENT\.locations\)/.test(reg)
+    && /waygateTruthDetail/.test(rd("engine/gm.js")));
+  // ⚑ AND THE FACT MATCHES WHAT THE JOURNEY WOULD ACTUALLY DO.
+  const J = await import("../engine/journey.js");
+  const WM = await import("../engine/worldmap.js");
+  // ⚠️ NOT one named place — a generated location belongs to the save that generated it, and naming one crashed this
+  // gate the first time. The claim is about the WORLD: over every place a long walk from the hub, the gates shorten it.
+  const far = [];
+  for (const id of Object.keys(L)) {
+    if (id === hub.id) continue;
+    const walk = WM.walkingDays(L[id], L[hub.id]);
+    if (!Number.isFinite(walk) || walk < 15) continue;
+    const hop = ((J.routeBetween(id, hub.id, L, { traveller: null }) || {}).options || []).find(o => o.kind === "gate");
+    if (hop) far.push({ id, walk, hop: hop.days });
+  }
+  const shortened = far.filter(r => r.hop < r.walk);
+  const halved = far.filter(r => r.hop < r.walk / 3);
+  // ⚠️ NOT every one: routeBetween OFFERS the gate leg and lets the caller choose, so a gate whose road legs are worse
+  // than the direct walk still appears in the list and still loses. Measured 2026-09-07: 101 of 116 faster, 91 far faster.
+  check("§139: ⛔ …and the network is REAL in the routing, not only in the prose — the gates shorten a long walk to the hub",
+    far.length >= 50 && shortened.length >= far.length * 0.75 && halved.length >= far.length / 2,
+    JSON.stringify({ far: far.length, shortened: shortened.length, muchShorter: halved.length }));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

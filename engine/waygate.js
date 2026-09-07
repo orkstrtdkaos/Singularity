@@ -1,3 +1,4 @@
+import { walkingDays } from "./worldmap.js";
 // waygate.js — SNG-148: WAYGATES. A network of gates across the world; the
 // Crossing is the hub — earned by geography, not decreed (it already sits at the
 // center, and the Coliseum's own connections name it).
@@ -157,6 +158,33 @@ export function routeGmMoveTo({ character, moveRef, locations, resolve }) {
 /** GM context row (§23 REGISTERED link): only when the character STANDS AT a
  *  gate — a compact door the GM may offer in fiction, never a menu. Null
  *  elsewhere (no per-turn spam for a rare capability). */
+/** ⛔ WHAT THE CHARACTER ALREADY KNOWS ABOUT THEIR OWN WORLD — for the ASK channel, where players ask how to get
+ *  somewhere. ⚠️ NOT for the turn: smoke 148 rules that the waygate block appears only when STANDING at a gate, so
+ *  that no turn carries a gate paragraph it did not need. This is the other half of that ruling — a question deserves
+ *  the fact, and with none the GM invented lore that contradicted the world and closed a player's goal (Erik).
+ *  ⚑ SHORT, and never an offer: it states that the gates ARE a network, names the hub, and says where the nearest
+ *  gate they know is. PURE. */
+export function waygateTruthForGM(character, locations) {
+  const hub = hubWaygate(locations);
+  if (!hub) return null;
+  const net = Object.values(locations || {}).filter(isNetworkGate);
+  if (!net.length) return null;
+  const hubName = String(hub.name || "the hub");
+  const theHub = /^the\s/i.test(hubName) ? hubName : `the ${hubName}`;   // "The Crossing" carries its own article
+  const origin = locations?.[character?.currentLocationId] || null;
+  const atGate = isWaygate(origin);
+  const known = knownWaygates(character, locations).filter(l => l.id !== origin?.id);
+  const near = known.map(l => ({ l, d: walkingDays(origin, l) })).filter(x => Number.isFinite(x.d)).sort((a, b) => a.d - b.d)[0];
+  return `WAYGATES — what the character already knows about their own world (answer questions from this; never invent past it):`
+    + ` They ARE a network, ${net.length} of them, and ${hubName} is its HUB — a gate that cannot aim true still routes there,`
+    + ` so ${theHub} is reachable THROUGH the gates and does NOT have to be walked to.`
+    + ` ⛔ NEVER tell the character the waygates are isolated landmarks, that they do not connect onward, or that ${theHub} must be reached overland. All three are false.`
+    + (atGate ? ` They are standing at one right now (${origin.name}).`
+      : near ? ` They are not at a gate this moment; the nearest they know is ${near.l.name}, about ${Math.max(1, Math.round(near.d))} day${Math.round(near.d) === 1 ? "" : "s"} off.`
+      : ` They are not at a gate this moment and know of none nearby yet.`)
+    + ` If they want to reach a gate or travel through one, say so plainly and let the journey carry them — that is a direction, not a refusal.`;
+}
+
 export function waygateBlockForGM(character, locations) {
   const origin = locations?.[character?.currentLocationId];
   if (!isWaygate(origin)) return null;

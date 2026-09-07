@@ -741,7 +741,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `status` | 1 | `root`×1 | ✅ READ | `assignments.js`, `authormode.js`, `backfill.js` |
 | `trails` | 1 | `mechanic`×1 | ✅ READ | `gm.js`, `recovery_snapshots.js` |
 | `awaitingEngine` | 1 | `mechanic`×1 | ⛔ DARK | — |
-| `questions` | 1 | `mechanic`×1 | ✅ READ | `app.js` |
+| `questions` | 1 | `mechanic`×1 | ✅ READ | `waygate.js`, `app.js` |
 | `reachesDepth` | 1 | `mechanic`×1 | ⛔ DARK | — |
 | `killCost` | 1 | `mechanic`×1 | ✅ READ | `skill_battle.js` |
 | `wornBenefits` | 1 | `mechanic`×1 | ⛔ DARK | — |

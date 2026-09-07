@@ -71,7 +71,7 @@ import { standingForGM } from "./standing.js"; // BATCH-12 §3
 import { renderNamesDeep } from "./names.js"; // SNG-182
 import { worldCount, worldCountLabel } from "./worldtime.js";
 import { encounterReceiptForGM } from "./encounters.js";
-import { waygateBlockForGM } from "./waygate.js";
+import { waygateBlockForGM, waygateTruthForGM } from "./waygate.js";
 import { readAloudDirective } from "./narration_voice.js";
 import { milestoneEffects } from "./ladder.js";
 
@@ -514,8 +514,17 @@ export const GM_CONTEXT = [
       const people = regionId ? (Object.values(byId).find(t => t?.region === regionId)?.traditionId || null) : null;
       return worldCountLabel(worldCount(), env.CONTENT?.worldClock, people);
     } },
+  // ⛔ THE ASK CHANNEL HAD NO WAYGATE FACT AT ALL, so when Erik asked how to reach the hub the GM invented lore that
+  // contradicted the world — "they aren't a transit network", "it must be walked to" — and closed his goal. ⚠️ It is a
+  // SEPARATE row, not a widening of the block below: smoke 148 rules that the turn only carries a gate paragraph when
+  // the character is standing at one, and that ruling is right.
+  { key: "waygateTruthDetail", builder: "waygate.waygateTruthForGM", carries: ["the gates ARE a network", "the hub", "the nearest gate they know"],
+    reachedBy: "any question about travel", spec: "§9", views: ["ask"],
+    build: (env) => waygateTruthForGM(env.character, env.CONTENT.locations) },
   { key: "waygateDetail", builder: "waygate.waygateBlockForGM (SNG-148)", carries: ["gate here", "aimable gates", "hub routing"],
-    reachedBy: "map ◈ Waygate control + GM offer", spec: "§9", views: ["turn"],
+    // ⛔ "How do I get to the hub?" IS A QUESTION, and the ask channel had no waygate fact at all — so the GM invented
+    // lore that contradicted the world and closed the player's goal (Erik 2026-09-07).
+    reachedBy: "map ◈ Waygate control + GM offer", spec: "§9", views: ["turn", "ask"],
     build: (env) => waygateBlockForGM(env.character, env.CONTENT.locations) },
   // CCODE-03: scenes were never closing (a real save ran 169 beats in ONE scene), so the chronicle
   // stayed thin and the save bloated. The contract now tells the GM when to close; this tells it

@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "id": "sunken_choir",
  "name": "The Sunken Choir",
- "regionId": "valley",
+ "regionId": "the_echo_vale",
  "communityId": "valley.sunken_choir",
  "spectrum": {
   "mechanical_spiritual": 0.5,
@@ -83,5 +83,7 @@
  },
  "worldPosNote": "⛔ SNG-407: moved 4.08° (7 walking days) onto the nearest river the built terrain actually has. Erik: 'keep the land as ground truth now and move the locations slightly to fit the land.' Was colatitude 24, longitude 205.",
  "tier": "settlement",
- "parentId": "echo_river_crossing"
+ "parentId": "echo_river_crossing",
+ "_regionWas": "valley",
+ "_reRegioned_20260906": "⛑ MOVED FROM `valley` TO `the_echo_vale`, 2026-09-06 — AND IT DID NOT MOVE. Membership, not geography, same as Kestrel's Roost the same hour. ⛔ THE FICTION SAID SO FIRST: 'a pre-transition amphitheater half-drowned in a still black tarn BELOW THE HEIGHTS'. ⚑ The Heights are `harmonic_heights_terrace`, and they are the Echo Vale's — the Choir is named for its relationship to a place in another region. ✅ MEASURED BOTH WAYS: in `valley` its median distance to peers is 20.6° against a typical 5.6° — ratio 3.7, stranded. In `the_echo_vale` it is 31.2° against 20.6° — ratio 1.5, comfortably inside. ⚠️ ITS ROADS ARE GENUINELY SPLIT — `harmonic_heights_terrace` (Vale) against `millbrook` and `echo_river_crossing` (valley) — ⛑ SO THE ROADS ALONE DID NOT DECIDE THIS ONE and the description did. ⚑ That is the right tiebreak: a bridge location belongs to the region it is NAMED FOR, and its roads to the valley are what make it a bridge rather than a mistake."
 }

@@ -92,7 +92,7 @@ import { needsBackfill, runBackfill, summaryLines } from "./engine/backfill.js";
 import { ensureFacts, applyFactUpdates, factsForGM } from "./engine/facts.js";
 import { notePerception, perceivedVectors, vectorSummary } from "./engine/vectors.js";
 import { tierPrice, isCrossClass, tierOf, classColor, classLabel, gateFor, meetsLearnGate, meetsRank3Gate, breadthUsed, breadthCap, atCapacity, skillGraphModel, skillPointCost, learnPointCost, forkPending, forkPaths, chosenFork, setFork, rankExpression, abilityTier } from "./engine/skilltree.js";
-import { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, setEncounterState, partyBlockForGM, fetchScene, listScenesAt, pushSceneWithMerge, scenePath, lastSceneError } from "./engine/party.js";
+import { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, setEncounterState, partyBlockForGM, fetchScene, listScenesAt, pushSceneWithMerge, scenePath, lastSceneError, setLeader, leaderOf, stateIntent, intentsOf, stragglerCall, STRAGGLER_CHOICES, heldRounds, openSharedEncounter, closeSharedEncounter, sharedPool, mergeStrike, RESOLVE_ORDER, lockDeclaration, allLocked, unlockedFighters, resolveOrder, advanceRound, joinFight, leaveFight, fightersOf } from "./engine/party.js";
 import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, intensityOptions } from "./engine/intensity.js";
 import { noteCoUseAndRefresh, refreshEvolvingItems, evolvedItemsForGM, currentStage } from "./engine/evolution.js";
 import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
@@ -126,7 +126,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.405";
+const APP_VERSION = "1.9.406";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4283,7 +4283,201 @@ async function pollPartyScene() {
       showPartyBanner();
     }
   }
+  renderPartyPanel();   // ⚑ the panel is its own node, so a poll may repaint it without touching the input or the beat
+  if (sharedScene?.encounter && allLocked(sharedScene)) maybeAdvancePartyRound();   // the last lock may have been someone else's
   // an empty poll (no new beats) does NOTHING to the DOM — your text + scene stay put.
+}
+
+/* ═══ THE PARTY PANEL — SPEC_party_mode_phase2, the fourth door ═══
+ * ⛔ Every function below was already in `party.js` with NO CALLER. The panel is a fixed dock, injected into the body
+ * the way the party banner is, so a poll re-render can never wipe what someone is typing.
+ * ⚠️ IT IS THE ONLY PARTY SURFACE. If a thing cannot be done here, it cannot be done. */
+function partySceneOr(fn) {   // every write goes through the merge, so two players acting at once cannot lose one
+  if (!sharedScene || !character?.sharedSceneId) return Promise.resolve(null);
+  return pushSceneWithMerge(character.sharedSceneId, fn).then(next => { if (next) { sharedScene = next; renderPartyPanel(); } return next; });
+}
+
+function partyNameOf(id) { return sharedScene?.party?.find(m => m.characterId === id)?.name || id; }
+
+/** ⚑ §4c IN THE PLAYER'S WORDS. The engine's RESOLVE_ORDER is the ruling; these are the same four in the language of
+ *  the table, so the panel can say WHY waiting for everyone is worth it: your ward is known before their blow lands. */
+const RESOLVE_ORDER_WORDS = { PROTECT: "wards", KNOW: "reading", HARM: "blows", RESTORE: "mending" };
+
+/** ⛔ THE PANEL. Scene mode above the rule, battle mode below it; the seam is absolute (§2). */
+function renderPartyPanel() {
+  let el = document.getElementById("party-panel");
+  if (!sharedScene || !character?.sharedSceneId) { if (el) { el.remove(); document.body.style.paddingBottom = ""; } return; }
+  if (!el) {
+    el = document.createElement("div"); el.id = "party-panel"; el.className = "party-panel";
+    // ⛔ ON A PHONE IT IS A BOTTOM SHEET, so it starts FOLDED — a dock that covers the input you type into is worse
+    // than no dock. The bar still says who leads; one tap opens the rest.
+    if (window.innerWidth <= 600) el.dataset.collapsed = "1";
+    document.body.appendChild(el);
+  }
+  const me = character.id;
+  const lead = leaderOf(sharedScene);
+  const iLead = lead === me;
+  const others = (sharedScene.party || []).filter(m => m.characterId !== me);
+  const wants = intentsOf(sharedScene);
+  const mine = wants.find(i => i.by === me);
+  const pool = sharedPool(sharedScene);
+  const fighters = fightersOf(sharedScene);
+  const iFight = (sharedScene.encounter?.fighting || []).includes(me);
+  const round = Number(sharedScene.encounter?.round) || 1;
+  const waiting = unlockedFighters(sharedScene);
+  const held = heldRounds(sharedScene);
+  const locked = !waiting.includes(me) && iFight;
+  const collapsed = el.dataset.collapsed === "1";
+  const enc = activeEnc();
+
+  const roster = [...(sharedScene.party || [])].map(m => {
+    const isLead = m.characterId === lead;
+    const on = (sharedScene.encounter?.fighting || []).includes(m.characterId);
+    const lk = on && !unlockedFighters(sharedScene).includes(m.characterId);
+    const wnt = wants.find(i => i.by === m.characterId);
+    return `<div class="pp-member${m.characterId === me ? " pp-me" : ""}">
+      <span class="pp-name">${isLead ? "<span class='pp-crown' title='Leads here'>\u265b</span> " : ""}${esc(m.name)}${m.characterId === me ? " <span class='hint'>(you)</span>" : ""}</span>
+      ${on ? `<span class="pp-tag${lk ? " pp-locked" : " pp-waiting"}">${lk ? "locked in" : "choosing\u2026"}</span>` : ""}
+      ${held[m.characterId] ? `<span class="hint">held \u00d7${held[m.characterId]}</span>` : ""}
+      ${wnt ? `<div class="pp-intent">wants: ${esc(wnt.text)}</div>` : ""}
+      ${iLead && !isLead ? `<button class="opt pp-mini" data-pp-pass="${esc(m.characterId)}" title="Hand them the lead">Pass the lead</button>` : ""}
+    </div>`;
+  }).join("");
+
+  // ⛔ §5b — THE LEADER DECIDES WHETHER THE PARTY MOVES WITHOUT SOMEONE, never what they do.
+  const stragglers = iLead && pool && waiting.filter(id => id !== me);
+  const stragglerBlock = stragglers && stragglers.length ? `
+    <div class="pp-straggler">
+      <div class="pp-head">${esc(stragglers.map(partyNameOf).join(", "))} ${stragglers.length === 1 ? "has" : "have"} not locked in</div>
+      <div class="opt-row" style="gap:6px;flex-wrap:wrap">
+        <button class="opt pp-mini" data-pp-call="wait" title="Hold the round. Repeatable, and it is counted">Wait</button>
+        <button class="opt pp-mini" data-pp-call="skip" title="They guard \u2014 still in the fight, still targetable, and not a strike nobody chose">Skip (they guard)</button>
+        <button class="opt pp-mini" data-pp-call="gm" title="Their character acts from their own sheet (R36)">Let the GM play them</button>
+      </div>
+    </div>` : "";
+
+  const fightBlock = pool ? `
+    <div class="pp-fight">
+      <div class="pp-head">\u2694 ${esc(sharedScene.encounter.name)} \u00b7 round ${round}</div>
+      <div class="pp-bar"><div class="pp-bar-fill" style="width:${Math.round(100 * pool.remaining / Math.max(1, pool.max))}%"></div></div>
+      <div class="hint">${pool.remaining} of ${pool.max} left${pool.down ? " \u2014 it is down" : ""} \u00b7 ${fighters.length ? esc(fighters.map(f => f.name).join(", ")) + " on it" : "nobody on it yet"}</div>
+      <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:6px">
+        ${iFight
+          ? `<button class="opt pp-mini" data-pp-leave="1" title="Step out. The fight does not end \u2014 the others are still in it">Step out</button>`
+          : `<button class="opt pp-mini" data-pp-join="1" title="Step into the shared fight">Join the fight</button>`}
+        ${iFight && !locked ? `<span class="hint">Choose a craft in your battle screen \u2014 it locks instead of resolving.</span>` : ""}
+        ${locked ? `<span class="pp-tag pp-locked">you are locked in</span>` : ""}
+        ${pool.down ? `<button class="opt pp-mini" data-pp-close="1" title="End the shared fight">End the fight</button>` : ""}
+      </div>
+      ${waiting.length ? `<div class="hint" style="margin-top:4px">waiting on ${esc(waiting.map(partyNameOf).join(", "))}</div>` : `<div class="hint" style="margin-top:4px">everyone is locked in \u2014 resolving\u2026</div>`}
+      <div class="hint pp-order" title="Everything is declared before anything resolves \u2014 which is why a ward declared last still catches a blow declared first">this round resolves: ${RESOLVE_ORDER.map(f => esc(RESOLVE_ORDER_WORDS[f] || f.toLowerCase())).join(" \u2192 ")}</div>
+      ${stragglerBlock}
+    </div>` : (enc ? `
+    <div class="pp-fight">
+      <div class="hint">You are in a fight of your own.</div>
+      <button class="opt pp-mini" data-pp-open="1" title="Open it to the party \u2014 one opponent, one pool, everyone declaring at once">Fight this together</button>
+    </div>` : "");
+
+  el.innerHTML = `
+    <div class="pp-top">
+      <strong>The party</strong>
+      <span class="hint">${esc(partyNameOf(lead))} leads</span>
+      <button class="pp-fold" data-pp-fold="1" title="${collapsed ? "Open" : "Fold"} the party panel">${collapsed ? "\u25b2" : "\u25bc"}</button>
+    </div>
+    <div class="pp-body" ${collapsed ? "hidden" : ""}>
+      ${roster}
+      ${!iLead && others.length ? `<button class="opt pp-mini" data-pp-take="1" title="Take the lead \u2014 a leader is never assigned by the engine">Take the lead</button>` : ""}
+      <div class="pp-intent-row">
+        <input id="pp-intent" placeholder="What are you reaching for?" value="${esc(mine?.text || "")}" maxlength="120">
+        <button class="opt pp-mini" data-pp-intent="1" title="State it \u2014 it costs nothing, blocks nobody, and you may change your mind">Say it</button>
+      </div>
+      ${fightBlock}
+    </div>`;
+
+  el.querySelector("[data-pp-fold]").onclick = () => { el.dataset.collapsed = collapsed ? "0" : "1"; renderPartyPanel(); };
+  const takeBtn = el.querySelector("[data-pp-take]"); if (takeBtn) takeBtn.onclick = () => partySceneOr(sc => setLeader(sc, me));
+  for (const b of el.querySelectorAll("[data-pp-pass]")) b.onclick = () => partySceneOr(sc => setLeader(sc, b.dataset.ppPass));
+  el.querySelector("[data-pp-intent]").onclick = () => {
+    const text = (document.getElementById("pp-intent")?.value || "").trim();
+    if (text) partySceneOr(sc => stateIntent(sc, me, text));
+  };
+  const joinBtn = el.querySelector("[data-pp-join]"); if (joinBtn) joinBtn.onclick = () => partySceneOr(sc => joinFight(sc, me));
+  const leaveBtn = el.querySelector("[data-pp-leave]"); if (leaveBtn) leaveBtn.onclick = () => partySceneOr(sc => leaveFight(sc, me));
+  const closeBtn = el.querySelector("[data-pp-close]"); if (closeBtn) closeBtn.onclick = () => partySceneOr(sc => closeSharedEncounter(sc));
+  const openBtn = el.querySelector("[data-pp-open]"); if (openBtn) openBtn.onclick = () => openSharedFight();
+  for (const b of el.querySelectorAll("[data-pp-call]")) b.onclick = () => callStragglers(b.dataset.ppCall);
+  // ⚑ AND THE PAGE GETS ITS HEIGHT BACK — whatever the panel covers, the page can still scroll to.
+  document.body.style.paddingBottom = window.innerWidth <= 600 ? `${el.getBoundingClientRect().height + 8}px` : "";
+}
+
+/** ⛔ §4a — ONE OPPONENT, ONE POOL. The pool's MAX is the opponent's own health; everything after is the ledger's. */
+function openSharedFight() {
+  const enc = activeEnc();
+  if (!enc) return;
+  const max = Number(enc.state?.opponentMaxHealth) || Number(enc.state?.opponentHealth) || Number(enc.def?.opponent?.health) || 40;
+  const name = enc.def?.opponent?.name || enc.def?.name || "the thing";
+  partySceneOr(sc => joinFight(openSharedEncounter(sc, { defId: character.activeEncounter.defId, name, max }), character.id));
+}
+
+/** ⛔ §5b — THE LEADER'S THREE CHOICES, and none of them picks an action. WAIT holds and is counted; SKIP makes them
+ *  GUARD (still in the fight, still targetable); GM plays them from their own sheet. ⚠️ The last two need a strike row
+ *  from a client, and theirs is not here — so mine writes it, and only for the member the leader named. */
+function callStragglers(choice) {
+  if (!sharedScene || !STRAGGLER_CHOICES.includes(choice)) return;
+  const me = character.id;
+  const ids = unlockedFighters(sharedScene).filter(id => id !== me);
+  partySceneOr(sc => {
+    let next = sc;
+    for (const id of ids) {
+      next = stragglerCall(next, me, id, choice);
+      if (choice === "wait") continue;
+      const at = new Date().toISOString() + "#" + id;   // the key this member's round is filed under
+      const decl = choice === "skip"
+        ? { family: "PROTECT", name: "guards", label: `${partyNameOf(id)} guards \u2014 nobody chose a strike for them` }
+        : { family: "HARM", name: "acts", label: `${partyNameOf(id)} acts from their own sheet` };
+      next = lockDeclaration(next, id, decl, { at });
+      const amount = choice === "skip" ? 0 : foldedStrikeFor(id);
+      next = mergeStrike(next, { by: id, at, amount, name: partyNameOf(id), label: decl.label });
+    }
+    return next;
+  }).then(() => maybeAdvancePartyRound());
+}
+
+/** ⚑ §5b's third option IS R36: an absent player is a FOLDED member, and their sheet is what acts. The presence
+ *  each player wrote at join carries the level this reads — no save is fetched and no prose crosses. */
+function foldedStrikeFor(id) {
+  const m = sharedScene?.party?.find(x => x.characterId === id);
+  const lvl = Number(m?.presence?.level) || 1;
+  return Math.max(1, Math.round(2 + lvl / 4));
+}
+
+/** ⛔ §4b — MY DECLARATION LOCKS, AND I RESOLVE MY OWN MATH. Two clients that both see the round complete write the
+ *  SAME row, because the key is the lock's own `at` — `mergeStrike` recognises it and the pool cannot double-apply. */
+function lockMyDeclaration(decl, amount, label) {
+  const at = new Date().toISOString();
+  return partySceneOr(sc => mergeStrike(lockDeclaration(sc, character.id, { ...decl, label }, { at }), 
+    { by: character.id, at, amount, name: character.name, label }))
+    .then(() => maybeAdvancePartyRound());
+}
+
+/** ⛔ THE ROUND ENDS WHEN EVERYONE HAS SPOKEN — and advancing is idempotent by ROUND NUMBER, so every client may try. */
+function maybeAdvancePartyRound() {
+  if (!sharedScene?.encounter || !allLocked(sharedScene)) return Promise.resolve(null);
+  const n = Number(sharedScene.encounter.round) || 1;
+  const order = resolveOrder(sharedScene);
+  return partySceneOr(sc => ((Number(sc.encounter?.round) || 1) === n && allLocked(sc)) ? advanceRound(sc) : sc)
+    .then(next => {
+      if (!next) return null;
+      // ⚑ §4c — ONE NARRATION FOR THE WHOLE ROUND, in the ruled order, and it is CHEAPER: three players, one call.
+      const pool2 = sharedPool(next);
+      const lines = order.map(l => `${partyNameOf(l.by)}: ${l.label || l.name}`).join("; ");
+      sceneTurns.push({ summary: `Round ${n} — ${lines}` });
+      renderPlay(character.activeScene?.lastTurn || null, {
+        aside: `Round ${n}, all at once — ${lines}.${pool2 ? ` ${next.encounter.name}: ${pool2.remaining} of ${pool2.max} left${pool2.down ? " — it is down" : ""}.` : ""}`,
+      });
+      renderPartyPanel();
+      return next;
+    });
 }
 
 /** Non-destructive toast: another player has acted. Injected directly into the DOM,
@@ -13946,6 +14140,23 @@ function renderSkillBattle(lastRound = null) {
  *  re-render the panel (fog view of what just happened) or end the contest. */
 function sbDeclare(skill, { intensity = "standard", scouting = false, finisher = false, woven = null } = {}) {
   const enc = activeEnc(); if (!enc) return;
+  // ⛔ SPEC_party_mode_phase2 §4b — IN A SHARED FIGHT A DECLARATION LOCKS; NOTHING RESOLVES UNTIL EVERYONE HAS SPOKEN.
+  // ⚠️ "Under turn order, a ward declared after someone is hit is wasted" — so the ward has to be known first, which
+  // is the mechanical reason simultaneity beats pacing here. The menu, the intensity and the stretch are unchanged:
+  // each player picks from their OWN battle screen, exactly as they do alone.
+  if (sharedScene && (sharedScene.encounter?.fighting || []).includes(character.id) && !scouting
+      && unlockedFighters(sharedScene).includes(character.id)) {
+    const fam = (FN_INDEX?.verbToFamily?.[skill.function] || "HARM").toUpperCase();
+    const before = enc.state?.opponentHealth ?? 0;
+    const solo = skillBattleRound(enc.state, enc.def, { function: skill.function, tier: skill.tier || 1, rank: skill.rank ?? skill.tier ?? 1,
+      attribute: skill.attribute || "practical", intensity, name: skill.name, id: skill.id },
+      { character, content: CONTENT, rules: CONTENT.rules, sb: CONTENT.skillBattle.engine, steps: CONTENT.intensity.steps, party: seatParty(), rng: Math.random });
+    const amount = Math.max(0, Math.round(before - (solo.state?.opponentHealth ?? before)));
+    lockMyDeclaration({ family: fam, name: skill.name, abilityId: skill.id },
+      amount, `${skill.name}${intensity !== "standard" ? ` (${intensity})` : ""}`);
+    renderSkillBattle({ opponent: null, _locked: true });
+    return;
+  }
   const beforeMom = enc.state?.momentum ?? 0; // SNG-246: for the per-round receipt (the swing this round)
   const sb = CONTENT.skillBattle.engine, steps = CONTENT.intensity.steps;
   const decl = { function: skill.function, tier: skill.tier || 1, rank: skill.rank ?? skill.tier ?? 1, attribute: skill.attribute || "practical", intensity, name: skill.name, id: skill.id, energyCost: skill.energyCost ?? null };

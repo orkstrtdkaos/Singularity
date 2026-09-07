@@ -129,7 +129,11 @@ let parses = true, why = "";
 try {
   // Strip module syntax so it can be parsed as a plain function body; this catches structural breakage
   // (unbalanced braces, a mangled template literal) without executing any browser-dependent code.
-  new Function(app.replace(/^import .*$/gm, "").replace(/^export /gm, ""));
+  // ⛔ AN IMPORT MAY SPAN LINES, AND THIS STRIPPER ASSUMED IT COULD NOT (2026-09-07). A legal multi-line import left
+  // its continuation lines behind, `new Function` choked on them, and the report read "app.js parses: Unexpected
+  // identifier 'from'" while `node --check app.js` exited 0 — a failing check wearing a real defect's clothes.
+  // ⚠️ Non-greedy to the first `from "…";` so two imports are never swallowed as one.
+  new Function(app.replace(/^import\s[\s\S]*?from\s*["'][^"']+["'];?/gm, "").replace(/^import\s+["'][^"']+["'];?/gm, "").replace(/^export /gm, ""));
 } catch (e) { parses = false; why = e.message; }
 check("353b: app.js parses — a syntax error there renders NOTHING and no engine test would see it", parses, why);
 

@@ -8694,6 +8694,95 @@ console.log("\n── §131 · another player's wife's forge is not your holding
   check("§131: ⛔ NO STEP GRANTS A HOLDING, A BAND OR A FIXED SUM WITHOUT NAMING WHOSE STORY IT IS", leaky.length === 0, leaky.join(", "));
 }
 
+/* ═════ §132 — PARTY PLAY: THE FOURTH DOOR (SPEC_party_mode_phase2, all of it) ═════ */
+// ⛔ MEASURED BEFORE THE BUILD: 26 of party.js's 38 exports had NO CALLER IN app.js. The leader, intents, the
+// straggler call, the shared opponent, the lock, the resolve order and the round were all built and unreachable —
+// authored, registered, loaded, never READ. Brook and Brayden could share a scene and take turns narrating, which is
+// exactly what "the results were not great" describes. Nothing in the engine changed; the door opened.
+console.log("\n── §132 · the fight belongs to everyone, and the leader never picks anyone's action ──");
+{
+  const P = await import("../engine/party.js");
+  const app = rd("app.js");
+  // ⛔ THE DOOR ITSELF: every export the app never called now has a caller. This is the check whose absence let the
+  // whole of phase 2 sit dark, and it is written as a CLASS so the next unread export fails it.
+  const src = rd("engine/party.js");
+  const names = [...src.matchAll(/^export (?:async )?function (\w+)|^export const (\w+)/gm)].map(m => m[1] || m[2]);
+  const imported = new Set(((app.match(/import \{([^}]*)\} from "\.\/engine\/party\.js"/) || [])[1] || "").split(",").map(x => x.trim()));
+  const unread = names.filter(n => !imported.has(n) && !/^(OPEN_INDEX_PATH|scenePath|lastSceneError|sceneIsOpen|closeScene|nextTurn|ledgerSum|compactLedger)$/.test(n));
+  check("§132: ⛔ EVERY PARTY EXPORT THE PLAYER NEEDS IS REACHED FROM THE APP — the fourth door, for all of phase 2",
+    unread.length === 0, unread.length ? `still unread: ${unread.join(", ")}` : `${imported.size} imported of ${names.length}`);
+  for (const [what, re] of [
+    ["a leader, taken and passed", /data-pp-take|data-pp-pass/],
+    ["an intent, stated and restated", /stateIntent\(sc, me, text\)/],
+    ["joining and leaving the shared fight", /joinFight\(sc, me\)[\s\S]{0,400}leaveFight\(sc, me\)/],
+    ["the straggler's three choices", /data-pp-call=\"wait\"[\s\S]{0,600}data-pp-call=\"skip\"[\s\S]{0,600}data-pp-call=\"gm\"/],
+    ["the lock, at the one declaration choke point", /function sbDeclare[\s\S]{0,1600}lockMyDeclaration\(/],
+    ["the round advancing when all have spoken", /allLocked\(sc\)\) \? advanceRound\(sc\)/],
+    ["the pool derived, never stored", /sharedPool\(sharedScene\)/],
+  ]) check(`§132: ⚑ …and the surface exists for ${what}`, re.test(app));
+
+  // ⛔ §2 — THE SEAM IS ABSOLUTE: there is no function that sets another member's declaration, and there must never be.
+  check("§132: ⛔ THE LEADER NEVER CHOOSES SOMEONE ELSE'S ACTION — no engine door does it, and the panel offers none",
+    !/export function (setDeclarationFor|declareFor|chooseFor)/.test(src) && !/data-pp-declare-for/.test(app));
+
+  // ── the flow the app drives, driven here end to end
+  const scene = (() => {
+    let sc = P.newSharedScene("millbrook", { id: "a", name: "Ana", playerKey: "pk" }, "2026-09-07T10:00:00Z");
+    sc = P.addMember(sc, { id: "b", name: "Bo", playerKey: "pk2" });
+    sc = P.addMember(sc, { id: "c", name: "Cade", playerKey: "pk3" });
+    return sc;
+  })();
+  check("§132: ⛔ THE LEADER DEFAULTS TO WHOEVER OPENED IT and is PASSABLE — never assigned by the engine",
+    P.leaderOf(scene) === "a" && P.leaderOf(P.setLeader(scene, "b")) === "b" && P.setLeader(scene, "nobody") === scene);
+  const withWants = P.stateIntent(P.stateIntent(scene, "b", "look behind the shrine"), "c", "gone before dark");
+  check("§132: ⚑ AN INTENT IS NOT A LOCK — it may be restated, and the GM's briefing carries it for whoever leads",
+    P.intentsOf(withWants).length === 2 && P.intentsOf(P.stateIntent(withWants, "b", "changed my mind")).find(i => i.by === "b").text === "changed my mind"
+    && /wants: look behind the shrine/.test(P.partyBlockForGM(withWants, "a") || ""));
+
+  // ── §4: one opponent, one pool, everyone at once
+  let f = P.openSharedEncounter(withWants, { defId: "boar", name: "the boar", max: 30 });
+  f = P.joinFight(P.joinFight(P.joinFight(f, "a"), "b"), "c");
+  check("§132: ⛔ ONE SHARED OPPONENT, AND ITS POOL IS DERIVED FROM THE LEDGER — never a stored counter",
+    P.sharedPool(f).remaining === 30 && P.fightersOf(f).length === 3 && f.encounter.strikes.length === 0);
+  f = P.lockDeclaration(f, "a", { family: "HARM", name: "spear" }, { at: "t1" });
+  check("§132: ⚠️ NOTHING RESOLVES UNTIL EVERYONE HAS SPOKEN — one lock is not a round",
+    !P.allLocked(f) && P.unlockedFighters(f).join(",") === "b,c");
+  f = P.lockDeclaration(f, "b", { family: "RESTORE", name: "mend" }, { at: "t2" });
+  f = P.lockDeclaration(f, "c", { family: "PROTECT", name: "ward" }, { at: "t3" });
+  check("§132: ⛔ …and then it does — and the ward that was declared LAST resolves FIRST (PROTECT → KNOW → HARM → RESTORE)",
+    P.allLocked(f) && P.resolveOrder(f).map(l => l.by).join(",") === "c,a,b", P.resolveOrder(f).map(l => `${l.by}:${l.family}`).join(" "));
+  // ⛔ TWO CLIENTS SEEING THE SAME ROUND WRITE THE SAME ROW — the key is the lock's own `at`, so a doubled resolve is a no-op.
+  const strike = { by: "a", at: "t1", amount: 12, name: "Ana", label: "spear" };
+  const once = P.mergeStrike(f, strike), twice = P.mergeStrike(once, { ...strike });
+  check("§132: ⛔ A LOST RESPONSE CANNOT DOUBLE-APPLY — the same (by, at) merges once, and the pool is a sum, not an assignment",
+    P.sharedPool(once).remaining === 18 && P.sharedPool(twice).remaining === 18 && twice.encounter.strikes.length === 1);
+  const healed = P.mergeStrike(once, { by: "b", at: "t2", amount: -4, name: "Bo", label: "mend" });
+  check("§132: ⚑ …and a heal is a NEGATIVE ROW, not a number anyone writes", P.sharedPool(healed).remaining === 22);
+  const next = P.advanceRound(healed);
+  check("§132: ⛔ A ROUND ENDS, A FIGHT DOES NOT — the locks clear, the ledger stays, and the pool is untouched",
+    Number(next.encounter.round) === 2 && Object.keys(next.encounter.locks).length === 0 && P.sharedPool(next).remaining === 22 && !P.allLocked(next));
+
+  // ── §5b: the leader may move the party without someone, and that is ALL they may do
+  let held = P.stragglerCall(next, "a", "c", "wait");
+  check("§132: ⛔ WAIT HOLDS THE ROUND AND IS COUNTED — 'we waited' must be visible or it is a stall",
+    P.heldRounds(held).c === 1 && P.heldRounds(P.stragglerCall(held, "a", "c", "wait")).c === 2 && /HELD FOR: Cade \(2\u00d7\)/.test(P.partyBlockForGM(P.stragglerCall(held, "a", "c", "wait"), "b") || ""));
+  check("§132: ⛔ …and only the LEADER may call it — a member cannot move the party past someone else",
+    P.stragglerCall(next, "b", "c", "skip") === next);
+  check("§132: ⚑ SKIP MEANS THEY GUARD — the app writes a PROTECT lock and a zero strike, never a strike nobody chose",
+    /family: \"PROTECT\", name: \"guards\"/.test(app) && /choice === \"skip\" \? 0 : foldedStrikeFor\(id\)/.test(app));
+  check("§132: ⚑ …and LET THE GM PLAY THEM is R36 — their own sheet acts, from the presence they wrote at join",
+    /function foldedStrikeFor/.test(app) && /m\?\.presence\?\.level/.test(app));
+
+  // ── the pool the leader is briefed on can never disagree with the ledger
+  check("§132: ⚑ THE GM IS TOLD THE SAME NUMBER THE STRIKES SAY — one derivation, never two",
+    /22 of 30 left/.test(P.partyBlockForGM(healed, "a") || ""), (P.partyBlockForGM(healed, "a") || "").slice(0, 0) || "");
+  check("§132: ⛔ …and on a phone it starts FOLDED and gives the page its height back — a dock over the input is worse than none",
+    /if \(window\.innerWidth <= 600\) el\.dataset\.collapsed = "1";/.test(app) && /document\.body\.style\.paddingBottom = window\.innerWidth <= 600/.test(app)
+    && /el\.remove\(\); document\.body\.style\.paddingBottom = "";/.test(app));
+  check("§132: ⚑ …and the panel is its own node, so a 20-second poll never wipes what someone is typing",
+    /renderPartyPanel\(\);   \/\/ \u26d1 the panel is its own node/.test(app) || /renderPartyPanel\(\);/.test(app) && /document\.body\.appendChild\(el\)/.test(app));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

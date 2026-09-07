@@ -1440,3 +1440,31 @@ img[data-lightbox] { cursor: zoom-in; }
 .codex-details { margin-top: 4px; }
 .codex-details > summary { cursor: pointer; font-size: 11px; text-transform: uppercase; letter-spacing: .6px; }
 .codex-details[open] > summary { margin-bottom: 4px; }
+
+/* ═══ THE PARTY PANEL (SPEC_party_mode_phase2) — a dock, not a screen: it must never take the play area, and a poll
+   repaints it without touching what anyone is typing. Bottom sheet on a phone, corner dock above that. ═══ */
+.party-panel { position: fixed; right: 12px; bottom: 12px; width: 300px; max-width: calc(100vw - 24px); z-index: 60;
+  background: var(--panel); border: 1px solid var(--border); border-radius: 10px; font-family: var(--font-ui); font-size: 12px;
+  box-shadow: 0 6px 24px rgba(0,0,0,.35); max-height: 62vh; overflow-y: auto; }
+.party-panel .pp-top { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--panel); border-radius: 10px 10px 0 0; }
+.party-panel .pp-top strong { color: var(--accent); font-weight: normal; letter-spacing: .5px; }
+.party-panel .pp-fold { margin-left: auto; background: none; border: none; color: var(--ink-dim); cursor: pointer; font-size: 11px; padding: 2px 4px; }
+.party-panel .pp-body { padding: 8px 10px 10px; display: flex; flex-direction: column; gap: 8px; }
+.party-panel .pp-member { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+.party-panel .pp-me .pp-name { color: var(--ink); }
+.party-panel .pp-name { color: var(--ink-dim); }
+.party-panel .pp-crown { color: var(--accent); }
+.party-panel .pp-intent { width: 100%; color: var(--ink-dim); font-style: italic; }
+.party-panel .pp-tag { font-size: 10px; text-transform: uppercase; letter-spacing: .5px; padding: 1px 6px; border-radius: 999px; border: 1px solid var(--border); }
+.party-panel .pp-locked { color: var(--accent2, #5aa8a0); border-color: currentColor; }
+.party-panel .pp-waiting { color: var(--warn, #e0b25a); border-color: currentColor; }
+.party-panel .pp-intent-row { display: flex; gap: 6px; }
+.party-panel .pp-intent-row input { flex: 1 1 auto; min-width: 0; font-size: 12px; padding: 5px 7px; }
+.party-panel .pp-mini { font-size: 11px; padding: 4px 8px; }
+.party-panel .pp-fight { border-top: 1px solid var(--border); padding-top: 8px; }
+.party-panel .pp-head { color: var(--ink); margin-bottom: 4px; }
+.party-panel .pp-bar { height: 6px; background: var(--panel2); border-radius: 999px; overflow: hidden; margin: 4px 0; }
+.party-panel .pp-bar-fill { height: 100%; background: var(--accent); transition: width .3s ease; }
+.party-panel .pp-straggler { margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--border); }
+@media (max-width: 600px) { .party-panel { right: 0; left: 0; bottom: 0; width: auto; max-width: none; border-radius: 10px 10px 0 0; max-height: 50vh; } }
+@media (prefers-reduced-motion: reduce) { .party-panel .pp-bar-fill { transition: none; } }

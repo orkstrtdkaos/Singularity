@@ -8,7 +8,7 @@
   "whyHere": "You were sent, or you were seeded, or you simply wanted to see something finish inside a single lifetime.",
   "background": "warden",
   "level": 2,
-  "xp": 145,
+  "xp": 150,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -43,13 +43,14 @@
   ],
   "alignment": {
     "death_life": 0.37824598259059133,
-    "destruction_creation": 0.027135000000000003
+    "destruction_creation": 0.027135000000000003,
+    "spectrumId": -0.05
   },
   "attunement": 2,
   "maxHealth": 43,
   "health": 43,
   "maxEnergy": 113,
-  "energy": 90,
+  "energy": 85,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -118,97 +119,101 @@
         "player": "Close the last thirty paces in silence and step into view — let them notice you themselves",
         "summary": "Aelyn closes the gap and is noticed — the traveler is Deni Cors, a registered pack-runner on the south circuit, headed northeast.",
         "narration": "You close the last thirty paces in careful steps, keeping to the road's soft margin where the mud swallows sound. Branch trails two paces behind you, its roots finding quiet purchase between the root-ridges. The traveler walks on, pack shifting with each step, unaware — and then a root-ridge catches their boot and they stumble, catching themselves on a low branch, and in the turn their balance makes they see you.\n\nThey go still. Not startled — still, the way a person goes still when they decide to, one hand on the branch and their weight balanced and ready. A woman in her late thirties or early forties, with a round, weathered face and short dark hair tucked behind her ears. She wears a registered pack-runner's sash beneath her open coat — faded blue, the hub's mark in the corner. Her eyes move from you to Branch and back.\n\n'Didn't hear you,' she says. Matter-of-fact, not accusing. She straightens and lets go of the branch. 'South circuit.' She names herself by her route, the way runners do. 'Deni Cors. You're heading the same road — northeast.' It is not quite a question."
+      },
+      {
+        "player": "Say: Aelyn. Are you alright? That was quite the tumble.",
+        "summary": "Deni Cors checks on Aelyn after the stumble on the root-ridge — both headed northeast, the kept road running on ahead of them.",
+        "narration": "Deni Cors drops her hand from the branch and takes two easy steps toward you, her pack shifting with the movement. \"Aelyn.\" She says it like she's fixing it in place — a runner's habit, names as landmarks. \"Are you alright? That was quite the tumble.\"\n\nYou'd caught yourself cleanly — knees bent, one hand down on the root-ridge, no real damage — but the fall had been ungainly enough that you're still brushing mud from your palm. The root-ridge is wide and old, its bark worn smooth by years of boots, and it crosses the road at an angle that catches anyone who isn't watching it. You aren't hurt. Your pack shifted on the way down and the thread at your sternum gave one sharp tug before settling, as if the jolt had reminded it of itself.\n\nBranch has come up beside you, bud-cluster turned toward your hand and then toward Deni Cors in a slow back-and-forth. It does not say anything. It is watching her the way it watches things that are new — careful, unhurried, making up its mind.\n\nDeni Cors waits with the particular patience of someone used to reading roads and people both. She's already clocked the pack on your back, already looked once at Branch and chosen not to comment on it. Her own pack is full and well-strapped, the hub-runner's sash visible beneath her open coat. Northeast, she said. Same road as you."
+      },
+      {
+        "player": "Dust off and ask if she knows the road ahead — whether she's seen anything unusual on her last circuit",
+        "summary": "Deni gives Aelyn good road-knowledge — kept way ahead, firmer past the hollow crossing — and names the older boot-tracks ahead of both of them, moving northeast at purpose.",
+        "narration": "You brush the last of the mud from your palm and straighten, pack resettled, the thread at your sternum quiet again — back to its steady pull northeast. Deni stands two paces off, weight easy, reading you the way a runner reads a road: practical, without judgment.\n\n\"The road's kept well past the margin,\" she says, adjusting her pack strap with one thumb. \"Canopy closes tight another quarter-mile in, then opens again at the hollow crossing. After that it's good ground — firmer, less mud — until you hit the bowl country at the edge of the march.\" She glances at Branch, who has positioned itself just behind your left shoulder and is watching her with its bud-cluster half-open. Whatever conclusion Branch has reached about her, it keeps it. \"Last circuit I ran this way, four days back — nothing unusual. Boot-tracks at the margin, which I assume are yours now.\" A small pause. \"Older ones ahead of yours, though. Adult-sized, moving northeast at a pace like they had somewhere to be. Those weren't mine.\"\n\nShe says it without alarm — just information, dropped into the space between you the way runners leave trail-marks. Whether she knows what it means is harder to read. Her eyes stay on you a moment longer than the words require."
       }
     ],
     "lastTurn": {
-      "narration": "You close the last thirty paces in careful steps, keeping to the road's soft margin where the mud swallows sound. Branch trails two paces behind you, its roots finding quiet purchase between the root-ridges. The traveler walks on, pack shifting with each step, unaware — and then a root-ridge catches their boot and they stumble, catching themselves on a low branch, and in the turn their balance makes they see you.\n\nThey go still. Not startled — still, the way a person goes still when they decide to, one hand on the branch and their weight balanced and ready. A woman in her late thirties or early forties, with a round, weathered face and short dark hair tucked behind her ears. She wears a registered pack-runner's sash beneath her open coat — faded blue, the hub's mark in the corner. Her eyes move from you to Branch and back.\n\n'Didn't hear you,' she says. Matter-of-fact, not accusing. She straightens and lets go of the branch. 'South circuit.' She names herself by her route, the way runners do. 'Deni Cors. You're heading the same road — northeast.' It is not quite a question.",
-      "sceneSummary": "Aelyn closes the gap and is noticed — the traveler is Deni Cors, a registered pack-runner on the south circuit, headed northeast.",
+      "narration": "You brush the last of the mud from your palm and straighten, pack resettled, the thread at your sternum quiet again — back to its steady pull northeast. Deni stands two paces off, weight easy, reading you the way a runner reads a road: practical, without judgment.\n\n\"The road's kept well past the margin,\" she says, adjusting her pack strap with one thumb. \"Canopy closes tight another quarter-mile in, then opens again at the hollow crossing. After that it's good ground — firmer, less mud — until you hit the bowl country at the edge of the march.\" She glances at Branch, who has positioned itself just behind your left shoulder and is watching her with its bud-cluster half-open. Whatever conclusion Branch has reached about her, it keeps it. \"Last circuit I ran this way, four days back — nothing unusual. Boot-tracks at the margin, which I assume are yours now.\" A small pause. \"Older ones ahead of yours, though. Adult-sized, moving northeast at a pace like they had somewhere to be. Those weren't mine.\"\n\nShe says it without alarm — just information, dropped into the space between you the way runners leave trail-marks. Whether she knows what it means is harder to read. Her eyes stay on you a moment longer than the words require.",
+      "sceneSummary": "Deni gives Aelyn good road-knowledge — kept way ahead, firmer past the hollow crossing — and names the older boot-tracks ahead of both of them, moving northeast at purpose.",
       "choices": [
         {
-          "label": "Name yourself and your direction plainly — let her read what she will from it",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": "easy",
-          "trivial": true,
-          "intentTags": [
-            "negotiate"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "axes": {}
-        },
-        {
-          "label": "Ask what she's carrying northeast — a runner on this road will know what lies ahead",
+          "label": "Ask about the older tracks — how old, exactly, and did she get a look at the person",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": "easy",
           "trivial": false,
           "intentTags": [
-            "negotiate",
-            "scout"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "axes": {}
+            "negotiate"
+          ]
         },
         {
-          "label": "Open Lifesense for a breath — read her vitals now that you are close, before you say anything else",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": "very easy",
+          "label": "Ask what cargo she's running northeast — and who she's running it to",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": "easy",
           "trivial": false,
           "intentTags": [
-            "scout",
-            "careful"
-          ],
+            "negotiate"
+          ]
+        },
+        {
+          "label": "Use Lifesense — let the wood tell you what it knows about who walked this road ahead",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": "normal",
+          "trivial": false,
           "abilityId": "lifesense",
           "energyCost": 3,
-          "axes": {
-            "death_life": 0.6
-          }
+          "intentTags": [
+            "scout",
+            "study"
+          ]
+        },
+        {
+          "label": "Thank her and press on — the thread is enough, and you'd rather close the distance",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": "very easy",
+          "trivial": true,
+          "intentTags": [
+            "travel"
+          ]
         }
       ],
       "scene": {
-        "setting": "The kept road northeast through the Quickwood — canopy filtering light to green-gray, root-ridges crossing at intervals, mud soft and clear at the margins. Early morning, first spring light.",
+        "setting": "The kept road northeast through the Quickwood — canopy filtering early spring light to green-gray, root-ridges crossing at intervals. Aelyn is standing upright again, mud brushed from her palm; Deni Cors stands two easy paces away, pack settled, facing her.",
         "npcsPresent": [
           {
             "name": "Deni Cors",
-            "state": "Standing still on the road, one hand just released from a low branch, facing Aelyn — weight balanced, reading her with calm, professional attention."
+            "state": "Two paces off, weight easy — she has given her road-knowledge and is watching Aelyn for a response, neither hurrying nor waiting too hard."
           },
           {
             "name": "Branch",
-            "state": "Two paces behind Aelyn, bud-cluster turned toward Deni Cors, quiet."
+            "state": "Just behind Aelyn's left shoulder, bud-cluster half-open, watching Deni with quiet attention."
           }
         ],
         "objects": [
-          "Boot-tracks in the road mud — still clear in softer sections, pointing northeast",
-          "Root-ridges crossing the road at intervals",
+          "Wide root-ridge crossing the road at an angle — bark worn smooth, mud-edged",
+          "Boot-tracks in the softer mud, pointing northeast — Aelyn's, and older ones beyond",
           "Traveler's Pack on Aelyn's back",
           "Deni Cors's pack — full, well-strapped, hub-runner configuration"
         ],
         "threads": [
-          "The thread at Aelyn's sternum pulls northeast with steady insistence",
-          "Deni Cors has named herself and her route — and noted Aelyn is on the same road northeast; she's waiting for a return",
-          "Branch noticed something about the eastern tree-line earlier — it has not explained what"
+          "Older boot-tracks ahead of both of them, adult-sized, moving northeast at purpose — not Deni's",
+          "The thread at Aelyn's sternum pulls northeast, steady",
+          "Branch noticed something about the eastern tree-line earlier and has not explained what",
+          "Deni's cargo and her destination are still unknown"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
+          "op": "update",
           "npcId": "deni-cors",
-          "name": "Deni Cors",
-          "role": "Hub-registered pack-runner, south circuit",
-          "sex": "female",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "description": "A weathered woman in her late thirties or early forties, round-faced, short dark hair tucked behind her ears, wearing a faded blue pack-runner's sash beneath her open coat.",
-          "note": "Noticed Aelyn on the road when she stumbled at a root-ridge — took it in stride, named herself by her circuit, observed Aelyn is heading the same way.",
+          "note": "Gave Aelyn road-knowledge unprompted — canopy closes a quarter-mile in, hollow crossing ahead, firmer ground past the bowl country. Named the older boot-tracks ahead of both of them as notable but delivered it without alarm.",
           "learned": [
-            "Hub-registered pack-runner, south circuit",
-            "Heading northeast on the kept road"
+            "The kept road is good past the margin — canopy then hollow crossing then firmer ground into the march",
+            "On her last circuit four days back she saw nothing unusual, but noted older boot-tracks moving northeast at purpose ahead of Aelyn's"
           ],
-          "status": "active",
-          "statusNote": "Standing on the kept road through the Quickwood, thirty paces northeast of the Heartroot margin, facing Aelyn.",
+          "statusNote": "On the kept road northeast, two paces from Aelyn, having shared road-knowledge — waiting to see what Aelyn does with it.",
           "relationshipDelta": 0
         }
       ],
@@ -217,44 +222,45 @@
           "topic": "gen-quickwood-margin",
           "label": "Quickwood Margin",
           "kind": "place",
-          "entityId": "gen-quickwood-margin",
-          "fact": "A hub-registered pack-runner (Deni Cors, south circuit) travels the kept road northeast — it is a regular route, not wilderness.",
+          "fact": "Deni Cors reports the road is kept well past the margin — canopy closes tight a quarter-mile in, then a hollow crossing, then firmer ground into the bowl country at the march's edge. Older boot-tracks ahead of Aelyn's, moving northeast at purpose, were noted by Deni four days prior.",
           "links": [
             "deni-cors",
-            "the-root-that-remembers"
+            "the-root-that-remembers",
+            "aelyn-father"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief moment on the road — closing the gap and first contact"
+        "why": "a brief exchange on the road"
       }
     },
     "sceneState": {
-      "setting": "The kept road northeast through the Quickwood — canopy filtering light to green-gray, root-ridges crossing at intervals, mud soft and clear at the margins. Early morning, first spring light.",
+      "setting": "The kept road northeast through the Quickwood — canopy filtering early spring light to green-gray, root-ridges crossing at intervals. Aelyn is standing upright again, mud brushed from her palm; Deni Cors stands two easy paces away, pack settled, facing her.",
       "npcsPresent": [
         {
           "name": "Deni Cors",
-          "state": "Standing still on the road, one hand just released from a low branch, facing Aelyn — weight balanced, reading her with c"
+          "state": "Two paces off, weight easy — she has given her road-knowledge and is watching Aelyn for a response, neither hurrying nor"
         },
         {
           "name": "Branch",
-          "state": "Two paces behind Aelyn, bud-cluster turned toward Deni Cors, quiet."
+          "state": "Just behind Aelyn's left shoulder, bud-cluster half-open, watching Deni with quiet attention."
         }
       ],
       "objects": [
-        "Boot-tracks in the road mud — still clear in softer sections, pointing northeast",
-        "Root-ridges crossing the road at intervals",
+        "Wide root-ridge crossing the road at an angle — bark worn smooth, mud-edged",
+        "Boot-tracks in the softer mud, pointing northeast — Aelyn's, and older ones beyo",
         "Traveler's Pack on Aelyn's back",
         "Deni Cors's pack — full, well-strapped, hub-runner configuration"
       ],
       "threads": [
-        "The thread at Aelyn's sternum pulls northeast with steady insistence",
-        "Deni Cors has named herself and her route — and noted Aelyn is on the same road northeast; she's waiting for a return",
-        "Branch noticed something about the eastern tree-line earlier — it has not explained what"
+        "Older boot-tracks ahead of both of them, adult-sized, moving northeast at purpose — not Deni's",
+        "The thread at Aelyn's sternum pulls northeast, steady",
+        "Branch noticed something about the eastern tree-line earlier and has not explained what",
+        "Deni's cargo and her destination are still unknown"
       ]
     },
-    "beats": 9
+    "beats": 11
   },
   "clock": {
     "schemaVersion": 1,
@@ -562,18 +568,22 @@
       },
       "relationship": 0,
       "history": [
-        "[d2] Noticed Aelyn on the road when she stumbled at a root-ridge — took it in stride, named herself by her circuit, observed Aelyn is heading the same way."
+        "[d2] Noticed Aelyn on the road when she stumbled at a root-ridge — took it in stride, named herself by her circuit, observed Aelyn is heading the same way.",
+        "[d2] Checked on Aelyn after the stumble — named her by name, steady and practical. Two paces away, still reading her.",
+        "[d2] Gave Aelyn road-knowledge unprompted — canopy closes a quarter-mile in, hollow crossing ahead, firmer ground past the bowl country. Named the older boot-tracks ahead of both of them as notable but delivered it without alarm."
       ],
       "knownFacts": [
         "Hub-registered pack-runner, south circuit",
-        "Heading northeast on the kept road"
+        "Heading northeast on the kept road",
+        "The kept road is good past the margin — canopy then hollow crossing then firmer ground into the march",
+        "On her last circuit four days back she saw nothing unusual, but noted older boot-tracks moving northeast at purpose ahead of Aelyn's"
       ],
       "skillsObserved": [],
       "status": "active",
       "sex": "female",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Standing on the kept road through the Quickwood, thirty paces northeast of the Heartroot margin, facing Aelyn.",
+      "statusNote": "On the kept road northeast, two paces from Aelyn, having shared road-knowledge — waiting to see what Aelyn does with it.",
       "domains": {
         "primary": "rootkin"
       },
@@ -582,7 +592,7 @@
         "locationId": "gen-quickwood-margin",
         "day": 2
       },
-      "met": 1
+      "met": 3
     }
   },
   "placeMemory": {
@@ -883,7 +893,7 @@
         "lastOutcome": "progress"
       }
     },
-    "turnsSinceOffer": 8,
+    "turnsSinceOffer": 10,
     "latentArcs": {
       "heartwood-hollowing": {
         "id": "heartwood-hollowing",
@@ -5162,7 +5172,8 @@
         "facts": [
           "[d2] you have walked here",
           "[d2] The road into the Quickwood is kept and shows recent traffic — someone has passed through in the last day or two. The substrate of the valley felt less even here at dawn on day 2.",
-          "[d2] A hub-registered pack-runner (Deni Cors, south circuit) travels the kept road northeast — it is a regular route, not wilderness."
+          "[d2] A hub-registered pack-runner (Deni Cors, south circuit) travels the kept road northeast — it is a regular route, not wilderness.",
+          "[d2] Deni Cors reports the road is kept well past the margin — canopy closes tight a quarter-mile in, then a hollow crossing, then firmer ground into the bowl country at the march's edge. Older boot-tracks ahead of Aelyn's, moving northeast at purpose, were noted by Deni four days prior."
         ],
         "links": [
           "the-root-that-remembers",
@@ -5355,18 +5366,18 @@
     ]
   },
   "tendencies": {
-    "cerebral": 13.23852408202417,
-    "cautious": 9.854163965948278,
-    "generous": 0.4900948554113099,
-    "social": 3.578966773075369,
-    "strategic": 5.301565261865851,
-    "devotion": 3.831558640487779,
-    "patient": 2.042436744515038
+    "cerebral": 12.584871955474226,
+    "cautious": 9.367614620129581,
+    "generous": 0.4658964219253765,
+    "social": 5.377255288654772,
+    "strategic": 6.039800477061225,
+    "devotion": 3.642375432613695,
+    "patient": 1.9415914302546078
   },
   "aptitudes": [
     "scholar"
   ],
-  "actionCount": 66,
+  "actionCount": 68,
   "grantsVersion": 1,
   "reconcileVersion": 48,
   "gallery": [
@@ -5404,8 +5415,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20mid-twenties%20with%20light%20blonde%2C%20faintly%20wavy%20hair%20cut%20in%20curtain%20bangs%2C%20the%20rest%20falling%20to%20the%20small%20of%20her%20back%20%E2%80%94%20usually%20worn%20in%20a%20french%20braid%20with%20the%20bangs%20left%20loose.%20Dark%20nature-green%20tank%20to%2C%20full-body%20character%20portrait%2C%20named%20Aelyn%20Kantoro%2C%20of%20the%20rootkin%2C%20warden%2C%20carrying%20Traveler's%20Pack%2C%20Her%20mother%20dies%2C%20and%20she%20decides%20to%20go%20to%20the%20nanite%20world%2C%20to%20figure%20out%20why%20she%20is%20different%20than%20the%20pure%20nature%20peop%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=73420&nologo=true",
-  "updatedAt": 1788814328644,
-  "rev": 127,
+  "updatedAt": 1788814564964,
+  "rev": 129,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -5464,7 +5475,7 @@
     "item": {}
   },
   "regionsKnown": {
-    "the_quickwood": 67
+    "the_quickwood": 69
   },
   "opLossPending": false,
   "establishedFacts": [
@@ -5640,10 +5651,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-09-07T20:52:08.629Z",
-      "lastAt": "2026-09-07T20:52:08.629Z",
+      "lastAt": "2026-09-07T20:56:04.954Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 1
+      "beats": 3
     }
   ],
   "livingCurrentAccess": [
@@ -5806,18 +5817,18 @@
   },
   "_intentAsked": null,
   "_opEmitted": {
-    "sceneSummary": 14,
-    "choices": 14,
-    "scene": 14,
+    "sceneSummary": 16,
+    "choices": 16,
+    "scene": 16,
     "questUpdates": 4,
-    "codexUpdates": 7,
-    "timeOps": 14,
+    "codexUpdates": 8,
+    "timeOps": 16,
     "sceneEnded": 3,
     "characterDeltas": 4,
-    "npcUpdates": 10,
+    "npcUpdates": 12,
     "offer": 1
   },
-  "_opTurns": 14,
+  "_opTurns": 16,
   "knownPlaces": [
     "gen-quickwood-margin"
   ],
@@ -5840,8 +5851,10 @@
   "skillUses": {
     "travel": 3,
     "careful": 6,
-    "scout": 3,
-    "study": 2
+    "scout": 4,
+    "study": 2,
+    "comfort": 1,
+    "negotiate": 1
   },
   "itemReclaimVersion": 1,
   "nameRepairVersion": 1,

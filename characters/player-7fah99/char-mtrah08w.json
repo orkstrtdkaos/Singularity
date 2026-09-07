@@ -138,83 +138,100 @@
         "player": "focus my mind, reach for the vision again and speak it to him",
         "summary": "Chernak reaches past the near-fight's residue and carries a fragment of vision to Brynjar — a road running outward, the light wrong on it, two figures, one faceless.",
         "narration": "You close your eyes for a moment — not long, just long enough to let the Common Table's noise drop to background. The near-fight's residue is still in your chest, that particular tightness, but you breathe past it and reach.\n\nThis time something comes.\n\nNot a full vision — not the wide, slow, river-of-images kind that sometimes keeps you rooted in place for a minute and a half while everyone around you pretends not to stare. This is a fragment. A single still image, clear and cold: a road running outward from the Crossing, the light on it wrong — too bright on one side, shadow pooling on the other where shadow has no cause to pool. Two figures walking it. One of them has no face in the image, only a direction. The other is Brynjar, unmistakably, though you have not known him long enough to say how you know it.\n\nYou speak it aloud, low and level, not performing, just reporting: \"A road running outward. Light and shadow both wrong on it, each keeping to its side. You are on the road. Someone walks beside you whose face the vision does not show me. I don't know yet if that is a good thing.\" You pause. \"It arrived this time. Make of it what you will.\""
+      },
+      {
+        "summary": "Brynjar Andyrsson: Brynjar takes a first look at Chernak the Blind — pale sightless eyes, mended robes, a stillness that listens rather than watches; Freki's verdict is neutral."
+      },
+      {
+        "player": "Press Brynjar on the faceless figure — ask what he makes of it, or whether it fits anything the Order-Sense already showed him",
+        "summary": "Chernak presses Brynjar on the faceless figure from the vision, asking whether Order-Sense caught anything that fits.",
+        "narration": "You turn toward Brynjar — not fully, because the broad-shouldered man is still watching and you don't quite trust your back to him yet — and ask plainly: what does he make of the faceless one?\n\nBrynjar is close enough that you can keep your voice low. The Common Table's noise covers it: the scrape of bowls at the far end, the water-crisis argument that hasn't stopped since you walked in, someone coughing behind a bench. You tell him what you saw — the road running outward, the light split wrong, two figures, and the one that had no face where a face should be. You ask if Order-Sense showed him anything that fits: a road with that kind of trouble on it, a person-shaped absence moving toward something.\n\nMayvee has not moved from your left shoulder's shadow. It is not looking at Brynjar. It is looking at the broad-shouldered man, which you register as information."
       }
     ],
     "lastTurn": {
-      "narration": "You close your eyes for a moment — not long, just long enough to let the Common Table's noise drop to background. The near-fight's residue is still in your chest, that particular tightness, but you breathe past it and reach.\n\nThis time something comes.\n\nNot a full vision — not the wide, slow, river-of-images kind that sometimes keeps you rooted in place for a minute and a half while everyone around you pretends not to stare. This is a fragment. A single still image, clear and cold: a road running outward from the Crossing, the light on it wrong — too bright on one side, shadow pooling on the other where shadow has no cause to pool. Two figures walking it. One of them has no face in the image, only a direction. The other is Brynjar, unmistakably, though you have not known him long enough to say how you know it.\n\nYou speak it aloud, low and level, not performing, just reporting: \"A road running outward. Light and shadow both wrong on it, each keeping to its side. You are on the road. Someone walks beside you whose face the vision does not show me. I don't know yet if that is a good thing.\" You pause. \"It arrived this time. Make of it what you will.\"",
-      "sceneSummary": "Chernak reaches past the near-fight's residue and carries a fragment of vision to Brynjar — a road running outward, the light wrong on it, two figures, one faceless.",
+      "narration": "You turn toward Brynjar — not fully, because the broad-shouldered man is still watching and you don't quite trust your back to him yet — and ask plainly: what does he make of the faceless one?\n\nBrynjar is close enough that you can keep your voice low. The Common Table's noise covers it: the scrape of bowls at the far end, the water-crisis argument that hasn't stopped since you walked in, someone coughing behind a bench. You tell him what you saw — the road running outward, the light split wrong, two figures, and the one that had no face where a face should be. You ask if Order-Sense showed him anything that fits: a road with that kind of trouble on it, a person-shaped absence moving toward something.\n\nMayvee has not moved from your left shoulder's shadow. It is not looking at Brynjar. It is looking at the broad-shouldered man, which you register as information.",
+      "sceneSummary": "Chernak presses Brynjar on the faceless figure from the vision, asking whether Order-Sense caught anything that fits.",
       "choices": [
         {
-          "label": "Press Brynjar on the faceless figure — ask what he makes of it, or whether it fits anything the Order-Sense already showed him",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
+          "label": "Wait for Brynjar's answer — stay still and listen to what he makes of it",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": "very easy",
+          "trivial": true,
           "intentTags": [
-            "negotiate",
-            "plan"
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
+          "axes": {},
+          "opposedDifficulty": null,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Turn Pattern-Sense on the road itself — the vision showed a shape; name the family it belongs to",
+          "label": "Use Pattern-Sense on the vision itself — read it as an instance of something, find the family it belongs to",
           "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
+          "subAttribute": "reason",
           "difficulty": "normal",
-          "opposedDifficulty": null,
+          "trivial": false,
           "intentTags": [
             "study"
           ],
           "abilityId": "pattern_sense",
           "energyCost": 3,
-          "trivial": false,
+          "axes": {},
+          "opposedDifficulty": null,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Look at the broad-shouldered man — he has been watching since the near-fight; find out what he actually wants",
+          "label": "Turn and directly face the broad-shouldered man — ask him plainly what he wanted",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {},
           "difficulty": "easy",
-          "opposedDifficulty": null,
+          "trivial": false,
           "intentTags": [
-            "scout",
             "negotiate"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
+          "axes": {},
+          "opposedDifficulty": null,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Step outside the Common Table — get clear of the noise and the watching man, find open ground",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": "very easy",
+          "trivial": true,
+          "intentTags": [
+            "travel",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "axes": {},
+          "opposedDifficulty": null,
           "encounterId": null,
           "emergenceId": null
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "The Common Table, long communal hall 140 m from the Crossing's centre. Midday, early spring. Pale cold light, mud on the floor, close-packed benches, boiled-herb smell.",
+        "setting": "The Common Table, long communal hall 140 m from the Crossing's centre. Midday, early spring. Pale cold light through open ends, mud on the floor, close-packed benches, boiled-herb smell.",
         "npcsPresent": [
           {
             "name": "Broad-shouldered man",
-            "state": "Still watching Chernak from three paces off, hand no longer near the hilt, expression shifted from challenge to something more cautious"
+            "state": "Still watching Chernak from three paces off; Mayvee is now watching him back"
           },
           {
             "name": "Mayvee",
-            "state": "A shape at the edge of vision, somewhere behind Chernak's left shoulder"
+            "state": "Stationed at Chernak's left shoulder, attention fixed on the broad-shouldered man"
+          },
+          {
+            "name": "Brynjar Andyrsson",
+            "state": "Close, low-voiced — Chernak has just put the question to him"
           }
         ],
         "objects": [
@@ -224,43 +241,31 @@
           "Bowls of boiled something at the far end"
         ],
         "threads": [
-          "Broad-shouldered man — reason for the near-fight still unknown; he is still present and watching",
-          "Vision delivered to Brynjar — a road outward, wrong light, two figures, one faceless; meaning unread",
-          "Water-crisis talk from the far end of the room",
-          "Brynjar somewhere in the crowd, last known after logging arrival with the Wardcaller"
+          "Brynjar has not yet answered — what does Order-Sense show about the faceless figure or the road?",
+          "Broad-shouldered man — reason for the near-fight still unknown; Mayvee is watching him",
+          "Vision content: road outward from the Crossing, light split wrong, two figures one faceless — meaning unread",
+          "Water-crisis argument continuing at the far end of the hall"
         ]
       },
-      "npcUpdates": [],
-      "codexUpdates": [
-        {
-          "topic": "the-crossing",
-          "label": "The Crossing",
-          "kind": "place",
-          "entityId": "the-crossing",
-          "fact": "A vision arrived on second reach: a road running outward from the Crossing, light and shadow split wrong, two figures on it — one of them Brynjar, one faceless. The channel blocked on the first attempt and opened on the second.",
-          "links": [
-            "the-heartroot"
-          ]
-        }
-      ],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "sceneEnded": false,
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a quiet moment of focused attention at the table"
+        "why": "a brief low-voiced exchange at the bench"
       }
     },
     "sceneState": {
-      "setting": "The Common Table, long communal hall 140 m from the Crossing's centre. Midday, early spring. Pale cold light, mud on the floor, close-packed benches, boiled-herb smell.",
+      "setting": "The Common Table, long communal hall 140 m from the Crossing's centre. Midday, early spring. Pale cold light through open ends, mud on the floor, close-packed benches, boiled-herb smell.",
       "npcsPresent": [
         {
           "name": "Broad-shouldered man",
-          "state": "Still watching Chernak from three paces off, hand no longer near the hilt, expression shifted from challenge to somethin"
+          "state": "Still watching Chernak from three paces off; Mayvee is now watching him back"
         },
         {
           "name": "Mayvee",
-          "state": "A shape at the edge of vision, somewhere behind Chernak's left shoulder"
+          "state": "Stationed at Chernak's left shoulder, attention fixed on the broad-shouldered man"
+        },
+        {
+          "name": "Brynjar Andyrsson",
+          "state": "Close, low-voiced — Chernak has just put the question to him"
         }
       ],
       "objects": [
@@ -270,13 +275,13 @@
         "Bowls of boiled something at the far end"
       ],
       "threads": [
-        "Broad-shouldered man — reason for the near-fight still unknown; he is still present and watching",
-        "Vision delivered to Brynjar — a road outward, wrong light, two figures, one faceless; meaning unread",
-        "Water-crisis talk from the far end of the room",
-        "Brynjar somewhere in the crowd, last known after logging arrival with the Wardcaller"
+        "Brynjar has not yet answered — what does Order-Sense show about the faceless figure or the road?",
+        "Broad-shouldered man — reason for the near-fight still unknown; Mayvee is watching him",
+        "Vision content: road outward from the Crossing, light split wrong, two figures one faceless — meaning unread",
+        "Water-crisis argument continuing at the far end of the hall"
       ]
     },
-    "beats": 3
+    "beats": 4
   },
   "clock": {
     "schemaVersion": 1,
@@ -381,7 +386,7 @@
     "lastTickWorldDay": 69,
     "lastCanonWorldDay": 69,
     "pressureQueue": [],
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 6,
     "recentOffers": [
       {
         "thing": "The wrongness in the hum — barely below hearing, but present since yesterday evening, a disruption in the Heartroot's living frequency",
@@ -460,18 +465,18 @@
     }
   },
   "tendencies": {
-    "devotion": 12.335339707031249,
-    "cerebral": 21.475601757812502,
-    "strategic": 0.9036878906249999,
-    "cautious": 1.9012499999999999,
-    "social": 1
+    "devotion": 12.026956214355467,
+    "cerebral": 20.93871171386719,
+    "strategic": 1.881095693359375,
+    "cautious": 1.8537187499999999,
+    "social": 1.975
   },
   "aptitudes": [
     "scholar",
     "sage",
     "faithful"
   ],
-  "actionCount": 5,
+  "actionCount": 6,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -594,8 +599,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788789258661,
-  "rev": 26,
+  "updatedAt": 1788789482266,
+  "rev": 27,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -624,7 +629,7 @@
   "teachers": {},
   "regionsKnown": {
     "the_quickwood": 3,
-    "the_center": 3
+    "the_center": 4
   },
   "company": [],
   "foreclosed": [
@@ -640,10 +645,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-09-07T13:42:24.727Z",
-      "lastAt": "2026-09-07T13:54:18.653Z",
+      "lastAt": "2026-09-07T13:58:02.254Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 6
+      "beats": 7
     }
   ],
   "_debtReceipts": [],
@@ -681,20 +686,22 @@
     "retreat": 1,
     "meditate": 1,
     "study": 1,
-    "rapport": 1
+    "rapport": 1,
+    "negotiate": 1,
+    "plan": 1
   },
   "_opEmitted": {
-    "sceneSummary": 5,
-    "choices": 5,
-    "scene": 5,
+    "sceneSummary": 6,
+    "choices": 6,
+    "scene": 6,
     "npcUpdates": 2,
     "codexUpdates": 4,
     "placeUpdates": 2,
-    "timeOps": 3,
+    "timeOps": 4,
     "sceneEnded": 2,
     "characterDeltas": 2
   },
-  "_opTurns": 5,
+  "_opTurns": 6,
   "_pendingIntent": null,
   "knownPlaces": [
     "the_crossing"

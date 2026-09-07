@@ -8,7 +8,7 @@
   "whyHere": "You put down the blade, or you were sent away from it, or you are looking for a line worth holding that isn't theirs.",
   "background": "war_leader",
   "level": 1,
-  "xp": 72,
+  "xp": 80,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -45,7 +45,7 @@
   "maxHealth": 46,
   "health": 46,
   "maxEnergy": 108,
-  "energy": 29,
+  "energy": 17,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -118,174 +118,146 @@
         "player": "Travel to the crossroads via this waygate",
         "summary": "Brynjar, Maret, Ragnar, and Freki stepped through the Marchward's waygate and arrived at The Crossing hub.",
         "narration": "The waygate anchor-stone sits at the north end of the Marchward's neutral ground — a block of dark granite with an iron ring driven through its crown, the ring worn smooth by more hands than anyone here has counted. Freki presses close to your left knee as you approach it, not afraid, just attentive, reading the thing the way she reads a doorway. Maret and Ragnar fall in half a step behind you. The stone hums when your palm finds the ring — not loud, not warm, just present, like a sleeping thing that knows it is being woken.\n\nYou speak the destination plainly, the way Marchward custom demands of anyone using the truce-gate: \"The Crossing.\" The air folds. There is no flash, no wind, only the brief wrongness of being somewhere else before you have walked there — the stone still in your hand, and then not, and then the light is different and the ground underfoot is different and the iron ring is gone.\n\nThe Crossing opens around you. A broad hub-space, high-roofed in old stone, gates in every face of the octagonal hall — some lit, some dark, one churning with that same fold-hum you just stepped through. The floor is worn to a dish at every threshold. Travelers move through without ceremony, heads down or watching the gates with the careful respect of people who know the fold is not obligated to carry them gently. A Wardcaller in grey-green stands at the central column, logging departures on a chalk-board. Freki's nose drops immediately to the stone — a year of crossings pressed into the floor, and she is reading every one."
+      },
+      {
+        "player": "Find the Wardcaller and log your arrival — ask what roads out of the Crossing are open and watched.",
+        "summary": "Brynjar logged the group's arrival with the Wardcaller; learned the Coliseum road is open and traveled, the Hundred Markets road has a customs trouble at the march-line, and that the Wardcaller won't speak to watches or patrols.",
+        "narration": "The Wardcaller is a lean man of middle years, ink-stained fingers, chalk dust on his sleeve, moving along the central column with the practiced efficiency of someone who has logged ten thousand arrivals and intends to log ten thousand more. He clocks Freki first — a flicker of the eyes, a small adjustment of his chalk — then you, then Maret, then Ragnar. Four arrivals. He doesn't ask why you travel together.\n\nYou name yourselves and he marks the board without looking up: Andyrsson, Threnwick, Solmyr, one hound. Marchward origin, this morning. He asks your declaration of purpose in a tone that expects something brief, and you give him what is true and plain: through the Crossing, roads undecided. He nods and makes a second mark, the kind that means no blood business declared.\n\nWhen you ask about roads out, he does answer — but only to the shape of the question, not its depth. The outward spinward road toward the Great Coliseum is open and well-traveled, two parties through this morning. The widdershins road toward the Hundred Markets is open but he notes it without warmth — a customs dispute at the march-line, a flag on the approach. The roads that lead deeper outward — the Axis Gate, the far pole-roads — he logs but does not comment on, because commenting is not his work. He has no knowledge of watches or patrols to share, or if he does, the Crossing's neutrality makes sharing it a thing he has decided not to do. He is not cold about it. He simply closes the exchange when the work of it is done, and returns to the column."
+      },
+      {
+        "player": "Use Order-Sense on the hall itself — read the Crossing's traffic pattern, who is moving where, what the flow of arrivals says about conditions on each road out.",
+        "summary": "Brynjar read the Crossing's traffic pattern through Order-Sense — Coliseum road busy and clear, Hundred Markets throttled by customs trouble, outward gates quiet with the caution of unprepared travelers; Freki keeps attending to something widdershins.",
+        "narration": "You let the hall settle into your awareness the way Marchward drill taught you to read a battlefield — not person by person, but as a system. Three energy bleeds out of you quietly, the lattice here thin enough that the effort has a faint drag to it, like pressing a hand through cold water.\n\nWhat comes back is clear. The spinward threshold — the Coliseum road — takes the heaviest traffic: traders, two parties of what look like arena spectators, a courier moving fast with a sealed satchel at her hip. People who know exactly where they're going and expect to arrive. The widdershins threshold, toward the Hundred Markets, is almost still. One man has been standing near it for the better part of an hour without going through — watching it, or watching what comes out of it. The gate itself shows a faint mis-cadence in the fold-hum, the kind that happens when customs pressure at the march-line is real enough to affect transit volume. The Wardcaller wasn't embellishing.\n\nThe outward gates — the ones that lead toward raw-pole country rather than the hub circuit — are quiet in a different way. People approach them, read something in the air, and turn back. That is not fear of a beast or a closed road. That is the ordinary arithmetic of someone who looked at what was ahead of them and decided the preparation wasn't done yet. The two gates in that arc have been used today, but by no one who arrived in the last two hours.\n\nFreki's ears tick widdershins again — the same direction she's been reading since you arrived. Whatever she has, it isn't in the gate-traffic. It's closer."
       }
     ],
     "lastTurn": {
-      "narration": "The waygate anchor-stone sits at the north end of the Marchward's neutral ground — a block of dark granite with an iron ring driven through its crown, the ring worn smooth by more hands than anyone here has counted. Freki presses close to your left knee as you approach it, not afraid, just attentive, reading the thing the way she reads a doorway. Maret and Ragnar fall in half a step behind you. The stone hums when your palm finds the ring — not loud, not warm, just present, like a sleeping thing that knows it is being woken.\n\nYou speak the destination plainly, the way Marchward custom demands of anyone using the truce-gate: \"The Crossing.\" The air folds. There is no flash, no wind, only the brief wrongness of being somewhere else before you have walked there — the stone still in your hand, and then not, and then the light is different and the ground underfoot is different and the iron ring is gone.\n\nThe Crossing opens around you. A broad hub-space, high-roofed in old stone, gates in every face of the octagonal hall — some lit, some dark, one churning with that same fold-hum you just stepped through. The floor is worn to a dish at every threshold. Travelers move through without ceremony, heads down or watching the gates with the careful respect of people who know the fold is not obligated to carry them gently. A Wardcaller in grey-green stands at the central column, logging departures on a chalk-board. Freki's nose drops immediately to the stone — a year of crossings pressed into the floor, and she is reading every one.",
-      "sceneSummary": "Brynjar, Maret, Ragnar, and Freki stepped through the Marchward's waygate and arrived at The Crossing hub.",
+      "narration": "You let the hall settle into your awareness the way Marchward drill taught you to read a battlefield — not person by person, but as a system. Three energy bleeds out of you quietly, the lattice here thin enough that the effort has a faint drag to it, like pressing a hand through cold water.\n\nWhat comes back is clear. The spinward threshold — the Coliseum road — takes the heaviest traffic: traders, two parties of what look like arena spectators, a courier moving fast with a sealed satchel at her hip. People who know exactly where they're going and expect to arrive. The widdershins threshold, toward the Hundred Markets, is almost still. One man has been standing near it for the better part of an hour without going through — watching it, or watching what comes out of it. The gate itself shows a faint mis-cadence in the fold-hum, the kind that happens when customs pressure at the march-line is real enough to affect transit volume. The Wardcaller wasn't embellishing.\n\nThe outward gates — the ones that lead toward raw-pole country rather than the hub circuit — are quiet in a different way. People approach them, read something in the air, and turn back. That is not fear of a beast or a closed road. That is the ordinary arithmetic of someone who looked at what was ahead of them and decided the preparation wasn't done yet. The two gates in that arc have been used today, but by no one who arrived in the last two hours.\n\nFreki's ears tick widdershins again — the same direction she's been reading since you arrived. Whatever she has, it isn't in the gate-traffic. It's closer.",
+      "sceneSummary": "Brynjar read the Crossing's traffic pattern through Order-Sense — Coliseum road busy and clear, Hundred Markets throttled by customs trouble, outward gates quiet with the caution of unprepared travelers; Freki keeps attending to something widdershins.",
       "choices": [
         {
-          "label": "Find the Wardcaller and log your arrival — ask what roads out of the Crossing are open and watched.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": "easy",
-          "intentTags": [
-            "negotiate",
-            "careful"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Let Freki work the floor and watch which gates she lingers at — see if she reads anything off the travelers coming through.",
+          "label": "Go to Freki and read what she's tracking — crouch to her level, follow her attention toward the widdershins gate.",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": "easy",
           "intentTags": [
-            "scout",
-            "careful"
+            "scout"
           ],
+          "abilityId": null,
           "trivial": false
         },
         {
-          "label": "Pull Maret aside to a quiet wall and let her say what she learned in the Stillhold record-hall — she has held it long enough.",
+          "label": "Cross to the widdershins gate and look at what's there — the man standing without going through, and whatever Freki keeps reading.",
+          "attribute": "mental",
+          "subAttribute": "wits",
+          "difficulty": "normal",
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "abilityId": "read_the_fight",
+          "energyCost": 3,
+          "trivial": false
+        },
+        {
+          "label": "Bring Maret and Ragnar in close — share what you read, ask them what they want to do next before anything moves.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": "very easy",
           "intentTags": [
-            "negotiate",
-            "careful"
+            "plan"
           ],
+          "abilityId": null,
           "trivial": true
-        },
-        {
-          "label": "Read the hall — the gates, the traffic, the chalk-board — and get a sense of who else passed through recently.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": "easy",
-          "intentTags": [
-            "study",
-            "scout"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 3,
-          "trivial": false
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -3,
+        "xp": 0
+      },
       "scene": {
-        "setting": "The Crossing hub — a high-roofed octagonal hall of old stone, gates in every wall, floor worn to dishes at every threshold. Mid-afternoon light filters through clerestory slots in the vault. Travelers cross without ceremony.",
+        "setting": "The Crossing hub — high-roofed octagonal hall of old stone, eight gate-thresholds set into the walls, mid-afternoon light through clerestory slots. The spinward threshold hums with fold-activity and steady traffic. The widdershins threshold is nearly still, one man standing near it and watching without transiting.",
         "npcsPresent": [
           {
-            "name": "Wardcaller (unnamed)",
-            "state": "Standing at the central column, logging arrivals and departures on a chalk-board."
+            "name": "Wardcaller",
+            "state": "Back at the chalk board on the central column, logging arrivals."
           },
           {
             "name": "Maret Threnwick",
-            "state": "Just through the gate, settling her grey cloak, watching the hall with quiet attention."
+            "state": "Near the spinward wall, cloak settled, watching the hall — still holding what she knows."
           },
           {
             "name": "Ragnar Solmyr",
-            "state": "Two steps behind Brynjar, eyes already on the exits, shoulders loose."
+            "state": "A few paces off, back to pillar, running exits and arriving faces."
           },
           {
             "name": "Freki",
-            "state": "Nose to the stone floor, reading the scent-record of every traveler who passed through."
+            "state": "Ears and nose fixed on the widdershins gate — steady, patient, not alarmed but certain."
           }
         ],
         "objects": [
-          "Central stone column with chalk arrival/departure board",
-          "Eight gate-thresholds — some lit with the fold-hum, some dark",
+          "Central stone column with chalk arrival/departure board — Andyrsson, Threnwick, Solmyr logged",
+          "Eight gate-thresholds — spinward Coliseum road active with fold-hum and foot traffic",
+          "Widdershins threshold — nearly still, customs-throttled, one man standing and watching without transiting",
           "Iron rings set into each gate-stone",
           "Worn dish-depressions at every threshold"
         ],
         "threads": [
-          "Maret is holding what she learned in the Stillhold record-hall — she has not spoken it yet",
-          "The Crossing's traffic is visible and unread",
-          "The road onward is unclear — no destination named beyond this hub"
+          "Maret is still holding what she learned in the Stillhold record-hall — not yet spoken",
+          "Freki is fixed on something from the direction of the widdershins gate — not the traffic, something closer",
+          "A man stands near the widdershins threshold watching it without going through — reason unknown"
         ]
       },
-      "moveTo": {
-        "location": "the_crossing",
-        "why": "stepped through the Marchward waygate, arriving at The Crossing hub"
-      },
-      "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "waygate transit — a brief fold, not a march"
-      },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "maret-threnwick",
-          "note": "Passed through the Marchward waygate with Brynjar and arrived at The Crossing. Still holding what she learned in the record-hall.",
-          "statusNote": "At The Crossing hub with Brynjar's group; carrying information from the Stillhold record-hall not yet spoken aloud."
-        },
-        {
-          "op": "update",
-          "npcId": "ragnar-solmyr",
-          "note": "Passed through the waygate with Brynjar, now reading the hall's exits on arrival.",
-          "statusNote": "At The Crossing hub with Brynjar's group; scanning exits."
-        }
-      ],
       "codexUpdates": [
         {
           "topic": "the-crossing",
           "label": "The Crossing",
           "kind": "place",
-          "fact": "An octagonal hub-hall of old stone with eight waygate thresholds — some active, some dark. Floor worn to dishes at every gate. A Wardcaller in grey-green logs arrivals and departures at the central column. Reached from the Marchward by waygate fold in under an hour.",
+          "fact": "Traffic reads cleanly by gate: the Coliseum road (spinward) is busy and straightforward — traders, spectators, a fast courier. The Hundred Markets gate (widdershins) is throttled by real customs pressure at the march-line; one man has stood near it watching for an hour without transiting. The outward gates have light use, but arrivals approach and turn back — not from a closed road, but from unprepared judgment.",
           "links": [
-            "the-marchward",
             "brynjar-andyrsson-thread"
           ]
         }
       ],
-      "placeUpdates": [
-        {
-          "note": "Brynjar arrived at The Crossing via the Marchward waygate, Day 1 afternoon, with Maret Threnwick, Ragnar Solmyr, and Freki.",
-          "subPlace": {
-            "name": "The Crossing Hub Hall",
-            "parent": "the_crossing",
-            "note": "Octagonal stone hall, eight waygate thresholds, central chalk-board column. The Wardcaller's station.",
-            "visited": true
-          }
-        }
-      ],
-      "offer": {
-        "thing": "Maret's eyes have tracked to one of the dark gates — not the lit ones, the one in the north face that hasn't hummed in what looks like months. She hasn't said anything about it yet.",
-        "from": "Maret's learned stillness under pressure and her habit of noting things she doesn't immediately name — something in this hall caught her attention the way the record-hall did"
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A brief scan of the hall's traffic pattern — a few minutes of focused attention."
       }
     },
     "sceneState": {
-      "setting": "The Crossing hub — a high-roofed octagonal hall of old stone, gates in every wall, floor worn to dishes at every threshold. Mid-afternoon light filters through clerestory slots in the vault. Travelers cross without ceremony.",
+      "setting": "The Crossing hub — high-roofed octagonal hall of old stone, eight gate-thresholds set into the walls, mid-afternoon light through clerestory slots. The spinward threshold hums with fold-activity and steady traffic. The widdershins threshold is nearly still, one man standing near it and watching without transiting.",
       "npcsPresent": [
         {
-          "name": "Wardcaller (unnamed)",
-          "state": "Standing at the central column, logging arrivals and departures on a chalk-board."
+          "name": "Wardcaller",
+          "state": "Back at the chalk board on the central column, logging arrivals."
         },
         {
           "name": "Maret Threnwick",
-          "state": "Just through the gate, settling her grey cloak, watching the hall with quiet attention."
+          "state": "Near the spinward wall, cloak settled, watching the hall — still holding what she knows."
         },
         {
           "name": "Ragnar Solmyr",
-          "state": "Two steps behind Brynjar, eyes already on the exits, shoulders loose."
+          "state": "A few paces off, back to pillar, running exits and arriving faces."
         },
         {
           "name": "Freki",
-          "state": "Nose to the stone floor, reading the scent-record of every traveler who passed through."
+          "state": "Ears and nose fixed on the widdershins gate — steady, patient, not alarmed but certain."
         }
       ],
       "objects": [
-        "Central stone column with chalk arrival/departure board",
-        "Eight gate-thresholds — some lit with the fold-hum, some dark",
+        "Central stone column with chalk arrival/departure board — Andyrsson, Threnwick, ",
+        "Eight gate-thresholds — spinward Coliseum road active with fold-hum and foot tra",
+        "Widdershins threshold — nearly still, customs-throttled, one man standing and wa",
         "Iron rings set into each gate-stone",
         "Worn dish-depressions at every threshold"
       ],
       "threads": [
-        "Maret is holding what she learned in the Stillhold record-hall — she has not spoken it yet",
-        "The Crossing's traffic is visible and unread",
-        "The road onward is unclear — no destination named beyond this hub"
+        "Maret is still holding what she learned in the Stillhold record-hall — not yet spoken",
+        "Freki is fixed on something from the direction of the widdershins gate — not the traffic, something closer",
+        "A man stands near the widdershins threshold watching it without going through — reason unknown"
       ]
     },
-    "beats": 1
+    "beats": 3
   },
   "clock": {
     "schemaVersion": 1,
@@ -489,7 +461,6 @@
       },
       "relationship": 2,
       "history": [
-        "[d1] Held his quiet through Maret's refusal — no comment, no move.",
         "[d1] Held position at Brynjar's shoulder through the exchange and Maret's departure — present, watchful, no comment.",
         "[d1] Gave Brynjar a Marcher read on route-knowledge: not watching, but planning — someone inside the thing, or close enough that the difference doesn't matter. Eyes still south toward the Stillhold.",
         "[d1] Waited in easy quiet through the hour — patient, unhurried, a brief exchange about the mud and the weather, then silence. Watching now as Maret comes back through the gate.",
@@ -498,7 +469,8 @@
         "[d1] Named the nearest way gate: back through the Marchward, north up the waystone track from the Wardhouse — the broken stone with the iron ring. Asked what is waiting on the other side.",
         "[d1] Recognized Kjotve Olafsson's name and reputation. Called out the back-strike as dishonorable by Marcher standards. Warned Brynjar that Kjotve doesn't travel alone. Offered, implicitly, that this is a job needing a second.",
         "[d1] Fell into step on Brynjar's left without being asked — old road habit; watching the tree-line at camp",
-        "[d1] Passed through the waygate with Brynjar, now reading the hall's exits on arrival."
+        "[d1] Passed through the waygate with Brynjar, now reading the hall's exits on arrival.",
+        "[d1] Took a position with his back to a pillar — watching exits and arriving faces. Said nothing during the log-in. Did his work."
       ],
       "knownFacts": [
         "The Marchers call whatever they carry a 'binding' — a cord, a knot, a mark; not a weapon",
@@ -511,29 +483,29 @@
         "Kjotve doesn't travel alone"
       ],
       "skillsObserved": [
-        "ground-reading",
-        "gait analysis",
         "print-reading",
         "tactical assessment",
         "tactical ground-reading",
-        "intelligence analysis"
+        "intelligence analysis",
+        "exit-mapping",
+        "crowd-reading"
       ],
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "At The Crossing hub with Brynjar's group; scanning exits.",
+      "statusNote": "At the Crossing hub, covering the room.",
       "domains": {
         "primary": "marcher"
       },
       "domainsSource": "derived",
       "lastSeen": {
-        "locationId": "the_marchward",
+        "locationId": "the_crossing",
         "day": 1
       },
       "aliases": [
         "Redline Warrior"
       ],
-      "met": 11
+      "met": 12
     },
     "sera": {
       "id": "sera",
@@ -899,7 +871,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "Doss watching Brynjar with the stillness of someone deciding something — she has not offered it yet, but she is on the edge of it",
@@ -3620,11 +3592,15 @@
         "label": "The Crossing",
         "kind": "place",
         "facts": [
-          "[d1] An octagonal hub-hall of old stone with eight waygate thresholds — some active, some dark. Floor worn to dishes at every gate. A Wardcaller in grey-green logs arrivals and departures at the central column. Reached from the Marchward by waygate fold in under an hour."
+          "[d1] An octagonal hub-hall of old stone with eight waygate thresholds — some active, some dark. Floor worn to dishes at every gate. A Wardcaller in grey-green logs arrivals and departures at the central column. Reached from the Marchward by waygate fold in under an hour.",
+          "[d1] The Wardcaller logs all arrivals — name, origin, declaration of purpose. Outward spinward road to the Coliseum is open and busy. Widdershins road toward the Hundred Markets is open but carries a customs dispute flag at the march-line. The Wardcaller will not speak to watches or patrols…",
+          "[d1] Traffic reads cleanly by gate: the Coliseum road (spinward) is busy and straightforward — traders, spectators, a fast courier. The Hundred Markets gate (widdershins) is throttled by real customs pressure at the march-line; one man has stood near it watching for an hour without transiting. The…"
         ],
         "links": [
           "the-marchward",
-          "brynjar-andyrsson-thread"
+          "brynjar-andyrsson-thread",
+          "ragnar-solmyr",
+          "maret-threnwick"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -3738,19 +3714,19 @@
     ]
   },
   "tendencies": {
-    "leadership": 6.577848968790053,
-    "cerebral": 5.643105668784126,
-    "strategic": 3.979472420903969,
-    "ruthless": 0.42282137456861496,
-    "social": 9.166490321771777,
-    "cautious": 7.917153201497729,
-    "generous": 0.7962355085707052,
-    "patient": 0.8590683010253904
+    "leadership": 6.253067675956045,
+    "cerebral": 6.36447732638791,
+    "strategic": 4.782985970121835,
+    "ruthless": 0.40194456919928956,
+    "social": 9.688894862134296,
+    "cautious": 8.501243762173777,
+    "generous": 0.7569213803350267,
+    "patient": 0.8166518036622618
   },
   "aptitudes": [
     "banner"
   ],
-  "actionCount": 36,
+  "actionCount": 38,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -3918,8 +3894,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788788913350,
-  "rev": 99,
+  "updatedAt": 1788789139243,
+  "rev": 102,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4185,12 +4161,13 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 39
+    "riven_marches": 39,
+    "the_center": 2
   },
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "order_sense": 2,
+      "order_sense": 3,
       "read_the_fight": 5
     },
     "coActivations": {},
@@ -4207,7 +4184,7 @@
       }
     ],
     "lastUsed": {
-      "order_sense": 23,
+      "order_sense": 69,
       "read_the_fight": 69
     }
   },
@@ -4265,10 +4242,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-09-07T13:23:54.773Z",
-      "lastAt": "2026-09-07T13:48:33.341Z",
+      "lastAt": "2026-09-07T13:52:19.238Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 11
+      "beats": 13
     }
   ],
   "_pendingArrival": null,
@@ -4284,17 +4261,17 @@
     "at": "2026-07-23T01:18:04.353Z"
   },
   "_opEmitted": {
-    "sceneSummary": 32,
-    "choices": 32,
-    "scene": 32,
-    "npcUpdates": 30,
+    "sceneSummary": 34,
+    "choices": 34,
+    "scene": 34,
+    "npcUpdates": 31,
     "placeUpdates": 6,
     "generateRequest": 3,
     "moveTo": 5,
-    "timeOps": 30,
-    "codexUpdates": 28,
+    "timeOps": 32,
+    "codexUpdates": 30,
     "sceneEnded": 9,
-    "characterDeltas": 10,
+    "characterDeltas": 11,
     "offer": 5,
     "deeds": 1,
     "standingOps": 1,
@@ -4302,7 +4279,7 @@
     "stageOps": 2,
     "factUpdates": 1
   },
-  "_opTurns": 32,
+  "_opTurns": 34,
   "_opLedger": {
     "offer": {
       "applied": 5,
@@ -4397,20 +4374,22 @@
   "_applyFailures": null,
   "_debtReceipts": [],
   "skillUses": {
-    "negotiate": 5,
-    "careful": 3,
+    "negotiate": 6,
+    "careful": 4,
     "help": 1,
     "plan": 1,
     "guard": 1,
     "sustain": 1,
-    "study": 1,
+    "study": 2,
     "travel": 3,
     "ask": 1,
-    "lead": 1
+    "lead": 1,
+    "scout": 1
   },
   "aptitudeEarnCount": {
     "banner": 1
   },
   "_intentAsked": null,
-  "_pendingIntent": null
+  "_pendingIntent": null,
+  "sharedSceneId": "the_crossing--2026-09-07T13-49-02-525Z"
 }

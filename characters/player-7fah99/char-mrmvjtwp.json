@@ -8,7 +8,7 @@
   "whyHere": "You were sent, or you were seeded, or you simply wanted to see something finish inside a single lifetime.",
   "background": "warden",
   "level": 2,
-  "xp": 150,
+  "xp": 160,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -50,7 +50,7 @@
   "maxHealth": 43,
   "health": 43,
   "maxEnergy": 113,
-  "energy": 85,
+  "energy": 82,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -129,66 +129,96 @@
         "player": "Dust off and ask if she knows the road ahead — whether she's seen anything unusual on her last circuit",
         "summary": "Deni gives Aelyn good road-knowledge — kept way ahead, firmer past the hollow crossing — and names the older boot-tracks ahead of both of them, moving northeast at purpose.",
         "narration": "You brush the last of the mud from your palm and straighten, pack resettled, the thread at your sternum quiet again — back to its steady pull northeast. Deni stands two paces off, weight easy, reading you the way a runner reads a road: practical, without judgment.\n\n\"The road's kept well past the margin,\" she says, adjusting her pack strap with one thumb. \"Canopy closes tight another quarter-mile in, then opens again at the hollow crossing. After that it's good ground — firmer, less mud — until you hit the bowl country at the edge of the march.\" She glances at Branch, who has positioned itself just behind your left shoulder and is watching her with its bud-cluster half-open. Whatever conclusion Branch has reached about her, it keeps it. \"Last circuit I ran this way, four days back — nothing unusual. Boot-tracks at the margin, which I assume are yours now.\" A small pause. \"Older ones ahead of yours, though. Adult-sized, moving northeast at a pace like they had somewhere to be. Those weren't mine.\"\n\nShe says it without alarm — just information, dropped into the space between you the way runners leave trail-marks. Whether she knows what it means is harder to read. Her eyes stay on you a moment longer than the words require."
+      },
+      {
+        "player": "Aelyn silently tries to see what branch feels",
+        "summary": "Aelyn tries to read Branch's emotional state through Lifesense — the craft slips, plant-life resisting that kind of grip — but Branch notices the attempt and leans in.",
+        "narration": "You let your attention slip sideways — not outward the way Lifesense usually runs, reaching for heartbeats and breath-heat and the warm signatures of living bodies, but inward and down, through the palm you've pressed flat against Branch's shoulder. Trying to read it the way you'd read a person. Feeling for something like feeling.\n\nThe craft doesn't answer cleanly. Lifesense finds *life* — vigor and location and the hum of a body doing its work — and Branch is alive, deeply and genuinely so. But what comes back isn't emotion. It's more like... proximity to emotion. A warmth that could be contentment or could be simple photosynthesis; a steadiness that might be watchfulness or might be bark. The craft keeps slipping off something it wasn't built to grip. You're trying to read a color with your ears.\n\nBranch notices the touch. Its bud-cluster shifts fractionally toward you — the small tilt it makes when it's paying attention — and one root-tip lifts from the mud, hovers, and settles again. It does not pull away. Whatever you were reaching for, Branch itself is entirely unbothered by the attempt.\n\nDeni has caught the gesture. She's watching your hand on Branch's shoulder with the frank, quiet attention of someone cataloguing something new. She doesn't comment. She just waits, pack settled, ready to keep walking whenever you are."
       }
     ],
     "lastTurn": {
-      "narration": "You brush the last of the mud from your palm and straighten, pack resettled, the thread at your sternum quiet again — back to its steady pull northeast. Deni stands two paces off, weight easy, reading you the way a runner reads a road: practical, without judgment.\n\n\"The road's kept well past the margin,\" she says, adjusting her pack strap with one thumb. \"Canopy closes tight another quarter-mile in, then opens again at the hollow crossing. After that it's good ground — firmer, less mud — until you hit the bowl country at the edge of the march.\" She glances at Branch, who has positioned itself just behind your left shoulder and is watching her with its bud-cluster half-open. Whatever conclusion Branch has reached about her, it keeps it. \"Last circuit I ran this way, four days back — nothing unusual. Boot-tracks at the margin, which I assume are yours now.\" A small pause. \"Older ones ahead of yours, though. Adult-sized, moving northeast at a pace like they had somewhere to be. Those weren't mine.\"\n\nShe says it without alarm — just information, dropped into the space between you the way runners leave trail-marks. Whether she knows what it means is harder to read. Her eyes stay on you a moment longer than the words require.",
-      "sceneSummary": "Deni gives Aelyn good road-knowledge — kept way ahead, firmer past the hollow crossing — and names the older boot-tracks ahead of both of them, moving northeast at purpose.",
+      "narration": "You let your attention slip sideways — not outward the way Lifesense usually runs, reaching for heartbeats and breath-heat and the warm signatures of living bodies, but inward and down, through the palm you've pressed flat against Branch's shoulder. Trying to read it the way you'd read a person. Feeling for something like feeling.\n\nThe craft doesn't answer cleanly. Lifesense finds *life* — vigor and location and the hum of a body doing its work — and Branch is alive, deeply and genuinely so. But what comes back isn't emotion. It's more like... proximity to emotion. A warmth that could be contentment or could be simple photosynthesis; a steadiness that might be watchfulness or might be bark. The craft keeps slipping off something it wasn't built to grip. You're trying to read a color with your ears.\n\nBranch notices the touch. Its bud-cluster shifts fractionally toward you — the small tilt it makes when it's paying attention — and one root-tip lifts from the mud, hovers, and settles again. It does not pull away. Whatever you were reaching for, Branch itself is entirely unbothered by the attempt.\n\nDeni has caught the gesture. She's watching your hand on Branch's shoulder with the frank, quiet attention of someone cataloguing something new. She doesn't comment. She just waits, pack settled, ready to keep walking whenever you are.",
+      "sceneSummary": "Aelyn tries to read Branch's emotional state through Lifesense — the craft slips, plant-life resisting that kind of grip — but Branch notices the attempt and leans in.",
       "choices": [
         {
-          "label": "Ask about the older tracks — how old, exactly, and did she get a look at the person",
+          "label": "Ask Branch directly — 'What did you notice in the eastern tree-line?'",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {},
           "difficulty": "easy",
-          "trivial": false,
+          "opposedDifficulty": null,
           "intentTags": [
-            "negotiate"
-          ]
+            "study",
+            "careful"
+          ],
+          "abilityId": "speaking_grove",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ask what cargo she's running northeast — and who she's running it to",
+          "label": "Tell Deni what you're doing here — gauge how much she already knows about this road",
           "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": "easy",
-          "trivial": false,
-          "intentTags": [
-            "negotiate"
-          ]
-        },
-        {
-          "label": "Use Lifesense — let the wood tell you what it knows about who walked this road ahead",
-          "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": "normal",
-          "trivial": false,
-          "abilityId": "lifesense",
-          "energyCost": 3,
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
           "intentTags": [
-            "scout",
-            "study"
-          ]
+            "negotiate",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Thank her and press on — the thread is enough, and you'd rather close the distance",
+          "label": "Press on — thank Deni for the road-knowledge and keep moving northeast",
           "attribute": "physical",
           "subAttribute": "agility",
+          "axes": {},
           "difficulty": "very easy",
-          "trivial": true,
+          "opposedDifficulty": null,
           "intentTags": [
-            "travel"
-          ]
+            "travel",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "xp": 0
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "deni-cors",
+          "name": "Deni Cors",
+          "note": "Observed Aelyn press a hand to Branch's shoulder and hold still — catalogued it without comment; still waiting to walk.",
+          "learned": [
+            "Aelyn attempted something subtle with Branch that Deni didn't fully understand"
+          ],
+          "statusNote": "On the kept road northeast, two paces from Aelyn — watching quietly, ready to move."
         }
       ],
       "scene": {
-        "setting": "The kept road northeast through the Quickwood — canopy filtering early spring light to green-gray, root-ridges crossing at intervals. Aelyn is standing upright again, mud brushed from her palm; Deni Cors stands two easy paces away, pack settled, facing her.",
+        "setting": "The kept road northeast through the Quickwood — canopy filtering early spring light to green-gray, root-ridges crossing at intervals. Aelyn stands with one hand just lifted from Branch's shoulder; Deni Cors is two paces off, pack settled, watching.",
         "npcsPresent": [
           {
             "name": "Deni Cors",
-            "state": "Two paces off, weight easy — she has given her road-knowledge and is watching Aelyn for a response, neither hurrying nor waiting too hard."
+            "state": "Standing two paces away, weight easy, watching Aelyn with quiet, cataloguing attention — ready to walk when Aelyn is."
           },
           {
             "name": "Branch",
-            "state": "Just behind Aelyn's left shoulder, bud-cluster half-open, watching Deni with quiet attention."
+            "state": "Bud-cluster tilted toward Aelyn, one root-tip recently lifted and resettled — unbothered, attentive."
           }
         ],
         "objects": [
@@ -204,47 +234,34 @@
           "Deni's cargo and her destination are still unknown"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "deni-cors",
-          "note": "Gave Aelyn road-knowledge unprompted — canopy closes a quarter-mile in, hollow crossing ahead, firmer ground past the bowl country. Named the older boot-tracks ahead of both of them as notable but delivered it without alarm.",
-          "learned": [
-            "The kept road is good past the margin — canopy then hollow crossing then firmer ground into the march",
-            "On her last circuit four days back she saw nothing unusual, but noted older boot-tracks moving northeast at purpose ahead of Aelyn's"
-          ],
-          "statusNote": "On the kept road northeast, two paces from Aelyn, having shared road-knowledge — waiting to see what Aelyn does with it.",
-          "relationshipDelta": 0
-        }
-      ],
       "codexUpdates": [
         {
-          "topic": "gen-quickwood-margin",
-          "label": "Quickwood Margin",
-          "kind": "place",
-          "fact": "Deni Cors reports the road is kept well past the margin — canopy closes tight a quarter-mile in, then a hollow crossing, then firmer ground into the bowl country at the march's edge. Older boot-tracks ahead of Aelyn's, moving northeast at purpose, were noted by Deni four days prior.",
+          "topic": "branch",
+          "label": "Branch",
+          "kind": "person",
+          "entityId": null,
+          "fact": "Lifesense cannot read Branch's emotional state through touch — the craft finds life-vigor but slips off something like feeling. Branch noticed the attempt and leaned in rather than pulling away.",
           "links": [
-            "deni-cors",
-            "the-root-that-remembers",
-            "aelyn-father"
+            "aelyn-inner-frequency",
+            "the-frequency-beneath-the-grove"
           ]
         }
       ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a brief exchange on the road"
+      "offer": {
+        "thing": "Deni clocking the gesture with Branch — she has seen wardens work with companions before, but not like that",
+        "from": "Deni's runner-peer read of Aelyn and her fear that the warden post is empty or compromised — she is quietly deciding what kind of warden Aelyn is"
       }
     },
     "sceneState": {
-      "setting": "The kept road northeast through the Quickwood — canopy filtering early spring light to green-gray, root-ridges crossing at intervals. Aelyn is standing upright again, mud brushed from her palm; Deni Cors stands two easy paces away, pack settled, facing her.",
+      "setting": "The kept road northeast through the Quickwood — canopy filtering early spring light to green-gray, root-ridges crossing at intervals. Aelyn stands with one hand just lifted from Branch's shoulder; Deni Cors is two paces off, pack settled, watching.",
       "npcsPresent": [
         {
           "name": "Deni Cors",
-          "state": "Two paces off, weight easy — she has given her road-knowledge and is watching Aelyn for a response, neither hurrying nor"
+          "state": "Standing two paces away, weight easy, watching Aelyn with quiet, cataloguing attention — ready to walk when Aelyn is."
         },
         {
           "name": "Branch",
-          "state": "Just behind Aelyn's left shoulder, bud-cluster half-open, watching Deni with quiet attention."
+          "state": "Bud-cluster tilted toward Aelyn, one root-tip recently lifted and resettled — unbothered, attentive."
         }
       ],
       "objects": [
@@ -260,12 +277,12 @@
         "Deni's cargo and her destination are still unknown"
       ]
     },
-    "beats": 11
+    "beats": 12
   },
   "clock": {
     "schemaVersion": 1,
     "day": 2,
-    "hour": 5,
+    "hour": 6,
     "realAnchor": null
   },
   "companions": [
@@ -570,20 +587,22 @@
       "history": [
         "[d2] Noticed Aelyn on the road when she stumbled at a root-ridge — took it in stride, named herself by her circuit, observed Aelyn is heading the same way.",
         "[d2] Checked on Aelyn after the stumble — named her by name, steady and practical. Two paces away, still reading her.",
-        "[d2] Gave Aelyn road-knowledge unprompted — canopy closes a quarter-mile in, hollow crossing ahead, firmer ground past the bowl country. Named the older boot-tracks ahead of both of them as notable but delivered it without alarm."
+        "[d2] Gave Aelyn road-knowledge unprompted — canopy closes a quarter-mile in, hollow crossing ahead, firmer ground past the bowl country. Named the older boot-tracks ahead of both of them as notable but delivered it without alarm.",
+        "[d2] Observed Aelyn press a hand to Branch's shoulder and hold still — catalogued it without comment; still waiting to walk."
       ],
       "knownFacts": [
         "Hub-registered pack-runner, south circuit",
         "Heading northeast on the kept road",
         "The kept road is good past the margin — canopy then hollow crossing then firmer ground into the march",
-        "On her last circuit four days back she saw nothing unusual, but noted older boot-tracks moving northeast at purpose ahead of Aelyn's"
+        "On her last circuit four days back she saw nothing unusual, but noted older boot-tracks moving northeast at purpose ahead of Aelyn's",
+        "Aelyn attempted something subtle with Branch that Deni didn't fully understand"
       ],
       "skillsObserved": [],
       "status": "active",
       "sex": "female",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "On the kept road northeast, two paces from Aelyn, having shared road-knowledge — waiting to see what Aelyn does with it.",
+      "statusNote": "On the kept road northeast, two paces from Aelyn — watching quietly, ready to move.",
       "domains": {
         "primary": "rootkin"
       },
@@ -592,7 +611,7 @@
         "locationId": "gen-quickwood-margin",
         "day": 2
       },
-      "met": 3
+      "met": 4
     }
   },
   "placeMemory": {
@@ -893,7 +912,7 @@
         "lastOutcome": "progress"
       }
     },
-    "turnsSinceOffer": 10,
+    "turnsSinceOffer": 0,
     "latentArcs": {
       "heartwood-hollowing": {
         "id": "heartwood-hollowing",
@@ -4694,6 +4713,10 @@
       {
         "thing": "The road shows recent traffic — more than one set of prints, some of them moving fast, one set that stopped and did not continue",
         "from": "What is stirring in the world: Sorel's party moving northeast-by-east into the Disputed Zone along the same general corridor as the…"
+      },
+      {
+        "thing": "Deni clocking the gesture with Branch — she has seen wardens work with companions before, but not like that",
+        "from": "Deni's runner-peer read of Aelyn and her fear that the warden post is empty or compromised — she is quietly deciding what kind of warden…"
       }
     ],
     "newsSpread": {},
@@ -4894,7 +4917,8 @@
           "[d1] [while away] The Cutting has moved closer — it was spotted briefly in a doorway one corridor nearer to where the player last was, then gone before it could be addressed.",
           "[d1] [while away] The Cutting was found this time not in a doorway but crouched at the base of a wall two corridors nearer still, leaving shallow parallel marks in the stone before it withdrew — it is moving with purpose now, not wandering.",
           "[d2] [while away] The Cutting was found this time pressed into a alcove just one corridor from the entrance hall, the parallel marks in the stone deeper than before — it is no longer testing the path, it is learning it.",
-          "[d2] [while away] The Cutting reached the entrance hall — the marks are now cut into the threshold stone itself, and the Rootkin Tender found them there at first light, still warm to the touch."
+          "[d2] [while away] The Cutting reached the entrance hall — the marks are now cut into the threshold stone itself, and the Rootkin Tender found them there at first light, still warm to the touch.",
+          "[d2] Lifesense cannot read Branch's emotional state through touch — the craft finds life-vigor but slips off something like feeling. Branch noticed the attempt and leaned in rather than pulling away."
         ],
         "links": [
           "root-that-remembers",
@@ -4902,7 +4926,8 @@
           "the-root-that-remembers",
           "the-deep-grain-passage",
           "the-deep-woven",
-          "the-frequency-beneath-the-grove"
+          "the-frequency-beneath-the-grove",
+          "aelyn-inner-frequency"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -5366,18 +5391,18 @@
     ]
   },
   "tendencies": {
-    "cerebral": 12.584871955474226,
-    "cautious": 9.367614620129581,
-    "generous": 0.4658964219253765,
-    "social": 5.377255288654772,
-    "strategic": 6.039800477061225,
-    "devotion": 3.642375432613695,
-    "patient": 1.9415914302546078
+    "cerebral": 13.27025015658737,
+    "cautious": 10.133424254626341,
+    "generous": 0.4542490113772421,
+    "social": 5.242823906438402,
+    "strategic": 5.888805465134694,
+    "devotion": 3.5513160467983527,
+    "patient": 1.8930516444982426
   },
   "aptitudes": [
     "scholar"
   ],
-  "actionCount": 68,
+  "actionCount": 69,
   "grantsVersion": 1,
   "reconcileVersion": 48,
   "gallery": [
@@ -5415,8 +5440,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20mid-twenties%20with%20light%20blonde%2C%20faintly%20wavy%20hair%20cut%20in%20curtain%20bangs%2C%20the%20rest%20falling%20to%20the%20small%20of%20her%20back%20%E2%80%94%20usually%20worn%20in%20a%20french%20braid%20with%20the%20bangs%20left%20loose.%20Dark%20nature-green%20tank%20to%2C%20full-body%20character%20portrait%2C%20named%20Aelyn%20Kantoro%2C%20of%20the%20rootkin%2C%20warden%2C%20carrying%20Traveler's%20Pack%2C%20Her%20mother%20dies%2C%20and%20she%20decides%20to%20go%20to%20the%20nanite%20world%2C%20to%20figure%20out%20why%20she%20is%20different%20than%20the%20pure%20nature%20peop%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=73420&nologo=true",
-  "updatedAt": 1788814564964,
-  "rev": 129,
+  "updatedAt": 1788814671851,
+  "rev": 130,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -5475,7 +5500,7 @@
     "item": {}
   },
   "regionsKnown": {
-    "the_quickwood": 69
+    "the_quickwood": 70
   },
   "opLossPending": false,
   "establishedFacts": [
@@ -5582,14 +5607,14 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "lifesense": 9,
+      "lifesense": 10,
       "the_speaking_grove": 11,
       "prism_sight": 1
     },
     "coActivations": {},
     "aspirations": [],
     "lastUsed": {
-      "lifesense": 68,
+      "lifesense": 69,
       "the_speaking_grove": 37
     }
   },
@@ -5651,10 +5676,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-09-07T20:52:08.629Z",
-      "lastAt": "2026-09-07T20:56:04.954Z",
+      "lastAt": "2026-09-07T20:57:51.835Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 3
+      "beats": 4
     }
   ],
   "livingCurrentAccess": [
@@ -5817,18 +5842,18 @@
   },
   "_intentAsked": null,
   "_opEmitted": {
-    "sceneSummary": 16,
-    "choices": 16,
-    "scene": 16,
+    "sceneSummary": 17,
+    "choices": 17,
+    "scene": 17,
     "questUpdates": 4,
-    "codexUpdates": 8,
+    "codexUpdates": 9,
     "timeOps": 16,
     "sceneEnded": 3,
-    "characterDeltas": 4,
-    "npcUpdates": 12,
-    "offer": 1
+    "characterDeltas": 5,
+    "npcUpdates": 13,
+    "offer": 2
   },
-  "_opTurns": 16,
+  "_opTurns": 17,
   "knownPlaces": [
     "gen-quickwood-margin"
   ],
@@ -5843,18 +5868,19 @@
   "_applyFailures": null,
   "_opLedger": {
     "offer": {
-      "applied": 1,
+      "applied": 2,
       "rejected": 0,
       "lastWhy": null
     }
   },
   "skillUses": {
     "travel": 3,
-    "careful": 6,
+    "careful": 7,
     "scout": 4,
     "study": 2,
     "comfort": 1,
-    "negotiate": 1
+    "negotiate": 1,
+    "investigate": 1
   },
   "itemReclaimVersion": 1,
   "nameRepairVersion": 1,

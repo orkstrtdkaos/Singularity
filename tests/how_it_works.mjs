@@ -8461,6 +8461,33 @@ console.log("\n── §124 · the relay pays for its own guard, and then some �
   check("§124: ⚑ the tick and the tab hand the places to the reader", /locations: content\?\.locations \|\| \{\},/.test(rd("engine/worldtick.js")) && /character, locations: CONTENT\.locations \|\| \{\} \}\);/.test(rd("app.js")));
 }
 
+/* ═════ §125 — THE NEAREST OF SEVERAL: A PLACE NAME RESOLVES TO THE CLOSEST PLACE THAT ANSWERS TO IT (Erik 2026-09-06) ═════ */
+// ⛔ resolveLocationId took the first match in file order, position-blind — the shape that once minted a second Hub.
+// Told where the character stands it prefers the nearest at every tier; not told, it behaves exactly as before.
+console.log("\n── §125 · two fords with one name, and the one you meant is the one you can see ──");
+{
+  const ST = await import("../engine/state.js");
+  const { loadContentHeadless: lch125 } = await import("./headless_content.mjs");
+  const C = await lch125();
+  const locs = {
+    far_ford: { id: "far_ford", name: "Twin Ford", worldPos: { colatitude: 40, longitude: 10, depth: 0 }, aliases: ["the ford"] },
+    near_ford: { id: "near_ford", name: "Twin Ford", worldPos: { colatitude: 20.3, longitude: 251.9, depth: 0 }, aliases: ["the ford"] },
+    march_road: { id: "march_road", name: "Ashwarden March Road", worldPos: { colatitude: 20.24, longitude: 251.72, depth: 0 } },
+    old_march: { id: "old_march", name: "The Old March", worldPos: { colatitude: 60, longitude: 100, depth: 0 } },
+    here: { id: "here", name: "Millbrook", worldPos: { colatitude: 20.31, longitude: 251.895, depth: 0 } },
+  };
+  check("§125: ⛔ TWO PLACES, ONE NAME — told where the character stands, the NEAREST answers; told the far side, the far one; not told, the first as before",
+    ST.resolveLocationId("Twin Ford", locs, { here: locs.here }) === "near_ford" && ST.resolveLocationId("Twin Ford", locs, { here: "far_ford" }) === "far_ford" && ST.resolveLocationId("Twin Ford", locs) === "far_ford");
+  check("§125: …the same on the alias and the loose pass — 'the ford' and 'march' both land on what is near",
+    ST.resolveLocationId("the ford", locs, { here: locs.here }) === "near_ford" && ST.resolveLocationId("march", locs, { here: locs.here }) === "march_road" && ST.resolveLocationId("march", locs, { here: "old_march" }) === "old_march");
+  check("§125: …an exact id still wins over any distance, and nowhere is still null",
+    ST.resolveLocationId("far_ford", locs, { here: locs.here }) === "far_ford" && ST.resolveLocationId("nowhere at all", locs, { here: locs.here }) === null);
+  check("§125: ⛔ THE HUB ANSWERS TO WHAT ERIK CALLS IT — the Hub, the crossroads, Center — on real content",
+    ST.resolveLocationId("the Hub", C.locations) === "the_crossing" && ST.resolveLocationId("the crossroads", C.locations) === "the_crossing" && ST.resolveLocationId("Center", C.locations) === "the_crossing");
+  check("§125: ⚑ every caller in the app says where the character stands",
+    (rd("app.js").match(/resolveLocationId\([^)]*CONTENT\.locations, \{ here: CONTENT\.locations\?\.\[character\?\.currentLocationId\] \|\| null \}\)/g) || []).length >= 5);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

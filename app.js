@@ -126,7 +126,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.400";
+const APP_VERSION = "1.9.401";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2444,7 +2444,7 @@ function markDevAction(reason) {
  *  visit, perception) — it exercises the real engine, never a dev-only shadow. Clears the active scene
  *  so play resumes FRESH at the new place instead of replaying the old one. */
 function devJumpTo(ref) {
-  const id = resolveLocationId(ref, CONTENT.locations) || (CONTENT.locations[ref] ? ref : null);
+  const id = resolveLocationId(ref, CONTENT.locations, { here: CONTENT.locations?.[character?.currentLocationId] || null }) || (CONTENT.locations[ref] ? ref : null);
   if (!id || !CONTENT.locations[id]) return { ok: false, msg: `no location matches "${ref}"` };
   const day = (() => { try { return readClock(character.clock).day; } catch { return null; } })();
   character.currentLocationId = id;
@@ -7105,7 +7105,7 @@ function applyTurn(turn, resolution, playerWords = null) {
           .filter(Boolean).join(" ");
       }
     }
-    let destId = subParentId || wgRoute?.destId || resolveLocationId(moveRef, CONTENT.locations) || mintTransitLocation(moveRef);
+    let destId = subParentId || wgRoute?.destId || resolveLocationId(moveRef, CONTENT.locations, { here: CONTENT.locations?.[character?.currentLocationId] || null }) || mintTransitLocation(moveRef);
     // ⛔ CCODE-158 — DID THE PLAYER ASK TO GO? Every guard above this line is about WHERE (sub-place →
     // parent, gate routing, resolve-or-mint); not one was about WHETHER. The contract told the GM the
     // header follows the fiction, the fiction said "arriving at a new location within the same scene",
@@ -8155,7 +8155,7 @@ function travelIntentOf(action) {
   // (1) trusted explicit destination from the free-text parser
   let ref = action.travelTo && String(action.travelTo).trim();
   if (ref && !NOT_A_PLACE.test(ref.replace(/^the\s+/i, "").trim())) {
-    const destId = resolveLocationId(ref, CONTENT.locations);
+    const destId = resolveLocationId(ref, CONTENT.locations, { here: CONTENT.locations?.[character?.currentLocationId] || null });
     if (destId) return { ref, name: CONTENT.locations[destId].name, destId }; // a REAL place — trust it
     // SNG-228: destId null → would mint `ref` as a phantom place. First check it isn't a PERSON (Ossian):
     // a known NPC, or someone the words go to CATCH/CONFRONT or address by TITLE. A person is never a
@@ -8174,7 +8174,7 @@ function travelIntentOf(action) {
     for (const l of Object.values(CONTENT.locations)) { const n = (l.name || "").toLowerCase(); if (n && n.length > 2 && text.toLowerCase().includes(n)) { cand = l.name; break; } }
   }
   if (!cand) return null;
-  const destId = resolveLocationId(cand, CONTENT.locations);
+  const destId = resolveLocationId(cand, CONTENT.locations, { here: CONTENT.locations?.[character?.currentLocationId] || null });
   if (!destId) return null; // a guessed phrase that isn't a real place is NOT a travel intent (no over-move)
   return { ref: cand, name: CONTENT.locations[destId].name, destId };
 }
@@ -8311,7 +8311,7 @@ function toggleSpeakTurn(displayed = null) {
 async function arriveAtPending() {
   const p = character._pendingArrival; if (!p || busy) return;
   character._pendingArrival = null;
-  const destId = (p.destId && CONTENT.locations[p.destId] ? p.destId : null) || resolveLocationId(p.ref, CONTENT.locations) || mintTransitLocation(p.ref);
+  const destId = (p.destId && CONTENT.locations[p.destId] ? p.destId : null) || resolveLocationId(p.ref, CONTENT.locations, { here: CONTENT.locations?.[character?.currentLocationId] || null }) || mintTransitLocation(p.ref);
   await travelTo(destId);
 }
 

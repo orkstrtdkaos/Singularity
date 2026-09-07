@@ -3,6 +3,7 @@
 // via sync.js pushes character + player profile to the shared repo when a PAT is
 // configured. Content packs always load from the served repo files.
 
+import { walkingDays } from "./worldmap.js";   // resolveLocationId: the nearest of several same-name places
 import { martialAbilityRecords } from "./martial.js";
 import { reconcileContent } from "./reconcile.js";
 import { applySubstrateField } from "./substrate.js";
@@ -136,7 +137,7 @@ export function canTravelBetween(here, destId, locations = {}, placeEdges = {}) 
 
 /** SNG-056: resolve a GM `moveTo` reference (an id or a place name) to a real loaded location id,
  *  or null if it names nowhere that exists. Exact id → slugified id → exact name → loose name. Pure. */
-export function resolveLocationId(ref, locations = {}) {
+export function resolveLocationId(ref, locations = {}, { here = null } = {}) {
   // SNG-329: coerce FIRST. An object reference used to stringify to "[object Object]", match nothing, and
   // fall through to a mint that wrote the artefact into the save.
   ref = locationRefToString(ref);
@@ -146,14 +147,28 @@ export function resolveLocationId(ref, locations = {}) {
   const slug = raw.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/(^_|_$)/g, "");
   if (locations[slug]) return slug;
   const lc = raw.toLowerCase();
-  for (const [k, l] of Object.entries(locations)) if ((l.name || "").toLowerCase() === lc) return k;
+  // ⛔ THE NEAREST OF SEVERAL (Erik 2026-09-06). Two places that answer to one word were decided by file order,
+  // position-blind — that is how a name once minted a second Hub. Told where the character stands (`here`: a record
+  // or an id), each tier below hands back the CLOSEST match by walking days; not told, it behaves exactly as before.
+  const hereLoc = here && typeof here === "object" ? here : (here ? locations[here] : null);
+  const pick = (keys) => {
+    if (keys.length <= 1 || !hereLoc?.worldPos) return keys[0] ?? null;
+    let best = keys[0], bestD = Infinity;
+    for (const k of keys) { const d = walkingDays(hereLoc, locations[k]); if (d != null && d < bestD) { best = k; bestD = d; } }
+    return best;
+  };
+  const byName = Object.entries(locations).filter(([, l]) => (l.name || "").toLowerCase() === lc).map(([k]) => k);
+  if (byName.length) return pick(byName);
   // SNG-221: a canonical location may declare `aliases` (other names it answers to — e.g. the name a
   // gen-stub carried before its canonical file was authored: "Stillwater's Trouble" / "Raven's Home").
   // An EXACT alias match (raw or slugged) resolves to it, before the looser substring pass below — so
   // traveling to a superseded gen-location's name lands on the real place (Q3), not a fresh mint.
-  for (const [k, l] of Object.entries(locations)) if ((l.aliases || []).some(a => String(a).toLowerCase() === lc)) return k;
-  for (const [k, l] of Object.entries(locations)) if ((l.aliases || []).some(a => String(a).toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/(^_|_$)/g, "") === slug)) return k;
-  for (const [k, l] of Object.entries(locations)) { const n = (l.name || "").toLowerCase(); if (n && (n.includes(lc) || lc.includes(n))) return k; }
+  const byAlias = Object.entries(locations).filter(([, l]) => (l.aliases || []).some(a => String(a).toLowerCase() === lc)).map(([k]) => k);
+  if (byAlias.length) return pick(byAlias);
+  const byAliasSlug = Object.entries(locations).filter(([, l]) => (l.aliases || []).some(a => String(a).toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/(^_|_$)/g, "") === slug)).map(([k]) => k);
+  if (byAliasSlug.length) return pick(byAliasSlug);
+  const loose = Object.entries(locations).filter(([, l]) => { const n = (l.name || "").toLowerCase(); return n && (n.includes(lc) || lc.includes(n)); }).map(([k]) => k);
+  if (loose.length) return pick(loose);
   return null;
 }
 

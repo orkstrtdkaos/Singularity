@@ -6867,7 +6867,7 @@ await (async () => {
   check("186 §2a: go-anywhere jumps via the REAL move fields (currentLocationId + knownPlaces), not a shadow",
     /function devJumpTo/.test(appSrcDev) && /character\.currentLocationId = id/.test(appSrcDev) && /addKnownPlace\(id\)/.test(appSrcDev) && /notePlaceVisit\(character, id/.test(appSrcDev));
   check("186 §2a: it resolves ANY location by id or name, ignoring connections (reachable or not)",
-    /resolveLocationId\(ref, CONTENT\.locations\) \|\| \(CONTENT\.locations\[ref\]/.test(appSrcDev));
+    /resolveLocationId\(ref, CONTENT\.locations(?:, \{ here:[^)]*\})?\) \|\| \(CONTENT\.locations\[ref\]/.test(appSrcDev));   // §125: the call may also say where the character stands
   check("186 §2b: know-everything reveals all locations; know-nothing resets to here",
     /function devKnowEverything/.test(appSrcDev) && /character\.knownPlaces = Object\.keys\(CONTENT\.locations/.test(appSrcDev) && /function devKnowNothing/.test(appSrcDev) && /knownPlaces = character\.currentLocationId \? \[character\.currentLocationId\]/.test(appSrcDev));
   check("186 §3.2: every lever marks the save (markDevAction → _devActions, into feedback)",

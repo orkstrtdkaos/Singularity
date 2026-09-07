@@ -8,7 +8,7 @@
   "whyHere": "You were sent, or you were seeded, or you simply wanted to see something finish inside a single lifetime.",
   "background": "warden",
   "level": 2,
-  "xp": 165,
+  "xp": 170,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -50,7 +50,7 @@
   "maxHealth": 43,
   "health": 43,
   "maxEnergy": 113,
-  "energy": 75,
+  "energy": 71,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -81,38 +81,50 @@
         "player": "Turn Lifesense toward the light — read the life-shape of what is watching",
         "summary": "Lifesense finds nothing in the Reaching Light — no life-heat, no vigor — the craft has no hold on what it is.",
         "narration": "You breathe out, slow, and let Lifesense unfurl — the restrained kind, a careful opening rather than a reach. The Quickwood responds: you feel the canopy overhead in its slow, cold-sap weight, the birches and root-tangled ground teeming with dormant life just beginning to stir. Earthworms in the mud beneath your boots. A roosting bird a hundred feet hubward. Branch, knee-high beside you, a small and growing warmth. Deni, solid and warm to your left.\n\nAnd then the eastern tree-line, where the light waits.\n\nYou turn the craft that way. It slips. Not blocked — that would feel like a wall. This is more like trying to count ripples on still water when the water itself has no temperature, no current, nothing the craft can settle into. Lifesense reads life. What stands between the trunks in the pale, steady radiance has no heat to give, no vigor to measure, no breath thinning and thickening with effort. The craft finds nothing it recognizes, and comes back to you empty.\n\nDeni doesn't look at you. She's still watching the tree-line, one hand resting on her pack-strap. \"Get anything?\" Her voice is level — the kind of question that already expects a complicated answer. Branch is very still beside you, buds half-closed, facing east."
+      },
+      {
+        "player": "Ask Branch directly — root-sense what the light is made of, through the ground if not the air",
+        "summary": "Branch root-sensed the Reaching Light — not living, but a pattern like the kept thread in the root-wall. Same old. Same waiting. Same target.",
+        "narration": "You crouch to Branch's level — not quite touching, just lowering yourself into its sight-line — and ask it plainly. \"Branch. Can you root-sense what the light is made of? Through the ground, if not the air.\"\n\nBranch goes still in the particular way it does when it is reaching rather than thinking. The buds at its shoulders close down to nothing. Its foot-roots press deeper into the melt-mud, and you watch the ground around them go slightly darker as moisture moves.\n\nA long moment. Deni doesn't speak. The light holds its station between the trunks.\n\nThen Branch says, one word at a time, with the usual gap between each: \"Not — root. Not — soil. Not — living.\" A pause. \"Old — pattern. Like — the — thread — in — the — wall. Same — old. But — bigger.\"\n\nIt lifts its face toward you. The buds have opened again, partway, the way they do when it wants you to understand something. \"Thread — waited — for — you. Light — waits — for — you. Same — waiting.\"\n\nDeni exhales through her nose. Quiet, but you hear it. She shifts her weight on the road and does not look away from the eastern tree-line.\n\n*✦ The Reaching Light — Codex: Caelum Kantoro — Seraph, father, the one who told the forest to hide — did not die. He was finished. The light has a name, and it is hers..*"
       }
     ],
     "lastTurn": {
-      "narration": "You breathe out, slow, and let Lifesense unfurl — the restrained kind, a careful opening rather than a reach. The Quickwood responds: you feel the canopy overhead in its slow, cold-sap weight, the birches and root-tangled ground teeming with dormant life just beginning to stir. Earthworms in the mud beneath your boots. A roosting bird a hundred feet hubward. Branch, knee-high beside you, a small and growing warmth. Deni, solid and warm to your left.\n\nAnd then the eastern tree-line, where the light waits.\n\nYou turn the craft that way. It slips. Not blocked — that would feel like a wall. This is more like trying to count ripples on still water when the water itself has no temperature, no current, nothing the craft can settle into. Lifesense reads life. What stands between the trunks in the pale, steady radiance has no heat to give, no vigor to measure, no breath thinning and thickening with effort. The craft finds nothing it recognizes, and comes back to you empty.\n\nDeni doesn't look at you. She's still watching the tree-line, one hand resting on her pack-strap. \"Get anything?\" Her voice is level — the kind of question that already expects a complicated answer. Branch is very still beside you, buds half-closed, facing east.",
-      "sceneSummary": "Lifesense finds nothing in the Reaching Light — no life-heat, no vigor — the craft has no hold on what it is.",
+      "narration": "You crouch to Branch's level — not quite touching, just lowering yourself into its sight-line — and ask it plainly. \"Branch. Can you root-sense what the light is made of? Through the ground, if not the air.\"\n\nBranch goes still in the particular way it does when it is reaching rather than thinking. The buds at its shoulders close down to nothing. Its foot-roots press deeper into the melt-mud, and you watch the ground around them go slightly darker as moisture moves.\n\nA long moment. Deni doesn't speak. The light holds its station between the trunks.\n\nThen Branch says, one word at a time, with the usual gap between each: \"Not — root. Not — soil. Not — living.\" A pause. \"Old — pattern. Like — the — thread — in — the — wall. Same — old. But — bigger.\"\n\nIt lifts its face toward you. The buds have opened again, partway, the way they do when it wants you to understand something. \"Thread — waited — for — you. Light — waits — for — you. Same — waiting.\"\n\nDeni exhales through her nose. Quiet, but you hear it. She shifts her weight on the road and does not look away from the eastern tree-line.\n\n*✦ The Reaching Light — Codex: Caelum Kantoro — Seraph, father, the one who told the forest to hide — did not die. He was finished. The light has a name, and it is hers..*",
+      "sceneSummary": "Branch root-sensed the Reaching Light — not living, but a pattern like the kept thread in the root-wall. Same old. Same waiting. Same target.",
       "choices": [
         {
-          "label": "Let Prism Sight open instead — read whether the light leaves heat-traces or bends the air around it",
+          "label": "Step toward the light — walk into the eastern tree-line and close the distance",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {},
+          "axes": {
+            "death_life": 0.6,
+            "destruction_creation": 0.2
+          },
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "study"
+            "risky",
+            "travel"
           ],
-          "abilityId": "prism_sight",
-          "energyCost": 4,
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Ask Branch directly — root-sense what the light is made of, through the ground if not the air",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "easy",
+          "label": "Speak to it through the green — use Speaking Grove to address the light directly",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "death_life": 0.5,
+            "destruction_creation": 0.1
+          },
+          "difficulty": "hard",
           "opposedDifficulty": null,
           "intentTags": [
-            "study",
-            "help"
+            "communicate",
+            "risky"
           ],
           "abilityId": "speaking_grove",
           "energyCost": 4,
@@ -121,37 +133,39 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Deni what she has actually seen — when it first appeared, whether it has ever moved",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "very easy",
+          "label": "Hold still and wait — let it come to you, if it will",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "chaos_order": 0.1
+          },
+          "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "study"
+            "careful",
+            "guard"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
       "characterDeltas": {
         "health": 0,
-        "energy": -3,
-        "xp": 0
+        "energy": 0
       },
       "scene": {
         "setting": "The Kept Road Northeast inside the Quickwood margin — early-spring dawn, canopy closed overhead, pale diffuse light through bare branches. The party has stopped on the road, facing the eastern tree-line where the Reaching Light holds steady between the trunks.",
         "npcsPresent": [
           {
             "name": "Deni Cors",
-            "state": "standing to Aelyn's left, one hand on her pack-strap, watching the eastern tree-line without looking away"
+            "state": "standing to Aelyn's left, exhaled once, weight shifted — watching the eastern tree-line, hasn't spoken"
           },
           {
             "name": "Branch",
-            "state": "very still beside Aelyn, knee-high, buds half-closed, facing east"
+            "state": "foot-roots re-settled in the melt-mud after root-sensing, buds half-open, face turned up toward Aelyn"
           }
         ],
         "objects": [
@@ -159,9 +173,9 @@
           "boot-tracks in the melt-mud ahead on the road"
         ],
         "threads": [
-          "Lifesense found nothing in the light — no life, no heat, no vigor; the craft has no hold on what it is",
-          "the boot-tracks ahead have stopped or left the road",
-          "Deni is waiting for an answer"
+          "Branch root-sensed the light as not living — an old pattern, like the kept thread in the wall, but bigger; it waits for Aelyn specifically",
+          "the boot-tracks ahead have stopped or left the road — still unresolved",
+          "Deni is present and has heard everything; she has not commented"
         ]
       },
       "npcUpdates": [
@@ -169,15 +183,12 @@
           "op": "update",
           "npcId": "deni-cors",
           "name": "Deni Cors",
-          "note": "Watched Aelyn try Lifesense on the light and waited without comment; asked plainly whether anything came through",
-          "statusNote": "Standing on the Kept Road inside the Quickwood margin, watching the eastern light"
-        },
-        {
-          "op": "update",
-          "npcId": "branch",
-          "name": "Branch",
-          "note": "Gone still and buds half-closed, facing east while Aelyn worked Lifesense — has not spoken",
-          "statusNote": "On the Kept Road, very still, facing the Reaching Light"
+          "note": "Heard Branch's root-sense reading of the light — same old pattern as the kept thread, bigger, waiting for Aelyn — exhaled once and said nothing. Still watching the eastern tree-line.",
+          "learned": [
+            "The Reaching Light is not living — Branch root-sensed it as an old pattern, same frequency as the kept thread in the Heartroot wall, but larger; it waits specifically for Aelyn"
+          ],
+          "statusNote": "Standing on the Kept Road at the Quickwood margin, watching the eastern tree-line, processing what Branch reported",
+          "status": "active"
         }
       ],
       "codexUpdates": [
@@ -185,17 +196,47 @@
           "topic": "the-reaching-light",
           "label": "The Reaching Light",
           "kind": "mystery",
-          "fact": "Lifesense finds nothing in the light — no life-heat, no vigor, nothing the craft can settle into. It is not blocked; it simply has no life-signature to read. Whatever it is, it does not register as living.",
+          "fact": "Branch root-sensed the light through the ground and found it is not living — no root, no soil-presence, no life-signature — but an old pattern, specifically comparable to the kept thread in the Heartroot's root-wall. Branch said 'same old' and confirmed it waits for Aelyn specifically, as the thread waited for her.",
           "links": [
             "gen-quickwood-margin",
             "aelyn-inner-frequency",
-            "aelyn-father"
+            "aelyn-father",
+            "heartroot",
+            "the-root-that-remembers",
+            "branch",
+            "the-reaching-light"
           ]
+        },
+        {
+          "topic": "aelyn-father",
+          "label": "Caelum Kantoro",
+          "kind": "person",
+          "fact": "Branch's root-sense identifies the Reaching Light as carrying the same 'old' pattern as the kept thread Caelum left in the root-wall — suggesting the light and the kept thread share an origin. Both wait for Aelyn specifically.",
+          "links": [
+            "the-reaching-light",
+            "heartroot",
+            "aelyn-inner-frequency",
+            "the-root-that-remembers"
+          ]
+        }
+      ],
+      "stageOps": [
+        {
+          "questId": "the-reaching-light",
+          "stageId": "s2",
+          "evidence": "Branch root-sensed the Reaching Light and identified it as the same old pattern as the kept thread Caelum left in the root-wall — not living, but waiting for Aelyn specifically, with the same frequency."
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-reaching-light",
+          "note": "Branch root-sensed the light through the ground — not living, an old pattern, same frequency as the kept thread in the Heartroot wall. It waits for Aelyn specifically. The light and her father's kept thread share an origin."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief stop on the road to attempt Lifesense on the eastern light"
+        "why": "a short exchange while stopped on the road"
       },
       "sceneEnded": false
     },
@@ -204,11 +245,11 @@
       "npcsPresent": [
         {
           "name": "Deni Cors",
-          "state": "standing to Aelyn's left, one hand on her pack-strap, watching the eastern tree-line without looking away"
+          "state": "standing to Aelyn's left, exhaled once, weight shifted — watching the eastern tree-line, hasn't spoken"
         },
         {
           "name": "Branch",
-          "state": "very still beside Aelyn, knee-high, buds half-closed, facing east"
+          "state": "foot-roots re-settled in the melt-mud after root-sensing, buds half-open, face turned up toward Aelyn"
         }
       ],
       "objects": [
@@ -216,12 +257,12 @@
         "boot-tracks in the melt-mud ahead on the road"
       ],
       "threads": [
-        "Lifesense found nothing in the light — no life, no heat, no vigor; the craft has no hold on what it is",
-        "the boot-tracks ahead have stopped or left the road",
-        "Deni is waiting for an answer"
+        "Branch root-sensed the light as not living — an old pattern, like the kept thread in the wall, but bigger; it waits for Aelyn specifically",
+        "the boot-tracks ahead have stopped or left the road — still unresolved",
+        "Deni is present and has heard everything; she has not commented"
       ]
     },
-    "beats": 1
+    "beats": 2
   },
   "clock": {
     "schemaVersion": 1,
@@ -425,19 +466,23 @@
           ]
         }
       ],
-      "stageIndex": 1,
+      "stageIndex": 2,
       "completedStages": [
-        "s1"
+        "s1",
+        "s2"
       ],
       "progress": [
         "The light has been identified — present since the margin, patient, and specifically oriented toward Aelyn. Branch named it: 'Knows you. Not me. You.' The first word across the distance has not yet been spoken, but the distance is closing.",
         "Codex: an entity of pure fabricated substrate is aware of Aelyn specifically — and something in its behavior toward her is wrong for a predator: it protects where it should consume.",
-        "↳ Branch identified the eastern light as something that specifically knows Aelyn — not her companions — and Deni confirmed it has been present and watching since the margin, consistent with a…"
+        "↳ Branch identified the eastern light as something that specifically knows Aelyn — not her companions — and Deni confirmed it has been present and watching since the margin, consistent with a…",
+        "Branch root-sensed the light through the ground — not living, an old pattern, same frequency as the kept thread in the Heartroot wall. It waits for Aelyn specifically. The light and her father's kept thread share an origin.",
+        "Codex: Caelum Kantoro — Seraph, father, the one who told the forest to hide — did not die. He was finished. The light has a name, and it is hers.",
+        "↳ Branch root-sensed the Reaching Light and identified it as the same old pattern as the kept thread Caelum left in the root-wall — not living, but waiting for Aelyn specifically, with the same…"
       ],
       "aliases": [],
       "startedAt": "2026-09-06T00:52:50.590Z",
       "startedWorldDay": 68,
-      "stageStartedAt": 72
+      "stageStartedAt": 74
     }
   ],
   "npcRegistry": {
@@ -543,7 +588,8 @@
         "[d2] Fell into step northeast without being asked — same road, same direction, practical economy of company.",
         "[d2] Watched Aelyn use Speaking Grove on the birch without comment; shifted to watching the tree-line after hearing 'tracks stopped'; offered a practical read — we'd see sign at the hollow crossing either way.",
         "[d2] Confirmed she had been watching the eastern light since the margin — said nothing until Branch named it",
-        "[d2] Watched Aelyn try Lifesense on the light and waited without comment; asked plainly whether anything came through"
+        "[d2] Watched Aelyn try Lifesense on the light and waited without comment; asked plainly whether anything came through",
+        "[d2] Heard Branch's root-sense reading of the light — same old pattern as the kept thread, bigger, waiting for Aelyn — exhaled once and said nothing. Still watching the eastern tree-line."
       ],
       "knownFacts": [
         "Hub-registered pack-runner, south circuit",
@@ -552,14 +598,15 @@
         "On her last circuit four days back she saw nothing unusual, but noted older boot-tracks moving northeast at purpose ahead of Aelyn's",
         "Aelyn attempted something subtle with Branch that Deni didn't fully understand",
         "Boot-tracks ahead have stopped or left the road, per the canopy's answer",
-        "The light has been present since the Quickwood margin; Deni noted it early and chose to wait before speaking"
+        "The light has been present since the Quickwood margin; Deni noted it early and chose to wait before speaking",
+        "The Reaching Light is not living — Branch root-sensed it as an old pattern, same frequency as the kept thread in the Heartroot wall, but larger; it waits specifically for Aelyn"
       ],
       "skillsObserved": [],
       "status": "active",
       "sex": "female",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Standing on the Kept Road inside the Quickwood margin, watching the eastern light",
+      "statusNote": "Standing on the Kept Road at the Quickwood margin, watching the eastern tree-line, processing what Branch reported",
       "domains": {
         "primary": "rootkin"
       },
@@ -568,7 +615,7 @@
         "locationId": "gen-quickwood-margin",
         "day": 2
       },
-      "met": 8
+      "met": 9
     }
   },
   "placeMemory": {
@@ -869,7 +916,7 @@
         "lastOutcome": "progress"
       }
     },
-    "turnsSinceOffer": 4,
+    "turnsSinceOffer": 5,
     "latentArcs": {
       "heartwood-hollowing": {
         "id": "heartwood-hollowing",
@@ -5009,22 +5056,24 @@
           "[d1] His name is written now — the first concrete thing Aelyn has set down about him in her own hand. The thread points northeast. A direction is becoming a destination.",
           "[d1] Left the Heartroot thirty years ago with no stated destination — stood in the entrance doorway, looked northeast toward the Pale, and walked. Maren was young then and remembers it.",
           "[d1] Maren believes Caelum went to the Ashwarden lands because the Rootkin would have pressed him to lean into the green — the Ashwardens work with what a thing actually is, and would not have tried to simplify his deep-woven nature. He gave them something in return for being taken in; Maren doesn't…",
-          "[d1] Caelum Kantoro — Aelyn's father, alive and northeast, almost certainly in the Ashwarden lands. He gave them something in return for being taken in; Maren believes Aelyn will recognize what it was. The kept thread settles and confirms his name when she writes it."
+          "[d1] Caelum Kantoro — Aelyn's father, alive and northeast, almost certainly in the Ashwarden lands. He gave them something in return for being taken in; Maren believes Aelyn will recognize what it was. The kept thread settles and confirms his name when she writes it.",
+          "[d2] Branch's root-sense identifies the Reaching Light as carrying the same 'old' pattern as the kept thread Caelum left in the root-wall — suggesting the light and the kept thread share an origin. Both wait for Aelyn specifically."
         ],
         "links": [
-          "heartroot",
           "the-deep-woven",
           "the-root-that-remembers",
           "root-that-remembers",
           "the-hollow-march",
           "ashwarden-lands",
-          "maren"
+          "maren",
+          "the-reaching-light",
+          "aelyn-inner-frequency"
         ],
         "aliases": [
           "Caelum Kantoro"
         ],
         "createdDay": 1,
-        "updatedDay": 1,
+        "updatedDay": 2,
         "summary": "Caelum Kantoro is Aelyn's father, alive and northeast of the Heartroot, found in the Ashwarden lands. He came to the Heartroot approximately thirty years ago, deep-woven and immediately known by the Root-That-Remembers—the only time before Aelyn that someone descending the deep grain was heard back. He sat in the entrance hall for two days, then descended and left a thread woven in his own deep-woven frequency folded in the root-wall as a message for his daughter; Maren believes he gave the Ashwardens something in return for taking him in, something Aelyn will recognize. The thread at Aelyn's sternum orients northeast and confirms his name and location as real and findable.",
         "summarisedAt": 8,
         "summaryDay": 2,
@@ -5280,12 +5329,14 @@
         "kind": "lore",
         "facts": [
           "[d2] Since the first pale stars of early-spring showed through the Quickwood canopy, a light has held its station at the eastern tree-line — not the warm amber of ne",
-          "[d2] Lifesense finds nothing in the light — no life-heat, no vigor, nothing the craft can settle into. It is not blocked; it simply has no life-signature to read. Whatever it is, it does not register as living."
+          "[d2] Lifesense finds nothing in the light — no life-heat, no vigor, nothing the craft can settle into. It is not blocked; it simply has no life-signature to read. Whatever it is, it does not register as living.",
+          "[d2] Branch root-sensed the light through the ground and found it is not living — no root, no soil-presence, no life-signature — but an old pattern, specifically comparable to the kept thread in the Heartroot's root-wall. Branch said 'same old' and confirmed it waits for Aelyn specifically, as the…"
         ],
         "links": [
           "gen-quickwood-margin",
           "aelyn-inner-frequency",
-          "aelyn-father"
+          "aelyn-father",
+          "heartroot"
         ],
         "aliases": [],
         "createdDay": 2,
@@ -5357,18 +5408,18 @@
     "deferredMysteries": []
   },
   "tendencies": {
-    "cerebral": 14.917789372072514,
-    "cautious": 10.08431216447149,
-    "generous": 0.41049933090999147,
-    "social": 4.737876476927642,
-    "strategic": 6.272267189088543,
-    "devotion": 3.2092813072739172,
-    "patient": 1.710727847460804
+    "cerebral": 15.544844637770701,
+    "cautious": 9.832204360359702,
+    "generous": 1.4002368476372418,
+    "social": 4.6194295650044515,
+    "strategic": 6.11546050936133,
+    "devotion": 3.1290492745920693,
+    "patient": 1.667959651274284
   },
   "aptitudes": [
     "scholar"
   ],
-  "actionCount": 73,
+  "actionCount": 74,
   "grantsVersion": 1,
   "reconcileVersion": 48,
   "gallery": [
@@ -5406,8 +5457,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20mid-twenties%20with%20light%20blonde%2C%20faintly%20wavy%20hair%20cut%20in%20curtain%20bangs%2C%20the%20rest%20falling%20to%20the%20small%20of%20her%20back%20%E2%80%94%20usually%20worn%20in%20a%20french%20braid%20with%20the%20bangs%20left%20loose.%20Dark%20nature-green%20tank%20to%2C%20full-body%20character%20portrait%2C%20named%20Aelyn%20Kantoro%2C%20of%20the%20rootkin%2C%20warden%2C%20carrying%20Traveler's%20Pack%2C%20Her%20mother%20dies%2C%20and%20she%20decides%20to%20go%20to%20the%20nanite%20world%2C%20to%20figure%20out%20why%20she%20is%20different%20than%20the%20pure%20nature%20peop%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=73420&nologo=true",
-  "updatedAt": 1788815028407,
-  "rev": 135,
+  "updatedAt": 1788815096990,
+  "rev": 136,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -5510,7 +5561,7 @@
     "item": {}
   },
   "regionsKnown": {
-    "the_quickwood": 74
+    "the_quickwood": 75
   },
   "opLossPending": false,
   "establishedFacts": [
@@ -5620,7 +5671,7 @@
       "lifesense": 11,
       "the_speaking_grove": 11,
       "prism_sight": 1,
-      "speaking_grove": 1
+      "speaking_grove": 2
     },
     "coActivations": {},
     "aspirations": [],
@@ -5688,10 +5739,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-09-07T20:52:08.629Z",
-      "lastAt": "2026-09-07T21:03:48.399Z",
+      "lastAt": "2026-09-07T21:04:56.970Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 8
+      "beats": 9
     }
   ],
   "livingCurrentAccess": [
@@ -5854,21 +5905,21 @@
   },
   "_intentAsked": null,
   "_opEmitted": {
-    "sceneSummary": 21,
-    "choices": 21,
-    "scene": 21,
-    "questUpdates": 5,
-    "codexUpdates": 12,
-    "timeOps": 20,
-    "sceneEnded": 7,
-    "characterDeltas": 6,
-    "npcUpdates": 17,
+    "sceneSummary": 22,
+    "choices": 22,
+    "scene": 22,
+    "questUpdates": 6,
+    "codexUpdates": 13,
+    "timeOps": 21,
+    "sceneEnded": 8,
+    "characterDeltas": 7,
+    "npcUpdates": 18,
     "offer": 2,
     "_engineClosedScene": 1,
-    "stageOps": 1,
+    "stageOps": 2,
     "generateRequest": 1
   },
-  "_opTurns": 21,
+  "_opTurns": 22,
   "knownPlaces": [
     "gen-quickwood-margin"
   ],
@@ -5892,10 +5943,11 @@
     "travel": 4,
     "careful": 8,
     "scout": 5,
-    "study": 5,
+    "study": 6,
     "comfort": 1,
     "negotiate": 1,
-    "investigate": 1
+    "investigate": 1,
+    "help": 1
   },
   "itemReclaimVersion": 1,
   "nameRepairVersion": 1,

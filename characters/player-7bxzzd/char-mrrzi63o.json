@@ -8,7 +8,7 @@
   "whyHere": "You put down the blade, or you were sent away from it, or you are looking for a line worth holding that isn't theirs.",
   "background": "war_leader",
   "level": 1,
-  "xp": 57,
+  "xp": 62,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -45,7 +45,7 @@
   "maxHealth": 46,
   "health": 46,
   "maxEnergy": 108,
-  "energy": 44,
+  "energy": 39,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -117,53 +117,95 @@
         "player": "Ask Ragnar where the nearest way gate is I have unfinished business to attend to",
         "summary": "Ragnar named the nearest way gate — back through the Marchward, north up the waystone track, half a morning from the Wardhouse. The question of what waits on the other side was left open.",
         "narration": "The scrub north of the Stillhold is quiet — pale chalk dust on your boots, Maret a few paces off watching the road south with the particular stillness of someone who has just finished something dangerous and is waiting to feel the relief of it. Ragnar stands close enough that you don't need to raise your voice.\n\n\"Ragnar.\" You keep it plain. \"The nearest way gate — where is it from here? I have unfinished business.\"\n\nHe looks at you for a moment, the jawbone necklace catching the thin spring light. Then he points hubward, northwest by the road's own bending. \"Back through the Marchward, then north up the waystone track. You passed the gate-marker yesterday — the broken stone with the iron ring hammered into it. Half a morning's walk from the Wardhouse, maybe less if you move.\" His eyes drop briefly to Freki, then back up. \"What's waiting for you on the other side?\"\n\nMaret glances over at that — the question hanging in the dry air between the three of you, the Stillhold walls a grey smudge to the south and the chalk road stretching north toward the Marchward and whatever comes after it."
+      },
+      {
+        "player": "Tell him plainly — Kjotve Olafsson, a blood oath, and a village called Javiksholm",
+        "summary": "Brynjar told Ragnar the full truth — Kjotve, the back-strike, the blood oath. Ragnar recognized the name and warned the man doesn't travel alone. Maret turned to listen.",
+        "narration": "Ragnar takes the information the way he takes everything — without surprise, without leaning away from it. His eyes stay on yours through the whole of it: Kjotve Olafsson, the duel that turned, the spear in the back, the body thrown into the water, the longhouse burning. When you finish, the scrub is quiet except for the wind moving through the new growth at the road's edge.\n\nHe says nothing for a moment. Then: \"Kjotve.\" He says it flat, the way you say a name you've heard before and not liked. \"I know the man's reputation. Not the kind that travels well.\" His jaw shifts once. \"A back-strike in a sworn duel is a thing a man doesn't come back from, in most company. Shouldn't be able to hold the land on it.\" He looks south toward the Stillhold walls, then back at you — reading something in your face the same way he read your shoulder yesterday. \"Blood oath or not, you'll want someone at your back for that one. He doesn't travel alone.\"\n\nMaret has turned from the road. She hasn't spoken, but she's listening now — the same careful attention she gave the ash copse question, which means she knows something or is deciding whether to spend it.\n\nFreki leans against your leg once, solid and warm, and then goes back to watching Maret."
       }
     ],
     "lastTurn": {
-      "narration": "The scrub north of the Stillhold is quiet — pale chalk dust on your boots, Maret a few paces off watching the road south with the particular stillness of someone who has just finished something dangerous and is waiting to feel the relief of it. Ragnar stands close enough that you don't need to raise your voice.\n\n\"Ragnar.\" You keep it plain. \"The nearest way gate — where is it from here? I have unfinished business.\"\n\nHe looks at you for a moment, the jawbone necklace catching the thin spring light. Then he points hubward, northwest by the road's own bending. \"Back through the Marchward, then north up the waystone track. You passed the gate-marker yesterday — the broken stone with the iron ring hammered into it. Half a morning's walk from the Wardhouse, maybe less if you move.\" His eyes drop briefly to Freki, then back up. \"What's waiting for you on the other side?\"\n\nMaret glances over at that — the question hanging in the dry air between the three of you, the Stillhold walls a grey smudge to the south and the chalk road stretching north toward the Marchward and whatever comes after it.",
-      "sceneSummary": "Ragnar named the nearest way gate — back through the Marchward, north up the waystone track, half a morning from the Wardhouse. The question of what waits on the other side was left open.",
+      "narration": "Ragnar takes the information the way he takes everything — without surprise, without leaning away from it. His eyes stay on yours through the whole of it: Kjotve Olafsson, the duel that turned, the spear in the back, the body thrown into the water, the longhouse burning. When you finish, the scrub is quiet except for the wind moving through the new growth at the road's edge.\n\nHe says nothing for a moment. Then: \"Kjotve.\" He says it flat, the way you say a name you've heard before and not liked. \"I know the man's reputation. Not the kind that travels well.\" His jaw shifts once. \"A back-strike in a sworn duel is a thing a man doesn't come back from, in most company. Shouldn't be able to hold the land on it.\" He looks south toward the Stillhold walls, then back at you — reading something in your face the same way he read your shoulder yesterday. \"Blood oath or not, you'll want someone at your back for that one. He doesn't travel alone.\"\n\nMaret has turned from the road. She hasn't spoken, but she's listening now — the same careful attention she gave the ash copse question, which means she knows something or is deciding whether to spend it.\n\nFreki leans against your leg once, solid and warm, and then goes back to watching Maret.",
+      "sceneSummary": "Brynjar told Ragnar the full truth — Kjotve, the back-strike, the blood oath. Ragnar recognized the name and warned the man doesn't travel alone. Maret turned to listen.",
       "choices": [
         {
-          "label": "Tell him plainly — Kjotve Olafsson, a blood oath, and a village called Javiksholm",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": "easy",
-          "intentTags": [
-            "negotiate",
-            "lead"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Give nothing away — say only that it's personal, and ask if either of them want to travel with you toward the Marchward",
+          "label": "Ask Maret what she knows about Kjotve or his movements",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": "easy",
+          "trivial": true,
           "intentTags": [
-            "careful",
-            "lead"
-          ],
-          "trivial": false
+            "negotiate"
+          ]
         },
         {
-          "label": "Turn to Maret first — she has something to say, and whatever she learned in the record-hall may change your route",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": "very easy",
+          "label": "Ask Ragnar what he means: Kjotve doesn't travel alone",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": "easy",
+          "trivial": true,
           "intentTags": [
             "study"
-          ],
-          "trivial": true
+          ]
         },
         {
-          "label": "Start walking north toward the Marchward and let them decide whether to follow",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": "very easy",
+          "label": "Tell them both what the oath requires — not just the killing, but the honor of it",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": "easy",
+          "trivial": true,
           "intentTags": [
-            "travel"
+            "lead"
+          ]
+        },
+        {
+          "label": "Suggest moving off the open road before Maret speaks what she learned in the Stillhold",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": "easy",
+          "trivial": true,
+          "intentTags": [
+            "careful"
+          ]
+        }
+      ],
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "ragnar-solmyr",
+          "note": "Recognized Kjotve Olafsson's name and reputation. Called out the back-strike as dishonorable by Marcher standards. Warned Brynjar that Kjotve doesn't travel alone. Offered, implicitly, that this is a job needing a second.",
+          "learned": [
+            "Kjotve Olafsson's reputation is known in the Marches — and not favorably",
+            "A back-strike in a sworn duel is recognized as disqualifying under Marcher custom",
+            "Kjotve doesn't travel alone"
           ],
-          "trivial": true
+          "skillsObserved": [
+            "intelligence analysis"
+          ],
+          "relationshipDelta": 0,
+          "statusNote": "Standing in the scrub north of the Stillhold with Brynjar and Maret; has heard the blood oath and recognized Kjotve's name"
+        },
+        {
+          "op": "update",
+          "npcId": "maret-threnwick",
+          "note": "Turned from the road to listen when Kjotve was named — listening with the careful attention she gave the ash copse question. Has not spoken yet.",
+          "learned": [
+            "Heard Brynjar's blood oath and Kjotve's name; recognized something worth listening to"
+          ],
+          "statusNote": "Standing in the scrub north of the Stillhold; turned to listen at Kjotve's name — seems to know something or is deciding whether to say it"
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "kjotve-olafsson",
+          "label": "Kjotve Olafsson",
+          "kind": "person",
+          "fact": "Ragnar Solmyr recognized Kjotve's name and reputation without prompting — called it 'not the kind that travels well.' Under Marcher custom, a back-strike in a sworn duel is disqualifying; a man shouldn't be able to hold land taken that way. Ragnar also noted Kjotve doesn't travel alone.",
+          "links": [
+            "brynjar-andyrsson-thread",
+            "javiksholm",
+            "ragnar-solmyr"
+          ]
         }
       ],
       "scene": {
@@ -171,15 +213,15 @@
         "npcsPresent": [
           {
             "name": "Ragnar Solmyr",
-            "state": "Standing close, watching Brynjar after answering, jaw easy, waiting for what comes next"
+            "state": "Standing close; jaw easy, watching Brynjar after speaking — waiting"
           },
           {
             "name": "Maret Threnwick",
-            "state": "Standing a few paces off, watching the road south — turned slightly at Ragnar's question"
+            "state": "Has turned from the road; listening carefully, not yet speaking"
           },
           {
             "name": "Freki",
-            "state": "Sitting at Brynjar's heel, watching Maret"
+            "state": "Leaning against Brynjar's leg; watching Maret"
           }
         ],
         "objects": [
@@ -189,42 +231,10 @@
           "pale spring light"
         ],
         "threads": [
-          "Ragnar's question — what's waiting on the other side of the way gate — is open in the air",
+          "Ragnar warned Kjotve doesn't travel alone — what that means is unexplained",
+          "Maret turned at Kjotve's name and is listening — seems to know something",
           "Maret has something from the record-hall she won't say on the open road"
         ]
-      },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "ragnar-solmyr",
-          "note": "Named the nearest way gate: back through the Marchward, north up the waystone track from the Wardhouse — the broken stone with the iron ring. Asked what is waiting on the other side.",
-          "learned": [
-            "The nearest way gate is half a morning north of the Marchward Wardhouse, marked by a broken stone with an iron ring"
-          ],
-          "statusNote": "Standing in the scrub north of the Stillhold with Brynjar and Maret; asked what is waiting at the way gate"
-        },
-        {
-          "op": "update",
-          "npcId": "maret-threnwick",
-          "note": "Glanced over at Ragnar's question — still waiting to speak what she learned inside",
-          "statusNote": "Standing in the elder scrub north of the Stillhold, delivery done, holding what she learned inside — waiting for cover before she speaks it"
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "the-marchward",
-          "label": "The Marchward",
-          "kind": "place",
-          "fact": "The nearest way gate is half a morning north of the Marchward Wardhouse, marked by a broken stone with an iron ring hammered into it — on the waystone track heading hubward from the town.",
-          "links": [
-            "brynjar-andyrsson-thread",
-            "ragnar-solmyr"
-          ]
-        }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A short exchange standing in the scrub"
       }
     },
     "sceneState": {
@@ -232,15 +242,15 @@
       "npcsPresent": [
         {
           "name": "Ragnar Solmyr",
-          "state": "Standing close, watching Brynjar after answering, jaw easy, waiting for what comes next"
+          "state": "Standing close; jaw easy, watching Brynjar after speaking — waiting"
         },
         {
           "name": "Maret Threnwick",
-          "state": "Standing a few paces off, watching the road south — turned slightly at Ragnar's question"
+          "state": "Has turned from the road; listening carefully, not yet speaking"
         },
         {
           "name": "Freki",
-          "state": "Sitting at Brynjar's heel, watching Maret"
+          "state": "Leaning against Brynjar's leg; watching Maret"
         }
       ],
       "objects": [
@@ -250,16 +260,17 @@
         "pale spring light"
       ],
       "threads": [
-        "Ragnar's question — what's waiting on the other side of the way gate — is open in the air",
+        "Ragnar warned Kjotve doesn't travel alone — what that means is unexplained",
+        "Maret turned at Kjotve's name and is listening — seems to know something",
         "Maret has something from the record-hall she won't say on the open road"
       ]
     },
-    "beats": 1
+    "beats": 2
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 13,
+    "hour": 14,
     "realAnchor": null
   },
   "companions": [
@@ -458,7 +469,6 @@
       },
       "relationship": 2,
       "history": [
-        "[d1] Matched Brynjar's pace for four miles without complaint. Standing at right shoulder now, watchful, not crowding.",
         "[d1] Standing at Brynjar's right shoulder through the introduction — present but not crowding the exchange. Maret's angle toward him has eased slightly as Brynjar spoke.",
         "[d1] Held his quiet at Brynjar's shoulder through Maret's explanation — present, listening, not crowding the exchange.",
         "[d1] Held his quiet through Maret's refusal — no comment, no move.",
@@ -467,17 +477,18 @@
         "[d1] Waited in easy quiet through the hour — patient, unhurried, a brief exchange about the mud and the weather, then silence. Watching now as Maret comes back through the gate.",
         "[d1] Held quiet on his stone through Maret's return — watching with interest, no comment.",
         "[d1] Unfolded from his stone and fell into step without being asked — quiet, watching south by habit.",
-        "[d1] Named the nearest way gate: back through the Marchward, north up the waystone track from the Wardhouse — the broken stone with the iron ring. Asked what is waiting on the other side."
+        "[d1] Named the nearest way gate: back through the Marchward, north up the waystone track from the Wardhouse — the broken stone with the iron ring. Asked what is waiting on the other side.",
+        "[d1] Recognized Kjotve Olafsson's name and reputation. Called out the back-strike as dishonorable by Marcher standards. Warned Brynjar that Kjotve doesn't travel alone. Offered, implicitly, that this is a job needing a second."
       ],
       "knownFacts": [
-        "Offered it as professional courtesy, not threat",
-        "Movement at the south fork before dawn — two people, direction south toward Stillhold road",
-        "Stillhold sends quiet operatives out — not travelers; they don't check in at Wardhouses",
         "The Marchers call whatever they carry a 'binding' — a cord, a knot, a mark; not a weapon",
         "At least one person dropped a trail they couldn't explain after encountering something like the shimmer",
         "The heavier follower left Sera's trail at the waypost junction and entered the ash copse — a position with a clear line of sight to the road",
         "Route-knowledge before a delivery means someone already knew the debt existed, the cord was moving, and the road it would take — planning, not surveillance; inside information, not hired eyes.",
-        "The nearest way gate is half a morning north of the Marchward Wardhouse, marked by a broken stone with an iron ring"
+        "The nearest way gate is half a morning north of the Marchward Wardhouse, marked by a broken stone with an iron ring",
+        "Kjotve Olafsson's reputation is known in the Marches — and not favorably",
+        "A back-strike in a sworn duel is recognized as disqualifying under Marcher custom",
+        "Kjotve doesn't travel alone"
       ],
       "skillsObserved": [
         "ground-reading",
@@ -490,7 +501,7 @@
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "Standing in the scrub north of the Stillhold with Brynjar and Maret; asked what is waiting at the way gate",
+      "statusNote": "Standing in the scrub north of the Stillhold with Brynjar and Maret; has heard the blood oath and recognized Kjotve's name",
       "domains": {
         "primary": "marcher"
       },
@@ -502,7 +513,7 @@
       "aliases": [
         "Redline Warrior"
       ],
-      "met": 8
+      "met": 9
     },
     "sera": {
       "id": "sera",
@@ -850,7 +861,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 3,
+    "turnsSinceOffer": 4,
     "recentOffers": [
       {
         "thing": "Doss watching Brynjar with the stillness of someone deciding something — she has not offered it yet, but she is on the edge of it",
@@ -3287,11 +3298,13 @@
         "kind": "person",
         "facts": [
           "[d1] Jarl who led the raid on Javiksholm. Won Andyr's land by having a spearman strike Andyr from behind mid-duel — a formal fight turned to murder when Kjotve was losing. Now holds Javiksholm's fields and shore. Andyr's body was thrown into the ocean.",
-          "[d1] met in play"
+          "[d1] met in play",
+          "[d1] Ragnar Solmyr recognized Kjotve's name and reputation without prompting — called it 'not the kind that travels well.' Under Marcher custom, a back-strike in a sworn duel is disqualifying; a man shouldn't be able to hold land taken that way. Ragnar also noted Kjotve doesn't travel alone."
         ],
         "links": [
           "brynjar-andyrsson-thread",
-          "javiksholm"
+          "javiksholm",
+          "ragnar-solmyr"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -3667,19 +3680,19 @@
     ]
   },
   "tendencies": {
-    "leadership": 6.071281275857035,
-    "cerebral": 6.088416237667258,
-    "strategic": 4.293501828045889,
-    "ruthless": 0.4561871908223564,
-    "social": 8.864198327574533,
-    "cautious": 8.541914140424732,
-    "generous": 0.8590683010253904,
-    "patient": 0.9268593749999999
+    "leadership": 6.919499243960609,
+    "cerebral": 5.936205831725577,
+    "strategic": 4.186164282344741,
+    "ruthless": 0.4447825110517975,
+    "social": 9.64259336938517,
+    "cautious": 8.328366286914113,
+    "generous": 0.8375915934997556,
+    "patient": 0.9036878906249999
   },
   "aptitudes": [
     "banner"
   ],
-  "actionCount": 33,
+  "actionCount": 34,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -3831,8 +3844,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788788588765,
-  "rev": 92,
+  "updatedAt": 1788788668680,
+  "rev": 93,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4098,7 +4111,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 36
+    "riven_marches": 37
   },
   "practice": {
     "schemaVersion": 1,
@@ -4178,10 +4191,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-09-07T13:23:54.773Z",
-      "lastAt": "2026-09-07T13:43:08.757Z",
+      "lastAt": "2026-09-07T13:44:28.670Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 8
+      "beats": 9
     }
   ],
   "_pendingArrival": null,
@@ -4197,15 +4210,15 @@
     "at": "2026-07-23T01:18:04.353Z"
   },
   "_opEmitted": {
-    "sceneSummary": 29,
-    "choices": 29,
-    "scene": 29,
-    "npcUpdates": 27,
+    "sceneSummary": 30,
+    "choices": 30,
+    "scene": 30,
+    "npcUpdates": 28,
     "placeUpdates": 5,
     "generateRequest": 3,
     "moveTo": 3,
     "timeOps": 28,
-    "codexUpdates": 26,
+    "codexUpdates": 27,
     "sceneEnded": 8,
     "characterDeltas": 10,
     "offer": 4,
@@ -4215,7 +4228,7 @@
     "stageOps": 2,
     "factUpdates": 1
   },
-  "_opTurns": 29,
+  "_opTurns": 30,
   "_opLedger": {
     "offer": {
       "applied": 4,
@@ -4306,7 +4319,7 @@
   "_applyFailures": null,
   "_debtReceipts": [],
   "skillUses": {
-    "negotiate": 4,
+    "negotiate": 5,
     "careful": 3,
     "help": 1,
     "plan": 1,
@@ -4314,7 +4327,8 @@
     "sustain": 1,
     "study": 1,
     "travel": 1,
-    "ask": 1
+    "ask": 1,
+    "lead": 1
   },
   "aptitudeEarnCount": {
     "banner": 1

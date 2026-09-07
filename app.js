@@ -127,7 +127,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.408";
+const APP_VERSION = "1.9.409";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -13887,7 +13887,8 @@ function skillBattlePanel() {
     </details>
     ${st.spent?.player ? `<div class="sb-spent-bar">🕯 <strong>You are spent</strong> — your crafts will not answer until you find energy. <span class="hint">Steel and wit still work (a plain strike, a raised guard). This is the moment to <strong>Yield</strong> by choice, or use something that restores you — the fight no longer ends itself here.</span></div>` : ""}
     ${st.spent?.opponent ? `<div class="sb-spent-bar dim">🕯 <strong>${esc(def.opponent?.name || "They")} are spent</strong> — swinging on will alone. <span class="hint">Their crafts are done; press it.</span></div>` : ""}
-    ${busySB ? `<div class="sb-waiting"><span class="sb-spinner"></span> ${esc(sbBusyLabel || "resolving…")}</div>` : ""}
+    ${busySB ? `<div class="sb-waiting"><span class="sb-spinner"></span> ${esc(sbBusyLabel || "resolving…")}
+      <button class="opt sb-escape" id="sb-escape" hidden title="Stop waiting for the narrator. What the engine decided already stands — only the telling is lost">Continue anyway</button></div>` : ""}
     ${sbQuickBeat && !busySB ? `<div class="sb-quick">${esc(sbQuickBeat)}</div>` : ""}
     ${turn.senseBlinded ? `<div class="sb-spent-bar">◉ <strong>Blinded</strong> — your senses are shut this turn. <span class="hint">You go straight to your action; the read is denied you.</span></div>` : ""}
     ${turn.phase === "review" ? sbReviewCard(turn, skills) : `
@@ -14006,7 +14007,40 @@ function wireSkillBattlePanel() {
     renderPlay(character.activeScene?.lastTurn || null, {});
   };
   const fl = document.getElementById("sb-flee"); if (fl) fl.onclick = () => beginChaseFromFight(activeEnc()?.def); // SNG-230 §6a: FLEE a fight → a real CHASE
+  // ⛔ THE WAY OUT, ALWAYS. It reveals itself after a few seconds of waiting — early enough that nobody is trapped,
+  // late enough that it is not advertising a fault. ⚑ Pressing it costs only the telling: the engine's result was
+  // saved before the narrator was ever called.
+  const escBtn = document.getElementById("sb-escape");
+  if (escBtn) {
+    escBtn.onclick = () => { sbSetBusy(false); renderPlay(character?.activeScene?.lastTurn || null, { aside: "You carried on without the telling. What the engine decided stands." }); renderSkillBattle(sbLastRound); };
+    setTimeout(() => { const b = document.getElementById("sb-escape"); if (b && sbBusy) b.hidden = false; }, SB_ESCAPE_AFTER_MS);
+  }
   const yl = document.getElementById("sb-yield"); if (yl) yl.onclick = () => sbEnd(skillBattleRound(enc.state, enc.def, {}, { character, content: CONTENT, rules: CONTENT.rules, sb, steps, party: seatParty(), yield: true }));
+}
+
+/* ═══ THE FIGHT'S BUSY FLAG HAS ONE WRITER, AND THE WRITER CANNOT BE TRUSTED TO FINISH ═══
+ * ⛔ Erik, twice: "my battle seems to have gotten stuck" and then "it faltered this time and froze. Need a robust fix."
+ * ⚠️ MY FIRST FIX GUARDED THE PATHS I COULD SEE, which is not robustness — it is a longer list of things I thought of.
+ * ⚑ A WATCHDOG DOES NOT CARE WHY. Whatever sets the flag starts a timer; if the flag is still set when it fires, it is
+ * released, the player is told, and the screen is redrawn. That covers the awaits I found, the ones I did not, and the
+ * ones added later. ⛑ AND IT IS SAFE TO RELEASE: every fight step SAVES its mechanical result before it calls the
+ * narrator, so the only thing an early release can cost is prose. */
+const SB_WATCHDOG_MS = 60000;      // generous: a slow model is not a hang. Past this, nothing is coming.
+const SB_ESCAPE_AFTER_MS = 8000;   // and the player gets a way out long before that
+let _sbWatchdog = null;
+function sbSetBusy(on, label = "") {
+  sbBusy = !!on;
+  sbBusyLabel = on ? label : "";
+  if (_sbWatchdog) { clearTimeout(_sbWatchdog); _sbWatchdog = null; }
+  if (!on) return;
+  _sbWatchdog = setTimeout(() => {
+    _sbWatchdog = null;
+    if (!sbBusy) return;
+    console.error("[fight] watchdog: the turn never released the screen — freeing it");
+    sbBusy = false; sbBusyLabel = "";
+    try { renderPlay(character?.activeScene?.lastTurn || null, { aside: "The narrator never answered. Your turn is yours again \u2014 what the engine decided already stands." }); } catch { /* the redraw below is what matters */ }
+    try { renderSkillBattle(sbLastRound); } catch { /* nothing left to do but let the player act */ }
+  }, SB_WATCHDOG_MS);
 }
 
 /** ⛔ A NARRATION CALL THAT NEVER ANSWERS MUST NOT WEDGE A FIGHT. `runGM` has no deadline of its own, and in a fight
@@ -14024,7 +14058,7 @@ async function sbResolveSense() {
   const decl = sbDeclFromSel(turn.sel.sense, skills, sbIntensity);
   turn.senseDone = true;
   if (!decl) { turn.phase = "action"; saveCharacter(character); renderSkillBattle(sbLastRound); return; }
-  sbBusy = true; sbBusyLabel = `Reading ${enc.def?.opponent?.name || "them"}…`; sbQuickBeat = ""; renderSkillBattle(sbLastRound);
+  sbSetBusy(true, `Reading ${enc.def?.opponent?.name || "them"}…`); sbQuickBeat = ""; renderSkillBattle(sbLastRound);
   // ⛔ EVERYTHING FROM HERE IS GUARDED. This stretch used to run OUTSIDE the try, so one throw in `playTurn` or the
   // logging left `sbBusy` set forever: every control disabled, a spinner that never stops, and no way to proceed
   // (Erik, mid-fight: "my battle seems to have gotten stuck when I locked in the sense step"). A hiccup never blocks play.
@@ -14070,7 +14104,7 @@ async function sbResolveSense() {
     try { saveCharacter(character); } catch { /* best effort */ }
     renderPlay(character.activeScene?.lastTurn || null, { aside: `The read did not resolve (${esc(String(err?.message || err).slice(0, 80))}). Your turn is still yours \u2014 choose your action.` });
   }
-  finally { sbBusy = false; sbBusyLabel = ""; renderSkillBattle(sbLastRound); }
+  finally { sbSetBusy(false); renderSkillBattle(sbLastRound); }
 }
 
 /** CCODE-45 · GM CALL #2 — resolve the ACTION (and the BONUS if earned), then narrate the WHOLE turn. */
@@ -14101,7 +14135,7 @@ async function sbExecuteTurn() {
   const aDecl = sbDeclFromSel(turn.sel.action, skills, sbIntensity);
   if (!aDecl) { turn.phase = "action"; saveCharacter(character); renderSkillBattle(sbLastRound); return; }
   const bDecl = turn.bonusEarned ? sbDeclFromSel(turn.sel.bonus, skills, sbIntensity) : null;
-  sbBusy = true; sbBusyLabel = "Resolving the turn…"; sbQuickBeat = ""; renderSkillBattle(sbLastRound);
+  sbSetBusy(true, "Resolving the turn…"); sbQuickBeat = ""; renderSkillBattle(sbLastRound);
   // ⛔ GUARDED FOR THE SAME REASON AS THE SENSE STEP — the flag must not be able to outlive a failure.
   try {
   const beats = [];
@@ -14153,7 +14187,7 @@ async function sbExecuteTurn() {
   if (!ended && checkIncapacitation(character)) {
     character.activeEncounter.state.turn = sbFreshTurn();
     saveCharacter(character);
-    sbBusy = false; sbEnd({ ...rr, ended: true, outcome: "incapacitated" }); return;
+    sbSetBusy(false); sbEnd({ ...rr, ended: true, outcome: "incapacitated" }); return;
   }
   // BONUS — a FULL action; it ticks the turn's effects, being the last step.
   if (!ended && bDecl) {
@@ -14165,19 +14199,19 @@ async function sbExecuteTurn() {
   }
   character.activeEncounter.state.turn = sbFreshTurn(); // the next turn starts clean
   saveCharacter(character);
-  if (checkIncapacitation(character)) { sbBusy = false; sbEnd({ ...endRR, ended: true, outcome: "incapacitated" }); return; }
-  if (ended) { sbBusy = false; sbEnd(endRR); return; }
+  if (checkIncapacitation(character)) { sbSetBusy(false); sbEnd({ ...endRR, ended: true, outcome: "incapacitated" }); return; }
+  if (ended) { sbSetBusy(false); sbEnd(endRR); return; }
   const nm = enc.def?.opponent?.name || "your opponent";
   // CCODE-47 (Erik): "you could have haiku do a short narration of the different skills each is using to describe
   // the turn - and indicate the narration is processing - then show the big narrative result." So a FAST Haiku beat
   // lands first — the clash of techniques, nothing more — while the panel keeps saying the full telling is coming.
   // It is a GRACE, never a gate: a failure here leaves the turn and the full narration untouched.
-  sbBusyLabel = "Telling the turn…";
+  sbSetBusy(true, "Telling the turn…");   // a new leg, a fresh watchdog
   renderSkillBattle(sbLastRound);
   try {
-    const quick = await callClaude([{ role: "user", content:
+    const quick = await raceTimeout(callClaude([{ role: "user", content:
       `In 2 short sentences, present tense, describe ONLY the clash of techniques in this exchange — name what each side DID. No outcome, no aftermath, no dialogue.\n${beats.map(b => `- ${b}`).join("\n")}\nThe opponent is ${nm}.` }],
-      { task: "combat-quick-beat", maxTokens: 160 });
+      { task: "combat-quick-beat", maxTokens: 160 }), 20000, "QUICK_TIMEOUT");   // ⛔ this await had NO deadline and could wedge the turn at "Telling the turn…"
     if (quick) { sbQuickBeat = String(quick).trim(); renderPlay(character.activeScene?.lastTurn || null, { aside: sbQuickBeat }); }
   } catch { /* a grace, never a gate */ }
   // ⛔ THE FOLDED ALLIES ARE PART OF WHAT HAPPENED, AND THE GM WAS NEVER TOLD (Erik: "the intent was that she and coil
@@ -14213,7 +14247,7 @@ async function sbExecuteTurn() {
     console.error("[fight] the turn failed to resolve:", err);
     renderPlay(character.activeScene?.lastTurn || null, { aside: `The turn did not resolve (${esc(String(err?.message || err).slice(0, 80))}). Nothing was lost \u2014 try it again.` });
   }
-  finally { sbBusy = false; sbBusyLabel = ""; sbQuickBeat = ""; renderSkillBattle(sbLastRound); }
+  finally { sbSetBusy(false); sbQuickBeat = ""; renderSkillBattle(sbLastRound); }
 }
 
 /** SNG-246 BUG1: renderSkillBattle is now a THIN ALIAS — there is no separate skill-battle screen. It carries the

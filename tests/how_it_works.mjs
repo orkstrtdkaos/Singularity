@@ -8867,14 +8867,14 @@ console.log("\n── §134 · a spinner you cannot escape is worse than an erro
   const body = (name) => { const i = app.indexOf(`async function ${name}(`); if (i < 0) return ""; const j = app.indexOf("\n}", i); return decomment(app.slice(i, j)); };
   for (const fn of ["sbResolveSense", "sbExecuteTurn"]) {
     const b = body(fn);
-    const flagAt = b.indexOf("sbBusy = true");
+    const flagAt = b.indexOf("sbSetBusy(true");   // the flag has ONE writer now (§135)
     const tryAt = b.indexOf("try {", flagAt);
     const between = flagAt >= 0 && tryAt > flagAt ? b.slice(flagAt, tryAt) : "";
     check(`§134: ⛔ ${fn} CANNOT LEAVE THE SPINNER UP — nothing but the render runs between setting the flag and the try`,
       flagAt >= 0 && tryAt > flagAt && !/playTurn|skillBattleRound|saveCharacter|sbLogRound|applyRoundToCharacter/.test(between),
       between.replace(/\s+/g, " ").slice(0, 110));
-    check(`§134: …and its finally clears the flag, so no failure can outlive the turn`,
-      /finally \{ sbBusy = false;/.test(b) && (b.match(/catch \(err\)/g) || []).length >= 2);
+    check(`§134: …and its finally releases through the one writer, so no failure can outlive the turn`,
+      /finally \{ sbSetBusy\(false\);/.test(b) && (b.match(/catch \(err\)/g) || []).length >= 2);
   }
   check("§134: ⛔ AND A SILENT NETWORK FAILS LOUDLY — both fight narrations carry a deadline, because a call that never answers is indistinguishable from a wedged app",
     /function runGMOrTimeout\(args\) \{ return raceTimeout\(runGM\(args\), GM_FIGHT_DEADLINE_MS/.test(app) && (app.match(/await runGMOrTimeout\(/g) || []).length === 2);
@@ -8888,6 +8888,47 @@ console.log("\n── §134 · a spinner you cannot escape is worse than an erro
     /acting for themselves, and narrated with you/.test(app) && !/fighting, not narrated/.test(app));
   check("§134: ⛔ …and NOBODY ACTS FOR THEM — no control anywhere picks a folded ally's move",
     !/declareFor|actFor\(|chooseForAlly|data-ally-declare/.test(app));
+}
+
+/* ═════ §135 — THE FIGHT RELEASES ITSELF, WHATEVER GOES WRONG (Erik: "it faltered this time and froze. Need a robust fix") ═════ */
+// ⛔ MY FIRST FIX GUARDED THE PATHS I COULD SEE, and it froze again. A fix that depends on having enumerated the
+// failures is not robustness — it is a longer list of things I happened to think of, and there was at least one more
+// (the quick-beat await had no deadline). ⚑ SO THE FLAG HAS ONE WRITER AND A WATCHDOG THAT DOES NOT CARE WHY:
+// whatever sets it starts a timer, and if it is still set when that fires, it is released and the player is told.
+// ⛑ Safe by construction: every fight step SAVES its mechanical result before it calls the narrator, so an early
+// release can only ever cost prose.
+console.log("\n── §135 · a watchdog does not need to know what broke ──");
+{
+  const app = rd("app.js");
+  const decomment = (t) => t.replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
+  const code = decomment(app);
+  check("§135: ⛔ THE BUSY FLAG HAS EXACTLY ONE WRITER — every fight step goes through it, so no path can set it and forget",
+    /function sbSetBusy\(on, label = ""\)/.test(code)
+    // ⚠️ the DECLARATION (`let sbBusy = false`) is not a write; only assignments outside the setter count.
+    && (code.match(/(?<!let )sbBusy = (?:true|false)/g) || []).length === 1,
+    `assignments outside the setter: ${((code.match(/(?<!let )sbBusy = (?:true|false)/g) || []).length) - 1}`);
+  check("§135: ⛔ …AND A WATCHDOG RELEASES IT WHATEVER HAPPENED — it checks the flag, not the reason",
+    /_sbWatchdog = setTimeout\(\(\) => \{/.test(code) && /if \(!sbBusy\) return;/.test(code)
+    && /sbBusy = false; sbBusyLabel = "";/.test(code) && /SB_WATCHDOG_MS/.test(code));
+  check("§135: …and it redraws even if telling the player throws — the last thing it does is hand the screen back",
+    /catch \{ \/\* the redraw below is what matters \*\/ \}[\s\S]{0,220}renderSkillBattle\(sbLastRound\); \} catch/.test(app));
+  check("§135: ⛔ EVERY NETWORK AWAIT IN THE FIGHT CARRIES A DEADLINE — including the quick beat, which had none and could wedge the turn at 'Telling the turn…'",
+    /await raceTimeout\(callClaude\(/.test(code) && (code.match(/await runGMOrTimeout\(/g) || []).length === 2
+    && !/await callClaude\(/.test(code.split("async function sbExecuteTurn")[1] || ""));
+  check("§135: ⚑ AND THE PLAYER IS NEVER TRAPPED — a way out appears after a few seconds and costs only the telling",
+    /id="sb-escape"/.test(app) && /SB_ESCAPE_AFTER_MS/.test(code) && /escBtn\.onclick = \(\) => \{ sbSetBusy\(false\)/.test(code)
+    && /b\.hidden = false;/.test(code));
+  check("§135: …and it is not named `esc` — that is the escaping helper, and shadowing it inside a render is its own bug",
+    !/const esc = document\.getElementById\("sb-escape"\)/.test(code) && /const escBtn = document\.getElementById\("sb-escape"\)/.test(code));
+  // ⛔ THE PROPERTY THAT MAKES RELEASING SAFE: the result is saved before the narrator is called, in BOTH steps.
+  for (const fn of ["sbResolveSense", "sbExecuteTurn"]) {
+    const i = code.indexOf(`async function ${fn}(`);
+    const body = code.slice(i, code.indexOf("\n}", i));
+    const saved = body.indexOf("saveCharacter(character)");
+    const told = body.search(/await (runGMOrTimeout|raceTimeout)\(/);
+    check(`§135: ⛔ ${fn} SAVES BEFORE IT TELLS — so releasing early can only cost prose, never the turn`,
+      saved > 0 && told > 0 && saved < told, `save at ${saved}, narrate at ${told}`);
+  }
 }
 
 /* ══════════ REPORT ══════════ */

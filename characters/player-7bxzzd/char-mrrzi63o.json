@@ -8,7 +8,7 @@
   "whyHere": "You put down the blade, or you were sent away from it, or you are looking for a line worth holding that isn't theirs.",
   "background": "war_leader",
   "level": 1,
-  "xp": 87,
+  "xp": 92,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -45,7 +45,7 @@
   "maxHealth": 46,
   "health": 46,
   "maxEnergy": 108,
-  "energy": 7,
+  "energy": 2,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -128,75 +128,63 @@
         "player": "Ask her plainly: what did the record-hall tell you?",
         "summary": "Maret named what the record-hall showed her: a seven-year-old debt marker with a restricted creditor, and a clerk who knew the name before reading it.",
         "narration": "The stranger's boots are gone into the dark, and the fire settles. You look across the coals at Maret.\n\n\"What did the record-hall tell you?\"\n\nShe doesn't rush it. She shifts her weight, pulls her grey cloak tighter at the collar, and looks into the fire for a moment the way people do when they're deciding exactly where to start. Then she speaks, flat and precise.\n\n\"The cord I carried was a debt marker — a formal one, registered at origin. Seven years old. The record-hall confirmed receipt and logged the closure.\" A pause. \"But the clerk who took it didn't look at me the way a clerk looks at someone closing a routine case. He knew the name on the cord before he read it. And when I asked who had filed the original — who the creditor of record was — he said the file was restricted. Internal Stillhold business. That phrase.\"\n\nShe finally looks at you. \"A seven-year-old debt marker. Restricted creditor. And someone knew which road I would walk before I walked it.\" She says the three things the way you'd lay stones in a row — deliberate, letting the weight speak. \"The debt is closed. The cord is logged. But whoever filed that debt marker is not a stranger, and they didn't want anyone asking.\"\n\nFreki shifts beside you, her nose tilting slightly toward Maret — not a warning, just attention. Maret notices and drops her gaze to the hound for a moment, something almost wry crossing her face. She's said what she came to say. The rest is yours to do with."
+      },
+      {
+        "player": "Ask her directly — whose name was on the cord, and who owed whom?",
+        "summary": "Maret named the cord's debtor — herself — and confirmed the creditor is restricted, the file recently watched, and the clerk already knew her name.",
+        "narration": "Maret holds the pause a moment longer — not reluctant, you think, but precise. When she speaks, her voice stays low and even, the kind of flat delivery that means the words cost something.\n\n\"The name on the cord was mine. Maret Threnwick, filed as debtor. Seven years ago, I borrowed against a journey — a passage fee, formally recorded. The creditor listed is restricted.\" She meets your eyes across the coals. \"That is not standard. A restricted creditor on a personal debt marker means someone inside the Stillhold didn't want the other name legible from the outside. The clerk — he'd seen my name before I'd said it. Not guessed. Seen it. Which means that file has had eyes on it recently, and not for the first time.\"\n\nRagnar doesn't move, but something in his jaw settles — the particular stillness of a man who's just had a shape confirmed. He says nothing, which is its own kind of answer.\n\nFreki has her chin on her forepaws, but her ears are up. She's been watching Maret since the stranger left, and there's no growl in her, no bristle — just attention, careful and patient. Whatever Maret is carrying, the hound has decided she's carrying it honestly.\n\nMaret folds her hands inside her cloak. \"I don't know who filed it. I don't know why they wanted the debt kept moving for seven years rather than called in. But someone inside those walls let me walk out without an answer, and the clerk didn't offer to find one.\" She looks into the fire. \"I came out because the debt is closed. Whatever the rest of it is, it's still in there.\""
       }
     ],
     "lastTurn": {
-      "narration": "The stranger's boots are gone into the dark, and the fire settles. You look across the coals at Maret.\n\n\"What did the record-hall tell you?\"\n\nShe doesn't rush it. She shifts her weight, pulls her grey cloak tighter at the collar, and looks into the fire for a moment the way people do when they're deciding exactly where to start. Then she speaks, flat and precise.\n\n\"The cord I carried was a debt marker — a formal one, registered at origin. Seven years old. The record-hall confirmed receipt and logged the closure.\" A pause. \"But the clerk who took it didn't look at me the way a clerk looks at someone closing a routine case. He knew the name on the cord before he read it. And when I asked who had filed the original — who the creditor of record was — he said the file was restricted. Internal Stillhold business. That phrase.\"\n\nShe finally looks at you. \"A seven-year-old debt marker. Restricted creditor. And someone knew which road I would walk before I walked it.\" She says the three things the way you'd lay stones in a row — deliberate, letting the weight speak. \"The debt is closed. The cord is logged. But whoever filed that debt marker is not a stranger, and they didn't want anyone asking.\"\n\nFreki shifts beside you, her nose tilting slightly toward Maret — not a warning, just attention. Maret notices and drops her gaze to the hound for a moment, something almost wry crossing her face. She's said what she came to say. The rest is yours to do with.",
-      "sceneSummary": "Maret named what the record-hall showed her: a seven-year-old debt marker with a restricted creditor, and a clerk who knew the name before reading it.",
+      "narration": "Maret holds the pause a moment longer — not reluctant, you think, but precise. When she speaks, her voice stays low and even, the kind of flat delivery that means the words cost something.\n\n\"The name on the cord was mine. Maret Threnwick, filed as debtor. Seven years ago, I borrowed against a journey — a passage fee, formally recorded. The creditor listed is restricted.\" She meets your eyes across the coals. \"That is not standard. A restricted creditor on a personal debt marker means someone inside the Stillhold didn't want the other name legible from the outside. The clerk — he'd seen my name before I'd said it. Not guessed. Seen it. Which means that file has had eyes on it recently, and not for the first time.\"\n\nRagnar doesn't move, but something in his jaw settles — the particular stillness of a man who's just had a shape confirmed. He says nothing, which is its own kind of answer.\n\nFreki has her chin on her forepaws, but her ears are up. She's been watching Maret since the stranger left, and there's no growl in her, no bristle — just attention, careful and patient. Whatever Maret is carrying, the hound has decided she's carrying it honestly.\n\nMaret folds her hands inside her cloak. \"I don't know who filed it. I don't know why they wanted the debt kept moving for seven years rather than called in. But someone inside those walls let me walk out without an answer, and the clerk didn't offer to find one.\" She looks into the fire. \"I came out because the debt is closed. Whatever the rest of it is, it's still in there.\"",
+      "sceneSummary": "Maret named the cord's debtor — herself — and confirmed the creditor is restricted, the file recently watched, and the clerk already knew her name.",
       "choices": [
         {
-          "label": "Ask her directly — whose name was on the cord, and who owed whom?",
+          "label": "Ask Ragnar what he makes of it — a seven-year debt held open and a restricted creditor inside the Stillhold",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": "easy",
-          "opposedDifficulty": null,
           "intentTags": [
-            "negotiate",
-            "careful"
+            "study"
           ],
           "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         },
         {
-          "label": "Use Order-Sense on what she's described — read the structure of the debt itself, who files restricted cases and why.",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "label": "Put it to Maret plainly: someone inside the Stillhold wanted leverage on her — ask if she knows who, and why they'd want it",
+          "attribute": "social",
+          "subAttribute": "insight",
           "difficulty": "normal",
-          "opposedDifficulty": null,
           "intentTags": [
             "study",
             "careful"
           ],
-          "abilityId": "order_sense",
-          "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "abilityId": null,
+          "trivial": false
         },
         {
-          "label": "Ask Ragnar — does any of this match something he's seen in the Marches?",
+          "label": "Read the fire and think it through — a restricted creditor, route-knowledge before the walk, a clerk who already knew the name — let Order-Sense trace the structure of it",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": "normal",
+          "intentTags": [
+            "study",
+            "plan"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false
+        },
+        {
+          "label": "Tell Maret she's not walking back in there alone — whatever is still inside those walls, it was watching her once already",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": "easy",
-          "opposedDifficulty": null,
           "intentTags": [
-            "help",
-            "careful"
+            "lead"
           ],
           "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Tell her what you're actually here for — Kjotve, the oath, and what you need. See if any of this connects.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "plan",
-            "negotiate"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         }
       ],
       "characterDeltas": {
@@ -204,20 +192,70 @@
         "energy": 0,
         "xp": 0
       },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "maret-threnwick",
+          "name": "Maret Threnwick",
+          "note": "Named herself as the cord's debtor — a seven-year-old debt with a restricted creditor, a clerk who knew her name before reading it, and no answer offered on the way out.",
+          "learned": [
+            "The name on the debt cord was Maret Threnwick — she was the debtor, not a courier for someone else's case.",
+            "The creditor of record is restricted — not standard for a personal debt marker; someone inside the Stillhold didn't want that name legible from outside.",
+            "The file has had eyes on it recently — the clerk's foreknowledge of her name confirms active monitoring, not archive neglect.",
+            "Maret came out because the debt is formally closed; the question of who filed it and why it was held open for seven years remains unanswered."
+          ],
+          "statusNote": "At the fire-pit, Marchward's edge — has spoken everything she came to say; waiting on what Brynjar does with it.",
+          "relationshipDelta": 0
+        },
+        {
+          "op": "update",
+          "npcId": "ragnar-solmyr",
+          "name": "Ragnar Solmyr",
+          "note": "Jaw settled — confirmed shape, no comment. Still watching the middle distance.",
+          "statusNote": "At the fire-pit, Marchward's edge — listening, processing, saying nothing.",
+          "relationshipDelta": 0
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "stillhold-operatives",
+          "label": "Stillhold Operatives",
+          "kind": "faction",
+          "fact": "The debt cord named Maret Threnwick as debtor — a personal debt filed seven years ago. The creditor is restricted, meaning someone inside the Stillhold used the institution's own mechanisms to keep their name invisible from outside inquiry. The file has been actively watched: the clerk knew Maret's name before reading it.",
+          "links": [
+            "maret-threnwick",
+            "the-stillhold",
+            "brynjar-andyrsson-thread",
+            "the-binding-cord"
+          ]
+        },
+        {
+          "topic": "maret-threnwick",
+          "label": "Maret Threnwick",
+          "kind": "person",
+          "entityId": "maret-threnwick",
+          "fact": "She was the cord's debtor — a formal debt registered seven years ago against a passage fee. The creditor is restricted inside the Stillhold. She came out because the debt is closed; the question of who filed it is not.",
+          "links": [
+            "stillhold-operatives",
+            "brynjar-andyrsson-thread",
+            "the-binding-cord"
+          ]
+        }
+      ],
       "scene": {
-        "setting": "The common fire-pit at the Marchward's edge, night. Low coals in an open pit between post-houses. Cold spring air, mud-smell from the drainage ditch, firelight on three faces and one hound. The road-worn stranger has gone.",
+        "setting": "The common fire-pit at the Marchward's edge, night. Low coals in an open pit between post-houses. Cold spring air, mud-smell from the drainage ditch, firelight on three faces and one hound.",
         "npcsPresent": [
           {
             "name": "Maret Threnwick",
-            "state": "Has spoken her piece — watching Brynjar across the fire, still and composed, waiting."
+            "state": "Has spoken everything she came to say — hands folded inside her cloak, watching the fire."
           },
           {
             "name": "Ragnar Solmyr",
-            "state": "Unmoved; listening, not intervening, attention on the middle distance."
+            "state": "Unmoved; jaw settled into quiet thought, attention on the middle distance."
           },
           {
             "name": "Freki",
-            "state": "Settled, nose tilted toward Maret, reading her without alarm."
+            "state": "Chin on forepaws, ears up, watching Maret with patient attention — no alarm in her."
           }
         ],
         "objects": [
@@ -226,91 +264,36 @@
           "Shadows between post-houses"
         ],
         "threads": [
-          "The restricted creditor on the cord — unknown identity, seven-year-old filing.",
-          "The clerk who knew the name before reading it.",
+          "The restricted creditor on the cord — unknown identity, seven-year-old filing, actively monitored.",
+          "The clerk who knew Maret's name before reading it.",
           "The follower's backer remains unidentified.",
-          "Maret has spoken; what Brynjar does with it is open."
+          "Maret has said what she knows; what Brynjar does with it is open.",
+          "Maret intends to come back out of the Stillhold — but whatever is still inside those walls was watching her once already."
         ]
       },
-      "npcUpdates": [
+      "factUpdates": [
         {
-          "op": "update",
-          "npcId": "maret-threnwick",
-          "name": "Maret Threnwick",
-          "note": "Told Brynjar what the record-hall revealed: a restricted creditor on a seven-year-old debt marker, and a clerk who knew the name before reading it. Has said what she came to say.",
-          "learned": [
-            "The clerk at the Stillhold record-hall knew the name on the cord before reading it — suggesting prior familiarity.",
-            "The creditor of record on the debt marker is listed as 'restricted — internal Stillhold business.'",
-            "The debt is formally closed; whatever the cord was, it is logged and done. The question of who filed it is not."
-          ],
-          "skillsObserved": [
-            "deliberate disclosure under pressure"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At the fire-pit, Marchward's edge — has spoken, now waiting on Brynjar's next move."
-        },
-        {
-          "op": "update",
-          "npcId": "ragnar-solmyr",
-          "name": "Ragnar Solmyr",
-          "note": "Listened to Maret's account without comment. Present and attentive.",
-          "status": "active",
-          "statusNote": "At the fire-pit, Marchward's edge — listening."
+          "op": "add",
+          "text": "Maret Threnwick was the debt cord's named debtor — a seven-year-old personal debt with a restricted creditor inside the Stillhold, filed under mechanisms that kept the other name invisible from outside inquiry.",
+          "subjectId": "maret-threnwick"
         }
       ],
-      "codexUpdates": [
-        {
-          "topic": "the-binding-cord",
-          "label": "The Binding Cord",
-          "kind": "mystery",
-          "fact": "The cord was a formal debt marker, seven years old, registered at origin. The Stillhold record-hall confirmed its closure — but the creditor of record is listed as restricted, 'internal Stillhold business,' and the clerk knew the name on the cord before he read it.",
-          "links": [
-            "maret-threnwick",
-            "stillhold-operatives",
-            "brynjar-andyrsson-thread",
-            "the-stillhold"
-          ]
-        },
-        {
-          "topic": "stillhold-operatives",
-          "label": "Stillhold Operatives",
-          "kind": "faction",
-          "fact": "Someone within the Stillhold filed the original debt marker — and had it restricted from outside inquiry. The record-hall clerk showed prior knowledge of the name. This points to a figure or faction inside the Stillhold with a long-standing interest in whoever owed the debt.",
-          "links": [
-            "the-binding-cord",
-            "maret-threnwick",
-            "brynjar-andyrsson-thread"
-          ]
-        }
-      ],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "brynjar-andyrsson-thread",
-          "note": "Maret has named what she learned: restricted creditor, knowing clerk, seven-year-old marker. The follower's backer is now a figure or faction inside the Stillhold."
-        }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A short exchange by firelight — Maret speaking her piece, the debt settled, the moment now open."
-      },
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The common fire-pit at the Marchward's edge, night. Low coals in an open pit between post-houses. Cold spring air, mud-smell from the drainage ditch, firelight on three faces and one hound. The road-worn stranger has gone.",
+      "setting": "The common fire-pit at the Marchward's edge, night. Low coals in an open pit between post-houses. Cold spring air, mud-smell from the drainage ditch, firelight on three faces and one hound.",
       "npcsPresent": [
         {
           "name": "Maret Threnwick",
-          "state": "Has spoken her piece — watching Brynjar across the fire, still and composed, waiting."
+          "state": "Has spoken everything she came to say — hands folded inside her cloak, watching the fire."
         },
         {
           "name": "Ragnar Solmyr",
-          "state": "Unmoved; listening, not intervening, attention on the middle distance."
+          "state": "Unmoved; jaw settled into quiet thought, attention on the middle distance."
         },
         {
           "name": "Freki",
-          "state": "Settled, nose tilted toward Maret, reading her without alarm."
+          "state": "Chin on forepaws, ears up, watching Maret with patient attention — no alarm in her."
         }
       ],
       "objects": [
@@ -319,18 +302,19 @@
         "Shadows between post-houses"
       ],
       "threads": [
-        "The restricted creditor on the cord — unknown identity, seven-year-old filing.",
-        "The clerk who knew the name before reading it.",
+        "The restricted creditor on the cord — unknown identity, seven-year-old filing, actively monitored.",
+        "The clerk who knew Maret's name before reading it.",
         "The follower's backer remains unidentified.",
-        "Maret has spoken; what Brynjar does with it is open."
+        "Maret has said what she knows; what Brynjar does with it is open.",
+        "Maret intends to come back out of the Stillhold — but whatever is still inside those walls was watching her once already."
       ]
     },
-    "beats": 3
+    "beats": 4
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 21,
+    "hour": 22,
     "realAnchor": null
   },
   "companions": [
@@ -530,7 +514,6 @@
       },
       "relationship": 2,
       "history": [
-        "[d1] Unfolded from his stone and fell into step without being asked — quiet, watching south by habit.",
         "[d1] Named the nearest way gate: back through the Marchward, north up the waystone track from the Wardhouse — the broken stone with the iron ring. Asked what is waiting on the other side.",
         "[d1] Recognized Kjotve Olafsson's name and reputation. Called out the back-strike as dishonorable by Marcher standards. Warned Brynjar that Kjotve doesn't travel alone. Offered, implicitly, that this is a job needing a second.",
         "[d1] Fell into step on Brynjar's left without being asked — old road habit; watching the tree-line at camp",
@@ -539,7 +522,8 @@
         "[d1] Registered Chernak's presence in his hall-sweep without comment.",
         "[d1] Heard Brynjar's inquiry about the Coliseum; glanced at him once then returned attention to the widdershins threshold.",
         "[d1] Swept the shadows behind the stranger on instinct — found nothing, returned to watching.",
-        "[d1] Listened to Maret's account without comment. Present and attentive."
+        "[d1] Listened to Maret's account without comment. Present and attentive.",
+        "[d1] Jaw settled — confirmed shape, no comment. Still watching the middle distance."
       ],
       "knownFacts": [
         "The Marchers call whatever they carry a 'binding' — a cord, a knot, a mark; not a weapon",
@@ -562,7 +546,7 @@
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "At the fire-pit, Marchward's edge — listening.",
+      "statusNote": "At the fire-pit, Marchward's edge — listening, processing, saying nothing.",
       "domains": {
         "primary": "marcher"
       },
@@ -574,7 +558,7 @@
       "aliases": [
         "Redline Warrior"
       ],
-      "met": 16
+      "met": 17
     },
     "sera": {
       "id": "sera",
@@ -593,17 +577,18 @@
         "[d1] Answered the follower question honestly — doesn't know who sent them, but knows the route was known before she walked it. Promised to meet Brynjar again when she comes back out of the Stillhold.",
         "[d1] Returned from the Stillhold with empty hands and a direct walk toward Brynjar's position — she had noted it. Confirmed the cord is with the record-hall and the case is formally closed. Will not say what the record-hall told her on the road.",
         "[d1] Watching the debt encounter with characteristic stillness — no move to intervene.",
-        "[d1] Told Brynjar what the record-hall revealed: a restricted creditor on a seven-year-old debt marker, and a clerk who knew the name before reading it. Has said what she came to say."
+        "[d1] Told Brynjar what the record-hall revealed: a restricted creditor on a seven-year-old debt marker, and a clerk who knew the name before reading it. Has said what she came to say.",
+        "[d1] Named herself as the cord's debtor — a seven-year-old debt with a restricted creditor, a clerk who knew her name before reading it, and no answer offered on the way out."
       ],
       "knownFacts": [
-        "The heavier follower withdrew cleanly from the ash copse after observing — Brynjar read it as planned, not spontaneous",
-        "Someone knew Maret's route before she walked it — the follower was not random or opportunistic",
-        "She intends to come back out of the Stillhold after the delivery",
         "The cord has been delivered to the record-hall and the debt case is formally closed on her end",
         "She learned something inside the Stillhold that she will not say on the road — wants cover before she speaks it",
         "The clerk at the Stillhold record-hall knew the name on the cord before reading it — suggesting prior familiarity.",
         "The creditor of record on the debt marker is listed as 'restricted — internal Stillhold business.'",
-        "The debt is formally closed; whatever the cord was, it is logged and done. The question of who filed it is not."
+        "The debt is formally closed; whatever the cord was, it is logged and done. The question of who filed it is not.",
+        "The name on the debt cord was Maret Threnwick — she was the debtor, not a courier for someone else's case.",
+        "The creditor of record is restricted — not standard for a personal debt marker; someone inside the Stillhold didn't want that name legible from outside.",
+        "The file has had eyes on it recently — the clerk's foreknowledge of her name confirms active monitoring, not archive neglect."
       ],
       "skillsObserved": [
         "threat assessment",
@@ -615,7 +600,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the fire-pit, Marchward's edge — has spoken, now waiting on Brynjar's next move.",
+      "statusNote": "At the fire-pit, Marchward's edge — has spoken everything she came to say; waiting on what Brynjar does with it.",
       "domains": {
         "primary": "stillhold"
       },
@@ -629,7 +614,7 @@
       "people": "human",
       "peopleSource": "generated",
       "appearance": "A woman in her mid-thirties, solid across the shoulders, grey wool cloak road-worn at the hem but well-kept above it — the distinction deliberate, not neglect. Brown hair pulled back with two bone pins. Eyes the colour of slate that has been rained on: dark grey, slightly greenish, constantly reading the middle distance. The cloth bundle is tucked under her left arm and against her ribs; she has not shifted it since the road bent. The scar across the back of her right hand is old and clean — blade, not burn. She stands with her weight over the balls of her feet.",
-      "met": 4
+      "met": 5
     }
   },
   "placeMemory": {
@@ -950,7 +935,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "Ragnar volunteered that he saw movement at the east fork before dawn — a detail he'd been holding, waiting for someone who earned it",
@@ -3584,7 +3569,8 @@
           "[d1] The follower at the ash copse junction was not Maret's — someone else's, with their own purpose for watching her route. Maret noticed them two days out of the Marchward, meaning the observation began well before Brynjar joined the trail.",
           "[d1] The follower watching Maret's route was not Stillhold-sent and not hers — someone else knew the delivery route in advance. The route-knowledge itself is the anomaly.",
           "[d1] Ragnar's read: someone who knew Maret's route before she walked it wasn't a hired watcher — they already knew the debt existed, the cord was moving, and which road it would take. Inside knowledge, not surveillance. Someone inside the debt or close enough to it.",
-          "[d1] Someone within the Stillhold filed the original debt marker — and had it restricted from outside inquiry. The record-hall clerk showed prior knowledge of the name. This points to a figure or faction inside the Stillhold with a long-standing interest in whoever owed the debt."
+          "[d1] Someone within the Stillhold filed the original debt marker — and had it restricted from outside inquiry. The record-hall clerk showed prior knowledge of the name. This points to a figure or faction inside the Stillhold with a long-standing interest in whoever owed the debt.",
+          "[d1] The debt cord named Maret Threnwick as debtor — a personal debt filed seven years ago. The creditor is restricted, meaning someone inside the Stillhold used the institution's own mechanisms to keep their name invisible from outside inquiry. The file has been actively watched: the clerk knew…"
         ],
         "links": [
           "sera-of-the-stillhold",
@@ -3635,7 +3621,8 @@
           "[d1] Refused escort to the Stillhold gate — the delivery must arrive without visible Marcher company or a hound; too much noise for a debt-record. Took the cloth bundle and is walking the last mile alone.",
           "[d1] Doesn't know who sent the follower — but is certain someone knew her route before she walked it. Intends to come back out of the Stillhold and has offered to pursue that question with Brynjar.",
           "[d1] Came back out of the Stillhold as promised, hands empty, delivery done. Came directly to Brynjar in the scrub — she had noted the position.",
-          "[d1] Returned from the Stillhold walking directly to Brynjar's position — she had noted where he waited. Delivery confirmed, case formally closed. She has something to say about what the record-hall told her, but not on the chalk road."
+          "[d1] Returned from the Stillhold walking directly to Brynjar's position — she had noted where he waited. Delivery confirmed, case formally closed. She has something to say about what the record-hall told her, but not on the chalk road.",
+          "[d1] She was the cord's debtor — a formal debt registered seven years ago against a passage fee. The creditor is restricted inside the Stillhold. She came out because the debt is closed; the question of who filed it is not."
         ],
         "links": [
           "the-stillhold",
@@ -3852,19 +3839,20 @@
     ]
   },
   "tendencies": {
-    "leadership": 5.509550999569585,
-    "cerebral": 6.5114014533887765,
-    "strategic": 5.164893339672661,
-    "ruthless": 0.35415162889068325,
-    "social": 10.463702911438302,
-    "cautious": 7.490409267049564,
-    "generous": 1.6419201684248255,
-    "patient": 0.7195483871809846
+    "leadership": 5.371812224580346,
+    "cerebral": 6.348616417054057,
+    "strategic": 5.035771006180844,
+    "ruthless": 0.34529783816841614,
+    "social": 11.202110338652345,
+    "cautious": 8.303149035373325,
+    "generous": 1.6008721642142048,
+    "patient": 0.70155967750146
   },
   "aptitudes": [
+    "silver_tongue",
     "banner"
   ],
-  "actionCount": 43,
+  "actionCount": 44,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -4048,8 +4036,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788789954760,
-  "rev": 114,
+  "updatedAt": 1788790024339,
+  "rev": 115,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4457,7 +4445,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "riven_marches": 39,
-    "the_center": 8
+    "the_center": 9
   },
   "practice": {
     "schemaVersion": 1,
@@ -4499,6 +4487,12 @@
       "text": "The cloth bundle from the Crow and Thistle has been handed to Maret Threnwick, who is carrying it to the Stillhold's record-hall alone.",
       "day": 1,
       "subjectId": "maret-threnwick"
+    },
+    {
+      "id": "maret-threnwick",
+      "text": "Maret Threnwick was the debt cord's named debtor — a seven-year-old personal debt with a restricted creditor inside the Stillhold, filed under mechanisms that kept the other name invisible from outside inquiry.",
+      "day": 1,
+      "subjectId": "maret-threnwick"
     }
   ],
   "teachers": {},
@@ -4537,10 +4531,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-09-07T13:23:54.773Z",
-      "lastAt": "2026-09-07T14:05:54.750Z",
+      "lastAt": "2026-09-07T14:07:04.332Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 19
+      "beats": 20
     }
   ],
   "_pendingArrival": null,
@@ -4556,25 +4550,25 @@
     "at": "2026-07-23T01:18:04.353Z"
   },
   "_opEmitted": {
-    "sceneSummary": 40,
-    "choices": 40,
-    "scene": 40,
-    "npcUpdates": 37,
+    "sceneSummary": 41,
+    "choices": 41,
+    "scene": 41,
+    "npcUpdates": 38,
     "placeUpdates": 6,
     "generateRequest": 4,
     "moveTo": 5,
     "timeOps": 37,
-    "codexUpdates": 33,
-    "sceneEnded": 10,
-    "characterDeltas": 14,
+    "codexUpdates": 34,
+    "sceneEnded": 11,
+    "characterDeltas": 15,
     "offer": 6,
     "deeds": 1,
     "standingOps": 1,
     "questUpdates": 5,
     "stageOps": 2,
-    "factUpdates": 1
+    "factUpdates": 2
   },
-  "_opTurns": 40,
+  "_opTurns": 41,
   "_opLedger": {
     "offer": {
       "applied": 6,
@@ -4675,8 +4669,8 @@
   "_applyFailures": null,
   "_debtReceipts": [],
   "skillUses": {
-    "negotiate": 8,
-    "careful": 4,
+    "negotiate": 9,
+    "careful": 5,
     "help": 2,
     "plan": 1,
     "guard": 1,
@@ -4689,7 +4683,8 @@
     "prepare": 1
   },
   "aptitudeEarnCount": {
-    "banner": 1
+    "banner": 1,
+    "silver_tongue": 1
   },
   "_intentAsked": null,
   "_pendingIntent": null,

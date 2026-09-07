@@ -53,6 +53,7 @@ import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf,
 // SNG-309: what happens when the player goes down — and the SAME death ladder every figure is on.
 // ⛔ 2026-09-05 (Erik: "I want our test harnesses to simulate the real game"): THE ONE PATH a skill battle takes — the menu, the
 // declaration, the rank, the guards, the turn, the apply, the end — lives in the engine now and the harness drives the same functions.
+import { phaseDenier } from "./engine/skill_battle.js";   // which effect shut the step, so the screen can say so
 import { battleSkillsForCharacter, declFromSelection, resolveDeclRank, guardBlockFor, openGuards, applyRoundToCharacter, collapseIfFinished, personOpponentFor, duelFromTarget, freshTurn, playTurn, endBattle } from "./engine/battle_turn.js";
 import { bearersOf, giveItemTo, takeItemFrom } from "./engine/npcs.js";   // R45c: a person can hold a thing
 import { incapacitationOutcome, playerDeathState, deathStopsPlay, deathLine, wireDeathModel } from "./engine/incapacitation.js";
@@ -127,7 +128,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.411";
+const APP_VERSION = "1.9.412";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -13581,7 +13582,13 @@ function skillBattlePanel() {
   // build, and the reason skipping sense had to be first-class. Without this consumer the whole thing was inert.
   if (turn.phase === "sense" && phaseDenied(st.effects, "player", "sense")) {
     turn.phase = "action"; turn.senseDone = true; turn.senseBlinded = true;
-    turn.senseLine = "Your senses are shut — you cannot read them this turn.";
+    // ⛔ SAY WHAT DID IT AND HOW LONG. This said only "your senses are shut", so from the player's side the sense step
+    // stopped existing with no reason and no end in sight — Erik read it as the fight being broken, which is fair.
+    const fx = phaseDenier(st.effects, "player", "sense");
+    turn.senseBlind = fx ? { label: fx.label || fx.kind || "something they did", roundsLeft: Number(fx.roundsLeft) || 1 } : null;
+    turn.senseLine = fx
+      ? `Your senses are shut by ${turn.senseBlind.label} — ${turn.senseBlind.roundsLeft} round${turn.senseBlind.roundsLeft === 1 ? "" : "s"} left. You fight by feel.`
+      : "Your senses are shut — you cannot read them this turn.";
   }
   const step = SB_STEPS.find(x => x.key === turn.phase) || SB_STEPS[1];
   const sel = turn.sel[turn.phase] || [];
@@ -13893,7 +13900,7 @@ function skillBattlePanel() {
     ${busySB ? `<div class="sb-waiting"><span class="sb-spinner"></span> ${esc(sbBusyLabel || "resolving…")}
       <button class="opt sb-escape" id="sb-escape" hidden title="Stop waiting for the narrator. What the engine decided already stands — only the telling is lost">Continue anyway</button></div>` : ""}
     ${sbQuickBeat && !busySB ? `<div class="sb-quick">${esc(sbQuickBeat)}</div>` : ""}
-    ${turn.senseBlinded ? `<div class="sb-spent-bar">◉ <strong>Blinded</strong> — your senses are shut this turn. <span class="hint">You go straight to your action; the read is denied you.</span></div>` : ""}
+    ${turn.senseBlinded ? `<div class="sb-spent-bar">◉ <strong>Blinded</strong> — ${turn.senseBlind ? `${esc(turn.senseBlind.label)} shut your senses \u00b7 <strong>${turn.senseBlind.roundsLeft} round${turn.senseBlind.roundsLeft === 1 ? "" : "s"} left</strong>` : "your senses are shut this turn"}. <span class="hint">It ticks down every turn you take, and lands again if they repeat it \u2014 strike, guard or mend meanwhile. You go straight to your action; the read is denied you.</span></div>` : ""}
     ${turn.phase === "review" ? sbReviewCard(turn, skills) : `
       <div class="sb-step-hint hint">${esc(sbStepHint(step))}${selCount === 2 ? ` <strong class="sb-braid-note">⋈ braided — both crafts, both effects, both costs.</strong>` : selCount === 1 ? ` <span class="hint">Pick a second craft to BRAID them.</span>` : ""}</div>
       <div class="sb-skills">${groups}</div>
@@ -14353,6 +14360,15 @@ function sbDeclare(skill, { intensity = "standard", scouting = false, finisher =
 
 /** The contest ends: clear it, then hand the outcome to the GM to narrate the aftermath and return to the scene. */
 async function sbEnd(rr) {
+  // ⛔ EVERY CALLER INVOKES THIS WITHOUT `await`, so a throw here is an UNHANDLED REJECTION and everything after it is
+  // silently skipped — including, until now, the line that ends the fight. It settles itself instead.
+  try { return await sbEndInner(rr); }
+  catch (err) { sbNoteFailure("end-step", err); character.activeEncounter = null; try { saveCharacter(character); } catch { /* best effort */ }
+    renderPlay(character.activeScene?.lastTurn || null, { aside: "The fight is over. (Something went wrong telling it \u2014 what you earned is yours.)" });
+    renderSkillBattle(null); return null; }
+}
+
+async function sbEndInner(rr) {
   const enc = activeEnc(); const def = enc?.def;
   // SNG-247 Tier 2b: FRAMES CHAIN, and now they chain through the contest engine. A chained CHASE that is LOST
   // means you were run down — that is not an ending, it is the fight resuming (FRAME_TRANSITIONS chase.fail =
@@ -14409,6 +14425,12 @@ async function sbEnd(rr) {
   // continuous blow-by-blow, not an aftermath beat.
   const transcript = (enc?.state?.transcript || []).slice();
   sbLastRoundReceipt = null; sbLastRoundRolls = null;
+  // ⛔ THE FIGHT IS OVER THE MOMENT THE ENGINE SAYS SO. This function settled the battle, paid the xp and narrated —
+  // and never cleared the encounter, so the beast yielded and the player kept swinging at it. Erik's round log read
+  // `opponent_yielded` SIX TIMES. ⚑ The transcript is already copied above, so clearing here costs the telling nothing,
+  // and it follows the rule every other step in this file obeys (§135): SETTLE AND SAVE BEFORE YOU TELL.
+  character.activeEncounter = null;
+  saveCharacter(character);
   renderPlay(null, { thinking: transcript.length > 1 ? "Telling the whole fight…" : "…" });
   // SNG-230 §6b: a collapse is a DECISIVE one-beat finish, not a worn-down win — narrate it as such.
   const finisherNote = rr._collapse ? " This was a single decisive finishing stroke — end it fast and hard, not as a drawn-out win." : "";
@@ -14419,9 +14441,17 @@ async function sbEnd(rr) {
   const ask = transcript.length > 1
     ? `(The skill-battle with ${nm} is over — outcome: ${rr.outcome}. ${outLine}${finisherNote}${fightStory}\n\nEnd by returning to the scene.)`
     : `(The skill-battle with ${nm} has resolved — outcome: ${rr.outcome}. ${outLine}${mechForGM}${finisherNote} Narrate the aftermath in one beat, describing how that final exchange landed, and return to the scene.)`;
-  const result = await runGM({ resolution: null, playerInput: ask });
-  if (result) renderPlay(result.turn, { aside: reason }); // keep the mechanical WHY visible alongside the GM's prose
-  else renderPlay(character.activeScene?.lastTurn || null, { aside: reason });
+  // ⚠️ AND THE TELLING CANNOT HOLD THE ENDING HOSTAGE. This await had no deadline and no catch, and `sbEnd` is called
+  // without one — so a failed narration became an unhandled rejection and everything after it was skipped. The fight
+  // is already over and saved by now; the worst this can cost is prose, and it says so.
+  try {
+    const result = await runGMOrTimeout({ resolution: null, playerInput: ask });
+    if (result) renderPlay(result.turn, { aside: reason }); // keep the mechanical WHY visible alongside the GM's prose
+    else renderPlay(character.activeScene?.lastTurn || null, { aside: reason });
+  } catch (err) {
+    sbNoteFailure("end-narration", err);
+    renderPlay(character.activeScene?.lastTurn || null, { aside: `${reason}  ·  (The narrator did not answer \u2014 the fight is over and everything it earned is yours.)` });
+  }
 }
 
 // ⛔ `contestSheetFor` NOW LIVES IN THE ENGINE (`encounters.js`). It decided THE OTHER SIDE of every

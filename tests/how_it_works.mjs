@@ -4860,9 +4860,11 @@ console.log("\n── §71 · the harness drives the production path (engine/bat
     && /async function sbResolveSense\(\) \{[\s\S]{0,1600}playTurn\(character, enc\.def, \{ sense: decl/.test(app71)
     && /const applyRR = \(r, d, label\) => \{[\s\S]{0,600}applyRoundToCharacter\(character, r, d/.test(app71)
     && /resolveDeclRank\(decl, \{ character, catalog: fullCatalog\(\) \}\)/.test(app71) && /collapseIfFinished\(rr, enc\.def/.test(app71));
-  check("§71: ⛔ …and a skill-battle END reaches the incapacitation table — `sbEnd` calls `endBattle` (it never called `endEncounter`)",
-    /async function sbEnd\(rr\) \{[\s\S]{0,1200}endBattle\(character, \{ outcome: rr\.outcome, def,/.test(app71)
-    && !/async function sbEnd\(rr\) \{[\s\S]{0,400}character\.activeEncounter = null; saveCharacter\(character\);/.test(app71));
+  check("§71: ⛔ …and a skill-battle END reaches the incapacitation table — the ending calls `endBattle` (it never called `endEncounter`)",
+    // ⚠️ the BODY moved to `sbEndInner` so the outer `sbEnd` can guarantee it never rejects (§138) — the property is
+    // that the skill-battle ending reaches endBattle, not what the function around it is called.
+    /async function sbEndInner\(rr\)[\s\S]{0,2400}endBattle\(character, \{ outcome: rr\.outcome/.test(app71)
+    );
   check("§71: …the duplicated logic is GONE from app.js (no second menu, no second apply)",
     !/for \(const a of character\.abilities \|\| \[\]\) \{\s*const def = fullCatalog\(\)\[a\.abilityId\];\s*const fns = def\?\.functions/.test(app71)
     && !/incapacitationOutcome\(\{/.test(app71) && /plan = incapacitationOutcome\(\{/.test(bt71));
@@ -8892,7 +8894,7 @@ console.log("\n── §134 · a spinner you cannot escape is worse than an erro
       /finally \{ sbSetBusy\(false\);/.test(b) && (b.match(/catch \(err\)/g) || []).length >= 2);
   }
   check("§134: ⛔ AND A SILENT NETWORK FAILS LOUDLY — both fight narrations carry a deadline, because a call that never answers is indistinguishable from a wedged app",
-    /function runGMOrTimeout\(args\) \{ return raceTimeout\(runGM\(args\), GM_FIGHT_DEADLINE_MS/.test(app) && (app.match(/await runGMOrTimeout\(/g) || []).length === 2);
+    /function runGMOrTimeout\(args\) \{ return raceTimeout\(runGM\(args\), GM_FIGHT_DEADLINE_MS/.test(app) && (app.match(/await runGMOrTimeout\(/g) || []).length >= 2);   // the ENDING is a third (§138)
   check("§134: ⚑ …and a failure SAYS what happened and hands the turn back — an error you can act on beats a spinner you cannot",
     /Your turn is still yours \\u2014 choose your action/.test(app) && /Nothing was lost \\u2014 try it again/.test(app));
   // ⛔ THE FOLD IS MECHANICAL, NOT NARRATIVE. Erik never acts for them; the narrator tells what they did.
@@ -8928,7 +8930,7 @@ console.log("\n── §135 · a watchdog does not need to know what broke ─�
   check("§135: …and it redraws even if telling the player throws — the last thing it does is hand the screen back",
     /catch \{ \/\* the redraw below is what matters \*\/ \}[\s\S]{0,220}renderSkillBattle\(sbLastRound\); \} catch/.test(app));
   check("§135: ⛔ EVERY NETWORK AWAIT IN THE FIGHT CARRIES A DEADLINE — including the quick beat, which had none and could wedge the turn at 'Telling the turn…'",
-    /await raceTimeout\(callClaude\(/.test(code) && (code.match(/await runGMOrTimeout\(/g) || []).length === 2
+    /await raceTimeout\(callClaude\(/.test(code) && (code.match(/await runGMOrTimeout\(/g) || []).length >= 2
     && !/await callClaude\(/.test(code.split("async function sbExecuteTurn")[1] || ""));
   check("§135: ⚑ AND THE PLAYER IS NEVER TRAPPED — a way out appears after a few seconds and costs only the telling",
     /id="sb-escape"/.test(app) && /SB_ESCAPE_AFTER_MS/.test(code) && /escBtn\.onclick = \(\) => \{ sbNoteFailure\("escape-pressed"[\s\S]{0,120}sbSetBusy\(false\)/.test(code)
@@ -9049,6 +9051,56 @@ console.log("\n── §137 · if someone says their armour is missing, give it 
     /phase: t\.phase \|\| null, senseDone: !!t\.senseDone/.test(app) && /sel: \{ sense:/.test(app) && /version: typeof APP_VERSION/.test(app));
   check("§137: ⛔ …and a diagnostic can never break the thing it is diagnosing",
     /catch \{ \/\* a diagnostic must never be the thing that breaks \*\/ \}/.test(app));
+}
+
+/* ═════ §138 — A FIGHT THAT THE ENGINE ENDED IS OVER, WHATEVER THE NARRATOR DOES (Erik's round log) ═════ */
+// ⛔ THE EVIDENCE WAS SIX LINES ON HIS SCREEN: r1..r6, every one `opponent_yielded`, and the fight went on. Measured
+// against his own save, the raw round reports `ended: true, outcome: opponent_yielded` on the FIRST strike — the
+// engine had been telling the app to stop since the first exchange. ⛔ `sbEnd` settled the battle, paid the xp, wrote
+// the deed, narrated — and NEVER CLEARED `character.activeEncounter`. Two other endings (breaking off, the chase
+// hand-off) clear it correctly, which is exactly why this one went unseen.
+// ⚠️ And the same function is why nothing narrated: its `await runGM` had no deadline and no catch, and `sbEnd` is
+// called WITHOUT await — so a failed telling was an unhandled rejection that skipped everything after it.
+console.log("\n── §138 · the beast yielded six times ──");
+{
+  const app = rd("app.js");
+  const decomment = (t) => t.replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
+  const i = app.indexOf("async function sbEndInner(rr) {");
+  const body = decomment(app.slice(i, app.indexOf("\n}", app.indexOf("const result = await runGMOrTimeout", i))));
+  check("§138: ⛔ THE ENDING CLEARS THE FIGHT — the one path that ends a skill battle no longer leaves it standing",
+    i > 0 && /character\.activeEncounter = null;/.test(body) && /saveCharacter\(character\);/.test(body));
+  // ⛔ AND IT CLEARS BEFORE IT TELLS — §135's rule, which every other fight step already obeys.
+  const cleared = body.indexOf("character.activeEncounter = null;");
+  const told = body.indexOf("await runGMOrTimeout(");
+  check("§138: ⛔ …BEFORE it narrates, so a silent narrator can never keep a man swinging at a beast that yielded",
+    cleared > 0 && told > cleared, `clear at ${cleared}, narrate at ${told}`);
+  check("§138: ⚑ …and the telling is deadlined and caught — it is a grace on top of an ending, never a gate in front of it",
+    /await runGMOrTimeout\(\{ resolution: null, playerInput: ask \}\)/.test(app) && /sbNoteFailure\("end-narration", err\)/.test(app));
+  check("§138: ⛔ …and sbEnd CANNOT REJECT — every caller invokes it without await, so a throw would be silent",
+    /try \{ return await sbEndInner\(rr\); \}/.test(app) && /catch \(err\) \{ sbNoteFailure\("end-step", err\); character\.activeEncounter = null;/.test(app));
+  // ⚑ AND THE PROOF ON THE ENGINE SIDE: his own opponent ends in one strike, so the app was ignoring a true flag.
+  const EN = await import("../engine/encounters.js");
+  const { loadContentHeadless: lch138 } = await import("./headless_content.mjs");
+  const C138 = await lch138();
+  const c138 = JSON.parse(rd("characters/player-s9z9u1/char-mrum8y4d.json"));
+  const def138 = C138.encounters?.[c138.activeEncounter?.defId] || c138.customEncounters?.[c138.activeEncounter?.defId];
+  if (def138) {
+    const pick = (c138.abilities || []).map(a => C138.abilities[a.abilityId]).find(d => d && (d.functions || []).includes("strike"));
+    const rr138 = EN.skillBattleRound(JSON.parse(JSON.stringify(c138.activeEncounter.state)), def138,
+      { function: "strike", tier: pick?.tier || 1, rank: 1, attribute: pick?.attribute || "practical", name: pick?.name || "strike", id: pick?.id, intensity: "standard" },
+      { character: JSON.parse(JSON.stringify(c138)), content: C138, rules: C138.rules, sb: C138.skillBattle.engine, steps: C138.intensity.steps, rng: () => 0.5, phase: "action", tickEffects: true });
+    check("§138: ⚑ the engine reports the end on the FIRST strike against his own opponent — the flag was true and the app ignored it",
+      rr138.ended === true && /yield|fell|overcome/.test(String(rr138.outcome || "")), `ended=${rr138.ended} outcome=${rr138.outcome}`);
+  } else check("§138: (his encounter def is on the save, so the engine half can be measured)", false, "def not found");
+  // ⛔ AND A STEP TAKEN AWAY MUST SAY WHY. `deniesPhase` shut his sense step and the screen said only "Blinded".
+  const SBM = await import("../engine/skill_battle.js");
+  const fx = [{ side: "player", deniesPhase: "sense", label: "the hollow-pace's blinding", roundsLeft: 2, kind: "blind" }];
+  check("§138: ⛔ THE ENGINE CAN SAY WHICH EFFECT SHUT THE STEP, not merely that one did",
+    typeof SBM.phaseDenier === "function" && SBM.phaseDenier(fx, "player", "sense")?.label === "the hollow-pace's blinding"
+    && SBM.phaseDenier(fx, "player", "action") === null && SBM.phaseDenied(fx, "player", "sense") === true);
+  check("§138: ⚑ …and the screen says WHAT did it and HOW LONG, because a step that vanishes with no reason reads as a bug",
+    /turn\.senseBlind = fx \?/.test(app) && /rounds? left/.test(app) && /shut your senses/.test(app)
+    && /Your senses are shut by \$\{turn\.senseBlind\.label\}/.test(app));
 }
 
 /* ══════════ REPORT ══════════ */

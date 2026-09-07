@@ -240,6 +240,13 @@ export function phaseDenied(effects, side, phase) {
   return (effects || []).some(fx => fx.side === side && fx.deniesPhase === phase);
 }
 
+/** ⛔ WHICH effect is shutting the phase — `phaseDenied` only ever answered yes or no, so the screen could say
+ *  "Blinded" and nothing else: not what did it, not how long. A step taken away without a reason is indistinguishable
+ *  from a bug, and Erik read it as one. PURE. */
+export function phaseDenier(effects, side, phase) {
+  return (effects || []).find(fx => fx.side === side && fx.deniesPhase === phase) || null;
+}
+
 /** The contestMod lines the active effects contribute to one side's roll — one honest labelled term each. */
 export function effectMods(effects, side, ownDecl, oppDecl, sb) {
   return (effects || [])

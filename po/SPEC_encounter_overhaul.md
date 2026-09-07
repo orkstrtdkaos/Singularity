@@ -26,7 +26,9 @@ you rule on a mechanic that cannot run.**
 - **And it never even arrives.** Forty rounds against an opponent whose only skill is `deceive` — the one
   function in the table carrying `deniesPhase` — produced **no live effect carrying the flag at all.**
 
-⚠️ **So something else took your sense step, and I do not yet know what.** That is the honest state. It is
+⚠️ **So something else took your sense step — and §8 now names it: every save was throwing on a circular
+structure, so the turn was never reset.** I wrote "I do not yet know what" here first, and measuring rather
+than guessing is what found it. It is
 also `CCODE-41`'s exact shape a second time: that ticket exists because the flag was not being copied from
 the content def onto the live effect. It is copied now. Nothing asks the question in the language it is
 written in.
@@ -217,8 +219,42 @@ Erik's ruling behind it:**
 
 ---
 
-## §8 — WHAT I HAVE NOT MEASURED YET
+## §8 — ⛑ FOUND, AFTER THIS SPEC WAS FIRST WRITTEN: THE SAVE WAS THE THING THAT BROKE
 
-⚠️ **The thing that actually took Erik's sense step is still unknown.** `deniesPhase` is ruled out. The
-remaining candidates are all in `app.js`'s turn handling rather than the engine, and I would rather say so
-than name one before I can show it. That measurement comes next, and it does not need a ruling to start.
+§8 used to say the cause of the stuck fight was unknown. **It is known now, and it was recorded on Erik's own
+save the whole time** — by the failure recorder built two days earlier. Three entries, `turn-step` twice and
+`sense-step` once, all against `re-beast_hollow_pace`:
+
+> `Converting circular structure to JSON --> starting at object with constructor 'Object' | property 'activeEncounter' -> object with constructor 'Object' | property 'state' -> object`
+
+⛑ **Reproduced, and the loop named exactly:**
+
+```
+character.activeEncounter.state.lastOppReceipt.targetChoice.target.record  →  the character
+```
+
+`chooseTarget` returns the **live** ally object, which carries `.record` (the whole character) and `.sheet`.
+`CCODE-250` rides that choice on the opponent receipt so the fog can read the aim — correct. The app then
+**persists** that receipt (`state.lastOppReceipt = rr.opponent`), and `saveCharacter` is `JSON.stringify`.
+
+⛔ **So every save threw.** Not the narrator, not the fight logic, not `deniesPhase` — all three of which I
+named at some point before measuring. And because the turn is reset **after** the save, the reset never ran:
+the phase stayed on `action`, the only control on screen was another strike, and the catch said *"Nothing was
+lost — try it again"* while nothing at all had been written. **That is the whole of "stuck striking it over
+and over" and "I can't tell what happened".**
+
+**Fixed, and the class with it:**
+
+- `persistableChoice` flattens the choice to scalars **by shape, not by a field list** — so no future field can
+  reintroduce a handle. The fog keeps `id`, `name`, `kind`, `isPlayer` and the reason; `record` and `sheet` go.
+- `saveCharacter` now **names the offending path** and rethrows, instead of reporting a constructor. The next
+  cycle will not be in `targetChoice`, and it will say where it is.
+- The recovery snapshot **skips** instead of throwing — its own note already said losing one is survivable.
+- The turn now tracks **applied** and **saved** as two facts, releases on either, and says plainly when a round
+  resolved but could not be written. ⚠ A fight that moves while nothing persists is the one failure nobody can
+  see from the outside; the player is the only witness, so the screen has to tell them.
+
+§141 asserts all of it, including that the diagnostic does not cry cycle at a shared leaf.
+
+⚠ **This changes nothing about §§1–7.** The overhaul is still wanted and the rulings are still open — but the
+fight should be legible again first, which is why §7.5 puts §A last.

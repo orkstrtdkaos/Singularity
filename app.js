@@ -128,7 +128,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.414";
+const APP_VERSION = "1.9.415";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14173,10 +14173,11 @@ async function sbExecuteTurn() {
   if (!aDecl) { turn.phase = "action"; saveCharacter(character); renderSkillBattle(sbLastRound); return; }
   const bDecl = turn.bonusEarned ? sbDeclFromSel(turn.sel.bonus, skills, sbIntensity) : null;
   sbSetBusy(true, "Resolving the turn…"); sbQuickBeat = ""; renderSkillBattle(sbLastRound);
-  // ⛔ DID THE ROUND ACTUALLY LAND? Declared OUT here because only the CATCH needs it, and the catch cannot see
-  // inside the try. Without this the failure path could not tell a turn that never happened from one that already
-  // hit — and it told the player "nothing was lost" for both (Erik: "stuck striking it over and over").
-  let roundLanded = false;
+  // ⛔ DID THE ROUND LAND, AND WAS IT WRITTEN DOWN? Two facts, not one, and Erik hit the gap between them: the
+  // round was applied to his character and the SAVE ITSELF threw (a circular structure — see engine/state.js), so
+  // the fight had moved and nothing persisted. Declared out here because only the CATCH needs them.
+  let roundLanded = false;   // applied to the character in memory
+  let roundSaved = false;    // …and persisted
   // ⛔ GUARDED FOR THE SAME REASON AS THE SENSE STEP — the flag must not be able to outlive a failure.
   try {
   const beats = [];
@@ -14215,8 +14216,9 @@ async function sbExecuteTurn() {
     beats.push(`${label}: ${sbFightBeat(r, d, beforeMom, false)}`);
   };
   applyRR(rr, aDecl, "Action");
+  roundLanded = true;   // ⛔ BEFORE the save: the fight HAS moved, whether or not the write succeeds.
   saveCharacter(character);
-  roundLanded = true;   // ⛔ SET AFTER THE SAVE, so it means "this is on disk", not "this was attempted".
+  roundSaved = true;
   let ended = rr.ended, endRR = rr;
   // SNG-271 (Erik's own fight log) — A DOWNED PLAYER STILL TOOK THEIR BONUS ACTION.
   //
@@ -14294,8 +14296,14 @@ async function sbExecuteTurn() {
     // and the only control on screen is another strike, forever. ⚠️ And the old message said "nothing was lost"
     // whichever it was, which is how a fight becomes unreadable.
     if (roundLanded) {
+      // ⛔ RELEASE IT EITHER WAY. The round already hit; leaving the phase on "action" means the only control on
+      // screen is another strike, landing a SECOND round on top of the first — which is what Erik saw.
       try { character.activeEncounter.state.turn = sbFreshTurn(); saveCharacter(character); } catch { /* best effort */ }
-      renderPlay(character.activeScene?.lastTurn || null, { aside: `Your action STOOD \u2014 it is in the log and on your sheet. What came after it did not (${esc(String(err?.message || err).slice(0, 80))}). The next round is yours.` });
+      renderPlay(character.activeScene?.lastTurn || null, { aside: roundSaved
+        ? `Your action STOOD \u2014 it is in the log and on your sheet. What came after it did not (${esc(String(err?.message || err).slice(0, 80))}). The next round is yours.`
+        // ⚠️ SAY IT PLAINLY. A fight that moves while nothing is written is the exact thing that cannot be
+        // diagnosed from the outside, and the player is the one who can tell us it happened.
+        : `\u26a0 Your action resolved, but it COULD NOT BE SAVED (${esc(String(err?.message || err).slice(0, 90))}). Reload before you go on \u2014 this round may not survive.` });
     } else {
       renderPlay(character.activeScene?.lastTurn || null, { aside: `The turn did not resolve (${esc(String(err?.message || err).slice(0, 80))}). Nothing was lost \u2014 try it again.` });
     }

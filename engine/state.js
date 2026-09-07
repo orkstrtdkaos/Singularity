@@ -1087,12 +1087,38 @@ export function listCharacters() {
   try { return JSON.parse(localStorage.getItem(LS.characterIndex) || "[]"); } catch { return []; }
 }
 
+/** ⛔ WHICH FIELD CLOSES THE LOOP. Walks own enumerable properties keeping an ANCESTOR set — a shared leaf that
+ *  appears twice is not a cycle, only a reference back to something still open is. Returns a dotted path, or null
+ *  when nothing loops (in which case the stringify failed for another reason and the native message stands). */
+export function cyclePathIn(root, label = "character") {
+  const open = new Map();
+  const walk = (o, path) => {
+    if (!o || typeof o !== "object") return null;
+    if (open.has(o)) return path;
+    open.set(o, path);
+    for (const k of Object.keys(o)) { const hit = walk(o[k], `${path}.${k}`); if (hit) return hit; }
+    open.delete(o);
+    return null;
+  };
+  try { return walk(root, label); } catch { return null; }   // a diagnostic may never be the thing that throws
+}
+
 export function saveCharacter(c, { stamp = true } = {}) {
   // SNG-BATCH-7 Phase 2: stamp last-write time + a monotonic rev so cross-device
   // load-latest can tell which copy is fresher. Adopting a remote copy passes
   // stamp:false to preserve the remote's own timestamps.
   if (stamp) { c.updatedAt = Date.now(); c.rev = (c.rev || 0) + 1; }
-  const payload = JSON.stringify(c);
+  // ⛔ THE ONE LINE THAT BROKE A FIGHT FOR A WEEK. A circular structure throws here, OUTSIDE every guard below,
+  // and the native message names a constructor rather than a field — so the save silently stopped happening and
+  // everything sequenced after it (the turn reset, most of all) never ran. Name the path, then rethrow.
+  let payload;
+  try { payload = JSON.stringify(c); }
+  catch (err) {
+    const where = cyclePathIn(c);
+    const e = new Error(`character ${c?.id || "?"} cannot be serialised${where ? ` — a cycle at ${where}` : ""}: ${err?.message || err}`);
+    e.cyclePath = where; e.cause = err;
+    throw e;   // ⚠️ STILL FATAL. A save that did not happen must never be reported as one that did.
+  }
   try {
     localStorage.setItem(LS.character(c.id), payload);
   } catch (err) {
@@ -1170,7 +1196,14 @@ export function pruneRecovery(characterId, keep = RECOVERY_KEEP) { // registry:i
  *  losing the ability to load your character is not. */
 export function preserveRecovery(c, tag = "") {
   const key = `singularity.recovery.${c.id}.${c.updatedAt || 0}${tag ? "." + tag : ""}`;
-  const payload = JSON.stringify(c);
+  // ⚠️ SURVIVABLE BY DESIGN, per this function's own note — so an unserialisable character SKIPS its snapshot
+  // rather than throwing through the character path. Named in the warning so it is still diagnosable.
+  let payload;
+  try { payload = JSON.stringify(c); }
+  catch (err) {
+    console.warn(`[recovery] no snapshot for ${c?.id || "?"} — it does not serialise`, cyclePathIn(c) || err?.message || err);
+    return null;
+  }
   pruneRecovery(c.id, RECOVERY_KEEP - 1); // make room for the one we're about to write
   try {
     localStorage.setItem(key, payload);

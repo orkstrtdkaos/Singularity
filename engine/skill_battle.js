@@ -254,6 +254,19 @@ export function effectMods(effects, side, ownDecl, oppDecl, sb) {
     .map(fx => ({ label: `${fx.label}${fx.roundsLeft > 1 ? ` (${fx.roundsLeft} rounds)` : ""}`, value: fx.value }));
 }
 
+/** ⛔ A RECEIPT THAT IS SAVED MUST NOT HOLD A LIVE OBJECT. Flattens a target choice to the scalars that describe
+ *  it, dropping `record`/`sheet` and anything else object-shaped. PURE. See the note at the `targetChoice`
+ *  assignment for the failure this exists to prevent (Erik, 2026-09-07: every save threw). */
+export function persistableChoice(choice) {
+  if (!choice || typeof choice !== "object") return null;
+  const flat = (o) => {
+    const out = {};
+    for (const [k, v] of Object.entries(o || {})) if (v === null || typeof v !== "object") out[k] = v;
+    return out;
+  };
+  return { ...flat(choice), ...(choice.target ? { target: flat(choice.target) } : {}) };
+}
+
 /** The effect a landed move leaves behind, or null. `roll` is that side's resolved receipt; `actor` is the side
  *  that declared it. A miss leaves nothing — a botched guard is not a raised shield. */
 function effectFrom(decl, roll, actor, sb, { cm = null, rng = Math.random } = {}) {
@@ -1867,7 +1880,18 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // `senseOpponent` gates DISPLAY over true state; putting the aim here means a good read EARNS it and a
   // character who obscured themselves simply never sees the field. Absent with no allies — so a 1v1 receipt
   // is byte-identical to the one this engine produced yesterday.
-  if (aimedAt) o.targetChoice = aimedAt;
+  // ⛔ AND IT RIDES AS A DESCRIPTION, NEVER AS A HANDLE. `chooseTarget` hands back the LIVE ally object, which
+  // carries `.record` (the whole character) and `.sheet`. The app persists this receipt onto the encounter state
+  // (`state.lastOppReceipt`), and `saveCharacter` is `JSON.stringify` — so the loop
+  //     character → activeEncounter → state → lastOppReceipt → targetChoice → target.record → character
+  // made EVERY SAVE THROW. Erik's `_fightLog` caught it three times; the fight then could not advance, because
+  // the turn is reset after the save and the save never returned. ⚠️ The failure looked like the narrator, and
+  // like the fight logic, and was neither.
+  // ⚑ SCALARS ONLY, chosen by SHAPE rather than by a field list: a whitelist has to be remembered when someone
+  // adds a field, and this rule cannot be forgotten — nothing that is an object can enter, so no future addition
+  // can reintroduce a cycle here. `revealTarget` (the one reader) needs id/name/isPlayer/kind and `why`, all scalar.
+  // The in-round code keeps using the live `aimedAt` local, which is deliberately untouched.
+  if (aimedAt) o.targetChoice = persistableChoice(aimedAt);
   const out = { state: newState, unsettled, cooled, player: p, opponent: o, roundWinner, ...(deathSave ? { deathSave } : {}), ...(aimedAt ? { aimedAt } : {}), ...(blindStrike ? { blindStrike } : {}), delta, resolved, effects, pressure, pressureEvent, spent, damage, healing, imposed, inflicted, opened, ...(unreachable ? { unreachable } : {}), deniedAct, opponentHealth, landed: [landedP, landedW, landedO].filter(Boolean),
     degraded: { player: !!playerDecl.spentFallback, opponent: !!oppDecl.spentFallback },
     // CCODE-80: an evaded blow must SAY it was evaded. An attack that quietly does less is indistinguishable

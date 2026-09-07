@@ -9201,8 +9201,16 @@ console.log("\n── §140 · a failed tail releases the turn, and says which i
   check("§140: the executor knows whether the round LANDED — a flag the catch can actually see",
     i > 0 && /let roundLanded = false;/.test(body)
     && body.indexOf("let roundLanded = false;") < body.indexOf("try {"), "declared outside the try");
-  check("§140: ⛔ …set AFTER the save, so it means \"this is on disk\", not \"this was attempted\"",
-    /saveCharacter\(character\);\s*\r?\n\s*roundLanded = true;/.test(body));
+  // ⛔ APPLIED AND SAVED ARE TWO FACTS. Erik's throw was INSIDE the save — a single flag set after it would have
+  // called his case "nothing happened" and left the turn stuck exactly as it was.
+  check("§140: ⛔ APPLIED and SAVED are tracked separately — the fight moving and the fight being written down",
+    /let roundSaved = false;/.test(body)
+    && /applyRR\(rr, aDecl, "Action"\);\s*\r?\n\s*roundLanded = true;/.test(body)
+    && /saveCharacter\(character\);\s*\r?\n\s*roundSaved = true;/.test(body));
+  // ⛔ AND THE UNSAVED CASE IS SAID OUT LOUD. A fight that moves while nothing persists is the one thing that
+  // cannot be diagnosed from outside — the player is the only witness, so the screen has to tell them.
+  check("§140: ⛔ …and a round that resolved but could NOT be written says so, keyed on the save flag",
+    /aside: roundSaved/.test(body) && /COULD NOT BE SAVED/.test(body) && /Reload before you go on/.test(body));
   check("§140: ⛔ THE TURN IS RELEASED when the round already stood — otherwise the phase never leaves \"action\"",
     /if \(roundLanded\) \{/.test(body)
     && /if \(roundLanded\) \{[\s\S]{0,400}state\.turn = sbFreshTurn\(\)/.test(body));
@@ -9213,6 +9221,79 @@ console.log("\n── §140 · a failed tail releases the turn, and says which i
   // ⚑ AND THE UNLANDED BRANCH KEEPS THE OLD, TRUE MESSAGE — a turn that never happened really did lose nothing.
   check("§140: ⚑ …while a turn that never resolved still says so, and does NOT burn the round",
     /\} else \{[\s\S]{0,300}Nothing was lost/.test(body));
+}
+
+/* ═════ §141 — THE SAVE WAS THE THING THAT BROKE (Erik's own _fightLog, three times) ═════ */
+// ⛔ THE EVIDENCE WAS ON HIS SAVE, WRITTEN BY THE FAILURE RECORDER ITSELF: three `turn-step`/`sense-step` entries
+// against `re-beast_hollow_pace`, every one of them `"Converting circular structure to JSON … property
+// 'activeEncounter' → object … property 'state' → object"`. ⚑ REPRODUCED, and the loop is exactly:
+//     character.activeEncounter.state.lastOppReceipt.targetChoice.target.record → the character
+// `chooseTarget` hands back the LIVE ally object (carrying `.record`, the whole character); CCODE-250 rides that
+// choice on the opponent receipt so the fog can read it; the app persists the receipt onto the encounter state;
+// and `saveCharacter` is `JSON.stringify`. ⛔ SO EVERY SAVE THREW — and because the turn is reset AFTER the save,
+// the reset never ran, the phase never left "action", and the catch said "Nothing was lost" while nothing at all
+// had been written. That is the whole of "stuck striking it over and over" and "I can't tell what happened".
+// ⚠️ IT WAS NOT the narrator, and NOT `deniesPhase` (see §10's gap), both of which I named before measuring.
+console.log("\n── §141 · a receipt that is saved is a description, not a handle ──");
+{
+  const SBM141 = await import("../engine/skill_battle.js");
+  const EN141 = await import("../engine/encounters.js");
+  const BT141 = await import("../engine/battle_turn.js");
+  const ST141 = await import("../engine/state.js");
+  const { loadContentHeadless: lch141 } = await import("./headless_content.mjs");
+  const C141 = await lch141();
+  // ⛑ THE DIAGNOSTIC FIRST, because a tool that reports defects has a self-test and it runs first (§11 RULE 1).
+  const fake = { id: "char-x" };
+  fake.activeEncounter = { state: { lastOppReceipt: { targetChoice: { target: { record: fake } } } } };
+  check("§141: ⛑ the cycle diagnostic NAMES the field that closes the loop — Erik's exact path",
+    ST141.cyclePathIn(fake) === "character.activeEncounter.state.lastOppReceipt.targetChoice.target.record",
+    String(ST141.cyclePathIn(fake)));
+  const shared141 = { v: 1 };
+  check("§141: ⚑ …and it does NOT cry cycle at a shared leaf — the same object twice is not a loop",
+    ST141.cyclePathIn({ a: shared141, b: shared141 }) === null && ST141.cyclePathIn({ a: 1, b: { c: 2 } }) === null);
+  // ⛔ THE FIX AT THE SOURCE: the choice that RIDES ON THE RECEIPT carries scalars only.
+  check("§141: ⛔ a persisted choice keeps its identifiers and drops every live object — by SHAPE, not by a field list",
+    (() => {
+      const live = { id: "char-x", name: "Loki", isPlayer: true, record: fake, sheet: { big: true } };
+      const out = SBM141.persistableChoice({ target: live, policy: "threat", why: "closest", blindly: false });
+      return out.target.id === "char-x" && out.target.name === "Loki" && out.target.isPlayer === true
+        && out.policy === "threat" && out.why === "closest"
+        && out.target.record === undefined && out.target.sheet === undefined;
+    })());
+  check("§141: ⛔ …and the receipt is assigned THROUGH it, so no caller has to remember",
+    /o\.targetChoice = persistableChoice\(aimedAt\)/.test(rd("engine/skill_battle.js")));
+  // ⛔ AND THE LIVE PROPERTY, MEASURED END TO END: play the step that threw on his save, and serialise.
+  const c141 = JSON.parse(rd("characters/player-s9z9u1/char-mrum8y4d.json"));
+  const def141 = c141.customEncounters["re-beast_hollow_pace"];
+  if (!def141) check("§141: (his own opponent is on the save, so the failing step can be replayed)", false, "def missing");
+  else {
+    c141.activeEncounter = { defId: def141.id, state: EN141.startEncounter(def141, { oppSheet: EN141.contestSheetFor(def141, { content: C141 }) }) };
+    const pick141 = (c141.abilities || []).map(a => C141.abilities[a.abilityId]).find(d => d && (d.functions || []).includes("reveal"));
+    BT141.playTurn(c141, def141, {
+      sense: { function: "reveal", tier: pick141?.tier || 2, rank: 1, attribute: pick141?.attribute || "mental", name: pick141?.name || "the read", intensity: "standard" },
+      content: C141, rules: C141.rules, sb: C141.skillBattle.engine, steps: C141.intensity.steps,
+      rng: () => 0.5, day: 100, catalog: { ...(C141.abilities || {}), ...(c141.customAbilities || {}) }, party: null });
+    let serialises = true, why = "";
+    try { JSON.stringify(c141); } catch (e) { serialises = false; why = e.message.split("\n")[0]; }
+    check("§141: ⛔ THE SENSE STEP THAT THREW ON HIS SAVE NOW SERIALISES — the save can happen, so the turn can reset",
+      serialises, why || ST141.cyclePathIn(c141) || "");
+    // ⚠ ASSERTED ON SUBSTANCE, NOT THROUGH A FALLBACK. Measured on this fixture the aim is always present, so an
+    // "or it was absent" escape would only hide the day it stops being computed at all.
+    const tc141 = c141.activeEncounter.state.lastOppReceipt?.targetChoice;
+    check("§141: ⛑ …and the aim SURVIVED the flattening — the fog keeps who, why and the flags, and loses the handles",
+      tc141?.target?.id === c141.id && typeof tc141.target.name === "string" && tc141.target.isPlayer === true
+      && typeof tc141.why === "string" && tc141.target.record === undefined && tc141.target.sheet === undefined,
+      JSON.stringify(tc141?.target || null));
+  }
+  // ⛔ AND THE CLASS, NOT JUST THIS INSTANCE (Erik: "Need a robust fix") — the next cycle will not be in targetChoice.
+  const st141src = rd("engine/state.js");
+  check("§141: ⛔ the SAVE names the field on any future cycle instead of throwing a constructor at us",
+    /let payload;/.test(st141src) && /try \{ payload = JSON\.stringify\(c\); \}/.test(st141src)
+    && /const where = cyclePathIn\(c\);/.test(st141src) && /e\.cyclePath = where/.test(st141src));
+  check("§141: ⚑ …and it STILL THROWS — a save that did not happen must never look like one that did",
+    /throw e;/.test(st141src));
+  check("§141: ⚑ …while the recovery SNAPSHOT skips instead, because losing one is survivable and it says so",
+    /\[recovery\] no snapshot for/.test(st141src));
 }
 
 /* ══════════ REPORT ══════════ */

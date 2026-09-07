@@ -176,29 +176,52 @@
     "Loki and Vessin slipped out of the alcove in the grey dawn and crossed the empty nave before the scaffold crew filled the landing — stepping into the yard with the Half-Cathedral at their backs and the man with the crooked jaw still the open thread between them.",
     "Shared broth and thanks with a road-warden who carries word of the water-crisis moving downhill faster than any official channel. Exchanged names and parted on the spinward road, heading toward the Waygate Path."
   ],
-  "currentLocationId": "the_quickwood_eaves",
+  "currentLocationId": "the_crossing",
   "activeScene": {
-    "locationId": "the_quickwood_eaves",
+    "locationId": "the_crossing",
     "turns": [
       {
         "player": "Back away — refuse the fight",
         "summary": "Loki refused the passage into the Deepwood at the Quickwood Eaves and turned back toward the known road.",
         "narration": "You step back from the threshold of the Quickwood Eaves, your hand steady on the pack strap. The morning light filters green through the canopy above, and the trees—still, patient, wholly uninterested in you—seem to settle at the withdrawal. Cy clicks softly at your ankle, a sound like agreement, and you turn from the waygate.\n\nBehind you, the living wood closes the way you came without fanfare. Ahead, the Eaves thin toward the deeper forest—ancient growth that has learned to be interested in visitors only on its own terms. The road back spinward toward the Waygate Path is still open, still yours to walk. The springs and the careful earth are here. The choice to go further inward—to cross the threshold into what the Deepwood wants—is a different shape of decision, and one that waits.\n\nCy's lens irisses once, a small mechanical breath. It does not ask. It knows what you are holding."
+      },
+      {
+        "player": "Enter the Waygate and arrive at the crossing. The hub where all Waygates land, just outside The Crosssroads.",
+        "summary": "Loki traveled via the Quickwood Eaves waygate and arrived at the Hub crossing outside The Crossing.",
+        "narration": "You turn from the Deepwood threshold and walk back toward the living waygate. The trees seem to release their attention as you move—not hostile, simply indifferent now that you've declined the crossing. Cy clicks in rhythm with your steps, lens irising open and closed in what might be satisfaction.\n\nThe waygate stands among the eaves-trees as it did when you arrived, the latticed wood grown smooth by centuries of passage. You step into the threshold. The light shifts—green to grey to the particular stillness that lives inside the gate-structure—and for a moment you are nowhere, held in the fold between places.\n\nThen the air changes temperature. You step out onto stone.\n\nThe Hub crossing opens around you: a vast circular chamber where five waygate arches converge, each one a living frame of different wood or metal or grown-thing, all of them humming at a frequency just below hearing. The floor beneath your boots is pale stone, worn smooth by uncounted arrivals. Morning light falls through high windows—the sun here is where it should be, not filtered green through the Deepwood canopy. The Crossing lies just beyond the archway to the east, its towers visible through the stone portal. Cy's clicks grow more elaborate, almost musical—it has returned to a place it understands, where the old works still hum their maintenance songs.\n\nYou are not alone. A handful of people move through the Hub with the ease of those who know these paths—a courier checking a slate, two merchants speaking in low voices near a carved bench, and by the western arch, a figure in grey standing utterly still, watching the gates with the particular patience of someone who has all the time the world requires."
       }
     ],
     "lastTurn": {
-      "narration": "You step back from the threshold of the Quickwood Eaves, your hand steady on the pack strap. The morning light filters green through the canopy above, and the trees—still, patient, wholly uninterested in you—seem to settle at the withdrawal. Cy clicks softly at your ankle, a sound like agreement, and you turn from the waygate.\n\nBehind you, the living wood closes the way you came without fanfare. Ahead, the Eaves thin toward the deeper forest—ancient growth that has learned to be interested in visitors only on its own terms. The road back spinward toward the Waygate Path is still open, still yours to walk. The springs and the careful earth are here. The choice to go further inward—to cross the threshold into what the Deepwood wants—is a different shape of decision, and one that waits.\n\nCy's lens irisses once, a small mechanical breath. It does not ask. It knows what you are holding.",
-      "sceneSummary": "Loki refused the passage into the Deepwood at the Quickwood Eaves and turned back toward the known road.",
+      "narration": "You turn from the Deepwood threshold and walk back toward the living waygate. The trees seem to release their attention as you move—not hostile, simply indifferent now that you've declined the crossing. Cy clicks in rhythm with your steps, lens irising open and closed in what might be satisfaction.\n\nThe waygate stands among the eaves-trees as it did when you arrived, the latticed wood grown smooth by centuries of passage. You step into the threshold. The light shifts—green to grey to the particular stillness that lives inside the gate-structure—and for a moment you are nowhere, held in the fold between places.\n\nThen the air changes temperature. You step out onto stone.\n\nThe Hub crossing opens around you: a vast circular chamber where five waygate arches converge, each one a living frame of different wood or metal or grown-thing, all of them humming at a frequency just below hearing. The floor beneath your boots is pale stone, worn smooth by uncounted arrivals. Morning light falls through high windows—the sun here is where it should be, not filtered green through the Deepwood canopy. The Crossing lies just beyond the archway to the east, its towers visible through the stone portal. Cy's clicks grow more elaborate, almost musical—it has returned to a place it understands, where the old works still hum their maintenance songs.\n\nYou are not alone. A handful of people move through the Hub with the ease of those who know these paths—a courier checking a slate, two merchants speaking in low voices near a carved bench, and by the western arch, a figure in grey standing utterly still, watching the gates with the particular patience of someone who has all the time the world requires.",
+      "sceneSummary": "Loki traveled via the Quickwood Eaves waygate and arrived at the Hub crossing outside The Crossing.",
       "choices": [
         {
-          "label": "Head back to the Waygate Path — the route south is clear and you know it",
+          "label": "Approach the still figure by the western arch and ask what they're watching for.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "approach",
+            "wary"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Head toward the eastern portal to enter The Crossing—you have people to find and questions to ask.",
           "attribute": "practical",
           "subAttribute": "wits",
           "axes": {},
-          "difficulty": "very easy",
+          "difficulty": "trivial",
           "opposedDifficulty": null,
           "intentTags": [
-            "travel"
+            "travel",
+            "direct"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -207,50 +230,19 @@
           "emergenceId": null
         },
         {
-          "label": "Stay at the Eaves for the day — read what the trees are saying and what traffic moves through this place",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "prism_sight",
-          "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Walk the Eaves' edge methodically — look for any sign of what the quest-seed speaks: a thing come out of the Deepwood, or something the wardens won't report",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
-          "difficulty": "hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "scout",
-            "study"
-          ],
-          "abilityId": "wayfinding",
-          "energyCost": 4,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Cy directly: what does it know about the seals and the things that should not come out of places like this",
+          "label": "Ask the courier at the slate desk about recent movements through the gates—who has come through, who has left.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": "easy",
           "opposedDifficulty": null,
-          "intentTags": [],
+          "intentTags": [
+            "study",
+            "inquire"
+          ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
@@ -268,28 +260,55 @@
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
+      "adoptSchool": null,
       "offer": {
-        "thing": "The threshold itself — the moment when you could have crossed and did not, a choice witnessed by Cy and held in the small machine's careful memory",
-        "from": "Your own refusal to walk into something deeper without understanding what waits, and Cy's quiet acknowledgment that the choice was yours to make"
+        "thing": "A figure in grey standing by the western arch, watching the gates with absolute stillness and patience.",
+        "from": "The Hub crossing itself — a place of convergence where travelers arrive and depart, and where watchers naturally gather"
       },
       "stageOps": [],
       "scene": {
-        "setting": "The Quickwood Eaves at early morning in spring-melt — ancient forest where the grown city thins to ordinary wood and ordinary wood thins to the Deepwood. The waygate stands among living eaves-trees, grown around rather than cut for, and the passage north into the Deepwood is open but unwelcoming. Light filters green through the canopy. The road back toward the Waygate Path remains clear.",
-        "npcsPresent": [],
+        "setting": "The Hub crossing — a vast circular chamber where five waygate arches converge, pale stone worn smooth by uncounted arrivals. Morning light falls through high windows. The Crossing's towers visible through the eastern portal. The sound of the gates is a hum just below hearing.",
+        "npcsPresent": [
+          {
+            "name": "A courier",
+            "state": "Checking a slate near the center of the chamber"
+          },
+          {
+            "name": "Two merchants",
+            "state": "Speaking in low voices by a carved bench"
+          },
+          {
+            "name": "A figure in grey",
+            "state": "Standing by the western arch, utterly still, watching the gates"
+          }
+        ],
         "objects": [
-          "the living waygate, grown around rather than built",
-          "the threshold between the Eaves and the Deepwood proper"
+          "Five waygate arches (wood, metal, and grown-thing)",
+          "Pale worn stone floor",
+          "Carved bench",
+          "A slate at the courier's desk"
         ],
         "threads": [
-          "What came out of the Deepwood and why the wardens have not reported it — still unanswered",
-          "Whether Loki will face the deep places of the Reach, or turn back toward the known roads",
-          "What Cy knows and will not say about the seals beneath the Valley"
+          "Who is the grey figure and what are they watching for?",
+          "Why does Cy find the Hub's frequency musical—is there something here it recognizes?",
+          "The man in the lower Annex who hired the striker is still unnamed",
+          "Tessvel Cairn awaits an answer about the personal offer"
         ]
       },
       "npcUpdates": [],
       "intentsHeard": [],
       "factUpdates": [],
-      "placeUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "Loki arrived at the Hub crossing via waygate from the Quickwood Eaves",
+          "subPlace": {
+            "name": "The Hub Crossing",
+            "parent": "The Crossing",
+            "note": "A vast circular chamber where five waygate arches converge; the hub of the network. Pale stone worn by uncounted arrivals.",
+            "visited": true
+          }
+        }
+      ],
       "discovery": null,
       "codexUpdates": [],
       "holdingOps": [],
@@ -303,8 +322,14 @@
       "newEncounter": null,
       "unlockPrecursor": null,
       "unlockSubstrate": null,
-      "timeOps": {},
-      "moveTo": null,
+      "timeOps": {
+        "hoursPassed": 1.5,
+        "why": "A journey through the waygate from the Quickwood Eaves to the Hub crossing — the transit itself is swift, but the walk to and through the gate consumed the early part of the morning"
+      },
+      "moveTo": {
+        "location": "the-hub-crossing",
+        "why": "Traveled via waygate from the Quickwood Eaves and arrived at the Hub crossing, the convergence point of all gates"
+      },
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
@@ -320,24 +345,40 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Quickwood Eaves at early morning in spring-melt — ancient forest where the grown city thins to ordinary wood and ordinary wood thins to the Deepwood. The waygate stands among living eaves-trees, grown around rather than cut for, and the passage north into the Deepwood is open but unwelcoming. Light filters green through the canopy. The road back toward the Waygate Path remains clear.",
-      "npcsPresent": [],
+      "setting": "The Hub crossing — a vast circular chamber where five waygate arches converge, pale stone worn smooth by uncounted arrivals. Morning light falls through high windows. The Crossing's towers visible through the eastern portal. The sound of the gates is a hum just below hearing.",
+      "npcsPresent": [
+        {
+          "name": "A courier",
+          "state": "Checking a slate near the center of the chamber"
+        },
+        {
+          "name": "Two merchants",
+          "state": "Speaking in low voices by a carved bench"
+        },
+        {
+          "name": "A figure in grey",
+          "state": "Standing by the western arch, utterly still, watching the gates"
+        }
+      ],
       "objects": [
-        "the living waygate, grown around rather than built",
-        "the threshold between the Eaves and the Deepwood proper"
+        "Five waygate arches (wood, metal, and grown-thing)",
+        "Pale worn stone floor",
+        "Carved bench",
+        "A slate at the courier's desk"
       ],
       "threads": [
-        "What came out of the Deepwood and why the wardens have not reported it — still unanswered",
-        "Whether Loki will face the deep places of the Reach, or turn back toward the known roads",
-        "What Cy knows and will not say about the seals beneath the Valley"
+        "Who is the grey figure and what are they watching for?",
+        "Why does Cy find the Hub's frequency musical—is there something here it recognizes?",
+        "The man in the lower Annex who hired the striker is still unnamed",
+        "Tessvel Cairn awaits an answer about the personal offer"
       ]
     },
-    "beats": 1
+    "beats": 2
   },
   "clock": {
     "schemaVersion": 1,
     "day": 3,
-    "hour": 11,
+    "hour": 12,
     "realAnchor": null
   },
   "companions": [
@@ -1037,21 +1078,35 @@
       "vectorsKnown": []
     },
     "the_crossing": {
-      "visits": 2,
+      "visits": 3,
       "notes": [
         "[d3] A hollow-pace Precursor patrol-frame stands motionless at the broken wall's edge—its route ended, its mandate expired or satisfied. The frame does not pursue beyond this point."
       ],
       "flags": {},
       "lastVisit": 3,
-      "vectorsKnown": []
+      "vectorsKnown": [],
+      "subPlaces": {
+        "the-hub-crossing": {
+          "name": "The Hub Crossing",
+          "parentId": "the_crossing",
+          "day": 3,
+          "visited": true,
+          "note": "A vast circular chamber where five waygate arches converge; the hub of the network. Pale stone worn by uncounted arrivals."
+        }
+      }
     },
     "the_quickwood_eaves": {
       "visits": 1,
-      "notes": [],
+      "notes": [
+        "[d3] Loki arrived at the Hub crossing via waygate from the Quickwood Eaves"
+      ],
       "flags": {},
       "lastVisit": 3,
       "vectorsKnown": [
         "death_life"
+      ],
+      "_containmentNotes": [
+        "\"The Hub Crossing\" was placed in the_crossing (the fiction named it), not the_quickwood_eaves"
       ]
     }
   },
@@ -1220,16 +1275,12 @@
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 1677,
-    "lastSharedReadAt": "2026-09-07T21:39:09.778Z",
+    "lastGenCount": 1678,
+    "lastSharedReadAt": "2026-09-07T22:27:40.544Z",
     "lastTickWorldDay": 69,
     "lastCanonWorldDay": 69,
     "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "The Half-Cathedral itself — in its patient, patient incompletion",
-        "from": "The player named this place and its nature; the world is honoring exactly what they said it is"
-      },
       {
         "thing": "Vessin's unplanned detail — she was in the lower Annex this morning, and she saw the man",
         "from": "Vessin's fear of making the same mistake a third time — the account Loki gave was precise and without performance, and the assessor in her…"
@@ -1245,6 +1296,10 @@
       {
         "thing": "The threshold itself — the moment when you could have crossed and did not, a choice witnessed by Cy and held in the small machine's…",
         "from": "Your own refusal to walk into something deeper without understanding what waits, and Cy's quiet acknowledgment that the choice was yours…"
+      },
+      {
+        "thing": "A figure in grey standing by the western arch, watching the gates with absolute stillness and patience.",
+        "from": "The Hub crossing itself — a place of convergence where travelers arrive and depart, and where watchers naturally gather"
       }
     ],
     "wantProgress": {
@@ -1304,7 +1359,7 @@
         "kind": "shortage",
         "premise": "The shallow wells that sustain the scattered settlements are dropping faster each season than anyone has yet admitted aloud.",
         "cause": "The Palelands' sparse, chalky soil has always demanded more water to work than it naturally holds, and the settlements were founded at the margins of what the…",
-        "stage": 39,
+        "stage": 40,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1317,7 +1372,7 @@
         "kind": "rot",
         "premise": "A slow fungal bloom is working through the oldest grain stores, and the steward responsible has been quietly discarding the worst sacks rather than reporting the loss.",
         "cause": "The valley's mild, damp winters make its granaries prone to moisture, and the current steward was appointed for loyalty rather than knowledge of grain-keeping.",
-        "stage": 39,
+        "stage": 40,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1342,7 +1397,7 @@
         "kind": "rot",
         "premise": "A key sequence in the primary record is being quietly re-threaded by someone who made an error years ago and cannot bear to have it discovered.",
         "cause": "Unspooling's knowledge is stored in physical cordage whose integrity depends entirely on the honesty of the hands that maintain it.",
-        "stage": 34,
+        "stage": 35,
         "seededAtCount": 758,
         "surfaced": true,
         "fate": "growing",
@@ -1379,7 +1434,7 @@
         "kind": "shortage",
         "premise": "Certain materials or substances needed for whatever work the Unmade does are being quietly stockpiled by one practitioner at the expense of communal supply, because she no longer trusts the…",
         "cause": "The Unmade is a place where things are taken apart, and grief for what is lost has no formal channel — it is expected to simply disperse, as everything else…",
-        "stage": 2,
+        "stage": 3,
         "seededAtCount": 1675,
         "surfaced": true,
         "fate": "growing",
@@ -1392,7 +1447,7 @@
         "kind": "rot",
         "premise": "A run of subtle flaws has begun appearing in work passing through one bench — small enough to escape immediate notice, deep enough to fail later — and the cause is a senior apprentice who has been…",
         "cause": "The two workshops already contesting the shared tool have each told their apprentices, in different words, that the other side cannot be trusted — and one…",
-        "stage": 2,
+        "stage": 3,
         "seededAtCount": 1675,
         "surfaced": true,
         "fate": "growing",
@@ -5671,17 +5726,17 @@
     ]
   },
   "tendencies": {
-    "devotion": 1.6188997978068345,
-    "cerebral": 9.176109344422029,
-    "social": 15.233836684006873,
-    "strategic": 6.563058731842147,
-    "cautious": 6.8801232156831444,
-    "amorous": 19.922776754018162,
-    "generous": 2.4022966389116096,
-    "ruthless": 0.8426732417732018,
-    "risky": 0.6886705874413387,
-    "patient": 0.18806355270700117,
-    "deception": 0.21891571657635028
+    "devotion": 1.5784273028616636,
+    "cerebral": 8.946706610811479,
+    "social": 14.8529907669067,
+    "strategic": 6.398982263546093,
+    "cautious": 6.7081201352910655,
+    "amorous": 19.424707335167707,
+    "generous": 2.342239222938819,
+    "ruthless": 0.8216064107288717,
+    "risky": 0.6714538227553052,
+    "patient": 0.18336196388932613,
+    "deception": 0.21344282366194153
   },
   "aptitudes": [
     "silver_tongue",
@@ -5692,7 +5747,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 144,
+  "actionCount": 145,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -6085,8 +6140,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788817203140,
-  "rev": 537,
+  "updatedAt": 1788820136436,
+  "rev": 540,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -6947,7 +7002,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 100,
+    "the_quickwood": 101,
     "the_center": 7
   },
   "opLossPending": false,
@@ -7019,10 +7074,10 @@
     {
       "id": "sess-9",
       "startedAt": "2026-09-07T19:42:14.907Z",
-      "lastAt": "2026-09-07T21:40:03.134Z",
+      "lastAt": "2026-09-07T22:28:56.423Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 12
+      "beats": 13
     }
   ],
   "establishedFacts": [
@@ -7059,7 +7114,7 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 15,
+      "applied": 16,
       "rejected": 1,
       "lastWhy": "rejected-shape"
     }
@@ -7070,14 +7125,14 @@
     "choices": 172,
     "characterDeltas": 69,
     "scene": 172,
-    "placeUpdates": 20,
+    "placeUpdates": 21,
     "codexUpdates": 99,
-    "timeOps": 159,
+    "timeOps": 160,
     "offer": 14,
     "generateRequest": 6,
     "sceneEnded": 49,
     "npcUpdates": 141,
-    "moveTo": 5,
+    "moveTo": 6,
     "gambitApt": 14,
     "deeds": 2,
     "questUpdates": 17,
@@ -7641,7 +7696,7 @@
   "skillUses": {
     "plan": 1,
     "discuss": 1,
-    "travel": 5,
+    "travel": 6,
     "scout": 1,
     "prepare": 1,
     "careful": 2,

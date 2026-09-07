@@ -8,7 +8,7 @@
   "whyHere": "You put down the blade, or you were sent away from it, or you are looking for a line worth holding that isn't theirs.",
   "background": "war_leader",
   "level": 1,
-  "xp": 50,
+  "xp": 55,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -45,7 +45,7 @@
   "maxHealth": 46,
   "health": 46,
   "maxEnergy": 108,
-  "energy": 55,
+  "energy": 50,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -260,27 +260,45 @@
         "player": "Hand over the bundle cleanly and let her go — but ask the one question you still need answered: who sent the follower",
         "summary": "Brynjar let Maret walk the last mile alone — asked who sent the follower, got a partial answer and a promise to meet again when she comes back out.",
         "narration": "You step back and give Maret the road. No argument, no second offer — just a half-step to the side that says plainly: the mile is hers. She reads it immediately and her shoulders drop a fraction, the last of the coil going out of her.\n\nBefore she turns, you ask the one question still unpaid. Not about the cord, not about the debt — about the follower. Not hers, she said. Two days out of the Marchward. Someone else's eyes on her route, with a clean exit and no interest in stopping her. Who sends a watcher like that?\n\nMaret is quiet for two full breaths. She looks south at the smudge of grey wall, then back at you. \"I don't know who sent them,\" she says, and you believe her — it has the weight of something she has been turning over herself. \"But someone knew the route before I walked it. That's not an accident and it's not the record-hall.\" She tucks the cloth bundle closer under her arm. \"If you're still in the Marchward when I come back out — and I will come back out — I'll ask that question with you.\"\n\nShe turns and walks south. Her stride is even, unhurried, the outside-edge gait you clocked on the track carrying her toward the Stillhold gate without looking back. Freki watches until she is fifty paces out, then sits — ears soft, no alarm in him, just the attentive patience of a dog waiting to be told what comes next."
+      },
+      {
+        "player": "Ask Ragnar what he makes of her answer — a Marcher read on what 'someone knew the route' means in practice",
+        "summary": "Ragnar reads the route-knowledge as inside information — not a hired watcher but someone who already knew the debt, the cord, and the road before Maret walked it.",
+        "narration": "Maret's figure is fifty paces south and shrinking. The chalk track holds her footprints — outside-edge stride, steady pace, no hesitation. Freki watches her go with soft ears and no alarm, which is its own kind of answer.\n\nYou turn to Ragnar. He's been quiet since she spoke, standing at your shoulder the way he's stood at every junction on this road — present, unhurried, already thinking. You ask him plainly: what does 'someone knew the route' mean, coming from a Marcher's read?\n\nHe takes a moment. Not because he doesn't have an answer — because he's deciding how much of it to give you. \"It means it wasn't watching,\" he says. \"A watcher follows and hopes to learn. Someone who knew the route before she walked it didn't need to learn anything.\" He shifts his weight, eyes still south. \"That's planning. And planning for a debt-record delivery means someone already knew the debt existed, the cord was moving, and which road it would take.\" He pauses once more. \"That's not a hired eye. That's someone inside the thing — or close enough to inside that the difference doesn't matter.\"\n\nFreki gets up from the track and presses its flank briefly against your leg — not alarm, just contact. The Stillhold walls are a grey smudge on the horizon, and Maret is already smaller against them. The question of who knew stands in the air between you and Ragnar, unanswered, and the chalk track offers no volunteers."
       }
     ],
     "lastTurn": {
-      "narration": "You step back and give Maret the road. No argument, no second offer — just a half-step to the side that says plainly: the mile is hers. She reads it immediately and her shoulders drop a fraction, the last of the coil going out of her.\n\nBefore she turns, you ask the one question still unpaid. Not about the cord, not about the debt — about the follower. Not hers, she said. Two days out of the Marchward. Someone else's eyes on her route, with a clean exit and no interest in stopping her. Who sends a watcher like that?\n\nMaret is quiet for two full breaths. She looks south at the smudge of grey wall, then back at you. \"I don't know who sent them,\" she says, and you believe her — it has the weight of something she has been turning over herself. \"But someone knew the route before I walked it. That's not an accident and it's not the record-hall.\" She tucks the cloth bundle closer under her arm. \"If you're still in the Marchward when I come back out — and I will come back out — I'll ask that question with you.\"\n\nShe turns and walks south. Her stride is even, unhurried, the outside-edge gait you clocked on the track carrying her toward the Stillhold gate without looking back. Freki watches until she is fifty paces out, then sits — ears soft, no alarm in him, just the attentive patience of a dog waiting to be told what comes next.",
-      "sceneSummary": "Brynjar let Maret walk the last mile alone — asked who sent the follower, got a partial answer and a promise to meet again when she comes back out.",
+      "narration": "Maret's figure is fifty paces south and shrinking. The chalk track holds her footprints — outside-edge stride, steady pace, no hesitation. Freki watches her go with soft ears and no alarm, which is its own kind of answer.\n\nYou turn to Ragnar. He's been quiet since she spoke, standing at your shoulder the way he's stood at every junction on this road — present, unhurried, already thinking. You ask him plainly: what does 'someone knew the route' mean, coming from a Marcher's read?\n\nHe takes a moment. Not because he doesn't have an answer — because he's deciding how much of it to give you. \"It means it wasn't watching,\" he says. \"A watcher follows and hopes to learn. Someone who knew the route before she walked it didn't need to learn anything.\" He shifts his weight, eyes still south. \"That's planning. And planning for a debt-record delivery means someone already knew the debt existed, the cord was moving, and which road it would take.\" He pauses once more. \"That's not a hired eye. That's someone inside the thing — or close enough to inside that the difference doesn't matter.\"\n\nFreki gets up from the track and presses its flank briefly against your leg — not alarm, just contact. The Stillhold walls are a grey smudge on the horizon, and Maret is already smaller against them. The question of who knew stands in the air between you and Ragnar, unanswered, and the chalk track offers no volunteers.",
+      "sceneSummary": "Ragnar reads the route-knowledge as inside information — not a hired watcher but someone who already knew the debt, the cord, and the road before Maret walked it.",
       "choices": [
         {
-          "label": "Watch her reach the gate, then turn back north toward the Marchward with Ragnar",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": "very easy",
-          "trivial": true,
+          "label": "Ask Ragnar if the Stillhold has a gate-record — a way to know who's gone in and out ahead of Maret",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": "easy",
           "intentTags": [
-            "travel"
-          ]
+            "plan",
+            "negotiate"
+          ],
+          "trivial": false
         },
         {
-          "label": "Hold position and observe the Stillhold gate — see if anyone moves to intercept her before she's inside",
+          "label": "Use Order-Sense on the chalk track — read the road itself, see if the follower's approach has a pattern that names a purpose",
           "attribute": "mental",
           "subAttribute": "insight",
-          "abilityId": "read_the_fight",
+          "difficulty": "normal",
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false
+        },
+        {
+          "label": "Walk the ash copse — go back to where the follower stood and look for what they left behind",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "difficulty": "normal",
           "intentTags": [
             "scout",
@@ -289,132 +307,106 @@
           "trivial": false
         },
         {
-          "label": "Ask Ragnar what he makes of her answer — a Marcher read on what 'someone knew the route' means in practice",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": "easy",
+          "label": "Wait on the Stillhold approach road — Maret said she'd come back out; be there when she does",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": "very easy",
           "intentTags": [
-            "plan"
+            "guard",
+            "sustain"
           ],
-          "trivial": false
-        }
-      ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "xp": 0
-      },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "maret-threnwick",
-          "name": "Maret Threnwick",
-          "note": "Answered the follower question honestly — doesn't know who sent them, but knows the route was known before she walked it. Promised to meet Brynjar again when she comes back out of the Stillhold.",
-          "learned": [
-            "Someone knew Maret's route before she walked it — the follower was not random or opportunistic",
-            "She intends to come back out of the Stillhold after the delivery"
-          ],
-          "statusNote": "Walking the last mile to the Stillhold gate alone, bundle in hand — last seen heading south on the chalk track.",
-          "relationshipDelta": 1
-        },
-        {
-          "op": "update",
-          "npcId": "ragnar-solmyr",
-          "name": "Ragnar Solmyr",
-          "note": "Held position at Brynjar's shoulder through the exchange and Maret's departure — present, watchful, no comment.",
-          "statusNote": "Standing at Brynjar's right shoulder on the chalk track, watching Maret walk south."
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "maret-threnwick",
-          "label": "Maret Threnwick",
-          "kind": "person",
-          "entityId": "maret-threnwick",
-          "fact": "Doesn't know who sent the follower — but is certain someone knew her route before she walked it. Intends to come back out of the Stillhold and has offered to pursue that question with Brynjar.",
-          "links": [
-            "the-binding-cord",
-            "stillhold-operatives",
-            "brynjar-andyrsson-thread",
-            "the-stillhold"
-          ]
-        },
-        {
-          "topic": "stillhold-operatives",
-          "label": "Stillhold Operatives",
-          "kind": "faction",
-          "fact": "The follower watching Maret's route was not Stillhold-sent and not hers — someone else knew the delivery route in advance. The route-knowledge itself is the anomaly.",
-          "links": [
-            "maret-threnwick",
-            "the-binding-cord",
-            "the-stillhold",
-            "brynjar-andyrsson-thread"
-          ]
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "The chalk Stillhold track, one mile north of the Stillhold approach. Flat road between elder scrub, spring mud soft in the ruts. Overcast midday light. Stillhold's grey walls visible one mile south. Maret's figure is fifty paces out and walking steadily toward the gate.",
+        "setting": "The chalk Stillhold track, one mile north of the Stillhold approach. Flat road between elder scrub, spring mud soft in the ruts. Overcast midday light. Stillhold's grey walls visible one mile south. Maret's figure now roughly fifty paces south and diminishing steadily.",
         "npcsPresent": [
           {
             "name": "Ragnar Solmyr",
-            "state": "Standing at Brynjar's right shoulder, watching Maret's retreating figure without comment."
+            "state": "Standing at Brynjar's right shoulder, eyes still tracking south toward the Stillhold walls, having just given his read of route-knowledge as inside information."
           },
           {
             "name": "Freki",
-            "state": "Sitting on the track, ears soft, watching south after Maret — no alarm, just patient attention."
+            "state": "Pressed briefly against Brynjar's leg, watching south — soft ears, no alarm, just contact."
           }
         ],
         "objects": [
           "Sera's old footprints in the chalk mud, already beginning to fill with spring water",
+          "Maret's fresh outside-edge stride marks heading south",
           "Elder scrub on both verges, first spring bud showing",
           "Stillhold walls visible as a grey smudge one mile south",
-          "Maret's figure moving steadily south along the chalk road"
+          "Maret's figure moving steadily south, growing smaller"
         ],
         "threads": [
-          "Who sent the follower who knew Maret's route before she walked it — her question and Brynjar's both, unanswered",
+          "Who sent the follower — someone with inside knowledge of the debt, the cord, and the route, per Ragnar's read",
           "Maret's promise to meet Brynjar again when she comes back out of the Stillhold",
           "The woman who originally needed to deliver the bundle — her situation 'had changed'; still unsaid what changed",
           "Whether anyone is watching the Stillhold approach from this side"
         ]
       },
-      "questUpdates": [
+      "npcUpdates": [
         {
-          "op": "progress",
-          "questId": "brynjar-andyrsson-thread",
-          "note": "Maret received the bundle and walked the last mile alone. She named the anomaly — someone knew her route before she walked it — and promised to meet Brynjar again coming out. The follower's backer is now the live thread."
+          "op": "update",
+          "npcId": "ragnar-solmyr",
+          "note": "Gave Brynjar a Marcher read on route-knowledge: not watching, but planning — someone inside the thing, or close enough that the difference doesn't matter. Eyes still south toward the Stillhold.",
+          "learned": [
+            "Route-knowledge before a delivery means someone already knew the debt existed, the cord was moving, and the road it would take — planning, not surveillance; inside information, not hired eyes."
+          ],
+          "skillsObserved": [
+            "tactical assessment",
+            "intelligence analysis"
+          ],
+          "statusNote": "Standing on the chalk track with Brynjar, watching Maret diminish toward the Stillhold gate."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "stillhold-operatives",
+          "label": "Stillhold Operatives",
+          "kind": "faction",
+          "fact": "Ragnar's read: someone who knew Maret's route before she walked it wasn't a hired watcher — they already knew the debt existed, the cord was moving, and which road it would take. Inside knowledge, not surveillance. Someone inside the debt or close enough to it.",
+          "links": [
+            "maret-threnwick",
+            "the-binding-cord",
+            "the-stillhold",
+            "brynjar-andyrsson-thread",
+            "sera-of-the-stillhold"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange on the road while Maret departed"
-      }
+        "why": "a brief exchange on the chalk track"
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The chalk Stillhold track, one mile north of the Stillhold approach. Flat road between elder scrub, spring mud soft in the ruts. Overcast midday light. Stillhold's grey walls visible one mile south. Maret's figure is fifty paces out and walking steadily toward the gate.",
+      "setting": "The chalk Stillhold track, one mile north of the Stillhold approach. Flat road between elder scrub, spring mud soft in the ruts. Overcast midday light. Stillhold's grey walls visible one mile south. Maret's figure now roughly fifty paces south and diminishing steadily.",
       "npcsPresent": [
         {
           "name": "Ragnar Solmyr",
-          "state": "Standing at Brynjar's right shoulder, watching Maret's retreating figure without comment."
+          "state": "Standing at Brynjar's right shoulder, eyes still tracking south toward the Stillhold walls, having just given his read o"
         },
         {
           "name": "Freki",
-          "state": "Sitting on the track, ears soft, watching south after Maret — no alarm, just patient attention."
+          "state": "Pressed briefly against Brynjar's leg, watching south — soft ears, no alarm, just contact."
         }
       ],
       "objects": [
         "Sera's old footprints in the chalk mud, already beginning to fill with spring wa",
+        "Maret's fresh outside-edge stride marks heading south",
         "Elder scrub on both verges, first spring bud showing",
         "Stillhold walls visible as a grey smudge one mile south",
-        "Maret's figure moving steadily south along the chalk road"
+        "Maret's figure moving steadily south, growing smaller"
       ],
       "threads": [
-        "Who sent the follower who knew Maret's route before she walked it — her question and Brynjar's both, unanswered",
+        "Who sent the follower — someone with inside knowledge of the debt, the cord, and the route, per Ragnar's read",
         "Maret's promise to meet Brynjar again when she comes back out of the Stillhold",
         "The woman who originally needed to deliver the bundle — her situation 'had changed'; still unsaid what changed",
         "Whether anyone is watching the Stillhold approach from this side"
       ]
     },
-    "beats": 3
+    "beats": 4
   },
   "clock": {
     "schemaVersion": 1,
@@ -618,7 +610,6 @@
       },
       "relationship": 2,
       "history": [
-        "[d1] Watched Brynjar's failed read of the shimmer without crowding it; checked the fact plainly and waited.",
         "[d1] Named what he knows of Stillhold operatives — quiet people carrying binding-cords, not weapons. Linked the knotted cord in the bundle to the same talk. Mentioned a man who dropped an inexplicable trail.",
         "[d1] Named the split plainly — the follower peeled east into the ash copse while Sera continued south; identified it as a watching position.",
         "[d1] Read Freki's posture without comment and shifted his footing to open a line toward the copse — tactical, unhurried.",
@@ -627,30 +618,31 @@
         "[d1] Standing at Brynjar's right shoulder through the introduction — present but not crowding the exchange. Maret's angle toward him has eased slightly as Brynjar spoke.",
         "[d1] Held his quiet at Brynjar's shoulder through Maret's explanation — present, listening, not crowding the exchange.",
         "[d1] Held his quiet through Maret's refusal — no comment, no move.",
-        "[d1] Held position at Brynjar's shoulder through the exchange and Maret's departure — present, watchful, no comment."
+        "[d1] Held position at Brynjar's shoulder through the exchange and Maret's departure — present, watchful, no comment.",
+        "[d1] Gave Brynjar a Marcher read on route-knowledge: not watching, but planning — someone inside the thing, or close enough that the difference doesn't matter. Eyes still south toward the Stillhold."
       ],
       "knownFacts": [
-        "Reads fighting stances on sight",
         "Identified Brynjar's collarbone gap as a liability against a patient opponent",
         "Offered it as professional courtesy, not threat",
         "Movement at the south fork before dawn — two people, direction south toward Stillhold road",
         "Stillhold sends quiet operatives out — not travelers; they don't check in at Wardhouses",
         "The Marchers call whatever they carry a 'binding' — a cord, a knot, a mark; not a weapon",
         "At least one person dropped a trail they couldn't explain after encountering something like the shimmer",
-        "The heavier follower left Sera's trail at the waypost junction and entered the ash copse — a position with a clear line of sight to the road"
+        "The heavier follower left Sera's trail at the waypost junction and entered the ash copse — a position with a clear line of sight to the road",
+        "Route-knowledge before a delivery means someone already knew the debt existed, the cord was moving, and the road it would take — planning, not surveillance; inside information, not hired eyes."
       ],
       "skillsObserved": [
-        "silent movement",
         "ground-reading",
         "gait analysis",
         "print-reading",
         "tactical assessment",
-        "tactical ground-reading"
+        "tactical ground-reading",
+        "intelligence analysis"
       ],
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "Standing at Brynjar's right shoulder on the chalk track, watching Maret walk south.",
+      "statusNote": "Standing on the chalk track with Brynjar, watching Maret diminish toward the Stillhold gate.",
       "domains": {
         "primary": "marcher"
       },
@@ -662,7 +654,7 @@
       "aliases": [
         "Redline Warrior"
       ],
-      "met": 3
+      "met": 4
     },
     "sera": {
       "id": "sera",
@@ -1009,7 +1001,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 8,
+    "turnsSinceOffer": 9,
     "recentOffers": [
       {
         "thing": "Doss watching Brynjar with the stillness of someone deciding something — she has not offered it yet, but she is on the edge of it",
@@ -3629,7 +3621,8 @@
         "facts": [
           "[d1] Ragnar names them: quiet people the Stillhold sends out who don't check in at Wardhouses. They carry something — a cord, a knot, a mark — the Marchers call it a binding. At least one man dropped a trail after encountering something he couldn't explain.",
           "[d1] The follower at the ash copse junction was not Maret's — someone else's, with their own purpose for watching her route. Maret noticed them two days out of the Marchward, meaning the observation began well before Brynjar joined the trail.",
-          "[d1] The follower watching Maret's route was not Stillhold-sent and not hers — someone else knew the delivery route in advance. The route-knowledge itself is the anomaly."
+          "[d1] The follower watching Maret's route was not Stillhold-sent and not hers — someone else knew the delivery route in advance. The route-knowledge itself is the anomaly.",
+          "[d1] Ragnar's read: someone who knew Maret's route before she walked it wasn't a hired watcher — they already knew the debt existed, the cord was moving, and which road it would take. Inside knowledge, not surveillance. Someone inside the debt or close enough to it."
         ],
         "links": [
           "sera-of-the-stillhold",
@@ -3815,18 +3808,18 @@
     ]
   },
   "tendencies": {
-    "leadership": 6.890603735343336,
-    "cerebral": 5.831138747345679,
-    "strategic": 3.847271031931234,
-    "ruthless": 0.5177498814947562,
-    "social": 8.953849606840315,
-    "cautious": 7.563797911683232,
-    "generous": 0.975
+    "leadership": 6.718338641959752,
+    "cerebral": 5.685360278662037,
+    "strategic": 4.751089256132953,
+    "ruthless": 0.5048061344573873,
+    "social": 8.730003366669306,
+    "cautious": 7.374702963891151,
+    "generous": 0.9506249999999999
   },
   "aptitudes": [
     "banner"
   ],
-  "actionCount": 28,
+  "actionCount": 29,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -3978,8 +3971,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788788287590,
-  "rev": 87,
+  "updatedAt": 1788788339608,
+  "rev": 88,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4245,7 +4238,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 31
+    "riven_marches": 32
   },
   "practice": {
     "schemaVersion": 1,
@@ -4325,10 +4318,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-09-07T13:23:54.773Z",
-      "lastAt": "2026-09-07T13:38:07.568Z",
+      "lastAt": "2026-09-07T13:38:59.597Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 3
+      "beats": 4
     }
   ],
   "_pendingArrival": null,
@@ -4344,16 +4337,16 @@
     "at": "2026-07-23T01:18:04.353Z"
   },
   "_opEmitted": {
-    "sceneSummary": 24,
-    "choices": 24,
-    "scene": 24,
-    "npcUpdates": 22,
+    "sceneSummary": 25,
+    "choices": 25,
+    "scene": 25,
+    "npcUpdates": 23,
     "placeUpdates": 5,
     "generateRequest": 3,
     "moveTo": 3,
-    "timeOps": 23,
-    "codexUpdates": 22,
-    "sceneEnded": 6,
+    "timeOps": 24,
+    "codexUpdates": 23,
+    "sceneEnded": 7,
     "characterDeltas": 9,
     "offer": 3,
     "deeds": 1,
@@ -4362,7 +4355,7 @@
     "stageOps": 2,
     "factUpdates": 1
   },
-  "_opTurns": 24,
+  "_opTurns": 25,
   "_opLedger": {
     "offer": {
       "applied": 3,
@@ -4455,7 +4448,8 @@
   "skillUses": {
     "negotiate": 3,
     "careful": 2,
-    "help": 1
+    "help": 1,
+    "plan": 1
   },
   "aptitudeEarnCount": {
     "banner": 1

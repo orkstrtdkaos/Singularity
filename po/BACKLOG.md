@@ -1675,3 +1675,48 @@ authored.**
 field · **evolution on the Warden's Charge and the brigandine, or the claim goes** · **the naming guard** ·
 ⛔ **the tradition narrative pass — 11 of 14 traditions unaudited** (`SPEC_tradition_narrative_npc_pass`,
 promoted 08-31, ⚠️ **the largest content item we have**)
+
+---
+
+## ⬜ THE GROUND CARD BELONGS EVERYWHERE A CRAFT IS SHOWN
+
+**Erik 2026-09-07:** *"show how well a craft functions where you are **anywhere you can see your craft
+details** (just like in the craft wheel when you click a craft)."*
+
+### ⛔ MEASURED: `groundRow` HAS EXACTLY ONE CALLER
+
+**`app.js:10396`, the wheel's selected craft. That is the only place in the game a player can learn what a
+craft is worth where they are standing.**
+
+⚠️ **AND THE RENDERER IS ALREADY THE RIGHT SHAPE AND ALREADY GOOD:**
+
+> ⚑ *"PIPS BEFORE PERCENTAGES. Four pips are scannable down a list of thirty crafts; '70%, −20 chance, +18%
+> energy' is the detail behind them and rides in the tooltip, not the line."*
+> ⛔ *"AND IT RENDERS NOTHING RATHER THAN A DEFAULT — a row that cannot answer must not print a confident
+> one."*
+
+➡️ ⛔ **SO THIS IS NOT A DESIGN TASK. IT IS A CALL SITE TASK** — the hard part is built, tested, honest about
+what it does not know, and reachable from one screen.
+
+### ⬜ WHERE IT SHOULD ALSO APPEAR
+
+| surface | why it matters there |
+|---|---|
+| ⛔ **the battle menu** (`sb-skills`, `app.js:13906`) | ⚑ **THE MOST IMPORTANT ONE.** You are choosing a move ON GROUND THAT DECIDES IT, and the panel says nothing about the ground. ⚠️ **R38b's meaning ceiling, the substrate band, the free floor — all invisible at the moment they apply** |
+| **the character sheet** | ⚠️ a player reading their own crafts should see which ones are strong *here* |
+| **the codex craft entry** | the reference view |
+| **a companion's or party member's kit** | ⛑ **R36 makes them fight from their own sheet — so their ground matters too** |
+| ⬜ **the growth / rank-up surface** | ⚠️ deepening a craft that is weak where you live is a real decision |
+
+### ⚠️ AND ONE THING TO WATCH
+
+⛔ **`groundCardFor` is not free** — it reads schools, substrate, location, power sources, foothills, carried
+charge, and who is present. ⚑ **Thirty crafts in a list is thirty calls.**
+
+⬜ **Memoise per (craft, location, pass)** — ⚠️ **the answer cannot change within a turn**, and the wheel
+already computes one at a time without noticing. ⛔ **The battle menu is the surface where this would bite.**
+
+⚑ **AND IT PAYS FOR THE WHOLE SUBSTRATE SYSTEM.** ⚠️ **R38b, Q3, the free floor, `craftSource` reading the
+craft — all of it is arithmetic the player currently experiences only as an unexplained number in a
+receipt.** ➡️ **The ground card is where that work becomes visible, and it is showing on one screen out of
+five.**

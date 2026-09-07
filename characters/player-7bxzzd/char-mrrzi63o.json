@@ -122,102 +122,22 @@
       }
     ],
     "lastTurn": {
-      "narration": "You find a hollow in the lee of the waygate stone — the iron ring above you catching the last of the night wind — and spread your bedroll on ground that is cold but dry enough. Freki circles twice and drops against your side, a warm press of wire coat and slow breath. Sleep comes without argument.\n\nDawn arrives gray and honest. The melt has softened the track overnight; boot-prints from yesterday are deeper now, edges blurred by the slow seep. The waygate stone stands as it did — the broken top, the iron ring hammered in crooked — but the light is different, the shadow thrown spinward across the path rather than widdershins. Your body feels the night's work undone. Freki is already on her feet, nose moving along the ground in widening arcs, reading the night's traffic.\n\nSomething she finds makes her pause — not a growl, not alarm, but the focused stillness she gets when something is worth your attention. A few yards along the track toward the Marchward, there is a dead sheep. Not torn, not dragged. It simply lay down in the night and did not get up, and whoever owns it has not yet come looking. The fleece is patchy in a way you have seen before on animals that stopped eating weeks before they died. You think of the news that has been drifting up the road — the Riven Marches herds, the quiet sickness spreading flock to flock — and the dead animal at a waygate feels less like bad luck and more like a marker.",
-      "sceneSummary": "Brynjar rested at the waygate stone and woke at dawn to find a dead sheep on the track — the first sign the Riven Marches livestock sickness has reached this road.",
-      "choices": [
+      "holdingOps": [
         {
-          "label": "Use Order-Sense on the dead sheep — read whether this is disease, something structural in the water or ground, or something else entirely",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": "normal",
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 3,
-          "trivial": false
+          "op": "addItem",
+          "itemName": "Hand-axe",
+          "itemType": "weapon",
+          "description": "The axe Brynjar grabbed on his way out of the Javiksholm longhouse the night of the raid. Well-used, well-kept."
         },
         {
-          "label": "Let Freki work — follow her nose and see where the sheep came from, and whether there are others",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": "easy",
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Leave the sheep and head back toward the Marchward — bring word of what you found to Halvra Stenn at the Wardhouse",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": "very easy",
-          "intentTags": [
-            "travel"
-          ],
-          "trivial": true
+          "op": "addItem",
+          "itemName": "Shield",
+          "itemType": "armor",
+          "description": "The shield Brynjar grabbed on his way out of the Javiksholm longhouse the night of the raid. Scored but sound."
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "xp": 0
-      },
-      "timeOps": {
-        "hoursPassed": 8,
-        "why": "slept through the night at the waygate stone"
-      },
-      "scene": {
-        "setting": "The waygate stone at dawn — a broken standing stone with an iron ring, on the track half a morning north of the Marchward. Cold, gray early-spring light; the ground softened by overnight melt, boot-prints from yesterday now blurred. Spinward shadow from the stone across the path.",
-        "npcsPresent": [
-          {
-            "name": "Freki",
-            "state": "On her feet and ranging, nose working the ground in arcs — paused and focused near a dead sheep a few yards down the track"
-          }
-        ],
-        "objects": [
-          "waygate stone with iron ring",
-          "bedroll (packed)",
-          "dead sheep on the track — not torn, fleece patchy, lay down and did not rise"
-        ],
-        "threads": [
-          "The dead sheep — is this the Riven Marches sickness arriving at the waygate road?",
-          "Maret Threnwick is traveling south to the Stillhold alone with the cloth bundle",
-          "The restricted creditor on Maret's debt is still unnamed"
-        ]
-      },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "freki",
-          "name": "Freki",
-          "note": "Woke at dawn and ranged immediately; found the dead sheep and stopped — focused stillness, not alarm. Performing her role as the sharper set of senses.",
-          "statusNote": "At the waygate stone, on point near the dead sheep"
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "riven-marches-sickness",
-          "label": "Livestock Sickness of the Riven Marches",
-          "kind": "mystery",
-          "fact": "A dead sheep found at the waygate road at dawn — fleece patchy, no signs of predation, died lying down. The pattern matches what has been said of the Riven Marches herds: animals that stopped eating weeks before they collapsed. The sickness may be moving along the road.",
-          "links": [
-            "the-marchward",
-            "brynjar-andyrsson-thread"
-          ]
-        }
-      ],
-      "offer": {
-        "thing": "A dead sheep on the waygate track — patchy fleece, no signs of violence, the same quiet sickness spreading through the Riven Marches herds",
-        "from": "What is stirring in the world: livestock quietly sickening across the Riven Marches, now visibly present on this road"
-      },
-      "placeUpdates": [
-        {
-          "note": "A dead sheep found on the track at dawn — patchy fleece, no predation. First sign of the Riven Marches livestock sickness at this waygate."
-        }
-      ],
-      "sceneEnded": false
+      "narration": "",
+      "sceneSummary": null
     },
     "sceneState": {
       "setting": "The waygate stone at dawn — a broken standing stone with an iron ring, on the track half a morning north of the Marchward. Cold, gray early-spring light; the ground softened by overnight melt, boot-prints from yesterday now blurred. Spinward shadow from the stone across the path.",
@@ -243,7 +163,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 2,
-    "hour": 14,
+    "hour": 15,
     "realAnchor": null
   },
   "companions": [
@@ -875,7 +795,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Freki sitting rather than ranging — the particular stillness that means the trail changed here, not ended, and Freki is waiting to be told…",
@@ -4027,8 +3947,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788809828380,
-  "rev": 121,
+  "updatedAt": 1788811179289,
+  "rev": 123,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4574,10 +4494,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-09-07T19:32:40.807Z",
-      "lastAt": "2026-09-07T19:37:08.364Z",
+      "lastAt": "2026-09-07T19:59:39.275Z",
       "startDay": 69,
       "endDay": 69,
-      "beats": 2
+      "beats": 3
     }
   ],
   "_pendingArrival": null,

@@ -1,79 +1,81 @@
 {
-  "schemaVersion": 1,
-  "id": "kestrels_roost",
-  "name": "Kestrel's Roost",
-  "regionId": "valley",
-  "communityId": "valley.kestrels_roost",
-  "spectrum": {
-    "chaos_order": -0.4,
-    "individual_collective": -0.3,
-    "falsehood_truth": -0.3,
-    "tradition_innovation": 0.3,
-    "concrete_abstract": -0.2
-  },
-  "tags": [
-    "trade-post",
-    "mountain",
-    "pass",
-    "crossroads",
-    "no-questions",
-    "unaligned"
-  ],
-  "connections": [
-    "radiant_plateau_edge",
-    "disputed_zone_fringe",
-    "old_switchback",
-    "tumbledown_market"
-  ],
-  "descriptionSeed": "A shelf of stone and timber wedged where three trails meet below the high pass — the last stop before the mountains and the first roof coming down. Everyone passing between the plateau, the wilds, and the country beyond the pass comes through the Roost, which means everyone's business does too. Cage-lanterns swing over a market that never fully closes; the Kestrel herself keeps the ledger of who owes whom, and up here that ledger is closer to law than anything the cities enforce. Nothing here is about the river. Up here the water runs clean and cold, and the trouble is entirely human.",
-  "loreRefs": [
-    "valley_primer"
-  ],
-  "npcsPresent": [
-    "the_kestrel",
-    "brann_tollhand",
-    "sable_the_runner"
-  ],
-  "encounterFlavor": "A crossroads that never sleeps — traders haggling in four dialects, debts called in, smuggled Precursor salvage under oilcloth, a knife-fight talked down before it starts, a caravan deciding whether to risk the pass before the snow.",
-  "dangerLevel": 2,
-  "image": "content/packs/valley/assets/kestrels_roost.jpg",
-  "questSeeds": [
-    "The Kestrel's ledger has a discrepancy she can't afford to be seen investigating herself — someone is skimming salvage debts, and she needs an outsider she can deny hiring",
-    "Brann the tollhand takes a cut he shouldn't and everyone knows; a caravan master wants him embarrassed, not killed — there's a clever way to do it that could go wrong",
-    "Sable runs messages over the pass and hasn't come back from the last run; her sister will pay, plead, or follow you up the switchback herself",
-    "A crate of Precursor salvage came through mislabeled and now two buyers think it's theirs — both are dangerous, and the truth of who it belongs to is uglier than either",
-    "Someone is buying up pass-debts cheap and no one knows who or why; the pattern points at a slow, patient takeover of the Roost itself"
-  ],
-  "map": {
-    "x": 610,
-    "y": 140
-  },
-  "poleIntensity": {
-    "chaos": 0.4,
-    "falsehood": 0.3,
-    "concrete": 0.2
-  },
-  "axisVector": [
-    0.0,
-    -0.3,
-    0.0,
-    0.0,
-    -0.2,
-    0.0,
-    -0.4,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0
-  ],
-  "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
-  "worldPos": {
-    "colatitude": 23.0,
-    "longitude": 167.0,
-    "depth": 0
-  },
-  "worldPosNote": "Near-centre folk country — the Valley sits where all axes cross faintly, so longitude spreads and colatitude stays low. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "settlement",
-  "parentId": "disputed_zone_fringe"
+ "schemaVersion": 1,
+ "id": "kestrels_roost",
+ "name": "Kestrel's Roost",
+ "regionId": "the_echo_vale",
+ "communityId": "valley.kestrels_roost",
+ "spectrum": {
+  "chaos_order": -0.4,
+  "individual_collective": -0.3,
+  "falsehood_truth": -0.3,
+  "tradition_innovation": 0.3,
+  "concrete_abstract": -0.2
+ },
+ "tags": [
+  "trade-post",
+  "mountain",
+  "pass",
+  "crossroads",
+  "no-questions",
+  "unaligned"
+ ],
+ "connections": [
+  "radiant_plateau_edge",
+  "disputed_zone_fringe",
+  "old_switchback",
+  "tumbledown_market"
+ ],
+ "descriptionSeed": "A shelf of stone and timber wedged where three trails meet below the high pass — the last stop before the mountains and the first roof coming down. Everyone passing between the plateau, the wilds, and the country beyond the pass comes through the Roost, which means everyone's business does too. Cage-lanterns swing over a market that never fully closes; the Kestrel herself keeps the ledger of who owes whom, and up here that ledger is closer to law than anything the cities enforce. Nothing here is about the river. Up here the water runs clean and cold, and the trouble is entirely human.",
+ "loreRefs": [
+  "valley_primer"
+ ],
+ "npcsPresent": [
+  "the_kestrel",
+  "brann_tollhand",
+  "sable_the_runner"
+ ],
+ "encounterFlavor": "A crossroads that never sleeps — traders haggling in four dialects, debts called in, smuggled Precursor salvage under oilcloth, a knife-fight talked down before it starts, a caravan deciding whether to risk the pass before the snow.",
+ "dangerLevel": 2,
+ "image": "content/packs/valley/assets/kestrels_roost.jpg",
+ "questSeeds": [
+  "The Kestrel's ledger has a discrepancy she can't afford to be seen investigating herself — someone is skimming salvage debts, and she needs an outsider she can deny hiring",
+  "Brann the tollhand takes a cut he shouldn't and everyone knows; a caravan master wants him embarrassed, not killed — there's a clever way to do it that could go wrong",
+  "Sable runs messages over the pass and hasn't come back from the last run; her sister will pay, plead, or follow you up the switchback herself",
+  "A crate of Precursor salvage came through mislabeled and now two buyers think it's theirs — both are dangerous, and the truth of who it belongs to is uglier than either",
+  "Someone is buying up pass-debts cheap and no one knows who or why; the pattern points at a slow, patient takeover of the Roost itself"
+ ],
+ "map": {
+  "x": 610,
+  "y": 140
+ },
+ "poleIntensity": {
+  "chaos": 0.4,
+  "falsehood": 0.3,
+  "concrete": 0.2
+ },
+ "axisVector": [
+  0.0,
+  -0.3,
+  0.0,
+  0.0,
+  -0.2,
+  0.0,
+  -0.4,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0
+ ],
+ "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
+ "worldPos": {
+  "colatitude": 23.0,
+  "longitude": 167.0,
+  "depth": 0
+ },
+ "worldPosNote": "Near-centre folk country — the Valley sits where all axes cross faintly, so longitude spreads and colatitude stays low. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+ "tier": "settlement",
+ "parentId": "disputed_zone_fringe",
+ "_regionWas": "valley",
+ "_reRegioned_20260906": "⛑ MOVED FROM `valley` TO `the_echo_vale`, 2026-09-06. ⛔ NOT A POSITION CHANGE — IT DID NOT MOVE. ⚠️ SNG-387 flagged it 'stranded 4.3× its region's typical spread', and the cause was membership, not geography. ⚑ THE ROADS SAY SO AND ALWAYS DID: of its four connections, `radiant_plateau_edge` and `old_switchback` are the_echo_vale, `tumbledown_market` is unspooling, and only `disputed_zone_fringe` is valley. ⛔ THREE OF FOUR NEIGHBOURS WERE OUTSIDE THE REGION IT CLAIMED. ✅ MEASURED BOTH WAYS: in `valley` its median distance to peers is 28.9° against a regional typical of 5.6° — a ratio of 5.1, stranded. In `the_echo_vale` it is 33.8° against 15.2° — a ratio of 2.2, inside the bound and inside a region that is genuinely spread out. ⚑ AND THE FICTION AGREES: 'a shelf of stone and timber wedged where three trails meet below the high pass — the last stop before the mountains… everyone passing between the plateau, the wilds.' ⚠️ THE PLATEAU IS THE ECHO VALE'S. It was never a valley town; it is the pass ABOVE the valley, and it has 17 mentions in Erik's save so its position is anchored by play and was never in question."
 }

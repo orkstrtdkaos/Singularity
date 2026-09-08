@@ -9831,11 +9831,25 @@ console.log("\n── §148 · role → tier, default down, authored always wins
   check("§148: ⛔ an unreadable role takes the table's DEFAULT, and the default is a LOW rung",
     (() => { const t = NS148.tierFromRole({ role: "zzz nothing matches this" }, { cfg: cfg148 }); return t && Number(cfg148.tierFloor[t.tier]) <= Number(cfg148.tierFloor.notable); })(),
     JSON.stringify(NS148.tierFromRole({ role: "zzz nothing matches this" }, { cfg: cfg148 })));
-  check("§148: ⛔ …and NO derivation may reach epic, legendary or mythic — those rungs are AUTHORED ONLY",
-    npcs148.filter(n => !n.tier && n.level == null).every(n => {
-      const t = NS148.tierFromRole(n, { cfg: cfg148 }); if (!t) return true;
-      return Number(cfg148.tierFloor[t.tier]) <= Number(cfg148.tierFloor[cfg148.tierSignals.ceiling]);
-    }));
+  // ⛑ RETIRED, ON AEVI'S SPEC §5 — and she is right that it was mine to retire: this asserted
+  // `derived <= cfg.tierSignals.ceiling`, and a GATE THAT PINS A DIAL is the wrong gate by my own rule.
+  // She removed `ceiling` (it is `null` now), so the check compared against `tierFloor[null]` → NaN and
+  // went red without anything being wrong. ⚠️ THE RULE ITSELF IS NOT RETIRED — SPEC §2.2 keeps it and
+  // says why: "A role string alone reaches heroic — that much of CCode's instinct holds and should stay.
+  // Above it needs more than a regex." So the property is asserted directly instead of through a dial.
+  // ⛔ WHEN EVIDENCE-BASED DERIVATION LANDS (an arc, authored renown, the region's band, figureCareer
+  // deeds) this check gains an evidence escape — it does NOT get deleted: a REGEX is still not entitled
+  // to mint a legendary, and that is the whole of §2.2.
+  {
+    const silent148 = npcs148.filter(n => !n.tier && n.level == null);
+    const derived148 = silent148.map(n => NS148.tierFromRole(n, { cfg: cfg148 })).filter(Boolean);
+    // ⛑ NON-VACUITY: "all of nothing is fine" is how this check would rot silently.
+    check("§148: ⚠️ the role derivation actually runs on silent records (else the rung check below is vacuous)",
+      silent148.length > 0 && derived148.length > 0, `${derived148.length} derived of ${silent148.length} silent`);
+    check("§148: ⛔ …and a ROLE STRING ALONE never reaches above heroic — above it takes evidence, not a regex",
+      derived148.every(t => Number(cfg148.tierFloor[t.tier]) <= Number(cfg148.tierFloor.heroic)),
+      [...new Set(derived148.map(t => t.tier))].join(", "));
+  }
   // ⚠️ THE DEMOTION ORDERING IS THE DESIGN: youth is listed first so a young keeper is not yet a keeper.
   check("§148: ⚠️ a demoting word outranks a promoting one — \"young\" beats \"keeper\", which is why order matters",
     NS148.tierFromRole({ role: "A young keeper of the gate" }, { cfg: cfg148 })?.tier === "notable"

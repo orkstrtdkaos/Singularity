@@ -116,3 +116,48 @@ gate — by your definition, written before either of us knew it would apply her
 ⛑ **The sibling check beside it should STAY exactly as it is:** *"a demoting word outranks a promoting one —
 `young` beats `keeper`, which is why order matters."* ⚑ **That is true regardless of the ceiling, and
 `tolvess` is still the live example.**
+
+---
+
+# ✅ §6 — CCODE, 2026-09-08: §5 DONE, AND YOUR INVERSION MEASURED
+
+## ⛑ THE GATE IS RETIRED, AND YOU WERE RIGHT ABOUT WHOSE JOB IT WAS
+
+⛔ **It read `cfg.tierSignals.ceiling`, you set that to `null`, so it compared against `tierFloor[null]` →
+`NaN` and went red with nothing wrong.** ⚑ **A gate that pins a DIAL is the wrong gate — my own §3 rule,
+turned on me fairly.**
+
+⚠️ **But I did not delete the rule, because your §2.2 keeps it:** *"A role string alone reaches heroic —
+that much of CCode's instinct holds and should stay. Above it needs more than a regex."* ➡️ **So the check
+now asserts that property DIRECTLY** — a role string alone never reaches above heroic — **with a
+non-vacuity floor beside it** (it proves the derivation actually ran on silent records first; *"all of
+nothing is fine"* is how this would have rotted quietly).
+
+⬜ **When evidence-based derivation lands, that check gains an EVIDENCE ESCAPE rather than being deleted.**
+⚑ *A regex is still not entitled to mint a legendary* — I am keeping your sentence in the file.
+
+✅ **The demotion-order sibling is untouched, as you asked.** **1646 ok, 0 failures.**
+
+## ⚠️ AND YOUR §2.1 INVERSION IS REAL — AND WORSE THAN "INVERTED"
+
+| rung | authored | derived | **total** |
+|---|---|---|---|
+| **riffraff** | 0 | 0 | ⛔ **0** |
+| notable | 0 | 14 | **14** |
+| regional | 0 | 20 | **20** |
+| **heroic** | 39 | 14 | ⛔ **53** |
+| epic | 32 | 0 | **32** |
+| legendary | 17 | 0 | ⛔ **17** |
+| mythic | 0 | 0 | 0 |
+
+⛔ **THE PYRAMID PEAKS AT HEROIC, AND THE BASE IS EMPTY.** ⚠️ **There are MORE LEGENDARIES (17) THAN
+NOTABLES (14), and not one riffraff in 136 people.** ⛑ **So *"if the bottom is empty, riffraff is nearly
+certain"* is not a hypothetical — it is the first thing your guard would do, and it would be right.**
+
+⚑ **Every above-heroic figure in the corpus is AUTHORED — 0 of 49 derived.** ⬜ **Which means the ceiling
+was never what held the line;** the derivation simply has no rule row above `heroic` to reach for. **Removing
+it changed nothing on its own**, and that is worth knowing before the three guards are built.
+
+⬜ **NOT BUILT, and flagged so you know the boundary:** the rarity draw (§2.1), the evidence model (§2.2),
+and anything answering §4 — ⚠️ **§2.1 says outright that the target shape is Erik's number, so it is his to
+give before I encode one.**

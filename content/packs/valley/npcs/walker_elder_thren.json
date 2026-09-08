@@ -33,12 +33,9 @@
  "appearance": "An Ent of middling age for their kind, twice a man's height, bark a smooth silver-grey like beech, still supple at the upper limbs. Leaves at the crown are small and dark. The face-knot is unusually mobile.",
  "people": "ent",
  "domains": {
-  "primary": [
-   "rootkin",
-   "numinous"
-  ],
-  "secondary": "stillhold",
-  "tertiary": "hourkeeper"
+  "primary": "rootkin",
+  "secondary": "numinous",
+  "tertiary": "stillhold"
  },
  "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own.",
  "teaches": "rootkin",
@@ -58,5 +55,14 @@
  "physicality": "An Ent of middling age for their kind, twice a man's height, bark a smooth silver-grey like beech. Slow to move and unstoppable once moving. Fine green growth in the seams where the bark has not closed. WHAT CATCHES THE EYE: they are arguing to keep the Deepwood woven into the world and losing, and the patience with which they keep arguing is the whole of them.",
  "intimacyNotes": "⚠️ ENTS ARE MALE OR FEMALE (Erik, 2026-09-02) AND THREN IS A PERSON, not a landscape feature. ⛔ SCALE IS A REAL PROBLEM and a GM should not pretend otherwise — with a human partner this is affection, attendance and presence rather than anything athletic, and it is not lesser for that. ⚠️ ENT TIME: a conversation may take a season and he does not experience that as waiting. ⛔ HE IS LOSING THE MOOT CASE. Do not resolve it here. TONE: slow, courteous, immense, and gentler than the size suggests.",
  "romanceEligible": true,
- "_physWhy": "⚠️ Authored per `po/CONTENT_POLICY_physicality.md`. ⛔ ADULT. The attraction comes OUT of who this person is rather than being applied on top, character bounds hold in intimacy, consent is authored in their own voice, and each entry names something intimacy must NOT resolve."
+ "_physWhy": "⚠️ Authored per `po/CONTENT_POLICY_physicality.md`. ⛔ ADULT. The attraction comes OUT of who this person is rather than being applied on top, character bounds hold in intimacy, consent is authored in their own voice, and each entry names something intimacy must NOT resolve.",
+ "_domainsWas": {
+  "primary": [
+   "rootkin",
+   "numinous"
+  ],
+  "secondary": "stillhold",
+  "tertiary": "hourkeeper"
+ },
+ "_domainsFix_20260908": "⛔ `domains.primary` WAS AN ARRAY — the Pell/Veth shape, and CCode's roster gave it a visible mechanical cost: these three were among the 62 records with NO REAL CRAFT, because `kitFor` cannot read a domain draw from a list. ⚠️ THE ARRAY WAS NOT SLOPPINESS — it holds a real tie the original author could not break, and all three are Deepwood ents whose register and whose craft genuinely differ. ⚑ THE ROLE STRING BREAKS IT, which is the same evidence `tierFromRole` now uses. ⛑ `_domainsWas` keeps the tie on the record. ⚑ HERE: ⚑ 'Ent elder arguing to KEEP THE DEEPWOOD WOVEN INTO THE WORLD.' ⛔ The tie in the array was real — he is genuinely both — and the role breaks it: he argues for the wood's CONNECTION, so rootkin leads and numinous carries the argument."
 }

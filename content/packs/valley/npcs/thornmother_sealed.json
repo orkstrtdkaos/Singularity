@@ -1,0 +1,126 @@
+{
+ "id": "thornmother_sealed",
+ "name": "The Thornmother of the Closing Wood",
+ "level": 64,
+ "role": "Legendary — life curdled into a wall; she would seal the wood so nothing mortal could enter",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "domains": {
+  "primary": "rootkin",
+  "secondary": "stillhold",
+  "tertiary": "threnodist"
+ },
+ "spectrum": {
+  "death_life": 0.9,
+  "violence_peace": 0.3
+ },
+ "subAttributes": {
+  "strength": 12,
+  "agility": 9,
+  "reason": 13,
+  "insight": 16,
+  "presence": 18,
+  "rapport": 8,
+  "craft": 14,
+  "wits": 12
+ },
+ "knowledge": [
+  "Every root under the Deepwood, and which of them answer",
+  "How long a sealed thing can stay alive"
+ ],
+ "wants": [
+  "The wood whole and sealed, humankind forever out"
+ ],
+ "fears": "⚠️ That sealing it kills it. ⛔ She has thought about this and continued.",
+ "appearance": "Bark to the shoulder, and the green around her does not move in wind that moves everything else.",
+ "voiceHints": "Slow, maternal, and completely closed. She calls you child and means it.",
+ "assistTags": [
+  "guard",
+  "tend",
+  "hold",
+  "bind"
+ ],
+ "abilities": [
+  {
+   "abilityId": "root_that_holds",
+   "level": 3
+  },
+  {
+   "abilityId": "carried_green",
+   "level": 3
+  },
+  {
+   "abilityId": "green_road",
+   "level": 3
+  },
+  {
+   "abilityId": "bark_and_briar",
+   "level": 3
+  },
+  {
+   "abilityId": "the_taking_root",
+   "level": 3
+  },
+  {
+   "abilityId": "boundary_stone",
+   "level": 3
+  },
+  {
+   "abilityId": "held_line",
+   "level": 3
+  },
+  {
+   "abilityId": "the_fixed_point",
+   "level": 3
+  },
+  {
+   "abilityId": "last_gift",
+   "level": 2
+  },
+  {
+   "abilityId": "grief_that_stops",
+   "level": 2
+  },
+  {
+   "abilityId": "stillwork",
+   "level": 2
+  },
+  {
+   "abilityId": "hearthbinding",
+   "level": 2
+  },
+  {
+   "abilityId": "steady_soul",
+   "level": 2
+  },
+  {
+   "abilityId": "kept_vigil",
+   "level": 2
+  },
+  {
+   "abilityId": "deathsense",
+   "level": 1
+  },
+  {
+   "abilityId": "calm_word",
+   "level": 1
+  }
+ ],
+ "closed": [
+  "hastened_grey"
+ ],
+ "personality": {
+  "warmth": 7,
+  "trust": 3,
+  "candor": 8,
+  "patience": 10
+ },
+ "physicality": "ADULT. Immense, still, and half-tree. WHAT CATCHES THE EYE: nothing about her is hurrying, including the growth.",
+ "intimacyNotes": "⛔ NOT AVAILABLE. She is the Rootbound's answer made flesh, and the entry exists so a GM can describe standing in front of her.",
+ "schemaVersion": 1,
+ "people": "human",
+ "_authoredWhy": "⛑ AUTHORED 2026-09-07 AT ERIK'S RULING: 'Mythical and legendary need sheets too. If you fight one, MECHANICALLY IT WORKS THE SAME as any other. They are pretty high level though — wouldn't stick with just lvl 40.' ⛔ CCODE'S FINDING: '69 legends live in the same npcs map `personOpponentFor` resolves from, and `sheetFor` gives one a LEVEL-40 sheet from its mythic tier. A legend can be made an opponent WITH NO KIT AT ALL.' ⚠️ AND 40 IS THE *EPIC* FLOOR — `resolution.npcStanding.tierFloor` reads mythic 85 · legendary 60 · epic 40. ⛔ The floors were right and the path was returning the wrong one. ⚑ LEVEL 62-66, ABOVE THE LEGENDARY FLOOR OF 60: capacity `round(level/2)` = 31-33 crafts. AUTHORED AT 16-18 — deliberately UNDER capacity, because a legendary is a HINGE and the rest of the kit should be earned by whoever finally writes the scene, not pre-spent by Aevi. ⚠️ `room` is the point.",
+ "_tier": "legendary",
+ "romanceEligible": false
+}

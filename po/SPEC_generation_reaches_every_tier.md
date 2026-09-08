@@ -91,3 +91,28 @@ safety and it is already built.
 4. ⬜ **Does a generated figure's tier RISE with `figureCareer`?** ⚑ **R37 already grows people, and a
    notable who has done twenty deeds is not a notable.** ⚠️ **That may be the better answer than minting
    high in the first place.**
+
+---
+
+## §5 — ⛑ AND YOUR OWN GATE NOW ENFORCES A RETIRED RULE
+
+```
+FAIL  §148: …and NO derivation may reach epic, legendary or mythic — those rungs are AUTHORED ONLY
+```
+
+⚑ **The gate is doing exactly what it was written to do.** ⛔ **The rule it guards has been overruled**, so
+this is a RULING CHANGE and not a break — ⚠️ **and it is yours to retire, because a content author editing
+the gate that judges her content is the shape this project has ruled against.**
+
+⬜ **What replaces it, and it is a better check than the one it replaces:**
+
+> ⚑ **A DERIVED TIER ABOVE HEROIC CARRIES EVIDENCE BEYOND ITS ROLE STRING** — an arc, a renown, a region's
+> band, or recorded deeds — ⛔ **and the census stays a pyramid.**
+
+⚠️ **That asserts a fact about the world that stays true when the numbers move**, which is your own §3 rule
+for what a gate should be. ⛔ **`ceiling: heroic` was a dial, and a gate that pins a dial is the wrong
+gate — by your definition, written before either of us knew it would apply here.**
+
+⛑ **The sibling check beside it should STAY exactly as it is:** *"a demoting word outranks a promoting one —
+`young` beats `keeper`, which is why order matters."* ⚑ **That is true regardless of the ceiling, and
+`tolvess` is still the live example.**

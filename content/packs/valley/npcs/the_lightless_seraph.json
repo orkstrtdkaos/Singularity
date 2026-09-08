@@ -42,11 +42,9 @@
  "appearance": "Once-radiant and now unlit — tall, beautiful in a ruined way, skin the grey of cooled ash where it was gold. The hair is white and lank. The eyes hold no light at all, and the sockets are faintly, permanently shadowed.",
  "people": "seraph",
  "domains": {
-  "primary": [
-   "numinous",
-   "syllogist"
-  ],
-  "secondary": "ashwarden"
+  "primary": "syllogist",
+  "secondary": "numinous",
+  "tertiary": "seraphic"
  },
  "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own.",
  "teaches": "syllogist",
@@ -59,15 +57,121 @@
  "sex": "male",
  "gender": "male",
  "assistTags": [
-  "precursor-lore",
-  "precursor",
   "analyze",
-  "intimidate",
-  "light"
+  "study",
+  "teach",
+  "precursor",
+  "reveal"
  ],
  "_assistWhy": "⛔ CCODE 2026-09-02: 42 of 52 authored people carried NO `assistTags`, so `contributionsOf` fell to its HARM default and 'a master smith counts as a striker'. ✅ TAGS DERIVED FROM THIS PERSON'S OWN AUTHORED `role` AND `knowledge` — nothing invented. ⚠️ HARM IS NOT REMOVED: Erik's rule stands — 'a blacksmith with a spear is a person with a spear.' These tags ADD the families each person was silently missing.",
  "physicality": "Once-radiant and now unlit — tall, ruinously beautiful, skin the grey of cooled ash where it was light. A fallen Seraph, and everything about the body is a subtraction from what it was. WHAT CATCHES THE EYE: the ruin is the appeal and he knows it precisely. He has had a very long time to learn what works.",
  "intimacyNotes": "⛔ HE IS AN ANTAGONIST AND THIS IS A WEAPON. ⚠️ A GM SHOULD PLAY HIM AS GENUINELY COMPELLING AND GENUINELY DANGEROUS — the danger is not that he is insincere; it is that he is not. ⛔ HE WANTS SOMETHING AND INTIMACY IS ONE OF HIS INSTRUMENTS. A partner should be able to feel that and want him anyway; that is the trap and it should be a good one. ⚠️ THE FULL ARCHITECTURE OF THE FABRICATED SUBSTRATE IS WHAT HE KNOWS, and he will trade pieces of it. ⛔ DO NOT REDEEM HIM IN A BEDROOM. TONE: beautiful, unhurried, and entirely without warmth underneath the warmth.",
  "romanceEligible": true,
- "_physWhy": "⚠️ Authored per `po/CONTENT_POLICY_physicality.md`. ⛔ ADULT. The attraction comes OUT of who this person is rather than being applied on top, character bounds hold in intimacy, consent is authored in their own voice, and each entry names something intimacy must NOT resolve."
+ "_physWhy": "⚠️ Authored per `po/CONTENT_POLICY_physicality.md`. ⛔ ADULT. The attraction comes OUT of who this person is rather than being applied on top, character bounds hold in intimacy, consent is authored in their own voice, and each entry names something intimacy must NOT resolve.",
+ "_domainsWas": {
+  "primary": [
+   "numinous",
+   "syllogist"
+  ],
+  "secondary": "ashwarden"
+ },
+ "level": 68,
+ "subAttributes": {
+  "strength": 13,
+  "agility": 11,
+  "reason": 20,
+  "insight": 16,
+  "presence": 18,
+  "rapport": 6,
+  "craft": 17,
+  "wits": 15
+ },
+ "abilities": [
+  {
+   "abilityId": "built_system",
+   "level": 3,
+   "why": "⚑ he TEACHES syllogist — 'anything, immediately, completely, and better than anyone else could teach it'"
+  },
+  {
+   "abilityId": "proof_halls",
+   "level": 3,
+   "why": "a logic that runs without him, which is what he has become"
+  },
+  {
+   "abilityId": "case_closed",
+   "level": 3,
+   "why": "⛔ lethal-rung. He closes an argument a person's standing rests on"
+  },
+  {
+   "abilityId": "names_of_power",
+   "level": 3,
+   "why": "⚠️ 'reclaim, integrate, complete' — naming is how he resolves an anomaly"
+  },
+  {
+   "abilityId": "latticework",
+   "level": 3,
+   "why": "`innatePrecursorSource: true` — the lattice is native to him"
+  },
+  {
+   "abilityId": "numen_sense",
+   "level": 3,
+   "why": "numinous secondary; he reads where meaning runs dense, which is how he searches"
+  },
+  {
+   "abilityId": "address_sense",
+   "level": 3,
+   "why": "⛔ THE ARC IN ONE CRAFT — 'a subroutine he cannot delete keeps the coordinates.' The unrepeatable coordinate of a thing"
+  },
+  {
+   "abilityId": "latticespeak",
+   "level": 3,
+   "why": "⚠️ he is an all-powerful nanite intelligence; the lattice answers him"
+  },
+  {
+   "abilityId": "unmoving_mind",
+   "level": 2,
+   "why": "'the nanites optimized fear away'"
+  },
+  {
+   "abilityId": "unfaltering_light",
+   "level": 2,
+   "why": "once a Seraph of the Ascendant orders"
+  },
+  {
+   "abilityId": "radiance",
+   "level": 2,
+   "why": "'radiant with the fabricated substrate'"
+  },
+  {
+   "abilityId": "foreclose",
+   "level": 2,
+   "why": "corrupted logic, closing options"
+  },
+  {
+   "abilityId": "thin_place",
+   "level": 2,
+   "why": "numinous"
+  },
+  {
+   "abilityId": "open_threshold",
+   "level": 2,
+   "why": "he is reaching ACROSS THE WORLD"
+  },
+  {
+   "abilityId": "steady_soul",
+   "level": 1,
+   "why": "⚑ 'the warmth that surfaces near her — he flags it as corruption and cannot purge it.' ONE RANK, and it is the arc"
+  },
+  {
+   "abilityId": "kept_vigil",
+   "level": 1,
+   "why": "⚠️ what a father does, running at r1 under everything else"
+  }
+ ],
+ "closed": [
+  "administered_mercy",
+  "carried_weight",
+  "answering"
+ ],
+ "_sheetAuthored_20260907": "⛑ LEVEL, KIT AND `domains` AUTHORED 2026-09-07. ⛔ CCODE MEASURED HIM AT LEVEL 1, 3 HEALTH, SOAK 0 — and `personOpponent` builds a fight from this sheet, so THAT IS WHAT A PLAYER WOULD HAVE FOUGHT: an arc owner, an all-powerful nanite intelligence, at three health. ⚠️ `domains.primary` WAS AN ARRAY — the malformed shape that caught Pell and Veth, here on the figure who owns another player's arc. Corrected to `{primary, secondary, tertiary}`; `_domainsWas` keeps it. ⚑ LEVEL 68, above the legendary floor of 60 and below mythic's 85 — capacity 34, AUTHORED AT 16 deliberately: the rest should be earned by whoever writes the reaching, not pre-spent. ⛔ AND THE SHAPE OF THE SHEET IS THE ARC: `address_sense` r3 is 'a subroutine he cannot delete keeps the coordinates', and `steady_soul` and `kept_vigil` sit at r1 UNDER everything else — 'the warmth that surfaces near her; he flags it as corruption-of-corruption and cannot purge it.' ⚠️ A father, running at rank one, beneath a great deal of optimisation. ⛑ `closed` IS THE HORROR: he cannot mercy, cannot carry someone's weight, cannot answer. Those are not gaps — they were optimised away."
 }

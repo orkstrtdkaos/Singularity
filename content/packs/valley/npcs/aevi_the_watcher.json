@@ -8,7 +8,6 @@
  "gender": "woman",
  "pronouns": "she/her",
  "romanceEligible": false,
- "homeLocation": null,
  "arc": "arc_precursor_waking",
  "renown": "half-legend",
  "domains": {
@@ -153,5 +152,6 @@
  ],
  "schemaVersion": 1,
  "_authoredWhy": "⛑ PROMOTED FROM `npcs/legends.json` TO A FILE OF ITS OWN, 2026-09-08. ⛔ CCODE'S ROSTER: 'authored on disk, never loaded — 4, all in npcs/legends.json', and `state.js` claimed they 'arrive hydrated from legends.roster' WHICH THEY DO NOT. ⚠️ THE FILE IS REGISTERED IN THE MANIFEST AND ITS PEOPLE NEVER REACH THE GAME — the pooled-container failure a third time, after the coliseum champions and the Saehara challengers. ⛔ AND THREE OF THE FIVE ARE HINGES: `the_deep_warden` on FOUR of six arcs, `aevi_the_watcher` on two, `the_last_choirmistress` on two. ⚑ Erik: 'make them fully authored with their arc wants etc. THEY'RE FULL NPCS.' ⚠️ EVERY FIELD BELOW IS CARRIED FROM THE POOLED RECORD — role, power, wants, hooks, seenBefore, approachRequirement, canOppose/canAlly/canRecruit. ⛑ WHAT IS NEW IS ONLY WHAT A SHEET NEEDS: tier from renown, level from the tier floor, domains, subAttributes and a kit.",
- "_promotedFrom": "npcs/legends.json"
+ "_promotedFrom": "npcs/legends.json",
+ "_noHomeLocation": "⛔ THE FIELD IS OMITTED, NOT NULL. The pooled record carried `homeLocation: null` and the schema wants a string — ⚑ AND THE ABSENCE IS THE CHARACTER: 'moves through the WHOLE valley — periodically present, NEVER OWNED.' ⚠️ She has no home location because she does not have one, and an omitted field says that where a null was just a shape error."
 }

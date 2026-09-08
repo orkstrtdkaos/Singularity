@@ -1,0 +1,104 @@
+{
+ "id": "lys_vane",
+ "name": "Lys of the Veiled Reach",
+ "level": 22,
+ "role": "Coliseum champion, the INFLUENCE cell — does not appear to be fighting you",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": true,
+ "domains": {
+  "primary": "veilwright",
+  "secondary": "cogitant",
+  "tertiary": "abyssal"
+ },
+ "spectrum": {
+  "falsehood_truth": -0.5
+ },
+ "subAttributes": {
+  "strength": 6,
+  "agility": 9,
+  "reason": 10,
+  "insight": 11,
+  "presence": 13,
+  "rapport": 11,
+  "craft": 6,
+  "wits": 11
+ },
+ "knowledge": [
+  "What a crowd wants before the crowd knows",
+  "The price a person will actually take"
+ ],
+ "wants": [
+  "To win without an exchange",
+  "An audience that understands what it watched"
+ ],
+ "fears": "⛔ Being seen doing it. ⚠️ The whole craft dies the moment the crowd sees the seam.",
+ "appearance": "Immaculate, unhurried, and never quite where the last glance put her. She addresses the stands more than the sand.",
+ "voiceHints": "Warm, public, and always slightly ahead. She offers you things.",
+ "reactsToReputation": {
+  "honest": "⚠️ finds it interesting and prices it higher",
+  "proud": "makes you the villain in one sentence",
+  "any": "charms"
+ },
+ "assistTags": [
+  "talk",
+  "bargain",
+  "conceal",
+  "read-people"
+ ],
+ "abilities": [
+  {
+   "abilityId": "read_the_room",
+   "level": 3,
+   "why": "⚑ `plays-the-crowd`"
+  },
+  {
+   "abilityId": "struck_term",
+   "level": 2,
+   "why": "⛔ `offers-a-deal` — an offer, honestly priced, mid-bout"
+  },
+  {
+   "abilityId": "lever",
+   "level": 2,
+   "why": "`makes-you-the-villain` — she finds what you will not risk"
+  },
+  {
+   "abilityId": "false_stance",
+   "level": 3,
+   "why": "`is-not-where-you-thought`"
+  },
+  {
+   "abilityId": "seeming",
+   "level": 2,
+   "why": "Falsecraft"
+  },
+  {
+   "abilityId": "told_of",
+   "level": 2,
+   "why": "the crowd carries it"
+  },
+  {
+   "abilityId": "quiet_step",
+   "level": 2,
+   "why": "she is never where the last glance put her"
+  },
+  {
+   "abilityId": "mediators_tongue",
+   "level": 1,
+   "why": "⚠️ she can also simply end it by agreement"
+  }
+ ],
+ "personality": {
+  "warmth": 8,
+  "trust": 4,
+  "candor": 3,
+  "patience": 9
+ },
+ "physicality": "ADULT. Slight, precise, thirties, and dressed for being looked at. WHAT CATCHES THE EYE: she is never breathing hard.",
+ "intimacyNotes": "⚠️ SHE OFFERS, ALWAYS, AND THE OFFER IS ALWAYS REAL — ⛔ which is what makes her dangerous rather than false. She will not be the one who asks for nothing.",
+ "schemaVersion": 1,
+ "people": "human",
+ "_authoredWhy": "⛑ AUTHORED 2026-09-07. ⛔ THE EIGHT COLISEUM CHAMPIONS WERE NOT NPCs — a name, a threat integer and four tactic tags inside an encounter file, and no sheet anywhere. ⚠️ CCode's matrix measured the consequence: 'every function any opponent can declare, in the whole game: strike, shield', and the win rate correlated with THREAT at −0.95 — ⛔ because threat was nearly the only authored number that varied. ⚑ THE EIGHT CELLS EXIST TO PROVE EVERY CONTRIBUTION FAMILY CAN WIN A FIGHT. They cannot prove it while every champion fights identically. ⚠️ Crafts are drawn from the encounter's OWN prose and tactic tags — nothing invented.",
+ "_isColiseumChampion": true
+}

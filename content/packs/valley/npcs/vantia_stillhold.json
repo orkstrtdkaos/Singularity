@@ -1,0 +1,103 @@
+{
+ "id": "vantia_stillhold",
+ "name": "Vantia of the Stillhold",
+ "level": 23,
+ "role": "Coliseum champion, the PROTECT cell — nine wins without a single offensive exchange",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": false,
+ "domains": {
+  "primary": "stillhold",
+  "secondary": "somatic",
+  "tertiary": "lattice"
+ },
+ "spectrum": {
+  "violence_peace": 0.5
+ },
+ "subAttributes": {
+  "strength": 10,
+  "agility": 7,
+  "reason": 8,
+  "insight": 10,
+  "presence": 11,
+  "rapport": 8,
+  "craft": 7,
+  "wits": 8
+ },
+ "knowledge": [
+  "Exactly how far away the bell is",
+  "What an opponent does in the ninth minute that they did not do in the first"
+ ],
+ "wants": [
+  "To win the cell without hurting anyone, an eleventh time"
+ ],
+ "fears": "⛔ A bout where holding is not enough. ⚠️ Two of eleven, and she remembers both.",
+ "appearance": "Broad, planted, and entirely unhurried. She has not advanced in this arena in eleven bouts.",
+ "voiceHints": "Few words, low, and she does not raise them when hit.",
+ "reactsToReputation": {
+  "patient": "respects it visibly",
+  "furious": "⚠️ absorbs it and waits, which is worse",
+  "any": "holds"
+ },
+ "assistTags": [
+  "guard",
+  "tend",
+  "watch",
+  "hold"
+ ],
+ "abilities": [
+  {
+   "abilityId": "held_line",
+   "level": 3,
+   "why": "⚑ `will-not-be-moved` — the cell in one craft"
+  },
+  {
+   "abilityId": "shieldwork",
+   "level": 3,
+   "why": "`covers-the-opening`"
+  },
+  {
+   "abilityId": "the_fixed_point",
+   "level": 3,
+   "why": "⛔ she does not advance"
+  },
+  {
+   "abilityId": "steady_soul",
+   "level": 2,
+   "why": "`absorbs-and-waits`"
+  },
+  {
+   "abilityId": "unbroken_practice",
+   "level": 2,
+   "why": "`counts-down-the-bell`"
+  },
+  {
+   "abilityId": "stillwork",
+   "level": 2,
+   "why": "Stillcraft — held peace, and what it costs"
+  },
+  {
+   "abilityId": "second_wind",
+   "level": 2,
+   "why": "eleven bouts"
+  },
+  {
+   "abilityId": "calm_word",
+   "level": 1,
+   "why": "⚠️ she has ended a bout by saying one thing"
+  }
+ ],
+ "personality": {
+  "warmth": 6,
+  "trust": 7,
+  "candor": 8,
+  "patience": 10
+ },
+ "physicality": "ADULT. Heavy through the shoulders, fifties, planted like a post. WHAT CATCHES THE EYE: she does not flinch, and it is not bravado — the flinch is simply gone.",
+ "intimacyNotes": "⛔ `romanceEligible: false` — she is the Stillhold's and has been for thirty years. ⚠️ This entry exists so a GM can describe her holding a line, not court her.",
+ "schemaVersion": 1,
+ "people": "human",
+ "_authoredWhy": "⛑ AUTHORED 2026-09-07. ⛔ THE EIGHT COLISEUM CHAMPIONS WERE NOT NPCs — a name, a threat integer and four tactic tags inside an encounter file, and no sheet anywhere. ⚠️ CCode's matrix measured the consequence: 'every function any opponent can declare, in the whole game: strike, shield', and the win rate correlated with THREAT at −0.95 — ⛔ because threat was nearly the only authored number that varied. ⚑ THE EIGHT CELLS EXIST TO PROVE EVERY CONTRIBUTION FAMILY CAN WIN A FIGHT. They cannot prove it while every champion fights identically. ⚠️ Crafts are drawn from the encounter's OWN prose and tactic tags — nothing invented.",
+ "_isColiseumChampion": true
+}

@@ -1,0 +1,107 @@
+{
+ "id": "oreth_quiet",
+ "name": "Oreth of the Quiet Ground",
+ "level": 24,
+ "role": "Coliseum champion, the RESTORE cell — has never put a competitor down and never lost by yielding",
+ "gender": "man",
+ "pronouns": "he/him",
+ "sex": "male",
+ "romanceEligible": true,
+ "domains": {
+  "primary": "threnodist",
+  "secondary": "ashwarden",
+  "tertiary": "rootkin"
+ },
+ "spectrum": {
+  "death_life": 0.4
+ },
+ "subAttributes": {
+  "strength": 7,
+  "agility": 7,
+  "reason": 9,
+  "insight": 13,
+  "presence": 11,
+  "rapport": 12,
+  "craft": 8,
+  "wits": 8
+ },
+ "knowledge": [
+  "What a wound will do before it does it",
+  "How to undo a thing without shaming the person who did it"
+ ],
+ "wants": [
+  "To finish a career without having put anyone down"
+ ],
+ "fears": "⚠️ An injury he cannot undo, in front of a crowd that came to watch him undo things.",
+ "appearance": "Unhurried, open-handed, and he tends you mid-bout whether or not you want it.",
+ "voiceHints": "Gentle and completely unembarrassed. He narrates what he is doing to you while he does it.",
+ "reactsToReputation": {
+  "cruel": "⚠️ tends them anyway, and the crowd notices",
+  "kind": "delighted",
+  "any": "attends"
+ },
+ "assistTags": [
+  "tend",
+  "mend",
+  "talk",
+  "watch"
+ ],
+ "abilities": [
+  {
+   "abilityId": "set_to_rights",
+   "level": 3,
+   "why": "⚑ `undoes-what-you-did` — the cell in one craft"
+  },
+  {
+   "abilityId": "administered_mercy",
+   "level": 3,
+   "why": "`tends-you-mid-bout`"
+  },
+  {
+   "abilityId": "carried_weight",
+   "level": 3,
+   "why": "Pathos — he takes it off you"
+  },
+  {
+   "abilityId": "quiet_the_room",
+   "level": 2,
+   "why": "`refuses-to-be-hurried`"
+  },
+  {
+   "abilityId": "kept_vigil",
+   "level": 2,
+   "why": "⛔ he attends"
+  },
+  {
+   "abilityId": "steady_hands",
+   "level": 2,
+   "why": "the tending"
+  },
+  {
+   "abilityId": "held_repair",
+   "level": 2,
+   "why": "`yields-nothing-by-conceding`"
+  },
+  {
+   "abilityId": "deathsense",
+   "level": 1,
+   "why": "'what a wound will do before it does it'"
+  }
+ ],
+ "closed": [
+  "hastened_grey",
+  "the_cut_thread"
+ ],
+ "personality": {
+  "warmth": 10,
+  "trust": 8,
+  "candor": 8,
+  "patience": 10
+ },
+ "physicality": "ADULT. Soft-handed, forties, and entirely unbothered by being hit. WHAT CATCHES THE EYE: he is looking at your injuries rather than your guard.",
+ "intimacyNotes": "⚠️ He attends without being asked and it is not a metaphor. ⛔ Being cared for by someone this good at it is a real experience and he knows it — the `closed` list is who he is, not a gap.",
+ "schemaVersion": 1,
+ "people": "human",
+ "_authoredWhy": "⛑ AUTHORED 2026-09-07. ⛔ THE EIGHT COLISEUM CHAMPIONS WERE NOT NPCs — a name, a threat integer and four tactic tags inside an encounter file, and no sheet anywhere. ⚠️ CCode's matrix measured the consequence: 'every function any opponent can declare, in the whole game: strike, shield', and the win rate correlated with THREAT at −0.95 — ⛔ because threat was nearly the only authored number that varied. ⚑ THE EIGHT CELLS EXIST TO PROVE EVERY CONTRIBUTION FAMILY CAN WIN A FIGHT. They cannot prove it while every champion fights identically. ⚠️ Crafts are drawn from the encounter's OWN prose and tactic tags — nothing invented.",
+ "_isColiseumChampion": true
+}

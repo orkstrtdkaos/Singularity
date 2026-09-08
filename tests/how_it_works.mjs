@@ -8156,8 +8156,11 @@ console.log("\n── §115 · the runner is at the post again, on the phone too
   const o = { id: "someone-else", inventory: [], npcRegistry: {}, codex: { topics: {} }, holdings: [] }; const oo = step.apply(o);
   check("§115: ⛔ …and NEVER another character — Silas's slate does not appear in anyone else's pack", !o.inventory.length && !oo.notes);
   const disk = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
-  check("§115: ⚑ the repo copy is ALSO whole, stamped to win under both rules — rev 3000 and a fresh clock",
-    disk.inventory.some(i => /Encrypted slate/.test(i.name)) && disk.rev >= 3000 && !!disk.npcRegistry["urgent-courier-whistling-woman"] && disk.reconcileVersion >= 41);
+  // ⚠️ NO REV CLAUSE. The repair stamped an absurd `rev` so the copy would win one race in September; asserting
+  // that number made this gate fail every time Erik played on. The durable claims are the CONTENT and the
+  // `reconcileVersion` — §117 is where the rev RULE lives, and it is the one that protects the copy.
+  check("§115: ⚑ the repo copy is ALSO whole — the slate, the courier, and the step that put them back",
+    disk.inventory.some(i => /Encrypted slate/.test(i.name)) && !!disk.npcRegistry["urgent-courier-whistling-woman"] && disk.reconcileVersion >= 41);
 }
 
 /* ═════ §117 — THE PUSH GUARD USES THE LOAD'S RULE: A LOWER REV NEVER OVERWRITES A HIGHER ONE ═════ */
@@ -8212,8 +8215,8 @@ console.log("\n── §118 · a hill overlooking the Crossing, a day and a half
   const o = { id: "someone-else", holdings: [{ name: "Threshold Post", locationId: null }] }; step.apply(o);
   check("§118: ⛔ …and never another character", o.holdings[0].locationId === null && !o.generated);
   const disk = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
-  check("§118: ⚑ the repo copy already carries it, and keeps its rev lead",
-    !!disk.generated.location["gen-threshold-post"] && disk.holdings.some(h => /threshold/i.test(h.name) && h.locationId === "gen-threshold-post") && disk.rev >= 3100 && disk.reconcileVersion >= 42);
+  check("§118: ⚑ the repo copy already carries it — the place and the holding that sits on it",
+    !!disk.generated.location["gen-threshold-post"] && disk.holdings.some(h => /threshold/i.test(h.name) && h.locationId === "gen-threshold-post") && disk.reconcileVersion >= 42);
   // the road north to the Whistling Woman is the GATE Silas made (§122) — Erik: the Crossing is the Hub, and the gate leads to the March
 }
 
@@ -8247,8 +8250,8 @@ console.log("\n── §119 · six hooks, one district, and a reading that arriv
   const o = mk(); o.id = "someone-else"; step.apply(o);
   check("§119: …and never another character", !!o.codex.topics["edge-district-contacts"]);
   const disk = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
-  check("§119: ⚑ the repo copy has no edge-district-* topic left and keeps its rev lead",
-    !Object.keys(disk.codex.topics).some(k => k.startsWith("edge-district-")) && !!disk.codex.topics["radiant-plateau-edge"] && disk.rev >= 3200 && disk.reconcileVersion >= 43);
+  check("§119: ⚑ the repo copy has no edge-district-* topic left, and the folded one stands",
+    !Object.keys(disk.codex.topics).some(k => k.startsWith("edge-district-")) && !!disk.codex.topics["radiant-plateau-edge"] && disk.reconcileVersion >= 43);
   // ⛔ AND THE READING ARRIVES UNASKED: the summariser fired on codex open only; twenty topics sat over the line.
   const app = rd("app.js");
   check("§119: ⛔ SUMMARIES FIRE ONCE PLAY STARTS, off the load path — not only when the codex is opened",
@@ -8375,8 +8378,16 @@ console.log("\n── §121 · the record kept the picture and dropped the build
   check("§121: ⛔ …never another character, and never without the catalogue", !o.holdings.some(h => h.id === "hold-made-gate") && !(o.holdings[0].features || []).length && !step.apply(fx(), {}).notes);
   const disk = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
   const dmg = disk.holdings.find(h => h.id === "hold-made-gate");
-  check("§121: ⚑ the repo copy carries all of it and keeps its rev lead",
-    !!dmg && (dmg.garrison || []).includes("logana") && disk.holdings.every(h => (h.features || []).length >= 2) && disk.holdings.find(h => h.id === "whistling-woman-post").watches === "hold-made-gate" && disk.rev >= 3300 && disk.reconcileVersion >= 44);
+  // ⚠️ THAT THE GATE HAS A GARRISON, not WHO is in it. The check named "logana" and now reads ["siol"] — because
+  // Erik moved someone, which is the game working. A roster is a running state; the structure is the fact.
+  check("§121: ⚑ the repo copy carries all of it — the gate is garrisoned, every hold has features, the post watches it",
+    // ⚠ THE FIELD, NOT THE ROSTER — AND NOT ITS SIZE EITHER. It reads [] today: the gate is unguarded because
+    // Erik moved his people, which is a world state and his to choose. Step 44's durable claim is that the gate
+    // CAN be garrisoned and the post watches it.
+    !!dmg && Array.isArray(dmg.garrison)
+    && disk.holdings.every(h => (h.features || []).length >= 2)
+    && disk.holdings.find(h => h.id === "whistling-woman-post").watches === "hold-made-gate" && disk.reconcileVersion >= 44,
+    JSON.stringify(dmg?.garrison));
   check("§121: ⚑ the GM's holdings line says who watches whom", /watches over the gate/.test(H.holdingsForGM(mk(standing), null, {})));
 }
 
@@ -8425,7 +8436,8 @@ console.log("\n── §122 · forty days on foot, or hours through the gate Sil
   check("§122: ⛔ STEP 45 MOVES ONCE — a marker, not a version: the second pass moves nothing and says nothing; Silas only",
     !!step && step.version === 45 && c.generated.location["gen-the-made-gate"].worldPos.colatitude > 20 && c.generated.location["gen-whistling-woman-post"].worldPos.longitude > 250 && Array.isArray(out.notes) && !again.notes
     && (() => { const o = fx(); o.id = "x"; step.apply(o, { content: C }); return o.generated.location["gen-the-made-gate"].worldPos.colatitude === 0.6; })());
-  check("§122: ⚑ the repo copy carries the cluster and keeps its rev lead", disk.rev >= 3600 && disk.reconcileVersion >= 47 && L["gen-threshold-post"]._placedBy === "erik-2026-09-06-hub-is-the-crossing" && L["gen-waygate"]._placedBy === "erik-2026-09-06-hub-is-the-crossing");
+  check("§122: ⚑ the repo copy carries the cluster — both places stamped by the ruling that placed them",
+    disk.reconcileVersion >= 47 && L["gen-threshold-post"]._placedBy === "erik-2026-09-06-hub-is-the-crossing" && L["gen-waygate"]._placedBy === "erik-2026-09-06-hub-is-the-crossing");
 }
 
 /* ═════ §123 — THE HOLDINGS SCREEN: PICTURES THAT MINT ON READ, ART THAT DOES NOT OUTLIVE A RENAME, TWO SURFACES THAT AGREE (SPEC_holdings_screen) ═════ */
@@ -8467,8 +8479,21 @@ console.log("\n── §123 · the list and the popup say the same thing, with a
     (app.match(/\$\{factsOf\(h\)\}/g) || []).length === 2 && (app.match(/\$\{ownerOf\(h\)\}/g) || []).length === 2 && /holdingFactsLine\(h, \{ nameOf, holdings: character\.holdings/.test(app)
     && /import \{[^}]*\bholdingFactsLine\b/.test(app));
   const disk = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
-  check("§123: ⚑ on the repo copy the stale Raven's Home art is gone from Stillwater's Trouble, and no hold carries art of another name",
-    disk.reconcileVersion >= 46 && disk.holdings.every(h => { const m = typeof h.image === "string" && /\/prompt\/([^?]+)/.exec(h.image); if (!m) return true; try { return decodeURIComponent(m[1]).startsWith(h.name); } catch { return true; } }));
+  // ⛔ THE DEFECT WAS A STOLEN PICTURE, NOT A MISSING PREFIX. Stillwater's Trouble wore RAVEN'S HOME's art. My
+  // first form demanded every prompt begin with its own hold's name, which fails two BESPOKE prompts that are
+  // each about their own hold (the Fell Pell's forge, the Made Gate's portal). Ask the real question instead:
+  // does any hold's art begin with SOMEONE ELSE'S name?
+  {
+    const names = disk.holdings.map(h => String(h.name || "")).filter(n => n.length > 3);
+    const stolen = disk.holdings.filter(h => {
+      const m = typeof h.image === "string" && /\/prompt\/([^?]+)/.exec(h.image);
+      if (!m) return false;
+      let p = ""; try { p = decodeURIComponent(m[1]); } catch { return false; }
+      return names.some(n => n !== h.name && p.startsWith(n));
+    });
+    check("§123: ⚑ on the repo copy no hold wears ANOTHER hold's art — the Raven's Home picture is off Stillwater's Trouble",
+      disk.reconcileVersion >= 46 && stolen.length === 0, stolen.map(h => h.id).join(", "));
+  }
 }
 
 /* ═════ §124 — RUNNER FEES: A RELAY POST KEEPS ITSELF, AND THE GATE BRINGS TRAFFIC AS WORD GETS OUT (Erik 2026-09-06) ═════ */
@@ -9483,6 +9508,58 @@ console.log("\n── §144 · a tag names a family, a family names a kit, and e
     check("§144: ⛔ …nor an explicit tag row — the floor corrects an INFERENCE, never an authored statement",
       JSON.stringify(kitFor(["warden"])) === JSON.stringify((syn.archetypeSkills.warden || []).map(d => d.function)));
   }
+}
+
+/* ═════ §145 — A BRAID IS A NUMBER FOR MOST VERBS (found by playing every encounter with every craft) ═════ */
+// ⛔ ERIK: "run a simulator of each encounter and play through each to use every combination skill we have to
+// prove things out." `scripts/encounter_matrix.mjs` does exactly that, on the PRODUCTION PATH —
+// `battleSkillsForCharacter` → `declFromSelection` → `playTurn`, the same three the panel calls.
+// ⚑ 17 encounters × 1038 declarable rows × 9 samples, plus 756 braids × 3: NO CRASHES.
+// ⚠️ AND THE FINDING THE SWEEP EXISTS FOR. CCODE-37 promises: *"a woven round lands the SECOND craft's effect
+// too, so one turn leaves two things standing… a weave is how a practised pairing beats [one move per turn]"*.
+// ⛔ `wovenBonus` reads ONLY THE TIER, and `effectFrom` returns null for a verb with no `persistentEffects` row —
+// so for the 15 verbs that leave nothing, a braid is a tier-scaled number and NOTHING ELSE. Proven, not sampled:
+// every one of the 105 effectless pairs at equal tier resolves BYTE-IDENTICALLY.
+console.log("\n── §145 · the braid payoff reaches the verbs that leave something behind ──");
+{
+  const SBM = await import("../engine/skill_battle.js");
+  const ENM = await import("../engine/encounters.js");
+  const { loadContentHeadless: lch145 } = await import("./headless_content.mjs");
+  const C145 = await lch145();
+  const sb145 = C145.skillBattle.engine;
+  // ⛔ THE MECHANISM, not a sample: the woven bonus is a function of TIER alone.
+  check("§145: ⛔ the woven bonus reads the TIER and not the VERB — two different crafts of one tier weave the same number",
+    SBM.wovenBonus({ tier: 3, function: "mend" }, sb145) === SBM.wovenBonus({ tier: 3, function: "summon" }, sb145)
+    && SBM.wovenBonus({ tier: 1, function: "mend" }, sb145) !== SBM.wovenBonus({ tier: 4, function: "mend" }, sb145));
+  // ⚑ AND THE PAYOFF DOES LAND where the second verb has an effect — so this is a REACH problem, not a broken weave.
+  const def145 = { id: "d", type: "duel", opponent: { name: "a foe", health: 40, threat: 30, tacticTags: ["duelist"] } };
+  const opp145 = SBM.synthesizeOpponentSheet(def145.opponent, sb145);
+  const round145 = (wovenFn) => {
+    const st = ENM.startEncounter(def145, { oppSheet: opp145 });
+    let seed = 4242; const rng = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return (seed % 100000) / 100000; };
+    const decl = { function: "strike", tier: 3, rank: 2, attribute: "practical", intensity: "standard", name: "a blow",
+      ...(wovenFn ? { woven: { function: wovenFn, tier: 2, rank: 2, name: `the ${wovenFn}` } } : {}) };
+    const rr = ENM.skillBattleRound(st, def145, decl, { character: { attributes: { practical: 5, mental: 4 }, energy: 100 },
+      content: C145, rules: C145.rules, sb: sb145, steps: C145.intensity.steps, rng, phase: "action", tickEffects: true });
+    return JSON.stringify({ d: (st.opponentHealth ?? 0) - (rr.state.opponentHealth ?? 0), deg: rr.player?.degree,
+      fx: (rr.state.effects || []).map(f => `${f.side}:${f.kind}`).sort() });
+  };
+  check("§145: ⚑ weaving a verb that LEAVES something differs from weaving one that leaves nothing — the payoff is real",
+    round145("shield") !== round145("bargain"));
+  // ⛔ AND THE REACH, as a §10 gap: it closes loudly the day the effect table grows.
+  const withFx = new Set(Object.keys(sb145.persistentEffects.byFunction || {}));
+  const fns145 = new Set();
+  for (const a of Object.values(C145.abilities || {})) for (const f of (a.functions || [])) fns145.add(f);
+  const effectless = [...fns145].filter(f => !withFx.has(f));
+  gap("§10: a braid is a bare number for the verbs that leave nothing — CCODE-37's payoff reaches only the effect-bearing half",
+    effectless.length > 0,
+    `${withFx.size} of ${fns145.size} verbs leave an effect; ${effectless.length} do not: ${effectless.sort().join(", ")}`);
+  // ⚑ AND THE SWEEP ITSELF IS WIRED, or the next person cannot reproduce any of this.
+  check("§145: ⚑ the matrix drives the PRODUCTION path — the same three functions the panel calls",
+    (() => {
+      const m = rd("scripts/encounter_matrix.mjs");
+      return /battleSkillsForCharacter/.test(m) && /declFromSelection/.test(m) && /playTurn\(/.test(m);
+    })());
 }
 
 /* ══════════ REPORT ══════════ */

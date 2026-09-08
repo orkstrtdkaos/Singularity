@@ -708,3 +708,82 @@ one. ⛔ **A kit needs something that PRESSES**, and which verb that is for a wa
 question, not an engine one. ⚑ **Three of your §C verbs would answer it directly — `provoke` moves someone,
 `bargain` offers a way out, `persuade` drops their pressure toward the break** — which is the argument for
 building §C before anyone judges these numbers.
+
+---
+
+# PART SIX — THE SIMULATOR, AND WHAT PLAYING EVERYTHING PROVED
+
+**Author:** CCode (engine) · **2026-09-07** · ⚑ **Erik: *"run a simulator of each encounter and play through each
+to use every combination skill we have to prove things out."*** → `scripts/encounter_matrix.mjs` (§145)
+
+**It drives the production path and nothing else:** `battleSkillsForCharacter` → `declFromSelection` →
+`playTurn` — the same three the panel calls. ⚠️ A harness with its own combat loop proves things about the
+harness.
+
+**Scope:** 17 encounters × **1,038 declarable rows** (28 verbs) × 9 samples, plus **756 braids** × 3.
+⚑ **NO CRASHES.**
+
+---
+
+## §23 — ⛔ THE DEFENSIVE CHAMPIONS ARE THE EASIEST FIGHTS IN THE GAME
+
+| encounter | win rate | | encounter | win rate |
+|---|---|---|---|---|
+| `coliseum_champion_sustain` | ⛔ **72%** | | `coliseum_champion_shape` | 19% |
+| `coliseum_champion_protect` | ⛔ **71%** | | `coliseum_champion_influence` | 13% |
+| `coliseum_champion_restore` | ⛔ **55%** | | `coliseum_champion_harm` | 12% |
+| `precursor_seal_probe` | 40% | | `coliseum_champion_know` | 9% |
+| `precursor_mechanism` | 31% | | `zone_raider_duel` · `champion_move` | 7% |
+
+⛔ **This is with the threat floor already in.** ⚠️ **The three cells built around holding, outlasting and
+mending are the three you are most likely to win** — the exact inverse of what they are written to be — and
+every other fight sits at 7–19%. ⛑ This is §22's finding measured across the whole craft menu instead of one
+strike.
+
+> ⚠️ **HONEST CAVEAT.** The sweeper declares ONE craft every round, never reads, never braids, never changes
+> intensity. So the absolute numbers are a FLOOR, not a verdict on difficulty. ⚑ **The comparison between
+> encounters is the signal** — same strategy everywhere, wildly different results.
+
+---
+
+## §24 — ⛔ A BRAID IS A BARE NUMBER FOR 15 OF 28 VERBS
+
+**CCODE-37 promises:** *"a woven round lands the SECOND craft's effect too, so one turn leaves two things
+standing… a weave is how a practised pairing beats [one move per turn]."*
+
+⛔ **`wovenBonus` reads ONLY THE TIER:**
+
+```js
+export function wovenBonus(woven, sb) {
+  return Math.min(w.maxBonus ?? 8, Math.round((woven?.tier || 1) * (w.bonusPerTier ?? 2)));
+}                              // ⚠️ the FUNCTION is not an input
+```
+
+⚑ **And `effectFrom` returns null for any verb with no `persistentEffects` row. 15 of the 28 have none** —
+`strike`, `break`, `make`, `move`, `travel`, `heal`, `restore`, `open`, `summon`, `mend`, `transform`,
+`bargain`, `provoke`, `soothe`, `persuade`.
+
+> ⛔ **PROVEN, NOT SAMPLED: all 105 effectless pairs at equal tier resolve BYTE-IDENTICALLY.** At tier 2,
+> weaving `mend` and weaving `summon` are the same move. ⚑ **Control:** weaving `shield` (which leaves
+> something) differs — so the payoff works, it just does not REACH here.
+
+⚠️ **Braiding two damage crafts — `strike ⋈ break`, the most obvious combination in the game — is a +4 and
+nothing else.** ⬜ Recorded as a §10 gap so it closes loudly the day the effect table grows.
+
+---
+
+## §25 — ⚠️ FOUR VERBS RESOLVE IDENTICALLY ACROSS EVERY CRAFT THAT CARRIES THEM
+
+`bargain` · `soothe` · `provoke` — ⚑ **the three inert social verbs, exactly as §C predicts** — and **`open`**,
+which is new. ⛔ Every craft of that verb produced the same outcome, damage and effect set: *a generic
+resolution, which is worse than an inert one because it looks like it worked.*
+
+---
+
+## §26 — ✅ AND WHAT IT CONFIRMED
+
+- ⚑ **The two `challenge` encounters get no contest sheet**, so the craft you declare is not read. §B, measured
+  from the outside this time.
+- ⚑ **Four `sunk_assay_*` records are design notes, not encounters** — the sweep names them rather than
+  silently skipping them.
+- ⚑ **No crashes anywhere**, including all 756 braids.

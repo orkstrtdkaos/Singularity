@@ -1,0 +1,316 @@
+{
+ "generatedAt": "2026-09-08T01:40:01.439Z",
+ "samples": 9,
+ "maxRounds": 14,
+ "perEnc": [
+  {
+   "encId": "coliseum_champion_harm",
+   "crafts": 1038,
+   "avgWin": 0.12192250053521785,
+   "avgRounds": 12.889959323485332,
+   "ended": 0.1222436309141517
+  },
+  {
+   "encId": "coliseum_champion_influence",
+   "crafts": 1038,
+   "avgWin": 0.13005780346820872,
+   "avgRounds": 12.870691500749288,
+   "ended": 0.13091415114536567
+  },
+  {
+   "encId": "coliseum_champion_know",
+   "crafts": 1038,
+   "avgWin": 0.08916720188396501,
+   "avgRounds": 12.434703489616794,
+   "ended": 0.19588953114964883
+  },
+  {
+   "encId": "coliseum_champion_move",
+   "crafts": 1038,
+   "avgWin": 0.07471633483194177,
+   "avgRounds": 11.393384714193964,
+   "ended": 0.2474844786983542
+  },
+  {
+   "encId": "coliseum_champion_protect",
+   "crafts": 1038,
+   "avgWin": 0.7081995290087801,
+   "avgRounds": 11.522586169985008,
+   "ended": 0.7083065724684248
+  },
+  {
+   "encId": "coliseum_champion_restore",
+   "crafts": 1038,
+   "avgWin": 0.5469920787839861,
+   "avgRounds": 11.752836651680578,
+   "ended": 0.5469920787839861
+  },
+  {
+   "encId": "coliseum_champion_shape",
+   "crafts": 1038,
+   "avgWin": 0.18518518518518673,
+   "avgRounds": 12.781417255405657,
+   "ended": 0.18636266324127748
+  },
+  {
+   "encId": "coliseum_champion_sustain",
+   "crafts": 1038,
+   "avgWin": 0.7161207450224818,
+   "avgRounds": 11.49796617426676,
+   "ended": 0.716334831941771
+  },
+  {
+   "encId": "duel_bargain_gate",
+   "crafts": 1038,
+   "avgWin": 0.13166345536287796,
+   "avgRounds": 12.87540141297365,
+   "ended": 0.1324127595803903
+  },
+  {
+   "encId": "duel_hall_of_mirrors",
+   "crafts": 1038,
+   "avgWin": 0.1259901520017133,
+   "avgRounds": 12.262577606508234,
+   "ended": 0.12684649967887024
+  },
+  {
+   "encId": "duel_marchward_forms",
+   "crafts": 1038,
+   "avgWin": 0.12631128238064718,
+   "avgRounds": 13.090772853778601,
+   "ended": 0.12780989081567184
+  },
+  {
+   "encId": "duel_redline_challenge",
+   "crafts": 1038,
+   "avgWin": 0.08756154998929576,
+   "avgRounds": 12.550203382573317,
+   "ended": 0.1896810104902608
+  },
+  {
+   "encId": "precursor_mechanism",
+   "crafts": 1038,
+   "avgWin": 0.30593020766431317,
+   "avgRounds": 5.0228002569042784,
+   "ended": 0.30593020766431317
+  },
+  {
+   "encId": "precursor_seal_probe",
+   "crafts": 1038,
+   "avgWin": 0.40387497323913507,
+   "avgRounds": 4.895632626846484,
+   "ended": 0.40387497323913507
+  },
+  {
+   "encId": "wild_boar_valley",
+   "crafts": 1038,
+   "avgWin": 0.12438450010704404,
+   "avgRounds": 13.087133376150689,
+   "ended": 0.1247056304859779
+  },
+  {
+   "encId": "wild_greatcat_quickwood",
+   "crafts": 1038,
+   "avgWin": 0.07471633483194179,
+   "avgRounds": 11.340398201669862,
+   "ended": 0.24470134874759414
+  },
+  {
+   "encId": "zone_raider_duel",
+   "crafts": 1038,
+   "avgWin": 0.07332476985656176,
+   "avgRounds": 11.264825519160777,
+   "ended": 0.2678227360308305
+  }
+ ],
+ "crashes": [],
+ "unfinished": [
+  {
+   "encId": "precursor_mechanism",
+   "n": 53,
+   "of": 1038,
+   "byFn": [
+    [
+     "bind",
+     7
+    ],
+    [
+     "mend",
+     5
+    ],
+    [
+     "break",
+     5
+    ],
+    [
+     "travel",
+     4
+    ],
+    [
+     "open",
+     4
+    ],
+    [
+     "heal",
+     4
+    ],
+    [
+     "shield",
+     3
+    ],
+    [
+     "make",
+     3
+    ],
+    [
+     "move",
+     3
+    ],
+    [
+     "sustain",
+     3
+    ],
+    [
+     "reveal",
+     2
+    ],
+    [
+     "restore",
+     2
+    ],
+    [
+     "strike",
+     1
+    ],
+    [
+     "foresee",
+     1
+    ],
+    [
+     "ward",
+     1
+    ],
+    [
+     "transform",
+     1
+    ],
+    [
+     "summon",
+     1
+    ],
+    [
+     "command",
+     1
+    ],
+    [
+     "empower",
+     1
+    ],
+    [
+     "track",
+     1
+    ]
+   ]
+  },
+  {
+   "encId": "precursor_seal_probe",
+   "n": 20,
+   "of": 1038,
+   "byFn": [
+    [
+     "reveal",
+     4
+    ],
+    [
+     "open",
+     3
+    ],
+    [
+     "transform",
+     2
+    ],
+    [
+     "heal",
+     2
+    ],
+    [
+     "soothe",
+     1
+    ],
+    [
+     "break",
+     1
+    ],
+    [
+     "hinder",
+     1
+    ],
+    [
+     "ward",
+     1
+    ],
+    [
+     "restore",
+     1
+    ],
+    [
+     "provoke",
+     1
+    ],
+    [
+     "resist",
+     1
+    ],
+    [
+     "shield",
+     1
+    ],
+    [
+     "command",
+     1
+    ]
+   ]
+  }
+ ],
+ "degenerate": [],
+ "generics": [
+  [
+   "bargain",
+   1
+  ],
+  [
+   "soothe",
+   1
+  ],
+  [
+   "open",
+   1
+  ],
+  [
+   "provoke",
+   1
+  ]
+ ],
+ "braids": {
+  "dead": [
+   {
+    "lead": "strike",
+    "second": "mend"
+   },
+   {
+    "lead": "strike",
+    "second": "provoke"
+   },
+   {
+    "lead": "strike",
+    "second": "summon"
+   },
+   {
+    "lead": "strike",
+    "second": "transform"
+   }
+  ],
+  "ran": 756,
+  "pairs": 756
+ }
+}

@@ -1444,7 +1444,8 @@
     "emotional_logical": -0.8
    },
    "functions": [
-    "bind"
+    "bind",
+    "strike"
    ],
    "narrationHints": "They set it down inside them the way you would set down a stone. The heart is not built to carry that.",
    "description": "⚠️ THE HEART-TUNERS' CRAFT. Pathos SHARES a feeling; this INSTALLS one at a weight no body holds. Not sorrow — sorrow's full weight, all at once, without the years that usually come with it. Some hearts stop. Most do not, and those people are changed.",
@@ -1533,7 +1534,8 @@
    "_idWas": "the_grief_that_stops",
    "_powerSystemWas": "reach_emotional_logical",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_emotional_logical` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_reviewed_20260824": "✅ TWO RANKS BY DESIGN (Erik confirmed 2026-08-24), like `the_cut_thread`. ⛔ r2 declared NO axes while adding the lethal chance — now `conditions, quality`; r1 is the base. ⚠️ The `[cost]` bound was not a cost — 'the ones who live are changed, and they know who did it' is the craft's moral weight, reclassified `drawback`. `challengeTypes` was SOCIAL alone on a craft that can stop a heart; DUEL added. ✅ PROSE UNTOUCHED AND `plainly` IS THE BEST IN THE CORPUS — an actual GM procedure naming the resist bonus and the independent roll, rather than a generated summary. ⛔ IT DISAMBIGUATES ITSELF: 'Pathos SHARES a feeling; this INSTALLS one' — the pairing every other craft needed me to add."
+   "_reviewed_20260824": "✅ TWO RANKS BY DESIGN (Erik confirmed 2026-08-24), like `the_cut_thread`. ⛔ r2 declared NO axes while adding the lethal chance — now `conditions, quality`; r1 is the base. ⚠️ The `[cost]` bound was not a cost — 'the ones who live are changed, and they know who did it' is the craft's moral weight, reclassified `drawback`. `challengeTypes` was SOCIAL alone on a craft that can stop a heart; DUEL added. ✅ PROSE UNTOUCHED AND `plainly` IS THE BEST IN THE CORPUS — an actual GM procedure naming the resist bonus and the independent roll, rather than a generated summary. ⛔ IT DISAMBIGUATES ITSELF: 'Pathos SHARES a feeling; this INSTALLS one' — the pairing every other craft needed me to add.",
+   "_harmVerbWhy_20260908": "⛑ RULED 2026-09-08 on CCode's `FINDING_harm_declared_vs_taught`. ⛔ THE MISMATCH IS REAL AND LOAD-BEARING: `battleSkillsForCharacter` builds the player's menu rows from the RECORD's `functions`, one row per verb, and never reads the rank's — while `intent.js` DOES read the per-rank rung. ⚠️ SO A CRAFT GATED AS HARM THAT OFFERS NO HARM VERB FIRES THE LETHAL-INTENT QUESTION AND THEN HANDS THE PLAYER `heal`, `bind`, `ward`. ⚑ AEVI'S RULE FOR WHICH WAY EACH ONE GOES: does the craft KILL BY DOING SOMETHING TO A PERSON, or does it kill by GOING WRONG? ⛔ The first gets the verb. THE SECOND GETS THE RUNG SOFTENED, because a craft whose danger is its FAILURE is not an attack and should not be offered as one. ⚑ HERE: ⛔ IT KILLS BY DOING SOMETHING TO A PERSON. 'Pathos SHARES a feeling; this INSTALLS one AT A WEIGHT NO BODY HOLDS.' ⚑ r2: 'a heart sometimes stops.' ⚠️ `strike` is right — the weight lands on them, and the craft's whole name is that it STOPS."
   },
   {
    "id": "keening",

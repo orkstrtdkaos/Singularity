@@ -1,0 +1,127 @@
+{
+ "id": "the_starless",
+ "name": "The Starless One",
+ "level": 65,
+ "role": "Legendary — the Unlit made appetite; would put out every light",
+ "gender": "neither",
+ "pronouns": "they/them",
+ "sex": null,
+ "domains": {
+  "primary": "umbral",
+  "secondary": "veilwright",
+  "tertiary": "abyssal"
+ },
+ "spectrum": {
+  "dark_light": -0.95
+ },
+ "subAttributes": {
+  "strength": 12,
+  "agility": 15,
+  "reason": 12,
+  "insight": 17,
+  "presence": 16,
+  "rapport": 5,
+  "craft": 11,
+  "wits": 14
+ },
+ "knowledge": [
+  "Where every light in a Reach is kept",
+  "What a person does in the first minute of total dark"
+ ],
+ "wants": [
+  "A dark so total nothing casts, nothing shines, nothing is seen again"
+ ],
+ "fears": "⚠️ Being LOOKED AT. ⛔ Not seen — looked at, deliberately, by someone who is not afraid.",
+ "appearance": "A shape the dark is thicker around. Nothing catches on them.",
+ "voiceHints": "Quiet, close, and always slightly behind you.",
+ "assistTags": [
+  "conceal",
+  "strike",
+  "watch",
+  "sense-danger"
+ ],
+ "abilities": [
+  {
+   "abilityId": "never_there",
+   "level": 3
+  },
+  {
+   "abilityId": "unlit_step",
+   "level": 3
+  },
+  {
+   "abilityId": "stopped_breath",
+   "level": 3
+  },
+  {
+   "abilityId": "darksight",
+   "level": 3
+  },
+  {
+   "abilityId": "shroud",
+   "level": 3
+  },
+  {
+   "abilityId": "dim",
+   "level": 3
+  },
+  {
+   "abilityId": "perfect_erasure",
+   "level": 3
+  },
+  {
+   "abilityId": "plain_seeming",
+   "level": 3
+  },
+  {
+   "abilityId": "uttered_name",
+   "level": 2
+  },
+  {
+   "abilityId": "false_stance",
+   "level": 2
+  },
+  {
+   "abilityId": "quiet_step",
+   "level": 2
+  },
+  {
+   "abilityId": "veil_stroke",
+   "level": 2
+  },
+  {
+   "abilityId": "thrown_edge",
+   "level": 2
+  },
+  {
+   "abilityId": "loose_limbed",
+   "level": 2
+  },
+  {
+   "abilityId": "deathsense",
+   "level": 1
+  },
+  {
+   "abilityId": "read_the_fight",
+   "level": 1
+  }
+ ],
+ "closed": [
+  "radiance",
+  "kindle",
+  "last_light"
+ ],
+ "personality": {
+  "warmth": 1,
+  "trust": 2,
+  "candor": 6,
+  "patience": 10
+ },
+ "physicality": "ADULT. Indeterminate, and the dark is deeper by them. WHAT CATCHES THE EYE: you cannot fix on the edges.",
+ "intimacyNotes": "⛔ NOT AVAILABLE. ⚠️ They are an appetite with a shape, and the fiction is clear that even other Umbrals will not stand near.",
+ "schemaVersion": 1,
+ "people": "human",
+ "_authoredWhy": "⛑ AUTHORED 2026-09-07 AT ERIK'S RULING: 'Mythical and legendary need sheets too. If you fight one, MECHANICALLY IT WORKS THE SAME as any other. They are pretty high level though — wouldn't stick with just lvl 40.' ⛔ CCODE'S FINDING: '69 legends live in the same npcs map `personOpponentFor` resolves from, and `sheetFor` gives one a LEVEL-40 sheet from its mythic tier. A legend can be made an opponent WITH NO KIT AT ALL.' ⚠️ AND 40 IS THE *EPIC* FLOOR — `resolution.npcStanding.tierFloor` reads mythic 85 · legendary 60 · epic 40. ⛔ The floors were right and the path was returning the wrong one. ⚑ LEVEL 62-66, ABOVE THE LEGENDARY FLOOR OF 60: capacity `round(level/2)` = 31-33 crafts. AUTHORED AT 16-18 — deliberately UNDER capacity, because a legendary is a HINGE and the rest of the kit should be earned by whoever finally writes the scene, not pre-spent by Aevi. ⚠️ `room` is the point.",
+ "_tier": "legendary",
+ "romanceEligible": false
+}

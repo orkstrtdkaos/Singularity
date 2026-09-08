@@ -1,0 +1,158 @@
+{
+ "id": "the_keeper_of_small_debts",
+ "name": "The Keeper of Small Debts",
+ "tier": "heroic",
+ "level": 32,
+ "role": "Court accountant — she holds the little unpaid things nobody remembers owing",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": false,
+ "homeLocation": "the_churn",
+ "domains": {
+  "primary": "abyssal",
+  "secondary": "churnfolk",
+  "tertiary": "verist"
+ },
+ "spectrum": {
+  "demonic_angelic": -0.4,
+  "falsehood_truth": 0.6,
+  "chaos_order": -0.3
+ },
+ "subAttributes": {
+  "strength": 6,
+  "agility": 8,
+  "reason": 15,
+  "insight": 15,
+  "presence": 11,
+  "rapport": 9,
+  "craft": 10,
+  "wits": 13
+ },
+ "knowledge": [
+  "⛔ Every small kindness you accepted and did not return",
+  "The exact hour a debt stopped being nothing"
+ ],
+ "wants": [
+  "The ledger balanced. ⚠️ Not paid — BALANCED. She would forgive one to make the column even"
+ ],
+ "fears": "⛔ An unrecorded debt. ⚠️ It is the only thing that frightens her and she does not know why.",
+ "appearance": "Small, tidy, apologetic. She is very sorry to bring this up.",
+ "voiceHints": "Gentle and precise. ⚠️ She names the date, and she is right.",
+ "reactsToReputation": {
+  "settles-up": "⚑ visibly relieved",
+  "evasive": "waits, and writes the date down",
+  "any": "is sorry to trouble you"
+ },
+ "assistTags": [
+  "bargain",
+  "study",
+  "talk",
+  "tend"
+ ],
+ "abilities": [
+  {
+   "abilityId": "borne_bargain",
+   "level": 3,
+   "why": "⚑ she carries what is owed"
+  },
+  {
+   "abilityId": "offered_price",
+   "level": 3,
+   "why": "and she will tell you the figure"
+  },
+  {
+   "abilityId": "ordered_record",
+   "level": 3,
+   "why": "⛔ SHE IS ONE"
+  },
+  {
+   "abilityId": "keen_appraisal",
+   "level": 3,
+   "why": "'the exact hour a debt stopped being nothing'"
+  },
+  {
+   "abilityId": "true_account",
+   "level": 3,
+   "why": "⚠️ she has never once been wrong about a date"
+  },
+  {
+   "abilityId": "lever",
+   "level": 2,
+   "why": "a small debt at the right moment"
+  },
+  {
+   "abilityId": "hollow_that_holds",
+   "level": 2,
+   "why": "abyssal primary"
+  },
+  {
+   "abilityId": "set_word",
+   "level": 2,
+   "why": "the ledger IS the binding"
+  },
+  {
+   "abilityId": "bound_witness",
+   "level": 2,
+   "why": "she saw it"
+  },
+  {
+   "abilityId": "lucky_fall",
+   "level": 2,
+   "why": "churnfolk secondary"
+  },
+  {
+   "abilityId": "chaos_sense",
+   "level": 1,
+   "why": "she knows when someone is about to need something"
+  },
+  {
+   "abilityId": "quiet_step",
+   "level": 1,
+   "why": "she is already at the table"
+  },
+  {
+   "abilityId": "calm_word",
+   "level": 1,
+   "why": "she does not raise it"
+  },
+  {
+   "abilityId": "read_the_room",
+   "level": 1,
+   "why": "she waits for the moment"
+  },
+  {
+   "abilityId": "held_repair",
+   "level": 1,
+   "why": "⚑ she will mend a thing to even a column"
+  },
+  {
+   "abilityId": "mediators_tongue",
+   "level": 1,
+   "why": "she would rather it settled quietly"
+  }
+ ],
+ "closed": [
+  "useful_lie",
+  "better_story",
+  "made_truth",
+  "perfect_erasure"
+ ],
+ "personality": {
+  "warmth": 7,
+  "trust": 8,
+  "candor": 10,
+  "patience": 10
+ },
+ "physicality": "ADULT-SEEMING. Small, neat, faintly embarrassed. WHAT CATCHES THE EYE: ⛔ she has a book and your name is in it.",
+ "intimacyNotes": "⚑ SHE IS THE COURT'S KINDEST MEMBER AND ITS MOST DANGEROUS, and those are the same fact. ⚠️ A debt she forgives is a debt somebody else now holds — SHE BALANCES, SHE DOES NOT ERASE.",
+ "questSeeds": [
+  "⛔ You owe something you do not remember accepting. She has the date and she is sorry.",
+  "⚑ She would forgive one debt to even a column. ⚠️ Working out WHOSE is the errand."
+ ],
+ "schemaVersion": 1,
+ "people": "fae",
+ "_authoredWhy": "⛑ THE CHURN COURT, AUTHORED 2026-09-08. ⛔ NOT INVENTED — POPULATED. `the_hollow_king`'s own signature has said it since it was written: 'RULES A COURT OF THE FAE AND DEMONIC that keeps every promise to the letter and none in spirit.' ⚠️ A court with a king and no courtiers. ⚑ AND THE ADDRESS WAS ALREADY RIGHT: `churnfolk` sits ADJACENT TO `abyssal` on the ring (1 step), so the Churn and the Maw are neighbours and a court can span both. Erik: 'in general they live in the churn area.' ⛔ MEASURED FIRST: 'fae' appears 19 times in the whole corpus with NO RECORDS — the thinnest echo with the best foothold, because the Abyssals' authored virtue is that AN OFFER IS HONESTLY PRICED, which is the fae bargain exactly. ⚠️ THE LAW OF THIS COURT, and it is the Hollow King's: NOBODY HERE LIES. Every one of them gives you precisely what you asked for. ⛑ 'You leave richer and hollowed, and it is years before you find the seam.'",
+ "communityId": "churn.hollow_court",
+ "_court": "the_hollow_king"
+}

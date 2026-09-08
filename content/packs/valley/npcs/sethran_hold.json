@@ -1,0 +1,104 @@
+{
+ "id": "sethran_hold",
+ "name": "Sethran of the Reasoned Hold",
+ "level": 25,
+ "role": "Coliseum champion, the KNOW cell — calls your moves aloud, a beat before you make them",
+ "gender": "man",
+ "pronouns": "he/him",
+ "sex": "male",
+ "romanceEligible": true,
+ "domains": {
+  "primary": "cogitant",
+  "secondary": "syllogist",
+  "tertiary": "marcher"
+ },
+ "spectrum": {
+  "emotional_logical": 0.5
+ },
+ "subAttributes": {
+  "strength": 7,
+  "agility": 8,
+  "reason": 13,
+  "insight": 12,
+  "presence": 9,
+  "rapport": 6,
+  "craft": 7,
+  "wits": 12
+ },
+ "knowledge": [
+  "The pattern under a fighter's first three exchanges",
+  "Which tell a person does not know they have"
+ ],
+ "wants": [
+  "A pattern he has not seen",
+  "To be beaten by someone who noticed he was calling it"
+ ],
+ "fears": "⛔ An opponent with no pattern. ⚠️ He has never met one and does not know what he would do.",
+ "appearance": "Still, watchful, hands loose. He does not move much in the first three exchanges and moves exactly enough after.",
+ "voiceHints": "Level and audible. ⛔ He is not taunting — he is stating, and the stands can hear it.",
+ "reactsToReputation": {
+  "unpredictable": "⚑ delighted, and says so",
+  "patterned": "names it in three exchanges",
+  "any": "watches"
+ },
+ "assistTags": [
+  "analyze",
+  "read-a-fight",
+  "study",
+  "strike"
+ ],
+ "abilities": [
+  {
+   "abilityId": "read_the_fight",
+   "level": 3,
+   "why": "⚑ `waits-for-the-pattern`"
+  },
+  {
+   "abilityId": "predicted_man",
+   "level": 3,
+   "why": "⛔ `calls-your-next-move` — the craft is the cell"
+  },
+  {
+   "abilityId": "keen_appraisal",
+   "level": 3,
+   "why": "`names-your-tell`"
+  },
+  {
+   "abilityId": "case_closed",
+   "level": 2,
+   "why": "⚠️ `argues-mid-exchange` — and it is lethal-rung, which is the cell's teeth"
+  },
+  {
+   "abilityId": "edge",
+   "level": 2,
+   "why": "he can also fight"
+  },
+  {
+   "abilityId": "proof_halls",
+   "level": 2,
+   "why": "Logos — he shows his working"
+  },
+  {
+   "abilityId": "latticework",
+   "level": 1,
+   "why": "order is how he thinks"
+  },
+  {
+   "abilityId": "shieldwork",
+   "level": 1,
+   "why": "enough to not be hit while reading"
+  }
+ ],
+ "personality": {
+  "warmth": 5,
+  "trust": 6,
+  "candor": 10,
+  "patience": 10
+ },
+ "physicality": "ADULT. Unremarkable, forties, and completely still until he is not. WHAT CATCHES THE EYE: he watches you the way a person watches a mechanism.",
+ "intimacyNotes": "⚠️ He states things, including this. ⛔ Being READ is not the same as being known, and he is aware of the difference and clumsy about it.",
+ "schemaVersion": 1,
+ "people": "human",
+ "_authoredWhy": "⛑ AUTHORED 2026-09-07. ⛔ THE EIGHT COLISEUM CHAMPIONS WERE NOT NPCs — a name, a threat integer and four tactic tags inside an encounter file, and no sheet anywhere. ⚠️ CCode's matrix measured the consequence: 'every function any opponent can declare, in the whole game: strike, shield', and the win rate correlated with THREAT at −0.95 — ⛔ because threat was nearly the only authored number that varied. ⚑ THE EIGHT CELLS EXIST TO PROVE EVERY CONTRIBUTION FAMILY CAN WIN A FIGHT. They cannot prove it while every champion fights identically. ⚠️ Crafts are drawn from the encounter's OWN prose and tactic tags — nothing invented.",
+ "_isColiseumChampion": true
+}

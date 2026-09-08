@@ -82,6 +82,48 @@ said once.**
 
 ---
 
+---
+
+## §3b — ✅ RULED: WHAT YOU EARNED RAISES THE CAP AS WELL AS FILLING IT
+
+> **Erik, 2026-09-07:** *"Silas has more than he should because he's the first real play test and has been
+> keeping skills, plus he has braids and earned free skills. **The minted and braids and earned should raise
+> cap by 1 as well as grant the skill so a PC doesn't get penalized.**"*
+
+⛔ **A CRAFT YOU EARNED MUST NOT COST YOU A SLOT YOU ALREADY HAD.** ⚠️ **Otherwise braiding two crafts you
+own hands you a third and quietly takes a future one away — a reward that is also a tax, and the player
+would learn to stop braiding.**
+
+### ✅ THE RULE
+```
+capacity = round(level / craftsPerLevels) + earned.length
+```
+
+| ⚑ counts as EARNED | why |
+|---|---|
+| ⚑ **a minted braid** | ⛔ **R39: one rank that becomes what its use makes it.** You made it |
+| ⚑ **a bond-taught craft** | ⚠️ `marrow-s-wings` — **a companion gave it to you** |
+| ⚑ **a granted craft** | ⛔ a teacher, a rung, a thing the story handed over |
+| ⛔ **NOT a craft taken at level-up** | ⚠️ **that IS the slot.** Counting it would make capacity meaningless |
+
+### ⚠️ MEASURED ON SILAS
+
+| | |
+|---|---|
+| level 31, **36 crafts** | formula capacity **16** |
+| ⛔ **8 are not in the catalogue** | ⚑ **3 braids** (`braid_order_sense_palework`, `braid_deathsense_order_sense`, `braid_deathsense_palework`) **+ 5 minted or bond-taught** (`the-attended-end`, `marrow-s-wings`, `the-held-place`, `the-declared-threshold`, `the-received-ending`) |
+| ⚑ **corrected capacity** | **16 + 8 = 24** |
+
+⛑ **HE IS STILL ABOVE IT, AND THAT IS THE HONEST PICTURE** — ⚠️ *"the first real play test, and has been
+keeping skills."* ⛔ **`room: 0` is the right answer for him; being above formula is not an error, and
+`sheetFor`'s authored-wins contract already says so.**
+
+⬜ **CCode: `earned` needs a marker.** ⚠️ **MEASURED: every one of Silas's 36 crafts reads `source:
+authored` — there is no field distinguishing a braid from a level-up pick**, and the only reason the eight
+are findable today is that they are ABSENT FROM THE CATALOGUE. ⛔ **That is an inference, not a record.**
+
+---
+
 ## §4 — ⚑ THE KIT, DRAWN FROM EVIDENCE AND NOT FROM TASTE
 
 ⛔ **In priority order, and every step is already built:**
@@ -128,9 +170,11 @@ creation; it becomes what its use makes it.**
 
 ## §7 — ROUND 2 QUESTIONS
 
-1. ⛔ **Is `craftsPerLevels: 2` right?** ⚑ It gives a L30 fifteen crafts and Silas has 40 at L31. ⚠️ **Either
-   the PC is above formula the way Pell is, or the dial is wrong for players and right for NPCs** — ⬜ **worth
-   knowing which.**
+1. ✅ **ANSWERED BY §3b.** ⚑ Silas is L31 with 36 crafts against a formula 16 — **and 8 are earned, so his
+   real capacity is 24.** ⚠️ He is still above it, *"because he's the first real play test."* ⛔ **The dial is
+   not wrong; the cap was missing a term.**
+1b. ⬜ **`earned` needs a FIELD.** ⚠️ Every craft on his sheet reads `source: authored`, and the eight are
+   only findable because they are absent from the catalogue — ⛔ **an inference where a record belongs.**
 2. ⚠️ **Should rank bands be a content table** rather than prose? ⬜ Aevi's read: **yes, beside
    `craftsPerLevels`.**
 3. ⛔ **Does a sheet gaining crafts change its THREAT mid-campaign?** ⚑ **It should — R37 grows NPCs, and a

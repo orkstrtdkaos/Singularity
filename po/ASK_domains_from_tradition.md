@@ -61,7 +61,7 @@ nothing.**
 
 | | ⬜ |
 |---|---|
-| ⚠️ **`saehara_challengers`** | ⛔ **a POOL and not people.** `notAnOpponent: true` is your lever and this is where it belongs |
+| ⛑ **`saehara_challengers`** | ⛔ **AEVI WAS WRONG — SEE §5. They are six authored PEOPLE and they belong in the derivation** |
 | ⛑ **the 9 companions** | ⚠️ **they have `stages[]` and no level, and R36 makes them fight from their own sheet.** ⬜ **A companion's kit is a DIFFERENT question and should not be swept into this one** |
 | **4 in `lore/legends.json`** | ⚑ these are the hinge figures — ⛔ **Erik's, per your §11** |
 
@@ -73,3 +73,41 @@ nothing.**
 designed.** ⛔ **A marshal is not a notable.** ⬜ **Aevi will author her tier rather than widen the pattern**
 — ⚑ **because `tier_signals.json` is a judgement about the world, and one wrong rung is a correction, not
 evidence the table is too tight.**
+
+---
+
+## §5 — ⛑ CORRECTION: THE SAEHARA CHALLENGERS ARE PEOPLE, AND ERIK CAUGHT IT
+
+> Erik: *"You're talking about the PC Saehara's challengers list? If so, **why would those NOT be NPCs with a
+> sheet?**"*
+
+⛔ **HE IS RIGHT AND I READ A FILENAME INSTEAD OF A FILE.** ⚠️ **I saw `kind: "challenger_pool"` and wrote
+*"a pool, not people"* — ⛑ WHICH IS THE EXACT MISTAKE I MADE ABOUT THE COLISEUM CHAMPIONS THIS MORNING, and
+that one took Erik asking too.**
+
+**MEASURED — six authored people, with an escalation band each:**
+
+| id | band | traditions | |
+|---|---|---|---|
+| `road_duelist_low` | unknown | somatic | *a dōjō-yaburi hopeful — the first rung* |
+| `school_champion` | known | somatic · stillhold | ⚑ **Ito of the Still-Water School** — *sent to defend the lineage's honour* |
+| `rival_ronin` | known | cogitant · somatic | **Kaede the Unlineaged** — *a mirror of Saehara on the same pilgrimage* |
+| `sworn_rival` | renowned | syllogist · somatic | **Ren of the Crimson Ledger** |
+| `blazeborn_kensei` | renowned | blazeborn · somatic | ⚠️ **Suzu of the Ember Draw** — *her draw ignites* |
+| ⛔ **`the_last_blade`** | legendary | cogitant · precursor | ⛑ **The Blade Without a Name — *"the Ganryūjima beat, the challenge that defines the arc"*** |
+
+⚑ **AND THE FILE'S OWN NOTE SAYS WHAT THEY ARE:** *"Each is a **duel opponent** (SNG-098 skill battle) with a
+decline/flee path."*
+
+### ⬜ SO THEY GO IN THE DERIVATION, NOT IN `notAnOpponent`
+
+⚑ **AND THEY ARE THE EASIEST ROWS IN IT: every one carries `traditions`** — ⚠️ **plural, and ORDERED, so
+`traditions[0]` is the primary and `traditions[1]` the secondary, already authored.** ⛔ **No ring derivation
+needed for these six at all.**
+
+⬜ **`band` is their tier:** unknown → notable · known → regional · renowned → heroic · ⛑ **legendary →
+legendary, and `the_last_blade` should sit at that floor because the arc says he may be *"genuinely
+Saehara's equal or better."***
+
+⚠️ **A POOL IS A CONTAINER, NOT A CATEGORY.** ⛔ **The coliseum was a pool. `npcs/legends.json` is a pool.
+Both held real people, and both were invisible for the same reason.**

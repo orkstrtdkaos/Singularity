@@ -1,18 +1,249 @@
 {
- "generatedAt": "2026-09-08T03:08:30.242Z",
- "samples": 3,
+ "generatedAt": "2026-09-08T03:13:50.028Z",
+ "samples": 9,
  "maxRounds": 14,
  "perEnc": [
   {
+   "encId": "coliseum_champion_harm",
+   "crafts": 1038,
+   "avgWin": 0.12031684864054856,
+   "avgRounds": 13.077178334403747,
+   "ended": 0.12063797901948242
+  },
+  {
+   "encId": "coliseum_champion_influence",
+   "crafts": 1038,
+   "avgWin": 0.13198458574181182,
+   "avgRounds": 13.077820595161608,
+   "ended": 0.13251980304003494
+  },
+  {
+   "encId": "coliseum_champion_know",
+   "crafts": 1038,
+   "avgWin": 0.09055876685934502,
+   "avgRounds": 12.667094840505232,
+   "ended": 0.1944979661742687
+  },
+  {
+   "encId": "coliseum_champion_move",
+   "crafts": 1038,
+   "avgWin": 0.0753585955898095,
+   "avgRounds": 12.4532220081353,
+   "ended": 0.25658317276814613
+  },
+  {
+   "encId": "coliseum_champion_protect",
+   "crafts": 1038,
+   "avgWin": 0.7233997002783169,
+   "avgRounds": 11.464568614857624,
+   "ended": 0.7235067437379614
+  },
+  {
+   "encId": "coliseum_champion_restore",
+   "crafts": 1038,
+   "avgWin": 0.568293727253265,
+   "avgRounds": 12.185720402483406,
+   "ended": 0.568293727253265
+  },
+  {
+   "encId": "coliseum_champion_shape",
+   "crafts": 1038,
+   "avgWin": 0.18272318561336054,
+   "avgRounds": 12.982016698779645,
+   "ended": 0.1834724898308729
+  },
+  {
+   "encId": "coliseum_champion_sustain",
+   "crafts": 1038,
+   "avgWin": 0.7333547420252657,
+   "avgRounds": 11.41350888460716,
+   "ended": 0.7335688289445549
+  },
+  {
    "encId": "duel_bargain_gate",
    "crafts": 1038,
-   "avgWin": 0.1342324983943481,
-   "avgRounds": 13.068079640333972,
-   "ended": 0.1348747591522158
+   "avgWin": 0.13144936844358876,
+   "avgRounds": 13.065831727681406,
+   "ended": 0.13209162920145645
+  },
+  {
+   "encId": "duel_hall_of_mirrors",
+   "crafts": 1038,
+   "avgWin": 0.12888032541211797,
+   "avgRounds": 13.039391993149184,
+   "ended": 0.12995076000856412
+  },
+  {
+   "encId": "duel_marchward_forms",
+   "crafts": 1038,
+   "avgWin": 0.1293084992506964,
+   "avgRounds": 13.055983729394114,
+   "ended": 0.13070006422607647
+  },
+  {
+   "encId": "duel_redline_challenge",
+   "crafts": 1038,
+   "avgWin": 0.08691928923142808,
+   "avgRounds": 12.692892314279595,
+   "ended": 0.1825090986940714
+  },
+  {
+   "encId": "precursor_mechanism",
+   "crafts": 1038,
+   "avgWin": 0.3712267180475273,
+   "avgRounds": 5.292121601370154,
+   "ended": 0.3712267180475273
+  },
+  {
+   "encId": "precursor_seal_probe",
+   "crafts": 1038,
+   "avgWin": 0.46381931064011983,
+   "avgRounds": 5.077820595161641,
+   "ended": 0.46381931064011983
+  },
+  {
+   "encId": "wild_boar_valley",
+   "crafts": 1038,
+   "avgWin": 0.12684649967887024,
+   "avgRounds": 13.059516163562375,
+   "ended": 0.12727467351744873
+  },
+  {
+   "encId": "wild_greatcat_quickwood",
+   "crafts": 1038,
+   "avgWin": 0.07514450867052025,
+   "avgRounds": 12.407942624705608,
+   "ended": 0.2595803896381952
+  },
+  {
+   "encId": "zone_raider_duel",
+   "crafts": 1038,
+   "avgWin": 0.07343181331620638,
+   "avgRounds": 12.31631342324983,
+   "ended": 0.28441447227574557
   }
  ],
  "crashes": [],
- "unfinished": [],
+ "unfinished": [
+  {
+   "encId": "precursor_mechanism",
+   "n": 36,
+   "of": 1038,
+   "byFn": [
+    [
+     "bind",
+     7
+    ],
+    [
+     "open",
+     4
+    ],
+    [
+     "break",
+     4
+    ],
+    [
+     "shield",
+     3
+    ],
+    [
+     "sustain",
+     3
+    ],
+    [
+     "reveal",
+     2
+    ],
+    [
+     "transform",
+     2
+    ],
+    [
+     "foresee",
+     1
+    ],
+    [
+     "ward",
+     1
+    ],
+    [
+     "mend",
+     1
+    ],
+    [
+     "make",
+     1
+    ],
+    [
+     "summon",
+     1
+    ],
+    [
+     "command",
+     1
+    ],
+    [
+     "bargain",
+     1
+    ],
+    [
+     "provoke",
+     1
+    ],
+    [
+     "restore",
+     1
+    ],
+    [
+     "empower",
+     1
+    ],
+    [
+     "track",
+     1
+    ]
+   ]
+  },
+  {
+   "encId": "precursor_seal_probe",
+   "n": 11,
+   "of": 1038,
+   "byFn": [
+    [
+     "reveal",
+     4
+    ],
+    [
+     "soothe",
+     1
+    ],
+    [
+     "hinder",
+     1
+    ],
+    [
+     "ward",
+     1
+    ],
+    [
+     "restore",
+     1
+    ],
+    [
+     "resist",
+     1
+    ],
+    [
+     "shield",
+     1
+    ],
+    [
+     "command",
+     1
+    ]
+   ]
+  }
+ ],
  "degenerate": [],
  "generics": [],
  "braids": {

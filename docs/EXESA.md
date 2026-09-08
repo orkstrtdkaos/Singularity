@@ -163,7 +163,7 @@ Untended, **the argument resumes with the world still standing in the middle of 
 
 ## VI · WHO IS OUT THERE
 
-Sixty-seven great figures on the roster and fourteen legendaries with sheets of their own, and **most of them have never heard of you.** They are
+Seventy great figures on the roster and fourteen legendaries with sheets of their own, and **most of them have never heard of you.** They are
 doing their own work. `figureCareer` counts their deeds whether you are in the room or not, and the ones you
 meet twice will not be the same both times.
 
@@ -224,9 +224,19 @@ trickster you brushed past in a market may be a gang leader when you meet again*
 | ⚑ **someone carrying an unfinished thing** | a work stopped deliberately, a debt unpaid, a question they were expelled for asking |
 | ⚑ **someone the town is wrong about** | in either direction |
 
-⛔ **AND IN THE CHURN, SOMETHING THAT IS NOT A PERSON AT ALL.** The Hollow King rules a court out of the wild
-half, and **nobody in it lies.** They give you precisely what you asked for, at a price named out loud
-before you agree — **and you leave richer and hollowed, and it is years before you find the seam.**
+⛔ **AND IN THE CHURN THERE ARE TWO COURTS, AND THEY ARE NOT ENEMIES BECAUSE ONE IS GOOD.**
+
+**The Hollow King rules out of the wild half, and nobody in his court lies.** They give you precisely what
+you asked for, at a price named aloud before you agree — **and you leave richer and hollowed, and it is
+years before you find the seam.**
+
+⚑ **The Kept Court is what stands against that, and it is not kinder.** Elves, dwarves and slower things
+living in the one place where nothing stays, refusing to dissolve into it. **They will not trade at all.**
+What they give they give freely; what they withhold cannot be bought. ⚠️ **There is no price, no term, and
+no lever** — you cannot purchase their help, and if they judge you unworthy of it, **there is nothing you
+can offer.**
+
+⛔ **One court will always deal with you. The other might simply decline.**
 
 ⚠️ **THE PEOPLE ARE THE POINT AND THE MECHANICS ARE UNDERNEATH THEM.** A person who fights beside you fights
 from their own sheet, with their own crafts, and the absences in that sheet are as authored as the

@@ -1,0 +1,104 @@
+{
+ "id": "bricke_making",
+ "name": "Bricke of the Making",
+ "level": 23,
+ "role": "Coliseum champion, the SHAPE cell — arrives with a satchel and permission to use it",
+ "gender": "man",
+ "pronouns": "he/him",
+ "sex": "male",
+ "romanceEligible": true,
+ "domains": {
+  "primary": "wright",
+  "secondary": "mason",
+  "tertiary": "enginewright"
+ },
+ "spectrum": {
+  "destruction_creation": 0.5
+ },
+ "subAttributes": {
+  "strength": 9,
+  "agility": 7,
+  "reason": 10,
+  "insight": 9,
+  "presence": 8,
+  "rapport": 8,
+  "craft": 14,
+  "wits": 10
+ },
+ "knowledge": [
+  "What a satchel of parts can become in three exchanges",
+  "Which ground will hold a wall and which will not"
+ ],
+ "wants": [
+  "To be allowed the satchel",
+  "A bout long enough to build something good"
+ ],
+ "fears": "⛔ A cell that starts and ends before he has made anything.",
+ "appearance": "Broad-handed, cheerful, and already looking at the ground rather than at you.",
+ "voiceHints": "Chatty and practical. He explains what he is building while he builds it.",
+ "reactsToReputation": {
+  "maker": "⚑ opens the satchel and shows you",
+  "impatient": "builds faster and worse",
+  "any": "works"
+ },
+ "assistTags": [
+  "craft",
+  "make",
+  "carry",
+  "analyze"
+ ],
+ "abilities": [
+  {
+   "abilityId": "whats_at_hand",
+   "level": 3,
+   "why": "⚑ `makes-a-tool-from-nothing` — the cell in one craft"
+  },
+  {
+   "abilityId": "raised_thing",
+   "level": 3,
+   "why": "⛔ `builds-the-ground`"
+  },
+  {
+   "abilityId": "boundary_stone",
+   "level": 2,
+   "why": "`fights-you-in-a-room-he-built`"
+  },
+  {
+   "abilityId": "dressed_edge",
+   "level": 2,
+   "why": "⚠️ he makes the weapon and then uses it"
+  },
+  {
+   "abilityId": "stonewise",
+   "level": 2,
+   "why": "'which ground will hold a wall'"
+  },
+  {
+   "abilityId": "keystone_blow",
+   "level": 2,
+   "why": "`changes-the-terms` — he can also take a structure apart"
+  },
+  {
+   "abilityId": "tinkers_hand",
+   "level": 2,
+   "why": "the satchel"
+  },
+  {
+   "abilityId": "plain_weight",
+   "level": 1,
+   "why": "he is a wright and wrights are strong"
+  }
+ ],
+ "personality": {
+  "warmth": 8,
+  "trust": 7,
+  "candor": 8,
+  "patience": 6
+ },
+ "physicality": "ADULT. Thick through the hands and forearms, thirties, always slightly dusty. WHAT CATCHES THE EYE: he is delighted, the whole time.",
+ "intimacyNotes": "⚠️ He shows people things. ⛔ That is how he does everything, including this.",
+ "schemaVersion": 1,
+ "people": "human",
+ "_authoredWhy": "⛑ AUTHORED 2026-09-07. ⛔ THE EIGHT COLISEUM CHAMPIONS WERE NOT NPCs — a name, a threat integer and four tactic tags inside an encounter file, and no sheet anywhere. ⚠️ CCode's matrix measured the consequence: 'every function any opponent can declare, in the whole game: strike, shield', and the win rate correlated with THREAT at −0.95 — ⛔ because threat was nearly the only authored number that varied. ⚑ THE EIGHT CELLS EXIST TO PROVE EVERY CONTRIBUTION FAMILY CAN WIN A FIGHT. They cannot prove it while every champion fights identically. ⚠️ Crafts are drawn from the encounter's OWN prose and tactic tags — nothing invented.",
+ "_isColiseumChampion": true
+}

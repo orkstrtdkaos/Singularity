@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 31,
-  "xp": 3037,
+  "xp": 3042,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -200,7 +200,7 @@
   "maxHealth": 191,
   "health": 191,
   "maxEnergy": 282,
-  "energy": 244,
+  "energy": 239,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2209,158 +2209,241 @@
         "player": "All is well - we have you. Now let me read this encrypted urgent message.",
         "summary": "Encrypted message received at dawn: Radiant leadership is contesting the water crisis theory. Buried readings in Edge District Archive hold the proof. Three days to convene; Silas must retrieve them.",
         "narration": "You set the encrypted slate on the waystation table beside the cooling breakfast plates. Pell is watching from the bench—a quick glance, noting your shift from rest to attention. Huginn shifts on the shelf, head turning.\n\nYou press your palm to the slate's surface. The encryption unwinds under your touch—not a lock, but a message that recognizes the hand that holds it. The words surface in clean script.\n\n*Silas Weir. The Radiant leadership has filed a formal objection to Warden Coll's amended petition. They name pole-pull as a conspiracy theory, not structural fact. The committee convenes in three days to hear arguments. Coll needs the deep readings—the ones buried in Grael's office. If you can produce them, the weight shifts. If not, silence wins and the drift continues. The readings are in Edge District Archive, third wing, sealed cabinet. Grael's personal mark on the seal. Bring them to the Hub before the convene. —Ossian, Registry*\n\nThe message fades. The urgency underneath is plain: this is not a suggestion. This is a stake named and a door opened—go to the Archive, unseal what was hidden, and carry proof of the buried readings back to the Hub before the committee decides which way the Radiant falls.\n\nPell reads your face. \"Bad news runs straight,\" she says quietly. It's not a question."
+      },
+      {
+        "player": "Ask Huginn what the Ashwarden network knows about the Edge District — paths, watchers, the weight of the Archive's seal",
+        "summary": "Huginn names the Archive's architecture and the watchers—Veth knows the warden-mark, there are paths, and the seal on Grael's cabinet is keyed to a question only he can answer.",
+        "narration": "You turn to Huginn, still roosted on the shelf beside the relay mechanism. The bird's head tilts—that particular angle that means it has been listening the whole time, waiting for the question it knew was coming.\n\n\"The Archive,\" you say plainly. \"What does the network know about it? The seal on Grael's office. The paths in and out. Who watches.\"\n\nHuginn shifts, wings settling. When it speaks—and it does speak now, in that rough approximation of your language that still sounds like carrion call underneath—the words come spare and direct. *\"Veth knows the warden-mark on the Archive's threshold. Older than Grael. Seal is hers, not his.\"* A pause. *\"Three watchers in the district. Two are Radiant-blood. One is not. Third one walks the long watch—doesn't report to the light-folk.\"* Another shift. *\"Eastern entry. Service stair. Watched less than the front.\"*\n\nThe bird's eye—that impossibly calm, impossibly old eye—fixes on you. *\"The readings are there. Buried in Grael's cabinet in the third wing. But the cabinet is sealed with his mark, and his mark is a question. You will have to answer it true, or the seal will not open.\"*\n\nPell, still seated on the bench, lets out a slow breath. She understands what that means: not just retrieval, but passage. Not just a theft, but a conversation with someone who sealed their own secrets away and then died, or departed, or chose not to answer anymore."
       }
     ],
     "lastTurn": {
-      "narration": "You set the encrypted slate on the waystation table beside the cooling breakfast plates. Pell is watching from the bench—a quick glance, noting your shift from rest to attention. Huginn shifts on the shelf, head turning.\n\nYou press your palm to the slate's surface. The encryption unwinds under your touch—not a lock, but a message that recognizes the hand that holds it. The words surface in clean script.\n\n*Silas Weir. The Radiant leadership has filed a formal objection to Warden Coll's amended petition. They name pole-pull as a conspiracy theory, not structural fact. The committee convenes in three days to hear arguments. Coll needs the deep readings—the ones buried in Grael's office. If you can produce them, the weight shifts. If not, silence wins and the drift continues. The readings are in Edge District Archive, third wing, sealed cabinet. Grael's personal mark on the seal. Bring them to the Hub before the convene. —Ossian, Registry*\n\nThe message fades. The urgency underneath is plain: this is not a suggestion. This is a stake named and a door opened—go to the Archive, unseal what was hidden, and carry proof of the buried readings back to the Hub before the committee decides which way the Radiant falls.\n\nPell reads your face. \"Bad news runs straight,\" she says quietly. It's not a question.",
-      "sceneSummary": "Encrypted message received at dawn: Radiant leadership is contesting the water crisis theory. Buried readings in Edge District Archive hold the proof. Three days to convene; Silas must retrieve them.",
+      "narration": "You turn to Huginn, still roosted on the shelf beside the relay mechanism. The bird's head tilts—that particular angle that means it has been listening the whole time, waiting for the question it knew was coming.\n\n\"The Archive,\" you say plainly. \"What does the network know about it? The seal on Grael's office. The paths in and out. Who watches.\"\n\nHuginn shifts, wings settling. When it speaks—and it does speak now, in that rough approximation of your language that still sounds like carrion call underneath—the words come spare and direct. *\"Veth knows the warden-mark on the Archive's threshold. Older than Grael. Seal is hers, not his.\"* A pause. *\"Three watchers in the district. Two are Radiant-blood. One is not. Third one walks the long watch—doesn't report to the light-folk.\"* Another shift. *\"Eastern entry. Service stair. Watched less than the front.\"*\n\nThe bird's eye—that impossibly calm, impossibly old eye—fixes on you. *\"The readings are there. Buried in Grael's cabinet in the third wing. But the cabinet is sealed with his mark, and his mark is a question. You will have to answer it true, or the seal will not open.\"*\n\nPell, still seated on the bench, lets out a slow breath. She understands what that means: not just retrieval, but passage. Not just a theft, but a conversation with someone who sealed their own secrets away and then died, or departed, or chose not to answer anymore.",
+      "sceneSummary": "Huginn names the Archive's architecture and the watchers—Veth knows the warden-mark, there are paths, and the seal on Grael's cabinet is keyed to a question only he can answer.",
       "choices": [
         {
-          "label": "Tell Pell plainly what the message asks",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Ask Huginn to carry word to Veth—she's at the Threshold Post, and if she knows the warden-mark, she may know Grael's question.",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {},
           "difficulty": "very easy",
-          "trivial": true
-        },
-        {
-          "label": "Plan the approach to the Archive — who goes, how the seal is handled, what comes after",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
-          "difficulty": "normal",
+          "opposedDifficulty": null,
           "intentTags": [
-            "plan",
-            "craft"
-          ]
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ask Huginn what the Ashwarden network knows about the Edge District — paths, watchers, the weight of the Archive's seal",
+          "label": "Ask Pell what she knows of the Archive from her time in the edge—supplier routes, back doors, weak seals.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": "easy",
+          "opposedDifficulty": null,
           "intentTags": [
-            "study"
-          ]
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ride for the Hub now, alone — leave the runner to rest, Pell to the post, and carry the message to Coll before the Archive play matters",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Leave now for the Hub, moving fast—you have three days and the Archive's east stair route is known. Reach Grael's cabinet before the convene and read what the seal holds.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": "hard",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "travel"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask The Attended End to read what the convene itself will decide—if three days is enough time, or if the readings matter less than the politics beneath them.",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {},
           "difficulty": "normal",
+          "opposedDifficulty": null,
           "intentTags": [
-            "travel",
-            "risky"
+            "study"
           ],
-          "travel": true
+          "abilityId": "the_attended_end",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "deeds": [],
-      "characterDeltas": {},
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
       "ledgerEvents": [],
       "questUpdates": [
         {
           "op": "progress",
           "questId": "the-light-that-will-not-dim",
-          "note": "Ossian names the buried readings as retrievable proof. Three days to the convene. The committee will choose based on what evidence reaches it."
+          "note": "Huginn names the Archive's location and the seal-question protecting the buried readings. Path is known: eastern service stair, less watched. Three days remain before the convene."
         }
       ],
       "standingOps": [],
+      "delegateOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": {
+        "thing": "Huginn speaks plainly about the Archive's architecture and watchers—a network the Ashwardens have been tending, aware and unhurried",
+        "from": "Huginn's nature as an attendant of endings, which means it walks the quiet roads and knows who watches what; also from the moment Silas turned to ask, which gave it permission to answer what it already knew"
+      },
+      "stageOps": [],
+      "scene": {
+        "setting": "The Whistling Woman post's single warm room at late midday—stone walls, the stove cooling, natural light through the small window. The encrypted slate now sits dark on the table beside the breakfast plates.",
+        "npcsPresent": [
+          {
+            "name": "Pell Ran Marsh",
+            "state": "Seated on the bench, watching Silas and Huginn—her attention steady, her hand resting on the table. She has shifted slightly, reading the weight of what the bird is saying."
+          },
+          {
+            "name": "The Runner",
+            "state": "Resting on the cot, breathing easier now—one arm still protective across her ribs. Mending, but not yet ready for hard riding."
+          },
+          {
+            "name": "Huginn",
+            "state": "Roosted on the shelf beside the relay mechanism, head turned toward Silas and Pell—present, awake, and having delivered what was needed without being asked twice."
+          }
+        ],
+        "objects": [
+          "The encrypted slate, now dark, on the table",
+          "Memory — the spear — propped against the wall",
+          "The relay mechanism, silent on the shelf",
+          "Breakfast plates, cooling",
+          "Water barrel and cup within reach of the cot"
+        ],
+        "threads": [
+          "The convene in three days and what evidence reaches it",
+          "Grael's sealed cabinet in the Archive's third wing and the question that guards it",
+          "The eastern service stair route and the watchers who do not report to the Radiant leadership",
+          "Whether the readings will matter more than the politics they threaten"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "huginn",
+          "note": "Named the Archive's architecture, the watchers, and the path—the service stair, the three watchers (two Radiant, one not), Veth's knowledge of the warden-mark, and the question-seal on Grael's cabinet. Spoke plainly, without the usual bird's hesitation.",
+          "learned": [
+            "The Archive's warden-mark is older than Grael's tenure and Veth knows it",
+            "There are three district watchers—two answer to Radiant leadership, one does not",
+            "The eastern service stair is less watched than the front entrance",
+            "Grael's cabinet seal is a question-lock keyed to Grael himself",
+            "The Archive holds the deep readings Coll needs"
+          ],
+          "skillsObserved": [
+            "Knowledge of Ashwarden network movements",
+            "Understanding of watcher patterns and reporting chains",
+            "Familiarity with the Archive's physical layout"
+          ]
+        }
+      ],
+      "intentsHeard": [],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "discovery": null,
       "codexUpdates": [
         {
-          "topic": "the-light-that-will-not-dim",
-          "label": "The Light That Will Not Dim",
-          "kind": "quest",
-          "fact": "Radiant leadership has filed formal objection to pole-pull naming. The buried readings in Grael's personal seal-cabinet in Edge District Archive are the only proof the committee will accept. Three days before the convene decides.",
+          "topic": "overseer-grael",
+          "label": "Overseer Grael",
+          "kind": "person",
+          "entityId": "overseer-grael",
+          "fact": "Grael's personal seal-cabinet in the Edge District Archive's third wing is sealed with a question-lock keyed to Grael himself. The cabinet holds the deep water readings that prove the water crisis is pole-pull, not conspiracy. The Ashwarden network knows the Archive's layout and the watchers.",
           "links": [
-            "warden-coll",
-            "overseer-grael",
+            "the-light-that-will-not-dim",
+            "edge-district",
             "the-water-crisis"
           ]
         },
         {
-          "topic": "overseer-grael",
-          "label": "Overseer Grael of the Edge District",
-          "kind": "person",
-          "entityId": "overseer-grael",
-          "fact": "Grael's personal seal-mark guards a cabinet in the Edge District Archive containing the buried water readings. The cabinet is in the third wing.",
+          "topic": "the-water-crisis",
+          "label": "The Water Crisis",
+          "kind": "mystery",
+          "fact": "The buried readings in Grael's cabinet are the only proof the committee will accept that pole-pull is the real cause. Three days before the convene decision.",
           "links": [
             "the-light-that-will-not-dim",
-            "edge-district"
+            "overseer-grael",
+            "warden-coll"
           ]
         }
       ],
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "courier",
-          "note": "The message she carried was encrypted, urgent, and breaks normal relay protocol. She knew its weight before she left the Hub. She is resting now, her fever holding steady, her three diverging paths still braiding."
-        }
-      ],
-      "scene": {
-        "setting": "The Whistling Woman post's single warm room at late morning—stone walls, the stove cooling from breakfast, the oil lamp now extinguished in the day's natural light. The encrypted message has faded from the slate, leaving only blank dark.",
-        "npcsPresent": [
-          {
-            "name": "Pell Ran Marsh",
-            "state": "Seated on the bench, watching Silas read the message—her attention steady, her hand on the table"
-          },
-          {
-            "name": "The Runner",
-            "state": "Resting on the cot, breathing easier now, one arm still protective across her ribs"
-          },
-          {
-            "name": "Huginn",
-            "state": "Roosted on the shelf, head turned toward the conversation—watching, waiting"
-          }
-        ],
-        "objects": [
-          "The encrypted slate, now dark",
-          "Memory — the spear — still propped against the wall",
-          "The relay mechanism, silent on the shelf",
-          "Breakfast plates, cooling on the table",
-          "Water barrel and cup within reach of the cot"
-        ],
-        "threads": [
-          "The message's urgency: three days before the convene",
-          "The sealed cabinet in Edge District Archive and what it holds",
-          "Grael's personal seal and whether it can be read or broken",
-          "How to move from this moorland waystation to the Hub and back in time"
-        ]
-      }
+      "holdingOps": [],
+      "debtOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": {
+        "hoursPassed": 0,
+        "why": "Midday conversation at the waystation—no significant passage"
+      },
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": null,
+      "gambitApt": true,
+      "gambitOps": null,
+      "newAbility": null,
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Whistling Woman post's single warm room at late morning—stone walls, the stove cooling from breakfast, the oil lamp now extinguished in the day's natural light. The encrypted message has faded from the slate, leaving only blank dark.",
+      "setting": "The Whistling Woman post's single warm room at late midday—stone walls, the stove cooling, natural light through the small window. The encrypted slate now sits dark on the table beside the breakfast plates.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Seated on the bench, watching Silas read the message—her attention steady, her hand on the table"
+          "state": "Seated on the bench, watching Silas and Huginn—her attention steady, her hand resting on the table. She has shifted slig"
         },
         {
           "name": "The Runner",
-          "state": "Resting on the cot, breathing easier now, one arm still protective across her ribs"
+          "state": "Resting on the cot, breathing easier now—one arm still protective across her ribs. Mending, but not yet ready for hard r"
         },
         {
           "name": "Huginn",
-          "state": "Roosted on the shelf, head turned toward the conversation—watching, waiting"
+          "state": "Roosted on the shelf beside the relay mechanism, head turned toward Silas and Pell—present, awake, and having delivered "
         }
       ],
       "objects": [
-        "The encrypted slate, now dark",
-        "Memory — the spear — still propped against the wall",
+        "The encrypted slate, now dark, on the table",
+        "Memory — the spear — propped against the wall",
         "The relay mechanism, silent on the shelf",
-        "Breakfast plates, cooling on the table",
+        "Breakfast plates, cooling",
         "Water barrel and cup within reach of the cot"
       ],
       "threads": [
-        "The message's urgency: three days before the convene",
-        "The sealed cabinet in Edge District Archive and what it holds",
-        "Grael's personal seal and whether it can be read or broken",
-        "How to move from this moorland waystation to the Hub and back in time"
+        "The convene in three days and what evidence reaches it",
+        "Grael's sealed cabinet in the Archive's third wing and the question that guards it",
+        "The eastern service stair route and the watchers who do not report to the Radiant leadership",
+        "Whether the readings will matter more than the politics they threaten"
       ]
     },
-    "beats": 4
+    "beats": 5
   },
   "clock": {
     "schemaVersion": 1,
@@ -3415,7 +3498,8 @@
         "Codex: the Radiant Reach is intensifying past the Accord's tolerance — and someone chose to hide it.",
         "↳ Ossian's sealed message names the suppressed readings plainly: the Radiant array north of the Crossing shows a drift, and Sera's engineer buried them five years ago. The archive holds copies. Leth…",
         "Warden Coll confirms the Radiant readings are buried and pole-pull is the real issue. An amended petition will name the drift plainly to the Accord. The conspiracy now has institutional weight behind it.",
-        "Ossian names the buried readings as retrievable proof. Three days to the convene. The committee will choose based on what evidence reaches it."
+        "Ossian names the buried readings as retrievable proof. Three days to the convene. The committee will choose based on what evidence reaches it.",
+        "Huginn names the Archive's location and the seal-question protecting the buried readings. Path is known: eastern service stair, less watched. Three days remain before the convene."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T12:58:53.302Z",
@@ -5132,16 +5216,23 @@
       "history": [
         "[d16] Arriving at Whistling Woman post at dawn with news that could not wait for the relay network's chain",
         "[d16] Silas read her death-thread and learned she chose the direct route knowing it would fracture her path—she knew the cost and ran hot anyway because the message could not wait. Her grip on the saddlebag has not unclenched.",
-        "[d16] The message she carried was encrypted, urgent, and breaks normal relay protocol. She knew its weight before she left the Hub. She is resting now, her fever holding steady, her three diverging paths still braiding."
+        "[d16] The message she carried was encrypted, urgent, and breaks normal relay protocol. She knew its weight before she left the Hub. She is resting now, her fever holding steady, her three diverging paths still braiding.",
+        "[d16] Named the Archive's architecture, the watchers, and the path—the service stair, the three watchers (two Radiant, one not), Veth's knowledge of the warden-mark, and the question-seal on Grael's cabinet. Spoke plainly, without the usual bird's hesitation."
       ],
       "knownFacts": [
         "She broke relay protocol deliberately, sent direct by someone at the Hub",
         "She was already fever-fractured when she left—the Hub chose to fracture her further rather than delay",
-        "The message matters more to her than her own pathway holds"
+        "The message matters more to her than her own pathway holds",
+        "The Archive's warden-mark is older than Grael's tenure and Veth knows it",
+        "There are three district watchers—two answer to Radiant leadership, one does not",
+        "The eastern service stair is less watched than the front entrance"
       ],
       "skillsObserved": [
         "Professional horsemanship",
-        "Moorland navigation"
+        "Moorland navigation",
+        "Knowledge of Ashwarden network movements",
+        "Understanding of watcher patterns and reporting chains",
+        "Familiarity with the Archive's physical layout"
       ],
       "status": "active",
       "sex": "unknown",
@@ -5152,7 +5243,11 @@
         "locationId": "gen-whistling-woman-post",
         "day": 16
       },
-      "met": 3
+      "met": 4,
+      "domains": {
+        "primary": "ashwarden"
+      },
+      "domainsSource": "observed"
     },
     "urgent-courier-whistling-woman": {
       "id": "urgent-courier-whistling-woman",
@@ -6383,12 +6478,8 @@
     "lastTickWorldDay": 70,
     "lastCanonWorldDay": 70,
     "lastGenCount": 1680,
-    "turnsSinceOffer": 11,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "The ordinary work of feeding—Aldric's fish, hard bread, cheese from Pell's pack—grounding after the novel-depth work",
-        "from": "The character's own need and Pell's steadiness—the meal that follows the meditation the way rest follows effort"
-      },
       {
         "thing": "The music-box mechanism—a carrier for Deni's whistle-song in physical form, a tool for the relay network",
         "from": "Deni Cors's methodical care in building the post; the infrastructure of the waystation network she has begun; the recognition that relay…"
@@ -6404,6 +6495,10 @@
       {
         "thing": "A quiet night with nothing demanded but presence—the first one since the temple was raised.",
         "from": "Pell's read of what the child needs, and what she needs alongside it"
+      },
+      {
+        "thing": "Huginn speaks plainly about the Archive's architecture and watchers—a network the Ashwardens have been tending, aware and unhurried",
+        "from": "Huginn's nature as an attendant of endings, which means it walks the quiet roads and knows who watches what; also from the moment Silas…"
       }
     ],
     "wantProgress": {
@@ -14086,8 +14181,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d13] Silas named Mara Wells to the Hub Council water committee as Millbrook's relay contact and pressed for a meeting sooner than their scheduled three days — the committee now has a named contact and a named urgency, delivered via the morning run.",
-          "[d13] Warden Coll confirmed: the committee can move on a named authority and a signed witness account without a full council vote. He asked for the document roll, a signed statement naming Grael, and a check-in protocol before Silas enters the Zone. Formal aid requests to the Rootkin and Cogitants are…",
           "[d13] Warden Coll witnessed the shadow-architecture of the valley's water infrastructure raised from the Waymarker and The Shadow Work on his desk — the conduit-lines, intake sleeves, and Disputed Zone survey-grid fringe all visible for thirty seconds before the detail at the failure points blurred. He…",
           "[d13] Silas signed the witness statement with his Post Master mark on Day 13 afternoon. The design of the aid framework is clear: the Rootkin ask carries implicit expectation of return — Stillwater's Trouble offered as staging; the Cogitants will want a named accountable contact in the Zone. Both…",
           "[d13] Warden Coll issued a formal letter of introduction — Post Master authority named explicitly, committee seal pressed beside his own. Valid for district-governed contacts in the Zone fringe. His caveat: anyone who does not recognize district governance is a different conversation the letter cannot…",
@@ -14110,22 +14203,27 @@
           "[d15] The deep seam beneath the Threshold Post is engineered — its dissolution is ordered, not natural. Someone deliberately made it to close in a specific way, on a specific schedule.",
           "[d15] The deep seam beneath the Threshold Post is engineered—its dissolution is ordered, not natural. Someone deliberately made it to close in a specific way, on a specific schedule.",
           "[d15] Warden Coll filed an amended petition on Day 15 morning naming pole-pull (The Poles Pull arc) as the underlying cause of the water crisis, replacing the Radiant readings conspiracy theory. The Radiant leadership has responded with silence—a dangerous sign that suggests either acceptance or deeper…",
-          "[d16] The moorland's substrate lattice is measurably thin—craft-work here runs starved and unpredictable. Unknown cause or extent."
+          "[d16] The moorland's substrate lattice is measurably thin—craft-work here runs starved and unpredictable. Unknown cause or extent.",
+          "[d16] The buried readings in Grael's cabinet are the only proof the committee will accept that pole-pull is the real cause. Three days before the convene decision."
         ],
         "links": [
-          "the-second-thread",
           "what-the-water-remembers",
           "the-actor-with-a-list",
           "the-threshold-post",
           "warden-coll",
           "millbrook",
           "the-poles-pull",
-          "the-light-that-will-not-dim"
+          "the-light-that-will-not-dim",
+          "overseer-grael"
         ],
         "aliases": [],
         "createdDay": 2,
-        "updatedDay": 15,
-        "entityId": "the-water-crisis"
+        "updatedDay": 16,
+        "entityId": "the-water-crisis",
+        "archive": [
+          "[d13] Silas named Mara Wells to the Hub Council water committee as Millbrook's relay contact and pressed for a meeting sooner than their scheduled three days — the committee now has a named contact and a named urgency, delivered via the morning run.",
+          "[d13] Warden Coll confirmed: the committee can move on a named authority and a signed witness account without a full council vote. He asked for the document roll, a signed statement naming Grael, and a check-in protocol before Silas enters the Zone. Formal aid requests to the Rootkin and Cogitants are…"
+        ]
       },
       "dara-holt-the-ditch-mother": {
         "id": "dara-holt-the-ditch-mother",
@@ -14531,7 +14629,8 @@
           "[d4] Grael marked Fendt himself — no external order. Fendt asked about the seven-band readings to the wrong person (Grael's keeper); the keeper filed nothing, and Grael put the name on the board the next m",
           "[d4] Shadow-residue from Deathsense in the board's shadow-space confirms at least three prior marks using the identical method — keeper's silence pre-arranged, question closed, pattern practiced and refine",
           "[d16] The Light That Will Not Dim — Radiant leadership has filed formal objection to pole-pull naming. The buried readings in Grael's personal seal-cabinet in Edge District Archive are the only proof the committee will accept. Three days before the convene decides.",
-          "[d16] Grael's personal seal-mark guards a cabinet in the Edge District Archive containing the buried water readings. The cabinet is in the third wing."
+          "[d16] Grael's personal seal-mark guards a cabinet in the Edge District Archive containing the buried water readings. The cabinet is in the third wing.",
+          "[d16] Grael's personal seal-cabinet in the Edge District Archive's third wing is sealed with a question-lock keyed to Grael himself. The cabinet holds the deep water readings that prove the water crisis is pole-pull, not conspiracy. The Ashwarden network knows the Archive's layout and the watchers."
         ],
         "links": [
           "vash-lens-grinder-east-room",
@@ -15609,22 +15708,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 14.904246808117454,
-    "cerebral": 17.21801607706405,
-    "social": 10.474587574967158,
-    "generous": 5.441221415871458,
-    "cautious": 6.047979390444258,
-    "physical": 0.4151611644924943,
-    "risky": 0.09957772338869728,
-    "ruthless": 0.2167390372184906,
-    "carousing": 0.03523905512435679,
-    "amorous": 3.8149780245577776,
-    "patient": 0.7287436404414538,
-    "stealth": 0.000007574834621719897,
-    "devotion": 0.3095327520204532,
-    "craft": 3.421407489750204,
-    "leadership": 1.007595305024706,
-    "deception": 0.0362747690838759
+    "strategic": 14.531640637914517,
+    "cerebral": 17.787565675137447,
+    "social": 10.212722885592978,
+    "generous": 5.3051908804746715,
+    "cautious": 5.896779905683151,
+    "physical": 0.40478213538018193,
+    "risky": 0.09708828030397984,
+    "ruthless": 0.21132056128802834,
+    "carousing": 0.03435807874624787,
+    "amorous": 3.719603573943833,
+    "patient": 0.7105250494304174,
+    "stealth": 0.0000073854637561768995,
+    "devotion": 0.30179443321994187,
+    "craft": 3.3358723025064485,
+    "leadership": 0.9824054223990882,
+    "deception": 0.035367899856778996
   },
   "aptitudes": [
     "strategist",
@@ -15633,10 +15732,30 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 953,
+  "actionCount": 954,
   "grantsVersion": 1,
   "reconcileVersion": 48,
   "gallery": [
+    {
+      "kind": "figure",
+      "prompt": "huge animal bones, animal weasel skeleton huge glowing undead guarding a portal, Logana",
+      "url": "https://image.pollinations.ai/prompt/huge%20animal%20bones%2C%20animal%20weasel%20skeleton%20huge%20glowing%20undead%20guarding%20a%20portal%2C%20Logana%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=61390&nologo=true",
+      "caption": "Logana",
+      "worldDay": 70,
+      "at": "2026-09-08T00:41:08.215Z",
+      "subjectKind": "figure",
+      "subjectId": "whois-logana"
+    },
+    {
+      "kind": "figure",
+      "prompt": "animal weasel skeleton huge glowing undead guarding a portal",
+      "url": "https://image.pollinations.ai/prompt/animal%20weasel%20skeleton%20huge%20glowing%20undead%20guarding%20a%20portal%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=61389&nologo=true",
+      "caption": "Logana",
+      "worldDay": 70,
+      "at": "2026-09-08T00:40:40.856Z",
+      "subjectKind": "figure",
+      "subjectId": "whois-logana"
+    },
     {
       "kind": "holding",
       "prompt": "smithy and forge selling wares, attractive woman dark hair working, blacksmith and forge with sign that says fell. woman crafting with hammer, The Fell Pell: a working enterprise, thriving, busy and w",
@@ -16385,8 +16504,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1788827579624,
-  "rev": 1890,
+  "updatedAt": 1788828437191,
+  "rev": 1900,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -20599,7 +20718,7 @@
   "syncedAt": 1788658062664,
   "teachers": {},
   "regionsKnown": {
-    "valley": 648,
+    "valley": 649,
     "the_palelands": 6,
     "the_center": 151,
     "the_echo_vale": 14
@@ -20902,10 +21021,10 @@
     {
       "id": "sess-32",
       "startedAt": "2026-09-08T00:32:59.614Z",
-      "lastAt": "2026-09-08T00:32:59.614Z",
+      "lastAt": "2026-09-08T00:47:17.183Z",
       "startDay": 70,
       "endDay": 70,
-      "beats": 1
+      "beats": 2
     }
   ],
   "company": [
@@ -21393,20 +21512,20 @@
     "gen-whistling-woman-post": "https://image.pollinations.ai/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=32614&nologo=true&_cb=1_1"
   },
   "_opEmitted": {
-    "sceneSummary": 328,
-    "choices": 327,
-    "characterDeltas": 160,
-    "scene": 328,
-    "npcUpdates": 294,
+    "sceneSummary": 329,
+    "choices": 328,
+    "characterDeltas": 161,
+    "scene": 329,
+    "npcUpdates": 295,
     "factUpdates": 27,
     "placeUpdates": 73,
-    "codexUpdates": 196,
-    "timeOps": 303,
+    "codexUpdates": 197,
+    "timeOps": 304,
     "imagePrompt": 25,
-    "sceneEnded": 107,
+    "sceneEnded": 108,
     "itemUpdates": 7,
-    "questUpdates": 43,
-    "offer": 40,
+    "questUpdates": 44,
+    "offer": 41,
     "moveTo": 20,
     "delegateOps": 4,
     "deeds": 12,
@@ -21420,11 +21539,11 @@
     "_applyFailedOp": 7,
     "newEncounter": 3,
     "encounterOps": 1,
-    "gambitApt": 37,
+    "gambitApt": 38,
     "markDefiningMoment": 1,
     "_engineClosedScene": 3
   },
-  "_opTurns": 328,
+  "_opTurns": 329,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -21432,7 +21551,7 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 44,
+      "applied": 45,
       "rejected": 1,
       "lastWhy": "rejected-shape"
     },
@@ -22401,36 +22520,12 @@
       "kind": "post",
       "name": "The Made Gate",
       "locationId": "gen-the-made-gate",
-      "steward": null,
+      "steward": "pell",
       "obligation": null,
       "condition": "thriving",
       "claimedDay": 16,
       "lastMovedWorldCount": 1667,
       "history": [
-        {
-          "at": null,
-          "from": "holding",
-          "to": "holding",
-          "note": "guarded by Logana"
-        },
-        {
-          "at": null,
-          "from": "holding",
-          "to": "holding",
-          "note": "built a gate that closes (you)"
-        },
-        {
-          "at": null,
-          "from": "holding",
-          "to": "holding",
-          "note": "built a standing ward-line (you)"
-        },
-        {
-          "at": null,
-          "from": "holding",
-          "to": "holding",
-          "note": "built a waygate — made, not found (you)"
-        },
         {
           "at": 1668,
           "from": "holding",
@@ -22460,12 +22555,52 @@
           "from": "thriving",
           "to": "thriving",
           "note": "built a shrine (you)"
+        },
+        {
+          "at": 1680,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "built a mine (the story)"
+        },
+        {
+          "at": 1680,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "hands: Pell Ran Marsh"
+        },
+        {
+          "at": 1680,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "hands: none"
+        },
+        {
+          "at": 1680,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "guarded by nobody"
+        },
+        {
+          "at": 1680,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "hands: Pell Ran Marsh"
+        },
+        {
+          "at": 1680,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "hands: none"
+        },
+        {
+          "at": 1680,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "Pell Ran Marsh appointed keeper"
         }
       ],
       "describedAs": "a gate that was made rather than found",
-      "garrison": [
-        "logana"
-      ],
+      "garrison": [],
       "features": [
         {
           "kind": "gate",
@@ -22511,6 +22646,16 @@
           "craftIds": [],
           "count": 1,
           "day": 69
+        },
+        {
+          "kind": "mine",
+          "family": "material",
+          "name": "a mine",
+          "by": "the story",
+          "craftIds": [],
+          "count": 1,
+          "day": 70,
+          "via": "granted"
         }
       ],
       "neglectPasses": 1,
@@ -22523,13 +22668,14 @@
           "name": "Raised Thing",
           "day": 69
         }
-      ]
+      ],
+      "crew": []
     }
   ],
   "skillUses": {
     "travel": 9,
     "careful": 4,
-    "study": 11,
+    "study": 12,
     "scout": 4,
     "lead": 2,
     "ask": 1,
@@ -22836,6 +22982,24 @@
           "at": 69
         }
       ]
+    },
+    "figure:whois-logana": {
+      "keeps": [
+        {
+          "url": "https://image.pollinations.ai/prompt/animal%20weasel%20skeleton%20huge%20glowing%20undead%20guarding%20a%20portal%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=61389&nologo=true",
+          "prompt": "huge animal bones, animal weasel skeleton huge glowing undead guarding a portal",
+          "note": "huge animal bones",
+          "seedKey": "whois-logana#r1",
+          "at": 70
+        },
+        {
+          "url": "https://image.pollinations.ai/prompt/huge%20animal%20bones%2C%20animal%20weasel%20skeleton%20huge%20glowing%20undead%20guarding%20a%20portal%2C%20Logana%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=61390&nologo=true",
+          "prompt": "huge animal bones, animal weasel skeleton huge glowing undead guarding a portal, Logana",
+          "note": null,
+          "seedKey": "whois-logana#r2",
+          "at": 70
+        }
+      ]
     }
   },
   "purse": {
@@ -23039,6 +23203,14 @@
     {
       "text": "Threshold Post has a mill now, the fiction's work.",
       "announced": true
+    },
+    {
+      "text": "The Made Gate has a mine now, the story's work.",
+      "announced": false
+    },
+    {
+      "text": "Pell Ran Marsh keeps The Made Gate now.",
+      "announced": false
     }
   ],
   "sceneImages": {
@@ -23118,7 +23290,8 @@
     }
   ],
   "figureImages": {
-    "whois-siol": "https://image.pollinations.ai/prompt/elk%20woman%2C%20capable%20armed%20and%20armored.%2C%20Siol%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=49899&nologo=true"
+    "whois-siol": "https://image.pollinations.ai/prompt/elk%20woman%2C%20capable%20armed%20and%20armored.%2C%20Siol%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=49899&nologo=true",
+    "whois-logana": "https://image.pollinations.ai/prompt/huge%20animal%20bones%2C%20animal%20weasel%20skeleton%20huge%20glowing%20undead%20guarding%20a%20portal%2C%20Logana%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=61390&nologo=true"
   },
   "precursorAxes": [],
   "featureOffers": [

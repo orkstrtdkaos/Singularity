@@ -66,8 +66,9 @@
    "level": 3
   },
   {
-   "abilityId": "the_answering",
-   "level": 3
+   "abilityId": "answering",
+   "level": 3,
+   "_idWas": "the_answering"
   },
   {
    "abilityId": "steady_soul",
@@ -121,5 +122,6 @@
  "people": "human",
  "_authoredWhy": "⛑ AUTHORED 2026-09-07 AT ERIK RULING: mythical and legendary need sheets too; mechanically the same as any other, but higher than level 40. ⛔ CCode found that 69 legends resolve through personOpponentFor and sheetFor gave one a LEVEL-40 sheet with NO KIT. ⚠️ 40 is the EPIC floor — resolution.npcStanding.tierFloor reads mythic 85 · legendary 60 · epic 40. ⚑ Authored at L63-67, above the legendary floor. Capacity round(level/2) is 31-33; these carry 16 DELIBERATELY UNDER — a legendary is a hinge and the rest of the kit should be earned by whoever writes the scene, not pre-spent. room is the point.",
  "_tier": "legendary",
- "romanceEligible": false
+ "romanceEligible": false,
+ "_idFix_20260907": "⛑ ID CORRECTIONS 2026-09-07. ⛔ `the_answering` → `answering`: AEVI RENAMED THAT CRAFT HERSELF ON 09-05 to satisfy the leading-article rule, and then used the OLD NAME the next day. ⚠️ `the_fixed_point` → `fixed_point` and `stillwork` → `stillcraft` are the same class — the definite article and a guessed name. ⛔ AN UNRESOLVABLE `abilityId` IS SILENTLY DROPPED, so the sheet would have loaded, validated, and been quietly short. ⚑ Caught by checking every id against the catalogue before declaring done — template step 6."
 }

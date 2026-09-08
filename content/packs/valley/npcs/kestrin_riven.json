@@ -1,0 +1,104 @@
+{
+ "id": "kestrin_riven",
+ "name": "Kestrin of the Riven Marches",
+ "level": 24,
+ "role": "Coliseum champion, the HARM cell — Marcher forms, and a clean stop when it is over",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": true,
+ "domains": {
+  "primary": "marcher",
+  "secondary": "somatic",
+  "tertiary": "verist"
+ },
+ "spectrum": {
+  "violence_peace": -0.3
+ },
+ "subAttributes": {
+  "strength": 11,
+  "agility": 10,
+  "reason": 7,
+  "insight": 10,
+  "presence": 8,
+  "rapport": 5,
+  "craft": 6,
+  "wits": 9
+ },
+ "knowledge": [
+  "Marcher forms, to the letter",
+  "Where a fighter's old injury is, from how they stand"
+ ],
+ "wants": [
+  "A bout fought properly",
+  "To be read as accurately as she reads"
+ ],
+ "fears": "⚠️ A bout that becomes about blood. ⛔ She salutes and she stops, and a crowd that wants otherwise is the thing she cannot control.",
+ "appearance": "Lean and squared-off, forearms scarred to the elbow, and she salutes before every exchange whether or not it is returned.",
+ "voiceHints": "Formal in the ring and plain out of it. She names what she saw and does not soften it.",
+ "reactsToReputation": {
+  "formal": "salutes and means it",
+  "hesitant": "⚠️ punishes it, and says why afterwards",
+  "any": "engages"
+ },
+ "assistTags": [
+  "strike",
+  "guard",
+  "read-a-fight",
+  "watch"
+ ],
+ "abilities": [
+  {
+   "abilityId": "edge",
+   "level": 3,
+   "why": "⚑ `reads-your-stance` — Marcher forms are the Edge"
+  },
+  {
+   "abilityId": "read_the_fight",
+   "level": 3,
+   "why": "⛔ 'she has read your stance since you walked out'"
+  },
+  {
+   "abilityId": "break_the_line",
+   "level": 2,
+   "why": "`punishes-hesitation` — the opening made from a pause"
+  },
+  {
+   "abilityId": "held_line",
+   "level": 2,
+   "why": "a Marcher holds"
+  },
+  {
+   "abilityId": "shieldwork",
+   "level": 2,
+   "why": "the form's other half"
+  },
+  {
+   "abilityId": "disarm",
+   "level": 2,
+   "why": "⚠️ 'they are not here for blood' — she ends it without ending you"
+  },
+  {
+   "abilityId": "perfect_motion",
+   "level": 2,
+   "why": "twenty years in the forms"
+  },
+  {
+   "abilityId": "true_account",
+   "level": 1,
+   "why": "she names what she saw"
+  }
+ ],
+ "personality": {
+  "warmth": 5,
+  "trust": 6,
+  "candor": 9,
+  "patience": 7
+ },
+ "physicality": "ADULT. Lean, hard-used, forty. WHAT CATCHES THE EYE: she salutes an opponent who has not saluted back, every time, and it never reads as condescension.",
+ "intimacyNotes": "⚠️ Formal until she is not. ⛔ She will not discuss the old injury she strikes at in others.",
+ "schemaVersion": 1,
+ "people": "human",
+ "_authoredWhy": "⛑ AUTHORED 2026-09-07. ⛔ THE EIGHT COLISEUM CHAMPIONS WERE NOT NPCs — a name, a threat integer and four tactic tags inside an encounter file, and no sheet anywhere. ⚠️ CCode's matrix measured the consequence: 'every function any opponent can declare, in the whole game: strike, shield', and the win rate correlated with THREAT at −0.95 — ⛔ because threat was nearly the only authored number that varied. ⚑ THE EIGHT CELLS EXIST TO PROVE EVERY CONTRIBUTION FAMILY CAN WIN A FIGHT. They cannot prove it while every champion fights identically. ⚠️ Crafts are drawn from the encounter's OWN prose and tactic tags — nothing invented.",
+ "_isColiseumChampion": true
+}

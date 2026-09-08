@@ -679,9 +679,10 @@
       "transform"
      ],
      "gains": "broaden",
-     "harmRung": "damaging",
+     "harmRung": "none",
      "_nameWas": "The Grafted Limb",
-     "gainAxes": []
+     "gainAxes": [],
+     "_harmRungWas": "damaging"
     },
     {
      "rank": 3,
@@ -693,10 +694,11 @@
       "transform"
      ],
      "gains": "deepen",
-     "harmRung": "damaging",
+     "harmRung": "none",
      "gainAxes": [
       "duration"
-     ]
+     ],
+     "_harmRungWas": "damaging"
     }
    ],
    "challengeTypes": [
@@ -761,7 +763,8 @@
    "_powerSystemWas": "reach_death_life",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_healTyped_20260829": "⛔ `vitality` — ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED. We've moved past that original idea. IT CAN HURT UNDEAD NOW.' ⚠️ A mending with no type is invisible to affinities exactly as an untyped blow is — the same hole at the other end of the arithmetic. ✅ `vitality` mends the living and HARMS the undead; a sheet carrying `vitality: vulnerable` now takes harm from a mending through the ordinary damage path, WITH NO NEW MACHINERY. ⛔ The `decay: absorb` half already worked.",
-   "_harmVerbWhy_20260908": "⛑ RULED 2026-09-08 on CCode's `FINDING_harm_declared_vs_taught`. ⛔ THE MISMATCH IS REAL AND LOAD-BEARING: `battleSkillsForCharacter` builds the player's menu rows from the RECORD's `functions`, one row per verb, and never reads the rank's — while `intent.js` DOES read the per-rank rung. ⚠️ SO A CRAFT GATED AS HARM THAT OFFERS NO HARM VERB FIRES THE LETHAL-INTENT QUESTION AND THEN HANDS THE PLAYER `heal`, `bind`, `ward`. ⚑ AEVI'S RULE FOR WHICH WAY EACH ONE GOES: does the craft KILL BY DOING SOMETHING TO A PERSON, or does it kill by GOING WRONG? ⛔ The first gets the verb. THE SECOND GETS THE RUNG SOFTENED, because a craft whose danger is its FAILURE is not an attack and should not be offered as one. ⚑ HERE: ⛑ THE ONLY ONE THAT NEEDS NO NEW VERB — `transform` IS ALREADY ON THE RECORD and on both damaging ranks. ⚠️ The damage is the graft: 'graft life into what was NOT ALIVE, or was NO LONGER — bone to wood, a heart to a stopped chest.' ⛔ Grafting living tissue onto someone hurts, and the rung says so honestly. ⬜ NO CHANGE — flagging it as already correct, and the gate should read `transform` as sufficient here."
+   "_harmVerbWhy_20260908": "⛑ RULED 2026-09-08 on CCode's `FINDING_harm_declared_vs_taught`. ⛔ THE MISMATCH IS REAL AND LOAD-BEARING: `battleSkillsForCharacter` builds the player's menu rows from the RECORD's `functions`, one row per verb, and never reads the rank's — while `intent.js` DOES read the per-rank rung. ⚠️ SO A CRAFT GATED AS HARM THAT OFFERS NO HARM VERB FIRES THE LETHAL-INTENT QUESTION AND THEN HANDS THE PLAYER `heal`, `bind`, `ward`. ⚑ AEVI'S RULE FOR WHICH WAY EACH ONE GOES: does the craft KILL BY DOING SOMETHING TO A PERSON, or does it kill by GOING WRONG? ⛔ The first gets the verb. THE SECOND GETS THE RUNG SOFTENED, because a craft whose danger is its FAILURE is not an attack and should not be offered as one. ⚑ HERE: ⛑ THE ONLY ONE THAT NEEDS NO NEW VERB — `transform` IS ALREADY ON THE RECORD and on both damaging ranks. ⚠️ The damage is the graft: 'graft life into what was NOT ALIVE, or was NO LONGER — bone to wood, a heart to a stopped chest.' ⛔ Grafting living tissue onto someone hurts, and the rung says so honestly. ⬜ NO CHANGE — flagging it as already correct, and the gate should read `transform` as sufficient here.",
+   "_harmRungWhy_20260908": "⛑ AEVI CORRECTED HERSELF. She first ruled `graftlife` already-correct on the grounds that `transform` was on the record — ⛔ AND HER OWN VERIFICATION DISAGREED, because `transform` is not in the harm family (`strike` / `break` / `hinder`). ⚠️ Reading the ranks properly, THE SOFTENING CASE APPLIES: 'the graft is not the original, AND IT KNOWS IT — the body argues with it for a long time', and r3 is 'the near edge of the Rootkin's own TABOO.' ⛔ THAT IS A COST TO THE PERSON BEING HEALED, NOT DAMAGE DEALT TO A TARGET — the same shape as `calling_back`, and `cannot` already carries it in prose where it belongs. ⚑ A HEALER REGROWING A HAND SHOULD NOT FIRE THE LETHAL-INTENT QUESTION. ⚠️ AND THE LESSON IS CCODE'S OWN, POINTED AT AEVI: she reasoned from a field she remembered instead of the family it belongs to, and the check caught it in the same minute."
   },
   {
    "id": "death_ward",

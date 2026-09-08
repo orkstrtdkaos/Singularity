@@ -1,0 +1,154 @@
+{
+ "id": "the_high_luminary",
+ "name": "Seraphine, the High Luminary",
+ "tier": "legendary",
+ "level": 62,
+ "role": "Absolute authority of the Radiant Plateau; the valley's most powerful aligned figure",
+ "people": "human",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "romanceEligible": false,
+ "homeLocation": "radiant_plateau_edge",
+ "arc": "arc_city_reach",
+ "renown": "world-famous",
+ "domains": {
+  "primary": "blazeborn",
+  "secondary": "lattice",
+  "tertiary": "seraphic"
+ },
+ "spectrum": {
+  "dark_light": 0.85,
+  "chaos_order": 0.7
+ },
+ "subAttributes": {
+  "strength": 9,
+  "agility": 8,
+  "reason": 16,
+  "insight": 15,
+  "presence": 20,
+  "rapport": 12,
+  "craft": 16,
+  "wits": 13
+ },
+ "knowledge": [
+  "The Plateau's photonic infrastructure, entire",
+  "Every faction's position in the valley and what would move it"
+ ],
+ "wants": [
+  "The valley unified under order before What Sleeps Under wakes — convinced only a single strong hand can meet it"
+ ],
+ "fears": "⛔ That she is right about the threat and wrong about the answer. ⚠️ 'Believes her foreclosure is mercy.'",
+ "appearance": "Radiant, seated, and rarely standing. The light in the room is hers before she speaks.",
+ "voiceHints": "Gracious and absolutely settled. She does not argue; she explains what will happen.",
+ "assistTags": [
+  "talk",
+  "guard",
+  "reveal",
+  "craft"
+ ],
+ "abilities": [
+  {
+   "abilityId": "light_borne",
+   "level": 3,
+   "why": "⚑ 'radiant mastery beyond any living practitioner'"
+  },
+  {
+   "abilityId": "last_light",
+   "level": 3,
+   "why": "'in a fight, SHE DOES NOT FIGHT — the light does'"
+  },
+  {
+   "abilityId": "unfaltering_light",
+   "level": 3,
+   "why": "same line"
+  },
+  {
+   "abilityId": "revealing_burn",
+   "level": 3,
+   "why": "Radiance at its top"
+  },
+  {
+   "abilityId": "hold_the_aperture",
+   "level": 3,
+   "why": "⛔ 'commands the Plateau's photonic INFRASTRUCTURE'"
+  },
+  {
+   "abilityId": "riding_order",
+   "level": 3,
+   "why": "lattice secondary — the city answers her"
+  },
+  {
+   "abilityId": "foreclose",
+   "level": 3,
+   "why": "⚠️ 'the foreclosure path made political', and she believes it is mercy"
+  },
+  {
+   "abilityId": "lifted_word",
+   "level": 2,
+   "why": "seraphic tertiary"
+  },
+  {
+   "abilityId": "guardian_angel",
+   "level": 2,
+   "why": "she protects, which is the whole problem"
+  },
+  {
+   "abilityId": "maintained_order",
+   "level": 2,
+   "why": "the Plateau holds"
+  },
+  {
+   "abilityId": "read_the_room",
+   "level": 2,
+   "why": "the valley's most powerful ALIGNED figure"
+  },
+  {
+   "abilityId": "mediators_tongue",
+   "level": 2,
+   "why": "'unify'"
+  },
+  {
+   "abilityId": "resonant_shield",
+   "level": 2,
+   "why": "she is not undefended"
+  },
+  {
+   "abilityId": "kindle",
+   "level": 2,
+   "why": "Blazeborn's first"
+  },
+  {
+   "abilityId": "calm_word",
+   "level": 1,
+   "why": "she does not need volume"
+  },
+  {
+   "abilityId": "bound_witness",
+   "level": 1,
+   "why": "⚑ r1 — she witnesses, but not as her method"
+  }
+ ],
+ "closed": [
+  "shroud",
+  "never_there",
+  "false_stance"
+ ],
+ "personality": {
+  "warmth": 8,
+  "trust": 5,
+  "candor": 8,
+  "patience": 9
+ },
+ "physicality": "ADULT. Seated, luminous, sixties. WHAT CATCHES THE EYE: the room lights toward her and she has stopped noticing.",
+ "canOppose": true,
+ "canAlly": true,
+ "canRecruit": false,
+ "intimacyNotes": "⛔ NOT AVAILABLE. ⚠️ 'She is NOT A VILLAIN — she is the contraction-choice with a good heart and terrible reach.'",
+ "questSeeds": [
+  "⚑ She will offer you the Plateau's backing, and the price is that you agree the valley needs one hand on it.",
+  "⛔ She is right that something is waking and wrong about what to do. Someone she respects could change that, and she respects very few."
+ ],
+ "schemaVersion": 1,
+ "_authoredWhy": "⛑ PROMOTED FROM `npcs/legends.json` TO A FILE OF ITS OWN, 2026-09-08. ⛔ CCODE'S ROSTER: 'authored on disk, never loaded — 4, all in npcs/legends.json', and `state.js` claimed they 'arrive hydrated from legends.roster' WHICH THEY DO NOT. ⚠️ THE FILE IS REGISTERED IN THE MANIFEST AND ITS PEOPLE NEVER REACH THE GAME — the pooled-container failure a third time, after the coliseum champions and the Saehara challengers. ⛔ AND THREE OF THE FIVE ARE HINGES: `the_deep_warden` on FOUR of six arcs, `aevi_the_watcher` on two, `the_last_choirmistress` on two. ⚑ Erik: 'make them fully authored with their arc wants etc. THEY'RE FULL NPCS.' ⚠️ EVERY FIELD BELOW IS CARRIED FROM THE POOLED RECORD — role, power, wants, hooks, seenBefore, approachRequirement, canOppose/canAlly/canRecruit. ⛑ WHAT IS NEW IS ONLY WHAT A SHEET NEEDS: tier from renown, level from the tier floor, domains, subAttributes and a kit.",
+ "_promotedFrom": "npcs/legends.json"
+}

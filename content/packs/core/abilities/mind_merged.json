@@ -360,7 +360,8 @@
      "functions": [
       "persuade",
       "bind",
-      "empower"
+      "empower",
+      "break"
      ],
      "gains": "deepen",
      "harmRung": "lethal",
@@ -370,7 +371,8 @@
       "duration"
      ],
      "_grantsWas_SNG510": "⛔ ADDS FINALITY AND PERSISTENCE. Walk one person to the conclusion where the consistent act is a final one — that the post cannot be held, that they should not continue — AND THEN STOP TALKING. ⚠️ It also no longer needs you present: built as a written or taught case, it goes on working after you have gone.",
-     "_harmRungWas": "⛔ 'severe' is not a rung. -> lethal: grants walk a person to a final act — this is the one rung it has to be (Aevi 2026-08-23)"
+     "_harmRungWas": "⛔ 'severe' is not a rung. -> lethal: grants walk a person to a final act — this is the one rung it has to be (Aevi 2026-08-23)",
+     "_harmVerbAdded_20260908": "⛔ r3 ONLY. r1 settles a matter and r2 compels — neither breaks anyone. ⚑ r3 is 'walk one person to the conclusion where the CONSISTENT ACT IS A FINAL ONE', and it is the rank the lethal rung sits on. ⚠️ r2 is `damaging` and keeps `persuade`/`bind`: being unable to act against a conclusion is not being broken by it."
     }
    ],
    "_merged": "⛔ SNG-450: MERGES The Stated Case (syllogist) and The Necessary Case (cogitant), which did the same job at different energy costs. Erik: 'could be Case Closed, and the flavour goes internal like the move skills did.' ⚠️ RETAGGED SOCIAL — this was `reveal/command/bind` and it is persuasion. ⚠️ ERIK: 'NO to the r3 cost — the case doesn't have to be true.' Removed.",
@@ -461,7 +463,8 @@
    "_rungFix_20260830": "⛔ ability rung -> `lethal`: r3 WALKS SOMEONE TO A CONCLUSION WHERE THE CONSISTENT ACT IS A FINAL ONE, and the ability declared `none` — which glosses as 'this craft HARMS NOTHING, NEVER invent a wound from it'. ⛔ A GM WOULD HAVE BEEN TOLD THE SYLLOGISTS' DARKEST CRAFT IS HARMLESS.",
    "_intensityAuthored_20260830": "⚠️ WAS THE BARE STRING 'moderate' — a magnitude word in the intensity field, so the craft had NO conserve and NO surge and resolved at standard only. ✅ Authored as a pair.",
    "_typed_20260830": "⛔ `judgement` — ⛔ IT WALKS SOMEONE TO A CONCLUSION BY THEIR OWN REASONING — the harm is arriving somewhere true and unbearable, which is INTRINSIC and needs a self that can follow an argument. ⚠️ A `damage`-reaching craft with NO DICE inherits the tier rung (5d6+8 at a level-8 standing) — the same defect as the eleven first-offenses.",
-   "_harmVerbWhy_20260908": "⛑ RULED 2026-09-08 on CCode's `FINDING_harm_declared_vs_taught`. ⛔ THE MISMATCH IS REAL AND LOAD-BEARING: `battleSkillsForCharacter` builds the player's menu rows from the RECORD's `functions`, one row per verb, and never reads the rank's — while `intent.js` DOES read the per-rank rung. ⚠️ SO A CRAFT GATED AS HARM THAT OFFERS NO HARM VERB FIRES THE LETHAL-INTENT QUESTION AND THEN HANDS THE PLAYER `heal`, `bind`, `ward`. ⚑ AEVI'S RULE FOR WHICH WAY EACH ONE GOES: does the craft KILL BY DOING SOMETHING TO A PERSON, or does it kill by GOING WRONG? ⛔ The first gets the verb. THE SECOND GETS THE RUNG SOFTENED, because a craft whose danger is its FAILURE is not an attack and should not be offered as one. ⚑ HERE: ⛔ IT KILLS BY DOING SOMETHING TO A PERSON. r3: 'walk one person to the conclusion where the CONSISTENT ACT IS A FINAL ONE.' ⚑ `break` and not `strike` — nothing is struck; a person's reasoning is broken and they act on it. ⚠️ This is the craft Sethran of the Reasoned Hold carries, and the KNOW cell's teeth."
+   "_harmVerbWhy_20260908": "⛑ RULED 2026-09-08 on CCode's `FINDING_harm_declared_vs_taught`. ⛔ THE MISMATCH IS REAL AND LOAD-BEARING: `battleSkillsForCharacter` builds the player's menu rows from the RECORD's `functions`, one row per verb, and never reads the rank's — while `intent.js` DOES read the per-rank rung. ⚠️ SO A CRAFT GATED AS HARM THAT OFFERS NO HARM VERB FIRES THE LETHAL-INTENT QUESTION AND THEN HANDS THE PLAYER `heal`, `bind`, `ward`. ⚑ AEVI'S RULE FOR WHICH WAY EACH ONE GOES: does the craft KILL BY DOING SOMETHING TO A PERSON, or does it kill by GOING WRONG? ⛔ The first gets the verb. THE SECOND GETS THE RUNG SOFTENED, because a craft whose danger is its FAILURE is not an attack and should not be offered as one. ⚑ HERE: ⛔ IT KILLS BY DOING SOMETHING TO A PERSON. r3: 'walk one person to the conclusion where the CONSISTENT ACT IS A FINAL ONE.' ⚑ `break` and not `strike` — nothing is struck; a person's reasoning is broken and they act on it. ⚠️ This is the craft Sethran of the Reasoned Hold carries, and the KNOW cell's teeth.",
+   "_rankVerbFix_20260908": "⛑ AEVI'S OWN FIX WAS HALF-DONE AND ERIK CAUGHT IT. She added the harm verb to the RECORD and not to any RANK — ⛔ WHICH IS THE EXACT VIOLATION CCODE'S GATE IS NAMED FOR: `abilitiesCombatClaimedNotTaught`, a record claiming combat no rank teaches. ⚠️ She fixed one direction of the mismatch by creating the other. ⚑ THE VERB NOW SITS ON THE RANKS THAT CARRY THE HARM RUNG, and nowhere else — r1 of a craft that only harms at r2 must not offer the verb."
   },
   {
    "powerSystem": "metaphysical",

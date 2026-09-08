@@ -1,0 +1,127 @@
+{
+ "id": "the_scouring_hand",
+ "name": "The Scouring Hand",
+ "level": 65,
+ "role": "Legendary — unmaking as its own end, until nothing is left that could ever need ending",
+ "gender": "neither",
+ "pronouns": "it/its",
+ "sex": null,
+ "domains": {
+  "primary": "unmaker",
+  "secondary": "marcher",
+  "tertiary": "abyssal"
+ },
+ "spectrum": {
+  "destruction_creation": -0.95
+ },
+ "subAttributes": {
+  "strength": 16,
+  "agility": 13,
+  "reason": 11,
+  "insight": 13,
+  "presence": 15,
+  "rapport": 3,
+  "craft": 9,
+  "wits": 11
+ },
+ "knowledge": [
+  "Where a made thing joins",
+  "How much of a thing you can take before it stops being one"
+ ],
+ "wants": [
+  "To unmake everything, until there is nothing left that could ever need ending"
+ ],
+ "fears": "⛔ Finishing. ⚠️ If it finishes, it does not die — IT ARRIVES.",
+ "appearance": "Whatever it has last touched is missing rather than broken.",
+ "voiceHints": "Almost none. It works.",
+ "assistTags": [
+  "strike",
+  "break",
+  "carry",
+  "guard"
+ ],
+ "abilities": [
+  {
+   "abilityId": "last_unmaking",
+   "level": 3
+  },
+  {
+   "abilityId": "undoing_word",
+   "level": 3
+  },
+  {
+   "abilityId": "last_fault",
+   "level": 3
+  },
+  {
+   "abilityId": "ruinwork",
+   "level": 3
+  },
+  {
+   "abilityId": "unmaking_of_walls",
+   "level": 3
+  },
+  {
+   "abilityId": "keystone_blow",
+   "level": 3
+  },
+  {
+   "abilityId": "break_the_line",
+   "level": 3
+  },
+  {
+   "abilityId": "the_known_name",
+   "level": 2
+  },
+  {
+   "abilityId": "edge",
+   "level": 2
+  },
+  {
+   "abilityId": "hurled_weight",
+   "level": 2
+  },
+  {
+   "abilityId": "plain_weight",
+   "level": 2
+  },
+  {
+   "abilityId": "held_line",
+   "level": 2
+  },
+  {
+   "abilityId": "stone_read",
+   "level": 2
+  },
+  {
+   "abilityId": "fault_sense",
+   "level": 2
+  },
+  {
+   "abilityId": "perfect_motion",
+   "level": 1
+  },
+  {
+   "abilityId": "second_wind",
+   "level": 1
+  }
+ ],
+ "closed": [
+  "raised_thing",
+  "held_repair",
+  "set_to_rights"
+ ],
+ "personality": {
+  "warmth": 0,
+  "trust": 2,
+  "candor": 7,
+  "patience": 10
+ },
+ "physicality": "ADULT. Heavy, patient, and marked by everything it has done. WHAT CATCHES THE EYE: the absence behind it.",
+ "intimacyNotes": "⛔ NOT AVAILABLE. ⚠️ Erik's Sovereign lore: 'a villain you fail to stop is a promotion' — this one is the clearest case.",
+ "schemaVersion": 1,
+ "people": "human",
+ "_authoredWhy": "⛑ AUTHORED 2026-09-07 AT ERIK RULING: mythical and legendary need sheets too; mechanically the same as any other, but higher than level 40. ⛔ CCode found that 69 legends resolve through personOpponentFor and sheetFor gave one a LEVEL-40 sheet with NO KIT. ⚠️ 40 is the EPIC floor — resolution.npcStanding.tierFloor reads mythic 85 · legendary 60 · epic 40. ⚑ Authored at L63-67, above the legendary floor. Capacity round(level/2) is 31-33; these carry 16 DELIBERATELY UNDER — a legendary is a hinge and the rest of the kit should be earned by whoever writes the scene, not pre-spent. room is the point.",
+ "_tier": "legendary",
+ "romanceEligible": false
+}

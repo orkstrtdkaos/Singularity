@@ -96,3 +96,26 @@ cosmology this month's Void work stands on has never reached the engine.**
 | **3** | **Sovereign records, three of seven** | ⚑ **Aevi authors, CCode rules the `diminished` shape** |
 | **4** | ⛔ **wire or classify `the_veil` and `power_cosmology`** | CCode |
 | **5** | ⬜ the remaining thin sheets to capacity | Aevi |
+
+---
+
+## §7 — ⛑ AND ONE GATE I BROKE BY FIXING THE THING IT MEASURED
+
+**`§59`: *"the Lightless Seraph is level 1 WITHOUT the dial and its tier floor WITH it — the gap was
+real."*** ⛔ **It now reads `bare 68 → dialed 68`, because he has an AUTHORED level and an authored level
+outranks a derived one.**
+
+⚠️ **THE GATE IS NOT WRONG AND THE CONTENT IS NOT WRONG.** ⚑ **The check proved the tier-floor dial closes a
+gap, and it used the one figure in the corpus who demonstrated that gap — ⛔ so fixing him removed the
+evidence.**
+
+⬜ **Yours, and the fix is a fixture swap:** ⚠️ **the very next check already passes — *"none of the 59
+tier-only people above riffraff is level 1 with the dial"*** — ⛑ **so pick any tier-only person WITHOUT an
+authored level, and the claim survives while the demonstration moves to someone who still demonstrates it.**
+
+⛔ **I did not touch `tests/how_it_works.mjs` for this.** ⚑ *"A content author editing the gate that judges
+her content is the shape this project has ruled against."*
+
+⬜ **I DID move `§70`'s baseline 13 → 14**, because that ratchet's own rule says a landed spec legitimately
+raises it and the forbidden thing is nudging it silently. ⚠️ **The reason and the name are written inline
+beside the number** — `SPEC_one_roster_and_the_mythicals.md`, naming `personOpponentFor`.

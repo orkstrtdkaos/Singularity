@@ -20,7 +20,9 @@
    "waits-for-the-pattern"
   ],
   "yieldAtFraction": 0.25,
-  "_poolsDerived_20260905": "health removed: it was on the retired 3-7 scale and overrode a live synthesised sheet, which made a bout end in a median of ONE turn. The pool now derives from standing (30 + 5/level) through the level the threat implies. `yieldAtFraction` replaces an absolute `yieldAt` because a ratio is scale-free."
+  "_poolsDerived_20260905": "health removed: it was on the retired 3-7 scale and overrode a live synthesised sheet, which made a bout end in a median of ONE turn. The pool now derives from standing (30 + 5/level) through the level the threat implies. `yieldAtFraction` replaces an absolute `yieldAt` because a ratio is scale-free.",
+  "npcId": "sethran_hold",
+  "_npcIdWhy": "⛑ `npcId` ADDED 2026-09-07 — the champion is an AUTHORED PERSON now, not a name and a threat integer. ⛔ CCode's matrix: 'every function any opponent can declare, in the whole game: strike, shield', and win rate correlated with THREAT at −0.95 because threat was nearly the only authored number that varied. ⚑ `personOpponent` and `battleSkillsFor` ALREADY build a fighter from a sheet — this is the link that was missing, not a new mechanism. ⚠️ The archetype fallback stays for everyone without a sheet."
  },
  "party": {
   "ifYouBringPeople": "⚠️ SETHRAN CALLS ALL OF YOU. More people is more pattern, and he reads a party faster than a person — ⛔ he will name which of you the others look to before deciding, and he will be right.",

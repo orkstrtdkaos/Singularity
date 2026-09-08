@@ -1,0 +1,157 @@
+{
+ "id": "stonefast_urd",
+ "name": "Urd Stonefast",
+ "tier": "epic",
+ "level": 47,
+ "role": "Kept Court's mason — a dwarf who builds in the Churn on purpose, and rebuilds",
+ "people": "dwarven",
+ "gender": "man",
+ "pronouns": "he/him",
+ "sex": "male",
+ "romanceEligible": true,
+ "homeLocation": "the_churn",
+ "domains": {
+  "primary": "mason",
+  "secondary": "stillhold",
+  "tertiary": "enginewright"
+ },
+ "spectrum": {
+  "chaos_order": 0.5,
+  "concrete_abstract": -0.8
+ },
+ "subAttributes": {
+  "strength": 15,
+  "agility": 8,
+  "reason": 13,
+  "insight": 11,
+  "presence": 12,
+  "rapport": 11,
+  "craft": 17,
+  "wits": 10
+ },
+ "knowledge": [
+  "⚑ How many times a thing must be rebuilt before the Churn stops taking it — the answer is not a number, it is a temperament",
+  "Which stone the wild half will not touch"
+ ],
+ "wants": [
+  "To finish one building. ⛔ He has been at it for two hundred years and does not consider this a failure"
+ ],
+ "fears": "⚠️ Building somewhere easy. ⛔ He would find out whether it was ever the work or only the difficulty.",
+ "appearance": "Broad, dusty, and cheerful. There is a half-built thing behind him and there always is.",
+ "voiceHints": "Warm, loud, and entirely unbothered. ⚑ He tells you what went wrong last time like it is a good story, and it is.",
+ "reactsToReputation": {
+  "maker": "⚑ hands you a tool and expects you to help",
+  "idle": "talks anyway",
+  "any": "is glad of company"
+ },
+ "assistTags": [
+  "craft",
+  "carry",
+  "make",
+  "guard"
+ ],
+ "abilities": [
+  {
+   "abilityId": "raised_thing",
+   "level": 3,
+   "why": "⚑ he builds. In the Churn. On purpose"
+  },
+  {
+   "abilityId": "stonewise",
+   "level": 3,
+   "why": "'which stone the wild half will not touch'"
+  },
+  {
+   "abilityId": "held_repair",
+   "level": 3,
+   "why": "⛔ AND HE REBUILDS — the craft is the character"
+  },
+  {
+   "abilityId": "boundary_stone",
+   "level": 3,
+   "why": "the Court's walls are his"
+  },
+  {
+   "abilityId": "plain_weight",
+   "level": 3,
+   "why": "dwarven, and it is not decorative"
+  },
+  {
+   "abilityId": "stone_read",
+   "level": 3,
+   "why": "mason primary"
+  },
+  {
+   "abilityId": "stillcraft",
+   "level": 2,
+   "why": "stillhold secondary — a held thing in an unheld place"
+  },
+  {
+   "abilityId": "whats_at_hand",
+   "level": 2,
+   "why": "⚠️ the Churn gives him different materials every time"
+  },
+  {
+   "abilityId": "keystone_blow",
+   "level": 2,
+   "why": "he takes things apart too"
+  },
+  {
+   "abilityId": "tinkers_hand",
+   "level": 2,
+   "why": "enginewright tertiary"
+  },
+  {
+   "abilityId": "dressed_edge",
+   "level": 2,
+   "why": "he made his own tools"
+  },
+  {
+   "abilityId": "the_fixed_point",
+   "level": 2,
+   "why": "the Court's law, in his register"
+  },
+  {
+   "abilityId": "shieldwork",
+   "level": 2,
+   "why": "a builder in a wild place learns"
+  },
+  {
+   "abilityId": "second_wind",
+   "level": 2,
+   "why": "⚑ two hundred years of starting again"
+  },
+  {
+   "abilityId": "makers_eye",
+   "level": 1,
+   "why": "he reads a made thing"
+  },
+  {
+   "abilityId": "calm_word",
+   "level": 1,
+   "why": "he settles a room without meaning to"
+  }
+ ],
+ "closed": [
+  "struck_term",
+  "offered_price",
+  "borne_bargain"
+ ],
+ "personality": {
+  "warmth": 9,
+  "trust": 8,
+  "candor": 9,
+  "patience": 10
+ },
+ "physicality": "ADULT. Broad, grey-bearded, permanently dusty. WHAT CATCHES THE EYE: ⚑ he is DELIGHTED, and there is a half-built thing behind him.",
+ "intimacyNotes": "⚠️ HE IS THE WARMEST THING IN EITHER COURT and there is no catch, which in the Churn is disorienting. ⛔ He gives freely because the Court's law says so and because he would anyway.",
+ "questSeeds": [
+  "⚑ He will hand you a tool and expect you to help, and he will not explain what you are building.",
+  "⛔ He has never built anywhere easy and is afraid to find out why. ⚠️ Someone could ask him."
+ ],
+ "schemaVersion": 1,
+ "_authoredWhy": "⛑ THE KEPT COURT, AUTHORED 2026-09-08 AT ERIK'S DIRECTION: 'There needs to be an ELVEN COURT in the chaos realm that COMBINES THE FAE AND FANTASY RACES and is OPPOSED TO THE HOLLOW COURT.' ⛔ AND THE OPPOSITION IS NOT FAE-VS-FAE. `peoples_of_kind` already says the Wild Half is churnfolk [FAE], abyssal [HORNED] and unmaker — ring 2, 3, 4 — and THE HOLLOW COURT IS THAT TAKEN PURE: one disposition, absolute. ⚑ SO ITS OPPOSITE IS A COALITION — elven, dwarven, ent, horizon-walker — PEOPLES WHO LIVE IN THE CHURN AND REFUSE TO DISSOLVE INTO IT. ⚠️ THE TWO LAWS ARE THE WHOLE DESIGN, AND BOTH ARE TERRIBLE: ⛔ THE HOLLOW COURT TRADES. Nobody lies, the price is named aloud, you get precisely what you asked for, and you leave hollowed. ⛔ THE KEPT COURT WILL NOT TRADE AT ALL. What they give they give FREELY, and what they withhold cannot be bought — there is no price, no term, no lever. ⚠️ You cannot purchase their help, and if they judge you unworthy of it THERE IS NOTHING YOU CAN OFFER. ⚑ AND IT IS THE SETTING'S CENTRAL ARGUMENT ONE SCALE DOWN: 'The Poles Pull… the counter is HOLDING THE MIDDLE OPEN.' The Kept Court is the Wild Half's own resistance to its own pole.",
+ "communityId": "churn.kept_court",
+ "_court": "the_kept_court",
+ "_opposes": "the_hollow_king"
+}

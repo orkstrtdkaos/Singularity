@@ -1720,3 +1720,55 @@ already computes one at a time without noticing. ⛔ **The battle menu is the su
 craft — all of it is arithmetic the player currently experiences only as an unexplained number in a
 receipt.** ➡️ **The ground card is where that work becomes visible, and it is showing on one screen out of
 five.**
+
+---
+
+## ⛔ NPC SHEETS: 7 OF 49 CARRY ABILITIES, AND GENERATION IS THE ANSWER
+
+**Erik 2026-09-07:** *"make sure the npc authoring is in the backlog too — we need to have those sheets
+either authored, or **more likely generated**. We need to make sure the **npc sheet generation and evolution
+engine is really good**."*
+
+### ⚠️ MEASURED 2026-09-07
+
+| | |
+|---|---|
+| authored NPC files | **56** |
+| ⛔ **carrying `abilities[]`** | ⛔ **15** — the 7 interiority/promoted people, and the 8 champions authored today |
+| ⛔ **41 carry NOTHING** | ⚠️ **every fight against them SYNTHESISES**, and until today synthesis meant `strike, shield` |
+| encounters with an authored `opponent.skills[]` | ⛔ **0 of 17** |
+
+⛑ **AND THE COLISEUM WAS THE PROOF: eight champions, eight authored fighting styles, and none of them was a
+PERSON.** ⚠️ A name, a threat integer, four tactic tags. ⛔ **Win rate correlated with threat at −0.95,
+because threat was nearly the only authored number that varied.**
+
+### ⬜ AUTHORING 56 SHEETS BY HAND IS THE WRONG ANSWER
+
+⚑ **Erik is right that it should be GENERATED.** ⚠️ **And the pieces exist and are not joined:**
+
+| built | ⬜ |
+|---|---|
+| ⚑ `kitFor` | draws a kit from `domains` + level + `skillsObserved` — ⛔ **and returns `needsDomains` for the 41 who have none** |
+| ⚑ `growthFor` | **R37's three proximities** — acquaintance, charge, deeds, stacking |
+| ⚑ `sheetFor` | authored WINS, derived FILLS — ⚠️ **the contract is already right** |
+| ⚑ `skillsObserved` | ⛔ **`growthFor`'s own evidence field, and it is how all 15 authored sheets were written** |
+| ⚑ **the family archetypes** | ⚠️ **the fallback below all of it, landed 09-07** |
+
+### ⬜ WHAT A GOOD GENERATION ENGINE OWES
+
+| | |
+|---|---|
+| ⛔ **`domains` FIRST** | ⚠️ **`kitFor` on a person with none returns `band: "open"` and draws from the WHOLE CATALOGUE** — the trap that caught Pell and Veth. ⚑ **A generated person needs a `{primary, secondary, tertiary}` before anything else** |
+| ⚑ **draw from what the story SHOWED** | ⛔ `skillsObserved` is evidence, not decoration — **Mara's *"reading a technical expert's reaction as diagnostic data"* became `keen_appraisal` r3** |
+| ⚑ **tactic tags are a kit** | ⚠️ **43 tags now map to a contribution family; the same map should seed a generated sheet** |
+| ⛔ **absences are authored too** | ⚠️ **Veth's missing `calling_back` is a JUDGEMENT, and `closed[]` is the field.** A generator that only adds is half a generator |
+| ⚑ **and it must EVOLVE** | ⛔ **R39: a minted braid is one rank that becomes what its use makes it, via `practice.coActivations`** — ⚠️ **the same evidence loop should grow an NPC's sheet, and `growthFor` is already the reader** |
+
+### ⬜ AND THE ORDER
+
+**1.** ⛔ **`domains` for the 41** — ⚠️ derivable from `assistTags`, `role` and `communityId`, and **nothing
+else works without it**.
+**2.** generate a kit from domains + level + `skillsObserved`.
+**3.** ⚑ **let `growthFor` write** — R37's rates are ruled and a gained craft starts at r1 (Erik, 09-02).
+**4.** ⬜ **hand-author only the hinges** — ⚠️ **the 15 that exist are the ones the story leans on, and that
+is the right population to have done by hand.**

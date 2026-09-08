@@ -1,0 +1,143 @@
+{
+ "id": "the_last_choirmistress",
+ "name": "Ledda, the Last Choirmistress",
+ "tier": "epic",
+ "level": 48,
+ "role": "The one who survived learning the Sunken Choir's full song, and walked away",
+ "people": "human",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "romanceEligible": false,
+ "homeLocation": "sunken_choir",
+ "arc": "arc_precursor_waking",
+ "renown": "famous",
+ "domains": {
+  "primary": "threnodist",
+  "secondary": "numinous",
+  "tertiary": "lattice"
+ },
+ "spectrum": {
+  "emotional_logical": -0.5,
+  "mechanical_spiritual": 0.4
+ },
+ "subAttributes": {
+  "strength": 7,
+  "agility": 8,
+  "reason": 13,
+  "insight": 17,
+  "presence": 15,
+  "rapport": 10,
+  "craft": 12,
+  "wits": 11
+ },
+ "knowledge": [
+  "The Choir's full song, and its price",
+  "⚑ How to take from the deep without being taken",
+  "What the song cost her, exactly"
+ ],
+ "wants": [
+  "To keep anyone else from making her mistakes, and to be left alone with the grief of what it cost"
+ ],
+ "fears": "⚠️ Someone learning it badly. ⛔ She would have to go back.",
+ "appearance": "Older than her years and entirely composed. She does not sing where anyone can hear.",
+ "voiceHints": "Warm, brief, and closed on one subject. She will teach anything except that.",
+ "assistTags": [
+  "study",
+  "tend",
+  "talk",
+  "precursor"
+ ],
+ "abilities": [
+  {
+   "abilityId": "worldsong",
+   "level": 3,
+   "why": "⚑ 'sonic mastery to rival the Luminary's light'"
+  },
+  {
+   "abilityId": "keening",
+   "level": 3,
+   "why": "the Choir's song"
+  },
+  {
+   "abilityId": "names_of_the_lost",
+   "level": 3,
+   "why": "'the grief of what the song cost her'"
+  },
+  {
+   "abilityId": "carried_weight",
+   "level": 3,
+   "why": "she carries it"
+  },
+  {
+   "abilityId": "sustained_chord",
+   "level": 3,
+   "why": "⛔ 'how to take from the deep WITHOUT BEING TAKEN' — the held note is the technique"
+  },
+  {
+   "abilityId": "resonant_anchor",
+   "level": 3,
+   "why": "the same craft, defensively"
+  },
+  {
+   "abilityId": "thin_place",
+   "level": 2,
+   "why": "she stood in one and came back"
+  },
+  {
+   "abilityId": "numen_sense",
+   "level": 2,
+   "why": "numinous secondary"
+  },
+  {
+   "abilityId": "grief_that_stops",
+   "level": 2,
+   "why": "authored grief"
+  },
+  {
+   "abilityId": "quiet_the_room",
+   "level": 2,
+   "why": "'left alone'"
+  },
+  {
+   "abilityId": "steady_soul",
+   "level": 2,
+   "why": "⚑ she is the counter-example to Corvane — she paid on purpose and lived"
+  },
+  {
+   "abilityId": "resonant_shield",
+   "level": 2,
+   "why": "how she survived"
+  },
+  {
+   "abilityId": "order_sense",
+   "level": 2,
+   "why": "lattice tertiary"
+  },
+  {
+   "abilityId": "true_account",
+   "level": 1,
+   "why": "she does not soften what it cost"
+  }
+ ],
+ "closed": [
+  "hastened_grey"
+ ],
+ "personality": {
+  "warmth": 8,
+  "trust": 6,
+  "candor": 9,
+  "patience": 9
+ },
+ "physicality": "ADULT. Composed, prematurely grey, fifties. WHAT CATCHES THE EYE: she never sings, and everyone in the room knows why.",
+ "canOppose": true,
+ "canAlly": true,
+ "canRecruit": "mentor",
+ "intimacyNotes": "⚠️ 'She may relent for someone worth teaching.' ⛔ The one closed subject is what the song took, and a GM should let it stay closed until it does not.",
+ "questSeeds": [
+  "⚑ She is the mentor for the Precursor and sonic path, and she will refuse you once before she agrees.",
+  "⛔ Someone is learning the Choir's song badly. She knows, and going back is the one thing she said she would never do."
+ ],
+ "schemaVersion": 1,
+ "_authoredWhy": "⛑ PROMOTED FROM `npcs/legends.json` TO A FILE OF ITS OWN, 2026-09-08. ⛔ CCODE'S ROSTER: 'authored on disk, never loaded — 4, all in npcs/legends.json', and `state.js` claimed they 'arrive hydrated from legends.roster' WHICH THEY DO NOT. ⚠️ THE FILE IS REGISTERED IN THE MANIFEST AND ITS PEOPLE NEVER REACH THE GAME — the pooled-container failure a third time, after the coliseum champions and the Saehara challengers. ⛔ AND THREE OF THE FIVE ARE HINGES: `the_deep_warden` on FOUR of six arcs, `aevi_the_watcher` on two, `the_last_choirmistress` on two. ⚑ Erik: 'make them fully authored with their arc wants etc. THEY'RE FULL NPCS.' ⚠️ EVERY FIELD BELOW IS CARRIED FROM THE POOLED RECORD — role, power, wants, hooks, seenBefore, approachRequirement, canOppose/canAlly/canRecruit. ⛑ WHAT IS NEW IS ONLY WHAT A SHEET NEEDS: tier from renown, level from the tier floor, domains, subAttributes and a kit.",
+ "_promotedFrom": "npcs/legends.json"
+}

@@ -424,12 +424,54 @@ const OFFENSIVE_RE = new RegExp(String.raw`\b(`
     .join("|") + String.raw`)\b`, "i");
 
 const claimsCombat = (a) => (a.functions || []).some(f => HARM_FUNCTIONS.has(String(f)));
-const teachesCombat = (a) => (a.tree || a.ranks || []).some(r => OFFENSIVE_RE.test(String(r.grants || "")));
+// The rungs that ARE harm. `none` is the fourth value and it is the discriminating one: 919 of 1215
+// authored ranks carry it, so reading this field is not a way of saying yes to everything.
+const HARMFUL_RUNGS = new Set(["damaging", "incapacitating", "lethal"]);
+// 147c ASKS A MECHANICAL QUESTION, SO READ THE MECHANICAL FIELDS. This used to grep the rank's `grants`
+// PROSE for an offensive word, and prose moved under it: Aevi rewrote eight body/weapon crafts (d27fca4b)
+// and four went red — drawn_bow, quick_hands, plain_weight, cast_twin — every one of which plainly deals
+// damage and says so in dice ("DEALS 2d6 DAMAGE", "for 1d6", "2d6 SHADOW"). The rule was never wrong
+// about them; the READER was looking in the wrong column. Each of those ranks already carries
+// `functions: ["strike"]` and `harmRung: "damaging"` — the answer, machine-readable, one field away.
+// ⛔ A GATE THAT GREPS PROSE MEASURES THE WORDING AND REPORTS IT AS THE MECHANIC. It goes red when an
+// author improves a sentence and stays green when a craft is genuinely toothless but well-described —
+// wrong in BOTH directions, which is worse than merely noisy. All 429 authored records carry per-rank
+// `functions` AND `harmRung`, so there is no coverage argument for the prose reading either.
+const teachesCombat = (a) => (a.tree || a.ranks || []).some(r =>
+  (r.functions || []).some(f => HARM_FUNCTIONS.has(String(f))) || HARMFUL_RUNGS.has(String(r.harmRung)));
 const combatUntaught = abilityRecords.filter(a => claimsCombat(a) && !teachesCombat(a));
 // ⚠️ NAME THEM. A ratchet that reports a COUNT and not the offenders is a number an author cannot act
 // on — "4" sends whoever reads it hunting through 382 abilities for the four. Printed on every run, not only
 // on regression, so a rising number arrives with its cause attached.
 if (combatUntaught.length) console.log(`note  ${combatUntaught.length} abilit(ies) claim combat and no rank grants teaches it: ${combatUntaught.map(a => a.id || a.name).join(", ")}`);
+
+// ⛑ THE GUARD CAN STILL FAIL. A field reader that returns true for everything would look exactly like a
+// clean corpus, so prove the discrimination rather than trusting it: a synthetic craft that claims a harm
+// verb and whose every rank is `harmRung: none` with no harm function MUST be caught.
+{
+  const canary = { id: "_canary", functions: ["strike"], tree: [{ rank: 1, harmRung: "none", functions: ["sense"], grants: "You strike a heroic pose and break the tension." }] };
+  const caught = claimsCombat(canary) && !teachesCombat(canary);
+  console.log(`${caught ? "ok  " : "FAIL"}  combat-claimed-not-taught guard can fail (a harmless rank whose PROSE says 'strike'/'break' is still caught)`);
+  if (!caught) failures.push("combat-untaught guard is vacuous");
+}
+
+// ⚠️ AND THE SAME RULE READ THE OTHER WAY. 147c says: if it can fight, a rank says HOW. The inverse is
+// just as much a mismatch — a rank that deals harm inside a record whose own `functions` never claim it.
+// It matters because `craftmechanics.js` falls back to the RECORD's `functions` when a rank is silent, so
+// the record-level list is what a caller sees first. Reported, not ratcheted: whether these should declare
+// the verb or soften the rank is Aevi's call, and a ratchet would be me making it for her.
+// ⚠️ SPLIT, NOT LUMPED. The flat list is 15 and SEVEN OF THEM ARE CORRECT: `incapacitating` is a rung and
+// `bind`/`command` are verbs, so a binding craft that stops someone is not misdeclared — harm is
+// strike/break/hinder and binding is not in that family. Reporting 15 would send an author to seven false
+// alarms, which is how a note stops being read. Only the first two groups are actually mismatched.
+const DAMAGING_RUNGS = new Set(["damaging", "lethal"]);
+const rankHarmVerb = (a) => (a.tree || a.ranks || []).some(r => (r.functions || []).some(f => HARM_FUNCTIONS.has(String(f))));
+const combatUnclaimed = abilityRecords.filter(a => !claimsCombat(a)
+  && (a.tree || a.ranks || []).some(r => DAMAGING_RUNGS.has(String(r.harmRung))));
+const verbOnlyUnclaimed = abilityRecords.filter(a => !claimsCombat(a) && rankHarmVerb(a)
+  && !(a.tree || a.ranks || []).some(r => DAMAGING_RUNGS.has(String(r.harmRung))));
+if (combatUnclaimed.length) console.log(`note  ${combatUnclaimed.length} abilit(ies) DEAL DAMAGE in a rank whose record names no harm verb — battleSkillsForCharacter builds its menu rows from the RECORD's 'functions', so these are gated as harm (intent.js reads the per-rank rung) while offering no harm verb to declare: ${combatUnclaimed.map(a => a.id + "[" + (a.functions || []).join("/") + "]").join(", ")}`);
+if (verbOnlyUnclaimed.length) console.log(`note  ${verbOnlyUnclaimed.length} abilit(ies) add a harm verb in a rank the record omits: ${verbOnlyUnclaimed.map(a => a.id + "[" + (a.functions || []).join("/") + "]").join(", ")}`);
 
 // ---------- SNG-152 §5e: the gate that makes this the LAST truncation fix ----------
 // The spec asked for this and I shipped without it, so corrections.js — listed in my own sweep

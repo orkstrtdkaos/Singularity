@@ -18,7 +18,7 @@
   "staged_crafts_check": 0,
   "craft_crit": 0,
   "world_drive_audit": 0,
-  "wiring_audit": 2,
+  "wiring_audit": 1,
   "how_it_works": 0,
   "save_fixtures": 0,
   "engine_map --check": 0,
@@ -27,6 +27,7 @@
  },
  "_verification_ledger": "⛔ CCode 2026-09-04: this suite exits 1 BY DESIGN whenever the ledger has red rows (it lists the known content_ci reds). It had been counted as 0 because a non-zero exit with no FAIL line read as green — run_tests.mjs now counts a crash or a bare non-zero exit as at least 1. Baselined at 1 deliberately, not hidden. wiring_audit 3 → 2 locked in (the ratchet asked for it on 09-03).",
  "_notes": {
+  "wiring_audit": "2026-09-08 (2→1): `abilitiesCombatClaimedNotTaught` went 0→4 on Aevi's d27fca4b and the CONTENT was never wrong — drawn_bow, quick_hands, plain_weight and cast_twin all deal damage and say so in dice. The gate grepped each rank's `grants` PROSE for an offensive word, so rewording a sentence turned it red. Every one of those ranks already carries `functions: [\"strike\"]` and `harmRung: \"damaging\"`; the reader was looking in the wrong column. Now reads the fields (429/429 records carry both), which is not vacuous — `harmRung: none` covers 919 of 1215 ranks — and a canary proves the guard can still fail. Lowered by fixing the reader, not by lowering the bar. `testOnlyExports` (19 vs 7) is the one remaining red and is NOT from this session: the newest of the nineteen dates to 2026-09-04, the oldest to 07-11.",
   "content_ci": "2026-09-08 (8→9): NOT a regression of mine — measured at HEAD in a worktree, the same nine fail there: SNG-167 want-without-seed sits at 51 against the 47 recorded (Aevi's content), and CCODE-55 is red at HEAD. The baseline was stale against HEAD; moved in place because --rebaseline rewrites this file and drops _notes/_verification_ledger. Her backlog ratchet, her call to work down.   // 2026-09-07 (11→8): Aevi’s content on the night of 09-06 (Greywater Stilts, the 18 re-measured layouts, Millbrook’s Long Fields and what followed) closed three more want-without-seed reds; the hook measured 8 on the v1.9.404 push. Locked in.   // 2026-09-06 (12→11): Aevi's Millbrook's Long Fields commit (c2abf5c4) closed one more want-without-seed red; the hook measured 11 on the push that followed. Locked in.   // 2026-09-06 (14→12): Aevi’s content pushes tonight (Greywater Stilts moved to flat ground, all 18 local layouts re-measured against the live terrain, Millbrook’s Long Fields authored) closed two of her want-without-seed reds. Measured 12 on two consecutive ratchet runs; locked in deliberately.   // 2026-09-06 (13→14): SNG-167 §2 want-without-seed went 47→48 on Aevi content pushed today (precursor party clauses + the Assay lore). Measured at HEAD with my changes stashed: still 14, so it is not mine. Her backlog ratchet, her call to work down."
  }
 }

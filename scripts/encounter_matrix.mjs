@@ -100,7 +100,11 @@ function fight(encId, def, skill, weave, seed) {
         rng, day: 100, catalog, party: null });
       rounds++;
       const rr = played.rr;
-      for (const fx of (rr?.state?.effects || [])) effectsSeen.add(`${fx.side}:${fx.kind}`);
+      // ⚠ THE SIGNATURE MUST BE ABLE TO SEE A DIFFERENCE OR IT MANUFACTURES "GENERIC". Recording only side:kind
+      // could not distinguish two crafts of one verb — the effect KIND is per-verb, so every persuade looked alike
+      // even though `persuade` has crafts at tiers 1, 2 and 4 with authored mechanics. CCODE-77 scales an effect's
+      // ROUNDS from the craft's own duration, so carrying value and rounds is what makes tier visible here.
+      for (const fx of (rr?.state?.effects || [])) effectsSeen.add(`${fx.side}:${fx.kind}:${fx.value}:${fx.roundsLeft}`);
       damageDealt += Math.max(0, before - (c.activeEncounter.state.opponentHealth ?? 0));
       if (rr?.ended) { ended = true; outcome = rr.outcome || "ended"; }
       if ((c.health ?? 0) <= 0) { ended = true; outcome = outcome || "player_down"; }

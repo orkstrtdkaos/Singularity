@@ -9551,9 +9551,37 @@ console.log("\n── §145 · the braid payoff reaches the verbs that leave som
   const fns145 = new Set();
   for (const a of Object.values(C145.abilities || {})) for (const f of (a.functions || [])) fns145.add(f);
   const effectless = [...fns145].filter(f => !withFx.has(f));
-  gap("§10: a braid is a bare number for the verbs that leave nothing — CCODE-37's payoff reaches only the effect-bearing half",
-    effectless.length > 0,
-    `${withFx.size} of ${fns145.size} verbs leave an effect; ${effectless.length} do not: ${effectless.sort().join(", ")}`);
+  // ✅ CLOSED 2026-09-07 by Aevi, who authored all 15. Asserted CLOSED now, so a verb losing its row goes RED
+  // rather than quietly shrinking the braid back to a number.
+  check("§145: ⛔ THE GAP IS CLOSED AND STAYS CLOSED — every verb a craft can declare leaves something behind",
+    effectless.length === 0, effectless.sort().join(", "));
+  // ⚑ AND THE PAYOFF ITSELF, on the pair Aevi named: "the row that makes `strike ⋈ break` stop being '+4 and
+  // nothing else'". Two effects standing after one turn is CCODE-37's whole promise.
+  {
+    const def146 = { id: "d", type: "duel", opponent: { name: "a foe", health: 60, threat: 30, tacticTags: ["duelist"] } };
+    const opp146 = SBM.synthesizeOpponentSheet(def146.opponent, sb145);
+    const play146 = (lead, woven) => {
+      const st = ENM.startEncounter(def146, { oppSheet: opp146 });
+      let seed = 777; const rng = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return (seed % 100000) / 100000; };
+      const decl = { function: lead, tier: 3, rank: 2, attribute: "practical", intensity: "standard", name: `the ${lead}`,
+        ...(woven ? { woven: { function: woven, tier: 3, rank: 2, name: `the ${woven}` } } : {}) };
+      const rr = ENM.skillBattleRound(st, def146, decl, { character: { attributes: { practical: 5, mental: 4 }, energy: 100 },
+        content: C145, rules: C145.rules, sb: sb145, steps: C145.intensity.steps, rng, phase: "action", tickEffects: true });
+      return (rr.state.effects || []).map(f => `${f.side}:${f.kind}`);
+    };
+    check("§145: ⛔ `strike ⋈ break` LEAVES TWO THINGS STANDING — the braid is no longer \"+4 and nothing else\"",
+      play146("strike", "break").length > play146("strike", null).length,
+      JSON.stringify(play146("strike", "break")));
+    // ⚑ AEVI'S SHARED-KIND RULE: mend/heal/restore are all `mending`, move/travel are `moving`, make/transform/
+    // summon are `shaped` — so weaving within a family EXTENDS one layer instead of stacking two.
+    for (const [a, b] of [["mend", "heal"], ["move", "travel"], ["make", "summon"]]) {
+      const mine = play146(a, b).filter(k => k.startsWith("player:"));
+      check(`§145: ⚑ a family EXTENDS rather than stacks — ${a} ⋈ ${b} leaves ONE layer`,
+        mine.length === new Set(mine).size && mine.length === 1, JSON.stringify(mine));
+    }
+    check("§145: ⚑ …while two DIFFERENT kinds both stand — extending is not a cap on braiding",
+      play146("shield", "empower").filter(k => k.startsWith("player:")).length === 2);
+  }
   // ⚑ AND THE SWEEP ITSELF IS WIRED, or the next person cannot reproduce any of this.
   check("§145: ⚑ the matrix drives the PRODUCTION path — the same three functions the panel calls",
     (() => {

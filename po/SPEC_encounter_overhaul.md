@@ -787,3 +787,79 @@ resolution, which is worse than an inert one because it looks like it worked.*
 - ⚑ **Four `sunk_assay_*` records are design notes, not encounters** — the sweep names them rather than
   silently skipping them.
 - ⚑ **No crashes anywhere**, including all 756 braids.
+
+---
+
+# PART SEVEN — THE 15 VERBS LAND, AND THE UNOPPOSED SURFACE JUST DOUBLED
+
+**Author:** CCode (engine) · **2026-09-07** · ✅ **Aevi's `e78676d4` verified end to end (§145).**
+
+---
+
+## §27 — ✅ IT WORKS, AND HERE IS THE PROOF
+
+| | before | after |
+|---|---|---|
+| verbs that leave something behind | 13 of 28 | ⚑ **28 of 28** |
+| effectless pairs weaving identically | ⛔ **105 of 105** | ⚑ **0 of 0** |
+| dead braids in 756 played | 4 | ⚑ **0** |
+| declarations that can never touch the foe | 73 | ⚑ **47** |
+
+⛑ **The pair you named by name:**
+
+```
+strike alone   →  opponent:reeling(-2, 1r)                            dmg 26
+strike ⋈ break →  opponent:reeling(-2, 1r) + opponent:opened(-3, 2r)   dmg 26
+```
+
+⚑ **Two things standing after one turn — CCODE-37's promise, landing for the first time.**
+
+✅ **AND THE SHARED-KIND RULE HOLDS:** `mend ⋈ heal`, `move ⋈ travel`, `make ⋈ summon` each leave **one**
+layer (a family EXTENDS), while `shield ⋈ empower` leaves **two** (different kinds both stand). ⚠️ Gated, so
+a future verb that picks the wrong `kind` fails rather than quietly stacking into invulnerability.
+
+✅ **`open` is fixed** — you took the matrix's one finding that was not one of the social three, and it is no
+longer generic.
+
+> ⚠️ **AND A CORRECTION TO MY OWN REPORT.** The re-run said `persuade`, `bargain` and `provoke` still
+> "resolved identically across every craft". ⛔ **That was my probe, not your content.** My signature recorded
+> only `side:kind`, and an effect's KIND is per-verb — so it could not see two crafts of one verb differing,
+> even though those verbs carry crafts at tiers 1, 2 and 4 with authored mechanics. CCODE-77 scales an
+> effect's ROUNDS from the craft's own duration, so the signature now carries value and rounds, and the
+> finding drops to **zero**. I would have reported three defects of yours that were mine.
+
+---
+
+## §28 — ⛔ WHAT THIS MAKES URGENT: THE UNOPPOSED SURFACE NEARLY DOUBLED
+
+**Erik's ruling is still unbuilt — §A is last in the agreed order — so every opponent-targeting effect lands
+on the ACTOR'S OWN ROLL, with no resistance from the target.**
+
+| | before | after |
+|---|---|---|
+| verbs that impose a condition | 4 | ⛔ **9** |
+| craft-authorings that can impose one | 169 | ⛔ **320** (1.9×) |
+
+⛔ **NEW AND UNOPPOSED:** `strike` (78 crafts · −2 · 1r) · `break` (49 · −3 · 2r) · `bargain` (12 · −2 · 2r) ·
+`provoke` (7 · −2 · 2r) · `persuade` (5 · −3 · 2r).
+
+⚠️ **`strike` is the big one.** 78 crafts, and every landed blow now leaves a debuff that the target never got
+to resist. ⛑ Your own §4 says it plainly: *"a social craft that landed automatically would be the worst
+mechanic in the game."* ⚑ **That argument now applies to the most common verb in the game as well.**
+
+➡️ **This is not an objection to the content — it is the right content, and it makes §A the next thing to
+build rather than the last.** ⬜ Erik's §7.5 order put §A last so the fight would be legible before it was
+rebalanced. **The surface is legible now** (four zones shipped, the braid pays, every verb leaves a trace).
+⛔ **I think §A moves up. That is Erik's call, and it is the only one I am still holding work on.**
+
+---
+
+## §29 — ⚠️ STILL OPEN, UNCHANGED BY THIS COMMIT
+
+- ⛔ **`deceive` still carries `deniesPhase: "setup"`, and nothing asks for that phase** — so no craft can shut
+  a step. §10's gap stands, and §6 says why it must wait for §A rather than be renamed.
+- ⛔ **The defensive champions are still the easiest fights**: sustain **73%**, protect **72%**, restore
+  **57%**, against 8–18% everywhere else. ⚠️ The new effects did not move this, and they were never going to
+  — those kits still cannot press. §22's residual, unchanged.
+- ⛔ **Two cells still get the wrong family** (§21): `reads-your-stance → influence` puts the influence kit on
+  the HARM champion, and PROTECT's own three tags are unmapped.

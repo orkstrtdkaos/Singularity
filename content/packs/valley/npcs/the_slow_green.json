@@ -1,0 +1,160 @@
+{
+ "id": "the_slow_green",
+ "name": "The Slow Green",
+ "tier": "epic",
+ "level": 45,
+ "role": "Kept Court's ent — a wood that grows in a place where nothing gets to finish growing",
+ "people": "ent",
+ "gender": "neither",
+ "pronouns": "they/them",
+ "sex": null,
+ "romanceEligible": false,
+ "homeLocation": "the_churn",
+ "domains": {
+  "primary": "rootkin",
+  "secondary": "hourkeeper",
+  "tertiary": "stillhold"
+ },
+ "spectrum": {
+  "death_life": 0.7,
+  "chaos_order": 0.3,
+  "space_time": -0.4
+ },
+ "subAttributes": {
+  "strength": 14,
+  "agility": 4,
+  "reason": 10,
+  "insight": 16,
+  "presence": 13,
+  "rapport": 8,
+  "craft": 9,
+  "wits": 7
+ },
+ "knowledge": [
+  "What was growing here before, and before that",
+  "⚠️ Exactly how long a thing needs, which is always longer than it is given"
+ ],
+ "wants": [
+  "One season that runs its whole length"
+ ],
+ "fears": "⛔ Being hurried. ⚠️ It is the only thing that can actually harm them and the Churn does it constantly.",
+ "appearance": "Growing, visibly, slowly, and in the wrong direction for the wind.",
+ "voiceHints": "Very slow. ⚠️ They will finish the sentence, and you should wait.",
+ "reactsToReputation": {
+  "patient": "⚑ opens, over some hours",
+  "hasty": "continues at their own speed",
+  "any": "grows"
+ },
+ "assistTags": [
+  "tend",
+  "guard",
+  "watch",
+  "carry"
+ ],
+ "abilities": [
+  {
+   "abilityId": "root_that_holds",
+   "level": 3,
+   "why": "⚑ they hold, in the place that holds nothing"
+  },
+  {
+   "abilityId": "carried_green",
+   "level": 3,
+   "why": "rootkin primary"
+  },
+  {
+   "abilityId": "bark_and_briar",
+   "level": 3,
+   "why": "an ent"
+  },
+  {
+   "abilityId": "kept_hour",
+   "level": 3,
+   "why": "⛔ hourkeeper secondary — 'exactly how long a thing needs'"
+  },
+  {
+   "abilityId": "the_taking_root",
+   "level": 3,
+   "why": "they take root anywhere, and that is the argument"
+  },
+  {
+   "abilityId": "the_fixed_point",
+   "level": 2,
+   "why": "the Court's law"
+  },
+  {
+   "abilityId": "stillcraft",
+   "level": 2,
+   "why": "stillhold tertiary"
+  },
+  {
+   "abilityId": "green_road",
+   "level": 2,
+   "why": "the wood remembers a way"
+  },
+  {
+   "abilityId": "hourcraft",
+   "level": 2,
+   "why": "duration"
+  },
+  {
+   "abilityId": "plain_weight",
+   "level": 2,
+   "why": "a tree is heavy"
+  },
+  {
+   "abilityId": "held_line",
+   "level": 2,
+   "why": "they do not move"
+  },
+  {
+   "abilityId": "steady_soul",
+   "level": 2,
+   "why": "⚑ given freely, slowly"
+  },
+  {
+   "abilityId": "last_gift",
+   "level": 1,
+   "why": "⚠️ r1 — and it is what they are for"
+  },
+  {
+   "abilityId": "deathsense",
+   "level": 1,
+   "why": "they have watched a great deal end early"
+  },
+  {
+   "abilityId": "boundary_stone",
+   "level": 1,
+   "why": "the Court's edge, in green"
+  },
+  {
+   "abilityId": "second_wind",
+   "level": 1,
+   "why": "slowly"
+  }
+ ],
+ "closed": [
+  "struck_term",
+  "offered_price",
+  "borne_bargain",
+  "scatter",
+  "misdirect"
+ ],
+ "personality": {
+  "warmth": 7,
+  "trust": 9,
+  "candor": 10,
+  "patience": 10
+ },
+ "physicality": "NOT HUMAN. Immense, slow, growing wrong-way to the wind. WHAT CATCHES THE EYE: ⚠️ they are visibly larger than when you arrived.",
+ "intimacyNotes": "⛔ NOT AVAILABLE, and the scale is why. ⚑ What they offer is TIME — they will wait for you, for years, and mean it.",
+ "questSeeds": [
+  "⚑ They want one season to run its whole length and have never had one. ⚠️ Something in the Churn is cutting them short and they have not worked out what.",
+  "⛔ They know what grew here before the Churn was the Churn. ⚠️ Ask slowly."
+ ],
+ "schemaVersion": 1,
+ "_authoredWhy": "⛑ THE KEPT COURT, AUTHORED 2026-09-08 AT ERIK'S DIRECTION: 'There needs to be an ELVEN COURT in the chaos realm that COMBINES THE FAE AND FANTASY RACES and is OPPOSED TO THE HOLLOW COURT.' ⛔ AND THE OPPOSITION IS NOT FAE-VS-FAE. `peoples_of_kind` already says the Wild Half is churnfolk [FAE], abyssal [HORNED] and unmaker — ring 2, 3, 4 — and THE HOLLOW COURT IS THAT TAKEN PURE: one disposition, absolute. ⚑ SO ITS OPPOSITE IS A COALITION — elven, dwarven, ent, horizon-walker — PEOPLES WHO LIVE IN THE CHURN AND REFUSE TO DISSOLVE INTO IT. ⚠️ THE TWO LAWS ARE THE WHOLE DESIGN, AND BOTH ARE TERRIBLE: ⛔ THE HOLLOW COURT TRADES. Nobody lies, the price is named aloud, you get precisely what you asked for, and you leave hollowed. ⛔ THE KEPT COURT WILL NOT TRADE AT ALL. What they give they give FREELY, and what they withhold cannot be bought — there is no price, no term, no lever. ⚠️ You cannot purchase their help, and if they judge you unworthy of it THERE IS NOTHING YOU CAN OFFER. ⚑ AND IT IS THE SETTING'S CENTRAL ARGUMENT ONE SCALE DOWN: 'The Poles Pull… the counter is HOLDING THE MIDDLE OPEN.' The Kept Court is the Wild Half's own resistance to its own pole.",
+ "communityId": "churn.kept_court",
+ "_court": "the_kept_court",
+ "_opposes": "the_hollow_king"
+}

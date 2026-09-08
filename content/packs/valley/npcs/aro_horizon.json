@@ -1,0 +1,104 @@
+{
+ "id": "aro_horizon",
+ "name": "Aro of the Horizon Reach",
+ "level": 26,
+ "role": "Coliseum champion, the MOVE cell — has never been hit in this arena",
+ "gender": "man",
+ "pronouns": "he/him",
+ "sex": "male",
+ "romanceEligible": true,
+ "domains": {
+  "primary": "horizon",
+  "secondary": "somatic",
+  "tertiary": "veilwright"
+ },
+ "spectrum": {
+  "space_time": 0.4
+ },
+ "subAttributes": {
+  "strength": 7,
+  "agility": 14,
+  "reason": 8,
+  "insight": 10,
+  "presence": 8,
+  "rapport": 7,
+  "craft": 6,
+  "wits": 11
+ },
+ "knowledge": [
+  "A hundred paces of open sand, and how long each of them takes",
+  "When a person has committed and cannot stop"
+ ],
+ "wants": [
+  "To be closed with",
+  "Someone fast enough to make it a bout"
+ ],
+ "fears": "⚠️ Being cornered where the sand runs out. ⛔ He has never tested it.",
+ "appearance": "Light, long-limbed, and always already moving. He does not set his feet.",
+ "voiceHints": "Short, amused, breathless-sounding and never actually out of breath.",
+ "reactsToReputation": {
+  "fast": "⚑ opens up and enjoys it",
+  "heavy": "makes you chase, and the crowd laughs",
+  "any": "stays away"
+ },
+ "assistTags": [
+  "move",
+  "scout",
+  "strike",
+  "travel"
+ ],
+ "abilities": [
+  {
+   "abilityId": "loose_limbed",
+   "level": 3,
+   "why": "⚑ `never-where-you-swing`"
+  },
+  {
+   "abilityId": "skydancer",
+   "level": 3,
+   "why": "`closes-in-one-step`"
+  },
+  {
+   "abilityId": "near_way",
+   "level": 2,
+   "why": "Spanwork — the distance made short"
+  },
+  {
+   "abilityId": "step_between",
+   "level": 2,
+   "why": "`makes-you-chase`"
+  },
+  {
+   "abilityId": "thrown_edge",
+   "level": 2,
+   "why": "⚠️ he can hit you from where you are not"
+  },
+  {
+   "abilityId": "quick_hands",
+   "level": 2,
+   "why": "the pass-by cut"
+  },
+  {
+   "abilityId": "read_the_fight",
+   "level": 2,
+   "why": "'when a person has committed and cannot stop'"
+  },
+  {
+   "abilityId": "quiet_step",
+   "level": 1,
+   "why": "`turns-the-sand`"
+  }
+ ],
+ "personality": {
+  "warmth": 7,
+  "trust": 6,
+  "candor": 7,
+  "patience": 4
+ },
+ "physicality": "ADULT. Wiry, thirties, and never still. WHAT CATCHES THE EYE: he is not breathing hard either, and unlike Lys he is genuinely working.",
+ "intimacyNotes": "⚠️ He is not good at staying. ⛔ That is a real thing about him and not a joke he makes.",
+ "schemaVersion": 1,
+ "people": "human",
+ "_authoredWhy": "⛑ AUTHORED 2026-09-07. ⛔ THE EIGHT COLISEUM CHAMPIONS WERE NOT NPCs — a name, a threat integer and four tactic tags inside an encounter file, and no sheet anywhere. ⚠️ CCode's matrix measured the consequence: 'every function any opponent can declare, in the whole game: strike, shield', and the win rate correlated with THREAT at −0.95 — ⛔ because threat was nearly the only authored number that varied. ⚑ THE EIGHT CELLS EXIST TO PROVE EVERY CONTRIBUTION FAMILY CAN WIN A FIGHT. They cannot prove it while every champion fights identically. ⚠️ Crafts are drawn from the encounter's OWN prose and tactic tags — nothing invented.",
+ "_isColiseumChampion": true
+}

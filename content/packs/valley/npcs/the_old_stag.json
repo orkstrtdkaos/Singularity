@@ -33,12 +33,9 @@
  "appearance": "Vast — shoulder-height to a standing man — with a rack of antlers gone mossy and asymmetric, one beam broken short. The pelt is winter-grey regardless of season. The eyes are wrong: level, dark, and far too patient.",
  "people": "glade-born",
  "domains": {
-  "primary": [
-   "numinous",
-   "hourkeeper"
-  ],
+  "primary": "rootkin",
   "secondary": "figurist",
-  "tertiary": "rootkin"
+  "tertiary": "numinous"
  },
  "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own.",
  "teaches": "numinous",
@@ -55,5 +52,14 @@
   "watch",
   "sense-danger"
  ],
- "_assistWhy": "⛔ CCODE 2026-09-02: 42 of 52 authored people carried NO `assistTags`, so `contributionsOf` fell to its HARM default and 'a master smith counts as a striker'. ✅ TAGS DERIVED FROM THIS PERSON'S OWN AUTHORED `role` AND `knowledge` — nothing invented. ⚠️ HARM IS NOT REMOVED: Erik's rule stands — 'a blacksmith with a spear is a person with a spear.' These tags ADD the families each person was silently missing."
+ "_assistWhy": "⛔ CCODE 2026-09-02: 42 of 52 authored people carried NO `assistTags`, so `contributionsOf` fell to its HARM default and 'a master smith counts as a striker'. ✅ TAGS DERIVED FROM THIS PERSON'S OWN AUTHORED `role` AND `knowledge` — nothing invented. ⚠️ HARM IS NOT REMOVED: Erik's rule stands — 'a blacksmith with a spear is a person with a spear.' These tags ADD the families each person was silently missing.",
+ "_domainsWas": {
+  "primary": [
+   "numinous",
+   "hourkeeper"
+  ],
+  "secondary": "figurist",
+  "tertiary": "rootkin"
+ },
+ "_domainsFix_20260908": "⛔ `domains.primary` WAS AN ARRAY — the Pell/Veth shape, and CCode's roster gave it a visible mechanical cost: these three were among the 62 records with NO REAL CRAFT, because `kitFor` cannot read a domain draw from a list. ⚠️ THE ARRAY WAS NOT SLOPPINESS — it holds a real tie the original author could not break, and all three are Deepwood ents whose register and whose craft genuinely differ. ⚑ THE ROLE STRING BREAKS IT, which is the same evidence `tierFromRole` now uses. ⛑ `_domainsWas` keeps the tie on the record. ⚑ HERE: ⚑ 'A presence between beast and guardian, the LIVING HEART of the Glade, DYING.' ⛔ The living heart is rootkin; `figurist` second is the between-beast-and-guardian shape — an imposed form; `numinous` third because he is a presence. ⚠️ His `mechanical_spiritual: 0.8` argued for numinous primary and the ROLE says otherwise: he is the Glade's heart, not its meaning."
 }

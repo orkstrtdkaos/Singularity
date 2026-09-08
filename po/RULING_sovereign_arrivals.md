@@ -93,3 +93,72 @@ Deduction, Figurework, Material, Discipline. ⛔ **A school is not an organisati
 3. **Do they know about each other?** ⚠️ Four figures hunting seven entities, ⬜ and no reason yet for them
    to have met.
 4. ⛔ **What does a recrossing leave behind?** ⚠️ **It fed on the way out.**
+
+---
+
+# R41b — THE FOUR OPEN ITEMS, RULED (Erik, 2026-09-08)
+
+**bodyAnchor:** "A FAT AND HAPPY SOVEREIGN IS BUSINESS AS USUAL"
+
+## ✅ 1 · STAGE 3 IS THE ARRIVAL, AND ARRIVING IS ALREADY DOING SOMETHING
+
+> Erik: *"That would be **stage 3 when they arrive diminished** and attempt to **push the arc back their way**
+> and **work to eliminate the threats**."*
+
+⚑ **AND IT MATCHES WHAT CCODE MEASURED IN THE CODE:** stage 1 at the mythic floor, ⛔ **stage 3 diminished at
+45**, stage 4 final at 85.
+
+⚠️ **THE ARRIVAL IS NOT A CUTSCENE — IT HAS TWO JOBS FROM THE MOMENT IT LANDS:** ⛔ **push the arc back its
+own way, and eliminate the people opposing it.** ⚑ **So a diminished Sovereign is an ACTIVE PARTY on the
+board, not a boss waiting at the end of one.**
+
+---
+
+## ✅ 2 · ⛔ THE BEST ANSWER OF THE FOUR: BOTH SIDES ESCALATE, INVERSELY
+
+> Erik: *"If the Sovereign is **fat and happy it's business as usual** for them and their agents. **The
+> opposite is true for the anti-Sovereigns.** As the arc shifts things get escalated — **the middle zone
+> everyone's trying to push** — and in the end, the Sovereign is the most upset, but the anti-Sovereign is
+> **also the most motivated to end them.**"*
+
+⚑ **THIS RESOLVES THE QUESTION BY REPLACING IT.** ⚠️ **Aevi asked *"does the anti-Sovereign KNOW?"* and Erik
+answered with something better: ⛔ KNOWING IS NOT THE VARIABLE. URGENCY IS, AND IT IS DRIVEN BY THE ARC.**
+
+| arc position | the Sovereign | the anti-Sovereign |
+|---|---|---|
+| ⚑ **its way** | ⛔ **fat and happy — BUSINESS AS USUAL.** Agents work, nothing escalates | ⚠️ **desperate** |
+| **the middle** | ⛔ **both push, and this is where the game happens** | ⛔ **both push** |
+| ⚑ **against it** | ⛔ **the most upset it has ever been** | ⚑ **the most motivated to END them** |
+
+➡️ ⛔ **SO THE SAME NUMBER DRIVES BOTH SIDES IN OPPOSITE DIRECTIONS**, and neither is ever simply idle —
+⚠️ **a complacent Sovereign still has agents working, which is why the world feels pressed before anyone
+knows why.**
+
+⛑ **AND IT MAKES THE END-STATE DANGEROUS RATHER THAN SAFE: pushing an arc against a Sovereign does not calm
+it down. It produces the angriest version of the thing AND the most committed enemy it has.**
+
+---
+
+## ✅ 3 · THEY TRY TO KNOW ABOUT EACH OTHER
+
+> Erik: *"If they are smart and have sensing abilities they will want to find out who and what is opposing
+> them, so yeah, **they're going to try to know about each other.**"*
+
+⚠️ **TRY is the word, and it is not the same as knowing.** ⛔ **Both sides are actively investigating, both
+are partially right, and the picture each holds is a thing that can be wrong** — ⚑ **which is more useful
+than a roster either side simply possesses.**
+
+⬜ **And it gives the four anti-Sovereigns a reason to have met that did not exist before: they are
+researching the same seven entities.**
+
+---
+
+## ⬜ 4 · WHAT A RECROSSING LEAVES — DELIBERATELY UNAUTHORED
+
+> Erik: *"Not sure exactly — **this might be narrative.**"*
+
+⛔ **LEFT OPEN ON PURPOSE, AND THE RECORD SAYS SO** rather than Aevi inventing a mechanic. ⚠️ **What is
+ruled: *it fed on the way out*.** ⬜ **What that leaves is the GM's, until somebody plays it and finds out.**
+
+⚑ **This is `notAnOpponent`-shaped discipline pointed at content: a thing declared open is not a thing
+forgotten.**

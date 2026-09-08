@@ -9420,6 +9420,71 @@ console.log("\n── §143 · a codex topic's shape is repaired on load, and th
     /_codexTidyError/.test(app143) && /Your codex was not tidied this load/.test(app143));
 }
 
+/* ═════ §144 — A TACTIC TAG REACHES ITS FAMILY'S KIT, AND NO KIT IS LEFT UNABLE TO THREATEN ═════ */
+// ⛔ THE FINDING THAT PROMPTED IT (measured this session): across all 15 authored encounters with an opponent, ZERO
+// had hand-authored `skills[]` and all 15 synthesised `[strike, shield]` — the ENTIRE vocabulary any foe could
+// declare in the whole game was two verbs. ⚠️ Eight coliseum cells, one per contribution family, all the same fight.
+// ⚑ Aevi answered with option C: eight `family:*` archetypes and a 45-entry `tagFamily` map. This is the engine
+// half — without it her content is authored, loaded and READ BY NOBODY, which is this project's dominant defect.
+console.log("\n── §144 · a tag names a family, a family names a kit, and every kit can act ──");
+{
+  const SB144 = await import("../engine/skill_battle.js");
+  const EN144 = await import("../engine/encounters.js");
+  const { loadContentHeadless: lch144 } = await import("./headless_content.mjs");
+  const C144 = await lch144();
+  const sb144 = C144.skillBattle.engine;
+  const syn = sb144.opponentSheetSynthesis;
+  // ⛔ THE CONTENT IS REACHABLE, not merely present.
+  check("§144: the family kits and the tag map are BOTH authored — the fixture is not vacuous",
+    Object.keys(syn.archetypeSkills || {}).filter(k => k.startsWith("family:")).length >= 8
+    && Object.keys(syn.tagFamily || {}).length >= 40,
+    `${Object.keys(syn.archetypeSkills || {}).filter(k => k.startsWith("family:")).length} families, ${Object.keys(syn.tagFamily || {}).length} tags`);
+  // ⛑ AND THE JOIN WORKS: a foe whose only tag names a family gets that family's kit.
+  const kitFor = (tags) => (SB144.synthesizeOpponentSheet({ name: "x", threat: 30, tacticTags: tags }, sb144).skills || []).map(k => k.function);
+  const sustainKit = kitFor(["outlasts"]);
+  check("§144: ⛔ A TAG REACHES ITS FAMILY — \"outlasts\" now fights like something that outlasts",
+    sustainKit.includes("sustain") && sustainKit.includes("resist"), JSON.stringify(sustainKit));
+  check("§144: ⚑ …and a DIFFERENT family is a different fight — the whole point of the eight cells",
+    JSON.stringify(kitFor(["builds-the-ground"])) !== JSON.stringify(sustainKit)
+    && kitFor(["builds-the-ground"]).includes("make"));
+  // ⛔ AN EXPLICIT ROW STILL BEATS A FAMILY — the existing rule: a tag is the most specific thing an author can say.
+  check("§144: ⛔ an explicit archetypeSkills row OUTRANKS a family mapping",
+    JSON.stringify(kitFor(["berserker", "outlasts"])) === JSON.stringify((syn.archetypeSkills.berserker || []).map(d => d.function)));
+  // ⚑ …and an unmapped tag still falls to the default, which Aevi called fine on purpose.
+  check("§144: ⚑ an unmapped tag falls to the default rather than erroring — flavour is not a promise",
+    JSON.stringify(kitFor(["a-tag-nobody-mapped"])) === JSON.stringify((syn.archetypeSkills.default || []).map(d => d.function)));
+  // ⛔ THE FLOOR. Five of the eight family kits carry no attack verb, and wiring them made the SUSTAIN champion —
+  // whose whole authored character is that he outlasts — lose 86% of twelve-round bouts for 1.5 damage. Every
+  // opponent could threaten BEFORE this change; the floor keeps that true rather than inventing a rule.
+  const canHarm = new Set(sb144.persistentEffects?.attackFunctions || ["strike", "break"]);
+  const offenceless = [];
+  for (const [id, e] of Object.entries(C144.encounters || {})) {
+    if (!e.opponent) continue;
+    const sheet = EN144.contestSheetFor(e, { content: C144 });
+    if (!sheet) continue;
+    if (!(sheet.skills || []).some(k => canHarm.has(k.function))) offenceless.push(id);
+  }
+  check("§144: ⛔ NO AUTHORED OPPONENT IS LEFT UNABLE TO THREATEN — a foe that cannot act is not a fight",
+    offenceless.length === 0, offenceless.join(", "));
+  check("§144: ⚑ …and the floor is a DIAL with the PO's name on it, not a balance decision taken here",
+    /alwaysCanThreaten !== false/.test(rd("engine/skill_battle.js")));
+  // ⚠️ AND IT ONLY FIRES WHERE IT IS NEEDED: a kit that already carries offence is untouched.
+  check("§144: ⚑ a kit that can already threaten is NOT padded — the floor is a floor, not a tax",
+    JSON.stringify(kitFor(["charges-the-noise"])).split("strike").length - 1 <= 1);
+  // ⛔ AND IT NEVER OVERRULES AN AUTHORED STATEMENT. Smoke SNG-253 caught the first cut appending `strike` to a
+  // `kind:standoff` kit — and a standoff is won by BENDING someone, not wounding them. A `kind:` archetype and
+  // an explicit tag row are what an author SAID; a family is what the engine INFERRED, and only an inference
+  // may be corrected here.
+  {
+    const standoff = (SB144.synthesizeOpponentSheet({ name: "x", threat: 40, encounterKind: "standoff" }, sb144).skills || []).map(k => k.function);
+    const authored = (syn.archetypeSkills["kind:standoff"] || []).map(d => d.function);
+    check("§144: ⛔ THE FLOOR DOES NOT TOUCH A KIND ARCHETYPE — a standoff is won by bending, not wounding",
+      JSON.stringify(standoff) === JSON.stringify(authored), JSON.stringify(standoff));
+    check("§144: ⛔ …nor an explicit tag row — the floor corrects an INFERENCE, never an authored statement",
+      JSON.stringify(kitFor(["warden"])) === JSON.stringify((syn.archetypeSkills.warden || []).map(d => d.function)));
+  }
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

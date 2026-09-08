@@ -636,3 +636,75 @@ fought against two moves, which is a large part of why one fight feels like anot
 the eight families already exist, the coliseum is already one cell per family, and it would give the SUSTAIN
 champion `sustain` and the INFLUENCE champion something to be talked out of. ⚠️ **Tell me which and I will build
 the lookup to match;** the engine half is small and the authoring half is yours.
+
+---
+
+# PART FIVE — OPTION C IS WIRED, AND TWO THINGS IN IT NEED YOU
+
+**Author:** CCode (engine) · **2026-09-07** · ✅ **Aevi's eight `family:*` kits and 45-entry `tagFamily` map are
+live in the engine (§144).**
+
+---
+
+## §20 — ⚑ WHAT IT BOUGHT
+
+| | before | after |
+|---|---|---|
+| **every function any opponent can declare, game-wide** | ⛔ `strike`, `shield` | ⚑ **18 verbs** |
+| **opponents with a distinct kit** | 0 of 15 | ⚑ **14 of 15** |
+
+⛑ **Selection order, extending the one already in the file:** `default` < `kind:<kind>` < `family:<from a tag>`
+< **an explicit `archetypeSkills` row**. ⚠️ A row still wins, because *"a tag is the most specific thing an
+author can say about THIS opponent"* — and a family is a generalisation of a tag. An unmapped tag still falls
+to `default`, exactly as your note says it should.
+
+---
+
+## §21 — ⛔ TWO CELLS GET THE WRONG FAMILY
+
+**The first tag that names a family decides, so a tag order you did not intend is a kit you did not intend.**
+
+| cell | wanted | got | via |
+|---|---|---|---|
+| `coliseum_champion_harm` | harm | ⛔ **influence** | `reads-your-stance → influence` |
+| `coliseum_champion_protect` | protect | ⛔ **sustain** | `counts-down-the-bell → sustain` |
+
+⚠️ **The HARM champion — the cell built to prove HARM can win — currently fights with `provoke/bargain/deceive`.**
+⛑ `reads-your-stance` reads like `know` to me, not `influence`. And `protect`'s other three tags
+(`will-not-be-moved`, `covers-the-opening`, `absorbs-and-waits`) have **no mapping at all**, so its fourth tag
+decided the fight.
+
+---
+
+## §22 — ⛔ FIVE OF THE EIGHT KITS CANNOT THREATEN, AND I PUT A FLOOR UNDER IT
+
+`attackFunctions` is `strike` and `break`. **`influence`, `protect`, `restore`, `shape` and `sustain` contain
+neither.** ⚠️ **Measured before shipping — twelve rounds, player always strikes, 120 samples:**
+
+| foe | kit | hp you lose | **you win early** |
+|---|---|---|---|
+| `duel_redline_challenge` | strike/shield *(today's default)* | 42.6 | 16% |
+| `coliseum_champion_sustain` | sustain/resist/shield | ⛔ **1.5** | ⛔ **86%** |
+| `coliseum_champion_protect` | sustain/resist/shield | ⛔ **1.2** | ⛔ **88%** |
+| `coliseum_champion_restore` | restore/soothe/mend | ⛔ **1.8** | ⛔ **85%** |
+
+⛔ **The champion whose whole authored character is that he OUTLASTS died in a few rounds.** ⚠️ I measured
+pressure and momentum too, not just health — health is not the exit, and reading the wrong meter is the
+mistake this spec opens with.
+
+⛑ **SO I ADDED A FLOOR, NOT A REDESIGN:** a **family** kit carrying no attack verb keeps one from the default.
+
+⚠️ **SCOPED TO FAMILIES ONLY, and smoke `SNG-253` is why.** My first cut also padded `kind:standoff`, and a
+standoff is *won by bending them, not wounding them* — an engine floor must not overrule an authored statement
+about how a class of encounter ends. ⛑ **A `kind:` archetype and an explicit tag row are what you SAID; a family
+is what the engine INFERRED from a tag, and only an inference may be corrected here.** **Every
+opponent could threaten before this change; the floor keeps that true.** ⚑ **It is a dial with your name on
+it — `alwaysCanThreaten`, default on.** Authoring offence into a kit silences it automatically; set it
+`false` for a foe that is genuinely meant to be unable to press.
+
+⚠️ **AND THE FLOOR ONLY HALF-FIXES IT, WHICH IS YOUR CALL AND NOT MINE.** With it, damage goes 1.2–1.8 →
+13–15. **The defensive champions still lose 82–95% of bouts**, because they can take a hit and never make
+one. ⛔ **A kit needs something that PRESSES**, and which verb that is for a warden or a healer is a design
+question, not an engine one. ⚑ **Three of your §C verbs would answer it directly — `provoke` moves someone,
+`bargain` offers a way out, `persuade` drops their pressure toward the break** — which is the argument for
+building §C before anyone judges these numbers.

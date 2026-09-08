@@ -148,7 +148,42 @@ export function synthesizeOpponentSheet(opponent = {}, sb, { standing = null } =
   let defs = arche.default || [{ function: "strike", name: "a hard strike" }, { function: "shield", name: "a raised guard" }];
   const kindDefs = opponent.encounterKind ? arche[`kind:${opponent.encounterKind}`] : null;
   if (Array.isArray(kindDefs) && kindDefs.length) defs = kindDefs;
-  for (const t of tags) if (arche[t]) { defs = arche[t]; break; }
+  // ⛑ SNG-§17 / AEVI 2026-09-07 — A TAG NAMES A CONTRIBUTION FAMILY, AND THE FAMILY NAMES A KIT.
+  // Measured before she authored it: 58 tacticTags across every encounter, bestiary and NPC record, and NOT ONE
+  // matched a row — every opponent without hand-written `skills[]` fought as "a hard strike / a raised guard".
+  // ⚠️ THE `deniesPhase` SHAPE: two vocabularies, each correct on its own side, that never met. `tagFamily` is the
+  // join, so `outlasts` and `does-not-tire` both reach `family:sustain` without either side learning the other's
+  // words.
+  // ⛔ AN EXPLICIT ROW BEATS A FAMILY, so the loop cannot simply take the first hit of either kind: it keeps the
+  // first family it sees and spends it ONLY if no tag has a row of its own.
+  let famDefs = null;
+  for (const t of tags) {
+    if (arche[t]) { defs = arche[t]; famDefs = null; break; }   // the author named this opponent's kit outright
+    if (!famDefs) {
+      const fam = syn.tagFamily?.[t];
+      const d = fam ? arche[`family:${fam}`] : null;
+      if (Array.isArray(d) && d.length) famDefs = d;
+    }
+  }
+  if (famDefs) defs = famDefs;
+  // ⛔ A KIT THAT CANNOT THREATEN IS NOT A KIT. Measured when the family lookup above first ran: five of the eight
+  // family kits carry no `attackFunction`, and the fights collapsed — the SUSTAIN champion, whose whole authored
+  // character is that he outlasts, lost 86% of twelve-round bouts and landed 1.5 damage. ⚠️ Every opponent could
+  // threaten before this change (strike/shield); the floor KEEPS that true rather than inventing a new rule.
+  // ⚑ AEVI'S DIAL, DEFAULT ON: authoring an offensive verb into a kit silences it, and `alwaysCanThreaten: false`
+  // turns it off entirely for a foe that is MEANT to be unable to press.
+  // ⛔ ONLY UNDER A FAMILY. Smoke SNG-253: appending `strike` to a `kind:standoff` kit broke a ruling — a standoff
+  // is won by BENDING someone, not wounding them, and an engine floor must not overrule an authored statement
+  // about how a class of encounter ends. A family is the engine GENERALISING from a tag, so it is the one
+  // selection a floor may correct.
+  if (famDefs && syn.alwaysCanThreaten !== false) {
+    const canHarm = new Set(sb?.persistentEffects?.attackFunctions || sb?.damage?.attackFunctions || ["strike", "break"]);
+    if (defs.length && !defs.some(d => canHarm.has(d.function))) {
+      const fallback = (arche.default || []).find(d => canHarm.has(d.function))
+        || { function: "strike", name: "a hard strike" };
+      defs = [...defs, fallback];
+    }
+  }
   const skills = defs.map(s => ({ function: s.function, name: s.name, tier, attribute: s.attribute || "practical" }));
   return { name: opponent.name || "the opponent", attributes: { practical: attr, physical: attr, mental: attr, social: attr },
     energy, maxEnergy: energy, tacticTags: tags, skills,

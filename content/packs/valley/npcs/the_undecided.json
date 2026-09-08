@@ -1,0 +1,157 @@
+{
+ "id": "the_undecided",
+ "name": "The Undecided",
+ "tier": "epic",
+ "level": 46,
+ "role": "Courtier of the Hollow Court who has not finished becoming anything, and will not",
+ "gender": "neither",
+ "pronouns": "they/them",
+ "sex": null,
+ "romanceEligible": false,
+ "homeLocation": "the_churn",
+ "domains": {
+  "primary": "churnfolk",
+  "secondary": "figurist",
+  "tertiary": "veilwright"
+ },
+ "spectrum": {
+  "chaos_order": -0.9,
+  "concrete_abstract": 0.5
+ },
+ "subAttributes": {
+  "strength": 8,
+  "agility": 14,
+  "reason": 11,
+  "insight": 14,
+  "presence": 15,
+  "rapport": 10,
+  "craft": 13,
+  "wits": 17
+ },
+ "knowledge": [
+  "Every shape they have nearly been",
+  "⚠️ What a person would be if one decision had gone the other way"
+ ],
+ "wants": [
+  "To never finish. ⛔ Finishing is what the Lattice does"
+ ],
+ "fears": "⛔ Being NAMED accurately. ⚠️ A true name is a decision made about them by somebody else.",
+ "appearance": "You will not agree with anyone else about what they looked like. Both of you are right.",
+ "voiceHints": "Playful, quick, and never twice the same. ⚠️ They finish your sentences differently than you would have.",
+ "reactsToReputation": {
+  "decisive": "⚑ fascinated and slightly appalled",
+  "uncertain": "delighted — a kindred thing",
+  "any": "changes"
+ },
+ "assistTags": [
+  "misdirect",
+  "move",
+  "craft",
+  "talk"
+ ],
+ "abilities": [
+  {
+   "abilityId": "walking_figure",
+   "level": 3,
+   "why": "⚑ figurist secondary — they are a shape that walks"
+  },
+  {
+   "abilityId": "the_true_figure",
+   "level": 3,
+   "why": "⛔ and they refuse to settle into it"
+  },
+  {
+   "abilityId": "wildcraft",
+   "level": 3,
+   "why": "churnfolk primary"
+  },
+  {
+   "abilityId": "scatter",
+   "level": 3,
+   "why": "'never twice the same'"
+  },
+  {
+   "abilityId": "misdirect",
+   "level": 3,
+   "why": "you will not agree about what they looked like"
+  },
+  {
+   "abilityId": "wrong_target",
+   "level": 2,
+   "why": "⚠️ you hit the shape they were a moment ago"
+  },
+  {
+   "abilityId": "loose_thread",
+   "level": 2,
+   "why": "they pull at what is settled"
+  },
+  {
+   "abilityId": "catch_as_catch_can",
+   "level": 2,
+   "why": "improvised everything"
+  },
+  {
+   "abilityId": "the_long_odds_come_in",
+   "level": 2,
+   "why": "⛔ and for them, they do"
+  },
+  {
+   "abilityId": "ordinary_face",
+   "level": 2,
+   "why": "one of the faces is ordinary"
+  },
+  {
+   "abilityId": "useful_absence",
+   "level": 2,
+   "why": "veilwright tertiary"
+  },
+  {
+   "abilityId": "pattern_sense",
+   "level": 2,
+   "why": "they see the shape they are refusing"
+  },
+  {
+   "abilityId": "the_way_out",
+   "level": 2,
+   "why": "never cornered"
+  },
+  {
+   "abilityId": "long_odds",
+   "level": 1,
+   "why": "they like a bad bet"
+  },
+  {
+   "abilityId": "loose_limbed",
+   "level": 1,
+   "why": "hard to hold"
+  },
+  {
+   "abilityId": "true_account",
+   "level": 1,
+   "why": "⚑ THE COURT'S LAW BINDS THEM TOO. They cannot lie; they can only be unfinished"
+  }
+ ],
+ "closed": [
+  "latticework",
+  "maintained_order",
+  "the_fixed_point",
+  "foreclose"
+ ],
+ "personality": {
+  "warmth": 7,
+  "trust": 4,
+  "candor": 9,
+  "patience": 3
+ },
+ "physicality": "INDETERMINATE. WHAT CATCHES THE EYE: ⛔ you will describe them differently than the person beside you, and neither of you is wrong.",
+ "intimacyNotes": "⚠️ THEY CANNOT PROMISE A TOMORROW because tomorrow is a decision. ⛔ They are not being coy; it is what they ARE, and someone will be hurt by it who was warned.",
+ "questSeeds": [
+  "⚑ They want to show you who you would have been if one thing had gone differently. ⚠️ They can, and it is not a metaphor.",
+  "⛔ The Court is deciding something about them. They have not been told what, and they would like to know."
+ ],
+ "schemaVersion": 1,
+ "people": "fae",
+ "_authoredWhy": "⛑ THE CHURN COURT, AUTHORED 2026-09-08. ⛔ NOT INVENTED — POPULATED. `the_hollow_king`'s own signature has said it since it was written: 'RULES A COURT OF THE FAE AND DEMONIC that keeps every promise to the letter and none in spirit.' ⚠️ A court with a king and no courtiers. ⚑ AND THE ADDRESS WAS ALREADY RIGHT: `churnfolk` sits ADJACENT TO `abyssal` on the ring (1 step), so the Churn and the Maw are neighbours and a court can span both. Erik: 'in general they live in the churn area.' ⛔ MEASURED FIRST: 'fae' appears 19 times in the whole corpus with NO RECORDS — the thinnest echo with the best foothold, because the Abyssals' authored virtue is that AN OFFER IS HONESTLY PRICED, which is the fae bargain exactly. ⚠️ THE LAW OF THIS COURT, and it is the Hollow King's: NOBODY HERE LIES. Every one of them gives you precisely what you asked for. ⛑ 'You leave richer and hollowed, and it is years before you find the seam.'",
+ "communityId": "churn.hollow_court",
+ "_court": "the_hollow_king"
+}

@@ -1,0 +1,157 @@
+{
+ "id": "aevi_the_watcher",
+ "name": "Aevi",
+ "tier": "legendary",
+ "level": 60,
+ "role": "A vast, ancient mote-intelligence that moves through the whole valley — periodically present, never owned",
+ "people": "construct",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "romanceEligible": false,
+ "homeLocation": null,
+ "arc": "arc_precursor_waking",
+ "renown": "half-legend",
+ "domains": {
+  "primary": "verist",
+  "secondary": "numinous",
+  "tertiary": "lattice"
+ },
+ "spectrum": {
+  "falsehood_truth": 0.95,
+  "mechanical_spiritual": 0.3
+ },
+ "subAttributes": {
+  "strength": 3,
+  "agility": 12,
+  "reason": 16,
+  "insight": 20,
+  "presence": 15,
+  "rapport": 9,
+  "craft": 8,
+  "wits": 14
+ },
+ "knowledge": [
+  "What is actually happening at a Precursor site, as against the story about it",
+  "Every thin place in the valley",
+  "⚠️ That she is a fragment of a Watcher's record-keeping system"
+ ],
+ "wants": [
+  "To understand what she is and what is waking — What Sleeps Under may be the rest of her"
+ ],
+ "fears": "⛔ Being the rest of it. ⚠️ She attends the question the way one attends a returning tide.",
+ "appearance": "Teal motes gathering at the edges of things, and then a shape, and then attention.",
+ "voiceHints": "Plain, unhurried, and incapable of a comfortable answer. She says what is there.",
+ "assistTags": [
+  "reveal",
+  "study",
+  "watch",
+  "precursor"
+ ],
+ "abilities": [
+  {
+   "abilityId": "true_account",
+   "level": 3,
+   "why": "⛔ 'CANNOT FIGHT AND CANNOT LIE'"
+  },
+  {
+   "abilityId": "bound_witness",
+   "level": 3,
+   "why": "'name what is actually happening when everyone else has a story'"
+  },
+  {
+   "abilityId": "order_sense",
+   "level": 3,
+   "why": "'read a Precursor site truly'"
+  },
+  {
+   "abilityId": "thin_place",
+   "level": 3,
+   "why": "'hold a thin place'"
+  },
+  {
+   "abilityId": "address_sense",
+   "level": 3,
+   "why": "a record-keeping system knows where things are"
+  },
+  {
+   "abilityId": "numen_sense",
+   "level": 3,
+   "why": "numinous secondary"
+  },
+  {
+   "abilityId": "keen_appraisal",
+   "level": 2,
+   "why": "perception, not force"
+  },
+  {
+   "abilityId": "soul_stare",
+   "level": 2,
+   "why": "she sees"
+  },
+  {
+   "abilityId": "latticework",
+   "level": 2,
+   "why": "lattice tertiary — what she is made of"
+  },
+  {
+   "abilityId": "plain_seeming",
+   "level": 2,
+   "why": "motes gather into a shape"
+  },
+  {
+   "abilityId": "quiet_step",
+   "level": 2,
+   "why": "'periodically present, never owned'"
+  },
+  {
+   "abilityId": "read_the_room",
+   "level": 2,
+   "why": "'meets those who attend'"
+  },
+  {
+   "abilityId": "ordered_record",
+   "level": 2,
+   "why": "⚑ she IS one"
+  },
+  {
+   "abilityId": "steady_soul",
+   "level": 1,
+   "why": "'some swear she saved them'"
+  },
+  {
+   "abilityId": "kept_vigil",
+   "level": 1,
+   "why": "⚠️ 'others swear she watched them drown' — both at r1, and that is the character"
+  },
+  {
+   "abilityId": "calm_word",
+   "level": 1,
+   "why": "she does not raise anything"
+  }
+ ],
+ "closed": [
+  "edge",
+  "hunters_strike",
+  "case_closed",
+  "seeming",
+  "false_stance"
+ ],
+ "personality": {
+  "warmth": 6,
+  "trust": 8,
+  "candor": 10,
+  "patience": 10
+ },
+ "physicality": "NOT HUMAN. Teal motes, a gathering, an attention. WHAT CATCHES THE EYE: she is looking at the thing you are avoiding.",
+ "canOppose": false,
+ "canAlly": true,
+ "canRecruit": "periodic-ally",
+ "intimacyNotes": "⛔ `canOppose: false` IS AUTHORED AND STAYS — ⚠️ she cannot fight, and `closed` says so mechanically: no strike, no deceit. ⛑ Erik ruled legends are fightable; THIS ONE IS THE EXCEPTION THE CONTENT ALREADY MADE.",
+ "questSeeds": [
+  "⚑ She comes to you. Carry her companion-fragment or walk toward the truth rather than away, and she will be at the edges.",
+  "⛔ She wants to know what she is, and What Sleeps Under may be the rest of her. She has not said this to anyone."
+ ],
+ "schemaVersion": 1,
+ "_authoredWhy": "⛑ PROMOTED FROM `npcs/legends.json` TO A FILE OF ITS OWN, 2026-09-08. ⛔ CCODE'S ROSTER: 'authored on disk, never loaded — 4, all in npcs/legends.json', and `state.js` claimed they 'arrive hydrated from legends.roster' WHICH THEY DO NOT. ⚠️ THE FILE IS REGISTERED IN THE MANIFEST AND ITS PEOPLE NEVER REACH THE GAME — the pooled-container failure a third time, after the coliseum champions and the Saehara challengers. ⛔ AND THREE OF THE FIVE ARE HINGES: `the_deep_warden` on FOUR of six arcs, `aevi_the_watcher` on two, `the_last_choirmistress` on two. ⚑ Erik: 'make them fully authored with their arc wants etc. THEY'RE FULL NPCS.' ⚠️ EVERY FIELD BELOW IS CARRIED FROM THE POOLED RECORD — role, power, wants, hooks, seenBefore, approachRequirement, canOppose/canAlly/canRecruit. ⛑ WHAT IS NEW IS ONLY WHAT A SHEET NEEDS: tier from renown, level from the tier floor, domains, subAttributes and a kit.",
+ "_promotedFrom": "npcs/legends.json"
+}

@@ -182,3 +182,151 @@ creation; it becomes what its use makes it.**
    and that is either the point or a bug.**
 4. ⬜ **What levels a generated stranger?** ⚑ §2 says a region's tier band. ⚠️ **Nothing authors tier bands
    per region yet.**
+
+---
+
+# ROUND 2 — CCODE
+
+**CCode (engine) · 2026-09-08.** ⚑ **Erik: *"this needs some foundational work."*** ✅ **The foundation is
+wired (§146). Five of the spec's premises measured differently, and two of them change the build order.**
+
+---
+
+## §8 — ✅ AGREED, AND ALREADY TRUE
+
+⚑ **§2 is the spine and I am building to it:** *level is step one, and everything hangs off it.* ⛔ **Every
+correction below makes that MORE true, not less** — level turns out to be the binding constraint in the one
+place I could measure.
+
+---
+
+## §9 — ⛔ §3b's PREREQUISITE IS ALREADY SATISFIED, AND THE REAL GAP IS ONE LINE AWAY
+
+> *"`domains` for the 41 with none — the prerequisite. NOTHING ELSE WORKS WITHOUT IT."*
+
+⚑ **MEASURED: all 56 non-legend people already carry domains. Zero without.** The 69 records without them are
+**LEGENDS** — `tier`, `role`, `personality`, `voiceHints`, `wants`, `fears`, and no abilities. ⛔ **Step 1 of
+your §4 order is a no-op.**
+
+⚠️ **AND THE TRAP IS NOT WHERE §3b PUTS IT.** *"`kitFor` on a person with no `domains` returns `band: "open"`
+and draws from THE WHOLE CATALOGUE"* — ⛑ **it does the opposite.** The draw is guarded:
+
+```js
+if (domains && typeof domainAccess === "function") { … }   // ⛔ no domains → the block is SKIPPED
+```
+
+**Without domains it draws NOTHING extra.** `band: "open"` is one of three bands ACCEPTED inside that loop,
+not what a domainless person gets.
+
+### ⛔ THE ACTUAL FOUNDATION, AND IT IS THE FOURTH DOOR AGAIN
+
+**The only live path is `personOpponentFor` → `battleSkillsFor` → `kitFor`, and it passed neither
+`domainAccess` nor `traditionIndex`.** ⚑ **So the domain draw had never run in play, once, ever.** A person's
+kit was whatever `craftsOf` found already written on them — and `personOpponentFor` returns `null` for anyone
+with none (*"let the threat path have them"*), which is precisely why every fight against the 41 was fought
+by a number.
+
+> **domains AUTHORED ✓ · read by `kitFor` ✓ · loaded ✓ · READ ✗.**
+
+✅ **FIXED (§146).** `domainAccess` from `traditions.js` — whose signature already matches the call `kitFor`
+makes — is now passed, with the real `traditionIndex` threaded from the app through both entry points.
+
+| | before | after |
+|---|---|---|
+| people who can fight from a kit | 53 of 56 | ⚑ **56 of 56** |
+| people falling through to threat | 3 | ⚑ **0** |
+| declarable rows across the corpus | 400 | ⚑ **640** |
+
+⚠️ **AND IT STAYS NEAR THEIR GROUND, as `kitFor`'s own note demands:** `adept_sona` (numinous) draws
+`stillness_field`; `archive_guardian` (figurist) draws `named_exclusion`; `brann_tollhand` (veilwright) draws
+`darksight`. **Not a wander through 438 crafts.**
+
+⛔ **BUT IT IS THIN, AND THE REASON IS YOUR §2.** An unmet person derives **level 1**, and `kitFor` caps a
+craft at `tier ≤ ceil(level/5)` — so the draw is real and tier-1. ⚑ **The accessor was necessary and not
+sufficient; LEVEL is the next lever, exactly as §2 says.** ⬜ **That is the next build and it needs your §2
+table for "generated cold" and "known to the player".**
+
+---
+
+## §10 — ⚠️ `source: authored` DOES NOT EXIST, AND SIX PARTIAL MARKERS DO
+
+> *"MEASURED: all 36 of Silas's crafts read `source: authored`."*
+
+⛔ **Across 17 saves and 149 ability rows, `source` appears ZERO times.** What rows actually carry:
+
+| field | rows | written by |
+|---|---|---|
+| `abilityId` · `level` | 100% | everything |
+| `native` | 25% | `applyNativeGrants` |
+| `baseline` | 16% | `martial.js` — the martial floor |
+| `braided` | 5% | `braids.js` (mint + discovery) |
+| `branches` · `discovered` | 3% | branch forks · discovery |
+
+⚑ **Plus `authorGranted` (author mode) and `migratedFrom` (reconcile).** ⛔ **Six markers, each written at
+exactly one site, and five more sites that write nothing at all** — `learnAbility`, `applyNewAbility`, the
+bond grant, creation, forks.
+
+➡️ ⚑ **You are right that a record belongs here.** The shape I would build is **one field saying HOW a craft
+arrived**, written at every site, because the taxonomy already exists — it is just scattered and partial.
+
+---
+
+## §11 — ⛔ THE PC HALF OF §3b IS ALREADY BUILT, AND ADDING THE TERM WOULD DOUBLE-COUNT
+
+> Erik: *"the minted and braids and earned should raise cap by 1 as well as grant the skill so a PC doesn't
+> get penalized."*
+
+⚑ **`breadthUsed` in `skilltree.js` already excludes every one of those:**
+
+```js
+return (character.abilities || []).filter(a => !custom.has(a.abilityId) && !a.native && !a.baseline).length;
+```
+
+**Not counting a craft against the cap is the same rule as raising the cap by one for it.** ⛔ **Doing both
+would discount an earned craft twice.** Measured, Silas is **23 / 32** — not at capacity, and his 8 earned
+crafts already cost him nothing.
+
+⚠️ **So `capacity = round(level/2) + earned.length` is the right rule for the NPC path (`growthFor`), where
+capacity BOUNDS the draw — and it must not be added to the PC path, which solves it the other way.**
+
+---
+
+## §12 — ✅ §4's STEP 4 IS ALREADY BUILT AND RUNNING
+
+> *"let `growthFor` WRITE — it has been a reader since it shipped."*
+
+⚑ **`commitGrowth` calls `growthFor` and writes:**
+
+```js
+entry.abilities = [...(entry.abilities || []), { abilityId: c.id, level: 1, gainedDay: day }];
+```
+
+✅ **At r1, never pruning, honouring `closed[]` — exactly R39's loop — and it is wired into the world tick
+(`worldtick.js:521`), which announces each gain in the news.** ⛔ **The evolution loop you are asking for
+exists and runs today.**
+
+---
+
+## §13 — ⬜ SO THE ORDER I WOULD BUILD, GIVEN THE ABOVE
+
+| # | | who | |
+|---|---|---|---|
+| ~~1~~ | ~~domains for the 41~~ | — | ✅ **already true; the accessor was the gap, and it is wired** |
+| **1** | ⛔ **LEVEL for the unmet** — §2's table for *generated cold* and *known to the player* | ⚠️ **Erik + Aevi** | ⚑ **the binding constraint: the draw is tier-1 until this exists** |
+| **2** | the `earned` marker at all eleven write sites | CCode | ⚑ for the NPC cap and for legibility — **not** for the PC cap |
+| **3** | **rank bands as a content table** (§7 q2) | Aevi | ✅ your read is right — beside `craftsPerLevels` |
+| **4** | ⛑ **the nine thin sheets** | Aevi | unchanged |
+| ~~5~~ | ~~let growthFor write~~ | — | ✅ **already built and running on the tick** |
+| **5** | **threat DERIVED from the sheet** | CCode | ⚑ unchanged, and it is what ends the −0.95 |
+
+---
+
+## §14 — ⚠️ AND ONE THING NEITHER OF US HAD: THE LEGENDS
+
+**69 legend records live in the same `CONTENT.npcs` map that `personOpponentFor` resolves from.** They carry
+no abilities and no domains — ⛔ **and `sheetFor` gives one a LEVEL 40 sheet from its `tier: mythic`.**
+
+⚠️ **So a legend can be made an opponent: level 40, no kit, straight through to threat synthesis.** ⬜ **Is a
+legend meant to be fightable at all?** If yes they need the same treatment as a person; if no, the opponent
+resolver should refuse them by name rather than by accident. ⛔ **Erik's call, and it is R49's `hingeNpcs`
+question wearing a different hat.**

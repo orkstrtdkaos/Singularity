@@ -4841,7 +4841,7 @@ console.log("\n── §70 · per-rank source · the revised kill cost · ongoin
   // growthFor as CONTEXT for what it proposes. The derived count is a proxy — the hard half is the declared builds: field
   // — and a new unbuilt spec raises the proxy without anything being stale. The population grew; the baseline moves with
   // it, and the reason is written here rather than the number quietly nudged.
-  const BASELINE_DERIVED = 12;   // 2026-09-07 (11→12): SPEC_intent_heard_and_unheard.md — Aevi, spec_ready, naming stateIntent/growBond as the exports it answers; BUILT the same day (§133) — flips to built and comes down when she marks it   // 2026-09-07 (10→11): SPEC_hold_costs_crafts_and_hiring.md — Aevi, spec_ready, naming addFeature/improveHolding/setCrew/setGarrison as the exports it prices; BUILT the same morning (§128–§130) — flips to built and comes down when she marks it   // 2026-09-06 (12→10): Aevi flipped SPEC_holdings_screen, SPEC_npc_presence_cadence and DESIGN_codex_admission_and_summaries to `built` — the ratchet tightens to what is measured   // 2026-09-06 (11→12): SPEC_holdings_screen.md — Aevi, landed today, UNBUILT (CCode round 2), naming ensureHoldingImage/renameHolding/holdingSentence as the exports it asks to CHANGE — the next landing builds it and the count comes back down   // 2026-09-06 (10→11): SPEC_codex_summaries_and_merging.md — Aevi, landed today, UNBUILT, naming codex readers as context for the summaries it asks for   // 2026-09-06 (9→10): SPEC_npc_presence_cadence.md — Aevi, landed today, UNBUILT, naming npcsPresent/attentionByTier/worldRoster as context for the roster it asks for; the population grew, nothing went stale, and `declaredStale` is still 0   // 2026-09-05 (5): SPEC_quest_snapshot.md landed unbuilt, naming ringDistance/meaningDensity as context   // (4): SPEC_companion_becomes_person.md, same case   // (3): SPEC_party_mode_phase2.md, same case   // (2): four more specs landed unbuilt with the brief   // measured 2026-09-04 after the eight were marked: the still-open specs that name existing exports as context
+  const BASELINE_DERIVED = 13;   // 2026-09-08 (12→13): SPEC_npc_sheet_generation.md — Aevi, spec_ready, naming growthFor/kitFor/craftsOf/derivedLevel as the exports it reasons about. ⚠ The population grew and nothing went stale: `declaredStale` is still 0, and the spec is a ROUND-2 ask rather than a landing. It comes down when she marks it built.   // 2026-09-07 (11→12): SPEC_intent_heard_and_unheard.md — Aevi, spec_ready, naming stateIntent/growBond as the exports it answers; BUILT the same day (§133) — flips to built and comes down when she marks it   // 2026-09-07 (10→11): SPEC_hold_costs_crafts_and_hiring.md — Aevi, spec_ready, naming addFeature/improveHolding/setCrew/setGarrison as the exports it prices; BUILT the same morning (§128–§130) — flips to built and comes down when she marks it   // 2026-09-06 (12→10): Aevi flipped SPEC_holdings_screen, SPEC_npc_presence_cadence and DESIGN_codex_admission_and_summaries to `built` — the ratchet tightens to what is measured   // 2026-09-06 (11→12): SPEC_holdings_screen.md — Aevi, landed today, UNBUILT (CCode round 2), naming ensureHoldingImage/renameHolding/holdingSentence as the exports it asks to CHANGE — the next landing builds it and the count comes back down   // 2026-09-06 (10→11): SPEC_codex_summaries_and_merging.md — Aevi, landed today, UNBUILT, naming codex readers as context for the summaries it asks for   // 2026-09-06 (9→10): SPEC_npc_presence_cadence.md — Aevi, landed today, UNBUILT, naming npcsPresent/attentionByTier/worldRoster as context for the roster it asks for; the population grew, nothing went stale, and `declaredStale` is still 0   // 2026-09-05 (5): SPEC_quest_snapshot.md landed unbuilt, naming ringDistance/meaningDensity as context   // (4): SPEC_companion_becomes_person.md, same case   // (3): SPEC_party_mode_phase2.md, same case   // (2): four more specs landed unbuilt with the brief   // measured 2026-09-04 after the eight were marked: the still-open specs that name existing exports as context
   check(`§70: ratchet — \`spec_ready\` specs naming an existing engine export = ${derivedStale.length} (baseline ${BASELINE_DERIVED}) — may only go DOWN`,
     derivedStale.length <= BASELINE_DERIVED, derivedStale.map(r => `${r.f}:${r.named.slice(0, 3).join(",")}`).join(" · "));
   const built70 = rows70.filter(r => r.status === "built" || r.status === "part_built");
@@ -9588,6 +9588,60 @@ console.log("\n── §145 · the braid payoff reaches the verbs that leave som
       const m = rd("scripts/encounter_matrix.mjs");
       return /battleSkillsForCharacter/.test(m) && /declFromSelection/.test(m) && /playTurn\(/.test(m);
     })());
+}
+
+/* ═════ §146 — A PERSON'S KIT IS DRAWN FROM THEIR OWN GROUND (SPEC_npc_sheet_generation, round 2) ═════ */
+// ⛔ AEVI'S §3b: "`domains` for the 41 with none — the prerequisite. NOTHING ELSE WORKS WITHOUT IT."
+// ⚑ MEASURED: ALL 56 non-legend people ALREADY CARRY DOMAINS. The 69 without are LEGENDS — story records with
+// no abilities. The authoring was never the missing half.
+// ⚠️ WHAT WAS MISSING IS THE ACCESSOR. `kitFor` guards its domain draw on `if (domains && typeof domainAccess
+// === "function")`, and the ONLY live path — `personOpponentFor` → `battleSkillsFor` — passed neither it nor
+// `traditionIndex`. ⛔ SO THE DRAW HAD NEVER RUN IN PLAY: a person's kit was whatever `craftsOf` found on their
+// sheet, and `personOpponentFor` returns null for anyone with none ("let the threat path have them") — which is
+// exactly why every fight against the 41 was fought by a number.
+// ⚑ THE FOURTH DOOR: domains AUTHORED ✓ · read by `kitFor` ✓ · loaded ✓ · READ ✗.
+console.log("\n── §146 · the domain draw runs, and it stays near their ground ──");
+{
+  const NS = await import("../engine/npcsheet.js");
+  const TR = await import("../engine/traditions.js");
+  const { loadContentHeadless: lch146 } = await import("./headless_content.mjs");
+  const C146 = await lch146();
+  const people146 = Object.values(C146.npcs || {}).filter(n => !(n.isLegend || n.legend));
+  const cfg146 = C146.rules?.npcStanding || {};
+  check("§146: the premise is measured, not assumed — every non-legend person already carries domains",
+    people146.length >= 50 && people146.every(n => n.domains && Object.keys(n.domains).length),
+    `${people146.filter(n => !(n.domains && Object.keys(n.domains).length)).length} without`);
+  // ⛔ THE ACCESSOR IS PASSED ON THE LIVE PATH, or the draw is inert however well the content is authored.
+  const bt = rd("engine/battle_turn.js");
+  check("§146: ⛔ `personOpponentFor` passes domainAccess AND traditionIndex — without both, kitFor skips the draw",
+    /battleSkillsFor\(rec, \{ catalog, day, cfg, domainAccess, traditionIndex \}\)/.test(bt)
+    && /import \{[^}]*\bdomainAccess\b[^}]*\} from "\.\/traditions\.js"/.test(bt));
+  // ⚠️ AND IT IS THREADED FROM THE APP, not defaulted to null — a null index makes the draw run and find nothing,
+  // which is worse than not running because it LOOKS wired.
+  const app146 = rd("app.js");
+  check("§146: ⚑ …and the app threads the real traditionIndex into both entry points",
+    /personOpponentFor\(rec, \{[^}]*traditionIndex: CONTENT\.traditionIndex/.test(app146)
+    && /duelFromTarget\([\s\S]{0,400}traditionIndex: CONTENT\.traditionIndex/.test(app146));
+  // ⛑ THE EFFECT, MEASURED THROUGH THE PRODUCTION CALL: nobody is left falling through to the threat path.
+  const kit = (n, withAccess) => NS.battleSkillsFor(n, withAccess
+    ? { catalog: C146.abilities, cfg: cfg146, day: 100, domainAccess: TR.domainAccess, traditionIndex: C146.traditionIndex }
+    : { catalog: C146.abilities, cfg: cfg146, day: 100 });
+  const without = people146.filter(n => !(kit(n, false).skills || []).length).length;
+  const with_ = people146.filter(n => !(kit(n, true).skills || []).length).length;
+  check("§146: ⛔ NOBODY FALLS THROUGH TO THE THREAT PATH once the draw runs — a person is fought as a person",
+    with_ === 0 && with_ < without, `${without} → ${with_} with no kit`);
+  // ⚠️ AND IT STAYS NEAR THEIR GROUND. `kitFor`'s own note: reaching across the circle would invent a biography.
+  {
+    const someone = people146.find(n => !(n.abilities || []).length && n.domains?.primary);
+    const rows = kit(someone, true).skills || [];
+    const ids = [...new Set(rows.map(r => r.id))];
+    check("§146: ⚑ …and the draw is SMALL and near — not a wander through a 438-craft catalogue",
+      ids.length > 0 && ids.length <= 12, `${someone?.id}: ${ids.length} craft(s) — ${ids.slice(0, 5).join(", ")}`);
+  }
+  // ⛔ AND THE LIMIT THAT REMAINS, which is Aevi's §2 and not a defect here: an unmet person derives LEVEL 1,
+  // and kitFor caps a craft at tier ceil(level/5) — so the draw is real but thin until level comes from somewhere.
+  check("§146: ⚠️ the remaining limit is LEVEL, exactly as §2 says — an unmet person derives 1 and draws at tier 1",
+    NS.derivedLevel({ id: "nobody", domains: { primary: "numinous" } }, { day: 100, cfg: cfg146 }) === 1);
 }
 
 /* ══════════ REPORT ══════════ */

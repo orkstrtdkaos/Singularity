@@ -20,6 +20,7 @@
 // Every function here is PURE over its inputs except the character/state it is handed to mutate, takes its content as
 // arguments, and touches no DOM. app.js calls these; `tests/lib/realgame.mjs` calls these. One path.
 
+import { domainAccess } from "./traditions.js";   // ⛔ kitFor's domain draw is inert without it
 import { skillBattleRound, startEncounter, checkIncapacitation, isLethalEncounter } from "./encounters.js";
 import { synthesizeOpponentSheet } from "./skill_battle.js";
 import { synthesizeDuelDef } from "./random_encounters.js";
@@ -191,10 +192,15 @@ export function collapseIfFinished(rr, def, { swingBefore = 0, family = null, sb
 }
 
 /** A PERSON as a fight opponent: their whole sheet — attributes, health, energy, soak, level, kit. Was `personOpponent` in app.js. */
-export function personOpponentFor(rec, { catalog = {}, cfg = {}, day = null } = {}) {
+export function personOpponentFor(rec, { catalog = {}, cfg = {}, day = null, traditionIndex = null } = {}) {
   if (!rec) return null;
   const sheet = personSheetFor(rec, { day, cfg });
-  const { skills } = battleSkillsFor(rec, { catalog, day, cfg });
+  // ⛔ THE DOMAIN DRAW HAS NEVER RUN IN PLAY. `kitFor` fills a kit from a person's place on the circle only
+  // `if (domains && typeof domainAccess === "function")` — and this, its ONLY live caller, passed neither.
+  // ⚠️ So a person's kit was whatever `craftsOf` found on their sheet, and the 41 people carrying no abilities
+  // fell straight through to threat synthesis: every fight against them was fought by a number, not a person.
+  // ⚑ All 56 non-legend people ALREADY carry domains — the authoring was never the missing half. The accessor was.
+  const { skills } = battleSkillsFor(rec, { catalog, day, cfg, domainAccess, traditionIndex });
   if (!skills.length) return null;                       // nothing to fight with — let the threat path have them
   return {
     name: sheet.name, attributes: sheet.attributes, health: sheet.health, energy: sheet.energy,
@@ -211,12 +217,12 @@ export function personOpponentFor(rec, { catalog = {}, cfg = {}, day = null } = 
  *  named person entered play as a threat-curve body. The person's body is put back on the def, so the opponent sheet is
  *  AUTHORED (their crafts, their health) and the encounter starts at their health, not a synthesized handful.
  *  Returns { def, oppSheet, state } and writes `character.customEncounters[def.id]` and `character.activeEncounter`. */
-export function duelFromTarget(character, target, { catalog = {}, npcs = {}, cfg = {}, day = null, sb = null, here = null, lethal = false, threat = null } = {}) {
+export function duelFromTarget(character, target, { catalog = {}, npcs = {}, cfg = {}, day = null, sb = null, here = null, lethal = false, threat = null, traditionIndex = null } = {}) {
   const id = target?.id || target?.npcId || null, name = target?.name || null;
   const rec = (id && (character?.npcRegistry?.[id] || npcs?.[id]))
     || (name && (Object.values(character?.npcRegistry || {}).find(n => n?.name === name) || Object.values(npcs || {}).find(n => n?.name === name)))
     || null;
-  const person = rec ? personOpponentFor(rec, { catalog, cfg, day }) : null;
+  const person = rec ? personOpponentFor(rec, { catalog, cfg, day, traditionIndex }) : null;
   const fallbackThreat = Number(threat) || Number(target?.threat) || Math.max(20, Math.min(70, Math.round((Number(here?.dangerLevel) || 3) * 12)));
   const entry = { id: `harm-${slugify(target?.name || "foe")}-${(character?.activeEncounter?.state?.round || 0)}`,
     flavor: "fight", seed: `You have committed to violence against ${target?.name || "them"}.`,

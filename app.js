@@ -128,7 +128,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.420";
+const APP_VERSION = "1.9.421";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8117,12 +8117,14 @@ function personOpponent(target) {
       || Object.values(CONTENT.npcs || {}).find(n => n?.name === name)));
   if (!rec) return null;
   const npcCfg = CONTENT.rules?.npcStanding || {};
-  return personOpponentFor(rec, { catalog: fullCatalog(), cfg: npcCfg, day: absoluteWorldDay() });
+  // ⛔ traditionIndex RIDES TOO — `domainAccess` needs it to place a craft on the circle, and without it the
+  // draw would run and find nothing, which is worse than not running: it would look wired.
+  return personOpponentFor(rec, { catalog: fullCatalog(), cfg: npcCfg, day: absoluteWorldDay(), traditionIndex: CONTENT.traditionIndex });
 }
 
 function escalateToFight(target, choice) {
   duelFromTarget(character, target, { catalog: fullCatalog(), npcs: CONTENT.npcs || {}, cfg: CONTENT.rules?.npcStanding || {}, day: absoluteWorldDay(),
-    sb: CONTENT.skillBattle?.engine, here: hereNow(), lethal: choice?.intentRung === "lethal" });
+    sb: CONTENT.skillBattle?.engine, here: hereNow(), lethal: choice?.intentRung === "lethal", traditionIndex: CONTENT.traditionIndex });
   saveCharacter(character);
   renderSkillBattle();
 }

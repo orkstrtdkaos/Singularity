@@ -12197,6 +12197,27 @@ await (async () => {
     const NP = await import("../engine/npcs.js");
     check("333: the circle is Dunbar's number, not an array bound", NP.REGISTRY_CAP === 150);
 
+    // ⛔ ONE WRITER FOR `lastSeen` — the field `seekersAmong` reads as the seeking CLOCK. `seeking.js`
+    // exported `noteSeen` to write it and nothing imported it, while `applyNpcUpdates` wrote the same
+    // field inline. ⚠️ I FIRST READ THAT AS 'the clock never empties' AND IT WAS WRONG — the inline write
+    // was emptying it all along, which is why nothing misbehaved. The defect was DUPLICATION, and the
+    // resolution is that the meet path now calls the owner. This gate holds the behaviour either way.
+    {
+      const seen = { id: "t", npcRegistry: {}, relationships: {}, clock: { day: 7 } };
+      NP.applyNpcUpdates(seen, [{ op: "meet", npcId: "gale_smith", name: "Gale Smith", role: "smith" }],
+        { day: 7, locationId: "millbrook" });
+      const rec = seen.npcRegistry["gale-smith"];
+      check("333: ⛑ a meet stamps the seeking clock — `noteSeen` finds the record by the key it is filed under",
+        rec?.lastSeen?.day === 7 && rec?.lastSeen?.locationId === "millbrook", JSON.stringify(rec?.lastSeen ?? null));
+      // ⚠️ THE ONE DELIBERATE DIFFERENCE from the inline write it replaced: a meet carrying no place keeps
+      // the last place we knew, instead of nulling a location for no reason.
+      NP.applyNpcUpdates(seen, [{ op: "meet", npcId: "gale_smith", name: "Gale Smith" }], { day: 9, locationId: null });
+      check("333: …and a placeless meet advances the day WITHOUT forgetting where we last saw them",
+        seen.npcRegistry["gale-smith"]?.lastSeen?.day === 9
+        && seen.npcRegistry["gale-smith"]?.lastSeen?.locationId === "millbrook",
+        JSON.stringify(seen.npcRegistry["gale-smith"]?.lastSeen ?? null));
+    }
+
     // ⛔ THE RULE: least-met first, oldest-first among equals. Everyone met once is spent before anyone met twice.
     const reg = {
       once_old:  { id: "once_old",  met: 1, firstMet: { day: 1 } },
@@ -18979,6 +19000,25 @@ await (async () => {
       // swinging at is exactly the cost of a bad read, which is what makes the read worth making.
       check("CCODE-250 JOIN: guarding the wrong ally saves nobody — a bad read costs you the round",
         round([IC.openProtection({ protectorId: "veth", allyId: "player", rank: 2 })]).imposed?.onId === "sprig");
+
+      // ⛔ AND THE CHARGE IS SPENT BY PLAY, WHICH NOTHING PROVED BEFORE. §5.2 above passes because the
+      // TEST calls `spendProtection` itself — the fifth door: the READ door passed by the test alone.
+      // ⚠️ Nothing in engine/ or app.js imported it, so `chargesLeft` was never decremented: a rank-1
+      // guard (ONE charge) intercepted forever, and `tickProtections`'s spent-check was unreachable code.
+      // This drives a real round and never touches `spendProtection`.
+      {
+        const oneUse = IC.openProtection({ protectorId: "veth", allyId: "sprig", rank: 1 });
+        check("CCODE-246: a rank-1 protection starts with exactly ONE charge (else the test below is vacuous)",
+          oneUse.chargesLeft === 1, String(oneUse.chargesLeft));
+        const first1 = round([oneUse]);
+        check("CCODE-246: ⛑ a one-charge guard catches the blow — and the ROUND spends the charge, not the test",
+          first1.imposed?.intercepted?.caughtBy === "veth" && oneUse.chargesLeft === 0,
+          `caught=${first1.imposed?.intercepted?.caughtBy} chargesLeft=${oneUse.chargesLeft}`);
+        const second1 = round([oneUse]);
+        check("CCODE-246: ⛔ …and a SPENT guard stands in front of nobody — one hit, not a standing wall",
+          second1.imposed?.onId === "sprig" && !second1.imposed?.intercepted,
+          JSON.stringify(second1.imposed ?? null));
+      }
     }
 
 

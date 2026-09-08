@@ -10,7 +10,7 @@ import { chooseTarget, foeKnowledge } from "./targeting.js";
 import { damageMixOf, wardAnswer, resolveComposite } from "./damagetypes.js";   // CCODE-281: composite damage, and the reader `wardTypes` never had
 import { predictAggregate, distributeCasualties, combatWeight } from "./melee.js";   // CCODE-298: the folded line takes losses too   // CCODE-274: the folded party contributes as a measured aggregate, not as N more rolls   // CCODE-250: a foe chooses who to hit
 import { groupCapability, loadBearing } from "./group.js";   // CCODE-322/323: what the line covers, who holds it alone, and how much of it they can bring
-import { redirectImposition, interceptorFor, catchesCondition, catchesDamage } from "./intercept.js";
+import { redirectImposition, interceptorFor, catchesCondition, catchesDamage, spendProtection } from "./intercept.js";
 import { persistsUntilHealed, persistedConditionName } from "./conditions.js";   // CCODE-296: the readers that accept BOTH authored shapes
 import { downEntity } from "./combatants.js";   // CCODE-298: the first path that can fire an authored downedEffect   // CCODE-296: the readers that accept BOTH authored shapes   // CCODE-250: …and someone may step in front of it
 import { mechanicFor, rollMagnitude, resolveHeal, resolveImposition, antisoakLanded, ongoingHarmOf, authoredBlock, resolveProvoke, resolveSoothe, rollOperative } from "./craftmechanics.js";   // SNG-263: a craft's own magnitudes, with family fallback
@@ -1645,6 +1645,12 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
             onId: gs?.id ?? guard.protection.protectorId, onName: gs?.name ?? guard.protection.protectorId,
             intercepted: { caughtBy: guard.protection.protectorId, onBehalfOf: damage.onId,
               why: (gs?.name || "they") + " took it instead" } };
+          // ⛔ AND THE CHARGE IS SPENT HERE, WHERE THE GUARD WAS ACTUALLY USED. `spendProtection` is
+          // deliberately separate from the DECISION so a redirect can be inspected without consuming
+          // anything — but nothing in play ever spent it, so a rank-1 guard (`chargesLeft: 1`) caught
+          // every blow forever and `tickProtections`'s spent-check could never fire. ⚠️ Safe here: both
+          // callers of `battleRound` resolve a REAL round, neither previews.
+          spendProtection(guard.protection);
         }
       }
       // CCODE-83: `landed` is NEGATIVE when the target ABSORBS this damage type, so this same line heals it —
@@ -1860,8 +1866,11 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
           imposition: { condition: imposed.condition, degradesTo: spec?.degradesTo, onCrit: spec?.onCrit },
           degree: winRoll.degree });
         // ⚠️ NULL MEANS NOBODY STOOD THERE, and the imposition is exactly what it was. Additive.
-        if (caught) imposed = { ...imposed, intercepted: caught, condition: caught.lands.condition,
+        if (caught) { imposed = { ...imposed, intercepted: caught, condition: caught.lands.condition,
           onId: caught.lands.on, onName: (allies || []).find(a => a.id === caught.lands.on)?.name || caught.lands.on };
+          // the same spend on the condition side — `redirectImposition` already returns the protection it used.
+          spendProtection(caught.protection);
+        }
       }
     }
   }

@@ -7653,8 +7653,17 @@ console.log("\n── §107 · who is around today, offered and never forced ─
   const b = PR.presentToday(who, C107, { day: busy, hereId: "millbrook" });
   check("§107: ⛑ the same day offers the same people, however many turns it takes",
     JSON.stringify(a) === JSON.stringify(b));
-  check("§107: …and a different day offers different people",
-    JSON.stringify(a) !== JSON.stringify(PR.presentToday(who, C107, { day: busy + 1, hereId: "millbrook" })));
+  // ⛔ OVER THE WINDOW, NOT ONE ADJACENT PAIR. This asked whether `busy` and `busy + 1` differ, and a
+  // person who stays in town two days running makes that FALSE while nothing is wrong — 7 of 59 adjacent
+  // pairs are identical, and Aevi's content moved the calendar until the first busy pair was one of them.
+  // ⚠️ The property meant is that the roster VARIES across days, which is a claim about the WINDOW; a
+  // single hand-picked pair could never state it. Same defect as the quiet-day fixture noted just above.
+  const rosters107 = new Set();
+  for (let d = 0; d < 60; d++) rosters107.add(JSON.stringify(PR.presentToday(who, C107, { day: d, hereId: "millbrook" })));
+  // ⛑ NON-VACUITY: a presence system handing back ONE constant roster — or nobody, ever — still fails here.
+  check("§107: …and the roster VARIES across days — the day is an input, not decoration",
+    rosters107.size > 1 && [...rosters107].some(r => r !== "[]"),
+    `${rosters107.size} distinct roster(s) across 60 days at Millbrook`);
 
   // ⚑ A STRANGER CAN FINALLY ARRIVE — the whole point, since KNOWN PEOPLE could only ever return the met.
   const strangers = over("millbrook", 60), anyUnmet = (() => {

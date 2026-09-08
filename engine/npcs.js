@@ -11,6 +11,7 @@ import { isMinorSubject } from "./art.js";
 import { applyCodexUpdates } from "./codex.js"; // SNG-199 §5: meeting someone MUST write the codex — direct, never injected
 import { recordDeed, renownHeardAt } from "./reputation.js";   // CCODE-85: an NPC keeps a record the same way the player does
 import { personName, mintedWants, nameOf } from "./names.js";   // SNG-431 §1: the ONE namer — the GM path is one of the three that calls it
+import { noteSeen } from "./seeking.js";   // ⛔ the seeking clock EMPTIES when you meet — nothing called this
 
 /** SNG-190 §2: a generateRequest:npc in the SAME turn as an op:"meet" for that person is ONE person.
  *  Both ops are mandatory by the contract (rule 14 + the generateRequest rule) and nothing reconciled
@@ -374,7 +375,15 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
         if (a.people && !n.people) { n.people = a.people; n.peopleSource = a.peopleSource; }
       } catch (err) { if (typeof console !== "undefined") console.warn("[npcUpdates] affiliation enrichment failed (person still registered):", err?.message); }
     }
-    n.lastSeen = { locationId: ctx.locationId || null, day: ctx.day ?? null };
+    // ⛔ ONE WRITER FOR `lastSeen`, NOT TWO. `seeking.js` owns this field — `seekersAmong` reads
+    // `n.lastSeen?.day` as the clock — and it exported `noteSeen` to write it, while this line wrote the
+    // same field inline. ⚠️ NOT A LIVE BUG: the clock WAS being emptied, by this line, which is why
+    // nothing misbehaved. But two writers for one field is the shape that lets them drift, and the
+    // exported one was reachable only from a test.
+    // ⛑ ONE DELIBERATE DIFFERENCE: `noteSeen` keeps the last known location when a meet carries none
+    // (`locationId ?? n.lastSeen?.locationId`), where this line nulled it — losing a place we knew for no
+    // reason. Everything else is identical.
+    noteSeen(character, n.id, ctx.day ?? null, ctx.locationId || null);
     // SNG-333 — ⚠️ COUNT THE MEETINGS. Erik: "if you interface with the NPCs then it should count those
     // interactions and keep the ones you meet more than once from dropping off." This is the only new
     // field, and it is written at the one place every interaction already passes through.

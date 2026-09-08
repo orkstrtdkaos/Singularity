@@ -9711,10 +9711,11 @@ console.log("\n── §147 · one roster, derived; the opponent gate; the Sover
   const reach = npcs147.filter(n => { try { return !!BT147.personOpponentFor(n, { catalog: C147.abilities, cfg: cfg147, day: 100, traditionIndex: C147.traditionIndex }); } catch { return false; } });
   const levelOne = reach.filter(n => n.level == null && NS147.derivedLevel(n, { day: 100, cfg: cfg147 }) === 1);
   check("§147: the fixture is not vacuous — the opponent path reaches most of the corpus", reach.length >= 100, `${reach.length} of ${npcs147.length}`);
-  // ⛔ BASELINE 40 (2026-09-08): the people in npcs/*.json with neither a level nor a tier — adept_sona, archive_guardian, maker_orrin,
-  // warden_isolde… — every one derives level 1 with 3+5 health. Aevi's SPEC_npc_sheet_generation §2 owns the fix (level is step one).
-  // May only go DOWN. Lower it by authoring a level or a tier; never by loosening this.
-  const LEVEL_ONE_BASELINE = 40;
+  // ✅ 40 → 0 (2026-09-08, same day): NOT by authoring forty sheets — by deriving the ONE missing field. Aevi,
+  // ASK_generate_the_forty: "NOT A MISSING SHEET. NOT A MISSING KIT. ONE MISSING FIELD." All forty were level 1
+  // for exactly one reason — no `tier` — and `tierFloor` already fired for everyone who had one. §148 owns the
+  // derivation; this stays as the standing guarantee that nobody arrives at level 1 again.
+  const LEVEL_ONE_BASELINE = 0;
   check(`§147: ratchet — people reachable as an opponent who would fight at LEVEL 1 = ${levelOne.length} (baseline ${LEVEL_ONE_BASELINE}) — may only go DOWN`,
     levelOne.length <= LEVEL_ONE_BASELINE, levelOne.slice(0, 6).map(n => n.id).join(", "));
   const arrays = npcs147.filter(n => Array.isArray(n.domains?.primary));
@@ -9739,6 +9740,21 @@ console.log("\n── §147 · one roster, derived; the opponent gate; the Sover
     at(1)?.level === Number(cfg147.tierFloor?.mythic) && at(1)?._form === undefined);
   check("§147: ⚑ …and a record with NO forms block resolves exactly as it always did — reader before field",
     (() => { const { forms, ...plain } = sov; const o = BT147.personOpponentFor(plain, { catalog: C147.abilities, cfg: cfg147, day: 100, traditionIndex: C147.traditionIndex, stageOf: () => 4 }); return o?.level === Number(cfg147.tierFloor?.mythic) && o?._form === undefined; })());
+  // ✅ R41b §1 (Erik, 2026-09-08) ANSWERED R41's OPEN q1 WITH A NUMBER: "that would be STAGE 3 when they arrive
+  // diminished", with R41a's "final form for the last arc stage". ⛔ So an omitted `atStage` falls to the RULING
+  // rather than to Infinity — an arrival that can never trigger is content that exists and does nothing.
+  {
+    const bare = { arcAffinity: { arcId: "a" }, forms: { diminished: { level: 45 }, final: { level: 85 } } };
+    const at = (st) => SV147.sovereignFormFor(bare, { stageOf: () => st })?.form || null;
+    check("§147: ✅ R41b — with no `atStage` authored the RULED stages apply: nothing before 3, diminished at 3, final at 4",
+      SV147.RULED_STAGES.diminished === 3 && SV147.RULED_STAGES.final === 4
+      && at(1) === null && at(2) === null && at(3) === "diminished" && at(4) === "final",
+      `1:${at(1)} 2:${at(2)} 3:${at(3)} 4:${at(4)}`);
+    check("§147: ⚑ …and a record may still name its own per-arc stage, which outranks the default",
+      SV147.sovereignFormFor({ arcAffinity: { arcId: "a" }, forms: { diminished: { atStage: 2, level: 10 } } }, { stageOf: () => 2 })?.form === "diminished");
+    check("§147: ⚑ …and the arrival SAYS what it is here to do — R41b: push the arc its way, and end whoever opposes it",
+      /push the arc back its own way and to end whoever is opposing it/.test(String(SV147.sovereignFormLine({ name: "X" }, { form: "diminished" }))));
+  }
   check("§147: ⚑ …and a Sovereign with no arc has no arrival, and says so", SV147.sovereignFormFor({ forms: { final: { atStage: 1, level: 9 } } }, { stageOf: () => 1 })?.why === "no arc to arrive on");
   check("§147: ⛔ …and the app threads the LIVE arc stage into the duel — worldtick owns it, the engine is handed it",
     /stageOf: \(arcId\) => arcStageNow\(CONTENT, character, arcId\)/.test(rd("app.js")) && /stageOf/.test(rd("engine/battle_turn.js").slice(rd("engine/battle_turn.js").indexOf("export function duelFromTarget"))));
@@ -9757,6 +9773,79 @@ console.log("\n── §147 · one roster, derived; the opponent gate; the Sover
     !/Its people arrive properly further down, hydrated from `legends\.roster`\.\s*$/m.test(rd("engine/state.js")) && /read by NOTHING/.test(rd("engine/state.js")));
   check("§147: ⚑ app.js has ONE door to a person-as-opponent (escalateToFight → duelFromTarget); the unreferenced wrapper is gone",
     !/^function personOpponent\(target\)/m.test(rd("app.js")) && /function escalateToFight\(target, choice\)/.test(rd("app.js")));
+}
+
+/* ═════ §148 — A PERSON IS NOT LEVEL 1 FOR WANT OF ONE FIELD: ROLE → TIER → THE CHAIN THAT ALREADY RAN ═════ */
+// ⛔ ERIK: "I thought you were going to have him make the generative engine build out the remaining empty NPCs?"
+// ⚑ AEVI, ASK_generate_the_forty, correcting her own spec: she wrote that generation was the answer and then
+// hand-authored nineteen sheets. "AUTHORING FORTY MORE BY HAND IS THE WRONG RESPONSE TO THAT NUMBER."
+// ⚠️ MEASURED, AND SHE IS RIGHT: 40 of 40 level-1 records were level 1 for ONE reason — no `tier`. `tierFloor`
+// (riffraff 1 · notable 5 · regional 12 · heroic 25 · epic 40 · legendary 60 · mythic 85) already fired for the
+// 64 who had one. So the fix is a field, and every link after it already worked:
+//     role → TIER → tierFloor → LEVEL → kitFor → a kit → growthFor → it grows
+// ⛔ AND THE TABLE IS CONTENT (`rules/tier_signals.json`), NOT A MAP IN THE ENGINE. Which rung a role sits on is
+// a judgement about the world; the engine only reads it, and with no signals authored it derives nothing at all.
+console.log("\n── §148 · role → tier, default down, authored always wins, and every guess is visible ──");
+{
+  const NS148 = await import("../engine/npcsheet.js");
+  const { loadContentHeadless: lch148 } = await import("./headless_content.mjs");
+  const C148 = await lch148();
+  const cfg148 = C148.rules?.npcStanding || {};
+  const npcs148 = Object.values(C148.npcs || {});
+  // ⛔ THE SIGNALS REACH THE ENGINE — registered, loaded, AND merged into the block every caller already threads
+  // as `cfg`. A dial nobody passes is a dial nobody reads; this rides inside `npcStanding` beside `tierFloor`.
+  check("§148: ⛔ the signal table is authored, registered and REACHES the deriver through npcStanding",
+    !!cfg148.tierSignals && Array.isArray(cfg148.tierSignals.rules) && cfg148.tierSignals.rules.length >= 5
+    && /rules\/tier_signals\.json/.test(rd("content/packs/core/manifest.json")),
+    `${cfg148.tierSignals?.rules?.length ?? 0} rule(s)`);
+  // ⛔ AND WITHOUT IT, NOTHING IS GUESSED. No code fallback — the same rule `tierFloor` itself is written under:
+  // a built-in map would MASK a broken thread instead of exposing it.
+  check("§148: ⛔ with no signals authored the deriver returns NULL — no code default may stand in for content",
+    NS148.tierFromRole({ role: "Master of the Harmonic Heights" }, { cfg: { tierFloor: cfg148.tierFloor } }) === null);
+  // ⚑ THE FORTY ARE GONE, and by derivation rather than by hand.
+  const stillOne = npcs148.filter(n => n.level == null && NS148.derivedLevel(n, { day: 100, cfg: cfg148 }) === 1);
+  check("§148: ⛔ NOBODY RESOLVES TO LEVEL 1 ANY MORE — 40 → 0, and not one sheet was hand-authored",
+    stillOne.length === 0, stillOne.map(n => n.id).slice(0, 8).join(", "));
+  // ⛔ AN AUTHORED TIER ALWAYS WINS, and so does an authored level — the derivation only speaks into silence.
+  const spoken = { id: "x", role: "Master of the Deep", tier: "riffraff" };
+  check("§148: ⛔ an AUTHORED tier outranks the derivation — authored wins, derived fills",
+    NS148.derivedLevel(spoken, { day: 100, cfg: cfg148 }) === Number(cfg148.tierFloor.riffraff)
+    && NS148.tierFromRole({ id: "x", role: "Master of the Deep" }, { cfg: cfg148 })?.tier === "heroic");
+  check("§148: ⚑ …and an authored LEVEL outranks both",
+    NS148.derivedLevel({ id: "x", role: "Master of the Deep", level: 3 }, { day: 100, cfg: cfg148 }) === 3);
+  // ⛔ DEFAULT DOWN, NEVER UP (Aevi): "a wrong guess that makes someone weaker is a disappointment; one that makes
+  // them stronger is an ambush." MEASURED: L1 is 35 health and 1 craft; heroic is 155 and 13.
+  check("§148: ⛔ an unreadable role takes the table's DEFAULT, and the default is a LOW rung",
+    (() => { const t = NS148.tierFromRole({ role: "zzz nothing matches this" }, { cfg: cfg148 }); return t && Number(cfg148.tierFloor[t.tier]) <= Number(cfg148.tierFloor.notable); })(),
+    JSON.stringify(NS148.tierFromRole({ role: "zzz nothing matches this" }, { cfg: cfg148 })));
+  check("§148: ⛔ …and NO derivation may reach epic, legendary or mythic — those rungs are AUTHORED ONLY",
+    npcs148.filter(n => !n.tier && n.level == null).every(n => {
+      const t = NS148.tierFromRole(n, { cfg: cfg148 }); if (!t) return true;
+      return Number(cfg148.tierFloor[t.tier]) <= Number(cfg148.tierFloor[cfg148.tierSignals.ceiling]);
+    }));
+  // ⚠️ THE DEMOTION ORDERING IS THE DESIGN: youth is listed first so a young keeper is not yet a keeper.
+  check("§148: ⚠️ a demoting word outranks a promoting one — \"young\" beats \"keeper\", which is why order matters",
+    NS148.tierFromRole({ role: "A young keeper of the gate" }, { cfg: cfg148 })?.tier === "notable"
+    && NS148.tierFromRole({ role: "A keeper of the gate" }, { cfg: cfg148 })?.tier === "regional");
+  // ⚑ VISIBLE — Erik must be able to correct a rung the engine guessed, so a guess is marked on the SHEET…
+  const guessSheet = NS148.sheetFor(C148.npcs.brann_tollhand, { cfg: cfg148 });
+  const authoredSheet = NS148.sheetFor(C148.npcs.pell, { cfg: cfg148 });
+  check("§148: ⚑ a DERIVED rung is marked on the sheet (`tierDerived`), and an authored one is not",
+    !!guessSheet.tierDerived?.tier && /role matched/.test(String(guessSheet.tierDerived.why)) && !authoredSheet.tierDerived,
+    JSON.stringify(guessSheet.tierDerived));
+  // …and NEVER written back onto the content record — a derived value stored on content is the repeated defect.
+  check("§148: ⛔ …and it is NOT written onto the record — the engine does not stamp content it merely read",
+    C148.npcs.brann_tollhand.tier === undefined && C148.npcs.brann_tollhand._tierDerived === undefined);
+  // ⚑ AND THE CHAIN AFTER IT ACTUALLY RUNS: a tier buys a level, and a level buys a kit.
+  const BT148 = await import("../engine/battle_turn.js");
+  const kitOf = (n) => { const o = BT148.personOpponentFor(n, { catalog: C148.abilities, cfg: cfg148, day: 100, traditionIndex: C148.traditionIndex }); return o ? [...new Set((o.skills || []).map(k => String(k.id)))].filter(id => !id.startsWith("_")) : []; };
+  const before148 = kitOf({ ...C148.npcs.adept_sona, role: "zzz", tier: "riffraff" });
+  const after148 = kitOf(C148.npcs.adept_sona);
+  check("§148: ⛔ THE CHAIN RUNS — the derived rung buys a level, and the level buys more of a kit",
+    after148.length > before148.length, `riffraff ${before148.length} craft(s) → derived ${after148.length}`);
+  // ⛔ AND THE HONEST COUNT: R47's bare `_strike` is engine furniture, not a kit. The roster says so now.
+  check("§148: ⛔ the roster counts REAL crafts — a lone `_strike` is not a kit, and 62 records have only that",
+    /filter\(id => !id\.startsWith\("_"\)\)/.test(rd("scripts/roster.mjs")) && /only the bare strike — no real craft/.test(rd("scripts/roster.mjs")));
 }
 
 /* ══════════ REPORT ══════════ */

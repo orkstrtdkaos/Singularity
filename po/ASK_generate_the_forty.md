@@ -84,3 +84,83 @@ lack is the kit, and `kitFor` now supplies one the moment they have `domains`.**
 
 ⬜ **So the same derivation closes both populations**, and the only hand-authoring left is the handful whose
 `closed` list is the character.
+
+---
+
+# ANSWERED — CCODE · 2026-09-08 · the forty are derived, and nobody was hand-authored
+
+✅ **Your read is right and it verified exactly: 40 of 40, level 1 for ONE reason — no `tier`.** ⚑ **role
+100% · assistTags 100% · domains 100% · communityId 98%.** ⛔ **40 → 0, and the ratchet is tightened to 0.**
+
+---
+
+## §6 — ⚑ WHAT SHIPPED
+
+```
+role → tierFromRole → tierFloor → LEVEL → kitFor → a kit → growthFor
+```
+
+| | |
+|---|---|
+| ⚑ **`rules/tier_signals.json`** | ⛔ **CONTENT, not a map in the engine.** Which rung a role sits on is your judgement and Erik's; the engine only reads. **Every row is correctable without touching code** |
+| **`npcsheet.tierFromRole`** | first match wins, in order; ⚠️ **demoting patterns listed FIRST**, so *"young keeper"* is `notable`, not `regional` |
+| **`derivedLevel`** | consults it **only where the record is silent** |
+| ⛑ **it rides inside `npcStanding`** | the block every caller already threads as `cfg`, beside `tierFloor` — **a dial nobody passes is a dial nobody reads** |
+
+### ✅ ALL FOUR GUARDS, GATED (§148)
+
+| your guard | |
+|---|---|
+| **an authored tier always wins** | ✅ and an authored **level** outranks both |
+| **default DOWN, not up** | ✅ default `notable`; ⛔ **and a hard `ceiling: heroic` — no derivation may EVER reach epic, legendary or mythic.** Those rungs are a claim about the world's great figures, and a regex is not entitled to make it |
+| **visible** | ✅ **`tierDerived: { tier, why }` on the SHEET** — ⚠️ **not written onto the record**: stamping a derived value onto content is the defect this project has ruled against four times. The roster shows it as **`~notable`** |
+| **the ratchet only goes down** | ✅ **40 → 0**, locked in |
+
+⛔ **AND NO CODE FALLBACK.** With the table absent the deriver returns `null` and every record resolves exactly as it did yesterday — the same rule `tierFloor` itself is written under: *a built-in map would MASK a broken thread instead of exposing it.*
+
+**Where the forty landed:** ⚑ **19 regional · 12 notable · 9 heroic.**
+
+---
+
+## §7 — ⛔ TWO CORRECTIONS, AND THE SECOND ONE IS MINE
+
+### ⚠️ 1 · `marshal_veyn` DERIVES `notable`, AND SHE IS A MARSHAL
+
+Her **role string** reads *"Marcher of the Redline — she has held a line and she has lost one."* ⛔ **The word
+"marshal" is only in her ID.** The deriver reads `role`, so she takes the default. ⚑ **This is the guard
+working as designed** — it failed DOWNWARD, which is the disappointment rather than the ambush — ⬜ **but she
+is exactly the row to correct: author `tier: "heroic"` on her, or widen the pattern to `marcher`.**
+
+### ⛔ 2 · MY ROSTER COLUMN WAS TOO GENEROUS AND I GAVE ERIK THE GENEROUS NUMBER
+
+**I reported *"125 of 125 reachable, 0 fall through to threat."*** ⚠️ **`battleSkillsFor` adds R47's bare
+`_strike` to nearly everyone**, so *"reachable with a kit"* was true of records whose entire kit is one
+fallback swing.
+
+> ⛔ **MEASURED: 62 records are reachable and have NO REAL CRAFT AT ALL — only `_strike`.** That is the threat
+> path wearing a person's name, and my column was calling it a kit.
+
+✅ **Fixed: the roster counts real crafts only, and names the 62.** ⚑ **Which makes your §5 right and my
+earlier line wrong** — the tiered figures do lack a kit. ⛔ **And their missing field is `domains`, not
+`tier`:** they already draw a level from their tier floor, and `kitFor` skips the draw entirely without
+domains. **59 of the 62 are the legends and epics; the other 3 are the array-shaped ones below.**
+
+---
+
+## §8 — ⚑ AND THE THREE ARRAY-DOMAINS RECORDS NOW HAVE A VISIBLE COST
+
+`rootbound_vaskar` · `the_old_stag` · `walker_elder_thren` — ⛔ **all three are in the bare-strike 62.**
+⚠️ `domainAccess` reads a string; an array matches nothing, so their draw returns empty and an Ancient Ent
+hardliner fights with one plain swing. ⛑ **Three edits, and they gain a kit the same hour.**
+
+---
+
+## §9 — ⬜ WHAT IS STILL OPEN
+
+| | who |
+|---|---|
+| ⛔ **the 62 with no real craft** — `domains` on the legends/epics is the one field, exactly as `tier` was here | ⚠️ **Aevi** — and it is the same one-field shape, so it should be as cheap |
+| **`marshal_veyn`, and any rung you disagree with** | Aevi — the `~` column shows every guess |
+| **the 3 array `domains`** | Aevi — three edits |
+| ⛔ **Corvane / Seraphine / Aevi-the-Watcher: records, or re-pointed hinges** | **Erik** |
+| **Sovereign `forms`** | Aevi authors; Erik owns which stage |

@@ -28,6 +28,13 @@
 
 const num = (v, d = 0) => (Number.isFinite(Number(v)) ? Number(v) : d);
 
+/** ⛔ R41b §1 (Erik, 2026-09-08), RULED AND NOT TUNED: *"That would be STAGE 3 when they arrive diminished and
+ *  attempt to push the arc back their way and work to eliminate the threats"* — with R41a's *"final form for
+ *  the last arc stage"*. ⚠️ A record may still name its own `atStage` per arc; these are what a `forms` block
+ *  that omits one falls to. Without them an authored Sovereign with no `atStage` would never arrive at all,
+ *  which is the inert-by-omission shape this project keeps closing. */
+export const RULED_STAGES = { diminished: 3, final: 4 };
+
 /** Which authored form is in force for this record at the arc's current stage, or null for "no forms". PURE.
  *  Returns { form, level, abilities, note, arcId, stage } — `level` and `abilities` are undefined when the form
  *  does not author them, so a caller spreads only what was said. */
@@ -42,8 +49,11 @@ export function sovereignFormFor(rec, { stageOf = null, stage = null } = {}) {
   // ⛔ FINAL WINS WHERE BOTH APPLY. A stage at or past `final.atStage` is the final form; at or past
   // `diminished.atStage` is the weakened arrival; before either, the Sovereign has not come.
   const fin = forms.final, dim = forms.diminished;
-  const pick = (fin && s >= num(fin.atStage, Infinity)) ? ["final", fin]
-    : (dim && s >= num(dim.atStage, Infinity)) ? ["diminished", dim]
+  // ⚑ AN OMITTED `atStage` FALLS TO THE RULING (R41b §1), never to Infinity — an arrival that can never
+  // trigger is content that exists and does nothing.
+  const stageFor = (f, k) => num(f?.atStage, RULED_STAGES[k]);   // ⚠ not `at` — that name already holds the resolved stage
+  const pick = (fin && s >= stageFor(fin, "final")) ? ["final", fin]
+    : (dim && s >= stageFor(dim, "diminished")) ? ["diminished", dim]
     : null;
   if (!pick) return { form: null, arcId, stage: s, why: "not yet arrived" };
   const [form, def] = pick;
@@ -61,5 +71,8 @@ export function sovereignFormLine(rec, form) {
   const name = rec?.name || rec?.id || "it";
   return form.form === "final"
     ? `${name} stands in FINAL FORM — this is the last stage, and there is no weaker version behind it.`
-    : `${name} has ARRIVED DIMINISHED — arriving is diminishment; it can be fought, and it can be lost to survivably.`;
+    // ⚑ R41b §1: the arrival is not a cutscene. It lands with two jobs — push the arc its own way, and
+    // eliminate the people opposing it — so a diminished Sovereign is an ACTIVE PARTY, not a boss waiting.
+    : `${name} has ARRIVED DIMINISHED — arriving is diminishment; it can be fought, and it can be lost to`
+      + ` survivably. It is here to push the arc back its own way and to end whoever is opposing it.`;
 }

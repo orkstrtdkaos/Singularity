@@ -46,6 +46,39 @@ const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
  *
  *  ⚠️ AND THE CEILING IS NOW CANON RATHER THAN AN ARBITRARY WALL. 100 is where the Veil is crossed, so a
  *  clamp at 100 means "as far as anyone goes on THIS side" instead of "as far as we bothered to model". */
+/** ⛔ WHICH RUNG A ROLE SITS ON — Aevi, ASK_generate_the_forty: "NOT A MISSING SHEET. NOT A MISSING KIT. ONE
+ *  MISSING FIELD." All 40 level-1 records were level 1 for exactly one reason: no `tier`. `tierFloor` already
+ *  maps tier → level and already fires for the 64 who have one, so deriving the tier makes the whole existing
+ *  chain run — tierFloor → level → kitFor → growthFor.
+ *
+ *  ⚠️ THE TABLE IS CONTENT (`rules/tier_signals.json`), NEVER A MAP IN HERE. The judgement about which rung a
+ *  role sits on is Aevi's and Erik's; the engine only reads. ⛔ AND THERE IS DELIBERATELY NO CODE FALLBACK: with
+ *  no signals authored this returns null and a record stays exactly as it is today, so a broken thread shows as
+ *  a broken thread instead of being masked — the same rule `tierFloor` itself is written under.
+ *
+ *  ⛔ DEFAULT DOWN, NEVER UP. Measured: level 1 is 35 health and 1 craft; heroic is 155 and 13. A rung guessed
+ *  high is an ambush, so the table's `ceiling` bounds every derivation and epic/legendary/mythic stay authored-only.
+ *  PURE. Returns { tier, why } or null. */
+export function tierFromRole(entry, { cfg = {} } = {}) {
+  const sig = cfg?.tierSignals; if (!sig || !Array.isArray(sig.rules)) return null;
+  const role = String(entry?.role || "").trim(); if (!role) return null;
+  const order = Object.keys(cfg?.tierFloor || {});
+  // ⛔ THE CEILING IS A RUNG NAME, and it bounds by FLOOR VALUE rather than by list position — two ladders that
+  // can disagree is the stored-copy-of-a-derived-value failure this project has committed twice.
+  const floorOf = (t) => num(cfg?.tierFloor?.[String(t).toLowerCase()], NaN);
+  const capF = floorOf(sig.ceiling); 
+  for (const r of sig.rules) {
+    let re = null; try { re = new RegExp(r.match, "i"); } catch { continue; }   // a bad pattern is skipped, never thrown
+    if (!re.test(role)) continue;
+    const t = String(r.tier || "").toLowerCase();
+    if (!order.includes(t)) continue;                                            // a rung the ladder does not carry
+    const bounded = (Number.isFinite(capF) && floorOf(t) > capF) ? String(sig.ceiling).toLowerCase() : t;
+    return { tier: bounded, why: `role matched /${r.match}/` };
+  }
+  const d = String(sig.default || "").toLowerCase();
+  return order.includes(d) ? { tier: d, why: "no signal — the table's default" } : null;
+}
+
 export function derivedLevel(entry, { day = null, cfg = {}, authored = null } = {}) {
   const met = num(entry?.met, 1);
   const known = day != null && entry?.firstMet?.day != null
@@ -81,7 +114,10 @@ export function derivedLevel(entry, { day = null, cfg = {}, authored = null } = 
   // mythic NPC quietly stays a nobody — so a built-in map would MASK a broken thread instead of exposing
   // it, and `wiring_audit` would report the dial as unread while the engine looked fine.
   const floors = cfg.tierFloor || null;
-  const tier = String(authored?.tier ?? entry?.tier ?? "").toLowerCase();
+  // ⛔ AN AUTHORED TIER ALWAYS WINS; a DERIVED one only speaks where the record is silent. `sheetFor`'s contract
+  // already says authored wins and derived fills, and this is the same sentence one field down.
+  const authoredTier = String(authored?.tier ?? entry?.tier ?? "").toLowerCase();
+  const tier = authoredTier || String(tierFromRole(entry, { cfg })?.tier || "");
   const base = num(authored?.level ?? entry?.level, 0)
     || (floors ? num(floors[tier], 0) : 0)
     || 1;
@@ -173,6 +209,10 @@ function sheetFrom(entry, { day = null, cfg = {}, roleAttributes = null, levelOv
   // ⚠️ `?? derivedLevel` RATHER THAN `||`: a legitimate override of 0 must not fall through to the derived
   // value, and levels are clamped to 1 below anyway.
   const level = levelOverride != null ? Math.max(1, num(levelOverride, 1)) : derivedLevel(entry, { day, cfg });
+  // ⚑ WHERE THE RUNG CAME FROM, SO IT CAN BE ARGUED WITH (Aevi): a tier the ENGINE guessed is marked; an
+  // authored one is not. ⚠️ On the SHEET, never written back onto the record — a derived value stored on
+  // content is the defect this project has ruled against four times.
+  const tierGuess = (entry?.tier || entry?.level != null) ? null : tierFromRole(entry, { cfg });
   const leans = leansOf(entry, { roleAttributes });
   const base = Math.max(1, Math.round(level / 2) + 1);
   const attributes = { physical: base, mental: base, social: base, practical: base };
@@ -198,6 +238,7 @@ function sheetFrom(entry, { day = null, cfg = {}, roleAttributes = null, levelOv
     skills: [],
     conditions: entry?.conditions || [],
     derived: true,
+    ...(tierGuess ? { tierDerived: { tier: tierGuess.tier, why: tierGuess.why } } : {}),
     lean: leans[0] || null,
     leans,
   };

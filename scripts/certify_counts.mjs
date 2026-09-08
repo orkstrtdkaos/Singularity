@@ -101,6 +101,15 @@ const counts = {
   })(),
   // ⚠️ THE SAME PREDICATES `smoke.mjs` USES, character for character. If these diverge, this script would
   // certify a number its own checker rejects — a generator arguing with its gate.
+  // ⛔ CCODE-327 AGAIN, ONE NUMBER OVER. Registering `tier_signals.json` moved this from 72 to 73 and the
+  // header still said 72 — `wiring_audit` gates it, so the staleness was NOISY rather than PREVENTED, which is
+  // this file's whole thesis. The count is derived here now, from the same manifest the loader reads.
+  coreRules: (() => {
+    const man = JSON.parse(readFileSync(join(root, "content/packs/core/manifest.json"), "utf8"));
+    const provides = man.provides || man;
+    const all = Array.isArray(provides) ? provides : Object.values(provides).flat().filter(v => typeof v === "string");
+    return [...new Set(all.filter(f => /^rules\/.*\.json$/.test(String(f))))].length;
+  })(),
   crit: records.filter(a => a.mechanic?.crit || a.crit).length,
   wardTypes: records.filter(a => JSON.stringify(a).includes('"wardTypes"')).length,
   // ⛔ CCODE-343 — A DERIVED NUMBER NO GENERATOR OWNED. `FIELD_REFERENCE.md` states the gainAxes node and
@@ -121,6 +130,10 @@ const CLAIMS = [
 
   { file: "SYSTEM_SPEC.md", name: "spec header · engine modules",
     re: /\*\*\d+ engine modules\*\*/, to: () => `**${counts.engine} engine modules**` },
+
+  // ⚠️ THE SAME HEADER LINE CARRIES THE RULES COUNT, and it drifted the first time a rules file landed.
+  { file: "SYSTEM_SPEC.md", name: "spec header · core rules files",
+    re: /\*\*\d+ core rules files\*\*/, to: () => `**${counts.coreRules} core rules files**` },
 
   { file: "SYSTEM_SPEC.md", name: "spec §39 · crit",
     re: /(\| `mechanic\.crit` \/ `crit` \|[^\n]*\| \*\*)\d+(\*\* \|)/,

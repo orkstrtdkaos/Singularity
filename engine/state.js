@@ -676,7 +676,7 @@ export async function loadContent() {
   // fold the two that mutate already-loaded maps (accords tag abilities, legends hydrate into npcs).
   // Failure semantics preserved exactly: `region` stays fatal; every optional one keeps its fallback.
   const [region, substrate, greaterArcs, genNpc, genLoc, genArc, genCreature, originsDoc, backgroundsDoc, regionsDoc,
-         accords, helpDoc, substrateModel, powerSourcesDoc, foothillsDoc, prologue, legendsLoaded, traitReadoutsDoc, traditionAestheticsDoc, frameContentDoc, frameKindsDoc, receiptLineDoc, consumerMapDoc, moveHintsDoc, ribbonCopyDoc, earnedPowerDoc, localLayoutsDoc, theVeilDoc, powerCosmologyDoc] = await Promise.all([
+         accords, helpDoc, substrateModel, powerSourcesDoc, foothillsDoc, prologue, legendsLoaded, traitReadoutsDoc, traditionAestheticsDoc, frameContentDoc, frameKindsDoc, receiptLineDoc, consumerMapDoc, moveHintsDoc, ribbonCopyDoc, earnedPowerDoc, localLayoutsDoc, theVeilDoc, powerCosmologyDoc, tierSignalsDoc] = await Promise.all([
     fetchJSON("world/regions/valley.json"),
     fetchJSON("content/packs/valley/lore/generative_substrate.json").catch(() => null),           // generation off on a miss
     fetchJSON("content/packs/valley/lore/greater_arcs.json").then(x => x.arcs || []).catch(() => []), // no arc few-shot
@@ -740,7 +740,11 @@ export async function loadContent() {
     // all authored against cosmology the engine had never seen. Same fault as `earned_power_guidance` above,
     // wearing a third hat. Loaded here and ATTACHED below; the GM's ask view carries the four-cell table.
     loadRule("the_veil", null),
-    loadRule("power_cosmology", null)
+    loadRule("power_cosmology", null),
+    // ⛔ ASK_generate_the_forty — ROLE → TIER, so a person is not level 1 for want of one field. Merged into
+    // `npcStanding` below rather than attached beside it, because every caller ALREADY threads that block as
+    // `cfg` — a new top-level key would need every one of them taught, and a dial nobody passes is a dial.
+    loadRule("tier_signals", null)
   ]);
   // ⛔ R28 — ATTACHED, not merely fetched, and attached IN THIS WAVE. My first pass put this beside the
   // ladder rule 250 lines up, where `localLayoutsDoc` does not exist yet — the exact temporal-dead-zone
@@ -846,6 +850,10 @@ export async function loadContent() {
       (gap.size ? ` — ${[...gap.values()].reduce((n, v) => n + v, 0)} abilit(ies) still fall back to the house palette: ${[...gap].sort((x, y) => y[1] - x[1]).map(([k, n]) => `${k} (${n})`).join(", ")}` : " — every ability covered"));
   }
 
+  // ⛔ ASK_generate_the_forty — THE SIGNALS RIDE INSIDE `npcStanding`, where `derivedLevel` already reads
+  // `tierFloor`. One block, one thread: a new top-level key would need every caller taught, and a dial nobody
+  // passes is a dial nobody reads. ⚠ `tierFromRole` returns null without it, so nothing moves until it lands.
+  if (tierSignalsDoc && rules?.npcStanding) rules.npcStanding.tierSignals = tierSignalsDoc;
   const content = { craftMechanics, damageFamilies, spectrums, rules, foothills: foothillsDoc, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, traditionArcs, npcQuests, regions, accords, helpText, substrateModel, powerSources: powerSourcesDoc || null, romanceGuidance, skillBattle, functionVocabulary, worldClock, schools, classArchetypes, repairPanelManifest, trait_readouts: traitReadoutsDoc?.readouts || traitReadoutsDoc || {}, traditionVisualAesthetics: traditionAestheticsDoc?.traditions || {}, visualAesthetics: traditionAestheticsDoc || {},   /* SNG-435 §C3: the WHOLE doc — `powerSystems` was flattened away at load */  bestiary, traditionMotivations, npcInteriority, encounterFrameContent: frameContentDoc || {}, frameKinds: frameKindsDoc?.frameKinds || {}, receiptLine: receiptLineDoc || {}, consumerContract: consumerMapDoc || { contentTypes: {} }, moveHints: moveHintsDoc || { byKind: {}, default: {} }, ribbonCopy: ribbonCopyDoc || {}, earnedPowerGuidance: earnedPowerDoc || { bands: {} }, theVeil: theVeilDoc || null, powerCosmology: powerCosmologyDoc || null, startingLocation: valley.startingLocation };
   // SNG-022: bring every loaded record up to current (derive missing additive fields,
   // flag dangling cross-refs). In-memory only — Pages files are static.

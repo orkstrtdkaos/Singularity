@@ -1,0 +1,127 @@
+{
+ "id": "sunwrack_valen",
+ "name": "Valen Sunwrack, Who Left No Shadow Standing",
+ "level": 66,
+ "role": "Legendary — burned the dark out of a whole Reach and called it dawn",
+ "gender": "man",
+ "pronouns": "he/him",
+ "sex": "male",
+ "domains": {
+  "primary": "blazeborn",
+  "secondary": "verist",
+  "tertiary": "seraphic"
+ },
+ "spectrum": {
+  "dark_light": 0.95
+ },
+ "subAttributes": {
+  "strength": 14,
+  "agility": 11,
+  "reason": 13,
+  "insight": 14,
+  "presence": 19,
+  "rapport": 9,
+  "craft": 13,
+  "wits": 12
+ },
+ "knowledge": [
+  "What a place looks like with nothing unseen in it",
+  "How long a person can go without rest before they confess"
+ ],
+ "wants": [
+  "A world with no dark left in it"
+ ],
+ "fears": "⛔ The unlit. ⚠️ Not what is in it — that there IS one.",
+ "appearance": "He casts no shadow and neither does anything near him. It is the first thing you notice and the last thing you stop noticing.",
+ "voiceHints": "Warm, certain, and relentless. He is glad to see you and will not let you rest.",
+ "assistTags": [
+  "reveal",
+  "strike",
+  "talk",
+  "guard"
+ ],
+ "abilities": [
+  {
+   "abilityId": "last_light",
+   "level": 3
+  },
+  {
+   "abilityId": "revealing_burn",
+   "level": 3
+  },
+  {
+   "abilityId": "light_borne",
+   "level": 3
+  },
+  {
+   "abilityId": "unshadow",
+   "level": 3
+  },
+  {
+   "abilityId": "radiance",
+   "level": 3
+  },
+  {
+   "abilityId": "kindle",
+   "level": 3
+  },
+  {
+   "abilityId": "bound_witness",
+   "level": 3
+  },
+  {
+   "abilityId": "true_account",
+   "level": 3
+  },
+  {
+   "abilityId": "the_unsurvivable_fact",
+   "level": 2
+  },
+  {
+   "abilityId": "unfaltering_light",
+   "level": 2
+  },
+  {
+   "abilityId": "numen_sense",
+   "level": 2
+  },
+  {
+   "abilityId": "edge",
+   "level": 2
+  },
+  {
+   "abilityId": "held_line",
+   "level": 2
+  },
+  {
+   "abilityId": "read_the_room",
+   "level": 2
+  },
+  {
+   "abilityId": "steady_hands",
+   "level": 1
+  },
+  {
+   "abilityId": "second_wind",
+   "level": 1
+  }
+ ],
+ "closed": [
+  "darksight",
+  "shroud",
+  "never_there"
+ ],
+ "personality": {
+  "warmth": 8,
+  "trust": 5,
+  "candor": 10,
+  "patience": 6
+ },
+ "physicality": "ADULT. Tall, luminous, exhausting to be near. WHAT CATCHES THE EYE: there is nowhere in the room to look away.",
+ "intimacyNotes": "⛔ NOT AVAILABLE. ⚠️ There is no privacy anywhere near him, and that is the horror rather than a joke.",
+ "schemaVersion": 1,
+ "people": "human",
+ "_authoredWhy": "⛑ AUTHORED 2026-09-07 AT ERIK'S RULING: 'Mythical and legendary need sheets too. If you fight one, MECHANICALLY IT WORKS THE SAME as any other. They are pretty high level though — wouldn't stick with just lvl 40.' ⛔ CCODE'S FINDING: '69 legends live in the same npcs map `personOpponentFor` resolves from, and `sheetFor` gives one a LEVEL-40 sheet from its mythic tier. A legend can be made an opponent WITH NO KIT AT ALL.' ⚠️ AND 40 IS THE *EPIC* FLOOR — `resolution.npcStanding.tierFloor` reads mythic 85 · legendary 60 · epic 40. ⛔ The floors were right and the path was returning the wrong one. ⚑ LEVEL 62-66, ABOVE THE LEGENDARY FLOOR OF 60: capacity `round(level/2)` = 31-33 crafts. AUTHORED AT 16-18 — deliberately UNDER capacity, because a legendary is a HINGE and the rest of the kit should be earned by whoever finally writes the scene, not pre-spent by Aevi. ⚠️ `room` is the point.",
+ "_tier": "legendary",
+ "romanceEligible": false
+}

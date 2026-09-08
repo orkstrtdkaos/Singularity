@@ -2382,14 +2382,16 @@
      "cannot": "A living ward can be broken. Fire is its particular enemy.",
      "functions": [
       "shield",
-      "ward"
+      "ward",
+      "strike"
      ],
      "gains": "broaden",
      "harmRung": "damaging",
      "gainAxes": [
       "scope",
       "damage"
-     ]
+     ],
+     "_harmVerbAdded_20260908": "⛔ r2 and r3, the two damaging ranks. ⚑ r1 is bark-skin on your OWN body — 'thorns that make you awkward to hold' is a shield, and it is `none`."
     },
     {
      "rank": 3,
@@ -2399,7 +2401,8 @@
      "functions": [
       "shield",
       "ward",
-      "resist"
+      "resist",
+      "strike"
      ],
      "gains": "broaden",
      "harmRung": "damaging",
@@ -2407,7 +2410,8 @@
      "gainAxes": [
       "quality",
       "targets"
-     ]
+     ],
+     "_harmVerbAdded_20260908": "the thorn-wall keeps cutting"
     }
    ],
    "functions": [
@@ -2503,7 +2507,8 @@
    "_wardTypes": "⛔ SNG-512. Bark-skin and thorn. ⚠️ Living answers living — the Rootkin ward is the green turned defensive.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "reach_death_life",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_harmVerbWhy_20260908": "⛑ RULED 2026-09-08 on CCode's `FINDING_harm_declared_vs_taught`. ⛔ THE MISMATCH IS REAL AND LOAD-BEARING: `battleSkillsForCharacter` builds the player's menu rows from the RECORD's `functions`, one row per verb, and never reads the rank's — while `intent.js` DOES read the per-rank rung. ⚠️ SO A CRAFT GATED AS HARM THAT OFFERS NO HARM VERB FIRES THE LETHAL-INTENT QUESTION AND THEN HANDS THE PLAYER `heal`, `bind`, `ward`. ⚑ AEVI'S RULE FOR WHICH WAY EACH ONE GOES: does the craft KILL BY DOING SOMETHING TO A PERSON, or does it kill by GOING WRONG? ⛔ The first gets the verb. THE SECOND GETS THE RUNG SOFTENED, because a craft whose danger is its FAILURE is not an attack and should not be offered as one. ⚑ HERE: ⚑ THORNS CUT. r2 is 'a thorn-wall that TURNS INTRUDERS', r3 resists what would take hold — ⛔ the damage is the thorns doing what thorns do. ⚠️ It stays a defensive craft and `shield`/`ward`/`resist` lead; `strike` is added LAST because it is what the defence costs whoever tries it."
+   "_harmVerbWhy_20260908": "⛑ RULED 2026-09-08 on CCode's `FINDING_harm_declared_vs_taught`. ⛔ THE MISMATCH IS REAL AND LOAD-BEARING: `battleSkillsForCharacter` builds the player's menu rows from the RECORD's `functions`, one row per verb, and never reads the rank's — while `intent.js` DOES read the per-rank rung. ⚠️ SO A CRAFT GATED AS HARM THAT OFFERS NO HARM VERB FIRES THE LETHAL-INTENT QUESTION AND THEN HANDS THE PLAYER `heal`, `bind`, `ward`. ⚑ AEVI'S RULE FOR WHICH WAY EACH ONE GOES: does the craft KILL BY DOING SOMETHING TO A PERSON, or does it kill by GOING WRONG? ⛔ The first gets the verb. THE SECOND GETS THE RUNG SOFTENED, because a craft whose danger is its FAILURE is not an attack and should not be offered as one. ⚑ HERE: ⚑ THORNS CUT. r2 is 'a thorn-wall that TURNS INTRUDERS', r3 resists what would take hold — ⛔ the damage is the thorns doing what thorns do. ⚠️ It stays a defensive craft and `shield`/`ward`/`resist` lead; `strike` is added LAST because it is what the defence costs whoever tries it.",
+   "_rankVerbFix_20260908": "⛑ AEVI'S OWN FIX WAS HALF-DONE AND ERIK CAUGHT IT. She added the harm verb to the RECORD and not to any RANK — ⛔ WHICH IS THE EXACT VIOLATION CCODE'S GATE IS NAMED FOR: `abilitiesCombatClaimedNotTaught`, a record claiming combat no rank teaches. ⚠️ She fixed one direction of the mismatch by creating the other. ⚑ THE VERB NOW SITS ON THE RANKS THAT CARRY THE HARM RUNG, and nowhere else — r1 of a craft that only harms at r2 must not offer the verb."
   },
   {
    "id": "speaking_grove",

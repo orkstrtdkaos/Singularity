@@ -61,6 +61,10 @@ const SUITES = [
   ["engine_map --check", "node", ["scripts/engine_map.mjs", "--check"]],
   // ⛔ WORK ORDER 2026-09-07 — the roster is DERIVED, and a derived doc with no gate is a stale doc carrying a promise.
   ["roster --check", "node", ["scripts/roster.mjs", "--check"]],
+  // ⛔ ERIK 2026-09-08: "document HOW to pipeline new NPCs (authored and game generated) through to full in game
+  // capability." ⚠️ The doc is DRIVEN — every row calls the production function — so it goes stale the moment a
+  // door moves, and a pipeline doc that lies is worse than none.
+  ["npc_pipeline --check", "node", ["scripts/npc_pipeline.mjs", "--check"]],
 ];
 
 const only = process.argv.slice(2).filter(a => !a.startsWith("-"));

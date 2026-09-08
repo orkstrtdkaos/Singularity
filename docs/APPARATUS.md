@@ -1,7 +1,7 @@
 # THE APPARATUS — every harness, what it is for, and whether it runs
 
 ⛔ **ERIK, 2026-08-29: *"I want this to be a well oiled factory."*** ⚠️ **A factory you cannot see is not
-well oiled.** 94 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
+well oiled.** 95 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
 were gates, which were reports, and which had quietly stopped being wired into anything.
 
 ```bash
@@ -10,7 +10,7 @@ node scripts/apparatus.mjs --md     # …as markdown for §5
 node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 ```
 
-**Last measured: 2026-09-08 · v1.9.425 · 94 files.**
+**Last measured: 2026-09-08 · v1.9.425 · 95 files.**
 
 ---
 
@@ -22,6 +22,7 @@ node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 | ⛔ **GATE-UNWIRED** | **0** | assertions nobody runs | ⛔ **nowhere — this must stay zero** |
 | ⚠️ **LIVE-API** | 2 | needs a real API key; costs money; cannot run in CI | run by hand, deliberately |
 | ○ **REPORT** | 19 | answers *how often / how hard / at what tier* | in a person's hand |
+| 🔧 **TOOL+SELFTEST** | 16 | a tool that checks its own output (`--check`) | ⚠️ **the doc-freshness gates live here, and several ARE in the runner** |
 | 🔧 **TOOL** | 32 | does a job — generates, repairs, measures on demand | invoked, not scheduled |
 | · **LIBRARY** | 1 | imported by other harnesses | nowhere |
 
@@ -90,7 +91,42 @@ correct; deleting them on that signal would be the "unreferenced is not useless"
 
 ---
 
-## 5 · THE FULL INVENTORY
+## 5 · ⛔ PROBE DISCIPLINE — HOW TO READ THE ENGINE WITHOUT LYING TO YOURSELF
+
+⛑ **A PROBE'S ZERO IS A CLAIM ABOUT THE PROBE FIRST.** Every harness in the inventory below is a probe, and a
+throwaway script written to answer one question is a probe with no gate on it. ⚠️ **On 2026-09-08 alone, four
+probe errors each produced a confident wrong answer, and two of them nearly shipped as engine defects.**
+
+### THE SIX SHAPES, ALL OBSERVED, ALL IN THIS REPO
+
+| shape | what it looked like | what was true |
+|---|---|---|
+| ⛔ **THE WRONG cfg BAG** | *"`the_glad_dissolution` is authored heroic and plays at LEVEL 1"* | `tierFloor` and `tierSignals` ride inside **`rules.npcStanding`**, not the top-level `rules`. With the wrong bag EVERY derived person collapses to level 1 — which reads exactly like a broken ladder |
+| ⛔ **THE WRONG RETURN SHAPE** | `kit.filter is not a function`; then *"every field is missing"* | `battleSkillsFor` returns **`{ skills, level }`**, not an array. `enforceFloors` returns **`{ entity, action }`**, not the record. ⚠️ Reading a wrapper as the record reports the whole schema as absent |
+| ⛔ **THE WRONG EXPORT NAME** | `sheetFrom is not a function` | it is **`sheetFor`**. ⛑ A `TypeError` is the LUCKY case — the unlucky one is a name that exists and means something else |
+| ⛔ **THE WRONG KEY ON A JSON DOC** | *"`tier_signals` has 0 rows"* | the array is **`rules`**, not `signals`/`rows`/`roles`. **"0 rows" read as "no coverage"** when the table was fully populated |
+| ⚠️ **A FIELD ON THE RECORD, NOT ON THE SHEET** | *"`sheetFor` returns `tier=undefined`"* | the sheet carries **`level`** and never `tier` — by design. The absence was my assumption, not a defect |
+| ⚠️ **THE SHELL EATING THE PROBE** | a template literal closed early; a regex matched nothing and passed vacuously | heredocs eat escapes **even into `.mjs`**. ⛑ Write patch and probe scripts with a file write, not a heredoc |
+
+### ⛑ THE ONE RULE THAT CATCHES ALL SIX
+
+> ⛔ **BEFORE REPORTING A ZERO OR AN ABSENCE, PROVE THE PROBE CAN REPORT A NON-ZERO.**
+
+⚑ **A canary, exactly as a gate has one.** `wiring_audit` now carries a synthetic craft that MUST be caught —
+because a field reader that returns `true` for everything looks identical to a clean corpus. ⚠️ **The same
+sentence applies to a five-line script:** if it cannot show you the positive case, its negative case is
+worthless.
+
+⬜ **Two habits that remove whole classes of this:**
+
+- ⛑ **DRIVE THE PRODUCTION FUNCTION, DO NOT RE-IMPLEMENT ITS LOGIC.** `scripts/roster.mjs` computes
+  reachability by CALLING `personOpponentFor`; `scripts/npc_pipeline.mjs` mints a person through
+  `stubEntity` → `enforceFloors` → `personOpponentFor`. ⚠️ A re-implementation measures the re-implementation.
+- ⛔ **ONE LADDER, NEVER TWO.** `certify_counts` and the PLAYERS_GUIDE gate derived "a person" two different
+  ways and disagreed 125 against 128 — both derived, neither stale, a CONTRADICTION rather than a drift. The
+  certifier now asks the loader. ⚑ **When a second count is needed, cite the first rather than recomputing it.**
+
+## 6 · THE FULL INVENTORY
 
 ⛔ **Generated. Re-run `node scripts/apparatus.mjs --md` and paste; do not hand-edit.**
 
@@ -149,6 +185,7 @@ correct; deleting them on that signal would be the "unreferenced is not useless"
 | `scripts/roster` | 🔧 TOOL+SELFTEST | 3 | ONE ROSTER, DERIVED, ACROSS SIX FILES THAT MUST NOT BE MERGED |
 | `scripts/run_tests` | 🔧 TOOL+SELFTEST | 3 | EVERY SUITE RUNS, EVEN AFTER ONE GOES RED |
 | `scripts/skills_inject` | 🔧 TOOL+SELFTEST | 3 | regenerate the derived half of docs/SKILLS |
+| `scripts/npc_pipeline` | 🔧 TOOL+SELFTEST | 2 | THE DOORS A PERSON PASSES TO BECOME PLAYABLE, DRIVEN RATHER THAN DESCRIBED |
 | `scripts/apparatus` | 🔧 TOOL+SELFTEST | 1 | CCODE-301 |
 | `scripts/certify_counts` | 🔧 TOOL+SELFTEST | 1 | CCODE-327 |
 | `scripts/encounter_types` | 🔧 TOOL+SELFTEST | 1 | CCODE-262 |

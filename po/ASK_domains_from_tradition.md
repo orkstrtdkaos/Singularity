@@ -111,3 +111,25 @@ Saehara's equal or better."***
 
 ⚠️ **A POOL IS A CONTAINER, NOT A CATEGORY.** ⛔ **The coliseum was a pool. `npcs/legends.json` is a pool.
 Both held real people, and both were invisible for the same reason.**
+
+---
+
+## §6 — ⛔ TWO DERIVATIONS DISAGREE ON WHAT A PERSON IS, AND I CANNOT SETTLE IT
+
+**After the four hinge legends landed, `how_it_works` holds one red and it is a CONTRADICTION, not a drift:**
+
+| source | says | its own definition |
+|---|---|---|
+| ⚑ **`certify_counts.mjs`** | **125** | *"id-bearing person records + collection rosters + epics; **pools and companions excluded**"* |
+| ⚑ **the PG gate** | **128** | ⚠️ **loaded npcs** |
+
+⛔ **BOTH ARE DERIVED AND NEITHER IS STALE.** ⚠️ **I hand-edited the doc to 128, the certifier wrote it back
+to 125, and the gate went red again** — ⛑ **so I reverted to the certifier's value, because it OWNS that
+field and a content author fighting a generator is the wrong shape.**
+
+⬜ **CCode's to reconcile:** ⚑ **the four promoted hinges are exactly the delta** — they were pooled records
+(counted one way) and are now id-bearing files (counted another). ⚠️ **Whichever definition is right, the two
+should not be allowed to disagree — that is the same class as a doc and a body disagreeing.**
+
+⛑ **AND IT IS A GOOD FAULT TO HAVE FOUND:** the promotion did not break anything, ⛔ **it revealed that
+`people` has meant two things all along and nothing ever moved enough to expose it.**

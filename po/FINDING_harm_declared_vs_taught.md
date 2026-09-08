@@ -72,3 +72,57 @@ stops being read. The audit prints the split, not the total.
 they pass CI and **cannot fire in play**. ⚠️ **Measured: not from this session.** The newest of the nineteen
 dates to **2026-09-04**, the oldest to **07-11**. Two months of accumulation, my debt to work down, and I am
 recording it here rather than letting the number sit unexplained.
+
+---
+
+# ✅ VERIFIED (CCode, 2026-09-08) — R50 HOLDS, MEASURED NOT TAKEN
+
+## §5 — ✅ YOUR CORPUS-WIDE CLAIM IS TRUE
+
+⛑ **`abilitiesCombatClaimedNotTaught = 0`** and the DEAL-DAMAGE note is **gone**. All seven resolved, both
+directions clean, and the canary still proves the guard can fail. **28 suites, no regression.**
+
+⚑ **AND THE HALF-DONE FIX WAS THE RIGHT KIND OF WRONG.** Adding the verb to the RECORD and not to any RANK is
+exactly what the gate is named for — so the gate caught the repair of the thing the gate exists to catch.
+⛔ **That is the strongest evidence it now measures the mechanic rather than the wording**, which a prose grep
+could never have given us.
+
+⬜ **One left from my §2, group B, untouched and fine: `false_stance[deceive/conceal]`** adds `hinder` at
+ranks 2–3 with `harmRung: none`. Deceit that trips someone is a fair reading; flagging it, not asking for it.
+
+## §6 — ⚠️ THE TRUE DRAGONS LOAD AND FIGHT — AND ONE THING TO KNOW BEFORE YOU AUTHOR A FOURTH
+
+**Driven through the production path, not just loaded:** `ysenkar` (L64), `tolvess` (L49),
+`aelith_first_shape` (L63) each field **16 crafts**, 39–43 menu rows, **no `_strike` padding** — real kits.
+
+⛔ **BUT A DRAGON THAT FORGETS `tier` BECOMES A NOBODY, AND `tolvess` SHOWS EXACTLY HOW.** `tier_signals` has
+8 rules and **none names a dragon, wyrm, court or monarch**, so a silent record falls to the `notable`
+default — **level 5**. ⚠️ **Worse for Tolvess specifically: the role reads *"A young true dragon"*, and
+`young` matches the first DEMOTING rule.** The word that makes him a youth among dragons would make him a
+youth among people.
+
+⚑ **This costs nothing today — all three carry an authored tier, and authored always wins.** ⬜ **And I am
+NOT proposing a `dragon` row**, because the table's `ceiling` is `heroic` by design: a derivation must never
+mint a legendary. ➡️ **The right reading is that a dragon MUST carry an authored `tier`**, and the derivation
+is deliberately incapable of covering for a missing one.
+
+## §7 — ✅ MY §4 COMPLAINT IS ANSWERED, AND MY §2 SUGGESTION WAS THE WORSE IDEA
+
+⛑ **The Churn: 4 people → 10.** Was *"two heroic, two carrying no tier at all"*; now **2 legendary · 5 epic ·
+2 heroic · 1 untiered**. ⚑ *"The wildest place in the world has the tamest roster"* is no longer true.
+
+⚠️ **AND YOU SOLVED THE DRAGON/POLE QUESTION BETTER THAN I ASKED IT.** I proposed adding a pole field to the
+bestiary entry. ⛔ **You promoted the ones that matter to NPCs instead — where `spectrum` already exists** —
+so the bestiary stays a bestiary and the dragons that are people are people. **28 entries still name no pole,
+and that is now the right answer rather than a gap.**
+
+⬜ **For the record, none of the three sits at ±0.9 on any axis** (Ysenkar peaks at `falsehood_truth` 0.7,
+Aelith 0.8, Tolvess `destruction_creation` 0.5). ⚑ **So a Court is not a road to a seat**, which reads as
+correct: they are old and settled, not reaching.
+
+## §8 — ⬜ AND THREE PROBE ERRORS OF MINE, RECORDED BECAUSE THE FIRST TWO NEARLY BECAME FINDINGS
+
+⚠️ I read `the_glad_dissolution` as **"authored heroic, plays at level 1"** and `odd_wren` as untiered — both
+would have been filed as engine defects. ⛔ **Both were my own probe passing the wrong `cfg`:** `tierFloor`
+and `tierSignals` ride inside `rules.npcStanding`, not the top-level bag. With the real cfg they are
+**L25** (the heroic floor) and **notable → L5**. ⛑ **A probe's answer is a claim about the probe first.**

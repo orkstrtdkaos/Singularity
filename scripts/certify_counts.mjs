@@ -38,6 +38,7 @@ import { readFileSync, writeFileSync, readdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { martialAbilityRecords } from "../engine/martial.js";
+import { loadContentHeadless } from "../tests/headless_content.mjs";   // ⛔ ONE definition of "a person": the loader's
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const CHECK = process.argv.includes("--check");
@@ -65,6 +66,10 @@ const t = rj("content/packs/core/rules/traditions.json");
 const martialFloor = Object.keys(martialAbilityRecords(rj("content/packs/core/rules/martial_paths.json"))).length;
 const dirCount = (p) => readdirSync(join(root, p)).filter(f => f.endsWith(".json")).length;
 
+// ⛔ THE LOADER, ONCE — so `people` is the same map the PLAYERS_GUIDE gate reads rather than a second walk of
+// the tree that can disagree with it. Top-level await; this script is an ES module and already uses one.
+const CONTENT = await loadContentHeadless();
+
 const counts = {
   authored: records.length,
   loaded: records.length + martialFloor,
@@ -87,18 +92,16 @@ const counts = {
   //
   // ⚠️ COMPANIONS ARE NOT INCLUDED — they are stated separately in the same sentence, and the loader
   // keeps them in their own map. Counting them here would double them.
-  people: (() => {
-    const ids = new Set();
-    for (const f of readdirSync(join(root, "content/packs/valley/npcs")).filter(x => x.endsWith(".json"))) {
-      const j = JSON.parse(readFileSync(join(root, "content/packs/valley/npcs", f), "utf8"));
-      if (j.kind === "challenger_pool" || Array.isArray(j.challengers)) continue;
-      if (j.id) { ids.add(j.id); continue; }
-      for (const fig of (j.legends || j.figures || [])) if (fig?.id) ids.add(fig.id);
-    }
-    const ep = JSON.parse(readFileSync(join(root, "content/packs/valley/tradition_epics.json"), "utf8"));
-    for (const e of (ep.epics || [])) if (e?.id) ids.add(e.id);
-    return ids.size;
-  })(),
+  // ⛔ THE LOADER'S OWN MAP, NOT A SECOND WALK OF THE TREE. Aevi found this disagreeing with the
+  // PLAYERS_GUIDE gate (125 vs 128) — both derived, neither stale, which makes it a CONTRADICTION about what
+  // a person IS. ⚠️ The old walk had two faults: it counted `saehara_challengers` (a file whose own `kind` is
+  // "challenger_pool") as a person, and it never read `lore/legends.json`, so it missed the four figures the
+  // loader hydrates from `legends.roster`. It also counted `the_iron_kestrel_buyer`, which is "a hidden hand,
+  // not a single person" and which the loader drops.
+  // ⚑ THE CLAIM LINE SETTLES IT: "N crafts (LOADED) · N places · N people · N companions" — every other
+  // number in that sentence is what the engine loads, so this one is too. Companions stay separate; the
+  // loader keeps them in their own map and they are stated beside this.
+  people: Object.keys(CONTENT.npcs || {}).length,
   // ⚠️ THE SAME PREDICATES `smoke.mjs` USES, character for character. If these diverge, this script would
   // certify a number its own checker rejects — a generator arguing with its gate.
   // ⛔ CCODE-327 AGAIN, ONE NUMBER OVER. Registering `tier_signals.json` moved this from 72 to 73 and the
@@ -185,7 +188,7 @@ for (const c of CLAIMS) {
   if (after !== before) { changed++; byFile.set(c.file, after); console.log(`  ${CHECK ? "STALE " : "stamped"}  ${c.file} :: ${c.name}`); }
 }
 
-console.log(`  owned now: PLAYERS_GUIDE 'people' = ${counts.people} — id-bearing person records + collection rosters + epics; pools and companions excluded`);
+console.log(`  owned now: PLAYERS_GUIDE 'people' = ${counts.people} — the loader's own npc map, the same one the PG gate reads; challenger pools and companions live in their own maps and are excluded by the loader, not by this rule`);
 
 if (CHECK) {
   console.log(changed ? `⚠️ ${changed} certified claim(s) are STALE — run without --check` : "✅ every certified count is fresh");

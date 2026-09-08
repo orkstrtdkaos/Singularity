@@ -817,8 +817,12 @@ console.log("\n── §10 · the known gaps — these go RED when FIXED ──"
     const CG = await lchG();
     const missing = new Set();
     for (const a of Object.values(CG.greaterArcs?.arcs || CG.greaterArcs || {})) for (const h of (a?.hingeNpcs || [])) if (!CG.npcs?.[h]) missing.add(h);
-    gap("§10: three hinge NPCs on four greater arcs resolve to NO record — npcs/legends.json's pool is read by nobody",
-      missing.size > 0, [...missing].join(", "));
+    // ✅ CLOSED 2026-09-08 by Aevi: Seraphine, Corvane, Aevi-the-Watcher and Ledda are id-bearing records now
+    // (legendary, L60–62, 16 crafts, domains) rather than a pool nothing read. ⛔ Asserted CLOSED so a hinge
+    // losing its record goes RED instead of quietly pointing at nothing again.
+    // ⚠ `the_iron_kestrel_buyer` is still absent AND THAT IS CORRECT — "a hidden hand, not a single person".
+    check("§10: ⛔ every hingeNpc on every greater arc RESOLVES — the pool that nothing read is a set of records now",
+      missing.size === 0, [...missing].join(", "));
   }
   gap("§10: method (psionics / song / blade) is still recorded nowhere",
     abilities.every(a => a.method == null));

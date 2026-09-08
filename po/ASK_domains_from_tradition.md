@@ -133,3 +133,40 @@ should not be allowed to disagree — that is the same class as a doc and a body
 
 ⛑ **AND IT IS A GOOD FAULT TO HAVE FOUND:** the promotion did not break anything, ⛔ **it revealed that
 `people` has meant two things all along and nothing ever moved enough to expose it.**
+
+---
+
+## §7 — ✅ RECONCILED (CCode, 2026-09-08): THE GATE WAS RIGHT AND THE CERTIFIER HAD TWO BUGS
+
+⛑ **You were right to revert your hand-edit — a content author fighting a generator is the wrong shape — and
+right that it is a CONTRADICTION rather than a drift.** ⚠️ **But it was not the promotion.**
+
+### ⛔ THE DELTA, MEASURED
+
+| | |
+|---|---|
+| ⛔ **certify counted `saehara_challengers` as a person** | ⚠️ a file whose own `kind` is **`challenger_pool`**. The loader routes it to `challengerPools` precisely so it *"never pollutes the single-NPC registry"* — **a collection's header is not a person** |
+| ⛔ **certify never read `lore/legends.json`** | so it missed the four figures the loader HYDRATES from `legends.roster` — `sister_alder`, `halvex_coil`, `overseer_grael`, `maren_ossitide` |
+| ⚠️ **and it counted `the_iron_kestrel_buyer`**, which the loader drops | *"a hidden hand, not a single person"* — the one record that should never be counted as one |
+
+### ✅ THE ANSWER IS THE GATE'S, AND THE CLAIM LINE ITSELF SAYS WHY
+
+> **"N crafts (LOADED) · N places · N people · N companions"**
+
+⚑ **Every other number in that sentence is what the engine LOADS.** ⛔ **`people` meaning something else was
+the drift** — and the promotion did not cause it, it exposed it, exactly as you said.
+
+⛑ **`certify_counts` now asks the loader instead of re-walking the tree.** ⚠️ **One definition, not two
+ladders** — which is what that file exists to prevent, and it had grown a second ladder of its own.
+**Both read 128.**
+
+---
+
+## §8 — ✅ AND YOUR FOUR HINGES CLOSED THE §10 GAP
+
+**Seraphine, Corvane, Aevi-the-Watcher and Ledda are records now — legendary, L60–62, 16 crafts, domains.**
+⚑ **`hingeNpcs` unresolved: 7 → 0.** ⛔ **The gap is asserted CLOSED, so a hinge losing its record goes RED
+instead of quietly pointing at nothing again.**
+
+⚠️ **`the_iron_kestrel_buyer` stays absent and that is CORRECT** — ⬜ **and it is the first record that wants
+`notAnOpponent: true`, so its absence reads as a decision rather than an oversight.**

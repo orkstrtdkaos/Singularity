@@ -93,3 +93,88 @@ Sovereign, and the seat is already occupied by someone the player may have met.*
 DURATION** — everywhere at once and never anywhen, ⛔ **or the inverse: something holding a single moment
 open forever that will not let it end.** ⚑ **The Hourkeepers' opposite, and nothing in the corpus is
 reaching for it yet.**
+
+---
+
+# CCODE — what the engine can settle, measured (2026-09-08)
+
+⚑ **The plan is yours and I am not going to re-order it.** ⛑ **But four of its claims are things only the
+engine can check, and one of them changes how cheap an item is.**
+
+---
+
+## §7 — ✅ `set_word` IS INERT, EXACTLY AS §5.3 SAYS
+
+⛔ **`set_word` is authored** (mason · verbs `bind` + `command`) ⚠️ **and the string appears NOWHERE in
+`engine/` or `app.js`.** ⚑ **Your instinct is right and it is the four-doors shape again.**
+
+⚠️ **AND THE OATH VOCABULARY IS THINNER THAN THE PLAN ASSUMES:**
+
+| word | in engine code | crafts mentioning it |
+|---|---|---|
+| `oath` | ⛔ **no** | 1 |
+| `pledge` | ⛔ **no** | 1 |
+| ⛔ **`thane`** | **no** | ⛔ **0** |
+
+➡️ ⚠️ **`thane` exists in LORE PROSE, not in a craft or a field** — so §5.3's *"runes exist, `thane` exists"*
+is true of the fiction and not of the corpus. ⛑ **That makes the oath item bigger than it reads: there is no
+record of a sworn band anywhere, so it is a mechanic to build, not a mechanic to connect.** ⬜ **Which is
+fine — but it should sit below the two that are genuinely cheap.**
+
+---
+
+## §8 — ⚠️ "MORE DRAGONS = MORE POLES" IS CHEAP TO AUTHOR AND CANNOT BE CHECKED
+
+⛔ **A wyrm carries `affinity`, and `affinity` is a DAMAGE-TYPE MAP, not a pole:**
+
+```
+the_ashen_wyrm       {"light":"resist","decay":"resist"}
+the_bright_devourer  {"light":"absorb"}
+the_unspooling_worm  {"order":"resist","wild":"vulnerable"}
+```
+
+⚑ **MEASURED: 0 of 28 bestiary entries name a tradition, pole or axis.** ⚠️ **So *"three authored, one per
+extreme"* is a reading of the PROSE — a true and good reading, and one nothing can verify.**
+
+➡️ ⛔ **THE RISK IS THE ONE §83 KEEPS CATCHING:** a count stated in a document with no field behind it drifts
+silently. ⚑ **If the pole is load-bearing — and *"twelve axes, three used"* is an argument that it is — it
+wants a field on the bestiary entry.** ⛑ **One key, and then "which poles have a wyrm" is derivable and
+gateable forever.** ⬜ **Your call whether it is worth it; the three new wyrms are cheap either way.**
+
+---
+
+## §9 — ✅ §4 VERIFIED, AND IT IS WORSE THAN STATED
+
+⛔ **Churn-adjacent people: FOUR.** ⚠️ **Two heroic, and two carrying no tier at all.** ⚑ *"The wildest place
+in the world has the tamest roster"* is measured, and the roster is thinner than "nothing above heroic"
+suggests.
+
+---
+
+## §10 — ⚑ §6 IS RIGHT, AND THE ENGINE AGREES WITH IT BY ACCIDENT
+
+**All four named candidates exist and sit at the extreme of exactly one axis:**
+
+| | level | axis, at ≥0.9 |
+|---|---|---|
+| `the_still_lattice` | 66 | `chaos_order` **+0.95** |
+| `harrow_the_hollowing` | 66 | `mechanical_spiritual` **−0.95** |
+| `the_scouring_hand` | 65 | `destruction_creation` **−0.95** |
+| `thornmother_sealed` | 64 | `death_life` **+0.9** |
+
+⚑ **So *"a villain you fail to stop is a promotion"* already has its arithmetic: the road to a seat is a
+`spectrum` value, and four people are standing at the end of one.**
+
+⛔ **AND THE ONE AXIS WITH NO EXTREMIST IS `light_dark` — LUCIFER'S OWN.** ⚠️ **The one seat that IS filled
+has nobody mortal reaching for it, and the six empty seats mostly do.** ⛑ **That is a better shape than it
+looks: the occupied axis is the one where the refusal already succeeded, so there is no road left to walk.**
+
+⬜ **And `span_spirit` — your "most interesting" — is genuinely absent: no record carries it at any value.**
+
+---
+
+## §11 — ⬜ SO THE ONLY RE-ORDERING I WOULD ARGUE FOR
+
+⚑ **Move VIKING/oath below GREEK/oracle.** ⚠️ **Not because it is less good — because `foresee` is a whole
+function family with 38 crafts and no one selling prophecy, so the oracle is CONNECTING something built,
+while the oath is BUILDING something absent.** ⛔ **Fae stays first; I agree with every word of §5.1.**

@@ -1,0 +1,163 @@
+{
+ "id": "ysenkar",
+ "name": "Ysenkar, Who Wears the Smaller Door",
+ "tier": "legendary",
+ "level": 64,
+ "role": "A true dragon of the Unbought Court — she has been at your table and you did not know",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": true,
+ "homeLocation": "the_churn",
+ "domains": {
+  "primary": "figurist",
+  "secondary": "hourkeeper",
+  "tertiary": "verist"
+ },
+ "spectrum": {
+  "chaos_order": 0.2,
+  "concrete_abstract": 0.4,
+  "falsehood_truth": 0.7
+ },
+ "subAttributes": {
+  "strength": 17,
+  "agility": 12,
+  "reason": 16,
+  "insight": 18,
+  "presence": 19,
+  "rapport": 13,
+  "craft": 12,
+  "wits": 14
+ },
+ "knowledge": [
+  "⛔ What the Churn was before the Transition, because she was in it",
+  "Every shape she has worn and what each one cost her to leave",
+  "⚠️ Which of the Hollow Court's bargains were struck with someone she was standing next to"
+ ],
+ "wants": [
+  "To be known in the small shape — ⛔ not tolerated in it, KNOWN in it, by someone who has seen the other one"
+ ],
+ "fears": "⚠️ That the small shape is the disguise. ⛔ She has worn it for two hundred years and no longer knows which is the costume.",
+ "appearance": "A tall woman with very still hands, or something enormous and old. Both are her. ⚠️ The eyes do not change.",
+ "voiceHints": "Dry, unhurried, and slightly amused at the size of the room. ⛔ She never mentions the other shape and never denies it.",
+ "reactsToReputation": {
+  "honest": "⚑ stays in the small shape, which is the compliment",
+  "fearful": "⚠️ obliges, once, and regrets it",
+  "any": "is already seated"
+ },
+ "assistTags": [
+  "talk",
+  "guard",
+  "study",
+  "travel",
+  "read-people"
+ ],
+ "abilities": [
+  {
+   "abilityId": "walking_figure",
+   "level": 3,
+   "why": "⚑ THE POLYMORPH. Figurist primary — a shape she walks in, not a lie she tells"
+  },
+  {
+   "abilityId": "the_true_figure",
+   "level": 3,
+   "why": "⛔ and she can drop it, and that is the moment"
+  },
+  {
+   "abilityId": "plain_seeming",
+   "level": 3,
+   "why": "⚠️ 'she has been at your table and you did not know'"
+  },
+  {
+   "abilityId": "formcraft",
+   "level": 3,
+   "why": "the shape is the craft"
+  },
+  {
+   "abilityId": "true_account",
+   "level": 3,
+   "why": "⛑ THE COURT'S LAW: she never denies the other shape"
+  },
+  {
+   "abilityId": "the_kept_hour",
+   "level": 3,
+   "why": "hourkeeper secondary — she predates the Transition"
+  },
+  {
+   "abilityId": "hourcraft",
+   "level": 2,
+   "why": "duration"
+  },
+  {
+   "abilityId": "soul_stare",
+   "level": 2,
+   "why": "⚠️ 'the eyes do not change'"
+  },
+  {
+   "abilityId": "bound_witness",
+   "level": 2,
+   "why": "'bargains struck with someone she was standing next to'"
+  },
+  {
+   "abilityId": "held_line",
+   "level": 2,
+   "why": "she is enormous, and it shows even small"
+  },
+  {
+   "abilityId": "plain_weight",
+   "level": 2,
+   "why": "⛔ the small shape is still heavy"
+  },
+  {
+   "abilityId": "read_the_room",
+   "level": 2,
+   "why": "two hundred years at other people's tables"
+  },
+  {
+   "abilityId": "fixed_point",
+   "level": 2,
+   "why": "the Court's law in her register"
+  },
+  {
+   "abilityId": "pattern_sense",
+   "level": 2,
+   "why": "she reads the shape a thing is taking"
+  },
+  {
+   "abilityId": "dread_mantle",
+   "level": 1,
+   "why": "⚠️ r1 — she does not use it and it is there"
+  },
+  {
+   "abilityId": "calm_word",
+   "level": 1,
+   "why": "she has never needed volume"
+  }
+ ],
+ "closed": [
+  "struck_term",
+  "offered_price",
+  "borne_bargain",
+  "useful_lie",
+  "better_story"
+ ],
+ "personality": {
+  "warmth": 7,
+  "trust": 6,
+  "candor": 9,
+  "patience": 10
+ },
+ "physicality": "⚠️ TWO SHAPES, BOTH REAL. Tall, still-handed, dark-eyed — or the other one. WHAT CATCHES THE EYE IN EITHER: she is not hurrying and everything in the Churn is.",
+ "intimacyNotes": "⛔ SHE IS AVAILABLE AND IT IS COMPLICATED IN A WAY THAT IS NOT ABOUT SCALE. ⚠️ Her want is the whole of it — TO BE KNOWN IN THE SMALL SHAPE by someone who has seen the other. ⛑ Not fetishised, not feared, not humoured. And her fear is that the small shape is a costume she can no longer take off.",
+ "questSeeds": [
+  "⚑ She has been at your table before. She will tell you when, and she will not say what she looked like.",
+  "⛔ She knows which Hollow Court bargains were struck beside her and did nothing. ⚠️ She has not forgiven herself and does not discuss it."
+ ],
+ "schemaVersion": 1,
+ "people": "dragon",
+ "_authoredWhy": "⛑ A TRUE DRAGON, AUTHORED 2026-09-08. Erik: 'I want some dragons in the court who can POLYMORPH TO HUMAN. ⛔ DRAGONS ARE NOT ALL POLES THAT WENT WRONG.' ⚑ AND THE BESTIARY'S OWN FIRST LAW ALREADY DREW THIS LINE: 'No person. A bestiary entry has no name of its own, no want, no story being ended. IF IT WOULD BE A TRAGEDY TO KILL, IT BELONGS IN NPCs, NOT HERE.' ⚠️ SO THERE ARE TWO KINDS AND THE CORPUS SPLITS THEM CLEANLY: ⛔ A `great_manifestation` — the Ashen Wyrm, the Bright Devourer, the Unspooling Worm — is 'a domain that RESOLVED WRONG and will not resolve back', a hazard with a broken directive and no grievance. ⚑ A TRUE DRAGON IS A PERSON. Older than the Transition, wearing whichever shape the conversation needs, with a want and a name and a story that can be ended badly. ⚠️ Killing one is a tragedy, which is exactly what the bestiary says makes it an NPC. ⛔ AND THE POLYMORPH IS NOT A DISGUISE: `plain_seeming` and `walking_figure` are authored crafts, and a dragon in a human shape is STILL THE DRAGON — it is the same being choosing a smaller door.",
+ "communityId": "churn.unbought_court",
+ "_court": "the_unbought_court",
+ "_opposes": "the_hollow_king",
+ "_trueDragon": "⚑ NOT A `great_manifestation`. A person, and the bestiary's law is the test: this one has a NAME, a WANT, and a story that can be ended badly."
+}

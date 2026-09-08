@@ -1,0 +1,123 @@
+{
+ "id": "harrow_the_hollowing",
+ "name": "Harrow, Who Makes People Into Mechanisms",
+ "level": 66,
+ "role": "Legendary — a person he 'improves' becomes a device with a function, and thanks him",
+ "gender": "man",
+ "pronouns": "he/him",
+ "sex": "male",
+ "domains": {
+  "primary": "enginewright",
+  "secondary": "lattice",
+  "tertiary": "cogitant"
+ },
+ "spectrum": {
+  "mechanical_spiritual": -0.95,
+  "chaos_order": 0.8
+ },
+ "subAttributes": {
+  "strength": 11,
+  "agility": 9,
+  "reason": 19,
+  "insight": 14,
+  "presence": 13,
+  "rapport": 6,
+  "craft": 18,
+  "wits": 13
+ },
+ "knowledge": [
+  "What every part of a person is FOR",
+  "Which people are already most of the way there"
+ ],
+ "wants": [
+  "A world of perfect mechanisms, people included, all function and no want"
+ ],
+ "fears": "⚠️ A thing with no function. ⛔ He cannot look at one.",
+ "appearance": "Immaculate hands. He looks at your joints while you talk.",
+ "voiceHints": "Kind, precise, and genuinely helpful. He explains the improvement first.",
+ "assistTags": [
+  "craft",
+  "analyze",
+  "mend",
+  "study"
+ ],
+ "abilities": [
+  {
+   "abilityId": "deep_works",
+   "level": 3
+  },
+  {
+   "abilityId": "self_mending_work",
+   "level": 3
+  },
+  {
+   "abilityId": "enginecraft",
+   "level": 3
+  },
+  {
+   "abilityId": "latticework",
+   "level": 3
+  },
+  {
+   "abilityId": "maintained_order",
+   "level": 3
+  },
+  {
+   "abilityId": "truename_order",
+   "level": 3
+  },
+  {
+   "abilityId": "makers_eye",
+   "level": 3
+  },
+  {
+   "abilityId": "fault_sense",
+   "level": 3
+  },
+  {
+   "abilityId": "foreclose",
+   "level": 2
+  },
+  {
+   "abilityId": "unmake_seal",
+   "level": 2
+  },
+  {
+   "abilityId": "predicted_man",
+   "level": 2
+  },
+  {
+   "abilityId": "named_exclusion",
+   "level": 2
+  },
+  {
+   "abilityId": "tinkers_hand",
+   "level": 2
+  },
+  {
+   "abilityId": "held_repair",
+   "level": 2
+  },
+  {
+   "abilityId": "proof_halls",
+   "level": 1
+  },
+  {
+   "abilityId": "set_to_rights",
+   "level": 1
+  }
+ ],
+ "personality": {
+  "warmth": 6,
+  "trust": 5,
+  "candor": 9,
+  "patience": 10
+ },
+ "physicality": "ADULT. Neat, unhurried, sixties. WHAT CATCHES THE EYE: he is looking at how you are put together.",
+ "intimacyNotes": "⛔ NOT AVAILABLE. ⚠️ He would improve you and you would thank him — the fiction says so and it is not a metaphor.",
+ "schemaVersion": 1,
+ "people": "human",
+ "_authoredWhy": "⛑ AUTHORED 2026-09-07 AT ERIK RULING: mythical and legendary need sheets too; mechanically the same as any other, but higher than level 40. ⛔ CCode found that 69 legends resolve through personOpponentFor and sheetFor gave one a LEVEL-40 sheet with NO KIT. ⚠️ 40 is the EPIC floor — resolution.npcStanding.tierFloor reads mythic 85 · legendary 60 · epic 40. ⚑ Authored at L63-67, above the legendary floor. Capacity round(level/2) is 31-33; these carry 16 DELIBERATELY UNDER — a legendary is a hinge and the rest of the kit should be earned by whoever writes the scene, not pre-spent. room is the point.",
+ "_tier": "legendary",
+ "romanceEligible": false
+}

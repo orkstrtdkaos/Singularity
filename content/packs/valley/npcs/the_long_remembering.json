@@ -59,14 +59,16 @@
    "why": "⚑ hourkeeper primary — duration is what an elf IS here"
   },
   {
-   "abilityId": "kept_hour",
+   "abilityId": "the_kept_hour",
    "level": 3,
-   "why": "⛔ 'what has not changed, in the place where nothing stays'"
+   "why": "⛔ 'what has not changed, in the place where nothing stays'",
+   "_idWas": "kept_hour"
   },
   {
-   "abilityId": "the_fixed_point",
+   "abilityId": "fixed_point",
    "level": 3,
-   "why": "⚠️ the only fixed point in the room"
+   "why": "⚠️ the only fixed point in the room",
+   "_idWas": "the_fixed_point"
   },
   {
    "abilityId": "stillcraft",
@@ -157,5 +159,6 @@
  "_authoredWhy": "⛑ THE KEPT COURT, AUTHORED 2026-09-08 AT ERIK'S DIRECTION: 'There needs to be an ELVEN COURT in the chaos realm that COMBINES THE FAE AND FANTASY RACES and is OPPOSED TO THE HOLLOW COURT.' ⛔ AND THE OPPOSITION IS NOT FAE-VS-FAE. `peoples_of_kind` already says the Wild Half is churnfolk [FAE], abyssal [HORNED] and unmaker — ring 2, 3, 4 — and THE HOLLOW COURT IS THAT TAKEN PURE: one disposition, absolute. ⚑ SO ITS OPPOSITE IS A COALITION — elven, dwarven, ent, horizon-walker — PEOPLES WHO LIVE IN THE CHURN AND REFUSE TO DISSOLVE INTO IT. ⚠️ THE TWO LAWS ARE THE WHOLE DESIGN, AND BOTH ARE TERRIBLE: ⛔ THE HOLLOW COURT TRADES. Nobody lies, the price is named aloud, you get precisely what you asked for, and you leave hollowed. ⛔ THE KEPT COURT WILL NOT TRADE AT ALL. What they give they give FREELY, and what they withhold cannot be bought — there is no price, no term, no lever. ⚠️ You cannot purchase their help, and if they judge you unworthy of it THERE IS NOTHING YOU CAN OFFER. ⚑ AND IT IS THE SETTING'S CENTRAL ARGUMENT ONE SCALE DOWN: 'The Poles Pull… the counter is HOLDING THE MIDDLE OPEN.' The Kept Court is the Wild Half's own resistance to its own pole.",
  "communityId": "churn.kept_court",
  "_court": "the_kept_court",
- "_opposes": "the_hollow_king"
+ "_opposes": "the_hollow_king",
+ "_idFix_20260908": "⛔ ID CORRECTIONS. ⚠️ AEVI GUESSED WRONG IN BOTH DIRECTIONS IN ONE FILE: she wrote `kept_hour` for a craft that IS `the_kept_hour`, and `the_fixed_point` for one that is `fixed_point`. ⛑ THE ARTICLE IS NOT A RULE — `craft_lint` catches leading articles on NAMES, and the ID vocabulary is simply not uniform. ⛔ THIS IS THE THIRD TIME `the_fixed_point` HAS BEEN WRITTEN WRONG (Calvar 09-05, the legendaries 09-07, here 09-08). ⚑ AN UNRESOLVABLE `abilityId` IS SILENTLY DROPPED — the sheet loads, validates, and is quietly short. ⚠️ CHECK EVERY ID AGAINST THE CATALOGUE BEFORE DECLARING DONE. It is step 6 and it has now paid three times."
 }

@@ -1,0 +1,155 @@
+{
+ "id": "the_deep_warden",
+ "name": "Corvane, the Deep Warden",
+ "tier": "legendary",
+ "level": 61,
+ "role": "Legendary Precursor-delver who goes where no one returns from, and returns",
+ "people": "human",
+ "gender": "neither",
+ "pronouns": "they/them",
+ "romanceEligible": false,
+ "homeLocation": "archive_hollow",
+ "arc": "arc_precursor_waking",
+ "renown": "famous",
+ "domains": {
+  "primary": "lattice",
+  "secondary": "cogitant",
+  "tertiary": "numinous"
+ },
+ "spectrum": {
+  "mechanical_spiritual": -0.6,
+  "chaos_order": 0.5,
+  "concrete_abstract": 0.4
+ },
+ "subAttributes": {
+  "strength": 9,
+  "agility": 9,
+  "reason": 17,
+  "insight": 16,
+  "presence": 12,
+  "rapport": 5,
+  "craft": 15,
+  "wits": 13
+ },
+ "knowledge": [
+  "Live Precursor remnants, from the inside",
+  "What the drift costs, measured on themselves",
+  "Where every mark they have left is, and why"
+ ],
+ "wants": [
+  "To understand What Sleeps Under before it wakes — and is running out of self to spend on the question"
+ ],
+ "fears": "⚠️ Not death. ⛔ Stopping before the answer, with the spent self unaccounted for.",
+ "appearance": "More than half-changed. The lattice shows at the edges and they have stopped covering it.",
+ "voiceHints": "Precise, tired, and foreclosed — they answer the question you asked and not the one you meant.",
+ "assistTags": [
+  "precursor",
+  "analyze",
+  "study",
+  "travel",
+  "reveal"
+ ],
+ "abilities": [
+  {
+   "abilityId": "latticespeak",
+   "level": 3,
+   "why": "⚑ named in `power` — 'Latticespeak, Address-Sense, and things beyond the catalog'"
+  },
+  {
+   "abilityId": "address_sense",
+   "level": 3,
+   "why": "⚑ named in `power`"
+  },
+  {
+   "abilityId": "wake_the_line",
+   "level": 3,
+   "why": "'walks into LIVE remnants and walks out'"
+  },
+  {
+   "abilityId": "foreclose",
+   "level": 3,
+   "why": "⛔ THE HOOK IS THE CRAFT: 'Corvane is what Foreclose overuse makes of a person — brilliant, essential, and mostly foreclosed'"
+  },
+  {
+   "abilityId": "hold_the_aperture",
+   "level": 3,
+   "why": "they hold a live site open long enough to read it"
+  },
+  {
+   "abilityId": "order_sense",
+   "level": 3,
+   "why": "the delver's first sense"
+  },
+  {
+   "abilityId": "unmake_seal",
+   "level": 2,
+   "why": "'places no one else has reached'"
+  },
+  {
+   "abilityId": "old_roads",
+   "level": 2,
+   "why": "they get there"
+  },
+  {
+   "abilityId": "latticework",
+   "level": 2,
+   "why": "lattice primary"
+  },
+  {
+   "abilityId": "unmoving_mind",
+   "level": 2,
+   "why": "cogitant secondary — how they survive the deep"
+  },
+  {
+   "abilityId": "numen_sense",
+   "level": 2,
+   "why": "numinous tertiary"
+  },
+  {
+   "abilityId": "thin_place",
+   "level": 2,
+   "why": "'more than half-changed by it'"
+  },
+  {
+   "abilityId": "resonant_shield",
+   "level": 2,
+   "why": "a delver's ward"
+  },
+  {
+   "abilityId": "fault_sense",
+   "level": 2,
+   "why": "they read what is about to fail"
+  },
+  {
+   "abilityId": "keen_appraisal",
+   "level": 1,
+   "why": "what a mark is worth"
+  },
+  {
+   "abilityId": "steady_soul",
+   "level": 1,
+   "why": "⚠️ r1, and thinning — 'running out of self to spend'"
+  }
+ ],
+ "closed": [
+  "administered_mercy"
+ ],
+ "personality": {
+  "warmth": 4,
+  "trust": 6,
+  "candor": 9,
+  "patience": 8
+ },
+ "physicality": "ADULT. Gaunt, lattice-marked, indeterminate age. WHAT CATCHES THE EYE: the parts that are no longer entirely them.",
+ "canOppose": true,
+ "canAlly": true,
+ "canRecruit": "temporary",
+ "intimacyNotes": "⛔ NOT AVAILABLE — ⚠️ 'meeting them is meeting the drift-cost embodied.' There is less of them than there was.",
+ "questSeeds": [
+  "⚑ They will take you into a live remnant if you are on the Precursor road, and they will not slow down for you.",
+  "⛔ They are spending themselves on What Sleeps Under and know it. Someone could make them stop. Nobody has tried."
+ ],
+ "schemaVersion": 1,
+ "_authoredWhy": "⛑ PROMOTED FROM `npcs/legends.json` TO A FILE OF ITS OWN, 2026-09-08. ⛔ CCODE'S ROSTER: 'authored on disk, never loaded — 4, all in npcs/legends.json', and `state.js` claimed they 'arrive hydrated from legends.roster' WHICH THEY DO NOT. ⚠️ THE FILE IS REGISTERED IN THE MANIFEST AND ITS PEOPLE NEVER REACH THE GAME — the pooled-container failure a third time, after the coliseum champions and the Saehara challengers. ⛔ AND THREE OF THE FIVE ARE HINGES: `the_deep_warden` on FOUR of six arcs, `aevi_the_watcher` on two, `the_last_choirmistress` on two. ⚑ Erik: 'make them fully authored with their arc wants etc. THEY'RE FULL NPCS.' ⚠️ EVERY FIELD BELOW IS CARRIED FROM THE POOLED RECORD — role, power, wants, hooks, seenBefore, approachRequirement, canOppose/canAlly/canRecruit. ⛑ WHAT IS NEW IS ONLY WHAT A SHEET NEEDS: tier from renown, level from the tier floor, domains, subAttributes and a kit.",
+ "_promotedFrom": "npcs/legends.json"
+}

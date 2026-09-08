@@ -163,7 +163,7 @@ Untended, **the argument resumes with the world still standing in the middle of 
 
 ## VI · WHO IS OUT THERE
 
-Seventy great figures on the roster and fourteen legendaries with sheets of their own, and **most of them have never heard of you.** They are
+Seventy-two great figures on the roster and fourteen legendaries with sheets of their own, and **most of them have never heard of you.** They are
 doing their own work. `figureCareer` counts their deeds whether you are in the room or not, and the ones you
 meet twice will not be the same both times.
 
@@ -230,11 +230,17 @@ trickster you brushed past in a market may be a gang leader when you meet again*
 you asked for, at a price named aloud before you agree — **and you leave richer and hollowed, and it is
 years before you find the seam.**
 
-⚑ **The Kept Court is what stands against that, and it is not kinder.** Elves, dwarves and slower things
-living in the one place where nothing stays, refusing to dissolve into it. **They will not trade at all.**
-What they give they give freely; what they withhold cannot be bought. ⚠️ **There is no price, no term, and
-no lever** — you cannot purchase their help, and if they judge you unworthy of it, **there is nothing you
-can offer.**
+⚑ **The Unbought Court is what stands against that, and it is not kinder.** Elves, dwarves, slower things
+and two dragons, living in the one place where nothing stays and refusing to dissolve into it. **They will
+not trade at all.** What they give they give freely; what they withhold cannot be bought. ⚠️ **There is no
+price, no term, and no lever** — you cannot purchase their help, and if they judge you unworthy of it,
+**there is nothing you can offer.**
+
+⛔ **AND NOT EVERY DRAGON IS A WOUND IN THE WORLD.** The Ashen Wyrm and the Bright Devourer are domains that
+resolved wrong and will not resolve back — hazards the size of a hill, with a broken directive and no
+grievance. ⚑ **A true dragon is a person**: older than the Transition, wearing whichever shape the
+conversation needs, and **the one who has been at your table did not lie about it. You simply did not
+ask.**
 
 ⛔ **One court will always deal with you. The other might simply decline.**
 

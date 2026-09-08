@@ -1101,14 +1101,179 @@
       "name": "anticipates your turn",
       "attribute": "mental"
      }
-    ]
+    ],
+    "family:harm": [
+     {
+      "function": "strike",
+      "name": "the committed blow"
+     },
+     {
+      "function": "break",
+      "name": "the opening made"
+     },
+     {
+      "function": "hinder",
+      "name": "the leg taken"
+     }
+    ],
+    "family:influence": [
+     {
+      "function": "provoke",
+      "name": "the goad",
+      "attribute": "social"
+     },
+     {
+      "function": "bargain",
+      "name": "the offer, priced",
+      "attribute": "social"
+     },
+     {
+      "function": "deceive",
+      "name": "the wrong tell",
+      "attribute": "social"
+     }
+    ],
+    "family:know": [
+     {
+      "function": "reveal",
+      "name": "the read"
+     },
+     {
+      "function": "foresee",
+      "name": "calling your next"
+     },
+     {
+      "function": "strike",
+      "name": "the blow you told them about"
+     }
+    ],
+    "family:move": [
+     {
+      "function": "move",
+      "name": "the slip"
+     },
+     {
+      "function": "travel",
+      "name": "already behind you"
+     },
+     {
+      "function": "strike",
+      "name": "the pass-by cut"
+     }
+    ],
+    "family:protect": [
+     {
+      "function": "ward",
+      "name": "the held line"
+     },
+     {
+      "function": "shield",
+      "name": "the turned guard"
+     },
+     {
+      "function": "resist",
+      "name": "not moved"
+     }
+    ],
+    "family:restore": [
+     {
+      "function": "restore",
+      "name": "undoing what you did"
+     },
+     {
+      "function": "soothe",
+      "name": "the room quieted",
+      "attribute": "social"
+     },
+     {
+      "function": "mend",
+      "name": "closed before you finished"
+     }
+    ],
+    "family:shape": [
+     {
+      "function": "make",
+      "name": "the wall that was not there"
+     },
+     {
+      "function": "transform",
+      "name": "the ground turned"
+     },
+     {
+      "function": "bind",
+      "name": "the room closed"
+     }
+    ],
+    "family:sustain": [
+     {
+      "function": "sustain",
+      "name": "still there"
+     },
+     {
+      "function": "resist",
+      "name": "does not tire"
+     },
+     {
+      "function": "shield",
+      "name": "letting you spend yourself"
+     }
+    ],
+    "_familyArchetypes_20260907": "⛑ AEVI 2026-09-07, ANSWERING CCODE'S §17 — OPTION C, ARCHETYPES PER CONTRIBUTION FAMILY. ⛔ THE FINDING WAS HIS AND IT IS THE LARGEST OF THE SESSION: 'every function any opponent can declare, in the whole game: STRIKE, SHIELD.' 58 authored tactic tags, 4 archetype names, ZERO overlap — so every foe without a hand-written skills[] fought as a hard strike and a raised guard, and EIGHT COLISEUM BOUTS WRITTEN ABOUT EIGHT DIFFERENT THINGS PLAYED AS ONE. ⚑ WHY FAMILIES AND NOT 58 TAG ROWS: the eight families already exist, `contributionsOf` already sorts people into them, and THE COLISEUM IS ALREADY ONE CELL PER FAMILY. A bout about outlasting should fight like outlasting, and now it does. ⚠️ AND EACH ROW IS THREE MOVES, NOT TWO — because a two-move opponent is a coin flip and the matchup matrix needs something to bite on. The third is deliberately OFF-FAMILY where the fiction wants it: `family:know` carries a strike named 'the blow you told them about', because a reader who cannot hit you is not frightening. ⛔ AND IT UNBLOCKS NINE OF THE TEN SOCIAL MATCHUP ROWS AEVI PRICED — `resist`, `conceal`, `sustain`, `provoke`, `bargain`, `soothe` are all declarable now, by somebody."
    },
    "soakRankAt": [
     0,
     3,
     6
    ],
-   "soakRankNote": "SNG-263: soak is a STACK of ranked layers, not a flat number. A foe gains its rank-N layer once its total soak reaches soakRankAt[N-1], so a riffraff has none, a notable has one thin layer, and an epic has a layered guard. A craft's `penetration` cuts every layer of rank <= penetration; the rest still soak. Total soak is unchanged — this only decides how it is DISTRIBUTED, and therefore what a penetrating craft can bypass."
+   "soakRankNote": "SNG-263: soak is a STACK of ranked layers, not a flat number. A foe gains its rank-N layer once its total soak reaches soakRankAt[N-1], so a riffraff has none, a notable has one thin layer, and an epic has a layered guard. A craft's `penetration` cuts every layer of rank <= penetration; the rest still soak. Total soak is unchanged — this only decides how it is DISTRIBUTED, and therefore what a penetrating craft can bypass.",
+   "tagFamily": {
+    "outlasts": "sustain",
+    "does-not-tire": "sustain",
+    "lets-you-spend-yourself": "sustain",
+    "is-still-there": "sustain",
+    "does-not-yield": "sustain",
+    "counts-down-the-bell": "sustain",
+    "never-tires": "sustain",
+    "plays-the-crowd": "influence",
+    "offers-a-deal": "influence",
+    "makes-you-the-villain": "influence",
+    "offers-terms-each-round": "influence",
+    "prices-your-yielding": "influence",
+    "never-lies-about-the-cost": "influence",
+    "argues-mid-exchange": "influence",
+    "changes-the-terms": "influence",
+    "wins-either-way": "influence",
+    "is-not-afraid-of-you": "influence",
+    "reads-your-stance": "influence",
+    "calls-your-next-move": "know",
+    "names-your-tell": "know",
+    "waits-for-the-pattern": "know",
+    "punishes-hesitation": "know",
+    "strikes-the-old-injury": "know",
+    "never-where-you-swing": "move",
+    "is-not-where-you-thought": "move",
+    "was-already-behind-you": "move",
+    "closes-in-one-step": "move",
+    "circle-left": "move",
+    "takes-the-slower-one": "move",
+    "waits-for-you-to-turn": "move",
+    "use-the-shimmer": "move",
+    "leaves-when-it-is-done": "move",
+    "hook-and-pull": "move",
+    "builds-the-ground": "shape",
+    "makes-a-tool-from-nothing": "shape",
+    "fights-you-in-a-room-he-built": "shape",
+    "turns-the-sand": "shape",
+    "undoes-what-you-did": "restore",
+    "calls-the-stop": "protect",
+    "will-not-strike-a-turned-back": "protect",
+    "formal-salute": "protect",
+    "punishes-the-unformed": "protect",
+    "charges-the-noise": "harm",
+    "feint-high": "harm",
+    "turns-faster-than-it-should": "harm"
+   },
+   "_tagFamilyWhy": "⛑ TAG → CONTRIBUTION FAMILY, 43 of the 58 authored tags. ⚠️ The prose clusters obviously and that is the whole argument for option C: 'outlasts', 'does-not-tire', 'lets-you-spend-yourself' and 'is-still-there' are one opponent four ways. ⛔ A TAG WITH NO ENTRY FALLS TO `default` AND THAT IS FINE — an unmapped tag is a foe with no declared style, not a broken record. ⬜ CCode: read this BEFORE the four legacy archetype names, and before `kind:`, so a tag that names a family beats a generic. ⚠️ 15 tags deliberately unmapped — 'formal-salute' and 'calls-the-stop' are about how a fight is CONDUCTED rather than how it is fought, and mapping them would have been tidiness rather than truth."
   },
   "targetReveal": {
    "namedAtTier": 2,

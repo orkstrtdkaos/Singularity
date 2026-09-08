@@ -1,33 +1,55 @@
 {
-  "schemaVersion": 1,
-  "id": "tier_signals",
-  "kind": "rules",
-  "note": "⛔ ROLE → TIER, SO A PERSON IS NOT LEVEL 1 FOR WANT OF ONE FIELD. Aevi, ASK_generate_the_forty: 'NOT A MISSING SHEET. NOT A MISSING KIT. ONE MISSING FIELD.' All 40 level-1 records were level 1 for exactly one reason — no `tier` — while `tierFloor` (riffraff 1 · notable 5 · regional 12 · heroic 25 · epic 40 · legendary 60 · mythic 85) already fires for the 64 who have one. ⚠️ THE ROLE STRING ALREADY SAYS WHICH RUNG: 'a toll-collector is not a heroic and a self-appointed keeper of the Lost Archive is not riffraff.' Same shape as the 43 tag→family mappings — the prose already clusters and nobody had read it.\n⛑ THIS TABLE IS CONTENT, DELIBERATELY. The engine derives; the JUDGEMENT about which rung a role sits on is Aevi's and Erik's, and every row here can be corrected without touching code. A record's own authored `tier` ALWAYS wins over anything here.",
-  "_howItIsRead": "⛔ FIRST MATCH WINS, IN ORDER, and the order is the whole design: DEMOTING patterns are listed FIRST so 'young keeper' reads as notable rather than regional. `match` is a case-insensitive regular expression tested against the record's `role` string. A record matching nothing takes `default`.",
-  "_theGuardThatMatters": "⛔ DEFAULT DOWN, NEVER UP (Aevi): 'a wrong guess that makes someone weaker is a disappointment; one that makes them stronger is an ambush.' MEASURED: at level 1 a person has 35 health and 1 craft; at heroic they have 155 health and 13. Guessing one rung high is a foe with a hundred more health, so nothing here promotes past `heroic` — epic, legendary and mythic are AUTHORED RUNGS ONLY. A figure whose story earns one of those gets it from a person, not from a regex.",
-  "default": "notable",
-  "ceiling": "heroic",
-  "_ceilingWhy": "⛔ THE HIGHEST A DERIVATION MAY REACH. Above this the rung is a claim about the world's great figures — `_theMythicalRung` calls them hinges — and a pattern match is not entitled to make it.",
-  "rules": [
-    { "match": "\\b(child|youth|young|foundling|apprentice|novice|initiate|stripling)\\b", "tier": "notable",
-      "why": "⚠️ DEMOTES FIRST, AND ON PURPOSE. `young_ent_lissome` is 'a young Ent who wants to walk out into the wider world'; `burr_the_foundling` is 'a human child half-adopted by the Glade'. Youth outranks every promoting word that follows it — a young keeper is not a keeper yet." },
-
-    { "match": "\\b(ancient|eldest|matriarch|patriarch|high\\s|grand\\s)", "tier": "heroic",
-      "why": "⚑ AGE AND PRECEDENCE AS STANDING. `rootbound_vaskar` is an 'Ancient Ent hardliner'; `reed_mother_ossa` is the 'aging matriarch and moral center of the Greywater Stilts'; `high_luminary` is 'Master of the Radiant Plateau'." },
-    { "match": "\\b(master|marshal|champion|archon|sovereign|warlord|commander)\\b", "tier": "heroic",
-      "why": "⚑ A TITLE THAT COMMANDS. `elder_resonance` is 'Master of the Harmonic Heights'; `champion_vael` is a 'Marcher champion'; `marshal_veyn` 'has held a line and she has lost one'." },
-    { "match": "\\belder\\b", "tier": "heroic",
-      "why": "⚑ AN ELDER SPEAKS FOR A PEOPLE. `walker_elder_thren` argues to keep the Deepwood woven into the world; `wend_elder_saba` is a dying Wend elder. ⚠️ Listed after the youth demotion so 'young elder' cannot promote." },
-
-    { "match": "\\b(keeper|warden|guardian|steward|custodian)\\b", "tier": "regional",
-      "why": "⚑ RESPONSIBILITY FOR A PLACE OR A THING. `warden_isolde` keeps the Green Accord; `keeper_ilma` has kept the accountability board thirty years; `archive_guardian` is the self-appointed keeper of the Lost Archive." },
-    { "match": "\\b(mediator|broker|arbiter|negotiator|magistrate|supervisor|foreman|overseer)\\b", "tier": "regional",
-      "why": "⚑ AUTHORITY OVER A PROCESS. `broker_sain` holds neutrality at the Center; `mediator_corran` holds a border town's balance; `fendt` is a filtration supervisor." },
-    { "match": "\\b(scholar|adept|cogitant|wright|maker|smith|pilot|physician|healer|artisan|luminary)\\b", "tier": "regional",
-      "why": "⚑ A PRACTISED CRAFT, DEEP ENOUGH TO BE THEIR NAME. `archivist_lom` is 'a Cogitant of the Cogitarium'; `solvace` is a 'Blazeborn lens-wright'; `the_ferryman_tam` is a channel-pilot who knows every secret in the marsh." },
-
-    { "match": "\\b(collector|toll|runner|courier|messenger|scout|explorer|hand|labourer|laborer|hawker|pedlar|peddler)\\b", "tier": "notable",
-      "why": "⚠️ A TRADE THAT TRAVELS OR FETCHES — real competence, no standing. `brann_tollhand` is a 'toll-collector at the Roost's lower gate; small crook with a soft spot'; `mountain_scout` is a 'young explorer who found the new pass'; `sable_the_runner` is a pass-runner." }
-  ],
-  "_whatIsNotHere": "⚠️ NO `communityId` OR `assistTags` RULES YET, AND THAT IS DELIBERATE. Aevi named all three as inputs; ROLE alone resolves all 40 defensibly, and a second signal that agrees with the first adds nothing while a second that disagrees needs a precedence rule nobody has ruled on. ⛑ If a role proves unreadable for a future record, an `assistTags` tie-breaker is the next thing to author — the engine already passes the whole record to the deriver."
+ "schemaVersion": 1,
+ "id": "tier_signals",
+ "kind": "rules",
+ "note": "⛔ ROLE → TIER, SO A PERSON IS NOT LEVEL 1 FOR WANT OF ONE FIELD. Aevi, ASK_generate_the_forty: 'NOT A MISSING SHEET. NOT A MISSING KIT. ONE MISSING FIELD.' All 40 level-1 records were level 1 for exactly one reason — no `tier` — while `tierFloor` (riffraff 1 · notable 5 · regional 12 · heroic 25 · epic 40 · legendary 60 · mythic 85) already fires for the 64 who have one. ⚠️ THE ROLE STRING ALREADY SAYS WHICH RUNG: 'a toll-collector is not a heroic and a self-appointed keeper of the Lost Archive is not riffraff.' Same shape as the 43 tag→family mappings — the prose already clusters and nobody had read it.\n⛑ THIS TABLE IS CONTENT, DELIBERATELY. The engine derives; the JUDGEMENT about which rung a role sits on is Aevi's and Erik's, and every row here can be corrected without touching code. A record's own authored `tier` ALWAYS wins over anything here.",
+ "_howItIsRead": "⛔ FIRST MATCH WINS, IN ORDER, and the order is the whole design: DEMOTING patterns are listed FIRST so 'young keeper' reads as notable rather than regional. `match` is a case-insensitive regular expression tested against the record's `role` string. A record matching nothing takes `default`.",
+ "_theGuardThatMatters": "⛔ DEFAULT DOWN, NEVER UP (Aevi): 'a wrong guess that makes someone weaker is a disappointment; one that makes them stronger is an ambush.' MEASURED: at level 1 a person has 35 health and 1 craft; at heroic they have 155 health and 13. Guessing one rung high is a foe with a hundred more health, so nothing here promotes past `heroic` — epic, legendary and mythic are AUTHORED RUNGS ONLY. A figure whose story earns one of those gets it from a person, not from a regex.",
+ "default": "notable",
+ "ceiling": "heroic",
+ "_ceilingWhy": "⛔ THE HIGHEST A DERIVATION MAY REACH. Above this the rung is a claim about the world's great figures — `_theMythicalRung` calls them hinges — and a pattern match is not entitled to make it.",
+ "rules": [
+  {
+   "match": "\\b(child|youth|young|foundling|apprentice|novice|initiate|stripling)\\b",
+   "tier": "notable",
+   "why": "⚠️ DEMOTES FIRST, AND ON PURPOSE. `young_ent_lissome` is 'a young Ent who wants to walk out into the wider world'; `burr_the_foundling` is 'a human child half-adopted by the Glade'. Youth outranks every promoting word that follows it — a young keeper is not a keeper yet."
+  },
+  {
+   "match": "\\b(ancient|eldest|matriarch|patriarch|high\\s|grand\\s)",
+   "tier": "heroic",
+   "why": "⚑ AGE AND PRECEDENCE AS STANDING. `rootbound_vaskar` is an 'Ancient Ent hardliner'; `reed_mother_ossa` is the 'aging matriarch and moral center of the Greywater Stilts'; `high_luminary` is 'Master of the Radiant Plateau'."
+  },
+  {
+   "match": "\\b(master|marshal|champion|archon|sovereign|warlord|commander)\\b",
+   "tier": "heroic",
+   "why": "⚑ A TITLE THAT COMMANDS. `elder_resonance` is 'Master of the Harmonic Heights'; `champion_vael` is a 'Marcher champion'; `marshal_veyn` 'has held a line and she has lost one'."
+  },
+  {
+   "match": "\\belder\\b",
+   "tier": "heroic",
+   "why": "⚑ AN ELDER SPEAKS FOR A PEOPLE. `walker_elder_thren` argues to keep the Deepwood woven into the world; `wend_elder_saba` is a dying Wend elder. ⚠️ Listed after the youth demotion so 'young elder' cannot promote."
+  },
+  {
+   "match": "\\b(keeper|warden|guardian|steward|custodian)\\b",
+   "tier": "regional",
+   "why": "⚑ RESPONSIBILITY FOR A PLACE OR A THING. `warden_isolde` keeps the Green Accord; `keeper_ilma` has kept the accountability board thirty years; `archive_guardian` is the self-appointed keeper of the Lost Archive."
+  },
+  {
+   "match": "\\b(mediator|broker|arbiter|negotiator|magistrate|supervisor|foreman|overseer)\\b",
+   "tier": "regional",
+   "why": "⚑ AUTHORITY OVER A PROCESS. `broker_sain` holds neutrality at the Center; `mediator_corran` holds a border town's balance; `fendt` is a filtration supervisor."
+  },
+  {
+   "match": "\\b(scholar|adept|cogitant|wright|maker|smith|pilot|physician|healer|artisan|luminary)\\b",
+   "tier": "regional",
+   "why": "⚑ A PRACTISED CRAFT, DEEP ENOUGH TO BE THEIR NAME. `archivist_lom` is 'a Cogitant of the Cogitarium'; `solvace` is a 'Blazeborn lens-wright'; `the_ferryman_tam` is a channel-pilot who knows every secret in the marsh."
+  },
+  {
+   "match": "\\b(collector|toll|runner|courier|messenger|scout|explorer|hand|labourer|laborer|hawker|pedlar|peddler)\\b",
+   "tier": "notable",
+   "why": "⚠️ A TRADE THAT TRAVELS OR FETCHES — real competence, no standing. `brann_tollhand` is a 'toll-collector at the Roost's lower gate; small crook with a soft spot'; `mountain_scout` is a 'young explorer who found the new pass'; `sable_the_runner` is a pass-runner."
+  }
+ ],
+ "_whatIsNotHere": "⚠️ NO `communityId` OR `assistTags` RULES YET, AND THAT IS DELIBERATE. Aevi named all three as inputs; ROLE alone resolves all 40 defensibly, and a second signal that agrees with the first adds nothing while a second that disagrees needs a precedence rule nobody has ruled on. ⛑ If a role proves unreadable for a future record, an `assistTags` tie-breaker is the next thing to author — the engine already passes the whole record to the deriver.",
+ "_whatThisCannotDo_20260908": "⛔ THIS TABLE CANNOT MINT ANYTHING ABOVE `heroic`, BY DESIGN — and that is a rule about AUTHORING, not a limitation to work around. ⚑ CCode: 'a derivation must never mint a legendary — epic, legendary and mythic are a claim about the world's great figures, and a REGEX IS NOT ENTITLED TO MAKE IT.' ⚠️ SO: ANY BEING ABOVE HEROIC MUST CARRY AN AUTHORED `tier`. A legendary, an epic, a mythic, a Sovereign, a dragon — if the record does not say, the derivation will read the role string and give them the honest small answer. ⛑ THE LIVE EXAMPLE, AND IT IS A DRAGON: `tolvess` is role 'A YOUNG true dragon' — ⛔ and `young` matches the FIRST rule, which demotes. ⚠️ Without his authored `tier: epic` he would be NOTABLE at level 5: a three-hundred-year-old dragon fought as a villager. ⚑ Nothing is wrong today because authored always wins — but the trap is one omitted field deep. ⬜ AND NO DRAGON ROW WAS ADDED ON PURPOSE. Naming 'dragon' or 'wyrm' here would let a regex mint a legendary, which is the one thing the ceiling forbids. ⛔ THE FIX IS ON THE AUTHOR'S SIDE: write the tier."
 }

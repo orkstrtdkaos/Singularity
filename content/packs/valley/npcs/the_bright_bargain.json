@@ -1,0 +1,159 @@
+{
+ "id": "the_bright_bargain",
+ "name": "The Bright Bargain",
+ "tier": "epic",
+ "level": 44,
+ "role": "Herald of the Hollow Court — she brings the offer, and the offer is always good",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": true,
+ "homeLocation": "the_churn",
+ "domains": {
+  "primary": "churnfolk",
+  "secondary": "abyssal",
+  "tertiary": "veilwright"
+ },
+ "spectrum": {
+  "chaos_order": -0.7,
+  "falsehood_truth": 0.3,
+  "demonic_angelic": -0.5
+ },
+ "subAttributes": {
+  "strength": 7,
+  "agility": 12,
+  "reason": 13,
+  "insight": 16,
+  "presence": 18,
+  "rapport": 15,
+  "craft": 9,
+  "wits": 15
+ },
+ "knowledge": [
+  "What a person wants before they have said it",
+  "Exactly what a thing is worth to the one who wants it",
+  "⚠️ Every bargain the Court has struck, and how each one closed"
+ ],
+ "wants": [
+  "A bargain nobody regrets — she has never made one and does not believe it is impossible"
+ ],
+ "fears": "⛔ Being refused kindly. ⚠️ Anger she can work with; a person who says *no thank you* and means it leaves her with nothing to hold.",
+ "appearance": "Delighted to see you. That is the first thing and it does not wear off.",
+ "voiceHints": "Warm, quick, and entirely honest. ⛔ She tells you the price first, every time, and it is always a fair one.",
+ "reactsToReputation": {
+  "honest": "⚑ prices higher, because you will actually pay",
+  "greedy": "gives you exactly what you asked for",
+  "any": "is glad you came"
+ },
+ "assistTags": [
+  "bargain",
+  "talk",
+  "read-people",
+  "travel"
+ ],
+ "abilities": [
+  {
+   "abilityId": "offered_price",
+   "level": 3,
+   "why": "⚑ the herald's whole function — an offer, honestly made"
+  },
+  {
+   "abilityId": "struck_term",
+   "level": 3,
+   "why": "⛔ and it BINDS. Lethal-rung, because a term struck at this court is not walked back"
+  },
+  {
+   "abilityId": "lever",
+   "level": 3,
+   "why": "'what a person wants before they have said it'"
+  },
+  {
+   "abilityId": "worth_the_work",
+   "level": 3,
+   "why": "'exactly what a thing is worth to the one who wants it'"
+  },
+  {
+   "abilityId": "read_the_room",
+   "level": 3,
+   "why": "she reads you before she speaks"
+  },
+  {
+   "abilityId": "borne_bargain",
+   "level": 2,
+   "why": "she carries the Court's terms"
+  },
+  {
+   "abilityId": "lucky_fall",
+   "level": 2,
+   "why": "churnfolk primary — the Churn favours her"
+  },
+  {
+   "abilityId": "probability_tilt",
+   "level": 2,
+   "why": "⚠️ the offer arrives at the worst possible moment, and that is not a coincidence"
+  },
+  {
+   "abilityId": "chaos_sense",
+   "level": 2,
+   "why": "she knows where a life is about to go wrong"
+  },
+  {
+   "abilityId": "the_way_out",
+   "level": 2,
+   "why": "⛔ she can always leave; you often cannot"
+  },
+  {
+   "abilityId": "ordinary_face",
+   "level": 2,
+   "why": "veilwright tertiary — she has been in the room before"
+  },
+  {
+   "abilityId": "mediators_tongue",
+   "level": 2,
+   "why": "the Court's herald brokers"
+  },
+  {
+   "abilityId": "true_account",
+   "level": 2,
+   "why": "⚑ SHE CANNOT LIE AND DOES NOT WANT TO. The truth is the trap"
+  },
+  {
+   "abilityId": "quiet_step",
+   "level": 1,
+   "why": "she is simply there"
+  },
+  {
+   "abilityId": "set_word",
+   "level": 1,
+   "why": "a word given"
+  },
+  {
+   "abilityId": "far_step",
+   "level": 1,
+   "why": "the Court is far and she is not"
+  }
+ ],
+ "closed": [
+  "useful_lie",
+  "better_story",
+  "made_truth",
+  "wrong_reality"
+ ],
+ "personality": {
+  "warmth": 10,
+  "trust": 5,
+  "candor": 10,
+  "patience": 9
+ },
+ "physicality": "ADULT-SEEMING. Bright, quick, delighted. WHAT CATCHES THE EYE: ⛔ she is telling you the truth and you keep checking.",
+ "intimacyNotes": "⚠️ SHE IS GENUINELY DELIGHTED BY PEOPLE and that is not a tactic — ⛔ it is WHY the tactic works. Her `closed` list is the character: NO DECEPTION CRAFTS AT ALL. She has never needed one.",
+ "questSeeds": [
+  "⚑ She will make you an honest offer for something you did not know you had. The price is fair and the loss is real.",
+  "⛔ She has never made a bargain nobody regretted and wants to. ⚠️ Somebody could help her; it would cost them."
+ ],
+ "schemaVersion": 1,
+ "people": "fae",
+ "_authoredWhy": "⛑ THE CHURN COURT, AUTHORED 2026-09-08. ⛔ NOT INVENTED — POPULATED. `the_hollow_king`'s own signature has said it since it was written: 'RULES A COURT OF THE FAE AND DEMONIC that keeps every promise to the letter and none in spirit.' ⚠️ A court with a king and no courtiers. ⚑ AND THE ADDRESS WAS ALREADY RIGHT: `churnfolk` sits ADJACENT TO `abyssal` on the ring (1 step), so the Churn and the Maw are neighbours and a court can span both. Erik: 'in general they live in the churn area.' ⛔ MEASURED FIRST: 'fae' appears 19 times in the whole corpus with NO RECORDS — the thinnest echo with the best foothold, because the Abyssals' authored virtue is that AN OFFER IS HONESTLY PRICED, which is the fae bargain exactly. ⚠️ THE LAW OF THIS COURT, and it is the Hollow King's: NOBODY HERE LIES. Every one of them gives you precisely what you asked for. ⛑ 'You leave richer and hollowed, and it is years before you find the seam.'",
+ "communityId": "churn.hollow_court",
+ "_court": "the_hollow_king"
+}

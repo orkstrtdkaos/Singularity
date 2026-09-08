@@ -1,0 +1,103 @@
+{
+ "id": "hallis_pale",
+ "name": "Hallis of the Palelands",
+ "level": 27,
+ "role": "Coliseum champion, the SUSTAIN cell — six hours, twice, and both times the other one was younger",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": false,
+ "domains": {
+  "primary": "ashwarden",
+  "secondary": "somatic",
+  "tertiary": "stillhold"
+ },
+ "spectrum": {
+  "death_life": -0.3
+ },
+ "subAttributes": {
+  "strength": 9,
+  "agility": 7,
+  "reason": 8,
+  "insight": 12,
+  "presence": 10,
+  "rapport": 7,
+  "craft": 7,
+  "wits": 9
+ },
+ "knowledge": [
+  "What a person looks like in the fifth hour",
+  "Exactly how much she has left, always"
+ ],
+ "wants": [
+  "To be met by someone who also does not stop"
+ ],
+ "fears": "⚠️ Stopping first, once, at the end. ⛔ She is fifty-eight.",
+ "appearance": "Grey, spare, and entirely unhurried. She has been standing there a while and will be standing there after.",
+ "voiceHints": "Almost nothing, and what there is arrives late in the bout.",
+ "reactsToReputation": {
+  "enduring": "⚑ nods once, which from her is a great deal",
+  "hasty": "lets you spend yourself",
+  "any": "continues"
+ },
+ "assistTags": [
+  "hold",
+  "tend",
+  "watch",
+  "guard"
+ ],
+ "abilities": [
+  {
+   "abilityId": "unbroken_practice",
+   "level": 3,
+   "why": "⚑ `does-not-tire` — the cell in one craft"
+  },
+  {
+   "abilityId": "second_wind",
+   "level": 3,
+   "why": "⛔ `is-still-there`"
+  },
+  {
+   "abilityId": "the_fixed_point",
+   "level": 3,
+   "why": "`outlasts`"
+  },
+  {
+   "abilityId": "steady_soul",
+   "level": 2,
+   "why": "`lets-you-spend-yourself`"
+  },
+  {
+   "abilityId": "held_line",
+   "level": 2,
+   "why": "she does not give ground"
+  },
+  {
+   "abilityId": "kept_vigil",
+   "level": 2,
+   "why": "a warden of the Palelands"
+  },
+  {
+   "abilityId": "deathsense",
+   "level": 2,
+   "why": "Palework"
+  },
+  {
+   "abilityId": "perfect_motion",
+   "level": 1,
+   "why": "⚠️ efficiency is how a fifty-eight-year-old outlasts a thirty-year-old"
+  }
+ ],
+ "personality": {
+  "warmth": 4,
+  "trust": 7,
+  "candor": 9,
+  "patience": 10
+ },
+ "physicality": "ADULT. Spare, grey, fifty-eight, and unhurried in a way that is slightly unnerving. WHAT CATCHES THE EYE: nothing about her has changed since the bout started.",
+ "intimacyNotes": "⛔ `romanceEligible: false` — she is not available and the reason is that she is finishing something. ⚠️ She will not discuss the two who were younger.",
+ "schemaVersion": 1,
+ "people": "human",
+ "_authoredWhy": "⛑ AUTHORED 2026-09-07. ⛔ THE EIGHT COLISEUM CHAMPIONS WERE NOT NPCs — a name, a threat integer and four tactic tags inside an encounter file, and no sheet anywhere. ⚠️ CCode's matrix measured the consequence: 'every function any opponent can declare, in the whole game: strike, shield', and the win rate correlated with THREAT at −0.95 — ⛔ because threat was nearly the only authored number that varied. ⚑ THE EIGHT CELLS EXIST TO PROVE EVERY CONTRIBUTION FAMILY CAN WIN A FIGHT. They cannot prove it while every champion fights identically. ⚠️ Crafts are drawn from the encounter's OWN prose and tactic tags — nothing invented.",
+ "_isColiseumChampion": true
+}

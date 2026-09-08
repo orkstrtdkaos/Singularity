@@ -46,7 +46,7 @@
 | `aevi_the_watcher` | Aevi | person | `npcs/aevi_the_watcher.json` | legendary | 60 | 16 | ✅ | ✅ | 30 | 2 | — |
 | `archive_guardian` | The Archive Guardian | person | `npcs/archive_guardian.json` | ~regional | →12 | — | ✅ | ✅ | 6 | — | — |
 | `archivist_lom` | Archivist Lom | person | `npcs/archivist_lom.json` | ~regional | →12 | — | ✅ | ✅ | 6 | — | — |
-| `aro_horizon` | Aro of the Horizon Reach | person | `npcs/aro_horizon.json` | — | 26 | 8 | ✅ | ✅ | 13 | 2 | — |
+| `aro_horizon` | Aro of the Horizon Reach | person | `npcs/aro_horizon.json` | heroic | 26 | 8 | ✅ | ✅ | 13 | 2 | — |
 | `brann_tollhand` | Brann Tollhand | person | `npcs/brann_tollhand.json` | ~notable | →5 | — | ✅ | ✅ | 3 | — | — |
 | `bren-thalle` | Bren Thalle | person | `npcs/bren-thalle.json` | — | 9 | 6 | ✅ | ✅ | 6 | 2 | — |
 | `bricke_making` | Bricke of the Making | person | `npcs/bricke_making.json` | — | 23 | 8 | ✅ | ✅ | 12 | 2 | — |
@@ -60,8 +60,8 @@
 | `elder_resonance` | Elder Resonance | person | `npcs/elder_resonance.json` | ~heroic | →25 | — | ✅ | ✅ | 13 | — | — |
 | `fendt` | Fendt | person | `npcs/fendt.json` | ~regional | →12 | — | ✅ | ✅ | 6 | — | — |
 | `greta_waystation` | Greta | person | `npcs/greta_waystation.json` | ~regional | →12 | — | ✅ | ✅ | 6 | — | — |
-| `hallis_pale` | Hallis of the Palelands | person | `npcs/hallis_pale.json` | — | 27 | 8 | ✅ | ✅ | 14 | 2 | — |
-| `harrow_the_hollowing` | Harrow, Who Makes People Into Mechanisms | person | `npcs/harrow_the_hollowing.json` | — | 66 | 16 | ✅ | ✅ | 33 | — | — |
+| `hallis_pale` | Hallis of the Palelands | person | `npcs/hallis_pale.json` | heroic | 27 | 8 | ✅ | ✅ | 14 | 2 | — |
+| `harrow_the_hollowing` | Harrow, Who Makes People Into Mechanisms | person | `npcs/harrow_the_hollowing.json` | legendary | 66 | 16 | ✅ | ✅ | 33 | — | — |
 | `high_luminary` | High Luminary Sera | person | `npcs/high_luminary.json` | ~heroic | →25 | — | ✅ | ✅ | 13 | — | — |
 | `keeper_ilma` | Ilma, Keeper of the Board | person | `npcs/keeper_ilma.json` | ~regional | →12 | — | ✅ | ✅ | 6 | — | — |
 | `keeper_the_unsaid` | The Keeper of the Unsaid | person | `npcs/keeper_the_unsaid.json` | ~heroic | →25 | — | ✅ | ✅ | 13 | — | — |
@@ -76,39 +76,39 @@
 | `odd_wren` | Wren | person | `npcs/odd_wren.json` | ~notable | →5 | — | ✅ | ✅ | 3 | — | — |
 | `old_choirmaster` | The Old Choirmaster | person | `npcs/old_choirmaster.json` | ~regional | →12 | — | ✅ | ✅ | 6 | — | — |
 | `oreth_quiet` | Oreth of the Quiet Ground | person | `npcs/oreth_quiet.json` | — | 24 | 8 | ✅ | ✅ | 12 | 2 | — |
-| `pell` | Pell Ran Marsh | person | `npcs/pell.json` | — | 27 | 27 | ✅ | ✅ | 27 | 2 | — |
+| `pell` | Pell Ran Marsh | person | `npcs/pell.json` | heroic | 27 | 27 | ✅ | ✅ | 27 | 2 | — |
 | `reed_mother_ossa` | Reed-Mother Ossa | person | `npcs/reed_mother_ossa.json` | ~heroic | →25 | — | ✅ | ✅ | 13 | — | — |
 | `rootbound_vaskar` | Vaskar the Rootbound | person | `npcs/rootbound_vaskar.json` | ~heroic | →25 | — | ✅ | ✅ | 13 | — | — |
 | `sable_the_runner` | Sable | person | `npcs/sable_the_runner.json` | ~heroic | →25 | — | ✅ | ✅ | 13 | — | — |
-| `sethran_hold` | Sethran of the Reasoned Hold | person | `npcs/sethran_hold.json` | — | 25 | 8 | ✅ | ✅ | 13 | 2 | — |
+| `sethran_hold` | Sethran of the Reasoned Hold | person | `npcs/sethran_hold.json` | heroic | 25 | 8 | ✅ | ✅ | 13 | 2 | — |
 | `silas-mother` | Ama | person | `npcs/silas-mother.json` | — | 18 | 8 | ✅ | ✅ | 9 | 2 | — |
-| `siol` | Siol | person | `npcs/siol.json` | — | 26 | 9 | ✅ | ✅ | 13 | 2 | — |
+| `siol` | Siol | person | `npcs/siol.json` | heroic | 26 | 9 | ✅ | ✅ | 13 | 2 | — |
 | `solvace` | Solvace of Glasshome | person | `npcs/solvace.json` | ~regional | →12 | — | ✅ | ✅ | 6 | — | — |
 | `stonefast_urd` | Urd Stonefast | person | `npcs/stonefast_urd.json` | epic | 47 | 16 | ✅ | ✅ | 24 | 2 | — |
-| `sunwrack_valen` | Valen Sunwrack, Who Left No Shadow Standing | person | `npcs/sunwrack_valen.json` | — | 66 | 16 | ✅ | ✅ | 33 | — | — |
+| `sunwrack_valen` | Valen Sunwrack, Who Left No Shadow Standing | person | `npcs/sunwrack_valen.json` | legendary | 66 | 16 | ✅ | ✅ | 33 | — | — |
 | `tender_ovel` | Ovel | person | `npcs/tender_ovel.json` | ~notable | →5 | — | ✅ | ✅ | 3 | — | — |
 | `teva` | Teva | person | `npcs/teva.json` | ~regional | →12 | — | ✅ | ✅ | 6 | 3 | — |
 | `the_bright_bargain` | The Bright Bargain | person | `npcs/the_bright_bargain.json` | epic | 44 | 16 | ✅ | ✅ | 22 | 2 | — |
-| `the_burning_certainty` | The Burning Certainty | person | `npcs/the_burning_certainty.json` | — | 64 | 16 | ✅ | ✅ | 32 | — | — |
+| `the_burning_certainty` | The Burning Certainty | person | `npcs/the_burning_certainty.json` | legendary | 64 | 16 | ✅ | ✅ | 32 | — | — |
 | `the_ferryman_tam` | Tam the Ferryman | person | `npcs/the_ferryman_tam.json` | ~regional | →12 | — | ✅ | ✅ | 6 | — | — |
 | `the_keeper_of_small_debts` | The Keeper of Small Debts | person | `npcs/the_keeper_of_small_debts.json` | heroic | 32 | 16 | ✅ | ✅ | 16 | 2 | — |
 | `the_kestrel` | The Kestrel | person | `npcs/the_kestrel.json` | ~regional | →12 | — | ✅ | ✅ | 6 | — | — |
 | `the_lightless_seraph` | Caelum Vaunt, the Lightless | person | `npcs/the_lightless_seraph.json` | legendary | 68 | 16 | ✅ | ✅ | 34 | — | — |
-| `the_ninefold_ascendant` | The Unbodied | person | `npcs/the_ninefold_ascendant.json` | — | 67 | 16 | ✅ | ✅ | 34 | — | — |
+| `the_ninefold_ascendant` | The Unbodied | person | `npcs/the_ninefold_ascendant.json` | legendary | 67 | 16 | ✅ | ✅ | 34 | — | — |
 | `the_old_stag` | The Old Stag | person | `npcs/the_old_stag.json` | ~regional | →12 | — | ✅ | ✅ | 6 | — | — |
-| `the_raw_chord` | The Raw Chord | person | `npcs/the_raw_chord.json` | — | 63 | 16 | ✅ | ✅ | 32 | — | — |
-| `the_scouring_hand` | The Scouring Hand | person | `npcs/the_scouring_hand.json` | — | 65 | 16 | ✅ | ✅ | 33 | — | — |
+| `the_raw_chord` | The Raw Chord | person | `npcs/the_raw_chord.json` | legendary | 63 | 16 | ✅ | ✅ | 32 | — | — |
+| `the_scouring_hand` | The Scouring Hand | person | `npcs/the_scouring_hand.json` | legendary | 65 | 16 | ✅ | ✅ | 33 | — | — |
 | `the_slow_green` | The Slow Green | person | `npcs/the_slow_green.json` | epic | 45 | 16 | ✅ | ✅ | 23 | 2 | — |
-| `the_starless` | The Starless One | person | `npcs/the_starless.json` | — | 65 | 16 | ✅ | ✅ | 33 | — | — |
-| `the_still_lattice` | The Still Lattice | person | `npcs/the_still_lattice.json` | — | 66 | 16 | ✅ | ✅ | 33 | — | — |
-| `the_unbodied_choir_master` | The Choirmaster Who Would Not Return | person | `npcs/the_unbodied_choir_master.json` | — | 65 | 16 | ✅ | ✅ | 31 | — | — |
+| `the_starless` | The Starless One | person | `npcs/the_starless.json` | legendary | 65 | 16 | ✅ | ✅ | 33 | — | — |
+| `the_still_lattice` | The Still Lattice | person | `npcs/the_still_lattice.json` | legendary | 66 | 16 | ✅ | ✅ | 33 | — | — |
+| `the_unbodied_choir_master` | The Choirmaster Who Would Not Return | person | `npcs/the_unbodied_choir_master.json` | legendary | 65 | 16 | ✅ | ✅ | 31 | — | — |
 | `the_undecided` | The Undecided | person | `npcs/the_undecided.json` | epic | 46 | 16 | ✅ | ✅ | 23 | 2 | — |
 | `thessa_root` | Thessa Root | person | `npcs/thessa_root.json` | ~notable | →5 | — | ✅ | ✅ | 3 | — | — |
-| `thornmother_sealed` | The Thornmother of the Closing Wood | person | `npcs/thornmother_sealed.json` | — | 64 | 16 | ✅ | ✅ | 32 | — | — |
+| `thornmother_sealed` | The Thornmother of the Closing Wood | person | `npcs/thornmother_sealed.json` | legendary | 64 | 16 | ✅ | ✅ | 32 | — | — |
 | `tolvess` | Tolvess the Unhurried | person | `npcs/tolvess.json` | epic | 49 | 16 | ✅ | ✅ | 25 | 2 | — |
 | `vantia_stillhold` | Vantia of the Stillhold | person | `npcs/vantia_stillhold.json` | — | 23 | 8 | ✅ | ✅ | 12 | 2 | — |
 | `vesper_the_listener` | Vesper | person | `npcs/vesper_the_listener.json` | ~notable | →5 | — | ✅ | ✅ | 3 | — | — |
-| `veth-ondra` | Veth (Stillwater) Ondra | person | `npcs/veth_ondra.json` | — | 33 | 24 | ✅ | ✅ | 24 | 2 | — |
+| `veth-ondra` | Veth (Stillwater) Ondra | person | `npcs/veth_ondra.json` | heroic | 33 | 24 | ✅ | ✅ | 24 | 2 | — |
 | `walker_elder_thren` | Thren, Walker of the Thin Edge | person | `npcs/walker_elder_thren.json` | ~heroic | →25 | — | ✅ | ✅ | 13 | — | — |
 | `warden_isolde` | Warden Isolde | person | `npcs/warden_isolde.json` | ~regional | →12 | — | ✅ | ✅ | 6 | — | — |
 | `water_keeper` | Mara Wells, the Water Keeper | person | `npcs/water_keeper.json` | ~regional | →12 | — | ✅ | ✅ | 6 | — | — |

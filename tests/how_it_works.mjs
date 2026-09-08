@@ -808,6 +808,18 @@ console.log("\n── §10 · the known gaps — these go RED when FIXED ──"
       authored.size > 0 && asked.size > 0 && ![...authored].some(a => asked.has(a)),
       `authored: ${[...authored].join(", ")} · asked: ${[...asked].join(", ")}`);
   }
+  // ⛔ THE ROSTER FOUND IT (2026-09-08): `npcs/legends.json`'s own `legends[]` is read by NOTHING — state.js said
+  // they "arrive hydrated from legends.roster" and they do not. Corvane the Deep Warden is a hinge on 4 of 6
+  // greater arcs and resolves to no record. Left UNHYDRATED on purpose: they carry `renown`, not `tier`, and
+  // hydrating them would make Corvane a level-1 opponent — the seraph defect, reproduced by a fix. Erik's call.
+  {
+    const { loadContentHeadless: lchG } = await import("./headless_content.mjs");
+    const CG = await lchG();
+    const missing = new Set();
+    for (const a of Object.values(CG.greaterArcs?.arcs || CG.greaterArcs || {})) for (const h of (a?.hingeNpcs || [])) if (!CG.npcs?.[h]) missing.add(h);
+    gap("§10: three hinge NPCs on four greater arcs resolve to NO record — npcs/legends.json's pool is read by nobody",
+      missing.size > 0, [...missing].join(", "));
+  }
   gap("§10: method (psionics / song / blade) is still recorded nowhere",
     abilities.every(a => a.method == null));
 }
@@ -3407,7 +3419,8 @@ console.log("\n── §50 · R28 · the authored ground ──");
   // far as being loaded. A fetch with no attach is a download the engine throws away.
   const st50 = rd("engine/state.js"), gr50 = rd("engine/gm_registry.js");
   check("§50: ⛔ the file is fetched, destructured, ATTACHED and READ — all four",
-    /local_layouts\.json/.test(st50) && /localLayoutsDoc\] = await/.test(st50) &&
+    // ⚠️ `localLayoutsDoc` is DESTRUCTURED — not necessarily LAST. Two cosmology docs joined the wave after it (09-08).
+    /local_layouts\.json/.test(st50) && /localLayoutsDoc[^\]]*\] = await/.test(st50) &&
     /rules\.localLayouts = localLayoutsDoc/.test(st50) &&
     /groundForGM\(env\.location\?\.id, env\.rules\?\.localLayouts\)/.test(gr50));
   check("§50: …and it is a registered GM block, so it reaches the narrator",  /key: "groundDetail"/.test(gr50));
@@ -3467,13 +3480,15 @@ console.log("\n── §51 · the person-keyed sheet, live ──");
     // ✅ 2026-09-05: the body of `personOpponent` and of `escalateToFight` moved to engine/battle_turn.js (§71) — app.js keeps the
     // wrappers; the shape is asserted where it lives now.
     const app51 = rd("app.js"), bt51 = rd("engine/battle_turn.js");
+    // ✅ 2026-09-08: the app's `personOpponent(target)` wrapper was DEAD — nothing called it — and is gone. The one live
+    // door is `escalateToFight → duelFromTarget`, and the engine resolves the person inside it; assert THAT.
     check("§51: ⛔ a named person fights as themselves, not as a difficulty rating",
-      /function personOpponent\(/.test(app51) && /personOpponentFor\(rec/.test(app51) &&
+      /function escalateToFight\(target, choice\) \{[\s\S]{0,700}duelFromTarget\(character, target/.test(app51) && /personOpponentFor\(rec, \{/.test(bt51) &&
       /opponent: person \|\| \{ name: target\?\.name, threat: fallbackThreat/.test(bt51));
     check("§51: …and it hands over the WHOLE sheet, never skills alone",
       /attributes: sheet\.attributes, health: sheet\.health, energy: sheet\.energy/.test(bt51));
     check("§51: ⚠️ …while a stranger still falls to the threat curve — 112 people is not everyone",
-      /if \(!rec\) return null;/.test(app51) && /if \(!skills\.length\) return null;/.test(bt51));
+      /if \(!rec\) return null;/.test(bt51) && /if \(!skills\.length\) return null;/.test(bt51) && /const person = rec \? personOpponentFor\(rec/.test(bt51));
   }
   // ⛔ THE BRIDGE. A half-passed sheet is refused rather than silently completed at threat 20.
   {
@@ -4091,15 +4106,21 @@ console.log("\n── §59 · sheets fill in through play; an authored sheet is 
     // ✅ 2026-09-05: the fight path's sheet call lives in engine/battle_turn.js now (§71); the dial reaches it as `cfg`, handed by app.js.
     const bt59 = rd("engine/battle_turn.js");
     const appSlice = bt59.slice(bt59.indexOf("personSheetFor(rec"), bt59.indexOf("personSheetFor(rec") + 120);
-    check("§59: ⛔ …and so does the fight path (`personOpponentFor`)", /cfg/.test(appSlice) && /cfg: npcCfg/.test(app), appSlice.slice(0, 100));
+    // ✅ 2026-09-08: the wrapper that carried `cfg: npcCfg` is gone; the one live door hands the dial in as `cfg: CONTENT.rules?.npcStanding`.
+    check("§59: ⛔ …and so does the fight path (`personOpponentFor`, via escalateToFight → duelFromTarget)", /cfg/.test(appSlice) && /function escalateToFight[\s\S]{0,400}cfg: CONTENT\.rules\?\.npcStanding \|\| \{\}/.test(app), appSlice.slice(0, 100));
     check("§59: …and the dial block is authored where the callers now read it", !!cfg59 && !!cfg59.tierFloor && Number(cfg59.tierFloor.legendary) > 1);
   }
 
   // ⛔ THE MEASURED CASE, BY NAME: a legendary with no authored level is not level 1 once the dial arrives.
   {
-    const seraph = C59.npcs?.the_lightless_seraph;
+    // ⚠️ FIXTURE SWAPPED 2026-09-08 (WORK ORDER §7). This measured `the_lightless_seraph`; Aevi then authored his
+    // level, and an authored level outranks a derived one — so fixing the figure removed the evidence and the gate
+    // went red WITHOUT the claim being wrong. The claim is about the DIAL, so it moves to a figure who still shows it:
+    // Sister Alder — epic, `lore/legends.json`, no level, no abilities, no subAttributes. If she is ever authored a
+    // level too, the next check ("none of the tier-only people is level 1 with the dial") still carries the claim.
+    const seraph = C59.npcs?.sister_alder;
     const bare = seraph && NS59.sheetFor(seraph, {}), dialed = seraph && NS59.sheetFor(seraph, { cfg: cfg59 });
-    check("§59: ⛔ the Lightless Seraph is level 1 WITHOUT the dial and its tier floor WITH it — the gap was real",
+    check("§59: ⛔ a tier-only figure (Sister Alder) is level 1 WITHOUT the dial and her tier floor WITH it — the gap was real",
       !!seraph && seraph.level == null && bare.level === 1 && dialed.level >= Number(cfg59.tierFloor[String(seraph.tier).toLowerCase()] || 999),
       `bare ${bare?.level} → dialed ${dialed?.level} (tier ${seraph?.tier})`);
     const tierOnly = npcs59.filter(n => n.tier && n.level == null);
@@ -4869,7 +4890,6 @@ console.log("\n── §71 · the harness drives the production path (engine/bat
     /from "\.\/engine\/battle_turn\.js"/.test(app71)
     && /function playerBattleSkills\(\) \{[\s\S]{0,300}battleSkillsForCharacter\(character/.test(app71)
     && /function sbDeclFromSel\(sel, skills, intensity\) \{[\s\S]{0,200}declFromSelection\(sel, skills, intensity/.test(app71)
-    && /function personOpponent\(target\) \{[\s\S]{0,900}personOpponentFor\(rec/.test(app71)
     && /function escalateToFight\(target, choice\) \{[\s\S]{0,600}duelFromTarget\(character, target/.test(app71)
     && /function endEncounter\(outcome\) \{[\s\S]{0,700}endBattle\(character/.test(app71)
     && /async function sbResolveSense\(\) \{[\s\S]{0,1600}playTurn\(character, enc\.def, \{ sense: decl/.test(app71)
@@ -9615,14 +9635,14 @@ console.log("\n── §146 · the domain draw runs, and it stays near their gro
   // ⛔ THE ACCESSOR IS PASSED ON THE LIVE PATH, or the draw is inert however well the content is authored.
   const bt = rd("engine/battle_turn.js");
   check("§146: ⛔ `personOpponentFor` passes domainAccess AND traditionIndex — without both, kitFor skips the draw",
-    /battleSkillsFor\(rec, \{ catalog, day, cfg, domainAccess, traditionIndex \}\)/.test(bt)
+    /battleSkillsFor\(kitRec, \{ catalog, day, cfg, domainAccess, traditionIndex \}\)/.test(bt)   // `kitRec`: R41 may swap the kit for a form
     && /import \{[^}]*\bdomainAccess\b[^}]*\} from "\.\/traditions\.js"/.test(bt));
   // ⚠️ AND IT IS THREADED FROM THE APP, not defaulted to null — a null index makes the draw run and find nothing,
   // which is worse than not running because it LOOKS wired.
   const app146 = rd("app.js");
   check("§146: ⚑ …and the app threads the real traditionIndex into both entry points",
-    /personOpponentFor\(rec, \{[^}]*traditionIndex: CONTENT\.traditionIndex/.test(app146)
-    && /duelFromTarget\([\s\S]{0,400}traditionIndex: CONTENT\.traditionIndex/.test(app146));
+    // ✅ 2026-09-08: ONE door. The dead wrapper carried the first of these two; the live door carries it now.
+    /duelFromTarget\([\s\S]{0,500}traditionIndex: CONTENT\.traditionIndex/.test(app146));
   // ⛑ THE EFFECT, MEASURED THROUGH THE PRODUCTION CALL: nobody is left falling through to the threat path.
   const kit = (n, withAccess) => NS.battleSkillsFor(n, withAccess
     ? { catalog: C146.abilities, cfg: cfg146, day: 100, domainAccess: TR.domainAccess, traditionIndex: C146.traditionIndex }
@@ -9643,6 +9663,100 @@ console.log("\n── §146 · the domain draw runs, and it stays near their gro
   // and kitFor caps a craft at tier ceil(level/5) — so the draw is real but thin until level comes from somewhere.
   check("§146: ⚠️ the remaining limit is LEVEL, exactly as §2 says — an unmet person derives 1 and draws at tier 1",
     NS.derivedLevel({ id: "nobody", domains: { primary: "numinous" } }, { day: 100, cfg: cfg146 }) === 1);
+}
+
+/* ═════ §147 — ONE ROSTER, DERIVED; AND EVERY REACHABLE OPPONENT HAS A LEVEL AND A KIT, OR IS DECLARED NOT ONE ═════ */
+// ⛔ WORK ORDER 2026-09-07 (Erik ruled; Aevi wrote): six files, ~149 records, no single list — and three failures in
+// one week were one person counting one list and describing another. `scripts/roster.mjs` reads all six from DISK,
+// asks the PRODUCTION opponent path (`personOpponentFor`, with the accessor and index the app passes) whether each
+// record can be put in front of a player, and writes one table into docs/ROSTER.md. ⚠️ A hand-kept roster is a
+// stored copy of a derived value; this project has ruled against that four times.
+// ⛔ AND THE GATE THAT PAYS FOR IT (SPEC_one_roster §4): every person reachable as an opponent has a level and a
+// kit, OR is declared not one. Measured: 125 of 125 records in CONTENT.npcs are reachable now that the domain draw
+// runs — and 40 of them would fight at LEVEL 1 (no authored level, no tier). That is the class the Lightless Seraph
+// was in. It is a RATCHET here, not a red: 40 people is Aevi's §2 table ("level is step one"), and a gate that
+// blocks every push until 40 sheets are authored is a gate somebody will --no-verify.
+console.log("\n── §147 · one roster, derived; the opponent gate; the Sovereign form; the Veil ──");
+{
+  const { execFileSync: ex147 } = await import("node:child_process");
+  const { loadContentHeadless: lch147 } = await import("./headless_content.mjs");
+  const BT147 = await import("../engine/battle_turn.js");
+  const SV147 = await import("../engine/sovereign.js");
+  const NS147 = await import("../engine/npcsheet.js");
+  const GR147 = await import("../engine/gm_registry.js");
+  const C147 = await lch147();
+  const cfg147 = C147.rules?.npcStanding || {};
+  // ── the generator, and the doc it owns
+  const gen = rd("scripts/roster.mjs");
+  check("§147: ⚑ the generator exists, reads all SIX files from disk, and asks the PRODUCTION opponent path",
+    /readdirSync\(join\(root, V \+ "npcs"\)\)/.test(gen) && /companions/.test(gen) && /tradition_epics\.json/.test(gen) && /lore\/legends\.json/.test(gen) && /npc_interiority\.json/.test(gen)
+    && /personOpponentFor\(loaded, \{ catalog: C\.abilities, cfg, day: 100, traditionIndex: C\.traditionIndex \}\)/.test(gen));
+  check("§147: ⛔ …it refuses to write a table that lost anyone, and cannot clobber a file someone is editing",
+    /REFUSING to write a table that lost someone/.test(gen) && /const WRITE = process\.argv\.includes\("--write"\)/.test(gen) && /if \(!WRITE\)/.test(gen));
+  // ⛔ FRESH, not merely present — the atlas rule. The generator emits LF; git re-materialises CRLF; normalise first.
+  const roster = rd("docs/ROSTER.md");
+  const norm = (t) => t.replace(/\r\n/g, "\n").trim();
+  // ⚠ `--md` SHARES STDOUT WITH THE LOADER'S CHATTER ([loadContent] …), so the block starts at its own first line.
+  const rawLive = ex147(process.execPath, [join(root, "scripts/roster.mjs"), "--md"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+  const live = rawLive.slice(Math.max(0, rawLive.indexOf("**GENERATED by")));
+  const a = roster.indexOf("<!-- BEGIN roster-generated -->"), b = roster.indexOf("<!-- END roster-generated -->");
+  check("§147: ⛔ docs/ROSTER.md carries the generated block and it is FRESH — regenerating produces the same table",
+    a > 0 && b > a && norm(roster.slice(a + "<!-- BEGIN roster-generated -->".length, b)) === norm(live), "run: node scripts/roster.mjs --write");
+  check("§147: ⚠️ …and the generated block carries NO date — a stamp would make the doc read stale every morning",
+    !/\*\*GENERATED \d{4}-\d{2}-\d{2}/.test(live) && /GENERATED by `scripts\/roster\.mjs`/.test(live));
+  check("§147: ⚑ …and the hand-written prose survives above the markers — a reference, not a migration",
+    a > roster.indexOf("# THE ROSTER") && /## §1 — FIVE PLACES/.test(roster.slice(b)));
+  // ── the opponent gate, as ratchets with the reason and the number written here
+  const npcs147 = Object.values(C147.npcs || {});
+  const reach = npcs147.filter(n => { try { return !!BT147.personOpponentFor(n, { catalog: C147.abilities, cfg: cfg147, day: 100, traditionIndex: C147.traditionIndex }); } catch { return false; } });
+  const levelOne = reach.filter(n => n.level == null && NS147.derivedLevel(n, { day: 100, cfg: cfg147 }) === 1);
+  check("§147: the fixture is not vacuous — the opponent path reaches most of the corpus", reach.length >= 100, `${reach.length} of ${npcs147.length}`);
+  // ⛔ BASELINE 40 (2026-09-08): the people in npcs/*.json with neither a level nor a tier — adept_sona, archive_guardian, maker_orrin,
+  // warden_isolde… — every one derives level 1 with 3+5 health. Aevi's SPEC_npc_sheet_generation §2 owns the fix (level is step one).
+  // May only go DOWN. Lower it by authoring a level or a tier; never by loosening this.
+  const LEVEL_ONE_BASELINE = 40;
+  check(`§147: ratchet — people reachable as an opponent who would fight at LEVEL 1 = ${levelOne.length} (baseline ${LEVEL_ONE_BASELINE}) — may only go DOWN`,
+    levelOne.length <= LEVEL_ONE_BASELINE, levelOne.slice(0, 6).map(n => n.id).join(", "));
+  const arrays = npcs147.filter(n => Array.isArray(n.domains?.primary));
+  // ⛔ BASELINE 3 (2026-09-08): rootbound_vaskar · the_old_stag · walker_elder_thren carry `domains.primary` as an ARRAY — the Pell/Veth
+  // shape. `domainAccess` reads a string; an array matches nothing, so their draw is empty. Aevi's; three edits.
+  const ARRAY_DOMAINS_BASELINE = 3;
+  check(`§147: ratchet — records whose domains.primary is an ARRAY = ${arrays.length} (baseline ${ARRAY_DOMAINS_BASELINE}) — may only go DOWN`,
+    arrays.length <= ARRAY_DOMAINS_BASELINE, arrays.map(n => n.id).join(", "));
+  // ── the declaration: `notAnOpponent: true` is refused by NAME, and the threat path does not take them either
+  const decl147 = { id: "x-declared", name: "A Hidden Hand", tier: "epic", domains: { primary: "abyssal" }, abilities: [{ abilityId: "struck_term", level: 2 }], notAnOpponent: true };
+  check("§147: ⛔ a record declared `notAnOpponent` is refused by the opponent path — the declaration IS the other half of the gate",
+    BT147.personOpponentFor(decl147, { catalog: C147.abilities, cfg: cfg147, day: 100, traditionIndex: C147.traditionIndex }) === null
+    && !!BT147.personOpponentFor({ ...decl147, notAnOpponent: false }, { catalog: C147.abilities, cfg: cfg147, day: 100, traditionIndex: C147.traditionIndex }));
+  // ── R41: one record, two forms, chosen by the arc's live stage — threaded in, never read from the world-tick
+  const sov = { id: "x-sov", name: "A Sovereign", tier: "mythic", domains: { primary: "abyssal" }, arcAffinity: { arcId: "arc_the_poles_pull" },
+    abilities: [{ abilityId: "struck_term", level: 2 }], forms: { diminished: { atStage: 3, level: 45, note: "thin" }, final: { atStage: 4, level: 85 } } };
+  const at = (st) => BT147.personOpponentFor(sov, { catalog: C147.abilities, cfg: cfg147, day: 100, traditionIndex: C147.traditionIndex, stageOf: () => st });
+  check("§147: ⛔ R41 — a Sovereign arrives DIMINISHED at the mid stage and in FINAL FORM at the last, from ONE record",
+    at(3)?.level === 45 && at(3)?._form === "diminished" && at(4)?.level === 85 && at(4)?._form === "final",
+    `stage3 L${at(3)?.level}/${at(3)?._form} · stage4 L${at(4)?.level}/${at(4)?._form}`);
+  check("§147: ⚑ …before either stage it has NOT arrived, and resolves as the plain record — the mythic floor, no form",
+    at(1)?.level === Number(cfg147.tierFloor?.mythic) && at(1)?._form === undefined);
+  check("§147: ⚑ …and a record with NO forms block resolves exactly as it always did — reader before field",
+    (() => { const { forms, ...plain } = sov; const o = BT147.personOpponentFor(plain, { catalog: C147.abilities, cfg: cfg147, day: 100, traditionIndex: C147.traditionIndex, stageOf: () => 4 }); return o?.level === Number(cfg147.tierFloor?.mythic) && o?._form === undefined; })());
+  check("§147: ⚑ …and a Sovereign with no arc has no arrival, and says so", SV147.sovereignFormFor({ forms: { final: { atStage: 1, level: 9 } } }, { stageOf: () => 1 })?.why === "no arc to arrive on");
+  check("§147: ⛔ …and the app threads the LIVE arc stage into the duel — worldtick owns it, the engine is handed it",
+    /stageOf: \(arcId\) => arcStageNow\(CONTENT, character, arcId\)/.test(rd("app.js")) && /stageOf/.test(rd("engine/battle_turn.js").slice(rd("engine/battle_turn.js").indexOf("export function duelFromTarget"))));
+  // ── the two cosmology files: registered 08-15, loaded 09-08, and CONSUMED — a loaded-but-unread value is the same bug one layer up
+  check("§147: ⛔ the_veil and power_cosmology are LOADED and ATTACHED — the Void work no longer stands on cosmology the engine never saw",
+    !!C147.theVeil?.theTable && !!C147.powerCosmology?.theFourFields);
+  const veilRow = (GR147.GM_CONTEXT || []).find(r => r.key === "veilDetail");
+  const veilTxt = veilRow ? veilRow.build({ CONTENT: C147, character: { nativeTradition: "wright" } }) : null;
+  check("§147: ⛔ …and the Veil REACHES the narrator: the four-cell table and this tradition's relation, on the ASK view only",
+    !!veilRow && veilRow.views.join() === "ask" && typeof veilTxt === "string" && /make lattice/.test(veilTxt) && /unmake nexus/.test(veilTxt) && /Their own domain \(Building\)/.test(veilTxt),   // wright → Building, via traditionIndex.domainOfTrad
+    String(veilTxt).slice(0, 80));
+  check("§147: ⚑ …rendered by gm.js, and absent from the turn view — no cosmology paragraph a turn did not ask for",
+    /if \(veilDetail\) world\.push/.test(rd("engine/gm.js")) && !GR147.registryKeys("turn").includes("veilDetail") && GR147.registryKeys("ask").includes("veilDetail"));
+  // ── the false comment is gone, and the dead door is gone
+  check("§147: ⚑ state.js no longer claims the pooled legends are hydrated — the comment was false and the roster proved it",
+    !/Its people arrive properly further down, hydrated from `legends\.roster`\.\s*$/m.test(rd("engine/state.js")) && /read by NOTHING/.test(rd("engine/state.js")));
+  check("§147: ⚑ app.js has ONE door to a person-as-opponent (escalateToFight → duelFromTarget); the unreferenced wrapper is gone",
+    !/^function personOpponent\(target\)/m.test(rd("app.js")) && /function escalateToFight\(target, choice\)/.test(rd("app.js")));
 }
 
 /* ══════════ REPORT ══════════ */

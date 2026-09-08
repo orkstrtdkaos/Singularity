@@ -59,6 +59,8 @@ const SUITES = [
   // real round and asks who is holding the wound afterwards.
   ["interpose_wiring", "node", ["tests/interpose_wiring.mjs"]],
   ["engine_map --check", "node", ["scripts/engine_map.mjs", "--check"]],
+  // ⛔ WORK ORDER 2026-09-07 — the roster is DERIVED, and a derived doc with no gate is a stale doc carrying a promise.
+  ["roster --check", "node", ["scripts/roster.mjs", "--check"]],
 ];
 
 const only = process.argv.slice(2).filter(a => !a.startsWith("-"));

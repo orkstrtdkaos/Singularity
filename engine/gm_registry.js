@@ -32,6 +32,7 @@
 // a key gm.js consumes that no row provides can never land — that is the exact
 // failure §23 exists to stop (challengeTypes: 45 values, read by nothing).
 
+import { smartClamp } from "./namematch.js";   // prose is clamped, never sliced (rawProseCaps)
 import { commandSlots, canRaiseBand } from "./melee.js";   // the three scales of company
 import { bearingsToKnown } from "./worldmap.js";   // SNG-386 §4.3: which way the road runs
 import { holdingsForGM, debtsForGM } from "./holdings.js";
@@ -322,6 +323,29 @@ export const GM_CONTEXT = [
     reachedBy: "always", spec: "§19", views: ["turn", "ask"],
     build: (env) => newsForGM(env.character) },
   // SNG-203 §3: the shared, public state of the valley's greater arcs (truth sealed) — so the GM weaves the moving world.
+  // ⛔ SNG-448 — THE VEIL, AS THE WORLD KNOWS IT. Registered 08-15, loaded by nothing until 09-08, while the Void
+  // work was authored against it. The four-cell table is the whole mechanic ("the act does not determine the
+  // effect — the TARGET does"), and the character's own tradition's relation to the divide is the line that
+  // stops the narrator inventing one. ASK view only — a question about the Veil deserves the fact; a turn does not
+  // need a cosmology paragraph it did not ask for (the waygate ruling, one seam over).
+  { key: "veilDetail", builder: "CONTENT.theVeil (SNG-448)", carries: ["the four-cell table", "this tradition's relation to the Veil", "what a nexus is"],
+    reachedBy: "any question about the Veil, nexuses, the other side", spec: "SNG-448 / R40", views: ["ask"],
+    build: (env) => {
+      const v = env.CONTENT?.theVeil; if (!v) return null;
+      const t = v.theTable || {};
+      const cells = ["make_lattice", "make_nexus", "unmake_lattice", "unmake_nexus"].filter(k => t[k]).map(k => `${k.replace("_", " ")} → ${t[k]}`);
+      const trad = env.character?.nativeTradition || env.character?.tradition || null;
+      // ⚠️ `byTradition` IS KEYED BY DOMAIN (Light · Dark · Building …), not by tradition id — the index the engine already
+      // owns maps one to the other. A name match on the id found nothing, which would have LOOKED wired.
+      const dom = trad ? env.CONTENT?.traditionIndex?.domainOfTrad?.[trad] : null;
+      const mine = dom && v.byTradition ? Object.entries(v.byTradition).find(([k]) => String(k).toLowerCase() === String(dom).toLowerCase()) : null;
+      const effect = (k) => (Array.isArray(v.veilEffect?.[k]) ? v.veilEffect[k].map(e => e.what).filter(Boolean).join(", ") : "");
+      return `THE VEIL — what the character already knows (answer from this; never invent past it): ${smartClamp(String(v.whatItIs || "").replace(/\s+/g, " "), 220)}`
+        + (cells.length ? ` The table: ${cells.join("; ")}.` : "")
+        + (effect("strengthens") ? ` Strengthens it: ${effect("strengthens")}.` : "") + (effect("thins") ? ` Thins it: ${effect("thins")}.` : "")
+        + (mine ? ` Their own domain (${mine[0]}): ${smartClamp(String(mine[1]).replace(/\s+/g, " "), 160)}` : "")
+        + ` A Veil nexus is a DOOR somebody built, not a thin patch.`;
+    } },
   { key: "worldArcsDetail", builder: "worldtick.worldArcsForGM", carries: ["greater arcs' public stage", "what has moved on the shared clock"],
     reachedBy: "always", spec: "SNG-203 §3", views: ["turn", "ask"],
     build: (env) => worldArcsForGM(env.CONTENT, env.character) },

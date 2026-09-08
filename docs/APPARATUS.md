@@ -1,7 +1,7 @@
 # THE APPARATUS — every harness, what it is for, and whether it runs
 
 ⛔ **ERIK, 2026-08-29: *"I want this to be a well oiled factory."*** ⚠️ **A factory you cannot see is not
-well oiled.** 93 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
+well oiled.** 94 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
 were gates, which were reports, and which had quietly stopped being wired into anything.
 
 ```bash
@@ -10,7 +10,7 @@ node scripts/apparatus.mjs --md     # …as markdown for §5
 node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 ```
 
-**Last measured: 2026-09-08 · v1.9.421 · 93 files.**
+**Last measured: 2026-09-08 · v1.9.422 · 94 files.**
 
 ---
 
@@ -81,6 +81,7 @@ coverage while sitting on the shelf.** All four are wired now, and `GATE-UNWIRED
 | `bump_version` | the version moves with the source it describes |
 | `hooks/install.sh` | installs the pre-push ratchet — ⚠️ **git does not version hooks** |
 | `engine_map --check` | the module map matches the code |
+| `roster --check` · `roster --write` | ⛔ **docs/ROSTER.md is DERIVED across six files** — every person, their file, and whether the opponent path can reach them. `--check` is a suite |
 | `repair_self_variants` · `repair_minted_transit` | one-shot and per-save data repairs |
 
 ⚠️ **`turn_flow` · `silas_battle` · `run_warden` · `encounter_types` are DEMONSTRATIONS** — they answer a
@@ -97,7 +98,7 @@ correct; deleting them on that signal would be the "unreferenced is not useless"
 | harness | kind | assertions | purpose |
 |---|---|---|---|
 | `tests/smoke` | ✅ GATE | 3532 | — |
-| `tests/how_it_works` | ✅ GATE | 1514 | CCODE-285 |
+| `tests/how_it_works` | ✅ GATE | 1520 | CCODE-285 |
 | `tests/skill_battle_sim` | ✅ GATE | 217 | SNG-098: the two-sided contest + fog-of-war invariant |
 | `tests/content_ci` | ✅ GATE | 184 | SNG-BATCH-10 Phase 4 / SNG-040/064: the content integrity gate |
 | `tests/craft_crit` | ✅ GATE | 43 | miss // it and YOU HAVE ONLY MADE CHAOS |
@@ -145,6 +146,7 @@ correct; deleting them on that signal would be the "unreferenced is not useless"
 | `scripts/verify_scene_merge` | 🔧 TOOL+SELFTEST | 8 | BATCH-11 146a live acceptance test (Law 7) |
 | `scripts/safe_delete` | 🔧 TOOL+SELFTEST | 5 | CCODE-283 |
 | `scripts/bump_version` | 🔧 TOOL+SELFTEST | 3 | SNG-274: the version moves, and it moves in ONE step |
+| `scripts/roster` | 🔧 TOOL+SELFTEST | 3 | ONE ROSTER, DERIVED, ACROSS SIX FILES THAT MUST NOT BE MERGED |
 | `scripts/run_tests` | 🔧 TOOL+SELFTEST | 3 | EVERY SUITE RUNS, EVEN AFTER ONE GOES RED |
 | `scripts/skills_inject` | 🔧 TOOL+SELFTEST | 3 | regenerate the derived half of docs/SKILLS |
 | `scripts/apparatus` | 🔧 TOOL+SELFTEST | 1 | CCODE-301 |

@@ -36,6 +36,7 @@ import { authoredBlock } from "./craftmechanics.js";
 import { smartClamp } from "./namematch.js";
 import { slugify } from "./quests.js";
 import { sheetFor as personSheetFor, battleSkillsFor } from "./npcsheet.js";
+import { sovereignFormFor, sovereignFormLine } from "./sovereign.js";   // R41: one record, two forms, chosen by arc stage
 import { incapacitationOutcome, playerDeathState } from "./incapacitation.js";
 import { enterDeathState } from "./death.js";
 import { activeCompanions, growBond } from "./companions.js";
@@ -192,15 +193,27 @@ export function collapseIfFinished(rr, def, { swingBefore = 0, family = null, sb
 }
 
 /** A PERSON as a fight opponent: their whole sheet — attributes, health, energy, soak, level, kit. Was `personOpponent` in app.js. */
-export function personOpponentFor(rec, { catalog = {}, cfg = {}, day = null, traditionIndex = null } = {}) {
+export function personOpponentFor(rec, { catalog = {}, cfg = {}, day = null, traditionIndex = null, stageOf = null } = {}) {
   if (!rec) return null;
-  const sheet = personSheetFor(rec, { day, cfg });
+  // ⛔ SPEC_one_roster §4 — "every person reachable as an opponent has a level and a kit, OR IS DECLARED NOT AN
+  // OPPONENT." This is the declaration. A record that says `notAnOpponent: true` is refused here, by name, and
+  // the threat path does NOT take them either — a hidden hand (`the_iron_kestrel_buyer`, "not a single person")
+  // or a being that has not arrived (R41) is not something a threat number can stand in for. The caller sees
+  // null and the roster's `reach` column says "declared no", so the absence is a decision rather than a hole.
+  if (rec.notAnOpponent === true) return null;
+  // ⚑ R41 — WHICH FORM IS IN FRONT OF THE PLAYER. A Sovereign arrives DIMINISHED at a mid arc stage and in FINAL
+  // FORM at the last; the record is one, the form is chosen by the arc's live stage (threaded in as `stageOf`,
+  // never read from the world-tick here). No `forms` block → exactly the record as authored.
+  const form = sovereignFormFor(rec, { stageOf });
+  const sheet = personSheetFor(rec, { day, cfg, ...(form?.level != null ? { levelOverride: form.level } : {}) });
   // ⛔ THE DOMAIN DRAW HAS NEVER RUN IN PLAY. `kitFor` fills a kit from a person's place on the circle only
   // `if (domains && typeof domainAccess === "function")` — and this, its ONLY live caller, passed neither.
   // ⚠️ So a person's kit was whatever `craftsOf` found on their sheet, and the 41 people carrying no abilities
   // fell straight through to threat synthesis: every fight against them was fought by a number, not a person.
   // ⚑ All 56 non-legend people ALREADY carry domains — the authoring was never the missing half. The accessor was.
-  const { skills } = battleSkillsFor(rec, { catalog, day, cfg, domainAccess, traditionIndex });
+  // ⚑ A form may author its own kit; otherwise the record's. The form's level already rode into the sheet above.
+  const kitRec = form?.abilities ? { ...rec, abilities: form.abilities } : rec;
+  const { skills } = battleSkillsFor(kitRec, { catalog, day, cfg, domainAccess, traditionIndex });
   if (!skills.length) return null;                       // nothing to fight with — let the threat path have them
   return {
     name: sheet.name, attributes: sheet.attributes, health: sheet.health, energy: sheet.energy,
@@ -209,6 +222,7 @@ export function personOpponentFor(rec, { catalog = {}, cfg = {}, day = null, tra
     soak: sheet.soak, skills, tacticTags: rec.tacticTags || [],
     threat: Math.max(10, Math.round(sheet.level * 2)),
     _person: rec.id || null,
+    ...(form?.form ? { _form: form.form, _formNote: form.note || null } : {}),   // R41: what the player is facing
   };
 }
 
@@ -217,12 +231,12 @@ export function personOpponentFor(rec, { catalog = {}, cfg = {}, day = null, tra
  *  named person entered play as a threat-curve body. The person's body is put back on the def, so the opponent sheet is
  *  AUTHORED (their crafts, their health) and the encounter starts at their health, not a synthesized handful.
  *  Returns { def, oppSheet, state } and writes `character.customEncounters[def.id]` and `character.activeEncounter`. */
-export function duelFromTarget(character, target, { catalog = {}, npcs = {}, cfg = {}, day = null, sb = null, here = null, lethal = false, threat = null, traditionIndex = null } = {}) {
+export function duelFromTarget(character, target, { catalog = {}, npcs = {}, cfg = {}, day = null, sb = null, here = null, lethal = false, threat = null, traditionIndex = null, stageOf = null } = {}) {
   const id = target?.id || target?.npcId || null, name = target?.name || null;
   const rec = (id && (character?.npcRegistry?.[id] || npcs?.[id]))
     || (name && (Object.values(character?.npcRegistry || {}).find(n => n?.name === name) || Object.values(npcs || {}).find(n => n?.name === name)))
     || null;
-  const person = rec ? personOpponentFor(rec, { catalog, cfg, day, traditionIndex }) : null;
+  const person = rec ? personOpponentFor(rec, { catalog, cfg, day, traditionIndex, stageOf }) : null;
   const fallbackThreat = Number(threat) || Number(target?.threat) || Math.max(20, Math.min(70, Math.round((Number(here?.dangerLevel) || 3) * 12)));
   const entry = { id: `harm-${slugify(target?.name || "foe")}-${(character?.activeEncounter?.state?.round || 0)}`,
     flavor: "fight", seed: `You have committed to violence against ${target?.name || "them"}.`,
@@ -239,6 +253,13 @@ export function duelFromTarget(character, target, { catalog = {}, npcs = {}, cfg
     delete def.opponent.yieldAtFraction;
   }
   def.lethal = !!lethal;
+  // ⚑ R41a — THE ARRIVAL IS THE EVENT. If the person came in a FORM (diminished at a mid stage, final at the last),
+  // the def's setup says so in the player's words: the panel and the narrator both read `setup` first, so the form
+  // is never something the engine knew and the player had to infer from a health number.
+  if (person?._form) {
+    const line = sovereignFormLine(rec, { form: person._form, note: person._formNote });
+    if (line) def.setup = def.setup ? `${line} ${def.setup}` : line;
+  }
   if (here?.dangerLevel != null) def.danger = here.dangerLevel;
   character.customEncounters = character.customEncounters || {};
   character.customEncounters[def.id] = def;

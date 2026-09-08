@@ -128,7 +128,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.421";
+const APP_VERSION = "1.9.422";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8097,34 +8097,15 @@ function isDev() { return isDevMode(); }
  *  engine MINTS the fight and ENTERS it structured, right now. No prose-only duel, no waiting on the GM to
  *  remember rule 18. Threat comes from the registry when it knows, else this place's danger, else a plain default —
  *  never from nothing, and never an invented PERSON (harmTargetFor already refused to guess at that). */
-/** ⛔ SPEC_npc_sheet_architecture §2 — A NAMED PERSON FIGHTS AS THEMSELVES, NOT AS A DIFFICULTY RATING.
- *
- *  ⚠️ UNTIL NOW, COMMITTING VIOLENCE AGAINST PELL BUILT `{ name, threat, tacticTags: [] }` — a threat
- *  number and nothing else. Her level 27, her seventeen crafts, her sub-attributes: none of it reached the
- *  fight. ⛔ THE PERSON-KEYED SHEET EXISTED THE WHOLE TIME AND NOTHING ASKED IT.
- *
- *  ⚠️ THE WHOLE SHEET, NOT ITS SKILLS. `synthesizeOpponentSheet` fills any field a caller omits from
- *  THREAT, defaulting to 20 — so handing over crafts alone would put a master smith in a raider's body.
- *  That path now throws rather than guessing, which is what makes this safe to add.
- *
- *  ⛔ RETURNS NULL FOR ANYONE UNKNOWN, and the threat path takes them — a bandit on a road is exactly what
- *  a threat number is for, and 112 people is not everyone the player will ever swing at. */
-function personOpponent(target) {
-  const id = target?.id || target?.npcId || null;
-  const name = target?.name || null;
-  const rec = (id && (character?.npcRegistry?.[id] || CONTENT.npcs?.[id]))
-    || (name && (Object.values(character?.npcRegistry || {}).find(n => n?.name === name)
-      || Object.values(CONTENT.npcs || {}).find(n => n?.name === name)));
-  if (!rec) return null;
-  const npcCfg = CONTENT.rules?.npcStanding || {};
-  // ⛔ traditionIndex RIDES TOO — `domainAccess` needs it to place a craft on the circle, and without it the
-  // draw would run and find nothing, which is worse than not running: it would look wired.
-  return personOpponentFor(rec, { catalog: fullCatalog(), cfg: npcCfg, day: absoluteWorldDay(), traditionIndex: CONTENT.traditionIndex });
-}
+// ⚠️ `personOpponent(target)` used to live here — a wrapper that resolved a target by id/name and called
+// `personOpponentFor`. ⛔ NOTHING CALLED IT: the live route is `escalateToFight` → `duelFromTarget`, which does the
+// same resolution in the engine. Removed 2026-09-08 rather than left as a second door nobody walks through.
 
 function escalateToFight(target, choice) {
   duelFromTarget(character, target, { catalog: fullCatalog(), npcs: CONTENT.npcs || {}, cfg: CONTENT.rules?.npcStanding || {}, day: absoluteWorldDay(),
-    sb: CONTENT.skillBattle?.engine, here: hereNow(), lethal: choice?.intentRung === "lethal", traditionIndex: CONTENT.traditionIndex });
+    sb: CONTENT.skillBattle?.engine, here: hereNow(), lethal: choice?.intentRung === "lethal", traditionIndex: CONTENT.traditionIndex,
+    // R41: the arc's LIVE stage decides a Sovereign's form; worldtick owns it, so it is handed in rather than reached for
+    stageOf: (arcId) => arcStageNow(CONTENT, character, arcId) });
   saveCharacter(character);
   renderSkillBattle();
 }

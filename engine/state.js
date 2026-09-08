@@ -600,7 +600,13 @@ export async function loadContent() {
     // `provides.npcs` — it carries `schemaVersion`, a `note` and a `legends[]`, and no id of its own — so
     // this line stored the file's own header under the key `"undefined"`. ⚠️ THE CENSUS COUNTED A
     // DOCUMENTATION BLOCK AS A PERSON, which is one of the two reasons 113 and 63 disagreed.
-    // ⚠️ Its people arrive properly further down, hydrated from `legends.roster`.
+    // ⛔ CORRECTED 2026-09-08 — THE COMMENT BELOW WAS FALSE, AND THE ROSTER FOUND IT. `legends.roster` is built from
+    // `lore/legends.json` + `tradition_epics.json`; this file's own `legends[]` (Seraphine the High Luminary,
+    // Corvane the Deep Warden, the Concordat, Aevi the Watcher, Ledda) is read by NOTHING. Only Ledda reaches
+    // `npcs` — because she is ALSO in the epics. ⚠️ Corvane is a hinge on 4 of 6 greater arcs and resolves to no
+    // record. Left unhydrated ON PURPOSE: these carry `renown`, not `tier`, and hydrating them here would make
+    // Corvane a level-1 opponent — the seraph defect, reproduced by a fix. Erik's call (WORK ORDER round 2).
+    // ⚠️ (was: "Its people arrive properly further down, hydrated from `legends.roster`.")
     if (!npc?.id) continue;
     npcs[npc.id] = npc;
   }
@@ -670,7 +676,7 @@ export async function loadContent() {
   // fold the two that mutate already-loaded maps (accords tag abilities, legends hydrate into npcs).
   // Failure semantics preserved exactly: `region` stays fatal; every optional one keeps its fallback.
   const [region, substrate, greaterArcs, genNpc, genLoc, genArc, genCreature, originsDoc, backgroundsDoc, regionsDoc,
-         accords, helpDoc, substrateModel, powerSourcesDoc, foothillsDoc, prologue, legendsLoaded, traitReadoutsDoc, traditionAestheticsDoc, frameContentDoc, frameKindsDoc, receiptLineDoc, consumerMapDoc, moveHintsDoc, ribbonCopyDoc, earnedPowerDoc, localLayoutsDoc] = await Promise.all([
+         accords, helpDoc, substrateModel, powerSourcesDoc, foothillsDoc, prologue, legendsLoaded, traitReadoutsDoc, traditionAestheticsDoc, frameContentDoc, frameKindsDoc, receiptLineDoc, consumerMapDoc, moveHintsDoc, ribbonCopyDoc, earnedPowerDoc, localLayoutsDoc, theVeilDoc, powerCosmologyDoc] = await Promise.all([
     fetchJSON("world/regions/valley.json"),
     fetchJSON("content/packs/valley/lore/generative_substrate.json").catch(() => null),           // generation off on a miss
     fetchJSON("content/packs/valley/lore/greater_arcs.json").then(x => x.arcs || []).catch(() => []), // no arc few-shot
@@ -728,7 +734,13 @@ export async function loadContent() {
     loadRule("earned_power_guidance", { bands: {} }),
     // ⛔ R28 — THE AUTHORED GROUND. 18 of 135 places, authored since 2026-08-14 and read by nothing but
     // a test. A miss leaves the other 117 exactly as they are, which is the dominant case.
-    fetchJSON("content/packs/core/world/local_layouts.json").catch(() => null)
+    fetchJSON("content/packs/core/world/local_layouts.json").catch(() => null),
+    // ⛔ SNG-448 / SNG-446 — THE VEIL AND THE POWER COSMOLOGY, REGISTERED SINCE 08-15 AND LOADED BY NOTHING. Aevi:
+    // "we built the Void on them this week" — R40/R41's Sovereigns, R38b's two grounds, the Assay's four conditions,
+    // all authored against cosmology the engine had never seen. Same fault as `earned_power_guidance` above,
+    // wearing a third hat. Loaded here and ATTACHED below; the GM's ask view carries the four-cell table.
+    loadRule("the_veil", null),
+    loadRule("power_cosmology", null)
   ]);
   // ⛔ R28 — ATTACHED, not merely fetched, and attached IN THIS WAVE. My first pass put this beside the
   // ladder rule 250 lines up, where `localLayoutsDoc` does not exist yet — the exact temporal-dead-zone
@@ -834,7 +846,7 @@ export async function loadContent() {
       (gap.size ? ` — ${[...gap.values()].reduce((n, v) => n + v, 0)} abilit(ies) still fall back to the house palette: ${[...gap].sort((x, y) => y[1] - x[1]).map(([k, n]) => `${k} (${n})`).join(", ")}` : " — every ability covered"));
   }
 
-  const content = { craftMechanics, damageFamilies, spectrums, rules, foothills: foothillsDoc, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, traditionArcs, npcQuests, regions, accords, helpText, substrateModel, powerSources: powerSourcesDoc || null, romanceGuidance, skillBattle, functionVocabulary, worldClock, schools, classArchetypes, repairPanelManifest, trait_readouts: traitReadoutsDoc?.readouts || traitReadoutsDoc || {}, traditionVisualAesthetics: traditionAestheticsDoc?.traditions || {}, visualAesthetics: traditionAestheticsDoc || {},   /* SNG-435 §C3: the WHOLE doc — `powerSystems` was flattened away at load */  bestiary, traditionMotivations, npcInteriority, encounterFrameContent: frameContentDoc || {}, frameKinds: frameKindsDoc?.frameKinds || {}, receiptLine: receiptLineDoc || {}, consumerContract: consumerMapDoc || { contentTypes: {} }, moveHints: moveHintsDoc || { byKind: {}, default: {} }, ribbonCopy: ribbonCopyDoc || {}, earnedPowerGuidance: earnedPowerDoc || { bands: {} }, startingLocation: valley.startingLocation };
+  const content = { craftMechanics, damageFamilies, spectrums, rules, foothills: foothillsDoc, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, traditionArcs, npcQuests, regions, accords, helpText, substrateModel, powerSources: powerSourcesDoc || null, romanceGuidance, skillBattle, functionVocabulary, worldClock, schools, classArchetypes, repairPanelManifest, trait_readouts: traitReadoutsDoc?.readouts || traitReadoutsDoc || {}, traditionVisualAesthetics: traditionAestheticsDoc?.traditions || {}, visualAesthetics: traditionAestheticsDoc || {},   /* SNG-435 §C3: the WHOLE doc — `powerSystems` was flattened away at load */  bestiary, traditionMotivations, npcInteriority, encounterFrameContent: frameContentDoc || {}, frameKinds: frameKindsDoc?.frameKinds || {}, receiptLine: receiptLineDoc || {}, consumerContract: consumerMapDoc || { contentTypes: {} }, moveHints: moveHintsDoc || { byKind: {}, default: {} }, ribbonCopy: ribbonCopyDoc || {}, earnedPowerGuidance: earnedPowerDoc || { bands: {} }, theVeil: theVeilDoc || null, powerCosmology: powerCosmologyDoc || null, startingLocation: valley.startingLocation };
   // SNG-022: bring every loaded record up to current (derive missing additive fields,
   // flag dangling cross-refs). In-memory only — Pages files are static.
   try { reconcileContent(content); } catch (err) { console.warn("[loadContent] reconcile skipped:", err.message); }

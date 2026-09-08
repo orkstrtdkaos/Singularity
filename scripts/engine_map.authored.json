@@ -450,5 +450,10 @@
     "purpose": "What one player's character feels about another's — and it only goes up. SPEC_intent_heard_and_unheard §3: being listened to is a small positive bond between the two characters; being overruled costs nothing at all, because a player charged for being overruled stops stating intents and the leader loses the briefing the whole model runs on.",
     "playerVisibleSurface": "The party panel shows a heart and the score beside anyone whose suggestion you have taken; the turn says so when it moves. An unfollowed intent appears as a beat in the shared log, attributed, moving nothing.",
     "whatMakesItFire": "The leader's own turn, when the GM reports which intents the party actually followed (`turn.intentsHeard`). Once per scene per pair. There is no writer anywhere in the module that lowers a bond."
+  },
+  "sovereign.js": {
+    "purpose": "R41 (2026-09-08): a Sovereign arrives TWICE — diminished at a mid arc stage, final at the last — and the shape is ONE record carrying `forms`, never two records for one being. The form in force is chosen by the arc's live stage, handed in as `stageOf` (worldtick owns it); `personOpponentFor` honours the form's level and kit, and the arrival is written on the duel def's `setup` because the arrival IS the event. No `forms` block resolves exactly as authored — reader before field.",
+    "playerVisibleSurface": "The duel def's `setup` line when a person arrives in a form: 'X has ARRIVED DIMINISHED - arriving is diminishment; it can be fought, and it can be lost to survivably' / 'X stands in FINAL FORM'. Read by the fight panel and the narrator before anything else. NONE until a record carries `forms` (nobody authors it yet).",
+    "whatMakesItFire": "A record with a `forms` block resolved as an opponent (personOpponentFor via escalateToFight -> duelFromTarget), with the arc's live stage handed in as `stageOf` (worldtick.arcStageNow); the stage at or past forms.diminished.atStage / forms.final.atStage selects the form. Content: Sovereign `forms` authored by Aevi; `atStage` per arc is Erik's (R41 open q1)."
   }
 }

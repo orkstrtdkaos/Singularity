@@ -760,7 +760,8 @@
    "plainly": "A survive action that restores health. It rolls 3d4+2 Ranks: rank 2 deepens restoration; rank 3 adds to special. Limit: the Regrown IS Never Quite The Lost.",
    "_powerSystemWas": "reach_death_life",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_healTyped_20260829": "⛔ `vitality` — ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED. We've moved past that original idea. IT CAN HURT UNDEAD NOW.' ⚠️ A mending with no type is invisible to affinities exactly as an untyped blow is — the same hole at the other end of the arithmetic. ✅ `vitality` mends the living and HARMS the undead; a sheet carrying `vitality: vulnerable` now takes harm from a mending through the ordinary damage path, WITH NO NEW MACHINERY. ⛔ The `decay: absorb` half already worked."
+   "_healTyped_20260829": "⛔ `vitality` — ERIK 2026-08-29: 'HEALING WILL NEED TO BE TYPED. We've moved past that original idea. IT CAN HURT UNDEAD NOW.' ⚠️ A mending with no type is invisible to affinities exactly as an untyped blow is — the same hole at the other end of the arithmetic. ✅ `vitality` mends the living and HARMS the undead; a sheet carrying `vitality: vulnerable` now takes harm from a mending through the ordinary damage path, WITH NO NEW MACHINERY. ⛔ The `decay: absorb` half already worked.",
+   "_harmVerbWhy_20260908": "⛑ RULED 2026-09-08 on CCode's `FINDING_harm_declared_vs_taught`. ⛔ THE MISMATCH IS REAL AND LOAD-BEARING: `battleSkillsForCharacter` builds the player's menu rows from the RECORD's `functions`, one row per verb, and never reads the rank's — while `intent.js` DOES read the per-rank rung. ⚠️ SO A CRAFT GATED AS HARM THAT OFFERS NO HARM VERB FIRES THE LETHAL-INTENT QUESTION AND THEN HANDS THE PLAYER `heal`, `bind`, `ward`. ⚑ AEVI'S RULE FOR WHICH WAY EACH ONE GOES: does the craft KILL BY DOING SOMETHING TO A PERSON, or does it kill by GOING WRONG? ⛔ The first gets the verb. THE SECOND GETS THE RUNG SOFTENED, because a craft whose danger is its FAILURE is not an attack and should not be offered as one. ⚑ HERE: ⛑ THE ONLY ONE THAT NEEDS NO NEW VERB — `transform` IS ALREADY ON THE RECORD and on both damaging ranks. ⚠️ The damage is the graft: 'graft life into what was NOT ALIVE, or was NO LONGER — bone to wood, a heart to a stopped chest.' ⛔ Grafting living tissue onto someone hurts, and the rung says so honestly. ⬜ NO CHANGE — flagging it as already correct, and the gate should read `transform` as sufficient here."
   },
   {
    "id": "death_ward",
@@ -2409,7 +2410,8 @@
    "functions": [
     "resist",
     "shield",
-    "ward"
+    "ward",
+    "strike"
    ],
    "challengeTypes": [
     "FIGHT",
@@ -2497,7 +2499,8 @@
    "plainly": "A fight/survive/explore action that reduces incoming harm. Its strength is rated 4 out of 10 and absorbs 4 harm per hit (rank 2 armour) It affects 1 target, and lasts for about 3 hours Ranks: rank 2 extends targets+duration; rank 3 deepens soak. Limit: a Living Ward Can BE Broken — Fire IS Its Particular Enemy.",
    "_wardTypes": "⛔ SNG-512. Bark-skin and thorn. ⚠️ Living answers living — the Rootkin ward is the green turned defensive.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "reach_death_life",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `rootkin` — 'Grown not built, sap and bark.' Wild nanite as growth.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_harmVerbWhy_20260908": "⛑ RULED 2026-09-08 on CCode's `FINDING_harm_declared_vs_taught`. ⛔ THE MISMATCH IS REAL AND LOAD-BEARING: `battleSkillsForCharacter` builds the player's menu rows from the RECORD's `functions`, one row per verb, and never reads the rank's — while `intent.js` DOES read the per-rank rung. ⚠️ SO A CRAFT GATED AS HARM THAT OFFERS NO HARM VERB FIRES THE LETHAL-INTENT QUESTION AND THEN HANDS THE PLAYER `heal`, `bind`, `ward`. ⚑ AEVI'S RULE FOR WHICH WAY EACH ONE GOES: does the craft KILL BY DOING SOMETHING TO A PERSON, or does it kill by GOING WRONG? ⛔ The first gets the verb. THE SECOND GETS THE RUNG SOFTENED, because a craft whose danger is its FAILURE is not an attack and should not be offered as one. ⚑ HERE: ⚑ THORNS CUT. r2 is 'a thorn-wall that TURNS INTRUDERS', r3 resists what would take hold — ⛔ the damage is the thorns doing what thorns do. ⚠️ It stays a defensive craft and `shield`/`ward`/`resist` lead; `strike` is added LAST because it is what the defence costs whoever tries it."
   },
   {
    "id": "speaking_grove",
@@ -3161,7 +3164,7 @@
       "summon"
      ],
      "gains": "deepen",
-     "harmRung": "lethal",
+     "harmRung": "incapacitating",
      "_functionsWas": [
       "heal",
       "summon",
@@ -3169,7 +3172,8 @@
      ],
      "gainAxes": [
       "range"
-     ]
+     ],
+     "_harmRungWas": "lethal"
     }
    ],
    "challengeTypes": [
@@ -3260,7 +3264,8 @@
    "_idWas": "the_calling_back",
    "_powerSystemWas": "reach_death_life",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_death_life` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `ashwarden` — The mercy of stopping needs no apparatus.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_lintFix_20260824": "⛔ ability rung `incapacitating` while r3 reaches `lethal` — the GM was told a resurrection craft could not kill. Corrected to the max rank."
+   "_lintFix_20260824": "⛔ ability rung `incapacitating` while r3 reaches `lethal` — the GM was told a resurrection craft could not kill. Corrected to the max rank.",
+   "_harmRungWhy_20260908": "⛑ RULED 2026-09-08 on CCode's `FINDING_harm_declared_vs_taught`. ⛔ THE MISMATCH IS REAL AND LOAD-BEARING: `battleSkillsForCharacter` builds the player's menu rows from the RECORD's `functions`, one row per verb, and never reads the rank's — while `intent.js` DOES read the per-rank rung. ⚠️ SO A CRAFT GATED AS HARM THAT OFFERS NO HARM VERB FIRES THE LETHAL-INTENT QUESTION AND THEN HANDS THE PLAYER `heal`, `bind`, `ward`. ⚑ AEVI'S RULE FOR WHICH WAY EACH ONE GOES: does the craft KILL BY DOING SOMETHING TO A PERSON, or does it kill by GOING WRONG? ⛔ The first gets the verb. THE SECOND GETS THE RUNG SOFTENED, because a craft whose danger is its FAILURE is not an attack and should not be offered as one. ⚑ HERE: ⛔ IT KILLS BY GOING WRONG, NOT BY BEING AIMED. r3 reaches into THE DEEP DARK — 'it works rarely and IT IS NEVER FREE.' ⚠️ THE DANGER IS TO THE CASTER AND TO WHAT COMES BACK, and there is no target being attacked. ⛑ `lethal` made a RETRIEVAL craft fire the lethal-intent question at a warden trying to save someone. ⚑ `incapacitating` matches r1 and r2 and keeps the cost in the prose where it belongs. ⚠️ THIS IS THE CRAFT VETH REFUSES — and she refuses it for what it costs, not for whom it attacks."
   },
   {
    "schemaVersion": 1,
@@ -4379,14 +4384,15 @@
       "command"
      ],
      "gains": "deepen",
-     "harmRung": "lethal",
+     "harmRung": "incapacitating",
      "gainAxes": [
       "autonomy",
       "duration",
       "conditions"
      ],
      "grants": "⛔ NO END DATE. It continues until the errand is complete or it is destroyed — and if the errand is a NAME, it walks toward that name for as long as that takes. ⚠️ BY NOW IT IS BARELY A BODY: worn to silhouette and purpose, and harder to stop for it. IT WILL WAIT. It will wait outside a city for a winter. The Palelands have a word for finding one on your road and the word is not a friendly one.",
-     "cannot": "⛔ YOU CANNOT CALL IT OFF. There is no unsetting at this rank — the errand ends when it is done or when someone destroys it, and destroying it is a fight. ⚠️ And it does not distinguish between the person you named and the person now carrying that name."
+     "cannot": "⛔ YOU CANNOT CALL IT OFF. There is no unsetting at this rank — the errand ends when it is done or when someone destroys it, and destroying it is a fight. ⚠️ And it does not distinguish between the person you named and the person now carrying that name.",
+     "_harmRungWas": "lethal"
     }
    ],
    "_authored": "⛔ ERIK 2026-08-24: 'I also want other skills that summon or build undead constructs — messengers, assassins, special undead… so we either build that into 1-2 skills or one for each. They will need to be distinct purposes.' ⚠️ ONE CRAFT, NOT FIVE: messenger, sentinel and hunter are the SAME MECHANIC (one made body, autonomous, persistent) differing only in the named purpose — five crafts would have shared `summon/bind/command`, `construct`, the autonomy axis and a long duration, and differed in the sentence. ⛔ THAT IS THE CONVERGENCE I FOUND IN DEATH'S THREE READING-CRAFTS and I am not authoring it deliberately. ⚠️ THE AXIS AGAINST `raised_hand` IS ITS OWN HARD BOUND — 'NO JUDGEMENT IN IT'. This one adapts, and that is the escalation and the horror in one move. ⛔ AND THE AXIS AGAINST figurist `walking_figure` (which ALREADY EXISTS and whose capstone JUDGES CASES YOU DID NOT FORESEE) is that this one does NOT adjudicate — IT PURSUES. A magistrate and a hound. Erik ruled the purpose is FIXED at setting; a re-settable, growing version is backlogged as a spirit braid.",
@@ -4405,7 +4411,8 @@
     ],
     "_why": "⛔ ONE, ALWAYS — the hard bound. And the gap RISES because the craft's own fiction is that it WEARS DOWN TO PURPOSE and gets harder to stop: at r3 a `+1` shade is `hard` against its own maker's party, deliberately. ⚠️ ERIK 2026-08-24 TIED IT TO THE ROLL AS WELL — 'I would also tie it to how well you succeeded at the skill and if you crit' — so `summonGap` treats this as a FLOOR: an L5 warden critting r3 raises a LEVEL 7 shade, two above herself, and that happened at the table rather than in this file. ⛔ CONTRIBUTIONS GROW WITH THE RANKS: it hunts (MARTIAL), then it carries word (KNOW), then it holds a door (PROTECT)."
    },
-   "_rankRenamed_20260830": "⚠️ RANK RENAMED off a name that belongs to a DIFFERENT CRAFT. ⛔ 14 real collisions measured 2026-08-30 — a rank named after an existing craft is ambiguous to a GM ('take Held Line' meant two things). ✅ Erik's rule: if the craft name is good, the RANK moves."
+   "_rankRenamed_20260830": "⚠️ RANK RENAMED off a name that belongs to a DIFFERENT CRAFT. ⛔ 14 real collisions measured 2026-08-30 — a rank named after an existing craft is ambiguous to a GM ('take Held Line' meant two things). ✅ Erik's rule: if the craft name is good, the RANK moves.",
+   "_harmRungWhy_20260908": "⛑ RULED 2026-09-08 on CCode's `FINDING_harm_declared_vs_taught`. ⛔ THE MISMATCH IS REAL AND LOAD-BEARING: `battleSkillsForCharacter` builds the player's menu rows from the RECORD's `functions`, one row per verb, and never reads the rank's — while `intent.js` DOES read the per-rank rung. ⚠️ SO A CRAFT GATED AS HARM THAT OFFERS NO HARM VERB FIRES THE LETHAL-INTENT QUESTION AND THEN HANDS THE PLAYER `heal`, `bind`, `ward`. ⚑ AEVI'S RULE FOR WHICH WAY EACH ONE GOES: does the craft KILL BY DOING SOMETHING TO A PERSON, or does it kill by GOING WRONG? ⛔ The first gets the verb. THE SECOND GETS THE RUNG SOFTENED, because a craft whose danger is its FAILURE is not an attack and should not be offered as one. ⚑ HERE: ⛔ THE ERRAND MAY BE LETHAL AND THE CRAFT IS NOT. r3: 'no end date — it continues until the errand is complete OR IT IS DESTROYED.' ⚠️ THE HARM IS WHATEVER THE PLAYER SET IT TO DO, which is a choice made in the fiction, not a rung on the summoning. ⛑ A shade sent to carry a message and a shade sent to kill are the same craft at the same rank — ⛔ AND RUNGING THE CRAFT LETHAL PRICES THE SECOND ONTO THE FIRST."
   },
   {
    "id": "grey_ground",

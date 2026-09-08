@@ -1,0 +1,167 @@
+{
+ "id": "aelith_first_shape",
+ "name": "Aelith of the First Shape",
+ "tier": "legendary",
+ "level": 63,
+ "role": "Monarch of the Kept Court — she is what has not changed, in the place where nothing stays",
+ "people": "elven",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": false,
+ "homeLocation": "the_churn",
+ "domains": {
+  "primary": "hourkeeper",
+  "secondary": "stillhold",
+  "tertiary": "verist"
+ },
+ "spectrum": {
+  "chaos_order": 0.3,
+  "space_time": -0.6,
+  "falsehood_truth": 0.8
+ },
+ "subAttributes": {
+  "strength": 9,
+  "agility": 10,
+  "reason": 15,
+  "insight": 19,
+  "presence": 18,
+  "rapport": 9,
+  "craft": 11,
+  "wits": 13
+ },
+ "knowledge": [
+  "⛔ Every bargain the Hollow Court has struck, and what each one actually cost",
+  "What the Churn looked like before it was the Churn",
+  "Who somebody was, when they have finished being it"
+ ],
+ "wants": [
+  "That something survive the Churn unaltered — she is not certain anything can, and she is the experiment"
+ ],
+ "fears": "⚠️ Forgetting. ⛔ Not death — she has watched a great deal of it. She is afraid of the day she cannot remember what a thing was BEFORE.",
+ "appearance": "Unhurried in a place where everything hurries. She is the only fixed point in the room and the room resents it.",
+ "voiceHints": "Slow, exact, and entirely unpersuadable. ⛔ She does not negotiate — she DECIDES, and then she tells you.",
+ "reactsToReputation": {
+  "keeps-their-word": "⚑ receives you, which is not nothing",
+  "bargained-with-the-Hollow": "⚠️ knows the exact terms and does not mention them",
+  "any": "remembers"
+ },
+ "assistTags": [
+  "watch",
+  "study",
+  "guard",
+  "talk"
+ ],
+ "abilities": [
+  {
+   "abilityId": "hourcraft",
+   "level": 3,
+   "why": "⚑ hourkeeper primary — duration is what an elf IS here"
+  },
+  {
+   "abilityId": "the_kept_hour",
+   "level": 3,
+   "why": "⛔ 'what has not changed, in the place where nothing stays'",
+   "_idWas": "kept_hour"
+  },
+  {
+   "abilityId": "fixed_point",
+   "level": 3,
+   "why": "⚠️ the only fixed point in the room",
+   "_idWas": "the_fixed_point"
+  },
+  {
+   "abilityId": "stillcraft",
+   "level": 3,
+   "why": "stillhold secondary — held peace, in the Churn"
+  },
+  {
+   "abilityId": "true_account",
+   "level": 3,
+   "why": "⛑ 'she does not negotiate — she DECIDES'"
+  },
+  {
+   "abilityId": "bound_witness",
+   "level": 3,
+   "why": "'every bargain the Hollow Court has struck'"
+  },
+  {
+   "abilityId": "held_line",
+   "level": 3,
+   "why": "a court that holds"
+  },
+  {
+   "abilityId": "steady_soul",
+   "level": 2,
+   "why": "⚑ she gives freely, and this is the giving"
+  },
+  {
+   "abilityId": "resonant_anchor",
+   "level": 2,
+   "why": "she anchors what would scatter"
+  },
+  {
+   "abilityId": "soul_stare",
+   "level": 2,
+   "why": "'who somebody was, when they have finished being it'"
+  },
+  {
+   "abilityId": "kept_vigil",
+   "level": 2,
+   "why": "she attends"
+  },
+  {
+   "abilityId": "calm_word",
+   "level": 2,
+   "why": "she does not raise anything"
+  },
+  {
+   "abilityId": "unbroken_practice",
+   "level": 2,
+   "why": "duration held as a discipline"
+  },
+  {
+   "abilityId": "boundary_stone",
+   "level": 1,
+   "why": "the Court's edge"
+  },
+  {
+   "abilityId": "read_the_room",
+   "level": 1,
+   "why": "she has read every room"
+  },
+  {
+   "abilityId": "second_wind",
+   "level": 1,
+   "why": "⚠️ r1 — she outlasts by refusing, not by enduring"
+  }
+ ],
+ "closed": [
+  "struck_term",
+  "offered_price",
+  "borne_bargain",
+  "lever",
+  "deep_covenant"
+ ],
+ "personality": {
+  "warmth": 4,
+  "trust": 6,
+  "candor": 10,
+  "patience": 10
+ },
+ "physicality": "ADULT. Tall, still, ageless in the way that means OLD. WHAT CATCHES THE EYE: ⛔ nothing about her is moving, and everything else is.",
+ "intimacyNotes": "⛔ NOT AVAILABLE — and the reason is her whole character: ⚠️ SHE CANNOT BE BARGAINED WITH. Her `closed` list is EVERY BARGAINING CRAFT IN THE GAME. ⛑ A person who wants something from her can only deserve it, and being unable to buy someone's regard is a harder thing than it sounds.",
+ "questSeeds": [
+  "⛔ She will not tell you what a Hollow Court bargain cost the last person. ⚠️ She will take you to them.",
+  "⚑ She wants one thing to survive the Churn unaltered and does not believe anything can. ⚠️ She has never asked anyone to help and would refuse if offered."
+ ],
+ "schemaVersion": 1,
+ "_authoredWhy": "⛑ THE KEPT COURT, AUTHORED 2026-09-08 AT ERIK'S DIRECTION: 'There needs to be an ELVEN COURT in the chaos realm that COMBINES THE FAE AND FANTASY RACES and is OPPOSED TO THE HOLLOW COURT.' ⛔ AND THE OPPOSITION IS NOT FAE-VS-FAE. `peoples_of_kind` already says the Wild Half is churnfolk [FAE], abyssal [HORNED] and unmaker — ring 2, 3, 4 — and THE HOLLOW COURT IS THAT TAKEN PURE: one disposition, absolute. ⚑ SO ITS OPPOSITE IS A COALITION — elven, dwarven, ent, horizon-walker — PEOPLES WHO LIVE IN THE CHURN AND REFUSE TO DISSOLVE INTO IT. ⚠️ THE TWO LAWS ARE THE WHOLE DESIGN, AND BOTH ARE TERRIBLE: ⛔ THE HOLLOW COURT TRADES. Nobody lies, the price is named aloud, you get precisely what you asked for, and you leave hollowed. ⛔ THE KEPT COURT WILL NOT TRADE AT ALL. What they give they give FREELY, and what they withhold cannot be bought — there is no price, no term, no lever. ⚠️ You cannot purchase their help, and if they judge you unworthy of it THERE IS NOTHING YOU CAN OFFER. ⚑ AND IT IS THE SETTING'S CENTRAL ARGUMENT ONE SCALE DOWN: 'The Poles Pull… the counter is HOLDING THE MIDDLE OPEN.' The Kept Court is the Wild Half's own resistance to its own pole.",
+ "communityId": "churn.unbought_court",
+ "_court": "the_unbought_court",
+ "_opposes": "the_hollow_king",
+ "_idFix_20260908": "⛔ ID CORRECTIONS. ⚠️ AEVI GUESSED WRONG IN BOTH DIRECTIONS IN ONE FILE: she wrote `kept_hour` for a craft that IS `the_kept_hour`, and `the_fixed_point` for one that is `fixed_point`. ⛑ THE ARTICLE IS NOT A RULE — `craft_lint` catches leading articles on NAMES, and the ID vocabulary is simply not uniform. ⛔ THIS IS THE THIRD TIME `the_fixed_point` HAS BEEN WRITTEN WRONG (Calvar 09-05, the legendaries 09-07, here 09-08). ⚑ AN UNRESOLVABLE `abilityId` IS SILENTLY DROPPED — the sheet loads, validates, and is quietly short. ⚠️ CHECK EVERY ID AGAINST THE CATALOGUE BEFORE DECLARING DONE. It is step 6 and it has now paid three times.",
+ "_idWas": "the_long_remembering",
+ "_nameWas": "The Long Remembering",
+ "_renamed_20260908": "⛑ RENAMED. Erik: 'find a better name for Long Remembering too — something more thematic.' ⛔ 'The Long Remembering' was a gerund and a mood. ⚑ THE FIRST SHAPE IS WHAT SHE ACTUALLY DOES: in a place where nothing keeps its form, she remembers what each thing WAS BEFORE. ⚠️ And it sets up the whole Churn: THE UNDECIDED refuses to take a shape, the Churn dissolves every shape, and Aelith holds the first one. ⛑ Named in the corpus's own style — `Neth, Who Has Buried More Than She Has Known`, `Corvane, the Deep Warden`. ⛑ RENAMED 2026-09-08. Erik: 'you used KEPT again — that's a known naming default for you. Choose something else.' ⛔ MEASURED AND HE IS RIGHT: `kept_vigil`, `kept_breath`, `kept_flame`, `the_kept_hour`, `the_kept_dark`, the Kept Reach — and then a Kept Court. ⚠️ A word I reach for when I have not thought of one. ⚑ THE UNBOUGHT COURT NAMES THE LAW INSTEAD OF THE MOOD: they will not trade, what they give they give freely, and what they withhold CANNOT BE PURCHASED. ⛔ It is the exact contrast with a court whose every member will deal with you."
+}

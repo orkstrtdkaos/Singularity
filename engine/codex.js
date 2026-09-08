@@ -18,9 +18,27 @@ const CAPS = { topics: 60, factsPerTopic: 12, factsPerPrimary: 24, linksPerTopic
   // evidence after a summary; the rest retire to `archive` so the topic drops under its ceiling and accepts again.
   summariseAt: 8, summariseEvery: 4, keepFacts: 8, archivePerTopic: 48, summaryChars: 700 };
 
+/** ⛔ THE FIELDS A TOPIC IS READ FOR WITHOUT A GUARD. `absorb` iterates `facts` and `links` and pushes onto both,
+ *  so a topic missing either is a crash waiting for a merge — that is Erik's `s.links is not iterable`. `aliases`
+ *  was already backfilled here before this fix and stays.
+ *  ⚠️ `archive` IS DELIBERATELY ABSENT. It is optional by design and read guarded everywhere (`s.archive?.length`,
+ *  `p.archive || []`), so defaulting it fixes nothing — and smoke 153 caught what it broke instead: `undo` restores
+ *  an absorbed topic CONTENT-EXACT, and stamping `archive: []` on every topic changed what came back. ⛑ A
+ *  defensive default is a WRITE, and a write nobody needed still turns up in someone's undo. */
+const TOPIC_ARRAYS = ["facts", "links", "aliases"];
+
 export function ensureCodex(character) {
   if (!character.codex) character.codex = { schemaVersion: 1, topics: {} };
-  for (const t of Object.values(character.codex.topics)) if (!t.aliases) t.aliases = [];
+  // ⛔ ERIK 2026-09-07, ON THE LOAD PATH: `TypeError: s.links is not iterable` in `absorb`, which meant Silas
+  // could not be OPENED. ⚠️ This loop already backfilled `aliases` and only `aliases` — the drift was known and
+  // repaired one field deep, so the next field to go missing took the whole character down with it.
+  // ⚑ NORMALISE THE WHOLE SHAPE, and do it by the LIST rather than one `if` per field, so adding an array field
+  // to a topic cannot reintroduce this. A non-array value is replaced rather than trusted: `links: null` and
+  // `links: "a,b"` both fail `for…of` the same way a missing one does.
+  for (const t of Object.values(character.codex.topics)) {
+    if (!t || typeof t !== "object") continue;
+    for (const k of TOPIC_ARRAYS) if (!Array.isArray(t[k])) t[k] = [];
+  }
   return character;
 }
 
@@ -342,6 +360,12 @@ export function undoLastMerge(character, index = -1) {
 }
 
 function absorb(topics, p, s, character = null) {
+  // ⛔ BELT AND BRACES AT THE CRASH SITE. `ensureCodex` runs first on every load and repairs the shape, but this
+  // function is also reachable from a manual merge and from undo-restore, and a tidy must never be able to throw
+  // a character out of play. ⚠ BEFORE `recordUndo` BELOW, deliberately: the undo receipt snapshots
+  // `targetBefore.facts/links/aliases` and restore spreads them, so a snapshot taken of a malformed topic would
+  // carry the same hole forward and break the undo instead of the merge.
+  for (const k of TOPIC_ARRAYS) { if (!Array.isArray(p[k])) p[k] = []; if (!Array.isArray(s[k])) s[k] = []; }
   // SNG-153: snapshot BEFORE mutating — the undo receipt needs the target's pre-merge state and
   // the set of topics whose links are about to be rewritten from s → p.
   const relinked = Object.values(topics).filter(t => t.id !== s.id && (t.links || []).includes(s.id)).map(t => t.id);

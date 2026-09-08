@@ -128,7 +128,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.416";
+const APP_VERSION = "1.9.417";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3184,7 +3184,20 @@ function migrate(c) {
   ensureSubAttributes(c);
   ensureCodex(c);
   ensureCharacterStyle(c); // SNG-BATCH-7: per-character play-style fields
-  mergeCodexTopics(c, { entities: codexEntities(c) }); // standing high-confidence tidy — and it re-keys, re-kinds and re-aliases anchored topics first (SPEC_codex §3b-d) — idempotent; player's not-same verdicts respected; manual merges cascade via their new aliases
+  // ⛔ A COSMETIC STEP MAY NEVER BE THE REASON A CHARACTER WILL NOT OPEN. This threw on Erik's save
+  // (`s.links is not iterable`) and Silas simply could not be loaded — everything after it in `migrate` was
+  // skipped too. ⚠️ The tidy is housekeeping: an untidied codex is a cosmetic loss, an unopenable character is
+  // the end of play. ⚑ RECORDED, NEVER SILENT — the note reaches the player and the reason reaches the save.
+  try {
+    // standing high-confidence tidy — and it re-keys, re-kinds and re-aliases anchored topics first (SPEC_codex §3b-d) — idempotent; player's not-same verdicts respected; manual merges cascade via their new aliases
+    mergeCodexTopics(c, { entities: codexEntities(c) });
+  } catch (err) {
+    console.error("[codex] the standing tidy did not run:", err);
+    c._codexTidyError = { at: new Date().toISOString(), message: String(err?.message || err).slice(0, 200) }; // prose-cap-ok: an exception message, not model prose
+    c._reconcileNotes = [...(c._reconcileNotes || []),
+      // prose-cap-ok: the same exception message, shown to the player rather than stored
+      `Your codex was not tidied this load (${String(err?.message || err).slice(0, 80)}). Nothing was lost — entries may show as duplicates until it runs.`];
+  }
   if (!c.customAbilities) c.customAbilities = {};
   ensureBonds(c);
   ensurePractice(c);

@@ -9350,6 +9350,76 @@ console.log("\n── §142 · four zones, in the order a round moves through th
     /\.sb-zone \{/.test(rd("style.css")) && /\.sb-state \{/.test(rd("style.css")) && /\.sb-do \{/.test(rd("style.css")));
 }
 
+/* ═════ §143 — A TIDY MAY NOT LOCK A PLAYER OUT OF THEIR CHARACTER (Erik: "Silas isn't loading") ═════ */
+// ⛔ THE CONSOLE, LIVE: `Uncaught (in promise) TypeError: s.links is not iterable` — absorb ← mergeCodexTopics ←
+// migrate ← the LOAD BUTTON. ⚠️ Silas could not be OPENED, and the step that threw is a COSMETIC TIDY, described
+// in its own call site as a "standing high-confidence tidy". An untidied codex is a cosmetic loss; an unopenable
+// character is the end of play. ⚑ And everything after it in `migrate` was skipped too.
+// ⚠️ MEASURED: all 17 committed saves ran the real load path without throwing, so the malformed topic lived only in
+// his browser and I could not read it. ⛑ SO THE FIX IS NOT A GUESS AT WHICH FIELD WAS MISSING — three layers, and
+// the middle one is the durable one: `ensureCodex` already backfilled `aliases` AND ONLY `aliases`, which is the
+// tell that this drift was known and repaired one field deep.
+console.log("\n── §143 · a codex topic's shape is repaired on load, and the tidy can never gate it ──");
+{
+  const CX = await import("../engine/codex.js");
+  const { loadContentHeadless: lch143 } = await import("./headless_content.mjs");
+  const C143 = await lch143();
+  const ents = { people: {}, places: {}, aliases: {} };
+  const LBL = "The Whistling Woman Post";
+  const wreck = (missing) => {
+    const c = { id: "char-x", codex: { schemaVersion: 1, topics: {
+      a: { id: "a", label: LBL, kind: "place", facts: ["[d1] one"], links: [], aliases: [], archive: [], createdDay: 1 },
+      b: { id: "b", label: LBL, kind: "place", facts: ["[d2] two"], links: [], aliases: [], archive: [], createdDay: 2 },
+    } } };
+    delete c.codex.topics.b[missing];
+    return c;
+  };
+  // ⛔ EVERY ARRAY FIELD, not just the one that happened to break. A list, so a new field cannot reintroduce it.
+  for (const missing of ["links", "facts", "aliases", "archive"]) {
+    let ok = true, why = "";
+    try {
+      const c = wreck(missing);
+      CX.ensureCodex(c);
+      CX.mergeCodexTopics(c, { entities: ents });
+      for (const t of Object.values(c.codex.topics))
+        for (const k of ["links", "facts", "aliases", "archive"]) if (!Array.isArray(t[k])) { ok = false; why = `${t.id}.${k} is ${typeof t[k]}`; }
+    } catch (e) { ok = false; why = e.message; }
+    check(`§143: ⛔ a topic missing \`${missing}\` LOADS — it used to throw and take the whole character with it`, ok, why);
+  }
+  // ⚑ …and the repair is driven by a LIST, so adding an array field to a topic cannot bring this back.
+  const cx = rd("engine/codex.js");
+  // ⛔ THE LIST IS THE UNGUARDED FIELDS AND NOTHING MORE. `archive` is optional by design and read guarded, and
+  // defaulting it broke smoke 153 (undo restores an absorbed topic CONTENT-EXACT). A defensive default is a WRITE.
+  check("§143: ⚑ the fields are named once, in one place, and ensureCodex walks them — archive stays optional",
+    /const TOPIC_ARRAYS = \["facts", "links", "aliases"\]/.test(cx)
+    && /for \(const k of TOPIC_ARRAYS\) if \(!Array\.isArray\(t\[k\]\)\) t\[k\] = \[\]/.test(cx));
+  // ⛔ AND AT THE CRASH SITE TOO, because absorb is also reachable from a manual merge and from undo-restore.
+  check("§143: ⛔ absorb normalises BEFORE recordUndo — a snapshot of a malformed topic would break the UNDO instead",
+    (() => {
+      const i = cx.indexOf("function absorb(topics, p, s, character = null) {");
+      const body = cx.slice(i, cx.indexOf("\n}", i));
+      return /for \(const k of TOPIC_ARRAYS\)/.test(body)
+        && body.indexOf("TOPIC_ARRAYS") < body.indexOf("recordUndo(");
+    })());
+  {
+    // reached WITHOUT ensureCodex, the way a manual merge reaches it
+    let survived = true;
+    try { const c = wreck("links"); CX.mergeCodexTopics(c, { entities: ents }); } catch { survived = false; }
+    check("§143: ⚑ …so a manual merge survives it too, with no load-time repair in front of it", survived);
+  }
+  // ⛔ AND THE RULE THAT OUTLIVES THIS BUG: the tidy is a GRACE, never a GATE.
+  const app143 = rd("app.js");
+  const mi = app143.indexOf("mergeCodexTopics(c, { entities: codexEntities(c) })");
+  // ⚠️ RELATIVE vs ABSOLUTE: `around` is a slice, so its indices are its own. Ask the question on ONE string.
+  const before143 = app143.slice(Math.max(0, mi - 700), mi);
+  const after143 = app143.slice(mi, mi + 700);
+  check("§143: ⛔ THE CODEX TIDY CANNOT BLOCK A LOAD — whatever it throws, the character still opens",
+    mi > 0 && /try \{\s*$/m.test(before143) && /\} catch \(err\) \{/.test(after143),
+    `try before: ${/try \{\s*$/m.test(before143)}, catch after: ${/\} catch \(err\) \{/.test(after143)}`);
+  check("§143: ⚑ …and the failure is RECORDED, never silent — the player is told and the reason lands on the save",
+    /_codexTidyError/.test(app143) && /Your codex was not tidied this load/.test(app143));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

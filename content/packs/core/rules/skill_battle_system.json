@@ -917,13 +917,149 @@
      "applies": "always",
      "target": "opponent",
      "deniesPhase": "setup"
+    },
+    "strike": {
+     "kind": "reeling",
+     "label": "reeling",
+     "value": -2,
+     "rounds": 1,
+     "applies": "whenAttacked",
+     "target": "opponent",
+     "why": "⛔ A LANDED BLOW MAKES THE NEXT ONE EASIER, and that is all. Deliberately the SMALLEST row in the table and only ONE round: strike already carries the damage, and a big standing debuff on top would pay twice for one action."
+    },
+    "break": {
+     "kind": "opened",
+     "label": "opened up",
+     "value": -3,
+     "rounds": 2,
+     "applies": "whenAttacked",
+     "target": "opponent",
+     "why": "⚑ BREAK'S WHOLE JOB IS OPENING, so it leaves more than a strike and lasts longer. ⚠️ This is the row that makes `strike + break` — the most obvious braid in the game — stop being '+4 and nothing else'."
+    },
+    "mend": {
+     "kind": "mending",
+     "label": "mending",
+     "value": 2,
+     "rounds": 2,
+     "applies": "whenAttacked",
+     "target": "self",
+     "why": "What was closed holds a little while it sets."
+    },
+    "heal": {
+     "kind": "mending",
+     "label": "mending",
+     "value": 2,
+     "rounds": 2,
+     "applies": "whenAttacked",
+     "target": "self",
+     "why": "Same kind as `mend` — `refreshesSameKind` means tending twice extends rather than stacks."
+    },
+    "restore": {
+     "kind": "mending",
+     "label": "restored",
+     "value": 3,
+     "rounds": 2,
+     "applies": "whenAttacked",
+     "target": "self",
+     "why": "⚑ Stronger than mend because restore UNDOES rather than closes — and it is the RESTORE champion's own verb."
+    },
+    "move": {
+     "kind": "moving",
+     "label": "hard to pin",
+     "value": 3,
+     "rounds": 1,
+     "applies": "whenAttacked",
+     "target": "self",
+     "why": "⚠️ ONE round only. Being hard to hit is a thing you keep doing, not a thing you did."
+    },
+    "travel": {
+     "kind": "moving",
+     "label": "already elsewhere",
+     "value": 3,
+     "rounds": 1,
+     "applies": "whenAttacked",
+     "target": "self",
+     "why": "Same kind as `move` — the MOVE family's two verbs should not stack into invulnerability."
+    },
+    "make": {
+     "kind": "shaped",
+     "label": "ground you made",
+     "value": 3,
+     "rounds": 3,
+     "applies": "always",
+     "target": "self",
+     "why": "⛔ THE LONGEST ROW IN THE TABLE — three rounds. A thing you built stays built, which is what separates SHAPE from everything else."
+    },
+    "transform": {
+     "kind": "shaped",
+     "label": "the ground turned",
+     "value": 3,
+     "rounds": 3,
+     "applies": "always",
+     "target": "self",
+     "why": "Same kind as `make`."
+    },
+    "summon": {
+     "kind": "shaped",
+     "label": "something of yours is standing",
+     "value": 3,
+     "rounds": 3,
+     "applies": "always",
+     "target": "self",
+     "why": "⚠️ Same kind, and the fiction agrees: a called thing is a made thing that argues back."
+    },
+    "open": {
+     "kind": "opened_way",
+     "label": "a way open",
+     "value": 2,
+     "rounds": 2,
+     "applies": "always",
+     "target": "self",
+     "why": "⛑ `open` resolved IDENTICALLY across every craft carrying it — CCode's matrix found it and it was not one of the social three. A way that is open is worth something for as long as it stays open."
+    },
+    "provoke": {
+     "kind": "goaded",
+     "label": "goaded",
+     "value": -2,
+     "rounds": 2,
+     "applies": "always",
+     "target": "opponent",
+     "why": "⚑ §C: provoke changes WHO THEY ARE LOOKING AT. The standing part is that a goaded foe is committed and slightly worse for it."
+    },
+    "persuade": {
+     "kind": "doubting",
+     "label": "doubting",
+     "value": -3,
+     "rounds": 2,
+     "applies": "always",
+     "target": "opponent",
+     "why": "⚑ §C: persuade REMOVES THEIR REASON. The largest social debuff, because an argument that lands does not wear off in a beat."
+    },
+    "soothe": {
+     "kind": "calmed",
+     "label": "calmed",
+     "value": 2,
+     "rounds": 2,
+     "applies": "whenAttacked",
+     "target": "self",
+     "why": "⚑ §C: soothe CLEARS a condition — that is its act. This is the residue: a room that has been quieted stays quieter."
+    },
+    "bargain": {
+     "kind": "in_terms",
+     "label": "terms on the table",
+     "value": -2,
+     "rounds": 2,
+     "applies": "always",
+     "target": "opponent",
+     "why": "⛔ AN OFFER THAT HAS BEEN MADE IS HARDER TO FIGHT THROUGH — and per §C the Abyssals' authored virtue is that it was honestly priced. The offer STANDS whether or not it is taken."
     }
    },
    "phaseDenialNote": "CCODE-41 (Erik): 'perhaps if the opposing skill has blinded you to the sense skills you might have' — an effect may carry deniesPhase, which locks that phase for the side it sits on. A blinded fighter cannot take a SETUP this round: they go straight to their action. This is the counterplay to a setup-heavy build, and the reason skipping setup has to be a first-class option rather than an error state.",
    "attackFunctions": [
     "strike",
     "break"
-   ]
+   ],
+   "_fifteenVerbs_20260907": "⛑ AEVI 2026-09-07 — THE FIFTEEN VERBS THAT LEFT NOTHING BEHIND. CCode's encounter matrix proved it rather than sampling it: 'a braid is a bare number for 15 of 28 verbs… all 105 effectless pairs at equal tier resolve BYTE-IDENTICALLY, and the control differs. Braiding STRIKE with BREAK, the most obvious combination in the game, is a +4 and nothing else.' ⛔ AND THE CONTRACT WAS ERIK'S ALL ALONG (CCODE-35): 'EACH ACTION SHOULD PRODUCE SOMETHING THAT COULD PERSIST.' Thirteen verbs did and fifteen did not, including the two the engine already names in `attackFunctions`. ⚠️ RESTRAINT IS THE DESIGN: `strike` is the SMALLEST row in the table at -2 for ONE round, because strike already carries the damage and a standing debuff on top would pay twice for one action. `break` is larger and longer because opening IS its job. ⚑ AND THE `kind` FIELD DOES REAL WORK: move/travel share `moving`, make/transform/summon share `shaped`, mend/heal/restore share `mending` — so `refreshesSameKind` EXTENDS rather than STACKS, and a family's two verbs cannot be doubled into invulnerability. ⬜ The four social rows follow §C's shape and are deliberately small; §C's real effects are the ACT, and these are only what the act leaves."
   },
   "opponentPolicy": {
    "note": "deterministic + seeded — the ENGINE picks the opponent's skill+intensity, never the narrative GM. Behind on momentum -> press (Surge); ahead -> pace (Conserve); tacticTags bias it. Skill pick: the function that matches up best against the player's last-SHOWN tendency (only what fog let them reveal to the engine's memory of the player).",

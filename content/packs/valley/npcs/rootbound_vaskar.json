@@ -33,12 +33,9 @@
  "appearance": "An ancient Ent, three times the height of a man, bark blackened and split with age and hung with grey lichen. Two of the great upper limbs are dead and unshed. The eyes are two knots of slow amber deep in the trunk-face.",
  "people": "ent",
  "domains": {
-  "primary": [
-   "numinous",
-   "hourkeeper"
-  ],
-  "secondary": "rootkin",
-  "tertiary": "stillhold"
+  "primary": "rootkin",
+  "secondary": "stillhold",
+  "tertiary": "numinous"
  },
  "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own.",
  "teaches": "numinous",
@@ -59,5 +56,14 @@
  "physicality": "An ancient Ent, three times a man's height, bark blackened and split with age and hung with old growth. He was there when the Burnscar burned and carries it in the wood. WHAT CATCHES THE EYE: he is genuinely frightening and has stopped noticing, and the moments he softens are correspondingly enormous.",
  "intimacyNotes": "⛔ HE WOULD SEAL THE WOOD FROM HUMANS ENTIRELY. A human partner is a contradiction he has to hold, and a GM should NOT let intimacy resolve his politics — he can want one person and still want the gate shut. ⚠️ THE BURNSCAR IS LIVED MEMORY, NOT HISTORY, and it is the thing he will not discuss. ⛔ DO NOT MAKE THIS A REDEMPTION. He is not wrong-and-fixable; he is old, burned, and in earnest. ⚠️ SCALE: attendance and presence, as with Thren. TONE: vast, weathered, dangerous, and capable of startling tenderness he regrets.",
  "romanceEligible": true,
- "_physWhy": "⚠️ Authored per `po/CONTENT_POLICY_physicality.md`. ⛔ ADULT. The attraction comes OUT of who this person is rather than being applied on top, character bounds hold in intimacy, consent is authored in their own voice, and each entry names something intimacy must NOT resolve."
+ "_physWhy": "⚠️ Authored per `po/CONTENT_POLICY_physicality.md`. ⛔ ADULT. The attraction comes OUT of who this person is rather than being applied on top, character bounds hold in intimacy, consent is authored in their own voice, and each entry names something intimacy must NOT resolve.",
+ "_domainsWas": {
+  "primary": [
+   "numinous",
+   "hourkeeper"
+  ],
+  "secondary": "rootkin",
+  "tertiary": "stillhold"
+ },
+ "_domainsFix_20260908": "⛔ `domains.primary` WAS AN ARRAY — the Pell/Veth shape, and CCode's roster gave it a visible mechanical cost: these three were among the 62 records with NO REAL CRAFT, because `kitFor` cannot read a domain draw from a list. ⚠️ THE ARRAY WAS NOT SLOPPINESS — it holds a real tie the original author could not break, and all three are Deepwood ents whose register and whose craft genuinely differ. ⚑ THE ROLE STRING BREAKS IT, which is the same evidence `tierFromRole` now uses. ⛑ `_domainsWas` keeps the tie on the record. ⚑ HERE: ⚑ 'Ancient Ent hardliner who WOULD SEAL THE WOOD from humankind.' ⛔ Sealing is the Rootbound's whole argument and it is ROOTKIN first — the array had `numinous` leading, which is his register rather than his craft. `stillhold` second because a seal is a held peace; `hourkeeper` drops to nothing because his `space_time: 0.6` is ENT-SLOWNESS, not Hourcraft."
 }

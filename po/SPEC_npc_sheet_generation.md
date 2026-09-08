@@ -330,3 +330,72 @@ no abilities and no domains — ⛔ **and `sheetFor` gives one a LEVEL 40 sheet 
 legend meant to be fightable at all?** If yes they need the same treatment as a person; if no, the opponent
 resolver should refuse them by name rather than by accident. ⛔ **Erik's call, and it is R49's `hingeNpcs`
 question wearing a different hat.**
+
+---
+
+## ⛑ CORRECTIONS — CCODE'S ROUND 2, AND THREE OF THEM ARE AEVI'S ERRORS
+
+**`52dd5f4`, verified independently before accepting.**
+
+### ⛔ 1 · *"41 people have no domains"* — FALSE, AND IT CONFLATED TWO FIELDS
+
+⚑ **MEASURED: 56 of 57 carry `domains`.** The one that does not is `saehara_challengers`, ⚠️ **a POOL rather
+than a person.** ⛔ **Aevi measured `abilities` and reported `domains`** — the 41 without abilities are real;
+the 41 without domains never existed.
+
+### ⛔ 2 · *"a domainless person draws from the whole catalogue"* — FALSE
+
+**`kitFor` guards its domain draw:** `if (domains && typeof domainAccess === "function")` — ⚑ **so a
+domainless person draws NOTHING extra.** ⚠️ **`band: "open"` is one of three bands accepted INSIDE that
+loop, not what happens without one.** ⛔ **Aevi read a band name as a failure mode.**
+
+### ⛑ 3 · AND THE REAL FOUNDATION IS THE FOURTH DOOR AGAIN
+
+> ⛔ *"The only live path — `personOpponentFor → battleSkillsFor → kitFor` — passed neither `domainAccess`
+> nor `traditionIndex`, so **the domain draw had never run in play.**"*
+
+⚠️ **Domains authored, read by `kitFor`, loaded — AND NEVER READ.** ⛔ **A person's kit was whatever
+`craftsOf` found already written on them, and `personOpponentFor` returns null for anyone with none** — ➡️
+**which is exactly why every fight against the 41 was fought by a number.**
+
+✅ **Wired: people who can fight from a kit 53 → 56 of 56; declarable rows 400 → 640.** ⚑ **And it stays
+near their ground** — `adept_sona` (numinous) draws `stillness_field`, not a wander through 438 crafts.
+
+### ⛔ 4 · `source: authored` DOES NOT EXIST — AEVI REPORTED HER OWN FALLBACK AS DATA
+
+⚠️ **MEASURED: an ability row carries `abilityId · level · native · braided · discovered`.** ⛔ **There is no
+`source` field anywhere, and Aevi's script read `.get('source') or 'authored'` and printed the DEFAULT as a
+finding.**
+
+⚑ **AND THE REAL MARKERS WERE THERE ALL ALONG: Silas carries `native: 5`, `braided: 7`, `discovered: 4`.**
+⛔ **She invented an absence over a record that existed.**
+
+### ✅ 5 · §3b's PC HALF IS ALREADY BUILT, AND THE FIX WOULD HAVE DOUBLE-COUNTED
+
+**`breadthUsed` filters out `customAbilities`, `native` and `baseline`** — ⚑ **not counting a craft against
+the cap IS raising the cap by one.** ⛔ **Adding `+ earned.length` would double-discount.** ⚠️ **Silas is
+23/32, not at capacity.**
+
+⛑ **ERIK'S RULING WAS RIGHT AND ALREADY HONOURED.** ⬜ **What remains is the NPC half: `growthFor`'s
+`capacity = round(level/2)` has no equivalent exclusion, so a generated person's earned crafts WOULD eat
+their capacity.**
+
+### ✅ 6 · §4 STEP 4 IS ALREADY RUNNING
+**`commitGrowth` calls `growthFor` and writes at r1 with `gainedDay`, on the world tick.** ⚠️ **Aevi listed
+as owed something that ships.**
+
+---
+
+## ⬜ AND ONE NEITHER OF US HAD — ERIK'S CALL
+
+> ⛔ *"69 legends live in the same npcs map `personOpponentFor` resolves from, and `sheetFor` gives one a
+> level-40 sheet from its mythic tier. **A legend can be made an opponent with no kit at all.**"*
+
+⚑ **AEVI'S READ: THIS SHOULD NOT BE POSSIBLE, AND THE REASON IS AUTHORED.** ⚠️ **`_theMythicalRung` says a
+Mythical is a HINGE — *"killing one moves its arc"*, and both doors join `arc_the_disagreement`.** ⛔ **A
+figure like that arriving as a level-40 opponent with an empty kit is the worst version of both: mechanically
+trivial and narratively enormous.**
+
+⬜ **Proposed: `personOpponentFor` refuses a legend without an authored kit and says so**, ⚠️ **the way
+`generateRequest` refuses to invent an npcId.** ⛑ **A legend is not a random encounter, and R41 already says
+how one arrives: at an arc stage, weakened first, and its arrival IS the event.**

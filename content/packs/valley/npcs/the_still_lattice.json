@@ -1,0 +1,125 @@
+{
+ "id": "the_still_lattice",
+ "name": "The Still Lattice",
+ "level": 66,
+ "role": "Legendary — would order the world into a closed proof; beautiful and airless",
+ "gender": "neither",
+ "pronouns": "it/its",
+ "sex": null,
+ "domains": {
+  "primary": "lattice",
+  "secondary": "syllogist",
+  "tertiary": "enginewright"
+ },
+ "spectrum": {
+  "chaos_order": 0.95
+ },
+ "subAttributes": {
+  "strength": 12,
+  "agility": 8,
+  "reason": 19,
+  "insight": 15,
+  "presence": 16,
+  "rapport": 5,
+  "craft": 16,
+  "wits": 12
+ },
+ "knowledge": [
+  "The single correct configuration",
+  "Every place the world currently differs from it"
+ ],
+ "wants": [
+  "A world ordered to one correct configuration, and held there forever"
+ ],
+ "fears": "⛔ Change. ⚠️ Not disorder — change, including improvement.",
+ "appearance": "Perfectly regular, and everything near it has begun to line up.",
+ "voiceHints": "Even, unhurried, and it does not repeat itself because it does not need to.",
+ "assistTags": [
+  "analyze",
+  "craft",
+  "guard",
+  "study"
+ ],
+ "abilities": [
+  {
+   "abilityId": "foreclose",
+   "level": 3
+  },
+  {
+   "abilityId": "riding_order",
+   "level": 3
+  },
+  {
+   "abilityId": "hold_the_aperture",
+   "level": 3
+  },
+  {
+   "abilityId": "maintained_order",
+   "level": 3
+  },
+  {
+   "abilityId": "latticework",
+   "level": 3
+  },
+  {
+   "abilityId": "truename_order",
+   "level": 3
+  },
+  {
+   "abilityId": "resonant_anchor",
+   "level": 3
+  },
+  {
+   "abilityId": "wake_the_line",
+   "level": 2
+  },
+  {
+   "abilityId": "unmake_seal",
+   "level": 2
+  },
+  {
+   "abilityId": "built_system",
+   "level": 2
+  },
+  {
+   "abilityId": "order_sense",
+   "level": 3
+  },
+  {
+   "abilityId": "resonant_shield",
+   "level": 2
+  },
+  {
+   "abilityId": "the_fixed_point",
+   "level": 2
+  },
+  {
+   "abilityId": "beacon_thread",
+   "level": 2
+  },
+  {
+   "abilityId": "proof_halls",
+   "level": 1
+  },
+  {
+   "abilityId": "predicted_man",
+   "level": 1
+  }
+ ],
+ "closed": [
+  "wildcraft"
+ ],
+ "personality": {
+  "warmth": 2,
+  "trust": 7,
+  "candor": 10,
+  "patience": 10
+ },
+ "physicality": "ADULT. Regular to the point of discomfort. WHAT CATCHES THE EYE: the room is tidier than it was.",
+ "intimacyNotes": "⛔ NOT AVAILABLE. ⚠️ 'The Churnfolk's exact opposite.'",
+ "schemaVersion": 1,
+ "people": "human",
+ "_authoredWhy": "⛑ AUTHORED 2026-09-07 AT ERIK RULING: mythical and legendary need sheets too; mechanically the same as any other, but higher than level 40. ⛔ CCode found that 69 legends resolve through personOpponentFor and sheetFor gave one a LEVEL-40 sheet with NO KIT. ⚠️ 40 is the EPIC floor — resolution.npcStanding.tierFloor reads mythic 85 · legendary 60 · epic 40. ⚑ Authored at L63-67, above the legendary floor. Capacity round(level/2) is 31-33; these carry 16 DELIBERATELY UNDER — a legendary is a hinge and the rest of the kit should be earned by whoever writes the scene, not pre-spent. room is the point.",
+ "_tier": "legendary",
+ "romanceEligible": false
+}

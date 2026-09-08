@@ -20,7 +20,9 @@
    "makes-you-chase"
   ],
   "yieldAtFraction": 0.33,
-  "_poolsDerived_20260905": "health removed: it was on the retired 3-7 scale and overrode a live synthesised sheet, which made a bout end in a median of ONE turn. The pool now derives from standing (30 + 5/level) through the level the threat implies. `yieldAtFraction` replaces an absolute `yieldAt` because a ratio is scale-free."
+  "_poolsDerived_20260905": "health removed: it was on the retired 3-7 scale and overrode a live synthesised sheet, which made a bout end in a median of ONE turn. The pool now derives from standing (30 + 5/level) through the level the threat implies. `yieldAtFraction` replaces an absolute `yieldAt` because a ratio is scale-free.",
+  "npcId": "aro_horizon",
+  "_npcIdWhy": "⛑ `npcId` ADDED 2026-09-07 — the champion is an AUTHORED PERSON now, not a name and a threat integer. ⛔ CCode's matrix: 'every function any opponent can declare, in the whole game: strike, shield', and win rate correlated with THREAT at −0.95 because threat was nearly the only authored number that varied. ⚑ `personOpponent` and `battleSkillsFor` ALREADY build a fighter from a sheet — this is the link that was missing, not a new mechanism. ⚠️ The archetype fallback stays for everyone without a sheet."
  },
  "party": {
   "ifYouBringPeople": "⛔ A HUNDRED PACES OF OPEN SAND AND MORE THAN ONE ANGLE. Aro's whole game is never being where the swing is, ⚑ AND THREE PEOPLE HAVE THREE SWINGS. ⚠️ He is beatable by a party in a way he is not beatable alone, and he knows it — he will try to make it a duel by ignoring two of you until they are out of position.",

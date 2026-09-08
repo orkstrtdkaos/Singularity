@@ -1,0 +1,161 @@
+{
+ "id": "tolvess",
+ "name": "Tolvess the Unhurried",
+ "tier": "epic",
+ "level": 49,
+ "role": "A young true dragon of the Unbought Court — three hundred years old and considered impulsive",
+ "gender": "man",
+ "pronouns": "he/him",
+ "sex": "male",
+ "romanceEligible": true,
+ "homeLocation": "the_churn",
+ "domains": {
+  "primary": "figurist",
+  "secondary": "mason",
+  "tertiary": "churnfolk"
+ },
+ "spectrum": {
+  "chaos_order": -0.2,
+  "concrete_abstract": -0.3,
+  "destruction_creation": 0.5
+ },
+ "subAttributes": {
+  "strength": 16,
+  "agility": 13,
+  "reason": 12,
+  "insight": 12,
+  "presence": 14,
+  "rapport": 14,
+  "craft": 15,
+  "wits": 13
+ },
+ "knowledge": [
+  "How a made thing is put together, from having taken several apart to see",
+  "⚠️ Which of the Churn's changes are permanent — he is usually wrong and improving"
+ ],
+ "wants": [
+  "⚑ To be useful to Urd's building, and to be taken seriously by Aelith, in that order"
+ ],
+ "fears": "⛔ Being the young one for another six hundred years.",
+ "appearance": "A broad young man with too-warm hands, helping. Or a great deal of bronze, helping less carefully.",
+ "voiceHints": "Cheerful, fast for his kind, and prone to explaining. ⚠️ He forgets to be intimidating.",
+ "reactsToReputation": {
+  "maker": "⚑ delighted, and immediately in the way",
+  "dismissive": "⚠️ takes it well and remembers",
+  "any": "helps"
+ },
+ "assistTags": [
+  "carry",
+  "craft",
+  "make",
+  "travel",
+  "guard"
+ ],
+ "abilities": [
+  {
+   "abilityId": "walking_figure",
+   "level": 3,
+   "why": "⚑ THE POLYMORPH, and he is better at it than at being a dragon"
+  },
+  {
+   "abilityId": "formcraft",
+   "level": 3,
+   "why": "figurist primary"
+  },
+  {
+   "abilityId": "plain_weight",
+   "level": 3,
+   "why": "⛔ he is bronze, in either shape"
+  },
+  {
+   "abilityId": "raised_thing",
+   "level": 2,
+   "why": "mason secondary — he helps Urd build"
+  },
+  {
+   "abilityId": "stonewise",
+   "level": 2,
+   "why": "he learned it to be useful"
+  },
+  {
+   "abilityId": "held_repair",
+   "level": 2,
+   "why": "and to rebuild"
+  },
+  {
+   "abilityId": "whats_at_hand",
+   "level": 2,
+   "why": "churnfolk tertiary — the Churn provides oddly"
+  },
+  {
+   "abilityId": "the_true_figure",
+   "level": 2,
+   "why": "⚠️ he drops it too readily, which is the young part"
+  },
+  {
+   "abilityId": "plain_seeming",
+   "level": 2,
+   "why": "the smaller door"
+  },
+  {
+   "abilityId": "lucky_fall",
+   "level": 2,
+   "why": "he is lucky and does not know it yet"
+  },
+  {
+   "abilityId": "dressed_edge",
+   "level": 2,
+   "why": "he made something and is proud of it"
+  },
+  {
+   "abilityId": "second_wind",
+   "level": 2,
+   "why": "three hundred years is nothing"
+  },
+  {
+   "abilityId": "true_account",
+   "level": 2,
+   "why": "⛑ the Court's law, and he finds it easy"
+  },
+  {
+   "abilityId": "shieldwork",
+   "level": 1,
+   "why": "he puts himself in front of things"
+  },
+  {
+   "abilityId": "tinkers_hand",
+   "level": 1,
+   "why": "learning"
+  },
+  {
+   "abilityId": "calm_word",
+   "level": 1,
+   "why": "⚠️ badly, and it works anyway"
+  }
+ ],
+ "closed": [
+  "struck_term",
+  "offered_price",
+  "borne_bargain",
+  "useful_lie"
+ ],
+ "personality": {
+  "warmth": 9,
+  "trust": 8,
+  "candor": 9,
+  "patience": 6
+ },
+ "physicality": "⚠️ TWO SHAPES. A broad young man with hands that run hot, or a great deal of bronze. WHAT CATCHES THE EYE: he is helping, in both.",
+ "intimacyNotes": "⚑ HE IS THREE HUNDRED AND THE COURT CONSIDERS HIM IMPULSIVE, which is the joke and also true. ⚠️ He is genuinely young and genuinely enormous, and a GM should let both be real rather than picking one.",
+ "questSeeds": [
+  "⚑ He wants to be useful to Urd's building and is in the way. ⚠️ Somebody could give him a job that is actually his.",
+  "⛔ He is usually wrong about which Churn changes are permanent — and he was right once, about something nobody checked."
+ ],
+ "schemaVersion": 1,
+ "people": "dragon",
+ "_authoredWhy": "⛑ A TRUE DRAGON, AUTHORED 2026-09-08. Erik: 'I want some dragons in the court who can POLYMORPH TO HUMAN. ⛔ DRAGONS ARE NOT ALL POLES THAT WENT WRONG.' ⚑ AND THE BESTIARY'S OWN FIRST LAW ALREADY DREW THIS LINE: 'No person. A bestiary entry has no name of its own, no want, no story being ended. IF IT WOULD BE A TRAGEDY TO KILL, IT BELONGS IN NPCs, NOT HERE.' ⚠️ SO THERE ARE TWO KINDS AND THE CORPUS SPLITS THEM CLEANLY: ⛔ A `great_manifestation` — the Ashen Wyrm, the Bright Devourer, the Unspooling Worm — is 'a domain that RESOLVED WRONG and will not resolve back', a hazard with a broken directive and no grievance. ⚑ A TRUE DRAGON IS A PERSON. Older than the Transition, wearing whichever shape the conversation needs, with a want and a name and a story that can be ended badly. ⚠️ Killing one is a tragedy, which is exactly what the bestiary says makes it an NPC. ⛔ AND THE POLYMORPH IS NOT A DISGUISE: `plain_seeming` and `walking_figure` are authored crafts, and a dragon in a human shape is STILL THE DRAGON — it is the same being choosing a smaller door.",
+ "communityId": "churn.unbought_court",
+ "_court": "the_unbought_court",
+ "_opposes": "the_hollow_king",
+ "_trueDragon": "⚑ NOT A `great_manifestation`. A person, and the bestiary's law is the test: this one has a NAME, a WANT, and a story that can be ended badly."
+}

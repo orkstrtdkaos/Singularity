@@ -120,7 +120,36 @@ to learn the other one. Your antipode is not closed to you.** It is expensive, a
 in it. ⛔ **Carry enough of that far pole and BOTH recede together** — the price falls and the ceiling
 rises. **The barrier is to dabbling, not to crossing.**
 
-### Where a craft comes from, and where you learn it
+### What you can be
+
+**Traditions are what you know. A vocation is what you are FOR** — and there are eight.
+
+| | |
+|---|---|
+| **the KEEPER** | holds a thing so it does not fall — a death, a shelter, a wood, a peace |
+| **the MAKER** | builds. Things, light, stone, mechanism, flesh, form |
+| **the READER** | knows before acting |
+| **the EDGE** | ends fights |
+| **the BROKER** | deals |
+| **the WALKER** | goes where others do not |
+| **the ATTENDANT** | is present at what cannot be fixed |
+| **the ENDER** | ends *things* — which is not the same as ending fights |
+
+**None of these is the fighting one.** A fight has five exits and only one of them is damage: health,
+energy, being driven back, a death save, or someone yielding. **The Keeper wins on pressure. The Broker
+wins on terms. The Walker wins by never being where the blow went. The Attendant wins by undoing damage
+faster than it lands.**
+
+If you want to see this proved rather than promised, the Great Coliseum runs **eight cells, one per way of
+winning**, each held by a champion who fights that way and only that way. Vantia has held hers eleven times
+and never once advanced.
+
+**And a vocation is not a class you pick at the start.** You have three domains, and what you become is the
+shape of what you took. Two people with the same tradition and different second domains are different
+people: one who attends the dying and carries a spear is not the one who attends the dying and works in
+the dark.
+
+## Where a craft comes from, and where you learn it
 
 **These are two different questions and the game keeps them apart.**
 

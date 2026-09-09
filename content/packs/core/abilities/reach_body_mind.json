@@ -744,7 +744,7 @@
      "class": "soft"
     }
    ],
-   "plainly": "A craft/technical/intellectual action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 2, and lasts for about 6 hours Ranks: rank 2 deepens precision; rank 3 adds to special. Limit: the model is Not The Thing — reality has details your model omitted.",
+   "plainly": "A puzzle/investigate action that holds a thing's true working shape where others can turn it over and see it. Its strength is rated 6 out of 10 across a scope of 2, and lasts for about 6 hours Ranks: rank 2 deepens precision; rank 3 adds to special. Limit: the model is Not The Thing — reality has details your model omitted.",
    "_treeWas": [
     {
      "rank": 1,
@@ -797,7 +797,9 @@
    "_projectThreshold": "⛔ SNG-527, CCODE'S QUESTION: 'built_system carries duration 8760 — a year in hours — and that is not what I used. If a project's real length is meant to come from `duration` rather than `magnitude`, then a Built System is a YEAR'S work and not twelve days.'\n⛔ NEITHER. `duration` IS HOW LONG THE RESULT LASTS; `projectThreshold` IS HOW LONG THE WORK TAKES. ⚠️ SOUND READ PROVES IT: `duration: 4` is four rounds of reading, and its threshold is ten days. The same field cannot mean both.\n⚠️ AUTHORED RATHER THAN DERIVED, WHICH IS WHY CCODE ASKED. ⛔ THREE WEEKS, and it becomes a project. Erik ruled Built System a project after I judged it on scene frequency; Working Model r3 — 'hand the model to others, anyone you brief can build their piece' — is the same mistake I have not yet corrected. ⚠️ DELEGATION IS THE PROJECT.",
    "_notJustAProject": "⛔ SNG-528, ERIK: 'I like to use Working Model as a skill IN THE STORY too. It brings up the shape of what you're talking about really nicely. Silas combines it with Shadow Work to make a SHADOW MODEL — you could combine it with light or other skills as well. IT'S NOT JUST A PROJECT SKILL.'\n⛔ AND I HAD BROKEN THAT. Marking the whole ability `downtime: true` removes the in-scene use entirely. ⚠️ `projectTicks` IS NOW SCOPED TO r3 — the delegation half — and r1/r2 resolve in a scene as they always did.\n⚠️ THE READING ALSO CHANGED, AND ERIK'S PHRASE IS WHY: 'it brings up THE SHAPE of what you're talking about'. This is not diagnosis — IT IS MAKING A THING VISIBLE AND POINTABLE-AT. Which is exactly why it combines: a model needs a medium, and shadow, light and figure-work all supply one.",
    "_challengeFix_20260829": "⚠️ was ['craft', 'technical', 'intellectual'] — lowercase and off the canonical fifteen. The canonical set is FIGHT · SOCIAL · INVESTIGATE · PUZZLE · SURVIVE · EXPLORE · STEALTH · CHASE · DUEL · TRAVEL · CREATE · DEFEND.",
-   "_repriced_20260829": "⚠️ e2 -> e5. L3 band is 4-8 and this holds a mill and its race in mind for six hours. Unmigrated-batch fingerprint alongside its lowercase challengeTypes and empty notFor."
+   "_repriced_20260829": "⚠️ e2 -> e5. L3 band is 4-8 and this holds a mill and its race in mind for six hours. Unmigrated-batch fingerprint alongside its lowercase challengeTypes and empty notFor.",
+   "_plainlyWas": "A craft/technical/intellectual action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 2, and lasts for about 6 hours Ranks: rank 2 deepens precision; rank 3 adds to special. Limit: the model is Not The Thing — reality has details your model omitted.",
+   "_glossFix_20260908": "⛑ TIER 2 OF `SPEC_tradition_narrative_npc_pass` — THE THIN GLOSSES. ⛔ All thirty were CORRECT and USELESS: 'makes or animates something' says THAT the craft makes and never WHICH, on thirty crafts that make thirty different things. ⚠️ T7: what does the GM narrate CHANGING? ⚑ Every rewrite is drawn from that craft's own `description` — nothing invented, and the description was right in all thirty cases. ⛔ THE SPEC ESTIMATED 251 THIN CRAFTS AND THERE WERE 42: measure before authoring."
   },
   {
    "id": "shaped_body",
@@ -939,7 +941,7 @@
      "class": "cost"
     }
    ],
-   "plainly": "A endurance/craft/physical action that makes or animates something. Its strength is rated 6 out of 10, and lasts for about 30 days Ranks: rank 2 deepens permanence; rank 3 adds to special.",
+   "plainly": "A defend action that conditions the body until it stops taking harm the way bodies do. Its strength is rated 6 out of 10, and lasts for about 30 days Ranks: rank 2 deepens permanence; rank 3 adds to special.",
    "upkeep": {
     "prepHoursByRank": {
      "1": 168,
@@ -966,7 +968,9 @@
    "_wardTypes": "⛔ SNG-512. ⛔ Conditioning answers blows, natural substances, and rot. ⚠️ NOT abstraction, not precursor — a hardened body is still a body.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_reviewed_20260829": "⚠️ It WARDS rather than deals, so it has no damageType and correctly should not. ⛔ Its `notFor` was an EMPTY LIST on a craft that grants standing soak, immunity to natural substances, and resistance to crafts worked on the body — the most defensively powerful thing in the tradition.",
    "_challengeFix_20260829": "⚠️ was ['endurance', 'craft', 'physical'] — lowercase and off the canonical fifteen. The canonical set is FIGHT · SOCIAL · INVESTIGATE · PUZZLE · SURVIVE · EXPLORE · STEALTH · CHASE · DUEL · TRAVEL · CREATE · DEFEND.",
-   "_repriced_20260829": "⛔ e2 -> e7. 720 DURATION, STANDING SOAK, IMMUNITY TO NATURAL SUBSTANCES, and resistance to crafts worked on the body — the most defensively powerful thing in the tradition, priced below a cantrip. ⚠️ Unmigrated-batch fingerprint (its challengeTypes were lowercase too). L3 band is 4-8; 7 for near-permanent standing defence."
+   "_repriced_20260829": "⛔ e2 -> e7. 720 DURATION, STANDING SOAK, IMMUNITY TO NATURAL SUBSTANCES, and resistance to crafts worked on the body — the most defensively powerful thing in the tradition, priced below a cantrip. ⚠️ Unmigrated-batch fingerprint (its challengeTypes were lowercase too). L3 band is 4-8; 7 for near-permanent standing defence.",
+   "_plainlyWas": "A endurance/craft/physical action that makes or animates something. Its strength is rated 6 out of 10, and lasts for about 30 days Ranks: rank 2 deepens permanence; rank 3 adds to special.",
+   "_glossFix_20260908": "⛑ TIER 2 OF `SPEC_tradition_narrative_npc_pass` — THE THIN GLOSSES. ⛔ All thirty were CORRECT and USELESS: 'makes or animates something' says THAT the craft makes and never WHICH, on thirty crafts that make thirty different things. ⚠️ T7: what does the GM narrate CHANGING? ⚑ Every rewrite is drawn from that craft's own `description` — nothing invented, and the description was right in all thirty cases. ⛔ THE SPEC ESTIMATED 251 THIN CRAFTS AND THERE WERE 42: measure before authoring."
   },
   {
    "schemaVersion": 1,

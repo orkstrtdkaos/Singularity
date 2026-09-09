@@ -163,7 +163,8 @@ Untended, **the argument resumes with the world still standing in the middle of 
 
 ## VI · WHO IS OUT THERE
 
-**Most of them have never heard of you.** They are doing their own work — and the world counts what they do
+**Ninety-eight great figures walk Exesa, across a hundred and thirty-five places, and most of them have
+never heard of you.** They are doing their own work — and the world counts what they do
 whether or not you are in the room. The trickster you brushed past in a market may be a gang leader when you
 meet again, and nobody arranged that.
 
@@ -311,8 +312,9 @@ world.
 
 ### The ones in front of you
 
-**Most of the people you meet will be neither famous nor written down in advance.** Some are authored; many
-the world makes as you go, and the ones who matter get remembered, given a name, and kept.
+**Most of the people you meet will be neither famous nor written down in advance.** Some were set down
+before you arrived; many the world makes as you go, and the ones who matter get remembered, given a name,
+and kept.
 
 Wherever you land, expect the same kinds of people:
 

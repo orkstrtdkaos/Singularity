@@ -1,0 +1,168 @@
+{
+ "schemaVersion": 1,
+ "id": "the_hollow_king",
+ "name": "The Hollow King of the Wild Half",
+ "tier": "mythic",
+ "level": 85,
+ "people": "fae",
+ "gender": "man",
+ "pronouns": "he/him",
+ "sex": "male",
+ "romanceEligible": false,
+ "homeLocation": "the_maw",
+ "communityId": "churn.hollow_court",
+ "role": "Sovereign of the Demonic axis — he never takes; he is given",
+ "domains": {
+  "primary": "abyssal",
+  "secondary": "churnfolk",
+  "tertiary": "veilwright"
+ },
+ "spectrum": {
+  "demonic_angelic": -0.8,
+  "falsehood_truth": -0.4,
+  "chaos_order": -0.3
+ },
+ "subAttributes": {
+  "strength": 12,
+  "agility": 10,
+  "reason": 18,
+  "insight": 20,
+  "presence": 20,
+  "rapport": 16,
+  "craft": 11,
+  "wits": 17
+ },
+ "knowledge": [
+  "The true name of every want you won't say aloud",
+  "Every law of bargain and its exact edge",
+  "What the Accords cannot compel"
+ ],
+ "wants": [
+  "To be asked. He never takes; he is given"
+ ],
+ "fears": "The one who wants nothing from him.",
+ "voiceHints": "Courtly, warm, delighted by you. Every sentence a door that opens the wrong way.",
+ "assistTags": [
+  "bargain",
+  "talk",
+  "read-people",
+  "watch"
+ ],
+ "abilities": [
+  {
+   "abilityId": "struck_term",
+   "level": 3,
+   "why": "⚑ 'grants exactly what you ask' — the term is struck and it binds"
+  },
+  {
+   "abilityId": "deep_covenant",
+   "level": 3,
+   "why": "⛔ 'the bargain with NO FLOOR'"
+  },
+  {
+   "abilityId": "offered_price",
+   "level": 3,
+   "why": "the price is named, and it is fair"
+  },
+  {
+   "abilityId": "borne_bargain",
+   "level": 3,
+   "why": "he carries every one"
+  },
+  {
+   "abilityId": "lever",
+   "level": 3,
+   "why": "'the true name of every want you won't say aloud'"
+  },
+  {
+   "abilityId": "hollow_that_holds",
+   "level": 3,
+   "why": "⚠️ the craft is his epithet — you leave richer and HOLLOWED"
+  },
+  {
+   "abilityId": "true_account",
+   "level": 3,
+   "why": "⛑ HE DOES NOT LIE. 'Keeps every promise TO THE LETTER'"
+  },
+  {
+   "abilityId": "soul_stare",
+   "level": 3,
+   "why": "'the true name of every want'"
+  },
+  {
+   "abilityId": "read_the_room",
+   "level": 3,
+   "why": "courtly"
+  },
+  {
+   "abilityId": "mediators_tongue",
+   "level": 2,
+   "why": "he holds a court"
+  },
+  {
+   "abilityId": "set_word",
+   "level": 2,
+   "why": "a word given is the whole mechanism"
+  },
+  {
+   "abilityId": "bound_witness",
+   "level": 2,
+   "why": "he catalogues what he has been given"
+  },
+  {
+   "abilityId": "the_way_out",
+   "level": 2,
+   "why": "there is always one, and it costs"
+  },
+  {
+   "abilityId": "ordinary_face",
+   "level": 1,
+   "why": "veilwright tertiary"
+  },
+  {
+   "abilityId": "lucky_fall",
+   "level": 1,
+   "why": "churnfolk secondary"
+  },
+  {
+   "abilityId": "calm_word",
+   "level": 1,
+   "why": "⚠️ he has never once raised his voice"
+  }
+ ],
+ "closed": [
+  "hunters_strike",
+  "edge",
+  "ki_wield",
+  "thrown_edge",
+  "keystone_blow",
+  "break_the_line",
+  "last_unmaking"
+ ],
+ "personality": {
+  "warmth": 3,
+  "trust": 1,
+  "candor": 5,
+  "patience": 10
+ },
+ "physicality": "NOT HUMAN. A tall figure on a plain seat in a vast dim hall, surrounded by heaped gifts nobody is collecting. WHAT CATCHES THE EYE: ⛔ he is waiting, and he is delighted to see you.",
+ "intimacyNotes": "⛔ NOT AVAILABLE, and the reason is structural rather than moral: ⚠️ HE CANNOT TAKE. 'He never takes; he is given' is not a style — the lore calls it A STRUCTURAL INCAPACITY. ⛑ Anything he has, someone asked him to have.",
+ "notAnOpponent": false,
+ "forms": [
+  {
+   "stage": 3,
+   "level": 45,
+   "name": "The Hollow King, diminished",
+   "why": "⚑ R41: arriving IS diminishment. He accepts a shape to act here and it is a fraction of what held the court."
+  },
+  {
+   "stage": 4,
+   "level": 85,
+   "name": "The Hollow King of the Wild Half",
+   "why": "⛔ final form at the mythic floor."
+  }
+ ],
+ "arcId": "arc_the_poles_pull",
+ "_authoredWhy": "⛑ AUTHORED 2026-09-08. CCode: 'the_hollow_king is named a Sovereign in the same lore file, sits at `epic` with no authored level, and fields ZERO crafts — A NAMED SOVEREIGN WHO FIGHTS WITH A PLAIN STRIKE. His tier and his kit are Aevi's and Erik's call, not mine to change by hand.' ⛔ TIER `epic` → `mythic`: the Sovereign doc names him the DEMONIC AXIS SEAT, and Lucifer holds Light at mythic 85. ⚠️ A seated Sovereign is not an epic. ⚑ AND `forms` PER R41b, ERIK'S OWN RULING: diminished at stage 3 (L45), final at stage 4 (L85), on `arc_the_poles_pull` — which his own `wantArcId` already named. ⛔ THE KIT IS THE PROSE AND NOTHING ELSE: 'grants exactly what you ask' is `struck_term`; 'the bargain with no floor' is `deep_covenant`; 'you leave richer and HOLLOWED' is `hollow_that_holds`, which is his epithet wearing a craft id. ⚑ AND `closed` IS THE WHOLE CHARACTER: HE HOLDS NO HARM CRAFT AT ALL. His own threading says why — 'NEVER FOUGHT HEAD-ON; OUTLASTED OR OUT-WANTED' — and the lore calls his inability to take A STRUCTURAL INCAPACITY. ⚠️ A Sovereign at level 85 who cannot strike you is more frightening than one who can, and it is what the fiction already said. ⬜ 16 crafts against a capacity of 43, deliberately under: the rest belongs to whoever writes the arrival.",
+ "_promotedFrom": "lore/legends.json figures[] — authored in prose, no row"
+}

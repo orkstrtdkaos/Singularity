@@ -1,0 +1,75 @@
+{
+ "schemaVersion": 1,
+ "id": "the_take_that_stops_her",
+ "name": "The Take That Stops Her",
+ "region": "foothill_longshore",
+ "tier": "heroic",
+ "giver": "cassa_redsail",
+ "axis": "chaos_order",
+ "traditions": [
+  "churnfolk",
+  "marcher",
+  "horizon"
+ ],
+ "premise": "Cassa Redsail has said four times that she wants one take big enough to stop. Nobody believes her, including her crew, and she has started to suspect they are right. Then a hull comes up the reach that nobody will insure and nobody will claim — a good ship, sound, and carrying something in the hold that is the reason it is unclaimed. She cannot take it alone and she will not take it with her own crew, because if this is the one that stops her then they are out of work and they do not know it yet.",
+ "stakes": "⛔ THE SHIP IS THE REWARD AND IT IS NOT THE POINT. Cassa is deciding whether she is a person who stops, and she has decided wrong four times. ⚠️ A player who takes the ship and leaves her to her crew gets a hull and an enemy. A player who makes her say it out loud, in front of them, gets a hull and the only person on the reach who knows every way off a ship.",
+ "stages": [
+  {
+   "id": "s1",
+   "title": "Four times",
+   "objective": "Meet Cassa and hear the pitch — the same pitch, for the fifth time.",
+   "condition": "A scene where she offers you a share before you have asked for one. ⚠️ Her `patience` is 3 and she agrees to things fast; the beat is noticing that her crew has stopped listening.",
+   "change": "Codex: Cassa Redsail wants out and has not managed it. Her crew have heard this before."
+  },
+  {
+   "id": "s2",
+   "title": "The unclaimed hull",
+   "objective": "Find out why nobody will claim a sound ship.",
+   "condition": "Reach the hull — beached, moored or under way — and learn what is in the hold. ⛔ It is not cargo, and whoever left it there did not leave willingly.",
+   "change": "World: the hull is real, it is sound, and it has a reason nobody wants it."
+  },
+  {
+   "id": "s3",
+   "title": "In front of the crew",
+   "objective": "Get the terms said aloud where her people can hear them.",
+   "condition": "⚑ HER OWN POLE-SIGNATURE IS THE PUZZLE: 'she agrees to things fast and means them for about a week — GET IT IN FRONT OF HER CREW IF YOU WANT IT TO LAST.' A private handshake with Cassa is worth a week.",
+   "change": "⛑ The terms bind, or they do not, and the difference is whether anybody but her heard them."
+  }
+ ],
+ "outcomes": [
+  {
+   "id": "hull_and_ally",
+   "when": "the terms were said in front of the crew",
+   "text": "⚑ The ship is yours and Cassa is not finished with you — she takes a share, a berth, or a standing claim to be asked first. ⚠️ SHE IS NOT A COMPANION. She is a person with a reason to answer.",
+   "effects": [
+    {
+     "type": "world_fact",
+     "text": "A hull nobody would claim changed hands on the Longshore reach, in front of witnesses."
+    }
+   ]
+  },
+  {
+   "id": "hull_alone",
+   "when": "the deal was struck privately",
+   "text": "⛔ You have a ship. ⚠️ Cassa meant it for about a week, and her crew were never told — which makes them your problem now and not hers.",
+   "effects": [
+    {
+     "type": "world_fact",
+     "text": "A hull changed hands quietly and a crew found out afterwards."
+    }
+   ]
+  },
+  {
+   "id": "she_stops",
+   "when": "you gave her the take and asked nothing",
+   "text": "⛑ She stops. ⚠️ FOR REAL, THIS TIME — and the ship goes to whoever she owes, which is not you. ⛔ You have made a friend of the most useful pirate on the reach and gained nothing you can sail.",
+   "effects": [
+    {
+     "type": "world_fact",
+     "text": "Cassa Redsail took one take and stopped, and nobody who knew her believed it."
+    }
+   ]
+  }
+ ],
+ "notes_for_gm": "⚠️ GM-EYES-ONLY: what is in the hold should be a PERSON or a person's work — the reason the ship is unclaimed is that claiming it means answering for them. ⛔ Cassa knows and has not said. Her fear is being ordinary, not being caught, so the lever on her is never the risk — it is whether this is a story worth telling afterwards."
+}

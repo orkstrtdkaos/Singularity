@@ -83,9 +83,37 @@ const dir = arcEffect ? (Math.sign(arcEffect.delta ?? arcEffect.dir ?? 1) || 1) 
 FROM a wake) is SNG-204 Phase 2 and reads these open wakes."*** ⚠️ **`eligibleWakes` returns them. Does
 anything consume it?**
 
-⬜ **If nothing does, this is a fourth-door case and the whole mechanism is one caller away.** ⚑ **And what
-it should mint is not only a quest — Erik's ask is that a wake can mint an ARC**, which is the same call with
-`type: "arc"` and §3's stub discipline behind it.
+### ⛑ AND IT IS NOT A FOURTH DOOR EITHER. IT IS WIRED, AND IT ALREADY MINTS ARCS.
+
+**`app.js:4641`, in the world tick:**
+```js
+await runWakeGeneration({ character, content: CONTENT, worldDay: absoluteWorldDay(),
+  generateFn: async (wakeCtx) => generate("arc", { ...wakeCtx, character, location, … })
+});
+```
+
+⛔ **A RESOLVED OUTCOME LEAVES A WAKE, THE WAKE IS ELIGIBLE, AND THE WAKE MINTS AN ARC.** ⚠️ **Erik's entire
+ask — *"the generative engine is made to be able to create arcs, especially upon completion of other
+arcs"* — IS BUILT, WIRED AND RUNNING.**
+
+⛑ **AEVI SPECCED A MECHANISM THAT EXISTS END TO END, AND THEN PROPOSED BUILDING IT.** ⚠️ **She read
+`generate.js` for the arc STUB, found it thin, and concluded the pipeline was missing** — ⛔ **without ever
+searching for the thing that CALLS it.** ⚑ Erik: *"I'd look for the quest wake engine."* **He knew.**
+
+---
+
+## §2b — ⬜ SO WHAT IS ACTUALLY LEFT, AND IT IS §3
+
+⛔ **THE STUB IS THE WHOLE PROBLEM AND IT IS THE ONLY PROBLEM.**
+
+⚠️ **The wake gives the generator a rich context — the pressure, the source arc, the neighbours it presses
+on, the direction it pushed** — ⛑ **and then `stubEntity` fills every unanswered field with
+`hingeNpcs: []`, *"it festers, unwatched"* and *"someone patient could turn it."***
+
+➡️ ⛔ **A GOOD CONTEXT MEETING A BOILERPLATE FLOOR.** ⚑ **Every arc the wake engine has ever minted carries
+those two sentences**, and R49 says why that is a debt rather than a hook.
+
+⬜ **So §3 is not a nice-to-have alongside a new mechanism. §3 IS THE WORK.**
 
 ## §3 — ⬜ AND THE ARC STUB MUST BE BORN WHOLE, LIKE THE CREATURE ONE
 

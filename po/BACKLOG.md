@@ -1772,3 +1772,31 @@ else works without it**.
 **3.** ⚑ **let `growthFor` write** — R37's rates are ruled and a gained craft starts at r1 (Erik, 09-02).
 **4.** ⬜ **hand-author only the hinges** — ⚠️ **the 15 that exist are the ones the story leans on, and that
 is the right population to have done by hand.**
+
+---
+
+## ⛔ THE ENCOUNTER TUNING JOB — the eight ways exist, the numbers do not
+
+**Logged 2026-09-08 at Erik's direction.** ⚠️ **This is a BALANCE job and it must not be conflated with the
+vocation design, which is done.**
+
+⛑ **`scripts/encounter_matrix.mjs`, re-run after the family archetypes and the fifteen effect rows:**
+
+| | |
+|---|---|
+| ⛔ **`win% == ends%` in 12 of 17 encounters** | ⚠️ **the fight is almost never LOST — IT DOES NOT FINISH.** 87% hit the 14-round cap with both sides standing |
+| ⛔ **threat explains the entire spread at −0.95** | ⚑ sustain 26→73% · protect 28→72% · move 44→8% · zone_raider 45→7% |
+| ⚠️ **so the defensive champions are not the easiest fights** | ⛑ **THEY ARE THE ONLY ONES THAT END** |
+
+⛔ **CAUSE: R34b's `breakAtPressure = ceil(level/2)` meeting a round cap of 14 that did not move with it.**
+⚠️ **A threat-44 foe needs more pressure ticks than a fight has rounds to produce, and health was already
+measured as *"nobody dies of dice."*** ⛑ **BOTH EXITS OUT OF REACH AT ONCE.**
+
+⬜ **Three shapes, and Aevi reads B:** ⛔ **A** raise the cap — *a 25-round fight is not better, it is longer*
+· ⚑ **B cap `breakAtPressure` at what a fight can produce (~6–8) with the level fraction under it** ·
+⚠️ **C** faster accrual at high threat — *undoes R34b*
+
+⚑ **AND THE DESIGN IS NOT THE PROBLEM: `docs/VOCATIONS.md` shows eight ways to win and the coliseum has a
+champion for each.** ⛔ **What is untuned is whether any of them can reach an ending.**
+
+⬜ **Re-run the matrix after the fix; the harness is CCode's and the numbers are the deliverable.**

@@ -9757,6 +9757,49 @@ await (async () => {
       (again.notes || []).length === 0);
   }
 
+  // ⛔ ERIK: "can we modify the land and coastline surgically? a bay… a new river… islands?"
+  // ⛑ Land is a THRESHOLD on a continuous field, and every authored lever was a bump UPWARD: `pts` and
+  // `landwant` raise it, `bridges`/`short` raise a segment, `belts` add relief, `waterauth.authored`
+  // carves rivers into the DEM afterwards. ⚠️ So an island and a river were always authorable and a BAY
+  // was not — `umb` is the only reducer and it is a special-purpose ripple for the Umbral depths.
+  // `seawant` is the missing mirror: the same gaussian `landwant` adds, SUBTRACTED.
+  {
+    const TER = await import("../scripts/world/terrain.mjs");
+    const GPW = JSON.parse(readFileSync(join(root, "content/packs/core/world/genparams.json"), "utf8"));
+    check("391: the seawant lever is AUTHORED and EMPTY — the world does not move until someone uses it",
+      Array.isArray(GPW.seawant) && GPW.seawant.length === 0, JSON.stringify(GPW.seawant));
+
+    const base = TER.makeTerrain(GPW);
+    // ⛑ INERT WHEN EMPTY: an empty list and a missing key must generate the same world, cell for cell.
+    const noKey = TER.makeTerrain({ ...GPW, seawant: undefined });
+    let same = true;
+    for (let lat = -70; lat <= 70 && same; lat += 17) for (let lon = -170; lon < 170; lon += 23) {
+      const a = base(lon, lat), b = noKey(lon, lat);
+      if (a.type !== b.type || a.raw !== b.raw) { same = false; break; }
+    }
+    check("391: …and an EMPTY seawant generates the identical world — the capability is inert until used", same);
+
+    // ⛔ NON-VACUITY, AND IT IS THE WHOLE POINT: on real coastline, one entry turns land into sea.
+    let coast = null;
+    outer: for (let lat = -80; lat <= 80 && !coast; lat += 1) for (let lon = -180; lon < 180; lon += 1) {
+      if (base(lon, lat).type !== 1) continue;
+      for (const [dx, dy] of [[2, 0], [-2, 0], [0, 2], [0, -2]]) if (base(lon + dx, lat + dy).type === 0) { coast = [lat, lon]; break outer; }
+    }
+    const bay = coast ? TER.makeTerrain({ ...GPW, seawant: [coast] }) : null;
+    check("391: ⛔ …and ONE seawant entry opens a bay — coastal land becomes sea",
+      !!coast && base(coast[1], coast[0]).type === 1 && bay(coast[1], coast[0]).type === 0,
+      coast ? `${coast[0]},${coast[1]}` : "no coast found");
+
+    // ⚠️ AND IT STAYS LOCAL. A lever that reshaped the far side of the world would be unusable.
+    let farMoved = 0;
+    if (coast) for (const [plat, plon] of GPW.pts) {
+      if (Math.hypot(plat - coast[0], plon - coast[1]) <= 20) continue;
+      const a = base(plon, plat), b = bay(plon, plat);
+      if (a.type !== b.type || a.raw !== b.raw) farMoved++;
+    }
+    check("391: ⛑ …and nothing beyond 20° moves — a bay is surgery, not a redrawn map", farMoved === 0, String(farMoved));
+  }
+
   // §2: a GM override wins over the computed depth (computed-with-GM-override, ROUND 2 Q1 recommendation).
   const forced = enterDeathState({ status: "active" }, { diedDay: 100, depthOverride: 3 });
   check("209 §2: a GM depthOverride wins over the clock (sealed by fiat)", deathDepth(forced, 101) === 3 && isSealed(forced, 101));

@@ -25,7 +25,7 @@ function makeTerrain(GP, view){
  const R=Math.PI/180;
  function dlon(a,b){return ((a-b+540)%360)-180;}
  // cull: a gaussian at sigma s is negligible past ~3.5s
- let pts=GP.pts, lw=GP.landwant, br=GP.bridges, sh=GP.short, belts=GP.belts, north=GP.north, umb=GP.umb;
+ let pts=GP.pts, lw=GP.landwant, sw=GP.seawant||[], br=GP.bridges, sh=GP.short, belts=GP.belts, north=GP.north, umb=GP.umb;
  if(view){
   const {la0,la1,lo0,lo1}=view;
   // ⚠️ meridians converge: near the pole a huge longitude span is a small distance,
@@ -40,6 +40,7 @@ function makeTerrain(GP, view){
   };
   pts  = GP.pts.filter(p=>inR(p[0],p[1],46));
   lw   = GP.landwant.filter(p=>inR(p[0],p[1],10));
+  sw   = (GP.seawant||[]).filter(p=>inR(p[0],p[1],10));   // ⛑ same radius as its mirror
   umb  = GP.umb.filter(p=>inR(p[0],p[1],20));
   br   = GP.bridges.filter(b=>inR(b[0],b[1],26)||inR(b[2],b[3],26));
   sh   = GP.short.filter(b=>inR(b[0],b[1],12)||inR(b[2],b[3],12));
@@ -80,6 +81,7 @@ function makeTerrain(GP, view){
   return {d:Math.sqrt(d2),t:t};}
  const PT=pts.map(p=>[p[0],p[1],Math.sin(p[0]*R),Math.cos(p[0]*R)]);
  const LW=lw.map(p=>[p[0],p[1],Math.sin(p[0]*R),Math.cos(p[0]*R)]);
+ const SW=sw.map(p=>[p[0],p[1],Math.sin(p[0]*R),Math.cos(p[0]*R)]);
  return function(lon,lat){
   const cl=Math.cos(lat*R);
   const V=sph(lon,lat);
@@ -92,6 +94,13 @@ function makeTerrain(GP, view){
   for(let i=0;i<LW.length;i++){const p=LW[i];
    const d2=gcd2(p[2],p[3],sinLat,cosLat,Math.cos((lon-p[1])*R));
    if(d2<64){const v=1.55*Math.exp(-d2/12.96); if(v>g)g=v;}}
+  // ⛔ THE ONLY LEVER THAT REMOVES LAND. Symmetric with `landwant` above — same falloff, same MAX (two
+  // bays overlapping open one bay, not an ocean) — and applied to `s` before the threshold, so a point
+  // just inside a coast pulls the shoreline in and a point inland opens a basin.
+  let sea=0;
+  for(let i=0;i<SW.length;i++){const p=SW[i];
+   const d2=gcd2(p[2],p[3],sinLat,cosLat,Math.cos((lon-p[1])*R));
+   if(d2<64){const v=1.55*Math.exp(-d2/12.96); if(v>sea)sea=v;}}
   let b2=0;
   for(let i=0;i<br.length;i++){const b=br[i];const q=segd(lon,lat,b[0],b[1],b[2],b[3]);
    const warp=2.6*n3(V,3,0.14,5.1);
@@ -107,6 +116,7 @@ function makeTerrain(GP, view){
   s+=cont*0.62;
   s-=Math.pow(Math.max(0,(lat-4)/56),1.3)*2.2;
   s+=g+b2;
+  s-=sea;   // ⛑ authored water, the mirror of authored land
   const thr=0.85+0.18*n3(V,4,0.09,0);
   const known=s-thr;
   let un=0;

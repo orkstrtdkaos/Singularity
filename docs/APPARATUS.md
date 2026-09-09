@@ -133,7 +133,7 @@ worthless.
 <!-- APPARATUS:BEGIN -->
 | harness | kind | assertions | purpose |
 |---|---|---|---|
-| `tests/smoke` | ✅ GATE | 3534 | — |
+| `tests/smoke` | ✅ GATE | 3563 | — |
 | `tests/how_it_works` | ✅ GATE | 1576 | CCODE-285 |
 | `tests/skill_battle_sim` | ✅ GATE | 217 | SNG-098: the two-sided contest + fog-of-war invariant |
 | `tests/content_ci` | ✅ GATE | 184 | SNG-BATCH-10 Phase 4 / SNG-040/064: the content integrity gate |
@@ -198,7 +198,6 @@ worthless.
 | `scripts/tradition_war` | 🔧 TOOL+SELFTEST | 1 | CCODE-331 |
 | `scripts/access_census` | 🔧 TOOL | — | CCODE-332 |
 | `scripts/apparatus_inject` | 🔧 TOOL | — | write the generated inventory into docs/APPARATUS |
-| `scripts/gm_companion.mjs` | 🔧 TOOL | `--write` | ⛑ **gathers every `gmHint`, `hook`, `hiddenTruth` and `gmMandate` in the corpus into `docs/GM_BOOK.md`.** ⚠️ The Library filters these from the player's view and NOTHING ELSE SHOWED THEM |
 | `scripts/apply_promotion_SNG-396` | 🔧 TOOL | — | applies Aevi's two ratifications, and ONLY what they say |
 | `scripts/atlas_inject` | 🔧 TOOL | — | regenerate the §13 table inside docs/FIELD_REFERENCE |
 | `scripts/audit_images` | 🔧 TOOL | — | — |
@@ -214,6 +213,7 @@ worthless.
 | `scripts/extract_generated_places` | 🔧 TOOL | — | SNG-396 §3 |
 | `scripts/field_atlas` | 🔧 TOOL | — | CCODE-287 |
 | `scripts/folded_casualties_report` | 🔧 TOOL | — | CCODE-298 |
+| `scripts/gm_companion` | 🔧 TOOL | — | SNG: THE GM'S BOOK |
 | `scripts/group_fidelity` | 🔧 TOOL | — | CCODE-307 |
 | `scripts/op_emission_audit` | 🔧 TOOL | — | because narration succeeds without them, so nothing complains |
 | `scripts/rank_curve` | 🔧 TOOL | — | CCODE-284 / SPEC_rank_scaling_derive_with_override §4 |

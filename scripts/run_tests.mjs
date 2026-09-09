@@ -69,6 +69,11 @@ const SUITES = [
   // DECIDES FROM — whether veil working in 5 of 39 regions is design or accident is his ruling — so a stale
   // one is worse than none: it would be a table of numbers that no longer describe the world.
   ["substrate_atlas --check", "node", ["scripts/substrate_atlas.mjs", "--check"]],
+  // ⛔ THE DRIFT GATE THE WORLD README SAYS TO RUN IN CI, AND NOBODY DID. "A red --check means the
+  // committed terrain no longer matches the generator that claims to produce it." ⚠️ Measured 2026-09-09:
+  // terrain.json was last rebuilt 2026-08-10 and its INPUTS have moved since, so the world has been stale
+  // for a month with nothing saying so. ⛑ Nine seconds to run — it was never a cost question.
+  ["world --check", "node", ["scripts/world/generate_world.mjs", "--check"]],
 ];
 
 const only = process.argv.slice(2).filter(a => !a.startsWith("-"));

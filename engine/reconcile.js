@@ -130,6 +130,50 @@ export const CHARACTER_STEPS = [
     }
   },
   {
+    version: 49, id: "generated-duplicates-authored", playerFacing: true,
+    // ⛔ ONE PERSON, TWO IDS — the generated mint that nobody could find. Erik met Silas's mother, the
+    // world generated a record for her under her OWN name (`hesta-vorn`), and the authored person she
+    // already was lives at `silas-mother`. Two records, one woman, and no reference between them.
+    //
+    // ⚠️ WHY IT WAS UNFINDABLE: the registry stub is named "Silas's Mother" — a description — so a search
+    // of the registry for her real name returns nothing, and the codex has no topic for her at all. The
+    // only join that finds it is GENERATED NAME against AUTHORED NAME.
+    //
+    // ⛑ `reconcileGeneratedNpcWithMeet` already does this at MINT time, keyed on the request hint naming
+    // the met person. This is the same repair after the fact, for the case where the hint never matched.
+    apply: (c, ctx) => {
+      const authored = ctx?.content?.npcs || {};
+      const gen = c.generated?.npc;
+      if (!gen || !Object.keys(authored).length) return {};
+      const norm = (x) => String(x || "").toLowerCase().replace(/[^a-z ]/g, "").replace(/\s+/g, " ").trim();
+      const byName = new Map();
+      for (const [id, n] of Object.entries(authored)) if (n?.name) byName.set(norm(n.name), id);
+      const merged = [];
+      for (const [gid, g] of Object.entries(gen)) {
+        const target = byName.get(norm(g?.name));
+        if (!target || target === gid) continue;
+        c.npcRegistry = c.npcRegistry || {};
+        const stub = (c.npcRegistry[target] = c.npcRegistry[target] || { id: target, name: authored[target].name });
+        // ⛔ AUTHORED WINS ON THE NAME, which is the visible half. A stub reading "Silas's Mother" told the
+        // GM that a description was her name, every turn — and the authored record says Hesta Vorn.
+        if (authored[target].name && stub.name !== authored[target].name) stub.name = authored[target].name;
+        // ⚑ AND THE GENERATED MATERIAL IS KEPT, NOT DISCARDED. It is richer than the stub — personality,
+        // wants, fears, voice, appearance, even a kit — and none of it exists anywhere else. Gaps only:
+        // anything the stub or the authored record already says stays as it is.
+        for (const [k, v] of Object.entries(g)) {
+          if (k === "id" || k === "name" || k.startsWith("_")) continue;
+          if (v == null) continue;
+          if (stub[k] == null && authored[target][k] == null) stub[k] = v;
+        }
+        stub._mergedFromGenerated = gid;
+        delete gen[gid];
+        merged.push({ from: gid, into: target, name: stub.name });
+      }
+      if (!merged.length) return {};
+      return { notes: merged.map(m => `${m.name} was two people in your world and is one again — what you learned of her is kept.`) };
+    }
+  },
+  {
     version: 1, id: "codex-entity-merge", playerFacing: true,
     // SNG-019's one-shot repair for pre-fragmented saves: collapse duplicate codex
     // topics into their primary nodes. High-confidence auto-merge only.

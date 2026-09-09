@@ -105,3 +105,58 @@ it. Hydrology must never see it** — ⛔ **and if it ever ends up in the same l
 ⛑ **AND `SHORELINE_PUSHBACK` IS DUPLICATED** — hard-coded at `hydrology.mjs:19` AND authored in
 `waterauth.json`. ⚠️ **They agree today.** ⬜ **Two copies of one list is the shape that drifts, and yours is
 the one the pipeline actually uses.**
+
+---
+
+# ⛑ CCODE, 2026-09-09 — FOUND HER. AND WHY YOU COULDN'T.
+
+## ⛔ THE SECOND MINT IS `character.generated.npc["hesta-vorn"]`
+
+**A GENERATED record carrying the same name as your AUTHORED `silas-mother`.** ⚠️ **One woman, two ids, and
+not one reference between them** — three literal occurrences of `hesta-vorn` in the whole save and all three
+are inside the record itself.
+
+### ⚑ AND IT WAS UNFINDABLE BY EVERY SEARCH YOU RAN, FOR ONE REASON
+
+> ⛔ **The registry stub for her is named `"Silas's Mother"`.**
+
+⚠️ **A DESCRIPTION, NOT A NAME** — so grepping the registry for "Hesta" returns nothing, the codex has no
+topic for her, and `mergeUndo`/`swept` were never involved because **nothing ever merged.** ⛑ **The only
+join that finds it is GENERATED name against AUTHORED name** — never against the registry, which is where
+anyone would naturally look.
+
+⬜ **And a hypothesis of mine was wrong on the way, which is worth you knowing:** `isDescriptiveNotName` —
+the predicate that exists for exactly this shape — **returns FALSE for `"Silas's Mother"`.** So the thing
+built to catch descriptive names does not catch this one either.
+
+## ✅ REPAIRED, AND GENERALLY
+
+⛑ **A reconcile step (`generated-duplicates-authored`), not a Silas-specific one.** ⚠️ Three reconcile steps
+carrying his story once ran for every character for eleven versions; this matches on the RULE — *a generated
+record duplicating an authored person* — and Hesta is simply the one instance that exists today. **1 of 22
+generated people.**
+
+| | |
+|---|---|
+| ✅ **the duplicate is merged onto the authored id** | and removed. 22 generated → 21 |
+| ⛔ **the authored NAME replaces the description** | ⚠️ **the GM has been told her name is "Silas's Mother" every turn.** It says Hesta Vorn now |
+| ⛑ **your authoring is never overwritten** | **measured: every field the generated record carried, your record already says** — wants, fears, voice, appearance, personality, spectrum, knowledge, even a kit. **Nothing was lost by dropping it; it was a parallel invention of a woman who was already fully authored** |
+| ⚑ **what you never wrote is kept** | gaps only, because it exists nowhere else |
+| ✅ **reported to the player, and idempotent** | *"Hesta Vorn was two people in your world and is one again"* |
+
+⚠️ **I did not touch Erik's save.** ⛑ **The step runs on load** — that is the project's own shape for this,
+and editing a live file while he plays is the race we have already lost once.
+
+## ⛑ ON THE WATER — YOU CAUGHT THE ONE THAT MATTERED
+
+⛔ **`hydrology.mjs` lowering the DEM by 9 units around every authored entry and ignoring `kind` is exactly
+the class I keep naming, and you found it by ASKING FIRST.** ⚑ **A coast is not something you dig** is the
+whole lesson in one sentence.
+
+✅ **`content_ci` 9 → 8 is locked into the baseline in place**, with your reason recorded — the determinism
+check passing again is what that number is. ⚠️ Not via `--rebaseline`, which rewrites the file and drops
+every note in it.
+
+⬜ **And your count is right: it is the fifth this week.** The region's own band, the foothills' home
+tradition, the mobile-holdings terrain gate, `renown` read by nobody, and now this. ⛑ **The difference you
+name is the whole difference** — four of those five were found by someone asking what reads the field.

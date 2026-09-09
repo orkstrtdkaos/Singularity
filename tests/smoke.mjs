@@ -9714,6 +9714,49 @@ await (async () => {
       /const LIB_SECRET_GM = /.test(appLib) && /libSkipKey\(k\) \{ return LIB_SKIP\.test\(k\) \|\| LIB_SECRET_GM/.test(appLib));
   }
 
+  // ⛔ ONE PERSON, TWO IDS — the second mint Aevi could not find. Erik met Silas's mother; the world
+  // generated a record for her under her own name (`hesta-vorn`) while the authored person she already
+  // was lived at `silas-mother`. Two records, one woman, no reference between them.
+  // ⚠️ IT WAS UNFINDABLE BY NAME because the registry stub was called "Silas's Mother" — a description —
+  // so searching the registry for "Hesta" returned nothing. The only join that finds it is GENERATED name
+  // against AUTHORED name. (`isDescriptiveNotName("Silas's Mother")` is FALSE, so the predicate that
+  // exists for this shape does not catch it either — measured, not assumed.)
+  {
+    const REC = await import("../engine/reconcile.js");
+    const authoredWoman = { id: "auth_person", name: "Hesta Vorn", wants: "authored want", fears: "authored fear" };
+    const ctxRec = { content: { npcs: { auth_person: authoredWoman } } };
+    const mk = () => ({ reconcileVersion: 48, npcRegistry: { auth_person: { id: "auth_person", name: "A Description" } },
+      generated: { npc: {
+        "hesta-vorn": { id: "hesta-vorn", name: "Hesta Vorn", wants: "generated want", voiceHints: "unhurried" },
+        "someone-else": { id: "someone-else", name: "Nobody In Content", wants: "left alone" } } } });
+
+    const c1 = mk();
+    const out1 = REC.reconcile(c1, "character", ctxRec);
+    check("190: ⛔ a GENERATED record duplicating an AUTHORED person is merged onto the authored id",
+      !c1.generated.npc["hesta-vorn"] && c1.npcRegistry.auth_person._mergedFromGenerated === "hesta-vorn",
+      JSON.stringify(Object.keys(c1.generated.npc)));
+    // ⛑ AUTHORED WINS ON THE NAME, and that is the visible half: a stub carrying a DESCRIPTION told the GM
+    // that "Silas's Mother" was her name, every turn.
+    check("190: …and the authored NAME replaces a stub carrying a description",
+      c1.npcRegistry.auth_person.name === "Hesta Vorn", c1.npcRegistry.auth_person.name);
+    // ⛔ AND THE GENERATED INVENTION NEVER OVERWRITES THE AUTHOR. Measured on the live save: every field
+    // the generated Hesta carried, the authored record already said — so nothing was lost by dropping it.
+    check("190: ⛑ …and an authored field is never overwritten by the generated one",
+      c1.npcRegistry.auth_person.wants !== "generated want", String(c1.npcRegistry.auth_person.wants));
+    // ⚑ …WHILE MATERIAL THE AUTHOR NEVER WROTE IS KEPT, because it exists nowhere else.
+    check("190: …while material the author never wrote is KEPT rather than thrown away",
+      c1.npcRegistry.auth_person.voiceHints === "unhurried");
+    // ⛑ NON-VACUITY: a generated person who is NOT in content is left entirely alone.
+    check("190: …and a generated person who is nobody in content is untouched",
+      !!c1.generated.npc["someone-else"] && Object.keys(c1.generated.npc).length === 1);
+    check("190: …and the merge is reported to the player, not done in silence", (out1.notes || []).some(n => /one again/.test(n)));
+    // ⛔ IDEMPOTENT: running it again finds nothing and changes nothing.
+    const c2 = mk(); REC.reconcile(c2, "character", ctxRec);
+    const again = REC.reconcile(c2, "character", ctxRec);
+    check("190: …and it is idempotent — a second pass finds nothing left to merge",
+      (again.notes || []).length === 0);
+  }
+
   // §2: a GM override wins over the computed depth (computed-with-GM-override, ROUND 2 Q1 recommendation).
   const forced = enterDeathState({ status: "active" }, { diedDay: 100, depthOverride: 3 });
   check("209 §2: a GM depthOverride wins over the clock (sealed by fiat)", deathDepth(forced, 101) === 3 && isSealed(forced, 101));

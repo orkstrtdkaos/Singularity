@@ -657,10 +657,10 @@ contribute to authored dice without recreating the double-scaling bug.
 | `tradition` | 429 | `root`×429 | ✅ READ | `arceffects.js`, `art.js`, `braids.js` |
 | `operativeAxis` | 429 | `root`×429 | ⚠️ COLLISION | only as `cfg.operativeAxis` |
 | `intensity` | 429 | `root`×429 | ✅ READ | `battle_turn.js`, `canon.js`, `craftmechanics.js` |
+| `plainly` | 429 | `root`×429 | ✅ READ | `gm.js`, `narration_voice.js`, `recovery_snapshots.js` |
 | `tree` | 429 | `root`×429 | ✅ READ | `backfill.js`, `braids.js`, `capabilities.js` |
 | `bounds` | 427 | `root`×427 | ✅ READ | `gm.js` |
 | `mechanic` | 422 | `root`×422 | ✅ READ | `battle_turn.js`, `braids.js`, `capabilities.js` |
-| `plainly` | 419 | `root`×419 | ✅ READ | `gm.js`, `narration_voice.js`, `recovery_snapshots.js` |
 | `challengeTypes` | 414 | `root`×414 | ⚠️ CI-ONLY | _4 test/script only_ |
 | `energyCost` | 411 | `root`×411 | ✅ READ | `battle_turn.js`, `braids.js`, `capabilities.js` |
 | `levelReq` | 405 | `root`×405 | ✅ READ | `backfill.js`, `braids.js`, `company.js` |

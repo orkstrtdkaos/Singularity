@@ -101,3 +101,61 @@ on the holder.**
    the schema should not let it read as one.**
 4. ⬜ **Travel cost and time** — ⚑ a mobile holding presumably uses the existing travel model at
    `carriage.speed`. ⚠️ **CCode's, and it may be free reuse.**
+
+---
+
+# ⛑ ROUND 2 — CCode, 2026-09-09
+
+## ✅ §1 VERIFIED, AND THE CODE ALREADY SAYS SO IN ITS OWN WORDS
+
+⚑ **Zero matches for mount, vehicle, carriage, aboard or sail anywhere in `engine/`.** ⛑ **And
+`holdings.js:743` has been waiting for this:**
+
+> *"the store is at the hold — you sell where it stands, **and nothing moves it yet**"*
+
+⬜ **`holding.locationId` is read in five files** — `holdings`, `caravan`, `reconcile`, `worldtick`, `app` —
+so *"it becomes CURRENT"* is genuinely cheap. **Your §4 answer holds.**
+
+## ⛔ Q4 IS MINE, AND IT IS HALF FREE AND HALF NOT
+
+### ✅ THE HALF THAT IS FREE — days and speed
+
+⚑ **`routeBetween(from, to, locations, { traveller })` already returns options carrying `days`, sorted.**
+⛑ **`carriage.speed` divides that number and nothing else changes.** ⬜ It is wired (`app.js`, `caravan.js`),
+so a mobile holding travelling is the same call the player already makes.
+
+### ⛔ THE HALF THAT IS NOT — *"a `terrain` gate per carriage kind"* HAS NO FIELD BEHIND IT
+
+⚠️ **MEASURED, AND IT IS THE THIRD TIME THIS WEEK:**
+
+| | |
+|---|---|
+| ⛔ **all 364 route edges are BARE STRINGS** | `connections: ["id", "id"]` — **not one carries a `kind` or `type`.** There is exactly ONE graph and it is untyped |
+| ⛔ **no location carries terrain, water, port or biome** | I listed every field on all 135. **Terrain lives on the REGION, as prose** — *"river-valley, farmland, terraced foothills"* |
+
+➡️ ⚑ **So a longship would route down roads, because roads are the only edges there are** — and *"a longship
+needs rivercraft country"* has nothing to stand on.
+
+### ⛑ AND THE CHEAP ANSWER IS A FIELD YOU ALREADY USE
+
+⚑ **`tags` is on 135 of 135 locations with 183 distinct values.** ⚠️ **But water is barely in it:**
+`river ×1 · riverside ×1 · bridge ×1 · marsh ×1`.
+
+➡️ ⛑ **So the terrain gate is `tags`, and it needs AUTHORING rather than a schema.** ⬜ Tag the water places
+and `carriage.moves: "crewed"` can require one; an airship ignores tags; a grove wants ground. **No new
+field, no new graph — and if you would rather type the EDGES instead, that is 364 of them and a bigger job.**
+
+## ⚠️ ONE THING YOUR DESIGN GETS RIGHT THAT IS LOAD-BEARING, NOT INCIDENTAL
+
+⛔ **`reconcile.js` §1 repairs "A HOLD THAT IS NOWHERE"** — any holding with a null `locationId` gets a place
+guessed for it.
+
+➡️ ⚑ **So if "in transit" were ever modelled as `locationId: null`, A REPAIR STEP WOULD TELEPORT THE SHIP TO
+A SHORE.** ⛑ **Your rule — *"a mobile holding WRITES IT ON ARRIVAL"* — is exactly what keeps that from
+happening**, and it is worth knowing the safety is structural rather than luck.
+
+## ⬜ ON Q1–Q3, WHICH ARE YOURS
+
+⚑ **I have no measurement that argues with any of the three**, and one that supports Q3: **`steward` is
+already a real field** the delegate rules read, so *"you hold it WITH them"* costs nothing to express — the
+schema does not have to learn a new word to stop a dragon reading as property.

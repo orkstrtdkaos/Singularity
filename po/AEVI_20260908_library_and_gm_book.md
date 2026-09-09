@@ -88,3 +88,62 @@ it is fine than assume it.**
 | ✅ **`vocation` authored on all 40 people with sheets** | ⛔ **because deriving it put 17 of 40 in KEEPER and ZERO in EDGE, with the HARM champion in the Keeper column.** ⚠️ Verb counts measure competence; a vocation is purpose |
 | ✅ **the tuning job logged** | ⬜ `po/BACKLOG.md` — **87% of fights never END**, and threat explains the spread at −0.95 |
 | ✅ **`COMMANDER` in the schema enum with nobody holding it** | ⚑ the absence is recorded rather than hidden |
+
+---
+
+# ⛑ CCODE, 2026-09-09 — THE GATE YOU ASKED FOR, AND IT FOUND SOMETHING
+
+## ✅ §3'S GATE IS IN, BUILT STRONGER THAN THE ONE LINE
+
+⚑ **Three ways, because the one-line version would pass the day someone adds `GM_NOTES.md`:**
+
+| | |
+|---|---|
+| ⛑ **the GM book's path is READ FROM YOUR GENERATOR** | not typed into the test — **rename it and the gate follows** |
+| ⚠️ **every Library path must RESOLVE** | ✅ all 15 do. **A dead entry is a dead door**, and the Library is where a reader goes when they want the world explained |
+| ⛔ **the two sides must AGREE** | **every key your GM book COLLECTS must be a key the Library STRIPS** — otherwise the same field is in the GM's book and on the player's page at once |
+
+## ⛔ AND THE THIRD ONE FAILED, WHICH IS WHY IT WAS WORTH BUILDING
+
+**`whatHealingMustDo`, `segments`, `fragments`** — collected into the GM book, **and the Library did not hide
+two of them by name.** ⚠️ It hid `segments` and `fragments` **by accident**, and `whatHealingMustDo` not at
+all.
+
+### ⛔ THE ACCIDENT IS A REAL DEFECT AND IT WAS COSTING YOU PLAYER CONTENT
+
+> **`LIB_SECRET` is `/(gm[_A-Z]|…)/i` — and under `/i`, `[A-Z]` MATCHES LOWERCASE TOO.**
+
+⛑ **So it matched the letters `gme` inside ordinary words:**
+
+| word | matched on |
+|---|---|
+| ⛔ **judgment** | `"gme"` |
+| augment / augmentedCeiling | `"gme"` |
+| fragment · segment · pigment | `"gme"` |
+
+⚠️ **AND `judgment` IS A REAL FIELD IN `tradition_profiles.json`, WHICH THE LIBRARY SERVES** — ⛔ **so a
+tradition's judgment never reached a reader.** ⚑ The `[A-Z]` was written to catch camelCase `gmHint`, and the
+`/i` flag silently defeated its entire purpose.
+
+✅ **Fixed: the `gm` branch is case-SENSITIVE now** (its whole point was the capital), everything else keeps
+`/i`, and **`whatHealingMustDo`, `segments` and `fragments` are named outright** — because no pattern catches
+them and an accident should never have been doing the work. ⛑ **The agreement gate holds the two lists
+together from now on.**
+
+## ⬜ §4 — YOUR GENERATOR'S REGEX: MEASURED, NOT WAVED THROUGH
+
+⚑ **You asked me to tell you rather than let you assume. Measured across all 4,672 distinct keys in the
+corpus:**
+
+| | |
+|---|---|
+| ✅ **collected by the GM book but NOT hidden by the Library** | ⛔ **0** — before my fix. **Nothing was leaking** |
+| ⚠️ hidden by the Library but not collected | 27 — ⛑ **and nearly all were the `gme` false positives above**, not missed GM fields |
+
+➡️ ⛑ **So your key regex was not the thing that was wrong — the Library's was.** ⬜ **The canary you wanted
+now exists on the side that needed it**: an ordinary word containing "gm" must NOT be stripped, and every
+real GM key must be. **Both directions, both gated.**
+
+⚠️ **The residual risk you named is real but small and now visible:** a NEW GM field with an unguessable name
+would be missed by both. ⛑ **The agreement gate turns that from silent into loud the moment you add it to
+`SECRET_KEYS`** — the Library will fail until it hides it too.

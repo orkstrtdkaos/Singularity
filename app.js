@@ -128,7 +128,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.436";
+const APP_VERSION = "1.9.437";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12578,8 +12578,21 @@ async function libFetch(path, kind) {
 
 // GM-only / meta keys never shown to the player.
 const LIB_SKIP = /^(schemaVersion|id|kind|note|designNote|buildPlan|buildNeeds.*|owed|migration|status|version|packId)$/i;
-const LIB_SECRET = /(gm[_A-Z]|gmeyes|eyes.?only|secret|hidden|hook|mandate|internal|_pat|token|guidance)/i;
-function libSkipKey(k) { return LIB_SKIP.test(k) || LIB_SECRET.test(k); }
+// ⛔ SPLIT, AND THE `i` FLAG IS THE REASON. `gm[_A-Z]` was written to catch camelCase `gmHint` and
+// snake `gm_hint` — and under /i the `[A-Z]` also matches lowercase, so it matched the letters "gme"
+// INSIDE ORDINARY WORDS. ⚠️ MEASURED: judgment, augment, fragment, segment and pigment were all being
+// stripped from the player's Library, and `judgment` is a real field in `tradition_profiles.json`, which
+// the Library serves — so a tradition's judgment never reached a reader.
+// ⛑ The gm branch is now CASE-SENSITIVE (its whole point was the capital); everything else keeps /i.
+const LIB_SECRET_GM = /(^|[^a-zA-Z])gm(_|[A-Z])/;
+// ⛔ AND THREE NAMED OUTRIGHT, because no PATTERN catches them and the accident above was doing it.
+// `whatHealingMustDo`, `segments` and `fragments` are GM material — `scripts/gm_companion.mjs` collects all
+// three into the GM's book — and only `segments`/`fragments` were ever hidden here, by matching the letters
+// "gme". ⚠️ `whatHealingMustDo` was never hidden at all. ⛑ A smoke gate now holds the two lists together:
+// every key the GM book COLLECTS must be a key the Library STRIPS, so this can never drift again.
+const LIB_SECRET_NAMED = /^(whatHealingMustDo|segments|fragments)$/;
+const LIB_SECRET = /(gmeyes|eyes.?only|secret|hidden|hook|mandate|internal|_pat|token|guidance)/i;
+function libSkipKey(k) { return LIB_SKIP.test(k) || LIB_SECRET_GM.test(k) || LIB_SECRET_NAMED.test(k) || LIB_SECRET.test(k); }
 function libPretty(k) { return String(k).replace(/[_-]+/g, " ").replace(/([a-z])([A-Z])/g, "$1 $2").replace(/\b\w/g, c => c.toUpperCase()); }
 
 /** Generic lore → readable HTML. Walks objects/arrays into headings + prose; filters GM fields. */

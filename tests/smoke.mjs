@@ -9671,6 +9671,49 @@ await (async () => {
       && /kind === "release"[\s\S]{0,1200}releaseHold\(ent\)/.test(appSrcRel));
   }
 
+  // ⛔ AEVI: "GM_BOOK.md MUST NEVER APPEAR IN LIBRARY_INDEX — it is spoilers by construction and the
+  // Library is the player's book." ⛑ Built stronger than the one line: the GM book's path is read from
+  // HER GENERATOR rather than typed here, so renaming it keeps the gate true.
+  {
+    const appLib = readFileSync(join(root, "app.js"), "utf8");
+    const genLib = readFileSync(join(root, "scripts/gm_companion.mjs"), "utf8");
+    const gmDoc = (genLib.match(/"(docs\/[A-Z_]+\.md)"/) || [])[1];
+    const idxBlock = appLib.slice(appLib.indexOf("const LIBRARY_INDEX"), appLib.indexOf("const LIB_SKIP"));
+    const libPaths = [...idxBlock.matchAll(/path:\s*"([^"]+)"/g)].map(m => m[1]);
+    check("LIB: the gate knows which document is the GM's — read from the generator, not typed here",
+      !!gmDoc && /GM_BOOK/.test(gmDoc), String(gmDoc));
+    check("LIB: ⛔ the GM's book is NEVER in the player's Library",
+      libPaths.length >= 10 && !libPaths.includes(gmDoc), libPaths.filter(x => /GM_/.test(x)).join(", ") || "clean");
+    // ⚠️ AND EVERY ENTRY RESOLVES. A Library category pointing at a file that no longer exists is a dead
+    // door, and the Library is exactly where a reader goes when they want the world explained.
+    const missing = libPaths.filter(x => !existsSync(join(root, x)));
+    check("LIB: every Library path resolves — a dead entry is a dead door", missing.length === 0, missing.join(", "));
+
+    // ⛔ THE TWO SIDES MUST AGREE. Every key her GM book COLLECTS must be a key the Library STRIPS, or the
+    // same field is in the GM's book and on the player's page at once.
+    const secretKeys = (genLib.match(/const SECRET_KEYS = \/\^\(([^)]+)\)\$\//) || [])[1] || "";
+    const collected = secretKeys.split("|").map(x => x.replace(/\?$/, "")).filter(x => /^[a-zA-Z_]+$/.test(x));
+    const LIB_GM = /(^|[^a-zA-Z])gm(_|[A-Z])/;
+    const LIB_CI = /(gmeyes|eyes.?only|secret|hidden|hook|mandate|internal|_pat|token|guidance)/i;
+    const LIB_NAMED = /^(whatHealingMustDo|segments|fragments)$/;   // named because no pattern catches them
+    const stripped = (k) => LIB_GM.test(k) || LIB_NAMED.test(k) || LIB_CI.test(k);
+    const leaks = collected.filter(k => !stripped(k));
+    check("LIB: every key the GM BOOK collects is a key the Library HIDES — the two sides agree",
+      collected.length >= 8 && leaks.length === 0, leaks.join(", ") || `${collected.length} keys checked`);
+
+    // ⛔ THE CANARY, AND IT IS THE DEFECT THIS ASK UNCOVERED. `gm[_A-Z]` under /i matches the LETTERS "gme"
+    // inside ordinary words — judgment, augment, fragment, segment — because /i makes [A-Z] match lowercase
+    // too. ⚠️ `judgment` is a real field in tradition_profiles.json, which the Library SERVES, so a
+    // tradition's judgment never reached a reader.
+    check("LIB: ⛑ …and an ordinary word containing 'gm' is NOT stripped — judgment, augment, fragment",
+      !["judgment", "augmentedCeiling", "pigment", "judgmental"].some(stripped));   // ⚠ NOT `segments`/`fragments`: those are GM material and are hidden BY NAME now, deliberately
+    check("LIB: …while the real GM keys still are — the split did not open a leak",
+      ["gmHint", "gm_hint", "gmGuidance", "gmMandate", "hiddenTruth", "hooks"].every(stripped));
+    // ⛑ AND THE FIX IS IN app.js, not only in this test's copy of the rule.
+    check("LIB: the app's own matcher is the split one — the gm branch is case-SENSITIVE",
+      /const LIB_SECRET_GM = /.test(appLib) && /libSkipKey\(k\) \{ return LIB_SKIP\.test\(k\) \|\| LIB_SECRET_GM/.test(appLib));
+  }
+
   // §2: a GM override wins over the computed depth (computed-with-GM-override, ROUND 2 Q1 recommendation).
   const forced = enterDeathState({ status: "active" }, { diedDay: 100, depthOverride: 3 });
   check("209 §2: a GM depthOverride wins over the clock (sealed by fiat)", deathDepth(forced, 101) === 3 && isSealed(forced, 101));

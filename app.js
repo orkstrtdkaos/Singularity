@@ -12612,19 +12612,34 @@ function libInline(escaped) {
 /** Minimal markdown → HTML for the .md lore (headings, lists, paragraphs, inline emphasis). */
 function libMdToHtml(md) {
   const lines = String(md || "").split(/\r?\n/);
-  let html = "", inList = false;
+  let html = "", inList = false, inTable = false, tableHeadDone = false;
   const closeList = () => { if (inList) { html += "</ul>"; inList = false; } };
+  const closeTable = () => { if (inTable) { html += tableHeadDone ? "</tbody></table>" : "</tr></thead></table>"; inTable = false; tableHeadDone = false; } };
   const ln = s => libInline(esc(s));
   for (const raw of lines) {
     const line = raw.trimEnd();
-    if (/^#{3,}\s/.test(line)) { closeList(); html += `<h4 class="lore-h">${ln(line.replace(/^#+\s/, ""))}</h4>`; }
-    else if (/^##\s/.test(line)) { closeList(); html += `<h3 class="lore-h">${ln(line.replace(/^#+\s/, ""))}</h3>`; }
-    else if (/^#\s/.test(line)) { closeList(); html += `<h2 class="lore-h">${ln(line.replace(/^#+\s/, ""))}</h2>`; }
-    else if (/^[-*]\s/.test(line)) { if (!inList) { html += "<ul class='lore-list'>"; inList = true; } html += `<li>${ln(line.replace(/^[-*]\s/, ""))}</li>`; }
-    else if (!line.trim()) { closeList(); }
-    else { closeList(); html += `<p class="lore-p">${ln(line)}</p>`; }
+    if (/^#{3,}\s/.test(line)) { closeList(); closeTable(); html += `<h4 class="lore-h">${ln(line.replace(/^#+\s/, ""))}</h4>`; }
+    else if (/^##\s/.test(line)) { closeList(); closeTable(); html += `<h3 class="lore-h">${ln(line.replace(/^#+\s/, ""))}</h3>`; }
+    else if (/^#\s/.test(line)) { closeList(); closeTable(); html += `<h2 class="lore-h">${ln(line.replace(/^#+\s/, ""))}</h2>`; }
+    else if (/^\s*\|.*\|\s*$/.test(line)) {
+      // SNG-061 (2026-09-08): TABLES. EXESA.md and VOCATIONS.md are table-heavy and the reader rendered
+      // every row as a paragraph of raw pipes. A separator row (|---|---|) closes the header.
+      closeList();
+      if (/^\s*\|[\s:|-]+\|\s*$/.test(line)) { if (inTable && !tableHeadDone) { html += "</tr></thead><tbody>"; tableHeadDone = true; } continue; }
+      const cells = line.trim().replace(/^\||\|$/g, "").split("|").map(c => ln(c.trim()));
+      if (!inTable) { html += "<table class='lore-table'><thead><tr>"; inTable = true; tableHeadDone = false; }
+      else if (!tableHeadDone) { html += "</tr><tr>"; }
+      else { html += "<tr>"; }
+      const tag = tableHeadDone ? "td" : "th";
+      html += cells.map(c => `<${tag}>${c}</${tag}>`).join("");
+      if (tableHeadDone) html += "</tr>";
+      continue;
+    }
+    else if (/^[-*]\s/.test(line)) { closeTable(); if (!inList) { html += "<ul class='lore-list'>"; inList = true; } html += `<li>${ln(line.replace(/^[-*]\s/, ""))}</li>`; }
+    else if (!line.trim()) { closeList(); closeTable(); }
+    else { closeList(); closeTable(); html += `<p class="lore-p">${ln(line)}</p>`; }
   }
-  closeList();
+  closeList(); closeTable();
   return html;
 }
 

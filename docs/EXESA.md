@@ -163,175 +163,168 @@ Untended, **the argument resumes with the world still standing in the middle of 
 
 ## VI · WHO IS OUT THERE
 
-Ninety-eight great figures on the roster and fourteen legendaries with sheets of their own, and **most of them have never heard of you.** They are
-doing their own work. `figureCareer` counts their deeds whether you are in the room or not, and the ones you
-meet twice will not be the same both times.
+**Most of them have never heard of you.** They are doing their own work — and the world counts what they do
+whether or not you are in the room. The trickster you brushed past in a market may be a gang leader when you
+meet again, and nobody arranged that.
 
-### The ones who hold something open
+**There are five arguments running through Exesa, and almost everyone worth knowing is on one side of one of
+them.** Not politics. Arguments about what the world should be, held by people with the reach to make their
+answer stick.
 
-**NETH, WHO HAS BURIED MORE THAN SHE HAS KNOWN** — the deep teacher of the Ashwarden craft. *She comes to
-deaths no one sent for and has never once looked away.* She taught the Cut Thread to almost nobody.
+---
 
-**THE DEEP LANTERN, WHO WALKS WHERE LIGHT WON'T** — she sees without light, and **the dark is not her enemy,
-it is her country.** She stands against both ends of her own axis: the man who burned the dark out of a
-whole Reach, and the thing that would put out every light. **She holds no side, which is why either extreme
-starves against her.**
+### The argument about what is waking
 
-**THE ONE WHO STAYED EMBODIED** — reached the edge of leaving the flesh and chose the flesh. Quietly the
-most important person in the world to one particular enemy.
+Something under the ground is stirring, and the question is whether to help it.
 
-**RETHE, WHO IS BECOMING THE ENGINE** — an enginewright replacing himself part by considered part, and
-**still asking to be talked out of it.** That asking is the whole of him.
+**MORVANE OF THE HARVEST HAND** and **HARROW, WHO MAKES PEOPLE INTO MECHANISMS** want it awake and are
+working toward it. **THE CHOIRMASTER WHO WOULD NOT RETURN** has already dissolved far enough into the
+practice that he cannot come back, and calls what is coming a homecoming.
 
-**THE TWO WHO ARE ONE** — a love that became a craft, teaching that **sustained attention is its own great
-work.** The least dramatic figure on any roster and possibly the most opposed to what is coming.
+Against them: **NETH, WHO HAS BURIED MORE THAN SHE HAS KNOWN**, the deep teacher of the attending craft,
+who comes to deaths nobody sent for and has never once looked away. **LEDDA, THE LAST CHOIRMISTRESS**, who
+survived learning the Sunken Choir's full song and walked away from it, and now lives at the Choir keeping
+anyone else from making her mistakes. And **RETHE, WHO IS BECOMING THE ENGINE** — an enginewright replacing
+himself part by considered part, **and still asking to be talked out of it.** That asking is the whole of
+him.
 
-**MAREN OSSITIDE, WHO BURIED THE DROWNED YEAR** — she was there for the year the Harrow drowned and buried
-every one of them **by name, alone, over a season.**
+Thirteen named people, six pushing and seven holding, and **the Valley's poisoned water is the nearest and
+least of what they are arguing about.**
 
-### The ones who took it all the way
+### The argument about the poles
 
-**VALEN SUNWRACK** — burned the dark out of an entire Reach and called it dawn. *Nothing unseen, nowhere to
-rest, no mercy of the unlit.* He is closer to something than anyone should be.
+The world's dispositions are intensifying. Every extreme is getting more extreme, and the middle is getting
+harder to stand in.
 
-**HARROW, WHO MAKES PEOPLE INTO MECHANISMS.** **THE STILL LATTICE**, who would order the world into a closed
-proof — beautiful and airless. **THE UNBODIED**, who dissolved into pure thought and cannot understand why
-anyone would grieve the leaving. **THE HOLLOW KING OF THE WILD HALF**, who keeps every promise to the letter
-and none in spirit — *you leave richer and hollowed, and it is years before you find the seam.*
+**Thirty-two people are in this one — eleven pushing and twenty-one holding the middle**, which tells you
+something about how it is going.
 
-⚠️ **And there are things further down than that.** The Abyssal Choir has a rule about how far you go, and
-everyone breaks it once. What you find past the last honest hunger is **not hungrier. It is finished** — and
-it is courteous, and it is not interested. ⛔ **Nobody has proved they exist.**
+**VALEN SUNWRACK** burned the dark out of an entire Reach and called it dawn: nothing unseen, nowhere to
+rest, no mercy of the unlit. **THE STARLESS ONE** would put out every light in the world. **THE HOLLOW KING
+OF THE WILD HALF** rules a court out of the Churn and keeps every promise to the letter and none in spirit.
 
-### The ones in front of you
+And standing between them, refusing both: **THE DEEP LANTERN, WHO WALKS WHERE LIGHT WON'T.** She sees
+without light, and the dark is not her enemy — it is her country. **She holds no side, which is why either
+extreme starves against her.**
 
-⛔ **AND THEN THERE ARE THE PEOPLE WHERE YOU ARE — and who they are depends entirely on where you started.**
+### The argument in the wood
 
-Exesa has a hundred and thirty-five authored places across **thirty-eight regions**, and **most of the
-people you meet will be neither famous nor written down in advance.** Some are authored. Many are made by
-the world as you go, and the ones who matter get remembered, given a name, and kept.
+The Deepwood's Moot has been arguing for a very long time and one side is finally winning.
 
-⚠️ **THEY ARE ALSO NOT STATIC.** The world counts what people do whether or not you are in the room. **The
-trickster you brushed past in a market may be a gang leader when you meet again**, and nobody arranged that.
+**THE THORNMOTHER OF THE CLOSING WOOD** would seal the wood so nothing mortal could enter again, and she has
+thought carefully about whether sealing it kills it. **THE LAST WALKER OF THE SEALED WOOD** and **THE ONE
+WHO CALLED THE FIRST MOOT** are what stands against her, and they are losing slowly.
 
-**What you can expect, wherever you land, is the same kinds of people:**
+### The argument about what is real
 
-| | |
-|---|---|
-| ⚑ **someone who keeps the place running** | a store-keeper, a water-keeper, a ferryman. ⚠️ **They know what everyone owes and they never say** |
-| ⚑ **someone who teaches** | and the good ones test you before they offer |
-| ⚑ **someone who holds a threshold** | a warden, a toll-hand, unofficial law at a pass |
-| ⚑ **someone carrying an unfinished thing** | a work stopped deliberately, a debt unpaid, a question they were expelled for asking |
-| ⚑ **someone the town is wrong about** | in either direction |
+The Transition made fiction real once. As the substrate stirs, it may do it again — and some people are
+helping.
 
-⛔ **AND IN THE CHURN THERE ARE TWO COURTS, AND THEY ARE NOT ENEMIES BECAUSE ONE IS GOOD.**
+**CINDER VAEL, THE WRIGHT WHO WOULD NOT STOP** and **THE GATE THAT GAPES** are on the making side.
+**HALCYON, WHO BUILT ONE PERFECT THING** is not, and the difference between them is one decision made a long
+time ago.
 
-**The Hollow King rules out of the wild half, and nobody in his court lies.** They give you precisely what
-you asked for, at a price named aloud before you agree — **and you leave richer and hollowed, and it is
-years before you find the seam.**
+### The argument about the grammar
 
-⚑ **The Unbought Court is what stands against that, and it is not kinder.** Elves, dwarves, slower things
-and two dragons, living in the one place where nothing stays and refusing to dissolve into it. **They will
-not trade at all.** What they give they give freely; what they withhold cannot be bought. ⚠️ **There is no
-price, no term, and no lever** — you cannot purchase their help, and if they judge you unworthy of it,
-**there is nothing you can offer.**
+Block-logic is bleeding out of the Glitchlands into country that does not run on it. **THE GLAD
+DISSOLUTION** and **THE UNBOUND** think that is fine. **THE STILL LATTICE**, who would order the world into
+one closed and airless proof, does not — **and being right about the danger does not make it good company.**
 
-⛔ **AND NOT EVERY DRAGON IS A WOUND IN THE WORLD.** The Ashen Wyrm and the Bright Devourer are domains that
-resolved wrong and will not resolve back — hazards the size of a hill, with a broken directive and no
-grievance. ⚑ **A true dragon is a person**: older than the Transition, wearing whichever shape the
-conversation needs, and **the one who has been at your table did not lie about it. You simply did not
-ask.**
+---
 
-⛔ **One court will always deal with you. The other might simply decline.**
+### The two courts of the Churn
 
-⚠️ **THE PEOPLE ARE THE POINT AND THE MECHANICS ARE UNDERNEATH THEM.** A person who fights beside you fights
-from their own sheet, with their own crafts, and the absences in that sheet are as authored as the
-presences. ⛔ **What someone will NOT do is usually the most useful thing to know about them.**
+In the wildest place in the world, where nothing keeps its shape, there are two courts and **they are not
+enemies because one of them is good.**
+
+**The Hollow King's court does not lie.** Every member gives you precisely what you asked for, at a price
+named aloud before you agree. **The Bright Bargain** is delighted to see you and tells you the cost first,
+every time, and it is always fair. **The Keeper of Small Debts** is very sorry to bring this up, but you
+accepted a kindness eleven years ago and she has the date. **You leave richer and hollowed, and it is years
+before you find the seam.**
+
+**The Unbought Court is what stands against that, and it is not kinder.** Elves, dwarves, slower things and
+two dragons, living in the one place where nothing stays and refusing to dissolve into it. **AELITH OF THE
+FIRST SHAPE** remembers what everything was before. **URD STONEFAST** has been building the same hall for
+two hundred years and rebuilds it every time the Churn takes it, cheerfully. **THE SLOW GREEN** is a wood
+that grows where nothing is allowed to finish growing.
+
+**They will not trade at all.** What they give they give freely; what they withhold cannot be bought. There
+is no price, no term, and no lever — **and if they judge you unworthy, there is nothing you can offer.**
+
+**One court will always deal with you. The other might simply decline.**
+
+### And not every dragon is a wound in the world
+
+The Ashen Wyrm and the Bright Devourer are domains that resolved wrong and will not resolve back — hazards
+the size of a hill, with a broken directive and no grievance.
+
+**A true dragon is a person.** Older than the Transition, wearing whichever shape the conversation needs.
+**YSENKAR** has been at your table and did not lie about it — you simply did not ask. **TOLVESS** is three
+hundred years old, which the court considers impulsive, and mostly wants to be useful to Urd's building.
 
 ---
 
 ### The ones who are very good at ending things
 
-⛔ **AND SOME PEOPLE'S ANSWER TO A PROBLEM IS THE EDGE OF SOMETHING.** ⚠️ **This is not a failure of
-imagination on their part. It is a trade, it is taught, and the people at the top of it are as precise as
-any scholar.**
+Some people's answer to a problem is the edge of something, and they are as precise about it as any scholar.
 
-**VEYRA OF THE LEVELLED LANCE** rides the Redline duelling circuit. **Twenty-two challenges, twenty-two
-stops, and she has never fought the same person twice.** She names the terms before the first pass and does
-not renegotiate — ⚑ **argue the terms and the duel is already over.** ⚠️ **What she is afraid of is killing
-one**, because twenty-two stops is a record and a record is a thing that ends.
+**VEYRA OF THE LEVELLED LANCE** rides the Redline duelling circuit: twenty-two challenges, twenty-two
+stops, never the same person twice. She names the terms before the first pass and does not renegotiate.
+**What she is afraid of is killing one.**
 
-**SESH OF THE QUIET BLOW** is a psionicist of the Cogitarium's hard school, and she ends fights with a
-thought. ⛑ **She does not read the body; she reads the DECISION** — the exact moment a fighter commits.
-⛔ **What frightens her is not a weapon.** It is that she has met people with nothing under the reading at
-all, **and she has not told the Cogitarium, because she does not know what they would do about it.**
+**SESH OF THE QUIET BLOW** ends fights with a thought. She does not read the body, she reads the decision —
+the exact moment a fighter commits. What frightens her is that she has met people with **nothing underneath
+the reading at all.**
 
-**MARN OF TWO FORMS** is sent by the Flesh-Temples where a fight must be stopped by one person. ⚑ **He bows
-before and after, to everyone, including things that cannot bow back.** ⚠️ **The first form ends fights
-without ending people. He has used the second four times and remembers all four** — and one of the four is
-still alive and looking for him.
+**MARN OF TWO FORMS** is sent by the Flesh-Temples where a fight must be stopped by one person. He bows
+before and after, to everyone, including things that cannot bow back. The first form ends fights without
+ending people. **He has used the second four times and remembers all four** — and one of the four is still
+alive and looking for him.
 
-**CASSA REDSAIL** takes ships nobody insures and is very hard to be angry at. ⛑ **She is laughing before you
-are and she is not where you last looked.** ⚠️ **She wants one take big enough to stop, and she has said
-that four times.** ⛔ Her fear is not being caught. It is being ordinary.
+**CASSA REDSAIL** takes ships nobody insures and is very hard to be angry at. She is laughing before you are
+and she is not where you last looked. She wants one take big enough to stop, **and she has said that four
+times.**
 
-### And two who are followed
+### The ones who are followed
 
-⚠️ **THERE IS A NINTH KIND OF PERSON EXESA HAS NO WORD FOR** — one whose work is other people acting on
-their word. ⛑ **Nobody teaches it. Both of these learned it the same way: by being followed and then having
-to be worth it.**
-
-**ORRUN SHIELDBREAKER** captains one ship out of the Longshore reach. ⛔ **Nine seasons, and the crew has
-voted him back every one of them** — his authority is re-sworn each season or it is not. ⚑ **He asks what
-your people get out of a thing before he asks what you want**, and answering that badly ends the
-conversation politely. ⚠️ **He has come back with fewer twice, and he can name them. The second time was not
-the sea, and he has never said what it was.**
+**ORRUN SHIELDBREAKER** captains one ship out of the Longshore reach. Nine seasons, and **the crew has voted
+him back every one of them** — his authority is re-sworn each season or it is not. He asks what your people
+get out of a thing before he asks what you want. He has come back with fewer twice, and he can name them.
 
 **IESULT OF THE KEPT WORD** is a knight-champion out of Hardline, and the forty who ride with her **swore to
-her, not to a lord.** ⛑ **She repeats your promise back to you in your own words before she agrees — and if
-you flinch at hearing it, she has her answer.** ⚑ **She stands when anyone enters a room: a servant, a
-child, an enemy**, and does not appear to decide to. ⚠️ **She wants her forty home every time, and she
-ordered something once that she should not have. One of them knows and has never said.**
+her, not to a lord.** She repeats your promise back in your own words before she agrees, and if you flinch
+at hearing it she has her answer. She stands when anyone enters a room — a servant, a child, an enemy — and
+does not appear to decide to.
 
-### And the roads are why anyone is rich
+### The ones who keep a place
 
-**The same eight units of raw material fetch 32 in the valley and 115 at the Gearlands Verge.** ⚑ **The
-difference is real, and it is the reason anyone leaves home with a cart.**
+Others hold ground rather than a cause. **CALVAR** keeps the filtration works running at Stillwater's
+Trouble. **SILAS'S MOTHER** keeps a cairn-line house on the Palelands road, and a stopped work she has not
+touched in years. **PELL** runs the forge at Millbrook and fights beside the people she feeds. **BREN
+THALLE** is two dry seasons behind with two children in the back house and asks the actual question rather
+than the polite one.
 
-⛔ **But the valley to the Verge is two hundred and thirty-six days on foot, through country that is
-dangerous the whole way** — and a road is only as safe as its ugliest mile. ⚠️ **A greenhorn walking it
-arrives with a tenth of what he set out with, and loses the people he brought nine times in ten.**
+**These are the people whose holdings you will actually visit** — a forge, a waystation, a filtration
+works, a hall with a garrison — and whose problems are the size of a life rather than the size of the
+world.
 
-⚑ **Through a waygate it is four days, and everything arrives.**
+### The ones in front of you
 
-➡️ ⛔ **SO TRADE IS NOT GATED BEHIND MONEY. IT IS GATED BEHIND WAYFARING.** ⚠️ **A Reach with a gate is rich
-and one without is poor, and that is not policy — it is distance.** ⚑ **It is why the Horizon-Walkers matter
-out of all proportion to their numbers, why the Precursor gates are the most valuable inheritance in the
-world, and why a road that stays open is worth defending by people who will never trade on it.**
+**Most of the people you meet will be neither famous nor written down in advance.** Some are authored; many
+the world makes as you go, and the ones who matter get remembered, given a name, and kept.
 
----
+Wherever you land, expect the same kinds of people:
 
-### And the eight ways of being useful
+| | |
+|---|---|
+| **someone who keeps the place running** | a store-keeper, a water-keeper, a ferryman. They know what everyone owes and they never say |
+| **someone who teaches** | and the good ones test you before they offer |
+| **someone who holds a threshold** | a warden, a toll-hand, unofficial law at a pass |
+| **someone carrying an unfinished thing** | a work stopped deliberately, a debt unpaid, a question they were expelled for asking |
+| **someone the town is wrong about** | in either direction |
 
-⛑ **A tradition is what a person KNOWS. It is not what they are FOR** — and Exesa sorts people the second
-way without ever having agreed to.
-
-**There are those who KEEP** — a death attended, a wood held, a hearth that does not go out, a peace that
-survives the week. **Those who MAKE**, in stone or light or mechanism or living tissue. **Those who READ**,
-and act once because they already know. **Those who are the EDGE**, and are why a fight was short. **Those
-who BROKER**, and end a thing on terms nobody had to bleed for. **Those who WALK**, and are simply not
-where the blow went. **Those who ATTEND**, and stay with what cannot be fixed. ⛔ **And those who END
-things** — which is a different trade from ending fights, and the Unmakers will tell you so at length.
-
-⚠️ **Nobody in Exesa thinks these are equal, and everybody's ranking is different.** A Marcher will tell you
-the Edge is the only honest one. An Ashwarden has buried enough Marchers to disagree. ⚑ **The Great
-Coliseum settles it the only way it can be settled: eight cells, eight champions, and the winner of each is
-the one who fought their own way best.**
-
-⛔ **AND THERE IS A NINTH THAT EXESA HAS NO WORD FOR.** ⚠️ **A person whose work is other people acting on
-their word — a captain, a lord, someone a band forms around.** ⛑ **Everyone knows one. The traditions teach
-nothing about it, the Coliseum has no cell for it, and the crafts to do it well simply do not exist.**
-⚠️ **Whether that is a gap in the world or a gap in what the world has bothered to teach is not settled.**
+**And what someone will not do is usually the most useful thing to know about them.**
 
 ---
 

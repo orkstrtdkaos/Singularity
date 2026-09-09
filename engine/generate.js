@@ -23,6 +23,7 @@ import { affiliationOf, regionHomeTradition } from "./affiliation.js";   // SNG-
 import { validate, missingRequired, defaultFor } from "./genschema.js";
 import { isLegalEmergent } from "./braids.js";   // SNG-197 §4: the ONE emergent-verb gate (no second impl to drift)
 import { checkBorn, describeBorn } from "./borncontract.js";  // SNG-250 §4: the ONE born-whole gate (the same fn content_ci runs over authored content)
+import { drawTier, evidenceFor } from "./npcsheet.js";   // ⛔ SPEC §2.1/§2.2 — rarity + evidence at the mint
 
 // SNG-250 §4 (CCODE-55): `creature` joins npc/location/arc. It is the type §6e calls out as the one
 // generatable-ish thing that was frozen, and §3's bar for it is the strictest — "a whole monster is
@@ -451,6 +452,36 @@ export async function generate(type, context = {}, deps = {}) {
   // SNG-177: an NPC arrives affiliated. Without this the standing system cannot see the people a
   // player actually spends their time with — every bond in play is with a generated NPC.
   if (type === "npc") Object.assign(entity, affiliationFor(entity, context, context.traditionIndex || null));
+  // ⛔ SPEC_generation_reaches_every_tier §2.1 + §2.2 — THE RARITY DRAW, HERE BECAUSE THIS IS THE ONE PLACE
+  // A PERSON IS MINTED. Everything before this commit was a mechanism with no consumer, which is the
+  // shape this project keeps catching: authored → registered → loaded → READ, and the fourth door is
+  // the one that hides.
+  //
+  // ⚠️ `!entity.tier` FIRST: a model that stated a tier keeps it. "An authored tier always wins" is the
+  // spec's §3, and a draw that overrode one would be the engine arguing with content.
+  // ⛑ AND NO CODE DEFAULT: without `context.npcStanding` nothing is drawn and the record resolves
+  // exactly as it always did (tierFromRole → tierFloor). A dial that does not reach must leave the
+  // engine visibly unchanged rather than quietly inventing a shape.
+  if (type === "npc" && !entity.tier && context.npcStanding) {
+    try {
+      const cfgT = context.npcStanding;
+      // ⚠️ THE CENSUS IS BOTH POPULATIONS (§4 Q2: "the player experiences one world and does not know
+      // which is which"), and it is SAVE STATE — `known` already carries exactly these two maps.
+      const census = {};
+      for (const src of [context.known?.authored, context.known?.generated]) {
+        for (const r of Object.values(src || {})) if (r?.tier) census[r.tier] = (census[r.tier] || 0) + 1;
+      }
+      const ev = evidenceFor(entity, { hingeIds: context.hingeIds || null, locations: context.locations || null, cfg: cfgT });
+      const drawn = drawTier(census, { cfg: cfgT, evidence: ev });
+      if (drawn) {
+        entity.tier = drawn;
+        entity.tierSource = "drawn";
+        // ⚑ THE RECEIPT, because a rung nobody can argue with is a rung nobody trusts — the same reason
+        // `tierDerived` rides on the sheet and the roster marks a guess with `~`.
+        if (entity._gen) entity._gen.tierDraw = { tier: drawn, evidence: ev.sources.map(s => s.from), of: Object.values(census).reduce((a, b) => a + b, 0) };
+      }
+    } catch (err) { if (typeof console !== "undefined") console.warn("[generate] tier draw skipped:", err?.message); }
+  }
   // SNG-166 §1: a generated PLACE gets an address derived from what it is, not from where the player
   // happened to be standing. 6 of 6 in Erik's save were stamped "valley", the Crossing included.
   if (type === "location") Object.assign(entity, resolveRegionFor(entity, context, context.traditionIndex || null, context.validRegions || null));

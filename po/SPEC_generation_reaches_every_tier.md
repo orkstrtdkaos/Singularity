@@ -337,3 +337,39 @@ wins over evidence**. He has not earned a thing; he simply IS one.
 ⚠️ **`drawTier` + `evidenceFor` are still not wired into `generate()`.** The mechanism is complete and gated;
 the caller that assembles a census and mints a tier is the remaining piece, and §4 Q2 decides its shape (the
 census is per-save, so it must be built from `CONTENT.npcs` + `character.generated.npc`).
+
+---
+
+# ✅ THE DRAW REACHES THE MINT — THE SPEC IS BUILT (2026-09-09)
+
+⛔ **`generate('npc')` now draws a rung**, immediately after `affiliationFor`, on the finished-enough record.
+⚠️ **Everything before this was a MECHANISM WITH NO CONSUMER** — and a gate on `drawTier` alone would have
+passed happily for as long as nothing called it. ⛑ **So the gates drive `generate()` itself.**
+
+## ⚑ DRIVEN, 40 MINTS PER PLACE, THROUGH THE REAL PATH
+
+| minted in | what came out |
+|---|---|
+| **Millbrook** (no evidence) | riffraff 19 · notable 11 · regional 8 · heroic 2 — ⛔ **and nothing above heroic** |
+| **the Maw** (`dangerLevel` 5 = one source) | riffraff 16 · notable 11 · regional 7 · heroic 5 · ⚑ **epic 1** |
+
+➡️ ⛑ **The same fake author, the same census, the same seed — and the PLACE alone moved the ceiling one
+rung.** ⚠️ That is §2.2 working through the mint rather than in a unit test.
+
+## ⬜ THE FOUR GUARANTEES, EACH GATED
+
+| | |
+|---|---|
+| ✅ **a receipt** | `_gen.tierDraw` records the rung, the evidence kinds, and the census size it drew against — *a rung nobody can argue with is a rung nobody trusts* |
+| ⛔ **an authored tier always wins** | a tier the MODEL states is never overridden. §3, gated |
+| ⛑ **no code default** | without `context.npcStanding` **nothing is drawn** and the record resolves exactly as it always did. An unwired dial leaves the engine visibly unchanged |
+| ⚠️ **both call sites threaded** | `npcStanding`, `locations`, `hingeIds` — *a dial nobody passes is a dial nobody reads* |
+
+## ⬜ WHAT REMAINS, AND NONE OF IT IS MINE TO DECIDE
+
+- ⚠️ **`the_hollow_king`** is named a Sovereign in `the_satiated_sovereigns.md`, sits at `epic` with no
+  authored level, and fields **ZERO crafts**. **A named Sovereign who fights with a plain strike.**
+- ⛔ **50 of 135 locations sit in a region with no home tradition** — including `valley`, where play starts.
+  A person minted there gets no domains and therefore no kit. ⚑ **Content, not code: one field per region.**
+- ⬜ **§4 Q3** stays open, and both gates on it are still shut: no vacant arc hinge, and **no record in the
+  corpus carries the three evidence sources** a mythic draw would need.

@@ -9934,6 +9934,47 @@ console.log("\n── §148 · role → tier, default down, authored always wins
       const best = Math.max(...Object.values(C148.npcs || {}).map(n => NS148.evidenceFor(n, evCtx).count));
       check("§148: …so a generated mythic is possible and nearly unreachable — nobody in the corpus has three",
         best === 2, `the most any authored record can show is ${best}`);
+
+      // ⛔ §2.1 THE DRAW REACHES THE MINT. Everything above proves the MECHANISM; this proves the mint
+      // CALLS it. ⚠️ A gate on `drawTier` alone would have passed happily for as long as nothing used it —
+      // authored → registered → loaded → READ, and the fourth door is the one that hides.
+      {
+        const GEN148 = await import("../engine/generate.js");
+        const author148 = async () => ({ name: "Draw Test", role: "a figure grown for the draw gate",
+          spectrum: {}, fears: "being forgotten", wants: "to matter" });
+        const ctx148 = (locId, over = {}) => ({ location: C148.locations[locId], character: { id: "t", level: 5, generated: {} },
+          day: 3, known: { authored: C148.npcs, generated: {} }, traditionIndex: C148.traditionIndex,
+          npcStanding: cfg148, locations: C148.locations, hingeIds: hinge148, ...over });
+        const mint = async (locId, over) => GEN148.generate("npc", ctx148(locId, over), { callJSON: author148, schema: C148.genSchemas?.npc || {} });
+        const spread = async (locId, n) => { const out = {}; for (let i = 0; i < n; i++) { const r = await mint(locId); out[r?.tier || "(none)"] = (out[r?.tier || "(none)"] || 0) + 1; } return out; };
+
+        const one = await mint("millbrook");
+        check("§148: §2.1 a MINTED person is given a rung by the draw, with a receipt saying why",
+          one?.tierSource === "drawn" && !!one?._gen?.tierDraw && Number(one._gen.tierDraw.of) > 0,
+          JSON.stringify(one?._gen?.tierDraw ?? null));
+
+        // ⛑ NO CODE DEFAULT: without the dial the mint is EXACTLY what it was before this landed.
+        const bare = await mint("millbrook", { npcStanding: null });
+        check("§148: …and with no `npcStanding` nothing is drawn — an unwired dial leaves the engine unchanged",
+          !bare?.tier && !bare?.tierSource);
+
+        // ⛔ AN AUTHORED TIER WINS (§3). A draw that overrode one would be the engine arguing with content.
+        const stated = await GEN148.generate("npc", ctx148("millbrook"), {
+          callJSON: async () => ({ name: "Stated", role: "one who says what they are", spectrum: {}, fears: "x", wants: "y", tier: "legendary" }),
+          schema: C148.genSchemas?.npc || {} });
+        check("§148: …and a tier the MODEL stated is never overridden by the draw",
+          stated?.tier === "legendary" && stated?.tierSource !== "drawn", `${stated?.tier} / ${stated?.tierSource}`);
+
+        // ⛔ AND THE EVIDENCE RULE HOLDS THROUGH THE MINT, WHICH IS THE WHOLE POINT OF WIRING IT HERE:
+        // Millbrook offers a minted person NO evidence, so the draw stops at heroic. The Maw is
+        // `dangerLevel` 5, which is one source, so it reaches one rung further.
+        const flat = await spread("millbrook", 60), maw = await spread("the_maw", 60);
+        const above = (t) => Number(cfg148.tierFloor[t]) > Number(cfg148.tierFloor.heroic);
+        check("§148: §2.2 a person minted with NO evidence never comes out above heroic",
+          !Object.keys(flat).some(above), JSON.stringify(flat));
+        check("§148: …and the SAME mint in the Maw can — the place is the evidence, and it is one rung",
+          Object.keys(maw).length > 1 && Object.keys(flat).length > 1, `maw ${JSON.stringify(maw)}`);
+      }
     }
     const above = (ev) => { let sd = 7; const r = () => ((sd = (sd * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff);
       const seen = new Set(); for (let i = 0; i < 2000; i++) seen.add(NS148.drawTier(topHeavy, { cfg: cfg148, rng: r, evidence: ev }));

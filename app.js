@@ -128,7 +128,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.430";
+const APP_VERSION = "1.9.431";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2013,7 +2013,9 @@ async function seedGrownEntity() {
   const fake = () => async () => ({ name: "Test Grown Warden", role: "a figure grown for the Keep test", spectrum: loc.spectrum || {}, fears: "being forgotten", wants: "to matter", homeLocation: loc.id });
   const rec = await generate("npc", {
     character, location: loc, day: readClock(character.clock).day, rating: ratingCeilingNow(),
-    known: { authored: CONTENT.npcs, generated: character.generated?.npc || {} }, genBudget: 5
+    known: { authored: CONTENT.npcs, generated: character.generated?.npc || {} }, genBudget: 5,
+    npcStanding: CONTENT.rules?.npcStanding || null, locations: CONTENT.locations || null,
+    hingeIds: new Set(Object.values(CONTENT.greaterArcs?.arcs || CONTENT.greaterArcs || {}).flatMap(a => a?.hingeNpcs || []))
   }, { callJSON: fake(), schema: CONTENT.genSchemas?.npc || {}, applyCodexUpdates, codexCtx: { locationId: loc.id }, ...genContractDeps() });
   if (rec?._gen) {
     recordAttention(rec, "keep", readClock(character.clock).day); // → established, so it's clearly grown
@@ -4036,6 +4038,13 @@ async function handleGenerateRequests(turn) {
       known: { authored, generated: character.generated?.[type] || {} },
       examples: pickExamples(type, location), substrate: CONTENT.substrate, genBudget: budget,
       traditionIndex: CONTENT.traditionIndex,  // SNG-177: a generated NPC arrives with a people + domains
+      // ⛔ SPEC_generation_reaches_every_tier — what the rarity draw needs, threaded because a dial nobody
+      // passes is a dial nobody reads. `npcStanding` carries tierFloor + tierRarity; `locations` and
+      // `hingeIds` are the two evidence sources a person can have AT BIRTH (the place they are minted in,
+      // and an arc that already names them). Renown and deeds are earned later, never born with.
+      npcStanding: CONTENT.rules?.npcStanding || null,
+      locations: CONTENT.locations || null,
+      hingeIds: new Set(Object.values(CONTENT.greaterArcs?.arcs || CONTENT.greaterArcs || {}).flatMap(a => a?.hingeNpcs || [])),
       // SNG-166 §3: he keeps meeting Mara. Across 10 characters on this device, 5 given names
       // recur and Mara appears in FOUR saves — invisible to any per-character check.
       avoidNames: namesToAvoid(allCharactersOnDevice(), 24),

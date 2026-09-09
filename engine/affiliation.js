@@ -88,14 +88,22 @@ export function affiliationOf(record, opts = {}) {
 }
 
 /** The home tradition of a region, for the domain fallback — the same map generate.js used. Pure. */
-export function regionHomeTradition(regionId, traditionIndex, regions = null) {
+export function regionHomeTradition(regionId, traditionIndex, regions = null, homeMap = null) {
   if (!regionId) return null;
+  // ⛔ THE AUTHORED MAP. Aevi wrote all seventeen into `the_substrate.json` (→
+  // `CONTENT.substrateModel.regionHomeTradition`) with a paragraph of reasoning per region, and nothing
+  // read it: I had built a `homeTradition` field on the region a day after she had already put the
+  // answer somewhere better, and my field had no content in it. ⚠️ `valley → mason` is in there, which
+  // she notes is "0° away" against the 45.7° I measured the valley reaching for want of a home.
+  const mapped = homeMap && typeof homeMap === "object" ? homeMap[regionId] : null;
   // ⛑ THE REGION'S OWN FIELD WINS, and it is read FIRST because the old map cannot express what Aevi
   // needs: `traditions[].region` names ONE region per tradition, so twelve foothills cannot each claim
   // one. A region naming its home tradition is many-to-one and additive. ⚠️ Absent, everything below
   // answers exactly as it did before, so nothing that worked stops working.
+  const known = (t) => !!t && (!traditionIndex?.byId || !!traditionIndex.byId[t]);
   const own = regionRecord(regions, regionId)?.homeTradition;
-  if (own && (!traditionIndex?.byId || traditionIndex.byId[own])) return own;
+  if (known(own)) return own;              // a region naming its own — the field, for future authoring
+  if (known(mapped)) return mapped;        // ⛑ the authored map — where the seventeen actually live
   if (!traditionIndex?.byId) return null;
   const t = Object.values(traditionIndex.byId).find(x => x?.region === regionId);
   return t?.traditionId || null;
@@ -137,13 +145,18 @@ export function degreesBetween(a, b) {
  *  away. ⛔ NO CODE DEFAULT for the cap: absent, nothing is borrowed at all.
  *
  *  Returns { tradition, viaLocationId, degrees } or null. PURE. */
-export function nearestHomeTradition(fromWorldPos, { locations = null, traditionIndex = null, regions = null, withinDeg = null } = {}) {
+export function nearestHomeTradition(fromWorldPos, { locations = null, traditionIndex = null, regions = null, homeMap = null, withinDeg = null } = {}) {
+  // ⛔ ABSENT MEANS ABSENT, AND `Number(null)` IS 0 — NOT NaN. Written as `Number.isFinite(Number(withinDeg))`
+  // this read "no dial" as "a cap of zero degrees", which still borrows from anything standing on the
+  // exact same spot. ⚠️ The gate caught it: a synthetic region placed on Millbrook's own coordinates
+  // borrowed `mason` at 0° with no cap threaded at all. A no-code-default rule defeated by a coercion.
+  if (withinDeg == null || withinDeg === "") return null;
   const cap = Number(withinDeg);
   if (!fromWorldPos || !locations || !Number.isFinite(cap)) return null;
   let best = null;
   for (const loc of (Array.isArray(locations) ? locations : Object.values(locations))) {
     if (!loc?.worldPos) continue;
-    const home = regionHomeTradition(loc.regionId || loc.region || null, traditionIndex, regions);
+    const home = regionHomeTradition(loc.regionId || loc.region || null, traditionIndex, regions, homeMap);
     if (!home) continue;
     const d = degreesBetween(fromWorldPos, loc.worldPos);
     if (d == null || d > cap) continue;

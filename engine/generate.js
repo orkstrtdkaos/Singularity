@@ -720,7 +720,8 @@ export function nominationsFor(character) {
 export function affiliationFor(entity, context = {}, traditionIndex = null) {
   const loc = context.location || {};
   const regions = context.regions || null;
-  const regionHome = regionHomeTradition(loc.regionId || loc.region || context.regionId || null, traditionIndex, regions);
+  const homeMap = context.regionHomeMap || null;
+  const regionHome = regionHomeTradition(loc.regionId || loc.region || context.regionId || null, traditionIndex, regions, homeMap);
   const base = affiliationOf(entity, { traditionIndex, peopleVocab: context.peopleVocab || null, regionHome });
   // ⛔ ERIK 2026-09-09 — THE DISTANCE RUNG, AND IT SITS BELOW EVERY RUNG THAT ALREADY ANSWERS. `readDomains`
   // tries model-authored, then the ROLE string, then `skillsObserved`, then the region's own home; only
@@ -730,7 +731,7 @@ export function affiliationFor(entity, context = {}, traditionIndex = null) {
   // is those four rungs; this is what happens when the story gave none.
   if (base.domains) return base;
   const near = nearestHomeTradition(loc.worldPos, {
-    locations: context.locations || null, traditionIndex, regions,
+    locations: context.locations || null, traditionIndex, regions, homeMap,
     withinDeg: context.nearestTraditionWithinDeg ?? null });
   if (!near) return base;
   // ⛑ MARKED `nearest`, WEAKER THAN `derived`, because it IS weaker: a borrowed craft says "the closest

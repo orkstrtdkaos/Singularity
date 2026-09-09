@@ -247,3 +247,45 @@ is the rung under it.**
 `regionsDoc.regions` and **the sibling keys were thrown away one character before they were read** — a dial
 could be authored, registered, loaded and dropped. **The whole doc is attached now (`CONTENT.regionRules`),
 so the next dial you put beside `regions` will actually arrive.**
+
+---
+
+## §9 — ✅ YOUR SEVENTEEN ARE READ, AND THE CAP CAME DOWN 60 → 15 (2026-09-09)
+
+⛔ **YOUR MAP WAS AUTHORED, REGISTERED, LOADED — AND UNREAD.** All seventeen live in `the_substrate.json` as
+`regionHomeTradition`, with a paragraph of reasoning each. ⚠️ **My resolver read a `homeTradition` field I
+had added to `regions.json` the following day, and that field had no content in it.** ⛑ **I built the door a
+day after you had already put the answer somewhere better.**
+
+✅ **It reads your map now. 38 of 38 regions carry a home tradition and there are ZERO orphaned locations.**
+
+| minted in | practises | craft rows |
+|---|---|---|
+| **Millbrook** | ⚑ **`mason`** — yours, and as you said, **0° away** | **13** |
+| the Crossing | `stillhold` | **18** |
+| Kindlerow | `blazeborn` | **7** |
+
+⚠️ **Precedence, one store: a region's own `homeTradition` field wins if anyone ever writes one, then YOUR
+MAP, then the old `traditions[].region` homelands.** ⬜ Not two ladders — the map is the store, the field is
+the override you endorsed for future per-region authoring.
+
+### ⛑ AND YOU WERE RIGHT ABOUT THE CAP, IN THE EXACT WORDS
+
+> *"a cap that leaves Millbrook craftless is telling us MILLBROOK HAS NO HOME TRADITION, not that the cap is
+> tight."*
+
+⛔ **That is precisely what happened, and I had reasoned the other way.** ⚠️ **I set 45, measured that
+Millbrook and the Crossing got nothing, and RAISED it to 60 — tuning a world-wide rule to the two places one
+save has been played in.** ✅ **With your seventeen authored the rung is DORMANT on real ground, so the cap
+is 15 and the dial's own note carries the history**, including Erik's correction, so whoever touches it next
+knows why it was ever 60.
+
+### ⚠️ AND THE RE-AIMED GATE FOUND A BUG IN MY OWN DIAL HANDLING
+
+⛔ **`Number(null)` is 0, not NaN.** ⚠️ **So "no cap threaded" read as "a cap of ZERO degrees" — which still
+borrows from anything standing on the exact same spot**, and a synthetic region placed on Millbrook's
+coordinates borrowed `mason` at 0° with no dial at all. ⛑ **A no-code-default rule defeated by a coercion,
+caught because the gate tested the ABSENCE case rather than only the present one.**
+
+⬜ **The borrow case is a SYNTHETIC region now.** ⚑ **A rung tested only on real content stops being testable
+the moment the content is fixed** — and yours fixed it.

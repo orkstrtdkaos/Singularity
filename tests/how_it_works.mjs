@@ -9977,39 +9977,53 @@ console.log("\n── §148 · role → tier, default down, authored always wins
         check("§148: …and the SAME mint in the Maw can — the place is the evidence, and it is one rung",
           Object.keys(maw).length > 1 && Object.keys(flat).length > 1, `maw ${JSON.stringify(maw)}`);
 
-        // ⛔ ERIK 2026-09-09 — THE DISTANCE RUNG. "the Valley is just a region — so npcs minted there would
-        // need to get their domains from the nearest foothills or poles (by distance) unless the story
-        // narratively gives them a hook." ⚠️ Driven through the MINT, and through `personOpponentFor`
-        // rather than `battleSkillsFor` — the latter does not pass `domainAccess`, so the domain draw is
-        // skipped and every kit reads as empty. That cost me a false zero an hour ago.
+        // ⛔ ERIK 2026-09-09 — THE DISTANCE RUNG. "npcs minted there would need to get their domains from
+        // the nearest foothills or poles (by distance) unless the story narratively gives them a hook."
+        // ⚠️ REWRITTEN AFTER AEVI AUTHORED ALL SEVENTEEN HOME TRADITIONS: 38 of 38 regions are homed and
+        // ZERO authored locations borrow any more, so the first version of this gate could no longer fail
+        // for the right reason. ⛑ A rung tested only on real content stops being testable the moment the
+        // content is fixed — the borrow case is a SYNTHETIC region now, which is what the rung is for.
         {
           const BT148 = await import("../engine/battle_turn.js");
+          const AFF148 = await import("../engine/affiliation.js");
+          const homeMap148 = C148.substrateModel?.regionHomeTradition || null;
           const cap148 = C148.regionRules?.nearestTraditionWithinDeg ?? null;
-          const nearCtx = (locId, cap) => ({ ...ctx148(locId), regions: C148.regions, nearestTraditionWithinDeg: cap });
-          const mintNear = async (locId, cap) => GEN148.generate("npc", nearCtx(locId, cap), { callJSON: author148, schema: C148.genSchemas?.npc || {} });
+          const nearCtx = (loc, cap) => ({ ...ctx148("millbrook"), location: loc, regions: C148.regions,
+            regionHomeMap: homeMap148, nearestTraditionWithinDeg: cap });
+          const mintAt = async (loc, cap) => GEN148.generate("npc", nearCtx(loc, cap), { callJSON: author148, schema: C148.genSchemas?.npc || {} });
           const rowsOf = (rec) => (BT148.personOpponentFor(rec, { catalog: C148.abilities, cfg: cfg148, day: 10, traditionIndex: C148.traditionIndex })?.skills || []).filter(s => !String(s?.id || "").startsWith("_")).length;
 
-          const mill = await mintNear("millbrook", cap148);
-          check("§148: ⛔ a person minted where no tradition is at home BORROWS the nearest one, and can fight",
-            mill?.domainsSource === "nearest" && !!mill?.domains?.primary && rowsOf(mill) > 0,
-            `${mill?.domains?.primary} via ${mill?.domainsVia?.degrees}° · ${rowsOf(mill)} craft rows`);
+          // ⛑ AEVI'S MAP IS READ. It was authored 09-08 into `the_substrate.json` and nothing consumed it
+          // until 09-09 — I had built a `homeTradition` field on the region a day after she had already
+          // put the answer somewhere better. `valley → mason` is hers, and it is 0° away.
+          const mill = await mintAt(C148.locations.millbrook, cap148);
+          check("§148: ⛑ a person minted in the valley practises `mason` — the authored map is READ, not just loaded",
+            mill?.domains?.primary === "mason" && mill?.domainsSource === "derived" && rowsOf(mill) > 0,
+            `${mill?.domains?.primary}/${mill?.domainsSource} · ${rowsOf(mill)} craft rows`);
 
-          // ⛑ AND IT IS MARKED WEAKER THAN A REAL ONE. A borrowed craft says "the closest people who
-          // practise anything practise this" — fine for a GM, poor evidence for standing credit.
-          const maw = await mintNear("the_maw", cap148);
-          check("§148: …and a region with its OWN tradition never borrows — `derived` outranks `nearest`",
-            maw?.domainsSource === "derived" && !maw?.domainsVia, `${maw?.domains?.primary}/${maw?.domainsSource}`);
+          // ⛔ AND EVERY REGION IS HOMED, so the borrow rung is dormant on real ground. That is the fix
+          // landing, not the rung failing.
+          const orphanCount = Object.values(C148.locations || {}).filter(l => !AFF148.regionHomeTradition(l?.regionId || l?.region || null, C148.traditionIndex, C148.regions, homeMap148)).length;
+          check("§148: …and NO authored location is left without a home tradition — all 38 regions carry one",
+            orphanCount === 0, `${orphanCount} orphaned locations`);
 
-          // ⛔ THE CAP MUST BE ABLE TO REFUSE, or it is not a distance rule at all. Millbrook's nearest
-          // anchor is 45.7° away, so a tight cap must leave the person with no domains rather than
-          // importing a craft from a third of a world away.
-          const tight = await mintNear("millbrook", 5);
-          check("§148: ⛑ …and the CAP can refuse — a tight one leaves them craftless rather than importing one",
-            !tight?.domains && !tight?.domainsSource, JSON.stringify(tight?.domains ?? null));
+          // ⛑ THE RUNG STILL WORKS, ON GROUND THAT GENUINELY HAS NONE. Synthetic: an unknown region,
+          // standing where Millbrook stands, so the nearest homed place is close.
+          const nowhere = { id: "_nowhere", name: "Nowhere", regionId: "_no_such_region", worldPos: C148.locations.millbrook.worldPos };
+          const lost = await mintAt(nowhere, 15);
+          check("§148: ⛔ …and ground with NO home still borrows the nearest one, and can fight",
+            lost?.domainsSource === "nearest" && !!lost?.domains?.primary && rowsOf(lost) > 0,
+            `${lost?.domains?.primary} via ${lost?.domainsVia?.degrees}° · ${rowsOf(lost)} craft rows`);
 
-          // ⛑ NO CODE DEFAULT: with no cap threaded, nothing is borrowed and the mint is what it was.
-          const nocap = await mintNear("millbrook", null);
-          check("§148: …and with no cap threaded nothing is borrowed at all", !nocap?.domainsSource);
+          // ⛔ THE CAP MUST BE ABLE TO REFUSE, or it is not a distance rule at all.
+          const far = { ...nowhere, worldPos: { colatitude: 179, longitude: 0, depth: 0 } };
+          const tight = await mintAt(far, 1);
+          check("§148: ⛑ …and the CAP refuses a far import — craftless beats a craft from across the world",
+            !tight?.domainsSource, JSON.stringify(tight?.domains ?? null));
+
+          // ⛑ NO CODE DEFAULT: with no cap threaded, nothing is borrowed at all.
+          const nocap = await mintAt(nowhere, null);
+          check("§148: …and with no cap threaded nothing is borrowed", !nocap?.domainsSource);
         }
       }
     }

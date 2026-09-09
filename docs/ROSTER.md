@@ -90,7 +90,7 @@
 | `sable_the_runner` | Sable | person | `npcs/sable_the_runner.json` | ~heroic | →25 | — | ✅ | ✅ | 13 | — | — |
 | `sesh_the_quiet_blow` | Sesh of the Quiet Blow | person | `npcs/sesh_the_quiet_blow.json` | heroic | 30 | 16 | ✅ | ✅ | 16 | 2 | — |
 | `sethran_hold` | Sethran of the Reasoned Hold | person | `npcs/sethran_hold.json` | heroic | 25 | 8 | ✅ | ✅ | 13 | 2 | — |
-| `silas-mother` | Ama | person | `npcs/silas-mother.json` | — | 18 | 8 | ✅ | ✅ | 9 | 2 | — |
+| `silas-mother` | Hesta Vorn | person | `npcs/silas-mother.json` | — | 18 | 8 | ✅ | ✅ | 9 | 2 | — |
 | `siol` | Siol | person | `npcs/siol.json` | heroic | 26 | 9 | ✅ | ✅ | 13 | 2 | — |
 | `solvace` | Solvace of Glasshome | person | `npcs/solvace.json` | ~regional | →12 | — | ✅ | ✅ | 6 | — | — |
 | `stonefast_urd` | Urd Stonefast | person | `npcs/stonefast_urd.json` | epic | 47 | 16 | ✅ | ✅ | 24 | 2 | — |

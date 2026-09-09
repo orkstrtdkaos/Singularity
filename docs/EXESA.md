@@ -163,7 +163,7 @@ Untended, **the argument resumes with the world still standing in the middle of 
 
 ## VI · WHO IS OUT THERE
 
-Eighty-eight great figures on the roster and fourteen legendaries with sheets of their own, and **most of them have never heard of you.** They are
+Ninety-two great figures on the roster and fourteen legendaries with sheets of their own, and **most of them have never heard of you.** They are
 doing their own work. `figureCareer` counts their deeds whether you are in the room or not, and the ones you
 meet twice will not be the same both times.
 

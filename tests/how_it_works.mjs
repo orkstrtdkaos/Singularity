@@ -4180,7 +4180,12 @@ console.log("\n── §59 · sheets fill in through play; an authored sheet is 
 
   // ⚠️ THE SPEC'S OWN NUMBERS, CORRECTED BY MEASUREMENT (reported in the ROUND 2 reply):
   {
-    const authored = npcs59.filter(n => n.schemaVersion != null);
+    // ⛔ `notAnOpponent` IS EXEMPT, AND THAT IS THE RULE THIS GATE ALWAYS MEANT. `domains` exist to field a
+    // KIT; a record declared out of the fight path has no kit to field. ⚠️ Erik had the Precursors built from
+    // their prose on 2026-09-08 — Akinetos never wakes, Kenosis is dead, Parakletos "cannot appear as a
+    // figure" — and giving them domains to satisfy a gate would contradict the lore's own "Precursor is not a
+    // playable tradition and should not become one."
+    const authored = npcs59.filter(n => n.schemaVersion != null && !n.notAnOpponent);
     check("§59: ⚠️ Q4's premise is wrong — every authored person HAS `domains` (it is the generated roster that lacks them)",
       authored.length >= 40 && authored.every(n => n.domains), `${authored.filter(n => !n.domains).length} of ${authored.length} without`);
   }
@@ -9641,7 +9646,9 @@ console.log("\n── §146 · the domain draw runs, and it stays near their gro
   const TR = await import("../engine/traditions.js");
   const { loadContentHeadless: lch146 } = await import("./headless_content.mjs");
   const C146 = await lch146();
-  const people146 = Object.values(C146.npcs || {}).filter(n => !(n.isLegend || n.legend));
+  // ⛔ SAME EXEMPTION AS §59, SAME REASON: domains feed the kit draw, and a `notAnOpponent` record is
+  // declared out of the fight path by decision. The Precursors carry none deliberately.
+  const people146 = Object.values(C146.npcs || {}).filter(n => !(n.isLegend || n.legend) && !n.notAnOpponent);
   const cfg146 = C146.rules?.npcStanding || {};
   check("§146: the premise is measured, not assumed — every non-legend person already carries domains",
     people146.length >= 50 && people146.every(n => n.domains && Object.keys(n.domains).length),
@@ -9872,9 +9879,21 @@ console.log("\n── §148 · role → tier, default down, authored always wins
     let seed148 = 1; const rng148 = () => ((seed148 = (seed148 * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff);
     const drawn = {};
     for (let i = 0; i < 2000; i++) { const t = NS148.drawTier(topHeavy, { cfg: cfg148, rng: rng148 }); drawn[t] = (drawn[t] || 0) + 1; }
-    check("§148: §2.1 the draw POURS INTO THE EMPTY RUNGS and never adds to an over-filled one",
-      Object.keys(drawn).length > 1 && !drawn.heroic && !drawn.epic && !drawn.legendary && drawn.riffraff > 0,
+    // ⛔ ERIK 2026-09-08: "i want a floor on the tier generated chance. it can be half of the goal, but i
+    // don't want a 0 chance." ⚠️ THIS CHECK USED TO ASSERT THE OPPOSITE — that an over-filled rung is drawn
+    // NEVER — and he is right that a zero weight is a wall wearing arithmetic, which is the thing this spec
+    // exists to remove. ⛑ So: the empty rungs still dominate, AND no allowed rung is ever impossible.
+    check("§148: §2.1 the draw POURS INTO THE EMPTY RUNGS — the bottom fills faster than the top grows",
+      drawn.riffraff > drawn.heroic && drawn.notable > drawn.heroic && drawn.regional > drawn.heroic,
       JSON.stringify(drawn));
+    // ⛔ ERIK'S FLOOR, 2026-09-08: "it can be half of the goal, but i don't want a 0 chance." ⚠️ THIS CHECK
+    // USED TO ASSERT THE OPPOSITE — that an over-filled rung is drawn NEVER — and he is right that a zero
+    // weight is a wall wearing arithmetic, the very thing this spec exists to remove.
+    // ⛑ TESTED ON A RUNG THE DRAW ALLOWS: heroic is over-filled 3× its target here, so without the floor its
+    // deficit is zero and it is impossible. epic and legendary are absent from THIS draw because the
+    // EVIDENCE CEILING excludes them, which is a different rule — the evidenced case is checked below.
+    check("§148: ⛑ …and an OVER-FILLED rung is rare, never impossible — Erik's floor, half the target",
+      drawn.heroic > 0, `heroic ${drawn.heroic || 0} of 2000 (target 10.5%, floor 5.25%)`);
     // ⛔ §2.2 — EVIDENCE PROPORTIONAL TO CLAIM. Without evidence the draw stops at the ceiling; WITH it, a
     // rung above becomes reachable. ⚠️ Not the retired `ceiling` returning: that capped every derivation,
     // this caps only an unevidenced DRAW.

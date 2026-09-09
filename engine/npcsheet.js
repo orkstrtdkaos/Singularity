@@ -233,12 +233,22 @@ export function drawTier(census = {}, { cfg = {}, rng = Math.random, evidence = 
   const capAt = ceilName != null && floors[ceilName] != null ? Number(floors[ceilName]) : Infinity;
   const allowed = Object.keys(target).filter(t => Number(floors[t]) <= capAt);
   const total = Object.values(census).reduce((a, b) => a + (Number(b) || 0), 0);
+  // ⚠️ NO CODE DEFAULT for the floor either: without the dial it is 0, which is the old behaviour, and an
+  // unwired dial must not silently invent a policy Erik chose.
+  const floorFrac = Math.max(0, Math.min(1, Number(cfg?.tierRarity?.rarityFloor) || 0));
   let pool = allowed.map(t => {
     const have = total > 0 ? (Number(census[t]) || 0) / total : 0;
-    return [t, Math.max(0, target[t] - have)];
+    // ⛔ ERIK'S FLOOR: "it can be half of the goal, but i don't want a 0 chance... the world is not
+    // perfectly balanced." A rung the world over-fills has a deficit of ZERO, and a zero weight is a WALL
+    // wearing arithmetic — the thing this whole spec exists to remove. ⚠️ So the weight is the DEFICIT or a
+    // fraction of the target, whichever is larger. ⛑ It still rebalances: an empty rung's deficit is its
+    // WHOLE target, so the bottom fills faster than the top grows — the top is rare, not forbidden.
+    return [t, Math.max(target[t] * floorFrac, target[t] - have)];
   });
   // ⚠️ A WORLD ALREADY AT OR ABOVE TARGET ON EVERY ALLOWED RUNG HAS NO DEFICIT TO DRAW FROM. Falling back to
   // the target shape keeps the generator producing people; returning null here would stop the world instead.
+  // ⚠️ UNREACHABLE ONCE A FLOOR IS SET (every weight is >= target × floorFrac > 0), and kept deliberately:
+  // the floor is a DIAL and may be set to 0, which is exactly the world where this matters again.
   if (!pool.some(([, w]) => w > 0)) pool = allowed.map(t => [t, target[t]]);
   const sum = pool.reduce((a, [, w]) => a + w, 0);
   if (!(sum > 0)) return null;

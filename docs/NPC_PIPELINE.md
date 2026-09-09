@@ -46,7 +46,7 @@ derivations of the same count is the defect that put `certify_counts` at 125 aga
 
 ⚑ **THE MISSING INPUTS ARE `abilities`, `domains`, `tradition`.** The generation schema asks for none of them, `enforceFloors` adds none, and `reconcileGeneratedNpcWithMeet` copies `domains` only `if (rec[k] != null)` — a condition that is never true for a minted record.
 
-⬜ **The authored side proves the doors themselves work:** **78 of 136** reachable authored people field at least one real craft through the same two functions. ⚠️ **The authored CENSUS is `docs/ROSTER.md` and is not recomputed here** — one ladder, deliberately.
+⬜ **The authored side proves the doors themselves work:** **79 of 137** reachable authored people field at least one real craft through the same two functions. ⚠️ **The authored CENSUS is `docs/ROSTER.md` and is not recomputed here** — one ladder, deliberately.
 
 <!-- END npc-pipeline-generated -->
 

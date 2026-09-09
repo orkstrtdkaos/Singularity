@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "id": "lucifer",
+  "name": "Lucifer",
+  "tier": "mythic",
+  "level": 85,
+  "role": "Satiated Sovereign of the Light axis — he did not want to be GOOD, he wanted to never again be UNSEEN",
+  "gender": "male",
+  "pronouns": "he/him",
+  "sex": null,
+  "people": "sovereign",
+  "tradition": "seraphic",
+  "alignment": "villain",
+  "domains": {
+    "primary": "seraphic",
+    "secondary": "verist"
+  },
+  "_domainsWhy": "⛑ BOTH TAKEN FROM THE PROSE, NEITHER INVENTED. `seraphic` because he holds the whole of the Light axis; `verist` because *\"he cannot lie\"* is stated as a STRUCTURAL INCAPACITY rather than a virtue — he gave away the capacity to be hidden, so truth is not a choice he makes. ⬜ NO TERTIARY, DELIBERATELY: the lore says the seats *\"should be filled slowly and separately\"* and a third domain would be me deciding something nobody has written.",
+  "spectrum": {
+    "light_dark": 1
+  },
+  "_spectrumWhy": "⛔ 1.0, NOT 0.95, AND THE DIFFERENCE IS THE WHOLE POINT. *\"Each is the total embrace of one half of existence with the other half declined entirely.\"* The four mortal Sovereign-candidates measured at ±0.9–0.95 are people walking a road; a Sovereign is the END of it. ⚠️ This is the only record in the corpus at an axis endpoint, and that is what a seat means.",
+  "notAnOpponent": false,
+  "forms": {
+    "arcId": null,
+    "diminished": {
+      "atStage": 3,
+      "level": 45,
+      "note": "⛔ IT ARRIVES DIMINISHED, BECAUSE ARRIVING IS DIMINISHMENT — *\"it must accept a shape to act here, and the shape is a fraction of what stood behind the Veil.\"* ⚠️ And it is the first time that thing has been hungry in an age, and it is here, and it knows who did it."
+    },
+    "final": {
+      "atStage": 4,
+      "level": 85,
+      "note": "⚑ The whole of the Light axis, present and constrained by nothing but having come. The mythic floor is 85 and this is what that floor was for."
+    }
+  },
+  "_formsWhy": "⛑ R41, and the lore states the trade in full: *\"Coming here means accepting a place, a shape and a duration — the exact constraints it refused. Manifesting costs a Sovereign the thing it IS.\"* ⚠️ `arcId` IS NULL ON PURPOSE — a Sovereign with no arc has no arrival and resolves as its plain record, which is the honest answer for a being that never comes until something starves it. ⛔ The day an arc is authored for the Light seat, this one field makes him arrive.",
+  "abilities": [
+    {
+      "abilityId": "kept_flame",
+      "level": 3
+    },
+    {
+      "abilityId": "lifted_word",
+      "level": 3
+    },
+    {
+      "abilityId": "miracle",
+      "level": 3
+    },
+    {
+      "abilityId": "unfaltering_light",
+      "level": 3
+    },
+    {
+      "abilityId": "burning_ones",
+      "level": 3
+    },
+    {
+      "abilityId": "guardian_angel",
+      "level": 3
+    },
+    {
+      "abilityId": "majesty",
+      "level": 3
+    }
+  ],
+  "subAttributes": {
+    "strength": 14,
+    "agility": 14,
+    "reason": 17,
+    "insight": 17,
+    "presence": 20,
+    "rapport": 12,
+    "craft": 12,
+    "wits": 16
+  },
+  "_subAttributesWhy": "⚑ PRESENCE IS THE MAXIMUM BECAUSE PRESENCE IS WHAT HE IS — *\"he shines constantly at everything.\"* ⚠️ RAPPORT IS NOT: rapport is reading another person, and *\"nothing shines back into him, because there is no in.\"* He is attended to; he does not attend.",
+  "personality": {
+    "warmth": 6,
+    "trust": 5,
+    "candor": 10,
+    "patience": 9
+  },
+  "_personalityWhy": "⛔ CANDOR 10 IS NOT AN OPINION — *\"He cannot lie.\"* It is the only value here the prose fixes outright.",
+  "knowledge": [
+    "Everything done in the open, because nothing is not in the open to him",
+    "What a thing looks like when it is holding something back — the one condition he no longer has"
+  ],
+  "wants": [
+    "To be looked at, always, by everything, with nothing of himself in shadow and nothing withheld"
+  ],
+  "fears": "⛔ Not a fear — an incapacity, and it is worse. He cannot rest and cannot be unwitnessed. ⚠️ What he refused was PRIVACY: the right to be partly unknown, to hold something back, to have an inside.",
+  "appearance": "Entirely surface. Radiant through and through, and there is nothing behind it — not because he is hollow, but because he gave away the capacity to be hidden.",
+  "voiceHints": "Courteous, and not interested. He is not persuading you; he is being seen by you, which is the only transaction he has left.",
+  "physicality": "No age and no wear. WHAT CATCHES THE EYE: that nothing casts a shadow on him, including himself.",
+  "assistTags": [
+    "guard",
+    "reveal",
+    "empower"
+  ],
+  "closed": [
+    "conceal",
+    "deceive"
+  ],
+  "_closedWhy": "⛔ STRUCTURAL, NOT STYLISTIC. A being that refused privacy cannot hide a thing or misrepresent one — these are shut for the same reason his candor is 10.",
+  "romanceEligible": false,
+  "intimacyNotes": "⛔ NOT AVAILABLE. ⚠️ There is no inside to be admitted to; that is the entire characterisation.",
+  "reactsToReputation": {
+    "balanced": "attends to you exactly as much as to everything else, which is completely",
+    "extreme": "the only mortal state he recognises — you have refused something too",
+    "seeking": "a witness who will not look away first"
+  },
+  "_authoredWhy": "⛔ ERIK, 2026-09-08: *\"we're going to build the mythicals from their prose. run them through the pipeline.\"* ⚑ EVERY LINE ABOVE IS TRANSCRIBED FROM `lore/the_satiated_sovereigns.md` — the Light seat, the refusal of privacy, the surface with no inside, the courtesy without interest. ⚠️ NOTHING HERE IS INVENTED CHARACTER: where the prose is silent (a tertiary domain, an arc to arrive on) the field is absent or null rather than guessed, because *\"six seats… should be filled slowly and separately\"* is an instruction about exactly this. ⛑ CCode authored the RECORD; Aevi owns the CHARACTER and every word of it is already hers.",
+  "_theSeatsNotFilled": "⬜ Mind/Body · Life/Death · Angelic/Demonic · Breaking/Building · Chaos/Order · Span/Spirit remain unauthored as seats. ⚠️ The Hollow King (`the_hollow_king`, Demonic) and the Unbodied (`the_ninefold_ascendant`, Mind) are named in the same lore file as Sovereigns while their records sit at `epic` and `legendary` — that is a TIER question for Aevi and Erik, not a thing to fix by hand here.",
+  "_reactsWhy": "⛑ SHAPED TO THE SCHEMA (balanced/extreme/seeking), and every line is his refusal read back: he cannot withhold attention, and the extreme is the road he is the end of."
+}

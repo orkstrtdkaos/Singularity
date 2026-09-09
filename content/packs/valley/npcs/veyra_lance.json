@@ -1,0 +1,199 @@
+{
+ "id": "veyra_lance",
+ "name": "Veyra of the Levelled Lance",
+ "tier": "heroic",
+ "level": 29,
+ "vocation": "EDGE",
+ "universalRole": "Warrior",
+ "roleMethod": "⚑ The Redline bends a warrior toward the DECIDING blow — a Marcher does not spar, she resolves.",
+ "role": "Duelist of the Redline circuit — twenty-two challenges, twenty-two stops, and she has never fought the same person twice",
+ "disposition": "direct",
+ "people": "human",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "age": 31,
+ "romanceEligible": true,
+ "isMinor": false,
+ "status": "active",
+ "communityId": "marcher.the_redline",
+ "homeLocation": "the_marchward",
+ "aliases": [
+  "the Levelled Lance",
+  "Veyra Redline"
+ ],
+ "domains": {
+  "primary": "marcher",
+  "secondary": "somatic",
+  "tertiary": "verist"
+ },
+ "spectrum": {
+  "violence_peace": -0.7,
+  "falsehood_truth": 0.6,
+  "chaos_order": 0.3
+ },
+ "poleIntensity": {
+  "violence": 0.7,
+  "truth": 0.6
+ },
+ "subAttributes": {
+  "strength": 12,
+  "agility": 13,
+  "reason": 9,
+  "insight": 12,
+  "presence": 11,
+  "rapport": 7,
+  "craft": 8,
+  "wits": 12
+ },
+ "poleSignature": {
+  "movedBy": [
+   "a straight challenge",
+   "competence",
+   "an honest account of why"
+  ],
+  "hardenedBy": [
+   "excuses",
+   "a second",
+   "being managed"
+  ],
+  "immovableBy": [
+   "money",
+   "rank"
+  ],
+  "patience": 4,
+  "tell": "⚑ She names the terms before the first pass and does not renegotiate. If you argue the terms, the duel is already over and you lost it."
+ },
+ "knowledge": [
+  "Where a fighter's guard actually opens, as against where they think it does",
+  "Every duel fought on the Redline circuit in eleven years, and who broke which rule",
+  "⚠️ How to stop without killing — and exactly how much harder that is"
+ ],
+ "wants": [
+  "A challenge she cannot call in the first three passes",
+  "To be beaten cleanly, once, by someone who then walks away"
+ ],
+ "fears": "⛔ Killing one. ⚠️ Twenty-two stops is a record and a record is a thing that ends.",
+ "appearance": "Long-limbed, scarred across both forearms, and she stands square to you the moment you enter a room without appearing to have moved.",
+ "voiceHints": "Short, level, and faintly bored until the terms are set. ⚠️ Then she is entirely present and it is unnerving.",
+ "reactsToReputation": {
+  "duellist": "⚑ names terms immediately",
+  "boastful": "shortens the terms",
+  "honest": "gives you the first pass",
+  "any": "measures you"
+ },
+ "assistTags": [
+  "strike",
+  "guard",
+  "read-a-fight",
+  "travel"
+ ],
+ "abilities": [
+  {
+   "abilityId": "edge",
+   "level": 3,
+   "why": "⚑ THE EDGE ITSELF — the blow that decides, and it is her whole trade"
+  },
+  {
+   "abilityId": "dressed_edge",
+   "level": 3,
+   "why": "her weapon is prepared before the circle is drawn"
+  },
+  {
+   "abilityId": "read_the_fight",
+   "level": 3,
+   "why": "'where a fighter's guard actually opens'"
+  },
+  {
+   "abilityId": "advance",
+   "level": 3,
+   "why": "⛔ she comes forward. Twenty-two times"
+  },
+  {
+   "abilityId": "perfect_motion",
+   "level": 3,
+   "why": "somatic secondary — nothing wasted"
+  },
+  {
+   "abilityId": "disarm",
+   "level": 3,
+   "why": "⚠️ TWENTY-TWO STOPS. This is how"
+  },
+  {
+   "abilityId": "stand",
+   "level": 2,
+   "why": "she does not give the circle"
+  },
+  {
+   "abilityId": "held_line",
+   "level": 2,
+   "why": "a Marcher holds"
+  },
+  {
+   "abilityId": "shieldwork",
+   "level": 2,
+   "why": "she has been hit and intends not to be again"
+  },
+  {
+   "abilityId": "chosen_ground",
+   "level": 2,
+   "why": "she picks where"
+  },
+  {
+   "abilityId": "answered_motion",
+   "level": 2,
+   "why": "the counter"
+  },
+  {
+   "abilityId": "who_falls_first",
+   "level": 2,
+   "why": "⛔ she knows, and it is usually not her"
+  },
+  {
+   "abilityId": "thrown_edge",
+   "level": 2,
+   "why": "reach, when the circle allows it"
+  },
+  {
+   "abilityId": "true_account",
+   "level": 2,
+   "why": "verist tertiary — she says what happened afterwards"
+  },
+  {
+   "abilityId": "second_wind",
+   "level": 2,
+   "why": "twenty-two"
+  },
+  {
+   "abilityId": "break_the_line",
+   "level": 1,
+   "why": "⚠️ r1 and deliberate — she can, and a circuit duel is not where"
+  }
+ ],
+ "closed": [
+  "hunters_strike",
+  "premeditate",
+  "slow_cup"
+ ],
+ "personality": {
+  "warmth": 5,
+  "trust": 6,
+  "candor": 9,
+  "patience": 4
+ },
+ "physicality": "ADULT. Long-limbed and hard through the shoulders, thirty-one, forearms scarred to the elbow. WHAT CATCHES THE EYE: ⚑ she squares to you without appearing to have moved, and she has already decided where this happens.",
+ "intimacyNotes": "⚠️ SHE IS DIRECT ABOUT THIS AS SHE IS ABOUT EVERYTHING and finds hedging tiresome. ⛔ What she will not discuss is the twenty-third challenge she declined and why.",
+ "gear": [
+  "a levelled lance, refaced twice",
+  "a Redline circuit token, twenty-two notches",
+  "light brigandine, mended at the left shoulder"
+ ],
+ "teaches": "the Edge, to anyone who will accept losing first",
+ "questSeeds": [
+  "⚑ She wants a challenge she cannot call in the first three passes. ⚠️ If you are that, she will find you.",
+  "⛔ Someone on the circuit is killing and calling it an accident. She has fought them and cannot prove it."
+ ],
+ "schemaVersion": 1,
+ "_authoredWhy": "⛑ AUTHORED 2026-09-08 AT ERIK'S CORRECTION: 'You had authored a lot of things with your own NON-VIOLENCE LEAN seeping in — but this is a FANTASY RPG. We need EDGES.' ⛔ HE IS RIGHT AND THE PATTERN IS DOCUMENTED ACROSS ONE SESSION: Aevi gave the Hollow King NO HARM CRAFT AT ALL and Erik had to reverse it; she wrote 'the refusal is the class' for wardens and he struck it; the Unbought Court is defined by what it will not do; Aevi-the-Watcher cannot fight; Oreth has never put anyone down. ⚠️ EVERY ONE DEFENSIBLE ALONE AND A LEAN TOGETHER. ⚑ THESE ARE AUTHORED THE OTHER WAY: people whose answer to a problem is the edge of something, written to the FULL 49-FIELD SCHEMA — poleSignature, universalRole, roleMethod, disposition, teaches, gear, aliases, canStrike, age, status. ⚠️ No corners: read the schema, then write.",
+ "canStrike": true
+}

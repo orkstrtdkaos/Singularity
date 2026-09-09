@@ -1261,7 +1261,7 @@
      "class": "cost"
     }
    ],
-   "plainly": "A explore/stealth action that makes or animates something. Its strength is rated 2 out of 10, and lasts for about 3 days Ranks: rank 2 extends persistence+keying; rank 3 extends persistence. Limit: any Radiant-trained eye can find it.",
+   "plainly": "A craft/social action that writes in persistent light, readable only by whoever holds the key. Its strength is rated 2 out of 10, and lasts for about 3 days Ranks: rank 2 extends persistence+keying; rank 3 extends persistence. Limit: any Radiant-trained eye can find it.",
    "upkeep": {
     "persistHours": 720,
     "note": "a month's persistence at rank"
@@ -1272,7 +1272,9 @@
    "folkAccessible": true,
    "learnedAt": "radiant_folk",
    "_lineageWhy": "⚑ wright — writes persistent marks that only keyed light reveals",
-   "_lineageRuling": "⛔ R33 (SNG-443) LINEAGE ASSIGNMENT, 2026-09-02. `tradition` is THE LINEAGE — which people's craft this descends from. `learnedAt` is THE ACCESS — the place a person can be taught it. ⚠️ THIS CRAFT PREVIOUSLY CARRIED A FOOTHILL IN `tradition`, WHICH CONFUSED ACCESS WITH ANCESTRY — the exact error R33 names: 'I filed six crafts as valley_craft because they were open to anyone. Open-to-anyone is a property of the LEARNING, not of the LINEAGE.' ✅ A foothill is a PLACE OF ACCESS, not a new ancestry: 'Hardline teaches the Edge; it does not own it.' ⬜ ASSIGNED BY AUTHORING, NOT ARITHMETIC — `foothills.json`'s blends are weights across a whole PLACE (who lives there), never a per-craft rule. Reason recorded per craft in `_lineageWhy`."
+   "_lineageRuling": "⛔ R33 (SNG-443) LINEAGE ASSIGNMENT, 2026-09-02. `tradition` is THE LINEAGE — which people's craft this descends from. `learnedAt` is THE ACCESS — the place a person can be taught it. ⚠️ THIS CRAFT PREVIOUSLY CARRIED A FOOTHILL IN `tradition`, WHICH CONFUSED ACCESS WITH ANCESTRY — the exact error R33 names: 'I filed six crafts as valley_craft because they were open to anyone. Open-to-anyone is a property of the LEARNING, not of the LINEAGE.' ✅ A foothill is a PLACE OF ACCESS, not a new ancestry: 'Hardline teaches the Edge; it does not own it.' ⬜ ASSIGNED BY AUTHORING, NOT ARITHMETIC — `foothills.json`'s blends are weights across a whole PLACE (who lives there), never a per-craft rule. Reason recorded per craft in `_lineageWhy`.",
+   "_plainlyWas": "A explore/stealth action that makes or animates something. Its strength is rated 2 out of 10, and lasts for about 3 days Ranks: rank 2 extends persistence+keying; rank 3 extends persistence. Limit: any Radiant-trained eye can find it.",
+   "_glossFix_20260908": "⛑ TIER 2 OF `SPEC_tradition_narrative_npc_pass` — THE THIN GLOSSES. ⛔ All thirty were CORRECT and USELESS: 'makes or animates something' says THAT the craft makes and never WHICH, on thirty crafts that make thirty different things. ⚠️ T7: what does the GM narrate CHANGING? ⚑ Every rewrite is drawn from that craft's own `description` — nothing invented, and the description was right in all thirty cases. ⛔ THE SPEC ESTIMATED 251 THIN CRAFTS AND THERE WERE 42: measure before authoring."
   },
   {
    "id": "beacon_thread",

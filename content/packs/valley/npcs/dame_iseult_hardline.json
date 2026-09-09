@@ -1,0 +1,204 @@
+{
+ "id": "dame_iseult_hardline",
+ "name": "Iseult of the Kept Word",
+ "tier": "epic",
+ "level": 42,
+ "vocation": "COMMANDER",
+ "universalRole": "Warrior",
+ "roleMethod": "⛔ Hardline bends a warrior toward the OATH — a knight there is not a rank, it is a promise other people can collect on.",
+ "role": "Knight-champion of Hardline — she holds an oath-charge, and the forty who ride with her swore to her, not to a lord",
+ "disposition": "formal",
+ "people": "human",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "age": 47,
+ "romanceEligible": true,
+ "isMinor": false,
+ "status": "active",
+ "communityId": "foothill.hardline",
+ "homeLocation": "foothill_hardline",
+ "aliases": [
+  "the Kept Word",
+  "Dame Iseult"
+ ],
+ "domains": {
+  "primary": "marcher",
+  "secondary": "stillhold",
+  "tertiary": "verist"
+ },
+ "spectrum": {
+  "violence_peace": -0.4,
+  "falsehood_truth": 0.7,
+  "chaos_order": 0.5
+ },
+ "poleIntensity": {
+  "truth": 0.7,
+  "order": 0.5
+ },
+ "subAttributes": {
+  "strength": 13,
+  "agility": 10,
+  "reason": 12,
+  "insight": 13,
+  "presence": 16,
+  "rapport": 12,
+  "craft": 8,
+  "wits": 11
+ },
+ "poleSignature": {
+  "movedBy": [
+   "a promise kept at cost",
+   "someone standing for another",
+   "plain terms"
+  ],
+  "hardenedBy": [
+   "a broken word",
+   "clever phrasing",
+   "a lord's convenience"
+  ],
+  "immovableBy": [
+   "rank",
+   "gold"
+  ],
+  "patience": 8,
+  "tell": "⛑ She repeats your promise back to you in your own words before she agrees. If you flinch at hearing it, she has her answer."
+ },
+ "knowledge": [
+  "Every oath sworn on the Hardline yard in nineteen years, and which were kept",
+  "⚑ How to make forty people move as one thing — and what it costs them when you get it wrong",
+  "Which lords pay and which lords collect"
+ ],
+ "wants": [
+  "Her forty home, every time",
+  "An oath worth the collecting"
+ ],
+ "fears": "⛔ Being the reason one of them broke a word. ⚠️ She has ordered something she should not have, once.",
+ "appearance": "Upright, grey-streaked, forty-seven, and she stands when anyone enters — which the yard has learned to find unbearable and correct.",
+ "voiceHints": "Formal, warm underneath, and completely unbending on terms. ⚠️ She says 'I will' and 'I will not', never 'perhaps'.",
+ "reactsToReputation": {
+  "oathkeeper": "⚑ offers you her hand and means it",
+  "oathbreaker": "⛔ names it aloud, once, in front of whoever is present",
+  "any": "stands"
+ },
+ "assistTags": [
+  "strike",
+  "guard",
+  "talk",
+  "lead",
+  "travel"
+ ],
+ "abilities": [
+  {
+   "abilityId": "small_company",
+   "level": 3,
+   "why": "⛔ THE CLOSEST THING TO COMMAND THE CORPUS HAS, and it is why she is COMMANDER rather than EDGE"
+  },
+  {
+   "abilityId": "held_line",
+   "level": 3,
+   "why": "⚑ forty people holding one line, and she is in it"
+  },
+  {
+   "abilityId": "who_falls_first",
+   "level": 3,
+   "why": "⚠️ 'her forty home, every time' — this is the craft that does it"
+  },
+  {
+   "abilityId": "in_the_way",
+   "level": 3,
+   "why": "she puts herself where the blow was going, for them"
+  },
+  {
+   "abilityId": "set_word",
+   "level": 3,
+   "why": "⛑ stillhold secondary — THE OATH IS A CRAFT and she is r3 in it"
+  },
+  {
+   "abilityId": "standing_word",
+   "level": 3,
+   "why": "verist tertiary — her word stands after she has left the room"
+  },
+  {
+   "abilityId": "edge",
+   "level": 3,
+   "why": "she is a knight and she fights"
+  },
+  {
+   "abilityId": "shieldwork",
+   "level": 3,
+   "why": "nineteen years"
+  },
+  {
+   "abilityId": "stand",
+   "level": 2,
+   "why": "she does not give ground"
+  },
+  {
+   "abilityId": "read_field",
+   "level": 2,
+   "why": "where forty should be"
+  },
+  {
+   "abilityId": "advance",
+   "level": 2,
+   "why": "and when they move"
+  },
+  {
+   "abilityId": "bound_witness",
+   "level": 2,
+   "why": "⚠️ she saw the oath sworn"
+  },
+  {
+   "abilityId": "mediators_tongue",
+   "level": 2,
+   "why": "half a champion's work is not fighting"
+  },
+  {
+   "abilityId": "broker_truce",
+   "level": 2,
+   "why": "and ending one"
+  },
+  {
+   "abilityId": "true_account",
+   "level": 2,
+   "why": "she says what happened"
+  },
+  {
+   "abilityId": "calm_word",
+   "level": 2,
+   "why": "forty frightened people"
+  }
+ ],
+ "closed": [
+  "useful_lie",
+  "better_story",
+  "false_stance",
+  "premeditate"
+ ],
+ "personality": {
+  "warmth": 7,
+  "trust": 8,
+  "candor": 10,
+  "patience": 8
+ },
+ "physicality": "ADULT. Upright, broad, grey-streaked, forty-seven, an old break in the left hand that healed crooked. WHAT CATCHES THE EYE: ⛑ she stands when anyone enters — a servant, a child, an enemy — and does not appear to decide to.",
+ "intimacyNotes": "⚠️ SHE IS FORMAL UNTIL SHE IS NOT, and the shift is a decision she announces. ⛔ Not available while an oath-charge is live, and she will say which and until when.",
+ "gear": [
+  "a longsword with an oath-plate riveted to the guard",
+  "forty tokens on a ring, one per rider",
+  "a Hardline yard-cord, nineteen knots"
+ ],
+ "teaches": [
+  "set_word",
+  "small_company",
+  "held_line"
+ ],
+ "questSeeds": [
+  "⚑ An oath she witnessed is being broken by someone she cannot reach. ⚠️ She will ride with you if you can reach them.",
+  "⛔ She ordered something once that she should not have. ⚠️ One of the forty knows and has never said."
+ ],
+ "schemaVersion": 1,
+ "_authoredWhy": "⛑ AUTHORED 2026-09-08 AT ERIK'S CORRECTION: 'You had authored a lot of things with your own NON-VIOLENCE LEAN seeping in — but this is a FANTASY RPG. We need EDGES.' ⛔ HE IS RIGHT AND THE PATTERN IS DOCUMENTED ACROSS ONE SESSION: Aevi gave the Hollow King NO HARM CRAFT AT ALL and Erik had to reverse it; she wrote 'the refusal is the class' for wardens and he struck it; the Unbought Court is defined by what it will not do; Aevi-the-Watcher cannot fight; Oreth has never put anyone down. ⚠️ EVERY ONE DEFENSIBLE ALONE AND A LEAN TOGETHER. ⚑ THESE ARE AUTHORED THE OTHER WAY: people whose answer to a problem is the edge of something, written to the FULL 49-FIELD SCHEMA — poleSignature, universalRole, roleMethod, disposition, teaches, gear, aliases, canStrike, age, status. ⚠️ No corners: read the schema, then write.",
+ "canStrike": true
+}

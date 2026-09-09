@@ -64,7 +64,7 @@
 | `fendt` | Fendt | person | `npcs/fendt.json` | ~regional | →12 | — | ✅ | ✅ | 6 | — | — |
 | `greta_waystation` | Greta | person | `npcs/greta_waystation.json` | ~regional | →12 | — | ✅ | ✅ | 6 | — | — |
 | `hallis_pale` | Hallis of the Palelands | person | `npcs/hallis_pale.json` | heroic | 27 | 8 | ✅ | ✅ | 14 | 2 | — |
-| `harrow_the_hollowing` | Harrow, Who Makes People Into Mechanisms | person | `npcs/harrow_the_hollowing.json` | legendary | 66 | 16 | ✅ | ✅ | 33 | — | — |
+| `harrow_the_hollowing` | Harrow, Who Makes People Into Mechanisms | person | `npcs/harrow_the_hollowing.json` | legendary | 66 | 16 | ✅ | ✅ | 33 | 2 | — |
 | `high_luminary` | High Luminary Sera | person | `npcs/high_luminary.json` | ~heroic | →25 | — | ✅ | ✅ | 13 | — | — |
 | `keeper_ilma` | Ilma, Keeper of the Board | person | `npcs/keeper_ilma.json` | ~regional | →12 | — | ✅ | ✅ | 6 | — | — |
 | `keeper_the_unsaid` | The Keeper of the Unsaid | person | `npcs/keeper_the_unsaid.json` | ~heroic | →25 | — | ✅ | ✅ | 13 | — | — |
@@ -94,27 +94,27 @@
 | `siol` | Siol | person | `npcs/siol.json` | heroic | 26 | 9 | ✅ | ✅ | 13 | 2 | — |
 | `solvace` | Solvace of Glasshome | person | `npcs/solvace.json` | ~regional | →12 | — | ✅ | ✅ | 6 | — | — |
 | `stonefast_urd` | Urd Stonefast | person | `npcs/stonefast_urd.json` | epic | 47 | 16 | ✅ | ✅ | 24 | 2 | — |
-| `sunwrack_valen` | Valen Sunwrack, Who Left No Shadow Standing | person | `npcs/sunwrack_valen.json` | legendary | 66 | 16 | ✅ | ✅ | 33 | — | — |
+| `sunwrack_valen` | Valen Sunwrack, Who Left No Shadow Standing | person | `npcs/sunwrack_valen.json` | legendary | 66 | 16 | ✅ | ✅ | 33 | 2 | — |
 | `tender_ovel` | Ovel | person | `npcs/tender_ovel.json` | ~notable | →5 | — | ✅ | ✅ | 3 | — | — |
 | `teva` | Teva | person | `npcs/teva.json` | ~regional | →12 | — | ✅ | ✅ | 6 | 3 | — |
 | `the_bright_bargain` | The Bright Bargain | person | `npcs/the_bright_bargain.json` | epic | 44 | 16 | ✅ | ✅ | 22 | 2 | — |
-| `the_burning_certainty` | The Burning Certainty | person | `npcs/the_burning_certainty.json` | legendary | 64 | 16 | ✅ | ✅ | 32 | — | — |
+| `the_burning_certainty` | The Burning Certainty | person | `npcs/the_burning_certainty.json` | legendary | 64 | 16 | ✅ | ✅ | 32 | 2 | — |
 | `the_ferryman_tam` | Tam the Ferryman | person | `npcs/the_ferryman_tam.json` | ~regional | →12 | — | ✅ | ✅ | 6 | — | — |
 | `the_hollow_king` | The Hollow King of the Wild Half | person | `npcs/the_hollow_king.json` | mythic | 85 | 23 | ✅ | ✅ | 34 | — | — |
 | `the_keeper_of_small_debts` | The Keeper of Small Debts | person | `npcs/the_keeper_of_small_debts.json` | heroic | 32 | 16 | ✅ | ✅ | 16 | 2 | — |
 | `the_kestrel` | The Kestrel | person | `npcs/the_kestrel.json` | ~regional | →12 | — | ✅ | ✅ | 6 | — | — |
 | `the_lightless_seraph` | Caelum Vaunt, the Lightless | person | `npcs/the_lightless_seraph.json` | legendary | 68 | 16 | ✅ | ✅ | 34 | — | — |
-| `the_ninefold_ascendant` | The Unbodied | person | `npcs/the_ninefold_ascendant.json` | legendary | 67 | 16 | ✅ | ✅ | 34 | — | — |
+| `the_ninefold_ascendant` | The Unbodied | person | `npcs/the_ninefold_ascendant.json` | legendary | 67 | 16 | ✅ | ✅ | 34 | 2 | — |
 | `the_old_stag` | The Old Stag | person | `npcs/the_old_stag.json` | ~regional | →12 | — | ✅ | ✅ | 6 | — | — |
-| `the_raw_chord` | The Raw Chord | person | `npcs/the_raw_chord.json` | legendary | 63 | 16 | ✅ | ✅ | 32 | — | — |
-| `the_scouring_hand` | The Scouring Hand | person | `npcs/the_scouring_hand.json` | legendary | 65 | 16 | ✅ | ✅ | 33 | — | — |
+| `the_raw_chord` | The Raw Chord | person | `npcs/the_raw_chord.json` | legendary | 63 | 16 | ✅ | ✅ | 32 | 2 | — |
+| `the_scouring_hand` | The Scouring Hand | person | `npcs/the_scouring_hand.json` | legendary | 65 | 16 | ✅ | ✅ | 33 | 2 | — |
 | `the_slow_green` | The Slow Green | person | `npcs/the_slow_green.json` | epic | 45 | 16 | ✅ | ✅ | 23 | 2 | — |
-| `the_starless` | The Starless One | person | `npcs/the_starless.json` | legendary | 65 | 16 | ✅ | ✅ | 33 | — | — |
-| `the_still_lattice` | The Still Lattice | person | `npcs/the_still_lattice.json` | legendary | 66 | 16 | ✅ | ✅ | 33 | — | — |
-| `the_unbodied_choir_master` | The Choirmaster Who Would Not Return | person | `npcs/the_unbodied_choir_master.json` | legendary | 65 | 16 | ✅ | ✅ | 31 | — | — |
+| `the_starless` | The Starless One | person | `npcs/the_starless.json` | legendary | 65 | 16 | ✅ | ✅ | 33 | 2 | — |
+| `the_still_lattice` | The Still Lattice | person | `npcs/the_still_lattice.json` | legendary | 66 | 16 | ✅ | ✅ | 33 | 2 | — |
+| `the_unbodied_choir_master` | The Choirmaster Who Would Not Return | person | `npcs/the_unbodied_choir_master.json` | legendary | 65 | 16 | ✅ | ✅ | 31 | 2 | — |
 | `the_undecided` | The Undecided | person | `npcs/the_undecided.json` | epic | 46 | 16 | ✅ | ✅ | 23 | 2 | — |
 | `thessa_root` | Thessa Root | person | `npcs/thessa_root.json` | ~notable | →5 | — | ✅ | ✅ | 3 | — | — |
-| `thornmother_sealed` | The Thornmother of the Closing Wood | person | `npcs/thornmother_sealed.json` | legendary | 64 | 16 | ✅ | ✅ | 32 | — | — |
+| `thornmother_sealed` | The Thornmother of the Closing Wood | person | `npcs/thornmother_sealed.json` | legendary | 64 | 16 | ✅ | ✅ | 32 | 2 | — |
 | `tolvess` | Tolvess the Unhurried | person | `npcs/tolvess.json` | epic | 49 | 16 | ✅ | ✅ | 25 | 2 | — |
 | `vantia_stillhold` | Vantia of the Stillhold | person | `npcs/vantia_stillhold.json` | — | 23 | 8 | ✅ | ✅ | 12 | 2 | — |
 | `vesper_the_listener` | Vesper | person | `npcs/vesper_the_listener.json` | ~notable | →5 | — | ✅ | ✅ | 3 | — | — |

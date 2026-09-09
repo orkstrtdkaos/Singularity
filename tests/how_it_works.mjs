@@ -9897,6 +9897,44 @@ console.log("\n── §148 · role → tier, default down, authored always wins
     // ⛔ §2.2 — EVIDENCE PROPORTIONAL TO CLAIM. Without evidence the draw stops at the ceiling; WITH it, a
     // rung above becomes reachable. ⚠️ Not the retired `ceiling` returning: that capped every derivation,
     // this caps only an unevidenced DRAW.
+    // ⛔ §2.2 BUILT: "A REGEX IS NOT ENTITLED TO MINT A LEGENDARY. A BODY OF EVIDENCE IS." Four sources,
+    // each MEASURED before it was coded — and one of them was not where the spec looked: §2.2 names "the
+    // region's own band", and REGIONS carry only cartography. The field is `dangerLevel` on the LOCATION.
+    {
+      const arcs148 = Object.values(C148.greaterArcs?.arcs || C148.greaterArcs || {});
+      const hinge148 = new Set(); for (const a of arcs148) for (const h of (a?.hingeNpcs || [])) hinge148.add(h);
+      const evCtx = { hingeIds: hinge148, locations: C148.locations, cfg: cfg148 };
+      const kindOf = (rec, extra = {}) => NS148.evidenceFor(rec, { ...evCtx, ...extra }).sources.map(s => s.from);
+      // ⛑ EACH SOURCE FIRES ON ITS OWN, or a lump count hides three dead readers behind one live one.
+      check("§148: §2.2 the ARC source fires — `arcAffinity`, or being named a greater arc's hinge",
+        kindOf({ id: "x", arcAffinity: { arcId: "arc_the_disagreement" } }).includes("arc")
+        && kindOf({ id: [...hinge148][0] }).includes("arc"), [...hinge148].slice(0, 2).join(","));
+      check("§148: §2.2 the RENOWN source fires — and it is the FIRST reader that field has ever had",
+        kindOf({ id: "x", renown: "world-famous" }).includes("renown"));
+      check("§148: §2.2 the PLACE source fires off `dangerLevel` on the LOCATION — the Maw is not Millbrook",
+        kindOf({ id: "x", homeLocation: "the_maw" }).includes("place")
+        && !kindOf({ id: "x", homeLocation: "millbrook" }).includes("place"),
+        `maw ${C148.locations?.the_maw?.dangerLevel} vs millbrook ${C148.locations?.millbrook?.dangerLevel}`);
+      check("§148: §2.2 the DEEDS source fires off runtime `figureCareer` — the one source that is EARNED",
+        kindOf({ id: "x" }, { career: { deeds: 6 } }).includes("deeds")
+        && !kindOf({ id: "x" }, { career: { deeds: 0 } }).includes("deeds"));
+      // ⛑ NON-VACUITY, BOTH WAYS: a plain record shows NOTHING, and the corpus is not all-or-nothing.
+      check("§148: …and a plain record shows no evidence at all — the reader is not saying yes to everyone",
+        NS148.evidenceFor({ id: "nobody", role: "a hand at the mill" }, evCtx).count === 0);
+      // ⛔ THE LADDER: each source lifts the ceiling one rung. none→heroic · 1→epic · 2→legendary · 3→mythic.
+      const reach = (n) => { let sd = 3; const r = () => ((sd = (sd * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff);
+        const seen = new Set(); for (let i = 0; i < 4000; i++) seen.add(NS148.drawTier(topHeavy, { cfg: cfg148, rng: r, evidence: n }));
+        return Math.max(...[...seen].map(t => Number(cfg148.tierFloor[t]))); };
+      check("§148: §2.2 EVIDENCE IS A LADDER, NOT A SWITCH — each source buys exactly one more rung",
+        reach(0) === cfg148.tierFloor.heroic && reach(1) === cfg148.tierFloor.epic
+        && reach(2) === cfg148.tierFloor.legendary && reach(3) === cfg148.tierFloor.mythic,
+        [0, 1, 2, 3].map(n => reach(n)).join(" → "));
+      // ⛔ AND THIS IS §4 Q3's ANSWER WITHOUT A RULE FORBIDDING IT: a generated mythic needs THREE
+      // independent kinds at once, and NOT ONE AUTHORED RECORD IN THE CORPUS CARRIES THREE.
+      const best = Math.max(...Object.values(C148.npcs || {}).map(n => NS148.evidenceFor(n, evCtx).count));
+      check("§148: …so a generated mythic is possible and nearly unreachable — nobody in the corpus has three",
+        best === 2, `the most any authored record can show is ${best}`);
+    }
     const above = (ev) => { let sd = 7; const r = () => ((sd = (sd * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff);
       const seen = new Set(); for (let i = 0; i < 2000; i++) seen.add(NS148.drawTier(topHeavy, { cfg: cfg148, rng: r, evidence: ev }));
       return [...seen].filter(t => Number(cfg148.tierFloor[t]) > Number(cfg148.tierFloor[cfg148.tierRarity.evidenceCeiling])); };

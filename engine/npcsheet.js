@@ -213,6 +213,46 @@ export function targetTierShares({ cfg = {} } = {}) {
   return out;
 }
 
+/** ⛔ WHAT A RECORD CAN SHOW FOR ITSELF (SPEC §2.2). "A REGEX IS NOT ENTITLED TO MINT A LEGENDARY. A BODY
+ *  OF EVIDENCE IS." ⚑ Returns { sources: [{ from, why }], count } — the COUNT lifts the ceiling, and each
+ *  `from` appears at most once, so two arcs are not two arguments.
+ *
+ *  ⚠️ EVERY SOURCE WAS MEASURED BEFORE IT WAS CODED, AND ONE OF THEM MOVED:
+ *    · arc     — `arcAffinity` (58 records) or membership of a greater arc's `hingeNpcs` (11 ids).
+ *    · renown  — the authored `renown` band. ⛔ 4 records carry it and NOTHING READ IT until now, exactly as
+ *                Aevi said; this is the first consumer that field has ever had.
+ *    · place   — ⛔ NOT THE REGION. §2.2 says "the region's own band", and regions carry only cartography
+ *                (elevation, terrain, water, palette). The field is `dangerLevel` on the LOCATION: 127 of
+ *                135 carry it, 0–5, and the Maw is 5. Her instinct was right one level down.
+ *    · deeds   — `worldState.figureCareer[id].deeds`, which is RUNTIME state. A person minted this turn has
+ *                none, and that is the point: this source is EARNED, never born with.
+ *
+ *  ⛑ NO CODE DEFAULTS FOR THE TWO THRESHOLDS. `place` and `deeds` compare against a dial, so an absent
+ *  dial means those cannot fire rather than firing on a number nobody authored. ⚠️ `arc` and `renown` are
+ *  PRESENCE checks with nothing to threshold, so they fire with no dial at all — stated because the
+ *  sentence "an absent dial means the source cannot fire" would be false for half of them. PURE. */
+export function evidenceFor(entry, { hingeIds = null, locations = null, career = null, cfg = {} } = {}) {
+  const dial = cfg?.tierRarity || {};
+  const sources = [];
+  const arcId = entry?.arcAffinity?.arcId || (typeof entry?.arcAffinity === "string" ? entry.arcAffinity : null);
+  if (arcId) sources.push({ from: "arc", why: `carries arcAffinity → ${arcId}` });
+  else if (hingeIds && entry?.id && hingeIds.has?.(entry.id)) sources.push({ from: "arc", why: "named as a greater arc's hinge" });
+  if (entry?.renown) sources.push({ from: "renown", why: `authored renown: ${entry.renown}` });
+  const at = Number(dial.dangerEvidenceAt);
+  const loc = entry?.homeLocation && locations ? locations[entry.homeLocation] : null;
+  const danger = Number(loc?.dangerLevel);
+  if (Number.isFinite(at) && Number.isFinite(danger) && danger >= at) {
+    sources.push({ from: "place", why: `${entry.homeLocation} stands at dangerLevel ${danger}` });
+  }
+  const deedsAt = Number(dial.deedsEvidenceAt);
+  const deeds = Number(career?.deeds);
+  if (Number.isFinite(deedsAt) && Number.isFinite(deeds) && deeds >= deedsAt) {
+    sources.push({ from: "deeds", why: `${deeds} recorded deeds` });
+  }
+  return { sources, count: sources.length };
+}
+
+
 /** ⛔ DRAW A RUNG AGAINST THE WORLD THE PLAYER ACTUALLY HAS (SPEC §2.1). Aevi: "If legendaries are already 12%
  *  of the population, another is vanishingly unlikely. If the bottom is empty, riffraff is nearly certain."
  *  ⚑ THE PYRAMID ENFORCES ITSELF: the weight of a rung is its DEFICIT — target share minus the share the world
@@ -229,8 +269,23 @@ export function drawTier(census = {}, { cfg = {}, rng = Math.random, evidence = 
   const target = targetTierShares({ cfg });
   if (!target) return null;
   const floors = cfg.tierFloor || {};
-  const ceilName = evidence ? null : (cfg?.tierRarity?.evidenceCeiling || null);
-  const capAt = ceilName != null && floors[ceilName] != null ? Number(floors[ceilName]) : Infinity;
+  // ⛔ EVIDENCE IS A LADDER, NOT A SWITCH (§2.2, and Erik's "rare, not never"). `evidence` accepts what
+  // callers actually have: `true`/`false` as before, a COUNT of independent sources, or the object
+  // `evidenceFor` returns. ⚠️ Each source lifts the allowed ceiling by `evidenceRungsPerSource`, so
+  // none → heroic · one → epic · two → legendary · three → mythic.
+  const evCount = typeof evidence === "number" ? evidence
+    : (evidence && typeof evidence === "object") ? Number(evidence.count) || 0
+    : evidence ? Infinity : 0;
+  const ceilName = cfg?.tierRarity?.evidenceCeiling || null;
+  const rungsAsc = Object.keys(floors).sort((a, b) => Number(floors[a]) - Number(floors[b]));
+  const baseIdx = ceilName != null ? rungsAsc.indexOf(ceilName) : -1;
+  const per = Number(cfg?.tierRarity?.evidenceRungsPerSource);
+  // ⛑ `true` still means "no ceiling", so every existing caller and gate reads the same. A COUNT with no
+  // `evidenceRungsPerSource` dial lifts NOTHING — an unwired dial must not invent a policy nobody authored.
+  const liftedIdx = !Number.isFinite(evCount) ? rungsAsc.length - 1
+    : baseIdx < 0 ? rungsAsc.length - 1
+    : Math.min(rungsAsc.length - 1, baseIdx + (Number.isFinite(per) ? Math.floor(evCount * per) : 0));
+  const capAt = baseIdx < 0 ? Infinity : Number(floors[rungsAsc[liftedIdx]]);
   const allowed = Object.keys(target).filter(t => Number(floors[t]) <= capAt);
   const total = Object.values(census).reduce((a, b) => a + (Number(b) || 0), 0);
   // ⚠️ NO CODE DEFAULT for the floor either: without the dial it is 0, which is the old behaviour, and an

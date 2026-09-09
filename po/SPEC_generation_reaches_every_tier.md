@@ -298,3 +298,42 @@ generated mythic be possible at all"* stops being theoretical. ⚑ **My measurem
 already shut, 0 of 20 slots vacant, so the natural answer is "only when an arc needs one".**
 
 **1653 ok · 29 suites · v1.9.428.**
+
+---
+
+# ✅ §2.2 BUILT — AND ONE OF YOUR FOUR SOURCES WAS NOT WHERE YOU LOOKED
+
+⛑ **`evidenceFor(record, ctx)` returns `{ sources, count }`, and the count LIFTS THE CEILING ONE RUNG PER
+SOURCE.** ⚑ *"Evidence proportional to claim"* read as a LADDER rather than a switch:
+
+> ⬜ **none → heroic · one → epic · two → legendary · ⛔ three → mythic**
+
+## ⚠️ EACH SOURCE MEASURED BEFORE IT WAS CODED
+
+| your source | what is actually there |
+|---|---|
+| ✅ **arc involvement** | `arcAffinity` on **58 records**, plus **11** `hingeNpcs` ids. Plentiful |
+| ✅ **authored renown** | **4 records** carry it — ⛔ **and you were exactly right that NOTHING read it.** This is the first consumer that field has ever had |
+| ⛔ **the region's own band** | ⚠️ **THE FIELD IS NOT ON THE REGION.** Regions carry `elevation`, `terrain`, `water`, `palette`, `features` — **no band, no danger, nothing.** ⛑ **It is `dangerLevel` on the LOCATION: 127 of 135 carry it, 0–5, and the Maw is 5.** Your instinct was right one level down, and *"a figure generated in the Maw is not a figure generated in Millbrook"* is now literally checkable — **the Maw 5, Millbrook 1** |
+| ✅ **`figureCareer` deeds** | ⚠️ **RUNTIME state, not content** — `worldState.figureCareer[id].deeds`, so **0 records carry it and that is correct.** ⛔ **It is the only source that is EARNED rather than born with**, which makes the generative road to the top mostly WALKED |
+
+## ⛔ AND THIS ANSWERS §4 Q3 WITHOUT A RULE FORBIDDING ANYTHING
+
+**Measured across the whole corpus:** `{0 sources: 70 · 1: 55 · 2: 15}` — ⛔ **NOT ONE AUTHORED RECORD
+CARRIES THREE.**
+
+➡️ ⚑ **So a generated mythic is POSSIBLE and NEARLY UNREACHABLE, which is precisely Erik's *"rare, not
+never"* — and it is arithmetic rather than a wall.** ⚠️ It agrees with my earlier hinge measurement from the
+other direction: 0 of 20 hinge slots vacant. **Two independent gates, both currently shut, neither of them a
+rule.**
+
+⬜ **Worked examples:** `the_high_luminary` shows 2 (arc + renown) and is legendary — consistent.
+`the_hollow_king` shows 2 (arc + the Maw) and sits at `epic`. ⚠️ **And `lucifer` shows ZERO** — no
+`arcAffinity`, no `renown`, no home location — which is honest: he is authored mythic, and **authored always
+wins over evidence**. He has not earned a thing; he simply IS one.
+
+## ⬜ STILL OWED
+
+⚠️ **`drawTier` + `evidenceFor` are still not wired into `generate()`.** The mechanism is complete and gated;
+the caller that assembles a census and mints a tier is the remaining piece, and §4 Q2 decides its shape (the
+census is per-save, so it must be built from `CONTENT.npcs` + `character.generated.npc`).

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "tier_rarity",
+  "kind": "rules",
+  "note": "⛔ THE SHAPE THE WORLD'S POPULATION SHOULD HAVE, so rarity does the work a ceiling was doing. Erik: 'Eliminate the no-generated-NPCs-past-this-tier rule. That's not what I want. We can make it rare, but the game is primarily generative.' ⚠️ MEASURED WHEN THIS LANDED: the authored corpus is an INVERTED pyramid — 44% heroic, 36% epic, 19% legendary, and ZERO riffraff, notable or regional in 136 people. Nobody has authored the bottom, and the generator is the only thing that ever will.",
+
+  "ratio": 0.667,
+  "_ratio": "⛑ ONE NUMBER, AND THE SHARES ARE DERIVED FROM IT — each rung is this fraction of the rung below, walking UP from riffraff. ⛔ DELIBERATELY NOT A TABLE OF SHARES: a table drifts from the intuition it was meant to encode, which is exactly what `attentionByTier` did (it weights notable, regional and heroic identically at 0.5, so inverting it gives a pyramid with a FLAT MIDDLE — a generated regional exactly as likely as a generated heroic). ⚠️ Change this one value and every share moves together.",
+  "_ratioWhy": "⚑ ERIK, 2026-09-08, choosing between halving and this: 'gentler than halving'. Halving makes a generated legendary a ~1-in-60 event while the corpus today is 19% legendary; two thirds fills the empty bottom without making the top feel unreachable. ⬜ At 0.667 the shape is riffraff 35% · notable 24% · regional 16% · heroic 10% · epic 7% · legendary 4.7% · mythic 3.1%.",
+
+  "evidenceCeiling": "heroic",
+  "_evidenceCeiling": "⛔ SPEC_generation_reaches_every_tier §2.2 — 'A role string alone reaches heroic; above it needs more than a regex. A REGEX IS NOT ENTITLED TO MINT A LEGENDARY. A BODY OF EVIDENCE IS.' ⚠️ THIS IS NOT THE OLD `ceiling` DIAL COMING BACK: the retired one capped what anyone could ever DERIVE. This caps only a draw made WITHOUT evidence, and the draw is free above it the moment evidence exists — an arc hinge, authored renown, the region's own band, or figureCareer deeds.",
+
+  "_theRungOrderIsNotHere": "⚑ DERIVED FROM `npcStanding.tierFloor`, ascending — riffraff 1 · notable 5 · regional 12 · heroic 25 · epic 40 · legendary 60 · mythic 85. A second list of the rungs is a second ladder, and two ladders that can disagree is the defect that put `certify_counts` at 125 against the gate's 128.",
+
+  "_whatIsNotHere": "⬜ NO PER-REGION SHAPE. SPEC §2.2 names 'the region's own band' as EVIDENCE — a figure generated in the Maw is not a figure generated in Millbrook — but that is an input to the evidence test, not a second pyramid. One target shape for the world; the Maw earns its legendaries by carrying evidence, not by having its own quota."
+}

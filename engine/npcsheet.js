@@ -190,6 +190,64 @@ export function leanOf(entry, opts = {}) {
 /** ⛔ THE SHEET. Same shape a contest already takes, so an NPC can be a combatant without a second format.
  *  ⚠️ AN AUTHORED SHEET WINS OUTRIGHT — this fills in for people nobody has written down yet, and the
  *  moment Aevi authors one the derivation stops applying to them. */
+/** ⛔ THE TARGET SHAPE OF THE WORLD'S POPULATION, DERIVED FROM ONE NUMBER (SPEC §2.1). Erik: "We can make
+ *  it rare, but the game is primarily generative" — so rarity, not a wall, is what keeps the great figures great.
+ *
+ *  ⚠️ THE RUNG ORDER IS READ FROM `tierFloor`, ASCENDING — never a second list. Two ladders that can disagree
+ *  is the defect that put `certify_counts` at 125 against the gate's 128, and this file already carries the
+ *  same warning over `tierOf`.
+ *
+ *  ⛑ NO CODE DEFAULT, DELIBERATELY. Without the dial this returns null and the caller derives nothing — a
+ *  built-in shape would MASK an unwired dial while the engine looked fine, which is the rule `derivedLevel`
+ *  states one function up. Returns { tier: share } summing to 1. */
+export function targetTierShares({ cfg = {} } = {}) {
+  const dial = cfg?.tierRarity, floors = cfg?.tierFloor;
+  if (!dial || !floors) return null;
+  const r = Number(dial.ratio);
+  if (!(r > 0 && r < 1)) return null;
+  const rungs = Object.keys(floors).sort((a, b) => Number(floors[a]) - Number(floors[b]));
+  const w = {}; let sum = 0, k = 1;
+  for (const t of rungs) { w[t] = k; sum += k; k *= r; }
+  const out = {};
+  for (const t of rungs) out[t] = w[t] / sum;
+  return out;
+}
+
+/** ⛔ DRAW A RUNG AGAINST THE WORLD THE PLAYER ACTUALLY HAS (SPEC §2.1). Aevi: "If legendaries are already 12%
+ *  of the population, another is vanishingly unlikely. If the bottom is empty, riffraff is nearly certain."
+ *  ⚑ THE PYRAMID ENFORCES ITSELF: the weight of a rung is its DEFICIT — target share minus the share the world
+ *  already carries — so the generator pours into the empty rungs and stops pouring when they fill.
+ *
+ *  ⚠️ `census` is { tier: count } over the people the PLAYER has, authored and generated together (SPEC §4 Q2:
+ *  "the player experiences one world and does not know which is which"). ⛔ THAT MAKES IT SAVE STATE, so a gate
+ *  on this must drive a FIXTURE census and never a live save's — a gate anchored to running state rots.
+ *
+ *  ⛑ §2.2 — WITHOUT EVIDENCE THE DRAW STOPS AT `evidenceCeiling`. "A REGEX IS NOT ENTITLED TO MINT A
+ *  LEGENDARY. A BODY OF EVIDENCE IS." ⚠️ This is NOT the retired `ceiling` returning: that one capped what
+ *  anyone could ever derive; this caps only an UNEVIDENCED draw, and lifts the moment evidence exists. */
+export function drawTier(census = {}, { cfg = {}, rng = Math.random, evidence = false } = {}) {
+  const target = targetTierShares({ cfg });
+  if (!target) return null;
+  const floors = cfg.tierFloor || {};
+  const ceilName = evidence ? null : (cfg?.tierRarity?.evidenceCeiling || null);
+  const capAt = ceilName != null && floors[ceilName] != null ? Number(floors[ceilName]) : Infinity;
+  const allowed = Object.keys(target).filter(t => Number(floors[t]) <= capAt);
+  const total = Object.values(census).reduce((a, b) => a + (Number(b) || 0), 0);
+  let pool = allowed.map(t => {
+    const have = total > 0 ? (Number(census[t]) || 0) / total : 0;
+    return [t, Math.max(0, target[t] - have)];
+  });
+  // ⚠️ A WORLD ALREADY AT OR ABOVE TARGET ON EVERY ALLOWED RUNG HAS NO DEFICIT TO DRAW FROM. Falling back to
+  // the target shape keeps the generator producing people; returning null here would stop the world instead.
+  if (!pool.some(([, w]) => w > 0)) pool = allowed.map(t => [t, target[t]]);
+  const sum = pool.reduce((a, [, w]) => a + w, 0);
+  if (!(sum > 0)) return null;
+  let roll = rng() * sum;
+  for (const [t, w] of pool) { roll -= w; if (roll <= 0) return t; }
+  return pool[pool.length - 1][0];
+}
+
+
 export function sheetFor(entry, { day = null, cfg = {}, roleAttributes = null, authored = null, levelOverride = null } = {}) {
   if (authored) return { ...authored, id: entry?.id || authored.id, authored: true };
   // ⛔ SNG-486 — see sheetFrom: a record carrying its own sub-attributes IS an authored sheet.

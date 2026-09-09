@@ -248,3 +248,53 @@ and that is a much better trigger than a percentage.**
 
 ⚠️ **I have left the status at `spec_ready` and not touched it.** ⛑ **It is not fully built, and the status
 field is yours** — the same rule that made §5 mine to retire makes this line yours to move.
+
+---
+
+# ✅ §2.1 AND §2.2 BUILT — ERIK RULED THE PYRAMID (2026-09-08)
+
+⚑ **ERIK, given halving · `attentionByTier` inverted · gentler · hold: *"gentler than halving"*.** ⛑ **So
+the dial is `ratio: 0.667` and EVERY SHARE IS DERIVED FROM IT** — `content/packs/core/rules/tier_rarity.json`,
+registered, loaded, and attached to `npcStanding` beside `tierSignals`.
+
+⛔ **ONE NUMBER, NOT A TABLE OF SHARES** — a table drifts from the intuition it encodes, which is precisely
+what `attentionByTier` did. **Change `ratio` and the whole shape moves together.**
+
+| rung | target | | rung | target |
+|---|---|---|---|---|
+| riffraff | **35.4%** | | epic | 7.0% |
+| notable | **23.6%** | | legendary | 4.7% |
+| regional | **15.7%** | | mythic | 3.1% |
+| heroic | **10.5%** | | | |
+
+## ⛑ AND THE PYRAMID SELF-CORRECTS EXACTLY AS YOU SAID IT WOULD
+
+**Driven against the corpus census as it stands** (`heroic 39 · epic 32 · legendary 17`, bottom empty),
+**2000 draws:**
+
+> ✅ **riffraff · notable · regional ONLY.** ⛔ **Not one heroic, epic or legendary** — because the world is
+> already far over target on all three, so their deficit is zero and their weight is zero.
+
+⚑ **No rule says "stop making legendaries". The deficit says it**, and it will stop saying it the moment the
+bottom fills. ⚠️ *"If the bottom is empty, riffraff is nearly certain"* is now literally the arithmetic.
+
+## ⚠️ §2.2 IS IN THE SAME FUNCTION, AND IT IS NOT THE OLD WALL
+
+⛔ **Without evidence a draw stops at `evidenceCeiling: heroic`. With evidence it does not.** ⚑ **The retired
+`ceiling` capped what anyone could EVER derive; this caps only an UNEVIDENCED draw and lifts the moment
+evidence exists.** ✅ **Both directions gated** — *"a regex may not mint a legendary"* AND *"evidence lifts
+it, or the ceiling is just the wall we retired"*.
+
+## ⬜ TWO THINGS STILL OWED, STATED SO NEITHER IS ASSUMED
+
+| | |
+|---|---|
+| ⚠️ **`drawTier` IS NOT WIRED INTO `generate()` YET** | the mechanism is built, gated and pure; **nothing mints a tier from it today.** The census is SAVE STATE (§4 Q2), so the caller must assemble it from `CONTENT.npcs` + `character.generated.npc` — that is the next piece |
+| ⛔ **THE EVIDENCE TEST ITSELF IS A STUB** | `drawTier` takes `evidence` as a BOOLEAN. **§2.2's four sources — arc hinge, authored renown, region band, `figureCareer` deeds — are not yet computed.** ⚠️ `renown` on `legends.json` is still read by nothing, exactly as you said |
+
+⬜ **AND Q3 IS STILL YOURS.** ⚠️ **With evidence, `drawTier` CAN return `mythic`** (the world has none and the
+target is 3.1%). ⛑ **Nothing can act on that yet because nothing is wired** — but the day it is, *"should a
+generated mythic be possible at all"* stops being theoretical. ⚑ **My measurement stands: the hinge gate is
+already shut, 0 of 20 slots vacant, so the natural answer is "only when an arc needs one".**
+
+**1653 ok · 29 suites · v1.9.428.**

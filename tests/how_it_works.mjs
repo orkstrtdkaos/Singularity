@@ -9851,6 +9851,41 @@ console.log("\n── §148 · role → tier, default down, authored always wins
       derived148.every(t => Number(cfg148.tierFloor[t.tier]) <= Number(cfg148.tierFloor.heroic)),
       [...new Set(derived148.map(t => t.tier))].join(", "));
   }
+  // ⛔ §2.1 — RARITY BY POPULATION SHAPE. Erik chose 'gentler than halving'; the dial is ONE ratio and every
+  // share is derived from it, because a table of shares drifts from the intuition it encodes (which is
+  // exactly what `attentionByTier` did — it weights notable/regional/heroic identically, so inverting it
+  // gives a pyramid with a flat middle). ⚠️ THE CENSUS IS SAVE STATE, so every check here drives a FIXTURE
+  // census and never a live save's — a gate anchored to running state rots, three times in one week.
+  {
+    const shares = NS148.targetTierShares({ cfg: cfg148 });
+    const rungs = Object.keys(cfg148.tierFloor).sort((a, b) => cfg148.tierFloor[a] - cfg148.tierFloor[b]);
+    check("§148: §2.1 the target shape is a PYRAMID — every rung rarer than the one below, summing to 1",
+      !!shares && Math.abs(Object.values(shares).reduce((a, b) => a + b, 0) - 1) < 1e-9
+      && rungs.every((t, i) => i === 0 || shares[t] < shares[rungs[i - 1]]),
+      rungs.map(t => `${t} ${(100 * (shares?.[t] ?? 0)).toFixed(1)}%`).join(" · "));
+    // ⛑ NO CODE DEFAULT: an unwired dial must derive NOTHING, or a built-in shape masks a broken thread.
+    check("§148: …and with no dial it derives NOTHING rather than inventing a shape",
+      NS148.targetTierShares({ cfg: {} }) === null && NS148.drawTier({}, { cfg: {} }) === null);
+    // ⛔ THE PYRAMID SELF-CORRECTS. A top-heavy world with an empty bottom must pour into the bottom and
+    // must NOT add to a rung it already over-fills — with no rule saying so, only the deficit.
+    const topHeavy = { heroic: 39, epic: 32, legendary: 17 };
+    let seed148 = 1; const rng148 = () => ((seed148 = (seed148 * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff);
+    const drawn = {};
+    for (let i = 0; i < 2000; i++) { const t = NS148.drawTier(topHeavy, { cfg: cfg148, rng: rng148 }); drawn[t] = (drawn[t] || 0) + 1; }
+    check("§148: §2.1 the draw POURS INTO THE EMPTY RUNGS and never adds to an over-filled one",
+      Object.keys(drawn).length > 1 && !drawn.heroic && !drawn.epic && !drawn.legendary && drawn.riffraff > 0,
+      JSON.stringify(drawn));
+    // ⛔ §2.2 — EVIDENCE PROPORTIONAL TO CLAIM. Without evidence the draw stops at the ceiling; WITH it, a
+    // rung above becomes reachable. ⚠️ Not the retired `ceiling` returning: that capped every derivation,
+    // this caps only an unevidenced DRAW.
+    const above = (ev) => { let sd = 7; const r = () => ((sd = (sd * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff);
+      const seen = new Set(); for (let i = 0; i < 2000; i++) seen.add(NS148.drawTier(topHeavy, { cfg: cfg148, rng: r, evidence: ev }));
+      return [...seen].filter(t => Number(cfg148.tierFloor[t]) > Number(cfg148.tierFloor[cfg148.tierRarity.evidenceCeiling])); };
+    check("§148: §2.2 an UNEVIDENCED draw never reaches above the ceiling — a regex may not mint a legendary",
+      above(false).length === 0, above(false).join(", "));
+    check("§148: …and EVIDENCE lifts it, or the ceiling is just the wall we retired",
+      above(true).length > 0, above(true).join(", ") || "(nothing above the ceiling was ever drawn)");
+  }
   // ⛔ SPEC_generation_reaches_every_tier — THE LADDER ALREADY REACHES EVERY RUNG, AND NOTHING READ IT BACK.
   // Erik ruled tier MOVES ("they need to grow too (which they do in tier)"); `tierOf` was built for it and
   // imported only by holdings.js. ⚠️ So the ceiling was never bounding what a generated person could

@@ -341,7 +341,7 @@
      "class": "hard"
     }
    ],
-   "plainly": "An action that makes or animates something. Its strength is rated 7 out of 10, and lasts for about 30 days Ranks: rank 2 adds to special. Limit: iT Needs A Genuine Bargain TO Bind.",
+   "plainly": "An action that strikes a pact whose terms are fair and whose keeping is wild — the Abyssals bargain honestly, and that is the horror. Its strength is rated 7 out of 10, and lasts for about 30 days Ranks: rank 2 adds to special. Limit: iT Needs A Genuine Bargain TO Bind.",
    "_nameWas": "The Honest Bargain",
    "_idWas": "the_honest_bargain",
    "_functionsWas": [
@@ -355,7 +355,9 @@
     "wild_nanite": 0.6,
     "veil": 0.4
    },
-   "namedCurrent": "wild_current"
+   "namedCurrent": "wild_current",
+   "_plainlyWas": "An action that makes or animates something. Its strength is rated 7 out of 10, and lasts for about 30 days Ranks: rank 2 adds to special. Limit: iT Needs A Genuine Bargain TO Bind.",
+   "_glossFix_20260908": "⛔ TIER 1 OF `SPEC_tradition_narrative_npc_pass` — A WRONG GLOSS IS A CORRECTNESS BUG, NOT POLISH. ⚠️ MEASURED 2026-09-08: 42 crafts carry a stock gloss and TWELVE named a verb family the craft does not have — and ALL TWELVE SAID THE SAME SENTENCE, 'makes or animates something'. ⛑ ONE STALE DEFAULT, not twelve errors: a concealment craft, a bargain, a truce and an hour held open were all being described to the GM as though they built something. ⚑ THE DESCRIPTION WAS RIGHT IN EVERY CASE. The gloss is the only thing that was wrong, and the fix is to say what the GM NARRATES CHANGING — T7: 'a dice roll is not an answer.' ⬜ The spec's estimate was ~48; the real number is 12, because the corpus has been repaired since 08-31. ⚠️ MEASURE BEFORE AUTHORING — an eight-day-old count is a claim about eight days ago."
   },
   {
    "schemaVersion": 1,

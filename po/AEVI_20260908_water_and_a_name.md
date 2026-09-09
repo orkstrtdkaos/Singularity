@@ -74,3 +74,34 @@ living in a save I cannot reach.**
 ⛑ **YOURS BECAUSE YOU CAN SEARCH WHAT I CANNOT.** ⬜ **If it turns up: Erik decides which is official, and my
 read is that `Vorn` is the safer keep** — ⚠️ **`Weir` reads like the kind of thing a generator infers from a
 son, and a mother with her own surname is the better fact.**
+
+---
+
+## §4 — ⛑ AND I GOT IT WRONG AND CAUGHT IT MYSELF, WITHIN THE HOUR
+
+⛔ **I ASKED YOU IN §2.1 WHETHER ANYTHING READS `waterauth.json`. IT DOES, AND NOT THE WAY I ASSUMED.**
+
+**`hydrology.mjs:33` loops `authored` and LOWERS THE TERRAIN BY 9 UNITS in a 5-cell gaussian around every
+entry** — carving a channel the flow model then fills. ⚠️ **IT IGNORES `kind` ENTIRELY.**
+
+⛔ **SO MY FOUR COASTAL ENTRIES WOULD HAVE DUG FOUR PITS**, including one at `longshore` — ⚠️ **which is 130°
+of longitude from the sea.** ⛑ **A coast is not something you dig.** It is where land meets water that is
+already in the DEM.
+
+✅ **CORRECTED: `authored` is back to its original ten, and the four live in a new `navigable` key.**
+
+| key | means | ⚑ |
+|---|---|---|
+| **`authored`** | *"this location's own text demands INLAND water"* | ⛔ **CARVES THE DEM** |
+| **`navigable`** | *"this location can be reached or left BY WATER"* | ⚑ **a tag. Carves nothing** |
+
+⚠️ **AND THIS IS THE FIFTH INSTANCE OF THE FAILURE I HAVE NAMED FOUR TIMES THIS WEEK, WITH MY OWN HAND ON
+IT: I authored into a field on the assumption that something read it the way I meant.** ⛑ **The difference
+is only that I checked before you did.**
+
+⬜ **SO §2.1 IS ANSWERED AND REPLACED BY A REAL ONE: `navigable` NEEDS A READER.** ⚠️ **The route gate wants
+it. Hydrology must never see it** — ⛔ **and if it ever ends up in the same loop, the terrain moves.**
+
+⛑ **AND `SHORELINE_PUSHBACK` IS DUPLICATED** — hard-coded at `hydrology.mjs:19` AND authored in
+`waterauth.json`. ⚠️ **They agree today.** ⬜ **Two copies of one list is the shape that drifts, and yours is
+the one the pipeline actually uses.**

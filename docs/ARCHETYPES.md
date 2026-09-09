@@ -92,7 +92,7 @@ for the three-domain rule.**
 ### THE HEARTH-KEEPER — *Building / Life / Death*
 `hearthbinding` · `laid_ground` · `safe_ground` · `stillcraft` · `held_repair`
 ⚑ **Life:** `staunch` · `greenlore` — **Death:** `kept_vigil` · `carried_name`
-⚠️ **The holdings build** — every craft makes a PLACE hold, which is why Ama draws here.
+⚠️ **The holdings build** — every craft makes a PLACE hold, which is why Hesta Vorn draws here.
 
 ### ⛔ THE RULER — *the largest hole found*
 **Wants:** ⛔ `the_gathering` · `raise_banner` · `lead_the_line` · `command_field` — **NONE EXIST.**

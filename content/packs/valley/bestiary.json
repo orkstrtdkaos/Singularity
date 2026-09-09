@@ -14,36 +14,144 @@
    "concept": "A creature bled out of native fiction by the Manifestation Storm — a thing from a domain that manifested wrong, 'wrong for here,' flagged by how badly it fits the place it's in. Not evil; misplaced, and dangerous the way a wild animal in a kitchen is dangerous.",
    "readsFromArc": "arc_manifestation_storm",
    "morallyClean": "It was dreamed into being by the substrate, not born. Ending it returns borrowed fiction; there is no one to mourn.",
-   "hasSelf": true
+   "hasSelf": true,
+   "kit": [
+    {
+     "function": "strike",
+     "name": "the wrong-shaped blow",
+     "why": "it does not fit here and neither does the way it hits you"
+    },
+    {
+     "function": "conceal",
+     "name": "almost not there",
+     "why": "⚑ 'flagged by how badly it fits the place it's in' — and it half-doesn't"
+    },
+    {
+     "function": "transform",
+     "name": "the domain leaking",
+     "why": "⚠️ it brings its own grammar with it"
+    }
+   ],
+   "_kitWhy": "⛔ NOT EVIL, MISPLACED. Its danger is that the rules it obeys are somewhere else's."
   },
   "feral_construct": {
    "concept": "A mechanism whose maker is gone and whose directive rots — a pre-Transition device or Enginewright construct still running an order it no longer understands, turned dangerous by a purpose with no one to serve.",
    "readsFromArc": "arc_what_wakes_beneath",
    "morallyClean": "It is a broken tool, not a mind. Stopping it is repair by other means; the only tragedy is the maker who left it, and they are long gone.",
-   "hasSelf": false
+   "hasSelf": false,
+   "kit": [
+    {
+     "function": "strike",
+     "name": "the order, still running",
+     "why": "⚑ 'a purpose with no one to serve' — it is executing"
+    },
+    {
+     "function": "resist",
+     "name": "built to last",
+     "why": "a pre-Transition device outlives what it was for"
+    },
+    {
+     "function": "bind",
+     "name": "the procedure applied to you",
+     "why": "⛔ it is not fighting you, it is PROCESSING you"
+    }
+   ],
+   "_kitWhy": "⚠️ `deathSave.notForClasses` bars it — there is no thread to cut. ⛑ And the kit says why: nothing here is alive to stop."
   },
   "substrate_warped_beast": {
    "concept": "A real animal the stirring substrate touched — a wolf, a river-thing, a bird-flock — warped past its own nature into something that hunts wrong and cannot be calmed. The saddest of the three, but past saving: the animal it was is already gone.",
    "readsFromArc": "arc_what_wakes_beneath",
    "morallyClean": "The creature it was is already lost to the warp. A clean end is the last mercy its original nature can be given — closer to putting down than to killing.",
-   "hasSelf": true
+   "hasSelf": true,
+   "kit": [
+    {
+     "function": "strike",
+     "name": "hunting wrong",
+     "why": "⚑ 'warped past its own nature into something that hunts wrong'"
+    },
+    {
+     "function": "move",
+     "name": "faster than the animal was",
+     "why": "the substrate gave it something"
+    },
+    {
+     "function": "resist",
+     "name": "cannot be calmed",
+     "why": "⛔ 'past saving' — soothe finds nothing to settle"
+    }
+   ],
+   "_kitWhy": "⚠️ THE SADDEST OF THE THREE and the kit should feel like an animal, not a monster: it strikes, it moves, and it will not stop."
   },
   "made_weapon": {
    "concept": "A person who has unmade themselves into a weapon — an assassin bound to a contract they can no longer refuse, a cultist hollowed by the cult-of-purity of their own tradition, a warden turned by the thing they warded. Clean to kill NOT because they were never a person, but because the person is already gone: what's left is the function. The design law holds by a hair — there is no story left to end, only a hand that will not stop.",
    "designNote": "The one class where the adversary wears a face. It stays clean ONLY when the person is genuinely foreclosed — a made instrument, not a soul mid-choice. If it would be a tragedy, it's an NPC, not this. Use sparingly; the horror is that a person CAN become this.",
-   "hasSelf": false
+   "hasSelf": false,
+   "kit": [
+    {
+     "function": "strike",
+     "name": "the contract, kept",
+     "why": "⛔ 'bound to a contract they can no longer refuse'"
+    },
+    {
+     "function": "foresee",
+     "name": "what a person was",
+     "why": "⚑ IT WAS SOMEONE — it still reads a fight like a person does"
+    },
+    {
+     "function": "resist",
+     "name": "nothing left to appeal to",
+     "why": "⚠️ hollowed by the cult-of-purity of their own tradition"
+    }
+   ],
+   "_kitWhy": "⛑ THE ONLY BEAST THAT KEEPS A PERSON'S SKILL. `deathSave.notForClasses` bars it too — there is a body and no self."
   },
   "great_manifestation": {
    "concept": "The largest things the Storm bled through or the substrate raised — dragon-scale manifestations of a whole domain's logic given hunger and wing. Not an animal grown big: a piece of the world's grammar walking, the size of a hill, that resolved wrong and will not resolve back. A dragon is a domain that learned to fly and forgot everything but appetite.",
    "hasSelf": true,
-   "_notAllDragons_20260908": "⛔ ERIK 2026-09-08: 'DRAGONS ARE NOT ALL POLES THAT WENT WRONG.' ⚑ A `great_manifestation` is ONE KIND — a domain that resolved wrong and will not resolve back, a hazard with a broken directive and no grievance. ⚠️ THE OTHER KIND IS A PERSON: a TRUE DRAGON, older than the Transition, wearing whichever shape the conversation needs. ⛑ AND THIS FILE'S OWN FIRST LAW IS THE TEST, UNCHANGED: 'no name of its own, no want, no story being ended — IF IT WOULD BE A TRAGEDY TO KILL, IT BELONGS IN NPCs, NOT HERE.' ⚑ Ysenkar and Tolvess have names, wants and stories that can end badly, so they are `npcs/`, and the line held without moving. ⬜ A manifestation-dragon and a true dragon can share a sky and are not the same kind of thing."
+   "_notAllDragons_20260908": "⛔ ERIK 2026-09-08: 'DRAGONS ARE NOT ALL POLES THAT WENT WRONG.' ⚑ A `great_manifestation` is ONE KIND — a domain that resolved wrong and will not resolve back, a hazard with a broken directive and no grievance. ⚠️ THE OTHER KIND IS A PERSON: a TRUE DRAGON, older than the Transition, wearing whichever shape the conversation needs. ⛑ AND THIS FILE'S OWN FIRST LAW IS THE TEST, UNCHANGED: 'no name of its own, no want, no story being ended — IF IT WOULD BE A TRAGEDY TO KILL, IT BELONGS IN NPCs, NOT HERE.' ⚑ Ysenkar and Tolvess have names, wants and stories that can end badly, so they are `npcs/`, and the line held without moving. ⬜ A manifestation-dragon and a true dragon can share a sky and are not the same kind of thing.",
+   "kit": [
+    {
+     "function": "strike",
+     "name": "the grammar landing",
+     "why": "⚑ 'a piece of the world's grammar walking, the size of a hill'"
+    },
+    {
+     "function": "transform",
+     "name": "the domain asserting itself",
+     "why": "⛔ it does not enter a place, it OVERWRITES one"
+    },
+    {
+     "function": "ward",
+     "name": "what a whole domain is",
+     "why": "⚠️ you are hitting a rule, not an animal"
+    }
+   ],
+   "_kitWhy": "⛔ A DOMAIN THAT RESOLVED WRONG AND WILL NOT RESOLVE BACK. ⚑ The `ward` is not armour — it is that the thing IS its own law."
   },
   "narrowed_dead": {
    "concept": "⛔ A RAISING THAT WENT THE OTHER WAY. SPEC §48 gives two end states: STABLE (Afterlings, full personality) and NARROWING (unminded purpose). ⚠️ AN AFTERLING BELONGS IN NPCs — it is a person and killing it is a tragedy, which the design laws exclude from here. THE NARROWED DO NOT: what is left is an errand wearing a body, and that is a hazard.",
    "readsFromArc": "arc_what_wakes_beneath · §48 undeath",
    "morallyClean": "✅ CLEAN. There is no person left to wrong — which is the whole difference between this class and an Afterling, and the reason one is a creature and the other is an NPC.",
    "hasSelf": false,
-   "_shapeFix_20260830": "⚠️ I AUTHORED THIS CLASS AS A BARE STRING while the other five are objects with `concept` / `readsFromArc` / `morallyClean`. ⛔ ANYTHING READING `classes[x].concept` GOT `undefined` FOR THE NEWEST CLASS — and it is the one class whose concept a rule would most want to read. CCode found it: 'exactly the shape that makes a property unreadable later, so fix it BEFORE anything reads classes rather than after.' ✅ The original string is preserved verbatim as `concept`."
+   "_shapeFix_20260830": "⚠️ I AUTHORED THIS CLASS AS A BARE STRING while the other five are objects with `concept` / `readsFromArc` / `morallyClean`. ⛔ ANYTHING READING `classes[x].concept` GOT `undefined` FOR THE NEWEST CLASS — and it is the one class whose concept a rule would most want to read. CCode found it: 'exactly the shape that makes a property unreadable later, so fix it BEFORE anything reads classes rather than after.' ✅ The original string is preserved verbatim as `concept`.",
+   "kit": [
+    {
+     "function": "strike",
+     "name": "the one purpose left",
+     "why": "⚑ 'unminded purpose' — everything else narrowed away"
+    },
+    {
+     "function": "track",
+     "name": "it knows what it was for",
+     "why": "⛔ narrowing keeps the errand and drops the person"
+    },
+    {
+     "function": "resist",
+     "name": "already past the worst",
+     "why": "⚠️ it has been dying for a while"
+    }
+   ],
+   "_kitWhy": "⛑ AND `deathSave` DELIBERATELY DOES NOT BAR IT (R29): there is still a thread there, and that is the whole horror of the class."
   },
   "_hasSelf_20260830": "⛔ `hasSelf` — ONE PROPERTY, NOT A TAXONOMY. CCode measured 2026-08-30 that a creature-type system predicting resistances would COMPLICATE: affinities do not cluster by class ('the_ashen_wyrm RESISTS light, the_bright_devourer ABSORBS it — SAME CLASS, opposite relationships'), so a class default would be wrong more often than right and every exception would need an override. ✅ THIS IS THE OTHER CHANGE: seven crafts already say 'nothing without a self can be frightened' IN FOUR DIFFERENT PHRASINGS, and `the_narrowed` says the other half as `feeling: immune` in data. NOTHING CHECKS THE TWO AGREE AND NOTHING EVER WILL WHILE ONE SIDE IS PROSE. ⚠️ THE TEST ERIK SET, AND IT IS THE RIGHT ONE: does it let content say ONCE what it currently says many times in prose? ⛔ If it only lets us predict a number, it is a layer. ✅ `hasSelf: false` — narrowed_dead, feral_construct, made_weapon. A thing driven by an errand or a mechanism has nobody home to frighten. ✅ `hasSelf: true` — manifested_creature, substrate_warped_beast, great_manifestation: manifested things WANT, and a warped beast is still a beast.",
   "_psychicResist_20260830": "⛔ EVERY `hasSelf: false` CREATURE CARRIES `psychic: resist`. Erik 2026-08-30, on psychic_lance: 'it seems like that one MIGHT STILL HAVE SOME IMPACT even if the thing doesn't have a mind.' ⚠️ SOME IMPACT, NOT NONE AND NOT FULL — and `resist` is the only verdict that says that. A craft-level `requiresSelf` is BINARY and could not express it. ✅ THE THOUGHT IS REAL AND ARRIVES; THERE IS SIMPLY LESS FOR IT TO FIND. ⚠️ AUTHORED PER-CREATURE RATHER THAN DERIVED FROM THE CLASS, because a class-level affinity DEFAULT is the thing CCode measured against on 08-30: affinities do not cluster, and a default would need overrides. ⛔ THIS IS A DELIBERATE EXCEPTION AND WORTH REVISITING IF A SELFLESS CREATURE SHOULD EVER BE FULLY OPEN TO PSYCHIC HARM — the per-creature field is what makes that possible."
@@ -564,5 +672,6 @@
    "_authored_20260902": "⛔ ERIK 2026-09-02: 'I DO want a creature that gets stronger and feeds off of unattended deaths.' ⚠️ IT IS THE DIRECT CONSEQUENCE OF R29 — if attending preserves personhood across the crossing, then an unattended ending LEAVES SOMETHING BEHIND, and this is what eats it. ✅ NO NEW MACHINERY: `decay: absorb` and `vitality: vulnerable` carry §48's inversion exactly as `the_narrowed` does. ⛔ AND IT IS NOT AN AFTERLING AND NEVER BECOMES ONE — the design laws exclude persons, and this has no self, no want, and no grievance. It wears postures it took and there is nobody behind them. ⚠️ THE WARD PRESSURE IS THE POINT: the counter is not a fight, it is a TRADITION DOING ITS JOB. An Ashwarden who attends the endings in a valley starves it out over months. ➡️ That makes `the_attended_end` matter at world scale and gives 22 non-striking traditions a way in, per design law 3.",
    "_notTheStillwaterThing": "⬜ THIS IS NOT THE THING UNDER STILLWATER'S TROUBLE. Erik left that unruled ('I'm not sure about the thing under the post'). ⚠️ This is a CLASS that exists in the world; that is a specific, and it is still open."
   }
- ]
+ ],
+ "_classKits_20260908": "⛑ CLASS KITS, AUTHORED 2026-09-08 — the bestiary's half of `SPEC_generative_arcs_and_bestiary`. ⛔ MEASURED: all 28 roster entries carry a `tier` and `pressures`; ZERO carry a `level` or a declarable move set. ⚠️ EXACTLY THE NPC FINDING ONE TIER OVER — the people were 40-of-40 at level 1 for want of `tier`; the beasts HAVE tier and want `level`, and `tierFloor` already maps one to the other. ⚑ A BEAST DOES NOT NEED `domains`. It is not a person and the bestiary's first law says so. It needs a move set, and the CLASS is where that lives — six classes, six distinct fictions, six kits. ⚠️ AND TWO CLASSES ALREADY CARRY ENGINE MEANING: `deathSave.notForClasses` bars `feral_construct` and `made_weapon`, so the classes were already load-bearing and nothing else read them. ⛔ THREE MOVES EACH, same as the contribution-family archetypes — a two-move opponent is a coin flip."
 }

@@ -250,6 +250,49 @@ presences. ⛔ **What someone will NOT do is usually the most useful thing to kn
 
 ---
 
+### The ones who are very good at ending things
+
+⛔ **AND SOME PEOPLE'S ANSWER TO A PROBLEM IS THE EDGE OF SOMETHING.** ⚠️ **This is not a failure of
+imagination on their part. It is a trade, it is taught, and the people at the top of it are as precise as
+any scholar.**
+
+**VEYRA OF THE LEVELLED LANCE** rides the Redline duelling circuit. **Twenty-two challenges, twenty-two
+stops, and she has never fought the same person twice.** She names the terms before the first pass and does
+not renegotiate — ⚑ **argue the terms and the duel is already over.** ⚠️ **What she is afraid of is killing
+one**, because twenty-two stops is a record and a record is a thing that ends.
+
+**SESH OF THE QUIET BLOW** is a psionicist of the Cogitarium's hard school, and she ends fights with a
+thought. ⛑ **She does not read the body; she reads the DECISION** — the exact moment a fighter commits.
+⛔ **What frightens her is not a weapon.** It is that she has met people with nothing under the reading at
+all, **and she has not told the Cogitarium, because she does not know what they would do about it.**
+
+**MARN OF TWO FORMS** is sent by the Flesh-Temples where a fight must be stopped by one person. ⚑ **He bows
+before and after, to everyone, including things that cannot bow back.** ⚠️ **The first form ends fights
+without ending people. He has used the second four times and remembers all four** — and one of the four is
+still alive and looking for him.
+
+**CASSA REDSAIL** takes ships nobody insures and is very hard to be angry at. ⛑ **She is laughing before you
+are and she is not where you last looked.** ⚠️ **She wants one take big enough to stop, and she has said
+that four times.** ⛔ Her fear is not being caught. It is being ordinary.
+
+### And two who are followed
+
+⚠️ **THERE IS A NINTH KIND OF PERSON EXESA HAS NO WORD FOR** — one whose work is other people acting on
+their word. ⛑ **Nobody teaches it. Both of these learned it the same way: by being followed and then having
+to be worth it.**
+
+**ORRUN SHIELDBREAKER** captains one ship out of the Longshore reach. ⛔ **Nine seasons, and the crew has
+voted him back every one of them** — his authority is re-sworn each season or it is not. ⚑ **He asks what
+your people get out of a thing before he asks what you want**, and answering that badly ends the
+conversation politely. ⚠️ **He has come back with fewer twice, and he can name them. The second time was not
+the sea, and he has never said what it was.**
+
+**IESULT OF THE KEPT WORD** is a knight-champion out of Hardline, and the forty who ride with her **swore to
+her, not to a lord.** ⛑ **She repeats your promise back to you in your own words before she agrees — and if
+you flinch at hearing it, she has her answer.** ⚑ **She stands when anyone enters a room: a servant, a
+child, an enemy**, and does not appear to decide to. ⚠️ **She wants her forty home every time, and she
+ordered something once that she should not have. One of them knows and has never said.**
+
 ### And the roads are why anyone is rich
 
 **The same eight units of raw material fetch 32 in the valley and 115 at the Gearlands Verge.** ⚑ **The

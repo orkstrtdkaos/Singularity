@@ -95,7 +95,7 @@
 | `the_bright_bargain` | The Bright Bargain | person | `npcs/the_bright_bargain.json` | epic | 44 | 16 | ✅ | ✅ | 22 | 2 | — |
 | `the_burning_certainty` | The Burning Certainty | person | `npcs/the_burning_certainty.json` | legendary | 64 | 16 | ✅ | ✅ | 32 | — | — |
 | `the_ferryman_tam` | Tam the Ferryman | person | `npcs/the_ferryman_tam.json` | ~regional | →12 | — | ✅ | ✅ | 6 | — | — |
-| `the_hollow_king` | The Hollow King of the Wild Half | person | `npcs/the_hollow_king.json` | mythic | 85 | 16 | ✅ | ✅ | 33 | — | — |
+| `the_hollow_king` | The Hollow King of the Wild Half | person | `npcs/the_hollow_king.json` | mythic | 85 | 23 | ✅ | ✅ | 34 | — | — |
 | `the_keeper_of_small_debts` | The Keeper of Small Debts | person | `npcs/the_keeper_of_small_debts.json` | heroic | 32 | 16 | ✅ | ✅ | 16 | 2 | — |
 | `the_kestrel` | The Kestrel | person | `npcs/the_kestrel.json` | ~regional | →12 | — | ✅ | ✅ | 6 | — | — |
 | `the_lightless_seraph` | Caelum Vaunt, the Lightless | person | `npcs/the_lightless_seraph.json` | legendary | 68 | 16 | ✅ | ✅ | 34 | — | — |

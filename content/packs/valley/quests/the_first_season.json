@@ -1,0 +1,65 @@
+{
+ "schemaVersion": 1,
+ "id": "the_first_season",
+ "name": "The First Season",
+ "region": "foothill_longshore",
+ "tier": "epic",
+ "axis": "chaos_order",
+ "traditions": [
+  "marcher",
+  "horizon",
+  "stillhold"
+ ],
+ "giver": null,
+ "premise": "You have a hull and you have been taught how a crew is kept. ⛔ NEITHER IS AN ENTERPRISE. An enterprise is a thing that pays for itself through a winter, and the reach has opinions about newcomers who think a ship is the hard part. ⚑ The first season is the test: fill the benches, name the terms, take enough to feed everyone, and be re-sworn at the end of it — or find out that you own a very expensive object.",
+ "stakes": "⚠️ THE VOTE AT THE END IS THE WHOLE QUEST. ⛔ Orrun's authority is conferred every season and yours will be too. ⛑ A player who has been taught `who_falls_first` and does not use it discovers what the craft was for.",
+ "stages": [
+  {
+   "id": "s1",
+   "title": "Fill the benches",
+   "objective": "Get enough people to move her.",
+   "condition": "⛑ `carriage.moves: crewed` means BELOW `needsCrew` SHE DOES NOT SAIL. ⚠️ `SPEC_hold_costs_crafts_and_hiring` §5: asking someone to WORK is a much lower bar than asking them to travel — known, not hostile, and paid.",
+   "change": "World: the ship has a crew and the crew has a wage."
+  },
+  {
+   "id": "s2",
+   "title": "A winter of upkeep",
+   "objective": "Pay for her through a season.",
+   "condition": "⚠️ Upkeep is charged whether or not she sails. ⛔ A `fishery` at sea produces; a `market` needs somewhere to sell. The features you chose are now the argument.",
+   "change": "Ledger: the enterprise either paid for itself or it did not."
+  },
+  {
+   "id": "s3",
+   "title": "The re-swearing",
+   "objective": "Be voted back.",
+   "condition": "⛑ Every person aboard decides again. ⚠️ Standing, wages paid, who came back, and whether you asked what THEY got out of it.",
+   "change": "⛔ A band that re-swears is a band. One that does not is a payroll that ended."
+  }
+ ],
+ "outcomes": [
+  {
+   "id": "enterprise",
+   "when": "re-sworn",
+   "text": "⚑ THE LONGSHIP IS AN ENTERPRISE — a holding that moves, a crew that chose you twice, and a reach that knows the name. ⚠️ And you are now the thing Exesa has no word for.",
+   "effects": [
+    {
+     "type": "world_fact",
+     "text": "A newcomer was re-sworn on the Longshore reach after one season."
+    }
+   ]
+  },
+  {
+   "id": "a_ship",
+   "when": "not re-sworn",
+   "text": "⛔ You own a ship. ⚠️ That is all you own, and the reach has a story about you now.",
+   "effects": [
+    {
+     "type": "world_fact",
+     "text": "A hull on the Longshore reach changed hands twice in a year."
+    }
+   ]
+  }
+ ],
+ "notes_for_gm": "⚑ GM-EYES-ONLY: THIS IS THE COMMANDER VOCATION ARRIVING AS PLAY. ⛔ `docs/VOCATIONS.md` — there is no COMMANDER craft line and no coliseum cell; 30 crafts carry `command` and none commands a band. ⚠️ The player WILL hit the ceiling here, exactly where Orrun does: `small_company` reaches a company and stops. ⛑ That is not a bug to hide — it is the moment to author `the_gathering`, `raise_banner`, `lead_the_line` and `command_field`, and this quest is the first content request with a player behind it.",
+ "_authoredWhy": "⛑ THE THIRD RUNG. ⛔ DEPENDS ON `SPEC_mobile_holdings` — until `carriage` lands, the reward has nowhere to live and the GM should hold this at stage 3. ⚠️ It is authored now because the two quests under it are playable and a ladder with no top is the debt R49 names."
+}

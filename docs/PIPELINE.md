@@ -514,6 +514,7 @@ blast radius includes every structure keyed to the thing being migrated.**
 | `docs/ROSTER.md` | **where every authored person lives, and who still needs a sheet** — five places, generated counts | us |
 | ⛔ `docs/NPC_PIPELINE.md` | **the seven doors a person passes to become playable** — driven for BOTH populations, authored and generated | us |
 | ⛔ `docs/SUBSTRATE_ATLAS.md` | **39 regions × 6 sources, printed once** — what every power source is worth everywhere, and the ruling it is waiting on | us |
+| `docs/GM_BOOK.md` | ⛔ **GENERATED — every `gmHint`, `hook`, `hiddenTruth` and `gmMandate` in the corpus, gathered. The Library filters these; nothing else showed them.** ⚠️ Spoilers by construction | generated |
 | `docs/VOCATIONS.md` | ⛑ **the eight VOCATIONS — the unifying classes, each with its coliseum cell as the viability proof** | Aevi |
 | `docs/ARCHETYPES.md` | how each vocation looks per domain, and the holes it found | Aevi |
 | ⛔ `docs/BALANCE.md` | ⛔ **which numbers can be turned, what each one moves, and HOW TO KNOW A MEASUREMENT IS REAL** — Erik: *"we need to build toward balance and use the dials"*. ⚠️ Its §5 is the hard-won half: four confounds in one session, each a strong and stable correlation that was an artefact | us |

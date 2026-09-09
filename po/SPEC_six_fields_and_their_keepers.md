@@ -130,3 +130,136 @@ DOWN: killing a keeper moves the ground.**
    should be rare enough that players learn the names.
 4. ⬜ **What does a `keptBy` death do — instant, or decay?** ⚠️ **Aevi's read: DECAY**, over a season. ⛔ A
    field that snaps is a switch; a field that fades is a consequence.
+
+---
+
+# PART TWO — ERIK'S THREE ADDITIONS
+
+> *"When we lock in the locations of the substrate it needs to be somewhat **balanced against the veil at
+> mid-arc influence**. Each buried substrate location should also **DO something when activated — like the
+> Assay.** Each nexus should be **tied to something: Sovereigns, other hooks**… and tie the nanites to
+> **the Seraphim people and others around**, so nanites can **surge from quasi-static locations. We need
+> floating cities — Valhalla, Asgard — that DRIFT and can go certain places, making the power sources
+> available DYNAMIC."*
+
+---
+
+## §7 — ⛑ BALANCED AT MID-ARC, NOT AT REST
+
+⛔ **A FIELD BALANCED WHERE IT SITS TODAY IS BALANCED FOR A WORLD NOBODY WILL PLAY IN.** ⚠️ Every arc is
+already running; `The Second Manifestation` is at **4 of 4** and `The Bleeding Grammar` at **2 of 3** on
+Erik's own save.
+
+⬜ **SO THE TUNING TARGET IS MID-ARC: place precursor and veil so that AT STAGE 2–3 OF `What Wakes Beneath`
+THE TWO FIELDS ARE ROUGHLY EVEN.**
+
+| ⚑ what that buys | |
+|---|---|
+| **early** | ⚠️ **the veil is stronger than the lattice** — the world is thin, doors are easier, and the Sovereigns are the near threat |
+| ⚑ **mid** | ⛑ **even, and it is the only time both work everywhere** — the widest playable window and it is where the campaign lives |
+| **late** | ⛔ **the lattice wins and the veil narrows toward nothing** — which is `What Wakes Beneath` succeeding, and it should feel like a loss to somebody |
+
+⛔ **AND THE FOUR-CELL TABLE MAKES THIS SELF-BALANCING RATHER THAN A DIAL:** `make_lattice` **strengthens**
+the divide, `unmake_lattice` **thins** it. ⚑ **Players push the balance both ways by working**, and the arc
+pushes it one way by advancing.
+
+---
+
+## §8 — ⛔ A BURIED SITE MUST DO SOMETHING, AND THE ASSAY IS THE TEMPLATE
+
+**Erik's own standard, from the Assay: *"NO MORE NEBULOUS UNKNOWN AUTHORING."***
+
+⚑ **THE ASSAY IS NOT A POOL. IT IS AN APPARATUS WITH A QUESTION AND AN ANSWER** — *"it measures whether what
+grew here can be handed the apparatus,"* four authored conditions, and three doors at the end.
+
+⬜ **EVERY BURIED SUBSTRATE SITE GETS THE SAME THREE THINGS:**
+
+| ⬜ | ⚠️ |
+|---|---|
+| **what it IS** | ⛔ not *"a lattice well"* — **a thing built for a purpose by people who are gone** |
+| **what ACTIVATING it does** | ⚑ **a world effect, not a buff.** The Assay hands over the apparatus; another might open every waygate on a line, or wake a region's nanite from `clear` to `ordered`, or **close a veil nexus permanently** |
+| **what it COSTS and who ELSE wants it** | ⚠️ **an activation nobody opposes is a lever, not a story** |
+
+⛑ **AND THE POOL BECOMES THE CONSEQUENCE RATHER THAN THE POINT: a site raises the field BECAUSE OF WHAT IT
+IS DOING**, and activating it changes both.
+
+---
+
+## §9 — ⚑ EVERY NEXUS IS TIED TO SOMETHING
+
+⛔ **A DOOR WITH NOBODY ON THE OTHER SIDE OF IT IS SCENERY.** ⚠️ Erik ruled a Veil nexus is *"a door somebody
+BUILT"* — ⛑ **so it has a builder, a keeper, and something that wants through.**
+
+```json
+{ "at": "the_thinning", "kind": "gate", "delta": 0.3,
+  "builtBy": "…", "keptBy": null, "wants​Through": "…", "hook": "…" }
+```
+
+| ⬜ what a nexus can be tied to | ⚑ |
+|---|---|
+| ⛔ **a SOVEREIGN** | **R41: arriving IS diminishment, and it arrives SOMEWHERE.** ⚠️ **The Hollow King's door, Lucifer's door** — and a stage-3 arrival now has an address |
+| ⚑ **an anti-Sovereign** | ⛑ **the four of them are researching the same seven entities — a nexus is where you WATCH one** |
+| **a keeper** | ⚠️ someone holds it shut, and holding it costs |
+| ⛑ **an unfinished thing** | ⛔ a door built for a reason nobody alive remembers |
+
+⚠️ **AND SOME SHOULD BE TIED TO NOTHING YET AND SAY SO** — ⛑ an authored `hook: null` with a reason is
+honest; a door with an invented occupant is the nebulous authoring Erik banned.
+
+---
+
+## §10 — ⛔ THE NANITE IS A PEOPLE'S FIELD, AND THE CONTINUOUS ARE ALREADY WRITTEN AS ITS KEEPERS
+
+**Erik: *"tie the nanites to the Seraphim people and others around."*** ⚑ **`peoples_of_kind` ALREADY SAYS
+IT:**
+
+> ⛔ **THE CONTINUOUS** — *"seraphic [angelic] — **THEY NEVER ABANDONED THEIR POWER AT THE TRANSITION.** They
+> are the only people continuous with the world that was… **the Seraphic Orders simply kept going.**"*
+
+⚠️ **AND `naniteField.states` ALREADY DEFINES `ordered` AS *"deployed and STILL CYCLED — the reprocessing
+never stopped, spent nanite is gathered and re-ordered on a schedule SOMEBODY STILL KEEPS."***
+
+➡️ ⛑ **THOSE TWO SENTENCES ARE THE SAME FACT AND NOTHING JOINS THEM. THE SOMEBODY IS THE CONTINUOUS.**
+
+⬜ **So `keptBy` on a nanite region takes a PEOPLE as well as a person** — ⚑ **and the Enginewrights, the
+Lattice-Cities and the Seraphic Orders are the three that never stopped.** ⛔ **A region goes `ordered` →
+`wild` → `clear` as its keepers fail, leave, or are killed**, and that is a campaign rather than a number.
+
+---
+
+## §11 — ⚑ AND THE FLOATING CITIES MAKE THE FIELD ITSELF MOBILE
+
+**Erik: *"we need floating cities — Valhalla, Asgard — that DRIFT and can go certain places, making the
+power sources available DYNAMIC."***
+
+⛑ **THIS JOINS TWO SPECS THAT WERE WRITTEN SEPARATELY.** ⚑ **`SPEC_mobile_holdings` already has
+`carriage.moves: "drifting"` — *"moves whether you want it to or not, slowly, and you do not steer it."***
+
+⛔ **A DRIFTING CITY THAT CARRIES A NANITE POOL IS A POWER SOURCE WITH A POSITION**, and everything follows:
+
+| ⚑ | |
+|---|---|
+| ⛔ **the field moves with it** | a `substrateSource` whose `at` is a mobile holding resolves **where it is now** |
+| ⚠️ **so a region's power is SEASONAL** | ⛑ **the Gearlands are `ordered` all year; a valley is `ordered` for the three weeks Asgard is overhead** |
+| ⚑ **and it can be MET** | ⛔ **a city you have to be standing in the right place to reach** — the Wayfarer's whole vocation, with a deadline |
+| ⛑ **and fought over** | ⚠️ **whoever holds a drifting city holds a power source that visits other people's ground** |
+
+⬜ **AEVI'S READ ON WHAT THEY ARE:** ⛔ **not Precursor and not new.** ⚑ **They are what the Continuous built
+when they kept going** — *"the only people continuous with the world that was"* — ⚠️ **and a city that never
+landed is the purest form of never having stopped.**
+
+⛑ **AND IT ANSWERS THE VEIL'S PROBLEM FROM THE OTHER SIDE:** ⛔ **a drifting lattice-city passing overhead
+NARROWS every veil nexus under it** — the four-cell table says a thicker lattice is a thicker divide —
+⚠️ **so a Veil-worker's good ground has a schedule, and the Sovereigns' doors close when Asgard is over
+them.**
+
+---
+
+## §12 — ⬜ ROUND 2, PART TWO
+
+5. ⛔ **How many drifting cities?** ⚑ **Aevi: TWO OR THREE, named, with routes** — ⚠️ **a drifting city
+   nobody can predict is weather; one with a known circuit is a DATE.**
+6. ⚠️ **Does a floating city have a fixed circuit or drift freely?** ⛑ **Aevi's read: a CIRCUIT, slow, and
+   the Hourkeepers know it** — ⛔ which gives that thin tradition something only it can sell.
+7. ⬜ **What activates a buried site?** ⚑ **The Assay's four conditions are the model** — `latticespeak` r3,
+   `address_sense` r3, a finished project, and nobody else holding it. ⚠️ **Each site should want something
+   different, or they are one site four times.**

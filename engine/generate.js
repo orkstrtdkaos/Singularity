@@ -154,11 +154,45 @@ export function stubEntity(type, context = {}, schema = {}) {
       provenance: `made in ${loc.name || region}`,
     });
   } else if (type === "arc") {
+    // ⛔ BORN WHOLE, ON THE CREATURE BRANCH'S OWN ARGUMENT: "even the stub must be born whole", or the
+    // fallback path quietly reintroduces exactly the hollow thing the contract exists to ban.
+    // ⚠️ AEVI: the wake hands this a rich context — pressure, source arc, neighbours pressed on, direction
+    // — "and then stubEntity fills every unanswered field with boilerplate. A GOOD CONTEXT MEETING A
+    // BOILERPLATE FLOOR, and every arc the wake engine has ever minted carries those two sentences."
+    const wakeArc = context.wake || null;
+    // ⚑ +1 advanced the arc, -1 drove it back. Erik's correction is that the successor is ALSO the winning
+    // side evolved — so the two outcomes must not read the same, and with no wake we say neither.
+    const won = Number(wakeArc?.dir ?? 0);
+    const here = loc.name || region || "this place";
+    const after = wakeArc?.parentName ? `after ${wakeArc.parentName}` : `at ${here}`;
     Object.assign(base, {
-      scale: "local", pressure: "medium",
-      tendency: `a tension local to ${loc.name || "this place"}, untended it hardens`,
-      crossesRegions: [loc.name || region], hingeNpcs: [], ifIgnored: "it festers, unwatched",
-      ifEngaged: "someone patient could turn it"
+      // ⛑ THE WAKE'S OWN SCALE AND THE PARENT'S REGISTER, not two constants. A world-scale aftermath that
+      // called itself `local` was the floor overwriting the one thing the wake knew.
+      scale: wakeArc?.scale || "local",
+      pressure: wakeArc?.parentPressure || (wakeArc ? "the aftermath, still settling" : "medium"),
+      // ⚠️ THE WAKE'S PRESSURE SENTENCE IS THE TENDENCY. It is what the world already said this leads to,
+      // authored by the outcome rather than invented here.
+      tendency: wakeArc?.pressure
+        ? `${wakeArc.pressure} — and untended, ${won < 0 ? "what was driven back gathers itself" : "what carried the day sets about keeping it"}`
+        : `a tension local to ${here}, untended it hardens`,
+      // ⬜ THE PARENT REACHES WHERE THE PARENT REACHED. Authored arcs write PROSE here ("all Reaches", "the
+      // Gearlands/Numen"), not region ids — so a place name is in keeping and inheriting the parent's is better.
+      crossesRegions: wakeArc?.parentRegions?.length ? wakeArc.parentRegions.slice(0, 3) : [here],
+      // ⚑ THE NEIGHBOURS THE WAKE ALREADY PRESSED ON — real arc ids, filtered to ones that exist when the
+      // wake was made. The floor used to drop them and the thread arrived connected to nothing.
+      ...(wakeArc?.connectsTo?.length ? { connectsTo: wakeArc.connectsTo.slice(0, 3) } : {}),
+      hingeNpcs: [],
+      // ⛔ AND THE TWO SENTENCES THAT WERE ON EVERY MINTED ARC NOW DEPEND ON WHICH SIDE WON.
+      ifIgnored: won < 0
+        ? `the side that lost ${after} is left to its own devices, and it does not stay lost`
+        : won > 0
+          ? `the side that won ${after} consolidates unopposed, and takes the next thing too`
+          : "it festers, unwatched",
+      ifEngaged: won < 0
+        ? `someone reaches the beaten side before it finishes deciding what it becomes`
+        : won > 0
+          ? `someone puts a limit on the winner while the limit can still be put`
+          : "someone patient could turn it",
     });
   }
   // fill any remaining required key the schema wants but we didn't set

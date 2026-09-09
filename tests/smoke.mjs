@@ -9090,6 +9090,67 @@ await (async () => {
   check("204 §6.4: the wake leans (+) on the arcs it connectsTo (an advance escalates its neighbours)", neighbors.length >= 1 && neighbors.every(n => ch.worldState.wakeArcPushes[n]?.push === 1) && wake.wakeArcPush(ch.worldState, neighbors[0]) === 1);
   check("204 §6.4: the wake's lean MOVES a connected arc's canonical stage (folded into the net)", worldArcsPublic(content, ch).find(r => r.arcId === neighbors[0]).stageNum === (ga.arcs.find(a => a.id === neighbors[0]).currentStage ?? 1) + 1);
 
+  // ⛔ AEVI, REPLY §2: "the wake hands the generator a rich context — pressure, source arc, neighbours
+  // pressed on, direction — and then stubEntity fills every unanswered field with `hingeNpcs: []`, 'it
+  // festers, unwatched' and 'someone patient could turn it'. A GOOD CONTEXT MEETING A BOILERPLATE FLOOR,
+  // and EVERY ARC THE WAKE ENGINE HAS EVER MINTED CARRIES THOSE TWO SENTENCES."
+  //
+  // ⛑ The creature branch is the model and states the rule: "even the stub must be BORN WHOLE."
+  {
+    const GEN = await import("../engine/generate.js");
+    const arcSchema = JSON.parse(readFileSync(join(root, "schemas/arc.schema.json"), "utf8"));   // the same schema §2 validates every authored arc against
+    const mkWake = (delta) => {
+      const c = { worldState: initWorldState(1) };
+      return wake.createWake(c, { id: "wq" + delta, tier: "world", arcId: arc.id, arcStageTo: 2 },
+        { id: "o" + delta, summary: "it went that way" },
+        [{ type: "arc_stage", arcId: arc.id, push: delta, delta }], content, { worldDay: 10 });
+    };
+    // ⛔ THE DIRECTION IS CARRIED. It was computed for `wakeArcPushes` and thrown away, so nothing
+    // downstream could tell a won push from a lost one — which is exactly Erik's correction that the
+    // successor is ALSO the winning side evolved, not only the defeated one.
+    const wonWake = mkWake(1), lostWake = mkWake(-1);
+    check("204 §2: the wake CARRIES which side won — `dir` used to be spent on the arc pushes and discarded",
+      wonWake.dir === 1 && lostWake.dir === -1, `${wonWake.dir} / ${lostWake.dir}`);
+
+    const stubFrom = async (w) => GEN.generate("arc",
+      { ...wake.wakeGenerationContext(w, content), location: { id: "millbrook", name: "Millbrook", regionId: "valley" },
+        character: { id: "t", level: 5, generated: {} }, day: 10 },
+      { callJSON: async () => null, schema: arcSchema });   // null author → the STUB path, which is the point
+    const won = await stubFrom(wonWake), lost = await stubFrom(lostWake);
+
+    // ⚑ BORN WHOLE: the wake knew the scale, the parent's register, its reach and its neighbours, and the
+    // floor used to overwrite all four with two constants.
+    check("204 §3: a wake-minted arc takes the WAKE'S scale, not a hardcoded `local`",
+      won.scale === wonWake.scale && won.scale === "world", `${won.scale} vs ${wonWake.scale}`);
+    check("204 §3: …and inherits the parent arc's register and reach rather than inventing them",
+      won.pressure === arc.pressure && JSON.stringify(won.crossesRegions) === JSON.stringify((arc.crossesRegions || []).slice(0, 3)),
+      `${won.pressure} · ${JSON.stringify(won.crossesRegions)}`);
+    check("204 §3: …and arrives CONNECTED — the neighbours the wake already pressed on",
+      Array.isArray(won.connectsTo) && won.connectsTo.length > 0 && won.connectsTo.every(id => (content.greaterArcs || []).some(a => a.id === id)),
+      JSON.stringify(won.connectsTo));
+    // ⚑ AND THE TENDENCY IS THE WAKE'S OWN PRESSURE SENTENCE — what the world already said this leads to,
+    // authored by the outcome rather than written by the floor.
+    check("204 §3: …and its tendency is the WAKE'S pressure, not a sentence about 'this place'",
+      String(won.tendency).startsWith(String(wonWake.pressure).slice(0, 30)));
+
+    // ⛔ THE TWO SENTENCES ARE GONE, AND WHAT REPLACED THEM DEPENDS ON WHO WON.
+    check("204 §3: ⛔ the boilerplate is gone — no minted arc still says 'it festers, unwatched'",
+      won.ifIgnored !== "it festers, unwatched" && lost.ifIgnored !== "it festers, unwatched"
+      && won.ifEngaged !== "someone patient could turn it" && lost.ifEngaged !== "someone patient could turn it",
+      `${won.ifIgnored} | ${lost.ifIgnored}`);
+    check("204 §3: ⛑ …and a WON aftermath reads differently from a LOST one — Erik's winning side evolved",
+      won.ifIgnored !== lost.ifIgnored && won.ifEngaged !== lost.ifEngaged);
+
+    // ⛑ NON-VACUITY BOTH WAYS: with NO wake the stub is exactly what it always was, so nothing regressed
+    // for the paths that mint an arc without one.
+    const bare = await GEN.generate("arc",
+      { location: { id: "millbrook", name: "Millbrook", regionId: "valley" }, character: { id: "t", level: 5, generated: {} }, day: 10 },
+      { callJSON: async () => null, schema: arcSchema });
+    check("204 §3: …and with NO wake the stub is unchanged — the floor still works where there is no context",
+      bare.scale === "local" && bare.ifIgnored === "it festers, unwatched",
+      `${bare.scale} · ${bare.ifIgnored}`);
+  }
+
   const ch2 = { worldState: initWorldState(1) };
   check("204 §2: an npc/local outcome with no arc move leaves NO wake (rarity is the point)", wake.createWake(ch2, { id: "errand", tier: "npc" }, { id: "done" }, [{ type: "codex_fact" }], content, {}) === null);
 

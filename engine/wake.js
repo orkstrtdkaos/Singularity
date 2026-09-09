@@ -51,15 +51,21 @@ export function createWake(character, quest, outcome, applied, content = {}, ctx
   const pressure = stageDef?.pressureOnAdvance || arc?.tendency || outcome.summary || "the world shifts in the wake of it";
   const scale = WAKE_TIERS.has(quest.tier) ? quest.tier : (arcEffect ? "world" : "local");
   const connectsTo = arc ? (arc.connectsTo || []).filter(nid => arcs.some(a => a.id === nid)) : []; // only arcs that EXIST
+  const dir = arcEffect ? (Math.sign(arcEffect.delta ?? arcEffect.dir ?? 1) || 1) : 1;
   const wake = {
     id, source: { questId: quest.id, outcomeId: outcome.id, arcId, worldDay: ctx.worldDay ?? null },
     change: applied || [], pressure: smartClamp(String(pressure), 400), scale, connectsTo,
+    // ⛔ WHICH SIDE WON, CARRIED. Erik's correction: the successor is also the WINNING side evolved, not
+    // only the defeated one. `dir` was computed for `wakeArcPushes` and discarded, so every aftermath read
+    // the same to the generator. +1 is a push that ADVANCED the arc, -1 one that drove it back.
+    dir,
     open: true, depth: Math.max(0, ctx.parentWakeDepth ?? 0), worldDay: ctx.worldDay ?? null, strength: WAKE_START_STRENGTH,
   };
   ws.wakes.push(wake);
   if (ws.wakes.length > WAKE_CAP) ws.wakes = ws.wakes.slice(-WAKE_CAP);
   // §6.4 the cheap path — a wake leans on the arcs it connects to, in the direction the outcome pushed.
-  const dir = arcEffect ? (Math.sign(arcEffect.delta ?? arcEffect.dir ?? 1) || 1) : 1;
+  // ⚑ `dir` is computed ABOVE the wake now and RIDES ON IT (see the literal): it used to be spent here and
+  // thrown away, so nothing downstream could tell a won push from a lost one.
   ws.wakeArcPushes = ws.wakeArcPushes || {};
   for (const nid of connectsTo) {
     const cur = ws.wakeArcPushes[nid] || { arcId: nid, push: 0 };
@@ -137,7 +143,12 @@ export function wakeGenerationContext(wake, content = {}) {
     hint: `a new thread that FOLLOWS FROM what just happened${arc ? ` to ${arc.name}` : ""} — the aftermath of it, not a fresh unrelated situation`,
     why: `A significant outcome left a wake: ${wake.pressure}. Author the consequence the LORE IMPLIES${neighbours.length ? ` (it presses on ${neighbours.join(", ")})` : ""} — a faction reacting, a place coping, a person seizing the moment — never arbitrary new content.`,
     arcPressure: wake.pressure,
-    wake: { source: wake.source, pressure: wake.pressure, connectsTo: wake.connectsTo, scale: wake.scale },
+    // ⛑ THE STUB READS THIS. Everything a born-whole arc needs and cannot invent: which side won, the
+    // parent's own register, and where the parent reaches. Without them the floor writes boilerplate over
+    // a context that already said something.
+    wake: { source: wake.source, pressure: wake.pressure, connectsTo: wake.connectsTo, scale: wake.scale,
+      dir: wake.dir ?? null, parentName: arc?.name || null, parentPressure: arc?.pressure || null,
+      parentRegions: Array.isArray(arc?.crossesRegions) ? arc.crossesRegions : null },
     parentWakeDepth: (wake.depth ?? 0) + 1,
   };
 }

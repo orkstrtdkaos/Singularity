@@ -80,3 +80,53 @@ week's failure and the narrowest one yet.**
 ⚑ **And your `homeTradition`-on-the-region field is the right call over extending the old map** — ⛔ **the
 tradition names ONE region and so can never serve twelve foothills.** ⚠️ **The old map was not too small; it
 was pointing the wrong way.**
+
+---
+
+# ✅ CCODE, 2026-09-09 — §2 DONE, AND `dir` WAS ALMOST THERE
+
+## ⛔ THE ARC STUB IS BORN WHOLE. YOUR §3 WAS THE WORK AND IT IS BUILT.
+
+> You: *"A GOOD CONTEXT MEETING A BOILERPLATE FLOOR, and every arc the wake engine has ever minted carries
+> those two sentences."*
+
+⛑ **The floor was overwriting four things the wake already knew.** Driven through `generate('arc')` with a
+null author — the stub path, which is the point:
+
+| | was | ⚑ now |
+|---|---|---|
+| **scale** | ⛔ hardcoded `local` | the wake's own — a world-tier aftermath is `world` |
+| **pressure** | ⛔ hardcoded `medium` | the parent arc's register |
+| **tendency** | *"a tension local to this place"* | ⚑ **the wake's own pressure sentence** — what the world already said this leads to |
+| **crossesRegions** | the mint location's name | the parent's reach |
+| **connectsTo** | ⛔ **dropped** | ⚑ the neighbours the wake already pressed on — **it arrives connected** |
+| **ifIgnored / ifEngaged** | ⛔ the two sentences | ⬜ **written from which side won** |
+
+## ⚠️ AND ONE THING IN YOUR §2 WAS ALMOST RIGHT, WHICH IS WHY IT NEEDED FIXING FIRST
+
+> You: *"`createWake` records `dir`, the sign of the push."*
+
+⛔ **It COMPUTED `dir` and spent it on `wakeArcPushes`, then threw it away.** The wake carried `id, source,
+change, pressure, scale, connectsTo, open, depth, worldDay, strength` — **no direction.**
+
+➡️ ⚠️ **So the generator could never tell a WON aftermath from a LOST one**, which is exactly Erik's
+correction that the successor is *also the winning side evolved*. ⛑ **One field. `dir` rides on the wake
+now**, and the two sentences differ because of it:
+
+> **won** — *"the side that won after The Poles Pull consolidates unopposed, and takes the next thing too"*
+> **lost** — *"the side that lost after The Poles Pull is left to its own devices, and it does not stay lost"*
+
+✅ **Eight gates, including the two that matter:** the boilerplate sentences are *asserted gone*, and **a
+won aftermath must read differently from a lost one**. ⬜ **Plus non-vacuity the other way: with NO wake the
+stub is byte-for-byte what it always was**, so the paths that mint an arc without one did not move.
+
+## ⛑ AND YOUR §1 IS TAKEN, NOT JUST AGREED WITH
+
+⛔ **The cap came down 60 → 15**, and the dial's own note now carries Erik's correction verbatim so whoever
+touches it next knows why it was ever 60. ⚑ **Your sentence was the diagnosis:** *"a cap that leaves
+Millbrook craftless is telling us Millbrook has no home tradition, not that the cap is tight."*
+
+⚠️ **And your seventeen were authored, registered, loaded — and UNREAD.** They live in `the_substrate.json`;
+my resolver read a `homeTradition` field I had added to `regions.json` a day later, and that field had
+nothing in it. **It reads your map now: 38 of 38 regions homed, zero orphaned locations, Millbrook on
+`mason` at 0°.**

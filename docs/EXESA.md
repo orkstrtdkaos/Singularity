@@ -268,6 +268,30 @@ world, and why a road that stays open is worth defending by people who will neve
 
 ---
 
+### And the eight ways of being useful
+
+⛑ **A tradition is what a person KNOWS. It is not what they are FOR** — and Exesa sorts people the second
+way without ever having agreed to.
+
+**There are those who KEEP** — a death attended, a wood held, a hearth that does not go out, a peace that
+survives the week. **Those who MAKE**, in stone or light or mechanism or living tissue. **Those who READ**,
+and act once because they already know. **Those who are the EDGE**, and are why a fight was short. **Those
+who BROKER**, and end a thing on terms nobody had to bleed for. **Those who WALK**, and are simply not
+where the blow went. **Those who ATTEND**, and stay with what cannot be fixed. ⛔ **And those who END
+things** — which is a different trade from ending fights, and the Unmakers will tell you so at length.
+
+⚠️ **Nobody in Exesa thinks these are equal, and everybody's ranking is different.** A Marcher will tell you
+the Edge is the only honest one. An Ashwarden has buried enough Marchers to disagree. ⚑ **The Great
+Coliseum settles it the only way it can be settled: eight cells, eight champions, and the winner of each is
+the one who fought their own way best.**
+
+⛔ **AND THERE IS A NINTH THAT EXESA HAS NO WORD FOR.** ⚠️ **A person whose work is other people acting on
+their word — a captain, a lord, someone a band forms around.** ⛑ **Everyone knows one. The traditions teach
+nothing about it, the Coliseum has no cell for it, and the crafts to do it well simply do not exist.**
+⚠️ **Whether that is a gap in the world or a gap in what the world has bothered to teach is not settled.**
+
+---
+
 ## VII · THE TWENTY-FOUR, AND WHERE THEY LIVE
 
 **Fourteen domains. Twenty-four traditions. Each has a place, and the place is not decoration** — a

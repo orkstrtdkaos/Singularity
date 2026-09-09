@@ -1623,7 +1623,7 @@
      "class": "hard"
     }
    ],
-   "plainly": "A tactical/craft/intellectual action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 2, and lasts for about 4 hours Ranks: rank 2 deepens duration; rank 3 adds to special. Limit: iT Only Bends What IS Already Running — it starts nothing, stops nothing.",
+   "plainly": "An action that changes how long something takes — a moment stretched, an hour compressed. Its strength is rated 6 out of 10 across a scope of 2, and lasts for about 4 hours Ranks: rank 2 deepens duration; rank 3 adds to special. Limit: iT Only Bends What IS Already Running — it starts nothing, stops nothing.",
    "upkeep": {
     "prepHours": 0,
     "attended": true,
@@ -1633,7 +1633,9 @@
    "_idWas": "the_shaped_duration",
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['tactical', 'craft', 'intellectual'], e2 below band — the same three fingerprints found in EIGHT traditions one at a time. ⛔ ERIK 2026-08-30: 'run the unmigrated batch' — swept corpus-wide instead of tradition-by-tradition."
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['tactical', 'craft', 'intellectual'], e2 below band — the same three fingerprints found in EIGHT traditions one at a time. ⛔ ERIK 2026-08-30: 'run the unmigrated batch' — swept corpus-wide instead of tradition-by-tradition.",
+   "_plainlyWas": "A tactical/craft/intellectual action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 2, and lasts for about 4 hours Ranks: rank 2 deepens duration; rank 3 adds to special. Limit: iT Only Bends What IS Already Running — it starts nothing, stops nothing.",
+   "_glossFix_20260908": "⛑ TIER 2 OF `SPEC_tradition_narrative_npc_pass` — THE THIN GLOSSES. ⛔ All thirty were CORRECT and USELESS: 'makes or animates something' says THAT the craft makes and never WHICH, on thirty crafts that make thirty different things. ⚠️ T7: what does the GM narrate CHANGING? ⚑ Every rewrite is drawn from that craft's own `description` — nothing invented, and the description was right in all thirty cases. ⛔ THE SPEC ESTIMATED 251 THIN CRAFTS AND THERE WERE 42: measure before authoring."
   },
   {
    "id": "opened_moment",

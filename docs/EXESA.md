@@ -330,6 +330,25 @@ Wherever you land, expect the same kinds of people:
 
 ---
 
+### There is no north
+
+Exesa never had one. The world's people navigate by what the world is actually shaped like, and the words
+are older than any of the traditions that use them.
+
+**Hubward** is toward the Crossing — the centre, the waygate hub, the one place where no disposition wins.
+**Outward** is away from it, toward whichever pole lies ahead of you. **Spinward** and **widdershins** are
+the two ways around the circuit, lateral to that.
+
+**The compass and the argument are the same axis**, which is why the words carry more than a bearing. Going
+outward means going somewhere more committed than where you started. Coming hubward means coming back
+toward the middle, and everyone means it both ways at once. *"He went outward and did not come back"* is a
+sentence about a road and about a person, and nobody in Exesa hears only one of those.
+
+Distance is counted in **days' walk**. A wayfarer who tells you the Palelands are forty days outward has
+told you everything you need and nothing you cannot verify with your feet.
+
+---
+
 ## VII · THE TWENTY-FOUR, AND WHERE THEY LIVE
 
 **Fourteen domains. Twenty-four traditions. Each has a place, and the place is not decoration** — a

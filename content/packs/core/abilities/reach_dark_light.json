@@ -156,7 +156,7 @@
      "class": "cost"
     }
    ],
-   "plainly": "A stealth/explore/fight action that makes or animates something. Its strength is rated 4 out of 10 across a scope of 2, and lasts for about 4 hours Ranks: rank 2 deepens concealment; rank 3 extends scope. Limit: total Light Defeats IT.",
+   "plainly": "A stealth/explore/fight action that sees in lightlessness and wraps you in the dark a place already has. Its strength is rated 4 out of 10 across a scope of 2, and lasts for about 4 hours Ranks: rank 2 deepens concealment; rank 3 extends scope. Limit: total Light Defeats IT.",
    "_descriptionWas": "The dark-pole mastery: concealment, sight-without-light, and the harboring of what should not be exposed. Not evil — the necessary shadow.",
    "_functionsWas": [
     "command",
@@ -170,7 +170,9 @@
    "_powerSystemWas": "reach_dark_light",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_wardMigrated_20260829": "⚠️ WARD `light` -> `radiance`. ⛔ MY MORNING MIGRATION WAS HALF A MIGRATION: I migrated `damageType` and `damageMix` and NEVER CHECKED `wardTypes`. Five crafts were warding a type that no longer existed — a ward against nothing, which reads as protection and is not. ⚠️ Found by the question-check flagging `heat` as UNWARDED and my going to look for the natural heat ward.",
-   "_rankRenamed_20260830": "⚠️ RANK RENAMED off a name that belongs to a DIFFERENT CRAFT. ⛔ 14 real collisions measured 2026-08-30 — a rank named after an existing craft is ambiguous to a GM ('take Held Line' meant two things). ✅ Erik's rule: if the craft name is good, the RANK moves."
+   "_rankRenamed_20260830": "⚠️ RANK RENAMED off a name that belongs to a DIFFERENT CRAFT. ⛔ 14 real collisions measured 2026-08-30 — a rank named after an existing craft is ambiguous to a GM ('take Held Line' meant two things). ✅ Erik's rule: if the craft name is good, the RANK moves.",
+   "_plainlyWas": "A stealth/explore/fight action that makes or animates something. Its strength is rated 4 out of 10 across a scope of 2, and lasts for about 4 hours Ranks: rank 2 deepens concealment; rank 3 extends scope. Limit: total Light Defeats IT.",
+   "_glossFix_20260908": "⛔ TIER 1 OF `SPEC_tradition_narrative_npc_pass` — A WRONG GLOSS IS A CORRECTNESS BUG, NOT POLISH. ⚠️ MEASURED 2026-09-08: 42 crafts carry a stock gloss and TWELVE named a verb family the craft does not have — and ALL TWELVE SAID THE SAME SENTENCE, 'makes or animates something'. ⛑ ONE STALE DEFAULT, not twelve errors: a concealment craft, a bargain, a truce and an hour held open were all being described to the GM as though they built something. ⚑ THE DESCRIPTION WAS RIGHT IN EVERY CASE. The gloss is the only thing that was wrong, and the fix is to say what the GM NARRATES CHANGING — T7: 'a dice roll is not an answer.' ⬜ The spec's estimate was ~48; the real number is 12, because the corpus has been repaired since 08-31. ⚠️ MEASURE BEFORE AUTHORING — an eight-day-old count is a claim about eight days ago."
   },
   {
    "id": "radiance",
@@ -1283,11 +1285,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A stealth/explore action that makes or animates something. Its strength is rated 4 out of 10, and lasts for about a day Ranks: rank 2 deepens concealment; rank 3 adds to persistence. Limit: a Shroud IS A Lie OF Absence — touch, sound, and a dog's nose all still work.",
+   "plainly": "A stealth/explore action that lays concealment over an AREA — a camp, a retreat, a path that resists being looked at. Its strength is rated 4 out of 10, and lasts for about a day Ranks: rank 2 deepens concealment; rank 3 adds to persistence. Limit: a Shroud IS A Lie OF Absence — touch, sound, and a dog's nose all still work.",
    "obscure": true,
    "_obscureNote": "⛔ SNG-469: USABLE IN THE SENSE SLOT AS AN OBSCURE. ⚠️ area concealment, but it can be thrown up in an instant over the ground between you\n⚠️ Erik: 'you'll need to see what crafts can ALREADY be used to do this — shadow work, bend light, false-something. They're already out there in general; just need to make sure they can be used in that way during the sense step and act as an OPPOSED RESULT.' ⛔ THIS IS A TAG ON AN EXISTING CRAFT, NOT A NEW ABILITY.",
    "_powerSystemWas": "reach_dark_light",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_plainlyWas": "A stealth/explore action that makes or animates something. Its strength is rated 4 out of 10, and lasts for about a day Ranks: rank 2 deepens concealment; rank 3 adds to persistence. Limit: a Shroud IS A Lie OF Absence — touch, sound, and a dog's nose all still work.",
+   "_glossFix_20260908": "⛔ TIER 1 OF `SPEC_tradition_narrative_npc_pass` — A WRONG GLOSS IS A CORRECTNESS BUG, NOT POLISH. ⚠️ MEASURED 2026-09-08: 42 crafts carry a stock gloss and TWELVE named a verb family the craft does not have — and ALL TWELVE SAID THE SAME SENTENCE, 'makes or animates something'. ⛑ ONE STALE DEFAULT, not twelve errors: a concealment craft, a bargain, a truce and an hour held open were all being described to the GM as though they built something. ⚑ THE DESCRIPTION WAS RIGHT IN EVERY CASE. The gloss is the only thing that was wrong, and the fix is to say what the GM NARRATES CHANGING — T7: 'a dice roll is not an answer.' ⬜ The spec's estimate was ~48; the real number is 12, because the corpus has been repaired since 08-31. ⚠️ MEASURE BEFORE AUTHORING — an eight-day-old count is a claim about eight days ago."
   },
   {
    "id": "false_trail",
@@ -1483,13 +1487,15 @@
      "class": "hard"
     }
    ],
-   "plainly": "An action that makes or animates something. Its strength is rated 9 out of 10 across a scope of 4, and lasts for about 8 hours Limit: a Single Overt Action Ends IT.",
+   "plainly": "An action that removes the fact of your passage — no trace, no gap, and no memory of one. Its strength is rated 9 out of 10 across a scope of 4, and lasts for about 8 hours Limit: a Single Overt Action Ends IT.",
    "_nameWas": "The Never-There",
    "_idWas": "the_never_there",
    "obscure": true,
    "_obscureNote": "⛔ SNG-469: USABLE IN THE SENSE SLOT AS AN OBSCURE. ⚠️ capstone-tier: denies the read AND leaves nothing to read afterwards\n⚠️ Erik: 'you'll need to see what crafts can ALREADY be used to do this — shadow work, bend light, false-something. They're already out there in general; just need to make sure they can be used in that way during the sense step and act as an OPPOSED RESULT.' ⛔ THIS IS A TAG ON AN EXISTING CRAFT, NOT A NEW ABILITY.",
    "_powerSystemWas": "reach_dark_light",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_plainlyWas": "An action that makes or animates something. Its strength is rated 9 out of 10 across a scope of 4, and lasts for about 8 hours Limit: a Single Overt Action Ends IT.",
+   "_glossFix_20260908": "⛔ TIER 1 OF `SPEC_tradition_narrative_npc_pass` — A WRONG GLOSS IS A CORRECTNESS BUG, NOT POLISH. ⚠️ MEASURED 2026-09-08: 42 crafts carry a stock gloss and TWELVE named a verb family the craft does not have — and ALL TWELVE SAID THE SAME SENTENCE, 'makes or animates something'. ⛑ ONE STALE DEFAULT, not twelve errors: a concealment craft, a bargain, a truce and an hour held open were all being described to the GM as though they built something. ⚑ THE DESCRIPTION WAS RIGHT IN EVERY CASE. The gloss is the only thing that was wrong, and the fix is to say what the GM NARRATES CHANGING — T7: 'a dice roll is not an answer.' ⬜ The spec's estimate was ~48; the real number is 12, because the corpus has been repaired since 08-31. ⚠️ MEASURE BEFORE AUTHORING — an eight-day-old count is a claim about eight days ago."
   },
   {
    "id": "shadowstep",

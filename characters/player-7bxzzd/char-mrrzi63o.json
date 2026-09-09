@@ -8,7 +8,7 @@
   "whyHere": "You put down the blade, or you were sent away from it, or you are looking for a line worth holding that isn't theirs.",
   "background": "war_leader",
   "level": 2,
-  "xp": 109,
+  "xp": 114,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -65,7 +65,7 @@
   "maxHealth": 51,
   "health": 51,
   "maxEnergy": 113,
-  "energy": 113,
+  "energy": 110,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -191,147 +191,143 @@
         "player": "\"Can you let Ragnar know I'm going to try and hire a ship to head North, speaking of which, do you know where the nearest port is?\"",
         "summary": "Brynjar asked after Ragnar and the nearest port; Doss offered the chalk-board and named Longshore and the Mudrun river road as the routes north.",
         "narration": "Doss sets her rag down and leans one hand on the bar. \"Ragnar left before first light — heading widdershins, no word where.\" She says it the same way she'd say the weather: factual, no apology attached. \"If he's on the road he won't see a message from me until he stops somewhere that talks to somewhere I know. I can put word with the waygate's chalk-board column — travelers check it, and widdershins-bound men pass that arch. No guarantees.\"\n\nShe straightens and considers the second question with the same unhurried pace. \"Nearest port that takes proper hire — not a fisherman with a broad back and a leaky coracle — is Longshore. Spinward and outward from here, best part of sixty days on foot.\" She tilts her head. \"There's river traffic before that. The Mudrun meets the coast road about twenty days spinward. You won't get a northern deep-water hull there, but you'll get flat-bottomed cargo boats running coastal hops. Crew will know who's taking on freight to the north.\"\n\nFreki lifts his head from the flagstone and watches the door as a new traveler shoulders in — heavy wool, a drover's build, no animals — then settles again when the man goes straight to a corner table without looking at the bar. Doss watched him too. She always does."
+      },
+      {
+        "player": "Step outside and scan the waygate arch — Freki flagged the heavy-wool man; see if he's worth a look with Read the Fight",
+        "summary": "Brynjar read the heavy-wool man from the street: he's watching the waygate for someone specific, checking faces and hands for a signal.",
+        "narration": "You drop a coin on the bar for Doss and step outside with the plate still half-eaten, Freki pressing close behind you.\n\nThe Crossing at midday is its usual crowded self — a knot of Lattice-City officials arguing over a writ near the Made Arch, a pair of rootkin traders with baskets of dried fungus, a woman in Stillhold grey moving fast with her hood pulled. You work your way to a spot with a clear angle on the waygate arch and let the crowd flow around you, keeping still the way Ragnar taught you to keep still — not stiff, just unhurried, like you belong to the wall.\n\nRead the Fight opens up your attention the same way it does before the first blow lands. You are not looking at the arch; you are looking at everything at once, letting the patterns sort themselves. The heavy-wool man is still at his corner table inside — you can see him through the shutters, elbows on wood, not eating, not reading, not talking to anyone. He is watching the waygate door.\n\nThe tell is small: when a new traveler comes through the arch, his eyes go to the face first, then the pack, then — briefly, almost nothing — to the hands. He is checking for something specific. Not robbery-sizing a mark; a marker-reader's habit, a man looking for a signal or a person he was told to identify. Freki has not moved from your left heel, but the hound's ears are forward and its weight is shifted toward him — not alarm, not yet, but pointed."
       }
     ],
     "lastTurn": {
-      "narration": "Doss sets her rag down and leans one hand on the bar. \"Ragnar left before first light — heading widdershins, no word where.\" She says it the same way she'd say the weather: factual, no apology attached. \"If he's on the road he won't see a message from me until he stops somewhere that talks to somewhere I know. I can put word with the waygate's chalk-board column — travelers check it, and widdershins-bound men pass that arch. No guarantees.\"\n\nShe straightens and considers the second question with the same unhurried pace. \"Nearest port that takes proper hire — not a fisherman with a broad back and a leaky coracle — is Longshore. Spinward and outward from here, best part of sixty days on foot.\" She tilts her head. \"There's river traffic before that. The Mudrun meets the coast road about twenty days spinward. You won't get a northern deep-water hull there, but you'll get flat-bottomed cargo boats running coastal hops. Crew will know who's taking on freight to the north.\"\n\nFreki lifts his head from the flagstone and watches the door as a new traveler shoulders in — heavy wool, a drover's build, no animals — then settles again when the man goes straight to a corner table without looking at the bar. Doss watched him too. She always does.",
-      "sceneSummary": "Brynjar asked after Ragnar and the nearest port; Doss offered the chalk-board and named Longshore and the Mudrun river road as the routes north.",
+      "narration": "You drop a coin on the bar for Doss and step outside with the plate still half-eaten, Freki pressing close behind you.\n\nThe Crossing at midday is its usual crowded self — a knot of Lattice-City officials arguing over a writ near the Made Arch, a pair of rootkin traders with baskets of dried fungus, a woman in Stillhold grey moving fast with her hood pulled. You work your way to a spot with a clear angle on the waygate arch and let the crowd flow around you, keeping still the way Ragnar taught you to keep still — not stiff, just unhurried, like you belong to the wall.\n\nRead the Fight opens up your attention the same way it does before the first blow lands. You are not looking at the arch; you are looking at everything at once, letting the patterns sort themselves. The heavy-wool man is still at his corner table inside — you can see him through the shutters, elbows on wood, not eating, not reading, not talking to anyone. He is watching the waygate door.\n\nThe tell is small: when a new traveler comes through the arch, his eyes go to the face first, then the pack, then — briefly, almost nothing — to the hands. He is checking for something specific. Not robbery-sizing a mark; a marker-reader's habit, a man looking for a signal or a person he was told to identify. Freki has not moved from your left heel, but the hound's ears are forward and its weight is shifted toward him — not alarm, not yet, but pointed.",
+      "sceneSummary": "Brynjar read the heavy-wool man from the street: he's watching the waygate for someone specific, checking faces and hands for a signal.",
       "choices": [
         {
-          "label": "Put a message on the waygate chalk-board for Ragnar — name the ship plan and a meeting point",
+          "label": "Go back inside and sit near him — close enough to hear if he speaks to anyone",
           "attribute": "social",
           "subAttribute": "rapport",
-          "difficulty": "very easy",
-          "trivial": true,
-          "intentTags": [
-            "communicate",
-            "plan"
-          ]
-        },
-        {
-          "label": "Ask Doss what she knows about the Mudrun river traffic — who runs cargo north and whether any are trustworthy",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": "very easy",
-          "trivial": true,
+          "difficulty": "normal",
           "intentTags": [
             "scout",
-            "negotiate"
-          ]
+            "careful"
+          ],
+          "abilityId": null,
+          "trivial": false
         },
         {
-          "label": "Step outside and scan the waygate arch — Freki flagged the heavy-wool man; see if he's worth a look with Read the Fight",
+          "label": "Step to the waygate arch and check the chalk-board column — see if anyone has left a name or mark that matches what he might be watching for",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": "easy",
+          "intentTags": [
+            "study",
+            "scout"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false
+        },
+        {
+          "label": "Send Freki back inside first — let the hound settle near him while you come in separately; his reaction to the dog tells you something",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": "easy",
-          "trivial": false,
           "intentTags": [
             "scout",
-            "study"
+            "careful"
           ],
-          "abilityId": "read_the_fight",
-          "energyCost": 3
+          "abilityId": null,
+          "trivial": false
+        },
+        {
+          "label": "Wait here and watch — let him make the next move before you show him you've noticed",
+          "attribute": "mental",
+          "subAttribute": "wits",
+          "difficulty": "very easy",
+          "intentTags": [
+            "careful",
+            "scout"
+          ],
+          "abilityId": null,
+          "trivial": true
         }
       ],
+      "scene": {
+        "setting": "Outside the Crow and Thistle, on the street with a clear sightline to the waygate arch. Spring midday light. Crowds moving — traders, officials, travelers. The heavy-wool man is visible through the shuttered window at his corner table.",
+        "npcsPresent": [
+          {
+            "name": "Freki",
+            "state": "pressed to Brynjar's left heel, ears forward, weight angled toward the heavy-wool man inside"
+          },
+          {
+            "name": "Doss Halveck",
+            "state": "behind the bar, working the room, not watching the door"
+          }
+        ],
+        "objects": [
+          "Hand-axe in its frog on the belt",
+          "Round Shield strapped to Brynjar's back",
+          "Heavy-wool man — visible through the shutters, watching the waygate door, checking faces and hands of arrivals"
+        ],
+        "threads": [
+          "Heavy-wool man is watching the waygate for someone specific — marker-reader's habit",
+          "Ragnar left widdershins before first light — chalk-board is the only reach",
+          "Maret did not come through the Crow and Thistle at all",
+          "The restricted creditor behind Maret's debt remains unidentified"
+        ]
+      },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "doss-halveck",
-          "note": "Told Brynjar that Ragnar left before first light heading widdershins and cannot be reached directly; offered to put word on the waygate chalk-board. Named Longshore (sixty days spinward) as the nearest proper hire-port, and the Mudrun river road (twenty days spinward) as the closer option for coastal cargo boats running north.",
-          "learned": [
-            "Ragnar left before first light heading widdershins — no stated destination",
-            "Longshore is the nearest deep-water hire port — sixty days spinward and outward",
-            "The Mudrun meets the coast road about twenty days spinward — flat-bottomed cargo boats running coastal hops toward the north"
-          ],
-          "statusNote": "On duty at the Crow and Thistle; watching the room with her usual thoroughness."
+          "name": "Doss Halveck",
+          "note": "Brynjar stepped outside; Doss working the room without watching the door.",
+          "statusNote": "On duty at the Crow and Thistle; working the midday room."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "ragnar-solmyr",
-          "label": "Ragnar Solmyr",
-          "kind": "person",
-          "entityId": "ragnar-solmyr",
-          "fact": "Left before first light heading widdershins — no stated destination. Doss offered the waygate chalk-board as the only realistic way to pass him a message.",
-          "links": [
-            "the-marchward",
-            "brynjar-andyrsson-thread"
-          ]
-        },
-        {
-          "topic": "longshore",
-          "label": "Longshore",
+          "topic": "gen-the-waygate",
+          "label": "The Waygate",
           "kind": "place",
-          "fact": "Nearest proper hire-port for a deep-water northern hull — about sixty days spinward and outward from the Crossing.",
+          "fact": "The heavy-wool man from the Hub Hall is sitting inside the Crow and Thistle watching the waygate arch — checking arriving travelers' faces and hands for a specific signal or person, not sizing marks for robbery. Freki confirms the scent match.",
           "links": [
-            "brynjar-andyrsson-thread"
-          ]
-        },
-        {
-          "topic": "the-mudrun",
-          "label": "The Mudrun",
-          "kind": "place",
-          "fact": "A river that meets the coast road about twenty days spinward from the Crossing. Flat-bottomed cargo boats run coastal hops from there toward the north — closer than Longshore, smaller ships.",
-          "links": [
-            "longshore",
+            "stillhold-operatives",
+            "maret-threnwick",
             "brynjar-andyrsson-thread"
           ]
         }
       ],
-      "scene": {
-        "setting": "The Crow and Thistle common room, midday. Spring light through the shutters. A dozen travelers eating and talking low; fried onion and salt-fish in the air.",
-        "npcsPresent": [
-          {
-            "name": "Doss Halveck",
-            "state": "behind the bar, leaning on one hand, watching the room after naming Longshore and the Mudrun"
-          },
-          {
-            "name": "Freki",
-            "state": "on the flagstone, head up, tracking the heavy-wool man who just came in and sat in the corner"
-          }
-        ],
-        "objects": [
-          "Plate of bread, fried salt-fish, and hard cheese on the bar",
-          "Hand-axe in its frog on the belt",
-          "Round Shield strapped to Brynjar's back",
-          "Traveler's Pack — upstairs on the peg",
-          "Heavy-wool man sitting alone in a corner table — no animals, drover's build"
-        ],
-        "threads": [
-          "Ragnar left widdershins before first light — no destination stated; chalk-board message is the only reach",
-          "Maret did not come in through the Crow and Thistle at all",
-          "The restricted creditor behind Maret's debt remains unidentified",
-          "The heavy-wool man from the Hub Hall — Freki has his scent, and he just walked in"
-        ]
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A quick step outside and a read of the street"
       }
     },
     "sceneState": {
-      "setting": "The Crow and Thistle common room, midday. Spring light through the shutters. A dozen travelers eating and talking low; fried onion and salt-fish in the air.",
+      "setting": "Outside the Crow and Thistle, on the street with a clear sightline to the waygate arch. Spring midday light. Crowds moving — traders, officials, travelers. The heavy-wool man is visible through the shuttered window at his corner table.",
       "npcsPresent": [
         {
-          "name": "Doss Halveck",
-          "state": "behind the bar, leaning on one hand, watching the room after naming Longshore and the Mudrun"
+          "name": "Freki",
+          "state": "pressed to Brynjar's left heel, ears forward, weight angled toward the heavy-wool man inside"
         },
         {
-          "name": "Freki",
-          "state": "on the flagstone, head up, tracking the heavy-wool man who just came in and sat in the corner"
+          "name": "Doss Halveck",
+          "state": "behind the bar, working the room, not watching the door"
         }
       ],
       "objects": [
-        "Plate of bread, fried salt-fish, and hard cheese on the bar",
         "Hand-axe in its frog on the belt",
         "Round Shield strapped to Brynjar's back",
-        "Traveler's Pack — upstairs on the peg",
-        "Heavy-wool man sitting alone in a corner table — no animals, drover's build"
+        "Heavy-wool man — visible through the shutters, watching the waygate door, checki"
       ],
       "threads": [
-        "Ragnar left widdershins before first light — no destination stated; chalk-board message is the only reach",
-        "Maret did not come in through the Crow and Thistle at all",
-        "The restricted creditor behind Maret's debt remains unidentified",
-        "The heavy-wool man from the Hub Hall — Freki has his scent, and he just walked in"
+        "Heavy-wool man is watching the waygate for someone specific — marker-reader's habit",
+        "Ragnar left widdershins before first light — chalk-board is the only reach",
+        "Maret did not come through the Crow and Thistle at all",
+        "The restricted creditor behind Maret's debt remains unidentified"
       ]
     },
-    "beats": 4
+    "beats": 5
   },
   "clock": {
     "schemaVersion": 1,
@@ -495,7 +491,8 @@
         "[d1] Told Brynjar the side door opens onto the east lane — north fork to the waygate, south fork to the Stillhold road. Watched him and Freki with the stillness of someone making a decision.",
         "[d3] Gave Brynjar a room and a bowl of barley soup without ceremony at the small hours of morning. Set a bowl of water on the flagstone for Freki unprompted.",
         "[d3] Told Brynjar that Ragnar left heading widdershins around first light; Maret never came in through the Crow and Thistle at all — no gate-log entry matching her description.",
-        "[d3] Told Brynjar that Ragnar left before first light heading widdershins and cannot be reached directly; offered to put word on the waygate chalk-board. Named Longshore (sixty days spinward) as the nearest proper hire-port, and the Mudrun river road (twenty days spinward) as the closer option for…"
+        "[d3] Told Brynjar that Ragnar left before first light heading widdershins and cannot be reached directly; offered to put word on the waygate chalk-board. Named Longshore (sixty days spinward) as the nearest proper hire-port, and the Mudrun river road (twenty days spinward) as the closer option for…",
+        "[d3] Brynjar stepped outside; Doss working the room without watching the door."
       ],
       "knownFacts": [
         "Doss kept the bundle because it felt deliberate, not lost",
@@ -513,7 +510,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "On duty at the Crow and Thistle; watching the room with her usual thoroughness.",
+      "statusNote": "On duty at the Crow and Thistle; working the midday room.",
       "domains": {
         "primary": "marcher"
       },
@@ -527,7 +524,7 @@
       "people": "human",
       "peopleSource": "generated",
       "appearance": "A stout woman in her mid-fifties, broad through the shoulders, heavy-handed in the way of someone who has carried kegs since she was fifteen. Skin the colour of old oak, short grey hair kept close to the skull for practicality. A crescent scar at the left jaw from a long-ago disagreement. Apron is clean — she changes it twice a day on principle. Eyes the flat, still grey of a whetstone, and about as yielding.",
-      "met": 3
+      "met": 4
     },
     "ragnar-solmyr": {
       "id": "ragnar-solmyr",
@@ -1082,7 +1079,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "Maret's eyes have tracked to one of the dark gates — not the lit ones, the one in the north face that hasn't hummed in what looks like…",
@@ -4776,18 +4773,20 @@
           "[d1] you have walked here",
           "[d2] The Crossing's waygate is a proper dressed-iron threshold arch, the ground worn smooth by decades of traffic; it opens into the octagonal Hub Hall with its chalk-board column and eight directional thresholds.",
           "[d2] Evening traffic pattern: most travelers check faces first; Lattice-Cities officials check the chalk column; one man — heavy wool, drover's gait, no animals, spinward road — checked the ironwork of the arch itself before checking anything else, then passed through hubward without stopping. Freki…",
-          "[d2] The heavy-wool man passed through the spinward arch without checking the chalk column — he knew his route in advance and moved too fast to tail in the dark. Freki held at the threshold but has his scent and will know him again."
+          "[d2] The heavy-wool man passed through the spinward arch without checking the chalk column — he knew his route in advance and moved too fast to tail in the dark. Freki held at the threshold but has his scent and will know him again.",
+          "[d3] The heavy-wool man from the Hub Hall is sitting inside the Crow and Thistle watching the waygate arch — checking arriving travelers' faces and hands for a specific signal or person, not sizing marks for robbery. Freki confirms the scent match."
         ],
         "links": [
           "gen-the-colosseum",
           "brynjar-andyrsson-thread",
           "stillhold-operatives",
-          "sera-of-the-stillhold"
+          "sera-of-the-stillhold",
+          "maret-threnwick"
         ],
         "aliases": [],
         "createdDay": 1,
         "entityId": "gen-the-waygate",
-        "updatedDay": 2
+        "updatedDay": 3
       },
       "halcyon-the-finished": {
         "id": "halcyon-the-finished",
@@ -4993,20 +4992,20 @@
     ]
   },
   "tendencies": {
-    "leadership": 3.865278822435884,
-    "cerebral": 8.711428926905283,
-    "strategic": 7.111792603897599,
-    "ruthless": 0.24845850255116445,
-    "social": 8.817381807535755,
-    "cautious": 7.6287608940882405,
-    "generous": 1.1519049838432636,
-    "patient": 0.5048061344573873
+    "leadership": 3.7686468518749865,
+    "cerebral": 9.49364320373265,
+    "strategic": 7.933997788800159,
+    "ruthless": 0.24224703998738534,
+    "social": 8.59694726234736,
+    "cautious": 7.438041871736035,
+    "generous": 1.1231073592471819,
+    "patient": 0.49218598109595263
   },
   "aptitudes": [
     "silver_tongue",
     "banner"
   ],
-  "actionCount": 57,
+  "actionCount": 58,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -6088,8 +6087,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788987212556,
-  "rev": 292,
+  "updatedAt": 1788987311309,
+  "rev": 293,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -6554,13 +6553,13 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "riven_marches": 39,
-    "the_center": 21,
+    "the_center": 22,
     "the_palelands": 3
   },
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "order_sense": 3,
+      "order_sense": 4,
       "read_the_fight": 6
     },
     "coActivations": {},
@@ -6577,7 +6576,7 @@
       }
     ],
     "lastUsed": {
-      "order_sense": 69,
+      "order_sense": 71,
       "read_the_fight": 69
     }
   },
@@ -6657,10 +6656,10 @@
     {
       "id": "sess-6",
       "startedAt": "2026-09-09T20:21:48.688Z",
-      "lastAt": "2026-09-09T20:53:32.551Z",
+      "lastAt": "2026-09-09T20:55:11.307Z",
       "startDay": 71,
       "endDay": 71,
-      "beats": 9
+      "beats": 10
     }
   ],
   "_pendingArrival": null,
@@ -6676,15 +6675,15 @@
     "at": "2026-09-09T20:47:47.388Z"
   },
   "_opEmitted": {
-    "sceneSummary": 54,
-    "choices": 54,
-    "scene": 54,
-    "npcUpdates": 48,
+    "sceneSummary": 55,
+    "choices": 55,
+    "scene": 55,
+    "npcUpdates": 49,
     "placeUpdates": 8,
     "generateRequest": 4,
     "moveTo": 7,
-    "timeOps": 48,
-    "codexUpdates": 42,
+    "timeOps": 49,
+    "codexUpdates": 43,
     "sceneEnded": 15,
     "characterDeltas": 20,
     "offer": 8,
@@ -6694,7 +6693,7 @@
     "stageOps": 2,
     "factUpdates": 2
   },
-  "_opTurns": 54,
+  "_opTurns": 55,
   "_opLedger": {
     "offer": {
       "applied": 9,
@@ -6810,11 +6809,11 @@
     "plan": 2,
     "guard": 1,
     "sustain": 1,
-    "study": 7,
+    "study": 8,
     "travel": 9,
     "ask": 2,
     "lead": 1,
-    "scout": 4,
+    "scout": 5,
     "prepare": 1,
     "meditate": 1
   },

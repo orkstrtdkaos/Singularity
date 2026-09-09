@@ -1,7 +1,7 @@
 # THE APPARATUS — every harness, what it is for, and whether it runs
 
 ⛔ **ERIK, 2026-08-29: *"I want this to be a well oiled factory."*** ⚠️ **A factory you cannot see is not
-well oiled.** 96 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
+well oiled.** 97 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
 were gates, which were reports, and which had quietly stopped being wired into anything.
 
 ```bash
@@ -10,7 +10,7 @@ node scripts/apparatus.mjs --md     # …as markdown for §5
 node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 ```
 
-**Last measured: 2026-09-08 · v1.9.425 · 96 files.**
+**Last measured: 2026-09-08 · v1.9.435 · 97 files.**
 
 ---
 
@@ -198,6 +198,7 @@ worthless.
 | `scripts/tradition_war` | 🔧 TOOL+SELFTEST | 1 | CCODE-331 |
 | `scripts/access_census` | 🔧 TOOL | — | CCODE-332 |
 | `scripts/apparatus_inject` | 🔧 TOOL | — | write the generated inventory into docs/APPARATUS |
+| `scripts/gm_companion.mjs` | 🔧 TOOL | `--write` | ⛑ **gathers every `gmHint`, `hook`, `hiddenTruth` and `gmMandate` in the corpus into `docs/GM_BOOK.md`.** ⚠️ The Library filters these from the player's view and NOTHING ELSE SHOWED THEM |
 | `scripts/apply_promotion_SNG-396` | 🔧 TOOL | — | applies Aevi's two ratifications, and ONLY what they say |
 | `scripts/atlas_inject` | 🔧 TOOL | — | regenerate the §13 table inside docs/FIELD_REFERENCE |
 | `scripts/audit_images` | 🔧 TOOL | — | — |

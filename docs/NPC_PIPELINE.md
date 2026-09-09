@@ -28,7 +28,7 @@ derivations of the same count is the defect that put `certify_counts` at 125 aga
 | 2 | **LOADED** — it is in a map the engine reads | `CONTENT.npcs[id]`, via `loadContent` | `character.npcRegistry[id]`, via the `meet` op |
 | 3 | **RESOLVED** — the fight path can FIND it | `duelFromTarget` → `npcs[id]` | `duelFromTarget` → `character.npcRegistry[id]` ⚠️ **checked FIRST, so a stub wins over content** |
 | 4 | **STANDING** — a tier and a level | authored `tier`/`level` win outright | ⛑ derived: `role` → `tierFromRole` → `tierFloor` |
-| 5 | **KIT** — a real craft to declare | authored `abilities[]`, else the domain draw | ⛔ **neither — see below** |
+| 5 | **KIT** — a real craft to declare | authored `abilities[]`, else the domain draw | ⚠️ `affiliationFor` — and WHERE they are minted decides it |
 | 6 | **OPPONENT** — a body to fight | `personOpponentFor` returns attributes, health, soak | same function, same shape |
 | 7 | **HARM** — a verb that can threaten | a harm verb in the kit, or `notAnOpponent: true` | the bare strike only |
 
@@ -40,13 +40,18 @@ derivations of the same count is the defect that put `certify_counts` at 125 aga
 |---|---|---|---|---|---|
 | as `generate('npc')` leaves it | notable | **5** | ✅ yes | ⛔ **0** | 1 |
 | a role that signals RANK (`Marshal of the Watch`) | heroic | **25** | ✅ yes | ⛔ **0** | 1 |
-| + `domains` (what the merge would copy, if it had any) | heroic | **25** | ✅ yes | **28** | 28 |
+| after `affiliationFor`, minted in Millbrook (region `valley`) | notable | **5** | ✅ yes | ⛔ **0** | 1 |
+| after `affiliationFor`, minted in the Maw (region `the_descent`) | notable | **5** | ✅ yes | **7** | 8 |
 
-⛔ **DOOR 5 IS THE HOLE, AND IT IS THE ONLY ONE.** Standing derives correctly — a role naming a rank lifts a minted person from **5** to **25** — and the body is real. ⚠️ **But the kit is empty at every level**, so a generated Marshal fights with a plain strike and a large health pool.
+⛔ **DOOR 5 IS THE ONLY UNEVEN ONE, AND IT IS UNEVEN BY PLACE RATHER THAN BROKEN.** ⚠️ **I first reported it as simply BROKEN, and that was a claim about my harness:** this file drove stubEntity → enforceFloors and stopped, while the real mint path also runs affiliationFor (generate.js:453). ⛑ Driving a PARTIAL path and calling it the production path is the exact defect this file exists to catch — committed by the file itself.
 
-⚑ **THE MISSING INPUTS ARE `abilities`, `domains`, `tradition`.** The generation schema asks for none of them, `enforceFloors` adds none, and `reconcileGeneratedNpcWithMeet` copies `domains` only `if (rec[k] != null)` — a condition that is never true for a minted record.
+⚑ **`readDomains` WALKS FOUR RUNGS** — model-authored · the ROLE string naming a tradition · `skillsObserved` · the REGION’S home tradition. ⛑ The last rung is the safety net, and it does not cover the whole map: **21 of 38 regions** have a home tradition, so **50 of 135 locations** fall through it — including `valley`, which is where play STARTS, and `the_center`, which is the Crossing.
 
-⬜ **The authored side proves the doors themselves work:** **79 of 137** reachable authored people field at least one real craft through the same two functions. ⚠️ **The authored CENSUS is `docs/ROSTER.md` and is not recomputed here** — one ladder, deliberately.
+➡️ **So a person minted in the Maw practises `abyssal` and fields a kit; the same person minted in Millbrook fields nothing.** ⚠️ Not a missing mechanism — a missing HOME TRADITION on the regions the player actually walks, which is content rather than code.
+
+⚠️ **The generation schema still asks for none of abilities, domains, tradition** — so every kit a minted person gets is DERIVED by affiliationFor, never authored by the model. ⛔ And reconcileGeneratedNpcWithMeet copies domains only when the record already has them, which is true once affiliation has run and false before it — so the ORDER of those two steps is load-bearing.
+
+⬜ **The authored side proves the doors themselves work:** **80 of 137** reachable authored people field at least one real craft through the same two functions. ⚠️ **The authored CENSUS is `docs/ROSTER.md` and is not recomputed here** — one ladder, deliberately.
 
 <!-- END npc-pipeline-generated -->
 

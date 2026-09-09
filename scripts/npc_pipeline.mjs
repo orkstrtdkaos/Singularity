@@ -22,7 +22,12 @@ import { fileURLToPath } from "node:url";
 import { loadContentHeadless } from "../tests/headless_content.mjs";
 import { personOpponentFor } from "../engine/battle_turn.js";
 import { derivedLevel, tierFromRole, battleSkillsFor } from "../engine/npcsheet.js";
-import { stubEntity, enforceFloors } from "../engine/generate.js";
+import { stubEntity, enforceFloors, affiliationFor } from "../engine/generate.js";
+// ⛔ `affiliationFor` IS PART OF THE MINT PATH — generate.js line 453 Object.assigns it onto every npc it
+// makes. ⚠️ MY FIRST VERSION OF THIS FILE LEFT IT OUT and reported "the generated path fields no kit",
+// which was a claim about my harness, not about the engine. Driving a PARTIAL path and calling it the
+// production path is the same defect this file exists to catch.
+import { regionHomeTradition } from "../engine/affiliation.js";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DOC = join(root, "docs/NPC_PIPELINE.md");
@@ -49,6 +54,16 @@ const stub = stubEntity("npc", genCtx, genSchema);
 // every field as missing — which is what it did to me the first time.
 const floored = enforceFloors(stub, "npc", genCtx, genSchema);
 const minted = floored?.entity || floored || stub;
+// ⛑ THE STEP THE MINT PATH ACTUALLY RUNS. `readDomains` walks a four-rung ladder — model-authored,
+// the ROLE string naming a tradition, skillsObserved, then the REGION'S home tradition — so whether a
+// minted person can field a kit depends on WHERE they are minted.
+const affiliated = { ...minted, ...affiliationFor(minted, genCtx, traditionIndex) };
+// how much of the world can that last rung actually serve?
+const regionsSeen = new Set(Object.values(C.locations || {}).map((l) => l?.regionId || l?.region || null));
+const regionsWithHome = [...regionsSeen].filter((r) => r && regionHomeTradition(r, traditionIndex));
+const locsNoHome = Object.values(C.locations || {}).filter((l) => !regionHomeTradition(l?.regionId || l?.region || null, traditionIndex));
+const mawCtx = { ...genCtx, location: C.locations?.the_maw || genCtx.location };
+const inTheMaw = { ...minted, ...affiliationFor(minted, mawCtx, traditionIndex) };
 
 const genRow = (label, rec) => {
   const opp = personOpponentFor(rec, { catalog, cfg, day: 10, traditionIndex });
@@ -62,8 +77,8 @@ const genRow = (label, rec) => {
 const genCases = [
   genRow("as `generate('npc')` leaves it", minted),
   genRow("a role that signals RANK (`Marshal of the Watch`)", { ...minted, role: "Marshal of the Watch" }),
-  genRow("+ `domains` (what the merge would copy, if it had any)", { ...minted, role: "Marshal of the Watch",
-    domains: C.npcs?.[Object.keys(C.npcs || {})[0]]?.domains || null }),
+  genRow("after `affiliationFor`, minted in Millbrook (region `valley`)", affiliated),
+  genRow("after `affiliationFor`, minted in the Maw (region `the_descent`)", inTheMaw),
 ];
 
 /* ── THE SCHEMA'S OWN ANSWER: what a minted person is REQUIRED to carry, and what the kit needs. ── */
@@ -93,7 +108,7 @@ out.push("| 1 | **REGISTERED** — something points at the record | the pack man
 out.push("| 2 | **LOADED** — it is in a map the engine reads | `CONTENT.npcs[id]`, via `loadContent` | `character.npcRegistry[id]`, via the `meet` op |");
 out.push("| 3 | **RESOLVED** — the fight path can FIND it | `duelFromTarget` → `npcs[id]` | `duelFromTarget` → `character.npcRegistry[id]` ⚠️ **checked FIRST, so a stub wins over content** |");
 out.push("| 4 | **STANDING** — a tier and a level | authored `tier`/`level` win outright | ⛑ derived: `role` → `tierFromRole` → `tierFloor` |");
-out.push("| 5 | **KIT** — a real craft to declare | authored `abilities[]`, else the domain draw | ⛔ **neither — see below** |");
+out.push("| 5 | **KIT** — a real craft to declare | authored `abilities[]`, else the domain draw | ⚠️ `affiliationFor` — and WHERE they are minted decides it |");
 out.push("| 6 | **OPPONENT** — a body to fight | `personOpponentFor` returns attributes, health, soak | same function, same shape |");
 out.push("| 7 | **HARM** — a verb that can threaten | a harm verb in the kit, or `notAnOpponent: true` | the bare strike only |");
 out.push("");
@@ -107,9 +122,13 @@ for (const g of genCases) {
   out.push(`| ${g.label} | ${g.tier} | **${g.level}** | ${g.fightable ? "✅ yes" : "⛔ NO"} | ${g.crafts === 0 ? `⛔ **${g.crafts}**` : `**${g.crafts}**`} | ${g.rows} |`);
 }
 out.push("");
-out.push(`⛔ **DOOR 5 IS THE HOLE, AND IT IS THE ONLY ONE.** Standing derives correctly — a role naming a rank lifts a minted person from **${genCases[0].level}** to **${genCases[1].level}** — and the body is real. ⚠️ **But the kit is empty at every level**, so a generated Marshal fights with a plain strike and a large health pool.`);
+out.push("⛔ **DOOR 5 IS THE ONLY UNEVEN ONE, AND IT IS UNEVEN BY PLACE RATHER THAN BROKEN.** ⚠️ **I first reported it as simply BROKEN, and that was a claim about my harness:** this file drove stubEntity → enforceFloors and stopped, while the real mint path also runs affiliationFor (generate.js:453). ⛑ Driving a PARTIAL path and calling it the production path is the exact defect this file exists to catch — committed by the file itself.");
 out.push("");
-out.push(`⚑ **THE MISSING INPUTS ARE \`${missingKitInputs.join("\`, \`")}\`.** The generation schema asks for none of them, \`enforceFloors\` adds none, and \`reconcileGeneratedNpcWithMeet\` copies \`domains\` only \`if (rec[k] != null)\` — a condition that is never true for a minted record.`);
+out.push(`⚑ **\`readDomains\` WALKS FOUR RUNGS** — model-authored · the ROLE string naming a tradition · \`skillsObserved\` · the REGION’S home tradition. ⛑ The last rung is the safety net, and it does not cover the whole map: **${regionsWithHome.length} of ${regionsSeen.size} regions** have a home tradition, so **${locsNoHome.length} of ${Object.keys(C.locations || {}).length} locations** fall through it — including \`valley\`, which is where play STARTS, and \`the_center\`, which is the Crossing.`);
+out.push("");
+out.push(`➡️ **So a person minted in the Maw practises \`abyssal\` and fields a kit; the same person minted in Millbrook fields nothing.** ⚠️ Not a missing mechanism — a missing HOME TRADITION on the regions the player actually walks, which is content rather than code.`);
+out.push("");
+out.push(`⚠️ **The generation schema still asks for none of ${KIT_INPUTS.join(", ")}** — so every kit a minted person gets is DERIVED by affiliationFor, never authored by the model. ⛔ And reconcileGeneratedNpcWithMeet copies domains only when the record already has them, which is true once affiliation has run and false before it — so the ORDER of those two steps is load-bearing.`);
 out.push("");
 out.push(`⬜ **The authored side proves the doors themselves work:** **${authoredWithCraft.length} of ${authoredFightable.length}** reachable authored people field at least one real craft through the same two functions. ⚠️ **The authored CENSUS is \`docs/ROSTER.md\` and is not recomputed here** — one ladder, deliberately.`);
 out.push("");

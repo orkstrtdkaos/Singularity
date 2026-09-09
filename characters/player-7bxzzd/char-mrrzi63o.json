@@ -8,7 +8,7 @@
   "whyHere": "You put down the blade, or you were sent away from it, or you are looking for a line worth holding that isn't theirs.",
   "background": "war_leader",
   "level": 2,
-  "xp": 114,
+  "xp": 116,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -65,7 +65,7 @@
   "maxHealth": 51,
   "health": 51,
   "maxEnergy": 113,
-  "energy": 110,
+  "energy": 105,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -196,143 +196,149 @@
         "player": "Step outside and scan the waygate arch — Freki flagged the heavy-wool man; see if he's worth a look with Read the Fight",
         "summary": "Brynjar read the heavy-wool man from the street: he's watching the waygate for someone specific, checking faces and hands for a signal.",
         "narration": "You drop a coin on the bar for Doss and step outside with the plate still half-eaten, Freki pressing close behind you.\n\nThe Crossing at midday is its usual crowded self — a knot of Lattice-City officials arguing over a writ near the Made Arch, a pair of rootkin traders with baskets of dried fungus, a woman in Stillhold grey moving fast with her hood pulled. You work your way to a spot with a clear angle on the waygate arch and let the crowd flow around you, keeping still the way Ragnar taught you to keep still — not stiff, just unhurried, like you belong to the wall.\n\nRead the Fight opens up your attention the same way it does before the first blow lands. You are not looking at the arch; you are looking at everything at once, letting the patterns sort themselves. The heavy-wool man is still at his corner table inside — you can see him through the shutters, elbows on wood, not eating, not reading, not talking to anyone. He is watching the waygate door.\n\nThe tell is small: when a new traveler comes through the arch, his eyes go to the face first, then the pack, then — briefly, almost nothing — to the hands. He is checking for something specific. Not robbery-sizing a mark; a marker-reader's habit, a man looking for a signal or a person he was told to identify. Freki has not moved from your left heel, but the hound's ears are forward and its weight is shifted toward him — not alarm, not yet, but pointed."
+      },
+      {
+        "player": "Go back inside and sit near him — close enough to hear if he speaks to anyone",
+        "summary": "Brynjar tried to settle within earshot of the heavy-wool man but the room failed him — wrong angles, too much noise, and Freki drew the man's eye. He clocked Brynjar plainly before returning his watch to the waygate.",
+        "narration": "You turn back through the Crow and Thistle's door with Freki at your heel, working through the lunchtime crowd toward a spot that would put you within earshot of the heavy-wool man's corner table.\n\nYou don't make it clean. The room is fuller than it was at dawn — a bench pulled out at the wrong angle, two drovers standing in the gap between your path and his corner, a woman with a child on her hip blocking the natural line. You find a stool, settle onto it, angle toward him — but the distance is wrong. The room's noise fills the gap: chair-scrape, the drovers' argument about wagon-weight, the child fussing. Whatever the heavy-wool man says to the serving boy who passes his table is swallowed before it reaches you.\n\nWorse: Freki stiffens the moment you sit. Not a growl — just a shift in the hindquarters, weight pulling back slightly, ears rotating toward the man's corner. He has noticed the dog. His eyes come off the waygate arch and settle on Freki for two full seconds, then move deliberately to you. He doesn't look away quickly. He looks long enough to say *I see you, and I have filed you*, then his gaze returns to the arch.\n\nYou got too close. Now he knows he's being watched."
       }
     ],
     "lastTurn": {
-      "narration": "You drop a coin on the bar for Doss and step outside with the plate still half-eaten, Freki pressing close behind you.\n\nThe Crossing at midday is its usual crowded self — a knot of Lattice-City officials arguing over a writ near the Made Arch, a pair of rootkin traders with baskets of dried fungus, a woman in Stillhold grey moving fast with her hood pulled. You work your way to a spot with a clear angle on the waygate arch and let the crowd flow around you, keeping still the way Ragnar taught you to keep still — not stiff, just unhurried, like you belong to the wall.\n\nRead the Fight opens up your attention the same way it does before the first blow lands. You are not looking at the arch; you are looking at everything at once, letting the patterns sort themselves. The heavy-wool man is still at his corner table inside — you can see him through the shutters, elbows on wood, not eating, not reading, not talking to anyone. He is watching the waygate door.\n\nThe tell is small: when a new traveler comes through the arch, his eyes go to the face first, then the pack, then — briefly, almost nothing — to the hands. He is checking for something specific. Not robbery-sizing a mark; a marker-reader's habit, a man looking for a signal or a person he was told to identify. Freki has not moved from your left heel, but the hound's ears are forward and its weight is shifted toward him — not alarm, not yet, but pointed.",
-      "sceneSummary": "Brynjar read the heavy-wool man from the street: he's watching the waygate for someone specific, checking faces and hands for a signal.",
+      "narration": "You turn back through the Crow and Thistle's door with Freki at your heel, working through the lunchtime crowd toward a spot that would put you within earshot of the heavy-wool man's corner table.\n\nYou don't make it clean. The room is fuller than it was at dawn — a bench pulled out at the wrong angle, two drovers standing in the gap between your path and his corner, a woman with a child on her hip blocking the natural line. You find a stool, settle onto it, angle toward him — but the distance is wrong. The room's noise fills the gap: chair-scrape, the drovers' argument about wagon-weight, the child fussing. Whatever the heavy-wool man says to the serving boy who passes his table is swallowed before it reaches you.\n\nWorse: Freki stiffens the moment you sit. Not a growl — just a shift in the hindquarters, weight pulling back slightly, ears rotating toward the man's corner. He has noticed the dog. His eyes come off the waygate arch and settle on Freki for two full seconds, then move deliberately to you. He doesn't look away quickly. He looks long enough to say *I see you, and I have filed you*, then his gaze returns to the arch.\n\nYou got too close. Now he knows he's being watched.",
+      "sceneSummary": "Brynjar tried to settle within earshot of the heavy-wool man but the room failed him — wrong angles, too much noise, and Freki drew the man's eye. He clocked Brynjar plainly before returning his watch to the waygate.",
       "choices": [
         {
-          "label": "Go back inside and sit near him — close enough to hear if he speaks to anyone",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": "normal",
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "abilityId": null,
-          "trivial": false
-        },
-        {
-          "label": "Step to the waygate arch and check the chalk-board column — see if anyone has left a name or mark that matches what he might be watching for",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": "easy",
-          "intentTags": [
-            "study",
-            "scout"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 3,
-          "trivial": false
-        },
-        {
-          "label": "Send Freki back inside first — let the hound settle near him while you come in separately; his reaction to the dog tells you something",
+          "label": "Pull back to the bar and let Freki settle — watch from a distance and wait to see who he's waiting for",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": "easy",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
           "intentTags": [
             "scout",
             "careful"
           ],
-          "abilityId": null,
-          "trivial": false
+          "abilityId": "read_the_fight",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Wait here and watch — let him make the next move before you show him you've noticed",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "difficulty": "very easy",
+          "label": "Walk to his table directly — sit across from him and ask plainly what he's watching for",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": "hard",
+          "opposedDifficulty": null,
           "intentTags": [
-            "careful",
-            "scout"
+            "negotiate",
+            "threaten"
           ],
           "abilityId": null,
-          "trivial": true
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Step back outside and wait near the waygate arch — if he's watching for someone arriving, intercept them first",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "scout",
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
-      "scene": {
-        "setting": "Outside the Crow and Thistle, on the street with a clear sightline to the waygate arch. Spring midday light. Crowds moving — traders, officials, travelers. The heavy-wool man is visible through the shuttered window at his corner table.",
-        "npcsPresent": [
-          {
-            "name": "Freki",
-            "state": "pressed to Brynjar's left heel, ears forward, weight angled toward the heavy-wool man inside"
-          },
-          {
-            "name": "Doss Halveck",
-            "state": "behind the bar, working the room, not watching the door"
-          }
-        ],
-        "objects": [
-          "Hand-axe in its frog on the belt",
-          "Round Shield strapped to Brynjar's back",
-          "Heavy-wool man — visible through the shutters, watching the waygate door, checking faces and hands of arrivals"
-        ],
-        "threads": [
-          "Heavy-wool man is watching the waygate for someone specific — marker-reader's habit",
-          "Ragnar left widdershins before first light — chalk-board is the only reach",
-          "Maret did not come through the Crow and Thistle at all",
-          "The restricted creditor behind Maret's debt remains unidentified"
-        ]
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "doss-halveck",
           "name": "Doss Halveck",
-          "note": "Brynjar stepped outside; Doss working the room without watching the door.",
+          "note": "Brynjar re-entered the inn; Doss working the room, not watching the door.",
           "statusNote": "On duty at the Crow and Thistle; working the midday room."
         }
       ],
-      "codexUpdates": [
-        {
-          "topic": "gen-the-waygate",
-          "label": "The Waygate",
-          "kind": "place",
-          "fact": "The heavy-wool man from the Hub Hall is sitting inside the Crow and Thistle watching the waygate arch — checking arriving travelers' faces and hands for a specific signal or person, not sizing marks for robbery. Freki confirms the scent match.",
-          "links": [
-            "stillhold-operatives",
-            "maret-threnwick",
-            "brynjar-andyrsson-thread"
-          ]
-        }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A quick step outside and a read of the street"
-      }
+      "scene": {
+        "setting": "Inside the Crow and Thistle, midday. Full common room — drovers, travelers, a bench pulled at the wrong angle, noise swallowing the far corner. The heavy-wool man is at his corner table near the shuttered window, gaze now returned to the waygate arch after clocking Brynjar.",
+        "npcsPresent": [
+          {
+            "name": "Doss Halveck",
+            "state": "behind the bar, working the room, not watching the door"
+          },
+          {
+            "name": "Heavy-wool man",
+            "state": "at his corner table, watching the waygate arch — has noted Brynjar and Freki and filed them away"
+          },
+          {
+            "name": "Freki",
+            "state": "pressed to Brynjar's heel, weight pulled back, ears on the heavy-wool man's corner"
+          }
+        ],
+        "objects": [
+          "Hand-axe in its frog on the belt",
+          "Round Shield strapped to Brynjar's back",
+          "Heavy-wool man's corner table — near the shuttered window, clear sightline to the waygate door"
+        ],
+        "threads": [
+          "Heavy-wool man has made Brynjar — he knows he's being watched now",
+          "Heavy-wool man is still watching the waygate for someone specific",
+          "Ragnar left widdershins before first light — chalk-board is the only reach",
+          "Maret did not come through the Crow and Thistle at all",
+          "The restricted creditor behind Maret's debt remains unidentified"
+        ]
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Outside the Crow and Thistle, on the street with a clear sightline to the waygate arch. Spring midday light. Crowds moving — traders, officials, travelers. The heavy-wool man is visible through the shuttered window at his corner table.",
+      "setting": "Inside the Crow and Thistle, midday. Full common room — drovers, travelers, a bench pulled at the wrong angle, noise swallowing the far corner. The heavy-wool man is at his corner table near the shuttered window, gaze now returned to the waygate arch after clocking Brynjar.",
       "npcsPresent": [
-        {
-          "name": "Freki",
-          "state": "pressed to Brynjar's left heel, ears forward, weight angled toward the heavy-wool man inside"
-        },
         {
           "name": "Doss Halveck",
           "state": "behind the bar, working the room, not watching the door"
+        },
+        {
+          "name": "Heavy-wool man",
+          "state": "at his corner table, watching the waygate arch — has noted Brynjar and Freki and filed them away"
+        },
+        {
+          "name": "Freki",
+          "state": "pressed to Brynjar's heel, weight pulled back, ears on the heavy-wool man's corner"
         }
       ],
       "objects": [
         "Hand-axe in its frog on the belt",
         "Round Shield strapped to Brynjar's back",
-        "Heavy-wool man — visible through the shutters, watching the waygate door, checki"
+        "Heavy-wool man's corner table — near the shuttered window, clear sightline to th"
       ],
       "threads": [
-        "Heavy-wool man is watching the waygate for someone specific — marker-reader's habit",
+        "Heavy-wool man has made Brynjar — he knows he's being watched now",
+        "Heavy-wool man is still watching the waygate for someone specific",
         "Ragnar left widdershins before first light — chalk-board is the only reach",
         "Maret did not come through the Crow and Thistle at all",
         "The restricted creditor behind Maret's debt remains unidentified"
       ]
     },
-    "beats": 5
+    "beats": 6
   },
   "clock": {
     "schemaVersion": 1,
     "day": 3,
-    "hour": 22,
+    "hour": 23,
     "realAnchor": null
   },
   "companions": [
@@ -492,7 +498,8 @@
         "[d3] Gave Brynjar a room and a bowl of barley soup without ceremony at the small hours of morning. Set a bowl of water on the flagstone for Freki unprompted.",
         "[d3] Told Brynjar that Ragnar left heading widdershins around first light; Maret never came in through the Crow and Thistle at all — no gate-log entry matching her description.",
         "[d3] Told Brynjar that Ragnar left before first light heading widdershins and cannot be reached directly; offered to put word on the waygate chalk-board. Named Longshore (sixty days spinward) as the nearest proper hire-port, and the Mudrun river road (twenty days spinward) as the closer option for…",
-        "[d3] Brynjar stepped outside; Doss working the room without watching the door."
+        "[d3] Brynjar stepped outside; Doss working the room without watching the door.",
+        "[d3] Brynjar re-entered the inn; Doss working the room, not watching the door."
       ],
       "knownFacts": [
         "Doss kept the bundle because it felt deliberate, not lost",
@@ -524,7 +531,7 @@
       "people": "human",
       "peopleSource": "generated",
       "appearance": "A stout woman in her mid-fifties, broad through the shoulders, heavy-handed in the way of someone who has carried kegs since she was fifteen. Skin the colour of old oak, short grey hair kept close to the skull for practicality. A crescent scar at the left jaw from a long-ago disagreement. Apron is clean — she changes it twice a day on principle. Eyes the flat, still grey of a whetstone, and about as yielding.",
-      "met": 4
+      "met": 5
     },
     "ragnar-solmyr": {
       "id": "ragnar-solmyr",
@@ -1079,7 +1086,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 3,
     "recentOffers": [
       {
         "thing": "Maret's eyes have tracked to one of the dark gates — not the lit ones, the one in the north face that hasn't hummed in what looks like…",
@@ -4992,20 +4999,20 @@
     ]
   },
   "tendencies": {
-    "leadership": 3.7686468518749865,
-    "cerebral": 9.49364320373265,
-    "strategic": 7.933997788800159,
-    "ruthless": 0.24224703998738534,
-    "social": 8.59694726234736,
-    "cautious": 7.438041871736035,
-    "generous": 1.1231073592471819,
-    "patient": 0.49218598109595263
+    "leadership": 3.6744306805781117,
+    "cerebral": 9.256302123639335,
+    "strategic": 8.735647844080155,
+    "ruthless": 0.2361908639877007,
+    "social": 8.382023580788676,
+    "cautious": 8.252090824942634,
+    "generous": 1.0950296752660023,
+    "patient": 0.4798813315685538
   },
   "aptitudes": [
     "silver_tongue",
     "banner"
   ],
-  "actionCount": 58,
+  "actionCount": 59,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -6087,8 +6094,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788987311309,
-  "rev": 293,
+  "updatedAt": 1788987372191,
+  "rev": 294,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -6553,7 +6560,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "riven_marches": 39,
-    "the_center": 22,
+    "the_center": 23,
     "the_palelands": 3
   },
   "practice": {
@@ -6656,10 +6663,10 @@
     {
       "id": "sess-6",
       "startedAt": "2026-09-09T20:21:48.688Z",
-      "lastAt": "2026-09-09T20:55:11.307Z",
+      "lastAt": "2026-09-09T20:56:12.189Z",
       "startDay": 71,
       "endDay": 71,
-      "beats": 10
+      "beats": 11
     }
   ],
   "_pendingArrival": null,
@@ -6675,17 +6682,17 @@
     "at": "2026-09-09T20:47:47.388Z"
   },
   "_opEmitted": {
-    "sceneSummary": 55,
-    "choices": 55,
-    "scene": 55,
-    "npcUpdates": 49,
+    "sceneSummary": 56,
+    "choices": 56,
+    "scene": 56,
+    "npcUpdates": 50,
     "placeUpdates": 8,
     "generateRequest": 4,
     "moveTo": 7,
     "timeOps": 49,
     "codexUpdates": 43,
-    "sceneEnded": 15,
-    "characterDeltas": 20,
+    "sceneEnded": 16,
+    "characterDeltas": 21,
     "offer": 8,
     "deeds": 1,
     "standingOps": 1,
@@ -6693,7 +6700,7 @@
     "stageOps": 2,
     "factUpdates": 2
   },
-  "_opTurns": 55,
+  "_opTurns": 56,
   "_opLedger": {
     "offer": {
       "applied": 9,
@@ -6804,7 +6811,7 @@
   "_debtReceipts": [],
   "skillUses": {
     "negotiate": 10,
-    "careful": 7,
+    "careful": 8,
     "help": 2,
     "plan": 2,
     "guard": 1,
@@ -6813,7 +6820,7 @@
     "travel": 9,
     "ask": 2,
     "lead": 1,
-    "scout": 5,
+    "scout": 6,
     "prepare": 1,
     "meditate": 1
   },

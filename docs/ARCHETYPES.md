@@ -4,6 +4,10 @@
 says what a person actually builds.** ⚠️ Every craft id here was checked against the catalogue; **the only
 ones that do not exist are marked as holes.**
 
+⛑ **READ `VOCATIONS.md` FIRST.** ⚠️ **The eight VOCATIONS are the classes — Keeper, Maker, Reader, Edge,
+Broker, Walker, Attendant, Ender — and everything below is how each one LOOKS in a given domain.** ⛔ **An
+Ash Warden and a Night-Warden are the same vocation in two poles.**
+
 ## ⛑ TWO RULES ERIK SET, AND THEY SHAPE EVERY ENTRY
 
 **1 · A CLASS IS THREE DOMAINS, NOT ONE.** ⚑ *"NPCs and PCs have three, so grabbing a few from another

@@ -943,12 +943,14 @@
      "class": "cost"
     }
    ],
-   "plainly": "A magical/craft/tactical action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 3, and lasts for about a day Ranks: rank 2 deepens fidelity; rank 3 extends duration. Limit: it Changes What People DO, not what is so — the real does not bend.",
+   "plainly": "A social/investigate action that installs a working reality — people act on it and the acting holds it up. Its strength is rated 6 out of 10 across a scope of 3, and lasts for about a day Ranks: rank 2 deepens fidelity; rank 3 extends duration. Limit: it Changes What People DO, not what is so — the real does not bend.",
    "_nameWas": "The Made Truth",
    "_idWas": "the_made_truth",
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['magical', 'craft', 'tactical'], energy e2 below band. ⛔ SEVENTH AND EIGHTH TRADITIONS with the same batch, and it spans BOTH POLES of one axis — which is how a batch is identified rather than a tradition being sloppy."
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['magical', 'craft', 'tactical'], energy e2 below band. ⛔ SEVENTH AND EIGHTH TRADITIONS with the same batch, and it spans BOTH POLES of one axis — which is how a batch is identified rather than a tradition being sloppy.",
+   "_plainlyWas": "A magical/craft/tactical action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 3, and lasts for about a day Ranks: rank 2 deepens fidelity; rank 3 extends duration. Limit: it Changes What People DO, not what is so — the real does not bend.",
+   "_glossFix_20260908": "⛑ TIER 2 OF `SPEC_tradition_narrative_npc_pass` — THE THIN GLOSSES. ⛔ All thirty were CORRECT and USELESS: 'makes or animates something' says THAT the craft makes and never WHICH, on thirty crafts that make thirty different things. ⚠️ T7: what does the GM narrate CHANGING? ⚑ Every rewrite is drawn from that craft's own `description` — nothing invented, and the description was right in all thirty cases. ⛔ THE SPEC ESTIMATED 251 THIN CRAFTS AND THERE WERE 42: measure before authoring."
   },
   {
    "id": "false_door",
@@ -1451,12 +1453,14 @@
      "class": "cost"
     }
    ],
-   "plainly": "A social/legal/intellectual action that makes or animates something. Its strength is rated 4 out of 10, and lasts for about 7 days Ranks: rank 2 deepens bindStrength; rank 3 adds to special. Limit: it establishes what IS True — a false claim gains nothing from this craft.",
+   "plainly": "An investigate/social action that states a thing so fully and accurately that it stops being deniable. Its strength is rated 4 out of 10, and lasts for about 7 days Ranks: rank 2 deepens bindStrength; rank 3 adds to special. Limit: it establishes what IS True — a false claim gains nothing from this craft.",
    "_nameWas": "The Established Fact",
    "_idWas": "the_established_fact",
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `verist` — Seeing truly, without an instrument between.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['social', 'legal', 'intellectual'], energy e2 below band. ⛔ SEVENTH AND EIGHTH TRADITIONS with the same batch, and it spans BOTH POLES of one axis — which is how a batch is identified rather than a tradition being sloppy."
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['social', 'legal', 'intellectual'], energy e2 below band. ⛔ SEVENTH AND EIGHTH TRADITIONS with the same batch, and it spans BOTH POLES of one axis — which is how a batch is identified rather than a tradition being sloppy.",
+   "_plainlyWas": "A social/legal/intellectual action that makes or animates something. Its strength is rated 4 out of 10, and lasts for about 7 days Ranks: rank 2 deepens bindStrength; rank 3 adds to special. Limit: it establishes what IS True — a false claim gains nothing from this craft.",
+   "_glossFix_20260908": "⛑ TIER 2 OF `SPEC_tradition_narrative_npc_pass` — THE THIN GLOSSES. ⛔ All thirty were CORRECT and USELESS: 'makes or animates something' says THAT the craft makes and never WHICH, on thirty crafts that make thirty different things. ⚠️ T7: what does the GM narrate CHANGING? ⚑ Every rewrite is drawn from that craft's own `description` — nothing invented, and the description was right in all thirty cases. ⛔ THE SPEC ESTIMATED 251 THIN CRAFTS AND THERE WERE 42: measure before authoring."
   },
   {
    "id": "weight_of_truth",

@@ -65,6 +65,10 @@ const SUITES = [
   // capability." ⚠️ The doc is DRIVEN — every row calls the production function — so it goes stale the moment a
   // door moves, and a pipeline doc that lies is worse than none.
   ["npc_pipeline --check", "node", ["scripts/npc_pipeline.mjs", "--check"]],
+  // ⛔ ERIK: "Spec a review of the world power source distribution." ⚠️ The atlas is a document Erik
+  // DECIDES FROM — whether veil working in 5 of 39 regions is design or accident is his ruling — so a stale
+  // one is worse than none: it would be a table of numbers that no longer describe the world.
+  ["substrate_atlas --check", "node", ["scripts/substrate_atlas.mjs", "--check"]],
 ];
 
 const only = process.argv.slice(2).filter(a => !a.startsWith("-"));

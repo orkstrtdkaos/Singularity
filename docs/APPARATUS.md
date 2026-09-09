@@ -1,7 +1,7 @@
 # THE APPARATUS — every harness, what it is for, and whether it runs
 
 ⛔ **ERIK, 2026-08-29: *"I want this to be a well oiled factory."*** ⚠️ **A factory you cannot see is not
-well oiled.** 95 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
+well oiled.** 96 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
 were gates, which were reports, and which had quietly stopped being wired into anything.
 
 ```bash
@@ -10,7 +10,7 @@ node scripts/apparatus.mjs --md     # …as markdown for §5
 node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 ```
 
-**Last measured: 2026-09-08 · v1.9.425 · 95 files.**
+**Last measured: 2026-09-08 · v1.9.425 · 96 files.**
 
 ---
 
@@ -22,7 +22,7 @@ node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 | ⛔ **GATE-UNWIRED** | **0** | assertions nobody runs | ⛔ **nowhere — this must stay zero** |
 | ⚠️ **LIVE-API** | 2 | needs a real API key; costs money; cannot run in CI | run by hand, deliberately |
 | ○ **REPORT** | 19 | answers *how often / how hard / at what tier* | in a person's hand |
-| 🔧 **TOOL+SELFTEST** | 16 | a tool that checks its own output (`--check`) | ⚠️ **the doc-freshness gates live here, and several ARE in the runner** |
+| 🔧 **TOOL+SELFTEST** | 17 | a tool that checks its own output (`--check`) | ⚠️ **the doc-freshness gates live here, and several ARE in the runner** |
 | 🔧 **TOOL** | 32 | does a job — generates, repairs, measures on demand | invoked, not scheduled |
 | · **LIBRARY** | 1 | imported by other harnesses | nowhere |
 
@@ -133,8 +133,8 @@ worthless.
 <!-- APPARATUS:BEGIN -->
 | harness | kind | assertions | purpose |
 |---|---|---|---|
-| `tests/smoke` | ✅ GATE | 3532 | — |
-| `tests/how_it_works` | ✅ GATE | 1549 | CCODE-285 |
+| `tests/smoke` | ✅ GATE | 3534 | — |
+| `tests/how_it_works` | ✅ GATE | 1576 | CCODE-285 |
 | `tests/skill_battle_sim` | ✅ GATE | 217 | SNG-098: the two-sided contest + fog-of-war invariant |
 | `tests/content_ci` | ✅ GATE | 184 | SNG-BATCH-10 Phase 4 / SNG-040/064: the content integrity gate |
 | `tests/craft_crit` | ✅ GATE | 43 | miss // it and YOU HAVE ONLY MADE CHAOS |
@@ -186,6 +186,7 @@ worthless.
 | `scripts/run_tests` | 🔧 TOOL+SELFTEST | 3 | EVERY SUITE RUNS, EVEN AFTER ONE GOES RED |
 | `scripts/skills_inject` | 🔧 TOOL+SELFTEST | 3 | regenerate the derived half of docs/SKILLS |
 | `scripts/npc_pipeline` | 🔧 TOOL+SELFTEST | 2 | THE DOORS A PERSON PASSES TO BECOME PLAYABLE, DRIVEN RATHER THAN DESCRIBED |
+| `scripts/substrate_atlas` | 🔧 TOOL+SELFTEST | 2 | 39 REGIONS × 6 SOURCES, PRINTED ONCE, BECAUSE NOBODY HAS EVER SEEN IT |
 | `scripts/apparatus` | 🔧 TOOL+SELFTEST | 1 | CCODE-301 |
 | `scripts/certify_counts` | 🔧 TOOL+SELFTEST | 1 | CCODE-327 |
 | `scripts/encounter_types` | 🔧 TOOL+SELFTEST | 1 | CCODE-262 |

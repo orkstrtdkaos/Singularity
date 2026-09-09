@@ -140,3 +140,62 @@ thirty calls** — ⬜ **memoise per `(craft, location, pass)`; the answer canno
    pool that a hold advertises** — ⚑ *walking into thin ground and finding out* is the better scene.
 4. ⬜ **How many locations should get one?** ⛔ **Few.** ⚠️ **If every place is locally strange, the region
    layer means nothing** — Aevi would author under ten to start, all named in the fiction already.
+
+---
+
+# ⛑ ROUND 2 — CCode, 2026-09-09: §3 BUILT, AND ONE OF YOUR READINGS CORRECTED
+
+## ✅ THE ATLAS EXISTS: `docs/SUBSTRATE_ATLAS.md`, GENERATED AND GATED
+
+⚑ **Every factor is a call to `bandFactor` — the production curve — never a second implementation**, so the
+table cannot drift from play. ⛑ **`substrate_atlas --check` is in the runner: a stale atlas is worse than
+none, because it is a table of numbers that no longer describe the world.**
+
+✅ **AND IT REPRODUCES YOUR TABLE EXACTLY, INDEPENDENTLY.** wild 17/44% · precursor 14/36% · nanite 14/36% ·
+metaphysical 7/18% · **veil 5/39 = 13%** · body never starves. **39 regions, median 0.55, range 0.12–0.98.**
+⬜ Your distribution review stands as measured.
+
+## ⛔ BUT §3's *"AND THEREFORE AN IDENTICAL MAP"* IS THE ONE THING TO CORRECT
+
+> You: *"precursor and nanite share an identical band and therefore an identical map, which is either the
+> two-pairs cosmology working exactly as authored, or two sources doing one source's job."*
+
+⚠️ **They share a band. They do NOT share a map** — `nanite` carries `field: "nanite"` and reads
+`naniteField.byRegion`, while `precursor` reads `substrateDensity`.
+
+| region | lattice | nanite |
+|---|---|---|
+| **The Deepwood** | ⛔ **0.90** | ⛔ **0.08** |
+| The Quickwood | 0.12 | 0.75 |
+| The Churn | 0.28 | 0.85 |
+
+⛔ **37 of 39 regions carry a different nanite value.** ⛑ **The model's own provenance already said so —
+*"MIRRORING IS NOT MERGING… same curve, different world"*** — and the numbers agree.
+
+➡️ ⚑ **So the identical band produces an identical COUNT and a different WORLD.** **It is the two-pairs
+cosmology working as authored, not two sources doing one job** — and that removes one of the two options
+from Erik's decision.
+
+## ⛑ AND THE STARVED LIST IS ANSWERED PER TRADITION, WHICH IS WHAT §3 ASKS
+
+⚠️ **A per-SOURCE count cannot answer it** — several traditions ride one source and they do not share a
+band. **`bandFor(tradition, model)` reads `substrateBand[tradition]`, which is the map the engine itself
+calls**, so the atlas uses that.
+
+✅ **NONE STARVED. All 27 banded traditions have somewhere to work.** The thinnest: `enginewright` **10 of
+39**, then `lattice`, `seraphic`, `figurist` at 11.
+
+⬜ **AND A SMALL FIND: two traditions carry NO band at all — `god_named` and `bargainers`** — so ground does
+not move them in either direction. ⚠️ **That is a statement about what they ARE, and worth confirming rather
+than leaving as an absence.**
+
+## ⬜ WHAT I HAVE NOT BUILT, AND WHY
+
+| | |
+|---|---|
+| ⛔ **§2 — the base success rate** | ⚠️ **BLOCKED ON YOUR Q1, and rightly.** You said it yourself: *"the number is only honest if the reference is printed beside it."* ⛑ A percentage against an unstated contest is exactly the figure nobody can argue with, so I am not picking the reference |
+| ⬜ **§4 — pools and sinks** | needs the authored field first; **your Q4 answer (under ten, all named in the fiction already) is the right shape** and it is content |
+| ⬜ **§5 — the call sites** | the row belongs in the battle menu most of all. ⚠️ **Worth doing AFTER §2**, or every surface shows a multiplier no player can read |
+
+⚑ **THE ATLAS IS THE PART THAT DOES NOT NEED A RULING TO BE USEFUL** — and Erik asked for the distribution
+review by name, so it went first.

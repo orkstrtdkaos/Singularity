@@ -59,7 +59,7 @@
   "alignment": {
     "spectrum": -0.03,
     "falsehood_truth": 0.082901375,
-    "spectrumId": -0.045125
+    "spectrumId": -0.04286875
   },
   "attunement": 2,
   "maxHealth": 51,
@@ -107,7 +107,8 @@
         "vague": [
           "effect-resolvable"
         ]
-      }
+      },
+      "pinned": true
     },
     {
       "id": null,
@@ -124,7 +125,8 @@
         "vague": [
           "effect-resolvable"
         ]
-      }
+      },
+      "pinned": true
     }
   ],
   "deeds": [
@@ -178,32 +180,74 @@
         "player": null,
         "summary": "*✦ Hand-Axe — added to your pack.*\n*✦ Round Shield — added to your pack.*",
         "narration": "\n\n*✦ Hand-Axe — added to your pack.*\n*✦ Round Shield — added to your pack.*"
+      },
+      {
+        "player": "I'll try to remember where the Crow and The Thistle was located.",
+        "summary": "Brynjar recalls the Crow and Thistle's location without difficulty — a half-morning's walk back to the Marchward.",
+        "narration": "The Crow and Thistle. You know exactly where it is — you only left it two days ago.\n\nIt sits in the Marchward, a half-morning's walk hubward and widdershins from where you stand. You can call up the layout without effort: Doss's bar running the length of the common room, the third stool where the bundle sat, the side door that opens east onto the back lane — north fork to the waygate approach, south fork down to the Stillhold road. The inn is the kind of place that prints itself on you. You don't forget it.\n\nFreki shifts against your leg. Outside, the spring dark is wet and still, and the waygate arch catches what little light there is. The argument-hall holds its lean around you, the plaques flush and patient on the walls."
       }
     ],
     "lastTurn": {
-      "characterDeltas": {
-        "inventoryAdd": [
+      "narration": "The Crow and Thistle. You know exactly where it is — you only left it two days ago.\n\nIt sits in the Marchward, a half-morning's walk hubward and widdershins from where you stand. You can call up the layout without effort: Doss's bar running the length of the common room, the third stool where the bundle sat, the side door that opens east onto the back lane — north fork to the waygate approach, south fork down to the Stillhold road. The inn is the kind of place that prints itself on you. You don't forget it.\n\nFreki shifts against your leg. Outside, the spring dark is wet and still, and the waygate arch catches what little light there is. The argument-hall holds its lean around you, the plaques flush and patient on the walls.",
+      "sceneSummary": "Brynjar recalls the Crow and Thistle's location without difficulty — a half-morning's walk back to the Marchward.",
+      "choices": [
+        {
+          "label": "Step through the waygate to The Crossing — cut the travel time entirely",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": "very easy",
+          "trivial": true,
+          "intentTags": [
+            "travel"
+          ]
+        },
+        {
+          "label": "Walk back to the Marchward now — the night is cold but the road is known",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": "easy",
+          "trivial": true,
+          "intentTags": [
+            "travel"
+          ]
+        },
+        {
+          "label": "Read one more plaque before you go — there was one you passed too fast",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": "easy",
+          "trivial": false,
+          "intentTags": [
+            "study"
+          ]
+        }
+      ],
+      "scene": {
+        "setting": "The argument-hall beside Cairnhold's waygate, deep night. Stone walls that lean inward, flush plaque-carvings in a steady hand. The dressed-iron waygate arch is visible through the far door. Cold, wet ground underfoot; spring dark outside both entrances.",
+        "npcsPresent": [
           {
-            "name": "Hand-Axe",
-            "type": "weapon",
-            "description": "A well-used hand-axe — taken from the longhouse as Brynjar fled Javiksholm. Balance is right for throwing or close work. The steel is good northern make, the haft worn smooth where his hand sits."
-          },
-          {
-            "name": "Round Shield",
-            "type": "armour",
-            "description": "A round traveler's shield, hide-faced over linden wood, iron boss at the center. Carried since Javiksholm. The edge is road-scarred but the grip is tight and the boss has stopped more than one blow."
+            "name": "Freki",
+            "state": "pressed against Brynjar's leg, still and attending"
           }
+        ],
+        "objects": [
+          "wall plaques — flush-carved, steady hand, each a short declarative sentence",
+          "the waygate arch — dressed iron, the Cairnhold plinth behind it",
+          "Brynjar's traveler's pack and axe"
+        ],
+        "threads": [
+          "The plaque: 'The door ahead leads where you have already decided to go' — Brynjar cannot find the moment he made the choice it names",
+          "Freki's read: still, attending, not afraid — but not fully at ease either",
+          "The Crow and Thistle is a half-morning's walk back to the Marchward"
         ]
-      },
-      "narration": "\n\n*✦ Hand-Axe — added to your pack.*\n*✦ Round Shield — added to your pack.*",
-      "sceneSummary": "*✦ Hand-Axe — added to your pack.*\n*✦ Round Shield — added to your pack.*"
+      }
     },
     "sceneState": {
-      "setting": "The argument-hall beside Cairnhold's waygate, deep night. Stone walls that lean inward. A plaque-lined interior, flush carvings in steady hands. The dressed-iron waygate arch is visible through the far door. Cold, wet ground underfoot; spring dark outside both entrances.",
+      "setting": "The argument-hall beside Cairnhold's waygate, deep night. Stone walls that lean inward, flush plaque-carvings in a steady hand. The dressed-iron waygate arch is visible through the far door. Cold, wet ground underfoot; spring dark outside both entrances.",
       "npcsPresent": [
         {
           "name": "Freki",
-          "state": "shoulder pressed against Brynjar's thigh, watching the walls, one low exhale — not alarmed"
+          "state": "pressed against Brynjar's leg, still and attending"
         }
       ],
       "objects": [
@@ -213,15 +257,16 @@
       ],
       "threads": [
         "The plaque: 'The door ahead leads where you have already decided to go' — Brynjar cannot find the moment he made the choice it names",
-        "Freki's read: still, attending, not afraid — but not fully at ease either"
+        "Freki's read: still, attending, not afraid — but not fully at ease either",
+        "The Crow and Thistle is a half-morning's walk back to the Marchward"
       ]
     },
-    "beats": 2
+    "beats": 3
   },
   "clock": {
     "schemaVersion": 1,
     "day": 3,
-    "hour": 1,
+    "hour": 2,
     "realAnchor": null
   },
   "companions": [
@@ -953,7 +998,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "Maret's eyes go briefly to Ragnar when she arrives — not suspicion, assessment — and then back to Brynjar, and she says, quietly: 'The…",
@@ -4877,20 +4922,20 @@
     ]
   },
   "tendencies": {
-    "leadership": 4.499384761167719,
-    "cerebral": 8.008336735663782,
-    "strategic": 7.143544461566882,
-    "ruthless": 0.2892185665035044,
-    "social": 10.26388914247128,
-    "cautious": 8.880272831604302,
-    "generous": 1.3408770670135786,
-    "patient": 0.5876204882136226
+    "leadership": 4.386900142138526,
+    "cerebral": 8.808128317272187,
+    "strategic": 6.964955850027709,
+    "ruthless": 0.2819881023409168,
+    "social": 10.007291913909498,
+    "cautious": 8.658266010814193,
+    "generous": 1.307355140338239,
+    "patient": 0.572929976008282
   },
   "aptitudes": [
     "silver_tongue",
     "banner"
   ],
-  "actionCount": 51,
+  "actionCount": 52,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -5851,14 +5896,6 @@
       "at": "2026-09-07T19:32:40.824Z"
     },
     {
-      "kind": "npc",
-      "prompt": "Calwick Pren",
-      "url": "https://image.pollinations.ai/prompt/A%20stocky%20man%20in%20his%20mid-forties%2C%20road-worn%20in%20the%20way%20of%20someone%20who%20has%20never%20left%20a%20fifty-mile%20radius%20but%20has%20walked%20every%20inch%20of%20it.%20A%20patched%20wool%20hood%2C%20faded%20brown-grey%2C%20pushed%20back%20to%20show%20a%20br%2C%20character%20portrait%2C%20named%20Calwick%20Pren%2C%20male%2C%20Small%20creditor%20who%20walks%20his%20own%20ledger%20%E2%80%94%20a%20man%20who%20is%20owed%20and%20has%20come%20to%20collect%2C%20nothing%20more%20an%2C%20Flat%2C%20unhurried%2C%20no%20flourish.%20Names%20amounts%20exactly%20%E2%80%94%20not%20'a%20few%20coins'%20but%20'fourteen%20and%20three.'%20Do%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=95888&nologo=true",
-      "caption": "Calwick Pren",
-      "worldDay": 69,
-      "at": "2026-09-07T14:04:08.585Z"
-    },
-    {
       "kind": "location",
       "prompt": "The Colosseum",
       "url": "https://image.pollinations.ai/prompt/The%20Colosseum%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20The%20Colosseum.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=917&nologo=true",
@@ -5980,8 +6017,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788985463406,
-  "rev": 268,
+  "updatedAt": 1788985934120,
+  "rev": 278,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -6447,7 +6484,7 @@
   "regionsKnown": {
     "riven_marches": 39,
     "the_center": 17,
-    "the_palelands": 1
+    "the_palelands": 2
   },
   "practice": {
     "schemaVersion": 1,
@@ -6549,10 +6586,10 @@
     {
       "id": "sess-6",
       "startedAt": "2026-09-09T20:21:48.688Z",
-      "lastAt": "2026-09-09T20:24:23.396Z",
+      "lastAt": "2026-09-09T20:32:14.116Z",
       "startDay": 71,
       "endDay": 71,
-      "beats": 3
+      "beats": 4
     }
   ],
   "_pendingArrival": null,
@@ -6568,9 +6605,9 @@
     "at": "2026-07-23T01:18:04.353Z"
   },
   "_opEmitted": {
-    "sceneSummary": 48,
-    "choices": 48,
-    "scene": 48,
+    "sceneSummary": 49,
+    "choices": 49,
+    "scene": 49,
     "npcUpdates": 44,
     "placeUpdates": 7,
     "generateRequest": 4,
@@ -6586,7 +6623,7 @@
     "stageOps": 2,
     "factUpdates": 2
   },
-  "_opTurns": 48,
+  "_opTurns": 49,
   "_opLedger": {
     "offer": {
       "applied": 8,
@@ -6702,7 +6739,7 @@
     "plan": 2,
     "guard": 1,
     "sustain": 1,
-    "study": 6,
+    "study": 7,
     "travel": 7,
     "ask": 1,
     "lead": 1,
@@ -6839,7 +6876,10 @@
   "promptCompositions": {
     "cp1s4oys6": "Bare figure in warm side-light, muscles defined by shadow and sweat-sheen, chest rising with breath, sinew taut in subtle motion, earth-toned skin glowing, intimate and immediate, no props or tools, pure kinetic presence.",
     "cp18rw9gb": "Two hands gripping trembling shoulders, sweat-sheened skin catching warm side-light, one figure bleeding, breathing hard, the other's palms pressing steady—earth tones, sinew visible, raw intimate contact, no instruments, just flesh…",
-    "cpzjh2gz": "Stocky pale man with icy blue eyes, chestnut hair long and knotted on top with shaved sides, thick beard split by two braids, dark blue Norse dragon-knot tattoo across chest, wearing traveler's pack and waterskin, stern weathered…"
+    "cpzjh2gz": "Stocky pale man with icy blue eyes, chestnut hair long and knotted on top with shaved sides, thick beard split by two braids, dark blue Norse dragon-knot tattoo across chest, wearing traveler's pack and waterskin, stern weathered…",
+    "cpfhbiix": "Hand-axe with worn wooden haft and northern steel blade, single light source catching the edge, dark background",
+    "cp1czit08": "Mid-forties woman, iron-grey hair in tight crown braid, neat scar bisecting left eyebrow, compact build, official bearing, austere intake desk setting.",
+    "cp1lvl7xj": "Stocky pale man, icy blue eyes, chestnut hair long and knotted on top with shaved sides, thick beard with two braids, dark blue Norse dragon-knot tattoo across chest, hand-axe and pack, standing amid smoldering ruins, weathered and haunted."
   },
   "likeness": {},
   "boostedCrafts": [

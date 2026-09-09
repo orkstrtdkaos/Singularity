@@ -1,0 +1,199 @@
+{
+ "id": "sesh_the_quiet_blow",
+ "name": "Sesh of the Quiet Blow",
+ "tier": "heroic",
+ "level": 30,
+ "vocation": "EDGE",
+ "universalRole": "Warrior",
+ "roleMethod": "⛔ The Cogitarium bends a warrior INWARD — Sesh does not swing until the swing is already decided, and the deciding is the craft.",
+ "role": "Psionicist of the Cogitarium's hard school — she ends fights with a thought and finds that unremarkable",
+ "disposition": "detached",
+ "people": "human",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "age": 36,
+ "romanceEligible": true,
+ "isMinor": false,
+ "status": "active",
+ "communityId": "mind.the_cogitarium",
+ "homeLocation": "the_cogitarium",
+ "aliases": [
+  "the Quiet Blow",
+  "Sesh Ninefold"
+ ],
+ "domains": {
+  "primary": "cogitant",
+  "secondary": "somatic",
+  "tertiary": "numinous"
+ },
+ "spectrum": {
+  "body_mind": 0.7,
+  "emotional_logical": 0.6,
+  "violence_peace": -0.4
+ },
+ "poleIntensity": {
+  "mind": 0.7,
+  "logical": 0.6
+ },
+ "subAttributes": {
+  "strength": 8,
+  "agility": 11,
+  "reason": 16,
+  "insight": 15,
+  "presence": 12,
+  "rapport": 6,
+  "craft": 9,
+  "wits": 15
+ },
+ "poleSignature": {
+  "movedBy": [
+   "a problem stated exactly",
+   "being wrong in an interesting way"
+  ],
+  "hardenedBy": [
+   "emotional appeal",
+   "repetition"
+  ],
+  "immovableBy": [
+   "intimidation"
+  ],
+  "patience": 9,
+  "tell": "⚠️ She goes still and answers a beat late, because she has already run the conversation to its end and is checking whether you will get there."
+ },
+ "knowledge": [
+  "Where a person's attention actually is, as against where they are looking",
+  "⚑ The exact moment a fighter commits — she does not read the body, she reads the DECISION",
+  "What psychic force does to something that has no mind, which is less than people assume"
+ ],
+ "wants": [
+  "An opponent whose decision she cannot read",
+  "To be surprised, once"
+ ],
+ "fears": "⛔ That there is nothing under the reading. ⚠️ She has met people with no interior and it frightened her more than any weapon has.",
+ "appearance": "Small, unhurried, hands folded. She is looking slightly past you and it is not rudeness.",
+ "voiceHints": "Level, precise, a beat late. ⛑ She states the conclusion and lets you find the argument.",
+ "reactsToReputation": {
+  "unpredictable": "⚑ delighted",
+  "brutal": "⚠️ solves you and says so afterwards",
+  "thoughtful": "engages properly",
+  "any": "reads you"
+ },
+ "assistTags": [
+  "analyze",
+  "strike",
+  "read-a-fight",
+  "study"
+ ],
+ "abilities": [
+  {
+   "abilityId": "psychic_lance",
+   "level": 3,
+   "why": "⛔ THE BLOW. Mind as a weapon, and it is her signature"
+  },
+  {
+   "abilityId": "convergent_strike",
+   "level": 3,
+   "why": "⚑ T5 — everything she knows arriving at once"
+  },
+  {
+   "abilityId": "deduced_strike",
+   "level": 3,
+   "why": "⚠️ 'she reads the DECISION, not the body'"
+  },
+  {
+   "abilityId": "unmoving_mind",
+   "level": 3,
+   "why": "her defence is that nothing reaches"
+  },
+  {
+   "abilityId": "predicted_man",
+   "level": 3,
+   "why": "she calls the commit"
+  },
+  {
+   "abilityId": "mind_read_folk",
+   "level": 3,
+   "why": "'where a person's attention actually is'"
+  },
+  {
+   "abilityId": "sustained_regard",
+   "level": 2,
+   "why": "she holds attention on one thing for a long time"
+  },
+  {
+   "abilityId": "working_model",
+   "level": 2,
+   "why": "she runs the fight before it happens"
+  },
+  {
+   "abilityId": "answered_motion",
+   "level": 2,
+   "why": "somatic secondary — the body keeps up"
+  },
+  {
+   "abilityId": "loose_limbed",
+   "level": 2,
+   "why": "she is not there when the swing lands"
+  },
+  {
+   "abilityId": "perfect_motion",
+   "level": 2,
+   "why": "nothing wasted"
+  },
+  {
+   "abilityId": "ignore_me",
+   "level": 2,
+   "why": "⚑ she is often simply not noticed"
+  },
+  {
+   "abilityId": "numen_sense",
+   "level": 2,
+   "why": "numinous tertiary"
+  },
+  {
+   "abilityId": "steady_soul",
+   "level": 1,
+   "why": "quietly"
+  },
+  {
+   "abilityId": "memory_palace",
+   "level": 2,
+   "why": "every fight she has seen, filed"
+  },
+  {
+   "abilityId": "names_of_power",
+   "level": 1,
+   "why": "⚠️ r1 and she is climbing it"
+  }
+ ],
+ "closed": [
+  "hunters_strike",
+  "edge",
+  "thrown_edge"
+ ],
+ "personality": {
+  "warmth": 4,
+  "trust": 6,
+  "candor": 8,
+  "patience": 9
+ },
+ "physicality": "ADULT. Small, still, thirty-six, hands folded and unremarkable. WHAT CATCHES THE EYE: ⛔ she is looking slightly past you, and the fight ends before her hands move.",
+ "intimacyNotes": "⚠️ SHE READS PEOPLE AND FINDS BEING READ BACK NOVEL. ⛑ Slow, curious, and startled by feeling. ⛔ What she cannot do is pretend not to have noticed something.",
+ "gear": [
+  "no weapon at all",
+  "a Cogitarium ninefold token",
+  "a plain grey coat"
+ ],
+ "teaches": [
+  "psychic_lance",
+  "deduced_strike"
+ ],
+ "questSeeds": [
+  "⚑ She wants an opponent whose decision she cannot read, and she thinks you might know one.",
+  "⛔ She has met people with no interior — ⚠️ and she has not told the Cogitarium, because she does not know what they would do about it."
+ ],
+ "schemaVersion": 1,
+ "_authoredWhy": "⛑ AUTHORED 2026-09-08 AT ERIK'S CORRECTION: 'You had authored a lot of things with your own NON-VIOLENCE LEAN seeping in — but this is a FANTASY RPG. We need EDGES.' ⛔ HE IS RIGHT AND THE PATTERN IS DOCUMENTED ACROSS ONE SESSION: Aevi gave the Hollow King NO HARM CRAFT AT ALL and Erik had to reverse it; she wrote 'the refusal is the class' for wardens and he struck it; the Unbought Court is defined by what it will not do; Aevi-the-Watcher cannot fight; Oreth has never put anyone down. ⚠️ EVERY ONE DEFENSIBLE ALONE AND A LEAN TOGETHER. ⚑ THESE ARE AUTHORED THE OTHER WAY: people whose answer to a problem is the edge of something, written to the FULL 49-FIELD SCHEMA — poleSignature, universalRole, roleMethod, disposition, teaches, gear, aliases, canStrike, age, status. ⚠️ No corners: read the schema, then write.",
+ "canStrike": true
+}

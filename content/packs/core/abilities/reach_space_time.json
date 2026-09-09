@@ -2162,12 +2162,14 @@
      "class": "cost"
     }
    ],
-   "plainly": "A defend action that makes or animates something. Its strength is rated 7 out of 10 across a scope of 2, and lasts for about an hour Ranks: rank 2 extends scope. Limit: iT Cannot Rewind, Only Delay The Passing.",
+   "plainly": "A defend action that refuses to let ONE hour finish — not stopping time, holding a single one open for what must be done in it. Its strength is rated 7 out of 10 across a scope of 2, and lasts for about an hour Ranks: rank 2 extends scope. Limit: iT Cannot Rewind, Only Delay The Passing.",
    "_descriptionWas": "The Hourkeeper art of the held hour — keeping a single hour open past its natural passing, a pocket of kept time in which the necessary can be finished. The timekeepers' patient gift.",
    "_nameWas": "The Held Hour",
    "_idWas": "the_held_hour",
    "_powerSystemWas": "reach_space_time",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_space_time` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_space_time` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_plainlyWas": "A defend action that makes or animates something. Its strength is rated 7 out of 10 across a scope of 2, and lasts for about an hour Ranks: rank 2 extends scope. Limit: iT Cannot Rewind, Only Delay The Passing.",
+   "_glossFix_20260908": "⛔ TIER 1 OF `SPEC_tradition_narrative_npc_pass` — A WRONG GLOSS IS A CORRECTNESS BUG, NOT POLISH. ⚠️ MEASURED 2026-09-08: 42 crafts carry a stock gloss and TWELVE named a verb family the craft does not have — and ALL TWELVE SAID THE SAME SENTENCE, 'makes or animates something'. ⛑ ONE STALE DEFAULT, not twelve errors: a concealment craft, a bargain, a truce and an hour held open were all being described to the GM as though they built something. ⚑ THE DESCRIPTION WAS RIGHT IN EVERY CASE. The gloss is the only thing that was wrong, and the fix is to say what the GM NARRATES CHANGING — T7: 'a dice roll is not an answer.' ⬜ The spec's estimate was ~48; the real number is 12, because the corpus has been repaired since 08-31. ⚠️ MEASURE BEFORE AUTHORING — an eight-day-old count is a claim about eight days ago."
   },
   {
    "schemaVersion": 1,

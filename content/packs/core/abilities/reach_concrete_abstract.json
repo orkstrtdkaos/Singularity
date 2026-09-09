@@ -144,7 +144,7 @@
      "class": "hard"
     }
    ],
-   "plainly": "A explore/fight/investigate action that makes or animates something. Its strength is rated 5 out of 10, and lasts for about 8 hours Ranks: rank 2 deepens materialTruth; rank 3 adds to denial. Limit: it tells you what a thing IS, Never what it means or what it is For.",
+   "plainly": "An investigate/craft action that tells you a thing's true weight, soundness and worth by touch. Its strength is rated 5 out of 10, and lasts for about 8 hours Ranks: rank 2 deepens materialTruth; rank 3 adds to denial. Limit: it tells you what a thing IS, Never what it means or what it is For.",
    "_sng360": "SNG-360: `break` is canon-defined as 'Harm or DESTROY a THING'. These carried it while sitting at harmRung 'none' on every rank — they cannot hurt anything, so they were registering as HARM coverage in recommendSkills/functionCoverage and telling a weaponless character they were covered. Retagged to their true family. The reveal-glut in reverse: `break` had become the catch-all for 'undo'.",
    "_descriptionWas": "The concrete-pole mastery: the real is what you can touch, weigh, and set. The world's finest building and its most stubborn skepticism, in one craft.",
    "_functionsWas": [
@@ -159,7 +159,9 @@
    "_merged": "⛔ SNG-481: absorbs Set Stone (L1 mason), which duplicated this skill's own r2 by name and effect.",
    "_powerSystemWas": "reach_concrete_abstract",
    "_powerSystemFix": "⛔ SNG-487. Erik: 'make sure each skill's power sources are identified and MAKE SENSE.' ⚠️ BODY CARRIED FIVE DIFFERENT VALUES AND THREE WERE NOT POWER SOURCES AT ALL — `reach_body_mind` and `reach_concrete_abstract` are REACH IDS, and `attribute` is a FIELD NAME. Corrected against canon (SNG-445).\n⛔ WORKED MATTER. Canon SNG-445: mason is ordered_nanite-primary — 'the one immaterial thing a Mason would accept: a load path is real'. A craft that reads or commands made material draws on the ordered field in it.",
-   "_wardTypes": "⛔ SNG-512. ⛔ 'Denial' — illusion, glamour, symbol-working and figure-craft FAIL inside it. THE CORPUS'S ONLY ABSTRACTION-WARD, and it was untyped.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half."
+   "_wardTypes": "⛔ SNG-512. ⛔ 'Denial' — illusion, glamour, symbol-working and figure-craft FAIL inside it. THE CORPUS'S ONLY ABSTRACTION-WARD, and it was untyped.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
+   "_plainlyWas": "A explore/fight/investigate action that makes or animates something. Its strength is rated 5 out of 10, and lasts for about 8 hours Ranks: rank 2 deepens materialTruth; rank 3 adds to denial. Limit: it tells you what a thing IS, Never what it means or what it is For.",
+   "_glossFix_20260908": "⛑ TIER 2 OF `SPEC_tradition_narrative_npc_pass` — THE THIN GLOSSES. ⛔ All thirty were CORRECT and USELESS: 'makes or animates something' says THAT the craft makes and never WHICH, on thirty crafts that make thirty different things. ⚠️ T7: what does the GM narrate CHANGING? ⚑ Every rewrite is drawn from that craft's own `description` — nothing invented, and the description was right in all thirty cases. ⛔ THE SPEC ESTIMATED 251 THIN CRAFTS AND THERE WERE 42: measure before authoring."
   },
   {
    "id": "formcraft",
@@ -496,7 +498,7 @@
      "class": "hard"
     }
    ],
-   "plainly": "A fight/social/explore action that makes or animates something. Its strength is rated 6 out of 10, and lasts for about 8 hours Ranks: rank 2 adds to persistence; rank 3 adds to special. Limit: it acts Once and is Spent at r1; it acts on What IT Means.",
+   "plainly": "A stealth/explore action that sends a made figure to do one named thing somewhere you are not. Its strength is rated 6 out of 10, and lasts for about 8 hours Ranks: rank 2 adds to persistence; rank 3 adds to special. Limit: it acts Once and is Spent at r1; it acts on What IT Means.",
    "_functionsWas": [
     "bind",
     "strike",
@@ -556,7 +558,9 @@
    "_wardTypes": "⛔ SNG-512. A figure that holds a threshold answers what tries to pass it.\n⚠️ `wardTypes` WAS ZERO ACROSS THE CORPUS — 26 crafts carried a `damageType` and nothing answered any of them. `answers(l)` already matches a layer to a kind; this is the missing half.",
    "_powerSystemWas": "reach_concrete_abstract",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_concrete_abstract` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `figurist` — ⛔ ERIK 2026-08-15: 'Figurist is ABSTRACT — think art, or math. Abstract is more of a crazy impression, like a WILD DREAM.' ⚠️ I had objected that Form\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_rungFix_20260830": "⛔ ability rung -> `none`: no rank harms anyone — a sent figure bars a door, warns, watches and judges; it does not wound."
+   "_rungFix_20260830": "⛔ ability rung -> `none`: no rank harms anyone — a sent figure bars a door, warns, watches and judges; it does not wound.",
+   "_plainlyWas": "A fight/social/explore action that makes or animates something. Its strength is rated 6 out of 10, and lasts for about 8 hours Ranks: rank 2 adds to persistence; rank 3 adds to special. Limit: it acts Once and is Spent at r1; it acts on What IT Means.",
+   "_glossFix_20260908": "⛑ TIER 2 OF `SPEC_tradition_narrative_npc_pass` — THE THIN GLOSSES. ⛔ All thirty were CORRECT and USELESS: 'makes or animates something' says THAT the craft makes and never WHICH, on thirty crafts that make thirty different things. ⚠️ T7: what does the GM narrate CHANGING? ⚑ Every rewrite is drawn from that craft's own `description` — nothing invented, and the description was right in all thirty cases. ⛔ THE SPEC ESTIMATED 251 THIN CRAFTS AND THERE WERE 42: measure before authoring."
   },
   {
    "id": "sound_repair",

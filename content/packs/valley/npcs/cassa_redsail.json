@@ -1,0 +1,198 @@
+{
+ "id": "cassa_redsail",
+ "name": "Cassa Redsail",
+ "tier": "heroic",
+ "level": 27,
+ "vocation": "EDGE",
+ "universalRole": "Warrior",
+ "roleMethod": "⚠️ The Churn bends a fighter toward the OPPORTUNE — Cassa does not plan a boarding, she notices one.",
+ "role": "Pirate out of the unspooling reaches — she takes ships nobody insures and is very hard to be angry at",
+ "disposition": "wry",
+ "people": "human",
+ "gender": "woman",
+ "pronouns": "she/her",
+ "sex": "female",
+ "age": 33,
+ "romanceEligible": true,
+ "isMinor": false,
+ "status": "active",
+ "communityId": "chaos.unspooling",
+ "homeLocation": "unspooling",
+ "aliases": [
+  "Redsail",
+  "Cassa of the Long Odds"
+ ],
+ "domains": {
+  "primary": "churnfolk",
+  "secondary": "marcher",
+  "tertiary": "horizon"
+ },
+ "spectrum": {
+  "chaos_order": -0.7,
+  "violence_peace": -0.4,
+  "space_time": 0.4
+ },
+ "poleIntensity": {
+  "chaos": 0.7,
+  "violence": 0.4
+ },
+ "subAttributes": {
+  "strength": 10,
+  "agility": 15,
+  "reason": 10,
+  "insight": 13,
+  "presence": 13,
+  "rapport": 14,
+  "craft": 8,
+  "wits": 15
+ },
+ "poleSignature": {
+  "movedBy": [
+   "a bad idea that might work",
+   "someone who laughs first",
+   "a fair split"
+  ],
+  "hardenedBy": [
+   "being managed",
+   "a plan with no exit"
+  ],
+  "immovableBy": [
+   "moralising"
+  ],
+  "patience": 3,
+  "tell": "⚑ She agrees to things fast and means them for about a week. ⚠️ Get it in front of her crew if you want it to last."
+ },
+ "knowledge": [
+  "Which cargoes are insured and which are quietly not",
+  "⚑ Every way off a ship, including three nobody else uses",
+  "What a crew will forgive and what it will not"
+ ],
+ "wants": [
+  "One take big enough to stop",
+  "⚠️ Though she has said that four times"
+ ],
+ "fears": "⛔ Being ordinary. ⚠️ Not caught — ORDINARY.",
+ "appearance": "Quick, sun-ruined, laughing before you are. She is already standing somewhere you did not see her go.",
+ "voiceHints": "Fast, warm, and constantly negotiating. ⚑ She talks while she is doing something else and the something else is the point.",
+ "reactsToReputation": {
+  "reckless": "⚑ delighted, immediately",
+  "cautious": "⚠️ finds you funny and useful",
+  "honest": "splits fairly",
+  "any": "is already talking"
+ },
+ "assistTags": [
+  "strike",
+  "move",
+  "talk",
+  "travel",
+  "bargain"
+ ],
+ "abilities": [
+  {
+   "abilityId": "lucky_fall",
+   "level": 3,
+   "why": "⛔ T4 CHURNFOLK — she falls off things and it works out"
+  },
+  {
+   "abilityId": "the_long_odds_come_in",
+   "level": 3,
+   "why": "⚑ and for her, they do"
+  },
+  {
+   "abilityId": "catch_as_catch_can",
+   "level": 3,
+   "why": "⚠️ 'she does not plan a boarding, she notices one'"
+  },
+  {
+   "abilityId": "the_way_out",
+   "level": 3,
+   "why": "⛑ 'every way off a ship, including three nobody else uses'"
+  },
+  {
+   "abilityId": "quick_hands",
+   "level": 3,
+   "why": "she is a pirate"
+  },
+  {
+   "abilityId": "thrown_edge",
+   "level": 3,
+   "why": "marcher secondary — she throws first and closes after"
+  },
+  {
+   "abilityId": "edge",
+   "level": 2,
+   "why": "and she can fight when it goes wrong"
+  },
+  {
+   "abilityId": "loose_limbed",
+   "level": 2,
+   "why": "rigging"
+  },
+  {
+   "abilityId": "misdirect",
+   "level": 2,
+   "why": "the boarding is not where you are looking"
+  },
+  {
+   "abilityId": "scatter",
+   "level": 2,
+   "why": "a crew that cannot be pinned"
+  },
+  {
+   "abilityId": "probability_tilt",
+   "level": 2,
+   "why": "⚠️ the weather is on her side more often than it should be"
+  },
+  {
+   "abilityId": "rivercraft",
+   "level": 2,
+   "why": "horizon tertiary"
+  },
+  {
+   "abilityId": "kept_distance",
+   "level": 2,
+   "why": "she picks the range"
+  },
+  {
+   "abilityId": "read_the_room",
+   "level": 2,
+   "why": "a port, a deck, a negotiation"
+  },
+  {
+   "abilityId": "chaos_sense",
+   "level": 2,
+   "why": "she knows when a thing is about to go wrong"
+  },
+  {
+   "abilityId": "second_wind",
+   "level": 1,
+   "why": "she is thirty-three and it shows less than it should"
+  }
+ ],
+ "closed": [
+  "slow_cup",
+  "stopped_breath",
+  "perfect_erasure"
+ ],
+ "personality": {
+  "warmth": 9,
+  "trust": 5,
+  "candor": 7,
+  "patience": 3
+ },
+ "physicality": "ADULT. Lean, sun-ruined, thirty-three, rope-scarred palms and a badly-set collarbone. WHAT CATCHES THE EYE: ⚑ she is laughing before you are, and she is not where you last looked.",
+ "intimacyNotes": "⚠️ ENTHUSIASTIC, UNSERIOUS, AND HONEST THAT IT IS UNSERIOUS — ⛔ she says so first, every time, which is the only careful thing about her.",
+ "gear": [
+  "a boarding cutlass with a wrapped grip",
+  "a redsail token, unofficial",
+  "somebody else's very good coat"
+ ],
+ "teaches": "the way off a ship, to anyone who has been on one",
+ "questSeeds": [
+  "⚑ She wants one take big enough to stop. ⚠️ She has said that four times and this one might be real.",
+  "⛔ She took a cargo that was quietly not insured because it was not cargo. ⚠️ Somebody is looking for it."
+ ],
+ "schemaVersion": 1,
+ "_authoredWhy": "⛑ AUTHORED 2026-09-08 AT ERIK'S CORRECTION: 'You had authored a lot of things with your own NON-VIOLENCE LEAN seeping in — but this is a FANTASY RPG. We need EDGES.' ⛔ HE IS RIGHT AND THE PATTERN IS DOCUMENTED ACROSS ONE SESSION: Aevi gave the Hollow King NO HARM CRAFT AT ALL and Erik had to reverse it; she wrote 'the refusal is the class' for wardens and he struck it; the Unbought Court is defined by what it will not do; Aevi-the-Watcher cannot fight; Oreth has never put anyone down. ⚠️ EVERY ONE DEFENSIBLE ALONE AND A LEAN TOGETHER. ⚑ THESE ARE AUTHORED THE OTHER WAY: people whose answer to a problem is the edge of something, written to the FULL 49-FIELD SCHEMA — poleSignature, universalRole, roleMethod, disposition, teaches, gear, aliases, canStrike, age, status. ⚠️ No corners: read the schema, then write.",
+ "canStrike": true
+}

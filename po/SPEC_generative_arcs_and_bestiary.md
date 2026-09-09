@@ -33,27 +33,59 @@ debt"* — ⛑ **and the arc generator is where that debt is minted.**
 
 ---
 
-## §2 — ⛔ AND NOTHING CREATES AN ARC WHEN ONE ENDS
+## §2 — ⛑ CORRECTED TWICE BY ERIK, AND THE SECOND CORRECTION FOUND THE ENGINE
 
-**Measured: no `arcComplete`, no `spawnArc`, no successor path anywhere in the engine.**
+> **Erik: *"The successor shouldn't just be the defeated argument's side — it can also include the WINNING
+> side's argument, EVOLVED. And I'd look for the QUEST WAKE ENGINE to see if you can use its
+> infrastructure."***
 
-⚠️ **An arc resolving is the single richest generation prompt the game will ever have** — ⛑ **it knows the
-stage it ended at, who turned it, what they chose, and which side won** — ⛔ **and it produces nothing.**
+### ⛔ AEVI'S §2 WAS WRONG TWICE OVER
 
-⬜ **PROPOSED: `succeedArc(resolved, character, world)`.**
+**She wrote: *"the successor is the defeated argument, carried by the people who lost it."*** ⚠️ **Half a
+mechanism, and she then proposed building it from scratch.**
 
-| ⚑ the successor inherits | from |
+⛑ **`engine/wake.js` IS THIS, ALREADY BUILT.** Its own header:
+
+> ⛔ *"SNG-204: the WAKE ENGINE. A resolved SIGNIFICANT outcome leaves a wake — a structured,
+> **generation-ready trace of what changed and which way it pushes the world** — and the world CONTINUES
+> from it. Before this, consequences landed durably and then stopped: `quest_seed` pinned 'A thread opens…'
+> that nothing ever opened. **This closes the loop.**"*
+
+### ⚑ AND IT ALREADY ANSWERS ERIK'S FIRST CORRECTION, IN A FIELD
+
+**`createWake` records `dir` — the SIGN of the push:**
+```js
+const dir = arcEffect ? (Math.sign(arcEffect.delta ?? arcEffect.dir ?? 1) || 1) : 1;
+```
+⛔ **THE DIRECTION IS ALREADY CAPTURED.** ⚠️ Aevi's *"the defeated argument"* is `dir < 0` and nothing else —
+⚑ **the winning side evolved is `dir > 0`, and the engine has been recording which since SNG-204.**
+
+**And `wakeGenerationContext` already names all three outcomes:**
+> ⚑ *"Author the consequence the LORE IMPLIES — **a faction reacting, a place coping, A PERSON SEIZING THE
+> MOMENT** — never arbitrary new content."*
+
+⛔ **A PERSON SEIZING THE MOMENT IS THE WINNING SIDE, EVOLVED, AND IT WAS ALREADY WRITTEN.**
+
+### ⚑ WHAT THE WAKE ENGINE ALREADY HAS THAT AEVI WAS ABOUT TO RE-SPEC
+
+| built | |
 |---|---|
-| **scale** | ⛔ **usually THE SAME OR SMALLER.** ⚠️ A world arc resolving leaves regional and local consequences; **it does not automatically spawn another world arc** |
-| ⚑ **the region** | ⛔ **where it was RESOLVED, not where it began** — that is where the aftermath lives |
-| ⚑ **`hingeNpcs`** | ⚠️ **THE PEOPLE WHO TURNED IT.** They are already registered, already levelled, already known to the player — ⛑ **and R49's "named people, may not be empty" is satisfied for free** |
-| **tendency** | the losing side's unfinished business |
-| ⛔ **and the LOSING side is the seed** | ⚑ **an arc that ends is one side winning, and R41b says the other side is now at its most motivated** |
+| ⚑ **`MAX_WAKE_DEPTH = 2`** | ⛔ **a consequence of a consequence of a consequence STOPS** — the runaway guard she had not thought of |
+| ⚑ **`decayWakes`** | ⚠️ **an untended wake fades and closes unspawned** — *"the world moves on"* |
+| ⚑ **idempotency** | one wake per `(quest, outcome)`, and `markWakeSpawned` marks on ATTEMPT so a failure is never an infinite retry |
+| ⚑ **`connectsTo` + `wakeArcPushes`** | ⛔ **the cheap path: a wake leans on neighbouring arcs without any model call at all** |
+| ⚑ **`WAKE_TIERS` / `WAKE_GEN_SCALES`** | ⚠️ **rarity is enforced** — *"a world that wakes on everything means nothing"* |
+| ⚑ **`arcPressure` threaded into `generate`** | ⛔ **no new prompt plumbing needed** |
 
-⛑ **THE SUCCESSOR IS THE DEFEATED ARGUMENT, CARRIED BY THE PEOPLE WHO LOST IT.** ⚠️ **That is a story
-generator, not a stub filler.**
+### ⬜ SO THE ASK SHRINKS TO ONE QUESTION
 
----
+⛔ **PHASE 2 IS THE GAP, AND THE HEADER SAYS SO: *"The EXPENSIVE path (a model call minting a full new quest
+FROM a wake) is SNG-204 Phase 2 and reads these open wakes."*** ⚠️ **`eligibleWakes` returns them. Does
+anything consume it?**
+
+⬜ **If nothing does, this is a fourth-door case and the whole mechanism is one caller away.** ⚑ **And what
+it should mint is not only a quest — Erik's ask is that a wake can mint an ARC**, which is the same call with
+`type: "arc"` and §3's stub discipline behind it.
 
 ## §3 — ⬜ AND THE ARC STUB MUST BE BORN WHOLE, LIKE THE CREATURE ONE
 

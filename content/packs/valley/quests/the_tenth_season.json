@@ -1,0 +1,75 @@
+{
+ "schemaVersion": 1,
+ "id": "the_tenth_season",
+ "name": "The Tenth Season",
+ "region": "foothill_longshore",
+ "tier": "heroic",
+ "giver": "orrun_shieldbreaker",
+ "axis": "violence_peace",
+ "traditions": [
+  "marcher",
+  "horizon",
+  "stillhold"
+ ],
+ "premise": "Orrun Shieldbreaker has been voted back nine times and the tenth vote is coming. One of the old landings on the reach has been taken by something that is not people, and a captain who cannot open the reach he feeds his crew from is a captain they do not re-swear. ⚑ He needs a second ship and a second band, and he is asking rather than hiring, which for him is the same as respect.",
+ "stakes": "⛔ THE LESSON IS THE REWARD. Orrun's authority is CONFERRED EVERY SEASON — the crew re-swears or they do not — and he is the only authored person who teaches the band-scale set. ⚠️ A player who fights this well gets a landing. A player who asks what HIS people get out of it gets taught.",
+ "stages": [
+  {
+   "id": "s1",
+   "title": "What your people get",
+   "objective": "Take the meeting, and answer the question he asks first.",
+   "condition": "⚑ HIS TELL IS THE GATE: 'he asks what your people get out of it before he asks what you want.' ⚠️ Answer that badly and the conversation ends politely and completely.",
+   "change": "Codex: Orrun Shieldbreaker asks about your people before your terms, and means it."
+  },
+  {
+   "id": "s2",
+   "title": "The taken landing",
+   "objective": "Reach the landing and find out what holds it.",
+   "condition": "⛔ It is not people. ⚠️ A manifestation, a warped beast, or something the Churn put there — the bestiary has three classes that fit and the GM should pick for the region.",
+   "change": "World: the landing is held by something that does not negotiate."
+  },
+  {
+   "id": "s3",
+   "title": "Who falls first",
+   "objective": "Take the landing without losing his crew.",
+   "condition": "⛑ THE ACTUAL TEST. Orrun's r3 craft is `who_falls_first` and his fear is 'coming back with fewer.' ⚠️ A player who wins by spending Orrun's people has failed this stage while succeeding at the fight.",
+   "change": "⚑ The landing is open, and the count of who came back is the thing that mattered."
+  }
+ ],
+ "outcomes": [
+  {
+   "id": "taught",
+   "when": "the landing opened and everyone came back",
+   "text": "⚑ He teaches you. `break_the_line`, `who_falls_first`, `small_company` — ⛔ THE CLOSEST THING THE GAME HAS TO COMMAND, and he gives it to you because you brought his people home.",
+   "effects": [
+    {
+     "type": "world_fact",
+     "text": "Orrun Shieldbreaker taught the band-set to someone who was not of his crew."
+    }
+   ]
+  },
+  {
+   "id": "landing_at_cost",
+   "when": "the landing opened and it cost him",
+   "text": "⚠️ You have the landing and he has a name to add to the two he can already recite. ⛔ He does not blame you. He does not teach you either.",
+   "effects": [
+    {
+     "type": "world_fact",
+     "text": "A landing on the Longshore reach was opened and paid for."
+    }
+   ]
+  },
+  {
+   "id": "tenth_refused",
+   "when": "the landing held",
+   "text": "⛔ The crew does not re-swear. ⚠️ Nine seasons end, and Orrun is on the beach with a reputation and no ship — WHICH MAKES HIM AVAILABLE, and that is either the worst outcome or the best one.",
+   "effects": [
+    {
+     "type": "world_fact",
+     "text": "Orrun Shieldbreaker was not re-sworn for a tenth season."
+    }
+   ]
+  }
+ ],
+ "notes_for_gm": "⚠️ GM-EYES-ONLY: the second time he came back with fewer WAS NOT THE SEA. ⛔ He has never said what it was, and one of the crew was there. ⚑ If the player earns the teaching, that is the scene where he might say it — not as a reward, as the thing you tell someone who has now carried the same weight."
+}

@@ -118,7 +118,7 @@ import { capabilityMenu, resolveTier } from "./engine/capabilities.js";
 // from smoke.mjs: work banked, nothing advanced it, and `PROJECT_TICKS` was the one INERT verdict in the
 // effect audit. A threshold nothing counts toward is a duration that never elapses.
 import { tickAllProjects, openProject, projectProgress, interruptProject, resumeProject, sabotageProject, inheritProject } from "./engine/projects.js";   // CCODE-295: the four verbs the content already depends on
-import { holdOpen, slowSink, canReach, resolveRetrieval } from "./engine/death.js"; // CCODE-270: the player's road back — the seven retrieval crafts had no door
+import { holdOpen, releaseHold, slowSink, canReach, resolveRetrieval } from "./engine/death.js"; // CCODE-270: the player's road back — the seven retrieval crafts had no door
 import { alliesOf } from "./engine/combatants.js"; // CCODE-276: the roster the party block renders
 import { commandSlots, bringForward, canRaiseBand, raiseBand, bandStrength, bandThreat, bloodBand, recoverBand, legionClash } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
 import { groupCapability, loadBearing } from "./engine/group.js";   // CCODE-317/322: what your line covers, and who holds it alone
@@ -128,7 +128,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.435";
+const APP_VERSION = "1.9.436";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6953,6 +6953,16 @@ function applyTurn(turn, resolution, playerWords = null) {
       const kind = String(op?.op || "");
       if (kind === "hold") {
         holdOpen(ent, character.name || "you", op.willing == null ? {} : { willing: !!op.willing });
+      } else if (kind === "release") {
+        // ⛔ THE COUNTER-OP TO `hold`, AND IT HAD NO DOOR. A held death stops sinking and never seals — by
+        // design, "a way held open does not seal" — so with no way to let go, one op froze a person at their
+        // depth forever and `releaseHold` was reachable only from a test.
+        // ⚠️ LETTING GO IS NOT FAILING: they resume sinking FROM WHERE THEY ARE, which is what the hold was
+        // preserving. A rung of loss here would make holding someone worse than never having tried.
+        if (ent.deathState?.heldOpenBy) {
+          releaseHold(ent);
+          character._deathNotes = [...(character._deathNotes || []).slice(-2), `${ent.name || who} is let go — they sink again from here`];
+        }
       } else if (kind === "slow") {
         slowSink(ent, Number(op.factor) || 2);
       } else if (kind === "retrieve") {

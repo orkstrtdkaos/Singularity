@@ -9646,6 +9646,30 @@ await (async () => {
   check("209 §2: days pass → the near dark (depth 1)", deathDepth(fell, 120) === 1);
   check("209 §2: a season passes → the deep dark (depth 2)", deathDepth(fell, 200) === 2);
   check("209 §2: body LOST forces the deep dark even when fresh", deathDepth(enterDeathState({ status: "active" }, { diedDay: 100, bodyStatus: "lost" }), 101) === 2);
+  // ⛔ A HOLD COULD BE PLACED AND NEVER LET GO. `holdOpen` is wired and a held death STOPS SINKING —
+  // `deathDepth` freezes it, `deepenDeaths` skips it — both deliberate: "a way held open does not seal."
+  // ⚠️ But `releaseHold` was the only thing that clears `heldOpenBy` and NOTHING called it, and the GM's
+  // vocabulary was "hold | slow | retrieve" with no counter-op. One op froze a person at their depth
+  // forever and nothing in the game could undo it.
+  {
+    const DTH = await import("../engine/death.js");
+    const held = enterDeathState({ status: "active", name: "Wren" }, { diedDay: 100 });
+    DTH.holdOpen(held, "you");
+    const frozen = deathDepth(held, 400);
+    check("209: ⛔ a held death does not sink — the hold is real, which is why letting go must exist",
+      frozen === 0 && deathDepth(enterDeathState({ status: "active" }, { diedDay: 100 }), 400) > 0, String(frozen));
+    DTH.releaseHold(held);
+    check("209: ⛑ …and RELEASING it lets them sink again from where they are — a HELD death could never be let go",
+      !held.deathState.heldOpenBy && deathDepth(held, 400) > frozen,
+      `${held.deathState.heldOpenBy} · depth ${deathDepth(held, 400)}`);
+    // ⛔ AND THE DOOR IS ALL THREE LAYERS. A handler for an op the GM is never told about is the same
+    // defect one level up — so the vocabulary AND the rule that explains it must carry the word.
+    const gmSrcRel = readFileSync(join(root, "engine/gm.js"), "utf8");
+    const appSrcRel = readFileSync(join(root, "app.js"), "utf8");
+    check("209: …and the GM is TOLD the word, and the app applies it — authored, said, and done",
+      /hold \| slow \| retrieve \| release/.test(gmSrcRel) && /"release" when whoever was holding/.test(gmSrcRel)
+      && /kind === "release"[\s\S]{0,1200}releaseHold\(ent\)/.test(appSrcRel));
+  }
 
   // §2: a GM override wins over the computed depth (computed-with-GM-override, ROUND 2 Q1 recommendation).
   const forced = enterDeathState({ status: "active" }, { diedDay: 100, depthOverride: 3 });

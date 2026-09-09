@@ -213,6 +213,16 @@ function sheetFrom(entry, { day = null, cfg = {}, roleAttributes = null, levelOv
   // authored one is not. ⚠️ On the SHEET, never written back onto the record — a derived value stored on
   // content is the defect this project has ruled against four times.
   const tierGuess = (entry?.tier || entry?.level != null) ? null : tierFromRole(entry, { cfg });
+  // ⛔ AND THE RUNG THE LEVEL HAS ACTUALLY REACHED, which is a different question from what a role STRING
+  // guesses. Erik ruled that tier MOVES — "they get killed and injured and they need to grow too (which
+  // they do in tier)" — and `tierOf` was built for exactly that and then imported by nobody except
+  // holdings.js, for a keeper's floor. ⚠️ MEASURED: a generated nobody with an unreadable role who
+  // completes 55 assignments stands at LEVEL 60, which IS the legendary floor, while every label still
+  // says `notable`. The ladder already reached every rung; nothing read it back.
+  // ⛑ IT CANNOT DEMOTE ANYONE. `derivedLevel` starts at the authored tier's own floor and only ADDS, so
+  // the rung a level lands in is always >= the authored tier — "an authored tier always wins" is preserved
+  // BY CONSTRUCTION here, not by a guard that could be forgotten.
+  const reachedTier = tierOf(level, { cfg });
   const leans = leansOf(entry, { roleAttributes });
   const base = Math.max(1, Math.round(level / 2) + 1);
   const attributes = { physical: base, mental: base, social: base, practical: base };
@@ -239,6 +249,7 @@ function sheetFrom(entry, { day = null, cfg = {}, roleAttributes = null, levelOv
     conditions: entry?.conditions || [],
     derived: true,
     ...(tierGuess ? { tierDerived: { tier: tierGuess.tier, why: tierGuess.why } } : {}),
+    ...(reachedTier ? { tierNow: reachedTier } : {}),   // ⛔ the rung this level lands in — CCODE-310, ruled and unread until now
     lean: leans[0] || null,
     leans,
   };

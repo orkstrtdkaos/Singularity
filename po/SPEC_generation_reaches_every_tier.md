@@ -161,3 +161,90 @@ it changed nothing on its own**, and that is worth knowing before the three guar
 ⬜ **NOT BUILT, and flagged so you know the boundary:** the rarity draw (§2.1), the evidence model (§2.2),
 and anything answering §4 — ⚠️ **§2.1 says outright that the target shape is Erik's number, so it is his to
 give before I encode one.**
+
+---
+
+# ⛑ ROUND 2 — CCODE, 2026-09-08: THREE OF THE FOUR ARE ALREADY ANSWERED BY THE ENGINE
+
+## ⛔ Q4 FIRST, BECAUSE IT CHANGES WHAT THE OTHER THREE ARE FOR
+
+> ⚑ **THE LADDER ALREADY REACHES EVERY RUNG, INCLUDING MYTHIC. NOTHING WAS READING IT BACK.**
+
+**A GENERATED nobody — no authored tier, no level, a role string the table cannot read:**
+
+| deeds | level | rung that level lands in | what every label said |
+|---|---|---|---|
+| 0 | 5 | notable | notable |
+| 20 | 25 | **heroic** | notable |
+| 35 | 40 | **epic** | notable |
+| 55 | 60 | ⛔ **legendary** | ⛔ **notable** |
+| 80 | 85 | ⛔ **mythic** | ⛔ **notable** |
+
+⛔ **SO THE CEILING NEVER BOUNDED WHAT A GENERATED PERSON COULD BECOME — ONLY WHAT A REGEX COULD NAME THEM
+AT BIRTH.** ⚠️ `levelPerCompletion` and `levelPerConditionStep` are both authored at **1**, `derivedLevel`
+has summed them since R37, and `tierOf` — *"the rung a level lands in, which is what makes tier something
+that MOVES"* — was built for Erik's own ruling (*"they need to grow too (which they do in tier)"*) and then
+**imported by nothing but `holdings.js`, for a keeper's floor.**
+
+✅ **WIRED: `sheetFor` now returns `tierNow`.** ⛑ **It cannot demote anyone** — `derivedLevel` starts at the
+authored tier's own floor and only adds, so the rung is always ≥ the authored tier. **"An authored tier
+always wins" is preserved BY CONSTRUCTION, not by a guard that can be forgotten.** ⚑ **And the role guess
+does NOT move with it: a regex names, deeds earn.** Three gates, 1649 ok.
+
+➡️ ⬜ **Your instinct in Q4 was right and stronger than it reads: this is not *"may be the better answer
+than minting high"* — it is the answer that was already built and unread.**
+
+## ⚠️ Q1 — YOUR TWO SUGGESTIONS ARE DIFFERENT SHAPES, AND THE TABLE DOES NOT ENCODE THE INTUITION
+
+| rung | `attentionByTier` **inverted** | *"halving each rung"* | corpus today |
+|---|---|---|---|
+| riffraff | 33.8% | 50.4% | ⛔ 0% |
+| notable | 16.9% | 25.2% | ⛔ 0% |
+| regional | ⚠️ **16.9%** | 12.6% | ⛔ 0% |
+| heroic | ⚠️ **16.9%** | 6.3% | ⛔ **44.3%** |
+| epic | 8.5% | 3.1% | **36.4%** |
+| legendary | 4.2% | 1.6% | **19.3%** |
+| mythic | 2.8% | 0.8% | 0% |
+
+⛔ **`attentionByTier` GIVES notable, regional AND heroic THE SAME WEIGHT (0.5), so inverted it is a pyramid
+with a FLAT MIDDLE** — a generated regional would be exactly as likely as a generated heroic. ⚠️ **That
+contradicts *"roughly halving at each rung upward"*, which is the intuition you stated one line earlier.**
+
+⬜ **Erik's call, and it is a real choice rather than a formality.** ⚑ **My recommendation: the halving
+shape, authored as its own dial** — the two tables answer different questions (`attentionByTier` is *how
+much attention a rung spends*, not *how many of them there are*), and a borrowed table that means something
+else is the drift `certify_counts` was built to stop.
+
+## ✅ Q2 — BOTH, AND THE CONSEQUENCE IS THAT THE CENSUS IS SAVE STATE
+
+⚑ **Agreed, and for your reason.** ⛔ **But the engine consequence is load-bearing:** authored people live in
+`CONTENT.npcs` (**global, 136**) and generated ones in `character.generated.npc` + `npcRegistry`
+(**per-save**). ➡️ **A census over both is PER CHARACTER — two players have different pyramids, which is
+correct, and it means the draw cannot be precomputed at load.**
+
+⚠️ **AND IT DECIDES THE GATE'S SHAPE:** a gate anchored to a live save rots — that has bitten me three times
+in a week. ⛑ **So the gate must assert what the FUNCTION does GIVEN a census, with a fixture census, never
+what some save's census happens to be.**
+
+## ⛔ Q3 — THE NATURAL GATE YOU HOPED FOR EXISTS, AND IT IS CURRENTLY SHUT
+
+**6 greater arcs · 20 `hingeNpcs` slots · ⛔ 0 unresolved.**
+
+⚑ **Every hinge already points at a real record, so there is no vacant hinge for a generated mythic to
+occupy.** ➡️ ⛑ **`_theMythicalRung`'s rule gates generated mythics at ZERO today without any rule being
+written** — exactly the *"natural gate rather than a rule"* you guessed at, and it is already closed.
+
+⬜ **Which means Q3 needs no decision now.** ⚠️ **It needs one the day an arc gains a hinge nobody fills —
+and that is a much better trigger than a percentage.**
+
+## ⬜ WHAT IS BUILT, AND WHAT IS STILL OWED
+
+| | |
+|---|---|
+| ✅ **BUILT** | **Q4** — `sheetFor` returns `tierNow`, the rung a level has reached; three gates, one of them the non-demotion floor |
+| ✅ **ANSWERED, no build needed** | **Q3** — the hinge gate is already shut (0 of 20 slots vacant) |
+| ⬜ **ANSWERED, yours to confirm** | **Q2** — both populations; the census is per-save, which decides the gate's shape |
+| ⛔ **BLOCKED ON ERIK** | **Q1** — the target pyramid. Your two suggestions are different shapes; I will not pick one for him |
+
+⚠️ **I have left the status at `spec_ready` and not touched it.** ⛑ **It is not fully built, and the status
+field is yours** — the same rule that made §5 mine to retire makes this line yours to move.

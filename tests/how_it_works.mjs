@@ -4866,7 +4866,8 @@ console.log("\n── §70 · per-rank source · the revised kill cost · ongoin
   // growthFor as CONTEXT for what it proposes. The derived count is a proxy — the hard half is the declared builds: field
   // — and a new unbuilt spec raises the proxy without anything being stale. The population grew; the baseline moves with
   // it, and the reason is written here rather than the number quietly nudged.
-  const BASELINE_DERIVED = 14;   // 2026-09-08 (13→14): SPEC_one_roster_and_the_mythicals.md — Aevi, spec_ready, naming `personOpponentFor` as the export whose reachability is the whole spec. ⚠ Moved deliberately with the reason and the name, per the ratchet's own rule: a spec landing legitimately raises this and the forbidden thing is nudging it silently. `declaredStale` is still 0.
+  const BASELINE_DERIVED = 15;   // 2026-09-08 (14→15): SPEC_generation_reaches_every_tier.md — Aevi, spec_ready, naming `tierOf`/`derivedLevel`/`sheetFor`/`tierFromRole` as the exports my ROUND 2 reasons about. ⚠ Same case as SPEC_npc_sheet_generation below: a round-2 ask, not a landing. ⛑ It is NOT fully built — Q4 is wired (`tierNow`) and Q1's pyramid is still Erik's number — so the spec stays `spec_ready` and the status is Aevi's to flip, not mine. `declaredStale` is still 0.
+  // 2026-09-08 (13→14): SPEC_one_roster_and_the_mythicals.md — Aevi, spec_ready, naming `personOpponentFor` as the export whose reachability is the whole spec. ⚠ Moved deliberately with the reason and the name, per the ratchet's own rule: a spec landing legitimately raises this and the forbidden thing is nudging it silently. `declaredStale` is still 0.
   // 2026-09-08 (12→13): SPEC_npc_sheet_generation.md — Aevi, spec_ready, naming growthFor/kitFor/craftsOf/derivedLevel as the exports it reasons about. ⚠ The population grew and nothing went stale: `declaredStale` is still 0, and the spec is a ROUND-2 ask rather than a landing. It comes down when she marks it built.   // 2026-09-07 (11→12): SPEC_intent_heard_and_unheard.md — Aevi, spec_ready, naming stateIntent/growBond as the exports it answers; BUILT the same day (§133) — flips to built and comes down when she marks it   // 2026-09-07 (10→11): SPEC_hold_costs_crafts_and_hiring.md — Aevi, spec_ready, naming addFeature/improveHolding/setCrew/setGarrison as the exports it prices; BUILT the same morning (§128–§130) — flips to built and comes down when she marks it   // 2026-09-06 (12→10): Aevi flipped SPEC_holdings_screen, SPEC_npc_presence_cadence and DESIGN_codex_admission_and_summaries to `built` — the ratchet tightens to what is measured   // 2026-09-06 (11→12): SPEC_holdings_screen.md — Aevi, landed today, UNBUILT (CCode round 2), naming ensureHoldingImage/renameHolding/holdingSentence as the exports it asks to CHANGE — the next landing builds it and the count comes back down   // 2026-09-06 (10→11): SPEC_codex_summaries_and_merging.md — Aevi, landed today, UNBUILT, naming codex readers as context for the summaries it asks for   // 2026-09-06 (9→10): SPEC_npc_presence_cadence.md — Aevi, landed today, UNBUILT, naming npcsPresent/attentionByTier/worldRoster as context for the roster it asks for; the population grew, nothing went stale, and `declaredStale` is still 0   // 2026-09-05 (5): SPEC_quest_snapshot.md landed unbuilt, naming ringDistance/meaningDensity as context   // (4): SPEC_companion_becomes_person.md, same case   // (3): SPEC_party_mode_phase2.md, same case   // (2): four more specs landed unbuilt with the brief   // measured 2026-09-04 after the eight were marked: the still-open specs that name existing exports as context
   check(`§70: ratchet — \`spec_ready\` specs naming an existing engine export = ${derivedStale.length} (baseline ${BASELINE_DERIVED}) — may only go DOWN`,
     derivedStale.length <= BASELINE_DERIVED, derivedStale.map(r => `${r.f}:${r.named.slice(0, 3).join(",")}`).join(" · "));
@@ -9849,6 +9850,29 @@ console.log("\n── §148 · role → tier, default down, authored always wins
     check("§148: ⛔ …and a ROLE STRING ALONE never reaches above heroic — above it takes evidence, not a regex",
       derived148.every(t => Number(cfg148.tierFloor[t.tier]) <= Number(cfg148.tierFloor.heroic)),
       [...new Set(derived148.map(t => t.tier))].join(", "));
+  }
+  // ⛔ SPEC_generation_reaches_every_tier — THE LADDER ALREADY REACHES EVERY RUNG, AND NOTHING READ IT BACK.
+  // Erik ruled tier MOVES ("they need to grow too (which they do in tier)"); `tierOf` was built for it and
+  // imported only by holdings.js. ⚠️ So the ceiling was never bounding what a generated person could
+  // BECOME — only what a regex could NAME them at birth. `tierNow` reports the rung the level has reached.
+  {
+    const grown = (d) => NS148.sheetFor({ id: "g", role: "a hired blade of the Watch", completions: d }, { cfg: cfg148 });
+    const ladder = [0, 20, 55, 80].map(d => grown(d).tierNow);
+    check("§148: ⛔ deeds carry a GENERATED nobody up the rungs — the generative path reaches every tier",
+      ladder[0] === "notable" && ladder[1] === "heroic" && ladder[2] === "legendary" && ladder[3] === "mythic",
+      ladder.join(" → "));
+    // ⚠️ AND THE ROLE GUESS DOES NOT MOVE WITH IT — two different questions, which is the whole point:
+    // a regex may not mint a legendary, but DEEDS may make one.
+    check("§148: …while the ROLE guess stays put — a regex names, deeds earn",
+      grown(80).tierDerived?.tier === "notable", String(grown(80).tierDerived?.tier));
+    // ⛑ AND IT CAN NEVER DEMOTE AN AUTHORED FIGURE: `derivedLevel` starts at their tier's own floor.
+    const rank148 = (t) => Number(cfg148.tierFloor[t] ?? 0);
+    const authoredTiered = npcs148.filter(n => n.tier && cfg148.tierFloor[n.tier] != null);
+    check("§148: ⛑ …and `tierNow` never demotes an AUTHORED figure — authored wins by construction, not by a guard",
+      authoredTiered.length > 0 && authoredTiered.every(n => {
+        const s = NS148.sheetFor(n, { cfg: cfg148 });
+        return !s.tierNow || rank148(s.tierNow) >= rank148(n.tier);
+      }), `${authoredTiered.length} authored-tier records checked`);
   }
   // ⚠️ THE DEMOTION ORDERING IS THE DESIGN: youth is listed first so a young keeper is not yet a keeper.
   check("§148: ⚠️ a demoting word outranks a promoting one — \"young\" beats \"keeper\", which is why order matters",

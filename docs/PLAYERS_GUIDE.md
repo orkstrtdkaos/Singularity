@@ -120,7 +120,32 @@ to learn the other one. Your antipode is not closed to you.** It is expensive, a
 in it. ⛔ **Carry enough of that far pole and BOTH recede together** — the price falls and the ceiling
 rises. **The barrier is to dabbling, not to crossing.**
 
-### What you can be
+### Which way is which
+
+**There is no north here.** The compass runs on the world's own structure, and it has four words.
+
+| | |
+|---|---|
+| **hubward** | toward the Crossing — the world's centre and its waygate hub |
+| **outward** | away from the Crossing, toward one of the poles |
+| **spinward** | one way around the circuit |
+| **widdershins** | the other way |
+
+Hubward and outward are one axis; spinward and widdershins are the other, lateral to it.
+
+**Picture a great wheel.** Hubward is toward the axle. Outward is toward the rim. Spinward and widdershins
+are the two ways to roll along it.
+
+**And the compass is not only a compass.** The Crossing is where the dispositions balance, and the poles are
+where each one has been taken all the way — so **hubward means toward balance and outward means toward
+commitment.** A traveller told *"we are going outward"* has learned something about where they will end up,
+not only which way they are facing.
+
+Distances come in **days' walk**, because that is what anyone can actually tell you. *"The Archive is
+hubward and spinward, about thirty-four days."* Every named place in your codex reads its direction from
+wherever you are standing, in exactly these four words.
+
+## What you can be
 
 **Traditions are what you know. A vocation is what you are FOR** — and there are eight.
 

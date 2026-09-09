@@ -59,7 +59,7 @@
   "alignment": {
     "spectrum": -0.03,
     "falsehood_truth": 0.082901375,
-    "spectrumId": -0.04072531249999999
+    "spectrumId": -0.038689046874999994
   },
   "attunement": 2,
   "maxHealth": 51,
@@ -186,165 +186,157 @@
         "player": "Go downstairs — eat something and find out if Ragnar or Maret have come in from the fire-pit",
         "summary": "Brynjar came downstairs to eat and ask after Ragnar and Maret; Doss reported Ragnar left heading widdershins at first light and Maret never came in.",
         "narration": "You pull on your boots, settle the axe in its frog, and head downstairs with Freki at your heel.\n\nThe common room at midday is busier than it was at dawn — a dozen travelers eating, two men arguing quietly over a folded map, a woman in road-gray mending a strap in the corner. The smell is fried onion and woodsmoke and something with fat in it. Doss is behind the bar, same as always, moving plates without looking at them.\n\nNo sign of Ragnar. No sign of Maret.\n\nDoss catches your eye before you've crossed half the room and tips her chin toward the bar. You settle onto a stool and she sets a plate down — bread, fried salt-fish, a wedge of hard cheese — without being asked. She watches Freki settle under the stool's edge and then looks back up at you.\n\n\"Your Marcher friend came in around first light,\" she says, keeping her voice at counter-level. \"Ate. Paid. Left again heading widdershins.\" A brief pause while she wipes the counter. \"The woman in grey didn't come in at all. Asked her name at the gate-log — nobody matching signed in last night or this morning.\" She sets the rag down and meets your eyes. \"Might mean nothing. Might mean she found a different door.\""
+      },
+      {
+        "player": "\"Can you let Ragnar know I'm going to try and hire a ship to head North, speaking of which, do you know where the nearest port is?\"",
+        "summary": "Brynjar asked after Ragnar and the nearest port; Doss offered the chalk-board and named Longshore and the Mudrun river road as the routes north.",
+        "narration": "Doss sets her rag down and leans one hand on the bar. \"Ragnar left before first light — heading widdershins, no word where.\" She says it the same way she'd say the weather: factual, no apology attached. \"If he's on the road he won't see a message from me until he stops somewhere that talks to somewhere I know. I can put word with the waygate's chalk-board column — travelers check it, and widdershins-bound men pass that arch. No guarantees.\"\n\nShe straightens and considers the second question with the same unhurried pace. \"Nearest port that takes proper hire — not a fisherman with a broad back and a leaky coracle — is Longshore. Spinward and outward from here, best part of sixty days on foot.\" She tilts her head. \"There's river traffic before that. The Mudrun meets the coast road about twenty days spinward. You won't get a northern deep-water hull there, but you'll get flat-bottomed cargo boats running coastal hops. Crew will know who's taking on freight to the north.\"\n\nFreki lifts his head from the flagstone and watches the door as a new traveler shoulders in — heavy wool, a drover's build, no animals — then settles again when the man goes straight to a corner table without looking at the bar. Doss watched him too. She always does."
       }
     ],
     "lastTurn": {
-      "narration": "You pull on your boots, settle the axe in its frog, and head downstairs with Freki at your heel.\n\nThe common room at midday is busier than it was at dawn — a dozen travelers eating, two men arguing quietly over a folded map, a woman in road-gray mending a strap in the corner. The smell is fried onion and woodsmoke and something with fat in it. Doss is behind the bar, same as always, moving plates without looking at them.\n\nNo sign of Ragnar. No sign of Maret.\n\nDoss catches your eye before you've crossed half the room and tips her chin toward the bar. You settle onto a stool and she sets a plate down — bread, fried salt-fish, a wedge of hard cheese — without being asked. She watches Freki settle under the stool's edge and then looks back up at you.\n\n\"Your Marcher friend came in around first light,\" she says, keeping her voice at counter-level. \"Ate. Paid. Left again heading widdershins.\" A brief pause while she wipes the counter. \"The woman in grey didn't come in at all. Asked her name at the gate-log — nobody matching signed in last night or this morning.\" She sets the rag down and meets your eyes. \"Might mean nothing. Might mean she found a different door.\"",
-      "sceneSummary": "Brynjar came downstairs to eat and ask after Ragnar and Maret; Doss reported Ragnar left heading widdershins at first light and Maret never came in.",
+      "narration": "Doss sets her rag down and leans one hand on the bar. \"Ragnar left before first light — heading widdershins, no word where.\" She says it the same way she'd say the weather: factual, no apology attached. \"If he's on the road he won't see a message from me until he stops somewhere that talks to somewhere I know. I can put word with the waygate's chalk-board column — travelers check it, and widdershins-bound men pass that arch. No guarantees.\"\n\nShe straightens and considers the second question with the same unhurried pace. \"Nearest port that takes proper hire — not a fisherman with a broad back and a leaky coracle — is Longshore. Spinward and outward from here, best part of sixty days on foot.\" She tilts her head. \"There's river traffic before that. The Mudrun meets the coast road about twenty days spinward. You won't get a northern deep-water hull there, but you'll get flat-bottomed cargo boats running coastal hops. Crew will know who's taking on freight to the north.\"\n\nFreki lifts his head from the flagstone and watches the door as a new traveler shoulders in — heavy wool, a drover's build, no animals — then settles again when the man goes straight to a corner table without looking at the bar. Doss watched him too. She always does.",
+      "sceneSummary": "Brynjar asked after Ragnar and the nearest port; Doss offered the chalk-board and named Longshore and the Mudrun river road as the routes north.",
       "choices": [
         {
-          "label": "Ask Doss what she knows about the widdershins road — where does it go, who uses it",
+          "label": "Put a message on the waygate chalk-board for Ragnar — name the ship plan and a meeting point",
           "attribute": "social",
           "subAttribute": "rapport",
-          "difficulty": "easy",
+          "difficulty": "very easy",
+          "trivial": true,
           "intentTags": [
-            "negotiate",
+            "communicate",
             "plan"
-          ],
-          "trivial": false
+          ]
         },
         {
-          "label": "Finish eating, then go out and look for Maret — retrace the fire-pit and the lanes around it",
+          "label": "Ask Doss what she knows about the Mudrun river traffic — who runs cargo north and whether any are trustworthy",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": "very easy",
+          "trivial": true,
+          "intentTags": [
+            "scout",
+            "negotiate"
+          ]
+        },
+        {
+          "label": "Step outside and scan the waygate arch — Freki flagged the heavy-wool man; see if he's worth a look with Read the Fight",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": "normal",
+          "difficulty": "easy",
+          "trivial": false,
           "intentTags": [
             "scout",
-            "careful"
+            "study"
           ],
           "abilityId": "read_the_fight",
-          "trivial": false
-        },
-        {
-          "label": "Let Freki lead — he has Ragnar's scent; put him on it and follow",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": "easy",
-          "intentTags": [
-            "scout",
-            "travel"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Eat and stay put — Ragnar knows where to find you, and Maret choosing a different door is her right",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": "very easy",
-          "intentTags": [
-            "careful",
-            "sustain"
-          ],
-          "trivial": true
+          "energyCost": 3
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 10,
-        "xp": 0
-      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "doss-halveck",
+          "note": "Told Brynjar that Ragnar left before first light heading widdershins and cannot be reached directly; offered to put word on the waygate chalk-board. Named Longshore (sixty days spinward) as the nearest proper hire-port, and the Mudrun river road (twenty days spinward) as the closer option for coastal cargo boats running north.",
+          "learned": [
+            "Ragnar left before first light heading widdershins — no stated destination",
+            "Longshore is the nearest deep-water hire port — sixty days spinward and outward",
+            "The Mudrun meets the coast road about twenty days spinward — flat-bottomed cargo boats running coastal hops toward the north"
+          ],
+          "statusNote": "On duty at the Crow and Thistle; watching the room with her usual thoroughness."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "ragnar-solmyr",
+          "label": "Ragnar Solmyr",
+          "kind": "person",
+          "entityId": "ragnar-solmyr",
+          "fact": "Left before first light heading widdershins — no stated destination. Doss offered the waygate chalk-board as the only realistic way to pass him a message.",
+          "links": [
+            "the-marchward",
+            "brynjar-andyrsson-thread"
+          ]
+        },
+        {
+          "topic": "longshore",
+          "label": "Longshore",
+          "kind": "place",
+          "fact": "Nearest proper hire-port for a deep-water northern hull — about sixty days spinward and outward from the Crossing.",
+          "links": [
+            "brynjar-andyrsson-thread"
+          ]
+        },
+        {
+          "topic": "the-mudrun",
+          "label": "The Mudrun",
+          "kind": "place",
+          "fact": "A river that meets the coast road about twenty days spinward from the Crossing. Flat-bottomed cargo boats run coastal hops from there toward the north — closer than Longshore, smaller ships.",
+          "links": [
+            "longshore",
+            "brynjar-andyrsson-thread"
+          ]
+        }
+      ],
       "scene": {
-        "setting": "The Crow and Thistle common room, midday. Spring light through the shutters. Busy — a dozen travelers, low talk, the smell of fried onion and salt-fish.",
+        "setting": "The Crow and Thistle common room, midday. Spring light through the shutters. A dozen travelers eating and talking low; fried onion and salt-fish in the air.",
         "npcsPresent": [
           {
             "name": "Doss Halveck",
-            "state": "behind the bar, wiping the counter, watching Brynjar steadily"
+            "state": "behind the bar, leaning on one hand, watching the room after naming Longshore and the Mudrun"
           },
           {
             "name": "Freki",
-            "state": "settled under the bar stool, ears up, watching the room"
+            "state": "on the flagstone, head up, tracking the heavy-wool man who just came in and sat in the corner"
           }
         ],
         "objects": [
           "Plate of bread, fried salt-fish, and hard cheese on the bar",
           "Hand-axe in its frog on the belt",
           "Round Shield strapped to Brynjar's back",
-          "Traveler's Pack — upstairs on the peg"
+          "Traveler's Pack — upstairs on the peg",
+          "Heavy-wool man sitting alone in a corner table — no animals, drover's build"
         ],
         "threads": [
-          "Ragnar left heading widdershins at first light — destination unknown",
+          "Ragnar left widdershins before first light — no destination stated; chalk-board message is the only reach",
           "Maret did not come in through the Crow and Thistle at all",
           "The restricted creditor behind Maret's debt remains unidentified",
-          "The heavy-wool man from the Hub Hall — Freki has his scent"
+          "The heavy-wool man from the Hub Hall — Freki has his scent, and he just walked in"
         ]
-      },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "doss-halveck",
-          "note": "Told Brynjar that Ragnar left heading widdershins around first light; Maret never came in through the Crow and Thistle at all — no gate-log entry matching her description.",
-          "learned": [
-            "Ragnar departed widdershins at first light after eating and paying",
-            "Maret did not sign in at the Crow and Thistle — may have used a different door"
-          ],
-          "statusNote": "On duty at the Crow and Thistle; present behind the bar at midday."
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "maret-threnwick",
-          "label": "Maret Threnwick",
-          "kind": "person",
-          "entityId": "maret-threnwick",
-          "fact": "Maret did not come in through the Crow and Thistle after the fire-pit — no gate-log entry, no sign. She may have found a different door into the Crossing, or left it entirely.",
-          "links": [
-            "brynjar-andyrsson-thread",
-            "the-marchward",
-            "ragnar-solmyr"
-          ]
-        },
-        {
-          "topic": "ragnar-solmyr",
-          "label": "Ragnar Solmyr",
-          "kind": "person",
-          "entityId": "ragnar-solmyr",
-          "fact": "Left the Crow and Thistle heading widdershins around first light on day 3, after eating and paying. No word left for Brynjar.",
-          "links": [
-            "brynjar-andyrsson-thread",
-            "the-marchward"
-          ]
-        }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a quick meal and a short exchange at the bar"
-      },
-      "offer": {
-        "thing": "Maret's absence from the gate-log — she found a different door, which is unusual for someone who was being followed",
-        "from": "Doss Halveck's habit of reading guests the way she reads tabs — fast and without flattery; she checked the log because Maret registered as someone worth tracking"
       }
     },
     "sceneState": {
-      "setting": "The Crow and Thistle common room, midday. Spring light through the shutters. Busy — a dozen travelers, low talk, the smell of fried onion and salt-fish.",
+      "setting": "The Crow and Thistle common room, midday. Spring light through the shutters. A dozen travelers eating and talking low; fried onion and salt-fish in the air.",
       "npcsPresent": [
         {
           "name": "Doss Halveck",
-          "state": "behind the bar, wiping the counter, watching Brynjar steadily"
+          "state": "behind the bar, leaning on one hand, watching the room after naming Longshore and the Mudrun"
         },
         {
           "name": "Freki",
-          "state": "settled under the bar stool, ears up, watching the room"
+          "state": "on the flagstone, head up, tracking the heavy-wool man who just came in and sat in the corner"
         }
       ],
       "objects": [
         "Plate of bread, fried salt-fish, and hard cheese on the bar",
         "Hand-axe in its frog on the belt",
         "Round Shield strapped to Brynjar's back",
-        "Traveler's Pack — upstairs on the peg"
+        "Traveler's Pack — upstairs on the peg",
+        "Heavy-wool man sitting alone in a corner table — no animals, drover's build"
       ],
       "threads": [
-        "Ragnar left heading widdershins at first light — destination unknown",
+        "Ragnar left widdershins before first light — no destination stated; chalk-board message is the only reach",
         "Maret did not come in through the Crow and Thistle at all",
         "The restricted creditor behind Maret's debt remains unidentified",
-        "The heavy-wool man from the Hub Hall — Freki has his scent"
+        "The heavy-wool man from the Hub Hall — Freki has his scent, and he just walked in"
       ]
     },
-    "beats": 3
+    "beats": 4
   },
   "clock": {
     "schemaVersion": 1,
     "day": 3,
-    "hour": 21,
+    "hour": 22,
     "realAnchor": null
   },
   "companions": [
@@ -502,17 +494,18 @@
         "[d1] Produced the cloth bundle left at the third stool — dried white herb and a knotted cord. Offered it to Brynjar directly.",
         "[d1] Told Brynjar the side door opens onto the east lane — north fork to the waygate, south fork to the Stillhold road. Watched him and Freki with the stillness of someone making a decision.",
         "[d3] Gave Brynjar a room and a bowl of barley soup without ceremony at the small hours of morning. Set a bowl of water on the flagstone for Freki unprompted.",
-        "[d3] Told Brynjar that Ragnar left heading widdershins around first light; Maret never came in through the Crow and Thistle at all — no gate-log entry matching her description."
+        "[d3] Told Brynjar that Ragnar left heading widdershins around first light; Maret never came in through the Crow and Thistle at all — no gate-log entry matching her description.",
+        "[d3] Told Brynjar that Ragnar left before first light heading widdershins and cannot be reached directly; offered to put word on the waygate chalk-board. Named Longshore (sixty days spinward) as the nearest proper hire-port, and the Mudrun river road (twenty days spinward) as the closer option for…"
       ],
       "knownFacts": [
-        "Sera left before dawn via the side door",
-        "Sera ate alone, had one cup, watched the door all evening — waiting or watching for someone",
-        "A second person sat near Sera the same evening, watching her without speaking, then left before her — leaving the bundle behind",
         "Doss kept the bundle because it felt deliberate, not lost",
         "The side door leads east, then forks — waygate approach north, Stillhold road south",
         "Keeps the inn through the small hours; reads returning travelers fast and without fuss",
         "Ragnar departed widdershins at first light after eating and paying",
-        "Maret did not sign in at the Crow and Thistle — may have used a different door"
+        "Maret did not sign in at the Crow and Thistle — may have used a different door",
+        "Ragnar left before first light heading widdershins — no stated destination",
+        "Longshore is the nearest deep-water hire port — sixty days spinward and outward",
+        "The Mudrun meets the coast road about twenty days spinward — flat-bottomed cargo boats running coastal hops toward the north"
       ],
       "skillsObserved": [
         "quick read of a stranger's intent"
@@ -520,7 +513,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "On duty at the Crow and Thistle; present behind the bar at midday.",
+      "statusNote": "On duty at the Crow and Thistle; watching the room with her usual thoroughness.",
       "domains": {
         "primary": "marcher"
       },
@@ -534,7 +527,7 @@
       "people": "human",
       "peopleSource": "generated",
       "appearance": "A stout woman in her mid-fifties, broad through the shoulders, heavy-handed in the way of someone who has carried kegs since she was fifteen. Skin the colour of old oak, short grey hair kept close to the skull for practicality. A crescent scar at the left jaw from a long-ago disagreement. Apron is clean — she changes it twice a day on principle. Eyes the flat, still grey of a whetstone, and about as yielding.",
-      "met": 2
+      "met": 3
     },
     "ragnar-solmyr": {
       "id": "ragnar-solmyr",
@@ -1089,7 +1082,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Maret's eyes have tracked to one of the dark gates — not the lit ones, the one in the north face that hasn't hummed in what looks like…",
@@ -4574,7 +4567,8 @@
           "[d1] Marcher duelist, visiting the Marchward neutral ground",
           "[d1] [while away] Over three days of sparring on the neutral ground, Redline Warrior has drawn two other visiting duelists into a loose, unspoken rivalry — testing footwork and reading each other without anyone yet naming the challenge openly.",
           "[d1] [while away] Ragnar and Brynjar have covered ground, crossing into the first southern stretch of the Marchward and making camp at a waystone — still far from wherever they're bound, but their boots are worn and the miles are real.",
-          "[d3] Left the Crow and Thistle heading widdershins around first light on day 3, after eating and paying. No word left for Brynjar."
+          "[d3] Left the Crow and Thistle heading widdershins around first light on day 3, after eating and paying. No word left for Brynjar.",
+          "[d3] Left before first light heading widdershins — no stated destination. Doss offered the waygate chalk-board as the only realistic way to pass him a message."
         ],
         "links": [
           "sera-of-the-stillhold",
@@ -4853,6 +4847,36 @@
         "aliases": [],
         "createdDay": 2,
         "updatedDay": 2
+      },
+      "longshore": {
+        "id": "longshore",
+        "label": "Longshore",
+        "kind": "place",
+        "facts": [
+          "[d3] Nearest proper hire-port for a deep-water northern hull — about sixty days spinward and outward from the Crossing."
+        ],
+        "links": [
+          "brynjar-andyrsson-thread"
+        ],
+        "aliases": [],
+        "createdDay": 3,
+        "entityId": "longshore",
+        "updatedDay": 3
+      },
+      "the-mudrun": {
+        "id": "the-mudrun",
+        "label": "The Mudrun",
+        "kind": "place",
+        "facts": [
+          "[d3] A river that meets the coast road about twenty days spinward from the Crossing. Flat-bottomed cargo boats run coastal hops from there toward the north — closer than Longshore, smaller ships."
+        ],
+        "links": [
+          "longshore",
+          "brynjar-andyrsson-thread"
+        ],
+        "aliases": [],
+        "createdDay": 3,
+        "updatedDay": 3
       }
     },
     "mergeUndo": [
@@ -4969,20 +4993,20 @@
     ]
   },
   "tendencies": {
-    "leadership": 3.964388535831676,
-    "cerebral": 8.934798899390033,
-    "strategic": 7.294146260407794,
-    "ruthless": 0.2548292333858097,
-    "social": 9.043468520549492,
-    "cautious": 7.824370147782811,
-    "generous": 1.181441009070014,
-    "patient": 0.5177498814947562
+    "leadership": 3.865278822435884,
+    "cerebral": 8.711428926905283,
+    "strategic": 7.111792603897599,
+    "ruthless": 0.24845850255116445,
+    "social": 8.817381807535755,
+    "cautious": 7.6287608940882405,
+    "generous": 1.1519049838432636,
+    "patient": 0.5048061344573873
   },
   "aptitudes": [
     "silver_tongue",
     "banner"
   ],
-  "actionCount": 56,
+  "actionCount": 57,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -6064,8 +6088,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788986836566,
-  "rev": 283,
+  "updatedAt": 1788987212556,
+  "rev": 292,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -6530,7 +6554,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "riven_marches": 39,
-    "the_center": 20,
+    "the_center": 21,
     "the_palelands": 3
   },
   "practice": {
@@ -6633,10 +6657,10 @@
     {
       "id": "sess-6",
       "startedAt": "2026-09-09T20:21:48.688Z",
-      "lastAt": "2026-09-09T20:47:16.561Z",
+      "lastAt": "2026-09-09T20:53:32.551Z",
       "startDay": 71,
       "endDay": 71,
-      "beats": 8
+      "beats": 9
     }
   ],
   "_pendingArrival": null,
@@ -6647,20 +6671,20 @@
     "lattice": "lat_standing"
   },
   "chronicleCache": {
-    "hash": "d0|b|c|q|L1|They were forced to flee from the raid that kill",
-    "text": "You have become a man unmade and remaking — your father Andyr's blood still vivid in memory, the village ash-smell still catching in your throat when the wind turns wrong, the night Jarl Kjotve Olafsson's raiders came and you ran still a splinter you cannot pull clean. What you have done since is small but absolute: you opened your palm, pressed steel to skin, and swore Andyr's name against Kjotve's, a blood oath that has given your flight the shape of a purpose. The Marchward knows your face now, and the Marchers know it too — a grieving son moving through their territory with a wound he has decided to sharpen into something useful.",
-    "at": "2026-07-23T01:18:04.353Z"
+    "hash": "d0|b|c|q|L2|They were forced to flee from the raid that kill",
+    "text": "You have become a man shaped by ash and obligation — the son of Andyr, whose name you now carry like a blade unsheathed, sworn in blood against Jarl Kjotve Olafsson for the raid that burned your village to its foundations and left your father among the dead. You fled that fire not as a coward but as a survivor who understood that vengeance requires a living hand, and you have been building that hand ever since: walking into the Marchers' territory without flinching, meeting a Redline Warrior eye to eye, naming your need without apology, and earning both his name and his presence at your side. You have no close ties yet — only the dead behind you, one hard-won ally beside you, and an oath that won't let you sleep easy.",
+    "at": "2026-09-09T20:47:47.388Z"
   },
   "_opEmitted": {
-    "sceneSummary": 53,
-    "choices": 53,
-    "scene": 53,
-    "npcUpdates": 47,
+    "sceneSummary": 54,
+    "choices": 54,
+    "scene": 54,
+    "npcUpdates": 48,
     "placeUpdates": 8,
     "generateRequest": 4,
     "moveTo": 7,
     "timeOps": 48,
-    "codexUpdates": 41,
+    "codexUpdates": 42,
     "sceneEnded": 15,
     "characterDeltas": 20,
     "offer": 8,
@@ -6670,7 +6694,7 @@
     "stageOps": 2,
     "factUpdates": 2
   },
-  "_opTurns": 53,
+  "_opTurns": 54,
   "_opLedger": {
     "offer": {
       "applied": 9,
@@ -6788,7 +6812,7 @@
     "sustain": 1,
     "study": 7,
     "travel": 9,
-    "ask": 1,
+    "ask": 2,
     "lead": 1,
     "scout": 4,
     "prepare": 1,
@@ -6927,10 +6951,55 @@
     "cpzjh2gz": "Stocky pale man with icy blue eyes, chestnut hair long and knotted on top with shaved sides, thick beard split by two braids, dark blue Norse dragon-knot tattoo across chest, wearing traveler's pack and waterskin, stern weathered…",
     "cpfhbiix": "Hand-axe with worn wooden haft and northern steel blade, single light source catching the edge, dark background",
     "cp1czit08": "Mid-forties woman, iron-grey hair in tight crown braid, neat scar bisecting left eyebrow, compact build, official bearing, austere intake desk setting.",
-    "cp1lvl7xj": "Stocky pale man, icy blue eyes, chestnut hair long and knotted on top with shaved sides, thick beard with two braids, dark blue Norse dragon-knot tattoo across chest, hand-axe and pack, standing amid smoldering ruins, weathered and haunted."
+    "cp1lvl7xj": "Stocky pale man, icy blue eyes, chestnut hair long and knotted on top with shaved sides, thick beard with two braids, dark blue Norse dragon-knot tattoo across chest, hand-axe and pack, standing amid smoldering ruins, weathered and haunted.",
+    "cp1jfcrus": "Stocky pale-skinned man, icy blue eyes, chestnut hair long and knotted atop, shaved sides, thick braided beard, dark blue Norse dragon-knot tattoo across chest, hand-axe at side, traveler's pack and waterskin, standing resolute amid…",
+    "cp19vyo0u": "Bare-chested figure mid-dodge, sweat-glistening skin in warm sidelight, muscles tensed mid-motion, breath visible, earth tones, no props—pure kinetic presence.",
+    "cp1x5k11l": "Underhand throw of knife spinning toward a figure eight paces distant, steel-grey light, weathered leather grip, blood-rust patina on blade, scarred armor catching hard edge-light, disciplined tension, no flourish.",
+    "cpwtvxf5": "Weathered warrior in scarred plate armor whipping a stone from sling toward distant falling figure, dust and blood-rust tones, hard sunlight catching steel edge, disciplined stance, scattered stones at feet, grey-brown battlefield…"
   },
-  "likeness": {},
+  "likeness": {
+    "character:char-mrrzi63o": {
+      "keeps": [
+        {
+          "url": "https://image.pollinations.ai/prompt/Stocky%2C%20average-height%20man%20with%20pale%20skin%20and%20icy%20blue%20eyes.%20Chestnut%20hair%20shaved%20at%20sides%20and%20back%2C%20long%20on%20top%20and%20knotted.%20Thick%20beard%20with%20two%20braids%20flanking%20the%20mouth.%20A%20dark%20blue%20Norse%20dragon-knot%20tattoo%20curls%20fro%2C%20full-body%20character%20portrait%2C%20named%20Brynjar%20Andyrsson%2C%20of%20the%20marcher%2C%20war%20leader%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20They%20were%20forced%20to%20flee%20from%20the%20raid%20that%20killed%20their%20father%20and%20razed%20their%20home%20village.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=53421&nologo=true",
+          "prompt": "Brynjar Andyrsson",
+          "note": null,
+          "seedKey": null,
+          "at": 71
+        }
+      ]
+    },
+    "npc:doss": {
+      "keeps": [
+        {
+          "url": "https://image.pollinations.ai/prompt/A%20stout%20woman%20in%20her%20mid-fifties%2C%20broad%20through%20the%20shoulders%2C%20heavy-handed%20in%20the%20way%20of%20someone%20who%20has%20carried%20kegs%20since%20she%20was%20fifteen.%20Skin%20the%20colour%20of%20old%20oak%2C%20short%20grey%20hair%20kept%20close%20to%20%2C%20character%20portrait%2C%20named%20Doss%20Halveck%2C%20Innkeep%20of%20the%20Crow%20and%20Thistle%20%E2%80%94%20she%20has%20outlasted%20three%20wars%20and%20two%20owners%2C%20and%20the%20place%20is%20hers%2C%20Unhurried%20and%20direct%20%E2%80%94%20speaks%20the%20way%20she%20sets%20a%20plate%20down%2C%20no%20wasted%20motion.%20Does%20not%20soften%20thing%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=21992&nologo=true",
+          "prompt": "Doss Halveck",
+          "note": null,
+          "seedKey": null,
+          "at": 71
+        }
+      ]
+    },
+    "npc:wardhouse-officer": {
+      "keeps": [
+        {
+          "url": "https://image.pollinations.ai/prompt/A%20compact%20woman%20somewhere%20in%20her%20mid-forties%2C%20hair%20the%20colour%20of%20old%20iron%20worn%20in%20a%20single%20braid%20wound%20close%20to%20the%20head.%20A%20small%2C%20neat%20scar%20through%20the%20left%20eyebrow%20%E2%80%94%20not%20a%20fighter's%20scar%2C%20an%20old%20wor%2C%20character%20portrait%2C%20named%20Halvra%20Stenn%2C%20Wardhouse%20Duty%20Officer%20%E2%80%94%20she%20processes%20what%20the%20Marchward%20receives%2C%20and%20she%20has%20received%20a%20great%20dea%2C%20Unhurried%2C%20precise%2C%20neither%20cold%20nor%20warm%20%E2%80%94%20the%20voice%20of%20a%20woman%20who%20has%20asked%20the%20same%20necessary%20qu%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=73527&nologo=true",
+          "prompt": "Halvra Stenn",
+          "note": null,
+          "seedKey": null,
+          "at": 71
+        }
+      ]
+    }
+  },
   "boostedCrafts": [
     "calm_word"
-  ]
+  ],
+  "_chronicleBusy": false,
+  "_chronicleError": null,
+  "portraitPinned": true,
+  "figureImages": {
+    "whois-sera": "https://image.pollinations.ai/prompt/Maret%20Threnwick%2C%20character%20portrait%2C%20named%20Maret%20Threnwick%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=88582&nologo=true"
+  },
+  "imagePinned": true
 }

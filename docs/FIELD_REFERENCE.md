@@ -647,14 +647,14 @@ contribute to authored dice without recreating the double-scaling bug.
 | `from` | 512 | `rankDeltas`×512 | ✅ READ | `affiliation.js`, `art.js`, `assignments.js` |
 | `kind` | 490 | `rankDeltas`×490 | ✅ READ | `arceffects.js`, `art.js`, `authormode.js` |
 | `powerSystem` | 431 | `root`×429 `tree`×2 | ✅ READ | `art.js`, `backfill.js`, `braids.js` |
-| `id` | 429 | `root`×429 | ✅ READ | `affinities.js`, `arceffects.js`, `art.js` |
+| `id` | 429 | `root`×429 | ✅ READ | `affiliation.js`, `affinities.js`, `arceffects.js` |
 | `tier` | 429 | `root`×429 | ✅ READ | `backfill.js`, `battle_turn.js`, `borncontract.js` |
 | `axes` | 429 | `root`×429 | ✅ READ | `affinities.js`, `craftmechanics.js`, `encounters.js` |
 | `attribute` | 429 | `root`×429 | ✅ READ | `affinities.js`, `battle_turn.js`, `braids.js` |
 | `narrationHints` | 429 | `root`×429 | ✅ READ | `battleprompt.js`, `braids.js`, `companions.js` |
 | `description` | 429 | `root`×429 | ✅ READ | `affiliation.js`, `art.js`, `authormode.js` |
 | `notFor` | 429 | `root`×429 | ✅ READ | `braids.js`, `entityDetail.js`, `generate.js` |
-| `tradition` | 429 | `root`×429 | ✅ READ | `arceffects.js`, `art.js`, `braids.js` |
+| `tradition` | 429 | `root`×429 | ✅ READ | `affiliation.js`, `arceffects.js`, `art.js` |
 | `operativeAxis` | 429 | `root`×429 | ⚠️ COLLISION | only as `cfg.operativeAxis` |
 | `intensity` | 429 | `root`×429 | ✅ READ | `battle_turn.js`, `canon.js`, `craftmechanics.js` |
 | `plainly` | 429 | `root`×429 | ✅ READ | `gm.js`, `narration_voice.js`, `recovery_snapshots.js` |

@@ -208,3 +208,42 @@ valley town earn a heroic without the cosmos having to move.**
 play. ⛑ **In Erik's save The Second Manifestation already stands at 4/4.** ➡️ **So a spec that says "an arc
 at stage 3 does X" is describing something that has already happened to at least one player** — the numbers
 in `greater_arcs.json` are a starting line, not a state.
+
+---
+
+## §8 — ✅ THE DISTANCE RULE IS BUILT (2026-09-09), AND IT SHIPPED WITH THE FIELD YOU FILL
+
+⛑ **Erik's rule works, driven through the mint:**
+
+| minted in | takes | from | craft rows |
+|---|---|---|---|
+| **Millbrook** | `rootkin` | ⚠️ **45.7° away** | **3** |
+| **the Crossing** | `somatic` | ⚠️ **52.0° away** | **4** |
+| the Maw | `abyssal` | ✅ its own region | **7** |
+
+### ⛔ AND THE FIELD IS YOURS: `homeTradition`, ONE PER REGION
+
+⚠️ **Until now the region→tradition map lived on the TRADITION (`traditions[].region`), which CANNOT serve
+twelve foothills — a tradition names one region.** ⛑ **A region may now name its own `homeTradition`:
+many-to-one, additive, and read FIRST.** ⬜ **Every region without one answers exactly as before, so nothing
+you have already authored changes.** It goes in `rules/regions.json`, beside the region.
+
+### ⚠️ THE CAP IS 60° AND THAT NUMBER IS A SYMPTOM, NOT A DESIGN
+
+⛔ **I set it to 45 first and measured what that does: Millbrook gets NOTHING** (its nearest anchor is
+45.7°) **and neither does the Crossing** (52°) — ⚠️ **the two places play actually happens in.** ⛑ **At 60 all
+fifty orphaned locations are reached.**
+
+➡️ ⚑ **Fill the foothills and this number should come DOWN.** **A craft borrowed from a third of a world
+away is a stopgap, not a rule** — and the dial says so in its own note, so whoever lowers it will know why it
+was ever this large.
+
+⬜ **Marked `domainsSource: "nearest"`, one rung BELOW `derived`,** with `domainsVia: {location, degrees}` —
+a borrowed craft says *"the closest people who practise anything practise this"*, which is a fine start for
+a GM and poor evidence for standing credit. **The provenance ladder already weighs `derived` at half; this
+is the rung under it.**
+
+⚠️ **One thing found on the way that would have bitten anyone:** `rules/regions.json` was loaded as
+`regionsDoc.regions` and **the sibling keys were thrown away one character before they were read** — a dial
+could be authored, registered, loaded and dropped. **The whole doc is attached now (`CONTENT.regionRules`),
+so the next dial you put beside `regions` will actually arrive.**

@@ -88,10 +88,68 @@ export function affiliationOf(record, opts = {}) {
 }
 
 /** The home tradition of a region, for the domain fallback — the same map generate.js used. Pure. */
-export function regionHomeTradition(regionId, traditionIndex) {
-  if (!regionId || !traditionIndex?.byId) return null;
+export function regionHomeTradition(regionId, traditionIndex, regions = null) {
+  if (!regionId) return null;
+  // ⛑ THE REGION'S OWN FIELD WINS, and it is read FIRST because the old map cannot express what Aevi
+  // needs: `traditions[].region` names ONE region per tradition, so twelve foothills cannot each claim
+  // one. A region naming its home tradition is many-to-one and additive. ⚠️ Absent, everything below
+  // answers exactly as it did before, so nothing that worked stops working.
+  const own = regionRecord(regions, regionId)?.homeTradition;
+  if (own && (!traditionIndex?.byId || traditionIndex.byId[own])) return own;
+  if (!traditionIndex?.byId) return null;
   const t = Object.values(traditionIndex.byId).find(x => x?.region === regionId);
   return t?.traditionId || null;
+}
+
+/** A regions collection may arrive as a list or a map; both are read the same way. */
+function regionRecord(regions, regionId) {
+  if (!regions || !regionId) return null;
+  const all = Array.isArray(regions) ? regions : Object.values(regions);
+  return all.find(r => (r?.regionId || r?.id) === regionId) || null;
+}
+
+// ⛔ GREAT-CIRCLE DEGREES between two `worldPos` ({colatitude, longitude}). Spherical, not planar: the
+// world wraps, and a longitude subtraction gave the Centre a 394° window the last time anyone forgot.
+const toRad = (d) => (Number(d) * Math.PI) / 180;
+const unitVec = (w) => {
+  const th = toRad(w?.colatitude), ph = toRad(w?.longitude);
+  if (!Number.isFinite(th) || !Number.isFinite(ph)) return null;
+  return [Math.sin(th) * Math.cos(ph), Math.sin(th) * Math.sin(ph), Math.cos(th)];
+};
+export function degreesBetween(a, b) {
+  const A = unitVec(a), B = unitVec(b);
+  if (!A || !B) return null;
+  const dot = Math.max(-1, Math.min(1, A[0] * B[0] + A[1] * B[1] + A[2] * B[2]));
+  return (Math.acos(dot) * 180) / Math.PI;
+};
+
+/** ⛔ ERIK 2026-09-09 — THE DISTANCE FALLBACK. A person minted where no tradition is at home takes the
+ *  one from the NEAREST place that has one: *"the nearest foothills or poles (by distance) unless the
+ *  story narratively gives them a hook."*
+ *
+ *  ⚠️ NEAREST **PLACE**, NOT NEAREST REGION CENTRE, and deliberately: regions carry no centre, and the
+ *  honest question is "where is the closest ground that actually practises something" rather than the
+ *  midpoint of a shape. Every location carries `worldPos`; 135 of 135.
+ *
+ *  ⛑ CAPPED, and the cap is a symptom: with twelve foothills holding no `homeTradition`, the median
+ *  orphan sits 34.3° from its nearest anchor. Beyond the cap this returns null and the person simply has
+ *  no domains — which is the honest answer, and better than importing a craft from a third of a world
+ *  away. ⛔ NO CODE DEFAULT for the cap: absent, nothing is borrowed at all.
+ *
+ *  Returns { tradition, viaLocationId, degrees } or null. PURE. */
+export function nearestHomeTradition(fromWorldPos, { locations = null, traditionIndex = null, regions = null, withinDeg = null } = {}) {
+  const cap = Number(withinDeg);
+  if (!fromWorldPos || !locations || !Number.isFinite(cap)) return null;
+  let best = null;
+  for (const loc of (Array.isArray(locations) ? locations : Object.values(locations))) {
+    if (!loc?.worldPos) continue;
+    const home = regionHomeTradition(loc.regionId || loc.region || null, traditionIndex, regions);
+    if (!home) continue;
+    const d = degreesBetween(fromWorldPos, loc.worldPos);
+    if (d == null || d > cap) continue;
+    if (!best || d < best.degrees) best = { tradition: home, viaLocationId: loc.id || null, degrees: d };
+  }
+  return best;
 }
 
 /** Build the people vocabulary from authored NPC `people` values plus any peoples_of_kind clusters.

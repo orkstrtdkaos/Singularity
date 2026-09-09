@@ -19,7 +19,7 @@
 import { isDescriptiveNotName } from "./state.js";
 import { slugify } from "./quests.js";
 import { namesMatch, smartClamp } from "./namematch.js";
-import { affiliationOf, regionHomeTradition } from "./affiliation.js";   // SNG-185: the ONE affiliation impl
+import { affiliationOf, regionHomeTradition, nearestHomeTradition } from "./affiliation.js";   // SNG-185: the ONE affiliation impl
 import { validate, missingRequired, defaultFor } from "./genschema.js";
 import { isLegalEmergent } from "./braids.js";   // SNG-197 §4: the ONE emergent-verb gate (no second impl to drift)
 import { checkBorn, describeBorn } from "./borncontract.js";  // SNG-250 §4: the ONE born-whole gate (the same fn content_ci runs over authored content)
@@ -719,8 +719,25 @@ export function nominationsFor(character) {
 // too; nothing here regresses.
 export function affiliationFor(entity, context = {}, traditionIndex = null) {
   const loc = context.location || {};
-  const regionHome = regionHomeTradition(loc.regionId || loc.region || context.regionId || null, traditionIndex);
-  return affiliationOf(entity, { traditionIndex, peopleVocab: context.peopleVocab || null, regionHome });
+  const regions = context.regions || null;
+  const regionHome = regionHomeTradition(loc.regionId || loc.region || context.regionId || null, traditionIndex, regions);
+  const base = affiliationOf(entity, { traditionIndex, peopleVocab: context.peopleVocab || null, regionHome });
+  // ⛔ ERIK 2026-09-09 — THE DISTANCE RUNG, AND IT SITS BELOW EVERY RUNG THAT ALREADY ANSWERS. `readDomains`
+  // tries model-authored, then the ROLE string, then `skillsObserved`, then the region's own home; only
+  // when all four are silent does a person borrow from the nearest ground that practises anything.
+  // ⚠️ "the Valley is just a region — so npcs minted there would need to get their domains from the
+  // nearest foothills or poles (by distance) unless the story narratively gives them a hook." The hook
+  // is those four rungs; this is what happens when the story gave none.
+  if (base.domains) return base;
+  const near = nearestHomeTradition(loc.worldPos, {
+    locations: context.locations || null, traditionIndex, regions,
+    withinDeg: context.nearestTraditionWithinDeg ?? null });
+  if (!near) return base;
+  // ⛑ MARKED `nearest`, WEAKER THAN `derived`, because it IS weaker: a borrowed craft says "the closest
+  // people who practise anything practise this", which is a fine start for a GM and poor evidence for
+  // standing credit. The provenance ladder already weighs `derived` at half; this is the rung below it.
+  return { ...base, domains: { primary: near.tradition }, domainsSource: "nearest",
+    domainsVia: { location: near.viaLocationId, degrees: Math.round(near.degrees * 10) / 10 } };
 }
 
 export function buildGeneratePrompt(type, context = {}, { schema = {}, examples = [], substrate = null } = {}) {

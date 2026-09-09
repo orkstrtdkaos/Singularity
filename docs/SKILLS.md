@@ -78,7 +78,7 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 |---|---|---|---|---|---|
 | `deduced_strike` | **Deduced Strike** | 4 | mental | strike,reveal,hinder | Aimed Thought · Called Effect · Strike in the Reading  ⚑ harm:damaging |
 | `force_the_move` | **Force the Move** | 4 | mental | provoke | Make Them Answer · Shove the Rank · On the Record |
-| `scholars_margin` | **Scholar's Margin** | 4 | mental |  | Margin Note · Thinking Out Loud · Dangerous Half |
+| `scholars_margin` | **Scholar's Margin** | 4 | mental | reveal,foresee,open | Margin Note · Thinking Out Loud · Dangerous Half |
 | `solved_route` | **Solved Route** | 3 | mental | move,travel | Route · Moving Space · Designed Scene |
 
 **Tier 3**
@@ -109,7 +109,7 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 
 | id | name | energy | attr | functions | ranks |
 |---|---|---|---|---|---|
-| `case_closed` | **Case Closed** | 4 | social | persuade,bind,empower | Matter Settled · Inescapable · Only Consistent Act  ⚑ harm:lethal |
+| `case_closed` | **Case Closed** | 4 | social | persuade,bind,empower,break | Matter Settled · Inescapable · Only Consistent Act  ⚑ harm:lethal |
 | `contradiction` | **Contradiction** | 5 | mental | bind,break,hinder | Named Flaw · Reductio · Collapse  ⚑ harm:incapacitating |
 | `known_price` | **Known Price** | 3 | mental | bargain | Open at the Close · Any Coin Is Coin · Terms Nobody Else Is Offered |
 | `unbroken_thread` | **Unbroken Thread** | 3 | mental | resist,sustain | Held Through · Across Days · Last Thing to Fail |
@@ -266,21 +266,21 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 | `beastfriend` | **Beastfriend** | 6 | social | bind,command,reveal,strike,summon | Gentle Presence · Working Trust · Old Accord  ⚑ folk · harm:damaging |
 | `greenlore` | **Greenlore** | 5 | mental | heal,hinder,sustain | Hedge Remedy · Deep Pharmacopeia · Old Recipes  ⚑ folk · harm:incapacitating |
 | `lifesense` | **Lifesense** | 3 | mental | reveal,track | Lifesense · Green Read · Whole Living Field |
-| `pack_sense` | **Pack-Sense** | 4 | social |  | Stray's Read · Pack · What It Remembers |
+| `pack_sense` | **Pack-Sense** | 4 | social | reveal,track,foresee | Stray's Read · Pack · What It Remembers |
 | `snaring_green` | **Snaring Green** | 6 | practical | bind,hinder,make,strike | Green Comes Up · Thorn Turns In · Long Green Death  ⚑ harm:lethal · backlash:damaging |
 | `staunch` | **Staunch** | 4 | practical | heal,sustain | Staunch · Held Wound · Refused Bleed |
-| `thin_place_sense` | **Thin-Place Sense** | 3 | mental |  | Grove's Loan · Kept Flame · What It Carries |
+| `thin_place_sense` | **Thin-Place Sense** | 3 | mental | reveal,foresee,travel,ward | Grove's Loan · Kept Flame · What It Carries |
 
 **Tier 2**
 
 | id | name | energy | attr | functions | ranks |
 |---|---|---|---|---|---|
-| `bark_and_briar` | **Bark and Briar** | 5 | practical | resist,shield,ward | Bark-Skin · Thorn-Ward · Grove's Resilience  ⚑ harm:damaging |
+| `bark_and_briar` | **Bark and Briar** | 5 | practical | resist,shield,ward,strike | Bark-Skin · Thorn-Ward · Grove's Resilience  ⚑ harm:damaging |
 | `green_claim` | **Green Claim** | 5 | practical | strike,summon | Answer · Living Response · Reclamation  ⚑ harm:lethal |
 | `quickening` | **Quickening** | 6 | practical | heal,make,restore,sustain | Green Touch · Quick Return · Unstoppable Spring |
 | `root_road` | **Root Road** | 5 | practical | move,open,travel | Between the Roots · Opened Way · Root Network |
 | `speaking_grove` | **Speaking Grove** | 4 | mental | command,reveal,track | A Word to the Green · Asking · Grove Speaks |
-| `the_taking_root` | **Taking Root** | 5 | practical |  | Cutting · First Words · Young Rootkin |
+| `the_taking_root` | **Taking Root** | 5 | practical | restore,mend,reveal,bind | Cutting · First Words · Young Rootkin |
 
 **Tier 3**
 
@@ -709,7 +709,7 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 | `shadowed_mending` | **Shadowed Mending** | 4 | mental | heal,mend | Sure Hands · Dark Aids · Dark Heals |
 | `shroud` | **Shroud** | 5 | mental | conceal,deceive | Shroud · Shroudwork · Long Shroud |
 | `slow_cup` | **Slow Cup** | 5 | practical | strike,hinder,make | Slow Cup · No Taste At All · Wasting  ⚑ harm:incapacitating |
-| `the_kept_dark` | **Kept Dark** | 6 | mental |  | Uninvited Dark · Kept Watch · Harbor |
+| `the_kept_dark` | **Kept Dark** | 6 | mental | conceal,ward,resist | Uninvited Dark · Kept Watch · Harbor |
 | `umbracraft` | **Umbracraft** | 6 | mental | command,conceal,move,ward | Seeing Dark · Past Finding · Deep Umbral |
 
 **Tier 3**
@@ -878,7 +878,7 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 
 | id | name | energy | attr | functions | ranks |
 |---|---|---|---|---|---|
-| `grief_that_stops` | **Grief That Stops** | 13 | mental | bind | Grief That Stops · All Of It  ⚑ harm:lethal |
+| `grief_that_stops` | **Grief That Stops** | 13 | mental | bind,strike | Grief That Stops · All Of It  ⚑ harm:lethal |
 | `last_lament` | **Last Lament** | 13 | social | empower,restore | Last Lament |
 | `worldsong` | **Worldsong** | 13 | practical | empower | Worldsong  ⚑ folk · learnedAt:harmonic |
 
@@ -953,7 +953,7 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 | `makers_eye` | **Maker's-Eye** | 3 | mental | make,reveal | Maker's-Eye · Better Shape · Thing It Wants to Be |
 | `quick_work` | **Quick Work** | 4 | practical | make | Thing Made · Larger Build · Built Answer |
 | `raised_thing` | **Raised Thing** | 4 | practical | make,mend | Raised Thing · Sound Work · Thing That Outlasts |
-| `second_pair_of_hands` | **A Second Pair of Hands** | 3 | practical |  | Uninvited Apprentice · Genuinely Useful · One Who Argues |
+| `second_pair_of_hands` | **A Second Pair of Hands** | 3 | practical | empower,reveal,foresee | Uninvited Apprentice · Genuinely Useful · One Who Argues |
 | `sudden_work` | **Sudden Work** | 6 | practical | break,make,strike | Driven Spar · Raised Work · Thing That Was Not There  ⚑ harm:lethal · backlash:incapacitating |
 | `tinkers_hand` | **Tinker's Hand** | 5 | practical | make,mend,open | Field Fix · Coaxing Function · Speaker to Machines  ⚑ folk |
 
@@ -1051,7 +1051,7 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 |---|---|---|---|---|---|
 | `enginecraft` | **Enginecraft** | 8 | practical | command,make,mend | Wright's Eye · System-Speaker · Master of the Works |
 | `shortfold` | **Shortfold** | 7 | mental | move,travel | Shortfold · Longer Fold · Folded Road |
-| `the_old_procedure` | **Old Procedure** | 7 | practical |  | Assignment · Kept Lamp · Chosen Function |
+| `the_old_procedure` | **Old Procedure** | 7 | practical | open,mend,sustain,travel | Assignment · Kept Lamp · Chosen Function |
 
 **Tier 4**
 
@@ -1073,7 +1073,7 @@ or `bargainers` in `tradition`, which **confused access with ancestry** — the 
 |---|---|---|---|---|---|
 | `carrying_call` | **Carrying Call** | 3 | practical | command,travel | Call That Carries · Worked Line · Whole Valley Hears  ⚑ folk · learnedAt:harmonic |
 | `established_route` | **Established Route** | 3 | practical | move,open,travel | Protocol Path · Seam-Walker · Inside Line |
-| `motes_vigil` | **Motes' Vigil** | 5 | mental |  | Curious Constellation · Kindled Chorus · What She Tastes |
+| `motes_vigil` | **Motes' Vigil** | 5 | mental | ward,reveal,shield,track | Curious Constellation · Kindled Chorus · What She Tastes |
 | `order_sense` | **Order-Sense** | 3 | mental | reveal | Order-Sense · Pattern Beneath · Whole Design |
 | `ordered_record` | **Ordered Record** | 3 | mental | bind,foresee,reveal | Departure Named · Held Order · City's Order |
 | `predicted_man` | **Predicted Man** | 5 | mental | bind,break,hinder,strike | Closed Line · Solved Position · Resolved Man  ⚑ harm:lethal · backlash:damaging |

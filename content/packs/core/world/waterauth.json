@@ -13,7 +13,9 @@
   "greywater_stilts",
   "waystone",
   "thinwater",
-  "the_hollowing"
+  "the_hollowing",
+  "the_grief_house",
+  "longshore"
  ],
  "authored": {
   "echo_river_crossing": {
@@ -53,16 +55,24 @@
    "why": "the water runs thin here and so does everything else"
   },
   "the_wellspring_deep": {
-   "kind": "lake",
-   "why": "where fresh water meets salt"
+   "kind": "coast",
+   "why": "⛔ ITS OWN AUTHORED LINE IS 'WHERE FRESH WATER MEETS SALT' — an estuary, which is the one place in the corpus that already said the sea exists."
   },
   "wellspring": {
-   "kind": "river",
-   "why": "the Wellspring rises here"
+   "kind": "coast",
+   "why": "⚑ A TIDAL CITY on the Feeling Coast — the tide is in the name of the thing it does: grief conducted in public halls, on a shore that comes and goes twice a day."
   },
   "the_greywater": {
    "kind": "marsh",
    "why": ""
+  },
+  "the_grief_house": {
+   "kind": "coast",
+   "why": "⚠️ The third place on the Feeling Coast, and a house that receives the drowned receives them from somewhere."
+  },
+  "longshore": {
+   "kind": "harbor",
+   "why": "⛑ THE NAME WAS ALWAYS A PROMISE AND NOTHING KEPT IT. 'Longshore' has been a WAYGATE TOWN with no shore since it was authored — outfitters, bridge-wrights, and people who know how long a road really takes. ⚑ A long shore is what it is named for and now has: the reach's harbour, where a keel can be laid and a crew can be found. ⛔ AND IT IS WHERE ORRUN SHIELDBREAKER AND CASSA REDSAIL ALREADY LIVE — both authored to `foothill_longshore` before the town had water, which is the gap arriving from two directions at once."
   }
  },
  "dropped": {
@@ -78,5 +88,6 @@
   "the_harborward": "a sea harbour — already coastal, needs no inland water",
   "the_unlit_deep": "'past the harbor' — sea, and it is a cavern",
   "the_maw": "a cavern"
- }
+ },
+ "_coastAdded_20260908": "⛑ COAST AND HARBOUR ADDED 2026-09-08. ⛔ MEASURED FIRST: twelve authored water locations — 6 river, 3 lake, 3 marsh — AND NO COAST, NO HARBOUR AND NO PORT ANYWHERE, in a world that already had `the_feeling_coast` as a REGION and `the_wellspring_deep` authored as 'where fresh water meets salt'. ⚠️ THE SEA WAS IMPLIED IN PROSE AND ABSENT FROM THE DATA. ⚑ CCode: 'no location carries terrain, water, port or biome at all — a longship would route down roads, because roads are the only edges there are.' ⛔ And Brayden's character is looking for a port right now. ⚠️ FOLLOWING THIS FILE'S OWN LAW: every entry is read from an authored description and carries its reason. ⛑ NO REGEX — the note at the top of this file records a 10-of-18 false-positive rate when that was tried, including two NEGATIONS, and it says DO NOT REINTRODUCE IT."
 }

@@ -1870,12 +1870,14 @@
      "class": "hard"
     }
    ],
-   "plainly": "A craft/stealth/magical action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 2, and lasts for about 6 hours Ranks: rank 2 extends scope; rank 3 adds to persistence. Limit: it is Shadow — it screens and conceals; it stops nothing physical.",
+   "plainly": "A stealth/craft action that shapes darkness into something with edges — a tool, a step, a wall of it. Its strength is rated 6 out of 10 across a scope of 2, and lasts for about 6 hours Ranks: rank 2 extends scope; rank 3 adds to persistence. Limit: it is Shadow — it screens and conceals; it stops nothing physical.",
    "_nameWas": "The Shadow Work",
    "_idWas": "the_shadow_work",
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_migrated_20260829": "⚠️ UNMIGRATED-BATCH FINGERPRINT AGAIN — empty `notFor`, off-vocabulary challengeTypes ['craft', 'stealth', 'magical'], energy e2 below band, ALL THREE TOGETHER. ⛔ Fifth tradition where the same three appear on the same crafts; it identifies a BATCH, not a sloppy author."
+   "_migrated_20260829": "⚠️ UNMIGRATED-BATCH FINGERPRINT AGAIN — empty `notFor`, off-vocabulary challengeTypes ['craft', 'stealth', 'magical'], energy e2 below band, ALL THREE TOGETHER. ⛔ Fifth tradition where the same three appear on the same crafts; it identifies a BATCH, not a sloppy author.",
+   "_plainlyWas": "A craft/stealth/magical action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 2, and lasts for about 6 hours Ranks: rank 2 extends scope; rank 3 adds to persistence. Limit: it is Shadow — it screens and conceals; it stops nothing physical.",
+   "_glossFix_20260908": "⛑ TIER 2 OF `SPEC_tradition_narrative_npc_pass` — THE THIN GLOSSES. ⛔ All thirty were CORRECT and USELESS: 'makes or animates something' says THAT the craft makes and never WHICH, on thirty crafts that make thirty different things. ⚠️ T7: what does the GM narrate CHANGING? ⚑ Every rewrite is drawn from that craft's own `description` — nothing invented, and the description was right in all thirty cases. ⛔ THE SPEC ESTIMATED 251 THIN CRAFTS AND THERE WERE 42: measure before authoring."
   },
   {
    "id": "long_dark",
@@ -2383,10 +2385,12 @@
      "class": "hard"
     }
    ],
-   "plainly": "A craft/technical/art action that makes or animates something. Its strength is rated 2 out of 10, and lasts for about 6 hours Ranks: rank 2 adds to materials; rank 3 adds to persistence. Limit: requires material that Answers to light and heat.",
+   "plainly": "A craft action that works glass and heat-formed material into a finished thing. Its strength is rated 2 out of 10, and lasts for about 6 hours Ranks: rank 2 adds to materials; rank 3 adds to persistence. Limit: requires material that Answers to light and heat.",
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_migrated_20260829": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['craft', 'technical', 'art'], and e2 below band. ⛔ All six blazeborn crafts in this batch had all three, which is how a batch is identified rather than a craft being sloppy."
+   "_migrated_20260829": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['craft', 'technical', 'art'], and e2 below band. ⛔ All six blazeborn crafts in this batch had all three, which is how a batch is identified rather than a craft being sloppy.",
+   "_plainlyWas": "A craft/technical/art action that makes or animates something. Its strength is rated 2 out of 10, and lasts for about 6 hours Ranks: rank 2 adds to materials; rank 3 adds to persistence. Limit: requires material that Answers to light and heat.",
+   "_glossFix_20260908": "⛑ TIER 2 OF `SPEC_tradition_narrative_npc_pass` — THE THIN GLOSSES. ⛔ All thirty were CORRECT and USELESS: 'makes or animates something' says THAT the craft makes and never WHICH, on thirty crafts that make thirty different things. ⚠️ T7: what does the GM narrate CHANGING? ⚑ Every rewrite is drawn from that craft's own `description` — nothing invented, and the description was right in all thirty cases. ⛔ THE SPEC ESTIMATED 251 THIN CRAFTS AND THERE WERE 42: measure before authoring."
   },
   {
    "id": "blazing_word",

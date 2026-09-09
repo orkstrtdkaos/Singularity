@@ -1149,7 +1149,7 @@
      "class": "cost"
     }
    ],
-   "plainly": "A magical/social/tactical action that makes or animates something. Its strength is rated 6 out of 10, and lasts for about 4 hours Ranks: rank 2 deepens summonPower; rank 3 extends control. Limit: what you call is AN Appetite Given Form — it wants what it is.",
+   "plainly": "A social/fight action that calls something up from the deep — the hunger under the anger — and it answers to you. Its strength is rated 6 out of 10, and lasts for about 4 hours Ranks: rank 2 deepens summonPower; rank 3 extends control. Limit: what you call is AN Appetite Given Form — it wants what it is.",
    "_functionsWas": [
     "command",
     "reveal",
@@ -1162,7 +1162,9 @@
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `abyssal` — ⛔ Canon: the demonic/angelic split IS the Precursor disagreement — 'an ancient disagreement between two entities of one people.' Demons draw on the al\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_migrated_20260829": "⚠️ UNMIGRATED-BATCH FINGERPRINT: empty `notFor`, lowercase off-vocabulary challengeTypes ['magical', 'social', 'tactical'], energy e2 below band — all three on the same six crafts. ⛔ SIXTH TRADITION with this exact batch.",
-   "_abyssalSource_20260902": "⛔ SHIFTS SOURCE BY RANK, and the flat field cannot express it. r1–2 METAPHYSICAL, r3 VEIL. `called_form` r1 gives a fear 'MOMENTARY form'; r3 'what you call up HOLDS, ACTS IN THE WORLD… IT IS NOT DOCILE'. `the_read_hunger` r1 reads one person; r3 reads 'A DEEP THING'. `hungry_step` r1 walks ALONGSIDE an appetite; r3 'the appetites READ YOU AS ONE OF THE THINGS ALREADY MOVING'. ⚠️ TOP-LEVEL IS METAPHYSICAL because r1–2 is where the craft mostly lives; ⬜ the r3 veil shift lands when the per-rank `source` mechanism exists (`SPEC_body_source.md` §4). ⚑ THE PATTERN IS THE TRADITION: you begin by understanding them and end by being counted among them."
+   "_abyssalSource_20260902": "⛔ SHIFTS SOURCE BY RANK, and the flat field cannot express it. r1–2 METAPHYSICAL, r3 VEIL. `called_form` r1 gives a fear 'MOMENTARY form'; r3 'what you call up HOLDS, ACTS IN THE WORLD… IT IS NOT DOCILE'. `the_read_hunger` r1 reads one person; r3 reads 'A DEEP THING'. `hungry_step` r1 walks ALONGSIDE an appetite; r3 'the appetites READ YOU AS ONE OF THE THINGS ALREADY MOVING'. ⚠️ TOP-LEVEL IS METAPHYSICAL because r1–2 is where the craft mostly lives; ⬜ the r3 veil shift lands when the per-rank `source` mechanism exists (`SPEC_body_source.md` §4). ⚑ THE PATTERN IS THE TRADITION: you begin by understanding them and end by being counted among them.",
+   "_plainlyWas": "A magical/social/tactical action that makes or animates something. Its strength is rated 6 out of 10, and lasts for about 4 hours Ranks: rank 2 deepens summonPower; rank 3 extends control. Limit: what you call is AN Appetite Given Form — it wants what it is.",
+   "_glossFix_20260908": "⛑ TIER 2 OF `SPEC_tradition_narrative_npc_pass` — THE THIN GLOSSES. ⛔ All thirty were CORRECT and USELESS: 'makes or animates something' says THAT the craft makes and never WHICH, on thirty crafts that make thirty different things. ⚠️ T7: what does the GM narrate CHANGING? ⚑ Every rewrite is drawn from that craft's own `description` — nothing invented, and the description was right in all thirty cases. ⛔ THE SPEC ESTIMATED 251 THIN CRAFTS AND THERE WERE 42: measure before authoring."
   },
   {
    "id": "descent_path",
@@ -1702,12 +1704,14 @@
      "class": "cost"
     }
    ],
-   "plainly": "A craft/leadership/magical action that makes or animates something. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 7 days Ranks: rank 2 deepens order; rank 3 adds to special. Limit: it instantiates what a thing Should be — which requires being Right about that.",
+   "plainly": "A craft/fight action that raises a form by seraphic authority, and what stands embodies the order that made it. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 7 days Ranks: rank 2 deepens order; rank 3 adds to special. Limit: it instantiates what a thing Should be — which requires being Right about that.",
    "_nameWas": "The Raised Form",
    "_idWas": "the_raised_form",
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `seraphic` — 'Mercy ADMINISTERED from above.' Administration is machinery — the Seraphim run an apparatus and call it grace.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['craft', 'leadership', 'magical'], e2 below band. ⛔ Erik 2026-08-30: 'run the unmigrated batch' — corpus-wide sweep."
+   "_migrated_20260830": "⚠️ UNMIGRATED-BATCH SWEEP: empty `notFor`, off-vocabulary challengeTypes ['craft', 'leadership', 'magical'], e2 below band. ⛔ Erik 2026-08-30: 'run the unmigrated batch' — corpus-wide sweep.",
+   "_plainlyWas": "A craft/leadership/magical action that makes or animates something. Its strength is rated 5 out of 10 across a scope of 2, and lasts for about 7 days Ranks: rank 2 deepens order; rank 3 adds to special. Limit: it instantiates what a thing Should be — which requires being Right about that.",
+   "_glossFix_20260908": "⛑ TIER 2 OF `SPEC_tradition_narrative_npc_pass` — THE THIN GLOSSES. ⛔ All thirty were CORRECT and USELESS: 'makes or animates something' says THAT the craft makes and never WHICH, on thirty crafts that make thirty different things. ⚠️ T7: what does the GM narrate CHANGING? ⚑ Every rewrite is drawn from that craft's own `description` — nothing invented, and the description was right in all thirty cases. ⛔ THE SPEC ESTIMATED 251 THIN CRAFTS AND THERE WERE 42: measure before authoring."
   },
   {
    "id": "ascent_path",

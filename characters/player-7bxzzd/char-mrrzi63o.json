@@ -65,7 +65,7 @@
   "maxHealth": 51,
   "health": 51,
   "maxEnergy": 113,
-  "energy": 103,
+  "energy": 98,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -165,108 +165,15 @@
   "chronicle": [
     "Maret agreed to speak at the Marchward — the group set north for the Crow and Thistle, Stillhold walls shrinking behind them.",
     "Brynjar, Maret, Ragnar, and Freki walked north from the Stillhold to the Marchward's edge; Maret will speak what she learned from the record-hall by firelight.",
-    "Brynjar departed the fire-pit with Freki and walked north through the spring dark to the waygate stone, turning the night's revelations over on the road."
+    "Brynjar departed the fire-pit with Freki and walked north through the spring dark to the waygate stone, turning the night's revelations over on the road.",
+    "Brynjar walked the night road from Cairnhold back to the Marchward, arriving cold and wet before dawn."
   ],
-  "currentLocationId": "cairnhold",
-  "activeScene": {
-    "locationId": "cairnhold",
-    "turns": [
-      {
-        "player": null,
-        "summary": "Brynjar entered the argument-hall beside the waygate and walked its plaques, agreeing — and could not afterward say why.",
-        "narration": "The waygate is a plain dressed-iron arch, shoulder-width, set into a low cairn-stone plinth at the field's edge. What stands beside it is not plain at all.\n\nSomeone built a hall here — or tried to. The walls are cairn-grey stone, but they do not meet at right angles. Every wall leans slightly inward, as though the building is mid-breath, and the doorways are all one step too narrow, and the ceilings one handspan too low. It is not threatening. It is not wrong. It simply makes you feel, continuously and without drama, that you are being given good reasons. There are no decorations. There are plaques — small ones, flush with the wall, carved in a hand that is too steady to be hurried — and each plaque says something that you find yourself nodding at before you have finished reading it. *The road asks of you. You asked the road first. This is balance.* Another: *A debt is not a punishment — it is a record. Records are neutral.* Another: *Whatever you came here carrying, it was yours before it was heavy.*\n\nYou do not remember walking to the center of the hall. Freki is beside you, head level with your hip, and she is not growling — which is its own information. The hound is still and watching the walls the way she watches a slow river: not alarmed, but attending, cataloguing. The plaques continue on the far wall. *The door behind you is still open.* It is. You checked without meaning to. *The door ahead leads where you have already decided to go.* That one stops you. Because you had decided — the gate, The Crossing, the thread Maret named — and you cannot now find the moment you made that choice. It feels, in here, as though it was always made. The hall has not lied to you. You cannot point to a single plaque that is false. You are simply no longer sure how much of the reasoning was yours.\n\nFreki makes a sound — not a growl, a single low exhale through the nose — and presses her shoulder against your thigh. Outside, the spring dark is the same spring dark. The arch waits. Your pack is on your back and your axe is at your hip and the cold is real and the ground is wet and those things are also true."
-      },
-      {
-        "player": null,
-        "summary": "*✦ Hand-Axe — added to your pack.*\n*✦ Round Shield — added to your pack.*",
-        "narration": "\n\n*✦ Hand-Axe — added to your pack.*\n*✦ Round Shield — added to your pack.*"
-      },
-      {
-        "player": "I'll try to remember where the Crow and The Thistle was located.",
-        "summary": "Brynjar recalls the Crow and Thistle's location without difficulty — a half-morning's walk back to the Marchward.",
-        "narration": "The Crow and Thistle. You know exactly where it is — you only left it two days ago.\n\nIt sits in the Marchward, a half-morning's walk hubward and widdershins from where you stand. You can call up the layout without effort: Doss's bar running the length of the common room, the third stool where the bundle sat, the side door that opens east onto the back lane — north fork to the waygate approach, south fork down to the Stillhold road. The inn is the kind of place that prints itself on you. You don't forget it.\n\nFreki shifts against your leg. Outside, the spring dark is wet and still, and the waygate arch catches what little light there is. The argument-hall holds its lean around you, the plaques flush and patient on the walls."
-      }
-    ],
-    "lastTurn": {
-      "narration": "The Crow and Thistle. You know exactly where it is — you only left it two days ago.\n\nIt sits in the Marchward, a half-morning's walk hubward and widdershins from where you stand. You can call up the layout without effort: Doss's bar running the length of the common room, the third stool where the bundle sat, the side door that opens east onto the back lane — north fork to the waygate approach, south fork down to the Stillhold road. The inn is the kind of place that prints itself on you. You don't forget it.\n\nFreki shifts against your leg. Outside, the spring dark is wet and still, and the waygate arch catches what little light there is. The argument-hall holds its lean around you, the plaques flush and patient on the walls.",
-      "sceneSummary": "Brynjar recalls the Crow and Thistle's location without difficulty — a half-morning's walk back to the Marchward.",
-      "choices": [
-        {
-          "label": "Step through the waygate to The Crossing — cut the travel time entirely",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": "very easy",
-          "trivial": true,
-          "intentTags": [
-            "travel"
-          ]
-        },
-        {
-          "label": "Walk back to the Marchward now — the night is cold but the road is known",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": "easy",
-          "trivial": true,
-          "intentTags": [
-            "travel"
-          ]
-        },
-        {
-          "label": "Read one more plaque before you go — there was one you passed too fast",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": "easy",
-          "trivial": false,
-          "intentTags": [
-            "study"
-          ]
-        }
-      ],
-      "scene": {
-        "setting": "The argument-hall beside Cairnhold's waygate, deep night. Stone walls that lean inward, flush plaque-carvings in a steady hand. The dressed-iron waygate arch is visible through the far door. Cold, wet ground underfoot; spring dark outside both entrances.",
-        "npcsPresent": [
-          {
-            "name": "Freki",
-            "state": "pressed against Brynjar's leg, still and attending"
-          }
-        ],
-        "objects": [
-          "wall plaques — flush-carved, steady hand, each a short declarative sentence",
-          "the waygate arch — dressed iron, the Cairnhold plinth behind it",
-          "Brynjar's traveler's pack and axe"
-        ],
-        "threads": [
-          "The plaque: 'The door ahead leads where you have already decided to go' — Brynjar cannot find the moment he made the choice it names",
-          "Freki's read: still, attending, not afraid — but not fully at ease either",
-          "The Crow and Thistle is a half-morning's walk back to the Marchward"
-        ]
-      }
-    },
-    "sceneState": {
-      "setting": "The argument-hall beside Cairnhold's waygate, deep night. Stone walls that lean inward, flush plaque-carvings in a steady hand. The dressed-iron waygate arch is visible through the far door. Cold, wet ground underfoot; spring dark outside both entrances.",
-      "npcsPresent": [
-        {
-          "name": "Freki",
-          "state": "pressed against Brynjar's leg, still and attending"
-        }
-      ],
-      "objects": [
-        "wall plaques — flush-carved, steady hand, each a short declarative sentence",
-        "the waygate arch — dressed iron, the Cairnhold plinth behind it",
-        "Brynjar's traveler's pack and axe"
-      ],
-      "threads": [
-        "The plaque: 'The door ahead leads where you have already decided to go' — Brynjar cannot find the moment he made the choice it names",
-        "Freki's read: still, attending, not afraid — but not fully at ease either",
-        "The Crow and Thistle is a half-morning's walk back to the Marchward"
-      ]
-    },
-    "beats": 3
-  },
+  "currentLocationId": "the_crossing",
+  "activeScene": null,
   "clock": {
     "schemaVersion": 1,
     "day": 3,
-    "hour": 2,
+    "hour": 7,
     "realAnchor": null
   },
   "companions": [
@@ -680,7 +587,7 @@
       ]
     },
     "the_crossing": {
-      "visits": 2,
+      "visits": 3,
       "notes": [],
       "flags": {},
       "subPlaces": {
@@ -692,7 +599,7 @@
           "note": "Octagonal stone hall, eight waygate thresholds, central chalk-board column. The Wardcaller's station."
         }
       },
-      "lastVisit": 1,
+      "lastVisit": 3,
       "vectorsKnown": []
     },
     "gen-the-colosseum": {
@@ -998,7 +905,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 3,
     "recentOffers": [
       {
         "thing": "Maret's eyes go briefly to Ragnar when she arrives — not suspicion, assessment — and then back to Brynjar, and she says, quietly: 'The…",
@@ -4922,20 +4829,20 @@
     ]
   },
   "tendencies": {
-    "leadership": 4.386900142138526,
-    "cerebral": 8.808128317272187,
-    "strategic": 6.964955850027709,
-    "ruthless": 0.2819881023409168,
-    "social": 10.007291913909498,
-    "cautious": 8.658266010814193,
-    "generous": 1.307355140338239,
-    "patient": 0.572929976008282
+    "leadership": 4.277227638585062,
+    "cerebral": 8.587925109340382,
+    "strategic": 6.790831953777016,
+    "ruthless": 0.27493839978239387,
+    "social": 9.75710961606176,
+    "cautious": 8.441809360543838,
+    "generous": 1.274671261829783,
+    "patient": 0.558606726608075
   },
   "aptitudes": [
     "silver_tongue",
     "banner"
   ],
-  "actionCount": 52,
+  "actionCount": 53,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -6017,8 +5924,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788985934120,
-  "rev": 278,
+  "updatedAt": 1788985983623,
+  "rev": 279,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -6484,7 +6391,7 @@
   "regionsKnown": {
     "riven_marches": 39,
     "the_center": 17,
-    "the_palelands": 2
+    "the_palelands": 3
   },
   "practice": {
     "schemaVersion": 1,
@@ -6586,13 +6493,17 @@
     {
       "id": "sess-6",
       "startedAt": "2026-09-09T20:21:48.688Z",
-      "lastAt": "2026-09-09T20:32:14.116Z",
+      "lastAt": "2026-09-09T20:33:03.622Z",
       "startDay": 71,
       "endDay": 71,
-      "beats": 4
+      "beats": 5
     }
   ],
-  "_pendingArrival": null,
+  "_pendingArrival": {
+    "ref": "The Marchward",
+    "name": "The Marchward",
+    "destId": "the_marchward"
+  },
   "syncedAt": 1788814058493,
   "schools": {
     "marcher": "mar_plain",
@@ -6605,17 +6516,17 @@
     "at": "2026-07-23T01:18:04.353Z"
   },
   "_opEmitted": {
-    "sceneSummary": 49,
-    "choices": 49,
-    "scene": 49,
+    "sceneSummary": 50,
+    "choices": 50,
+    "scene": 50,
     "npcUpdates": 44,
     "placeUpdates": 7,
     "generateRequest": 4,
-    "moveTo": 6,
-    "timeOps": 44,
+    "moveTo": 7,
+    "timeOps": 45,
     "codexUpdates": 40,
-    "sceneEnded": 13,
-    "characterDeltas": 16,
+    "sceneEnded": 14,
+    "characterDeltas": 17,
     "offer": 7,
     "deeds": 1,
     "standingOps": 1,
@@ -6623,7 +6534,7 @@
     "stageOps": 2,
     "factUpdates": 2
   },
-  "_opTurns": 49,
+  "_opTurns": 50,
   "_opLedger": {
     "offer": {
       "applied": 8,
@@ -6740,7 +6651,7 @@
     "guard": 1,
     "sustain": 1,
     "study": 7,
-    "travel": 7,
+    "travel": 8,
     "ask": 1,
     "lead": 1,
     "scout": 3,

@@ -45,50 +45,80 @@ the world.**
 
 ---
 
-## §3 — ⬜ PROPOSED: WHICH SCALES LICENSE WHICH RUNGS
+## §3 — ✅ WHICH SCALES LICENSE WHICH RUNGS — ERIK'S VERSION
 
 ⛑ **A scale is a CEILING on what its stage can license, not a grant.**
 
 | arc scale | may license up to | ⚑ because |
 |---|---|---|
-| **local** | ⚑ **regional** | ⚠️ a town's trouble makes a person locally important. **It does not make them known three regions away** |
-| **regional** | ⚑ **heroic** | ⛔ the Green Schism can make a Thornwake advocate heroic. **It cannot make them legendary** |
-| **world** | ⚑ **epic**, and **legendary at stage 3+** | ⚠️ **the Poles Pull at Fracture is enough to have produced a legend, and at Drift it is not** |
-| ⛔ **cosmic** | ⛔ **mythic, and only at stage 3+** | ⚑ **The Disagreement's stage 3 is *"somebody is asked to answer for what the seeded have made of themselves"* — that is a Sovereign's occasion and nothing smaller is** |
+| ⚑ **personal** | **notable** | ⚠️ **`personalArc.js` already gives every character one at birth.** Your own story makes you someone in a room, not in a region |
+| **local** | ⚑ **regional** | a town's trouble makes you locally important. ⛔ **It does not make you known three regions away** |
+| **regional** | ⚑ **heroic** | the Green Schism can make a Thornwake advocate heroic. ⛔ It cannot make them legendary |
+| **world** | ⚑ **epic**, and **legendary at the extremes** | ⚠️ the Poles Pull at Drift or at the Snap; not at Strain |
+| ⛔ **cosmic** | ⛔ **mythic, at the extremes** | ⚑ **The Disagreement, and nothing smaller** |
 
-⚠️ **AND THE STAGE GATE IS ALREADY R41's.** ⛑ **CCode: *"the signal is a greater arc's stage, and it is the
-same threshold R41 already uses for a Sovereign's arrival"*** — ⛔ **so *"the story is building toward a big
-force"* and *"a Sovereign is close enough to arrive"* stop being two opinions and become ONE MEASUREMENT.**
+### ⛔ AND THE GATE IS DISTANCE FROM THE MIDDLE, NOT STAGE NUMBER
 
-⚑ **AND ERIK'S SAVE ALREADY CLEARS IT ONCE:** the Second Manifestation is **4/4 advancing** and the Bleeding
-Grammar is **2/3**. ⚠️ **The gate is not shut. It is open on a world arc right now**, which means the rule
-ships live rather than theoretical.
+> **Erik: *"Don't limit the mythic to stage 3+ — remember BOTH EXTREMES of a stage put on pressure to one
+> side or the other."***
 
----
+⛑ **HE IS RIGHT AND IT IS R41b ARRIVING HERE UNDER ITS OWN POWER.** ⚠️ **R41b already ruled that arc position
+drives both sides INVERSELY: *"if the Sovereign is fat and happy it's business as usual for them and their
+agents… the opposite is true for the anti-Sovereigns."***
 
-## §4 — ⬜ AND THE MISSING LOCAL ARCS ARE MINE TO AUTHOR
+⛔ **SO STAGE 1 IS NOT QUIET. IT IS ONE SIDE WINNING.** ⚑ **The Disagreement at *"The Pause Holds"* is a
+cosmos in which Akinetos's silence is TOTAL — and a mythic agent of that silence is exactly as licensed
+there as a Sovereign is at Resumption.** ⚠️ **What is NOT licensed is the middle**, where nobody has won
+anything yet.
 
-⛔ **Zero local arcs is the real gap, and it is content.** ⚑ **The corpus is full of trouble that is already
-local and has no arc to sit in:**
-
-| ⬜ candidate | already authored |
+| stage of 4 | licenses |
 |---|---|
-| ⚑ **the valley's water** | ⚠️ *"the Valley's poisoned water is the nearest and least of them"* — **it is currently a FOOTNOTE ON A WORLD ARC and it is the player's home** |
-| **Saehara's ladder** | ⛔ six challengers, an escalation, a Ganryūjima beat. **That is a local arc with no arc record** |
-| ⚑ **the two courts in the Churn** | the Hollow Court trades and the Unbought Court refuses — ⚠️ **and nothing measures who is winning** |
-| **the Sunk Assay** | four floors and a project that persists — ⛔ **it already has stages** |
+| **1** | ⚑ **yes — one side is winning** |
+| **2** | ⛔ **no** |
+| **3** | ⛔ **no** |
+| **4** | ⚑ **yes — the other side is** |
 
-⬜ **Aevi will author these as `scale: "local"` arcs with a `regions` field** — ⚠️ **which also closes the
-*"no arc names a region"* gap, because a local arc that does not name its place is not local.**
+⚑ **AND IT MAKES THE MIDDLE MEAN SOMETHING MECHANICALLY: the contested middle is where the world stops
+producing giants, which is exactly when the players are the largest thing in it.**
 
----
+## §4 — ⛔ AND THE VALLEY SHOULD STOP BEING THE CENTRE OF EVERYTHING
 
-## §5 — ⬜ FOR ERIK
+> **Erik: *"I don't want the Valley and the water crisis to be as central to everything as it has been. So
+> LOCAL AND PERSONAL ARCS ARE A LOT OF WHAT A PLAYER DOES, until they get tangled in regional and world
+> arcs."***
 
-1. ⛔ **Ratify the scale→rung table**, or move a row. ⚑ **The one Aevi is least sure of: should a WORLD arc
-   at stage 4 license mythic?** ⚠️ **Aevi says no — mythic is the cosmic argument's own rung** — ⛔ **but The
-   Second Manifestation at 4/4 is arguably the world remaking itself, and that is close.**
-2. ⬜ **Does a LOCAL arc need a region, or a location?** ⚑ **Aevi: a region minimum, a location where the
-   fiction has one.** The water is the valley; the Assay is one place.
-3. ⚠️ **How many local arcs?** ⛔ **Aevi's read: FOUR to start, one per major play area** — ⚑ enough that a
-   player somewhere is always inside one, ⚠️ **few enough that a local arc still means something.**
+⛑ **AND AEVI'S FIRST DRAFT MADE EXACTLY THAT MISTAKE:** she proposed *"the valley's water"* as the flagship
+local arc. ⛔ **That is the same footnote promoted, not decentred** — ⚠️ **and it would have made the valley
+MORE central by giving its crisis an arc of its own.**
+
+### ⚑ WHAT A LOCAL ARC IS, PER ERIK: *"local politics and trade wars, gangs, disciplines, schools"*
+
+⛔ **NONE OF THOSE IS A CATASTROPHE, AND THAT IS THE POINT.** ⚠️ **A local arc is a thing people are
+ARGUING ABOUT** — and the corpus is already full of them with no arc to sit in:
+
+| ⬜ candidate | already authored, nowhere to live |
+|---|---|
+| ⚑ **a SCHOOL feud** | **Saehara's ladder — six challengers, an escalation, a Ganryūjima beat.** ⛔ The Still-Water School defending its lineage against a masterless ronin IS a local arc |
+| ⚑ **a TRADE war** | ⚠️ **the Crossing is *"the clearing house"* and `economy.regions` prices twenty-five regions** — nothing contests a route |
+| ⚑ **a GANG** | ⛔ *"the trickster you brushed past in a market may be a gang leader when you meet again"* — **authored as a possibility and never as a party** |
+| ⚑ **POLITICS** | Stair Hollow is *"courts, registries and oath-halls; judgement you can appeal to"* — ⚠️ **a town whose entire trade is disputes, and no dispute** |
+| ⚑ **a DISCIPLINE** | ⛔ the two Churn courts: one trades, one refuses, **and nothing measures who is winning** |
+| **the Sunk Assay** | four floors and a project that persists — ⛑ **it already has stages** |
+
+⬜ **Aevi authors these as `scale: "local"` with a `regions` field** — ⚠️ **and a local arc that does not name
+its place is not local, which closes CCode's *"no arc names a region"* gap as a side effect.**
+
+⛔ **AND DELIBERATELY NOT THE WATER.** ⚑ **It stays a line on a world arc, where it already is: *"the
+Valley's poisoned water is the nearest and least of them."*** ⚠️ **That sentence is the right relationship
+and it was already written.**
+
+## §5 — ⬜ WHAT REMAINS FOR ERIK
+
+1. ⚠️ **How many local arcs, and where?** ⛔ **Aevi's read: SIX, spread deliberately AWAY from the valley** —
+   ⚑ one in the Churn, one at the Crossing, one at Stair Hollow, one on Saehara's road, one in a foothill
+   town, and the Assay. ⬜ **The valley gets none, on purpose.**
+2. ⛔ **Does `personal` licensing `notable` feel right?** ⚑ **A character's own arc making them a notable
+   is small** — ⚠️ **but a personal arc is one person's story, and the alternative is that it licenses
+   nothing, which would make `personalArc.js` inert for this purpose.**
+3. ⬜ **`scale` is UNSET on all six greater arcs in the file** — ⚠️ the values come from elsewhere.
+   ⛑ **CCode's, and it is one field.**

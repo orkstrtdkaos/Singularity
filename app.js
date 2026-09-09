@@ -12523,12 +12523,24 @@ async function enrichPersonalArc(char) {
 // every render — the Library is the player's book, never the GM's. Distinct from the discovered
 // Codex (what THIS character has actually found), which keeps its discovery gate.
 
+// SNG-061 (2026-09-08): the Library had never been updated as the world grew — it opened on the Twelve
+// Reaches and the valley primer while EXESA.md, the eight vocations, the archetype pass and the player's
+// guide were all authored and unreachable from inside the game. The world doc is FIRST because a reader
+// who opens the Library wants to know WHERE THEY ARE before being told what they can be.
 const LIBRARY_INDEX = [
+  { cat: "The World", entries: [
+    { id: "exesa", label: "Exesa \u2014 the world, entire", path: "docs/EXESA.md", kind: "md" },
+    { id: "guide", label: "A Player's Guide", path: "docs/PLAYERS_GUIDE.md", kind: "md" },
+  ] },
+  { cat: "What You Can Be", entries: [
+    { id: "vocations", label: "The Eight Vocations", path: "docs/VOCATIONS.md", kind: "md" },
+    { id: "archetypes", label: "Archetypes, domain by domain", path: "docs/ARCHETYPES.md", kind: "md" },
+  ] },
   { cat: "Peoples & Traditions", entries: [
     { id: "great_circle", label: "The Great Circle", kind: "circle" },
     { id: "reaches", label: "The Twelve Reaches", path: "content/packs/valley/lore/the_twelve_reaches.json", kind: "json" },
   ] },
-  { cat: "The World", entries: [
+  { cat: "Cosmology", entries: [
     { id: "framing", label: "The Shape of the World", path: "content/packs/valley/lore/world_framing.json", kind: "json" },
     { id: "coordinate", label: "The Coordinate World & the Center", path: "content/packs/valley/lore/the_coordinate_world.json", kind: "json" },
     { id: "poles", label: "Pole & Intensity", path: "content/packs/valley/lore/the_pole_intensity_model.json", kind: "json" },

@@ -61,9 +61,31 @@ nobody has ever printed.**
 | ⛔ **the starved list** | ⚑ **any tradition with no region inside its band is a tradition nobody can play well anywhere** |
 | ⚠️ **and the FOOTHILLS** | they teach across lineage — ⬜ **their density decides what is worth learning there** |
 
-⛑ **AEVI'S SUSPICION, TO BE CONFIRMED OR KILLED BY THE ATLAS:** ⛔ **metaphysical (0.15) and veil (0.10)
-peak in THIN ground, and the authored densities skew HIGH** — ⚠️ **if most regions sit above 0.5, then two
-of six sources are starved almost everywhere and nobody has noticed** because no one has printed the table.
+### ⛑ AND AEVI RAN THE TABLE BEFORE HANDING THIS OVER. THE ANSWER IS HALF WHAT SHE EXPECTED.
+
+**39 regions, median density 0.55, range 0.12–0.98.**
+
+| source | band | regions INSIDE it |
+|---|---|---|
+| **wild** | 0.12–0.52 | ⚑ **17 of 39 — 44%** |
+| **precursor** | 0.70–1.10 | 14 — 36% |
+| **nanite** | 0.70–1.10 | 14 — 36% |
+| ⚠️ **metaphysical** | −0.07–0.37 | ⛔ **7 — 18%** |
+| ⛔ **veil** | −0.10–0.30 | ⛔ **5 of 39 — 13%** |
+| **body** | *floor, no band* | ⚑ **never starves anywhere** |
+
+⛔ **THE SUSPICION WAS RIGHT ABOUT VEIL AND WRONG ABOUT THE CAUSE.** ⚠️ **The densities do not skew high —
+the median is 0.55, dead centre.** ⛑ **The problem is that veil's band is only 0.40 WIDE and sits at the
+very bottom**, so it needs one of five regions in the world to be worth casting in.
+
+⚑ **AND THAT MAY BE ENTIRELY CORRECT.** ⛔ **The Veil is the pure absence and `the_substrate` says veil
+craft *"draws on the LACK of a thing rather than the thing"*** — ⚠️ **a source that only works in the
+world's five thinnest places is a strong piece of design, not a bug.**
+
+⬜ **BUT IT IS A DESIGN DECISION NOBODY HAS EVER SEEN THE NUMBERS FOR, AND IT SHOULD BE ERIK'S.** ⚑ **The
+atlas exists to put this table in front of him** — ⛔ **precursor and nanite share an identical band and
+therefore an identical map, which is either the two-pairs cosmology working exactly as authored, or two
+sources doing one source's job.**
 
 ---
 

@@ -141,7 +141,7 @@
      "class": "cost"
     }
    ],
-   "plainly": "A puzzle action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 3, and lasts for about 8 hours Ranks: rank 2 extends scope; rank 3 extends scope. Limit: understanding Function IS Not Understanding Why IT Was Made.",
+   "plainly": "A puzzle/craft action that reads any mechanism's design on study and builds reliable machinery. Its strength is rated 6 out of 10 across a scope of 3, and lasts for about 8 hours Ranks: rank 2 extends scope; rank 3 extends scope. Limit: understanding Function IS Not Understanding Why IT Was Made.",
    "_descriptionWas": "The mechanical-pole mastery: design, run, and command machine-systems, Precursor works included, at the Enginewrights' depth.",
    "_functionsWas": [
     "command",
@@ -151,7 +151,9 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_powerSystemWas": "reach_mechanical_spiritual",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `enginewright` — ⛔ STRUCTURED NANITE AT ITS PRIME. Aesthetic line updated per Erik — was 'the Precursor arts at their most literal', which contradicted this allocation\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `enginewright` — ⛔ STRUCTURED NANITE AT ITS PRIME. Aesthetic line updated per Erik — was 'the Precursor arts at their most literal', which contradicted this allocation\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_plainlyWas": "A puzzle action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 3, and lasts for about 8 hours Ranks: rank 2 extends scope; rank 3 extends scope. Limit: understanding Function IS Not Understanding Why IT Was Made.",
+   "_glossFix_20260908": "⛑ TIER 2 OF `SPEC_tradition_narrative_npc_pass` — THE THIN GLOSSES. ⛔ All thirty were CORRECT and USELESS: 'makes or animates something' says THAT the craft makes and never WHICH, on thirty crafts that make thirty different things. ⚠️ T7: what does the GM narrate CHANGING? ⚑ Every rewrite is drawn from that craft's own `description` — nothing invented, and the description was right in all thirty cases. ⛔ THE SPEC ESTIMATED 251 THIN CRAFTS AND THERE WERE 42: measure before authoring."
   },
   {
    "id": "numenwork",
@@ -828,7 +830,7 @@
      "class": "hard"
     }
    ],
-   "plainly": "A puzzle/explore/survive action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 2, and lasts for about 2 hours Ranks: rank 2 extends duration; rank 3 adds to special. Limit: you Hold The Opening, Never What Comes Through IT.",
+   "plainly": "An action that briefly makes a symbol REAL where significance runs dense — a threshold, a name, a mark that now does something. Its strength is rated 6 out of 10 across a scope of 2, and lasts for about 2 hours Ranks: rank 2 extends duration; rank 3 adds to special. Limit: you Hold The Opening, Never What Comes Through IT.",
    "_functionsWas": [
     "make",
     "open",
@@ -839,7 +841,9 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_powerSystemWas": "reach_mechanical_spiritual",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `numinous` — Meaning without matter. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `numinous` — Meaning without matter. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_plainlyWas": "A puzzle/explore/survive action that makes or animates something. Its strength is rated 6 out of 10 across a scope of 2, and lasts for about 2 hours Ranks: rank 2 extends duration; rank 3 adds to special. Limit: you Hold The Opening, Never What Comes Through IT.",
+   "_glossFix_20260908": "⛑ TIER 2 OF `SPEC_tradition_narrative_npc_pass` — THE THIN GLOSSES. ⛔ All thirty were CORRECT and USELESS: 'makes or animates something' says THAT the craft makes and never WHICH, on thirty crafts that make thirty different things. ⚠️ T7: what does the GM narrate CHANGING? ⚑ Every rewrite is drawn from that craft's own `description` — nothing invented, and the description was right in all thirty cases. ⛔ THE SPEC ESTIMATED 251 THIN CRAFTS AND THERE WERE 42: measure before authoring."
   },
   {
    "id": "meaning_engine",
@@ -2064,12 +2068,14 @@
      "class": "cost"
     }
    ],
-   "plainly": "A create action that makes or animates something. Its strength is rated 7 out of 10 across a scope of 3, and lasts for about 30 days Ranks: rank 2 adds to special. Limit: iT Cannot Mend The Living, Only The Made.",
+   "plainly": "A craft action that builds repair into the thing itself, so it fixes what goes wrong without you. Its strength is rated 7 out of 10 across a scope of 3, and lasts for about 30 days Ranks: rank 2 adds to special. Limit: iT Cannot Mend The Living, Only The Made.",
    "_descriptionWas": "The Enginewright art of the work that mends itself — a mechanism, a structure, a system built with its own healing folded in, so it survives its maker. To build this well is to build something that no longer needs you.",
    "_nameWas": "The Self-Mending Work",
    "_idWas": "the_self_mending_work",
    "_powerSystemWas": "reach_mechanical_spiritual",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `enginewright` — ⛔ STRUCTURED NANITE AT ITS PRIME. Aesthetic line updated per Erik — was 'the Precursor arts at their most literal', which contradicted this allocation\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `enginewright` — ⛔ STRUCTURED NANITE AT ITS PRIME. Aesthetic line updated per Erik — was 'the Precursor arts at their most literal', which contradicted this allocation\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_plainlyWas": "A create action that makes or animates something. Its strength is rated 7 out of 10 across a scope of 3, and lasts for about 30 days Ranks: rank 2 adds to special. Limit: iT Cannot Mend The Living, Only The Made.",
+   "_glossFix_20260908": "⛑ TIER 2 OF `SPEC_tradition_narrative_npc_pass` — THE THIN GLOSSES. ⛔ All thirty were CORRECT and USELESS: 'makes or animates something' says THAT the craft makes and never WHICH, on thirty crafts that make thirty different things. ⚠️ T7: what does the GM narrate CHANGING? ⚑ Every rewrite is drawn from that craft's own `description` — nothing invented, and the description was right in all thirty cases. ⛔ THE SPEC ESTIMATED 251 THIN CRAFTS AND THERE WERE 42: measure before authoring."
   },
   {
    "schemaVersion": 1,
@@ -2145,11 +2151,13 @@
      "class": "cost"
     }
    ],
-   "plainly": "A create action that makes or animates something. Its strength is rated 9 out of 10 across a scope of 5, and lasts for about 12 months Limit: iT Demands Real Time And Nearly All You Have.",
+   "plainly": "A craft/puzzle action that raises a great work of the deep kind — a mechanism at the scale of a place. Its strength is rated 9 out of 10 across a scope of 5, and lasts for about 12 months Limit: iT Demands Real Time And Nearly All You Have.",
    "_nameWas": "The Deep Works",
    "_idWas": "the_deep_works",
    "_powerSystemWas": "reach_mechanical_spiritual",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `enginewright` — ⛔ STRUCTURED NANITE AT ITS PRIME. Aesthetic line updated per Erik — was 'the Precursor arts at their most literal', which contradicted this allocation\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_mechanical_spiritual` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `enginewright` — ⛔ STRUCTURED NANITE AT ITS PRIME. Aesthetic line updated per Erik — was 'the Precursor arts at their most literal', which contradicted this allocation\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_plainlyWas": "A create action that makes or animates something. Its strength is rated 9 out of 10 across a scope of 5, and lasts for about 12 months Limit: iT Demands Real Time And Nearly All You Have.",
+   "_glossFix_20260908": "⛑ TIER 2 OF `SPEC_tradition_narrative_npc_pass` — THE THIN GLOSSES. ⛔ All thirty were CORRECT and USELESS: 'makes or animates something' says THAT the craft makes and never WHICH, on thirty crafts that make thirty different things. ⚠️ T7: what does the GM narrate CHANGING? ⚑ Every rewrite is drawn from that craft's own `description` — nothing invented, and the description was right in all thirty cases. ⛔ THE SPEC ESTIMATED 251 THIN CRAFTS AND THERE WERE 42: measure before authoring."
   },
   {
    "schemaVersion": 1,

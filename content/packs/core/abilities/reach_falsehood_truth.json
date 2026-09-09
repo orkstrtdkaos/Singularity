@@ -150,7 +150,7 @@
      "class": "cost"
     }
    ],
-   "plainly": "A stealth/social/investigate action that makes or animates something. Its strength is rated 4 out of 10 across a scope of 2, and lasts for about 6 hours Ranks: rank 2 deepens conviction; rank 3 extends scope. Limit: illusion IS Not Substance — tested hard, it fails.",
+   "plainly": "A stealth/social/investigate action that hides a thing behind something believable — and lets you spot the joinery in someone else's version. Its strength is rated 4 out of 10 across a scope of 2, and lasts for about 6 hours Ranks: rank 2 deepens conviction; rank 3 extends scope. Limit: illusion IS Not Substance — tested hard, it fails.",
    "_sng360": "SNG-360: `break` is canon-defined as 'Harm or DESTROY a THING'. These carried it while sitting at harmRung 'none' on every rank — they cannot hurt anything, so they were registering as HARM coverage in recommendSkills/functionCoverage and telling a weaponless character they were covered. Retagged to their true family. The reveal-glut in reverse: `break` had become the catch-all for 'undo'.",
    "_descriptionWas": "The falsehood-pole mastery: illusion, disguise, the constructed untruth — and, by knowing how lies are built, the sharpest detector of them. The Veilwrights' art.",
    "_functionsWas": [
@@ -161,7 +161,9 @@
    ],
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_powerSystemWas": "reach_falsehood_truth",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_plainlyWas": "A stealth/social/investigate action that makes or animates something. Its strength is rated 4 out of 10 across a scope of 2, and lasts for about 6 hours Ranks: rank 2 deepens conviction; rank 3 extends scope. Limit: illusion IS Not Substance — tested hard, it fails.",
+   "_glossFix_20260908": "⛔ TIER 1 OF `SPEC_tradition_narrative_npc_pass` — A WRONG GLOSS IS A CORRECTNESS BUG, NOT POLISH. ⚠️ MEASURED 2026-09-08: 42 crafts carry a stock gloss and TWELVE named a verb family the craft does not have — and ALL TWELVE SAID THE SAME SENTENCE, 'makes or animates something'. ⛑ ONE STALE DEFAULT, not twelve errors: a concealment craft, a bargain, a truce and an hour held open were all being described to the GM as though they built something. ⚑ THE DESCRIPTION WAS RIGHT IN EVERY CASE. The gloss is the only thing that was wrong, and the fix is to say what the GM NARRATES CHANGING — T7: 'a dice roll is not an answer.' ⬜ The spec's estimate was ~48; the real number is 12, because the corpus has been repaired since 08-31. ⚠️ MEASURE BEFORE AUTHORING — an eight-day-old count is a claim about eight days ago."
   },
   {
    "id": "verity",
@@ -2043,11 +2045,13 @@
      "class": "hard"
     }
    ],
-   "plainly": "A social/investigate action that makes or animates something. Its strength is rated 9 out of 10 across a scope of 4, and lasts for about a day Limit: iT Fails Against Determined Truth.",
+   "plainly": "A social/investigate action that installs a fiction so completely that people ACT on it, and the acting is what makes it true for a while. Its strength is rated 9 out of 10 across a scope of 4, and lasts for about a day Limit: iT Fails Against Determined Truth.",
    "_nameWas": "The Necessary Fiction",
    "_idWas": "the_useful_lie",
    "_powerSystemWas": "reach_falsehood_truth",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_falsehood_truth` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `veilwright` — ⚠️ Veil folded INTO metaphysical per Erik's grouping (Veil/Psychic/Ki). Resolves 'veil primary for nobody'.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_plainlyWas": "A social/investigate action that makes or animates something. Its strength is rated 9 out of 10 across a scope of 4, and lasts for about a day Limit: iT Fails Against Determined Truth.",
+   "_glossFix_20260908": "⛔ TIER 1 OF `SPEC_tradition_narrative_npc_pass` — A WRONG GLOSS IS A CORRECTNESS BUG, NOT POLISH. ⚠️ MEASURED 2026-09-08: 42 crafts carry a stock gloss and TWELVE named a verb family the craft does not have — and ALL TWELVE SAID THE SAME SENTENCE, 'makes or animates something'. ⛑ ONE STALE DEFAULT, not twelve errors: a concealment craft, a bargain, a truce and an hour held open were all being described to the GM as though they built something. ⚑ THE DESCRIPTION WAS RIGHT IN EVERY CASE. The gloss is the only thing that was wrong, and the fix is to say what the GM NARRATES CHANGING — T7: 'a dice roll is not an answer.' ⬜ The spec's estimate was ~48; the real number is 12, because the corpus has been repaired since 08-31. ⚠️ MEASURE BEFORE AUTHORING — an eight-day-old count is a claim about eight days ago."
   },
   {
    "schemaVersion": 1,

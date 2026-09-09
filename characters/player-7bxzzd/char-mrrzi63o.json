@@ -91,6 +91,40 @@
       },
       "consumable": true,
       "pinned": true
+    },
+    {
+      "id": null,
+      "name": "Hand-Axe",
+      "kind": "misc",
+      "qty": 1,
+      "description": "A well-used hand-axe — taken from the longhouse as Brynjar fled Javiksholm. Balance is right for throwing or close work. The steel is good northern make, the haft worn smooth where his hand sits.",
+      "consumable": false,
+      "_contract": {
+        "verdict": "reject",
+        "missing": [
+          "id"
+        ],
+        "vague": [
+          "effect-resolvable"
+        ]
+      }
+    },
+    {
+      "id": null,
+      "name": "Round Shield",
+      "kind": "misc",
+      "qty": 1,
+      "description": "A round traveler's shield, hide-faced over linden wood, iron boss at the center. Carried since Javiksholm. The edge is road-scarred but the grip is tight and the boss has stopped more than one blow.",
+      "consumable": false,
+      "_contract": {
+        "verdict": "reject",
+        "missing": [
+          "id"
+        ],
+        "vague": [
+          "effect-resolvable"
+        ]
+      }
     }
   ],
   "deeds": [
@@ -139,99 +173,30 @@
         "player": null,
         "summary": "Brynjar entered the argument-hall beside the waygate and walked its plaques, agreeing — and could not afterward say why.",
         "narration": "The waygate is a plain dressed-iron arch, shoulder-width, set into a low cairn-stone plinth at the field's edge. What stands beside it is not plain at all.\n\nSomeone built a hall here — or tried to. The walls are cairn-grey stone, but they do not meet at right angles. Every wall leans slightly inward, as though the building is mid-breath, and the doorways are all one step too narrow, and the ceilings one handspan too low. It is not threatening. It is not wrong. It simply makes you feel, continuously and without drama, that you are being given good reasons. There are no decorations. There are plaques — small ones, flush with the wall, carved in a hand that is too steady to be hurried — and each plaque says something that you find yourself nodding at before you have finished reading it. *The road asks of you. You asked the road first. This is balance.* Another: *A debt is not a punishment — it is a record. Records are neutral.* Another: *Whatever you came here carrying, it was yours before it was heavy.*\n\nYou do not remember walking to the center of the hall. Freki is beside you, head level with your hip, and she is not growling — which is its own information. The hound is still and watching the walls the way she watches a slow river: not alarmed, but attending, cataloguing. The plaques continue on the far wall. *The door behind you is still open.* It is. You checked without meaning to. *The door ahead leads where you have already decided to go.* That one stops you. Because you had decided — the gate, The Crossing, the thread Maret named — and you cannot now find the moment you made that choice. It feels, in here, as though it was always made. The hall has not lied to you. You cannot point to a single plaque that is false. You are simply no longer sure how much of the reasoning was yours.\n\nFreki makes a sound — not a growl, a single low exhale through the nose — and presses her shoulder against your thigh. Outside, the spring dark is the same spring dark. The arch waits. Your pack is on your back and your axe is at your hip and the cold is real and the ground is wet and those things are also true."
+      },
+      {
+        "player": null,
+        "summary": "*✦ Hand-Axe — added to your pack.*\n*✦ Round Shield — added to your pack.*",
+        "narration": "\n\n*✦ Hand-Axe — added to your pack.*\n*✦ Round Shield — added to your pack.*"
       }
     ],
     "lastTurn": {
-      "narration": "The waygate is a plain dressed-iron arch, shoulder-width, set into a low cairn-stone plinth at the field's edge. What stands beside it is not plain at all.\n\nSomeone built a hall here — or tried to. The walls are cairn-grey stone, but they do not meet at right angles. Every wall leans slightly inward, as though the building is mid-breath, and the doorways are all one step too narrow, and the ceilings one handspan too low. It is not threatening. It is not wrong. It simply makes you feel, continuously and without drama, that you are being given good reasons. There are no decorations. There are plaques — small ones, flush with the wall, carved in a hand that is too steady to be hurried — and each plaque says something that you find yourself nodding at before you have finished reading it. *The road asks of you. You asked the road first. This is balance.* Another: *A debt is not a punishment — it is a record. Records are neutral.* Another: *Whatever you came here carrying, it was yours before it was heavy.*\n\nYou do not remember walking to the center of the hall. Freki is beside you, head level with your hip, and she is not growling — which is its own information. The hound is still and watching the walls the way she watches a slow river: not alarmed, but attending, cataloguing. The plaques continue on the far wall. *The door behind you is still open.* It is. You checked without meaning to. *The door ahead leads where you have already decided to go.* That one stops you. Because you had decided — the gate, The Crossing, the thread Maret named — and you cannot now find the moment you made that choice. It feels, in here, as though it was always made. The hall has not lied to you. You cannot point to a single plaque that is false. You are simply no longer sure how much of the reasoning was yours.\n\nFreki makes a sound — not a growl, a single low exhale through the nose — and presses her shoulder against your thigh. Outside, the spring dark is the same spring dark. The arch waits. Your pack is on your back and your axe is at your hip and the cold is real and the ground is wet and those things are also true.",
-      "sceneSummary": "Brynjar entered the argument-hall beside the waygate and walked its plaques, agreeing — and could not afterward say why.",
-      "choices": [
-        {
-          "label": "Step through the waygate to The Crossing — the hall has already made the argument; let the choice be yours to close",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": "very easy",
-          "intentTags": [
-            "travel"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Read the plaque that stopped you — 'The door ahead leads where you have already decided to go' — and resist agreeing with it, out loud, in the dark",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": "normal",
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Use Order-Sense on the hall itself — read the system of it, find its load-bearing point, the one argument the whole structure rests on",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": "easy",
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 3,
-          "trivial": false
-        }
-      ],
-      "scene": {
-        "setting": "The argument-hall beside Cairnhold's waygate, deep night. Stone walls that lean inward. A plaque-lined interior, flush carvings in steady hands. The dressed-iron waygate arch is visible through the far door. Cold, wet ground underfoot; spring dark outside both entrances.",
-        "npcsPresent": [
+      "characterDeltas": {
+        "inventoryAdd": [
           {
-            "name": "Freki",
-            "state": "shoulder pressed against Brynjar's thigh, watching the walls, one low exhale — not alarmed"
+            "name": "Hand-Axe",
+            "type": "weapon",
+            "description": "A well-used hand-axe — taken from the longhouse as Brynjar fled Javiksholm. Balance is right for throwing or close work. The steel is good northern make, the haft worn smooth where his hand sits."
+          },
+          {
+            "name": "Round Shield",
+            "type": "armour",
+            "description": "A round traveler's shield, hide-faced over linden wood, iron boss at the center. Carried since Javiksholm. The edge is road-scarred but the grip is tight and the boss has stopped more than one blow."
           }
-        ],
-        "objects": [
-          "wall plaques — flush-carved, steady hand, each a short declarative sentence",
-          "the waygate arch — dressed iron, the Cairnhold plinth behind it",
-          "Brynjar's traveler's pack and axe"
-        ],
-        "threads": [
-          "The plaque: 'The door ahead leads where you have already decided to go' — Brynjar cannot find the moment he made the choice it names",
-          "Freki's read: still, attending, not afraid — but not fully at ease either"
         ]
       },
-      "codexUpdates": [
-        {
-          "topic": "cairnhold",
-          "label": "Cairnhold",
-          "kind": "place",
-          "fact": "An argument-hall stands beside the waygate — stone walls that lean inward, wall-plaques in a steady hand, each a short true sentence that steers without lying. Walking it, you found yourself agreeing and could not afterward reconstruct why.",
-          "links": [
-            "gen-the-waygate",
-            "brynjar-andyrsson-thread"
-          ]
-        }
-      ],
-      "placeUpdates": [
-        {
-          "subPlace": {
-            "name": "The Argument-Hall",
-            "parent": "cairnhold",
-            "note": "A stone hall beside the waygate — inward-leaning walls, flush-carved plaques in a steady hand, each a short true sentence. Entering it, you find yourself agreeing before you have finished reading. Freki was still but watchful.",
-            "visited": true
-          }
-        }
-      ],
-      "offer": {
-        "thing": "The hall's final plaque — on the back of the door you came in through, visible only once you are already inside: 'You will not remember choosing this. You will remember choosing well.'",
-        "from": "What this place is — Cairnhold is a city built for endings and the Ashwardens tend those endings as craft; a hall that makes a last argument before the gate is entirely in their character"
-      },
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A short walk through the hall and its plaques — a few minutes, no more"
-      },
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "xp": 0
-      }
+      "narration": "\n\n*✦ Hand-Axe — added to your pack.*\n*✦ Round Shield — added to your pack.*",
+      "sceneSummary": "*✦ Hand-Axe — added to your pack.*\n*✦ Round Shield — added to your pack.*"
     },
     "sceneState": {
       "setting": "The argument-hall beside Cairnhold's waygate, deep night. Stone walls that lean inward. A plaque-lined interior, flush carvings in steady hands. The dressed-iron waygate arch is visible through the far door. Cold, wet ground underfoot; spring dark outside both entrances.",
@@ -251,12 +216,12 @@
         "Freki's read: still, attending, not afraid — but not fully at ease either"
       ]
     },
-    "beats": 1
+    "beats": 2
   },
   "clock": {
     "schemaVersion": 1,
     "day": 3,
-    "hour": 0,
+    "hour": 1,
     "realAnchor": null
   },
   "companions": [
@@ -922,7 +887,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-09-09T20:21:59.047Z",
+    "lastSharedReadAt": "2026-09-09T20:23:35.792Z",
     "lastTickWorldDay": 71,
     "lastCanonWorldDay": 71,
     "lastGenCount": 1724,
@@ -988,7 +953,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Maret's eyes go briefly to Ragnar when she arrives — not suspicion, assessment — and then back to Brynjar, and she says, quietly: 'The…",
@@ -6015,8 +5980,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788985356682,
-  "rev": 264,
+  "updatedAt": 1788985463406,
+  "rev": 268,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -6584,10 +6549,10 @@
     {
       "id": "sess-6",
       "startedAt": "2026-09-09T20:21:48.688Z",
-      "lastAt": "2026-09-09T20:22:36.681Z",
+      "lastAt": "2026-09-09T20:24:23.396Z",
       "startDay": 71,
       "endDay": 71,
-      "beats": 2
+      "beats": 3
     }
   ],
   "_pendingArrival": null,
@@ -6603,25 +6568,25 @@
     "at": "2026-07-23T01:18:04.353Z"
   },
   "_opEmitted": {
-    "sceneSummary": 49,
-    "choices": 49,
-    "scene": 49,
+    "sceneSummary": 48,
+    "choices": 48,
+    "scene": 48,
     "npcUpdates": 44,
-    "placeUpdates": 8,
+    "placeUpdates": 7,
     "generateRequest": 4,
     "moveTo": 6,
-    "timeOps": 45,
-    "codexUpdates": 41,
+    "timeOps": 44,
+    "codexUpdates": 40,
     "sceneEnded": 13,
-    "characterDeltas": 17,
-    "offer": 8,
+    "characterDeltas": 16,
+    "offer": 7,
     "deeds": 1,
     "standingOps": 1,
     "questUpdates": 5,
     "stageOps": 2,
     "factUpdates": 2
   },
-  "_opTurns": 49,
+  "_opTurns": 48,
   "_opLedger": {
     "offer": {
       "applied": 8,

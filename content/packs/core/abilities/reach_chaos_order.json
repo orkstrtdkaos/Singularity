@@ -154,7 +154,7 @@
      "class": "cost"
     }
    ],
-   "plainly": "A chase/fight/puzzle action that makes or animates something. Its strength is rated 3 out of 10 across a scope of 2, and lasts for about 2 hours Ranks: rank 2 deepens variance; rank 3 extends scope. Limit: you Don'T Choose How IT Breaks, only that it does.",
+   "plainly": "An action that turns a chaotic moment to advantage and improvises a working answer from what is lying around. Its strength is rated 3 out of 10 across a scope of 2, and lasts for about 2 hours Ranks: rank 2 deepens variance; rank 3 extends scope. Limit: you Don'T Choose How IT Breaks, only that it does.",
    "_descriptionWas": "The chaos-craft: improvisation as power, luck-riding, the unmaking of others' plans. The Churnfolk discipline of productive disorder.",
    "_functionsWas": [
     "break",
@@ -164,7 +164,9 @@
    ],
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_powerSystemWas": "reach_chaos_order",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `churnfolk` — Improvised everything, luck-riding, nothing twice. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `churnfolk` — Improvised everything, luck-riding, nothing twice. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_plainlyWas": "A chase/fight/puzzle action that makes or animates something. Its strength is rated 3 out of 10 across a scope of 2, and lasts for about 2 hours Ranks: rank 2 deepens variance; rank 3 extends scope. Limit: you Don'T Choose How IT Breaks, only that it does.",
+   "_glossFix_20260908": "⛑ TIER 2 OF `SPEC_tradition_narrative_npc_pass` — THE THIN GLOSSES. ⛔ All thirty were CORRECT and USELESS: 'makes or animates something' says THAT the craft makes and never WHICH, on thirty crafts that make thirty different things. ⚠️ T7: what does the GM narrate CHANGING? ⚑ Every rewrite is drawn from that craft's own `description` — nothing invented, and the description was right in all thirty cases. ⛔ THE SPEC ESTIMATED 251 THIN CRAFTS AND THERE WERE 42: measure before authoring."
   },
   {
    "id": "latticework",
@@ -310,7 +312,7 @@
      "class": "cost"
     }
    ],
-   "plainly": "A puzzle/fight/social action that makes or animates something. Its strength is rated 3 out of 10 across a scope of 2, and lasts for about 4 hours Ranks: rank 2 deepens reliability; rank 3 extends scope. Limit: prediction fails on the Truly Chaotic.",
+   "plainly": "A puzzle/social action that builds a plan that holds under pressure, and tells you a system's next move. Its strength is rated 3 out of 10 across a scope of 2, and lasts for about 4 hours Ranks: rank 2 deepens reliability; rank 3 extends scope. Limit: prediction fails on the Truly Chaotic.",
    "_descriptionWas": "The order-craft: structure, prediction, law, the binding of possibility. The Lattice-Cities' discipline — order as power.",
    "_functionsWas": [
     "bind",
@@ -321,7 +323,9 @@
    "_perceiveReview": "⛔ SNG-455: perceive tag reviewed per rank. Kept where the player receives information they act on; stripped where the perceiving is the ability's internal mechanism.",
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_powerSystemWas": "reach_chaos_order",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `lattice` — Perfect prediction, the binding of possibility. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_chaos_order` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `lattice` — Perfect prediction, the binding of possibility. Definitional.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_plainlyWas": "A puzzle/fight/social action that makes or animates something. Its strength is rated 3 out of 10 across a scope of 2, and lasts for about 4 hours Ranks: rank 2 deepens reliability; rank 3 extends scope. Limit: prediction fails on the Truly Chaotic.",
+   "_glossFix_20260908": "⛑ TIER 2 OF `SPEC_tradition_narrative_npc_pass` — THE THIN GLOSSES. ⛔ All thirty were CORRECT and USELESS: 'makes or animates something' says THAT the craft makes and never WHICH, on thirty crafts that make thirty different things. ⚠️ T7: what does the GM narrate CHANGING? ⚑ Every rewrite is drawn from that craft's own `description` — nothing invented, and the description was right in all thirty cases. ⛔ THE SPEC ESTIMATED 251 THIN CRAFTS AND THERE WERE 42: measure before authoring."
   },
   {
    "id": "scatter",

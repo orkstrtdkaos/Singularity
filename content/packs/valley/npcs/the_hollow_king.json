@@ -46,7 +46,8 @@
   "bargain",
   "talk",
   "read-people",
-  "watch"
+  "watch",
+  "summon"
  ],
  "abilities": [
   {
@@ -57,12 +58,32 @@
   {
    "abilityId": "deep_covenant",
    "level": 3,
-   "why": "⛔ 'the bargain with NO FLOOR'"
+   "why": "⛔ 'the bargain with NO FLOOR' — and it carries `command`, which is the point"
   },
   {
-   "abilityId": "offered_price",
+   "abilityId": "called_form",
    "level": 3,
-   "why": "the price is named, and it is fair"
+   "why": "⚑ SOMETHING ANSWERS. `command` + `summon`, T3 abyssal — a court-holder does not swing, he CALLS"
+  },
+  {
+   "abilityId": "descent",
+   "level": 3,
+   "why": "⛔ `bind` + `command` — the Descent is his hall and what is in it answers him"
+  },
+  {
+   "abilityId": "honest_bargain",
+   "level": 3,
+   "why": "⚠️ T4, `bind` + `command`. 'Keeps every promise to the letter' IS the binding, and the binding commands"
+  },
+  {
+   "abilityId": "offered_mouth",
+   "level": 3,
+   "why": "⚑ `summon` — the lesser bargainers who foreshadow him. His `threading`: 'his riffraff are lesser bargainers'"
+  },
+  {
+   "abilityId": "hollow_that_holds",
+   "level": 3,
+   "why": "⚠️ his epithet wearing a craft id — richer and HOLLOWED"
   },
   {
    "abilityId": "borne_bargain",
@@ -75,14 +96,14 @@
    "why": "'the true name of every want you won't say aloud'"
   },
   {
-   "abilityId": "hollow_that_holds",
+   "abilityId": "offered_price",
    "level": 3,
-   "why": "⚠️ the craft is his epithet — you leave richer and HOLLOWED"
+   "why": "the price is named, and it is fair"
   },
   {
    "abilityId": "true_account",
    "level": 3,
-   "why": "⛑ HE DOES NOT LIE. 'Keeps every promise TO THE LETTER'"
+   "why": "⛑ HE DOES NOT LIE"
   },
   {
    "abilityId": "soul_stare",
@@ -93,6 +114,16 @@
    "abilityId": "read_the_room",
    "level": 3,
    "why": "courtly"
+  },
+  {
+   "abilityId": "churns_gift",
+   "level": 2,
+   "why": "⚑ churnfolk `summon` — the Churn hands him things and he keeps them"
+  },
+  {
+   "abilityId": "offered_lesser",
+   "level": 2,
+   "why": "⚠️ the court's lower ranks, bound"
   },
   {
    "abilityId": "mediators_tongue",
@@ -115,6 +146,11 @@
    "why": "there is always one, and it costs"
   },
   {
+   "abilityId": "choir_sustains",
+   "level": 2,
+   "why": "⛔ `empower` — HE MAKES WHAT FIGHTS FOR HIM STRONGER, which is the whole of how he fights"
+  },
+  {
    "abilityId": "ordinary_face",
    "level": 1,
    "why": "veilwright tertiary"
@@ -135,9 +171,7 @@
   "edge",
   "ki_wield",
   "thrown_edge",
-  "keystone_blow",
-  "break_the_line",
-  "last_unmaking"
+  "keystone_blow"
  ],
  "personality": {
   "warmth": 3,
@@ -164,5 +198,8 @@
  ],
  "arcId": "arc_the_poles_pull",
  "_authoredWhy": "⛑ AUTHORED 2026-09-08. CCode: 'the_hollow_king is named a Sovereign in the same lore file, sits at `epic` with no authored level, and fields ZERO crafts — A NAMED SOVEREIGN WHO FIGHTS WITH A PLAIN STRIKE. His tier and his kit are Aevi's and Erik's call, not mine to change by hand.' ⛔ TIER `epic` → `mythic`: the Sovereign doc names him the DEMONIC AXIS SEAT, and Lucifer holds Light at mythic 85. ⚠️ A seated Sovereign is not an epic. ⚑ AND `forms` PER R41b, ERIK'S OWN RULING: diminished at stage 3 (L45), final at stage 4 (L85), on `arc_the_poles_pull` — which his own `wantArcId` already named. ⛔ THE KIT IS THE PROSE AND NOTHING ELSE: 'grants exactly what you ask' is `struck_term`; 'the bargain with no floor' is `deep_covenant`; 'you leave richer and HOLLOWED' is `hollow_that_holds`, which is his epithet wearing a craft id. ⚑ AND `closed` IS THE WHOLE CHARACTER: HE HOLDS NO HARM CRAFT AT ALL. His own threading says why — 'NEVER FOUGHT HEAD-ON; OUTLASTED OR OUT-WANTED' — and the lore calls his inability to take A STRUCTURAL INCAPACITY. ⚠️ A Sovereign at level 85 who cannot strike you is more frightening than one who can, and it is what the fiction already said. ⬜ 16 crafts against a capacity of 43, deliberately under: the rest belongs to whoever writes the arrival.",
- "_promotedFrom": "lore/legends.json figures[] — authored in prose, no row"
+ "_promotedFrom": "lore/legends.json figures[] — authored in prose, no row",
+ "_abilitiesWas": 16,
+ "_closedWhy": "⛔ HE HOLDS NO PERSONAL HARM CRAFT — not because he cannot, but because HE WILL NOT TAKE with his own hands. ⚠️ `break_the_line` and `last_unmaking` REMOVED from this list: unmaking is not taking, and a Sovereign of the bargain may well undo a thing that was given badly. ⚑ What stays closed is the personal blow — the fist, the edge, the thrown weapon. Someone else swings.",
+ "_correctedWhy_20260908": "⛑ CORRECTED BY ERIK, 2026-09-08: 'The Hollow King should have SUMMON AND COMMAND crafts then. Anyone who has OTHERS FIGHT FOR HIM. He had to have enough to have ASCENDED in the first place… he wanted to never have to take again and be given everything — THAT DOESN'T MEAN HE CAN'T.' ⛔ AEVI TURNED A REFUSAL INTO AN INCAPACITY. The lore says he REFUSED the Angelic and TOOK the whole Demonic half — ⚠️ a choice, made by something already powerful enough to make it. You do not reach a Sovereign seat by being unable. ⚑ WHAT HE WILL NOT DO IS TAKE. HE STILL COMMANDS WHAT HE WAS GIVEN — and the crafts were all sitting in his own domains: `called_form` (command + summon), `descent` (his hall answers him), `honest_bargain` (the promise kept to the letter IS the binding, and the binding commands), `offered_mouth` and `churns_gift` (what is handed to him), `choir_sustains` (he makes what fights for him STRONGER). ⚠️ AND HIS OWN `threading` ALREADY SAID IT: 'HIS RIFFRAFF ARE LESSER BARGAINERS WHO FORESHADOW HIM… never fought head-on.' ⛑ Not-fought-head-on is not defenceless — IT MEANS SOMETHING ELSE IS IN FRONT OF HIM, and that something was given."
 }

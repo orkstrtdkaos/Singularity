@@ -1,0 +1,202 @@
+{
+ "id": "orrun_shieldbreaker",
+ "name": "Orrun Shieldbreaker",
+ "tier": "heroic",
+ "level": 31,
+ "vocation": "COMMANDER",
+ "universalRole": "Warrior",
+ "roleMethod": "⛔ A raider-captain's authority is CONFERRED EVERY SEASON — the crew re-swears or they do not, and he has been re-sworn nine times.",
+ "role": "Raider-captain of the Longshore reach — nine seasons, one ship, and a crew that has voted him back every one of them",
+ "disposition": "blunt",
+ "people": "human",
+ "gender": "man",
+ "pronouns": "he/him",
+ "sex": "male",
+ "age": 44,
+ "romanceEligible": true,
+ "isMinor": false,
+ "status": "active",
+ "communityId": "foothill.longshore",
+ "homeLocation": "foothill_longshore",
+ "aliases": [
+  "Shieldbreaker",
+  "Orrun of the Nine Seasons"
+ ],
+ "domains": {
+  "primary": "marcher",
+  "secondary": "horizon",
+  "tertiary": "stillhold"
+ },
+ "spectrum": {
+  "violence_peace": -0.6,
+  "space_time": 0.5,
+  "chaos_order": -0.2
+ },
+ "poleIntensity": {
+  "violence": 0.6,
+  "space": 0.5
+ },
+ "subAttributes": {
+  "strength": 14,
+  "agility": 10,
+  "reason": 11,
+  "insight": 13,
+  "presence": 15,
+  "rapport": 13,
+  "craft": 9,
+  "wits": 12
+ },
+ "poleSignature": {
+  "movedBy": [
+   "a fair split",
+   "someone who feeds his crew",
+   "plain speech"
+  ],
+  "hardenedBy": [
+   "a captain who spends people",
+   "being lectured about raiding"
+  ],
+  "immovableBy": [
+   "threats to himself"
+  ],
+  "patience": 7,
+  "tell": "⛑ He asks what your people get out of it before he asks what you want. Answer that badly and the conversation is finished politely."
+ },
+ "knowledge": [
+  "Every landing on the Longshore reach and which of them a crew survives",
+  "⚑ What a crew will actually do when it goes wrong — as against what they said in port",
+  "The exact hour a raid stops being worth it"
+ ],
+ "wants": [
+  "A tenth season, and the crew whole at the end of it",
+  "Somewhere to put the money that is not another ship"
+ ],
+ "fears": "⛔ Coming back with fewer. ⚠️ He has, twice, and he can name them.",
+ "appearance": "Barrel-built, grey through the beard, and the first thing he does in any room is count the exits and the people, in that order.",
+ "voiceHints": "Loud, warm, and completely unembarrassed. ⚑ He negotiates by telling you exactly what he needs and waiting.",
+ "reactsToReputation": {
+  "fair-dealer": "⚑ offers you a share",
+  "cruel": "⛔ will not sail with you at any price",
+  "capable": "offers you a place",
+  "any": "counts you"
+ },
+ "assistTags": [
+  "strike",
+  "carry",
+  "travel",
+  "talk",
+  "guard"
+ ],
+ "abilities": [
+  {
+   "abilityId": "break_the_line",
+   "level": 3,
+   "why": "⛔ THE NAME. He goes through a shield wall and the crew follows the hole"
+  },
+  {
+   "abilityId": "who_falls_first",
+   "level": 3,
+   "why": "⚑ A CAPTAIN'S CRAFT — he knows, and he moves people out of it"
+  },
+  {
+   "abilityId": "small_company",
+   "level": 3,
+   "why": "⚠️ THE CLOSEST THING THE CORPUS HAS TO COMMAND — and it is only a company"
+  },
+  {
+   "abilityId": "held_line",
+   "level": 3,
+   "why": "the other half: he holds while they board"
+  },
+  {
+   "abilityId": "read_field",
+   "level": 3,
+   "why": "he reads a landing before the keel touches"
+  },
+  {
+   "abilityId": "weight",
+   "level": 3,
+   "why": "fourteen strength and a boarding axe"
+  },
+  {
+   "abilityId": "long_road",
+   "level": 2,
+   "why": "horizon secondary — nine seasons of reaches"
+  },
+  {
+   "abilityId": "rivercraft",
+   "level": 2,
+   "why": "he takes ships up water that should not hold them"
+  },
+  {
+   "abilityId": "land_knowledge",
+   "level": 2,
+   "why": "'every landing on the Longshore reach'"
+  },
+  {
+   "abilityId": "advance",
+   "level": 2,
+   "why": "forward"
+  },
+  {
+   "abilityId": "shieldwork",
+   "level": 2,
+   "why": "he has been on the other side of a wall"
+  },
+  {
+   "abilityId": "stand",
+   "level": 2,
+   "why": "and held one"
+  },
+  {
+   "abilityId": "mediators_tongue",
+   "level": 2,
+   "why": "⚑ stillhold tertiary — HALF OF RAIDING IS TERMS, and he is good at them"
+  },
+  {
+   "abilityId": "broker_truce",
+   "level": 2,
+   "why": "⚠️ he has ended two raids by talking and both times the crew agreed"
+  },
+  {
+   "abilityId": "calm_word",
+   "level": 1,
+   "why": "a crew in a bad hour"
+  },
+  {
+   "abilityId": "second_wind",
+   "level": 2,
+   "why": "forty-four"
+  }
+ ],
+ "closed": [
+  "never_there",
+  "slow_cup",
+  "perfect_erasure"
+ ],
+ "personality": {
+  "warmth": 8,
+  "trust": 7,
+  "candor": 9,
+  "patience": 7
+ },
+ "physicality": "ADULT. Barrel-built, grey-bearded, forty-four, hands ruined by rope and cold. WHAT CATCHES THE EYE: ⛑ he counts the exits and then the people, every single time, and does not know he does it.",
+ "intimacyNotes": "⚠️ WARM, UNCOMPLICATED, AND HONEST ABOUT BEING AWAY SEVEN MONTHS A YEAR. ⛔ He will not pretend otherwise to keep someone, and has lost people that way and accepted it.",
+ "gear": [
+  "a boarding axe, rehafted every season",
+  "a captain's token the crew re-cuts each time they re-swear",
+  "salt-ruined oilskins"
+ ],
+ "teaches": [
+  "break_the_line",
+  "who_falls_first",
+  "small_company"
+ ],
+ "questSeeds": [
+  "⚑ He needs a tenth season and one of the old landings has been taken by something that is not people.",
+  "⛔ He came back with fewer, twice. ⚠️ The second time was not the sea and he has never said what it was."
+ ],
+ "schemaVersion": 1,
+ "_authoredWhy": "⛑ AUTHORED 2026-09-08 AT ERIK'S CORRECTION: 'You had authored a lot of things with your own NON-VIOLENCE LEAN seeping in — but this is a FANTASY RPG. We need EDGES.' ⛔ HE IS RIGHT AND THE PATTERN IS DOCUMENTED ACROSS ONE SESSION: Aevi gave the Hollow King NO HARM CRAFT AT ALL and Erik had to reverse it; she wrote 'the refusal is the class' for wardens and he struck it; the Unbought Court is defined by what it will not do; Aevi-the-Watcher cannot fight; Oreth has never put anyone down. ⚠️ EVERY ONE DEFENSIBLE ALONE AND A LEAN TOGETHER. ⚑ THESE ARE AUTHORED THE OTHER WAY: people whose answer to a problem is the edge of something, written to the FULL 49-FIELD SCHEMA — poleSignature, universalRole, roleMethod, disposition, teaches, gear, aliases, canStrike, age, status. ⚠️ No corners: read the schema, then write.",
+ "canStrike": true
+}

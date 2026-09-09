@@ -1,0 +1,197 @@
+{
+ "id": "marn_two_forms",
+ "name": "Marn of Two Forms",
+ "tier": "heroic",
+ "level": 28,
+ "vocation": "EDGE",
+ "universalRole": "Warrior",
+ "roleMethod": "⚑ The Flesh-Temples bend a warrior toward PRACTICE — Marn's craft is that he has done it two hundred thousand times.",
+ "role": "Battle-monk of the Flesh-Temples — the temple sends him where a fight must be stopped by one person",
+ "disposition": "calm",
+ "people": "human",
+ "gender": "man",
+ "pronouns": "he/him",
+ "sex": "male",
+ "age": 39,
+ "romanceEligible": true,
+ "isMinor": false,
+ "status": "active",
+ "communityId": "body.the_flesh_temples",
+ "homeLocation": "somatic_reaches",
+ "aliases": [
+  "Two Forms",
+  "Marn of the Temple"
+ ],
+ "domains": {
+  "primary": "somatic",
+  "secondary": "marcher",
+  "tertiary": "numinous"
+ },
+ "spectrum": {
+  "body_mind": -0.6,
+  "violence_peace": -0.3,
+  "mechanical_spiritual": 0.4
+ },
+ "poleIntensity": {
+  "body": 0.6,
+  "spiritual": 0.4
+ },
+ "subAttributes": {
+  "strength": 13,
+  "agility": 14,
+  "reason": 10,
+  "insight": 12,
+  "presence": 11,
+  "rapport": 9,
+  "craft": 7,
+  "wits": 11
+ },
+ "poleSignature": {
+  "movedBy": [
+   "a person who trains",
+   "someone protecting someone else",
+   "stillness"
+  ],
+  "hardenedBy": [
+   "cruelty for its own sake",
+   "boasting"
+  ],
+  "immovableBy": [
+   "pain"
+  ],
+  "patience": 9,
+  "tell": "⛑ He bows before and after, to everyone, including things that cannot bow back. It is not ceremony — it is how he starts and stops."
+ },
+ "knowledge": [
+  "⚑ Two forms, done two hundred thousand times, and what each one is actually for",
+  "Where a body fails first, in whatever it is standing in",
+  "How long a person can keep going after they have decided to stop"
+ ],
+ "wants": [
+  "To need only the first form",
+  "A student who stays past the boring years"
+ ],
+ "fears": "⛔ The second form. ⚠️ He has used it four times and remembers all four.",
+ "appearance": "Unremarkable until he moves — then it is obvious that he has done this more than anyone in the room has done anything.",
+ "voiceHints": "Slow, warm, and very short. ⚠️ He asks whether you would like to stop, once, and means it.",
+ "reactsToReputation": {
+  "disciplined": "⚑ recognises you",
+  "cruel": "⛔ stops you, and the stopping is the second form",
+  "any": "bows"
+ },
+ "assistTags": [
+  "strike",
+  "guard",
+  "tend",
+  "travel"
+ ],
+ "abilities": [
+  {
+   "abilityId": "ki_wield",
+   "level": 3,
+   "why": "⛔ T5 SOMATIC — the second form, and he has used it four times"
+  },
+  {
+   "abilityId": "perfect_motion",
+   "level": 3,
+   "why": "⚑ two hundred thousand repetitions"
+  },
+  {
+   "abilityId": "unbroken_practice",
+   "level": 3,
+   "why": "⚠️ numinous tertiary — the practice IS the craft"
+  },
+  {
+   "abilityId": "shaped_body",
+   "level": 3,
+   "why": "'stops taking harm the way bodies do'"
+  },
+  {
+   "abilityId": "ki_thorns",
+   "level": 3,
+   "why": "striking him costs"
+  },
+  {
+   "abilityId": "answered_motion",
+   "level": 3,
+   "why": "the counter, first form"
+  },
+  {
+   "abilityId": "held_line",
+   "level": 3,
+   "why": "marcher secondary — one person stopping a fight means standing in it"
+  },
+  {
+   "abilityId": "loose_limbed",
+   "level": 2,
+   "why": "he is not hit"
+  },
+  {
+   "abilityId": "skydancer",
+   "level": 2,
+   "why": "he closes"
+  },
+  {
+   "abilityId": "steady_hands",
+   "level": 2,
+   "why": "the temple's first lesson"
+  },
+  {
+   "abilityId": "second_wind",
+   "level": 2,
+   "why": "'how long a person can keep going'"
+  },
+  {
+   "abilityId": "in_the_way",
+   "level": 2,
+   "why": "⚑ he puts himself where the blow was going"
+  },
+  {
+   "abilityId": "disarm",
+   "level": 2,
+   "why": "⚠️ the first form ends fights without ending people"
+  },
+  {
+   "abilityId": "weight_of_practice",
+   "level": 2,
+   "why": "numinous"
+  },
+  {
+   "abilityId": "steady_soul",
+   "level": 2,
+   "why": "he settles a room"
+  },
+  {
+   "abilityId": "body_read",
+   "level": 2,
+   "why": "'where a body fails first'"
+  }
+ ],
+ "closed": [
+  "slow_cup",
+  "premeditate",
+  "perfect_erasure",
+  "never_there"
+ ],
+ "personality": {
+  "warmth": 8,
+  "trust": 7,
+  "candor": 8,
+  "patience": 10
+ },
+ "physicality": "ADULT. Compact, unremarkable, thirty-nine, knuckles flattened. WHAT CATCHES THE EYE: ⛑ he moves once and the room understands that everyone else has been approximating.",
+ "intimacyNotes": "⚠️ PRESENT, UNHURRIED AND ENTIRELY UNSELFCONSCIOUS. ⛔ The temple does not forbid it and he will say so plainly. ⚠️ What he will not discuss is the four.",
+ "gear": [
+  "wrapped hands",
+  "a temple cord, four knots",
+  "nothing else"
+ ],
+ "teaches": "the first form, to anyone who will do it for two years before asking about the second",
+ "questSeeds": [
+  "⚑ The temple sends him where a fight must be stopped by ONE person. ⚠️ It has sent him somewhere he does not think one person is enough.",
+  "⛔ He has used the second form four times. ⚠️ One of the four is still alive and looking for him."
+ ],
+ "schemaVersion": 1,
+ "_authoredWhy": "⛑ AUTHORED 2026-09-08 AT ERIK'S CORRECTION: 'You had authored a lot of things with your own NON-VIOLENCE LEAN seeping in — but this is a FANTASY RPG. We need EDGES.' ⛔ HE IS RIGHT AND THE PATTERN IS DOCUMENTED ACROSS ONE SESSION: Aevi gave the Hollow King NO HARM CRAFT AT ALL and Erik had to reverse it; she wrote 'the refusal is the class' for wardens and he struck it; the Unbought Court is defined by what it will not do; Aevi-the-Watcher cannot fight; Oreth has never put anyone down. ⚠️ EVERY ONE DEFENSIBLE ALONE AND A LEAN TOGETHER. ⚑ THESE ARE AUTHORED THE OTHER WAY: people whose answer to a problem is the edge of something, written to the FULL 49-FIELD SCHEMA — poleSignature, universalRole, roleMethod, disposition, teaches, gear, aliases, canStrike, age, status. ⚠️ No corners: read the schema, then write.",
+ "canStrike": true
+}

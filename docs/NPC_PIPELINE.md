@@ -51,7 +51,7 @@ derivations of the same count is the defect that put `certify_counts` at 125 aga
 
 ⚠️ **The generation schema still asks for none of abilities, domains, tradition** — so every kit a minted person gets is DERIVED by affiliationFor, never authored by the model. ⛔ And reconcileGeneratedNpcWithMeet copies domains only when the record already has them, which is true once affiliation has run and false before it — so the ORDER of those two steps is load-bearing.
 
-⬜ **The authored side proves the doors themselves work:** **80 of 137** reachable authored people field at least one real craft through the same two functions. ⚠️ **The authored CENSUS is `docs/ROSTER.md` and is not recomputed here** — one ladder, deliberately.
+⬜ **The authored side proves the doors themselves work:** **86 of 143** reachable authored people field at least one real craft through the same two functions. ⚠️ **The authored CENSUS is `docs/ROSTER.md` and is not recomputed here** — one ladder, deliberately.
 
 <!-- END npc-pipeline-generated -->
 

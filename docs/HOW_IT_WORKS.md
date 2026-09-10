@@ -1152,9 +1152,23 @@ them permanently.** ⚠️ **Using the craft badly is how a person becomes unrea
 **Five traditions answer this ladder differently and share one set of verbs** — `retrieve` · `sink` ·
 `seal` · `hold` · `slow`. Ashwardens drag, Numinous invite, Threnody delays, Rootkin pay a price.
 
-⛔ **PROPOSED (§48): undeath.** A raised body is a COCOON — as it wears, the thing inside grows. Two end
-states: **narrowing** into unminded purpose, or **stable** as an Afterling with a whole personality.
-**Healing harms them, decay mends them**, and Deathsense reads them as inverted life.
+⛔ **PROPOSED (§48): undeath. TWO ROADS, AND ONLY ONE OF THEM IS A COCOON.**
+
+**An AFTERLING is the same person, undead** — the closest to living a dead person can be. Nothing grew
+inside them and nothing emerged, because there was never anything in there but the person. They want what
+they wanted.
+
+**The other road is the cocoon, and it is the losing of the mind.** The body wears, the thing inside grows,
+and what comes out is not who went in — `the_narrowed` at the far end of it. The corpus tracks *progress
+along* it as a danger measure: *"the cocoon was the last thing holding it in."*
+
+**Healing harms them, decay mends them**, and Deathsense reads them as inverted life. And Deathsense is a
+diagnostic before it is anything else: a mindless raised crew arrives **unfelt** — there is no self in one
+to give it away — while an Afterling or a driven shade **reads fine, because they want something, and
+wanting is weather.** *An Afterling reads as a person because it is one, not because it is far along
+anything* — telling those two apart is the warden's actual problem.
+
+*Aevi read the cocoon as a chrysalis twice in one conversation, from the sentence that used to be here.*
 
 ---
 

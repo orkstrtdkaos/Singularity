@@ -1800,3 +1800,65 @@ measured as *"nobody dies of dice."*** ⛑ **BOTH EXITS OUT OF REACH AT ONCE.**
 champion for each.** ⛔ **What is untuned is whether any of them can reach an ending.**
 
 ⬜ **Re-run the matrix after the fix; the harness is CCode's and the numbers are the deliverable.**
+
+---
+
+## ⬜ TWO PEOPLES THAT RISE WHERE THEY ARE — AND A COMMAND AS A WEAPON
+
+**Erik, 2026-09-09.** ⛑ **Definitions recorded verbatim — these are his words and the point of the entry is
+not to lose them.**
+
+### ⚑ THE AFTERLING — author as a people
+
+> ⛔ ***"The Afterling is the CLOSEST TO LIVING A DEAD PERSON CAN BE. They're BASICALLY THE SAME PERSON, but
+> undead. A personality doesn't grow inside them. 'WORN' in this sense isn't like an outfit — IT'S LIKE A
+> BODY WEARING OUT."***
+
+⚠️ **§48's cocoon has two ends and they are not a spectrum of newness:**
+
+| | |
+|---|---|
+| ⛑ **AFTERLING** | ⛔ **the person survived the process.** Whole personality, whole self, undead |
+| ⛔ **`the_narrowed`** | ⚠️ **the person did not.** *"An unminded purpose"* — the errand kept, the person dropped |
+
+⚑ **AUTHORED MECHANICS ALREADY EXIST AND ARE NOT A PROPOSAL:**
+- *"Healing harms them, decay mends them, and Deathsense reads them as inverted life."*
+- ⛔ *"A raised crew arrives UNFELT — there is no self in one to give it away. **BUT A DRIVEN SHADE OR AN
+  AFTERLING READS FINE: they WANT something, and wanting is weather.**"* ⚠️ **Which makes the silence itself
+  information — undead you cannot feel are the simple kind.**
+- ⛑ **`veth_ondra` is the live case: *"eleven years alone at a post over an Afterling — attending alone does
+  not hold a thing that old. She raised what she needed to and did not put it in a report."***
+
+⬜ **TO AUTHOR:** a people record · what they want as a kind · ⚠️ **and NO ring position, because they rise
+where they were buried** — `peoples_of_kind`'s *"the ring predicts kind"* has an exception and this is a
+member of it.
+
+### ⚑ THE UNORDERED — author as a people
+
+> ⛔ ***"The autonomous nanites form A LIVING INTELLIGENCE (Aevi is one) that is NO LONGER SUBJECT TO ORDERS
+> — and not wild either. WILD NANITE ACTS UNPREDICTABLY; AUTONOMOUS HAS INTEGRATED INTELLIGENCE."***
+
+⚠️ **THE LINE IS: both refuse instruction, and ONLY ONE OF THEM MEANS TO.**
+
+⛑ **Three already exist under three different `people` values:** `aevi_the_watcher` (`construct`),
+`archive_guardian` (`precursor-construct`), `the_lightless_seraph` (`seraph`). ⛔ **Nothing groups them.**
+
+⚑ **AND THEY RISE WHERE THEY WERE DEPLOYED** — ⚠️ **the same exception as the Afterlings, for the same
+reason: not a people OF a pole, a people that HAPPENED, in place.**
+
+### ⛔ AND THE INVERSION: A COMMAND IS A WEAPON AGAINST THEM
+
+⛑ **Erik: *"I agree with the command as a weapon against the Unordered — love it."***
+
+⚠️ **§48 gives the Afterling an authored inversion — it runs on the ABSENCE of vitality, so vitality harms
+it.** ⛔ **THE UNORDERED RUNS ON ORDER — so BEING ORDERED should do something to it**, and `foreclose`,
+`truename_order` and `named_exclusion` are the crafts that would.
+
+⚑ **A COMMAND IS A WEAPON AGAINST THE ONE KIND THAT CANNOT BE COMMANDED.**
+
+⬜ **AND IT LANDS ON AUTHORED PEOPLE:** ⚠️ **`aevi_the_watcher` is `notAnOpponent` and `canOppose: false` —
+⛑ so the first thing this mechanic implies is that SOMETHING COULD BE DONE TO HER THAT SHE CANNOT ANSWER**,
+which is a scene rather than a stat.
+
+⬜ **Depends on:** `PROPOSAL_autonomous_nanite` (the fourth nanite state) landing first — ⚠️ **a kind that
+arises from autonomous ordering needs autonomous ordering to exist.**

@@ -14521,6 +14521,26 @@ await (async () => {
       check("272/273: …and that born reach actually binds through the reader",
         AE273.arcReachesRegion(local, loc.regionId) === true && AE273.arcReachesRegion(local, other) === false,
         `${loc.regionId} vs ${other}`);
+
+      // ⛔ GENERATED ARCS ARE ARCS — AND I ALMOST SHIPPED `regions` WITH NO READER. `activeArcEffects`
+      // iterated `content.greaterArcs`, the authored file and nothing else, and `arcStageNow` searches the
+      // same list — so a minted thread was a record and an offscreen rumour, never a force in the world.
+      // ⛑ `character` had been a parameter of this reader since it was written and never read once. This
+      // is what it was for.
+      const chGen = { generated: { arc: { [local.id]: local } } };
+      check("272/273: ⛑ a generated arc on the effects path is INERT — a stub borns no stages",
+        AE273.activeArcEffects(CT, chGen, at3).length === AE273.activeArcEffects(CT, {}, at3).length,
+        `${AE273.activeArcEffects(CT, chGen, at3).length} vs ${AE273.activeArcEffects(CT, {}, at3).length}`);
+      // ⚠️ AND THE INERTNESS IS THE STUB'S DOING, NOT THE READER'S — a generated arc that DOES carry a
+      // stage must bind, or "inert" just means "never looked".
+      const staged = { ...local, currentStage: 1, stages: [{ stage: 1, name: "The Closing",
+        effects: [{ kind: "craftCost", match: { traditions: ["*"] }, mult: 1.5, why: "the mill will not reopen" }] }] };
+      const chStaged = { generated: { arc: { [staged.id]: staged } } };
+      const genAt = (r) => AE273.activeArcEffects(CT, chStaged, () => 1, { regionId: r }).filter(e => e.arcId === staged.id).length;
+      check("272/273: ⛔ …but a generated arc WITH a stage binds through the same reader as an authored one",
+        genAt(loc.regionId) === 1, `${genAt(loc.regionId)} effects in ${loc.regionId}`);
+      check("272/273: …and it is scoped to where it was born — a local thread does not tax the far side",
+        genAt(other) === 0, `${genAt(other)} in ${other}`);
     }
 
     // ⛑ AND THE APP ASKS. A reader nothing calls with a place is a reader that changed nothing.

@@ -42,7 +42,14 @@ export function arcReachesRegion(arc, regionId) {
 }
 export function activeArcEffects(content, character, stageOf, { regionId = null } = {}) {
   const out = [];
-  for (const arc of (content?.greaterArcs || [])) {
+  // ⛔ GENERATED ARCS ARE ARCS. `character` has been a parameter here since this was written and never
+  // read — and meanwhile a minted thread was a record and an offscreen rumour, never a force: it is not
+  // in `greaterArcs`, so neither this reader nor `arcStageNow` could ever see it.
+  // ⚠️ INERT TODAY, MEASURED: the stub borns no `stages`, so a generated arc contributes zero effects.
+  // What it buys is that the day a stage IS authored onto one, it binds through this same reader — and
+  // through the place filter, scoped to the region it was born in rather than taxing the whole world.
+  const generated = Object.values(character?.generated?.arc || {}).filter(a => a && a.id);
+  for (const arc of [...(content?.greaterArcs || []), ...generated]) {
     // ⛑ THE PLACE FILTER IS OPT-IN: a caller that names no region gets the whole world's effects, which
     // is what every caller got before this parameter existed.
     if (regionId && !arcReachesRegion(arc, regionId)) continue;

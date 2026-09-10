@@ -65,7 +65,7 @@
   "maxHealth": 51,
   "health": 51,
   "maxEnergy": 113,
-  "energy": 92,
+  "energy": 113,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -169,151 +169,15 @@
     "Brynjar, Maret, Ragnar, and Freki walked north from the Stillhold to the Marchward's edge; Maret will speak what she learned from the record-hall by firelight.",
     "Brynjar departed the fire-pit with Freki and walked north through the spring dark to the waygate stone, turning the night's revelations over on the road.",
     "Brynjar walked the night road from Cairnhold back to the Marchward, arriving cold and wet before dawn.",
-    "Brynjar stood, left the heavy-wool man to his watching, wrote Ragnar's name on the Hub Hall chalk-board, and stepped into the midday Crossing to weigh the road north."
+    "Brynjar stood, left the heavy-wool man to his watching, wrote Ragnar's name on the Hub Hall chalk-board, and stepped into the midday Crossing to weigh the road north.",
+    "Brynjar returned to the Crow and Thistle, took the second-door room without ceremony, and slept through the deep night into morning with Freki at the foot of the bed."
   ],
   "currentLocationId": "the_crossing",
-  "activeScene": {
-    "locationId": "the_crossing",
-    "turns": [
-      {
-        "player": null,
-        "summary": "Brynjar stands in the deep-night Crossing, Freki at his knee, the world reorganizing itself around distant events — Grael home, Maren down, the Poles pulling harder — while the road north waits.",
-        "narration": "Deep night at the Crossing, and the city never quite sleeps — torchlight smears across wet cobblestone, the spring melt running in thin black rivulets toward the drains. The Crow and Thistle is still lit, its shutters showing amber lines, and the Hub Hall's chalk-board catches the glow of two oil-lamps left burning for travelers who arrive past the common hour. You are standing somewhere between the two: Freki pressed to your left knee, coat damp from the night air, ears up and sorting the dark for anything worth reporting.\n\nThe world has been moving while you held still. Word travels fast through waygate chalk and merchant mouth: Overseer Grael went back to the Edge District. Maren Ossitide is hurt and out of whatever she was doing — by Grael's hand, the rumor says, and a stranger doesn't walk away from that encounter the same as she walked in. None of it touches you directly tonight, but you feel it the way a soldier feels weather — a pressure change, something reorganizing itself past the horizon. The Poles are pulling harder. The people at the Crossing carry it in the set of their shoulders: watchful, border-talk low and constant, every face checking the door when it opens.\n\nFreki pushes her nose against the back of your hand once, then sits. She is not alarmed — just checking that you are still here, still thinking. The Crow and Thistle is thirty paces ahead. Your second-door room is there, the straw bed you paid for and did not sleep in last night. The fire-pit at the Marchward's edge is a day's walk south, where Ragnar last stood watching the dark. Maret has crossed a river and taken the Ashen Road — gone, or nearly gone. The chalk-board carries your name and Ragnar's and a heading: north, by ship, Longshore or the Mudrun. What it does not carry is what comes after that."
-      }
-    ],
-    "lastTurn": {
-      "narration": "Deep night at the Crossing, and the city never quite sleeps — torchlight smears across wet cobblestone, the spring melt running in thin black rivulets toward the drains. The Crow and Thistle is still lit, its shutters showing amber lines, and the Hub Hall's chalk-board catches the glow of two oil-lamps left burning for travelers who arrive past the common hour. You are standing somewhere between the two: Freki pressed to your left knee, coat damp from the night air, ears up and sorting the dark for anything worth reporting.\n\nThe world has been moving while you held still. Word travels fast through waygate chalk and merchant mouth: Overseer Grael went back to the Edge District. Maren Ossitide is hurt and out of whatever she was doing — by Grael's hand, the rumor says, and a stranger doesn't walk away from that encounter the same as she walked in. None of it touches you directly tonight, but you feel it the way a soldier feels weather — a pressure change, something reorganizing itself past the horizon. The Poles are pulling harder. The people at the Crossing carry it in the set of their shoulders: watchful, border-talk low and constant, every face checking the door when it opens.\n\nFreki pushes her nose against the back of your hand once, then sits. She is not alarmed — just checking that you are still here, still thinking. The Crow and Thistle is thirty paces ahead. Your second-door room is there, the straw bed you paid for and did not sleep in last night. The fire-pit at the Marchward's edge is a day's walk south, where Ragnar last stood watching the dark. Maret has crossed a river and taken the Ashen Road — gone, or nearly gone. The chalk-board carries your name and Ragnar's and a heading: north, by ship, Longshore or the Mudrun. What it does not carry is what comes after that.",
-      "sceneSummary": "Brynjar stands in the deep-night Crossing, Freki at his knee, the world reorganizing itself around distant events — Grael home, Maren down, the Poles pulling harder — while the road north waits.",
-      "scene": {
-        "setting": "The Crossing, deep night, early spring. Wet cobblestones, torchlight reflected in runoff channels. The Crow and Thistle thirty paces ahead, shutters lit amber. Hub Hall chalk-board visible under two oil-lamps to the right.",
-        "npcsPresent": [
-          {
-            "name": "Freki",
-            "state": "pressed to Brynjar's left knee, ears up, coat damp — settled but watchful"
-          }
-        ],
-        "objects": [
-          "Hub Hall chalk-board (lit, carries Brynjar's message for Ragnar)",
-          "Hand-Axe (at belt)",
-          "Round Shield (on back)",
-          "Traveler's Pack (shouldered)",
-          "Waterskin (at hip)"
-        ],
-        "threads": [
-          "The road north — Longshore or the Mudrun — is the next real move",
-          "Maret has taken the Ashen Road; her thread is unresolved",
-          "Ragnar's location and intent are unknown",
-          "Kjotve Olafsson: the blood oath stands, the man is still alive"
-        ]
-      },
-      "choices": [
-        {
-          "label": "Go in, take the second-door room, and sleep — the road north can wait for first light and a clear head",
-          "attribute": "physical",
-          "subAttribute": "strength",
-          "difficulty": "very easy",
-          "intentTags": [
-            "sustain",
-            "careful"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Check the chalk-board before sleeping — see if Ragnar or anyone else has left a mark since you wrote",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "difficulty": "very easy",
-          "intentTags": [
-            "scout"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Stand in the Hub Hall and use Order-Sense on the chalk-board — read which messages are recent, which are old, and what the pattern of traffic through the gates tonight says about the road ahead",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": "easy",
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 3,
-          "trivial": false
-        },
-        {
-          "label": "Head toward the Crow and Thistle, but pause outside — let Freki read the night air around the entrance before you go in",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": "easy",
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "trivial": false
-        }
-      ],
-      "offer": {
-        "thing": "A single figure sits on the Hub Hall steps — staff across their knees, not asleep, just waiting. The posture is familiar: Chernak the Blind, who has been sitting at the Crossing's south gate for days watching for a vision he may have misread. Tonight he is on the north side instead.",
-        "from": "Chernak's own codex fact — he began to wonder if he misread the direction of the road in the dream, and moved accordingly; the world quietly following through on what was already known to be true"
-      },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "chernak-the-blind",
-          "name": "Chernak the Blind",
-          "note": "Moved from the south gate to the Hub Hall steps — sat down on the north side with his staff across his knees, waiting in the deep-night quiet",
-          "learned": [
-            "Moved to the Hub Hall north steps — reconsidered the direction the road ran in his vision"
-          ],
-          "statusNote": "Sitting on the Hub Hall steps, north side, staff across knees, deep-night — has not spoken yet"
-        }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a moment's pause in the night street — Brynjar taking stock before moving"
-      },
-      "codexUpdates": [
-        {
-          "topic": "chernak-the-blind",
-          "label": "Chernak the Blind",
-          "kind": "person",
-          "fact": "Moved from the Crossing's south gate to the Hub Hall north steps in deep night — reconsidered the direction of the road in his vision and is now watching the north side instead",
-          "links": [
-            "brynjar-andyrsson-thread",
-            "sera-of-the-stillhold"
-          ]
-        }
-      ],
-      "sceneEnded": false
-    },
-    "sceneState": {
-      "setting": "The Crossing, deep night, early spring. Wet cobblestones, torchlight reflected in runoff channels. The Crow and Thistle thirty paces ahead, shutters lit amber. Hub Hall chalk-board visible under two oil-lamps to the right.",
-      "npcsPresent": [
-        {
-          "name": "Freki",
-          "state": "pressed to Brynjar's left knee, ears up, coat damp — settled but watchful"
-        }
-      ],
-      "objects": [
-        "Hub Hall chalk-board (lit, carries Brynjar's message for Ragnar)",
-        "Hand-Axe (at belt)",
-        "Round Shield (on back)",
-        "Traveler's Pack (shouldered)",
-        "Waterskin (at hip)"
-      ],
-      "threads": [
-        "The road north — Longshore or the Mudrun — is the next real move",
-        "Maret has taken the Ashen Road; her thread is unresolved",
-        "Ragnar's location and intent are unknown",
-        "Kjotve Olafsson: the blood oath stands, the man is still alive"
-      ]
-    },
-    "beats": 1
-  },
+  "activeScene": null,
   "clock": {
     "schemaVersion": 1,
     "day": 4,
-    "hour": 0,
+    "hour": 8,
     "realAnchor": null
   },
   "companions": [
@@ -466,7 +330,6 @@
       },
       "relationship": 0,
       "history": [
-        "[d1] Confirmed Sera left on her own before dawn via the side door; described her as thinking-quiet, watching the entrance; noted Freki's behavior at the third stool",
         "[d1] Produced the cloth bundle left at the third stool — dried white herb and a knotted cord. Offered it to Brynjar directly.",
         "[d1] Told Brynjar the side door opens onto the east lane — north fork to the waygate, south fork to the Stillhold road. Watched him and Freki with the stillness of someone making a decision.",
         "[d3] Gave Brynjar a room and a bowl of barley soup without ceremony at the small hours of morning. Set a bowl of water on the flagstone for Freki unprompted.",
@@ -475,7 +338,8 @@
         "[d3] Brynjar stepped outside; Doss working the room without watching the door.",
         "[d3] Brynjar re-entered the inn; Doss working the room, not watching the door.",
         "[d3] Working the bar while Brynjar holds his standoff with the heavy-wool man; uninvolved this beat",
-        "[d4] Brynjar stood and left the heavy-wool man's table without incident; Doss working the room, uninvolved this beat"
+        "[d4] Brynjar stood and left the heavy-wool man's table without incident; Doss working the room, uninvolved this beat",
+        "[d4] Spotted Brynjar returning late and told him the second-door room was made up without being asked; no conversation beyond that."
       ],
       "knownFacts": [
         "Doss kept the bundle because it felt deliberate, not lost",
@@ -493,7 +357,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "On duty at the Crow and Thistle, working the midday room.",
+      "statusNote": "Behind the bar at the Crow and Thistle, working the late and early hours.",
       "domains": {
         "primary": "marcher"
       },
@@ -507,7 +371,7 @@
       "people": "human",
       "peopleSource": "generated",
       "appearance": "A stout woman in her mid-fifties, broad through the shoulders, heavy-handed in the way of someone who has carried kegs since she was fifteen. Skin the colour of old oak, short grey hair kept close to the skull for practicality. A crescent scar at the left jaw from a long-ago disagreement. Apron is clean — she changes it twice a day on principle. Eyes the flat, still grey of a whetstone, and about as yielding.",
-      "met": 7
+      "met": 8
     },
     "ragnar-solmyr": {
       "id": "ragnar-solmyr",
@@ -1069,7 +933,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Maret beginning to open — the shape of what she carries is about to become real",
@@ -5434,21 +5298,21 @@
     ]
   },
   "tendencies": {
-    "leadership": 3.3205385109794165,
-    "cerebral": 11.265433141099338,
-    "strategic": 8.869299173459623,
-    "ruthless": 1.1403021986619413,
-    "social": 8.501592583891927,
-    "cautious": 8.407939550838325,
-    "generous": 0.9895650574129125,
-    "patient": 0.43366294827550256
+    "leadership": 3.237525048204931,
+    "cerebral": 10.983797312571854,
+    "strategic": 8.647566694123132,
+    "ruthless": 1.1117946436953927,
+    "social": 8.28905276929463,
+    "cautious": 9.197741062067367,
+    "generous": 0.9648259309775896,
+    "patient": 1.422821374568615
   },
   "aptitudes": [
     "silver_tongue",
     "scholar",
     "banner"
   ],
-  "actionCount": 63,
+  "actionCount": 64,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -6580,8 +6444,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789002626627,
-  "rev": 306,
+  "updatedAt": 1789002702852,
+  "rev": 307,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -7050,7 +6914,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "riven_marches": 39,
-    "the_center": 28,
+    "the_center": 29,
     "the_palelands": 3
   },
   "practice": {
@@ -7161,10 +7025,10 @@
     {
       "id": "sess-7",
       "startedAt": "2026-09-10T01:07:19.725Z",
-      "lastAt": "2026-09-10T01:10:26.622Z",
+      "lastAt": "2026-09-10T01:11:42.851Z",
       "startDay": 72,
       "endDay": 72,
-      "beats": 3
+      "beats": 4
     }
   ],
   "_pendingArrival": null,
@@ -7180,17 +7044,17 @@
     "at": "2026-09-09T20:47:47.388Z"
   },
   "_opEmitted": {
-    "sceneSummary": 60,
-    "choices": 60,
-    "scene": 60,
-    "npcUpdates": 54,
+    "sceneSummary": 61,
+    "choices": 61,
+    "scene": 61,
+    "npcUpdates": 55,
     "placeUpdates": 8,
     "generateRequest": 4,
     "moveTo": 7,
-    "timeOps": 52,
+    "timeOps": 53,
     "codexUpdates": 45,
-    "sceneEnded": 17,
-    "characterDeltas": 21,
+    "sceneEnded": 18,
+    "characterDeltas": 22,
     "offer": 9,
     "deeds": 1,
     "standingOps": 1,
@@ -7198,7 +7062,7 @@
     "stageOps": 2,
     "factUpdates": 2
   },
-  "_opTurns": 60,
+  "_opTurns": 61,
   "_opLedger": {
     "offer": {
       "applied": 10,
@@ -7309,11 +7173,11 @@
   "_debtReceipts": [],
   "skillUses": {
     "negotiate": 11,
-    "careful": 9,
+    "careful": 10,
     "help": 2,
     "plan": 2,
     "guard": 1,
-    "sustain": 1,
+    "sustain": 2,
     "study": 9,
     "travel": 10,
     "ask": 2,

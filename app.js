@@ -128,7 +128,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.443";
+const APP_VERSION = "1.9.444";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8125,10 +8125,19 @@ function isDev() { return isDevMode(); }
 // same resolution in the engine. Removed 2026-09-08 rather than left as a second door nobody walks through.
 
 function escalateToFight(target, choice) {
-  duelFromTarget(character, target, { catalog: fullCatalog(), npcs: CONTENT.npcs || {}, cfg: CONTENT.rules?.npcStanding || {}, day: absoluteWorldDay(),
+  const duel = duelFromTarget(character, target, { catalog: fullCatalog(), npcs: CONTENT.npcs || {}, cfg: CONTENT.rules?.npcStanding || {}, day: absoluteWorldDay(),
     sb: CONTENT.skillBattle?.engine, here: hereNow(), lethal: choice?.intentRung === "lethal", traditionIndex: CONTENT.traditionIndex,
     // R41: the arc's LIVE stage decides a Sovereign's form; worldtick owns it, so it is handed in rather than reached for
     stageOf: (arcId) => arcStageNow(CONTENT, character, arcId) });
+  // ⛔ A DECLARED NON-OPPONENT REFUSES THE FIGHT, AND THE PLAYER IS TOLD SO. Silently doing nothing reads
+  // as a broken button; a threat-number stand-in — which is what happened before — reads as a fight the
+  // fiction says cannot happen. ⚑ The refusal is in the world's voice, not the engine's: the authored
+  // reasons on these records are GM-eyes notes and never reach a player.
+  if (!duel) {
+    renderPlay(character.activeScene?.lastTurn || null,
+      { aside: `${esc(target?.name || "They")} is not something a fight can reach.` });
+    return;
+  }
   saveCharacter(character);
   renderSkillBattle();
 }

@@ -4185,7 +4185,8 @@ console.log("\n── §59 · sheets fill in through play; an authored sheet is 
     // their prose on 2026-09-08 — Akinetos never wakes, Kenosis is dead, Parakletos "cannot appear as a
     // figure" — and giving them domains to satisfy a gate would contradict the lore's own "Precursor is not a
     // playable tradition and should not become one."
-    const authored = npcs59.filter(n => n.schemaVersion != null && !n.notAnOpponent);
+    const BT147x = await import("../engine/battle_turn.js");   // ⛑ ONE predicate for "declared not an opponent" — two spellings reach it
+    const authored = npcs59.filter(n => n.schemaVersion != null && !BT147x.declaredNotAnOpponent(n));
     check("§59: ⚠️ Q4's premise is wrong — every authored person HAS `domains` (it is the generated roster that lacks them)",
       authored.length >= 40 && authored.every(n => n.domains), `${authored.filter(n => !n.domains).length} of ${authored.length} without`);
   }
@@ -9652,7 +9653,8 @@ console.log("\n── §146 · the domain draw runs, and it stays near their gro
   const C146 = await lch146();
   // ⛔ SAME EXEMPTION AS §59, SAME REASON: domains feed the kit draw, and a `notAnOpponent` record is
   // declared out of the fight path by decision. The Precursors carry none deliberately.
-  const people146 = Object.values(C146.npcs || {}).filter(n => !(n.isLegend || n.legend) && !n.notAnOpponent);
+  const BT147x = await import("../engine/battle_turn.js");   // ⛑ ONE predicate for "declared not an opponent" — two spellings reach it
+  const people146 = Object.values(C146.npcs || {}).filter(n => !(n.isLegend || n.legend) && !BT147x.declaredNotAnOpponent(n));
   const cfg146 = C146.rules?.npcStanding || {};
   check("§146: the premise is measured, not assumed — every non-legend person already carries domains",
     people146.length >= 50 && people146.every(n => n.domains && Object.keys(n.domains).length),
@@ -9754,6 +9756,63 @@ console.log("\n── §147 · one roster, derived; the opponent gate; the Sover
   check("§147: ⛔ a record declared `notAnOpponent` is refused by the opponent path — the declaration IS the other half of the gate",
     BT147.personOpponentFor(decl147, { catalog: C147.abilities, cfg: cfg147, day: 100, traditionIndex: C147.traditionIndex }) === null
     && !!BT147.personOpponentFor({ ...decl147, notAnOpponent: false }, { catalog: C147.abilities, cfg: cfg147, day: 100, traditionIndex: C147.traditionIndex }));
+  // ⛔ AND THE LINE ABOVE SAID "AND THE THREAT PATH DOES NOT TAKE THEM EITHER" WHILE TESTING ONLY THE
+  // PERSON PATH. It described the intent; half of it was implemented. Measured on real content: Akinetos —
+  // "appears? No, and its absence is the content" — entered play through `duelFromTarget` at threat 36 with
+  // 5 health, because that function falls back to a threat number whenever `person` is null.
+  {
+    const ch147 = () => ({ id: "p", name: "P", level: 10, npcRegistry: {}, customEncounters: {} });
+    const duel = (rec, c) => BT147.duelFromTarget(c, { id: rec.id, name: rec.name },
+      { catalog: C147.abilities, npcs: { [rec.id]: rec }, cfg: cfg147, day: 100, here: { dangerLevel: 3 } });
+    const cDecl = ch147();
+    check("§147: ⛔ …and the THREAT PATH does not take them either — the fight is refused, not downgraded to a number",
+      duel(decl147, cDecl) === null);
+    // ⚑ AND NOTHING IS WRITTEN ON THE WAY OUT. `duelFromTarget` mutates the character; refusing after a
+    // partial write would leave a half-made encounter that the next render would try to play.
+    check("§147: …and no encounter is left on the character when the fight is refused",
+      !cDecl.activeEncounter && !Object.keys(cDecl.customEncounters).length);
+    // ⛑ NON-VACUITY: the same record without the declaration DOES build a fight, so "refused" is a decision.
+    const cOk = ch147();
+    check("§147: ⚑ …while the same record undeclared still fights — the refusal is the flag, not the fixture",
+      !!duel({ ...decl147, notAnOpponent: false }, cOk) && !!cOk.activeEncounter);
+
+    // ⛔ TWO SPELLINGS, AND THE ENGINE KNEW ONE. `aevi_the_watcher` declares `canOppose: false` and
+    // `canOppose` appeared in ZERO .js files — so a legend whose record says "she cannot fight and cannot
+    // lie" TWICE (her own `_vocationWhy` and `legends.json`) built as a level-60 opponent with 330 health
+    // and 72 crafts. Found while verifying Aevi's own `PROPOSAL_the_unordered`, which cites the flag she
+    // did not use.
+    const watcher = C147.npcs?.aevi_the_watcher;
+    check("§147: ⛔ `canOppose: false` is the OTHER authored spelling and the engine honours it",
+      !!watcher && watcher.canOppose === false && BT147.declaredNotAnOpponent(watcher)
+      && BT147.personOpponentFor(watcher, { catalog: C147.abilities, cfg: cfg147, day: 100, traditionIndex: C147.traditionIndex }) === null,
+      watcher ? `canOppose=${watcher.canOppose}` : "no record");
+    // ⚠️ AND `canOppose: true` DECLARES NOTHING — it is the ordinary case, and reading it as a refusal would
+    // silently un-fight three more legends.
+    const warden = C147.npcs?.the_deep_warden;
+    check("§147: ⚑ …while `canOppose: true` is not a declaration — the ordinary case still fights",
+      !!warden && warden.canOppose === true && !BT147.declaredNotAnOpponent(warden)
+      && !!BT147.personOpponentFor(warden, { catalog: C147.abilities, cfg: cfg147, day: 100, traditionIndex: C147.traditionIndex }));
+
+    // ⛔ AND THE TWO NULLS ARE NOT THE SAME NULL. `personOpponentFor` also returns null for a person with no
+    // kit, and THAT one is supposed to reach the threat path ("let the threat path have them"). Collapsing
+    // the refusal into a null check would have made every kitless person unfightable.
+    // ⚠️ AND MY FIRST FIXTURE FOR THIS WAS WRONG, WHICH IS WHY IT IS WRITTEN OUT: a bare record is NOT
+    // kitless — `battleSkillsFor` gives every entry a plain strike ("the PC gets one and an NPC is not a
+    // different kind of thing"), so `skills.length` is never 0 for it. The null is reachable only through
+    // `canStrike: false` or `incorporeal: true`, which is the condition that guards that floor.
+    const kitless = { id: "x-kitless", name: "A Kitless Someone", tier: "notable", incorporeal: true };
+    const cKit = ch147();
+    const dKit = duel(kitless, cKit);
+    check("§147: ⛑ …and a person with NO KIT still reaches the threat path — that null is a different null",
+      BT147.personOpponentFor(kitless, { catalog: C147.abilities, cfg: cfg147, day: 100, traditionIndex: C147.traditionIndex }) === null
+      && !!dKit && Number(dKit.def?.opponent?.threat) > 0,
+      dKit ? `threat ${dKit.def?.opponent?.threat}` : "refused — WRONG");
+
+    // ⛑ AND THE APP TELLS THE PLAYER. A refusal that renders nothing reads as a broken button.
+    const app147 = rd("app.js");
+    check("§147: the app says so when a fight is refused, rather than silently doing nothing",
+      /const duel = duelFromTarget\(/.test(app147) && /if \(!duel\) \{[\s\S]{0,240}not something a fight can reach/.test(app147));
+  }
   // ── R41: one record, two forms, chosen by the arc's live stage — threaded in, never read from the world-tick
   const sov = { id: "x-sov", name: "A Sovereign", tier: "mythic", domains: { primary: "abyssal" }, arcAffinity: { arcId: "arc_the_poles_pull" },
     abilities: [{ abilityId: "struck_term", level: 2 }], forms: { diminished: { atStage: 3, level: 45, note: "thin" }, final: { atStage: 4, level: 85 } } };

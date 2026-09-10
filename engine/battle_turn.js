@@ -192,6 +192,22 @@ export function collapseIfFinished(rr, def, { swingBefore = 0, family = null, sb
   return rr;
 }
 
+/** ⛔ SPEC_one_roster §4 — "every person reachable as an opponent has a level and a kit, OR IS DECLARED NOT
+ *  AN OPPONENT." ⚠️ THE CORPUS DECLARES IT IN TWO SPELLINGS AND THE ENGINE KNEW ONE. `notAnOpponent: true`
+ *  on the three mythicals; `canOppose: false` on `aevi_the_watcher` — and `canOppose` appeared in ZERO .js
+ *  files, so a legend whose record says "she cannot fight and cannot lie" TWICE built as a level-60
+ *  opponent with 330 health and 72 crafts.
+ *
+ *  ⛑ THE READER HONOURS BOTH rather than the content being rewritten, because either spelling is a clear
+ *  authored refusal and silently ignoring one is the failure this fixes. `canOppose: true` is not a
+ *  declaration of anything — it is the ordinary case — so only the explicit `false` refuses.
+ *
+ *  ⚑ AND THIS IS NOT "personOpponentFor RETURNED NULL". That function also returns null for a person with
+ *  no kit, and THAT null is supposed to fall through to the threat path. Only a DECLARATION stops a fight.
+ */
+export function declaredNotAnOpponent(rec) {
+  return rec?.notAnOpponent === true || rec?.canOppose === false;
+}
 /** A PERSON as a fight opponent: their whole sheet — attributes, health, energy, soak, level, kit. Was `personOpponent` in app.js. */
 export function personOpponentFor(rec, { catalog = {}, cfg = {}, day = null, traditionIndex = null, stageOf = null } = {}) {
   if (!rec) return null;
@@ -200,7 +216,7 @@ export function personOpponentFor(rec, { catalog = {}, cfg = {}, day = null, tra
   // the threat path does NOT take them either — a hidden hand (`the_iron_kestrel_buyer`, "not a single person")
   // or a being that has not arrived (R41) is not something a threat number can stand in for. The caller sees
   // null and the roster's `reach` column says "declared no", so the absence is a decision rather than a hole.
-  if (rec.notAnOpponent === true) return null;
+  if (declaredNotAnOpponent(rec)) return null;
   // ⚑ R41 — WHICH FORM IS IN FRONT OF THE PLAYER. A Sovereign arrives DIMINISHED at a mid arc stage and in FINAL
   // FORM at the last; the record is one, the form is chosen by the arc's live stage (threaded in as `stageOf`,
   // never read from the world-tick here). No `forms` block → exactly the record as authored.
@@ -236,6 +252,13 @@ export function duelFromTarget(character, target, { catalog = {}, npcs = {}, cfg
   const rec = (id && (character?.npcRegistry?.[id] || npcs?.[id]))
     || (name && (Object.values(character?.npcRegistry || {}).find(n => n?.name === name) || Object.values(npcs || {}).find(n => n?.name === name)))
     || null;
+  // ⛔ AND THE REFUSAL IS HONOURED HERE TOO, WHICH IS WHERE IT WAS MISSING. `personOpponentFor` refused a
+  // declared non-opponent and this function then built the fight anyway out of a threat number — measured:
+  // Akinetos, "appears? No, and its absence is the content", entered play at threat 36 with 5 health.
+  // ⚠️ The comment on `personOpponentFor` already claimed "the threat path does NOT take them either". It
+  // described the intent; only half of it was implemented. Refused before anything is written, so a
+  // caller that ignores the return value cannot leave a half-made encounter on the character.
+  if (declaredNotAnOpponent(rec)) return null;
   const person = rec ? personOpponentFor(rec, { catalog, cfg, day, traditionIndex, stageOf }) : null;
   const fallbackThreat = Number(threat) || Number(target?.threat) || Math.max(20, Math.min(70, Math.round((Number(here?.dangerLevel) || 3) * 12)));
   const entry = { id: `harm-${slugify(target?.name || "foe")}-${(character?.activeEncounter?.state?.round || 0)}`,

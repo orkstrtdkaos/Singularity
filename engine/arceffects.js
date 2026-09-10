@@ -18,9 +18,34 @@
 
 /** Every effect in force right now, tagged with the arc and stage it came from.
  *  `stageOf` is injected (worldtick owns `arcStageNow`) so this module stays free of the world-tick. */
-export function activeArcEffects(content, character, stageOf) {
+/** SNG-273 §2 — IS THIS ARC IN FORCE *HERE*?
+ *
+ *  ⛔ ERIK: "I want regional and local arcs as well." `scale` was authored on all six greater arcs and
+ *  read by nobody on the effects path, so `arc_block_bleed` — scale `regional`, the Blocklands and the
+ *  Gearlands — put craftCost ×1.9 on lattice, figurist and hourkeeper IN THE DEEPWOOD.
+ *
+ *  ⚠️ `crossesRegions` IS PROSE AND IS NOT THIS. It is authored as sentences the GM reads aloud — "all
+ *  Reaches", "every deep site", "the manifest domains (which the substrate runs)" — and 14 of its 17
+ *  entries resolve to no region at all. Reading it as ids would quietly strand most of the world's arcs.
+ *  The machine-readable reach is `regions`, a separate field of region IDS, and the prose stays prose.
+ *
+ *  ⛑ ABSENT `regions` MEANS EVERYWHERE, which is exactly what the engine did before this existed — so
+ *  the six authored arcs do not move until somebody authors a reach for them. A world or cosmic arc is
+ *  everywhere regardless: listing a few example regions on one must not shrink it. */
+export function arcReachesRegion(arc, regionId) {
+  const scale = String(arc?.scale || "").toLowerCase();
+  if (scale === "world" || scale === "cosmic") return true;
+  const reach = Array.isArray(arc?.regions) ? arc.regions.filter(Boolean) : [];
+  if (!reach.length) return true;              // unscoped is UNKNOWN, not NOWHERE — today's behaviour
+  if (!regionId) return true;                  // asked without a place: answer as the world, not as nowhere
+  return reach.includes(regionId);
+}
+export function activeArcEffects(content, character, stageOf, { regionId = null } = {}) {
   const out = [];
   for (const arc of (content?.greaterArcs || [])) {
+    // ⛑ THE PLACE FILTER IS OPT-IN: a caller that names no region gets the whole world's effects, which
+    // is what every caller got before this parameter existed.
+    if (regionId && !arcReachesRegion(arc, regionId)) continue;
     let stage = null;
     try { stage = stageOf ? stageOf(arc.id) : (arc.currentStage ?? 1); } catch { stage = null; }
     if (stage == null) continue;

@@ -128,7 +128,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.440";
+const APP_VERSION = "1.9.441";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12273,8 +12273,16 @@ async function ensureChronicleParagraph(force = false) {
 // than pattern-matched; this is the thin shell that feeds it real state and puts it on screen.
 // SNG-273: the effects in force RIGHT NOW. One reader, so the receipt, the World tab and the GM block can
 // never disagree about what the world is doing.
+// SNG-273 §2: WHERE THE PLAYER IS, for the arcs that are only in force somewhere. Its own function so
+// a missing location answers `null` — "no place", which the reader treats as the world — rather than
+// throwing inside the try and blanking every effect in the game.
+function hereRegionId() {
+  try { return CONTENT.locations?.[character?.currentLocationId]?.regionId || null; } catch { return null; }
+}
 function arcEffectsNow() {
-  try { return activeArcEffects(CONTENT, character, (arcId) => arcStageNow(CONTENT, character, arcId)); }
+  // ⛔ A REGIONAL ARC IS NOW REGIONAL. Authored arcs carry no `regions` and so are unchanged; a
+  // GENERATED arc is born with the region it was minted in, and stops taxing the rest of the world.
+  try { return activeArcEffects(CONTENT, character, (arcId) => arcStageNow(CONTENT, character, arcId), { regionId: hereRegionId() }); }
   catch { return []; }
 }
 

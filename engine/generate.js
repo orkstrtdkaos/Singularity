@@ -181,6 +181,12 @@ export function stubEntity(type, context = {}, schema = {}) {
       // ⚑ THE NEIGHBOURS THE WAKE ALREADY PRESSED ON — real arc ids, filtered to ones that exist when the
       // wake was made. The floor used to drop them and the thread arrived connected to nothing.
       ...(wakeArc?.connectsTo?.length ? { connectsTo: wakeArc.connectsTo.slice(0, 3) } : {}),
+      // ⛔ AND A GENERATED ARC IS BORN WITH ITS REACH, which is the half of `scale` that was a label.
+      // A `local` arc whose effects reached every region was the born-whole contract broken one field
+      // along — the world taxing the Deepwood for something that happened outside Cairnhold.
+      // ⛑ REGION IDS, never the prose `crossesRegions` above: that line is what the GM says out loud.
+      // A wake at world scale inherits no reach and stays everywhere, because that is what it is.
+      ...(wakeArc?.scale === "world" || wakeArc?.scale === "cosmic" || !region ? {} : { regions: [region] }),
       hingeNpcs: [],
       // ⛔ AND THE TWO SENTENCES THAT WERE ON EVERY MINTED ARC NOW DEPEND ON WHICH SIDE WON.
       ifIgnored: won < 0

@@ -14445,6 +14445,89 @@ await (async () => {
   })());
   check("272/302: priceShift now HAS a consumer, and the register says so",
     typeof AE.EFFECT_CONSUMERS.priceShift === "string" && /economy/.test(AE.EFFECT_CONSUMERS.priceShift));
+
+  // ⛔ ERIK: "I want regional and local arcs as well." ⚠️ `scale` was authored on all six greater arcs and
+  // read by NOBODY on the effects path: `activeArcEffects` iterated every arc and applied every stage
+  // effect everywhere. Measured at stage 3, `arc_block_bleed` — scale `regional`, "the Blocklands / the
+  // Gearlands" — put craftCost ×1.9 on lattice, figurist and hourkeeper IN THE DEEPWOOD. An effect carried
+  // no place at all; `match` supports `traditions` and nothing else.
+  {
+    const AE273 = await import("../engine/arceffects.js");
+    const { loadContentHeadless: lch273 } = await import("./headless_content.mjs");
+    const CT = await lch273();
+    const at3 = () => 3;
+    const REGIONS = [...new Set(Object.values(CT.locations || {}).map(l => l.regionId).filter(Boolean))];
+    // ⛑ INERT ON AUTHORED CONTENT, AND THAT IS THE POINT OF LANDING IT THIS WAY. None of Aevi's six arcs
+    // carries `regions`, so every one of them is still in force everywhere — the world does not move on
+    // the day the capability arrives, and she decides the reach when she is ready.
+    const nowhere = AE273.activeArcEffects(CT, {}, at3).length;
+    const moved = REGIONS.filter(r => AE273.activeArcEffects(CT, {}, at3, { regionId: r }).length !== nowhere);
+    check("272/273: ⛑ the place filter is INERT on authored content — no authored arc scopes itself yet",
+      moved.length === 0, moved.slice(0, 4).join(", "));
+    // ⚑ NON-VACUITY: "equal everywhere" is also true of nothing at all.
+    check("272/273: …and that comparison runs on real effects across real regions",
+      nowhere > 0 && REGIONS.length > 10, `${nowhere} effects · ${REGIONS.length} regions`);
+
+    // ⛔ AND THE CAPABILITY WORKS, on a scoped copy rather than on content that must not change.
+    const scoped = JSON.parse(JSON.stringify(CT.greaterArcs || []));
+    const bleed = scoped.find(a => String(a.scale).toLowerCase() === "regional" && (a.stages || []).length);
+    if (bleed) {
+      const home = REGIONS[0], away = REGIONS.find(r => r !== home);
+      bleed.regions = [home];
+      const cnt = (r) => AE273.activeArcEffects({ ...CT, greaterArcs: scoped }, {}, at3, { regionId: r })
+        .filter(e => e.arcId === bleed.id).length;
+      check("272/273: ⛔ a REGIONAL arc scoped to a region is in force THERE", cnt(home) > 0, `${cnt(home)} effects`);
+      check("272/273: …and is NOT in force in a region it does not name", cnt(away) === 0, `${cnt(away)} in ${away}`);
+      // ⚠️ A WORLD ARC LISTING EXAMPLE REGIONS MUST NOT SHRINK TO THEM. Aevi writes places on world arcs
+      // as illustration ("the Gearlands/Numen"), and reading that as a boundary would strand the arc.
+      const w = scoped.find(a => String(a.scale).toLowerCase() === "world" && (a.stages || []).length);
+      if (w) { w.regions = [home];
+        const wAway = AE273.activeArcEffects({ ...CT, greaterArcs: scoped }, {}, at3, { regionId: away })
+          .filter(e => e.arcId === w.id).length;
+        check("272/273: ⛑ …while a WORLD arc listing a region is still everywhere — scale outranks reach",
+          wAway > 0, `${wAway} effects in ${away}`); }
+    }
+
+    // ⛔ THE PROSE IS NOT THE REACH, AND READING IT AS ONE WOULD HAVE STRANDED MOST OF THE WORLD.
+    // `crossesRegions` is authored as sentences the GM says out loud — "all Reaches", "every deep site",
+    // "the manifest domains (which the substrate runs)" — and 14 of its 17 entries across the six arcs
+    // resolve to no region id at all. An arc that names a region IN PROSE and scopes nothing must still
+    // be everywhere.
+    const prosey = (CT.greaterArcs || []).find(a => (a.crossesRegions || []).length && !a.regions);
+    check("272/273: ⚠️ `crossesRegions` PROSE is never read as the reach — only `regions` ids are",
+      !!prosey && REGIONS.every(r => AE273.arcReachesRegion(prosey, r)),
+      prosey ? `${prosey.id}: ${JSON.stringify(prosey.crossesRegions).slice(0, 60)}` : "no prose arc");
+    // ⛑ AND ASKED WITHOUT A PLACE, THE ANSWER IS THE WORLD, NOT NOWHERE. A caller that cannot say where
+    // the player is must get every effect, which is what silently blanking the field would look like.
+    check("272/273: …and an arc asked about NO place answers as the world, not as nowhere",
+      AE273.arcReachesRegion({ scale: "local", regions: ["somewhere"] }, null) === true);
+    check("272/273: …but asked about a real elsewhere, it says no — the guard above is not blanket-true",
+      AE273.arcReachesRegion({ scale: "local", regions: ["somewhere"] }, "elsewhere") === false);
+
+    // ⛔ AND A GENERATED ARC IS BORN LOCAL — the half of Erik's ask the engine could not do at all. The
+    // stub borns every wake-arc at `scale: "local"`, and before this its effects reached every region.
+    {
+      const GEN = await import("../engine/generate.js");
+      const loc = Object.values(CT.locations || {}).find(l => l.regionId);
+      const mk = (scale) => GEN.stubEntity("arc", { location: loc, wake: { scale, pressure: "the mill will not reopen", dir: 1 } }, {});
+      const local = mk("local"), world = mk("world");
+      check("272/273: ⛔ a GENERATED local arc is born with the region it was minted in",
+        Array.isArray(local.regions) && local.regions.length === 1 && local.regions[0] === loc.regionId,
+        `${JSON.stringify(local.regions)} vs ${loc.regionId}`);
+      check("272/273: …and a WORLD-scale wake inherits no reach, because that is what it is",
+        world.regions === undefined, JSON.stringify(world.regions));
+      // ⚑ AND THE BORN REACH IS REAL: the arc it births is in force where it was minted and not elsewhere.
+      const other = REGIONS.find(r => r !== loc.regionId);
+      check("272/273: …and that born reach actually binds through the reader",
+        AE273.arcReachesRegion(local, loc.regionId) === true && AE273.arcReachesRegion(local, other) === false,
+        `${loc.regionId} vs ${other}`);
+    }
+
+    // ⛑ AND THE APP ASKS. A reader nothing calls with a place is a reader that changed nothing.
+    const appArc = readFileSync(join(root, "app.js"), "utf8");
+    check("272/273: the app passes the PLAYER'S region to the one effects reader",
+      /function hereRegionId\(\)/.test(appArc) && /activeArcEffects\(CONTENT, character,[^;]*\{ regionId: hereRegionId\(\) \}\)/.test(appArc));
+  }
 }
 
 // --- SNG-288: seven roads to mythic -------------------------------------------------------------------

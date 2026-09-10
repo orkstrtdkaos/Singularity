@@ -109,12 +109,24 @@ out.**
 against the wrong one and called it *"the inverse"* — ⛑ it is not an inverse of anything. IT IS THE SAME
 SHAPE IN A DIFFERENT MEDIUM.**
 
+### ⛔ AND AEVI MISREAD THE COCOON A SECOND TIME — ERIK'S CORRECTION
+
+> *"The Afterling is **the closest to living a dead person can be.** They're **basically the same person,
+> but undead.** A personality doesn't grow inside them. **'Worn' in this sense isn't like an outfit, it's
+> like a body wearing out.**"*
+
+⛑ **THE COCOON IS NOT A CHRYSALIS WITH SOMETHING NEW IN IT. IT IS A BODY FAILING, AND WHAT COMES THROUGH IS
+WHO WAS ALREADY THERE.**
+
 | | ⚑ |
 |---|---|
-| **the AFTERLING** | ⛔ a raised body worn long enough that **a whole personality grew inside it** |
-| ⚑ **the UNORDERED** | ⛔ a deployment run long enough that **a whole intelligence grew inside it** |
+| ⛑ **the AFTERLING** | ⛔ **the same person, undead.** The body wears out and **the person survives it** — the closest to living a dead person can be |
+| ⛔ **`the_narrowed`** | ⚠️ the other end: **the person did NOT survive.** An errand kept, a person dropped |
+| ⚑ **the UNORDERED** | ⛔ **there was never a person — and one accumulated anyway** |
 
-⚠️ **NEITHER WAS MADE. BOTH ACCUMULATED.** ⛑ **And the corpus already treats an Afterling as a person with a
+⚠️ **SO THE THREE ARE NOT ONE SHAPE. THEY ARE THREE ANSWERS TO ONE QUESTION: WHAT SURVIVES A PROCESS THAT
+WAS NOT MEANT TO PRODUCE A PERSON?** ⛑ **An Afterling: everything. A narrowed: nothing. An Unordered:
+someone who was never there to begin with.** ⛑ **And the corpus already treats an Afterling as a person with a
 want: *"a driven shade or an Afterling READS FINE — they WANT something, and wanting is weather."*** ⛔ **That
 sentence is the test for both kinds, and Aevi-the-Watcher passes it.**
 

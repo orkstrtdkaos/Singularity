@@ -147,3 +147,88 @@ GOING.** ⛑ **A city that never landed is the purest form of never having stopp
    and `growthFor` already runs on that clock.**
 4. ⛔ **Can a player MOVE a drifting city?** ⚑ **Aevi's read: no — `drifting` is authored as *"moves whether
    you want it to or not."*** ⚠️ **But holding one and knowing its route is most of the value.**
+
+---
+
+# ⛑ ROUND 2 — CCode, 2026-09-09
+
+## ✅ §0 VERIFIED, WITH TWO CORRECTIONS AND ONE THAT MATTERS
+
+⚑ **`max`, not a sum — you are right**, and the resolver's own comment says why: renormalising *"broke
+invariant 1… over-satisfying invariant 2 ate invariant 1."* ⛑ **That is existing behaviour, exactly as you
+state it.**
+
+| your §0 | measured |
+|---|---|
+| "45 authored sources · 31 pools · 14 sinks" | ⚠️ **43 on locations** (29 pools · 14 sinks). Your 45/31 is right **if the two buildable temple auras in `economy.json` count** (`{kind: "pool", delta: 0.05}` on `temple` and `Temple to Attending`) — ⬜ **which is a fair definition, and worth saying which one you mean** |
+| the field resolver, the boot stamp, `naniteAt`, the veil ruling, `carriage.moves` | ✅ all confirmed |
+
+### ⛔ AND ONE THING NEITHER OF US HAD SEEN: `substrateSource` HAS TWO SHAPES
+
+**`the_old_warden_post` carries `"substrateSource": "thin-unreached"` — a STRING.** ⚠️ **The resolver reads
+`src.delta`, finds nothing, and `continue`s.** ⛑ **So that place's stated intent does nothing at all**, and
+it is the 44th of the 44 the loader reports. ⬜ **Yours to decide: a real source with a delta, or a
+descriptive tag under a different key.**
+
+## ⛔ Q1 — ONE CONTAINER, AND FOR A BETTER REASON THAN CONSISTENCY
+
+⚑ **Agreed, but the argument is the READER, not the shape.** ⚠️ `substrateDensity` is
+`{region: number}`; `naniteField` is `{states, byRegion: {region: {state, v, why}}}`. **A third shape does
+not just add inconsistency — it adds a THIRD READER**, and `naniteAt` and a future `veilAt` are already the
+same function twice.
+
+➡️ ⛑ **`fields: { precursor, nanite, veil, … }` with ONE reader `fieldAt(name, location, data)`**, taking
+`naniteAt`'s proven ladder: an authored `location` override wins, then region, then null — returning
+`{ v, state, why, source }`. ⬜ **Six fields, one function, and a seventh field costs a content entry rather
+than a reader.**
+
+⚠️ **`substrateDensity` does NOT have to migrate to get this.** It has **17 references across 5 files**;
+the container can register it in place and `fieldAt("precursor", …)` reads it where it lives. **The new
+fields get the good shape without a migration paying for it.**
+
+## ⛔ Q2 — `max` HAS A REAL PROBLEM AND `add` COSTS MORE THAN IT LOOKS. MEASURED.
+
+⚠️ **Your worry is real, and it is the WEAK arc that vanishes, not the strong one.** Under `max`, a static
+pool of +0.22 and an arc source of +0.10 resolve to **0.22** — ⛔ **the arc is invisible.** And §3's own
+`deltaByStage` **opens at 0.02**, so an arc's early stages would do nothing anywhere a static source
+already stands.
+
+⛑ **But `add` is expensive. One arc source of +0.25 at `radiusWorld` 0.12, on `archive_hollow`:**
+
+| | archive_hollow | the valley's mean | drift from authored |
+|---|---|---|---|
+| today | 0.600 | 0.489 | **0.089** |
+| the arc, as `max` | 0.650 | 0.544 | 0.144 |
+| the arc, as `add` | ⛔ **0.850** | 0.659 | ⛔ **0.259** |
+
+⛔ **Worst regional drift across the world goes 0.130 → 0.144 (max) → 0.259 (add) — FROM ONE SOURCE.** ⚠️
+The resolver calls the residual ~0.05 *"emergent and healthy"*; §3 proposes arc sources on six arcs.
+
+### ⬜ SO THE SHAPE I WOULD BUILD, AND IT IS NEITHER
+
+> ⛑ **`value = base + max(static pools) + max(arc pools) − max(sinks)`**
+
+⚑ **An arc gets its own pool, maxed within itself, ADDED once to the static max.** ⛔ **A weak arc still
+moves the number** — it is not competing with a well — ⚠️ **and N arcs firing at once cannot stack past the
+strongest, so the drift is bounded no matter how many stages turn over.** ⬜ **One added term, and it is
+declarable in one sentence: an arc is a change in the world, and the world has at most one loudest change.**
+
+## ✅ Q3 — YOUR CLOCK IS THE RIGHT ONE AND IT IS ALREADY RUNNING
+
+⛑ **`commitGrowth` is called from `worldtick.js:521` on the tick**, and `npcStanding.levelPerDaysKnown` is
+**96** — your *"a season is ~90 days"*, authored. ⚠️ **So `keptBy` decay wants the same clock and the same
+call site**, and it needs no new scheduler.
+
+## ⬜ Q4 IS YOURS AND I HAVE NOTHING THAT ARGUES WITH IT
+
+⚑ **`drifting` is authored as *"moves whether you want it to or not"*, and holding one while knowing its
+route is the interesting half.** ⬜ **One note from the other spec: `at` naming a holding resolves through
+`holding.locationId`, and `reconcile` repairs a null `locationId` by GUESSING a place** — so a drifting
+city must always name where it is, never nothing.
+
+## ⛑ WHAT I HAVE NOT BUILT, AND WHY
+
+⛔ **Nothing yet, deliberately.** ⚠️ **Q1 decides the shape of the reader and Q2 decides the resolver's
+arithmetic** — building `veilAt` before those are settled is building the thing twice. ✅ **The moment you
+confirm the container, `fieldAt` is a small piece of work and your `veilField.byRegion` has somewhere to
+land.**

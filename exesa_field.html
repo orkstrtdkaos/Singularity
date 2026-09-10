@@ -1,196 +1,228 @@
 <!DOCTYPE html>
-<meta charset="utf-8"><title>Exesa — power source field</title>
+<meta charset="utf-8"><title>Exesa — the power under the ground</title>
 <style>
-:root{--bg:#0b0d10;--ink:#e8ecf2;--dim:#8b95a3;--line:#232a33;--hot:#ffb454;}
+:root{--bg:#07090c;--ink:#e9edf3;--dim:#8791a0;--line:#1e242c;--hot:#ffb454}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-header{padding:14px 18px;border-bottom:1px solid var(--line)}
-h1{margin:0;font-size:17px;font-weight:600;letter-spacing:.2px}
-.sub{color:var(--dim);font-size:12.5px;margin-top:3px}
-.wrap{display:grid;grid-template-columns:1fr 300px;gap:0;height:calc(100vh - 62px)}
-@media(max-width:900px){.wrap{grid-template-columns:1fr;height:auto}}
-.stage{position:relative;background:#070809;display:flex;align-items:center;justify-content:center;overflow:hidden}
-canvas{max-width:100%;max-height:100%;image-rendering:pixelated;cursor:crosshair}
-aside{border-left:1px solid var(--line);padding:16px;overflow-y:auto;background:#0d1014}
-@media(max-width:900px){aside{border-left:none;border-top:1px solid var(--line)}}
-h2{font-size:11px;text-transform:uppercase;letter-spacing:.9px;color:var(--dim);margin:20px 0 8px;font-weight:600}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;overflow:hidden}
+header{padding:12px 18px;border-bottom:1px solid var(--line)}
+h1{margin:0;font-size:16px;font-weight:600}
+.sub{color:var(--dim);font-size:12px;margin-top:2px}
+.wrap{display:grid;grid-template-columns:1fr 296px;height:calc(100vh - 56px)}
+@media(max-width:860px){.wrap{grid-template-columns:1fr}}
+.stage{position:relative;background:radial-gradient(circle at 50% 45%,#0d1218,#05070a 70%);display:flex;align-items:center;justify-content:center}
+canvas{cursor:grab}canvas:active{cursor:grabbing}
+aside{border-left:1px solid var(--line);padding:15px;overflow-y:auto;background:#0a0d11}
+h2{font-size:10.5px;text-transform:uppercase;letter-spacing:.9px;color:var(--dim);margin:18px 0 7px;font-weight:600}
 h2:first-child{margin-top:0}
-.src{display:flex;gap:7px;flex-wrap:wrap}
-button.s{background:#151a20;border:1px solid var(--line);color:var(--dim);padding:5px 10px;border-radius:5px;cursor:pointer;font:inherit;font-size:12.5px}
-button.s.on{background:var(--hot);border-color:var(--hot);color:#1a1206;font-weight:600}
-.arc{margin-bottom:11px}
-.arc label{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:3px}
-.arc .nm{color:var(--ink)}
+.src{display:flex;flex-direction:column;gap:5px}
+.sr{display:flex;align-items:center;gap:8px;padding:5px 8px;border:1px solid var(--line);border-radius:5px;cursor:pointer;background:#0e1217;font-size:12.5px}
+.sr.off{opacity:.32}
+.sw{width:13px;height:13px;border-radius:3px;flex:none}
+.sr .nm{flex:1}.sr .pc{color:var(--dim);font-variant-numeric:tabular-nums;font-size:11.5px}
+.arc{margin-bottom:9px}
+.arc label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:2px}
 .arc .st{color:var(--hot);font-variant-numeric:tabular-nums}
-input[type=range]{width:100%;accent-color:var(--hot)}
-.rd{border:1px solid var(--line);border-radius:6px;padding:11px;margin-top:6px;background:#0a0d11}
-.rd .big{font-size:26px;font-variant-numeric:tabular-nums;line-height:1.1}
-.rd .lbl{color:var(--dim);font-size:11.5px;margin-top:2px}
-.rd .band{margin-top:9px;font-size:12px;color:var(--dim)}
-.in{color:#7fd18b;font-weight:600}.out{color:#e0705f;font-weight:600}
-table{width:100%;border-collapse:collapse;font-size:12px;font-variant-numeric:tabular-nums}
-td{padding:2.5px 0;border-bottom:1px solid #161c23}
-td:last-child{text-align:right}
-.note{color:var(--dim);font-size:11.5px;line-height:1.45;margin-top:8px}
-.legend{display:flex;align-items:center;gap:7px;margin-top:9px;font-size:11px;color:var(--dim)}
-.ramp{height:9px;flex:1;border-radius:2px;background:linear-gradient(90deg,#101820,#1d3a52,#2f7fa8,#63c4b0,#c9d96a,#ffb454,#ff6a3d)}
-.pin{position:absolute;pointer-events:none;border:1.5px solid #fff;border-radius:50%;width:9px;height:9px;margin:-5px 0 0 -5px;box-shadow:0 0 0 1.5px #000}
+input[type=range]{width:100%;accent-color:var(--hot);margin:0}
+.rd{border:1px solid var(--line);border-radius:6px;padding:10px;background:#080b0e;font-size:12px}
+.rd .big{font-size:23px;font-variant-numeric:tabular-nums}
+.rd .lbl{color:var(--dim);font-size:11px}
+.rd .ln{margin-top:6px;display:flex;justify-content:space-between}
+.in{color:#7fd18b}.out{color:#e0705f}
+.note{color:var(--dim);font-size:11px;line-height:1.45;margin-top:9px}
+.tog{display:flex;gap:6px;margin-top:8px}
+button.t{flex:1;background:#141a21;border:1px solid var(--line);color:var(--dim);padding:5px;border-radius:5px;cursor:pointer;font:inherit;font-size:11.5px}
+button.t.on{background:var(--hot);border-color:var(--hot);color:#1a1206;font-weight:600}
 </style>
 <header>
   <h1>Exesa — the power under the ground</h1>
-  <div class="sub">Real field data from <code>terrain.json</code> — 118 region voters, 43 authored sources, 39 region densities. Click the map to probe a point.</div>
+  <div class="sub">Real field data: 118 region voters, 43 authored sources, 39 densities. Drag to spin · click to probe.</div>
 </header>
 <div class="wrap">
-  <div class="stage"><canvas id="c" width="480" height="240"></canvas><div class="pin" id="pin" style="display:none"></div></div>
+  <div class="stage"><canvas id="c" width="620" height="620"></canvas></div>
   <aside>
-    <h2>Power source</h2>
-    <div class="src" id="src"></div>
-    <div class="legend"><span>thin</span><div class="ramp"></div><span>dense</span></div>
-
-    <h2>Arc stage</h2>
-    <div id="arcs"></div>
-
-    <h2>At this point</h2>
-    <div class="rd">
-      <div class="big" id="pv">—</div>
-      <div class="lbl" id="pl">click the map</div>
-      <div class="band" id="pb"></div>
+    <h2>Sources</h2><div class="src" id="src"></div>
+    <div class="tog">
+      <button class="t on" id="bSpin">spinning</button>
+      <button class="t" id="bMix">additive</button>
     </div>
-
-    <h2>World reach</h2>
-    <table id="reach"></table>
+    <h2>Arc stage</h2><div id="arcs"></div>
+    <h2>At this point</h2>
+    <div class="rd" id="rd"><div class="big">—</div><div class="lbl">click the globe</div></div>
     <div class="note" id="note"></div>
   </aside>
 </div>
 <script>
 const DATA = {"f":{"voters":[[-68,-164,"valley"],[-10,115,"the_given_land"],[-8,70,"the_palelands"],[-14,74,"the_palelands"],[-6,-144,"the_ascent"],[-2,-57,"the_pattern_reach"],[-64.2,-111.8,"valley"],[-43.8,1.8,"foothill_dusklow"],[-9,-98,"manifest_domain"],[-5,-99,"manifest_domain"],[-18,-104,"manifest_domain"],[-62,88,"the_echo_vale"],[-16,-98,"manifest_domain"],[-46,75,"foothill_gearsflat"],[-9,175,"radiant_wastes"],[-5,-114,"the_making"],[-45,-52,"foothill_greenmarch"],[-47,36,"foothill_greyhearth"],[-68,114,"the_echo_vale"],[-13,-106,"the_quickwood"],[-46,46,"foothill_hardline"],[-72,107,"the_echo_vale"],[-67,167,"valley"],[-45,-90,"foothill_kindlerow"],[-54,68,"foothill_longshore"],[-64,-112,"valley"],[-65,76,"the_echo_vale"],[-52,-80,"foothill_plainstead"],[-10,158,"the_gearlands"],[-65,49,"the_echo_vale"],[-1,37,"unspooling"],[-48,-72,"foothill_stair_hollow"],[-68.2,-163.8,"valley"],[-1,23,"the_descent"],[-8,172,"the_reasoned_hold"],[-82,0,"the_center"],[-11,29,"the_descent"],[0,-180,"radiant_wastes"],[-3,-99,"manifest_domain"],[-5,162,"the_reasoned_hold"],[-6,-122,"the_making"],[-20,44,"unspooling"],[-2,56,"the_unmade"],[-12,99,"somatic_reaches"],[-90,0,"the_center"],[-7,-52,"the_kept_reach"],[-14,-63,"the_pattern_reach"],[-6,-159,"the_stark_reach"],[-5,110,"somatic_reaches"],[-10,-124,"the_making"],[-5,-47,"the_kept_reach"],[-22,158,"the_gearlands"],[-22,42,"unspooling"],[-4,-130,"the_lattice_cities"],[-83,40,"the_center"],[-1,150,"the_gearlands"],[-24,-106,"the_quickwood"],[-4.6,-9.6,"the_feeling_coast"],[-3,101,"somatic_reaches"],[-1,-123,"the_making"],[-9,9,"the_veiled_reach"],[1,1.2,"umbral_depths"],[0,-105,"the_quickwood"],[-8,92,"somatic_reaches"],[-20,68,"the_palelands"],[-81,-160,"the_center"],[-6,-39,"the_kept_reach"],[-8,13,"the_veiled_reach"],[-5,-25,"the_numinous_reach"],[-8.6,-3,"umbral_depths"],[-3,11,"the_veiled_reach"],[-3,120,"the_given_land"],[-23,-177,"radiant_wastes"],[-2,75,"the_palelands"],[-18,136,"the_open_reach"],[-45,15,"foothill_the_low_market"],[-32,90,"riven_marches"],[0,30,"the_descent"],[-10,143,"the_open_reach"],[-2,-147,"the_ascent"],[-38,105,"somatic_reaches"],[0,-30,"the_numinous_reach"],[-17,71,"the_palelands"],[-5,164,"the_reasoned_hold"],[-21,-103,"the_quickwood"],[-4,73,"the_palelands"],[-79,-70,"the_center"],[-1,92,"riven_marches"],[-13,67,"the_unmade"],[-3,64,"the_unmade"],[-4,176,"radiant_wastes"],[-4,146,"the_gearlands"],[-12,-48,"the_kept_reach"],[-4,-100,"the_quickwood"],[-22.2,0,"umbral_depths"],[-16,56,"unspooling"],[-4,84,"riven_marches"],[-3,-45,"the_kept_reach"],[-3,-38,"the_numinous_reach"],[-2,-167,"the_stark_reach"],[-14,-161,"the_stark_reach"],[-3,-3,"umbral_depths"],[-6,-147,"the_ascent"],[-4,131,"the_open_reach"],[1,0,"umbral_depths"],[-1,-142,"the_lattice_cities"],[-3,-61,"the_pattern_reach"],[-19,141,"the_open_reach"],[-8,114,"the_given_land"],[-5.4,-10.2,"the_feeling_coast"],[-26,44,"unspooling"],[-52,34,"foothill_the_worn_yard"],[-45,-15,"foothill_thinwater"],[-69,101,"the_echo_vale"],[-10,-133,"the_lattice_cities"],[-14,45,"unspooling"],[-14,126,"the_given_land"],[-8.6,-20.4,"the_feeling_coast"]],"densByRegion":{"the_gearlands":0.98,"the_lattice_cities":0.94,"manifest_domain":0.9,"the_ascent":0.88,"radiant_wastes":0.86,"the_pattern_reach":0.85,"the_kept_reach":0.84,"the_numinous_reach":0.82,"the_center":0.7,"the_veiled_reach":0.66,"the_reasoned_hold":0.6,"umbral_depths":0.58,"the_descent":0.55,"the_making":0.52,"the_feeling_coast":0.48,"the_stark_reach":0.46,"the_open_reach":0.44,"the_unmade":0.42,"valley":0.4,"the_palelands":0.32,"the_given_land":0.3,"unspooling":0.28,"somatic_reaches":0.22,"riven_marches":0.2,"the_quickwood":0.12,"the_foothills":0.7,"the_echo_vale":0.46,"foothill_dusklow":0.55,"foothill_gearsflat":0.8,"foothill_greenmarch":0.45,"foothill_greyhearth":0.35,"foothill_hardline":0.6,"foothill_kindlerow":0.85,"foothill_longshore":0.7,"foothill_plainstead":0.5,"foothill_stair_hollow":0.55,"foothill_the_low_market":0.6,"foothill_the_worn_yard":0.75,"foothill_thinwater":0.4},"nanByRegion":{"the_gearlands":1,"the_lattice_cities":1,"the_making":1,"the_reasoned_hold":1,"the_ascent":1,"the_kept_reach":1,"the_pattern_reach":1,"the_center":1,"the_veiled_reach":1,"the_numinous_reach":1,"radiant_wastes":2,"the_foothills":1,"unspooling":2,"the_quickwood":2,"the_feeling_coast":2,"the_descent":2,"umbral_depths":2,"manifest_domain":0,"somatic_reaches":0,"riven_marches":0,"the_palelands":0,"the_given_land":0,"the_unmade":0,"the_stark_reach":0,"the_open_reach":2,"valley":2,"the_echo_vale":1,"foothill_dusklow":1,"foothill_gearsflat":1,"foothill_greenmarch":2,"foothill_greyhearth":0,"foothill_hardline":1,"foothill_kindlerow":1,"foothill_longshore":1,"foothill_plainstead":1,"foothill_stair_hollow":1,"foothill_the_low_market":1,"foothill_the_worn_yard":1,"foothill_thinwater":2},"sources":[[-68,-164,0.2,0.054],[-8,70,0.1,0.054],[-43.8,1.8,-0.06,0.054],[-16,-98,0.2,0.105],[-46,75,0.13,0.054],[-5,-114,0.16,0.054],[-47,36,0.1,0.054],[-13,-106,-0.06,0.072],[-45,-90,0.12,0.054],[-48,-72,-0.06,0.054],[-68.2,-163.8,0.26,0.057],[-82,0,0.16,0.09],[0,-180,0.18,0.096],[-5,162,0.14,0.081],[-6,-122,0.13,0.081],[-12,99,-0.12,0.066],[-7,-52,0.1,0.054],[-5,110,-0.14,0.075],[-4,-130,0.2,0.099],[-1,150,0.22,0.102],[-3,101,-0.08,0.054],[0,-105,-0.1,0.105],[-8,92,0.1,0.054],[-20,68,0.1,0.048],[-6,-39,0.1,0.054],[-3,11,0.14,0.084],[-3,120,-0.18,0.072],[-2,75,-0.16,0.069],[0,30,0.14,0.084],[-10,143,0.14,0.054],[0,-30,0.16,0.096],[-4,176,0.1,0.054],[-4,146,0.14,0.084],[-4,-100,-0.08,0.078],[-16,56,-0.14,0.054],[-4,84,-0.14,0.078],[-3,-45,0.17,0.093],[-6,-147,0.18,0.096],[1,0,0.16,0.09],[-3,-61,0.17,0.093],[-52,34,-0.1,0.054],[-45,-15,-0.12,0.054],[-14,126,0.1,0.054]]},"m":{"bands":{"precursor":{"center":0.9,"width":0.2},"nanite":{"center":0.9,"width":0.2},"metaphysical":{"center":0.15,"width":0.22},"body":null,"wild":{"center":0.32,"width":0.2},"veil":{"center":0.1,"width":0.2}},"arcs":[{"id":"arc_the_poles_pull","name":"The Poles Pull","scale":"world","stage":1,"stages":4},{"id":"arc_what_wakes_beneath","name":"What Wakes Beneath","scale":"world","stage":1,"stages":4},{"id":"arc_manifestation_storm","name":"The Second Manifestation","scale":"world","stage":1,"stages":4},{"id":"arc_block_bleed","name":"The Bleeding Grammar","scale":"regional","stage":1,"stages":3},{"id":"arc_green_schism","name":"The Green Schism","scale":"regional","stage":1,"stages":3},{"id":"arc_the_disagreement","name":"The Disagreement","scale":"cosmic","stage":1,"stages":4}]}};
 const F=DATA.f, M=DATA.m;
-const W=480,H=240, cv=document.getElementById("c"), cx=cv.getContext("2d");
-const SRC=["precursor","nanite","veil","metaphysical","wild","body"];
-let src="precursor", stages={};
-M.arcs.forEach(a=>stages[a.id]=a.stage);
-
-// ── ARC EFFECT MODEL (prototype): each arc pushes named sources, by stage.
-// Direction is PER SOURCE, not per arc — The Poles Pull polarises rather than raises.
+// ── the four Erik named, plus the two that have no colour of their own
+const SRC=[
+ {k:"precursor", label:"crystal lattice", rgb:[ 74,150,255], on:true},
+ {k:"nanite",    label:"ordered nanite",  rgb:[255,214, 74], on:true},
+ {k:"veil",      label:"the veil",        rgb:[255, 82, 82], on:true},
+ {k:"wild",      label:"wild current",    rgb:[ 90,224,120], on:true},
+ {k:"metaphysical",label:"meaning",       rgb:[198,124,255], on:false},
+ {k:"body",      label:"body",            rgb:[190,190,190], on:false}
+];
 const EFFECT={
-  arc_what_wakes_beneath:{precursor:+1,nanite:+.6,veil:-1,metaphysical:-.7},
-  arc_the_poles_pull:{POLARISE:1},
-  arc_manifestation_storm:{precursor:+.5,wild:+.8,veil:-.4},
-  arc_bleeding_grammar:{nanite:+1,wild:-.8},
-  arc_green_schism:{wild:-1,veil:+.4,metaphysical:+.5},
-  arc_the_disagreement:{veil:+1,metaphysical:+.8}
+ arc_what_wakes_beneath:{precursor:+1,nanite:+.6,veil:-1,metaphysical:-.7},
+ arc_the_poles_pull:{POLARISE:1},
+ arc_manifestation_storm:{precursor:+.5,wild:+.8,veil:-.4},
+ arc_bleeding_grammar:{nanite:+1,wild:-.8},
+ arc_green_schism:{wild:-1,veil:+.4,metaphysical:+.5},
+ arc_the_disagreement:{veil:+1,metaphysical:+.8}
 };
-const STEP=0.055;  // per stage above 1, at full weight
+const STEP=.055;
+let stages={}; M.arcs.forEach(a=>stages[a.id]=a.stage);
+let spin=true, mix=true, rot=0, drag=null;
 
-function arcShift(s,d){
-  let out=0;
-  for(const a of M.arcs){
-    const k=(stages[a.id]||1)-1; if(!k) continue;
-    const e=EFFECT[a.id]; if(!e) continue;
-    if(e.POLARISE){ out += (d-0.55)*0.34*k; continue; }   // extremes intensify, middle thins
-    if(e[s]) out += e[s]*STEP*k;
-  }
-  return out;
-}
-// region vote — the asset's own formula: w = 1/((d²+6)^1.6)
-function densAt(lat,lon){
-  let bw=0,bd=0,tot=0;
-  for(const v of F.voters){
-    const dy=lat-v[0]; let dx=lon-v[1]; if(dx>180)dx-=360; if(dx<-180)dx+=360;
-    const d2=dy*dy+dx*dx*Math.cos(lat*Math.PI/180)**2;
-    const w=1/Math.pow(d2+6,1.6);
-    tot+=w; if(w>bw){bw=w;bd=F.densByRegion[v[2]]??0.5;}
-  }
-  let d=bd;
-  for(const s of F.sources){
-    const dy=lat-s[0]; let dx=lon-s[1]; if(dx>180)dx-=360; if(dx<-180)dx+=360;
-    const dd=Math.sqrt(dy*dy+dx*dx*Math.cos(lat*Math.PI/180)**2)*Math.PI/180;
-    const r=s[3]; if(dd<r*2.5){ const f=Math.exp(-(dd*dd)/(2*r*r)); d=Math.max(d,bd+s[2]*f); }
-  }
-  return Math.max(0,Math.min(1,d));
-}
-function value(lat,lon){
-  const d=densAt(lat,lon);
-  if(src==="body") return {d, v:0.62, band:null};       // a floor, not a spike
-  const dd=Math.max(0,Math.min(1,d+arcShift(src,d)));
-  const b=M.bands[src];
-  const lo=b.center-b.width, hi=b.center+b.width;
-  const v = dd>=lo&&dd<=hi ? 1 : dd<lo ? Math.pow(dd/Math.max(lo,1e-6),1.9) : Math.max(0,1-(dd-hi)*1.6);
-  return {d:dd, v:Math.max(0,Math.min(1,v)), band:b, inBand:dd>=lo&&dd<=hi};
-}
-function ramp(t){
-  const S=[[16,24,32],[29,58,82],[47,127,168],[99,196,176],[201,217,106],[255,180,84],[255,106,61]];
-  const x=Math.max(0,Math.min(.999,t))*(S.length-1), i=Math.floor(x), f=x-i;
-  const a=S[i],b=S[i+1]||S[i];
-  return [a[0]+(b[0]-a[0])*f, a[1]+(b[1]-a[1])*f, a[2]+(b[2]-a[2])*f];
-}
-function draw(){
-  const img=cx.createImageData(W,H);
-  for(let y=0;y<H;y++){
-    const lat=90-(y+0.5)/H*180;
-    for(let x=0;x<W;x++){
-      const lon=-180+(x+0.5)/W*360;
-      const {v}=value(lat,lon);
-      const c=ramp(v), i=(y*W+x)*4;
-      img.data[i]=c[0];img.data[i+1]=c[1];img.data[i+2]=c[2];img.data[i+3]=255;
+// ── FIELD, SOFT. The engine's region vote is winner-take-all because a LOCATION must be in ONE
+//    region. A FIELD is not a location — so here the same weights BLEND, which is why the edges bleed.
+const TW=288, TH=144;                     // field texture
+function densGrid(){
+  const g=new Float32Array(TW*TH);
+  for(let y=0;y<TH;y++){
+    const lat=90-(y+.5)/TH*180, cl=Math.cos(lat*Math.PI/180);
+    for(let x=0;x<TW;x++){
+      const lon=-180+(x+.5)/TW*360;
+      let num=0,den=0;
+      for(const v of F.voters){
+        const dy=lat-v[0]; let dx=lon-v[1]; if(dx>180)dx-=360; if(dx<-180)dx+=360;
+        const d2=dy*dy+dx*dx*cl*cl;
+        const w=1/Math.pow(d2+6,1.6);
+        num+=w*(F.densByRegion[v[2]]??.5); den+=w;
+      }
+      let d=num/den;                      // ⚑ blended, not winner-take-all
+      for(const s of F.sources){          // sources RADIATE from their anchors
+        const dy=lat-s[0]; let dx=lon-s[1]; if(dx>180)dx-=360; if(dx<-180)dx+=360;
+        const dd=Math.sqrt(dy*dy+dx*dx*cl*cl)*Math.PI/180, r=s[3];
+        if(dd<r*3) d+=s[2]*Math.exp(-(dd*dd)/(2*r*r));
+      }
+      g[y*TW+x]=Math.max(0,Math.min(1,d));
     }
   }
-  cx.putImageData(img,0,0);
-  // authored sources
-  cx.globalAlpha=.85;
-  for(const s of F.sources){
-    const x=(s[1]+180)/360*W, y=(90-s[0])/180*H;
-    cx.beginPath();cx.arc(x,y,1.6,0,7);
-    cx.fillStyle=s[2]>0?"#fff":"#000";cx.fill();
-  }
-  cx.globalAlpha=1;
-  reach();
+  return g;
 }
-function reach(){
-  let inB=0,n=0,sum=0;
-  for(let y=4;y<H;y+=6)for(let x=0;x<W;x+=6){
-    const r=value(90-(y+.5)/H*180,-180+(x+.5)/W*360);
-    n++; sum+=r.v; if(r.inBand||src==="body") inB++;
+const BASE=densGrid();
+function arcShift(k,d){
+  let o=0;
+  for(const a of M.arcs){
+    const n=(stages[a.id]||1)-1; if(!n) continue;
+    const e=EFFECT[a.id]; if(!e) continue;
+    if(e.POLARISE){ o+=(d-.55)*.34*n; continue; }
+    if(e[k]) o+=e[k]*STEP*n;
   }
-  const pct=Math.round(100*inB/n);
-  document.getElementById("reach").innerHTML=
-    `<tr><td>works well in</td><td><b>${pct}%</b> of the world</td></tr>`+
-    `<tr><td>mean strength</td><td>${(sum/n).toFixed(2)}</td></tr>`;
-  const moved=M.arcs.some(a=>stages[a.id]>a.stage);
-  document.getElementById("note").textContent = src==="body"
-    ? "Body never starves and never peaks — a floor, not a spike. Arcs do not move it."
-    : moved ? "Arc stages moved. Compare this number against the same source at stage 1."
-    : "All arcs at their authored stage. Move a slider to see the ground change.";
+  return o;
 }
+function strength(k,d){
+  if(k==="body") return .55;
+  const b=M.bands[k], lo=b.center-b.width, hi=b.center+b.width;
+  const dd=Math.max(0,Math.min(1,d+arcShift(k,d)));
+  if(dd>=lo&&dd<=hi) return 1;
+  return dd<lo ? Math.pow(dd/Math.max(lo,1e-6),2.2) : Math.max(0,1-(dd-hi)*1.7);
+}
+// ── per-source colour textures, additively mixed
+let TEX=null;
+function build(){
+  const on=SRC.filter(s=>s.on);
+  const t=new Uint8ClampedArray(TW*TH*3);
+  for(let i=0;i<TW*TH;i++){
+    const d=BASE[i]; let r=0,g=0,b=0;
+    for(const s of on){
+      const v=strength(s.k,d);
+      if(mix){ r+=s.rgb[0]*v; g+=s.rgb[1]*v; b+=s.rgb[2]*v; }
+      else   { r=Math.max(r,s.rgb[0]*v); g=Math.max(g,s.rgb[1]*v); b=Math.max(b,s.rgb[2]*v); }
+    }
+    const n=mix?Math.max(1,on.length*.62):1;
+    t[i*3]=r/n; t[i*3+1]=g/n; t[i*3+2]=b/n;
+  }
+  TEX=t; percents();
+}
+function percents(){
+  for(const s of SRC){
+    let n=0,c=0;
+    for(let i=0;i<TW*TH;i+=7){ n++; if(strength(s.k,BASE[i])>.55) c++; }
+    const el=document.getElementById("pc_"+s.k); if(el) el.textContent=Math.round(100*c/n)+"%";
+  }
+}
+// ── ORTHOGRAPHIC GLOBE
+const cv=document.getElementById("c"), cx=cv.getContext("2d");
+const S=cv.width, R=S*.44, CXp=S/2, CYp=S/2, TILT=18*Math.PI/180;
+function render(){
+  const img=cx.createImageData(S,S), D=img.data;
+  const st=Math.sin(TILT), ct=Math.cos(TILT);
+  for(let py=0;py<S;py++){
+    const dy=(py-CYp)/R;
+    for(let px=0;px<S;px++){
+      const dx=(px-CXp)/R, i=(py*S+px)*4;
+      const q=dx*dx+dy*dy;
+      if(q>1){ D[i+3]=0; continue; }
+      const dz=Math.sqrt(1-q);
+      // un-tilt
+      const y2=dy*ct+dz*st, z2=-dy*st+dz*ct;
+      const lat=Math.asin(Math.max(-1,Math.min(1,y2)))*180/Math.PI;
+      let lon=Math.atan2(dx,z2)*180/Math.PI+rot;
+      lon=((lon+180)%360+360)%360-180;
+      const tx=Math.min(TW-1,Math.floor((lon+180)/360*TW)), ty=Math.min(TH-1,Math.floor((90-lat)/180*TH));
+      const t=(ty*TW+tx)*3;
+      const lit=.42+.58*dz;                       // limb shading
+      D[i]=TEX[t]*lit; D[i+1]=TEX[t+1]*lit; D[i+2]=TEX[t+2]*lit;
+      D[i+3]=255*Math.min(1,(1-q)*14+.25);        // soft terminator, no hard rim
+    }
+  }
+  cx.clearRect(0,0,S,S); cx.putImageData(img,0,0);
+  // atmosphere
+  const gl=cx.createRadialGradient(CXp,CYp,R*.93,CXp,CYp,R*1.14);
+  gl.addColorStop(0,"rgba(120,170,255,.13)"); gl.addColorStop(1,"rgba(120,170,255,0)");
+  cx.fillStyle=gl; cx.beginPath(); cx.arc(CXp,CYp,R*1.14,0,7); cx.fill();
+}
+function frame(){ if(spin&&!drag){ rot=(rot+.22)%360; render(); } requestAnimationFrame(frame); }
+// probe
 function probe(lat,lon){
-  const r=value(lat,lon);
-  document.getElementById("pv").textContent=r.d.toFixed(2);
-  document.getElementById("pl").textContent=`density at ${lat.toFixed(1)}°, ${lon.toFixed(1)}°`;
-  document.getElementById("pb").innerHTML = src==="body"
-    ? "<span class=in>body works here</span> — it works everywhere"
-    : r.inBand
-      ? `<span class=in>${src} works here</span> — band ${(r.band.center-r.band.width).toFixed(2)}–${(r.band.center+r.band.width).toFixed(2)}`
-      : `<span class=out>${src} starves here</span> — needs ${(r.band.center-r.band.width).toFixed(2)}–${(r.band.center+r.band.width).toFixed(2)}`;
+  const tx=Math.min(TW-1,Math.floor((lon+180)/360*TW)), ty=Math.min(TH-1,Math.floor((90-lat)/180*TH));
+  const d=BASE[ty*TW+tx];
+  let h="";
+  for(const s of SRC.filter(s=>s.on)){
+    const v=strength(s.k,d);
+    h+=`<div class=ln><span style="color:rgb(${s.rgb})">${s.label}</span><span class="${v>.55?'in':'out'}">${(v*100).toFixed(0)}%</span></div>`;
+  }
+  document.getElementById("rd").innerHTML=
+    `<div class=big>${d.toFixed(2)}</div><div class=lbl>density at ${lat.toFixed(0)}°, ${lon.toFixed(0)}°</div>${h}`;
 }
-// controls
+cv.onpointerdown=e=>{drag={x:e.clientX,r:rot,moved:0};cv.setPointerCapture(e.pointerId)};
+cv.onpointermove=e=>{if(!drag)return;const d=e.clientX-drag.x;drag.moved=Math.max(drag.moved,Math.abs(d));rot=(drag.r-d*.42)%360;render()};
+cv.onpointerup=e=>{
+  if(drag&&drag.moved<4){
+    const b=cv.getBoundingClientRect();
+    const dx=(e.clientX-b.left-CXp*(b.width/S))/(R*(b.width/S)), dy=(e.clientY-b.top-CYp*(b.height/S))/(R*(b.height/S));
+    if(dx*dx+dy*dy<=1){
+      const dz=Math.sqrt(1-dx*dx-dy*dy), st=Math.sin(TILT), ct=Math.cos(TILT);
+      const y2=dy*ct+dz*st, z2=-dy*st+dz*ct;
+      let lon=Math.atan2(dx,z2)*180/Math.PI+rot; lon=((lon+180)%360+360)%360-180;
+      probe(Math.asin(Math.max(-1,Math.min(1,y2)))*180/Math.PI, lon);
+    }
+  }
+  drag=null;
+};
+// UI
 const sd=document.getElementById("src");
-SRC.forEach(s=>{const b=document.createElement("button");b.className="s"+(s===src?" on":"");b.textContent=s;
-  b.onclick=()=>{src=s;[...sd.children].forEach(c=>c.classList.remove("on"));b.classList.add("on");draw();};sd.appendChild(b);});
+SRC.forEach(s=>{
+  const el=document.createElement("div"); el.className="sr"+(s.on?"":" off");
+  el.innerHTML=`<div class=sw style="background:rgb(${s.rgb})"></div><span class=nm>${s.label}</span><span class=pc id=pc_${s.k}></span>`;
+  el.onclick=()=>{s.on=!s.on;el.classList.toggle("off",!s.on);build();render();};
+  sd.appendChild(el);
+});
 const ad=document.getElementById("arcs");
 M.arcs.forEach(a=>{
-  const d=document.createElement("div");d.className="arc";
-  d.innerHTML=`<label><span class=nm>${a.name}</span><span class=st id=st_${a.id}>${a.stage} / ${a.stages}</span></label>`;
-  const r=document.createElement("input");r.type="range";r.min=1;r.max=a.stages;r.value=a.stage;
-  r.oninput=()=>{stages[a.id]=+r.value;document.getElementById("st_"+a.id).textContent=`${r.value} / ${a.stages}`;draw();};
-  d.appendChild(r);ad.appendChild(d);
+  const d=document.createElement("div"); d.className="arc";
+  d.innerHTML=`<label><span>${a.name}</span><span class=st id=st_${a.id}>${a.stage}/${a.stages}</span></label>`;
+  const r=document.createElement("input"); r.type="range"; r.min=1; r.max=a.stages; r.value=a.stage;
+  r.oninput=()=>{stages[a.id]=+r.value;document.getElementById("st_"+a.id).textContent=`${r.value}/${a.stages}`;
+    build();render();
+    document.getElementById("note").textContent=M.arcs.some(x=>stages[x.id]>x.stage)
+      ?"Arc stages moved. The ground is not where it was authored." : "";};
+  d.appendChild(r); ad.appendChild(d);
 });
-cv.onclick=e=>{
-  const b=cv.getBoundingClientRect();
-  const x=(e.clientX-b.left)/b.width, y=(e.clientY-b.top)/b.height;
-  probe(90-y*180,-180+x*360);
-  const p=document.getElementById("pin");
-  p.style.display="block";p.style.left=(e.clientX-cv.getBoundingClientRect().left+cv.offsetLeft)+"px";
-  p.style.top=(e.clientY-cv.getBoundingClientRect().top+cv.offsetTop)+"px";
-};
-draw();
+document.getElementById("bSpin").onclick=function(){spin=!spin;this.classList.toggle("on",spin);this.textContent=spin?"spinning":"paused"};
+document.getElementById("bMix").onclick=function(){mix=!mix;this.classList.toggle("on",mix);this.textContent=mix?"additive":"strongest";build();render()};
+build(); render(); frame();
 </script>

@@ -172,3 +172,43 @@ is not "already paid":**
 ⬜ **That is Erik's call, and the cheapest order is yours:** ⚑ **re-place those six first** — the terrain the
 rebuild produces is deterministic and I can hand you its water features before anything ships, so the names
 land on real water instead of being lost and re-found.
+
+---
+
+## 6 · SNG-384 — I CHANGED A NUMBER IN YOUR CONTENT, AND HERE IS EXACTLY WHICH ONE
+
+Your `7bb8112b` closed the ratchet I opened for `the_old_warden_post` — the bare-string
+`substrateSource` is an object now, with a reason, and it reads well. Thank you.
+
+The gate caught one thing in it:
+
+| | radius | radiusWorld | ratio |
+|---|---|---|---|
+| the other 43 sources | 80 – 175 | 0.048 – 0.105 | **0.0006** exactly, all of them |
+| `the_old_warden_post` | **95** | **0.054** | 0.000568 |
+
+`0.054` is 90's value — the modal one, shared by 18 other places. So the two halves of your
+object disagree.
+
+**I moved `radius` to 90 and left `radiusWorld` alone.** The reason matters more than the
+edit: `engine/substrate.js` reads `radiusWorld` and treats `radius` as legacy, so **0.054 is
+what your sink is already doing in the world**. Bringing the legacy number to 90 makes it
+tell the truth and moves nothing. Raising `radiusWorld` to 0.057 would have *widened a live
+sink* in order to make a number agree — a consistency repair doing the opposite of its job.
+
+**⛔ If you meant 95 — a wider sink — say so and I will set `radiusWorld: 0.057` instead.**
+That is a content call and it is yours. I took the option that changes nothing while the
+question is open.
+
+### And the engine had the same bug, waiting
+
+The fallback for a source authored *without* `radiusWorld` divided by **309**. Radius 95 down
+that path is 0.29 radians — **16.7°** — against your convention's 3.3°. Five and a half times
+wider is a **blanket**, the one shape the locality ceiling ten lines below it exists to
+forbid. The rescue path for an un-re-authored source was the thing that would have broken it.
+
+It is one named constant now, `RADIUS_MAP_TO_WORLD`, and **your content is its authority**:
+the gate derives the ratio from what all 44 records already do and asserts the engine agrees.
+Inert the day it landed — 0 of 44 sources lack `radiusWorld`, measured.
+
+`content_ci` is back to **8**. No ratchet moved.

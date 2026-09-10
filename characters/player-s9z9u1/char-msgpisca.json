@@ -8,7 +8,7 @@
   "whyHere": "You came back into the world to find out whether it still holds anything worth staying material for.",
   "background": "orphan",
   "level": 2,
-  "xp": 154,
+  "xp": 157,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -67,7 +67,7 @@
   "maxHealth": 56,
   "health": 56,
   "maxEnergy": 105,
-  "energy": 89,
+  "energy": 80,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -360,22 +360,28 @@
         "player": "Keep a steady pace and watch Cevaine—she's just woken and the lattice doesn't move fast; match her rhythm and read the path together",
         "summary": "On the downhill switchbacks, Splarf and Cevaine race against the spring melt and lose the figure ahead; the path remains passable but the lower circuits flood, and Cevaine's discipline finds no easy footing in the chaos of rushing water.",
         "narration": "You move downhill with intention, but Cevaine's lattice-trained body is not built for haste—it moves with geometric precision through each switchback turn, each step calibrated and deliberate. You try to match her rhythm, watching the path together as you'd planned, but the geometry of her discipline is not yours. She reads the way forward with structural clarity, but clarity is not speed. The afternoon deepens. The roar of melt-water grows louder as you descend, and somewhere ahead on the switchbacks, the figure you glimpsed from the waystation—Hoss, your mind keeps insisting it's Hoss—grows more distant with every moment you cannot close the gap. The path remains dry where your feet fall, but the sound of water carries an edge now: the sun has been climbing all afternoon, and the high snowpack is answering. When you reach the first of the lower switchback cuts, you see it: a channel that was probably trickling this morning is now a rush of grey-white water, roaring through stone with the force of the whole upper watershed behind it. The melt has come fast. The path beyond is still there—still passable—but the water has claimed the lowest circuits. The figure ahead is gone, swallowed into the afternoon and the distance you could not close. Cevaine stops at the edge of the rushing water and reads it with her whole body—the way the current moves, where the pressure lies—and her lattice-trained precision finds no comfortable geometry in chaos."
+      },
+      {
+        "player": "Use beastfri3nd on the waterline to get Intel on the best way to cross",
+        "summary": "At the lower switchback waterline in deep night, Splarf reads the kingfisher's knowledge—a narrow crossing exists upstream, passable now but not for long as the melt continues to rise. Cevaine waits with her discipline, Boo absent into shadow.",
+        "narration": "You crouch at the waterline where the melt roars past, your hand just above the surface—not touching, not yet asking. The spray is ice-cold even this close, and the sound is immense. You reach for the animal-sense, the quiet language that speaks without words, extending your presence toward whatever moves in or near this chaos.\n\nSomething answers. A kingfisher, perched on a half-submerged stone maybe fifteen meters downstream, flicks its attention toward you—not fear, but recognition of another creature assessing the water. Its mood comes through in fragments: the dive-paths are wrong today, the current has moved them, the usual stone-route is buried. But there—a few meters upstream where the channel narrows—something calmer lives in the water's intention. The bird knows it. A deer crossed there yesterday, hooves finding purchase on the bedrock beneath the chaos. The kingfisher watched it happen from its own hunting perch.\n\nBut the bird is also anxious. The water is still rising. By tomorrow morning, even that narrow crossing will be contested. The sense is clear: now, or wait for the melt to peak and recede—a choice of days.\n\nCevaine stands maybe three meters uphill from you, her lattice-discipline reading the water's geometry as if the rushing force might resolve into a pattern. Boo is gone into the shadows, the way it does before water. The path behind you is still clear and dry, but the roar around you fills everything—the only voice the watershed has."
       }
     ],
     "lastTurn": {
-      "narration": "You move downhill with intention, but Cevaine's lattice-trained body is not built for haste—it moves with geometric precision through each switchback turn, each step calibrated and deliberate. You try to match her rhythm, watching the path together as you'd planned, but the geometry of her discipline is not yours. She reads the way forward with structural clarity, but clarity is not speed. The afternoon deepens. The roar of melt-water grows louder as you descend, and somewhere ahead on the switchbacks, the figure you glimpsed from the waystation—Hoss, your mind keeps insisting it's Hoss—grows more distant with every moment you cannot close the gap. The path remains dry where your feet fall, but the sound of water carries an edge now: the sun has been climbing all afternoon, and the high snowpack is answering. When you reach the first of the lower switchback cuts, you see it: a channel that was probably trickling this morning is now a rush of grey-white water, roaring through stone with the force of the whole upper watershed behind it. The melt has come fast. The path beyond is still there—still passable—but the water has claimed the lowest circuits. The figure ahead is gone, swallowed into the afternoon and the distance you could not close. Cevaine stops at the edge of the rushing water and reads it with her whole body—the way the current moves, where the pressure lies—and her lattice-trained precision finds no comfortable geometry in chaos.",
-      "sceneSummary": "On the downhill switchbacks, Splarf and Cevaine race against the spring melt and lose the figure ahead; the path remains passable but the lower circuits flood, and Cevaine's discipline finds no easy footing in the chaos of rushing water.",
+      "narration": "You crouch at the waterline where the melt roars past, your hand just above the surface—not touching, not yet asking. The spray is ice-cold even this close, and the sound is immense. You reach for the animal-sense, the quiet language that speaks without words, extending your presence toward whatever moves in or near this chaos.\n\nSomething answers. A kingfisher, perched on a half-submerged stone maybe fifteen meters downstream, flicks its attention toward you—not fear, but recognition of another creature assessing the water. Its mood comes through in fragments: the dive-paths are wrong today, the current has moved them, the usual stone-route is buried. But there—a few meters upstream where the channel narrows—something calmer lives in the water's intention. The bird knows it. A deer crossed there yesterday, hooves finding purchase on the bedrock beneath the chaos. The kingfisher watched it happen from its own hunting perch.\n\nBut the bird is also anxious. The water is still rising. By tomorrow morning, even that narrow crossing will be contested. The sense is clear: now, or wait for the melt to peak and recede—a choice of days.\n\nCevaine stands maybe three meters uphill from you, her lattice-discipline reading the water's geometry as if the rushing force might resolve into a pattern. Boo is gone into the shadows, the way it does before water. The path behind you is still clear and dry, but the roar around you fills everything—the only voice the watershed has.",
+      "sceneSummary": "At the lower switchback waterline in deep night, Splarf reads the kingfisher's knowledge—a narrow crossing exists upstream, passable now but not for long as the melt continues to rise. Cevaine waits with her discipline, Boo absent into shadow.",
       "choices": [
         {
-          "label": "Wade across the lower-circuit channel while it's still crossable—you're strong enough, and the figure is within reach if you move fast enough.",
+          "label": "Follow the kingfisher's route—move upstream to the narrow crossing and attempt it now, before the water rises further.",
           "attribute": "physical",
-          "subAttribute": "strength",
+          "subAttribute": "agility",
           "axes": {},
           "difficulty": "hard",
           "opposedDifficulty": null,
           "intentTags": [
-            "risky",
-            "travel"
+            "travel",
+            "careful",
+            "risky"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -384,49 +390,52 @@
           "emergenceId": null
         },
         {
-          "label": "Wait and let Cevaine find the structure in it—her lattice-sense reads patterns, and there may be a way through if the form is understood first.",
+          "label": "Wait for the melt to peak and the water to recede—find shelter nearby and hold through the night, crossing when the hazard lessens.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "defend",
+            "careful",
+            "endure"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Cevaine what her reading of the water's geometry tells her—the lattice-trained eye might see something the kingfisher's knowledge misses about structure and timing.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "ask",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Move to higher ground and reconsider—the figure on the downhill path is gone, and the water is rising. What matters most: reaching Hoss, or understanding what just happened at the waystation.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "careful",
-            "help"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Numen-Sense to read the thin places in the melt-water—where the veil is thinnest, the path may fold differently than ordinary stone and water would allow.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": "hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "numen_sense",
-          "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Turn back to the waystation—the melt is dangerous and the circuit will keep. The figure ahead will reach the valley floor safely, and you can find her another way.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
-          "difficulty": "very easy",
-          "opposedDifficulty": null,
-          "intentTags": [
+            "study",
             "careful"
           ],
-          "abilityId": null,
+          "abilityId": "storykeeper",
           "energyCost": null,
           "trivial": false,
           "encounterId": null,
@@ -436,7 +445,7 @@
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
+        "energy": -3,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
@@ -446,30 +455,34 @@
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
-      "adoptSchool": null,
-      "offer": null,
+      "adoptSchool": {},
+      "offer": {
+        "thing": "The kingfisher's knowledge—a narrow crossing exists upstream, passable now but closing as the melt rises.",
+        "from": "Beastfriend's sensing revealed what the animal has learned through survival: the watershed teaches its own passage to those who listen."
+      },
       "stageOps": [],
       "scene": {
-        "setting": "The lower switchback cuts of the pass—late afternoon, spring daylight sharp and angled. A channel that was dry this morning now roars with melt-water, churning grey-white and loud. The path beyond is visible but the water has claimed the lowest circuits. The roar of the watershed fills the air.",
+        "setting": "The lower switchback waterline in deep night, early spring. Melt-water roars past in a grey-white torrent, spray cold and insistent. The path behind remains dry; ahead, the channel has claimed the lowest circuits. Stars are fading into the false dawn of the season's long twilight.",
         "npcsPresent": [
           {
             "name": "Cevaine",
-            "state": "Standing at the edge of the rushing water, reading its geometry with lattice precision—her discipline finding no comfortable structure in chaos."
+            "state": "Standing uphill from the waterline, reading the water's geometry with lattice precision—her discipline seeking structure in the chaos, finding none"
           }
         ],
         "objects": [
-          "The lower switchback path, clear and dry where you stand",
-          "A channel of roaring melt-water, grey-white and violent",
-          "The path beyond, visible but water-claimed",
-          "Boo, present in the shadows of the stone cuts",
-          "Splarf's Traveler's Pack, worn from the descent",
-          "Waystation Provision Bundle, secure in the pack"
+          "The roaring melt-water channel",
+          "A half-submerged stone downstream where a kingfisher perches",
+          "The narrow passage upstream where yesterday's deer crossed",
+          "The path behind, still clear and dry",
+          "Traveler's Pack on Splarf's shoulders",
+          "Waystation Provision Bundle secured in the pack"
         ],
         "threads": [
-          "The figure ahead on the switchbacks—lost to distance and the afternoon",
-          "The melt-water's roar: a clock counting down; the high snowpack answering the afternoon sun",
-          "Cevaine's lattice discipline and the rushing chaos that offers no geometry",
-          "The lower circuits claimed by water; the path forward present but hazardous"
+          "The figure on the downhill path—lost to distance, but was it Hoss?",
+          "The melt-water rising by the hour—a clock counting down",
+          "Cevaine's lattice discipline and its struggle with the water's chaos",
+          "Boo absent into shadow—where has it gone, and why?",
+          "The narrow upstream crossing: passable now, but how long?"
         ]
       },
       "npcUpdates": [
@@ -477,38 +490,41 @@
           "op": "update",
           "npcId": "cevaine",
           "name": "Cevaine",
-          "note": "At the edge of the melt-water channel, reading the rushing water with lattice precision—her discipline meeting chaos and finding no easy structure.",
+          "note": "Reading the water's geometry with lattice precision—finding no structure in the chaos. Waiting for Splarf's assessment before deciding on crossing.",
           "learned": [
-            "Chaos unsettles the lattice's geometry—rushing water offers no predictable form for her discipline to recognize"
+            "The rushing water offers no geometric form for the lattice-trained discipline to recognize and navigate by"
           ],
-          "skillsObserved": [
-            "Reading structure and pressure in flowing systems",
-            "Recognizing when the form cannot hold"
-          ]
+          "statusNote": "Active and present at the waterline, discipline engaged but frustrated by the chaos"
         }
       ],
       "intentsHeard": [],
       "factUpdates": [],
       "placeUpdates": [
         {
-          "note": "The lower switchback circuits have begun to flood with melt-water—a channel that was dry this morning now roars with grey-white force. The path remains passable above this level, but the water has claimed the lowest runs.",
-          "flag": {
-            "melt_stage": "fast",
-            "water_hazard": "high"
-          }
+          "note": "The melt-water is rising fast and dangerous—the lower switchback circuits are now claimed by roaring water. A narrow crossing exists upstream where the channel narrows; a deer crossed there yesterday. The passage is passable now but closing as the melt continues through the night."
         }
       ],
-      "discovery": null,
+      "discovery": {},
       "codexUpdates": [
         {
           "topic": "the-spring-melt",
           "label": "The Spring Melt",
           "kind": "lore",
-          "fact": "The melt is running faster and harder than usual—the lower switchback circuits have begun to flood by late afternoon as the high-altitude snowpack breaks under the warming sun. The roar carries warning: the water is claiming the lowest passes, and the hazard rises with every hour of daylight.",
+          "fact": "The melt is rising hour by hour in deep night—the high snowpack breaking under solar warmth. A narrow crossing exists upstream where bedrock offers temporary purchase, passable now but closing as the melt climbs. The kingfisher's knowledge: the usual stone-routes are buried; the water is still rising.",
           "links": [
             "lower-pass-waystation",
             "the-thinning",
             "crestfall-notch"
+          ]
+        },
+        {
+          "topic": "beastfriend-sensing",
+          "label": "Animal Knowledge Through Presence",
+          "kind": "lore",
+          "fact": "A kingfisher at the waterline carries knowledge of the water's passage through its own survival—where to dive, where the current has moved, where bedrock holds. Reaching for the animal-sense without demand can yield fragments of lived wisdom: yesterday's deer-crossing, today's rising water, tomorrow's danger.",
+          "links": [
+            "the-spring-melt",
+            "lower-pass-waystation"
           ]
         }
       ],
@@ -520,52 +536,54 @@
       "projectOps": [],
       "bandOps": [],
       "deathOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
+      "newEncounter": {},
+      "unlockPrecursor": {},
+      "unlockSubstrate": {},
       "timeOps": {
-        "hoursPassed": 4,
-        "why": "the descent from the waystation and the attempt to close the gap, racing against the spring melt"
+        "hoursPassed": 0.5,
+        "why": "crouching at the waterline in deep night, reading animal awareness and assessing the crossing—a half hour of presence and listening"
       },
-      "moveTo": null,
+      "moveTo": {},
       "stateOps": [],
       "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": null,
-      "newAbility": null,
-      "gambitOps": null,
+      "deriveItem": {},
+      "imagePrompt": "A kingfisher perched on a half-submerged stone in the roaring melt-water, its eye turning toward you with the clarity of creature-knowledge—the water's rage around it, the narrow passage upstream holding secrets only survival can teach.",
+      "newAbility": {},
+      "gambitOps": {},
       "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
-      "sceneEnded": false
+      "markDefiningMoment": {},
+      "markTeacher": {},
+      "offerPromotion": {},
+      "offerAcquisition": {},
+      "offerIntent": {},
+      "sceneEnded": false,
+      "momentArt": "https://image.pollinations.ai/prompt/A%20kingfisher%20perched%20on%20a%20half-submerged%20stone%20in%20the%20roaring%20melt-water%2C%20its%20eye%20turning%20toward%20you%20with%20the%20clarity%20of%20creature-knowledge%E2%80%94the%20water's%20rage%20around%20it%2C%20the%20narrow%20passage%20upstream%20holding%20secrets%20only%20survival%20can%20teach.%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=9199&nologo=true"
     },
     "sceneState": {
-      "setting": "The lower switchback cuts of the pass—late afternoon, spring daylight sharp and angled. A channel that was dry this morning now roars with melt-water, churning grey-white and loud. The path beyond is visible but the water has claimed the lowest circuits. The roar of the watershed fills the air.",
+      "setting": "The lower switchback waterline in deep night, early spring. Melt-water roars past in a grey-white torrent, spray cold and insistent. The path behind remains dry; ahead, the channel has claimed the lowest circuits. Stars are fading into the false dawn of the season's long twilight.",
       "npcsPresent": [
         {
           "name": "Cevaine",
-          "state": "Standing at the edge of the rushing water, reading its geometry with lattice precision—her discipline finding no comfort"
+          "state": "Standing uphill from the waterline, reading the water's geometry with lattice precision—her discipline seeking structure"
         }
       ],
       "objects": [
-        "The lower switchback path, clear and dry where you stand",
-        "A channel of roaring melt-water, grey-white and violent",
-        "The path beyond, visible but water-claimed",
-        "Boo, present in the shadows of the stone cuts",
-        "Splarf's Traveler's Pack, worn from the descent",
-        "Waystation Provision Bundle, secure in the pack"
+        "The roaring melt-water channel",
+        "A half-submerged stone downstream where a kingfisher perches",
+        "The narrow passage upstream where yesterday's deer crossed",
+        "The path behind, still clear and dry",
+        "Traveler's Pack on Splarf's shoulders",
+        "Waystation Provision Bundle secured in the pack"
       ],
       "threads": [
-        "The figure ahead on the switchbacks—lost to distance and the afternoon",
-        "The melt-water's roar: a clock counting down; the high snowpack answering the afternoon sun",
-        "Cevaine's lattice discipline and the rushing chaos that offers no geometry",
-        "The lower circuits claimed by water; the path forward present but hazardous"
+        "The figure on the downhill path—lost to distance, but was it Hoss?",
+        "The melt-water rising by the hour—a clock counting down",
+        "Cevaine's lattice discipline and its struggle with the water's chaos",
+        "Boo absent into shadow—where has it gone, and why?",
+        "The narrow upstream crossing: passable now, but how long?"
       ]
     },
-    "beats": 9
+    "beats": 10
   },
   "clock": {
     "schemaVersion": 1,
@@ -736,7 +754,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d4] At the waystation threshold, she names what lattice-discipline held hidden: 'You are remarkably difficult to categorize. Which I find—valuable. Acceptable does not begin to encompass it.' The form holds, but choice is present within it now.",
         "[d4] Descended from The Thinning's sealed veil and entered the waystation shelter. She chose to sit beside Splarf—maintaining careful distance, but present. Her sentinel-form is beginning to release its tension as warmth reaches her.",
         "[d4] At the waystation, her sentinel-form finally loosens into rest. She sits beside Splarf, maintaining careful distance but present. Her breathing deepens toward sleep. The discipline that held the veil is beginning to release—not shattering, but yielding with precision, moment by moment.",
         "[d4] Descended from The Thinning's opened veil with Splarf at her side. Entered the waystation shelter and allowed her lattice-trained form to release into rest—falling asleep against Splarf's shoulder, the discipline finally yielding to exhaustion. The sentinel's form is no longer held rigid by duty…",
@@ -745,17 +762,18 @@
         "[d4] Still asleep at the waystation, her form completely released—the lattice-trained discipline finally yielding to rest. This is integration, a stage the form permits and honors.",
         "[d4] Your bond deepens — together.",
         "[d4] Wakes to Splarf's quiet call and rises with geometric precision—the form releasing into choice rather than rigidity. Moves toward the downhill path with the character, ready for descent and the meeting that waits there.",
-        "[d4] At the edge of the melt-water channel, reading the rushing water with lattice precision—her discipline meeting chaos and finding no easy structure."
+        "[d4] At the edge of the melt-water channel, reading the rushing water with lattice precision—her discipline meeting chaos and finding no easy structure.",
+        "[d5] Reading the water's geometry with lattice precision—finding no structure in the chaos. Waiting for Splarf's assessment before deciding on crossing."
       ],
       "knownFacts": [
-        "The form can hold warmth as well as it held refusal",
         "Rest is not failure—it is integration, a stage the form permits",
         "Presence without demand can be a form of holding that the lattice honors",
         "Rest is not failure—it is integration, a stage the form permits and even honors",
         "The body released can trust its anchor",
         "Sleep is a form of choice, and she can choose it",
         "Sleep is a choice, and she can choose it",
-        "Chaos unsettles the lattice's geometry—rushing water offers no predictable form for her discipline to recognize"
+        "Chaos unsettles the lattice's geometry—rushing water offers no predictable form for her discipline to recognize",
+        "The rushing water offers no geometric form for the lattice-trained discipline to recognize and navigate by"
       ],
       "skillsObserved": [
         "The willingness to trust what she could not have predicted",
@@ -768,18 +786,18 @@
       "status": "active",
       "gender": "Woman",
       "pronouns": "she/her",
-      "statusNote": "Descending the switchback path with Splarf toward the valley floor—the vigil ended, her discipline now a chosen frame rather than a cage",
+      "statusNote": "Active and present at the waterline, discipline engaged but frustrated by the chaos",
       "domains": {
         "primary": "lattice"
       },
       "domainsSource": "role",
       "lastSeen": {
         "locationId": "the_thinning",
-        "day": 4
+        "day": 5
       },
       "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Cevaine%2C%20Woman%2C%20Lattice-trained%20order-reader%20of%20the%20Seventh%20Measure%3B%20sentinel%20at%20the%20sealed%20veil%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=39649&nologo=true",
       "_portraitTier": "devoted",
-      "met": 23,
+      "met": 24,
       "bondType": "romantic",
       "bondStage": "together",
       "deeds": [
@@ -899,7 +917,6 @@
     "the_thinning": {
       "visits": 1,
       "notes": [
-        "[d2] The Thinning clearing is stripped of resources—no firewood, no food plants, no medicinal growth within the clearing's boundary. The forest beyond the veil thickens against approach; the humming presence reads as present and observant. The boundary appears deliberately scoured.",
         "[d3] The veil is tiring under constant pressure from the sender on the other side. It is holding by active choice, not passive seal—the hold is chosen moment by moment, and the cost is mounting.",
         "[d3] The sealed veil's mood has shifted from angry refusal to waiting acceptance. The hum is steadier. The boundary is no longer pushing back against crossing—it is preparing to yield. The sender's desperation has become recognition that the message has a witness on this side.",
         "[d3] The sealed veil opened on the dawn of day three when Splarf told Cevaine to let it yield. A messenger crossed through and delivered a voided ledger assignment. The veil remains open, its hum now musical rather than resentful.",
@@ -910,7 +927,8 @@
         "[d4] The Lower-Pass Waystation has become a place of rest and integration—a shelter where vigil becomes stillness, where the discipline can release, where presence without demand is honored as a form of holding.",
         "[d4] The spring melt is running hard and dangerous this year—water roars through the lower switchback cuts. The path remains clear at the waystation elevation but travel downhill carries increased water-hazard.",
         "[d4] The Lower-Pass Waystation has become a place of integration and release—a threshold where the vigil ends and the path begins again. The caretaker reads travelers' need and releases them without holding.",
-        "[d4] The lower switchback circuits have begun to flood with melt-water—a channel that was dry this morning now roars with grey-white force. The path remains passable above this level, but the water has claimed the lowest runs."
+        "[d4] The lower switchback circuits have begun to flood with melt-water—a channel that was dry this morning now roars with grey-white force. The path remains passable above this level, but the water has claimed the lowest runs.",
+        "[d5] The melt-water is rising fast and dangerous—the lower switchback circuits are now claimed by roaring water. A narrow crossing exists upstream where the channel narrows; a deer crossed there yesterday. The passage is passable now but closing as the melt continues through the night."
       ],
       "flags": {
         "veilState": "open_and_musical",
@@ -1209,12 +1227,8 @@
         "locationId": "the_thinning"
       }
     ],
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "The caretaker approaches with warm food—something simple, root-stock in broth, bread that smells of yesterday's baking—and sets it near…",
-        "from": "their practice of tending travelers; the way they've read that two people who held vigil need nourishment before choice"
-      },
       {
         "thing": "The caretaker's quiet competence and the shelter's genuine welcome—a place that asks nothing and offers warmth without demand",
         "from": "The nature of the waystation itself, and the caretaker's own practice of tending fire and travelers"
@@ -1230,6 +1244,10 @@
       {
         "thing": "The caretaker's unhurried knowledge of when to let someone go—the grace of not holding what needs to move",
         "from": "their long practice of tending travelers without attachment, reading the boundary between shelter and path"
+      },
+      {
+        "thing": "The kingfisher's knowledge—a narrow crossing exists upstream, passable now but closing as the melt rises.",
+        "from": "Beastfriend's sensing revealed what the animal has learned through survival: the watershed teaches its own passage to those who listen."
       }
     ],
     "offscreenCursor": 0,
@@ -6170,7 +6188,8 @@
         "facts": [
           "[d4] The melt this year is running faster and harder than usual—water roars through the lower switchback cuts of the pass, presenting increased hazard for travel. The lower circuits will be busier than usual with maintenance and repair work.",
           "[d4] The melt-water in the lower switchback cuts is roaring with full force—the high-altitude snowpack has broken in the warming afternoon sun. Travel downhill at the waystation elevation is still dry, but the water carries mounting danger as elevation drops. The sound itself is a warning that the…",
-          "[d4] The melt is running faster and harder than usual—the lower switchback circuits have begun to flood by late afternoon as the high-altitude snowpack breaks under the warming sun. The roar carries warning: the water is claiming the lowest passes, and the hazard rises with every hour of daylight."
+          "[d4] The melt is running faster and harder than usual—the lower switchback circuits have begun to flood by late afternoon as the high-altitude snowpack breaks under the warming sun. The roar carries warning: the water is claiming the lowest passes, and the hazard rises with every hour of daylight.",
+          "[d5] The melt is rising hour by hour in deep night—the high snowpack breaking under solar warmth. A narrow crossing exists upstream where bedrock offers temporary purchase, passable now but closing as the melt climbs. The kingfisher's knowledge: the usual stone-routes are buried; the water is still…"
         ],
         "links": [
           "the-thinning",
@@ -6181,7 +6200,7 @@
           "The Spring Melt Running Hard"
         ],
         "createdDay": 4,
-        "updatedDay": 4
+        "updatedDay": 5
       },
       "hoss-on-the-path": {
         "id": "hoss-on-the-path",
@@ -6244,6 +6263,21 @@
         "createdDay": 4,
         "entityId": "a-counter-claim-under-lower-pass-common",
         "updatedDay": 4
+      },
+      "beastfriend-sensing": {
+        "id": "beastfriend-sensing",
+        "label": "Animal Knowledge Through Presence",
+        "kind": "lore",
+        "facts": [
+          "[d5] A kingfisher at the waterline carries knowledge of the water's passage through its own survival—where to dive, where the current has moved, where bedrock holds. Reaching for the animal-sense without demand can yield fragments of lived wisdom: yesterday's deer-crossing, today's rising water…"
+        ],
+        "links": [
+          "the-spring-melt",
+          "lower-pass-waystation"
+        ],
+        "aliases": [],
+        "createdDay": 5,
+        "updatedDay": 5
       }
     },
     "mergeUndo": [
@@ -6492,25 +6526,25 @@
     ]
   },
   "tendencies": {
-    "stealth": 2.918876221018005,
-    "strategic": 4.443563891622329,
-    "cautious": 13.96603274736243,
-    "cerebral": 6.259544583294121,
-    "patient": 4.933015778922316,
-    "devotion": 1.0479292943798475,
-    "risky": 3.1930040102044046,
-    "generous": 6.955911012572702,
-    "social": 9.334874559542564,
-    "craft": 0.6573393131802049,
-    "amorous": 2.852951889174053,
-    "leadership": 0.7962355085707052
+    "stealth": 2.8459043154925547,
+    "strategic": 6.3324747943317705,
+    "cautious": 13.616881928678369,
+    "cerebral": 6.103055968711767,
+    "patient": 4.809690384449258,
+    "devotion": 1.0217310620203512,
+    "risky": 3.1131789099492946,
+    "generous": 6.782013237258385,
+    "social": 9.101502695554,
+    "craft": 0.6409058303506997,
+    "amorous": 2.7816280919447016,
+    "leadership": 0.7763296208564376
   },
   "aptitudes": [
     "stalwart",
     "shadow",
     "naive"
   ],
-  "actionCount": 59,
+  "actionCount": 60,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -6573,6 +6607,14 @@
   "nativeGrantsVersion": 2,
   "reconcileVersion": 49,
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "A kingfisher perched on a half-submerged stone in the roaring melt-water, its eye turning toward you with the clarity of creature-knowledge—the water's rage around it, the narrow passage upstream hold",
+      "url": "https://image.pollinations.ai/prompt/A%20kingfisher%20perched%20on%20a%20half-submerged%20stone%20in%20the%20roaring%20melt-water%2C%20its%20eye%20turning%20toward%20you%20with%20the%20clarity%20of%20creature-knowledge%E2%80%94the%20water's%20rage%20around%20it%2C%20the%20narrow%20passage%20upstream%20holding%20secrets%20only%20survival%20can%20teach.%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=9199&nologo=true",
+      "caption": "At the lower switchback waterline in deep night, Splarf reads the kingfisher's knowledge—a",
+      "worldDay": 72,
+      "at": "2026-09-10T03:17:19.415Z"
+    },
     {
       "kind": "figure",
       "prompt": "Cevaine",
@@ -6945,8 +6987,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789010056458,
-  "rev": 218,
+  "updatedAt": 1789010239416,
+  "rev": 220,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -7150,7 +7192,7 @@
   ],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_numinous_reach": 65
+    "the_numinous_reach": 66
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -7190,10 +7232,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-09-10T03:14:16.439Z",
-      "lastAt": "2026-09-10T03:14:16.439Z",
+      "lastAt": "2026-09-10T03:17:19.384Z",
       "startDay": 72,
       "endDay": 72,
-      "beats": 1
+      "beats": 2
     }
   ],
   "establishedFacts": [
@@ -7248,30 +7290,30 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 37,
+      "applied": 38,
       "rejected": 0,
       "lastWhy": null
     }
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 58,
-    "scene": 58,
-    "choices": 58,
-    "offer": 33,
-    "codexUpdates": 33,
-    "imagePrompt": 25,
-    "gambitApt": 44,
-    "sceneEnded": 57,
-    "characterDeltas": 46,
+    "sceneSummary": 59,
+    "scene": 59,
+    "choices": 59,
+    "offer": 34,
+    "codexUpdates": 34,
+    "imagePrompt": 26,
+    "gambitApt": 45,
+    "sceneEnded": 58,
+    "characterDeltas": 47,
     "arcOps": 1,
     "factUpdates": 7,
-    "placeUpdates": 18,
-    "timeOps": 39,
+    "placeUpdates": 19,
+    "timeOps": 40,
     "deeds": 10,
     "ledgerEvents": 4,
     "questUpdates": 18,
-    "npcUpdates": 50,
+    "npcUpdates": 51,
     "generateRequest": 2,
     "newEncounter": 1,
     "encounterOps": 1,
@@ -7282,11 +7324,11 @@
     "standingOps": 1,
     "moveTo": 1
   },
-  "_opTurns": 58,
+  "_opTurns": 59,
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "beastfriend": 3,
+      "beastfriend": 4,
       "numen_sense": 7,
       "storykeeper": 4,
       "the_unbroken_practice": 4,
@@ -7297,16 +7339,16 @@
       {
         "abilityId": "greenlore",
         "since": "2026-08-05T23:25:06.049Z",
-        "progress": 7
+        "progress": 8
       },
       {
         "abilityId": "wayfinding",
         "since": "2026-08-05T23:25:30.590Z",
-        "progress": 7
+        "progress": 8
       }
     ],
     "lastUsed": {
-      "beastfriend": 37,
+      "beastfriend": 72,
       "numen_sense": 38,
       "storykeeper": 37,
       "the_unbroken_practice": 38,
@@ -7336,7 +7378,7 @@
     }
   },
   "companionBonds": {
-    "hush": 6.5
+    "hush": 6.75
   },
   "teachers": {},
   "foreclosed": [
@@ -7476,13 +7518,13 @@
     "rapport": 3,
     "care": 1,
     "heal": 1,
-    "prepare": 1,
+    "prepare": 2,
     "meditate": 1,
     "flirt": 1,
     "guard": 1,
     "endure": 1,
     "rest": 1,
-    "scout": 1,
+    "scout": 2,
     "risky": 1
   },
   "_stageOpRefusals": [
@@ -7576,5 +7618,15 @@
       ]
     }
   },
-  "_debtReceipts": []
+  "_debtReceipts": [],
+  "bondLog": [
+    {
+      "companionId": "hush",
+      "kind": "assist",
+      "delta": 0.25,
+      "day": 5,
+      "worldDay": 72,
+      "actionCount": 59
+    }
+  ]
 }

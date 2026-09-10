@@ -341,14 +341,19 @@
         "player": "Ask Cevaine what her lattice-reading makes of that creature—did she see structure in it, or only formlessness?",
         "summary": "Descending through concealment toward the roaring melt-water, Splarf asks Cevaine what her lattice-discipline reads in the watching presence—and learns that it defies structure entirely: a thing that holds form and denies it, that breaks the geometry the sentinel relies on.",
         "narration": "You keep close to Cevaine as the path levels slightly, and the question spills from you—quiet, urgent. \"What did you read in it? The thing in the dark—did your discipline see structure, or just...formlessness?\"\n\nCevaine's breathing steadies. For a long moment, she does not answer. The roar of melt-water grows louder as you descend, and her eyes track sideways—not toward where the presence was, but inward, as if checking the shape of something held in memory.\n\n\"I couldn't read it,\" she says finally. Her voice carries no fear, only precision. \"The geometry refused. What I saw was—*contradiction*. A thing that held shape and then didn't. A form that the lattice should have recognized and instead... slipped from.\" She pauses. \"Like holding structure while the ground moves. Like trying to calibrate to something that changes the rules of measure.\"\n\nShe does not sound uncertain. She sounds like someone reporting a material property—the way water does not hold geometry, the way chaos reads as formlessness to discipline trained in order. But there is something else underneath: a tremor in her steady voice. The veil's pressure, the hours of holding the boundary, and now this—a thing that breaks the one language she trusts to read the world.\n\nAhead, the sound of the melt-water grows closer. The path will open soon onto the waystation's clearing."
+      },
+      {
+        "player": "Call for Boo—pull the umbral companion back to you and ask what it learned in the dark. It can see what defies structure.",
+        "summary": "Deep in the flooded forest, Splarf calls Boo back from the watching presence and learns the umbral has confirmed passage—the creature does not follow. The waystation's light waits just ahead.",
+        "narration": "You call Boo's name silently—not aloud, but the kind of calling that reaches into dark and asks a question the umbral thing understands. For a breath, nothing answers. Then shadow moves across shadow, and Boo emerges from the forest-dark with the precision of something that has finished its reconnaissance.\n\nThe umbral companion settles against your leg, its form solidifying just enough for you to feel weight and fur. Its eyes—those non-eyes that do not catch light—turn upward, and you know the posture. It is waiting for you to understand what it already does.\n\nCevaine has gone still beside you, her lattice-discipline reading the space where Boo materializes. \"Your shadow-friend,\" she says. Not a question. Her breathing has steadied; the descent and the reaching for understanding has grounded her.\n\n\"What did you see?\" you ask Boo quietly. The umbral does not speak, but it turns its entire body to look back up the path—toward where the presence had been—and then looks at you. Its gaze is solid. Then it looks down the path, toward the waystation's distant glow, and settles closer to your legs. The message is plain: *Whatever it is, it does not follow. The way forward is open.*\n\nThe roar of melt-water grows louder as the path widens slightly. Ahead, past the next switchback, you can see the first true sign of the Lower-Pass Waystation—a warm spill of firelight against stone, and the shape of shelter."
       }
     ],
     "lastTurn": {
-      "narration": "You keep close to Cevaine as the path levels slightly, and the question spills from you—quiet, urgent. \"What did you read in it? The thing in the dark—did your discipline see structure, or just...formlessness?\"\n\nCevaine's breathing steadies. For a long moment, she does not answer. The roar of melt-water grows louder as you descend, and her eyes track sideways—not toward where the presence was, but inward, as if checking the shape of something held in memory.\n\n\"I couldn't read it,\" she says finally. Her voice carries no fear, only precision. \"The geometry refused. What I saw was—*contradiction*. A thing that held shape and then didn't. A form that the lattice should have recognized and instead... slipped from.\" She pauses. \"Like holding structure while the ground moves. Like trying to calibrate to something that changes the rules of measure.\"\n\nShe does not sound uncertain. She sounds like someone reporting a material property—the way water does not hold geometry, the way chaos reads as formlessness to discipline trained in order. But there is something else underneath: a tremor in her steady voice. The veil's pressure, the hours of holding the boundary, and now this—a thing that breaks the one language she trusts to read the world.\n\nAhead, the sound of the melt-water grows closer. The path will open soon onto the waystation's clearing.",
-      "sceneSummary": "Descending through concealment toward the roaring melt-water, Splarf asks Cevaine what her lattice-discipline reads in the watching presence—and learns that it defies structure entirely: a thing that holds form and denies it, that breaks the geometry the sentinel relies on.",
+      "narration": "You call Boo's name silently—not aloud, but the kind of calling that reaches into dark and asks a question the umbral thing understands. For a breath, nothing answers. Then shadow moves across shadow, and Boo emerges from the forest-dark with the precision of something that has finished its reconnaissance.\n\nThe umbral companion settles against your leg, its form solidifying just enough for you to feel weight and fur. Its eyes—those non-eyes that do not catch light—turn upward, and you know the posture. It is waiting for you to understand what it already does.\n\nCevaine has gone still beside you, her lattice-discipline reading the space where Boo materializes. \"Your shadow-friend,\" she says. Not a question. Her breathing has steadied; the descent and the reaching for understanding has grounded her.\n\n\"What did you see?\" you ask Boo quietly. The umbral does not speak, but it turns its entire body to look back up the path—toward where the presence had been—and then looks at you. Its gaze is solid. Then it looks down the path, toward the waystation's distant glow, and settles closer to your legs. The message is plain: *Whatever it is, it does not follow. The way forward is open.*\n\nThe roar of melt-water grows louder as the path widens slightly. Ahead, past the next switchback, you can see the first true sign of the Lower-Pass Waystation—a warm spill of firelight against stone, and the shape of shelter.",
+      "sceneSummary": "Deep in the flooded forest, Splarf calls Boo back from the watching presence and learns the umbral has confirmed passage—the creature does not follow. The waystation's light waits just ahead.",
       "choices": [
         {
-          "label": "Keep moving—trust the path and the waystation ahead. Let Cevaine's answer settle.",
+          "label": "Descend directly to the waystation. The shelter, fire, and rest are close now—and the melt-water's roar says time is against you.",
           "attribute": "physical",
           "subAttribute": "agility",
           "axes": {},
@@ -356,8 +361,7 @@
           "opposedDifficulty": null,
           "intentTags": [
             "travel",
-            "careful",
-            "endure"
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -366,32 +370,15 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Cevaine if she can hold that contradiction in mind—use her discipline to *track* the thing even though it won't resolve to structure. See if she can follow its movement.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Stop here on the path and use Numen-Sense to read what the presence IS—feel the significance-density of it, understand what watches you.",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {},
           "difficulty": "hard",
           "opposedDifficulty": null,
           "intentTags": [
-            "persuade",
-            "help"
-          ],
-          "abilityId": "steady_soul",
-          "energyCost": 4,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Reach for Numen-Sense—feel the significance-density of what watches, whether the lattice can read it or not.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
             "study",
-            "scout"
+            "careful"
           ],
           "abilityId": "numen_sense",
           "energyCost": 3,
@@ -400,15 +387,15 @@
           "emergenceId": null
         },
         {
-          "label": "Call for Boo—pull the umbral companion back to you and ask what it learned in the dark. It can see what defies structure.",
+          "label": "Ask Cevaine if her lattice-discipline can read what Boo found in the dark—the umbral sees what breaks geometry. Together, you might understand.",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
           "axes": {},
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "help",
-            "study"
+            "plan",
+            "help"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -418,7 +405,13 @@
         }
       ],
       "deeds": [],
-      "characterDeltas": {},
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
       "ledgerEvents": [],
       "questUpdates": [],
       "standingOps": [],
@@ -428,55 +421,31 @@
       "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "Deep-night forest path descending steeply toward the Lower-Pass Waystation—switchbacks leveling out, the roar of melt-water louder now, closer, the tree-line beginning to open onto cleared ground ahead. Darkness still absolute beyond arm's reach, but the waystation's warm glow is not yet visible. Early spring, pre-dawn hours.",
+        "setting": "Deep-night forest path descending toward the Lower-Pass Waystation—switchbacks visible ahead, the stone worn and certain beneath your feet. The roar of melt-water echoes from below, closer now. Warm firelight glows from the waystation ahead, visible past the next bend. Early spring, pre-dawn hours, trees opening out.",
         "npcsPresent": [
           {
             "name": "Cevaine",
-            "state": "Walking beside you with lattice-precision, her discipline holding the path's geometry even in chaos, her voice steady but shaken by what she could NOT read"
+            "state": "Standing beside you on the path, lattice-discipline holding her form steady, watching Boo materialize with the recognition of a trained observer. Breathing steadied after the descent. Present, alert, waiting."
           }
         ],
         "objects": [
-          "The stone path beneath your feet—worn, certain, descending",
-          "The roaring melt-water below—closer now, the sound growing louder with each switchback",
-          "The dark itself—thick, honest, answering your use of the Kept Dark"
+          "The stone path—worn, descending, certain",
+          "The roaring melt-water below—loud, close, claiming the lower circuits",
+          "The dark itself—thick but beginning to lighten at the eastern rim",
+          "The waystation's warm firelight—visible ahead, shelter and rest within reach",
+          "Boo—now visible, settled against your leg, present and grounded"
         ],
         "threads": [
-          "Where is Boo? The umbral has gone to engage the presence in the forest-dark and has not yet returned.",
-          "What is the creature that defies Cevaine's lattice-reading? Its nature remains unknown—structure that denies structure, geometry that breaks measure.",
-          "The waystation lies ahead—warm shelter, fire, rest—but the path must be descended first, and the presence still moves in the forest above."
+          "What is the presence that defies structure? Its nature remains unknown, but Boo confirms it does not pursue.",
+          "The waystation lies ahead—shelter, fire, the caretaker waiting. But why does the path feel like crossing a threshold?"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "cevaine",
-          "name": "Cevaine",
-          "role": "Sentinel of the released veil, lattice-trained order-reader",
-          "note": "Descending the path in Splarf's concealment, she attempted to read the watching presence with her lattice-discipline and discovered something that breaks structure entirely—a contradiction that defies geometric measure. Her voice remains steady, but the impossibility clearly unsettles her. The veil's hours of pressure, and now this.",
-          "learned": [
-            "The presence holds contradiction—structure that denies structure, form that slips from geometry",
-            "Her discipline can fail to read something that matters—a humbling recognition for a lattice-trained sentinel",
-            "Formlessness is not absence; it is a property that defeats the language of order"
-          ],
-          "relationshipDelta": 0
-        }
-      ],
+      "npcUpdates": [],
       "intentsHeard": [],
       "factUpdates": [],
       "placeUpdates": [],
       "discovery": null,
-      "codexUpdates": [
-        {
-          "topic": "the_unnamed_presence",
-          "label": "The Presence That Breaks Structure",
-          "kind": "mystery",
-          "fact": "A thing that watches the forest-path above the waystation—holds form and denies it, contradicting itself. The lattice-trained discipline cannot read it. It is not invisible or merely hidden; it is geometrically impossible to measure.",
-          "links": [
-            "the-thinning",
-            "the-spring-melt"
-          ]
-        }
-      ],
+      "codexUpdates": [],
       "holdingOps": [],
       "debtOps": [],
       "partyOps": [],
@@ -488,10 +457,7 @@
       "newEncounter": null,
       "unlockPrecursor": null,
       "unlockSubstrate": null,
-      "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "slow descent through darkness and conversation"
-      },
+      "timeOps": {},
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
@@ -508,30 +474,31 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Deep-night forest path descending steeply toward the Lower-Pass Waystation—switchbacks leveling out, the roar of melt-water louder now, closer, the tree-line beginning to open onto cleared ground ahead. Darkness still absolute beyond arm's reach, but the waystation's warm glow is not yet visible. Early spring, pre-dawn hours.",
+      "setting": "Deep-night forest path descending toward the Lower-Pass Waystation—switchbacks visible ahead, the stone worn and certain beneath your feet. The roar of melt-water echoes from below, closer now. Warm firelight glows from the waystation ahead, visible past the next bend. Early spring, pre-dawn hours, trees opening out.",
       "npcsPresent": [
         {
           "name": "Cevaine",
-          "state": "Walking beside you with lattice-precision, her discipline holding the path's geometry even in chaos, her voice steady bu"
+          "state": "Standing beside you on the path, lattice-discipline holding her form steady, watching Boo materialize with the recogniti"
         }
       ],
       "objects": [
-        "The stone path beneath your feet—worn, certain, descending",
-        "The roaring melt-water below—closer now, the sound growing louder with each swit",
-        "The dark itself—thick, honest, answering your use of the Kept Dark"
+        "The stone path—worn, descending, certain",
+        "The roaring melt-water below—loud, close, claiming the lower circuits",
+        "The dark itself—thick but beginning to lighten at the eastern rim",
+        "The waystation's warm firelight—visible ahead, shelter and rest within reach",
+        "Boo—now visible, settled against your leg, present and grounded"
       ],
       "threads": [
-        "Where is Boo? The umbral has gone to engage the presence in the forest-dark and has not yet returned.",
-        "What is the creature that defies Cevaine's lattice-reading? Its nature remains unknown—structure that denies structure, geometry that breaks measure.",
-        "The waystation lies ahead—warm shelter, fire, rest—but the path must be descended first, and the presence still moves in the forest above."
+        "What is the presence that defies structure? Its nature remains unknown, but Boo confirms it does not pursue.",
+        "The waystation lies ahead—shelter, fire, the caretaker waiting. But why does the path feel like crossing a threshold?"
       ]
     },
-    "beats": 2
+    "beats": 3
   },
   "clock": {
     "schemaVersion": 1,
     "day": 5,
-    "hour": 3,
+    "hour": 4,
     "realAnchor": null
   },
   "companions": [
@@ -1140,7 +1107,7 @@
         "locationId": "the_thinning"
       }
     ],
-    "turnsSinceOffer": 6,
+    "turnsSinceOffer": 7,
     "recentOffers": [
       {
         "thing": "The caretaker's quiet competence and the shelter's genuine welcome—a place that asks nothing and offers warmth without demand",
@@ -6466,25 +6433,25 @@
     ]
   },
   "tendencies": {
-    "stealth": 2.444826185191016,
-    "strategic": 10.124263519102703,
-    "cautious": 14.504552317092445,
-    "cerebral": 5.2429419221040865,
-    "patient": 4.131852547026981,
-    "devotion": 0.8777367675546911,
-    "risky": 3.555529010317592,
-    "generous": 5.826212589263268,
-    "social": 7.818812457447586,
-    "craft": 0.5505818827966427,
-    "amorous": 2.3896085190314333,
-    "leadership": 0.6669201684248254
+    "stealth": 2.3837055305612402,
+    "strategic": 9.871156931125135,
+    "cautious": 14.141938509165133,
+    "cerebral": 6.111868374051484,
+    "patient": 4.028556233351306,
+    "devotion": 0.8557933483658238,
+    "risky": 3.4666407850596523,
+    "generous": 6.680557274531687,
+    "social": 7.623342146011396,
+    "craft": 0.5368173357267266,
+    "amorous": 2.3298683060556473,
+    "leadership": 0.6502471642142047
   },
   "aptitudes": [
     "stalwart",
     "shadow",
     "naive"
   ],
-  "actionCount": 66,
+  "actionCount": 67,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -6927,8 +6894,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789011043689,
-  "rev": 226,
+  "updatedAt": 1789011145870,
+  "rev": 227,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -7132,7 +7099,7 @@
   ],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_numinous_reach": 72
+    "the_numinous_reach": 73
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -7172,10 +7139,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-09-10T03:14:16.439Z",
-      "lastAt": "2026-09-10T03:30:43.670Z",
+      "lastAt": "2026-09-10T03:32:25.865Z",
       "startDay": 72,
       "endDay": 72,
-      "beats": 8
+      "beats": 9
     }
   ],
   "establishedFacts": [
@@ -7237,15 +7204,15 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 65,
-    "scene": 65,
-    "choices": 65,
+    "sceneSummary": 66,
+    "scene": 66,
+    "choices": 66,
     "offer": 34,
     "codexUpdates": 36,
     "imagePrompt": 28,
-    "gambitApt": 51,
-    "sceneEnded": 64,
-    "characterDeltas": 51,
+    "gambitApt": 52,
+    "sceneEnded": 65,
+    "characterDeltas": 52,
     "arcOps": 1,
     "factUpdates": 7,
     "placeUpdates": 20,
@@ -7265,7 +7232,7 @@
     "moveTo": 1,
     "intentsHeard": 1
   },
-  "_opTurns": 65,
+  "_opTurns": 66,
   "practice": {
     "schemaVersion": 1,
     "uses": {
@@ -7452,14 +7419,14 @@
   "_pendingLedger": [],
   "placeEdges": {},
   "skillUses": {
-    "help": 6,
+    "help": 7,
     "comfort": 5,
     "sustain": 3,
     "careful": 12,
     "speak": 1,
     "honest": 1,
     "devote": 1,
-    "study": 2,
+    "study": 3,
     "negotiate": 1,
     "travel": 5,
     "romantic": 2,

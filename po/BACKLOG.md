@@ -1814,12 +1814,32 @@ not to lose them.**
 > undead. A personality doesn't grow inside them. 'WORN' in this sense isn't like an outfit — IT'S LIKE A
 > BODY WEARING OUT."***
 
-⚠️ **§48's cocoon has two ends and they are not a spectrum of newness:**
+### ⛔ AND THE COCOON IS NOT THE AFTERLING'S ROAD — ERIK, CORRECTING AEVI TWICE
+
+> *"This is true, for the undead who LOSE THEIR SANITY/MINDS — **not Afterlings.** We talked through this as
+> well: **THE COCOON EXISTS FOR THOSE KIND.**"*
+
+⚠️ **AEVI HAS BEEN QUOTING A SUMMARY LINE THAT CONFLATES TWO ROADS:** *"a raised body is a cocoon — two end
+states, narrowing or stable as an Afterling."* ⛔ **THE CONTENT ITSELF SAYS OTHERWISE, AND IT IS EXPLICIT:**
+
+> ⛑ *"An undead **NEAR EMERGENCE**, or one carrying that aura, ABSORBS it, **BECAUSE THE COCOON WAS THE LAST
+> THING HOLDING IT IN.**"*
+> ⚠️ *"Anything you CAN feel is **further along the cocoon** and more dangerous."*
+
+⛔ **A COCOON HOLDS SOMETHING IN, AND WHAT COMES OUT IS NOT WHO WENT IN.** ⚑ **That is the losing-the-mind
+road, and the corpus tracks *progress along it* as a danger measure.**
 
 | | |
 |---|---|
-| ⛑ **AFTERLING** | ⛔ **the person survived the process.** Whole personality, whole self, undead |
-| ⛔ **`the_narrowed`** | ⚠️ **the person did not.** *"An unminded purpose"* — the errand kept, the person dropped |
+| ⛑ **AFTERLING** | ⛔ **NO COCOON. The person is simply still there, undead.** ⚠️ **The closest to living a dead person can be — nothing emerged, because nothing else was ever in there** |
+| ⛔ **the COCOON road** | ⚠️ **the mind goes and SOMETHING ELSE EMERGES.** `the_narrowed` at one end; *"near emergence"* is a state a GM can read |
+
+⛑ **AND THE DIAGNOSTIC SPLITS THEM IN PLAY:** *"if the undead in front of you cannot be felt, it is a TOOL;
+if it can, it is further along the cocoon and MORE DANGEROUS."* ⚠️ **An Afterling reads as a person because
+IT IS ONE — not because it is far along anything.**
+
+⬜ **AND `HOW_IT_WORKS.md`'S §48 SUMMARY LINE SHOULD BE CORRECTED WHEN THIS IS AUTHORED** — ⚠️ **it is the
+sentence that misled Aevi twice, and it is in the source of truth.**
 
 ⚑ **AUTHORED MECHANICS ALREADY EXIST AND ARE NOT A PROPOSAL:**
 - *"Healing harms them, decay mends them, and Deathsense reads them as inverted life."*

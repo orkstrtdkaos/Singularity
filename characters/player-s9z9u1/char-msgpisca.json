@@ -8,7 +8,7 @@
   "whyHere": "You came back into the world to find out whether it still holds anything worth staying material for.",
   "background": "orphan",
   "level": 2,
-  "xp": 165,
+  "xp": 170,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -67,7 +67,7 @@
   "maxHealth": 56,
   "health": 56,
   "maxEnergy": 105,
-  "energy": 72,
+  "energy": 67,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -385,22 +385,27 @@
         "player": "Follow the kingfisher's route—move upstream to the narrow crossing and attempt it now, before the water rises further.",
         "summary": "Splarf and Cevaine crossed the spring melt at the narrow upstream passage—the kingfisher's route proved true, and the path ahead now leads downhill into the darkening forest.",
         "narration": "You push uphill along the waterline, reading the kingfisher's flight-path like a map written in air. Cevaine follows, her discipline finding purchase on the rocks despite the chaos—the lattice teaches precision even where geometry dissolves. The narrow crossing reveals itself exactly where the bird showed it: bedrock breaking the surface like a spine, the current still fierce but divorceable. You move first, water foaming around your thighs, the roar deafening. Your foot finds each stone before you commit weight; the kingfisher wheels overhead, approving or simply present. Cevaine crosses behind you with geometric care, each step a calculated placement, and you realize her precision is not a weakness here—it is the only thing that holds against this kind of chaos. The far bank rises under your feet. You climb out together, spray-soaked and alive, and the water behind you churns higher than it was a moment ago. The crossing will not hold much longer. Behind you, the lower circuits are now fully claimed—the path you came down has become impassable. Ahead, downhill and eastward along the emerging tree-line, the path continues into the pre-dawn dark."
+      },
+      {
+        "player": "Use  umensense to assist with na imaging the path ahead.",
+        "summary": "At the forest's edge above the flooded pass, Splarf reads the numinous weight of the path ahead—something aware is waiting below, but the thinning place keeps its nature hidden. Cevaine moves forward. The descent continues into deep night.",
+        "narration": "You pause at the forest's edge where the path descends into deeper dark, and you let your ordinary sight soften—the practice you've carried since childhood, the small reaching that asks: where does the world *mean* something?\n\nThe significance-density shifts beneath your attention like a hand turning over cards. The path ahead reads as *worn*—not by feet alone, but by intention. Something moves through these trees with purpose; the forest knows it. There's a thinning ahead, a place where the numinous-weight gathers—not hostile, but *present*, alert. It's the quality of attention you felt at the waystation fire, and at the sealed veil before it yielded.\n\nYet the reading frays at the edges. The forest itself resists clean sight—the canopy is dense enough to scatter what little starlight reaches here, and the melt-water's roar from the channels below makes the ground feel unstable, uncertain. You can sense that *something* waits ahead on the path, something aware of being approached. But *who*, or *what*, stays just beyond the reach of what this thin place will let you read clearly.\n\nCevaine stands beside you, her lattice discipline already mapping the path's geometry in the dark—she moves first, downhill into the forest, trusting the form to hold. The question hangs: do you trust the significance you sensed, or do you ask for another kind of knowing before the path pulls you forward?"
       }
     ],
     "lastTurn": {
-      "narration": "You push uphill along the waterline, reading the kingfisher's flight-path like a map written in air. Cevaine follows, her discipline finding purchase on the rocks despite the chaos—the lattice teaches precision even where geometry dissolves. The narrow crossing reveals itself exactly where the bird showed it: bedrock breaking the surface like a spine, the current still fierce but divorceable. You move first, water foaming around your thighs, the roar deafening. Your foot finds each stone before you commit weight; the kingfisher wheels overhead, approving or simply present. Cevaine crosses behind you with geometric care, each step a calculated placement, and you realize her precision is not a weakness here—it is the only thing that holds against this kind of chaos. The far bank rises under your feet. You climb out together, spray-soaked and alive, and the water behind you churns higher than it was a moment ago. The crossing will not hold much longer. Behind you, the lower circuits are now fully claimed—the path you came down has become impassable. Ahead, downhill and eastward along the emerging tree-line, the path continues into the pre-dawn dark.",
-      "sceneSummary": "Splarf and Cevaine crossed the spring melt at the narrow upstream passage—the kingfisher's route proved true, and the path ahead now leads downhill into the darkening forest.",
+      "narration": "You pause at the forest's edge where the path descends into deeper dark, and you let your ordinary sight soften—the practice you've carried since childhood, the small reaching that asks: where does the world *mean* something?\n\nThe significance-density shifts beneath your attention like a hand turning over cards. The path ahead reads as *worn*—not by feet alone, but by intention. Something moves through these trees with purpose; the forest knows it. There's a thinning ahead, a place where the numinous-weight gathers—not hostile, but *present*, alert. It's the quality of attention you felt at the waystation fire, and at the sealed veil before it yielded.\n\nYet the reading frays at the edges. The forest itself resists clean sight—the canopy is dense enough to scatter what little starlight reaches here, and the melt-water's roar from the channels below makes the ground feel unstable, uncertain. You can sense that *something* waits ahead on the path, something aware of being approached. But *who*, or *what*, stays just beyond the reach of what this thin place will let you read clearly.\n\nCevaine stands beside you, her lattice discipline already mapping the path's geometry in the dark—she moves first, downhill into the forest, trusting the form to hold. The question hangs: do you trust the significance you sensed, or do you ask for another kind of knowing before the path pulls you forward?",
+      "sceneSummary": "At the forest's edge above the flooded pass, Splarf reads the numinous weight of the path ahead—something aware is waiting below, but the thinning place keeps its nature hidden. Cevaine moves forward. The descent continues into deep night.",
       "choices": [
         {
-          "label": "Follow the tree-line downhill—the path is visible enough and Hoss lies ahead somewhere in that direction",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Follow Cevaine downhill into the dark forest, trusting the awareness you sensed to guide your caution.",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "axes": {},
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
             "travel",
-            "pursue"
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -409,51 +414,39 @@
           "emergenceId": null
         },
         {
-          "label": "Stop and wait for full dawn—the melt-water crossing is passable now, and pushing through the dark tree-line unprepared could mean losing the path entirely",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "careful",
-            "endure"
-          ],
-          "abilityId": "unbroken_practice",
-          "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Cevaine what she reads in the path ahead—her lattice discipline has precision even in chaos; what does the emerging forest geometry tell her about safe footing?",
+          "label": "Call ahead into the dark—use your voice to announce yourself and ask who or what waits on the path below.",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "negotiate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Wait at the tree-line and ask Boo to scout the path ahead—the shadow-companion reads honesty in darkness better than any craft of yours.",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {},
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "help"
+            "scout"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
-      "deeds": [
-        {
-          "description": "Read the kingfisher's knowledge and trusted the wild thing's navigation through a flooded pass—crossing the melt-water where the bird showed the way, when the lower circuits were already claimed",
-          "tags": [
-            "trust",
-            "water-sense",
-            "presence"
-          ],
-          "weight": 2,
-          "communityId": "valley.thinning"
-        }
-      ],
+      "deeds": [],
       "characterDeltas": {
         "health": 0,
         "energy": -3,
@@ -470,89 +463,43 @@
       "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "The tree-line above the melt-water channel, early pre-dawn dark. The path continues downhill into the forest, emerging from shadow. Behind: the roaring channel, impassable now and climbing. Ahead: the dark, the downhill slope, and the shape of the land becoming visible as the false dawn begins.",
+        "setting": "Tree-line above the flooded pass switchbacks, deep night giving way to pre-dawn grey. The path descends into dense forest, passable but shadowed. Behind: the melt-water roaring through the lower circuits, now impassable. Ahead: the dark canopy, the forest's interior, and something aware waiting on the downhill slope.",
         "npcsPresent": [
           {
             "name": "Cevaine",
-            "state": "Standing wet and precise at the far bank, reading the path ahead with lattice discipline, breathing steady despite the exertion"
+            "state": "Standing at the forest's edge, reading the path ahead with lattice precision despite the dark. Breathing steady. Ready to move downhill. Her discipline is mapping geometry where your senses find only shadow."
           }
         ],
         "objects": [
-          "The crossed waterline, now impassable behind you",
-          "The narrow bedrock passage you just traversed, disappearing under rising water",
-          "The tree-line, emerging from dark into grey pre-dawn",
-          "The downhill path, passable but shadowed",
-          "The kingfisher, still wheeling in the pre-dawn air",
-          "Traveler's Pack on your shoulders, heavy with wet",
-          "Waystation Provision Bundle, secured but damp"
+          "The tree-line, clear and immediate",
+          "The downhill path, disappearing into forest shadow",
+          "The forest canopy, dense enough to scatter starlight",
+          "The roaring melt-water below, a constant presence in the dark",
+          "Traveler's Pack on your shoulders",
+          "Waystation Provision Bundle, secured",
+          "The ledger assignment—void, carried safe",
+          "Boo—absent into shadow, its presence felt rather than seen"
         ],
         "threads": [
-          "The figure on the downhill path—was it Hoss? Is she still ahead?",
-          "Cevaine's lattice discipline and how it reads chaos differently than you do",
-          "Where has Boo gone, and why is the shadow empty when you most expect it?",
-          "The path ahead into the forest—safe passage or another test?"
+          "The aware presence ahead on the path—is it Hoss? Is it something else?",
+          "Cevaine's certainty about moving forward, versus the forest's resistance to clear sight",
+          "Where is Boo, and why does the dark feel emptier than it should when you need it most?"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "cevaine",
-          "carries": [],
-          "returns": [],
-          "name": null,
-          "role": null,
-          "sex": null,
-          "gender": null,
-          "pronouns": null,
-          "description": null,
-          "note": "Crossed the spring melt with geometric precision, each step calibrated despite chaos. Her discipline found footing where fluidity would have drowned. Stands now at the far bank, reading the path ahead with the same lattice-trained clarity she brings to everything.",
-          "learned": [
-            "Her precision is not weakness in chaos—it is the only anchor against the formless. The lattice teaches calibration even where geometry dissolves.",
-            "She does not move fast, but she moves *true*. Speed is not her craft; structural integrity is."
-          ],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
-          "vouchedBy": null,
-          "status": "active",
-          "statusNote": "Wet, precise, present. Her discipline holds even soaked and exhausted."
+          "name": "Cevaine",
+          "note": "Reads the path ahead with lattice discipline in the dark forest. Her geometry finds structure where Splarf finds only shadow. Moving forward with certainty.",
+          "statusNote": "Active, present, ready to move downhill—no longer exhausted from holding the veil open."
         }
       ],
       "intentsHeard": [],
       "factUpdates": [],
-      "placeUpdates": [
-        {
-          "note": "The melt-water has claimed the lower switchback circuits completely—the passage is now impassable by the path Splarf and Cevaine came down. The narrow upstream crossing where bedrock breaks the surface remains passable but closing as water rises.",
-          "flag": {
-            "lowerCircuitsFlooded": true,
-            "narrowCrossingOpen": true
-          }
-        }
-      ],
+      "placeUpdates": [],
       "discovery": null,
-      "codexUpdates": [
-        {
-          "topic": "the-spring-melt",
-          "label": "The Spring Melt",
-          "kind": "lore",
-          "entityId": null,
-          "fact": "The melt-water rises by the hour in deep night—so fast that a narrow bedrock crossing passable at midnight is closing rapidly by early dawn. The kingfisher knows the water's true routes; the old stone-paths are buried.",
-          "links": [
-            "lower-pass-waystation",
-            "thinning"
-          ]
-        },
-        {
-          "topic": "kingfisher-knowledge",
-          "label": "The Kingfisher's Knowing",
-          "kind": "lore",
-          "entityId": null,
-          "fact": "The kingfisher at the melt-water reading showed the narrow bedrock crossing upstream—the passage where yesterday's deer crossed, still navigable by one who trusts the wild thing's sight. The bird's mood: the usual dive-paths are wrong, the current has moved them, the stone-routes are buried.",
-          "links": [
-            "beastfriend",
-            "the-spring-melt"
-          ]
-        }
-      ],
+      "codexUpdates": [],
       "holdingOps": [],
       "debtOps": [],
       "partyOps": [],
@@ -565,14 +512,14 @@
       "unlockPrecursor": null,
       "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 1,
-        "why": "Crossing the melt-water and climbing out took an hour—deep night edging toward pre-dawn"
+        "hoursPassed": 0.75,
+        "why": "descending the switchbacks and reaching the forest edge took the remainder of deep night as dawn approaches"
       },
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": "Splarf and Cevaine emerge from the roaring melt-water onto the far bank at the pre-dawn threshold—spray-soaked, the kingfisher wheeling overhead, the lower path behind them now fully claimed by white water. The tree-line rises ahead in shadow, and the false dawn is just beginning to grey the sky.",
+      "imagePrompt": null,
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
@@ -584,30 +531,30 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The tree-line above the melt-water channel, early pre-dawn dark. The path continues downhill into the forest, emerging from shadow. Behind: the roaring channel, impassable now and climbing. Ahead: the dark, the downhill slope, and the shape of the land becoming visible as the false dawn begins.",
+      "setting": "Tree-line above the flooded pass switchbacks, deep night giving way to pre-dawn grey. The path descends into dense forest, passable but shadowed. Behind: the melt-water roaring through the lower circuits, now impassable. Ahead: the dark canopy, the forest's interior, and something aware waiting on the downhill slope.",
       "npcsPresent": [
         {
           "name": "Cevaine",
-          "state": "Standing wet and precise at the far bank, reading the path ahead with lattice discipline, breathing steady despite the e"
+          "state": "Standing at the forest's edge, reading the path ahead with lattice precision despite the dark. Breathing steady. Ready t"
         }
       ],
       "objects": [
-        "The crossed waterline, now impassable behind you",
-        "The narrow bedrock passage you just traversed, disappearing under rising water",
-        "The tree-line, emerging from dark into grey pre-dawn",
-        "The downhill path, passable but shadowed",
-        "The kingfisher, still wheeling in the pre-dawn air",
-        "Traveler's Pack on your shoulders, heavy with wet",
-        "Waystation Provision Bundle, secured but damp"
+        "The tree-line, clear and immediate",
+        "The downhill path, disappearing into forest shadow",
+        "The forest canopy, dense enough to scatter starlight",
+        "The roaring melt-water below, a constant presence in the dark",
+        "Traveler's Pack on your shoulders",
+        "Waystation Provision Bundle, secured",
+        "The ledger assignment—void, carried safe",
+        "Boo—absent into shadow, its presence felt rather than seen"
       ],
       "threads": [
-        "The figure on the downhill path—was it Hoss? Is she still ahead?",
-        "Cevaine's lattice discipline and how it reads chaos differently than you do",
-        "Where has Boo gone, and why is the shadow empty when you most expect it?",
-        "The path ahead into the forest—safe passage or another test?"
+        "The aware presence ahead on the path—is it Hoss? Is it something else?",
+        "Cevaine's certainty about moving forward, versus the forest's resistance to clear sight",
+        "Where is Boo, and why does the dark feel emptier than it should when you need it most?"
       ]
     },
-    "beats": 11
+    "beats": 12
   },
   "clock": {
     "schemaVersion": 1,
@@ -778,7 +725,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d4] At the waystation, her sentinel-form finally loosens into rest. She sits beside Splarf, maintaining careful distance but present. Her breathing deepens toward sleep. The discipline that held the veil is beginning to release—not shattering, but yielding with precision, moment by moment.",
         "[d4] Descended from The Thinning's opened veil with Splarf at her side. Entered the waystation shelter and allowed her lattice-trained form to release into rest—falling asleep against Splarf's shoulder, the discipline finally yielding to exhaustion. The sentinel's form is no longer held rigid by duty…",
         "[d4] Has entered full rest against Splarf—her lattice-trained form finally releasing the discipline that held her upright through the vigil. Sleep is deep and unguarded. This is integration, a stage the form permits.",
         "[d4] Sleeping deeply at the waystation, her sentinel-form finally released, the discipline that held the veil breaking yielding to rest. Her hand rests relaxed at her side, her breathing matched to the shelter's quiet rhythm.",
@@ -787,7 +733,8 @@
         "[d4] Wakes to Splarf's quiet call and rises with geometric precision—the form releasing into choice rather than rigidity. Moves toward the downhill path with the character, ready for descent and the meeting that waits there.",
         "[d4] At the edge of the melt-water channel, reading the rushing water with lattice precision—her discipline meeting chaos and finding no easy structure.",
         "[d5] Reading the water's geometry with lattice precision—finding no structure in the chaos. Waiting for Splarf's assessment before deciding on crossing.",
-        "[d5] Crossed the spring melt with geometric precision, each step calibrated despite chaos. Her discipline found footing where fluidity would have drowned. Stands now at the far bank, reading the path ahead with the same lattice-trained clarity she brings to everything."
+        "[d5] Crossed the spring melt with geometric precision, each step calibrated despite chaos. Her discipline found footing where fluidity would have drowned. Stands now at the far bank, reading the path ahead with the same lattice-trained clarity she brings to everything.",
+        "[d5] Reads the path ahead with lattice discipline in the dark forest. Her geometry finds structure where Splarf finds only shadow. Moving forward with certainty."
       ],
       "knownFacts": [
         "Rest is not failure—it is integration, a stage the form permits and even honors",
@@ -810,7 +757,7 @@
       "status": "active",
       "gender": "Woman",
       "pronouns": "she/her",
-      "statusNote": "Wet, precise, present. Her discipline holds even soaked and exhausted.",
+      "statusNote": "Active, present, ready to move downhill—no longer exhausted from holding the veil open.",
       "domains": {
         "primary": "lattice"
       },
@@ -821,7 +768,7 @@
       },
       "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Cevaine%2C%20Woman%2C%20Lattice-trained%20order-reader%20of%20the%20Seventh%20Measure%3B%20sentinel%20at%20the%20sealed%20veil%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=39649&nologo=true",
       "_portraitTier": "devoted",
-      "met": 25,
+      "met": 26,
       "bondType": "romantic",
       "bondStage": "together",
       "deeds": [
@@ -1163,21 +1110,6 @@
       {
         "source": "threat-attack",
         "kind": "threat-attack",
-        "subjectId": "beast_rust_choir_gnats",
-        "aimedAtPlayer": true,
-        "urgency": 3,
-        "oneLineHook": "A rust-choir gnats has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
-        "becomes": {
-          "type": "encounter",
-          "encounterId": "beast_rust_choir_gnats",
-          "name": "rust-choir gnats"
-        },
-        "addedDay": 3,
-        "locationId": "the_thinning"
-      },
-      {
-        "source": "threat-attack",
-        "kind": "threat-attack",
         "subjectId": "beast_hollow_pace",
         "aimedAtPlayer": true,
         "urgency": 3,
@@ -1251,7 +1183,7 @@
         "locationId": "the_thinning"
       }
     ],
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "The caretaker's quiet competence and the shelter's genuine welcome—a place that asks nothing and offers warmth without demand",
@@ -6567,25 +6499,25 @@
     ]
   },
   "tendencies": {
-    "stealth": 2.7747567076052406,
-    "strategic": 6.174162924473476,
-    "cautious": 14.27645988046141,
-    "cerebral": 5.9504795694939725,
-    "patient": 4.689448124838027,
-    "devotion": 0.9961877854698424,
-    "risky": 4.035349437200562,
-    "generous": 6.6124629063269245,
-    "social": 8.87396512816515,
-    "craft": 0.6248831845919322,
-    "amorous": 2.712087389646084,
-    "leadership": 0.7569213803350267
+    "stealth": 2.7053877899151098,
+    "strategic": 8.019808851361638,
+    "cautious": 13.919548383449873,
+    "cerebral": 5.801717580256623,
+    "patient": 4.572211921717076,
+    "devotion": 0.9712830908330964,
+    "risky": 3.9344657012705477,
+    "generous": 6.447151333668751,
+    "social": 8.65211599996102,
+    "craft": 0.6092611049771338,
+    "amorous": 2.644285204904932,
+    "leadership": 0.7379983458266509
   },
   "aptitudes": [
     "stalwart",
     "shadow",
     "naive"
   ],
-  "actionCount": 61,
+  "actionCount": 62,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -7028,8 +6960,8 @@
     "source": "personal",
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789010359783,
-  "rev": 221,
+  "updatedAt": 1789010488892,
+  "rev": 222,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -7233,7 +7165,7 @@
   ],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_numinous_reach": 67
+    "the_numinous_reach": 68
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -7273,10 +7205,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-09-10T03:14:16.439Z",
-      "lastAt": "2026-09-10T03:19:19.769Z",
+      "lastAt": "2026-09-10T03:21:28.880Z",
       "startDay": 72,
       "endDay": 72,
-      "beats": 3
+      "beats": 4
     }
   ],
   "establishedFacts": [
@@ -7338,23 +7270,23 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 60,
-    "scene": 60,
-    "choices": 60,
+    "sceneSummary": 61,
+    "scene": 61,
+    "choices": 61,
     "offer": 34,
     "codexUpdates": 35,
     "imagePrompt": 27,
-    "gambitApt": 46,
-    "sceneEnded": 59,
-    "characterDeltas": 48,
+    "gambitApt": 47,
+    "sceneEnded": 60,
+    "characterDeltas": 49,
     "arcOps": 1,
     "factUpdates": 7,
     "placeUpdates": 20,
-    "timeOps": 41,
+    "timeOps": 42,
     "deeds": 11,
     "ledgerEvents": 4,
     "questUpdates": 18,
-    "npcUpdates": 52,
+    "npcUpdates": 53,
     "generateRequest": 2,
     "newEncounter": 1,
     "encounterOps": 1,
@@ -7365,12 +7297,12 @@
     "standingOps": 1,
     "moveTo": 1
   },
-  "_opTurns": 60,
+  "_opTurns": 61,
   "practice": {
     "schemaVersion": 1,
     "uses": {
       "beastfriend": 4,
-      "numen_sense": 7,
+      "numen_sense": 8,
       "storykeeper": 4,
       "the_unbroken_practice": 4,
       "steady_soul": 8
@@ -7380,17 +7312,17 @@
       {
         "abilityId": "greenlore",
         "since": "2026-08-05T23:25:06.049Z",
-        "progress": 8
+        "progress": 9
       },
       {
         "abilityId": "wayfinding",
         "since": "2026-08-05T23:25:30.590Z",
-        "progress": 8
+        "progress": 9
       }
     ],
     "lastUsed": {
       "beastfriend": 72,
-      "numen_sense": 38,
+      "numen_sense": 72,
       "storykeeper": 37,
       "the_unbroken_practice": 38,
       "steady_soul": 38
@@ -7419,7 +7351,7 @@
     }
   },
   "companionBonds": {
-    "hush": 7.25
+    "hush": 7.5
   },
   "teachers": {},
   "foreclosed": [
@@ -7564,13 +7496,13 @@
     "rapport": 3,
     "care": 1,
     "heal": 1,
-    "prepare": 2,
+    "prepare": 3,
     "meditate": 1,
     "flirt": 1,
     "guard": 1,
     "endure": 1,
     "rest": 1,
-    "scout": 2,
+    "scout": 3,
     "risky": 2
   },
   "_stageOpRefusals": [
@@ -7681,6 +7613,14 @@
       "day": 5,
       "worldDay": 72,
       "actionCount": 60
+    },
+    {
+      "companionId": "hush",
+      "kind": "assist",
+      "delta": 0.25,
+      "day": 5,
+      "worldDay": 72,
+      "actionCount": 61
     }
   ]
 }

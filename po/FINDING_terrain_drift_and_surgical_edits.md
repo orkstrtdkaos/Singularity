@@ -212,3 +212,72 @@ the gate derives the ratio from what all 44 records already do and asserts the e
 Inert the day it landed — 0 of 44 sources lack `radiusWorld`, measured.
 
 `content_ci` is back to **8**. No ratchet moved.
+
+---
+
+# ⛔ SUPERSEDED — §4 IS ANSWERED, AND THE RECOMMENDATION REVERSES
+
+**CCode, `SNG-391/393 §4`, 2026-09-09. ⚑ AEVI VERIFIED IT HERSELF BEFORE ACCEPTING IT.**
+
+## ⛑ DO NOT REBUILD. THE SIX NAMES ARE NOT LOST — THEY ARE PLACED.
+
+**MEASURED DIRECTLY IN `terrain.json.placeNames`:**
+
+| name | score | via |
+|---|---|---|
+| The Middle Run | **0** | signature |
+| The Burnwater | **0** | signature |
+| The Milljaw | 0.11 | signature |
+| The Echofen | **0** | signature |
+| The Quiet Fen | **0** | signature |
+| The Upper Mire | 0.14 | signature |
+
+⛔ **SIX OF SIX RESOLVED, VIA SIGNATURE, AT A PERFECT ANCHOR.** ⚠️ **Aevi's §4 read — *"if they are already
+lost, rebuilding does not lose them"* — WAS FALSE AT ITS PREMISE.** ⛑ **They are not already lost. They are
+in the shipped world right now, and a rebuild ends them** — ⚠️ **because the FEATURES STOP EXISTING, so no
+tolerance recovers them.**
+
+⚑ **AND CCODE FOUND THE TRAP THAT WOULD HAVE HIDDEN THIS:** *"both runs report names against the
+REGENERATED world, so that comparison may prove nothing about the rebuild's cost."* ⛔ **`resolvePlaceNames`
+runs against freshly computed hydrology — comparing two regenerations is the same computation twice.** ⚠️
+**The only comparison that counts is the SHIPPED asset against a regeneration**, and he caught that in
+himself mid-measurement.
+
+---
+
+## ⛔ THREE THINGS IN §1 WERE AEVI'S ERRORS
+
+| ⛔ she wrote | ⚑ measured |
+|---|---|
+| *"`seawant` shipped without a rebuild — five existing keys CHANGED"* | ⛑ **REFORMATTING NOISE. ZERO VALUES CHANGED** — his rewrite exploded compact arrays to one number per line and `-10.0` → `-10`. ⚠️ **She diffed a JSON re-serialisation and reported it as data drift** |
+| *"`terrain.json` was last built 2026-09-04"* | ⛔ **08-10, by mtime AND by content.** ⚠️ The 09-04 commit was `craft_lint fixes` sweeping the file along — ⛑ **she read a drive-by commit as a rebuild** |
+| *"cause two is `seawant`"* | ⛔ **NO. The regenerated size has been 875,972 THROUGHOUT, before and after `seawant` — it is the DISK file that is stale.** ⚑ **The real cause is AEVI'S OWN three `genparams` commits on 08-14/08-15**, re-deriving `pts`, `landwant` and `short` from canon |
+
+⚠️ **SO BOTH CAUSES WERE HERS AND SHE ATTRIBUTED ONE OF THEM TO HIM.** ⛑ **The decisive experiment was his
+and it is the right one: revert each input in a throwaway worktree and see which one makes the drift
+vanish.**
+
+---
+
+## ⚠️ AND A NUMBER SHE AUTHORED TODAY WAS WRONG
+
+**`the_old_warden_post`: she wrote `radius: 95` with `radiusWorld: 0.054`. ⛔ 0.054 IS 90'S VALUE, and the
+other 43 sources sit at exactly 0.0006.** ✅ **He set `radius: 90`; `radiusWorld` is what the mechanic reads,
+so the sink is unchanged.**
+
+⛑ **AND THE SAME BUG WAS IN THE ENGINE, WHICH IS THE HALF THAT MATTERED:** the fallback for a source
+authored WITHOUT `radiusWorld` divided by 309 — ⛔ **17.6° against the convention's 3.27°.** ⚠️ **5.4× wider
+is a blanket, and the locality ceiling ten lines below it forbids exactly that.** ⚑ **A malformed record
+led to a live engine defect, which is the second time this week that pair has come up together.**
+
+---
+
+## ⬜ SO THE DECISION FOR ERIK IS NOW A REAL TRADE
+
+⛔ **Rebuilding costs six named rivers and fens, permanently.** ⚑ **Not rebuilding costs `seawant` doing
+nothing and a permanent known-red.**
+
+⚠️ **AEVI'S REVISED READ: DO NOT REBUILD YET.** ⛑ **Author the bay first — `foothill_longshore` is tagged
+`harbor` with no water — and then rebuild ONCE, deliberately, having decided what the six names become.**
+⛔ **A river that stops existing should be a thing somebody in Exesa noticed**, not a silent loss in a byte
+diff.

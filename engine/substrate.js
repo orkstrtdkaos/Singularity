@@ -380,7 +380,7 @@ export function resolveSubstrateField(locations = {}, data = {}) {
     // radiusWorld is RADII on the sphere and is what mechanics use; `radius` (legacy map units) is
     // only a fallback for any source not yet re-authored.
     // ⛔ AND THE FALLBACK USED TO DISAGREE WITH EVERY AUTHORED SOURCE. It divided by 309, which turns
-    // radius 95 into 0.29 radians — 16.7° — while all 44 authored sources convert at 0.0006, or 3.3°.
+    // radius 95 into 0.31 radians — 17.6° — while all 44 authored sources convert at 0.0006, or 3.3°.
     // ⚠️ Five and a half times wider is a BLANKET, the one shape the coverage gate exists to forbid, so
     // the fallback for an un-re-authored source was the very thing it was meant to rescue.
     // ⛑ INERT WHEN IT LANDED — measured: 0 of 44 sources lack radiusWorld, so this path fires for

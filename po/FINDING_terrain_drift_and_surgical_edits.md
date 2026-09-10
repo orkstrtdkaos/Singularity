@@ -203,7 +203,7 @@ question is open.
 ### And the engine had the same bug, waiting
 
 The fallback for a source authored *without* `radiusWorld` divided by **309**. Radius 95 down
-that path is 0.29 radians — **16.7°** — against your convention's 3.3°. Five and a half times
+that path is 0.31 radians — **17.6°** — against your convention's 3.3°. Five and a half times
 wider is a **blanket**, the one shape the locality ceiling ten lines below it exists to
 forbid. The rescue path for an un-re-authored source was the thing that would have broken it.
 

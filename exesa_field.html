@@ -54,7 +54,8 @@ button.t.on{background:var(--hot);border-color:var(--hot);color:#1a1206;font-wei
       <span style="color:#4a96ff">●</span> 29 crystal wells — the lattice thick around them<br>
       <span style="color:#ff5252">○</span> 15 thin places — the divide worn, where veil craft works<br>
       <span style="color:#bef5ff">◇</span> 26 waygates — a door somebody keeps<br>
-      <span style="color:var(--dim)">drift = wild nanite ringing the ordered sites (proposed, not authored)</span>
+      <span style="color:#ffd64a">■</span> 21 ordered — kept and cycled · <span style="color:#5ae078">■</span> 10 wild — bloomed, patchy<br>
+      <span style="color:var(--dim)">8 regions are CLEAR — no nanite of either kind. drift = wild collar around ordered wells (proposed)</span>
     </div>
     <h2>Arc stage</h2><div id="arcs"></div>
     <h2>At this point</h2>
@@ -83,7 +84,7 @@ const SRC=[
  {k:"precursor",label:"crystal lattice",rgb:[74,150,255],on:true},
  {k:"nanite",label:"ordered nanite",rgb:[255,214,74],on:true},
  {k:"veil",label:"the veil",rgb:[255,82,82],on:true},
- {k:"wild",label:"wild current",rgb:[90,224,120],on:true},
+ {k:"wild",label:"wild nanite",rgb:[90,224,120],on:true},
  {k:"metaphysical",label:"meaning",rgb:[198,124,255],on:false},
  {k:"body",label:"body",rgb:[190,190,190],on:false}];
 const EFFECT={
@@ -99,13 +100,14 @@ let spin=true,mix=true,geo=true,lbl=true,anc=true,wgs=true,RINGS=true,rot=0,drag
 const TW=288,TH=144;
 // ⛑ NANITE HAS ITS OWN GEOGRAPHY — 21 ordered, 10 wild, 8 CLEAR. Reading it off the density band was
 //    wrong: `clear` means "no nanite worth the name", which no amount of substrate density implies.
-const NANG=new Float32Array(TW*TH);
+const ORDG=new Float32Array(TW*TH);   // ordered nanite — kept and cycled
+const WLDG=new Float32Array(TW*TH);   // wild nanite — bloomed and feral
 function nanGrid(){
   for(let y=0;y<TH;y++){
     const lat=90-(y+.5)/TH*180, cl=Math.cos(lat*Math.PI/180);
     for(let x=0;x<TW;x++){
       const lon=-180+(x+.5)/TW*360;
-      let num=0,den=0,wgt=0;
+      let ordN=0,wldN=0,den=0,wgt=0;
       for(const v of F.voters){
         const dy=lat-v[0]; let dx=lon-v[1]; if(dx>180)dx-=360; if(dx<-180)dx+=360;
         const w=1/Math.pow(dy*dy+dx*dx*cl*cl+6,1.6);
@@ -113,17 +115,20 @@ function nanGrid(){
         // ⛔ ORDERED is kept and even. WILD IS NOT A WASH — the corpus says "scattered thin along the old
         //    routes and gone feral IN PATCHES", "SMALL FIELDS gone feral". So wild carries its authored
         //    value into a patchy field rather than a flat one.
-        const s=!n?0:(n[0]==="o"?n[1]:n[0]==="w"?n[1]:0);
-        num+=w*s; den+=w;
-        if(n&&n[0]==="w") wgt+=w;
+        // ⛔ THEY ARE TWO DIFFERENT SOURCES. `ordered_nanite` (65 crafts) and `wild_nanite` (45) —
+        //    ordered is KEPT, wild is what got away. A region is one state or the other, never both.
+        if(n&&n[0]==="o") ordN+=w*n[1];
+        if(n&&n[0]==="w"){ wldN+=w*n[1]; wgt+=w; }
+        den+=w;
       }
-      let v=den?num/den:0;
+      let o=den?ordN/den:0, v=den?wldN/den:0;
       const wildShare=den?wgt/den:0;
-      if(wildShare>.25){
+      if(wildShare>.05){
         // ⚠️ PATCHINESS — value-noise at two scales, so a bloom reads as fields and verges rather than
         //    a region-wide glow. The AMPLITUDE follows how wild the ground is; ordered ground stays even.
+        // ⚠️ PATCHY: "scattered thin along the old routes and gone feral IN PATCHES", "SMALL FIELDS"
         const p=(nse(lat*1.9,lon*1.9)*.62+nse(lat*5.3,lon*5.3)*.38);
-        v*= (1-wildShare*.85) + wildShare*.85*(0.28+1.5*p);
+        v*= 0.22+1.65*p;
       }
       // ⬜ PROPOSED (not authored): DRIFT RINGS. "The reprocessing never stopped: spent nanite is gathered
       //    and re-ordered on a schedule somebody still keeps" — so what ISN'T gathered goes feral at the
@@ -136,11 +141,14 @@ function nanGrid(){
           const R0=7.5, W0=4.2;
           if(dd>R0-W0 && dd<R0+W0*1.6){
             const t=(dd-R0)/W0;
-            v=Math.max(v, 0.34*Math.exp(-t*t*1.1)*Math.min(1,dl*4.5));
+            // ⬜ drift: what the circuit does not gather goes feral at its edge — WILD, never ordered
+            const pr=(nse(lat*3.1+9,lon*3.1+4)*.6+nse(lat*7.7,lon*7.7)*.4);
+            v=Math.max(v, 0.40*Math.exp(-t*t*1.1)*Math.min(1,dl*4.5)*(0.3+1.4*pr));
           }
         }
       }
-      NANG[y*TW+x]=Math.max(0,Math.min(1,v));
+      ORDG[y*TW+x]=Math.max(0,Math.min(1,o));
+      WLDG[y*TW+x]=Math.max(0,Math.min(1,v));
     }
   }
 }
@@ -178,9 +186,10 @@ function arcShift(k,d){let o=0;
   return o;}
 function strength(k,d,i){
   if(k==="body")return .55;
-  if(k==="nanite"&&i!==undefined){                       // ⛔ its own field, plus the arc shift
-    const n=Math.max(0,Math.min(1,NANG[i]+arcShift("nanite",d)));
-    return n<.08?0:n;                                     // clear ground stays DARK
+  if(i!==undefined&&(k==="nanite"||k==="wild")){          // ⛔ each reads ITS OWN grid
+    const g=(k==="nanite"?ORDG:WLDG)[i];
+    const n=Math.max(0,Math.min(1,g+arcShift(k,d)));
+    return n<.06?0:n;                                     // clear ground stays DARK
   }
   const b=M.bands[k],lo=b.center-b.width,hi=b.center+b.width;
   const dd=Math.max(0,Math.min(1,d+arcShift(k,d)));

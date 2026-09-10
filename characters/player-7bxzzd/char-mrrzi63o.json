@@ -8,7 +8,7 @@
   "whyHere": "You put down the blade, or you were sent away from it, or you are looking for a line worth holding that isn't theirs.",
   "background": "war_leader",
   "level": 2,
-  "xp": 123,
+  "xp": 125,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -59,13 +59,13 @@
   "alignment": {
     "spectrum": -0.03,
     "falsehood_truth": 0.082901375,
-    "spectrumId": -0.038689046874999994
+    "spectrumId": -0.03675459453124999
   },
   "attunement": 2,
   "maxHealth": 51,
   "health": 51,
   "maxEnergy": 113,
-  "energy": 97,
+  "energy": 92,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -211,48 +211,54 @@
         "player": "Stay seated across from him — say nothing, let the silence do the work, watch his eyes when the next person comes through the waygate arch",
         "summary": "Brynjar held silence across the table and watched; the heavy-wool man is checking for a signal, not a face — one specific arrival, unknown.",
         "narration": "The heavy-wool man does not ask you to leave.\n\nYou stay in your seat across from him and say nothing. Freki settles under the table, her flank warm against your boot, and the common room noise fills the space between you — chair-scrape, distant argument, the serving boy calling an order. The man keeps his eyes on the arch. You keep your eyes on him.\n\nThree people come through the waygate in the next quarter-hour. First, a pair of young traders with matching packs — he clocks them, dismisses them before they clear the threshold. Second, a woman in Stillhold grey moving alone and fast — he holds on her longer, two full seconds, watching her hands specifically. She does not look at him and he lets her go. Third: an older man, heavyset, travelling coat dusty from real miles, who comes through and immediately checks the chalk column. The heavy-wool man's eyes stay flat. Not him either.\n\nWhat you learn from watching rather than asking: he is waiting for one specific person and has a signal to look for — something in how that person carries themselves, or what they do first when they step through. The Stillhold woman made him careful. She passed his test. He does not know you are running one of your own.\n\nFreki shifts once, pressing harder against your shin. Not a warning — more like patience, a hound that has decided this wait is worth keeping."
+      },
+      {
+        "player": "\"What is your name, and who are you waiting for?\" I'll ask the man. Then, I'll try and study his facial features and the way he is dressed. Do I recognize him? Is he dressed similarly to anyone I've met, does he have any patches or sigils on his clothing. Anything that stands out about him or his attire. Freki pointed me to him and I'd like to find out why.,",
+        "summary": "Brynjar asked the heavy-wool man his name and who he waited for; the man gave nothing — no name, no words, only silence and a flat look that had already made its decision.",
+        "narration": "You lean forward slightly and ask it straight: \"What is your name, and who are you waiting for?\"\n\nHe does not answer. His eyes stay on the arch for a breath, then cut to you — a flat, assessing look, the kind that has decided something before you finished speaking. He picks up his cup, drinks from it, sets it down. That is the whole of his response.\n\nYou use the silence to look at him properly. Mid-fifties, road-worn but not road-broken — the difference is in how he carries his weight. The scar along his left jaw healed raised and crooked, old work, a blade rather than a fall. His wool coat is heavy and dark, no visible patch or sigil, nothing embroidered at the collar or cuffs. The cut is Stillhold-adjacent — conservative, built for weather — but the stitching at the shoulders is tighter than standard Stillhold make, and the hem has been taken in once, which means it was bought somewhere else and altered later. No clan mark you recognize. No Marcher token. Nothing that names him.\n\nFreki shifts under the table. Not a growl — just a repositioning, her body angled toward the man's legs rather than away. She has not relaxed since you sat down. Whatever she read when she first flagged him, she has not revised it.\n\nThe heavy-wool man sets his cup down and looks at the arch again. He is done with you the way a wall is done with a hand that pressed it — he simply is not a door."
       }
     ],
     "lastTurn": {
-      "narration": "The heavy-wool man does not ask you to leave.\n\nYou stay in your seat across from him and say nothing. Freki settles under the table, her flank warm against your boot, and the common room noise fills the space between you — chair-scrape, distant argument, the serving boy calling an order. The man keeps his eyes on the arch. You keep your eyes on him.\n\nThree people come through the waygate in the next quarter-hour. First, a pair of young traders with matching packs — he clocks them, dismisses them before they clear the threshold. Second, a woman in Stillhold grey moving alone and fast — he holds on her longer, two full seconds, watching her hands specifically. She does not look at him and he lets her go. Third: an older man, heavyset, travelling coat dusty from real miles, who comes through and immediately checks the chalk column. The heavy-wool man's eyes stay flat. Not him either.\n\nWhat you learn from watching rather than asking: he is waiting for one specific person and has a signal to look for — something in how that person carries themselves, or what they do first when they step through. The Stillhold woman made him careful. She passed his test. He does not know you are running one of your own.\n\nFreki shifts once, pressing harder against your shin. Not a warning — more like patience, a hound that has decided this wait is worth keeping.",
-      "sceneSummary": "Brynjar held silence across the table and watched; the heavy-wool man is checking for a signal, not a face — one specific arrival, unknown.",
+      "narration": "You lean forward slightly and ask it straight: \"What is your name, and who are you waiting for?\"\n\nHe does not answer. His eyes stay on the arch for a breath, then cut to you — a flat, assessing look, the kind that has decided something before you finished speaking. He picks up his cup, drinks from it, sets it down. That is the whole of his response.\n\nYou use the silence to look at him properly. Mid-fifties, road-worn but not road-broken — the difference is in how he carries his weight. The scar along his left jaw healed raised and crooked, old work, a blade rather than a fall. His wool coat is heavy and dark, no visible patch or sigil, nothing embroidered at the collar or cuffs. The cut is Stillhold-adjacent — conservative, built for weather — but the stitching at the shoulders is tighter than standard Stillhold make, and the hem has been taken in once, which means it was bought somewhere else and altered later. No clan mark you recognize. No Marcher token. Nothing that names him.\n\nFreki shifts under the table. Not a growl — just a repositioning, her body angled toward the man's legs rather than away. She has not relaxed since you sat down. Whatever she read when she first flagged him, she has not revised it.\n\nThe heavy-wool man sets his cup down and looks at the arch again. He is done with you the way a wall is done with a hand that pressed it — he simply is not a door.",
+      "sceneSummary": "Brynjar asked the heavy-wool man his name and who he waited for; the man gave nothing — no name, no words, only silence and a flat look that had already made its decision.",
       "choices": [
         {
-          "label": "Stay at the table — when the next person he holds on comes through, follow their exit instead of his.",
+          "label": "Watch him without speaking — let Freki's read be enough and wait to see who finally comes through the arch",
           "attribute": "mental",
-          "subAttribute": "wits",
-          "difficulty": "normal",
+          "subAttribute": "insight",
+          "difficulty": "easy",
+          "trivial": false,
           "intentTags": [
-            "scout",
+            "guard",
             "careful"
-          ],
-          "trivial": false
+          ]
         },
         {
-          "label": "Ask him again, differently — \"Who sent you to wait here?\"",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": "hard",
+          "label": "Read the room with Order-Sense — look at the man's position, sight-lines, and the table itself for structural clues about what he's running",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": "normal",
+          "trivial": false,
+          "abilityId": "order_sense",
+          "energyCost": 3,
           "intentTags": [
-            "persuade",
-            "negotiate"
-          ],
-          "trivial": false
+            "study",
+            "careful"
+          ]
         },
         {
-          "label": "Leave the table and take a position near the waygate arch itself, so you see arrivals before he does.",
+          "label": "Stand up and leave him — write Ragnar's name on the waygate chalk-board and start working out the road north",
           "attribute": "practical",
           "subAttribute": "wits",
-          "difficulty": "easy",
+          "difficulty": "very easy",
+          "trivial": true,
           "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "trivial": false
+            "travel"
+          ]
         }
       ],
       "scene": {
-        "setting": "Inside the Crow and Thistle, midday — full common room, noise and crowd. Brynjar seated across from the heavy-wool man at his corner table near the shuttered window. Three waygate arrivals observed; none triggered his contact.",
+        "setting": "Inside the Crow and Thistle, midday — full common room, noise and crowd. Brynjar seated across from the heavy-wool man at his corner table near the shuttered window, with Freki under the table angled toward the man.",
         "npcsPresent": [
           {
             "name": "Doss Halveck",
@@ -260,17 +266,18 @@
           },
           {
             "name": "Heavy-wool man",
-            "state": "eyes on the waygate arch, watching for a signal in how someone moves or what they do first — Brynjar still across from him, not dismissed"
+            "state": "watching the waygate arch, ignoring Brynjar, cup set down — has not moved from his corner seat"
           }
         ],
         "objects": [
           "Hand-axe in its frog on the belt",
           "Round Shield strapped to Brynjar's back",
-          "Heavy-wool man's corner table — near the shuttered window, clear sightline to the waygate arch"
+          "Heavy-wool man's corner table — near the shuttered window, clear sightline to the waygate arch",
+          "Heavy-wool man's cup — recently set down"
         ],
         "threads": [
-          "Heavy-wool man waiting for one specific arrival — checks hands and first movement, not just face",
-          "Stillhold woman in grey passed his test; she may matter",
+          "Heavy-wool man waiting for one specific arrival — checks hands and first movement, not face; coat is Stillhold-adjacent cut but altered, no sigil or clan mark",
+          "Freki has not relaxed — body angled toward the man's legs, read still active",
           "Ragnar left widdershins before first light — chalk-board is the only reach",
           "Maret did not come through the Crow and Thistle at all",
           "The restricted creditor behind Maret's debt remains unidentified"
@@ -279,37 +286,14 @@
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "heavy-wool-man",
-          "name": "Heavy-wool man",
-          "note": "Held on the Stillhold woman in grey for two seconds — watching her hands specifically. She passed whatever his test is. Brynjar holding silence across the table; the man has not moved him on.",
-          "learned": [
-            "Waits for one specific person and looks for a signal in how they carry themselves or what they do first when stepping through",
-            "Checked the Stillhold woman's hands specifically — she passed his test and was released"
-          ],
-          "statusNote": "Seated at corner table, watching the waygate arch for a specific arriving signal"
+          "npcId": "doss-halveck",
+          "note": "Working the bar while Brynjar holds his standoff with the heavy-wool man; uninvolved this beat",
+          "statusNote": "On duty at the Crow and Thistle; working the midday room."
         }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "gen-the-waygate",
-          "label": "The Waygate",
-          "kind": "place",
-          "entityId": "gen-the-waygate",
-          "fact": "The heavy-wool man watches arrivals for a signal in how they carry themselves or what they do first — not a face, a behavior. The Stillhold woman in grey passed his check; she may be his contact or simply shared his contact's method.",
-          "links": [
-            "stillhold-operatives",
-            "maret-threnwick",
-            "brynjar-andyrsson-thread"
-          ]
-        }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a quarter-hour of watching at the table"
-      }
+      ]
     },
     "sceneState": {
-      "setting": "Inside the Crow and Thistle, midday — full common room, noise and crowd. Brynjar seated across from the heavy-wool man at his corner table near the shuttered window. Three waygate arrivals observed; none triggered his contact.",
+      "setting": "Inside the Crow and Thistle, midday — full common room, noise and crowd. Brynjar seated across from the heavy-wool man at his corner table near the shuttered window, with Freki under the table angled toward the man.",
       "npcsPresent": [
         {
           "name": "Doss Halveck",
@@ -317,28 +301,29 @@
         },
         {
           "name": "Heavy-wool man",
-          "state": "eyes on the waygate arch, watching for a signal in how someone moves or what they do first — Brynjar still across from h"
+          "state": "watching the waygate arch, ignoring Brynjar, cup set down — has not moved from his corner seat"
         }
       ],
       "objects": [
         "Hand-axe in its frog on the belt",
         "Round Shield strapped to Brynjar's back",
-        "Heavy-wool man's corner table — near the shuttered window, clear sightline to th"
+        "Heavy-wool man's corner table — near the shuttered window, clear sightline to th",
+        "Heavy-wool man's cup — recently set down"
       ],
       "threads": [
-        "Heavy-wool man waiting for one specific arrival — checks hands and first movement, not just face",
-        "Stillhold woman in grey passed his test; she may matter",
+        "Heavy-wool man waiting for one specific arrival — checks hands and first movement, not face; coat is Stillhold-adjacent cut but altered, no sigil or clan mark",
+        "Freki has not relaxed — body angled toward the man's legs, read still active",
         "Ragnar left widdershins before first light — chalk-board is the only reach",
         "Maret did not come through the Crow and Thistle at all",
         "The restricted creditor behind Maret's debt remains unidentified"
       ]
     },
-    "beats": 8
+    "beats": 9
   },
   "clock": {
     "schemaVersion": 1,
-    "day": 3,
-    "hour": 23,
+    "day": 4,
+    "hour": 0,
     "realAnchor": null
   },
   "companions": [
@@ -499,7 +484,8 @@
         "[d3] Told Brynjar that Ragnar left heading widdershins around first light; Maret never came in through the Crow and Thistle at all — no gate-log entry matching her description.",
         "[d3] Told Brynjar that Ragnar left before first light heading widdershins and cannot be reached directly; offered to put word on the waygate chalk-board. Named Longshore (sixty days spinward) as the nearest proper hire-port, and the Mudrun river road (twenty days spinward) as the closer option for…",
         "[d3] Brynjar stepped outside; Doss working the room without watching the door.",
-        "[d3] Brynjar re-entered the inn; Doss working the room, not watching the door."
+        "[d3] Brynjar re-entered the inn; Doss working the room, not watching the door.",
+        "[d3] Working the bar while Brynjar holds his standoff with the heavy-wool man; uninvolved this beat"
       ],
       "knownFacts": [
         "Doss kept the bundle because it felt deliberate, not lost",
@@ -531,7 +517,7 @@
       "people": "human",
       "peopleSource": "generated",
       "appearance": "A stout woman in her mid-fifties, broad through the shoulders, heavy-handed in the way of someone who has carried kegs since she was fifteen. Skin the colour of old oak, short grey hair kept close to the skull for practicality. A crescent scar at the left jaw from a long-ago disagreement. Apron is clean — she changes it twice a day on principle. Eyes the flat, still grey of a whetstone, and about as yielding.",
-      "met": 5
+      "met": 6
     },
     "ragnar-solmyr": {
       "id": "ragnar-solmyr",
@@ -1086,7 +1072,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 6,
     "recentOffers": [
       {
         "thing": "Maret's eyes have tracked to one of the dark gates — not the lit ones, the one in the north face that hasn't hummed in what looks like…",
@@ -5000,20 +4986,21 @@
     ]
   },
   "tendencies": {
-    "leadership": 3.493005665724567,
-    "cerebral": 9.799272206284643,
-    "strategic": 8.304325231778696,
-    "ruthless": 1.1995289400783078,
-    "social": 8.943161166487235,
-    "cautious": 8.844643840461092,
-    "generous": 1.0409625850497435,
-    "patient": 0.4561871908223564
+    "leadership": 3.4056805240814527,
+    "cerebral": 11.554290401127526,
+    "strategic": 9.096717100984229,
+    "ruthless": 1.16954071657635,
+    "social": 8.719582137325053,
+    "cautious": 8.623527744449564,
+    "generous": 1.0149385204235,
+    "patient": 0.4447825110517975
   },
   "aptitudes": [
     "silver_tongue",
+    "scholar",
     "banner"
   ],
-  "actionCount": 61,
+  "actionCount": 62,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -6095,8 +6082,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1788987510635,
-  "rev": 296,
+  "updatedAt": 1789002439728,
+  "rev": 297,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -6565,7 +6552,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "riven_marches": 39,
-    "the_center": 25,
+    "the_center": 26,
     "the_palelands": 3
   },
   "practice": {
@@ -6672,6 +6659,14 @@
       "startDay": 71,
       "endDay": 71,
       "beats": 13
+    },
+    {
+      "id": "sess-7",
+      "startedAt": "2026-09-10T01:07:19.725Z",
+      "lastAt": "2026-09-10T01:07:19.725Z",
+      "startDay": 72,
+      "endDay": 72,
+      "beats": 1
     }
   ],
   "_pendingArrival": null,
@@ -6687,10 +6682,10 @@
     "at": "2026-09-09T20:47:47.388Z"
   },
   "_opEmitted": {
-    "sceneSummary": 58,
-    "choices": 58,
-    "scene": 58,
-    "npcUpdates": 52,
+    "sceneSummary": 59,
+    "choices": 59,
+    "scene": 59,
+    "npcUpdates": 53,
     "placeUpdates": 8,
     "generateRequest": 4,
     "moveTo": 7,
@@ -6705,7 +6700,7 @@
     "stageOps": 2,
     "factUpdates": 2
   },
-  "_opTurns": 58,
+  "_opTurns": 59,
   "_opLedger": {
     "offer": {
       "applied": 9,
@@ -6825,14 +6820,17 @@
     "travel": 9,
     "ask": 2,
     "lead": 1,
-    "scout": 6,
+    "scout": 7,
     "prepare": 1,
     "meditate": 1,
-    "threaten": 1
+    "threaten": 1,
+    "investigate": 1,
+    "analyze": 1
   },
   "aptitudeEarnCount": {
     "banner": 1,
-    "silver_tongue": 1
+    "silver_tongue": 1,
+    "scholar": 1
   },
   "_intentAsked": null,
   "_pendingIntent": null,

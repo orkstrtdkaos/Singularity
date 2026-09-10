@@ -362,6 +362,11 @@ export function meaningCeiling(meaning, data = null) {
 
 const FIELD_SUPPORT = 2.5;   // compact support: nothing past radius × this
 
+// ⛑ LEGACY MAP UNITS → RADIANS ON THE SPHERE. Not decreed: DERIVED, and the content is the authority —
+// all 44 authored `substrateSource` records convert `radius` to `radiusWorld` at exactly this ratio, and
+// content_ci asserts both halves against each other so neither can drift alone.
+export const RADIUS_MAP_TO_WORLD = 0.0006;
+
 /** Resolve the geographic substrate field. Returns Map<locationId, density>. Pure — no I/O, no
  *  mutation. `locations` is the id→record map; `data` is the_substrate.json. */
 export function resolveSubstrateField(locations = {}, data = {}) {
@@ -374,7 +379,13 @@ export function resolveSubstrateField(locations = {}, data = {}) {
     const src = s.substrateSource;
     // radiusWorld is RADII on the sphere and is what mechanics use; `radius` (legacy map units) is
     // only a fallback for any source not yet re-authored.
-    const radius = Number.isFinite(Number(src?.radiusWorld)) ? Number(src.radiusWorld) : Number(src?.radius) / 309;
+    // ⛔ AND THE FALLBACK USED TO DISAGREE WITH EVERY AUTHORED SOURCE. It divided by 309, which turns
+    // radius 95 into 0.29 radians — 16.7° — while all 44 authored sources convert at 0.0006, or 3.3°.
+    // ⚠️ Five and a half times wider is a BLANKET, the one shape the coverage gate exists to forbid, so
+    // the fallback for an un-re-authored source was the very thing it was meant to rescue.
+    // ⛑ INERT WHEN IT LANDED — measured: 0 of 44 sources lack radiusWorld, so this path fires for
+    // nobody today and is right for the first person who authors radius alone.
+    const radius = Number.isFinite(Number(src?.radiusWorld)) ? Number(src.radiusWorld) : Number(src?.radius) * RADIUS_MAP_TO_WORLD;
     const peak = Number(src?.delta);
     if (!Number.isFinite(radius) || radius <= 0 || !Number.isFinite(peak) || peak === 0) continue;
     for (const l of all) {

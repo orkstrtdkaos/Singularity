@@ -479,6 +479,47 @@ for (const pack of PACKS) {
   check("SNG-384: radius and radiusWorld agree — editing one and not the other leaves mechanics on the stale number",
     drift.length === 0, drift.slice(0, 6).join(" · "));
 
+  // ⛔ AND THE RATIO ABOVE WAS A LITERAL HERE AND A DIFFERENT LITERAL IN THE ENGINE. This gate read
+  // `0.0006`; `resolveSubstrateField` fell back to `radius / 309` for any source not yet re-authored —
+  // the same conversion, 5.5× apart. ⚠️ radius 95 became 16.7° down that path against 3.3° down this
+  // one, which is a BLANKET: exactly what the coverage check below forbids. The fallback existed to
+  // rescue an un-re-authored source and would have been the thing that broke it.
+  {
+    const SUB = await import("../engine/substrate.js");
+    // ⛑ THE CONTENT IS THE AUTHORITY. The constant is not decreed here — it is what every authored
+    // source already does, and the engine must agree with the content rather than the other way round.
+    const ratios = [...new Set(pairs.map(l => +(l.substrateSource.radiusWorld / l.substrateSource.radius).toFixed(8)))];
+    check("SNG-384: the engine's map→world constant IS the ratio the content uses — one number, not two",
+      ratios.length === 1 && Math.abs(SUB.RADIUS_MAP_TO_WORLD - ratios[0]) < 1e-9,
+      `engine ${SUB.RADIUS_MAP_TO_WORLD} vs content ${ratios.join("/")}`);
+
+    // ⛔ BEHAVIOURAL, THROUGH THE PRODUCTION FUNCTION. A source authored WITHOUT radiusWorld must land
+    // the identical field as the same source WITH it — otherwise the fallback quietly means something
+    // else than every record on disk says.
+    // ⚠️ AND THIS PROBE LIED THE FIRST TIME I RAN IT. `resolveSubstrateField` emits a location only when
+    // its region carries an ambient in `data.substrateDensity`; I passed `{}`, so both fields came back
+    // EMPTY and "identical" was two nothings agreeing. The non-vacuity line below is what caught it.
+    const src = objs.find(l => l.regionId && (l.worldPos || l.map));
+    if (src) {
+      const near = flat.filter(l => l.id && l.id !== src.id && l.regionId && (l.worldPos || l.map)).slice(0, 40);
+      const ambient = {}; for (const l of [src, ...near]) ambient[l.regionId] = 0.5;
+      const mk = (withWorld) => Object.fromEntries([src, ...near].map(l => [l.id, {
+        ...l, substrateSource: l.id !== src.id ? undefined : (withWorld
+          ? { kind: "sink", delta: -0.1, radius: 90, radiusWorld: 90 * SUB.RADIUS_MAP_TO_WORLD }
+          : { kind: "sink", delta: -0.1, radius: 90 }) }]));
+      const data = { substrateDensity: ambient };
+      const a = SUB.resolveSubstrateField(mk(true), data), b = SUB.resolveSubstrateField(mk(false), data);
+      const same = a.size === b.size && [...a.entries()].every(([k, v]) => Math.abs((b.get(k) ?? NaN) - v) < 1e-12);
+      check("SNG-384: ⛔ a source authored WITHOUT radiusWorld resolves the SAME field as one with it",
+        same, `${a.size} vs ${b.size} placed`);
+      // ⚑ NON-VACUITY, TWICE. The field must be non-empty, AND the source must actually MOVE its own
+      // location off the ambient — a field of untouched 0.5s would also match itself.
+      check("SNG-384: …and that comparison is not two empty fields", a.size > 0, String(a.size));
+      check("SNG-384: …and the source visibly BENDS the field it sits in — otherwise both sides are inert",
+        Math.abs((a.get(src.id) ?? 0.5) - 0.5) > 1e-6, `${src.id} → ${(a.get(src.id) ?? 0.5).toFixed(4)} from 0.5`);
+    }
+  }
+
   // ⚠️ A CATASTROPHE GUARD, NOT A TUNING PIN. The documented failure is the field going FLAT (~55%
   // everywhere). Today's spread is sd 0.275 across 118 locations; the floor is set well below that so it
   // catches the collapse and never argues with ordinary authoring.

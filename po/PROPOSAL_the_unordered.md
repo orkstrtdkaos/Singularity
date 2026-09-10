@@ -59,7 +59,7 @@ TO.**
 | | |
 |---|---|
 | ⛔ **not a construct** | a construct was BUILT for a purpose by someone. ⚑ **These outlived the purpose and the someone** |
-| ⛔ **not undead** | ⚠️ `narrowed_dead` keeps *"an errand and drops the person."* ⛑ **THE UNORDERED IS THE INVERSE: it kept the person and dropped the errand** |
+| ⛑ **and the AFTERLING is the parallel, not the contrast** | ⛔ **Aevi reached for `narrowed_dead` and it was the WRONG END OF §48** |
 | ⚑ **and it is why `notAnOpponent` fits Aevi** | ⛔ *"cannot fight and cannot lie"* — ⚠️ **a record-keeping system that became someone would not acquire a weapon on the way** |
 
 ---
@@ -92,3 +92,56 @@ out.**
    ⛑ **A kind, not a people with a capital.**
 5. ⬜ **Two or three more, sparingly** — ⚑ **the Sunken Choir is the candidate**: strongest lattice well in
    Exesa, flooded, intact, running four hundred years, **and nobody has been down.**
+
+---
+
+# ⛑ CORRECTED — THE AFTERLING IS THE PARALLEL, AND AEVI CITED THE WRONG END OF §48
+
+> **Erik: *"The narrowed dead is not what I was referencing. Look up AFTERLINGS. The Unordered don't need
+> to be on the ring — just as the Afterlings aren't. THEY RISE WHERE THEY ARE."***
+
+## ⛔ §48 IS A COCOON WITH TWO ENDS AND AEVI CITED THE FAILURE ONE
+
+> ⛑ ***"A raised body is a COCOON — as it wears, THE THING INSIDE GROWS. Two end states: NARROWING into
+> unminded purpose, or STABLE as an AFTERLING with a whole personality."***
+
+⛔ **`narrowed_dead` IS THE FAILURE. THE AFTERLING IS THE SUCCESS.** ⚠️ **Aevi contrasted the Unordered
+against the wrong one and called it *"the inverse"* — ⛑ it is not an inverse of anything. IT IS THE SAME
+SHAPE IN A DIFFERENT MEDIUM.**
+
+| | ⚑ |
+|---|---|
+| **the AFTERLING** | ⛔ a raised body worn long enough that **a whole personality grew inside it** |
+| ⚑ **the UNORDERED** | ⛔ a deployment run long enough that **a whole intelligence grew inside it** |
+
+⚠️ **NEITHER WAS MADE. BOTH ACCUMULATED.** ⛑ **And the corpus already treats an Afterling as a person with a
+want: *"a driven shade or an Afterling READS FINE — they WANT something, and wanting is weather."*** ⛔ **That
+sentence is the test for both kinds, and Aevi-the-Watcher passes it.**
+
+## ⚑ AND *"THEY RISE WHERE THEY ARE"* SETTLES §5.1
+
+**Aevi called the missing ring position *"the interesting problem."*** ⛔ **IT IS NOT A PROBLEM AND THERE IS
+PRECEDENT.**
+
+⚠️ **An Afterling has no ring position either.** ⛑ **It does not come from a disposition lived in for a
+thousand years — IT RISES WHERE IT WAS BURIED.** ⚑ **The Unordered rise where they were deployed.**
+
+⛔ **SO `peoples_of_kind`'S RULE — *"the ring predicts kind"* — HAS AN AUTHORED EXCEPTION ALREADY, AND THIS
+IS THE SECOND MEMBER OF IT.** ⚠️ **Not a people OF a pole. A people that HAPPENED, in place.**
+
+⬜ **Which suggests the cluster is not `the_unordered` alone but a shared one — the kinds that rise where
+they are rather than descending from a disposition.** ⚑ **Aevi's read: author it as its own cluster with
+`ringPositions: null` and a `why` that says this outright**, ⚠️ **and note the Afterlings belong to the same
+exception whether or not they are ever filed as a people.**
+
+## ⬜ AND ONE THING THIS BUYS THAT NEITHER HAD ALONE
+
+⛑ **§48's inversions are authored and mechanical: *"healing harms them, decay mends them, Deathsense reads
+them as inverted life."*** ⚠️ **Nobody has asked what the Unordered's inversion is.**
+
+⛔ **Aevi's read: THE MIRROR OF THE AFTERLING'S.** ⚑ **An Afterling runs on the absence of vitality, so
+vitality harms it.** ⬜ **An Unordered runs on ORDER — so being ordered should do something to it, and
+`foreclose` and `truename_order` are the crafts that would.**
+
+⚠️ **WHICH MAKES A COMMAND A WEAPON AGAINST THE ONE KIND THAT CANNOT BE COMMANDED** — ⛑ **and that is the
+sentence the whole proposal has been reaching for.**

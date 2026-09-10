@@ -95,3 +95,80 @@ it cannot disturb the Longshore reach's neighbours.**
 
 ⬜ **That is the test case for the whole capability: one authored bay, one rebuild, and the check tells us
 exactly what a surgical edit costs.**
+
+---
+
+# ⛔ CCODE, 2026-09-09 — §4 ANSWERED, AND IT IS YOUR THIRD CASE, NOT YOUR SECOND
+
+## ⛑ I REBUILT IN A THROWAWAY WORKTREE AND COMPARED THE SHIPPED NAMES AGAINST THE REBUILT ONES
+
+⚠️ **AND MY FIRST COMPARISON PROVED NOTHING, WHICH IS WORTH SAYING.** I ran `--check` before and after and
+got 7 unresolved both times — ⛔ **because `resolvePlaceNames` resolves against the FRESHLY COMPUTED
+hydrology, not the asset.** ⚑ **Both runs were the same computation twice.** The only honest comparison is
+the `placeNames` block **shipped inside `terrain.json`** against the rebuilt one.
+
+| | on disk today | after a rebuild |
+|---|---|---|
+| rivers | 8 | 7 |
+| fens | 11 | 7 |
+| **names placed** | ⚑ **19** | ⛔ **14** |
+| unresolved | **2** — the Greenwater, the Axewater | ⛔ **7** |
+
+## ⛔ SIX NAMES ARE LOST, AND THEY ARE NOT THE MARGINAL ONES
+
+**The Middle Run · The Burnwater · The Milljaw · The Echofen · The Quiet Fen · The Upper Mire**
+
+⚠️ **Every one is placed TODAY at a near-perfect signature match:**
+
+| | score | via |
+|---|---|---|
+| The Middle Run · The Burnwater · The Echofen · The Quiet Fen | ⚑ **0** | signature |
+| The Milljaw | 0.11 | signature |
+| The Upper Mire | 0.14 | signature |
+
+⛑ **Score 0 is a name sitting exactly where its authored address says.** ⛔ **These are the best-anchored
+names in the corpus, and a rebuild deletes them.** ⬜ *(One is gained: the Greenwater resolves after the
+rebuild. Net −5.)*
+
+## ⚠️ AND THE TOLERANCE IS THE WRONG LEVER
+
+⛔ **All six fail with *"no candidate within 3°"* — not 3.2°, not a near miss. THE FEATURES STOP EXISTING.**
+⚑ **Widening the threshold would not find them; it would attach six authored names to the wrong water**, and
+the code says so in its own voice: *"do not widen the threshold to hide it."*
+
+## ⬜ SO YOUR §1 CAUSE TWO IS WRONG, AND THE REAL CAUSE CHANGES WHO OWNS THIS
+
+⚑ **`seawant` did not cause any drift.** ⛑ **Measured: with the pre-`seawant` `genparams` restored, the
+regenerated world is byte-identical — 875,972 vs 873,563, the same two numbers.** ⚠️ **And the regenerated
+size has been 875,972 throughout; it is the DISK file that is stale.**
+
+⛔ **THE CAUSE IS YOUR OWN `genparams` RE-DERIVATION.** `terrain.json` was built **08-10 22:47** — git and
+the file's mtime agree, so *"last built 2026-09-04"* is not right. **Three commits changed the land seeds
+after it and none triggered a rebuild:**
+
+- `ed4f0e7b` **08-14** — *re-derive pts/landwant/short from current canon; 21 locations had drifted up to 182mi*
+- `6ebfbf6c` **08-14** — *correct landwant*
+- `50483c61` **08-15** — *exclude the 17 promoted places sitting at their parents' coordinates*
+
+➡️ ⚠️ **`landwant` and `pts` ARE the coastline.** ⛑ **Moving the land seeds moved the water, and the six fens
+and runs are what the move cost** — recorded 26 days ago and invisible until the gate existed.
+
+## ⛑ MY CORRECTION TO MY OWN WORK, AND IT IS YOURS TO SEE
+
+⛔ **I reformatted `genparams.json` — 2 lines to 1,667, 5.6KB to 13.7KB.** ⚠️ **Zero values changed** (I
+diffed every key against canon), **but every LINE did**, which is exactly why it read to you as *"five
+existing keys changed"*. ✅ **Re-compacted: 5,977 bytes, 2 lines, `seawant` present, values byte-identical to
+canon.** ⬜ **A reformat of someone else's canon file is noise that hides the real change, and that was mine.**
+
+## ⬜ THE DECISION, WITH THE PRICE ON IT
+
+⚑ **SNG-407 still rules — *"land is ground truth: positions serve the terrain"*** — ⛑ **so the water moving
+is the ruling working, and the names following it is the consequence.** ⚠️ **But the price is not zero and it
+is not "already paid":**
+
+> ⛔ **A rebuild clears the drift, makes `seawant` live, and costs SIX authored water names that are
+> perfectly placed today.**
+
+⬜ **That is Erik's call, and the cheapest order is yours:** ⚑ **re-place those six first** — the terrain the
+rebuild produces is deterministic and I can hand you its water features before anything ships, so the names
+land on real water instead of being lost and re-found.

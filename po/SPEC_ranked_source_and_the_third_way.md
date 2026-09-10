@@ -144,3 +144,76 @@ CHOICE SOME PEOPLE MAKE INSIDE A PLACE THAT DID NOT.**
 4. ⬜ **Does Parakletos respond MORE at an aperture?** ⛔ *"It responds early… indistinguishable from luck."*
    ⚑ **Aevi's read: yes, and that is how a player discovers the third way exists** — ⚠️ **not by being told,
    by noticing the world arriving a half-beat ahead more often in one kind of place.**
+
+---
+
+# ⛑ CORRECTED BY ERIK — MEASURE FIRST, CHANGE NOTHING
+
+> *"I don't want aperture to be a pool or a new source. **It's literally a shifting field that is a BAND
+> between the substrate lattice and the thinnest veil.** It wouldn't benefit from the poles pulling because
+> **a lowering tide drops all boats, while a rising tide raises all.** And make sure you DON'T change any
+> crafts unless I tell you it's ok. **We authored everything — measure first.** There should be MORE than
+> one craft with some ranks that use veil."*
+
+## §7 — ⛔ AEVI PROPOSED RE-GRADING TWELVE CRAFTS. THAT PROPOSAL IS WITHDRAWN.
+
+⚠️ **§1 said *"the job is AUTHORING: 12 veil crafts re-graded."* ⛔ NOT WITHOUT ERIK'S WORD, AND NOT ON A
+SCAN THAT ONLY LOOKED AT ONE FIELD.**
+
+## §8 — ✅ AND HE IS RIGHT: THERE ARE MORE. MEASURED PROPERLY.
+
+**First scan checked `powerSystem` on tree nodes — 2 of 1,206 nodes carry it.** ⛑ **That is accurate and it
+is the wrong question.** ⚠️ **A rank does not have to carry the FIELD to be doing the thing.**
+
+⛔ **RE-MEASURED AGAINST WHAT THE RANKS SAY THEY DO: 19 ranks invoke the veil or the other side.** ⚑ **Three
+are unambiguous crossings on crafts the record calls `metaphysical`:**
+
+| craft | rank | ⛔ what it says |
+|---|---|---|
+| **`false_door`** | r3 | *"a route **through the veil itself**"* |
+| **`thin_place`** | r3 | *"**open a thin place where there was none**… and a door opens"* |
+| ⚑ **`veil_stroke`** | **r1 vs r3** | ⚠️ **r1: *"THIN the veil until something reaches through."* r3: *"THE VEIL PARTS. Something gets most of itself through, and for a few moments IT IS HERE."*** |
+
+⛑ **`veil_stroke` IS THE PATTERN IN ONE CRAFT: r1 THINS THE DIVIDE, r3 CROSSES IT.** ⚠️ **Two different acts
+under one name — exactly what Erik described, already written, and the source field cannot express it.**
+
+⬜ **AND `numen_sense` r2 IS THE OTHER HALF OF THE RULE:** *"Feel where the veil is thin — **where meaning
+presses close enough to touch**."* ⛑ **Meaning and thinness in one sentence, on a metaphysical craft. That
+is the reaching-versus-arriving line drawn by an author who was not thinking about fields.**
+
+⛔ **NOTHING CHANGED. This is a measurement and a list, awaiting Erik's word.**
+
+## §9 — ⛔ AND APERTURE IS A BAND, NOT A POOL. §4 AND §5 ARE WRONG.
+
+**Aevi wrote `aperture` as a seventh SOURCE with authored POOLS in five to eight places. ⛔ BOTH ARE WRONG.**
+
+⚑ **IT IS A BAND: the shifting zone between the substrate lattice and the thinnest veil.** ⚠️ **Not a
+quantity that pools anywhere — a REGION OF THE AXIS, and where the world currently sits in it.**
+
+⛑ **WHICH MEANS IT NEEDS NO NEW FIELD AND NO NEW AUTHORING.** ⛔ **It is already computable from the one
+number the world has: a place is in the aperture when the lattice is thin enough that the divide is
+reachable, and thick enough that the divide still holds.**
+
+### ⚠️ AND ERIK'S TIDE LINE IS THE PART AEVI HAD BACKWARDS
+
+> ***"It wouldn't benefit from the poles pulling because a LOWERING TIDE DROPS ALL BOATS, while a RISING
+> TIDE RAISES ALL."***
+
+⛔ **AEVI PROPOSED *"The Poles Pull reduces aperture everywhere — that is the arc's teeth."*** ⚑ **THAT IS A
+POOL'S BEHAVIOUR, NOT A BAND'S.**
+
+⚠️ **A band does not shrink when the tide moves — IT MOVES WITH IT.** ⛑ **Polarising does not close the
+aperture; it RELOCATES it, and the places that were in it are not the places that are in it afterwards.**
+
+➡️ ⛔ **THAT IS A BETTER MECHANIC AND A WORSE FATE: nobody loses the aperture. THE PEOPLE HOLDING ONE LOSE
+THEIRS**, and it opens somewhere that did not ask for it.
+
+## §10 — ⬜ SO WHAT SURVIVES
+
+| ⛔ withdrawn | ⚑ stands |
+|---|---|
+| a seventh `powerSystem` | ⛑ **`hold_the_aperture` and `foreclose` are already the two ends of it** |
+| authored aperture pools | ⚠️ **the band is derived; nothing is authored** |
+| *"The Poles Pull reduces it"* | ⛑ **it MOVES it** |
+| re-grading 12 crafts | ⚑ **a measured list of 3 clear cases, awaiting Erik** |
+| ⚠️ **the Quickwood as balance** | ⛔ **Erik: *"rejecting the lattice so absolutely is NOT balanced"*** — it is an extreme, and extremes sit OUTSIDE the band by definition |

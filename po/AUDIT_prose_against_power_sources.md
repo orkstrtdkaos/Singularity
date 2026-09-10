@@ -104,3 +104,71 @@ LOAD-BEARING RATHER THAN TIDY.**
 
 ⛔ **AND THE OLD WARDEN POST IS 0.02 OUTSIDE THE BAND** — ⚑ **the one entry on this list that a tuning pass
 fixes rather than a new field.**
+
+---
+
+# ⛔ CORRECTED — AEVI HAD THE MODEL BACKWARDS, AND THE DATA WAS ALWAYS RIGHT
+
+> **Erik: *"The Veil is the BARRIER. The power source veil is strongest where the Veil is THINNEST — and the
+> veil is thinnest in the nexus locations or any location that DOESN'T have crystal substrate nearby (nor
+> ordered nanite, which also bolsters the veil thickness)."***
+
+⛑ **HE IS RIGHT, AND `the_veil.json` SAYS IT IN THE SAME WORDS:**
+
+> ⛔ *"THE VEIL IS THE DIVIDE between this side and the other side… **powered by an ABSENCE, not a
+> substance** — **the MIRROR of precursor**."*
+> ⛔ *"precursor lattice work **STRENGTHENS** — THE SUBSTRATE SOLIDIFIES THE DIVIDE. Every line laid, every
+> seal held, every waygate kept is **the Veil made thicker.**"*
+
+## ⚠️ SO THE BAND MODEL IS CORRECT AND §4 OF THIS AUDIT WAS WRONG
+
+⛔ **AEVI CONCLUDED *"veil needs its own field because it is being scored against the wrong axis."*** ⛑ **IT
+IS NOT THE WRONG AXIS. IT IS THE MIRROR OF THE RIGHT ONE**, and that is authored canon, not an accident of
+the band table.
+
+⚑ **`veil` at 0.10 ± 0.20 IS `1 − precursor` EXPRESSED AS A BAND.** ⚠️ **Thin lattice = thin divide = strong
+veil craft. The model has been saying exactly what Erik just said.**
+
+## ⛑ AND THE QUICKWOOD IS NOT BACKWARDS. IT IS THE BEST STORY IN THE AUDIT.
+
+**Aevi wrote: *"a deliberate anti-lattice fortress is accidentally the best doorway in Exesa"* and called it
+wrong.** ⛔ **IT IS NOT WRONG. IT IS TRUE, AND NOBODY IN THE FICTION HAS NOTICED.**
+
+> *"The Rootkin did not merely go back to nature — **they grew a country the lattice cannot get purchase
+> in.** It is a fortification, and the Lattice-Cities know it."*
+
+⚑ **THEY BUILT A WALL AGAINST AKINETOS AND IT IS A DOOR FOR EVERYTHING ELSE.** ⚠️ **The single lowest-lattice
+region in the world is the single thinnest divide in the world** — ⛑ **and `the_quickwood` is `wild` nanite,
+so nothing is bolstering it either.** ⛔ **That is a campaign, not a bug.**
+
+## ⬜ WHAT SURVIVES OF THE THIRTEEN
+
+⚠️ **They are still a real finding — but they are PROSE errors, not model errors.**
+
+| ⛔ genuinely wrong | ⚑ why |
+|---|---|
+| **`the_thinning`** at 0.82 | ⛔ *"where the veil is thin enough to feel"* — **it is one of the THICKEST divides in the world.** ⚠️ Either the prose moves or the place does |
+| **`dw_the_thinedge`** at 0.90 | ⛔ same, worse |
+| **`thinwater`** at 0.40 | ⚠️ a town named for thin water sitting above the band |
+| **`the_veiled_reach`** 0.66 · **`umbral_depths`** 0.58 | ⛔ **Reaches named for the veil where the divide is thick** |
+| ⚑ **`the_old_warden_post`** 0.32 | **0.02 outside — a tuning nudge, not a rewrite** |
+
+⛑ **AND THE FIVE METAPHYSICAL ROWS ARE A DIFFERENT QUESTION ENTIRELY** — ⚠️ **meaning is NOT the mirror of
+precursor and has no reason to track it at all.** ⛔ **`the_kept_shrine` at 0.84 claiming meaning is the case
+where a separate field IS still warranted**, and Aevi should not have bundled the two.
+
+## ⬜ AND THE SPEC CHANGES
+
+⛔ **`SPEC_six_fields_and_their_keepers` OVERSTATED THE JOB.** ⚑ **Veil does not need an independent field —
+it needs:**
+
+```
+veil = f( LOW precursor, NOT-ordered nanite ) + authored NEXUS pools
+```
+
+⚠️ **Which is a DERIVED field plus a short authored list, not 39 hand-tuned regions.** ⛑ **`meaning` still
+wants its own — shrines and memorials have no relationship to lattice density.**
+
+⛔ **AND THE NEXUS LIST IS NOW THE WHOLE OF THE AUTHORING JOB FOR VEIL:** ⚠️ **a door somebody built is the
+one thing the formula cannot derive**, and `the_thinning` should be the first one — ⛑ **which makes its
+prose true again without moving a single density.**

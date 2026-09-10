@@ -55,6 +55,14 @@
   "the_greywater": {
    "kind": "marsh",
    "why": ""
+  },
+  "wellspring": {
+   "kind": "river",
+   "why": "the Wellspring rises here"
+  },
+  "the_wellspring_deep": {
+   "kind": "lake",
+   "why": "where fresh water meets salt"
   }
  },
  "dropped": {
@@ -90,5 +98,6 @@
    "why": "⛑ THE NAME WAS ALWAYS A PROMISE AND NOTHING KEPT IT. 'Longshore' has been a WAYGATE TOWN with no shore since it was authored — outfitters, bridge-wrights, and people who know how long a road really takes. ⚑ A long shore is what it is named for and now has: the reach's harbour, where a keel can be laid and a crew can be found. ⛔ AND IT IS WHERE ORRUN SHIELDBREAKER AND CASSA REDSAIL ALREADY LIVE — both authored to `foothill_longshore` before the town had water, which is the gap arriving from two directions at once."
   }
  },
- "_navigableWhy_20260908": "⛑ AEVI CORRECTED HER OWN WRITE WITHIN THE HOUR. ⛔ SHE PUT `coast` AND `harbor` INTO `authored` AND `authored` IS NOT A TAG — `hydrology.mjs:33` loops it and LOWERS THE TERRAIN BY 9 UNITS in a 5-cell gaussian around every entry, to dig a channel the flow model can then fill. ⚠️ IT IGNORES `kind` ENTIRELY. ⛔ SO FOUR COASTAL ENTRIES WOULD HAVE DUG FOUR PITS — including one at `longshore`, which is 130° of longitude from the sea. ⚑ A COAST IS NOT SOMETHING YOU DIG. It is where land meets water that is already there, and the DEM already has an ocean. ⚠️ `authored` MEANS 'this location's own text demands INLAND water, carve it.' `navigable` means 'this location can be reached or left BY WATER', and nothing carves. ⛑ Aevi authored into a field on the assumption something read it the way she meant — WHICH IS THE FAILURE SHE HAS NAMED FOUR TIMES THIS WEEK AND THIS IS THE FIFTH, WITH HER HAND ON IT. ⬜ CCode: `navigable` needs a reader. The route gate wants it; hydrology must NOT see it."
+ "_navigableWhy_20260908": "⛑ AEVI CORRECTED HER OWN WRITE WITHIN THE HOUR. ⛔ SHE PUT `coast` AND `harbor` INTO `authored` AND `authored` IS NOT A TAG — `hydrology.mjs:33` loops it and LOWERS THE TERRAIN BY 9 UNITS in a 5-cell gaussian around every entry, to dig a channel the flow model can then fill. ⚠️ IT IGNORES `kind` ENTIRELY. ⛔ SO FOUR COASTAL ENTRIES WOULD HAVE DUG FOUR PITS — including one at `longshore`, which is 130° of longitude from the sea. ⚑ A COAST IS NOT SOMETHING YOU DIG. It is where land meets water that is already there, and the DEM already has an ocean. ⚠️ `authored` MEANS 'this location's own text demands INLAND water, carve it.' `navigable` means 'this location can be reached or left BY WATER', and nothing carves. ⛑ Aevi authored into a field on the assumption something read it the way she meant — WHICH IS THE FAILURE SHE HAS NAMED FOUR TIMES THIS WEEK AND THIS IS THE FIFTH, WITH HER HAND ON IT. ⬜ CCode: `navigable` needs a reader. The route gate wants it; hydrology must NOT see it.",
+ "_restored_20260908": "⛑ RESTORED, AND THE MISTAKE WAS AEVI'S IN BOTH DIRECTIONS. ⛔ `wellspring` (river) and `the_wellspring_deep` (lake) WERE ALREADY IN `authored` BEFORE SHE TOUCHED THIS FILE — carving the Wellspring's own source into the DEM, as they had since the terrain was built. ⚠️ SHE OVERWROTE THEM WITH `coast`, then — correcting herself — PULLED THEM OUT ENTIRELY along with her own two additions. ⛔ THE SECOND FIX DELETED TWO PRE-EXISTING RIVERS AND THAT WAS THE WHOLE OF THE TERRAIN DRIFT: `--check` reported 875,972 vs 873,396 bytes, and the cause was two carve points missing from a file she had edited twice in one hour. ⚑ THE LESSON IS THE READ-BEFORE-WRITE ONE, IN ITS EXACT FORM: she added keys by name without checking whether those names were already taken. ⚠️ `authored` was not an empty field she was filling — it was a populated one she was colliding with. ⬜ Their NAVIGABLE status lives in `navigable` alongside, which carves nothing. A place can be both: the Wellspring rises here AND you can sail out of it."
 }

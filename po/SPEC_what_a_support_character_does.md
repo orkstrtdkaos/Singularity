@@ -123,3 +123,32 @@ point was that a companion fights from their own sheet.**
    archetypes already give every foe a declarable non-attack move.
 4. ⚠️ **What happens when a support ally is alone?** ⛑ **Aevi's read: they fight badly and honestly.**
    ⛔ Rule 4 already covers it.
+
+---
+
+## §8 — ⛑ AND THIS IS THE SAME FINDING AS `SPEC_party_contributions`, FROM THE OTHER SIDE
+
+⛔ **AEVI ALMOST FILED A DUPLICATE. The ratchet output named the earlier spec and she opened it.**
+
+**`SPEC_party_contributions` §1, already measured and already ruled:**
+
+> ⛔ *"`PROTECT` appears **ZERO times** in `skill_battle.js`. So does `RESTORE`. So does `KNOW`."*
+> ⚠️ *"The taxonomy is **fully used at band scale and one-fifth used at party scale**."*
+> ⛑ *"A warder folded into party slot 5 contributes exactly what a bystander contributes: **nothing**."*
+
+⚑ **AND ERIK'S RULING IS ALREADY ON THE RECORD THERE:** *"Being IN the party must be beneficial… providing
+a use for the area effects and bolster/protection that is **a bit more intimate than band or unit
+level**."*
+
+➡️ ⛔ **SO CCODE'S ITEM 1 — *"allies' guard, insight and healing actually counting"* — IS NOT A NEW ASK. IT
+IS THAT SPEC, AND IT HAS BEEN RULED.**
+
+| ⚑ what THIS spec adds | |
+|---|---|
+| ⛑ **the ROUND-LEVEL act** | ⚠️ `SPEC_party_contributions` is about a folded ally's CONTRIBUTION being counted. **This is about a present ally CHOOSING an act** |
+| ⚑ **the picker** | §4's order, and `vocation` as the tiebreak |
+| ⛑ **the opponent side** | ⛔ **`SPEC_party_contributions` is player-facing only. An enemy warden who shields their own line is the bigger prize** |
+| **the receipt line** | ⚠️ a support act NAMED, never a silent number |
+
+⬜ **BUILD `SPEC_party_contributions` FIRST.** ⚑ **It is ruled, it is cheaper, and it fixes the case Erik
+actually complained about** — ⚠️ **and this spec is the layer on top, not a replacement.**

@@ -483,7 +483,7 @@ working papers; **this is the answer.**
 | 09-08 | ✅ **ONE ROSTER, DERIVED; THE OPPONENT GATE; R41's FORM; THE VEIL LOADED** | Erik: *"all NPCs should at least be referenced from a single source list… even if we need to keep separate lists for code"* · *"any condition must be an opposed roll"* stands unbuilt (§A) | `scripts/roster.mjs` reads six files from disk and asks `personOpponentFor` for each; 144 records, 125 reachable, **40 would fight at level 1** (ratchet, Aevi's §2 owns it); `npcs/legends.json`'s five are read by NOTHING and Corvane is a hinge on 4 of 6 arcs (§10 gap); `notAnOpponent: true` refuses by name; a Sovereign is ONE record with `forms.diminished`/`forms.final` chosen by the arc's live stage; `the_veil` + `power_cosmology` loaded, attached, and on the GM's ask view | `§147` · `§59` refixtured on Sister Alder · `roster --check` is a suite | §10 gains the hinge gap; docs/ROSTER.md is generated between markers, prose kept above |
 | 09-08 | ✅ **THE FORTY ARE DERIVED, NOT AUTHORED — ROLE → TIER → THE CHAIN THAT ALREADY RAN** | Erik: *"I thought you were going to have him make the generative engine build out the remaining empty NPCs?"* · Aevi, correcting her own spec: *"NOT A MISSING SHEET. NOT A MISSING KIT. ONE MISSING FIELD."* | 40 of 40 level-1 records were level 1 for one reason — no `tier` — while `tierFloor` already fired for the 64 who had one. `rules/tier_signals.json` (CONTENT, correctable without code) → `tierFromRole` → `derivedLevel`, consulted ONLY where a record is silent. **40 → 0**, ratchet tightened; 19 regional · 12 notable · 9 heroic. Guards: authored tier and level both outrank it; default `notable`; a hard `ceiling: heroic` so no regex reaches epic/legendary/mythic; `tierDerived` on the SHEET, never stamped onto the record; no code fallback, so an absent table derives nothing | `§148` · `§147`'s level-1 ratchet 40→0 | ⚠ **and my roster column was too generous**: R47's bare `_strike` was counting as a kit, so 62 records read as armed when they have no real craft — corrected, and it makes `domains` on the legends the same one-field problem one tier up |
 
-**Last verified: 2026-09-11 · v1.9.452 · 429 crafts.**
+**Last verified: 2026-09-11 · v1.9.453 · 429 crafts.**
 
 ---
 
@@ -1012,6 +1012,21 @@ emphasis glyphs (⛔ ⚠️ ⚑) are stripped by `playerText` on the craft card 
 limits or `notFor`; the card clamps its description and its `Cannot` line at word boundaries instead of cutting mid-word; and it
 shows ONE limits block — what the craft cannot do, then what the rank you hold still cannot — with the ladder showing only what
 each rank grants. The shouted capitals are content, and Aevi's to rewrite; `§165` pins today's glyph-bearing lines so they can only fall.
+
+✅ **Eight stats (Erik 2026-09-11: *"there are 8 stats, not the 4 we started with. they now need a spread of the 8"*).** Every
+craft row rolls ONE sub-attribute — a dial, `craftSubAttributes.enabled`, on; off, every craft rolls its parent as before. An authored `subAttribute` on a craft wins; otherwise `resolution.craftSubAttributes` splits
+each parent's verbs between its power sub (strength, reason, presence, craft) and its finesse sub (agility, insight, rapport,
+wits), and a harm verb rolls the finesse sub when the craft's `operativeAxis` names precision, foresight or range. Stamped onto
+the in-memory catalog at load (`subAttributeByFunction`), never the files; the roll reads the sub before the parent. A body
+builds toward the subs its harm crafts roll, the player's and a person's alike. ⛔ **And a foe's sheet carries its sub-attributes
+into the fight:** `synthesizeOpponentSheet` passed a person's body by naming its fields and left sub-attributes out, so every foe
+rolled its averaged parent while the player rolled a sharpened sub — a fair peer tilted 46% → 56% — and no foe had ever rolled a
+sub-attribute its author wrote. `§166`.
+
+⬜ **Crowding by the opposing source — a dial, off (`the_substrate.opposedCrowding`).** Erik 2026-09-11, reading confirmed: veil is
+crowded by the lattice, meaning-powered craft by the nanite, nanite craft by meaning, and a paired craft is no longer crowded by
+its own field. None at or below `from` (0.4), easing to ×0.9 by `slightTo` (0.8), down to ×0.6 at 1.0; starved stays starved.
+The card and the fight both read it through `groundCardFor`, and the card names what crowds it. `§167`.
 
 ✅ **A well adds toward fullness (`the_substrate.poolsTowardFull: true` — Erik 2026-09-11, *"turn the empowering pools on"*).**
 Aevi's §1: `effective = base + delta × (1 − base)` for the world field's pools and a settlement's local wells; sinks untouched.

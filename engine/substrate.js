@@ -645,6 +645,30 @@ export function groundCardFor(ability, character, { schools, substrate, location
         if (sourceHasFloor(cs.source, substrate) && side === "starved" && factor < tuning.materialFloor) { factor = tuning.materialFloor; side = "floored"; }
         return { factor, side, percent: Math.round(factor * 100), chancePenalty: Math.round((1 - factor) * tuning.maxChancePenalty),
                  energyMult: 1 + tuning.energyK * (1 - factor), off: factor < tuning.gateBelow }; })();
+  // ⬜ ERIK 2026-09-11 — CROWDING BY THE OPPOSING SOURCE (`the_substrate.opposedCrowding`, OFF until he turns it on). He asked "what if
+  // lower levels of the opposing power sources NOT crowd (lattice/veil, meaning/nanite) but med to med high levels crowd slightly and full
+  // levels crowd?" and confirmed the reading: a paired craft is no longer crowded by too much of its OWN field; the OPPOSING source's
+  // level crowds it on a curve — none to `from`, easing to `slight` by `slightTo`, down to `floor` at 1.0. Starved stays starved.
+  // ⚠️ Measured before it was built: meaning is 1.00 at the Great Engine and the Grand Lattice, so nanite craft there goes from mostly
+  // empowered to fully crowded. The numbers are in REPLY_ccode_20260911f.
+  const oc = substrate?.opposedCrowding;
+  const opposedBy = oc?.enabled === true ? oc.pairs?.[cs.source] : null;
+  let opposed = null;
+  if (opposedBy && location) {
+    const lvl = opposedBy === "lattice" ? locationDensity(location, substrate)
+      : opposedBy === "nanite" ? (naniteAt(location, substrate)?.v ?? 0)
+      : opposedBy === "meaning" ? meaningDensity(location, { present, data: substrate, aura: meaningAura }) : null;
+    if (Number.isFinite(Number(lvl))) {
+      const L = Number(lvl), from = Number(oc.from ?? 0.4), to = Number(oc.slightTo ?? 0.8), sl = Number(oc.slight ?? 0.9), fl = Number(oc.floor ?? tuning.crowdFloor);
+      const c = L <= from ? 1 : L <= to ? 1 - (1 - sl) * (L - from) / Math.max(1e-9, to - from) : Math.max(fl, sl - (sl - fl) * (L - to) / Math.max(1e-9, 1 - to));
+      const starvedSide = v.side === "starved" || v.side === "floored";
+      const f = (v.side === "crowded" ? 1 : v.factor) * c;   // the craft's own-field crowding lifted; the opposing source's applied
+      v.factor = f; v.percent = Math.round(f * 100); v.chancePenalty = Math.round((1 - f) * tuning.maxChancePenalty);
+      v.energyMult = 1 + tuning.energyK * (1 - f); v.off = f < tuning.gateBelow;
+      if (!starvedSide) v.side = c < 1 && f < 1 ? "crowded" : f > 1 ? "empowered" : "full";
+      opposed = { by: opposedBy, level: Math.round(L * 100) / 100, factor: Math.round(c * 1000) / 1000 };
+    }
+  }
   // ✅ R38b (Erik 2026-09-04): MEANING SETS THE CEILING, SUBSTRATE SETS THE PENALTY. A metaphysical craft reads TWO grounds:
   // how much there is to work with (meaning → the ceiling) and how cleanly it can be reached (substrate → the penalty
   // above). Shape 1 of three: `min(ceiling, factor)`, never a product — a place with both is not worse than a place with
@@ -685,6 +709,7 @@ export function groundCardFor(ability, character, { schools, substrate, location
     strength: Math.max(0, Math.min(4, Math.round(v.factor * 4))), percent: v.percent, factor: v.factor, side: v.side,
     // R38: the second ground, when this source reads it — absent otherwise, never a default
     ...(readsMeaning ? { meaning, ceiling, meaningBound } : {}),
+    ...(opposed ? { opposed } : {}),   // ⬜ what crowds it, when the opposing source does
     chancePenalty: v.chancePenalty, energyMult: v.energyMult, off: v.off, grounded: true };
 }
 

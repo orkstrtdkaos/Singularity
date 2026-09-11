@@ -135,7 +135,11 @@ function pcFor(level, abilities) {
   const counts = {};
   for (const a of (abilities || [])) { const ab = (CONTENT.abilities || {})[a.abilityId]; if (ab && (ab.functions || []).some(f => f === "strike" || f === "break")) counts[ab.attribute || "physical"] = (counts[ab.attribute || "physical"] || 0) + 1; }
   const lead = Object.entries(counts).sort((x, y) => y[1] - x[1])[0]?.[0] || "physical";
-  return pcBodyAt(level, { rules: CONTENT.rules, focusParents: [lead, lead === "mental" ? "practical" : "mental"] });
+  // ✅ the eight stats: the sub points go first to the SUBS those harm crafts roll, most-used first, as a person's do
+  const subs = {};
+  for (const a of (abilities || [])) { const ab = (CONTENT.abilities || {})[a.abilityId]; for (const f of (ab?.functions || [])) if ((f === "strike" || f === "break") && ab.subAttributeByFunction?.[f]) subs[ab.subAttributeByFunction[f]] = (subs[ab.subAttributeByFunction[f]] || 0) + 1; }
+  const focusSubs = Object.entries(subs).sort((x, y) => y[1] - x[1]).map(([s]) => s);
+  return pcBodyAt(level, { rules: CONTENT.rules, focusParents: [lead, lead === "mental" ? "practical" : "mental"], focusSubs });
 }
 const DOMAIN_OF = CONTENT.traditionIndex?.domainOfTrad || {};
 const DOMAINS = [...new Set(Object.values(DOMAIN_OF))].sort();
@@ -364,9 +368,13 @@ function fight(cfg, encId, def, skill, seed, menu) {
     const L = Math.max(1, Math.round((Number(def.opponent.threat) || 20) / 2));
     const dom = DOMAINS[(L * 7) % DOMAINS.length];
     const kit = boughtKit(dom, L, cfg);
-    def.opponent.skills = kit.abilities.map(k => catalog[k.abilityId]).filter(Boolean).map(a => ({ id: a.id, abilityId: a.id,
-      function: (a.functions || [])[0] || "strike", tier: Math.max(1, Number(a.tier ?? a.levelReq) || 1), rank: kit.rank,
-      attribute: a.attribute || "practical", name: a.name || a.id }));
+    // ⛔ 2026-09-11: these rows were built by hand — ONE row per craft (its first verb), no sub — while the player and every person in
+    // the game get every verb, each with the sub it rolls (`battleSkillsFor`). Once bodies built toward the sub each verb rolls, the
+    // gap tilted a fair peer toward the player: the foe's body sharpened subs its rows could not use. The game's shape, now.
+    def.opponent.skills = kit.abilities.map(k => catalog[k.abilityId]).filter(Boolean).flatMap(a => (a.functions?.length ? a.functions : ["strike"]).map(fn => {
+      const sub = a.subAttributeByFunction?.[fn];
+      return { id: a.id, abilityId: a.id, function: fn, tier: Math.max(1, Number(a.tier ?? a.levelReq) || 1), rank: kit.rank,
+        attribute: a.attribute || "practical", ...(sub ? { subAttribute: sub } : {}), name: a.name || a.id }; }));
     def.opponent.inventory = npcGear({}, { items: CONTENT.items || {}, cfg: CONTENT.rules?.npcStanding || {} });   // a person carries a person's gear
     // …and its BODY is a person's too — the same player rules (`pcBodyAt`), soak from what it wears (a default loadout wears nothing)
     { const fpc = pcFor(L, kit.abilities); Object.assign(def.opponent, { attributes: fpc.attributes, subAttributes: fpc.subAttributes, health: fpc.maxHealth, energy: fpc.maxEnergy, soak: 0 }); }

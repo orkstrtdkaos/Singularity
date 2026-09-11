@@ -23,7 +23,7 @@
 
 import { abilityTier } from "./skilltree.js";
 import { offersFreeFloor } from "./capabilities.js";   // R47: a kit with a free floor needs no bare strike
-import { pcBodyAt, SUB_OF } from "./progression.js";   // ✅ Erik 2026-09-11: a person carries a player's body
+import { pcBodyAt, SUB_OF, craftSubAttribute } from "./progression.js";   // ✅ Erik 2026-09-11: a person carries a player's body
 const num = (v, d = 0) => (v == null || v === "" || !Number.isFinite(Number(v)) ? d : Number(v));
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 
@@ -375,7 +375,7 @@ function sheetFrom(entry, { day = null, cfg = {}, roleAttributes = null, levelOv
   // ⛔ …and like a player, a person builds toward what they FIGHT with: `cfg.bodyFocus` (the attributes the kit's harm crafts roll
   // on, from `personOpponentFor`) comes first, the roles' leans after. Leans alone spent Veth's points where her crafts do not roll.
   const focusNow = [...new Set([...(Array.isArray(cfg?.bodyFocus) ? cfg.bodyFocus : []), ...leans])];
-  const pcBody = cfg?.body === "player" ? pcBodyAt(level, { rules: { leveling: cfg.leveling || {}, energy: cfg.energy || {} }, focusParents: focusNow }) : null;
+  const pcBody = cfg?.body === "player" ? pcBodyAt(level, { rules: { leveling: cfg.leveling || {}, energy: cfg.energy || {} }, focusParents: focusNow, focusSubs: Array.isArray(cfg?.bodyFocusSubs) ? cfg.bodyFocusSubs : [] }) : null;
   return {
     id: entry?.id || null,
     name: entry?.name || entry?.id || "someone",
@@ -616,10 +616,12 @@ export function battleSkillsFor(entry, opts = {}) {
   const out = [];
   for (const ab of crafts) {
     for (const fn of (ab.functions || [])) {
+      // ✅ ERIK 2026-09-11 (the eight stats): the sub this craft rolls for this verb, as the player's row carries it
+      const sub = ab.subAttributeByFunction?.[fn] || craftSubAttribute(ab, fn, opts?.rules?.craftSubAttributes);
       // ⛔ DUEL_pell_vs_veth §C.2 — the RANK rides beside the tier, so the roll's rank term and the dice's tier
       // term stop sharing one field. An authored `abilities[]` entry names it; an observed craft is rank 1.
       out.push({ id: ab.id, function: fn, name: ab.name || ab.id, tier: abilityTier(ab), rank: rankOf(ab.id),   // CCODE-341d: a THIRD shape of the levelReq-as-tier defect — assigning it to a field NAMED tier
-        attribute: ab.attribute || "practical", energyCost: ab.energyCost ?? null });
+        attribute: ab.attribute || "practical", ...(sub ? { subAttribute: sub } : {}), energyCost: ab.energyCost ?? null });
     }
   }
   // ⛔ AND THE PLAIN STRIKE, because the PC gets one and an NPC is not a different kind of thing. This is

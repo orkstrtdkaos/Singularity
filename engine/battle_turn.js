@@ -27,7 +27,7 @@ import { synthesizeOpponentSheet } from "./skill_battle.js";
 import { synthesizeDuelDef } from "./random_encounters.js";
 import { encounterKind, frameCollapsible, collapseMode, collapseResult, collapseFloor, wardAgainst, wardBroken, swingDegree } from "./encounterFrame.js";
 import { abilityTier } from "./skilltree.js";
-import { effectiveEnergyCost, autoAdvancePracticedRanks, SUB_OF } from "./progression.js";
+import { effectiveEnergyCost, autoAdvancePracticedRanks, SUB_OF, craftSubAttribute } from "./progression.js";
 import { capabilityMenu, resolveTier, offersFreeFloor } from "./capabilities.js";
 import { usableCombatItems, wieldBonusFor, consumeItem, removeItem, wornSoak, wornSoakLayers } from "./inventory.js";
 import { recordUse } from "./practice.js";
@@ -51,7 +51,9 @@ export function battleSkillsForCharacter(character, { catalog = {}, rules = {}, 
     const fns = def?.functions || [];
     if (!fns.length) continue;
     for (const fn of fns) {
-      out.push({ id: a.abilityId, function: fn, tier: abilityTier(def), rank: a.level ?? 1, attribute: def.attribute || "practical", name: def.name || a.abilityId,
+      // ✅ ERIK 2026-09-11 (the eight stats): the sub this craft rolls for this verb — stamped at load, derived for a minted craft
+      const sub = def.subAttributeByFunction?.[fn] || craftSubAttribute(def, fn, rules?.craftSubAttributes);
+      out.push({ id: a.abilityId, function: fn, tier: abilityTier(def), rank: a.level ?? 1, attribute: def.attribute || "practical", ...(sub ? { subAttribute: sub } : {}), name: def.name || a.abilityId,
         energyCost: effectiveEnergyCost(def, character, rules), mechanic: def.mechanic || null,
         ...(() => { // ⚠️ `??`, NOT `||` — CCODE-245: a genuine rank 0 must reach the module
           const menu = capabilityMenu(def, a.level ?? 1, { cfg: rules?.energy });
@@ -92,7 +94,7 @@ export function declFromSelection(sel, skills, intensity, { character, sb = null
   const picked = (sel || []).map(i => (typeof i === "number" ? skills[i] : i)).filter(Boolean);
   if (!picked.length) return null;
   const lead = picked[0];
-  const d = { function: lead.function, tier: lead.tier || 1, rank: lead.rank ?? lead.tier ?? 1, attribute: lead.attribute || "practical",
+  const d = { function: lead.function, tier: lead.tier || 1, rank: lead.rank ?? lead.tier ?? 1, attribute: lead.attribute || "practical", ...(lead.subAttribute ? { subAttribute: lead.subAttribute } : {}),
               intensity, name: lead.name, id: lead.id, energyCost: lead.energyCost ?? null };
   if (picked[1]) d.woven = { function: picked[1].function, tier: picked[1].tier || 1, rank: picked[1].rank ?? picked[1].tier ?? 1, name: picked[1].name, id: picked[1].id, energyCost: picked[1].energyCost ?? null };
   const wield = wieldBonusFor(character, d.function, sb?.items || {});
@@ -240,10 +242,12 @@ export function personOpponentFor(rec, { catalog = {}, cfg = {}, day = null, tra
   if (!skills.length) return null;                       // nothing to fight with — let the threat path have them
   // ✅ 2026-09-11: the sheet is built AFTER the kit, so a person's body can build toward what they fight with — the attributes
   // their harm crafts roll on, most-used first (`sheetFor` reads `cfg.bodyFocus` ahead of the roles' leans).
-  const harmAttr = {};
-  for (const s of skills) if (s.function === "strike" || s.function === "break") harmAttr[s.attribute || "practical"] = (harmAttr[s.attribute || "practical"] || 0) + 1;
+  const harmAttr = {}, harmSub = {};
+  for (const s of skills) if (s.function === "strike" || s.function === "break") { harmAttr[s.attribute || "practical"] = (harmAttr[s.attribute || "practical"] || 0) + 1; if (s.subAttribute) harmSub[s.subAttribute] = (harmSub[s.subAttribute] || 0) + 1; }
   const bodyFocus = Object.entries(harmAttr).sort((a, b) => b[1] - a[1]).map(([a]) => a);
-  const sheet = personSheetFor(rec, { day, cfg: bodyFocus.length ? { ...cfg, bodyFocus } : cfg, ...(form?.level != null ? { levelOverride: form.level } : {}) });
+  // ✅ the eight stats: and toward the SUBS those crafts roll, most-used first — as a player builds
+  const bodyFocusSubs = Object.entries(harmSub).sort((a, b) => b[1] - a[1]).map(([s]) => s);
+  const sheet = personSheetFor(rec, { day, cfg: bodyFocus.length ? { ...cfg, bodyFocus, bodyFocusSubs } : cfg, ...(form?.level != null ? { levelOverride: form.level } : {}) });
   const gear = npcGear(rec, { items, cfg });
   // ✅ Erik 2026-09-11: under the player's rules a person's soak is what they WEAR, as yours is
   const worn = cfg?.body === "player" ? { soak: wornSoak({ inventory: gear }), layers: wornSoakLayers({ inventory: gear }) } : null;

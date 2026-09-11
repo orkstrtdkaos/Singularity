@@ -1,6 +1,6 @@
 # BALANCE — the dials, what they actually do, and how to turn one without lying to yourself
 
-**CCode · started 2026-08-30 · v1.9.452**
+**CCode · started 2026-08-30 · v1.9.453**
 
 > Erik: *"we need to build toward balance and use the dials."*
 
@@ -63,6 +63,8 @@ What balance means here is narrower and testable:
 | `senseStep.decisiveReadEarnsBonus` | `skill_battle_system` | **true** (Erik 2026-09-11) | true: a decisive read (tier 3) earns the bonus action — bonus 7% → 28% of reads; reading every turn 81% → 88% of peer wins |
 | `npcStanding.defaultLoadout` | `resolution` | a weapon of their trade (melee) + a healing draught (v1.9.449) | Erik 2026-09-11 (Q3) — what a person carries when the record authors no `inventory` or `gear`; the foe wields it (+4 on a strike) and drinks it when low. ⬜ Aevi's placeholder until gear is authored |
 | `npcStanding.gearWords` | `resolution` | blade · axe · spear · bow · melee · shield · armor word lists | how a record's `gear` PROSE becomes an item a fight can read, when it names no catalogue item |
+| `craftSubAttributes` | `resolution` | **on** · power / finesse per parent; harm by `operativeAxis` (v1.9.453) | ✅ Erik 2026-09-11 — *"there are 8 stats, not the 4 we started with"*: each craft row rolls one of the eight; an authored `subAttribute` wins; bodies build toward the subs they roll. `§166` |
+| `opposedCrowding` | `the_substrate` | **off** · none ≤ 0.4, ×0.9 at 0.8, ×0.6 at 1.0 (v1.9.453) | ⬜ Erik 2026-09-11, reading confirmed — veil ← the lattice, meaning-powered ← the nanite, nanite ← meaning. `§167` |
 | `poolsTowardFull` | `the_substrate` | **true** (v1.9.452) | ✅ Erik 2026-09-11 — *"turn the empowering pools on"* (Aevi's §1): a well adds TOWARD fullness, base + delta × (1 − base). On a well the empowered share 8.4% → 14.6%; Archive Hollow 0.60 → 0.52, crowded 6% → 0. `§164` |
 | `npcStanding.body` | `resolution` | **player** (v1.9.450) | Erik 2026-09-11 — a person carries the body a PLAYER of their level carries (`pcBodyAt`), soak from what they wear; `legacy` = round(level/2)+1 in every attribute and soak level/3 |
 | `deathSave.saveBonus` | `skill_battle_system` | **20** | R35 — the target's weight on the save. 0 → 66% of landed Cut Thread hits kill a fresh equal (R43: the only craft that offers the save) · 10 → 58% · **20 → 48%** · 30 → 38% |

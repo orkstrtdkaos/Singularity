@@ -75,7 +75,7 @@ export function syncParentAttributes(character) {
  *    · the points go to the subs of `focusParents`, in order, round-robin, to `subAttributeCap`, then spill on — a person
  *      builds toward what they roll with; the parents are the mean of their subs (`syncParentAttributes`).
  *  One function for an NPC's sheet (`npcStanding.body: "player"`) and the harness's PC. Pure. */
-export function pcBodyAt(level, { rules = {}, focusParents = [], start = null } = {}) {
+export function pcBodyAt(level, { rules = {}, focusParents = [], focusSubs = [], start = null } = {}) {
   const lv = rules?.leveling || {};
   const L = Math.max(1, Math.round(Number(level) || 1));
   const base = { physical: 3, mental: 3, social: 3, practical: 3, ...(start?.attributes || {}) };
@@ -88,6 +88,8 @@ export function pcBodyAt(level, { rules = {}, focusParents = [], start = null } 
   const rest = SUBS.filter(s => !focus.includes(s));
   // the first focus parent's subs climb together; when both are full, the next parent's; then everything else, evenly
   const groups = [];
+  // ✅ ERIK 2026-09-11 (the eight stats): a character who rolls a SUB builds toward that sub, one at a time, before the parents
+  for (const s of (Array.isArray(focusSubs) ? focusSubs : []).filter((x, i, a) => SUB_OF[x] && a.indexOf(x) === i)) groups.push([s]);
   for (const p of (Array.isArray(focusParents) ? focusParents : [])) { const g = SUBS.filter(s => SUB_OF[s] === p); if (g.length) groups.push(g); }
   groups.push(rest.length ? rest : SUBS);
   for (const g of groups) {
@@ -107,6 +109,39 @@ export function pcBodyAt(level, { rules = {}, focusParents = [], start = null } 
   const h0 = Number(start?.maxHealth) || (15 + 5 * (Number(base.physical) || 3));
   const e0 = Number(start?.maxEnergy) || Number(rules?.energy?.max) || 100;
   return { level: L, attributes, subAttributes: subs, maxHealth: h0 + (L - 1) * per, maxEnergy: e0 + (L - 1) * per };
+}
+
+/** ✅ ERIK 2026-09-11: "there are 8 stats, not the 4 we started with. they now need a spread of the 8." The sub-attribute a craft
+ *  rolls when it does `fn`. An authored `subAttribute` wins; otherwise the content table (`rules.craftSubAttributes`) splits each
+ *  parent's verbs between its POWER sub and its FINESSE sub, and a harm verb goes to finesse when the craft's operativeAxis names
+ *  precision (or another `finesseAxes` word). Null with no table — the parent rolls, exactly as before. Pure. */
+export function craftSubAttribute(def, fn, table) {
+  if (!def) return null;
+  if (table && table.enabled === false) return null;   // the dial: off, every craft rolls its parent, as before
+  if (def.subAttribute && SUB_OF[def.subAttribute]) return def.subAttribute;
+  if (!table?.power) return null;
+  const p = def.attribute || "practical";
+  const pow = table.power[p], fin = table.finesse?.[p];
+  if (!pow) return null;
+  if ((table.harmVerbs || ["strike", "break"]).includes(fn)) {
+    const axes = [].concat(def.operativeAxis || []).join(" ");
+    return fin && (table.finesseAxes || []).some(w => axes.includes(w)) ? fin : pow;
+  }
+  return fin && (table.finesseVerbs?.[p] || []).includes(fn) ? fin : pow;
+}
+
+/** Stamp every craft's per-verb sub onto the in-memory catalog at load (`subAttributeByFunction`), as the substrate field stamps a
+ *  place's density: the authored files are never touched, and an authored `subAttribute` always wins. Returns how many crafts. */
+export function stampCraftSubAttributes(abilities = {}, table = null) {
+  if (!table?.power || table.enabled === false) return 0;
+  let n = 0;
+  for (const def of Object.values(abilities)) {
+    if (!def || !Array.isArray(def.functions) || !def.functions.length) continue;
+    const by = {};
+    for (const fn of def.functions) { const s = craftSubAttribute(def, fn, table); if (s) by[fn] = s; }
+    if (Object.keys(by).length) { def.subAttributeByFunction = by; n++; }
+  }
+  return n;
 }
 
 /** Level-up: bank growth choices instead of auto-spending them. Returns messages. */

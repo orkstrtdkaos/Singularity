@@ -231,6 +231,20 @@
   "heartyMeal": 0.12,
   "drink": 0.04
  },
+ "_craftSubAttributes": "✅ ERIK 2026-09-11: 'there are 8 stats, not the 4 we started with. they now need a spread of the 8.' Each craft row rolls ONE sub-attribute. An authored `subAttribute` on a craft wins; otherwise a parent's verbs split between its POWER sub and its FINESSE sub (`finesseVerbs`), and a harm verb (`harmVerbs`) goes to the finesse sub when the craft's operativeAxis names one of `finesseAxes`. Stamped onto the in-memory catalog at load as `subAttributeByFunction` (progression.stampCraftSubAttributes), never onto the files. A bow, a sling and a crossbow read as strength under this rule because their operativeAxis never says precision — author `subAttribute: \"agility\"` on them. Aevi's to retune.",
+ "craftSubAttributes": {
+  "enabled": true,
+  "power": { "physical": "strength", "mental": "reason", "social": "presence", "practical": "craft" },
+  "finesse": { "physical": "agility", "mental": "insight", "social": "rapport", "practical": "wits" },
+  "harmVerbs": ["strike", "break"],
+  "finesseAxes": ["precision", "foresight", "range"],
+  "finesseVerbs": {
+   "physical": ["move", "travel", "conceal", "deceive", "reveal", "foresee", "open", "soothe", "track", "evade"],
+   "mental": ["reveal", "foresee", "track", "conceal", "deceive", "soothe", "heal", "restore", "resist", "provoke"],
+   "social": ["persuade", "soothe", "heal", "restore", "bargain", "reveal", "sustain", "deceive", "track", "conceal", "foresee", "open", "make", "travel", "transform", "bind"],
+   "practical": ["move", "travel", "reveal", "track", "conceal", "deceive", "open", "hinder", "foresee", "command", "resist", "bargain"]
+  }
+ },
  "subAttributes": {
   "physical": [
    "strength",

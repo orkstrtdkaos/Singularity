@@ -39,14 +39,16 @@ file is replaced.**
 
 | bucket | n | means |
 |---|---|---|
-| ✅ **READ** | **97** | a play-path file names it outside a comment |
+| ✅ **READ** | **98** | a play-path file names it outside a comment |
 | ⛔ **DARK** | **16** | **no literal reader anywhere** — see the four lies below |
 | ⚠️ **CI-ONLY** | **3** | the only consumer is a test. **That is a real consumer for correctness and not one for play** |
-| ⚠️ **COLLISION** | **1** | the name is live, but on a *different owner* |
+| ⚠️ **COLLISION** | **0** | the name is live, but on a *different owner* |
 
 ### ⛔ THE FOUR WAYS "UNREAD" LIES — all four produced a false finding here inside one day
 
-1. ⚠️ **NAME-COLLISION.** `operativeAxis` is a **craft field** and a **rules dial**. Two owners, one word.
+1. ⚠️ **NAME-COLLISION.** `operativeAxis` is a **craft field** and a **rules dial**. Two owners, one word. ✅ 2026-09-11: the craft field now has its own
+   reader — the eight stats (`craftSubAttribute`) roll a harm verb's finesse sub when it names precision — so the atlas counts it READ
+   and the collision bucket is empty. The word still has two owners; read it by which object carries it.
    Matching the bare name reported the craft field as live on the strength of two reads of the dial.
    ✅ **Capture the receiver, not the name.**
 2. ⚠️ **COMMENT-ONLY.** The name appears solely inside a comment — often the comment explaining its removal.
@@ -655,7 +657,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `description` | 429 | `root`×429 | ✅ READ | `affiliation.js`, `art.js`, `authormode.js` |
 | `notFor` | 429 | `root`×429 | ✅ READ | `braids.js`, `entityDetail.js`, `generate.js` |
 | `tradition` | 429 | `root`×429 | ✅ READ | `affiliation.js`, `arceffects.js`, `art.js` |
-| `operativeAxis` | 429 | `root`×429 | ⚠️ COLLISION | only as `cfg.operativeAxis` |
+| `operativeAxis` | 429 | `root`×429 | ✅ READ | `craftmechanics.js`, `progression.js` |
 | `intensity` | 429 | `root`×429 | ✅ READ | `battle_turn.js`, `canon.js`, `craftmechanics.js` |
 | `plainly` | 429 | `root`×429 | ✅ READ | `gm.js`, `narration_voice.js`, `recovery_snapshots.js` |
 | `tree` | 429 | `root`×429 | ✅ READ | `backfill.js`, `braids.js`, `capabilities.js` |

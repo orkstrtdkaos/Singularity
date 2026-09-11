@@ -488,7 +488,9 @@ console.log("\n── FR · the field reference — measured claims stay measure
   for (const label of ["READ", "DARK", "CI-ONLY", "COLLISION"]) {
     const n = cnt(label);
     check(`FR: the prose count for ${label} (${n}) matches the table`,
-      n > 0 && new RegExp(`\\*\\*${label}\\*\\*\\s*\\|\\s*\\*\\*${n}\\*\\*`).test(fr),
+      // ✅ 2026-09-11: the eight stats gave `operativeAxis` (the craft field) its own reader, and the one COLLISION became READ. A zero
+      // COLLISION is legitimate when the SAME counter finds READ rows — the counter works, so its zero is a count, not a broken regex.
+      (n > 0 || (label === "COLLISION" && cnt("READ") > 0)) && new RegExp(`\\*\\*${label}\\*\\*\\s*\\|\\s*\\*\\*${n}\\*\\*`).test(fr),
       n === 0 ? "⛔ counted ZERO — the counter is broken, not the doc" : `table says ${n}`);
   }
 
@@ -1725,6 +1727,85 @@ console.log("\n── §165 · craft prose reaches the player clean ──");
   const pin165 = { description: 93, notFor: 150, plainly: 55, grants: 358, cannot: 423 };
   check("§165: ⬜ …and the content half is Aevi's rewrite — glyph-bearing lines may only FALL from today's count",
     Object.keys(pin165).every(k => cnt165[k] <= pin165[k]), JSON.stringify(cnt165));
+}
+
+/* ══════════ §166 — EIGHT STATS: A CRAFT ROLLS ONE SUB-ATTRIBUTE (Erik 2026-09-11) ══════════ */
+// ✅ ERIK 2026-09-11: "there are 8 stats, not the 4 we started with. they now need a spread of the 8." All 438 crafts named only a
+// parent; the roll already read a sub when a declaration carried one, and none did.
+console.log("\n── §166 · eight stats ──");
+{
+  const PR166 = await import("../engine/progression.js");
+  const BT166 = await import("../engine/battle_turn.js");
+  const { loadContentHeadless: lch166 } = await import("./headless_content.mjs");
+  const C166 = await lch166();
+  const T166 = C166.rules.craftSubAttributes;
+  check("§166: the table is content — a power and a finesse sub for each of the four parents",
+    !!T166 && ["physical", "mental", "social", "practical"].every(p => PR166.SUB_OF[T166.power?.[p]] === p && PR166.SUB_OF[T166.finesse?.[p]] === p));
+  check("§166: ⛔ an AUTHORED subAttribute wins over the table", PR166.craftSubAttribute({ attribute: "physical", subAttribute: "agility", functions: ["strike"] }, "strike", T166) === "agility");
+  check("§166: ⬜ …and it is a DIAL — content carries craftSubAttributes.enabled: true; off, nothing is stamped and every craft rolls its parent, exactly as before",
+    T166?.enabled === true && PR166.craftSubAttribute({ attribute: "physical", subAttribute: "agility" }, "strike", { ...T166, enabled: false }) === null && PR166.stampCraftSubAttributes({ x: { attribute: "mental", functions: ["strike"] } }, { ...T166, enabled: false }) === 0);
+  check("§166: …a harm verb rolls the finesse sub when the craft's operativeAxis names precision, the power sub otherwise",
+    PR166.craftSubAttribute({ attribute: "mental", operativeAxis: ["precision", "magnitude"] }, "strike", T166) === "insight" && PR166.craftSubAttribute({ attribute: "mental", operativeAxis: ["magnitude"] }, "strike", T166) === "reason");
+  check("§166: …and a verb the table names finesse rolls it — a physical move is agility", PR166.craftSubAttribute({ attribute: "physical" }, "move", T166) === "agility");
+  const crafts166 = Object.values(C166.abilities).filter(a => (a.functions || []).length);
+  const harm166 = {};
+  for (const a of crafts166) for (const f of a.functions) if (f === "strike" || f === "break") { const s = a.subAttributeByFunction?.[f]; if (s) harm166[s] = (harm166[s] || 0) + 1; }
+  check("§166: ⛔ the catalog is STAMPED at load — every craft rolls a sub for each of its verbs — and all EIGHT carry harm",
+    crafts166.every(a => a.functions.every(f => PR166.SUB_OF[a.subAttributeByFunction?.[f]])) && Object.keys(harm166).length === 8, JSON.stringify(harm166));
+  const id166 = crafts166.find(a => Object.values(a.subAttributeByFunction || {}).includes("agility"))?.id;
+  const rows166 = id166 ? BT166.battleSkillsForCharacter({ abilities: [{ abilityId: id166, level: 1 }], inventory: [] }, { catalog: C166.abilities, rules: C166.rules }) : [];
+  const row166 = rows166.find(r => r.id === id166 && r.subAttribute === "agility");
+  const decl166 = row166 ? BT166.declFromSelection([row166], rows166, "standard", { character: { abilities: [], inventory: [] } }) : null;
+  check("§166: …a player's row carries the sub, and the declaration takes it to the roll", !!row166 && decl166?.subAttribute === "agility", id166);
+  check("§166: …the roll reads it — rollSide hands decl.subAttribute to the chance stack, which reads the sub before the parent",
+    rd("engine/skill_battle.js").includes("...(decl.subAttribute ? { subAttribute: decl.subAttribute } : {})") && rd("engine/resolve.js").includes("action.subAttribute && character.subAttributes?.[action.subAttribute]"));
+  const cap166 = C166.rules.leveling?.subAttributeCap ?? 20;
+  const b166 = PR166.pcBodyAt(30, { rules: C166.rules, focusParents: ["physical"], focusSubs: ["agility"] });
+  const p166 = PR166.pcBodyAt(30, { rules: C166.rules, focusParents: ["physical"] });
+  check("§166: …and a body builds toward the SUB it rolls — agility to the cap before strength rises; with no sub named, the parent's subs climb together as before",
+    b166.subAttributes.agility === cap166 && b166.subAttributes.agility > b166.subAttributes.strength && Math.abs(p166.subAttributes.agility - p166.subAttributes.strength) <= 1, JSON.stringify(b166.subAttributes));
+  // ⛔ …AND THE FOE'S SHEET KEEPS THEM. synthesizeOpponentSheet passed "the whole sheet" by naming its fields and left subAttributes out,
+  // so every foe in the game rolled its averaged parent while the player rolled its sharpened sub — a fair peer tilted 46% → 56%. No foe
+  // had rolled an authored sub-attribute before this.
+  const E166 = await import("../engine/encounters.js");
+  const sb166 = C166.skillBattle?.engine;
+  const sh166 = E166.contestSheetFor({ id: "g166", type: "duel", opponent: { name: "g166", attributes: { physical: 12 }, subAttributes: { agility: 20, strength: 3 }, health: 100, energy: 100,
+    skills: [{ id: "g166", function: "strike", tier: 2, rank: 1, attribute: "physical", subAttribute: "agility", name: "g166" }] } }, { sb: sb166, content: C166 });
+  const vey166 = C166.npcs?.veyra_lance;
+  const po166 = vey166 ? BT166.personOpponentFor(vey166, { catalog: C166.abilities, cfg: C166.rules.npcStanding, day: 100, traditionIndex: C166.traditionIndex, items: C166.items, leveling: C166.rules.leveling }) : null;
+  const shv166 = po166 ? E166.contestSheetFor({ id: "g166v", type: "duel", opponent: { ...po166 } }, { sb: sb166, content: C166 }) : null;
+  check("§166: ⛔ …and a FOE's sheet keeps its sub-attributes through contestSheetFor, so its crafts roll the sub its body built — Veyra's authored agility reaches the roll",
+    sh166?.subAttributes?.agility === 20 && sh166?.skills?.[0]?.subAttribute === "agility" && shv166?.subAttributes?.agility === Number(vey166?.subAttributes?.agility) && (shv166?.skills || []).some(s => s.subAttribute),
+    JSON.stringify({ probe: sh166?.subAttributes, veyra: shv166?.subAttributes }));
+
+}
+
+/* ══════════ §167 — CROWDING BY THE OPPOSING SOURCE (a dial, off) ══════════ */
+// ⬜ ERIK 2026-09-11, "1. yes": veil ← the lattice, meaning-powered ← the nanite, nanite ← meaning; none low, slight medium, full at full.
+console.log("\n── §167 · crowding by the opposing source ──");
+{
+  const SUB167 = await import("../engine/substrate.js");
+  const { loadContentHeadless: lch167 } = await import("./headless_content.mjs");
+  const C167 = await lch167();
+  const raw167 = rj("content/packs/core/rules/the_substrate.json");
+  const oc167 = raw167.opposedCrowding;
+  check("§167: ⛑ the dial is content and OFF — the pairs Erik named, and today's crowding stands", oc167?.enabled === false && oc167?.pairs?.veil === "lattice" && oc167?.pairs?.metaphysical === "nanite" && oc167?.pairs?.nanite === "meaning");
+  const on167 = { ...C167.substrateModel, opposedCrowding: { ...oc167, enabled: true } };
+  const card167 = (a, l, sub) => SUB167.groundCardFor(a, { abilities: [{ abilityId: a.id, level: 1 }] }, { schools: C167.schools, substrate: sub, location: l, locations: C167.locations, powerSources: C167.powerSources, foothills: C167.foothills });
+  const ge = C167.locations.the_great_engine, veil167 = Object.values(C167.abilities).find(a => a.tradition && card167(a, ge, C167.substrateModel)?.source === "veil");
+  const offC = veil167 ? card167(veil167, ge, C167.substrateModel) : null, onC = veil167 ? card167(veil167, ge, on167) : null;
+  // the curve at the card's own level: the Engine's lattice is 0.98 with the pools on, so this is ≈ ×0.62, just above the ×0.6 floor
+  const want167 = (L) => L <= oc167.from ? 1 : L <= oc167.slightTo ? 1 - (1 - oc167.slight) * (L - oc167.from) / (oc167.slightTo - oc167.from) : Math.max(oc167.floor, oc167.slight - (oc167.slight - oc167.floor) * (L - oc167.slightTo) / (1 - oc167.slightTo));
+  check("§167: ⛔ ON, a veil craft at the Great Engine is crowded by the LATTICE — heavily, on the curve at its level — and the card says by what",
+    !!onC && onC.side === "crowded" && onC.opposed?.by === "lattice" && onC.opposed.level >= 0.95 && Math.abs(onC.opposed.factor - want167(onC.opposed.level)) < 0.01 && onC.opposed.factor < 0.7 && !offC?.opposed, JSON.stringify({ off: offC?.side, on: onC?.side, opp: onC?.opposed }));
+  const low167 = Object.values(C167.locations).find(l => SUB167.locationDensity(l, C167.substrateModel) <= (oc167?.from ?? 0.4) && veil167 && card167(veil167, l, C167.substrateModel)?.side !== "starved");
+  const lowOn = low167 && veil167 ? card167(veil167, low167, on167) : null;
+  check("§167: …and at a lattice at or under its threshold the opposing source costs nothing", !!lowOn && lowOn.opposed?.factor === 1, low167?.id);
+  const nan167 = Object.values(C167.abilities).find(a => a.tradition && card167(a, ge, on167)?.source === "nanite");
+  const nanOn = nan167 ? card167(nan167, ge, on167) : null;
+  check("§167: …a nanite craft is crowded by MEANING — and at the Great Engine meaning is full (the consequence Erik is shown)", !!nanOn && nanOn.opposed?.by === "meaning" && nanOn.opposed.level >= 0.99, JSON.stringify(nanOn?.opposed));
+  const g167 = SUB167.groundForDecl ? rd("engine/substrate.js") : "";
+  check("§167: …and the fight reads the same card — groundForDecl goes through groundCardFor", /export function groundForDecl[\s\S]{0,1600}groundCardFor\(/.test(g167));
 }
 
 /* ══════════ §14 — THE FOLD CANNOT BEAT AN IMMUNITY THE BLOW COULD NOT ══════════ */

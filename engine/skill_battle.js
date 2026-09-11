@@ -125,6 +125,9 @@ export function synthesizeOpponentSheet(opponent = {}, sb, { standing = null } =
     return { name: opponent.name || "the opponent", attributes: opponent.attributes || { practical: attr, physical: attr, mental: attr, social: attr },
       energy: opponent.energy ?? energy, maxEnergy: opponent.energy ?? energy, tacticTags: tags, skills: opponent.skills,
       ...(Array.isArray(opponent.inventory) ? { inventory: opponent.inventory } : {}),   // ✅ Erik 2026-09-11 (Q3): what they carry
+      // ⛔ 2026-09-11 (the eight stats): AND THE BODY'S SUB-ATTRIBUTES. "Pass the whole sheet" named its fields and left these out, so
+      // every foe rolled its averaged parent while the player rolled its sharpened sub — and no authored sub was ever rolled here.
+      ...(opponent.subAttributes && Object.keys(opponent.subAttributes).length ? { subAttributes: { ...opponent.subAttributes } } : {}),
       health: opponent.health ?? health, soak: opponent.soak ?? soak,
       // ✅ R34b: LEVEL RIDES ON THE SHEET — the break threshold is `ceil(level / 2)` of the side being broken. A
       // person's sheet carries its level; a threat-built foe's level is the inverse of `personOpponent`'s

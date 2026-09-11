@@ -7,6 +7,7 @@ import { walkingDays } from "./worldmap.js";   // resolveLocationId: the nearest
 import { martialAbilityRecords } from "./martial.js";
 import { reconcileContent } from "./reconcile.js";
 import { applySubstrateField } from "./substrate.js";
+import { stampCraftSubAttributes } from "./progression.js";
 import { loadLegends } from "./legends.js";
 import { buildTraditionIndex } from "./traditions.js";
 import { bestiaryEncounters, frameExemplarEncounters } from "./random_encounters.js"; // SNG-229 §2b: synthesize monster encounters from the loaded bestiary
@@ -837,6 +838,13 @@ export async function loadContent() {
   // ⚠️ AND WHICH ORIGINS ARE FOLK IS ALSO DERIVED — from `nativeKind`, not from a hardcoded "valleyfolk".
   rules.folkOriginIds = origins.filter(o => o && o.nativeKind === "folk").map(o => o.id);
   console.log(`[rules] folk pool: ${rules.folkAccessibleIds.length} folkAccessible crafts for origin(s) ${rules.folkOriginIds.join(", ") || "(none)"}`);
+
+  // ✅ ERIK 2026-09-11: "there are 8 stats, not the 4 we started with. they now need a spread of the 8." Each craft's per-verb sub,
+  // stamped on the in-memory catalog (never the files) from `rules.craftSubAttributes`; an authored `subAttribute` wins.
+  {
+    const n = stampCraftSubAttributes(abilities, rules.craftSubAttributes);
+    if (n) console.log(`[rules] eight stats: ${n} crafts roll a sub-attribute per verb`);
+  }
 
   // ⛔ SNG-435 §C3 — A SILENT FALLBACK IS THE BUG. An ability whose tradition has no aesthetics entry
   // is rendered in the HOUSE palette — muted earth tones with teal and gold — and nothing says so. Erik hit

@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 31,
-  "xp": 3065,
+  "xp": 3068,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -206,7 +206,7 @@
   "maxHealth": 191,
   "health": 191,
   "maxEnergy": 282,
-  "energy": 200,
+  "energy": 187,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2145,6 +2145,21 @@
       "spread": [],
       "day": 16,
       "worldDay": 73
+    },
+    {
+      "at": "2026-09-11T22:58:41.056Z",
+      "locationId": "gen-whistling-woman-post",
+      "communityId": "valley.hub",
+      "description": "Retrieved proof of the water crisis's true cause—buried readings from the sealed Archive cabinet—at the cost of breaking Grael's seal-mark and triggering the March's warden-alert.",
+      "tags": [
+        "risk",
+        "boldness",
+        "service"
+      ],
+      "weight": 2,
+      "spread": [],
+      "day": 16,
+      "worldDay": 73
     }
   ],
   "relationships": {},
@@ -2267,111 +2282,97 @@
         "player": "GAMBIT — Retrieve Grael's buried water readings from the Archive's third-wing cabinet without triggering the warden-mark or alerting the district watchers.",
         "summary": "Silas executes a shadow-step gambit to retrieve Grael's buried water readings from the Edge District Archive. The moorland's thin lattice strains the passage; the warden-mark acknowledges him despite the secrecy; the cabinet opens to the true answer of Grael's seal-question. Readings retrieved. Veth alerted.",
         "narration": "You step into the shadow at the waystation's threshold and hold it—the moorland lattice thin enough that you feel the reach strain almost immediately, the dark less solid than it should be. The Threshold Post's temple-shadow resolves wrong, stretched thin like light through fabric. You push through anyway.\n\nThe antechamber materializes around you—Archive stone, older than Grael's tenure, colder than the moorland. The seal-lock on the cabinet third-wing door is not merely a lock; it is a warden-mark, Veth's own work, and it reads your presence the instant you solidify. The wrinkle comes fast: the mark does not scream an alarm, but it *acknowledges* you—a pulse of recognition that travels up the March's own spine. Veth will know. She will know *now*, not later. You have three breaths, maybe four.\n\nYou move to Grael's cabinet. The question-lock inscribed into the seal is plain: *What ends?* Three words. The truth-answer sits in your bones: *The illusion of understanding.* The seal reads it—reads *you*—and the cabinet opens like it was always meant to. The buried readings are there, water-stained and dated, proof written in numbers that the pole-pull is real. You take them. The warden-mark pulses again. No alarm yet, but the clock is running down.\n\nYou step back into shadow with the readings in your grip. The moorland lattice is *worse* on the return—the dark fighting you, the passage resisting. You push through anyway, pulling hard, and the Whistling Woman Post's stove-shadow resolves beneath your feet. You step out into lamplight, readings in hand, breathing like you've run a race.\n\nPell looks up. She reads your face and she reads what you're carrying. The warden-mark has been triggered. Veth knows you broke into the Archive. And you have what you came for.\n\n*✦ Buried Water Readings (Archive) — added to your pack.*\n\n*✦ The Ashwardens: -1 — broke the Archive's warden-mark without consultation, triggering the March's witness-seal (held at the band's edge).*"
+      },
+      {
+        "player": "Shadow-sheet Mara immediately—urgent message. The readings are out. Tell her to move fast and name what Calvar needs to present this to the committee.",
+        "summary": "Silas retrieves Grael's buried water readings from the Archive at cost of triggering the warden-mark and alerting Veth. The readings are urgent proof—and the method of retrieval is a liability. Mara relays that Calvar can present them, but chain-of-custody will matter in the convene vote.",
+        "narration": "You take the shadow-tablet from your pocket—Mara's face emerges in your mind, the supply-store counter, her hands already moving to whatever needs doing next. You write fast: READINGS RETRIEVED ARCHIVE STOP GRAEL SEALED THEM STOP POLE-PULL PROVEN STOP CONVENE IN THREE DAYS STOP WHAT DOES CALVAR NEED TO PRESENT STOP\n\nThe slate goes dark as the message travels. You count breaths—three, four, five—and the surface shivers. Her answer comes back: CALVAR NEEDS THE READINGS THEMSELVES AND CHAIN-OF-CUSTODY STOP WARDEN COLL WILL DEMAND PROVENANCE STOP GRAEL'S SEAL BROKEN IS A PROBLEM BUT PROOF IS BIGGER STOP DARA SAYS CREWS CAN MOVE MATERIALS FASTER IF COMMITTEE VOTES POLE-PULL STOP SEND THEM SOON STOP\n\nShe's right and you know it. The readings are proof, but proof broken out of a sealed cabinet by a warden whose name is not yet public carries a weight that cuts both ways. Calvar can present the data—he has the standing to read it, to speak it plainly, to make the case that the numbers are real. But the chain of how you got them will be the question every skeptical ear latches onto. Three days is enough time if you move now, and not enough if you hesitate.\n\n*✦ The Ashwardens: -1 — broke the Archive warden-mark without consultation, triggering the March's witness-seal.*"
       }
     ],
     "lastTurn": {
-      "narration": "You step into the shadow at the waystation's threshold and hold it—the moorland lattice thin enough that you feel the reach strain almost immediately, the dark less solid than it should be. The Threshold Post's temple-shadow resolves wrong, stretched thin like light through fabric. You push through anyway.\n\nThe antechamber materializes around you—Archive stone, older than Grael's tenure, colder than the moorland. The seal-lock on the cabinet third-wing door is not merely a lock; it is a warden-mark, Veth's own work, and it reads your presence the instant you solidify. The wrinkle comes fast: the mark does not scream an alarm, but it *acknowledges* you—a pulse of recognition that travels up the March's own spine. Veth will know. She will know *now*, not later. You have three breaths, maybe four.\n\nYou move to Grael's cabinet. The question-lock inscribed into the seal is plain: *What ends?* Three words. The truth-answer sits in your bones: *The illusion of understanding.* The seal reads it—reads *you*—and the cabinet opens like it was always meant to. The buried readings are there, water-stained and dated, proof written in numbers that the pole-pull is real. You take them. The warden-mark pulses again. No alarm yet, but the clock is running down.\n\nYou step back into shadow with the readings in your grip. The moorland lattice is *worse* on the return—the dark fighting you, the passage resisting. You push through anyway, pulling hard, and the Whistling Woman Post's stove-shadow resolves beneath your feet. You step out into lamplight, readings in hand, breathing like you've run a race.\n\nPell looks up. She reads your face and she reads what you're carrying. The warden-mark has been triggered. Veth knows you broke into the Archive. And you have what you came for.\n\n*✦ Buried Water Readings (Archive) — added to your pack.*\n\n*✦ The Ashwardens: -1 — broke the Archive's warden-mark without consultation, triggering the March's witness-seal (held at the band's edge).*",
-      "sceneSummary": "Silas executes a shadow-step gambit to retrieve Grael's buried water readings from the Edge District Archive. The moorland's thin lattice strains the passage; the warden-mark acknowledges him despite the secrecy; the cabinet opens to the true answer of Grael's seal-question. Readings retrieved. Veth alerted.",
+      "narration": "You take the shadow-tablet from your pocket—Mara's face emerges in your mind, the supply-store counter, her hands already moving to whatever needs doing next. You write fast: READINGS RETRIEVED ARCHIVE STOP GRAEL SEALED THEM STOP POLE-PULL PROVEN STOP CONVENE IN THREE DAYS STOP WHAT DOES CALVAR NEED TO PRESENT STOP\n\nThe slate goes dark as the message travels. You count breaths—three, four, five—and the surface shivers. Her answer comes back: CALVAR NEEDS THE READINGS THEMSELVES AND CHAIN-OF-CUSTODY STOP WARDEN COLL WILL DEMAND PROVENANCE STOP GRAEL'S SEAL BROKEN IS A PROBLEM BUT PROOF IS BIGGER STOP DARA SAYS CREWS CAN MOVE MATERIALS FASTER IF COMMITTEE VOTES POLE-PULL STOP SEND THEM SOON STOP\n\nShe's right and you know it. The readings are proof, but proof broken out of a sealed cabinet by a warden whose name is not yet public carries a weight that cuts both ways. Calvar can present the data—he has the standing to read it, to speak it plainly, to make the case that the numbers are real. But the chain of how you got them will be the question every skeptical ear latches onto. Three days is enough time if you move now, and not enough if you hesitate.\n\n*✦ The Ashwardens: -1 — broke the Archive warden-mark without consultation, triggering the March's witness-seal.*",
+      "sceneSummary": "Silas retrieves Grael's buried water readings from the Archive at cost of triggering the warden-mark and alerting Veth. The readings are urgent proof—and the method of retrieval is a liability. Mara relays that Calvar can present them, but chain-of-custody will matter in the convene vote.",
       "choices": [
         {
-          "label": "Shadow-sheet Mara immediately—urgent message. The readings are out. Tell her to move fast and name what Calvar needs to present this to the committee.",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Ride to the Hub immediately with the readings—Calvar can prepare while you travel, and arriving in person carries weight the sheets alone cannot.",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "axes": {},
-          "difficulty": "easy",
-          "trivial": false,
+          "difficulty": "normal",
+          "opposedDifficulty": null,
           "intentTags": [
-            "gamble",
-            "rally",
-            "command"
+            "travel",
+            "risky"
           ],
           "abilityId": null,
-          "energyCost": null
-        },
-        {
-          "label": "Wait for Veth to arrive here—she will come now that the mark is triggered. Sit with what you did and answer her directly: you broke the seal to save the valley, and you need her to understand why before the March decides what that costs.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": "hard",
+          "energyCost": null,
           "trivial": false,
-          "intentTags": [
-            "confront",
-            "negotiate",
-            "defend"
-          ],
-          "abilityId": null,
-          "energyCost": null
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Read the buried readings now—understand exactly what they say, what the pole-pull's angle is, how deep the drift has already taken the Radiant. Know what you just risked everything to carry before anyone else gets hands on it.",
+          "label": "Prepare a careful written account of exactly how and why the readings were retrieved—frame the necessity plainly so the committee cannot dismiss the method.",
           "attribute": "mental",
           "subAttribute": "reason",
           "axes": {},
           "difficulty": "normal",
-          "trivial": false,
+          "opposedDifficulty": null,
           "intentTags": [
-            "study",
-            "prepare",
-            "learn"
+            "craft"
           ],
-          "abilityId": "order_sense",
-          "energyCost": 2
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ask Pell what she saw in the spear—did Memory feel the seal break? Did it register what you just did, and what that means for the shadow-binding you two hold together?",
+          "label": "Wait for Veth to arrive—she knows what the warden-mark means, she'll read your actions in context, and her standing may matter more than Calvar's data.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
-          "difficulty": "easy",
-          "trivial": false,
+          "difficulty": "hard",
+          "opposedDifficulty": null,
           "intentTags": [
-            "romantic",
-            "comfort",
-            "help"
+            "careful"
           ],
           "abilityId": null,
-          "energyCost": null
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "deeds": [
         {
-          "description": "Broke a warden-mark to retrieve proof the pole-pull is real—risking the March's regard to save the valley's balance",
+          "description": "Retrieved proof of the water crisis's true cause—buried readings from the sealed Archive cabinet—at the cost of breaking Grael's seal-mark and triggering the March's warden-alert.",
           "tags": [
+            "risk",
             "boldness",
-            "rule-breaking",
-            "desperate-measure"
+            "service"
           ],
           "weight": 2,
-          "communityId": "valley.ashwarden"
+          "communityId": "valley.hub"
         }
       ],
       "characterDeltas": {
         "health": 0,
-        "energy": -45,
-        "inventoryAdd": [
-          {
-            "name": "Buried Water Readings (Archive)",
-            "kind": "quest",
-            "description": "A sheaf of water-quality measurements from the Edge District archive — dated entries showing the pole-pull's effect on the Radiant watershed over years. Proof that the water crisis is structural drift, not conspiracy or negligence. Grael sealed these away.",
-            "consumable": false
-          }
-        ],
+        "energy": -8,
+        "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
       },
       "ledgerEvents": [
         {
-          "what": "Silas Weir breached the Archive's warden-mark and retrieved sealed water readings proving pole-pull causation",
+          "what": "The buried water readings are now in Silas Weir's hands—proof that pole-pull is the true cause of the crisis. The convene vote is three days away. Calvar can present; the method of retrieval will be contested.",
           "tags": [
-            "breach-of-archive",
-            "warden-mark-triggered",
-            "pole-pull-proof"
+            "proof",
+            "crisis",
+            "politics"
           ],
           "visibility": "witnessed",
           "spectrumDeltas": {
-            "falsehood_truth": 0.15,
-            "chaos_order": -0.1
+            "truth_falsehood": 0.15
           },
           "impactsLocal": true
         }
@@ -2381,9 +2382,9 @@
           "op": "progress",
           "questId": "the-light-that-will-not-dim",
           "title": "The Light That Will Not Dim",
-          "summary": "Retrieve proof that pole-pull, not conspiracy, is draining the valley's water",
+          "summary": "Find who benefits from the light winning",
           "giver": "high_luminary",
-          "note": "Readings retrieved from Archive at cost of triggering warden-mark. Veth will know. Convene in three days.",
+          "note": "Readings retrieved from Archive—concrete proof that pole-pull is the real cause. Three days before convene votes on whether to accept the evidence. Calvar can present; the method of retrieval (cabinet broken, warden-mark triggered) is a liability.",
           "xpReward": 0
         }
       ],
@@ -2391,96 +2392,33 @@
         {
           "people": "ashwarden",
           "delta": -1,
-          "why": "broke the Archive's warden-mark without consultation, triggering the March's witness-seal"
+          "why": "broke the Archive warden-mark without consultation, triggering the March's witness-seal"
         }
       ],
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "pell-ran-marsh",
-          "name": "Pell Ran Marsh",
-          "role": "partner",
-          "note": "Watched Silas return from the Archive gambit with the readings in hand. Reading his face, understanding what it cost and what comes next. Present, attentive, not moving.",
-          "learned": [
-            "The gambit succeeded at cost — the warden-mark was triggered",
-            "Veth will know Silas broke into the Archive",
-            "The shadow-lattice was weaker than expected; the passage fought him"
-          ],
-          "relationshipDelta": 0,
-          "statusNote": "At the Whistling Woman post, resting, strong, alert to what comes next"
-        },
-        {
-          "op": "update",
-          "npcId": "huginn",
-          "name": "Huginn",
-          "role": "companion",
-          "note": "Still roosted on the shelf. Watches Silas return. The bird's eye reflects lamplight — knowing, patient, unhurried.",
-          "learned": [
-            "The warden-mark was triggered and Veth knows"
-          ],
-          "statusNote": "At the Whistling Woman post, roosted, attending"
-        },
-        {
-          "op": "update",
-          "npcId": "the-runner",
-          "name": "The Runner",
-          "role": "relay courier",
-          "note": "Still asleep on the cot, mending. Unaware of what just transpired. The encrypted message that brought her here is now partially answered.",
-          "statusNote": "At the Whistling Woman post, asleep, mending well"
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "overseer-grael",
-          "label": "Overseer Grael",
-          "kind": "person",
-          "entityId": "overseer-grael",
-          "fact": "The seal-question on Grael's cabinet is older than his tenure — he learned to answer it but did not author it. The true answer is 'the illusion of understanding.' Grael has feared that answer his entire tenure. The cabinet holds the buried water readings that prove pole-pull is real.",
-          "links": [
-            "the-water-crisis",
-            "edge-district",
-            "the-light-that-will-not-dim"
-          ]
-        },
-        {
-          "topic": "the-water-crisis",
-          "label": "The Water Crisis",
-          "kind": "mystery",
-          "fact": "Proof retrieved: the Archive's buried readings show pole-pull as the true cause. The readings are dated, numbered, and undeniable. Grael sealed them away.",
-          "links": [
-            "overseer-grael",
-            "the-light-that-will-not-dim",
-            "warden-coll",
-            "what-wakes-beneath"
-          ]
-        }
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "The warden-mark on the Archive was triggered when Silas Weir entered to retrieve the buried readings. Veth Ondra now knows the cabinet was breached. The March is alerted.",
-          "subjectId": "veth-ondra"
-        }
-      ],
+      "delegateOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": null,
+      "stageOps": [],
       "scene": {
-        "setting": "The Whistling Woman post's single warm room at midday—stone walls, the stove recently fed, sunlight through the small window casting long rectangles on the floor. The encrypted slate sits dark on the table. The Runner sleeps on the cot, steady and mending. Huginn is roosted on the shelf. Pell stands near the table, watching Silas with complete attention. The retrieved readings are now in the room.",
+        "setting": "The Whistling Woman post's single warm room at midday—stone walls, the stove recently fed, sunlight through the small window. The encrypted slate sits dark on the table. The Runner sleeps on the cot, steady and mending. Huginn is roosted on the shelf. Pell stands near the table, watching Silas with complete attention. The retrieved readings are stacked on the table, sheaf of dated numbers that prove the theory.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Standing, hands loose, reading Silas's face and what the readings mean—understanding what comes next"
+            "state": "Standing, hands loose, reading Silas's face and the shadow-tablet's exchange—understanding what comes next and what it costs"
           },
           {
             "name": "Huginn",
-            "state": "Roosted on shelf beside relay mechanism, head turned, watching with that particular stillness"
+            "state": "Roosted on shelf beside relay mechanism, head turned, watching with that particular stillness—present but not intervening"
           },
           {
             "name": "The Runner",
-            "state": "Asleep on cot, breathing steady, mending from cautery"
+            "state": "Asleep on cot, breathing steady, mending from cautery—unaware of the message just sent"
           }
         ],
         "objects": [
           "Buried Water Readings (Archive) — sheaf of dated, numbered proof",
-          "Encrypted slate — dark on table",
+          "Shadow-tablet — dark on table, message-exchange just concluded",
           "Memory — the spear propped against the wall",
           "Relay mechanism — silent on shelf",
           "Breakfast plates — cooling on table"
@@ -2489,30 +2427,99 @@
           "Veth is coming—the warden-mark alerted her and she will arrive to confront what was broken",
           "The readings are out—but only three days before the convene votes on pole-pull",
           "The cost of the gambit: standing with the March, secrecy abandoned, rules broken",
-          "What Pell is reading in the spear—did Memory feel the seal break?"
+          "Calvar must present the data; the method of retrieval will be the liability"
         ]
       },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "mara-wells",
+          "name": "Mara Wells",
+          "role": "Millbrook's supply-store operator—now the Hub committee's fastest messenger",
+          "note": "Received urgent shadow-tablet message about the retrieved readings. Responded with tactical assessment: Calvar can present, chain-of-custody matters, Dara's crews can move faster if the vote goes pole-pull. Moving fast herself—already acting on the news.",
+          "learned": [
+            "The readings are proof but the broken cabinet is a liability",
+            "Calvar's standing as a reader will matter more than the method",
+            "Dara's repair crews need the committee vote to move at pace"
+          ],
+          "relationshipDelta": 0,
+          "statusNote": "At Millbrook, receipt of urgent message, moving to coordinate response"
+        }
+      ],
+      "intentsHeard": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The buried water readings proving pole-pull as the true cause are now retrieved from Grael's sealed Archive cabinet. The warden-mark was triggered; Veth knows the cabinet was breached. Three days remain before the convene votes on whether to accept pole-pull as the crisis's source.",
+          "subjectId": "the-water-crisis"
+        }
+      ],
+      "placeUpdates": [],
+      "discovery": null,
+      "codexUpdates": [
+        {
+          "topic": "the-water-crisis",
+          "label": "The Water Crisis",
+          "kind": "mystery",
+          "entityId": null,
+          "fact": "The readings are retrieved and proof is concrete—the pole-pull is the true cause, documented in dated measurements from the Archive. Presentation to the convene in three days will determine whether the valley accepts the evidence and pivots to long-term mitigation or continues the blame-game.",
+          "links": [
+            "overseer-grael",
+            "warden-coll",
+            "calvar",
+            "the-light-that-will-not-dim"
+          ]
+        }
+      ],
+      "holdingOps": [],
+      "debtOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": {
+        "hoursPassed": 1.5,
+        "why": "the gambit run, return, recovery, and message exchange took the span of late morning into early afternoon"
+      },
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": null,
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Whistling Woman post's single warm room at midday—stone walls, the stove recently fed, sunlight through the small window casting long rectangles on the floor. The encrypted slate sits dark on the table. The Runner sleeps on the cot, steady and mending. Huginn is roosted on the shelf. Pell stands near the table, watching Silas with complete attention. The retrieved readings are now in the room.",
+      "setting": "The Whistling Woman post's single warm room at midday—stone walls, the stove recently fed, sunlight through the small window. The encrypted slate sits dark on the table. The Runner sleeps on the cot, steady and mending. Huginn is roosted on the shelf. Pell stands near the table, watching Silas with complete attention. The retrieved readings are stacked on the table, sheaf of dated numbers that…",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Standing, hands loose, reading Silas's face and what the readings mean—understanding what comes next"
+          "state": "Standing, hands loose, reading Silas's face and the shadow-tablet's exchange—understanding what comes next and what it c"
         },
         {
           "name": "Huginn",
-          "state": "Roosted on shelf beside relay mechanism, head turned, watching with that particular stillness"
+          "state": "Roosted on shelf beside relay mechanism, head turned, watching with that particular stillness—present but not intervenin"
         },
         {
           "name": "The Runner",
-          "state": "Asleep on cot, breathing steady, mending from cautery"
+          "state": "Asleep on cot, breathing steady, mending from cautery—unaware of the message just sent"
         }
       ],
       "objects": [
         "Buried Water Readings (Archive) — sheaf of dated, numbered proof",
-        "Encrypted slate — dark on table",
+        "Shadow-tablet — dark on table, message-exchange just concluded",
         "Memory — the spear propped against the wall",
         "Relay mechanism — silent on shelf",
         "Breakfast plates — cooling on table"
@@ -2521,15 +2528,15 @@
         "Veth is coming—the warden-mark alerted her and she will arrive to confront what was broken",
         "The readings are out—but only three days before the convene votes on pole-pull",
         "The cost of the gambit: standing with the March, secrecy abandoned, rules broken",
-        "What Pell is reading in the spear—did Memory feel the seal break?"
+        "Calvar must present the data; the method of retrieval will be the liability"
       ]
     },
-    "beats": 8
+    "beats": 9
   },
   "clock": {
     "schemaVersion": 1,
     "day": 16,
-    "hour": 14,
+    "hour": 15,
     "realAnchor": null
   },
   "companions": [
@@ -3575,14 +3582,14 @@
         "s1"
       ],
       "progress": [
-        "Ossian names the drift plainly: readings buried five years ago, archive copies held by Leth in the Edge District. The Radiant leadership is choosing not to see what they measure.",
         "Codex: the Radiant Reach is intensifying past the Accord's tolerance — and someone chose to hide it.",
         "↳ Ossian's sealed message names the suppressed readings plainly: the Radiant array north of the Crossing shows a drift, and Sera's engineer buried them five years ago. The archive holds copies. Leth…",
         "Warden Coll confirms the Radiant readings are buried and pole-pull is the real issue. An amended petition will name the drift plainly to the Accord. The conspiracy now has institutional weight behind it.",
         "Ossian names the buried readings as retrievable proof. Three days to the convene. The committee will choose based on what evidence reaches it.",
         "Huginn names the Archive's location and the seal-question protecting the buried readings. Path is known: eastern service stair, less watched. Three days remain before the convene.",
         "Archive layout and watchers mapped via Veth. Grael's seal-question remains: what does he fear ending? Answer must be true or the seal hardens. Three days to convene.",
-        "Readings retrieved from Archive at cost of triggering warden-mark. Veth will know. Convene in three days."
+        "Readings retrieved from Archive at cost of triggering warden-mark. Veth will know. Convene in three days.",
+        "Readings retrieved from Archive—concrete proof that pole-pull is the real cause. Three days before convene votes on whether to accept the evidence. Calvar can present; the method of retrieval (cabinet broken, warden-mark triggered) is a liability."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T12:58:53.302Z",
@@ -4024,7 +4031,7 @@
     "mara-wells": {
       "id": "mara-wells",
       "name": "Mara Wells",
-      "role": "Village supply store operator, Millbrook",
+      "role": "Millbrook's supply-store operator—now the Hub committee's fastest messenger",
       "description": "A woman of practical bearing — keeps a close ledger, reacts to what customers need rather than how they present. Unruffled by Huginn's presence.",
       "firstMet": {
         "locationId": "millbrook",
@@ -4032,7 +4039,6 @@
       },
       "relationship": 8,
       "history": [
-        "[d13] Named Crane's records-case and Gweth Callow's unspoken fury as the two levers that might move the Radiant or Harmonic to real action.",
         "[d13] Took Silas's instruction without argument — wrote the note for Gweth Callow herself and set it with the morning errands. Her read of Gweth as the human lever that can move smallholders is now in play.",
         "[d13] Sealed a message for the march road waystation without hesitation — a water-reading request, leave it on the hook if the post is dark. Efficient, no ceremony.",
         "[d13] Lodging arranged for Crane and Veth without hesitation — two names in the ledger, Torval's rooms above the grain store named.",
@@ -4041,17 +4047,18 @@
         "[d14] Received a shadow-sheet linked privately to Silas's own — placed behind the counter between the salt block and the receipt tin.",
         "[d14] Received the shadow-sheet message — the work is done, the wells will clear first, the watershed will follow.",
         "[d14] Shadow-message received at the supply store counter—Fendt and crew ordered to the ridge node to begin construction of the Threshold Post. The network's northern anchor is now Mara's responsibility to stage.",
-        "[d15] Exchanged shadow-sheet messages at night on Day 15—confirmed the Whistling Woman post is operational and the relay mechanism tested. Mara reported Coll filed the amended petition naming pole-pull, the Radiant leadership is quiet (dangerous kind), and Calvar's crew moves to secondary sleeve repairs…"
+        "[d15] Exchanged shadow-sheet messages at night on Day 15—confirmed the Whistling Woman post is operational and the relay mechanism tested. Mara reported Coll filed the amended petition naming pole-pull, the Radiant leadership is quiet (dangerous kind), and Calvar's crew moves to secondary sleeve repairs…",
+        "[d16] Received urgent shadow-tablet message about the retrieved readings. Responded with tactical assessment: Calvar can present, chain-of-custody matters, Dara's crews can move faster if the vote goes pole-pull. Moving fast herself—already acting on the news."
       ],
       "knownFacts": [
-        "Silas has read the design and assigned her to hold the Millbrook thread while the party enters the Zone.",
-        "The shadow-sheet carries plain text only — no voice, no drawings. Writing appears on Silas's end immediately. Cleared by a slow palm-pass. The link is private between Mara and Silas alone.",
-        "The reclamation work is complete — wells will clear in a week or two, watershed will follow after.",
         "Fendt is being assigned as warden of the Threshold Post—a new post at the ridge relay node",
         "Mara Wells now holds the dispatch coordination for the post's construction crew and materials",
         "Warden Coll filed the amended petition on Day 15 morning, naming pole-pull as the real issue",
         "The Radiant leadership's silence is more dangerous than open response",
-        "Calvar's crew is staging for the secondary valve and sleeve repairs at the secondary sites"
+        "Calvar's crew is staging for the secondary valve and sleeve repairs at the secondary sites",
+        "The readings are proof but the broken cabinet is a liability",
+        "Calvar's standing as a reader will matter more than the method",
+        "Dara's repair crews need the committee vote to move at pace"
       ],
       "skillsObserved": [
         "proactive expedition resupply from personal stock without pr",
@@ -4062,16 +4069,16 @@
         "reading a political situation plainly and naming it without "
       ],
       "status": "active",
-      "statusNote": "At Millbrook, receipt of shadow-message ordering Fendt's assignment and post construction",
+      "statusNote": "At Millbrook, receipt of urgent message, moving to coordinate response",
       "lastSeen": {
         "locationId": "gen-whistling-woman-post",
-        "day": 15
+        "day": 16
       },
       "gender": "woman",
       "pronouns": "she/her",
       "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Mara%20Wells%2C%20woman%2C%20Village%20supply%20store%20operator%2C%20Millbrook%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=8967&nologo=true",
       "_portraitTier": "devoted",
-      "met": 2
+      "met": 3
     },
     "corvin": {
       "id": "corvin",
@@ -6557,7 +6564,7 @@
     "lastTickWorldDay": 73,
     "lastCanonWorldDay": 73,
     "lastGenCount": 1774,
-    "turnsSinceOffer": 3,
+    "turnsSinceOffer": 4,
     "recentOffers": [
       {
         "thing": "The music-box mechanism—a carrier for Deni's whistle-song in physical form, a tool for the relay network",
@@ -14553,7 +14560,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d13] Silas signed the witness statement with his Post Master mark on Day 13 afternoon. The design of the aid framework is clear: the Rootkin ask carries implicit expectation of return — Stillwater's Trouble offered as staging; the Cogitants will want a named accountable contact in the Zone. Both…",
           "[d13] Warden Coll issued a formal letter of introduction — Post Master authority named explicitly, committee seal pressed beside his own. Valid for district-governed contacts in the Zone fringe. His caveat: anyone who does not recognize district governance is a different conversation the letter cannot…",
           "[d13] A permanent two-way shadow-slate bound to Silas's Weirmark is now seated on Warden Coll's desk — written contact established without runners. Check-in protocol terms are the last open item before the scene closes.",
           "[d13] The Attended End, read through Huginn at Day 13 afternoon: the aid framework has weight and will hold. But the source upstream is on its own schedule — something is finishing there, and the question is whether Silas arrives before it does. The clock has not been seen.",
@@ -14576,17 +14582,18 @@
           "[d15] Warden Coll filed an amended petition on Day 15 morning naming pole-pull (The Poles Pull arc) as the underlying cause of the water crisis, replacing the Radiant readings conspiracy theory. The Radiant leadership has responded with silence—a dangerous sign that suggests either acceptance or deeper…",
           "[d16] The moorland's substrate lattice is measurably thin—craft-work here runs starved and unpredictable. Unknown cause or extent.",
           "[d16] The buried readings in Grael's cabinet are the only proof the committee will accept that pole-pull is the real cause. Three days before the convene decision.",
-          "[d16] Proof retrieved: the Archive's buried readings show pole-pull as the true cause. The readings are dated, numbered, and undeniable. Grael sealed them away."
+          "[d16] Proof retrieved: the Archive's buried readings show pole-pull as the true cause. The readings are dated, numbered, and undeniable. Grael sealed them away.",
+          "[d16] The readings are retrieved and proof is concrete—the pole-pull is the true cause, documented in dated measurements from the Archive. Presentation to the convene in three days will determine whether the valley accepts the evidence and pivots to long-term mitigation or continues the blame-game."
         ],
         "links": [
-          "the-actor-with-a-list",
           "the-threshold-post",
           "warden-coll",
           "millbrook",
           "the-poles-pull",
           "the-light-that-will-not-dim",
           "overseer-grael",
-          "what-wakes-beneath"
+          "what-wakes-beneath",
+          "calvar"
         ],
         "aliases": [],
         "createdDay": 2,
@@ -14595,7 +14602,8 @@
         "archive": [
           "[d13] Silas named Mara Wells to the Hub Council water committee as Millbrook's relay contact and pressed for a meeting sooner than their scheduled three days — the committee now has a named contact and a named urgency, delivered via the morning run.",
           "[d13] Warden Coll confirmed: the committee can move on a named authority and a signed witness account without a full council vote. He asked for the document roll, a signed statement naming Grael, and a check-in protocol before Silas enters the Zone. Formal aid requests to the Rootkin and Cogitants are…",
-          "[d13] Warden Coll witnessed the shadow-architecture of the valley's water infrastructure raised from the Waymarker and The Shadow Work on his desk — the conduit-lines, intake sleeves, and Disputed Zone survey-grid fringe all visible for thirty seconds before the detail at the failure points blurred. He…"
+          "[d13] Warden Coll witnessed the shadow-architecture of the valley's water infrastructure raised from the Waymarker and The Shadow Work on his desk — the conduit-lines, intake sleeves, and Disputed Zone survey-grid fringe all visible for thirty seconds before the detail at the failure points blurred. He…",
+          "[d13] Silas signed the witness statement with his Post Master mark on Day 13 afternoon. The design of the aid framework is clear: the Rootkin ask carries implicit expectation of return — Stillwater's Trouble offered as staging; the Cogitants will want a named accountable contact in the Zone. Both…"
         ]
       },
       "dara-holt-the-ditch-mother": {
@@ -16150,22 +16158,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 21.36941235938205,
-    "cerebral": 19.437197004429343,
-    "social": 10.440757950788905,
-    "generous": 4.917165903732454,
-    "cautious": 7.465485737894044,
-    "physical": 0.3751761170096408,
-    "risky": 1.0899871828023715,
-    "ruthless": 0.19586444336007114,
-    "carousing": 1.031845107392948,
-    "amorous": 3.4475494437933474,
-    "patient": 0.6585568032369208,
-    "stealth": 0.000006845286321135273,
-    "devotion": 0.2797209997527145,
-    "craft": 3.0918845173809375,
-    "leadership": 0.9105516758014299,
-    "deception": 0.032781069556316766
+    "strategic": 20.835177050397498,
+    "cerebral": 18.951267079318608,
+    "social": 10.179739002019183,
+    "generous": 4.794236756139142,
+    "cautious": 7.278848594446693,
+    "physical": 0.3657967140843998,
+    "risky": 1.062737503232312,
+    "ruthless": 0.19096783227606937,
+    "carousing": 2.0060489797081242,
+    "amorous": 3.3613607076985135,
+    "patient": 0.6420928831559978,
+    "stealth": 0.000006674154163106891,
+    "devotion": 0.27272797475889665,
+    "craft": 3.014587404446414,
+    "leadership": 2.887787883906394,
+    "deception": 0.031961542817408845
   },
   "aptitudes": [
     "strategist",
@@ -16174,7 +16182,7 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 957,
+  "actionCount": 958,
   "grantsVersion": 1,
   "reconcileVersion": 49,
   "gallery": [
@@ -16976,8 +16984,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1789167046230,
-  "rev": 1919,
+  "updatedAt": 1789167521084,
+  "rev": 1922,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -20348,6 +20356,12 @@
       "text": "The warden-mark on the Archive was triggered when Silas Weir entered to retrieve the buried readings. Veth Ondra now knows the cabinet was breached. The March is alerted.",
       "day": 16,
       "subjectId": "veth-ondra"
+    },
+    {
+      "id": "the-water-crisis",
+      "text": "The buried water readings proving pole-pull as the true cause are now retrieved from Grael's sealed Archive cabinet. The warden-mark was triggered; Veth knows the cabinet was breached. Three days remain before the convene votes on whether to accept pole-pull as the crisis's source.",
+      "day": 16,
+      "subjectId": "the-water-crisis"
     }
   ],
   "practice": {
@@ -21138,7 +21152,7 @@
   "syncedAt": 1788658062664,
   "teachers": {},
   "regionsKnown": {
-    "valley": 652,
+    "valley": 653,
     "the_palelands": 6,
     "the_center": 151,
     "the_echo_vale": 14
@@ -21449,10 +21463,10 @@
     {
       "id": "sess-33",
       "startedAt": "2026-09-11T22:48:54.873Z",
-      "lastAt": "2026-09-11T22:50:46.199Z",
+      "lastAt": "2026-09-11T22:58:41.056Z",
       "startDay": 73,
       "endDay": 73,
-      "beats": 2
+      "beats": 3
     }
   ],
   "company": [
@@ -21785,7 +21799,7 @@
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
   "peopleDisposition": {
-    "ashwarden": 8.99,
+    "ashwarden": 7.99,
     "cogitant": 1,
     "figurist": 1,
     "rootkin": -1,
@@ -21880,6 +21894,13 @@
       "people": "ashwarden",
       "delta": -1,
       "text": "broke the Archive's warden-mark without consultation, triggering the March's witness-seal"
+    },
+    {
+      "at": 73,
+      "kind": "act",
+      "people": "ashwarden",
+      "delta": -1,
+      "text": "broke the Archive warden-mark without consultation, triggering the March's witness-seal"
     }
   ],
   "_pendingIntent": null,
@@ -21947,25 +21968,25 @@
     "gen-whistling-woman-post": "https://image.pollinations.ai/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=32614&nologo=true&_cb=1_1"
   },
   "_opEmitted": {
-    "sceneSummary": 331,
-    "choices": 330,
-    "characterDeltas": 162,
-    "scene": 331,
-    "npcUpdates": 297,
-    "factUpdates": 28,
+    "sceneSummary": 332,
+    "choices": 331,
+    "characterDeltas": 163,
+    "scene": 332,
+    "npcUpdates": 298,
+    "factUpdates": 29,
     "placeUpdates": 73,
-    "codexUpdates": 198,
-    "timeOps": 304,
+    "codexUpdates": 199,
+    "timeOps": 305,
     "imagePrompt": 25,
-    "sceneEnded": 109,
+    "sceneEnded": 110,
     "itemUpdates": 7,
-    "questUpdates": 45,
+    "questUpdates": 46,
     "offer": 41,
     "moveTo": 20,
     "delegateOps": 4,
-    "deeds": 13,
-    "standingOps": 4,
-    "ledgerEvents": 9,
+    "deeds": 14,
+    "standingOps": 5,
+    "ledgerEvents": 10,
     "discovery": 5,
     "stageOps": 15,
     "generateRequest": 13,
@@ -21974,12 +21995,12 @@
     "_applyFailedOp": 7,
     "newEncounter": 3,
     "encounterOps": 1,
-    "gambitApt": 39,
+    "gambitApt": 40,
     "markDefiningMoment": 1,
     "_engineClosedScene": 3,
     "gambitOps": 1
   },
-  "_opTurns": 331,
+  "_opTurns": 332,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -22080,11 +22101,6 @@
   "companionMemory": {
     "marrow": [
       {
-        "text": "Commissioned Edvar Crane as an agent of Stillwater's Trouble — ending his twenty-year solitary watch and bringing his filtration knowledge into the fellowship's network.",
-        "weight": 2,
-        "day": 13
-      },
-      {
         "text": "Bound a complete four-stage community filtration cascade — including a detail the shadow found before any of them thought to draw it — into the Waymarker's memory",
         "weight": 2,
         "day": 13
@@ -22136,6 +22152,11 @@
       },
       {
         "text": "Broke a warden-mark to retrieve proof the pole-pull is real—risking the March's regard to save the valley's balance",
+        "weight": 2,
+        "day": 16
+      },
+      {
+        "text": "Retrieved proof of the water crisis's true cause—buried readings from the sealed Archive cabinet—at the cost of breaking Grael's seal-mark and triggering the March's warden-alert.",
         "weight": 2,
         "day": 16
       }
@@ -22227,20 +22248,19 @@
   "_pendingLedger": [
     {
       "schemaVersion": 1,
-      "at": "2026-09-11T22:50:46.230Z",
+      "at": "2026-09-11T22:58:41.084Z",
       "worldDay": 73,
       "who": "char-mrhs8286",
       "playerKey": "player-s9z9u1",
       "where": "gen-whistling-woman-post",
-      "what": "Silas Weir breached the Archive's warden-mark and retrieved sealed water readings proving pole-pull causation",
+      "what": "The buried water readings are now in Silas Weir's hands—proof that pole-pull is the true cause of the crisis. The convene vote is three days away. Calvar can present; the method of retrieval will be c",
       "tags": [
-        "breach-of-archive",
-        "warden-mark-triggered",
-        "pole-pull-proof"
+        "proof",
+        "crisis",
+        "politics"
       ],
       "spectrumDeltas": {
-        "falsehood_truth": 0.15,
-        "chaos_order": -0.1
+        "truth_falsehood": 0.15
       },
       "visibility": "witnessed",
       "impactsLocal": true
@@ -23169,9 +23189,11 @@
     "heal": 1,
     "analyze": 1,
     "finesse": 1,
-    "gamble": 1,
+    "gamble": 2,
     "risky": 1,
-    "retreat": 1
+    "retreat": 1,
+    "rally": 1,
+    "command": 1
   },
   "aptitudeEarnCount": {
     "silver_tongue": 1
@@ -23256,6 +23278,14 @@
       "day": 16,
       "worldDay": 70,
       "actionCount": 954
+    },
+    {
+      "companionId": "marrow",
+      "kind": "deed",
+      "delta": 0.5,
+      "day": 16,
+      "worldDay": 73,
+      "actionCount": 957
     },
     {
       "companionId": "marrow",

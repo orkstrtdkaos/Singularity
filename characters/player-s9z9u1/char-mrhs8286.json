@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 31,
-  "xp": 3068,
+  "xp": 3073,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -188,7 +188,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": 0.03289932681673842,
+    "spectrumId": 0.031254360475901494,
     "violence_peace": 0.09078381765624999,
     "chaos_order": 0.2642031390370944,
     "mechanical_spiritual": 0.2629700196352162,
@@ -206,7 +206,7 @@
   "maxHealth": 191,
   "health": 191,
   "maxEnergy": 282,
-  "energy": 187,
+  "energy": 182,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2287,55 +2287,219 @@
         "player": "Shadow-sheet Mara immediately—urgent message. The readings are out. Tell her to move fast and name what Calvar needs to present this to the committee.",
         "summary": "Silas retrieves Grael's buried water readings from the Archive at cost of triggering the warden-mark and alerting Veth. The readings are urgent proof—and the method of retrieval is a liability. Mara relays that Calvar can present them, but chain-of-custody will matter in the convene vote.",
         "narration": "You take the shadow-tablet from your pocket—Mara's face emerges in your mind, the supply-store counter, her hands already moving to whatever needs doing next. You write fast: READINGS RETRIEVED ARCHIVE STOP GRAEL SEALED THEM STOP POLE-PULL PROVEN STOP CONVENE IN THREE DAYS STOP WHAT DOES CALVAR NEED TO PRESENT STOP\n\nThe slate goes dark as the message travels. You count breaths—three, four, five—and the surface shivers. Her answer comes back: CALVAR NEEDS THE READINGS THEMSELVES AND CHAIN-OF-CUSTODY STOP WARDEN COLL WILL DEMAND PROVENANCE STOP GRAEL'S SEAL BROKEN IS A PROBLEM BUT PROOF IS BIGGER STOP DARA SAYS CREWS CAN MOVE MATERIALS FASTER IF COMMITTEE VOTES POLE-PULL STOP SEND THEM SOON STOP\n\nShe's right and you know it. The readings are proof, but proof broken out of a sealed cabinet by a warden whose name is not yet public carries a weight that cuts both ways. Calvar can present the data—he has the standing to read it, to speak it plainly, to make the case that the numbers are real. But the chain of how you got them will be the question every skeptical ear latches onto. Three days is enough time if you move now, and not enough if you hesitate.\n\n*✦ The Ashwardens: -1 — broke the Archive warden-mark without consultation, triggering the March's witness-seal.*"
+      },
+      {
+        "player": "Ask Logana to go find Bryn Calowell, the radiant and bring him to the Whistling Woman Post.",
+        "summary": "Silas sends Logana to retrieve Bryn Calowell from the Edge District—the Radiant craftsperson who can help decode the Archives' findings.",
+        "narration": "You step to the threshold and call Logana's name plainly—she lifts her head from the ground where she's been watching the moorland approach, and the skeletal frame catches the afternoon light. 'Bryn Calowell,' you say. 'Radiant folk in the Edge District. I need him here.' Her jaw articulates—a sound like wind through branches—and she nods once, decisive. She moves past you without ceremony, her gait a long lope across the open ground toward the road south, already reading the air for the scent of someone who has passed this way.\n\nYou watch her go—a made guardian with a single charge, and you have named it clear. The moorland swallows her shape within a few minutes of walking, the mist rolling thick enough to blur the horizon.\n\nPell emerges from the post behind you, one hand on the doorframe. 'She'll find him if he's within a day's walk and moving,' she says, reading your face. 'If he's stopped somewhere, she'll bring him regardless. That one doesn't do half-measures.' The Runner still sleeps on the cot inside. Huginn watches from the shelf. The retrieved readings lie on the table, waiting for the person who will carry them forward."
       }
     ],
     "lastTurn": {
-      "standingOps": [
+      "narration": "You step to the threshold and call Logana's name plainly—she lifts her head from the ground where she's been watching the moorland approach, and the skeletal frame catches the afternoon light. 'Bryn Calowell,' you say. 'Radiant folk in the Edge District. I need him here.' Her jaw articulates—a sound like wind through branches—and she nods once, decisive. She moves past you without ceremony, her gait a long lope across the open ground toward the road south, already reading the air for the scent of someone who has passed this way.\n\nYou watch her go—a made guardian with a single charge, and you have named it clear. The moorland swallows her shape within a few minutes of walking, the mist rolling thick enough to blur the horizon.\n\nPell emerges from the post behind you, one hand on the doorframe. 'She'll find him if he's within a day's walk and moving,' she says, reading your face. 'If he's stopped somewhere, she'll bring him regardless. That one doesn't do half-measures.' The Runner still sleeps on the cot inside. Huginn watches from the shelf. The retrieved readings lie on the table, waiting for the person who will carry them forward.",
+      "sceneSummary": "Silas sends Logana to retrieve Bryn Calowell from the Edge District—the Radiant craftsperson who can help decode the Archives' findings.",
+      "choices": [
         {
-          "op": "setRecentShift",
-          "traditionId": "ashwarden",
-          "reason": "broke the Archive warden-mark without consultation, triggering the March's witness-seal"
+          "label": "Wait at the post for Logana's return—tend the Runner, check the relay mechanism, prepare the readings for presentation.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "wait",
+            "guard",
+            "sustain"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Shadow-sheet Veth at the Threshold Post—ask plainly what she intends to do about the broken warden-mark and the alarm that went up.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "ask",
+            "confront",
+            "negotiate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Deathsense on the Runner while she sleeps—read what death-paths are still braiding through her frame, and whether the cautery burn set them moving wrong.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study",
+            "read"
+          ],
+          "abilityId": "deathsense",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Walk the moorland approach with Pell and read the ground for sign of how Logana moves—track her path, her pace, what she's hunting for.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": "hard",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "track",
+            "scout",
+            "travel"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
-      "narration": "",
-      "sceneSummary": null
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-light-that-will-not-dim",
+          "note": "Readings retrieved and urgent—Bryn Calowell, a Radiant who understands the Archive's technical language, is being brought to the post to help decode and contextualize them for presentation."
+        }
+      ],
+      "standingOps": [],
+      "delegateOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": {
+        "thing": "Logana departs on a single clear charge—a made guardian following her maker's word with the precision a warden would envy",
+        "from": "Silas named it plainly; Logana acts on clarity, not interpretation. This is what a threshold-creature does when its purpose is unmistakable."
+      },
+      "stageOps": [],
+      "scene": {
+        "setting": "The Whistling Woman post's threshold and approach—afternoon light, moorland mist rolling in from the south. The post stands solid at the character's back; the road and open ground stretch toward the road south where Logana departed moments ago.",
+        "npcsPresent": [
+          {
+            "name": "Pell Ran Marsh",
+            "state": "Standing at the doorframe, reading Silas's face, present and attending"
+          },
+          {
+            "name": "Huginn",
+            "state": "Roosted on the shelf inside, head turned toward the threshold, watching"
+          },
+          {
+            "name": "The Runner",
+            "state": "Asleep on the cot inside, mending steadily from cautery, unaware of Logana's departure"
+          },
+          {
+            "name": "Logana",
+            "state": "Moving south across the moorland on a single clear charge—hunting for Bryn Calowell"
+          }
+        ],
+        "objects": [
+          "Buried Water Readings—stacked on the table, sheaf of dated numbers",
+          "Shadow-tablet—dark on table, message-exchange concluded",
+          "Relay mechanism—silent on shelf",
+          "Memory—the spear propped against the wall"
+        ],
+        "threads": [
+          "Logana hunting Bryn Calowell in the southern approach",
+          "Veth now knows the warden-mark was triggered and the cabinet breached",
+          "The readings are out—three days before the convene votes",
+          "Calvar must present, but chain-of-custody and method will be scrutinized"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "logana",
+          "note": "Sent on a clear charge to retrieve Bryn Calowell from the Edge District and bring him to the Whistling Woman Post. She moves with a made guardian's precision."
+        }
+      ],
+      "intentsHeard": [],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "discovery": null,
+      "codexUpdates": [],
+      "holdingOps": [],
+      "debtOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": {},
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": null,
+      "gambitApt": false,
+      "gambitOps": null,
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Whistling Woman post's single warm room at midday—stone walls, the stove recently fed, sunlight through the small window. The encrypted slate sits dark on the table. The Runner sleeps on the cot, steady and mending. Huginn is roosted on the shelf. Pell stands near the table, watching Silas with complete attention. The retrieved readings are stacked on the table, sheaf of dated numbers that…",
+      "setting": "The Whistling Woman post's threshold and approach—afternoon light, moorland mist rolling in from the south. The post stands solid at the character's back; the road and open ground stretch toward the road south where Logana departed moments ago.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Standing, hands loose, reading Silas's face and the shadow-tablet's exchange—understanding what comes next and what it c"
+          "state": "Standing at the doorframe, reading Silas's face, present and attending"
         },
         {
           "name": "Huginn",
-          "state": "Roosted on shelf beside relay mechanism, head turned, watching with that particular stillness—present but not intervenin"
+          "state": "Roosted on the shelf inside, head turned toward the threshold, watching"
         },
         {
           "name": "The Runner",
-          "state": "Asleep on cot, breathing steady, mending from cautery—unaware of the message just sent"
+          "state": "Asleep on the cot inside, mending steadily from cautery, unaware of Logana's departure"
+        },
+        {
+          "name": "Logana",
+          "state": "Moving south across the moorland on a single clear charge—hunting for Bryn Calowell"
         }
       ],
       "objects": [
-        "Buried Water Readings (Archive) — sheaf of dated, numbered proof",
-        "Shadow-tablet — dark on table, message-exchange just concluded",
-        "Memory — the spear propped against the wall",
-        "Relay mechanism — silent on shelf",
-        "Breakfast plates — cooling on table"
+        "Buried Water Readings—stacked on the table, sheaf of dated numbers",
+        "Shadow-tablet—dark on table, message-exchange concluded",
+        "Relay mechanism—silent on shelf",
+        "Memory—the spear propped against the wall"
       ],
       "threads": [
-        "Veth is coming—the warden-mark alerted her and she will arrive to confront what was broken",
-        "The readings are out—but only three days before the convene votes on pole-pull",
-        "The cost of the gambit: standing with the March, secrecy abandoned, rules broken",
-        "Calvar must present the data; the method of retrieval will be the liability"
+        "Logana hunting Bryn Calowell in the southern approach",
+        "Veth now knows the warden-mark was triggered and the cabinet breached",
+        "The readings are out—three days before the convene votes",
+        "Calvar must present, but chain-of-custody and method will be scrutinized"
       ]
     },
-    "beats": 9
+    "beats": 10
   },
   "clock": {
     "schemaVersion": 1,
     "day": 16,
-    "hour": 16,
+    "hour": 17,
     "realAnchor": null
   },
   "companions": [
@@ -3381,14 +3545,14 @@
         "s1"
       ],
       "progress": [
-        "Codex: the Radiant Reach is intensifying past the Accord's tolerance — and someone chose to hide it.",
         "↳ Ossian's sealed message names the suppressed readings plainly: the Radiant array north of the Crossing shows a drift, and Sera's engineer buried them five years ago. The archive holds copies. Leth…",
         "Warden Coll confirms the Radiant readings are buried and pole-pull is the real issue. An amended petition will name the drift plainly to the Accord. The conspiracy now has institutional weight behind it.",
         "Ossian names the buried readings as retrievable proof. Three days to the convene. The committee will choose based on what evidence reaches it.",
         "Huginn names the Archive's location and the seal-question protecting the buried readings. Path is known: eastern service stair, less watched. Three days remain before the convene.",
         "Archive layout and watchers mapped via Veth. Grael's seal-question remains: what does he fear ending? Answer must be true or the seal hardens. Three days to convene.",
         "Readings retrieved from Archive at cost of triggering warden-mark. Veth will know. Convene in three days.",
-        "Readings retrieved from Archive—concrete proof that pole-pull is the real cause. Three days before convene votes on whether to accept the evidence. Calvar can present; the method of retrieval (cabinet broken, warden-mark triggered) is a liability."
+        "Readings retrieved from Archive—concrete proof that pole-pull is the real cause. Three days before convene votes on whether to accept the evidence. Calvar can present; the method of retrieval (cabinet broken, warden-mark triggered) is a liability.",
+        "Readings retrieved and urgent—Bryn Calowell, a Radiant who understands the Archive's technical language, is being brought to the post to help decode and contextualize them for presentation."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T12:58:53.302Z",
@@ -4920,7 +5084,6 @@
       },
       "relationship": 1,
       "history": [
-        "[d14] Order-Sense surge-read reveals the Zone uses her as a structural anchor for the relay node — not hostile, but the boundary between maker's warding and lattice-claim cannot be fully resolved in this substrate.",
         "[d14] Given a plain verbal perimeter charge by Silas — acknowledged with a deliberate tilt of the skull. Now stationary at the downed tree's base.",
         "[d14] Found unchanged at the relay node — guardian-purpose active, Zone-thread present, skull angled toward the party's approach. Watched through the night. Nothing crossed.",
         "[d14] The relay node's circuit went quiet when the reclamation site closed. The Zone-thread in her warding has shifted with it — the knot between guardian-purpose and lattice-claim is looser than it was at dawn.",
@@ -4929,7 +5092,8 @@
         "[d14] Silas read what she carries forward from the old watch through The Attended End — the habit of the perimeter, nothing more, nothing wrong. She is ready to move; she is only deciding to.",
         "[d14] Stepped through the made gate first, clean and without hesitation — took the transit the way she takes everything, as a fact of the work.",
         "[d15] Standing at the downed tree's clearing as Silas and Pell return—her warding-purpose held steady through the evening shift",
-        "[d15] Stands watch at the downed tree's clearing as the party passes through the made gate and heads north. Her guardian-purpose holds steady."
+        "[d15] Stands watch at the downed tree's clearing as the party passes through the made gate and heads north. Her guardian-purpose holds steady.",
+        "[d16] Sent on a clear charge to retrieve Bryn Calowell from the Edge District and bring him to the Whistling Woman Post. She moves with a made guardian's precision."
       ],
       "knownFacts": [
         "The boundary between Silas's guardian-purpose and the Zone's hold cannot be distinguished in the thin substrate without a longer, calmer reading.",
@@ -4950,10 +5114,10 @@
       "pronouns": "she/her",
       "statusNote": "active at post, watching the gate-crossing",
       "lastSeen": {
-        "locationId": "gen-left-branch-gate-clearing",
-        "day": 15
+        "locationId": "gen-whistling-woman-post",
+        "day": 16
       },
-      "met": 2
+      "met": 3
     },
     "archive_guardian": {
       "id": "archive_guardian",
@@ -6363,12 +6527,8 @@
     "lastTickWorldDay": 73,
     "lastCanonWorldDay": 73,
     "lastGenCount": 1774,
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "The music-box mechanism—a carrier for Deni's whistle-song in physical form, a tool for the relay network",
-        "from": "Deni Cors's methodical care in building the post; the infrastructure of the waystation network she has begun; the recognition that relay…"
-      },
       {
         "thing": "The relay mechanism—Deni's working vocabulary of melodies built into the network",
         "from": "Deni Cors's design and Pell's presence beside you, reading craft the way you do"
@@ -6384,6 +6544,10 @@
       {
         "thing": "Huginn speaks plainly about the Archive's architecture and watchers—a network the Ashwardens have been tending, aware and unhurried",
         "from": "Huginn's nature as an attendant of endings, which means it walks the quiet roads and knows who watches what; also from the moment Silas…"
+      },
+      {
+        "thing": "Logana departs on a single clear charge—a made guardian following her maker's word with the precision a warden would envy",
+        "from": "Silas named it plainly; Logana acts on clarity, not interpretation. This is what a threshold-creature does when its purpose is unmistakable."
       }
     ],
     "wantProgress": {
@@ -15957,22 +16121,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 20.835177050397498,
-    "cerebral": 18.951267079318608,
-    "social": 10.179739002019183,
-    "generous": 4.794236756139142,
-    "cautious": 7.278848594446693,
-    "physical": 0.3657967140843998,
-    "risky": 1.062737503232312,
-    "ruthless": 0.19096783227606937,
-    "carousing": 2.0060489797081242,
-    "amorous": 3.3613607076985135,
-    "patient": 0.6420928831559978,
-    "stealth": 0.000006674154163106891,
-    "devotion": 0.27272797475889665,
-    "craft": 3.014587404446414,
-    "leadership": 2.887787883906394,
-    "deception": 0.031961542817408845
+    "strategic": 20.31429762413756,
+    "cerebral": 18.477485402335642,
+    "social": 10.925245526968704,
+    "generous": 4.674380837235663,
+    "cautious": 7.096877379585525,
+    "physical": 0.35665179623228976,
+    "risky": 1.0361690656515044,
+    "ruthless": 0.18619363646916762,
+    "carousing": 1.955897755215421,
+    "amorous": 3.2773266900060505,
+    "patient": 0.6260405610770978,
+    "stealth": 0.000006507300309029218,
+    "devotion": 0.2659097753899242,
+    "craft": 2.9392227193352536,
+    "leadership": 2.815593186808734,
+    "deception": 0.031162504246973623
   },
   "aptitudes": [
     "strategist",
@@ -15981,7 +16145,7 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 958,
+  "actionCount": 959,
   "grantsVersion": 1,
   "reconcileVersion": 49,
   "gallery": [
@@ -16783,8 +16947,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1789167783454,
-  "rev": 1925,
+  "updatedAt": 1789168119450,
+  "rev": 1929,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -19490,14 +19654,22 @@
         "dangerLevel": 1,
         "_gen": {
           "type": "location",
-          "tier": "fresh",
-          "engagementScore": 2,
+          "tier": "nominated",
+          "engagementScore": 10,
           "birthWeight": 1,
           "rating": null,
           "attentionHistory": [
             {
               "kind": "revisit",
               "day": 14
+            },
+            {
+              "kind": "keep",
+              "day": 16
+            },
+            {
+              "kind": "keep",
+              "day": 16
             }
           ],
           "createdDay": 14,
@@ -19506,7 +19678,8 @@
             "day": null,
             "hint": "transit"
           },
-          "lastAttentionDay": 14
+          "lastAttentionDay": 16,
+          "needsDepth": "nominated"
         },
         "map": {
           "x": 405.75227902134543,
@@ -20951,7 +21124,7 @@
   "syncedAt": 1788658062664,
   "teachers": {},
   "regionsKnown": {
-    "valley": 653,
+    "valley": 654,
     "the_palelands": 6,
     "the_center": 151,
     "the_echo_vale": 14
@@ -20989,9 +21162,9 @@
   ],
   "_pinsInitialized": true,
   "chronicleCache": {
-    "hash": "d15|bpell:romantic:partner,veth-ondra:sworn:-|c|q|L26|You took the short way, and the short way was wr",
-    "text": "You have become the man who finished what his father couldn't — who stood at an unmapped door in the hillside and folded it open with his own hands, then sealed it with the Weirmark before the March could swallow it back into silence. That act, the first warded threshold in eleven years, made you real to the Ashwardens in a way no lineage claim could have; now Raven's Home is a working post again, and Edvar Crane, who kept his solitary watch for twenty years, keeps it no longer alone. You organized the valley's water crisis the way a man organizes grief — methodically, because falling apart costs others — putting Dara and Aldric and Calvar and Mara in one room at Pell's forge and naming who carried each thread until the problem had a shape people could actually hold. The grove circle accepted the ward you seated with Veth and Siol and Pell and Huginn, the Weirmark at the join, the Ent's own roots as the frame — something older than doctrine receiving something new without flinching. And Pell, who has seen all of it, who was at the forge and in the grove and at the gate: you come back to her the way the fold comes back to its anchor, not because she holds you in place but because she is where you most fully know what you've done and who you are doing it for.",
-    "at": "2026-07-26T00:37:37.015Z"
+    "hash": "d24|bpell:romantic:partner,veth-ondra:sworn:-|c|q|L31|You took the short way, and the short way was wr",
+    "text": "You have become the man who finished what the lineage was for — not by inheritance but by work: you closed your father's unfinished fold and built the first new waygate since the Transition with your own hands and understanding, a threshold made by a person rather than a power. Before that you gave the final instruction to a reclamation site that had run unattended for fifteen years, and the watershed began, quietly, to remember itself. You broke Grael's seal-mark twice — once for buried readings that proved the water crisis's true cause, once for proof the pole-pull is real — and both times you accepted the March's warden-alert as the cost of being right in a way that could not wait. At the ridge you raised a death-warden temple and then a working mine from living iron and then the skeleton of the Threshold Post itself, each making honestly marked at its limits before you handed it to Fendt's crew to finish. Pell Ran Marsh is beside you in the way that rearranges what belonging means; Calvar and Veth Ondra and Hesta Vorn have sworn themselves into the orbit of what you are building. The air here tastes of metal, the path back is gone, and you are not looking for it.",
+    "at": "2026-09-11T23:04:51.253Z"
   },
   "_pendingArrival": null,
   "sessions": [
@@ -21262,10 +21435,10 @@
     {
       "id": "sess-33",
       "startedAt": "2026-09-11T22:48:54.873Z",
-      "lastAt": "2026-09-11T23:03:03.436Z",
+      "lastAt": "2026-09-11T23:08:39.444Z",
       "startDay": 73,
       "endDay": 73,
-      "beats": 4
+      "beats": 5
     }
   ],
   "company": [
@@ -21767,20 +21940,20 @@
     "gen-whistling-woman-post": "https://image.pollinations.ai/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=32614&nologo=true&_cb=1_1"
   },
   "_opEmitted": {
-    "sceneSummary": 332,
-    "choices": 331,
-    "characterDeltas": 163,
-    "scene": 332,
-    "npcUpdates": 298,
+    "sceneSummary": 333,
+    "choices": 332,
+    "characterDeltas": 164,
+    "scene": 333,
+    "npcUpdates": 299,
     "factUpdates": 29,
     "placeUpdates": 73,
     "codexUpdates": 199,
     "timeOps": 305,
     "imagePrompt": 25,
-    "sceneEnded": 110,
+    "sceneEnded": 111,
     "itemUpdates": 7,
-    "questUpdates": 46,
-    "offer": 41,
+    "questUpdates": 47,
+    "offer": 42,
     "moveTo": 20,
     "delegateOps": 4,
     "deeds": 14,
@@ -21794,12 +21967,12 @@
     "_applyFailedOp": 7,
     "newEncounter": 3,
     "encounterOps": 1,
-    "gambitApt": 40,
+    "gambitApt": 41,
     "markDefiningMoment": 1,
     "_engineClosedScene": 3,
     "gambitOps": 1
   },
-  "_opTurns": 332,
+  "_opTurns": 333,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -21807,7 +21980,7 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 45,
+      "applied": 46,
       "rejected": 1,
       "lastWhy": "rejected-shape"
     },
@@ -22948,7 +23121,7 @@
     "study": 12,
     "scout": 7,
     "lead": 2,
-    "ask": 1,
+    "ask": 2,
     "plan": 9,
     "negotiate": 2,
     "prepare": 7,
@@ -22957,7 +23130,7 @@
     "help": 5,
     "discipline": 1,
     "persuade": 1,
-    "rapport": 6,
+    "rapport": 7,
     "meditate": 1,
     "sustain": 1,
     "discuss": 1,
@@ -23619,5 +23792,7 @@
       "why": "the record reads: “…of thin ground behind it. Reactivated and claimed by Silas Weir and company; named for its rooms: Pell's forge, Veth's laboratory, Cassiel'…”",
       "from": "its place"
     }
-  ]
+  ],
+  "_chronicleBusy": false,
+  "_chronicleError": null
 }

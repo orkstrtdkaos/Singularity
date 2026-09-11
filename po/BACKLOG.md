@@ -1882,3 +1882,23 @@ which is a scene rather than a stat.
 
 ⬜ **Depends on:** `PROPOSAL_autonomous_nanite` (the fourth nanite state) landing first — ⚠️ **a kind that
 arises from autonomous ordering needs autonomous ordering to exist.**
+
+---
+
+## ⬜ BACKLOGGED 2026-09-10 — Erik: *"backlog the rest"*
+
+⛑ **Not declined. Parked, in his words, with what is known about each.**
+
+| | ⚑ state |
+|---|---|
+| ⛔ **THE COMMANDER CRAFT LINE** | `the_gathering` · `raise_banner` · `lead_the_line` · `command_field`. ⚠️ **30 crafts carry `command` and none commands a BAND.** ⛑ **Orrun and Iseult both cap at `small_company`, and Brayden's three quests end at that ceiling** — the first content request with a player behind it |
+| ⚠️ **LOCAL ARCS — how many, and where** | ⛑ Aevi proposed six, deliberately away from the valley. ⛔ **CCode has built `regions` scoping, so a generated local arc is born scoped** — ⚠️ **but local arcs need STAGES before they can press on anything, and that is Aevi's to spec** |
+| **THE SIX SOVEREIGN SEATS** | ⛑ Hollow King authored; Lucifer and the Unbodied outlined. ⚠️ **The lore wants these slowly and that is right** |
+| ⚑ **THE AFTERLING AS A PEOPLE** | ⛔ *"the closest to living a dead person can be — basically the same person, but undead."* ⚠️ **No ring position: they rise where they were buried** |
+| ⚑ **THE UNORDERED AS A PEOPLE** | ⛔ **autonomous nanite that integrated into an intelligence.** ⚠️ Three exist under three different `people` values — `aevi_the_watcher`, `archive_guardian`, `the_lightless_seraph` |
+| ⛔ **A COMMAND AS A WEAPON** | ⚑ **the Unordered run on ORDER, so being ordered should bite** — `foreclose`, `truename_order`, `named_exclusion`. ⚠️ Depends on the fourth nanite state landing |
+| ⬜ **`autonomous` — the fourth nanite state** | ⛑ **two ways to be ordered, and the second cannot be told to stop.** ⚠️ Archive Hollow is the case: *"sealed before the Transition and never opened"*, currently rendering as feral |
+| ⚠️ **ITEMS: WELLS, SINKS, CONDITIONERS, TRANSFORMERS** | ⛑ **Erik ruled they MAY beat the ground — *"that makes those items TARGETS."*** ⛔ **The big ones belong in `holdFeatures`: a power generator is a hold feature that emits a field and can be taken out** |
+| ⚠️ **THE MADE GATE, AND EVERY `gen-` ID WITHOUT A POSITION** | ⛔ **36 directed connection refs point at unplaced locations — 18 undirected road edges that cannot be drawn.** ⚑ **This is why CCode counted 182 adjacency edges and Aevi counted 164** |
+| ⬜ **THE OPPONENT'S THIRD MOOD** | ⛔ **`opponentPolicy` is press/protect with no support behaviour — Aevi-the-Watcher strikes 12 of 12 rounds when behind.** ⚑ CCode calls it the bigger prize |
+| ⚠️ **R25a SLOTS 5–6 SHIPPED EARLY** | ⛑ against their own *"do not ship until"*. ⛔ **A sequencing error, not a live defect — the party is worth joining now** |

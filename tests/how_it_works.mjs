@@ -1674,10 +1674,11 @@ console.log("\n── §164 · a well adds toward fullness ──");
   const { loadContentHeadless: lch164 } = await import("./headless_content.mjs");
   const C164 = await lch164();
   const raw164 = rj("content/packs/core/rules/the_substrate.json");
-  const off164 = SUB164.resolveSubstrateField(C164.locations, raw164), on164 = SUB164.resolveSubstrateField(C164.locations, { ...raw164, poolsTowardFull: true });
+  const off164 = SUB164.resolveSubstrateField(C164.locations, { ...raw164, poolsTowardFull: false }), on164 = SUB164.resolveSubstrateField(C164.locations, { ...raw164, poolsTowardFull: true });
   const ge164 = C164.locations?.the_great_engine, ah164 = C164.locations?.archive_hollow;
   const b164 = (l) => raw164.substrateDensity[l.regionId || l.region];
-  check("§164: ⛑ OFF IS TODAY — the content carries `poolsTowardFull: false`, and the Great Engine resolves as it did, pinned full", raw164.poolsTowardFull === false && off164.get("the_great_engine") === 1);
+  // ✅ ERIK 2026-09-11: "turn the empowering pools on."
+  check("§164: ✅ ON, BY ERIK'S WORD — the content carries `poolsTowardFull: true`; off, the Great Engine resolves as it did, pinned full", raw164.poolsTowardFull === true && off164.get("the_great_engine") === 1);
   check("§164: ⛔ ON, a well on rich ground adds toward fullness, not past it — the Great Engine is its ground plus its delta × what was left",
     !!ge164 && Math.abs(on164.get("the_great_engine") - (b164(ge164) + Number(ge164.substrateSource.delta) * (1 - b164(ge164)))) < 1e-9 && on164.get("the_great_engine") < 1, String(on164.get("the_great_engine")));
   check("§164: …and a well in empty country still adds most of its delta — Archive Hollow 0.40 → 0.52, not 0.60", !!ah164 && Math.abs(on164.get("archive_hollow") - 0.52) < 0.005, String(on164.get("archive_hollow")));
@@ -1690,8 +1691,42 @@ console.log("\n── §164 · a well adds toward fullness ──");
   SUB164.applySubstrateField(fresh164, { ...C164.substrateModel, poolsTowardFull: true });
   check("§164: ⛔ …and the ground a craft reads moves with it — stamped with the dial on, Archive Hollow reads 0.52 through `locationDensity`",
     Math.abs(SUB164.locationDensity(fresh164.archive_hollow, C164.substrateModel) - 0.52) < 0.005, String(fresh164.archive_hollow?.substrateDensity));
-  check("§164: …and the loader hands the stamp the content's model, the dial in it — `substrateModel.poolsTowardFull` is the file's false", C164.substrateModel?.poolsTowardFull === false, String(C164.substrateModel?.poolsTowardFull));
+  check("§164: …and the loader hands the stamp the content's model, the dial in it — `substrateModel.poolsTowardFull` is the file's true", C164.substrateModel?.poolsTowardFull === true, String(C164.substrateModel?.poolsTowardFull));
 }
+/* ══════════ §165 — A PLAYER NEVER READS THE AUTHOR'S GLYPHS (Aevi's BUG_authoring_markup_in_player_text, the display half) ══════════ */
+// ⛔ Aevi 2026-09-11: her PO emphasis convention (⛔ ⚠️ ⚑) reached the player's craft card on 438 crafts, and the card cut the
+// prose mid-word. The display half is mine: strip at every craft-prose surface, clamp at word boundaries, one limits block.
+// The content half — rewriting the capitals that carry a line's weight — is hers, and is pinned below so it can only fall.
+console.log("\n── §165 · craft prose reaches the player clean ──");
+{
+  const NM165 = await import("../engine/namematch.js");
+  const ED165 = await import("../engine/entityDetail.js");
+  const { loadContentHeadless: lch165 } = await import("./headless_content.mjs");
+  const C165 = await lch165();
+  const G165 = /[⛔⚠⚑⛑⬜✅➡❌]/u;
+  check("§165: ⛔ playerText strips the authoring glyphs and keeps every word — the capitals are Aevi's to rewrite, not a regex's",
+    NM165.playerText("⛔ IT DETERS. ⚠️ It does not stop anyone") === "IT DETERS. It does not stop anyone", NM165.playerText("⛔ IT DETERS. ⚠️ It does not stop anyone"));
+  const worst165 = Object.values(C165.abilities).find(a => G165.test(String(a.notFor || "")) && (a.tree || []).length > 1 && (a.tree || []).some(t => G165.test(String(t.grants || "") + String(t.cannot || ""))));
+  const card165 = worst165 ? ED165.skillDetail(worst165, { owned: true, level: 2, maxRank: 3, ladder: worst165.tree.map(t => ({ rank: t.rank, name: t.name, grants: t.grants, cannot: t.cannot })) }) : "";
+  check("§165: ⛔ …the craft card carries none of them, for a craft whose notFor and ladder both do", !!worst165 && !G165.test(card165), worst165?.id);
+  check("§165: …one limits block — Cannot, then the held rank's limit ONCE — and the ladder shows what each rank grants",
+    !!worst165 && /Cannot: /.test(card165) && (card165.match(/Still can't at rank/g) || []).length <= 1 && !/still can't:/.test(card165), card165.slice(0, 200));
+  const app165 = rd("app.js").split("\n");
+  const raw165 = app165.filter(l => /esc\(/.test(l) && /\.(grants|cannot|notFor)\b/.test(l) && !/playerText\(/.test(l));
+  check("§165: ⛔ every app surface that shows a craft's grants, limits or notFor passes it through playerText",
+    raw165.length === 0 && app165.filter(l => /playerText\(/.test(l)).length >= 8, raw165.map(l => l.trim().slice(0, 90)).join(" | "));
+  // ⬜ THE CONTENT HALF IS AEVI'S: glyph-bearing lines in the player-facing fields, pinned at 2026-09-11's count. ONLY DOWN —
+  // lower a pin in the same commit that lowers the count.
+  const cnt165 = { description: 0, notFor: 0, plainly: 0, grants: 0, cannot: 0 };
+  for (const a of Object.values(C165.abilities)) {
+    for (const f of ["description", "notFor", "plainly"]) if (G165.test(String(a[f] || ""))) cnt165[f]++;
+    for (const t of a.tree || []) { if (G165.test(String(t.grants || ""))) cnt165.grants++; if (G165.test(String(t.cannot || ""))) cnt165.cannot++; }
+  }
+  const pin165 = { description: 93, notFor: 150, plainly: 55, grants: 358, cannot: 423 };
+  check("§165: ⬜ …and the content half is Aevi's rewrite — glyph-bearing lines may only FALL from today's count",
+    Object.keys(pin165).every(k => cnt165[k] <= pin165[k]), JSON.stringify(cnt165));
+}
+
 /* ══════════ §14 — THE FOLD CANNOT BEAT AN IMMUNITY THE BLOW COULD NOT ══════════ */
 // ⛔ FOUND BY RUNNING AEVI'S TWELVE CRAFTS THROUGH A MELEE-SCALE FIGHT (CCODE-313), which is the whole
 // reason Erik asked for a big-battle test. A physical-immune foe took ZERO from the player's typed blow and

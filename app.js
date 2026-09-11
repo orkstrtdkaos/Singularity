@@ -39,7 +39,7 @@ import { composeImagePrompt } from "./engine/imageprompt.js";   // CCODE-190: co
 import { ITEM_KINDS, itemKindsIn, itemKindLabel, wieldBonusFor, usableCombatItems, normalizeInventory, reclaimEstablishedItems, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates, deriveItem, findItem, skillBonus, startingSkills } from "./engine/inventory.js"; // CCODE-161: reclaim items the story conferred but the ledger missed
 import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive } from "./engine/earnedpower.js"; // SNG-251 §2c/§4: the earned-power economy (ceiling = f(level, craft rank); ~1 evolution/day)
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
-import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
+import { smartClamp, playerText } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { groundForDecl, groundTag, substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor, peoplePresentAt } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { sceneImage, itemImage, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
 import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, regionExtent, bendRoad, roadNetwork, clipToFrame } from "./engine/worldglobe.js";
@@ -128,7 +128,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.451";
+const APP_VERSION = "1.9.452";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4971,7 +4971,7 @@ function renderCreate() {
     const grantSet = new Set(grantIds);
     const choosable = creationChoosable(state, grantSet);
     state.abilities = state.abilities.filter(id => choosable.some(a => a.id === id)).slice(0, maxAbilities());
-    const abTitle = (a) => { const r1 = a.tree?.find(x => x.rank === 1); return esc((r1 ? "Rank 1 “" + r1.name + "” — CAN: " + r1.grants + " | CANNOT: " + r1.cannot : a.description) + (a.notFor ? " | NOT FOR: " + a.notFor : "")); };
+    const abTitle = (a) => { const r1 = a.tree?.find(x => x.rank === 1); return esc(playerText((r1 ? "Rank 1 “" + r1.name + "” — CAN: " + r1.grants + " | CANNOT: " + r1.cannot : a.description) + (a.notFor ? " | NOT FOR: " + a.notFor : ""))); };
     const abBtn = (a, extraCls = "", whyHtml = "") => `<button class="opt ${extraCls} ${state.abilities.includes(a.id) ? "selected" : ""}" data-ab="${a.id}" title="${abTitle(a)}">${esc(a.name)}${whyHtml}</button>`;
     // SNG-192 §4: the archetype LENS (optional front door) — pick a shape (Magus, Shadow, Seer…) and the
     // suggestions lean toward its coreFunctions. A lens, never a class: it biases, the player changes any of it.
@@ -10214,7 +10214,7 @@ function skillSelectionActions(ab) {
   const ladder = (ab.tree || []).map(t => {
     const on = owned && t.rank <= owned.level;
     const isNext = owned ? t.rank === owned.level + 1 : t.rank === 1;
-    return `<div class="skill-rung ${on ? "on" : ""} ${isNext ? "next" : ""}"><span class="skill-rung-dot">${on ? "●" : "○"}</span> <strong>r${t.rank} ${esc(t.name)}</strong>: ${esc(t.grants || "")}${t.cannot ? ` <span class="skill-rung-cannot">— cannot: ${esc(t.cannot)}</span>` : ""}</div>`;
+    return `<div class="skill-rung ${on ? "on" : ""} ${isNext ? "next" : ""}"><span class="skill-rung-dot">${on ? "●" : "○"}</span> <strong>r${t.rank} ${esc(t.name)}</strong>: ${esc(playerText(t.grants || ""))}${t.cannot ? ` <span class="skill-rung-cannot">— cannot: ${esc(playerText(t.cannot))}</span>` : ""}</div>`;
   }).join("");
   const ladderBlock = ladder ? `<div class="skill-ladder">${ladder}</div>` : "";
 
@@ -10447,7 +10447,7 @@ function renderSkillWheel(selectedId = null, status = "") {
     ${groundRow(selAb)}
     ${(selAb?.functions || []).length ? `<div style="margin:4px 0">${functionChips(selAb)}</div>` : ""}
     <p class="map-details-desc">${esc(selAb?.description || "")}</p>
-    ${selAb?.notFor ? `<div class="hint"><em>cannot: ${esc(selAb.notFor)}</em></div>` : ""}
+    ${selAb?.notFor ? `<div class="hint"><em>cannot: ${esc(playerText(selAb.notFor))}</em></div>` : ""}
     ${selAb?.minted?.kind === "braid" && sel.owned ? `<div class="hint" style="margin-top:4px"><button class="link-btn" id="braid-card-rename" data-braid="${esc(selAb.id)}">✎ Rename this braid</button></div>` : ""}
     ${sealedSel
       ? `<div class="precursor-seal-note">Precursor crafts aren't taught or bought. <strong>A door opens only when the fiction earns it</strong> — walking the Old Roads, a precursor-touched teacher, a discovery in play. There's no button; keep playing toward it, and one day it may open.</div>`
@@ -10818,7 +10818,7 @@ function renderLevelUp(status = "") {
     const band = dv.band === "far" ? " · far" : dv.band === "adjacent" ? " · kin" : dv.band === "accord" ? " · open" : "";
     return `<div class="cs-ability ${blocked ? "locked" : ""}">
       <div><span class="tier-badge">${tierOf(abilityTier(ab))}</span> <strong>${esc(ab.name)}</strong> <span class="hint">L${ab.levelReq || 1}${band}${cost > 1 ? ` · ${cost} pts` : ""}${ripe ? " · practiced (free)" : ""}</span></div>
-      <div class="hint">${esc((r1 ? r1.grants : ab.description) || "").slice(0, 130)}</div>
+      <div class="hint">${esc(smartClamp(playerText((r1 ? r1.grants : ab.description) || ""), 130))}</div>
       ${blocked
         ? `<span class="hint">🔒 ${!gate.ok ? esc(gate.why) : capBlock ? "at capacity — this waits until your next level widens it" : "need " + cost + " point" + (cost > 1 ? "s" : "")}</span>`
         : `<button class="btn" data-lvllearn="${esc(ab.id)}">Learn${ripe ? " (free)" : ` (${cost} pt${cost > 1 ? "s" : ""})`}</button>`}
@@ -10876,7 +10876,7 @@ function renderLevelUp(status = "") {
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Your crafts ${infoDot("ability.ranks")} <span class="hint" style="text-transform:none">— depth is earned through use, not points</span></h3>
       ${rankRows.map(r => { const p = rankProgress(character, r.a.abilityId); return `<div class="cs-ability">
         <div><strong class="entity-hover" data-entity="skill:${esc(r.a.abilityId)}" title="Tap to see how this craft grows rank by rank">${esc(r.ab.name)}</strong> ${functionChips(r.ab)} <span class="cs-ranks">${[1, 2, 3].map(n => `<span class="${n <= r.a.level ? "cs-rank-on" : "cs-rank-off"}">${n <= r.a.level ? "●" : "○"}</span>`).join("")}</span> <span class="hint">${r.now ? esc(r.now.name) : ""}</span></div>
-        ${r.next ? `<div class="hint">→ ${esc(r.next.name)}: ${esc(r.next.grants || "")}</div>` : ""}
+        ${r.next ? `<div class="hint">→ ${esc(r.next.name)}: ${esc(playerText(r.next.grants || ""))}</div>` : ""}
         <div class="hint ${p.ripe ? "practiced" : ""}">${esc(p.text)}</div>
       </div>`; }).join("") || "<div class='insight'>no crafts yet — learn one below</div>"}
     </div>
@@ -11563,7 +11563,7 @@ function renderCharacterScreen() {
         const p = rankProgress(character, a.abilityId);
         return `<div class="cs-ability"><span class="tier-badge">${tierOf(abilityTier(ab))}</span> <strong>${esc(ab.name)}</strong> <span class="hint">(${esc(sheetCraftLabel(ab))})${domainVerdict(ab).castable === false ? ` · <strong class="not-castable">${esc(domainVerdict(ab).reason || "you cannot cast this")}</strong>` : ""} · ${cost} energy${cost < ab.energyCost ? ` (was ${ab.energyCost})` : ""}</span>
           <span class="cs-ranks">${[1, 2, 3].map(r => `<span class="${r <= a.level ? "cs-rank-on" : "cs-rank-off"}" title="${esc(ab.tree?.[r - 1]?.name || "")}">${r <= a.level ? "●" : "○"}</span>`).join("")}</span>
-          ${ab.tree?.[a.level - 1] ? `<div class="hint">${esc(ab.tree[a.level - 1].name)}: ${esc(ab.tree[a.level - 1].grants)}</div>` : ""}
+          ${ab.tree?.[a.level - 1] ? `<div class="hint">${esc(ab.tree[a.level - 1].name)}: ${esc(playerText(ab.tree[a.level - 1].grants))}</div>` : ""}
           <div class="hint ${p.ripe ? "practiced" : ""}">${esc(p.text)}</div></div>`; }).join("")}
       ${(character.discoveries || []).map(d => `<div class="discovery" title="${esc(d.description)}">✦ ${esc(d.name)} (discovered technique)</div>`).join("")}</div>
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Aspirations <span class="hint" style="text-transform:none">(declare what you're working toward — practice makes it free)</span></h3>
@@ -11586,7 +11586,7 @@ function renderCharacterScreen() {
       if (!combos.length && !branches.length) return "";
       return `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Ripe to claim <span class="hint" style="text-transform:none">(practice has ripened these — claim now or let the GM offer them in play)</span></h3>
         ${combos.map(r => `<div class="cs-ability"><strong>${esc(r.name)}</strong> <span class="hint">(combo: ${r.components.join(" + ")})</span> <button class="grow-btn practiced" data-claimcombo="${esc(r.id)}">claim</button><div class="hint">${esc(r.description.slice(0, 120))}</div></div>`).join("")}
-        ${branches.map(t => `<div class="cs-ability"><strong>${esc(t.name)}</strong> <span class="hint">(branch: grows ${t.growsAbility})</span> <button class="grow-btn practiced" data-claimbranch="${esc(t.id)}">claim</button><div class="hint">${esc(t.grants.slice(0, 120))}</div></div>`).join("")}
+        ${branches.map(t => `<div class="cs-ability"><strong>${esc(t.name)}</strong> <span class="hint">(branch: grows ${t.growsAbility})</span> <button class="grow-btn practiced" data-claimbranch="${esc(t.id)}">claim</button><div class="hint">${esc(smartClamp(playerText(t.grants), 120))}</div></div>`).join("")}
       </div>`;
     })()}
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Play-style (${esc(character.name)}'s own)</h3>
@@ -14800,7 +14800,7 @@ function renderPlay(turn, opts = {}) {
           // SNG-202 §3 / SNG-201: a braid names its parents + who found it first (the list echo of the wheel).
           const braidLine = (ab.minted && (ab.minted.from || []).length === 2)
             ? `<div class="hint braid-parents">⧉ braid of ${esc((ab.minted.sourceNames || []).join(" × ") || "two crafts")}${ab.minted.namedBy === "player" ? " · your name for it" : ab.minted.adoptedFrom?.characterName ? ` · first found by ${esc(ab.minted.adoptedFrom.characterName)}` : ab.minted.firstFinder ? " · you found it first" : ""}</div>` : "";
-          return `<div class="ability${on ? " boosted" : ""}" title="${esc(rank ? "CAN: " + rank.grants + " | CANNOT: " + rank.cannot : ab?.description || "")}">
+          return `<div class="ability${on ? " boosted" : ""}" title="${esc(playerText(rank ? "CAN: " + rank.grants + " | CANNOT: " + rank.cannot : ab?.description || ""))}">
             <button class="craft-boost${on ? " on" : ""}" data-boost="${esc(a.abilityId)}" title="${on ? "Boosted — the GM leans toward suggesting this when it fits (tap to clear). A nudge, never a force." : "Boost — nudge the GM to surface this craft in your options when it fits. Never forces it, never changes a roll."}">✦</button>
             <span class="name entity-hover" data-entity="skill:${esc(a.abilityId)}">${esc(ab?.name || a.abilityId)}</span> <span class="tier-badge" title="Tier ${tierOf(abilityTier(ab))}">${tierOf(abilityTier(ab))}</span> rank ${a.level}${rank ? ` — <em>${esc(rank.name)}${rank.forked ? " ⑂" : ""}</em>` : ""}
             <span class="cost">(${effectiveEnergyCost(ab, character, CONTENT.rules)} energy${effectiveEnergyCost(ab, character, CONTENT.rules) < ab.energyCost ? `, was ${ab.energyCost}` : ""})</span>
@@ -14843,7 +14843,7 @@ function renderPlay(turn, opts = {}) {
             const tooExpensive = !ripe && character.skillPoints < learnCost;
             const blocked = !gate.ok || capBlock || tooExpensive;
             const bandTag = dv.band === "far" ? ", far" : dv.band === "adjacent" ? ", kin" : "";
-            return `<button class="opt ${ripe ? "practiced" : ""} ${blocked ? "locked" : ""}" ${blocked ? "disabled" : `data-learn="${esc(ab.id)}"`} title="${esc(ab.description + " — " + dv.reason + (gate.ok ? "" : " · " + gate.why))}" style="margin:2px 0; display:block; width:100%"><span class="tier-badge">${tierOf(abilityTier(ab))}</span> ${esc(ab.name)} <span class="cost">L${ab.levelReq || 1}${bandTag}${learnCost > 1 ? ` · ${learnCost} pts` : ""}${ripe ? " — FREE" : ""}${!gate.ok ? " 🔒 " + esc(gate.why) : capBlock ? " 🔒 at capacity" : tooExpensive ? " 🔒 need " + learnCost + " pts" : ""}</span></button>`;
+            return `<button class="opt ${ripe ? "practiced" : ""} ${blocked ? "locked" : ""}" ${blocked ? "disabled" : `data-learn="${esc(ab.id)}"`} title="${esc(playerText(ab.description) + " — " + dv.reason + (gate.ok ? "" : " · " + gate.why))}" style="margin:2px 0; display:block; width:100%"><span class="tier-badge">${tierOf(abilityTier(ab))}</span> ${esc(ab.name)} <span class="cost">L${ab.levelReq || 1}${bandTag}${learnCost > 1 ? ` · ${learnCost} pts` : ""}${ripe ? " — FREE" : ""}${!gate.ok ? " 🔒 " + esc(gate.why) : capBlock ? " 🔒 at capacity" : tooExpensive ? " 🔒 need " + learnCost + " pts" : ""}</span></button>`;
           }).join("")}</details>`]);
         // ⛔ CCODE-338 (D) — POLES GROUPED UNDER A DOMAIN HEADING, AND THE THING YOU PICK IS STILL THE POLE.
         // Aevi’s ruling, and the reasoning is Reading B’s: the learn screen is where ACCESS IS DECIDED, and
@@ -15745,7 +15745,7 @@ function renderForkModal(abilityId, onPick) {
   el.id = "fork-modal"; el.className = "fork-modal";
   el.innerHTML = `<div class="fork-card"><div class="fork-title">${esc(ab?.name || abilityId)} — Rank ${f.atRank}: choose a path</div>` +
     `<div class="fork-prompt">${esc(f.prompt)}</div><div class="fork-paths">${paths.map(p =>
-      `<button class="fork-path" data-forkpick="${esc(p.key)}"><div class="fp-name">${esc(p.name)}</div><div class="fp-grants">${esc(p.grants)}</div><div class="fp-cannot">△ ${esc(p.cannot)}</div></button>`).join("")}</div>` +
+      `<button class="fork-path" data-forkpick="${esc(p.key)}"><div class="fp-name">${esc(p.name)}</div><div class="fp-grants">${esc(playerText(p.grants))}</div><div class="fp-cannot">△ ${esc(playerText(p.cannot))}</div></button>`).join("")}</div>` +
     `<div class="fork-warn">Permanent — the path you don't take locks forever for this ability.</div>` +
     `<button class="fork-cancel" id="fork-cancel">Not yet</button></div>`;
   document.body.appendChild(el);

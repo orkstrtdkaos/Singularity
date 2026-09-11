@@ -5,6 +5,14 @@
 /** SNG-076: clamp MODEL output on a WORD BOUNDARY with a real ellipsis — never mid-word, never
  *  losing a word's tail like `slice()` does. AUTHORED content is never clamped (it is finite and
  *  meant to be read); this exists only to bound untrusted model strings, and generously. */
+/** ⛔ Aevi 2026-09-11 (BUG_authoring_markup_in_player_text): her PO emphasis glyphs (⛔ ⚠️ ⚑ ⛑ ⬜ ✅ ➡️) are a convention for
+ *  Erik and CCode, and 438 crafts carried them into what a player reads. Every craft-prose surface passes through this.
+ *  GLYPHS ONLY — the shouted capitals often carry a line's weight, and rewriting them is hers, not a regex's. */
+export const AUTHORING_GLYPHS = /[⛔⚠⚑⛑⬜✅➡❌]\uFE0F? ?/gu;
+export function playerText(text) {
+  return String(text ?? "").replace(AUTHORING_GLYPHS, "").replace(/ {2,}/g, " ").trim();
+}
+
 export function smartClamp(text, max = 600) {
   const s = String(text ?? "");
   if (s.length <= max) return s;

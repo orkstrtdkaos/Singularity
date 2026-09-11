@@ -481,7 +481,7 @@ working papers; **this is the answer.**
 | 09-08 | ✅ **ONE ROSTER, DERIVED; THE OPPONENT GATE; R41's FORM; THE VEIL LOADED** | Erik: *"all NPCs should at least be referenced from a single source list… even if we need to keep separate lists for code"* · *"any condition must be an opposed roll"* stands unbuilt (§A) | `scripts/roster.mjs` reads six files from disk and asks `personOpponentFor` for each; 144 records, 125 reachable, **40 would fight at level 1** (ratchet, Aevi's §2 owns it); `npcs/legends.json`'s five are read by NOTHING and Corvane is a hinge on 4 of 6 arcs (§10 gap); `notAnOpponent: true` refuses by name; a Sovereign is ONE record with `forms.diminished`/`forms.final` chosen by the arc's live stage; `the_veil` + `power_cosmology` loaded, attached, and on the GM's ask view | `§147` · `§59` refixtured on Sister Alder · `roster --check` is a suite | §10 gains the hinge gap; docs/ROSTER.md is generated between markers, prose kept above |
 | 09-08 | ✅ **THE FORTY ARE DERIVED, NOT AUTHORED — ROLE → TIER → THE CHAIN THAT ALREADY RAN** | Erik: *"I thought you were going to have him make the generative engine build out the remaining empty NPCs?"* · Aevi, correcting her own spec: *"NOT A MISSING SHEET. NOT A MISSING KIT. ONE MISSING FIELD."* | 40 of 40 level-1 records were level 1 for one reason — no `tier` — while `tierFloor` already fired for the 64 who had one. `rules/tier_signals.json` (CONTENT, correctable without code) → `tierFromRole` → `derivedLevel`, consulted ONLY where a record is silent. **40 → 0**, ratchet tightened; 19 regional · 12 notable · 9 heroic. Guards: authored tier and level both outrank it; default `notable`; a hard `ceiling: heroic` so no regex reaches epic/legendary/mythic; `tierDerived` on the SHEET, never stamped onto the record; no code fallback, so an absent table derives nothing | `§148` · `§147`'s level-1 ratchet 40→0 | ⚠ **and my roster column was too generous**: R47's bare `_strike` was counting as a kit, so 62 records read as armed when they have no real craft — corrected, and it makes `domains` on the legends the same one-field problem one tier up |
 
-**Last verified: 2026-09-11 · v1.9.451 · 429 crafts.**
+**Last verified: 2026-09-11 · v1.9.452 · 429 crafts.**
 
 ---
 
@@ -1005,10 +1005,17 @@ fight menu and the wheel. Aevi's two words (2026-09-11): a craft capped by meani
 made this place matter"* — never *thin ground*: they are different fields), and a craft that cannot work reads `will not answer`
 with no number, because a number implies a roll. `§159`.
 
-⬜ **A well adds toward fullness — a dial (`the_substrate.poolsTowardFull`, false = today).** Aevi 2026-09-11 §1: additive on a
-bounded scale, a well on rich ground is punished for being there — the Great Engine (0.98 + 0.22) resolved past every band, the
-worst place in Exesa to cast. On, `effective = base + delta × (1 − base)`: the Great Engine 0.98, Archive Hollow (0.40 + 0.20)
-0.52. The world field's pools and a settlement's local wells; sinks untouched. Erik rules. `§164`.
+⛔ **Craft prose reaches the player clean (Aevi 2026-09-11, `BUG_authoring_markup_in_player_text`, the display half).** Her PO
+emphasis glyphs (⛔ ⚠️ ⚑) are stripped by `playerText` on the craft card and on every app surface that shows a craft's grants,
+limits or `notFor`; the card clamps its description and its `Cannot` line at word boundaries instead of cutting mid-word; and it
+shows ONE limits block — what the craft cannot do, then what the rank you hold still cannot — with the ladder showing only what
+each rank grants. The shouted capitals are content, and Aevi's to rewrite; `§165` pins today's glyph-bearing lines so they can only fall.
+
+✅ **A well adds toward fullness (`the_substrate.poolsTowardFull: true` — Erik 2026-09-11, *"turn the empowering pools on"*).**
+Aevi's §1: `effective = base + delta × (1 − base)` for the world field's pools and a settlement's local wells; sinks untouched.
+A well in empty country still adds most of its delta (Archive Hollow 0.40 + 0.20 → 0.52) and a well on full ground adds little;
+on a well the empowered share rises 8.4% → 14.6%, above open ground. It does not move the Great Engine — the field was always
+clamped at 1, and the Gearlands' own 0.98 is what crowds a thin-ground craft there, which Aevi ruled canon. `§164`.
 
 ⬜ **Crowding is a dial keyed by the craft's SOURCE** (`the_substrate.crowdBySource[source]` → `{ crowdSlope, crowdFloor }`; empty =
 today), merged onto whichever band the craft resolves — its tradition's (`substrateBand`, where most crafts land), its school's, or

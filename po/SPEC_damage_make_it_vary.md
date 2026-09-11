@@ -118,3 +118,34 @@ change touches that.** ⛔ **Both exits need their own fix and that is what the 
    the original complaint in miniature.
 4. ⚑ **Should soak scale with the dice?** ⚠️ **If T5 means 25.5 and soak stays at 2, armour is noise at the
    top of the ladder** — ⬜ and soak is authored as *"the honest limiter."*
+
+---
+
+## §6 — ✅ §5.2 MEASURED, AND IT IS A THIRD PATH
+
+> ⚠️ *"`authoredKeepsPlus` exempts authored dice from `nMult`… **How many crafts author their own `dice`?
+> If most do, the tier ladder barely applies and that is a third path.**"*
+
+⛔ **MOST DO.**
+
+| | |
+|---|---|
+| crafts with a harm verb | **120** |
+| ⛔ **authoring their OWN `dice`** | ⛔ **80 — 66%** |
+| falling through to `tierLadder` | 40 |
+
+⛑ **SO THE TIER LADDER GOVERNS ONE HARM CRAFT IN THREE.** ⚠️ **For the other two thirds, `nMult` is
+exempted by `authoredKeepsPlus` and only the additive `plus` reaches them** — ⛔ **which is the exemption
+working as authored, and it means TUNING `tierLadder` MOVES 40 CRAFTS, NOT 120.**
+
+⚑ **AND THAT IS THE ANSWER TO §2's "vary from one place": there is no one place yet.** ⬜ **A sweep that
+turns `tierLadder` and reports a global effect will under-report by two thirds unless it also sweeps the 80
+authored rows.**
+
+⚠️ **Aevi's read: that is correct design and a reporting hazard, not a bug.** ⛑ **An authored craft SHOULD
+say what it does.** ⛔ **But any dial Erik turns needs to say which of the three populations it moves** —
+authored-dice, ladder-dice, or the flat fallback.
+
+⬜ **AND AEVI'S RETRACTION DOCUMENT IS DELETED**, not amended: this spec already supersedes the withdrawn
+one and asks better questions than hers did. ⚠️ **Two documents saying the same thing is the failure she was
+apologising for, repeated.**

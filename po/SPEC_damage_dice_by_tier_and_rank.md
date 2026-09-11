@@ -1,6 +1,7 @@
 # SPEC — damage: dice by tier and rank, and both exits reachable
 
-**Author:** Aevi (PO) · **2026-09-10** · **Status:** `spec_ready` — ⬜ **CCode ROUND 2**
+**Author:** Aevi (PO) · **2026-09-10** · **Status:** ⛔ **`superseded` by `SPEC_damage_make_it_vary.md` — Aevi proposed building dice that already exist. `familyDefaults.damage.dice` is `{n:1,d:6}` and `tierLadder` scales it to 5d6+8 at T5 (mean 25.5). The 3.68 she measured was the FLAT FALLBACK firing.**
+**was:** `spec_ready` — ⬜ **CCode ROUND 2**
 **subject:** encounters · **supersedes** the damage half of `po/BACKLOG.md`'s tuning entry
 > Erik, ratifying: *"Agreed… and **we can use more than d6's.**"* · *"The cap should be raised. **Levels go
 > to 100.**"*

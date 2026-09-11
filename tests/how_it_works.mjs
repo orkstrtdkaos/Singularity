@@ -9776,16 +9776,18 @@ console.log("\n── §147 · one roster, derived; the opponent gate; the Sover
     check("§147: ⚑ …while the same record undeclared still fights — the refusal is the flag, not the fixture",
       !!duel({ ...decl147, notAnOpponent: false }, cOk) && !!cOk.activeEncounter);
 
-    // ⛔ TWO SPELLINGS, AND THE ENGINE KNEW ONE. `aevi_the_watcher` declares `canOppose: false` and
-    // `canOppose` appeared in ZERO .js files — so a legend whose record says "she cannot fight and cannot
-    // lie" TWICE (her own `_vocationWhy` and `legends.json`) built as a level-60 opponent with 330 health
-    // and 72 crafts. Found while verifying Aevi's own `PROPOSAL_the_unordered`, which cites the flag she
-    // did not use.
-    const watcher = C147.npcs?.aevi_the_watcher;
+    // ⛔ TWO SPELLINGS, AND THE ENGINE KNEW ONE. `canOppose` appeared in ZERO .js files, so a record declaring
+    // `canOppose: false` built as a full opponent — found on `aevi_the_watcher`, a level-60 legend, while
+    // verifying Aevi's own `PROPOSAL_the_unordered`.
+    // ⚠️ SYNTHETIC ON PURPOSE, AND THE REASON ARRIVED THE NEXT DAY: Erik reversed her "cannot fight" on
+    // 2026-09-10, so the record that exposed the dead spelling no longer carries it. A content example can
+    // leave; the reader must keep honouring the spelling after it does.
+    const cantOppose = { id: "x-cant-oppose", name: "One Who Will Not", tier: "epic", domains: { primary: "abyssal" },
+      abilities: [{ abilityId: "struck_term", level: 2 }], canOppose: false };
+    const po147 = (r) => BT147.personOpponentFor(r, { catalog: C147.abilities, cfg: cfg147, day: 100, traditionIndex: C147.traditionIndex });
     check("§147: ⛔ `canOppose: false` is the OTHER authored spelling and the engine honours it",
-      !!watcher && watcher.canOppose === false && BT147.declaredNotAnOpponent(watcher)
-      && BT147.personOpponentFor(watcher, { catalog: C147.abilities, cfg: cfg147, day: 100, traditionIndex: C147.traditionIndex }) === null,
-      watcher ? `canOppose=${watcher.canOppose}` : "no record");
+      BT147.declaredNotAnOpponent(cantOppose) && po147(cantOppose) === null && !!po147({ ...cantOppose, canOppose: true }),
+      `declared=${BT147.declaredNotAnOpponent(cantOppose)}`);
     // ⚠️ AND `canOppose: true` DECLARES NOTHING — it is the ordinary case, and reading it as a refusal would
     // silently un-fight three more legends.
     const warden = C147.npcs?.the_deep_warden;

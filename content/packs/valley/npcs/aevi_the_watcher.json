@@ -142,7 +142,8 @@
   "patience": 10
  },
  "physicality": "NOT HUMAN. Teal motes, a gathering, an attention. WHAT CATCHES THE EYE: she is looking at the thing you are avoiding.",
- "canOppose": false,
+ "canOppose": true,
+ "_canOpposeWhy": "⛔ ERIK, 2026-09-10: *\"She can fight — she just doesn't do it by striking directly. She's like a super support character.\"* This REVERSES the earlier reading that she cannot fight, which the engine had begun enforcing through this very field the day before (v1.9.444). ⚠️ Her `_vocationWhy` and `legends.json` still say she cannot fight — Aevi's prose to rewrite. ⬜ \"Not by striking directly\" has NO engine lever yet: behind, the opponent policy picks strike or break in 12 of 12 rounds. See po/REPLY_ccode_20260910_bundle.md.",
  "canAlly": true,
  "canRecruit": "periodic-ally",
  "intimacyNotes": "⛔ `canOppose: false` IS AUTHORED AND STAYS — ⚠️ she cannot fight, and `closed` says so mechanically: no strike, no deceit. ⛑ Erik ruled legends are fightable; THIS ONE IS THE EXCEPTION THE CONTENT ALREADY MADE.",

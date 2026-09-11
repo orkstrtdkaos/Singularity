@@ -1074,6 +1074,96 @@
         "birthWeight": 1,
         "rivalId": "gen-stillwater-s-trouble"
       }
+    },
+    {
+      "id": "gen-waygate",
+      "name": "The Pale March Waygate",
+      "regionId": "valley",
+      "parentId": "gen-ashwarden-march-road",
+      "_promotedFromSubPlace": true,
+      "descriptionSeed": "The waygate the Hub's crossroads opens onto the Pale March. A couple of hours' walk to the fork in the road, and Stillwater's Trouble beyond it.",
+      "tags": [
+        "transitional",
+        "waygate"
+      ],
+      "connections": [
+        "gen-ashwarden-march-road",
+        "millbrook"
+      ],
+      "_mintedAs": "transit",
+      "map": {
+        "x": 409.5058087856015,
+        "y": 397.4185998280231
+      },
+      "dangerLevel": 2,
+      "worldPos": {
+        "colatitude": 20.2,
+        "longitude": 251.63,
+        "depth": 0
+      },
+      "waygate": true,
+      "waygateTier": 2,
+      "networkCapable": true,
+      "waygateDefaultTo": "the_crossing",
+      "_placedBy": "erik-2026-09-06-hub-is-the-crossing",
+      "_canon": {
+        "entityId": "gen-waygate",
+        "type": "location",
+        "weight": 5,
+        "rating": null,
+        "tier": "variant",
+        "provenance": {
+          "healed": "sng-216-backfill"
+        },
+        "contributedBy": {
+          "playerKey": null,
+          "characterId": null
+        },
+        "promotedWorldDay": 73,
+        "birthWeight": 1,
+        "rivalId": "gen-waygate"
+      }
+    },
+    {
+      "id": "gen-threshold-post",
+      "name": "Threshold Post",
+      "regionId": "the_center",
+      "descriptionSeed": "The ridge relay node north of the Crossing's mill gate — a sentinel post high on the moorland ridge, overlooking the settlement, the relay network's northern anchor. A warden post raised from blueprint into standing structure, a working mine of living iron beneath it, a death-warden temple at the sentinel. Three beacon stones cracked in the sentinel array; Fendt keeps it.",
+      "tags": [
+        "ridge",
+        "relay",
+        "post",
+        "moorland"
+      ],
+      "connections": [
+        "the_crossing"
+      ],
+      "dangerLevel": 2,
+      "worldPos": {
+        "colatitude": 0.9,
+        "longitude": 30,
+        "depth": 0
+      },
+      "_placedBy": "erik-2026-09-06-hub-is-the-crossing",
+      "_canon": {
+        "entityId": "gen-threshold-post",
+        "type": "location",
+        "weight": 5,
+        "rating": null,
+        "tier": "variant",
+        "provenance": {
+          "locationId": "the_crossing",
+          "day": 14,
+          "hint": "the ridge relay node, north of the mill gate"
+        },
+        "contributedBy": {
+          "playerKey": null,
+          "characterId": null
+        },
+        "promotedWorldDay": 73,
+        "birthWeight": 1,
+        "rivalId": "gen-threshold-post"
+      }
     }
   ]
 }

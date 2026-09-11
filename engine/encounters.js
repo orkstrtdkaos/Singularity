@@ -278,6 +278,16 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
     // `canStrike: false` is liftable by an earned item can never actually lift it in a real fight, and the
     // override would be a field with a reader and no caller — this project's signature defect, one level up.
     stageOf: (itemId) => { try { return currentStage(itemId, character, content?.items || {})?.stage ?? null; } catch { return null; } } });
+  // ⛔ WHO IS STILL STANDING IN THIS FIGHT. `alliesOf` rebuilds every ally from the character's own entries each
+  // round, and in real play `character.companions` holds bare ids — so a knockout written onto the per-round
+  // wrapper (which is what the fold did) was gone by the next round. MEASURED: the fold downed Ember and the
+  // next round's roster had her standing. The fight's own state is the one thing that survives the round, so
+  // that is where a knockout lives. ⚠️ FOR THIS FIGHT ONLY — whether a knockout outlasts the encounter is a
+  // ruling nobody has made, and this does not invent one.
+  const downedHere = state.allyDowned || {};
+  for (const list of [partyAll, partyPresent]) {
+    for (let i = list.length - 1; i >= 0; i--) if (list[i] && !list[i].isPlayer && downedHere[list[i].id]) list.splice(i, 1);
+  }
   // ⛔ CCODE-274 — THE FORWARD/FOLDED SPLIT, DERIVED HERE. How many you can lead is EARNED
   // (`commandSlots`: level + presence + renown, capped at Erik's goal of 3), and WHICH of them come forward
   // is the player's pick, carried on the encounter state so a swap persists between rounds.
@@ -307,6 +317,18 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   const split = partyAll.length > 1
     ? bringForward(partyAll, { chosen: state.broughtForward || null, slots: lead.slots })
     : null;
+  // ⛔ SPEC_party_contributions, SHAPE B. A folded ally does the thing their family is FOR, once a fight each,
+  // and it is named — Erik: "being IN the party must be beneficial", and a warder in slot 5 contributed exactly
+  // what a bystander did. `spent` is per fight, on the fight's own state, for the same reason knockouts are.
+  const spent = state.foldSpent || {};
+  const foldCan = (fam, act) => (split?.folded || []).find(a => a && !a.downed && a.present !== false
+    && (a.contributions || []).includes(fam) && !spent[a.id]?.[act]) || null;
+  // ⚑ KNOW — the read. It rides the EXISTING setup bonus ("you read them first"), so the contest's own receipt
+  // names it and no new term enters the roll. Only on an action round, and only if you have no read of your own:
+  // a knower hands you what you lacked, never stacks on what you already earned.
+  const readBonus = Math.max(0, Number(sb?.melee?.foldedReadBonus ?? 0));
+  const reader = (phase === "action" && !(Number(setupBonus) > 0) && readBonus > 0) ? foldCan("KNOW", "read") : null;
+  const setupWithRead = reader ? readBonus : setupBonus;
   const r = battleRound({
     playerDecl, oppDecl,
     // ⚠️ THE FOLDED FIGHT WITHOUT BEING NARRATED. Erik: "you only have so much focus."
@@ -345,7 +367,7 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
       foeReadTier: state.foeReadTier ?? null,
       // ✅ R35: the seal a kill left on the player outlives the encounter — it lives on the sheet and rides in here.
       ...(character.craftSealedUntilRest ? { playerSealed: true } : {}) }, rules, sb, steps, rng,
-    phase, tickEffects, setupBonus,
+    phase, tickEffects, setupBonus: setupWithRead,
     // SNG-247: DERIVED here, never passed in. This wrapper has now silently eaten a forwarded option twice
     // (CCODE-35 `effects`, CCODE-45 `phase`) — a value the wrapper computes from what it already holds cannot be
     // dropped on the way in. `encounterKind(def)` is the same function the frame uses, so the exit rule and the
@@ -389,6 +411,37 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   }
   const deltas = { health: 0, energy: r.state.playerEnergy - before }; // the player's own energy attrition (<= 0)
   const events = []; let ended = false, outcome = null;
+  // ⛔ SHAPE B — WHAT THE FOLDED PARTY DID THIS ROUND, BY NAME. "A silent +3 is indistinguishable from nothing."
+  const foldActs = [];
+  const first = (n) => String(n || "they").split(" ")[0];
+  const markSpent = (id, act) => { s.foldSpent = { ...(s.foldSpent || {}), [id]: { ...((s.foldSpent || {})[id] || {}), [act]: s.round } }; };
+  if (reader) { markSpent(reader.id, "read"); foldActs.push({ act: "read", id: reader.id, by: reader.name, why: `${first(reader.name)} reads their next move — you have their measure` }); }
+  // ⚑ PROTECT — a warder takes ONE blow aimed at you. ⚠️ A REASSIGNMENT, NOT A REDUCTION, and it runs on what
+  // actually got through: the warder takes exactly the blow that would have hit you, so it cannot stack with your
+  // own mitigation into immunity. Never over a declared guard that already caught it.
+  if (r.damage && r.damage.side === "player" && !r.damage.onId && !r.damage.intercepted && (Number(r.damage.amount) || 0) > 0) {
+    const warder = foldCan("PROTECT", "shield");
+    if (warder) {
+      markSpent(warder.id, "shield");
+      r.damage = { ...r.damage, onId: warder.id, onName: warder.name,
+        intercepted: { caughtBy: warder.name, onBehalfOf: "you", folded: true, why: `${first(warder.name)} stepped into it` } };
+      foldActs.push({ act: "shield", id: warder.id, by: warder.name, why: `${first(warder.name)} takes the blow meant for you` });
+    }
+  }
+  // ⚑ RESTORE — a mender stops ONE imposition before it takes hold. ⚠️ NOT "lasting harm becomes temporary" as
+  // the spec's shape B reads: lasting harm is `inflicted`, and nothing writes `inflicted` onto anyone (H2). An
+  // imposition DOES reach you (`applyRoundToCharacter`), and `refused` is the field that already stops it.
+  if (r.imposed && !r.imposed.refused && r.imposed.side === "player" && !r.imposed.onId) {
+    const mender = foldCan("RESTORE", "mend");
+    if (mender) {
+      markSpent(mender.id, "mend");
+      r.imposed = { ...r.imposed, refused: `${first(mender.name)} mends it before it takes hold`, mendedBy: mender.name };
+      foldActs.push({ act: "mend", id: mender.id, by: mender.name, why: `${first(mender.name)} mends it before it takes hold — ${r.imposed.name || String(r.imposed.condition || "it").replace(/_/g, " ")} never lands` });
+    }
+  }
+  // ⛔ H3 — AND THE FOLD'S OWN KNOCKOUTS LAST THE FIGHT. `downEntity` marked a wrapper that the next round threw away.
+  for (const d of (r.damage?.foldedLosses?.downed || [])) if (d?.id) s.allyDowned = { ...(s.allyDowned || {}), [d.id]: { why: "the melee", round: s.round } };
+  for (const a of foldActs) events.push(`${a.why}.`);
   if (senseBoughtALayer && s.hintsRevealed > (state.hintsRevealed || 0)) events.push("A layer gives — you understand it better than you did.");
   // SNG-247 (AEVI-247-AUTHOR): a STATIC antagonist gets Aevi's degree VOICE — "a piece gives — you feel the thing
   // loosen toward you" rather than a foe's win/loss line. Her whole ruling for this kind is that a sealed thing
@@ -435,16 +488,38 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   // cannot see — "the strike didn't seem to land" was true, and also unreported when it did.
   if (r.damage) {
     const hpLeft = s.opponentHealth, of = def.opponent?.health;
+    // ⛔ H1 — A BLOW AIMED AT AN ALLY LANDS ON THE ALLY. It came off YOUR health: every foe blow has side "player",
+    // and the only branch here was `opponent` or you. MEASURED: 26 of 26 blows a foe aimed at Coil were taken from
+    // the player, while the receipt printed "It lands on Coil, not you." The targeting (CCODE-250) chose who to hit
+    // and the damage ignored the choice. ⚠️ `isPlayer` is a FLAG, never an id comparison (CCODE-261): a human party
+    // member is a player too, and keeps today's handling here.
+    const onAlly = r.damage.side === "player" && r.damage.onId
+      ? (partyPresent.find(a => a && a.id === r.damage.onId && !a.isPlayer) || null) : null;
     if (r.damage.side === "opponent") events.push(`Your ${r.damage.by} LANDS — ${def.opponent.name} takes ${r.damage.amount}${of ? ` (${Math.max(0, hpLeft)}/${of} left)` : ""}.`);
+    else if (onAlly) {
+      // their harm accumulates for this fight, against the health their sheet has; at that line they go down
+      const hp = Number(onAlly.sheet?.health) || 0;
+      const total = (Number((s.allyHarm || {})[onAlly.id]) || 0) + (Number(r.damage.amount) || 0);
+      s.allyHarm = { ...(s.allyHarm || {}), [onAlly.id]: total };
+      events.push(`${def.opponent.name}'s ${r.damage.by} LANDS on ${onAlly.name} — ${r.damage.amount} taken${hp ? ` (${Math.max(0, hp - total)}/${hp} left)` : ""}.`);
+      if (hp > 0 && total >= hp && !(s.allyDowned || {})[onAlly.id]) {
+        s.allyDowned = { ...(s.allyDowned || {}), [onAlly.id]: { why: `${def.opponent.name}'s ${r.damage.by}`, round: s.round } };
+        events.push(`${onAlly.name} goes down.`);
+      }
+    }
     else { deltas.health -= r.damage.amount; events.push(`${def.opponent.name}'s ${r.damage.by} LANDS on you — ${r.damage.amount} taken.`); }
     // ✅ R35: the death save is EVENT-VISIBLE either way it falls — a kill that reads as a big number is the
     // silent-arithmetic failure again, and a save that held has to say what the dice were falling back from.
     const ds = r.damage.deathSave;
     if (ds) {
       if (ds.kill && ds.on === "opponent") events.push(`THE THREAD IS CUT — ${def.opponent.name} simply stops.${ds.cost && ds.cost !== "standard" ? " It cost you everything you had left." : ""}`);
+      else if (ds.kill && onAlly) {
+        s.allyDowned = { ...(s.allyDowned || {}), [onAlly.id]: { why: "the thread is cut", round: s.round } };
+        events.push(`${def.opponent.name}'s ${r.damage.by} — and ${onAlly.name}'s ${ds.saveOn} fails. ${onAlly.name} stops.`);
+      }
       else if (ds.kill) events.push(`${def.opponent.name}'s ${r.damage.by} — and your ${ds.saveOn} fails you. You stop.`);
       else if (ds.on === "opponent") events.push(`${def.opponent.name}'s ${ds.saveOn} holds against the kill — the blow lands as a wound instead.`);
-      else events.push(`Your ${ds.saveOn} holds against the kill — it lands as a wound instead.`);
+      else events.push(onAlly ? `${onAlly.name}'s ${ds.saveOn} holds against the kill — it lands as a wound instead.` : `Your ${ds.saveOn} holds against the kill — it lands as a wound instead.`);
     }
   }
   // ⛔ CCODE-237 (Aevi's §0) — A HEAL REACHES A SHEET. `battleRound` has computed `healing` since CCODE-207
@@ -497,6 +572,7 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
     // in smoke.mjs, which DERIVES the key set from what `battleRound` actually returns and fails on any key
     // this wrapper drops. A ninth omission now goes red instead of shipping green.
     imposed: r.imposed, inflicted: r.inflicted, opened: r.opened, deniedAct: r.deniedAct,
+    ...(foldActs.length ? { foldActs } : {}),   // SHAPE B: what the folded party did, by name
     // ⚠️ AND TWO MORE THE DERIVED GATE FOUND THAT I DID NOT KNOW ABOUT: the contested sense slot's
     // `senseGap` and `senseBonus` (CCODE-211/213) were dropped here too. Ten values, not eight — which is
     // the argument for deriving the expectation instead of extending a list by hand each time.

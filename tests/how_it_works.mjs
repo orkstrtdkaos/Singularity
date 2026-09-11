@@ -962,6 +962,145 @@ console.log("\n── §13 · an NPC's level is what they ARE, plus what you hav
     lvl({ met: 1, level: 77 }) === 77, String(lvl({ met: 1, level: 77 })));
 }
 
+/* ══════════ §150 — THE FOLDED PARTY DOES WHAT IT IS FOR (SPEC_party_contributions, shape B) ══════════ */
+// ⛔ AND THREE REPAIRS IT COULD NOT STAND WITHOUT, each measured in live play before it was touched:
+//   H1 · a blow the foe aimed at an ALLY came off the PLAYER — 26 of 26, while the receipt said "It lands on Coil, not you"
+//   H3 · a knockout lasted one round — the fold downed Ember and the next roster had her standing
+//   B  · PROTECT, KNOW and RESTORE were derived for 46, 60 and 29 people and spent by nothing
+console.log("\n── §150 · the folded party does what it is for ──");
+{
+  const ENC150 = await import("../engine/encounters.js");
+  const RE150 = await import("../engine/random_encounters.js");
+  const SB150 = await import("../engine/skill_battle.js");
+  const CM150 = await import("../engine/craftmechanics.js");
+  const { loadContentHeadless: lch150 } = await import("./headless_content.mjs");
+  const C150 = await lch150();
+  const sb150 = rj("content/packs/core/rules/skill_battle_system.json").engine;
+  const steps150 = rj("content/packs/core/rules/intensity_scaling.json").steps;
+  const rng150 = (seed) => () => { seed |= 0; seed = (seed + 0x6D2B79F5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  // one companion per family, so each act is isolated. `canStrike: false` keeps HARM out of their contributions.
+  const mate = (id, tags, extra = {}) => ({ id, name: id[0].toUpperCase() + id.slice(1), assistTags: tags, canStrike: false, health: 40, ...extra });
+  const withMates = (mates) => ({ ...C150, companions: { ...(C150.companions || {}), ...Object.fromEntries(mates.map(m => [m.id, m])) } });
+  const hero = (ids, o = {}) => ({ id: "hero150", name: "Hero", level: 4, health: 400, maxHealth: 400, energy: 400, maxEnergy: 400,
+    attributes: { physical: 3, mental: 3, social: 3, practical: 3 }, subAttributes: {}, abilities: [],
+    companions: ids.map(id => ({ id })), company: [], npcRegistry: {}, clock: { day: 1 }, ...o });
+  const fight = (opponent) => { const def = RE150.synthesizeDuelDef({ id: "f150", flavor: "fight", seed: "", opponent: { tacticTags: [], ...opponent } });
+    if (opponent.skills) def.opponent.skills = opponent.skills;
+    const fresh = () => { const os = SB150.synthesizeOpponentSheet(def.opponent, sb150); if (opponent.targetPolicy) os.targetPolicy = opponent.targetPolicy; return ENC150.startEncounter(def, { oppSheet: os }); };
+    return { def, fresh }; };
+  const decl150 = { function: "strike", tier: 1, attribute: "physical", intensity: "standard", name: "a plain strike" };
+  const run = (ch, content, f, seed, n, each) => { let st = f.fresh(); const rng = rng150(seed);
+    for (let i = 0; i < n; i++) { const rr = ENC150.skillBattleRound(st, f.def, decl150, { character: ch, rules: C150.rules, sb: sb150, steps: steps150, rng, content });
+      if (each(rr, i, st) === false) return rr; st = rr.ended ? f.fresh() : rr.state; } return null; };
+
+  // ── H1 · a blow aimed at an ally lands on the ally ──
+  {
+    const healer = mate("wren", ["mend"]);
+    const content = withMates([healer]); const ch = hero(["wren"]); const f = fight({ name: "Foe", threat: 60, targetPolicy: "healer" });
+    let aimed = 0, onAllyEvent = 0, onYouEvent = 0, ledger = 0, harmSeen = 0, downed = null, afterDown = 0, shown = null;
+    run(ch, content, f, 150101, 120, (rr) => {
+      const d = rr.damage;
+      if (d && d.side === "player" && d.onId === "wren" && !downed) {
+        aimed++; ledger += d.amount; harmSeen = rr.state.allyHarm?.wren || 0;
+        if ((rr.events || []).some(e => /LANDS on Wren/.test(e))) onAllyEvent++;
+        if ((rr.events || []).some(e => /LANDS on you/.test(e))) onYouEvent++;
+        if (!shown) shown = (rr.events || []).find(e => /LANDS on Wren/.test(e));
+      }
+      if (downed && d?.onId === "wren") afterDown++;
+      if (!downed && rr.state.allyDowned?.wren) downed = rr.state.allyDowned.wren;
+      if (rr.ended) return false;
+    });
+    check("§150: ⛑ NON-VACUITY — the foe really did aim at the ally", aimed > 0, String(aimed));
+    check("§150: ⛔ H1 — a blow aimed at an ally LANDS ON THE ALLY, and the event names them",
+      onAllyEvent === aimed && onYouEvent === 0, `${onAllyEvent}/${aimed} named · ${onYouEvent} said "on you"`);
+    check("§150: …and the ally's harm is the exact sum of the blows that reached them",
+      harmSeen === ledger, `${harmSeen} vs ${ledger}`);
+    check("§150: ⛔ H1 — at their health they go down, and no blow is aimed at them after",
+      !!downed && afterDown === 0, downed ? `${downed.why} · ${afterDown} after` : "never downed");
+    console.log(`note  §150: ${shown || "(no event)"}`);
+  }
+
+  // ── a solo fight is exactly as it was: every foe blow comes off you ──
+  {
+    const ch = hero([]); const f = fight({ name: "Foe", threat: 60 });
+    let landed = 0, onYou = 0;
+    run(ch, C150, f, 150102, 60, (rr) => { const d = rr.damage; if (d && d.side === "player") { landed++; if ((rr.events || []).some(e => /LANDS on you/.test(e)) && rr.deltas.health <= -d.amount) onYou++; } });
+    check("§150: ⛑ …and with no allies, every foe blow still lands on you — the repair moved nothing it should not",
+      landed > 0 && onYou === landed, `${onYou}/${landed}`);
+  }
+
+  // ── H3 · the fold's knockout lasts the fight, and not beyond it ──
+  {
+    const ids = Object.keys(C150.companions || {});
+    const ch = hero(ids, { level: 4, attributes: { physical: 2, mental: 2, social: 2, practical: 2 } }); const f = fight({ name: "Brute", threat: 90 });
+    let who = null, stillFolded = 0, rounds = 0;
+    run(ch, C150, f, 777, 200, (rr) => {
+      if (who) { rounds++; const inIt = [...(rr.party?.folded || []), ...(rr.party?.forward || [])].some(a => a.id === who); if (inIt) stillFolded++; if (rounds >= 3 || rr.ended) return false; }
+      else { const dn = rr.damage?.foldedLosses?.downed?.[0]; if (dn) { who = dn.id; if (!rr.state.allyDowned?.[who]) who = "NOT-RECORDED:" + dn.id; } }
+    });
+    check("§150: ⛑ NON-VACUITY — the fold really did take someone out", !!who, String(who));
+    check("§150: ⛔ H3 — the fold's knockout is RECORDED on the fight, not on a wrapper the next round throws away",
+      !!who && !String(who).startsWith("NOT-RECORDED"), String(who));
+    check("§150: …and they are out of the party for the rest of that fight", !!who && rounds > 0 && stillFolded === 0, `${stillFolded} of ${rounds} rounds`);
+    const fresh = ENC150.startEncounter(f.def, {});
+    check("§150: ⚑ …and a NEW fight starts with nobody down — a knockout outlasting the encounter is not ruled",
+      !fresh.allyDowned, JSON.stringify(fresh.allyDowned || null));
+  }
+
+  // ── PROTECT · a warder takes ONE blow meant for you ──
+  {
+    const warder = mate("brace", ["guard"]);
+    const content = withMates([warder]); const ch = hero(["brace"]); const f = fight({ name: "Foe", threat: 60 });
+    let caught = 0, afterFirst = 0, youAfter = 0, sample = null;
+    run(ch, content, f, 150103, 80, (rr) => {
+      const d = rr.damage;
+      if (d?.intercepted?.folded) { caught++; if (!sample) sample = { ev: (rr.events || []).find(e => /takes the blow meant for you/.test(e)), on: d.onName, harm: rr.state.allyHarm?.brace }; }
+      else if (caught && d && d.side === "player" && !d.onId) { youAfter++; }
+      if (caught && d?.intercepted?.folded && caught > 1) afterFirst++;
+      if (rr.ended) return false;
+    });
+    check("§150: ⛔ PROTECT — a folded warder takes the blow meant for you, and it lands ON THEM",
+      caught >= 1 && !!sample?.ev && sample.on === "Brace" && (sample.harm || 0) > 0, JSON.stringify(sample));
+    check("§150: …ONCE a fight — every later blow meant for you reaches you", caught === 1 && youAfter > 0, `${caught} caught · ${youAfter} after`);
+  }
+
+  // ── KNOW · a reader hands you the read, once ──
+  {
+    const reader = mate("sage", ["study"]);
+    const content = withMates([reader]); const ch = hero(["sage"]); const f = fight({ name: "Foe", threat: 60 });
+    const reads = []; let first = null;
+    run(ch, content, f, 150104, 6, (rr, i) => { const r0 = (rr.foldActs || []).filter(a => a.act === "read"); if (r0.length) reads.push(i); if (i === 0) first = rr; if (rr.ended) return false; });
+    check("§150: ⛔ KNOW — a folded reader hands you the read on the first round, and it reaches the ROLL",
+      reads[0] === 0 && JSON.stringify(first?.player || {}).includes("you read them first"), `reads at ${JSON.stringify(reads)}`);
+    check("§150: …ONCE a fight", reads.length === 1, JSON.stringify(reads));
+    const off = { ...sb150, melee: { ...sb150.melee, foldedReadBonus: 0 } };
+    let offReads = 0; let st = f.fresh(); const rng = rng150(150104);
+    for (let i = 0; i < 3; i++) { const rr = ENC150.skillBattleRound(st, f.def, decl150, { character: hero(["sage"]), rules: C150.rules, sb: off, steps: steps150, rng, content }); offReads += (rr.foldActs || []).filter(a => a.act === "read").length; st = rr.state; }
+    check("§150: ⚑ …and it is ERIK'S DIAL — `melee.foldedReadBonus: 0` turns the read off", offReads === 0, String(offReads));
+  }
+
+  // ── RESTORE · a mender stops ONE imposition before it lands ──
+  {
+    const imposer = Object.values(C150.abilities || {}).find(a => CM150.authoredBlock(a, "imposes", 1) && (a.functions || []).length);
+    check("§150: ⛑ NON-VACUITY — the corpus has an imposing craft to test with", !!imposer, imposer?.id || "none");
+    if (imposer) {
+      const mender = mate("tansy", ["mend"]);
+      const content = withMates([mender]); const ch = hero(["tansy"]);
+      const skill = { ...imposer, function: imposer.functions[0], tier: 3, rank: 1, name: imposer.name || imposer.id };
+      const f = fight({ name: "Binder", threat: 80, skills: [skill] });
+      let mended = 0, landedAfter = 0, sample = null;
+      run(ch, content, f, 150105, 160, (rr) => {
+        const im = rr.imposed;
+        if (im?.mendedBy) { mended++; if (!sample) sample = { refused: im.refused, ev: (rr.events || []).find(e => /mends it before it takes hold/.test(e)) }; }
+        else if (mended && im && !im.refused && im.side === "player") landedAfter++;
+        if (rr.ended && mended && landedAfter) return false;
+      });
+      check("§150: ⛔ RESTORE — a folded mender stops an imposition before it lands, and says so",
+        mended >= 1 && !!sample?.ev, JSON.stringify(sample));
+      check("§150: …ONCE a fight — the next one lands", mended >= 1 && landedAfter >= 1, `${mended} mended · ${landedAfter} landed after`);
+    }
+  }
+}
 /* ══════════ §14 — THE FOLD CANNOT BEAT AN IMMUNITY THE BLOW COULD NOT ══════════ */
 // ⛔ FOUND BY RUNNING AEVI'S TWELVE CRAFTS THROUGH A MELEE-SCALE FIGHT (CCODE-313), which is the whole
 // reason Erik asked for a big-battle test. A physical-immune foe took ZERO from the player's typed blow and

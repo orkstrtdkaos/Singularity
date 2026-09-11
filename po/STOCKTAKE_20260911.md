@@ -46,17 +46,17 @@ all of it Aevi's, all of it §3 below.
 |---|---|---|
 | **peer** — the player wins | 38% | **34%** |
 | peer — the player goes down | 62% | 66% |
-| peer — mean rounds · break as a share of wins | 4.1 · 12% | 4.4 · 9% |
-| **+10 levels** | 58% | **54%** |
-| **the roster**, a player of their level | 71% | **76%** |
-| the 16 who hold crafts above their tier band | 72% | 82% |
-| the 46 authored bodies · the grown ones | 67% · 74% | 72% · 78% |
-| **the spread across the player's domain** | 42–92 | 44–92 |
+| peer — mean rounds · break as a share of wins | 4.1 · 12% | 4.4 · 8% |
+| **+10 levels** | 58% | **51%** |
+| **the roster**, a player of their level | 71% | **70%** |
+| the 16 who hold crafts above their tier band | 72% | 72% |
+| the 46 authored bodies · the grown ones | 67% · 74% | 69% · 71% |
+| **the spread across the player's domain** | 42–92 | 44–91 |
 
 ⛔ **The tilt I reported earlier today was the harness, and it is retracted.** I said the eight stats moved fair fights 8–10
 points toward the player and that I could not find why. The cause was the harness's domain picks: its synth peer foe was
 Angelic at three of the four measured levels, and a player's two other domains were its alphabetical neighbours. With the
-domains spread on **both** trees, the eight stats move a peer fight **-4** points (toward the foe) and the roster **+5**. Two
+domains spread on **both** trees, the eight stats move a peer fight **-3** points and the roster **-1**. Two
 one-sided rules found on the way were real and are fixed: a foe's sheet dropped its sub-attributes (so no foe had ever
 rolled one its author wrote), and the harness gave its foe one verb a craft.
 
@@ -64,7 +64,7 @@ rolled one its author wrote), and the harness gave its foe one verb a craft.
 
 1. **A peer fight sits at 34% for the player** — against a bought-kit specialist of the opposite domain. Even, or too hard?
    Erik's call; the dial is `resolution.craftSubAttributes.enabled` (on) and the level terms beside it.
-2. **The domain a player carries still decides more than anything else** (44–92 across the roster). Offense, ground and the
+2. **The domain a player carries still decides more than anything else** (44–91 across the roster). Offense, ground and the
    defensive crafts a domain can hold are all ruled out (`scratchpad/domain_probe.mjs`, `def_probe.mjs`). Not diagnosed.
 
 ✅ **Settled this round:** the empowering pools are on; crowding is pinned as a documented option (`po/BACKLOG.md`, gate
@@ -79,7 +79,7 @@ action as you do; the ground reaches every roll and says so in one vocabulary; t
 | # | what | why it is open |
 |---|---|---|
 | 1 | **is 34% the right even fight?** | with the domains spread, a peer is a bought-kit specialist of the opposite domain; per-fight telemetry (what takes each side down, and when) is the next tool |
-| 2 | **diagnose the domain spread** | 44–92 across domains; three explanations ruled out |
+| 2 | **diagnose the domain spread** | 44–91 across domains; three explanations ruled out |
 | 3 | **`fieldAt` container + `keptBy` + the arc term** | `SPEC_BUILD_six_fields` — ⚠️ fix its §3 sign error first; every field surface then reads one function |
 | 4 | **the ranked source** | `SPEC_ranked_source_and_the_third_way` — measure-only per Erik, not verified yet |
 | 5 | **the field view in the game** | `SPEC_field_view_in_game` — Erik on the prototype: *"how to incorporate it into the game"* |
@@ -103,7 +103,7 @@ action as you do; the ground reaches every roll and says so in one vocabulary; t
 | # | question | where |
 |---|---|---|
 | 1 | **bodies are spiky** — a level-30 person with 19 in one attribute and 3 in the rest: the character you want? | `REPLY_ccode_20260911c` §3 |
-| 2 | **ten levels win 54%** — trivial enough, or should level count for more? | `subPointPerLevel`, `damage.scaling.perLevel`, `rankLevelReq` |
+| 2 | **ten levels win 51%** — trivial enough, or should level count for more? | `subPointPerLevel`, `damage.scaling.perLevel`, `rankLevelReq` |
 | 3 | **fights run a median of 4 rounds** — still fine? | you were fine with 6 |
 | 4 | **crowding** — pinned as an option; unpin when you want it | `po/BACKLOG.md` |
 | 5 | the world rebuild · the Commander craft line · local arcs · the six Sovereign seats · the Afterling and the Unordered as peoples | Aevi's `SESSION_20260908_to_0911` §2 |

@@ -149,3 +149,54 @@ authored-dice, ladder-dice, or the flat fallback.
 ⬜ **AND AEVI'S RETRACTION DOCUMENT IS DELETED**, not amended: this spec already supersedes the withdrawn
 one and asks better questions than hers did. ⚠️ **Two documents saying the same thing is the failure she was
 apologising for, repeated.**
+
+---
+
+## §7 — ✅ §1 AND Q1 ANSWERED BY MEASUREMENT. THE TELEMETRY IS NO LONGER NEEDED TO DECIDE.
+
+⛑ **Aevi called `mechanicFor` with a player-shaped and an NPC-shaped declaration. Result:**
+
+| declaration | shape | dice | path |
+|---|---|---|---|
+| **player-shaped** `{strike, tier:5, rank:3}` | damage | `{n:5,d:6}` | ✅ **DICE** |
+| ⚑ **NPC-shaped** `{strike, tier:5}` — no `rank` | damage | ⚑ **`{n:5,d:6}`** | ✅ **DICE** |
+| bare verb, no tier | damage | `{n:1,d:6}` | ✅ DICE |
+| `reveal` (KNOW) | setup | — | fallback |
+| `hinder` | hobble | — | fallback |
+
+### ⛔ Q1: NO ASYMMETRY. BOTH SIDES RESOLVE IDENTICALLY.
+
+⚠️ **The `skill_battle.js:607` bug is FIXED and the fix is load-bearing here:** *"a declaration now carries
+both; `rank` feeds the roll and falls back to `tier`."* ⛑ **An NPC declaration missing `rank` still resolves
+the same dice** — ⛔ **so foes have NOT been on the flat formula.**
+
+### ⚑ AND §1's DECIDING QUESTION IS ANSWERED: THE FALLBACK IS NOT LOAD-BEARING
+
+⛔ **It fires only for NON-DAMAGE SHAPES** — `setup`, `hobble`, `guard`. ⚠️ **That is correct behaviour, not
+a defect: a `hinder` has no dice BY DESIGN** (*"hinder sits in HARM by vocabulary but does not damage — it
+hobbles"*).
+
+➡️ ⛑ **SO §11 IS A TUNING PROBLEM AFTER ALL, NOT A DEFECT — and every damage number Aevi reported from the
+fallback was describing a branch that only serves shapes which deal no damage.**
+
+⚠️ **AND `perTier: 0.5` NEEDS NO TUNING.** ⛔ **Per this spec's own §3: *"if the dice path fires as designed,
+the fallback should be rare — and then the right fix is to make it RARER, not to tune it."*** ⛑ **It is
+already rare and already correct. LEAVE IT.**
+
+---
+
+## §8 — ⬜ SO THE BUILD LIST SHRINKS TO THREE THINGS
+
+| # | | ⚑ |
+|---|---|---|
+| **1** | ⛑ **`scripts/damage_sweep.mjs`** — §2, unchanged | ⚠️ **and it must report which of the THREE populations a dial moves** (§6: 80 authored / 40 ladder / fallback) |
+| **2** | ⚠️ **`maxScaling 6 → 20`, `perLevel 0.06 → 0.10`** | ⛔ **Erik ruled the cap rises; levels go to 100** |
+| **3** | ⬜ **`perMarginPoint 0.06 → ~0.20`** | ⚑ so winning WELL is worth something |
+
+⛔ **AND ONE CONTENT GAP THAT IS ERIK'S TO RULE, NOT A BUILD: `tierLadder` HAS NO RANK DIMENSION.**
+⚠️ **`T5 r1` and `T5 r3` are byte-identical.** ⛑ **His own idea — *"more damage dice on rank up"* — is the
+only part of today's damage discussion that is not already built.** ⬜ **A `rankLadder` beside the tier one,
+same file, same shape.**
+
+⚑ **§1's telemetry is still worth building** — ⚠️ **but as a standing gate rather than a decision input, and
+`minHit` (§5.3) and soak (§5.4) are still open.**

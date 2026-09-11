@@ -1152,23 +1152,26 @@ them permanently.** ⚠️ **Using the craft badly is how a person becomes unrea
 **Five traditions answer this ladder differently and share one set of verbs** — `retrieve` · `sink` ·
 `seal` · `hold` · `slow`. Ashwardens drag, Numinous invite, Threnody delays, Rootkin pay a price.
 
-⛔ **PROPOSED (§48): undeath. TWO ROADS, AND ONLY ONE OF THEM IS A COCOON.**
+⛔ **PROPOSED (§48): undeath. THREE KINDS, AND THEY ARE NOT DEGREES OF ONE THING.**
 
-**An AFTERLING is the same person, undead** — the closest to living a dead person can be. Nothing grew
-inside them and nothing emerged, because there was never anything in there but the person. They want what
-they wanted.
+**The MINDLESS are automatons.** They do the raiser's will, simply. There is no self in one, they want
+nothing, and what they are told is all they are. **This is what most raising produces and what most raisers
+intend.**
 
-**The other road is the cocoon, and it is the losing of the mind.** The body wears, the thing inside grows,
-and what comes out is not who went in — `the_narrowed` at the far end of it. The corpus tracks *progress
-along* it as a danger measure: *"the cocoon was the last thing holding it in."*
+**A SPIRIT is what a mindless one becomes if it is left to proceed through the cocoon phases and is then
+released.** The body was the last thing holding it in. A spirit can also be raised directly — **without a
+body, but with intent** — and either way it is dangerous in a way an automaton is not, because it wants
+something and nobody chose what.
 
-**Healing harms them, decay mends them**, and Deathsense reads them as inverted life. And Deathsense is a
-diagnostic before it is anything else: a mindless raised crew arrives **unfelt** — there is no self in one
-to give it away — while an Afterling or a driven shade **reads fine, because they want something, and
-wanting is weather.** *An Afterling reads as a person because it is one, not because it is far along
-anything* — telling those two apart is the warden's actual problem.
+**An AFTERLING is an undead person.** The same person: their mind, their wants, their grudges. **The closest
+to living a dead person can be.** No cocoon, nothing grew, nothing emerged — they are simply still here.
 
-*Aevi read the cocoon as a chrysalis twice in one conversation, from the sentence that used to be here.*
+**Healing harms all three, decay mends them**, and Deathsense reads them as inverted life.
+
+**And Deathsense is a diagnostic before it is anything else.** A mindless crew arrives **unfelt** — there is
+no self in one to give it away. **A spirit or an Afterling reads fine: they want something, and wanting is
+weather.** So silence means a tool, and anything you can feel is either further along the cocoon or a person
+— **and telling those two apart is the warden's actual problem.**
 
 ---
 

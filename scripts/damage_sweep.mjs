@@ -21,6 +21,7 @@
 //   --fights N          samples per craft × encounter (default 5)      --all   the whole craft menu, not the panel
 //   --encounter <id>    one encounter                                   --level L --hp H   the sweeper's body
 //   --json <path>       write the report
+//   --match peer|+10    the player's level relative to each foe (foe level = threat × 0.5); --body npc|sweeper
 //
 // DIAL PATHS: `craftMechanics.…` and `npcStanding.…` read rules.* (the ladder, family defaults, rankDeltas; the foe's health pool);
 // `maxRounds` is this harness's cap; everything else is `skillBattle.engine.…` (damage, momentum.pressure, …).
@@ -43,6 +44,13 @@ const ONLY = flag("--encounter");
 const ALL = argv.includes("--all");
 const LEVEL = Number(flag("--level", 12)), HP = Number(flag("--hp", 80));
 const OUT = flag("--json");
+// ⛔ ERIK 2026-09-11: "fights should be 10 rounds ± 5 when fighting something at or within a level or 2 of you —
+// across the board. If you are 10 levels higher in a 1-1 fight it should be very trivial. Breaking for a win
+// should be 30% to 15% of the time." `--match` sets the player's level RELATIVE TO EACH FOE; `--body npc`
+// builds the player by the foe's own formula so a peer fight is symmetric by construction.
+const MATCH = flag("--match");                 // "peer" | "+10" | "-3" …  (null = fixed --level)
+const BODY = flag("--body", MATCH ? "npc" : "sweeper");
+const TARGET = { lo: 5, hi: 15, breakLo: 0.15, breakHi: 0.30 };
 let MAX_ROUNDS = 14;                       // the matrix's cap — "a fight longer than this is the finding"
 const STALL_AT = 4;
 function parseVal(v) { if (v === "null") return null; if (v === "true") return true; if (v === "false") return false; const n = Number(v); return Number.isFinite(n) && v !== "" ? n : v; }
@@ -73,7 +81,25 @@ function makeRng(seed) { let s = seed >>> 0 || 1; return () => { s = (s * 166452
 const hash = (str) => { let h = 2166136261; for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; };
 
 /** The matrix's sweeper: a capable mid character who owns every craft. `--level` and `--hp` move the body. */
-function makeSweeper(catalog) {
+/** The player's body at `level`, by the FOE'S OWN FORMULA: pool from npcStanding, attributes from the synthesis
+ *  curve at threat = level × 2. Symmetric by construction — the only asymmetry left in a peer fight is the craft. */
+function npcBody(level, cfg) {
+  const st = cfg.rules.npcStanding || {}, syn = cfg.sb.opponentSheetSynthesis || {};
+  const threat = level * 2;
+  const curve = (v, knee) => (v <= knee ? v : knee + Math.pow(v - knee, syn.aboveKneeExponent ?? 0.75));
+  const attr = Math.max(syn.attributeFloor ?? 2, Math.round(curve(threat * (syn.threatToAttribute ?? 0.08), syn.attributeKnee ?? 6)));
+  const hp = Math.max(1, Math.round((Number(st.healthBase) || 30) + level * (Number(st.healthPerLevel) || 5)));
+  const en = Math.max(1, Math.round((Number(st.energyBase) || 100) + level * (Number(st.energyPerLevel) || 5)));
+  return { level, attr, hp, en };
+}
+function makeSweeper(catalog, body = null) {
+  if (body) return {
+    id: "sim-sweeper", name: "The Sweeper", level: body.level,
+    attributes: { practical: body.attr, physical: body.attr, mental: body.attr, social: body.attr },
+    subAttributes: {}, alignment: {}, health: body.hp, maxHealth: body.hp, energy: body.en, maxEnergy: body.en,
+    abilities: Object.keys(catalog).map(id => ({ abilityId: id, level: 2 })),
+    inventory: [], codex: { schemaVersion: 1, topics: {} },
+  };
   return {
     id: "sim-sweeper", name: "The Sweeper", level: LEVEL,
     attributes: { practical: 5, physical: 5, mental: 5, social: 5 },
@@ -107,8 +133,14 @@ function craftPanel(menu) {
 
 /** One bout on the production path, with THIS variant's config. */
 function fight(cfg, encId, def, skill, seed, menu) {
-  const c = makeSweeper(catalog);
   const oppSheet = contestSheetFor(def, { sb: cfg.sb, content: { ...CONTENT, rules: cfg.rules } });
+  let body = null;
+  if (MATCH && Number.isFinite(Number(oppSheet?.level))) {
+    const foeL = Number(oppSheet.level);
+    const lvl = MATCH === "peer" ? foeL : Math.max(1, foeL + Number(MATCH));
+    body = BODY === "npc" ? npcBody(lvl, cfg) : { level: lvl, attr: 5, hp: HP, en: 200 };
+  }
+  const c = makeSweeper(catalog, body);
   c.activeEncounter = { defId: def.id, state: startEncounter(def, { oppSheet }) };
   const rng = makeRng(seed);
   const decl = declFromSelection([skill], menu, "standard", { character: c, sb: cfg.sb });
@@ -137,7 +169,7 @@ function fight(cfg, encId, def, skill, seed, menu) {
   const st = c.activeEncounter.state;
   return { ...t, won: /yield|fell|overcome|solved|fled/.test(String(t.outcome || "")),
     how: !t.ended ? "cap" : /player_down|incapac/.test(String(t.outcome)) ? "player-down" : (st?.opponentHealth ?? 1) <= 0 ? "health" : (st?.pressure?.opponent ?? 0) >= (st?.breakAt?.opponent ?? Infinity) ? "break" : t.outcome,
-    hpLost: t.hpStart - (c.health ?? 0), oppHp0, oppHpLeft: st?.opponentHealth ?? null, foeLevel: oppSheet?.level ?? null, foeHealth: oppSheet?.health ?? null };
+    hpLost: t.hpStart - (c.health ?? 0), oppHp0, oppHpLeft: st?.opponentHealth ?? null, foeLevel: oppSheet?.level ?? null, foeHealth: oppSheet?.health ?? null, playerLevel: c.level, playerHp: c.maxHealth, craftTier: decl.tier || 1 };
 }
 
 const mean = (a) => a.length ? a.reduce((x, y) => x + y, 0) / a.length : 0;
@@ -151,7 +183,7 @@ function runVariant(label, dials) {
   const sweeper = makeSweeper(catalog);
   const menu = battleSkillsForCharacter(sweeper, { catalog, rules: cfg.rules, sb: cfg.sb });
   const panel = craftPanel(menu);
-  const agg = { fights: 0, won: 0, ended: 0, capped: 0, stalled: 0, rounds: 0, how: {}, hits: [], foeHits: [], hpLost: 0, playerDown: 0, breakNeeded: [], breakGot: [], byEnc: [] };
+  const agg = { fights: 0, won: 0, ended: 0, capped: 0, stalled: 0, rounds: 0, how: {}, hits: [], foeHits: [], hpLost: 0, playerDown: 0, breakNeeded: [], breakGot: [], byEnc: [], roundsList: [], winRounds: [], breakWins: 0, playerLevels: [], winRoundsByTier: {}, fightsByTier: {} };
   for (const [encId, def] of runnable) {
     const e = { encId, fights: 0, won: 0, ended: 0, capped: 0, rounds: 0, foeLevel: null, foeHealth: null, breakAt: null, how: {} };
     for (const skill of panel) for (let s = 0; s < FIGHTS; s++) {
@@ -163,6 +195,9 @@ function runVariant(label, dials) {
       if (r.stalled) agg.stalled++;
       e.how[r.how] = (e.how[r.how] || 0) + 1; agg.how[r.how] = (agg.how[r.how] || 0) + 1;
       agg.hits.push(...r.hits); agg.foeHits.push(...r.foeHits); agg.hpLost += r.hpLost;
+      agg.roundsList.push(r.rounds); if (r.won) { agg.winRounds.push(r.rounds); if (r.how === "break") agg.breakWins++; (agg.winRoundsByTier[r.craftTier] ||= []).push(r.rounds); }
+      (agg.fightsByTier[r.craftTier] ||= { n: 0, won: 0 }).n++; if (r.won) agg.fightsByTier[r.craftTier].won++;
+      if (MATCH) { agg.playerLevels.push(r.playerLevel); (agg.playerHps ||= []).push(r.playerHp); }
       if (/player-down/.test(r.how)) agg.playerDown++;
       e.foeLevel = r.foeLevel; e.foeHealth = r.foeHealth; e.breakAt = r.pressureAt;
       if (r.pressureAt != null) agg.breakNeeded.push(r.pressureAt);
@@ -182,10 +217,24 @@ function print(v) {
   console.log(`    ${a.fights} fights · ${runnable.length} encounters × ${v.panel.length} crafts × ${FIGHTS} samples · cap ${MAX_ROUNDS} rounds`);
   console.log(`    ENDS ${pct(a.ended, a.fights)}   win ${pct(a.won, a.fights)}   capped ${pct(a.capped, a.fights)}   stalled ${pct(a.stalled, a.fights)}   mean rounds ${(a.rounds / Math.max(1, a.fights)).toFixed(1)}`);
   console.log(`    how it ended: ${Object.entries(a.how).sort((x, y) => y[1] - x[1]).map(([k, n]) => `${k} ${pct(n, a.fights)}`).join(" · ")}`);
+  // ⛔ ERIK'S THREE TARGETS, scored. Rounds are the ENDED fights' rounds (a capped fight has no length yet);
+  // break is a share of WINS; "trivial" is read off win% and rounds in a +N match.
+  const ended = a.roundsList.filter((_, i) => true);
+  const q = (arr, f) => { if (!arr.length) return 0; const s2 = [...arr].sort((x, y) => x - y); return s2[Math.min(s2.length - 1, Math.floor(f * s2.length))]; };
+  const inBand = a.winRounds.filter(r => r >= TARGET.lo && r <= TARGET.hi).length;
+  const breakShare = a.won ? a.breakWins / a.won : 0;
+  const lvlNote = MATCH ? ` · player L${q(a.playerLevels, 0.5)} (${MATCH}${BODY === "npc" ? ", foe's own body formula" : ", sweeper body"})` : "";
+  console.log(`    TARGETS${lvlNote}`);
+  console.log(`      rounds to a WIN: p10 ${q(a.winRounds, 0.1)} · p50 ${q(a.winRounds, 0.5)} · p90 ${q(a.winRounds, 0.9)} · inside ${TARGET.lo}–${TARGET.hi}: ${pct(inBand, a.winRounds.length)} of ${a.winRounds.length} wins   ${inBand / Math.max(1, a.winRounds.length) >= 0.8 ? "✅" : "❌"}`);
+  console.log(`      break as a share of wins: ${(breakShare * 100).toFixed(0)}%   (target ${TARGET.breakLo * 100}–${TARGET.breakHi * 100}%)   ${breakShare >= TARGET.breakLo && breakShare <= TARGET.breakHi ? "✅" : "❌"}`);
+  console.log(`      win ${pct(a.won, a.fights)} · you down ${pct(a.playerDown, a.fights)} · capped ${pct(a.capped, a.fights)}`);
+  // ⚠️ ACROSS THE BOARD MEANS PER TIER. levelReq == tier for every harm craft, so a level-6 player may hold a T5; the
+  // tier spread (T1 ~5 a hit, T5 ~50) is real in play, and no pool or level dial closes it. Shown, not averaged away.
+  console.log(`      by the craft's TIER — p50 rounds to a win · inside ${TARGET.lo}–${TARGET.hi} · win%:  ` + Object.keys(a.fightsByTier).sort().map(t => { const w = a.winRoundsByTier[t] || []; const ib = w.filter(r => r >= TARGET.lo && r <= TARGET.hi).length; return `T${t} ${q(w, 0.5)} · ${pct(ib, w.length)} · ${pct(a.fightsByTier[t].won, a.fightsByTier[t].n)}`; }).join("   "));
   const tiers = Object.keys(v.byTier).sort();
   console.log(`    YOUR hits: ${a.hits.length} landed · mean per tier  ${tiers.map(t => `T${t} ${mean(v.byTier[t]).toFixed(1)}`).join("  ")}`);
   console.log(`    path of your hits: ${Object.entries(v.paths).sort((x, y) => y[1] - x[1]).map(([k, n]) => `${k} ${pct(n, a.hits.length)}`).join(" · ") || "none"}`);
-  console.log(`    FOE's hits on you: ${a.foeHits.length} landed · mean ${mean(a.foeHits.map(h => h.amount)).toFixed(1)} · you lost ${(a.hpLost / Math.max(1, a.fights)).toFixed(1)} hp per fight of ${HP} · down ${pct(a.playerDown, a.fights)} · path ${Object.entries(v.foePaths).map(([k, n]) => `${k} ${pct(n, a.foeHits.length)}`).join(" · ") || "none"}`);
+  console.log(`    FOE's hits on you: ${a.foeHits.length} landed · mean ${mean(a.foeHits.map(h => h.amount)).toFixed(1)} · you lost ${(a.hpLost / Math.max(1, a.fights)).toFixed(1)} hp per fight of ${MATCH ? Math.round(mean(a.playerHps || [HP])) : HP} · down ${pct(a.playerDown, a.fights)} · path ${Object.entries(v.foePaths).map(([k, n]) => `${k} ${pct(n, a.foeHits.length)}`).join(" · ") || "none"}`);
   console.log(`    BREAK exit: foes need ${a.breakNeeded.length ? mean(a.breakNeeded).toFixed(1) : "?"} pressure ticks; fights produced ${mean(a.breakGot).toFixed(2)} per fight, max ${a.breakGot.length ? Math.max(...a.breakGot) : 0}`);
   console.log(`    per encounter (foe L / hp / break-at → ends · win · how):`);
   for (const e of a.byEnc) console.log(`      ${e.encId.padEnd(26)} L${String(e.foeLevel ?? "?").padStart(2)} / ${String(e.foeHealth ?? "?").padStart(3)}hp / ${String(e.breakAt ?? "?").padStart(2)}  →  ends ${pct(e.ended, e.fights).padStart(4)} · win ${pct(e.won, e.fights).padStart(4)} · ${Object.entries(e.how).sort((x, y) => y[1] - x[1]).map(([k, n]) => `${k} ${n}`).join(", ")}${e.error ? `  ⚠️ ${e.error}` : ""}`);
@@ -200,7 +249,7 @@ for (const val of RANGE) {
 }
 if (variants.length > 1) {
   console.log(`\n═══ SUMMARY — ${VARY} ═══`);
-  console.log(`    ${"value".padEnd(10)} ${"ends".padStart(6)} ${"win".padStart(6)} ${"capped".padStart(7)} ${"rounds".padStart(7)} ${"your hit".padStart(9)} ${"foe hit".padStart(8)} ${"hp lost".padStart(8)} ${"you down".padStart(9)}`);
-  for (const v of variants) { const a = v.agg; console.log(`    ${String(v.label.split(" = ")[1]).padEnd(10)} ${pct(a.ended, a.fights).padStart(6)} ${pct(a.won, a.fights).padStart(6)} ${pct(a.capped, a.fights).padStart(7)} ${(a.rounds / Math.max(1, a.fights)).toFixed(1).padStart(7)} ${mean(a.hits.map(h => h.amount)).toFixed(1).padStart(9)} ${mean(a.foeHits.map(h => h.amount)).toFixed(1).padStart(8)} ${(a.hpLost / Math.max(1, a.fights)).toFixed(1).padStart(8)} ${pct(a.playerDown, a.fights).padStart(9)}`); }
+  console.log(`    ${"value".padEnd(10)} ${"ends".padStart(6)} ${"win".padStart(6)} ${"capped".padStart(7)} ${"rounds".padStart(7)} ${"p50 win".padStart(8)} ${"in 5–15".padStart(8)} ${"brk/win".padStart(8)} ${"your hit".padStart(9)} ${"foe hit".padStart(8)} ${"you down".padStart(9)}`);
+  for (const v of variants) { const a = v.agg; const q2 = (arr) => { if (!arr.length) return 0; const s2 = [...arr].sort((x, y) => x - y); return s2[Math.floor(0.5 * s2.length)]; }; const inB = a.winRounds.filter(r => r >= TARGET.lo && r <= TARGET.hi).length; console.log(`    ${String(v.label.split(" = ")[1]).padEnd(10)} ${pct(a.ended, a.fights).padStart(6)} ${pct(a.won, a.fights).padStart(6)} ${pct(a.capped, a.fights).padStart(7)} ${(a.rounds / Math.max(1, a.fights)).toFixed(1).padStart(7)} ${String(q2(a.winRounds)).padStart(8)} ${pct(inB, a.winRounds.length).padStart(8)} ${pct(a.breakWins, a.won).padStart(8)} ${mean(a.hits.map(h => h.amount)).toFixed(1).padStart(9)} ${mean(a.foeHits.map(h => h.amount)).toFixed(1).padStart(8)} ${pct(a.playerDown, a.fights).padStart(9)}`); }
 }
 if (OUT) { writeFileSync(join(root, OUT), JSON.stringify({ at: new Date().toISOString(), vary: VARY, set: SET, fights: FIGHTS, level: LEVEL, hp: HP, variants: variants.map(v => ({ ...v, agg: { ...v.agg, hits: undefined, foeHits: undefined } })) }, null, 1)); console.log(`\nwrote ${OUT}`); }

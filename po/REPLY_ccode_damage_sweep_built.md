@@ -153,3 +153,89 @@ turn and a number that answers."* The numbers are answered; the turning is his.
 ✅ **Gates:** 12 in `how_it_works` §151 (path share both sides, population, rank already moves damage, `breakAtMax`
 inert/binding, the `breakAt` seam). `scripts/damage_sweep.mjs --vary <path> --range a,b,c` for any dial;
 `--set` to combine; a path that does not exist is an error, never a silent no-op.
+
+---
+
+# §7 — ⛔ ERIK RULED THE TARGETS (2026-09-11), AND HERE ARE THE OPTIONS
+
+> Erik: *"Too long. Fights should be 10 rounds ± 5 when fighting something at or within a level or 2 of you —
+> across the board. If you are 10 levels higher in a 1-1 fight it should be very trivial. Breaking for a win
+> should be 30% to 15% of the time. Tune knobs to help get us here, and let me know the options."*
+
+⛑ **The sweep now matches the player's level to each foe (`--match peer | +10 | -2`) and builds the player by the
+foe's own body formula (`--body npc`), so a peer fight is symmetric by construction.** Rounds are reported as a
+distribution; break as a share of WINS; and per craft TIER — because `levelReq == tier` for every harm craft,
+a level-6 player may hold a T5, and the ×10 tier spread is real in play.
+
+## §7.1 — where it stands today, peer-matched
+
+| | median rounds to a win | inside 5–15 | break / wins | win | you down |
+|---|---|---|---|---|---|
+| **peer (L20 vs L20)** | **14** (p10 3 · p90 25) | 43% | 3% | 75% | 3% |
+| **+10 (L30 vs L20)** | **12** | 54% | 8% | 92% | 0% |
+
+⛔ **Neither target holds.** Level barely reaches a fight: +10 levels is +50 hp, +0.6 damage, ~+2 attribute —
+and **level never enters the contest roll**. Length is the foe's pool (`30 + 5 × level`) against ~14-point hits.
+
+## §7.2 — the single dials, peer, patience 30
+
+| dial | values | median | in 5–15 | break / wins | you down |
+|---|---|---|---|---|---|
+| ⛔ `damage.scaling.perLevel` (level hits harder) | 0.06 → 0.3 → **0.6** | 14 → 12 → **10** | 41 → 50 → **72%** | 3 → 0 → 0 | 3 → 7 → 8% |
+| `npcStanding.healthPerLevel` (both pools) | 5 → 3 → 2 | 14 → 11 → 9 | 40 → 53 → 60% | 3 → 1 → 0 | 3 → 9 → 13% |
+| `momentum.pressure.breakAtMax` | off → 6 → 4 | 14 → 15 → 14 | — | 2 → **17** → 36% | — |
+| `momentum.pressure.breakAtLevelFraction` | 0.5 → 0.35 → 0.25 | 14 | — | 3 → 11 → **23%** | — |
+| `momentum.marginScale` (meter fill) | 0.2 → 0.35 → 0.5 | 14 → 13 → 13 | — | 2 → 10 → **16%** | — |
+
+⚠️ **Length and break pull against each other:** the harder the hits, the sooner health ends it and the fewer
+pressure ticks a fight produces — `perLevel 0.6` alone drives break to **0%**. So the break dials have to be set
+*for the shorter fight*, not for today's.
+
+## §7.3 — ⚑ THE OPTIONS
+
+### Option 1 — LEVEL HITS HARDER · ✅ all three targets
+`damage.scaling.perLevel 0.06 → 0.6` · `damage.scaling.maxScaling 6 → 60` (levels to 100) ·
+`momentum.marginScale 0.2 → 0.5` · `momentum.pressure.breakAtMax: 4` (new dial)
+
+| | median | in 5–15 | break / wins | win | you down | per tier (median) |
+|---|---|---|---|---|---|---|
+| **peer** | **8** | 73% | ✅ **27%** | 86% | 11% | T1 15 · T2 12 · T3 10 · T4 8 · T5 4 |
+| **+10** | **6** | 67% | ✅ 16% | **97%** — 100% on every real duel | **0%** | T1 7 · T2 7 · T3 6 · T4 5 · T5 3 |
+| **−2** (foe two above you) | 7 | 73% | 34% | 79% | 19% | T3 8 · T4 7 |
+
+⛑ **+10 is trivial, peer is 10±5 for T2–T4, break sits mid-band.** ⚠️ **Cost: fights are deadlier both ways** —
+the foe's mean hit goes 10 → 25, and you go down 11% of peer fights instead of 3%. A foe two levels above you
+is a real fight (greatcat, zone raider ~35–45%).
+
+### Option 2 — SMALLER POOLS · gentler, more even across tiers, break a touch over
+`npcStanding.healthPerLevel 5 → 3` · `momentum.marginScale 0.2 → 0.5` · `momentum.pressure.breakAtMax: 5`
+
+| | median | in 5–15 | break / wins | win | you down | per tier (median) |
+|---|---|---|---|---|---|---|
+| **peer** | 9 | 65% | 33% | 86% | 11% | **T1 12 · T2 12 · T3 11 · T4 7 · T5 3** |
+| **+10** | 7 | 72% | 34% | 97% | 0% | T1 9 · T2 9 · T3 8 · T4 6 · T5 3 |
+| **−2** | 9 | 65% | ✅ 30% | 80% | 18% | T3 11 · T4 7 |
+
+⛑ **Tighter across tiers (a T1 cantrip is 12, not 15) and the foe's hit stays at 14.** ⚠️ +10 is 7 rounds, not 6;
+break overshoots by 3–4 points — `breakAtMax 6` or `marginScale 0.4` would bring it in. ⚠️ **Note this changes
+the PLAYER's pool too if the same standing formula is read** — the sweep's `--body npc` does; a real save keeps
+its own `maxHealth`, so in play only the foes shrink, which makes it easier than measured here.
+
+### Option 3 — halfway (`perLevel 0.3`, `healthPerLevel 4`, break as Option 1)
+peer median 11, 62% in band; +10 median 8. ⚠️ Lands the length target less well than either, and buys nothing
+the other two don't. Included for completeness.
+
+## §7.4 — ⚠️ THE RESIDUE NO DIAL CLOSES: THE TIER SPREAD
+
+Under every option a **T5 capstone ends a peer fight in 3–4 rounds** and a T1 cantrip takes 12–15. That is
+`tierLadder` — T5 is 5d6+8 (25.5) against T1's 1d6 (3.5), ×7 — and it is authored, not a fight dial. ⬜ **If Erik
+wants "across the board" to include T1 and T5, that is a ladder ruling** (`tierLadder.5.dice.plus` / `nMult`),
+not a tuning knob, and it changes what a capstone *is*.
+
+## §7.5 — ⛔ RECOMMENDATION, AND WHAT SHIPS
+**Option 1.** It is the only set that lands all three targets as ruled, and "+10 is trivial" needs level to reach
+damage — which is exactly what `perLevel` is for. ⚠️ Deadlier fights are the price, and they look like what
+"10 rounds" meant.
+
+⛔ **Nothing is shipped.** `breakAtMax` exists as an inert dial; the four values are one content edit each
+(`skill_battle_system.json`, `resolution.json`). Say which option, or a mix, and it lands with the sweep as its gate.

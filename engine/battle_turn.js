@@ -29,7 +29,7 @@ import { encounterKind, frameCollapsible, collapseMode, collapseResult, collapse
 import { abilityTier } from "./skilltree.js";
 import { effectiveEnergyCost, autoAdvancePracticedRanks, SUB_OF } from "./progression.js";
 import { capabilityMenu, resolveTier, offersFreeFloor } from "./capabilities.js";
-import { usableCombatItems, wieldBonusFor, consumeItem, removeItem } from "./inventory.js";
+import { usableCombatItems, wieldBonusFor, consumeItem, removeItem, wornSoak, wornSoakLayers } from "./inventory.js";
 import { recordUse } from "./practice.js";
 import { applyCondition } from "./conditions.js";
 import { protectionFromCraft, tickProtections } from "./intercept.js";
@@ -224,8 +224,9 @@ export function personOpponentFor(rec, { catalog = {}, cfg = {}, day = null, tra
   // ⚑ R41 — WHICH FORM IS IN FRONT OF THE PLAYER. A Sovereign arrives DIMINISHED at a mid arc stage and in FINAL
   // FORM at the last; the record is one, the form is chosen by the arc's live stage (threaded in as `stageOf`,
   // never read from the world-tick here). No `forms` block → exactly the record as authored.
+  // ✅ Erik 2026-09-11: the leveling rules ride on `cfg` — the player's body a person carries, and the kit's tier bands
+  if (leveling) cfg = { ...cfg, leveling };
   const form = sovereignFormFor(rec, { stageOf });
-  const sheet = personSheetFor(rec, { day, cfg, ...(form?.level != null ? { levelOverride: form.level } : {}) });
   // ⛔ THE DOMAIN DRAW HAS NEVER RUN IN PLAY. `kitFor` fills a kit from a person's place on the circle only
   // `if (domains && typeof domainAccess === "function")` — and this, its ONLY live caller, passed neither.
   // ⚠️ So a person's kit was whatever `craftsOf` found on their sheet, and the 41 people carrying no abilities
@@ -237,12 +238,22 @@ export function personOpponentFor(rec, { catalog = {}, cfg = {}, day = null, tra
   const kitRec = form?.abilities ? { ...rec, abilities: form.abilities } : rec;
   const { skills } = battleSkillsFor(kitRec, { catalog, day, cfg, domainAccess, traditionIndex });
   if (!skills.length) return null;                       // nothing to fight with — let the threat path have them
+  // ✅ 2026-09-11: the sheet is built AFTER the kit, so a person's body can build toward what they fight with — the attributes
+  // their harm crafts roll on, most-used first (`sheetFor` reads `cfg.bodyFocus` ahead of the roles' leans).
+  const harmAttr = {};
+  for (const s of skills) if (s.function === "strike" || s.function === "break") harmAttr[s.attribute || "practical"] = (harmAttr[s.attribute || "practical"] || 0) + 1;
+  const bodyFocus = Object.entries(harmAttr).sort((a, b) => b[1] - a[1]).map(([a]) => a);
+  const sheet = personSheetFor(rec, { day, cfg: bodyFocus.length ? { ...cfg, bodyFocus } : cfg, ...(form?.level != null ? { levelOverride: form.level } : {}) });
+  const gear = npcGear(rec, { items, cfg });
+  // ✅ Erik 2026-09-11: under the player's rules a person's soak is what they WEAR, as yours is
+  const worn = cfg?.body === "player" ? { soak: wornSoak({ inventory: gear }), layers: wornSoakLayers({ inventory: gear }) } : null;
   return {
     name: sheet.name, attributes: sheet.attributes, health: sheet.health, energy: sheet.energy,
     ...(sheet.subAttributes ? { subAttributes: sheet.subAttributes } : {}),
     level: sheet.level,
-    soak: sheet.soak, skills, tacticTags: rec.tacticTags || [],
-    inventory: npcGear(rec, { items, cfg }),
+    soak: (Number(sheet.soak) || 0) + (worn ? worn.soak : 0), skills, tacticTags: rec.tacticTags || [],
+    ...(worn && worn.layers.length ? { soakLayers: worn.layers } : {}),
+    inventory: gear,
     threat: Math.max(10, Math.round(sheet.level * 2)),
     _person: rec.id || null,
     ...(form?.form ? { _form: form.form, _formNote: form.note || null } : {}),   // R41: what the player is facing
@@ -303,7 +314,7 @@ export function duelFromTarget(character, target, { catalog = {}, npcs = {}, cfg
 
 /** A fresh turn record — sense → action → bonus. */
 export function freshTurn() {
-  return { phase: "sense", sel: { sense: [], action: [], bonus: [] }, text: { sense: "", action: "", bonus: "" }, setupBonus: 0, bonusEarned: false, senseDone: false, senseLine: "" };
+  return { phase: "sense", sel: { sense: [], action: [], bonus: [] }, text: { sense: "", action: "", bonus: "" }, setupBonus: 0, bonusEarned: false, foeBonusEarned: false, senseDone: false, senseLine: "" };
 }
 
 /** ONE TURN, the way the app plays it (CCODE-45: sense → action → bonus). `sense`/`action`/`bonus` are declarations from
@@ -322,7 +333,7 @@ export function playTurn(character, def, { sense = null, action = null, bonus = 
   party = null } = {}) {
   const turn = freshTurn();
   // the app resolves the sense in one call and the action later; the read it earned rides in as `turnState`
-  if (turnState) { turn.setupBonus = Number(turnState.setupBonus) || 0; turn.bonusEarned = !!turnState.bonusEarned; turn.senseDone = !!turnState.senseDone; }
+  if (turnState) { turn.setupBonus = Number(turnState.setupBonus) || 0; turn.bonusEarned = !!turnState.bonusEarned; turn.foeBonusEarned = !!turnState.foeBonusEarned; turn.senseDone = !!turnState.senseDone; }
   const beats = [], receipts = [];
   const state = () => character.activeEncounter?.state;
   const apply = (rr, decl, label) => {
@@ -333,12 +344,18 @@ export function playTurn(character, def, { sense = null, action = null, bonus = 
     return r;
   };
   let last = null, lastFn = seenTendency;
+  // ✅ 2026-09-11 — THE FOE READS YOU WHETHER OR NOT YOU LOOK. The sense step ran only when the PLAYER declared a read, so
+  // skipping it denied the foe its read, its setup and its bonus action — measured with a player's growth on both sides, never
+  // reading beat reading every turn by 13 points. With `senseStep.foeReadsWhenYouSkip`, a skipped step still runs with you
+  // declaring nothing: the foe reads (or hides), and you earn nothing from a step you did not take (`declaredNothing`).
+  if (!sense && !turnState && sb?.senseStep?.foeReadsWhenYouSkip === true)
+    sense = { id: "_no_read", function: "idle", noAct: true, tier: 1, rank: 1, attribute: "mental", intensity: "conserve", name: "you do not look", energyCost: 0 };
   if (sense) {
     const sd = resolveDeclRank(sense, { character, catalog });
     const rr = skillBattleRound(state(), def, sd, { character, content, rules, sb, steps, seenTendency: lastFn, foePolicy, rng, party, phase: "sense", ground, tickEffects: false });
     character.energy = Math.max(0, character.energy + (rr.deltas?.energy || 0));
     character.activeEncounter = { defId: def.id, state: rr.state };
-    turn.senseDone = true; turn.setupBonus = rr.setupBonus || 0; turn.bonusEarned = !!rr.bonusEarned?.player;
+    turn.senseDone = true; turn.setupBonus = rr.setupBonus || 0; turn.bonusEarned = !!rr.bonusEarned?.player; turn.foeBonusEarned = !!rr.bonusEarned?.opponent;
     turn.senseLine = `You read with ${sd.name}${sd.woven ? ` ⋈ ${sd.woven.name}` : ""} — ${(rr.player?.degree || "").replace("_", " ")}.`;
     if (state()) { state().lastOppReceipt = rr.opponent || null; state().lastReadWasSense = true; state().senseTierEarned = rr.senseTier ?? null; state().senseResist = rr.senseResist || null; }
     receipts.push({ label: "sense", decl: sd, rr });
@@ -351,7 +368,7 @@ export function playTurn(character, def, { sense = null, action = null, bonus = 
   const st = state();
   if (openGuards(character, st, ad, { catalog })) st.guardPick = [];
   const swingBefore = st?.momentum ?? 0;
-  let rr = skillBattleRound(st, def, ad, { character, content, rules, sb, steps, seenTendency: lastFn, foePolicy, rng, party, phase: "action", ground, tickEffects: !(turn.bonusEarned && bonus), setupBonus: turn.setupBonus || 0 });
+  let rr = skillBattleRound(st, def, ad, { character, content, rules, sb, steps, seenTendency: lastFn, foePolicy, rng, party, phase: "action", ground, tickEffects: !((turn.bonusEarned && bonus) || turn.foeBonusEarned), setupBonus: turn.setupBonus || 0 });
   if (finisher) rr = collapseIfFinished(rr, def, { swingBefore, family, sb, frameContent });
   lastFn = ad.function;
   if (Array.isArray(st?.protections) && st.protections.length) rr.state.protections = tickProtections(st.protections);
@@ -360,9 +377,19 @@ export function playTurn(character, def, { sense = null, action = null, bonus = 
   if (!ended && checkIncapacitation(character)) { ended = true; outcome = "incapacitated"; }
   if (!ended && turn.bonusEarned && bonus) {
     const bd = resolveDeclRank(bonus, { character, catalog });
-    const br = skillBattleRound(state(), def, bd, { character, content, rules, sb, steps, seenTendency: lastFn, foePolicy, rng, party, phase: "bonus", ground, tickEffects: true });
+    const br = skillBattleRound(state(), def, bd, { character, content, rules, sb, steps, seenTendency: lastFn, foePolicy, rng, party, phase: "bonus", ground, tickEffects: !turn.foeBonusEarned });
     apply(br, bd, "bonus");
     ended = br.ended; outcome = br.outcome || null; endRR = br;
+    if (!ended && checkIncapacitation(character)) { ended = true; outcome = "incapacitated"; }
+  }
+  // ✅ ERIK 2026-09-11 ("absolutely yes"): THE FOE TAKES ITS BONUS ACTION when its read earned one — a full exchange of its
+  // choosing, exactly as yours is: in YOUR bonus the foe answers with its own move, so in ITS bonus you answer with the move you
+  // declared this turn. ⛔ My first build had you BRACE (a free guard) — one-sided where yours is two-sided — and the foe won
+  // 63–70% of even fights on it. The last step, so it ticks the turn's effects.
+  if (!ended && turn.foeBonusEarned) {
+    const fb = skillBattleRound(state(), def, ad, { character, content, rules, sb, steps, seenTendency: lastFn, rng, party, foePolicy, phase: "bonus", tickEffects: true, ground });
+    apply(fb, ad, "their bonus");
+    ended = fb.ended; outcome = fb.outcome || null; endRR = fb;
     if (!ended && checkIncapacitation(character)) { ended = true; outcome = "incapacitated"; }
   }
   if (state()) state().turn = freshTurn();

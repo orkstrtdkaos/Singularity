@@ -5,7 +5,7 @@
 // narrates round receipts and proposes choices — it never advances state.
 // Incapacitation, never engine-imposed death.
 
-import { battleRound, opponentPolicy, synthesizeOpponentSheet, synthesizeStaticSheet, declaredSense } from "./skill_battle.js";
+import { battleRound, opponentPolicy, synthesizeOpponentSheet, synthesizeStaticSheet, declaredSense, isObscureDecl } from "./skill_battle.js";
 import { wornSoak, wornSoakLayers, wieldBonusFor } from "./inventory.js";   // 2026-09-04: the PC’s authored armour reaches the fight seat
 import { targetableAllies, alliesOf } from "./combatants.js";
 import { commandSlots, bringForward, theatresOf, overmatchOf, answersOvermatch, scaleRank } from "./melee.js";   // CCODE-274: how many you lead is earned; who comes forward is chosen
@@ -207,7 +207,8 @@ export function duelRound(state, def, resolution, rules, opts = {}) {
 /** ✅ ERIK 2026-09-11 (Q3) — "foes would definitely gain a bonus from reading you successfully and they should and can
  *  use weapons and items." The foe's OWN moves, which the scoring policy never made:
  *    · the SENSE step — it reads you (its sharpest read; else it sizes you up on its best wit, the generic read a PC
- *      always has), or it HIDES when it holds a craft its author made OBSCURE and you have been reading it.
+ *      always has), or it HIDES when it holds a craft its author made OBSCURE and you have been reading it or hiding from it
+ *      (hide against hide pays nobody; a hide against a reader is a contest; a read into a hider feeds it).
  *    · the ACTION step — low on health or wind, it drinks what it carries, as you would.
  *  Returns a declaration, or null (null → the policy, exactly as before). Pure. */
 export function foeOwnMove(oppSheet, state = {}, sb = null, phase = "action", abilities = null) {
@@ -216,7 +217,7 @@ export function foeOwnMove(oppSheet, state = {}, sb = null, phase = "action", ab
   if (phase === "sense") {
     const defOf = (s) => (abilities && (abilities[s.abilityId] || abilities[s.id])) || null;
     const hide = skills.find(s => s.obscure === true || defOf(s)?.obscure === true);
-    if (hide && Number(state?.playerReads) > 0) return { ...hide, intensity: "standard", attribute: hide.attribute || "practical", obscure: true };
+    if (hide && (Number(state?.playerReads) > 0 || Number(state?.playerHides) > 0)) return { ...hide, intensity: "standard", attribute: hide.attribute || "practical", obscure: true };
     const fns = sb?.senseStep?.senseFunctions || ["reveal", "foresee", "track"];
     const reads = skills.filter(s => fns.includes(s.function)).sort((a, b) => (Number(b.tier) || 1) - (Number(a.tier) || 1) || (Number(b.rank) || 1) - (Number(a.rank) || 1));
     if (reads.length) return { ...reads[0], intensity: "standard", attribute: reads[0].attribute || "mental" };
@@ -448,6 +449,7 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   // the step that ENDS the turn (the same signal that ticks effects), so "round 3" means three turns, not six steps.
   // ✅ Q3: a foe hides from a player it has SEEN reading — the count rides on the fight's state.
   if (phase === "sense" && declaredSense(playerDecl, sb)) state = { ...state, playerReads: (Number(state.playerReads) || 0) + 1 };
+  else if (phase === "sense" && isObscureDecl(playerDecl)) state = { ...state, playerHides: (Number(state.playerHides) || 0) + 1 };
   // ✅ Q3: the foe drinks what it carries, as you do — applied HERE, where its pools live, and the draught leaves its sheet.
   if (oppDecl?.itemMove?.mode === "drink" && r?.state) {
     const g = oppDecl.itemMove.restores || {};
@@ -664,6 +666,9 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
     // value here that must also RIDE FORWARD onto state — it is earned in the sense step and spent in the
     // action step of the same turn, so a wrapper that merely reports it has still dropped it.
     foeReadTier: r.foeReadTier,
+    // ✅ 2026-09-11: the foe's read and yours, as setups — computed by the round, spent by the action step, and until now
+    // dropped here, so no receipt and no harness could see what the foe's read bought it.
+    foeSetup: r.foeSetup ?? null, playerSetup: r.playerSetup ?? null,
     // ⛔ THE UI OWES THE PICKING AND THE ENGINE OWES A STABLE ANSWER TO "who is forward". Erik: "this needs
     // to be a UI pick." Without this on the receipt there is nothing for that control to bind to.
     // ⛔ THE SCALES ON THE RECEIPT, so the UI can say what this actually is before the player commits.

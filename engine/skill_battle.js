@@ -806,9 +806,14 @@ export function senseResistOf(oppSheet = {}, sb) {
   // concealing craft the character holds) — the seat's answer to the same question, now that the foe reads you too.
   const hide = (Array.isArray(oppSheet.skills) ? oppSheet.skills : []).find(x => hideFns.includes(x.function))
     || (Number(oppSheet.concealTier) > 0 ? { tier: Number(oppSheet.concealTier), name: "what you keep hidden" } : null);
-  if (hide) return { value: Math.round((hide.tier || 1) * (cfg.concealTierWeight ?? 6)), label: `they are hiding it (${hide.name || hide.function})`, from: "craft" };
   const best = Math.max(0, ...Object.values(oppSheet.attributes || {}).map(Number).filter(Number.isFinite));
-  return { value: Math.round(best * (cfg.passiveAttributeWeight ?? 3)), label: "their natural guardedness", from: "passive" };
+  const passive = { value: Math.round(best * (cfg.passiveAttributeWeight ?? 3)), label: "their natural guardedness", from: "passive" };
+  if (!hide) return passive;
+  const craft = { value: Math.round((hide.tier || 1) * (cfg.concealTierWeight ?? 6)), label: `they are hiding it (${hide.name || hide.function})`, from: "craft" };
+  // ⛔ 2026-09-11 — HOLDING A CONCEAL CRAFT MUST NOT MAKE YOU EASIER TO READ. With a player's growth a body spikes (19 at level
+  // 30), so 3 × attribute is 57 while a T2 conceal is 12 — the craft REPLACED the stronger number, and buying one made you easy
+  // prey. The rule the active obscure already follows ("working at it cannot leave you easier to read") now holds for the held craft.
+  return craft.value >= passive.value ? craft : passive;
 }
 
 /** SNG-500 §4 / CCODE-211 — OBSCURE IS A DECLARATION, NOT A PROPERTY OF THE SHEET.
@@ -2036,6 +2041,10 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
     // their margin over the player's. Using the same number for both would have paid the bonus off the
     // hider's own read - a sign error that reads as balance.
     const playerHiding = isObscureDecl(playerDecl);
+    // ✅ 2026-09-11: a player who DID NOT LOOK (the step ran so the foe could read them) earns nothing from it — no setup of
+    // their own, no tier, no bonus; the foe's read is the step's only content.
+    const playerIdle = declaredNothing(playerDecl);
+    if (playerIdle) out.setupBonus = 0;
     // an ACTIVE obscure opposes the read with the roll they actually made, never less than their passive
     // guardedness — working at it cannot leave you easier to read than standing there.
     const oppObscuring = isObscureDecl(oppDecl);
@@ -2054,12 +2063,12 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
     // computing it twice is how they would drift apart.
     out.senseGap = playerHiding ? (o.margin - Math.max(resist.value, p.margin)) : readerGap;
     if (oppObscuring) out.obscuredBy = { name: oppDecl.name || oppDecl.function, resist: activeResist, was: resist.value };
-    out.senseTier = (out.guardedInsteadOfReading || out.obscuredInsteadOfReading) ? 0
+    out.senseTier = (out.guardedInsteadOfReading || out.obscuredInsteadOfReading || playerIdle) ? 0
       // ⛔ THE TIE GOES TO THE OBSCURER. See obscurerWinsTie — do not soften this.
       : (oppObscuring && obscurerWinsTie(readerGap)) ? 0
       : senseTierFromDegree(p.degree, readerGap, sb);
     const grants = turnCfg.bonusOnDegrees || ["crit_success"];
-    out.bonusEarned = { player: grants.includes(p.degree), opponent: grants.includes(o.degree) };
+    out.bonusEarned = { player: !playerIdle && grants.includes(p.degree), opponent: grants.includes(o.degree) };
     // ⛔ …AND A DECISIVE READ EARNS THE BONUS ACTION (`decisiveReadEarnsBonus`). The ladder already calls a success by
     // `tierByDegree.decisiveMargin` a tier-3 read — the crit's own tier — and only the crit earned the bonus. A read that
     // good is the payoff the turn was built around. Only a READ earns it: a guard or an obscure spent the step on
@@ -2096,13 +2105,24 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
     // read is now the mirror of yours: its margin against what resists being read on YOUR side (your sharpest attribute,
     // or a concealing craft you hold), the same scale and cap, the same floor — a read that fails against someone who is
     // not hiding costs the reader the step, no more. It comes off your setup. ⚠️ A foe that is HIDING is not reading.
+    let foeBonus = false;
     if (declaredSense(oppDecl, sb) && !oppObscuring) {
       const youResist = senseResistOf(playerSheet, sb);
-      let foePart = clamp(Math.round((o.margin - youResist.value) * scale), -cap, cap);
+      const foeGap = o.margin - youResist.value;
+      let foePart = clamp(Math.round(foeGap * scale), -cap, cap);
       if (!playerHiding && senseCfg.passiveFailFloor != null && Number.isFinite(pff)) foePart = Math.max(foePart, pff);
       out.playerSetup = out.setupBonus; out.foeSetup = foePart; out.foeSenseResist = youResist;
       out.setupBonus = clamp(out.setupBonus - foePart, -cap, cap);
+      // ✅ ERIK 2026-09-11 ("absolutely yes"): …AND ITS READ EARNS A BONUS ACTION EXACTLY AS YOURS DOES — a crit, or a decisive
+      // read under the same dial. Against a player who is not hiding, its tier is earned against what resists it.
+      if (!playerHiding) out.foeReadTier = senseTierFromDegree(o.degree, foeGap, sb);
+      foeBonus = grants.includes(o.degree) || (senseCfg.decisiveReadEarnsBonus === true && (out.foeReadTier ?? 0) >= (senseCfg.tierByDegree?.crit ?? 3));
+    } else if (oppObscuring) {
+      // …and a foe that HIDES from your read and beats it cleanly earns one, as you do (SNG-517, mirrored)
+      foeBonus = senseBonusFor({ obscured: true, opponentSensed: declaredSense(playerDecl, sb), opponentIdle: declaredNothing(playerDecl), gap: readerGap, sb }) === "obscurer";
     }
+    // ⚠️ a crit on a STRIKE in the sense step no longer earns the foe anything — the bonus is a read's (or a hide's) payoff
+    out.bonusEarned = { ...out.bonusEarned, opponent: foeBonus };
   }
   return out;
 }

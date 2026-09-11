@@ -65,6 +65,50 @@ export function syncParentAttributes(character) {
   return character;
 }
 
+/** ✅ ERIK 2026-09-11: "the player should have a player's growth. Everything should follow the rules of the game — or be a dial
+ *  we're adjusting." And of NPCs: "They should follow the same rules as players."
+ *
+ *  THE BODY A CHARACTER OF LEVEL L CARRIES UNDER THE PLAYER'S OWN RULES, built from the rules that grow one:
+ *    · creation — every attribute 3 (`start.attributes`), both subs at the parent (`ensureSubAttributes`), two sub points
+ *      to specialise (creation's `pendingSubPoints`), health 15 + 5 × physical, energy `rules.energy.max`
+ *    · each level — `subPointPerLevel` sub points and +5 to both reserves (`applyLevelUps`)
+ *    · the points go to the subs of `focusParents`, in order, round-robin, to `subAttributeCap`, then spill on — a person
+ *      builds toward what they roll with; the parents are the mean of their subs (`syncParentAttributes`).
+ *  One function for an NPC's sheet (`npcStanding.body: "player"`) and the harness's PC. Pure. */
+export function pcBodyAt(level, { rules = {}, focusParents = [], start = null } = {}) {
+  const lv = rules?.leveling || {};
+  const L = Math.max(1, Math.round(Number(level) || 1));
+  const base = { physical: 3, mental: 3, social: 3, practical: 3, ...(start?.attributes || {}) };
+  const subs = {};
+  for (const [sub, parent] of Object.entries(SUB_OF)) subs[sub] = Number(base[parent]) || 2;
+  const cap = Number(lv.subAttributeCap) || 20;
+  let points = Number(start?.subPoints ?? 2) + (L - 1) * (Number(lv.subPointPerLevel) || 1);
+  const focus = [];
+  for (const p of (Array.isArray(focusParents) ? focusParents : [])) for (const s of SUBS) if (SUB_OF[s] === p && !focus.includes(s)) focus.push(s);
+  const rest = SUBS.filter(s => !focus.includes(s));
+  // the first focus parent's subs climb together; when both are full, the next parent's; then everything else, evenly
+  const groups = [];
+  for (const p of (Array.isArray(focusParents) ? focusParents : [])) { const g = SUBS.filter(s => SUB_OF[s] === p); if (g.length) groups.push(g); }
+  groups.push(rest.length ? rest : SUBS);
+  for (const g of groups) {
+    while (points > 0) {
+      const open = g.filter(s => subs[s] < cap);
+      if (!open.length) break;
+      open.sort((a, b) => subs[a] - subs[b] || SUBS.indexOf(a) - SUBS.indexOf(b));
+      subs[open[0]]++; points--;
+    }
+  }
+  const attributes = {};
+  for (const parent of ["physical", "mental", "social", "practical"]) {
+    const ss = SUBS.filter(s => SUB_OF[s] === parent).map(s => subs[s]);
+    attributes[parent] = Math.round(ss.reduce((a, b) => a + b, 0) / ss.length);
+  }
+  const per = 5;   // `applyLevelUps`: +5 to both reserves a level
+  const h0 = Number(start?.maxHealth) || (15 + 5 * (Number(base.physical) || 3));
+  const e0 = Number(start?.maxEnergy) || Number(rules?.energy?.max) || 100;
+  return { level: L, attributes, subAttributes: subs, maxHealth: h0 + (L - 1) * per, maxEnergy: e0 + (L - 1) * per };
+}
+
 /** Level-up: bank growth choices instead of auto-spending them. Returns messages. */
 export function applyLevelUps(character, rules) {
   const per = rules.leveling?.xpPerLevel ?? 100;

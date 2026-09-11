@@ -23,6 +23,7 @@
 
 import { abilityTier } from "./skilltree.js";
 import { offersFreeFloor } from "./capabilities.js";   // R47: a kit with a free floor needs no bare strike
+import { pcBodyAt } from "./progression.js";   // ✅ Erik 2026-09-11: a person carries a player's body
 const num = (v, d = 0) => (v == null || v === "" || !Number.isFinite(Number(v)) ? d : Number(v));
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 
@@ -353,21 +354,29 @@ function sheetFrom(entry, { day = null, cfg = {}, roleAttributes = null, levelOv
   // both and best at neither. ⚠️ NOT a flat stack: someone with four roles is not superhuman in all four.
   const bonus = num(cfg.roleLeanBonus, 2);
   leans.forEach((attr, i) => { attributes[attr] = base + Math.max(1, Math.round(bonus / (i + 1))); });
+  // ✅ ERIK 2026-09-11: "They should follow the same rules as players." Under `npcStanding.body: "player"` a person carries the
+  // body a PLAYER of this level carries (`pcBodyAt`) — their points on the subs their roles lean on — and soak from what they
+  // WEAR, as yours is (`personOpponentFor` adds it from their gear). The rule above — round(level/2)+1 in every attribute and
+  // soak level/3 — was "a general starting point"; it stays readable as `body: "legacy"`, the dial it now is.
+  // ⛔ …and like a player, a person builds toward what they FIGHT with: `cfg.bodyFocus` (the attributes the kit's harm crafts roll
+  // on, from `personOpponentFor`) comes first, the roles' leans after. Leans alone spent Veth's points where her crafts do not roll.
+  const focusNow = [...new Set([...(Array.isArray(cfg?.bodyFocus) ? cfg.bodyFocus : []), ...leans])];
+  const pcBody = cfg?.body === "player" ? pcBodyAt(level, { rules: { leveling: cfg.leveling || {}, energy: cfg.energy || {} }, focusParents: focusNow }) : null;
   return {
     id: entry?.id || null,
     name: entry?.name || entry?.id || "someone",
     level,
-    attributes,
-    subAttributes: {},
+    attributes: pcBody ? pcBody.attributes : attributes,
+    subAttributes: pcBody ? pcBody.subAttributes : {},
     // ✅ R34/Q1 (GO_LIST_20260904 §1, Erik 2026-09-04): the pools run on the SAME shape as the player's curve —
     // a base plus a per-level term for BOTH currencies. `healthBase`/`energyPerLevel` were the two terms the
     // old formula did not have (`level × 3` health, `40` flat energy), which is why a level-33 figure carried
     // the wind of a level-1 one. Unauthored, every default is the old number, so nothing moves until content says so.
-    health: num(cfg.healthBase, 0) + level * num(cfg.healthPerLevel, 3),
-    maxHealth: num(cfg.healthBase, 0) + level * num(cfg.healthPerLevel, 3),
-    energy: num(cfg.energyBase, 40) + level * num(cfg.energyPerLevel, 0),
-    maxEnergy: num(cfg.energyBase, 40) + level * num(cfg.energyPerLevel, 0),
-    soak: Math.max(0, Math.round(level / 3)),
+    health: pcBody ? pcBody.maxHealth : num(cfg.healthBase, 0) + level * num(cfg.healthPerLevel, 3),
+    maxHealth: pcBody ? pcBody.maxHealth : num(cfg.healthBase, 0) + level * num(cfg.healthPerLevel, 3),
+    energy: pcBody ? pcBody.maxEnergy : num(cfg.energyBase, 40) + level * num(cfg.energyPerLevel, 0),
+    maxEnergy: pcBody ? pcBody.maxEnergy : num(cfg.energyBase, 40) + level * num(cfg.energyPerLevel, 0),
+    soak: pcBody ? 0 : Math.max(0, Math.round(level / 3)),
     skills: [],
     conditions: entry?.conditions || [],
     derived: true,

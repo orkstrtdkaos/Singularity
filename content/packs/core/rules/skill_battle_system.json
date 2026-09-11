@@ -638,6 +638,8 @@
    "passiveFailFloor": 0,
    "_decisiveReadEarnsBonus": "✅ RULED — Erik 2026-09-11: 'Yes.' Measured before the ruling — true: a read that succeeds by tierByDegree.decisiveMargin (the crit's own tier 3) earns the bonus action, not only the crit — bonus actions 7% → 28% of reads, and reading every turn wins 88% of peer fights to 70% never reading. It makes skipping the read never right; with the floor alone, energy (4–5 a read) is the only price and fights end with 100+ left, so skipping is rarely right either.",
    "decisiveReadEarnsBonus": true,
+   "_foeReadsWhenYouSkip": "✅ 2026-09-11 (Erik: foes gain a bonus from reading you — and 'everything should follow the rules of the game'): the sense step runs even when YOU skip it, with you declaring nothing, so the foe still reads you (or hides). You earn nothing from a step you did not take. Measured before it: skipping the read denied the foe its read, setup and bonus action, and never reading beat reading every turn by 13 points. false = the old step, which ran only when you read.",
+   "foeReadsWhenYouSkip": true,
    "senseOppositionNote": "SNG-248 (Erik): a read is opposed by what resists BEING READ - their concealing craft, else a flat passive off their sharpest attribute - NOT by whatever they happened to declare. Reading a foe who is swinging should not mean beating their swing with your eyes.",
    "tierByDegree": {
     "failure": 0,

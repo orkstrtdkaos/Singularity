@@ -227,21 +227,27 @@ export function bandFactor(band, eff, t = SUBSTRATE_TUNING) {
     const x = lo <= 0 ? 1 : Math.max(0, eff / lo); // 1 at the band edge → 0 at true nature
     return Math.max(t.starveFloor, Math.min(1, Math.pow(x, t.starveExp)));
   }
-  return Math.max(t.crowdFloor, 1 - t.crowdSlope * (eff - hi)); // interference — mild, floored
+  // ⬜ ERIK 2026-09-11: "thinking about removing the above band penalty. at least for some sources." A band may carry its own
+  // `crowdSlope` / `crowdFloor` — 0 means abundance never hurts that source. Absent, the tuning stands, today exactly.
+  const slope = Number.isFinite(Number(band.crowdSlope)) ? Number(band.crowdSlope) : t.crowdSlope;
+  const cfloor = Number.isFinite(Number(band.crowdFloor)) ? Number(band.crowdFloor) : t.crowdFloor;
+  return Math.max(cfloor, 1 - slope * (eff - hi)); // interference — mild, floored
 }
 
 /** The full substrate verdict for a craft at a place. `data` = the_substrate.json. Pure.
  *  SNG-193b: pass the character's `school` (from schoolForTradition) and the tradition's `root` and the
  *  band reads the SCHOOL's extension source, floored by a material root. Omit both and it is the legacy
  *  per-tradition verdict — every un-schooled save resolves exactly as before. */
-export function substrateVerdict({ tradition, school = null, root = null, density, carried = 0, data, tuning = SUBSTRATE_TUNING }) {
+export function substrateVerdict({ tradition, school = null, root = null, density, carried = 0, data, tuning = SUBSTRATE_TUNING,
+  // ⬜ Erik 2026-09-11 — the source's own crowding (`crowdBySource[source]`), merged onto whatever band resolves. Absent: today.
+  crowd = null }) {
   // §3.3: the school's extension source sets the band; absent a school, the tradition's own band.
   const band = school ? bandForSchool(tradition, school, data) : bandFor(tradition, data);
   const eff = effectiveDensity(density, carried);
-  let factor = bandFactor(band, eff, tuning);
+  let factor = bandFactor(band && crowd ? { ...band, ...crowd } : band, eff, tuning);
   let side = !band ? "neutral"
     : eff < band.center - band.width ? "starved"
-    : eff > band.center + band.width ? "crowded" : factor > 1 ? "empowered" : "full";
+    : eff > band.center + band.width ? (factor < 1 ? "crowded" : "full") : factor > 1 ? "empowered" : "full";
   // §4: the FLOOR is the root's. A material ROOT — or a material-EXTENSION school — is never STARVED: the
   // augmented craft degrades TOWARD its pure form (materialFloor), never to zero. The floor bites only on
   // the starved side; interference from ABUNDANCE still applies. "The material school is the one that travels."
@@ -619,14 +625,18 @@ export function groundCardFor(ability, character, { schools, substrate, location
              strength: 4, percent: null, chancePenalty: 0, energyMult: 1, off: false, grounded: false };
   }
   const tuning = SUBSTRATE_TUNING;
+  // ⬜ ERIK 2026-09-11: "thinking about removing the above band penalty. at least for some sources." KEYED BY THE CRAFT'S SOURCE
+  // and applied to whichever band it resolves — most crafts take their TRADITION's band (`substrateBand`), a schooled one its
+  // extension's, an unschooled one the source's — so a dial on `sourceBands` alone would miss most of them. Absent: today.
+  const crowd = substrate?.crowdBySource?.[cs.source] || null;
   const v = cs.school
     ? substrateVerdict({ tradition: cs.traditionId, school: cs.school,
-        root: schools?.traditionSchools?.[cs.traditionId]?.root, density, carried, data: substrate })
+        root: schools?.traditionSchools?.[cs.traditionId]?.root, density, carried, data: substrate, crowd })
     // ⛔ Q3: the unschooled branch used to carry its OWN constants (−30 max, ×0.5 energy, off under 0.2) while the roll
     // used the tuning (−65, ×0.6, 0.18) — two arithmetics for one ground. One tuning now, and the source's own floor.
     : (() => { const eff = effectiveDensity(density, carried);
-        let factor = bandFactor(band, eff, tuning);
-        let side = eff < band.center - band.width ? "starved" : eff > band.center + band.width ? "crowded" : factor > 1 ? "empowered" : "full";
+        let factor = bandFactor(crowd ? { ...band, ...crowd } : band, eff, tuning);
+        let side = eff < band.center - band.width ? "starved" : eff > band.center + band.width ? (factor < 1 ? "crowded" : "full") : factor > 1 ? "empowered" : "full";
         if (sourceHasFloor(cs.source, substrate) && side === "starved" && factor < tuning.materialFloor) { factor = tuning.materialFloor; side = "floored"; }
         return { factor, side, percent: Math.round(factor * 100), chancePenalty: Math.round((1 - factor) * tuning.maxChancePenalty),
                  energyMult: 1 + tuning.energyK * (1 - factor), off: factor < tuning.gateBelow }; })();

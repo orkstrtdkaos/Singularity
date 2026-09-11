@@ -1309,8 +1309,8 @@ console.log("\n── §154 · the death save is the Cut Thread's, and the groun
   check("§154: ⛔ THE SEAM — skillBattleRound ACCEPTS `ground`, computes BOTH sides with `groundForDecl`, and HANDS it to battleRound",
     enc154.includes("ground = null } = {}) {") && enc154.split("groundForDecl(").length - 1 === 2 && enc154.includes("    ground: groundNow,"));
   check("§154: …playTurn forwards it to all three phases", bt154.split(", ground, tickEffects").length - 1 === 3);
-  check("§154: …and every fight round the app plays carries `ground: sbGround()` — the sense (via playTurn), the action, the bonus, the shared-fight lock, the single declare",
-    app154.split("ground: sbGround()").length - 1 === 5, String(app154.split("ground: sbGround()").length - 1));
+  check("§154: …and every fight round the app plays carries `ground: sbGround()` — the sense (via playTurn), the skipped sense, the action, the bonus, the foe's bonus, the shared-fight lock, the single declare",
+    app154.split("ground: sbGround()").length - 1 === 7, String(app154.split("ground: sbGround()").length - 1));
   check("§154: …and the odds the player SEES before committing carry the same ground (SNG-116: a preview that omits a term the roll pays lies)",
     app154.includes("- (gv?.chancePenalty || 0);") && app154.includes("groundForDecl({ ...s, abilityId: s.id }, character"));
 }
@@ -1396,8 +1396,8 @@ console.log("\n── §157 · the foe reads you, wields and drinks what it carr
   const hideSheet = obs ? { skills: [{ id: obs.id, abilityId: obs.id, function: (obs.functions || ["conceal"])[0], tier: Number(obs.tier) || 1 }, readRow] } : null;
   check("§157: ⛔ in the SENSE step the foe READS you — its sharpest read, else the generic read on its best wit",
     m1?.function === "reveal" && m1.id === "x_read" && m2?.id === "_foe_read" && m2.subAttribute === "insight", JSON.stringify([m1?.id, m2?.id, m2?.subAttribute]));
-  check("§157: …and a foe holding an OBSCURE craft HIDES from a player it has seen reading — and reads one who has not",
-    !!hideSheet && ENC157.foeOwnMove(hideSheet, { playerReads: 1 }, sb157, "sense", cat157)?.obscure === true && ENC157.foeOwnMove(hideSheet, { playerReads: 0 }, sb157, "sense", cat157)?.id === "x_read");
+  check("§157: …and a foe holding an OBSCURE craft HIDES from a player it has seen reading or hiding — and reads one who has done neither",
+    !!hideSheet && ENC157.foeOwnMove(hideSheet, { playerReads: 1 }, sb157, "sense", cat157)?.obscure === true && ENC157.foeOwnMove(hideSheet, { playerHides: 1 }, sb157, "sense", cat157)?.obscure === true && ENC157.foeOwnMove(hideSheet, { playerReads: 0 }, sb157, "sense", cat157)?.id === "x_read");
   // ── the mirrored setup
   const me = { attributes: { physical: 6, mental: 6, social: 6, practical: 6 }, subAttributes: {}, energy: 200, maxEnergy: 200, health: 120, maxHealth: 120, level: 30, skills: {} };
   const foe = { attributes: { physical: 8, mental: 8, social: 8, practical: 8 }, subAttributes: {}, energy: 200, maxEnergy: 200, health: 120, maxHealth: 120, level: 30, skills: [readRow] };
@@ -1518,6 +1518,131 @@ console.log("\n── §159 · the ground tag ──");
   const app159 = rd("app.js");
   check("§159: ⛔ THE SAME WORDS EVERYWHERE — the fight menu row and the wheel both render `groundTag`, nothing else invents a label",
     app159.split("groundTag(").length - 1 >= 2 && app159.includes("sbGroundChip(odds?.ground)") && rd("style.css").includes(".sb-ground-good"));
+}
+/* ══════════ §160 — THE FOE TAKES ITS BONUS ACTION (a read earns it one exactly as yours does) ══════════ */
+// ⛔ ERIK 2026-09-11: "absolutely yes." Its read could earn a bonus action (`bonusEarned.opponent`) and nothing played it — the
+// player took one on 31% of reads, the foe on none: the largest asymmetry left in an even fight.
+console.log("\n── §160 · the foe takes its bonus action ──");
+{
+  const SB160 = await import("../engine/skill_battle.js");
+  const rules160 = rj("content/packs/core/rules/resolution.json"), sbe160 = rj("content/packs/core/rules/skill_battle_system.json").engine, steps160 = rj("content/packs/core/rules/intensity_scaling.json").steps;
+  const seq160 = (arr) => { let i = 0; return () => arr[(i++) % arr.length]; };
+  const me = { attributes: { physical: 5, mental: 5, social: 5, practical: 5 }, subAttributes: {}, energy: 200, maxEnergy: 200, health: 120, maxHealth: 120, level: 20, skills: {} };
+  const foe = { attributes: { physical: 8, mental: 8, social: 8, practical: 8 }, subAttributes: {}, energy: 200, maxEnergy: 200, health: 120, maxHealth: 120, level: 20, skills: [] };
+  const myRead = { function: "reveal", tier: 1, rank: 1, attribute: "mental", intensity: "standard", name: "a read" };
+  const theirRead = { function: "reveal", tier: 2, rank: 1, attribute: "mental", intensity: "standard", name: "their read" };
+  const theirSwing = { function: "strike", tier: 2, attribute: "physical", intensity: "standard", name: "a swing" };
+  const run = (oppDecl, rolls) => SB160.battleRound({ playerDecl: myRead, oppDecl, playerSheet: me, oppSheet: foe, state: { momentum: 0, round: 1 }, rules: rules160, sb: sbe160, steps: steps160, rng: seq160(rolls), phase: "sense", tickEffects: false });
+  let hit = null;
+  // one CONSTANT low value for every draw, so the foe crits whichever draw is its roll (a crit needs the very bottom of the d100)
+  for (const v of [0.001, 0.005, 0.01, 0.02, 0.03, 0.05]) { if (hit) break; const r = run(theirRead, [v]); if (r.opponent?.degree === "crit_success") hit = { rolls: [v], r }; }
+  check("§160: the probe found rolls where the foe's READ crits (not vacuous)", !!hit);
+  if (hit) {
+    check("§160: ⛔ a foe whose READ crits EARNS the bonus action", hit.r.bonusEarned?.opponent === true);
+    const sw = run(theirSwing, hit.rolls);
+    check("§160: …a crit on a SWING in the sense step earns nothing — the bonus is a read's payoff, not any roll's", sw.opponent?.degree === "crit_success" ? sw.bonusEarned?.opponent === false : sw.bonusEarned?.opponent !== true);
+  }
+  const bt = rd("engine/battle_turn.js"), app = rd("app.js");
+  check("§160: ⛔ `playTurn` PLAYS it — the earned flag rides the turn, and a FULL exchange runs, answered by the move you declared (as the foe answers yours)",
+    bt.includes("turn.foeBonusEarned = !!rr.bonusEarned?.opponent") && bt.includes("if (!ended && turn.foeBonusEarned)") && bt.includes('apply(fb, ad, "their bonus")') && !bt.includes('name: "you brace"'));
+  check("§160: …and so does the app — the same step after your bonus, and the turn's effects tick once, on the last step",
+    app.includes("t.foeBonusEarned = !!played.turn.foeBonusEarned") && app.includes('applyRR(fb, aDecl, "Their bonus action")') && app.includes("tickEffects: !bDecl && !turn.foeBonusEarned"));
+}
+/* ══════════ §161 — CROWDING IS A PER-SOURCE DIAL ══════════ */
+// ⬜ ERIK 2026-09-11: "thinking about removing the above band penalty. at least for some sources." A band may carry its own
+// `crowdSlope` / `crowdFloor`; 0 means abundance never hurts that source. Absent, the tuning stands — today exactly.
+console.log("\n── §161 · crowding is a per-source dial ──");
+{
+  const SUB161 = await import("../engine/substrate.js");
+  const T = SUB161.SUBSTRATE_TUNING, band = { center: 0.15, width: 0.2 };
+  check("§161: ⛑ ABSENT MEANS TODAY — a band with no dial crowds by the tuning", SUB161.bandFactor(band, 0.9) === Math.max(T.crowdFloor, 1 - T.crowdSlope * (0.9 - 0.35)));
+  check("§161: ⛔ `crowdSlope: 0` — abundance never hurts this source: full above its band", SUB161.bandFactor({ ...band, crowdSlope: 0 }, 0.9) === 1);
+  check("§161: …and a gentler slope or a higher floor moves only that source", SUB161.bandFactor({ ...band, crowdSlope: 0.5 }, 0.9) > SUB161.bandFactor(band, 0.9) && SUB161.bandFactor({ ...band, crowdFloor: 0.9 }, 0.9) === 0.9);
+  check("§161: …'crowded' is named only when it costs something — a source that does not crowd reads full above its band",
+    rd("engine/substrate.js").includes("? (factor < 1 ? \"crowded\" : \"full\")"));
+  // ⛔ the dial is keyed by the craft's SOURCE and reaches it wherever its band resolves — most crafts take their TRADITION's band
+  const { loadContentHeadless: lch161 } = await import("./headless_content.mjs");
+  const C161 = await lch161();
+  const locs161 = Object.values(C161.locations || {});
+  const card161 = (a, l, substrate) => SUB161.groundCardFor(a, { abilities: [{ abilityId: a.id, level: 1 }] }, { schools: C161.schools, substrate, location: l, locations: C161.locations, powerSources: C161.powerSources, foothills: C161.foothills });
+  let crowded161 = null;
+  for (const a of Object.values(C161.abilities || {})) { if (!a?.tradition) continue; for (const l of locs161) { const g = card161(a, l, C161.substrateModel); if (g?.side === "crowded") { crowded161 = { a, l, g }; break; } } if (crowded161) break; }
+  if (crowded161) {
+    const g2 = card161(crowded161.a, crowded161.l, { ...C161.substrateModel, crowdBySource: { [crowded161.g.source]: { crowdSlope: 0 } } });
+    check("§161: ⛔ THE DIAL IS KEYED BY THE CRAFT'S SOURCE — `crowdBySource[source].crowdSlope: 0` lifts a real crowded craft to full, whatever band it resolves",
+      g2.side !== "crowded" && g2.chancePenalty <= 0, `${crowded161.a.id} @ ${crowded161.l.id}: ${crowded161.g.source} ${crowded161.g.side} −${crowded161.g.chancePenalty} → ${g2.side} ${g2.chancePenalty}`);
+  } else check("§161: a crowded craft exists to test the source dial (not vacuous)", false);
+  check("§161: ⛑ …and the content carries the dial EMPTY — today exactly, until a source is named", JSON.stringify(rj("content/packs/core/rules/the_substrate.json").crowdBySource) === "{}");
+}
+/* ══════════ §162 — ONE BODY RULE: A PERSON OF LEVEL L CARRIES WHAT A PLAYER OF LEVEL L CARRIES ══════════ */
+// ⛔ ERIK 2026-09-11: "the player should have a player's growth. Everything should follow the rules of the game — or be a dial
+// we're adjusting." And of the NPC body (round(level/2)+1 in every attribute): "I think that was just a general starting point
+// for NPCs. They should follow the same rules as players." Measured the day before: 16 in all four at level 30, soak 10.
+console.log("\n── §162 · one body rule ──");
+{
+  const PR162 = await import("../engine/progression.js");
+  const NS162 = await import("../engine/npcsheet.js");
+  const rules162 = rj("content/packs/core/rules/resolution.json");
+  const b1 = PR162.pcBodyAt(1, { rules: rules162, focusParents: ["physical"] });
+  check("§162: ⛔ level 1 is CREATION — every attribute 3, both subs at the parent, creation's two points on the focus, health 15 + 5 × physical",
+    b1.subAttributes.strength === 4 && b1.subAttributes.agility === 4 && b1.attributes.mental === 3 && b1.maxHealth === 30 && b1.maxEnergy === (rules162.energy?.max ?? 100), JSON.stringify(b1));
+  const b30 = PR162.pcBodyAt(30, { rules: rules162, focusParents: ["physical"] });
+  check("§162: …each level adds a sub point (`subPointPerLevel`) and +5 to both reserves — 31 points by level 30, the parent the MEAN of its subs",
+    b30.subAttributes.strength + b30.subAttributes.agility === 6 + 31 && b30.attributes.physical === Math.round((b30.subAttributes.strength + b30.subAttributes.agility) / 2) && b30.maxHealth === 30 + 29 * 5, JSON.stringify(b30.attributes));
+  const b60 = PR162.pcBodyAt(60, { rules: rules162, focusParents: ["physical", "mental"] });
+  check("§162: …no sub past `subAttributeCap`, and the points spill to the next focus when the first is full", Object.values(b60.subAttributes).every(v => v <= (rules162.leveling?.subAttributeCap ?? 20)) && b60.attributes.mental > 3, JSON.stringify(b60.subAttributes));
+  const cfgP = { ...rules162.npcStanding, body: "player" }, cfgL = { ...rules162.npcStanding, body: "legacy" };
+  const rec = { id: "b162", level: 30, role: "warden" };
+  const sp = NS162.sheetFor(rec, { cfg: cfgP, day: 400 }), sl = NS162.sheetFor(rec, { cfg: cfgL, day: 400 });
+  check("§162: ⛔ a PERSON'S sheet follows the player's rules under `body: \"player\"` — no flat 16 in every attribute, and soak from what they wear, not level/3",
+    sp.attributes.social <= 4 && Math.max(...Object.values(sp.attributes)) > 4 && sp.soak === 0 && Object.keys(sp.subAttributes).length === 8, JSON.stringify({ attrs: sp.attributes, soak: sp.soak }));
+  check("§162: …and the old rule is a DIAL, readable for comparison — `body: \"legacy\"` is round(level/2)+1 and soak level/3", sl.attributes.social === 16 && sl.soak === 10);
+  check("§162: …the content says which — `npcStanding.body` is authored \"player\"", rules162.npcStanding?.body === "player");
+  check("§162: …and the harness plays its PC on the same function (`pcBodyAt`), not a threat curve", rd("scripts/damage_sweep.mjs").includes("pcBodyAt(level, { rules: CONTENT.rules"));
+  const BT162 = await import("../engine/battle_turn.js");
+  const { loadContentHeadless: lch162 } = await import("./headless_content.mjs");
+  const C162 = await lch162();
+  const veth162 = C162.npcs?.["veth-ondra"];
+  const po162 = veth162 ? BT162.personOpponentFor(veth162, { catalog: C162.abilities, cfg: C162.rules.npcStanding, day: 100, traditionIndex: C162.traditionIndex, items: C162.items, leveling: C162.rules.leveling }) : null;
+  const harm162 = {}; for (const s of (po162?.skills || [])) if (s.function === "strike" || s.function === "break") harm162[s.attribute || "practical"] = (harm162[s.attribute || "practical"] || 0) + 1;
+  const lead162 = Object.entries(harm162).sort((a, b) => b[1] - a[1])[0]?.[0];
+  check("§162: ⛔ …a person builds toward what they FIGHT with, as a player does — Veth's strongest attribute is the one her kit's harm crafts roll on",
+    !!po162 && !!lead162 && po162.attributes[lead162] === Math.max(...Object.values(po162.attributes)), JSON.stringify({ lead: lead162, attrs: po162?.attributes }));
+}
+/* ══════════ §163 — THE FOE READS YOU WHETHER OR NOT YOU LOOK · AND A CONCEAL CRAFT NEVER MAKES YOU EASIER TO READ ══════════ */
+// ⛔ 2026-09-11, measured with a player's growth on both sides: reading every turn won 35% of even fights and never reading 48%.
+// The sense step ran only when the PLAYER read, so skipping it denied the foe its read, its setup and its bonus action; and a
+// held conceal craft REPLACED 3 × attribute with tier × 6 — 12 against 57 at level 30 — so buying one made you easier to read.
+console.log("\n── §163 · the foe reads you whether or not you look ──");
+{
+  const SB163 = await import("../engine/skill_battle.js");
+  const BT163 = await import("../engine/battle_turn.js");
+  const ENC163 = await import("../engine/encounters.js");
+  const { loadContentHeadless: lch163 } = await import("./headless_content.mjs");
+  const C163 = await lch163();
+  const sb163 = C163.skillBattle.engine, steps163 = C163.intensity.steps, rules163 = C163.rules;
+  const hi = { attributes: { physical: 19, mental: 3, social: 3, practical: 3 } };
+  const r1 = SB163.senseResistOf({ ...hi, skills: [{ function: "conceal", tier: 2, name: "a T2 conceal" }] }, sb163), r0 = SB163.senseResistOf(hi, sb163);
+  check("§163: ⛔ holding a conceal craft never makes you EASIER to read — the larger of the craft and your guardedness stands", r1.value === r0.value && r1.value === 57, JSON.stringify({ held: r1, bare: r0 }));
+  check("§163: …and a strong conceal craft still beats a weak body", SB163.senseResistOf({ attributes: { mental: 2 }, skills: [{ function: "conceal", tier: 3, name: "c" }] }, sb163).from === "craft");
+  const seqC = (v) => () => v;
+  const idle = { id: "_no_read", function: "idle", noAct: true, tier: 1, rank: 1, attribute: "mental", intensity: "conserve", name: "you do not look", energyCost: 0 };
+  const me = { attributes: { physical: 5, mental: 5, social: 5, practical: 5 }, subAttributes: {}, energy: 100, maxEnergy: 100, health: 80, maxHealth: 80, level: 10, skills: {} };
+  const foe = { attributes: { physical: 5, mental: 5, social: 5, practical: 5 }, subAttributes: {}, energy: 100, maxEnergy: 100, health: 80, maxHealth: 80, level: 10, skills: [] };
+  const ir = SB163.battleRound({ playerDecl: idle, oppDecl: { function: "reveal", tier: 1, attribute: "mental", intensity: "standard", name: "their read" }, playerSheet: me, oppSheet: foe, state: { momentum: 0, round: 1 }, rules: rules163, sb: sb163, steps: steps163, rng: seqC(0.001), phase: "sense", tickEffects: false });
+  check("§163: ⛔ a player who does not look earns NOTHING from the step — no setup of their own, no tier, no bonus even on a crit roll — while the foe's read stands",
+    (ir.playerSetup ?? 0) === 0 && ir.senseTier === 0 && ir.bonusEarned?.player === false && ir.foeSetup >= 0 && ir.bonusEarned?.opponent === true, JSON.stringify({ mine: ir.playerSetup, tier: ir.senseTier, bonus: ir.bonusEarned, foe: ir.foeSetup }));
+  check("§163: …the dial is content — `senseStep.foeReadsWhenYouSkip` is authored true", sb163.senseStep?.foeReadsWhenYouSkip === true);
+  const encDef = { id: "d163", type: "duel", flavor: "fight", opponent: { name: "a watcher", threat: 30, tacticTags: [] } };
+  const osh = ENC163.contestSheetFor(encDef, { content: C163 });
+  const hero = () => ({ id: "h163", name: "H", level: 15, attributes: { practical: 5, physical: 5, mental: 5, social: 5 }, subAttributes: {}, alignment: {}, health: 200, maxHealth: 200, energy: 300, maxEnergy: 300, abilities: [], inventory: [], codex: { schemaVersion: 1, topics: {} } });
+  const play = (sbX) => { const c = hero(); c.activeEncounter = { defId: encDef.id, state: ENC163.startEncounter(encDef, { oppSheet: osh }) };
+    return BT163.playTurn(c, encDef, { sense: null, action: { function: "strike", tier: 1, attribute: "physical", intensity: "standard", name: "a strike" }, content: C163, rules: rules163, sb: sbX, steps: steps163, rng: seqC(0.5), day: 100, catalog: C163.abilities, party: null }); };
+  const on = play(sb163), off = play({ ...sb163, senseStep: { ...sb163.senseStep, foeReadsWhenYouSkip: false } });
+  check("§163: ⛔ ON THE PRODUCTION PATH — skip the read and the sense step STILL runs (the foe reads you); with the dial off it does not",
+    on.receipts.some(r => r.label === "sense") && !off.receipts.some(r => r.label === "sense"), JSON.stringify([on.receipts.map(r => r.label), off.receipts.map(r => r.label)]));
+  const app163 = rd("app.js");
+  check("§163: …and the app's skip runs the same step — `playTurn` with no read, no narration call", app163.includes("THE FOE STILL READS YOU WHEN YOU DO NOT LOOK") && app163.includes("playTurn(character, enc.def, { sense: null,"));
 }
 /* ══════════ §14 — THE FOLD CANNOT BEAT AN IMMUNITY THE BLOW COULD NOT ══════════ */
 // ⛔ FOUND BY RUNNING AEVI'S TWELVE CRAFTS THROUGH A MELEE-SCALE FIGHT (CCODE-313), which is the whole
@@ -4829,7 +4954,8 @@ console.log("\n── §60 · the craft reaches the round — def under the decl
   // ── F4 · an authored soak is the soak the damage block reads ──
   {
     const veth = C60.npcs["veth-ondra"];
-    const sheet = NS60.sheetFor(veth, { cfg: C60.rules.npcStanding });
+    // ⚠️ the LEGACY body (v1.9.450): under the player's rules a person's soak is what they WEAR (§162) — this tests the layer mechanism on an authored number
+    const sheet = NS60.sheetFor(veth, { cfg: { ...C60.rules.npcStanding, body: "legacy" } });
     const kit = NS60.battleSkillsFor(veth, { catalog: C60.abilities, cfg: C60.rules.npcStanding }).skills;
     const o = SB60.synthesizeOpponentSheet({ name: sheet.name, attributes: sheet.attributes, health: sheet.health, energy: sheet.energy, soak: sheet.soak, skills: kit, threat: sheet.level * 2 }, sb60);
     const sum = (o.soakLayers || []).reduce((a, l) => a + l.value, 0);
@@ -5083,7 +5209,8 @@ console.log("\n── §68 · the combat floor — pools, symmetric pressure, br
   check("§68: ⛔ the four pool dials are authored (healthBase · healthPerLevel · energyBase · energyPerLevel), all positive",
     [cfg68.healthBase, cfg68.healthPerLevel, cfg68.energyBase, cfg68.energyPerLevel].every(n => Number.isFinite(n) && n > 0),
     JSON.stringify([cfg68.healthBase, cfg68.healthPerLevel, cfg68.energyBase, cfg68.energyPerLevel]));
-  const s30 = NS68.sheetFor({ id: "x68", name: "X" }, { cfg: cfg68, levelOverride: 30 });
+  // ⚠️ the pool DIALS are the legacy body's (v1.9.450); under `body: "player"` a person carries a player's reserves (§162)
+  const s30 = NS68.sheetFor({ id: "x68", name: "X" }, { cfg: { ...cfg68, body: "legacy" }, levelOverride: 30 });
   check("§68: …and a level-30 person carries them — health = base + 30×perLevel, energy likewise",
     s30?.health === cfg68.healthBase + 30 * cfg68.healthPerLevel && s30?.energy === cfg68.energyBase + 30 * cfg68.energyPerLevel,
     `health ${s30?.health} energy ${s30?.energy} (level ${s30?.level})`);

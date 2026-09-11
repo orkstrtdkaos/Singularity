@@ -128,7 +128,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.449";
+const APP_VERSION = "1.9.450";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14201,15 +14201,31 @@ function sbSetBusy(on, label = "") {
 const GM_FIGHT_DEADLINE_MS = 45000;
 function runGMOrTimeout(args) { return raceTimeout(runGM(args), GM_FIGHT_DEADLINE_MS, "GM_TIMEOUT"); }
 
+/** ✅ 2026-09-11 — a SKIPPED sense step still lets the foe read you: the engine's step, with you declaring nothing. Its own
+ *  function so `sbResolveSense` keeps its shape (§71 pins it). */
+function sbFoeReadsWhileYouSkip(enc, turn, sb, steps) {
+  // ✅ 2026-09-11: THE FOE STILL READS YOU WHEN YOU DO NOT LOOK — the engine's sense step runs with you declaring nothing
+  // (`playTurn` + `senseStep.foeReadsWhenYouSkip`). No narration call: there is nothing of yours to narrate.
+  try {
+    const played = playTurn(character, enc.def, { sense: null, content: CONTENT, rules: CONTENT.rules, sb, steps, seenTendency: sbLastPlayerFn, rng: Math.random,
+      day: absoluteWorldDay(), catalog: fullCatalog(), party: seatParty(), ground: sbGround() });
+    const t = sbTurn();
+    t.senseDone = true; t.setupBonus = played.turn.setupBonus || 0; t.bonusEarned = false; t.foeBonusEarned = !!played.turn.foeBonusEarned;
+    t.sel = turn.sel; t.text = turn.text; t.phase = "action";
+    t.senseLine = `You did not look.${t.setupBonus < 0 ? ` They read you first (${t.setupBonus} to your action).` : ""}${t.foeBonusEarned ? " They read you well enough to take a bonus action." : ""}`;
+  } catch (e) { console.warn("[sense] the foe's read on a skipped step failed", e); turn.phase = "action"; }
+  saveCharacter(character); renderSkillBattle(sbLastRound); return;
+}
+
 /** CCODE-45 · GM CALL #1 — resolve the SENSE step, then narrate what you sensed and what they did. Skipping the
- *  sense costs nothing and skips the call. Either way the step then LOCKS and we move to the action. */
+ *  sense skips the call — but the foe still reads you (`sbFoeReadsWhileYouSkip`). Either way the step then LOCKS and we move to the action. */
 async function sbResolveSense() {
   const enc = activeEnc(); if (!enc || sbBusy) return;
   const turn = sbTurn(), sb = CONTENT.skillBattle.engine, steps = CONTENT.intensity.steps;
   const skills = window._sbSkills || playerBattleSkills();
   const decl = sbDeclFromSel(turn.sel.sense, skills, sbIntensity);
   turn.senseDone = true;
-  if (!decl) { turn.phase = "action"; saveCharacter(character); renderSkillBattle(sbLastRound); return; }
+  if (!decl) { sbFoeReadsWhileYouSkip(enc, turn, sb, steps); return; }
   sbSetBusy(true, `Reading ${enc.def?.opponent?.name || "them"}…`); sbQuickBeat = ""; renderSkillBattle(sbLastRound);
   // ⛔ EVERYTHING FROM HERE IS GUARDED. This stretch used to run OUTSIDE the try, so one throw in `playTurn` or the
   // logging left `sbBusy` set forever: every control disabled, a spinner that never stops, and no way to proceed
@@ -14220,7 +14236,7 @@ async function sbResolveSense() {
     day: absoluteWorldDay(), catalog: fullCatalog(), party: seatParty(), ground: sbGround() });
   const rr = played.rr;
   const t = sbTurn();
-  t.senseDone = true; t.setupBonus = played.turn.setupBonus || 0; t.bonusEarned = !!played.turn.bonusEarned;
+  t.senseDone = true; t.setupBonus = played.turn.setupBonus || 0; t.bonusEarned = !!played.turn.bonusEarned; t.foeBonusEarned = !!played.turn.foeBonusEarned;
   t.sel = turn.sel; t.text = turn.text;
   t.readPayoff = sbReadPayoff(rr.player?.degree, character.activeEncounter.state.opponentSheet, character.activeEncounter.state, enc.def);
   t.senseLine = `You read with ${decl.name}${decl.woven ? ` \u22c8 ${decl.woven.name}` : ""} \u2014 ${(rr.player?.degree || "").replace("_", " ")}. ${t.setupBonus > 0 ? `You have the read (+${t.setupBonus} to your action).` : t.setupBonus < 0 ? `They read you better (${t.setupBonus} to your action).` : "Neither of you learns much."}${t.bonusEarned ? " The opening is there \u2014 you have earned a BONUS action." : ""} ${t.readPayoff}`;
@@ -14309,7 +14325,7 @@ async function sbExecuteTurn() {
   // silently re-place it every round for free, which is the wall the action cost is supposed to prevent.
   if (guardsOpened) enc.state.guardPick = [];
   let rr = skillBattleRound(character.activeEncounter.state, enc.def, aDecl, { character, content: CONTENT, rules: CONTENT.rules, sb, steps, party: seatParty(),
-    seenTendency: sbLastPlayerFn, rng: Math.random, phase: "action", tickEffects: !bDecl, setupBonus: turn.setupBonus || 0, ground: sbGround() });
+    seenTendency: sbLastPlayerFn, rng: Math.random, phase: "action", tickEffects: !bDecl && !turn.foeBonusEarned, setupBonus: turn.setupBonus || 0, ground: sbGround() });
   sbLastPlayerFn = aDecl.function;
   // ⛔ AND THE DECAY. `tickProtections` has existed since CCODE-260 and was CALLED BY NOTHING, so a
   // rank-2 guard with `rounds: 3` would have stood forever — exactly the wall the r2 rung must not be.
@@ -14353,10 +14369,19 @@ async function sbExecuteTurn() {
   // BONUS — a FULL action; it ticks the turn's effects, being the last step.
   if (!ended && bDecl) {
     const br = skillBattleRound(character.activeEncounter.state, enc.def, bDecl, { character, content: CONTENT, rules: CONTENT.rules, sb, steps, party: seatParty(),
-      seenTendency: sbLastPlayerFn, rng: Math.random, phase: "bonus", tickEffects: true, ground: sbGround() });
+      seenTendency: sbLastPlayerFn, rng: Math.random, phase: "bonus", tickEffects: !turn.foeBonusEarned, ground: sbGround() });
     applyRR(br, bDecl, "Bonus action");
     saveCharacter(character);
     ended = br.ended; endRR = br;
+  }
+  // ✅ ERIK 2026-09-11 ("absolutely yes"): THE FOE'S BONUS ACTION — its read earned one. The same step as `playTurn`'s: a full
+  // exchange of its choosing, answered by the move you declared this turn (in YOUR bonus the foe answers with its own).
+  if (!ended && turn.foeBonusEarned && !checkIncapacitation(character)) {
+    const fb = skillBattleRound(character.activeEncounter.state, enc.def, aDecl, { character, content: CONTENT, rules: CONTENT.rules, sb, steps, party: seatParty(),
+      seenTendency: sbLastPlayerFn, rng: Math.random, phase: "bonus", tickEffects: true, ground: sbGround() });
+    applyRR(fb, aDecl, "Their bonus action");
+    saveCharacter(character);
+    ended = fb.ended; endRR = fb;
   }
   character.activeEncounter.state.turn = sbFreshTurn(); // the next turn starts clean
   saveCharacter(character);

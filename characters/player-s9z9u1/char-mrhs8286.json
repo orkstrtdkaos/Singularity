@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 31,
-  "xp": 3073,
+  "xp": 3078,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -188,7 +188,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": 0.031254360475901494,
+    "spectrumId": 0.02969164245210642,
     "violence_peace": 0.09078381765624999,
     "chaos_order": 0.2642031390370944,
     "mechanical_spiritual": 0.2629700196352162,
@@ -206,7 +206,7 @@
   "maxHealth": 191,
   "health": 191,
   "maxEnergy": 282,
-  "energy": 182,
+  "energy": 174,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2160,6 +2160,21 @@
       "spread": [],
       "day": 16,
       "worldDay": 73
+    },
+    {
+      "at": "2026-09-11T23:13:20.445Z",
+      "locationId": "gen-whistling-woman-post",
+      "communityId": null,
+      "description": "Forged a second shadow tablet to maintain secure communication across distance—matching Mara's own pair, the first new two-way relays established since the Transition.",
+      "tags": [
+        "craft",
+        "connection",
+        "making"
+      ],
+      "weight": 1,
+      "spread": [],
+      "day": 16,
+      "worldDay": 73
     }
   ],
   "relationships": {},
@@ -2292,152 +2307,168 @@
         "player": "Ask Logana to go find Bryn Calowell, the radiant and bring him to the Whistling Woman Post.",
         "summary": "Silas sends Logana to retrieve Bryn Calowell from the Edge District—the Radiant craftsperson who can help decode the Archives' findings.",
         "narration": "You step to the threshold and call Logana's name plainly—she lifts her head from the ground where she's been watching the moorland approach, and the skeletal frame catches the afternoon light. 'Bryn Calowell,' you say. 'Radiant folk in the Edge District. I need him here.' Her jaw articulates—a sound like wind through branches—and she nods once, decisive. She moves past you without ceremony, her gait a long lope across the open ground toward the road south, already reading the air for the scent of someone who has passed this way.\n\nYou watch her go—a made guardian with a single charge, and you have named it clear. The moorland swallows her shape within a few minutes of walking, the mist rolling thick enough to blur the horizon.\n\nPell emerges from the post behind you, one hand on the doorframe. 'She'll find him if he's within a day's walk and moving,' she says, reading your face. 'If he's stopped somewhere, she'll bring him regardless. That one doesn't do half-measures.' The Runner still sleeps on the cot inside. Huginn watches from the shelf. The retrieved readings lie on the table, waiting for the person who will carry them forward."
+      },
+      {
+        "player": "Create another Shadow Tablet to leave here at the Whistling Woman for Deni Cors to use to contact you.  Walk the grounds with Pell, assess the needs of the post - it's proximity to the Made Gate and Millbrook will make it an incredibly strategically important position.  We should establish trade here, guards, defenses, etc... what are her thoughts?",
+        "summary": "At the Whistling Woman post: Silas forges a second shadow tablet for Deni Cors to maintain communication. Walking the grounds with Pell, they assess the post's strategic value—its proximity to the Made Gate, its position on the relay network, and its role as proof of new-making. Pell advises that the post's power lies in what it *represents*, not in fortification alone.",
+        "narration": "You sit at the post's rough table and settle into the craft—Shadow Work running beneath your hands as you fold a second dark plane from the ambient light caught in the threshold stone. The tablet takes shape where your fingers guide it, twin to the one Mara holds, and you seal it with a breath and a whisper of the Weirmark. It's done before the afternoon light shifts much. You set it on the shelf beside the relay mechanism, positioned where Deni will find it without searching.\n\nPell is already outside when you step through the door, boots on the moorland grass, reading the ground the way she reads iron. You walk the perimeter together—the post at the center, the road south clear and defensible, the approach from the east open but not exposed. The Made Gate sits a half-mile north-widdershins, close enough to matter, far enough to breathe. Millbrook is a long morning's walk southward. She crouches at the eastern approach, running her palm across the turf.\n\n'This position holds the only made crossing in the valley,' Pell says flatly. 'That makes it worth more than stone and timber. You can tax passage if the convene votes it, or trade it—supplies in, materials out, information on both legs.' She stands, brushing her hands. 'The moorland's thin here. Defenses matter more than walls. You'd want sentries on the ridge to the east—line of sight to three approaches. The relay mechanism keeps it connected to the network, but that also means someone could follow a message here.' She looks at the post itself, assessing. 'Deni built it solid. It will hold against weather. Against raiders?' She pauses. 'That depends on who you put here. Fendt's got the ridge post now. This one needs someone who understands what it actually is—not a shelter. A *threshold*. Someone who can read the difference between a traveler and a threat.'\n\nShe turns to face you directly. 'You're thinking garrison. I'd think differently. This post's value is that it *exists*—that it shows the valley can build new things, can hold new ground. Garrison it and you're defending property. Leave it lightly held and staffed with someone sharp, and you're *showing* the world that the made gate is real enough to stake a future on. The defenses are intelligence and position, not numbers.' She pauses. 'But that's a choice you get to make—if the convene lets you keep it at all.'"
       }
     ],
     "lastTurn": {
-      "narration": "You step to the threshold and call Logana's name plainly—she lifts her head from the ground where she's been watching the moorland approach, and the skeletal frame catches the afternoon light. 'Bryn Calowell,' you say. 'Radiant folk in the Edge District. I need him here.' Her jaw articulates—a sound like wind through branches—and she nods once, decisive. She moves past you without ceremony, her gait a long lope across the open ground toward the road south, already reading the air for the scent of someone who has passed this way.\n\nYou watch her go—a made guardian with a single charge, and you have named it clear. The moorland swallows her shape within a few minutes of walking, the mist rolling thick enough to blur the horizon.\n\nPell emerges from the post behind you, one hand on the doorframe. 'She'll find him if he's within a day's walk and moving,' she says, reading your face. 'If he's stopped somewhere, she'll bring him regardless. That one doesn't do half-measures.' The Runner still sleeps on the cot inside. Huginn watches from the shelf. The retrieved readings lie on the table, waiting for the person who will carry them forward.",
-      "sceneSummary": "Silas sends Logana to retrieve Bryn Calowell from the Edge District—the Radiant craftsperson who can help decode the Archives' findings.",
+      "narration": "You sit at the post's rough table and settle into the craft—Shadow Work running beneath your hands as you fold a second dark plane from the ambient light caught in the threshold stone. The tablet takes shape where your fingers guide it, twin to the one Mara holds, and you seal it with a breath and a whisper of the Weirmark. It's done before the afternoon light shifts much. You set it on the shelf beside the relay mechanism, positioned where Deni will find it without searching.\n\nPell is already outside when you step through the door, boots on the moorland grass, reading the ground the way she reads iron. You walk the perimeter together—the post at the center, the road south clear and defensible, the approach from the east open but not exposed. The Made Gate sits a half-mile north-widdershins, close enough to matter, far enough to breathe. Millbrook is a long morning's walk southward. She crouches at the eastern approach, running her palm across the turf.\n\n'This position holds the only made crossing in the valley,' Pell says flatly. 'That makes it worth more than stone and timber. You can tax passage if the convene votes it, or trade it—supplies in, materials out, information on both legs.' She stands, brushing her hands. 'The moorland's thin here. Defenses matter more than walls. You'd want sentries on the ridge to the east—line of sight to three approaches. The relay mechanism keeps it connected to the network, but that also means someone could follow a message here.' She looks at the post itself, assessing. 'Deni built it solid. It will hold against weather. Against raiders?' She pauses. 'That depends on who you put here. Fendt's got the ridge post now. This one needs someone who understands what it actually is—not a shelter. A *threshold*. Someone who can read the difference between a traveler and a threat.'\n\nShe turns to face you directly. 'You're thinking garrison. I'd think differently. This post's value is that it *exists*—that it shows the valley can build new things, can hold new ground. Garrison it and you're defending property. Leave it lightly held and staffed with someone sharp, and you're *showing* the world that the made gate is real enough to stake a future on. The defenses are intelligence and position, not numbers.' She pauses. 'But that's a choice you get to make—if the convene lets you keep it at all.'",
+      "sceneSummary": "At the Whistling Woman post: Silas forges a second shadow tablet for Deni Cors to maintain communication. Walking the grounds with Pell, they assess the post's strategic value—its proximity to the Made Gate, its position on the relay network, and its role as proof of new-making. Pell advises that the post's power lies in what it *represents*, not in fortification alone.",
       "choices": [
         {
-          "label": "Wait at the post for Logana's return—tend the Runner, check the relay mechanism, prepare the readings for presentation.",
+          "label": "Ask Pell directly what she needs from you before the convene vote—what will keep her steady while you're presenting the readings to the committee",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "rapport",
+            "steady"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Walk back inside and review the buried readings one more time—cross-check Calvar's chain-of-custody notes against the actual entries to ensure nothing is lost in translation before he presents",
           "attribute": "practical",
           "subAttribute": "craft",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "working_model",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Send a message through the relay mechanism to Fendt at the Threshold Post—name him as the tactical anchor for the moorland relay network and ask what he advises for Whistling Woman's defense posture",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "command",
+            "delegate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Rest here at the post for the remainder of the afternoon—you've moved hard and fast since dawn, and the convene is three days out. Huginn can watch the approach.",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {},
           "difficulty": "very easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "wait",
-            "guard",
-            "sustain"
+            "rest"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true,
           "encounterId": null,
           "emergenceId": null
-        },
-        {
-          "label": "Shadow-sheet Veth at the Threshold Post—ask plainly what she intends to do about the broken warden-mark and the alarm that went up.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "ask",
-            "confront",
-            "negotiate"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Deathsense on the Runner while she sleeps—read what death-paths are still braiding through her frame, and whether the cautery burn set them moving wrong.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study",
-            "read"
-          ],
-          "abilityId": "deathsense",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Walk the moorland approach with Pell and read the ground for sign of how Logana moves—track her path, her pace, what she's hunting for.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": "hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "track",
-            "scout",
-            "travel"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
         }
       ],
-      "deeds": [],
+      "deeds": [
+        {
+          "description": "Forged a second shadow tablet to maintain secure communication across distance—matching Mara's own pair, the first new two-way relays established since the Transition.",
+          "tags": [
+            "craft",
+            "connection",
+            "making"
+          ],
+          "weight": 1,
+          "communityId": null
+        }
+      ],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
+        "energy": -3,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-light-that-will-not-dim",
-          "note": "Readings retrieved and urgent—Bryn Calowell, a Radiant who understands the Archive's technical language, is being brought to the post to help decode and contextualize them for presentation."
-        }
-      ],
+      "questUpdates": [],
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
       "adoptSchool": null,
       "offer": {
-        "thing": "Logana departs on a single clear charge—a made guardian following her maker's word with the precision a warden would envy",
-        "from": "Silas named it plainly; Logana acts on clarity, not interpretation. This is what a threshold-creature does when its purpose is unmistakable."
+        "thing": "Pell's direct reading of what the Whistling Woman post actually *is*—not a garrison to hold, but a threshold that proves the valley can build new ground",
+        "from": "Pell's own strategic thinking and her read of Silas's intent; what she knows the valley needs to understand about new-making"
       },
       "stageOps": [],
       "scene": {
-        "setting": "The Whistling Woman post's threshold and approach—afternoon light, moorland mist rolling in from the south. The post stands solid at the character's back; the road and open ground stretch toward the road south where Logana departed moments ago.",
+        "setting": "The Whistling Woman post's threshold and immediate grounds—late afternoon light beginning to gold across the moorland, the post solid at the character's back, the road south visible in both directions, the Made Gate half a mile north-widdershins beyond the mist.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Standing at the doorframe, reading Silas's face, present and attending"
+            "state": "Standing in the eastern approach, reading the ground and the post's position with a soldier's eye. Present, attending, offering assessment without decoration."
           },
           {
             "name": "Huginn",
-            "state": "Roosted on the shelf inside, head turned toward the threshold, watching"
+            "state": "Roosted on the post's roof-edge, head turned toward the moorland approach, watching the space Logana departed into."
           },
           {
             "name": "The Runner",
-            "state": "Asleep on the cot inside, mending steadily from cautery, unaware of Logana's departure"
-          },
-          {
-            "name": "Logana",
-            "state": "Moving south across the moorland on a single clear charge—hunting for Bryn Calowell"
+            "state": "Asleep inside on the cot, mending steadily, unaware of the strategy-work underway outside."
           }
         ],
         "objects": [
-          "Buried Water Readings—stacked on the table, sheaf of dated numbers",
-          "Shadow-tablet—dark on table, message-exchange concluded",
-          "Relay mechanism—silent on shelf",
-          "Memory—the spear propped against the wall"
+          "Shadow Tablet (new—Deni's pair, seated on the shelf beside the relay mechanism)",
+          "Buried Water Readings (stacked on the table inside)",
+          "Memory—the spear (propped against the wall inside)",
+          "Relay mechanism (silent on shelf, tested and confirmed working)"
         ],
         "threads": [
-          "Logana hunting Bryn Calowell in the southern approach",
-          "Veth now knows the warden-mark was triggered and the cabinet breached",
-          "The readings are out—three days before the convene votes",
-          "Calvar must present, but chain-of-custody and method will be scrutinized"
+          "Logana hunting Bryn Calowell in the southern approach—no word yet",
+          "The convene votes in three days on whether to accept pole-pull as the crisis's source",
+          "Veth now knows the warden-mark was triggered and Grael's cabinet breached",
+          "The shadow tablet gives Deni a permanent secure line to the post—and to Silas"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "logana",
-          "note": "Sent on a clear charge to retrieve Bryn Calowell from the Edge District and bring him to the Whistling Woman Post. She moves with a made guardian's precision."
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "note": "At the Whistling Woman post in late afternoon—walked the grounds with Silas, assessed the post's strategic value, and named it as a threshold that proves the valley can make new things. Her reading: the post's power is not in garrison but in what it *represents*. She understands the stakes.",
+          "learned": [
+            "The Whistling Woman post holds the only made crossing in the valley—that changes its value fundamentally",
+            "Defenses here should prioritize intelligence and position over numbers—the post's actual strength is that it exists and shows what's possible",
+            "A garrison post becomes property to defend; a lightly-held threshold becomes proof of new-making"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the Whistling Woman post, rested and clear-eyed, assessing and strategizing. Strong and steady."
         }
       ],
       "intentsHeard": [],
       "factUpdates": [],
-      "placeUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "The Whistling Woman post now has a second shadow tablet seated on the interior shelf—Deni Cors's pair, enabling secure two-way communication between the post and the wider network.",
+          "flag": {}
+        }
+      ],
       "discovery": null,
       "codexUpdates": [],
       "holdingOps": [],
@@ -2454,52 +2485,62 @@
       "timeOps": {},
       "moveTo": null,
       "stateOps": [],
-      "itemUpdates": [],
+      "itemUpdates": [
+        {
+          "name": "Shadow Tablet (new—Deni's pair)",
+          "customName": "Deni's Relay Slate",
+          "description": "A second dark plane, cool and light, sealed with the Weirmark—twin to Mara's own shadow tablet. This one is seated at the Whistling Woman post, ready for Deni Cors to use to maintain secure contact with Silas Weir across distance.",
+          "provenance": "Forged at the Whistling Woman post by Silas Weir using Shadow Work, sealed with the Weirmark to match the first pair. The first new relay tablets established since the Transition.",
+          "grants": []
+        }
+      ],
       "deriveItem": null,
       "imagePrompt": null,
-      "gambitApt": false,
+      "newAbility": null,
       "gambitOps": null,
+      "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Whistling Woman post's threshold and approach—afternoon light, moorland mist rolling in from the south. The post stands solid at the character's back; the road and open ground stretch toward the road south where Logana departed moments ago.",
+      "setting": "The Whistling Woman post's threshold and immediate grounds—late afternoon light beginning to gold across the moorland, the post solid at the character's back, the road south visible in both directions, the Made Gate half a mile north-widdershins beyond the mist.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Standing at the doorframe, reading Silas's face, present and attending"
+          "state": "Standing in the eastern approach, reading the ground and the post's position with a soldier's eye. Present, attending, o"
         },
         {
           "name": "Huginn",
-          "state": "Roosted on the shelf inside, head turned toward the threshold, watching"
+          "state": "Roosted on the post's roof-edge, head turned toward the moorland approach, watching the space Logana departed into."
         },
         {
           "name": "The Runner",
-          "state": "Asleep on the cot inside, mending steadily from cautery, unaware of Logana's departure"
-        },
-        {
-          "name": "Logana",
-          "state": "Moving south across the moorland on a single clear charge—hunting for Bryn Calowell"
+          "state": "Asleep inside on the cot, mending steadily, unaware of the strategy-work underway outside."
         }
       ],
       "objects": [
-        "Buried Water Readings—stacked on the table, sheaf of dated numbers",
-        "Shadow-tablet—dark on table, message-exchange concluded",
-        "Relay mechanism—silent on shelf",
-        "Memory—the spear propped against the wall"
+        "Shadow Tablet (new—Deni's pair, seated on the shelf beside the relay mechanism)",
+        "Buried Water Readings (stacked on the table inside)",
+        "Memory—the spear (propped against the wall inside)",
+        "Relay mechanism (silent on shelf, tested and confirmed working)"
       ],
       "threads": [
-        "Logana hunting Bryn Calowell in the southern approach",
-        "Veth now knows the warden-mark was triggered and the cabinet breached",
-        "The readings are out—three days before the convene votes",
-        "Calvar must present, but chain-of-custody and method will be scrutinized"
+        "Logana hunting Bryn Calowell in the southern approach—no word yet",
+        "The convene votes in three days on whether to accept pole-pull as the crisis's source",
+        "Veth now knows the warden-mark was triggered and Grael's cabinet breached",
+        "The shadow tablet gives Deni a permanent secure line to the post—and to Silas"
       ]
     },
-    "beats": 10
+    "beats": 11
   },
   "clock": {
     "schemaVersion": 1,
     "day": 16,
-    "hour": 17,
+    "hour": 18,
     "realAnchor": null
   },
   "companions": [
@@ -3940,7 +3981,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d15] Departed the Threshold Post with Silas at evening—calm and steady on the road north toward the Whistling Woman post. The child she carries is present in her movement, a weight she carries with deliberate care.",
         "[d15] Named plainly what she needs from the night: food, rest, and Silas present without the weight of the work running through his head. The child responds to whether he is carrying the problem or carrying her.",
         "[d15] At the Whistling Woman post, evening settling to night—Pell has named what the child needs and what she needs from Silas. Present, steady, reaching for more.",
         "[d16] At the Whistling Woman post in deep night—Silas named what the child feels like, and Pell answered plainly. Present, reaching, her grip on his hand steady and complete.",
@@ -3949,17 +3989,18 @@
         "[d16] Deep night at the Whistling Woman post—Silas traced the shape of her with plain words and plain touch. She received it the way she receives true things: without ornament, and asking for more tomorrows. The child she carries is steady; she is at rest.",
         "[d16] Sleeping deeply, settled and present, her grip on Silas's hand holding even in rest—asking for more tomorrows, and the three of them held together in the dark.",
         "[d16] At the Whistling Woman post at midday on Day 16: read Silas's attention shift from rest to action. Named what Grael fears ending (the illusion that he ever understood the seal-question). Warned that the moorland's starved lattice will weaken shadowstep, and that breaking the cabinet's warden-mark…",
-        "[d16] Watched Silas return from the Archive gambit with the readings in hand. Reading his face, understanding what it cost and what comes next. Present, attentive, not moving."
+        "[d16] Watched Silas return from the Archive gambit with the readings in hand. Reading his face, understanding what it cost and what comes next. Present, attentive, not moving.",
+        "[d16] At the Whistling Woman post in late afternoon—walked the grounds with Silas, assessed the post's strategic value, and named it as a threshold that proves the valley can make new things. Her reading: the post's power is not in garrison but in what it *represents*. She understands the stakes."
       ],
       "knownFacts": [
-        "She can rest completely when Silas is present and the work is near—the child settles, and so does she",
-        "The little one moves in response to the novel-depth work, and settles when Silas is close",
-        "A man like Grael fears exposure as never having had the answer at all",
         "The moorland's lattice is thin—craft-work there runs starved",
         "The old warden-mark on the Archive isn't just a lock; it's a witness that alerts the March",
         "The gambit succeeded at cost — the warden-mark was triggered",
         "Veth will know Silas broke into the Archive",
-        "The shadow-lattice was weaker than expected; the passage fought him"
+        "The shadow-lattice was weaker than expected; the passage fought him",
+        "The Whistling Woman post holds the only made crossing in the valley—that changes its value fundamentally",
+        "Defenses here should prioritize intelligence and position over numbers—the post's actual strength is that it exists and shows what's possible",
+        "A garrison post becomes property to defend; a lightly-held threshold becomes proof of new-making"
       ],
       "skillsObserved": [
         "reading a person's craft-sense and understanding what it mea",
@@ -3970,7 +4011,7 @@
         "Partnership-binding through physical presence and craft-sens"
       ],
       "status": "active",
-      "statusNote": "At the Whistling Woman post, resting, strong, alert to what comes next",
+      "statusNote": "At the Whistling Woman post, rested and clear-eyed, assessing and strategizing. Strong and steady.",
       "lastSeen": {
         "locationId": "gen-whistling-woman-post",
         "day": 16
@@ -3989,7 +4030,7 @@
         "primary": "ashwarden"
       },
       "domainsSource": "derived",
-      "met": 31
+      "met": 32
     },
     "mara-wells": {
       "id": "mara-wells",
@@ -6334,7 +6375,8 @@
         "[d15] The Whistling Woman post is fully built, provisioned, and warded—a waystation on the moorland relay network with shelter, supplies, and Deni Cors's relay mechanism in place",
         "[d15] The music-box relay mechanism is a working vocabulary of melodies—each song carries a message across the whistle-mark network. Cylinder and pins can be swapped to change the signal.",
         "[d15] The music-box relay mechanism is confirmed working—the first melody carries 'all is well' across the moorland network and receives an answer from an unseen listener",
-        "[d15] The Whistling Woman post is now confirmed operational as a warden-staffed waystation—Silas Weir has arrived and the relay mechanism's first test melody was answered from across the moorland network."
+        "[d15] The Whistling Woman post is now confirmed operational as a warden-staffed waystation—Silas Weir has arrived and the relay mechanism's first test melody was answered from across the moorland network.",
+        "[d16] The Whistling Woman post now has a second shadow tablet seated on the interior shelf—Deni Cors's pair, enabling secure two-way communication between the post and the wider network."
       ],
       "flags": {
         "status": "active",
@@ -6530,10 +6572,6 @@
     "turnsSinceOffer": 0,
     "recentOffers": [
       {
-        "thing": "The relay mechanism—Deni's working vocabulary of melodies built into the network",
-        "from": "Deni Cors's design and Pell's presence beside you, reading craft the way you do"
-      },
-      {
         "thing": "The moorland silence holds a weight—a listening quality that suggests the relay network is not merely a series of posts but something more…",
         "from": "the post itself and Deni Cors's careful work, which built not just waypoints but a living circuit"
       },
@@ -6548,6 +6586,10 @@
       {
         "thing": "Logana departs on a single clear charge—a made guardian following her maker's word with the precision a warden would envy",
         "from": "Silas named it plainly; Logana acts on clarity, not interpretation. This is what a threshold-creature does when its purpose is unmistakable."
+      },
+      {
+        "thing": "Pell's direct reading of what the Whistling Woman post actually *is*—not a garrison to hold, but a threshold that proves the valley can…",
+        "from": "Pell's own strategic thinking and her read of Silas's intent; what she knows the valley needs to understand about new-making"
       }
     ],
     "wantProgress": {
@@ -16121,22 +16163,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 20.31429762413756,
-    "cerebral": 18.477485402335642,
-    "social": 10.925245526968704,
-    "generous": 4.674380837235663,
-    "cautious": 7.096877379585525,
-    "physical": 0.35665179623228976,
-    "risky": 1.0361690656515044,
-    "ruthless": 0.18619363646916762,
-    "carousing": 1.955897755215421,
-    "amorous": 3.2773266900060505,
-    "patient": 0.6260405610770978,
-    "stealth": 0.000006507300309029218,
-    "devotion": 0.2659097753899242,
-    "craft": 2.9392227193352536,
-    "leadership": 2.815593186808734,
-    "deception": 0.031162504246973623
+    "strategic": 22.80644018353412,
+    "cerebral": 18.01554826727725,
+    "social": 10.652114388794486,
+    "generous": 4.557521316304771,
+    "cautious": 6.9194554450958865,
+    "physical": 0.3477355013264825,
+    "risky": 1.0102648390102167,
+    "ruthless": 0.18153879555743843,
+    "carousing": 1.9070003113350356,
+    "amorous": 3.195393522755899,
+    "patient": 0.6103895470501703,
+    "stealth": 0.0000063446178013034875,
+    "devotion": 0.2592620310051761,
+    "craft": 2.8657421513518724,
+    "leadership": 2.7452033571385157,
+    "deception": 0.030383441640799282
   },
   "aptitudes": [
     "strategist",
@@ -16145,7 +16187,7 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 959,
+  "actionCount": 960,
   "grantsVersion": 1,
   "reconcileVersion": 49,
   "gallery": [
@@ -16947,8 +16989,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1789168119450,
-  "rev": 1929,
+  "updatedAt": 1789168400451,
+  "rev": 1930,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -21124,7 +21166,7 @@
   "syncedAt": 1788658062664,
   "teachers": {},
   "regionsKnown": {
-    "valley": 654,
+    "valley": 655,
     "the_palelands": 6,
     "the_center": 151,
     "the_echo_vale": 14
@@ -21435,10 +21477,10 @@
     {
       "id": "sess-33",
       "startedAt": "2026-09-11T22:48:54.873Z",
-      "lastAt": "2026-09-11T23:08:39.444Z",
+      "lastAt": "2026-09-11T23:13:20.438Z",
       "startDay": 73,
       "endDay": 73,
-      "beats": 5
+      "beats": 6
     }
   ],
   "company": [
@@ -21940,23 +21982,23 @@
     "gen-whistling-woman-post": "https://image.pollinations.ai/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=32614&nologo=true&_cb=1_1"
   },
   "_opEmitted": {
-    "sceneSummary": 333,
-    "choices": 332,
-    "characterDeltas": 164,
-    "scene": 333,
-    "npcUpdates": 299,
+    "sceneSummary": 334,
+    "choices": 333,
+    "characterDeltas": 165,
+    "scene": 334,
+    "npcUpdates": 300,
     "factUpdates": 29,
-    "placeUpdates": 73,
+    "placeUpdates": 74,
     "codexUpdates": 199,
     "timeOps": 305,
     "imagePrompt": 25,
-    "sceneEnded": 111,
-    "itemUpdates": 7,
+    "sceneEnded": 112,
+    "itemUpdates": 8,
     "questUpdates": 47,
-    "offer": 42,
+    "offer": 43,
     "moveTo": 20,
     "delegateOps": 4,
-    "deeds": 14,
+    "deeds": 15,
     "standingOps": 5,
     "ledgerEvents": 10,
     "discovery": 5,
@@ -21967,12 +22009,12 @@
     "_applyFailedOp": 7,
     "newEncounter": 3,
     "encounterOps": 1,
-    "gambitApt": 41,
+    "gambitApt": 42,
     "markDefiningMoment": 1,
     "_engineClosedScene": 3,
     "gambitOps": 1
   },
-  "_opTurns": 333,
+  "_opTurns": 334,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -21980,7 +22022,7 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 46,
+      "applied": 47,
       "rejected": 1,
       "lastWhy": "rejected-shape"
     },
@@ -23119,12 +23161,12 @@
     "travel": 10,
     "careful": 5,
     "study": 12,
-    "scout": 7,
+    "scout": 8,
     "lead": 2,
     "ask": 2,
-    "plan": 9,
+    "plan": 10,
     "negotiate": 2,
-    "prepare": 7,
+    "prepare": 8,
     "investigate": 3,
     "craft": 5,
     "help": 5,
@@ -23246,6 +23288,22 @@
       "day": 16,
       "worldDay": 73,
       "actionCount": 957
+    },
+    {
+      "companionId": "marrow",
+      "kind": "deed",
+      "delta": 0.5,
+      "day": 16,
+      "worldDay": 73,
+      "actionCount": 959
+    },
+    {
+      "companionId": "marrow",
+      "kind": "assist",
+      "delta": 0.25,
+      "day": 16,
+      "worldDay": 73,
+      "actionCount": 959
     }
   ],
   "_standingOpRefusals": [

@@ -172,7 +172,9 @@ function boughtKit(domain, level, cfg) {
   // ✅ ERIK 2026-09-11: THREE DOMAINS, "just like PCs" — the primary to the level's top tier, and two more as the
   // secondary (to T3) and tertiary (to T2), the caps `domainAccess` gives a PC. ⚠️ Which two is a harness choice
   // (the next two in a fixed cycle); a real PC chooses them.
-  const di = DOMAINS.indexOf(domain), D2 = di >= 0 ? DOMAINS[(di + 1) % DOMAINS.length] : null, D3 = di >= 0 ? DOMAINS[(di + 2) % DOMAINS.length] : null;
+  // ✅ ERIK 2026-09-11: "you need to spread the domains, not just take the next two." Adjacent picks made a kit its neighbours'
+  // (Angelic reached 17 of its 20 harm crafts through Body and Breaking); a third and two thirds around the circle spread them.
+  const di = DOMAINS.indexOf(domain), D2 = di >= 0 ? DOMAINS[(di + Math.round(DOMAINS.length / 3)) % DOMAINS.length] : null, D3 = di >= 0 ? DOMAINS[(di + Math.round(2 * DOMAINS.length / 3)) % DOMAINS.length] : null;
   const capOf = (a) => { if (!domain || domain === "all" || !a.tradition) return top; const d = DOMAIN_OF[a.tradition]; return d === domain ? top : d === D2 ? Math.min(top, 3) : d === D3 ? Math.min(top, 2) : 0; };
   const pool = Object.values(catalog).filter(a => Math.max(1, Number(a.tier ?? a.levelReq) || 1) <= capOf(a)
     && !(NO_LETHAL && (a.harmRung === "lethal" || a.harmRung === "atrocity")));
@@ -366,7 +368,11 @@ function fight(cfg, encId, def, skill, seed, menu) {
   // as yours) from a domain picked by level, in the row shape `battleSkillsFor` builds. Built once per def.
   if (FOE_KIT === "bought" && def.opponent && !def.opponent._kitDomain && /^synth_L/.test(String(encId))) {
     const L = Math.max(1, Math.round((Number(def.opponent.threat) || 20) / 2));
-    const dom = DOMAINS[(L * 7) % DOMAINS.length];
+    // ✅ ERIK 2026-09-11 (spread the domains): keyed to the LEVEL, this was Angelic at three of the four measured levels, so a
+    // "peer" fight mostly meant "against Angelic". The foe now stands opposite the player's own domain on the circle, and the
+    // level only shifts it — every player domain meets a different foe, and the four levels are not one domain.
+    const pdi = Math.max(0, DOMAINS.indexOf(KIT_DOMAIN || DOMAINS[0]));
+    const dom = DOMAINS[(pdi + Math.round(DOMAINS.length / 2) + Math.round(L / 25)) % DOMAINS.length];
     const kit = boughtKit(dom, L, cfg);
     // ⛔ 2026-09-11: these rows were built by hand — ONE row per craft (its first verb), no sub — while the player and every person in
     // the game get every verb, each with the sub it rolls (`battleSkillsFor`). Once bodies built toward the sub each verb rolls, the

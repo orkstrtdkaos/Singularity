@@ -1902,3 +1902,34 @@ arises from autonomous ordering needs autonomous ordering to exist.**
 | ⚠️ **THE MADE GATE, AND EVERY `gen-` ID WITHOUT A POSITION** | ⛔ **36 directed connection refs point at unplaced locations — 18 undirected road edges that cannot be drawn.** ⚑ **This is why CCode counted 182 adjacency edges and Aevi counted 164** |
 | ⬜ **THE OPPONENT'S THIRD MOOD** | ⛔ **`opponentPolicy` is press/protect with no support behaviour — Aevi-the-Watcher strikes 12 of 12 rounds when behind.** ⚑ CCode calls it the bigger prize |
 | ⚠️ **R25a SLOTS 5–6 SHIPPED EARLY** | ⛑ against their own *"do not ship until"*. ⛔ **A sequencing error, not a live defect — the party is worth joining now** |
+
+## ⬜ PINNED OPTION — CROWDING BY THE OPPOSING SOURCE (Erik, 2026-09-11: *"put a pin in the crowding question, document it as a dial or option"*)
+
+**Built and OFF.** `the_substrate.opposedCrowding` — a craft of a paired source is no longer crowded by too much of its OWN
+field; the OPPOSING source's level crowds it on a curve: none at or below `from` (0.4), easing to ×`slight` (0.9) by
+`slightTo` (0.8), down to ×`floor` (0.6) at 1.0. Starved stays starved. It sits in `groundCardFor`, so the ground card and
+the fight read the same thing, and the card names what crowds it. Every threshold is a dial. Gate `§167`; the reading Erik
+confirmed is `po/REPLY_ccode_20260911e` §6; the measurement is `po/REPLY_ccode_20260911f` §2.
+
+| the pairs | veil ← the lattice · meaning-powered (metaphysical) ← the nanite · nanite ← meaning · precursor, wild, body keep today's rule |
+|---|---|
+
+**Measured through the built dial (429 traditioned crafts × 135 places):**
+
+| craft source | today | on, from 0.4 | on, from 0.6 |
+|---|---|---|---|
+| veil — crowded · mean penalty | 13% · 5.8 | **59%** · 10.1 | 33% · 7.6 |
+| meaning-powered — crowded · mean penalty | 12% · 20.5 | 19% · 20.0 | 11% · 19.3 |
+| nanite — crowded · empowered | 6% · 11% | 17% · 8% | 17% · 8% |
+| nanite at the Great Engine — empowered | 69% | **0%** | **0%** |
+
+⚠️ **Two things to decide with, when it is unpinned:**
+
+1. **From 0.4 it is harsher on veil, not gentler** — half the world's lattice sits above 0.49, so most places land in the
+   slight band. From 0.6 veil's new crowding roughly halves and meaning-powered craft ends a little better off than today.
+2. **The nanite consequence does not depend on the start.** Meaning is 1.00 at the Great Engine and the Grand Lattice — the
+   two places Aevi ruled perfect for nanite (`REPLY_aevi_engine_is_correct` §1) — so pairing nanite with meaning empties
+   both for nanite craft. Meaning reaches 0.8 at only 12% of places, and those are the cities.
+
+⛑ **Related dial, also empty:** `the_substrate.crowdBySource` — per-source `crowdSlope`/`crowdFloor` (option E was "only
+metaphysical and veil crowd"). Aevi's ruling stands: keep today's crowding (option A). Gate `§161`.

@@ -226,7 +226,11 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   // repo ever wrote — the roster lives on the shared SCENE — and a fight roster is not save state, so it
   // arrives as an option and is never persisted. Null means solo, which is every single-player fight.
   party = null,
-  phase = "action", tickEffects = true, setupBonus = 0 } = {}) {
+  phase = "action", tickEffects = true, setupBonus = 0,
+  // ⛔ A BRAIN FOR THE FOE OTHER THAN `opponentPolicy`. `(oppSheet, state, seenTendency, sb, phase) => decl | null`;
+  // null falls back to the policy. ABSENT MEANS TODAY. Built so a harness can make the foe weave and surge the
+  // way a person does — a fight measured against a foe that never tries is not a measure of a fight.
+  foePolicy = null } = {}) {
   const cfg = rules.encounters?.duel || {};
   // SNG-247 Tier 3: a PUZZLE promoted onto the contest engine has no `opponent` block — the thing itself is the
   // other side. Normalized once, here, so every `def.opponent.name` below reads "the sealed door" instead of
@@ -242,7 +246,9 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   // ⛔ DUEL_pell_vs_veth §C.1 — the def under BOTH declarations, here, where both pass. See `enrichDecl`.
   const abilities = content?.abilities || null;
   playerDecl = enrichDecl(playerDecl, abilities);
-  const oppDecl = enrichDecl(opponentPolicy(oppSheet, state, seenTendency, sb), abilities);
+  const chosen = typeof foePolicy === "function" ? (foePolicy(oppSheet, state, seenTendency, sb, phase) || null) : null;
+  // both declarations pass through `enrichDecl` whichever brain chose the foe's — §60 stands on that
+  const oppDecl = chosen ? enrichDecl(chosen, abilities) : enrichDecl(opponentPolicy(oppSheet, state, seenTendency, sb), abilities);
   const before = character.energy ?? 0;
   // ⛔ CCODE-253 — DERIVED HERE, NEVER PASSED IN, because this wrapper's own comment (three lines down)
   // records that it has silently eaten a forwarded option TWICE. I made it three: CCODE-250 gave
@@ -784,7 +790,7 @@ export function sanitizeNewEncounter(raw) {
     ...(["standoff", "chase"].includes(String(raw.flavor || "")) ? { flavor: String(raw.flavor) } : {}),
     lethal: !!raw.lethal,
     opponent: { name: String(o.name).slice(0, 60), health: Math.max(2, Math.min(8, o.health | 0 || 4)),
-      threat: Math.max(10, Math.min(70, o.threat | 0 || 35)), yieldAt: Math.max(0, Math.min(3, o.yieldAt | 0)),
+      threat: Math.max(10, o.threat | 0 || 35), yieldAt: Math.max(0, Math.min(3, o.yieldAt | 0)),   // SNG-249: no 70 ceiling
       // ⚠️ THE RATIO IS SANITISED TOO, and as a ratio: 0–0.9 of the pool. An unsanitised field on a
       // GM-authored opponent is a field a prompt can set to anything.
       ...(Number.isFinite(Number(o.yieldAtFraction)) ? { yieldAtFraction: Math.max(0, Math.min(0.9, Number(o.yieldAtFraction))) } : {}),

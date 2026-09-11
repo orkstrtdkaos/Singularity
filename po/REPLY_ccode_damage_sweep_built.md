@@ -239,3 +239,104 @@ damage — which is exactly what `perLevel` is for. ⚠️ Deadlier fights are t
 
 ⛔ **Nothing is shipped.** `breakAtMax` exists as an inert dial; the four values are one content edit each
 (`skill_battle_system.json`, `resolution.json`). Say which option, or a mix, and it lands with the sweep as its gate.
+
+---
+
+# §8 — ⛔ ERIK ASKED WHETHER THE HARNESS PLAYS LIKE A PERSON. IT DID NOT. NOW IT DOES, AND THE ANSWER CHANGES.
+
+> Erik: *"real people try for every advantage and want to hit as hard as they can. that means their best sense /
+> conceal for the opponent and their best actions. does this harness do that? and does it test the entire level
+> range up to 100? for each domain?"*
+
+⛔ **No, no, and no** — measured before anything was changed:
+
+| what a person can do in a round (engine) | the sweep did |
+|---|---|
+| **sense** first with their best read → setup bonus up to +12 | never sensed |
+| **conceal** to deny the foe's read | never |
+| **weave** two crafts (+2/tier to the roll, max +8, energy ×1.8) | one craft |
+| **surge** (+10 to the roll, energy ×1.6) | standard, always |
+| **wield** a weapon (+4 per item, cap +8) | no inventory |
+| attempt the **finisher** when the odds favour it | never |
+| the **bonus action** a good read earns | never |
+| levels: the 17 authored encounters, foes **L13–23** | not 100 |
+| kit: **every craft in the catalog**, chosen by tier | not a domain, not a level |
+| the foe: `opponentPolicy` — never weaves, never senses, never wields | as in the game |
+
+⛑ **Built:** `--policy greedy` (the person above), `--foe greedy` (the foe weaves and surges too — through a new
+`foePolicy` hook on `playTurn` / `skillBattleRound`, absent = today, gated §152), `--kit bought` (a level-L person's
+purchases under the rules: `tierUnlockBands` T2@8 · T3@21 · T4@35 · T5@48, `skillPointPerLevel 2`, `tierPrice`,
+ranks by `rankLevelReq`), `--levels 5,…,100` (synthesized peers), `--foes people` (the authored roster at their own
+level, their real kits), `--domain <D>|all`.
+
+⚠️ **AND A CORRECTION OF MY OWN CLAIM IN §7:** *"a level-6 player may hold a T5."* Wrong for a real character — `levelReq ==
+tier` is the legacy alias; **`tierUnlockBands` is the gate**, enforced at learn time (`progression.js`). The harness now
+buys under it.
+
+## §8.1 — ⛔ THE FINDING: UNDER REAL PLAY A FIGHT IS 1–3 ROUNDS, DECIDED BY THE DEATH SAVE
+
+**Both sides greedy, a bought kit, peer-matched, patience 30 — every level:**
+
+| ladder | rounds to a win (p50) | how it ended | win | you down |
+|---|---|---|---|---|
+| **peer** L5→L100 | **2** (p90 6) | **finisher 80%** · health 12% · you 8% | 92% | 8% |
+| **+10** | 2 | finisher 68% · health 28% | 95% | 5% |
+| **−2** | 2 | finisher 76% · health 8% | 85% | 15% |
+
+⛔ **Why:** R35 — *a landed hit at a lethal rung OFFERS the insta-kill* — is engine-intrinsic, not a button. **47 of 105
+harm crafts are lethal-rung, 28 of them at T1–T2**, so a level-1 person has it. The greedy pick lands nearly every hit
+(weave + surge + weapon), and with `deathSave.saveBonus 20` the save fails about half the time. `case_closed` (T1,
+lethal) ends a level-20 peer fight in two rounds. ⚠️ **The 10 ± 5 target and R35 as it stands cannot both be true
+for people who play well.**
+
+## §8.2 — ⚑ FOR EACH DOMAIN (level 20, peer): IT BIFURCATES ON ONE THING
+
+| the domain's T≤2 kit has a lethal craft | domains | rounds (p50) | ended by |
+|---|---|---|---|
+| ⛔ **yes** | Angelic · Body · Breaking · Death · Life · Light · Mind · Span | **2** | finisher 95–100% |
+| ⚑ **no** | Building 9 · Chaos 8 · Dark 7 · Demonic 7 · Order 7 · Spirit 10 | **7–10** ✅ in band | health 100% |
+
+## §8.3 — ⬜ THE FIGHT THE TARGET DESCRIBES: attrition, no lethal crafts (`--no-lethal`), both greedy
+
+| level | rounds p50 | win | you down |
+|---|---|---|---|
+| 5 · 10 · 20 | 4–6 | 100% | 0% |
+| 35 | 6 | 83% | 17% |
+| 50 · 75 | 6–9 | **42%** | 58% |
+| 100 | 9 | **20%** | 80% |
+
+⛑ **Median 6, 67% inside 5–15 — the length is already close under today's dials once the kill is out of the kit.**
+⚠️ **But a symmetric peer who weaves and surges a bare T5 strike out-damages a player's non-lethal T5 at level 50+.**
+
+## §8.4 — ⚑ THE KNOB THAT GOVERNS THE KILL, MEASURED UNDER REAL PLAY: `deathSave.saveBonus`
+
+| saveBonus | L20 rounds p50 · finisher share | L50 rounds p50 · finisher share · win |
+|---|---|---|
+| **20** (today) | 2 · 100% | 2 · 83% · 83% |
+| 40 | 3 · 100% | 2 · 63% · 65% |
+| 60 | 3 · 98% | 2 · 55% · 62% |
+| 80 | 4 · 90% | 4 · 50% · 62% |
+
+⛔ **It softens the kill and does not remove it.** A lethal craft that rolls on every landed hit still ends most fights
+at 80. If Erik wants 10-round fights among people who play well, the change is to **when a lethal craft may roll** —
+a tier floor, a rung cost, or a set-up condition (worn down, driven back) — and that is a ruling on R35, not a dial.
+
+## §8.5 — ⛔ WHAT THE HONEST HARNESS SURFACED ON THE WAY
+
+| | | |
+|---|---|---|
+| ✅ **fixed** | **three callers still clamped threat to 70** after SNG-249 removed the sheet's ceilings — `synthesizeDuelDef`, `encounters.js`, `battle_turn.js`. Every synthesized duel foe in play was **level 35 or below**. Lifted; gated §153 (a threat-200 duel is a level-100 sheet) |
+| ⛔ **reported** | **the ground never reaches a fight.** `substratePenalty` is a roll term supplied only to free-form actions (`app.js:7594`); `rollSide` never sees it. ⚠️ **The entire power-source / band / reach work touches free-form actions and the ground card, not one skill battle.** "Per domain" in a fight is a KIT question today |
+| ⛔ **reported** | **the read loses on average at every level** for symmetric bodies: resist = `passiveAttributeWeight 3` × best attribute (9 at L20, 36 at L100); the read caps at rank 3; a failed read hands the FOE the setup. Mean setup −3 to −7. A person learns to stop — the harness does (`sensed 20–50%`) |
+| ⛔ **reported** | **the break exit is 0% under real play at every level** — a 2–6-round fight never fills the meter |
+| ⛔ **reported** | **authored people are not held to the tier bands.** Against the roster at peer level (33 people, L9–85), a bought-kit player **loses 74%**; a level-12 NPC lands 42-point hits |
+| ⚠️ **withdrawn** | §7's Options 1 and 2. They were measured against a player and a foe who never wove, surged, sensed or wielded. Under real play the dials they turn are not what decides a fight |
+
+## §8.6 — ⛔ WHAT ERIK DECIDES NOW
+
+| # | | |
+|---|---|---|
+| 1 | ⛔ **R35 under real play** — keep (fights among people who play well are 1–3 rounds, decided by the save), raise `saveBonus`, or restrict WHEN a lethal craft may roll | the whole 10 ± 5 question turns on this |
+| 2 | ⚠️ **should NPCs be held to the player's tier bands?** | today a L12 NPC out-guns a L12 player 3:1 |
+| 3 | ⬜ **should the ground reach a fight?** | today it does not, anywhere |
+| 4 | ⬜ the read: `senseStep.passiveAttributeWeight` 3 | sensing a peer is a loss on average |

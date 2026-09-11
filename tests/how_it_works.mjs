@@ -1180,6 +1180,59 @@ console.log("\n── §151 · which path made the hit ──");
     check("§151: …and app.js reads it from state (the fallback to the flat dial is now the exception, not the rule)", /rr\?\.state\?\.breakAt\?\.opponent/.test(app151));
   }
 }
+/* ══════════ §152 — THE FOE'S BRAIN IS A FORWARDED OPTION (a fight measured against a foe that never tries is not a measure) ══════════ */
+// ⛔ ERIK: "real people try for every advantage and want to hit as hard as they can." The harness could play the
+// PLAYER that way and the foe was still `opponentPolicy` — never weaves, surges only when behind. `foePolicy` lets a
+// harness hand the foe the same greedy play. ⚠️ This seam has eaten a forwarded option five times, so the gate is
+// on the CALLER: accepted by playTurn, forwarded to all three phases, and used.
+console.log("\n── §152 · the foe's brain is a forwarded option ──");
+{
+  const BT152 = await import("../engine/battle_turn.js");
+  const ENC152 = await import("../engine/encounters.js");
+  const { loadContentHeadless: lch152 } = await import("./headless_content.mjs");
+  const C152 = await lch152();
+  const sb152 = C152.skillBattle.engine, steps152 = C152.intensity.steps, rules152 = C152.rules, cat152 = C152.abilities || {};
+  const rng152 = (seed) => () => { seed |= 0; seed = (seed + 0x6D2B79F5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  const bt152 = rd("engine/battle_turn.js"), enc152 = rd("engine/encounters.js");
+  check("§152: ⛔ `playTurn` ACCEPTS `foePolicy` and FORWARDS it to all three phases", /foePolicy = null,/.test(bt152) && (bt152.match(/foePolicy, rng, party, phase:/g) || []).length === 3, `${(bt152.match(/foePolicy, rng, party, phase:/g) || []).length} of 3`);
+  check("§152: …and `skillBattleRound` accepts it and uses it in place of the policy", /foePolicy = null \} = \{\}\) \{/.test(enc152) && /const chosen = typeof foePolicy === "function"/.test(enc152) && /chosen \? enrichDecl\(chosen, abilities\) : enrichDecl\(opponentPolicy\(/.test(enc152));
+  const enc = Object.entries(C152.encounters || {}).find(([, e]) => e && e.type === "duel" && ENC152.contestSheetFor(e, { content: C152 }));
+  if (enc) {
+    const [, def] = enc;
+    const hero = () => ({ id: "h152", name: "H", level: 12, attributes: { practical: 5, physical: 5, mental: 5, social: 5 }, subAttributes: {}, alignment: {}, health: 300, maxHealth: 300, energy: 400, maxEnergy: 400, abilities: [], inventory: [], codex: { schemaVersion: 1, topics: {} } });
+    const run = (foePolicy, seed) => { const c = hero(); c.activeEncounter = { defId: def.id, state: ENC152.startEncounter(def, { oppSheet: ENC152.contestSheetFor(def, { content: C152 }) }) };
+      const decl = { function: "strike", tier: 1, attribute: "physical", intensity: "standard", name: "a plain strike" };
+      const out = []; const rng = rng152(seed);
+      for (let i = 0; i < 4; i++) { const played = BT152.playTurn(c, def, { action: decl, intensity: "standard", content: C152, rules: rules152, sb: sb152, steps: steps152, rng, day: 100, catalog: cat152, party: null, ...(foePolicy ? { foePolicy } : {}) }); out.push(played.rr?.oppDecl); if (played.ended) break; }
+      return out; };
+    const a = run(null, 152), b = run(null, 152);
+    check("§152: ⛑ ABSENT MEANS TODAY — two runs with no foePolicy are identical, and the policy chose every foe move", JSON.stringify(a) === JSON.stringify(b) && a.length > 0 && a.every(d => d && d.function));
+    let calls = 0; const seen = new Set();
+    const brain = (oppSheet, state, seenT, sb, phase) => { calls++; seen.add(phase); return { function: "shield", tier: 2, name: "the brain's guard", attribute: "practical", intensity: "conserve" }; };
+    const c2 = run(brain, 152);
+    check("§152: ⛔ …and a supplied brain is CALLED and its declaration is the foe's move", calls > 0 && c2.length > 0 && c2.every(d => d && d.name === "the brain's guard"), `${calls} calls · ${c2.map(d => d?.name).join(",")}`);
+    check("§152: …with the PHASE handed to it, so a brain can decline the sense step", seen.has("action"), JSON.stringify([...seen]));
+    const c3 = run(() => null, 152);
+    check("§152: ⚑ …and a brain that returns null falls back to the policy — the same moves as no brain at all", JSON.stringify(c3) === JSON.stringify(a));
+  }
+}
+/* ══════════ §153 — THE UPPER TAIL REACHES THE ROAD (SNG-249, the callers) ══════════ */
+// ⛔ SNG-249 removed the sheet's ceilings and three CALLERS still clamped threat to 70 — so every synthesized duel foe was
+// level 35 or below, in play and in every harness built on `synthesizeDuelDef`. Found by asking the sweep for a level-50
+// foe and getting a level-35 one.
+console.log("\n── §153 · the upper tail reaches the road ──");
+{
+  const RE153 = await import("../engine/random_encounters.js");
+  const ENC153 = await import("../engine/encounters.js");
+  const { loadContentHeadless: lch153 } = await import("./headless_content.mjs");
+  const C153 = await lch153();
+  const def = RE153.synthesizeDuelDef({ id: "x153", flavor: "fight", seed: "", opponent: { name: "a titan", threat: 200, tacticTags: [] } });
+  check("§153: ⛔ a threat-200 duel KEEPS its threat — the builder no longer clamps to 70", def.opponent.threat === 200, String(def.opponent.threat));
+  const sheet = ENC153.contestSheetFor(def, { content: C153 });
+  check("§153: …and the sheet it becomes is level 100, not 35", Number(sheet?.level) === 100, `level ${sheet?.level}`);
+  check("§153: ⛑ …while a threat-40 duel is exactly what it was — the floor of 10 stands, nothing else moved", RE153.synthesizeDuelDef({ id: "y153", flavor: "fight", seed: "", opponent: { name: "r", threat: 40 } }).opponent.threat === 40 && RE153.synthesizeDuelDef({ id: "z153", flavor: "fight", seed: "", opponent: { name: "r", threat: 3 } }).opponent.threat === 10);
+  check("§153: …and no caller still writes the 70 ceiling", ![rd("engine/random_encounters.js"), rd("engine/encounters.js"), rd("engine/battle_turn.js")].some(src => /Math\.min\(70, /.test(src)));
+}
 /* ══════════ §14 — THE FOLD CANNOT BEAT AN IMMUNITY THE BLOW COULD NOT ══════════ */
 // ⛔ FOUND BY RUNNING AEVI'S TWELVE CRAFTS THROUGH A MELEE-SCALE FIGHT (CCODE-313), which is the whole
 // reason Erik asked for a big-battle test. A physical-immune foe took ZERO from the player's typed blow and

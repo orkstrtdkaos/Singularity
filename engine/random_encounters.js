@@ -273,7 +273,9 @@ function titleFromFlavor(entry) {
  *  yieldAt) into the full encounters.js duel schema. Never lethal — avoidable. */
 export function synthesizeDuelDef(entry) {
   const o = entry.opponent || {};
-  const threat = Math.max(10, Math.min(70, o.threat | 0 || 40));
+  // ✅ SNG-249 (Erik): "the CEILINGS are gone". The sheet dropped its cap; this builder still clamped threat to 70, so every
+  // synthesized DUEL foe was level 35 or below — the world's upper tail existed on the sheet and not on the road to it.
+  const threat = Math.max(10, o.threat | 0 || 40);
   const health = Math.max(3, Math.min(8, 3 + Math.round(threat / 15)));
   const yieldAt = Math.max(0, Math.min(health - 1, Math.round(health * (o.yieldAt || 0.2))));
   return {

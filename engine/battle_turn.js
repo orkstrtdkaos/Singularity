@@ -260,7 +260,7 @@ export function duelFromTarget(character, target, { catalog = {}, npcs = {}, cfg
   // caller that ignores the return value cannot leave a half-made encounter on the character.
   if (declaredNotAnOpponent(rec)) return null;
   const person = rec ? personOpponentFor(rec, { catalog, cfg, day, traditionIndex, stageOf }) : null;
-  const fallbackThreat = Number(threat) || Number(target?.threat) || Math.max(20, Math.min(70, Math.round((Number(here?.dangerLevel) || 3) * 12)));
+  const fallbackThreat = Number(threat) || Number(target?.threat) || Math.max(20, Math.round((Number(here?.dangerLevel) || 3) * 12));   // SNG-249: no 70 ceiling
   const entry = { id: `harm-${slugify(target?.name || "foe")}-${(character?.activeEncounter?.state?.round || 0)}`,
     flavor: "fight", seed: `You have committed to violence against ${target?.name || "them"}.`,
     opponent: person || { name: target?.name, threat: fallbackThreat, tacticTags: [] } };
@@ -306,6 +306,9 @@ export function playTurn(character, def, { sense = null, action = null, bonus = 
   rng = Math.random, day = null, seenTendency = null, finisher = false, family = null, frameContent = {}, catalog = {}, turnState = null,
   // ACCEPTED AND FORWARDED to every round below — the human party for the length of this contest. This file
   // exists so play and the harness take ONE path, so an option only the app knew about would defeat its purpose.
+  // ⛔ ACCEPTED AND FORWARDED to every round below — the foe's brain, when a harness supplies one (see
+  // skillBattleRound). Absent means today.
+  foePolicy = null,
   party = null } = {}) {
   const turn = freshTurn();
   // the app resolves the sense in one call and the action later; the read it earned rides in as `turnState`
@@ -322,7 +325,7 @@ export function playTurn(character, def, { sense = null, action = null, bonus = 
   let last = null, lastFn = seenTendency;
   if (sense) {
     const sd = resolveDeclRank(sense, { character, catalog });
-    const rr = skillBattleRound(state(), def, sd, { character, content, rules, sb, steps, seenTendency: lastFn, rng, party, phase: "sense", tickEffects: false });
+    const rr = skillBattleRound(state(), def, sd, { character, content, rules, sb, steps, seenTendency: lastFn, foePolicy, rng, party, phase: "sense", tickEffects: false });
     character.energy = Math.max(0, character.energy + (rr.deltas?.energy || 0));
     character.activeEncounter = { defId: def.id, state: rr.state };
     turn.senseDone = true; turn.setupBonus = rr.setupBonus || 0; turn.bonusEarned = !!rr.bonusEarned?.player;
@@ -338,7 +341,7 @@ export function playTurn(character, def, { sense = null, action = null, bonus = 
   const st = state();
   if (openGuards(character, st, ad, { catalog })) st.guardPick = [];
   const swingBefore = st?.momentum ?? 0;
-  let rr = skillBattleRound(st, def, ad, { character, content, rules, sb, steps, seenTendency: lastFn, rng, party, phase: "action", tickEffects: !(turn.bonusEarned && bonus), setupBonus: turn.setupBonus || 0 });
+  let rr = skillBattleRound(st, def, ad, { character, content, rules, sb, steps, seenTendency: lastFn, foePolicy, rng, party, phase: "action", tickEffects: !(turn.bonusEarned && bonus), setupBonus: turn.setupBonus || 0 });
   if (finisher) rr = collapseIfFinished(rr, def, { swingBefore, family, sb, frameContent });
   lastFn = ad.function;
   if (Array.isArray(st?.protections) && st.protections.length) rr.state.protections = tickProtections(st.protections);
@@ -347,7 +350,7 @@ export function playTurn(character, def, { sense = null, action = null, bonus = 
   if (!ended && checkIncapacitation(character)) { ended = true; outcome = "incapacitated"; }
   if (!ended && turn.bonusEarned && bonus) {
     const bd = resolveDeclRank(bonus, { character, catalog });
-    const br = skillBattleRound(state(), def, bd, { character, content, rules, sb, steps, seenTendency: lastFn, rng, party, phase: "bonus", tickEffects: true });
+    const br = skillBattleRound(state(), def, bd, { character, content, rules, sb, steps, seenTendency: lastFn, foePolicy, rng, party, phase: "bonus", tickEffects: true });
     apply(br, bd, "bonus");
     ended = br.ended; outcome = br.outcome || null; endRR = br;
     if (!ended && checkIncapacitation(character)) { ended = true; outcome = "incapacitated"; }

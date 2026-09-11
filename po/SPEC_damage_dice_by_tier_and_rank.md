@@ -1,3 +1,9 @@
+# ⛔ WITHDRAWN — DO NOT BUILD
+
+**The die ladder in this spec ALREADY EXISTS** in `craft_mechanics.json` (`familyDefaults.damage.dice` + `tierLadder`), and the authored one is better: **T5 is 5d6+8, mean 25.5**, against the 2d12 proposed below. ⚠️ **Aevi measured the flat FALLBACK branch, which does not run for harm crafts.** ⛑ See `po/RETRACTED_damage_dice_spec.md`. ⬜ **Only §2's RANK term survives — `tierLadder` has no rank dimension.**
+
+---
+
 # SPEC — damage: dice by tier and rank, and both exits reachable
 
 **Author:** Aevi (PO) · **2026-09-10** · **Status:** ⛔ **`superseded` by `SPEC_damage_make_it_vary.md` — Aevi proposed building dice that already exist. `familyDefaults.damage.dice` is `{n:1,d:6}` and `tierLadder` scales it to 5d6+8 at T5 (mean 25.5). The 3.68 she measured was the FLAT FALLBACK firing.**

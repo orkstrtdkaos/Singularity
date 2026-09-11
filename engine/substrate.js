@@ -34,6 +34,11 @@ export const SUBSTRATE_TUNING = {
   gateBelow: 0.18,      // factor under this → the craft is effectively OFF (a hard, explained gate)
   materialFloor: 0.7,   // SNG-193b §4: a material root/extension is never STARVED — the augmented craft
                         //   degrades TOWARD its pure form (this floor), never to zero. Sits with crowdFloor.
+  // ✅ ERIK 2026-09-11 — THE EMPOWERED CORE (Aevi's MEASURED_empowered_band §2: "~1.25, narrow, and it should be RARE").
+  // Inside the band the factor was flat 1.0 — the scale ran 0 → 1 and never above. A core of center ± width × empowerCore
+  // now rises to empowerPeak at the heart of the band: a PEAK, not a plateau, so only the richest ground reaches it.
+  empowerPeak: 1.25,
+  empowerCore: 0.3,
 };
 
 // SNG-193b: a source's characteristic band — what a craft LEANS ON decides its best-ground, not the
@@ -211,7 +216,13 @@ export function bandFactor(band, eff, t = SUBSTRATE_TUNING) {
  // registry:internal
   if (!band) return 1; // untuned tradition — substrate-neutral
   const lo = band.center - band.width, hi = band.center + band.width;
-  if (eff >= lo && eff <= hi) return 1;
+  if (eff >= lo && eff <= hi) {
+    // ✅ THE EMPOWERED CORE (Erik 2026-09-11). "The best it ever gets" was one point inside the edge; the heart of the band
+    // is now better than its rim — the ground is not merely adequate there, it is ANSWERING. Linear to the peak.
+    const core = band.width * (Number(t.empowerCore) || 0), peak = Number(t.empowerPeak) || 1;
+    const d = Math.abs(eff - band.center);
+    return peak > 1 && core > 0 && d < core ? 1 + (peak - 1) * (1 - d / core) : 1;
+  }
   if (eff < lo) {
     const x = lo <= 0 ? 1 : Math.max(0, eff / lo); // 1 at the band edge → 0 at true nature
     return Math.max(t.starveFloor, Math.min(1, Math.pow(x, t.starveExp)));
@@ -230,7 +241,7 @@ export function substrateVerdict({ tradition, school = null, root = null, densit
   let factor = bandFactor(band, eff, tuning);
   let side = !band ? "neutral"
     : eff < band.center - band.width ? "starved"
-    : eff > band.center + band.width ? "crowded" : "full";
+    : eff > band.center + band.width ? "crowded" : factor > 1 ? "empowered" : "full";
   // §4: the FLOOR is the root's. A material ROOT — or a material-EXTENSION school — is never STARVED: the
   // augmented craft degrades TOWARD its pure form (materialFloor), never to zero. The floor bites only on
   // the starved side; interference from ABUNDANCE still applies. "The material school is the one that travels."
@@ -615,7 +626,7 @@ export function groundCardFor(ability, character, { schools, substrate, location
     // used the tuning (−65, ×0.6, 0.18) — two arithmetics for one ground. One tuning now, and the source's own floor.
     : (() => { const eff = effectiveDensity(density, carried);
         let factor = bandFactor(band, eff, tuning);
-        let side = eff < band.center - band.width ? "starved" : eff > band.center + band.width ? "crowded" : "full";
+        let side = eff < band.center - band.width ? "starved" : eff > band.center + band.width ? "crowded" : factor > 1 ? "empowered" : "full";
         if (sourceHasFloor(cs.source, substrate) && side === "starved" && factor < tuning.materialFloor) { factor = tuning.materialFloor; side = "floored"; }
         return { factor, side, percent: Math.round(factor * 100), chancePenalty: Math.round((1 - factor) * tuning.maxChancePenalty),
                  energyMult: 1 + tuning.energyK * (1 - factor), off: factor < tuning.gateBelow }; })();
@@ -629,7 +640,10 @@ export function groundCardFor(ability, character, { schools, substrate, location
   const meaning = readsMeaning && location ? meaningDensity(location, { present, data: substrate, aura: meaningAura }) : null;
   const ceiling = readsMeaning ? meaningCeiling(meaning, substrate) : null;
   let meaningBound = false;
-  if (ceiling !== null && v.factor > ceiling) {
+  // ⚠️ THE CEILING BINDS ONLY BELOW 1. It tops out at 1.0 at full meaning, so without this an empowered factor would be
+  // clipped at every place short of perfect meaning and labelled "meaningless". Meaning caps a craft's reach; it does not
+  // take away what the substrate's own heart lends it where the meaning is whole.
+  if (ceiling !== null && ceiling < 1 && v.factor > ceiling) {
     v.factor = ceiling; v.percent = Math.round(ceiling * 100); meaningBound = true;
     v.chancePenalty = Math.round((1 - ceiling) * tuning.maxChancePenalty);
     v.energyMult = 1 + tuning.energyK * (1 - ceiling);
@@ -638,6 +652,7 @@ export function groundCardFor(ability, character, { schools, substrate, location
   }
   const word = v.off ? "will not answer here"
     : v.side === "meaningless" ? "capped here — little meaning to work with"
+    : v.side === "empowered" ? "empowered here — the ground is answering"
     : v.side === "full" ? "at full strength here"
     : v.side === "floored" ? "holding at its floor here"
     : v.side === "starved" ? "starved here — the ground is too thin"
@@ -656,6 +671,22 @@ export function groundCardFor(ability, character, { schools, substrate, location
     // R38: the second ground, when this source reads it — absent otherwise, never a default
     ...(readsMeaning ? { meaning, ceiling, meaningBound } : {}),
     chancePenalty: v.chancePenalty, energyMult: v.energyMult, off: v.off, grounded: true };
+}
+
+/** ⛔ AEVI 2026-09-11 — COPY_ground_tag_fight_menu. ONE VOCABULARY for what the ground does to a craft, on a menu row: which
+ *  way and how much, read in a second. Always the number; the GROUND named, never the craft; no jargon; silence for the good
+ *  state (full ground, or a move with no source). The fight menu and the wheel both render this — nothing invents a label.
+ *  `g` is a verdict from `groundCardFor` / `groundForDecl`. Returns { tag, tip, tone } or null. Pure. */
+export function groundTag(g) {
+  const p = Number(g?.chancePenalty) || 0;
+  if (!g || !p) return null;
+  if (p < 0) return { tag: `rich ground +${-p}`, tone: "good", tip: `This ground is rich in what the craft draws on. +${-p} to the roll, and it costs less.` };
+  if (g.side === "floored") return { tag: `bare hands −${p}`, tone: "hold", tip: "The ground is thin, but this craft falls back on what your body can do. It will not fail entirely." };
+  if (g.side === "crowded") return { tag: `crowded −${p}`, tone: "warn", tip: "More here than the craft can use cleanly; it interferes." };
+  // ⚠️ not in Aevi's table (flagged to her): a craft capped by how little MEANING a place holds is a different lack from thin ground
+  if (g.side === "meaningless") return { tag: `little meaning −${p}`, tone: "warn", tip: `There is little here for this craft to take hold of — the place caps it. −${p} to the roll, and it costs more.` };
+  // starved — and a craft too starved to answer at all is still thin ground, with its number (flagged: her table left it silent)
+  return { tag: `thin ground −${p}`, tone: "bad", tip: `Little of what this craft draws on is here. −${p} to the roll, and it costs more.${g.off ? " It may not answer at all." : ""}` };
 }
 
 /** ✅ ERIK 2026-09-11 — "THE GROUND MUST REACH A FIGHT. SKILL SUCCESS DEPENDS ON IT."

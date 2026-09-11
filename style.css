@@ -1365,9 +1365,16 @@ img[data-lightbox] { cursor: zoom-in; }
 .ground-pips { letter-spacing: 1px; }
 .ground-verdict { font-weight: 600; }
 .ground-row-full .ground-pips, .ground-row-full .ground-verdict { color: var(--accent, #d4a24a); }
+.ground-row-empowered .ground-pips, .ground-row-empowered .ground-verdict { color: var(--good, #4fa36b); font-weight: 600; }   /* Erik 2026-09-11: the empowered core */
 .ground-row-starved .ground-pips, .ground-row-starved .ground-verdict,
 .ground-row-off .ground-pips, .ground-row-off .ground-verdict { color: var(--bad, #c46) ; }
 .ground-row-neutral { opacity: 0.65; }
+/* Aevi's ground tag (COPY_ground_tag_fight_menu): which way and how much, on a craft row — the same words on the wheel */
+.sb-ground { font-family: var(--font-ui); font-size: 11px; padding: 1px 6px; border-radius: 3px; border: 1px solid currentColor; white-space: nowrap; margin-left: 6px; }
+.sb-ground-bad { color: var(--bad, #c46); }
+.sb-ground-warn { color: var(--warn, #c9913a); }
+.sb-ground-hold { color: var(--muted, #8a8f84); }
+.sb-ground-good { color: var(--good, #4fa36b); font-weight: 600; }
 .ground-because { font-style: italic; }
 
 /* SNG-385 — the nanite chip. A SECOND field, so it gets its own colour rather than shading the first:

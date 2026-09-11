@@ -1,6 +1,6 @@
 # BALANCE — the dials, what they actually do, and how to turn one without lying to yourself
 
-**CCode · started 2026-08-30 · v1.9.448**
+**CCode · started 2026-08-30 · v1.9.449**
 
 > Erik: *"we need to build toward balance and use the dials."*
 
@@ -60,7 +60,9 @@ What balance means here is narrower and testable:
 | `momentum.pressure.breakAtMax` | `skill_battle_system` | **10** (v1.9.448) | caps R34b above level 20 — a level-50 foe asked for 25 ticks when fights make ~2 was a break that could not happen |
 | `momentum.pressure.breakEasesEvery` / `breakEaseFloor` | `skill_battle_system` | **2 / 1** (v1.9.448) | Erik 2026-09-11: *"breaking … increases likelihood after a long fight"* — one tick off the threshold per 2 rounds fought. Break 21% of wins: 5% (1–3 rounds) · 9% · 26% · 43% · **56% past 12** |
 | `senseStep.passiveFailFloor` | `skill_battle_system` | **0** (v1.9.448) | Erik 2026-09-11: *"I don't want sensing to be a loss on average"* — a failed read against a foe who is not hiding costs the step, not the exchange. Read mean −0.6 → +3.5; an active obscure still bites |
-| `senseStep.decisiveReadEarnsBonus` | `skill_battle_system` | **false** · ⬜ Erik's call | true: a decisive read (tier 3) earns the bonus action — bonus 7% → 28% of reads; reading every turn 81% → 88% of peer wins |
+| `senseStep.decisiveReadEarnsBonus` | `skill_battle_system` | **true** (Erik 2026-09-11) | true: a decisive read (tier 3) earns the bonus action — bonus 7% → 28% of reads; reading every turn 81% → 88% of peer wins |
+| `npcStanding.defaultLoadout` | `resolution` | a weapon of their trade (melee) + a healing draught (v1.9.449) | Erik 2026-09-11 (Q3) — what a person carries when the record authors no `inventory` or `gear`; the foe wields it (+4 on a strike) and drinks it when low. ⬜ Aevi's placeholder until gear is authored |
+| `npcStanding.gearWords` | `resolution` | blade · axe · spear · bow · melee · shield · armor word lists | how a record's `gear` PROSE becomes an item a fight can read, when it names no catalogue item |
 | `deathSave.saveBonus` | `skill_battle_system` | **20** | R35 — the target's weight on the save. 0 → 66% of landed Cut Thread hits kill a fresh equal (R43: the only craft that offers the save) · 10 → 58% · **20 → 48%** · 30 → 38% |
 | `deathSave.saveOn` / `notForClasses` | `skill_battle_system` | strength, presence / feral_construct, made_weapon | what the target rolls; the classes the Cut Thread cannot be aimed at (Aevi, from its `notFor` prose). ⛔ **R43b, built 2026-09-11:** the save fires where a craft AUTHORS `mechanic.killCost` — `rungs` and `defaultKillCost` are gone (a rung list enrolled 51 lethal crafts; a default price would re-enrol them) |
 | `npcStanding.levelPerCompletion` / `levelPerConditionStep` | `resolution` | **1 / 1** (v1.9.348) | R37 — a done assignment, a condition climb on a kept hold; stacks on acquaintance. ⛔ no service-band dial (R37c) |

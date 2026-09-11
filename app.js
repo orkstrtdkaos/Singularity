@@ -40,7 +40,7 @@ import { ITEM_KINDS, itemKindsIn, itemKindLabel, wieldBonusFor, usableCombatItem
 import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive } from "./engine/earnedpower.js"; // SNG-251 §2c/§4: the earned-power economy (ceiling = f(level, craft rank); ~1 evolution/day)
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
-import { groundForDecl, substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor, peoplePresentAt } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
+import { groundForDecl, groundTag, substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor, peoplePresentAt } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { sceneImage, itemImage, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
 import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, regionExtent, bendRoad, roadNetwork, clipToFrame } from "./engine/worldglobe.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
@@ -128,7 +128,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.448";
+const APP_VERSION = "1.9.449";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3445,16 +3445,16 @@ function groundRow(ability) {
     if (!g) return "";
     const pips = "◉".repeat(g.strength) + "◎".repeat(4 - g.strength);
     const detail = g.grounded && g.percent !== null
-      ? `${g.percent}% of its full strength here` + (g.chancePenalty ? ` · −${g.chancePenalty} to the roll` : "")
-        + (g.energyMult > 1 ? ` · +${Math.round((g.energyMult - 1) * 100)}% energy` : "")
+      ? `${g.percent}% of its full strength here` + (g.chancePenalty > 0 ? ` · −${g.chancePenalty} to the roll` : g.chancePenalty < 0 ? ` · +${-g.chancePenalty} to the roll` : "")
+        + (g.energyMult > 1 ? ` · +${Math.round((g.energyMult - 1) * 100)}% energy` : g.energyMult < 1 ? ` · −${Math.round((1 - g.energyMult) * 100)}% energy` : "")
       : "the ground does not touch this one";
     // the lineage’s authored blend, when there is one (a dark field until 2026-09-04)
     const blend = Array.isArray(g.lineageMix) && g.lineageMix.length ? " · lineage leans " + g.lineageMix.map(m => `${m.source} ${m.share}%`).join(", ") : "";
     // ✅ R38b: MEANING SETS THE CEILING — a second ground on the row, only for a source that reads it
     const meaningBit = g.meaning !== undefined && g.meaning !== null ? ` · meaning ${Math.round(g.meaning * 100)}% (ceiling ${Math.round((g.ceiling ?? 1) * 100)}%${g.meaningBound ? " — binding" : ""})` : "";
-    const cls = !g.grounded ? "neutral" : g.off ? "off" : g.strength >= 4 ? "full" : g.strength <= 1 ? "starved" : "part";
+    const cls = !g.grounded ? "neutral" : g.off ? "off" : g.side === "empowered" ? "empowered" : g.strength >= 4 ? "full" : g.strength <= 1 ? "starved" : "part";
     return `<div class="ground-row ground-row-${cls}" title="${esc(detail + meaningBit + blend + (g.because ? " — " + g.because : ""))}">`
-      + `<span class="ground-pips">${pips}</span> <span class="ground-verdict">${esc(g.verdict)}</span>`
+      + `<span class="ground-pips">${pips}</span> <span class="ground-verdict">${esc(g.verdict)}</span>` + (groundTag(g) ? ` ${sbGroundChip(g)}` : "")
       + (g.because ? ` <span class="hint ground-because">· ${esc(g.because)}</span>` : "") + `</div>`;
   } catch { return ""; }   // a readout is never worth breaking the card for
 }
@@ -7596,6 +7596,13 @@ function substratePenaltyFor(choice, location) {
   return usesAbility ? (substrateForAction(choice, location)?.chancePenalty || 0) : 0;
 }
 
+/** ⛔ AEVI's COPY_ground_tag_fight_menu — the chip a craft row carries: `groundTag`'s words, a tone class, her tooltip. Empty
+ *  when the ground is full or the move has no source — silence is the good state. */
+function sbGroundChip(g) {
+  const t = groundTag(g);
+  return t ? `<span class="sb-ground sb-ground-${t.tone}" title="${esc(t.tip)}">${esc(t.tag)}</span>` : "";
+}
+
 /** ✅ ERIK 2026-09-11 — "THE GROUND MUST REACH A FIGHT. SKILL SUCCESS DEPENDS ON IT." WHERE a contest is, handed to
  *  every fight round the way `substrateForAction` hands it to a free action: the place, what you carry (a Waystaff, a
  *  companion's aura, a hold's field), who is present, the meaning a hold lends. The engine turns it into each side's
@@ -7908,7 +7915,9 @@ async function onChoice(choice) {
   if (substrate && substrate.side !== "full" && substrate.side !== "neutral") {
     resolution.substrate = { percent: substrate.percent, side: substrate.side, carriedBy: substrate.carriedBy || null,
       ...(substrate.meaningBound ? { meaningBound: true, meaning: substrate.meaning } : {}) };
-    pendingSubstrateNote = substrate.side === "meaningless"
+    pendingSubstrateNote = substrate.side === "empowered"
+      ? `The ground here ANSWERS the character's craft — it runs at ~${substrate.percent}% of its ordinary strength. Let it read as the place lending its weight.`
+      : substrate.side === "meaningless"
       ? `There is little MEANING here for the character's craft to take hold of — it runs at ~${substrate.percent}% (capped by the place, not the lattice). Let it read as reaching for significance the place does not hold.`
       : substrate.side === "starved"
       ? `The lattice is THIN here — the character's craft is running at ~${substrate.percent}% (starved of substrate). Let the effort show the strain; a weapon or mundane means is unaffected.`
@@ -8139,7 +8148,7 @@ function isDev() { return isDevMode(); }
 // same resolution in the engine. Removed 2026-09-08 rather than left as a second door nobody walks through.
 
 function escalateToFight(target, choice) {
-  const duel = duelFromTarget(character, target, { catalog: fullCatalog(), npcs: CONTENT.npcs || {}, cfg: CONTENT.rules?.npcStanding || {}, day: absoluteWorldDay(),
+  const duel = duelFromTarget(character, target, { catalog: fullCatalog(), npcs: CONTENT.npcs || {}, cfg: CONTENT.rules?.npcStanding || {}, items: CONTENT.items || {}, leveling: CONTENT.rules?.leveling || null, day: absoluteWorldDay(),
     sb: CONTENT.skillBattle?.engine, here: hereNow(), lethal: choice?.intentRung === "lethal", traditionIndex: CONTENT.traditionIndex,
     // R41: the arc's LIVE stage decides a Sovereign's form; worldtick owns it, so it is handed in rather than reached for
     stageOf: (arcId) => arcStageNow(CONTENT, character, arcId) });
@@ -13627,7 +13636,7 @@ function sbPriceMove(allSkills, fog, st, sb) {
     est.tip = est.show === "none"
       ? `Your senses do not reach this yet — read them first. ${counter ? "" : "A craft that counters what they are doing would also let you judge it."}`
       : `Your read of the odds you WIN this exchange (opposed, with matchup and standing effects). Confidence ${est.confidence}/3${counter ? " — you hold a craft that counters what they are doing, so you can judge this well" : fogTier ? " — from what your read bought you" : ""}.`;
-    if (est.ground) est.tip = `${est.tip || ""} The ground here costs this craft ${est.ground.chancePenalty} (${est.ground.off ? "it will not answer here" : est.ground.side}, ${est.ground.percent}% of its strength).`.trim();
+    if (est.ground) est.tip = `${est.tip || ""} ${est.ground.chancePenalty < 0 ? `The ground here lends this craft +${-est.ground.chancePenalty}` : `The ground here costs this craft ${est.ground.chancePenalty}`} (${est.ground.off ? "it will not answer here" : est.ground.side}, ${est.ground.percent}% of its strength).`.trim();
     return est;
   };
 }
@@ -13754,7 +13763,7 @@ function skillBattlePanel() {
       const finTag = fin?.can
         ? `<span class="sb-fin" title="FINISHING POTENTIAL${fin.why === "innate" ? " — this craft can kill, so it has carried this from the start" : " — earned by reaching tier " + (s.tier || 1)}. Declare it as your ACTION and a decisive swing can end the fight in one beat.${fo ? "\n\nChance to END it outright: " + fo.pct + "%\n· " + fo.reasons.join("\n· ") : ""}${foKnown ? "" : "\n\n(Read them to see the number.)"}">\u26a1 finisher${foKnown ? ` \u00b7 ${fo.pct}% to end it` : ""}</span>`
         : (fin && fin.why === "needs-tier" ? `<span class="sb-fin dim" title="Not yet a finisher — this craft gains finishing potential at tier ${fin.needTier}.">\u26a1 at T${fin.needTier}</span>` : "");
-      const oddsTag = odds ? `<span class="sb-odds sb-odds-${odds.show}" title="${esc(odds.tip)}">${esc(odds.label)}</span>` : "";
+      const oddsTag = (odds ? `<span class="sb-odds sb-odds-${odds.show}" title="${esc(odds.tip)}">${esc(odds.label)}</span>` : "") + sbGroundChip(odds?.ground);
       // CCODE-78: on the SENSE step a guard is offered alongside the reads, and the TRADE has to be visible
       // BEFORE the pick, not discovered after it. An unpriced choice between "read them" and "raise a shield"
       // reads as strictly-better-defence; priced, it is the actual decision Erik described.

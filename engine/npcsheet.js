@@ -511,8 +511,17 @@ export function isPermanent(entry, { at = 3 } = {}) {
  *       they do not have. The role SEEDS the domains; it does not hand out abilities directly.
  *
  *  ⛔ CAPPED BY LEVEL, exactly as a PC is. `skillCapacity` is the same table. */
+/** The highest tier a level-L character may hold under `leveling.tierUnlockBands` — the PC's own table. Pure. */
+export function topTierFromBands(level, bands) {
+  let top = 1;
+  for (const [t, b] of Object.entries(bands || {})) if (Number(b?.start) <= Number(level)) top = Math.max(top, Number(t) || 1);
+  return top;
+}
+
 export function kitFor(entry, { catalog = {}, traditionIndex = null, domainAccess = null,
-  day = null, cfg = {}, capacity = null } = {}) {
+  day = null, cfg = {}, capacity = null,
+  // ✅ Erik 2026-09-11: the PC's tier bands (`leveling.tierUnlockBands`). Absent, the old ceil(level / 5) cap stands.
+  tierBands = null } = {}) {
   const level = derivedLevel(entry, { day, cfg });
   const formula = Math.max(1, num(capacity, Math.max(1, Math.round(level / Math.max(1, num(cfg.craftsPerLevels, 2))))));
   const seen = craftsOf(entry, catalog, { limit: formula });
@@ -524,19 +533,43 @@ export function kitFor(entry, { catalog = {}, traditionIndex = null, domainAcces
   // below may not hand it back. (Veth has no bone_lance, set_hand or reaping_sickle, and those are her.)
   const closed = new Set((Array.isArray(entry?.closed) ? entry.closed : []).map(String));
 
-  // what their place on the circle opens — the same question the creation screen asks
+  // ✅ ERIK 2026-09-11: "NPCs should have 3 domain access just like PCs... that's the way you get to a balanced kit."
+  // The draw read the PRIMARY ring only (plus adjacent/open) and took crafts in CATALOGUE ORDER until the cap, so a kit
+  // was whatever tradition the catalogue happened to list first. It now reads all three domains the way `domainAccess`
+  // grants them to a PC (the secondary to its tier cap, the tertiary to its) and fills BALANCED: a harm craft from each
+  // domain, then one read, one guard, one hide, then round-robin across the domains. ⚠️ Still NEAR GROUND: acquired and
+  // cross-circle crafts come only from the story (`skillsObserved`). ⛔ AND THE TIER CAP IS THE PC'S when the caller
+  // hands the bands — under ceil(level / 5) a level-21 person held a T5 a PC reaches at 48.
   const domains = entry?.domains || null;
   if (domains && typeof domainAccess === "function") {
+    const bandsNow = tierBands || cfg?.tierUnlockBands || null;
+    const topTier = bandsNow ? topTierFromBands(level, bandsNow) : Math.max(1, Math.ceil(level / 5));
+    const BANDS = ["primary", "secondary", "tertiary", "adjacent", "open"];
+    const byBand = Object.fromEntries(BANDS.map(b => [b, []]));
     for (const ab of Object.values(catalog || {})) {
-      if (kit.length >= cap) break;
-      if (abilityTier(ab) > Math.max(1, Math.ceil(level / 5))) continue;
-      if (kit.some(k => k.id === ab.id)) continue;
-      if (closed.has(ab.id)) continue;
+      if (!ab?.id || abilityTier(ab) > topTier) continue;
+      if (kit.some(k => k.id === ab.id) || closed.has(ab.id)) continue;
       let v = null;
       try { v = domainAccess(ab, abilityTier(ab), domains, traditionIndex); } catch { v = null; }
-      // ⚠️ NEAR GROUND ONLY. An NPC reaches across the circle only where the story has SHOWN them doing it
-      // — that is what `skillsObserved` is for. Filling a kit from the far side would invent a biography.
-      if (v?.allowed && (v.band === "primary" || v.band === "adjacent" || v.band === "open")) kit.push(ab);
+      if (v?.allowed && byBand[v.band]) byBand[v.band].push(ab);
+    }
+    for (const b of BANDS) byBand[b].sort((x, y) => abilityTier(y) - abilityTier(x) || String(x.id).localeCompare(String(y.id)));
+    const inKit = (ab) => kit.some(k => k.id === ab.id);
+    const has = (ab, list) => (ab.functions || []).some(f => list.includes(f));
+    const take = (ab) => { if (ab && kit.length < cap && !inKit(ab)) kit.push(ab); };
+    const pool = () => BANDS.flatMap(b => byBand[b]);
+    const HARM = ["strike", "break"], READ = ["reveal", "foresee", "track"], GUARD = ["shield", "ward", "resist"], HIDE = ["conceal", "deceive"];
+    for (const b of ["primary", "secondary", "tertiary"]) take(byBand[b].find(ab => has(ab, HARM) && !inKit(ab)));
+    take(pool().find(ab => has(ab, READ) && !inKit(ab)));
+    take(pool().find(ab => has(ab, GUARD) && !inKit(ab)));
+    take(pool().find(ab => (ab.obscure === true || has(ab, HIDE)) && !inKit(ab)));
+    const at = Object.fromEntries(BANDS.map(b => [b, 0]));
+    for (let moved = true; moved && kit.length < cap;) {
+      moved = false;
+      for (const b of BANDS) {
+        while (at[b] < byBand[b].length && inKit(byBand[b][at[b]])) at[b]++;
+        if (at[b] < byBand[b].length && kit.length < cap) { kit.push(byBand[b][at[b]++]); moved = true; }
+      }
     }
   }
   return {
@@ -574,6 +607,43 @@ export function battleSkillsFor(entry, opts = {}) {
     out.push({ id: "_strike", function: "strike", name: "a plain strike", tier: 1, attribute: "physical" });
   }
   return { skills: out, level };
+}
+
+/** ✅ ERIK 2026-09-11 (Q3): "they should and can use weapons and items. These things need to be on their npc sheets."
+ *  WHAT A PERSON CARRIES, as an inventory the fight reads exactly as it reads a PC's (`wieldBonusFor`, the drink).
+ *    1. `inventory` — items authored as items (ids, `{ item: id }`, or objects), resolved against the catalogue
+ *    2. `gear` — the record's prose ("a boarding cutlass with a wrapped grip"). A line that names a catalogue item (its
+ *       id, a parenthesised id, or its name) IS that item; otherwise `npcStanding.gearWords` classifies it by the words
+ *       that name a weapon or a guard, and a line no word names ("a redsail token") carries nothing into a fight
+ *    3. neither authored → `npcStanding.defaultLoadout`, a person's ordinary kit, until content says otherwise.
+ *  ⚠️ An authored `gear` that names nothing usable ("no weapon at all") is a FACT about the person: no default. Pure. */
+export function npcGear(entry, { items = null, cfg = {} } = {}) {
+  const cat = items || {};
+  const byName = new Map(Object.values(cat).filter(i => i && i.name).map(i => [String(i.name).toLowerCase(), i]));
+  const words = cfg?.gearWords || {};
+  const asItem = (x) => {
+    if (!x) return null;
+    if (typeof x === "object") {
+      if (x.item) return cat[x.item] ? { ...cat[x.item], qty: x.qty ?? 1 } : null;
+      return x.id && cat[x.id] ? { ...cat[x.id], ...x } : { ...x };
+    }
+    const s = String(x).trim(); if (!s) return null;
+    if (cat[s]) return { ...cat[s] };
+    const a = s.indexOf("("), b = a >= 0 ? s.indexOf(")", a + 1) : -1;
+    const inner = a >= 0 && b > a ? s.slice(a + 1, b).trim() : null, head = a >= 0 ? s.slice(0, a).trim() : s;
+    if (inner && cat[inner]) return { ...cat[inner] };
+    if (cat[head]) return { ...cat[head] };
+    if (byName.has(s.toLowerCase())) return { ...byName.get(s.toLowerCase()) };
+    const tokens = new Set(s.toLowerCase().split(/[^a-z]+/).filter(Boolean));
+    const tags = Object.entries(words).filter(([, ws]) => (Array.isArray(ws) ? ws : []).some(w => tokens.has(String(w).toLowerCase()))).map(([t]) => t);
+    if (!tags.length) return null;
+    return { name: s, kind: tags.some(t => t === "armor" || t === "shield") && tags.length === 1 ? "armor" : "weapon", bonusTags: tags, fromGear: true };
+  };
+  const authored = [...(Array.isArray(entry?.inventory) ? entry.inventory : []), ...(Array.isArray(entry?.gear) ? entry.gear : [])];
+  const src = authored.length ? authored : (Array.isArray(cfg?.defaultLoadout) ? cfg.defaultLoadout : []);
+  const out = [];
+  for (const x of src) { const it = asItem(x); if (it) out.push({ qty: 1, ...it }); }
+  return out;
 }
 
 /** ⛔ CCODE-273 / AEVI's SPEC_summoned_sheets, WITH ERIK'S ADDITION — WHAT ARRIVES WHEN YOU SUMMON.

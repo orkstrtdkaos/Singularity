@@ -481,7 +481,7 @@ working papers; **this is the answer.**
 | 09-08 | ✅ **ONE ROSTER, DERIVED; THE OPPONENT GATE; R41's FORM; THE VEIL LOADED** | Erik: *"all NPCs should at least be referenced from a single source list… even if we need to keep separate lists for code"* · *"any condition must be an opposed roll"* stands unbuilt (§A) | `scripts/roster.mjs` reads six files from disk and asks `personOpponentFor` for each; 144 records, 125 reachable, **40 would fight at level 1** (ratchet, Aevi's §2 owns it); `npcs/legends.json`'s five are read by NOTHING and Corvane is a hinge on 4 of 6 arcs (§10 gap); `notAnOpponent: true` refuses by name; a Sovereign is ONE record with `forms.diminished`/`forms.final` chosen by the arc's live stage; `the_veil` + `power_cosmology` loaded, attached, and on the GM's ask view | `§147` · `§59` refixtured on Sister Alder · `roster --check` is a suite | §10 gains the hinge gap; docs/ROSTER.md is generated between markers, prose kept above |
 | 09-08 | ✅ **THE FORTY ARE DERIVED, NOT AUTHORED — ROLE → TIER → THE CHAIN THAT ALREADY RAN** | Erik: *"I thought you were going to have him make the generative engine build out the remaining empty NPCs?"* · Aevi, correcting her own spec: *"NOT A MISSING SHEET. NOT A MISSING KIT. ONE MISSING FIELD."* | 40 of 40 level-1 records were level 1 for one reason — no `tier` — while `tierFloor` already fired for the 64 who had one. `rules/tier_signals.json` (CONTENT, correctable without code) → `tierFromRole` → `derivedLevel`, consulted ONLY where a record is silent. **40 → 0**, ratchet tightened; 19 regional · 12 notable · 9 heroic. Guards: authored tier and level both outrank it; default `notable`; a hard `ceiling: heroic` so no regex reaches epic/legendary/mythic; `tierDerived` on the SHEET, never stamped onto the record; no code fallback, so an absent table derives nothing | `§148` · `§147`'s level-1 ratchet 40→0 | ⚠ **and my roster column was too generous**: R47's bare `_strike` was counting as a kit, so 62 records read as armed when they have no real craft — corrected, and it makes `domains` on the legends the same one-field problem one tier up |
 
-**Last verified: 2026-09-11 · v1.9.448 · 429 crafts.**
+**Last verified: 2026-09-11 · v1.9.449 · 429 crafts.**
 
 ---
 
@@ -960,6 +960,29 @@ what the player carries, who is present) and `battleRound` puts it on the roll a
 today the Cut Thread — and its dice are the fallback. Every rung grants finishing potential, spent by the deliberate
 ⚡ Finish it. A fight ends by **health ≤ 0** or by **being driven back
 `ceil(level / 2)` times** (`breakAtLevelFraction`, R34b) — a flat `breakAtPressure` is the fallback for a sheet with no level.
+✅ **Since v1.9.448 that threshold is capped at `breakAtMax` (10) and EASES with the fight** — one tick less for every
+`breakEasesEvery` (2) rounds fought, never below `breakEaseFloor` (1). Erik 2026-09-11: *"I want breaking to be the outcome that
+increases likelihood after a long fight."* Break is 21% of wins: 5% of fights won in 1–3 rounds, 56% of those past 12. `§156`.
+
+✅ **The foe is a person too (Erik 2026-09-11, Q3: *"foes would definitely gain a bonus from reading you successfully and they
+should and can use weapons and items… NPCs should have 3 domain access just like PCs"*).** In the SENSE step the foe reads you
+(`foeOwnMove`: its sharpest read, else sizing you up on its best wit) or, holding an OBSCURE craft, hides from a player it has
+seen reading. A read it wins earns the setup yours does, mirrored — the same scale, cap and `passiveFailFloor` — and comes off
+yours (`foeSetup`; the seat names `concealTier` for what resists it). It WIELDS what its sheet carries (`armFoe` →
+`wieldBonusFor`) and DRINKS a restorative when low (`opponentPolicy.drinkAtHealthPct` 0.35 / `drinkAtEnergyPct` 0.25; the wrapper
+applies it and the draught leaves the sheet). A person's sheet carries `inventory` (`npcGear`: authored items; `gear` prose
+resolved to the catalogue item it names, else classified by `npcStanding.gearWords`; neither → `npcStanding.defaultLoadout`).
+Their kit is drawn from all THREE domains, balanced — a harm craft from each, a read, a guard, a hide, then round-robin — under
+the PC's tier bands (`kitFor` + `tierUnlockBands`). `§157`.
+
+✅ **The empowered core (Erik 2026-09-11, on Aevi's `MEASURED_empowered_band_and_damage` §2).** Inside a band the factor was flat
+1.0 — *"the best it ever gets"* was one point inside the edge. A core of center ± width × `empowerCore` (0.3) now rises to
+`empowerPeak` (1.25) at the heart of the band: side `empowered`, a BONUS to the roll (median +7, up to +16) and a cheaper craft.
+Measured: 11.1% of craft-and-place pairs (3.3% at a core of 0.1, 5.1% at 0.15, 6.5% at 0.2). ⚠️ Standing on one of the 29 pool
+anchors makes it LESS likely (7.2%, against 12.4% elsewhere) — a pool pushes most crafts past their band's top, so it crowds.
+The meaning ceiling now binds only below 1. `§158`. **The ground tag** (Aevi's `COPY_ground_tag_fight_menu`): `thin ground −N` ·
+`crowded −N` · `bare hands −N` · `rich ground +N`, and silence when the ground is full — one vocabulary (`groundTag`) on the
+fight menu and the wheel. `§159`.
 
 ✅ **The ground CARD (not the round) also carries the lineage's authored blend** — `power_sources.json`'s `byTradition[t].mix`,
 26 blends with Erik's reasons that had no reader since the day they landed — as `lineageMix` in the band vocabulary

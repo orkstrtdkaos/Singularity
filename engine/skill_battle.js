@@ -124,6 +124,7 @@ export function synthesizeOpponentSheet(opponent = {}, sb, { standing = null } =
     }
     return { name: opponent.name || "the opponent", attributes: opponent.attributes || { practical: attr, physical: attr, mental: attr, social: attr },
       energy: opponent.energy ?? energy, maxEnergy: opponent.energy ?? energy, tacticTags: tags, skills: opponent.skills,
+      ...(Array.isArray(opponent.inventory) ? { inventory: opponent.inventory } : {}),   // ✅ Erik 2026-09-11 (Q3): what they carry
       health: opponent.health ?? health, soak: opponent.soak ?? soak,
       // ✅ R34b: LEVEL RIDES ON THE SHEET — the break threshold is `ceil(level / 2)` of the side being broken. A
       // person's sheet carries its level; a threat-built foe's level is the inverse of `personOpponent`'s
@@ -187,6 +188,7 @@ export function synthesizeOpponentSheet(opponent = {}, sb, { standing = null } =
   const skills = defs.map(s => ({ function: s.function, name: s.name, tier, attribute: s.attribute || "practical" }));
   return { name: opponent.name || "the opponent", attributes: { practical: attr, physical: attr, mental: attr, social: attr },
     energy, maxEnergy: energy, tacticTags: tags, skills,
+    ...(Array.isArray(opponent.inventory) ? { inventory: opponent.inventory } : {}),
     health: opponent.health ?? health, soak: opponent.soak ?? soak, soakLayers: opponent.soakLayers ?? soakLayers,
     // CCODE-83: the creature's authored AFFINITY must reach the sheet, or a typed bestiary is prose again.
     ...(opponent.affinity ? { affinity: opponent.affinity } : {}), ...(opponent.class ? { creatureClass: opponent.class } : {}),
@@ -800,7 +802,10 @@ export function degradeIfSpent(decl, energy, sb, steps, rules) {
 export function senseResistOf(oppSheet = {}, sb) {
   const cfg = sb?.senseStep || {};
   const hideFns = cfg.concealFunctions || ["conceal", "deceive"];
-  const hide = (oppSheet.skills || []).find(x => hideFns.includes(x.function));
+  // ⚠️ the PLAYER seat carries `skills` as a MAP; read the array form only, and its `concealTier` (the sharpest
+  // concealing craft the character holds) — the seat's answer to the same question, now that the foe reads you too.
+  const hide = (Array.isArray(oppSheet.skills) ? oppSheet.skills : []).find(x => hideFns.includes(x.function))
+    || (Number(oppSheet.concealTier) > 0 ? { tier: Number(oppSheet.concealTier), name: "what you keep hidden" } : null);
   if (hide) return { value: Math.round((hide.tier || 1) * (cfg.concealTierWeight ?? 6)), label: `they are hiding it (${hide.name || hide.function})`, from: "craft" };
   const best = Math.max(0, ...Object.values(oppSheet.attributes || {}).map(Number).filter(Number.isFinite));
   return { value: Math.round(best * (cfg.passiveAttributeWeight ?? 3)), label: "their natural guardedness", from: "passive" };
@@ -2086,6 +2091,18 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       : senseTierFromDegree(o.degree, 0, sb);
     out.senseBonus = { winner: bonusWinner, opponentSensed: oppSensed, opponentIdle: oppIdle,
       band: Math.max(0, Number(sb?.senseStep?.bonusNullBand ?? 2)), gap: out.senseGap ?? null };
+    // ✅ ERIK 2026-09-11 (Q3): "foes would definitely gain a bonus from reading you successfully." Until now the foe's read
+    // bought it TARGETING only; "they read you first" came off YOUR read failing, never off theirs succeeding. The foe's
+    // read is now the mirror of yours: its margin against what resists being read on YOUR side (your sharpest attribute,
+    // or a concealing craft you hold), the same scale and cap, the same floor — a read that fails against someone who is
+    // not hiding costs the reader the step, no more. It comes off your setup. ⚠️ A foe that is HIDING is not reading.
+    if (declaredSense(oppDecl, sb) && !oppObscuring) {
+      const youResist = senseResistOf(playerSheet, sb);
+      let foePart = clamp(Math.round((o.margin - youResist.value) * scale), -cap, cap);
+      if (!playerHiding && senseCfg.passiveFailFloor != null && Number.isFinite(pff)) foePart = Math.max(foePart, pff);
+      out.playerSetup = out.setupBonus; out.foeSetup = foePart; out.foeSenseResist = youResist;
+      out.setupBonus = clamp(out.setupBonus - foePart, -cap, cap);
+    }
   }
   return out;
 }

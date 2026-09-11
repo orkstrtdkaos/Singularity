@@ -1374,6 +1374,151 @@ console.log("\n── §156 · a long fight wears a side down ──");
   const eLong = at156(pr({ breakEasesEvery: 3, breakEaseFloor: 2 }), 60, 1);
   check("§156: …and it never falls below `breakEaseFloor` — sixty rounds in, one tick is not enough when the floor is 2", eLong.state.breakAt?.opponent === 2 && !eLong.state.resolved);
 }
+/* ══════════ §157 — THE FOE IS A PERSON TOO: IT READS YOU, IT WIELDS AND DRINKS WHAT IT CARRIES, ITS KIT SPANS THREE DOMAINS ══════════ */
+// ⛔ ERIK 2026-09-11: "foes would definitely gain a bonus from reading you successfully and they should and can use weapons
+// and items. These things need to be on their npc sheets. Plus NPCs should have 3 domain access just like PCs... that's the
+// way you get to a balanced kit." Measured the day before: the player won ~90% of even fights because the foe could do none of it.
+console.log("\n── §157 · the foe reads you, wields and drinks what it carries, and draws from three domains ──");
+{
+  const SB157 = await import("../engine/skill_battle.js");
+  const ENC157 = await import("../engine/encounters.js");
+  const NS157 = await import("../engine/npcsheet.js");
+  const TR157 = await import("../engine/traditions.js");
+  const { loadContentHeadless: lch157 } = await import("./headless_content.mjs");
+  const C157 = await lch157();
+  const sb157 = C157.skillBattle.engine, steps157 = C157.intensity.steps, rules157 = C157.rules, cat157 = C157.abilities || {};
+  const seq157 = (arr) => { let i = 0; return () => arr[(i++) % arr.length]; };
+  // ── the foe's own sense move
+  const readRow = { id: "x_read", function: "reveal", tier: 2, rank: 1, attribute: "mental", name: "a trained eye" };
+  const m1 = ENC157.foeOwnMove({ skills: [{ id: "s", function: "strike", tier: 1 }, readRow] }, {}, sb157, "sense", cat157);
+  const m2 = ENC157.foeOwnMove({ skills: [{ id: "s", function: "strike", tier: 1 }], subAttributes: { insight: 6, wits: 3 } }, {}, sb157, "sense", cat157);
+  const obs = Object.values(cat157).find(a => a && a.obscure === true);
+  const hideSheet = obs ? { skills: [{ id: obs.id, abilityId: obs.id, function: (obs.functions || ["conceal"])[0], tier: Number(obs.tier) || 1 }, readRow] } : null;
+  check("§157: ⛔ in the SENSE step the foe READS you — its sharpest read, else the generic read on its best wit",
+    m1?.function === "reveal" && m1.id === "x_read" && m2?.id === "_foe_read" && m2.subAttribute === "insight", JSON.stringify([m1?.id, m2?.id, m2?.subAttribute]));
+  check("§157: …and a foe holding an OBSCURE craft HIDES from a player it has seen reading — and reads one who has not",
+    !!hideSheet && ENC157.foeOwnMove(hideSheet, { playerReads: 1 }, sb157, "sense", cat157)?.obscure === true && ENC157.foeOwnMove(hideSheet, { playerReads: 0 }, sb157, "sense", cat157)?.id === "x_read");
+  // ── the mirrored setup
+  const me = { attributes: { physical: 6, mental: 6, social: 6, practical: 6 }, subAttributes: {}, energy: 200, maxEnergy: 200, health: 120, maxHealth: 120, level: 30, skills: {} };
+  const foe = { attributes: { physical: 8, mental: 8, social: 8, practical: 8 }, subAttributes: {}, energy: 200, maxEnergy: 200, health: 120, maxHealth: 120, level: 30, skills: [readRow] };
+  const myRead = { function: "reveal", tier: 1, rank: 1, attribute: "mental", intensity: "standard", name: "a read" };
+  const sense = (oppDecl, rolls) => SB157.battleRound({ playerDecl: myRead, oppDecl, playerSheet: me, oppSheet: foe, state: { momentum: 0, round: 1 }, rules: rules157, sb: sb157, steps: steps157, rng: seq157(rolls), phase: "sense", tickEffects: false });
+  const theyRead = sense({ ...readRow, intensity: "standard" }, [0.99, 0.02, 0.5, 0.5]), theySwing = sense({ function: "strike", tier: 1, attribute: "physical", intensity: "standard", name: "s" }, [0.99, 0.02, 0.5, 0.5]);
+  check("§157: ⛔ a foe that READS YOU WELL earns the setup — `foeSetup` > 0 and it comes off yours ('they read you first')",
+    theyRead.foeSetup > 0 && Number.isFinite(theyRead.playerSetup) && theyRead.setupBonus === Math.max(-12, Math.min(12, theyRead.playerSetup - theyRead.foeSetup)), JSON.stringify({ f: theyRead.foeSetup, mine: theyRead.playerSetup, net: theyRead.setupBonus }));
+  check("§157: ⛑ …a foe that does not read earns nothing (no `foeSetup`) — the step you win is still yours alone", theySwing.foeSetup === undefined);
+  // the floor, mirrored: find rolls where the foe's read FAILS with no floor, then take the same rolls under the content's floor
+  const noFloor157 = { ...sb157, senseStep: { ...sb157.senseStep, passiveFailFloor: undefined } };
+  const senseWith = (sbX, rolls) => SB157.battleRound({ playerDecl: myRead, oppDecl: { ...readRow, intensity: "standard" }, playerSheet: me, oppSheet: foe, state: { momentum: 0, round: 1 }, rules: rules157, sb: sbX, steps: steps157, rng: seq157(rolls), phase: "sense", tickEffects: false });
+  let failRolls = null;
+  for (let a = 1; a <= 99 && !failRolls; a += 7) for (let b = 1; b <= 99 && !failRolls; b += 7) { const x = senseWith(noFloor157, [a / 100, b / 100, 0.5, 0.5]); if (x.foeSetup < 0) failRolls = [a / 100, b / 100, 0.5, 0.5]; }
+  const floored157 = failRolls ? senseWith(sb157, failRolls) : null;
+  check("§157: …and the floor is mirrored — a foe's read that FAILS (negative with no floor) costs the foe the step under the content's floor, not you a bonus",
+    !!failRolls && floored157.foeSetup === 0, failRolls ? `raw ${senseWith(noFloor157, failRolls).foeSetup} → floored ${floored157.foeSetup}` : "no failing read found");
+  check("§157: …the player seat names what resists the foe's read (`concealTier`), and `senseResistOf` reads a seat whose skills are a map",
+    SB157.senseResistOf({ skills: {}, attributes: { mental: 5 }, concealTier: 3 }, sb157).from === "craft" && SB157.senseResistOf({ skills: {}, attributes: { mental: 5 } }, sb157).from === "passive"
+      && rd("engine/encounters.js").includes("concealTier: Math.max(0,"));
+  // ── what they carry
+  const pell = C157.npcs?.pell, cassa = C157.npcs?.cassa_redsail, sesh = C157.npcs?.sesh_the_quiet_blow;
+  const gp = pell ? NS157.npcGear(pell, { items: C157.items, cfg: rules157.npcStanding }) : [], gc = cassa ? NS157.npcGear(cassa, { items: C157.items, cfg: rules157.npcStanding }) : [];
+  const gs = sesh ? NS157.npcGear(sesh, { items: C157.items, cfg: rules157.npcStanding }) : null, gn = NS157.npcGear({ id: "nobody" }, { items: C157.items, cfg: rules157.npcStanding });
+  check("§157: ⛔ GEAR ON THE SHEET — Pell's gear resolves to the catalogue items it names; Cassa's 'boarding cutlass' reads as a blade",
+    gp.some(i => i.id === "pells_short_sword") && gp.some(i => i.id === "smiths_hammer") && gc.some(i => (i.bonusTags || []).includes("blade")), JSON.stringify([gp.map(i => i.id || i.name), gc.map(i => i.name)]));
+  check("§157: …'no weapon at all' is a FACT about Sesh (no default); a person who authors nothing carries the content default loadout",
+    Array.isArray(gs) && gs.length === 0 && gn.length === (rules157.npcStanding?.defaultLoadout || []).length && gn.length > 0, JSON.stringify({ sesh: gs, none: gn.map(i => i.name) }));
+  const inv = [{ name: "a weapon of their trade", kind: "weapon", bonusTags: ["melee"], qty: 1 }];
+  const armed = ENC157.armFoe({ function: "strike", tier: 1, name: "s" }, { inventory: inv }, sb157), bare = ENC157.armFoe({ function: "strike", tier: 1, name: "s" }, { inventory: [] }, sb157);
+  check("§157: ⛔ the foe WIELDS what it carries — the same `wieldBonusFor` a PC gets (+4 on a strike), nothing when it carries nothing",
+    armed.wield?.value === (sb157.items?.wieldBonusPerItem ?? 4) && !bare.wield && rd("engine/encounters.js").includes("oppDecl: armFoe(oppDecl, oppSheet, sb)"));
+  const low = ENC157.foeOwnMove({ skills: [], health: 100, maxHealth: 100, energy: 100, maxEnergy: 100, inventory: [{ name: "a healing draught", consumable: true, effects: { health: 8 }, qty: 1 }] }, { opponentHealth: 20, opponentEnergy: 100 }, sb157, "action");
+  const fine = ENC157.foeOwnMove({ skills: [], health: 100, maxHealth: 100, energy: 100, maxEnergy: 100, inventory: [{ name: "a healing draught", consumable: true, effects: { health: 8 }, qty: 1 }] }, { opponentHealth: 90, opponentEnergy: 100 }, sb157, "action");
+  check("§157: …and DRINKS it when low — a foe at 20% health with a draught declares the drink; at 90% it does not", low?.itemMove?.mode === "drink" && low.itemMove.restores.health === 8 && fine === null);
+  // the drink applied by the wrapper: the draught leaves the sheet
+  const encDef = { id: "d157", type: "duel", flavor: "fight", opponent: { name: "a drinker", threat: 40, tacticTags: [], inventory: [{ name: "a healing draught", consumable: true, effects: { health: 8 }, qty: 1 }] } };
+  const osh = ENC157.contestSheetFor(encDef, { content: C157 });
+  const hero = { id: "h157", name: "H", level: 20, attributes: { practical: 5, physical: 5, mental: 5, social: 5 }, subAttributes: {}, alignment: {}, health: 200, maxHealth: 200, energy: 300, maxEnergy: 300, abilities: [], inventory: [], codex: { schemaVersion: 1, topics: {} } };
+  const st0 = { ...ENC157.startEncounter(encDef, { oppSheet: osh }), opponentHealth: Math.round((osh?.health || 100) * 0.2) };
+  const rr = ENC157.skillBattleRound(st0, encDef, { function: "shield", tier: 1, attribute: "physical", intensity: "standard", name: "a guard" }, { character: hero, content: C157, rules: rules157, sb: sb157, steps: steps157, rng: seq157([0.5, 0.5, 0.5, 0.5]) });
+  check("§157: ⛔ ON THE WRAPPER — the foe drinks, the draught leaves its sheet (qty 1 → 0) and its health rises",
+    rr.oppDecl?.itemMove?.mode === "drink" && rr.state?.opponentSheet?.inventory?.[0]?.qty === 0 && rr.state.opponentHealth >= st0.opponentHealth, JSON.stringify({ d: rr.oppDecl?.name, q: rr.state?.opponentSheet?.inventory?.[0]?.qty, h0: st0.opponentHealth, h1: rr.state?.opponentHealth }));
+  // ── three domains, the PC's tier bands, a balanced fill
+  const dom157 = C157.traditionIndex?.domainOfTrad || {};
+  const base157 = Object.values(C157.npcs || {}).filter(n => n?.domains?.primary && n.domains.secondary && n.domains.tertiary).sort((a, b) => (Number(b.level) || 0) - (Number(a.level) || 0))[0] || null;
+  // a real person's three domains and level, with what the story authored set aside, so the kit is entirely DRAWN
+  const rec157 = base157 ? { ...base157, id: "k157", abilities: [], skillsObserved: [], closed: [] } : null;
+  if (rec157) {
+    const cfgN = rules157.npcStanding, bands = rules157.leveling?.tierUnlockBands;
+    const kOld = NS157.kitFor(rec157, { catalog: cat157, traditionIndex: C157.traditionIndex, domainAccess: TR157.domainAccess, day: 400, cfg: cfgN });
+    const kNew = NS157.kitFor(rec157, { catalog: cat157, traditionIndex: C157.traditionIndex, domainAccess: TR157.domainAccess, day: 400, cfg: cfgN, tierBands: bands });
+    const domsOf = (k) => new Set(k.crafts.map(c => dom157[c.tradition]).filter(Boolean));
+    const top = NS157.topTierFromBands(kNew.level, bands);
+    check("§157: ⛔ THREE DOMAINS — a person with three authored domains draws crafts from more than one of them, balanced (a harm craft from each, a read, a guard)",
+      domsOf(kNew).size >= 2 && kNew.crafts.some(c => (c.functions || []).some(f => f === "reveal" || f === "foresee" || f === "track")) && kNew.crafts.some(c => (c.functions || []).some(f => f === "shield" || f === "ward" || f === "resist")),
+      `${rec157.id} L${kNew.level}: ${[...domsOf(kNew)].join("/")} · ${kNew.crafts.length} crafts (was ${[...domsOf(kOld)].join("/")})`);
+    check("§157: …under the PC's tier bands when the caller hands them — no drawn craft above the tier a PC of that level may hold",
+      kNew.crafts.filter(c => !(kNew.fromStory || []).includes(c.id)).every(c => (Number(c.tier) || 1) <= top), `top T${top} · held ${Math.max(...kNew.crafts.map(c => Number(c.tier) || 1))}`);
+  } else check("§157: a three-domain person with no authored crafts exists to test the draw (not vacuous)", false);
+  check("§157: …and the live duel builder hands the bands and the items through (`duelFromTarget` → `personOpponentFor`)",
+    rd("engine/battle_turn.js").includes("personOpponentFor(rec, { catalog, cfg, day, traditionIndex, stageOf, items, leveling })") && rd("engine/battle_turn.js").includes("cfg = { ...cfg, tierUnlockBands: leveling.tierUnlockBands }"));
+}
+
+/* ══════════ §158 — THE EMPOWERED CORE: THE HEART OF A BAND IS BETTER THAN ITS RIM ══════════ */
+// ⛔ ERIK 2026-09-11, on Aevi's MEASURED_empowered_band §2: "bandFactor is graded in both directions outside the band ... But
+// inside the band it's flat 1.0. No gradient, no peak." The scale ran 0 → 1 and never above; the 44 authored wells were worth
+// nothing to a caster once they cleared the band. A narrow core now peaks at 1.25 — rare by construction.
+console.log("\n── §158 · the empowered core ──");
+{
+  const SUB158 = await import("../engine/substrate.js");
+  const SB158 = await import("../engine/skill_battle.js");
+  const { loadContentHeadless: lch158 } = await import("./headless_content.mjs");
+  const C158 = await lch158();
+  const T = SUB158.SUBSTRATE_TUNING, band = { center: 0.5, width: 0.2 };
+  const f = (e, t = T) => SUB158.bandFactor(band, e, t);
+  check("§158: ⛔ the heart of the band is EMPOWERED — the factor peaks at `empowerPeak` (1.25) at the center",
+    T.empowerPeak === 1.25 && Math.abs(f(0.5) - 1.25) < 1e-9 && f(0.52) > 1 && f(0.52) < 1.25, `${f(0.5)} · ${f(0.52)}`);
+  check("§158: …and falls to 1.0 at the core's edge (center ± width × empowerCore) — the rest of the band is today's flat 1.0",
+    Math.abs(f(0.5 + 0.2 * T.empowerCore) - 1) < 1e-9 && f(0.62) === 1 && f(0.3) === 1 && f(0.7) === 1);
+  check("§158: ⛑ outside the band nothing moved — starving below, interference above — and `empowerPeak: 1` is today exactly",
+    f(0.2) < 1 && f(0.9) < 1 && SUB158.bandFactor(band, 0.5, { ...T, empowerPeak: 1 }) === 1);
+  const locs = Object.values(C158.locations || {}), crafts = Object.values(C158.abilities || {}).filter(a => a?.tradition && (a.functions || []).some(x => x === "strike" || x === "break"));
+  let n = 0, emp = 0, probe = null, meaninglessAtFull = 0;
+  for (const a of crafts) for (const l of locs) { const g = SUB158.groundCardFor(a, { abilities: [{ abilityId: a.id, level: 1 }] }, { schools: C158.schools, substrate: C158.substrateModel, location: l, locations: C158.locations, powerSources: C158.powerSources, foothills: C158.foothills });
+    if (!g?.grounded) continue; n++; if (g.side === "empowered") { emp++; if (!probe) probe = { a, l, g }; } if (g.side === "meaningless" && (g.ceiling ?? 0) >= 1) meaninglessAtFull++; }
+  check("§158: the world has empowered ground and it is a MINORITY of grounded craft-and-place pairs (11.1% at empowerCore 0.3, 2026-09-11)", emp > 0 && emp / n < 0.25, `${emp} of ${n} (${(100 * emp / Math.max(1, n)).toFixed(1)}%)`);
+  if (probe) {
+    const { g } = probe;
+    check("§158: ⛔ the card says GOOD news — 'empowered here', a BONUS to the roll (negative penalty) and a cheaper craft", /empowered here/.test(g.verdict) && g.chancePenalty < 0 && g.energyMult < 1 && g.percent > 100, JSON.stringify({ v: g.verdict, p: g.chancePenalty, e: g.energyMult, pct: g.percent }));
+    const decl = { function: (probe.a.functions || []).find(x => x === "strike" || x === "break"), tier: Number(probe.a.tier) || 1, rank: 1, attribute: probe.a.attribute || "physical", intensity: "standard", name: probe.a.name, id: probe.a.id, energyCost: 10 };
+    const sheet = { attributes: { physical: 6, mental: 6, social: 6, practical: 6 }, subAttributes: {}, energy: 200, maxEnergy: 200, health: 120, maxHealth: 120, level: 30, skills: [{ function: "shield", tier: 1, name: "g" }] };
+    const run = (ground) => SB158.battleRound({ playerDecl: decl, oppDecl: { function: "shield", tier: 1, name: "g" }, playerSheet: sheet, oppSheet: sheet, state: { momentum: 0, round: 1 }, rules: C158.rules, sb: C158.skillBattle.engine, steps: C158.intensity.steps, rng: (() => { let i = 0; const s = [0.4, 0.6, 0.5, 0.5]; return () => s[(i++) % s.length]; })(), ...(ground ? { ground } : {}) });
+    const r0 = run(null), r1 = run({ player: { ...g, chancePenalty: g.chancePenalty, energyMult: g.energyMult, side: g.side, percent: g.percent }, opponent: null });
+    const line = (r1.player?.effectMods || []).find(m => String(m.label).startsWith("the ground here (empowered"));
+    check("§158: …and it reaches the FIGHT — a named line that ADDS to the roll, the margin up by exactly the bonus", !!line && line.value === -g.chancePenalty && line.value > 0 && r1.player.margin === r0.player.margin - g.chancePenalty, JSON.stringify({ line, m0: r0.player?.margin, m1: r1.player?.margin }));
+  }
+  check("§158: ⛑ the meaning ceiling never labels a craft 'meaningless' where the meaning is whole (it binds only below 1)", meaninglessAtFull === 0);
+  const app158 = rd("app.js");
+  check("§158: …and the three surfaces that show a craft's ground can say so — the card's class and signs, the free roll's note, the fight preview",
+    app158.includes('g.side === "empowered" ? "empowered"') && app158.includes('substrate.side === "empowered"') && app158.includes("The ground here lends this craft +") && rd("style.css").includes(".ground-row-empowered"));
+}
+/* ══════════ §159 — THE GROUND TAG: THE MENU SAYS WHICH WAY AND HOW MUCH (Aevi's COPY_ground_tag_fight_menu) ══════════ */
+// Aevi 2026-09-11: "THE PLAYER PICKS A CRAFT FROM A MENU AND THE MENU DOES NOT SAY... the single largest hidden modifier in the game."
+// Her rules: always show the number · name the ground, not the craft · no jargon on the row · silence is the good state · the same
+// words everywhere.
+console.log("\n── §159 · the ground tag ──");
+{
+  const SUB159 = await import("../engine/substrate.js");
+  const t = (g) => SUB159.groundTag(g);
+  check("§159: ⛔ thin ground — `thin ground −24`, and her tooltip", t({ side: "starved", chancePenalty: 24 })?.tag === "thin ground −24" && /Little of what this craft draws on is here/.test(t({ side: "starved", chancePenalty: 24 }).tip));
+  check("§159: …crowded is its OWN problem — `crowded −9`", t({ side: "crowded", chancePenalty: 9 })?.tag === "crowded −9" && /interferes/.test(t({ side: "crowded", chancePenalty: 9 }).tip));
+  check("§159: …the material floor reads as a REASSURANCE — `bare hands −18`", t({ side: "floored", chancePenalty: 18 })?.tag === "bare hands −18" && /will not fail entirely/.test(t({ side: "floored", chancePenalty: 18 }).tip));
+  check("§159: …and the empowered core is the only positive tag — `rich ground +12`", t({ side: "empowered", chancePenalty: -12 })?.tag === "rich ground +12" && t({ side: "empowered", chancePenalty: -12 }).tone === "good");
+  check("§159: ⛔ SILENCE IS THE GOOD STATE — full ground and no source carry no tag", t({ side: "full", chancePenalty: 0 }) === null && t(null) === null);
+  const tags = [t({ side: "starved", chancePenalty: 30 }), t({ side: "crowded", chancePenalty: 9 }), t({ side: "floored", chancePenalty: 18 }), t({ side: "empowered", chancePenalty: -8 }), t({ side: "meaningless", chancePenalty: 20 })].map(x => x.tag + " " + x.tip).join(" ");
+  check("§159: …NO JARGON on the row or in the tip — no source names, no factor, no substrate", !/precursor|metaphysical|veil|nanite|substrate|factor|lattice/i.test(tags), tags.slice(0, 160));
+  const app159 = rd("app.js");
+  check("§159: ⛔ THE SAME WORDS EVERYWHERE — the fight menu row and the wheel both render `groundTag`, nothing else invents a label",
+    app159.split("groundTag(").length - 1 >= 2 && app159.includes("sbGroundChip(odds?.ground)") && rd("style.css").includes(".sb-ground-good"));
+}
 /* ══════════ §14 — THE FOLD CANNOT BEAT AN IMMUNITY THE BLOW COULD NOT ══════════ */
 // ⛔ FOUND BY RUNNING AEVI'S TWELVE CRAFTS THROUGH A MELEE-SCALE FIGHT (CCODE-313), which is the whole
 // reason Erik asked for a big-battle test. A physical-immune foe took ZERO from the player's typed blow and
@@ -4404,7 +4549,7 @@ console.log("\n── §57 · the ordered/wild nanite vocabulary now matches the
     const cs = sub57.craftSource({ id: "syn_seraphic", tradition: "seraphic" }, { domains: { primary: "seraphic" }, schools: {} }, C57.schools, C57.powerSources, C57.foothills);
     const band = C57.substrateModel.sourceBands.sources[cs.source]?.band;
     check("§57: …a real band with center and width, not a coincidental key match", !!band && band.center != null);
-    check("§57: …full output in thick country (its own band center)", sub57.bandFactor(band, band.center) === 1);
+    check("§57: …full output in thick country (its own band center) — at least full, and since v1.9.449 the empowered peak", sub57.bandFactor(band, band.center) >= 1);
     check("§57: …and real starvation in clear ground, not the old flat factor-1 \"unaffected\"",
       sub57.bandFactor(band, 0.05) < 0.2, String(sub57.bandFactor(band, 0.05)));
   }

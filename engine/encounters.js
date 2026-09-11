@@ -5,8 +5,8 @@
 // narrates round receipts and proposes choices — it never advances state.
 // Incapacitation, never engine-imposed death.
 
-import { battleRound, opponentPolicy, synthesizeOpponentSheet, synthesizeStaticSheet } from "./skill_battle.js";
-import { wornSoak, wornSoakLayers } from "./inventory.js";   // 2026-09-04: the PC’s authored armour reaches the fight seat
+import { battleRound, opponentPolicy, synthesizeOpponentSheet, synthesizeStaticSheet, declaredSense } from "./skill_battle.js";
+import { wornSoak, wornSoakLayers, wieldBonusFor } from "./inventory.js";   // 2026-09-04: the PC’s authored armour reaches the fight seat
 import { targetableAllies, alliesOf } from "./combatants.js";
 import { commandSlots, bringForward, theatresOf, overmatchOf, answersOvermatch, scaleRank } from "./melee.js";   // CCODE-274: how many you lead is earned; who comes forward is chosen
 import { currentStage } from "./evolution.js";   // CCODE-265: an earned item stage can lift a companion's canStrike:false   // CCODE-253: who a foe may aim at — DERIVED here, per this seam's own rule
@@ -204,6 +204,52 @@ export function duelRound(state, def, resolution, rules, opts = {}) {
  *  or effective energy cost is never overwritten by the catalogue; `functions` is dropped because a decl names
  *  ONE function and the plural would shadow it in `resolvedDamageType`. A decl with no `id`, or an id the
  *  catalogue does not carry (`_strike`, `_guard`, an item move), comes back untouched. */
+/** ✅ ERIK 2026-09-11 (Q3) — "foes would definitely gain a bonus from reading you successfully and they should and can
+ *  use weapons and items." The foe's OWN moves, which the scoring policy never made:
+ *    · the SENSE step — it reads you (its sharpest read; else it sizes you up on its best wit, the generic read a PC
+ *      always has), or it HIDES when it holds a craft its author made OBSCURE and you have been reading it.
+ *    · the ACTION step — low on health or wind, it drinks what it carries, as you would.
+ *  Returns a declaration, or null (null → the policy, exactly as before). Pure. */
+export function foeOwnMove(oppSheet, state = {}, sb = null, phase = "action", abilities = null) {
+  if (!oppSheet || oppSheet.static) return null;
+  const skills = Array.isArray(oppSheet.skills) ? oppSheet.skills : [];
+  if (phase === "sense") {
+    const defOf = (s) => (abilities && (abilities[s.abilityId] || abilities[s.id])) || null;
+    const hide = skills.find(s => s.obscure === true || defOf(s)?.obscure === true);
+    if (hide && Number(state?.playerReads) > 0) return { ...hide, intensity: "standard", attribute: hide.attribute || "practical", obscure: true };
+    const fns = sb?.senseStep?.senseFunctions || ["reveal", "foresee", "track"];
+    const reads = skills.filter(s => fns.includes(s.function)).sort((a, b) => (Number(b.tier) || 1) - (Number(a.tier) || 1) || (Number(b.rank) || 1) - (Number(a.rank) || 1));
+    if (reads.length) return { ...reads[0], intensity: "standard", attribute: reads[0].attribute || "mental" };
+    const subs = oppSheet.subAttributes || {};
+    const best = (sb?.senseStep?.genericSenses || []).map(g => g.sub).filter(k => Number.isFinite(Number(subs[k]))).sort((a, b) => Number(subs[b]) - Number(subs[a]))[0] || null;
+    return { id: "_foe_read", function: fns[0] || "reveal", tier: 1, rank: 1, attribute: "mental", ...(best ? { subAttribute: best } : {}),
+      intensity: "standard", name: "sizes you up", generic: true };
+  }
+  if (phase === "action") {
+    const pol = sb?.opponentPolicy || {};
+    const e = Number(state?.opponentEnergy ?? oppSheet.energy) || 0, eMax = Number(oppSheet.maxEnergy || oppSheet.energy) || 0;
+    const h = Number(state?.opponentHealth ?? oppSheet.health) || 0, hMax = Number(oppSheet.maxHealth || oppSheet.health) || 0;
+    const lowE = eMax > 0 && e / eMax <= Number(pol.drinkAtEnergyPct ?? 0.25), lowH = hMax > 0 && h > 0 && h / hMax <= Number(pol.drinkAtHealthPct ?? 0.35);
+    if (!lowE && !lowH) return null;
+    for (const it of (Array.isArray(oppSheet.inventory) ? oppSheet.inventory : [])) {
+      if (!it || (it.qty ?? 1) <= 0 || !(it.consumable || it.kind === "consumable")) continue;
+      const fx = it.effects || {}, re = Number(fx.energy) || 0, rh = Number(fx.health) || 0;
+      if ((lowH && rh > 0) || (lowE && re > 0)) {
+        return { id: "_item_foe", function: sb?.items?.drinkFunction || "restore", tier: 1, rank: 1, attribute: "practical", intensity: "conserve",
+          name: `drinks ${it.customName || it.name}`, itemMove: { item: it, mode: "drink", restores: { energy: re, health: rh } } };
+      }
+    }
+  }
+  return null;
+}
+
+/** The foe WIELDS what it carries, as you do — the same `wieldBonusFor`, a named line on its roll. Pure. */
+export function armFoe(decl, oppSheet, sb = null) {
+  if (!decl || decl.wield || decl.static || decl.itemMove || !Array.isArray(oppSheet?.inventory) || !oppSheet.inventory.length) return decl;
+  const w = wieldBonusFor({ inventory: oppSheet.inventory }, decl.function, sb?.items || {});
+  return w ? { ...decl, wield: w } : decl;
+}
+
 export function enrichDecl(decl, abilities) {
   if (!decl || !abilities) return decl;
   const id = decl.id || decl.abilityId || null;
@@ -250,7 +296,8 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   // ⛔ DUEL_pell_vs_veth §C.1 — the def under BOTH declarations, here, where both pass. See `enrichDecl`.
   const abilities = content?.abilities || null;
   playerDecl = enrichDecl(playerDecl, abilities);
-  const chosen = typeof foePolicy === "function" ? (foePolicy(oppSheet, state, seenTendency, sb, phase) || null) : null;
+  // ✅ Q3: when no brain chooses (or it declines), the foe's OWN move comes first — its read, its hide, its drink.
+  const chosen = typeof foePolicy === "function" ? (foePolicy(oppSheet, state, seenTendency, sb, phase) || foeOwnMove(oppSheet, state, sb, phase, abilities)) : foeOwnMove(oppSheet, state, sb, phase, abilities);
   // both declarations pass through `enrichDecl` whichever brain chose the foe's — §60 stands on that
   const oppDecl = chosen ? enrichDecl(chosen, abilities) : enrichDecl(opponentPolicy(oppSheet, state, seenTendency, sb), abilities);
   // ✅ THE GROUND, BOTH SIDES — computed here, where both declarations are final and the content is in hand. The player's
@@ -347,7 +394,7 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   const reader = (phase === "action" && !(Number(setupBonus) > 0) && readBonus > 0) ? foldCan("KNOW", "read") : null;
   const setupWithRead = reader ? readBonus : setupBonus;
   const r = battleRound({
-    playerDecl, oppDecl,
+    playerDecl, oppDecl: armFoe(oppDecl, oppSheet, sb),
     ground: groundNow,
     // ⚠️ THE FOLDED FIGHT WITHOUT BEING NARRATED. Erik: "you only have so much focus."
     folded: split ? split.folded : null,
@@ -369,7 +416,9 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
       level: Number(character.level) || 1, health: character.health, maxHealth: character.maxHealth,
       // R35: `skills` here is a MAP — name the sharpest craft for the tier term (§68)
       maxTier: Math.max(1, ...(character.abilities || []).map(a => Number(abilities?.[a?.abilityId]?.tier) || 1)),
-      soak: Math.max(0, Number(character.soak) || 0, wornSoak(character)), soakLayers: (() => { const w = wornSoakLayers(character); return w.length ? w : undefined; })() },
+      soak: Math.max(0, Number(character.soak) || 0, wornSoak(character)), soakLayers: (() => { const w = wornSoakLayers(character); return w.length ? w : undefined; })(),
+      // ✅ Q3: what resists the FOE's read of you — the sharpest concealing (or obscure) craft you hold, 0 for none
+      concealTier: Math.max(0, ...(character.abilities || []).map(a => abilities?.[a?.abilityId]).filter(ab => ab && (ab.obscure === true || (ab.functions || []).some(f => f === "conceal" || f === "deceive"))).map(ab => Number(ab.tier) || 1)) },
     // CCODE-35: `effects` must ride BOTH ways — into the round (they modify this roll) and back out onto the
     // encounter state (they persist). This hand-built state object is the seam where they would silently drop.
     // CCODE-35/38: `effects` and `pressure` must ride BOTH ways — into the round (they modify this roll / carry the
@@ -397,6 +446,18 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   const senseOnly = phase === "sense" && sb?.turn?.senseMovesMomentum !== true; // CCODE-45: a sense is part of the turn, not a round of its own
   // CCODE-48 (Erik): a ROUND is a TURN, not a step. Sense never advanced it; now action/bonus only advance it on
   // the step that ENDS the turn (the same signal that ticks effects), so "round 3" means three turns, not six steps.
+  // ✅ Q3: a foe hides from a player it has SEEN reading — the count rides on the fight's state.
+  if (phase === "sense" && declaredSense(playerDecl, sb)) state = { ...state, playerReads: (Number(state.playerReads) || 0) + 1 };
+  // ✅ Q3: the foe drinks what it carries, as you do — applied HERE, where its pools live, and the draught leaves its sheet.
+  if (oppDecl?.itemMove?.mode === "drink" && r?.state) {
+    const g = oppDecl.itemMove.restores || {};
+    const eMax = Number(oppSheet?.maxEnergy || oppSheet?.energy) || Infinity, hMax = Number(oppSheet?.maxHealth || oppSheet?.health) || Infinity;
+    if (g.energy) r.state.opponentEnergy = Math.min(eMax, (Number(r.state.opponentEnergy) || 0) + g.energy);
+    if (g.health && r.state.opponentHealth != null && r.state.opponentHealth > 0) r.state.opponentHealth = Math.min(hMax, r.state.opponentHealth + g.health);
+    const nm = oppDecl.itemMove.item?.name; let spent = false;
+    const inv = (oppSheet?.inventory || []).map(it => (!spent && it && it.name === nm && (it.qty ?? 1) > 0) ? (spent = true, { ...it, qty: (it.qty ?? 1) - 1 }) : it);
+    state = { ...state, opponentSheet: { ...oppSheet, inventory: inv } };
+  }
   const s = { ...state, round: state.round + ((senseOnly || !tickEffects) ? 0 : 1), momentum: r.state.momentum, opponentEnergy: r.state.opponentEnergy, opponentHealth: r.state.opponentHealth ?? state.opponentHealth, effects: r.state.effects || [], pressure: r.state.pressure || { player: 0, opponent: 0 }, spent: r.state.spent || { player: false, opponent: false }, lastOppFn: oppDecl.function,
     // ⛔ CCODE-255: and back out, so the action step of this turn spends the read the sense step just earned.
     // ⛔ CCODE-277, SIXTH VALUE: `breakAt` — the pressure the foe breaks at — rode on battleRound's state and this

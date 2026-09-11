@@ -31,9 +31,9 @@ const pct = (tradition, region, carried = 0) =>
 console.log("\n=== SNG-090 substrate — design anchors ===");
 near(pct("seraphic", "the_quickwood"), 5, 20, "Seraph in the Quickwood (starved, near-off)");
 near(pct("rootkin", "the_gearlands"), 60, 78, "Rootkin in the Gearlands (crowded, impaired not off)");
-near(pct("rootkin", "the_quickwood"), 100, 100, "Rootkin in the Quickwood (tuned to thin ground — full)");
-near(pct("seraphic", "the_lattice_cities"), 100, 100, "Seraph in the Lattice-Cities (at home — full)");
-near(pct("mason", "the_given_land"), 100, 100, "Mason in the Given Land (at home — full)");
+near(pct("rootkin", "the_quickwood"), 100, 125, "Rootkin in the Quickwood (tuned to thin ground — full, or the empowered core up to its 125% peak since v1.9.449)");
+near(pct("seraphic", "the_lattice_cities"), 100, 125, "Seraph in the Lattice-Cities (at home — full, or the empowered core up to its 125% peak since v1.9.449)");
+near(pct("mason", "the_given_land"), 100, 125, "Mason in the Given Land (at home — full, or the empowered core up to its 125% peak since v1.9.449)");
 
 console.log("\n--- carried substrate: rescues the starved, worsens the crowded ---");
 {

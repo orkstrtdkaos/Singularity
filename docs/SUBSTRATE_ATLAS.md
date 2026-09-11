@@ -21,12 +21,12 @@ measurement.**
 
 | source | band | reads | regions INSIDE | best | worst |
 |---|---|---|---|---|---|
-| **precursor** | 0.70–1.10 | `substrateDensity` | **14 of 39** — 36% | The Gearlands 1.00 | The Quickwood 0.13 |
-| **nanite** | 0.70–1.10 | `naniteField` | **14 of 39** — 36% | The Gearlands 1.00 | The Given Land 0.04 |
-| **metaphysical** | -0.07–0.37 | `substrateDensity` | **7 of 39** — 18% | Greyhearth Foothill 1.00 | The Gearlands 0.60 |
+| **precursor** | 0.70–1.10 | `substrateDensity` | **14 of 39** — 36% | The Deepwood 1.25 | The Quickwood 0.13 |
+| **nanite** | 0.70–1.10 | `naniteField` | **14 of 39** — 36% | The Lattice-Cities 1.25 | The Given Land 0.04 |
+| **metaphysical** | -0.07–0.37 | `substrateDensity` | **7 of 39** — 18% | The Quickwood 1.14 | The Gearlands 0.60 |
 | **body** | *floor, no band* | — | **never starves** | *everywhere 1.00* | *nowhere below 1.00* |
-| **wild** | 0.12–0.52 | `substrateDensity` | **17 of 39** — 44% | The Making 1.00 | The Gearlands 0.60 |
-| **veil** | -0.10–0.30 | `substrateDensity` | **5 of 39** — 13% | The Given Land 1.00 | The Gearlands 0.60 |
+| **wild** | 0.12–0.52 | `substrateDensity` | **17 of 39** — 44% | The Palelands 1.25 | The Gearlands 0.60 |
+| **veil** | -0.10–0.30 | `substrateDensity` | **5 of 39** — 13% | The Quickwood 1.17 | The Gearlands 0.60 |
 
 ⛔ **AND PRECURSOR AND NANITE DO NOT SHARE A MAP, THOUGH THEY SHARE A BAND.** `nanite` reads `naniteField.byRegion`; `precursor` reads `substrateDensity`.
 
@@ -58,8 +58,8 @@ measurement.**
 
 | region | density | nanite | strongest sources here |
 |---|---|---|---|
-| The Gearlands | 0.98 | 0.95 | `precursor` · `nanite` · `body` |
-| The Lattice-Cities | 0.94 | 0.90 | `precursor` · `nanite` · `body` |
+| The Gearlands | 0.98 | 0.95 | `nanite` · `precursor` · `body` |
+| The Lattice-Cities | 0.94 | 0.90 | `nanite` · `precursor` · `body` |
 | The Deepwood | 0.90 | 0.08 | `precursor` · `body` |
 | The Ascent | 0.88 | 0.82 | `precursor` · `nanite` · `body` |
 | The Radiant Wastes | 0.86 | 0.70 | `precursor` · `nanite` · `body` |
@@ -90,13 +90,13 @@ measurement.**
 | The Unmade | 0.42 | 0.15 | `body` · `wild` · `metaphysical` |
 | The Valley of Echoes | 0.40 | 0.40 | `body` · `wild` · `metaphysical` |
 | Thinwater Foothill | 0.40 | 0.45 | `body` · `wild` · `metaphysical` |
-| Greyhearth Foothill | 0.35 | 0.40 | `metaphysical` · `body` · `wild` · `veil` |
-| The Palelands | 0.32 | 0.06 | `metaphysical` · `body` · `wild` · `veil` |
-| The Given Land | 0.30 | 0.04 | `metaphysical` · `body` · `wild` · `veil` |
-| The Unspooling / The Churn | 0.28 | 0.85 | `nanite` · `metaphysical` · `body` · `wild` · `veil` |
+| Greyhearth Foothill | 0.35 | 0.40 | `wild` · `metaphysical` · `body` · `veil` |
+| The Palelands | 0.32 | 0.06 | `wild` · `metaphysical` · `body` · `veil` |
+| The Given Land | 0.30 | 0.04 | `wild` · `metaphysical` · `body` · `veil` |
+| The Unspooling / The Churn | 0.28 | 0.85 | `wild` · `nanite` · `metaphysical` · `body` · `veil` |
 | The Somatic Reaches | 0.22 | 0.05 | `metaphysical` · `body` · `wild` · `veil` |
 | The Riven Marches | 0.20 | 0.12 | `metaphysical` · `body` · `wild` · `veil` |
-| The Quickwood | 0.12 | 0.75 | `nanite` · `metaphysical` · `body` · `wild` · `veil` |
+| The Quickwood | 0.12 | 0.75 | `veil` · `metaphysical` · `nanite` · `body` · `wild` |
 
 <!-- END substrate-atlas -->
 

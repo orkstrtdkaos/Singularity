@@ -41,7 +41,7 @@ derivations of the same count is the defect that put `certify_counts` at 125 aga
 | as `generate('npc')` leaves it | notable | **5** | ✅ yes | ⛔ **0** | 1 |
 | a role that signals RANK (`Marshal of the Watch`) | heroic | **25** | ✅ yes | ⛔ **0** | 1 |
 | after `affiliationFor`, minted in Millbrook (region `valley`) | notable | **5** | ✅ yes | ⛔ **0** | 1 |
-| after `affiliationFor`, minted in the Maw (region `the_descent`) | notable | **5** | ✅ yes | **7** | 8 |
+| after `affiliationFor`, minted in the Maw (region `the_descent`) | notable | **5** | ✅ yes | **5** | 6 |
 
 ⛔ **DOOR 5 IS THE ONLY UNEVEN ONE, AND IT IS UNEVEN BY PLACE RATHER THAN BROKEN.** ⚠️ **I first reported it as simply BROKEN, and that was a claim about my harness:** this file drove stubEntity → enforceFloors and stopped, while the real mint path also runs affiliationFor (generate.js:453). ⛑ Driving a PARTIAL path and calling it the production path is the exact defect this file exists to catch — committed by the file itself.
 

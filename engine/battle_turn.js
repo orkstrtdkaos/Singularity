@@ -21,6 +21,7 @@
 // arguments, and touches no DOM. app.js calls these; `tests/lib/realgame.mjs` calls these. One path.
 
 import { domainAccess } from "./traditions.js";   // ⛔ kitFor's domain draw is inert without it
+import { npcGear } from "./npcsheet.js";   // ✅ Erik 2026-09-11 (Q3): what a person carries rides on their sheet
 import { skillBattleRound, startEncounter, checkIncapacitation, isLethalEncounter } from "./encounters.js";
 import { synthesizeOpponentSheet } from "./skill_battle.js";
 import { synthesizeDuelDef } from "./random_encounters.js";
@@ -209,7 +210,10 @@ export function declaredNotAnOpponent(rec) {
   return rec?.notAnOpponent === true || rec?.canOppose === false;
 }
 /** A PERSON as a fight opponent: their whole sheet — attributes, health, energy, soak, level, kit. Was `personOpponent` in app.js. */
-export function personOpponentFor(rec, { catalog = {}, cfg = {}, day = null, traditionIndex = null, stageOf = null } = {}) {
+export function personOpponentFor(rec, { catalog = {}, cfg = {}, day = null, traditionIndex = null, stageOf = null,
+  // ✅ Erik 2026-09-11 (Q3): the item catalogue (their gear resolves to real items) and `rules.leveling` (their kit is
+  // drawn under a PC's tier bands). Absent, the kit and the sheet are exactly as before.
+  items = null, leveling = null } = {}) {
   if (!rec) return null;
   // ⛔ SPEC_one_roster §4 — "every person reachable as an opponent has a level and a kit, OR IS DECLARED NOT AN
   // OPPONENT." This is the declaration. A record that says `notAnOpponent: true` is refused here, by name, and
@@ -228,6 +232,8 @@ export function personOpponentFor(rec, { catalog = {}, cfg = {}, day = null, tra
   // fell straight through to threat synthesis: every fight against them was fought by a number, not a person.
   // ⚑ All 56 non-legend people ALREADY carry domains — the authoring was never the missing half. The accessor was.
   // ⚑ A form may author its own kit; otherwise the record's. The form's level already rode into the sheet above.
+  // ✅ Q3: a person's kit is drawn under a PC's tier bands — they ride on `cfg`, where `kitFor` reads them.
+  if (leveling?.tierUnlockBands) cfg = { ...cfg, tierUnlockBands: leveling.tierUnlockBands };
   const kitRec = form?.abilities ? { ...rec, abilities: form.abilities } : rec;
   const { skills } = battleSkillsFor(kitRec, { catalog, day, cfg, domainAccess, traditionIndex });
   if (!skills.length) return null;                       // nothing to fight with — let the threat path have them
@@ -236,6 +242,7 @@ export function personOpponentFor(rec, { catalog = {}, cfg = {}, day = null, tra
     ...(sheet.subAttributes ? { subAttributes: sheet.subAttributes } : {}),
     level: sheet.level,
     soak: sheet.soak, skills, tacticTags: rec.tacticTags || [],
+    inventory: npcGear(rec, { items, cfg }),
     threat: Math.max(10, Math.round(sheet.level * 2)),
     _person: rec.id || null,
     ...(form?.form ? { _form: form.form, _formNote: form.note || null } : {}),   // R41: what the player is facing
@@ -247,7 +254,7 @@ export function personOpponentFor(rec, { catalog = {}, cfg = {}, day = null, tra
  *  named person entered play as a threat-curve body. The person's body is put back on the def, so the opponent sheet is
  *  AUTHORED (their crafts, their health) and the encounter starts at their health, not a synthesized handful.
  *  Returns { def, oppSheet, state } and writes `character.customEncounters[def.id]` and `character.activeEncounter`. */
-export function duelFromTarget(character, target, { catalog = {}, npcs = {}, cfg = {}, day = null, sb = null, here = null, lethal = false, threat = null, traditionIndex = null, stageOf = null } = {}) {
+export function duelFromTarget(character, target, { catalog = {}, npcs = {}, cfg = {}, day = null, sb = null, here = null, lethal = false, threat = null, traditionIndex = null, stageOf = null, items = null, leveling = null } = {}) {
   const id = target?.id || target?.npcId || null, name = target?.name || null;
   const rec = (id && (character?.npcRegistry?.[id] || npcs?.[id]))
     || (name && (Object.values(character?.npcRegistry || {}).find(n => n?.name === name) || Object.values(npcs || {}).find(n => n?.name === name)))
@@ -259,7 +266,7 @@ export function duelFromTarget(character, target, { catalog = {}, npcs = {}, cfg
   // described the intent; only half of it was implemented. Refused before anything is written, so a
   // caller that ignores the return value cannot leave a half-made encounter on the character.
   if (declaredNotAnOpponent(rec)) return null;
-  const person = rec ? personOpponentFor(rec, { catalog, cfg, day, traditionIndex, stageOf }) : null;
+  const person = rec ? personOpponentFor(rec, { catalog, cfg, day, traditionIndex, stageOf, items, leveling }) : null;
   const fallbackThreat = Number(threat) || Number(target?.threat) || Math.max(20, Math.round((Number(here?.dangerLevel) || 3) * 12));   // SNG-249: no 70 ceiling
   const entry = { id: `harm-${slugify(target?.name || "foe")}-${(character?.activeEncounter?.state?.round || 0)}`,
     flavor: "fight", seed: `You have committed to violence against ${target?.name || "them"}.`,
@@ -269,7 +276,8 @@ export function duelFromTarget(character, target, { catalog = {}, npcs = {}, cfg
   if (person) {
     // the whole body rides on the def — the sheet is authored, the health is theirs
     def.opponent = { ...def.opponent, attributes: person.attributes, ...(person.subAttributes ? { subAttributes: person.subAttributes } : {}),
-      health: person.health, energy: person.energy, soak: person.soak, level: person.level, skills: person.skills, tacticTags: person.tacticTags, _person: person._person };
+      health: person.health, energy: person.energy, soak: person.soak, level: person.level, skills: person.skills, tacticTags: person.tacticTags, _person: person._person,
+      ...(Array.isArray(person.inventory) && person.inventory.length ? { inventory: person.inventory } : {}) };
     // a person fights to their own end, not to a synthesized fraction. ⚠️ AND THE RATIO MUST GO WITH IT:
     // clearing only the absolute would leave `yieldAtFraction` standing and make every person yield.
     def.yieldAt = def.opponent.yieldAt = 0;

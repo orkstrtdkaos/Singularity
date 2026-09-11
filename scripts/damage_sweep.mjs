@@ -43,7 +43,8 @@ import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { loadContentHeadless } from "../tests/headless_content.mjs";
 import { battleSkillsForCharacter, declFromSelection, playTurn } from "../engine/battle_turn.js";
-import { startEncounter, contestSheetFor } from "../engine/encounters.js";
+import { startEncounter, contestSheetFor, foeOwnMove } from "../engine/encounters.js";
+import { npcGear } from "../engine/npcsheet.js";
 import { synthesizeDuelDef } from "../engine/random_encounters.js";
 import { groundForDecl } from "../engine/substrate.js";
 import { pDiffExceeds } from "../engine/skill_battle.js";
@@ -155,7 +156,12 @@ const priceOf = (a) => { const t = Math.max(1, Number(a?.tier ?? a?.levelReq) ||
  *  tier band and the skill-point budget the rules give a level-L character. */
 function boughtKit(domain, level, cfg) {
   const top = topTierAt(level), rank = rankAt(level), budget = (Number(LEV.skillPointPerLevel) || 2) * Math.max(1, level);
-  const pool = Object.values(catalog).filter(a => (!domain || domain === "all" || !a.tradition || DOMAIN_OF[a.tradition] === domain) && Math.max(1, Number(a.tier ?? a.levelReq) || 1) <= top
+  // ✅ ERIK 2026-09-11: THREE DOMAINS, "just like PCs" — the primary to the level's top tier, and two more as the
+  // secondary (to T3) and tertiary (to T2), the caps `domainAccess` gives a PC. ⚠️ Which two is a harness choice
+  // (the next two in a fixed cycle); a real PC chooses them.
+  const di = DOMAINS.indexOf(domain), D2 = di >= 0 ? DOMAINS[(di + 1) % DOMAINS.length] : null, D3 = di >= 0 ? DOMAINS[(di + 2) % DOMAINS.length] : null;
+  const capOf = (a) => { if (!domain || domain === "all" || !a.tradition) return top; const d = DOMAIN_OF[a.tradition]; return d === domain ? top : d === D2 ? Math.min(top, 3) : d === D3 ? Math.min(top, 2) : 0; };
+  const pool = Object.values(catalog).filter(a => Math.max(1, Number(a.tier ?? a.levelReq) || 1) <= capOf(a)
     && !(NO_LETHAL && (a.harmRung === "lethal" || a.harmRung === "atrocity")));
   const ev = (a) => { const v = (a.functions || []).find(f => HARM_FNS.has(f)); if (!v) return 0; const m = mechanicFor(a, { verb: v, tier: Number(a.tier ?? a.levelReq) || 1, rank, intensity: "standard", cfg: cfg.rules.craftMechanics || {} }); const f = m?.fields || {}; return f.dice ? ((Number(f.dice.n) || 1) * ((Number(f.dice.d) || 6) + 1) / 2 + (Number(f.plus) || 0)) * (Number(f.mult) || 1) : 0; };
   const harm = pool.filter(a => ev(a) > 0).sort((x, y) => ev(y) - ev(x));
@@ -210,11 +216,11 @@ if (FOES === "synth") {
   const want = new Set(LEVELS || []);
   runnable = [];
   for (const [id, rec] of Object.entries(CONTENT.npcs || {})) {
-    const po = personOpponentFor(rec, { catalog, cfg, traditionIndex: CONTENT.traditionIndex });
+    const po = personOpponentFor(rec, { catalog, cfg, traditionIndex: CONTENT.traditionIndex, items: CONTENT.items || {}, leveling: LEV });
     if (!po) continue;
     if (want.size && ![...want].some(L => Math.abs(po.level - L) <= 2)) continue;
     const def = synthesizeDuelDef({ id: `person_${id}`, flavor: "fight", seed: "", opponent: { name: po.name, threat: Math.max(10, po.level * 2), tacticTags: rec.tacticTags || [] } });
-    def.opponent = { ...def.opponent, attributes: po.attributes, subAttributes: po.subAttributes, health: po.health, energy: po.energy, soak: po.soak, level: po.level, skills: po.skills, tacticTags: po.tacticTags, _person: id };
+    def.opponent = { ...def.opponent, attributes: po.attributes, subAttributes: po.subAttributes, health: po.health, energy: po.energy, soak: po.soak, level: po.level, skills: po.skills, tacticTags: po.tacticTags, _person: id, inventory: po.inventory, _audit: auditPerson(rec, po) };
     def.yieldAt = def.opponent.yieldAt = 0; delete def.opponent.yieldAtFraction;
     runnable.push([`person_${id}`, def]);
   }
@@ -238,6 +244,21 @@ function craftPanel(menu) {
     if (!pick.has(key)) pick.set(key, { ...s, _pop: pop });
   }
   return [...pick.values()].sort((a, b) => (a.tier || 1) - (b.tier || 1) || a._pop.localeCompare(b._pop));
+}
+
+/** ⛔ ERIK 2026-09-11 (Q4): "Authored NPCs can break the standard rules... We need to know who the worst offenders are, as this
+ *  may not have been intentional." A person's AUTHORED crafts against the rules a PC of the same level plays by: the tier
+ *  bands, the rank ladder, the skill-point budget. Drawn crafts (kitFor) follow the rules by construction; this reads
+ *  only what somebody wrote down. */
+function auditPerson(rec, po) {
+  const L = Number(po?.level) || 1, top = topTierAt(L), rk = rankAt(L), budget = (Number(LEV.skillPointPerLevel) || 2) * Math.max(1, L);
+  const auth = (Array.isArray(rec?.abilities) ? rec.abilities : []).map(a => ({ id: a?.abilityId || a, rank: Number(a?.level) || 1 })).map(x => ({ ...x, ab: catalog[x.id] })).filter(x => x.ab);
+  const tierOf = (ab) => Math.max(1, Number(ab.tier ?? ab.levelReq) || 1);
+  const overTier = auth.filter(x => tierOf(x.ab) > top), overRank = auth.filter(x => x.rank > rk);
+  const spent = auth.reduce((s, x) => s + priceOf(x.ab), 0);
+  return { id: rec?.id, name: rec?.name || rec?.id, level: L, authored: auth.length, top, rankCap: rk, heldTop: auth.length ? Math.max(...auth.map(x => tierOf(x.ab))) : 0,
+    overTier: overTier.map(x => `${x.id} T${tierOf(x.ab)}`), overRank: overRank.map(x => `${x.id} r${x.rank}`), spent, budget, overBudget: spent - budget,
+    gear: (po?.inventory || []).map(i => i.name) };
 }
 
 let CFG_NOW = null, LAST_KIT = null;
@@ -272,10 +293,11 @@ function groundPen(row, where, holder = null) {
 function greedyFoe(cfg, where = null) {
   return (oppSheet, state, seenTendency, sb, phase) => {
     if (oppSheet?.static) return null;
-    // ⚑ A PERSON HIDES FROM A READER. In the sense step the foe's own roll only reads you, so a foe holding a craft its
-    // author made OBSCURE spends the step working at being unfound — the conceal result a read is weighed against.
-    if (FOE_HIDES && phase === "sense") { const hide = (oppSheet?.skills || []).find(r => catalog[r.abilityId || r.id]?.obscure === true);
-      if (hide) return { ...hide, intensity: "standard", attribute: hide.attribute || "practical", obscure: true }; }
+    // ⚑ THE SENSE STEP AND THE DRINK ARE THE ENGINE'S OWN FOE MOVES NOW (`foeOwnMove`: it reads you, or hides from a
+    // reader, and drinks when low) — the production path, not a harness copy of it. `--foe-hides` is kept for old
+    // command lines and does nothing the engine does not already do.
+    if (phase === "sense") return null;
+    { const own = foeOwnMove(oppSheet, state, sb, phase, catalog); if (own) return own; }
     const rows = (oppSheet?.skills || []).filter(r => HARM_FNS.has(r.function));
     if (!rows.length) return null;
     const evOf = (r) => { const m = mechanicFor(r.abilityId ? catalog[r.abilityId] : null, { verb: r.function, tier: r.tier || 1, rank: r.rank || 1, intensity: "standard", cfg: cfg.rules.craftMechanics || {} }); const f = m?.fields || {}; return f.dice ? ((Number(f.dice.n) || 1) * ((Number(f.dice.d) || 6) + 1) / 2 + (Number(f.plus) || 0)) * (Number(f.mult) || 1) : (r.tier || 1); };
@@ -327,6 +349,7 @@ function fight(cfg, encId, def, skill, seed, menu) {
     def.opponent.skills = kit.abilities.map(k => catalog[k.abilityId]).filter(Boolean).map(a => ({ id: a.id, abilityId: a.id,
       function: (a.functions || [])[0] || "strike", tier: Math.max(1, Number(a.tier ?? a.levelReq) || 1), rank: kit.rank,
       attribute: a.attribute || "practical", name: a.name || a.id }));
+    def.opponent.inventory = npcGear({}, { items: CONTENT.items || {}, cfg: CONTENT.rules?.npcStanding || {} });   // a person carries a person's gear
     def.opponent._kitDomain = dom;
   }
   const oppSheet = contestSheetFor(def, { sb: cfg.sb, content: { ...CONTENT, rules: cfg.rules } });
@@ -495,5 +518,15 @@ if (variants.length > 1) {
   console.log(`\n═══ SUMMARY — ${VARY} ═══`);
   console.log(`    ${"value".padEnd(10)} ${"ends".padStart(6)} ${"win".padStart(6)} ${"capped".padStart(7)} ${"rounds".padStart(7)} ${"p50 win".padStart(8)} ${"in 5–15".padStart(8)} ${"brk/win".padStart(8)} ${"your hit".padStart(9)} ${"foe hit".padStart(8)} ${"you down".padStart(9)}`);
   for (const v of variants) { const a = v.agg; const q2 = (arr) => { if (!arr.length) return 0; const s2 = [...arr].sort((x, y) => x - y); return s2[Math.floor(0.5 * s2.length)]; }; const inB = a.winRounds.filter(r => r >= TARGET.lo && r <= TARGET.hi).length; console.log(`    ${String(v.label.includes(" = ") ? v.label.split(" = ")[1] : v.label).padEnd(10)} ${pct(a.ended, a.fights).padStart(6)} ${pct(a.won, a.fights).padStart(6)} ${pct(a.capped, a.fights).padStart(7)} ${(a.rounds / Math.max(1, a.fights)).toFixed(1).padStart(7)} ${String(q2(a.winRounds)).padStart(8)} ${pct(inB, a.winRounds.length).padStart(8)} ${pct(a.breakWins, a.won).padStart(8)} ${mean(a.hits.map(h => h.amount)).toFixed(1).padStart(9)} ${mean(a.foeHits.map(h => h.amount)).toFixed(1).padStart(8)} ${pct(a.playerDown, a.fights).padStart(9)}`); }
+}
+if (FOES === "people" && variants.length) {
+  const v0 = variants[0]; const byEnc = Object.fromEntries(v0.agg.byEnc.map(e => [e.encId, e]));
+  const rows = runnable.map(([encId, def]) => ({ ...(def.opponent._audit || {}), e: byEnc[encId] })).filter(r => r.id);
+  const score = (r) => r.overTier.length * 10 + Math.max(0, r.overBudget) + r.overRank.length * 3;
+  rows.sort((a, b) => score(b) - score(a) || (b.e ? b.e.won / Math.max(1, b.e.fights) : 0) - (a.e ? a.e.won / Math.max(1, a.e.fights) : 0));
+  console.log(`\n═══ RULES AUDIT — ${rows.length} authored people against the rules a PC of their level plays by ═══`);
+  console.log("    person                     L  · authored · top T held (PC max) · over the tier band · rank over · points (PC budget) · you win vs them");
+  for (const r of rows) console.log(`    ${String(r.name).slice(0, 26).padEnd(26)} ${String(r.level).padStart(3)} · ${String(r.authored).padStart(8)} · T${r.heldTop} (T${r.top})${r.heldTop > r.top ? " ⛔" : "   "}        · ${String(r.overTier.length).padStart(2)} ${r.overTier.slice(0, 3).join(", ")}${r.overTier.length > 3 ? " …" : ""} · ${r.overRank.length} · ${r.spent} (${r.budget})${r.overBudget > 0 ? " +" + r.overBudget : ""} · ${r.e ? pct(r.e.won, r.e.fights) : "—"}`);
+  if (OUT) writeFileSync(join(root, OUT.replace(/[.]json$/, "_audit.json")), JSON.stringify(rows.map(r => ({ ...r, e: r.e ? { fights: r.e.fights, won: r.e.won } : null })), null, 1));
 }
 if (OUT) { writeFileSync(join(root, OUT), JSON.stringify({ at: new Date().toISOString(), vary: VARY, set: SET, fights: FIGHTS, level: LEVEL, hp: HP, variants: variants.map(v => ({ ...v, agg: { ...v.agg, hits: undefined, foeHits: undefined } })) }, null, 1)); console.log(`\nwrote ${OUT}`); }

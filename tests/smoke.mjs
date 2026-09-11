@@ -7008,8 +7008,8 @@ await (async () => {
   const vInstrThin = sb.substrateVerdict({ tradition: "cogitant", school: instrumented, root: rootOf("cogitant"), density: 0.12, data: substrateModel });
   const vReachDense = sb.substrateVerdict({ tradition: "cogitant", school: reaching, root: rootOf("cogitant"), density: 0.9, data: substrateModel });
   const vInstrDense = sb.substrateVerdict({ tradition: "cogitant", school: instrumented, root: rootOf("cogitant"), density: 0.9, data: substrateModel });
-  check("193b §3.3: in THIN ground the reaching mind is FULL and the instrumented is impaired", vReachThin.factor === 1 && vInstrThin.factor < 1);
-  check("193b §3.3: in DENSE ground the instrumented is FULL and the reaching mind is impaired (OPPOSITE best-grounds)", vInstrDense.factor === 1 && vReachDense.factor < 1);
+  check("193b §3.3: in THIN ground the reaching mind is FULL and the instrumented is impaired", vReachThin.factor >= 1 && vInstrThin.factor < 1   /* ≥ 1: the empowered core (v1.9.449) */);
+  check("193b §3.3: in DENSE ground the instrumented is FULL and the reaching mind is impaired (OPPOSITE best-grounds)", vInstrDense.factor >= 1 && vReachDense.factor < 1);
 
   // §4 — the FLOOR is the root's. A material root never STARVES (degrades toward its pure form).
   check("193b §4: a BODY-root precursor craft in thin ground is FLOORED, never off", vInstrThin.side === "floored" && vInstrThin.factor >= 0.7 && !vInstrThin.off);

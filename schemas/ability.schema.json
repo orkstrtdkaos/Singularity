@@ -762,6 +762,26 @@
   "folkAccessible": {
    "type": "boolean",
    "description": "⛔ THIS CRAFT IS OPENLY LEARNABLE BY ANYONE, not only by the tradition that owns it. ⚠️ ERIK 2026-08-30: 'THERE IS NO FOLK TRADITION. ONLY THE POLES ARE TRADITIONS. The folk idea was just that EVERYONE COULD ACCESS A SMALL NUMBER OF ABILITIES FROM EACH DOMAIN.' ✅ SO THIS IS AN ACCESS FLAG, NOT A CATEGORY. The craft's `tradition` is its real owner and always a POLE; this field says the pole shares it. ⛔ I FIRST DECLARED `traditionKind: \"pole\"|\"foothill\"|\"folk\"` from SNG-536 §2a and it was wrong in the same way the spec was: **it made folk a kind of tradition, which is the thing being retired.**"
+  },
+  "subAttribute": {
+   "type": "string",
+   "enum": [
+    "strength",
+    "agility",
+    "reason",
+    "insight",
+    "presence",
+    "rapport",
+    "craft",
+    "wits"
+   ],
+   "description": "⛑ §166: a craft rolls ONE SUB-ATTRIBUTE. This names it, and AN AUTHORED VALUE WINS over `resolution.craftSubAttributes`, which otherwise derives it from the verb and `operativeAxis`. ⛔ THE DERIVATION ROUTES A HARM VERB TO THE POWER SUB (strength/reason/presence/craft) UNLESS THE AXIS NAMES PRECISION, FORESIGHT OR RANGE — and `drawn_bow`, `sling_and_stone`, `levelled_crossbow` and `thrown_edge` carry `violence_peace`, so A BOW WAS ROLLING STRENGTH. ⚠️ That is the case this field exists for: where the prose says finesse and the axis does not."
+  },
+  "_subAttributeWhy": {
+   "type": "string"
+  },
+  "_subAttributeReviewed": {
+   "type": "string"
   }
  }
 }

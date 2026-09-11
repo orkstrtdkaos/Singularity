@@ -39,7 +39,7 @@ file is replaced.**
 
 | bucket | n | means |
 |---|---|---|
-| ✅ **READ** | **98** | a play-path file names it outside a comment |
+| ✅ **READ** | **99** | a play-path file names it outside a comment |
 | ⛔ **DARK** | **16** | **no literal reader anywhere** — see the four lies below |
 | ⚠️ **CI-ONLY** | **3** | the only consumer is a test. **That is a real consumer for correctness and not one for play** |
 | ⚠️ **COLLISION** | **0** | the name is live, but on a *different owner* |
@@ -711,6 +711,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `taughtBy` | 9 | `root`×9 | ✅ READ | `companions.js`, `gm.js`, `progression.js` |
 | `companionTaught` | 9 | `root`×9 | ⛔ DARK | — |
 | `companionId` | 9 | `root`×9 | ✅ READ | `companions.js`, `evolution.js`, `app.js` |
+| `subAttribute` | 9 | `root`×9 | ✅ READ | `affinities.js`, `battle_turn.js`, `encounters.js` |
 | `antisoakImposed` | 8 | `mechanic`×2 `tree`×6 | ✅ READ | `capabilities.js`, `skill_battle.js` |
 | `namedCurrent` | 7 | `root`×7 | ⛔ DARK | — |
 | `evasion` | 7 | `mechanic`×7 | ✅ READ | `craftmechanics.js`, `skill_battle.js`, `app.js` |

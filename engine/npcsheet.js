@@ -23,7 +23,7 @@
 
 import { abilityTier } from "./skilltree.js";
 import { offersFreeFloor } from "./capabilities.js";   // R47: a kit with a free floor needs no bare strike
-import { pcBodyAt } from "./progression.js";   // ✅ Erik 2026-09-11: a person carries a player's body
+import { pcBodyAt, SUB_OF } from "./progression.js";   // ✅ Erik 2026-09-11: a person carries a player's body
 const num = (v, d = 0) => (v == null || v === "" || !Number.isFinite(Number(v)) ? d : Number(v));
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 
@@ -319,7 +319,21 @@ export function sheetFor(entry, { day = null, cfg = {}, roleAttributes = null, a
   // ⛔ SNG-486 — see sheetFrom: a record carrying its own sub-attributes IS an authored sheet.
   const own = entry?.subAttributes && Object.keys(entry.subAttributes).length;
   const sheet = sheetFrom(entry, { day, cfg, roleAttributes, levelOverride });
-  return own ? { ...sheet, subAttributes: { ...entry.subAttributes }, authored: true, derived: false } : sheet;
+  // ⛔ Aevi 2026-09-11 (§5): AND THE PARENTS COME FROM THOSE SUBS. The authored spread rode along while the parent attributes —
+  // the numbers most rolls use — came from the growth function: Veyra, authored strength 12 / agility 13, fought with physical 18
+  // and 3 in everything else. Read the authored value where it exists (a parent is the mean of its subs, as a player's is);
+  // synthesize only where it does not. An authored `attributes` block wins outright (none today).
+  const authoredAttrs = entry?.attributes && Object.keys(entry.attributes).length ? { ...sheet.attributes, ...entry.attributes } : null;
+  if (!own) return authoredAttrs ? { ...sheet, attributes: authoredAttrs } : sheet;
+  const subs = { ...(sheet.subAttributes || {}) };
+  for (const [s, v] of Object.entries(entry.subAttributes)) if (Number.isFinite(Number(v))) subs[s] = Number(v);
+  const parents = { ...sheet.attributes };
+  for (const p of Object.keys(parents)) {
+    if (!Object.keys(entry.subAttributes).some(s => SUB_OF[s] === p)) continue;   // nothing authored under this parent: keep the grown one
+    const vals = Object.entries(subs).filter(([s]) => SUB_OF[s] === p).map(([, v]) => v);
+    if (vals.length) parents[p] = Math.round(vals.reduce((a, b) => a + b, 0) / vals.length);
+  }
+  return { ...sheet, attributes: authoredAttrs || parents, subAttributes: subs, authored: true, derived: false };
 }
 /** ⛔ THE BODY OF THE SHEET, shared by the derived and the authored paths. ⚠️ SPLIT OUT RATHER THAN
  *  COPIED: an authored sheet differs from a derived one in WHAT IT KNOWS, not in how health, soak or

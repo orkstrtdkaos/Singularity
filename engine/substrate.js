@@ -431,7 +431,12 @@ export function resolveSubstrateField(locations = {}, data = {}) {
   for (const l of all) {
     const b = base[l.regionId || l.region];
     if (typeof b !== "number") continue;              // no ambient → locationDensity's own fallback handles it
-    out.set(l.id, clamp01(b + (pool.get(l.id) || 0) - (sink.get(l.id) || 0)));
+    // ⬜ Aevi 2026-09-11 (§1): "A WELL ADDS TOWARD FULLNESS, NOT PAST IT" — `effective = base + delta × (1 − base)`. Additive, a well on
+    // rich ground is PUNISHED for being there: the Great Engine (0.98 +0.22) resolved past every band, the worst place in Exesa to
+    // cast. Diminishing, a well in empty country is a revelation and one in the Gearlands is one more engine. `poolsTowardFull`;
+    // off = today. Sinks are untouched.
+    const lift = (pool.get(l.id) || 0) * (data?.poolsTowardFull === true ? 1 - b : 1);
+    out.set(l.id, clamp01(b + lift - (sink.get(l.id) || 0)));
   }
   return out;
 }
@@ -689,14 +694,17 @@ export function groundCardFor(ability, character, { schools, substrate, location
  *  `g` is a verdict from `groundCardFor` / `groundForDecl`. Returns { tag, tip, tone } or null. Pure. */
 export function groundTag(g) {
   const p = Number(g?.chancePenalty) || 0;
-  if (!g || !p) return null;
+  if (!g) return null;
+  // ✅ Aevi 2026-09-11 (§3): a craft that CANNOT work shows no number — a number implies a roll. Its own word; the tip says why.
+  if (g.off) return { tag: "will not answer", tone: "bad", tip: "There is nothing here for this to draw on." };
+  if (!p) return null;
   if (p < 0) return { tag: `rich ground +${-p}`, tone: "good", tip: `This ground is rich in what the craft draws on. +${-p} to the roll, and it costs less.` };
   if (g.side === "floored") return { tag: `bare hands −${p}`, tone: "hold", tip: "The ground is thin, but this craft falls back on what your body can do. It will not fail entirely." };
   if (g.side === "crowded") return { tag: `crowded −${p}`, tone: "warn", tip: "More here than the craft can use cleanly; it interferes." };
-  // ⚠️ not in Aevi's table (flagged to her): a craft capped by how little MEANING a place holds is a different lack from thin ground
-  if (g.side === "meaningless") return { tag: `little meaning −${p}`, tone: "warn", tip: `There is little here for this craft to take hold of — the place caps it. −${p} to the roll, and it costs more.` };
-  // starved — and a craft too starved to answer at all is still thin ground, with its number (flagged: her table left it silent)
-  return { tag: `thin ground −${p}`, tone: "bad", tip: `Little of what this craft draws on is here. −${p} to the roll, and it costs more.${g.off ? " It may not answer at all." : ""}` };
+  // ✅ Aevi 2026-09-11 (§3): capped by MEANING is a different lack from thin ground — "a player who conflates them will travel to
+  // the wrong place" — so it never says thin ground. Her tooltip.
+  if (g.side === "meaningless") return { tag: `little meaning −${p}`, tone: "warn", tip: "Few here have made this place matter. This craft draws on that." };
+  return { tag: `thin ground −${p}`, tone: "bad", tip: `Little of what this craft draws on is here. −${p} to the roll, and it costs more.` };
 }
 
 /** ✅ ERIK 2026-09-11 — "THE GROUND MUST REACH A FIGHT. SKILL SUCCESS DEPENDS ON IT."
@@ -861,5 +869,7 @@ export function fieldValueAtSite(source, location, substrateData, locations) {
   const local = location?.id && locations ? localFieldAt(location.id, locations) : null;
   if (!local) return { value: base, local: null };
   const axis = fieldOfSource(source, substrateData) === "nanite" ? "nanite" : "substrate";
-  return { value: Math.max(0, Math.min(1, base + local[axis])), local };
+  // ⬜ …and a settlement's own well the same way, under the same dial (Aevi §1)
+  const add = local[axis] > 0 && substrateData?.poolsTowardFull === true ? local[axis] * (1 - base) : local[axis];
+  return { value: Math.max(0, Math.min(1, base + add)), local };
 }

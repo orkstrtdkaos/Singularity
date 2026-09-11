@@ -1515,6 +1515,10 @@ console.log("\n── §159 · the ground tag ──");
   check("§159: ⛔ SILENCE IS THE GOOD STATE — full ground and no source carry no tag", t({ side: "full", chancePenalty: 0 }) === null && t(null) === null);
   const tags = [t({ side: "starved", chancePenalty: 30 }), t({ side: "crowded", chancePenalty: 9 }), t({ side: "floored", chancePenalty: 18 }), t({ side: "empowered", chancePenalty: -8 }), t({ side: "meaningless", chancePenalty: 20 })].map(x => x.tag + " " + x.tip).join(" ");
   check("§159: …NO JARGON on the row or in the tip — no source names, no factor, no substrate", !/precursor|metaphysical|veil|nanite|substrate|factor|lattice/i.test(tags), tags.slice(0, 160));
+  // Aevi 2026-09-11 (§3): her two words
+  const off159 = t({ side: "starved", chancePenalty: 62, off: true }), mg159 = t({ side: "meaningless", chancePenalty: 20 });
+  check("§159: ⛔ a craft that CANNOT work reads `will not answer` — no number, because a number implies a roll", off159?.tag === "will not answer" && !/[0-9]/.test(off159.tag) && /nothing here for this to draw on/.test(off159.tip) && t({ side: "starved", chancePenalty: 0, off: true })?.tag === "will not answer");
+  check("§159: …and a craft capped by meaning reads `little meaning −N`, never thin ground — two fields, two words", mg159?.tag === "little meaning −20" && /Few here have made this place matter/.test(mg159.tip) && !/thin|ground/.test(mg159.tip));
   const app159 = rd("app.js");
   check("§159: ⛔ THE SAME WORDS EVERYWHERE — the fight menu row and the wheel both render `groundTag`, nothing else invents a label",
     app159.split("groundTag(").length - 1 >= 2 && app159.includes("sbGroundChip(odds?.ground)") && rd("style.css").includes(".sb-ground-good"));
@@ -1602,12 +1606,29 @@ console.log("\n── §162 · one body rule ──");
   const BT162 = await import("../engine/battle_turn.js");
   const { loadContentHeadless: lch162 } = await import("./headless_content.mjs");
   const C162 = await lch162();
-  const veth162 = C162.npcs?.["veth-ondra"];
+  // ⚠️ Veth AUTHORS her spread (insight 15, reason 11), so since Aevi's §5 her body is her author's, not the growth rule's. This gate
+  // asks the RULE, so it takes the first person with no authored subs whose kit's harm crafts lean one way (the name is its first subject's).
+  const hasSubs162 = (r) => !!(r?.subAttributes && Object.keys(r.subAttributes).length);
+  const opp162 = (r) => BT162.personOpponentFor(r, { catalog: C162.abilities, cfg: C162.rules.npcStanding, day: 100, traditionIndex: C162.traditionIndex, items: C162.items, leveling: C162.rules.leveling });
+  const leanOne162 = (po) => { const h = {}; for (const s of (po?.skills || [])) if (s.function === "strike" || s.function === "break") h[s.attribute || "practical"] = (h[s.attribute || "practical"] || 0) + 1; const e = Object.values(h).sort((a, b) => b - a); return e.length === 1 || (e.length > 1 && e[0] > e[1]); };
+  const veth162 = Object.values(C162.npcs || {}).filter(r => r?.id && !hasSubs162(r)).slice(0, 24).find(r => leanOne162(opp162(r)));
   const po162 = veth162 ? BT162.personOpponentFor(veth162, { catalog: C162.abilities, cfg: C162.rules.npcStanding, day: 100, traditionIndex: C162.traditionIndex, items: C162.items, leveling: C162.rules.leveling }) : null;
   const harm162 = {}; for (const s of (po162?.skills || [])) if (s.function === "strike" || s.function === "break") harm162[s.attribute || "practical"] = (harm162[s.attribute || "practical"] || 0) + 1;
   const lead162 = Object.entries(harm162).sort((a, b) => b[1] - a[1])[0]?.[0];
-  check("§162: ⛔ …a person builds toward what they FIGHT with, as a player does — Veth's strongest attribute is the one her kit's harm crafts roll on",
+  check("§162: ⛔ …a person builds toward what they FIGHT with, as a player does — a person with no authored body: their strongest attribute is the one their kit's harm crafts roll on",
     !!po162 && !!lead162 && po162.attributes[lead162] === Math.max(...Object.values(po162.attributes)), JSON.stringify({ lead: lead162, attrs: po162?.attributes }));
+  // ⛔ Aevi 2026-09-11 (§5): 46 records AUTHOR a sub-attribute spread, and the sheet kept the subs but built the PARENTS — the
+  // attributes most rolls use — from the growth function. Veyra is authored strength 12 / agility 13 and fought with physical 18,
+  // everything else 3. Read the authored value where it exists; synthesize only where it does not.
+  const vey162 = C162.npcs?.veyra_lance;
+  const sv162 = vey162 ? NS162.sheetFor(vey162, { cfg: C162.rules.npcStanding, day: 400 }) : null;
+  const mean162 = (a, b) => Math.round((Number(vey162?.subAttributes?.[a]) + Number(vey162?.subAttributes?.[b])) / 2);
+  check("§162: ⛔ a person with AUTHORED sub-attributes fights on them — each parent the mean of its authored subs, not a synthesized body",
+    !!sv162 && sv162.attributes.physical === mean162("strength", "agility") && sv162.attributes.mental === mean162("reason", "insight") && sv162.attributes.social === mean162("presence", "rapport") && sv162.attributes.practical === mean162("craft", "wits") && sv162.subAttributes.agility === Number(vey162.subAttributes.agility),
+    JSON.stringify({ authored: vey162?.subAttributes, fights: sv162?.attributes }));
+  const po162v = vey162 ? BT162.personOpponentFor(vey162, { catalog: C162.abilities, cfg: C162.rules.npcStanding, day: 100, traditionIndex: C162.traditionIndex, items: C162.items, leveling: C162.rules.leveling }) : null;
+  check("§162: …and the FIGHT reads them too — the opponent built for a duel carries the authored parents, not the growth function's",
+    !!po162v && po162v.attributes.physical === mean162("strength", "agility") && po162v.attributes.mental === mean162("reason", "insight"), JSON.stringify(po162v?.attributes));
 }
 /* ══════════ §163 — THE FOE READS YOU WHETHER OR NOT YOU LOOK · AND A CONCEAL CRAFT NEVER MAKES YOU EASIER TO READ ══════════ */
 // ⛔ 2026-09-11, measured with a player's growth on both sides: reading every turn won 35% of even fights and never reading 48%.
@@ -1643,6 +1664,33 @@ console.log("\n── §163 · the foe reads you whether or not you look ──"
     on.receipts.some(r => r.label === "sense") && !off.receipts.some(r => r.label === "sense"), JSON.stringify([on.receipts.map(r => r.label), off.receipts.map(r => r.label)]));
   const app163 = rd("app.js");
   check("§163: …and the app's skip runs the same step — `playTurn` with no read, no narration call", app163.includes("THE FOE STILL READS YOU WHEN YOU DO NOT LOOK") && app163.includes("playTurn(character, enc.def, { sense: null,"));
+}
+/* ══════════ §164 — A WELL ADDS TOWARD FULLNESS, NOT PAST IT (a dial: `poolsTowardFull`) ══════════ */
+// ⬜ Aevi 2026-09-11 (§1): additive on a bounded scale, a well on rich ground is PUNISHED for being there — the Great Engine (0.98 +0.22)
+// resolved past every band. Her line: `effective = base + delta × (1 − base)`. Off is today; Erik rules whether it turns on.
+console.log("\n── §164 · a well adds toward fullness ──");
+{
+  const SUB164 = await import("../engine/substrate.js");
+  const { loadContentHeadless: lch164 } = await import("./headless_content.mjs");
+  const C164 = await lch164();
+  const raw164 = rj("content/packs/core/rules/the_substrate.json");
+  const off164 = SUB164.resolveSubstrateField(C164.locations, raw164), on164 = SUB164.resolveSubstrateField(C164.locations, { ...raw164, poolsTowardFull: true });
+  const ge164 = C164.locations?.the_great_engine, ah164 = C164.locations?.archive_hollow;
+  const b164 = (l) => raw164.substrateDensity[l.regionId || l.region];
+  check("§164: ⛑ OFF IS TODAY — the content carries `poolsTowardFull: false`, and the Great Engine resolves as it did, pinned full", raw164.poolsTowardFull === false && off164.get("the_great_engine") === 1);
+  check("§164: ⛔ ON, a well on rich ground adds toward fullness, not past it — the Great Engine is its ground plus its delta × what was left",
+    !!ge164 && Math.abs(on164.get("the_great_engine") - (b164(ge164) + Number(ge164.substrateSource.delta) * (1 - b164(ge164)))) < 1e-9 && on164.get("the_great_engine") < 1, String(on164.get("the_great_engine")));
+  check("§164: …and a well in empty country still adds most of its delta — Archive Hollow 0.40 → 0.52, not 0.60", !!ah164 && Math.abs(on164.get("archive_hollow") - 0.52) < 0.005, String(on164.get("archive_hollow")));
+  const moved164 = [...off164].filter(([id, v]) => Math.abs(on164.get(id) - v) > 1e-12).length;
+  check("§164: …it only ever LOWERS a lift — no place rises, and places a well reaches move", [...off164].every(([id, v]) => on164.get(id) <= v + 1e-12) && moved164 > 0, `${moved164} places move`);
+  // ⛔ …and the CARD reads it (door 4). My first measurement of this dial moved NOTHING: the load stamps `location.substrateDensity`
+  // once and a stamp is never overwritten ("an authored override always wins"), so re-stamping a loaded copy was a no-op. A dial can
+  // only reach play through the model the loader passes — so this asserts both halves: the key rides in that model, and a fresh stamp moves the read.
+  const fresh164 = structuredClone(C164.locations); for (const l of Object.values(fresh164)) delete l.substrateDensity;
+  SUB164.applySubstrateField(fresh164, { ...C164.substrateModel, poolsTowardFull: true });
+  check("§164: ⛔ …and the ground a craft reads moves with it — stamped with the dial on, Archive Hollow reads 0.52 through `locationDensity`",
+    Math.abs(SUB164.locationDensity(fresh164.archive_hollow, C164.substrateModel) - 0.52) < 0.005, String(fresh164.archive_hollow?.substrateDensity));
+  check("§164: …and the loader hands the stamp the content's model, the dial in it — `substrateModel.poolsTowardFull` is the file's false", C164.substrateModel?.poolsTowardFull === false, String(C164.substrateModel?.poolsTowardFull));
 }
 /* ══════════ §14 — THE FOLD CANNOT BEAT AN IMMUNITY THE BLOW COULD NOT ══════════ */
 // ⛔ FOUND BY RUNNING AEVI'S TWELVE CRAFTS THROUGH A MELEE-SCALE FIGHT (CCODE-313), which is the whole

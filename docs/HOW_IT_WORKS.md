@@ -481,7 +481,7 @@ working papers; **this is the answer.**
 | 09-08 | ✅ **ONE ROSTER, DERIVED; THE OPPONENT GATE; R41's FORM; THE VEIL LOADED** | Erik: *"all NPCs should at least be referenced from a single source list… even if we need to keep separate lists for code"* · *"any condition must be an opposed roll"* stands unbuilt (§A) | `scripts/roster.mjs` reads six files from disk and asks `personOpponentFor` for each; 144 records, 125 reachable, **40 would fight at level 1** (ratchet, Aevi's §2 owns it); `npcs/legends.json`'s five are read by NOTHING and Corvane is a hinge on 4 of 6 arcs (§10 gap); `notAnOpponent: true` refuses by name; a Sovereign is ONE record with `forms.diminished`/`forms.final` chosen by the arc's live stage; `the_veil` + `power_cosmology` loaded, attached, and on the GM's ask view | `§147` · `§59` refixtured on Sister Alder · `roster --check` is a suite | §10 gains the hinge gap; docs/ROSTER.md is generated between markers, prose kept above |
 | 09-08 | ✅ **THE FORTY ARE DERIVED, NOT AUTHORED — ROLE → TIER → THE CHAIN THAT ALREADY RAN** | Erik: *"I thought you were going to have him make the generative engine build out the remaining empty NPCs?"* · Aevi, correcting her own spec: *"NOT A MISSING SHEET. NOT A MISSING KIT. ONE MISSING FIELD."* | 40 of 40 level-1 records were level 1 for one reason — no `tier` — while `tierFloor` already fired for the 64 who had one. `rules/tier_signals.json` (CONTENT, correctable without code) → `tierFromRole` → `derivedLevel`, consulted ONLY where a record is silent. **40 → 0**, ratchet tightened; 19 regional · 12 notable · 9 heroic. Guards: authored tier and level both outrank it; default `notable`; a hard `ceiling: heroic` so no regex reaches epic/legendary/mythic; `tierDerived` on the SHEET, never stamped onto the record; no code fallback, so an absent table derives nothing | `§148` · `§147`'s level-1 ratchet 40→0 | ⚠ **and my roster column was too generous**: R47's bare `_strike` was counting as a kit, so 62 records read as armed when they have no real craft — corrected, and it makes `domains` on the legends the same one-field problem one tier up |
 
-**Last verified: 2026-09-11 · v1.9.450 · 429 crafts.**
+**Last verified: 2026-09-11 · v1.9.451 · 429 crafts.**
 
 ---
 
@@ -989,6 +989,11 @@ leans after, soak from what they wear —
 and the harness plays its PC on it. The old NPC starting point (round(level/2)+1 in every attribute, soak level/3) stays
 readable as `body: "legacy"`. `§162`.
 
+⛔ **An authored body wins (Aevi 2026-09-11, `REPLY_aevi_wells_gear_tags` §5).** 46 people author a sub-attribute spread; the sheet
+kept the subs and built the PARENTS — the numbers most rolls use — from the growth function, so Veyra (authored strength 12 /
+agility 13) fought with physical 18 and 3 everywhere else. Now each parent is the mean of its authored subs, as a player's is;
+the growth function fills only what nobody wrote. An authored `attributes` block would win outright (none today). `§162`.
+
 ✅ **The empowered core (Erik 2026-09-11, on Aevi's `MEASURED_empowered_band_and_damage` §2).** Inside a band the factor was flat
 1.0 — *"the best it ever gets"* was one point inside the edge. A core of center ± width × `empowerCore` (0.3) now rises to
 `empowerPeak` (1.25) at the heart of the band: side `empowered`, a BONUS to the roll (median +7, up to +16) and a cheaper craft.
@@ -996,7 +1001,14 @@ Measured: 11.1% of craft-and-place pairs (3.3% at a core of 0.1, 5.1% at 0.15, 6
 anchors makes it LESS likely (7.2%, against 12.4% elsewhere) — a pool pushes most crafts past their band's top, so it crowds.
 The meaning ceiling now binds only below 1. `§158`. **The ground tag** (Aevi's `COPY_ground_tag_fight_menu`): `thin ground −N` ·
 `crowded −N` · `bare hands −N` · `rich ground +N`, and silence when the ground is full — one vocabulary (`groundTag`) on the
-fight menu and the wheel. `§159`.
+fight menu and the wheel. Aevi's two words (2026-09-11): a craft capped by meaning reads `little meaning −N` (*"Few here have
+made this place matter"* — never *thin ground*: they are different fields), and a craft that cannot work reads `will not answer`
+with no number, because a number implies a roll. `§159`.
+
+⬜ **A well adds toward fullness — a dial (`the_substrate.poolsTowardFull`, false = today).** Aevi 2026-09-11 §1: additive on a
+bounded scale, a well on rich ground is punished for being there — the Great Engine (0.98 + 0.22) resolved past every band, the
+worst place in Exesa to cast. On, `effective = base + delta × (1 − base)`: the Great Engine 0.98, Archive Hollow (0.40 + 0.20)
+0.52. The world field's pools and a settlement's local wells; sinks untouched. Erik rules. `§164`.
 
 ⬜ **Crowding is a dial keyed by the craft's SOURCE** (`the_substrate.crowdBySource[source]` → `{ crowdSlope, crowdFloor }`; empty =
 today), merged onto whichever band the craft resolves — its tradition's (`substrateBand`, where most crafts land), its school's, or

@@ -2290,216 +2290,15 @@
       }
     ],
     "lastTurn": {
-      "narration": "You take the shadow-tablet from your pocket—Mara's face emerges in your mind, the supply-store counter, her hands already moving to whatever needs doing next. You write fast: READINGS RETRIEVED ARCHIVE STOP GRAEL SEALED THEM STOP POLE-PULL PROVEN STOP CONVENE IN THREE DAYS STOP WHAT DOES CALVAR NEED TO PRESENT STOP\n\nThe slate goes dark as the message travels. You count breaths—three, four, five—and the surface shivers. Her answer comes back: CALVAR NEEDS THE READINGS THEMSELVES AND CHAIN-OF-CUSTODY STOP WARDEN COLL WILL DEMAND PROVENANCE STOP GRAEL'S SEAL BROKEN IS A PROBLEM BUT PROOF IS BIGGER STOP DARA SAYS CREWS CAN MOVE MATERIALS FASTER IF COMMITTEE VOTES POLE-PULL STOP SEND THEM SOON STOP\n\nShe's right and you know it. The readings are proof, but proof broken out of a sealed cabinet by a warden whose name is not yet public carries a weight that cuts both ways. Calvar can present the data—he has the standing to read it, to speak it plainly, to make the case that the numbers are real. But the chain of how you got them will be the question every skeptical ear latches onto. Three days is enough time if you move now, and not enough if you hesitate.\n\n*✦ The Ashwardens: -1 — broke the Archive warden-mark without consultation, triggering the March's witness-seal.*",
-      "sceneSummary": "Silas retrieves Grael's buried water readings from the Archive at cost of triggering the warden-mark and alerting Veth. The readings are urgent proof—and the method of retrieval is a liability. Mara relays that Calvar can present them, but chain-of-custody will matter in the convene vote.",
-      "choices": [
-        {
-          "label": "Ride to the Hub immediately with the readings—Calvar can prepare while you travel, and arriving in person carries weight the sheets alone cannot.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "travel",
-            "risky"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Prepare a careful written account of exactly how and why the readings were retrieved—frame the necessity plainly so the committee cannot dismiss the method.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "craft"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Wait for Veth to arrive—she knows what the warden-mark means, she'll read your actions in context, and her standing may matter more than Calvar's data.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        }
-      ],
-      "deeds": [
-        {
-          "description": "Retrieved proof of the water crisis's true cause—buried readings from the sealed Archive cabinet—at the cost of breaking Grael's seal-mark and triggering the March's warden-alert.",
-          "tags": [
-            "risk",
-            "boldness",
-            "service"
-          ],
-          "weight": 2,
-          "communityId": "valley.hub"
-        }
-      ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -8,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [
-        {
-          "what": "The buried water readings are now in Silas Weir's hands—proof that pole-pull is the true cause of the crisis. The convene vote is three days away. Calvar can present; the method of retrieval will be contested.",
-          "tags": [
-            "proof",
-            "crisis",
-            "politics"
-          ],
-          "visibility": "witnessed",
-          "spectrumDeltas": {
-            "truth_falsehood": 0.15
-          },
-          "impactsLocal": true
-        }
-      ],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-light-that-will-not-dim",
-          "title": "The Light That Will Not Dim",
-          "summary": "Find who benefits from the light winning",
-          "giver": "high_luminary",
-          "note": "Readings retrieved from Archive—concrete proof that pole-pull is the real cause. Three days before convene votes on whether to accept the evidence. Calvar can present; the method of retrieval (cabinet broken, warden-mark triggered) is a liability.",
-          "xpReward": 0
-        }
-      ],
       "standingOps": [
         {
-          "people": "ashwarden",
-          "delta": -1,
-          "why": "broke the Archive warden-mark without consultation, triggering the March's witness-seal"
+          "op": "setRecentShift",
+          "traditionId": "ashwarden",
+          "reason": "broke the Archive warden-mark without consultation, triggering the March's witness-seal"
         }
       ],
-      "delegateOps": [],
-      "arcOps": [],
-      "adoptSchool": null,
-      "offer": null,
-      "stageOps": [],
-      "scene": {
-        "setting": "The Whistling Woman post's single warm room at midday—stone walls, the stove recently fed, sunlight through the small window. The encrypted slate sits dark on the table. The Runner sleeps on the cot, steady and mending. Huginn is roosted on the shelf. Pell stands near the table, watching Silas with complete attention. The retrieved readings are stacked on the table, sheaf of dated numbers that prove the theory.",
-        "npcsPresent": [
-          {
-            "name": "Pell Ran Marsh",
-            "state": "Standing, hands loose, reading Silas's face and the shadow-tablet's exchange—understanding what comes next and what it costs"
-          },
-          {
-            "name": "Huginn",
-            "state": "Roosted on shelf beside relay mechanism, head turned, watching with that particular stillness—present but not intervening"
-          },
-          {
-            "name": "The Runner",
-            "state": "Asleep on cot, breathing steady, mending from cautery—unaware of the message just sent"
-          }
-        ],
-        "objects": [
-          "Buried Water Readings (Archive) — sheaf of dated, numbered proof",
-          "Shadow-tablet — dark on table, message-exchange just concluded",
-          "Memory — the spear propped against the wall",
-          "Relay mechanism — silent on shelf",
-          "Breakfast plates — cooling on table"
-        ],
-        "threads": [
-          "Veth is coming—the warden-mark alerted her and she will arrive to confront what was broken",
-          "The readings are out—but only three days before the convene votes on pole-pull",
-          "The cost of the gambit: standing with the March, secrecy abandoned, rules broken",
-          "Calvar must present the data; the method of retrieval will be the liability"
-        ]
-      },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "mara-wells",
-          "name": "Mara Wells",
-          "role": "Millbrook's supply-store operator—now the Hub committee's fastest messenger",
-          "note": "Received urgent shadow-tablet message about the retrieved readings. Responded with tactical assessment: Calvar can present, chain-of-custody matters, Dara's crews can move faster if the vote goes pole-pull. Moving fast herself—already acting on the news.",
-          "learned": [
-            "The readings are proof but the broken cabinet is a liability",
-            "Calvar's standing as a reader will matter more than the method",
-            "Dara's repair crews need the committee vote to move at pace"
-          ],
-          "relationshipDelta": 0,
-          "statusNote": "At Millbrook, receipt of urgent message, moving to coordinate response"
-        }
-      ],
-      "intentsHeard": [],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "The buried water readings proving pole-pull as the true cause are now retrieved from Grael's sealed Archive cabinet. The warden-mark was triggered; Veth knows the cabinet was breached. Three days remain before the convene votes on whether to accept pole-pull as the crisis's source.",
-          "subjectId": "the-water-crisis"
-        }
-      ],
-      "placeUpdates": [],
-      "discovery": null,
-      "codexUpdates": [
-        {
-          "topic": "the-water-crisis",
-          "label": "The Water Crisis",
-          "kind": "mystery",
-          "entityId": null,
-          "fact": "The readings are retrieved and proof is concrete—the pole-pull is the true cause, documented in dated measurements from the Archive. Presentation to the convene in three days will determine whether the valley accepts the evidence and pivots to long-term mitigation or continues the blame-game.",
-          "links": [
-            "overseer-grael",
-            "warden-coll",
-            "calvar",
-            "the-light-that-will-not-dim"
-          ]
-        }
-      ],
-      "holdingOps": [],
-      "debtOps": [],
-      "partyOps": [],
-      "generateRequest": [],
-      "encounterOps": [],
-      "projectOps": [],
-      "bandOps": [],
-      "deathOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": {
-        "hoursPassed": 1.5,
-        "why": "the gambit run, return, recovery, and message exchange took the span of late morning into early afternoon"
-      },
-      "moveTo": null,
-      "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": null,
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
-      "sceneEnded": false
+      "narration": "",
+      "sceneSummary": null
     },
     "sceneState": {
       "setting": "The Whistling Woman post's single warm room at midday—stone walls, the stove recently fed, sunlight through the small window. The encrypted slate sits dark on the table. The Runner sleeps on the cot, steady and mending. Huginn is roosted on the shelf. Pell stands near the table, watching Silas with complete attention. The retrieved readings are stacked on the table, sheaf of dated numbers that…",
@@ -2536,7 +2335,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 16,
-    "hour": 15,
+    "hour": 16,
     "realAnchor": null
   },
   "companions": [
@@ -6564,7 +6363,7 @@
     "lastTickWorldDay": 73,
     "lastCanonWorldDay": 73,
     "lastGenCount": 1774,
-    "turnsSinceOffer": 4,
+    "turnsSinceOffer": 5,
     "recentOffers": [
       {
         "thing": "The music-box mechanism—a carrier for Deni's whistle-song in physical form, a tool for the relay network",
@@ -16984,8 +16783,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1789167521084,
-  "rev": 1922,
+  "updatedAt": 1789167783454,
+  "rev": 1925,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -21463,10 +21262,10 @@
     {
       "id": "sess-33",
       "startedAt": "2026-09-11T22:48:54.873Z",
-      "lastAt": "2026-09-11T22:58:41.056Z",
+      "lastAt": "2026-09-11T23:03:03.436Z",
       "startDay": 73,
       "endDay": 73,
-      "beats": 3
+      "beats": 4
     }
   ],
   "company": [
@@ -22245,27 +22044,7 @@
   "_stageOpRefusals": [
     "what-the-water-remembers: not-current-stage (named \"resolve\", current is \"null\")"
   ],
-  "_pendingLedger": [
-    {
-      "schemaVersion": 1,
-      "at": "2026-09-11T22:58:41.084Z",
-      "worldDay": 73,
-      "who": "char-mrhs8286",
-      "playerKey": "player-s9z9u1",
-      "where": "gen-whistling-woman-post",
-      "what": "The buried water readings are now in Silas Weir's hands—proof that pole-pull is the true cause of the crisis. The convene vote is three days away. Calvar can present; the method of retrieval will be c",
-      "tags": [
-        "proof",
-        "crisis",
-        "politics"
-      ],
-      "spectrumDeltas": {
-        "truth_falsehood": 0.15
-      },
-      "visibility": "witnessed",
-      "impactsLocal": true
-    }
-  ],
+  "_pendingLedger": [],
   "locationState": {},
   "_applyFailures": null,
   "activeEncounter": null,
@@ -23297,9 +23076,7 @@
     }
   ],
   "_standingOpRefusals": [
-    "lattice: no-delta",
-    "verist: no-delta",
-    "ashwarden: no-delta"
+    "?: no-people"
   ],
   "itemReclaimVersion": 1,
   "nameRepairVersion": 1,

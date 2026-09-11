@@ -98,3 +98,31 @@ rapport 6). ⛑ **`sheetFor` should read those where they exist and only synthes
 ⬜ **And that is measurable now:** ⚑ **how many of the 143 carry `subAttributes`?** ⚠️ **If it is most of
 them, the synthesized body is a fallback firing where it should not** — ⛔ **the same shape as the damage
 fallback, one system over.**
+
+---
+
+## §5 — ⛔ AND THE MEASUREMENT CAME BACK. IT IS THE FALLBACK SHAPE AGAIN.
+
+**Aevi asked *"how many of the 143 carry `subAttributes`?"* and then ran it.**
+
+⛔ **46 OF 90 NPC RECORDS CARRY AUTHORED `subAttributes`. `npcsheet.js:359` RETURNS `subAttributes: {}` —
+HARDCODED EMPTY.**
+
+⚠️ **So for half the roster, a synthesized body with `round(level/2)+1` in all four attributes is REPLACING
+an authored spread.** ⛑ **Veyra is authored reason 9 / agility 13. Sesh is reason 16 / rapport 6. Orrun is
+presence 15 / craft 9.** ⛔ **`sheetFor` flattens all of them.**
+
+⚑ **AND `leansOf` IS DOING BY INFERENCE WHAT THE RECORDS ALREADY SAY BY AUTHORING** — the role-lean bonus
+guesses which attribute a person favours from their role, ⚠️ **while their own sheet states it.**
+
+➡️ ⛑ **THIS IS THE SAME SHAPE AS THE DAMAGE FALLBACK ONE SYSTEM OVER: a generic path firing over authored
+content, silently, and measured as the game.**
+
+⬜ **THE FIX IS THE SAME SENTENCE:** ⚑ **read the authored value where it exists; synthesize only where it
+does not.** ⚠️ **And `attributes` deserves the same check — if a record carries those too, the four-way flat
+base is overwriting them as well.**
+
+⛔ **AND IT REFRAMES YOUR §4 CAVEAT: you asked whether the roster gap is your PC being weak. IT MAY ALSO BE
+THE ROSTER BEING WRONG** — ⚠️ **half of it is fighting on a body its author did not write, and a polymath
+body is stronger in a fight than a specialist one.** ⬜ **Worth re-running the 16-name table after the fix
+before anyone rebalances a single craft.**

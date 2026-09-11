@@ -343,7 +343,8 @@
    "_controlReview": "⛔ SNG-456: control tag reviewed per rank. Kept where restricting the target is the point; stripped where the restriction is a consequence of damage.",
    "_powerSystemWas": "reach_dark_light",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `blazeborn` — Glass plains, revelation as violence. Light shaped through crystal.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_typed_20260829": "⛔ THE TRADITION'S SIGNATURE AND IT DOES ALL THREE THINGS AT ONCE: 'light that SHOWS THINGS AS THEY ARE — no illusion, no disguise, no shadow holds — OR focus it to a beam that BURNS AND BLINDS'. ⚠️ `radiance` .5 the beam, `heat` .3 the burn, `truth` .2 because r2 'MAKES A LIE VISIBLY A LIE' — that is intrinsic harm and armour does nothing about it."
+   "_typed_20260829": "⛔ THE TRADITION'S SIGNATURE AND IT DOES ALL THREE THINGS AT ONCE: 'light that SHOWS THINGS AS THEY ARE — no illusion, no disguise, no shadow holds — OR focus it to a beam that BURNS AND BLINDS'. ⚠️ `radiance` .5 the beam, `heat` .3 the burn, `truth` .2 because r2 'MAKES A LIE VISIBLY A LIE' — that is intrinsic harm and armour does nothing about it.",
+   "_subAttributeReviewed": "⛑ SNG/§166: a craft rolls ONE SUB-ATTRIBUTE and this names it. CCode's derivation routes a harm verb to the POWER sub unless `operativeAxis` says precision, foresight or range — and these crafts' axes are `violence_peace` or a damage/speed pair, so a BOW WAS ROLLING STRENGTH. ⚠️ An authored `subAttribute` wins, which is why it exists. ⛑ LEFT on the power sub: 'throw light' is a figure of speech; the craft is an area effect."
   },
   {
    "id": "darksight",
@@ -622,7 +623,8 @@
    "obscure": true,
    "_obscureNote": "⛔ SNG-469: USABLE IN THE SENSE SLOT AS AN OBSCURE. pull shadow around yourself in the moment — the globe over the head, Erik's example\n⚠️ Erik: 'you'll need to see what crafts can ALREADY be used to do this — shadow work, bend light, false-something. They're already out there in general; just need to make sure they can be used in that way during the sense step and act as an OPPOSED RESULT.' ⛔ THIS IS A TAG ON AN EXISTING CRAFT, NOT A NEW ABILITY.",
    "_powerSystemWas": "reach_dark_light",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id."
+   "_powerSystemFix": "⛔ SNG-524. Was `reach_dark_light` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `umbral` — They live in the deeps, which is where the lattice is buried.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
+   "_subAttributeReviewed": "⛑ SNG/§166: a craft rolls ONE SUB-ATTRIBUTE and this names it. CCode's derivation routes a harm verb to the POWER sub unless `operativeAxis` says precision, foresight or range — and these crafts' axes are `violence_peace` or a damage/speed pair, so a BOW WAS ROLLING STRENGTH. ⚠️ An authored `subAttribute` wins, which is why it exists. ⛑ LEFT: 'slip from sight' describes the result, not the roll."
   },
   {
    "id": "kindle",

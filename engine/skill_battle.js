@@ -974,7 +974,10 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // rolls, a margin delta driving a meter. The one fight-shaped thing in it was the EXIT RULE (what a pressure
   // tick costs each side, how many ticks break them), and that is now per-kind CONTENT. Defaults to "fight", so
   // every existing caller resolves EXACTLY as before.
-  phase = "action", tickEffects: doTick = true, setupBonus = 0, kind = "fight" }) {
+  phase = "action", tickEffects: doTick = true, setupBonus = 0, kind = "fight",
+  // ✅ ERIK 2026-09-11 — THE GROUND: `{ player, opponent }` verdicts from `groundForDecl`, computed by the caller that holds
+  // the content. ABSENT MEANS TODAY — every existing caller, and the world's NPC-vs-NPC fights, roll exactly as before.
+  ground = null }) {
   sb = sb || {};
   steps = steps || rules?.intensitySteps || DEFAULT_STEPS;
   // CCODE-35: standing effects modify THIS round's rolls as named contestMods, then tick; newly landed ones
@@ -984,8 +987,16 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // fight without your crafts until you find energy again. Enforced here so it binds both sides equally.
   // ✅ R35: a side that PAID THE KILL is sealed — "unable to use any craft until a full night's rest". A seal
   // reads as an empty pool here, so the craft falls back exactly as a spent one does; the state carries it out.
+  const playerDeclIn = playerDecl, oppDeclIn = oppDecl;
   playerDecl = degradeIfSpent(playerDecl, state.playerSealed ? 0 : (state.playerEnergy ?? playerSheet.energy ?? 0), sb, steps, rules);
   oppDecl = degradeIfSpent(oppDecl, state.opponentSealed ? 0 : (state.opponentEnergy ?? oppSheet.energy ?? 0), sb, steps, rules);
+  // ✅ THE GROUND (Erik 2026-09-11) — a named line on each side's roll, and the strain on its energy, exactly the terms the
+  // free-form roll pays. A declaration that DEGRADED to steel and wit has no craft behind it, so it has no ground either.
+  const groundHere = {
+    player: ground?.player && playerDecl === playerDeclIn ? ground.player : null,
+    opponent: ground?.opponent && oppDecl === oppDeclIn ? ground.opponent : null };
+  const groundMods = (side) => { const g = groundHere[side]; return g && g.chancePenalty
+    ? [{ label: `the ground here (${g.off ? "it will not answer" : g.side}, ${g.percent}% of its strength)`, value: -g.chancePenalty }] : []; };
   const standing = state.effects || [];
   // ⛔ CCODE-250 — WHO IS THIS AIMED AT. Erik: "Yes a foe chooses who to hit... you need to sense who's
   // getting attacked so you can intervene if you want." Until now `oppDecl` resolved against `playerSheet`
@@ -1009,8 +1020,8 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   const aimedAtPlayer = !!(aimedAt?.target && (aimedAt.target.isPlayer || aimedAt.target.kind === "player"));
   const defenderSheet = (aimedAt && aimedAt.target && !aimedAtPlayer && aimedAt.target.sheet)
     ? aimedAt.target.sheet : playerSheet;
-  const p = rollSide(playerSheet, playerDecl, oppDecl, sb, steps, rules, rng, effectMods(standing, "player", playerDecl, oppDecl, sb), momentumModifier(state.momentum || 0, "player", sb), setupBonus);
-  const o = rollSide(oppSheet, oppDecl, playerDecl, sb, steps, rules, rng, effectMods(standing, "opponent", oppDecl, playerDecl, sb), momentumModifier(state.momentum || 0, "opponent", sb), -setupBonus);
+  const p = rollSide(playerSheet, playerDecl, oppDecl, sb, steps, rules, rng, [...effectMods(standing, "player", playerDecl, oppDecl, sb), ...groundMods("player")], momentumModifier(state.momentum || 0, "player", sb), setupBonus);
+  const o = rollSide(oppSheet, oppDecl, playerDecl, sb, steps, rules, rng, [...effectMods(standing, "opponent", oppDecl, playerDecl, sb), ...groundMods("opponent")], momentumModifier(state.momentum || 0, "opponent", sb), -setupBonus);
   // CCODE-80 — EVASION IS NOT SOAK (Erik's correction, Aevi's re-authoring of `the_wrong_target`).
   // "Not blocking, not armoring, just not being where they land." Soak reduces damage AFTER a hit lands;
   // evasion means it does not land. Applied HERE, between the rolls and everything downstream, because both
@@ -1111,8 +1122,8 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   }
   momentum = clamp(momentum, -meterMax, meterMax);
 
-  let playerEnergy = Math.max(0, (state.playerEnergy ?? playerSheet.energy ?? 0) - energyCost(playerDecl, sb, steps, rules));
-  let opponentEnergy = Math.max(0, (state.opponentEnergy ?? oppSheet.energy ?? 0) - energyCost(oppDecl, sb, steps, rules));
+  let playerEnergy = Math.max(0, (state.playerEnergy ?? playerSheet.energy ?? 0) - Math.round(energyCost(playerDecl, sb, steps, rules) * (groundHere.player?.energyMult || 1)));
+  let opponentEnergy = Math.max(0, (state.opponentEnergy ?? oppSheet.energy ?? 0) - Math.round(energyCost(oppDecl, sb, steps, rules) * (groundHere.opponent?.energyMult || 1)));
   // CCODE-39 (Erik: "if energy is depleted it shouldn't stop a fight cold… people can fight on with simple strikes
   // and defends"): being spent is a STATE, not a verdict. It is surfaced so the player can yield BY CHOICE, drink
   // something, or keep swinging steel — the engine never decides it for them.
@@ -1681,12 +1692,18 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       // Hold: the dice already rolled are the damage, at the standard cost already charged. A target the craft
       // cannot be aimed at (`deathSave.notForClasses`, a static thing) is never offered the save.
       const dsCfg = sb?.deathSave || {};
-      const dsRungs = dsCfg.rungs || ["lethal", "atrocity"];
       const winRung = String(winDecl?.harmRung || winDecl?.def?.harmRung || "none");
+      // ⛔ R43b (Erik 2026-09-04, CORRECTING R35 — built 2026-09-11, a week after it was ruled): "Don't confuse INSTA-KILL with
+      // BEING ABLE TO KILL. Hunter's Strike is not an insta-kill." THE SAVE FIRES WHERE A `killCost` IS AUTHORED, NOT ON THE RUNG.
+      // `lethal` means the craft can kill you the ordinary way, through damage (`intent.js` gates that cast); a craft that STOPS
+      // you outright opts in by authoring what stopping you costs. ⛔ NO DEFAULT PRICE (R43b): a default re-enrols every lethal
+      // craft, which is the defect this closes. Until today this read `harmRung ∈ deathSave.rungs` — 51 crafts offered the kill,
+      // 28 of them at T1–T2, and a fight between two people who play well ended in two rounds by it. Population now: one.
+      const killCost = winDecl?.killCost || winDecl?.mechanic?.killCost || winDecl?.def?.mechanic?.killCost || null;
       const dsTargetSheet = roundWinner === "player" ? oppSheet : playerSheet;
       const dsNotFor = (dsCfg.notForClasses || []).map(String);
       const dsBarred = !!dsTargetSheet?.static || (dsTargetSheet?.creatureClass && dsNotFor.includes(String(dsTargetSheet.creatureClass)));
-      if (dsCfg.enabled !== false && damage && damage.amount > 0 && !damage.intercepted && dsRungs.includes(winRung) && !dsBarred) {
+      if (dsCfg.enabled !== false && damage && damage.amount > 0 && !damage.intercepted && killCost && !dsBarred) {
         const subs = dsTargetSheet?.subAttributes || {}, attrs = dsTargetSheet?.attributes || {};
         const saveOn = (dsCfg.saveOn || ["strength", "presence"]).map(String);
         const parentOf = { strength: "physical", presence: "social" };
@@ -1720,7 +1737,6 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
         const casterMargin = Number(winRoll?.margin) || 0, saveMargin = Number(save?.margin) || 0;
         const killMargin = casterMargin + mods.reduce((a, m) => a + m.value, 0) - saveMargin;
         const kill = killMargin > 0;
-        const killCost = winDecl?.killCost || winDecl?.mechanic?.killCost || winDecl?.def?.mechanic?.killCost || dsCfg.defaultKillCost || null;
         const ds = { by: roundWinner, rung: winRung, on: targetSide, saveOn: pick.sub || pick.parent, saveValue: pick.value,
           caster: casterMargin, save: saveMargin, mods, killMargin, kill, held: !kill, cost: kill ? (killCost || null) : "standard",
           why: kill ? `the thread is cut — ${winDecl.name || winDecl.function} ends it outright`
@@ -1765,7 +1781,7 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // person to drive off the field. A flat 2 ended 1,595 of 2,000 duels by break; a level-33 figure now takes
   // 17 ticks and a novice 1–3. `breakAtLevelFraction` is the content dial; a kind that authors its own flat
   // `breakAtPressure` (a chase, a standoff) keeps it, and a sheet with no level falls back to the flat number.
-  const breakAtFor = (side) => {
+  const breakAtBase = (side) => {
     const kindFlat = Number((kcfg.pressure || {}).breakAtPressure);
     if (Number.isFinite(kindFlat)) return kindFlat;
     const frac = Number(pcfg.breakAtLevelFraction);
@@ -1779,6 +1795,17 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       return Number.isFinite(cap) && cap > 0 ? Math.min(raw, cap) : raw;
     }
     return pcfg.breakAtPressure ?? 3;
+  };
+  // ⛔ ERIK 2026-09-11: "I want breaking to be the outcome that increases likelihood after a long fight." A flat threshold
+  // only rises with length because ticks pile up; `breakEasesEvery` N makes the threshold ITSELF fall — one tick less for
+  // every N rounds this fight has run, never below `breakEaseFloor` (default 1). A long fight wears a side down; a short
+  // one has to be won. ABSENT MEANS TODAY (no ease).
+  const breakAtFor = (side) => {
+    const base = breakAtBase(side);
+    const every = Number(pcfg.breakEasesEvery);
+    if (!(Number.isFinite(every) && every > 0)) return base;
+    const floor = Math.max(1, Number(pcfg.breakEaseFloor) || 1);
+    return Math.max(Math.min(floor, base), base - Math.floor((Number(state.round) || 0) / every));
   };
   const breakAt = { opponent: breakAtFor("opponent"), player: breakAtFor("player") };
   if (opponentHealth != null && opponentHealth <= 0) resolved = "player";
@@ -1954,7 +1981,7 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // can reintroduce a cycle here. `revealTarget` (the one reader) needs id/name/isPlayer/kind and `why`, all scalar.
   // The in-round code keeps using the live `aimedAt` local, which is deliberately untouched.
   if (aimedAt) o.targetChoice = persistableChoice(aimedAt);
-  const out = { state: newState, unsettled, cooled, player: p, opponent: o, roundWinner, ...(deathSave ? { deathSave } : {}), ...(aimedAt ? { aimedAt } : {}), ...(blindStrike ? { blindStrike } : {}), delta, resolved, effects, pressure, pressureEvent, spent, damage, healing, imposed, inflicted, opened, ...(unreachable ? { unreachable } : {}), deniedAct, opponentHealth, landed: [landedP, landedW, landedO].filter(Boolean),
+  const out = { state: newState, unsettled, cooled, player: p, opponent: o, roundWinner, ...(groundHere.player || groundHere.opponent ? { ground: groundHere } : {}), ...(deathSave ? { deathSave } : {}), ...(aimedAt ? { aimedAt } : {}), ...(blindStrike ? { blindStrike } : {}), delta, resolved, effects, pressure, pressureEvent, spent, damage, healing, imposed, inflicted, opened, ...(unreachable ? { unreachable } : {}), deniedAct, opponentHealth, landed: [landedP, landedW, landedO].filter(Boolean),
     degraded: { player: !!playerDecl.spentFallback, opponent: !!oppDecl.spentFallback },
     // CCODE-80: an evaded blow must SAY it was evaded. An attack that quietly does less is indistinguishable
     // from a bad roll, and the whole point of the three defensive logics is that they read differently.
@@ -2008,6 +2035,15 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
     // guardedness — working at it cannot leave you easier to read than standing there.
     const oppObscuring = isObscureDecl(oppDecl);
     const activeResist = oppObscuring ? Math.max(resist.value, o.margin) : resist.value;
+    // ⛔ ERIK 2026-09-11: "I don't want sensing to be a loss on average." A read that FAILS against someone who was NOT
+    // working at hiding cost you the exchange: the negative setup above handed the foe "they read you first" off nothing
+    // they did — measured, a person's read cost them more often than it paid at every level, so the right play was never
+    // to look. `passiveFailFloor` floors that case: against a foe who did not declare obscure this step, a failed read costs
+    // the step and its energy, no more. ⚠️ AN ACTIVE OBSCURE STILL BITES — that is the conceal result, and SNG-517's bonus
+    // for beating a reader is untouched. ABSENT MEANS TODAY (no floor).
+    const pff = Number(senseCfg.passiveFailFloor);
+    if (!oppObscuring && senseCfg.passiveFailFloor != null && Number.isFinite(pff) && !out.guardedInsteadOfReading && !out.obscuredInsteadOfReading)
+      out.setupBonus = Math.max(out.setupBonus, pff);
     const readerGap = p.margin - activeResist;
     // ⚠️ recorded because SNG-517's null band needs the same number the tie rule used. Two axes, ONE gap -
     // computing it twice is how they would drift apart.
@@ -2019,6 +2055,12 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       : senseTierFromDegree(p.degree, readerGap, sb);
     const grants = turnCfg.bonusOnDegrees || ["crit_success"];
     out.bonusEarned = { player: grants.includes(p.degree), opponent: grants.includes(o.degree) };
+    // ⛔ …AND A DECISIVE READ EARNS THE BONUS ACTION (`decisiveReadEarnsBonus`). The ladder already calls a success by
+    // `tierByDegree.decisiveMargin` a tier-3 read — the crit's own tier — and only the crit earned the bonus. A read that
+    // good is the payoff the turn was built around. Only a READ earns it: a guard or an obscure spent the step on
+    // something else. ABSENT MEANS TODAY (the crit alone).
+    if (senseCfg.decisiveReadEarnsBonus === true && !out.guardedInsteadOfReading && !out.obscuredInsteadOfReading
+      && (out.senseTier ?? 0) >= (senseCfg.tierByDegree?.crit ?? 3)) out.bonusEarned = { ...out.bonusEarned, player: true };
     // ⛔ SNG-517 / CCODE-212 — AND A SUCCESSFUL OBSCURE EARNS ONE TOO. Without it the trade is pure
     // denial: you spend your slot, they lose theirs, nobody gains, and obscure is a tax on both sides
     // rather than a play. `senseBonusFor` states the conditions once; this only routes the answer.

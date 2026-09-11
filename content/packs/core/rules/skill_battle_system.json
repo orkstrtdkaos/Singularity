@@ -494,7 +494,11 @@
     "opponentHealthLoss": 3,
     "opponentEnergyLoss": 8,
     "breakAtLevelFraction": 0.5,
-    "breakAtPressure": 2
+    "breakAtPressure": 2,
+    "_breakEasesEvery": "✅ ERIK 2026-09-11: 'I want breaking to be the outcome that increases likelihood after a long fight.' R34b (ceil(level/2)) asked a level-50 foe for 25 ticks and fights made ~2, so break was 0–1% of wins at every length. breakAtMax 10 caps R34b above level 20; breakEasesEvery 2 takes one tick off the threshold for every 2 rounds fought (never below breakEaseFloor, 1). Measured (fair peers, L5–100, 1,524 fights): break is 21% of wins — 5% of fights won in 1–3 rounds, 9% in 4–6, 26% in 7–9, 43% in 10–12, 56% past 12. A flat cap of 4 gave 30% that did NOT rise (6·30·42·42·28); cap 8 / every 2 gives 36% rising to 91%.",
+    "breakAtMax": 10,
+    "breakEasesEvery": 2,
+    "breakEaseFloor": 1
    },
    "redesignNote": "CCODE-38 (Erik, decisive): 'momentum should be a MODIFIER mechanic, not the primary exit encounter metric.' He ended a fight at 37/45 hp and 90/115 energy — beaten by a meter while holding every real resource. So momentum no longer ENDS anything. It does two things now: (1) asModifier — whoever is ahead carries a named roll bonus (pressure/advantage), the side behind carries the penalty, capped at ±max; (2) filling the meter is a PRESSURE EVENT, not a death — the dominated side takes real attrition (the player loses health, the opponent loses energy/composure), a pressure counter ticks, and the meter resets to resetTo so they are driven back but still IN it. The fight now ends only on things the player can feel and manage: health gone, energy gone, the opponent breaking after breakAtPressure pressure events, a stalemate of mutual exhaustion, or a deliberate exit (Yield / Break away / Finish it).",
    "note": "CCODE-34 (Erik, MEASURED — the SNG-246 widening was not enough because marginScale stayed at 0.5): two d100 rolls differ by ~33 on average, so a TYPICAL round's delta was ~16.5 — past BOTH meterMax and the crush threshold at once. Simulated 4000 fights/dial against the real battleRound: the old 16/0.5/16 ended 47% of fights in ONE round and 90.6% by crush. 16/0.20/20 gives median 4-5 rounds, ~5% one-round ends (mostly vs weak foes — correct), and ~4% crush ends, so an overwhelming blow stays a rare real beat. bidirectional -meterMax..+meterMax; a round shifts it toward the winner by round-margin * marginScale; reaching +/-meterMax resolves. The deliberate Finish-it (the §6b collapse) is a SEPARATE path and still ends a fight in one beat BY CHOICE. DIAL: Aevi/Erik tune to taste."
@@ -630,6 +634,10 @@
    ],
    "concealTierWeight": 6,
    "passiveAttributeWeight": 3,
+   "_passiveFailFloor": "✅ ERIK 2026-09-11: 'I don't want sensing to be a loss on average.' A read that FAILED against a foe who was not hiding handed the foe 'they read you first' off nothing it did — measured (fair peers, one domain a side, both greedy, real places, L5–100): a read cost the reader 51% of the time and paid 45%, mean −0.6. At 0, a failed read against a foe who did not declare obscure costs the step and its energy, no more: mean +3.5, never negative, and reading every turn wins 81% of peer fights to 70% never reading. ⚠️ AN ACTIVE OBSCURE STILL BITES — the conceal result is untouched. Absent = no floor.",
+   "passiveFailFloor": 0,
+   "_decisiveReadEarnsBonus": "⬜ ERIK'S CALL, measured and left OFF. true: a read that succeeds by tierByDegree.decisiveMargin (the crit's own tier 3) earns the bonus action, not only the crit — bonus actions 7% → 28% of reads, and reading every turn wins 88% of peer fights to 70% never reading. It makes skipping the read never right; with the floor alone, energy (4–5 a read) is the only price and fights end with 100+ left, so skipping is rarely right either.",
+   "decisiveReadEarnsBonus": false,
    "senseOppositionNote": "SNG-248 (Erik): a read is opposed by what resists BEING READ - their concealing craft, else a flat passive off their sharpest attribute - NOT by whatever they happened to declare. Reading a foe who is swinging should not mean beating their swing with your eyes.",
    "tierByDegree": {
     "failure": 0,
@@ -761,10 +769,7 @@
   },
   "deathSave": {
    "note": "✅ R35 (Erik 2026-09-04): a landed hit at a lethal rung OFFERS THE INSTA-KILL, resolved by an opposed death save — the caster's landed roll (plus the finisher's situational terms: driven back, run down) against the target's save on the higher of strength/presence, no craft behind it. Kill: the target stops and the caster pays the craft's authored killCost (mechanic.killCost — the_cut_thread: whole pool, sealed until a night's rest). Hold: the dice are the fallback at the standard cost. notForClasses is Aevi's to fill (the_cut_thread's notFor prose: a machine, a figure, a Precursor working).",
-   "rungs": [
-    "lethal",
-    "atrocity"
-   ],
+   "_marker": "⛔ R43b (Erik 2026-09-04, correcting R35; built 2026-09-11): the save fires where a craft AUTHORS a `killCost` — never on `harmRung`. 'Don't confuse INSTA-KILL with BEING ABLE TO KILL. Hunter's Strike is not an insta-kill.' `rungs` and `defaultKillCost` are gone: a rung list is what enrolled 51 lethal crafts, and R43b forbids a default price for the same reason. Population on 2026-09-11: one craft, the_cut_thread.",
    "saveOn": [
     "strength",
     "presence"
@@ -775,7 +780,6 @@
    ],
    "_saveBonus": "the target's own weight on the save. Measured 2026-09-04 (5,000 rounds, equal fresh foes, equal tier): 0 → 66% of landed lethal hits kill · 10 → 58% · 20 → 48% · 30 → 38%. Set to 20 to meet Erik's own calibration for the lethal rung (CCODE-42: 'against a healthy foe of equal level it might be a 50/50'; finisher.odds.baseByRung.lethal is 48). A run-down, pressed×3 target dies ~94%; a physical-20/strength-24 target is barely hit and never dies fresh.",
    "saveBonus": 20,
-   "defaultKillCost": null,
    "_notForClassesWhy": "⛔ AUTHORED BY AEVI 2026-09-05, six days after R35 shipped with this EMPTY — until now the death save could be aimed at anything. ⚑ THE TEST IS THE CRAFT'S OWN PROSE: `the_cut_thread` notFor — 'it cannot be aimed at what has no thread: A MACHINE, A FIGURE, A PRECURSOR WORKING.' A thread is a life that RUNS and can be ENDED. ⛔ BARRED — `feral_construct` (hollow-pace · rust-choir gnats · lantern ambusher · the Kept Hunger · the Gearfather): a MACHINE still running its errand. No thread — a mechanism, and you BREAK a mechanism rather than end it. ⛔ BARRED — `made_weapon` (the Unrefusing Blade · the Pure of Ash · the Severed Choir): a PRECURSOR WORKING. It was never alive to stop. ✅ NOT BARRED — `manifested_creature` · `substrate_warped_beast` · `great_manifestation`: they live, however strangely, and a life that runs can be cut. ⚠️ A great manifestation is HARD to stop, and that is what the opposed save is for — DIFFICULTY IS NOT IMMUNITY. ⛔ NOT BARRED — `narrowed_dead`, AND THIS IS THE DELIBERATE ONE. R29: attending preserves personhood across the crossing, so what comes back is LESS OF SOMEONE, not nothing. ⚑ THERE IS STILL A THREAD THERE — which is the horror and the mercy both — and the Cut Thread in an Ashwarden's hands is exactly the craft that should be able to answer it. `the_gathering` is `narrowed_dead` and its authored counter is WARD, not a blade; barring the save would not have protected it and would have made a mercy impossible. ⚠️ `static` ALREADY BARS THE INERT and is checked separately — this list is for things that MOVE and still have no thread."
   },
   "turn": {

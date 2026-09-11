@@ -97,7 +97,7 @@ evidence and the measured options for each. When one is ruled it gets a paper, a
 | ~~**Q18**~~ | ✅ **RULED 09-05 ("please build it") — a hold grows by one-time acts: the keeper's tier caps a climb every 4 passes, a craft applied lifts a rung once, hands raise yield, a garrison halves raids, the ground scales yield** | v1.9.354 `§74` | `economy.holdStore.growth` · ⬜ what a post can become |
 | **Q17** | a post the fiction names but the GM never claims (the Whistling Woman): a player *Claim this place* affordance, a narrator nudge, or an offer minted from the chronicle | holdings | `DECISIONS_OWED` Q17 |
 | ~~**Q16**~~ | ✅ **RULED 09-05 (R46c) — no cap; the panel groups by craft and any bound exempts the fallbacks** | v1.9.356 `§76` | `WORK_ORDER_20260905b` §3 |
-| **Q15** | which of the 53 `lethal`/`atrocity` crafts keep the rung now that R35 makes it a ~50% insta-kill on a landed hit, and whether `deathSave.defaultKillCost` prices the 52 with no `killCost`; the ⚡ button still offers at lethal | every fight | `DECISIONS_OWED` Q15 · `HOW_IT_WORKS` §3c |
+| ~~**Q15**~~ | ✅ **RULED 09-04 (R43, `RULING_killcost_marker`) · BUILT 2026-09-11 — `killCost` is the insta-kill marker, not the rung.** The death save is the Cut Thread's alone; the other 51 lethal crafts kill through damage; no default price | every fight | `DECISIONS_OWED` Q15 · `HOW_IT_WORKS` §3c |
 | `precursor` is not a tradition | `foothills.json` → `notATradition` |
 
 ➡️ ⚠️ **When a content file carries a `_`-prefixed key that states a RULE rather than a fact, it belongs

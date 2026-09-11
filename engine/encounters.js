@@ -13,6 +13,7 @@ import { currentStage } from "./evolution.js";   // CCODE-265: an earned item st
 import { buildFunctionIndex } from "./functions.js";   // R36 for a human: a party member's crafts say what they bring
 import { encounterKind } from "./encounterFrame.js"; // SNG-247: which bounded thing this is — it picks the exit rule
 import { smartClamp } from "./namematch.js"; // SNG-152
+import { groundForDecl } from "./substrate.js";   // ✅ Erik 2026-09-11: "the ground must reach a fight"
 
 // The verb-to-family index, derived once per vocabulary document. `content.functionVocabulary` is loaded by
 // `state.js` and the built index lives only in the app's own module scope, so a pure engine seam has to build
@@ -230,7 +231,10 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   // ⛔ A BRAIN FOR THE FOE OTHER THAN `opponentPolicy`. `(oppSheet, state, seenTendency, sb, phase) => decl | null`;
   // null falls back to the policy. ABSENT MEANS TODAY. Built so a harness can make the foe weave and surge the
   // way a person does — a fight measured against a foe that never tries is not a measure of a fight.
-  foePolicy = null } = {}) {
+  foePolicy = null,
+  // ✅ ERIK 2026-09-11: "THE GROUND MUST REACH A FIGHT. SKILL SUCCESS DEPENDS ON IT." WHERE the contest is —
+  // `{ location, carried, present, meaningAura }`, the four terms the free-form roll reads. ABSENT MEANS TODAY.
+  ground = null } = {}) {
   const cfg = rules.encounters?.duel || {};
   // SNG-247 Tier 3: a PUZZLE promoted onto the contest engine has no `opponent` block — the thing itself is the
   // other side. Normalized once, here, so every `def.opponent.name` below reads "the sealed door" instead of
@@ -249,6 +253,13 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   const chosen = typeof foePolicy === "function" ? (foePolicy(oppSheet, state, seenTendency, sb, phase) || null) : null;
   // both declarations pass through `enrichDecl` whichever brain chose the foe's — §60 stands on that
   const oppDecl = chosen ? enrichDecl(chosen, abilities) : enrichDecl(opponentPolicy(oppSheet, state, seenTendency, sb), abilities);
+  // ✅ THE GROUND, BOTH SIDES — computed here, where both declarations are final and the content is in hand. The player's
+  // craft carries what they carry; the foe's carries nothing. `battleRound` names each as a line on its own roll.
+  const where = ground && ground.location ? ground : null;
+  const groundNow = where ? {
+    player: groundForDecl(playerDecl, character, { content, location: where.location, carried: where.carried || 0, present: where.present || 0, meaningAura: where.meaningAura || 0 }),
+    opponent: groundForDecl(oppDecl, null, { content, location: where.location, carried: 0, present: where.present || 0, meaningAura: where.meaningAura || 0 }),
+  } : null;
   const before = character.energy ?? 0;
   // ⛔ CCODE-253 — DERIVED HERE, NEVER PASSED IN, because this wrapper's own comment (three lines down)
   // records that it has silently eaten a forwarded option TWICE. I made it three: CCODE-250 gave
@@ -337,6 +348,7 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   const setupWithRead = reader ? readBonus : setupBonus;
   const r = battleRound({
     playerDecl, oppDecl,
+    ground: groundNow,
     // ⚠️ THE FOLDED FIGHT WITHOUT BEING NARRATED. Erik: "you only have so much focus."
     folded: split ? split.folded : null,
     // one ally means "just you", and `chooseTarget` returns the lone-target case — byte-identical to before.
@@ -572,7 +584,7 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   s.log = [...(state.log || []), `r${state.round}: ${playerDecl.function} vs ${oppDecl.function} → momentum ${Math.round(s.momentum)}${outcome ? " — " + outcome : ""}`].slice(-12);
   return { state: s, player: r.player, opponent: r.opponent, oppDecl, ended, outcome, deltas, events, roundWinner: r.roundWinner, effects: r.effects || [], landed: r.landed || [], pressure: r.pressure, pressureEvent: r.pressureEvent, spent: r.spent, degraded: r.degraded, setupBonus: r.setupBonus, bonusEarned: r.bonusEarned, senseTier: r.senseTier, senseResist: r.senseResist, damage: r.damage,
     // ✅ R35: the death save and the seal it may have left on the player — the ninth and tenth things this seam carries.
-    deathSave: r.deathSave || null, sealed: r.state?.playerSealed === true,
+    deathSave: r.deathSave || null, sealed: r.state?.playerSealed === true, ground: r.ground || null,
     // ⛔ CCODE-228 — THE FIFTH THROUGH EIGHTH THING THIS SEAM HAS EATEN. The comment above this wrapper already
     // names `effects`, `pressure`, `phase` and `health` as values it silently dropped. `imposed`, `inflicted`,
     // `opened` and `deniedAct` were the next four: `battleRound` computes an imposition on EVERY round, and

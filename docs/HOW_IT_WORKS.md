@@ -480,7 +480,7 @@ working papers; **this is the answer.**
 | 09-08 | ✅ **ONE ROSTER, DERIVED; THE OPPONENT GATE; R41's FORM; THE VEIL LOADED** | Erik: *"all NPCs should at least be referenced from a single source list… even if we need to keep separate lists for code"* · *"any condition must be an opposed roll"* stands unbuilt (§A) | `scripts/roster.mjs` reads six files from disk and asks `personOpponentFor` for each; 144 records, 125 reachable, **40 would fight at level 1** (ratchet, Aevi's §2 owns it); `npcs/legends.json`'s five are read by NOTHING and Corvane is a hinge on 4 of 6 arcs (§10 gap); `notAnOpponent: true` refuses by name; a Sovereign is ONE record with `forms.diminished`/`forms.final` chosen by the arc's live stage; `the_veil` + `power_cosmology` loaded, attached, and on the GM's ask view | `§147` · `§59` refixtured on Sister Alder · `roster --check` is a suite | §10 gains the hinge gap; docs/ROSTER.md is generated between markers, prose kept above |
 | 09-08 | ✅ **THE FORTY ARE DERIVED, NOT AUTHORED — ROLE → TIER → THE CHAIN THAT ALREADY RAN** | Erik: *"I thought you were going to have him make the generative engine build out the remaining empty NPCs?"* · Aevi, correcting her own spec: *"NOT A MISSING SHEET. NOT A MISSING KIT. ONE MISSING FIELD."* | 40 of 40 level-1 records were level 1 for one reason — no `tier` — while `tierFloor` already fired for the 64 who had one. `rules/tier_signals.json` (CONTENT, correctable without code) → `tierFromRole` → `derivedLevel`, consulted ONLY where a record is silent. **40 → 0**, ratchet tightened; 19 regional · 12 notable · 9 heroic. Guards: authored tier and level both outrank it; default `notable`; a hard `ceiling: heroic` so no regex reaches epic/legendary/mythic; `tierDerived` on the SHEET, never stamped onto the record; no code fallback, so an absent table derives nothing | `§148` · `§147`'s level-1 ratchet 40→0 | ⚠ **and my roster column was too generous**: R47's bare `_strike` was counting as a kit, so 62 records read as armed when they have no real craft — corrected, and it makes `domains` on the legends the same one-field problem one tier up |
 
-**Last verified: 2026-09-11 · v1.9.447 · 429 crafts.**
+**Last verified: 2026-09-11 · v1.9.448 · 429 crafts.**
 
 ---
 
@@ -950,10 +950,14 @@ choice, not a default. The project has ruled three times against a wall the game
 | **an authored soak** | becomes the LAYERS the damage block reads (`layersFor(soak)`), not threat's | Veth's 11 is `[4, 4, 3]`, not `[1]` |
 | **the player seat** | carries `level`, `health`, `maxHealth`, `soak` | the wielder term scales; ⚠️ `soak` reads a field nothing writes yet |
 
-⚠️ **What a round does NOT read:** the ground. No substrate term enters a skill-battle roll; `substrateForAction` gates
-and penalises FREE actions only. ✅ **`harmRung` now moves a number inside a round (R35, below):** a landed hit at a
-lethal rung is offered the insta-kill through a DEATH SAVE, and the dice are the fallback. The other rungs still only
-grant finishing potential, spent by the deliberate ⚡ Finish it. A fight ends by **health ≤ 0** or by **being driven back
+✅ **The ground reaches the roll (Erik 2026-09-11: *"The ground must reach a fight. Skill success depends on it."*).** Until
+the 11th no substrate term entered a skill-battle roll — `substrateForAction` penalised FREE actions only. Now
+`skillBattleRound` computes each side's verdict with `groundForDecl` (the card's answer — the craft's source, the place,
+what the player carries, who is present) and `battleRound` puts it on the roll as a named line (`the ground here`,
+−`chancePenalty`) and on the energy (× `energyMult`). A bare strike or guard has no source and is not grounded. `§154`.
+⛔ **`harmRung` does not offer the insta-kill (R43, built 2026-09-11):** only a craft that authors a `killCost` does —
+today the Cut Thread — and its dice are the fallback. Every rung grants finishing potential, spent by the deliberate
+⚡ Finish it. A fight ends by **health ≤ 0** or by **being driven back
 `ceil(level / 2)` times** (`breakAtLevelFraction`, R34b) — a flat `breakAtPressure` is the fallback for a sheet with no level.
 
 ✅ **The ground CARD (not the round) also carries the lineage's authored blend** — `power_sources.json`'s `byTradition[t].mix`,
@@ -1007,6 +1011,12 @@ not a breather; a sealed side's crafts fall back as a spent side's do) stay READ
 already rolled are the damage, at the standard cost already charged (14 for the Cut Thread). A `notForClasses` target or a
 static thing is never offered the save; a non-lethal rung is untouched (the ⚡ finisher path stands).
 
+⛔ **R43 (Erik 2026-09-04, correcting R35) — BUILT 2026-09-11, a week late.** *"Don't confuse INSTA-KILL with BEING ABLE
+TO KILL."* The save fires where a craft **authors a `killCost`**, never on `harmRung`; `deathSave.rungs` and
+`defaultKillCost` are gone. Until the 11th the engine still read the rung — 51 lethal crafts (28 at T1–T2) offered the
+kill, and a fight between two people who play well ended in two rounds by it. **Population now: one craft,
+`the_cut_thread`.** What follows about 53 crafts describes the defect R43 closed. `§154`.
+
 **Two crafts left the rung the same afternoon** (Aevi acting on Q15): `slow_cup` and `stopped_breath` are `incapacitating`
 now, with `mechanic.ongoing` — `{ perRound: 1d6, damageType, endsOn: treated | reached }` — *"an ATTRITION kill, not a landed
 one"*. It reads through the ongoing-harm reader (`ongoingHarmOf`: magnitude from the per-round dice, the type, the end carried),
@@ -1027,6 +1037,10 @@ of the Cut Thread?"):**
 | Veth without the Cut Thread | 14.7% | the same shape | 7.3 |
 | Veth without any lethal craft | 51.5% | Pell kills Veth 1,030 (all by Plain Weight) · 836 cap at 60 rounds | 36.4 |
 | death save OFF | 0.1% | Pell worn down by dice and ticks 1,609 · 390 cap | 41.2 |
+
+⚠️ **THE CENSUS ABOVE IS HISTORY (2026-09-11).** It was measured under R35 as built — every lethal craft offering the kill. R43,
+built on the 11th, leaves the save to the Cut Thread alone, and Veth never casts it: a fresh Pell now reaches `§71`'s 40-turn
+cap in 25 of 40 seeds and goes down in none. ⬜ Re-run it before it is quoted again.
 
 ⛔ **The Cut Thread is never cast — 0 of 14,889 Veth declarations.** `opponentPolicy` scores a move by matchup, by
 momentum (press when behind, guard when ahead), by not repeating, and by a rotating variety term; **it has no notion of a

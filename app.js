@@ -40,7 +40,7 @@ import { ITEM_KINDS, itemKindsIn, itemKindLabel, wieldBonusFor, usableCombatItem
 import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive } from "./engine/earnedpower.js"; // SNG-251 §2c/§4: the earned-power economy (ceiling = f(level, craft rank); ~1 evolution/day)
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
-import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor, peoplePresentAt } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
+import { groundForDecl, substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor, peoplePresentAt } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { sceneImage, itemImage, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
 import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, regionExtent, bendRoad, roadNetwork, clipToFrame } from "./engine/worldglobe.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
@@ -128,7 +128,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.447";
+const APP_VERSION = "1.9.448";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7596,6 +7596,20 @@ function substratePenaltyFor(choice, location) {
   return usesAbility ? (substrateForAction(choice, location)?.chancePenalty || 0) : 0;
 }
 
+/** ✅ ERIK 2026-09-11 — "THE GROUND MUST REACH A FIGHT. SKILL SUCCESS DEPENDS ON IT." WHERE a contest is, handed to
+ *  every fight round the way `substrateForAction` hands it to a free action: the place, what you carry (a Waystaff, a
+ *  companion's aura, a hold's field), who is present, the meaning a hold lends. The engine turns it into each side's
+ *  verdict (`groundForDecl`) — one answer for the card, the free roll and the fight. Null away from any place. */
+function sbGround() {
+  const location = hereNow();
+  if (!location || !CONTENT.substrateModel) return null;
+  const comps = activeCompanions(character, CONTENT.companions);
+  return { location,
+    carried: carriedSubstrate(character, CONTENT.items, comps) + holdingFieldDelta(character, location?.id, holdCfgNow()),
+    present: peoplePresentAt(location?.id, { registry: character?.npcRegistry || {}, npcs: CONTENT.npcs || {} }),
+    meaningAura: holdingMeaningAura(character, location?.id, holdCfgNow()) };
+}
+
 /** SNG-149 / CCODE-89 — draw both axes for a Coliseum bout, or null when this is not one.
  *
  *  Gated on the LOCATION rather than on a name match, so a bout is a bout because of where it is fought.
@@ -13601,13 +13615,19 @@ function sbPriceMove(allSkills, fog, st, sb) {
   const theirAttr = Math.max(0, ...Object.values(oppSheet.attributes || {}).map(Number).filter(Number.isFinite));
   const theirTier = Math.max(1, ...((oppSheet.skills || []).map(x => Number(x.tier) || 1)));
   const theirStack = theirAttr * 16 + theirTier * 5;
+  // ✅ ERIK 2026-09-11 — THE GROUND REACHES THE ROLL, SO IT REACHES WHAT YOU SEE BEFORE COMMITTING (SNG-116: a preview that
+  // omits a term the roll pays is a preview that lies). One place per render; each craft's own verdict, the card's answer.
+  const where = sbGround();
   return (s) => {
+    const gv = where && s?.id ? groundForDecl({ ...s, abilityId: s.id }, character, { content: CONTENT, location: where.location, carried: where.carried || 0, present: where.present || 0, meaningAura: where.meaningAura || 0 }) : null;
     const myAttr = Number((character.attributes || {})[s.attribute]) || 0;
-    const mine = myAttr * 16 + ((s.rank ?? s.tier) || 1) * 5 + matchupBonus(s.function, theirFn, sb);   // DUEL §C.2: the rank term, not the tier
+    const mine = myAttr * 16 + ((s.rank ?? s.tier) || 1) * 5 + matchupBonus(s.function, theirFn, sb) - (gv?.chancePenalty || 0);   // DUEL §C.2: the rank term, not the tier · the ground
     const est = estimateExchange({ myStack: mine, theirStack, fogTier, counterCraft: counter, sb });
+    if (gv && gv.chancePenalty) est.ground = gv;
     est.tip = est.show === "none"
       ? `Your senses do not reach this yet — read them first. ${counter ? "" : "A craft that counters what they are doing would also let you judge it."}`
       : `Your read of the odds you WIN this exchange (opposed, with matchup and standing effects). Confidence ${est.confidence}/3${counter ? " — you hold a craft that counters what they are doing, so you can judge this well" : fogTier ? " — from what your read bought you" : ""}.`;
+    if (est.ground) est.tip = `${est.tip || ""} The ground here costs this craft ${est.ground.chancePenalty} (${est.ground.off ? "it will not answer here" : est.ground.side}, ${est.ground.percent}% of its strength).`.trim();
     return est;
   };
 }
@@ -14188,7 +14208,7 @@ async function sbResolveSense() {
   try {
   // ✅ 2026-09-05: the sense step is `playTurn` with only a sense — the harness plays the same step through the same function.
   const played = playTurn(character, enc.def, { sense: decl, content: CONTENT, rules: CONTENT.rules, sb, steps, seenTendency: sbLastPlayerFn, rng: Math.random,
-    day: absoluteWorldDay(), catalog: fullCatalog(), party: seatParty() });
+    day: absoluteWorldDay(), catalog: fullCatalog(), party: seatParty(), ground: sbGround() });
   const rr = played.rr;
   const t = sbTurn();
   t.senseDone = true; t.setupBonus = played.turn.setupBonus || 0; t.bonusEarned = !!played.turn.bonusEarned;
@@ -14280,7 +14300,7 @@ async function sbExecuteTurn() {
   // silently re-place it every round for free, which is the wall the action cost is supposed to prevent.
   if (guardsOpened) enc.state.guardPick = [];
   let rr = skillBattleRound(character.activeEncounter.state, enc.def, aDecl, { character, content: CONTENT, rules: CONTENT.rules, sb, steps, party: seatParty(),
-    seenTendency: sbLastPlayerFn, rng: Math.random, phase: "action", tickEffects: !bDecl, setupBonus: turn.setupBonus || 0 });
+    seenTendency: sbLastPlayerFn, rng: Math.random, phase: "action", tickEffects: !bDecl, setupBonus: turn.setupBonus || 0, ground: sbGround() });
   sbLastPlayerFn = aDecl.function;
   // ⛔ AND THE DECAY. `tickProtections` has existed since CCODE-260 and was CALLED BY NOTHING, so a
   // rank-2 guard with `rounds: 3` would have stood forever — exactly the wall the r2 rung must not be.
@@ -14324,7 +14344,7 @@ async function sbExecuteTurn() {
   // BONUS — a FULL action; it ticks the turn's effects, being the last step.
   if (!ended && bDecl) {
     const br = skillBattleRound(character.activeEncounter.state, enc.def, bDecl, { character, content: CONTENT, rules: CONTENT.rules, sb, steps, party: seatParty(),
-      seenTendency: sbLastPlayerFn, rng: Math.random, phase: "bonus", tickEffects: true });
+      seenTendency: sbLastPlayerFn, rng: Math.random, phase: "bonus", tickEffects: true, ground: sbGround() });
     applyRR(br, bDecl, "Bonus action");
     saveCharacter(character);
     ended = br.ended; endRR = br;
@@ -14421,7 +14441,7 @@ function sbDeclare(skill, { intensity = "standard", scouting = false, finisher =
     const before = enc.state?.opponentHealth ?? 0;
     const solo = skillBattleRound(enc.state, enc.def, { function: skill.function, tier: skill.tier || 1, rank: skill.rank ?? skill.tier ?? 1,
       attribute: skill.attribute || "practical", intensity, name: skill.name, id: skill.id },
-      { character, content: CONTENT, rules: CONTENT.rules, sb: CONTENT.skillBattle.engine, steps: CONTENT.intensity.steps, party: seatParty(), rng: Math.random });
+      { character, content: CONTENT, rules: CONTENT.rules, sb: CONTENT.skillBattle.engine, steps: CONTENT.intensity.steps, party: seatParty(), rng: Math.random, ground: sbGround() });
     const amount = Math.max(0, Math.round(before - (solo.state?.opponentHealth ?? before)));
     lockMyDeclaration({ family: fam, name: skill.name, abilityId: skill.id },
       amount, `${skill.name}${intensity !== "standard" ? ` (${intensity})` : ""}`);
@@ -14437,7 +14457,7 @@ function sbDeclare(skill, { intensity = "standard", scouting = false, finisher =
   // stands, which is exactly today's behaviour.
   Object.assign(decl, resolveDeclRank(decl, { character, catalog: fullCatalog() }));   // CCODE-244/245: what is OWNED bounds what is WANTED
   if (woven) decl.woven = { function: woven.function, tier: woven.tier || 1, name: woven.name, id: woven.id };
-  let rr = skillBattleRound(enc.state, enc.def, decl, { character, content: CONTENT, rules: CONTENT.rules, sb, steps, party: seatParty(), seenTendency: sbLastPlayerFn, rng: Math.random });
+  let rr = skillBattleRound(enc.state, enc.def, decl, { character, content: CONTENT, rules: CONTENT.rules, sb, steps, party: seatParty(), seenTendency: sbLastPlayerFn, rng: Math.random, ground: sbGround() });
   // SNG-230 §6b (Erik: a good roll can end a fight too, easier vs weaker foes): a decisive HARM FINISHER can
   // COLLAPSE the skill-battle EARLY — the round's momentum SWING is mapped to a degree and checked against the
   // foe's collapse floor. A strong swing on the right craft ends it; a lesser swing runs the meter unchanged

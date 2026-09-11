@@ -273,6 +273,11 @@ level, their real kits), `--domain <D>|all`.
 tier` is the legacy alias; **`tierUnlockBands` is the gate**, enforced at learn time (`progression.js`). The harness now
 buys under it.
 
+> ⛔ **SUPERSEDED 2026-09-11.** This finding measured R35 as the engine still ran it. R43 (`RULING_killcost_marker.md`,
+> 09-04) had already moved the death save to an authored `killCost` — one craft, the Cut Thread — and the engine never
+> got the re-gate. Built, the median even fight is 5–6 rounds and the insta-kill 0–2%. See
+> `REPLY_ccode_20260911_death_save_ground_read_break.md`.
+
 ## §8.1 — ⛔ THE FINDING: UNDER REAL PLAY A FIGHT IS 1–3 ROUNDS, DECIDED BY THE DEATH SAVE
 
 **Both sides greedy, a bought kit, peer-matched, patience 30 — every level:**

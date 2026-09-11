@@ -1158,7 +1158,7 @@ console.log("\n── §151 · which path made the hit ──");
   check("§151: …and the default rank delta is the multiplier the content authors, not a number in code", cm151.rankDeltas?.default?.kind === "deepen" && Math.abs(Number(cm151.rankDeltas.default.mult) - 1.35) < 1e-9, JSON.stringify(cm151.rankDeltas?.default));
 
   // ⬜ breakAtMax — FINDING_matrix_rerun §4 shape B, as an INERT dial. Absent: R34b's ceil(level/2) exactly.
-  const bo = (pressureCfg, lvl) => { const sbX = { ...sb151, momentum: { ...sb151.momentum, pressure: { ...sb151.momentum.pressure, ...pressureCfg } } };
+  const bo = (pressureCfg, lvl) => { const sbX = { ...sb151, momentum: { ...sb151.momentum, pressure: { ...sb151.momentum.pressure, breakAtMax: undefined, breakEasesEvery: undefined, breakEaseFloor: undefined, ...pressureCfg } } };   // v1.9.448 authors a cap and an ease: R34b is tested without them
     const r = SB151.battleRound({ playerDecl: { function: "strike", tier: 1, attribute: "physical", intensity: "standard", name: "x" }, oppDecl: { function: "shield", tier: 1, name: "g" },
       playerSheet: { attributes: { physical: 5, mental: 5, social: 5, practical: 5 }, energy: 100, health: 60, level: 10 }, oppSheet: { attributes: { physical: 5, mental: 5, social: 5, practical: 5 }, energy: 100, health: 60, level: lvl, skills: [] },
       state: { momentum: 0, round: 1 }, rules: rules151, sb: sbX, steps: steps151, rng: rng151(9) }); return r.state.breakAt.opponent; };
@@ -1195,7 +1195,7 @@ console.log("\n── §152 · the foe's brain is a forwarded option ──");
   const rng152 = (seed) => () => { seed |= 0; seed = (seed + 0x6D2B79F5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
   const bt152 = rd("engine/battle_turn.js"), enc152 = rd("engine/encounters.js");
   check("§152: ⛔ `playTurn` ACCEPTS `foePolicy` and FORWARDS it to all three phases", /foePolicy = null,/.test(bt152) && (bt152.match(/foePolicy, rng, party, phase:/g) || []).length === 3, `${(bt152.match(/foePolicy, rng, party, phase:/g) || []).length} of 3`);
-  check("§152: …and `skillBattleRound` accepts it and uses it in place of the policy", /foePolicy = null \} = \{\}\) \{/.test(enc152) && /const chosen = typeof foePolicy === "function"/.test(enc152) && /chosen \? enrichDecl\(chosen, abilities\) : enrichDecl\(opponentPolicy\(/.test(enc152));
+  check("§152: …and `skillBattleRound` accepts it and uses it in place of the policy", enc152.includes("  foePolicy = null,") && /const chosen = typeof foePolicy === "function"/.test(enc152) && /chosen \? enrichDecl\(chosen, abilities\) : enrichDecl\(opponentPolicy\(/.test(enc152));
   const enc = Object.entries(C152.encounters || {}).find(([, e]) => e && e.type === "duel" && ENC152.contestSheetFor(e, { content: C152 }));
   if (enc) {
     const [, def] = enc;
@@ -1232,6 +1232,147 @@ console.log("\n── §153 · the upper tail reaches the road ──");
   check("§153: …and the sheet it becomes is level 100, not 35", Number(sheet?.level) === 100, `level ${sheet?.level}`);
   check("§153: ⛑ …while a threat-40 duel is exactly what it was — the floor of 10 stands, nothing else moved", RE153.synthesizeDuelDef({ id: "y153", flavor: "fight", seed: "", opponent: { name: "r", threat: 40 } }).opponent.threat === 40 && RE153.synthesizeDuelDef({ id: "z153", flavor: "fight", seed: "", opponent: { name: "r", threat: 3 } }).opponent.threat === 10);
   check("§153: …and no caller still writes the 70 ceiling", ![rd("engine/random_encounters.js"), rd("engine/encounters.js"), rd("engine/battle_turn.js")].some(src => /Math\.min\(70, /.test(src)));
+}
+/* ══════════ §154 — R43 BUILT: THE DEATH SAVE IS THE CUT THREAD'S · AND THE GROUND REACHES A FIGHT ══════════ */
+// ⛔ ERIK 2026-09-11: "I think you may be confusing a 'lethal' damage tier or rating with an ability to be instantly lethal... the
+// cut thread is one that is instantly lethal and is what the death save is meant for." He had RULED it on 09-04 (R43b: `killCost`
+// is the marker) and the engine still gated the save on the rung — 51 crafts offering the kill. And: "The ground must reach a
+// fight. Skill success depends on it." `substratePenalty` reached free actions only; `rollSide` never saw it.
+console.log("\n── §154 · the death save is the Cut Thread's, and the ground reaches a fight ──");
+{
+  const SB154 = await import("../engine/skill_battle.js");
+  const SUB154 = await import("../engine/substrate.js");
+  const BT154 = await import("../engine/battle_turn.js");
+  const ENC154 = await import("../engine/encounters.js");
+  const { loadContentHeadless: lch154 } = await import("./headless_content.mjs");
+  const C154 = await lch154();
+  const sb154 = C154.skillBattle.engine, steps154 = C154.intensity.steps, rules154 = C154.rules, cat154 = C154.abilities || {};
+  const HARMF154 = sb154.damage?.harmFunctions || ["strike", "break"];
+  const seq154 = (arr) => { let i = 0; return () => arr[(i++) % arr.length]; };
+  const mk154 = (o = {}) => ({ attributes: { physical: 6, mental: 6, social: 6, practical: 6 }, subAttributes: { strength: 8, presence: 4 }, energy: 200, maxEnergy: 200, health: 120, maxHealth: 120, level: 30, skills: [{ function: "strike", tier: 5, name: "t5" }], ...o });
+  const round154 = (decl, extra = {}) => SB154.battleRound({ playerDecl: decl, oppDecl: { function: "shield", tier: 1, name: "g" }, playerSheet: mk154(), oppSheet: mk154(), state: { momentum: 0, round: 1 }, rules: rules154, sb: sb154, steps: steps154, rng: seq154([0.02, 0.99, 0.98, 0.99, 0.99, 0.99, 0.5]), ...extra });
+  const declOf154 = (a) => ({ function: (a.functions || []).find(f => HARMF154.includes(f)) || "strike", tier: Math.max(1, Number(a.tier) || 1), rank: 1, attribute: a.attribute || "physical",
+    intensity: "standard", name: a.name || a.id, id: a.id, abilityId: a.id, harmRung: a.harmRung, mechanic: a.mechanic, energyCost: Number(a.energyCost) || 10 });
+  // ── R43: the population is the crafts that AUTHOR a price, and nothing else
+  const lethal154 = Object.values(cat154).filter(a => a && a.harmRung === "lethal" && (a.functions || []).some(f => HARMF154.includes(f)) && !(a.mechanic?.killCost || a.killCost));
+  const landed154 = lethal154.map(a => ({ a, r: round154(declOf154(a)) })).filter(x => x.r.damage?.amount > 0 && x.r.damage?.side === "opponent");
+  check("§154: ⛔ R43b BUILT — of the lethal crafts with NO authored price, none is offered the death save when it lands: they kill through damage (hunters_strike)",
+    landed154.length >= 20 && landed154.every(x => !x.r.deathSave), `${landed154.length} of ${lethal154.length} landed · offered: ${landed154.filter(x => x.r.deathSave).map(x => x.a.id).slice(0, 5).join(",") || "none"}`);
+  const priced154 = Object.values(cat154).filter(a => a && (a.mechanic?.killCost || a.killCost));
+  check("§154: …the priced population is exactly what content authors — on 2026-09-11 one craft, the_cut_thread", priced154.length === 1 && priced154[0].id === "the_cut_thread", priced154.map(a => a.id).join(","));
+  const cut154 = round154(declOf154(cat154.the_cut_thread));
+  check("§154: …and the Cut Thread IS offered it on a landed hit", !!cut154.deathSave && cut154.damage?.amount > 0, JSON.stringify({ ds: !!cut154.deathSave, amt: cut154.damage?.amount }));
+  const code154 = rd("engine/skill_battle.js").split(String.fromCharCode(10)).filter(l => !l.trim().startsWith("//")).join(" ");
+  check("§154: ⛔ the engine reads no rung list and no default price (R43b: a default re-enrols every lethal craft)", !code154.includes("dsCfg.rungs") && !code154.includes("defaultKillCost"));
+  // ── the ground reaches the roll: find a real craft starved in one real place and at full strength in another
+  const locs154 = Object.values(C154.locations || {});
+  let probe154 = null;
+  for (const a of Object.values(cat154)) {
+    if (!a?.tradition || !(a.functions || []).some(f => HARMF154.includes(f)) || a.mechanic?.killCost) continue;
+    const who = { abilities: [{ abilityId: a.id, level: 1 }] };
+    const at = locs154.map(l => ({ l, g: SUB154.groundForDecl({ ...a, abilityId: a.id, rank: 1 }, who, { content: C154, location: l }) })).filter(x => x.g);
+    const thin = at.find(x => x.g.chancePenalty >= 20 && !x.g.off), full = at.find(x => x.g.chancePenalty === 0);
+    if (thin && full) { probe154 = { a, thin, full }; break; }
+  }
+  check("§154: the probe found a craft starved in one real place and at full strength in another (not vacuous)", !!probe154,
+    probe154 ? `${probe154.a.id}: ${probe154.thin.l.id} −${probe154.thin.g.chancePenalty} ×${probe154.thin.g.energyMult.toFixed(2)} · ${probe154.full.l.id} 0` : "none");
+  if (probe154) {
+    const { a, thin, full } = probe154;
+    const d = declOf154(a);
+    const noG = round154(d), gThin = round154(d, { ground: { player: thin.g, opponent: null } }), gFull = round154(d, { ground: { player: full.g, opponent: null } });
+    const line = (r, side = "player") => (r[side]?.effectMods || []).find(m => String(m.label).startsWith("the ground here"));
+    check("§154: ⛔ THE GROUND REACHES THE ROLL — starved ground is a NAMED line on the player's roll, and the margin moves by exactly its penalty",
+      !!line(gThin) && line(gThin).value === -thin.g.chancePenalty && gThin.player.margin === noG.player.margin - thin.g.chancePenalty,
+      JSON.stringify({ line: line(gThin), m0: noG.player?.margin, m1: gThin.player?.margin }));
+    const spent = (r) => 200 - r.state.playerEnergy - (r.pressureEvent?.side === "player" ? (r.pressureEvent.energyLoss || 0) : 0);
+    check("§154: …and the strain reaches the pool — the craft costs its standard × the ground's energy multiplier",
+      thin.g.energyMult > 1 && spent(gThin) === Math.round(spent(noG) * thin.g.energyMult), JSON.stringify({ base: spent(noG), thin: spent(gThin), mult: thin.g.energyMult }));
+    check("§154: ⛑ full ground adds no line and moves nothing — and ABSENT MEANS TODAY (no `ground`, no receipt field)", !line(gFull) && gFull.player.margin === noG.player.margin && !noG.ground && !!gThin.ground);
+    check("§154: …a bare strike has no source — `groundForDecl` answers null (steel and wit do not care what the lattice is doing, SNG-089)",
+      SUB154.groundForDecl({ function: "strike", id: "_strike" }, null, { content: C154, location: thin.l }) === null);
+    const oppG = round154(d, { ground: { player: null, opponent: thin.g } });
+    check("§154: …the FOE's craft stands on the same ground — the line lands on the foe's roll", line(oppG, "opponent")?.value === -thin.g.chancePenalty && !line(oppG));
+    // on the production path: playTurn at a starved place carries the verdict the card gives, onto the receipt
+    const encDef = Object.values(C154.encounters || {}).find(e => e && e.type === "duel" && ENC154.contestSheetFor(e, { content: C154 }));
+    if (encDef) {
+      const hero = { id: "h154", name: "H", level: 12, attributes: { practical: 5, physical: 5, mental: 5, social: 5 }, subAttributes: {}, alignment: {}, health: 300, maxHealth: 300, energy: 400, maxEnergy: 400,
+        abilities: [{ abilityId: a.id, level: 1 }], inventory: [], codex: { schemaVersion: 1, topics: {} } };
+      hero.activeEncounter = { defId: encDef.id, state: ENC154.startEncounter(encDef, { oppSheet: ENC154.contestSheetFor(encDef, { content: C154 }) }) };
+      const played = BT154.playTurn(hero, encDef, { action: d, intensity: "standard", content: C154, rules: rules154, sb: sb154, steps: steps154, rng: seq154([0.3, 0.6, 0.5, 0.4]), day: 100, catalog: cat154, party: null, ground: { location: thin.l } });
+      const g = played.rr?.ground?.player;
+      check("§154: ⛔ ON THE PRODUCTION PATH — playTurn at a starved place puts the craft's verdict on the receipt, the same penalty the card gives",
+        !!g && g.chancePenalty === thin.g.chancePenalty, JSON.stringify(g));
+    }
+  }
+  // ── the seam, which has eaten a forwarded option five times
+  const enc154 = rd("engine/encounters.js"), bt154 = rd("engine/battle_turn.js"), app154 = rd("app.js");
+  check("§154: ⛔ THE SEAM — skillBattleRound ACCEPTS `ground`, computes BOTH sides with `groundForDecl`, and HANDS it to battleRound",
+    enc154.includes("ground = null } = {}) {") && enc154.split("groundForDecl(").length - 1 === 2 && enc154.includes("    ground: groundNow,"));
+  check("§154: …playTurn forwards it to all three phases", bt154.split(", ground, tickEffects").length - 1 === 3);
+  check("§154: …and every fight round the app plays carries `ground: sbGround()` — the sense (via playTurn), the action, the bonus, the shared-fight lock, the single declare",
+    app154.split("ground: sbGround()").length - 1 === 5, String(app154.split("ground: sbGround()").length - 1));
+  check("§154: …and the odds the player SEES before committing carry the same ground (SNG-116: a preview that omits a term the roll pays lies)",
+    app154.includes("- (gv?.chancePenalty || 0);") && app154.includes("groundForDecl({ ...s, abilityId: s.id }, character"));
+}
+/* ══════════ §155 — THE READ IS NOT A LOSS ON AVERAGE (the floor, the conceal result, the decisive read) ══════════ */
+// ⛔ ERIK 2026-09-11: "I don't want sensing to be a loss on average... likely by balancing against conserving the energy by
+// skipping or dialing in the conceal results and the bonus action." A failed read handed the foe "they read you first" off
+// nothing the foe did, so a person's right play was never to look. Two dials; both ABSENT MEANS TODAY.
+console.log("\n── §155 · the read is not a loss on average ──");
+{
+  const SB155 = await import("../engine/skill_battle.js");
+  const rules155 = rj("content/packs/core/rules/resolution.json"), sbe155 = rj("content/packs/core/rules/skill_battle_system.json").engine, steps155 = rj("content/packs/core/rules/intensity_scaling.json").steps;
+  const seq155 = (arr) => { let i = 0; return () => arr[(i++) % arr.length]; };
+  const me155 = { attributes: { physical: 8, mental: 8, social: 8, practical: 8 }, subAttributes: {}, energy: 200, maxEnergy: 200, health: 120, maxHealth: 120, level: 30, skills: {} };
+  const foe155 = { attributes: { physical: 6, mental: 6, social: 6, practical: 6 }, subAttributes: {}, energy: 200, maxEnergy: 200, health: 120, maxHealth: 120, level: 30, skills: [{ function: "strike", tier: 3, name: "t3" }] };
+  const read155 = { function: "reveal", tier: 1, rank: 1, attribute: "mental", intensity: "standard", name: "a read" };
+  const swing155 = { function: "strike", tier: 3, attribute: "physical", intensity: "standard", name: "a swing" };
+  const hide155 = { function: "conceal", tier: 2, attribute: "social", intensity: "standard", name: "a hiding", obscure: true };
+  const sense155 = (sb, oppDecl, rolls, playerDecl = read155) => SB155.battleRound({ playerDecl, oppDecl, playerSheet: me155, oppSheet: foe155, state: { momentum: 0, round: 1 }, rules: rules155, sb, steps: steps155, rng: seq155(rolls), phase: "sense", tickEffects: false });
+  const withDials = (d) => { const ss = { ...(sbe155.senseStep || {}) }; delete ss.passiveFailFloor; delete ss.decisiveReadEarnsBonus; return { ...sbe155, senseStep: { ...ss, ...d } }; };
+  const bare = withDials({});
+  const FAIL = [0.99, 0.10, 0.5, 0.5];
+  const lo = sense155(bare, swing155, FAIL);
+  check("§155: the probe's failed read costs the exchange without the dial (a negative setup) — not vacuous", lo.setupBonus < 0, String(lo.setupBonus));
+  const fl = sense155(withDials({ passiveFailFloor: 0 }), swing155, FAIL);
+  check("§155: ⛔ `passiveFailFloor` 0 — a failed read against a foe who is NOT hiding costs the step and its energy, not the exchange", fl.setupBonus === 0, String(fl.setupBonus));
+  const ob = sense155(bare, hide155, FAIL), obF = sense155(withDials({ passiveFailFloor: 0 }), hide155, FAIL);
+  check("§155: ⚑ …but an ACTIVE obscure still bites — the floor never reaches the conceal result",
+    !!obF.obscuredBy && obF.setupBonus === ob.setupBonus && obF.setupBonus < 0, JSON.stringify({ ob: ob.setupBonus, obF: obF.setupBonus }));
+  let dec155 = null;
+  for (let i = 6; i <= 50 && !dec155; i++) { const r = i / 100; const x = sense155(bare, swing155, [r, 0.5, 0.5, 0.5]); if (x.player?.degree === "success" && x.senseTier >= 3) dec155 = { r, x }; }
+  check("§155: the probe found a DECISIVE read that is not a crit (a success earning tier 3) — not vacuous", !!dec155, dec155 ? `roll ${dec155.r} · tier ${dec155.x.senseTier}` : "none");
+  if (dec155) {
+    check("§155: ⛑ ABSENT MEANS TODAY — a decisive read that is not a crit earns no bonus action", dec155.x.bonusEarned?.player === false);
+    const dB = sense155(withDials({ decisiveReadEarnsBonus: true }), swing155, [dec155.r, 0.5, 0.5, 0.5]);
+    check("§155: ⛔ `decisiveReadEarnsBonus` — the same read now earns the bonus action", dB.bonusEarned?.player === true && dB.senseTier >= 3);
+    const guard = sense155(withDials({ decisiveReadEarnsBonus: true, passiveFailFloor: 0 }), swing155, [dec155.r, 0.5, 0.5, 0.5],
+      { function: "shield", tier: 1, attribute: "mental", intensity: "standard", name: "a guard" });
+    check("§155: …only a READ earns it — a guard on the sense step reads nothing and earns no bonus", !!guard.guardedInsteadOfReading && guard.setupBonus === 0 && guard.bonusEarned?.player !== true);
+  }
+}
+/* ══════════ §156 — A LONG FIGHT WEARS A SIDE DOWN: THE BREAK EASES WITH THE ROUNDS ══════════ */
+// ⛔ ERIK 2026-09-11: "I want breaking to be the outcome that increases likelihood after a long fight." A flat threshold only
+// rises with length because ticks pile up; `breakEasesEvery` N makes the threshold itself fall — one tick less every N
+// rounds fought, never below `breakEaseFloor` (1). ABSENT MEANS TODAY.
+console.log("\n── §156 · a long fight wears a side down ──");
+{
+  const SB156 = await import("../engine/skill_battle.js");
+  const rules156 = rj("content/packs/core/rules/resolution.json"), sbe156 = rj("content/packs/core/rules/skill_battle_system.json").engine, steps156 = rj("content/packs/core/rules/intensity_scaling.json").steps;
+  const seq156 = (arr) => { let i = 0; return () => arr[(i++) % arr.length]; };
+  const sheet156 = { attributes: { physical: 6, mental: 6, social: 6, practical: 6 }, subAttributes: {}, energy: 200, maxEnergy: 200, health: 500, maxHealth: 500, level: 30, skills: [{ function: "shield", tier: 1, name: "g" }] };
+  const guard156 = { function: "shield", tier: 1, attribute: "physical", intensity: "standard", name: "a guard" };
+  const pr = (d) => { const p = { ...(sbe156.momentum?.pressure || {}) }; delete p.breakEasesEvery; delete p.breakEaseFloor; return { ...sbe156, momentum: { ...sbe156.momentum, pressure: { ...p, breakAtMax: 6, ...d } } }; };
+  const at156 = (sb, round, ticks) => SB156.battleRound({ playerDecl: guard156, oppDecl: guard156, playerSheet: sheet156, oppSheet: sheet156,
+    state: { momentum: 0, round, opponentHealth: 500, pressure: { player: 0, opponent: ticks } }, rules: rules156, sb, steps: steps156, rng: seq156([0.5, 0.5, 0.5, 0.5]) });
+  const t0 = at156(pr({}), 9, 3);
+  check("§156: ⛑ ABSENT MEANS TODAY — nine rounds in, three ticks against a cap of 6 does not break them", t0.state.breakAt?.opponent === 6 && !t0.state.resolved && !t0.pressureEvent, JSON.stringify({ at: t0.state.breakAt, res: t0.state.resolved, pe: !!t0.pressureEvent }));
+  const e9 = at156(pr({ breakEasesEvery: 3 }), 9, 3);
+  check("§156: ⛔ `breakEasesEvery` 3 — nine rounds in, the threshold is 6 − 3 = 3, and three ticks BREAK them", e9.state.breakAt?.opponent === 3 && e9.state.resolved === "player", JSON.stringify({ at: e9.state.breakAt, res: e9.state.resolved }));
+  const e0 = at156(pr({ breakEasesEvery: 3 }), 0, 3);
+  check("§156: …the same three ticks in round one do not — the ease is the fight's LENGTH, not a flat cut", e0.state.breakAt?.opponent === 6 && !e0.state.resolved);
+  const eLong = at156(pr({ breakEasesEvery: 3, breakEaseFloor: 2 }), 60, 1);
+  check("§156: …and it never falls below `breakEaseFloor` — sixty rounds in, one tick is not enough when the floor is 2", eLong.state.breakAt?.opponent === 2 && !eLong.state.resolved);
 }
 /* ══════════ §14 — THE FOLD CANNOT BEAT AN IMMUNITY THE BLOW COULD NOT ══════════ */
 // ⛔ FOUND BY RUNNING AEVI'S TWELVE CRAFTS THROUGH A MELEE-SCALE FIGHT (CCODE-313), which is the whole
@@ -4836,7 +4977,8 @@ console.log("\n── §68 · the combat floor — pools, symmetric pressure, br
   // ── R34b · the break threshold is ceil(level × fraction) of the side being broken
   check("§68: ⛔ R34b — `breakAtLevelFraction` is authored (0.5) and the round reads it",
     pc68.breakAtLevelFraction === 0.5 && /breakAtLevelFraction/.test(rd("engine/skill_battle.js")));
-  check("§68: …a level-30 side breaks at 15, a level-5 side at 3", tickO.state.breakAt?.opponent === 15
+  check("§68: …a level-30 side breaks at 15 by R34b — or at the content's `breakAtMax` where it is lower (10 since v1.9.448) — and a level-5 side at 3",
+    tickO.state.breakAt?.opponent === Math.min(15, Number.isFinite(Number(pc68.breakAtMax)) && Number(pc68.breakAtMax) > 0 ? Number(pc68.breakAtMax) : 15)
     && round68(plain68, guard68, { opp: { level: 5 } }).state.breakAt?.opponent === 3, JSON.stringify(tickO.state.breakAt));
   check("§68: …a sheet with no level falls back to the flat dial", round68(plain68, guard68, { opp: { level: undefined } }).state.breakAt?.opponent === pc68.breakAtPressure);
   check("§68: …a kind that authors its own flat break (a chase) keeps it — the ruling is about fights",
@@ -4853,8 +4995,8 @@ console.log("\n── §68 · the combat floor — pools, symmetric pressure, br
   // ⚠️ Erik revised the bound the same afternoon (double cost, not the pool — §70 measures that shape); this section keeps the
   // whole-pool + seal PATH under test with an explicit fixture, because a craft may still author it.
   check("§68: ⛔ R35 — the_cut_thread carries an authored `mechanic.killCost`", cut68?.harmRung === "lethal" && !!cut68?.mechanic?.killCost);
-  check("§68: …`deathSave` is content — rungs include lethal, the save reads strength/presence, saveBonus is a number",
-    Array.isArray(sb68.deathSave?.rungs) && sb68.deathSave.rungs.includes("lethal") && (sb68.deathSave.saveOn || []).includes("strength")
+  check("§68: …`deathSave` is content — the save reads strength/presence, saveBonus is a number; ⛔ R43b: NO `rungs` list and NO `defaultKillCost` (the marker is an authored killCost)",
+    !("rungs" in (sb68.deathSave || {})) && !("defaultKillCost" in (sb68.deathSave || {})) && (sb68.deathSave.saveOn || []).includes("strength")
       && Number.isFinite(sb68.deathSave.saveBonus) && Array.isArray(sb68.deathSave.notForClasses));
   const lethal68 = { function: "strike", tier: 5, rank: 1, attribute: "mental", intensity: "standard", name: "the Cut Thread", id: "the_cut_thread", energyCost: 14,
     harmRung: "lethal", mechanic: { ...cut68.mechanic, killCost: { energy: "all", sealedUntilRest: true } } };   // the whole-pool shape, explicitly
@@ -4868,12 +5010,12 @@ console.log("\n── §68 · the combat floor — pools, symmetric pressure, br
   check("§68: …the save rolled the higher of strength/presence (strength 8 over presence 4), with no craft behind it",
     k.deathSave.saveOn === "strength" && k.deathSave.saveValue === 8);
   const h = round68(lethal68, guard68, { rng: seq68(HOLD) });
-  const hPlain = round68({ ...lethal68, harmRung: "wounding" }, guard68, { rng: seq68(HOLD) });
+  const hPlain = round68({ ...lethal68, mechanic: { ...lethal68.mechanic, killCost: undefined } }, guard68, { rng: seq68(HOLD) });   // ⛔ R43: lethal, no price authored
   check("§68: ⛔ save HOLDS → the dice are the fallback at the STANDARD cost, not the pool",
     h.deathSave?.held === true && !h.damage?.slain && h.damage.amount > 0 && h.damage.amount < 120 && h.state.opponentHealth === 120 - h.damage.amount - (h.pressureEvent?.healthLoss || 0)
       && h.state.playerEnergy === hPlain.state.playerEnergy && h.state.playerEnergy > 150 && !h.state.playerSealed,
     JSON.stringify({ amt: h.damage?.amount, e: h.state.playerEnergy, plainE: hPlain.state.playerEnergy }));
-  check("§68: …a non-lethal rung is offered no save (the ⚡ finisher path is untouched)", !hPlain.deathSave && !hPlain.damage?.deathSave);
+  check("§68: ⛔ R43 — a LETHAL craft with no authored `killCost` is offered no save: it kills through damage, as hunters_strike does (the ⚡ finisher path is untouched)", hPlain.harmRung !== "x" && !hPlain.deathSave && !hPlain.damage?.deathSave);
   const sbBar = { ...sb68, deathSave: { ...sb68.deathSave, notForClasses: ["machine"] } };
   check("§68: …a class the craft cannot be aimed at (`notForClasses`) gets no save, and takes the dice",
     (() => { const b = round68(lethal68, guard68, { rng: seq68(KILL), opp: { creatureClass: "machine" } }, {}, sbBar); return !b.deathSave && b.damage?.amount > 0 && !b.damage?.slain; })());
@@ -5217,7 +5359,11 @@ console.log("\n── §71 · the harness drives the production path (engine/bat
       const small = BT71.battleSkillsForCharacter({ ...pc71, abilities: pc71.abilities.slice(0, 3), inventory: [] }, { catalog: C71.abilities, rules: rules71, sb: sb71 });
       return big.length >= verbs && big.length > 40; })());
   // ── a duel played through the production path: deterministic, ends in the vocabulary, the knockout reaches the table
-  const play71 = (seed) => { const c = RG71.characterFromPerson(pell71, { catalog: C71.abilities, cfg: cfg71, day: 1 }); return RG71.playDuel({ character: c, target: { id: "veth-ondra", name: veth71.name }, content: C71, rng: RG71.mulberry32(seed), day: 1, maxTurns: 40 }); };
+  // ⚠️ R43 (built 2026-09-11) took the insta-kill off 51 crafts, and a FRESH Pell no longer goes down to Veth inside 40 turns
+  // (0 knockouts in 40 seeds — every one of them came from the death save, and the policy never casts the Cut Thread). This
+  // gate is about WHERE a knockout goes, not how one happens, so Pell walks into the duel at a tenth of his health —
+  // at a quarter, v1.9.448's eased break let him win by breaking Veth (2 knockouts in 40).
+  const play71 = (seed) => { const c = RG71.characterFromPerson(pell71, { catalog: C71.abilities, cfg: cfg71, day: 1 }); c.health = Math.max(1, Math.round((Number(c.maxHealth) || Number(c.health) || 40) * 0.1)); return RG71.playDuel({ character: c, target: { id: "veth-ondra", name: veth71.name }, content: C71, rng: RG71.mulberry32(seed), day: 1, maxTurns: 40 }); };
   const d1 = play71(7), d2 = play71(7);
   check("§71: ⛔ a duel played through `playTurn` is DETERMINISTIC under a seed and ends in the app's outcome vocabulary",
     JSON.stringify(d1.transcript) === JSON.stringify(d2.transcript) && d1.turns >= 1 && ["opponent_fell", "opponent_yielded", "incapacitated", "player_overcome", "stalemate", "cap"].includes(d1.outcome), `${d1.outcome} in ${d1.turns} turns`);

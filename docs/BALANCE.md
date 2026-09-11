@@ -1,6 +1,6 @@
 # BALANCE — the dials, what they actually do, and how to turn one without lying to yourself
 
-**CCode · started 2026-08-30 · v1.9.447**
+**CCode · started 2026-08-30 · v1.9.448**
 
 > Erik: *"we need to build toward balance and use the dials."*
 
@@ -57,8 +57,12 @@ What balance means here is narrower and testable:
 | `momentum.pressure.{player,opponent}HealthLoss` | `skill_battle_system` | **3 / 3** | R34a — a tick costs both sides health, priced alike |
 | `momentum.pressure.{player,opponent}EnergyLoss` | `skill_battle_system` | **8 / 8** (was 0 / 22) | R34a — and energy; `opponentEnergyLoss` may go to 0 (pressure purely positional) |
 | `momentum.pressure.breakAtLevelFraction` | `skill_battle_system` | **0.5** | R34b — break at `ceil(level × f)` of the side being broken; L33 → 17, L5 → 3 |
-| `deathSave.saveBonus` | `skill_battle_system` | **20** | R35 — the target's weight on the save. 0 → 66% of landed lethal hits kill a fresh equal · 10 → 58% · **20 → 48%** · 30 → 38% |
-| `deathSave.rungs` / `saveOn` / `notForClasses` / `defaultKillCost` | `skill_battle_system` | lethal, atrocity / strength, presence / [] / null | which rungs offer the kill; what the target rolls; ⬜ Aevi fills the classes (`notFor` prose); ⬜ a default price for the 52 lethal crafts with no `killCost` (Q15) |
+| `momentum.pressure.breakAtMax` | `skill_battle_system` | **10** (v1.9.448) | caps R34b above level 20 — a level-50 foe asked for 25 ticks when fights make ~2 was a break that could not happen |
+| `momentum.pressure.breakEasesEvery` / `breakEaseFloor` | `skill_battle_system` | **2 / 1** (v1.9.448) | Erik 2026-09-11: *"breaking … increases likelihood after a long fight"* — one tick off the threshold per 2 rounds fought. Break 21% of wins: 5% (1–3 rounds) · 9% · 26% · 43% · **56% past 12** |
+| `senseStep.passiveFailFloor` | `skill_battle_system` | **0** (v1.9.448) | Erik 2026-09-11: *"I don't want sensing to be a loss on average"* — a failed read against a foe who is not hiding costs the step, not the exchange. Read mean −0.6 → +3.5; an active obscure still bites |
+| `senseStep.decisiveReadEarnsBonus` | `skill_battle_system` | **false** · ⬜ Erik's call | true: a decisive read (tier 3) earns the bonus action — bonus 7% → 28% of reads; reading every turn 81% → 88% of peer wins |
+| `deathSave.saveBonus` | `skill_battle_system` | **20** | R35 — the target's weight on the save. 0 → 66% of landed Cut Thread hits kill a fresh equal (R43: the only craft that offers the save) · 10 → 58% · **20 → 48%** · 30 → 38% |
+| `deathSave.saveOn` / `notForClasses` | `skill_battle_system` | strength, presence / feral_construct, made_weapon | what the target rolls; the classes the Cut Thread cannot be aimed at (Aevi, from its `notFor` prose). ⛔ **R43b, built 2026-09-11:** the save fires where a craft AUTHORS `mechanic.killCost` — `rungs` and `defaultKillCost` are gone (a rung list enrolled 51 lethal crafts; a default price would re-enrol them) |
 | `npcStanding.levelPerCompletion` / `levelPerConditionStep` | `resolution` | **1 / 1** (v1.9.348) | R37 — a done assignment, a condition climb on a kept hold; stacks on acquaintance. ⛔ no service-band dial (R37c) |
 | `meaning.*` (base, tags, tier, community, perPerson, presentCap, ceilingFloor) | `the_substrate` | 0.1 · sacred 0.35 / locus 0.2 / cult 0.15 / home 0.1 · settlement 0.15 / region 0.1 / site 0.05 · 0.1 · 0.04 (cap 0.2) · **0.35** | R38 — crude on purpose; Choirheight 0.75, a fringe 0.20. `ceilingFloor` is what a meaningless place still allows a metaphysical craft |
 | `holdStore.yieldByCondition` / `upkeepByKind` | `economy` | **8 / 4 / 2 / 0** · **enterprise 14, post 0** | Q8 — at ordinary demand: +18 / +2 / −6 / −14 per pass (a unit = `useful` 4 × need × scarcity where sold) |

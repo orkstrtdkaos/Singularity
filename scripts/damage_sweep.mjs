@@ -27,6 +27,13 @@
 //   --foes people       fight the authored roster at their level with their real kits
 //   --foe greedy        the foe weaves and surges too (default: the game's opponentPolicy)
 //   --kit bought|all    a level-L person's purchases (tier bands, skill points, ranks) — default under greedy
+//   --foe-kit bought    a synthesized foe becomes a PERSON of its level: a bought kit from one domain, real crafts with a source
+//   --foe-hides         a foe holding an author-OBSCURE craft spends its sense step hiding (the conceal result a read meets)
+//   --ground sample|<id>|none   a real place per fight (seeded) — both sides' crafts stand on its ground (Erik 2026-09-11:
+//                       "the ground must reach a fight"); greedy players weigh each craft's hit by its chance to land there
+//   --sense greedy|always|never  the read measured against skipping it (greedy: read while reads pay)
+//   ⚠️ A FAIR PEER is `--domain all --foe-kit bought --foe-hides --ground sample`: one domain per side. Without `--domain`
+//   the player buys from EVERY domain and always holds a craft at full ground, which reads as a 91–100% peer win.
 //
 // DIAL PATHS: `craftMechanics.…` and `npcStanding.…` read rules.* (the ladder, family defaults, rankDeltas; the foe's health pool);
 // `maxRounds` is this harness's cap; everything else is `skillBattle.engine.…` (damage, momentum.pressure, …).
@@ -38,6 +45,8 @@ import { loadContentHeadless } from "../tests/headless_content.mjs";
 import { battleSkillsForCharacter, declFromSelection, playTurn } from "../engine/battle_turn.js";
 import { startEncounter, contestSheetFor } from "../engine/encounters.js";
 import { synthesizeDuelDef } from "../engine/random_encounters.js";
+import { groundForDecl } from "../engine/substrate.js";
+import { pDiffExceeds } from "../engine/skill_battle.js";
 import { finishOdds } from "../engine/skill_battle.js";
 import { mechanicFor } from "../engine/craftmechanics.js";
 import { personOpponentFor } from "../engine/battle_turn.js";
@@ -72,6 +81,10 @@ const DEBUG = argv.includes("--debug");
 const NO_FINISHER = argv.includes("--no-finisher");   // a person who never attempts the insta-kill, for comparison
 // ⛔ R35: a LETHAL-rung craft rolls the death save on every landed hit — the engine's, not this harness's. `--no-lethal`
 // buys a kit without lethal/atrocity crafts, so an ATTRITION fight can be measured beside a killing one.
+const GROUND = flag("--ground", "none");        // "none" (no place — the old measure) | "sample" (a real place per fight, seeded) | a location id
+const SENSE = flag("--sense", "greedy");        // "greedy" (read while reads pay) | "always" | "never" — the read measured against skipping it
+const FOE_HIDES = argv.includes("--foe-hides");  // a foe holding an OBSCURE craft spends its sense step hiding (the conceal result)
+const FOE_KIT = flag("--foe-kit", "synth");     // "synth" (the synthesized rows) | "bought" (a person of the foe's level with real crafts)
 const NO_LETHAL = argv.includes("--no-lethal");    // the share of max energy a person keeps back before surging / weaving
 let MAX_ROUNDS = 14;                       // the matrix's cap — "a fight longer than this is the finding"
 const STALL_AT = 4;
@@ -147,7 +160,7 @@ function boughtKit(domain, level, cfg) {
   const ev = (a) => { const v = (a.functions || []).find(f => HARM_FNS.has(f)); if (!v) return 0; const m = mechanicFor(a, { verb: v, tier: Number(a.tier ?? a.levelReq) || 1, rank, intensity: "standard", cfg: cfg.rules.craftMechanics || {} }); const f = m?.fields || {}; return f.dice ? ((Number(f.dice.n) || 1) * ((Number(f.dice.d) || 6) + 1) / 2 + (Number(f.plus) || 0)) * (Number(f.mult) || 1) : 0; };
   const harm = pool.filter(a => ev(a) > 0).sort((x, y) => ev(y) - ev(x));
   const reads = pool.filter(a => (a.functions || []).some(f => SENSE_FNS.has(f))).sort((x, y) => (Number(y.tier) || 1) - (Number(x.tier) || 1));
-  const hides = pool.filter(a => (a.functions || []).some(f => f === "conceal" || f === "deceive")).sort((x, y) => (Number(y.tier) || 1) - (Number(x.tier) || 1));
+  const hides = pool.filter(a => a.obscure === true || (a.functions || []).some(f => f === "conceal" || f === "deceive")).sort((x, y) => (y.obscure === true) - (x.obscure === true) || (Number(y.tier) || 1) - (Number(x.tier) || 1));
   const guards = pool.filter(a => (a.functions || []).some(f => f === "shield" || f === "ward" || f === "resist")).sort((x, y) => (Number(y.tier) || 1) - (Number(x.tier) || 1));
   const chosen = []; let left = budget; const take = (a) => { if (!a || chosen.some(c => c.id === a.id)) return; const pr = priceOf(a); if (pr <= left) { chosen.push(a); left -= pr; } };
   take(harm[0]); take(harm[1]); take(reads[0]); take(hides[0]); take(guards[0]);
@@ -176,6 +189,7 @@ function makeSweeper(catalog, body = null) {
 }
 
 const catalog = CONTENT.abilities || {};
+const GROUND_LOCS = Object.values(CONTENT.locations || {}).filter(l => l && l.id).sort((a, b) => String(a.id).localeCompare(String(b.id)));
 const HARM = new Set(CONTENT.skillBattle.engine.damage?.harmFunctions || ["strike", "break"]);
 let runnable;
 if (FOES === "synth") {
@@ -243,13 +257,29 @@ const costOf = (decl, cfg) => Math.round((Number.isFinite(Number(decl?.energyCos
  *  when the energy is there; a finisher when the odds favour it; the bonus action if the read earned one. */
 /** ⛔ THE FOE PLAYS LIKE A PERSON TOO: the hardest hit in its kit, woven with the next, surged when energy allows.
  *  It has no sense step and no inventory in the engine — said in the report rather than invented here. */
-function greedyFoe(cfg) {
+/** ⚑ A PERSON READS THE GROUND. The card tells them what a craft is worth here, so they weigh a hit by its chance to land:
+ *  a penalty p on your roll means beating the other side by p, P(d2 − d1 > p) against an even P at 0. Cached per fight. */
+const LAND0 = pDiffExceeds(0);
+const landOn = (pen) => pDiffExceeds(pen) / LAND0;
+function groundPen(row, where, holder = null) {
+  if (!where?.location || !row) return 0;
+  const k = (holder ? "p:" : "f:") + (row.abilityId || row.id);
+  const m = (where._pen ||= new Map());
+  if (m.has(k)) return m.get(k);
+  const g = groundForDecl({ ...row, abilityId: row.abilityId || row.id }, holder, { content: CONTENT, location: where.location });
+  const v = g ? g.chancePenalty : 0; m.set(k, v); return v;
+}
+function greedyFoe(cfg, where = null) {
   return (oppSheet, state, seenTendency, sb, phase) => {
     if (oppSheet?.static) return null;
+    // ⚑ A PERSON HIDES FROM A READER. In the sense step the foe's own roll only reads you, so a foe holding a craft its
+    // author made OBSCURE spends the step working at being unfound — the conceal result a read is weighed against.
+    if (FOE_HIDES && phase === "sense") { const hide = (oppSheet?.skills || []).find(r => catalog[r.abilityId || r.id]?.obscure === true);
+      if (hide) return { ...hide, intensity: "standard", attribute: hide.attribute || "practical", obscure: true }; }
     const rows = (oppSheet?.skills || []).filter(r => HARM_FNS.has(r.function));
     if (!rows.length) return null;
     const evOf = (r) => { const m = mechanicFor(r.abilityId ? catalog[r.abilityId] : null, { verb: r.function, tier: r.tier || 1, rank: r.rank || 1, intensity: "standard", cfg: cfg.rules.craftMechanics || {} }); const f = m?.fields || {}; return f.dice ? ((Number(f.dice.n) || 1) * ((Number(f.dice.d) || 6) + 1) / 2 + (Number(f.plus) || 0)) * (Number(f.mult) || 1) : (r.tier || 1); };
-    const sorted = [...rows].sort((a, b) => evOf(b) - evOf(a));
+    const sorted = [...rows].sort((a, b) => evOf(b) * landOn(groundPen(b, where)) - evOf(a) * landOn(groundPen(a, where)));
     const lead = sorted[0], second = sorted.find(r => r !== lead && r.function !== lead.function) || sorted[1] || null;
     const energy = state?.opponentEnergy ?? oppSheet?.energy ?? 0, reserve = (oppSheet?.maxEnergy || oppSheet?.energy || 100) * RESERVE;
     const mk = (intensity, woven) => ({ ...lead, intensity, attribute: lead.attribute || "practical", ...(woven ? { woven: { ...second } } : {}) });
@@ -259,15 +289,15 @@ function greedyFoe(cfg) {
     return mk("conserve", false);
   };
 }
-function greedyTurn(c, def, menu, cfg, state, learn = null) {
+function greedyTurn(c, def, menu, cfg, state, learn = null, where = null) {
   const energy = c.energy ?? 0, reserve = (c.maxEnergy || 100) * RESERVE;
-  const harm = menu.filter(r => HARM_FNS.has(r.function) && !r.itemMove).map(r => ({ r, ev: expectedHit(r, cfg) })).sort((a, b) => b.ev - a.ev);
+  const harm = menu.filter(r => HARM_FNS.has(r.function) && !r.itemMove).map(r => ({ r, ev: expectedHit(r, cfg) * landOn(groundPen(r, where, c)) })).sort((a, b) => b.ev - a.ev);
   if (!harm.length) return null;
-  const senses = menu.filter(r => SENSE_FNS.has(r.function) && !r.itemMove).sort((a, b) => (b.tier || 1) - (a.tier || 1) || (String(a.id).startsWith("_sense_") ? 1 : -1));
+  const senses = menu.filter(r => SENSE_FNS.has(r.function) && !r.itemMove).sort((a, b) => groundPen(a, where, c) - groundPen(b, where, c) || (b.tier || 1) - (a.tier || 1) || (String(a.id).startsWith("_sense_") ? 1 : -1));
   // ⚑ A PERSON WHO IS OUT-READ STOPS READING. A failed read hands the foe the setup bonus (battleRound gives the
   // opponent −setupBonus), so reading every turn against a foe who resists better is worse than not looking.
   // Read on the first turn; keep reading only while the reads have paid on average.
-  const worthReading = !learn || learn.reads === 0 || (learn.setupSum / learn.reads) > 0;
+  const worthReading = SENSE === "always" ? true : SENSE === "never" ? false : (!learn || learn.reads === 0 || (learn.setupSum / learn.reads) > 0);
   const sense = (senses.length && worthReading) ? declFromSelection([senses[0]], menu, "standard", { character: c, sb: cfg.sb }) : null;
   const afterSense = energy - (sense ? costOf(sense, cfg) : 0);
   const lead = harm[0].r, second = harm.find(h => h.r.id !== lead.id && h.r.function !== lead.function)?.r || harm[1]?.r || null;
@@ -288,6 +318,17 @@ function greedyTurn(c, def, menu, cfg, state, learn = null) {
 
 /** One bout on the production path, with THIS variant's config. */
 function fight(cfg, encId, def, skill, seed, menu) {
+  // ⚑ `--foe-kit bought`: a synthesized foe of level L becomes a PERSON of level L — a bought kit (the same purchase rules
+  // as yours) from a domain picked by level, in the row shape `battleSkillsFor` builds. Built once per def.
+  if (FOE_KIT === "bought" && def.opponent && !def.opponent._kitDomain && /^synth_L/.test(String(encId))) {
+    const L = Math.max(1, Math.round((Number(def.opponent.threat) || 20) / 2));
+    const dom = DOMAINS[(L * 7) % DOMAINS.length];
+    const kit = boughtKit(dom, L, cfg);
+    def.opponent.skills = kit.abilities.map(k => catalog[k.abilityId]).filter(Boolean).map(a => ({ id: a.id, abilityId: a.id,
+      function: (a.functions || [])[0] || "strike", tier: Math.max(1, Number(a.tier ?? a.levelReq) || 1), rank: kit.rank,
+      attribute: a.attribute || "practical", name: a.name || a.id }));
+    def.opponent._kitDomain = dom;
+  }
   const oppSheet = contestSheetFor(def, { sb: cfg.sb, content: { ...CONTENT, rules: cfg.rules } });
   let body = null;
   if (MATCH && Number.isFinite(Number(oppSheet?.level))) {
@@ -299,27 +340,31 @@ function fight(cfg, encId, def, skill, seed, menu) {
   const c = makeSweeper(catalog, body);
   c.activeEncounter = { defId: def.id, state: startEncounter(def, { oppSheet }) };
   const rng = makeRng(seed);
+  // ✅ THE GROUND (Erik 2026-09-11: "the ground must reach a fight"). A real place per fight, picked from the seed so a
+  // variant and its baseline stand on the same ground. "none" is the old measure: no place, no ground term.
+  const pickLoc = () => { const k = [...String(seed)].reduce((h, ch) => (Math.imul(h, 31) + ch.charCodeAt(0)) >>> 0, 7); return GROUND_LOCS[k % GROUND_LOCS.length]; };
+  const where = GROUND === "none" ? null : { location: GROUND === "sample" ? pickLoc() : (CONTENT.locations?.[GROUND] || null) };
   // ⚠️ THE MENU IS THE CHARACTER'S OWN — a domain kit, a weapon — built here because the body was.
   const myMenu = POLICY === "greedy" ? battleSkillsForCharacter(c, { catalog, rules: cfg.rules, sb: cfg.sb }) : menu;
   let decl = POLICY === "greedy" ? null : declFromSelection([skill], menu, "standard", { character: c, sb: cfg.sb });
   if (POLICY !== "greedy" && !decl) return { error: "no declaration" };
   const pol = { surges: 0, weaves: 0, senses: 0, setup: 0, finishers: 0, turns: 0 };
   const learn = { reads: 0, setupSum: 0 };
-  const foePolicy = FOE_POLICY === "greedy" ? greedyFoe(cfg) : null;
-  const t = { rounds: 0, ended: false, outcome: null, stalled: false, hits: [], foeHits: [], hpStart: c.health, breaks: 0, pressureAt: null };
+  const foePolicy = FOE_POLICY === "greedy" ? greedyFoe(cfg, where) : null;
+  const t = { rounds: 0, ended: false, outcome: null, stalled: false, hits: [], foeHits: [], hpStart: c.health, breaks: 0, pressureAt: null, gP: [], gO: [], gSide: {} };
   let sinceChange = 0, fxCount = 0, hpCount = c.health, oppHp0 = c.activeEncounter.state.opponentHealth ?? 0;
   try {
     while (t.rounds < MAX_ROUNDS && !t.ended) {
       const before = c.activeEncounter.state.opponentHealth ?? 0;
       let turnArgs = { action: decl, intensity: "standard" };
       if (POLICY === "greedy") {
-        const g = greedyTurn(c, def, myMenu, cfg, c.activeEncounter.state, learn);
+        const g = greedyTurn(c, def, myMenu, cfg, c.activeEncounter.state, learn, where);
         if (!g) return { error: "no harm craft in kit" };
         decl = g.action; pol.turns++; if (g.intensity === "surge") pol.surges++; if (g.woven) pol.weaves++; if (g.sense) pol.senses++; if (g.finisher) pol.finishers++;
         turnArgs = { sense: g.sense, action: g.action, bonus: g.bonus, intensity: g.intensity, finisher: g.finisher };
       }
-      const played = playTurn(c, def, { ...turnArgs, content: CONTENT, rules: cfg.rules, sb: cfg.sb, steps: cfg.steps, rng, day: 100, catalog, party: null, foePolicy });
-      if (POLICY === "greedy") { const sb0 = Number(played.turn?.setupBonus) || 0; pol.setup += sb0; if (turnArgs.sense) { learn.reads++; learn.setupSum += sb0; } }
+      const played = playTurn(c, def, { ...turnArgs, content: CONTENT, rules: cfg.rules, sb: cfg.sb, steps: cfg.steps, rng, day: 100, catalog, party: null, foePolicy, ground: where });
+      if (POLICY === "greedy") { const sb0 = Number(played.turn?.setupBonus) || 0; pol.setup += sb0; if (turnArgs.sense) { learn.reads++; learn.setupSum += sb0; (pol.readSetups ||= []).push(sb0); pol.readBonus = (pol.readBonus || 0) + (played.turn?.bonusEarned ? 1 : 0); pol.readCost = (pol.readCost || 0) + costOf(turnArgs.sense, cfg); } }
       if (DEBUG && t.rounds <= 2) {
         const d = played.rr?.damage, a = turnArgs.action;
         console.log(`    [debug ${encId} r${t.rounds}] kit: ${(c.abilities || []).slice(0, 6).map(x => x.abilityId + "@" + x.level).join(" ")}${(c.abilities || []).length > 6 ? " …" : ""}`);
@@ -328,6 +373,7 @@ function fight(cfg, encId, def, skill, seed, menu) {
       }
       t.rounds++;
       const rr = played.rr;
+      for (const rec of played.receipts || []) { const g = rec.rr?.ground; if (!g) continue; if (g.player) { t.gP.push(g.player.chancePenalty); t.gSide[g.player.side] = (t.gSide[g.player.side] || 0) + 1; } if (g.opponent) t.gO.push(g.opponent.chancePenalty); }
       const d = rr?.damage;
       if (d && d.side === "opponent") t.hits.push({ amount: d.amount, tier: decl.tier || 1, path: d.path || null, why: d.pathWhy || null, pop: d.population || null });
       if (d && d.side === "player") t.foeHits.push({ amount: d.amount, tier: rr?.oppDecl?.tier || 1, path: d.path || null, why: d.pathWhy || null, verb: rr?.oppDecl?.function });
@@ -378,6 +424,11 @@ function runVariant(label, dials) {
       if (MATCH) { agg.playerLevels.push(r.playerLevel); (agg.playerHps ||= []).push(r.playerHp); }
       if (r.pol) { const P = (agg.pol ||= { turns: 0, surges: 0, weaves: 0, senses: 0, setup: 0, finishers: 0, energyLeft: 0, n: 0 }); for (const k of ["turns", "surges", "weaves", "senses", "setup", "finishers"]) P[k] += r.pol[k]; P.energyLeft += r.energyLeft; P.n++; }
       if (/player-down/.test(r.how)) agg.playerDown++;
+      { const b = r.rounds <= 3 ? "1–3" : r.rounds <= 6 ? "4–6" : r.rounds <= 9 ? "7–9" : r.rounds <= 12 ? "10–12" : "13+";
+        const H = ((agg.byLen ||= {})[b] ||= { n: 0, won: 0, brk: 0 }); H.n++; if (r.won) H.won++; if (r.how === "break") H.brk++; }
+      if (r.pol?.readSetups) { const Q = (agg.reads ||= { setups: [], bonus: 0, cost: 0, n: 0 }); Q.setups.push(...r.pol.readSetups); Q.bonus += r.pol.readBonus || 0; Q.cost += r.pol.readCost || 0; Q.n += r.pol.readSetups.length; }
+      if (GROUND !== "none") { const G = (agg.ground ||= { you: [], foe: [], side: {}, bySide: {} }); G.you.push(...r.gP); G.foe.push(...r.gO); for (const [k, n] of Object.entries(r.gSide)) G.side[k] = (G.side[k] || 0) + n;
+        const lead = Object.entries(r.gSide).sort((x, y) => y[1] - x[1])[0]?.[0] || "ungrounded"; const B = (G.bySide[lead] ||= { n: 0, won: 0, rounds: [] }); B.n++; if (r.won) B.won++; B.rounds.push(r.rounds); }
       e.foeLevel = r.foeLevel; e.foeHealth = r.foeHealth; e.breakAt = r.pressureAt;
       if (r.pressureAt != null) agg.breakNeeded.push(r.pressureAt);
       if (r.foeLevel != null) agg.breakGot.push(r.breaks);
@@ -409,6 +460,13 @@ function print(v) {
   console.log(`      win ${pct(a.won, a.fights)} · you down ${pct(a.playerDown, a.fights)} · capped ${pct(a.capped, a.fights)}`);
   if (LAST_KIT) console.log(`      THE KIT (last fight): level ${LAST_KIT ? "" : ""}top tier T${LAST_KIT.top} · rank ${LAST_KIT.rank} · ${LAST_KIT.n} crafts for ${LAST_KIT.spent} of ${LAST_KIT.budget} points · foe brain: ${FOE_POLICY === "greedy" ? "greedy (weaves, surges; no sense step, no weapon — engine facts)" : "the game's opponentPolicy (never weaves, surges only when behind)"}`);
   if (a.pol) console.log(`      HOW YOU PLAYED (${POLICY}${KIT_DOMAIN ? ", kit: " + KIT_DOMAIN : ", kit: every domain"}): sensed ${pct(a.pol.senses, a.pol.turns)} of turns · mean setup bonus ${(a.pol.setup / Math.max(1, a.pol.senses)).toFixed(1)} · surged ${pct(a.pol.surges, a.pol.turns)} · wove ${pct(a.pol.weaves, a.pol.turns)} · finishers tried ${a.pol.finishers} · energy left ${(a.pol.energyLeft / Math.max(1, a.pol.n)).toFixed(0)} per fight`);
+  if (a.reads) { const S2 = [...a.reads.setups].sort((x, y) => x - y); const at = (f) => S2[Math.min(S2.length - 1, Math.floor(f * S2.length))] ?? 0; const pos = S2.filter(x => x > 0).length, neg = S2.filter(x => x < 0).length;
+    console.log(`      THE READ (${SENSE}): ${a.reads.n} reads · setup mean ${mean(S2).toFixed(1)} · p10 ${at(0.1)} · p50 ${at(0.5)} · p90 ${at(0.9)} · paid ${pct(pos, S2.length)} · cost you ${pct(neg, S2.length)} · bonus action ${pct(a.reads.bonus, a.reads.n)} · energy/read ${(a.reads.cost / Math.max(1, a.reads.n)).toFixed(1)}`); }
+  if (a.ground) { const G = a.ground;
+    console.log(`      THE GROUND: your craft ${G.you.length} grounded rolls, penalty mean ${mean(G.you).toFixed(1)} · the foe ${G.foe.length}, mean ${mean(G.foe).toFixed(1)} · your side: ${Object.entries(G.side).sort((x, y) => y[1] - x[1]).map(([k, n]) => k + " " + n).join(" · ")}`);
+    console.log(`        by where you mostly stood: ` + Object.entries(G.bySide).sort((x, y) => y[1].n - x[1].n).map(([k, B]) => { const s3 = [...B.rounds].sort((x, y) => x - y); return `${k} ${B.n} fights · win ${pct(B.won, B.n)} · p50 ${s3[Math.floor(0.5 * s3.length)] ?? "-"}r`; }).join("  |  ")); }
+  if (a.byLen) console.log(`      BY FIGHT LENGTH (rounds: fights · win · break share of wins): ` + ["1–3", "4–6", "7–9", "10–12", "13+"].filter(k => a.byLen[k])
+    .map(k => { const H = a.byLen[k]; return `${k}: ${H.n} · win ${pct(H.won, H.n)} · break ${pct(H.brk, H.won)}`; }).join("  |  "));
   // ⚠️ ACROSS THE BOARD MEANS PER TIER. levelReq == tier for every harm craft, so a level-6 player may hold a T5; the
   // tier spread (T1 ~5 a hit, T5 ~50) is real in play, and no pool or level dial closes it. Shown, not averaged away.
   console.log(`      by the craft's TIER — p50 rounds to a win · inside ${TARGET.lo}–${TARGET.hi} · win%:  ` + Object.keys(a.fightsByTier).sort().map(t => { const w = a.winRoundsByTier[t] || []; const ib = w.filter(r => r >= TARGET.lo && r <= TARGET.hi).length; return `T${t} ${q(w, 0.5)} · ${pct(ib, w.length)} · ${pct(a.fightsByTier[t].won, a.fightsByTier[t].n)}`; }).join("   "));

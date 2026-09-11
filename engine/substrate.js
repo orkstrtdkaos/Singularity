@@ -658,6 +658,35 @@ export function groundCardFor(ability, character, { schools, substrate, location
     chancePenalty: v.chancePenalty, energyMult: v.energyMult, off: v.off, grounded: true };
 }
 
+/** ✅ ERIK 2026-09-11 — "THE GROUND MUST REACH A FIGHT. SKILL SUCCESS DEPENDS ON IT."
+ *
+ *  ⛔ IT NEVER DID. `substratePenalty` was supplied to FREE-FORM actions only (`resolveAction` via the app's
+ *  `substratePenaltyFor`); `rollSide` never saw it, so a craft starved to 13% of its strength — refused outright as a
+ *  free action — rolled at full strength the moment the same craft was declared in a contest. Every power-source ruling
+ *  stopped at the fight's door.
+ *
+ *  ONE ANSWER TO "what is this craft worth here" — the card's (`groundCardFor`) — for EITHER side of a contest: the
+ *  player's craft with what they carry, the foe's with nothing carried; the same place, the same people present, the same
+ *  meaning aura. A declaration with no craft behind it (a bare strike, a raised guard, a synthesized foe's row, a death
+ *  save) has no source and is not grounded — steel and wit do not care what the lattice is doing, the line SNG-089 drew.
+ *  ⚠️ THE LEAD CRAFT ONLY, as the free-form roll reads it (`choice.abilityId || comboAbilities[0]`): a woven second craft
+ *  adds no second ground term. Returns the verdict, or null when the declaration is not grounded here. Pure. */
+export function groundForDecl(decl, holder, { content = null, location = null, carried = 0, present = 0, meaningAura = 0 } = {}) {
+  if (!decl || !location || !content?.substrateModel) return null;
+  const id = decl.abilityId || decl.id || null;
+  // an enriched declaration already carries its craft (`enrichDecl` spreads the def); a bare one is looked up
+  const ab = decl.tradition ? { ...decl, id } : (id ? content.abilities?.[id] || null : null);
+  if (!ab || !ab.tradition) return null;
+  // the foe has no `abilities` list on its sheet: its owned rank is the declaration's, so a per-rank source still reads
+  const who = holder || { abilities: [{ abilityId: id, level: Number(decl.rank) || 1 }] };
+  const g = groundCardFor(ab, who, { schools: content.schools, substrate: content.substrateModel, location,
+    locations: content.locations, powerSources: content.powerSources, foothills: content.foothills,
+    carried: Number(carried) || 0, present: Number(present) || 0, meaningAura: Number(meaningAura) || 0 });
+  if (!g || !g.grounded) return null;
+  return { chancePenalty: g.chancePenalty || 0, energyMult: g.energyMult || 1, off: !!g.off, percent: g.percent, side: g.side,
+    source: g.source, via: g.via, ...(g.meaningBound ? { meaningBound: true } : {}) };
+}
+
 /** ⛔ SNG-381 — THE GROUND UNDER YOUR FEET, FOR THE LOCATION BANNER. Erik: "the current ground's power
  *  sources should be viewable in the location banner. Remember there are bastions of power with auras."
  *

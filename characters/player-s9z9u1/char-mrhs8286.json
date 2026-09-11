@@ -7,8 +7,8 @@
   "nativeTradition": "wright",
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
-  "level": 31,
-  "xp": 3083,
+  "level": 32,
+  "xp": 3111,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -185,10 +185,16 @@
     {
       "abilityId": "dread",
       "level": 1
+    },
+    {
+      "abilityId": "shadowcast-model",
+      "level": 1,
+      "braided": true,
+      "discovered": true
     }
   ],
   "alignment": {
-    "spectrumId": 0.02969164245210642,
+    "spectrumId": 0.028207060329501096,
     "violence_peace": 0.09078381765624999,
     "chaos_order": 0.2642031390370944,
     "mechanical_spiritual": 0.2629700196352162,
@@ -199,14 +205,14 @@
     "demonic_angelic": 0.013499999999999998,
     "value": 0.053420408281249956,
     "spectrum": 0.11337499999999998,
-    "dark_light": -0.05,
+    "dark_light": -0.1,
     "space_time": 0.05
   },
-  "attunement": 30,
-  "maxHealth": 191,
-  "health": 191,
-  "maxEnergy": 282,
-  "energy": 158,
+  "attunement": 31,
+  "maxHealth": 196,
+  "health": 196,
+  "maxEnergy": 287,
+  "energy": 287,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2175,6 +2181,21 @@
       "spread": [],
       "day": 16,
       "worldDay": 73
+    },
+    {
+      "at": "2026-09-11T23:34:00.774Z",
+      "locationId": "gen-whistling-woman-post",
+      "communityId": null,
+      "description": "Forged a novel craft-braiding that manifests shadow as persistent structural model—a threshold-post's purpose made visible and revisable in real time.",
+      "tags": [
+        "innovation",
+        "making",
+        "craft-braiding"
+      ],
+      "weight": 2,
+      "spread": [],
+      "day": 16,
+      "worldDay": 73
     }
   ],
   "relationships": {},
@@ -2317,51 +2338,106 @@
         "player": "Thank Pell for her insights... then use Marrow's wings to fly into the air to get a birds eye view and to inform how you will lay out the site.",
         "summary": "At the Whistling Woman post in late afternoon: Silas thanks Pell for her strategic counsel, takes flight via Marrow's Wings to survey the post's position and role in the relay network, and returns with clear sight on how to develop the threshold—as proof of new-making, not as a fortress.",
         "narration": "You turn to Pell, the gold-hour light catching the edge of her face as she stands at the post's eastern face, still reading the ground. 'You're right,' you say plainly. 'It's not about walls. It's about what it proves.' She nods once—that spare acknowledgment that means she heard you truly—and reaches over to squeeze your shoulder, ironsense already moving on to the next problem.\n\nYou step clear of the threshold and name the wings aloud. The shift is immediate: shadow spreads from your shoulders like something unfurling, dark and structured, feathered with the edges of endings. Your feet leave the ground. The moorland tilts beneath you as you climb—the post shrinking to its true size below, the Made Gate a thread of lighter air half a mile north, the relay network's nodes suddenly visible as pattern.\n\nFrom height, the landscape reads clean. Millbrook sits south and hubward, the smoke from evening fires just beginning to rise. The relay node at the ridge is a clear bump to the north-widdershins. The Whistling Woman post itself sits perfectly positioned—not defending anything, but *witnessing*. The road splits here. The made gate proves something. A working waystation proves something else. From the air you can see where a guard-post would choke the road unnecessarily, where supplies would best be staged, where a second small shelter—not fortress, shelter—could stand without announcing itself.\n\nYou hold the height for one more breath, Pell's figure small below you, Huginn's thought-presence calm and attentive. The air tastes clean. Then you bank the wings and descend, the shadow-form folding back into your shoulders as your boots find the moorland grass again. The reconnaissance is complete."
+      },
+      {
+        "player": "Ask Huginn to bring Deni Cors back to the post.  We have some planning to do.  While she's doing that, spend some time with Pell building a working model of the features of the post and use shadow work to make the model a real thing.",
+        "summary": "At the Whistling Woman post in the gold-hour evening: Silas dispatches Huginn to retrieve Deni Cors, then co-crafts a shadow-model of the post with Pell—a dimensional structure that holds the post's purpose and strategic positions in a form they can walk around and improve. A new technique emerges from braiding Working Model with Shadow Work.",
+        "narration": "You step back from the threshold and look up at Huginn, still perched on the post's roof-edge. The corvid's head tilts—that particular angle that means it has already heard the half-formed thought. 'Deni Cors,' you say plainly. 'Bring her back. We have planning to do.' Huginn's wings spread, dark and methodical, and it launches without ceremony into the moorland air, the wingbeat steady and unhurried. You watch it angle south toward the road, reading the air the way an Ashwarden reads an ending—because that is what Huginn is doing, in its way. Finding the thread and following it home.\n\nPell is already at the table inside when you turn back, pulling out the working materials—chalk, a piece of linen, her own clear reading of what the post needs to become. You settle across from her and begin. The model builds in your hands together: the post's central structure, the relay mechanism's vault, the watch-room sightlines, the threshold-marks Deni set. Pell names the spacing; you hold it in order-sense. She traces the iron paths; you listen through the fuller of Memory where it leans against the bench.\n\nThen you bring Shadow Work to bear—not to shadow a thing that exists, but to give shadow the shape of what you are building. Your hands and Pell's move in concert. The chalk lines on linen become something else: a model that sits in the space between shadow and structure, dark and dimensional, holding the post's whole purpose in a form you can walk around, adjust, improve. It doesn't cast a shadow—it *is* shadow, given weight and intention. The relay mechanism's exact position blooms into clarity. The sightlines from the watch-point resolve. Three possible defensive positions show themselves, not as fortifications but as *vantages*.\n\nYou both step back. The model hovers a handspan above the table, real enough to touch, alive with the work of two crafts braided into one. Pell reaches out and adjusts the eastern threshold slightly—the model shifts with her touch, accepting the change as though it were always meant to be there. She looks at you, and there's approval in the line of her mouth. 'This works,' she says. 'We can build from this.'\n\nThe afternoon light is going long and gold across the moorland. Somewhere to the south, Huginn is reading the air for Deni's path. And in your hands, the post's true shape is finally visible—not a fortress, but a threshold made purposeful.\n\n*✦ New technique discovered: **Shadowcast Model** — it's yours now, ready to use.*\n\n*You feel it settle into you — a new steadiness. (Level 32: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
       }
     ],
     "lastTurn": {
-      "narration": "You turn to Pell, the gold-hour light catching the edge of her face as she stands at the post's eastern face, still reading the ground. 'You're right,' you say plainly. 'It's not about walls. It's about what it proves.' She nods once—that spare acknowledgment that means she heard you truly—and reaches over to squeeze your shoulder, ironsense already moving on to the next problem.\n\nYou step clear of the threshold and name the wings aloud. The shift is immediate: shadow spreads from your shoulders like something unfurling, dark and structured, feathered with the edges of endings. Your feet leave the ground. The moorland tilts beneath you as you climb—the post shrinking to its true size below, the Made Gate a thread of lighter air half a mile north, the relay network's nodes suddenly visible as pattern.\n\nFrom height, the landscape reads clean. Millbrook sits south and hubward, the smoke from evening fires just beginning to rise. The relay node at the ridge is a clear bump to the north-widdershins. The Whistling Woman post itself sits perfectly positioned—not defending anything, but *witnessing*. The road splits here. The made gate proves something. A working waystation proves something else. From the air you can see where a guard-post would choke the road unnecessarily, where supplies would best be staged, where a second small shelter—not fortress, shelter—could stand without announcing itself.\n\nYou hold the height for one more breath, Pell's figure small below you, Huginn's thought-presence calm and attentive. The air tastes clean. Then you bank the wings and descend, the shadow-form folding back into your shoulders as your boots find the moorland grass again. The reconnaissance is complete.",
-      "sceneSummary": "At the Whistling Woman post in late afternoon: Silas thanks Pell for her strategic counsel, takes flight via Marrow's Wings to survey the post's position and role in the relay network, and returns with clear sight on how to develop the threshold—as proof of new-making, not as a fortress.",
+      "narration": "You step back from the threshold and look up at Huginn, still perched on the post's roof-edge. The corvid's head tilts—that particular angle that means it has already heard the half-formed thought. 'Deni Cors,' you say plainly. 'Bring her back. We have planning to do.' Huginn's wings spread, dark and methodical, and it launches without ceremony into the moorland air, the wingbeat steady and unhurried. You watch it angle south toward the road, reading the air the way an Ashwarden reads an ending—because that is what Huginn is doing, in its way. Finding the thread and following it home.\n\nPell is already at the table inside when you turn back, pulling out the working materials—chalk, a piece of linen, her own clear reading of what the post needs to become. You settle across from her and begin. The model builds in your hands together: the post's central structure, the relay mechanism's vault, the watch-room sightlines, the threshold-marks Deni set. Pell names the spacing; you hold it in order-sense. She traces the iron paths; you listen through the fuller of Memory where it leans against the bench.\n\nThen you bring Shadow Work to bear—not to shadow a thing that exists, but to give shadow the shape of what you are building. Your hands and Pell's move in concert. The chalk lines on linen become something else: a model that sits in the space between shadow and structure, dark and dimensional, holding the post's whole purpose in a form you can walk around, adjust, improve. It doesn't cast a shadow—it *is* shadow, given weight and intention. The relay mechanism's exact position blooms into clarity. The sightlines from the watch-point resolve. Three possible defensive positions show themselves, not as fortifications but as *vantages*.\n\nYou both step back. The model hovers a handspan above the table, real enough to touch, alive with the work of two crafts braided into one. Pell reaches out and adjusts the eastern threshold slightly—the model shifts with her touch, accepting the change as though it were always meant to be there. She looks at you, and there's approval in the line of her mouth. 'This works,' she says. 'We can build from this.'\n\nThe afternoon light is going long and gold across the moorland. Somewhere to the south, Huginn is reading the air for Deni's path. And in your hands, the post's true shape is finally visible—not a fortress, but a threshold made purposeful.\n\n*✦ New technique discovered: **Shadowcast Model** — it's yours now, ready to use.*\n\n*You feel it settle into you — a new steadiness. (Level 32: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*",
+      "sceneSummary": "At the Whistling Woman post in the gold-hour evening: Silas dispatches Huginn to retrieve Deni Cors, then co-crafts a shadow-model of the post with Pell—a dimensional structure that holds the post's purpose and strategic positions in a form they can walk around and improve. A new technique emerges from braiding Working Model with Shadow Work.",
       "choices": [
         {
-          "label": "Write to Deni on the new shadow tablet—relay what you've learned about the post's strategic role and ask what materials and crew she'd recommend for the next stage of build.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
-          "difficulty": "very easy",
-          "trivial": true
-        },
-        {
-          "label": "Ask Pell if she wants to stay here and begin laying out defensive positions, or return to Millbrook to brief Calvar and Mara on what you've learned.",
+          "label": "Wait for Huginn and Deni to return—they'll need to see the model and weigh in on the layout.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": "very easy",
-          "trivial": true
+          "opposedDifficulty": null,
+          "intentTags": [
+            "wait",
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Check on The Runner inside—her fever may have broken by now, and she may have a message that needs sending before nightfall.",
+          "label": "Walk the full perimeter with Pell while the model holds—test the sight-lines and defensive vantages it's showing you.",
           "attribute": "practical",
-          "subAttribute": "insight",
+          "subAttribute": "craft",
           "axes": {},
-          "difficulty": "easy"
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "scout",
+            "craft",
+            "careful"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Walk the moorland approach alone while light holds—use Order-Sense to read the relay network's deeper structure and understand how the Whistling Woman post anchors into it.",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "label": "Check on The Runner—her fever was breaking, but the cautery wound needs tending before the day fully closes.",
+          "attribute": "social",
+          "subAttribute": "presence",
           "axes": {},
-          "difficulty": "normal",
-          "abilityId": "order_sense"
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "help",
+            "comfort"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Pell to hold the model steady while you use the shadow tablet to shadow-sheet Mara—tell her the post's purpose is now clear, and ask what resources she can move north in the next few days.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "craft",
+            "lead",
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
-      "deeds": [],
+      "deeds": [
+        {
+          "description": "Forged a novel craft-braiding that manifests shadow as persistent structural model—a threshold-post's purpose made visible and revisable in real time.",
+          "tags": [
+            "innovation",
+            "making",
+            "craft-braiding"
+          ],
+          "weight": 2,
+          "communityId": null
+        }
+      ],
       "characterDeltas": {
         "health": 0,
-        "energy": -9,
+        "energy": -6,
         "inventoryAdd": [],
         "inventoryRemove": [],
-        "xp": 0
+        "xp": 12
       },
       "ledgerEvents": [],
       "questUpdates": [],
@@ -2372,39 +2448,61 @@
       "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "The Whistling Woman post's grounds in late-afternoon gold light—the moorland stretching in every direction, the road south visible in both, the Made Gate a distant thread to the north-widdershins. The post itself solid and provisioned at the center, shadows beginning to lengthen across the grass.",
+        "setting": "The Whistling Woman post's interior at late-afternoon gold light—the table at the center holds a shadow-model of the post's layout, dimensional and touchable, hovering a handspan above the wood. The relay mechanism sits on its shelf. Outside, the moorland stretches in long shadows toward the road south. Huginn is aloft, bearing south.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Standing at the post's eastern face, her attention now on the practical work to come. Present. Waiting for the next decision."
-          },
-          {
-            "name": "Huginn",
-            "state": "Aloft on the post's roof-edge, having watched Silas ascend and descend in the shadow-wings. Settled and attentive."
+            "state": "Standing beside the table, studying the shadow-model with ironsense, making small adjustments and approvals"
           },
           {
             "name": "The Runner",
-            "state": "Asleep inside on the cot, still mending from the fever and the cautery. Unaware of the strategy-work outside."
+            "state": "Asleep on the cot in the back room, fever breaking, raw from the cautery but mending"
           }
         ],
         "objects": [
+          "Shadow-Model of the Whistling Woman Post (dimensional, hovering, touchable, holds the post's layout and vantage-points)",
+          "Memory—the spear (propped against the wall)",
+          "Relay mechanism (on shelf, tested and working)",
           "Shadow Tablet (Deni's pair, on the interior shelf)",
-          "Buried Water Readings (stacked on the table inside)",
-          "Memory—the spear (propped against the wall inside)",
-          "Relay mechanism (silent on shelf, tested and confirmed working)"
+          "Buried Water Readings (on the table)"
         ],
         "threads": [
-          "Logana hunting Bryn Calowell in the southern approach—no word yet on her return",
-          "The convene votes in three days on whether to accept pole-pull as the crisis's source",
-          "Veth now knows the warden-mark was triggered; the March is alerted",
-          "The post's next stage of build—materials, crew, and timeline undefined"
+          "Huginn bearing south to retrieve Deni Cors—ETA uncertain",
+          "The shadow-model holding steady, waiting for Deni's eye and input",
+          "Logana hunting Bryn Calowell in the southern approach—no word yet",
+          "The convene votes in three days on pole-pull as the crisis's source"
         ]
       },
-      "npcUpdates": [],
-      "intentsHeard": [],
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "note": "At the table with Silas, co-crafting the shadow-model of the post. She makes small adjustments with ironsense-reading, and names the work as viable—'We can build from this.' Present, attentive, working partnership.",
+          "learned": [
+            "The post's true strategic value lies in its threshold-proof, not in fortification",
+            "The shadow-model approach lets them refine vantage and layout before materials arrive"
+          ],
+          "skillsObserved": [
+            "co-holding a model through partnership-binding",
+            "reading structural intent through ironsense while another craft weaves"
+          ],
+          "relationshipDelta": 1
+        }
+      ],
+      "intentsHeard": [
+        "pell-ran-marsh"
+      ],
       "factUpdates": [],
-      "placeUpdates": [],
-      "discovery": null,
+      "placeUpdates": [
+        {
+          "note": "The shadow-model of the Whistling Woman post now exists as a working tool—a dimensional structure held by braided Shadow Work and Working Model, showing the post's layout, relay vault, watch-room sightlines, threshold-marks, and potential defensive vantages. The model is responsive to adjustment and serves as the planning base for the post's full development."
+        }
+      ],
+      "discovery": {
+        "name": "Shadowcast Model",
+        "description": "Shadow Work and Working Model braided into a single technique: the practitioner manifests a scale structure in shadow-form, persistent and touchable, that shows a building's or system's complete layout and allows real-time adjustment before the full construction is attempted. The model responds to physical touch and can be refined iteratively. Costs the sum of both component crafts' energy. The model holds until released or the practitioner moves out of sustained attention-range."
+      },
       "codexUpdates": [],
       "holdingOps": [],
       "debtOps": [],
@@ -2418,14 +2516,15 @@
       "unlockPrecursor": null,
       "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "ascent, reconnaissance, descent—the reconnaissance flight itself brief, the conversation unhurried"
+        "hoursPassed": 1,
+        "why": "Co-crafting the shadow-model with Pell takes an hour of focused work as the afternoon moves toward evening"
       },
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": "A figure wreathed in shadow-wings climbing into late-afternoon light above a small waystation on open moorland, the relay network's pattern suddenly visible beneath—roads, nodes, the distant Made Gate catching the gold hour like a held breath.",
+      "imagePrompt": "A woman and a man stand at a rough wooden table in a warded moorland waystation. Between them hovers a shadow-form model—dark, dimensional, detailed—showing a post's layout as though it were built from smoke and ending-sense. Their hands adjust it together. Afternoon gold light streams through the door behind them, casting their shadows long across the threshold.",
+      "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
       "markDefiningMoment": null,
@@ -2433,44 +2532,40 @@
       "offerPromotion": null,
       "offerAcquisition": null,
       "offerIntent": null,
-      "sceneEnded": false,
-      "momentArt": "https://image.pollinations.ai/prompt/A%20figure%20wreathed%20in%20shadow-wings%20climbing%20into%20late-afternoon%20light%20above%20a%20small%20waystation%20on%20open%20moorland%2C%20the%20relay%20network's%20pattern%20suddenly%20visible%20beneath%E2%80%94roads%2C%20nodes%2C%20the%20distant%20Made%20Gate%20catching%20the%20gold%20hour%20like%20a%20held%20breath.%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=2972&nologo=true"
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Whistling Woman post's grounds in late-afternoon gold light—the moorland stretching in every direction, the road south visible in both, the Made Gate a distant thread to the north-widdershins. The post itself solid and provisioned at the center, shadows beginning to lengthen across the grass.",
+      "setting": "The Whistling Woman post's interior at late-afternoon gold light—the table at the center holds a shadow-model of the post's layout, dimensional and touchable, hovering a handspan above the wood. The relay mechanism sits on its shelf. Outside, the moorland stretches in long shadows toward the road south. Huginn is aloft, bearing south.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Standing at the post's eastern face, her attention now on the practical work to come. Present. Waiting for the next deci"
-        },
-        {
-          "name": "Huginn",
-          "state": "Aloft on the post's roof-edge, having watched Silas ascend and descend in the shadow-wings. Settled and attentive."
+          "state": "Standing beside the table, studying the shadow-model with ironsense, making small adjustments and approvals"
         },
         {
           "name": "The Runner",
-          "state": "Asleep inside on the cot, still mending from the fever and the cautery. Unaware of the strategy-work outside."
+          "state": "Asleep on the cot in the back room, fever breaking, raw from the cautery but mending"
         }
       ],
       "objects": [
+        "Shadow-Model of the Whistling Woman Post (dimensional, hovering, touchable, hold",
+        "Memory—the spear (propped against the wall)",
+        "Relay mechanism (on shelf, tested and working)",
         "Shadow Tablet (Deni's pair, on the interior shelf)",
-        "Buried Water Readings (stacked on the table inside)",
-        "Memory—the spear (propped against the wall inside)",
-        "Relay mechanism (silent on shelf, tested and confirmed working)"
+        "Buried Water Readings (on the table)"
       ],
       "threads": [
-        "Logana hunting Bryn Calowell in the southern approach—no word yet on her return",
-        "The convene votes in three days on whether to accept pole-pull as the crisis's source",
-        "Veth now knows the warden-mark was triggered; the March is alerted",
-        "The post's next stage of build—materials, crew, and timeline undefined"
+        "Huginn bearing south to retrieve Deni Cors—ETA uncertain",
+        "The shadow-model holding steady, waiting for Deni's eye and input",
+        "Logana hunting Bryn Calowell in the southern approach—no word yet",
+        "The convene votes in three days on pole-pull as the crisis's source"
       ]
     },
-    "beats": 12
+    "beats": 13
   },
   "clock": {
     "schemaVersion": 1,
     "day": 16,
-    "hour": 18,
+    "hour": 19,
     "realAnchor": null
   },
   "companions": [
@@ -3911,7 +4006,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d15] Named plainly what she needs from the night: food, rest, and Silas present without the weight of the work running through his head. The child responds to whether he is carrying the problem or carrying her.",
         "[d15] At the Whistling Woman post, evening settling to night—Pell has named what the child needs and what she needs from Silas. Present, steady, reaching for more.",
         "[d16] At the Whistling Woman post in deep night—Silas named what the child feels like, and Pell answered plainly. Present, reaching, her grip on his hand steady and complete.",
         "[d16] At the Whistling Woman post in deep night—Pell has eaten well and is moving toward rest, present and unhurried. The child she carries is steady beneath the novel-depth work.",
@@ -3920,25 +4014,26 @@
         "[d16] Sleeping deeply, settled and present, her grip on Silas's hand holding even in rest—asking for more tomorrows, and the three of them held together in the dark.",
         "[d16] At the Whistling Woman post at midday on Day 16: read Silas's attention shift from rest to action. Named what Grael fears ending (the illusion that he ever understood the seal-question). Warned that the moorland's starved lattice will weaken shadowstep, and that breaking the cabinet's warden-mark…",
         "[d16] Watched Silas return from the Archive gambit with the readings in hand. Reading his face, understanding what it cost and what comes next. Present, attentive, not moving.",
-        "[d16] At the Whistling Woman post in late afternoon—walked the grounds with Silas, assessed the post's strategic value, and named it as a threshold that proves the valley can make new things. Her reading: the post's power is not in garrison but in what it *represents*. She understands the stakes."
+        "[d16] At the Whistling Woman post in late afternoon—walked the grounds with Silas, assessed the post's strategic value, and named it as a threshold that proves the valley can make new things. Her reading: the post's power is not in garrison but in what it *represents*. She understands the stakes.",
+        "[d16] At the table with Silas, co-crafting the shadow-model of the post. She makes small adjustments with ironsense-reading, and names the work as viable—'We can build from this.' Present, attentive, working partnership."
       ],
       "knownFacts": [
-        "The moorland's lattice is thin—craft-work there runs starved",
-        "The old warden-mark on the Archive isn't just a lock; it's a witness that alerts the March",
         "The gambit succeeded at cost — the warden-mark was triggered",
         "Veth will know Silas broke into the Archive",
         "The shadow-lattice was weaker than expected; the passage fought him",
         "The Whistling Woman post holds the only made crossing in the valley—that changes its value fundamentally",
         "Defenses here should prioritize intelligence and position over numbers—the post's actual strength is that it exists and shows what's possible",
-        "A garrison post becomes property to defend; a lightly-held threshold becomes proof of new-making"
+        "A garrison post becomes property to defend; a lightly-held threshold becomes proof of new-making",
+        "The post's true strategic value lies in its threshold-proof, not in fortification",
+        "The shadow-model approach lets them refine vantage and layout before materials arrive"
       ],
       "skillsObserved": [
-        "reading a person's craft-sense and understanding what it mea",
-        "speed over broken ground at night",
         "Reading novel craft-strain through ironsense",
         "Steadying a complex making through partnership",
         "Understanding the cost of pushing a craft past its boundarie",
-        "Partnership-binding through physical presence and craft-sens"
+        "Partnership-binding through physical presence and craft-sens",
+        "co-holding a model through partnership-binding",
+        "reading structural intent through ironsense while another cr"
       ],
       "status": "active",
       "statusNote": "At the Whistling Woman post, rested and clear-eyed, assessing and strategizing. Strong and steady.",
@@ -3960,7 +4055,7 @@
         "primary": "ashwarden"
       },
       "domainsSource": "derived",
-      "met": 32
+      "met": 33
     },
     "mara-wells": {
       "id": "mara-wells",
@@ -6306,7 +6401,8 @@
         "[d15] The music-box relay mechanism is a working vocabulary of melodies—each song carries a message across the whistle-mark network. Cylinder and pins can be swapped to change the signal.",
         "[d15] The music-box relay mechanism is confirmed working—the first melody carries 'all is well' across the moorland network and receives an answer from an unseen listener",
         "[d15] The Whistling Woman post is now confirmed operational as a warden-staffed waystation—Silas Weir has arrived and the relay mechanism's first test melody was answered from across the moorland network.",
-        "[d16] The Whistling Woman post now has a second shadow tablet seated on the interior shelf—Deni Cors's pair, enabling secure two-way communication between the post and the wider network."
+        "[d16] The Whistling Woman post now has a second shadow tablet seated on the interior shelf—Deni Cors's pair, enabling secure two-way communication between the post and the wider network.",
+        "[d16] The shadow-model of the Whistling Woman post now exists as a working tool—a dimensional structure held by braided Shadow Work and Working Model, showing the post's layout, relay vault, watch-room sightlines, threshold-marks, and potential defensive vantages. The model is responsive to adjustment…"
       ],
       "flags": {
         "status": "active",
@@ -6499,7 +6595,7 @@
     "lastTickWorldDay": 73,
     "lastCanonWorldDay": 73,
     "lastGenCount": 1774,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "The moorland silence holds a weight—a listening quality that suggests the relay network is not merely a series of posts but something more…",
@@ -7145,19 +7241,6 @@
       }
     },
     "pressureQueue": [
-      {
-        "source": "npc-want",
-        "kind": "npc-want",
-        "subjectId": "calvar",
-        "aimedAtPlayer": true,
-        "urgency": 3,
-        "oneLineHook": "Calvar, unseen for 7 days, has come looking for you — driven by an unmet want: The filtration work done CORRECTLY — he came out of a solitary twenty-year watch for this; sloppiness offends him more than danger.. They arrive now, not content to keep waiting.",
-        "becomes": {
-          "type": "scene",
-          "who": "calvar"
-        },
-        "addedDay": 16
-      },
       {
         "source": "threat-attack",
         "kind": "threat-attack",
@@ -14092,8 +14175,8 @@
     "craft": 10,
     "wits": 6
   },
-  "pendingSubPoints": 0,
-  "skillPoints": 0,
+  "pendingSubPoints": 1,
+  "skillPoints": 2,
   "discoveries": [
     {
       "key": "the-attended-end+the_shadow_work:aerial-transit-via-atten",
@@ -14147,6 +14230,19 @@
       ],
       "discoveredDay": 14,
       "image": "https://image.pollinations.ai/prompt/The%20Received%20Ending%20%E2%80%94%20Deathsense%20and%20The%20Attended%20End%20braided%20into%20a%20single%20reading%3A%20Deathsense%20names%20the%20shape%20of%20an%20ending%20%E2%80%94%20cause%2C%20trajectory%2C%20what%20would%20turn%20it%20aside%20%E2%80%94%20while%20The%20Attended%20End%20names%20what%20the%20ending%20is%20*for*.%20Together%20they%20compose%20both%20at%20once.%20The%20practitioner%20does%20not%20merely%E2%80%A6%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=69946&nologo=true",
+      "_momentShown": true
+    },
+    {
+      "key": "shadow_work+working_model:shadow-manifesting-a-sca",
+      "id": "shadowcast-model",
+      "name": "Shadowcast Model",
+      "description": "Shadow Work and Working Model braided into a single technique: the practitioner manifests a scale structure in shadow-form, persistent and touchable, that shows a building's or system's complete layout and allows real-time adjustment before the full construction is attempted. The model responds to…",
+      "abilities": [
+        "working_model",
+        "shadow_work"
+      ],
+      "discoveredDay": 16,
+      "image": "https://image.pollinations.ai/prompt/Shadowcast%20Model%20%E2%80%94%20Shadow%20Work%20and%20Working%20Model%20braided%20into%20a%20single%20technique%3A%20the%20practitioner%20manifests%20a%20scale%20structure%20in%20shadow-form%2C%20persistent%20and%20touchable%2C%20that%20shows%20a%20building's%20or%20system's%20complete%20layout%20and%20allows%20real-time%20adjustment%20before%20the%20full%20construction%20is%20attempted%E2%80%A6%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=91048&nologo=true",
       "_momentShown": true
     }
   ],
@@ -16093,22 +16189,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 24.236279178945768,
-    "cerebral": 17.56515956059532,
-    "social": 10.385811529074623,
-    "generous": 4.443583283397152,
-    "cautious": 6.746469058968489,
-    "physical": 0.33904211379332044,
-    "risky": 0.9850082180349612,
-    "ruthless": 0.17700032566850246,
-    "carousing": 1.8593253035516597,
-    "amorous": 3.1155086846870015,
-    "patient": 0.595129808373916,
-    "stealth": 0.0000061860023562709,
-    "devotion": 0.2527804802300467,
-    "craft": 2.7940985975680754,
-    "leadership": 2.6765732732100527,
-    "deception": 0.0296238555997793
+    "strategic": 25.630372199472124,
+    "cerebral": 17.126030571580436,
+    "social": 10.126166240847757,
+    "generous": 4.332493701312224,
+    "cautious": 6.5778073324942765,
+    "physical": 0.33056606094848745,
+    "risky": 0.9603830125840871,
+    "ruthless": 0.1725753175267899,
+    "carousing": 1.8128421709628681,
+    "amorous": 3.0376209675698265,
+    "patient": 0.5802515631645682,
+    "stealth": 0.000006031352297364127,
+    "devotion": 0.2464609682242955,
+    "craft": 3.7242461326288736,
+    "leadership": 2.6096589413798013,
+    "deception": 0.028883259209784816
   },
   "aptitudes": [
     "strategist",
@@ -16117,10 +16213,18 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 961,
+  "actionCount": 962,
   "grantsVersion": 1,
   "reconcileVersion": 49,
   "gallery": [
+    {
+      "kind": "discovery",
+      "prompt": "Shadow Work and Working Model braided into a single technique: the practitioner manifests a scale structure in shadow-form, persistent and touchable, that shows a building's or system's complete layou",
+      "url": "https://image.pollinations.ai/prompt/Shadowcast%20Model%20%E2%80%94%20Shadow%20Work%20and%20Working%20Model%20braided%20into%20a%20single%20technique%3A%20the%20practitioner%20manifests%20a%20scale%20structure%20in%20shadow-form%2C%20persistent%20and%20touchable%2C%20that%20shows%20a%20building's%20or%20system's%20complete%20layout%20and%20allows%20real-time%20adjustment%20before%20the%20full%20construction%20is%20attempted%E2%80%A6%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=91048&nologo=true",
+      "caption": "Shadowcast Model",
+      "worldDay": 73,
+      "at": "2026-09-11T23:34:00.782Z"
+    },
     {
       "kind": "moment",
       "prompt": "A figure wreathed in shadow-wings climbing into late-afternoon light above a small waystation on open moorland, the relay network's pattern suddenly visible beneath—roads, nodes, the distant Made Gate",
@@ -16927,8 +17031,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1789169143874,
-  "rev": 1932,
+  "updatedAt": 1789169640800,
+  "rev": 1934,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -20351,9 +20455,9 @@
       "the_open_material": 1,
       "the_called_form": 1,
       "brace": 1,
-      "working_model": 1,
+      "working_model": 2,
       "dawn_surgery": 1,
-      "shadow_work": 1,
+      "shadow_work": 2,
       "braid_deathsense_palework": 1
     },
     "coActivations": {
@@ -20405,13 +20509,14 @@
       "the_shadow_work+the_shielding_word": 1,
       "the_raised_thing+the_shielding_word": 1,
       "the-declared-threshold+the_raised_thing": 1,
-      "braid_deathsense_palework+shadow_work": 1
+      "braid_deathsense_palework+shadow_work": 1,
+      "shadow_work+working_model": 1
     },
     "aspirations": [
       {
         "abilityId": "hunters_strike",
         "since": "2026-07-12T16:27:52.479Z",
-        "progress": 7
+        "progress": 8
       },
       {
         "abilityId": "pattern_sense",
@@ -20447,7 +20552,7 @@
       "the_open_material": 28,
       "the_called_form": 28,
       "brace": 42,
-      "working_model": 67,
+      "working_model": 73,
       "dawn_surgery": 68,
       "shadow_work": 73,
       "braid_deathsense_palework": 73
@@ -20981,6 +21086,74 @@
         "firstFinder": true,
         "worldName": "The Received Ending"
       }
+    },
+    "shadowcast-model": {
+      "id": "shadowcast-model",
+      "name": "Shadowcast Model",
+      "tradition": "cogitant",
+      "powerSystem": "cogitant",
+      "levelReq": 3,
+      "energyCost": 11,
+      "attribute": "mental",
+      "functions": [
+        "make",
+        "conceal"
+      ],
+      "harmRung": "none",
+      "effectTags": [],
+      "nativeOrCombination": "combination",
+      "description": "Shadow Work and Working Model braided into a single technique: the practitioner manifests a scale structure in shadow-form, persistent and touchable, that shows a building's or system's complete layout and allows real-time adjustment before the full construction is attempted. The model responds to…",
+      "tensionNote": "These two do not sit easily together; the joining takes something the parts do not.",
+      "notFor": "What lies outside this braid's own reach — it is not either parent whole, only the single new craft their braiding makes.",
+      "narrationHints": "Shadow Work and Working Model braided into a single technique: the practitioner manifests a scale structure in shadow-form, persistent and touchable, that shows a building's or system's complete…",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Shadowcast Model I",
+          "grants": "Working Model and Shadow Work run as one craft: the move only their joining makes.",
+          "cannot": "What neither parent could do apart.",
+          "functions": [
+            "make",
+            "conceal"
+          ]
+        },
+        {
+          "rank": 2,
+          "name": "Shadowcast Model II",
+          "grants": "The braid deepens; the two crafts answer together more surely.",
+          "cannot": "What neither parent could do apart.",
+          "functions": [
+            "make",
+            "conceal"
+          ]
+        }
+      ],
+      "minted": {
+        "kind": "discovery",
+        "from": [
+          "working_model",
+          "shadow_work"
+        ],
+        "requiresPoles": [
+          "cogitant",
+          "umbral"
+        ],
+        "tension": {
+          "steps": 5,
+          "band": "far",
+          "factor": 1.4
+        },
+        "mintedAt": null,
+        "namedBy": "player",
+        "tier": 3,
+        "emergent": null,
+        "enriched": true,
+        "sourceNames": [
+          "Working Model",
+          "Shadow Work"
+        ],
+        "discoveredFrom": "shadow_work+working_model:shadow-manifesting-a-sca"
+      }
     }
   },
   "precursorAccess": [],
@@ -21104,7 +21277,7 @@
   "syncedAt": 1788658062664,
   "teachers": {},
   "regionsKnown": {
-    "valley": 656,
+    "valley": 657,
     "the_palelands": 6,
     "the_center": 151,
     "the_echo_vale": 14
@@ -21415,10 +21588,10 @@
     {
       "id": "sess-33",
       "startedAt": "2026-09-11T22:48:54.873Z",
-      "lastAt": "2026-09-11T23:25:43.852Z",
+      "lastAt": "2026-09-11T23:34:00.774Z",
       "startDay": 73,
       "endDay": 73,
-      "beats": 7
+      "beats": 8
     }
   ],
   "company": [
@@ -21920,26 +22093,26 @@
     "gen-whistling-woman-post": "https://image.pollinations.ai/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=32614&nologo=true&_cb=1_1"
   },
   "_opEmitted": {
-    "sceneSummary": 335,
-    "choices": 334,
-    "characterDeltas": 166,
-    "scene": 335,
-    "npcUpdates": 300,
+    "sceneSummary": 336,
+    "choices": 335,
+    "characterDeltas": 167,
+    "scene": 336,
+    "npcUpdates": 301,
     "factUpdates": 29,
-    "placeUpdates": 74,
+    "placeUpdates": 75,
     "codexUpdates": 199,
-    "timeOps": 306,
-    "imagePrompt": 26,
-    "sceneEnded": 113,
+    "timeOps": 307,
+    "imagePrompt": 27,
+    "sceneEnded": 114,
     "itemUpdates": 8,
     "questUpdates": 47,
     "offer": 43,
     "moveTo": 20,
     "delegateOps": 4,
-    "deeds": 15,
+    "deeds": 16,
     "standingOps": 5,
     "ledgerEvents": 10,
-    "discovery": 5,
+    "discovery": 6,
     "stageOps": 15,
     "generateRequest": 13,
     "inventoryAdd": 2,
@@ -21947,12 +22120,13 @@
     "_applyFailedOp": 7,
     "newEncounter": 3,
     "encounterOps": 1,
-    "gambitApt": 43,
+    "gambitApt": 44,
     "markDefiningMoment": 1,
     "_engineClosedScene": 3,
-    "gambitOps": 1
+    "gambitOps": 1,
+    "intentsHeard": 1
   },
-  "_opTurns": 335,
+  "_opTurns": 336,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -22045,6 +22219,17 @@
       "tier": 4,
       "mintedAt": 14,
       "discovered": true
+    },
+    {
+      "id": "shadowcast-model",
+      "from": [
+        "working_model",
+        "shadow_work"
+      ],
+      "name": "Shadowcast Model",
+      "tier": 3,
+      "mintedAt": 16,
+      "discovered": true
     }
   ],
   "locationAliases": {
@@ -22052,11 +22237,6 @@
   },
   "companionMemory": {
     "marrow": [
-      {
-        "text": "Bound a complete four-stage community filtration cascade — including a detail the shadow found before any of them thought to draw it — into the Waymarker's memory",
-        "weight": 2,
-        "day": 13
-      },
       {
         "text": "Closed his father's unfinished fold and made the first new waygate since the Transition — a passage built not by the Numinous, but by the man the lineage was for.",
         "weight": 3,
@@ -22109,6 +22289,11 @@
       },
       {
         "text": "Retrieved proof of the water crisis's true cause—buried readings from the sealed Archive cabinet—at the cost of breaking Grael's seal-mark and triggering the March's warden-alert.",
+        "weight": 2,
+        "day": 16
+      },
+      {
+        "text": "Forged a novel craft-braiding that manifests shadow as persistent structural model—a threshold-post's purpose made visible and revisable in real time.",
         "weight": 2,
         "day": 16
       }
@@ -23102,11 +23287,11 @@
     "scout": 9,
     "lead": 2,
     "ask": 2,
-    "plan": 10,
+    "plan": 11,
     "negotiate": 2,
-    "prepare": 9,
+    "prepare": 10,
     "investigate": 3,
-    "craft": 5,
+    "craft": 6,
     "help": 5,
     "discipline": 1,
     "persuade": 1,
@@ -23250,6 +23435,14 @@
       "day": 16,
       "worldDay": 73,
       "actionCount": 960
+    },
+    {
+      "companionId": "marrow",
+      "kind": "deed",
+      "delta": 0.5,
+      "day": 16,
+      "worldDay": 73,
+      "actionCount": 961
     }
   ],
   "_standingOpRefusals": [

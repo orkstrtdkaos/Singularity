@@ -111,6 +111,22 @@ the densest ground in the world.**
    transformer, and transformers should be rare, large, and probably Precursor.
 2. ⛑ **A carried sink is a weapon and an invitation.** ⚠️ **Thinning the divide is what a Sovereign wants
    done.**
-3. ⛔ **Nothing carried should beat standing in the right place.** ⚑ **An item is how you work where you
-   are, not a reason to stop caring where you are** — ⚠️ **otherwise the whole field model stops mattering
-   and the ground card has nothing to say.**
+3. ⛔ **AEVI'S THIRD RULE WAS WRONG AND ERIK STRUCK IT.** She wrote *"nothing carried should beat standing
+   in the right place."*
+
+> ⛑ **Erik: *"The ground is varied enough — we don't want it to be the whole story. People and their bands
+> can get items and artifacts and strongholds that MAKE THEIR CONDITIONS BETTER… that makes those items
+> TARGETS. Take out the power generator for a stronghold in enemy territory and IT'S OPEN SEASON."***
+
+⚑ **AN ITEM THAT ONLY EVER HELPS A LITTLE IS EQUIPMENT. ONE THAT CAN BEAT THE GROUND IS AN OBJECTIVE.**
+⚠️ **And it cuts both ways at once: the thing that lets you work in hostile country is the thing the enemy
+comes for**, and a stronghold holding a field is a stronghold with a heart somebody can reach.
+
+⛔ **SO A CARRIED OR INSTALLED SOURCE MAY OVERCOME BAD GROUND ENTIRELY** — ⛑ **and the design consequence is
+that it must be REACHABLE, DESTRUCTIBLE AND VISIBLE.** ⚠️ **A field nobody can find is a buff. A field with
+a generator in a room is a war.**
+
+⬜ **Which makes the holdings model the right home for the big ones** — ⚑ `holdFeatures` already has kinds,
+build costs, upkeep and a garrison, and ⛔ **`SPEC_hold_costs_crafts_and_hiring` already rules that a watch
+is what turns a raid into a fight.** ⚠️ **A power generator is a hold feature that emits a field and can be
+taken out.**

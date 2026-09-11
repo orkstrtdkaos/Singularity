@@ -321,6 +321,7 @@ export function mechanicFor(ability, { verb, tier, rank = 1, intensity = "standa
   return {
     verb: v, shape: sh.shape, operative: op, family: sh.family,
     authored: !!authored,
+    diceAuthored,   // SPEC_damage_make_it_vary §6: which POPULATION a dial moves — the craft's own dice, or the ladder's
     special: !!rung.special || !!authored?.special,
     rankDelta: rDelta ? { kind: rDelta.kind, ...(rDelta.dimension ? { dimension: rDelta.dimension } : {}) } : null,
     refusedIntensity: refused,

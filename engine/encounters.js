@@ -381,6 +381,10 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   // the step that ENDS the turn (the same signal that ticks effects), so "round 3" means three turns, not six steps.
   const s = { ...state, round: state.round + ((senseOnly || !tickEffects) ? 0 : 1), momentum: r.state.momentum, opponentEnergy: r.state.opponentEnergy, opponentHealth: r.state.opponentHealth ?? state.opponentHealth, effects: r.state.effects || [], pressure: r.state.pressure || { player: 0, opponent: 0 }, spent: r.state.spent || { player: false, opponent: false }, lastOppFn: oppDecl.function,
     // ⛔ CCODE-255: and back out, so the action step of this turn spends the read the sense step just earned.
+    // ⛔ CCODE-277, SIXTH VALUE: `breakAt` — the pressure the foe breaks at — rode on battleRound's state and this
+    // wrapper dropped it, so app.js:14514 fell back to the FLAT dial (2) and told the player two ticks would break
+    // a foe the engine holds at ceil(level/2). Found by scripts/damage_sweep.mjs printing "?" for every fight.
+    breakAt: r.state.breakAt ?? state.breakAt ?? null,
     foeReadTier: r.foeReadTier ?? state.foeReadTier ?? null,
     // ⛔ CCODE-277 — THE SCALES RIDE ON STATE, NOT ONLY ON THE RECEIPT. The panel renders from the ENCOUNTER
     // STATE; a value that exists only on the round's return is invisible to it, which is the seam that has

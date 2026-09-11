@@ -1101,6 +1101,85 @@ console.log("\n── §150 · the folded party does what it is for ──");
     }
   }
 }
+/* ══════════ §151 — WHICH PATH MADE THE HIT (SPEC_damage_make_it_vary §1, §6, §8) ══════════ */
+// ⛔ THE DICE PATH AND THE FLAT FALLBACK LIVE IN ONE FUNCTION AND DIFFER SEVEN-FOLD AT T5. The guard between them
+// has rotted once already and nothing said so. Every landed hit now names its branch on the receipt, and this
+// gate reads the share IN PLAY — Aevi measured `mechanicFor` alone; a probe that never reaches `battleRound` can
+// pass while the live declaration takes the other branch.
+console.log("\n── §151 · which path made the hit ──");
+{
+  const BT151 = await import("../engine/battle_turn.js");
+  const ENC151 = await import("../engine/encounters.js");
+  const CM151 = await import("../engine/craftmechanics.js");
+  const SB151 = await import("../engine/skill_battle.js");
+  const { loadContentHeadless: lch151 } = await import("./headless_content.mjs");
+  const C151 = await lch151();
+  const sb151 = C151.skillBattle.engine, steps151 = C151.intensity.steps, rules151 = C151.rules, cat151 = C151.abilities || {};
+  const rng151 = (seed) => () => { seed |= 0; seed = (seed + 0x6D2B79F5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  const sweeper = () => ({ id: "s151", name: "S", level: 12, attributes: { practical: 5, physical: 5, mental: 5, social: 5 }, subAttributes: {}, alignment: {},
+    health: 300, maxHealth: 300, energy: 400, maxEnergy: 400, abilities: Object.keys(cat151).map(id => ({ abilityId: id, level: 2 })), inventory: [], codex: { schemaVersion: 1, topics: {} } });
+  const menu = BT151.battleSkillsForCharacter(sweeper(), { catalog: cat151, rules: rules151, sb: sb151 });
+  const HARM151 = new Set(sb151.damage?.harmFunctions || ["strike", "break"]);
+  const harmRows = menu.filter(s => HARM151.has(s.function));
+  const enc = Object.entries(C151.encounters || {}).find(([, e]) => e && e.type === "duel" && ENC151.contestSheetFor(e, { content: C151 }));
+  check("§151: ⛑ NON-VACUITY — there is a duel to drive and harm crafts to declare", !!enc && harmRows.length > 20, `${harmRows.length} harm rows`);
+  const yours = [], theirs = [];
+  if (enc) {
+    const [, def] = enc;
+    for (let i = 0; i < harmRows.length; i += Math.max(1, Math.floor(harmRows.length / 24))) {
+      const skill = harmRows[i]; const c = sweeper();
+      c.activeEncounter = { defId: def.id, state: ENC151.startEncounter(def, { oppSheet: ENC151.contestSheetFor(def, { content: C151 }) }) };
+      const decl = BT151.declFromSelection([skill], menu, "standard", { character: c, sb: sb151 }); if (!decl) continue;
+      const rng = rng151(151 + i);
+      for (let r = 0; r < 8; r++) {
+        const played = BT151.playTurn(c, def, { action: decl, intensity: "standard", content: C151, rules: rules151, sb: sb151, steps: steps151, rng, day: 100, catalog: cat151, party: null });
+        const d = played.rr?.damage; if (!d) { if (played.ended) break; continue; }
+        (d.side === "opponent" ? yours : theirs).push({ path: d.path, why: d.pathWhy || null, pop: d.population || null, verb: d.verb, amount: d.amount });
+        if (played.ended) break;
+      }
+    }
+  }
+  const share = (rows) => rows.length ? rows.filter(h => h.path === "dice").length / rows.length : 0;
+  check("§151: ⛔ every landed hit SAYS which branch made it — no hit is unmarked", [...yours, ...theirs].length > 30 && [...yours, ...theirs].every(h => h.path === "dice" || h.path === "flat"), `${[...yours, ...theirs].filter(h => !h.path).length} unmarked of ${[...yours, ...theirs].length}`);
+  check("§151: ⛔ YOUR harm hits come from the DICE — the seven-fold fallback is not load-bearing (≥95%)", yours.length > 20 && share(yours) >= 0.95, `${Math.round(share(yours) * 100)}% dice · flat why: ${JSON.stringify([...new Set(yours.filter(h => h.path === "flat").map(h => h.why))])}`);
+  check("§151: ⛔ …and so do the FOE'S — the path serves both sides, measured on the receipt not on a probe", theirs.length > 5 && share(theirs) >= 0.95, `${Math.round(share(theirs) * 100)}% dice over ${theirs.length} hits · flat why: ${JSON.stringify([...new Set(theirs.filter(h => h.path === "flat").map(h => h.why))])}`);
+  // §6: which POPULATION each hit came from is on the receipt, so a dial can say which crafts it moved.
+  check("§151: ⚑ a dice hit names its POPULATION — the craft's own dice or the ladder's", yours.filter(h => h.path === "dice").every(h => h.pop === "authored" || h.pop === "ladder") && new Set(yours.map(h => h.pop)).size >= 2, JSON.stringify([...new Set(yours.map(h => h.pop))]));
+
+  // ⛔ §8 SAID "tierLadder HAS NO RANK DIMENSION — T5 r1 and T5 r3 are byte-identical." Measured on a BARE
+  // declaration, where no rankDeltas exist. On the real crafts, rank already scales harm: `rankDeltas.default`
+  // is deepen ×1.35 per step, so r3 = ×1.82, and the crafts it does NOT move author `add`/`extend` deltas by
+  // choice. A `rankLadder` on top would double-scale 89 of 105. This gate names the fact so nobody builds it.
+  const cm151 = rules151.craftMechanics; let moved = 0, total = 0;
+  for (const a of Object.values(cat151)) { const v = (a.functions || []).find(f => HARM151.has(f)); if (!v) continue; total++;
+    const t = Number(a.tier || a.levelReq || 1); const k = (m) => JSON.stringify({ d: m?.fields?.dice, p: m?.fields?.plus, m: m?.fields?.mult });
+    if (k(CM151.mechanicFor(a, { verb: v, tier: t, rank: 1, cfg: cm151 })) !== k(CM151.mechanicFor(a, { verb: v, tier: t, rank: 3, cfg: cm151 }))) moved++; }
+  check("§151: ⛔ RANK ALREADY MOVES DAMAGE — r3 differs from r1 on ≥80% of harm crafts (rankDeltas deepen ×1.35/step); a rankLadder would double it", total > 80 && moved / total >= 0.8, `${moved} of ${total}`);
+  check("§151: …and the default rank delta is the multiplier the content authors, not a number in code", cm151.rankDeltas?.default?.kind === "deepen" && Math.abs(Number(cm151.rankDeltas.default.mult) - 1.35) < 1e-9, JSON.stringify(cm151.rankDeltas?.default));
+
+  // ⬜ breakAtMax — FINDING_matrix_rerun §4 shape B, as an INERT dial. Absent: R34b's ceil(level/2) exactly.
+  const bo = (pressureCfg, lvl) => { const sbX = { ...sb151, momentum: { ...sb151.momentum, pressure: { ...sb151.momentum.pressure, ...pressureCfg } } };
+    const r = SB151.battleRound({ playerDecl: { function: "strike", tier: 1, attribute: "physical", intensity: "standard", name: "x" }, oppDecl: { function: "shield", tier: 1, name: "g" },
+      playerSheet: { attributes: { physical: 5, mental: 5, social: 5, practical: 5 }, energy: 100, health: 60, level: 10 }, oppSheet: { attributes: { physical: 5, mental: 5, social: 5, practical: 5 }, energy: 100, health: 60, level: lvl, skills: [] },
+      state: { momentum: 0, round: 1 }, rules: rules151, sb: sbX, steps: steps151, rng: rng151(9) }); return r.state.breakAt.opponent; };
+  check("§151: ⚑ with no `breakAtMax` a level-40 foe breaks at ceil(40 × 0.5) = 20 — R34b untouched", bo({}, 40) === 20, String(bo({}, 40)));
+  check("§151: ⚑ …and `breakAtMax: 8` caps it at 8 while a level-10 foe still breaks at 5 — a ceiling, not a flat", bo({ breakAtMax: 8 }, 40) === 8 && bo({ breakAtMax: 8 }, 10) === 5, `${bo({ breakAtMax: 8 }, 40)} / ${bo({ breakAtMax: 8 }, 10)}`);
+  // ⛔ CCODE-277, SIXTH VALUE THE WRAPPER ATE. `breakAt` rode on battleRound's state and `skillBattleRound` dropped
+  // it, so app.js read `rr.state.breakAt.opponent ?? 2` and told the player TWO ticks would break a foe the engine
+  // holds at ceil(level/2). Found by the sweep printing "?" for every fight. Driven through the wrapper, on a duel.
+  if (enc) {
+    const [, def] = enc; const c = sweeper();
+    c.activeEncounter = { defId: def.id, state: ENC151.startEncounter(def, { oppSheet: ENC151.contestSheetFor(def, { content: C151 }) }) };
+    const decl = BT151.declFromSelection([harmRows[0]], menu, "standard", { character: c, sb: sb151 });
+    const played = BT151.playTurn(c, def, { action: decl, intensity: "standard", content: C151, rules: rules151, sb: sb151, steps: steps151, rng: rng151(277), day: 100, catalog: cat151, party: null });
+    const lvl = c.activeEncounter.state.opponentSheet?.level;
+    check("§151: ⛔ `breakAt` RIDES ON THE WRAPPER'S STATE — the panel reads the engine's number, not the flat dial",
+      Number.isFinite(played.rr?.state?.breakAt?.opponent) && played.rr.state.breakAt.opponent === Math.max(1, Math.ceil(Number(lvl) * (sb151.momentum.pressure.breakAtLevelFraction || 0.5))),
+      `state.breakAt=${JSON.stringify(played.rr?.state?.breakAt)} foe level ${lvl}`);
+    const app151 = rd("app.js");
+    check("§151: …and app.js reads it from state (the fallback to the flat dial is now the exception, not the rule)", /rr\?\.state\?\.breakAt\?\.opponent/.test(app151));
+  }
+}
 /* ══════════ §14 — THE FOLD CANNOT BEAT AN IMMUNITY THE BLOW COULD NOT ══════════ */
 // ⛔ FOUND BY RUNNING AEVI'S TWELVE CRAFTS THROUGH A MELEE-SCALE FIGHT (CCODE-313), which is the whole
 // reason Erik asked for a big-battle test. A physical-immune foe took ZERO from the player's typed blow and

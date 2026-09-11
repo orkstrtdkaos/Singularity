@@ -1256,6 +1256,11 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       // on purpose — seam_battle_round_options has bitten four times, and a value the wrapper already
       // carries cannot be dropped on the way in.
       let hit = null;
+      // ⛔ SPEC_damage_make_it_vary §1 — WHICH PATH PRODUCED THIS HIT, and why, ON THE RECEIPT. The dice path and
+      // the flat fallback live in the same function and differ seven-fold at T5 (25.5 vs 3.68). The last time
+      // the guard below rotted, every hit fell to the fallback and nothing said so until someone measured damage
+      // per landed hit by hand. Now every hit says which branch made it, and a gate reads the share.
+      let hitPath = null, hitWhy = null, hitPop = null;
       const cmCfg = rules?.craftMechanics;
       if (cmCfg?.families) {
         const m = mechanicFor(winDecl, { verb: winDecl.function, tier: winDecl.tier,
@@ -1265,13 +1270,17 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
         // per landed hit (T-III delivered 5.2 where its dice say 13.4) rather than by reading the code.
         // CCODE-77: `cfg` is threaded so a craft's authored VARIANCE widens its band from Erik's live dial
         // rather than the function's own fallback — the same reason the wild dials read from rules.wild.
-        if (m?.shape === "damage" && (m.fields?.dice || m.fields?.max != null)) hit = Math.max(dcfg.minHit ?? 1, rollMagnitude(m.fields, rng, { marginGap, cfg: cmCfg }));
-      }
+        if (m?.shape === "damage" && (m.fields?.dice || m.fields?.max != null)) {
+          hit = Math.max(dcfg.minHit ?? 1, rollMagnitude(m.fields, rng, { marginGap, cfg: cmCfg }));
+          hitPath = "dice"; hitPop = m.diceAuthored ? "authored" : "ladder";
+        } else hitWhy = !m ? "no-mechanic" : m.shape !== "damage" ? `shape:${m.shape}` : "no-dice";
+      } else hitWhy = "no-craftMechanics";
       if (hit == null) {
         const raw = (dcfg.base ?? 1)
           + (winDecl.tier || 1) * (dcfg.perTier ?? 0.5)
           + marginGap * (dcfg.perMarginPoint ?? 0.06);
         hit = Math.max(dcfg.minHit ?? 1, Math.round(raw));
+        hitPath = "flat";
       }
       // SNG-263 r4 §11 — SCALING: the WIELDER's contribution. The dice are what the craft IS; this is what
       // the person swinging it brings. Without it a master's kindle hit exactly as hard as a novice's, which
@@ -1464,6 +1473,8 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
         if (rc.blocked > 0) { composite = { ...rc, ward: wardAns.depth, answers: wardAns.answers }; landed = rc.landed; }
       }
       damage = { side: roundWinner === "player" ? "opponent" : "player",
+        // SPEC_damage_make_it_vary §1: the branch that made this hit. `flat` should be rare and never a harm verb.
+        path: hitPath, ...(hitWhy ? { pathWhy: hitWhy } : {}), ...(hitPop ? { population: hitPop } : {}),
         // ⛔ CCODE-314 — CARRIED ON THE RECEIPT, not merely computed. A flag the caller cannot see is the
         // same silence it replaces. `untyped: true` means NO affinity could have applied to this blow.
         ...(typedByDefault ? { typedByDefault: true } : {}),
@@ -1759,7 +1770,14 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
     if (Number.isFinite(kindFlat)) return kindFlat;
     const frac = Number(pcfg.breakAtLevelFraction);
     const lvl = Number(side === "opponent" ? oppSheet?.level : playerSheet?.level);
-    if (Number.isFinite(frac) && frac > 0 && Number.isFinite(lvl) && lvl > 0) return Math.max(1, Math.ceil(lvl * frac));
+    // ⬜ FINDING_matrix_rerun_87pct §4 shape B — a CEILING on what a fight can be asked to produce. Erik's R34b
+    // (`ceil(level/2)`) is right that a level-33 figure is hard to drive off a field, and the round cap is 14, so
+    // above ~level 28 the break exit cannot be reached at all. `breakAtMax` caps it; absent, R34b stands alone.
+    const cap = Number(pcfg.breakAtMax);
+    if (Number.isFinite(frac) && frac > 0 && Number.isFinite(lvl) && lvl > 0) {
+      const raw = Math.max(1, Math.ceil(lvl * frac));
+      return Number.isFinite(cap) && cap > 0 ? Math.min(raw, cap) : raw;
+    }
     return pcfg.breakAtPressure ?? 3;
   };
   const breakAt = { opponent: breakAtFor("opponent"), player: breakAtFor("player") };

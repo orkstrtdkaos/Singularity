@@ -8441,7 +8441,9 @@ await (async () => {
   const appSrc202 = readFileSync(join(root, "app.js"), "utf8");
   check("202 §1: buildWheelModel places minted braids by braidPlacement, not on a parent's spoke", /braidAbs\.push\(ab\)/.test(appSrc202) && /braidPlacement\(pa, pb, n\)/.test(appSrc202) && /braid: true/.test(appSrc202));
   // §3: braids are their own ability-LIST category with parents + first-finder attribution.
-  check("202 §3: braids get their own ability-list category (not interleaved under one parent)", /braids-group[\s\S]{0,40}✦ Braids/.test(appSrc202) && /minted\.from[\s\S]{0,60}length === 2[\s\S]{0,40}braids\.push/.test(appSrc202));
+  // ⚠️ 2026-09-11 (§168): the fold key and the store call now sit between the class and the summary, so the old 40-char window
+  // could not reach. Re-aimed at the PROPERTY — a braids-group `<details>` whose own summary names Braids — not at the distance.
+  check("202 §3: braids get their own ability-list category (not interleaved under one parent)", /<details class="skill-group braids-group"[^\n]{0,200}?<summary>✦ Braids/.test(appSrc202) && /minted\.from[\s\S]{0,60}length === 2[\s\S]{0,40}braids\.push/.test(appSrc202));
   check("202 §3: a braid list entry names its parents + carries first-finder attribution (SNG-201)", /braid-parents[\s\S]{0,60}sourceNames/.test(appSrc202) && /first found by/.test(appSrc202));
 
   // ---- SNG-202B §1: general weighted-mean placement — a craft leans off its spoke by its composition ----

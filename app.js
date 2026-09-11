@@ -128,7 +128,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.453";
+const APP_VERSION = "1.9.454";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -10898,7 +10898,7 @@ function renderLevelUp(status = "") {
       </div>
       <button class="btn" id="lvl-wheel" style="width:100%; margin-bottom:10px">✦ Browse crafts on the wheel${wheelRecommended.size ? " — your suggested picks are lit ✨" : ""} →</button>
       ${Object.keys(byTrad).length
-        ? `<details class="learn-list-fallback"><summary class="hint">Or browse as a plain list ↴</summary><div style="margin-top:6px">${Object.keys(byTrad).sort((a, b) => traditionLabel(a).localeCompare(traditionLabel(b))).map(k => `<details class="learn-group"><summary>${esc(traditionLabel(k))} <span class="cost">(${byTrad[k].length})</span></summary>${byTrad[k].sort((a, b) => (a.levelReq || 1) - (b.levelReq || 1)).map(learnRow).join("")}</details>`).join("")}</div></details>`
+        ? `<details class="learn-list-fallback" data-fold="learn:list"${sectionOpen("learn:list", false) ? " open" : ""}><summary class="hint">Or browse as a plain list ↴</summary><div style="margin-top:6px">${Object.keys(byTrad).sort((a, b) => traditionLabel(a).localeCompare(traditionLabel(b))).map(k => `<details class="learn-group" data-fold="learn:${esc(k)}"${sectionOpen("learn:" + k, false) ? " open" : ""}><summary>${esc(traditionLabel(k))} <span class="cost">(${byTrad[k].length})</span></summary>${byTrad[k].sort((a, b) => (a.levelReq || 1) - (b.levelReq || 1)).map(learnRow).join("")}</details>`).join("")}</div></details>`
         : "<div class='insight'>nothing new to learn at this level — play on; the crafts you hold deepen as you use them</div>"}
     </div>
 
@@ -13392,7 +13392,9 @@ let sbBusy = false;      // CCODE-45/47: a call is in flight — the panel must 
 let sbBusyLabel = "";    // CCODE-47: what we are waiting ON, in the player's terms.
 let sbQuickBeat = "";    // CCODE-47: the fast Haiku read of the exchange, shown while the full telling renders.       // CCODE-45: a GM call is in flight for this turn — don't let a double-click double-resolve.
 let sbWeaveArmed = null;       // CCODE-37 (Erik: "this is where braids really shine"): index of the craft armed to WEAVE.
-const sbOpenFams = {};         // CCODE-38 (Erik: "can we make the categories collapsible?"): family → open?, kept across rounds.
+// CCODE-38 (Erik: "can we make the categories collapsible?") — the move groups fold, and ✅ ERIK 2026-09-11 ("I'd like them to
+// stay the way I put them") moved the memory onto the PROFILE store (moves:<family>, via sectionOpen / saveSidebarState),
+// because a module-level map survives a round and forgets the moment you navigate away.
 let sbDetailOpen = false;      // SNG-252b §2c: the tucked turn-detail (intensity + the action chain), remembered across rounds
 
 // SNG-246 (Erik: "no rolls, no opposed rolls or descriptions… ended inexplicably"): a per-round MECHANICAL line
@@ -13783,10 +13785,10 @@ function skillBattlePanel() {
       </div>`;
     }).join("");
     // CCODE-38 (Erik: "can we make the categories collapsible?"): each family is a <details> — open by default,
-    // and the open/closed choice persists across the round re-renders via sbOpenFams so a fight doesn't keep
+    // and the open/closed choice persists on the PROFILE store (moves:<family>, §168) so neither a round nor leaving the view
     // re-expanding what you just folded away.
-    const open = sbOpenFams[f] !== false;
-    return `<details class="moves-group" data-sbfam="${esc(f)}"${open ? " open" : ""}><summary class="moves-group-lbl"><span style="color:${FAMILY_COLOR[f]}">${FAMILY_GLYPH[f]}</span> ${esc(SB_FAM_LABEL[f] || f.toLowerCase())} <span class="hint">(${byFam[f].length})</span>${sharedDoes ? `<span class="moves-group-hint"> · ${esc(sharedDoes)}</span>` : ""}</summary>${chips}</details>`;
+    // ✅ ERIK 2026-09-11: this survived a round and reopened when he left the view — the store keeps it now.
+    return `<details class="moves-group" data-fold="moves:${esc(f)}"${sectionOpen("moves:" + f, true) ? " open" : ""}><summary class="moves-group-lbl"><span style="color:${FAMILY_COLOR[f]}">${FAMILY_GLYPH[f]}</span> ${esc(SB_FAM_LABEL[f] || f.toLowerCase())} <span class="hint">(${byFam[f].length})</span>${sharedDoes ? `<span class="moves-group-hint"> · ${esc(sharedDoes)}</span>` : ""}</summary>${chips}</details>`;
   }).join("");
   // ⛔ CCODE-276 — THE PARTY BLOCK AND THE FORWARD PICK. Erik: "Named companions folded into the aggregate
   // still feel like people... if you want to have them be turn by turned you just swap them out with someone
@@ -14009,7 +14011,7 @@ function skillBattlePanel() {
     ${/* SNG-252b §2c: TURN DETAIL, tucked. Intensity and the Sense→Action→Bonus→Execute chain are ADVANCED
           controls — precise, rarely changed, and they were sitting at the same visual weight as the scene,
           competing with it. Behind a <details> they stay one tap away and stop shouting. Default closed;
-          `sbDetailOpen` remembers the choice across the round re-renders, the same way sbOpenFams does, so a
+          `sbDetailOpen` remembers the choice across the round re-renders (⚠️ in memory only, unlike the fold keys of §168), so a
           player who wants them open is not re-collapsing them every beat. */""}
     <details class="sb-detail"${sbDetailOpen ? " open" : ""}><summary class="sb-detail-sum">${esc(CONTENT.ribbonCopy?.turnDetail?.label || "⚙ turn detail")}<span class="hint"> — ${esc(CONTENT.ribbonCopy?.turnDetail?.hint || "intensity + the action chain")}</span></summary>
       <div class="sb-intensity">Intensity: ${["conserve", "standard", "surge"].map(i => `<button class="opt sb-int ${sbIntensity === i ? "on" : ""}" data-sbint="${i}">${i}</button>`).join("")}</div>
@@ -14087,7 +14089,12 @@ function wireSkillBattlePanel() {
   const ti = document.getElementById("sb-step-text");
   // clamp at a word boundary — it is the player's own prose, so never cut them mid-word
   if (ti) ti.oninput = () => { turn.text[turn.phase] = smartClamp(ti.value, 300); };
-  for (const d of app.querySelectorAll("[data-sbfam]")) d.ontoggle = () => { sbOpenFams[d.dataset.sbfam] = d.open; };
+  // ✅ ERIK 2026-09-11 (§168): every foldable group persists through the one store — the fight menu included.
+  for (const d of app.querySelectorAll("details[data-fold]")) d.ontoggle = () => {
+    const k = d.dataset.fold;
+    if (d.open) { sidebarOpen.add(k); sidebarClosed.delete(k); } else { sidebarOpen.delete(k); sidebarClosed.add(k); }
+    saveSidebarState();
+  };
   // SNG-252b §2c: remember the turn-detail tuck across round re-renders, same as the family groups above —
   // a player who opens it should not have to re-open it every beat.
   for (const d of app.querySelectorAll("details.sb-detail")) d.ontoggle = () => { sbDetailOpen = d.open; };
@@ -14808,9 +14815,9 @@ function renderPlay(turn, opts = {}) {
             <div class="hint ${p.ripe ? "practiced" : ""}">${esc(p.text)}</div>${trainLine(a, ab)}</div>`;
         };
         const braidGroup = braids.length
-          ? `<details class="skill-group braids-group" open><summary>✦ Braids <span class="cost">(${braids.length})</span></summary>${braids.sort((x, y) => (x.ab.levelReq || 1) - (y.ab.levelReq || 1)).map(row).join("")}</details>`
+          ? `<details class="skill-group braids-group" data-fold="skills:braids"${sectionOpen("skills:braids", true) ? " open" : ""}><summary>✦ Braids <span class="cost">(${braids.length})</span></summary>${braids.sort((x, y) => (x.ab.levelReq || 1) - (y.ab.levelReq || 1)).map(row).join("")}</details>`
           : "";
-        return braidGroup + order.map(fam => `<details class="skill-group ${familyClass(fam)}" open><summary>${FAMILY_GLYPH?.[fam] || "◆"} ${esc(famLabel(fam))} <span class="cost">(${byFam[fam].length})</span></summary>${
+        return braidGroup + order.map(fam => `<details class="skill-group ${familyClass(fam)}" data-fold="skills:fam:${esc(fam)}"${sectionOpen("skills:fam:" + fam, true) ? " open" : ""}><summary>${FAMILY_GLYPH?.[fam] || "◆"} ${esc(famLabel(fam))} <span class="cost">(${byFam[fam].length})</span></summary>${
           byFam[fam].sort((x, y) => (x.ab.levelReq || 1) - (y.ab.levelReq || 1)).map(row).join("")}</details>`).join("");
       })()}
       ${(() => {
@@ -14831,7 +14838,7 @@ function renderPlay(turn, opts = {}) {
         // SNG-059: group the learn list by TRADITION (the people)
         const byClass = {};
         for (const ab of learnable) { const key = abilityGroupKey(ab, "learned"); (byClass[key] = byClass[key] || []).push(ab); }
-        const groupHtml = Object.keys(byClass).sort((a, b) => traditionLabel(a).localeCompare(traditionLabel(b))).map(cls => [cls, `<details class="learn-group"><summary>Learn ${esc(traditionLabel(cls))} <span class="cost">(${byClass[cls].length})</span></summary>${
+        const groupHtml = Object.keys(byClass).sort((a, b) => traditionLabel(a).localeCompare(traditionLabel(b))).map(cls => [cls, `<details class="learn-group" data-fold="learn:${esc(cls)}"${sectionOpen("learn:" + cls, false) ? " open" : ""}><summary>Learn ${esc(traditionLabel(cls))} <span class="cost">(${byClass[cls].length})</span></summary>${
           byClass[cls].sort((a,b)=>(a.levelReq||1)-(b.levelReq||1)).map(ab => {
             const gate = meetsLearnGate(character, ab.id, CONTENT.attributeGates);
             const capBlock = cap && ab.powerSystem !== "learned";
@@ -14873,7 +14880,7 @@ function renderPlay(turn, opts = {}) {
         }).join("");
         return capLine + groups;
       })()}
-      ${(character.discoveries || []).length ? `<details class="skill-group discoveries" open><summary>Discoveries &amp; Combinations <span class="cost">(${character.discoveries.length})</span></summary>${character.discoveries.map(d => {
+      ${(character.discoveries || []).length ? `<details class="skill-group discoveries" data-fold="skills:discoveries"${sectionOpen("skills:discoveries", true) ? " open" : ""}><summary>Discoveries &amp; Combinations <span class="cost">(${character.discoveries.length})</span></summary>${character.discoveries.map(d => {
         // SNG-047: adopt the orphan combo — show the source abilities it braids (recipe parts)
         const parts = (d.abilityIds || []).map(id => fullCatalog()[id]?.name || id.replace(/-/g, " "));
         return `<div class="ability discovery-row" title="${esc(d.description || "")}">✦ <span class="name">${esc(d.name)}</span>${parts.length ? ` <span class="combo-parts">= ${parts.map(esc).join(" + ")}</span>` : ""}</div>`;
@@ -15577,6 +15584,12 @@ function renderPlay(turn, opts = {}) {
     const k = d.dataset.npcgroup;
     if (d.open) { npcGroupsOpen.add(k); npcGroupsClosed.delete(k); }
     else { npcGroupsOpen.delete(k); npcGroupsClosed.add(k); }
+  };
+  // ✅ ERIK 2026-09-11 (§168): the craft, learn and move groups ride the same store as the sections.
+  for (const d of app.querySelectorAll("details[data-fold]")) d.ontoggle = () => {
+    const k = d.dataset.fold;
+    if (d.open) { sidebarOpen.add(k); sidebarClosed.delete(k); } else { sidebarOpen.delete(k); sidebarClosed.add(k); }
+    saveSidebarState();
   };
   // SNG-120: persist each sidebar section's open/closed state across turns + reloads (on the profile).
   for (const d of app.querySelectorAll("details.sidebar-sec[data-sec]")) d.ontoggle = () => {

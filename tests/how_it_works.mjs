@@ -1808,6 +1808,31 @@ console.log("\n── §167 · crowding by the opposing source ──");
   check("§167: …and the fight reads the same card — groundForDecl goes through groundCardFor", /export function groundForDecl[\s\S]{0,1600}groundCardFor\(/.test(g167));
 }
 
+/* ══════════ §168 — A FOLD STAYS FOLDED (Erik 2026-09-11) ══════════ */
+// ✅ ERIK: "fix the skills that I collapse uncollapsing when i navigate away or take a turn? I'd like them to stay the way I put them."
+// ⛔ The skills panel wrote the word open into every craft group as a LITERAL, so each re-render reopened what he had folded away;
+// the learn list hardcoded the closed side of the same bug; and the fight menu kept its own module-level map, which survived a round
+// and forgot the moment he left the view. THE PROPERTY: a foldable group's state is decided by the store, never by a literal.
+console.log("\n── §168 · a fold stays folded ──");
+{
+  const app168 = rd("app.js");
+  const strip = app168.replace(/^\s*\/\/.*$/gm, "");
+  // ⚠️ COUNT EVERY GROUP RENDER, not only the ones that already carry a key: the first version of this check passed while a
+  // second `learn-group` site (the wheel's plain-list fallback) was still hardcoded closed, because `every()` over the matches
+  // it happened to see is satisfied by the set it can see. A missed site must go RED.
+  const groups = [...strip.matchAll(/<details class="(?:skill-group|learn-group|moves-group|learn-list-fallback)[^\n]{0,400}?>/g)].map(m => m[0]);
+  check("§168: ⛔ every craft, learn and move group asks the STORE for its state — no literal open or closed left in one",
+    groups.length >= 7 && groups.every(g => /sectionOpen\(/.test(g) && /data-fold="/.test(g)),
+    groups.length + " groups · " + groups.filter(g => !/sectionOpen\(/.test(g)).length + " still literal");
+  check("§168: …and the keys name what was folded, so a fold outlives a re-render, a view change and a reload",
+    /sectionOpen\("skills:braids"/.test(strip) && /sectionOpen\([^)]*skills:fam:/.test(strip) && /sectionOpen\("skills:discoveries"/.test(strip)
+      && /sectionOpen\([^)]*learn:/.test(strip) && /sectionOpen\([^)]*moves:/.test(strip));
+  check("§168: ⛔ ONE store owns it — the fight menu's own copy is retired and the toggle writes the profile",
+    !/sbOpenFams/.test(strip) && /details\[data-fold\]/.test(strip) && /saveSidebarState\(\)/.test(strip));
+  check("§168: …the same store the sidebar sections use, so nothing invents a second one (SNG-120)",
+    /function sectionOpen\(key, defaultOpen\)/.test(app168) && /profile\.uiSidebar = \{ open:/.test(app168));
+}
+
 /* ══════════ §14 — THE FOLD CANNOT BEAT AN IMMUNITY THE BLOW COULD NOT ══════════ */
 // ⛔ FOUND BY RUNNING AEVI'S TWELVE CRAFTS THROUGH A MELEE-SCALE FIGHT (CCODE-313), which is the whole
 // reason Erik asked for a big-battle test. A physical-immune foe took ZERO from the player's typed blow and

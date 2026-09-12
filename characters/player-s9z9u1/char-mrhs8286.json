@@ -2450,92 +2450,70 @@
         "player": "Head downstairs and great the Wardens.  Then check on the Runner.",
         "summary": "Morning at the Whistling Woman post: Silas wakes to find Maren and Veth holding the watch through the night. He greets both wardens, then finds the Runner awake and speaking for the first time since surgery.",
         "narration": "You emerge from the back room into the main chamber of the waystation as the last of the night's weight lifts. The fire has been tended through the darkness—Maren sits at the table exactly as she did hours ago, and Veth stands near the threshold with her hand resting light on the warded frame. Both turn their attention to you without moving more than their eyes.\n\n'Dawn,' you say to them both—a greeting and an acknowledgment. Maren nods, spare and steady. Veth's response is a fractional shift in her shoulders, the kind of agreement a warden gives when the night's watch has held and the day can be received.\n\nYou turn toward the cot where the Runner is resting. She's awake—fever-clear now, though the raw cautery marks on her ribs still read rough under the blanket. Her eyes track you as you approach, and she shifts slightly, testing the pain. 'Water,' she says, and it's the first word you've heard from her since the surgery. Not a request—a statement of need, dry-voiced and direct. The urgency that brought her here hasn't left her; it's just been held in abeyance by the Kept Breath's soak and the body's slow mending."
+      },
+      {
+        "player": "Pour water from the barrel and bring it to her—let her drink, then sit and listen to what brought her here with a fractured death-thread",
+        "summary": "Morning at the Whistling Woman post: the Runner wakes fever-clear and begins to speak of the message that brought her—urgent word from the Hub about something stirring north in the changing moorland.",
+        "narration": "You fill a cup from the water barrel—cold and clean, the kind the waystation's deep draw provides—and bring it to the Runner's cot. She takes it with both hands, and drinks like someone who has been thirsty for days. When she lowers the cup, her hands are shaking less.\n\n'The fever's breaking,' she says, her voice rough but steady. 'You did good work.' She sets the cup down careful on the cot's edge, and then the urgency surfaces again—the thing that brought her here on a fractured thread. 'I need to tell you what I was carrying. The message—' She pauses, breathing through something. 'It's encrypted, but I know the shape of it. Hub to warden. Marked urgent-to-hand, which means someone broke protocol to send it direct.'\n\nYou sit on the stool beside her cot, close enough to hear but not crowding. Maren and Veth have both turned their attention inward—giving you the space to listen without the weight of their full witness.\n\nThe Runner's eyes find yours. 'The moorland north of here. The silence Deni marked—it's not just getting quiet. Something is moving that shouldn't be. And the Hub knows. That's why they sent me direct, fever and all.'"
       }
     ],
     "lastTurn": {
-      "narration": "You emerge from the back room into the main chamber of the waystation as the last of the night's weight lifts. The fire has been tended through the darkness—Maren sits at the table exactly as she did hours ago, and Veth stands near the threshold with her hand resting light on the warded frame. Both turn their attention to you without moving more than their eyes.\n\n'Dawn,' you say to them both—a greeting and an acknowledgment. Maren nods, spare and steady. Veth's response is a fractional shift in her shoulders, the kind of agreement a warden gives when the night's watch has held and the day can be received.\n\nYou turn toward the cot where the Runner is resting. She's awake—fever-clear now, though the raw cautery marks on her ribs still read rough under the blanket. Her eyes track you as you approach, and she shifts slightly, testing the pain. 'Water,' she says, and it's the first word you've heard from her since the surgery. Not a request—a statement of need, dry-voiced and direct. The urgency that brought her here hasn't left her; it's just been held in abeyance by the Kept Breath's soak and the body's slow mending.",
-      "sceneSummary": "Morning at the Whistling Woman post: Silas wakes to find Maren and Veth holding the watch through the night. He greets both wardens, then finds the Runner awake and speaking for the first time since surgery.",
+      "narration": "You fill a cup from the water barrel—cold and clean, the kind the waystation's deep draw provides—and bring it to the Runner's cot. She takes it with both hands, and drinks like someone who has been thirsty for days. When she lowers the cup, her hands are shaking less.\n\n'The fever's breaking,' she says, her voice rough but steady. 'You did good work.' She sets the cup down careful on the cot's edge, and then the urgency surfaces again—the thing that brought her here on a fractured thread. 'I need to tell you what I was carrying. The message—' She pauses, breathing through something. 'It's encrypted, but I know the shape of it. Hub to warden. Marked urgent-to-hand, which means someone broke protocol to send it direct.'\n\nYou sit on the stool beside her cot, close enough to hear but not crowding. Maren and Veth have both turned their attention inward—giving you the space to listen without the weight of their full witness.\n\nThe Runner's eyes find yours. 'The moorland north of here. The silence Deni marked—it's not just getting quiet. Something is moving that shouldn't be. And the Hub knows. That's why they sent me direct, fever and all.'",
+      "sceneSummary": "Morning at the Whistling Woman post: the Runner wakes fever-clear and begins to speak of the message that brought her—urgent word from the Hub about something stirring north in the changing moorland.",
       "choices": [
         {
-          "label": "Pour water from the barrel and bring it to her—let her drink, then sit and listen to what brought her here with a fractured death-thread",
+          "label": "Ask her plainly: what does the message say, in the shape she knows?",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": "easy",
-          "opposedDifficulty": null,
           "intentTags": [
-            "help",
-            "listen"
+            "ask"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Ask Veth to read the Runner's thread plainly—what paths still diverge, and which one holds",
+          "label": "Reach for Deathsense on her—read what the fractured thread is about, what pulled her through dying to get here.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
+          "difficulty": "normal",
+          "abilityId": "deathsense",
+          "energyCost": 2,
           "intentTags": [
             "study"
           ],
-          "abilityId": "deathsense",
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         },
         {
-          "label": "Ask Maren what she read in the Runner's urgency while you slept—what does a legendary warden see in a broken courier",
+          "label": "Wait. Let her tell it her own way, on her own breath. Sometimes listening is the only craft that matters.",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "presence",
           "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
+          "difficulty": "very easy",
           "intentTags": [
-            "listen"
+            "help"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         }
       ],
-      "deeds": [],
       "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
+        "energy": 0
       },
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "standingOps": [],
-      "delegateOps": [],
-      "arcOps": [],
-      "adoptSchool": null,
-      "offer": null,
-      "stageOps": [],
       "scene": {
-        "setting": "Interior of the Whistling Woman waystation—main room in pale morning light. The fire banked low and steady in the stove. Maren seated at the table, Veth near the threshold. The Runner on a cot, awake and fever-clear, the cautery marks visible under the blanket.",
+        "setting": "Main room of the Whistling Woman waystation, pale morning light through the window. Fire banked low and steady. The Runner on a cot, awake and fever-clear, holding a cup of water. Maren at the table, Veth near the threshold. Huginn perched on the shelf.",
         "npcsPresent": [
           {
             "name": "Maren Ossitide",
-            "state": "seated at the table, steady presence, having held the watch through the night"
+            "state": "seated at the table, attention turned inward, holding space for the Runner's report"
           },
           {
             "name": "Veth (Stillwater) Ondra",
-            "state": "standing near the threshold, hand resting light on the warded frame, perimeter awareness maintained"
+            "state": "standing near the threshold, hand resting on the warded frame, present but not intruding"
           },
           {
             "name": "The Runner",
-            "state": "awake on a cot, fever-clear, speaking for the first time since surgery, thirst-urgent"
+            "state": "awake on the cot, fever-clear, speaking for the first time since surgery, water-urgent, carrying urgent word from the Hub"
           },
           {
             "name": "Huginn",
@@ -2544,8 +2522,8 @@
         ],
         "objects": [
           "banked fire in the stove, low and steady",
+          "cup of water in the Runner's hands",
           "table, worn smooth",
-          "two chairs",
           "oil lamp, dimmed",
           "water barrel",
           "cots with blankets",
@@ -2553,79 +2531,42 @@
           "music-box on the shelf with melody-pattern cylinder"
         ],
         "threads": [
-          "What the moorland's silence means—Deni's warning, Maren's recognition",
-          "The shadow-reach that shouldn't have worked—the shadows tearing under some greater pull",
-          "Three days until the convene votes on accepting pole-pull as the crisis's true source",
-          "The Runner's fractured death-thread and what urgency brought her here",
-          "Cael's news from the ridge post and what Fendt has discovered",
-          "The world's equilibrium beginning to slip"
+          "What the encrypted Hub message says, in the shape the Runner knows",
+          "What stirred in the moorland north that broke protocol to report",
+          "Why the Runner's death-thread fractured—what pulled her through dying to deliver this",
+          "Three days until the convene votes on the water crisis",
+          "The shadows that tore when Silas reached for Cael—what that means"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "the-runner",
-          "name": "The Runner",
-          "statusNote": "Awake at the Whistling Woman post, fever-clear, mending from cautery. Speaking for the first time since surgery—thirst-urgent, direct, the urgency that brought her still present.",
-          "note": "She wakes speaking plainly, asking for water. The fever is broken and the body is mending. The urgency remains."
-        },
-        {
-          "op": "update",
-          "npcId": "maren-ossitide",
-          "statusNote": "Seated at the table in the Whistling Woman post, holding the watch through the night. Steady presence, attentive, having observed the Runner's mending and the moorland's changed silence.",
-          "note": "She has held the watch through the night, tended the fire, and observed what the Runner revealed in fever-dreams or murmurs. Ready to speak plainly when asked."
-        },
-        {
-          "op": "update",
-          "npcId": "veth-ondra",
-          "statusNote": "Standing near the threshold of the Whistling Woman post, maintaining perimeter awareness. Present and steady through the night watch.",
-          "note": "She has stood the warden's watch at the threshold, confirming the wards hold, attentive to any breach or shift in the protected space."
+          "note": "Awake and fever-clear at the Whistling Woman post. Speaking for the first time since surgery. Carrying urgent word from the Hub about something stirring north in the moorland. The message is encrypted, urgent-to-hand, breaking normal relay protocol.",
+          "learned": [
+            "She was sent direct from the Hub with an encrypted message, breaking relay protocol",
+            "Something is moving in the moorland north that should not be—it triggered urgent response",
+            "The fracture in her death-thread is connected to whatever urgency brought her here"
+          ],
+          "status": "injured",
+          "statusNote": "Fever broken, mending from cautery. Still in pain but stable and speaking clearly."
         }
-      ],
-      "intentsHeard": [],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "discovery": null,
-      "codexUpdates": [],
-      "holdingOps": [],
-      "debtOps": [],
-      "partyOps": [],
-      "generateRequest": [],
-      "encounterOps": [],
-      "projectOps": [],
-      "bandOps": [],
-      "deathOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": {
-        "hoursPassed": 0,
-        "why": "morning light; time to wake and greet the day"
-      },
-      "moveTo": null,
-      "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": null,
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "sceneEnded": false
+      ]
     },
     "sceneState": {
-      "setting": "Interior of the Whistling Woman waystation—main room in pale morning light. The fire banked low and steady in the stove. Maren seated at the table, Veth near the threshold. The Runner on a cot, awake and fever-clear, the cautery marks visible under the blanket.",
+      "setting": "Main room of the Whistling Woman waystation, pale morning light through the window. Fire banked low and steady. The Runner on a cot, awake and fever-clear, holding a cup of water. Maren at the table, Veth near the threshold. Huginn perched on the shelf.",
       "npcsPresent": [
         {
           "name": "Maren Ossitide",
-          "state": "seated at the table, steady presence, having held the watch through the night"
+          "state": "seated at the table, attention turned inward, holding space for the Runner's report"
         },
         {
           "name": "Veth (Stillwater) Ondra",
-          "state": "standing near the threshold, hand resting light on the warded frame, perimeter awareness maintained"
+          "state": "standing near the threshold, hand resting on the warded frame, present but not intruding"
         },
         {
           "name": "The Runner",
-          "state": "awake on a cot, fever-clear, speaking for the first time since surgery, thirst-urgent"
+          "state": "awake on the cot, fever-clear, speaking for the first time since surgery, water-urgent, carrying urgent word from the Hu"
         },
         {
           "name": "Huginn",
@@ -2634,8 +2575,8 @@
       ],
       "objects": [
         "banked fire in the stove, low and steady",
+        "cup of water in the Runner's hands",
         "table, worn smooth",
-        "two chairs",
         "oil lamp, dimmed",
         "water barrel",
         "cots with blankets",
@@ -2643,19 +2584,19 @@
         "music-box on the shelf with melody-pattern cylinder"
       ],
       "threads": [
-        "What the moorland's silence means—Deni's warning, Maren's recognition",
-        "The shadow-reach that shouldn't have worked—the shadows tearing under some greater pull",
-        "Three days until the convene votes on accepting pole-pull as the crisis's true source",
-        "The Runner's fractured death-thread and what urgency brought her here",
-        "Cael's news from the ridge post and what Fendt has discovered"
+        "What the encrypted Hub message says, in the shape the Runner knows",
+        "What stirred in the moorland north that broke protocol to report",
+        "Why the Runner's death-thread fractured—what pulled her through dying to deliver this",
+        "Three days until the convene votes on the water crisis",
+        "The shadows that tore when Silas reached for Cael—what that means"
       ]
     },
-    "beats": 9
+    "beats": 10
   },
   "clock": {
     "schemaVersion": 1,
     "day": 17,
-    "hour": 22,
+    "hour": 23,
     "realAnchor": null
   },
   "companions": [
@@ -5437,17 +5378,18 @@
         "[d17] Fever has broken; wounds are mending well under care; resting deeply; message delivered and urgent business resolved",
         "[d17] Received Deni's letter warning of quiet moorland north. Reads it, recognizes the old-watcher's notice. Witnesses Silas's shadow-reach and names it plainly: 'The warden's reach is growing.' Her presence affirms what just happened.",
         "[d17] Sat across the table with Silas after Deni's warning. Recognized the moorland's changed silence as something the old watchers notice first. Speaks plainly about the warden's reach and what it means. Entirely unmoved by the impossible.",
-        "[d17] She has held the watch through the night, tended the fire, and observed what the Runner revealed in fever-dreams or murmurs. Ready to speak plainly when asked."
+        "[d17] She has held the watch through the night, tended the fire, and observed what the Runner revealed in fever-dreams or murmurs. Ready to speak plainly when asked.",
+        "[d17] Awake and fever-clear at the Whistling Woman post. Speaking for the first time since surgery. Carrying urgent word from the Hub about something stirring north in the moorland. The message is encrypted, urgent-to-hand, breaking normal relay protocol."
       ],
       "knownFacts": [
-        "The message matters more to her than her own pathway holds",
-        "The Archive's warden-mark is older than Grael's tenure and Veth knows it",
-        "There are three district watchers—two answer to Radiant leadership, one does not",
         "The eastern service stair is less watched than the front entrance",
         "The moorland's silence is a known sign that changes meaning with the watcher's eyes",
         "Silas's reach exceeded Shadowstep — the reach itself is becoming something else",
         "The moorland changes and the old watchers notice first",
-        "Silas is not stepping between shadows now—he is pulling through them, and that is a different work entirely"
+        "Silas is not stepping between shadows now—he is pulling through them, and that is a different work entirely",
+        "She was sent direct from the Hub with an encrypted message, breaking relay protocol",
+        "Something is moving in the moorland north that should not be—it triggered urgent response",
+        "The fracture in her death-thread is connected to whatever urgency brought her here"
       ],
       "skillsObserved": [
         "Professional horsemanship",
@@ -5456,16 +5398,16 @@
         "Understanding of watcher patterns and reporting chains",
         "Familiarity with the Archive's physical layout"
       ],
-      "status": "active",
+      "status": "injured",
       "sex": "unknown",
       "gender": "unknown",
       "pronouns": "—",
-      "statusNote": "Seated at the table in the Whistling Woman post, holding the watch through the night. Steady presence, attentive, having observed the Runner's mending and the moorland's changed silence.",
+      "statusNote": "Fever broken, mending from cautery. Still in pain but stable and speaking clearly.",
       "lastSeen": {
         "locationId": "gen-whistling-woman-post",
         "day": 17
       },
-      "met": 8,
+      "met": 9,
       "domains": {
         "primary": "ashwarden"
       },
@@ -6787,7 +6729,7 @@
     "lastTickWorldDay": 74,
     "lastCanonWorldDay": 74,
     "lastGenCount": 1779,
-    "turnsSinceOffer": 3,
+    "turnsSinceOffer": 4,
     "recentOffers": [
       {
         "thing": "Maren Ossitide's acceptance of co-wardenship—the valley now has both a Warden and a Wright tending the threshold.",
@@ -17222,22 +17164,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 22.372036051814348,
-    "cerebral": 13.153655946923132,
-    "social": 13.491392211149078,
-    "generous": 3.7015136575996186,
-    "cautious": 6.231277661415163,
-    "physical": 0.22611402363415015,
-    "risky": 0.6569218466717135,
-    "ruthless": 0.11804508700608662,
-    "carousing": 1.2400215446012122,
-    "amorous": 2.915387170220217,
-    "patient": 0.39690407203536615,
-    "stealth": 0.000004125569733320556,
-    "devotion": 0.168584400449531,
-    "craft": 3.2854597386762436,
-    "leadership": 2.735685698170635,
-    "deception": 0.019756746765997518
+    "strategic": 21.81273515051899,
+    "cerebral": 12.824814548250053,
+    "social": 13.15410740587035,
+    "generous": 4.608975816159628,
+    "cautious": 6.075495719879783,
+    "physical": 0.22046117304329638,
+    "risky": 0.6404988005049207,
+    "ruthless": 0.11509395983093446,
+    "carousing": 1.209021005986182,
+    "amorous": 2.8425024909647116,
+    "patient": 0.386981470234482,
+    "stealth": 0.000004022430489987543,
+    "devotion": 0.16436979043829272,
+    "craft": 3.2033232452093374,
+    "leadership": 2.667293555716369,
+    "deception": 0.019262828096847578
   },
   "aptitudes": [
     "strategist",
@@ -17245,7 +17187,7 @@
     "scholar",
     "tactician"
   ],
-  "actionCount": 977,
+  "actionCount": 978,
   "grantsVersion": 1,
   "reconcileVersion": 49,
   "gallery": [
@@ -18177,8 +18119,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1789182423286,
-  "rev": 2000,
+  "updatedAt": 1789182807459,
+  "rev": 2001,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -22528,7 +22470,7 @@
   "syncedAt": 1788658062664,
   "teachers": {},
   "regionsKnown": {
-    "valley": 677,
+    "valley": 678,
     "the_palelands": 6,
     "the_center": 151,
     "the_echo_vale": 14
@@ -22839,10 +22781,10 @@
     {
       "id": "sess-33",
       "startedAt": "2026-09-11T22:48:54.873Z",
-      "lastAt": "2026-09-12T03:07:03.277Z",
+      "lastAt": "2026-09-12T03:13:27.453Z",
       "startDay": 73,
       "endDay": 74,
-      "beats": 29
+      "beats": 30
     }
   ],
   "company": [
@@ -23355,11 +23297,11 @@
     "gen-whistling-woman-post": "https://image.pollinations.ai/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=32614&nologo=true&_cb=1_1"
   },
   "_opEmitted": {
-    "sceneSummary": 355,
-    "choices": 354,
-    "characterDeltas": 185,
-    "scene": 355,
-    "npcUpdates": 311,
+    "sceneSummary": 356,
+    "choices": 355,
+    "characterDeltas": 186,
+    "scene": 356,
+    "npcUpdates": 312,
     "factUpdates": 37,
     "placeUpdates": 80,
     "codexUpdates": 210,
@@ -23390,7 +23332,7 @@
     "partyOps": 3,
     "stateOps": 1
   },
-  "_opTurns": 355,
+  "_opTurns": 356,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -24580,7 +24522,7 @@
     "prepare": 13,
     "investigate": 4,
     "craft": 7,
-    "help": 6,
+    "help": 7,
     "discipline": 2,
     "persuade": 3,
     "rapport": 10,
@@ -24601,7 +24543,8 @@
     "command": 2,
     "charm": 2,
     "announce": 1,
-    "retrieve": 1
+    "retrieve": 1,
+    "listen": 1
   },
   "aptitudeEarnCount": {
     "silver_tongue": 1

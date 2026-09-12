@@ -194,7 +194,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": 0.024184028350006,
+    "spectrumId": 0.022974826932505698,
     "violence_peace": 0.09078381765624999,
     "chaos_order": 0.2642031390370944,
     "mechanical_spiritual": 0.2629700196352162,
@@ -213,7 +213,7 @@
   "maxHealth": 196,
   "health": 196,
   "maxEnergy": 287,
-  "energy": 210,
+  "energy": 195,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2243,6 +2243,21 @@
       "spread": [],
       "day": 17,
       "worldDay": 74
+    },
+    {
+      "at": "2026-09-12T01:20:47.544Z",
+      "locationId": "gen-whistling-woman-post",
+      "communityId": "valley",
+      "description": "Built a universal shrine at the Made Gate—unmarked, singular, open to all peoples—raising proof that balance holds without any single tradition claiming victory.",
+      "tags": [
+        "creation",
+        "balance",
+        "leadership"
+      ],
+      "weight": 3,
+      "spread": [],
+      "day": 17,
+      "worldDay": 74
     }
   ],
   "relationships": {},
@@ -2352,88 +2367,130 @@
         "player": "I am honored by your presence and your attention - Marrow... that is perhaps your Warden name, but who is the woman? What is her name?  And will that woman continue to travel with me - Troubler - Silas Weir?  And would that woman like to have dinner with us? ",
         "summary": "At the Made Gate shrine in deep night, Silas learns that Huginn is Maren Ossitide, the legendary Ashwarden warden who buried the Drowned Year—and she accepts his invitation to travel with him and join the party for dinner at the Whistling Woman Post.",
         "narration": "You stand before Marrow in the shrine's unmarked center, the circle holding soft around you both. Your question lands simply, and she receives it the way she receives all difficult things—without flinching, without the performance of surprise.\n\n\"Maren,\" she says. Her voice carries the weight of a name kept private for a long time. \"Maren Ossitide. I buried the Drowned Year.\" The words are plain, neither apology nor explanation—a fact she is laying down the way she laid down the shrine's stones. \"The woman does not stop at the warden's work. She eats, she sleeps, she moves through the world the way anyone does. And yes—she will travel with you, Troubler. She has already chosen it.\" Marrow's ash-grey eyes hold yours. \"Dinner,\" she says, and there is something almost like amusement in it. \"Yes. The woman would like that.\"\n\nShe does not move to leave the shrine yet. Her hand is still on your shoulder, and the night air around you both is very still.\n\n\"You named what the shrine is,\" Marrow says quietly. \"A proof that balance holds. You were not wrong. The poles will pull—they always do—but the middle does not have to fracture under it. Not if someone stands there and says: this is enough. This is home.\" She pauses. \"That someone is you now.\""
+      },
+      {
+        "player": "I must have a way with the powerful and beautiful ladies - Pell, Veth, and now You - wink.  But on a serious note... What do you need from me? What does your watch truly require?  What price will the Valley pay for the balance this shrine now holds?",
+        "summary": "At the Made Gate shrine in deep night, Marrow names what the balance truly requires and what she needs from Silas—to stay revealed, to tend the valley's thresholds together, and to help the valley understand that the shrine's power lies not in its creation, but in what each tradition will choose to do with the proof it offers.",
+        "narration": "Marrow's mouth curves—not quite a smile, something older and more exact. She holds your eye, and there's a glint there that reads as approval of the wink before she lets it pass. \"You do,\" she says, simply. Then her expression settles back to that absolute stillness, and she turns to face the shrine.\n\n\"What I need,\" she begins, her voice carrying the weight of someone who has thought about this for a very long time, \"is for the valley to understand what it has just built. The shrine is not a monument to balance—it is proof that balance *requires* all the poles to *stop*. The pull does not end because the middle holds. It ends because every tradition, every craft, every ending attended is its own complete answer.\" She pauses, her weathered hands folding before her. \"The valley will test this. It will doubt. And someone will come—not tomorrow, perhaps not this year—asking how to make it stronger. The answer is always the same: tend it. Mark no tradition as keeper. Let all peoples stand unmarked at its center.\"\n\nShe turns back to you, and her eye is still that far-too-calm eye, but now you see the weight behind it. \"The price is already being paid. Fendt carries the warden-watch at the ridge. The Threshold Post holds the sentinel. The readings prove the pole-pull true. Calvar will present them, and the valley will decide whether to move toward order or continue the blame. That decision—*that* is the price. The shrine does not promise the valley will choose right. It only promises the valley will *see* the choice.\"\n\nShe steps closer, close enough that you feel her presence the way you feel the shrine's presence—singular, complete, undeniable. \"And I need to stay. Not as a bird. As this. The warden who tends endings the March cannot reach, walking the valley's thresholds with you. That is what I choose, and that is what I require: to be seen as I am, and to work at your side without pretense.\""
       }
     ],
     "lastTurn": {
-      "narration": "You stand before Marrow in the shrine's unmarked center, the circle holding soft around you both. Your question lands simply, and she receives it the way she receives all difficult things—without flinching, without the performance of surprise.\n\n\"Maren,\" she says. Her voice carries the weight of a name kept private for a long time. \"Maren Ossitide. I buried the Drowned Year.\" The words are plain, neither apology nor explanation—a fact she is laying down the way she laid down the shrine's stones. \"The woman does not stop at the warden's work. She eats, she sleeps, she moves through the world the way anyone does. And yes—she will travel with you, Troubler. She has already chosen it.\" Marrow's ash-grey eyes hold yours. \"Dinner,\" she says, and there is something almost like amusement in it. \"Yes. The woman would like that.\"\n\nShe does not move to leave the shrine yet. Her hand is still on your shoulder, and the night air around you both is very still.\n\n\"You named what the shrine is,\" Marrow says quietly. \"A proof that balance holds. You were not wrong. The poles will pull—they always do—but the middle does not have to fracture under it. Not if someone stands there and says: this is enough. This is home.\" She pauses. \"That someone is you now.\"",
-      "sceneSummary": "At the Made Gate shrine in deep night, Silas learns that Huginn is Maren Ossitide, the legendary Ashwarden warden who buried the Drowned Year—and she accepts his invitation to travel with him and join the party for dinner at the Whistling Woman Post.",
+      "narration": "Marrow's mouth curves—not quite a smile, something older and more exact. She holds your eye, and there's a glint there that reads as approval of the wink before she lets it pass. \"You do,\" she says, simply. Then her expression settles back to that absolute stillness, and she turns to face the shrine.\n\n\"What I need,\" she begins, her voice carrying the weight of someone who has thought about this for a very long time, \"is for the valley to understand what it has just built. The shrine is not a monument to balance—it is proof that balance *requires* all the poles to *stop*. The pull does not end because the middle holds. It ends because every tradition, every craft, every ending attended is its own complete answer.\" She pauses, her weathered hands folding before her. \"The valley will test this. It will doubt. And someone will come—not tomorrow, perhaps not this year—asking how to make it stronger. The answer is always the same: tend it. Mark no tradition as keeper. Let all peoples stand unmarked at its center.\"\n\nShe turns back to you, and her eye is still that far-too-calm eye, but now you see the weight behind it. \"The price is already being paid. Fendt carries the warden-watch at the ridge. The Threshold Post holds the sentinel. The readings prove the pole-pull true. Calvar will present them, and the valley will decide whether to move toward order or continue the blame. That decision—*that* is the price. The shrine does not promise the valley will choose right. It only promises the valley will *see* the choice.\"\n\nShe steps closer, close enough that you feel her presence the way you feel the shrine's presence—singular, complete, undeniable. \"And I need to stay. Not as a bird. As this. The warden who tends endings the March cannot reach, walking the valley's thresholds with you. That is what I choose, and that is what I require: to be seen as I am, and to work at your side without pretense.\"",
+      "sceneSummary": "At the Made Gate shrine in deep night, Marrow names what the balance truly requires and what she needs from Silas—to stay revealed, to tend the valley's thresholds together, and to help the valley understand that the shrine's power lies not in its creation, but in what each tradition will choose to do with the proof it offers.",
       "choices": [
         {
-          "label": "Walk back to the Whistling Woman Post together—Marrow in warden-form, visible to anyone who sees her arrive.",
-          "attribute": "physical",
-          "subAttribute": "strength",
-          "axes": {},
-          "difficulty": "trivial",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "travel"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Marrow to return to corvid-form before the journey—to spare Pell and the others from the shock of a full revelation before they are ready for it.",
+          "label": "Take her hand and lead her back to the Whistling Woman Post—the party is waiting, and Pell will want to meet the warden who stayed.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": "easy",
-          "opposedDifficulty": null,
+          "trivial": true,
           "intentTags": [
-            "careful",
-            "comfort"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+            "lead",
+            "travel"
+          ]
         },
         {
-          "label": "Stay at the shrine a while longer—ask Marrow directly what she needs from you, what her watch truly requires, and what price the valley will pay for the balance the shrine now holds.",
+          "label": "Ask Marrow what she saw at the shrine's completion—what ending did she witness, and what does the pole-pull's stopping *mean*?",
           "attribute": "mental",
-          "subAttribute": "reason",
+          "subAttribute": "insight",
           "axes": {},
           "difficulty": "normal",
-          "opposedDifficulty": null,
+          "trivial": false,
           "intentTags": [
             "study",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
+            "learn"
+          ]
+        },
+        {
+          "label": "Speak plainly: thank her for the work, name the cost you both carry, and ask if she is certain this path—traveling, visible, bound to a half-wright who still doesn't fully understand what he's done.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": "normal",
           "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "intentTags": [
+            "woo",
+            "negotiate"
+          ]
         }
       ],
-      "deeds": [],
+      "deeds": [
+        {
+          "description": "Built a universal shrine at the Made Gate—unmarked, singular, open to all peoples—raising proof that balance holds without any single tradition claiming victory.",
+          "tags": [
+            "creation",
+            "balance",
+            "leadership"
+          ],
+          "weight": 3,
+          "communityId": "valley"
+        }
+      ],
       "characterDeltas": {
+        "energy": -15,
         "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
         "xp": 0
       },
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "standingOps": [],
-      "delegateOps": [],
-      "arcOps": [],
-      "adoptSchool": null,
-      "offer": {
-        "thing": "Maren Ossitide, the legendary Ashwarden warden, steps fully into the world as Silas's companion and traveling partner—no longer hidden, no longer deniable.",
-        "from": "Silas's own invitation to Huginn to witness the shrine's completion, and his direct question about identity and intention. Marrow chose to answer plainly."
-      },
-      "stageOps": [],
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "huginn",
+          "name": "Maren Ossitide",
+          "nameExtend": "Ossitide",
+          "role": "Ashwarden warden; the one who buried the Drowned Year",
+          "note": "Revealed herself in full warden-form at the universal shrine. Accepted invitation to travel with Silas and join the party for dinner. She is both bird and woman—chose corvid form to attend endings the institutional March cannot reach.",
+          "status": "active",
+          "statusNote": "Traveling with the party in human form; arriving at Whistling Woman Post for dinner",
+          "learned": [
+            "She is Maren Ossitide, legendary Ashwarden warden",
+            "She chose corvid form to attend roadside deaths, exile endings, solitary passings that the institutional March cannot reach",
+            "She has sat with every death at Silas's side since they met",
+            "She does not perform gentleness or grief—she attends completely, without defense",
+            "She understands the shrine as proof that balance requires ALL poles to stop, not merely the middle holding"
+          ]
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Maren Ossitide is the legendary Ashwarden warden. She chose corvid form to attend endings the institutional March cannot reach—roadside deaths, exile endings, solitary passings. She has been present at every death at Silas's side since they met and has now revealed herself in full warden-form.",
+          "subjectId": "huginn"
+        },
+        {
+          "op": "add",
+          "text": "The universal shrine at the Made Gate stands as proof that balance can hold—the pole-pull's ending is not marked by any single tradition claiming victory, but by all peoples standing in one unmarked, open place. Marrow affirmed this as the shrine's true purpose and the reason Silas was meant to build it.",
+          "subjectId": "gen-whistling-woman-post"
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "marrow",
+          "label": "Maren Ossitide, The Legendary Warden",
+          "kind": "person",
+          "entityId": "huginn",
+          "fact": "Maren Ossitide is the legendary Ashwarden warden who buried the Drowned Year. She chose corvid form to attend endings the institutional March cannot reach—roadside deaths, exile endings, solitary passings that the formal warden network cannot reach. She has been present at every death at Silas's side since they met and understands the universal shrine as proof that balance requires ALL poles to *stop*, not merely that the middle holds.",
+          "links": [
+            "ashwarden",
+            "the-made-gate",
+            "the-water-crisis",
+            "the-poles-pull"
+          ]
+        }
+      ],
+      "partyOps": [
+        {
+          "op": "join",
+          "npcId": "huginn",
+          "why": "Maren Ossitide accepted Silas's invitation to travel with him in human form, revealed and present, to tend the valley's thresholds together."
+        }
+      ],
       "scene": {
-        "setting": "The Made Gate clearing in full deep night—stars visible overhead, the circle's soft warding-mark glowing faintly on the moorland ground. The universal shrine stands at the circle's center, unmarked and singular. Four pole-stations stand at the cardinal points. Marrow stands close to Silas, ash-grey and present in full warden-form, her hand still resting on his shoulder. The Made Gate rises to the south, shadow-warded and sealed.",
+        "setting": "The Made Gate clearing in full deep night—stars visible overhead, the circle's soft warding-mark glowing faintly on the moorland ground. The universal shrine stands at the circle's center, unmarked and singular. Four pole-stations stand at the cardinal points. Maren Ossitide stands close to Silas, ash-grey and present in full warden-form, her hand steady at her side. The Made Gate rises to the south, shadow-warded and fully sealed.",
         "npcsPresent": [
           {
-            "name": "Marrow (Maren Ossitide)",
-            "state": "Standing face-to-face with Silas at the shrine's center, hand on his shoulder, full attention on him. Revealed. Present. Waiting."
+            "name": "Maren Ossitide",
+            "state": "Standing face-to-face with Silas at the shrine's center, full attention on him and the weight of what she has just named. Present. Revealed."
           }
         ],
         "objects": [
@@ -2443,111 +2500,19 @@
           "The circle's warding-mark on the moorland ground—soft claim, faintly visible"
         ],
         "threads": [
-          "What Pell will do when she sees Marrow arrive in warden-form",
+          "What Pell will do when she sees Maren arrive in warden-form; whether she understands who she is",
           "Whether Veth recognizes Maren Ossitide by sight or name",
           "How the runner and any others at the post will react to a legendary warden walking in for dinner",
-          "What Marrow's acceptance of travel with Silas means for the post, the party, and the wider valley"
+          "What Marrow's acceptance of travel with Silas means for the post, the party, and the valley's immediate future"
         ]
-      },
-      "npcUpdates": [
-        {
-          "op": "meet",
-          "npcId": "marrow",
-          "name": "Maren Ossitide",
-          "role": "Legendary Ashwarden warden; the one who buried the Drowned Year",
-          "sex": "female",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "description": "Ash-grey hair unbound, weathered face lined at eyes and mouth, steady hands scarred at the knuckles. Tall, built like someone who has walked a great distance and hurried for none of it. Age unresolvable—could be forty or four hundred. Eyes far too calm, the eye of something that has sat with more endings than anything alive. Moves without hurry. Attends completely.",
-          "note": "Revealed herself in full warden-form at the completion of the universal shrine. Accepted Silas's invitation to travel. Accepted dinner invitation. Named herself plainly as Maren Ossitide.",
-          "learned": [
-            "She is the legendary Ashwarden warden, not merely an Ashwarden-touched bird",
-            "She chose corvid form to attend endings the March cannot reach",
-            "She has sat with every death at Silas's side and demands precision in all things",
-            "She reads the shrine as proof that balance holds without any single tradition claiming it",
-            "She believes the middle must not fracture under the poles' pull—and that Silas is now the one who holds that ground"
-          ],
-          "skillsObserved": [
-            "Perfect warden's attention—complete, unhurried, undivided",
-            "Judgment of endings and what they mean",
-            "Ability to stand in two forms at once, or move between them"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Revealed as Ashwarden warden in full form; accepted into the party; traveling with Silas to the Whistling Woman Post for dinner",
-          "bondType": "sworn",
-          "bondStage": "devoted",
-          "revealName": "Maren Ossitide"
-        }
-      ],
-      "intentsHeard": [],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Marrow is Maren Ossitide, the legendary Ashwarden warden who buried the Drowned Year. She chose corvid form to attend the endings the institutional March cannot reach—roadside deaths, exile endings, solitary passings. She has been present at every death at Silas's side since they met.",
-          "subjectId": "marrow"
-        },
-        {
-          "op": "add",
-          "text": "The universal shrine at the Made Gate stands as proof that balance can hold—the pole-pull's ending is not marked by any single tradition claiming victory, but by all peoples standing in one unmarked, open place. Marrow affirmed this as the shrine's true purpose and the reason Silas was meant to raise it.",
-          "subjectId": "the-made-gate"
-        }
-      ],
-      "placeUpdates": [],
-      "discovery": null,
-      "codexUpdates": [
-        {
-          "topic": "marrow",
-          "label": "Maren Ossitide — The One Who Buried the Drowned Year",
-          "kind": "person",
-          "entityId": "marrow",
-          "fact": "Maren Ossitide is the legendary Ashwarden warden. She chose corvid form to attend endings the institutional March cannot reach—roadside deaths, exile endings, solitary passings. She has sat with every death at Silas's side since they met and has now revealed herself in full warden-form. She affirms the universal shrine as proof that balance holds without any single tradition claiming victory.",
-          "links": [
-            "ashwarden",
-            "the-made-gate",
-            "the-water-crisis"
-          ]
-        }
-      ],
-      "holdingOps": [],
-      "debtOps": [],
-      "partyOps": [
-        {
-          "op": "join",
-          "npcId": "marrow",
-          "why": "Accepted Silas's invitation to witness the shrine's completion and to travel with him. Named herself as the woman who will continue the journey alongside him."
-        }
-      ],
-      "generateRequest": [],
-      "encounterOps": [],
-      "projectOps": [],
-      "bandOps": [],
-      "deathOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "A quiet moment at the shrine—standing, speaking, receiving the revelation plainly. The walk back to the post is still ahead."
-      },
-      "moveTo": null,
-      "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": "Maren Ossitide stands revealed in ash-grey warden-form at the unmarked shrine's center—weathered, tall, unhurried, with one steady hand on Silas's shoulder and the whole vast night sky behind her. The shrine plinth stands simple and singular at her back. Her eye is far too calm.",
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "sceneEnded": false,
-      "_applyFailed": true,
-      "_applyFailedOp": "npcUpdates"
+      }
     },
     "sceneState": {
-      "setting": "The Made Gate clearing in full deep night—stars visible overhead, the circle's soft warding-mark glowing faintly on the moorland ground. The universal shrine stands at the circle's center, unmarked and singular. Four pole-stations stand at the cardinal points. Marrow stands close to Silas, ash-grey and present in full warden-form, her hand still resting on his shoulder. The Made Gate rises to…",
+      "setting": "The Made Gate clearing in full deep night—stars visible overhead, the circle's soft warding-mark glowing faintly on the moorland ground. The universal shrine stands at the circle's center, unmarked and singular. Four pole-stations stand at the cardinal points. Maren Ossitide stands close to Silas, ash-grey and present in full warden-form, her hand steady at her side. The Made Gate rises to the…",
       "npcsPresent": [
         {
-          "name": "Marrow (Maren Ossitide)",
-          "state": "Standing face-to-face with Silas at the shrine's center, hand on her shoulder, full attention on her. Revealed. Present."
+          "name": "Maren Ossitide",
+          "state": "Standing face-to-face with Silas at the shrine's center, full attention on her and the weight of what she has just named"
         }
       ],
       "objects": [
@@ -2557,18 +2522,18 @@
         "The circle's warding-mark on the moorland ground—soft claim, faintly visible"
       ],
       "threads": [
-        "What Pell will do when she sees Marrow arrive in warden-form",
+        "What Pell will do when she sees Maren arrive in warden-form; whether she understands who she is",
         "Whether Veth recognizes Maren Ossitide by sight or name",
         "How the runner and any others at the post will react to a legendary warden walking in for dinner",
-        "What Marrow's acceptance of travel with Silas means for the post, the party, and the wider valley"
+        "What Marrow's acceptance of travel with Silas means for the post, the party, and the valley's immediate future"
       ]
     },
-    "beats": 5
+    "beats": 6
   },
   "clock": {
     "schemaVersion": 1,
     "day": 17,
-    "hour": 0,
+    "hour": 1,
     "realAnchor": null
   },
   "companions": [
@@ -5420,7 +5385,7 @@
     "marrow": {
       "id": "marrow",
       "name": "Maren Ossitide",
-      "role": "Legendary Ashwarden warden; the one who buried the Drowned Year",
+      "role": "Ashwarden warden; the one who buried the Drowned Year",
       "description": "Ash-grey hair unbound, weathered face lined at eyes and mouth, steady hands scarred at the knuckles. Tall, built like someone who has walked a great distance and hurried for none of it. Age unresolvable—could be forty or four hundred. Eyes far too calm, the eye of something that has sat with more endings than anything alive. Moves without hurry. Attends completely.",
       "firstMet": {
         "locationId": "gen-whistling-woman-post",
@@ -5429,12 +5394,16 @@
       "relationship": 0,
       "history": [
         "[d17] Revealed herself in full warden-form at the completion of the universal shrine. Accepted Silas's invitation to travel. Accepted dinner invitation. Named herself plainly as Maren Ossitide.",
-        "[d17] Your bond becomes sworn."
+        "[d17] Your bond becomes sworn.",
+        "[d17] Revealed herself in full warden-form at the universal shrine. Accepted invitation to travel with Silas and join the party for dinner. She is both bird and woman—chose corvid form to attend endings the institutional March cannot reach."
       ],
       "knownFacts": [
         "She is the legendary Ashwarden warden, not merely an Ashwarden-touched bird",
         "She chose corvid form to attend endings the March cannot reach",
-        "She has sat with every death at Silas's side and demands precision in all things"
+        "She has sat with every death at Silas's side and demands precision in all things",
+        "She is Maren Ossitide, legendary Ashwarden warden",
+        "She chose corvid form to attend roadside deaths, exile endings, solitary passings that the institutional March cannot reach",
+        "She has sat with every death at Silas's side since they met"
       ],
       "skillsObserved": [
         "Perfect warden's attention—complete, unhurried, undivided",
@@ -5448,7 +5417,17 @@
       "bondType": "sworn",
       "kin": "sworn",
       "image": "https://image.pollinations.ai/prompt/Ash-grey%20hair%20unbound%2C%20weathered%20face%20lined%20at%20eyes%20and%20mouth%2C%20steady%20hands%20scarred%20at%20the%20knuckles.%20Tall%2C%20built%20like%20someone%20who%20has%20walked%20a%20great%20distance%20and%20hurried%20for%20none%20of%20it.%20Age%20unresolvab%2C%20character%20portrait%2C%20named%20Maren%20Ossitide%2C%20woman%2C%20Legendary%20Ashwarden%20warden%3B%20the%20one%20who%20buried%20the%20Drowned%20Year%2C%20sworn%20to%20Silas%20Weir%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=56790&nologo=true",
-      "_portraitTier": "sworn"
+      "_portraitTier": "sworn",
+      "statusNote": "Traveling with the party in human form; arriving at Whistling Woman Post for dinner",
+      "domains": {
+        "primary": "ashwarden"
+      },
+      "domainsSource": "role",
+      "lastSeen": {
+        "locationId": "gen-whistling-woman-post",
+        "day": 17
+      },
+      "met": 1
     }
   },
   "placeMemory": {
@@ -6642,7 +6621,7 @@
     "lastTickWorldDay": 74,
     "lastCanonWorldDay": 74,
     "lastGenCount": 1776,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Logana departs on a single clear charge—a made guardian following her maker's word with the precision a warden would envy",
@@ -14597,22 +14576,26 @@
           "[d3] Huginn's ending-texture can be threaded through Memory's rune alongside The Attended End — held lightly, it reads a living person's current hour without searching for an ending. Pell read as rooted, d",
           "[d3] Huginn's ending-texture can be extended outward through Memory's collar rune with deliberate conserved attention — it reads a living person's current presence without searching for endings. Pell read ",
           "[d16] Marrow is an Ashwarden warden who chose the corvid shape to attend endings the March cannot reach. She has sat with every death at Silas's side and demands precision in all things—truth before gentleness, exact form before explanation.",
-          "[d17] Marrow is an Ashwarden warden, not merely a bird touched by Ashwarden craft. She chose the corvid form to attend endings the March cannot reach—deaths at the roadside, in exile, in solitude. She has been present at every death at Silas's side since they met and revealed herself in full warden-form…"
+          "[d17] Marrow is an Ashwarden warden, not merely a bird touched by Ashwarden craft. She chose the corvid form to attend endings the March cannot reach—deaths at the roadside, in exile, in solitude. She has been present at every death at Silas's side since they met and revealed herself in full warden-form…",
+          "[d17] Maren Ossitide is the legendary Ashwarden warden who buried the Drowned Year. She chose corvid form to attend endings the institutional March cannot reach—roadside deaths, exile endings, solitary passings that the formal warden network cannot reach. She has been present at every death at Silas's…"
         ],
         "links": [
-          "radiant-plateau-edge",
-          "find-the-engineer",
           "mara-wells",
           "ashwarden",
           "precursor-signs-in-the-valley",
           "palework",
           "the-made-gate",
-          "deathsense"
+          "deathsense",
+          "the-water-crisis",
+          "the-poles-pull"
         ],
         "aliases": [
           "Marrow",
           "the Warden",
-          "Marrow, the Warden"
+          "Marrow, the Warden",
+          "Maren Ossitide",
+          "The Legendary Warden",
+          "Maren Ossitide, The Legendary Warden"
         ],
         "createdDay": 1,
         "entityId": "huginn",
@@ -16489,22 +16472,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 24.157399859198083,
-    "cerebral": 16.10681062349434,
-    "social": 13.307841717715105,
-    "generous": 4.53254819373476,
-    "cautious": 6.436375500358258,
-    "physical": 0.276879353746781,
-    "risky": 0.8044087378804015,
-    "ruthless": 0.1445476352059903,
-    "carousing": 1.5184213627403453,
-    "amorous": 2.5442857866750805,
-    "patient": 0.4860138314217347,
-    "stealth": 0.000005051809981707632,
-    "devotion": 0.20643363511048032,
-    "craft": 4.02308514343892,
-    "leadership": 2.1858283912011935,
-    "deception": 0.02419237510699016
+    "strategic": 23.55346486271813,
+    "cerebral": 15.704140357906981,
+    "social": 13.975145674772227,
+    "generous": 4.419234488891391,
+    "cautious": 6.275466112849301,
+    "physical": 0.2699573699031115,
+    "risky": 0.7842985194333914,
+    "ruthless": 0.14093394432584053,
+    "carousing": 1.4804608286718366,
+    "amorous": 3.4806786420082036,
+    "patient": 0.47386348563619135,
+    "stealth": 0.000004925514732164941,
+    "devotion": 0.20127279423271832,
+    "craft": 3.9225080148529474,
+    "leadership": 2.131182681421164,
+    "deception": 0.023587565729315405
   },
   "aptitudes": [
     "strategist",
@@ -16513,10 +16496,20 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 969,
+  "actionCount": 970,
   "grantsVersion": 1,
   "reconcileVersion": 49,
   "gallery": [
+    {
+      "kind": "figure",
+      "prompt": "",
+      "url": "https://image.pollinations.ai/prompt/Maren%20Ossitide%2C%20character%20portrait%2C%20named%20Maren%20Ossitide%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=39519&nologo=true",
+      "caption": "Maren Ossitide",
+      "worldDay": 74,
+      "at": "2026-09-12T01:16:14.746Z",
+      "subjectKind": "figure",
+      "subjectId": "whois-marrow"
+    },
     {
       "kind": "portrait",
       "prompt": "Ash-grey hair unbound, weathered face lined at eyes and mouth, steady hands scarred at the knuckles. Tall, built like someone who has walked a great distance and hurried for none of it. Age unresolvab",
@@ -17379,8 +17372,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1789175512992,
-  "rev": 1957,
+  "updatedAt": 1789176047552,
+  "rev": 1959,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -20485,7 +20478,7 @@
     "creature": {},
     "item": {}
   },
-  "opLossPending": true,
+  "opLossPending": false,
   "establishedFacts": [
     {
       "id": "veth-ondra",
@@ -20804,6 +20797,12 @@
       "text": "The universal shrine at the Made Gate stands as proof that balance can hold—the pole-pull's ending is not marked by any single tradition claiming victory, but by all peoples standing in one unmarked, open place. Marrow affirmed this as the shrine's true purpose and the reason Silas was meant to…",
       "day": 17,
       "subjectId": "the-made-gate"
+    },
+    {
+      "id": "huginn",
+      "text": "Maren Ossitide is the legendary Ashwarden warden. She chose corvid form to attend endings the institutional March cannot reach—roadside deaths, exile endings, solitary passings. She has been present at every death at Silas's side since they met and has now revealed herself in full warden-form.",
+      "day": 17,
+      "subjectId": "huginn"
     }
   ],
   "practice": {
@@ -21674,7 +21673,7 @@
   "syncedAt": 1788658062664,
   "teachers": {},
   "regionsKnown": {
-    "valley": 664,
+    "valley": 665,
     "the_palelands": 6,
     "the_center": 151,
     "the_echo_vale": 14
@@ -21985,10 +21984,10 @@
     {
       "id": "sess-33",
       "startedAt": "2026-09-11T22:48:54.873Z",
-      "lastAt": "2026-09-12T01:11:52.962Z",
+      "lastAt": "2026-09-12T01:20:47.544Z",
       "startDay": 73,
       "endDay": 74,
-      "beats": 16
+      "beats": 17
     }
   ],
   "company": [
@@ -22497,14 +22496,14 @@
     "gen-whistling-woman-post": "https://image.pollinations.ai/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=32614&nologo=true&_cb=1_1"
   },
   "_opEmitted": {
-    "sceneSummary": 343,
-    "choices": 342,
-    "characterDeltas": 174,
-    "scene": 343,
-    "npcUpdates": 304,
-    "factUpdates": 33,
+    "sceneSummary": 344,
+    "choices": 343,
+    "characterDeltas": 175,
+    "scene": 344,
+    "npcUpdates": 305,
+    "factUpdates": 34,
     "placeUpdates": 77,
-    "codexUpdates": 204,
+    "codexUpdates": 205,
     "timeOps": 313,
     "imagePrompt": 30,
     "sceneEnded": 120,
@@ -22513,7 +22512,7 @@
     "offer": 46,
     "moveTo": 20,
     "delegateOps": 4,
-    "deeds": 19,
+    "deeds": 20,
     "standingOps": 6,
     "ledgerEvents": 11,
     "discovery": 6,
@@ -22529,9 +22528,9 @@
     "_engineClosedScene": 5,
     "gambitOps": 1,
     "intentsHeard": 1,
-    "partyOps": 1
+    "partyOps": 2
   },
-  "_opTurns": 343,
+  "_opTurns": 344,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -22653,11 +22652,6 @@
         "day": 14
       },
       {
-        "text": "Built the skeleton of the Threshold Post at the ridge relay node—manifesting blueprint into standing structure using threshold-casting and the raised thing braided. The warden post now stands ready…",
-        "weight": 2,
-        "day": 14
-      },
-      {
         "text": "Raised a working mine from living iron beneath the Threshold Post—an imperfect making that will serve generations, built to ask rather than demand.",
         "weight": 2,
         "day": 14
@@ -22699,6 +22693,11 @@
       },
       {
         "text": "Silas Weir raised a universal shrine at the Made Gate—unmarked, open to all peoples, built as philosophical proof that balance holds without any single tradition claiming victory. The Made Gate is…",
+        "weight": 3,
+        "day": 17
+      },
+      {
+        "text": "Built a universal shrine at the Made Gate—unmarked, singular, open to all peoples—raising proof that balance holds without any single tradition claiming victory.",
         "weight": 3,
         "day": 17
       }
@@ -23691,7 +23690,7 @@
     "study": 12,
     "scout": 9,
     "lead": 2,
-    "ask": 3,
+    "ask": 4,
     "plan": 12,
     "negotiate": 3,
     "prepare": 12,
@@ -23707,7 +23706,7 @@
     "comfort": 3,
     "romantic": 3,
     "presence": 1,
-    "flirt": 1,
+    "flirt": 2,
     "heal": 1,
     "analyze": 1,
     "finesse": 1,
@@ -23716,7 +23715,7 @@
     "retreat": 1,
     "rally": 1,
     "command": 1,
-    "charm": 1
+    "charm": 2
   },
   "aptitudeEarnCount": {
     "silver_tongue": 1
@@ -23873,6 +23872,14 @@
       "day": 17,
       "worldDay": 74,
       "actionCount": 967
+    },
+    {
+      "companionId": "marrow",
+      "kind": "deed",
+      "delta": 0.5,
+      "day": 17,
+      "worldDay": 74,
+      "actionCount": 969
     }
   ],
   "_standingOpRefusals": [
@@ -24138,6 +24145,17 @@
           "prompt": "Tall woman in ash-grey facing unmarked stone shrine within marked circle, four cardinal poles, shadow-warded gate behind, starlit sky, her gaze distant and steadied with completion., cinematic still, a held beat",
           "note": null,
           "seedKey": "solo:cap:at the made gate in full night, silas invites huginn to witness the ending of the polar pu#r1",
+          "at": 74
+        }
+      ]
+    },
+    "figure:whois-marrow": {
+      "keeps": [
+        {
+          "url": "https://image.pollinations.ai/prompt/Maren%20Ossitide%2C%20character%20portrait%2C%20named%20Maren%20Ossitide%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=39519&nologo=true",
+          "prompt": "",
+          "note": null,
+          "seedKey": null,
           "at": 74
         }
       ]

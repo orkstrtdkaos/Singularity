@@ -1904,7 +1904,8 @@
       ],
       "weight": 2,
       "spread": [
-        "valley.sunken_choir"
+        "valley.sunken_choir",
+        "valley.disputed_zone_fringe"
       ],
       "day": 13,
       "worldDay": 24
@@ -1921,7 +1922,9 @@
         "wright"
       ],
       "weight": 3,
-      "spread": [],
+      "spread": [
+        "valley.disputed_zone_fringe"
+      ],
       "day": 14,
       "worldDay": 25
     },
@@ -1999,7 +2002,9 @@
         "uncanny"
       ],
       "weight": 2,
-      "spread": [],
+      "spread": [
+        "center.markets"
+      ],
       "day": 14,
       "worldDay": 28
     },
@@ -2059,7 +2064,9 @@
         "making"
       ],
       "weight": 2,
-      "spread": [],
+      "spread": [
+        "valley.millbrook"
+      ],
       "day": 14,
       "worldDay": 41
     },
@@ -2075,7 +2082,9 @@
         "ashwarden-collaboration"
       ],
       "weight": 2,
-      "spread": [],
+      "spread": [
+        "waystone"
+      ],
       "day": 14,
       "worldDay": 42
     },
@@ -2090,7 +2099,9 @@
         "partnership"
       ],
       "weight": 1,
-      "spread": [],
+      "spread": [
+        "valley.millbrook"
+      ],
       "day": 14,
       "worldDay": 42
     },
@@ -2373,11 +2384,209 @@
     "Deep night at the Whistling Woman post: the party gathers for dinner after completing the universal shrine at the Made Gate. Maren Ossitide is revealed as the legendary Ashwarden warden, accepts Silas's invitation to join the company, and co-works the Named Exclusion threshold with him—a mark to exclude those who come with foreclosure in their hearts and open the shrine to all who come in good faith. The shrine is named as a pilgrimage threshold that will strengthen as peoples return to affirm balance. The Runner recovers, the fire burns steady, and the post becomes a place of gathering—a waystation not just for passage, but for witness."
   ],
   "currentLocationId": "gen-whistling-woman-post",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "gen-whistling-woman-post",
+    "turns": [
+      {
+        "player": null,
+        "summary": "Deep night at the Whistling Woman post—a moment of earned rest before the world calls again.",
+        "narration": "The fire has burned low in the Whistling Woman post. Maren sits across from you in her warden-form, grey and still, the kind of quiet that only comes when a long night has earned its rest. Huginn perches on the shelf behind your shoulder, breathing the same slow rhythm as the banked coals. Pell is asleep in the back room—you can hear it in the absence of her movement, the deep settle of someone who worked until the work was done and then lay down without ceremony.\n\nVeth stepped outside an hour ago to walk the perimeter. She moves like someone checking a stitch, making sure the ward still holds. The Runner sleeps the sleep of the fever-broken, her breathing steady now, the raw cautery holding.\n\nMaren's eyes meet yours across the table. 'You built something that will outlast you,' she says plainly. 'The shrine will draw them back. Not all at once. But they will come.' She pauses, and there is something in that pause—recognition, or maybe something older. 'That is what a shrine does. It remembers, on behalf of everyone who forgets.'\n\nA sound from outside: hoofbeats on the moorland road, coming south from the direction of Millbrook. One horse, ridden hard but not panicked. Maren's head turns toward the door without any visible change in her body. Huginn's breathing does not shift. You recognize the rhythm: someone coming to find you, and they have been looking long enough to be tired of it."
+      }
+    ],
+    "lastTurn": {
+      "narration": "The fire has burned low in the Whistling Woman post. Maren sits across from you in her warden-form, grey and still, the kind of quiet that only comes when a long night has earned its rest. Huginn perches on the shelf behind your shoulder, breathing the same slow rhythm as the banked coals. Pell is asleep in the back room—you can hear it in the absence of her movement, the deep settle of someone who worked until the work was done and then lay down without ceremony.\n\nVeth stepped outside an hour ago to walk the perimeter. She moves like someone checking a stitch, making sure the ward still holds. The Runner sleeps the sleep of the fever-broken, her breathing steady now, the raw cautery holding.\n\nMaren's eyes meet yours across the table. 'You built something that will outlast you,' she says plainly. 'The shrine will draw them back. Not all at once. But they will come.' She pauses, and there is something in that pause—recognition, or maybe something older. 'That is what a shrine does. It remembers, on behalf of everyone who forgets.'\n\nA sound from outside: hoofbeats on the moorland road, coming south from the direction of Millbrook. One horse, ridden hard but not panicked. Maren's head turns toward the door without any visible change in her body. Huginn's breathing does not shift. You recognize the rhythm: someone coming to find you, and they have been looking long enough to be tired of it.",
+      "sceneSummary": "Deep night at the Whistling Woman post—a moment of earned rest before the world calls again.",
+      "scene": {
+        "setting": "Interior of the Whistling Woman waystation post—a single warm room with stove, bed, table, shelf of supplies, water barrel, oil lamps. The fire is banked low. Outside: moorland, night, road from the south. Warded threshold. Hoofbeats approaching.",
+        "npcsPresent": [
+          {
+            "name": "Maren Ossitide (warden-form)",
+            "state": "Seated across the table from Silas, still and present, grey and weathered, eyes steady on the approaching rider's rhythm."
+          },
+          {
+            "name": "Huginn",
+            "state": "Perched on the shelf behind Silas, wholly awake, breathing the banked-fire rhythm."
+          },
+          {
+            "name": "Pell Ran Marsh",
+            "state": "Asleep in the back room."
+          },
+          {
+            "name": "Veth (Stillwater) Ondra",
+            "state": "Outside, walking the perimeter, checking the ward—she will hear the rider before they reach the post."
+          },
+          {
+            "name": "The Runner (Hub relay courier)",
+            "state": "Asleep on a cot in the inner room, fever broken, mending steadily."
+          }
+        ],
+        "objects": [
+          "banked fire in the stove",
+          "table, worn smooth",
+          "two chairs",
+          "oil lamps (one lit low)",
+          "water barrel",
+          "shelf of supplies",
+          "sleeping cots"
+        ],
+        "threads": [
+          "A rider from Millbrook arrives under hard hoofbeats—controlled but urgent.",
+          "The shrine's purpose has been affirmed; Maren is at rest beside you.",
+          "Veth is outside and will intercept the arrival first."
+        ]
+      },
+      "choices": [
+        {
+          "label": "Stand and move to the threshold to meet whoever arrives—let them see you warded and present.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "warden",
+            "lead"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Stay seated. Call Veth back in and let her read the rider before you show yourself—she will know if this is what Calvar wanted or something else entirely.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "careful",
+            "lead"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Order-Sense on the approaching rider—read the shape of what brings them here before they arrive at the threshold.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "chaos_order": 0.8
+          },
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
+      "delegateOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": {
+        "thing": "An unexpected rider from Millbrook, arriving at deep night—sent by someone who has been asking after you more than once.",
+        "from": "Calvar's urgency and standing in the community, now made concrete in a hard ride across moorland"
+      },
+      "stageOps": [],
+      "npcUpdates": [],
+      "intentsHeard": [],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "discovery": null,
+      "codexUpdates": [],
+      "holdingOps": [],
+      "debtOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": null,
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": null,
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "Interior of the Whistling Woman waystation post—a single warm room with stove, bed, table, shelf of supplies, water barrel, oil lamps. The fire is banked low. Outside: moorland, night, road from the south. Warded threshold. Hoofbeats approaching.",
+      "npcsPresent": [
+        {
+          "name": "Maren Ossitide (warden-form)",
+          "state": "Seated across the table from Silas, still and present, grey and weathered, eyes steady on the approaching rider's rhythm"
+        },
+        {
+          "name": "Huginn",
+          "state": "Perched on the shelf behind Silas, wholly awake, breathing the banked-fire rhythm."
+        },
+        {
+          "name": "Pell Ran Marsh",
+          "state": "Asleep in the back room."
+        },
+        {
+          "name": "Veth (Stillwater) Ondra",
+          "state": "Outside, walking the perimeter, checking the ward—she will hear the rider before they reach the post."
+        },
+        {
+          "name": "The Runner (Hub relay courier)",
+          "state": "Asleep on a cot in the inner room, fever broken, mending steadily."
+        }
+      ],
+      "objects": [
+        "banked fire in the stove",
+        "table, worn smooth",
+        "two chairs",
+        "oil lamps (one lit low)",
+        "water barrel",
+        "shelf of supplies",
+        "sleeping cots"
+      ],
+      "threads": [
+        "A rider from Millbrook arrives under hard hoofbeats—controlled but urgent.",
+        "The shrine's purpose has been affirmed; Maren is at rest beside you.",
+        "Veth is outside and will intercept the arrival first."
+      ]
+    },
+    "beats": 1
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 17,
-    "hour": 3,
+    "hour": 4,
     "realAnchor": null
   },
   "companions": [
@@ -6295,7 +6504,7 @@
   },
   "worldState": {
     "schemaVersion": 1,
-    "lastTickDay": 16,
+    "lastTickDay": 17,
     "eventStages": {
       "water_crisis": {
         "stage": 2,
@@ -6308,41 +6517,6 @@
       "falsehood_truth": -0.05
     },
     "news": [
-      {
-        "day": 16,
-        "worldDay": 73,
-        "text": "Word reaches you that A mid-ranking administrator in the Manifest Domain has begun routing certain land-use authorizations through her own seal rather than her superior's, telling herself it is a matter of efficiency… — settled, it seems, without you.",
-        "tier": "event",
-        "section": "world"
-      },
-      {
-        "day": 16,
-        "worldDay": 73,
-        "text": "The One Who Called the First Moot held The Thornmother of the Closing Wood at The Heartroot — Snaring Green — and The Thornmother's design is stalled, not stopped.",
-        "tier": "event",
-        "section": "world",
-        "kind": "clash",
-        "winnerId": "the_first_moot",
-        "loserId": "thornmother_sealed",
-        "outcome": "stopped",
-        "abilityId": "snaring_green",
-        "locationId": "the_heartroot",
-        "arcId": "arc_green_schism"
-      },
-      {
-        "day": 16,
-        "worldDay": 73,
-        "text": "Word from The Service Ways — Halvex Coil, the Rewriter: tuning instruments he does not play.",
-        "tier": "murmur",
-        "section": "world"
-      },
-      {
-        "day": 16,
-        "worldDay": 73,
-        "text": "Word from Radiant Plateau — Edge District — Overseer Grael of the Edge District: keeping the board tidy.",
-        "tier": "murmur",
-        "section": "world"
-      },
       {
         "day": 16,
         "worldDay": 73,
@@ -6467,19 +6641,43 @@
         "text": "Pell Ran Marsh: Pell spent part of the day sorting through a crate of her father's old ledgers kept beneath the shop counter, and found an entry in a hand she doesn't recognize — not her father's — recording a debt paid on his behalf, years before she was old enough to remember.",
         "tier": "ambient",
         "section": "world"
+      },
+      {
+        "day": 17,
+        "worldDay": 74,
+        "text": "Calvar has been asking after you. More than once.",
+        "tier": "event",
+        "section": "world"
+      },
+      {
+        "day": 17,
+        "worldDay": 74,
+        "text": "As far as disputed_zone_fringe: Bound a complete four-stage community filtration cascade — including a detail the shadow found before any of them thought to draw it — into the Waymarker's memory",
+        "tier": "event",
+        "section": "elsewhere"
+      },
+      {
+        "day": 17,
+        "worldDay": 74,
+        "text": "As far as disputed_zone_fringe: Closed his father's unfinished fold and made the first new waygate since the Transition — a passage built not by the Numinous, but by the man the lineage was for.",
+        "tier": "event",
+        "section": "elsewhere"
+      },
+      {
+        "day": 17,
+        "worldDay": 74,
+        "text": "Word travelled on 4 other counts besides.",
+        "tier": "event",
+        "section": "elsewhere"
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-09-12T00:23:58.242Z",
+    "lastSharedReadAt": "2026-09-12T01:52:37.084Z",
     "lastTickWorldDay": 74,
     "lastCanonWorldDay": 74,
-    "lastGenCount": 1776,
-    "turnsSinceOffer": 1,
+    "lastGenCount": 1777,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "Marrow's true form, witnessed and named—the Ashwarden warden who has been traveling as a bird",
-        "from": "Silas's invitation to witness the ending of the pole-pull; the shrine's completion as proof of balance; Huginn's readiness to be seen"
-      },
       {
         "thing": "Marrow's explicit acknowledgment of her warden-nature and her choice to attend your endings in corvid form",
         "from": "the shrine's completion—a work that proved balance can hold without any single tradition marking it as theirs"
@@ -6495,6 +6693,10 @@
       {
         "thing": "Maren Ossitide accepts co-wardenship of the Made Gate shrine and will travel with you—a legendary warden at your side, revealed and…",
         "from": "Your witness of her true form and your asking her plainly for both her name and her presence; the shrine's completion giving shape to what…"
+      },
+      {
+        "thing": "An unexpected rider from Millbrook, arriving at deep night—sent by someone who has been asking after you more than once.",
+        "from": "Calvar's urgency and standing in the community, now made concrete in a hard ride across moorland"
       }
     ],
     "wantProgress": {
@@ -7121,6 +7323,19 @@
     },
     "pressureQueue": [
       {
+        "source": "npc-want",
+        "kind": "npc-want",
+        "subjectId": "calvar",
+        "aimedAtPlayer": true,
+        "urgency": 3,
+        "oneLineHook": "Calvar, unseen for 8 days, has come looking for you — driven by an unmet want: The filtration work done CORRECTLY — he came out of a solitary twenty-year watch for this; sloppiness offends him more than danger.. They arrive now, not content to keep waiting.",
+        "becomes": {
+          "type": "scene",
+          "who": "calvar"
+        },
+        "addedDay": 17
+      },
+      {
         "source": "threat-attack",
         "kind": "threat-attack",
         "subjectId": "beast_cinder_mote_drift",
@@ -7141,12 +7356,12 @@
         "subjectId": "tane-solr",
         "aimedAtPlayer": true,
         "urgency": 2,
-        "oneLineHook": "Tane Solr, unseen for 10 days, has come looking for you — driven by an unmet want: A bout that is true — not won or lost but honest, where both fighters come to the center-line having brought everything they actually are and no more.. They arrive now, not content to keep waiting.",
+        "oneLineHook": "Tane Solr, unseen for 11 days, has come looking for you — driven by an unmet want: A bout that is true — not won or lost but honest, where both fighters come to the center-line having brought everything they actually are and no more.. They arrive now, not content to keep waiting.",
         "becomes": {
           "type": "scene",
           "who": "tane-solr"
         },
-        "addedDay": 16
+        "addedDay": 17
       },
       {
         "source": "threat-attack",
@@ -14409,38 +14624,40 @@
         "label": "Huginn",
         "kind": "person",
         "facts": [
-          "[d1] Positioned its shadow over the dead rabbit at the moment Silas reached for the gift — not deliberate, perhaps, but load-bearing. Croaked one word ('well') and retracted it immediately.",
           "[d1] Asked directly, Huginn landed and gave one croak — directional (northwest), felt like 'soon' or 'already'. Will not specify what is ending up there, only that the heading is north and the matter is pr…",
+          "[d1] Asked directly, Huginn landed and gave one croak — directional (northwest), felt like 'soon' or 'already'. Will not specify what is ending up there, only that the heading is north and the matter is pr",
           "[d2] When Silas named Pell's futures plainly — tinkers, the pass, the spear-thread — Huginn did not orient toward any horizon-ending. It stayed still. From Huginn, stillness is the answer: she is not concl…",
           "[d2] Huginn's stillness when asked about Pell's futures means she is not foreclosed — no endings in motion for her, no roads concluding. The bird watches her out of interest, not as a harbinger.",
+          "[d2] When Silas named Pell's futures plainly — tinkers, the pass, the spear-thread — Huginn did not orient toward any horizon-ending. It stayed still. From Huginn, stillness is the answer: she is not concl",
           "[d3] Accepts a learning-bond when approached through threshold-attention rather than reaching. Teaches by texture-transfer — the feel of reading an ending's approach while its subject is still alive. The p…",
           "[d3] Huginn reads endings not as discrete events but as a field condition — a thickening in the air around a living thing long before the ending arrives. This texture has been transferred to Silas: the fee…",
           "[d3] The Attended End confirms Huginn's teaching is real and present in Silas's grain — the texture of accumulated endings sits in him as felt knowledge, not yet organized into reliable use. The craft can…",
           "[d3] Huginn's ending-texture can be threaded through Memory's rune alongside The Attended End — held lightly, it reads a living person's current hour without searching for an ending. Pell read as rooted, d…",
           "[d3] Huginn's ending-texture can be extended outward through Memory's collar rune with deliberate conserved attention — it reads a living person's current presence without searching for endings. Pell read…",
-          "[d12] The Ashwarden explanation given to Silas's mother: not trained, drawn — present at endings because that is its work, not because it was directed there. Veth confirmed this framing as accurate from the inside.",
-          "[d?] The One Who Stays — You were dying, once, and it did not leave, and it did not lie to you, and you have not spoken of it since.",
-          "[d13] When Huginn looks at Silas, it sees what it sees in dying things. Not a warning, not a prophecy — a description. It has been looking at him this way since the day they met, and it has not left. The staying is the answer.",
-          "[d1] Asked directly, Huginn landed and gave one croak — directional (northwest), felt like 'soon' or 'already'. Will not specify what is ending up there, only that the heading is north and the matter is pr",
-          "[d2] When Silas named Pell's futures plainly — tinkers, the pass, the spear-thread — Huginn did not orient toward any horizon-ending. It stayed still. From Huginn, stillness is the answer: she is not concl",
           "[d3] Accepts a learning-bond when approached through threshold-attention rather than reaching. Teaches by texture-transfer — the feel of reading an ending's approach while its subject is still alive. The p",
           "[d3] Huginn reads endings not as discrete events but as a field condition — a thickening in the air around a living thing long before the ending arrives. This texture has been transferred to Silas: the fee",
           "[d3] The Attended End confirms Huginn's teaching is real and present in Silas's grain — the texture of accumulated endings sits in him as felt knowledge, not yet organized into reliable use. The craft can ",
           "[d3] Huginn's ending-texture can be threaded through Memory's rune alongside The Attended End — held lightly, it reads a living person's current hour without searching for an ending. Pell read as rooted, d",
           "[d3] Huginn's ending-texture can be extended outward through Memory's collar rune with deliberate conserved attention — it reads a living person's current presence without searching for endings. Pell read ",
+          "[d12] The Ashwarden explanation given to Silas's mother: not trained, drawn — present at endings because that is its work, not because it was directed there. Veth confirmed this framing as accurate from the inside.",
+          "[d13] When Huginn looks at Silas, it sees what it sees in dying things. Not a warning, not a prophecy — a description. It has been looking at him this way since the day they met, and it has not left. The staying is the answer.",
           "[d16] Marrow is an Ashwarden warden who chose the corvid shape to attend endings the March cannot reach. She has sat with every death at Silas's side and demands precision in all things—truth before gentleness, exact form before explanation.",
+          "[d16] [while away] Coll spent both days chasing a paperwork discrepancy in the reserve ledger that turned out to be a copying error, leaving the real work of the culvert inspection unscheduled and the reserve question no clearer.",
           "[d17] Marrow is an Ashwarden warden, not merely a bird touched by Ashwarden craft. She chose the corvid form to attend endings the March cannot reach—deaths at the roadside, in exile, in solitude. She has been present at every death at Silas's side since they met and revealed herself in full warden-form…",
-          "[d17] Maren Ossitide is the legendary Ashwarden warden who buried the Drowned Year. She chose corvid form to attend endings the institutional March cannot reach—roadside deaths, exile endings, solitary passings that the formal warden network cannot reach. She has been present at every death at Silas's…"
+          "[d17] Maren Ossitide is the legendary Ashwarden warden who buried the Drowned Year. She chose corvid form to attend endings the institutional March cannot reach—roadside deaths, exile endings, solitary passings that the formal warden network cannot reach. She has been present at every death at Silas's…",
+          "[d17] Legendary Ashwarden warden; the one who buried the Drowned Year",
+          "[d17] Maren Ossitide is the legendary Ashwarden warden. She chose corvid form to attend endings the institutional March cannot reach—roadside deaths, exile endings, solitary passings. She has sat with every death at Silas's side since they met and has now revealed herself in full warden-form. She…",
+          "[d17] Maren Ossitide is the legendary Ashwarden warden who buried the Drowned Year. She chose corvid form to attend endings the institutional March cannot reach—roadside deaths, exile endings, solitary passings that have no formal warden to tend them. She has been present at every death at Silas's side…"
         ],
         "links": [
-          "mara-wells",
           "ashwarden",
           "precursor-signs-in-the-valley",
           "palework",
           "the-made-gate",
           "deathsense",
           "the-water-crisis",
-          "the-poles-pull"
+          "the-poles-pull",
+          "the-light-that-will-not-dim"
         ],
         "aliases": [
           "Marrow",
@@ -14448,11 +14665,17 @@
           "Marrow, the Warden",
           "Maren Ossitide",
           "The Legendary Warden",
-          "Maren Ossitide, The Legendary Warden"
+          "Maren Ossitide, The Legendary Warden",
+          "Warden Coll",
+          "Maren Ossitide — The One Who Buried the Drowned Year"
         ],
         "createdDay": 1,
         "entityId": "huginn",
-        "updatedDay": 17
+        "updatedDay": 17,
+        "archive": [
+          "[d?] The One Who Stays — You were dying, once, and it did not leave, and it did not lie to you, and you have not spoken of it since.",
+          "[d1] Positioned its shadow over the dead rabbit at the moment Silas reached for the gift — not deliberate, perhaps, but load-bearing. Croaked one word ('well') and retracted it immediately."
+        ]
       },
       "rabbit-structural-seam": {
         "id": "rabbit-structural-seam",
@@ -14712,7 +14935,7 @@
           "what-wakes-beneath",
           "calvar",
           "the-made-gate",
-          "marrow"
+          "huginn"
         ],
         "aliases": [
           "The Water Crisis (ongoing)"
@@ -15144,7 +15367,7 @@
           "calvar",
           "leth",
           "fendt-and-the-falsified-ledger",
-          "warden-coll",
+          "huginn",
           "the-water-crisis",
           "the-light-that-will-not-dim",
           "edge-district"
@@ -15852,19 +16075,6 @@
         "entityId": "cassiel-ord",
         "updatedDay": 16
       },
-      "warden-coll": {
-        "id": "warden-coll",
-        "label": "Warden Coll",
-        "kind": "person",
-        "facts": [
-          "[d16] [while away] Coll spent both days chasing a paperwork discrepancy in the reserve ledger that turned out to be a copying error, leaving the real work of the culvert inspection unscheduled and the reserve question no clearer."
-        ],
-        "links": [],
-        "aliases": [],
-        "createdDay": 16,
-        "entityId": "warden-coll",
-        "updatedDay": 16
-      },
       "edvar-crane": {
         "id": "edvar-crane",
         "label": "Edvar Crane",
@@ -15895,7 +16105,7 @@
           "palework",
           "boundary-stone",
           "the-shrine-that-would-not-hold",
-          "marrow",
+          "huginn",
           "order-sense",
           "the-light-that-will-not-dim",
           "maren-ossitide"
@@ -15906,29 +16116,6 @@
           "gen-whistling-woman-post"
         ],
         "createdDay": 16,
-        "updatedDay": 17
-      },
-      "marrow": {
-        "id": "marrow",
-        "label": "Maren Ossitide",
-        "kind": "person",
-        "facts": [
-          "[d17] Legendary Ashwarden warden; the one who buried the Drowned Year",
-          "[d17] Maren Ossitide is the legendary Ashwarden warden. She chose corvid form to attend endings the institutional March cannot reach—roadside deaths, exile endings, solitary passings. She has sat with every death at Silas's side since they met and has now revealed herself in full warden-form. She…",
-          "[d17] Maren Ossitide is the legendary Ashwarden warden who buried the Drowned Year. She chose corvid form to attend endings the institutional March cannot reach—roadside deaths, exile endings, solitary passings that have no formal warden to tend them. She has been present at every death at Silas's side…"
-        ],
-        "links": [
-          "ashwarden",
-          "the-made-gate",
-          "the-water-crisis",
-          "the-light-that-will-not-dim"
-        ],
-        "aliases": [
-          "Maren Ossitide — The One Who Buried the Drowned Year",
-          "marrow"
-        ],
-        "createdDay": 17,
-        "entityId": "marrow",
         "updatedDay": 17
       }
     },
@@ -16278,6 +16465,149 @@
           "entityId": "mara-wells"
         },
         "relinked": []
+      },
+      {
+        "at": "2026-09-12T01:52:36.584Z",
+        "source": {
+          "id": "warden-coll",
+          "label": "Warden Coll",
+          "kind": "person",
+          "facts": [
+            "[d16] [while away] Coll spent both days chasing a paperwork discrepancy in the reserve ledger that turned out to be a copying error, leaving the real work of the culvert inspection unscheduled and the reserve question no clearer."
+          ],
+          "links": [],
+          "aliases": [],
+          "createdDay": 16,
+          "entityId": "warden-coll",
+          "updatedDay": 16
+        },
+        "targetId": "huginn",
+        "targetBefore": {
+          "facts": [
+            "[d1] Positioned its shadow over the dead rabbit at the moment Silas reached for the gift — not deliberate, perhaps, but load-bearing. Croaked one word ('well') and retracted it immediately.",
+            "[d1] Asked directly, Huginn landed and gave one croak — directional (northwest), felt like 'soon' or 'already'. Will not specify what is ending up there, only that the heading is north and the matter is pr…",
+            "[d2] When Silas named Pell's futures plainly — tinkers, the pass, the spear-thread — Huginn did not orient toward any horizon-ending. It stayed still. From Huginn, stillness is the answer: she is not concl…",
+            "[d2] Huginn's stillness when asked about Pell's futures means she is not foreclosed — no endings in motion for her, no roads concluding. The bird watches her out of interest, not as a harbinger.",
+            "[d3] Accepts a learning-bond when approached through threshold-attention rather than reaching. Teaches by texture-transfer — the feel of reading an ending's approach while its subject is still alive. The p…",
+            "[d3] Huginn reads endings not as discrete events but as a field condition — a thickening in the air around a living thing long before the ending arrives. This texture has been transferred to Silas: the fee…",
+            "[d3] The Attended End confirms Huginn's teaching is real and present in Silas's grain — the texture of accumulated endings sits in him as felt knowledge, not yet organized into reliable use. The craft can…",
+            "[d3] Huginn's ending-texture can be threaded through Memory's rune alongside The Attended End — held lightly, it reads a living person's current hour without searching for an ending. Pell read as rooted, d…",
+            "[d3] Huginn's ending-texture can be extended outward through Memory's collar rune with deliberate conserved attention — it reads a living person's current presence without searching for endings. Pell read…",
+            "[d12] The Ashwarden explanation given to Silas's mother: not trained, drawn — present at endings because that is its work, not because it was directed there. Veth confirmed this framing as accurate from the inside.",
+            "[d?] The One Who Stays — You were dying, once, and it did not leave, and it did not lie to you, and you have not spoken of it since.",
+            "[d13] When Huginn looks at Silas, it sees what it sees in dying things. Not a warning, not a prophecy — a description. It has been looking at him this way since the day they met, and it has not left. The staying is the answer.",
+            "[d1] Asked directly, Huginn landed and gave one croak — directional (northwest), felt like 'soon' or 'already'. Will not specify what is ending up there, only that the heading is north and the matter is pr",
+            "[d2] When Silas named Pell's futures plainly — tinkers, the pass, the spear-thread — Huginn did not orient toward any horizon-ending. It stayed still. From Huginn, stillness is the answer: she is not concl",
+            "[d3] Accepts a learning-bond when approached through threshold-attention rather than reaching. Teaches by texture-transfer — the feel of reading an ending's approach while its subject is still alive. The p",
+            "[d3] Huginn reads endings not as discrete events but as a field condition — a thickening in the air around a living thing long before the ending arrives. This texture has been transferred to Silas: the fee",
+            "[d3] The Attended End confirms Huginn's teaching is real and present in Silas's grain — the texture of accumulated endings sits in him as felt knowledge, not yet organized into reliable use. The craft can ",
+            "[d3] Huginn's ending-texture can be threaded through Memory's rune alongside The Attended End — held lightly, it reads a living person's current hour without searching for an ending. Pell read as rooted, d",
+            "[d3] Huginn's ending-texture can be extended outward through Memory's collar rune with deliberate conserved attention — it reads a living person's current presence without searching for endings. Pell read ",
+            "[d16] Marrow is an Ashwarden warden who chose the corvid shape to attend endings the March cannot reach. She has sat with every death at Silas's side and demands precision in all things—truth before gentleness, exact form before explanation.",
+            "[d17] Marrow is an Ashwarden warden, not merely a bird touched by Ashwarden craft. She chose the corvid form to attend endings the March cannot reach—deaths at the roadside, in exile, in solitude. She has been present at every death at Silas's side since they met and revealed herself in full warden-form…",
+            "[d17] Maren Ossitide is the legendary Ashwarden warden who buried the Drowned Year. She chose corvid form to attend endings the institutional March cannot reach—roadside deaths, exile endings, solitary passings that the formal warden network cannot reach. She has been present at every death at Silas's…"
+          ],
+          "links": [
+            "mara-wells",
+            "ashwarden",
+            "precursor-signs-in-the-valley",
+            "palework",
+            "the-made-gate",
+            "deathsense",
+            "the-water-crisis",
+            "the-poles-pull"
+          ],
+          "aliases": [
+            "Marrow",
+            "the Warden",
+            "Marrow, the Warden",
+            "Maren Ossitide",
+            "The Legendary Warden",
+            "Maren Ossitide, The Legendary Warden"
+          ],
+          "entityId": "huginn"
+        },
+        "relinked": [
+          "overseer-grael"
+        ]
+      },
+      {
+        "at": "2026-09-12T01:52:36.586Z",
+        "source": {
+          "id": "marrow",
+          "label": "Maren Ossitide",
+          "kind": "person",
+          "facts": [
+            "[d17] Legendary Ashwarden warden; the one who buried the Drowned Year",
+            "[d17] Maren Ossitide is the legendary Ashwarden warden. She chose corvid form to attend endings the institutional March cannot reach—roadside deaths, exile endings, solitary passings. She has sat with every death at Silas's side since they met and has now revealed herself in full warden-form. She…",
+            "[d17] Maren Ossitide is the legendary Ashwarden warden who buried the Drowned Year. She chose corvid form to attend endings the institutional March cannot reach—roadside deaths, exile endings, solitary passings that have no formal warden to tend them. She has been present at every death at Silas's side…"
+          ],
+          "links": [
+            "ashwarden",
+            "the-made-gate",
+            "the-water-crisis",
+            "the-light-that-will-not-dim"
+          ],
+          "aliases": [
+            "Maren Ossitide — The One Who Buried the Drowned Year",
+            "marrow"
+          ],
+          "createdDay": 17,
+          "entityId": "marrow",
+          "updatedDay": 17
+        },
+        "targetId": "huginn",
+        "targetBefore": {
+          "facts": [
+            "[d?] The One Who Stays — You were dying, once, and it did not leave, and it did not lie to you, and you have not spoken of it since.",
+            "[d1] Positioned its shadow over the dead rabbit at the moment Silas reached for the gift — not deliberate, perhaps, but load-bearing. Croaked one word ('well') and retracted it immediately.",
+            "[d1] Asked directly, Huginn landed and gave one croak — directional (northwest), felt like 'soon' or 'already'. Will not specify what is ending up there, only that the heading is north and the matter is pr…",
+            "[d1] Asked directly, Huginn landed and gave one croak — directional (northwest), felt like 'soon' or 'already'. Will not specify what is ending up there, only that the heading is north and the matter is pr",
+            "[d2] When Silas named Pell's futures plainly — tinkers, the pass, the spear-thread — Huginn did not orient toward any horizon-ending. It stayed still. From Huginn, stillness is the answer: she is not concl…",
+            "[d2] Huginn's stillness when asked about Pell's futures means she is not foreclosed — no endings in motion for her, no roads concluding. The bird watches her out of interest, not as a harbinger.",
+            "[d2] When Silas named Pell's futures plainly — tinkers, the pass, the spear-thread — Huginn did not orient toward any horizon-ending. It stayed still. From Huginn, stillness is the answer: she is not concl",
+            "[d3] Accepts a learning-bond when approached through threshold-attention rather than reaching. Teaches by texture-transfer — the feel of reading an ending's approach while its subject is still alive. The p…",
+            "[d3] Huginn reads endings not as discrete events but as a field condition — a thickening in the air around a living thing long before the ending arrives. This texture has been transferred to Silas: the fee…",
+            "[d3] The Attended End confirms Huginn's teaching is real and present in Silas's grain — the texture of accumulated endings sits in him as felt knowledge, not yet organized into reliable use. The craft can…",
+            "[d3] Huginn's ending-texture can be threaded through Memory's rune alongside The Attended End — held lightly, it reads a living person's current hour without searching for an ending. Pell read as rooted, d…",
+            "[d3] Huginn's ending-texture can be extended outward through Memory's collar rune with deliberate conserved attention — it reads a living person's current presence without searching for endings. Pell read…",
+            "[d3] Accepts a learning-bond when approached through threshold-attention rather than reaching. Teaches by texture-transfer — the feel of reading an ending's approach while its subject is still alive. The p",
+            "[d3] Huginn reads endings not as discrete events but as a field condition — a thickening in the air around a living thing long before the ending arrives. This texture has been transferred to Silas: the fee",
+            "[d3] The Attended End confirms Huginn's teaching is real and present in Silas's grain — the texture of accumulated endings sits in him as felt knowledge, not yet organized into reliable use. The craft can ",
+            "[d3] Huginn's ending-texture can be threaded through Memory's rune alongside The Attended End — held lightly, it reads a living person's current hour without searching for an ending. Pell read as rooted, d",
+            "[d3] Huginn's ending-texture can be extended outward through Memory's collar rune with deliberate conserved attention — it reads a living person's current presence without searching for endings. Pell read ",
+            "[d12] The Ashwarden explanation given to Silas's mother: not trained, drawn — present at endings because that is its work, not because it was directed there. Veth confirmed this framing as accurate from the inside.",
+            "[d13] When Huginn looks at Silas, it sees what it sees in dying things. Not a warning, not a prophecy — a description. It has been looking at him this way since the day they met, and it has not left. The staying is the answer.",
+            "[d16] Marrow is an Ashwarden warden who chose the corvid shape to attend endings the March cannot reach. She has sat with every death at Silas's side and demands precision in all things—truth before gentleness, exact form before explanation.",
+            "[d16] [while away] Coll spent both days chasing a paperwork discrepancy in the reserve ledger that turned out to be a copying error, leaving the real work of the culvert inspection unscheduled and the reserve question no clearer.",
+            "[d17] Marrow is an Ashwarden warden, not merely a bird touched by Ashwarden craft. She chose the corvid form to attend endings the March cannot reach—deaths at the roadside, in exile, in solitude. She has been present at every death at Silas's side since they met and revealed herself in full warden-form…",
+            "[d17] Maren Ossitide is the legendary Ashwarden warden who buried the Drowned Year. She chose corvid form to attend endings the institutional March cannot reach—roadside deaths, exile endings, solitary passings that the formal warden network cannot reach. She has been present at every death at Silas's…"
+          ],
+          "links": [
+            "mara-wells",
+            "ashwarden",
+            "precursor-signs-in-the-valley",
+            "palework",
+            "the-made-gate",
+            "deathsense",
+            "the-water-crisis",
+            "the-poles-pull"
+          ],
+          "aliases": [
+            "Marrow",
+            "the Warden",
+            "Marrow, the Warden",
+            "Maren Ossitide",
+            "The Legendary Warden",
+            "Maren Ossitide, The Legendary Warden",
+            "Warden Coll"
+          ],
+          "entityId": "huginn"
+        },
+        "relinked": [
+          "the-water-crisis",
+          "gen-whistling-woman-post"
+        ]
       }
     ],
     "swept": [
@@ -17240,8 +17570,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1789176825096,
-  "rev": 1966,
+  "updatedAt": 1789177981554,
+  "rev": 1969,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -21562,7 +21892,7 @@
   "syncedAt": 1788658062664,
   "teachers": {},
   "regionsKnown": {
-    "valley": 668,
+    "valley": 669,
     "the_palelands": 6,
     "the_center": 151,
     "the_echo_vale": 14
@@ -21873,10 +22203,10 @@
     {
       "id": "sess-33",
       "startedAt": "2026-09-11T22:48:54.873Z",
-      "lastAt": "2026-09-12T01:33:45.090Z",
+      "lastAt": "2026-09-12T01:53:01.546Z",
       "startDay": 73,
       "endDay": 74,
-      "beats": 20
+      "beats": 21
     }
   ],
   "company": [
@@ -22390,19 +22720,19 @@
   },
   "_opEmitted": {
     "sceneSummary": 347,
-    "choices": 345,
+    "choices": 346,
     "characterDeltas": 178,
     "scene": 347,
-    "npcUpdates": 308,
+    "npcUpdates": 307,
     "factUpdates": 36,
     "placeUpdates": 78,
-    "codexUpdates": 208,
-    "timeOps": 315,
+    "codexUpdates": 207,
+    "timeOps": 314,
     "imagePrompt": 32,
     "sceneEnded": 123,
     "itemUpdates": 8,
     "questUpdates": 49,
-    "offer": 48,
+    "offer": 49,
     "moveTo": 20,
     "delegateOps": 4,
     "deeds": 22,
@@ -22416,7 +22746,7 @@
     "_applyFailedOp": 8,
     "newEncounter": 3,
     "encounterOps": 1,
-    "gambitApt": 52,
+    "gambitApt": 53,
     "markDefiningMoment": 1,
     "_engineClosedScene": 5,
     "gambitOps": 1,
@@ -22431,7 +22761,7 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 52,
+      "applied": 53,
       "rejected": 1,
       "lastWhy": "rejected-shape"
     },
@@ -23862,7 +24192,7 @@
     }
   },
   "holdingOffers": [],
-  "_lastProjectDay": 16,
+  "_lastProjectDay": 17,
   "likeness": {
     "battle:the_hundred_hands|sunwrack_valen|daybreak_mantle|67|stopped": {
       "keeps": [
@@ -24371,5 +24701,6 @@
       "why": "the record reads: “…of thin ground behind it. Reactivated and claimed by Silas Weir and company; named for its rooms: Pell's forge, Veth's laboratory, Cassiel'…”",
       "from": "its place"
     }
-  ]
+  ],
+  "_bandNotes": null
 }

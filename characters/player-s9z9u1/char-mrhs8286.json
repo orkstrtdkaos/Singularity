@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 32,
-  "xp": 3131,
+  "xp": 3136,
   "attributes": {
     "physical": 5,
     "mental": 8,
@@ -206,13 +206,14 @@
     "value": 0.053420408281249956,
     "spectrum": 0.11337499999999998,
     "dark_light": -0.1,
-    "space_time": 0.05
+    "space_time": 0.05,
+    "destruction_creation": -0.05
   },
   "attunement": 31,
   "maxHealth": 196,
   "health": 196,
   "maxEnergy": 287,
-  "energy": 262,
+  "energy": 240,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2196,6 +2197,21 @@
       "spread": [],
       "day": 16,
       "worldDay": 73
+    },
+    {
+      "at": "2026-09-12T00:48:15.324Z",
+      "locationId": "gen-whistling-woman-post",
+      "communityId": null,
+      "description": "Raised a universal shrine at the Made Gate—unmarked, singular, open to all peoples",
+      "tags": [
+        "craft",
+        "valor",
+        "creation"
+      ],
+      "weight": 2,
+      "spread": [],
+      "day": 16,
+      "worldDay": 74
     }
   ],
   "relationships": {},
@@ -2285,185 +2301,145 @@
         "player": "Walking back to the Post - Silas is inspired to raise a universal shrine near the Made Gate.  As this gate will likely be used by all the peoples of Exesa, and Pell would want this, make a shrine that would be comfortable to every domain in the world.  Just like the mine and the Warden Temple.. .but this time all inclusive and thoughtful.  Poor the time and energy into this and use what skills are needed.",
         "summary": "At the Made Gate in evening light, Silas attempts to raise an inclusive shrine for all peoples—combining Palework and Boundary-Stone into a novel unified working. The crafts are incompatible at this depth: Palework reads the sacred in an ending; Boundary-Stone claims it as held by the reader. A shrine for all cannot be marked as belonging to one. The working fails. The gate stands unmarked.",
         "narration": "You walk the road back toward the Made Gate with the evening light bleeding gold across the moorland, and the thought settles in you clean and whole: a threshold for all of them. Not Ashwarden only. Not Wright only. A place where the Radiant and the Rootkin, the Lattice-reader and the plain craftsperson, could each stand and know themselves welcome. Pell would want that. The gate deserves that.\n\nYou reach the cleared ground before the gate as the light shifts toward amber. The stones are warm still. You set your hands on the gate's frame—the warding-marks answering under your palms—and you begin to work.\n\nPalework reaches first, the way it always does: you read the ground's ending, the way it wants to settle, what it will hold. A shrine is a place where an ending is named as sacred. You feel the shape of it, the proportions that would let a warden sit with a body, a Lattice-reader mark an orderly completion, a Rootkin lay green for the letting-go. All of it, held at once. You pull Boundary-Stone up beside it—not to wall anything in, but to declare: *here* is set apart, *here* all the ways of tending are honored.\n\nBut as you weave them together, as you begin to draw the stone up from the ground and shape the walls that will hold all those purposes at once, something fractures in the working. The two crafts are both about endings—Palework reads them, Boundary-Stone marks them—but they are not the same ending. Palework says: *this one is finished, and it matters*. Boundary-Stone says: *this threshold is mine to hold*. A shrine that serves every people cannot be Ashwarden-held. The moment you try to make it both—a space that is sacred to all, and a space that is marked as yours—the working unravels.\n\nYou feel the strain in your chest, a sharp pull behind your ribs. The stone half-risen falls back. The boundary you were trying to declare breaks before it forms. You are left standing with your hands on the gate, breathing hard, with nothing to show but effort and the clear knowledge of what you tried and why it failed.\n\nThe gate stands unmarked. The ground lies still. And the question hangs: a shrine for all peoples cannot be held by one. Not by your hand, anyway. Not like this."
+      },
+      {
+        "player": "try again... and build each piece sequentially. starting with clearing the ground into a great circle and creating a place for each pole... and in the center - the Shrine to the singularity. Surge the Making.",
+        "summary": "At the Made Gate in night-fall, Silas built a universal shrine—not marked by any single tradition, but raised sequentially with each component answering its own purpose. The circle is claimed, the pole-stations set, and the central shrine stands unmarked and singular.",
+        "narration": "You step back from the gate and draw a long breath, centering yourself in the work ahead. The failed shrine sits in you still—not as defeat, but as a question that wants answering differently.\n\nYou begin again, but this time you build sequentially, methodically, the way a wright builds a house. First: the clearing itself. You walk the circle, your hands trailing—Boundary-Stone reaching first, claiming the ground as work-space, a threshold between the ordinary moorland and what you will make here. The warding-mark you lay is soft, not a ward against intrusion but a declaration: *this ground is made*. The earth feels the claiming and settles into it.\n\nSecond: the pole-stations. You walk inward and outward, marking four cardinal points—north and south, spinward and widdershins—and at each you set a simple stone. Not grand. Not claimed by any one tradition. Just: *here a people may stand*. The stones remember what they are for the moment you name them. Ashwarden stone. Figurist stone. Lattice stone. Wright stone. A fifth, unmarked, for whoever comes with no people's name. The work flows through you steady and clear.\n\nThird, and the hardest: the center. You move to the heart of the circle and you kneel. Here the Surge comes—not a push against resistance, but a descent, a deepening. You call on the Raised Thing at its full strength, and you pour the energy down into the ground like water into dry earth. The working takes, and takes, and takes—60 energy flows out of you, then 80, then the full Surge-weight of 140, and still you pour.\n\nWhat rises is *singular*. Not a shrine to one people or one craft. A stone plinth, simple and unadorned, tall enough to rest a hand on, broad enough to hold a name if someone wanted to carve one. No altar. No symbol. No mark. Just: *this is the center of the circle, and you may stand here*.\n\nYou sit back on your heels, breathing hard, the energy nearly spent. The circle holds. The poles hold. The shrine stands, unmarked and whole, in the center of the cleared ground. It is not what you reached for—but it is what the ground would let you make.\n\nBehind you, Huginn shifts on the gate-post and croaks once, a sound that might mean approval or might mean she is simply noting that you have finished something else."
       }
     ],
     "lastTurn": {
-      "narration": "You walk the road back toward the Made Gate with the evening light bleeding gold across the moorland, and the thought settles in you clean and whole: a threshold for all of them. Not Ashwarden only. Not Wright only. A place where the Radiant and the Rootkin, the Lattice-reader and the plain craftsperson, could each stand and know themselves welcome. Pell would want that. The gate deserves that.\n\nYou reach the cleared ground before the gate as the light shifts toward amber. The stones are warm still. You set your hands on the gate's frame—the warding-marks answering under your palms—and you begin to work.\n\nPalework reaches first, the way it always does: you read the ground's ending, the way it wants to settle, what it will hold. A shrine is a place where an ending is named as sacred. You feel the shape of it, the proportions that would let a warden sit with a body, a Lattice-reader mark an orderly completion, a Rootkin lay green for the letting-go. All of it, held at once. You pull Boundary-Stone up beside it—not to wall anything in, but to declare: *here* is set apart, *here* all the ways of tending are honored.\n\nBut as you weave them together, as you begin to draw the stone up from the ground and shape the walls that will hold all those purposes at once, something fractures in the working. The two crafts are both about endings—Palework reads them, Boundary-Stone marks them—but they are not the same ending. Palework says: *this one is finished, and it matters*. Boundary-Stone says: *this threshold is mine to hold*. A shrine that serves every people cannot be Ashwarden-held. The moment you try to make it both—a space that is sacred to all, and a space that is marked as yours—the working unravels.\n\nYou feel the strain in your chest, a sharp pull behind your ribs. The stone half-risen falls back. The boundary you were trying to declare breaks before it forms. You are left standing with your hands on the gate, breathing hard, with nothing to show but effort and the clear knowledge of what you tried and why it failed.\n\nThe gate stands unmarked. The ground lies still. And the question hangs: a shrine for all peoples cannot be held by one. Not by your hand, anyway. Not like this.",
-      "sceneSummary": "At the Made Gate in evening light, Silas attempts to raise an inclusive shrine for all peoples—combining Palework and Boundary-Stone into a novel unified working. The crafts are incompatible at this depth: Palework reads the sacred in an ending; Boundary-Stone claims it as held by the reader. A shrine for all cannot be marked as belonging to one. The working fails. The gate stands unmarked.",
+      "narration": "You step back from the gate and draw a long breath, centering yourself in the work ahead. The failed shrine sits in you still—not as defeat, but as a question that wants answering differently.\n\nYou begin again, but this time you build sequentially, methodically, the way a wright builds a house. First: the clearing itself. You walk the circle, your hands trailing—Boundary-Stone reaching first, claiming the ground as work-space, a threshold between the ordinary moorland and what you will make here. The warding-mark you lay is soft, not a ward against intrusion but a declaration: *this ground is made*. The earth feels the claiming and settles into it.\n\nSecond: the pole-stations. You walk inward and outward, marking four cardinal points—north and south, spinward and widdershins—and at each you set a simple stone. Not grand. Not claimed by any one tradition. Just: *here a people may stand*. The stones remember what they are for the moment you name them. Ashwarden stone. Figurist stone. Lattice stone. Wright stone. A fifth, unmarked, for whoever comes with no people's name. The work flows through you steady and clear.\n\nThird, and the hardest: the center. You move to the heart of the circle and you kneel. Here the Surge comes—not a push against resistance, but a descent, a deepening. You call on the Raised Thing at its full strength, and you pour the energy down into the ground like water into dry earth. The working takes, and takes, and takes—60 energy flows out of you, then 80, then the full Surge-weight of 140, and still you pour.\n\nWhat rises is *singular*. Not a shrine to one people or one craft. A stone plinth, simple and unadorned, tall enough to rest a hand on, broad enough to hold a name if someone wanted to carve one. No altar. No symbol. No mark. Just: *this is the center of the circle, and you may stand here*.\n\nYou sit back on your heels, breathing hard, the energy nearly spent. The circle holds. The poles hold. The shrine stands, unmarked and whole, in the center of the cleared ground. It is not what you reached for—but it is what the ground would let you make.\n\nBehind you, Huginn shifts on the gate-post and croaks once, a sound that might mean approval or might mean she is simply noting that you have finished something else.",
+      "sceneSummary": "At the Made Gate in night-fall, Silas built a universal shrine—not marked by any single tradition, but raised sequentially with each component answering its own purpose. The circle is claimed, the pole-stations set, and the central shrine stands unmarked and singular.",
       "choices": [
         {
-          "label": "Rest here and try again—the working was sound, just the braiding was wrong",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
-          "difficulty": "hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study",
-            "craft",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Leave the shrine ungated—let all peoples claim it together, without a warden's mark",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "craft",
-            "compromise"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Pell what she would choose—bring her here and let her read it",
+          "label": "Return to the post and tell Pell what you've made",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": "very easy",
-          "opposedDifficulty": null,
+          "trivial": true,
           "intentTags": [
-            "help",
-            "romantic"
+            "travel"
           ],
           "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "energyCost": null
         },
         {
-          "label": "Head back to the post—you need food, rest, and clearer thought before you try this again",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Sit with the shrine for a while longer—let it settle into the ground, and let yourself settle into what it means",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {},
           "difficulty": "very easy",
-          "opposedDifficulty": null,
+          "trivial": true,
           "intentTags": [
-            "travel",
-            "careful"
+            "study"
           ],
           "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "energyCost": null
+        },
+        {
+          "label": "Walk the shrine's perimeter slowly, reading it with Order-Sense—confirm the work is sound and will hold",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": "easy",
+          "trivial": false,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 2
         }
       ],
-      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -28,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
+        "energy": -280
       },
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "standingOps": [],
-      "delegateOps": [],
-      "arcOps": [],
-      "adoptSchool": null,
-      "offer": null,
-      "stageOps": [],
-      "scene": {
-        "setting": "The Made Gate clearing at evening—amber light across moorland, the frameless gate standing in its marked circle, the stone of its uprights still warm from the day. The ground around it is clear and open. Sky bleeds gold westward; the road south and north are both visible from this ground.",
-        "npcsPresent": [],
-        "objects": [
-          "The Made Gate itself—frameless, shadow-warded, marked with Veth's open-hand and Pell's ironsense-read",
-          "Huginn—perched on the right upright, watching the working with one patient eye"
-        ],
-        "threads": [
-          "A shrine for all peoples—attempted, failed, the working incomplete",
-          "The gate stands unmarked and unguarded save by its own warding",
-          "Pell at the post, waiting—does not yet know the shrine-work broke"
-        ]
-      },
-      "npcUpdates": [],
-      "intentsHeard": [],
-      "factUpdates": [],
-      "placeUpdates": [
+      "deeds": [
         {
-          "note": "Silas Weir attempted to raise an inclusive shrine at the Made Gate clearing—combining Palework and Boundary-Stone to create a space sacred to all peoples. The working failed: a shrine for all peoples cannot be simultaneously held by one warden's mark. The attempt is incomplete; the ground remains unmarked.",
-          "flag": null,
-          "subPlace": null
+          "description": "Raised a universal shrine at the Made Gate—unmarked, singular, open to all peoples",
+          "tags": [
+            "craft",
+            "valor",
+            "creation"
+          ],
+          "weight": 2
         }
       ],
-      "discovery": null,
+      "scene": {
+        "setting": "The Made Gate clearing at night-fall—the circle now fully claimed and marked by the sequential work, four pole-stations standing at cardinal points, the central shrine a simple unmarked stone in the heart of it all. The made gate itself stands to the south, shadow-warded and fully sealed. The moorland stretches north and east and widdershins into darkening distance. Huginn perches on the right upright of the gate.",
+        "npcsPresent": [
+          {
+            "name": "Huginn",
+            "state": "Perched on the gate-post, one eye on Silas, patient and still"
+          }
+        ],
+        "objects": [
+          "The Made Gate—frameless, shadow-warded, marked with Veth's open-hand at the left upright and Pell's mark at the right",
+          "Four standing stones at the cardinal points—unmarked, each a pole-station for a people",
+          "The central shrine plinth—simple stone, unadorned, singular"
+        ],
+        "threads": [
+          "The universal shrine is now complete and standing",
+          "Pell waits at the post, unaware of what Silas has made",
+          "Night is settling; the road back is clear but darker"
+        ]
+      },
       "codexUpdates": [
         {
-          "topic": "the-shrine-that-would-not-hold",
-          "label": "The Shrine That Would Not Hold (mystery)",
-          "kind": "mystery",
-          "entityId": null,
-          "fact": "A shrine for all peoples cannot be both universally sacred and singularly warden-held. Palework reads the sacred in an ending; Boundary-Stone claims it as marked territory. The two crafts are incompatible at this depth—one makes the space sacred, the other makes it yours. A shrine for all requires a different answer.",
+          "topic": "gen_whistling_woman_post",
+          "label": "Whistling Woman Post",
+          "kind": "place",
+          "entityId": "gen_whistling_woman_post",
+          "fact": "The Made Gate now has a universal shrine at its center—unmarked, open to all peoples, built sequentially by Silas Weir on the night of Day 16. The shrine is a simple stone plinth in the heart of a claimed circle, with four pole-stations at the cardinal points.",
           "links": [
-            "the-made-gate",
-            "palework",
-            "boundary_stone"
+            "the_made_gate"
           ]
         }
       ],
-      "holdingOps": [],
-      "debtOps": [],
-      "partyOps": [],
-      "generateRequest": [],
-      "encounterOps": [],
-      "projectOps": [],
-      "bandOps": [],
-      "deathOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": {
-        "hoursPassed": 1.5,
-        "why": "the working took an hour and a half—effort, focus, and the slow unraveling"
-      },
-      "moveTo": null,
-      "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": null,
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
-      "sceneEnded": false
-    },
-    "sceneState": {
-      "setting": "The Made Gate clearing at evening—amber light across moorland, the frameless gate standing in its marked circle, the stone of its uprights still warm from the day. The ground around it is clear and open. Sky bleeds gold westward; the road south and north are both visible from this ground.",
-      "npcsPresent": [],
-      "objects": [
-        "The Made Gate itself—frameless, shadow-warded, marked with Veth's open-hand and ",
-        "Huginn—perched on the right upright, watching the working with one patient eye"
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "A universal shrine now stands at the Made Gate clearing—raised by Silas Weir using The Raised Thing at novel depth (Surge-cast), unmarked and singular, open to all peoples. The shrine is anchored at the center of a claimed circle with four pole-stations at cardinal points. The working succeeded where the braided working failed: by building sequentially rather than unified.",
+          "subjectId": "the_made_gate"
+        }
       ],
-      "threads": [
-        "A shrine for all peoples—attempted, failed, the working incomplete",
-        "The gate stands unmarked and unguarded save by its own warding",
-        "Pell at the post, waiting—does not yet know the shrine-work broke"
+      "placeUpdates": [
+        {
+          "note": "The Made Gate clearing now contains a completed universal shrine—a simple unmarked stone plinth at the center of a claimed circle, with four pole-stations at cardinal points (Ashwarden, Figurist, Lattice, Wright) and a fifth unmarked. The circle itself is warded and claimed as work-space.",
+          "flag": {
+            "shrine_complete": true,
+            "shrine_universal": true
+          }
+        }
       ]
     },
-    "beats": 1
+    "sceneState": {
+      "setting": "The Made Gate clearing at night-fall—the circle now fully claimed and marked by the sequential work, four pole-stations standing at cardinal points, the central shrine a simple unmarked stone in the heart of it all. The made gate itself stands to the south, shadow-warded and fully sealed. The moorland stretches north and east and widdershins into darkening distance. Huginn perches on the right…",
+      "npcsPresent": [
+        {
+          "name": "Huginn",
+          "state": "Perched on the gate-post, one eye on Silas, patient and still"
+        }
+      ],
+      "objects": [
+        "The Made Gate—frameless, shadow-warded, marked with Veth's open-hand at the left",
+        "Four standing stones at the cardinal points—unmarked, each a pole-station for a ",
+        "The central shrine plinth—simple stone, unadorned, singular"
+      ],
+      "threads": [
+        "The universal shrine is now complete and standing",
+        "Pell waits at the post, unaware of what Silas has made",
+        "Night is settling; the road back is clear but darker"
+      ]
+    },
+    "beats": 2
   },
   "clock": {
     "schemaVersion": 1,
     "day": 16,
-    "hour": 21,
+    "hour": 22,
     "realAnchor": null
   },
   "companions": [
@@ -6301,11 +6277,14 @@
         "[d15] The Whistling Woman post is now confirmed operational as a warden-staffed waystation—Silas Weir has arrived and the relay mechanism's first test melody was answered from across the moorland network.",
         "[d16] The Whistling Woman post now has a second shadow tablet seated on the interior shelf—Deni Cors's pair, enabling secure two-way communication between the post and the wider network.",
         "[d16] The shadow-model of the Whistling Woman post now exists as a working tool—a dimensional structure held by braided Shadow Work and Working Model, showing the post's layout, relay vault, watch-room sightlines, threshold-marks, and potential defensive vantages. The model is responsive to adjustment…",
-        "[d16] Silas Weir attempted to raise an inclusive shrine at the Made Gate clearing—combining Palework and Boundary-Stone to create a space sacred to all peoples. The working failed: a shrine for all peoples cannot be simultaneously held by one warden's mark. The attempt is incomplete; the ground remains…"
+        "[d16] Silas Weir attempted to raise an inclusive shrine at the Made Gate clearing—combining Palework and Boundary-Stone to create a space sacred to all peoples. The working failed: a shrine for all peoples cannot be simultaneously held by one warden's mark. The attempt is incomplete; the ground remains…",
+        "[d16] The Made Gate clearing now contains a completed universal shrine—a simple unmarked stone plinth at the center of a claimed circle, with four pole-stations at cardinal points (Ashwarden, Figurist, Lattice, Wright) and a fifth unmarked. The circle itself is warded and claimed as work-space."
       ],
       "flags": {
         "status": "active",
-        "warden": "silas_weir"
+        "warden": "silas_weir",
+        "shrine_complete": true,
+        "shrine_universal": true
       },
       "lastVisit": 15,
       "vectorsKnown": [],
@@ -6501,7 +6480,7 @@
     "lastTickWorldDay": 74,
     "lastCanonWorldDay": 74,
     "lastGenCount": 1776,
-    "turnsSinceOffer": 6,
+    "turnsSinceOffer": 7,
     "recentOffers": [
       {
         "thing": "The moorland silence holds a weight—a listening quality that suggests the relay network is not merely a series of posts but something more…",
@@ -15910,7 +15889,8 @@
         "kind": "place",
         "entityId": "gen-whistling-woman-post",
         "facts": [
-          "[d16] The Shrine That Would Not Hold (mystery) — A shrine for all peoples cannot be both universally sacred and singularly warden-held. Palework reads the sacred in an ending; Boundary-Stone claims it as marked territory. The two crafts are incompatible at this depth—one makes the space sacred, the…"
+          "[d16] The Shrine That Would Not Hold (mystery) — A shrine for all peoples cannot be both universally sacred and singularly warden-held. Palework reads the sacred in an ending; Boundary-Stone claims it as marked territory. The two crafts are incompatible at this depth—one makes the space sacred, the…",
+          "[d16] The Made Gate now has a universal shrine at its center—unmarked, open to all peoples, built sequentially by Silas Weir on the night of Day 16. The shrine is a simple stone plinth in the heart of a claimed circle, with four pole-stations at the cardinal points."
         ],
         "links": [
           "the-made-gate",
@@ -16330,22 +16310,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 25.706375757820105,
-    "cerebral": 17.823421991805933,
-    "social": 9.385532113138252,
-    "generous": 5.015612404189684,
-    "cautious": 6.096702393066061,
-    "physical": 0.306388252646927,
-    "risky": 0.8901399988043041,
-    "ruthless": 0.15995305094330703,
-    "carousing": 1.680249761552287,
-    "amorous": 2.8154474714886644,
-    "patient": 0.5378116011774846,
-    "stealth": 0.000005590215420739729,
-    "devotion": 0.22843465897026538,
-    "craft": 4.451852442834564,
-    "leadership": 2.418786855370444,
-    "deception": 0.026770719579144144
+    "strategic": 26.0637163638746,
+    "cerebral": 17.377836442010786,
+    "social": 9.150893810309796,
+    "generous": 4.890222094084942,
+    "cautious": 6.94428483323941,
+    "physical": 0.2987285463307538,
+    "risky": 0.8678864988341964,
+    "ruthless": 0.15595422466972436,
+    "carousing": 1.6382435175134797,
+    "amorous": 2.7450612847014475,
+    "patient": 0.5243663111480474,
+    "stealth": 0.000005450460035221235,
+    "devotion": 0.22272379249600874,
+    "craft": 4.3405561317637,
+    "leadership": 2.358317183986183,
+    "deception": 0.02610145158966554
   },
   "aptitudes": [
     "strategist",
@@ -16354,7 +16334,7 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 965,
+  "actionCount": 966,
   "grantsVersion": 1,
   "reconcileVersion": 49,
   "gallery": [
@@ -17192,8 +17172,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1789173903781,
-  "rev": 1947,
+  "updatedAt": 1789174095328,
+  "rev": 1948,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -20581,6 +20561,12 @@
       "text": "The buried water readings proving pole-pull as the true cause are now retrieved from Grael's sealed Archive cabinet. The warden-mark was triggered; Veth knows the cabinet was breached. Three days remain before the convene votes on whether to accept pole-pull as the crisis's source.",
       "day": 16,
       "subjectId": "the-water-crisis"
+    },
+    {
+      "id": "the_made_gate",
+      "text": "A universal shrine now stands at the Made Gate clearing—raised by Silas Weir using The Raised Thing at novel depth (Surge-cast), unmarked and singular, open to all peoples. The shrine is anchored at the center of a claimed circle with four pole-stations at cardinal points. The working succeeded…",
+      "day": 16,
+      "subjectId": "the_made_gate"
     }
   ],
   "practice": {
@@ -20621,7 +20607,8 @@
       "working_model": 2,
       "dawn_surgery": 1,
       "shadow_work": 2,
-      "braid_deathsense_palework": 1
+      "braid_deathsense_palework": 1,
+      "open_material": 1
     },
     "coActivations": {
       "lightsense+numen_sense": 1,
@@ -20724,7 +20711,8 @@
       "dawn_surgery": 68,
       "shadow_work": 73,
       "braid_deathsense_palework": 73,
-      "wildcraft": 74
+      "wildcraft": 74,
+      "open_material": 74
     }
   },
   "companionBonds": {
@@ -21449,7 +21437,7 @@
   "syncedAt": 1788658062664,
   "teachers": {},
   "regionsKnown": {
-    "valley": 660,
+    "valley": 661,
     "the_palelands": 6,
     "the_center": 151,
     "the_echo_vale": 14
@@ -21760,10 +21748,10 @@
     {
       "id": "sess-33",
       "startedAt": "2026-09-11T22:48:54.873Z",
-      "lastAt": "2026-09-12T00:45:03.770Z",
+      "lastAt": "2026-09-12T00:48:15.323Z",
       "startDay": 73,
       "endDay": 74,
-      "beats": 12
+      "beats": 13
     }
   ],
   "company": [
@@ -22265,14 +22253,14 @@
     "gen-whistling-woman-post": "https://image.pollinations.ai/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=32614&nologo=true&_cb=1_1"
   },
   "_opEmitted": {
-    "sceneSummary": 339,
-    "choices": 338,
-    "characterDeltas": 170,
-    "scene": 339,
+    "sceneSummary": 340,
+    "choices": 339,
+    "characterDeltas": 171,
+    "scene": 340,
     "npcUpdates": 301,
-    "factUpdates": 29,
-    "placeUpdates": 76,
-    "codexUpdates": 200,
+    "factUpdates": 30,
+    "placeUpdates": 77,
+    "codexUpdates": 201,
     "timeOps": 310,
     "imagePrompt": 27,
     "sceneEnded": 117,
@@ -22281,7 +22269,7 @@
     "offer": 43,
     "moveTo": 20,
     "delegateOps": 4,
-    "deeds": 16,
+    "deeds": 17,
     "standingOps": 5,
     "ledgerEvents": 10,
     "discovery": 6,
@@ -22298,7 +22286,7 @@
     "gambitOps": 1,
     "intentsHeard": 1
   },
-  "_opTurns": 339,
+  "_opTurns": 340,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -22415,11 +22403,6 @@
         "day": 14
       },
       {
-        "text": "Sealed the made gate with a warded shadow-frame and the Weirmark — the first warded threshold on the March since the Transition",
-        "weight": 2,
-        "day": 14
-      },
-      {
         "text": "Gave the final instruction to the pre-Transition reclamation site — close clean and stop — ending fifteen years of unattended operation and beginning the watershed's return to itself.",
         "weight": 3,
         "day": 14
@@ -22466,6 +22449,11 @@
       },
       {
         "text": "Forged a novel craft-braiding that manifests shadow as persistent structural model—a threshold-post's purpose made visible and revisable in real time.",
+        "weight": 2,
+        "day": 16
+      },
+      {
+        "text": "Raised a universal shrine at the Made Gate—unmarked, singular, open to all peoples",
         "weight": 2,
         "day": 16
       }
@@ -23454,18 +23442,18 @@
   ],
   "skillUses": {
     "travel": 10,
-    "careful": 5,
+    "careful": 6,
     "study": 12,
     "scout": 9,
     "lead": 2,
     "ask": 2,
     "plan": 12,
     "negotiate": 2,
-    "prepare": 11,
+    "prepare": 12,
     "investigate": 4,
     "craft": 7,
     "help": 6,
-    "discipline": 1,
+    "discipline": 2,
     "persuade": 1,
     "rapport": 7,
     "meditate": 2,
@@ -23615,6 +23603,14 @@
       "day": 16,
       "worldDay": 73,
       "actionCount": 961
+    },
+    {
+      "companionId": "marrow",
+      "kind": "deed",
+      "delta": 0.5,
+      "day": 16,
+      "worldDay": 74,
+      "actionCount": 965
     }
   ],
   "_standingOpRefusals": [

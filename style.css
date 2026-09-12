@@ -1500,3 +1500,23 @@ img[data-lightbox] { cursor: zoom-in; }
 .party-panel .pp-straggler { margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--border); }
 @media (max-width: 600px) { .party-panel { right: 0; left: 0; bottom: 0; width: auto; max-width: none; border-radius: 10px 10px 0 0; max-height: 50vh; } }
 @media (prefers-reduced-motion: reduce) { .party-panel .pp-bar-fill { transition: none; } }
+
+/* §179 (Erik 2026-09-12: "that very untidy piece of UI") — the holding card's controls as labelled rows, and what it has as chips. */
+.hold-controls { display: flex; flex-direction: column; gap: 6px; margin-top: 6px; }
+.hold-ctl { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.hold-ctl-label { font-family: var(--font-ui); font-size: 10px; text-transform: uppercase; letter-spacing: .6px; color: var(--ink-dim); min-width: 96px; }
+.hold-ctl select { flex: 1 1 160px; min-width: 0; }
+.hold-ctl .opt { padding: 5px 10px; font-size: 12px; }
+.hold-has { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+.hold-chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 4px 2px 8px; border: 1px solid var(--border); border-radius: 10px; background: var(--panel2); font-size: 12px; color: var(--ink); }
+.hold-chip-x { background: none; border: 0; color: var(--ink-dim); cursor: pointer; font-size: 12px; line-height: 1; padding: 0 3px; }
+.hold-chip-x:hover, .hold-chip-x:focus-visible { color: var(--ink); }
+
+/* §179 — WHO'S HERE: one line per person. The name yields (ellipsis) before the standing does; the standing never wraps; the
+   controls are one cluster, drawn as controls rather than as the browser's default buttons. */
+.known-npc { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; min-width: 0; }
+.known-npc .npc-name { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.known-npc .rep-band { flex: 0 1 auto; min-width: 0; max-width: 48%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.npc-ctls { flex: 0 0 auto; display: inline-flex; gap: 2px; }
+.npc-ctl { background: none; border: 1px solid transparent; color: var(--ink-dim); border-radius: 6px; padding: 1px 4px; font-size: 12px; line-height: 1.2; cursor: pointer; font-family: var(--font-ui); }
+.npc-ctl:hover, .npc-ctl:focus-visible { color: var(--ink); border-color: var(--border); }

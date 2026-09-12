@@ -2224,6 +2224,46 @@ console.log("\n── §178 · the hands control reads the select beside it, and
     && /const people = askable\(\)\.filter\(id => id !== h\.steward\)\.slice\(0, 80\);/.test(app178) && /const folk = askable\(\)\.slice\(0, 80\);/.test(app178));
 }
 
+/* ══════════ §179 — THE HOLDING CARD'S CONTROLS, TIDIED; A COMPANION SHOWN BY THE NAME THE STORY KNOWS (Erik 2026-09-12: "can you clean up that very untidy piece of UI as well?") ══════════ */
+console.log("\n── §179 · labelled rows and chips on the holding card; Huginn (Marrow) is Maren Ossitide in the sidebar ──");
+{
+  const app179 = rd("app.js").replace(/^\s*\/\/.*$/gm, "");
+  const css179 = rd("style.css");
+  check("§179: ⛔ the card's controls are two labelled rows — a craft to put to it, and the people — and the hands select shares its row with its buttons (what handSelFor reads)",
+    /<div class="hold-controls">/.test(app179) && /<div class="hold-ctl"><span class="hold-ctl-label">Put a craft to it<\/span><select data-hold-craft=/.test(app179)
+    && /<div class="hold-ctl"><span class="hold-ctl-label">People<\/span><select data-hold-hand="\$\{esc\(h\.id\)\}">[^\n]*<button class="opt" data-hold-crew=/.test(app179)
+    && !/<div class="opt-row" style="margin-top:4px;gap:6px;flex-wrap:wrap">/.test(app179));
+  check("§179: ⛔ what the hold HAS reads as chips, each with its own tear-down, not a sentence with × buttons in it — and the CSS exists for every class the markup uses",
+    /<span class="hold-chip">[^\n]*<button class="hold-chip-x" data-hold-unfeature=/.test(app179) && /<div class="hint hold-has"><span class="hold-ctl-label">has<\/span>/.test(app179)
+    && /\.hold-controls \{/.test(css179) && /\.hold-ctl \{/.test(css179) && /\.hold-ctl-label \{/.test(css179) && /\.hold-has \{/.test(css179) && /\.hold-chip \{/.test(css179) && /\.hold-chip-x \{/.test(css179));
+  check("§179: ⛔ a companion whose person is in the registry is named by the registry everywhere the companion is named — a rename still wins, the authored name is last",
+    /const compName = \(c\) => character\.companionNames\?\.\[c\.id\] \|\| character\.npcRegistry\?\.\[c\.id\]\?\.name \|\| c\.name;/.test(app179)
+    && (app179.match(/compName\(c\)/g) || []).length >= 6 && !/character\.companionNames\?\.\[c\.id\] \|\| c\.name/.test(app179) && !/character\.companionNames\?\.\[id\] \|\| c\.name/.test(app179));
+  // ⛔ WHO'S HERE: the name wrapped under the standing pill, the pill wrapped inside itself, and the controls were the browser's default buttons
+  check("§179: ⛔ who's here is one line per person — the name yields before the standing, the standing never wraps, the controls are one cluster drawn as controls",
+    /\.known-npc \.npc-name \{[^}]*text-overflow: ellipsis[^}]*white-space: nowrap/.test(css179) && /\.known-npc \.rep-band \{[^}]*white-space: nowrap/.test(css179) && /\.npc-ctls \{/.test(css179) && /\.npc-ctl \{[^}]*background: none/.test(css179)
+    && /<span class="npc-ctls"><button class="npc-ctl" data-setname=/.test(app179) && /<\/button>\$\{imagesEnabled\(\)[^\n]*<\/span>` : "";/.test(app179));
+  check("§179: …a person whose name is only \"—\" is shown by what they are, in parentheses, and every name and standing carries its full text as a title",
+    /const shownName = \(p\) => \{[^\n]*nameIsUnknown\(rec\)[^\n]*`\(\$\{role\.slice\(0, 28\)\}\)`/.test(app179) && /title="\$\{esc\(shownName\(p\)\)\}">\$\{esc\(shownName\(p\)\)\}<\/span>/.test(app179)
+    && /title="\$\{esc\(p\.name\)\}">❤ \$\{esc\(p\.name\)\}<\/span><span class="rep-band trusted"/.test(app179));
+}
+
+/* ══════════ §180 — THE RATCHET, ONCE AND IN PARALLEL (Erik 2026-09-12: "please explain the 5 minute ratchet necessity... is it needed?" — "yes, lower it and do the plan") ══════════ */
+console.log("\n── §180 · the suites run in a pool; the hook skips a tree the ship already verified; the baseline is lowered, never raised ──");
+{
+  const runner180 = rd("scripts/run_tests.mjs");
+  check("§180: ⛔ the suites run in a pool, not one after another — spawn under a job count, results reported in SUITES order, the serial loop kept as an escape hatch",
+    /import \{ spawnSync, spawn \} from "node:child_process";/.test(runner180) && /RUN_TESTS_SERIAL/.test(runner180) && /RUN_TESTS_JOBS/.test(runner180)
+    && /for \(const \[name, cmd, args\] of \(serial \? run : \[\]\)\) \{/.test(runner180) && /pooled\[i\] = await runOne\(run\[i\]\)/.test(runner180) && /results\.push\(\.\.\.pooled\)/.test(runner180));
+  const hook180 = rd(".githooks/pre-push"), hook180b = rd("scripts/hooks/pre-push");
+  check("§180: ⛔ the hook skips the ratchet for the tree the ship script verified, or one that differs only under characters/ — and runs it for anything else; both tracked copies are one text",
+    hook180 === hook180b && /ratchet-verified-tree/.test(hook180) && /grep -v '\^characters\/'/.test(hook180) && /node scripts\/run_tests\.mjs --ratchet --quiet/.test(hook180) && /exit 1/.test(hook180));
+  const base180 = JSON.parse(rd("tests/suite_baseline.json"));
+  check("§180: the baseline was LOWERED for wiring_audit (1 → 0) on Erik's word — the deliberate act the file's own note prescribes — and nothing was raised",
+    base180.suites.wiring_audit === 0 && base180.suites.content_ci === 8 && base180.suites.smoke === 0 && base180._updatedAt === "2026-09-12");
+}
+
+
 /* ══════════ §14 — THE FOLD CANNOT BEAT AN IMMUNITY THE BLOW COULD NOT ══════════ */
 // ⛔ FOUND BY RUNNING AEVI'S TWELVE CRAFTS THROUGH A MELEE-SCALE FIGHT (CCODE-313), which is the whole
 // reason Erik asked for a big-battle test. A physical-immune foe took ZERO from the player's typed blow and
@@ -6486,7 +6526,7 @@ console.log("\n── §75 · features — a mine yields, a temple carries meani
   const app75 = rd("app.js"), gm75 = rd("engine/gm.js");
   check("§75: …the GM has `feature` and `rename`, a claim carries `rename`, and the tab has *Add what was built* / *Rename* and lists what the hold has",
     /sell\|improve\|crew\|garrison\|feature\|rename/.test(gm75) && /kind === "feature"/.test(app75) && /kind === "rename"/.test(app75) && /rename: op\.rename === true/.test(app75)
-    && /data-hold-feature=/.test(app75) && /data-hold-rename=/.test(app75) && /data-hold-unfeature=/.test(app75) && /has: \$\{list/.test(app75) && /residentsOf\(h, holdCfgNow\(\)\)/.test(app75));
+    && /data-hold-feature=/.test(app75) && /data-hold-rename=/.test(app75) && /data-hold-unfeature=/.test(app75) && /hold-has"><span class="hold-ctl-label">has<\/span>\$\{list/.test(app75) && /residentsOf\(h, holdCfgNow\(\)\)/.test(app75));   // §179: the "has:" sentence became chips
   check("§75: …the body and the spec say so", /holdFeatures/.test(rd("docs/HOW_IT_WORKS.md")) && /PASS TWO, FIRST CUT/.test(rd("po/SPEC_holding_attributes.md")));
 }
 /* ═════ §76 — R47 THE UNIVERSAL FALLBACKS RETIRE BEHIND THE FREE TOUCH · R46c NO CAP, AND A ROW IS A CRAFT ═════ */

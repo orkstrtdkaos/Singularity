@@ -12,7 +12,7 @@
 // tell is identical — the count of things that ran drops, and the count of failures does not rise.
 //
 // So: run all of them, always. Report a table. Exit 1 if ANY failed, naming every one.
-import { spawnSync } from "node:child_process";
+import { spawnSync, spawn } from "node:child_process";
 
 const SUITES = [
   ["import_integrity", "node", ["tests/import_integrity.mjs"]],
@@ -81,7 +81,44 @@ const quiet = process.argv.includes("--quiet");
 const run = only.length ? SUITES.filter(s => only.some(o => s[0].includes(o))) : SUITES;
 
 const results = [];
-for (const [name, cmd, args] of run) {
+// ✅ 2026-09-12 (Erik: "please explain the 5 minute ratchet necessity... this seems to be slowing us down quite a bit" — "do the plan"):
+// the 31 suites ran ONE AFTER ANOTHER, so five minutes was their sum. They run in a pool now — bounded by the slowest suite, not the
+// total — and the report is printed in SUITES order once every one has finished, so nothing about what is checked, or how it reads,
+// changes. RUN_TESTS_SERIAL=1 restores the old loop (kept verbatim below) for a flaky-in-parallel suspicion; RUN_TESTS_JOBS=n sets the pool.
+const runOne = ([name, cmd, args]) => new Promise((resolve) => {
+  const t0 = Date.now(); let out = "", done = false;
+  const finish = (status, err) => {
+    if (done) return; done = true;
+    if (err) out += "\n" + String(err);
+    const ok = status === 0 && !err;
+    const all = [...out.matchAll(/(\d+)\s+FAILURE\(S\)/gi)];
+    const lineCount = (out.match(/^FAIL/gm) || []).length;
+    const fails = all.length ? Number(all[all.length - 1][1]) : (ok ? 0 : lineCount || null);
+    resolve({ name, ok, fails, lineCount, ms: Date.now() - t0, out });
+  };
+  let p;
+  try { p = spawn(cmd, args, { shell: false, windowsHide: true }); } catch (err) { return finish(1, err); }
+  p.stdout.on("data", (d) => { out += d; }); p.stderr.on("data", (d) => { out += d; });
+  p.on("error", (err) => finish(1, err));
+  p.on("close", (status) => finish(status ?? 1));
+});
+const serial = process.env.RUN_TESTS_SERIAL === "1";
+const jobs = serial ? 1 : Math.max(1, Math.min(Number(process.env.RUN_TESTS_JOBS) || 8, run.length));
+if (!serial) {
+  const tAll = Date.now();
+  const pooled = new Array(run.length);
+  let cursor = 0;
+  await Promise.all(Array.from({ length: jobs }, async () => { while (cursor < run.length) { const i = cursor++; pooled[i] = await runOne(run[i]); } }));
+  results.push(...pooled);
+  for (const { name, ok, fails, lineCount, ms } of results) {
+    if (fails != null && lineCount && fails !== lineCount && !quiet)
+      process.stdout.write(`      ⚠ ${name}: reported total ${fails} ≠ ${lineCount} FAIL lines — read the suite directly\n`);
+    if (!quiet) process.stdout.write(`${ok ? "ok  " : "FAIL"}  ${name}${fails ? ` — ${fails} failure(s)` : ""}${process.env.RUN_TESTS_TIMES ? ` (${(ms / 1000).toFixed(1)}s)` : ""}\n`);
+  }
+  const longest = results.reduce((a, b) => (b.ms > a.ms ? b : a), results[0]);
+  if (!quiet) process.stdout.write(`      ${results.length} suites · pool of ${jobs} · ${((Date.now() - tAll) / 1000).toFixed(0)}s wall (longest ${longest?.name} ${((longest?.ms || 0) / 1000).toFixed(0)}s)\n`);
+}
+for (const [name, cmd, args] of (serial ? run : [])) {
   const t0 = Date.now();
   const r = spawnSync(cmd, args, { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
   const out = (r.stdout || "") + (r.stderr || "");

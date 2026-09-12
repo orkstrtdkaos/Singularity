@@ -1,6 +1,6 @@
 {
  "_note": "⛔ KNOWN-RED COUNTS PER SUITE. `run_tests --ratchet` blocks only when a count RISES or a new suite goes red. ⚠️ Numbers may only go DOWN — lower one by FIXING something, then re-baseline deliberately with `--rebaseline` so the improvement lands as a visible commit.",
- "_updatedAt": "2026-09-08",
+ "_updatedAt": "2026-09-12",
  "suites": {
   "import_integrity": 0,
   "smoke": 0,
@@ -18,7 +18,7 @@
   "staged_crafts_check": 0,
   "craft_crit": 0,
   "world_drive_audit": 0,
-  "wiring_audit": 1,
+  "wiring_audit": 0,
   "how_it_works": 0,
   "save_fixtures": 0,
   "engine_map --check": 0,

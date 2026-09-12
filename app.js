@@ -129,7 +129,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.458";
+const APP_VERSION = "1.9.459";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -555,6 +555,9 @@ let pendingArcCostNote = null;   // SNG-273: why this craft just cost what it di
 // anything anyone reads. The chronicle keeps each scene's summary independently on scene end.
 const SCENE_TURN_CAP = 40;
 let sceneState = null;   // authoritative scene anchor: setting, npcsPresent, objects, threads
+// §179 (Erik 2026-09-12): a companion whose person is in the registry is shown by the name the story knows them by — "Huginn (Marrow)"
+// is Maren Ossitide once she has said so. A player's rename still wins; the authored name is last.
+const compName = (c) => character.companionNames?.[c.id] || character.npcRegistry?.[c.id]?.name || c.name;
 let busy = false;
 let _discoverAutoRan = false; // SNG-087: auto-run cross-device discovery at most once per session
 let examinedItem = null; // name of the item expanded in the sidebar
@@ -6101,7 +6104,7 @@ function showCompanionPanel(companionId) {
   const thresholds = companionStageThresholds(b.stageCount, CONTENT.rules);
   const maxBond = CONTENT.rules?.companions?.tiers?.maxBond ?? 10;
   const grantAt = CONTENT.rules?.companions?.tiers?.grantAt ?? 6;
-  const dn = character.companionNames?.[c.id] || c.name;
+  const dn = compName(c);
   const has = (id) => (character.abilities || []).some(a => a.abilityId === id);
   // ⚠️ NO COMPANION AUTHORS AN IMAGE — all nine have `image: undefined`. They go through the same
   // ensureImage path an NPC does, seeded on the companion id so the face is STABLE across openings rather
@@ -6737,7 +6740,7 @@ function applyTurn(turn, resolution, playerWords = null) {
           // gets, not a line in a status list. Reuses a ceremony that already exists rather than inventing
           // a second one — and this is the first craft in the game TAUGHT BY A COMPANION rather than a
           // catalog, which is exactly the kind of thing that deserves the surface.
-          try { showBraidMoment({ ...def, kind: "bondGift", _teacherName: character.companionNames?.[c.id] || c.name }); } catch { /* a ceremony must never break the turn */ }
+          try { showBraidMoment({ ...def, kind: "bondGift", _teacherName: compName(c) }); } catch { /* a ceremony must never break the turn */ }
           turn.narration += `
 
 *✦ Your bond with ${c.name} deepens into something new: **${def.name}**.*`;
@@ -11406,17 +11409,16 @@ function renderHoldingsTab(manageId = null) {
           const hands = (h.crew || []).map(id => esc(nameOf(id))).join(", "), guards = (h.garrison || []).map(id => esc(nameOf(id))).join(", ");
           const done = (h.improvements || []).map(i => esc(i.name || i.abilityId)).join(", ");
           return `<div class="hint">grows: ${h.steward ? `one rung every ${g.passesPerClimb || 4} passes under a keeper, as far as their standing allows` : "<em>not while nobody keeps it</em>"}${done ? ` · improved with ${done}` : ""}${hands ? ` · hands: ${hands}` : ""}${guards ? ` · watch: ${guards}` : ""}</div>
-        <div class="opt-row" style="margin-top:4px;gap:6px;flex-wrap:wrap">
-          ${crafts.length ? `<select data-hold-craft="${esc(h.id)}">${crafts.map(d => `<option value="${esc(d.id)}">${esc(d.name || d.id)}</option>`).join("")}</select><button class="opt" data-hold-improve="${esc(h.id)}" title="Put a craft you carry to the place — it comes up a rung, once per craft">Apply a craft</button>` : ""}
-          ${people.length ? `<select data-hold-hand="${esc(h.id)}">${people.map(id => `<option value="${esc(id)}">${esc(nameOf(id))}</option>`).join("")}</select><button class="opt" data-hold-crew="${esc(h.id)}" title="Put them to work here — more hands, more yield (up to ${g.maxHands || 0})">Add hands</button><button class="opt" data-hold-guard="${esc(h.id)}" title="Post them on watch — halves a raid, costs ${g.garrisonUpkeepPerHand || 0} crystal a pass">Post a guard</button>` : ""}
-          ${(h.crew || []).length || (h.garrison || []).length ? `<button class="opt" data-hold-clear="${esc(h.id)}" title="Stand the hands and the watch down">Stand them down</button>` : ""}
+        <div class="hold-controls">
+          ${crafts.length ? `<div class="hold-ctl"><span class="hold-ctl-label">Put a craft to it</span><select data-hold-craft="${esc(h.id)}">${crafts.map(d => `<option value="${esc(d.id)}">${esc(d.name || d.id)}</option>`).join("")}</select><button class="opt" data-hold-improve="${esc(h.id)}" title="Put a craft you carry to the place — it comes up a rung, once per craft">Apply</button></div>` : ""}
+          ${people.length ? `<div class="hold-ctl"><span class="hold-ctl-label">People</span><select data-hold-hand="${esc(h.id)}">${people.map(id => `<option value="${esc(id)}">${esc(nameOf(id))}</option>`).join("")}</select><button class="opt" data-hold-crew="${esc(h.id)}" title="Put them to work here — more hands, more yield (up to ${g.maxHands || 0})">Add hands</button><button class="opt" data-hold-guard="${esc(h.id)}" title="Post them on watch — halves a raid, costs ${g.garrisonUpkeepPerHand || 0} crystal a pass">Post a guard</button>${(h.crew || []).length || (h.garrison || []).length ? `<button class="opt" data-hold-clear="${esc(h.id)}" title="Stand the hands and the watch down">Stand them down</button>` : ""}</div>` : ((h.crew || []).length || (h.garrison || []).length ? `<div class="hold-ctl"><span class="hold-ctl-label">People</span><button class="opt" data-hold-clear="${esc(h.id)}" title="Stand the hands and the watch down">Stand them down</button></div>` : "")}
         </div>`; })()}
         `; })()}
         ${(() => { // ✅ FEATURES — what the hold HAS (SPEC_holding_attributes pass two): built through play or here, read every pass
           const cfgF = holdCfgNow(); const kinds = featureKinds(cfgF);
-          const list = (h.features || []).map((f, i) => `<span>${esc(f.name || f.kind)}${f.count > 1 ? ` ×${f.count}` : ""}${f.by && f.by !== "you" ? ` (${esc(nameOf(f.by))})` : ""} <button class="opt" data-hold-unfeature="${esc(h.id)}" data-index="${i}" title="Tear it down" style="padding:0 4px">×</button></span>`).join(" · ");
+          const list = (h.features || []).map((f, i) => `<span class="hold-chip">${esc(f.name || f.kind)}${f.count > 1 ? ` ×${f.count}` : ""}${f.by && f.by !== "you" ? ` (${esc(nameOf(f.by))})` : ""}<button class="hold-chip-x" data-hold-unfeature="${esc(h.id)}" data-index="${i}" title="Tear it down">×</button></span>`).join("");
           const opts = Object.entries(kinds).map(([k, d]) => `<option value="${esc(k)}">${esc(d.label || k)}</option>`).join("");
-          return `<div class="hint">has: ${list || "<em>nothing built yet</em>"}</div>
+          return `<div class="hint hold-has"><span class="hold-ctl-label">has</span>${list || "<em>nothing built yet</em>"}</div>
         `; })()}
         ${storeTotal(h) > 0 ? `<div class="hint">store: ${esc(Object.entries(h.store).filter(([, n]) => n > 0).map(([g, n]) => `${n} ${String(g).replace(/_/g, " ")}`).join(", "))}${(() => { const w = storeWorth(h, { economy: CONTENT.rules?.economy, regionId: CONTENT.locations?.[h.locationId]?.regionId || null, cfg: CONTENT.rules?.economy?.holdStore }); return w ? ` · worth ~${w} crystal here` : ""; })()}${h.arrears ? ` · in arrears ${h.arrears}` : ""}</div>` : ""}
         ${h.fromAssignment ? `<div class="hint">from work you delegated</div>` : ""}
@@ -11659,7 +11661,7 @@ function renderCharacterScreen() {
         // and it showed a raw tag dump ("assists: deathsense, scout, watch, tend") where a sentence belongs.
         const tg = (c.assistTags || []).map(t => esc(String(t).replace(/_/g, " ")));
         const help = tg.length ? `helps when you ${tg.length === 1 ? tg[0] : tg.slice(0, -1).join(", ") + " or " + tg[tg.length - 1]}` : "";
-        return `<div class="codex-fact comp-open" data-companion="${esc(c.id)}" role="button" tabindex="0" style="cursor:pointer" title="Tap for the full record"><strong>${esc(character.companionNames?.[c.id] || c.name)}</strong> — ${esc(help)} <span class="hint">· bond ${b.bond}/${mx} · stage ${b.stage} of ${b.stageCount} — tap</span></div>`;
+        return `<div class="codex-fact comp-open" data-companion="${esc(c.id)}" role="button" tabindex="0" style="cursor:pointer" title="Tap for the full record"><strong>${esc(compName(c))}</strong> — ${esc(help)} <span class="hint">· bond ${b.bond}/${mx} · stage ${b.stage} of ${b.stageCount} — tap</span></div>`;
       }).join("") || "<div class='insight'>traveling alone</div>"}</div>
     ${canLevelUp(character) ? `<button class="btn" id="cs-levelup" style="margin-top:10px; margin-right:8px">⬆ Level Up${character.skillPoints ? ` (${character.skillPoints})` : ""}</button>` : ""}
     <button class="btn secondary" id="cs-skillgraph" style="margin-top:10px; margin-right:8px">✦ Skill Wheel</button>
@@ -14972,7 +14974,7 @@ function renderPlay(turn, opts = {}) {
       // SNG-135: ONE tight flex row per member — name · inline badge · compact action. Roster/roles/recruit
       // gating (SNG-126) unchanged; the companion description moves to the row title (hover) instead of a
       // printed line. data-rename/part/partally/recruit hooks are identical — layout only.
-      const compBody = comps.length ? `<div class="company-group"><div class="sys-label">Companions</div>${comps.map(id => { const c = CONTENT.companions[id]; const dn = character.companionNames?.[id] || c.name; const b = bondOf(character, c.id, CONTENT.rules, c.stages); const th = companionStageThresholds(b.stageCount, CONTENT.rules); const nx = th.find(t => b.bond < t); const mx = CONTENT.rules?.companions?.tiers?.maxBond ?? 10;
+      const compBody = comps.length ? `<div class="company-group"><div class="sys-label">Companions</div>${comps.map(id => { const c = CONTENT.companions[id]; const dn = compName(c); const b = bondOf(character, c.id, CONTENT.rules, c.stages); const th = companionStageThresholds(b.stageCount, CONTENT.rules); const nx = th.find(t => b.bond < t); const mx = CONTENT.rules?.companions?.tiers?.maxBond ?? 10;
         // ⛔ SNG-353 — THE WHOLE NAME IS THE TAP TARGET, because `title=` was the ONLY delivery for role
         // and appearance and hover does not exist on touch. And the badge reads as PROGRESS, not a score:
         // every number in it (`bond 4/10 · s2 · next at 7`) was already computed and never said.
@@ -15014,9 +15016,12 @@ function renderPlay(turn, opts = {}) {
       // SNG-401 §5: the direct way in. A portrait otherwise only appears as a gallery tile, so a player who
       // thinks "that isn't what she looks like" has to go hunting for it. The ↻ shows ONLY when this person
       // actually has a picture to be unhappy with.
-      const peopleCtl = (p) => p.id ? ` <button class="npc-ctl" data-setname="${esc(p.id)}" title="Set or extend this person's name (e.g. Pell → Pell Ran Marsh)">✎</button><button class="npc-ctl" data-mergenpc="${esc(p.id)}" title="This is the same person as someone else you know — merge them">⇊</button>${imagesEnabled() && character.npcRegistry?.[p.id]?.image ? `<button class="npc-ctl" data-repic="${esc(p.id)}" title="Look at ${esc(p.name)}'s picture — and draw it again if it isn't them">↻</button>` : ""}` : "";
-      const row = (p, extra = "") => `<div class="known-npc"><span class="npc-name entity-hover" ${p.id ? `data-entity="npc:${esc(p.id)}"` : ""}>${esc(p.name)}</span> <span class="rep-band ${p.bondType === "romantic" ? "trusted" : ""}">${esc(p.label)}${extra}</span>${peopleCtl(p)}</div>`;
-      const body = `${partners.length ? `<div class="partner-adjacent" style="margin-bottom:6px">${partners.map(p => `<div class="known-npc partner"><span class="npc-name entity-hover" ${p.id ? `data-entity="npc:${esc(p.id)}"` : ""}>❤ ${esc(p.name)}</span> <span class="rep-band trusted" title="A committed partner — with you in all but the mechanics">${esc(p.label)} · with you</span>${peopleCtl(p)}</div>`).join("")}</div>` : ""}${rep ? `<div style="margin-bottom:4px"><span class="rep-band ${rep.band}">${rep.band} (${rep.score})</span></div>` : ""}${hereRest.length ? hereRest.map(p => row(p)).join("") : (partners.length ? "" : `<span class="insight">no one you know is here right now</span>`)}`;
+      // §179 (Erik 2026-09-12, "the WHO'S HERE list too"): the controls in one cluster that never wraps; a name that is only "—" shows
+      // what the person is, in parentheses, until the story gives one.
+      const peopleCtl = (p) => p.id ? `<span class="npc-ctls"><button class="npc-ctl" data-setname="${esc(p.id)}" title="Set or extend this person's name (e.g. Pell → Pell Ran Marsh)">✎</button><button class="npc-ctl" data-mergenpc="${esc(p.id)}" title="This is the same person as someone else you know — merge them">⇊</button>${imagesEnabled() && character.npcRegistry?.[p.id]?.image ? `<button class="npc-ctl" data-repic="${esc(p.id)}" title="Look at ${esc(p.name)}'s picture — and draw it again if it isn't them">↻</button>` : ""}</span>` : "";
+      const shownName = (p) => { const rec = p.id ? character.npcRegistry?.[p.id] : null; const bare = !p.name || p.name === "—" || (rec && nameIsUnknown(rec)); const role = String(rec?.role || "").split(/[,;—]/)[0].trim(); return bare && role ? `(${role.slice(0, 28)})` : (p.name || "someone"); };
+      const row = (p, extra = "") => `<div class="known-npc"><span class="npc-name entity-hover" ${p.id ? `data-entity="npc:${esc(p.id)}"` : ""} title="${esc(shownName(p))}">${esc(shownName(p))}</span><span class="rep-band ${p.bondType === "romantic" ? "trusted" : ""}" title="${esc(p.label)}${esc(extra)}">${esc(p.label)}${extra}</span>${peopleCtl(p)}</div>`;
+      const body = `${partners.length ? `<div class="partner-adjacent" style="margin-bottom:6px">${partners.map(p => `<div class="known-npc partner"><span class="npc-name entity-hover" ${p.id ? `data-entity="npc:${esc(p.id)}"` : ""} title="${esc(p.name)}">❤ ${esc(p.name)}</span><span class="rep-band trusted" title="A committed partner — with you in all but the mechanics · ${esc(p.label)}">${esc(p.label)} · with you</span>${peopleCtl(p)}</div>`).join("")}</div>` : ""}${rep ? `<div style="margin-bottom:4px"><span class="rep-band ${rep.band}">${rep.band} (${rep.score})</span></div>` : ""}${hereRest.length ? hereRest.map(p => row(p)).join("") : (partners.length ? "" : `<span class="insight">no one you know is here right now</span>`)}`;
       return `<details class="sidebar-sec" data-sec="whoshere"${sectionOpen("whoshere", true) ? " open" : ""}><summary><span class="sec-title">${esc(location.name)} — who's here</span>${rep ? ` <span class="sec-sum">· ${rep.band}</span>` : ""}</summary><div class="sec-body">${body}</div></details>`;
     })()}
     <details class="sidebar-sec" data-sec="playstyle"${sectionOpen("playstyle", false) ? " open" : ""}><summary><span class="sec-title">Play-style</span></summary><div class="sec-body">${aptitudeChips()}</div></details>
@@ -15527,12 +15532,12 @@ function renderPlay(turn, opts = {}) {
   };
   for (const btn of app.querySelectorAll("[data-part]")) btn.onclick = () => {
     const c = CONTENT.companions[btn.dataset.part];
-    if (!confirm(`Part ways with ${character.companionNames?.[c.id] || c.name}?`)) return;
+    if (!confirm(`Part ways with ${compName(c)}?`)) return;
     character.companions = character.companions.filter(id => id !== c.id);
     if (character.companionBonds) delete character.companionBonds[c.id]; // SNG-126: clean part-ways — no orphan bond/name state
     if (character.companionNames) delete character.companionNames[c.id];
     saveCharacter(character);
-    renderPlay(character.activeScene?.lastTurn || null, { aside: `${character.companionNames?.[c.id] || c.name} drifts on — for now.` });
+    renderPlay(character.activeScene?.lastTurn || null, { aside: `${compName(c)} drifts on — for now.` });
   };
   // SNG-126: recruit a strong-bonded present NPC into your company (roles from their authored record),
   // and part ways with a recruited ally. partner is bond-derived (SNG-108), never set here.
@@ -15566,7 +15571,7 @@ function renderPlay(turn, opts = {}) {
   }
   for (const btn of app.querySelectorAll("[data-rename]")) btn.onclick = () => {
     const id = btn.dataset.rename; const c = CONTENT.companions[id]; if (!c) return;
-    const next = prompt(`What do you call ${c.name}?`, character.companionNames?.[id] || c.name);
+    const next = prompt(`What do you call ${c.name}?`, compName(c));
     if (next === null) return;
     character.companionNames = character.companionNames || {};
     if (next.trim() && next.trim() !== c.name) character.companionNames[id] = next.trim(); else delete character.companionNames[id];

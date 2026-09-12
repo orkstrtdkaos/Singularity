@@ -14,11 +14,42 @@
 # ⚠️ CI ALREADY RUNS THIS SUITE (.github/workflows/ci.yml) — but AFTER the push, on GitHub. By then the
 # bad content is on main and whoever pulls next inherits it. This is the same check, one step earlier.
 #
-# ⚠️ --ratchet, NOT all-green. The suite carries ~23 known-red assertions that are the project's tracked
+# ⚠️ --ratchet, NOT all-green. The suite carries known-red assertions that are the project's tracked
 # open gaps. A gate that can never pass is a gate everyone learns to bypass — it trains the --no-verify
 # habit, which is worse than having no hook. So: block on REGRESSION only.
 #
+# ✅ 2026-09-12 (ERIK: "this seems to be slowing us down quite a bit" — "do the plan"): ONCE, NOT TWICE. The ship
+# script runs the ratchet on the tree it commits and writes that tree's hash to $GIT_DIR/ratchet-verified-tree.
+# Running the same suites on the same tree again verifies nothing, so this hook skips when the tree being pushed
+# IS that tree — or differs from it only under characters/, which is the app's own save pushes rebased under us
+# (no suite reads the live save as a fixture any more: §119 and smoke 5aw, 2026-09-12; and CI runs everything on
+# GitHub after every push regardless). Anything else that differs — engine, content, docs, tests, world — runs the
+# full ratchet, which itself now runs its suites in a pool (scripts/run_tests.mjs).
+#
 # ⛔ ENABLE IT ONCE, PER CLONE:  git config core.hooksPath .githooks
 #    Skip deliberately with `git push --no-verify` — and say why in the commit.
+GITDIR=$(git rev-parse --git-dir)
+TREE=$(git rev-parse 'HEAD^{tree}')
+MARK=$(head -1 "$GITDIR/ratchet-verified-tree" 2>/dev/null)
+if [ -n "$MARK" ]; then
+  if [ "$MARK" = "$TREE" ]; then
+    echo "pre-push: the ratchet already verified this tree ($TREE) — not running it twice"
+    exit 0
+  fi
+  if git diff-tree -r --name-only "$MARK" "$TREE" > "$GITDIR/ratchet-tree-diff" 2>/dev/null; then
+    OTHER=$(grep -v '^characters/' "$GITDIR/ratchet-tree-diff" | head -1)
+    if [ -z "$OTHER" ]; then
+      echo "pre-push: the verified tree differs only under characters/ (the app's save pushes) — not running the ratchet again"
+      exit 0
+    fi
+    echo "pre-push: the tree differs from the verified one outside characters/ ($OTHER) — running the ratchet"
+  fi
+fi
 echo "pre-push: suite ratchet (skip with --no-verify)"
 node scripts/run_tests.mjs --ratchet --quiet
+if [ $? -ne 0 ]; then
+  echo ""
+  echo "  ⛔ REGRESSION — push blocked. Something got worse than tests/suite_baseline.json."
+  exit 1
+fi
+exit 0

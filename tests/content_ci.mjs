@@ -1667,7 +1667,9 @@ for (const pack of PACKS) {
     check("energy_costs: every level's DOCUMENTED median is still the corpus's median (±1) — SNG-497's structure has not drifted from the crafts",
       ecR.drifted.length === 0, ecR.drifted.map(r => `T${r.tier} file ${r.fileMedian} live ${r.liveMedian}`).join(" · "));
     console.log(`      energy_costs: ${ecR.rows.map(r => `T${r.tier} median ${r.liveMedian} band ${r.band} · ${r.outsideBand.length} outside`).join(" | ")}`);
-    if (ecR.staleCounts.length) console.log(`      note  energy_costs: the file's own counts are a stored copy of a derived number and ${ecR.staleCounts.length} are stale (${ecR.staleCounts.map(r => `T${r.tier} says ${r.fileN}, corpus ${r.liveN}`).join(" · ")}) — Aevi's to restamp or drop`);
+    check("energy_costs: the per-level `n` counts stay DROPPED — Aevi 2026-09-12: 'a stored copy of a derived number is a staleness generator… restamping buys one correct day and the same drift again'",
+      ecR.restamped.length === 0, ecR.restamped.map(r => `T${r.tier} has stored n=${r.fileN} (corpus ${r.liveN})`).join(" · "));
+    console.log(`      energy_costs: priced crafts per level, derived at read — ${ecR.liveCounts.join(" · ")}`);
     const ecOut = ecR.rows.flatMap(r => r.outsideBand);
     if (ecOut.length) console.log(`      note  energy_costs: ${ecOut.length} craft(s) priced outside their level's band — the outliers the file was written to make visible: ${ecOut.slice(0, 12).join(" · ")}${ecOut.length > 12 ? " …" : ""}`);
 
@@ -1681,11 +1683,11 @@ for (const pack of PACKS) {
     if (stubGrants.length) console.log(`      note  companion_template: ${stubGrants.length} bond grant(s) are stubs — the template says a grant must carry the full ability schema (no tree/mechanic/bounds/plainly): ${stubGrants.slice(0, 6).join(" · ")}${stubGrants.length > 6 ? " …" : ""} — Aevi's`);
 
     // 3 · damage_types.json — the authored enum against what the crafts declare, with the five it has not admitted named
-    const DT_CENSUS = ["force", "psychic", "radiance", "spatial", "corrosive"];   // measured 2026-09-12; widen the enum or retype the crafts (Aevi)
-    const dtR = AC.damageTypeReport(craftsB2, rj("content/packs/core/rules/damage_types.json"), DT_CENSUS);
-    check(`damage_types: every type a craft declares is in the authored enum, or in the census awaiting a content decision (${dtR.listed.length} listed, ${dtR.used.length} declared)`,
+    const DT_CENSUS = [];   // ⛔ EMPTIED 2026-09-12 on Aevi's ruling: the five were already in the family canon, so they are ADMITTED, not pending
+    const dtR = AC.damageTypeReport(craftsB2, rj("content/packs/core/rules/damage_types.json"), DT_CENSUS, rj("content/packs/core/rules/damage_families.json"));
+    check(`damage_types: every type a craft declares is admitted by EITHER canon — this enum or the damage families (${dtR.enumTypes.length} in the enum, ${dtR.famTypes.length} in the families, ${dtR.used.length} declared by crafts)`,
       dtR.fresh.length === 0, `NEW type(s) outside both: ${dtR.fresh.join(", ")}`);
-    if (dtR.outside.length) console.log(`      note  damage_types: ${dtR.outside.length} declared type(s) the enum does not admit — ${dtR.outside.map(t => `${t} (${(dtR.used.find(u => u[0] === t) || [])[1] || 0})`).join(" · ")} — widen the enum or retype, Aevi's call`);
+    if (dtR.unwarded.length) console.log(`      note  damage_types: ${dtR.unwarded.length} declared type(s) with NO WARD written — ${dtR.unwarded.map(t => `${t} (${(dtR.used.find(u => u[0] === t) || [])[1] || 0})`).join(" · ")} — the type is canon and the ward is Aevi's prose; ⚠️ a typed attack no ward answers is SNG-512's original defect, so this note is the one to close`);
     if (dtR.stale.length) console.log(`      note  damage_types: the census names ${dtR.stale.join(", ")}, which no craft declares any more — drop from the census`);
 
     // 4 · ability_distribution_target.json — a compass, measured and never gated

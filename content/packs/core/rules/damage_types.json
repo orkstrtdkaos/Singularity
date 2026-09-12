@@ -3,7 +3,7 @@
  "id": "damage_types",
  "kind": "rules",
  "note": "⛔ SNG-512. THE DAMAGE-TYPE VOCABULARY AND ITS WARDS. CCode: '`damageType` on 26 crafts · `wardTypes` on ZERO · typed soak layers on ZERO. The 26 typed attacks are typed against nothing. `wrongType` can never be non-empty.' ⚠️ NOT DEAD — NEVER ALIVE.\n⛔ NO ENGINE WORK NEEDED. `answers(l)` already matches a layer to a damage kind and a wrong-type layer already contributes nothing. Authoring the counterpart makes 26 existing values mean something the day it lands.",
- "_derivedNotInvented": "⚠️ THE 13 TYPES BELOW ARE THE 13 ALREADY AUTHORED, not a new set. I grouped them and named what each is FOR; I did not add or rename one. ⛔ THREE ARE SINGLETONS AND MAY WANT MERGING — `grief` and `feeling` are both threnodist, and `judgement` appears once.",
+ "_derivedNotInvented": "⚠️ THE TYPES BELOW ARE THE TYPES ALREADY AUTHORED, not a new set — 13 at SNG-512, and 18 since 2026-09-12. I grouped them and named what each is FOR; I did not add or rename one. ⛔ THREE ARE SINGLETONS AND MAY WANT MERGING — `grief` and `feeling` are both threnodist, and `judgement` appears once.",
  "types": {
   "physical": {
    "what": "Edge, weight, impact. The default when no type is named.",
@@ -12,70 +12,83 @@
   },
   "appetite": {
    "what": "Want turned into a weapon — the Abyssal's own kind.",
-   "n": 5,
    "wardedBy": "a vow held, a satisfied want, an honest ledger",
    "_note": "⛔ A WARD AGAINST APPETITE IS NOT ARMOUR — it is having nothing they can reach for."
   },
   "shadow": {
    "what": "Dark as a medium, not an absence.",
-   "n": 1,
    "wardedBy": "held light, a lattice reading, anything that does not need eyes"
   },
   "decay": {
    "what": "An ending hastened. ⛔ THE ANTI-HEALING TYPE.",
-   "n": 2,
    "wardedBy": "a tended vigil, consecrated ground, a mending held open",
    "_note": "⛔ THIS IS THE ONE THE HEALING WORK NEEDS. `healing_intent.json` §5: a heal is reduced by ACTIVE ONGOING HARM, never by armour. A decay-typed condition a generic ward does not answer IS that mechanism."
   },
   "living": {
    "what": "Growth turned against — root, bloom, choking green.",
-   "n": 2,
    "wardedBy": "cleared ground, salt, cut stone, a season's cold"
   },
   "abstraction": {
    "what": "Pattern imposed on matter — a figure that cuts.",
-   "n": 2,
    "wardedBy": "⛔ THE CONCRETE ITSELF. Thingcraft r3 'Denial' already does this in prose and is untyped.",
    "_note": "⚠️ Body's Material school is the natural counter and none of it is typed."
   },
   "feeling": {
    "what": "Emotion delivered as force.",
-   "n": 1,
    "wardedBy": "a steadied mind, a held vow, contact with someone calm",
    "_absorbedGrief": "⛔ SNG-534. `grief` merged in. It was the ONLY damage type in the game that no ward answered — ⚠️ I flagged the merge as an Erik call in this very file and then left it open, and the which-check turned an open question into a failing gate."
   },
   "truth": {
    "what": "A fact that cannot be survived.",
-   "n": 1,
    "wardedBy": "⚠️ almost nothing — that is the point. A prepared lie, or not being present"
   },
   "deception": {
    "what": "A falsehood made structural.",
-   "n": 1,
    "wardedBy": "the plain seeing, a verist's ground, a witness who was there"
   },
   "judgement": {
    "what": "Moral weight delivered as harm.",
-   "n": 1,
    "wardedBy": "a clean conscience, or an unreachable one",
    "_erikCall": "⚠️ SINGLETON. Keep — it is the Seraphic signature and more will be authored."
   },
   "temporal": {
    "what": "Duration taken or spent.",
-   "n": 1,
    "wardedBy": "an anchored hour, a kept count"
   },
   "vitality": {
    "what": "⛔ LIFE MOVED, NOT LIFE ENDED. Harm to one becomes healing for another — the same quantity, relocated.",
-   "n": 2,
    "wardedBy": "a full vessel, a thing with nothing left to give, ⛔ BEING ALREADY DEAD, or a living ward that answers first",
    "_why": "⛔ ERIK 2026-08-24: 'heal is life added, the other side of it is harm. This skill steals vitality by TRANSFORMING HARM ON ONE INTO HEALING FOR ANOTHER. Seems like a common type we can use.' ⚠️ THE DEFINING PROPERTY IS CONSERVATION: every other type ENDS somewhere; this one ARRIVES. ⛔ IT IS NOT `decay` (an ending hastened — hastening is not taking) AND NOT `living` (growth turned against — life as a weapon, not life removed). The nearest neighbour is `temporal`, which is the same shape one axis over. ⚠️ CARRIERS: `draw_down` (ashwarden) and `consumed_wound` (abyssal) — two traditions reaching the same mechanic from opposite moral directions, which is what makes it a TYPE rather than one craft's quirk. ⛔ AGAINST THE UNDEAD IT IS EMPTY, NOT ABSORBED: a raised body runs on the ABSENCE of life, so there is nothing there to take (§48.5)."
   },
   "cold": {
    "what": "⛔ HEAT TAKEN OUT — not an ending hastened and not a wound, but warmth REMOVED until the body cannot work.",
-   "n": 2,
    "wardedBy": "fire, shelter, a living press of bodies, anything that MAKES heat rather than keeping it",
    "_why": "⛔ ERIK 2026-08-24: 'you die from cold just as easily, and YOUR BODY GOES COLD WHEN YOU DIE.' ⚠️ IT IS NOT `decay` (an ending hastened) and not `physical` (edge, weight, impact) — it is REMOVAL, structurally `vitality`'s sibling: something taken rather than destroyed. ⛔ AND IT GIVES DEATH A SECOND AESTHETIC: the domain was entirely ROT, when cold is the other half of what a body does at the end. ⚠️ WARDED BY THINGS THAT MAKE HEAT, NOT THINGS THAT KEEP IT — armour is no answer, a fire is."
+  },
+  "force": {
+   "what": "Momentum without an edge — thrown, crushed, flung. Physics' second kind.",
+   "_family": "physics · ⛔ ERIK 2026-08-24: 'temporal and SPATIAL move into the PHYSICS family, of which physical is one.'",
+   "_wardOwed": "⛔ WARD OWED — AEVI. The type is canon (damage_families.json); the ward prose is not written yet. `wardedBy` is absent rather than guessed, because a ward is the half the typed-soak build will READ and an invented one would be a rule nobody ruled."
+  },
+  "spatial": {
+   "what": "Distance itself used as the weapon — the cut that is a place, not a blade.",
+   "_family": "physics",
+   "_wardOwed": "⛔ WARD OWED — AEVI. The type is canon (damage_families.json); the ward prose is not written yet. `wardedBy` is absent rather than guessed, because a ward is the half the typed-soak build will READ and an invented one would be a rule nobody ruled."
+  },
+  "radiance": {
+   "what": "Light as a medium, not a brightness. ⛔ LOAD-BEARING: `shadow` in this very file is defined as its opposite, so the enum refusing radiance refused the thing shadow is anchored to.",
+   "_family": "physics · the two kinds of matter you can see by",
+   "_wardOwed": "⛔ WARD OWED — AEVI. The type is canon (damage_families.json); the ward prose is not written yet. `wardedBy` is absent rather than guessed, because a ward is the half the typed-soak build will READ and an invented one would be a rule nobody ruled."
+  },
+  "corrosive": {
+   "what": "Matter unmade by contact — the elemental that keeps working after the blow.",
+   "_family": "elemental · ⛔ 'Siblings, never opposites.'",
+   "_wardOwed": "⛔ WARD OWED — AEVI. The type is canon (damage_families.json); the ward prose is not written yet. `wardedBy` is absent rather than guessed, because a ward is the half the typed-soak build will READ and an invented one would be a rule nobody ruled."
+  },
+  "psychic": {
+   "what": "The mind struck directly. ⛔ Requires a will to make it — a rockfall cannot do this.",
+   "_family": "intrinsic · mental axis, beside abstraction, truth and deception",
+   "_wardOwed": "⛔ WARD OWED — AEVI. The type is canon (damage_families.json); the ward prose is not written yet. `wardedBy` is absent rather than guessed, because a ward is the half the typed-soak build will READ and an invented one would be a rule nobody ruled."
   }
  },
  "_wardRule": "⛔ A WARD NAMES WHAT IT ANSWERS. `mechanic.wardTypes: [\"physical\",\"light\"]` means the layer contributes its soak against those kinds and NOTHING against others.\n⚠️ A WARD THAT ANSWERS EVERYTHING IS A WARD WITH NO CHARACTER — and it is what all 65 ward-capable crafts currently are. ⛔ THE TRADITION'S IDENTITY IS IN WHAT IT CANNOT STOP.",
@@ -85,5 +98,6 @@
   "3": "⚠️ NAME THE GAP IN THE `cannot`. 'It will not stop a working that reaches for what you want' is a bound AND a type declaration.",
   "4": "A craft that answers nothing typed is `wardTypes: [\"physical\"]` — say so rather than leaving it null."
  },
- "_deadTypesRemoved_20260829": "⛔ `light` and `precursor` removed. ⚠️ `light` migrated to `radiance`; `precursor` was ruled a METHOD not a type and carried by 7 crafts that dealt no damage. **Both had been listed here after their rulings, which is how a dead vocabulary keeps looking alive.**"
+ "_deadTypesRemoved_20260829": "⛔ `light` and `precursor` removed. ⚠️ `light` migrated to `radiance`; `precursor` was ruled a METHOD not a type and carried by 7 crafts that dealt no damage. **Both had been listed here after their rulings, which is how a dead vocabulary keeps looking alive.**",
+ "_widened_20260912": "⛔ AEVI 2026-09-12, over my report that five declared types sat outside this enum: \"WIDEN THE ENUM. DO NOT RETYPE THE CRAFTS. I checked all five against damage_families.json and every one of them is already in the family canon… The crafts are right and the enum is the stale source.\" Two sources of truth and the gate was pointed at the narrower one, so 5 types were admitted here and content_ci now reads BOTH canons. ⚠️ Their wards are unwritten and named as owed — the sixth-new-type gate stays red for a type outside both. Also dropped 12 stored `n` counts under her energy_costs ruling (\"a stored copy of a derived number is a staleness generator\"); the live count is reported every run."
 }

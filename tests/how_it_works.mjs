@@ -2499,14 +2499,23 @@ console.log("\n── §185 · four of the nine are read for what they say, and 
 
   // 3 · damage_types — green with the census, red on a type outside both
   const dt185 = rj("content/packs/core/rules/damage_types.json");
-  const CENSUS = ["force", "psychic", "radiance", "spatial", "corrosive"];
-  const dtLive = AC185.damageTypeReport(crafts185, dt185, CENSUS);
-  check(`§185: ⛔ damage_types is READ — ${dtLive.used.length} types declared, ${dtLive.listed.length} in the enum, ${dtLive.outside.length} in the census, 0 outside both`,
-    dtLive.fresh.length === 0, dtLive.fresh.join(", "));
-  check("§185: …and RED for a SIXTH type outside both the enum and the census — while the five wait on a content decision",
-    AC185.damageTypeReport([...crafts185, { id: "x", mechanic: { damageType: "sonorous" } }], dt185, CENSUS).fresh.join() === "sonorous"
-    && AC185.damageTypeReport(crafts185, dt185, []).fresh.length === 5);
-  check("§185: …and the census cannot rot unnoticed — a type nothing declares any more is reported", AC185.damageTypeReport(crafts185, dt185, [...CENSUS, "ectoplasm"]).stale.join() === "ectoplasm");
+  const fam185 = rj("content/packs/core/rules/damage_families.json");   // ⛔ THE SECOND CANON — the one the gate was not pointed at
+  const dtLive = AC185.damageTypeReport(crafts185, dt185, [], fam185);   // census EMPTY: the five were admitted, not pending
+  check(`§185: ⛔ damage_types is READ — ${dtLive.used.length} types declared by crafts, ${dtLive.listed.length} admitted by the two canons, ${dtLive.unwarded.length} still owed a ward, 0 outside both`,
+    dtLive.fresh.length === 0 && dtLive.outside.length === 0, `outside: ${dtLive.outside.join(", ")} · fresh: ${dtLive.fresh.join(", ")}`);
+  check("§185: …and RED for a type outside BOTH canons — Aevi 2026-09-12: 'the sixth-new-type gate is right and should stay'",
+    AC185.damageTypeReport([...crafts185, { id: "x", mechanic: { damageType: "sonorous" } }], dt185, [], fam185).fresh.join() === "sonorous");
+  // ⛔ THE FIX ITSELF, PROVEN ON A FIXTURE and not on the live files — the live enum now lists all five, so asserting against it
+  // would pass for the wrong reason the day someone narrows either canon. Aevi: "Two sources of truth, and the gate was pointed
+  // at the narrower one." A type only the FAMILY canon knows is admitted; the same call without the families is red.
+  check("§185: ⛔ EITHER CANON ADMITS A TYPE — the enum alone was the narrower source, and that is why five right crafts read as wrong",
+    (() => { const craft = [{ id: "f", mechanic: { damageType: "tidal" } }], narrow = { types: { physical: { what: "x", wardedBy: "y" } } }, wide = { families: { water: { types: ["tidal"] } } };
+      return AC185.damageTypeReport(craft, narrow, [], wide).fresh.length === 0 && AC185.damageTypeReport(craft, narrow, []).fresh.join() === "tidal"; })());
+  check("§185: …and a type listed with NO `wardedBy` is reported as unwarded — SNG-512's defect was typed attacks nothing answers, so the ward is the load-bearing half and an absent one must not read as done",
+    (() => { const owed = Object.entries(dt185.types).filter(([, v]) => !v?.wardedBy).map(([k]) => k);
+      return owed.length > 0 && owed.every(t => !dtLive.warded.includes(t)) && dtLive.unwarded.every(t => owed.includes(t))
+        && AC185.damageTypeReport([{ id: "w", mechanic: { damageType: "physical" } }], dt185, [], fam185).unwarded.length === 0; })());
+  check("§185: …and the census cannot rot unnoticed — a type nothing declares any more is reported", AC185.damageTypeReport(crafts185, dt185, ["ectoplasm"], fam185).stale.join() === "ectoplasm");
 
   // 4 · ability_distribution_target — measured, never gated
   const adLive = AC185.distributionDistance(crafts185, rj("content/packs/core/rules/ability_distribution_target.json"), C185.traditionIndex?.domainOfTrad || {});

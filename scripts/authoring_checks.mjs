@@ -36,7 +36,9 @@ export function energyBandReport(crafts, spec, { tolerance = 1 } = {}) {
       outsideBand: Number.isFinite(lo) && Number.isFinite(hi) ? at.filter(a => num(a.energyCost) < lo || num(a.energyCost) > hi).map(a => `${a.id} e${a.energyCost}`) : [],
     });
   }
-  return { rows, drifted: rows.filter(r => r.drift === null || r.drift > tolerance), staleCounts: rows.filter(r => r.fileN !== r.liveN) };
+  // ⛔ AEVI 2026-09-12: "DROP THEM, DO NOT RESTAMP." `restamped` is the rows that carry a stored copy of the live count AT ALL —
+  // the gate is no longer "is the copy stale" (it always goes stale) but "is there a copy", which is the defect itself.
+  return { rows, drifted: rows.filter(r => r.drift === null || r.drift > tolerance), restamped: rows.filter(r => r.fileN !== null), liveCounts: rows.map(r => `T${r.tier} ${r.liveN}`) };
 }
 
 /** `companion_template.json` — ⛔ SNG-511: the one GM-generated type with no template, written after nine companions had been
@@ -49,15 +51,25 @@ export function templateGaps(companions, template) {
 /** `damage_types.json` — the authored enum of what a blow can BE. Every type a craft declares must be in it, or in the
  *  census of types the corpus uses and the enum has not admitted yet — which is a content decision (widen the enum, or
  *  retype the crafts), named here so a NEW one fails while the known five wait for Aevi. */
-export function damageTypeReport(crafts, spec, census = []) {
-  const listed = Array.isArray(spec?.types) ? spec.types.map(t => (typeof t === "string" ? t : t?.id || t?.type)).filter(Boolean) : Object.keys(spec?.types || {});
+export function damageTypeReport(crafts, spec, census = [], families = null) {
+  // ⛔ AEVI 2026-09-12: TWO SOURCES OF TRUTH, AND THIS WAS POINTED AT THE NARROWER ONE. `damage_types.json` carries the enum AND the
+  // ward prose; `damage_families.json` carries the canon of what a blow can be — and all five types the enum refused (force,
+  // spatial, radiance, corrosive, psychic) were already in it. `radiance` is load-bearing there: the void ruling defines `shadow`
+  // as "opposite radiance", so an enum rejecting it rejects the thing that ruling is anchored to. A type either canon declares is
+  // admitted; `unwarded` names the admitted ones with no ward entry yet, which is Aevi's prose to write and not a gate.
+  const enumTypes = Array.isArray(spec?.types) ? spec.types.map(t => (typeof t === "string" ? t : t?.id || t?.type)).filter(Boolean) : Object.keys(spec?.types || {});
+  const famTypes = Object.values((families?.families || families) || {}).flatMap(f => (Array.isArray(f?.types) ? f.types : [])).map(String);
+  const listed = [...new Set([...enumTypes, ...famTypes])];
   const used = new Map();
   for (const a of crafts || []) {
     const seen = [a?.mechanic?.damageType, ...((a?.tree || []).map(t => t?.mechanic?.damageType))].filter(Boolean);
     for (const t of seen) used.set(t, (used.get(t) || 0) + 1);
   }
   const outside = [...used.keys()].filter(t => !listed.includes(t));
-  return { listed, used: [...used.entries()].sort((a, b) => b[1] - a[1]), outside, fresh: outside.filter(t => !census.includes(t)), stale: census.filter(t => !used.has(t)) };
+  const warded = new Set(Object.entries(spec?.types || {}).filter(([, v]) => typeof v?.wardedBy === "string" && v.wardedBy.trim()).map(([k]) => k));
+  return { listed, enumTypes, famTypes: [...new Set(famTypes)], warded: [...warded], used: [...used.entries()].sort((a, b) => b[1] - a[1]), outside,
+    fresh: outside.filter(t => !census.includes(t)), stale: census.filter(t => !used.has(t)),
+    unwarded: [...used.keys()].filter(t => !warded.has(t)) };   // ⛔ THE WARD, NOT THE KEY: a type listed with no `wardedBy` is still unanswerable
 }
 
 /** `ability_distribution_target.json` — a design COMPASS, not a mirror: Aevi's per-domain shape (HARM 3, PERCEIVE 4…) with a

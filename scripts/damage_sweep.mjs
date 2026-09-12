@@ -186,7 +186,10 @@ function boughtKit(domain, level, cfg) {
   const chosen = []; let left = budget; const take = (a) => { if (!a || chosen.some(c => c.id === a.id)) return; const pr = priceOf(a); if (pr <= left) { chosen.push(a); left -= pr; } };
   take(harm[0]); take(harm[1]); take(reads[0]); take(hides[0]); take(guards[0]);
   for (const a of harm.slice(2)) { if (left <= 0) break; take(a); }
-  return { abilities: chosen.map(a => ({ abilityId: a.id, level: rank })), top, rank, budget, spent: budget - left, n: chosen.length };
+  // ⛔ 2026-09-12: WHICH crafts, not just how many. The report said "20 crafts for 36 of 200 points" and a reader asking WHY a domain
+  // loses had to re-derive the purchase from the catalogue — I did, against `kitFor`'s whole menu instead of this selection, and the
+  // correlation I got described a kit nobody was holding. The buyer knows; it keeps the records.
+  return { abilities: chosen.map(a => ({ abilityId: a.id, level: rank })), top, rank, budget, spent: budget - left, n: chosen.length, chosen };
 }
 function makeSweeper(catalog, body = null) {
   const bought = (KIT === "bought" && body) ? boughtKit(KIT_DOMAIN, body.level, CFG_NOW) : null;
@@ -519,6 +522,7 @@ function print(v) {
   console.log(`      rounds to a WIN: p10 ${q(a.winRounds, 0.1)} · p50 ${q(a.winRounds, 0.5)} · p90 ${q(a.winRounds, 0.9)} · inside ${TARGET.lo}–${TARGET.hi}: ${pct(inBand, a.winRounds.length)} of ${a.winRounds.length} wins   ${inBand / Math.max(1, a.winRounds.length) >= 0.8 ? "✅" : "❌"}`);
   console.log(`      break as a share of wins: ${(breakShare * 100).toFixed(0)}%   (target ${TARGET.breakLo * 100}–${TARGET.breakHi * 100}%)   ${breakShare >= TARGET.breakLo && breakShare <= TARGET.breakHi ? "✅" : "❌"}`);
   console.log(`      win ${pct(a.won, a.fights)} · you down ${pct(a.playerDown, a.fights)} · capped ${pct(a.capped, a.fights)}`);
+  if (LAST_KIT?.chosen) console.log(`      WHAT THEY BOUGHT: ${LAST_KIT.chosen.map(a => { const v = (a.functions || []).find(f => HARM_FNS.has(f)); return `${a.id} T${Math.max(1, Number(a.tier ?? a.levelReq) || 1)}${v ? "·" + v : "·no harm verb"}`; }).join(" | ")}`);
   if (LAST_KIT) console.log(`      THE KIT (last fight): level ${LAST_KIT ? "" : ""}top tier T${LAST_KIT.top} · rank ${LAST_KIT.rank} · ${LAST_KIT.n} crafts for ${LAST_KIT.spent} of ${LAST_KIT.budget} points · foe brain: ${FOE_POLICY === "greedy" ? "greedy (weaves, surges; no sense step, no weapon — engine facts)" : "the game's opponentPolicy (never weaves, surges only when behind)"}`);
   if (a.pol) console.log(`      HOW YOU PLAYED (${POLICY}${KIT_DOMAIN ? ", kit: " + KIT_DOMAIN : ", kit: every domain"}): sensed ${pct(a.pol.senses, a.pol.turns)} of turns · mean setup bonus ${(a.pol.setup / Math.max(1, a.pol.senses)).toFixed(1)} · surged ${pct(a.pol.surges, a.pol.turns)} · wove ${pct(a.pol.weaves, a.pol.turns)} · finishers tried ${a.pol.finishers} · energy left ${(a.pol.energyLeft / Math.max(1, a.pol.n)).toFixed(0)} per fight`);
   if (a.dia) console.log(`      BONUS ACTIONS per turn: yours ${(a.dia.myBonus / Math.max(1, a.dia.turns)).toFixed(2)} · the foe's ${(a.dia.foeBonus / Math.max(1, a.dia.turns)).toFixed(2)} · the foe read you on ${(100 * a.dia.foeReads / Math.max(1, a.dia.turns)).toFixed(0)}% of turns, its setup mean ${(a.dia.foeSetup / Math.max(1, a.dia.foeReads)).toFixed(1)}`);

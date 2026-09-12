@@ -211,6 +211,49 @@ than permanent.
 
 ---
 
+### 4e · ⛔ THE EXPENSIVE CRAFT LOSES THE FIGHT — measured 2026-09-12, and it inverts the ladder's promise
+
+**Erik asked why the win rate spreads 13–58% across the fourteen domains. It is not the ground and it is not the
+kit's shape. It is the TIER of the craft the fight is fought with, and the direction is backwards.**
+
+Pooled across all fourteen domains, a peer fight at levels 5/20/50/100, the player buying a kit inside a
+level-L budget (the same rule the foe uses), 6 samples per craft per encounter:
+
+| the craft's tier | mean win% (no ground) | mean win% (sampled ground) | damage per landed hit | skill-point price |
+|---|---|---|---|---|
+| **T1** | **40%** | **50%** | 27.5 | 1 |
+| T2 | 29% | 29% | 30.9 | 2 |
+| T3 | 29% | 31% | 38.6 | 2 |
+| T4 | 14% | 22% | 49.7 | 3 |
+| **T5** | **17%** | **21%** | **130.5** | 3 |
+
+⛔ **A T5 craft hits between 2.6× and 4.8× as hard as a T1 and wins less than half as often.** The ladder is
+not underpowered — `tierLadder` pays it exactly as authored (T5 is 5× dice +8) and the damage column proves the
+payment arrives. **What a high tier costs is not damage; it is fights.**
+
+⚠️ **AND THAT IS THE WHOLE DOMAIN SPREAD.** `tierPrice` is `{1:1, 2:2, 3:2, 4:3, 5:3}` — a T5 costs three
+points of a level-50 character's hundred, so a greedy buyer takes the top of its menu every time. Domains whose
+menus top out high buy T5s and lose (Body 4%, Dark 8%, Mind 12% with no ground); domains whose menus top out
+low buy T1–T2s and win (Demonic 49%, Life 48%, Breaking 41%). **The 45-point spread is the same 45 points with
+the ground removed** — it is a ladder effect wearing a domain's clothes.
+
+⛑ **WHAT IS RULED OUT, WITH THE MEASUREMENT:** the ground (spread 13–58 with a sampled place, 4–49 without it —
+the same 45-point width; the field moves the MEAN by ~6 points and reorders domains, and explains none of the
+spread); offense (the weakest domains hit *harder* per blow); the kit's harm-capability (r = 0.04 against win%);
+kit size (r = −0.27); defensive reach and harm share (earlier rounds).
+
+⬜ **WHAT IS NOT YET MEASURED, AND NO DIAL MOVES UNTIL IT IS:** *why* a high-tier craft loses a fight it
+out-damages. The candidates, in the order I would test them — the per-tier rounds-to-a-win says T5 wins take ~6
+rounds against T1's ~2, and a peer foe lands ~60 a hit, so the fight is lost in the rounds the craft takes to
+work: (a) energy — a T5's cost per use against the pool, and whether the player is degraded when it matters;
+(b) the landed-hit RATE per round by tier, which the harness reports as a mean and not a rate; (c) a high
+tier's exposure — whether a bigger craft gives the foe more openings (its own setup, a slower verb).
+
+⚠️ **THE MEASUREMENT ITSELF CORRECTED ME TWICE.** I told Erik the spread was probably the ground; it is not.
+I then correlated harm-capability against win% using `kitFor`'s whole-domain menu when the player actually holds
+`boughtKit`'s purchase — a correlation against a kit nobody was holding, which is why the harness now prints
+**what they bought**, craft by craft, with each one's tier and harm verb.
+
 ## §5 — ⛔ HOW TO KNOW YOUR MEASUREMENT IS REAL
 
 This is the section that cost the most to write. Four confounds in one session, each of which produced a
@@ -313,3 +356,9 @@ Also: `casualty_sim.mjs` (the fold pool), `group_fidelity.mjs` (coverage and coh
 3. ⬜ **Should RESTORE act in an exchange?** (§4c) Today a mender in a band is inert.
 4. ⬜ **Should the five constants in §2b become content dials?** Each is a real balance lever currently
    frozen at a default I chose.
+5. ⛔ **Is the expensive craft supposed to lose?** (§4e) A T5 hits up to 4.8× a T1 and wins less than half as
+   often, pooled across all fourteen domains — so buying the best craft you can afford makes you weaker, and
+   the domain spread you asked about is that one fact wearing fourteen costumes. **I have not touched a dial:**
+   the *why* is unmeasured (§4e lists the three candidates in test order), and the last two times I moved on a
+   spread before naming its mechanism the mechanism turned out to be the harness. Say whether you want the
+   diagnosis first or a dial now.

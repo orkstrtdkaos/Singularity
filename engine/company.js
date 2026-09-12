@@ -24,7 +24,11 @@ export function ensureCompany(character) {
 /** Is this registry NPC bonded strongly enough to recruit? (band ≥ ally.) Consent + earned is the guard;
  *  the recruiter still checks the fiction, but the bond is the mechanical floor. Pure. */
 export function isRecruitable(npcEntry) {
-  return !!npcEntry && RECRUIT_BANDS.includes(relationshipBand(Number(npcEntry.relationship) || 0));
+  if (!npcEntry) return false;
+  // ✅ ERIK 2026-09-12: "If someone swears to you - they're IN... you don't have to build up rapport with them to do that." A sworn
+  // bond IS the consent this gate was built to look for — Maren swore at the shrine and still had to climb a band to be askable.
+  if (npcEntry.bondType === "sworn" || npcEntry.kin === "sworn" || npcEntry.bondStage === "sworn") return true;
+  return RECRUIT_BANDS.includes(relationshipBand(Number(npcEntry.relationship) || 0));
 }
 
 /** The roles an NPC's authored record offers when recruited: always `ally`; `trainer` if it teaches a

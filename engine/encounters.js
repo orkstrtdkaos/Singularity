@@ -411,12 +411,12 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
     powers: (character.abilities || []).map(a => content?.abilities?.[a.abilityId]).filter(Boolean),
     ground: state.preparedGround || [] }) : null;
   const split = partyAll.length > 1
-    // ✅ §177 (Aevi 2026-09-11): `actingSlots` said "namedLimit NOW COMES FROM commandSlots" and was never called. Now it is, with
-    // commandSlots as the named limit — and the tier it reads (MELEE_TIERS, Erik's numbers) can only NARROW the pick: a legion leaves
-    // you one figure. ⛔ NEVER WIDENED: a full-resolve tier (≤3) would bring everyone forward and leave nobody folded, and §150's fold
-    // contributions — a folded warder takes the blow, a folded reader hands you the read — live on the folded (Erik: "being IN the
-    // party must be beneficial"). Whether ≤3 means everyone ACTS or everyone CONTRIBUTES is a ruling still open; until then, the cap.
-    ? bringForward(partyAll, { chosen: state.broughtForward || null, slots: Math.min(lead.slots, actingSlots(resolutionTier(partyPresent.length + 1, 1), { namedLimit: lead.slots })) })
+    // ✅ ERIK RULED IT 2026-09-12: "3 or fewer combatants in your party means everyone acts and no one is folded." So a full-resolve
+    // tier is NOT capped by commandSlots — it is the tier saying every ally takes a real turn, and §150's fold contributions simply
+    // do not arise in a fight that small. ⛔ AND THE COUNT IS THE ALLIES, NOT THE ALLIES PLUS YOU: counting the player made a party of
+    // three read as four combatants and folded one of them, which is the thing he was looking at when he ruled. commandSlots still
+    // decides who comes forward once the party is bigger than the tier resolves in full, and a legion still leaves you one figure.
+    ? bringForward(partyAll, { chosen: state.broughtForward || null, slots: (() => { const t = actingSlots(resolutionTier(partyPresent.length, 1), { namedLimit: lead.slots }); return t === Infinity ? Infinity : Math.min(lead.slots, t); })() })
     : null;
   // ⛔ SPEC_party_contributions, SHAPE B. A folded ally does the thing their family is FOR, once a fight each,
   // and it is named — Erik: "being IN the party must be beneficial", and a warder in slot 5 contributed exactly

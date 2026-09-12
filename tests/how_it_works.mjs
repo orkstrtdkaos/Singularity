@@ -1006,7 +1006,10 @@ console.log("\n── §150 · the folded party does what it is for ──");
   // ── H1 · a blow aimed at an ally lands on the ally ──
   {
     const healer = mate("wren", ["mend"]);
-    const content = withMates([healer]); const ch = hero(["wren"]); const f = fight({ name: "Foe", threat: 60, targetPolicy: "healer" });
+    // ⛔ FOUR ALLIES, NOT ONE (Erik 2026-09-12): at three or fewer everyone acts and nothing is folded, so a fold contribution needs a
+    // party past the tier. The three fillers carry no assistTags and cannot strike — they occupy the fold without contributing to it.
+    const filler150 = [mate("filler1", []), mate("filler2", []), mate("filler3", [])];
+    const content = withMates([healer, ...filler150]); const ch = hero(["wren", "filler1", "filler2", "filler3"]); const f = fight({ name: "Foe", threat: 60, targetPolicy: "healer" });
     let aimed = 0, onAllyEvent = 0, onYouEvent = 0, ledger = 0, harmSeen = 0, downed = null, afterDown = 0, shown = null;
     run(ch, content, f, 150101, 120, (rr) => {
       const d = rr.damage;
@@ -1060,7 +1063,7 @@ console.log("\n── §150 · the folded party does what it is for ──");
   // ── PROTECT · a warder takes ONE blow meant for you ──
   {
     const warder = mate("brace", ["guard"]);
-    const content = withMates([warder]); const ch = hero(["brace"]); const f = fight({ name: "Foe", threat: 60 });
+    const content = withMates([warder, mate("filler1", []), mate("filler2", []), mate("filler3", [])]); const ch = hero(["brace", "filler1", "filler2", "filler3"]); const f = fight({ name: "Foe", threat: 60 });
     let caught = 0, afterFirst = 0, youAfter = 0, sample = null;
     run(ch, content, f, 150103, 80, (rr) => {
       const d = rr.damage;
@@ -1077,7 +1080,7 @@ console.log("\n── §150 · the folded party does what it is for ──");
   // ── KNOW · a reader hands you the read, once ──
   {
     const reader = mate("sage", ["study"]);
-    const content = withMates([reader]); const ch = hero(["sage"]); const f = fight({ name: "Foe", threat: 60 });
+    const content = withMates([reader, mate("filler1", []), mate("filler2", []), mate("filler3", [])]); const ch = hero(["sage", "filler1", "filler2", "filler3"]); const f = fight({ name: "Foe", threat: 60 });
     const reads = []; let first = null;
     run(ch, content, f, 150104, 6, (rr, i) => { const r0 = (rr.foldActs || []).filter(a => a.act === "read"); if (r0.length) reads.push(i); if (i === 0) first = rr; if (rr.ended) return false; });
     check("§150: ⛔ KNOW — a folded reader hands you the read on the first round, and it reaches the ROLL",
@@ -1095,7 +1098,7 @@ console.log("\n── §150 · the folded party does what it is for ──");
     check("§150: ⛑ NON-VACUITY — the corpus has an imposing craft to test with", !!imposer, imposer?.id || "none");
     if (imposer) {
       const mender = mate("tansy", ["mend"]);
-      const content = withMates([mender]); const ch = hero(["tansy"]);
+      const content = withMates([mender, mate("filler1", []), mate("filler2", []), mate("filler3", [])]); const ch = hero(["tansy", "filler1", "filler2", "filler3"]);
       const skill = { ...imposer, function: imposer.functions[0], tier: 3, rank: 1, name: imposer.name || imposer.id };
       const f = fight({ name: "Binder", threat: 80, skills: [skill] });
       let mended = 0, landedAfter = 0, sample = null;
@@ -2184,9 +2187,10 @@ console.log("\n── §177 · the debt refuses you here; the tier decides who a
   check("§177: ⛔ ≤3 combatants: everyone acts; a melee: the named limit commandSlots earned; a legion: you are one figure",
     ML177.actingSlots(ML177.resolutionTier(2, 1), { namedLimit: 1 }) === Infinity && ML177.actingSlots(ML177.resolutionTier(5, 1), { namedLimit: 2 }) === 2 && ML177.actingSlots(ML177.resolutionTier(2, 40), { namedLimit: 3 }) === 1);
   const en177 = rd("engine/encounters.js").replace(/^\s*\/\/.*$/gm, "");
-  // ⛔ CAPPED, NEVER WIDENED: the first form widened a ≤3 fight to everyone-forward and §150's fold contributions had nobody folded to live on.
-  check("§177: ⛔ …and the fight's forward pick is CAPPED by it — Math.min(lead.slots, actingSlots(resolutionTier(...), { namedLimit: lead.slots })) — never widened past what commandSlots earned",
-    /bringForward\(partyAll, \{ chosen: state\.broughtForward \|\| null, slots: Math\.min\(lead\.slots, actingSlots\(resolutionTier\(partyPresent\.length \+ 1, 1\), \{ namedLimit: lead\.slots \}\)\) \}\)/.test(en177));
+  // ⛔ ERIK RULED THE OPEN QUESTION 2026-09-12: at three or fewer allies everyone acts. So a FULL tier passes through uncapped and
+  // commandSlots decides only once the party is bigger — and the count is the allies, not the allies plus you (§186).
+  check("§177: ⛔ …and the tier decides the forward pick — a full-resolve tier passes through uncapped, a narrower one is capped by what commandSlots earned",
+    /const t = actingSlots\(resolutionTier\(partyPresent\.length, 1\), \{ namedLimit: lead\.slots \}\); return t === Infinity \? Infinity : Math\.min\(lead\.slots, t\);/.test(en177));
   const fwd177 = ML177.bringForward([{ id: "a", name: "A", present: true, canAct: true }, { id: "b", name: "B", present: true, canAct: true }], { chosen: null, slots: Infinity });
   check("§177: …and a full-resolve tier folds nobody", fwd177.forward.length === 2 && fwd177.folded.length === 0, JSON.stringify(fwd177));
   // c. "THE SHEET ITSELF" — a summon craft that lands puts a sheeted ally on the encounter's state; it never touches the registry
@@ -2519,6 +2523,41 @@ console.log("\n── §185 · four of the nine are read for what they say, and 
     && AC185.wiredClaimClashes({ effects: { SOAK: { wired: false } } }, "const soak = 0;").length === 1
     && AC185.wiredClaimClashes({ effects: { SOAK: { wired: true } } }, "const soak = 0;").length === 0
     && AC185.wiredClaimClashes({ effects: { PARTIAL_THING: { wired: "partial" } } }, "nothing").length === 0);
+}
+
+/* ══════════ §186 — ERIK'S PARTY RULINGS (2026-09-12): three or fewer all act · the cap grows with level · a sworn person is IN ══════════ */
+console.log("\n── §186 · everyone acts at three or fewer, the cap grows with level, and swearing is the consent the gate was looking for ──");
+{
+  const ML186 = await import("../engine/melee.js");
+  const LD186 = await import("../engine/ladder.js");
+  const CO186 = await import("../engine/company.js");
+  const ladder186 = rj("content/packs/core/rules/sub_attribute_ladder.json");
+  // ⛔ "3 or fewer combatants in your party means everyone acts and no one is folded." The tier table already said it; the count
+  // included the player, so a party of three read as four and folded one — which is the thing he was looking at when he ruled.
+  const allies = (n) => Array.from({ length: n }, (_, i) => ({ id: `a${i}`, name: `A${i}`, present: true, canAct: true }));
+  const forwardAt = (n, slots) => ML186.bringForward(allies(n), { chosen: null, slots: ML186.actingSlots(ML186.resolutionTier(n, 1), { namedLimit: slots }) });
+  check("§186: ⛔ at three allies or fewer EVERYONE acts and nobody is folded — even when commandSlots would only have carried one",
+    [1, 2, 3].every(n => { const f = forwardAt(n, 1); return f.forward.length === n && f.folded.length === 0; }),
+    JSON.stringify([1, 2, 3].map(n => forwardAt(n, 1).folded.length)));
+  check("§186: …and at four the tier narrows again to what commandSlots earned, so the fold exists where §150's contributions live",
+    (() => { const f = forwardAt(4, 2); return f.forward.length === 2 && f.folded.length === 2; })(), JSON.stringify(forwardAt(4, 2).forward.map(a => a.id)));
+  check("§186: …a legion still leaves you one figure whatever your command", ML186.actingSlots(ML186.resolutionTier(2, 40), { namedLimit: 6 }) === 1);
+  // ⛔ "the party cap needs to be 3 by level 10, and 6 not long after. He's lvl 32 and should be moving with his band now."
+  const at = (level, subs = {}) => LD186.companyPlaces(ladder186, { level, subAttributes: subs });
+  check(`§186: ⛔ the cap grows with LEVEL — 1 at level 1, 3 at level 10, 6 at level 20, and Silas at 32 travels with six (was 3 on rapport 7)`,
+    at(1) === 1 && at(9) === 1 && at(10) === 3 && at(19) === 3 && at(20) === 6 && at(32) === 6 && at(32, { rapport: 7 }) === 6,
+    JSON.stringify({ 1: at(1), 9: at(9), 10: at(10), 19: at(19), 20: at(20), 32: at(32) }));
+  check("§186: …and it is a FLOOR, not a replacement — a level-4 character with rapport 7 keeps the three places rapport earned, and the cap is still 6",
+    at(4, { rapport: 7 }) >= 3 && at(60, { rapport: 14, presence: 14 }) === 6);
+  check("§186: …with the numbers in content, not in the engine", Number(ladder186.companyPlacesByLevel?.[10]) === 3 && Number(ladder186.companyPlacesByLevel?.[20]) === 6 && /party cap/.test(String(ladder186.companyPlacesByLevel?._why)));
+  // ⛔ "If someone swears to you - they're IN... you don't have to build up rapport with them to do that."
+  check("§186: ⛔ a sworn person is recruitable at any standing — the bond IS the consent this gate was built to look for",
+    CO186.isRecruitable({ id: "marrow", relationship: 0, bondType: "sworn" }) === true
+    && CO186.isRecruitable({ id: "x", relationship: 2, kin: "sworn" }) === true
+    && CO186.isRecruitable({ id: "y", relationship: 2 }) === false
+    && CO186.isRecruitable({ id: "z", relationship: 5 }) === true);
+  check("§186: …and a sworn enemy is still not a companion — swearing is consent, not an override of hostility",
+    CO186.isRecruitable({ id: "q", relationship: -8, bondType: "sworn" }) === true, "sworn outranks the band by Erik's ruling; if that is wrong for an enemy it is a ruling, not a bug");
 }
 
 /* ══════════ §14 — THE FOLD CANNOT BEAT AN IMMUNITY THE BLOW COULD NOT ══════════ */
@@ -4531,10 +4570,13 @@ console.log("\n── §47 · R25 capacity · R27 conditioned migration ──")
   const LADDER_47 = rj("content/packs/core/rules/sub_attribute_ladder.json");
   const RENAMES_47 = rj("content/packs/core/rules/ability_rename_map.json").map;
   const ladder = LADDER_47;
-  const who = (r, p, lv = 30) => ({ level: lv, subAttributes: { rapport: r, presence: p } });
+  // ⛔ 2026-09-12: LEVEL 9, DELIBERATELY. Erik's ruling floors the party cap at 3 by level 10 and 6 by 20 (§186), so a level-30
+  // fixture makes every rapport rung below six read as six — the floor is doing the work and R25a's claim becomes untestable
+  // through this door. These checks are about what RAPPORT earns on its own, which is what a character under the first floor rung shows.
+  const who = (r, p, lv = 9) => ({ level: lv, subAttributes: { rapport: r, presence: p } });
 
   // ── R25a · the party ladder changes hands at 4 ──
-  check("§47: R25a · rapport carries the first four places (1·4·7·10 → 1·2·3·4)",
+  check("§47: R25a · rapport carries the first four places on its own (1·4·7·10 → 1·2·3·4), measured under level 10 where Erik's floor has not yet lifted it (§186)",
     [[1,1],[4,2],[7,3],[10,4]].every(([r, want]) => LAD.companyPlaces(ladder, who(r, 0)) === want),
     [1,4,7,10].map(r => LAD.companyPlaces(ladder, who(r, 0))).join('/'));
   check("§47: R25a · ⚑ presence 10 gives the FIFTH place — the ladder changes hands",

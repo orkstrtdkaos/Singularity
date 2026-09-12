@@ -167,7 +167,16 @@ export function milestoneEffects(ladder, character) {
  *  third and fourth explicitly, so the cap is read rather than computed from a curve. */
 export function companyPlaces(ladder, character) {
   const e = milestoneEffects(ladder, character).live.companyCapacity;
-  return e && Number.isFinite(e.places) ? e.places : 1;
+  const earned = e && Number.isFinite(e.places) ? e.places : 1;
+  // ✅ ERIK 2026-09-12: "the party cap … needs to be 3 by level 10, and 6 not long after. He's lvl 32 and should be moving with his
+  // band now, not worrying about not having enough room in his party." ⛔ A FLOOR, NOT A REPLACEMENT: rapport and presence still earn
+  // places (a level-4 character with rapport 7 keeps three), and level guarantees them. Content-dialled in `companyPlacesByLevel`;
+  // the cap is still 6, and the ladder's own rungs stop there. A level with no rung yet floors at the highest rung it has passed.
+  const byLevel = ladder?.companyPlacesByLevel || {};
+  const level = Number(character?.level) || 1;
+  let floor = 0;
+  for (const [at, places] of Object.entries(byLevel)) if (level >= Number(at)) floor = Math.max(floor, Number(places) || 0);
+  return Math.max(earned, floor);
 }
 
 /** ⛔ R25b (ERIK 2026-09-02) — HOW MANY PEOPLE CAN RUN SOMETHING IN YOUR NAME WHILE YOU ARE ELSEWHERE.

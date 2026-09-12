@@ -1,6 +1,6 @@
 # BALANCE — the dials, what they actually do, and how to turn one without lying to yourself
 
-**CCode · started 2026-08-30 · v1.9.463**
+**CCode · started 2026-08-30 · v1.9.464**
 
 > Erik: *"we need to build toward balance and use the dials."*
 
@@ -242,7 +242,9 @@ the same 45-point width; the field moves the MEAN by ~6 points and reorders doma
 spread); offense (the weakest domains hit *harder* per blow); the kit's harm-capability (r = 0.04 against win%);
 kit size (r = −0.27); defensive reach and harm share (earlier rounds).
 
-⬜ **WHAT IS NOT YET MEASURED, AND NO DIAL MOVES UNTIL IT IS:** *why* a high-tier craft loses a fight it
+✅ **RULED 2026-09-12: INTENDED (§8.5).** Erik: *"big tiers do big damage and do big things but cost — low tiers are the work horses — that is correct."* Nothing below was tested and nothing is owed; it stands as the record of what the next diagnosis would look at.
+
+⬜ **WHAT WAS NOT MEASURED, AND IS NO LONGER OWED:** *why* a high-tier craft loses a fight it
 out-damages. The candidates, in the order I would test them — the per-tier rounds-to-a-win says T5 wins take ~6
 rounds against T1's ~2, and a peer foe lands ~60 a hit, so the fight is lost in the rounds the craft takes to
 work: (a) energy — a T5's cost per use against the pool, and whether the player is degraded when it matters;
@@ -356,9 +358,4 @@ Also: `casualty_sim.mjs` (the fold pool), `group_fidelity.mjs` (coverage and coh
 3. ⬜ **Should RESTORE act in an exchange?** (§4c) Today a mender in a band is inert.
 4. ⬜ **Should the five constants in §2b become content dials?** Each is a real balance lever currently
    frozen at a default I chose.
-5. ⛔ **Is the expensive craft supposed to lose?** (§4e) A T5 hits up to 4.8× a T1 and wins less than half as
-   often, pooled across all fourteen domains — so buying the best craft you can afford makes you weaker, and
-   the domain spread you asked about is that one fact wearing fourteen costumes. **I have not touched a dial:**
-   the *why* is unmeasured (§4e lists the three candidates in test order), and the last two times I moved on a
-   spread before naming its mechanism the mechanism turned out to be the harness. Say whether you want the
-   diagnosis first or a dial now.
+5. ✅ **RULED 2026-09-12 — YES, AND IT IS NOT A LOSS.** Erik: *"I am getting the sense that we are fairly balanced on fights… big tiers do big damage and do big things but cost — low tiers are the work horses — that is correct. Besides, the fighting is only one major facet of the game, not the whole game. Most of the skills are used to do everything else."* ⛔ **§4e is therefore a description, not a defect**, and the domain spread it explains needs no dial. The diagnosis is closed with no candidate tested and none owed. ⚠️ What §4e still earns its place for: it is the measurement that would show a *change* here, and it names the harness artefact beside the fact — a greedy buyer takes the top of its menu every time, which is not how a person plays.

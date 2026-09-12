@@ -2405,35 +2405,26 @@
         "player": "Ask if Cael, and Deni have arrived yet.",
         "summary": "Deep night at the Whistling Woman post: Silas learns that Cael arrived at dusk and rode to report to Fendt, and that Deni passed through and left a sealed packet.",
         "narration": "You surface from the memory with a breath, and ask Maren plainly: 'Has Cael arrived yet? Or Deni?'\n\nMaren turns her head slightly—not a full look, just enough to acknowledge the question. 'Cael came through the gate at dusk. Left his horse with the watch and went to the ridge post to report to Fendt. He will not sleep until the news is given.' Her voice is steady, matter-of-fact. The legendary warden does not embellish. 'Deni passed north an hour before dusk. She had no stopping here—the relay marks are clear, and she needed the moonlight for the moorland stretch. She left a sealed packet on the shelf.' Maren gestures with a subtle tilt of her chin toward the supply shelf, where a small canvas packet sits waiting, marked with Deni's neat hand.\n\nOutside, the moorland is quiet under the stars. The ward holds steady at the threshold. Pell sleeps on in the back room. The Runner's breathing remains deep and even. The night is moving toward the hour before dawn—that thin, still moment when the world pauses before the light returns."
+      },
+      {
+        "player": "Open Deni's packet and read what she left",
+        "summary": "Deep night at the Whistling Woman post: Silas reads Deni Cors's message confirming the relay network active and the post's readiness, with notice that the moorland north grows quiet.",
+        "narration": "You reach for the sealed packet on the shelf—a small canvas envelope, Deni's neat hand written across it in charcoal: *To the Warden at Whistling Woman*. The seal is a simple wax thumbprint, already broken by your fingers as you open it.\n\nInside: a single folded sheet of paper, crisp and dry from the moorland air. The writing is precise, economical—Deni's field-hand clarity.\n\n*The relay marks are holding. The network acknowledges Whistling Woman as active. Three more wayhouses are ready for foundation work: midrow, mill gate, ridge high. I've left the melody-pattern cylinder in the music-box—swap it for the new song when you're ready to signal the wider circuit. The old pattern stays until you choose to change it. The post is sound. Whatever comes next, it will not come through a broken threshold.*\n\n*The moorland is quiet. Too quiet. But that is not your problem yet. It is mine to carry north.*\n\n*—Deni Cors*\n\nYou lower the sheet. The music-box on the shelf sits silent, its cylinder still turning the old melody in your absence—*all is well*, repeating into the dark. Maren is watching you read, her eye still and patient. The fire breathes."
       }
     ],
     "lastTurn": {
-      "narration": "You surface from the memory with a breath, and ask Maren plainly: 'Has Cael arrived yet? Or Deni?'\n\nMaren turns her head slightly—not a full look, just enough to acknowledge the question. 'Cael came through the gate at dusk. Left his horse with the watch and went to the ridge post to report to Fendt. He will not sleep until the news is given.' Her voice is steady, matter-of-fact. The legendary warden does not embellish. 'Deni passed north an hour before dusk. She had no stopping here—the relay marks are clear, and she needed the moonlight for the moorland stretch. She left a sealed packet on the shelf.' Maren gestures with a subtle tilt of her chin toward the supply shelf, where a small canvas packet sits waiting, marked with Deni's neat hand.\n\nOutside, the moorland is quiet under the stars. The ward holds steady at the threshold. Pell sleeps on in the back room. The Runner's breathing remains deep and even. The night is moving toward the hour before dawn—that thin, still moment when the world pauses before the light returns.",
-      "sceneSummary": "Deep night at the Whistling Woman post: Silas learns that Cael arrived at dusk and rode to report to Fendt, and that Deni passed through and left a sealed packet.",
+      "narration": "You reach for the sealed packet on the shelf—a small canvas envelope, Deni's neat hand written across it in charcoal: *To the Warden at Whistling Woman*. The seal is a simple wax thumbprint, already broken by your fingers as you open it.\n\nInside: a single folded sheet of paper, crisp and dry from the moorland air. The writing is precise, economical—Deni's field-hand clarity.\n\n*The relay marks are holding. The network acknowledges Whistling Woman as active. Three more wayhouses are ready for foundation work: midrow, mill gate, ridge high. I've left the melody-pattern cylinder in the music-box—swap it for the new song when you're ready to signal the wider circuit. The old pattern stays until you choose to change it. The post is sound. Whatever comes next, it will not come through a broken threshold.*\n\n*The moorland is quiet. Too quiet. But that is not your problem yet. It is mine to carry north.*\n\n*—Deni Cors*\n\nYou lower the sheet. The music-box on the shelf sits silent, its cylinder still turning the old melody in your absence—*all is well*, repeating into the dark. Maren is watching you read, her eye still and patient. The fire breathes.",
+      "sceneSummary": "Deep night at the Whistling Woman post: Silas reads Deni Cors's message confirming the relay network active and the post's readiness, with notice that the moorland north grows quiet.",
       "choices": [
         {
-          "label": "Open Deni's packet and read what she left",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
-          "difficulty": "very easy",
-          "opposedDifficulty": null,
-          "intentTags": [],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Maren what she reads in Cael's arrival and why he rode straight through",
+          "label": "Ask Maren what 'too quiet' means—what does she read in the silence north?",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "insight",
           "axes": {},
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "ask"
+            "study"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -2442,14 +2433,14 @@
           "emergenceId": null
         },
         {
-          "label": "Step outside and walk the perimeter with Veth—check the wards and talk about what comes next",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Wait for Veth to come back inside and tell them both what Deni saw—let them read the silence together.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {},
-          "difficulty": "very easy",
+          "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "travel"
+            "calm"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -2458,31 +2449,60 @@
           "emergenceId": null
         },
         {
-          "label": "Go wake Pell—tell her Cael is at the ridge post and Deni left word",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Change the melody-box cylinder now—signal the circuit that something has shifted, and you are watching.",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "axes": {},
-          "difficulty": "very easy",
+          "difficulty": "easy",
           "opposedDifficulty": null,
-          "intentTags": [],
+          "intentTags": [
+            "craft"
+          ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Deathsense on the message itself—read what ending Deni is moving toward.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "deathsense",
+          "energyCost": 2,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
       "deeds": [],
-      "characterDeltas": {},
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
       "ledgerEvents": [],
       "questUpdates": [],
       "standingOps": [],
+      "delegateOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": null,
+      "stageOps": [],
       "scene": {
-        "setting": "Interior of the Whistling Woman waystation post—a single warm room with stove, table, chairs, shelf of supplies, water barrel, oil lamps. Fire banked low. Outside: moorland under starlight, late night, the road quiet. Warded threshold holding steady. The hour before dawn approaches.",
+        "setting": "Interior of the Whistling Woman waystation post—a single warm room with stove, table, chairs, shelf of supplies, water barrel, oil lamps. Banked fire glowing low. Outside: moorland under starlight, late night, the road quiet. Warded threshold holding steady. The hour before dawn approaches. Deni's packet open on the table, its message read.",
         "npcsPresent": [
           {
             "name": "Maren Ossitide",
-            "state": "Seated across the table from Silas in warden-form, grey and still, attentive"
+            "state": "Seated across the table, warden-form grey and still, watching Silas read the message with complete, unhurried attention"
           },
           {
             "name": "Huginn",
@@ -2509,24 +2529,69 @@
           "water barrel",
           "shelf of supplies",
           "sleeping cots",
-          "sealed canvas packet from Deni on the shelf"
+          "Deni's message, open on the table",
+          "music-box on the shelf with the old melody-pattern cylinder still turning"
         ],
         "threads": [
-          "What Deni left in the sealed packet",
-          "Cael's arrival at dusk and his ride to the ridge post",
-          "What Maren reads in the evening's movements",
-          "Veth's perimeter check and what the wards are holding against",
-          "The Runner's recovery and what awaits when she wakes",
-          "What the dawn will bring when the watch changes"
+          "What 'too quiet' means north of the moorland",
+          "Whether to change the melody signal now",
+          "Veth returning from perimeter check",
+          "Cael at the ridge post reporting to Fendt",
+          "The Runner's recovery and what waits when she wakes"
         ]
-      }
+      },
+      "npcUpdates": [],
+      "intentsHeard": [],
+      "factUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "Deni Cors confirmed the relay network operational and Whistling Woman waystation ready; left warning that moorland north is growing quiet",
+          "flag": null,
+          "subPlace": null
+        }
+      ],
+      "discovery": null,
+      "codexUpdates": [
+        {
+          "topic": "deni-cors-the-waystation-builder",
+          "label": "Deni Cors (person)",
+          "kind": "person",
+          "entityId": "deni-cors",
+          "fact": "Deni Cors reads the moorland and its moods—she noticed the silence growing north and named it to Silas in writing, marking it as her concern but not yet a threat. She carries that weight northward.",
+          "links": [
+            "whistling-woman-post",
+            "what-wakes-beneath"
+          ]
+        }
+      ],
+      "holdingOps": [],
+      "debtOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": null,
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": null,
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Interior of the Whistling Woman waystation post—a single warm room with stove, table, chairs, shelf of supplies, water barrel, oil lamps. Fire banked low. Outside: moorland under starlight, late night, the road quiet. Warded threshold holding steady. The hour before dawn approaches.",
+      "setting": "Interior of the Whistling Woman waystation post—a single warm room with stove, table, chairs, shelf of supplies, water barrel, oil lamps. Banked fire glowing low. Outside: moorland under starlight, late night, the road quiet. Warded threshold holding steady. The hour before dawn approaches. Deni's packet open on the table, its message read.",
       "npcsPresent": [
         {
           "name": "Maren Ossitide",
-          "state": "Seated across the table from Silas in warden-form, grey and still, attentive"
+          "state": "Seated across the table, warden-form grey and still, watching Silas read the message with complete, unhurried attention"
         },
         {
           "name": "Huginn",
@@ -2553,22 +2618,23 @@
         "water barrel",
         "shelf of supplies",
         "sleeping cots",
-        "sealed canvas packet from Deni on the shelf"
+        "Deni's message, open on the table",
+        "music-box on the shelf with the old melody-pattern cylinder still turning"
       ],
       "threads": [
-        "What Deni left in the sealed packet",
-        "Cael's arrival at dusk and his ride to the ridge post",
-        "What Maren reads in the evening's movements",
-        "Veth's perimeter check and what the wards are holding against",
-        "The Runner's recovery and what awaits when she wakes"
+        "What 'too quiet' means north of the moorland",
+        "Whether to change the melody signal now",
+        "Veth returning from perimeter check",
+        "Cael at the ridge post reporting to Fendt",
+        "The Runner's recovery and what waits when she wakes"
       ]
     },
-    "beats": 3
+    "beats": 4
   },
   "clock": {
     "schemaVersion": 1,
     "day": 17,
-    "hour": 6,
+    "hour": 7,
     "realAnchor": null
   },
   "companions": [
@@ -6464,7 +6530,8 @@
         "[d16] The shadow-model of the Whistling Woman post now exists as a working tool—a dimensional structure held by braided Shadow Work and Working Model, showing the post's layout, relay vault, watch-room sightlines, threshold-marks, and potential defensive vantages. The model is responsive to adjustment…",
         "[d16] Silas Weir attempted to raise an inclusive shrine at the Made Gate clearing—combining Palework and Boundary-Stone to create a space sacred to all peoples. The working failed: a shrine for all peoples cannot be simultaneously held by one warden's mark. The attempt is incomplete; the ground remains…",
         "[d16] The Made Gate clearing now contains a completed universal shrine—a simple unmarked stone plinth at the center of a claimed circle, with four pole-stations at cardinal points (Ashwarden, Figurist, Lattice, Wright) and a fifth unmarked. The circle itself is warded and claimed as work-space.",
-        "[d17] The Made Gate clearing now holds a universal shrine with Named Exclusion threshold—warded at the cardinal points, co-kept by Warden and Wright. The shrine excludes those with foreclosure in their intent; it is open to all who come in good faith."
+        "[d17] The Made Gate clearing now holds a universal shrine with Named Exclusion threshold—warded at the cardinal points, co-kept by Warden and Wright. The shrine excludes those with foreclosure in their intent; it is open to all who come in good faith.",
+        "[d17] Deni Cors confirmed the relay network operational and Whistling Woman waystation ready; left warning that moorland north is growing quiet"
       ],
       "flags": {
         "status": "active",
@@ -6659,7 +6726,7 @@
     "lastTickWorldDay": 74,
     "lastCanonWorldDay": 74,
     "lastGenCount": 1777,
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 3,
     "recentOffers": [
       {
         "thing": "Marrow's explicit acknowledgment of her warden-nature and her choice to attend your endings in corvid form",
@@ -7305,19 +7372,6 @@
       }
     },
     "pressureQueue": [
-      {
-        "source": "npc-want",
-        "kind": "npc-want",
-        "subjectId": "calvar",
-        "aimedAtPlayer": true,
-        "urgency": 3,
-        "oneLineHook": "Calvar, unseen for 8 days, has come looking for you — driven by an unmet want: The filtration work done CORRECTLY — he came out of a solitary twenty-year watch for this; sloppiness offends him more than danger.. They arrive now, not content to keep waiting.",
-        "becomes": {
-          "type": "scene",
-          "who": "calvar"
-        },
-        "addedDay": 17
-      },
       {
         "source": "threat-attack",
         "kind": "threat-attack",
@@ -16100,6 +16154,24 @@
         ],
         "createdDay": 16,
         "updatedDay": 17
+      },
+      "deni-cors": {
+        "id": "deni-cors",
+        "label": "Deni Cors",
+        "kind": "person",
+        "facts": [
+          "[d17] Deni Cors reads the moorland and its moods—she noticed the silence growing north and named it to Silas in writing, marking it as her concern but not yet a threat. She carries that weight northward."
+        ],
+        "links": [
+          "whistling-woman-post",
+          "what-wakes-beneath"
+        ],
+        "aliases": [
+          "Deni Cors (person)"
+        ],
+        "createdDay": 17,
+        "entityId": "deni-cors",
+        "updatedDay": 17
       }
     },
     "notSame": [
@@ -17563,8 +17635,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1789178677840,
-  "rev": 1974,
+  "updatedAt": 1789178798710,
+  "rev": 1975,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -19626,7 +19698,7 @@
           "entityId": "deni-cors",
           "type": "npc",
           "birthWeight": 42,
-          "engagementScore": 17,
+          "engagementScore": 18,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -19674,13 +19746,17 @@
             {
               "kind": "fact",
               "day": 15
+            },
+            {
+              "kind": "fact",
+              "day": 17
             }
           ],
           "createdDay": 14,
           "repaired": false,
           "stubbed": false,
           "romanceEligible": true,
-          "lastAttentionDay": 15,
+          "lastAttentionDay": 17,
           "depthTier": "established",
           "promotedWorldDay": 27,
           "canonTier": "variant",
@@ -21885,7 +21961,7 @@
   "syncedAt": 1788658062664,
   "teachers": {},
   "regionsKnown": {
-    "valley": 671,
+    "valley": 672,
     "the_palelands": 6,
     "the_center": 151,
     "the_echo_vale": 14
@@ -22196,10 +22272,10 @@
     {
       "id": "sess-33",
       "startedAt": "2026-09-11T22:48:54.873Z",
-      "lastAt": "2026-09-12T02:04:37.834Z",
+      "lastAt": "2026-09-12T02:06:38.705Z",
       "startDay": 73,
       "endDay": 74,
-      "beats": 23
+      "beats": 24
     }
   ],
   "company": [
@@ -22712,17 +22788,17 @@
     "gen-whistling-woman-post": "https://image.pollinations.ai/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=32614&nologo=true&_cb=1_1"
   },
   "_opEmitted": {
-    "sceneSummary": 349,
-    "choices": 348,
-    "characterDeltas": 179,
-    "scene": 349,
+    "sceneSummary": 350,
+    "choices": 349,
+    "characterDeltas": 180,
+    "scene": 350,
     "npcUpdates": 308,
     "factUpdates": 36,
-    "placeUpdates": 78,
-    "codexUpdates": 207,
+    "placeUpdates": 79,
+    "codexUpdates": 208,
     "timeOps": 314,
     "imagePrompt": 32,
-    "sceneEnded": 124,
+    "sceneEnded": 125,
     "itemUpdates": 8,
     "questUpdates": 49,
     "offer": 49,
@@ -22739,14 +22815,14 @@
     "_applyFailedOp": 8,
     "newEncounter": 3,
     "encounterOps": 1,
-    "gambitApt": 54,
+    "gambitApt": 55,
     "markDefiningMoment": 1,
     "_engineClosedScene": 5,
     "gambitOps": 1,
     "intentsHeard": 1,
     "partyOps": 3
   },
-  "_opTurns": 349,
+  "_opTurns": 350,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

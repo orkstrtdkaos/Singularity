@@ -184,7 +184,7 @@ export function freeTierOf(ability, { cfg = {} } = {}) {
     const verbs = new Set((f.functions || []).map(String));
     if (!verbs.size || !Number.isFinite(at)) return null;    // no dials, no floor — the content decides this
     if ((Number(ability?.tier) || 1) > at) return null;
-    const fns = Array.isArray(ability?.functions) ? ability.functions : (ability?.function ? [ability.function] : []);
+    const fns = Array.isArray(ability?.functions) ? ability.functions : [];   // §182: `function` (singular) is a decl's field, never a craft's — the fallback read nothing
     if (!fns.some(v => verbs.has(String(v)))) return null;
   }
   const contactOnly = spec.contactOnly === true;             // ⛔ the exception, never the default

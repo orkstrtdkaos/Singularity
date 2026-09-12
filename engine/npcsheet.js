@@ -688,7 +688,7 @@ export function npcGear(entry, { items = null, cfg = {} } = {}) {
  *  craft promises; one raised on a crit is worse than its maker — and that is a thing that HAPPENED at the
  *  table rather than a number sitting in a file. */
 export function summonGap(ability, { rank = 1, degree = "success", cfg = {} } = {}) {
-  const authored = ability?.summon?.tierGap ?? ability?.tierGap;
+  const authored = ability?.summon?.tierGap;   // §182: tierGap lives under summon; the top-level fallback read nothing
   // a per-rank ladder is authored as an array or an object keyed by rank; a bare number is flat
   let base = 0;
   if (Array.isArray(authored)) base = num(authored[Math.max(0, num(rank, 1) - 1)], num(authored[authored.length - 1], 0));

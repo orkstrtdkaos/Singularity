@@ -121,7 +121,7 @@ export function powerPhrase(ability = null, killer = {}) {
     // what the Thornmother card is already showing"). The name plus the shape is the picture; the paragraph
     // explaining the mechanic is not.
     const visual = [shape, tags].filter(Boolean).join(", ");
-    const named = visual || clause(ability.description || ability.effect, CAP.power);
+    const named = visual || clause(ability.description, CAP.power);
     return smartClamp(`${ability.name}${named ? ` — ${named}` : ""}`, CAP.power);
   }
   const style = clause(killer.fightingStyle, CAP.power);

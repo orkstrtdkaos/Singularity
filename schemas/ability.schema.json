@@ -746,6 +746,14 @@
   "summon": {
    "type": "object"
   },
+  "unlockCondition": {
+   "type": "object",
+   "description": "A combination's post-creation unlock. practice.js:combinationThresholdMet reads ripenAt, components and viaAbilities; a prose-only {type, description} form is surfaced by the GM instead (content_ci 3e). Declared 2026-09-12 (§182): it was read, validated and forbidden here — a reader with no legal author, §166's shape."
+  },
+  "combinationAxis": {
+   "type": "string",
+   "description": "The axis an axis-touch combination touches (content_ci 3e). Declared 2026-09-12 (§182)."
+  },
   "innatePrecursor": {
    "type": "boolean"
   },

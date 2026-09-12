@@ -303,7 +303,7 @@ export function stageTaughtRank(character, ability, companions = {}, rules = {})
   const def = companions[cid];
   if (!def) return null;
   const stage = bondOf(character, cid, rules, def.stages).stage;
-  const rows = (ability.tree || ability.ranks || []).length || 1;
+  const rows = (ability.tree || []).length || 1;
   return Math.max(1, Math.min(rows, stage));
 }
 

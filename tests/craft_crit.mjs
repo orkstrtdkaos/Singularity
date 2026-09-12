@@ -44,15 +44,16 @@ console.log("CRAFT-AUTHORED CRITICALS — CCODE-76 / SNG-258 §3b\n");
 
   // TEXT WITHOUT A CHANCE IS THE COMMON CASE, and must not be treated as empty. Most crafts want to say what
   // their disaster looks like without claiming it happens more often.
-  const textOnly = critFor({ crit: { success: { text: "the shape holds past the moment it should have" } } }, { cap: CAP });
+  // §182 (2026-09-12): under `mechanic`, where every authored craft puts it — the top-level form was a fixture-only shape and its fallback is gone.
+  const textOnly = critFor({ mechanic: { crit: { success: { text: "the shape holds past the moment it should have" } } } }, { cap: CAP });
   check("prose with no chance still resolves (saying what it looks like ≠ claiming it happens more)", !!textOnly?.success?.text);
 
   // A CRAFT BIASES THE DIAL, IT DOES NOT OWN IT. Expertise is what crit is for (§3b: mastery triumphs harder
   // and fails softer); authoring must not be able to out-shout it.
-  const greedy = critFor({ crit: { failure: { text: "catastrophe", chance: 80 } } }, { cap: CAP });
+  const greedy = critFor({ mechanic: { crit: { failure: { text: "catastrophe", chance: 80 } } } }, { cap: CAP });
   check(`an over-reaching authored dial is clamped to the cap (${CAP}), with the ask recorded`,
     greedy.failure.chance === CAP && greedy.failure.asked === 80, JSON.stringify(greedy));
-  const negative = critFor({ crit: { failure: { text: "it fails gently", chance: -80 } } }, { cap: CAP });
+  const negative = critFor({ mechanic: { crit: { failure: { text: "it fails gently", chance: -80 } } } }, { cap: CAP });
   check("the clamp is symmetric — a craft may also make itself SAFER, by no more than the cap",
     negative.failure.chance === -CAP);
 
@@ -61,7 +62,7 @@ console.log("CRAFT-AUTHORED CRITICALS — CCODE-76 / SNG-258 §3b\n");
     critFor(null) === null && critFor(undefined, {}) === null && critFor({ crit: null }) === null);
   // A cap of 0 must leave the prose intact and only silence the number: that is exactly what turning the dev
   // dial to 0 means, and it would be a trap if it also deleted the authored sentence.
-  const silenced = critFor({ crit: { failure: { text: "chaos", chance: 9 } } }, { cap: 0 });
+  const silenced = critFor({ mechanic: { crit: { failure: { text: "chaos", chance: 9 } } } }, { cap: 0 });   // §182: under mechanic, like every authored craft
   check("cap 0 keeps the sentence and drops only the dial (what the dev dial at 0 must mean)",
     silenced?.failure?.text === "chaos" && !silenced.failure.chance);
 }

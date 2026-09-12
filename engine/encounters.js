@@ -286,7 +286,7 @@ export function summonOnRound(s, playerDecl, r, { character = null, rules = {}, 
   const abilityId = playerDecl.abilityId || playerDecl.id || null;
   if (!abilityId) return null;
   if ((s.summons || []).some(x => x.summonedBy === abilityId)) return null;   // one living answer per craft per fight
-  const sheet = summonSheetFor({ id: abilityId, name: playerDecl.name, summon: block, tierGap: playerDecl.tierGap }, character?.level, { rank: playerDecl.rank || 1, degree, cfg: rules?.summons || {} });
+  const sheet = summonSheetFor({ id: abilityId, name: playerDecl.name, summon: block }, character?.level, { rank: playerDecl.rank || 1, degree, cfg: rules?.summons || {} });
   const one = { ...sheet, id: `summon-${abilityId}`, name: sheet.name || playerDecl.name || abilityId, summonedBy: abilityId, summonedRound: s.round ?? null };
   s.summons = [...(s.summons || []), one];
   if (Array.isArray(events)) events.push(`${one.name} answers — ${one.count > 1 ? `${one.count} of them, ` : ""}level ${one.level} (${sheet.gap?.why || "as the craft promises"}); in the fight from the next round.`);

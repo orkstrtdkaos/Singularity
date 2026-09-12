@@ -7933,7 +7933,7 @@ await (async () => {
 
     // ⛔ THE DEAD NAMES ARE GONE AND MAY NOT COME BACK. `fieldOfSource()` ends in `|| "substrate"`, so a
     // dead source never threw — it silently graded the craft on the lattice axis. That is the whole ticket.
-    check(`382/CCODE-221: all ${rows382.length} rows name a ratified source, or are explicitly DEFERRED`,
+    check(`382/CCODE-221: every row names a ratified source, or is explicitly DEFERRED (${rows382.length} rows)`,
       rows382.every(([, c]) => c.primary === null || RATIFIED.has(c.primary)),
       rows382.filter(([, c]) => c.primary !== null && !RATIFIED.has(c.primary)).map(([k, c]) => `${k}=${c.primary}`).join(", "));
     check("382/CCODE-221: no `body`, `nanite` or `wild` survives anywhere in the table — primary or weight",
@@ -7943,7 +7943,7 @@ await (async () => {
     // value doing double duty was the actual trap." `mix: null` has to mean UNAUTHORED and never "the mean
     // is pure", or a card renders a confident blend out of nothing.
     const nullMix = rows382.filter(([, c]) => c.mix === null && c.primary !== null);
-    check(`382/CCODE-221: all ${nullMix.length} null mixes are MARKED unauthored — null never means "pure"`,
+    check(`382/CCODE-221: every null mix is MARKED unauthored — null never means pure (${nullMix.length})`,
       nullMix.every(([, c]) => c._mixUnauthored === true),
       nullMix.filter(([, c]) => !c._mixUnauthored).map(([k]) => k).join(", "));
     check("382/CCODE-221: every mix WEIGHT names a ratified source, whatever the primary says",

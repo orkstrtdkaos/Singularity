@@ -812,11 +812,11 @@ export function senseResistOf(oppSheet = {}, sb) {
   const best = Math.max(0, ...Object.values(oppSheet.attributes || {}).map(Number).filter(Number.isFinite));
   const passive = { value: Math.round(best * (cfg.passiveAttributeWeight ?? 3)), label: "their natural guardedness", from: "passive" };
   if (!hide) return passive;
-  const craft = { value: Math.round((hide.tier || 1) * (cfg.concealTierWeight ?? 6)), label: `they are hiding it (${hide.name || hide.function})`, from: "craft" };
+  const held = { value: Math.round((hide.tier || 1) * (cfg.concealTierWeight ?? 6)), label: `they are hiding it (${hide.name || hide.function})`, from: "craft" };
   // ⛔ 2026-09-11 — HOLDING A CONCEAL CRAFT MUST NOT MAKE YOU EASIER TO READ. With a player's growth a body spikes (19 at level
   // 30), so 3 × attribute is 57 while a T2 conceal is 12 — the craft REPLACED the stronger number, and buying one made you easy
   // prey. The rule the active obscure already follows ("working at it cannot leave you easier to read") now holds for the held craft.
-  return craft.value >= passive.value ? craft : passive;
+  return held.value >= passive.value ? held : passive;   // §182: `held` — a scored pair, not a craft; the craft-typed name misled the gate
 }
 
 /** SNG-500 §4 / CCODE-211 — OBSCURE IS A DECLARATION, NOT A PROPERTY OF THE SHEET.

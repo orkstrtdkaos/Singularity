@@ -2305,6 +2305,44 @@ console.log("\n── §181 · every Library document renders through playerText
 }
 
 
+/* ══════════ §182 — A READER WITH NO LEGAL AUTHOR (B3, Aevi's ask after §166): every craft field the engine reads is one the schema admits ══════════ */
+console.log("\n── §182 · the reverse schema gate: what the engine reads off a craft, content may author ──");
+{
+  const { readdirSync: rdd182 } = await import("node:fs");
+  const schema182 = rj("schemas/ability.schema.json");
+  const top182 = new Set(Object.keys(schema182.properties || {})), rank182 = new Set(Object.keys(schema182.properties?.tree?.items?.properties || {}));
+  // ⛔ THE ENGINE'S OWN STAMPS — written by the engine, never by content, so never in the schema. Each names its writer; add one only with its writer.
+  const RUNTIME182 = { minted: "braids.js mints a braid onto customAbilities; reconcile.js reads it", subAttributeByFunction: "state.js stamps it at load (§166)", image: "app.js stamps the gallery portrait" };
+  const JS182 = new Set("length map filter find some every forEach slice join push includes reduce flatMap sort indexOf toLowerCase toUpperCase trim split replace startsWith endsWith keys values entries hasOwnProperty toString concat at test match size add has get set delete call apply bind then catch constructor prototype".split(" "));
+  // the names the engine binds a craft to; a craft bound to another name escapes this scan, which is a naming defect worth a name
+  const VARS182 = ["ability", "ab", "abDef", "abilityDef", "craft"];
+  const files182 = [...rdd182(new URL("../engine/", import.meta.url)).filter(f => f.endsWith(".js")).map(f => "engine/" + f), "app.js"];
+  const reads182 = new Map();
+  for (const f of files182) rd(f).split(/\r?\n/).forEach((line, i) => {
+    if (/^\s*(\/\/|\*|\/\*)/.test(line)) return;                               // comments say what they like
+    // the lookbehind keeps string keys ("ability.ranks" in an infoDot) and other objects' members (x.ability.y) out of the count
+    for (const m of line.matchAll(new RegExp(`(?<!["'\`\\w$.])(?:${VARS182.join("|")})\\??\\.([A-Za-z_$][\\w$]*)`, "g"))) {
+      if (JS182.has(m[1])) continue;
+      if (!reads182.has(m[1])) reads182.set(m[1], new Set());
+      reads182.get(m[1]).add(`${f}:${i + 1}`);
+    }
+  });
+  const undeclared182 = [...reads182].filter(([k]) => !top182.has(k) && !rank182.has(k) && !(k in RUNTIME182));
+  check(`§182: ⛔ every craft field the engine reads is one the schema admits or the engine itself stamps — ${reads182.size} fields read across ${files182.length} files, ${top182.size}+${rank182.size} declared, ${Object.keys(RUNTIME182).length} runtime, ${undeclared182.length} undeclared`,
+    reads182.size >= 30 && undeclared182.length === 0, undeclared182.map(([k, s]) => `${k} ← ${[...s].slice(0, 2).join(" ")}`).join("; ") || "clean");
+  check("§182: …the schema admits what practice.js reads and content_ci validates — unlockCondition and combinationAxis were read, checked, and forbidden",
+    top182.has("unlockCondition") && top182.has("combinationAxis") && schema182.properties.unlockCondition.type === "object" && schema182.properties.combinationAxis.type === "string");
+  check("§182: …the fallbacks that read nothing are gone — effect, ranks, function, top-level crit and tierGap (no authored craft ever carried them)",
+    !reads182.has("effect") && !reads182.has("ranks") && !reads182.has("function") && !reads182.has("crit") && !reads182.has("tierGap"));
+  check("§182: …and the scan reaches the site that made the case — `subAttribute` is read, and is declared", reads182.has("subAttribute") && top182.has("subAttribute"));
+  // ⛑ the forward direction stays where content_ci keeps it: the only authored keys outside the schema are `_`-prefixed notes
+  const man182 = rj("content/packs/core/manifest.json"); let bare182 = [];
+  for (const rel of man182.provides?.abilities || []) { let doc; try { doc = rj(`content/packs/core/${rel}`); } catch { continue; }
+    for (const a of (Array.isArray(doc) ? doc : Array.isArray(doc.abilities) ? doc.abilities : [doc])) { if (!a?.id) continue; for (const k of Object.keys(a)) if (!top182.has(k) && !/^_/.test(k)) bare182.push(`${a.id}.${k}`); for (const t of a.tree || []) for (const k of Object.keys(t || {})) if (!rank182.has(k) && !/^_/.test(k)) bare182.push(`${a.id}.tree.${k}`); } }
+  check("§182: …and no authored craft carries a non-private key the schema does not admit (the forward direction, kept)", bare182.length === 0, bare182.slice(0, 6).join(", "));
+}
+
+
 /* ══════════ §14 — THE FOLD CANNOT BEAT AN IMMUNITY THE BLOW COULD NOT ══════════ */
 // ⛔ FOUND BY RUNNING AEVI'S TWELVE CRAFTS THROUGH A MELEE-SCALE FIGHT (CCODE-313), which is the whole
 // reason Erik asked for a big-battle test. A physical-immune foe took ZERO from the player's typed blow and

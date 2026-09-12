@@ -459,7 +459,7 @@ export function rollMagnitude(fields = {}, rng = Math.random, { marginGap = 0, m
  *  Returns `{ success:{text,chance}, failure:{text,chance} }` with absent halves omitted, or null.
  *  The cap comes from `cap`, or from `cfg.crit.perCraftCap` if you hand it the rules bag instead. */
 export function critFor(ability, { cfg = {}, cap = null } = {}) {
-  const src = ability?.mechanic?.crit || ability?.crit || null;
+  const src = ability?.mechanic?.crit || null;   // §182: crit lives under mechanic on every authored craft; the top-level fallback read nothing
   if (!src) return null;
   const lim = num(cap, num(cfg.crit?.perCraftCap, 10));
   const side = key => {

@@ -115,16 +115,16 @@ export function pcBodyAt(level, { rules = {}, focusParents = [], focusSubs = [],
  *  rolls when it does `fn`. An authored `subAttribute` wins; otherwise the content table (`rules.craftSubAttributes`) splits each
  *  parent's verbs between its POWER sub and its FINESSE sub, and a harm verb goes to finesse when the craft's operativeAxis names
  *  precision (or another `finesseAxes` word). Null with no table — the parent rolls, exactly as before. Pure. */
-export function craftSubAttribute(def, fn, table) {
-  if (!def) return null;
+export function craftSubAttribute(ability, fn, table) {   // §182: the craft is `ability` here, the name the reverse schema gate scans — `def` is what the engine calls an encounter
+  if (!ability) return null;
   if (table && table.enabled === false) return null;   // the dial: off, every craft rolls its parent, as before
-  if (def.subAttribute && SUB_OF[def.subAttribute]) return def.subAttribute;
+  if (ability.subAttribute && SUB_OF[ability.subAttribute]) return ability.subAttribute;
   if (!table?.power) return null;
-  const p = def.attribute || "practical";
+  const p = ability.attribute || "practical";
   const pow = table.power[p], fin = table.finesse?.[p];
   if (!pow) return null;
   if ((table.harmVerbs || ["strike", "break"]).includes(fn)) {
-    const axes = [].concat(def.operativeAxis || []).join(" ");
+    const axes = [].concat(ability.operativeAxis || []).join(" ");
     return fin && (table.finesseAxes || []).some(w => axes.includes(w)) ? fin : pow;
   }
   return fin && (table.finesseVerbs?.[p] || []).includes(fn) ? fin : pow;

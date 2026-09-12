@@ -266,9 +266,23 @@ export function slugify(s) {
 // structured quest record carries structured:true + stages/routes/outcomes/stageIndex.
 // The schema's rule: IF YOU CANNOT NAME THE COST OF IGNORING IT, IT IS NOT A QUEST.
 
-/** The schema's real-quest test: stakes named + at least one stage + at least one outcome. */
+/** The schema's real-quest test: stakes named + at least one stage + at least one outcome — AND EVERY STAGE SAYING SOMETHING.
+ *
+ *  ⛔ SNG-542, ANSWERING AEVI'S ONE OPEN QUESTION: *"whether the blank `def.stages` those records were written from came from the GM
+ *  emitting a structured quest with arity but no prose. If so the write path has the same hole as the read path."* ⚠️ IT WAS NOT THE
+ *  GM. `the-stag-that-wont-die` carries `startedWorldDay: 26` and `startedAt: 2026-07-26` — it was written from the AUTHORED def,
+ *  before that def had stage prose, and `structuredQuestRecord` copies `{id, objective, condition, change}` per stage, all four of
+ *  which were `undefined` and which `JSON.stringify` then drops. ⛔ THAT IS HOW A SAVE COMES TO HOLD `[{}, {}, {}]`: not a bad
+ *  writer, a def with arity and nothing in it.
+ *
+ *  ⛑ SO THE HOLE IS CLOSED WHERE IT OPENS. A stage carrying neither an id nor an objective cannot be played, cannot be rendered,
+ *  and must not be startable — and `hydrateQuest` hiding it is fine today and worthless the day that content is retired, when (her
+ *  words) *"the snapshot IS the answer"* and the answer is `{}`. ⚠️ MEASURED BEFORE TIGHTENING: 0 of 54 authored stages are hollow
+ *  and both personal-arc builders always write an id and an objective, so this refuses nothing that exists. */
 export function isRealQuest(def) {
-  return !!(def && def.stakes && Array.isArray(def.stages) && def.stages.length && Array.isArray(def.outcomes) && def.outcomes.length);
+  const stages = Array.isArray(def?.stages) ? def.stages : [];
+  const everyStageSaysSomething = stages.length > 0 && stages.every(s => !!(s && (s.id || s.objective)));
+  return !!(def && def.stakes && everyStageSaysSomething && Array.isArray(def.outcomes) && def.outcomes.length);
 }
 
 /** Normalize an authored quest into a not-yet-started character-quest record. Outcomes carry both

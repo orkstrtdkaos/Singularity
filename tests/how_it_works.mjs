@@ -12069,6 +12069,70 @@ console.log("\n── §188 · who has thrown in with you: plural bands, a deriv
     })());
 }
 
+/* ══════════ §189 — SNG-542 · THE GM COULD READ THE QUEST AND THE PLAYER COULD NOT (Aevi's HANDOFF_aevi_SNG-542) ══════════ */
+console.log("\n── §189 · one reader for every player-facing quest surface, and the write-path hole that made the blanks ──");
+{
+  const Q189 = await import("../engine/quests.js");
+  const { loadContentHeadless: lch189 } = await import("./headless_content.mjs");
+  const C189 = await lch189();
+  const A189 = rd("app.js");
+  const silas189 = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+
+  // ⛔ HER FINDING, AS A GATE: `questsFor` was not in app.js's import list at all, so no player surface could hydrate.
+  check("§189: ⛔ app.js IMPORTS the one reader — Aevi: \"`hydrateQuest` already repairs all three broken quests. app.js does not import it\"",
+    /import \{[^}]*\bquestsFor\b[^}]*\} from "\.\/engine\/quests\.js"/.test(A189) && /function myQuests\(\) \{ return questsFor\(character, CONTENT\.quests\); \}/.test(A189));
+
+  // ⛔ ONE READER, NOT SIX PATCHES (her §5.1, and CCODE-186's shape). Every surface that prints a quest's WORDS calls it.
+  const surfaces = ["const activeQuests = myQuests()", "const questTitles = myQuests()", "${myQuests().filter(q => q.status === \"active\").map(q => `<div class=\"codex-fact\"",
+    "${myQuests().length ? `<div class=\"cs-block\"", "const q = myQuests().find(x => x.id === questId);", "function questsAtDecision() { return myQuests().filter(questAtDecision); }",
+    "renderStructuredQuestDetail(myQuests().find(x => x.id === q.id))", "const q = myQuests();", "sectionOpen(\"quests\", myQuests().some"];
+  check(`§189: ⛔ every player-facing quest surface reads through it — ${surfaces.length} of them, including the Quest Log where Erik was reading the fallback`,
+    surfaces.every(s => A189.includes(s)), surfaces.filter(s => !A189.includes(s)).join(" | ").slice(0, 240));
+
+  // ⛔ AND THE RATCHET, so a seventh raw read cannot appear quietly (her §5.2: "a gate: no player-facing quest surface may read
+  // `character.quests` directly"). ⚠️ THE READS LEFT ARE DELIBERATE AND NONE OF THEM TOUCHES PROSE: the dev-mode writer (two
+  // lines), a Set of ids for the turn context, and two lookups by `arcId`. A count, because a spelling ban would forbid the
+  // writer too — and it may only go DOWN.
+  const rawReads = (A189.match(/character\??\.quests/g) || []).length;
+  check(`§189: ⛔ the raw reads left in app.js are ${rawReads} and every one of them is prose-free — the dev-mode writer (4), a Set of ids, two arcId lookups (may only go DOWN)`,
+    rawReads <= 7, `${rawReads} raw reads`);
+  const proseWords = /\b(title|objective|summary|premise|stakes|stages|progress|condition)\b/;
+  const offenders = A189.split(/\r?\n/).map((l, i) => [i + 1, l]).filter(([, l]) => /character\??\.quests/.test(l) && proseWords.test(l) && !/^\s*(\/\/|\*)/.test(l));
+  check("§189: …and no LINE both reaches the raw record and names a prose field — the belt beside the braces",
+    offenders.filter(([, l]) => !/dev-test-quest/.test(l)).length === 0,
+    offenders.map(([n]) => `app.js:${n}`).join(" · "));
+
+  // ⛑ THE PROOF ON THE THREE RECORDS ERIK IS LOOKING AT — her own measurement, re-run through the reader the player now uses
+  const raw189 = (silas189.quests || []).filter(q => q.status === "active");
+  const hyd189 = Q189.questsFor(silas189, C189.quests).filter(q => q.status === "active");
+  const lens = (q) => (q.stages || []).map(s => (s?.objective || "").length);
+  const blanks = raw189.filter(q => lens(q).every(n => n === 0));
+  check(`§189: ⛔ LIVE — ${blanks.length} active quests are stored with EMPTY stages and every one of them reads its words through the def`,
+    blanks.length === 3 && blanks.map(q => q.id).sort().join(",") === "the-mercy-that-wont-ask,the-stag-that-wont-die,the-wyrm-of-endings"
+    && hyd189.every(q => lens(q).every(n => n > 20)), JSON.stringify(hyd189.map(q => `${q.id}:${lens(q).join("/")}`)));
+  // ⛔ AND THE WORD ERIK SAW: `s?.objective || "resolve"` is the Quest Log's fallback, and it was the whole sentence on his screen.
+  check("§189: …and the log's fallback string is no longer what a started quest renders — the fallback is for a quest with no def, not for every quest",
+    hyd189.every(q => (q.stages?.[q.stageIndex || 0]?.objective || "resolve") !== "resolve")
+    && /objective \|\| "resolve"/.test(A189), "the fallback still fires for a hydrated stage");
+  // ⚠️ HYDRATION IS NOT A REWRITE: progress comes from the record, words from the def, and the save is untouched.
+  check("§189: ⛔ the record is NOT repaired — Aevi's §5.3: \"I would not bother… repairing records teaches nobody anything\"",
+    (silas189.quests || []).filter(q => (q.stages || []).some(s => s && !Object.keys(s).length)).length === 3
+    && hyd189.every(q => q.stageIndex === raw189.find(r => r.id === q.id).stageIndex));
+
+  // ⛔ THE WRITE-PATH HOLE, WHICH WAS HER ONE OPEN QUESTION — and the answer is that a def with arity and no prose is startable
+  const hollow = { id: "hollow-thing", name: "A Hollow Thing", stakes: "something", stages: [{}, {}], outcomes: [{ id: "done" }] };
+  const fine = { id: "fine-thing", name: "A Fine Thing", stakes: "something", stages: [{ id: "s1", objective: "do the thing" }], outcomes: [{ id: "done" }] };
+  check("§189: ⛔ a def whose stages carry NOTHING is not a real quest — that is how a save comes to hold `[{}, {}, {}]`, and it is refused at the door now",
+    Q189.isRealQuest(hollow) === false && Q189.isRealQuest(fine) === true
+    && Q189.startStructuredQuest({ quests: [] }, hollow).why === "not a structured quest");
+  check("§189: …and it refuses nothing that exists: every authored stage and both personal-arc builders carry an id or an objective",
+    (() => {
+      const defs = Object.values(C189.quests || {});
+      const stages = defs.flatMap(d => (Array.isArray(d?.stages) ? d.stages : []));
+      return stages.length >= 50 && stages.every(s => s && (s.id || s.objective)) && defs.filter(Q189.isRealQuest).length >= 15;
+    })(), `${Object.values(C189.quests || {}).flatMap(d => d.stages || []).length} authored stages`);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

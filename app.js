@@ -15,7 +15,7 @@ import { gmTurn, refusalSignal, reNarrateRich, parseIntent, gmAsk, generateBio, 
 import { buildBattlePrompt, battleKey } from "./engine/battleprompt.js"; // SNG-400b: the battle image is a prompt BUILD, not a string join
 import { namesToAvoid, namesMatch } from "./engine/namematch.js"; // CCODE-166: the codebase already knew how to match a fuller name to a known one
 import { affiliationOf, regionHomeTradition, buildPeopleVocab } from "./engine/affiliation.js"; // SNG-185
-import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, slugify, advanceStructuredQuest } from "./engine/quests.js";
+import { applyQuestUpdates, questsFor, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, slugify, advanceStructuredQuest } from "./engine/quests.js";
 import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM } from "./engine/corrections.js";
 import { applyAuthorOps, AUTHOR_OPS } from "./engine/authormode.js"; // SNG-207b: the author god-mode (dev-gated, separate surface)
 import { getApiKey, setApiKey, callClaude, callClaudeJSON, parseLooseJSON, setCallObserver, MODELS } from "./engine/claude.js";
@@ -132,7 +132,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.467";
+const APP_VERSION = "1.9.468";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2240,7 +2240,7 @@ function buildFeedbackContext() {
   if (typeof character !== "undefined" && character) {
     ctx.character = { id: character.id, name: character.name, level: character.level, origin: character.origin, nativeTradition: character.nativeTradition || null, domains: character.domains || null, background: character.background };
     ctx.location = (() => { const l = CONTENT.locations?.[character.currentLocationId]; return { id: character.currentLocationId, name: l?.name || null, regionId: l?.regionId || null }; })();
-    const activeQuests = (character.quests || []).filter(q => q.status === "active").map(q => q.title || q.id);
+    const activeQuests = myQuests().filter(q => q.status === "active").map(q => q.title || q.id);
     if (activeQuests.length) ctx.activeQuests = activeQuests;
     ctx.journeyDay = (() => { try { return readClock(character.clock).day; } catch { return null; } })();
     // SNG-179 §4.4: attach what the OPS actually did. A report that says "the teacher never
@@ -8479,7 +8479,7 @@ function maybeWorldPressure(turn, resolution) {
     return;
   }
   // Fallback (queue empty) — the generic escalating push, unchanged (SNG-080).
-  const questTitles = (character.quests || []).filter(q => q.status === "active").map(q => q.title || q.id);
+  const questTitles = myQuests().filter(q => q.status === "active").map(q => q.title || q.id);
   pendingPressure = pressureDirective(tier, loc?.dangerLevel || 0, questTitles);
   pressureStreak++;   // the next pressure escalates
   quietTurns = 0;     // space them out — another threshold of quiet before the next push
@@ -11714,7 +11714,7 @@ function renderCharacterScreen() {
       <div class="cs-lean">${esc(profileInsight(character, CONTENT.rules.playerAptitudes || [], CONTENT.rules))}</div>
       ${aptitudeChips()}</div>
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Active quests ${infoDot("quest.routes")}</h3>
-      ${(character.quests || []).filter(q => q.status === "active").map(q => `<div class="codex-fact"><strong>${esc(q.title)}</strong> — ${esc(q.progress?.slice(-1)[0] || q.summary)}</div>`).join("") || "<div class='insight'>none</div>"}</div>
+      ${myQuests().filter(q => q.status === "active").map(q => `<div class="codex-fact"><strong>${esc(q.title)}</strong> — ${esc(q.progress?.slice(-1)[0] || q.summary)}</div>`).join("") || "<div class='insight'>none</div>"}</div>
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Companions ${infoDot("companion.bond")}</h3>
       ${activeCompanions(character, CONTENT.companions).map(c => { const b = bondOf(character, c.id, CONTENT.rules, c.stages); const mx = CONTENT.rules?.companions?.tiers?.maxBond ?? 10;
         // ⚠️ THE CODEX IS WHERE ERIK LOOKED, so it is the second tap target rather than an afterthought —
@@ -12050,9 +12050,9 @@ function renderRepairScreen(note = "") {
         <label class="rating-check"><input type="checkbox" data-rmcomp="${esc(c.id)}"> Remove <strong>${esc(c.name)}</strong></label>`).join("")}
     </div>` : ""}
 
-    ${(character.quests || []).length ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Unstick a quest</h3>
+    ${myQuests().length ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Unstick a quest</h3>
       <p class="hint" style="margin-bottom:8px">Force a stuck thread to a sane status. Leave "no change" for quests that are fine.</p>
-      ${(character.quests || []).map(q => `
+      ${myQuests().map(q => `
         <div class="cs-attr"><span class="cs-attr-name" style="width:auto; flex:1" title="${esc(q.summary || "")}">${esc(q.title || q.id)} <span class="hint">(${esc(q.status || "?")})</span></span>
           <select data-quest="${esc(q.id)}" style="max-width:160px">
             <option value="">no change</option>
@@ -12184,7 +12184,7 @@ function renderInventoryScreen(openName = null) {
 // ---------- quest detail ----------
 
 function renderQuestDetail(questId, guidance = null, loading = false) {
-  const q = (character.quests || []).find(x => x.id === questId);
+  const q = myQuests().find(x => x.id === questId);
   if (!q) { renderPlay(character.activeScene?.lastTurn || null, {}); return; }
   if (q.structured) { renderStructuredQuestDetail(q); return; }
   chrome(`<div class="screen" style="max-width:680px">
@@ -12228,18 +12228,36 @@ function renderQuestDetail(questId, guidance = null, loading = false) {
 // SNG-244: is this structured quest at its decision point — every stage behind you, the ending not yet chosen?
 // The SAME derivation the detail page uses (app.js atDecision below), lifted so the in-play decision strip can
 // ask it without rendering the detail. Reads existing state only (no new resolve/decision logic).
+/** ⛔ SNG-542 (Aevi 2026-09-12) — THE ONE READER FOR EVERY PLAYER-FACING QUEST SURFACE.
+ *
+ *  Her finding, in her words: *"`hydrateQuest` already repairs all three broken quests. `app.js` does not import it. The GM can
+ *  read the quest text. The player cannot."* Three of Silas's active quests carry `"stages": [{}, {}, {}]` — literally empty
+ *  objects — while `content/packs/valley/quests.json` holds a perfect `id`/`objective`/`condition` for every one of them.
+ *  `questsForGM` hydrates because it is handed the defs, so the prompt got the words; the player's surfaces read the raw record and
+ *  rendered the fallback string. ⛔ THE WORD ON ERIK'S SCREEN WAS `resolve` — `s?.objective || "resolve"`, the fallback itself.
+ *
+ *  ⚠️ THIS IS THE WEEK'S DEFECT CLASS AT ITS WORST, and she named it: the nine rules files were authored with no reader and the
+ *  sixteen exports built with no caller — but here THE READER EXISTS, IS CORRECT, AND IS DOCUMENTED AS "the one call a consumer
+ *  should make", and the consumer the content was written FOR is the one that never made it.
+ *
+ *  ⛑ ONE READER, NOT SIX PATCHES: progress comes from the record, words come from the def, and a content fix reaches a quest that
+ *  is already under way — which is the whole point of `hydrateQuest` and the reason her §5.3 says not to repair the records.
+ *  ⛔ Reads that never touch prose stay raw on purpose (a Set of ids, two `arcId` lookups, the dev-mode writer) and §189 ratchets
+ *  their number so a seventh cannot appear quietly. */
+function myQuests() { return questsFor(character, CONTENT.quests); }
+
 function questAtDecision(q) {
   if (!q || !q.structured || q.status !== "active") return false;
   const allStagesDone = (q.completedStages || []).length >= (q.stages || []).length || (q.stageIndex || 0) >= (q.stages || []).length;
   return !!(q.awaitingResolution || allStagesDone);
 }
-function questsAtDecision() { return (character?.quests || []).filter(questAtDecision); }
+function questsAtDecision() { return myQuests().filter(questAtDecision); }
 
 // SNG-244: the ONE resolve action, shared by the quest-detail ending buttons AND the in-play decision strip — so
 // the strip is a genuine shortcut to the existing ending-selection, not a parallel resolve path (the spec guard).
 // De-dupes the SNG-235 ctx sink bundle that both callers need. onDone lets a caller override the after-render.
 function resolveQuestOutcome(questId, outcomeId, { onDone } = {}) {
-  const q = (character?.quests || []).find(x => x.id === questId);
+  const q = myQuests().find(x => x.id === questId);
   const o = q && (q.outcomes || []).find(x => x.id === outcomeId);
   if (!q || !o) return;
   if (!confirm(`Resolve "${q.title}" as “${o.name}”? This is permanent and changes the world.`)) return;
@@ -12322,7 +12340,7 @@ function renderStructuredQuestDetail(q) {
   document.getElementById("sq-back").onclick = () => renderQuestLog();
   for (const b of app.querySelectorAll("[data-stagedone]")) b.onclick = () => {
     const r = completeQuestStage(character, q.id, b.dataset.stagedone);
-    if (r.ok) { saveCharacter(character); renderStructuredQuestDetail(character.quests.find(x => x.id === q.id)); }
+    if (r.ok) { saveCharacter(character); renderStructuredQuestDetail(myQuests().find(x => x.id === q.id)); }
   };
   // SNG-244: the ending buttons and the in-play decision strip both route through resolveQuestOutcome — one path.
   for (const b of app.querySelectorAll("[data-outcome]")) b.onclick = () => resolveQuestOutcome(q.id, b.dataset.outcome);
@@ -12331,7 +12349,7 @@ function renderStructuredQuestDetail(q) {
 /** SNG-BATCH-7 Phase 3 + SNG-065: the full quest log — available (startable, structured) /
  *  active / resolved / completed / failed, with stakes + current stage. */
 function renderQuestLog() {
-  const q = character.quests || [];
+  const q = myQuests();
   const group = (...sts) => q.filter(x => sts.includes(x.status));
   const stageLabel = x => { if (!x.structured) return x.progress?.length ? x.progress[x.progress.length - 1] : x.summary;
     const s = x.stages?.[x.stageIndex] || x.stages?.[x.stages.length - 1]; return x.status === "active" ? (s?.objective || "resolve") : (x.outcomeName || x.summary || ""); };
@@ -14969,13 +14987,14 @@ function renderPlay(turn, opts = {}) {
     </div></details>
     ${/* SNG-120: the old sidebar "People you know" (a duplicate of the SNG-119 "who's here" list + the full
           Character-screen roster) is GONE — its people show once, in the place-scoped section below. */""}
-    <details class="sidebar-sec" data-sec="quests"${sectionOpen("quests", (character.quests || []).some(q => q.status === "active")) ? " open" : ""}><summary><span class="sec-title">Quests</span> ${infoDot("quest.routes")}${(character.quests || []).filter(q => q.status === "active").length ? ` <span class="sec-sum">(${(character.quests || []).filter(q => q.status === "active").length})</span>` : ""}</summary><div class="sec-body">
-      ${(character.quests || []).filter(q => q.status === "active").map(q => { const stage = q.structured ? (q.stages?.[q.stageIndex] || q.stages?.[q.stages.length - 1]) : null;
+    <details class="sidebar-sec" data-sec="quests"${sectionOpen("quests", myQuests().some(q => q.status === "active")) ? " open" : ""}><summary><span class="sec-title">Quests</span> ${infoDot("quest.routes")}${(() => { const n = myQuests().filter(q => q.status === "active").length; return n ? ` <span class="sec-sum">(${n})</span>` : ""; })()}</summary><div class="sec-body">
+      ${myQuests().filter(q => q.status === "active").map(q => { const stage = q.structured ? (q.stages?.[q.stageIndex] || q.stages?.[q.stages.length - 1]) : null;
         return `<button class="quest quest-click" data-quest="${esc(q.id)}"><span class="quest-title">${esc(q.title)}</span>${q.structured ? ` <span class="cost">✦</span>` : ""}
           <div class="quest-note">${esc(q.structured ? (stage?.objective || "resolve") : (q.progress?.length ? q.progress[q.progress.length - 1] : q.summary))}</div>
         </button>`; }).join("") || "<div class='insight'>no undertakings yet — the valley will provide</div>"}
       ${(() => { const avail = availableStructuredQuests(character, [...(CONTENT.quests || []), ...(character.personalArc ? [character.personalArc] : [])], questOfferContext(character, sceneState)); return avail.length ? `<div class="hint" style="margin-top:4px">✦ ${avail.length} quest${avail.length === 1 ? "" : "s"} to take up here</div>` : ""; })()}
-      <button class="opt" id="open-questlog" style="display:block;width:100%;margin-top:4px">📜 Quest Log${(character.quests || []).some(q => q.status !== "active") ? ` — ${(character.quests || []).filter(q => q.status === "completed" || q.status === "resolved").length} done · ${(character.quests || []).filter(q => q.status === "failed").length} failed` : ""}</button>
+      ${(() => { const all = myQuests();   // ⛔ SNG-542: one reader here too. Status is not prose, but a rendering line that reaches past the reader is where the next prose read gets written.
+        return `<button class="opt" id="open-questlog" style="display:block;width:100%;margin-top:4px">📜 Quest Log${all.some(q => q.status !== "active") ? ` — ${all.filter(q => q.status === "completed" || q.status === "resolved").length} done · ${all.filter(q => q.status === "failed").length} failed` : ""}</button>`; })()}
     </div></details>
     ${(() => { // SNG-120/126: Company — Party (players) + Companions (catalog) + Allies (NPC party members, roles)
       const comps = (character.companions || []).filter(id => CONTENT.companions[id]);

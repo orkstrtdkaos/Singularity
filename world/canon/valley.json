@@ -1164,6 +1164,48 @@
         "birthWeight": 1,
         "rivalId": "gen-threshold-post"
       }
+    },
+    {
+      "id": "gen-mara-wells-store",
+      "name": "Mara Wells Store",
+      "regionId": "valley",
+      "descriptionSeed": "A place the road led to — Mara Wells Store. The fiction brought you here before the map knew its name.",
+      "tags": [
+        "transitional"
+      ],
+      "connections": [
+        "millbrook"
+      ],
+      "_mintedAs": "transit",
+      "dangerLevel": 1,
+      "map": {
+        "x": 405.75227902134543,
+        "y": 254.2511499259448
+      },
+      "worldPos": {
+        "colatitude": 20.603,
+        "longitude": 250.39599999999996,
+        "depth": 0
+      },
+      "_canon": {
+        "entityId": "gen-mara-wells-store",
+        "type": "location",
+        "weight": 6,
+        "rating": null,
+        "tier": "variant",
+        "provenance": {
+          "locationId": "millbrook",
+          "day": null,
+          "hint": "transit"
+        },
+        "contributedBy": {
+          "playerKey": null,
+          "characterId": null
+        },
+        "promotedWorldDay": 74,
+        "birthWeight": 1,
+        "rivalId": "gen-mara-wells-store"
+      }
     }
   ]
 }

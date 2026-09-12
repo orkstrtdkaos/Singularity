@@ -12233,9 +12233,12 @@ console.log("\n── §190 · the push rides on the save, a failure says so, an
   check(`§190: ⛔ LIVE — nobody in the Fellowship reads level 1 any more; Aldric ${lvl("aldric")} and Dara ${lvl("dara-holt")} sit on the notable floor instead of the bottom of the ladder`,
     rows190.length === 6 && rows190.every(r => r.level > 1) && lvl("aldric") >= 5 && lvl("dara-holt") >= 5,
     rows190.map(r => `${r.name} ${r.level}`).join(" · "));
-  check("§190: …and the deriver itself proves the bag is the whole difference — the same record, the two bags, two answers",
-    (() => { const e = silas190.npcRegistry["aldric"];
-      return NS190.derivedLevel(e, { day: 19, cfg: subBlock }) === 1 && NS190.derivedLevel(e, { day: 19, cfg: merged }) > 1; })());
+  // ⚠️ ON A FIXTURE, NOT ON ALDRIC. This read the live record and asserted the wrong bag gives exactly 1 — true while he had no
+  // meetings and no completions counted, and false an hour later once step 55 credited him. The CAPABILITY is what matters and a
+  // bare record is the only state that cannot move: no authored level, no tier, a role the signals place, nothing earned.
+  check("§190: …and the deriver itself proves the bag is the whole difference — one record, the two bags, two answers",
+    (() => { const bare = { id: "nobody", name: "Nobody", role: "Smokehouse operator, Millbrook" };
+      return NS190.derivedLevel(bare, { day: 19, cfg: subBlock }) === 1 && NS190.derivedLevel(bare, { day: 19, cfg: merged }) > 1; })());
 }
 
 /* ══════════ §191 — SNG-544 · THE THREE REASONS A REAL PERSON READ AS LEVEL 1 (Erik 2026-09-12) ══════════ */
@@ -12280,12 +12283,34 @@ console.log("\n── §191 · the meetings already on the record, the quest its
 
   /* ---- 2 · STEP 55, THROUGH THE RUNNER. ⚠️ Not `apply` on a copy: a step proven that way has never met the version gate, which
        is exactly how the braid repair sat unrun on Silas's save at reconcileVersion 49. ---- */
-  const silas191 = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  // ⛔ REWOUND, BECAUSE THE REPAIR HAS SINCE LANDED. These checks first asserted the BEFORE→AFTER transition on the live save at
+  // reconcileVersion 54; Erik loaded the build, the step ran on his real save, it pushed, and all four went red within the hour.
+  // ⚠️ THAT IS THE GATE-PINS-A-MOVING-VALUE DEFECT, mine for the fourth time in a day — a one-shot repair can only be caught in
+  // the act ONCE. ⛑ So the transition is driven on a COPY rewound to just before the step (its own version and the four fields the
+  // step writes, stripped), which is a state that cannot move, and the LIVE save is asserted separately for the end state it now
+  // holds. Both halves are true forever: the step still does what it claims, and his save still carries what it did.
+  const silasLive = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const silas191 = JSON.parse(JSON.stringify(silasLive));
+  silas191.reconcileVersion = 54;
+  // ⚠️ A COUNT ABOVE THE FLOOR IS REAL PLAY AND SURVIVES THE REWIND. The step only ever RAISES `met` to the number of history
+  // rows, so a count at or below that is indistinguishable from its output and is stripped; Pell's 35 against a history capped at
+  // ten is demonstrably his own, and keeping it is what lets the "never lowered" half of the claim still be tested.
+  for (const n of Object.values(silas191.npcRegistry || {})) {
+    if ((Number(n.met) || 0) <= (Array.isArray(n.history) ? n.history.length : 0)) delete n.met;
+    delete n.completions; delete n.creditedQuests;
+  }
+  silas191.npcRegistry["dara-holt"].role = "Senior east-channel irrigator, Millbrook";
+  silas191.npcRegistry["dara-holt"].aliases = (silas191.npcRegistry["dara-holt"].aliases || []).filter(a => !/Ditch-Mother/.test(a));
   const seenBefore = silas191.reconcileVersion || 0;
   const lvlBefore = Object.fromEntries([...FW191.atSideRows(silas191, opts191), ...FW191.poolRows(silas191, opts191)].map(r => [r.id, r.level]));
   const metBefore = Object.fromEntries(Object.entries(silas191.npcRegistry || {}).map(([k, v]) => [k, Number(v.met) || 0]));
   const out191 = RC191.reconcile(silas191, "character", { content: C191, day: 19 });
-  check(`§191: ⛔ step 55 RUNS through the runner's version gate on the live save (it was at ${seenBefore}) and says all three things it did`,
+  check(`§191: ⛑ AND IT HAS LANDED ON HIS SAVE — reconcileVersion ${silasLive.reconcileVersion}, Aldric credited for the quest he gave, Dara's seat on her record`,
+    (silasLive.reconcileVersion || 0) >= 55
+    && silasLive.npcRegistry.aldric.completions >= 1 && (Number(silasLive.npcRegistry.aldric.met) || 0) >= 10
+    && /Millbrook Council/.test(silasLive.npcRegistry["dara-holt"].role),
+    `v${silasLive.reconcileVersion} · aldric met ${silasLive.npcRegistry.aldric.met}/completions ${silasLive.npcRegistry.aldric.completions}`);
+  check(`§191: ⛔ step 55 RUNS through the runner's version gate, driven on a copy rewound to ${seenBefore}, and says all three things it did`,
     out191.applied.includes("the-people-who-never-counted") && silas191.reconcileVersion === 55
     && out191.notes.some(n => /meetings already written/.test(n))
     && out191.notes.some(n => /Work you finished for people counts/.test(n))
@@ -12313,7 +12338,7 @@ console.log("\n── §191 · the meetings already on the record, the quest its
 
   /* ---- 3 · WHAT ERIK SEES ---- */
   const lvlAfter = Object.fromEntries([...FW191.atSideRows(silas191, opts191), ...FW191.poolRows(silas191, opts191)].map(r => [r.id, r.level]));
-  check(`§191: ⛔ LIVE — every one of the six rose or held, and the two he named are no longer read as nobodies: Aldric ${lvlBefore.aldric} → ${lvlAfter.aldric}, Dara ${lvlBefore["dara-holt"]} → ${lvlAfter["dara-holt"]}`,
+  check(`§191: ⛔ every one of the six rose or held, and the two he named are no longer read as nobodies: Aldric ${lvlBefore.aldric} → ${lvlAfter.aldric}, Dara ${lvlBefore["dara-holt"]} → ${lvlAfter["dara-holt"]}`,
     Object.keys(lvlAfter).every(k => lvlAfter[k] >= lvlBefore[k])
     && lvlAfter.aldric > lvlBefore.aldric && lvlAfter["dara-holt"] >= 12
     && lvlAfter.pell === lvlBefore.pell,

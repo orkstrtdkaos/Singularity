@@ -363,7 +363,7 @@ const wanderer = {
 // ⚠️ 2026-09-05 (BUG_news_rebroadcast): `alwaysHops` is the point of this fixture. The player's spread call used to pass
 // `rate: 1`, which made `spreadDeeds`' throttle unreachable — so these checks were driven by the DEFECT and would now be a
 // coin flip on the authored 0.35. A test of the MODEL (one hop, local first, never twice) must not ride on the RATE.
-const alwaysHops = () => 0;   // `spreadDeeds` skips on `rng() >= rate`; zero never skips
+const alwaysHops = () => 0;   // `spreadDeeds` skips on `rng() >= rate`; zero never skips
 await runWorldTick({ character: wanderer, content: tickContent, currentDay: 1, evolveNpcs: null, rng: alwaysHops });
 check("same-day tick is a no-op", wanderer.worldState.news.length === 0);
 await runWorldTick({ character: wanderer, content: tickContent, currentDay: 14, evolveNpcs: null, rng: alwaysHops });
@@ -7263,9 +7263,15 @@ await (async () => {
     check("385: nanite carries NO floor — it can genuinely fail, which body cannot",
       sb385.sourceHasFloor("nanite", sd385) === false && sb385.sourceHasFloor("body", sd385) === true);
     // And the banner carries both fields as separate chips.
+    // ⛔ SNG-546 (ERIK 2026-09-12) REPLACED THE TWO CHIPS WITH FOUR: "can we just show the 4 sources, what level they're at here,
+    // and a short pop up describing what they power". The CLAIM this check exists for is untouched and better served — the nanite
+    // is still its own row reading its own field, never averaged into a word about the lattice — so it asserts the claim on the
+    // new strip instead of the old spelling. ⚠️ A gate that pins markup a ruling replaces reads as a red against the ruling.
     const app385 = readFileSync(join(root, "app.js"), "utf8");
-    check("385: the banner shows the nanite field as its OWN chip, never merged into the ground word",
-      /ground-nanite/.test(app385) && /g\.nanite/.test(app385));
+    check("385: the location strip reads the nanite as its OWN source on its OWN field, never merged into the ground word",
+      /sourcesHere\(location, CONTENT\.substrateModel/.test(app385) && /src-chip/.test(app385)
+      && /The nanite field feeds this/.test(app385)
+      && sb385.sourcesHere(sd385 && { id: "x", regionId: "valley", tags: [] } || {}, sd385, {}).some(r => r.id === "nanite" && r.field === "nanite"));
   }
 
   // ══ SNG-386 — RENDER THE FIELD, NOT THE DOTS. Erik: "can it show colors with density that
@@ -16355,6 +16361,15 @@ await (async () => {
   check(`CCODE-169: all ${surfaces.length} image surfaces open (a picture you cannot look at is a picture you cannot fix)`,
     surfaces.length >= 10 && shut.length === 0,
     () => shut.map(t => t.replace(/\s+/g, " ").slice(0, 90)).join(" || "));
+  // ⛔ AND A THUMBNAIL THAT IS ITSELF A CONTROL OPENS ITS PICTURE ELSEWHERE (SNG-546: the holdings shelf on the character sheet).
+  // Clicking a holding's tile opens that place's manage screen, whose art carries the lightbox and the re-mint hook — putting a
+  // second lightbox on the thumbnail would make one click mean two things. ⚠️ `data-lightbox-via` NAMES the surface that opens it
+  // and this check follows the name: the claim is only allowed while that surface really does open a picture.
+  const via = surfaces.filter(t => /data-lightbox-via/.test(t)).map(t => (t.match(/data-lightbox-via="([^"]+)"/) || [])[1]);
+  check(`CCODE-169: …and every ${via.length} thumbnail that defers its lightbox names a surface that really opens one`,
+    via.every(target => new RegExp(`id="${target}"`).test(markup169))
+    && via.every(() => /class="item-detail-modal" id="hold-modal"[\s\S]{0,900}data-lightbox=/.test(markup169)),
+    () => `via: ${via.join(", ")}`);
 
   // ⚠️ AND A FACE MUST BE REDRAWABLE, not merely viewable. A quest illustration or a scene banner has no
   // subject record to redraw against, so view-only is the honest answer there; a PERSON is different.

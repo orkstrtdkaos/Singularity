@@ -18,6 +18,66 @@ const ROMAN = ["", "I", "II", "III", "IV", "V"];
  *
  *  ⛔ EVERY tier question goes through here. `?? levelReq` keeps all 414 current crafts exactly as they
  *  are, so this change is inert until content actually diverges — which is the point. */
+import { familiesOfAbility, FUNCTION_FAMILIES } from "./functions.js";   // ⛔ the SAME join the sidebar has grouped by since SNG-215, so the two surfaces cannot disagree about what a craft DOES
+
+/** ⛔ ERIK 2026-09-12: "The skills in your character sheet should be organized by domain, then tradition, then tier and major
+ *  functional category. The whole thing collapsible with each section collapsible."
+ *
+ *  The sheet listed 39 owned crafts as one flat column, so a kit that spans thirteen domains read as a wall. This returns the
+ *  shape and nothing else — domains, each holding traditions, each holding TIER groups whose rows are ordered by their major
+ *  function family. ⚠️ EVERY LABEL IS READ, NOT WRITTEN HERE: the domain comes from `traditionIndex.domainOfTrad`, the tradition's
+ *  name from the tradition record, the tier from `abilityTier`, and the family from `familiesOfAbility` — the same join the
+ *  sidebar has grouped by since SNG-215, so the two surfaces cannot disagree about what a craft DOES.
+ *
+ *  ⛑ BRAIDS ARE THEIR OWN DOMAIN, as they are in the sidebar (SNG-202 §3): a braid belongs to no single tradition — that is the
+ *  point of one — and filing it under either parent hides what it is. A craft whose tradition the index does not place goes to
+ *  "Unfiled" rather than being dropped, because a craft the player owns and cannot find is worse than an untidy heading.
+ *
+ *  `openIf` decides which sections start open (the caller's rule, not the engine's); everything else starts closed.
+ *  Returns [{ id, label, count, open, traditions: [{ id, label, count, open, tiers: [{ tier, label, rows: [{ owned, ability,
+ *  family, familyLabel }] }] }] }]. PURE. */
+export function craftTree(character, catalog, { traditionIndex = null, fnIndex = null, traditions = null, openIf = null } = {}) {
+  const owned = (character?.abilities || []).map(a => ({ owned: a, ability: catalog?.[a?.abilityId] })).filter(x => x.ability);
+  const domainOf = traditionIndex?.domainOfTrad || {};
+  const tradName = (id) => traditions?.[id]?.name || traditionIndex?.byId?.[id]?.name || id;
+  const BRAID = "__braid";
+  const bucket = new Map();
+  for (const o of owned) {
+    const ab = o.ability;
+    const isBraid = !!(ab.minted && Array.isArray(ab.minted.from) && ab.minted.from.length === 2);
+    const trad = isBraid ? BRAID : (ab.tradition || null);
+    const dom = isBraid ? BRAID : (domainOf[trad] || null);
+    const dKey = dom || "__unfiled";
+    const tKey = trad || "__unfiled";
+    if (!bucket.has(dKey)) bucket.set(dKey, new Map());
+    const byTrad = bucket.get(dKey);
+    if (!byTrad.has(tKey)) byTrad.set(tKey, []);
+    const fam = (fnIndex ? familiesOfAbility(ab, fnIndex)[0] : null) || null;
+    byTrad.get(tKey).push({ ...o, family: fam, familyLabel: fam ? fam.charAt(0) + fam.slice(1).toLowerCase() : "unfiled", tier: abilityTier(ab) });
+  }
+  const famRank = (f) => { const i = FUNCTION_FAMILIES.indexOf(f); return i < 0 ? FUNCTION_FAMILIES.length : i; };
+  const domLabel = (k) => k === BRAID ? "Braids" : k === "__unfiled" ? "Unfiled" : k;
+  const out = [...bucket.entries()].map(([dKey, byTrad]) => {
+    const traditions_ = [...byTrad.entries()].map(([tKey, rows]) => {
+      // ⚠️ TIER DESCENDING: the crafts that decide a scene are the ones a player is looking for, and a Tier V sitting under six
+      // Tier I rows is a Tier V nobody reads.
+      const tiers = [...new Set(rows.map(r => r.tier))].sort((a, b) => (b ?? 0) - (a ?? 0)).map(t => ({
+        tier: t, label: t == null ? "unranked" : "Tier " + tierOf(t),
+        rows: rows.filter(r => r.tier === t).sort((a, b) => famRank(a.family) - famRank(b.family) || String(a.ability.name).localeCompare(String(b.ability.name))),
+      }));
+      return { id: tKey, label: tKey === BRAID ? "Braided crafts" : tKey === "__unfiled" ? "No tradition named" : tradName(tKey), count: rows.length, tiers };
+    }).sort((a, b) => b.count - a.count || a.label.localeCompare(b.label));
+    const count = traditions_.reduce((n, t) => n + t.count, 0);
+    return { id: dKey, label: domLabel(dKey), count, traditions: traditions_ };
+  }).sort((a, b) => b.count - a.count || a.label.localeCompare(b.label));
+  // the caller's rule for what starts open, applied to both levels
+  for (const d of out) {
+    d.open = openIf ? !!openIf({ kind: "domain", id: d.id, count: d.count }) : d.count >= 3;
+    for (const t of d.traditions) t.open = openIf ? !!openIf({ kind: "tradition", id: t.id, count: t.count, domainId: d.id }) : d.open;
+  }
+  return out;
+}
+
 export function abilityTier(ability) {
   return Math.max(1, Math.min(5, Number(ability?.tier ?? ability?.levelReq) || 1));
 }

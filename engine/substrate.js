@@ -771,6 +771,75 @@ export function groundForDecl(decl, holder, { content = null, location = null, c
  *
  *  Returns { density, word, bastion } — `bastion` non-null only AT an authored source, and it carries the
  *  authored reason, because "dense here" is trivia and "the machines here never stopped" is the world. */
+/** ⛔ ERIK 2026-09-12, on the banner strip: "the top of the location section… it's out of date with the nanite and ground
+ *  description. Can we just show the 4 sources, what level they're at here, and a short pop up describing what they power
+ *  (Meaning powers Metaphysical for example)."
+ *
+ *  THE FOUR ARE HIS OWN, from `power_sources._theFourSources_20260823`: PRECURSOR LATTICE (the built substrate) · NANITE
+ *  ("ORDERED AND WILD ARE ONE SOURCE IN TWO STATES, not two sources") · VEIL (unrestrained will or desire) · METAPHYSICAL
+ *  (psychic, ki, and the rest). ⚠️ `body` is a FLOOR rather than ground that varies, and `wild` is the nanite's other state — so
+ *  neither is a fifth row, and the nanite row carries the state it is in HERE and grades against that state's own band.
+ *
+ *  ⛑ EVERY NUMBER AND EVERY SENTENCE IS READ, NOT WRITTEN HERE. The level is the source's own band factor against the field it
+ *  draws on — `fieldValueFor`'s two halves plus `bandFactor`, the same maths the craft card uses, so the strip cannot disagree
+ *  with a roll. The field→source pairing comes from `sourceBands.sources[x].field` and from `meaning.appliesTo`, which is exactly
+ *  Erik's example: meaning powers metaphysical, and it sets a CEILING rather than a penalty. The ground sentence is the authored
+ *  `ground` string. What each source POWERS is counted off `power_sources.byTradition`, so it names real traditions.
+ *
+ *  Returns one row per source: `{ id, label, field, fieldValue, factor, level, state, ceiling, ground, powers }`. PURE. */
+export function sourcesHere(location, substrateData, { present = 0, aura = 0, carried = 0, powerSources = null, traditionName = null } = {}) {
+  if (!location || !substrateData) return [];
+  const FOUR = [
+    { id: "precursor", label: "Precursor lattice", of: ["precursor"] },
+    { id: "nanite", label: "Nanite", of: ["ordered_nanite", "wild_nanite"] },
+    { id: "veil", label: "Veil", of: ["veil"] },
+    { id: "metaphysical", label: "Metaphysical", of: ["metaphysical"] },
+  ];
+  const density = locationDensity(location, substrateData);
+  const nan = naniteAt(location, substrateData);
+  const meaning = meaningDensity(location, { present, data: substrateData, aura });
+  const ceiling = meaningCeiling(meaning, substrateData);
+  const appliesTo = new Set(Array.isArray(substrateData?.meaning?.appliesTo) ? substrateData.meaning.appliesTo : []);
+  // ⚠️ THE TRADITIONS THAT DRAW ON IT, at a quarter of their mix or more — below that it is a trace, not something a place powers.
+  const drawsOn = (ids) => Object.entries(powerSources?.byTradition || {})
+    .filter(([k]) => !k.startsWith("_"))
+    .filter(([, row]) => ids.some(i => Number(row?.mix?.[i]) >= 0.25) || ids.includes(row?.primary))
+    .map(([k]) => (traditionName ? traditionName(k) || k : k));
+  return FOUR.map(s => {
+    // the nanite's band is the band of the state it is IN here: ordered mirrors the lattice, wild wants the ungoverned gaps
+    const bandKey = s.id === "nanite" ? (nan?.state === "wild" ? "wild" : "nanite") : s.id;
+    const entry = substrateData?.sourceBands?.sources?.[bandKey] || null;
+    const fieldId = s.id === "nanite" ? "nanite" : (appliesTo.has(s.id) ? "meaning" : fieldOfSource(bandKey, substrateData));
+    const raw = s.id === "nanite" ? (nan ? nan.v : null) : (typeof density === "number" ? density : null);
+    const eff = raw == null ? null : effectiveDensity(raw, carried);
+    const banded = eff == null || !entry?.band ? null : bandFactor(entry.band, eff);
+    // ⛔ MEANING SETS A CEILING, NOT A PENALTY (R38a/b) — `min(ceiling, band)` is the authored shape, never a product.
+    const factor = appliesTo.has(s.id) && ceiling != null && banded != null ? Math.min(ceiling, banded) : banded;
+    return {
+      id: s.id, label: s.label, field: fieldId,
+      fieldValue: appliesTo.has(s.id) ? meaning : raw,
+      substrateValue: raw, factor,
+      level: levelWordFor(factor),
+      state: s.id === "nanite" ? (nan?.state || null) : null,
+      ceiling: appliesTo.has(s.id) ? ceiling : null,
+      ground: entry?.ground || null,
+      powers: drawsOn(s.of),
+    };
+  });
+}
+
+/** ⚠️ ONE WORD FOR HOW WELL A SOURCE ANSWERS HERE, off the same factor the roll uses. Above 1 is the empowered core Erik ruled in
+ *  (SUBSTRATE_TUNING.empowerPeak) — the heart of a band is better than its rim, so it gets a word of its own. */
+function levelWordFor(factor) {
+  if (factor == null) return "unsurveyed";
+  if (factor > 1.001) return "answering";
+  if (factor >= 0.95) return "strong";
+  if (factor >= 0.7) return "workable";
+  if (factor >= 0.45) return "thin";
+  if (factor > 0.12) return "starved";
+  return "silent";
+}
+
 export function groundHere(location, substrateData) {
   if (!location) return null;
   const density = locationDensity(location, substrateData);

@@ -828,7 +828,13 @@ img[data-lightbox] { cursor: zoom-in; }
 .point-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
 .point-row .pips { letter-spacing: 3px; color: var(--accent); min-width: 70px; }
 .point-row button { background: var(--panel2); border: 1px solid var(--border); color: var(--ink); border-radius: 4px; width: 26px; height: 26px; }
-.roster-item { display: flex; justify-content: space-between; align-items: center; background: var(--panel2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; }
+.roster-item { display: flex; justify-content: space-between; align-items: center; gap: 12px; background: var(--panel2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; }
+/* ⛔ TWO COLUMNS, NOT THREE. SNG-543's sync line went in as a third flex child, so the row split three ways and every name wrapped
+   mid-phrase — "Adelheid harmonic · level" / "1". Who they are and what this device is doing with them are ONE column; the buttons
+   are the other. `min-width: 0` is what lets a long name shrink instead of shoving Play off the edge. */
+.roster-who { flex: 1 1 auto; min-width: 0; }
+.roster-name { white-space: normal; }
+.roster-who > .hint { margin-top: 2px; display: block; }
 /* SNG: character delete is a de-emphasized 🗑 (not a button beside Play) that expands to a two-step confirm */
 .roster-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
 .roster-del-icon { background: none; border: none; color: var(--ink-dim); opacity: .5; font-size: 15px; cursor: pointer; padding: 4px 6px; border-radius: 6px; line-height: 1; }
@@ -1514,9 +1520,67 @@ img[data-lightbox] { cursor: zoom-in; }
 
 /* §179 — WHO'S HERE: one line per person. The name yields (ellipsis) before the standing does; the standing never wraps; the
    controls are one cluster, drawn as controls rather than as the browser's default buttons. */
-.known-npc { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; min-width: 0; }
-.known-npc .npc-name { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.known-npc .rep-band { flex: 0 1 auto; min-width: 0; max-width: 48%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.npc-ctls { flex: 0 0 auto; display: inline-flex; gap: 2px; }
+/* ⛔ ERIK 2026-09-12: "some names disappear completely." THE NAME HAD NO FLOOR. `min-width: 0` plus `overflow: hidden` lets a flex
+   child shrink to ZERO, and in a 325px sidebar a long standing chip ("partner · devoted") plus three controls took the whole row —
+   so the person's name rendered as bare ellipsis. ⛑ THE NAME IS THE ROW: it keeps a hard floor, the chip and controls WRAP to the
+   next line instead of squeezing it, and the chip gives up its width first. A name may be abbreviated; it may never vanish. */
+.known-npc { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 6px; margin-bottom: 4px; min-width: 0; }
+.known-npc .npc-name { flex: 1 1 auto; min-width: 9ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.known-npc .rep-band { flex: 0 1 auto; min-width: 0; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.npc-ctls { flex: 0 0 auto; display: inline-flex; gap: 2px; margin-left: auto; }
 .npc-ctl { background: none; border: 1px solid transparent; color: var(--ink-dim); border-radius: 6px; padding: 1px 4px; font-size: 12px; line-height: 1.2; cursor: pointer; font-family: var(--font-ui); }
 .npc-ctl:hover, .npc-ctl:focus-visible { color: var(--ink); border-color: var(--border); }
+
+/* ⛔ ERIK 2026-09-12: "the character portrait should show up at the top of the sidebar as well." The face you play as lived only on
+   the character screen and in the gallery — two clicks from every scene. Small, beside the name, and it opens the same lightbox. */
+.sb-ident { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 10px; }
+.sb-ident-who { min-width: 0; flex: 1 1 auto; }
+.sb-ident-who h2 { margin-bottom: 2px; }
+.sb-ident-who .meta { margin-bottom: 0; }
+.sb-portrait { width: 52px; height: 66px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border); flex: 0 0 auto; cursor: zoom-in; }
+
+/* ⛔ ERIK 2026-09-12: the four power sources on the location strip, each with how well it answers here. Replaces the two chips that
+   said one word about the lattice and one about the nanite. The tone is the LEVEL, so a glance reads the place. */
+.src-strip { display: inline-flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+.src-chip { font-size: 11px; padding: 1px 7px; border-radius: 999px; border: 1px solid var(--border); background: var(--panel2); color: var(--ink-dim); white-space: nowrap; cursor: help; }
+.src-chip b { font-weight: 600; color: var(--ink); }
+.src-answering { border-color: #7fc98a; color: #bfe6c6; } .src-answering b { color: #d8f5dd; }
+.src-strong { border-color: #6f9f77; } .src-strong b { color: #cfe8d3; }
+.src-workable { border-color: var(--border); }
+.src-thin { border-color: #8a7a4f; } .src-thin b { color: #e0cf9a; }
+.src-starved { border-color: #8a5f4f; } .src-starved b { color: #e0b0a0; }
+.src-silent, .src-unsurveyed { opacity: .65; }
+
+/* ⛔ ERIK 2026-09-12: the craft list grouped by domain → tradition → tier, each part collapsible. Thirty-nine owned crafts across
+   thirteen domains read as a wall in one flat column. The nesting is shown by indent and a left rule, never by a box per level. */
+.craft-group { margin: 4px 0; }
+.craft-group > summary { cursor: pointer; list-style: none; padding: 3px 0; }
+.craft-group > summary::-webkit-details-marker { display: none; }
+.craft-group > summary::before { content: "▸"; display: inline-block; width: 1em; color: var(--ink-dim); transition: transform .12s ease; }
+.craft-group[open] > summary::before { transform: rotate(90deg); }
+.craft-dom { font-family: var(--font); font-size: 14px; color: var(--accent); }
+.craft-trad { margin-left: 12px; border-left: 1px solid var(--border); padding-left: 8px; }
+.craft-trad-name { color: var(--ink); font-size: 13px; }
+.craft-tier { margin-left: 10px; }
+.craft-tier-label { font-size: 10px; text-transform: uppercase; letter-spacing: .6px; color: var(--ink-dim); margin: 6px 0 2px; }
+.fam-chip { font-size: 10px; text-transform: uppercase; letter-spacing: .4px; padding: 0 5px; border-radius: 999px; border: 1px solid var(--border); }
+
+/* ⛔ ERIK 2026-09-12 — THE PURSE NAMES EVERY CURRENCY, not only the ones you hold: a purse that lists what you have cannot teach
+   a player that marks exist, or that the scrip in their pocket belongs to another Reach. Zero balances are dim, never missing. */
+.purse-table { margin-top: 6px; display: grid; grid-template-columns: minmax(90px, auto) 3.5em 1fr; gap: 1px 10px; align-items: baseline; font-variant-numeric: tabular-nums; }
+.purse-row { display: contents; cursor: help; }
+.purse-cur { color: var(--ink); }
+.purse-n { text-align: right; color: var(--accent); }
+.purse-none .purse-cur, .purse-none .purse-n { opacity: .45; }
+.purse-trade { margin-top: 10px; border-top: 1px solid var(--border); padding-top: 6px; }
+
+/* ⛔ ERIK 2026-09-12: "you could at least put the picture and name of the holding there." A count is not the places. Each tile is
+   a door to that place's own manage screen. */
+.hold-shelf { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.hold-tile { width: 104px; display: flex; flex-direction: column; gap: 2px; padding: 4px; background: var(--panel2); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; text-align: left; font-family: var(--font-ui); color: var(--ink); }
+.hold-tile:hover { border-color: var(--accent); }
+.hold-tile img { width: 100%; height: 64px; object-fit: cover; border-radius: 5px; }
+.hold-tile-noart { height: 64px; display: flex; align-items: center; justify-content: center; font-size: 22px; color: var(--ink-dim); background: var(--panel); border-radius: 5px; }
+.hold-tile-name { font-size: 12px; line-height: 1.2; }
+.hold-tile-sub { font-size: 10px; }
+.cs-lately { margin-top: 10px; border-top: 1px solid var(--border); padding-top: 6px; }

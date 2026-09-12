@@ -483,7 +483,7 @@ working papers; **this is the answer.**
 | 09-08 | ✅ **ONE ROSTER, DERIVED; THE OPPONENT GATE; R41's FORM; THE VEIL LOADED** | Erik: *"all NPCs should at least be referenced from a single source list… even if we need to keep separate lists for code"* · *"any condition must be an opposed roll"* stands unbuilt (§A) | `scripts/roster.mjs` reads six files from disk and asks `personOpponentFor` for each; 144 records, 125 reachable, **40 would fight at level 1** (ratchet, Aevi's §2 owns it); `npcs/legends.json`'s five are read by NOTHING and Corvane is a hinge on 4 of 6 arcs (§10 gap); `notAnOpponent: true` refuses by name; a Sovereign is ONE record with `forms.diminished`/`forms.final` chosen by the arc's live stage; `the_veil` + `power_cosmology` loaded, attached, and on the GM's ask view | `§147` · `§59` refixtured on Sister Alder · `roster --check` is a suite | §10 gains the hinge gap; docs/ROSTER.md is generated between markers, prose kept above |
 | 09-08 | ✅ **THE FORTY ARE DERIVED, NOT AUTHORED — ROLE → TIER → THE CHAIN THAT ALREADY RAN** | Erik: *"I thought you were going to have him make the generative engine build out the remaining empty NPCs?"* · Aevi, correcting her own spec: *"NOT A MISSING SHEET. NOT A MISSING KIT. ONE MISSING FIELD."* | 40 of 40 level-1 records were level 1 for one reason — no `tier` — while `tierFloor` already fired for the 64 who had one. `rules/tier_signals.json` (CONTENT, correctable without code) → `tierFromRole` → `derivedLevel`, consulted ONLY where a record is silent. **40 → 0**, ratchet tightened; 19 regional · 12 notable · 9 heroic. Guards: authored tier and level both outrank it; default `notable`; a hard `ceiling: heroic` so no regex reaches epic/legendary/mythic; `tierDerived` on the SHEET, never stamped onto the record; no code fallback, so an absent table derives nothing | `§148` · `§147`'s level-1 ratchet 40→0 | ⚠ **and my roster column was too generous**: R47's bare `_strike` was counting as a kit, so 62 records read as armed when they have no real craft — corrected, and it makes `domains` on the legends the same one-field problem one tier up |
 
-**Last verified: 2026-09-12 · v1.9.471 · 429 crafts.**
+**Last verified: 2026-09-12 · v1.9.476 · 429 crafts.**
 
 ---
 
@@ -2249,7 +2249,7 @@ reaches it** — and that gap has produced a specific, repeated defect described
 ### 12.1 · THE SHAPE — one document, one shell, 47 screens
 
 **Singularity is a single-page app with no build step and no framework.** `index.html` is 75 lines; the
-whole interface is **`app.js`, 16,073 lines**, and there are **51 `render*` functions** that paint into one
+whole interface is **`app.js`, 16,217 lines**, and there are **51 `render*` functions** that paint into one
 shell function, `chrome()`, called from **51 sites**. ⚠️ **THERE IS NO ROUTER AND NO SCREEN VARIABLE.**
 A screen does not "navigate" — it **calls the next render function directly**. `renderCompanionStep`'s
 done-button *is* the edge into `renderBioStep`.

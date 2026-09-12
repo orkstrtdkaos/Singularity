@@ -41,6 +41,7 @@ import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive }
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp, playerText } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { LIBRARY_INDEX, loreToHtml, libMdToHtml, circleRows } from "./engine/library.js";   // SNG-538 §4: the Library's index and renderers — pure, gated by §181
+import { sourcesHere } from "./engine/substrate.js";   // ⛔ Erik 2026-09-12: the four sources and how well each answers HERE
 import { groundForDecl, groundTag, substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor, peoplePresentAt } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { sceneImage, itemImage, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
 import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, regionExtent, bendRoad, roadNetwork, clipToFrame } from "./engine/worldglobe.js";
@@ -96,6 +97,7 @@ import { ensurePractice, recordUse, declareAspiration, dropAspiration, recordAsp
 import { needsBackfill, runBackfill, summaryLines } from "./engine/backfill.js";
 import { ensureFacts, applyFactUpdates, factsForGM } from "./engine/facts.js";
 import { notePerception, perceivedVectors, vectorSummary } from "./engine/vectors.js";
+import { craftTree } from "./engine/skilltree.js";   // ⛔ Erik 2026-09-12: domain → tradition → tier → function family, each part collapsible
 import { tierPrice, isCrossClass, tierOf, classColor, classLabel, gateFor, meetsLearnGate, meetsRank3Gate, breadthUsed, breadthCap, atCapacity, skillGraphModel, skillPointCost, learnPointCost, forkPending, forkPaths, chosenFork, setFork, rankExpression, abilityTier } from "./engine/skilltree.js";
 import { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, setEncounterState, partyBlockForGM, fetchScene, listScenesAt, pushSceneWithMerge, scenePath, lastSceneError, setLeader, leaderOf, stateIntent, intentsOf, stragglerCall, STRAGGLER_CHOICES, heldRounds, openSharedEncounter, closeSharedEncounter, sharedPool, mergeStrike, RESOLVE_ORDER, lockDeclaration, allLocked, unlockedFighters, resolveOrder, advanceRound, joinFight, leaveFight, fightersOf } from "./engine/party.js";
 import { noteHeard, unheardOf, unheardBeat, partyBondOf } from "./engine/partybond.js";   // SPEC_intent_heard_and_unheard: heard is a nudge, unheard is a thread
@@ -139,7 +141,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "1.9.471";
+const APP_VERSION = "1.9.476";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3116,7 +3118,8 @@ function renderRoster() {
     ${chars.length === 0 ? `<p class="hint" style="margin-bottom:14px">No characters on this device yet. ${syncEnabled() ? "Find the ones you've played elsewhere, or make a new one." : "Make one — or set up sync in Settings to bring in characters from another device."}</p>` : ""}
     <div id="roster">${chars.map(c => `
       <div class="roster-item">
-        <div><strong>${esc(c.name)}</strong> <span class="hint">${esc(c.origin)} · level ${c.level}</span></div>
+        <div class="roster-who">
+        <div class="roster-name"><strong>${esc(c.name)}</strong> <span class="hint">${esc(c.origin)} · level ${c.level}</span></div>
         ${(() => {
           // ⛔ WHERE ERIK WOULD HAVE SEEN IT ON HIS PHONE. A device that is carrying this character nowhere, or
           // that has failed to send a copy up, says so HERE — before a session is played on a stale copy and
@@ -3129,6 +3132,7 @@ function renderRoster() {
             ? `<div class="hint">last sent up ${esc(agoWords(info.at))}</div>`
             : `<div class="hint" style="color:var(--warn,#e0b25a)">not going up: ${esc(info.reason || "the network refused it")} · ${info.lastOkAt ? `last good copy ${esc(agoWords(info.lastOkAt))}` : "none has ever gone up from here"}</div>`;
         })()}
+        </div>
         <div class="roster-actions"><button class="btn" data-play="${esc(c.id)}">Play</button><button class="roster-del-icon" data-del="${esc(c.id)}" title="Delete ${esc(c.name)} from this device" aria-label="Delete ${esc(c.name)}">🗑</button></div>
       </div>`).join("")}</div>
     <div style="margin-top:16px; display:flex; gap:8px; flex-wrap:wrap;">
@@ -11713,6 +11717,13 @@ function renderHoldingsTab(manageId = null) {
     <button class="btn secondary" id="cs-back" style="margin-top:10px">Back</button>
   </div>`);
   wireCharacterTabs();
+  // ⛔ THE CRAFT GROUPS PERSIST through the same store every other foldable uses. A player who collapses thirty Ashwarden
+  // crafts must find them collapsed next time, or "collapsible" only means "collapsible until you leave the screen".
+  for (const d of app.querySelectorAll("details.craft-group[data-sec]")) d.ontoggle = () => {
+    const k = d.dataset.sec;
+    if (d.open) { sidebarOpen.add(k); sidebarClosed.delete(k); } else { sidebarOpen.delete(k); sidebarClosed.add(k); }
+    saveSidebarState();
+  };
   wireHoldingOffers();
   // \u26d1 THE POPUP OPENS AND CLOSES THE WAY EVERY OTHER ONE HERE DOES \u2014 the button, the \u2715, and the backdrop.
   for (const b of document.querySelectorAll("[data-hold-manage]")) b.onclick = () => renderHoldingsTab(b.dataset.holdManage);
@@ -11753,8 +11764,47 @@ function renderCharacterScreen() {
       const here = hereNow()?.regionId || null;
       const w = worthOf(purse, CONTENT.rules?.economy, { regionId: here, worldState: character.worldState });
       const line = purseLine(purse, { regionId: here });
+      // ⛔ ERIK 2026-09-12: "The Purse is good, but should list all the potential types of money. It could also show any trade or
+      // sales going on (sum of your enterprises and holdings)." A purse that lists only what you HOLD cannot teach a player that
+      // marks exist, or that the scrip in their pocket is another Reach's paper. All five authored currencies are named, and the
+      // ones at zero are dim rather than missing.
+      const curDefs = (CONTENT.rules?.economy?.currencies || []).filter(c => c && c.id);
+      const held = Object.fromEntries(w.lines.filter(l => l.currency !== "scrip").map(l => [l.currency, l]));
+      const scripRows = w.lines.filter(l => l.currency === "scrip");
+      const curRow = (c) => {
+        const l = held[c.id];
+        const n = c.id === "scrip" ? scripRows.reduce((a, r) => a + r.count, 0) : (l?.count || 0);
+        const tip = `${c.name} — ${c.unit}, worth ${c.baseValue} against crystal's ${curDefs.find(x => x.id === "crystal")?.baseValue ?? 10}.${c.note ? " " + String(c.note).replace(/^[⛔⚠️✅⛑\s]+/, "") : ""}`;
+        return `<div class="purse-row${n ? "" : " purse-none"}" title="${esc(tip)}">
+          <span class="purse-cur">${esc(c.name)}</span>
+          <span class="purse-n">${n}</span>
+          <span class="hint">${n ? (c.id === "scrip" ? scripRows.map(r => `${r.count} ${r.regionId}${r.usableHere === false ? " (not good here)" : ""}`).join(" · ") : `${(l.worthInCrystal || 0).toFixed(1)} in crystal`) : "none"}</span></div>`;
+      };
+      // ⛔ WHAT THE ESTATE IS DOING, which the sheet has never shown: the sum of every holding's pass — what it makes, what the
+      // keeper sells, the fees, the upkeep — plus the caravans actually on the road right now. ⚠️ `net` is the authored field the
+      // purse really receives, so the headline number is the one that lands rather than one I add up myself.
+      const estate = (character.holdings || []).map(h => ({ h, L: holdingLedger(h, {
+        economy: CONTENT.rules?.economy, cfg: holdCfgNow(), regionId: CONTENT.locations?.[h.locationId]?.regionId || null,
+        character, locations: CONTENT.locations || {} }) })).filter(x => x.L);
+      // ⚠️ THE FIELD IS `worth`, NOT `made`. The first draft read `perPass.made` and the panel said "makes 0 · sold 189", which
+      // is impossible on its face — a keeper sells a SHARE of what a pass makes — and is exactly the sort of number that gets
+      // believed. The authored names are `worth` (the pass, valued here), `sells`, `fees`, `upkeep`, `net` and `banks`.
+      const estSum = estate.reduce((a, x) => ({
+        made: a.made + (x.L.perPass?.worth || 0), sells: a.sells + (x.L.perPass?.sells || 0),
+        fees: a.fees + (x.L.perPass?.fees || 0), upkeep: a.upkeep + (x.L.perPass?.upkeep || 0),
+        net: a.net + (x.L.perPass?.net || 0), store: a.store + (x.L.store?.worth || 0),
+      }), { made: 0, sells: 0, fees: 0, upkeep: 0, net: 0, store: 0 });
+      const cars = caravansOf(character).filter(c => c && !c.arrivedDay);
       return `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Purse</h3>
         <div class="hint" style="font-variant-numeric:tabular-nums">${esc(line)}${w.totalInCrystal ? ` · <strong>${w.totalInCrystal.toFixed(1)}</strong> in crystal` : ""}</div>
+        <div class="purse-table">${curDefs.map(curRow).join("")}</div>
+        ${estate.length ? `<div class="purse-trade">
+          <div class="craft-tier-label">What your holdings are doing</div>
+          <div class="hint" style="font-variant-numeric:tabular-nums" title="Every place you hold, summed over one pass: what the yields are worth, what a keeper turns into coin, runner fees, and the upkeep. The net is what the purse actually receives.">
+            ${estate.length} place${estate.length === 1 ? "" : "s"} · makes <strong>${estSum.made}</strong> · sold <strong>${estSum.sells}</strong>${estSum.fees ? ` · fees <strong>${estSum.fees}</strong>` : ""} · upkeep <strong>${estSum.upkeep}</strong> · <strong class="${estSum.net < 0 ? "not-castable" : "practiced"}">${estSum.net >= 0 ? "+" : ""}${estSum.net} a pass</strong></div>
+          ${estSum.store ? `<div class="hint">Unsold in their stores: <strong>${estSum.store}</strong> in crystal.</div>` : ""}
+          ${cars.length ? `<div class="hint">${cars.length} load${cars.length === 1 ? "" : "s"} on the road — ${esc(cars.map(c => `${c.goods || "goods"} to ${CONTENT.locations?.[c.to]?.name || c.to}`).slice(0, 3).join(", "))}.</div>` : ""}
+        </div>` : ""}
         ${w.lines.some(l => l.usableHere === false) ? `<p class="hint" style="margin-top:4px;color:var(--warn,#e0b25a)">Some of your scrip is another Reach's — it buys nothing here.</p>` : ""}
         ${(character._exchangeReceipts || []).filter(r => r.ok === false).map(r => `<p class="hint" style="margin-top:4px;color:var(--danger)">A trade did not go through — ${esc(r.why || "refused")}</p>`).join("")}
         ${(character._exchangeReceipts || []).filter(r => r.settled).map(r => `<p class="hint" style="margin-top:4px">Paid ${r.paid} ${esc(r.currency)}${r.bargain?.ok ? ` — bargained down from ${r.bargain.price}` : ""}.</p>`).join("")}</div>`;
@@ -11783,8 +11833,22 @@ function renderCharacterScreen() {
       const hs = character.holdings || [], offers = character.holdingOffers || [];
       if (!hs.length && !offers.length) return "";
       const kept = hs.filter(h => h.steward).length;
+      // ⛔ ERIK 2026-09-12: "If we have a holdings section, you could at least put the picture and name of the holding there." One
+      // sentence saying "5 places stand in your name" is a count, not the places. ⚠️ The tab is still where a place is MANAGED —
+      // this is the shelf you recognise them off, and each tile opens straight to its own manage screen.
+      const tile = (h) => { const art = ensureHoldingImage(h) || h.image || null;
+        const where = h.locationId ? (CONTENT.locations?.[h.locationId]?.name || character.generated?.location?.[h.locationId]?.name || null) : null;
+        return `<button class="hold-tile" data-hold-open="${esc(h.id)}" title="${esc([h.name || h.id, h.kind || "post", h.condition || "", where ? `at ${where}` : ""].filter(Boolean).join(" · "))}">
+          ${/* ⛔ CCODE-169 SAYS EVERY PICTURE MUST OPEN, and this one does — one tap away. The tile is a CONTROL: clicking it opens
+                the place's own manage screen, whose art carries `data-lightbox` and the re-mint hook. Putting a lightbox on the
+                thumbnail as well would make one click mean two things. `data-lightbox-via` names the surface that opens it, and the
+                census checks that surface really does. */""}
+          ${art ? `<img src="${esc(art)}" alt="${esc(h.name || h.id)}" loading="lazy" data-lightbox-via="hold-modal" onerror="this.style.display='none'">` : `<span class="hold-tile-noart">⌂</span>`}
+          <span class="hold-tile-name">${esc(h.name || h.id)}</span>
+          <span class="hold-tile-sub hint">${esc(h.condition || h.kind || "")}${h.steward ? "" : " · unkept"}</span></button>`; };
       return `<div class="cs-block cs-holdings-summary"><h3 class="codex-title" style="font-size:15px">Holdings</h3>
         <div class="hint">${hs.length ? `${hs.length} place${hs.length === 1 ? "" : "s"} stand${hs.length === 1 ? "s" : ""} in your name${kept < hs.length ? ` — ${hs.length - kept} unkept` : ""}.` : "Nothing yet stands in your name."}</div>
+        ${hs.length ? `<div class="hold-shelf">${hs.map(tile).join("")}</div>` : ""}
         ${offers.length ? `<p class="hint" style="margin-top:4px;color:var(--warn,#e0b25a)">${offers.length} assignment${offers.length === 1 ? "" : "s"} may describe a place you hold — review ${offers.length === 1 ? "it" : "them"}.</p>` : ""}
         <button class="opt" id="cs-goto-holdings" style="margin-top:6px">⌂ Holdings</button></div>`;
     })()}
@@ -11792,7 +11856,22 @@ function renderCharacterScreen() {
       ${["hometown", "residence", "livelihood", "hobbies", "motivation"].filter(k => b[k]).map(k => `<div class="codex-fact"><strong style="text-transform:capitalize">${k}:</strong> ${esc(b[k])}</div>`).join("")}
       ${(() => { // SNG-215 §C-2 dedup: the lived "story so far" paragraph is the Chronicle tab's job now; the
         // Traits tab keeps only the bio facts + the creation seed (no longer duplicating the chronicle prose).
-        return (!character.chronicleCache?.text && b.story) ? `<p class="map-details-desc" style="margin-top:8px">${esc(b.story)}</p>` : ""; })()}</div>` : ""}
+        return (!character.chronicleCache?.text && b.story) ? `<p class="map-details-desc" style="margin-top:8px">${esc(b.story)}</p>` : ""; })()}
+      ${(() => {
+        // ⛔ ERIK 2026-09-12: "your story should probably update with what you've been doing lately." Every line above this is
+        // from CHARACTER CREATION — a motivation written before day 1, still the only story on the sheet at day 18 and level 32.
+        // ⚠️ THE LIVED STORY ALREADY EXISTS and the sheet was the one surface not reading it: 39 chronicle entries, the newest
+        // written last night. This is the last two, newest first, and the door to the rest — the Chronicle tab still owns the
+        // woven prose, so this is a WINDOW onto it rather than a second copy of it.
+        const ch = Array.isArray(character.chronicle) ? character.chronicle : [];
+        const recent = ch.slice(-2).reverse().map(e => (typeof e === "string" ? e : e?.text || e?.summary || "")).filter(Boolean);
+        if (!recent.length) return "";
+        return `<div class="cs-lately">
+          <div class="craft-tier-label">Lately</div>
+          ${recent.map(t => `<p class="map-details-desc" style="margin:4px 0">${esc(smartClamp(playerText(t), 320))}</p>`).join("")}
+          <button class="opt" id="cs-goto-chronicle" style="margin-top:4px">📜 The whole chronicle${ch.length ? ` — ${ch.length} entries` : ""}</button>
+        </div>`;
+      })()}</div>` : ""}
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Attributes ${infoDot("growth.attributes")} <span class="hint" style="text-transform:none">(knee at ${soft}: full value to there, +5/point beyond, cap ${cap})</span></h3>
       ${SUBS.map(sub => { const v = character.subAttributes?.[sub] ?? 0; return `
         <div class="cs-attr"><span class="cs-attr-name" title="${esc(SUB_DESC[sub])}">${sub}</span>
@@ -11806,10 +11885,24 @@ function renderCharacterScreen() {
       const ceilOf = (t, def) => character.domainCeilings?.[t] ?? def;
       const rows = [["primary", 5], ["secondary", 3], ["tertiary", 2]].filter(([k]) => character.domains?.[k]).map(([k, def]) => {
         const t = character.domains[k]; const c = ceilOf(t, def); const promoted = character.domainCeilings?.[t] != null && c > def;
-        return `<div class="codex-fact"><strong class="trait-tap" data-trait="tradition:${esc(t)}" title="tap: lore + mechanics">${esc(traditionLabel(t))}</strong> — ${k}${promoted ? " · <em>promoted</em>" : ""}, to Tier ${ROM[c]}</div>`;
+        // ⛔ ERIK 2026-09-12: "Domains need to match the latest domain structure and access rulings." A station is a TRADITION
+        // and it sits in a DOMAIN — the thirteen the craft list above now groups by — and the sheet named only the tradition, so
+        // the two halves of the same word were never shown together.
+        const dom = CONTENT.traditionIndex?.domainOfTrad?.[t] || null;
+        return `<div class="codex-fact"><strong class="trait-tap" data-trait="tradition:${esc(t)}" title="tap: lore + mechanics">${esc(traditionLabel(t))}</strong>${dom ? ` <span class="hint">of ${esc(dom)}</span>` : ""} — ${k}${promoted ? " · <em>promoted</em>" : ""}, to Tier ${ROM[c]}</div>`;
       }).join("");
-      const acq = (character.domainsAcquired || []).map(t => `<div class="codex-fact"><strong class="trait-tap" data-trait="tradition:${esc(t)}" title="tap: lore + mechanics">${esc(traditionLabel(t))}</strong> — acquired, to Tier ${ROM[ceilOf(t, 1)]}</div>`).join("");
-      const fore = (character.foreclosed || []).length ? `<div class="hint">Foreclosed — reachable only as a braid: ${character.foreclosed.map(traditionLabel).join(", ")}</div>` : "";
+      const acq = (character.domainsAcquired || []).map(t => { const dom = CONTENT.traditionIndex?.domainOfTrad?.[t] || null;
+        return `<div class="codex-fact"><strong class="trait-tap" data-trait="tradition:${esc(t)}" title="tap: lore + mechanics">${esc(traditionLabel(t))}</strong>${dom ? ` <span class="hint">of ${esc(dom)}</span>` : ""} — acquired, to Tier ${ROM[ceilOf(t, 1)]}</div>`; }).join("");
+      // ⛔ THE ACCESS RULING AS IT STANDS, AND THE OLD ONE UN-TOLD. R9/R16 removed foreclosure and CCODE-339 replaced the
+      // antipode WALL with a mark: "we need to rework the domain access model SO WE NO LONGER LOSE ACCESS TO THE ANTIPOLES… you
+      // can't use the skill itself, ONLY THE BRAIDABLE PART." ⚠️ `domainAccessInner` says so in its own words — "`opts.foreclosed`
+      // IS STILL READ NOWHERE ELSE — old saves may carry the array and it is simply ignored" — and this sheet was still telling
+      // Silas his two foreclosed poles were "reachable only as a braid". A retired restriction printed as a live one is the
+      // defect this project keeps finding, and it was on the character sheet.
+      const anti = [...new Set([character.domains?.primary, character.domains?.secondary].filter(Boolean)
+        .map(t => antipodeOf(t, CONTENT.traditionIndex)).filter(Boolean))];
+      const fore = `${anti.length ? `<div class="hint" style="margin-top:4px" title="CCODE-339: the antipode is no longer a wall. A craft across your axis can be learned and held — it simply cannot be cast, and a braid is what spends it.">Across your axis: <strong>${anti.map(traditionLabel).join(", ")}</strong> — learnable and holdable, never castable. Only a braid spends one.</div>` : ""}`
+        + `${(character.foreclosed || []).length ? `<div class="hint" style="margin-top:2px">Your save still lists ${character.foreclosed.map(traditionLabel).join(" and ")} as foreclosed. That rule was retired — nothing forecloses a pole any more, and the line above is what governs instead.</div>` : ""}`;
       const promos = ["tertiary", "secondary"].map(k => {
         if (!character.domains?.[k]) return ""; const e = promotionEligible(character, k, CONTENT.rules, { catalog: fullCatalog(), traditionIndex: CONTENT.traditionIndex });
         if (!e.eligible) return ""; return `<div class="cs-ability" style="border-left:3px solid var(--accent)"><strong>✦ You may rise:</strong> become ${esc(traditionLabel(e.trad))} as your ${e.to} <button class="grow-btn practiced" data-promote="${k}">Promote…</button></div>`;
@@ -11823,12 +11916,32 @@ function renderCharacterScreen() {
     })() : ""}
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Abilities ${infoDot("ability.tiers")} <span class="cap-line" style="text-transform:none">${breadthUsed(character)} of ${breadthCap(character, CONTENT.skillCapacity)} skills${atCapacity(character, CONTENT.skillCapacity) ? " — at capacity; new points learn other crafts" : ""}</span>${atCapacity(character, CONTENT.skillCapacity) ? infoDot("lock.capacity") : ""}</h3>
       ${character.pendingMasteryFork ? (() => { const fb = fullCatalog()[character.pendingMasteryFork]; return `<div class="cs-ability" style="border-left:3px solid var(--accent)"><strong>⑂ A defining moment for ${esc(fb?.name || character.pendingMasteryFork)}</strong> — choose its path to master it. <button class="grow-btn practiced" data-masteryfork="${esc(character.pendingMasteryFork)}">Choose path</button></div>`; })() : ""}
-      ${character.abilities.map(a => { const ab = fullCatalog()[a.abilityId]; if (!ab) return ""; const cost = effectiveEnergyCost(ab, character, rules);
-        const p = rankProgress(character, a.abilityId);
-        return `<div class="cs-ability"><span class="tier-badge">${tierOf(abilityTier(ab))}</span> <strong>${esc(ab.name)}</strong> <span class="hint">(${esc(sheetCraftLabel(ab))})${domainVerdict(ab).castable === false ? ` · <strong class="not-castable">${esc(domainVerdict(ab).reason || "you cannot cast this")}</strong>` : ""} · ${cost} energy${cost < ab.energyCost ? ` (was ${ab.energyCost})` : ""}</span>
-          <span class="cs-ranks">${[1, 2, 3].map(r => `<span class="${r <= a.level ? "cs-rank-on" : "cs-rank-off"}" title="${esc(ab.tree?.[r - 1]?.name || "")}">${r <= a.level ? "●" : "○"}</span>`).join("")}</span>
-          ${ab.tree?.[a.level - 1] ? `<div class="hint">${esc(ab.tree[a.level - 1].name)}: ${esc(playerText(ab.tree[a.level - 1].grants))}</div>` : ""}
-          <div class="hint ${p.ripe ? "practiced" : ""}">${esc(p.text)}</div></div>`; }).join("")}
+      ${(() => {
+        // ⛔ ERIK 2026-09-12: "The skills in your character sheet should be organized by domain, then tradition, then tier and
+        // major functional category. The whole thing collapsible with each section collapsible." Thirty-nine owned crafts across
+        // thirteen domains read as a wall in one flat column. `craftTree` decides the shape (engine, pure, tested); this only
+        // nests <details> around it and keeps the row exactly as it was — tier badge, name, craft label, ranks, grant, practice.
+        // ⚠️ THE OPEN/CLOSED STATE PERSISTS through `sectionOpen`, the same store the sidebar sections use, so a player who
+        // collapses their thirty Ashwarden crafts finds them collapsed next time.
+        const row = (r) => { const a = r.owned, ab = r.ability; const cost = effectiveEnergyCost(ab, character, rules);
+          const p = rankProgress(character, a.abilityId);
+          return `<div class="cs-ability"><span class="tier-badge">${tierOf(abilityTier(ab))}</span> <strong>${esc(ab.name)}</strong> <span class="hint">(${esc(sheetCraftLabel(ab))})${r.family ? ` · <span class="fam-chip ${esc(familyClass(r.family))}">${esc(r.familyLabel)}</span>` : ""}${domainVerdict(ab).castable === false ? ` · <strong class="not-castable">${esc(domainVerdict(ab).reason || "you cannot cast this")}</strong>` : ""} · ${cost} energy${cost < ab.energyCost ? ` (was ${ab.energyCost})` : ""}</span>
+            <span class="cs-ranks">${[1, 2, 3].map(n => `<span class="${n <= a.level ? "cs-rank-on" : "cs-rank-off"}" title="${esc(ab.tree?.[n - 1]?.name || "")}">${n <= a.level ? "●" : "○"}</span>`).join("")}</span>
+            ${ab.tree?.[a.level - 1] ? `<div class="hint">${esc(ab.tree[a.level - 1].name)}: ${esc(playerText(ab.tree[a.level - 1].grants))}</div>` : ""}
+            <div class="hint ${p.ripe ? "practiced" : ""}">${esc(p.text)}</div></div>`; };
+        const tree = craftTree(character, fullCatalog(), {
+          traditionIndex: CONTENT.traditionIndex, fnIndex: FN_INDEX, traditions: CONTENT.traditions,
+          openIf: ({ kind, id, count }) => sectionOpen(`craft:${kind}:${id}`, count >= 3),
+        });
+        if (!tree.length) return "<div class='insight'>none yet</div>";
+        return tree.map(d => `<details class="craft-group" data-sec="craft:domain:${esc(d.id)}"${d.open ? " open" : ""}>
+          <summary><span class="craft-dom">${esc(d.label)}</span> <span class="hint">${d.count} craft${d.count === 1 ? "" : "s"}</span></summary>
+          ${d.traditions.map(t => `<details class="craft-group craft-trad" data-sec="craft:tradition:${esc(t.id)}"${t.open ? " open" : ""}>
+            <summary><span class="craft-trad-name">${esc(t.label)}</span> <span class="hint">${t.count}</span></summary>
+            ${t.tiers.map(tier => `<div class="craft-tier"><div class="craft-tier-label">${esc(tier.label)}</div>${tier.rows.map(row).join("")}</div>`).join("")}
+          </details>`).join("")}
+        </details>`).join("");
+      })()}
       ${(character.discoveries || []).map(d => `<div class="discovery" title="${esc(d.description)}">✦ ${esc(d.name)} (discovered technique)</div>`).join("")}</div>
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Aspirations <span class="hint" style="text-transform:none">(declare what you're working toward — practice makes it free)</span></h3>
       ${(character.practice?.aspirations || []).map(a => { const ab = fullCatalog()[a.abilityId]; const ripe = aspirationRipe(character, a.abilityId, rules); const need = rules.practice?.aspirationRipe ?? 10;
@@ -11872,6 +11985,9 @@ function renderCharacterScreen() {
     <button class="btn secondary" id="cs-back" style="margin-top:10px">Back</button>
   </div>`);
   { const g = document.getElementById("cs-goto-holdings"); if (g) g.onclick = () => renderHoldingsTab(); }
+  { const g = document.getElementById("cs-goto-chronicle"); if (g) g.onclick = () => renderChronicle(); }
+  // ⛔ A TILE IS A DOOR, not a picture: tapping a place opens its own manage screen, which is where everything about it lives.
+  for (const b of app.querySelectorAll("[data-hold-open]")) b.onclick = () => renderHoldingsTab(b.dataset.holdOpen);
   wireHoldingOffers();
   for (const btn of app.querySelectorAll("[data-grow2]")) btn.onclick = () => { if (spendSubPoint(character, btn.dataset.grow2, rules)) { saveCharacter(character); renderCharacterScreen(); } };
   // ability-arch v2: mastery of a craft that forks at rank 3 — the GM marked the defining moment; the
@@ -14987,8 +15103,16 @@ function renderPlay(turn, opts = {}) {
   const rep = location.communityId ? standingWith(character, location.communityId, rules) : null;
 
   const sheet = `<div class="sheet">
-    <h2>${esc(character.name)}</h2>
-    <div class="meta">${esc(character.origin)} · ${esc(character.background)} · level ${character.level} (${character.xp} xp)</div>
+    ${/* ⛔ ERIK 2026-09-12: "the character portrait should show up at the top of the sidebar as well." It existed only on the
+          character screen and in the gallery, so the face you play as was two clicks away from every scene. Same `data-lightbox`
+          and `data-regen-kind` hooks the big one carries, so tapping it opens and re-minting works from here too. */""}
+    <div class="sb-ident">
+      ${character.portrait ? `<img class="sb-portrait" src="${esc(character.portrait)}" alt="${esc(character.name)}" data-lightbox="portrait" data-regen-kind="character" onerror="this.style.display='none'">` : ""}
+      <div class="sb-ident-who">
+        <h2>${esc(character.name)}</h2>
+        <div class="meta">${esc(character.origin)} · ${esc(character.background)} · level ${character.level} (${character.xp} xp)</div>
+      </div>
+    </div>
     <div style="display:flex; gap:6px; margin:6px 0">
       <button class="opt" id="open-character" style="flex:1">Character</button>
       <button class="opt" id="open-inventory" style="flex:1">Inventory</button>
@@ -15201,7 +15325,7 @@ function renderPlay(turn, opts = {}) {
       const peopleCtl = (p) => p.id ? `<span class="npc-ctls"><button class="npc-ctl" data-setname="${esc(p.id)}" title="Set or extend this person's name (e.g. Pell → Pell Ran Marsh)">✎</button><button class="npc-ctl" data-mergenpc="${esc(p.id)}" title="This is the same person as someone else you know — merge them">⇊</button>${imagesEnabled() && character.npcRegistry?.[p.id]?.image ? `<button class="npc-ctl" data-repic="${esc(p.id)}" title="Look at ${esc(p.name)}'s picture — and draw it again if it isn't them">↻</button>` : ""}</span>` : "";
       const shownName = (p) => { const rec = p.id ? character.npcRegistry?.[p.id] : null; const bare = !p.name || p.name === "—" || (rec && nameIsUnknown(rec)); const role = String(rec?.role || "").split(/[,;—]/)[0].trim(); return bare && role ? `(${role.slice(0, 28)})` : (p.name || "someone"); };
       const row = (p, extra = "") => `<div class="known-npc"><span class="npc-name entity-hover" ${p.id ? `data-entity="npc:${esc(p.id)}"` : ""} title="${esc(shownName(p))}">${esc(shownName(p))}</span><span class="rep-band ${p.bondType === "romantic" ? "trusted" : ""}" title="${esc(p.label)}${esc(extra)}">${esc(p.label)}${extra}</span>${peopleCtl(p)}</div>`;
-      const body = `${partners.length ? `<div class="partner-adjacent" style="margin-bottom:6px">${partners.map(p => `<div class="known-npc partner"><span class="npc-name entity-hover" ${p.id ? `data-entity="npc:${esc(p.id)}"` : ""} title="${esc(p.name)}">❤ ${esc(p.name)}</span><span class="rep-band trusted" title="A committed partner — with you in all but the mechanics · ${esc(p.label)}">${esc(p.label)} · with you</span>${peopleCtl(p)}</div>`).join("")}</div>` : ""}${rep ? `<div style="margin-bottom:4px"><span class="rep-band ${rep.band}">${rep.band} (${rep.score})</span></div>` : ""}${hereRest.length ? hereRest.map(p => row(p)).join("") : (partners.length ? "" : `<span class="insight">no one you know is here right now</span>`)}`;
+      const body = `${partners.length ? `<div class="partner-adjacent" style="margin-bottom:6px">${partners.map(p => `<div class="known-npc partner"><span class="npc-name entity-hover" ${p.id ? `data-entity="npc:${esc(p.id)}"` : ""} title="${esc(shownName(p))}">❤ ${esc(shownName(p))}</span><span class="rep-band trusted" title="A committed partner — with you in all but the mechanics · ${esc(p.label)}">${esc(p.label)} · with you</span>${peopleCtl(p)}</div>`).join("")}</div>` : ""}${rep ? `<div style="margin-bottom:4px"><span class="rep-band ${rep.band}">${rep.band} (${rep.score})</span></div>` : ""}${hereRest.length ? hereRest.map(p => row(p)).join("") : (partners.length ? "" : `<span class="insight">no one you know is here right now</span>`)}`;
       return `<details class="sidebar-sec" data-sec="whoshere"${sectionOpen("whoshere", true) ? " open" : ""}><summary><span class="sec-title">${esc(location.name)} — who's here</span>${rep ? ` <span class="sec-sum">· ${rep.band}</span>` : ""}</summary><div class="sec-body">${body}</div></details>`;
     })()}
     <details class="sidebar-sec" data-sec="playstyle"${sectionOpen("playstyle", false) ? " open" : ""}><summary><span class="sec-title">Play-style</span></summary><div class="sec-body">${aptitudeChips()}</div></details>
@@ -15238,18 +15362,38 @@ function renderPlay(turn, opts = {}) {
       // state.js resolves that field onto all 118 locations at load. The density has decided every craft's
       // strength since SNG-090; the player has never been shown the number or the cause. This is the one
       // place they are already looking to learn where they are.
+      // ⛔ ERIK 2026-09-12: "the top of the location section… it's out of date with the nanite and ground description. Can we just
+      // show the 4 sources, what level they're at here, and a short pop up describing what they power (Meaning powers Metaphysical
+      // for example)." So the two chips — one word about the lattice and one about the nanite — become the four sources HE named,
+      // each with how well it answers here and a tooltip that says which field feeds it, what that field reads, and who draws on it.
+      // ⚠️ `groundHere`'s bastion line is kept: a pool or sink with an authored REASON is why the number is what it is, and it was
+      // the one thing on the old strip that explained itself.
       const g = groundHere(location, CONTENT.substrateModel);
       if (!g) return "";
+      const rows = sourcesHere(location, CONTENT.substrateModel, {
+        present: (sceneState?.npcsPresent || []).length,
+        aura: holdingMeaningAura(character, location.id, holdCfgNow()),   // a temple you hold here is meaning on the ground
+        powerSources: CONTENT.powerSources,   // the loader hangs it at the TOP level — both other callers already read it there
+        traditionName: (id) => CONTENT.traditionIndex?.byId?.[id]?.name || CONTENT.traditions?.[id]?.name || null,   // ⚠️ the NAMES live on the index; `CONTENT.traditions` carries none, so this listed raw ids
+      });
+      if (!rows.length) return "";
+      const GLYPH = { precursor: "⛰", nanite: "✵", veil: "◈", metaphysical: "✧" };
+      const pct1 = (v) => (v == null ? "unsurveyed" : `${Math.round(v * 100)}% of full`);
+      const chips = rows.map(r => {
+        const feeds = r.field === "meaning" ? "Meaning powers this" : r.field === "nanite" ? "The nanite field feeds this" : "The substrate feeds this";
+        const tip = [
+          `${r.label} — ${r.level} here.`,
+          `${feeds}: ${pct1(r.fieldValue)}${r.state ? ` and ${r.state}` : ""}.`,
+          r.ceiling != null ? `Meaning sets the ceiling and the substrate (${pct1(r.substrateValue)}) sets the penalty — a craft gets the lower of the two.` : "",
+          r.ground ? `${r.ground[0].toUpperCase()}${r.ground.slice(1)}.` : "",
+          r.powers.length ? `Powers ${r.powers.slice(0, 4).join(", ")}${r.powers.length > 4 ? ` and ${r.powers.length - 4} more` : ""}.` : "",
+          g.bastion?.reason && r.field === "substrate" ? g.bastion.reason : "",
+        ].filter(Boolean).join(" ");
+        return `<span class="src-chip src-${esc(r.level)}" title="${esc(tip)}">${GLYPH[r.id] || "•"} ${esc(r.label.split(" ")[0])} <b>${esc(r.level)}</b></span>`;
+      }).join("");
       const aura = g.bastion
         ? `<span class="ground-bastion ground-${esc(g.bastion.kind)}" title="${esc(g.bastion.reason || "")}">${g.bastion.kind === "pool" ? "▲" : "▼"} ${esc(g.bastion.kind)}</span>` : "";
-      const why = `The substrate here — ${g.density.toFixed(2)} of full. Your crafts read this: a school that wants dense ground is starved in the thin, and one that wants thin is crowded in the dense.`
-        + (g.bastion?.reason ? ` — ${g.bastion.reason}` : "");
-      // ⚠️ THE SECOND FIELD IS SHOWN AS ITS OWN CHIP, never merged into the first. They are different
-      // geographies — one says where the Precursors built, the other where the tech was left and what
-      // became of it — and averaging them into one "power here" number would erase the whole point.
-      const nan = g.nanite
-        ? `<span class="ground-nanite ground-nan-${esc(String(g.nanite.state || "unknown"))}" title="${esc(`Nanite here — ${g.nanite.state || "unsurveyed"}, ${g.nanite.v.toFixed(2)} of full. A SECOND geography: not where the Precursors built, but where the tech was deployed and what became of it.${g.nanite.why ? " " + g.nanite.why : ""}`)}">✵ ${esc(String(g.nanite.state || "unsurveyed"))} nanite</span>` : "";
-      return `<span class="ground-tag ground-${esc(g.word.replace(/[^a-z]/g, ""))}" title="${esc(why)}">⛰ ${esc(g.word)} ground${aura}</span>${nan}`;
+      return `<span class="src-strip">${chips}${aura}</span>`;
     })()}<span class="time-tag" title="Your own clock — days, season, time of day (SNG-191). The world's count is a separate shared tally, not a date.">${esc(time.label)} <span class="world-day-tag" title="The Kept Count — the shared world tally; it only ever climbs and is not a date">· ⧗ ${worldCount()}</span></span></div>
     ${(() => { const e = activeEnc(); if (!e) return ""; const st = e.state, d = e.def;
       let status = "";

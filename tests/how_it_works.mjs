@@ -2269,7 +2269,10 @@ console.log("\n── §179 · labelled rows and chips on the holding card; Hugi
     && /<span class="npc-ctls"><button class="npc-ctl" data-setname=/.test(app179) && /<\/button>\$\{imagesEnabled\(\)[^\n]*<\/span>` : "";/.test(app179));
   check("§179: …a person whose name is only \"—\" is shown by what they are, in parentheses, and every name and standing carries its full text as a title",
     /const shownName = \(p\) => \{[^\n]*nameIsUnknown\(rec\)[^\n]*`\(\$\{role\.slice\(0, 28\)\}\)`/.test(app179) && /title="\$\{esc\(shownName\(p\)\)\}">\$\{esc\(shownName\(p\)\)\}<\/span>/.test(app179)
-    && /title="\$\{esc\(p\.name\)\}">❤ \$\{esc\(p\.name\)\}<\/span><span class="rep-band trusted"/.test(app179));
+    // ⛔ ERIK 2026-09-12: "some names disappear completely." This clause pinned `esc(p.name)` on the PARTNER row — the one row
+    // that did NOT go through `shownName`, which is exactly why a partner with no name rendered as a bare heart. ⚠️ A GATE THAT
+    // PINS THE SPELLING OF A DEFECT DEFENDS THE DEFECT. It now asserts the claim: every row, partner included, reads one rule.
+    && /title="\$\{esc\(shownName\(p\)\)\}">❤ \$\{esc\(shownName\(p\)\)\}<\/span><span class="rep-band trusted"/.test(app179));
 }
 
 /* ══════════ §180 — THE RATCHET, ONCE AND IN PARALLEL (Erik 2026-09-12: "please explain the 5 minute ratchet necessity... is it needed?" — "yes, lower it and do the plan") ══════════ */
@@ -12374,6 +12377,131 @@ console.log("\n── §192 · the build stamps the modules and the content, or 
     rd("scripts/bump_version.mjs").includes('join(root, "engine", "version.js")')
     && rd("scripts/bump_version.mjs").includes("export const APP_VERSION")
     && rd("scripts/module_map.mjs").includes("one build cannot have two versions"));
+}
+
+/* ══════════ §193 — SNG-546 · THE SHEET AND THE SIDEBAR BROUGHT UP TO DATE (Erik 2026-09-12, seven asks in one message) ══════════ */
+console.log("\n── §193 · a name that cannot vanish, four sources with their level, crafts by domain, and a sheet that says what is true today ──");
+{
+  const SB193 = await import("../engine/substrate.js");
+  const ST193 = await import("../engine/skilltree.js");
+  const FN193 = await import("../engine/functions.js");
+  const { loadContentHeadless: lch193 } = await import("./headless_content.mjs");
+  const C193 = await lch193();
+  const A193 = rd("app.js");
+  const CSS193 = rd("style.css");
+  const silas193 = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+
+  /* ---- 1 · the load screen. "load screen ui got tweaked a bit. Quick simple fix." ---- */
+  // ⛔ MY OWN DOING: SNG-543's sync line went in as a THIRD flex child of `.roster-item`, so the row split three ways and every
+  // name wrapped mid-phrase — "Adelheid harmonic · level" / "1".
+  check("§193: ⛔ the roster row is TWO columns again — who they are (with the sync line under it) and the buttons",
+    /<div class="roster-who">/.test(A193) && /<div class="roster-name">/.test(A193)
+    && /\.roster-who \{ flex: 1 1 auto; min-width: 0; \}/.test(CSS193)
+    && /\.roster-item \{[^}]*gap: 12px/.test(CSS193));
+
+  /* ---- 2 · "some names disappear completely" ---- */
+  // ⛔ TWO DEFECTS UNDER ONE SYMPTOM: the name had `min-width: 0` with `overflow: hidden`, so in a 325px sidebar a long standing
+  // chip plus three controls shrank it to ZERO; and the PARTNER row printed `p.name` raw instead of going through `shownName`,
+  // so a partner with no name rendered a bare heart.
+  check("§193: ⛔ a name in the who's-here list can be abbreviated but never vanish — it keeps a floor and the chip wraps instead",
+    /\.known-npc \.npc-name \{ flex: 1 1 auto; min-width: 9ch;/.test(CSS193)
+    && /\.known-npc \{ display: flex; flex-wrap: wrap;/.test(CSS193)
+    && /\.npc-ctls \{[^}]*margin-left: auto;/.test(CSS193));
+  check("§193: …and the partner row reads through the SAME name rule as every other row, so a nameless partner shows what they are",
+    // ⚠️ `.includes()` on the literal, per FIELD_REFERENCE §11 — the question is whether an exact string appears, and a regex
+    // carrying `${`, `\(` and a heart through a patch script is where this project loses its backslashes.
+    A193.includes('title="${esc(shownName(p))}">❤ ${esc(shownName(p))}')
+    && !A193.includes('title="${esc(p.name)}">❤ ${esc(p.name)}'));
+
+  /* ---- 3 · "show the 4 sources, what level they're at here, and a short pop up describing what they power" ---- */
+  const rows193 = SB193.sourcesHere(C193.locations.millbrook, C193.substrateModel, {
+    present: 3, powerSources: C193.powerSources, traditionName: (id) => C193.traditions?.[id]?.name || null });
+  check("§193: ⛔ the four sources are ERIK'S OWN four — precursor · nanite · veil · metaphysical — and `body` and `wild` are not a fifth row",
+    rows193.map(r => r.id).join(",") === "precursor,nanite,veil,metaphysical"
+    && rows193.every(r => r.level && r.factor != null), JSON.stringify(rows193.map(r => `${r.id} ${r.level}`)));
+  // ⛑ HIS OWN EXAMPLE, AS A CHECK: "Meaning powers Metaphysical for example" — and `the_substrate.meaning.appliesTo` says exactly
+  // that, so the row reads the MEANING field while the other three read the substrate or the nanite.
+  check("§193: ⛔ MEANING POWERS METAPHYSICAL — the field→source pairing is read from `meaning.appliesTo`, not written in the view",
+    rows193.find(r => r.id === "metaphysical").field === "meaning"
+    && rows193.find(r => r.id === "precursor").field === "substrate"
+    && rows193.find(r => r.id === "nanite").field === "nanite"
+    && (C193.substrateModel?.meaning?.appliesTo || []).join() === "metaphysical");
+  check("§193: …and meaning sets a CEILING while the substrate sets the penalty (R38a/b), so the factor is the LOWER of the two and never a product",
+    (() => { const m = rows193.find(r => r.id === "metaphysical");
+      const band = SB193.bandFactor(C193.substrateModel.sourceBands.sources.metaphysical.band, SB193.locationDensity(C193.locations.millbrook, C193.substrateModel));
+      return m.ceiling != null && Math.abs(m.factor - Math.min(m.ceiling, band)) < 1e-9; })());
+  check("§193: …and the nanite grades against the band of the state it is IN here, because ordered and wild are one source in two states",
+    (() => { const wild = SB193.sourcesHere({ ...C193.locations.millbrook, naniteDensity: 0.32, naniteState: "wild" }, C193.substrateModel, {});
+      const ord = SB193.sourcesHere({ ...C193.locations.millbrook, naniteDensity: 0.9, naniteState: "ordered" }, C193.substrateModel, {});
+      return wild.find(r => r.id === "nanite").state === "wild" && ord.find(r => r.id === "nanite").state === "ordered"
+        && wild.find(r => r.id === "nanite").level === "answering" && ord.find(r => r.id === "nanite").level === "answering"; })());
+  check("§193: …and each source names the traditions that actually draw on it, counted off the authored mixes",
+    rows193.find(r => r.id === "metaphysical").powers.length >= 3
+    && rows193.find(r => r.id === "precursor").powers.some(n => /blazeborn/i.test(n))
+    && /src-chip/.test(A193) && /Meaning powers this/.test(A193));
+
+  /* ---- 4 · "the character portrait should show up at the top of the sidebar as well" ---- */
+  check("§193: ⛔ the portrait is at the top of the sidebar, with the same lightbox and re-mint hooks the big one carries",
+    /<div class="sb-ident">/.test(A193) && /class="sb-portrait"[^`]*data-lightbox="portrait"[^`]*data-regen-kind="character"/.test(A193)
+    && /\.sb-portrait \{ width: 52px;/.test(CSS193));
+
+  /* ---- 5 · "organized by domain, then tradition, then tier and major functional category… each section collapsible" ---- */
+  const cat193 = { ...C193.abilities, ...(silas193.customAbilities || {}) };
+  const tree193 = ST193.craftTree(silas193, cat193, {
+    traditionIndex: C193.traditionIndex, fnIndex: FN193.buildFunctionIndex(C193.functionVocabulary), traditions: C193.traditions });
+  const owned193 = (silas193.abilities || []).filter(a => cat193[a.abilityId]).length;
+  check(`§193: ⛔ every owned craft lands in the tree exactly once — ${owned193} owned, grouped domain → tradition → tier`,
+    tree193.reduce((n, d) => n + d.traditions.reduce((m, t) => m + t.tiers.reduce((k, x) => k + x.rows.length, 0), 0), 0) === owned193
+    && tree193.every(d => d.count === d.traditions.reduce((m, t) => m + t.count, 0)));
+  check("§193: …and a tradition's tiers run HIGH TO LOW with rows ordered by their major function family, so a Tier V is never buried under six Tier I rows",
+    tree193.every(d => d.traditions.every(t => t.tiers.every((x, i, arr) => i === 0 || (arr[i - 1].tier ?? 0) >= (x.tier ?? 0))))
+    && tree193.some(d => d.traditions.some(t => t.tiers.some(x => x.rows.length > 1 && x.rows.every(r => r.familyLabel)))));
+  // ⛑ BRAIDS ARE THEIR OWN GROUP, as they are in the sidebar: a braid belongs to no single tradition, which is the point of one.
+  check("§193: ⛔ braids are their own group and nothing owned is silently dropped — an unplaced tradition goes to Unfiled, never nowhere",
+    tree193.some(d => d.id === "__braid" && d.count > 0)
+    && tree193.filter(d => d.id === "__unfiled").every(d => d.count > 0));
+  check("§193: …and every level is a <details> with a persisted key, wired on the character screen as well as the sidebar",
+    /<details class="craft-group" data-sec="craft:domain:/.test(A193)
+    && /<details class="craft-group craft-trad" data-sec="craft:tradition:/.test(A193)
+    && /querySelectorAll\("details\.craft-group\[data-sec\]"\)/.test(A193)
+    && /sectionOpen\(`craft:\$\{kind\}:\$\{id\}`/.test(A193));
+
+  /* ---- 6 · the sheet's own sections ---- */
+  check("§193: ⛔ the Purse names ALL FIVE authored currencies, not only the ones you hold — a purse that lists what you have cannot teach that marks exist",
+    (C193.rules?.economy?.currencies || []).length === 5
+    && /curDefs\.map\(curRow\)/.test(A193) && /purse-none/.test(A193)
+    && /\.purse-none \.purse-cur, \.purse-none \.purse-n \{ opacity: \.45; \}/.test(CSS193));
+  check("§193: …and it shows what the estate is DOING — every holding's pass summed, with `net` as the headline because that is the field the purse receives",
+    /What your holdings are doing/.test(A193) && /x\.L\.perPass\?\.worth/.test(A193)
+    && /x\.L\.perPass\?\.net/.test(A193) && /caravansOf\(character\)\.filter\(c => c && !c\.arrivedDay\)/.test(A193)
+    && !/perPass\?\.made/.test(A193));
+  check("§193: ⛔ the Holdings section shows each place's PICTURE AND NAME, and a tile is a door to that place's manage screen",
+    /class="hold-shelf"/.test(A193) && /class="hold-tile" data-hold-open=/.test(A193)
+    && /ensureHoldingImage\(h\) \|\| h\.image/.test(A193)
+    && A193.includes('querySelectorAll("[data-hold-open]")) b.onclick = () => renderHoldingsTab(b.dataset.holdOpen)'));
+  // ⛔ A RETIRED RULE PRINTED AS A LIVE ONE, on the character sheet: R9/R16 removed foreclosure and CCODE-339 replaced the
+  // antipode wall with "learnable, never castable", and `domainAccessInner` says in its own words that `foreclosed` is read
+  // nowhere. Silas's save still carries two, and the sheet was still calling them "reachable only as a braid".
+  check("§193: ⛔ Domains state the ACCESS RULING AS IT STANDS — the antipode is learnable and holdable but never castable, and a braid is what spends it",
+    /Across your axis/.test(A193) && /learnable and holdable, never castable/.test(A193)
+    && /antipodeOf\(t, CONTENT\.traditionIndex\)/.test(A193)
+    && !/Foreclosed — reachable only as a braid/.test(A193));
+  check("§193: …and a save that still lists a foreclosed pole is UN-TOLD rather than left believing it",
+    /That rule was retired — nothing forecloses a pole any more/.test(A193)
+    && (silas193.foreclosed || []).length === 2);
+  check("§193: …and a station names the DOMAIN its tradition sits in, the same thirteen the craft tree groups by",
+    /domainOfTrad\?\.\[t\] \|\| null/.test(A193) && /of \$\{esc\(dom\)\}/.test(A193)
+    && C193.traditionIndex?.domainOfTrad?.ashwarden === "Death");
+
+  /* ---- 7 · "your story should probably update with what you've been doing lately" ---- */
+  // ⛔ EVERY LINE IN THAT BLOCK CAME FROM CHARACTER CREATION. A motivation written before day 1 was still the only story on the
+  // sheet at day 18 and level 32, while 39 chronicle entries sat unread by this surface.
+  check(`§193: ⛔ the Story block reads the LIVED story — the newest chronicle entries (${(silas193.chronicle || []).length} of them on his save) and a door to the rest`,
+    /class="cs-lately"/.test(A193) && /character\.chronicle\) \? character\.chronicle : \[\]/.test(A193)
+    && /ch\.slice\(-2\)\.reverse\(\)/.test(A193) && /cs-goto-chronicle/.test(A193)
+    && Array.isArray(silas193.chronicle) && silas193.chronicle.length > 30);
+  check("§193: …and the button that offers the whole chronicle is wired, because a button is only as real as its handler",
+    /getElementById\("cs-goto-chronicle"\); if \(g\) g\.onclick = \(\) => renderChronicle\(\)/.test(A193));
 }
 
 /* ══════════ REPORT ══════════ */

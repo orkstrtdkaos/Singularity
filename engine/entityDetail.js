@@ -15,6 +15,9 @@ export function skillDetail(ab = {}, opts = {}) {
   lines.push(opts.owned ? `Rank ${opts.level || 1}/${opts.maxRank || 3}` : "Not yet learned");
   if (opts.rankText) lines.push(opts.rankText);
   if (opts.ripe) lines.push("✦ ripe for mastery — a defining moment could raise it");
+  // ✅ ERIK 2026-09-11: the base chance this craft lands where the character stands, the ground counted (the app computes it through
+  // the same stack the roll pays; this only says it)
+  if (opts.chanceHere) lines.push(opts.chanceHere.off ? "Will not answer here — nothing for it to draw on." : `🎯 ${opts.chanceHere.chance}% base chance here${opts.chanceHere.ground ? ` (the ground ${opts.chanceHere.ground > 0 ? "costs it " : "lends it +"}${Math.abs(opts.chanceHere.ground)})` : ""}`);
   if (opts.effCost != null) lines.push(`⚡ ${opts.effCost} energy to use${opts.baseCost != null && opts.baseCost !== opts.effCost ? ` (base ${opts.baseCost})` : ""}`);
   if ((opts.families || []).length) lines.push(`Function: ${opts.families.join(" · ")}`);
   // ⛔ Aevi 2026-09-11 (BUG_authoring_markup_in_player_text §3–§4): a word-boundary clamp, not a hard `slice` that ended Erik's

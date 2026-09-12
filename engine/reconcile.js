@@ -30,7 +30,7 @@ import { seedStandingAtCreation } from "./standing.js";
 import { namesMatch } from "./namematch.js";
 import { affiliationOf, regionHomeTradition, buildPeopleVocab } from "./affiliation.js";
 import { defaultSchoolsForDomains } from "./substrate.js"; // SNG-193b §3.2: seed a school per practised domain on old saves
-import { mintableBraidsFor, buildBraidDef, mintBraid } from "./braids.js"; // SNG-196: mint the braids a character already earned
+import { mintableBraidsFor, buildBraidDef, mintBraid, braidTreeFor } from "./braids.js"; // SNG-196: mint the braids a character already earned · ✅ 2026-09-12: braidTreeFor for the template-rank repair
 import { findExistingNpc, prettifyNpcName, REGISTRY_CAP } from "./npcs.js"; // SNG-199/205: registry + codex backfill
 import { bondOf, companionCodexUpdate, companionStageCount } from "./companions.js"; // SNG-200: stage + codex backfill
 import { isCoercedObjectArtefact, isDescriptiveNotName } from "./state.js"; // SNG-329: the artefact detector, shared with the mint that now refuses it
@@ -84,6 +84,27 @@ function renameTargets(spec, entry, character, known) {
 // "has this entity seen this step yet" via entity.reconcileVersion.
 
 export const CHARACTER_STEPS = [
+  {
+    version: 1, id: "braid-template-ranks", playerFacing: true,
+    // ✅ ERIK 2026-09-11: Silas minted a braid whose r2 read "The braid deepens" — braids.js's old scaffold, which named nothing.
+    // Every minted braid still carrying that template gets its ranks rebuilt from its parents (`braidTreeFor`), once, on load, so
+    // he sees the fix without re-minting. Idempotent: a rebuilt rank no longer matches the template. A model-authored tree is not
+    // touched — only the template is.
+    apply: (c, ctx) => {
+      const catalog = { ...(ctx.content?.abilities || {}), ...(c.customAbilities || {}) };
+      const fixed = [];
+      for (const ab of Object.values(c.customAbilities || {})) {
+        if (!ab?.minted || !Array.isArray(ab.tree) || !ab.tree.length) continue;
+        const sources = (ab.minted.from || []).map(id => catalog[id]).filter(Boolean);
+        if (sources.length < 2) continue;
+        const template = ab.tree.some(t => /^The braid deepens/.test(String(t?.grants || "")) || String(t?.cannot || "") === "What neither parent could do apart.");
+        if (!template) continue;
+        ab.tree = braidTreeFor(sources, { name: ab.name, emergent: ab.minted.emergent || ab.minted.emergentFunction || null, functions: ab.functions || [], maxRank: ab.tree.length });
+        fixed.push(ab.name);
+      }
+      return fixed.length ? { notes: [`Braid ranks rewritten from their parents (${fixed.length}): ${fixed.join(", ")} — each rank now says what it carries and what it still cannot.`] } : {};
+    }
+  },
   {
     version: 31, id: "ability-rename-map", playerFacing: true,
     // ⛔ CCODE-294 — 22 ABILITY REFERENCES ACROSS 7 REAL SAVES POINT AT IDS THAT NO LONGER EXIST.

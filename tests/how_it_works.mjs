@@ -1878,6 +1878,71 @@ console.log("\n── §169 · six test-only exports decided ──");
     ["functions.js", "practice.js", "skilltree.js"].filter(f => /nativeOrCombination/.test(rd("engine/" + f).replace(/^\s*\/\/.*$/gm, ""))).length === 3);
 }
 
+/* ══════════ §170 — ERIK'S THREE (2026-09-11): braid ranks from the parents · raise bonuses in the tip · base chance here ══════════ */
+console.log("\n── §170 · braid ranks, raise tips, chance here ──");
+{
+  const BR170 = await import("../engine/braids.js");
+  const RC170 = await import("../engine/reconcile.js");
+  const LD170 = await import("../engine/ladder.js");
+  const ED170 = await import("../engine/entityDetail.js");
+  // ⛔ "make the skills better than the parents and detailed on rank up so that it matches the pattern of other skills"
+  const pA = { id: "pa", name: "Working Model", functions: ["make"], tree: [{ rank: 1, name: "Single Thing", grants: "⛔ HOLD ONE THING'S SHAPE", cannot: "One object at a time." }, { rank: 2, name: "Whole Working", grants: "⛔ HOLD A WORKING SYSTEM with parts moving", cannot: "You must have access to the whole of it." }] };
+  const pB = { id: "pb", name: "Shadow Work", functions: ["conceal"], tree: [{ rank: 1, name: "Dim", grants: "Dim one lamp", cannot: "Not daylight." }, { rank: 2, name: "Deeper Shadow", grants: "Darken a room", cannot: "Not a field." }] };
+  const r2 = BR170.braidRankFromParents([pA, pB], 2, { name: "Shadowcast Model", srcNames: ["Working Model", "Shadow Work"], emergent: "reveal", functions: ["make", "conceal", "reveal"] });
+  check("§170: ⛔ rank 2 of a braid carries what BOTH parents reach at rank 2 — their words, the emergent named, no authoring glyphs",
+    /Working Model — HOLD A WORKING SYSTEM/.test(r2.grants) && /Shadow Work — Darken a room/.test(r2.grants) && /reveal/.test(r2.grants) && !/⛔/.test(r2.grants), r2.grants);
+  check("§170: …its limits are both parents' rank-2 limits, and its name is theirs", /access to the whole/.test(r2.cannot) && /Not a field/.test(r2.cannot) && r2.name === "Whole Working · Deeper Shadow", r2.name + " | " + r2.cannot);
+  const built = BR170.buildBraidDef({ level: 20, abilities: [{ abilityId: "pa", level: 2 }, { abilityId: "pb", level: 2 }] }, ["pa", "pb"], { pa: pA, pb: pB },
+    { authored: { tree: [{ name: "Shadowcast Model I", grants: "Working Model and Shadow Work run as one craft: the move only their joining makes." }, { name: "Shadowcast Model II", grants: "The braid deepens; the two crafts answer together more surely." }] } });
+  check("§170: ⛔ a model-authored rank that is TEMPLATE-THIN (Silas's r2) falls back to the parent-derived rank; a real authored rank stands",
+    !!built && /Shadow Work — Darken a room/.test(built.tree?.[1]?.grants || "") && /run as one craft/.test(built.tree?.[0]?.grants || ""), JSON.stringify(built?.tree?.map(t => t.grants.slice(0, 50))));
+  const step170 = RC170.CHARACTER_STEPS.find(s => s.id === "braid-template-ranks");
+  const fix170 = { customAbilities: { b: { id: "b", name: "Shadowcast Model", functions: ["make"], minted: { from: ["pa", "pb"] }, tree: [{ rank: 1, name: "Shadowcast Model I", grants: "x", cannot: "What neither parent could do apart." }, { rank: 2, name: "Shadowcast Model II", grants: "The braid deepens; the two crafts answer together more surely.", cannot: "What neither parent could do apart." }] } } };
+  const res170 = step170 ? step170.apply(fix170, { content: { abilities: { pa: pA, pb: pB } } }) : null;
+  check("§170: ⛔ …and a save's minted braid still carrying the template is rewritten from its parents ON LOAD, once (idempotent)",
+    !!step170 && (res170?.notes || []).length === 1 && /Darken a room/.test(fix170.customAbilities.b.tree[1].grants) && Object.keys(step170.apply(fix170, { content: { abilities: { pa: pA, pb: pB } } })).length === 0, JSON.stringify(res170));
+  // ⛔ "the bonuses for raising abilities needs to show up in the pop-up text for each"
+  const ladder170 = rj("content/packs/core/rules/sub_attribute_ladder.json");
+  const app170 = rd("app.js").replace(/^\s*\/\/.*$/gm, "");
+  check("§170: ⛔ the raise tip reads the authored ladder the engine pays from — rank 4→5 is +10 to rolls, and strength 6 buys max health",
+    Number(LD170.ladderRoll(ladder170, 5)) - Number(LD170.ladderRoll(ladder170, 4)) === 10 && LD170.ladderRungLine(ladder170, "strength", 6)?.governs === "maxHealth");
+  check("§170: …and it reaches every raise control — the sub row, the sidebar +, the level-up + — and the two ladder readers are no longer dark",
+    /subRaiseTip\(s\)/.test(app170) && /data-grow="\$\{s\}" title=/.test(app170) && /data-grow2="\$\{sub\}" title=/.test(app170) && /ladderRungLine, ladderRoll/.test(app170));
+  // ⛔ "I don't see the base chance skill success (per skill) based on ground yet"
+  check("§170: ⛔ the chance shown HERE pays the ground — craftChanceHere passes substrateForAction's penalty into the SAME successChance the roll uses",
+    /function craftChanceHere/.test(app170) && /substrateForAction\(\{ abilityId: ab\.id \}, location\)/.test(app170) && /successChance\(\{ character, action, location, rules, aptitudeMods: mods/.test(app170) && /substratePenalty: ground\?\.chancePenalty/.test(app170));
+  check("§170: …and it is shown in BOTH places Erik named — the ability row and the skill pop-up",
+    /craftChanceHere\(ab, a\)/.test(app170) && /chanceHere: craftChanceHere\(ab, owned\)/.test(app170)
+      && /62% base chance here/.test(ED170.skillDetail({ name: "X" }, { owned: true, level: 1, chanceHere: { chance: 62, ground: 12, off: false } }))
+      && /costs it 12/.test(ED170.skillDetail({ name: "X" }, { owned: true, level: 1, chanceHere: { chance: 62, ground: 12, off: false } }))
+      && /Will not answer here/.test(ED170.skillDetail({ name: "X" }, { owned: true, level: 1, chanceHere: { chance: 0, ground: 65, off: true } })));
+}
+
+/* ══════════ §171 — THE REPAIR NOTE MEASURES THE STATE, NOT FOUR COUNTS (Erik 2026-09-11) ══════════ */
+// ✅ ERIK: "the GM still reports not being able to do things... although they seem to be able to." Logana's charge was corrected —
+// an EXISTING NPC record changed — and the note said NOTHING MOVED, because it compared four counts. Three true outcomes now.
+console.log("\n── §171 · the repair note measures the state ──");
+{
+  const RN171 = await import("../engine/repair_note.js");
+  const c171 = { npcRegistry: { logana: { id: "logana", name: "Logana", charge: "retrieve Bryn Calowell", _seenAt: 1 } }, holdings: [], quests: [], facts: [] };
+  const before171 = RN171.repairFingerprint(c171);
+  c171.npcRegistry.logana.charge = "retrieve Cael and bring him to the Whistling Woman Post";
+  const after171 = RN171.repairFingerprint(c171);
+  check("§171: ⛔ a changed RECORD with an unchanged COUNT reads as CHANGED — the case that read NOTHING MOVED", before171 !== after171 && /the GM changed: npcUpdates/.test(RN171.repairNote(["npcUpdates"], { before: before171, after: after171 })));
+  c171.npcRegistry.logana._seenAt = 2;
+  check("§171: …volatile bookkeeping (underscore keys, timestamps) does not count as a change", RN171.repairFingerprint(c171) === after171);
+  check("§171: …an op family that THREW is named as not taken, with its message — never reported as a change or as nothing",
+    /npcUpdates did not take: Cannot read properties/.test(RN171.repairNote(["npcUpdates"], { before: after171, after: after171, failures: [{ op: "npcUpdates", message: "Cannot read properties of undefined" }] })));
+  check("§171: …and a repair that applied without error and changed nothing says it may already have been so, not that the GM failed",
+    /already have been so/.test(RN171.repairNote(["questUpdates"], { before: after171, after: after171 })) && !/NOTHING MOVED/.test(RN171.repairNote(["questUpdates"], { before: after171, after: after171 })));
+  const app171 = rd("app.js").replace(/^\s*\/\/.*$/gm, "");
+  check("§171: ⛔ the ask channel USES it — no four-count ruler is left, and the failures applyStep records reach the note",
+    /repairFingerprint\(character\)/.test(app171) && /repairNote\(Object\.keys\(result\.ops\)/.test(app171) && /failures: character\._applyFailures/.test(app171) && !/NOTHING MOVED/.test(app171));
+  const fams171 = [...rd("app.js").matchAll(/applyStep\("([a-zA-Z_]+)"/g)].map(m => m[1]);
+  check("§171: …and the fingerprint covers what the op families write — every family app.js applies is one of the sixteen this gate knows",
+    fams171.length >= 16 && fams171.every(f => ["bandOps", "codexUpdates", "deathOps", "debtOps", "encounterOps", "exchangeOps", "factUpdates", "holdingOps", "newEncounter", "npcUpdates", "partyOps", "placeUpdates", "projectOps", "questUpdates", "refusalSignal", "relationshipDeltas"].includes(f)), fams171.join(","));
+}
+
 /* ══════════ §14 — THE FOLD CANNOT BEAT AN IMMUNITY THE BLOW COULD NOT ══════════ */
 // ⛔ FOUND BY RUNNING AEVI'S TWELVE CRAFTS THROUGH A MELEE-SCALE FIGHT (CCODE-313), which is the whole
 // reason Erik asked for a big-battle test. A physical-immune foe took ZERO from the player's typed blow and
@@ -7578,8 +7643,11 @@ console.log("\n── §94 · repair requests are welcome here AND this channel 
   check("§94: ⛔ the ops run through `applyTurn` — every guard, refusal and history write a beat gets, a repair gets",
     /applyTurn\(\{ \.\.\.result\.ops, narration: "" \}, null, null\)/.test(app94)
     && /saveCharacter\(character\);/.test(app94));
+  // ✅ 2026-09-12 (§171): the note is built by repairNote — three true outcomes, not one string — so this holds the PROPERTY: the
+  // ask channel hands the ops' keys and the before/after fingerprints to repairNote and APPENDS what comes back.
   check("§94: ⚑ …and the player is TOLD what changed — a state change nobody can see is worse than one that did not happen",
-    /the GM changed: \$\{Object\.keys\(result\.ops\)\.join/.test(app94));
+    /askOpsNote = "\\n\\n" \+ repairNote\(Object\.keys\(result\.ops\), \{ before, after, failures: character\._applyFailures/.test(app94)
+    && /the GM changed: \$\{keys\}/.test(rd("engine/repair_note.js")));
   // ⛔ AND THE DETECTOR WATCHES THIS CHANNEL. It lived only in `applyTurn`, which a refusal never reaches —
   // a refusal emits no ops by definition, so the one path that could have caught it was the one path it could
   // not take. ⚠️ Erik's own screenshot is the proof: "the Repair panel isn't the right tool", "in your next

@@ -48,7 +48,8 @@ import { walkingDays, worldPosForGenerated, autoMapPositions, coordForGenerated,
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal, domainOf, domainOfTradition, sectOf } from "./engine/traditions.js";
 import { sheetFor as personSheetFor, battleSkillsFor } from "./engine/npcsheet.js";  // the person-keyed sheet
-import { companyPlaces, delegationCapacity } from "./engine/ladder.js";   // SNG-390: how many places rapport has earned · R25b: how many can run things in your name
+import { companyPlaces, delegationCapacity, ladderRungLine, ladderRoll } from "./engine/ladder.js";
+import { repairFingerprint, repairNote } from "./engine/repair_note.js";   // ✅ ERIK 2026-09-11: the ask channel's repair note measures the state, not four counts   // SNG-390: how many places rapport has earned · R25b: how many can run things in your name
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs, companionCodexUpdate, noteCompanionWitnessed, companionStageThresholds, shareAtOrAbove, syncStageTaughtRanks, stageTaughtBy } from "./engine/companions.js";
 // SNG-309: what happens when the player goes down — and the SAME death ladder every figure is on.
 // ⛔ 2026-09-05 (Erik: "I want our test harnesses to simulate the real game"): THE ONE PATH a skill battle takes — the menu, the
@@ -128,7 +129,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.454";
+const APP_VERSION = "1.9.455";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -221,6 +222,7 @@ function entityHover(spec) {
         owned: !!owned, level: owned?.level, maxRank: CONTENT.rules?.leveling?.maxAbilityRank ?? 3,
         effCost: (() => { try { return effectiveEnergyCost(ab, character, CONTENT.rules); } catch { return ab.energyCost ?? null; } })(),
         baseCost: ab.energyCost ?? null, families: familiesOfAbility(ab, FN_INDEX),
+        chanceHere: craftChanceHere(ab, owned),   // ✅ ERIK 2026-09-11: the base chance here, ground included
         rankText: rp?.text, ripe: !!rp?.ripe || aspirationRipe(character, id, CONTENT.rules),
         ladder: (ab.tree || []).map(t => ({ rank: t.rank, name: t.name, grants: t.grants, cannot: t.cannot })) // CCODE-29: how it evolves rank-by-rank
       });
@@ -7596,6 +7598,44 @@ function substratePenaltyFor(choice, location) {
   return usesAbility ? (substrateForAction(choice, location)?.chancePenalty || 0) : 0;
 }
 
+
+/** ✅ ERIK 2026-09-11: "the bonuses for raising abilities needs to show up in the pop-up text for each." What the NEXT rank of a
+ *  sub-attribute buys, from the authored ladder the engine pays from (`ladderRungLine` / `ladderRoll` — built for this readout and
+ *  read by nothing until now), so the tip and the arithmetic cannot disagree. Empty when no ladder is authored. */
+function subRaiseTip(s) {
+  const ladder = CONTENT.rules?.subAttributeLadder;
+  if (!ladder) return "";
+  const now = Math.max(0, Number(character.subAttributes?.[s] ?? 0)), next = now + 1;
+  const rung = ladderRungLine(ladder, s, next);
+  const roll = Math.round((Number(ladderRoll(ladder, next)) || 0) - (Number(ladderRoll(ladder, now)) || 0));
+  const bits = [];
+  if (roll) bits.push(`+${roll} to rolls on ${s}`);
+  if (rung && Number(rung.perRank) > 0) bits.push(`+${rung.perRank} ${rung.unit || rung.governs || ""}`.trim());
+  const line = rung?.line ? ` — ${rung.line}` : "";
+  return bits.length ? `Raise to ${next}: ${bits.join(" · ")}${line}` : "";
+}
+
+
+/** ✅ ERIK 2026-09-11: "I don't see the base chance skill success (per skill) based on ground yet." The chance this craft's first
+ *  verb lands HERE, unopposed, through the same stack the resolve path pays — `successChance` with the character's aptitudes, gear,
+ *  companions and affinity, and the ground's own penalty via `substrateForAction` (SNG-116: a preview that omits a term the roll pays
+ *  is a preview that lies). Null with no place to stand. Returns { chance, ground, off }. */
+function craftChanceHere(ab, owned) {
+  const location = CONTENT.locations?.[character.currentLocationId];
+  if (!ab || !location) return null;
+  const fn = (ab.functions || [])[0] || null;
+  const sub = fn && SUBS.includes(ab.subAttributeByFunction?.[fn]) ? ab.subAttributeByFunction[fn] : null;
+  const action = { attribute: ab.attribute || "practical", subAttribute: sub, abilityId: ab.id, abilityLevel: owned?.level ?? 1, label: ab.name || ab.id, tags: [], axes: {} };
+  const rules = CONTENT.rules;
+  const mods = aptitudeMods(character, rules.playerAptitudes);
+  const equip = equipmentBonus(character, action.tags, rules);
+  const comp = companionBonus(activeCompanions(character, CONTENT.companions), action.tags, rules, character);
+  const aff = affinityFor(action, location);
+  const ground = substrateForAction({ abilityId: ab.id }, location);
+  const chance = successChance({ character, action, location, rules, aptitudeMods: mods, equipmentBonus: (equip?.bonus || 0) + (comp?.bonus || 0) + (aff?.bonus || 0), substratePenalty: ground?.chancePenalty || 0 });
+  return { chance: Math.round(Number(chance) || 0), ground: Number(ground?.chancePenalty) || 0, off: !!ground?.off };
+}
+
 /** ⛔ AEVI's COPY_ground_tag_fight_menu — the chip a craft row carries: `groundTag`'s words, a tone class, her tooltip. Empty
  *  when the ground is full or the move has no source — silence is the good state. */
 function sbGroundChip(g) {
@@ -8878,15 +8918,14 @@ async function onAsk(text) {
       // ⛔ MEASURE THE CHANGE, DO NOT ANNOUNCE THE CALL. The first version said "the GM changed: holdingOps"
       // whenever `applyTurn` did not throw — so a dropped op read exactly like an applied one, and Erik was
       // told his post was recorded when it was not. ⚠️ That is the refusal failure wearing the opposite coat.
-      const before = JSON.stringify({ h: (character.holdings || []).length, q: (character.quests || []).length,
-        n: Object.keys(character.npcRegistry || {}).length, f: (character.facts || []).length });
+      // ✅ ERIK 2026-09-11: "the GM still reports not being able to do things... although they seem to be able to." Four COUNTS
+      // could not see a changed RECORD (Logana's charge corrected: same number of NPCs), so an applied repair read "NOTHING MOVED".
+      // The ruler is the state itself, plus the isolated failures applyStep records — `repairNote` says which of three true things.
+      const before = repairFingerprint(character);
       applyTurn({ ...result.ops, narration: "" }, null, null);
       saveCharacter(character);
-      const after = JSON.stringify({ h: (character.holdings || []).length, q: (character.quests || []).length,
-        n: Object.keys(character.npcRegistry || {}).length, f: (character.facts || []).length });
-      askOpsNote = before === after
-        ? `\n\n— *the GM tried to change ${Object.keys(result.ops).join(", ")} and NOTHING MOVED. Say so and I will look.*`
-        : `\n\n— *the GM changed: ${Object.keys(result.ops).join(", ")}*`;
+      const after = repairFingerprint(character);
+      askOpsNote = "\n\n" + repairNote(Object.keys(result.ops), { before, after, failures: character._applyFailures || [] });
     } catch (err) {
       console.error("[ask] repair ops failed:", err);
       askOpsNote = "\n\n— *the GM tried to change something and it did not take; nothing was written.*";
@@ -11534,7 +11573,7 @@ function renderCharacterScreen() {
         <div class="cs-attr"><span class="cs-attr-name" title="${esc(SUB_DESC[sub])}">${sub}</span>
           <div class="cs-bar"><div class="cs-fill" style="width:${Math.min(100, v / cap * 100)}%"></div><div class="cs-knee" style="left:${soft / cap * 100}%"></div></div>
           <span class="cs-val">${v}</span>
-          ${character.pendingSubPoints > 0 && v < cap ? `<button class="grow-btn" data-grow2="${sub}">+</button>` : ""}
+          ${character.pendingSubPoints > 0 && v < cap ? `<button class="grow-btn" data-grow2="${sub}" title="${esc(subRaiseTip(sub) || "Raise " + sub)}">+</button>` : ""}
         </div>`; }).join("")}</div>
     ${character.domains?.primary ? (() => {
       // SNG-101/102: the great-circle domains you hold — station, ceiling, promotions, foreclosures.
@@ -14757,7 +14796,7 @@ function renderPlay(turn, opts = {}) {
     <div class="vital-row">Energy ${infoDot("energy.no_regen")}<span class="vital-num" data-vital="energy" tabindex="0" role="button" aria-label="Energy ${character.energy} of ${character.maxEnergy}. Tap for detail.">${character.energy} / ${character.maxEnergy}</span></div>
     <div class="bar energy"><div style="width:${pct(character.energy, character.maxEnergy)}%"></div></div>
     <details class="sidebar-sec" data-sec="attributes"${sectionOpen("attributes", false) ? " open" : ""}><summary><span class="sec-title">Attributes</span>${character.pendingSubPoints > 0 ? ` <span class="grow-badge">+${character.pendingSubPoints} to place</span>` : ""}</summary><div class="sec-body"><div class="attr-grid">
-      ${SUBS.map(s => `<div style="text-transform:capitalize" title="${esc(SUB_DESC[s])} (${SUB_OF[s]})">${s}</div><div>${(character.subAttributes?.[s] ?? 0) > 6 ? (character.subAttributes[s] + " ●●●●●●⁺") : "●".repeat(character.subAttributes?.[s] ?? 0) + "○".repeat(Math.max(0, 4 - (character.subAttributes?.[s] ?? 0)))}${character.pendingSubPoints > 0 && (character.subAttributes?.[s] ?? 0) < (CONTENT.rules.leveling?.subAttributeCap ?? 6) ? ` <button class="grow-btn" data-grow="${s}">+</button>` : ""}</div>`).join("")}
+      ${SUBS.map(s => `<div style="text-transform:capitalize" title="${esc(SUB_DESC[s])} (${SUB_OF[s]})${subRaiseTip(s) ? ". " + esc(subRaiseTip(s)) : ""}">${s}</div><div>${(character.subAttributes?.[s] ?? 0) > 6 ? (character.subAttributes[s] + " ●●●●●●⁺") : "●".repeat(character.subAttributes?.[s] ?? 0) + "○".repeat(Math.max(0, 4 - (character.subAttributes?.[s] ?? 0)))}${character.pendingSubPoints > 0 && (character.subAttributes?.[s] ?? 0) < (CONTENT.rules.leveling?.subAttributeCap ?? 6) ? ` <button class="grow-btn" data-grow="${s}" title="${esc(subRaiseTip(s) || "Raise " + s)}">+</button>` : ""}</div>`).join("")}
     </div></div></details>
     <details class="sidebar-sec" data-sec="abilities"${sectionOpen("abilities", true) ? " open" : ""}><summary><span class="sec-title">Abilities</span>${character.skillPoints > 0 ? ` <span class="grow-badge">${character.skillPoints} skill pt</span>` : ""}</summary><div class="sec-body">
       ${canLevelUp(character) ? `<button class="opt" id="sidebar-levelup" title="Spend your skill points" style="padding:2px 8px; margin-bottom:6px; display:block">⬆ Level Up</button>` : ""}
@@ -14810,7 +14849,7 @@ function renderPlay(turn, opts = {}) {
           return `<div class="ability${on ? " boosted" : ""}" title="${esc(playerText(rank ? "CAN: " + rank.grants + " | CANNOT: " + rank.cannot : ab?.description || ""))}">
             <button class="craft-boost${on ? " on" : ""}" data-boost="${esc(a.abilityId)}" title="${on ? "Boosted — the GM leans toward suggesting this when it fits (tap to clear). A nudge, never a force." : "Boost — nudge the GM to surface this craft in your options when it fits. Never forces it, never changes a roll."}">✦</button>
             <span class="name entity-hover" data-entity="skill:${esc(a.abilityId)}">${esc(ab?.name || a.abilityId)}</span> <span class="tier-badge" title="Tier ${tierOf(abilityTier(ab))}">${tierOf(abilityTier(ab))}</span> rank ${a.level}${rank ? ` — <em>${esc(rank.name)}${rank.forked ? " ⑂" : ""}</em>` : ""}
-            <span class="cost">(${effectiveEnergyCost(ab, character, CONTENT.rules)} energy${effectiveEnergyCost(ab, character, CONTENT.rules) < ab.energyCost ? `, was ${ab.energyCost}` : ""})</span>
+            <span class="cost">(${effectiveEnergyCost(ab, character, CONTENT.rules)} energy${effectiveEnergyCost(ab, character, CONTENT.rules) < ab.energyCost ? `, was ${ab.energyCost}` : ""})</span>${(() => { const ch = craftChanceHere(ab, a); return ch ? ` <span class="cost craft-chance" title="Base chance this craft lands here, unopposed${ch.ground ? ` — the ground ${ch.ground > 0 ? "costs it " : "lends it +"}${Math.abs(ch.ground)}` : ""}">${ch.off ? "will not answer here" : ch.chance + "% here"}</span>` : ""; })()}
             ${functionChips(ab)}${braidLine}
             <div class="hint ${p.ripe ? "practiced" : ""}">${esc(p.text)}</div>${trainLine(a, ab)}</div>`;
         };

@@ -83,3 +83,12 @@ its generator, `certify_counts.mjs`, not by hand.
 | 1 | Erik | the ten features: which three or more are wired for 2.0.0, and which are cut (with their gates)? |
 | 2 | Aevi | the B2 readings above — confirm or correct before I build the five gates |
 | 3 | CCode | B6a next, then B3 (the schema gate, both directions), then B4 (`verification_ledger`) |
+
+---
+
+## Addendum, 2026-09-12 — your one constant, taken
+
+`HANDOFF_ccode_SNG-537_one_constant`: the ratified settlement census is 98 (`tests/content_ci.mjs`), with the provenance line
+the old number carried — Erik ratified Keelmouth and Firstsight, so the gate moved by ratification, not by mirroring what you
+authored. The verification ledger's two claims on that gate moved with it, so §272's agreement check stays as strict as it was.
+You were right to stop at the line; it is what keeps the gate a ratification.

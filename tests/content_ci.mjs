@@ -872,8 +872,11 @@ for (const pack of PACKS) {
     // 65 topology-derived "sites" to settlement (they were satellites, not rooms) and SNG-396 repopulated
     // the tier with 14 places PLAY authored — real interiors with fiction-derived parents. 25/28/65
     // became 25/96/14, and every number here is a ratified decision rather than a measurement of drift.
-    check("SNG-392/398/396: the hierarchy matches the RATIFIED census — 25 regions, 96 settlements, 14 authored-in-play sites",
-      tiers.region === 25 && tiers.settlement === 96 && tiers.site === 14, JSON.stringify(tiers));
+    // SNG-537 (Erik 2026-09-11): 96 -> 98. Keelmouth and Firstsight minted onto the Outrun so a player walking to a port that
+    // does not exist arrives at one that does. Ratified, not drift — Aevi authored the places and left this line to me so the
+    // gate stays a ratification rather than a mirror of what was just authored (HANDOFF_ccode_SNG-537_one_constant).
+    check("SNG-392/398/396: the hierarchy matches the RATIFIED census — 25 regions, 98 settlements, 14 authored-in-play sites",
+      tiers.region === 25 && tiers.settlement === 98 && tiers.site === 14, JSON.stringify(tiers));
     const ids = new Set(allLocs.map((l) => l.id));
     const badParent = allLocs.filter((l) => l.parentId !== null && !ids.has(l.parentId));
     check("SNG-392: every parentId resolves and every site HAS a parent",

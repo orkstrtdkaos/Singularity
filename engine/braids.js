@@ -15,7 +15,7 @@
 
 import { ringDistance } from "./traditions.js";   // SNG-268: how FAR APART the parents are, not just how expensive
 import { discoveryKey } from "./progression.js"; // the SAME co-activation key the ledger is written with
-import { smartClamp } from "./namematch.js";
+import { smartClamp, playerText } from "./namematch.js";   // ✅ 2026-09-11: a parent's prose reaches a braid without its author's glyphs
 import { deriveMechanic } from "./craftmechanics.js";  // SNG-263 §9: a braid inherits its parents' specificity
 
 export const BRAID_RIPEN_AT = 5; // co-activations before a pairing is EARNED as a braid — a clearly deliberate
@@ -37,6 +37,33 @@ export const BRAID_RIPEN_AT = 5; // co-activations before a pairing is EARNED as
 // arbitrary where content never exercises it. If a braid ever pairs them, it wants Erik, not a sort.
 const HARM_ORDER = ["none", "damaging", "incapacitating", "lethal"];
 const ROMAN = ["I", "II", "III"];
+/** ✅ ERIK 2026-09-11: "make the skills better than the parents and detailed on rank up so that it matches the pattern of other
+ *  skills." Rank r of a braid, built from what BOTH parents reach at rank r — their own rank names, grants and limits, stripped of
+ *  authoring glyphs — plus the emergent function. Better than either parent by construction: it carries both. Pure. */
+export function braidRankFromParents(sources, r, { name, srcNames, emergent = null, functions = [] } = {}) {
+  const names = srcNames || sources.map(s => s.name || s.id);
+  const at = sources.map(s => (Array.isArray(s.tree) ? s.tree.find(t => Number(t?.rank) === r) : null) || null);
+  const clean = (v) => playerText(v || "").replace(/\s+/g, " ").trim();
+  const parts = at.map((t, i) => clean(t?.grants) ? `${names[i]} — ${smartClamp(clean(t.grants), 100)}` : null).filter(Boolean);
+  const emergentLine = emergent ? (r === 1 ? ` — and in the braiding, a thing neither reached alone (${emergent})` : `, and the thing neither reached alone (${emergent}) comes more surely`) : "";
+  const grants = parts.length
+    ? (r === 1 ? `${names[0]} and ${names[1]} run as one craft${emergentLine}: ${parts.join("; ")}.`
+               : `At this depth the braid carries what each parent reaches here${emergentLine}: ${parts.join("; ")}.`)
+    : (r === 1 ? `${names[0]} and ${names[1]} run as one craft${emergentLine}: the move only their joining makes.`
+               : `The braid deepens${emergentLine}; the two crafts answer together more surely.`);
+  const cannots = at.map(t => clean(t?.cannot)).filter(Boolean);
+  const cannot = cannots.length ? cannots.map(c => smartClamp(c, 75)).join(" · ") : "What neither parent could do apart.";
+  const rankName = at.every(t => t?.name) ? `${clean(at[0].name)} · ${clean(at[1].name)}` : `${name} ${ROMAN[r - 1] || r}`;
+  return { rank: r, name: smartClamp(rankName, 60), grants: smartClamp(grants, 260), cannot: smartClamp(cannot, 160), functions };
+}
+
+/** The whole tree from the parents, `maxRank` deep — what the scaffold builds and what the reconcile repair rebuilds. Pure. */
+export function braidTreeFor(sources, { name, emergent = null, functions = [], maxRank = 3 } = {}) {
+  const srcNames = sources.map(s => s.name || s.id);
+  const out = [];
+  for (let r = 1; r <= Math.max(1, Math.min(3, maxRank)); r++) out.push(braidRankFromParents(sources, r, { name, srcNames, emergent, functions }));
+  return out;
+}
 
 /** SNG-196: the pairings a character has EARNED the right to braid — co-activated at least `threshold`
  *  times, both crafts still held, and not already braided. GENERATIVE: an authored recipe is NOT required.
@@ -224,18 +251,21 @@ export function buildBraidDef(character, components, catalog = {}, opts = {}) {
   const namedByPlayer = !!opts.name;
   const name = smartClamp(String(opts.name || authored.name || `${srcNames[0]} × ${srcNames[1]}`), 60);
   const id = "braid_" + braidKey(components).replace(/[^a-z0-9]+/gi, "_");
-  // the tree: use the model's ranks when present + valid, else scaffold `maxRank` deep.
-  let tree = Array.isArray(authored.tree) ? authored.tree.filter(n => n && n.name).slice(0, maxRank).map((n, i) => ({
-    rank: i + 1, name: smartClamp(String(n.name), 60), grants: smartClamp(String(n.grants || "The braid runs as one craft."), 200),
-    cannot: smartClamp(String(n.cannot || "What neither parent could do alone."), 160), functions
-  })) : [];
-  while (tree.length < maxRank) {
-    const r = tree.length + 1;
-    tree.push({
-      rank: r, name: `${name} ${ROMAN[r - 1] || r}`,
-      grants: r === 1 ? `${srcNames[0]} and ${srcNames[1]} run as one craft${emergent ? ` — and in the braiding, a thing neither reached alone (${emergent})` : ""}: the move only their joining makes.` : `The braid deepens; the two crafts answer together more surely.`,
-      cannot: "What neither parent could do apart.", functions
-    });
+  // ✅ ERIK 2026-09-11: rank r carries what BOTH parents reach at rank r (`braidRankFromParents`) — the old scaffold said "the braid
+  // deepens" and named nothing. A model-authored rank stands unless it is template-thin: shorter than 40 characters, or the same
+  // words as the rank below it. Then the parent-derived rank replaces it.
+  const authoredRanks = Array.isArray(authored.tree) ? authored.tree.filter(n => n && n.name).slice(0, maxRank) : [];
+  const tree = [];
+  for (let r = 1; r <= maxRank; r++) {
+    const fromParents = braidRankFromParents(sources, r, { name, srcNames, emergent, functions });
+    const a = authoredRanks[r - 1], prev = tree[r - 2];
+    const words = playerText(a?.grants || "");
+    // thin: absent, the same words as the rank below — or the OLD scaffold's own sentences, which Silas's r2 was (62 characters
+    // of nothing: "The braid deepens; the two crafts answer together more surely"). A template is thin at any length.
+    const template = /^The braid deepens\b/.test(words) || /the move only their joining makes\.?$/.test(words) || /^The braid runs as one craft\.?$/.test(words);
+    const thin = !a || template || (prev && words === prev.grants);   // a short authored rank is still authored (smoke 196)
+    tree.push(thin ? fromParents : { rank: r, name: smartClamp(String(a.name), 60), grants: smartClamp(words, 260),
+      cannot: smartClamp(playerText(a.cannot || "") || fromParents.cannot, 160), functions });
   }
   return {
     id, name, tradition, powerSystem: tradition,

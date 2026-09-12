@@ -141,7 +141,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "1.9.476";
+const APP_VERSION = "1.9.477";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -10471,7 +10471,9 @@ function wireSkillSelectionActions(rerender) {
     const id = b.dataset.skilllearn;
     const free = aspirationRipe(character, id, CONTENT.rules);
     const r = learnAbility(character, id, fullCatalog(), CONTENT.rules, { free, attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, traditionIndex: CONTENT.traditionIndex });
-    if (r.ok) { if (free) dropAspiration(character, id); saveCharacter(character); rerender(id, `Learned ${fullCatalog()[id]?.name}${free ? " — no point spent" : ""}.`); }
+    // ⛔ `dropAspiration` IS GONE FROM HERE: `learnAbility` now settles the aspiration itself — transfer the practice, then clear
+    // it — and dropping afterwards was a no-op that still read as "discard the progress". The receipt says what carried over.
+    if (r.ok) { saveCharacter(character); rerender(id, `Learned ${fullCatalog()[id]?.name}${free ? " — no point spent" : ""}.${r.settled?.moved ? ` ${r.settled.moved} practice${r.settled.moved === 1 ? "" : "s"} carried over — ${r.settled.uses} toward its next rank.` : ""}`); }
     else rerender(id, r.why);
   };
   // ability-arch v2: no data-skillrank handler — ranks are no longer bought here; depth is earned
@@ -11138,7 +11140,8 @@ function renderLevelUp(status = "") {
     const id = b.dataset.lvllearn;
     const free = aspirationRipe(character, id, rules);
     const r = learnAbility(character, id, fullCatalog(), rules, { free, attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, traditionIndex: CONTENT.traditionIndex });
-    if (r.ok) { if (free) dropAspiration(character, id); saveCharacter(character); renderLevelUp(`Learned ${fullCatalog()[id]?.name}${free ? " — no point spent" : ""}.`); }
+    // ⛔ SAME HERE: the settle belongs to `learnAbility`, and the level-up receipt now says what the practice bought.
+    if (r.ok) { saveCharacter(character); renderLevelUp(`Learned ${fullCatalog()[id]?.name}${free ? " — no point spent" : ""}.${r.settled?.moved ? ` ${r.settled.moved} practice${r.settled.moved === 1 ? "" : "s"} carried over — ${r.settled.uses} toward its next rank.` : ""}`); }
     else renderLevelUp(r.why);
   }; };
   bindLearn();
@@ -11948,7 +11951,13 @@ function renderCharacterScreen() {
         return `<div class="cs-attr"><span class="cs-attr-name trait-tap" style="width:140px" data-trait="aspiration:${esc(a.abilityId)}" title="tap: lore + mechanics">${esc(ab?.name || a.abilityId)}</span>
           <div class="cs-bar"><div class="cs-fill" style="width:${Math.min(100, (a.progress || 0) / need * 100)}%"></div></div>
           <span class="cs-val">${Math.min(a.progress || 0, need)}/${need}</span>
-          ${ripe && character.level >= (learnLevelReq(ab) ?? 99) ? `<button class="grow-btn practiced" data-asplearn="${esc(a.abilityId)}" title="Fully practiced — learn free">✓</button>` : ""}
+          ${/* ⛔ ERIK 2026-09-12: "at this point I can't claim it, because i already have it." The ✓ appeared on a craft he already
+                owned and could do nothing — `learnAbility` refuses a duplicate. Reconcile step 56 settles the ones already stranded
+                and `learnAbility` settles every new acquisition, so this state should not arise again; the offer is guarded anyway,
+                because a button that cannot fire is worse than no button. */""}
+          ${(character.abilities || []).some(x => x.abilityId === a.abilityId)
+            ? `<span class="hint practiced" title="You already have this — its practice has been carried over to its uses.">already yours</span>`
+            : ripe && character.level >= (learnLevelReq(ab) ?? 99) ? `<button class="grow-btn practiced" data-asplearn="${esc(a.abilityId)}" title="Fully practiced — learn free">✓</button>` : ""}
           <button class="grow-btn" data-aspdrop="${esc(a.abilityId)}" title="Drop aspiration" style="background:var(--panel2); color:var(--ink-dim)">×</button>
         </div>`; }).join("") || "<div class='insight'>none declared</div>"}
       ${(character.practice?.aspirations || []).length < (rules.practice?.maxAspirations ?? 2) ? `
@@ -12012,7 +12021,9 @@ function renderCharacterScreen() {
   for (const btn of app.querySelectorAll("[data-asplearn]")) btn.onclick = () => {
     const id = btn.dataset.asplearn;
     const r = learnAbility(character, id, fullCatalog(), rules, { free: true, attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, traditionIndex: CONTENT.traditionIndex });
-    if (r.ok) { dropAspiration(character, id); saveCharacter(character); renderCharacterScreen(); } else alert(r.why);
+    // ⛔ `dropAspiration` DELETED the progress here, so practising a craft into your hands threw that practice away at the
+    // moment of learning it. `learnAbility` now settles the aspiration itself — transfer, then clear — and says what moved.
+    if (r.ok) { saveCharacter(character); if (r.settled?.moved) alert(`${r.settled.moved} practice${r.settled.moved === 1 ? "" : "s"} carried over — ${r.settled.uses} use${r.settled.uses === 1 ? "" : "s"} toward the next rank${r.settled.rankReady ? ", which is enough to rank it" : r.settled.need ? ` (${r.settled.need} needed)` : ""}.`); renderCharacterScreen(); } else alert(r.why);
   };
   for (const btn of app.querySelectorAll("[data-claimcombo]")) btn.onclick = () => {
     const tpl = validEmergenceId(character, CONTENT.emergence, rules, btn.dataset.claimcombo);

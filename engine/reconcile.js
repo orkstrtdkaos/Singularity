@@ -23,6 +23,7 @@ import { mergeCodexTopics, ensureCodex, applyCodexUpdates, foldTopicsByIdPrefix 
 import { mergeRecovery, mergeReceiptLine } from "./recovery.js";   // step 41: the Settings door's merge, run where every copy passes
 import { SNAPSHOTS } from "./recovery_snapshots.js";              // step 41: the overwritten branch, as a diff
 import { dedupeQuests, normalizeProse, creditQuestGiver } from "./quests.js";   // ⛔ step 55: a quest its giver was never credited for
+import { settleAspiration } from "./progression.js";   // ⛔ step 56: an aspiration for a craft already in hand   // ⛔ step 55: a quest its giver was never credited for
 import { dedupeInventory } from "./inventory.js";
 import { inferDomains } from "./traditions.js";
 import { fallbackPersonalArc } from "./personalArc.js";
@@ -334,6 +335,30 @@ export const CHARACTER_STEPS = [
         }
       }
       return notes.length ? { notes } : {};
+    }
+  },
+  {
+    version: 56, id: "aspirations-already-in-hand", playerFacing: true,
+    // ✅ ERIK 2026-09-12: "Hunter's strike is 10/10 but I already bought it at some point... at that point it should have
+    // transferred all my practice times to uses and cleared my aspiration. at this point I can't claim it, because i already have
+    // it and I don't want to lose the 10 practices... those should be enough to rank it to 2."
+    // ⛔ NOTHING EVER CLEARED AN ASPIRATION ON ACQUISITION, so a craft bought by any other road kept a finished aspiration for
+    // ever — holding one of two slots and showing a ✓ that `learnAbility` would refuse as a duplicate. `settleAspiration` closes
+    // it going forward; this pays the ones already stranded. ⚠️ THE PRACTICE IS ADDED TO THE USES, never assigned over them.
+    apply: (c) => {
+      const list = Array.isArray(c?.practice?.aspirations) ? c.practice.aspirations : [];
+      if (!list.length) return {};
+      const owned = new Set((c.abilities || []).map(a => a && a.abilityId).filter(Boolean));
+      const stranded = list.filter(a => a && owned.has(a.abilityId));
+      if (!stranded.length) return {};
+      const moved = [];
+      for (const a of stranded) {
+        const r = settleAspiration(c, a.abilityId, null);
+        if (r) moved.push({ id: a.abilityId, ...r });
+      }
+      if (!moved.length) return {};
+      const say = moved.map(m => `${m.id.replace(/_/g, " ")} (${m.moved} carried over, ${m.uses} toward its next rank)`).join("; ");
+      return { notes: [`Practice you had already spent is where it belongs: ${say}. An aspiration for something already in your hands was holding a slot and offering nothing.`] };
     }
   },
   {

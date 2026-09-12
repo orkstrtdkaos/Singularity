@@ -5,6 +5,7 @@
 // recipe/branch templates — the engine mints, the model only offers words.
 
 import { discoveryKey, knownDiscovery, recordDiscovery } from "./progression.js";
+export { settleAspiration } from "./progression.js";   // ⛔ acquiring a craft you aspired to TRANSFERS the practice and clears the aspiration; it lives there because this module imports that one
 import { smartClamp } from "./namematch.js"; // SNG-152
 
 export function ensurePractice(character) {

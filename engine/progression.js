@@ -836,7 +836,40 @@ export function learnAbility(character, abilityId, catalog, rules, opts = {}) {
   if (!check.ok) return check;
   character.abilities.push({ abilityId, level: 1 });
   if (!opts.free) character.skillPoints = (character.skillPoints || 0) - check.cost;
-  return { ok: true, free: check.free, cost: check.cost, band: check.band };
+  const settled = settleAspiration(character, abilityId, rules);
+  return { ok: true, free: check.free, cost: check.cost, band: check.band, settled };
+}
+
+/** ⛔ ERIK 2026-09-12: "Hunter's strike is 10/10 but I already bought it at some point… at that point it should have transferred
+ *  all my practice times to uses and cleared my aspiration. at this point I can't claim it, because i already have it and I don't
+ *  want to lose the 10 practices… those should be enough to rank it to 2."
+ *
+ *  ⛔ TWO HALVES OF ONE HOLE, AND HE FOUND BOTH. Nothing cleared an aspiration when the craft was acquired by any other road — so
+ *  a bought craft kept a finished aspiration for ever, holding one of his two slots and offering a ✓ that could not fire. And the
+ *  ripe-claim path called `dropAspiration`, which DELETES the progress: practising a craft into existence threw that practice away
+ *  at the moment of learning it, so a craft earned by practice always began at zero uses.
+ *
+ *  ⛑ THE PRACTICE TRANSFERS, because it is the same act counted twice. `aspirationRipe` is 10 and rank 2 wants 8 uses, so a craft
+ *  practised into your hands arrives ready to rank — which is what he expects and what the authored numbers already say. ⚠️ ADDED,
+ *  never assigned: a craft you had already used keeps those uses as well.
+ *
+ *  ⚠️ IT LIVES HERE AND NOT IN `practice.js` because that module imports THIS one (`discoveryKey`) — the same circular-import
+ *  reason the `practiceRankReady` mirror at the top of this file exists, and the comment there says so. One implementation, and
+ *  `practice.js` re-exports it so callers find it beside the rest of the aspiration verbs. Returns what moved, or null. */
+export function settleAspiration(character, abilityId, rules = null) {
+  const list = character?.practice?.aspirations;
+  if (!Array.isArray(list)) return null;
+  const asp = list.find(a => a && a.abilityId === abilityId);
+  if (!asp) return null;
+  const moved = Math.max(0, Number(asp.progress) || 0);
+  character.practice.aspirations = list.filter(a => a !== asp);
+  if (moved > 0) {
+    character.practice.uses = character.practice.uses || {};
+    character.practice.uses[abilityId] = (Number(character.practice.uses[abilityId]) || 0) + moved;
+  }
+  const uses = Number(character.practice.uses?.[abilityId]) || 0;
+  const need = Number(rules?.practice?.useRankThreshold?.["2"]) || null;
+  return { abilityId, moved, uses, rankReady: need != null ? uses >= need : null, need };
 }
 
 // ---------- GM-generated abilities (earned in fiction, clamped by engine) ----------
@@ -898,7 +931,9 @@ export function applyNewAbility(character, def, rules) {
   if (character.customAbilities[def.id] || (character.abilities || []).some(a => a.abilityId === def.id)) return { ok: false, why: "already known" };
   character.customAbilities[def.id] = def;
   character.abilities.push({ abilityId: def.id, level: 1 });
-  return { ok: true };
+  // ⛔ THE SAME SETTLE ON THE FICTION'S ROAD: a craft the story earns you is still one you may have been practising toward.
+  const settled = settleAspiration(character, def.id, rules);
+  return { ok: true, settled };
 }
 
 // ---------- novel use & discoveries ----------

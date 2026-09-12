@@ -12311,7 +12311,9 @@ console.log("\n── §191 · the meetings already on the record, the quest its
     && /Millbrook Council/.test(silasLive.npcRegistry["dara-holt"].role),
     `v${silasLive.reconcileVersion} · aldric met ${silasLive.npcRegistry.aldric.met}/completions ${silasLive.npcRegistry.aldric.completions}`);
   check(`§191: ⛔ step 55 RUNS through the runner's version gate, driven on a copy rewound to ${seenBefore}, and says all three things it did`,
-    out191.applied.includes("the-people-who-never-counted") && silas191.reconcileVersion === 55
+    // ⚠️ `>= 55`, NOT `=== 55`: a rewound copy runs every step ABOVE the rewind point, so the version lands on the newest one
+    // that exists — which grows every time a repair is added. Pinning the exact number would make this red on the next step.
+    out191.applied.includes("the-people-who-never-counted") && (silas191.reconcileVersion || 0) >= 55
     && out191.notes.some(n => /meetings already written/.test(n))
     && out191.notes.some(n => /Work you finished for people counts/.test(n))
     && out191.notes.some(n => /Ditch-Mother/.test(n)), out191.applied.join(", "));
@@ -12527,6 +12529,78 @@ console.log("\n── §193 · a name that cannot vanish, four sources with thei
     && Array.isArray(silas193.chronicle) && silas193.chronicle.length > 30);
   check("§193: …and the button that offers the whole chronicle is wired, because a button is only as real as its handler",
     /getElementById\("cs-goto-chronicle"\); if \(g\) g\.onclick = \(\) => renderChronicle\(\)/.test(A193));
+}
+
+/* ══════════ §194 — SNG-548 · THE PRACTICE YOU ALREADY SPENT (Erik 2026-09-12: "Hunter's strike is 10/10 but I already bought it") ══════════ */
+console.log("\n── §194 · acquiring a craft you aspired to carries the practice over and closes the aspiration ──");
+{
+  const PR194 = await import("../engine/progression.js");
+  const PC194 = await import("../engine/practice.js");
+  const RC194 = await import("../engine/reconcile.js");
+  const { loadContentHeadless: lch194 } = await import("./headless_content.mjs");
+  const C194 = await lch194();
+  const need2 = Number(C194.rules?.practice?.useRankThreshold?.["2"]);
+  const ripeAt = Number(C194.rules?.practice?.aspirationRipe);
+
+  // ⛑ THE TWO AUTHORED NUMBERS ALREADY AGREE WITH WHAT HE EXPECTS, which is why the transfer is the fix and not a new dial:
+  // an aspiration ripens at 10 and rank 2 wants 8 uses, so a craft practised into your hands arrives ready to rank.
+  check(`§194: ⛔ the authored numbers say a ripened aspiration is MORE than a rank — ripe at ${ripeAt}, rank 2 at ${need2} uses`,
+    ripeAt >= need2 && need2 > 0, `ripe ${ripeAt} · rank2 ${need2}`);
+
+  const mk = (progress = 10, uses = 0) => ({ id: "t194", level: 30, abilities: [], skillPoints: 9,
+    practice: { schemaVersion: 1, uses: uses ? { hunters_strike: uses } : {}, coActivations: {}, aspirations: [{ abilityId: "hunters_strike", progress }] },
+    domains: { primary: "marcher" } });
+  const opts194 = { free: true, attributeGates: C194.attributeGates, skillCapacity: C194.skillCapacity, traditionIndex: C194.traditionIndex };
+
+  // ⛔ THE CLAIM PATH USED TO CALL `dropAspiration`, WHICH DELETES THE PROGRESS: practising a craft into existence threw that
+  // practice away at the very moment of learning it, so a craft earned by practice always began at zero uses.
+  const c1 = mk();
+  const r1 = PR194.learnAbility(c1, "hunters_strike", C194.abilities, C194.rules, opts194);
+  check("§194: ⛔ learning a craft you aspired to CARRIES THE PRACTICE OVER and closes the aspiration — it was the same act counted twice",
+    r1.ok === true && r1.settled?.moved === 10 && c1.practice.uses.hunters_strike === 10
+    && c1.practice.aspirations.length === 0 && r1.settled.rankReady === true,
+    JSON.stringify(r1.settled));
+  // ⚠️ ADDED, NEVER ASSIGNED: a craft you had already used keeps those uses too — which is his case exactly (one use, ten practices).
+  const c2 = mk(10, 1);
+  PR194.learnAbility(c2, "hunters_strike", C194.abilities, C194.rules, opts194);
+  check("§194: …and the uses are ADDED to what was already there, never assigned over them",
+    c2.practice.uses.hunters_strike === 11 && PC194.practiceRankReady(c2, "hunters_strike", C194.rules) === true);
+  check("§194: …and a craft nobody aspired to settles nothing and reports nothing, so the ordinary path is untouched",
+    (() => { const c = mk(); c.practice.aspirations = [];
+      const r = PR194.learnAbility(c, "hunters_strike", C194.abilities, C194.rules, opts194);
+      return r.ok === true && r.settled === null && !c.practice.uses.hunters_strike; })());
+  check("§194: …and the fiction's road settles too — a craft the story earns you is still one you may have been practising toward",
+    (() => { const c = mk(); c.customAbilities = {};
+      const r = PR194.applyNewAbility(c, { id: "hunters_strike", name: "Hunter's Strike", tier: 1 }, C194.rules);
+      return r.ok === true && r.settled?.moved === 10 && c.practice.aspirations.length === 0; })());
+  check("§194: ⛑ and `practice.js` re-exports it, so the aspiration verbs are all in one place despite the circular import that keeps it elsewhere",
+    typeof PC194.settleAspiration === "function" && PC194.settleAspiration === PR194.settleAspiration
+    && /export \{ settleAspiration \} from "\.\/progression\.js"/.test(rd("engine/practice.js")));
+
+  /* ---- the one-shot, on a save that already has one stranded ---- */
+  // ⛔ HIS CASE: `hunters_strike` owned at rank 1, one use, and a 10/10 aspiration still holding a slot and offering a ✓ that
+  // `learnAbility` would refuse as a duplicate. ⚠️ Driven on a REWOUND COPY, because the repair is one-shot and lands once.
+  const silas194 = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const rewound = JSON.parse(JSON.stringify(silas194));
+  rewound.reconcileVersion = 55;
+  rewound.practice.uses.hunters_strike = 1;
+  rewound.practice.aspirations = [{ abilityId: "hunters_strike", since: "2026-07-12T16:27:52.479Z", progress: 10 },
+    ...(rewound.practice.aspirations || []).filter(a => a.abilityId !== "hunters_strike")];
+  const out194 = RC194.reconcile(rewound, "character", { content: C194, day: 19 });
+  check("§194: ⛔ step 56 pays the ones already stranded — the practice lands on the uses, the slot comes back, and the note says so",
+    out194.applied.includes("aspirations-already-in-hand")
+    && rewound.practice.uses.hunters_strike === 11
+    && !rewound.practice.aspirations.some(a => a.abilityId === "hunters_strike")
+    && rewound.practice.aspirations.length === 1
+    && out194.notes.some(n => /carried over/.test(n)), out194.notes.join(" | ").slice(0, 200));
+  check("§194: …and it leaves an aspiration for a craft you do NOT yet own exactly where it is",
+    rewound.practice.aspirations[0].abilityId === "pattern_sense" && rewound.practice.aspirations[0].progress === 3);
+  check("§194: …and the craft is now rankable, which is the whole of what he asked for: \"those should be enough to rank it to 2\"",
+    PC194.practiceRankReady(rewound, "hunters_strike", C194.rules) === true);
+  // ⛔ AND THE DEAD BUTTON IS GUARDED, because a control that cannot fire is worse than no control.
+  check("§194: ⛔ an aspiration for a craft already in hand never offers a claim it cannot honour",
+    rd("app.js").includes('(character.abilities || []).some(x => x.abilityId === a.abilityId)')
+    && /already yours/.test(rd("app.js")) && !/dropAspiration\(character, id\); saveCharacter/.test(rd("app.js")));
 }
 
 /* ══════════ REPORT ══════════ */

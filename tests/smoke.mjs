@@ -9675,11 +9675,12 @@ await (async () => {
   // Library is the player's book." ⛑ Built stronger than the one line: the GM book's path is read from
   // HER GENERATOR rather than typed here, so renaming it keeps the gate true.
   {
-    const appLib = readFileSync(join(root, "app.js"), "utf8");
+    // SNG-538 §4 (2026-09-12): the index and the matcher live in engine/library.js now — read the index from the module, check the matcher by calling it.
+    const LBx = await import("../engine/library.js");
+    const libSrc = readFileSync(join(root, "engine/library.js"), "utf8");
     const genLib = readFileSync(join(root, "scripts/gm_companion.mjs"), "utf8");
     const gmDoc = (genLib.match(/"(docs\/[A-Z_]+\.md)"/) || [])[1];
-    const idxBlock = appLib.slice(appLib.indexOf("const LIBRARY_INDEX"), appLib.indexOf("const LIB_SKIP"));
-    const libPaths = [...idxBlock.matchAll(/path:\s*"([^"]+)"/g)].map(m => m[1]);
+    const libPaths = LBx.LIBRARY_INDEX.flatMap(c => (c.entries || []).map(e => e.path).filter(Boolean));
     check("LIB: the gate knows which document is the GM's — read from the generator, not typed here",
       !!gmDoc && /GM_BOOK/.test(gmDoc), String(gmDoc));
     check("LIB: ⛔ the GM's book is NEVER in the player's Library",
@@ -9710,8 +9711,9 @@ await (async () => {
     check("LIB: …while the real GM keys still are — the split did not open a leak",
       ["gmHint", "gm_hint", "gmGuidance", "gmMandate", "hiddenTruth", "hooks"].every(stripped));
     // ⛑ AND THE FIX IS IN app.js, not only in this test's copy of the rule.
-    check("LIB: the app's own matcher is the split one — the gm branch is case-SENSITIVE",
-      /const LIB_SECRET_GM = /.test(appLib) && /libSkipKey\(k\) \{ return LIB_SKIP\.test\(k\) \|\| LIB_SECRET_GM/.test(appLib));
+    check("LIB: the engine's own matcher is the split one — the gm branch is case-SENSITIVE, and a `_` key is private first (SNG-538 §4)",
+      /const LIB_SECRET_GM = /.test(libSrc) && /export function libSkipKey\(k\) \{ return \/\^_\/\.test\(k\) \|\| LIB_SKIP\.test\(k\) \|\| LIB_SECRET_GM/.test(libSrc)
+      && LBx.libSkipKey("gmHint") && LBx.libSkipKey("gm_hint") && !LBx.libSkipKey("judgment") && LBx.libSkipKey("_parentsMirrored_20260830") && !LBx.libSkipKey("description"));
   }
 
   // ⛔ ONE PERSON, TWO IDS — the second mint Aevi could not find. Erik met Silas's mother; the world

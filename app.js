@@ -40,6 +40,7 @@ import { ITEM_KINDS, itemKindsIn, itemKindLabel, wieldBonusFor, usableCombatItem
 import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive } from "./engine/earnedpower.js"; // SNG-251 §2c/§4: the earned-power economy (ceiling = f(level, craft rank); ~1 evolution/day)
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp, playerText } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
+import { LIBRARY_INDEX, loreToHtml, libMdToHtml } from "./engine/library.js";   // SNG-538 §4: the Library's index and renderers — pure, gated by §181
 import { groundForDecl, groundTag, substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor, peoplePresentAt } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { sceneImage, itemImage, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
 import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, regionExtent, bendRoad, roadNetwork, clipToFrame } from "./engine/worldglobe.js";
@@ -129,7 +130,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.459";
+const APP_VERSION = "1.9.460";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12638,36 +12639,8 @@ async function enrichPersonalArc(char) {
 // Reaches and the valley primer while EXESA.md, the eight vocations, the archetype pass and the player's
 // guide were all authored and unreachable from inside the game. The world doc is FIRST because a reader
 // who opens the Library wants to know WHERE THEY ARE before being told what they can be.
-const LIBRARY_INDEX = [
-  { cat: "The World", entries: [
-    { id: "exesa", label: "Exesa \u2014 the world, entire", path: "docs/EXESA.md", kind: "md" },
-    { id: "guide", label: "A Player's Guide", path: "docs/PLAYERS_GUIDE.md", kind: "md" },
-  ] },
-  { cat: "What You Can Be", entries: [
-    { id: "vocations", label: "The Eight Vocations", path: "docs/VOCATIONS.md", kind: "md" },
-    { id: "archetypes", label: "Archetypes, domain by domain", path: "docs/ARCHETYPES.md", kind: "md" },
-  ] },
-  { cat: "Peoples & Traditions", entries: [
-    { id: "great_circle", label: "The Great Circle", kind: "circle" },
-    { id: "reaches", label: "The Twelve Reaches", path: "content/packs/valley/lore/the_twelve_reaches.json", kind: "json" },
-  ] },
-  { cat: "Cosmology", entries: [
-    { id: "framing", label: "The Shape of the World", path: "content/packs/valley/lore/world_framing.json", kind: "json" },
-    { id: "coordinate", label: "The Coordinate World & the Center", path: "content/packs/valley/lore/the_coordinate_world.json", kind: "json" },
-    { id: "poles", label: "Pole & Intensity", path: "content/packs/valley/lore/the_pole_intensity_model.json", kind: "json" },
-  ] },
-  { cat: "The Valley", entries: [
-    { id: "primer", label: "A Valley Primer", path: "content/packs/valley/lore/valley_primer.md", kind: "md" },
-    { id: "precursors", label: "The Precursors", path: "content/packs/valley/lore/precursors.md", kind: "md" },
-  ] },
-  { cat: "Powers & Crafts", entries: [
-    { id: "traditions", label: "The Traditions", path: "content/packs/valley/lore/tradition_profiles.json", kind: "json" },
-    { id: "powers", label: "The Power Systems", path: "content/packs/valley/lore/power_systems.md", kind: "md" },
-    { id: "roles", label: "Universal Roles", path: "content/packs/valley/lore/universal_roles.json", kind: "json" },
-    { id: "game", label: "The Game & the Coin", path: "content/packs/valley/lore/the_game_and_coin.json", kind: "json" },
-    { id: "arcs", label: "Greater Arcs", path: "content/packs/valley/lore/greater_arcs.json", kind: "json" },
-  ] },
-];
+// ✅ SNG-538 §4: LIBRARY_INDEX and the renderers (loreToHtml, libMdToHtml, LIB_SKIP…) live in engine/library.js now — every string passes
+// playerText and a `_`-prefixed key is private. The fetch, its cache and the great circle stay here (they need the page).
 
 const _libCache = {};
 async function libFetch(path, kind) {
@@ -12675,96 +12648,6 @@ async function libFetch(path, kind) {
   try { const res = await fetch(path); _libCache[path] = res.ok ? (kind === "md" ? await res.text() : await res.json()) : null; }
   catch { _libCache[path] = null; }
   return _libCache[path];
-}
-
-// GM-only / meta keys never shown to the player.
-const LIB_SKIP = /^(schemaVersion|id|kind|note|designNote|buildPlan|buildNeeds.*|owed|migration|status|version|packId)$/i;
-// ⛔ SPLIT, AND THE `i` FLAG IS THE REASON. `gm[_A-Z]` was written to catch camelCase `gmHint` and
-// snake `gm_hint` — and under /i the `[A-Z]` also matches lowercase, so it matched the letters "gme"
-// INSIDE ORDINARY WORDS. ⚠️ MEASURED: judgment, augment, fragment, segment and pigment were all being
-// stripped from the player's Library, and `judgment` is a real field in `tradition_profiles.json`, which
-// the Library serves — so a tradition's judgment never reached a reader.
-// ⛑ The gm branch is now CASE-SENSITIVE (its whole point was the capital); everything else keeps /i.
-const LIB_SECRET_GM = /(^|[^a-zA-Z])gm(_|[A-Z])/;
-// ⛔ AND THREE NAMED OUTRIGHT, because no PATTERN catches them and the accident above was doing it.
-// `whatHealingMustDo`, `segments` and `fragments` are GM material — `scripts/gm_companion.mjs` collects all
-// three into the GM's book — and only `segments`/`fragments` were ever hidden here, by matching the letters
-// "gme". ⚠️ `whatHealingMustDo` was never hidden at all. ⛑ A smoke gate now holds the two lists together:
-// every key the GM book COLLECTS must be a key the Library STRIPS, so this can never drift again.
-const LIB_SECRET_NAMED = /^(whatHealingMustDo|segments|fragments)$/;
-const LIB_SECRET = /(gmeyes|eyes.?only|secret|hidden|hook|mandate|internal|_pat|token|guidance)/i;
-function libSkipKey(k) { return LIB_SKIP.test(k) || LIB_SECRET_GM.test(k) || LIB_SECRET_NAMED.test(k) || LIB_SECRET.test(k); }
-function libPretty(k) { return String(k).replace(/[_-]+/g, " ").replace(/([a-z])([A-Z])/g, "$1 $2").replace(/\b\w/g, c => c.toUpperCase()); }
-
-/** Generic lore → readable HTML. Walks objects/arrays into headings + prose; filters GM fields. */
-function loreToHtml(value, depth = 0) {
-  if (value == null) return "";
-  if (typeof value === "string") return `<p class="lore-p">${esc(value)}</p>`;
-  if (typeof value === "number" || typeof value === "boolean") return `<p class="lore-p">${esc(String(value))}</p>`;
-  if (Array.isArray(value)) {
-    if (!value.length) return "";
-    if (value.every(v => typeof v === "string")) return `<ul class="lore-list">${value.map(v => `<li>${esc(v)}</li>`).join("")}</ul>`;
-    return value.map(v => {
-      if (v && typeof v === "object") {
-        const title = v.name || v.title || v.label || v.people || v.craft || v.role || v.id;
-        return `<div class="lore-entry">${title ? `<h4 class="lore-h">${esc(libPretty(title))}</h4>` : ""}${loreToHtml(stripTitle(v), depth + 1)}</div>`;
-      }
-      return loreToHtml(v, depth + 1);
-    }).join("");
-  }
-  if (typeof value === "object") {
-    return Object.entries(value).filter(([k]) => !libSkipKey(k)).map(([k, v]) => {
-      const H = depth <= 0 ? "h3" : "h4";
-      if (typeof v === "string" || typeof v === "number" || typeof v === "boolean")
-        return `<div class="lore-field"><span class="lore-key">${esc(libPretty(k))}:</span> ${esc(String(v))}</div>`;
-      const inner = loreToHtml(v, depth + 1);
-      return inner ? `<div class="lore-section"><${H} class="lore-h">${esc(libPretty(k))}</${H}>${inner}</div>` : "";
-    }).join("");
-  }
-  return "";
-}
-function stripTitle(o) { const c = { ...o }; for (const k of ["name", "title", "label"]) delete c[k]; return c; }
-
-/** Inline markdown emphasis on already-escaped text: **bold**, *italic* / _italic_. */
-function libInline(escaped) {
-  return escaped
-    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
-    .replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g, "$1<em>$2</em>")
-    .replace(/\b_([^_\n]+)_\b/g, "<em>$1</em>");
-}
-
-/** Minimal markdown → HTML for the .md lore (headings, lists, paragraphs, inline emphasis). */
-function libMdToHtml(md) {
-  const lines = String(md || "").split(/\r?\n/);
-  let html = "", inList = false, inTable = false, tableHeadDone = false;
-  const closeList = () => { if (inList) { html += "</ul>"; inList = false; } };
-  const closeTable = () => { if (inTable) { html += tableHeadDone ? "</tbody></table>" : "</tr></thead></table>"; inTable = false; tableHeadDone = false; } };
-  const ln = s => libInline(esc(s));
-  for (const raw of lines) {
-    const line = raw.trimEnd();
-    if (/^#{3,}\s/.test(line)) { closeList(); closeTable(); html += `<h4 class="lore-h">${ln(line.replace(/^#+\s/, ""))}</h4>`; }
-    else if (/^##\s/.test(line)) { closeList(); closeTable(); html += `<h3 class="lore-h">${ln(line.replace(/^#+\s/, ""))}</h3>`; }
-    else if (/^#\s/.test(line)) { closeList(); closeTable(); html += `<h2 class="lore-h">${ln(line.replace(/^#+\s/, ""))}</h2>`; }
-    else if (/^\s*\|.*\|\s*$/.test(line)) {
-      // SNG-061 (2026-09-08): TABLES. EXESA.md and VOCATIONS.md are table-heavy and the reader rendered
-      // every row as a paragraph of raw pipes. A separator row (|---|---|) closes the header.
-      closeList();
-      if (/^\s*\|[\s:|-]+\|\s*$/.test(line)) { if (inTable && !tableHeadDone) { html += "</tr></thead><tbody>"; tableHeadDone = true; } continue; }
-      const cells = line.trim().replace(/^\||\|$/g, "").split("|").map(c => ln(c.trim()));
-      if (!inTable) { html += "<table class='lore-table'><thead><tr>"; inTable = true; tableHeadDone = false; }
-      else if (!tableHeadDone) { html += "</tr><tr>"; }
-      else { html += "<tr>"; }
-      const tag = tableHeadDone ? "td" : "th";
-      html += cells.map(c => `<${tag}>${c}</${tag}>`).join("");
-      if (tableHeadDone) html += "</tr>";
-      continue;
-    }
-    else if (/^[-*]\s/.test(line)) { closeTable(); if (!inList) { html += "<ul class='lore-list'>"; inList = true; } html += `<li>${ln(line.replace(/^[-*]\s/, ""))}</li>`; }
-    else if (!line.trim()) { closeList(); closeTable(); }
-    else { closeList(); closeTable(); html += `<p class="lore-p">${ln(line)}</p>`; }
-  }
-  closeList(); closeTable();
-  return html;
 }
 
 /** The great circle, rendered as a readable centerpiece + the 24 peoples with their crafts. */

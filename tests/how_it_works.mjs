@@ -2264,6 +2264,47 @@ console.log("\n── §180 · the suites run in a pool; the hook skips a tree t
 }
 
 
+/* ══════════ §181 — THE LIBRARY SERVES THE PLAYER, NOT MY NOTES (SNG-538 §4, Aevi 2026-09-11; Erik GO: "riddled with all caps notes and other phrasing that is not meant for a player finished product audience") ══════════ */
+console.log("\n── §181 · every Library document renders through playerText; a private key never reaches the page ──");
+{
+  const LB181 = await import("../engine/library.js");
+  const NM181 = await import("../engine/namematch.js");
+  // the glyph class, mirrored from AUTHORING_GLYPHS and asserted to still be its class — a gate that drifts from its stripper is no gate
+  const glyph = /[⛔⚠⚑⛑⬜✅➡❌]/u;
+  check("§181: the gate's glyph class is the stripper's", NM181.AUTHORING_GLYPHS.source.includes("[⛔⚠⚑⛑⬜✅➡❌]"));
+  const esc181 = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  const docs = LB181.LIBRARY_INDEX.flatMap(c => c.entries.filter(e => e.path).map(e => ({ ...e, cat: c.cat })));
+  const rendered = []; let rawGlyphs = 0, privateKeys = 0; const leaked = [];
+  const walkKeys = (v, fn) => { if (Array.isArray(v)) v.forEach(x => walkKeys(x, fn)); else if (v && typeof v === "object") for (const [k, x] of Object.entries(v)) { fn(k, x); walkKeys(x, fn); } };
+  for (const d of docs) {
+    const raw = rd(d.path);
+    rawGlyphs += (raw.match(/[⛔⚠⚑⛑⬜✅➡❌]/gu) || []).length;
+    const html = d.kind === "md" ? LB181.libMdToHtml(raw) : LB181.loreToHtml(JSON.parse(raw), 0);
+    rendered.push({ path: d.path, glyphs: (html.match(/[⛔⚠⚑⛑⬜✅➡❌]/gu) || []).length, bytes: html.length });
+    if (d.kind === "json") walkKeys(JSON.parse(raw), (k, v) => {
+      if (!/^_/.test(k)) return;
+      privateKeys++;
+      if (!LB181.libSkipKey(k)) leaked.push(`${d.path}:${k} (not skipped)`);
+      const probe = typeof v === "string" ? v.replace(/[⛔⚠⚑⛑⬜✅➡❌]️?/gu, "").trim().slice(0, 40) : null;
+      if (probe && probe.length > 12 && html.includes(esc181(probe))) leaked.push(`${d.path}:${k} (its text is on the page)`);
+    });
+  }
+  check(`§181: ⛔ no authoring glyph reaches the Library page — ${docs.length} documents, ${rawGlyphs} glyphs in the files, ${rendered.reduce((n, r) => n + r.glyphs, 0)} rendered`,
+    docs.length >= 14 && rendered.every(r => r.glyphs === 0 && r.bytes > 0), JSON.stringify(rendered.filter(r => r.glyphs || !r.bytes)));
+  check(`§181: ⛔ no \`_\`-prefixed key reaches the page — ${privateKeys} private keys in the files, every one skipped, none of their text rendered`,
+    privateKeys >= 1 && leaked.length === 0, JSON.stringify(leaked.slice(0, 6)));
+  check("§181: …the door is playerText itself, at every string both renderers emit — headings, paragraphs, list items, fields, titles",
+    !glyph.test(LB181.libMdToHtml("# ⛔ A heading\n\n⚠️ A paragraph with ✅ marks.\n\n- ⚑ an item\n\n| ⛑ col | two |\n|---|---|\n| ✅ cell | x |"))
+    && /A heading/.test(LB181.libMdToHtml("# ⛔ A heading")) && /an item/.test(LB181.libMdToHtml("- ⚑ an item"))
+    && !glyph.test(LB181.loreToHtml({ text: "⛔ shouted", list: ["⚑ one", "two"], nested: [{ name: "✅ Titled", body: "⚠️ inner" }], _note: "⚠️ private" }, 0))
+    && /shouted/.test(LB181.loreToHtml({ text: "⛔ shouted" }, 0)) && !/private/.test(LB181.loreToHtml({ _note: "private", shown: "public" }, 0)) && /public/.test(LB181.loreToHtml({ _note: "private", shown: "public" }, 0)));
+  const app181 = rd("app.js").replace(/^\s*\/\/.*$/gm, "");
+  check("§181: ⛔ app.js renders the Library through the engine's renderers and keeps no copy of its own",
+    /import \{ LIBRARY_INDEX, loreToHtml, libMdToHtml \} from "\.\/engine\/library\.js";/.test(app181) && !/^function loreToHtml\b/m.test(app181) && !/^function libMdToHtml\b/m.test(app181)
+    && !/^const LIBRARY_INDEX = \[/m.test(app181) && !/^const LIB_SKIP = /m.test(app181) && /entry\.kind === "md" \? libMdToHtml\(data\) : loreToHtml\(data, 0\)/.test(app181));
+}
+
+
 /* ══════════ §14 — THE FOLD CANNOT BEAT AN IMMUNITY THE BLOW COULD NOT ══════════ */
 // ⛔ FOUND BY RUNNING AEVI'S TWELVE CRAFTS THROUGH A MELEE-SCALE FIGHT (CCODE-313), which is the whole
 // reason Erik asked for a big-battle test. A physical-immune foe took ZERO from the player's typed blow and

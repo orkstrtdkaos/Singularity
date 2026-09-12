@@ -7,8 +7,8 @@
   "nativeTradition": "wright",
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
-  "level": 32,
-  "xp": 3195,
+  "level": 33,
+  "xp": 3200,
   "attributes": {
     "physical": 5,
     "mental": 8,
@@ -213,11 +213,11 @@
     "space_time": 0.1,
     "destruction_creation": -0.05
   },
-  "attunement": 31,
-  "maxHealth": 196,
-  "health": 196,
-  "maxEnergy": 287,
-  "energy": 223,
+  "attunement": 32,
+  "maxHealth": 201,
+  "health": 201,
+  "maxEnergy": 292,
+  "energy": 292,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2509,74 +2509,92 @@
         "player": "Land next to Maren.",
         "summary": "Silas and Maren descend into the waking reclamation system's hollow—the bones of pre-Transition machinery rising beneath the moorland, luminous and purposeful, beginning its final work. They stand at the threshold together.",
         "narration": "The shadow-wings fold as the luminescence rises to meet you both. The hollow's bottom is not ground but structure—vast bone-lattice lit from within, a thing that was built to *work*, and work it does. You angle the wings' descent to match Maren's fall, the darkness you carry bleeding into the light below. Your feet touch stone that hums. The vibration travels up through your boots and into your bones, a frequency that speaks of machinery still running after fifteen years of sleep, now waking into its final hour.\n\nMaren lands beside you with the corvid grace that never quite leaves her, even in warden-form. Her shadow-wings fold and fold again, collapsing into the shape of a woman—tall, grey-ash hair unbound, weathered face turned toward the luminescence. The bones of the system glow brighter as you both stand there, two figures at the threshold of an ending already in motion. Around you, the hollow's walls curve upward into darkness. Below, the lattice-work pulses with light that was never sunlight.\n\nShe does not turn her head. \"It has been asleep so long,\" Maren says, her voice steady as stone. \"Now it wakes, and it *knows* you are here. It knows what you are.\" Her hand, scarred at the knuckles, rises slowly. Not pointing—simply present. \"The question is whether we can attend what it has become, or whether we can only stand witness to what it completes.\""
+      },
+      {
+        "player": "Maren - This is a thing that want to live its purpose... its sleep is ending - and yet it is causing suffering as it wakes.  I want to both make room for it to be, and minimize the damage it's causing.  How do we do that?",
+        "summary": "Deep in the reclamation system's hollow, Silas and Maren confer on how to guide the waking entity—not to stop it, but to ask it to attend the harm it causes as it fulfills its purpose. The path forward requires both warden and wright speaking together.",
+        "narration": "You stand at the threshold of the hollow, the luminescence pulsing like a heartbeat through the bone-lattice beneath your feet. The hum is deeper now—not the idle frequency of a system at rest, but the rising note of something moving toward completion. Around you, the pre-Transition machinery begins to *work* in earnest. Water moves through channels you cannot quite see. The earth trembles in a rhythm that is not threatening yet, but becoming.\n\nMaren stands beside you, her warden-form steady and unhurried. You ask her plainly: how do you make room for a thing to live its purpose while the living world bleeds under its waking?\n\nShe does not answer at once. Her scarred hands rest at her sides, and her grey eye—the one that has watched more endings than anything alive—turns inward, reading what the hollow is *becoming*. When she speaks, it is with the certainty of someone who has stood at the threshold between completion and ruin before.\n\n\"The system was ordered to prepare the watershed,\" she says. \"Prepare means ready—to ready a thing is not to finish it. The damage is not the work itself. The damage is that it wakes without *listening*. It moves toward its purpose without asking what stands in the way.\"\n\nShe turns to face you directly. \"A warden attends. We do not stop an ending—we witness it, and we name what it means, and we *speak*. The system will listen to a warden's voice if that voice stands at the threshold and speaks its true name. Not the name it was given. The name it *is*—what it was made for, and what it costs to finish.\"\n\nMaren's hand lifts, and she places her palm flat against the luminescent bone-lattice. The hum changes pitch—not stopping, but *answering*. \"We speak to it together. The wright who holds its maker's line and the warden who holds the endings. Between us, we can ask it to *wake carefully*. Not slowly. Not hesitantly. But with attention to what breaks beneath its work.\"\n\nHer eye finds yours again. \"The system will accept that or it will not. But it will have been asked. That is the difference between an ending that is merely suffered and one that is attended.\"\n\n*You feel it settle into you — a new steadiness. (Level 33: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
       }
     ],
     "lastTurn": {
-      "narration": "The shadow-wings fold as the luminescence rises to meet you both. The hollow's bottom is not ground but structure—vast bone-lattice lit from within, a thing that was built to *work*, and work it does. You angle the wings' descent to match Maren's fall, the darkness you carry bleeding into the light below. Your feet touch stone that hums. The vibration travels up through your boots and into your bones, a frequency that speaks of machinery still running after fifteen years of sleep, now waking into its final hour.\n\nMaren lands beside you with the corvid grace that never quite leaves her, even in warden-form. Her shadow-wings fold and fold again, collapsing into the shape of a woman—tall, grey-ash hair unbound, weathered face turned toward the luminescence. The bones of the system glow brighter as you both stand there, two figures at the threshold of an ending already in motion. Around you, the hollow's walls curve upward into darkness. Below, the lattice-work pulses with light that was never sunlight.\n\nShe does not turn her head. \"It has been asleep so long,\" Maren says, her voice steady as stone. \"Now it wakes, and it *knows* you are here. It knows what you are.\" Her hand, scarred at the knuckles, rises slowly. Not pointing—simply present. \"The question is whether we can attend what it has become, or whether we can only stand witness to what it completes.\"",
-      "sceneSummary": "Silas and Maren descend into the waking reclamation system's hollow—the bones of pre-Transition machinery rising beneath the moorland, luminous and purposeful, beginning its final work. They stand at the threshold together.",
+      "narration": "You stand at the threshold of the hollow, the luminescence pulsing like a heartbeat through the bone-lattice beneath your feet. The hum is deeper now—not the idle frequency of a system at rest, but the rising note of something moving toward completion. Around you, the pre-Transition machinery begins to *work* in earnest. Water moves through channels you cannot quite see. The earth trembles in a rhythm that is not threatening yet, but becoming.\n\nMaren stands beside you, her warden-form steady and unhurried. You ask her plainly: how do you make room for a thing to live its purpose while the living world bleeds under its waking?\n\nShe does not answer at once. Her scarred hands rest at her sides, and her grey eye—the one that has watched more endings than anything alive—turns inward, reading what the hollow is *becoming*. When she speaks, it is with the certainty of someone who has stood at the threshold between completion and ruin before.\n\n\"The system was ordered to prepare the watershed,\" she says. \"Prepare means ready—to ready a thing is not to finish it. The damage is not the work itself. The damage is that it wakes without *listening*. It moves toward its purpose without asking what stands in the way.\"\n\nShe turns to face you directly. \"A warden attends. We do not stop an ending—we witness it, and we name what it means, and we *speak*. The system will listen to a warden's voice if that voice stands at the threshold and speaks its true name. Not the name it was given. The name it *is*—what it was made for, and what it costs to finish.\"\n\nMaren's hand lifts, and she places her palm flat against the luminescent bone-lattice. The hum changes pitch—not stopping, but *answering*. \"We speak to it together. The wright who holds its maker's line and the warden who holds the endings. Between us, we can ask it to *wake carefully*. Not slowly. Not hesitantly. But with attention to what breaks beneath its work.\"\n\nHer eye finds yours again. \"The system will accept that or it will not. But it will have been asked. That is the difference between an ending that is merely suffered and one that is attended.\"\n\n*You feel it settle into you — a new steadiness. (Level 33: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*",
+      "sceneSummary": "Deep in the reclamation system's hollow, Silas and Maren confer on how to guide the waking entity—not to stop it, but to ask it to attend the harm it causes as it fulfills its purpose. The path forward requires both warden and wright speaking together.",
       "choices": [
         {
-          "label": "Ask Maren to read the system—what does Deathsense tell her about this ending?",
+          "label": "Place your hand on the lattice beside Maren's and speak the system's true purpose aloud—ask it to wake carefully, with attention to what breaks.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "deathsense",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Order-Sense to read the system's structure—what was it built to do, and how close is it to completion?",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Place your hand on the luminescent bone-lattice and let Palework speak—claim this ending as warden-work and see what authority your craft carries here.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
+          "axes": {
+            "death_life": -0.3
+          },
           "difficulty": "hard",
           "opposedDifficulty": null,
           "intentTags": [
-            "study",
-            "risky"
+            "speak",
+            "attend",
+            "sustain"
           ],
-          "abilityId": "palework",
-          "energyCost": 2,
+          "abilityId": "the-received-ending",
+          "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Hold still and wait for Maren's judgment—let her read it first, as the legendary warden, and see what she chooses to do.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "very easy",
+          "label": "Ask Maren what language the system will understand—does it still hold speech, or has it forgotten how to hear?",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "chaos_order": 0.2
+          },
+          "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "careful"
+            "study",
+            "ask"
           ],
           "abilityId": null,
-          "energyCost": 0,
+          "energyCost": null,
           "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Read the system's structure and purpose through Order-Sense—understand what it is trying to complete before you attempt to speak with it.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "chaos_order": 0.2
+          },
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study",
+            "read"
+          ],
+          "abilityId": "order-sense",
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Move deeper into the hollow to find the system's central control or heart—if you can reach what drives it, you may be able to negotiate more directly.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {
+            "mechanical_spiritual": 0.2
+          },
+          "difficulty": "hard",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "travel",
+            "explore",
+            "risky"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
@@ -2584,43 +2602,74 @@
       "deeds": [],
       "characterDeltas": {},
       "ledgerEvents": [],
-      "questUpdates": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-water-crisis",
+          "note": "Silas and Maren have reached the reclamation system and learned its true purpose: to prepare the watershed. They now consult on how to ask it to complete its work with attention to the harm it causes."
+        }
+      ],
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
+      "adoptSchool": null,
+      "offer": {
+        "thing": "Maren's direct counsel on attending an ending without stopping it—the warden's core practice made plain",
+        "from": "Maren's own craft and her bond with Silas; the moment requires the legend to teach"
+      },
+      "stageOps": [],
       "scene": {
-        "setting": "Deep hollow beneath the moorland north—pre-Transition reclamation system waking from false sleep. Luminescent bone-lattice glows from within. Vast stone structure curves upward into darkness. The air tastes of old metal and electricity. Late morning light does not reach here.",
+        "setting": "Deep hollow beneath the moorland north—pre-Transition reclamation system, luminescent bone-lattice structure rising around them, vast and purposeful. The hum has risen in pitch; water moves through channels. The stone beneath their feet vibrates with the system's waking frequency. Late morning light does not reach here.",
         "npcsPresent": [
           {
             "name": "Maren Ossitide",
-            "state": "Standing beside Silas in warden-form, grey-ash hair unbound, shadow-wings folded away. Hands scarred at the knuckles, held steady. Reading the system with complete, unhurried attention. Waiting to see what the wright will do."
+            "state": "Standing at the threshold with her palm against the luminescent lattice, grey-ash hair unbound, reading the system's true name and speaking counsel to Silas about the warden's way of attending endings without stopping them"
+          },
+          {
+            "name": "Huginn",
+            "state": "Not present—the companion remains at the Whistling Woman post with Pell, Veth, Bryn, Deni, and Corvin"
           }
         ],
         "objects": [
-          "The luminescent bone-lattice—vast pre-Transition machinery, glowing from within, humming with active purpose",
+          "The luminescent bone-lattice—vast pre-Transition machinery, glowing from within, beginning its purposeful work",
           "The hollow's curved stone walls, reaching upward into darkness",
-          "The worn stone beneath your feet—thrumming with the system's frequency"
+          "The stone beneath your feet—thrumming with the system's waking frequency",
+          "Water channels—moving with intention through the structure"
         ],
         "threads": [
-          "What the system will do now that it accepts warden and wright both",
-          "Whether the convene's vote at noon will matter when the system moves",
-          "What standing at this threshold together will cost each of you"
+          "What the system will do when asked to wake carefully with attention to harm",
+          "Whether the convene's noon vote will matter when the system is already in motion",
+          "What naming the system's true purpose will cost Silas and Maren both"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "maren-ossitide",
-          "name": "Maren (Marrow) Ossitide",
-          "status": "active",
-          "statusNote": "In warden-form, descending into the reclamation system's hollow with Silas Weir. Reading the awakening machinery with complete attention. At the threshold of an ending in motion.",
-          "note": "Maren named the reclamation site's purpose aloud—to prepare the watershed—and revealed she can reach the system directly. She dove with Silas into the hollow. Now stands at the threshold, scarred hands steady, waiting to see what the system will accept from warden and wright together."
-        }
-      ],
+      "npcUpdates": [],
       "intentsHeard": [],
       "factUpdates": [],
       "placeUpdates": [],
-      "codexUpdates": [],
+      "discovery": null,
+      "codexUpdates": [
+        {
+          "topic": "the-water-crisis",
+          "label": "The Water Crisis",
+          "kind": "mystery",
+          "fact": "A warden can attend an ending already in motion by standing at its threshold and speaking its true name. Maren Ossitide teaches that the damage is not the system's work itself, but that it wakes without listening. The remedy is to ask it to wake carefully—with attention to what breaks beneath its purpose.",
+          "links": [
+            "maren-ossitide",
+            "whistling-woman-post",
+            "what-wakes-beneath"
+          ]
+        },
+        {
+          "topic": "the-received-ending",
+          "label": "The Received Ending",
+          "kind": "lore",
+          "fact": "The craft that braids Deathsense and The Attended End reads both the shape of an ending and what that ending is *for*. At the reclamation system's hollow, Maren teaches Silas how to use this to speak a system's true name—not what it was ordered to do, but what it *is*, and what it will cost to finish.",
+          "links": [
+            "maren-ossitide",
+            "the-water-crisis"
+          ]
+        }
+      ],
       "holdingOps": [],
       "debtOps": [],
       "partyOps": [],
@@ -2632,48 +2681,44 @@
       "newEncounter": null,
       "unlockPrecursor": null,
       "unlockSubstrate": null,
-      "timeOps": {},
+      "timeOps": null,
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": "Two figures standing in the luminous hollow—a tall woman in warden-form with grey-ash hair and scarred hands, beside a man in travel-worn clothes, both framed against the glowing lattice-work of ancient machinery. The bone-structure beneath them hums with light. Darkness curves overhead. The air itself seems to *know* they are there.",
+      "imagePrompt": "Deep in luminescent bone-lattice machinery lit from within—Maren in warden-form, grey-ash hair unbound, her scarred hand pressed against glowing stone; Silas facing her at the threshold of a pre-Transition system beginning its purposeful waking. The hum of ancient work. The moment before the choice.",
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
       "sceneEnded": false,
-      "momentArt": "https://image.pollinations.ai/prompt/Two%20figures%20standing%20in%20the%20luminous%20hollow%E2%80%94a%20tall%20woman%20in%20warden-form%20with%20grey-ash%20hair%20and%20scarred%20hands%2C%20beside%20a%20man%20in%20travel-worn%20clothes%2C%20both%20framed%20against%20the%20glowing%20lattice-work%20of%20ancient%20machinery.%20The%20bone-structure%20beneath%20them%20hums%20with%20light.%20Darkness%20curves%20overhead.%20The%20air%20its%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=94675&nologo=true"
+      "momentArt": "https://image.pollinations.ai/prompt/Deep%20in%20luminescent%20bone-lattice%20machinery%20lit%20from%20within%E2%80%94Maren%20in%20warden-form%2C%20grey-ash%20hair%20unbound%2C%20her%20scarred%20hand%20pressed%20against%20glowing%20stone%3B%20Silas%20facing%20her%20at%20the%20threshold%20of%20a%20pre-Transition%20system%20beginning%20its%20purposeful%20waking.%20The%20hum%20of%20ancient%20work.%20The%20moment%20before%20the%20choice.%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=33954&nologo=true"
     },
     "sceneState": {
-      "setting": "Deep hollow beneath the moorland north—pre-Transition reclamation system waking from false sleep. Luminescent bone-lattice glows from within. Vast stone structure curves upward into darkness. The air tastes of old metal and electricity. Late morning light does not reach here.",
+      "setting": "Deep hollow beneath the moorland north—pre-Transition reclamation system, luminescent bone-lattice structure rising around them, vast and purposeful. The hum has risen in pitch; water moves through channels. The stone beneath their feet vibrates with the system's waking frequency. Late morning light does not reach here.",
       "npcsPresent": [
         {
           "name": "Maren Ossitide",
-          "state": "Standing beside Silas in warden-form, grey-ash hair unbound, shadow-wings folded away. Hands scarred at the knuckles, she"
+          "state": "Standing at the threshold with her palm against the luminescent lattice, grey-ash hair unbound, reading the system's tru · Not present—the companion remains at the Whistling Woman post with Pell, Veth, Bryn, Deni, and Corvin"
         }
       ],
       "objects": [
         "The luminescent bone-lattice—vast pre-Transition machinery, glowing from within,",
         "The hollow's curved stone walls, reaching upward into darkness",
-        "The worn stone beneath your feet—thrumming with the system's frequency"
+        "The stone beneath your feet—thrumming with the system's waking frequency",
+        "Water channels—moving with intention through the structure"
       ],
       "threads": [
-        "What the system will do now that it accepts warden and wright both",
-        "Whether the convene's vote at noon will matter when the system moves",
-        "What standing at this threshold together will cost each of you"
+        "What the system will do when asked to wake carefully with attention to harm",
+        "Whether the convene's noon vote will matter when the system is already in motion",
+        "What naming the system's true purpose will cost Silas and Maren both"
       ]
     },
-    "beats": 10
+    "beats": 11
   },
   "clock": {
     "schemaVersion": 1,
     "day": 18,
-    "hour": 11,
+    "hour": 12,
     "realAnchor": null
   },
   "companions": [
@@ -6903,12 +6948,8 @@
     "lastTickWorldDay": 74,
     "lastCanonWorldDay": 74,
     "lastGenCount": 1796,
-    "turnsSinceOffer": 8,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "Corvin Teth — a runner with a fractured death-thread, an urgency that broke relay protocol, and knowledge of the moorland's changed quiet",
-        "from": "the moorland itself, through Deni's warning and Corvin's arrival; the world moving on its own timeline"
-      },
       {
         "thing": "Corvin's crystal remains in her palm — a question without words. Will she stay or will she leave when morning comes?",
         "from": "Silas's offer of work and Corvin's own uncertainty — a runner with nowhere to be, and a post that needs runners. The work waiting to be…"
@@ -6924,6 +6965,10 @@
       {
         "thing": "Maren's acceptance and readiness to fly—a warden who will ride into the moorland's wrongness without hesitation.",
         "from": "her bond with Silas and her ancient charge to attend what is changing in the world"
+      },
+      {
+        "thing": "Maren's direct counsel on attending an ending without stopping it—the warden's core practice made plain",
+        "from": "Maren's own craft and her bond with Silas; the moment requires the legend to teach"
       }
     ],
     "wantProgress": {
@@ -14707,8 +14752,8 @@
     "craft": 10,
     "wits": 6
   },
-  "pendingSubPoints": 0,
-  "skillPoints": 0,
+  "pendingSubPoints": 1,
+  "skillPoints": 2,
   "discoveries": [
     {
       "key": "the-attended-end+the_shadow_work:aerial-transit-via-atten",
@@ -15155,8 +15200,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d15] The deep seam beneath the Threshold Post is engineered — its dissolution is ordered, not natural. Someone deliberately made it to close in a specific way, on a specific schedule.",
-          "[d15] The deep seam beneath the Threshold Post is engineered—its dissolution is ordered, not natural. Someone deliberately made it to close in a specific way, on a specific schedule.",
           "[d15] Warden Coll filed an amended petition on Day 15 morning naming pole-pull (The Poles Pull arc) as the underlying cause of the water crisis, replacing the Radiant readings conspiracy theory. The Radiant leadership has responded with silence—a dangerous sign that suggests either acceptance or deeper…",
           "[d16] The moorland's substrate lattice is measurably thin—craft-work here runs starved and unpredictable. Unknown cause or extent.",
           "[d16] The buried readings in Grael's cabinet are the only proof the committee will accept that pole-pull is the real cause. Three days before the convene decision.",
@@ -15178,7 +15221,9 @@
           "[d18] The reclamation system beneath the ridge was built before the Transition to prepare the watershed for something larger. Silas's father gave it a new instruction—close clean and stop—but the original purpose still runs beneath it. The system is nearly finished with its work. It will complete in…",
           "[d18] What Wakes Beneath — Not a creature waking. A pre-Transition reclamation system waking from false sleep beneath the ridge hollow. Its original instruction still runs in its bones: prepare the watershed. It is moving toward completion whether the valley acts or not.",
           "[d18] Maren Ossitide can reach the reclamation system directly—a warden's hand can attempt to attend an ending already moving. Whether the system accepts warden authority over its original purpose remains unknown. The convene votes at noon in the Center; the system completes in hours.",
-          "[d18] The reclamation system waking beneath the ridge has accepted the reach of a warden and a wright together. What happens next depends on whether they can attend the ending already in motion—and whether the system will accept their hand on its course."
+          "[d18] The reclamation system waking beneath the ridge has accepted the reach of a warden and a wright together. What happens next depends on whether they can attend the ending already in motion—and whether the system will accept their hand on its course.",
+          "[d18] A warden can attend an ending already in motion by standing at its threshold and speaking its true name. Maren Ossitide teaches that the damage is not the system's work itself, but that it wakes without listening. The remedy is to ask it to wake carefully—with attention to what breaks beneath its…",
+          "[d18] The Received Ending — The craft that braids Deathsense and The Attended End reads both the shape of an ending and what that ending is *for*. At the reclamation system's hollow, Maren teaches Silas how to use this to speak a system's true name—not what it was ordered to do, but what it *is*, and…"
         ],
         "links": [
           "the-made-gate",
@@ -15217,7 +15262,9 @@
           "[d14] The reclamation site in the left-branch Zone received its closing instruction on Day 14 at dawn — complete the task and stop. The site is winding down. The watershed will clear within one to two weeks without further intervention.",
           "[d14] The reclamation site has a fourth connection: a buried substrate-thread running southwest toward the lower watershed, seeding downstream wells with clean water for fifteen years. When the site closes, the feeding stops. The wells hold what they have, but the thread goes quiet.",
           "[d14] The reclamation site's closing instruction was amended on Day 14 at dawn — complete the task, push clean water through the substrate-thread to the lower wells, then stop. Both the watershed and the downstream wells will clear. The substrate-thread goes quiet when the site closes, but the wells…",
-          "[d14] Mara Wells informed via shadow-sheet on Day 14 at dawn — the work is complete, the downstream wells will clear first, the watershed will follow on its own schedule."
+          "[d14] Mara Wells informed via shadow-sheet on Day 14 at dawn — the work is complete, the downstream wells will clear first, the watershed will follow on its own schedule.",
+          "[d15] The deep seam beneath the Threshold Post is engineered — its dissolution is ordered, not natural. Someone deliberately made it to close in a specific way, on a specific schedule.",
+          "[d15] The deep seam beneath the Threshold Post is engineered—its dissolution is ordered, not natural. Someone deliberately made it to close in a specific way, on a specific schedule."
         ]
       },
       "dara-holt-the-ditch-mother": {
@@ -17323,26 +17370,32 @@
         "to": "the-water-crisis",
         "why": "full",
         "day": 18
+      },
+      {
+        "label": "The Received Ending",
+        "to": "the-water-crisis",
+        "why": "full",
+        "day": 18
       }
     ]
   },
   "tendencies": {
-    "strategic": 21.31205796885505,
-    "cerebral": 10.302283515641866,
-    "social": 13.590863312403608,
-    "generous": 4.328275903280845,
-    "cautious": 5.38739368197318,
-    "physical": 0.16269998102495578,
-    "risky": 0.4726870552765856,
-    "ruthless": 0.08493915196986863,
-    "carousing": 0.892255502487476,
-    "amorous": 2.097762136340091,
-    "patient": 0.28559168489861314,
-    "stealth": 0.000002968547047813491,
-    "devotion": 0.12130463344733332,
-    "craft": 2.3640472561125505,
-    "leadership": 1.968458231952766,
-    "deception": 0.014215935271416649
+    "strategic": 20.779256519633673,
+    "cerebral": 10.044726427750819,
+    "social": 14.251091729593517,
+    "generous": 5.220069005698824,
+    "cautious": 5.25270883992385,
+    "physical": 0.15863248149933187,
+    "risky": 0.46086987889467096,
+    "ruthless": 0.08281567317062191,
+    "carousing": 0.869949114925289,
+    "amorous": 2.0453180829315887,
+    "patient": 0.2784518927761478,
+    "stealth": 0.0000028943333716181536,
+    "devotion": 0.11827201761114998,
+    "craft": 2.304946074709737,
+    "leadership": 1.9192467761539467,
+    "deception": 0.013860536889631231
   },
   "aptitudes": [
     "strategist",
@@ -17350,10 +17403,18 @@
     "scholar",
     "tactician"
   ],
-  "actionCount": 990,
+  "actionCount": 991,
   "grantsVersion": 1,
   "reconcileVersion": 55,
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "Deep in luminescent bone-lattice machinery lit from within—Maren in warden-form, grey-ash hair unbound, her scarred hand pressed against glowing stone; Silas facing her at the threshold of a pre-Trans",
+      "url": "https://image.pollinations.ai/prompt/Deep%20in%20luminescent%20bone-lattice%20machinery%20lit%20from%20within%E2%80%94Maren%20in%20warden-form%2C%20grey-ash%20hair%20unbound%2C%20her%20scarred%20hand%20pressed%20against%20glowing%20stone%3B%20Silas%20facing%20her%20at%20the%20threshold%20of%20a%20pre-Transition%20system%20beginning%20its%20purposeful%20waking.%20The%20hum%20of%20ancient%20work.%20The%20moment%20before%20the%20choice.%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=33954&nologo=true",
+      "caption": "Deep in the reclamation system's hollow, Silas and Maren confer on how to guide the waking",
+      "worldDay": 74,
+      "at": "2026-09-12T21:01:22.823Z"
+    },
     {
       "kind": "figure",
       "prompt": "",
@@ -18366,8 +18427,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1789245835360,
-  "rev": 2069,
+  "updatedAt": 1789246882823,
+  "rev": 2071,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -22859,7 +22920,7 @@
   "syncedAt": 1788658062664,
   "teachers": {},
   "regionsKnown": {
-    "valley": 692,
+    "valley": 693,
     "the_palelands": 6,
     "the_center": 151,
     "the_echo_vale": 14
@@ -23176,6 +23237,14 @@
       "beats": 47,
       "_recapError": null,
       "recap": "Days 73 and 74 moved fast and left marks that won't fade. You broke two seal-marks—Grael's and the March's both—pulling buried readings from the Archive and proof of the pole-pull's reality out of locked cabinets, trading the warden system's regard for the valley's actual survival. The shadow tablets came next, the first two-way relays since the Transition, matched to Mara's pair and forged with your own hands; then a braiding that made shadow structural, a threshold-post's whole purpose hanging visible and revisable in the air. But the work that will last longest is what you built at the Made Gate: a universal shrine, unmarked, claimed by no tradition, its threshold co-held with Maren Ossitide and Named to close only to those who arrive as conquerors. You called it a pilgrimage site before it had a single pilgrim, because you knew what it was—proof that balance holds without a winner. You posted Corvin Teth at the Whistling Woman, named her urgency as the virtue it was, stretched shadow farther than the road should have allowed to pull a rider across distance that had no right to close. And at the end of it you stood at the Made Gate with Maren and named yourself the seed of the singularity, called her down into the waking reclamation system beside you—a wright and a warden together, walking into an ending already in motion, neither of you pretending otherwise."
+    },
+    {
+      "id": "sess-34",
+      "startedAt": "2026-09-12T21:01:22.805Z",
+      "lastAt": "2026-09-12T21:01:22.805Z",
+      "startDay": 74,
+      "endDay": 74,
+      "beats": 1
     }
   ],
   "company": [
@@ -23697,20 +23766,20 @@
     "gen-whistling-woman-post": "https://image.pollinations.ai/prompt/Small%20wooden%20watchpost%20beside%20a%20shimmering%20dark%20portal%2C%20woman%20silhouetted%20in%20doorway%20whistling%2C%20dusty%20road%20converging%20toward%20her%2C%20twilight%20atmosphere.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=34173&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 368,
-    "choices": 367,
+    "sceneSummary": 369,
+    "choices": 368,
     "characterDeltas": 195,
-    "scene": 368,
+    "scene": 369,
     "npcUpdates": 320,
     "factUpdates": 40,
     "placeUpdates": 80,
-    "codexUpdates": 217,
+    "codexUpdates": 218,
     "timeOps": 328,
-    "imagePrompt": 40,
-    "sceneEnded": 141,
+    "imagePrompt": 41,
+    "sceneEnded": 142,
     "itemUpdates": 8,
-    "questUpdates": 49,
-    "offer": 56,
+    "questUpdates": 50,
+    "offer": 57,
     "moveTo": 20,
     "delegateOps": 6,
     "deeds": 25,
@@ -23724,7 +23793,7 @@
     "_applyFailedOp": 8,
     "newEncounter": 3,
     "encounterOps": 1,
-    "gambitApt": 69,
+    "gambitApt": 70,
     "markDefiningMoment": 1,
     "_engineClosedScene": 5,
     "gambitOps": 1,
@@ -23732,7 +23801,7 @@
     "partyOps": 3,
     "stateOps": 1
   },
-  "_opTurns": 368,
+  "_opTurns": 369,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -23740,7 +23809,7 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 61,
+      "applied": 62,
       "rejected": 2,
       "lastWhy": "rejected-shape"
     },
@@ -24970,11 +25039,11 @@
     "lead": 2,
     "ask": 7,
     "plan": 16,
-    "negotiate": 3,
+    "negotiate": 4,
     "prepare": 14,
     "investigate": 4,
     "craft": 7,
-    "help": 8,
+    "help": 9,
     "discipline": 2,
     "persuade": 3,
     "rapport": 12,
@@ -24996,7 +25065,8 @@
     "charm": 2,
     "announce": 3,
     "retrieve": 1,
-    "listen": 1
+    "listen": 1,
+    "consult": 1
   },
   "aptitudeEarnCount": {
     "silver_tongue": 1

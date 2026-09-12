@@ -217,7 +217,7 @@
   "maxHealth": 196,
   "health": 196,
   "maxEnergy": 287,
-  "energy": 235,
+  "energy": 233,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2469,23 +2469,49 @@
         "player": "Circle wider—map the moorland's changed shape and find the edge of what moves wrong",
         "summary": "Airborne over the moorland at dawn—Silas and Maren map the stirring's edge: a pressure under the northern grass, a boundary at the ridge line, and a luminescence in the deep hollow beyond that speaks of something immense waking beneath.",
         "narration": "The shadow-wings beat steady through the moorland dark, and Maren flies without haste at your side—the legendary warden reading the ground the way a reader reads a page. The stars wheel overhead, steady and high. Below, the pale grass of the moorland shows its shape in starlight: the ridge climbing northward, the stone outcrops like broken teeth, the long hollow where the eastern water-runs collect before they spill down toward Millbrook.\n\nYou bank wider, climbing slightly to read the whole of it. The moorland spreads beneath you like a map made of light and shadow—and there: the edge where the wrongness begins. Not a line you can draw on paper, but a CHANGE in how the ground sits. North of the ridge, the grass moves—not in the wind, but in response to something underneath it. A breathing. A pressure. The pale grass ripples in waves that do not match the wind above, and beyond it, deeper north, the ground itself seems to shift in its sleep.\n\nMaren's wings tilt her eastward without your speaking. She has seen it too. The wrongness does not spread south past the ridge line—not yet—but it presses against it like a thing testing a boundary. Your eyes adjust further to the dark. There: in the deep hollow beyond the ridge, a faint luminescence—not light exactly, but an absence-of-dark that reads wrong to the eye. It is vast. Whatever wakes beneath the moorland north, it is far larger than you thought."
+      },
+      {
+        "player": "Ask Maren what a warden reads in that wrongness—what does her craft tell her?",
+        "summary": "Airborne at dawn over the moorland north: Maren reads the wrongness beneath the ridge as a pre-Transition system waking from false sleep—the reclamation site's original order still alive beneath your father's new instruction, unfinished and moving toward completion.",
+        "narration": "You bank the shadow-wings wider, reading the moorland's sprawl beneath starlight and shadow. The ridge climbs northward, a dark spine against the paler sky. Below it, in the deep hollow where water-runs collect, there is light where there should be none—a luminescence that has no source, no flame, no craft-glow you recognize. It moves wrong. Not the movement of fire or breath or the slow rotation of a star. It moves like something *waking*.\n\nYou turn your head to Maren. She flies steady at your shoulder, the warden-form unhurried, her eye fixed on that glow. \"What does your craft read in that wrongness?\" you ask. \"What are we looking at?\"\n\nMaren does not answer immediately. A warden's attention is complete—nothing held back, nothing distracted. She reads the ground the way a scholar reads a page written in a language the whole world speaks but few understand anymore. When she speaks, her voice carries the weight of every ending she has stood witness to.\n\n\"It is not a death,\" she says. \"Deathsense finds nothing ending there. But something *was* made to sleep, and the sleep is breaking.\" She turns her grey eye to you. \"Your father's instruction to the reclamation site—to close clean and stop. It has stopped the *conscious* work. But *underneath* that stopping, something larger is waking. The ground remembers what it was made to do before your father ever gave it the new order.\" She points with one steady wing-tip toward the luminescence. \"That is the old instruction, still running in its bones. And it is not finished yet.\""
       }
     ],
     "lastTurn": {
-      "narration": "The shadow-wings beat steady through the moorland dark, and Maren flies without haste at your side—the legendary warden reading the ground the way a reader reads a page. The stars wheel overhead, steady and high. Below, the pale grass of the moorland shows its shape in starlight: the ridge climbing northward, the stone outcrops like broken teeth, the long hollow where the eastern water-runs collect before they spill down toward Millbrook.\n\nYou bank wider, climbing slightly to read the whole of it. The moorland spreads beneath you like a map made of light and shadow—and there: the edge where the wrongness begins. Not a line you can draw on paper, but a CHANGE in how the ground sits. North of the ridge, the grass moves—not in the wind, but in response to something underneath it. A breathing. A pressure. The pale grass ripples in waves that do not match the wind above, and beyond it, deeper north, the ground itself seems to shift in its sleep.\n\nMaren's wings tilt her eastward without your speaking. She has seen it too. The wrongness does not spread south past the ridge line—not yet—but it presses against it like a thing testing a boundary. Your eyes adjust further to the dark. There: in the deep hollow beyond the ridge, a faint luminescence—not light exactly, but an absence-of-dark that reads wrong to the eye. It is vast. Whatever wakes beneath the moorland north, it is far larger than you thought.",
-      "sceneSummary": "Airborne over the moorland at dawn—Silas and Maren map the stirring's edge: a pressure under the northern grass, a boundary at the ridge line, and a luminescence in the deep hollow beyond that speaks of something immense waking beneath.",
+      "narration": "You bank the shadow-wings wider, reading the moorland's sprawl beneath starlight and shadow. The ridge climbs northward, a dark spine against the paler sky. Below it, in the deep hollow where water-runs collect, there is light where there should be none—a luminescence that has no source, no flame, no craft-glow you recognize. It moves wrong. Not the movement of fire or breath or the slow rotation of a star. It moves like something *waking*.\n\nYou turn your head to Maren. She flies steady at your shoulder, the warden-form unhurried, her eye fixed on that glow. \"What does your craft read in that wrongness?\" you ask. \"What are we looking at?\"\n\nMaren does not answer immediately. A warden's attention is complete—nothing held back, nothing distracted. She reads the ground the way a scholar reads a page written in a language the whole world speaks but few understand anymore. When she speaks, her voice carries the weight of every ending she has stood witness to.\n\n\"It is not a death,\" she says. \"Deathsense finds nothing ending there. But something *was* made to sleep, and the sleep is breaking.\" She turns her grey eye to you. \"Your father's instruction to the reclamation site—to close clean and stop. It has stopped the *conscious* work. But *underneath* that stopping, something larger is waking. The ground remembers what it was made to do before your father ever gave it the new order.\" She points with one steady wing-tip toward the luminescence. \"That is the old instruction, still running in its bones. And it is not finished yet.\"",
+      "sceneSummary": "Airborne at dawn over the moorland north: Maren reads the wrongness beneath the ridge as a pre-Transition system waking from false sleep—the reclamation site's original order still alive beneath your father's new instruction, unfinished and moving toward completion.",
       "choices": [
         {
-          "label": "Descend closer to the luminescence—read what causes that glow with Deathsense or Order-Sense.",
+          "label": "Descend closer to the hollow and use Deathsense on the luminescence itself—read its trajectory, its path, what it *intends*.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "death_life": -0.3
+          },
+          "difficulty": "hard",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "scout",
+            "study",
+            "careful"
+          ],
+          "abilityId": "deathsense",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Order-Sense to read the *system* beneath—its design, its structure, what it was meant to accomplish before your father changed its purpose.",
           "attribute": "mental",
           "subAttribute": "reason",
-          "axes": {},
+          "axes": {
+            "chaos_order": 0.4
+          },
           "difficulty": "hard",
           "opposedDifficulty": null,
           "intentTags": [
             "study",
-            "careful",
-            "risky"
+            "scout"
           ],
           "abilityId": "order_sense",
           "energyCost": 2,
@@ -2494,32 +2520,14 @@
           "emergenceId": null
         },
         {
-          "label": "Circle the ridge line to mark where the wrongness STOPS—find the southern boundary.",
+          "label": "Return to the Whistling Woman post immediately—the party needs to know what Maren has read, and Millbrook needs warning before the convene votes at noon.",
           "attribute": "physical",
           "subAttribute": "agility",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Maren what a warden reads in that wrongness—what does her craft tell her?",
-          "attribute": "social",
-          "subAttribute": "rapport",
           "axes": {},
           "difficulty": "very easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "help",
-            "ask"
+            "travel"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -2528,14 +2536,14 @@
           "emergenceId": null
         },
         {
-          "label": "Turn back to the post—you have the intelligence you came for. Mara needs to know, and the convene votes at noon.",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Ask Maren directly—as a warden who has walked the boundary between worlds, does she know what *this particular* system is meant to do? What is the unfinished work beneath the ridge?",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {},
-          "difficulty": "very easy",
+          "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "travel"
+            "ask"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -2561,29 +2569,24 @@
       "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "Airborne above the moorland north of the Whistling Woman post at deep night—the grass far below pale in starlight, the ridge line climbing northward, and beyond it a darkness that moves wrong. Two figures ride the thermals on shadow-wings, the wind cold and carrying ozone.",
+        "setting": "Airborne above the moorland north of the Whistling Woman post at late dawn—the grass far below pale and rippling in waves from beneath, the ridge line climbing northward like a dark spine, and beyond it a deep hollow glowing with sourceless luminescence. Two figures ride the thermals on shadow-wings, the wind cold and carrying ozone.",
         "npcsPresent": [
           {
             "name": "Maren Ossitide (warden-form)",
-            "state": "Flying steady beside you in warden-form, grey-ash hair unbound, eye fixed on the wrongness below. Reading the ground the way a reader reads a page. Unhu"
-          },
-          {
-            "name": "Huginn",
-            "state": "Riding the thermal currents far below the shadow-wings, moving in parallel through the moorland dark. Silent."
+            "state": "Flying steady at your side in warden-form, grey-ash hair unbound, eye fixed on the wrongness below. Reading the ground like a page written in an old language. Just named the luminescence as the old instruction still running in the reclamation site's bones."
           }
         ],
         "objects": [
-          "The moorland below—pale grass, dark stone, the line of the ridge northward",
-          "The shadow-wings, vast and dark, manifested and steady",
-          "Starlight above, darkness below, wind moving cold",
-          "The luminescence in the deep hollow beyond the ridge—an absence-of-dark that reads wrong"
+          "The shadow-wings, vast and dark, manifested and steady beneath you both",
+          "Starlight above, fading as dawn approaches from the east",
+          "The luminescence in the deep hollow beyond the ridge—an absence-of-dark that reads as presence, moving in a way that does not fit weather or season",
+          "The moorland below—pale grass rippling in waves from beneath, dark stone outcrops, the line of the ridge northward"
         ],
         "threads": [
-          "What wakes beneath the moorland north—its shape, its purpose, its danger",
-          "The luminescence in the deep hollow—what causes it and how large the thing beneath truly is",
-          "Whether the wrongness will breach the ridge line and reach the post or the valley beyond",
-          "Grael's three-day absence and its connection to this stirring",
-          "The convene vote at noon—and whether this intelligence will change the outcome"
+          "What the unfinished work beneath the ridge is meant to accomplish",
+          "How much time remains before the convene votes at noon in the Center",
+          "Whether the system will complete its task before the party can reach Millbrook",
+          "What the old instruction was, and how far along its completion truly is"
         ]
       },
       "npcUpdates": [
@@ -2591,12 +2594,13 @@
           "op": "update",
           "npcId": "maren-ossitide",
           "name": "Maren Ossitide",
-          "role": "Legendary Ashwarden warden; traveling companion",
-          "sex": "female",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Flying at Silas's side over the moorland north, reading the wrongness beneath the ground. Steady, unhurried, attentive to what wakes.",
-          "statusNote": "Active, airborne over the moorland north with Silas Weir, scouting the stirring that moves beneath."
+          "note": "Read the moorland wrongness as pre-Transition system waking from false sleep—the reclamation site's original order still running beneath Silas's father's new instruction, incomplete and moving toward its original purpose.",
+          "learned": [
+            "The luminescence is not a death—Deathsense finds nothing ending, but something that was made to sleep is breaking",
+            "The reclamation site's original instruction still runs in its bones beneath the new order given",
+            "The system is unfinished—the old purpose is still moving toward completion"
+          ],
+          "statusNote": "Active, airborne over the moorland north with Silas Weir, reading the waking system beneath the ridge"
         }
       ],
       "intentsHeard": [],
@@ -2605,25 +2609,16 @@
       "discovery": null,
       "codexUpdates": [
         {
-          "topic": "what-wakes-beneath",
-          "label": "What Wakes Beneath",
+          "topic": "the-water-crisis",
+          "label": "The Water Crisis",
           "kind": "mystery",
-          "fact": "The moorland north of the ridge moves wrong in a way that does not match wind or weather. The grass ripples in waves from beneath; the ground shifts as if breathing. A faint luminescence glows in the deep hollow beyond the ridge—vast, deep-seated, and unmapped. The wrongness does not yet cross the ridge line southward, but presses against it like a boundary being tested.",
-          "links": [
-            "whistling-woman-post",
-            "the-water-crisis",
-            "the-poles-pull"
-          ]
-        },
-        {
-          "topic": "maren-ossitide",
-          "label": "Maren Ossitide",
-          "kind": "person",
-          "entityId": "maren-ossitide",
-          "fact": "She reads the moorland north the way a reader reads a page—with complete, unhurried attention. She sees what wakes beneath without naming it plainly, and she wants to understand what changed it.",
+          "entityId": null,
+          "fact": "Maren reads the moorland luminescence as a pre-Transition reclamation system waking from false sleep—the original instruction still running beneath the new order given by Silas's father. The system is unfinished; the old purpose is still moving toward completion beneath the ridge.",
           "links": [
             "what-wakes-beneath",
-            "whistling-woman-post"
+            "silas-father-the-fold-weir",
+            "whistling-woman-post",
+            "overseer-grael"
           ]
         }
       ],
@@ -2639,52 +2634,41 @@
       "unlockPrecursor": null,
       "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 2,
-        "why": "Deep night scouting flight—two hours aloft over the moorland to map the edge of wrongness"
+        "hoursPassed": 1,
+        "why": "scouting flight over the moorland from deep night into late dawn"
       },
       "moveTo": null,
       "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": "Two figures silhouetted against stars—a wright and a legendary warden on vast shadow-wings, banking over pale moorland grass. Below them: the ridge line rises northward, and beyond it, the ground glows wrong with an absence-of-dark that speaks of something immense waking from the earth.",
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
+      "imagePrompt": "Two figures on shadow-wings banking wide above pale moorland in the grey-gold light of late dawn—the warden in her tall, unhurried form, the wright beside her. Below, a luminescence in a deep hollow glows without flame or source, and the grass ripples in waves as if the earth beneath it is breathing.",
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Airborne above the moorland north of the Whistling Woman post at deep night—the grass far below pale in starlight, the ridge line climbing northward, and beyond it a darkness that moves wrong. Two figures ride the thermals on shadow-wings, the wind cold and carrying ozone.",
+      "setting": "Airborne above the moorland north of the Whistling Woman post at late dawn—the grass far below pale and rippling in waves from beneath, the ridge line climbing northward like a dark spine, and beyond it a deep hollow glowing with sourceless luminescence. Two figures ride the thermals on shadow-wings, the wind cold and carrying ozone.",
       "npcsPresent": [
         {
           "name": "Maren Ossitide (warden-form)",
-          "state": "Flying steady beside you in warden-form, grey-ash hair unbound, eye fixed on the wrongness below. Reading the ground the · Riding the thermal currents far below the shadow-wings, moving in parallel through the moorland dark. Silent."
+          "state": "Flying steady at your side in warden-form, grey-ash hair unbound, eye fixed on the wrongness below. Reading the ground l"
         }
       ],
       "objects": [
-        "The moorland below—pale grass, dark stone, the line of the ridge northward",
-        "The shadow-wings, vast and dark, manifested and steady",
-        "Starlight above, darkness below, wind moving cold",
-        "The luminescence in the deep hollow beyond the ridge—an absence-of-dark that rea"
+        "The shadow-wings, vast and dark, manifested and steady beneath you both",
+        "Starlight above, fading as dawn approaches from the east",
+        "The luminescence in the deep hollow beyond the ridge—an absence-of-dark that rea",
+        "The moorland below—pale grass rippling in waves from beneath, dark stone outcrop"
       ],
       "threads": [
-        "What wakes beneath the moorland north—its shape, its purpose, its danger",
-        "The luminescence in the deep hollow—what causes it and how large the thing beneath truly is",
-        "Whether the wrongness will breach the ridge line and reach the post or the valley beyond",
-        "Grael's three-day absence and its connection to this stirring",
-        "The convene vote at noon—and whether this intelligence will change the outcome"
+        "What the unfinished work beneath the ridge is meant to accomplish",
+        "How much time remains before the convene votes at noon in the Center",
+        "Whether the system will complete its task before the party can reach Millbrook",
+        "What the old instruction was, and how far along its completion truly is"
       ]
     },
-    "beats": 5
+    "beats": 6
   },
   "clock": {
     "schemaVersion": 1,
     "day": 18,
-    "hour": 8,
+    "hour": 9,
     "realAnchor": null
   },
   "companions": [
@@ -5566,7 +5550,6 @@
       },
       "relationship": 2,
       "history": [
-        "[d17] Revealed herself in full warden-form at the completion of the universal shrine. Accepted Silas's invitation to travel. Accepted dinner invitation. Named herself plainly as Maren Ossitide.",
         "[d17] Your bond becomes sworn.",
         "[d17] Revealed herself in full warden-form at the universal shrine. Accepted invitation to travel with Silas and join the party for dinner. She is both bird and woman—chose corvid form to attend endings the institutional March cannot reach.",
         "[d17] Co-worked Named Exclusion at the Made Gate shrine with Silas Weir. Accepted co-wardenship of the threshold. The mark took unevenly, settling only at the cardinal points. She reads this as acceptable and foresees the valley will learn to read it in time.",
@@ -5575,17 +5558,18 @@
         "[d17] Sits at the table in the Whistling Woman post in warden-form, revealed and no longer hidden. Accepted co-wardenship of the universal shrine. Present and attentive as Silas recalls the introductions.",
         "[d18] Accepted Silas's invitation to fly north over the moorland to scout what moves wrong in the dark. Rises in full warden-form, steady and unhurried.",
         "[d18] Departed the Whistling Woman post at deep night in warden-form, rising on shadow-wings with Silas to scout the moorland stirring north. Said: 'I have waited fifteen years to fly with you again. I am ready.' Flying steady and attentive beside him.",
-        "[d18] Flying at Silas's side over the moorland north, reading the wrongness beneath the ground. Steady, unhurried, attentive to what wakes."
+        "[d18] Flying at Silas's side over the moorland north, reading the wrongness beneath the ground. Steady, unhurried, attentive to what wakes.",
+        "[d18] Read the moorland wrongness as pre-Transition system waking from false sleep—the reclamation site's original order still running beneath Silas's father's new instruction, incomplete and moving toward its original purpose."
       ],
       "knownFacts": [
-        "She is Maren Ossitide, legendary Ashwarden warden",
-        "She chose corvid form to attend roadside deaths, exile endings, solitary passings that the institutional March cannot reach",
-        "She has sat with every death at Silas's side since they met",
         "She requires co-wardenship of the shrine—the valley must know both Warden and Wright hold this threshold",
         "The mark's uneven settling does not disturb her; she reads it as a thing that will strengthen and be understood",
         "She allowed the revelation at the shrine's completion—not before, not after, but at that exact threshold",
         "She accepted Silas's invitation to travel with the company without ceremony or condition",
-        "She is comfortable in human form among the party, seated at a common table, present for dinner and counsel"
+        "She is comfortable in human form among the party, seated at a common table, present for dinner and counsel",
+        "The luminescence is not a death—Deathsense finds nothing ending, but something that was made to sleep is breaking",
+        "The reclamation site's original instruction still runs in its bones beneath the new order given",
+        "The system is unfinished—the old purpose is still moving toward completion"
       ],
       "skillsObserved": [
         "Perfect warden's attention—complete, unhurried, undivided",
@@ -5602,7 +5586,7 @@
       "kin": "sworn",
       "image": "https://image.pollinations.ai/prompt/Ash-grey%20hair%20unbound%2C%20weathered%20face%20lined%20at%20eyes%20and%20mouth%2C%20steady%20hands%20scarred%20at%20the%20knuckles.%20Tall%2C%20built%20like%20someone%20who%20has%20walked%20a%20great%20distance%20and%20hurried%20for%20none%20of%20it.%20Age%20unresolvab%2C%20character%20portrait%2C%20named%20Maren%20Ossitide%2C%20woman%2C%20Legendary%20Ashwarden%20warden%3B%20the%20one%20who%20buried%20the%20Drowned%20Year%2C%20sworn%20to%20Silas%20Weir%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=56790&nologo=true",
       "_portraitTier": "sworn",
-      "statusNote": "Active, airborne over the moorland north with Silas Weir, scouting the stirring that moves beneath.",
+      "statusNote": "Active, airborne over the moorland north with Silas Weir, reading the waking system beneath the ridge",
       "domains": {
         "primary": "ashwarden"
       },
@@ -5611,7 +5595,7 @@
         "locationId": "gen-whistling-woman-post",
         "day": 18
       },
-      "met": 8,
+      "met": 9,
       "aliases": [
         "Huginn",
         "Marrow"
@@ -6872,7 +6856,7 @@
     "lastTickWorldDay": 74,
     "lastCanonWorldDay": 74,
     "lastGenCount": 1780,
-    "turnsSinceOffer": 3,
+    "turnsSinceOffer": 4,
     "recentOffers": [
       {
         "thing": "Corvin Teth — a runner with a fractured death-thread, an urgency that broke relay protocol, and knowledge of the moorland's changed quiet",
@@ -7518,19 +7502,6 @@
       }
     },
     "pressureQueue": [
-      {
-        "source": "npc-want",
-        "kind": "npc-want",
-        "subjectId": "calvar",
-        "aimedAtPlayer": true,
-        "urgency": 3,
-        "oneLineHook": "Calvar, unseen for 9 days, has come looking for you — driven by an unmet want: The filtration work done CORRECTLY — he came out of a solitary twenty-year watch for this; sloppiness offends him more than danger.. They arrive now, not content to keep waiting.",
-        "becomes": {
-          "type": "scene",
-          "who": "calvar"
-        },
-        "addedDay": 18
-      },
       {
         "source": "threat-attack",
         "kind": "threat-attack",
@@ -15124,7 +15095,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d14] Order-Sense read of the assembled group confirms the division: Mara Wells holds the Millbrook thread (the node the four working threads run through), while Veth goes into the Zone as March-road guide. The design left no room for it to be otherwise.",
           "[d14] The reclamation site in the left-branch Zone received its closing instruction on Day 14 at dawn — complete the task and stop. The site is winding down. The watershed will clear within one to two weeks without further intervention.",
           "[d14] The reclamation site has a fourth connection: a buried substrate-thread running southwest toward the lower watershed, seeding downstream wells with clean water for fifteen years. When the site closes, the feeding stops. The wells hold what they have, but the thread goes quiet.",
           "[d14] The reclamation site's closing instruction was amended on Day 14 at dawn — complete the task, push clean water through the substrate-thread to the lower wells, then stop. Both the watershed and the downstream wells will clear. The substrate-thread goes quiet when the site closes, but the wells…",
@@ -15147,17 +15117,18 @@
           "[d13] Silas named Mara Wells to the Hub Council water committee as Millbrook's relay contact and pressed for a meeting sooner than their scheduled three days — the committee now has a named contact and a named urgency, delivered via the morning run.",
           "[d17] A third-circuit relay runner broke protocol to carry an urgent message from the Hub to the warden—the encryption is sealed, but Corvin knows the shape: something is stirring in the moorland north, and it matters enough to abandon the standard relay chain.",
           "[d18] The north gate ward is failing. Grael has been absent for three days. The convene votes tomorrow at noon on whether to accept pole-pull as proven cause. The encrypted Hub message confirms urgency but does not name the source of the moorland stirring.",
-          "[d18] What Wakes Beneath — The moorland north of the ridge moves wrong in a way that does not match wind or weather. The grass ripples in waves from beneath; the ground shifts as if breathing. A faint luminescence glows in the deep hollow beyond the ridge—vast, deep-seated, and unmapped. The wrongness…"
+          "[d18] What Wakes Beneath — The moorland north of the ridge moves wrong in a way that does not match wind or weather. The grass ripples in waves from beneath; the ground shifts as if breathing. A faint luminescence glows in the deep hollow beyond the ridge—vast, deep-seated, and unmapped. The wrongness…",
+          "[d18] Maren reads the moorland luminescence as a pre-Transition reclamation system waking from false sleep—the original instruction still running beneath the new order given by Silas's father. The system is unfinished; the old purpose is still moving toward completion beneath the ridge."
         ],
         "links": [
-          "overseer-grael",
-          "what-wakes-beneath",
           "calvar",
           "the-made-gate",
           "huginn",
           "maren-ossitide",
           "whistling-woman-post",
-          "the-poles-pull"
+          "the-poles-pull",
+          "silas-father-the-fold-weir",
+          "overseer-grael"
         ],
         "aliases": [
           "The Water Crisis (ongoing)"
@@ -15181,7 +15152,8 @@
           "[d13] The complete community-scale filtration cascade now includes a fourth element the shadow work surfaced: a settling basin before the cloth stage, required at community scale to prevent the particulate load from blinding the cloth within a week. The design is now complete in four stages: settle…",
           "[d13] The full four-stage filtration cascade — settle, cloth, limestone bed, boil — transmitted to Warden Coll's shadow-slate via the Weirmark bond, signed with the Weirmark and the Fell Pell's name. The design is now in the hands of someone with authority to disseminate it. Crane names limestone…",
           "[d13] Creek gray-green four of six mornings at Millbrook intake. Third sleeve junction at east-bend confirmed iron-oxide seep — staged behind primary. Committee meeting in three days, no extension. Crane named as Silas's delegate to hold the thread.",
-          "[d13] A Radiant factor visited Millbrook four days ago — looked at the creek, asked about boiling, wrote in a book, and left without offering anything. The Harmonic sent a formal note of 'monitoring' with no person, no goods, and no offer. Mara's read: both are waiting to see who gets blamed before…"
+          "[d13] A Radiant factor visited Millbrook four days ago — looked at the creek, asked about boiling, wrote in a book, and left without offering anything. The Harmonic sent a formal note of 'monitoring' with no person, no goods, and no offer. Mara's read: both are waiting to see who gets blamed before…",
+          "[d14] Order-Sense read of the assembled group confirms the division: Mara Wells holds the Millbrook thread (the node the four working threads run through), while Veth goes into the Zone as March-road guide. The design left no room for it to be otherwise."
         ]
       },
       "dara-holt-the-ditch-mother": {
@@ -17277,22 +17249,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 22.4768508901973,
-    "cerebral": 11.400267307462423,
-    "social": 15.039333218246432,
-    "generous": 3.763928413302506,
-    "cautious": 5.961564537782178,
-    "physical": 0.180040014603306,
-    "risky": 0.5230645006758587,
-    "ruthless": 0.09399168988656452,
-    "carousing": 0.9873491852041779,
-    "amorous": 2.321334786160803,
-    "patient": 0.31602911565086367,
-    "stealth": 0.000003284925114754402,
-    "devotion": 0.13423288582901977,
-    "craft": 2.615999705913455,
-    "leadership": 2.1782500931724997,
-    "deception": 0.01573102330892667
+    "strategic": 21.91492961794237,
+    "cerebral": 11.115260624775862,
+    "social": 14.66334988779027,
+    "generous": 4.669830202969943,
+    "cautious": 5.812525424337624,
+    "physical": 0.17553901423822332,
+    "risky": 0.5099878881589622,
+    "ruthless": 0.09164189763940041,
+    "carousing": 0.9626654555740735,
+    "amorous": 2.2633014165067826,
+    "patient": 0.30812838775959206,
+    "stealth": 0.000003202801986885542,
+    "devotion": 0.13087706368329427,
+    "craft": 2.5505997132656186,
+    "leadership": 2.123793840843187,
+    "deception": 0.015337747726203502
   },
   "aptitudes": [
     "strategist",
@@ -17300,7 +17272,7 @@
     "scholar",
     "tactician"
   ],
-  "actionCount": 986,
+  "actionCount": 987,
   "grantsVersion": 1,
   "reconcileVersion": 54,
   "gallery": [
@@ -18248,8 +18220,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1789187487933,
-  "rev": 2037,
+  "updatedAt": 1789187628171,
+  "rev": 2038,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -22728,7 +22700,7 @@
   "syncedAt": 1788658062664,
   "teachers": {},
   "regionsKnown": {
-    "valley": 687,
+    "valley": 688,
     "the_palelands": 6,
     "the_center": 151,
     "the_echo_vale": 14
@@ -23039,10 +23011,10 @@
     {
       "id": "sess-33",
       "startedAt": "2026-09-11T22:48:54.873Z",
-      "lastAt": "2026-09-12T04:31:27.923Z",
+      "lastAt": "2026-09-12T04:33:48.168Z",
       "startDay": 73,
       "endDay": 74,
-      "beats": 42
+      "beats": 43
     }
   ],
   "company": [
@@ -23555,17 +23527,17 @@
     "gen-whistling-woman-post": "https://image.pollinations.ai/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=32614&nologo=true&_cb=1_1"
   },
   "_opEmitted": {
-    "sceneSummary": 364,
-    "choices": 363,
-    "characterDeltas": 193,
-    "scene": 364,
-    "npcUpdates": 317,
+    "sceneSummary": 365,
+    "choices": 364,
+    "characterDeltas": 194,
+    "scene": 365,
+    "npcUpdates": 318,
     "factUpdates": 40,
     "placeUpdates": 80,
-    "codexUpdates": 214,
-    "timeOps": 325,
-    "imagePrompt": 37,
-    "sceneEnded": 137,
+    "codexUpdates": 215,
+    "timeOps": 326,
+    "imagePrompt": 38,
+    "sceneEnded": 138,
     "itemUpdates": 8,
     "questUpdates": 49,
     "offer": 56,
@@ -23590,7 +23562,7 @@
     "partyOps": 3,
     "stateOps": 1
   },
-  "_opTurns": 364,
+  "_opTurns": 365,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -24816,13 +24788,13 @@
     "study": 13,
     "scout": 12,
     "lead": 2,
-    "ask": 4,
+    "ask": 5,
     "plan": 15,
     "negotiate": 3,
     "prepare": 14,
     "investigate": 4,
     "craft": 7,
-    "help": 7,
+    "help": 8,
     "discipline": 2,
     "persuade": 3,
     "rapport": 12,

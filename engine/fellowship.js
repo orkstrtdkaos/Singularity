@@ -75,7 +75,12 @@ function memberRows(character, { content = {}, worldDay = null, cfg = null, incl
   const npcs = content?.npcs || {};
   const reg = character?.npcRegistry || {};
   const side = new Set(activeCompany(character).map(m => m.npcId));
-  const sheetCfg = cfg || content?.rules?.resolution?.npcStanding || {};
+  // ⛔ THE MERGED BAG, NOT THE RAW SUB-BLOCK. `rules.npcStanding` is where `state.js` merges the authored
+  // `tier_signals` table in; `rules.resolution.npcStanding` is the file's own copy and carries `tierFloor`
+  // WITHOUT the signals. Reading the wrong one made `tierFromRole` return null for everyone, so every person
+  // with no authored level collapsed to 1 — Aldric and Dara read level 1 on Erik's screen and he caught it in
+  // an hour. ⚠️ `scripts/npc_pipeline.mjs` records this exact trap in its own header and I walked into it anyway.
+  const sheetCfg = cfg || content?.rules?.npcStanding || content?.rules?.resolution?.npcStanding || {};
   const rows = [];
   for (const u of unitsOf(character)) {
     for (const c of contingentsOf(u.unit)) {

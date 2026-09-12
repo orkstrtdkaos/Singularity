@@ -12133,6 +12133,96 @@ console.log("\n── §189 · one reader for every player-facing quest surface,
     })(), `${Object.values(C189.quests || {}).flatMap(d => d.stages || []).length} authored stages`);
 }
 
+/* ══════════ §190 — SNG-543 · THE SAVE THAT NEVER WENT UP, AND THE BAG THAT MADE EVERYONE LEVEL 1 (Erik 2026-09-12) ══════════ */
+console.log("\n── §190 · the push rides on the save, a failure says so, and the signals reach the deriver ──");
+{
+  const SY190 = await import("../engine/sync.js");
+  const FW190 = await import("../engine/fellowship.js");
+  const NS190 = await import("../engine/npcsheet.js");
+  const { loadContentHeadless: lch190 } = await import("./headless_content.mjs");
+  const C190 = await lch190();
+  const A190 = rd("app.js");
+  const silas190 = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+
+  /* ---- 1 · THE CADENCE. Erik: "I just loaded my Silas Character on my phone... it is quite a bit out of date." ---- */
+  // ⛔ THE MEASUREMENT THAT FOUND IT: `saveCharacter` is called ~176 times in app.js and `backupSaves` was called ONCE,
+  // inside `applyTurn`. Every between-turn change stayed on the device. The count is a ratchet rather than a pin, because
+  // the number of save sites moves with the app and the RATIO is the fact that matters.
+  const saveCalls = (A190.match(/\bsaveCharacter\(/g) || []).length;
+  check(`§190: ⛔ every one of app.js's ${saveCalls} save sites passes through ONE local writer that queues a push — the import is aliased so none of them can reach past it`,
+    /import \{[^}]*\bsaveCharacter as persistCharacter\b/.test(A190)
+    && (A190.match(/^function saveCharacter\(c, opts\) \{$/gm) || []).length === 1
+    && /function saveCharacter\(c, opts\) \{\s*\n\s*const r = persistCharacter\(c, opts\);\s*\n\s*_syncTarget = c \|\| _syncTarget;\s*\n\s*queueSync\(\);/.test(A190)
+    && !/\bpersistCharacter\(/.test(A190.replace(/const r = persistCharacter\(c, opts\);/, "")),
+    `${saveCalls} save sites`);
+  check("§190: …and the local write happens FIRST and is never made to wait on the network — a save that did not happen must never be reported as one that did",
+    /const r = persistCharacter\(c, opts\);[\s\S]{0,120}queueSync\(\);[\s\S]{0,40}return r;/.test(A190));
+  check("§190: ⛔ the push is DEBOUNCED and flushed when the page hides — 176 call sites must not be 176 PUTs, and closing a tab is when the last change has to leave",
+    /_syncTimer = setTimeout\(\(\) => \{ _syncTimer = null; flushSync\(\); \}, SYNC_IDLE_MS\)/.test(A190)
+    && /visibilityState === "hidden"\) queueSync\(\{ now: true \}\)/.test(A190)
+    && /addEventListener\("pagehide", \(\) => queueSync\(\{ now: true \}\)\)/.test(A190)
+    && /const SYNC_IDLE_MS = \d+;/.test(A190));
+  check("§190: …and a refusal leaves the copy DIRTY, so the next save retries instead of waiting for a turn",
+    /if \(ok\) clearSyncNote\(\); else \{ _syncDirty = true; showSyncNote\(r\?\.reason\); \}/.test(A190)
+    && /catch \(err\) \{\s*\n\s*_syncDirty = true;/.test(A190));
+
+  /* ---- 2 · NOTHING FAILS QUIETLY, AND THE STATUS LINE MAY NOT LIE ---- */
+  check("§190: ⛔ every outcome is stamped OUTSIDE the pushed object — a stamp on the character would change it, bump `rev`, and need a push of its own forever",
+    /const LAST_PUSH_KEY = \(id\) => `singularity\.sync\.lastPush\.\$\{id\}`;/.test(A190)
+    && !/character\.(_pushedAt|lastPush|pushedAt)\s*=/.test(A190));
+  // ⛔ MEASURED IN THE BROWSER AND FIXED: one good push, then a 403, and the line read "No copy has ever gone up from
+  // this device" — false, and the worst thing a status line can be. The last good stamp is carried forward.
+  check("§190: ⛔ a FAILURE MUST NOT ERASE THE LAST SUCCESS — the stamp carries `lastOkAt` forward so \"not going up\" can always say since when",
+    /const okAt = info\.ok \? info\.at : \(prev\.lastOkAt \?\? \(prev\.ok \? prev\.at : null\)\);/.test(A190)
+    && /const okAt = info \? \(info\.ok \? info\.at : info\.lastOkAt\) : null;/.test(A190)
+    && /last good copy \$\{esc\(agoWords\(info\.lastOkAt\)\)\}/.test(A190));
+  check("§190: …and the reason reaches the PLAYER with a retry, not the console — the guard's own line was said once per session and only after a turn",
+    /el\.className = "error-card"; el\.id = "sync-note"/.test(A190)
+    && /btn\.textContent = "Try again now"/.test(A190)
+    && /Another device holds a fresher copy, so this one was not sent/.test(A190));
+  // ⚠️ AND NO UNREACHABLE MESSAGE: both gates refuse when sync is off, so a `sync-off` line on that path could never fire.
+  check("§190: ⛔ no `sync-off` branch on the push path — both gates refuse when sync is off, and an unreachable message is the defect this project keeps finding",
+    !/reason === "sync-off"/.test(A190) && /if \(!_syncTarget \|\| !syncEnabled\(\)\) return;/.test(A190)
+    && /on this device only — sync is not set up here/.test(A190));
+  check("§190: …and the ROSTER says what this device is doing with each character, which is where a stale phone shows itself before a session is played on it",
+    /nothing sent up from this device yet/.test(A190) && /last sent up \$\{esc\(agoWords\(info\.at\)\)\}/.test(A190));
+
+  /* ---- 3 · THE GUARD IS UNTOUCHED (§117 must not regress under a busier push) ---- */
+  const stale = { id: "x", playerKey: "p", rev: 1794, updatedAt: 9_000, syncedAt: 1_000 };
+  const fresh = { id: "x", playerKey: "p", rev: 1858, updatedAt: 5_000, syncedAt: 1_000 };
+  check("§190: ⛔ pushing oftener does NOT weaken the stale-overwrite guard — a decisive rev lead still beats the clock, both ways",
+    SY190.resolveSaveConflict(stale, fresh).reason === "remote-newer"
+    && SY190.resolveSaveConflict(fresh, stale).reason === "local-newer"
+    && SY190.resolveSaveConflict({ ...stale, rev: 1855 }, fresh).reason === "local-newer");
+  check("§190: …and the guarded push refuses a stale local rather than clobbering a fresher remote",
+    await (async () => {
+      const r = await SY190.pushCharacterGuarded(stale, { fetch: async () => fresh, push: async () => { throw new Error("must not push"); }, enabled: () => true });
+      return r.ok === false && r.reason === "remote-newer";
+    })());
+
+  /* ---- 4 · THE BAG. Erik: "I ran a quest for Aldric so he should be leveled out... Dara Holt is the ditchmother" ---- */
+  // ⛔ TWO BAGS WITH THE SAME NAME AND ONLY ONE OF THEM MERGED: `state.js` merges the authored `tier_signals` table into
+  // `rules.npcStanding`; `rules.resolution.npcStanding` is the file's own sub-block and carries `tierFloor` WITHOUT the
+  // signals. Reading the sub-block made `tierFromRole` return null for everyone, so every person with no authored level
+  // collapsed to 1 — and `scripts/npc_pipeline.mjs` names this exact trap in its own header.
+  const merged = C190.rules?.npcStanding || {}, subBlock = C190.rules?.resolution?.npcStanding || {};
+  check("§190: ⛔ the MERGED bag carries the signals and the sub-block does not — the two are not interchangeable and the difference is every NPC's level",
+    !!merged.tierSignals && Array.isArray(merged.tierSignals.rules) && merged.tierSignals.rules.length >= 5
+    && !subBlock.tierSignals && !!merged.tierFloor,
+    `merged ${merged.tierSignals?.rules?.length ?? 0} rule(s) · sub-block ${subBlock.tierSignals ? "has" : "has none"}`);
+  check("§190: …and the roster reads the merged one, falling back only if it is absent",
+    /content\?\.rules\?\.npcStanding \|\| content\?\.rules\?\.resolution\?\.npcStanding/.test(rd("engine/fellowship.js")));
+  // ⛑ THE LIVE EFFECT, on the two people Erik named: a floor from their role instead of the bottom of the ladder.
+  const rows190 = [...FW190.atSideRows(silas190, { content: C190, worldDay: 19 }), ...FW190.poolRows(silas190, { content: C190, worldDay: 19 })];
+  const lvl = (id) => rows190.find(r => r.id === id)?.level ?? null;
+  check(`§190: ⛔ LIVE — nobody in the Fellowship reads level 1 any more; Aldric ${lvl("aldric")} and Dara ${lvl("dara-holt")} sit on the notable floor instead of the bottom of the ladder`,
+    rows190.length === 6 && rows190.every(r => r.level > 1) && lvl("aldric") >= 5 && lvl("dara-holt") >= 5,
+    rows190.map(r => `${r.name} ${r.level}`).join(" · "));
+  check("§190: …and the deriver itself proves the bag is the whole difference — the same record, the two bags, two answers",
+    (() => { const e = silas190.npcRegistry["aldric"];
+      return NS190.derivedLevel(e, { day: 19, cfg: subBlock }) === 1 && NS190.derivedLevel(e, { day: 19, cfg: merged }) > 1; })());
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

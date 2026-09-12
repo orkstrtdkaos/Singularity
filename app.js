@@ -2,7 +2,7 @@
 // Engine does the math (resolve/sense/reputation/profile); GM model does the words.
 
 import { grantMartialKit } from "./engine/martial.js";
-import { loadRecovery, recoveryKeys, loadContent, loreForLocation, eventsForGM, getPlayerKey, setPlayerKey, hasChosenPlayer, listPlayers, listCharacters, saveCharacter, loadCharacter, deleteCharacter, saveProfile, loadProfile, exportSave, importSave, adoptRemoteCharacter, preserveRecovery, dedupePlayers, findProfileByName, resolveLocationId, canTravelBetween, locationRefToString, isCoercedObjectName } from "./engine/state.js";
+import { loadRecovery, recoveryKeys, loadContent, loreForLocation, eventsForGM, getPlayerKey, setPlayerKey, hasChosenPlayer, listPlayers, listCharacters, saveCharacter as persistCharacter, loadCharacter, deleteCharacter, saveProfile, loadProfile, exportSave, importSave, adoptRemoteCharacter, preserveRecovery, dedupePlayers, findProfileByName, resolveLocationId, canTravelBetween, locationRefToString, isCoercedObjectName } from "./engine/state.js";
 import { mergeRecovery, mergeReceiptLine } from "./engine/recovery.js";   // the door to the snapshots the sync kept and nobody could reach
 import { resolveAction, successChance, applyEnergyCost } from "./engine/resolve.js";
 import { senseAction, senseTier, senseOpponent, appraiseOpponent } from "./engine/sense.js"; // CCODE-44: size a fight up BEFORE taking it
@@ -132,7 +132,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.468";
+const APP_VERSION = "1.9.469";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -724,6 +724,130 @@ async function syncPullCharacter(local) {
   }
   if (res.conflict) { preserveRecovery(remote, "remote"); return { character: local, note: "Kept this device's newer version — the other device's copy was saved as a recovery copy." }; }
   return { character: local, note: null };
+}
+
+/* ══════════ ⛔ THE SAVE GOES UP WHENEVER IT CHANGES, AND A FAILURE SAYS SO ══════════
+ *
+ *  ERIK 2026-09-12: *"I just loaded my Silas Character on my phone... it is quite a bit out of date... why is
+ *  the sync between devices broken!"*
+ *
+ *  ⛔ MEASURED, AND IT IS NOT THE TOKEN. At 09:23 that morning his session pushed three WORLD files —
+ *  world-tick, arcs, canon — while the character save had not moved since 23:47 the night before. Ten hours
+ *  and a day of play. ⚠️ THE CAUSE IS THE CADENCE: `saveCharacter` is called 176 times in this file and
+ *  `backupSaves` exactly ONCE, inside `applyTurn`. Everything a player does between turns — levelling,
+ *  spending points, holdings, hands, features, sailing a hull, bringing someone to their side — was written
+ *  to localStorage and left there. A second device then loads the last state a GM turn happened to carry up.
+ *
+ *  ⛑ SO THE PUSH RIDES ON THE SAVE, at the one place all 176 writes already pass through — CCODE-186's shape,
+ *  the one Aevi named as the one that works: put the rule where every surface funnels instead of patching the
+ *  surfaces. Debounced, because 176 call sites must not become 176 PUTs, and flushed when the page hides,
+ *  because closing a tab is precisely when the last change has to leave.
+ *
+ *  ⛔ AND NOTHING FAILS QUIETLY NOW. A refused push (the stale-copy guard), a dead network and a thrown PUT
+ *  all reached the console alone, and the guard's own line was said once per session and only after a turn —
+ *  so a save could stop going up for ten hours and the only symptom was a stale phone. ⚠️ THE STAMP LIVES
+ *  OUTSIDE THE PUSHED OBJECT: written onto the character it would change it, bump `rev`, and need a push of
+ *  its own, forever. */
+const SYNC_IDLE_MS = 12000;
+const LAST_PUSH_KEY = (id) => `singularity.sync.lastPush.${id}`;
+let _syncTimer = null, _syncInFlight = false, _syncDirty = false, _syncTarget = null;
+
+function lastPushInfo(id) { try { return JSON.parse(localStorage.getItem(LAST_PUSH_KEY(id)) || "null"); } catch { return null; } }
+/** ⛔ A FAILURE MUST NOT ERASE THE LAST SUCCESS. Measured in the browser: one good push, then a 403, and the
+ *  line read "No copy has ever gone up from this device" — which was false and is the worst thing a status
+ *  line can be. The last good stamp is carried forward, so "not going up" can always say since when. */
+function noteLastPush(id, info) {
+  const prev = lastPushInfo(id) || {};
+  const okAt = info.ok ? info.at : (prev.lastOkAt ?? (prev.ok ? prev.at : null));
+  const okRev = info.ok ? info.rev : (prev.lastOkRev ?? (prev.ok ? prev.rev : null));
+  try { localStorage.setItem(LAST_PUSH_KEY(id), JSON.stringify({ ...info, lastOkAt: okAt, lastOkRev: okRev })); } catch { /* best-effort */ }
+}
+
+/** ⛔ THE ONE WRITER every `saveCharacter(...)` in this file lands on. The local write happens FIRST and is
+ *  never made to wait on a network; a throw from it still propagates, because a save that did not happen must
+ *  never be reported as one that did. ⚠️ The pushed object is the one just saved rather than the module's
+ *  `character`, so a save during creation — before `character` is assigned — still goes up. */
+function saveCharacter(c, opts) {
+  const r = persistCharacter(c, opts);
+  _syncTarget = c || _syncTarget;
+  queueSync();
+  return r;
+}
+
+function queueSync({ now = false } = {}) {
+  if (!_syncTarget || !syncEnabled()) return;
+  _syncDirty = true;
+  if (now) { flushSync(); return; }
+  if (_syncTimer) return;                                   // one timer, whatever the burst
+  _syncTimer = setTimeout(() => { _syncTimer = null; flushSync(); }, SYNC_IDLE_MS);
+}
+
+async function flushSync() {
+  const c = _syncTarget;
+  if (!c || !syncEnabled() || _syncInFlight || !_syncDirty) return;
+  _syncInFlight = true; _syncDirty = false;
+  const id = c.id, rev = c.rev || 0;
+  try {
+    const r = await backupSaves(c, profile);
+    const ok = !!r?.ok;
+    noteLastPush(id, { at: Date.now(), rev, ok, reason: r?.reason || null });
+    // ⚠️ A REFUSAL LEAVES THE COPY DIRTY, so the next save tries again instead of waiting for a turn.
+    if (ok) clearSyncNote(); else { _syncDirty = true; showSyncNote(r?.reason); }
+  } catch (err) {
+    _syncDirty = true;
+    noteLastPush(id, { at: Date.now(), rev, ok: false, reason: err?.message || "the push failed" });
+    showSyncNote(err?.message);
+  } finally { _syncInFlight = false; }
+}
+
+function agoWords(at) {
+  const secs = Math.max(0, Math.round((Date.now() - Number(at || 0)) / 1000));
+  if (secs < 90) return "moments ago";
+  const mins = Math.round(secs / 60);
+  if (mins < 60) return `${mins} minute${mins === 1 ? "" : "s"} ago`;
+  const hours = Math.round(mins / 60);
+  if (hours < 24) return `${hours} hour${hours === 1 ? "" : "s"} ago`;
+  const days = Math.round(hours / 24);
+  return `${days} day${days === 1 ? "" : "s"} ago`;
+}
+
+/** The reason in words a player can act on, and the time a copy last DID go up. */
+function syncNoteLine(reason) {
+  const info = _syncTarget ? lastPushInfo(_syncTarget.id) : null;
+  const okAt = info ? (info.ok ? info.at : info.lastOkAt) : null;
+  const when = okAt ? `The last copy that went up from this device was ${agoWords(okAt)}.`
+    : "No copy has ever gone up from this device.";
+  // ⚠️ NO `sync-off` BRANCH HERE ON PURPOSE: both `queueSync` and `flushSync` refuse when sync is off, so a
+  // line about it could never be reached from this path — and an unreachable message is the defect this
+  // project keeps finding. That fact belongs where a player can act on it, and the roster states it.
+  const why = reason === "remote-newer"
+    ? "Another device holds a fresher copy, so this one was not sent. Reload to take theirs in — nothing here is lost; this copy is kept as a recovery copy when you do."
+    : `Your save is not going up: ${reason || "the network refused it"}.`;
+  return `${why} ${when}`;
+}
+
+function showSyncNote(reason) {
+  const line = syncNoteLine(reason);
+  let el = document.getElementById("sync-note");
+  if (!el) {
+    el = document.createElement("div"); el.className = "error-card"; el.id = "sync-note";
+    document.getElementById("app")?.prepend(el);
+  }
+  el.textContent = "";
+  const span = document.createElement("span"); span.textContent = line + " ";
+  const btn = document.createElement("button"); btn.className = "opt"; btn.textContent = "Try again now";
+  btn.onclick = () => { btn.disabled = true; btn.textContent = "Sending…"; _syncDirty = true; flushSync().then(() => { btn.disabled = false; btn.textContent = "Try again now"; }); };
+  el.append(span, btn);
+}
+function clearSyncNote() { document.getElementById("sync-note")?.remove(); }
+
+// ⛔ CLOSING THE TAB IS WHEN THE LAST CHANGE MUST LEAVE. `visibilitychange` fires when a phone is locked or an
+// app is switched away from, and `pagehide` on the real teardown; both flush whatever is still dirty.
+// ⚠️ Best effort by nature — an authenticated PUT cannot ride `sendBeacon` — which is exactly why the debounce
+// is short and every save re-arms it.
+if (typeof document !== "undefined") {
+  document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") queueSync({ now: true }); });
+  window.addEventListener("pagehide", () => queueSync({ now: true }));
 }
 
 /** "Who's playing?" — pick an existing player on this device, or start a new one. */
@@ -2986,6 +3110,18 @@ function renderRoster() {
     <div id="roster">${chars.map(c => `
       <div class="roster-item">
         <div><strong>${esc(c.name)}</strong> <span class="hint">${esc(c.origin)} · level ${c.level}</span></div>
+        ${(() => {
+          // ⛔ WHERE ERIK WOULD HAVE SEEN IT ON HIS PHONE. A device that is carrying this character nowhere, or
+          // that has failed to send a copy up, says so HERE — before a session is played on a stale copy and
+          // the two devices disagree. ⚠️ A device with no sync configured is playing that way on purpose: it is
+          // stated once, plainly, and never as a warning.
+          if (!syncEnabled()) return `<div class="hint">on this device only — sync is not set up here</div>`;
+          const info = lastPushInfo(c.id);
+          if (!info) return `<div class="hint">nothing sent up from this device yet — it goes up as you play</div>`;
+          return info.ok
+            ? `<div class="hint">last sent up ${esc(agoWords(info.at))}</div>`
+            : `<div class="hint" style="color:var(--warn,#e0b25a)">not going up: ${esc(info.reason || "the network refused it")} · ${info.lastOkAt ? `last good copy ${esc(agoWords(info.lastOkAt))}` : "none has ever gone up from here"}</div>`;
+        })()}
         <div class="roster-actions"><button class="btn" data-play="${esc(c.id)}">Play</button><button class="roster-del-icon" data-del="${esc(c.id)}" title="Delete ${esc(c.name)} from this device" aria-label="Delete ${esc(c.name)}">🗑</button></div>
       </div>`).join("")}</div>
     <div style="margin-top:16px; display:flex; gap:8px; flex-wrap:wrap;">

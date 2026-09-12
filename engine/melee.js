@@ -513,8 +513,11 @@ export function raiseBand(character, { id, name = null, count = 20, quality = 1,
 export function contingentsOf(band) {
   const list = band?.contingents;
   if (Array.isArray(list) && list.length) {
+    // ⛔ `npcId` RIDES THROUGH. It is the difference between "one of quality 2 who shapes" and "Pell Ran Marsh", and the
+    // normaliser used to drop it — so a band composed of real people read back as anonymous bodies to every consumer, the
+    // Fellowship roster included. ⚠️ The combat maths does not read it and does not have to; identity is not a modifier.
     return list.map(c => ({ n: Math.max(0, num(c?.n, 0)), quality: Math.max(0, num(c?.quality, 1)),
-      does: (c?.does || ["MARTIAL"]).map(String), what: c?.what || null }));
+      does: (c?.does || ["MARTIAL"]).map(String), what: c?.what || null, npcId: c?.npcId || null }));
   }
   return [{ n: Math.max(0, num(band?.count, 0)), quality: Math.max(0, num(band?.quality, 1)),
     does: ["HARM", "MARTIAL"], what: band?.name || null }];
@@ -554,7 +557,8 @@ export function contingentsFromPeople(people = [], { contributionsOf = null, lev
   }
   const out = named.map(({ p, does }) => {
     const lvl = Math.max(1, Number(levelOf ? levelOf(p) : p.level) || 1);
-    return { n: 1, quality: 1 + Math.floor(lvl / 10), does, what: p.name || p.id || "one of yours" };
+    // ⚠️ AND THE OTHER DIRECTION STAMPS IT, so people → contingents → people is lossless rather than one-way.
+    return { n: 1, quality: 1 + Math.floor(lvl / 10), does, what: p.name || p.id || "one of yours", npcId: p.id || null };
   });
   // ⛔ AND THE SIMPLE SOLDIERS ARE COUNTED, NOT DROPPED. Erik asked for the number explicitly, and a unit
   // that reports only its notables is a unit whose losses land on nobody.

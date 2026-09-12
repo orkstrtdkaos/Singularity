@@ -853,6 +853,13 @@ console.log("\n── §12 · the interface — reachability, phases, apparatus 
     // lines with the check green the whole way. ⚠️ A GATE WITH AN ESCAPE HATCH IS A GATE THAT CANNOT FAIL.
     doc.includes(`${renderFns.length} \`render*\` functions`),
     `app.js has ${renderFns.length}`);
+  // ⛔ AND THE TWO NUMBERS IN THE SAME SENTENCE THAT WERE NOT GATED: the line count drifted 981 lines while the function count
+  // beside it was checked every run. ⚠️ The ungated half of a gated sentence is exactly where a stale number survives.
+  const appLines = appSrc.split(/\r?\n/).length - (appSrc.endsWith("\n") ? 1 : 0);
+  const chromeSites = [...appSrc.matchAll(/(?<!function )\bchrome\(/g)].length;
+  check("§12: …and so do the line count and the shell call-site count, which sat in the same sentence ungated and went stale",
+    doc.includes(`${appLines.toLocaleString("en-US")} lines`) && doc.includes(`called from **${chromeSites} sites**`),
+    `app.js is ${appLines.toLocaleString("en-US")} lines with ${chromeSites} chrome() sites`);
 
   // ⛔ REACHABILITY IS DERIVED, NOT LISTED. There is no router and no screen variable in this app — a screen
   // calls the next one directly — so "is it reachable" has exactly one mechanical answer: does anything else
@@ -11887,6 +11894,179 @@ console.log("\n── §148 · role → tier, default down, authored always wins
   // ⛔ AND THE HONEST COUNT: R47's bare `_strike` is engine furniture, not a kit. The roster says so now.
   check("§148: ⛔ the roster counts REAL crafts — a lone `_strike` is not a kit, and 62 records have only that",
     /filter\(id => !id\.startsWith\("_"\)\)/.test(rd("scripts/roster.mjs")) && /only the bare strike — no real craft/.test(rd("scripts/roster.mjs")));
+}
+
+/* ══════════ §188 — SNG-541 slice 1 · THE ROSTER, THE POOL, AND EVERY BAND RATHER THAN ONE (Aevi's SPEC_SNG-541; Erik 2026-09-12) ══════════ */
+console.log("\n── §188 · who has thrown in with you: plural bands, a derived head, a pool that is a view, and a place that resolves three ways ──");
+{
+  const FW = await import("../engine/fellowship.js");
+  const ML = await import("../engine/melee.js");
+  const CO = await import("../engine/company.js");
+  const GR = await import("../engine/gm_registry.js");
+  const LD188 = await import("../engine/ladder.js");   // the cap is the ladder's, so the test derives it rather than pinning a number that moves
+  const { loadContentHeadless: lch188 } = await import("./headless_content.mjs");
+  const C188 = await lch188();
+  const L188 = C188.locations;
+
+  // ⛔ TWO BANDS, because Erik's ruling is that one is the accident of today: "he'll likely have other bands as he adventures... so
+  // don't make everything about a single band." The fixture is the state the roster must already handle before it exists in a save.
+  const two = () => ({
+    id: "c188", currentLocationId: "millbrook", clock: { day: 40 }, level: 20,
+    company: [{ npcId: "ana", roles: ["ally"], joinedDay: 30 }],
+    npcRegistry: {
+      ana: { id: "ana", name: "Ana Vell", role: "Blacksmith", firstMet: { locationId: "millbrook", day: 2 }, met: 8 },
+      bor: { id: "bor", name: "Bor", role: "Senior irrigator", lastSeen: { locationId: "the_crossing", day: 38 }, met: 4 },
+      cyn: { id: "cyn", name: "Cyn", role: "Messenger", firstMet: { locationId: "millbrook", day: 3 }, met: 2 },
+    },
+    bands: [
+      { id: "u1", name: "The First Band", from: "millbrook", quality: 2, condition: "fresh", count: 99,
+        contingents: [{ n: 1, quality: 2, does: ["SHAPE", "HARM"], what: "Ana Vell — the smith", npcId: "ana" },
+          { n: 1, quality: 2, does: ["MOVE", "SUSTAIN"], what: "Bor — logistics", npcId: "bor" },
+          { n: 4, quality: 1, does: ["HARM"], what: "ditch crew" }] },
+      { id: "u2", name: "The Second Band", from: "the_crossing", quality: 1, condition: "bloodied",
+        contingents: [{ n: 1, quality: 1, does: ["KNOW"], what: "Cyn — runner", npcId: "cyn" }] },
+    ],
+  });
+  const opts188 = { content: C188, worldDay: 40 };
+  const where188 = (ch) => ({ locations: L188, generated: ch.generated?.location || {}, holdings: ch.holdings || [], hereId: ch.currentLocationId, worldDay: 40 });
+
+  // ⛔ THE BUG THE ROSTER FOUND: `contingentsOf` normalised a contingent to {n, quality, does, what} and DROPPED `npcId`, so a band
+  // built out of real people read back as anonymous bodies to every consumer. The combat maths never needed it, which is why it
+  // survived — and why nothing could tell that a contingent WAS Pell.
+  check("§188: ⛔ a contingent's `npcId` survives normalisation — identity is not a modifier, and dropping it made six people six bodies",
+    ML.contingentsOf(two().bands[0]).map(c => c.npcId || "-").join(",") === "ana,bor,-"
+    && ML.contingentsFromPeople([{ id: "zed", name: "Zed", contributions: ["KNOW"], level: 12 }], {}).every(c => c.npcId === "zed" || c.what === "rank and file"));
+
+  // ⛔ PLURAL BY CONSTRUCTION — Erik's ruling, as a gate
+  const units188 = FW.unitsOf(two());
+  check("§188: ⛔ EVERY band is a unit and none of them is THE band — two bands read as two, each named, each with its own seat",
+    units188.length === 2 && units188.map(u => u.id).join(",") === "u1,u2"
+    && units188[0].seatId === "millbrook" && units188[1].seatId === "the_crossing" && units188[1].condition === "bloodied");
+  const rows188 = [...FW.atSideRows(two(), opts188), ...FW.poolRows(two(), opts188)];
+  check("§188: …and every row NAMES ITS UNIT, so a roster of three bands needs no grouping logic and no second screen",
+    rows188.length === 4 && rows188.every(r => r.unitId && r.unitName)
+    && new Set(rows188.map(r => r.unitId)).size === 2 && rows188.filter(r => r.unitId === "u2").length === 1);
+  check("§188: …and nothing reads `bands[0]` — a character with no bands answers with nothing rather than a fabricated one",
+    FW.unitsOf({ id: "x" }).length === 0 && FW.poolRows({ id: "x" }, opts188).length === 0
+    && FW.rosterLine({ id: "x" }, opts188) === "You command no bands."
+    && !/\.bands\s*\[\s*0\s*\]/.test(rd("engine/fellowship.js")) && !/\.bands\s*\[\s*0\s*\]/.test(rd("app.js")));
+
+  // ⛔ THE HEAD IS DERIVED. The fixture's first band carries `count: 99` against six real bodies, which is the staleness Aevi ruled
+  // on the same day for the energy counts: "a stored copy of a derived number is a staleness generator."
+  check("§188: ⛔ the headcount is DERIVED from the contingents and the stored `count` is never read — the fixture says 99 and the truth is 6",
+    units188[0].head === 6 && units188[0].unit.count === 99 && !/\b99\b/.test(FW.unitLine(units188[0]))
+    && FW.unitLine(units188[0]).startsWith("six strong"));
+  check("§188: …and no player-facing string prints the field or the number — Aevi: \"never print `count: 6` to a player. It is six people and they have names\"",
+    !/count/i.test(FW.rosterLine(two(), opts188)) && !/\b6\b/.test(FW.rosterLine(two(), opts188))
+    && /two bands — three sworn and four hands, one here/.test(FW.rosterLine(two(), opts188)), FW.rosterLine(two(), opts188));
+
+  // ⛔ THE POOL IS A VIEW (Aevi's §1) — recruiting moves a person between the two halves and touches no membership
+  const ch188 = two();
+  const folk188 = { ...opts188, includeHands: false };   // ⚠️ THE POOL HOLDS HANDS TOO — counting people means asking for people
+  const before = { pool: FW.poolRows(ch188, folk188).length, side: FW.atSideRows(ch188, folk188).length, sworn: ch188.bands.reduce((a, b) => a + b.contingents.filter(c => c.npcId).length, 0) };
+  CO.recruit(ch188, "bor", { roles: ["ally"], day: 41, ladder: C188.rules?.subAttributeLadder || null });
+  const after = { pool: FW.poolRows(ch188, folk188).length, side: FW.atSideRows(ch188, folk188).length, sworn: ch188.bands.reduce((a, b) => a + b.contingents.filter(c => c.npcId).length, 0) };
+  check("§188: ⛔ THE POOL IS A VIEW, NOT A CONTAINER — coming to your side moves a person between the two halves and changes no membership",
+    before.pool === 2 && after.pool === 1 && before.side === 1 && after.side === 2 && before.sworn === after.sworn && after.sworn === 3);
+  CO.partCompany(ch188, "bor", { day: 42, why: "sent back to the band" });
+  check("§188: …and going back does not unswear them: the party empties, the bands do not, and there is no third list to disagree",
+    FW.poolRows(ch188, folk188).length === 2 && FW.atSideRows(ch188, folk188).length === 1
+    && ch188.bands.reduce((a, b) => a + b.contingents.filter(c => c.npcId).length, 0) === 3
+    && !/character\.(pool|fellowship)\b/.test(rd("engine/fellowship.js")));
+
+  // ⛔ WHERE THEY ARE, WITH THE BASIS NAMED — the chain Erik asked for, each rung saying which rung it is
+  const rAna = FW.atSideRows(two(), opts188)[0];
+  const rBor = FW.poolRows(two(), opts188).find(r => r.id === "bor");
+  const rCyn = FW.poolRows(two(), opts188).find(r => r.id === "cyn");
+  const wAna = FW.wherePerson(rAna, where188(two())), wBor = FW.wherePerson(rBor, where188(two())), wCyn = FW.wherePerson(rCyn, where188(two()));
+  // ⛔ THE ORDER OF THE CHAIN IS THE RULING, and the engine was right where I was not: Cyn was MET at Millbrook and her band is
+  // seated at the Crossing, and the seat is the fresher fact — so she reads with her band. `firstMet` answers last, or not at all.
+  check("§188: ⛔ at your side is a FACT, last seen is a fact with a date, and the band's SEAT outranks where you happened to meet",
+    wAna.line === "here, with you" && wAna.basis === "at your side"
+    && wBor.basis === "last seen" && /at The Crossing, 34 days hubward and spinward/.test(wBor.line)
+    && wCyn.basis === "with the band" && /with the band at The Crossing/.test(wCyn.line), `${wBor.line} | ${wCyn.line}`);
+  // ⚠️ A PLACE THAT RESOLVES TO NOTHING IS NOT A PLACE TO PRINT. The slug is the one thing a player must never be shown.
+  const slug = two(); slug.bands[1].from = "no-such-place-anywhere"; delete slug.npcRegistry.cyn.firstMet;
+  const wSlug = FW.wherePerson(FW.poolRows(slug, opts188).find(r => r.id === "cyn"), where188(slug));
+  check("§188: ⛔ an id that resolves to no place NEVER reaches the player — it degrades to the fact that survives it",
+    wSlug.line === "with the band" && !/no-such-place/.test(wSlug.line), wSlug.line);
+  // ⛔ A HOLDING IS A PLACE. Silas's band's seat is `the-fell-pell`, a HOLDING standing at Millbrook — resolving against
+  // `locations` alone printed that slug straight at him.
+  const held = two();
+  held.holdings = [{ id: "the-fell-pell", name: "The Fell Pell", locationId: "the_crossing" }];   // elsewhere, so the distance path runs
+  held.bands[1].from = "the-fell-pell"; delete held.npcRegistry.cyn.firstMet; delete held.npcRegistry.cyn.lastSeen;
+  const wHeld = FW.wherePerson(FW.poolRows(held, opts188).find(r => r.id === "cyn"), where188(held));
+  check("§188: ⛔ a place is THREE THINGS — an authored location, one the fiction minted, or A HOLDING OF YOURS: the seat resolves by name",
+    /with the band at The Fell Pell/.test(wHeld.line) && !/the-fell-pell/.test(wHeld.line), wHeld.line);
+  // ⚠️ AND A DIFFERENT PLACE IS NEVER "no distance at all"
+  // ⛔ AND A HOLDING STANDING WHERE YOU ALREADY ARE IS "here at", not a journey — the same resolution, the other branch.
+  const atHand = two(); atHand.holdings = [{ id: "the-fell-pell", name: "The Fell Pell", locationId: "millbrook" }];
+  atHand.bands[1].from = "the-fell-pell"; delete atHand.npcRegistry.cyn.firstMet;
+  check("§188: …and the same seat standing where you are reads `here at` — a place is either a journey or underfoot, never both",
+    /^here at The Fell Pell$/.test(FW.wherePerson(FW.poolRows(atHand, opts188).find(r => r.id === "cyn"), where188(atHand)).line),
+    FW.wherePerson(FW.poolRows(atHand, opts188).find(r => r.id === "cyn"), where188(atHand)).line);
+
+  // ⛔ HANDS ARE COUNTED AND NEVER NAMED — a band is people and bodies by construction
+  const hands = FW.poolRows(two(), opts188).filter(r => r.kind === "hands");
+  check("§188: ⛔ a contingent with no `npcId` reads as HANDS with its charge, never as a person with an invented name",
+    hands.length === 1 && hands[0].n === 4 && hands[0].name === null && hands[0].what === "ditch crew"
+    && hands[0].level === null && hands[0].atSide === false);
+
+  // ⛔ FAMILIES AS VERBS, TWO TO A ROW (Aevi's §4: "a row that lists everything ranks nothing")
+  check("§188: ⛔ families read as VERBS and two is the limit in a row — `SHAPE/HARM` is a database, \"shapes and harms\" is a person",
+    rAna.verbs === "shapes and harms" && rBor.verbs === "moves and sustains" && rCyn.verbs === "knows"
+    && FW.poolRows({ bands: [{ id: "u", name: "U", contingents: [{ n: 1, npcId: "q", does: ["SHAPE", "HARM", "KNOW", "MOVE"] }] }], npcRegistry: { q: { id: "q", name: "Q" } } }, opts188)[0].verbs === "shapes and harms");
+
+  // ⛔ THE REFUSAL IS SAID, AND IT NAMES THE PERSON. `recruit` returns a bare null over the cap; the holds screen shipped that
+  // silence a week ago and Erik found it in an hour.
+  const full = two(); full.level = 10;
+  full.company = [{ npcId: "ana", roles: ["ally"], joinedDay: 30 }, { npcId: "x1", roles: ["ally"], joinedDay: 31 }, { npcId: "x2", roles: ["ally"], joinedDay: 32 }];
+  const gate188 = FW.canBringForward(full, FW.poolRows(full, opts188).find(r => r.id === "bor"), { ladder: C188.rules?.subAttributeLadder || null });
+  check("§188: ⛔ over the cap the refusal is a SENTENCE naming the person and the places, not a silent null",
+    gate188.ok === false && /Bor/.test(gate188.why)
+    && gate188.why.startsWith(`${gate188.taken} of ${gate188.places} places at your side are taken`)
+    && gate188.places === LD188.companyPlaces(C188.rules?.subAttributeLadder || null, full), gate188.why);
+  check("§188: …and hands are refused with the reason they are refused, while someone already here is told so",
+    FW.canBringForward(two(), hands[0], {}).why === "hands stay with their band"
+    && /already at your side/.test(FW.canBringForward(two(), rAna, {}).why));
+
+  // ⛔ THE SCREEN IS WIRED — a button is only as real as its handler (the tab bar's own comment, three screens up in app.js)
+  const A188 = rd("app.js");
+  check("§188: ⛔ the Bands tab exists, is wired in the ONE wiring function, and its two controls have handlers",
+    /id="tab-bands"/.test(A188) && /go\("tab-bands", \(\) => renderBandsTab\(\)\)/.test(A188)
+    && /function renderBandsTab\(\)/.test(A188) && /data-band-bring/.test(A188) && /data-band-part/.test(A188)
+    && /querySelectorAll\("\[data-band-bring\]"\)/.test(A188) && /querySelectorAll\("\[data-band-part\]"\)/.test(A188));
+  check("§188: …and the refusal is shown before the writer is called, never swallowed",
+    /const gate = canBringForward\(character, row, \{ ladder \}\);\s*\n\s*if \(!gate\.ok\) \{ alert\(gate\.why\); return; \}/.test(A188));
+
+  // ⛔ THE GM IS TOLD THE ROSTER, DERIVED. It was told `(fresh, 6)` — the stored copy, in the one place it learns what you command.
+  const row188 = GR.GM_CONTEXT.find(r => r.key === "commandDetail");
+  const gmOut = row188.build({ character: two(), CONTENT: C188, worldDay: 40, character_: null });
+  check("§188: ⛔ the GM reads the DERIVED roster — every unit, what it is for, and who of it walks with you",
+    /The First Band — six strong, fresh; it shapes, harms, moves, sustains/.test(gmOut)
+    && /Ana Vell \(with you\)/.test(gmOut) && /The Second Band — one strong, bloodied; it knows/.test(gmOut)
+    && !/\b99\b/.test(gmOut) && !/fresh, 6/.test(gmOut), gmOut.split("\n").filter(l => /raised/.test(l)).join(" | "));
+
+  // ⛔ AND THE LIVE CASE, ON SILAS'S OWN SAVE — the state Erik was looking at when he said he could not find the roster
+  const silas = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const sOpts = { content: C188, worldDay: 19 };
+  const sRows = [...FW.atSideRows(silas, sOpts), ...FW.poolRows(silas, sOpts)];
+  check("§188: ⛔ LIVE — the Fellowship of the Fell Pell reads six sworn with one at his side, every one of them named and levelled",
+    /^The Fellowship of the Fell Pell — six sworn, one here$/.test(FW.rosterLine(silas, sOpts))
+    && sRows.length === 6 && sRows.every(r => r.kind === "person" && r.name && r.level >= 1 && r.verbs)
+    && sRows.find(r => r.id === "pell").atSide === true, FW.rosterLine(silas, sOpts));
+  check("§188: ⛔ LIVE — a place under a day off reads `within the day`, never `no distance at all`, which would put a man both elsewhere and here",
+    (() => { const a = sRows.find(r => r.id === "aldric");
+      const w = FW.wherePerson(a, { locations: L188, generated: silas.generated?.location || {}, holdings: silas.holdings || [], hereId: silas.currentLocationId, worldDay: 19 });
+      return /^at Millbrook, within the day/.test(w.line); })(),
+    FW.wherePerson(sRows.find(r => r.id === "aldric"), { locations: L188, generated: silas.generated?.location || {}, holdings: silas.holdings || [], hereId: silas.currentLocationId, worldDay: 19 }).line);
+  check("§188: …and each of the six is placed by a named basis, with no slug and no invented position",
+    (() => {
+      const w = sRows.map(r => FW.wherePerson(r, { locations: L188, generated: silas.generated?.location || {}, holdings: silas.holdings || [], hereId: silas.currentLocationId, worldDay: 19 }));
+      const bases = ["at your side", "last seen", "home", "with the band", "where you met"];
+      return w.length === 6 && w.every(x => bases.includes(x.basis)) && w.every(x => !/-[a-z]+-/.test(x.line) || /Fell Pell/.test(x.line))
+        && w.some(x => x.basis === "with the band") && w.some(x => x.basis === "last seen");
+    })());
 }
 
 /* ══════════ REPORT ══════════ */

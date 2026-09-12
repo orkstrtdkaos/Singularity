@@ -1,7 +1,7 @@
 # THE APPARATUS — every harness, what it is for, and whether it runs
 
 ⛔ **ERIK, 2026-08-29: *"I want this to be a well oiled factory."*** ⚠️ **A factory you cannot see is not
-well oiled.** 100 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
+well oiled.** 101 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
 were gates, which were reports, and which had quietly stopped being wired into anything.
 
 ```bash
@@ -10,7 +10,7 @@ node scripts/apparatus.mjs --md     # …as markdown for §5
 node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 ```
 
-**Last measured: 2026-09-12 · v1.9.466 · 100 files.**
+**Last measured: 2026-09-12 · v1.9.467 · 101 files.**
 
 ---
 
@@ -134,7 +134,7 @@ worthless.
 | harness | kind | assertions | purpose |
 |---|---|---|---|
 | `tests/smoke` | ✅ GATE | 3562 | — |
-| `tests/how_it_works` | ✅ GATE | 1896 | CCODE-285 |
+| `tests/how_it_works` | ✅ GATE | 1919 | CCODE-285 |
 | `tests/skill_battle_sim` | ✅ GATE | 217 | SNG-098: the two-sided contest + fog-of-war invariant |
 | `tests/content_ci` | ✅ GATE | 192 | SNG-BATCH-10 Phase 4 / SNG-040/064: the content integrity gate |
 | `tests/craft_crit` | ✅ GATE | 43 | miss // it and YOU HAVE ONLY MADE CHAOS |
@@ -192,6 +192,7 @@ worthless.
 | `scripts/damage_sweep` | 🔧 TOOL+SELFTEST | 1 | SPEC_damage_make_it_vary §2: ONE HARNESS, ANY DIAL, THE NUMBER THAT MATTERS |
 | `scripts/encounter_types` | 🔧 TOOL+SELFTEST | 1 | CCODE-262 |
 | `scripts/engine_map` | 🔧 TOOL+SELFTEST | 1 | BATCH-12 §5 |
+| `scripts/interface_counts` | 🔧 TOOL+SELFTEST | 1 | STAMP THE THREE INTERFACE NUMBERS IN docs/HOW_IT_WORKS |
 | `scripts/prompt_grid` | 🔧 TOOL+SELFTEST | 1 | SNG-435 §B3: the ordering grid |
 | `scripts/run_warden` | 🔧 TOOL+SELFTEST | 1 | CCODE-258 |
 | `scripts/scale_fidelity` | 🔧 TOOL+SELFTEST | 1 | CCODE-251 |

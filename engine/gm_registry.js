@@ -34,6 +34,7 @@
 
 import { smartClamp } from "./namematch.js";   // prose is clamped, never sliced (rawProseCaps)
 import { commandSlots, canRaiseBand } from "./melee.js";   // the three scales of company
+import { rosterForGM } from "./fellowship.js";   // SNG-541: the GM is told the roster, derived, instead of a stored count
 import { bearingsToKnown } from "./worldmap.js";   // SNG-386 §4.3: which way the road runs
 import { holdingsForGM, debtsForGM } from "./holdings.js";
 import { caravansForGM } from "./caravan.js";   // R49: loads on the road
@@ -227,7 +228,10 @@ export const GM_CONTEXT = [
       const cfg = env.CONTENT?.rules?.martial || {};
       const lead = commandSlots(env.character, { cfg, renownBand: env.character?.renownBand || null });
       const band = canRaiseBand(env.character, { cfg, renownBand: env.character?.renownBand || null });
-      const bands = Array.isArray(env.character?.bands) ? env.character.bands : [];
+      // ⛔ SNG-541: THE GM READS THE ROSTER, NOT A STORED COUNT. This printed `${b.name} (${b.condition}, ${b.count})` — the copy of
+      // a derived number, in the one place the GM is told what the player commands, so a band that had lost people still read full.
+      // `rosterForGM` derives the head from the contingents and says what each unit is FOR and who of it walks with you.
+      const roster = rosterForGM(env.character, { content: env.CONTENT, worldDay: env.worldDay ?? null });
       const lines = [
         `PARTY — you lead ${lead.slots} named ${lead.slots === 1 ? "person" : "people"} into a fight${lead.capped ? " (the most anyone leads for now)" : ""}. ${lead.why}.`,
         `  earned by: ${lead.earned.map(e => e.why).join(" · ") || "nothing yet — level, presence 7+, and renown each add one"}`,
@@ -235,7 +239,7 @@ export const GM_CONTEXT = [
           ? `BAND — you can raise one: ${band.why}. A band is a following that fights as a unit, not as names.`
           : `BAND — not yet: ${band.why}. It opens at 3 command slots OR 2 holdings that are not failing.`,
       ];
-      if (bands.length) lines.push(`  raised: ${bands.map(b => `${b.name} (${b.condition}, ${b.count})`).join(" · ")}`);
+      for (const r of roster) lines.push(`  raised: ${r}`);
       lines.push("LEGION — bands meet bands. What decides it is NUMBERS AND QUALITY, not one hero's roll; a hero bends a battle, and never by more than their rung allows.");
       return lines.join("\n");
     } },

@@ -68,6 +68,7 @@ wireDeathModel(DeathModel);
 import { carriageOf, voyageOf, isMoored, canSail, sailHolding, voyageLine, featureRuling, canBuildOn } from "./engine/carriage.js";   // B6b: the holding that moves
 import { featureCost, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady, applyPartyOps, activeCompany, formerCompany } from "./engine/company.js";
+import { unitsOf, unitLine, poolRows, atSideRows, wherePerson, canBringForward, rosterLine } from "./engine/fellowship.js";   // SNG-541: the roster, the pool, and EVERY band rather than one
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, suggestForCreation, archetypeFamilies, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
 import { toolkitForGM } from "./engine/toolkit.js";
 import { fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc } from "./engine/personalArc.js";
@@ -131,7 +132,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.466";
+const APP_VERSION = "1.9.467";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -11145,6 +11146,7 @@ function wireCharacterTabs() {
   go("tab-traits", () => renderCharacterScreen());
   go("tab-chronicle", () => renderChronicle());
   go("tab-holdings", () => renderHoldingsTab());
+  go("tab-bands", () => renderBandsTab());
   go("tab-world", () => renderWorldTab());
 }
 function characterTabBar(active) {
@@ -11152,6 +11154,7 @@ function characterTabBar(active) {
     <button class="char-tab${active === "traits" ? " on" : ""}" id="tab-traits">Traits</button>
     <button class="char-tab${active === "chronicle" ? " on" : ""}" id="tab-chronicle">📜 Chronicle</button>
     <button class="char-tab${active === "holdings" ? " on" : ""}" id="tab-holdings">⌂ Holdings</button>
+    <button class="char-tab${active === "bands" ? " on" : ""}" id="tab-bands">⚔ Bands</button>
     <button class="char-tab${active === "world" ? " on" : ""}" id="tab-world">🌍 The World</button>
   </div>`;
 }
@@ -12434,6 +12437,84 @@ function arcEffectsNow() {
   // GENERATED arc is born with the region it was minted in, and stops taxing the rest of the world.
   try { return activeArcEffects(CONTENT, character, (arcId) => arcStageNow(CONTENT, character, arcId), { regionId: hereRegionId() }); }
   catch { return []; }
+}
+
+/** ⛔ SNG-541 §4.4 / ERIK 2026-09-12 — WHO HAS THROWN IN WITH YOU: "I don't see where it lists who's in it and how I can manage it.
+ *  I would want everyone listed with their level and primary functions. I should be able to move people from my active party to the
+ *  fellowship pool easily, and it should list where those people are located currently, if not in my vicinity."
+ *
+ *  ⛔ AND THE TAB IS "BANDS", PLURAL, on his ruling the same day: "he'll likely have other bands as he adventures... so don't make
+ *  everything about a single band." One band names itself in its own heading; three read as three, with no second screen.
+ *
+ *  ⚠️ THE POOL IS NOT A LIST HELD ANYWHERE — it is everyone sworn who is not at your side today (Aevi's §1: "nothing to migrate,
+ *  nothing to keep in sync, and no way for the two lists to disagree"). So this screen cannot drift from the party sidebar: both
+ *  read the same two independent facts, membership and posture. */
+function renderBandsTab() {
+  const ladder = CONTENT.rules.subAttributeLadder;
+  const day = absoluteWorldDay();
+  const opts = { content: CONTENT, worldDay: day };
+  const units = unitsOf(character);
+  const whereOpts = { locations: CONTENT.locations || {}, generated: character.generated?.location || {},
+    holdings: character.holdings || [], hereId: character.currentLocationId, worldDay: day };
+  const places = companyPlaces(ladder, character);
+  const side = activeCompany(character);
+  const pool = poolRows(character, opts), here = atSideRows(character, opts);
+
+  const rowFor = (r) => {
+    if (r.kind === "hands") {
+      return `<div class="codex-f"><strong>${r.n} hands</strong> <span class="hint">${esc(r.what || "no charge written")}${r.verbs ? " · " + esc(r.verbs) : ""}</span></div>`;
+    }
+    const w = wherePerson(r, whereOpts);
+    const gate = r.atSide ? null : canBringForward(character, r, { ladder });
+    return `<div class="codex-f" style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap">
+      <strong style="min-width:130px">${esc(r.name)}</strong>
+      <span class="hint" style="flex:1 1 180px;min-width:0">${esc(r.what || "")}</span>
+      <span>${r.verbs ? esc(r.verbs) : `<span class="hint">nothing named</span>`}</span>
+      ${r.level != null ? `<span class="hint" style="font-variant-numeric:tabular-nums">level ${r.level}</span>` : ""}
+      <span class="hint" style="width:100%">${esc(w.line)}</span>
+      <div class="opt-row" style="gap:6px;flex-wrap:wrap;width:100%">
+        ${r.atSide
+          ? `<button class="opt" data-band-part="${esc(r.id)}" title="They stay sworn — they stop walking with you">Send back to the band</button>`
+          : `<button class="opt" data-band-bring="${esc(r.id)}"${gate?.ok ? "" : " disabled"} title="${esc(gate?.ok ? "They walk with you from here" : gate?.why || "")}">Bring to your side</button>`}
+        ${!r.atSide && !gate?.ok ? `<span class="hint">${esc(gate?.why || "")}</span>` : ""}
+      </div></div>`;
+  };
+
+  chrome(`<div class="screen" style="max-width:760px">
+    ${characterTabBar("bands")}
+    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">${esc(rosterLine(character, opts))}</h3>
+      ${units.length ? units.map(u => `<div style="margin-top:10px">
+        ${units.length === 1
+          ? `<div class="hint">${esc(unitLine(u))}</div>`
+          : `<div><strong>${esc(u.name)}</strong> <span class="hint">— ${esc(unitLine(u))}</span></div>`}
+        ${[...here.filter(r => r.unitId === u.id), ...pool.filter(r => r.unitId === u.id)].map(rowFor).join("") || `<div class="hint">nobody stands in it</div>`}
+      </div>`).join("") : `<p class="hint">Nobody has thrown in with you yet. A band is raised in play — and someone who has sworn to you stands in it whether or not they walk at your side.</p>`}
+    </div>
+    ${units.length ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">At your side</h3>
+      <div class="codex-f" style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap">
+        <strong style="min-width:150px">Places taken</strong>
+        <span style="font-variant-numeric:tabular-nums">${side.length} of ${places}</span>
+        ${side.length >= places ? `<span class="hint" style="color:var(--warn,#e0b25a)">full</span>` : ""}
+        <span class="hint" style="width:100%">Three by level ten, six not long after. ${here.length ? esc(here.map(r => r.name).join(" · ")) + (here.length === 1 ? " walks" : " walk") + " with you" : "None of your sworn walk with you today"}.${side.length > here.length ? ` ${side.length - here.length} more at your side ${side.length - here.length === 1 ? "stands" : "stand"} in no band.` : ""}</span></div>
+      <p class="hint">Sending someone back does not unswear them. They are in the band because they threw in with you; being at your side is a posture, and it is the only half this screen changes.</p></div>` : ""}
+    <button class="btn secondary" id="cs-back" style="margin-top:10px">Back</button>
+  </div>`);
+  wireCharacterTabs();
+  // ⛔ THE REFUSAL IS SAID, NEVER SWALLOWED. `recruit` returns a bare null over the cap, and the holds screen shipped exactly that
+  // silence a week ago — Erik found it in an hour. The gate speaks first and the writer acts second.
+  for (const b of app.querySelectorAll("[data-band-bring]")) b.onclick = () => {
+    const id = b.dataset.bandBring;
+    const row = poolRows(character, opts).find(r => r.id === id);
+    const gate = canBringForward(character, row, { ladder });
+    if (!gate.ok) { alert(gate.why); return; }
+    if (!recruit(character, id, { roles: ["ally"], day, ladder })) { alert("There is no place at your side for them today."); return; }
+    saveCharacter(character); renderBandsTab();
+  };
+  for (const b of app.querySelectorAll("[data-band-part]")) b.onclick = () => {
+    partCompany(character, b.dataset.bandPart, { day, why: "sent back to the band" });
+    saveCharacter(character); renderBandsTab();
+  };
+  const back = document.getElementById("cs-back"); if (back) back.onclick = () => renderCharacterScreen();
 }
 
 function renderWorldTab() {

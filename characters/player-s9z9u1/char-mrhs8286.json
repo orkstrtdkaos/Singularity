@@ -198,7 +198,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": 0.01969804224125707,
+    "spectrumId": 0.018713140129194214,
     "violence_peace": 0.09078381765624999,
     "chaos_order": 0.2642031390370944,
     "mechanical_spiritual": 0.2629700196352162,
@@ -2320,6 +2320,21 @@
       "spread": [],
       "day": 17,
       "worldDay": 74
+    },
+    {
+      "at": "2026-09-12T03:23:23.098Z",
+      "locationId": "gen-whistling-woman-post",
+      "communityId": null,
+      "description": "Offered Corvin Teth work and coin — named her as essential to the runner-side of the Whistling Woman post, treating her urgency as virtue",
+      "tags": [
+        "leadership",
+        "care",
+        "recognition"
+      ],
+      "weight": 1,
+      "spread": [],
+      "day": 18,
+      "worldDay": 74
     }
   ],
   "relationships": {},
@@ -2460,64 +2475,240 @@
         "player": "Ask her what her name is.  Reassure her that you are already acting on the message and that all will be well.",
         "summary": "Morning at the Whistling Woman waystation: Corvin Teth, the urgency-runner who broke relay protocol, names herself and her circuit. Silas assures her that the message is received and he is already in motion.",
         "narration": "You sit on the edge of the cot, keeping your voice level and your presence steady. 'What's your name?' you ask. It's a simple question—foundational—and the asking is itself an answer: you are listening, not merely receiving.\n\nShe steadies the cup in her lap and meets your eye. 'Corvin,' she says. 'Corvin Teth, third-circuit runner.' Her voice is clearer now, the thirst-edge worn off, and something else surfaces—the weight of the urgency she carried. 'I know the route was broken. Direct to warden, no relay chain. That means—'\n\n'It means you ran because something matters,' you say plainly. 'And you got here. The message is in your hands now, and I am already moving on it.' You let that land. Maren, still seated at the table, shifts her attention fully toward you both—the legendary warden's regard, complete and unhurried. Veth's hand tightens fractionally on the threshold's warded frame. Huginn, perched on the shelf, cocks its head. 'You did what was asked. All will be well. Rest, and let the body finish mending.'"
+      },
+      {
+        "player": "Thank Ms Teth for doing such a great job - tip her a few crystal.  Let her know she's welcome to help Deni run the runner side of this Post if she'd like.  ",
+        "summary": "At the Whistling Woman waystation in deep night, Silas thanks Corvin Teth for breaking relay protocol to deliver the urgent message and offers her a place running the post's runner-side operations alongside Deni Cors.",
+        "narration": "You reach into your coin-purse and draw out a handful of crystal — small weight, real value — and press it into Corvin's palm with the kind of directness she'll recognize. 'You ran on a broken thread and got here whole,' you say. 'That's work worth doing, and worth paying for.' She closes her fingers around it, steady. You let that land for a breath before the rest comes. 'Deni Cors built this post to outlast its maker and serve whoever tends it next. The runner-side of the circuit — the relay work, the whistle-marks, the message flow — that's going to need someone who knows the moorland and knows how to move through it clean. You do both. If you want it, there's a place here for you. Steady work. A post at your back. And you wouldn't be the first to choose the waystation over the road.' Corvin's eyes don't move from yours while you're speaking. When you finish, she nods — a small movement, but it carries weight. She's listening. The fever's clear now, and the urgency hasn't faded; it's just found a shape she can hold."
       }
     ],
     "lastTurn": {
-      "holdingOps": [
+      "narration": "You reach into your coin-purse and draw out a handful of crystal — small weight, real value — and press it into Corvin's palm with the kind of directness she'll recognize. 'You ran on a broken thread and got here whole,' you say. 'That's work worth doing, and worth paying for.' She closes her fingers around it, steady. You let that land for a breath before the rest comes. 'Deni Cors built this post to outlast its maker and serve whoever tends it next. The runner-side of the circuit — the relay work, the whistle-marks, the message flow — that's going to need someone who knows the moorland and knows how to move through it clean. You do both. If you want it, there's a place here for you. Steady work. A post at your back. And you wouldn't be the first to choose the waystation over the road.' Corvin's eyes don't move from yours while you're speaking. When you finish, she nods — a small movement, but it carries weight. She's listening. The fever's clear now, and the urgency hasn't faded; it's just found a shape she can hold.",
+      "sceneSummary": "At the Whistling Woman waystation in deep night, Silas thanks Corvin Teth for breaking relay protocol to deliver the urgent message and offers her a place running the post's runner-side operations alongside Deni Cors.",
+      "choices": [
         {
-          "op": "npcUpdate",
-          "npcId": "corvin",
-          "field": "name",
-          "value": "Teth"
+          "label": "Ask Corvin what she needs to answer — rest, supplies, time to think — and see what the offer needs to become real",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "negotiate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Turn to Maren and ask plainly what she reads in the moorland's changed silence — what her warden's eye sees moving north",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "ask"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Open Corvin's encrypted message now — break the seal and read what the Hub sent, whatever it costs",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Step outside to the threshold and use Order-Sense on the post itself — read what it is becoming, now that it holds wardens, runners, and a messenger with a fractured thread",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
-      "narration": "",
-      "sceneSummary": null
+      "deeds": [
+        {
+          "description": "Offered Corvin Teth work and coin — named her as essential to the runner-side of the Whistling Woman post, treating her urgency as virtue",
+          "tags": [
+            "leadership",
+            "care",
+            "recognition"
+          ],
+          "weight": 1,
+          "communityId": null
+        }
+      ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
+      "delegateOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": {
+        "thing": "Corvin Teth — a runner with a fractured death-thread, an urgency that broke relay protocol, and knowledge of the moorland's changed quiet",
+        "from": "the moorland itself, through Deni's warning and Corvin's arrival; the world moving on its own timeline"
+      },
+      "stageOps": [],
+      "scene": {
+        "setting": "Main room of the Whistling Woman waystation, deep night holding into the last hours before dawn. Fire banked steady and low. Corvin on the cot, crystal in her palm now, fever-clear and listening. Maren still at the table. Veth at the threshold. Huginn on the shelf, watching the runner with an eye that knows ending.",
+        "npcsPresent": [
+          {
+            "name": "Corvin Teth",
+            "state": "Awake on the cot, fever-clear, holding crystal, listening — the offer landing on her like something real"
+          },
+          {
+            "name": "Maren Ossitide",
+            "state": "Seated at the table, attention turned inward toward the moorland's moving silence, the warden's eye steady"
+          },
+          {
+            "name": "Veth (Stillwater) Ondra",
+            "state": "Standing near the threshold, hand resting on the warded frame, present and steady through the deep night"
+          },
+          {
+            "name": "Huginn",
+            "state": "Perched on the shelf, awake and watching, head cocked toward the runner with the timing that is never accidental"
+          }
+        ],
+        "objects": [
+          "banked fire in the stove, low and steady",
+          "table, worn smooth from Deni's work",
+          "oil lamps, dimmed to preserve the night",
+          "water barrel at the corner",
+          "cots with blankets",
+          "Deni's letter, folded on the shelf",
+          "music-box relay mechanism, silent and waiting",
+          "crystal in Corvin's palm"
+        ],
+        "threads": [
+          "What Corvin will answer to the offer",
+          "What the encrypted Hub message contains — still unopened, still urgent",
+          "What the moorland's changed silence means, and what moves north through it",
+          "Three days until the convene votes on the water crisis"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "corvin-teth",
+          "name": "Corvin Teth",
+          "note": "Offered a place at the Whistling Woman post running the runner-side operations alongside Deni Cors. Accepted crystal payment. Fever clear. Listening.",
+          "relationshipDelta": 1,
+          "statusNote": "Awake and fever-clear at the Whistling Woman post. Offered work as runner-coordinator. Carrying urgent encrypted message from the Hub about moorland stirring."
+        }
+      ],
+      "intentsHeard": [],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "discovery": null,
+      "codexUpdates": [
+        {
+          "topic": "corvin-teth",
+          "label": "Corvin Teth",
+          "kind": "person",
+          "entityId": "corvin-teth",
+          "fact": "Third-circuit runner who broke relay protocol to carry an urgent Hub message direct to the warden. Fever-fractured death-thread on arrival; surgery succeeded and mending. Now offered work at the Whistling Woman post as runner-coordinator.",
+          "links": [
+            "whistling-woman-post",
+            "the-water-crisis"
+          ]
+        }
+      ],
+      "holdingOps": [],
+      "debtOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": null,
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": null,
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Main room of the Whistling Woman waystation, pale morning light through the window. Fire banked low and steady. Corvin on the cot, holding a cup, fever-clear and speaking. Maren at the table, Veth near the threshold, Huginn on the shelf.",
+      "setting": "Main room of the Whistling Woman waystation, deep night holding into the last hours before dawn. Fire banked steady and low. Corvin on the cot, crystal in her palm now, fever-clear and listening. Maren still at the table. Veth at the threshold. Huginn on the shelf, watching the runner with an eye that knows ending.",
       "npcsPresent": [
         {
           "name": "Corvin Teth",
-          "state": "Awake, fever-clear, resting on the cot with water in hand, speaking plainly for the first time since surgery"
+          "state": "Awake on the cot, fever-clear, holding crystal, listening — the offer landing on him like something real"
         },
         {
           "name": "Maren Ossitide",
-          "state": "Seated at the table, attention turned fully toward Silas and Corvin, holding the watch"
+          "state": "Seated at the table, attention turned inward toward the moorland's moving silence, the warden's eye steady"
         },
         {
           "name": "Veth (Stillwater) Ondra",
-          "state": "Standing near the threshold, hand resting on the warded frame, present and steady"
+          "state": "Standing near the threshold, hand resting on the warded frame, present and steady through the deep night"
         },
         {
           "name": "Huginn",
-          "state": "Perched on the shelf, awake and watching, head cocked toward the Runner"
+          "state": "Perched on the shelf, awake and watching, head cocked toward the runner with the timing that is never accidental"
         }
       ],
       "objects": [
         "banked fire in the stove, low and steady",
-        "cup of water in Corvin's hands",
-        "table, worn smooth",
-        "oil lamp, dimmed",
-        "water barrel",
+        "table, worn smooth from Deni's work",
+        "oil lamps, dimmed to preserve the night",
+        "water barrel at the corner",
         "cots with blankets",
-        "Deni's letter, folded on the table",
-        "music-box relay mechanism on the shelf"
+        "Deni's letter, folded on the shelf",
+        "music-box relay mechanism, silent and waiting",
+        "crystal in Corvin's palm"
       ],
       "threads": [
-        "What the encrypted Hub message contains, in the shape Corvin knows it",
-        "What stirred in the moorland north that broke relay protocol",
-        "Why Corvin's death-thread fractured — what pulled his through dying to deliver this",
-        "The shadows that tore when Silas reached for Cael — what that means",
+        "What Corvin will answer to the offer",
+        "What the encrypted Hub message contains — still unopened, still urgent",
+        "What the moorland's changed silence means, and what moves north through it",
         "Three days until the convene votes on the water crisis"
       ]
     },
-    "beats": 11
+    "beats": 12
   },
   "clock": {
     "schemaVersion": 1,
     "day": 18,
-    "hour": 0,
+    "hour": 1,
     "realAnchor": null
   },
   "companions": [
@@ -4065,17 +4256,15 @@
     },
     "corvin": {
       "id": "corvin",
-      "name": "Corvin",
+      "name": "Corvin Teth (Runner)",
       "role": "Third-circuit relay runner, Hub messenger",
       "description": "Broad-shouldered, younger than Aldric, compact and weathered — the kind of man who maintains a place without being asked. Currently losing an argument with a fence-section.",
       "firstMet": {
         "locationId": "millbrook",
         "day": 1
       },
-      "relationship": 4,
+      "relationship": 5,
       "history": [
-        "[d1] Landed the killing strike on the sow — clean, short-range, no wasted motion. Kneeling in the sedge now, settling before the dressing work.",
-        "[d1] Received the acknowledgment with a nod and a palm-flat on the sow's flank — then drew his knife and began dressing without ceremony.",
         "[d1] Received the handoff cleanly — no argument, back to the dressing work.",
         "[d1] Dressing the sow in the sedge strip — out of earshot of the ridge work.",
         "[d1] Still dressing the sow thirty yards south — out of earshot of the ridge conversation.",
@@ -4083,7 +4272,9 @@
         "[d2] Pole leaned against the wall — his part of the work is done. Ready to head back to his furlong.",
         "[d2] Received twenty cord-weight without objection — brief recalibration, short nod, then out the door with his pole.",
         "[d2] Received farewell nod, departed with his pole — clean parting.",
-        "[d17] Woke fever-clear at the Whistling Woman post and named herself. Broke relay protocol to carry an encrypted message marked urgent-to-hand from the Hub to warden. She knows the shape of the crisis but not the plaintext."
+        "[d17] Woke fever-clear at the Whistling Woman post and named herself. Broke relay protocol to carry an encrypted message marked urgent-to-hand from the Hub to warden. She knows the shape of the crisis but not the plaintext.",
+        "[d18] You know this person's name now: Corvin Teth (Runner) (was \"Corvin\")",
+        "[d18] Offered a place at the Whistling Woman post running the runner-side operations alongside Deni Cors. Accepted crystal payment. Fever clear. Listening."
       ],
       "knownFacts": [
         "The tip is now his — he wrapped it himself",
@@ -4104,14 +4295,18 @@
         "immediate transition to post-kill work without ceremony"
       ],
       "status": "active",
-      "statusNote": "Awake and mending at the Whistling Woman post. Fever broken. Carrying urgent word from the Hub about something stirring in the moorland north.",
+      "statusNote": "Awake and fever-clear at the Whistling Woman post. Offered work as runner-coordinator. Carrying urgent encrypted message from the Hub about moorland stirring.",
       "lastSeen": {
         "locationId": "gen-whistling-woman-post",
-        "day": 17
+        "day": 18
       },
       "gender": "man",
       "pronouns": "he/him",
-      "met": 1
+      "met": 2,
+      "aliases": [
+        "Corvin"
+      ],
+      "nameRevealed": true
     },
     "dara-holt": {
       "id": "dara-holt",
@@ -6652,12 +6847,8 @@
     "lastTickWorldDay": 74,
     "lastCanonWorldDay": 74,
     "lastGenCount": 1779,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "Maren Ossitide accepts co-wardenship of the Made Gate shrine and will travel with you—a legendary warden at your side, revealed and…",
-        "from": "Your witness of her true form and your asking her plainly for both her name and her presence; the shrine's completion giving shape to what…"
-      },
       {
         "thing": "An unexpected rider from Millbrook, arriving at deep night—sent by someone who has been asking after you more than once.",
         "from": "Calvar's urgency and standing in the community, now made concrete in a hard ride across moorland"
@@ -6673,6 +6864,10 @@
       {
         "thing": "Corvin Teth — a third-circuit runner who broke protocol to carry an urgent message to the warden",
         "from": "The Hub's break of relay discipline, and Deni's warning about the moorland's changed silence — something in the north has already begun to…"
+      },
+      {
+        "thing": "Corvin Teth — a runner with a fractured death-thread, an urgency that broke relay protocol, and knowledge of the moorland's changed quiet",
+        "from": "the moorland itself, through Deni's warning and Corvin's arrival; the world moving on its own timeline"
       }
     ],
     "wantProgress": {
@@ -14793,16 +14988,21 @@
           "[d1] Pell named a specific concern: Corvin will be brave in the wrong moment. She agreed to supply the spear modification at cost only because a capable person will be beside him. His location: east furlon",
           "[d1] Pell gave exact directions — east furlong, past the second fence-line, left fork at the willow. He'll be mending something he broke or building something not fully thought through. She expects him to ",
           "[d1] Committed to the hunt on World-day 14 morning — north gate, before the light gets high. The reframe from 'arrangement' to 'going north together' resolved his hesitation. Modified light spear-tip now i",
-          "[d1] Confirmed the boar sounder's displacement pattern — driven higher by river smell on low air. Has been watching the north wood ground closely for weeks. Noted it without alarm, the way he notes a fence"
+          "[d1] Confirmed the boar sounder's displacement pattern — driven higher by river smell on low air. Has been watching the north wood ground closely for weeks. Noted it without alarm, the way he notes a fence",
+          "[d18] Third-circuit runner who broke relay protocol to carry an urgent Hub message direct to the warden. Fever-fractured death-thread on arrival; surgery succeeded and mending. Now offered work at the Whistling Woman post as runner-coordinator."
         ],
         "links": [
           "millbrook",
           "pell",
-          "aldric-provisioning-deal"
+          "aldric-provisioning-deal",
+          "whistling-woman-post",
+          "the-water-crisis"
         ],
-        "aliases": [],
+        "aliases": [
+          "Corvin Teth"
+        ],
         "createdDay": 1,
-        "updatedDay": 1,
+        "updatedDay": 18,
         "entityId": "corvin"
       },
       "millbrook-north-wood-boar": {
@@ -17075,22 +17275,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 21.267416771756015,
-    "cerebral": 12.504194184543802,
-    "social": 14.825254720723592,
-    "generous": 4.493751420755637,
-    "cautious": 5.923608326882789,
-    "physical": 0.21494964371721395,
-    "risky": 0.6244863304922976,
-    "ruthless": 0.11221661083516109,
-    "carousing": 1.1787954808365273,
-    "amorous": 2.7714399286905937,
-    "patient": 0.37730693347861993,
-    "stealth": 0.000003921869727737854,
-    "devotion": 0.16026054567733541,
-    "craft": 3.123240164079104,
-    "leadership": 2.6006112168234594,
-    "deception": 0.018781257394426387
+    "strategic": 20.735731352462114,
+    "cerebral": 12.191589329930206,
+    "social": 16.454623352705504,
+    "generous": 4.381407635236746,
+    "cautious": 5.775518118710719,
+    "physical": 0.2095759026242836,
+    "risky": 0.6088741722299902,
+    "ruthless": 0.10941119556428205,
+    "carousing": 1.1493255938156142,
+    "amorous": 2.7021539304733286,
+    "patient": 0.3678742601416544,
+    "stealth": 0.000003823822984544408,
+    "devotion": 0.15625403203540203,
+    "craft": 3.0451591599771266,
+    "leadership": 2.535595936402873,
+    "deception": 0.018311725959565726
   },
   "aptitudes": [
     "strategist",
@@ -17098,7 +17298,7 @@
     "scholar",
     "tactician"
   ],
-  "actionCount": 979,
+  "actionCount": 980,
   "grantsVersion": 1,
   "reconcileVersion": 49,
   "gallery": [
@@ -18030,8 +18230,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1789183100724,
-  "rev": 2004,
+  "updatedAt": 1789183403106,
+  "rev": 2006,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -22387,7 +22587,7 @@
   "syncedAt": 1788658062664,
   "teachers": {},
   "regionsKnown": {
-    "valley": 679,
+    "valley": 680,
     "the_palelands": 6,
     "the_center": 151,
     "the_echo_vale": 14
@@ -22698,10 +22898,10 @@
     {
       "id": "sess-33",
       "startedAt": "2026-09-11T22:48:54.873Z",
-      "lastAt": "2026-09-12T03:18:20.710Z",
+      "lastAt": "2026-09-12T03:23:23.098Z",
       "startDay": 73,
       "endDay": 74,
-      "beats": 32
+      "beats": 33
     }
   ],
   "company": [
@@ -23214,23 +23414,23 @@
     "gen-whistling-woman-post": "https://image.pollinations.ai/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=32614&nologo=true&_cb=1_1"
   },
   "_opEmitted": {
-    "sceneSummary": 357,
-    "choices": 356,
-    "characterDeltas": 187,
-    "scene": 357,
-    "npcUpdates": 313,
+    "sceneSummary": 358,
+    "choices": 357,
+    "characterDeltas": 188,
+    "scene": 358,
+    "npcUpdates": 314,
     "factUpdates": 38,
     "placeUpdates": 80,
-    "codexUpdates": 211,
+    "codexUpdates": 212,
     "timeOps": 320,
     "imagePrompt": 34,
-    "sceneEnded": 130,
+    "sceneEnded": 131,
     "itemUpdates": 8,
     "questUpdates": 49,
-    "offer": 52,
+    "offer": 53,
     "moveTo": 20,
     "delegateOps": 4,
-    "deeds": 23,
+    "deeds": 24,
     "standingOps": 6,
     "ledgerEvents": 12,
     "discovery": 6,
@@ -23241,7 +23441,7 @@
     "_applyFailedOp": 8,
     "newEncounter": 3,
     "encounterOps": 1,
-    "gambitApt": 60,
+    "gambitApt": 61,
     "markDefiningMoment": 1,
     "_engineClosedScene": 5,
     "gambitOps": 1,
@@ -23249,7 +23449,7 @@
     "partyOps": 3,
     "stateOps": 1
   },
-  "_opTurns": 357,
+  "_opTurns": 358,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -23257,7 +23457,7 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 56,
+      "applied": 57,
       "rejected": 1,
       "lastWhy": "rejected-shape"
     },
@@ -24442,11 +24642,11 @@
     "help": 7,
     "discipline": 2,
     "persuade": 3,
-    "rapport": 11,
+    "rapport": 12,
     "meditate": 2,
     "sustain": 1,
     "discuss": 1,
-    "comfort": 4,
+    "comfort": 5,
     "romantic": 3,
     "presence": 1,
     "flirt": 2,
@@ -24650,6 +24850,14 @@
       "day": 17,
       "worldDay": 74,
       "actionCount": 973
+    },
+    {
+      "companionId": "marrow",
+      "kind": "deed",
+      "delta": 0.5,
+      "day": 18,
+      "worldDay": 74,
+      "actionCount": 979
     }
   ],
   "_standingOpRefusals": [

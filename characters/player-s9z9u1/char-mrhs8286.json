@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 32,
-  "xp": 3175,
+  "xp": 3180,
   "attributes": {
     "physical": 5,
     "mental": 8,
@@ -217,7 +217,7 @@
   "maxHealth": 196,
   "health": 196,
   "maxEnergy": 287,
-  "energy": 255,
+  "energy": 250,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2435,132 +2435,242 @@
         "player": null,
         "summary": "Deep night at the Whistling Woman post. Bryn brings urgent word: the moorland north is moving wrong. An encrypted Hub message waits unread. Maren listens to something in the dark.",
         "narration": "The Whistling Woman post glows warm against the deep moorland night. Inside, the fire has burned down to a steady red core—the kind that holds heat without demanding attention. You are at the table with Pell across from you, Huginn perched on the high shelf where she can see the whole room, and Maren Ossitide sitting still as stone in the corner where the lamp-light catches her grey-ash hair.\n\nBryn arrived hours ago with word from Fendt. The Threshold Post frame stands. The mine is open and fractured but workable. The temple is done. And then he named what matters: the moorland north has stopped being silent. It is moving wrong now—a stirring that does not fit the natural patterns, and the ridge watchers felt it even at distance.\n\nMaren has not moved since he said it. Her attention is complete and undivided, the way a warden's attention is. She is listening to something you cannot hear yet, or waiting for something to arrive that she already knows is coming.\n\nThe encrypted message from the Hub sits on the table between you—sealed slate, unread, marked urgent-to-hand. Corvin brought it through fever and fracture. Whatever is stirring in the north, the Hub already knew it was moving. They sent word ahead.\n\nPell is watching you with the attention of someone who knows you are about to choose something that changes the shape of what comes next."
+      },
+      {
+        "player": "Break the seal on the encrypted message — read what the Hub sent urgent.",
+        "summary": "At the Whistling Woman post in deep night—the encrypted message reads: north gate ward failing, Grael absent, convene votes tomorrow at noon, and something moves wrong in the moorland north. The clock has turned.",
+        "narration": "Your fingers find the seal's edge—wax impressed with the Hub committee's stamp, still soft from the road. It breaks cleanly under your thumb. The slate beneath is dark, its surface unmarked until you lift it to the lamplight.\n\nShadow-script blooms across the surface, already fading as you read. The message is short and plain: \"North gate ward failing. Archive hold broken. Grael absent three days. Convene votes tomorrow at noon on pole-pull acceptance. Runner broke protocol: something stirs the moorland north of your position. It moves wrong. Watch the ridge. Watch the shadows. —Mara.\"\n\nThe script dissolves as you finish. The slate goes blank again. Pell's hand stills on her cup across the table. In the corner, Maren's head turns—just slightly—toward the window where the moorland dark presses against the glass. Huginn shifts on the shelf. One eye catches the firelight and holds it, very bright.\n\nThe north gate ward is failing. Grael is gone. The convene votes tomorrow—the same convene you pressed to move sooner, the same meeting that will decide whether the buried readings matter, whether the valley accepts what the water proves. And something is moving in the moorland north, moving wrong, moving in a way that caught Fendt's attention and broke a runner's protocols to warn you."
       }
     ],
     "lastTurn": {
-      "narration": "The Whistling Woman post glows warm against the deep moorland night. Inside, the fire has burned down to a steady red core—the kind that holds heat without demanding attention. You are at the table with Pell across from you, Huginn perched on the high shelf where she can see the whole room, and Maren Ossitide sitting still as stone in the corner where the lamp-light catches her grey-ash hair.\n\nBryn arrived hours ago with word from Fendt. The Threshold Post frame stands. The mine is open and fractured but workable. The temple is done. And then he named what matters: the moorland north has stopped being silent. It is moving wrong now—a stirring that does not fit the natural patterns, and the ridge watchers felt it even at distance.\n\nMaren has not moved since he said it. Her attention is complete and undivided, the way a warden's attention is. She is listening to something you cannot hear yet, or waiting for something to arrive that she already knows is coming.\n\nThe encrypted message from the Hub sits on the table between you—sealed slate, unread, marked urgent-to-hand. Corvin brought it through fever and fracture. Whatever is stirring in the north, the Hub already knew it was moving. They sent word ahead.\n\nPell is watching you with the attention of someone who knows you are about to choose something that changes the shape of what comes next.",
-      "sceneSummary": "Deep night at the Whistling Woman post. Bryn brings urgent word: the moorland north is moving wrong. An encrypted Hub message waits unread. Maren listens to something in the dark.",
+      "narration": "Your fingers find the seal's edge—wax impressed with the Hub committee's stamp, still soft from the road. It breaks cleanly under your thumb. The slate beneath is dark, its surface unmarked until you lift it to the lamplight.\n\nShadow-script blooms across the surface, already fading as you read. The message is short and plain: \"North gate ward failing. Archive hold broken. Grael absent three days. Convene votes tomorrow at noon on pole-pull acceptance. Runner broke protocol: something stirs the moorland north of your position. It moves wrong. Watch the ridge. Watch the shadows. —Mara.\"\n\nThe script dissolves as you finish. The slate goes blank again. Pell's hand stills on her cup across the table. In the corner, Maren's head turns—just slightly—toward the window where the moorland dark presses against the glass. Huginn shifts on the shelf. One eye catches the firelight and holds it, very bright.\n\nThe north gate ward is failing. Grael is gone. The convene votes tomorrow—the same convene you pressed to move sooner, the same meeting that will decide whether the buried readings matter, whether the valley accepts what the water proves. And something is moving in the moorland north, moving wrong, moving in a way that caught Fendt's attention and broke a runner's protocols to warn you.",
+      "sceneSummary": "At the Whistling Woman post in deep night—the encrypted message reads: north gate ward failing, Grael absent, convene votes tomorrow at noon, and something moves wrong in the moorland north. The clock has turned.",
       "choices": [
         {
-          "label": "Break the seal on the encrypted message — read what the Hub sent urgent.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
-          "difficulty": "very easy",
-          "trivial": false,
-          "intentTags": [
-            "study"
-          ]
-        },
-        {
-          "label": "Ask Maren what she is listening for — the warden who hears endings might hear what is stirring in the north.",
+          "label": "Ask Maren what she hears in the dark.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": "easy",
-          "trivial": true,
+          "opposedDifficulty": null,
           "intentTags": [
             "ask"
-          ]
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Step outside the post and use Deathsense on the moorland — read what is moving out there and how far along its ending might be.",
+          "label": "Push north toward the ridge now—the stirring cannot wait for daylight.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {},
+          "difficulty": "hard",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "travel",
+            "risky"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Deathsense on the moorland north—read what is moving wrong from this distance.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
-          "difficulty": "hard",
-          "trivial": false,
+          "difficulty": "very hard",
+          "opposedDifficulty": null,
           "intentTags": [
             "study"
           ],
           "abilityId": "deathsense",
-          "energyCost": 2
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ask Bryn for detail — how many watchers felt it, and what exactly they said was wrong about the stirring.",
+          "label": "Wake Corvin and Bryn—the encrypted message changes what needs to happen next, and they need to know before the morning comes.",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {},
           "difficulty": "easy",
-          "trivial": true,
+          "opposedDifficulty": null,
           "intentTags": [
             "ask"
-          ]
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
-      "characterDeltas": {},
-      "ledgerEvents": [],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [
+        {
+          "what": "The Hub committee's encrypted message arrives—north gate ward failing, Grael absent, convene votes tomorrow, moorland north moves wrong",
+          "tags": [
+            "crisis",
+            "urgent",
+            "shared-knowledge"
+          ],
+          "visibility": "witnessed",
+          "spectrumDeltas": {},
+          "impactsLocal": true
+        }
+      ],
       "questUpdates": [],
       "standingOps": [],
+      "delegateOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": {
+        "thing": "Maren's listening—she hears something in the dark that the message confirms. Her attention is not casual.",
+        "from": "What Wakes Beneath stirring in the moorland; Maren's warden-sense carrying news before the words did"
+      },
+      "stageOps": [],
       "scene": {
-        "setting": "Whistling Woman post interior — a single warm room lit by firelight and oil lamps, deep night, late spring. The fire has burned to steady coals. Outside, moorland dark and a wind that carries something wrong.",
+        "setting": "Whistling Woman post interior—deep night, fire burned to red coals, lamplight and shadow. Outside, moorland dark. Wind carries something that does not belong to the season.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Seated at the table across from you, watching. Alert and present."
+            "state": "Seated across the table. Hand stilled on her cup. Alert and watching Silas read."
           },
           {
-            "name": "Maren Ossitide (Huginn, Marrow)",
-            "state": "Seated in the corner, very still. Listening to something in the dark. Warden-attention complete and undivided."
-          },
-          {
-            "name": "Huginn",
-            "state": "Perched on the high shelf. Eyes on the whole room. Croaks once, low, and goes quiet."
+            "name": "Maren Ossitide (Huginn/Marrow)",
+            "state": "In the corner, very still. Warden-attention turned toward the window. Listening to something in the moorland dark. Perched on the shelf: eyes on the whole room, one eye catching firelight."
           },
           {
             "name": "Bryn Calowell",
-            "state": "Having delivered his message. Present but deferred, waiting for direction."
+            "state": "Resting after delivering his message. Present but deferred, waiting for direction."
           }
         ],
         "objects": [
-          "The table — sturdy, holding meal-leavings and water",
-          "The encrypted slate message — sealed, marked urgent-to-hand, waiting",
-          "The fire — red coals, steady heat",
-          "Oil lamps — casting warm light and long shadows",
-          "Bedroll and supplies on the shelf",
-          "The music-box relay mechanism — silent"
+          "The table—sturdy, holding meal-leavings and cooling water",
+          "The encrypted slate—now blank, its message read and dissolved",
+          "The fire—red coals, steady heat, casting long shadows",
+          "Oil lamps—warm light pooling in the corners",
+          "Bedrolls and supplies on the shelf",
+          "The music-box relay mechanism—silent"
         ],
         "threads": [
-          "What the Hub knew to send urgent",
-          "What is stirring in the moorland north",
-          "What Maren is listening for in the dark",
-          "Fendt's assessment at the ridge — the fracture at the mine, the wrongness in the air"
+          "What the moorland north is moving wrong—and why it matters now",
+          "The convene votes tomorrow at noon—and whether the buried readings will be accepted",
+          "Grael absent three days—and what that means for the Archive's hold",
+          "The north gate ward failing—and whether it will hold until the vote"
         ]
       },
-      "sceneEnded": false
+      "npcUpdates": [],
+      "intentsHeard": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The north gate ward is failing. Grael has been absent from the Archive for three days. The convene votes tomorrow at noon on whether to accept pole-pull as the cause of the water crisis. Something stirs in the moorland north of the Whistling Woman post—it moves wrong, in a way that does not fit natural patterns, and broke relay protocol for a runner to warn the warden.",
+          "subjectId": "whistling-woman-post"
+        }
+      ],
+      "placeUpdates": [],
+      "discovery": null,
+      "codexUpdates": [
+        {
+          "topic": "the-water-crisis",
+          "label": "The Water Crisis",
+          "kind": "mystery",
+          "fact": "The north gate ward is failing. Grael has been absent for three days. The convene votes tomorrow at noon on whether to accept pole-pull as proven cause. The encrypted Hub message confirms urgency but does not name the source of the moorland stirring.",
+          "links": [
+            "what-wakes-beneath",
+            "the-light-that-will-not-dim",
+            "overseer-grael"
+          ]
+        },
+        {
+          "topic": "deni-cors",
+          "label": "Deni Cors",
+          "kind": "person",
+          "entityId": "deni-cors",
+          "fact": "Named the moorland north of the Whistling Woman post as growing quiet in an unnatural way—a change the old watchers notice first. That silence has now shifted: it is no longer merely quiet but actively moving wrong. Something is stirring in that direction, and the ridge post has felt it.",
+          "links": [
+            "whistling-woman-post",
+            "what-wakes-beneath",
+            "threshold-post"
+          ]
+        }
+      ],
+      "holdingOps": [],
+      "debtOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "the time it takes to break a seal and read a shadow-message"
+      },
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": "Deep night at a moorland waystation—lamplight catching the edge of a blank slate, shadow-script dissolving as you read. Maren's profile in the corner, warden-still, her attention turned toward a window where the dark presses. Huginn's eye bright. Pell's hand stilled on her cup. The fire's red core. Outside, moorland night that is no longer merely dark but moving.",
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
+      "sceneEnded": false,
+      "momentArt": "https://image.pollinations.ai/prompt/Deep%20night%20at%20a%20moorland%20waystation%E2%80%94lamplight%20catching%20the%20edge%20of%20a%20blank%20slate%2C%20shadow-script%20dissolving%20as%20you%20read.%20Maren's%20profile%20in%20the%20corner%2C%20warden-still%2C%20her%20attention%20turned%20toward%20a%20window%20where%20the%20dark%20presses.%20Huginn's%20eye%20bright.%20Pell's%20hand%20stilled%20on%20her%20cup.%20The%20fire's%20red%20core.%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=14772&nologo=true"
     },
     "sceneState": {
-      "setting": "Whistling Woman post interior — a single warm room lit by firelight and oil lamps, deep night, late spring. The fire has burned to steady coals. Outside, moorland dark and a wind that carries something wrong.",
+      "setting": "Whistling Woman post interior—deep night, fire burned to red coals, lamplight and shadow. Outside, moorland dark. Wind carries something that does not belong to the season.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Seated at the table across from you, watching. Alert and present."
+          "state": "Seated across the table. Hand stilled on her cup. Alert and watching Silas read."
         },
         {
-          "name": "Maren Ossitide (Huginn, Marrow)",
-          "state": "Seated in the corner, very still. Listening to something in the dark. Warden-attention complete and undivided. · Perched on the high shelf. Eyes on the whole room. Croaks once, low, and goes quiet."
+          "name": "Maren Ossitide (Huginn/Marrow)",
+          "state": "In the corner, very still. Warden-attention turned toward the window. Listening to something in the moorland dark. Perch"
         },
         {
           "name": "Bryn Calowell",
-          "state": "Having delivered his message. Present but deferred, waiting for direction."
+          "state": "Resting after delivering his message. Present but deferred, waiting for direction."
         }
       ],
       "objects": [
-        "The table — sturdy, holding meal-leavings and water",
-        "The encrypted slate message — sealed, marked urgent-to-hand, waiting",
-        "The fire — red coals, steady heat",
-        "Oil lamps — casting warm light and long shadows",
-        "Bedroll and supplies on the shelf",
-        "The music-box relay mechanism — silent"
+        "The table—sturdy, holding meal-leavings and cooling water",
+        "The encrypted slate—now blank, its message read and dissolved",
+        "The fire—red coals, steady heat, casting long shadows",
+        "Oil lamps—warm light pooling in the corners",
+        "Bedrolls and supplies on the shelf",
+        "The music-box relay mechanism—silent"
       ],
       "threads": [
-        "What the Hub knew to send urgent",
-        "What is stirring in the moorland north",
-        "What Maren is listening for in the dark",
-        "Fendt's assessment at the ridge — the fracture at the mine, the wrongness in the air"
+        "What the moorland north is moving wrong—and why it matters now",
+        "The convene votes tomorrow at noon—and whether the buried readings will be accepted",
+        "Grael absent three days—and what that means for the Archive's hold",
+        "The north gate ward failing—and whether it will hold until the vote"
       ]
     },
-    "beats": 1
+    "beats": 2
   },
   "clock": {
     "schemaVersion": 1,
@@ -6748,12 +6858,8 @@
     "lastTickWorldDay": 74,
     "lastCanonWorldDay": 74,
     "lastGenCount": 1779,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "Cael, arrived via shadow-reach, brings word from Fendt at the ridge post",
-        "from": "the escalating crisis—the shadows are tearing, and the north is changing"
-      },
       {
         "thing": "Corvin Teth — a third-circuit runner who broke protocol to carry an urgent message to the warden",
         "from": "The Hub's break of relay discipline, and Deni's warning about the moorland's changed silence — something in the north has already begun to…"
@@ -6769,6 +6875,10 @@
       {
         "thing": "Bryn Calowell arrives with news that the Threshold Post is complete and ready, and that something in the moorland north is moving wrong",
         "from": "Fendt's concern transmitted through Logana, and the world's own stirring that Deni named—the moorland's silence has become active, and the…"
+      },
+      {
+        "thing": "Maren's listening—she hears something in the dark that the message confirms. Her attention is not casual.",
+        "from": "What Wakes Beneath stirring in the moorland; Maren's warden-sense carrying news before the words did"
       }
     ],
     "wantProgress": {
@@ -14999,7 +15109,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d13] Creek gray-green four of six mornings at Millbrook intake. Third sleeve junction at east-bend confirmed iron-oxide seep — staged behind primary. Committee meeting in three days, no extension. Crane named as Silas's delegate to hold the thread.",
           "[d13] A Radiant factor visited Millbrook four days ago — looked at the creek, asked about boiling, wrote in a book, and left without offering anything. The Harmonic sent a formal note of 'monitoring' with no person, no goods, and no offer. Mara's read: both are waiting to see who gets blamed before…",
           "[d14] Order-Sense read of the assembled group confirms the division: Mara Wells holds the Millbrook thread (the node the four working threads run through), while Veth goes into the Zone as March-road guide. The design left no room for it to be otherwise.",
           "[d14] The reclamation site in the left-branch Zone received its closing instruction on Day 14 at dawn — complete the task and stop. The site is winding down. The watershed will clear within one to two weeks without further intervention.",
@@ -15022,7 +15131,8 @@
           "[d13] A permanent two-way shadow-slate bound to Silas's Weirmark is now seated on Warden Coll's desk — written contact established without runners. Check-in protocol terms are the last open item before the scene closes.",
           "[d13] Dara Holt's relay confirms a third sleeve junction at the east-bend intake is showing the same iron-oxide seep as the others — repair materials staged in sequence by Dara, Calvar walking the line.",
           "[d13] Silas named Mara Wells to the Hub Council water committee as Millbrook's relay contact and pressed for a meeting sooner than their scheduled three days — the committee now has a named contact and a named urgency, delivered via the morning run.",
-          "[d17] A third-circuit relay runner broke protocol to carry an urgent message from the Hub to the warden—the encryption is sealed, but Corvin knows the shape: something is stirring in the moorland north, and it matters enough to abandon the standard relay chain."
+          "[d17] A third-circuit relay runner broke protocol to carry an urgent message from the Hub to the warden—the encryption is sealed, but Corvin knows the shape: something is stirring in the moorland north, and it matters enough to abandon the standard relay chain.",
+          "[d18] The north gate ward is failing. Grael has been absent for three days. The convene votes tomorrow at noon on whether to accept pole-pull as proven cause. The encrypted Hub message confirms urgency but does not name the source of the moorland stirring."
         ],
         "links": [
           "the-poles-pull",
@@ -15038,7 +15148,7 @@
           "The Water Crisis (ongoing)"
         ],
         "createdDay": 2,
-        "updatedDay": 17,
+        "updatedDay": 18,
         "entityId": "the-water-crisis",
         "archive": [
           "[d13] Silas named Mara Wells to the Hub Council water committee as Millbrook's relay contact and pressed for a meeting sooner than their scheduled three days — the committee now has a named contact and a named urgency, delivered via the morning run.",
@@ -15054,7 +15164,8 @@
           "[d13] Crane names the three-stage filter cascade — cloth, limestone bed, boiling — and confirms the mill's pressure could supply a whole settlement. Scaling is a solved problem. The source is not. And Aldric told him never to approach the fold, without saying why.",
           "[d13] Community-scale three-stage filtration cascade fully documented — intake, particulate cloth, limestone bed, boil-vessel, with scaling notes from 50 to 500 people, failure points, and material substitutions. The engineering problem is now solved on paper. The source is still the problem.",
           "[d13] The complete community-scale filtration cascade now includes a fourth element the shadow work surfaced: a settling basin before the cloth stage, required at community scale to prevent the particulate load from blinding the cloth within a week. The design is now complete in four stages: settle…",
-          "[d13] The full four-stage filtration cascade — settle, cloth, limestone bed, boil — transmitted to Warden Coll's shadow-slate via the Weirmark bond, signed with the Weirmark and the Fell Pell's name. The design is now in the hands of someone with authority to disseminate it. Crane names limestone…"
+          "[d13] The full four-stage filtration cascade — settle, cloth, limestone bed, boil — transmitted to Warden Coll's shadow-slate via the Weirmark bond, signed with the Weirmark and the Fell Pell's name. The design is now in the hands of someone with authority to disseminate it. Crane names limestone…",
+          "[d13] Creek gray-green four of six mornings at Millbrook intake. Third sleeve junction at east-bend confirmed iron-oxide seep — staged behind primary. Committee meeting in three days, no extension. Crane named as Silas's delegate to hold the thread."
         ]
       },
       "dara-holt-the-ditch-mother": {
@@ -16253,7 +16364,8 @@
           "[d17] Deni Cors reads the moorland and its moods with the precision of someone who has walked it for years. She noticed the silence growing north of the whistle-marks and named it as a concern in her letter to Silas, marking it as something the old watchers notice first—a change in the world's…",
           "[d17] What Wakes Beneath — The moorland north of the Whistling Woman post grows quiet in a way that is not weather or season—a change the old watchers notice first. This silence is connected to something deeper stirring, and Maren Ossitide recognizes it as a sign. The shadows are tearing under some…",
           "[d18] Deni Cors named the moorland north of the Whistling Woman post as growing quiet in a way that is not weather or season—a change the old watchers notice first. That silence has now shifted: it is no longer merely quiet but active and wrong. Something is moving in that direction, and the ridge post…",
-          "[d18] What Wakes Beneath — The moorland north of the Whistling Woman post is no longer merely silent but actively moving wrong. Something is stirring in that direction—it moves in a way that does not fit the natural patterns of the land, and watchers on the ridge can feel the disturbance even at distance."
+          "[d18] What Wakes Beneath — The moorland north of the Whistling Woman post is no longer merely silent but actively moving wrong. Something is stirring in that direction—it moves in a way that does not fit the natural patterns of the land, and watchers on the ridge can feel the disturbance even at distance.",
+          "[d18] Named the moorland north of the Whistling Woman post as growing quiet in an unnatural way—a change the old watchers notice first. That silence has now shifted: it is no longer merely quiet but actively moving wrong. Something is stirring in that direction, and the ridge post has felt it."
         ],
         "links": [
           "whistling-woman-post",
@@ -17143,22 +17255,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 21.661904616934297,
-    "cerebral": 11.589629606764902,
-    "social": 16.64217632466567,
-    "generous": 4.165075633246932,
-    "cautious": 5.490351911599378,
-    "physical": 0.1992280924322096,
-    "risky": 0.5788110099761344,
-    "ruthless": 0.10400901778329562,
-    "carousing": 1.0925776426209683,
-    "amorous": 2.5687350801562077,
-    "patient": 0.34971046854716026,
-    "stealth": 0.0000036350217246825272,
-    "devotion": 0.14853898920365405,
-    "craft": 2.8948044264532555,
-    "leadership": 2.410400887042981,
-    "deception": 0.01740758449031217
+    "strategic": 21.12035700151094,
+    "cerebral": 12.29988886659578,
+    "social": 16.226121916549026,
+    "generous": 4.060948742415759,
+    "cautious": 5.353093113809393,
+    "physical": 0.19424739012140435,
+    "risky": 0.5643407347267311,
+    "ruthless": 0.10140879233871322,
+    "carousing": 1.0652632015554442,
+    "amorous": 2.5045167031523023,
+    "patient": 0.34096770683348127,
+    "stealth": 0.000003544146181565464,
+    "devotion": 0.1448255144735627,
+    "craft": 2.822434315791924,
+    "leadership": 2.350140864866906,
+    "deception": 0.016972394878054364
   },
   "aptitudes": [
     "strategist",
@@ -17166,10 +17278,18 @@
     "scholar",
     "tactician"
   ],
-  "actionCount": 982,
+  "actionCount": 983,
   "grantsVersion": 1,
   "reconcileVersion": 54,
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "Deep night at a moorland waystation—lamplight catching the edge of a blank slate, shadow-script dissolving as you read. Maren's profile in the corner, warden-still, her attention turned toward a windo",
+      "url": "https://image.pollinations.ai/prompt/Deep%20night%20at%20a%20moorland%20waystation%E2%80%94lamplight%20catching%20the%20edge%20of%20a%20blank%20slate%2C%20shadow-script%20dissolving%20as%20you%20read.%20Maren's%20profile%20in%20the%20corner%2C%20warden-still%2C%20her%20attention%20turned%20toward%20a%20window%20where%20the%20dark%20presses.%20Huginn's%20eye%20bright.%20Pell's%20hand%20stilled%20on%20her%20cup.%20The%20fire's%20red%20core.%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=14772&nologo=true",
+      "caption": "At the Whistling Woman post in deep night—the encrypted message reads: north gate ward fai",
+      "worldDay": 74,
+      "at": "2026-09-12T03:48:30.440Z"
+    },
     {
       "kind": "npc",
       "prompt": "Weathered woman in leather apron filing hot metal, back turned to doorway, organized workbench behind her, focused grip, workshop lit by forge glow, practical efficiency in every motion.",
@@ -18098,8 +18218,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1789184793751,
-  "rev": 2018,
+  "updatedAt": 1789184910440,
+  "rev": 2021,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -20161,7 +20281,7 @@
           "entityId": "deni-cors",
           "type": "npc",
           "birthWeight": 42,
-          "engagementScore": 20,
+          "engagementScore": 21,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -20217,6 +20337,10 @@
             {
               "kind": "fact",
               "day": 17
+            },
+            {
+              "kind": "fact",
+              "day": 18
             },
             {
               "kind": "fact",
@@ -21580,6 +21704,12 @@
       "text": "Corvin Teth, third-circuit runner, broke relay protocol carrying an encrypted message from the Hub marked urgent-to-hand. She reached the Whistling Woman post with a fractured death-thread, indicating something in the north has begun to move.",
       "day": 17,
       "subjectId": "corvin-teth"
+    },
+    {
+      "id": "whistling-woman-post",
+      "text": "The north gate ward is failing. Grael has been absent from the Archive for three days. The convene votes tomorrow at noon on whether to accept pole-pull as the cause of the water crisis. Something stirs in the moorland north of the Whistling Woman post—it moves wrong, in a way that does not fit…",
+      "day": 18,
+      "subjectId": "whistling-woman-post"
     }
   ],
   "practice": {
@@ -22525,7 +22655,7 @@
   "syncedAt": 1788658062664,
   "teachers": {},
   "regionsKnown": {
-    "valley": 683,
+    "valley": 684,
     "the_palelands": 6,
     "the_center": 151,
     "the_echo_vale": 14
@@ -22836,10 +22966,10 @@
     {
       "id": "sess-33",
       "startedAt": "2026-09-11T22:48:54.873Z",
-      "lastAt": "2026-09-12T03:46:33.741Z",
+      "lastAt": "2026-09-12T03:48:30.396Z",
       "startDay": 73,
       "endDay": 74,
-      "beats": 37
+      "beats": 38
     }
   ],
   "company": [
@@ -23352,25 +23482,25 @@
     "gen-whistling-woman-post": "https://image.pollinations.ai/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=32614&nologo=true&_cb=1_1"
   },
   "_opEmitted": {
-    "sceneSummary": 360,
-    "choices": 359,
-    "characterDeltas": 189,
-    "scene": 360,
+    "sceneSummary": 361,
+    "choices": 360,
+    "characterDeltas": 190,
+    "scene": 361,
     "npcUpdates": 314,
-    "factUpdates": 38,
+    "factUpdates": 39,
     "placeUpdates": 80,
-    "codexUpdates": 212,
-    "timeOps": 321,
-    "imagePrompt": 34,
-    "sceneEnded": 133,
+    "codexUpdates": 213,
+    "timeOps": 322,
+    "imagePrompt": 35,
+    "sceneEnded": 134,
     "itemUpdates": 8,
     "questUpdates": 49,
-    "offer": 54,
+    "offer": 55,
     "moveTo": 20,
     "delegateOps": 4,
     "deeds": 24,
     "standingOps": 6,
-    "ledgerEvents": 12,
+    "ledgerEvents": 13,
     "discovery": 6,
     "stageOps": 15,
     "generateRequest": 13,
@@ -23379,7 +23509,7 @@
     "_applyFailedOp": 8,
     "newEncounter": 3,
     "encounterOps": 1,
-    "gambitApt": 62,
+    "gambitApt": 63,
     "markDefiningMoment": 1,
     "_engineClosedScene": 5,
     "gambitOps": 1,
@@ -23387,7 +23517,7 @@
     "partyOps": 3,
     "stateOps": 1
   },
-  "_opTurns": 360,
+  "_opTurns": 361,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -23395,7 +23525,7 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 59,
+      "applied": 60,
       "rejected": 1,
       "lastWhy": "rejected-shape"
     },
@@ -23644,7 +23774,25 @@
   "_stageOpRefusals": [
     "what-the-water-remembers: not-current-stage (named \"resolve\", current is \"null\")"
   ],
-  "_pendingLedger": [],
+  "_pendingLedger": [
+    {
+      "schemaVersion": 1,
+      "at": "2026-09-12T03:48:30.417Z",
+      "worldDay": 74,
+      "who": "char-mrhs8286",
+      "playerKey": "player-s9z9u1",
+      "where": "gen-whistling-woman-post",
+      "what": "The Hub committee's encrypted message arrives—north gate ward failing, Grael absent, convene votes tomorrow, moorland north moves wrong",
+      "tags": [
+        "crisis",
+        "urgent",
+        "shared-knowledge"
+      ],
+      "spectrumDeltas": {},
+      "visibility": "witnessed",
+      "impactsLocal": true
+    }
+  ],
   "locationState": {},
   "_applyFailures": null,
   "activeEncounter": null,
@@ -24593,7 +24741,7 @@
   "skillUses": {
     "travel": 12,
     "careful": 7,
-    "study": 12,
+    "study": 13,
     "scout": 10,
     "lead": 2,
     "ask": 4,

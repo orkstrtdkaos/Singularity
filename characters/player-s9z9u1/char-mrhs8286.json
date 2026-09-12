@@ -2462,222 +2462,17 @@
       }
     ],
     "lastTurn": {
-      "narration": "You turn to Maren in the lamplight, the encrypted message still blank in your hand. \"Do you feel up for a flight over the moors? We need some intel—and I will fly with you if you'd like.\"\n\nMaren's grey eye meets yours without hesitation. She stands, and the warden-form rises with her—tall, steady, built like someone who has walked ten thousand miles and hurried for none of it. \"I will,\" she says. Her voice is older than the bird's croak, and it carries the weight of endings attended. \"The moorland north has a shape now. I want to see what changed it.\"\n\nYou turn to Bryn, still resting by the fire. \"I need you to stay here to help protect the Whistling Woman Post—Deni and Corvin. After this scouting, the rest of us will need to head to Millbrook. Use the shadow model plans to build up the post, and attend to the shrine by the gate.\" Bryn nods, understanding the weight of the charge. He has carried urgent word across broken ground; he knows how to hold a place.\n\nPell sets down her cup. \"I'll ready the packs for the road south,\" she says plainly. No question about whether she's going—she and Silas move as one now, and Millbrook is the hammer that needs striking. Veth is already thinking about the route, about what a warden knows to watch for on moorland roads. The fire burns steady. The night is turning toward dawn.\n\n*You can keep 3 people running things in your name, and those places are taken. Someone would have to finish first.*",
-      "sceneSummary": "Deep night at the Whistling Woman post: Silas commits to aerial scouting with Maren Ossitide over the troubled moorland north, posts Bryn Calowell to defend the waystation with Deni and Corvin, and prepares the party for urgent travel south to Millbrook.",
-      "choices": [
-        {
-          "label": "Rise into the dark with Maren and cast Light-Borne to see the moorland north from height.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "scout",
-            "risky"
-          ],
-          "abilityId": "light_borne",
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Maren what she already knows—what does a warden sense in the moorland's wrongness?",
-          "attribute": "social",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": "very easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Order-Sense on the moorland north from the post threshold before flying—read what the land itself is becoming.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
-          "difficulty": "hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Depart now for Millbrook on foot with Pell and Veth—the message says the convene votes at noon. Time matters more than perfect intel.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
-          "difficulty": "very easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "travel",
-            "risky"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        }
-      ],
-      "deeds": [
-        {
-          "description": "Posted a guardian at the Whistling Woman waystation—a clear charge to hold the threshold while the warden rode north with urgent purpose.",
-          "tags": [
-            "leadership",
-            "resolve"
-          ],
-          "weight": 1,
-          "communityId": null
-        }
-      ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "standingOps": [],
-      "delegateOps": [
-        {
-          "npcId": "bryn-callowell",
-          "charge": "defend the Whistling Woman post and oversee construction using the shadow model plans; attend the universal shrine at the Made Gate",
-          "targetEventId": null
-        }
-      ],
-      "arcOps": [],
-      "adoptSchool": null,
-      "offer": {
-        "thing": "Maren's acceptance and readiness to fly—a warden who will ride into the moorland's wrongness without hesitation.",
-        "from": "her bond with Silas and her ancient charge to attend what is changing in the world"
-      },
-      "stageOps": [],
-      "scene": {
-        "setting": "Whistling Woman post interior at deep night turning toward dawn—fire burned to red coals, lamplight pooling in shadows. Outside, moorland dark and the wind carries something that does not belong.",
-        "npcsPresent": [
-          {
-            "name": "Pell Ran Marsh",
-            "state": "Standing now, ready to pack for the road south. Alert and present."
-          },
-          {
-            "name": "Maren Ossitide",
-            "state": "Risen in warden-form, tall and grey-ash, steady eye fixed on Silas. Ready to fly."
-          },
-          {
-            "name": "Bryn Calowell",
-            "state": "Resting by the fire, receiving his charge with clear understanding. Will stay to defend."
-          },
-          {
-            "name": "Huginn",
-            "state": "On the high shelf, watching. Silent."
-          },
-          {
-            "name": "Veth Ondra",
-            "state": "Present, thinking already about the road south and what a warden watches for."
-          }
-        ],
-        "objects": [
-          "The table—holding meal-leavings and cooling water",
-          "The encrypted slate—now blank, its message read and dissolved",
-          "The fire—red coals, steady heat",
-          "Oil lamps—warm light pooling",
-          "Bedrolls and supplies on the shelf",
-          "The music-box relay mechanism—silent"
-        ],
-        "threads": [
-          "What moves wrong in the moorland north—and why it matters now",
-          "The convene votes at noon—and whether the buried readings will shift the decision",
-          "Grael's three-day absence—and what it means for the Archive's hold",
-          "The north gate ward failing—and whether it will hold until the vote"
-        ]
-      },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "bryn-callowell",
+          "npcId": "bryn-calowell",
           "name": "Bryn Calowell",
-          "role": "Ridge warden's messenger and waystation defender",
-          "note": "Received clear charge to hold the Whistling Woman post with Deni Cors and Corvin while the party scouts and travels south. Understands the weight of urgent work.",
-          "statusNote": "At the Whistling Woman post, defending; will oversee construction and shrine attendance",
-          "relationshipDelta": 1,
-          "status": "active"
-        },
-        {
-          "op": "update",
-          "npcId": "maren-ossitide",
-          "name": "Maren Ossitide",
-          "role": "Legendary Ashwarden warden; traveling companion; co-keeper of the Made Gate shrine",
-          "note": "Accepted Silas's invitation to fly north over the moorland to scout what moves wrong in the dark. Rises in full warden-form, steady and unhurried.",
-          "statusNote": "At the Whistling Woman post, preparing to fly north with Silas to scout the moorland stirring",
-          "relationshipDelta": 0,
-          "status": "active"
-        },
-        {
-          "op": "update",
-          "npcId": "pell-ran-marsh",
-          "name": "Pell Ran Marsh",
-          "role": "Blacksmith; partner",
-          "note": "Setting to ready the packs for the road south to Millbrook. Understands without question that she and Silas move together toward what needs striking.",
-          "statusNote": "At the Whistling Woman post, preparing for urgent travel to Millbrook",
-          "relationshipDelta": 0,
-          "status": "active"
+          "role": "Ridge warden's messenger, waystation defender, and shrine attendant",
+          "notes": "Merged with Cael — the same man arrived first via Silas's shadow-reach from the ridge post (gasping, surprised, first witness to that novel working), and returned again bearing Fendt's news about the Threshold Post and the moorland stirring. Both arrivals are his."
         }
       ],
-      "intentsHeard": [
-        "maren-ossitide",
-        "bryn-callowell",
-        "pell-ran-marsh"
-      ],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "discovery": null,
-      "codexUpdates": [],
-      "holdingOps": [],
-      "debtOps": [],
-      "partyOps": [],
-      "generateRequest": [],
-      "encounterOps": [],
-      "projectOps": [],
-      "bandOps": [],
-      "deathOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief gathering and charge-giving before departure"
-      },
-      "moveTo": null,
-      "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": null,
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
-      "sceneEnded": false
+      "narration": "",
+      "sceneSummary": null
     },
     "sceneState": {
       "setting": "Whistling Woman post interior at deep night turning toward dawn—fire burned to red coals, lamplight pooling in shadows. Outside, moorland dark and the wind carries something that does not belong.",
@@ -2719,7 +2514,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 18,
-    "hour": 5,
+    "hour": 6,
     "realAnchor": null
   },
   "companions": [
@@ -5684,7 +5479,7 @@
     "bryn-calowell": {
       "id": "bryn-calowell",
       "name": "Bryn Calowell",
-      "role": "Ridge warden's messenger and waystation defender",
+      "role": "Ridge warden's messenger, waystation defender, and shrine attendant",
       "description": "A lean, alert man in his mid-twenties, marked by hard riding and the focus that comes from carrying urgent word. Quick-eyed and steady-handed.",
       "firstMet": {
         "locationId": "gen-whistling-woman-post",
@@ -5714,7 +5509,7 @@
         "locationId": "gen-whistling-woman-post",
         "day": 18
       },
-      "met": 2
+      "met": 3
     }
   },
   "placeMemory": {
@@ -6900,11 +6695,11 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-09-12T03:46:16.236Z",
+    "lastSharedReadAt": "2026-09-12T04:15:33.103Z",
     "lastTickWorldDay": 74,
     "lastCanonWorldDay": 74,
-    "lastGenCount": 1779,
-    "turnsSinceOffer": 0,
+    "lastGenCount": 1780,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Corvin Teth — a runner with a fractured death-thread, an urgency that broke relay protocol, and knowledge of the moorland's changed quiet",
@@ -18264,8 +18059,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1789185654872,
-  "rev": 2025,
+  "updatedAt": 1789186731183,
+  "rev": 2031,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -22749,11 +22544,7 @@
     "text": "You have become the man who finished what the lineage was for — not by inheritance but by work: you closed your father's unfinished fold and built the first new waygate since the Transition with your own hands and understanding, a threshold made by a person rather than a power. Before that you gave the final instruction to a reclamation site that had run unattended for fifteen years, and the watershed began, quietly, to remember itself. You broke Grael's seal-mark twice — once for buried readings that proved the water crisis's true cause, once for proof the pole-pull is real — and both times you accepted the March's warden-alert as the cost of being right in a way that could not wait. At the ridge you raised a death-warden temple and then a working mine from living iron and then the skeleton of the Threshold Post itself, each making honestly marked at its limits before you handed it to Fendt's crew to finish. Pell Ran Marsh is beside you in the way that rearranges what belonging means; Calvar and Veth Ondra and Hesta Vorn have sworn themselves into the orbit of what you are building. The air here tastes of metal, the path back is gone, and you are not looking for it.",
     "at": "2026-09-11T23:04:51.253Z"
   },
-  "_pendingArrival": {
-    "ref": "Millbrook",
-    "name": "Millbrook",
-    "destId": "millbrook"
-  },
+  "_pendingArrival": null,
   "sessions": [
     {
       "id": "sess-1",
@@ -23022,10 +22813,10 @@
     {
       "id": "sess-33",
       "startedAt": "2026-09-11T22:48:54.873Z",
-      "lastAt": "2026-09-12T04:00:54.863Z",
+      "lastAt": "2026-09-12T04:18:51.164Z",
       "startDay": 73,
       "endDay": 74,
-      "beats": 39
+      "beats": 40
     }
   ],
   "company": [
@@ -24560,6 +24351,18 @@
         },
         {
           "at": 1779,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "hands: none"
+        },
+        {
+          "at": 1780,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "hands: Pell Ran Marsh"
+        },
+        {
+          "at": 1780,
           "from": "thriving",
           "to": "thriving",
           "note": "hands: none"

@@ -5,207 +5,6 @@
  "note": "Player-facing profile for every tradition: what the craft IS, what it can do at first rank, what mastery looks like, and what it costs. Written for two surfaces — the character-creation guide (pick a tradition knowing what you are choosing) and the Library. Function coverage is derived from the shipped ability content, not authored separately, so it cannot drift. Authored by Aevi (PO) during the SNG-147c per-rank pass, 2026-07-18.",
  "traditions": [
   {
-   "name": "The Harmonic",
-   "axis": "civilization craft",
-   "pole": "—",
-   "home": "Choirheight and the resonant halls",
-   "oneLine": "Sound as structure. You hear what a thing is made of, and you can sing it steadier, quieter, or apart.",
-   "theCraft": "Harmonics treat vibration as the honest layer of the world. Everything has a note — a wall, a crowd, a wound, a lie — and a practitioner who finds it can reinforce it, mask it, or break it at the point where it was always going to fail.",
-   "atCreation": "You perceive through sound where others need light: bodies through a wall, a digger at work below, the gait of someone you know. You can push objects at a distance, blanket a corner in quiet, or run on a rhythm that carries you further than your legs should.",
-   "withMastery": "A chord set once and left ringing that holds a company through a night's march. A room brought to genuine willingness by a voice. A shatterpoint called on a Radiant lattice, a fortress wall, or a body — and struck where it was already going to fail.",
-   "theTrade": "Nothing a Harmonic does is quiet. The craft is audible by definition; there is no stealth in it. It works on structure, so it is superb against the made and the massed and awkward against the singular and the strange.",
-   "whoPractices": "Choir-trained, mostly. Harmonic and Radiant are closed to each other — a life spent learning to hear is not a life spent learning to see.",
-   "acrossTheAxis": "Radiant reveals by exposure; Harmonic reveals by resonance. The Radiant makes a thing visible. The Harmonic makes it audible, and then makes it fall.",
-   "id": "harmonic",
-   "functionCoverage": [
-    "bind",
-    "break",
-    "command",
-    "conceal",
-    "empower",
-    "foresee",
-    "heal",
-    "mend",
-    "move",
-    "resist",
-    "restore",
-    "reveal",
-    "shield",
-    "strike",
-    "sustain",
-    "track",
-    "ward"
-   ],
-   "distribution": {
-    "modes": [
-     "THE CHOIR — resonance as craft: steady a company, quiet a room, find the note a wall was always going to fail at.",
-     "THE TUNERS — instrument-makers and menders; the trade half, and most of the people."
-    ],
-    "tail": {
-     "name": "THE SILENCERS",
-     "what": "They find the note of a heart and hold it until it stops. Sonic resonance does not care whether the structure is stone or a chest, and a Silencer has never pretended otherwise."
-    }
-   },
-   "parents": {
-    "threnodist": 0.5,
-    "lattice": 0.3,
-    "mason": 0.2
-   },
-   "_parentsMirrored_20260830": "⛔ PARENTS MIRRORED FROM `foothills.json`, WHERE THEY HAVE ALWAYS BEEN, BECAUSE I KEPT RE-DERIVING THEM WRONG FROM THIS FILE. ⚠️ ERIK 2026-08-30: 'VALLEYCRAFT JUST MEANS IT'S AVAILABLE TO ANYONE — BEASTFRIEND IS A LIFE CRAFT. In fact you should find how many times I've corrected this.' ✅ I SEARCHED: the 2026-08-23 session record says outright — '`valley_craft` HAS PARENTS (stillhold 0.4 / wright 0.3 / rootkin 0.3) — **ERIK CORRECTED AEVI ON THIS MULTIPLE TIMES**' — and I did it again today by calling valley_craft 'the folk collection, not a tradition'. ⛔ THE CAUSE: the ruling lives in `foothills.json` and the PROFILE said nothing, so every time I read a tradition profile I re-derived a foothill as parentless. **A ruling stored in one file and needed in another is a ruling that gets re-made wrongly.** ✅ Now it is in both."
-  },
-  {
-   "name": "The Radiant",
-   "axis": "civilization craft",
-   "pole": "—",
-   "home": "Glasshome and the lit terraces",
-   "oneLine": "Light as tool, weapon, and witness. Nothing you shine on gets to stay hidden, and at full focus the beam does more than show.",
-   "theCraft": "Radiants work light the way a smith works metal: stored, shaped, thrown, and sharpened. The tradition's premise is that exposure is a good in itself — that what survives being seen clearly is what deserved to.",
-   "atCreation": "You read the hidden spectra — heat on a handle, tampering under paint, the flush of a lie in good light. You bend light to hide in, bank daylight in a jar against the night, and coax a season's warmth into a struggling seedbed.",
-   "withMastery": "A lattice fence warding a compound for a season. Surgery done by your own operating glow, deep enough to rebuild a crushed hand. And the Sunlance — a single coherent strike through a stone wall, an engine block, or a person.",
-   "theTrade": "You glow. There is no Radiant stealth, no Radiant ambush, no Radiant anonymity — the craft announces its user in the act of using it. It fails on mirror-finish, on running water, and in true dark where there is nothing to work with.",
-   "whoPractices": "Glasshome-trained, and the blaze-adjacent settlements. Closed to Harmonic, and the two traditions have opinions about each other.",
-   "acrossTheAxis": "Where the Harmonic finds a thing's note, the Radiant simply shows it. Both end arguments; only one of them does it politely.",
-   "id": "radiant_folk",
-   "functionCoverage": [
-    "bind",
-    "break",
-    "command",
-    "conceal",
-    "deceive",
-    "empower",
-    "heal",
-    "hinder",
-    "make",
-    "mend",
-    "move",
-    "resist",
-    "restore",
-    "reveal",
-    "shield",
-    "strike",
-    "sustain",
-    "track",
-    "travel",
-    "ward"
-   ],
-   "distribution": {
-    "modes": [
-     "The Lantern-Keepers — worked light, warmth, the folk half; most radiants never do anything else.",
-     "THE LANCE — light as a cutting instrument, taught openly and used in war."
-    ],
-    "tail": {
-     "name": "THE SCOURERS",
-     "what": "Light burned into an eye until nothing behind it works. The Scourers hold that a thing which cannot bear looking at should be unmade by looking at it, and they do it slowly."
-    }
-   },
-   "_idFixed_20260830": "⚠️ id `radiant` -> `radiant_folk`. ⛔ A PRE-MIGRATION ID: the crafts have used the new key for a long time, so this profile joined to NOTHING — its `functionCoverage` reported zero crafts and could never be checked against reality. ⛔ THIRTEEN PROFILES WERE IN THIS STATE, and I found it only because Erik asked me to compare coverage across traditions and the join came back empty.",
-   "parents": {
-    "blazeborn": 0.5,
-    "wright": 0.3,
-    "lattice": 0.2
-   },
-   "_parentsMirrored_20260830": "⛔ PARENTS MIRRORED FROM `foothills.json`, WHERE THEY HAVE ALWAYS BEEN, BECAUSE I KEPT RE-DERIVING THEM WRONG FROM THIS FILE. ⚠️ ERIK 2026-08-30: 'VALLEYCRAFT JUST MEANS IT'S AVAILABLE TO ANYONE — BEASTFRIEND IS A LIFE CRAFT. In fact you should find how many times I've corrected this.' ✅ I SEARCHED: the 2026-08-23 session record says outright — '`valley_craft` HAS PARENTS (stillhold 0.4 / wright 0.3 / rootkin 0.3) — **ERIK CORRECTED AEVI ON THIS MULTIPLE TIMES**' — and I did it again today by calling valley_craft 'the folk collection, not a tradition'. ⛔ THE CAUSE: the ruling lives in `foothills.json` and the PROFILE said nothing, so every time I read a tradition profile I re-derived a foothill as parentless. **A ruling stored in one file and needed in another is a ruling that gets re-made wrongly.** ✅ Now it is in both."
-  },
-  {
-   "name": "Precursor Work",
-   "axis": "deep-power family (gated)",
-   "pole": "fabricated substrate",
-   "home": "the Old Roads and the lattice under everything",
-   "oneLine": "The machinery the world was built on still answers, if you learn its grammar. Never offered at creation — earned in fiction.",
-   "theCraft": "Precursor work is not a tradition so much as a conversation with what the builders left running. It is queried, not commanded; it answers on its own terms; and every exchange pulls the practitioner's own coordinate further toward the pole they are drawing from.",
-   "atCreation": "Not available. Access opens per-ability through play — a remnant found, a road mastered, a teacher who owes you. Substrate-born origins are seeded a single innate base and grow it like any skill.",
-   "withMastery": "Reading a thing's unrepeatable cosmic address and navigating to it across any distance. Foreclosing a possibility outright — and Hold the Aperture, the standing refusal that keeps open what the lattice is closing.",
-   "theTrade": "Drift. Every use moves your vector, and Foreclose moves it toward the contraction the framework names as the enemy. The engine tracks it. The GM will eventually name where it has taken you.",
-   "whoPractices": "Nobody by right except the substrate-born, and even they only hold the doorway. Everyone else earns each ability separately.",
-   "acrossTheAxis": "Its living counterpart is the green current; its tangled counterpart is the wild. Same depth, different substrate, and they do not mix.",
-   "id": "precursor",
-   "functionCoverage": [
-    "bind",
-    "break",
-    "command",
-    "open",
-    "reveal",
-    "summon",
-    "track",
-    "ward"
-   ],
-   "distribution": {
-    "modes": [
-     "THE READERS — address-sense, latticespeak, the old roads walked carefully.",
-     "THE WAKERS — rousing what sleeps, opening what was sealed."
-    ],
-    "tail": {
-     "name": "THE SHUTTERS",
-     "what": "Foreclosure as governance. The Shutters close possibilities off people — a future denied, a way barred, a thing that can no longer happen to anyone. It is the framework's own definition of evil, practised deliberately."
-    }
-   },
-   "_notATradition_20260830": "⚠️ NOT A TRADITION — a DEEP-POWER FAMILY (`axis: deep-power family (gated)`). No craft carries this as `tradition` and none should; these are POWER SOURCES. ⛔ Its `functionCoverage` will never join and that is correct."
-  },
-  {
-   "name": "The Green Current",
-   "axis": "deep-power family (gated)",
-   "pole": "living substrate",
-   "home": "the Quickwood and every rooted place",
-   "oneLine": "The life-layer the Rootkin never surrendered. The ground is awake, and it will answer a true touch.",
-   "theCraft": "Where the Precursors built a substrate, the Rootkin kept the one that grew. The green current runs through everything living and connects every rooted place to every other. It answers sincerity and refuses force.",
-   "atCreation": "Not available. Innate to rootkin origins, seeded per-ability; earned by everyone else through the Reach.",
-   "withMastery": "Waking a whole district's current so that ground you have quickened carries a party rested. Travelling the green road between rooted places, carrying others, toward places you have never walked because something living there knows your touch.",
-   "theTrade": "It reaches only where life runs unbroken. A dead zone, a machine-city, a burned waste has no green road through it and no current to wake. And what you wake, you tend.",
-   "whoPractices": "Rootkin by birth; Ashwardens and travellers of the Reach by long apprenticeship.",
-   "acrossTheAxis": "The precursor lattice is fabricated and obeys grammar. The green current is grown and obeys relationship. Neither can do the other's work.",
-   "id": "living_current",
-   "functionCoverage": [
-    "open",
-    "reveal",
-    "sustain",
-    "travel"
-   ],
-   "distribution": {
-    "modes": [
-     "The Green-Touched — the living current as inheritance, used gently.",
-     "THE DEEP-ROOTED — Heartroot work; the current at depth."
-    ],
-    "tail": {
-     "name": "The Floodbearers",
-     "what": "The current forced through a body that cannot hold it. The Floodbearers use a person as a conduit and do not always get them back."
-    }
-   },
-   "_notATradition_20260830": "⚠️ NOT A TRADITION — a DEEP-POWER FAMILY (`axis: deep-power family (gated)`). No craft carries this as `tradition` and none should; these are POWER SOURCES. ⛔ Its `functionCoverage` will never join and that is correct."
-  },
-  {
-   "name": "The Churn",
-   "axis": "deep-power family (gated)",
-   "pole": "tangled substrate",
-   "home": "the Wild Half",
-   "oneLine": "Both substrates at once, tangled and generous and never twice the same. It gives — just never exactly what you asked for.",
-   "theCraft": "The fae art of productive disorder at the substrate layer. The Churn accretes and improvises. Its gifts are real, potent, and shaped by the current rather than the asker.",
-   "atCreation": "Not available. Innate to churnfolk and abyssal origins; opened per-ability.",
-   "withMastery": "Naming the shape of what you want and letting the Churn invent every detail. A district-wide flowering of growth-and-ruin that lasts days before the tangle takes it back. Bargains struck with places rather than persons, set to outlive both parties.",
-   "theTrade": "No precision, ever, at any rank. You cannot aim it at pure growth or pure ruin. And the Honest Bargain is scrupulously fair, which is the horror rather than the safety.",
-   "whoPractices": "The Wild Half — churnfolk, fae, and the Abyssals who kept their hollow.",
-   "acrossTheAxis": "It is the third substrate. Precursor work is grammar and green current is relationship; the Churn is neither, and both.",
-   "id": "wild_current",
-   "functionCoverage": [
-    "bind",
-    "command",
-    "make",
-    "open",
-    "summon",
-    "transform"
-   ],
-   "distribution": {
-    "modes": [
-     "THE FAE-TOUCHED — bargains with the wild half; gifts that arrive sideways.",
-     "The Current-Riders — the tangled substrate, ridden rather than steered."
-    ],
-    "tail": {
-     "name": "The Hollow Bargainers",
-     "what": "Bargains made with things that are not people, on behalf of people who did not agree. The Hollow Bargainers trade someone else's future for their own present."
-    }
-   },
-   "_notATradition_20260830": "⚠️ NOT A TRADITION — a DEEP-POWER FAMILY (`axis: deep-power family (gated)`). No craft carries this as `tradition` and none should; these are POWER SOURCES. ⛔ Its `functionCoverage` will never join and that is correct."
-  },
-  {
    "name": "The Somatic",
    "axis": "body ↔ mind",
    "pole": "body",
@@ -1655,6 +1454,212 @@
     "note": "ERIK'S EXAMPLE. 'Death people don't raise' was my bias. They raise. Some of them do little else."
    },
    "_idFixed_20260830": "⚠️ id `palework` -> `ashwarden`. ⛔ A PRE-MIGRATION ID: the crafts have used the new key for a long time, so this profile joined to NOTHING — its `functionCoverage` reported zero crafts and could never be checked against reality. ⛔ THIRTEEN PROFILES WERE IN THIS STATE, and I found it only because Erik asked me to compare coverage across traditions and the join came back empty."
+  }
+ ],
+ "designNote": "⚠️ SNG-276 NORTH STAR (Erik 2026-08-03): 'ANYTHING IS ON THE TABLE. ANYTHING IS POSSIBLE.' A tradition is a DISTRIBUTION, not a center. Every profile's oneLine/theCraft/withMastery describe the MODE — how most practitioners use it, and the polite public face. That is real and it is most of them. But a people is not its median. `modes` names the shapes the bulk of the tradition takes; `tail` names what it looks like at the far end, where the same craft is turned to the thing the center will not do. THE TAIL IS NOT A VILLAIN CLASS — it is the same craft, same training, different answer to what it is FOR. One practitioner uses shatterpoint on walls; another uses it on chests. Both are Harmonics. AND THIS TIES TO SCHOOLS: a school is what you reach WITH; a mode/tail is what you reach FOR. CONSEQUENCE FOR BOUNDS: a craft's bounds state what it CANNOT REACH, never what a practitioner should not want. A bound that reads as manners is describing the mode and calling it the world.",
+ "powerSources": [
+  {
+   "name": "Precursor Work",
+   "axis": "deep-power family (gated)",
+   "pole": "fabricated substrate",
+   "home": "the Old Roads and the lattice under everything",
+   "oneLine": "The machinery the world was built on still answers, if you learn its grammar. Never offered at creation — earned in fiction.",
+   "theCraft": "Precursor work is not a tradition so much as a conversation with what the builders left running. It is queried, not commanded; it answers on its own terms; and every exchange pulls the practitioner's own coordinate further toward the pole they are drawing from.",
+   "atCreation": "Not available. Access opens per-ability through play — a remnant found, a road mastered, a teacher who owes you. Substrate-born origins are seeded a single innate base and grow it like any skill.",
+   "withMastery": "Reading a thing's unrepeatable cosmic address and navigating to it across any distance. Foreclosing a possibility outright — and Hold the Aperture, the standing refusal that keeps open what the lattice is closing.",
+   "theTrade": "Drift. Every use moves your vector, and Foreclose moves it toward the contraction the framework names as the enemy. The engine tracks it. The GM will eventually name where it has taken you.",
+   "whoPractices": "Nobody by right except the substrate-born, and even they only hold the doorway. Everyone else earns each ability separately.",
+   "acrossTheAxis": "Its living counterpart is the green current; its tangled counterpart is the wild. Same depth, different substrate, and they do not mix.",
+   "id": "precursor",
+   "functionCoverage": [
+    "bind",
+    "break",
+    "command",
+    "open",
+    "reveal",
+    "summon",
+    "track",
+    "ward"
+   ],
+   "distribution": {
+    "modes": [
+     "THE READERS — address-sense, latticespeak, the old roads walked carefully.",
+     "THE WAKERS — rousing what sleeps, opening what was sealed."
+    ],
+    "tail": {
+     "name": "THE SHUTTERS",
+     "what": "Foreclosure as governance. The Shutters close possibilities off people — a future denied, a way barred, a thing that can no longer happen to anyone. It is the framework's own definition of evil, practised deliberately."
+    }
+   },
+   "_notATradition_20260830": "⚠️ NOT A TRADITION — a DEEP-POWER FAMILY (`axis: deep-power family (gated)`). No craft carries this as `tradition` and none should; these are POWER SOURCES. ⛔ Its `functionCoverage` will never join and that is correct."
+  },
+  {
+   "name": "The Green Current",
+   "axis": "deep-power family (gated)",
+   "pole": "living substrate",
+   "home": "the Quickwood and every rooted place",
+   "oneLine": "The life-layer the Rootkin never surrendered. The ground is awake, and it will answer a true touch.",
+   "theCraft": "Where the Precursors built a substrate, the Rootkin kept the one that grew. The green current runs through everything living and connects every rooted place to every other. It answers sincerity and refuses force.",
+   "atCreation": "Not available. Innate to rootkin origins, seeded per-ability; earned by everyone else through the Reach.",
+   "withMastery": "Waking a whole district's current so that ground you have quickened carries a party rested. Travelling the green road between rooted places, carrying others, toward places you have never walked because something living there knows your touch.",
+   "theTrade": "It reaches only where life runs unbroken. A dead zone, a machine-city, a burned waste has no green road through it and no current to wake. And what you wake, you tend.",
+   "whoPractices": "Rootkin by birth; Ashwardens and travellers of the Reach by long apprenticeship.",
+   "acrossTheAxis": "The precursor lattice is fabricated and obeys grammar. The green current is grown and obeys relationship. Neither can do the other's work.",
+   "id": "living_current",
+   "functionCoverage": [
+    "open",
+    "reveal",
+    "sustain",
+    "travel"
+   ],
+   "distribution": {
+    "modes": [
+     "The Green-Touched — the living current as inheritance, used gently.",
+     "THE DEEP-ROOTED — Heartroot work; the current at depth."
+    ],
+    "tail": {
+     "name": "The Floodbearers",
+     "what": "The current forced through a body that cannot hold it. The Floodbearers use a person as a conduit and do not always get them back."
+    }
+   },
+   "_notATradition_20260830": "⚠️ NOT A TRADITION — a DEEP-POWER FAMILY (`axis: deep-power family (gated)`). No craft carries this as `tradition` and none should; these are POWER SOURCES. ⛔ Its `functionCoverage` will never join and that is correct."
+  },
+  {
+   "name": "The Churn",
+   "axis": "deep-power family (gated)",
+   "pole": "tangled substrate",
+   "home": "the Wild Half",
+   "oneLine": "Both substrates at once, tangled and generous and never twice the same. It gives — just never exactly what you asked for.",
+   "theCraft": "The fae art of productive disorder at the substrate layer. The Churn accretes and improvises. Its gifts are real, potent, and shaped by the current rather than the asker.",
+   "atCreation": "Not available. Innate to churnfolk and abyssal origins; opened per-ability.",
+   "withMastery": "Naming the shape of what you want and letting the Churn invent every detail. A district-wide flowering of growth-and-ruin that lasts days before the tangle takes it back. Bargains struck with places rather than persons, set to outlive both parties.",
+   "theTrade": "No precision, ever, at any rank. You cannot aim it at pure growth or pure ruin. And the Honest Bargain is scrupulously fair, which is the horror rather than the safety.",
+   "whoPractices": "The Wild Half — churnfolk, fae, and the Abyssals who kept their hollow.",
+   "acrossTheAxis": "It is the third substrate. Precursor work is grammar and green current is relationship; the Churn is neither, and both.",
+   "id": "wild_current",
+   "functionCoverage": [
+    "bind",
+    "command",
+    "make",
+    "open",
+    "summon",
+    "transform"
+   ],
+   "distribution": {
+    "modes": [
+     "THE FAE-TOUCHED — bargains with the wild half; gifts that arrive sideways.",
+     "The Current-Riders — the tangled substrate, ridden rather than steered."
+    ],
+    "tail": {
+     "name": "The Hollow Bargainers",
+     "what": "Bargains made with things that are not people, on behalf of people who did not agree. The Hollow Bargainers trade someone else's future for their own present."
+    }
+   },
+   "_notATradition_20260830": "⚠️ NOT A TRADITION — a DEEP-POWER FAMILY (`axis: deep-power family (gated)`). No craft carries this as `tradition` and none should; these are POWER SOURCES. ⛔ Its `functionCoverage` will never join and that is correct."
+  }
+ ],
+ "folkCrafts": [
+  {
+   "name": "The Harmonic",
+   "axis": "civilization craft",
+   "pole": "—",
+   "home": "Choirheight and the resonant halls",
+   "oneLine": "Sound as structure. You hear what a thing is made of, and you can sing it steadier, quieter, or apart.",
+   "theCraft": "Harmonics treat vibration as the honest layer of the world. Everything has a note — a wall, a crowd, a wound, a lie — and a practitioner who finds it can reinforce it, mask it, or break it at the point where it was always going to fail.",
+   "atCreation": "You perceive through sound where others need light: bodies through a wall, a digger at work below, the gait of someone you know. You can push objects at a distance, blanket a corner in quiet, or run on a rhythm that carries you further than your legs should.",
+   "withMastery": "A chord set once and left ringing that holds a company through a night's march. A room brought to genuine willingness by a voice. A shatterpoint called on a Radiant lattice, a fortress wall, or a body — and struck where it was already going to fail.",
+   "theTrade": "Nothing a Harmonic does is quiet. The craft is audible by definition; there is no stealth in it. It works on structure, so it is superb against the made and the massed and awkward against the singular and the strange.",
+   "whoPractices": "Choir-trained, mostly. Harmonic and Radiant are closed to each other — a life spent learning to hear is not a life spent learning to see.",
+   "acrossTheAxis": "Radiant reveals by exposure; Harmonic reveals by resonance. The Radiant makes a thing visible. The Harmonic makes it audible, and then makes it fall.",
+   "id": "harmonic",
+   "functionCoverage": [
+    "bind",
+    "break",
+    "command",
+    "conceal",
+    "empower",
+    "foresee",
+    "heal",
+    "mend",
+    "move",
+    "resist",
+    "restore",
+    "reveal",
+    "shield",
+    "strike",
+    "sustain",
+    "track",
+    "ward"
+   ],
+   "distribution": {
+    "modes": [
+     "THE CHOIR — resonance as craft: steady a company, quiet a room, find the note a wall was always going to fail at.",
+     "THE TUNERS — instrument-makers and menders; the trade half, and most of the people."
+    ],
+    "tail": {
+     "name": "THE SILENCERS",
+     "what": "They find the note of a heart and hold it until it stops. Sonic resonance does not care whether the structure is stone or a chest, and a Silencer has never pretended otherwise."
+    }
+   },
+   "parents": {
+    "threnodist": 0.5,
+    "lattice": 0.3,
+    "mason": 0.2
+   },
+   "_parentsMirrored_20260830": "⛔ PARENTS MIRRORED FROM `foothills.json`, WHERE THEY HAVE ALWAYS BEEN, BECAUSE I KEPT RE-DERIVING THEM WRONG FROM THIS FILE. ⚠️ ERIK 2026-08-30: 'VALLEYCRAFT JUST MEANS IT'S AVAILABLE TO ANYONE — BEASTFRIEND IS A LIFE CRAFT. In fact you should find how many times I've corrected this.' ✅ I SEARCHED: the 2026-08-23 session record says outright — '`valley_craft` HAS PARENTS (stillhold 0.4 / wright 0.3 / rootkin 0.3) — **ERIK CORRECTED AEVI ON THIS MULTIPLE TIMES**' — and I did it again today by calling valley_craft 'the folk collection, not a tradition'. ⛔ THE CAUSE: the ruling lives in `foothills.json` and the PROFILE said nothing, so every time I read a tradition profile I re-derived a foothill as parentless. **A ruling stored in one file and needed in another is a ruling that gets re-made wrongly.** ✅ Now it is in both."
+  },
+  {
+   "name": "The Radiant",
+   "axis": "civilization craft",
+   "pole": "—",
+   "home": "Glasshome and the lit terraces",
+   "oneLine": "Light as tool, weapon, and witness. Nothing you shine on gets to stay hidden, and at full focus the beam does more than show.",
+   "theCraft": "Radiants work light the way a smith works metal: stored, shaped, thrown, and sharpened. The tradition's premise is that exposure is a good in itself — that what survives being seen clearly is what deserved to.",
+   "atCreation": "You read the hidden spectra — heat on a handle, tampering under paint, the flush of a lie in good light. You bend light to hide in, bank daylight in a jar against the night, and coax a season's warmth into a struggling seedbed.",
+   "withMastery": "A lattice fence warding a compound for a season. Surgery done by your own operating glow, deep enough to rebuild a crushed hand. And the Sunlance — a single coherent strike through a stone wall, an engine block, or a person.",
+   "theTrade": "You glow. There is no Radiant stealth, no Radiant ambush, no Radiant anonymity — the craft announces its user in the act of using it. It fails on mirror-finish, on running water, and in true dark where there is nothing to work with.",
+   "whoPractices": "Glasshome-trained, and the blaze-adjacent settlements. Closed to Harmonic, and the two traditions have opinions about each other.",
+   "acrossTheAxis": "Where the Harmonic finds a thing's note, the Radiant simply shows it. Both end arguments; only one of them does it politely.",
+   "id": "radiant_folk",
+   "functionCoverage": [
+    "bind",
+    "break",
+    "command",
+    "conceal",
+    "deceive",
+    "empower",
+    "heal",
+    "hinder",
+    "make",
+    "mend",
+    "move",
+    "resist",
+    "restore",
+    "reveal",
+    "shield",
+    "strike",
+    "sustain",
+    "track",
+    "travel",
+    "ward"
+   ],
+   "distribution": {
+    "modes": [
+     "The Lantern-Keepers — worked light, warmth, the folk half; most radiants never do anything else.",
+     "THE LANCE — light as a cutting instrument, taught openly and used in war."
+    ],
+    "tail": {
+     "name": "THE SCOURERS",
+     "what": "Light burned into an eye until nothing behind it works. The Scourers hold that a thing which cannot bear looking at should be unmade by looking at it, and they do it slowly."
+    }
+   },
+   "_idFixed_20260830": "⚠️ id `radiant` -> `radiant_folk`. ⛔ A PRE-MIGRATION ID: the crafts have used the new key for a long time, so this profile joined to NOTHING — its `functionCoverage` reported zero crafts and could never be checked against reality. ⛔ THIRTEEN PROFILES WERE IN THIS STATE, and I found it only because Erik asked me to compare coverage across traditions and the join came back empty.",
+   "parents": {
+    "blazeborn": 0.5,
+    "wright": 0.3,
+    "lattice": 0.2
+   },
+   "_parentsMirrored_20260830": "⛔ PARENTS MIRRORED FROM `foothills.json`, WHERE THEY HAVE ALWAYS BEEN, BECAUSE I KEPT RE-DERIVING THEM WRONG FROM THIS FILE. ⚠️ ERIK 2026-08-30: 'VALLEYCRAFT JUST MEANS IT'S AVAILABLE TO ANYONE — BEASTFRIEND IS A LIFE CRAFT. In fact you should find how many times I've corrected this.' ✅ I SEARCHED: the 2026-08-23 session record says outright — '`valley_craft` HAS PARENTS (stillhold 0.4 / wright 0.3 / rootkin 0.3) — **ERIK CORRECTED AEVI ON THIS MULTIPLE TIMES**' — and I did it again today by calling valley_craft 'the folk collection, not a tradition'. ⛔ THE CAUSE: the ruling lives in `foothills.json` and the PROFILE said nothing, so every time I read a tradition profile I re-derived a foothill as parentless. **A ruling stored in one file and needed in another is a ruling that gets re-made wrongly.** ✅ Now it is in both."
   },
   {
    "id": "valley_craft",
@@ -1709,5 +1714,33 @@
    "_retired_20260830": "⛔ RETIRED AS A DOMAIN, 2026-08-30. ERIK: \"LET'S EMPTY THE VALLEYCRAFT INTO THE PARENTS. IT'S TOO MUDDLED.\" ⚠️ All 18 crafts reassigned to their real parents and marked  — they remain fully accessible to anyone; what is gone is the claim that they are a DOMAIN. ✅ AND THE AUTHORED PARENTS EXPLAIN THE MUDDLE: stillhold .4 / wright .3 / rootkin .3 is a THREE-WAY BLEND, so 18 crafts under one label were never one people's craft. ⛔ This entry is kept for the record and is no longer a tradition."
   }
  ],
- "designNote": "⚠️ SNG-276 NORTH STAR (Erik 2026-08-03): 'ANYTHING IS ON THE TABLE. ANYTHING IS POSSIBLE.' A tradition is a DISTRIBUTION, not a center. Every profile's oneLine/theCraft/withMastery describe the MODE — how most practitioners use it, and the polite public face. That is real and it is most of them. But a people is not its median. `modes` names the shapes the bulk of the tradition takes; `tail` names what it looks like at the far end, where the same craft is turned to the thing the center will not do. THE TAIL IS NOT A VILLAIN CLASS — it is the same craft, same training, different answer to what it is FOR. One practitioner uses shatterpoint on walls; another uses it on chests. Both are Harmonics. AND THIS TIES TO SCHOOLS: a school is what you reach WITH; a mode/tail is what you reach FOR. CONSEQUENCE FOR BOUNDS: a craft's bounds state what it CANNOT REACH, never what a practitioner should not want. A bound that reads as manners is describing the mode and calling it the world."
+ "foothills": [
+  {
+   "id": "god_named",
+   "name": "The God-Named",
+   "axis": "foothill — a pole made usable",
+   "pole": "foothill",
+   "home": "the foothill country, and wherever a name travels further than the man carrying it",
+   "oneLine": "Borrowed grandeur worn slightly wrong: a person addressed by a name nobody here can check.",
+   "theCraft": "The God-Named do not claim to be gods and do not quite deny it either. What they actually have is the Seraphic grammar of standing — the forms of address, the bearing, the authority that arrives before the person does — carried down out of the orders and into country where nobody can write to the orders and ask. It works. That is the uncomfortable part. A God-Named who walks into a dispute is deferred to, and the deference is real even when the name is not.",
+   "atCreation": "Available. You begin with a name that is doing work you did not earn, and the question of whether you will earn it is the character.",
+   "withMastery": "A standing that holds under challenge — not because the claim was verified, but because you have been worth deferring to for long enough that verification stopped being the question.",
+   "theTrade": "Somebody, eventually, can check. The foothills are getting smaller every year and the orders write letters.",
+   "whoTheyAre": "Traders, arbiters, the person a village sends for when two families will not speak. Several are frauds. Several were frauds and are not any more. Nobody has a reliable way to tell those two apart, including the God-Named."
+  },
+  {
+   "id": "bargainers",
+   "name": "The Bargainers",
+   "axis": "foothill — a pole made usable",
+   "pole": "foothill",
+   "home": "the foothill roads, the markets at the passes, and anywhere a price has to be found rather than looked up",
+   "oneLine": "The Abyssal grammar of the struck term, with the appetite taken out of it.",
+   "theCraft": "A Bargainer works the same machinery the Abyssal Choir works — a term named, a price agreed, a thing that binds once both have said it — and none of the hunger underneath. What the Choir does to feed, a Bargainer does for a living. The terms are honest, enforceable and frequently expensive, and a Bargainer will tell you the cost before you agree rather than after, which is the entire distance between them and the thing they learned it from.",
+   "atCreation": "Available. You begin knowing how to make an agreement that holds, and how to price one.",
+   "withMastery": "A term nobody can wriggle out of, made in front of witnesses, that both sides still consider fair a year later — and the standing that comes of being the person both sides asked.",
+   "theTrade": "You learned this from something that eats people, and everyone you deal with knows where the grammar comes from. A Bargainer is trusted with the contract and watched at the table.",
+   "whoTheyAre": "Brokers, factors, the third party at a bad negotiation. They keep their own ledgers scrupulously, because the one thing a Bargainer cannot survive is a rumour."
+  }
+ ],
+ "_structure_20260912": "⛑ AEVI 2026-09-12. The file held 30 entries under `traditions` and they were never 30 traditions: 24 on the pole ring, 3 POWER SOURCES (`deep-power family (gated)` — precursor, living_current, wild_current) and 3 FOLK CRAFTS. ⛔ `foothills.json._theRule` says it plainly — 'A FOOTHILL IS NOT A LESSER TRADITION — IT IS A POLE MADE USABLE' — and `notATradition.precursor` calls precursor 'A POWER SOURCE MISFILED AS A TRADITION'. The precursor profile's own prose agrees: 'not a tradition so much as a conversation with what the builders left running'. ⚠️ EVERY LAYER KNEW AND THE CONTAINER DID NOT. Split, nothing rewritten, all 30 entries intact. ⛔ AND THE TWO FOOTHILLS HAD NO PROFILE AT ALL — the God-Named and the Bargainers are peoples with a population and the Peoples page did not list them. Authored here, per Erik 2026-09-12."
 }

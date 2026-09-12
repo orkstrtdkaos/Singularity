@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 32,
-  "xp": 3121,
+  "xp": 3131,
   "attributes": {
     "physical": 5,
     "mental": 8,
@@ -212,7 +212,7 @@
   "maxHealth": 196,
   "health": 196,
   "maxEnergy": 287,
-  "energy": 284,
+  "energy": 262,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2278,11 +2278,192 @@
     "At the Made Gate in evening light, Silas attempts to open a waymark portal and reach his father's spirit through it—a novel combination of boundary-stone and Ask the Dead. The craft fails; the dead cannot answer through portals, only through fresh thresholds. The reach breaks before the working breaks. The gate stands quiet. The warden post is ready. The road waits."
   ],
   "currentLocationId": "gen-whistling-woman-post",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "gen-whistling-woman-post",
+    "turns": [
+      {
+        "player": "Walking back to the Post - Silas is inspired to raise a universal shrine near the Made Gate.  As this gate will likely be used by all the peoples of Exesa, and Pell would want this, make a shrine that would be comfortable to every domain in the world.  Just like the mine and the Warden Temple.. .but this time all inclusive and thoughtful.  Poor the time and energy into this and use what skills are needed.",
+        "summary": "At the Made Gate in evening light, Silas attempts to raise an inclusive shrine for all peoples—combining Palework and Boundary-Stone into a novel unified working. The crafts are incompatible at this depth: Palework reads the sacred in an ending; Boundary-Stone claims it as held by the reader. A shrine for all cannot be marked as belonging to one. The working fails. The gate stands unmarked.",
+        "narration": "You walk the road back toward the Made Gate with the evening light bleeding gold across the moorland, and the thought settles in you clean and whole: a threshold for all of them. Not Ashwarden only. Not Wright only. A place where the Radiant and the Rootkin, the Lattice-reader and the plain craftsperson, could each stand and know themselves welcome. Pell would want that. The gate deserves that.\n\nYou reach the cleared ground before the gate as the light shifts toward amber. The stones are warm still. You set your hands on the gate's frame—the warding-marks answering under your palms—and you begin to work.\n\nPalework reaches first, the way it always does: you read the ground's ending, the way it wants to settle, what it will hold. A shrine is a place where an ending is named as sacred. You feel the shape of it, the proportions that would let a warden sit with a body, a Lattice-reader mark an orderly completion, a Rootkin lay green for the letting-go. All of it, held at once. You pull Boundary-Stone up beside it—not to wall anything in, but to declare: *here* is set apart, *here* all the ways of tending are honored.\n\nBut as you weave them together, as you begin to draw the stone up from the ground and shape the walls that will hold all those purposes at once, something fractures in the working. The two crafts are both about endings—Palework reads them, Boundary-Stone marks them—but they are not the same ending. Palework says: *this one is finished, and it matters*. Boundary-Stone says: *this threshold is mine to hold*. A shrine that serves every people cannot be Ashwarden-held. The moment you try to make it both—a space that is sacred to all, and a space that is marked as yours—the working unravels.\n\nYou feel the strain in your chest, a sharp pull behind your ribs. The stone half-risen falls back. The boundary you were trying to declare breaks before it forms. You are left standing with your hands on the gate, breathing hard, with nothing to show but effort and the clear knowledge of what you tried and why it failed.\n\nThe gate stands unmarked. The ground lies still. And the question hangs: a shrine for all peoples cannot be held by one. Not by your hand, anyway. Not like this."
+      }
+    ],
+    "lastTurn": {
+      "narration": "You walk the road back toward the Made Gate with the evening light bleeding gold across the moorland, and the thought settles in you clean and whole: a threshold for all of them. Not Ashwarden only. Not Wright only. A place where the Radiant and the Rootkin, the Lattice-reader and the plain craftsperson, could each stand and know themselves welcome. Pell would want that. The gate deserves that.\n\nYou reach the cleared ground before the gate as the light shifts toward amber. The stones are warm still. You set your hands on the gate's frame—the warding-marks answering under your palms—and you begin to work.\n\nPalework reaches first, the way it always does: you read the ground's ending, the way it wants to settle, what it will hold. A shrine is a place where an ending is named as sacred. You feel the shape of it, the proportions that would let a warden sit with a body, a Lattice-reader mark an orderly completion, a Rootkin lay green for the letting-go. All of it, held at once. You pull Boundary-Stone up beside it—not to wall anything in, but to declare: *here* is set apart, *here* all the ways of tending are honored.\n\nBut as you weave them together, as you begin to draw the stone up from the ground and shape the walls that will hold all those purposes at once, something fractures in the working. The two crafts are both about endings—Palework reads them, Boundary-Stone marks them—but they are not the same ending. Palework says: *this one is finished, and it matters*. Boundary-Stone says: *this threshold is mine to hold*. A shrine that serves every people cannot be Ashwarden-held. The moment you try to make it both—a space that is sacred to all, and a space that is marked as yours—the working unravels.\n\nYou feel the strain in your chest, a sharp pull behind your ribs. The stone half-risen falls back. The boundary you were trying to declare breaks before it forms. You are left standing with your hands on the gate, breathing hard, with nothing to show but effort and the clear knowledge of what you tried and why it failed.\n\nThe gate stands unmarked. The ground lies still. And the question hangs: a shrine for all peoples cannot be held by one. Not by your hand, anyway. Not like this.",
+      "sceneSummary": "At the Made Gate in evening light, Silas attempts to raise an inclusive shrine for all peoples—combining Palework and Boundary-Stone into a novel unified working. The crafts are incompatible at this depth: Palework reads the sacred in an ending; Boundary-Stone claims it as held by the reader. A shrine for all cannot be marked as belonging to one. The working fails. The gate stands unmarked.",
+      "choices": [
+        {
+          "label": "Rest here and try again—the working was sound, just the braiding was wrong",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": "hard",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study",
+            "craft",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Leave the shrine ungated—let all peoples claim it together, without a warden's mark",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "craft",
+            "compromise"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Pell what she would choose—bring her here and let her read it",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "help",
+            "romantic"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Head back to the post—you need food, rest, and clearer thought before you try this again",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "travel",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -28,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
+      "delegateOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": null,
+      "stageOps": [],
+      "scene": {
+        "setting": "The Made Gate clearing at evening—amber light across moorland, the frameless gate standing in its marked circle, the stone of its uprights still warm from the day. The ground around it is clear and open. Sky bleeds gold westward; the road south and north are both visible from this ground.",
+        "npcsPresent": [],
+        "objects": [
+          "The Made Gate itself—frameless, shadow-warded, marked with Veth's open-hand and Pell's ironsense-read",
+          "Huginn—perched on the right upright, watching the working with one patient eye"
+        ],
+        "threads": [
+          "A shrine for all peoples—attempted, failed, the working incomplete",
+          "The gate stands unmarked and unguarded save by its own warding",
+          "Pell at the post, waiting—does not yet know the shrine-work broke"
+        ]
+      },
+      "npcUpdates": [],
+      "intentsHeard": [],
+      "factUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "Silas Weir attempted to raise an inclusive shrine at the Made Gate clearing—combining Palework and Boundary-Stone to create a space sacred to all peoples. The working failed: a shrine for all peoples cannot be simultaneously held by one warden's mark. The attempt is incomplete; the ground remains unmarked.",
+          "flag": null,
+          "subPlace": null
+        }
+      ],
+      "discovery": null,
+      "codexUpdates": [
+        {
+          "topic": "the-shrine-that-would-not-hold",
+          "label": "The Shrine That Would Not Hold (mystery)",
+          "kind": "mystery",
+          "entityId": null,
+          "fact": "A shrine for all peoples cannot be both universally sacred and singularly warden-held. Palework reads the sacred in an ending; Boundary-Stone claims it as marked territory. The two crafts are incompatible at this depth—one makes the space sacred, the other makes it yours. A shrine for all requires a different answer.",
+          "links": [
+            "the-made-gate",
+            "palework",
+            "boundary_stone"
+          ]
+        }
+      ],
+      "holdingOps": [],
+      "debtOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": {
+        "hoursPassed": 1.5,
+        "why": "the working took an hour and a half—effort, focus, and the slow unraveling"
+      },
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": null,
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "The Made Gate clearing at evening—amber light across moorland, the frameless gate standing in its marked circle, the stone of its uprights still warm from the day. The ground around it is clear and open. Sky bleeds gold westward; the road south and north are both visible from this ground.",
+      "npcsPresent": [],
+      "objects": [
+        "The Made Gate itself—frameless, shadow-warded, marked with Veth's open-hand and ",
+        "Huginn—perched on the right upright, watching the working with one patient eye"
+      ],
+      "threads": [
+        "A shrine for all peoples—attempted, failed, the working incomplete",
+        "The gate stands unmarked and unguarded save by its own warding",
+        "Pell at the post, waiting—does not yet know the shrine-work broke"
+      ]
+    },
+    "beats": 1
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 16,
-    "hour": 20,
+    "hour": 21,
     "realAnchor": null
   },
   "companions": [
@@ -6119,7 +6300,8 @@
         "[d15] The music-box relay mechanism is confirmed working—the first melody carries 'all is well' across the moorland network and receives an answer from an unseen listener",
         "[d15] The Whistling Woman post is now confirmed operational as a warden-staffed waystation—Silas Weir has arrived and the relay mechanism's first test melody was answered from across the moorland network.",
         "[d16] The Whistling Woman post now has a second shadow tablet seated on the interior shelf—Deni Cors's pair, enabling secure two-way communication between the post and the wider network.",
-        "[d16] The shadow-model of the Whistling Woman post now exists as a working tool—a dimensional structure held by braided Shadow Work and Working Model, showing the post's layout, relay vault, watch-room sightlines, threshold-marks, and potential defensive vantages. The model is responsive to adjustment…"
+        "[d16] The shadow-model of the Whistling Woman post now exists as a working tool—a dimensional structure held by braided Shadow Work and Working Model, showing the post's layout, relay vault, watch-room sightlines, threshold-marks, and potential defensive vantages. The model is responsive to adjustment…",
+        "[d16] Silas Weir attempted to raise an inclusive shrine at the Made Gate clearing—combining Palework and Boundary-Stone to create a space sacred to all peoples. The working failed: a shrine for all peoples cannot be simultaneously held by one warden's mark. The attempt is incomplete; the ground remains…"
       ],
       "flags": {
         "status": "active",
@@ -6319,7 +6501,7 @@
     "lastTickWorldDay": 74,
     "lastCanonWorldDay": 74,
     "lastGenCount": 1776,
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 6,
     "recentOffers": [
       {
         "thing": "The moorland silence holds a weight—a listening quality that suggests the relay network is not merely a series of posts but something more…",
@@ -15721,6 +15903,23 @@
         "createdDay": 16,
         "entityId": "edvar-crane",
         "updatedDay": 16
+      },
+      "gen-whistling-woman-post": {
+        "id": "gen-whistling-woman-post",
+        "label": "Whistling Woman Post",
+        "kind": "place",
+        "entityId": "gen-whistling-woman-post",
+        "facts": [
+          "[d16] The Shrine That Would Not Hold (mystery) — A shrine for all peoples cannot be both universally sacred and singularly warden-held. Palework reads the sacred in an ending; Boundary-Stone claims it as marked territory. The two crafts are incompatible at this depth—one makes the space sacred, the…"
+        ],
+        "links": [
+          "the-made-gate",
+          "palework",
+          "boundary-stone"
+        ],
+        "aliases": [],
+        "createdDay": 16,
+        "updatedDay": 16
       }
     },
     "notSame": [
@@ -16121,26 +16320,32 @@
         "to": "overseer-grael",
         "why": "beat",
         "day": 16
+      },
+      {
+        "label": "The Shrine That Would Not Hold (mystery)",
+        "to": "gen-whistling-woman-post",
+        "why": "beat",
+        "day": 16
       }
     ]
   },
   "tendencies": {
-    "strategic": 25.339872572123184,
-    "cerebral": 18.28043281210865,
-    "social": 9.626186782705899,
-    "generous": 4.118576824809932,
-    "cautious": 6.253028095452371,
-    "physical": 0.31424436168915587,
-    "risky": 0.9129641013377477,
-    "ruthless": 0.16405441122390466,
-    "carousing": 1.7233330887715763,
-    "amorous": 2.887638432296066,
-    "patient": 0.5516016422333175,
-    "stealth": 0.000005733554277681773,
-    "devotion": 0.2342919579182209,
-    "craft": 3.540361479830323,
-    "leadership": 2.4808070311491734,
-    "deception": 0.027457148286301688
+    "strategic": 25.706375757820105,
+    "cerebral": 17.823421991805933,
+    "social": 9.385532113138252,
+    "generous": 5.015612404189684,
+    "cautious": 6.096702393066061,
+    "physical": 0.306388252646927,
+    "risky": 0.8901399988043041,
+    "ruthless": 0.15995305094330703,
+    "carousing": 1.680249761552287,
+    "amorous": 2.8154474714886644,
+    "patient": 0.5378116011774846,
+    "stealth": 0.000005590215420739729,
+    "devotion": 0.22843465897026538,
+    "craft": 4.451852442834564,
+    "leadership": 2.418786855370444,
+    "deception": 0.026770719579144144
   },
   "aptitudes": [
     "strategist",
@@ -16149,7 +16354,7 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 964,
+  "actionCount": 965,
   "grantsVersion": 1,
   "reconcileVersion": 49,
   "gallery": [
@@ -16987,8 +17192,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1789173466653,
-  "rev": 1946,
+  "updatedAt": 1789173903781,
+  "rev": 1947,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -20384,11 +20589,11 @@
       "numen_sense": 3,
       "lightsense": 2,
       "order_sense": 99,
-      "palework": 32,
+      "palework": 33,
       "deathsense": 49,
       "shadowstep": 28,
       "the-attended-end": 46,
-      "wildcraft": 6,
+      "wildcraft": 7,
       "the_raised_thing": 21,
       "the_ended_threat": 6,
       "the_shadow_work": 22,
@@ -20397,7 +20602,7 @@
       "the_grey_road": 1,
       "the_grey_hand": 2,
       "the_shielding_word": 3,
-      "boundary_stone": 10,
+      "boundary_stone": 11,
       "the_kept_breath": 3,
       "light_borne": 3,
       "marrow-s-wings": 4,
@@ -20469,18 +20674,22 @@
       "the-declared-threshold+the_raised_thing": 1,
       "braid_deathsense_palework+shadow_work": 1,
       "shadow_work+working_model": 1,
-      "ask_the_dead+boundary_stone": 1
+      "ask_the_dead+boundary_stone": 1,
+      "boundary_stone+palework+wildcraft": 1,
+      "palework+wildcraft": 1,
+      "boundary_stone+wildcraft": 1,
+      "boundary_stone+palework": 1
     },
     "aspirations": [
       {
         "abilityId": "hunters_strike",
         "since": "2026-07-12T16:27:52.479Z",
-        "progress": 9
+        "progress": 10
       },
       {
         "abilityId": "pattern_sense",
         "since": "2026-07-17T18:29:50.856Z",
-        "progress": 2
+        "progress": 3
       }
     ],
     "lastUsed": {
@@ -20488,7 +20697,7 @@
       "the-attended-end": 28,
       "order_sense": 73,
       "boundary_stone": 74,
-      "palework": 73,
+      "palework": 74,
       "the_shadow_work": 25,
       "the_kept_breath": 42,
       "the_raised_thing": 42,
@@ -20514,7 +20723,8 @@
       "working_model": 73,
       "dawn_surgery": 68,
       "shadow_work": 73,
-      "braid_deathsense_palework": 73
+      "braid_deathsense_palework": 73,
+      "wildcraft": 74
     }
   },
   "companionBonds": {
@@ -21239,7 +21449,7 @@
   "syncedAt": 1788658062664,
   "teachers": {},
   "regionsKnown": {
-    "valley": 659,
+    "valley": 660,
     "the_palelands": 6,
     "the_center": 151,
     "the_echo_vale": 14
@@ -21550,10 +21760,10 @@
     {
       "id": "sess-33",
       "startedAt": "2026-09-11T22:48:54.873Z",
-      "lastAt": "2026-09-12T00:37:46.645Z",
+      "lastAt": "2026-09-12T00:45:03.770Z",
       "startDay": 73,
       "endDay": 74,
-      "beats": 11
+      "beats": 12
     }
   ],
   "company": [
@@ -22055,17 +22265,17 @@
     "gen-whistling-woman-post": "https://image.pollinations.ai/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=32614&nologo=true&_cb=1_1"
   },
   "_opEmitted": {
-    "sceneSummary": 338,
-    "choices": 337,
-    "characterDeltas": 169,
-    "scene": 338,
+    "sceneSummary": 339,
+    "choices": 338,
+    "characterDeltas": 170,
+    "scene": 339,
     "npcUpdates": 301,
     "factUpdates": 29,
-    "placeUpdates": 75,
-    "codexUpdates": 199,
-    "timeOps": 309,
+    "placeUpdates": 76,
+    "codexUpdates": 200,
+    "timeOps": 310,
     "imagePrompt": 27,
-    "sceneEnded": 116,
+    "sceneEnded": 117,
     "itemUpdates": 8,
     "questUpdates": 47,
     "offer": 43,
@@ -22082,13 +22292,13 @@
     "_applyFailedOp": 7,
     "newEncounter": 3,
     "encounterOps": 1,
-    "gambitApt": 46,
+    "gambitApt": 47,
     "markDefiningMoment": 1,
     "_engineClosedScene": 5,
     "gambitOps": 1,
     "intentsHeard": 1
   },
-  "_opTurns": 338,
+  "_opTurns": 339,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -23251,10 +23461,10 @@
     "ask": 2,
     "plan": 12,
     "negotiate": 2,
-    "prepare": 10,
+    "prepare": 11,
     "investigate": 4,
-    "craft": 6,
-    "help": 5,
+    "craft": 7,
+    "help": 6,
     "discipline": 1,
     "persuade": 1,
     "rapport": 7,

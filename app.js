@@ -65,6 +65,7 @@ import { enterDeathState } from "./engine/death.js";
 // second copy of the clock — the injury model, the tier ladder and the arc-stage lookup have each been
 // duplicated in this codebase, and each time the copies drifted before anyone noticed.
 wireDeathModel(DeathModel);
+import { carriageOf, voyageOf, isMoored, canSail, sailHolding, voyageLine, featureRuling, canBuildOn } from "./engine/carriage.js";   // B6b: the holding that moves
 import { featureCost, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady, applyPartyOps, activeCompany, formerCompany } from "./engine/company.js";
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, suggestForCreation, archetypeFamilies, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
@@ -130,7 +131,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.464";
+const APP_VERSION = "1.9.465";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6822,6 +6823,8 @@ function applyTurn(turn, resolution, playerWords = null) {
         character._applyFailures = [...(character._applyFailures || []), { op: "holdingOps", at: new Date().toISOString(), message: "a holding op carried neither an id nor a name" }].slice(-10);
         continue;
       }
+      // ✅ B6b: this scope had no notes array — a carriage op speaks through the channel §172 built, which reaches the beat's aside.
+      const said = (line) => { character._stepAsides = [...(character._stepAsides || []), line].slice(-4); };
       if (kind === "claim") { const made = addHolding(character, { id, kind: op.kind || "post", name: op.name, rename: op.rename === true, locationId: op.locationId || location.id, steward: op.steward || null, obligation: op.obligation || null, day: absoluteWorldDay() })
         if (!made) console.warn("[holdingOps] CLAIM REFUSED by addHolding — nothing was added:", JSON.stringify(op).slice(0, 160));   // prose-cap-ok: a console diagnostic
       }
@@ -6840,8 +6843,23 @@ function applyTurn(turn, resolution, playerWords = null) {
       else if (kind === "crew") setCrew(character, id, op.npcIds || (op.npcId ? [op.npcId] : []), { cfg: CONTENT.rules?.economy?.holdStore, worldCount: worldCount() });
       else if (kind === "garrison") setGarrison(character, id, op.npcIds || (op.npcId ? [op.npcId] : []), { worldCount: worldCount() });
       // ✅ features and names — what a hold HAS, and what it is called
-      else if (kind === "feature") { const r = addFeature(character, id, { kind: op.kind, name: op.name || null, by: op.by || null, craftIds: op.craftIds || (op.abilityId ? [op.abilityId] : []), count: op.count || 1, day: absoluteWorldDay(), worldCount: worldCount(), cfg: holdCfgNow() }); if (!r.ok) console.warn("[holdingOps] feature refused:", r.why); }
+      else if (kind === "feature") { const hb = (character.holdings || []).find(x => x.id === id); const bld = hb ? canBuildOn(hb, op.kind, CONTENT.rules?.economy?.holdFeatures?.kinds) : { ok: true };
+        if (!bld.ok) { said(`${hb.name}: ${bld.why}.`); continue; }   // ✅ B6b: a mine cannot be built aboard a ship, and the refusal is said
+        const r = addFeature(character, id, { kind: op.kind, name: op.name || null, by: op.by || null, craftIds: op.craftIds || (op.abilityId ? [op.abilityId] : []), count: op.count || 1, day: absoluteWorldDay(), worldCount: worldCount(), cfg: holdCfgNow() }); if (!r.ok) console.warn("[holdingOps] feature refused:", r.why); }
       else if (kind === "rename") renameHolding(character, id, op.name, { worldCount: worldCount() });
+      // ✅ B6b: the GM may give a place a carriage (a hull bought at a yard, a dragon that agrees) and may sail it. A `willed`
+      // carriage records `steward: bearerId` — Aevi's Q3: you hold it WITH them, and a dragon must not read as property.
+      else if (kind === "carriage") { const h = (character.holdings || []).find(x => x.id === id);
+        if (h && op.carriage && typeof op.carriage === "object") { h.carriage = { ...(h.carriage || {}), ...op.carriage };
+          if (["willed", "living"].includes(String(op.carriage.moves || "").toLowerCase()) && op.carriage.bearerId) h.steward = op.carriage.bearerId;
+          if (carriageOf(h)) said(`${h.name} can move now.`); } }
+      else if (kind === "sail") { const h = (character.holdings || []).find(x => x.id === id);
+        const to = op.toLocationId || op.locationId || null;
+        if (h && to) { const here = CONTENT.locations?.[h.locationId] || null;
+          const r = sailHolding(character, h, to, { locations: CONTENT.locations, npcs: character.npcRegistry, cfg: CONTENT.rules?.economy?.carriage,
+            routeDays: walkingDays(here, CONTENT.locations[to]), worldDay: absoluteWorldDay(), aboard: character.currentLocationId === h.locationId });
+          said(r.ok ? (r.carried ? `${h.name} made ${to} with you aboard.` : `${h.name} put out for ${to}.`) : `${h.name} stays where she is — ${r.why}`);
+          if (r.ok && r.carried) character.currentLocationId = to; } }
       // ⛔ R49 — THE LOAD LEAVES THE HOLD. `sellStore` has always refused away from the hold: "you sell where
       // it stands, and nothing moves it yet." This is the thing that moves it, and the prices it reaches are
       // already authored — 8 raw material is 32 in the valley and 115 in the Gearlands.
@@ -11237,6 +11255,22 @@ function wireHoldingOffers() {
   // `app.querySelector` took the FIRST — the card's — so a pick in the modal landed on whoever the card's select showed. The select
   // beside the clicked button is the one that was used.
   const handSelFor = (btn, id) => btn.parentElement?.querySelector(`select[data-hold-hand="${id}"]`) || app.querySelector(`[data-hold-hand="${id}"]`);
+  // ✅ B6b: put out. She arrives with you if you are aboard (and the clock moves with her); otherwise she is at sea and the world
+  // brings her in. A refusal is SAID — a control that silently does nothing is indistinguishable from a broken one.
+  for (const btn of app.querySelectorAll("[data-hold-sail]")) btn.onclick = () => {
+    const id = btn.dataset.holdSail; const sel = btn.parentElement?.querySelector(`select[data-hold-dest="${id}"]`);
+    const h = (character.holdings || []).find(x => x.id === id); const to = sel?.value;
+    if (!h || !to) return;
+    const here = CONTENT.locations?.[h.locationId] || null;
+    const r = sailHolding(character, h, to, { locations: CONTENT.locations, npcs: character.npcRegistry, cfg: CONTENT.rules?.economy?.carriage,
+      routeDays: walkingDays(here, CONTENT.locations[to]), worldDay: absoluteWorldDay(), aboard: character.currentLocationId === h.locationId });
+    if (!r.ok) { renderPlay(character.activeScene?.lastTurn || null, { aside: `${h.name} stays where she is — ${r.why}` }); return; }
+    if (r.carried) { character.currentLocationId = to; advanceClock(character.clock, Math.max(ADVANCE.travel, Math.round(r.days * 24))); }
+    saveCharacter(character);
+    renderPlay(character.activeScene?.lastTurn || null, { aside: r.carried
+      ? `${h.name} makes ${CONTENT.locations?.[to]?.name || to} in ${r.days < 1 ? "under a day" : Math.round(r.days) + " days"}, and you are aboard.`
+      : `${h.name} puts out for ${CONTENT.locations?.[to]?.name || to} without you — ${r.days < 1 ? "under a day" : Math.round(r.days) + " days"} out. She cannot be raided under way.` });
+  };
   for (const btn of app.querySelectorAll("[data-hold-crew]")) btn.onclick = () => {
     const id = btn.dataset.holdCrew, sel = handSelFor(btn, id);
     const h = (character.holdings || []).find(x => x.id === id);
@@ -11399,10 +11433,17 @@ function renderHoldingsTab(manageId = null) {
           const y = ys[0] || null;
           const produces = ys.length ? ys.map(yy => `${yy.units} ${String(yy.goods).replace(/_/g, " ")}${yy.feature ? ` (${yy.feature})` : ""}`).join(" + ") + ` per pass while ${h.condition}${y.hands ? ` (${y.hands} extra hand${y.hands === 1 ? "" : "s"})` : ""}${y.groundMult && y.groundMult !== 1 ? ` (ground ×${y.groundMult})` : ""}` : (h.kind === "post" ? "nothing yet — a post holds ground; a mine, a mill or a herd built here would" : "nothing yet");
           const here = hereNow();
+          // ✅ B6b: a mobile holding says what she is and where she is — at anchor somewhere, or at sea and how far out.
+          const car = carriageOf(h); const voy = voyageOf(h);
+          const whereName = (id) => esc(CONTENT.locations?.[id]?.name || id);
+          const carLine = !car ? "" : voy
+            ? `<div class="hint">under way — ${esc(voyageLine(h, { worldDay: absoluteWorldDay(), locations: CONTENT.locations }) || "")} · <em>raidable where she is</em></div>`
+            : `<div class="hint">she moves — ${esc(car.moves)}${car.moves === "crewed" ? ` · needs ${car.needsCrew} aboard, has ${(h.garrison || []).length}` : car.bearerId ? ` · carried by ${esc(nameOf(car.bearerId))}` : ""}${car.speed !== 1 ? ` · ${car.speed}× speed` : ""}</div>`;
           const where = h.locationId ? esc(CONTENT.locations?.[h.locationId]?.name || h.locationId)
             : `<em>not recorded</em>${here?.id ? ` <button class="opt" data-hold-here="${esc(h.id)}" title="Record that this hold is the place you are standing in">It's here — ${esc(here.name || here.id)}</button>` : ""}`;
           const crew = Object.values(character.worldState?.assignments || {}).filter(a => a && a.status !== "done" && (a.npcId === h.steward || a.id === h.fromAssignment)).map(a => `${esc(a.npcName || a.npcId)} — ${esc(String(a.charge || "").slice(0, 70))} (${esc(a.status || "working")})`);
           return `<div class="hint">where: ${where}</div>
+        ${carLine}
         <div class="hint">keeper: ${h.steward ? esc(nameOf(h.steward)) : "<em>nobody</em>"} · produces: ${esc(produces)}${up > 0 ? ` · keep: ${up} crystal per pass` : ""}</div>
         ${crew.length ? `<div class="hint">at work here: ${crew.join("; ")}</div>` : ""}
         <div class="hint">who lives here: ${(() => { const r = residentsOf(h, holdCfgNow()); return r.homes || r.people.length ? `${r.people.map(id => esc(nameOf(id))).join(", ") || "nobody named"}${r.homes ? ` · homes for ${r.homes}` : ""}` : "<em>nobody yet — quarters would house the people who work it</em>"; })()}</div>
@@ -11418,6 +11459,16 @@ function renderHoldingsTab(manageId = null) {
         <div class="hold-controls">
           ${crafts.length ? `<div class="hold-ctl"><span class="hold-ctl-label">Put a craft to it</span><select data-hold-craft="${esc(h.id)}">${crafts.map(d => `<option value="${esc(d.id)}">${esc(d.name || d.id)}</option>`).join("")}</select><button class="opt" data-hold-improve="${esc(h.id)}" title="Put a craft you carry to the place — it comes up a rung, once per craft">Apply</button></div>` : ""}
           ${people.length ? `<div class="hold-ctl"><span class="hold-ctl-label">People</span><select data-hold-hand="${esc(h.id)}">${people.map(id => `<option value="${esc(id)}">${esc(nameOf(id))}</option>`).join("")}</select><button class="opt" data-hold-crew="${esc(h.id)}" title="Put them to work here — more hands, more yield (up to ${g.maxHands || 0})">Add hands</button><button class="opt" data-hold-guard="${esc(h.id)}" title="Post them on watch — halves a raid, costs ${g.garrisonUpkeepPerHand || 0} crystal a pass">Post a guard</button>${(h.crew || []).length || (h.garrison || []).length ? `<button class="opt" data-hold-clear="${esc(h.id)}" title="Stand the hands and the watch down">Stand them down</button>` : ""}</div>` : ((h.crew || []).length || (h.garrison || []).length ? `<div class="hold-ctl"><span class="hold-ctl-label">People</span><button class="opt" data-hold-clear="${esc(h.id)}" title="Stand the hands and the watch down">Stand them down</button></div>` : "")}
+          ${(() => { // ✅ B6b: sail her. The places her own graph reaches from where she lies, with the days at her speed — and when she cannot go, the reason in the row.
+            if (!car || voy) return "";
+            const here = CONTENT.locations?.[h.locationId] || null;
+            const near = [...new Set([...(here?.connections || []), ...Object.keys(character.generated?.location || {})])].filter(id => id !== h.locationId && CONTENT.locations?.[id]).slice(0, 40);
+            const opts = near.map(id => { const g = canSail(character, h, id, { locations: CONTENT.locations, npcs: character.npcRegistry, cfg: CONTENT.rules?.economy?.carriage, routeDays: walkingDays(here, CONTENT.locations[id]) });
+              const d = g.ok && g.days != null ? ` — ${g.days < 1 ? "under a day" : Math.round(g.days) + " days"}` : "";
+              return `<option value="${esc(id)}"${g.ok ? "" : " disabled"}>${whereName(id)}${d}${g.ok ? "" : " — " + esc(g.why.replace(/\.$/, ""))}</option>`; }).join("");
+            const first = near.find(id => canSail(character, h, id, { locations: CONTENT.locations, npcs: character.npcRegistry, cfg: CONTENT.rules?.economy?.carriage, routeDays: walkingDays(here, CONTENT.locations[id]) }).ok);
+            return `<div class="hold-ctl"><span class="hold-ctl-label">Sail her</span><select data-hold-dest="${esc(h.id)}">${opts}</select><button class="opt" data-hold-sail="${esc(h.id)}"${first ? "" : " disabled"} title="${first ? "Put out for the place chosen — you come along if you are aboard" : "Nowhere she can reach from here"}">Put out</button></div>`;
+          })()}
         </div>`; })()}
         `; })()}
         ${(() => { // ✅ FEATURES — what the hold HAS (SPEC_holding_attributes pass two): built through play or here, read every pass

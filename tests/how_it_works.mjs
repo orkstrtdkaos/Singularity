@@ -2560,6 +2560,120 @@ console.log("\n── §186 · everyone acts at three or fewer, the cap grows wi
     CO186.isRecruitable({ id: "q", relationship: -8, bondType: "sworn" }) === true, "sworn outranks the band by Erik's ruling; if that is wrong for an enemy it is a ruling, not a bug");
 }
 
+/* ══════════ §187 — B6b · THE HOLDING THAT MOVES (SPEC_mobile_holdings, Aevi; Erik 2026-09-12: "I want mobile holdings prioritized fairly high") ══════════ */
+console.log("\n── §187 · five kinds of carriage, a crew that is the engine, a bearer who may refuse, and a hull that cannot be raided under way ──");
+{
+  const CR187 = await import("../engine/carriage.js");
+  const HO187 = await import("../engine/holdings.js");
+  const { loadContentHeadless: lch187 } = await import("./headless_content.mjs");
+  const C187 = await lch187();
+  const cfg187 = C187.rules?.economy?.carriage || null;
+  const kinds187 = C187.rules?.economy?.holdFeatures?.kinds || {};
+  // the two ports Aevi minted are the live case: Keelmouth carries harbour · river · shipyard, Firstsight river, Longshore neither
+  const L187 = C187.locations;
+  const ship = () => ({ id: "brayden-longship", kind: "enterprise", name: "the longship", locationId: "keelmouth", garrison: ["a", "b", "c", "d", "e", "f"], features: [], history: [],
+    carriage: { moves: "crewed", speed: 2, needsCrew: 6 } });
+  const mk = (h, o = {}) => ({ id: "c187", currentLocationId: "keelmouth", holdings: [h], npcRegistry: {}, clock: { day: 1 }, ...o });
+  check("§187: the five carriage kinds are the spec's, and a place with no carriage does not move",
+    JSON.stringify(CR187.CARRIAGE_KINDS) === JSON.stringify(["crewed", "powered", "drifting", "living", "willed"])
+    && CR187.carriageOf({ id: "x" }) === null && CR187.carriageOf({ carriage: { moves: "teleports" } }) === null && CR187.carriageOf(ship()).speed === 2);
+  // ⛔ THE GARRISON IS THE ENGINE: below needsCrew she does not sail, and the refusal counts them
+  const short = ship(); short.garrison = ["a", "b"];
+  const shortGate = CR187.canSail(mk(short), short, "firstsight", { locations: L187, cfg: cfg187, routeDays: 4 });
+  check("§187: ⛔ a crewed hull below its crew does not sail, and the refusal says how many are aboard",
+    shortGate.ok === false && /needs 6 aboard to move and has 2/.test(shortGate.why), shortGate.why);
+  // ⛔ THE TERRAIN GATE IS `tags`: Longshore is a mountain town and she cannot arrive there
+  const dry = CR187.canSail(mk(ship()), ship(), "longshore", { locations: L187, cfg: cfg187, routeDays: 30 });
+  check("§187: ⛔ she will not arrive where there is no water — Longshore is no place for a longship, and the reason names what it wants",
+    dry.ok === false && /no place for/.test(dry.why) && /harbour|river/.test(dry.why), dry.why);
+  const wet = CR187.canSail(mk(ship()), ship(), "firstsight", { locations: L187, cfg: cfg187, routeDays: 4 });
+  check("§187: …and Firstsight, which carries `river`, she can reach — at her speed, so four days becomes two",
+    wet.ok === true && Math.abs(wet.days - 2) < 0.001, JSON.stringify({ ok: wet.ok, days: wet.days, why: wet.why }));
+  // ⛔ ABOARD: she arrives and the player arrives with her — Aevi's "that is the whole appeal"
+  const h1 = ship(); const c1 = mk(h1);
+  const r1 = CR187.sailHolding(c1, h1, "firstsight", { locations: L187, cfg: cfg187, routeDays: 4, worldDay: 70, aboard: true });
+  check("§187: ⛔ with the player aboard she ARRIVES — locationId written, no voyage left open, and it is on her history",
+    r1.ok && r1.arrived === true && r1.carried === true && h1.locationId === "firstsight" && !CR187.voyageOf(h1) && h1.history.some(l => /with you aboard/.test(l)), JSON.stringify(r1));
+  // ⛔ NOT ABOARD: a voyage in flight, and locationId STAYS until she arrives — a null would let reconcile teleport her to a shore
+  const h2 = ship(); const c2 = mk(h2, { currentLocationId: "longshore" });
+  const r2 = CR187.sailHolding(c2, h2, "firstsight", { locations: L187, cfg: cfg187, routeDays: 4, worldDay: 70 });
+  check("§187: ⛔ sent out without the player she is UNDER WAY — locationId still Keelmouth, the voyage carries from/to/arriveDay",
+    r2.ok && r2.sailed === true && h2.locationId === "keelmouth" && CR187.voyageOf(h2)?.to === "firstsight" && CR187.voyageOf(h2)?.arriveDay === 72, JSON.stringify({ r2, at: h2.locationId, voyage: CR187.voyageOf(h2) }));
+  // ⛔ ERIK 2026-09-12, OVER AEVI'S §4: "I would want any moving holds or trade caravans to be raidable from where they currently are
+  // along the route. it doesn't make sense to only update their location at the very end." So she is raidable under way, at the point
+  // the day puts her — and the raid's receipt says it happened at sea.
+  const raidedAtSea = HO187.resolveRaid(c2, h2, { cfg: C187.rules?.economy, dangerLevel: 9, day: 71, rng: () => 0 });
+  check("§187: ⛔ a hull under way IS raidable — Erik overruled \"moving is not\", and the receipt says it happened at sea",
+    raidedAtSea.atSea === true && !/nothing at anchor/.test(raidedAtSea.why || ""), JSON.stringify(raidedAtSea).slice(0, 200));
+  const pos71 = CR187.voyagePosition(h2, { worldDay: 71, locations: L187 });
+  const pos70 = CR187.voyagePosition(h2, { worldDay: 70, locations: L187 });
+  check("§187: ⛔ …and WHERE she is comes from the day — a day out of Keelmouth she has covered half the two-day run, and the position moves with the date",
+    pos70.fraction === 0 && Math.abs(pos71.fraction - 0.5) < 0.001 && pos71.daysOut === 1 && Math.abs(pos71.daysLeft - 1) < 0.001
+    && pos71.worldPos && Math.abs(pos71.worldPos.colatitude - (51.75 + 47.75) / 2) < 0.01, JSON.stringify({ f70: pos70.fraction, f71: pos71.fraction, at: pos71.worldPos }));
+  const wh = CR187.whereaboutsOf(h2, { worldDay: 71, locations: L187 });
+  check("§187: ⛔ …and everything that asks where she is gets the nearest place to that point, with `atSea` said — while a holding at anchor answers with its own place, unchanged",
+    wh.atSea === true && !!wh.locationId && ["keelmouth", "firstsight"].includes(wh.locationId)
+    && CR187.whereaboutsOf(ship(), { worldDay: 71, locations: L187 }).atSea === false && CR187.whereaboutsOf(ship(), { worldDay: 71, locations: L187 }).locationId === "keelmouth", JSON.stringify(wh));
+  check("§187: …and the line a player reads names both ends and the days either side", /out of Keelmouth/.test(CR187.voyageLine(h2, { worldDay: 71, locations: L187 }) || "") && /to Firstsight/.test(CR187.voyageLine(h2, { worldDay: 71, locations: L187 }) || ""), CR187.voyageLine(h2, { worldDay: 71, locations: L187 }));
+  check("§187: ⛔ the tick reads her whereabouts, so the danger under her is where she IS and not where she left",
+    /const whereNow = whereaboutsOf\(h, \{ worldDay:/.test(rd("engine/worldtick.js")) && /const loc = content\?\.locations\?\.\[whereNow\.locationId\]/.test(rd("engine/worldtick.js")));
+  // ⛔ AND THE SAME RULE FOR A CARAVAN: the danger it meets today is the step of the road it is on today, not the worst of the route
+  const CV187 = await import("../engine/caravan.js");
+  const car187 = { id: "c", path: ["keelmouth", "firstsight", "longshore"], days: 6, departedDay: 40, danger: 9 };
+  const steps = [40, 42, 43, 46].map(d => CV187.positionOnRoad(car187, d, L187));
+  check("§187: ⛔ a caravan's danger is where it is on the day — the road's steps in order, each carrying its own place's danger, not the worst step of the whole route",
+    steps.map(s => s.placeId).join(",") === "keelmouth,keelmouth,firstsight,longshore"   // three places over six days: on day 42 she is still short of the second && steps[0].daysOut === 0 && steps[3].daysLeft === 0
+    && /the danger WHERE THEY ARE on this day/.test(rd("engine/caravan.js")) && /const at = positionOnRoad\(car, now - \(elapsed - 1 - i\), locations\);/.test(rd("engine/caravan.js")),
+    JSON.stringify(steps.map(s => s.placeId)));
+  check("§187: …and the hazard READS the place it happened at rather than being handed it and dropping it",
+    /where = null \} = \{\}\) \{/.test(rd("engine/caravan.js")) && /const atWhere = where\?\.name \? ` near \$\{where\.name\}` : ""/.test(rd("engine/caravan.js")) && /set upon\$\{atWhere\}/.test(rd("engine/caravan.js")));
+  // the world brings her in, not a moment sooner
+  // ⛔ THE ORDER MATTERS AND MY FIRST VERSION GOT IT WRONG: both ticks run before the check does, so where she is had to be read
+  // BETWEEN them, or the assertion asks where she is after she has already arrived.
+  const early = CR187.voyageTick(c2, { worldDay: 71, cfg: cfg187 });
+  const stillAt = h2.locationId;
+  const onTime = CR187.voyageTick(c2, { worldDay: 72, cfg: cfg187 });
+  check("§187: ⛔ the world brings her in on her day and not before — one arrival, said once, and the place is written then",
+    early.arrived.length === 0 && stillAt === "keelmouth" && onTime.arrived.length === 1 && h2.locationId === "firstsight" && !CR187.voyageOf(h2)
+    && onTime.notes.some(n => /has come in at firstsight/.test(n)) && CR187.voyageTick(c2, { worldDay: 99, cfg: cfg187 }).arrived.length === 0,
+    JSON.stringify({ early: early.arrived.length, onTime: onTime.notes }));
+  // ⛔ WILLED: the bearer decides, and if their standing falls far enough the holding walks away
+  const dragon = () => ({ id: "the-grove", kind: "post", name: "the walking grove", locationId: "keelmouth", garrison: [], features: [], history: [], carriage: { moves: "willed", speed: 1, bearerId: "tolvess" } });
+  const withBearer = (rel, status = "active") => mk(dragon(), { npcRegistry: { tolvess: { id: "tolvess", name: "Tolvess", relationship: rel, status } } });
+  const warm = withBearer(6), cool = withBearer(0), done187 = withBearer(-9);
+  check("§187: ⛔ a willed carriage asks its BEARER — willing at standing 6, refusing at 0, and the refusal is in their name",
+    CR187.canSail(warm, warm.holdings[0], "firstsight", { locations: L187, cfg: cfg187, routeDays: 4 }).ok === true
+    && CR187.canSail(cool, cool.holdings[0], "firstsight", { locations: L187, cfg: cfg187, routeDays: 4 }).ok === false
+    && /Tolvess will not carry you/.test(CR187.canSail(cool, cool.holdings[0], "firstsight", { locations: L187, cfg: cfg187, routeDays: 4 }).why));
+  const walked = CR187.voyageTick(done187, { cfg: cfg187 });
+  check("§187: ⛔ …and once their standing falls past the floor THE HOLDING WALKS AWAY, with the reason on the record — a place with opinions, not a punishment",
+    walked.departed.length === 1 && done187.holdings[0].condition === "gone" && /carried you as far as they cared to/.test(walked.notes[0] || "")
+    && done187.holdings[0].history.some(l => /left:/.test(l)), JSON.stringify(walked));
+  check("§187: …a bearer who is gone stops carrying it too", CR187.bearerWill({ moves: "willed", bearerId: "t" }, { t: { id: "t", name: "T", relationship: 9, status: "dead" } }, cfg187).leaves === true);
+  // ⛔ WHAT CAN RIDE, AND WHAT EARNS AT SEA — Aevi's §4 list and her Q1, in content
+  const laden = ship(); laden.features = [{ kind: "fishery" }, { kind: "market" }, { kind: "mine" }, { kind: "smithy" }];
+  const ruling = CR187.featureRuling(laden, kinds187);
+  check("§187: ⛔ a mine cannot ride and a fishery can; a fishery earns under way and a market does not (a market needs someone to sell TO)",
+    ruling.grounded.map(f => f.kind).join() === "mine" && ruling.rides.map(f => f.kind).sort().join() === "fishery,market,smithy"
+    && ruling.underWay.map(f => f.kind).sort().join() === "fishery,smithy" && ruling.earnsAtSea === true, JSON.stringify({ grounded: ruling.grounded.length, rides: ruling.rides.length, underWay: ruling.underWay.length }));
+  check("§187: …and building one aboard is refused with its reason, while a holding that does not move takes anything",
+    CR187.canBuildOn(ship(), "mine", kinds187).ok === false && /cannot be built aboard something that moves/.test(CR187.canBuildOn(ship(), "mine", kinds187).why)
+    && CR187.canBuildOn(ship(), "fishery", kinds187).ok === true && CR187.canBuildOn({ id: "post" }, "mine", kinds187).ok === true);
+  check("§187: the dials are content — the water tags, the willing floor and the leaving floor are Aevi's and Erik's to move",
+    Array.isArray(cfg187?.needsTags?.crewed) && cfg187.needsTags.crewed.includes("harbour") && cfg187.needsTags.crewed.includes("river")
+    && cfg187.willingAt === 1 && cfg187.leavesAt === -4 && /tags/.test(String(cfg187._why)));
+  // ⛔ THE READERS: the page sails her, the world brings her in, the GM may give a carriage and may sail it
+  const app187 = rd("app.js").replace(/^\s*\/\/.*$/gm, "");
+  check("§187: ⛔ the page reads it — the card says what she is and where, the control sails her, and a refusal is SAID not swallowed",
+    /const car = carriageOf\(h\); const voy = voyageOf\(h\);/.test(app187) && /data-hold-sail=/.test(app187) && /const r = sailHolding\(character, h, to, \{/.test(app187)
+    && /stays where she is — \$\{r\.why\}/.test(app187) && /character\.currentLocationId = to; advanceClock/.test(app187));
+  check("§187: ⛔ the world brings her in on the pass that already advances holdings, and says so as news",
+    /voyageTick\(character, \{ worldDay: absoluteWorldDay\(now\)/.test(rd("engine/worldtick.js")) && /for \(const n of vt\.notes\) news\.push\(stampNews\(n,/.test(rd("engine/worldtick.js")));
+  check("§187: ⛔ the GM has both ops with their contract, and a willed carriage records the bearer as steward — you hold it WITH them",
+    /carriage\|sail/.test(rd("engine/gm.js")) && /a hold that MOVES/.test(rd("engine/gm.js"))
+    && /else if \(kind === "carriage"\)/.test(app187) && /else if \(kind === "sail"\)/.test(app187) && /h\.steward = op\.carriage\.bearerId/.test(app187));
+}
+
 /* ══════════ §14 — THE FOLD CANNOT BEAT AN IMMUNITY THE BLOW COULD NOT ══════════ */
 // ⛔ FOUND BY RUNNING AEVI'S TWELVE CRAFTS THROUGH A MELEE-SCALE FIGHT (CCODE-313), which is the whole
 // reason Erik asked for a big-battle test. A physical-immune foe took ZERO from the player's typed blow and

@@ -48,6 +48,21 @@ function ensureCaravans(character) {
  *  `dangerLevel` (0-5, mean 2.28), and a route through the Unmade should not read like a route through the
  *  valley because they share a Reach. ⛑ The WORST place on the path sets it: a road is as safe as its
  *  ugliest mile, which is what makes the two named options a real decision rather than a preference. */
+/** ⛔ ERIK 2026-09-12: "raidable from where they currently are along the route… a simplified way to do this by day." The day's
+ *  position on the road is the fraction of the journey elapsed, taken to the step of `path` it falls in; that step's own danger is
+ *  what can reach them today. ⚠️ `roadDanger` (the worst on the whole road) STAYS — it is what a player is told before setting out,
+ *  and it is the right number for that question. This is the other question: what is out there right now. Pure. */
+export function positionOnRoad(car, day = null, locations = {}) {
+  const path = Array.isArray(car?.path) && car.path.length ? car.path : [car?.to].filter(Boolean);
+  const total = Math.max(0.0001, num(car?.days, 0));
+  const started = num(car?.departedDay, num(car?.startedDay, num(car?.lastTickDay, num(day, 0))));   // `departedDay` is what sendCaravan writes
+  const elapsed = Math.max(0, Math.min(total, num(day, started) - started));
+  const f = total ? elapsed / total : 1;
+  const i = Math.max(0, Math.min(path.length - 1, Math.floor(f * (path.length - 1) + 0.0001)));
+  const placeId = path[i] || null;
+  return { index: i, placeId, name: locations?.[placeId]?.name || placeId, danger: num(locations?.[placeId]?.dangerLevel, num(car?.danger, 0)), fraction: f, daysOut: elapsed, daysLeft: Math.max(0, total - elapsed) };
+}
+
 export function roadDanger(path = [], locations = {}) {
   let worst = 0;
   for (const id of path) worst = Math.max(worst, num(locations[id]?.dangerLevel, 0));
@@ -114,7 +129,10 @@ export function standingCarriers(car, people = {}, character = null) {
  *  ⚠️ AND `personalRisk` HAS NEVER BEEN READ BY ANYTHING. `legionClash` has computed and returned it since it
  *  was written, with a comment arguing hard for why it must have a floor, and no module in the engine ever
  *  looked at it. This is its first consumer, and it is the thing that makes Erik's ruling mean something. */
-export function resolveRoadHazard(character, car, { rng = Math.random, cfg = null, people = {}, day = null } = {}) {
+export function resolveRoadHazard(character, car, { rng = Math.random, cfg = null, people = {}, day = null, where = null } = {}) {
+  // ✅ ERIK 2026-09-12: the hazard happened SOMEWHERE — `where` comes from positionOnRoad and is named in the event, so a player
+  // reading the log knows which stretch of road took the load rather than only that the road did.
+  const atWhere = where?.name ? ` near ${where.name}` : "";
   const raidCfg = cfg?.raid || {};
   const baseShare = Number.isFinite(Number(raidCfg.takeShare)) ? Number(raidCfg.takeShare) : 0.5;
   const escort = standingCarriers(car, people, character);
@@ -134,7 +152,7 @@ export function resolveRoadHazard(character, car, { rng = Math.random, cfg = nul
   // unescorted cart has nobody to kill. It is simply a bad way to move goods.
   if (!escort.length) {
     const taken = take(baseShare);
-    car.events.push({ at: day, what: `set upon with nobody walking beside it — ${describe(taken)} taken` });
+    car.events.push({ at: day, what: `set upon${atWhere} with nobody walking beside it — ${describe(taken)} taken`, where: where?.placeId || null });
     return { fought: false, held: false, wiped: false, taken, fallen: [] };
   }
 
@@ -212,8 +230,10 @@ export function tickCaravans(character, {
 
     for (let i = 0; i < elapsed; i++) {
       if (!Object.keys(car.load || {}).length) break;    // nothing left to take
-      if (rng() < clamp01(num(car.danger, 0) * perDangerChance)) {
-        const r = resolveRoadHazard(character, car, { rng, cfg, people, day: now });
+      // ✅ ERIK 2026-09-12: the danger WHERE THEY ARE on this day of the road, not the worst step of the whole route.
+      const at = positionOnRoad(car, now - (elapsed - 1 - i), locations);
+      if (rng() < clamp01(at.danger * perDangerChance)) {
+        const r = resolveRoadHazard(character, car, { rng, cfg, people, day: now, where: at });
         // ⚑ EACH EVENT CARRIES ITS OWN NOTE. The caller used to reach back for the caravan's latest event,
         // which duplicated an arrival and swallowed the robbing that happened on the way to it.
         out.push({ kind: "hazard", caravanId: car.id, note: car.events[car.events.length - 1]?.what || null, ...r });

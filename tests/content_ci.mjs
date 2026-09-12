@@ -876,8 +876,12 @@ for (const pack of PACKS) {
     // SNG-537 (Erik 2026-09-11): 96 -> 98. Keelmouth and Firstsight minted onto the Outrun so a player walking to a port that
     // does not exist arrives at one that does. Ratified, not drift — Aevi authored the places and left this line to me so the
     // gate stays a ratification rather than a mirror of what was just authored (HANDOFF_ccode_SNG-537_one_constant).
-    check("SNG-392/398/396: the hierarchy matches the RATIFIED census — 25 regions, 98 settlements, 14 authored-in-play sites",
-      tiers.region === 25 && tiers.settlement === 98 && tiers.site === 14, JSON.stringify(tiers));
+    // ⚠️ 99 SINCE 2026-09-12: Aevi minted the Mountain Pass (and Keelmouth and Firstsight before it, which the 98 already carried).
+    // Her own standing ask names the number — `po/ASK_aevi_20260912_header_regen_foothills.md`: "the census reads 99 since the
+    // Mountain Pass". ⛔ THE GATE STAYS A RATIFICATION RATHER THAN A MIRROR: it moves when an author says the world grew, with the
+    // authoring named here, and not by reading the corpus back to itself.
+    check("SNG-392/398/396: the hierarchy matches the RATIFIED census — 25 regions, 99 settlements, 14 authored-in-play sites",
+      tiers.region === 25 && tiers.settlement === 99 && tiers.site === 14, JSON.stringify(tiers));
     const ids = new Set(allLocs.map((l) => l.id));
     const badParent = allLocs.filter((l) => l.parentId !== null && !ids.has(l.parentId));
     check("SNG-392: every parentId resolves and every site HAS a parent",

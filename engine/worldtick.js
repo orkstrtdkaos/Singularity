@@ -40,6 +40,7 @@ import { syncEnabled, fetchRepoJSON, fetchLedger, pushOwnedFile, pushMergedFile 
 import { decayWakes, wakeArcPush } from "./wake.js"; // SNG-204: wakes decay on the tick + lean on connected arcs
 import { enterDeathState, deepenDeaths, deathDepth, isRetrievable, resolveRetrieval } from "./death.js"; // SNG-209: a killed figure ENTERS the death state; the clock sinks untended deaths toward sealed
 import { absoluteWorldDay, worldDayAt, worldCount, readClock } from "./worldtime.js";
+import { voyageTick, whereaboutsOf } from "./carriage.js";   // ⛔ B6b: a voyage arrives on world time, and where she is now is where she can be raided
 import { advanceAssignment, progressAgainst } from "./assignments.js"; // SNG-191 §4: the world advances delegated work
 import { seedArc, fomentArc, surfaceableArcs, markSurfaced, seasonalPressure } from "./latentarcs.js"; // SNG-191 §7: the world's own agenda
 import { ensureCanonStore, promotionCandidates, promoteInto, canonForViewer } from "./canon.js";
@@ -404,6 +405,13 @@ export function clashNewsItem(line, { worldDay = null, arcId = null, regionId = 
 export function advanceHoldings({ character, now = Date.now(), ladder = null, content = null, rng = Math.random }) {
   const holdEffects = ladder ? milestoneEffects(ladder, character).live : null;
   const news = [];
+  // ✅ B6b (SPEC_mobile_holdings): A VOYAGE ARRIVES ON WORLD TIME, on the pass that already moves holdings — so a ship sent out
+  // without the player comes in while they are elsewhere, and a `willed` carriage whose bearer has had enough LEAVES, taking the
+  // place with it. ⚠️ Said as news, because a holding that moved and said nothing is a state change nobody can see.
+  {
+    const vt = voyageTick(character, { worldDay: absoluteWorldDay(now), npcs: character?.npcRegistry || {}, cfg: content?.rules?.economy?.carriage || null });
+    for (const n of vt.notes) news.push(stampNews(n, { day: readClock(character.clock).day, worldDay: absoluteWorldDay(now), section: "holdings", clamp: 200 }));
+  }
   // ⛔ DESIGN_celebrations §5.2 — WHERE THE PLAYER IS TOLD. Erik ruled BOTH surfaces and gave them
   // different jobs: the character sheet is where the player goes LOOKING, and the world-tick news —
   // beside "Cassiel Ord made progress on the Raven's Home" — is where they are TOLD.
@@ -458,7 +466,10 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null, co
     }
     // ✅ Q8 (SPEC_hold_store): the store runs itself on the tick — yield by condition, upkeep from the purse, a full
     // store a target. Needs the economy dials and the place; a caller without content sees the tick it saw before.
-    const loc = content?.locations?.[h.locationId] || null;
+    // ✅ ERIK 2026-09-12: a hull under way answers with the nearest place to the point she has reached, so the danger she is under,
+    // the region beneath her and her ground are all where she IS — not where she left. A holding at anchor answers with its own place.
+    const whereNow = whereaboutsOf(h, { worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })(), locations: content?.locations || {} });
+    const loc = content?.locations?.[whereNow.locationId] || null;
     // ✅ Q18: a KEPT hold climbs on its own, one rung per passesPerClimb, to the ceiling its keeper's tier allows.
     const holdCfg = content?.rules?.economy?.holdStore ? { ...content.rules.economy.holdStore, features: content.rules.economy.holdFeatures || null } : null;
     const grew = growHolding(character, h, { cfg: holdCfg, npcs: content?.npcs || {}, npcCfg: content?.rules?.npcStanding || {},

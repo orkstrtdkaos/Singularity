@@ -23,7 +23,8 @@ import { debit, credit } from "./purse.js";        // Q8: upkeep leaves the purs
 import { regionDemand } from "./economy.js";       // Q8: a unit is worth what THIS Reach wants it for
 import { sheetFor as personSheetFor, tierOf as tierOfLevel } from "./npcsheet.js";   // Q18 → v2 §1: the keeper's tier sets the FLOOR
 import { locationDensity } from "./substrate.js";   // Q18: the ground scales an enterprise's yield
-import { legionClash, contingentsFromPeople } from "./melee.js";   // R46a: a detected raid is a FIGHT, resolved unattended
+import { legionClash, contingentsFromPeople } from "./melee.js";
+import { isMoored } from "./carriage.js";   // ⛔ SPEC_mobile_holdings §4: moored is raidable, moving is not   // R46a: a detected raid is a FIGHT, resolved unattended
 import { smartClamp } from "./namematch.js";   // an evidence quote is prose — cut at a word, never mid-word
 import { isNetworkGate } from "./waygate.js";   // runner fees: a NETWORK gate near a relay post brings traffic
 import { walkingDays } from "./worldmap.js";     // …within gateWithinDays of it
@@ -487,6 +488,10 @@ export function yieldFor(holding, cfg, { density = null } = {}) {
  *  ⚠️ A WATCH IS WHAT DETECTS: people on the garrison, or a feature that keeps one (sentries, a tower). Stone alone does not
  *  see. Returns the receipt the news reads, or null when nothing came of it. */
 export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, rng = Math.random, day = null, people = {}, keeperFloor = null } = {}) {
+  // ⛔ ERIK 2026-09-12, OVER AEVI'S §4: a hull under way is RAIDABLE WHERE SHE IS — "it doesn't make sense to only update their
+  // location at the very end." Her whereabouts come from the day (`carriage.voyagePosition`), the danger is the nearest place's,
+  // and the crew aboard defends as a garrison does in port. The receipt says she was taken at sea so the news can read right.
+  const atSea = !isMoored(holding);
   const wasAt = holding.condition;
   const paid = () => { const r = voucherPays(character, holding, cfg, wasAt, day); return r ? { voucherCost: r } : {}; };
   const fcfg = cfg?.features || {};
@@ -505,10 +510,10 @@ export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, r
     // ⛔ nobody saw them coming. Stone still slows them; nothing stops them.
     const share = Math.max(0, Math.min(1, baseShare - step * defenceOf(holding, cfg)));
     const taken = take(share);
-    if (!Object.keys(taken).length) return { detected: false, taken: {}, day, why: "they found nothing worth the carrying" };
+    if (!Object.keys(taken).length) return { detected: false, taken: {}, day, atSea, why: atSea ? "they came alongside and found nothing worth the carrying" : "they found nothing worth the carrying" };
     if (Object.keys(taken).length) advanceHolding(holding, "problem", null, "raided", keeperFloor ? { keeperFloor } : null);   // ⚑ SLIP FIRST, THEN NOTE — the raid's own line stays the last entry (§78). AN EVENT SLIPS AT ONCE — time slips slowly, a raid does not
     note(`raided unseen — ${Object.entries(taken).map(([g, n]) => `${n} ${g}`).join(", ")} taken`);
-    return { detected: false, taken, day, ...paid() };
+    return { detected: false, taken, day, atSea, ...paid() };
   }
   // ⚑ the watch saw them: a fight, at band scale, unattended
   const defenders = contingentsFromPeople(watchOf(holding, cfg).map(id => people?.[id] || character?.npcRegistry?.[id] || { id, name: id }),
@@ -525,12 +530,12 @@ export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, r
     holding.store = holding.store && typeof holding.store === "object" ? holding.store : {};
     holding.store[spoilKind] = (Number(holding.store[spoilKind]) || 0) + spoils;
     note(`raid beaten off — ${spoils} ${spoilKind} taken from them`);
-    return { detected: true, held: true, taken: {}, spoils: { [spoilKind]: spoils }, outcome: clash.outcome, day };
+    return { detected: true, held: true, taken: {}, spoils: { [spoilKind]: spoils }, outcome: clash.outcome, day, atSea };
   }
   const taken = take(Math.max(0, Math.min(1, baseShare - step * stone)));
   if (Object.keys(taken).length) advanceHolding(holding, "problem", null, "raided", keeperFloor ? { keeperFloor } : null);   // ⚑ AN EVENT SLIPS AT ONCE — time slips slowly, a raid does not
   note(`raid fought and lost — ${Object.entries(taken).map(([g, n]) => `${n} ${g}`).join(", ") || "nothing"} taken`);
-  return { detected: true, held: false, taken, outcome: clash.outcome, day, ...paid() };
+  return { detected: true, held: false, taken, outcome: clash.outcome, day, atSea, ...paid() };   // the path where the raiders WIN carried the fact too
 }
 
 /** Who is WATCHING: people posted on the garrison, plus a feature that keeps a watch (sentries, a tower). Stone does not see. */

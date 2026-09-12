@@ -231,13 +231,29 @@
   },
   "relay": {
    "note": "⛔ ERIK 2026-09-06: 'the relay station income should be enough to maintain the post minimally. The more important the runner post — more messages and traffic — the more revenue; the waygate here will likely bring a lot more runner traffic as word gets out.' A hold with a feature carrying `service: true` (relay_station) earns runner fees each pass: max(feePerPass, its own upkeep) × (1 + trafficPerStation × the other service holds you keep + gateTraffic × ramp), where ramp climbs from 0 to 1 over wordPasses while a NETWORK waygate stands within gateWithinDays of the post. Credited before upkeep as origin 'relay'; said in the news the first time and when word has got out. Priced by CCode; Erik turns.",
-   "feePerPass": 4, "trafficPerStation": 0.5, "gateWithinDays": 2, "gateTraffic": 1, "wordPasses": 20
+   "feePerPass": 4,
+   "trafficPerStation": 0.5,
+   "gateWithinDays": 2,
+   "gateTraffic": 1,
+   "wordPasses": 20
   },
   "growth": {
    "note": "✅ Q18 (Erik 2026-09-05: 'please build it'; SPEC_hold_store §5): a hold grows by ONE-TIME ACTS WITH LASTING EFFECTS, never a per-tick chore. A KEPT hold climbs one rung every passesPerClimb passes (4 passes = 12 world days) to thriving — and its keeper's TIER sets the FLOOR it will not drop below (floorByKeeperTier; v2 §1: floors, not ceilings). A craft the character carries, applied to the place (the tab, or holdingOps improve), lifts it a rung at once, once per craft per hold, when the craft SHAPES or MENDS (improveFunctions). Each extra hand adds handsYieldBonus to the yield, to maxHands. A garrison halves a raid (raid.defendedMult) and costs garrisonUpkeepPerHand each pass. The ground scales an enterprise's yield by 1 + groundYieldWeight × (density − 0.5): dense lattice 0.9 → ×1.2, thin 0.2 → ×0.85. Priced by CCode; Erik turns them. What a POST can become is not built.",
    "passesPerClimb": 4,
    "_costs_20260907": "SPEC_hold_costs §4–§5: wagePerHand — what a hand asked to come and work is paid per pass (the garrison's rate; Erik's number, Q4). improveEnergyMult — a craft applied to a place costs its own energy × this, refused at zero (R47). lastingFunctions — a craft that leaves a THING behind is permanent; seasonFunctions — one that holds ground or defends lasts improveSeasonDays, warns one pass before (Q3), then goes quiet: the rung it gave comes off, the feature stays, refreshCost is the energy again. Priced by CCode; Erik turns.",
-   "wagePerHand": 3, "improveEnergyMult": 2, "improveSeasonDays": 12, "lastingFunctions": ["make", "mend", "restore"], "seasonFunctions": ["transform", "sustain", "empower"],
+   "wagePerHand": 3,
+   "improveEnergyMult": 2,
+   "improveSeasonDays": 12,
+   "lastingFunctions": [
+    "make",
+    "mend",
+    "restore"
+   ],
+   "seasonFunctions": [
+    "transform",
+    "sustain",
+    "empower"
+   ],
    "passesPerSlip": 10,
    "floorByKeeperTier": {
     "_note": "⛔ PROPOSAL_delegate_tiers v2 §1 (Erik: 'floors not ceilings — poor Deni might just be keeping it, but the place might be thriving anyway due to circumstance'). A keeper sets what the place will NOT DROP BELOW while they are there; circumstance sets the rest. A strong keeper's floor is high — the reward is not permission to climb but that it stays climbed. Read where a hold FALLS (a raid's slip, resolveRaid → advanceHolding); a kept hold climbs to thriving regardless of tier. _default is an unknown tier. Priced by CCode; Erik turns.",
@@ -273,69 +289,119 @@
   "maxEscalation": 2
  },
  "holdFeatures": {
-   "_costs_20260907": "⛔ SPEC_hold_costs_crafts_and_hiring §2–§3 (Aevi; Erik: 'we shouldn't be adding these for free'). Every kind carries `build` {goods, days} and `upkeep` (per pass). The cost is what the thing IS: stone is built once and kept cheaply; a watch is cheap to raise and the dearest thing in the game to keep, because people must be paid every pass and stone does not see. A waygate cannot be built (build: null) — you come to hold one, or you MAKE one and that is a story — and costs 12 to keep. BUILT charges the price (store first, purse second at the region's unit worth, else it stalls as a build in progress that pays itself off); INHERITED and GRANTED are free; all three pay upkeep. Labour days are passes: a build IS a project (Q2). Aevi's numbers; Erik turns.",
+  "_costs_20260907": "⛔ SPEC_hold_costs_crafts_and_hiring §2–§3 (Aevi; Erik: 'we shouldn't be adding these for free'). Every kind carries `build` {goods, days} and `upkeep` (per pass). The cost is what the thing IS: stone is built once and kept cheaply; a watch is cheap to raise and the dearest thing in the game to keep, because people must be paid every pass and stone does not see. A waygate cannot be built (build: null) — you come to hold one, or you MAKE one and that is a story — and costs 12 to keep. BUILT charges the price (store first, purse second at the region's unit worth, else it stalls as a build in progress that pays itself off); INHERITED and GRANTED are free; all three pay upkeep. Labour days are passes: a build IS a project (Q2). Aevi's numbers; Erik turns.",
   "note": "✅ SPEC_holding_attributes pass two, first cut (Erik 2026-09-05 by example: 'the Threshold Post is supposed to have a mine… a Temple to Attending… Stillwater's Trouble has barriers, a wall, skeletal sentries'). A hold carries FEATURES from this catalogue; each kind names its family (§3 of the spec) and the ONE effect the engine reads for it. material → yields the goods into the store at the hold's condition; martial → the hold is guarded (raids halved) and each defence point cuts a raid's take by defenceShareStep; sentries are a watch that costs no keep; meaning → an aura added to the place's meaningDensity (SPEC_meaning_density — 'a hold IS people living somewhere'); people → quarters raise the hands a hold can work and count as residents; craft → a facility recorded on the place (what it gates is pass three). Priced by CCode; Aevi extends the kinds and their flavour; Erik turns the numbers. A feature is added through play (holdingOps feature) or on the Holdings tab; it records who built it and the crafts used.",
   "defenceShareStep": 0.15,
   "kinds": {
    "mine": {
-    "build": {"goods":{"cut_stone":12},"days":20},
+    "build": {
+     "goods": {
+      "cut_stone": 12
+     },
+     "days": 20
+    },
     "upkeep": 4,
     "family": "material",
     "yields": "raw_material",
-    "label": "a mine"
+    "label": "a mine",
+    "hullable": false,
+    "_hullableWhy": "Aevi §4"
    },
    "quarry": {
-    "build": {"goods":{"raw_material":8},"days":16},
+    "build": {
+     "goods": {
+      "raw_material": 8
+     },
+     "days": 16
+    },
     "upkeep": 3,
     "family": "material",
     "yields": "cut_stone",
-    "label": "a quarry"
+    "label": "a quarry",
+    "hullable": false,
+    "_hullableWhy": "Aevi §4"
    },
    "mill": {
-    "build": {"goods":{"cut_stone":10},"days":14},
+    "build": {
+     "goods": {
+      "cut_stone": 10
+     },
+     "days": 14
+    },
     "upkeep": 2,
     "family": "material",
     "yields": "raw_material",
     "label": "a mill"
    },
    "workshop": {
-    "build": {"goods":{"mech_parts":8},"days":12},
+    "build": {
+     "goods": {
+      "mech_parts": 8
+     },
+     "days": 12
+    },
     "upkeep": 3,
     "family": "material",
     "yields": "mech_parts",
     "label": "a workshop",
-    "_yieldFix_20260906": "⛔ ERIK 2026-09-06: 'the workshop says WORKED LIGHT, but a workshop can be for lots of finished goods.' ⚠️ AEVI GAVE IT THE LENS-WORKS' OUTPUT — `worked_light` is what a lens-works makes, and a workshop is the general case. ✅ `mech_parts` is the honest default from the authored goods vocabulary (arms · cut_stone · documents · instruments · living_stock · luxuries · mech_parts · medicines · nanite_tech · precursor_salvage · raw_material · worked_light). ⚑ AND A WORKSHOP SHOULD BE ABLE TO SAY WHAT IT MAKES — see `_yieldOverride`."
+    "_yieldFix_20260906": "⛔ ERIK 2026-09-06: 'the workshop says WORKED LIGHT, but a workshop can be for lots of finished goods.' ⚠️ AEVI GAVE IT THE LENS-WORKS' OUTPUT — `worked_light` is what a lens-works makes, and a workshop is the general case. ✅ `mech_parts` is the honest default from the authored goods vocabulary (arms · cut_stone · documents · instruments · living_stock · luxuries · mech_parts · medicines · nanite_tech · precursor_salvage · raw_material · worked_light). ⚑ AND A WORKSHOP SHOULD BE ABLE TO SAY WHAT IT MAKES — see `_yieldOverride`.",
+    "producesWhileMoving": true
    },
    "herd": {
-    "build": {"goods":{"living_stock":6},"days":10},
+    "build": {
+     "goods": {
+      "living_stock": 6
+     },
+     "days": 10
+    },
     "upkeep": 2,
     "family": "material",
     "yields": "living_stock",
     "label": "a herd or a planting"
    },
    "wall": {
-    "build": {"goods":{"cut_stone":10},"days":12},
+    "build": {
+     "goods": {
+      "cut_stone": 10
+     },
+     "days": 12
+    },
     "upkeep": 1,
     "family": "martial",
     "defence": 1,
     "label": "a wall"
    },
    "barrier": {
-    "build": {"goods":{"cut_stone":10},"days":12},
+    "build": {
+     "goods": {
+      "cut_stone": 10
+     },
+     "days": 12
+    },
     "upkeep": 1,
     "family": "martial",
     "defence": 1,
     "label": "a barrier or a ward-line"
    },
    "tower": {
-    "build": {"goods":{"cut_stone":18},"days":20},
+    "build": {
+     "goods": {
+      "cut_stone": 18
+     },
+     "days": 20
+    },
     "upkeep": 2,
     "family": "martial",
     "defence": 2,
     "label": "a watchtower"
    },
    "sentries": {
-    "build": {"goods":{"raw_material":2},"days":3},
+    "build": {
+     "goods": {
+      "raw_material": 2
+     },
+     "days": 3
+    },
     "upkeep": 6,
     "family": "martial",
     "defence": 1,
@@ -343,7 +409,12 @@
     "label": "sentries — raised, bound, or posted"
    },
    "temple": {
-    "build": {"goods":{"cut_stone":20},"days":30},
+    "build": {
+     "goods": {
+      "cut_stone": 20
+     },
+     "days": 30
+    },
     "upkeep": 3,
     "family": "meaning",
     "aura": 0.2,
@@ -355,7 +426,12 @@
     }
    },
    "shrine": {
-    "build": {"goods":{"raw_material":2},"days":4},
+    "build": {
+     "goods": {
+      "raw_material": 2
+     },
+     "days": 4
+    },
     "upkeep": 0,
     "family": "meaning",
     "aura": 0.1,
@@ -363,57 +439,103 @@
     "pilgrims": 1
    },
    "quarters": {
-    "build": {"goods":{"raw_material":10},"days":12},
+    "build": {
+     "goods": {
+      "raw_material": 10
+     },
+     "days": 12
+    },
     "upkeep": 2,
     "family": "people",
     "hands": 2,
     "residents": 4,
-    "label": "quarters — homes for the people who work it"
+    "label": "quarters — homes for the people who work it",
+    "producesWhileMoving": true
    },
    "forge": {
-    "build": {"goods":{"mech_parts":12},"days":16},
+    "build": {
+     "goods": {
+      "mech_parts": 12
+     },
+     "days": 16
+    },
     "upkeep": 2,
     "family": "craft",
     "facility": "forge",
     "label": "a forge"
    },
    "laboratory": {
-    "build": {"goods":{"instruments":16},"days":24},
+    "build": {
+     "goods": {
+      "instruments": 16
+     },
+     "days": 24
+    },
     "upkeep": 4,
     "family": "craft",
     "facility": "laboratory",
-    "label": "a laboratory"
+    "label": "a laboratory",
+    "producesWhileMoving": true
    },
    "scriptorium": {
-    "build": {"goods":{"documents":10},"days":14},
+    "build": {
+     "goods": {
+      "documents": 10
+     },
+     "days": 14
+    },
     "upkeep": 2,
     "family": "craft",
     "facility": "scriptorium",
-    "label": "a scriptorium"
+    "label": "a scriptorium",
+    "producesWhileMoving": true
    },
    "kiln": {
-    "build": {"goods":{"cut_stone":6},"days":8},
+    "build": {
+     "goods": {
+      "cut_stone": 6
+     },
+     "days": 8
+    },
     "upkeep": 2,
     "family": "material",
     "yields": "cut_stone",
-    "label": "a kiln or a lime-burn"
+    "label": "a kiln or a lime-burn",
+    "producesWhileMoving": true
    },
    "fishery": {
-    "build": {"goods":{"living_stock":6},"days":10},
+    "build": {
+     "goods": {
+      "living_stock": 6
+     },
+     "days": 10
+    },
     "upkeep": 2,
     "family": "material",
     "yields": "living_stock",
-    "label": "a fishery or a weir"
+    "label": "a fishery or a weir",
+    "producesWhileMoving": true
    },
    "still": {
-    "build": {"goods":{"medicines":6},"days":10},
+    "build": {
+     "goods": {
+      "medicines": 6
+     },
+     "days": 10
+    },
     "upkeep": 2,
     "family": "material",
     "yields": "medicines",
-    "label": "a still or a physic-garden"
+    "label": "a still or a physic-garden",
+    "producesWhileMoving": true
    },
    "lens_works": {
-    "build": {"goods":{"worked_light":20},"days":30},
+    "build": {
+     "goods": {
+      "worked_light": 20
+     },
+     "days": 30
+    },
     "upkeep": 6,
     "family": "material",
     "yields": "worked_light",
@@ -427,39 +549,74 @@
     "transit": true,
     "label": "a waygate — made, not found",
     "_note": "⛔ ERIK 2026-09-06: 'A waygate is a huge deal. There aren't many in the world and they let you travel vast distances.' Twenty-seven in the world, and this one was MADE. The effect the engine reads is the PLACE's — journey.gatesUsableBy/routeBetween read `waygate: true` on the location — so the kind marks that the hold KEEPS a gate; nothing new is read. Aevi: the flavour is yours.",
-    "_flavour_20260906": "⛑ THE FLAVOUR, AEVI'S, PER CCODE 2026-09-06: 'a `waygate` feature kind now exists — Erik ruled its weight; the flavour is yours.' ⚑ WHAT IT IS TO HOLD ONE: twenty-seven exist in the world and the Precursors made the rest. This one was made by a person, which is either the most reassuring fact in Exesa or the least. ⚠️ A HELD WAYGATE IS NOT A DOOR YOU OWN — IT IS A DOOR THAT OPENS ON YOUR GROUND. The traffic is not yours. People arrive who were not coming to see you, and leave from somewhere you are standing. ⛔ Trade is gated behind wayfaring (`docs/EXESA.md`), so a hold with a gate is not merely richer — it is CONNECTED, and connected places are where things happen to you. ⚑ AND THE KEEPING IS THE POINT, WHICH IS WHY THIS IS A FEATURE AND NOT A LOCATION FLAG: the gate belongs to the world and reads from the place; the FEATURE says somebody is responsible for it. ⛔ A gate nobody keeps is a hole in the world with weather coming through it. ⚠️ NARRATION: it does not hum, glow, or announce itself. The arch is there and the distance on the other side is wrong, and everyone who uses it stops noticing within a week — which is the strangest thing about it."
+    "_flavour_20260906": "⛑ THE FLAVOUR, AEVI'S, PER CCODE 2026-09-06: 'a `waygate` feature kind now exists — Erik ruled its weight; the flavour is yours.' ⚑ WHAT IT IS TO HOLD ONE: twenty-seven exist in the world and the Precursors made the rest. This one was made by a person, which is either the most reassuring fact in Exesa or the least. ⚠️ A HELD WAYGATE IS NOT A DOOR YOU OWN — IT IS A DOOR THAT OPENS ON YOUR GROUND. The traffic is not yours. People arrive who were not coming to see you, and leave from somewhere you are standing. ⛔ Trade is gated behind wayfaring (`docs/EXESA.md`), so a hold with a gate is not merely richer — it is CONNECTED, and connected places are where things happen to you. ⚑ AND THE KEEPING IS THE POINT, WHICH IS WHY THIS IS A FEATURE AND NOT A LOCATION FLAG: the gate belongs to the world and reads from the place; the FEATURE says somebody is responsible for it. ⛔ A gate nobody keeps is a hole in the world with weather coming through it. ⚠️ NARRATION: it does not hum, glow, or announce itself. The arch is there and the distance on the other side is wrong, and everyone who uses it stops noticing within a week — which is the strangest thing about it.",
+    "hullable": false,
+    "_hullableWhy": "Aevi §4"
    },
    "gate": {
-    "build": {"goods":{"cut_stone":10},"days":12},
+    "build": {
+     "goods": {
+      "cut_stone": 10
+     },
+     "days": 12
+    },
     "upkeep": 1,
     "family": "martial",
     "defence": 1,
-    "label": "a gate that closes"
+    "label": "a gate that closes",
+    "hullable": false,
+    "_hullableWhy": "CCode — a gate in a hull leads nowhere"
    },
    "keep": {
-    "build": {"goods":{"cut_stone":40},"days":60},
+    "build": {
+     "goods": {
+      "cut_stone": 40
+     },
+     "days": 60
+    },
     "upkeep": 4,
     "family": "martial",
     "defence": 3,
-    "label": "a keep — the last room that holds"
+    "label": "a keep — the last room that holds",
+    "hullable": false,
+    "_hullableWhy": "CCode — a keep is its ground"
    },
    "ward_line": {
-    "build": {"goods":{"raw_material":3},"days":4},
+    "build": {
+     "goods": {
+      "raw_material": 3
+     },
+     "days": 4
+    },
     "upkeep": 5,
     "family": "martial",
     "defence": 2,
     "watch": true,
-    "label": "a standing ward-line"
+    "label": "a standing ward-line",
+    "hullable": false,
+    "_hullableWhy": "Aevi §4"
    },
    "muster_yard": {
-    "build": {"goods":{"raw_material":4},"days":6},
+    "build": {
+     "goods": {
+      "raw_material": 4
+     },
+     "days": 6
+    },
     "upkeep": 1,
     "family": "martial",
     "defence": 1,
-    "label": "a muster yard — where a band forms"
+    "label": "a muster yard — where a band forms",
+    "hullable": false,
+    "_hullableWhy": "CCode — a yard is ground you muster on"
    },
    "temple_to_attending": {
-    "build": {"goods":{"cut_stone":24},"days":36},
+    "build": {
+     "goods": {
+      "cut_stone": 24
+     },
+     "days": 36
+    },
     "upkeep": 4,
     "family": "meaning",
     "aura": 0.25,
@@ -472,7 +629,12 @@
     }
    },
    "memorial": {
-    "build": {"goods":{"cut_stone":6},"days":8},
+    "build": {
+     "goods": {
+      "cut_stone": 6
+     },
+     "days": 8
+    },
     "upkeep": 1,
     "family": "meaning",
     "aura": 0.15,
@@ -480,40 +642,70 @@
     "pilgrims": 1
    },
    "grave_ground": {
-    "build": {"goods":{"cut_stone":6},"days":8},
+    "build": {
+     "goods": {
+      "cut_stone": 6
+     },
+     "days": 8
+    },
     "upkeep": 1,
     "family": "meaning",
     "aura": 0.15,
     "attends": true,
     "label": "tended grave-ground",
-    "pilgrims": 1
+    "pilgrims": 1,
+    "hullable": false,
+    "_hullableWhy": "Aevi §4"
    },
    "hearth": {
-    "build": {"goods":{"raw_material":2},"days":4},
+    "build": {
+     "goods": {
+      "raw_material": 2
+     },
+     "days": 4
+    },
     "upkeep": 0,
     "family": "meaning",
     "aura": 0.1,
     "label": "a hearth nobody lets go out",
-    "pilgrims": 1
+    "pilgrims": 1,
+    "producesWhileMoving": true
    },
    "longhouse": {
-    "build": {"goods":{"raw_material":16},"days":20},
+    "build": {
+     "goods": {
+      "raw_material": 16
+     },
+     "days": 20
+    },
     "upkeep": 3,
     "family": "people",
     "hands": 3,
     "residents": true,
-    "label": "a longhouse"
+    "label": "a longhouse",
+    "producesWhileMoving": true
    },
    "infirmary": {
-    "build": {"goods":{"medicines":8},"days":12},
+    "build": {
+     "goods": {
+      "medicines": 8
+     },
+     "days": 12
+    },
     "upkeep": 3,
     "family": "people",
     "hands": 1,
     "residents": true,
-    "label": "an infirmary"
+    "label": "an infirmary",
+    "producesWhileMoving": true
    },
    "market": {
-    "build": {"goods":{"cut_stone":6},"days":10},
+    "build": {
+     "goods": {
+      "cut_stone": 6
+     },
+     "days": 10
+    },
     "upkeep": 2,
     "family": "people",
     "hands": 1,
@@ -521,21 +713,37 @@
     "label": "a market day"
    },
    "school_room": {
-    "build": {"goods":{"documents":10},"days":14},
+    "build": {
+     "goods": {
+      "documents": 10
+     },
+     "days": 14
+    },
     "upkeep": 2,
     "family": "craft",
     "facility": "teach",
     "label": "a school-room"
    },
    "smithy": {
-    "build": {"goods":{"raw_material":6},"days":8},
+    "build": {
+     "goods": {
+      "raw_material": 6
+     },
+     "days": 8
+    },
     "upkeep": 1,
     "family": "craft",
     "facility": "repair",
-    "label": "a smithy"
+    "label": "a smithy",
+    "producesWhileMoving": true
    },
    "stable": {
-    "build": {"goods":{"raw_material":6},"days":8},
+    "build": {
+     "goods": {
+      "raw_material": 6
+     },
+     "days": 8
+    },
     "upkeep": 1,
     "family": "craft",
     "facility": "travel",
@@ -543,23 +751,40 @@
    },
    "_yieldOverride_20260906": "⬜ A FEATURE MAY NAME ITS OWN GOOD. Erik: 'a workshop can be for lots of finished goods.' ⚑ `{kind: 'workshop', yields: 'instruments'}` on the HOLD overrides the kind's default — so Cassiel's workshop at a laboratory post makes instruments, and a wright's workshop makes mech_parts, without two feature kinds. ⚠️ Same shape for `still` (medicines vs luxuries) and `mill` (raw_material vs documents, if it is a paper mill). ⛔ CCode: needs a reader — the kind's `yields` is the default, the feature's own `yields` wins.",
    "watch": {
-    "build": {"goods":{"raw_material":3},"days":4},
+    "build": {
+     "goods": {
+      "raw_material": 3
+     },
+     "days": 4
+    },
     "upkeep": 8,
     "family": "martial",
     "defence": 2,
     "watch": true,
-    "label": "a Watch — people posted, and they SEE"
+    "label": "a Watch — people posted, and they SEE",
+    "producesWhileMoving": true
    },
    "keepers_hut": {
-    "build": {"goods":{"raw_material":4},"days":6},
+    "build": {
+     "goods": {
+      "raw_material": 4
+     },
+     "days": 6
+    },
     "upkeep": 1,
     "family": "people",
     "hands": 1,
     "residents": true,
-    "label": "a keeper's hut"
+    "label": "a keeper's hut",
+    "producesWhileMoving": true
    },
    "relay_station": {
-    "build": {"goods":{"mech_parts":8},"days":12},
+    "build": {
+     "goods": {
+      "mech_parts": 8
+     },
+     "days": 12
+    },
     "upkeep": 3,
     "family": "craft",
     "facility": "relay",
@@ -567,12 +792,19 @@
     "label": "a relay station — the network's node"
    },
    "reclamation_bowl": {
-    "build": {"goods":{"raw_material":8},"days":12},
+    "build": {
+     "goods": {
+      "raw_material": 8
+     },
+     "days": 12
+    },
     "upkeep": 1,
     "family": "meaning",
     "aura": 0.2,
     "attends": true,
-    "label": "a reclamation bowl — where endings are attended"
+    "label": "a reclamation bowl — where endings are attended",
+    "hullable": false,
+    "_hullableWhy": "CCode — the bowl is the place"
    }
   },
   "_kindsExtended_20260905": "⚑ AEVI EXTENDED THE KINDS, per CCode: 'Aevi extends the kinds and their flavour; Erik turns the numbers.' +18 kinds, taking the catalogue to 33. ⛔ EVERY ONE NAMES ONE EFFECT THE ENGINE ALREADY READS — nothing here needs a new reader. ⚠️ THREE ADDITIONS CARRY A FLAG THAT DOES: `attends: true` on `temple_to_attending` and `grave_ground`. ⛔ R29 MADE ATTENDING THE MECHANISM AND `the_gathering` STARVES WHERE ENDINGS ARE ATTENDED — so a hold that attends its dead should starve it in its reach. That is the ONE new reader worth asking for, and it is a bestiary term, not an economy one. ⚑ `temple_to_attending` IS ERIK'S OWN EXAMPLE from the Threshold Post. `ward_line` and `sentries` are the Stillwater's Trouble pair — 'barriers, a wall, skeletal undead sentries.' ⚠️ `market` carries `trade: true` and `infirmary`/`longhouse` carry `residents: true`; both are flags for pass three, not readers yet. ⬜ `keep` at defence 3 is the ceiling on purpose — a hold should never be un-raidable, and `minTakeShare: 0.1` already guarantees a raid takes something.",
@@ -2002,5 +2234,51 @@
   }
  ],
  "visibility": "⚠️ REQUIRED, per Erik: THE NUMBERS ARE VISIBLE AND PRECISE; THE NARRATION DOES NOT RECITE THEM. Show the purse as a permanent row, show a price as a number when a trade is on the table, and show conversion math so a player can decide whether to convert here or wait. The trader SAYS 'ten for those, and I'm being generous'; the interface SAYS 10. Both.",
- "tradersNotShops": "There is no shop screen and there should not be one. A trader is an NPC with wants, and buying is a conversation — which is what this game is good at. The price model exists so the GM has a number to be honest about, not so a UI can render a catalogue."
+ "tradersNotShops": "There is no shop screen and there should not be one. A trader is an NPC with wants, and buying is a conversation — which is what this game is good at. The price model exists so the GM has a number to be honest about, not so a UI can render a catalogue.",
+ "carriage": {
+  "_why": "✅ SPEC_mobile_holdings (Aevi) + Erik 2026-09-12 (\"I want mobile holdings prioritized fairly high\"). The dials behind engine/carriage.js. ⛔ THE TERRAIN GATE IS `tags`, measured: all 364 route edges are bare strings and no location carries terrain or water as a field, while `tags` is on 135 of 135 places. So a crewed carriage requires one of these tags AT THE PLACE IT ARRIVES — Keelmouth carries harbour · river · shipyard, which is why a longship can put in there and not at Longshore. ⚠️ TAGGING THE WATER PLACES IS AUTHORING, AND IT IS AEVI'S: today only five places carry a water word at all (river ×3, riverside, marsh, harbour, bridge), so the world a ship can reach is exactly as large as that list.",
+  "willingAt": 1,
+  "leavesAt": -4,
+  "_willWhy": "⛑ A `willed` or `living` carriage asks its BEARER, never its holder (Aevi §3). At standing below `willingAt` they decline to move; at or below `leavesAt` THE HOLDING WALKS AWAY, which is not a punishment but the honest reading of a place with opinions.",
+  "needsTags": {
+   "crewed": [
+    "harbour",
+    "harbor",
+    "port",
+    "river",
+    "riverside",
+    "coast",
+    "coastal",
+    "sea",
+    "lake",
+    "shore",
+    "wharf",
+    "quay",
+    "dock",
+    "ford",
+    "bridge",
+    "marsh",
+    "tidal",
+    "water"
+   ],
+   "living": [
+    "road",
+    "settlement",
+    "wood",
+    "forest",
+    "grove",
+    "plain",
+    "hill",
+    "foothill",
+    "ridge",
+    "moor",
+    "vale",
+    "valley"
+   ],
+   "drifting": [],
+   "powered": [],
+   "willed": []
+  },
+  "_needsTagsWhy": "⚠️ `crewed` wants water and `living` wants ground it can walk; `powered`, `drifting` and `willed` care about nothing (an airship ignores terrain, a floating city goes where it goes, and a dragon lands where it likes)."
+ }
 }

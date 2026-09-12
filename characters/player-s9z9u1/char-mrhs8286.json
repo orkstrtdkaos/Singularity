@@ -1891,7 +1891,8 @@
       ],
       "weight": 2,
       "spread": [
-        "valley.kestrels_roost"
+        "valley.kestrels_roost",
+        "waystone"
       ],
       "day": 13,
       "worldDay": 24
@@ -1960,7 +1961,9 @@
         "reclamation"
       ],
       "weight": 3,
-      "spread": [],
+      "spread": [
+        "valley.disputed_zone_fringe"
+      ],
       "day": 14,
       "worldDay": 26
     },
@@ -1991,7 +1994,9 @@
         "generous"
       ],
       "weight": 1,
-      "spread": [],
+      "spread": [
+        "center.gate"
+      ],
       "day": 14,
       "worldDay": 28
     },
@@ -2038,7 +2043,9 @@
         "building"
       ],
       "weight": 1,
-      "spread": [],
+      "spread": [
+        "waystone"
+      ],
       "day": 14,
       "worldDay": 41
     },
@@ -2053,7 +2060,9 @@
         "foundation"
       ],
       "weight": 2,
-      "spread": [],
+      "spread": [
+        "waystone"
+      ],
       "day": 14,
       "worldDay": 41
     },
@@ -2488,155 +2497,16 @@
       }
     ],
     "lastTurn": {
-      "narration": "You move to the music box in the relay vault—the mechanism Deni Cors built sits waiting, its cylinder already marked with the melody that says 'all is well.' Your hands find the pins, steady from the night's rest, and you begin the work of changing the tune: pulling back the marked pins, resetting them to the next sequence in Deni's vocabulary. The motion is deliberate, precise. Each pin carries a syllable of the message you are sending out across the moorland network: things are moving forward. Things are in motion.\n\nWhen the cylinder clicks into place and you turn the crank, the new melody carries—different from before, purposeful, a message that travels on air and whistle-mark to every listener tuned to receive it. Somewhere north, someone hears it and knows. The network has your answer.\n\nBreakfast waits. Maren is at the table when you turn from the vault, steady as stone, with bread and cold meat laid out—simple food, substantial. Veth nods from the threshold, still holding the watch. You sit, eat, let the food settle into your bones. Your body takes it gladly; the surgery and the night's work have cost you, and the eating is repair. Corvin rests on the cot, the crystal in her palm, the fever truly gone now. The Runner sleeps. Huginn watches from the shelf, the eye that knows ending content to let you have this moment of ordinary hunger and its satisfaction.\n\nThe daylight beyond the wavering lamps is still deep night—hours yet before dawn. The moorland holds its changed silence. Three days remain before the convene votes. The message is sent. You are mending.",
-      "sceneSummary": "At the Whistling Woman waystation in deep night: Silas sends word through the relay network that things are moving forward, then takes breakfast with Maren Ossitide while Veth holds the threshold and Corvin rests. The urgent message waits unopened. The moorland's silence deepens.",
-      "choices": [
+      "holdingOps": [
         {
-          "label": "Wake Corvin and ask what the encrypted message says — it is urgent-marked and carried through a fractured death-thread for a reason.",
-          "attribute": "social",
-          "subAttribute": "insight",
-          "axes": {
-            "violence_peace": 0.6,
-            "falsehood_truth": 0.8
-          },
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "listen"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Maren plainly what the moorland's silence means — she has sat with more endings than anything alive and she felt the tremor in the shadows.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.85,
-            "concrete_abstract": 0.5
-          },
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "listen"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Rest here at the fire while Veth and Maren hold the watch — let sleep take you and wake to dawn with the moorland's answer clearer.",
-          "attribute": "physical",
-          "subAttribute": "strength",
-          "axes": {},
-          "difficulty": "very easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "endure"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "op": "npcUpdate",
+          "id": "cael",
+          "name": "Bryn Calowell",
+          "notes": "Ridge warden's messenger; arrived at the Whistling Woman post via Silas's novel shadow-reach, pulled from the ridge post across distance that should have held. Sent to rest before briefing. Knows: a warden can reach through the shadows themselves, not just step between them; Maren Ossitide is real and present and entirely unmoved by impossible arrivals."
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 8,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "standingOps": [],
-      "delegateOps": [],
-      "arcOps": [],
-      "adoptSchool": null,
-      "offer": {
-        "thing": "Corvin's crystal remains in her palm — a question without words. Will she stay or will she leave when morning comes?",
-        "from": "Silas's offer of work and Corvin's own uncertainty — a runner with nowhere to be, and a post that needs runners. The work waiting to be decided."
-      },
-      "stageOps": [],
-      "scene": {
-        "setting": "Main room of the Whistling Woman waystation, deep night holding steady. The fire is banked but giving heat. Oil lamps cast steady light. The relay vault door is closed. The table holds the remains of breakfast — bread, meat, water cups.",
-        "npcsPresent": [
-          {
-            "name": "Maren Ossitide",
-            "state": "Seated at the table, attending completely, her eye steady on the moorland's silence"
-          },
-          {
-            "name": "Veth (Stillwater) Ondra",
-            "state": "Standing at the threshold, hand resting on the warded frame, holding the watch through the deep night"
-          },
-          {
-            "name": "Corvin Teth",
-            "state": "Resting on the cot, fever-clear, the crystal in her palm, the message she carried still unopened in Silas's hands"
-          },
-          {
-            "name": "Huginn",
-            "state": "Perched on the shelf, awake and watching, eye cocked toward the fire"
-          }
-        ],
-        "objects": [
-          "banked fire in the stove, steady heat",
-          "table, worn smooth from Deni's work",
-          "oil lamps, steady light",
-          "water barrel at the corner",
-          "cots with blankets",
-          "music-box relay mechanism, cylinder reset to new melody",
-          "crystal in Corvin's palm",
-          "encrypted Hub message on the shelf, still unopened and urgent"
-        ],
-        "threads": [
-          "What the encrypted Hub message contains",
-          "What Corvin will choose — stay and tend the runner-side, or move on",
-          "What the moorland's changed silence means, and why Maren felt the shadow-reach strain",
-          "Three days until the convene votes on the water crisis"
-        ]
-      },
-      "npcUpdates": [],
-      "intentsHeard": [],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "discovery": null,
-      "codexUpdates": [],
-      "holdingOps": [],
-      "debtOps": [],
-      "partyOps": [],
-      "generateRequest": [],
-      "encounterOps": [],
-      "projectOps": [],
-      "bandOps": [],
-      "deathOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": {
-        "hoursPassed": 1,
-        "why": "Deep night holds; breakfast eaten, relay message sent, the post settling into its steady watch"
-      },
-      "moveTo": null,
-      "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": null,
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
-      "sceneEnded": false
+      "narration": "",
+      "sceneSummary": null
     },
     "sceneState": {
       "setting": "Main room of the Whistling Woman waystation, deep night holding steady. The fire is banked but giving heat. Oil lamps cast steady light. The relay vault door is closed. The table holds the remains of breakfast — bread, meat, water cups.",
@@ -2680,7 +2550,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 18,
-    "hour": 2,
+    "hour": 3,
     "realAnchor": null
   },
   "companions": [
@@ -6647,7 +6517,7 @@
   },
   "worldState": {
     "schemaVersion": 1,
-    "lastTickDay": 17,
+    "lastTickDay": 18,
     "eventStages": {
       "water_crisis": {
         "stage": 2,
@@ -6660,41 +6530,6 @@
       "falsehood_truth": -0.05
     },
     "news": [
-      {
-        "day": 16,
-        "worldDay": 73,
-        "text": "Maren Ossitide, Who Buried the Drowned Year is spoken of: refusing to rest between.",
-        "tier": "murmur",
-        "section": "world"
-      },
-      {
-        "day": 16,
-        "worldDay": 73,
-        "text": "Sister Alder, the Ward That Does Not Break has not been seen at home in a long while — whatever is happening has all of them.",
-        "tier": "murmur",
-        "section": "world"
-      },
-      {
-        "day": 16,
-        "worldDay": 73,
-        "text": "Morvane of the Harvest Hand has not been seen at home in a long while — whatever is happening has all of them.",
-        "tier": "murmur",
-        "section": "world"
-      },
-      {
-        "day": 16,
-        "worldDay": 73,
-        "text": "The Thornmother of the Closing Wood has dug in over The Green Schism.",
-        "tier": "murmur",
-        "section": "world"
-      },
-      {
-        "day": 16,
-        "worldDay": 73,
-        "text": "Cassiel Ord: Cassiel has stopped eating at the common table and begun taking his meals alone by the east window — not from misery but from a dawning, uncomfortable suspicion that what he called exhaustion has a name he isn't ready to say aloud yet.",
-        "tier": "ambient",
-        "section": "world"
-      },
       {
         "day": 16,
         "worldDay": 73,
@@ -6812,14 +6647,49 @@
         "text": "Word travelled on 4 other counts besides.",
         "tier": "event",
         "section": "elsewhere"
+      },
+      {
+        "day": 18,
+        "worldDay": 74,
+        "text": "Whistling Woman Post has a shrine now, the fiction's work.",
+        "tier": "event",
+        "section": "yours"
+      },
+      {
+        "day": 18,
+        "worldDay": 74,
+        "text": "Calvar has been asking after you. More than once.",
+        "tier": "event",
+        "section": "world"
+      },
+      {
+        "day": 18,
+        "worldDay": 74,
+        "text": "As far as waystone: Commissioned Edvar Crane as an agent of Stillwater's Trouble — ending his twenty-year solitary watch and bringing his filtration knowledge into the fellowship's network.",
+        "tier": "event",
+        "section": "elsewhere"
+      },
+      {
+        "day": 18,
+        "worldDay": 74,
+        "text": "As far as disputed_zone_fringe: Gave the final instruction to the pre-Transition reclamation site — close clean and stop — ending fifteen years of unattended operation and beginning the watershed's return to itself.",
+        "tier": "event",
+        "section": "elsewhere"
+      },
+      {
+        "day": 18,
+        "worldDay": 74,
+        "text": "Word travelled on 3 other counts besides.",
+        "tier": "event",
+        "section": "elsewhere"
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-09-12T03:03:42.485Z",
+    "lastSharedReadAt": "2026-09-12T03:35:00.617Z",
     "lastTickWorldDay": 74,
     "lastCanonWorldDay": 74,
     "lastGenCount": 1779,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Cael's arrival at the waystation through shadow-reach rather than road-travel — a messenger with urgent news, arriving wrong-way and…",
@@ -7466,6 +7336,19 @@
     },
     "pressureQueue": [
       {
+        "source": "npc-want",
+        "kind": "npc-want",
+        "subjectId": "calvar",
+        "aimedAtPlayer": true,
+        "urgency": 3,
+        "oneLineHook": "Calvar, unseen for 9 days, has come looking for you — driven by an unmet want: The filtration work done CORRECTLY — he came out of a solitary twenty-year watch for this; sloppiness offends him more than danger.. They arrive now, not content to keep waiting.",
+        "becomes": {
+          "type": "scene",
+          "who": "calvar"
+        },
+        "addedDay": 18
+      },
+      {
         "source": "threat-attack",
         "kind": "threat-attack",
         "subjectId": "beast_cinder_mote_drift",
@@ -7486,12 +7369,12 @@
         "subjectId": "tane-solr",
         "aimedAtPlayer": true,
         "urgency": 2,
-        "oneLineHook": "Tane Solr, unseen for 11 days, has come looking for you — driven by an unmet want: A bout that is true — not won or lost but honest, where both fighters come to the center-line having brought everything they actually are and no more.. They arrive now, not content to keep waiting.",
+        "oneLineHook": "Tane Solr, unseen for 12 days, has come looking for you — driven by an unmet want: A bout that is true — not won or lost but honest, where both fighters come to the center-line having brought everything they actually are and no more.. They arrive now, not content to keep waiting.",
         "becomes": {
           "type": "scene",
           "who": "tane-solr"
         },
-        "addedDay": 17
+        "addedDay": 18
       },
       {
         "source": "threat-attack",
@@ -18202,8 +18085,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1789183616226,
-  "rev": 2007,
+  "updatedAt": 1789184273032,
+  "rev": 2013,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -22870,10 +22753,10 @@
     {
       "id": "sess-33",
       "startedAt": "2026-09-11T22:48:54.873Z",
-      "lastAt": "2026-09-12T03:26:56.221Z",
+      "lastAt": "2026-09-12T03:37:53.016Z",
       "startDay": 73,
       "endDay": 74,
-      "beats": 34
+      "beats": 35
     }
   ],
   "company": [
@@ -24393,6 +24276,18 @@
           "from": "thriving",
           "to": "thriving",
           "note": "a shrine torn down"
+        },
+        {
+          "at": 1779,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "hands: Pell Ran Marsh"
+        },
+        {
+          "at": 1779,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "built a shrine (the fiction)"
         }
       ],
       "describedAs": "a warden-staffed waystation on the moorland relay network",
@@ -24423,6 +24318,16 @@
           "craftIds": [],
           "count": 1,
           "day": 16
+        },
+        {
+          "kind": "shrine",
+          "family": "meaning",
+          "name": "a shrine",
+          "by": "the fiction",
+          "craftIds": [],
+          "count": 1,
+          "day": 74,
+          "via": "granted"
         }
       ],
       "watches": "hold-made-gate",
@@ -24437,7 +24342,10 @@
           "day": 69
         }
       ],
-      "lastFeatureOfferCount": 1778
+      "lastFeatureOfferCount": 1778,
+      "crew": [
+        "pell"
+      ]
     },
     {
       "id": "hold-made-gate",
@@ -24905,7 +24813,7 @@
     }
   },
   "holdingOffers": [],
-  "_lastProjectDay": 17,
+  "_lastProjectDay": 18,
   "likeness": {
     "battle:the_hundred_hands|sunwrack_valen|daybreak_mantle|67|stopped": {
       "keeps": [
@@ -25371,6 +25279,10 @@
     {
       "text": "Stillwater's Trouble has a fishery or a weir now, the fiction's work.",
       "announced": true
+    },
+    {
+      "text": "Whistling Woman Post has a shrine now, the fiction's work.",
+      "announced": true
     }
   ],
   "sceneImages": {
@@ -25454,14 +25366,6 @@
     "whois-logana": "https://image.pollinations.ai/prompt/huge%20animal%20bones%2C%20animal%20weasel%20skeleton%20huge%20glowing%20undead%20guarding%20a%20portal%2C%20Logana%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=61390&nologo=true"
   },
   "precursorAxes": [],
-  "featureOffers": [
-    {
-      "holdingId": "whistling-woman-post",
-      "holdingName": "Whistling Woman Post",
-      "kind": "shrine",
-      "why": "the record reads: “built a shrine (the story)”",
-      "from": "its own record"
-    }
-  ],
+  "featureOffers": [],
   "_bandNotes": null
 }

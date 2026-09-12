@@ -1206,6 +1206,50 @@
         "birthWeight": 1,
         "rivalId": "gen-mara-wells-store"
       }
+    },
+    {
+      "id": "gen-whistling-woman-post",
+      "name": "Whistling Woman Post",
+      "regionId": "valley",
+      "descriptionSeed": "A place the road led to — Whistling Woman Post. The fiction brought you here before the map knew its name.",
+      "tags": [
+        "transitional"
+      ],
+      "connections": [
+        "gen-left-branch-gate-clearing",
+        "gen-the-made-gate"
+      ],
+      "_mintedAs": "transit",
+      "dangerLevel": 1,
+      "map": {
+        "x": 153.28056126691263,
+        "y": 350.2434922699326
+      },
+      "worldPos": {
+        "colatitude": 20.36,
+        "longitude": 252.1,
+        "depth": 0
+      },
+      "_placedBy": "erik-2026-09-06-gate-cluster",
+      "_canon": {
+        "entityId": "gen-whistling-woman-post",
+        "type": "location",
+        "weight": 5,
+        "rating": null,
+        "tier": "variant",
+        "provenance": {
+          "locationId": "gen-the-made-gate",
+          "day": null,
+          "hint": "transit"
+        },
+        "contributedBy": {
+          "playerKey": null,
+          "characterId": null
+        },
+        "promotedWorldDay": 74,
+        "birthWeight": 1,
+        "rivalId": "gen-whistling-woman-post"
+      }
     }
   ]
 }

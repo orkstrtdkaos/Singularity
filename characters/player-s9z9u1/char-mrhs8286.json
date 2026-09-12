@@ -4022,7 +4022,8 @@
         "day": 1
       },
       "gender": "woman",
-      "pronouns": "she/her"
+      "pronouns": "she/her",
+      "met": 1
     },
     "cookhouse-boy": {
       "id": "cookhouse-boy",
@@ -4052,7 +4053,8 @@
       "aliases": [
         "Boy (name unknown)"
       ],
-      "nameRevealed": true
+      "nameRevealed": true,
+      "met": 1
     },
     "aldric": {
       "id": "aldric",
@@ -4101,7 +4103,12 @@
         "day": 5
       },
       "gender": "man",
-      "pronouns": "he/him"
+      "pronouns": "he/him",
+      "met": 10,
+      "creditedQuests": [
+        "aldric-provisioning-deal"
+      ],
+      "completions": 1
     },
     "pell": {
       "id": "pell",
@@ -4217,7 +4224,7 @@
       "pronouns": "she/her",
       "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Mara%20Wells%2C%20woman%2C%20Village%20supply%20store%20operator%2C%20Millbrook%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=8967&nologo=true",
       "_portraitTier": "devoted",
-      "met": 3
+      "met": 10
     },
     "corvin": {
       "id": "corvin",
@@ -4270,12 +4277,13 @@
       "aliases": [
         "Corvin"
       ],
-      "nameRevealed": true
+      "nameRevealed": true,
+      "met": 10
     },
     "dara-holt": {
       "id": "dara-holt",
       "name": "Dara Holt",
-      "role": "Senior east-channel irrigator, Millbrook",
+      "role": "Senior east-channel irrigator, Millbrook · the Ditch-Mother · Millbrook Council",
       "description": "A composed woman, mug in both hands at her own door before the frost has melted — does her accounting fast and quiet, and waits.",
       "firstMet": {
         "locationId": "millbrook",
@@ -4319,7 +4327,12 @@
         "day": 13
       },
       "gender": "woman",
-      "pronouns": "she/her"
+      "pronouns": "she/her",
+      "met": 10,
+      "aliases": [
+        "the Ditch-Mother",
+        "Ditch-Mother"
+      ]
     },
     "sorel": {
       "id": "sorel",
@@ -4365,7 +4378,12 @@
         "day": 12
       },
       "gender": "Woman",
-      "pronouns": "she/her"
+      "pronouns": "she/her",
+      "met": 10,
+      "creditedQuests": [
+        "find-the-engineer"
+      ],
+      "completions": 1
     },
     "fendt": {
       "id": "fendt",
@@ -4408,10 +4426,10 @@
         "disciplined disclosure under pressure — three minutes of tes"
       ],
       "status": "active",
-      "statusNote": "A traveler reporting sick from the fisher settlements collapsed at the ridge node and died there; Fendt has quarantined the post and stopped all traffic through the sentinel watch point, but the…",
+      "statusNote": "Two of the ridge node's three signal anchors have gone dark — physical inspection reveals the anchor lines were cut, not failed from weather, and Fendt cannot maintain sentinel watch or tend the…",
       "lastSeen": {
         "locationId": null,
-        "day": 16
+        "day": 18
       },
       "gender": "Man",
       "pronouns": "he/him",
@@ -4419,7 +4437,11 @@
       "_portraitTier": "devoted",
       "questState": "restored",
       "questNote": "permanently in your debt, and not entirely grateful about it",
-      "met": 4
+      "met": 11,
+      "creditedQuests": [
+        "the-edge-district-ledger"
+      ],
+      "completions": 1
     },
     "road-traveler": {
       "id": "road-traveler",
@@ -4447,7 +4469,8 @@
         "day": 3
       },
       "gender": "woman",
-      "pronouns": "she/her"
+      "pronouns": "she/her",
+      "met": 2
     },
     "leth": {
       "id": "leth",
@@ -4496,7 +4519,8 @@
         "day": 3
       },
       "gender": "woman",
-      "pronouns": "she/her"
+      "pronouns": "she/her",
+      "met": 10
     },
     "calvar": {
       "id": "calvar",
@@ -4547,7 +4571,8 @@
       "gender": "man",
       "pronouns": "he/him",
       "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Calvar%2C%20man%2C%20Pre-Transition%20filtration%20engineer%2C%20Edge%20District%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=84827&nologo=true",
-      "_portraitTier": "devoted"
+      "_portraitTier": "devoted",
+      "met": 10
     },
     "maret-doss": {
       "id": "maret-doss",
@@ -4580,7 +4605,8 @@
         "day": 5
       },
       "gender": "woman",
-      "pronouns": "she/her"
+      "pronouns": "she/her",
+      "met": 3
     },
     "morning-shepherd": {
       "id": "morning-shepherd",
@@ -4604,7 +4630,8 @@
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
-      }
+      },
+      "met": 1
     },
     "bren-thalle": {
       "id": "bren-thalle",
@@ -4649,7 +4676,8 @@
       },
       "aliases": [
         "Broad Opportunist"
-      ]
+      ],
+      "met": 10
     },
     "curis": {
       "id": "curis",
@@ -4682,7 +4710,8 @@
       },
       "aliases": [
         "Lean Opportunist"
-      ]
+      ],
+      "met": 3
     },
     "siol": {
       "id": "siol",
@@ -4736,7 +4765,7 @@
         "primary": "ashwarden"
       },
       "domainsSource": "derived",
-      "met": 2
+      "met": 10
     },
     "orvil": {
       "id": "orvil",
@@ -4777,7 +4806,8 @@
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 6
-      }
+      },
+      "met": 8
     },
     "tane-solr": {
       "id": "tane-solr",
@@ -4825,7 +4855,8 @@
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 6
-      }
+      },
+      "met": 10
     },
     "veth-ondra": {
       "id": "veth-ondra",
@@ -4927,12 +4958,12 @@
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "The forge foundation was mortared and the first course of stonework laid; the workshop framing crew arrived two days late but made up ground, and the laboratory shelving is now roughed in awaiting…",
+      "statusNote": "The forge foundation stones were mortared and set over two days, and the first Watch room walls are now framed; hired labor from the lower settlement arrived on day 16 and is holding schedule.",
       "lastSeen": {
         "locationId": null,
-        "day": 16
+        "day": 18
       },
-      "met": 4
+      "met": 11
     },
     "silas-mother": {
       "id": "silas-mother",
@@ -4983,7 +5014,8 @@
       "_portraitTier": "devoted",
       "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own. Her numinous tertiary is not studied — it accreted, the way cairn-stones do, one careful act at a time.",
       "peopleSource": "generated",
-      "_mergedFromGenerated": "hesta-vorn"
+      "_mergedFromGenerated": "hesta-vorn",
+      "met": 10
     },
     "ossian": {
       "id": "ossian",
@@ -5030,7 +5062,7 @@
         "locationId": "gen-the-temple",
         "day": 15
       },
-      "met": 1
+      "met": 10
     },
     "warden-coll": {
       "id": "warden-coll",
@@ -5080,7 +5112,7 @@
         "locationId": "gen-the-temple",
         "day": 15
       },
-      "met": 1
+      "met": 10
     },
     "renna": {
       "id": "renna",
@@ -5114,7 +5146,8 @@
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 13
-      }
+      },
+      "met": 3
     },
     "osten": {
       "id": "osten",
@@ -5141,7 +5174,8 @@
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 13
-      }
+      },
+      "met": 1
     },
     "edvar-crane": {
       "id": "edvar-crane",
@@ -5186,12 +5220,16 @@
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "Edvar pushed the repair sequence forward by coordinating directly with Mara's field engineer, bypassing the stalled committee — the structural relay notes were transmitted and two of the three…",
+      "statusNote": "Despite the committee deadlock, Edvar pushed the structural relay notes directly to Mara's junior engineer, who confirmed the secondary silt trap design and began sourcing replacement mesh — the…",
       "lastSeen": {
         "locationId": null,
-        "day": 16
+        "day": 18
       },
-      "met": 8
+      "met": 12,
+      "creditedQuests": [
+        "the-second-thread"
+      ],
+      "completions": 1
     },
     "old-shepherd-woman": {
       "id": "old-shepherd-woman",
@@ -5239,7 +5277,8 @@
       "domainsSource": "generated",
       "people": "human",
       "peopleSource": "generated",
-      "appearance": "A tall woman gone bony with age, weathered to the same grey-brown as the March Road itself. White hair cropped close under a wide felt hat. Staff cut from hedgerow hawthorn, worn smooth at the grip. Boots resoled so many times the layers are visible at the heel. A dog — large, pale, moves like water around the flock — that she addresses by name and in full sentences."
+      "appearance": "A tall woman gone bony with age, weathered to the same grey-brown as the March Road itself. White hair cropped close under a wide felt hat. Staff cut from hedgerow hawthorn, worn smooth at the grip. Boots resoled so many times the layers are visible at the heel. A dog — large, pale, moves like water around the flock — that she addresses by name and in full sentences.",
+      "met": 7
     },
     "grael": {
       "name": "Grael",
@@ -5297,7 +5336,7 @@
         "locationId": "gen-whistling-woman-post",
         "day": 16
       },
-      "met": 3
+      "met": 10
     },
     "archive_guardian": {
       "id": "archive_guardian",
@@ -5330,7 +5369,8 @@
       "lastSeen": {
         "locationId": "gen-disputed-zone-left-branch-entrance",
         "day": 14
-      }
+      },
+      "met": 2
     },
     "deni-cors": {
       "id": "deni-cors",
@@ -5376,7 +5416,7 @@
         "locationId": "gen-whistling-woman-post",
         "day": 15
       },
-      "met": 1
+      "met": 9
     },
     "mason-threshold-post": {
       "id": "mason-threshold-post",
@@ -5442,7 +5482,7 @@
         "locationId": "gen-whistling-woman-post",
         "day": 18
       },
-      "met": 3,
+      "met": 6,
       "aliases": [
         "The Runner"
       ],
@@ -6859,10 +6899,10 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-09-12T04:43:11.235Z",
+    "lastSharedReadAt": "2026-09-12T20:43:53.763Z",
     "lastTickWorldDay": 74,
     "lastCanonWorldDay": 74,
-    "lastGenCount": 1780,
+    "lastGenCount": 1796,
     "turnsSinceOffer": 8,
     "recentOffers": [
       {
@@ -7123,10 +7163,10 @@
         "npcName": "Cassiel Ord",
         "charge": "full reconstruction of the Raven's Home post — laboratory, workshop, Watch, forge, keeper's hut — funded and staffed…",
         "targetEventId": null,
-        "progress": 4,
+        "progress": 5,
         "status": "working",
         "stampedAtWorldCount": 566,
-        "lastMovedWorldCount": 1721
+        "lastMovedWorldCount": 1796
       },
       "edvar-crane::silas-s-named-delegate-to-mara-wells-and": {
         "id": "edvar-crane::silas-s-named-delegate-to-mara-wells-and",
@@ -7137,7 +7177,7 @@
         "progress": 0,
         "status": "problem",
         "stampedAtWorldCount": 589,
-        "lastMovedWorldCount": 1721
+        "lastMovedWorldCount": 1796
       },
       "edvar-crane::the-millbrook-filtration-thread-repair-s": {
         "id": "edvar-crane::the-millbrook-filtration-thread-repair-s",
@@ -7145,10 +7185,10 @@
         "npcName": "Edvar Crane",
         "charge": "the Millbrook filtration thread — repair sequence, notes, and structural relay through Mara",
         "targetEventId": null,
-        "progress": 4,
+        "progress": 5,
         "status": "working",
         "stampedAtWorldCount": 593,
-        "lastMovedWorldCount": 1721
+        "lastMovedWorldCount": 1796
       },
       "fendt::warden-of-the-threshold-post-at-the-ridg": {
         "id": "fendt::warden-of-the-threshold-post-at-the-ridg",
@@ -7159,7 +7199,7 @@
         "progress": 0,
         "status": "problem",
         "stampedAtWorldCount": 1000,
-        "lastMovedWorldCount": 1721
+        "lastMovedWorldCount": 1796
       }
     },
     "wakes": [
@@ -17312,8 +17352,68 @@
   ],
   "actionCount": 990,
   "grantsVersion": 1,
-  "reconcileVersion": 54,
+  "reconcileVersion": 55,
   "gallery": [
+    {
+      "kind": "figure",
+      "prompt": "",
+      "url": "https://image.pollinations.ai/prompt/A%20figure%20of%20the%20god%20named%2C%20sovereign%20among%20them%3A%20wearing%20a%20name%20the%20way%20other%20people%20wear%20armour%2C%20and%20it%20is%20answering%3B%20crowned%20by%20consent%20of%20nobody%2C%20character%20portrait%2C%20named%20The%20One%20Called%20Zeus%2C%20he%2C%20Sovereign%2C%20of%20a%20people%20who%20read%20as%3A%20bears%20the%20name%20visibly%20%E2%80%94%20a%20sigil%2C%20a%20stole%2C%20a%20brand%2C%20a%20stance.%20Often%20tired%20underneath%20the%20bearing.%20The%20name%20is%20grander%20than%20the%20person%20and%20that%20gap%20SHOWS%3A%20fine%20d%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20bleached%20linen%2C%20old%20gold%20leaf%2C%20dust-white%2C%20deep%20shadowed%20umber%2C%20high%20and%20behind%2C%20upright%2C%20weathered%2C%20certain%20in%20a%20way%20that%20has%20cost%20something?width=512&height=640&seed=54975&nologo=true",
+      "caption": "The One Called Zeus",
+      "worldDay": 74,
+      "at": "2026-09-12T13:50:04.523Z",
+      "subjectKind": "figure",
+      "subjectId": "whois-the_one_called_zeus"
+    },
+    {
+      "kind": "moment",
+      "prompt": "",
+      "url": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
+      "caption": "Silas Weir",
+      "worldDay": 74,
+      "at": "2026-09-12T13:12:20.150Z",
+      "subjectKind": "moment",
+      "subjectId": "solo:cap:silas weir"
+    },
+    {
+      "kind": "figure",
+      "prompt": "timeless grey highlights attention eyes feathers full figure, great death raven beautiful powerful woman, Maren (Marrow) Ossitide",
+      "url": "https://image.pollinations.ai/prompt/timeless%20grey%20highlights%20attention%20eyes%20feathers%20full%20figure%2C%20great%20death%20raven%20beautiful%20powerful%20woman%2C%20Maren%20(Marrow)%20Ossitide%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=20894&nologo=true",
+      "caption": "Huginn",
+      "worldDay": 74,
+      "at": "2026-09-12T13:11:32.731Z",
+      "subjectKind": "figure",
+      "subjectId": "whois-marrow"
+    },
+    {
+      "kind": "figure",
+      "prompt": "Great Death Raven beautiful powerful woman",
+      "url": "https://image.pollinations.ai/prompt/Great%20Death%20Raven%20beautiful%20powerful%20woman%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=20895&nologo=true",
+      "caption": "Huginn",
+      "worldDay": 74,
+      "at": "2026-09-12T13:11:15.734Z",
+      "subjectKind": "figure",
+      "subjectId": "whois-marrow"
+    },
+    {
+      "kind": "location",
+      "prompt": "Small wooden watchpost beside a shimmering dark portal, woman silhouetted in doorway whistling, dusty road converging toward her, twilight atmosphere., wide establishing shot, atmospheric, no figures ",
+      "url": "https://image.pollinations.ai/prompt/Small%20wooden%20watchpost%20beside%20a%20shimmering%20dark%20portal%2C%20woman%20silhouetted%20in%20doorway%20whistling%2C%20dusty%20road%20converging%20toward%20her%2C%20twilight%20atmosphere.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=34173&nologo=true",
+      "caption": "Whistling Woman Post",
+      "worldDay": 74,
+      "at": "2026-09-12T04:53:50.213Z",
+      "subjectKind": "location",
+      "subjectId": "gen-whistling-woman-post"
+    },
+    {
+      "kind": "location",
+      "prompt": "Whistling Woman Post: A place the road led to — Whistling Woman Post. The fiction brought you here before the map knew its name., wide establishing shot, atmospheric, no figures in the foreground",
+      "url": "https://image.pollinations.ai/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=34172&nologo=true",
+      "caption": "Whistling Woman Post",
+      "worldDay": 74,
+      "at": "2026-09-12T04:53:30.083Z",
+      "subjectKind": "location",
+      "subjectId": "gen-whistling-woman-post"
+    },
     {
       "kind": "moment",
       "prompt": "Two figures standing in the luminous hollow—a tall woman in warden-form with grey-ash hair and scarred hands, beside a man in travel-worn clothes, both framed against the glowing lattice-work of ancie",
@@ -18266,8 +18366,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1789188478461,
-  "rev": 2046,
+  "updatedAt": 1789245835360,
+  "rev": 2069,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -20162,8 +20262,8 @@
           "entityId": "bryn-callowell",
           "type": "npc",
           "birthWeight": 36,
-          "engagementScore": 4,
-          "tier": "established",
+          "engagementScore": 8,
+          "tier": "nominated",
           "rating": "R+",
           "provenance": {
             "playerKey": "player-s9z9u1",
@@ -20182,6 +20282,10 @@
             {
               "kind": "interact",
               "day": 18
+            },
+            {
+              "kind": "keep",
+              "day": 18
             }
           ],
           "createdDay": 14,
@@ -20189,7 +20293,10 @@
           "stubbed": false,
           "romanceEligible": true,
           "lastAttentionDay": 18,
-          "depthTier": "established"
+          "depthTier": "established",
+          "needsDepth": "nominated",
+          "promotedWorldDay": 74,
+          "canonTier": "variant"
         },
         "peopleSource": "generated",
         "image": "https://image.pollinations.ai/prompt/A%20broad-chested%20man%20in%20his%20mid-thirties%2C%20built%20for%20endurance%20rather%20than%20force%20%E2%80%94%20the%20kind%20of%20frame%20that%20still%20looks%20like%20it%20could%20cover%20forty%20miles%20and%20then%20split%20wood.%20Amber%20eyes%2C%20unhurried.%20Tawny%20sk%2C%20character%20portrait%2C%20named%20Bryn%20Callowell%2C%20Former%20south-circuit%20post%20rider%20turned%20deliberate%20messenger%20%E2%80%94%20the%20man%20who%20rode%20the%20Zone's%20margins%20lo%2C%20Unhurried%20in%20all%20things%20%E2%80%94%20speaks%20the%20way%20a%20man%20moves%20who%20has%20spent%20years%20in%20a%20saddle%20reading%20weather%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=29545&nologo=true",
@@ -23066,7 +23173,9 @@
       "lastAt": "2026-09-12T04:47:58.438Z",
       "startDay": 73,
       "endDay": 74,
-      "beats": 47
+      "beats": 47,
+      "_recapError": null,
+      "recap": "Days 73 and 74 moved fast and left marks that won't fade. You broke two seal-marks—Grael's and the March's both—pulling buried readings from the Archive and proof of the pole-pull's reality out of locked cabinets, trading the warden system's regard for the valley's actual survival. The shadow tablets came next, the first two-way relays since the Transition, matched to Mara's pair and forged with your own hands; then a braiding that made shadow structural, a threshold-post's whole purpose hanging visible and revisable in the air. But the work that will last longest is what you built at the Made Gate: a universal shrine, unmarked, claimed by no tradition, its threshold co-held with Maren Ossitide and Named to close only to those who arrive as conquerors. You called it a pilgrimage site before it had a single pilgrim, because you knew what it was—proof that balance holds without a winner. You posted Corvin Teth at the Whistling Woman, named her urgency as the virtue it was, stretched shadow farther than the road should have allowed to pull a rider across distance that had no right to close. And at the end of it you stood at the Made Gate with Maren and named yourself the seed of the singularity, called her down into the waking reclamation system beside you—a wright and a warden together, walking into an ending already in motion, neither of you pretending otherwise."
     }
   ],
   "company": [
@@ -23109,6 +23218,15 @@
       "teaches": null,
       "liaisonFor": null,
       "joinedDay": 19
+    },
+    {
+      "npcId": "marrow",
+      "roles": [
+        "ally"
+      ],
+      "teaches": null,
+      "liaisonFor": null,
+      "joinedDay": 74
     }
   ],
   "livingCurrentAccess": [],
@@ -23576,7 +23694,7 @@
     "gen-object-object": "https://image.pollinations.ai/prompt/%5BObject%20Object%5D%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20%5BObject%20Object%5D.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=32752&nologo=true",
     "gen-the-temple": "https://image.pollinations.ai/prompt/The%20Temple%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20The%20Temple.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=60806&nologo=true",
     "gen-left-branch-gate-clearing": "https://image.pollinations.ai/prompt/Left%20Branch%20Gate%20Clearing%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Left%20Branch%20Gate%20Clearing.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=1941&nologo=true",
-    "gen-whistling-woman-post": "https://image.pollinations.ai/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=32614&nologo=true&_cb=1_1"
+    "gen-whistling-woman-post": "https://image.pollinations.ai/prompt/Small%20wooden%20watchpost%20beside%20a%20shimmering%20dark%20portal%2C%20woman%20silhouetted%20in%20doorway%20whistling%2C%20dusty%20road%20converging%20toward%20her%2C%20twilight%20atmosphere.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=34173&nologo=true"
   },
   "_opEmitted": {
     "sceneSummary": 368,
@@ -23827,7 +23945,7 @@
     "the_undoing_word": "https://image.pollinations.ai/prompt/The%20Undoing%20Word%3A%20The%20Unmaker%20art%20of%20the%20undoing%20%E2%80%94%20returning%20a%20made%20or%20bound%20thing%20to%20its%20unassembled%20state%2C%20so%20it%20is%20not%20destroyed%20but%20un-done%2C%20its%20making%20reversed.%20The%20clean%20art%20of%20those%20who%20end%20things%20properly.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20unmaker%20tradition%3A%20dust-grey%2C%20controlled-rubble%2C%20clean%20break-line%3B%20beautiful%20demolition%2C%20ordered%20ruin%2C%20the%20cleared%20space%3B%20light%20entering%20a%20thing%20just%20opened%3B%20an%20ethic%20of%20clearing%20%E2%80%94%20ruin%20made%20beautiful%20and%20deliberate%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=7516&nologo=true",
     "the_ended_burden": "https://image.pollinations.ai/prompt/The%20Ended%20Burden%3A%20Sustain%20by%20precisely%20ending%20what's%20wearing%20you%20down%20%E2%80%94%20the%20habit%2C%20the%20wound%2C%20the%20relationship%2C%20the%20weight%20%E2%80%94%20rather%20than%20trying%20to%20carry%20it%20further.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20unmaker%20tradition%3A%20dust-grey%2C%20controlled-rubble%2C%20clean%20break-line%3B%20beautiful%20demolition%2C%20ordered%20ruin%2C%20the%20cleared%20space%3B%20light%20entering%20a%20thing%20just%20opened%3B%20an%20ethic%20of%20clearing%20%E2%80%94%20ruin%20made%20beautiful%20and%20deliberate%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=99164&nologo=true",
     "the_stand": "https://image.pollinations.ai/prompt/The%20Stand%3A%20Hold%20a%20position%20or%20protect%20another%20under%20assault%20%E2%80%94%20the%20guardian's%20discipline.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20marcher%20tradition%3A%20steel-grey%2C%20blood-rust%2C%20weathered%20leather%3B%20honed%20blades%2C%20scarred%20armor%2C%20the%20held%20line%3B%20hard%20edge-light%2C%20a%20blade%20catching%20the%20sun%3B%20disciplined%2C%20scarred%2C%20holding%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=21723&nologo=true",
-    "storykeeper": "https://image.pollinations.ai/prompt/Storykeeper%3A%20Hold%2C%20recall%2C%20and%20deploy%20the%20valley's%20stories%20%E2%80%94%20living%20memory%20as%20a%20working%20tool.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20valley%20craft%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=96412&nologo=true",
+    "storykeeper": "https://image.pollinations.ai/prompt/Flowing%20robes%20in%20tidal%20blues%20and%20deep%20reds%20billowing%20like%20water%20around%20a%20figure%20standing%20amid%20architecture%20carved%20to%20channel%20emotion%2C%20tear-bright%20light%20catching%20fabric%20and%20stone%2C%20gestures%20broad%20and%20swelling%2C%20movement%20like%20sorrow%20and%20joy%E2%80%A6%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20tidal%20blues%20and%20reds%2C%20tear-bright%2C%20dramatic%2C%20swelling%2C%20emotion%20made%20visible%2C%20public%20weeping%20and%20public%20joy?width=1024&height=512&seed=98075&nologo=true",
     "light_well": "https://image.pollinations.ai/prompt/Light%20Well%3A%20Store%20light%20in%20a%20simple%20vessel%20and%20release%20it%20later%2C%20slow%20or%20sudden.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20radiant%20folk%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=89242&nologo=true",
     "light_bending": "https://image.pollinations.ai/prompt/Light%20bending%20around%20a%20figure%20or%20object%2C%20white-gold%20radiance%20refracting%20outward%2C%20polished%20sun-metal%20surfaces%20catching%20harsh%20glare%2C%20overexposed%20white-hot%20highlights%20with%20no%20shadows%2C%20salt-flat%20emptiness%2C%20glass%20catching%20violent%20clarity%E2%80%A6%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20white-gold%2C%20glare-blown%20highlights%2C%20no%20true%20shadow%2C%20overexposed%2C%20revelation-as-violence%2C%20everything%20laid%20bare%2C%20burning%20clarity%2C%20nowhere%20to%20hide?width=1024&height=512&seed=43866&nologo=true",
     "blend_in": "https://image.pollinations.ai/prompt/Blend%20In%3A%20Pass%20unnoticed%20in%20a%20crowd%20or%20settlement%20%E2%80%94%20look%20like%20you%20belong%2C%20be%20forgotten.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20valley%20craft%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=9526&nologo=true",
@@ -23967,7 +24085,7 @@
       "obligation": null,
       "condition": "thriving",
       "claimedDay": 67,
-      "lastMovedWorldCount": 1721,
+      "lastMovedWorldCount": 1796,
       "history": [
         {
           "at": 1612,
@@ -24034,6 +24152,12 @@
           "from": "thriving",
           "to": "thriving",
           "note": "built a mill (the fiction)"
+        },
+        {
+          "at": 1790,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "hands: Cael"
         }
       ],
       "fromAssignment": "fendt::warden-of-the-threshold-post-at-the-ridg",
@@ -24106,12 +24230,15 @@
       ],
       "lastFeatureOfferCount": 1667,
       "image": "https://image.pollinations.ai/prompt/Threshold%20Post%3A%20a%20standing%20post%2C%20thriving%2C%20busy%20and%20well-found.%20Kept%20by%20Fendt%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=5696&nologo=true",
-      "growthPasses": 1,
+      "growthPasses": 2,
       "store": {
-        "raw_material": 9
+        "raw_material": 15
       },
-      "relayPasses": 1,
-      "relayAnnounced": true
+      "relayPasses": 2,
+      "relayAnnounced": true,
+      "crew": [
+        "cael"
+      ]
     },
     {
       "id": "hold-cassiel-ord::full-reconstruction-of-the-raven-s-home-",
@@ -24122,7 +24249,7 @@
       "obligation": null,
       "condition": "thriving",
       "claimedDay": 67,
-      "lastMovedWorldCount": 1721,
+      "lastMovedWorldCount": 1796,
       "history": [
         {
           "at": 1648,
@@ -24380,9 +24507,10 @@
       "crew": [],
       "lastFeatureOfferCount": 1649,
       "image": "https://image.pollinations.ai/prompt/Stillwater's%20Trouble%3A%20a%20standing%20post%2C%20thriving%2C%20busy%20and%20well-found.%20Kept%20by%20Cassiel%20Ord%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=70152&nologo=true",
-      "growthPasses": 1,
+      "growthPasses": 2,
       "store": {
-        "mech_parts": 3
+        "mech_parts": 5,
+        "living_stock": 3
       }
     },
     {
@@ -24394,7 +24522,7 @@
       "obligation": "the fellowship's work, and the road drainage it promised",
       "condition": "thriving",
       "claimedDay": 16,
-      "lastMovedWorldCount": 1721,
+      "lastMovedWorldCount": 1796,
       "history": [
         {
           "at": 1645,
@@ -24458,10 +24586,10 @@
         }
       ],
       "describedAs": "forge",
-      "growthPasses": 2,
+      "growthPasses": 3,
       "store": {
-        "raw_material": 6,
-        "mech_parts": 4
+        "raw_material": 7,
+        "mech_parts": 6
       },
       "improvements": [
         {
@@ -25115,7 +25243,8 @@
     "cp1fcy7ze": "Tall woman in ash-grey facing unmarked stone shrine within marked circle, four cardinal poles, shadow-warded gate behind, starlit sky, her gaze distant and steadied with completion.",
     "cp91dslk": "Flowing robes in tidal blues and deep reds billowing like water around a figure standing amid architecture carved to channel emotion, tear-bright light catching fabric and stone, gestures broad and swelling, movement like sorrow and joy…",
     "cp75wuug": "Tall woman with ash-grey unbound hair, weathered face lined at eyes and mouth, scarred knuckles, steady gaze—built from long journeys, character portrait of timeless worn grace.",
-    "cpgfhd5h": "Weathered woman in leather apron filing hot metal, back turned to doorway, organized workbench behind her, focused grip, workshop lit by forge glow, practical efficiency in every motion."
+    "cpgfhd5h": "Weathered woman in leather apron filing hot metal, back turned to doorway, organized workbench behind her, focused grip, workshop lit by forge glow, practical efficiency in every motion.",
+    "cp700p80": "Small wooden watchpost beside a shimmering dark portal, woman silhouetted in doorway whistling, dusty road converging toward her, twilight atmosphere."
   },
   "composedImages": {
     "https://image.pollinations.ai/prompt/Left%20Branch%20Gate%20Clearing%20%E2%80%94%20The%20left-branch%20clearing%20at%20the%20made%20gate%2C%20evening%20light%20amber%20and%20soft%E2%80%94the%20downed%20tree's%20clearing%20open%20on%20both%20sides%2C%20the%20skeleton%20of%20Logana%20still-standing%20at%20her%20post%2C%20the%20gate%20itself%20frameless%20and%20present.%20The%20Whistling%20Woman%20post%20lies%20north%20through%20the%20gate%3B%20the%20Threshold%20Pos%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=47401&nologo=true": "https://image.pollinations.ai/prompt/Amber%20evening%20light%20through%20left-branch%20clearing%2C%20downed%20tree%20opened%20both%20sides%2C%20skeletal%20figure%20standing%20at%20frameless%20gate%2C%20path%20extending%20north%20beyond.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=47401&nologo=true",
@@ -25369,6 +25498,20 @@
           "note": null,
           "seedKey": null,
           "at": 74
+        },
+        {
+          "url": "https://image.pollinations.ai/prompt/Great%20Death%20Raven%20beautiful%20powerful%20woman%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=20895&nologo=true",
+          "prompt": "Timeless grey highlights attention eyes feathers full figure, Great Death Raven beautiful powerful woman",
+          "note": "Timeless grey highlights attention eyes feathers full figure",
+          "seedKey": "whois-marrow#r1",
+          "at": 74
+        },
+        {
+          "url": "https://image.pollinations.ai/prompt/timeless%20grey%20highlights%20attention%20eyes%20feathers%20full%20figure%2C%20great%20death%20raven%20beautiful%20powerful%20woman%2C%20Maren%20(Marrow)%20Ossitide%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=20894&nologo=true",
+          "prompt": "timeless grey highlights attention eyes feathers full figure, great death raven beautiful powerful woman, Maren (Marrow) Ossitide",
+          "note": null,
+          "seedKey": "whois-marrow#r2",
+          "at": 74
         }
       ]
     },
@@ -25411,10 +25554,61 @@
           "at": 74
         }
       ]
+    },
+    "moment:solo:cap:silas and maren descend into the waking reclamation system's hollow—the bones of pre-trans": {
+      "keeps": [
+        {
+          "url": "https://image.pollinations.ai/prompt/Two%20figures%20standing%20in%20the%20luminous%20hollow%E2%80%94a%20tall%20woman%20in%20warden-form%20with%20grey-ash%20hair%20and%20scarred%20hands%2C%20beside%20a%20man%20in%20travel-worn%20clothes%2C%20both%20framed%20against%20the%20glowing%20lattice-work%20of%20ancient%20machinery.%20The%20bone-structure%20beneath%20them%20hums%20with%20light.%20Darkness%20curves%20overhead.%20The%20air%20its%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=94675&nologo=true",
+          "prompt": "Two figures standing in the luminous hollow—a tall woman in warden-form with grey-ash hair and scarred hands, beside a man in travel-worn clothes, both framed against the glowing lattice-work of ancient machinery. The bone-structure beneath them hums with light. Darkness curves overhead. The air its",
+          "note": null,
+          "seedKey": null,
+          "at": 74
+        }
+      ]
+    },
+    "location:gen-whistling-woman-post": {
+      "keeps": [
+        {
+          "url": "https://image.pollinations.ai/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=34172&nologo=true",
+          "prompt": "Small Watchpost near shadow portal, Whistling Woman Post: A place the road led to — Whistling Woman Post. The fiction brought you here before the map knew its name., wide establishing shot, atmospheric, no figures in the foreground",
+          "note": "Small Watchpost near shadow portal",
+          "seedKey": "gen-whistling-woman-post#r1",
+          "at": 74
+        },
+        {
+          "url": "https://image.pollinations.ai/prompt/Small%20wooden%20watchpost%20beside%20a%20shimmering%20dark%20portal%2C%20woman%20silhouetted%20in%20doorway%20whistling%2C%20dusty%20road%20converging%20toward%20her%2C%20twilight%20atmosphere.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=34173&nologo=true",
+          "prompt": "Small wooden watchpost beside a shimmering dark portal, woman silhouetted in doorway whistling, dusty road converging toward her, twilight atmosphere., wide establishing shot, atmospheric, no figures in the foreground",
+          "note": null,
+          "seedKey": "gen-whistling-woman-post#r2",
+          "at": 74
+        }
+      ]
+    },
+    "moment:solo:cap:silas weir": {
+      "keeps": [
+        {
+          "url": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
+          "prompt": "",
+          "note": null,
+          "seedKey": null,
+          "at": 74
+        }
+      ]
+    },
+    "figure:whois-the_one_called_zeus": {
+      "keeps": [
+        {
+          "url": "https://image.pollinations.ai/prompt/A%20figure%20of%20the%20god%20named%2C%20sovereign%20among%20them%3A%20wearing%20a%20name%20the%20way%20other%20people%20wear%20armour%2C%20and%20it%20is%20answering%3B%20crowned%20by%20consent%20of%20nobody%2C%20character%20portrait%2C%20named%20The%20One%20Called%20Zeus%2C%20he%2C%20Sovereign%2C%20of%20a%20people%20who%20read%20as%3A%20bears%20the%20name%20visibly%20%E2%80%94%20a%20sigil%2C%20a%20stole%2C%20a%20brand%2C%20a%20stance.%20Often%20tired%20underneath%20the%20bearing.%20The%20name%20is%20grander%20than%20the%20person%20and%20that%20gap%20SHOWS%3A%20fine%20d%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20bleached%20linen%2C%20old%20gold%20leaf%2C%20dust-white%2C%20deep%20shadowed%20umber%2C%20high%20and%20behind%2C%20upright%2C%20weathered%2C%20certain%20in%20a%20way%20that%20has%20cost%20something?width=512&height=640&seed=54975&nologo=true",
+          "prompt": "",
+          "note": null,
+          "seedKey": null,
+          "at": 74
+        }
+      ]
     }
   },
   "purse": {
-    "crystal": 1242,
+    "crystal": 1436,
     "coin": 0,
     "paper": 0,
     "marks": 0,
@@ -25637,7 +25831,8 @@
     }
   ],
   "sceneImages": {
-    "solo:cap:silas and pell arrive at the whistling woman post—a small moorland waystation built by den": "https://image.pollinations.ai/prompt/A%20small%20stone%20waystation%20built%20into%20moorland%20at%20dusk%E2%80%94smoke%20curling%20from%20a%20chimney%2C%20warm%20light%20spilling%20from%20an%20unshuttered%20window.%20The%20building%20is%20solid%2C%20built%20to%20last%2C%20with%20a%20warded%20threshold%20marked%20by%20cairns.%20Mist%20clings%20to%20the%20grass%20beyond.%20Inside%2C%20the%20glow%20of%20a%20stove%20and%20the%20rough%20comfort%20of%20a%20m%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=50900&nologo=true"
+    "solo:cap:silas and pell arrive at the whistling woman post—a small moorland waystation built by den": "https://image.pollinations.ai/prompt/A%20small%20stone%20waystation%20built%20into%20moorland%20at%20dusk%E2%80%94smoke%20curling%20from%20a%20chimney%2C%20warm%20light%20spilling%20from%20an%20unshuttered%20window.%20The%20building%20is%20solid%2C%20built%20to%20last%2C%20with%20a%20warded%20threshold%20marked%20by%20cairns.%20Mist%20clings%20to%20the%20grass%20beyond.%20Inside%2C%20the%20glow%20of%20a%20stove%20and%20the%20rough%20comfort%20of%20a%20m%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=50900&nologo=true",
+    "solo:cap:silas weir": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true"
   },
   "bands": [
     {
@@ -25714,7 +25909,8 @@
   ],
   "figureImages": {
     "whois-siol": "https://image.pollinations.ai/prompt/elk%20woman%2C%20capable%20armed%20and%20armored.%2C%20Siol%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=49899&nologo=true",
-    "whois-logana": "https://image.pollinations.ai/prompt/huge%20animal%20bones%2C%20animal%20weasel%20skeleton%20huge%20glowing%20undead%20guarding%20a%20portal%2C%20Logana%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=61390&nologo=true"
+    "whois-logana": "https://image.pollinations.ai/prompt/huge%20animal%20bones%2C%20animal%20weasel%20skeleton%20huge%20glowing%20undead%20guarding%20a%20portal%2C%20Logana%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=61390&nologo=true",
+    "whois-marrow": "https://image.pollinations.ai/prompt/timeless%20grey%20highlights%20attention%20eyes%20feathers%20full%20figure%2C%20great%20death%20raven%20beautiful%20powerful%20woman%2C%20Maren%20(Marrow)%20Ossitide%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=20894&nologo=true"
   },
   "precursorAxes": [],
   "featureOffers": [],

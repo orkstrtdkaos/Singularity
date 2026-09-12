@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 32,
-  "xp": 3111,
+  "xp": 3121,
   "attributes": {
     "physical": 5,
     "mental": 8,
@@ -212,7 +212,7 @@
   "maxHealth": 196,
   "health": 196,
   "maxEnergy": 287,
-  "energy": 287,
+  "energy": 284,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2274,26 +2274,11 @@
     "Deep in the Threshold Post mine-shaft, Silas assessed the second structural fault—a slower-developing fracture that will require monitoring in months to come—and marked it plainly for Fendt's crew. The ridge sentinel is now fully assessed, armed with honest limits and clear notice of what requires attention. The warden post is ready.",
     "At the ridge Threshold Post in early morning, Silas returns from the spring-fed draw to share a meal with Pell and ask after the child she carries. Pell reports the little one is strong and steady, moving in response to the novel-depth work.",
     "Deep night at the Whistling Woman post: Silas and Pell share an intimate night—fed, present, and at rest together in the warded waystation.",
-    "At the Whistling Woman post in the gold hour: Silas asks Pell to prepare dinner for multiple arrivals (the runner, Veth, Deni, and Corvin), and walks south to the Made Gate to clear his head while the preparations are made."
+    "At the Whistling Woman post in the gold hour: Silas asks Pell to prepare dinner for multiple arrivals (the runner, Veth, Deni, and Corvin), and walks south to the Made Gate to clear his head while the preparations are made.",
+    "At the Made Gate in evening light, Silas attempts to open a waymark portal and reach his father's spirit through it—a novel combination of boundary-stone and Ask the Dead. The craft fails; the dead cannot answer through portals, only through fresh thresholds. The reach breaks before the working breaks. The gate stands quiet. The warden post is ready. The road waits."
   ],
   "currentLocationId": "gen-whistling-woman-post",
-  "activeScene": {
-    "locationId": "gen-whistling-woman-post",
-    "turns": [],
-    "lastTurn": {
-      "stateOps": [
-        {
-          "op": "upsert",
-          "key": "logana_current_mission",
-          "value": "Retrieve Cael from the left-branch area and bring him to the Whistling Woman Post."
-        }
-      ],
-      "narration": "",
-      "sceneSummary": null
-    },
-    "sceneState": null,
-    "beats": 14
-  },
+  "activeScene": null,
   "clock": {
     "schemaVersion": 1,
     "day": 16,
@@ -6334,7 +6319,7 @@
     "lastTickWorldDay": 74,
     "lastCanonWorldDay": 74,
     "lastGenCount": 1776,
-    "turnsSinceOffer": 4,
+    "turnsSinceOffer": 5,
     "recentOffers": [
       {
         "thing": "The moorland silence holds a weight—a listening quality that suggests the relay network is not merely a series of posts but something more…",
@@ -16140,22 +16125,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 25.98961289448532,
-    "cerebral": 16.697879807290924,
-    "social": 9.873012084826563,
-    "generous": 4.224181358779418,
-    "cautious": 6.4133621491819195,
-    "physical": 0.32230190942477527,
-    "risky": 0.9363734372694849,
-    "ruthless": 0.16826093458862015,
-    "carousing": 1.7675211166887963,
-    "amorous": 2.9616804433805806,
-    "patient": 0.5657452740854539,
-    "stealth": 0.000005880568489930024,
-    "devotion": 0.2402994440186881,
-    "craft": 3.6311399793131516,
-    "leadership": 2.544417467845306,
-    "deception": 0.028161177729540195
+    "strategic": 25.339872572123184,
+    "cerebral": 18.28043281210865,
+    "social": 9.626186782705899,
+    "generous": 4.118576824809932,
+    "cautious": 6.253028095452371,
+    "physical": 0.31424436168915587,
+    "risky": 0.9129641013377477,
+    "ruthless": 0.16405441122390466,
+    "carousing": 1.7233330887715763,
+    "amorous": 2.887638432296066,
+    "patient": 0.5516016422333175,
+    "stealth": 0.000005733554277681773,
+    "devotion": 0.2342919579182209,
+    "craft": 3.540361479830323,
+    "leadership": 2.4808070311491734,
+    "deception": 0.027457148286301688
   },
   "aptitudes": [
     "strategist",
@@ -16164,7 +16149,7 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 963,
+  "actionCount": 964,
   "grantsVersion": 1,
   "reconcileVersion": 49,
   "gallery": [
@@ -17002,8 +16987,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1789173157645,
-  "rev": 1945,
+  "updatedAt": 1789173466653,
+  "rev": 1946,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -20412,11 +20397,11 @@
       "the_grey_road": 1,
       "the_grey_hand": 2,
       "the_shielding_word": 3,
-      "boundary_stone": 9,
+      "boundary_stone": 10,
       "the_kept_breath": 3,
       "light_borne": 3,
       "marrow-s-wings": 4,
-      "ask_the_dead": 2,
+      "ask_the_dead": 3,
       "the_warding_mark": 3,
       "the_working_model": 14,
       "the-held-place": 1,
@@ -20483,13 +20468,14 @@
       "the_raised_thing+the_shielding_word": 1,
       "the-declared-threshold+the_raised_thing": 1,
       "braid_deathsense_palework+shadow_work": 1,
-      "shadow_work+working_model": 1
+      "shadow_work+working_model": 1,
+      "ask_the_dead+boundary_stone": 1
     },
     "aspirations": [
       {
         "abilityId": "hunters_strike",
         "since": "2026-07-12T16:27:52.479Z",
-        "progress": 8
+        "progress": 9
       },
       {
         "abilityId": "pattern_sense",
@@ -20501,7 +20487,7 @@
       "deathsense": 42,
       "the-attended-end": 28,
       "order_sense": 73,
-      "boundary_stone": 28,
+      "boundary_stone": 74,
       "palework": 73,
       "the_shadow_work": 25,
       "the_kept_breath": 42,
@@ -20510,7 +20496,7 @@
       "shadowstep": 73,
       "the_shielding_word": 25,
       "marrow-s-wings": 73,
-      "ask_the_dead": 26,
+      "ask_the_dead": 74,
       "the_warding_mark": 25,
       "the_working_model": 41,
       "the-held-place": 24,
@@ -21253,7 +21239,7 @@
   "syncedAt": 1788658062664,
   "teachers": {},
   "regionsKnown": {
-    "valley": 658,
+    "valley": 659,
     "the_palelands": 6,
     "the_center": 151,
     "the_echo_vale": 14
@@ -21564,10 +21550,10 @@
     {
       "id": "sess-33",
       "startedAt": "2026-09-11T22:48:54.873Z",
-      "lastAt": "2026-09-12T00:32:37.624Z",
+      "lastAt": "2026-09-12T00:37:46.645Z",
       "startDay": 73,
       "endDay": 74,
-      "beats": 10
+      "beats": 11
     }
   ],
   "company": [
@@ -22069,17 +22055,17 @@
     "gen-whistling-woman-post": "https://image.pollinations.ai/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=32614&nologo=true&_cb=1_1"
   },
   "_opEmitted": {
-    "sceneSummary": 337,
-    "choices": 336,
-    "characterDeltas": 168,
-    "scene": 337,
+    "sceneSummary": 338,
+    "choices": 337,
+    "characterDeltas": 169,
+    "scene": 338,
     "npcUpdates": 301,
     "factUpdates": 29,
     "placeUpdates": 75,
     "codexUpdates": 199,
-    "timeOps": 308,
+    "timeOps": 309,
     "imagePrompt": 27,
-    "sceneEnded": 115,
+    "sceneEnded": 116,
     "itemUpdates": 8,
     "questUpdates": 47,
     "offer": 43,
@@ -22096,13 +22082,13 @@
     "_applyFailedOp": 7,
     "newEncounter": 3,
     "encounterOps": 1,
-    "gambitApt": 45,
+    "gambitApt": 46,
     "markDefiningMoment": 1,
-    "_engineClosedScene": 4,
+    "_engineClosedScene": 5,
     "gambitOps": 1,
     "intentsHeard": 1
   },
-  "_opTurns": 337,
+  "_opTurns": 338,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -23266,13 +23252,13 @@
     "plan": 12,
     "negotiate": 2,
     "prepare": 10,
-    "investigate": 3,
+    "investigate": 4,
     "craft": 6,
     "help": 5,
     "discipline": 1,
     "persuade": 1,
     "rapport": 7,
-    "meditate": 1,
+    "meditate": 2,
     "sustain": 1,
     "discuss": 1,
     "comfort": 3,

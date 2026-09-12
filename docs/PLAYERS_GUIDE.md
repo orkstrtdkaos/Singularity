@@ -10,7 +10,7 @@ place, person and belief in X–XII is drawn from authored content — , ,
 , the nine companion files and — and where the world has not decided
 something, the guide says so rather than filling it in.
 
-Last verified: 2026-09-12 · v1.9.464 · 438 crafts · 137 places · 146 people · 9 companions.
+Last verified: 2026-09-12 · v1.9.464 · 438 crafts · 138 places · 146 people · 9 companions.
 
 Every craft in the game, by domain and sect, is listed in [`SKILLS.md`](SKILLS.md) — what each
 one costs, what it does, and what its three ranks give you.
@@ -492,7 +492,7 @@ leader when you meet again, and nobody arranged that — the world grew while yo
 
 # PART X · WHERE YOU BEGIN
 
-Exesa has a hundred and thirty-seven authored places across thirty-eight regions, and you do not all begin
+Exesa has a hundred and thirty-eight authored places across thirty-eight regions, and you do not all begin
 in the same one.** Where you start decides which of the world's troubles is *yours* — the water crisis
 belongs to the valley, and someone who begins in the Deepwood will meet a different quarrel entirely.
 

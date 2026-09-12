@@ -4,7 +4,7 @@
 
 ## Where this sits
 
-The Valley of Echoes is a fertile mountain valley holding ten of the world's hundred and thirty-seven
+The Valley of Echoes is a fertile mountain valley holding ten of the world's hundred and thirty-eight
 places. It is not the world and it is not a summary of the world — but it is the argument in miniature, which
 is why people who have never been here have opinions about it.
 

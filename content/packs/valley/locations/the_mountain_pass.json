@@ -1,0 +1,67 @@
+{
+ "schemaVersion": 1,
+ "id": "the_mountain_pass",
+ "name": "The Mountain Pass",
+ "regionId": "valley",
+ "communityId": "the_mountain_pass",
+ "spectrum": {
+  "space_time": 0.35,
+  "chaos_order": -0.2,
+  "falsehood_truth": 0.15
+ },
+ "tags": [
+  "road",
+  "frontier",
+  "outward",
+  "threshold",
+  "valley"
+ ],
+ "connections": [
+  "archive_hollow",
+  "millbrook"
+ ],
+ "descriptionSeed": "The Mountain Pass — where the valley stops being a valley. Ten days up from Millbrook along the rising floor, three past Archive Hollow, the ground levels into a long stone shelf and then simply ends: the far lip, and beyond it the land going down and outward for as far as anyone has walked it. There is no gate and no wall. There is a cairn somebody built recently and a wind that comes up the descent instead of down it. Nobody in living memory had been this far and found it open. It is open now.",
+ "loreRefs": [],
+ "npcsPresent": [],
+ "encounterFlavor": "people who came up to look and have not gone back down; a Millbrook survey party arguing about whether to report it; whoever left the boot prints, possibly, coming the other way",
+ "dangerLevel": 2,
+ "questSeeds": [
+  "The boot prints on the far side are not from any tread made in the valley",
+  "Millbrook cannot decide whether to hold the pass, map it, or close it again — and one faction has stopped attending the meetings",
+  "Somebody has been leaving provisions at the cairn, and they are not for anyone going out"
+ ],
+ "map": {
+  "x": 250,
+  "y": 120
+ },
+ "encounterSeeds": [],
+ "poleIntensity": {
+  "space": 0.35,
+  "chaos": 0.2,
+  "truth": 0.15
+ },
+ "axisVector": [
+  0.0,
+  0.15,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  -0.2,
+  0.0,
+  0.0,
+  0.35,
+  0.0,
+  0.0
+ ],
+ "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180). `space_time` +0.35 is the highest component and it is the point: a pass is a place that is only about where it leads.",
+ "worldPos": {
+  "colatitude": 26.3,
+  "longitude": 251.895,
+  "depth": 0
+ },
+ "worldPosNote": "SNG-540: MINTED AT THE FAR LIP OF THE VALLEY PLATEAU, chosen from the terrain rather than picked. Walking straight outward from Millbrook along lon 251.895 the river valley climbs 149 -> 168 and then holds a shelf from lat -65.95 to -63.70 before descending steadily to +21 over the next 170 miles. This is the outer edge of that shelf: elevation 168 (+40 above a sea level of 128), biome `river_valley`, 156 mi / 10 walking days from Millbrook and 47 mi / 3 days past Archive Hollow, which sits on the shelf itself. Region vote: `valley` at 3.06e-2, two orders above the next — a pass out of the valley is still valley ground, which is what a threshold is. TIER/ROLE: authored as tier `settlement` + role `gate`, NOT a `site`. SNG-398 requires a site to sit within ONE DAY of its parent, and this is 3 days past Archive Hollow and 10 past Millbrook — which is the whole point of a pass. `gate` is the ratified role for a threshold, so no vocabulary was invented for it.",
+ "tier": "settlement",
+ "parentId": null,
+ "role": "gate"
+}

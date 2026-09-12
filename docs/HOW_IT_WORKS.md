@@ -1908,7 +1908,7 @@ collapse to more threat than one powerful individual, because collapsing is for 
 ## 7g · AUTHORED GROUND IS CANON (Erik, R28)
 
 **Where a place is hand-authored, the authored ground is the truth; the generator fills the rest.**
-`local_layouts.json` places **84 sites across 18 of 137 locations** — a well at a centre, a river 2.2 miles
+`local_layouts.json` places **84 sites across 18 of 138 locations** — a well at a centre, a river 2.2 miles
 south-west, a smithy 150 m south.
 
 ⛔ **IT WAS AUTHORED IN AUGUST AND READ ONLY BY THE TEST THAT REPORTED IT DISAGREEING WITH THE GENERATOR.**

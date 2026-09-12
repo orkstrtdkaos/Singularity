@@ -1724,7 +1724,12 @@ console.log("\n── §165 · craft prose reaches the player clean ──");
     for (const f of ["description", "notFor", "plainly"]) if (G165.test(String(a[f] || ""))) cnt165[f]++;
     for (const t of a.tree || []) { if (G165.test(String(t.grants || ""))) cnt165.grants++; if (G165.test(String(t.cannot || ""))) cnt165.cannot++; }
   }
-  const pin165 = { description: 93, notFor: 150, plainly: 55, grants: 358, cannot: 423 };
+  const pin165 = { description: 93, notFor: 100, plainly: 55, grants: 358, cannot: 423 };
+  // ⬜ notFor 150 -> 100 (Aevi 2026-09-11): 50 lines rewritten out of the PO register into player prose.
+  // ⚠️ THE PIN IS THE ONLY LINE IN THIS FILE I TOUCH, and only because this comment delegates it — "lower a
+  // pin in the same commit that lowers the count". Safe by construction: a pin may only go DOWN, so the worst
+  // an author can do here is make the gate stricter. The RATIFIED census two files over says the opposite
+  // ("a ratified decision rather than a measurement of drift") and I left that one for CCode.
   check("§165: ⬜ …and the content half is Aevi's rewrite — glyph-bearing lines may only FALL from today's count",
     Object.keys(pin165).every(k => cnt165[k] <= pin165[k]), JSON.stringify(cnt165));
 }

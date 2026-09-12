@@ -12603,6 +12603,113 @@ console.log("\n── §194 · acquiring a craft you aspired to carries the prac
     && /already yours/.test(rd("app.js")) && !/dropAspiration\(character, id\); saveCharacter/.test(rd("app.js")));
 }
 
+/* ══════════ §195 — SNG-547 · ABSENCE FROM THE PROMPT IS NOT ABSENCE FROM THE WORLD (Aevi's spec; Erik: "the GM just choked on my next working") ══════════ */
+console.log("\n── §195 · the parser can see the canon, an item answers to its name, and a dropped axis is audible ──");
+{
+  const GM195 = await import("../engine/gm.js");
+  const INV195 = await import("../engine/inventory.js");
+  const RC195 = await import("../engine/reconcile.js");
+  const { loadContentHeadless: lch195 } = await import("./headless_content.mjs");
+  const C195 = await lch195();
+  const G195 = rd("engine/gm.js");
+  const silas195 = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+
+  /* ---- O1 · infeasible requires a positive contradiction ---- */
+  // ⛔ HER RULING, AND IT IS THE WHOLE SPEC IN ONE SENTENCE: "A classifier that cannot see the canon must not be permitted to rule
+  // on what exists." `feasible: false` does not fail an action — it tells a player he is confused about his own character.
+  check("§195: ⛔ the parser is told the lists are PARTIAL and that an unfound thing is UNKNOWN, not absent",
+    /THE LISTS BELOW ARE PARTIAL/.test(G195) && /it is UNKNOWN, not absent/.test(G195)
+    && /NEVER return feasible:false because something was not in the lists/.test(G195)
+    && /requires a POSITIVE CONTRADICTION/.test(G195));
+
+  /* ---- O2 · the canon reaches it: the recent and the named ---- */
+  const canon = GM195.parserCanon(silas195);
+  check(`§195: ⛔ the canon reaches the parser — ${canon.facts.length} recent established facts and ${canon.names.length} named things of his`,
+    canon.facts.length > 0 && canon.facts.length <= 8 && canon.names.length > 0
+    && canon.facts.every(f => typeof f === "string" && f.length > 10)
+    && (silas195.establishedFacts || []).length > canon.facts.length,
+    `${(silas195.establishedFacts || []).length} facts on the save, ${canon.facts.length} carried`);
+  // ⛑ THE NAMES ARE THE LOAD-BEARING HALF, because those are exactly what a player types.
+  check("§195: …and the named things include what the FICTION called them — the spear's own name among them",
+    canon.names.some(n => /Memory/i.test(n))
+    && canon.names.some(n => (silas195.holdings || []).some(h => h.name === n)),
+    canon.names.slice(0, 6).join(" · "));
+  check("§195: …and the prompt actually carries both, with the facts marked as TRUE of this character",
+    /Named things of theirs \(any of these may be what the player means\)/.test(G195)
+    && /Recently established in play \(these are TRUE of this character\)/.test(G195)
+    && /parserCanon\(character\)/.test(G195));
+
+  /* ---- O4 · near-miss resolution by aliases, exactly — never fuzzy matching in the model ---- */
+  // ⛔ SAME BUG, ONE NOUN OVER: the comment above the defect already said it of abilities — "fed BY ID only, so a braid invoked by
+  // its NAME could never resolve → the GM then rejected a craft the character actually holds." Items got `i.name` alone.
+  check("§195: ⛔ the inventory line carries the name the FICTION gave a thing and its aliases, not just its shop name",
+    /a player may name any of these; match on any name given/.test(G195)
+    && /i\.customName \? `\$\{i\.customName\}/.test(G195)
+    && !/\(character\.inventory \|\| \[\]\)\.map\(i => i\.name \|\| i\)\.join/.test(G195));
+  // ⛔ AND THE HEAD OF A COMPOUND NAME IS A NAME. The spear carries `customName: "Memory — The Dual Spear"`, and the one word the
+  // story actually gave it resolved to NOTHING because every matcher wanted the whole string.
+  const memory = (silas195.inventory || []).find(i => /Memory/i.test(String(i.customName || "")));
+  check("§195: ⛔ LIVE — the spear answers to Memory, to the words he typed, and to its own shop name",
+    !!memory && INV195.findItem(silas195, "Memory") === memory
+    && INV195.resolveInventoryItem(silas195, { name: "the Runic Spear Memory" }) === memory
+    && INV195.resolveInventoryItem(silas195, { name: memory.name }) === memory,
+    memory ? `${memory.name} / ${memory.customName}` : "no named spear on the save");
+  check("§195: …and a parenthetical gloss is not part of the name — \"Waymarker (father's)\" answers to Waymarker",
+    (() => { const c = { inventory: [{ name: "Waymarker (father's)", kind: "quest" }] };
+      return INV195.findItem(c, "Waymarker")?.name === "Waymarker (father's)"
+        && INV195.findItem(c, "Waymarker (father's)")?.name === "Waymarker (father's)"; })());
+  check("§195: …and one resolver serves both the player's typing and every GM item op, so the two can never disagree",
+    /export function findItem\(character, name\) \{[\s\S]{0,200}return resolveInventoryItem\(character, \{ name: String\(name\) \}\);/.test(rd("engine/inventory.js")));
+
+  /* ---- O3 · a naming writes back ---- */
+  check("§195: ⛔ A NAMING IS A RECORD CHANGE, and the contract now says so as a MUST with the same-turn rule",
+    /AND A NAMING IS A RECORD CHANGE, NOT FLAVOUR/.test(G195)
+    && /you MUST emit "itemUpdates" with "customName" in THAT SAME TURN/.test(G195)
+    && /put it in "aliases" instead/.test(G195)
+    && /"aliases": \["another name the fiction has called it/.test(G195));
+  // ⚠️ AND THE PROMISED OP EXISTS: the contract sentence above would otherwise describe a mechanism there was none of, which is
+  // the defect this project keeps finding — caught while writing the sentence.
+  check("§195: …and `applyItemUpdates` honours an `aliases` op — added, never replaced, and never duplicating a name it has",
+    (() => { const c = { inventory: [{ name: "Assembled Mid-Weight Spear", kind: "weapon", aliases: ["old haft"] }] };
+      INV195.applyItemUpdates(c, [{ name: "Assembled Mid-Weight Spear", aliases: ["Memory", "old haft", "Assembled Mid-Weight Spear"] }]);
+      const it = c.inventory[0];
+      return it.aliases.includes("Memory") && it.aliases.filter(a => a === "old haft").length === 1
+        && !it.aliases.includes("Assembled Mid-Weight Spear"); })());
+  check("§195: ⛑ and step 57 pays the one already stranded — but declines when the name is already on the record",
+    (() => { const src = rd("engine/reconcile.js");
+      if (!/version: 57, id: "a-word-that-held"/.test(src)) return false;
+      // it applies on a save that recorded the naming and never kept it …
+      const c = { id: "char-mrhs8286", reconcileVersion: 56, deeds: [{ description: "Named the repaired death-bound spear Memory in Pell's forge at dawn — a word that held." }],
+        inventory: [{ name: "Assembled Mid-Weight Spear", kind: "weapon" }] };
+      const r = RC195.reconcile(c, "character", {});
+      const named = c.inventory[0].customName === "Memory" && (c.inventory[0].aliases || []).includes("Memory");
+      // … and leaves a name the fiction has since given alone
+      const c2 = { id: "char-mrhs8286", reconcileVersion: 56, deeds: c.deeds, inventory: [{ name: "Assembled Mid-Weight Spear", kind: "weapon", customName: "Memory — The Dual Spear" }] };
+      RC195.reconcile(c2, "character", {});
+      return named && r.applied.includes("a-word-that-held") && c2.inventory[0].customName === "Memory — The Dual Spear"; })());
+
+  /* ---- O5 · the axes contract is validated and its failures are audible ---- */
+  // ⛔ THE MODEL RETURNED THE PLACEHOLDER LITERALLY — `"axes": {"spectrumId": "mechanical_spiritual"}` — and `Number.isFinite`
+  // rejected it, which is the "roll 20 vs NaN" guard holding as designed. ⚠️ BUT IT WAS DROPPED IN SILENCE, and the KEY was never
+  // checked: a number under a misspelled id stored a real axis nothing would ever read.
+  const ids195 = (C195.spectrums?.spectrums || []).map(s => s && s.id).filter(Boolean);
+  const out195 = GM195.sanitizeIntent({ axes: { spectrumId: "mechanical_spiritual", mechanical_spiritual: 0.6, nonsense_axis: 0.4, death_life: 5 } },
+    { abilities: [] }, "x", { spectrumIds: ids195 });
+  check(`§195: ⛔ the axes key is checked against the ${ids195.length} authored spectrum ids and a bad value is REJECTED, not stored`,
+    ids195.length === 12
+    && out195.axes.mechanical_spiritual === 0.6 && out195.axes.death_life === 1
+    && !("spectrumId" in out195.axes) && !("nonsense_axis" in out195.axes));
+  check("§195: …and every drop is AUDIBLE with its reason — a turn that lost its axis contribution looked exactly like a clean one",
+    Array.isArray(out195.axesDropped) && out195.axesDropped.length === 2
+    && out195.axesDropped.some(d => d.key === "spectrumId" && /not a number/.test(d.why))
+    && out195.axesDropped.some(d => d.key === "nonsense_axis" && /not a spectrum id/.test(d.why)),
+    JSON.stringify(out195.axesDropped));
+  check("§195: …and with no whitelist passed the check is OFF rather than silently empty, so an un-updated caller behaves as before",
+    (() => { const o = GM195.sanitizeIntent({ axes: { anything_at_all: 0.5 } }, { abilities: [] }, "x");
+      return o.axes.anything_at_all === 0.5 && o.axesDropped.length === 0; })()
+    && /spectrumIds: \(CONTENT\.spectrums\?\.spectrums \|\| \[\]\)/.test(rd("app.js")));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

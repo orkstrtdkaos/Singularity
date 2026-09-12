@@ -141,7 +141,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "1.9.477";
+const APP_VERSION = "1.9.478";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8342,7 +8342,10 @@ async function onFreeform(text) {
   lastPlayerText = text;
   renderPlay(null, { thinking: "Reading your intent…", playerBeat: { label: text } });
   const location = CONTENT.locations[character.currentLocationId];
-  const intent = await parseIntent(text, character, location, fullCatalog());
+  // ⛔ SNG-547 O5: the twelve authored spectrum ids, so a misspelled key is REJECTED rather than stored as an axis nothing reads.
+  // ⚠️ THE LOADED DOC IS THE WHOLE FILE, not the array — `CONTENT.spectrums.spectrums` is the list, and reading the envelope hands
+  // the whitelist zero ids, which silently turns the check off. Measured before wiring it rather than after.
+  const intent = await parseIntent(text, character, location, fullCatalog(), { spectrumIds: (CONTENT.spectrums?.spectrums || []).map(s => s && s.id).filter(Boolean) });
   if (intent.feasible === false) {
     renderPlay(character.activeScene?.lastTurn || null, { aside: intent.infeasibleReason || "That isn't possible here." });
     return;

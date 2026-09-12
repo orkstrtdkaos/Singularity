@@ -42,9 +42,27 @@ export function resolveInventoryItem(character, incoming, catalog = {}) {
   const exact = inv.find(m => m.name.toLowerCase() === name.toLowerCase() || (m.customName || "").toLowerCase() === name.toLowerCase());
   if (exact) return exact;
   // then fuzzy against name + customName + aliases (drifted phrasings)
+  // ⛔ SNG-547 (Aevi's O4) — AND THE HEAD OF A COMPOUND NAME IS A NAME. A spear the fiction named in a forge ended up carrying
+  // `customName: "Memory — The Dual Spear"`, and a player typing the one word the story actually gave it — *Memory* — resolved to
+  // NOTHING, because every match here wanted the whole string. ⚠️ The head is the part a person says: a name before its em-dash,
+  // colon or comma, and a parenthetical gloss dropped ("Waymarker (father's)" → "Waymarker"). Exact matching over MORE names,
+  // which is her ruling — "do not put fuzzy matching in the model… give it the aliases and let it match exactly" — applied to the
+  // engine's own resolver as well.
+  const heads = (m) => [m.customName, m.name, ...(m.aliases || [])].filter(Boolean).flatMap(s => {
+    const t = String(s);
+    const out = [t];
+    const head = t.split(/\s+[—–-]\s+|[:,]/)[0].trim();
+    if (head && head.length >= 3 && head !== t) out.push(head);
+    const bare = t.replace(/\s*\([^)]*\)\s*/g, " ").replace(/\s+/g, " ").trim();
+    if (bare && bare !== t) out.push(bare);
+    return out;
+  });
+  const q = name.toLowerCase();
+  const byHead = inv.find(m => heads(m).some(h => h.toLowerCase() === q));
+  if (byHead) return byHead;
   return resolveByName(name, inv, {
     getLabel: m => m.name,
-    getAliases: m => [m.customName, ...(m.aliases || [])].filter(Boolean)
+    getAliases: m => heads(m)
   });
 }
 
@@ -258,9 +276,12 @@ export function nameItem(character, originalName, customName) {
   return true;
 }
 
+/** ⛔ SNG-547: `findItem` is what every GM item op resolves through, and it wanted the WHOLE name — so an op naming the spear
+ *  *Memory* could not find the spear called "Memory — The Dual Spear". It shares one resolver with the player's own typing now;
+ *  there is no reason those two should ever disagree about what a thing is called. */
 export function findItem(character, name) {
-  const q = String(name).toLowerCase();
-  return (character.inventory || []).find(m => m.name.toLowerCase() === q || (m.customName || "").toLowerCase() === q) || null;
+  if (!name) return null;
+  return resolveInventoryItem(character, { name: String(name) });
 }
 
 export function displayName(item) {
@@ -332,6 +353,16 @@ export function applyItemUpdates(character, ops = [], opts = {}) {
     const before = { description: it.description || "", evoStage: it.evoStage || 0 };
     if (op.description != null) { it.description = smartClamp(String(op.description), 400); changed.push("description"); } // SNG-152
     if (op.customName != null && String(op.customName).trim()) { it.customName = String(op.customName).slice(0, 60); changed.push("name"); }
+    // ⛔ SNG-547 (Aevi's O3): "When the fiction names an object, the object's record takes the name — or takes it AS AN ALIAS,
+    // which is safer and loses nothing." A poetic or uncertain name should not overwrite what a thing is called, and the alias is
+    // read by `resolveInventoryItem` and now by the intent parser — so a player can call a thing what they call it.
+    // ⚠️ ADDED, NEVER REPLACED, and capped the way `resolveInventoryItem` already caps its own alias list.
+    if (Array.isArray(op.aliases) && op.aliases.length) {
+      const add = op.aliases.map(a => String(a || "").trim().slice(0, 60)).filter(Boolean);
+      const have = new Set([it.name, it.customName, ...(it.aliases || [])].filter(Boolean).map(s => s.toLowerCase()));
+      const fresh = add.filter(a => !have.has(a.toLowerCase()));
+      if (fresh.length) { it.aliases = [...(it.aliases || []), ...fresh].slice(-6); changed.push("aliases"); }
+    }
     if (op.provenance != null) { it.provenance = smartClamp(String(op.provenance), 160); changed.push("provenance"); } // SNG-152
     if (Array.isArray(op.bonusTags)) { it.bonusTags = op.bonusTags.map(t => String(t).slice(0, 24)).slice(0, 4); changed.push("tags"); }
     if (op.addUse && op.addUse.label) { it.uses = [...(it.uses || []), { label: String(op.addUse.label).slice(0, 40), prompt: String(op.addUse.prompt || op.addUse.label).slice(0, 160) }].slice(-5); changed.push("use"); }

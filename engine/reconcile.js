@@ -362,6 +362,28 @@ export const CHARACTER_STEPS = [
     }
   },
   {
+    version: 57, id: "a-word-that-held", playerFacing: true,
+    // ✅ SNG-547 (Aevi) — THE NAME NEVER WROTE BACK, and it is the saddest defect in her report. `deeds[6]` on this save:
+    //   "Named the repaired death-bound spear Memory in Pell's forge at dawn — a word that held."
+    // ⛔ AND THE RECORD STILL READ `Assembled Mid-Weight Spear`. The name is in his form, his deeds, his codex, four established
+    // facts and the place memory of the kill — everywhere except the one field the parser reads. So he typed "the Runic Spear
+    // Memory" and was told he owns no such thing, in the flat voice of a system that had not looked.
+    // ⛑ THE WRITER IS THE REAL FIX (`itemUpdates.customName`, now a MUST in the contract, with `aliases` as its safer form); this
+    // pays the one already stranded. ⚠️ ONLY IF IT IS STILL UNNAMED — a name the player has since given wins over this repair.
+    apply: (c) => {
+      if (c?.id !== "char-mrhs8286") return {};
+      const said = (c.deeds || []).some(d => /Named the repaired death-bound spear Memory/i.test(String(d?.description || "")));
+      if (!said) return {};
+      const it = (c.inventory || []).find(i => i && /assembled mid-weight spear/i.test(String(i.name || "")));
+      if (!it || it.customName) return {};
+      it.customName = "Memory";
+      const have = new Set([it.name, ...(it.aliases || [])].filter(Boolean).map(s => s.toLowerCase()));
+      const add = ["Memory", "the Runic Spear Memory", "the death-bound spear"].filter(a => !have.has(a.toLowerCase()));
+      if (add.length) it.aliases = [...(it.aliases || []), ...add].slice(-6);
+      return { notes: ["The spear answers to Memory again — the name you gave it in Pell's forge is on the record now, not only in the telling of it."] };
+    }
+  },
+  {
     version: 1, id: "codex-entity-merge", playerFacing: true,
     // SNG-019's one-shot repair for pre-fragmented saves: collapse duplicate codex
     // topics into their primary nodes. High-confidence auto-merge only.

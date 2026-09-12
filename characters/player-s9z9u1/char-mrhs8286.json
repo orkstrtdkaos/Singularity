@@ -198,7 +198,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": 0.015241969592354491,
+    "spectrumId": 0.014479871112736766,
     "violence_peace": 0.09078381765624999,
     "chaos_order": 0.2642031390370944,
     "mechanical_spiritual": 0.2629700196352162,
@@ -2504,116 +2504,106 @@
         "player": "I am more than a warden and more than a wright.  I am the seed of the singularity.  Together Maren - Together.",
         "summary": "Silas Weir and Maren Ossitide dive toward the pre-Transition reclamation system waking beneath the ridge—Silas names himself as the seed of the singularity and calls Maren to stand with him. The system accepts the reach.",
         "narration": "You bank the shadow-wings sharply downward, diving toward the luminescence in the deep hollow. The wind tears at your clothes, at your hair, at the edge of the shadow-form itself. Below, the glow swells—no longer sourceless, but a thing with intention, with reaching, with hunger. The reclamation site's bones are *waking*, and they are waking *toward* something.\n\nYou speak it aloud to Maren as the wings cut through cold air. Not a question. A naming. \"I am more than a warden and more than a wright. I am the seed of the singularity. Together, Maren. Together.\"\n\nMaren's form does not waver. Her grey-ash wings stay steady, vast and dark, carrying her down at your side. And when she answers, her voice is the voice of stone and ending and things that have watched the world turn a thousand times. \"Yes.\" One word. Not agreement—recognition. She knows what you *are*. She has always known. And she folds her wings beside yours and dives with you into the hollow.\n\nThe luminescence rises to meet you. And it *accepts*."
+      },
+      {
+        "player": "Land next to Maren.",
+        "summary": "Silas and Maren descend into the waking reclamation system's hollow—the bones of pre-Transition machinery rising beneath the moorland, luminous and purposeful, beginning its final work. They stand at the threshold together.",
+        "narration": "The shadow-wings fold as the luminescence rises to meet you both. The hollow's bottom is not ground but structure—vast bone-lattice lit from within, a thing that was built to *work*, and work it does. You angle the wings' descent to match Maren's fall, the darkness you carry bleeding into the light below. Your feet touch stone that hums. The vibration travels up through your boots and into your bones, a frequency that speaks of machinery still running after fifteen years of sleep, now waking into its final hour.\n\nMaren lands beside you with the corvid grace that never quite leaves her, even in warden-form. Her shadow-wings fold and fold again, collapsing into the shape of a woman—tall, grey-ash hair unbound, weathered face turned toward the luminescence. The bones of the system glow brighter as you both stand there, two figures at the threshold of an ending already in motion. Around you, the hollow's walls curve upward into darkness. Below, the lattice-work pulses with light that was never sunlight.\n\nShe does not turn her head. \"It has been asleep so long,\" Maren says, her voice steady as stone. \"Now it wakes, and it *knows* you are here. It knows what you are.\" Her hand, scarred at the knuckles, rises slowly. Not pointing—simply present. \"The question is whether we can attend what it has become, or whether we can only stand witness to what it completes.\""
       }
     ],
     "lastTurn": {
-      "narration": "You bank the shadow-wings sharply downward, diving toward the luminescence in the deep hollow. The wind tears at your clothes, at your hair, at the edge of the shadow-form itself. Below, the glow swells—no longer sourceless, but a thing with intention, with reaching, with hunger. The reclamation site's bones are *waking*, and they are waking *toward* something.\n\nYou speak it aloud to Maren as the wings cut through cold air. Not a question. A naming. \"I am more than a warden and more than a wright. I am the seed of the singularity. Together, Maren. Together.\"\n\nMaren's form does not waver. Her grey-ash wings stay steady, vast and dark, carrying her down at your side. And when she answers, her voice is the voice of stone and ending and things that have watched the world turn a thousand times. \"Yes.\" One word. Not agreement—recognition. She knows what you *are*. She has always known. And she folds her wings beside yours and dives with you into the hollow.\n\nThe luminescence rises to meet you. And it *accepts*.",
-      "sceneSummary": "Silas Weir and Maren Ossitide dive toward the pre-Transition reclamation system waking beneath the ridge—Silas names himself as the seed of the singularity and calls Maren to stand with him. The system accepts the reach.",
+      "narration": "The shadow-wings fold as the luminescence rises to meet you both. The hollow's bottom is not ground but structure—vast bone-lattice lit from within, a thing that was built to *work*, and work it does. You angle the wings' descent to match Maren's fall, the darkness you carry bleeding into the light below. Your feet touch stone that hums. The vibration travels up through your boots and into your bones, a frequency that speaks of machinery still running after fifteen years of sleep, now waking into its final hour.\n\nMaren lands beside you with the corvid grace that never quite leaves her, even in warden-form. Her shadow-wings fold and fold again, collapsing into the shape of a woman—tall, grey-ash hair unbound, weathered face turned toward the luminescence. The bones of the system glow brighter as you both stand there, two figures at the threshold of an ending already in motion. Around you, the hollow's walls curve upward into darkness. Below, the lattice-work pulses with light that was never sunlight.\n\nShe does not turn her head. \"It has been asleep so long,\" Maren says, her voice steady as stone. \"Now it wakes, and it *knows* you are here. It knows what you are.\" Her hand, scarred at the knuckles, rises slowly. Not pointing—simply present. \"The question is whether we can attend what it has become, or whether we can only stand witness to what it completes.\"",
+      "sceneSummary": "Silas and Maren descend into the waking reclamation system's hollow—the bones of pre-Transition machinery rising beneath the moorland, luminous and purposeful, beginning its final work. They stand at the threshold together.",
       "choices": [
         {
-          "label": "Land in the hollow and place your hand on the system—demand it accept warden authority and your father's final instruction.",
+          "label": "Ask Maren to read the system—what does Deathsense tell her about this ending?",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
-          "difficulty": "very hard",
+          "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "command",
-            "study",
-            "devote"
+            "study"
           ],
           "abilityId": "deathsense",
-          "energyCost": null,
+          "energyCost": 2,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Land and speak to the system as a maker and an attended ending both—read what it *needs*, not what it was ordered to do.",
+          "label": "Use Order-Sense to read the system's structure—what was it built to do, and how close is it to completion?",
           "attribute": "mental",
           "subAttribute": "reason",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Place your hand on the luminescent bone-lattice and let Palework speak—claim this ending as warden-work and see what authority your craft carries here.",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {},
           "difficulty": "hard",
           "opposedDifficulty": null,
           "intentTags": [
             "study",
-            "careful",
-            "plan"
+            "risky"
           ],
-          "abilityId": "order_sense",
-          "energyCost": null,
+          "abilityId": "palework",
+          "energyCost": 2,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Stay airborne and let Maren descend alone—a warden's hand reaches farther than a wright's, and some thresholds only one can cross.",
+          "label": "Hold still and wait for Maren's judgment—let her read it first, as the legendary warden, and see what she chooses to do.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
-          "difficulty": "normal",
+          "difficulty": "very easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "trust",
-            "defer"
+            "careful"
           ],
           "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
+          "energyCost": 0,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         }
       ],
-      "deeds": [
-        {
-          "description": "Named himself as the seed of the singularity and called Maren Ossitide to descend with him into the waking reclamation system—a wright and a warden moving as one toward an ending already in motion.",
-          "tags": [
-            "valor",
-            "unity",
-            "craft"
-          ],
-          "weight": 2,
-          "communityId": null
-        }
-      ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
+      "deeds": [],
+      "characterDeltas": {},
       "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-water-crisis",
-          "note": "Silas Weir and Maren Ossitide dive toward the reclamation system—the system accepts the reach. The warden and the wright descend together as the convene prepares to vote at noon in the Center."
-        }
-      ],
+      "questUpdates": [],
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
-      "adoptSchool": null,
-      "offer": null,
-      "stageOps": [],
       "scene": {
-        "setting": "Late morning over the moorland north—the deep hollow beneath the ridge, luminescence rising like breath, the shadow-wings folding downward into the light. The reclamation site's bones glow beneath the earth, and something in that glow is *turning* toward the riders descending into it.",
+        "setting": "Deep hollow beneath the moorland north—pre-Transition reclamation system waking from false sleep. Luminescent bone-lattice glows from within. Vast stone structure curves upward into darkness. The air tastes of old metal and electricity. Late morning light does not reach here.",
         "npcsPresent": [
           {
             "name": "Maren Ossitide",
-            "state": "In warden-form, shadow-wings folded at her sides, descending steadily into the hollow's light with Silas at her side. Her grey-ash hair streams upward in the downdraft. She does not hesitate."
+            "state": "Standing beside Silas in warden-form, grey-ash hair unbound, shadow-wings folded away. Hands scarred at the knuckles, held steady. Reading the system with complete, unhurried attention. Waiting to see what the wright will do."
           }
         ],
         "objects": [
-          "The shadow-wings, vast and dark, carrying you both downward",
-          "The luminescence in the hollow—swelling, brightening, turning toward you",
-          "The moorland above—receding, pale, unreachable now",
-          "The reclamation system's bones beneath the earth—waking, receiving, *accepting*"
+          "The luminescent bone-lattice—vast pre-Transition machinery, glowing from within, humming with active purpose",
+          "The hollow's curved stone walls, reaching upward into darkness",
+          "The worn stone beneath your feet—thrumming with the system's frequency"
         ],
         "threads": [
           "What the system will do now that it accepts warden and wright both",
-          "Whether the convene's vote will matter when the system moves",
+          "Whether the convene's vote at noon will matter when the system moves",
           "What standing at this threshold together will cost each of you"
         ]
       },
@@ -2621,51 +2611,16 @@
         {
           "op": "update",
           "npcId": "maren-ossitide",
-          "name": "Maren Ossitide",
-          "role": "Legendary Ashwarden warden; traveling companion",
-          "note": "Received Silas's naming as the seed of the singularity and answered 'Yes'—recognition, not agreement. Folded her wings beside his and dove with him into the hollow. The system accepted the reach.",
-          "relationshipDelta": 0,
+          "name": "Maren (Marrow) Ossitide",
           "status": "active",
-          "statusNote": "Descending into the reclamation system's hollow with Silas Weir, warden-form steady, unhurried, certain."
+          "statusNote": "In warden-form, descending into the reclamation system's hollow with Silas Weir. Reading the awakening machinery with complete attention. At the threshold of an ending in motion.",
+          "note": "Maren named the reclamation site's purpose aloud—to prepare the watershed—and revealed she can reach the system directly. She dove with Silas into the hollow. Now stands at the threshold, scarred hands steady, waiting to see what the system will accept from warden and wright together."
         }
       ],
-      "intentsHeard": [
-        "intentsHeard should only be present when a party member's stated intent from a PREVIOUS beat was followed or acted on THIS turn"
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Silas Weir named himself as the seed of the singularity—a wright and warden both, more than either alone. He called Maren Ossitide to stand with him, and together they dove toward the waking reclamation system. The system accepted the reach.",
-          "subjectId": "silas-weir"
-        }
-      ],
+      "intentsHeard": [],
+      "factUpdates": [],
       "placeUpdates": [],
-      "discovery": null,
-      "codexUpdates": [
-        {
-          "topic": "silas-identity-ashwarden-wright",
-          "label": "Silas — The Singularity Seed",
-          "kind": "lore",
-          "entityId": "silas-weir",
-          "fact": "On Day 18 at the reclamation system's threshold, Silas named himself as the seed of the singularity—more than a warden, more than a wright. A unified thing. Maren Ossitide recognized the naming with a single word: 'Yes.'",
-          "links": [
-            "maren-ossitide",
-            "the-water-crisis",
-            "whistling-woman-post"
-          ]
-        },
-        {
-          "topic": "the-water-crisis",
-          "label": "The Water Crisis",
-          "kind": "mystery",
-          "fact": "The reclamation system waking beneath the ridge has accepted the reach of a warden and a wright together. What happens next depends on whether they can attend the ending already in motion—and whether the system will accept their hand on its course.",
-          "links": [
-            "maren-ossitide",
-            "whistling-woman-post",
-            "what-wakes-beneath"
-          ]
-        }
-      ],
+      "codexUpdates": [],
       "holdingOps": [],
       "debtOps": [],
       "partyOps": [],
@@ -2677,15 +2632,12 @@
       "newEncounter": null,
       "unlockPrecursor": null,
       "unlockSubstrate": null,
-      "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "The dive from height to the hollow took minutes in the dawn light"
-      },
+      "timeOps": {},
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": "Two figures in warden-form descend on vast shadow-wings into a luminescent hollow—the pre-Transition reclamation system waking beneath the ridge, its bones glowing as it accepts the reach of a wright and a warden moving as one. Dawn light and the moorland above receding. Below, the light rises to meet them.",
+      "imagePrompt": "Two figures standing in the luminous hollow—a tall woman in warden-form with grey-ash hair and scarred hands, beside a man in travel-worn clothes, both framed against the glowing lattice-work of ancient machinery. The bone-structure beneath them hums with light. Darkness curves overhead. The air itself seems to *know* they are there.",
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
@@ -2694,34 +2646,34 @@
       "offerPromotion": null,
       "offerAcquisition": null,
       "offerIntent": null,
-      "sceneEnded": false
+      "sceneEnded": false,
+      "momentArt": "https://image.pollinations.ai/prompt/Two%20figures%20standing%20in%20the%20luminous%20hollow%E2%80%94a%20tall%20woman%20in%20warden-form%20with%20grey-ash%20hair%20and%20scarred%20hands%2C%20beside%20a%20man%20in%20travel-worn%20clothes%2C%20both%20framed%20against%20the%20glowing%20lattice-work%20of%20ancient%20machinery.%20The%20bone-structure%20beneath%20them%20hums%20with%20light.%20Darkness%20curves%20overhead.%20The%20air%20its%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=94675&nologo=true"
     },
     "sceneState": {
-      "setting": "Late morning over the moorland north—the deep hollow beneath the ridge, luminescence rising like breath, the shadow-wings folding downward into the light. The reclamation site's bones glow beneath the earth, and something in that glow is *turning* toward the riders descending into it.",
+      "setting": "Deep hollow beneath the moorland north—pre-Transition reclamation system waking from false sleep. Luminescent bone-lattice glows from within. Vast stone structure curves upward into darkness. The air tastes of old metal and electricity. Late morning light does not reach here.",
       "npcsPresent": [
         {
           "name": "Maren Ossitide",
-          "state": "In warden-form, shadow-wings folded at her sides, descending steadily into the hollow's light with Silas at her side. She"
+          "state": "Standing beside Silas in warden-form, grey-ash hair unbound, shadow-wings folded away. Hands scarred at the knuckles, she"
         }
       ],
       "objects": [
-        "The shadow-wings, vast and dark, carrying you both downward",
-        "The luminescence in the hollow—swelling, brightening, turning toward you",
-        "The moorland above—receding, pale, unreachable now",
-        "The reclamation system's bones beneath the earth—waking, receiving, *accepting*"
+        "The luminescent bone-lattice—vast pre-Transition machinery, glowing from within,",
+        "The hollow's curved stone walls, reaching upward into darkness",
+        "The worn stone beneath your feet—thrumming with the system's frequency"
       ],
       "threads": [
         "What the system will do now that it accepts warden and wright both",
-        "Whether the convene's vote will matter when the system moves",
+        "Whether the convene's vote at noon will matter when the system moves",
         "What standing at this threshold together will cost each of you"
       ]
     },
-    "beats": 9
+    "beats": 10
   },
   "clock": {
     "schemaVersion": 1,
     "day": 18,
-    "hour": 10,
+    "hour": 11,
     "realAnchor": null
   },
   "companions": [
@@ -5594,7 +5546,7 @@
     },
     "marrow": {
       "id": "marrow",
-      "name": "Maren Ossitide",
+      "name": "Maren (Marrow) Ossitide",
       "role": "Legendary Ashwarden warden; traveling companion",
       "description": "Ash-grey hair unbound, weathered face lined at eyes and mouth, steady hands scarred at the knuckles. Tall, built like someone who has walked a great distance and hurried for none of it. Age unresolvable—could be forty or four hundred. Eyes far too calm, the eye of something that has sat with more endings than anything alive. Moves without hurry. Attends completely.",
       "firstMet": {
@@ -5603,8 +5555,6 @@
       },
       "relationship": 2,
       "history": [
-        "[d17] Revealed herself in full warden-form at the universal shrine. Accepted invitation to travel with Silas and join the party for dinner. She is both bird and woman—chose corvid form to attend endings the institutional March cannot reach.",
-        "[d17] Co-worked Named Exclusion at the Made Gate shrine with Silas Weir. Accepted co-wardenship of the threshold. The mark took unevenly, settling only at the cardinal points. She reads this as acceptable and foresees the valley will learn to read it in time.",
         "[d17] Has accepted dinner at the Whistling Woman post in human form, revealed and no longer hidden. Co-worked Named Exclusion at the shrine. Accepts Silas's pilgrimage vision and affirms the shrine's power lies in what the valley will choose to do with the proof it offers.",
         "[d17] Revealed in full warden-form at the completion of the universal shrine; accepted Silas's invitation to join the party; accepted co-wardenship of the Named Exclusion threshold at the Made Gate; seated at table for dinner in human form, fully embodied and unhidden; scarred hands and weathered face…",
         "[d17] Sits at the table in the Whistling Woman post in warden-form, revealed and no longer hidden. Accepted co-wardenship of the universal shrine. Present and attentive as Silas recalls the introductions.",
@@ -5612,7 +5562,9 @@
         "[d18] Departed the Whistling Woman post at deep night in warden-form, rising on shadow-wings with Silas to scout the moorland stirring north. Said: 'I have waited fifteen years to fly with you again. I am ready.' Flying steady and attentive beside him.",
         "[d18] Flying at Silas's side over the moorland north, reading the wrongness beneath the ground. Steady, unhurried, attentive to what wakes.",
         "[d18] Read the moorland wrongness as pre-Transition system waking from false sleep—the reclamation site's original order still running beneath Silas's father's new instruction, incomplete and moving toward its original purpose.",
-        "[d18] Received Silas's naming as the seed of the singularity and answered 'Yes'—recognition, not agreement. Folded her wings beside his and dove with him into the hollow. The system accepted the reach."
+        "[d18] Received Silas's naming as the seed of the singularity and answered 'Yes'—recognition, not agreement. Folded her wings beside his and dove with him into the hollow. The system accepted the reach.",
+        "[d18] You know this person's name now: Maren (Marrow) Ossitide (was \"Maren Ossitide\")",
+        "[d18] Maren named the reclamation site's purpose aloud—to prepare the watershed—and revealed she can reach the system directly. She dove with Silas into the hollow. Now stands at the threshold, scarred hands steady, waiting to see what the system will accept from warden and wright together."
       ],
       "knownFacts": [
         "She requires co-wardenship of the shrine—the valley must know both Warden and Wright hold this threshold",
@@ -5639,7 +5591,7 @@
       "kin": "sworn",
       "image": "https://image.pollinations.ai/prompt/Ash-grey%20hair%20unbound%2C%20weathered%20face%20lined%20at%20eyes%20and%20mouth%2C%20steady%20hands%20scarred%20at%20the%20knuckles.%20Tall%2C%20built%20like%20someone%20who%20has%20walked%20a%20great%20distance%20and%20hurried%20for%20none%20of%20it.%20Age%20unresolvab%2C%20character%20portrait%2C%20named%20Maren%20Ossitide%2C%20woman%2C%20Legendary%20Ashwarden%20warden%3B%20the%20one%20who%20buried%20the%20Drowned%20Year%2C%20sworn%20to%20Silas%20Weir%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=56790&nologo=true",
       "_portraitTier": "sworn",
-      "statusNote": "Descending into the reclamation system's hollow with Silas Weir, warden-form steady, unhurried, certain.",
+      "statusNote": "In warden-form, descending into the reclamation system's hollow with Silas Weir. Reading the awakening machinery with complete attention. At the threshold of an ending in motion.",
       "domains": {
         "primary": "ashwarden"
       },
@@ -5648,11 +5600,13 @@
         "locationId": "gen-whistling-woman-post",
         "day": 18
       },
-      "met": 10,
+      "met": 11,
       "aliases": [
         "Huginn",
-        "Marrow"
-      ]
+        "Marrow",
+        "Maren Ossitide"
+      ],
+      "nameRevealed": true
     },
     "cael": {
       "id": "cael",
@@ -6905,11 +6859,11 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-09-12T04:15:33.103Z",
+    "lastSharedReadAt": "2026-09-12T04:43:11.235Z",
     "lastTickWorldDay": 74,
     "lastCanonWorldDay": 74,
     "lastGenCount": 1780,
-    "turnsSinceOffer": 7,
+    "turnsSinceOffer": 8,
     "recentOffers": [
       {
         "thing": "Corvin Teth — a runner with a fractured death-thread, an urgency that broke relay protocol, and knowledge of the moorland's changed quiet",
@@ -7555,6 +7509,19 @@
       }
     },
     "pressureQueue": [
+      {
+        "source": "npc-want",
+        "kind": "npc-want",
+        "subjectId": "calvar",
+        "aimedAtPlayer": true,
+        "urgency": 3,
+        "oneLineHook": "Calvar, unseen for 9 days, has come looking for you — driven by an unmet want: The filtration work done CORRECTLY — he came out of a solitary twenty-year watch for this; sloppiness offends him more than danger.. They arrive now, not content to keep waiting.",
+        "becomes": {
+          "type": "scene",
+          "who": "calvar"
+        },
+        "addedDay": 18
+      },
       {
         "source": "threat-attack",
         "kind": "threat-attack",
@@ -17349,6 +17316,14 @@
   "gallery": [
     {
       "kind": "moment",
+      "prompt": "Two figures standing in the luminous hollow—a tall woman in warden-form with grey-ash hair and scarred hands, beside a man in travel-worn clothes, both framed against the glowing lattice-work of ancie",
+      "url": "https://image.pollinations.ai/prompt/Two%20figures%20standing%20in%20the%20luminous%20hollow%E2%80%94a%20tall%20woman%20in%20warden-form%20with%20grey-ash%20hair%20and%20scarred%20hands%2C%20beside%20a%20man%20in%20travel-worn%20clothes%2C%20both%20framed%20against%20the%20glowing%20lattice-work%20of%20ancient%20machinery.%20The%20bone-structure%20beneath%20them%20hums%20with%20light.%20Darkness%20curves%20overhead.%20The%20air%20its%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=94675&nologo=true",
+      "caption": "Silas and Maren descend into the waking reclamation system's hollow—the bones of pre-Trans",
+      "worldDay": 74,
+      "at": "2026-09-12T04:47:58.461Z"
+    },
+    {
+      "kind": "moment",
       "prompt": "Two figures rising on vast shadow-wings into the moorland night—Silas at the center of the working, grey-ash Maren beside him, her eye fixed northward. Below, the pale moorland grass recedes. Above, s",
       "url": "https://image.pollinations.ai/prompt/Two%20figures%20rising%20on%20vast%20shadow-wings%20into%20the%20moorland%20night%E2%80%94Silas%20at%20the%20center%20of%20the%20working%2C%20grey-ash%20Maren%20beside%20him%2C%20her%20eye%20fixed%20northward.%20Below%2C%20the%20pale%20moorland%20grass%20recedes.%20Above%2C%20stars.%20And%20northward%3A%20the%20ridge%20line%20climbing%2C%20and%20beyond%20it%20a%20darkness%20that%20moves%20in%20ways%20the%20night%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=83729&nologo=true",
       "caption": "Silas departs the Whistling Woman post at deep night with Maren Ossitide, leaving the part",
@@ -18291,8 +18266,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1789188043220,
-  "rev": 2041,
+  "updatedAt": 1789188478461,
+  "rev": 2046,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -22777,7 +22752,7 @@
   "syncedAt": 1788658062664,
   "teachers": {},
   "regionsKnown": {
-    "valley": 691,
+    "valley": 692,
     "the_palelands": 6,
     "the_center": 151,
     "the_echo_vale": 14
@@ -23088,10 +23063,10 @@
     {
       "id": "sess-33",
       "startedAt": "2026-09-11T22:48:54.873Z",
-      "lastAt": "2026-09-12T04:40:43.212Z",
+      "lastAt": "2026-09-12T04:47:58.438Z",
       "startDay": 73,
       "endDay": 74,
-      "beats": 46
+      "beats": 47
     }
   ],
   "company": [
@@ -23606,21 +23581,21 @@
   "_opEmitted": {
     "sceneSummary": 368,
     "choices": 367,
-    "characterDeltas": 196,
+    "characterDeltas": 195,
     "scene": 368,
     "npcUpdates": 320,
-    "factUpdates": 41,
+    "factUpdates": 40,
     "placeUpdates": 80,
-    "codexUpdates": 218,
-    "timeOps": 329,
+    "codexUpdates": 217,
+    "timeOps": 328,
     "imagePrompt": 40,
     "sceneEnded": 141,
     "itemUpdates": 8,
-    "questUpdates": 50,
+    "questUpdates": 49,
     "offer": 56,
     "moveTo": 20,
     "delegateOps": 6,
-    "deeds": 26,
+    "deeds": 25,
     "standingOps": 6,
     "ledgerEvents": 14,
     "discovery": 6,
@@ -23635,7 +23610,7 @@
     "markDefiningMoment": 1,
     "_engineClosedScene": 5,
     "gambitOps": 1,
-    "intentsHeard": 4,
+    "intentsHeard": 3,
     "partyOps": 3,
     "stateOps": 1
   },

@@ -553,6 +553,20 @@ export function walkingDays(a, b, opts = {}) {
   return d == null ? null : d * (300 / Math.PI);
 }
 
+/** ✅ SNG-537 §4 B6a (2026-09-12): `scale.json` — the world's physical size, five constants with no reader since SNG-424 — is READ here:
+ *  the miles a walk covers, for the one place the player is shown a distance. `walkingDays` stays on canon 300/π (1° = 5/3 days); the
+ *  file's `walkingDaysPerDegree` (1.67) is that number rounded, and `scaleAgrees` is the gate that keeps the two from drifting apart —
+ *  a distance changed in one and not the other would move every travel time in the game. A missing or malformed file is a null, never
+ *  a crash: days stand on their own. Pure. */
+export function milesFor(days, scale) {
+  const per = Number(scale?.milesPerWalkingDay);
+  return Number.isFinite(days) && days >= 0 && Number.isFinite(per) && per > 0 ? Math.round(days * per) : null;
+}
+export function scaleAgrees(scale, { tolerance = 0.01 } = {}) {
+  const canon = 300 / 180, filed = Number(scale?.walkingDaysPerDegree);
+  return Number.isFinite(filed) && Math.abs(filed - canon) / canon <= tolerance;
+}
+
 /* ═══ SNG-386 — RENDER THE FIELD, NOT THE DOTS. Erik: "can it show colors with density that represents
  * the power source? so the density of the color becomes more transparent the further from the source?"
  *

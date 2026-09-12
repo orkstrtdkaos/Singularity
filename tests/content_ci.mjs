@@ -646,7 +646,8 @@ for (const pack of PACKS) {
   // ⛔ SEED DRIFT — genparams.pts proved to be a byte-exact derivation of canon worldPos (118/118), so
   // the pipeline derives seeds itself and this gate fails if the cache and canon ever disagree.
   const seedBad = GW.verifySeeds(canon);
-  check("SNG-391: genparams seeds are the canon derivation — a moved worldPos without a rebuild fails here",
+  // §183 (2026-09-12): this label claimed a moved seat fails here; verifySeeds checks the pts COUNT. A moved seat shows in seedDrift and fails the determinism gate below.
+  check("SNG-391: genparams.pts is the authored 118 — the LAND did not change size (a moved seat shows in seedDrift and fails the determinism gate, §183)",
     seedBad.length === 0, seedBad.slice(0, 4).join(" · "));
 
   const built = GW.buildWorld(canon);

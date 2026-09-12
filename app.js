@@ -45,7 +45,7 @@ import { groundForDecl, groundTag, substrateVerdict, locationDensity, carriedSub
 import { sceneImage, itemImage, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
 import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, regionExtent, bendRoad, roadNetwork, clipToFrame } from "./engine/worldglobe.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
-import { walkingDays, worldPosForGenerated, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
+import { walkingDays, milesFor, worldPosForGenerated, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal, domainOf, domainOfTradition, sectOf } from "./engine/traditions.js";
 import { sheetFor as personSheetFor, battleSkillsFor } from "./engine/npcsheet.js";  // the person-keyed sheet
@@ -130,7 +130,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.461";
+const APP_VERSION = "1.9.462";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -559,6 +559,10 @@ let sceneState = null;   // authoritative scene anchor: setting, npcsPresent, ob
 // §179 (Erik 2026-09-12): a companion whose person is in the registry is shown by the name the story knows them by — "Huginn (Marrow)"
 // is Maren Ossitide once she has said so. A player's rename still wins; the authored name is last.
 const compName = (c) => character.companionNames?.[c.id] || character.npcRegistry?.[c.id]?.name || c.name;
+// ✅ SNG-537 §4 B6a (2026-09-12): the world's physical size — content/packs/core/world/scale.json, five constants with no reader since SNG-424 —
+// loaded once for the miles on the travel card (milesFor). A missing file leaves distances in days alone.
+let WORLD_SCALE = null;
+fetch("content/packs/core/world/scale.json?v=" + APP_VERSION).then((r) => (r.ok ? r.json() : null)).then((s) => { WORLD_SCALE = s && typeof s === "object" ? s : null; }).catch(() => { WORLD_SCALE = null; });
 let busy = false;
 let _discoverAutoRan = false; // SNG-087: auto-run cross-device discovery at most once per session
 let examinedItem = null; // name of the item expanded in the sidebar
@@ -9917,7 +9921,8 @@ function renderMap(selectedId = null) {
             // scale makes the number mean something — a neighbouring Reach is weeks and your
             // antipode is most of a year, which is what turns waygates into infrastructure.
             const days = walkingDays(CONTENT.locations[character.currentLocationId], l);
-            return days == null ? "" : `<div class="hint" style="margin-top:4px">${days < 1 ? "less than a day" : `about ${Math.round(days)} day${Math.round(days) === 1 ? "" : "s"}`} on foot — ${days > 40 ? "a waygate is the difference between a journey and a life" : "walkable, if you have the season for it"}.</div>`;
+            const mi = milesFor(days, WORLD_SCALE);   // SNG-537 B6a: the first distance the player has ever been shown in a unit
+            return days == null ? "" : `<div class="hint" style="margin-top:4px">${days < 1 ? "less than a day" : `about ${Math.round(days)} day${Math.round(days) === 1 ? "" : "s"}`}${mi ? ` (about ${mi} miles)` : ""} on foot — ${days > 40 ? "a waygate is the difference between a journey and a life" : "walkable, if you have the season for it"}.</div>`;
           })()}`
         + `<button class="opt" id="map-lookinside" data-inside="${esc(l.id)}" style="margin:8px 0 0 6px" title="What's within this place">⌂ Look inside</button>`
         : `<div class="hint" style="margin-top:6px">Not directly reachable from ${esc(CONTENT.locations[here]?.name || "here")}${(() => {

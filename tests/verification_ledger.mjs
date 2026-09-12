@@ -376,7 +376,7 @@ const LEDGER = [
   {
     id: "SNG-391", ask: "(Aevi, handoff) the prototype works; the PIPELINE does not exist, and that is the whole ticket — a build step cannot forget to rebuild; I can, and did, repeatedly",
     how: "scripts/world/generate_world.mjs: canon in, terrain out, deterministic; seeds derived from worldPos at build time; nine gates in content_ci fed by one regeneration",
-    gates: ["SNG-391: genparams seeds are the canon derivation — a moved worldPos without a rebuild fails here",
+    gates: ["SNG-391: genparams.pts is the authored 118 — the LAND did not change size (a moved seat shows in seedDrift and fails the determinism gate, §183)",
             "SNG-391: determinism — the regenerated world is byte-identical to the shipped asset",
             "SNG-391: no land-wanting location stands in water",
             "SNG-391: every region seat is on land, and no region lost its seat",

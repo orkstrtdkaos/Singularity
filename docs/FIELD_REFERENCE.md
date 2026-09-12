@@ -379,7 +379,9 @@ The damage families did not, which is why they were dark.**
 - ⛔ **`interiorLayout` ([worldmap.js:169](engine/worldmap.js:169)) places children procedurally on rings** —
   even angular spacing, a second ring past eight. **It never opens `local_layouts.json`**, which holds
   measured river bearings, road mileages, relief and uphill direction.
-- ⚠️ **`scale.json` is an unbuilt feature, not a wrong constant.** I checked for the hardcoded Earth radius
+- ✅ **2026-09-12 (`§183`, SNG-537 B6a): `scale.json` has its reader** — `milesFor` in `worldmap.js`, shown on the travel card as *(about N
+  miles)*, with `scaleAgrees` holding the file's `walkingDaysPerDegree` to canon `300/π` within 1%. The finding as it stood:
+- ⚠️ **`scale.json` was an unbuilt feature, not a wrong constant.** I checked for the hardcoded Earth radius
   its own note warns about — **it is not there**, and neither is any scale bar, mile or km string anywhere
   in the UI. `walkingDays` runs on canon `300/π` and agrees with the file. **The player has never been shown
   a distance in any unit.**

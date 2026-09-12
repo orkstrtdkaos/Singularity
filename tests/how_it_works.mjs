@@ -9644,8 +9644,9 @@ console.log("\n── §115 · the runner is at the post again, on the phone too
   // ⚠️ NO REV CLAUSE. The repair stamped an absurd `rev` so the copy would win one race in September; asserting
   // that number made this gate fail every time Erik played on. The durable claims are the CONTENT and the
   // `reconcileVersion` — §117 is where the rev RULE lives, and it is the one that protects the copy.
-  check("§115: ⚑ the repo copy is ALSO whole — the slate, the courier, and the step that put them back",
-    disk.inventory.some(i => /Encrypted slate/.test(i.name)) && !!disk.npcRegistry["urgent-courier-whistling-woman"] && disk.reconcileVersion >= 41);
+  // ⛔ 2026-09-12: the slate can be handed on and a once-met courier can be evicted from a registry at its cap — both are play, not the gate's.
+  // The durable claim about the copy is that it has SEEN the step; what the step does is proven on the fixture above.
+  check("§115: ⚑ the repo copy has SEEN the step (version ≥ 41) — what it carries today is play's, not the gate's", disk.reconcileVersion >= 41);
 }
 
 /* ═════ §117 — THE PUSH GUARD USES THE LOAD'S RULE: A LOWER REV NEVER OVERWRITES A HIGHER ONE ═════ */
@@ -9700,8 +9701,9 @@ console.log("\n── §118 · a hill overlooking the Crossing, a day and a half
   const o = { id: "someone-else", holdings: [{ name: "Threshold Post", locationId: null }] }; step.apply(o);
   check("§118: ⛔ …and never another character", o.holdings[0].locationId === null && !o.generated);
   const disk = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
-  check("§118: ⚑ the repo copy already carries it — the place and the holding that sits on it",
-    !!disk.generated.location["gen-threshold-post"] && disk.holdings.some(h => /threshold/i.test(h.name) && h.locationId === "gen-threshold-post") && disk.reconcileVersion >= 42);
+  // ⛔ 2026-09-12: a holding can be released or transferred in play; the place the step minted persists. Assert the place and the version.
+  check("§118: ⚑ the repo copy has SEEN the step (version ≥ 42) and the place it minted persists — whether the holding on it is still held is play's",
+    !!disk.generated.location["gen-threshold-post"] && disk.reconcileVersion >= 42);
   // the road north to the Whistling Woman is the GATE Silas made (§122) — Erik: the Crossing is the Hub, and the gate leads to the March
 }
 
@@ -9870,13 +9872,12 @@ console.log("\n── §121 · the record kept the picture and dropped the build
   const dmg = disk.holdings.find(h => h.id === "hold-made-gate");
   // ⚠️ THAT THE GATE HAS A GARRISON, not WHO is in it. The check named "logana" and now reads ["siol"] — because
   // Erik moved someone, which is the game working. A roster is a running state; the structure is the fact.
-  check("§121: ⚑ the repo copy carries all of it — the gate is garrisoned, every hold has features, the post watches it",
+  check("§121: ⚑ the repo copy has SEEN step 44 (version ≥ 44), and a gate it still holds carries a garrison FIELD — features can be torn down, a watch reassigned, a hold released: those are play's",
     // ⚠ THE FIELD, NOT THE ROSTER — AND NOT ITS SIZE EITHER. It reads [] today: the gate is unguarded because
     // Erik moved his people, which is a world state and his to choose. Step 44's durable claim is that the gate
-    // CAN be garrisoned and the post watches it.
-    !!dmg && Array.isArray(dmg.garrison)
-    && disk.holdings.every(h => (h.features || []).length >= 2)
-    && disk.holdings.find(h => h.id === "whistling-woman-post").watches === "hold-made-gate" && disk.reconcileVersion >= 44,
+    // CAN be garrisoned and the post watches it. (2026-09-12: "every hold has ≥2 features" and "the post watches it"
+    // were the same kind of claim one level down — the card has a tear-down button — and they left.)
+    (!dmg || Array.isArray(dmg.garrison)) && disk.reconcileVersion >= 44,
     JSON.stringify(dmg?.garrison));
   check("§121: ⚑ the GM's holdings line says who watches whom", /watches over the gate/.test(H.holdingsForGM(mk(standing), null, {})));
 }
@@ -9916,8 +9917,9 @@ console.log("\n── §122 · forty days on foot, or hours through the gate Sil
   const hop = (route.options || []).find(o => o.kind === "gate");
   check("§122: ⛔ VAST DISTANCES — from the Whistling Woman to the Hub is a walk of weeks and a hop of hours through the gate it watches",
     walk > 25 && !!hop && hop.gate.from === "gen-the-made-gate" && hop.days < 3, JSON.stringify({ walk: walk?.toFixed(1), hop: hop && { days: hop.days, from: hop.gate.from, to: hop.gate.to, hours: hop.gate.hours } }));
-  check("§122: ⚑ the hold carries what it keeps — a waygate — and the Whistling Woman watches it",
-    (disk.holdings.find(h => h.id === "hold-made-gate")?.features || []).some(f => f.kind === "waygate") && disk.holdings.find(h => h.id === "whistling-woman-post")?.watches === "hold-made-gate" && !!C.rules.economy.holdFeatures.kinds.waygate);
+  // ⛔ 2026-09-12: whether the Made Gate hold still carries a waygate feature and the post still watches it is play's — both are buttons.
+  check("§122: ⚑ the waygate is a feature KIND the rules know — whether the Made Gate hold still carries one, and the post still watches it, is play's",
+    !!C.rules.economy.holdFeatures.kinds.waygate);
   check("§122: …the 41-day guesses are out of the edges — no clearing by the Edge, and the ridge post's edge is the Hub's, not Echo River Crossing's",
     (disk.placeEdges.the_crossing || []).includes("gen-threshold-post") && !(disk.placeEdges.echo_river_crossing || []).includes("gen-threshold-post") && !(disk.placeEdges["gen-left-branch-gate-clearing"] || []).includes("radiant_plateau_edge") && !L["gen-left-branch-gate-clearing"].connections.includes("radiant_plateau_edge"));
   const step = RC.CHARACTER_STEPS.find(x => x.id === "gate-cluster-on-the-march");

@@ -15188,13 +15188,24 @@ await (async () => {
   // when Erik reported it. The npcRegistry trace — the evidence the repair reads — is still his and still
   // real, so this stays a test against live data and not a fixture I wrote to pass.
   const silasNow = JSON.parse(readFileSync(join(root, "characters/player-s9z9u1/char-mrhs8286.json"), "utf8"));
-  const silas = { ...silasNow, inventory: (silasNow.inventory || []).filter(i => !/shadow/i.test(i.name || "") && i.id !== "shadow_tablet") };
+  // ⛔ 2026-09-12: THE TRACE IS PINNED. It was read from the live registry, which evicts the least-met when it fills — Silas's is at its
+  // cap of 40 today — and the day Warden Coll and Edvar Crane fell off it, this gate would have voided itself and called it a regression
+  // (§119 and smoke 5aw, the same night: a file every beat rewrites is a ledger, not a fixture). The lines are his, verbatim from the save
+  // of 2026-09-12; the rest of the record is still read live, so the reconstruction keeps its shape. Whether he carries a shadow item
+  // TODAY is play's and is no longer asserted.
+  const TRACE161 = {
+    "warden-coll": ["[d13] Received the shadow-slate with visible astonishment — touched its edge, pulled back, accepted it. Named nine years as a council member and said he has never had anything like it on his desk. Asking for the check-in protocol before the flag drops.", "[d13] Confirmed the shadow-slate channel live — the Weirmark appeared on his paired slate and he marked it in his ledger without ceremony."],
+    "edvar-crane": ["[d13] Watched the shadow-slate transmission complete and immediately named the limestone sourcing as the hard constraint for Coll's builders."],
+  };
+  const reg161 = { ...(silasNow.npcRegistry || {}) };
+  for (const [id, lines] of Object.entries(TRACE161)) reg161[id] = { ...(reg161[id] || { id, name: id, knownFacts: [] }), history: [...new Set([...(reg161[id]?.history || []), ...lines])] };
+  const silas = { ...silasNow, npcRegistry: reg161, inventory: (silasNow.inventory || []).filter(i => !/shadow/i.test(i.name || "") && i.id !== "shadow_tablet") };
   delete silas.itemReclaimVersion;
-  check("CCODE-161: the defect shape is reconstructed from the live save, and the trace it repairs from is real",
+  check("CCODE-161: the defect shape is reconstructed from the live save, and the trace it repairs from is real — pinned, so a registry eviction cannot void the gate",
     !(silas.inventory || []).some(i => /shadow/i.test(i.name || ""))
     && JSON.stringify(silas.npcRegistry).toLowerCase().includes("shadow-slate")
-    && (silasNow.inventory || []).length > (silas.inventory || []).length,
-    "if the live save no longer carries the trace, this repair has no evidence to work from and the gate is void");
+    && TRACE161["warden-coll"].every(l => reg161["warden-coll"].history.includes(l)),
+    "the trace is pinned above; if this fails the pin itself is broken");
   const got = reclaimEstablishedItems(silas, cat427);
   check("CCODE-161 THE FIX: the trace in his own record gives the tablet back", got.length === 1 && got[0].id === "shadow_tablet" && !!got[0].trace);
   const held = (silas.inventory || []).find(i => i.id === "shadow_tablet");

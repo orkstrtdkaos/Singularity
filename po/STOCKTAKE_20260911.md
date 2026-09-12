@@ -142,5 +142,5 @@ action as you do; the ground reaches every roll and says so in one vocabulary; t
 - **B4** — `verification_ledger` red: undiagnosed.
 - **B6a** — SPEC_SNG-537 §4 (movable `worldPos`, mint at authored coordinates, `scale.json` reader): not started.
 - **SNG-538 §5** — Aevi's content pass (ARCHETYPES, tradition_profiles, EXESA, PLAYERS_GUIDE, the tail), and the staleness pass after it.
-- **Tests still reading the live save** — 10 sites remain (6 in how_it_works, 4 in smoke); two were pinned tonight; the rest are derived fixtures or invariants, listed in memory `push-race-with-aevi`. Convert on sight.
+- **Tests reading the live save** — audited 2026-09-12: twelve sites; five asserted state play can undo (§115, §118, §121, §122, CCODE-161) and now assert the copy has SEEN the step and the structure, with CCODE-161's evidence pinned verbatim; the other seven read the save as a derived fixture or assert an invariant (§119 reconciled copy, §123, CCODE-168/271/274 pinned/277/278) and stay.
 - **The Fight Dials page** — stale; nothing in it changed tonight; republish with the next balance round.

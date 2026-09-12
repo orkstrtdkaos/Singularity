@@ -10,7 +10,7 @@ place, person and belief in X–XII is drawn from authored content — , ,
 , the nine companion files and — and where the world has not decided
 something, the guide says so rather than filling it in.
 
-**Last verified: 2026-09-12 · v1.9.463 · 438 crafts · 137 places · 146 people · 9 companions.**
+Last verified: 2026-09-12 · v1.9.463 · 438 crafts · 137 places · 146 people · 9 companions.
 
 Every craft in the game, by domain and sect, is listed in [`SKILLS.md`](SKILLS.md) — what each
 one costs, what it does, and what its three ranks give you.
@@ -34,7 +34,7 @@ Three things are always true:**
 
 ---
 
-# PART I½ · WHERE EVERYTHING IS
+# Part I½ · Where everything is
 
 Read this once and you will never hunt for a button again.** **Singularity does not have menus in
 the usual sense.** It has **places you go, and each one answers a different question.
@@ -237,7 +237,7 @@ A craft is a thing you can do.** Not a spell list — a practice. **387 of them.
 
 You learn a craft at **rank 1** and grow into **2** and **3**.
 
-**RANKS ARE ADDITIVE** — you never lose a lower rank's use. You do not learn to burn down a hall and
+**Ranks are additive** — you never lose a lower rank's use. You do not learn to burn down a hall and
 thereby forget how to light a candle.
 
 Each rank says how it grows you** — it may **ADD** something new you can do, **DEEPEN** what you already

@@ -2445,70 +2445,59 @@
         "player": "Sleep through till morning light and wake naturally—let the body mend fully.",
         "summary": "Silas wakes at the Whistling Woman post to morning light—the shadow-reach has frayed something in the world, Deni's warning about the moorland's changed silence waits to be understood, and three days remain before the convene votes on the water crisis.",
         "narration": "You wake to pale moorland light filtering through the waystation's single window—the kind of dawn that comes slowly, the sun still behind the ridge but the sky already turning. Pell is warm beside you, breathing steady and deep. Cael's cot in the corner is empty; he's moved on or woken earlier. The back room smells like old wool and lamp oil and the particular peace of people who've slept hard.\n\nThe main room beyond holds low voices—Maren, still seated at the table, and Veth's quieter tones from near the threshold. Neither of them has moved from the watch. The fire in the stove has been tended; it's low and steady, banked for the long hours. The lamp is dimmed.\n\nYou've slept clean through. Your body feels like something has been put back together—not whole, not yet, but mended enough that you can move without the reach's weight dragging at your hindbrain. The novel stretch through the shadows left something frayed in you; sleep has begun to settle it, but not entirely. There's still a sense of tearing, distant and patient, like something asking a question it knows you'll have to answer soon.\n\nPell stirs as you shift, her eyes opening without confusion—the habit of someone who sleeps ready. 'Morning's come,' she says simply, and there's warmth in it and nothing else, which is exactly what you needed. 'Veth's been walking the perimeter. Maren's been thinking.'\n\nDownstairs, the Runner is still asleep on her cot. The encrypted tablet sits on the shelf where it was left."
+      },
+      {
+        "player": "Head downstairs and great the Wardens.  Then check on the Runner.",
+        "summary": "Morning at the Whistling Woman post: Silas wakes to find Maren and Veth holding the watch through the night. He greets both wardens, then finds the Runner awake and speaking for the first time since surgery.",
+        "narration": "You emerge from the back room into the main chamber of the waystation as the last of the night's weight lifts. The fire has been tended through the darkness—Maren sits at the table exactly as she did hours ago, and Veth stands near the threshold with her hand resting light on the warded frame. Both turn their attention to you without moving more than their eyes.\n\n'Dawn,' you say to them both—a greeting and an acknowledgment. Maren nods, spare and steady. Veth's response is a fractional shift in her shoulders, the kind of agreement a warden gives when the night's watch has held and the day can be received.\n\nYou turn toward the cot where the Runner is resting. She's awake—fever-clear now, though the raw cautery marks on her ribs still read rough under the blanket. Her eyes track you as you approach, and she shifts slightly, testing the pain. 'Water,' she says, and it's the first word you've heard from her since the surgery. Not a request—a statement of need, dry-voiced and direct. The urgency that brought her here hasn't left her; it's just been held in abeyance by the Kept Breath's soak and the body's slow mending."
       }
     ],
     "lastTurn": {
-      "narration": "You wake to pale moorland light filtering through the waystation's single window—the kind of dawn that comes slowly, the sun still behind the ridge but the sky already turning. Pell is warm beside you, breathing steady and deep. Cael's cot in the corner is empty; he's moved on or woken earlier. The back room smells like old wool and lamp oil and the particular peace of people who've slept hard.\n\nThe main room beyond holds low voices—Maren, still seated at the table, and Veth's quieter tones from near the threshold. Neither of them has moved from the watch. The fire in the stove has been tended; it's low and steady, banked for the long hours. The lamp is dimmed.\n\nYou've slept clean through. Your body feels like something has been put back together—not whole, not yet, but mended enough that you can move without the reach's weight dragging at your hindbrain. The novel stretch through the shadows left something frayed in you; sleep has begun to settle it, but not entirely. There's still a sense of tearing, distant and patient, like something asking a question it knows you'll have to answer soon.\n\nPell stirs as you shift, her eyes opening without confusion—the habit of someone who sleeps ready. 'Morning's come,' she says simply, and there's warmth in it and nothing else, which is exactly what you needed. 'Veth's been walking the perimeter. Maren's been thinking.'\n\nDownstairs, the Runner is still asleep on her cot. The encrypted tablet sits on the shelf where it was left.",
-      "sceneSummary": "Silas wakes at the Whistling Woman post to morning light—the shadow-reach has frayed something in the world, Deni's warning about the moorland's changed silence waits to be understood, and three days remain before the convene votes on the water crisis.",
+      "narration": "You emerge from the back room into the main chamber of the waystation as the last of the night's weight lifts. The fire has been tended through the darkness—Maren sits at the table exactly as she did hours ago, and Veth stands near the threshold with her hand resting light on the warded frame. Both turn their attention to you without moving more than their eyes.\n\n'Dawn,' you say to them both—a greeting and an acknowledgment. Maren nods, spare and steady. Veth's response is a fractional shift in her shoulders, the kind of agreement a warden gives when the night's watch has held and the day can be received.\n\nYou turn toward the cot where the Runner is resting. She's awake—fever-clear now, though the raw cautery marks on her ribs still read rough under the blanket. Her eyes track you as you approach, and she shifts slightly, testing the pain. 'Water,' she says, and it's the first word you've heard from her since the surgery. Not a request—a statement of need, dry-voiced and direct. The urgency that brought her here hasn't left her; it's just been held in abeyance by the Kept Breath's soak and the body's slow mending.",
+      "sceneSummary": "Morning at the Whistling Woman post: Silas wakes to find Maren and Veth holding the watch through the night. He greets both wardens, then finds the Runner awake and speaking for the first time since surgery.",
       "choices": [
         {
-          "label": "Go out to the perimeter and walk it with Veth — ask what her warden's eye reads in the moorland's silence",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Pour water from the barrel and bring it to her—let her drink, then sit and listen to what brought her here with a fractured death-thread",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {},
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "scout",
-            "study"
+            "help",
+            "listen"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Sit with Maren at the table and ask her plainly — what does a warden of her depth read in what just happened",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Deathsense on the moorland north through the window — read what the changed silence actually means",
+          "label": "Ask Veth to read the Runner's thread plainly—what paths still diverge, and which one holds",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
-          "difficulty": "hard",
+          "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
             "study"
           ],
           "abilityId": "deathsense",
-          "energyCost": 2,
+          "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Wake Cael and get his report — what news did he bring from Fendt, and what does the ridge post know about the moorland change",
+          "label": "Ask Maren what she read in the Runner's urgency while you slept—what does a legendary warden see in a broken courier",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
           "axes": {},
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "study"
+            "listen"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -2519,8 +2508,8 @@
       ],
       "deeds": [],
       "characterDeltas": {
-        "health": 8,
-        "energy": 92,
+        "health": 0,
+        "energy": 0,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
@@ -2534,31 +2523,23 @@
       "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "Interior of the Whistling Woman waystation—back room, pale dawn light filtering through the single window, cots with blankets, Pell waking beside you. The main room beyond holds the banked fire, table, and the low voices of Maren at the table and Veth near the threshold.",
+        "setting": "Interior of the Whistling Woman waystation—main room in pale morning light. The fire banked low and steady in the stove. Maren seated at the table, Veth near the threshold. The Runner on a cot, awake and fever-clear, the cautery marks visible under the blanket.",
         "npcsPresent": [
           {
-            "name": "Pell Ran Marsh",
-            "state": "waking, warm beside you, ready"
-          },
-          {
             "name": "Maren Ossitide",
-            "state": "seated at the table in the main room, holding the watch, grey eyes steady"
+            "state": "seated at the table, steady presence, having held the watch through the night"
           },
           {
             "name": "Veth (Stillwater) Ondra",
-            "state": "near the threshold, moving through perimeter awareness"
-          },
-          {
-            "name": "Huginn",
-            "state": "perched on the shelf, wholly awake, unsurprised"
+            "state": "standing near the threshold, hand resting light on the warded frame, perimeter awareness maintained"
           },
           {
             "name": "The Runner",
-            "state": "asleep on a cot in the inner room, fever broken, mending steadily"
+            "state": "awake on a cot, fever-clear, speaking for the first time since surgery, thirst-urgent"
           },
           {
-            "name": "Cael",
-            "state": "either resting in the back room or already risen"
+            "name": "Huginn",
+            "state": "perched on the shelf, awake and watching"
           }
         ],
         "objects": [
@@ -2567,22 +2548,40 @@
           "two chairs",
           "oil lamp, dimmed",
           "water barrel",
-          "shelf of supplies",
-          "Deni's letter, folded on the table",
-          "music-box on the shelf with melody-pattern cylinder",
           "cots with blankets",
-          "Pell's sword on the bench beside the cots",
-          "encrypted tablet on the shelf"
+          "Deni's letter, folded on the table",
+          "music-box on the shelf with melody-pattern cylinder"
         ],
         "threads": [
-          "What the moorland's silence means—Deni's warning, Maren's recognition, the world's equilibrium beginning to slip",
-          "The shadow-reach that shouldn't have worked—the shadows tearing under some greater pull, frayed and waiting for answer",
+          "What the moorland's silence means—Deni's warning, Maren's recognition",
+          "The shadow-reach that shouldn't have worked—the shadows tearing under some greater pull",
           "Three days until the convene votes on accepting pole-pull as the crisis's true source",
+          "The Runner's fractured death-thread and what urgency brought her here",
           "Cael's news from the ridge post and what Fendt has discovered",
-          "The Runner's recovery and what she will say when she fully wakes"
+          "The world's equilibrium beginning to slip"
         ]
       },
-      "npcUpdates": [],
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "the-runner",
+          "name": "The Runner",
+          "statusNote": "Awake at the Whistling Woman post, fever-clear, mending from cautery. Speaking for the first time since surgery—thirst-urgent, direct, the urgency that brought her still present.",
+          "note": "She wakes speaking plainly, asking for water. The fever is broken and the body is mending. The urgency remains."
+        },
+        {
+          "op": "update",
+          "npcId": "maren-ossitide",
+          "statusNote": "Seated at the table in the Whistling Woman post, holding the watch through the night. Steady presence, attentive, having observed the Runner's mending and the moorland's changed silence.",
+          "note": "She has held the watch through the night, tended the fire, and observed what the Runner revealed in fever-dreams or murmurs. Ready to speak plainly when asked."
+        },
+        {
+          "op": "update",
+          "npcId": "veth-ondra",
+          "statusNote": "Standing near the threshold of the Whistling Woman post, maintaining perimeter awareness. Present and steady through the night watch.",
+          "note": "She has stood the warden's watch at the threshold, confirming the wards hold, attentive to any breach or shift in the protected space."
+        }
+      ],
       "intentsHeard": [],
       "factUpdates": [],
       "placeUpdates": [],
@@ -2600,8 +2599,8 @@
       "unlockPrecursor": null,
       "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 8,
-        "why": "slept through the night till morning light"
+        "hoursPassed": 0,
+        "why": "morning light; time to wake and greet the day"
       },
       "moveTo": null,
       "stateOps": [],
@@ -2614,31 +2613,23 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Interior of the Whistling Woman waystation—back room, pale dawn light filtering through the single window, cots with blankets, Pell waking beside you. The main room beyond holds the banked fire, table, and the low voices of Maren at the table and Veth near the threshold.",
+      "setting": "Interior of the Whistling Woman waystation—main room in pale morning light. The fire banked low and steady in the stove. Maren seated at the table, Veth near the threshold. The Runner on a cot, awake and fever-clear, the cautery marks visible under the blanket.",
       "npcsPresent": [
         {
-          "name": "Pell Ran Marsh",
-          "state": "waking, warm beside you, ready"
-        },
-        {
           "name": "Maren Ossitide",
-          "state": "seated at the table in the main room, holding the watch, grey eyes steady"
+          "state": "seated at the table, steady presence, having held the watch through the night"
         },
         {
           "name": "Veth (Stillwater) Ondra",
-          "state": "near the threshold, moving through perimeter awareness"
-        },
-        {
-          "name": "Huginn",
-          "state": "perched on the shelf, wholly awake, unsurprised"
+          "state": "standing near the threshold, hand resting light on the warded frame, perimeter awareness maintained"
         },
         {
           "name": "The Runner",
-          "state": "asleep on a cot in the inner room, fever broken, mending steadily"
+          "state": "awake on a cot, fever-clear, speaking for the first time since surgery, thirst-urgent"
         },
         {
-          "name": "Cael",
-          "state": "either resting in the back room or already risen"
+          "name": "Huginn",
+          "state": "perched on the shelf, awake and watching"
         }
       ],
       "objects": [
@@ -2647,21 +2638,19 @@
         "two chairs",
         "oil lamp, dimmed",
         "water barrel",
-        "shelf of supplies",
-        "Deni's letter, folded on the table",
-        "music-box on the shelf with melody-pattern cylinder",
         "cots with blankets",
-        "Pell's sword on the bench beside the cots"
+        "Deni's letter, folded on the table",
+        "music-box on the shelf with melody-pattern cylinder"
       ],
       "threads": [
-        "What the moorland's silence means—Deni's warning, Maren's recognition, the world's equilibrium beginning to slip",
-        "The shadow-reach that shouldn't have worked—the shadows tearing under some greater pull, frayed and waiting for answer",
+        "What the moorland's silence means—Deni's warning, Maren's recognition",
+        "The shadow-reach that shouldn't have worked—the shadows tearing under some greater pull",
         "Three days until the convene votes on accepting pole-pull as the crisis's true source",
-        "Cael's news from the ridge post and what Fendt has discovered",
-        "The Runner's recovery and what she will say when she fully wakes"
+        "The Runner's fractured death-thread and what urgency brought her here",
+        "Cael's news from the ridge post and what Fendt has discovered"
       ]
     },
-    "beats": 8
+    "beats": 9
   },
   "clock": {
     "schemaVersion": 1,
@@ -4146,7 +4135,7 @@
       "bondStage": "partner",
       "gender": "woman",
       "pronouns": "she/her",
-      "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Pell%2C%20woman%2C%20Village%20blacksmith%2C%20Millbrook%20%E2%80%94%20traveling%20companion%2C%20partner%20romantic%20to%20Silas%20Weir%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=49264&nologo=true",
+      "image": "https://image.pollinations.ai/prompt/Weathered%20woman%20in%20leather%20apron%20filing%20hot%20metal%2C%20back%20turned%20to%20doorway%2C%20organized%20workbench%20behind%20her%2C%20focused%20grip%2C%20workshop%20lit%20by%20forge%20glow%2C%20practical%20efficiency%20in%20every%20motion.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=63665&nologo=true",
       "_portraitTier": "partner",
       "aliases": [
         "Pell"
@@ -4156,7 +4145,9 @@
         "primary": "ashwarden"
       },
       "domainsSource": "derived",
-      "met": 33
+      "met": 33,
+      "imageSeedKey": "pell#r3",
+      "imagePinned": true
     },
     "mara-wells": {
       "id": "mara-wells",
@@ -4825,7 +4816,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] At the ridge relay node, walked Silas through the warden post's material needs—water from the spring-fed draw to the northeast, a simple lodge at the sight-line threshold, and the core understanding that a warden's defense is not walls but standing witness at the threshold while the network…",
         "[d14] Walked the lodge structure when it manifested—hand on the timber, reading its load-bearing truth. Confirmed the placement sound and the warden's watch ready to begin.",
         "[d14] At the ridge, witnessed Silas raise a working mine from the iron below—acknowledged the imperfect making with a warden's grip and silence. Reading the ridge geometry with full attention.",
         "[d14] At the ridge mine-shaft, watched Silas and Pell reinforce the bracing with quiet approval. Reading the fault-line clearly and assessing what comes next for the post.",
@@ -4834,7 +4824,8 @@
         "[d15] Entered the death-warden temple and read its structure and purpose in full silence. Offered her warden's approval: 'It will serve.' 'This is rightly made.' She is assessing whether this threshold can be a true Ashwarden post, and the judgment is positive.",
         "[d15] Entered the death-warden temple at dawn on Day 15 and read its purpose with full warden's attention. Offered her approval: 'It will serve. This is rightly made.' She is assessing whether this threshold can be a true Ashwarden post, and she has answered her own question.",
         "[d15] Sat in meditation with Silas and Huginn at the sealed seam—a three-warden attendance. Her presence confirmed the temple's readiness and her willingness to teach its discipline. She is watching to see what Silas will ask next.",
-        "[d16] Gave Silas the Archive's architecture, the watchers' positions, and the eastern service stair route. Named the seal-question as the lock: Grael will ask what ends, and the answer must be true. Warned that wrong answers harden the seal."
+        "[d16] Gave Silas the Archive's architecture, the watchers' positions, and the eastern service stair route. Named the seal-question as the lock: Grael will ask what ends, and the answer must be true. Warned that wrong answers harden the seal.",
+        "[d17] She has stood the warden's watch at the threshold, confirming the wards hold, attentive to any breach or shift in the protected space."
       ],
       "knownFacts": [
         "The temple is structurally sound for Ashwarden practice",
@@ -4857,10 +4848,10 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Inside the death-warden temple at the ridge threshold, having just completed a three-warden meditative attendance at the sealed seam",
+      "statusNote": "Standing near the threshold of the Whistling Woman post, maintaining perimeter awareness. Present and steady through the night watch.",
       "lastSeen": {
         "locationId": "gen-whistling-woman-post",
-        "day": 16
+        "day": 17
       },
       "bondType": "sworn",
       "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Veth%20Ondra%2C%20woman%2C%20Former%20Ashwarden%20warden%2C%20now%20teaching%20at%20the%20dark-cloth%20stall%20%E2%80%94%20has%20offered%20to%20join%20the%20party%2C%20sworn%20to%20Silas%20Weir%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=66052&nologo=true",
@@ -4873,7 +4864,7 @@
         "primary": "ashwarden"
       },
       "domainsSource": "role",
-      "met": 16
+      "met": 17
     },
     "cassiel-ord": {
       "id": "cassiel-ord",
@@ -5412,7 +5403,8 @@
       "relationship": 0,
       "history": [
         "[d16] Arrived at the Whistling Woman waystation with cracked ribs from a fall. Tended by Silas Weir with Dawn Surgery. Grateful and resting.",
-        "[d16] Still asleep on the cot, mending. Unaware of what just transpired. The encrypted message that brought her here is now partially answered."
+        "[d16] Still asleep on the cot, mending. Unaware of what just transpired. The encrypted message that brought her here is now partially answered.",
+        "[d17] She wakes speaking plainly, asking for water. The fever is broken and the body is mending. The urgency remains."
       ],
       "knownFacts": [],
       "skillsObserved": [],
@@ -5420,12 +5412,12 @@
       "sex": "female",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the Whistling Woman post, asleep, mending well",
+      "statusNote": "Awake at the Whistling Woman post, fever-clear, mending from cautery. Speaking for the first time since surgery—thirst-urgent, direct, the urgency that brought her still present.",
       "lastSeen": {
         "locationId": "gen-whistling-woman-post",
-        "day": 16
+        "day": 17
       },
-      "met": 2
+      "met": 3
     },
     "courier-whistling-woman": {
       "id": "courier-whistling-woman",
@@ -5444,7 +5436,8 @@
         "[d16] Named the Archive's architecture, the watchers, and the path—the service stair, the three watchers (two Radiant, one not), Veth's knowledge of the warden-mark, and the question-seal on Grael's cabinet. Spoke plainly, without the usual bird's hesitation.",
         "[d17] Fever has broken; wounds are mending well under care; resting deeply; message delivered and urgent business resolved",
         "[d17] Received Deni's letter warning of quiet moorland north. Reads it, recognizes the old-watcher's notice. Witnesses Silas's shadow-reach and names it plainly: 'The warden's reach is growing.' Her presence affirms what just happened.",
-        "[d17] Sat across the table with Silas after Deni's warning. Recognized the moorland's changed silence as something the old watchers notice first. Speaks plainly about the warden's reach and what it means. Entirely unmoved by the impossible."
+        "[d17] Sat across the table with Silas after Deni's warning. Recognized the moorland's changed silence as something the old watchers notice first. Speaks plainly about the warden's reach and what it means. Entirely unmoved by the impossible.",
+        "[d17] She has held the watch through the night, tended the fire, and observed what the Runner revealed in fever-dreams or murmurs. Ready to speak plainly when asked."
       ],
       "knownFacts": [
         "The message matters more to her than her own pathway holds",
@@ -5467,12 +5460,12 @@
       "sex": "unknown",
       "gender": "unknown",
       "pronouns": "—",
-      "statusNote": "Active, seated at the Whistling Woman post in deep night, attending to the crisis as it unfolds",
+      "statusNote": "Seated at the table in the Whistling Woman post, holding the watch through the night. Steady presence, attentive, having observed the Runner's mending and the moorland's changed silence.",
       "lastSeen": {
         "locationId": "gen-whistling-woman-post",
         "day": 17
       },
-      "met": 7,
+      "met": 8,
       "domains": {
         "primary": "ashwarden"
       },
@@ -6790,11 +6783,11 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-09-12T02:41:39.531Z",
+    "lastSharedReadAt": "2026-09-12T03:03:42.485Z",
     "lastTickWorldDay": 74,
     "lastCanonWorldDay": 74,
-    "lastGenCount": 1778,
-    "turnsSinceOffer": 2,
+    "lastGenCount": 1779,
+    "turnsSinceOffer": 3,
     "recentOffers": [
       {
         "thing": "Maren Ossitide's acceptance of co-wardenship—the valley now has both a Warden and a Wright tending the threshold.",
@@ -17229,22 +17222,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 22.94567800186087,
-    "cerebral": 13.490929176331418,
-    "social": 13.837325344768285,
-    "generous": 3.796424264204737,
-    "cautious": 6.39105401170786,
-    "physical": 0.23191181911194889,
-    "risky": 0.6737659965863728,
-    "ruthless": 0.1210718841088068,
-    "carousing": 1.2718169688217562,
-    "amorous": 2.9901406874053507,
-    "patient": 0.40708109952345245,
-    "stealth": 0.000004231353572636469,
-    "devotion": 0.17290707738413436,
-    "craft": 3.3697022960781986,
-    "leadership": 2.8058314853032154,
-    "deception": 0.02026333001640771
+    "strategic": 22.372036051814348,
+    "cerebral": 13.153655946923132,
+    "social": 13.491392211149078,
+    "generous": 3.7015136575996186,
+    "cautious": 6.231277661415163,
+    "physical": 0.22611402363415015,
+    "risky": 0.6569218466717135,
+    "ruthless": 0.11804508700608662,
+    "carousing": 1.2400215446012122,
+    "amorous": 2.915387170220217,
+    "patient": 0.39690407203536615,
+    "stealth": 0.000004125569733320556,
+    "devotion": 0.168584400449531,
+    "craft": 3.2854597386762436,
+    "leadership": 2.735685698170635,
+    "deception": 0.019756746765997518
   },
   "aptitudes": [
     "strategist",
@@ -17252,10 +17245,30 @@
     "scholar",
     "tactician"
   ],
-  "actionCount": 976,
+  "actionCount": 977,
   "grantsVersion": 1,
   "reconcileVersion": 49,
   "gallery": [
+    {
+      "kind": "npc",
+      "prompt": "Weathered woman in leather apron filing hot metal, back turned to doorway, organized workbench behind her, focused grip, workshop lit by forge glow, practical efficiency in every motion.",
+      "url": "https://image.pollinations.ai/prompt/Weathered%20woman%20in%20leather%20apron%20filing%20hot%20metal%2C%20back%20turned%20to%20doorway%2C%20organized%20workbench%20behind%20her%2C%20focused%20grip%2C%20workshop%20lit%20by%20forge%20glow%2C%20practical%20efficiency%20in%20every%20motion.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=63665&nologo=true",
+      "caption": "Pell Ran Marsh — partner · devoted",
+      "worldDay": 74,
+      "at": "2026-09-12T03:00:13.707Z",
+      "subjectKind": "npc",
+      "subjectId": "pell"
+    },
+    {
+      "kind": "npc",
+      "prompt": "Tall woman with ash-grey unbound hair, weathered face lined at eyes and mouth, scarred knuckles, steady gaze—built from long journeys, character portrait of timeless worn grace.",
+      "url": "https://image.pollinations.ai/prompt/Tall%20woman%20with%20ash-grey%20unbound%20hair%2C%20weathered%20face%20lined%20at%20eyes%20and%20mouth%2C%20scarred%20knuckles%2C%20steady%20gaze%E2%80%94built%20from%20long%20journeys%2C%20character%20portrait%20of%20timeless%20worn%20grace.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=9274&nologo=true",
+      "caption": "Maren Ossitide — sworn · friendly",
+      "worldDay": 74,
+      "at": "2026-09-12T02:49:32.532Z",
+      "subjectKind": "npc",
+      "subjectId": "marrow"
+    },
     {
       "kind": "moment",
       "prompt": "Deep night in a moorland waystation: lamplight casting long shadows on two figures at a worn table—a young warden, still breathing hard from a reach that shouldn't have worked, and across from him the",
@@ -18164,8 +18177,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1789181203238,
-  "rev": 1993,
+  "updatedAt": 1789182423286,
+  "rev": 2000,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -22515,7 +22528,7 @@
   "syncedAt": 1788658062664,
   "teachers": {},
   "regionsKnown": {
-    "valley": 676,
+    "valley": 677,
     "the_palelands": 6,
     "the_center": 151,
     "the_echo_vale": 14
@@ -22826,10 +22839,10 @@
     {
       "id": "sess-33",
       "startedAt": "2026-09-11T22:48:54.873Z",
-      "lastAt": "2026-09-12T02:46:43.235Z",
+      "lastAt": "2026-09-12T03:07:03.277Z",
       "startDay": 73,
       "endDay": 74,
-      "beats": 28
+      "beats": 29
     }
   ],
   "company": [
@@ -23342,17 +23355,17 @@
     "gen-whistling-woman-post": "https://image.pollinations.ai/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=32614&nologo=true&_cb=1_1"
   },
   "_opEmitted": {
-    "sceneSummary": 354,
-    "choices": 353,
-    "characterDeltas": 184,
-    "scene": 354,
-    "npcUpdates": 310,
+    "sceneSummary": 355,
+    "choices": 354,
+    "characterDeltas": 185,
+    "scene": 355,
+    "npcUpdates": 311,
     "factUpdates": 37,
     "placeUpdates": 80,
     "codexUpdates": 210,
-    "timeOps": 318,
+    "timeOps": 319,
     "imagePrompt": 34,
-    "sceneEnded": 128,
+    "sceneEnded": 129,
     "itemUpdates": 8,
     "questUpdates": 49,
     "offer": 51,
@@ -23369,7 +23382,7 @@
     "_applyFailedOp": 8,
     "newEncounter": 3,
     "encounterOps": 1,
-    "gambitApt": 58,
+    "gambitApt": 59,
     "markDefiningMoment": 1,
     "_engineClosedScene": 5,
     "gambitOps": 1,
@@ -23377,7 +23390,7 @@
     "partyOps": 3,
     "stateOps": 1
   },
-  "_opTurns": 354,
+  "_opTurns": 355,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -24556,7 +24569,7 @@
     }
   ],
   "skillUses": {
-    "travel": 11,
+    "travel": 12,
     "careful": 7,
     "study": 12,
     "scout": 10,
@@ -24801,7 +24814,9 @@
     "cp11cgun2": "Two figures — a scarred maker in scorched leather apron setting down tools, and a weather-cracked prodigy marcher dusted with border-stone — the made thing between them drives back the champion reeling but still standing in the Coliseum.",
     "cp936gse": "Two figures — a part-machine prodigy with metal limbs, and a master — locked rigid at The Gearlands Verge, the prodigy's untiring rhythm of gears and flesh meeting the master's blow without yield, both suspended in that impossible moment…",
     "cp1fcy7ze": "Tall woman in ash-grey facing unmarked stone shrine within marked circle, four cardinal poles, shadow-warded gate behind, starlit sky, her gaze distant and steadied with completion.",
-    "cp91dslk": "Flowing robes in tidal blues and deep reds billowing like water around a figure standing amid architecture carved to channel emotion, tear-bright light catching fabric and stone, gestures broad and swelling, movement like sorrow and joy…"
+    "cp91dslk": "Flowing robes in tidal blues and deep reds billowing like water around a figure standing amid architecture carved to channel emotion, tear-bright light catching fabric and stone, gestures broad and swelling, movement like sorrow and joy…",
+    "cp75wuug": "Tall woman with ash-grey unbound hair, weathered face lined at eyes and mouth, scarred knuckles, steady gaze—built from long journeys, character portrait of timeless worn grace.",
+    "cpgfhd5h": "Weathered woman in leather apron filing hot metal, back turned to doorway, organized workbench behind her, focused grip, workshop lit by forge glow, practical efficiency in every motion."
   },
   "composedImages": {
     "https://image.pollinations.ai/prompt/Left%20Branch%20Gate%20Clearing%20%E2%80%94%20The%20left-branch%20clearing%20at%20the%20made%20gate%2C%20evening%20light%20amber%20and%20soft%E2%80%94the%20downed%20tree's%20clearing%20open%20on%20both%20sides%2C%20the%20skeleton%20of%20Logana%20still-standing%20at%20her%20post%2C%20the%20gate%20itself%20frameless%20and%20present.%20The%20Whistling%20Woman%20post%20lies%20north%20through%20the%20gate%3B%20the%20Threshold%20Pos%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=47401&nologo=true": "https://image.pollinations.ai/prompt/Amber%20evening%20light%20through%20left-branch%20clearing%2C%20downed%20tree%20opened%20both%20sides%2C%20skeletal%20figure%20standing%20at%20frameless%20gate%2C%20path%20extending%20north%20beyond.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=47401&nologo=true",
@@ -25065,6 +25080,35 @@
           "prompt": "Flowing robes in tidal blues and deep reds billowing like water around a figure standing amid architecture carved to channel emotion, tear-bright light catching fabric and stone, gestures broad and swelling, movement like sorrow and joy…",
           "note": null,
           "seedKey": "storykeeper#r1",
+          "at": 74
+        }
+      ]
+    },
+    "npc:marrow": {
+      "keeps": [
+        {
+          "url": "https://image.pollinations.ai/prompt/Ash-grey%20hair%20unbound%2C%20weathered%20face%20lined%20at%20eyes%20and%20mouth%2C%20steady%20hands%20scarred%20at%20the%20knuckles.%20Tall%2C%20built%20like%20someone%20who%20has%20walked%20a%20great%20distance%20and%20hurried%20for%20none%20of%20it.%20Age%20unresolvab%2C%20character%20portrait%2C%20named%20Maren%20Ossitide%2C%20woman%2C%20Legendary%20Ashwarden%20warden%3B%20the%20one%20who%20buried%20the%20Drowned%20Year%2C%20sworn%20to%20Silas%20Weir%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=56790&nologo=true",
+          "prompt": "Timeless Beauty",
+          "note": "Timeless Beauty",
+          "seedKey": null,
+          "at": 74
+        },
+        {
+          "url": "https://image.pollinations.ai/prompt/Tall%20woman%20with%20ash-grey%20unbound%20hair%2C%20weathered%20face%20lined%20at%20eyes%20and%20mouth%2C%20scarred%20knuckles%2C%20steady%20gaze%E2%80%94built%20from%20long%20journeys%2C%20character%20portrait%20of%20timeless%20worn%20grace.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=9274&nologo=true",
+          "prompt": "Tall woman with ash-grey unbound hair, weathered face lined at eyes and mouth, scarred knuckles, steady gaze—built from long journeys, character portrait of timeless worn grace.",
+          "note": null,
+          "seedKey": "marrow#r1",
+          "at": 74
+        }
+      ]
+    },
+    "npc:pell": {
+      "keeps": [
+        {
+          "url": "https://image.pollinations.ai/prompt/Weathered%20woman%20in%20leather%20apron%20filing%20hot%20metal%2C%20back%20turned%20to%20doorway%2C%20organized%20workbench%20behind%20her%2C%20focused%20grip%2C%20workshop%20lit%20by%20forge%20glow%2C%20practical%20efficiency%20in%20every%20motion.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=63665&nologo=true",
+          "prompt": "Weathered woman in leather apron filing hot metal, back turned to doorway, organized workbench behind her, focused grip, workshop lit by forge glow, practical efficiency in every motion.",
+          "note": null,
+          "seedKey": "pell#r3",
           "at": 74
         }
       ]

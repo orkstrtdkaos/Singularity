@@ -1,389 +1,364 @@
-# ARCHETYPES BY DOMAIN — who you would be, and what you would take
+# Archetypes, domain by domain
 
-**Companion to `SKILLS.md`.** ⛔ **That file is GENERATED and lists every craft. This one is HAND-AUTHORED and
-says what a person actually builds.** ⚠️ Every craft id here was checked against the catalogue; **the only
-ones that do not exist are marked as holes.**
+*Who you would be, and what you would take.*
 
-⛑ **READ `VOCATIONS.md` FIRST.** ⚠️ **The eight VOCATIONS are the classes — Keeper, Maker, Reader, Edge,
-Broker, Walker, Attendant, Ender — and everything below is how each one LOOKS in a given domain.** ⛔ **An
-Ash Warden and a Night-Warden are the same vocation in two poles.**
+Read *The Vocations* first. The eight vocations are the classes — Keeper, Maker, Reader, Edge, Broker,
+Walker, Attendant, Ender — and everything below is how each one looks in a given domain. An Ash Warden and a
+Night-Warden are the same vocation standing in two different poles.
 
-## ⛑ TWO RULES ERIK SET, AND THEY SHAPE EVERY ENTRY
+## Two rules shape every entry
 
-**1 · A CLASS IS THREE DOMAINS, NOT ONE.** ⚑ *"NPCs and PCs have three, so grabbing a few from another
-domain to fill a class in this primary is totally legit. **That makes it an Ash Warden instead of a Guardian
-Monk.**"* ⚠️ **Every kit below names its primary and what it borrows** — and the borrowing is what
-distinguishes two classes built on the same pole.
+**A class is three domains, not one.** Everyone carries three, so taking a few crafts from another domain to
+finish a class in your primary is not a compromise — it is how classes are built here. That is what makes you
+an Ash Warden rather than a Guardian Monk. Every kit below names its primary and what it borrows, and the
+borrowing is what separates two classes standing on the same pole.
 
-**2 · EVERY CLASS SURVIVES ITS OWN PATH.** ⛔ *"These classes still need to walk dangerous paths, even if
-they're a Warden — so they would have some FUNCTIONAL PROTECTION."* ⚠️ **An earlier draft called a warden's
-avoidance of harm *"the refusal is the class."* THAT WAS WRONG.** ⛑ **A person who attends deaths in the
-Palelands is not defenceless; they are competent at something dangerous.** ⛔ **Every entry names how it
-stays alive.**
+**Every class survives its own path.** These classes walk dangerous roads, and being a Warden does not excuse
+you from that, so every one of them has real protection. An earlier draft of this page called a warden's
+avoidance of harm "the refusal is the class". That was wrong. A person who attends deaths in the Palelands is
+not defenceless; they are competent at something dangerous, and every entry below names how it stays alive.
 
 ---
 
-# DEATH — 44 · ashwarden 24 · threnodist 20
+# Death
 
-### THE ASH WARDEN — *Death / Body / Building*
-**Death:** `deathsense` · `the_attended_end` · `kept_vigil` · `palework` · `grey_road` · `ask_the_dead` ·
-`death_ward` · `grey_ground` · `deathless`
-⚑ **Body (survival):** `plain_weight` · `steady_hands` · `second_wind` · **`shieldwork`**
-⚑ **Building (the work):** `held_repair` · `hearthbinding` · `calm_word`
+### The Ash Warden — *Death / Body / Building*
+**Death:** Deathsense · Attended End · Kept Vigil · Palework · Grey Road · Ask the Dead ·
+Death-Ward · Killing Field · Deathless
+**Body (survival):** Plain Weight · Steady Hands · Second Wind · **Shieldwork**
+**Building (the work):** Held Repair · Hearthbinding · Calming Word
 
-⛔ **THE BORROW IS THE CLASS.** ⚠️ **Take Body and you are an ASH WARDEN — someone who walks to a death across
-bad country and gets there.** ⛑ **Take Spirit instead (`steady_soul`, `unbroken_practice`, `hallowed_ground`)
-and the same Death spine makes a GUARDIAN MONK.** ⚑ **Same primary, different person.**
+**The borrow is the class.** Take Body and you are an Ash Warden — someone who walks to a death across
+bad country and gets there. Take Spirit instead (Steady the Soul, Unbroken Practice, Hallowed Ground)
+and the same Death spine makes a Guardian Monk. Same primary, different person.
 
-⚠️ **AND THE PROTECTION IS REAL:** `death_ward` (T3, `resist`/`shield`/`ward`), `grey_ground`, `kept_breath`,
-`deathless` at T4. ⛔ **A warden who takes `hastened_grey` is not less a warden** — it is a T1 in their own
+And the protection is real: Death-Ward (T3, resist/shield/ward), Killing Field, Kept Breath,
+Deathless at T4. **A warden who takes Necrotic Strike is not less a warden** — it is a T1 in their own
 tradition and the road is dangerous.
 
-### THE GRAVE-CALLER — *Death / Order / Dark* ⛔ **AND IT IS A HOLE**
-**Has:** `set_hand` (T3) · `given_errand` (T4) · `calling_back` (T3) · `deathsense` · `ask_the_dead`
-**Borrows Order:** `truename_order` · `ordered_record` — ⚑ **what you raise, you must be able to hold**
-**Borrows Dark:** `carried_dark` · `known_in_the_dark` — ⚠️ **the work happens at night**
+### The Grave-Caller — *Death / Order / Dark*
+**Has:** Raised Hand (T3) · Driven Shade (T4) · Calling Back (T3) · Deathsense · Ask the Dead
+**Borrows Order:** Set in Order · Ordered Record — **what you raise, you must be able to hold**
+**Borrows Dark:** Carried Dark · Known In The Dark — **the work happens at night**
 
-⛔ **THREE RAISING CRAFTS AND NO LADDER.** ⚠️ **`set_hand` is authored *"⚠️ RAISING — the Grave-Callers'
-craft"*, and a grave-caller arrives at T3 fully formed and stops.** ⛑ **`narrowed_dead` is an authored
-bestiary class that nothing a player casts can produce.**
 
-### THE THRENODIST — *Death / Mind / Spirit*
-**Death:** `carried_name` · `shared_weight` · `storykeeper` · `the_true_feeling` · `wellspring` · `pathos` ·
-`harmonic_voice` · `echo_memory` · `names_of_the_lost` · `worldsong`
-⚑ **Mind:** `quiet_the_room` · `sustained_regard` — **Spirit:** `steady_soul` · `answering`
-⚠️ **Survival:** `felt_wall` (T2 `reveal`/`shield`) · `shared_weight` · `stillness_field`
+### The Threnodist — *Death / Mind / Spirit*
+**Death:** Carried Name · Shared Weight · Storykeeper · Feeling-Sense · Wellspring · Pathos ·
+Harmonic Voice · Echo Memory · Names of the Lost · Worldsong
+**Mind:** Quiet the Room · Sustained Regard — **Spirit:** Steady the Soul · Answering
+**Survival:** Felt Wall (T2 reveal/shield) · Shared Weight · Stillness Field
 
-### THE MOURNER-KILLER — *Death / Breaking / Dark*
-`keening` · `grief_strike` · `last_cold` · `wither` · `dread` · `grief_that_stops` (T5 lethal)
-⚑ **Breaking:** `read_the_fight` · `edge` · `in_the_way` — **Dark:** `quiet_step` · `premeditate`
-⛔ **Pathos SHARES a feeling; this INSTALLS one at a weight no body holds.**
+### The Mourner-killer — *Death / Breaking / Dark*
+Keening · Grief Strike · Last Cold · Wither · Dread Mantle · Grief That Stops (T5 lethal)
+**Breaking:** Read the Fight · Edge · In the Way — **Dark:** Quiet Step · Premeditate
+Pathos shares a feeling; this installs one at a weight no body holds.
 
-⬜ **Domain note:** ⚠️ Death has no `make` but `made_elegy` and no `travel` but `grey_road`. ⛑ **It reveals,
-wards, sustains and harms — and builds almost nothing.** Probably correct.
+*Domain note:* Death has no make but Made Elegy and no travel but Grey Road. It reveals,
+wards, sustains and harms — and builds almost nothing. Probably correct.
 
 ---
 
-# BUILDING — 33 · wright 20 · stillhold 13
+# Building
 
-### THE ARTIFICER — *Building / Order / Body*
-**Building:** `makers_eye` · `tinkers_hand` · `raised_thing` · `held_repair` · `quick_work` · `makecraft` ·
-`weapon_at_hand` · `ongoing_work` · `true_making` · `reforging` · `masterwork`
-⚑ **Order:** `mech_sense` · `enginecraft` — **Body:** `stone_read` · `thingcraft` · `plain_weight`
-⚠️ **Survival:** `weapon_at_hand` (T2) · `sudden_work` · `mechanical_defense`
+### The Artificer — *Building / Order / Body*
+**Building:** Maker's-Eye · Tinker's Hand · Raised Thing · Held Repair · Quick Work · Makecraft ·
+Weapon at Hand · Ongoing Work · True Making · Reforging · Masterwork
+**Order:** Mechanism-Sense · Enginecraft — **Body:** Stone-Read · Thingcraft · Plain Weight
+**Survival:** Weapon at Hand (T2) · Sudden Work · Mechanical Defense
 
-⛑ **The cleanest ladder in the game**, and `reforging` is a T4 that is a philosophy: *"where it broke is now
+**The cleanest ladder in the game**, and Reforging is a T4 that is a philosophy: *"where it broke is now
 where it is strongest."*
 
-### THE LIGHTWRIGHT — *Building / Light / Order*
-`glasswork` · `light_well` · `glimmer_script` · `clarity_lens` · `sun_seal`
-⚑ **Light:** `kindle` · `lightsense` · `prism_sight` · `radiant_ground` — **Order:** `prism_ward`
-⚠️ **Survival:** `blaze_wall` · `shielding_light`
-⛑ **Five Building crafts that only work once Light is your second** — ⚠️ **the clearest case in the corpus
-for the three-domain rule.**
+### The Lightwright — *Building / Light / Order*
+Glasswork · Light Well · Glimmer Script · Clarity Lens · Sun-Seal
+**Light:** Kindle · Lightsense · Prism Sight · Radiant Ground — **Order:** Prism Ward
+**Survival:** Blaze Wall · Shielding Light
+Five Building crafts that only work once Light is your second — the clearest case in the corpus
+for the three-domain rule.
 
-### THE PEACEMAKER — *Building / Mind / Light*
-`read_the_room` · `calm_word` · `mediators_tongue` · `broken_quiet` · `price_shown` · `step_between` ·
-`safe_ground` · `broker_truce` · `held_breath` · `quieting`
-⚑ **Mind:** `quiet_the_room` · `mind_read_folk` — **Light (verist):** `honest_price` · `standing_word`
-⛔ **NOT A PACIFIST BUILD:** `step_between` puts you in the way, `held_breath` and `quieting` are T4.
-⚠️ **Holding a peace is expensive and the ladder says so.**
+### The Peacemaker — *Building / Mind / Light*
+Read the Room · Calming Word · Mediator's Tongue · Broken Quiet · Price Shown · Step Between ·
+Safe Ground · Broker Truce · Held Breath · Quieting
+**Mind:** Quiet the Room · Cold-Read — **Light (verist):** Honest Price · Standing Word
+**Not a pacifist build.** Step Between puts you in the way, Held Breath and Quieting are T4.
+**Holding a peace is expensive and the ladder says so.**
 
-### THE HEARTH-KEEPER — *Building / Life / Death*
-`hearthbinding` · `laid_ground` · `safe_ground` · `stillcraft` · `held_repair`
-⚑ **Life:** `staunch` · `greenlore` — **Death:** `kept_vigil` · `carried_name`
-⚠️ **The holdings build** — every craft makes a PLACE hold, which is why Hesta Vorn draws here.
+### The Hearth-keeper — *Building / Life / Death*
+Hearthbinding · Laid Ground · Safe Ground · Stillcraft · Held Repair
+**Life:** Staunch · Greenlore — **Death:** Kept Vigil · Carried Name
+**The holdings build** — every craft makes a place hold, which is why Hesta Vorn draws here.
 
-### ⛔ THE RULER — *the largest hole found*
-**Wants:** ⛔ `the_gathering` · `raise_banner` · `lead_the_line` · `command_field` — **NONE EXIST.**
-⚠️ **30 crafts carry `command` and every one commands A PERSON, A MACHINE OR A SPIRIT.** ⛔ **NOTHING
-COMMANDS A BAND** — and the standing ladder, `delegationCapacity`, `bandOps`, the garrison and R46a's
-`legionClash` are all waiting for it.
 
 ---
 
-# ORDER — 38 · lattice 26 · enginewright 12
+# Order
 
-### THE LATTICE-ADEPT — *Order / Mind / Span*
-`order_sense` · `ordered_record` · `working_order` · `established_route` · `latticework` ·
-`maintained_order` · `truename_order` · `fixed_point` · `riding_order` · `foreclose` · `hold_the_aperture`
-⚑ **Mind:** `working_model` · `built_system` — **Span:** `old_roads` · `known_way`
-⚠️ **Survival:** `resonant_shield` · `resonant_anchor` · `prism_ward` · `motes_vigil`
-⛔ **`foreclose` at T4 is the class's own warning** — Corvane is *"what Foreclose overuse makes of a person."*
+### The Lattice-adept — *Order / Mind / Span*
+Order-Sense · Ordered Record · Working Order · Established Route · Latticework ·
+Maintained Order · Set in Order · Fixed Point · Riding Order · Foreclose · Hold the Aperture
+**Mind:** Working Model · Built System — **Span:** Old Roads · Known Way
+**Survival:** Resonant Shield · Resonant Anchor · Prism Ward · Motes' Vigil
+**Foreclose at T4 is the class's own warning** — Corvane is *"what Foreclose overuse makes of a person."*
 
-### THE PRECURSOR-DELVER — *Order / Spirit / Dark*
-`order_sense` · `address_sense` · `latticespeak` · `wake_the_line` · `unmake_seal` · `hold_the_aperture`
-⚑ **Spirit:** `numen_sense` · `thin_place` · `steady_soul` — **Dark:** `darksight` · `long_dark`
-⚠️ **Survival:** `prism_ward` · `resonant_shield` · `death_ward` (borrowed)
-⛑ **The only path to `directsSubstrate`** — `latticespeak` r3 and `address_sense` r3 are two of its four
-conditions.
+### The Precursor-delver — *Order / Spirit / Dark*
+Order-Sense · Address-Sense · Latticespeak · Wake the Line · Unmake Seal · Hold the Aperture
+**Spirit:** Numen-Sense · Open the Thin Place · Steady the Soul — **Dark:** Darksight · Long Dark
+**Survival:** Prism Ward · Resonant Shield · Death-Ward (borrowed)
+The only path to directing the substrate itself — Latticespeak and Address-Sense, both at rank 3, are two of
+the four conditions.
 
-### THE ENGINEWRIGHT — *Order / Building / Body*
-`mech_sense` · `mend_device` · `running_engine` · `command_engine` · `the_old_procedure` ·
-`mechanical_defense` · `enginecraft` · `shortfold` · `self_mending_work` · `deep_works`
-⚑ **Building:** `tinkers_hand` · `held_repair` · `raised_thing` — **Body:** `plain_weight` · `steady_hands`
-⛔ **Twelve crafts, every one on the ladder — the tightest tradition in the game.**
-
----
-
-# MIND — 31 · cogitant 15 · figurist 9 · syllogist 7
-
-### THE WIZARD — *Mind / Order / Spirit*
-`scholars_margin` · `sustained_regard` · `mind_read_folk` · `deduced_strike` · `solved_route` ·
-`working_model` · `memory_palace` · `psychic_lance` · `unmoving_mind` · `mind_meld` · `convergent_strike` ·
-`names_of_power`
-⚑ **Order:** `latticework` · `ordered_record` — **Spirit:** `numen_sense` · `unbroken_practice`
-⚠️ **Survival:** `unmoving_mind` (T4) · `ignore_me` (T1) · `stillness_field` borrowed
-
-### THE ADVOCATE — *Mind / Light / Building*
-`case_closed` · `contradiction` · `known_price` · `unbroken_thread` · `physicians_tome` · `built_system` ·
-`proof_halls`
-⚑ **Light (verist):** `standing_word` · `held_truth` · `weight_of_truth` — **Building:** `mediators_tongue` ·
-`broker_truce`
-⛔ **`case_closed` is T1 AND LETHAL-RUNG** — ⚠️ **the Syllogists' darkest craft is their FIRST**, which no
-other tradition does. ⛑ **Seven crafts is a thin pole and the Advocate is complete anyway, because the
-second domain carries half the class.**
-
-### THE FIGURIST — *Mind / Dark / Chaos*
-`the_true_figure` · `cutting_figure` · `pattern_sense` · `named_exclusion` · `formcraft` · `walking_figure`
-· `my_reality` · `sent_meaning` · `drawn_ascent`
-⚑ **Dark:** `ordinary_face` · `blend_in` · `false_target` — **Chaos:** `misdirect` · `wrong_target`
-⚠️ **Survival:** `named_exclusion` (T1) · `false_target` · `wrong_target`
-⛑ **`walking_figure` is the polymorph** — Ysenkar and Tolvess are built on it.
+### The Enginewright — *Order / Building / Body*
+Mechanism-Sense · Mend · Running Engine · Command the Small Engine · Old Procedure ·
+Mechanical Defense · Enginecraft · Shortfold · Self-Mending Work · Deep Works
+**Building:** Tinker's Hand · Held Repair · Raised Thing — **Body:** Plain Weight · Steady Hands
+Twelve crafts, every one on the ladder — the tightest tradition in the game.
 
 ---
 
-# BODY — 34 · mason 21 · somatic 13
+# Mind
 
-### THE MASON — *Body / Building / Order*
-`stone_read` · `stonewise` · `plain_weight` · `keen_appraisal` · `worth_the_work` · `thingcraft` ·
-`boundary_stone` · `set_word` · `shatterpoint` · `reduction` · `keystone_blow` · `raised_road` ·
-`unmaking_of_walls`
-⚑ **Building:** `raised_thing` · `held_repair` · `makers_eye` — **Order:** `latticework`
-⚠️ **Pell's list, near enough** — and note `worth_the_work` and `set_word` sit in a STONE tradition: **a
+### The Wizard — *Mind / Order / Spirit*
+Scholar's Margin · Sustained Regard · Cold-Read · Deduced Strike · Solved Route ·
+Working Model · Memory-Palace · Psychic Lance · Unmoving Mind · Mind Meld · Convergent Strike ·
+Names of Power
+**Order:** Latticework · Ordered Record — **Spirit:** Numen-Sense · Unbroken Practice
+**Survival:** Unmoving Mind (T4) · Ignore Me (T1) · Stillness Field borrowed
+
+### The Advocate — *Mind / Light / Building*
+Case Closed · Contradiction · Known Price · Unbroken Thread · Physician's Tome · Built System ·
+Proof-Halls
+**Light (verist):** Standing Word · Held Truth · Weight of Truth — **Building:** Mediator's Tongue ·
+Broker Truce
+**Case Closed is T1 AND LETHAL-RUNG** — **the Syllogists' darkest craft is their FIRST**, which no
+other tradition does. Seven crafts is a thin pole and the Advocate is complete anyway, because the
+second domain carries half the class.
+
+### The Figurist — *Mind / Dark / Chaos*
+True Figure · Cutting Figure · Pattern-Sense · Named Exclusion · Formcraft · Walking Figure
+· My Reality · Sent Meaning · Borrowed Form
+**Dark:** Ordinary Face · Blend In · False Target — **Chaos:** Misdirect · Wrong Target
+**Survival:** Named Exclusion (T1) · False Target · Wrong Target
+**Walking Figure is the polymorph** — Ysenkar and Tolvess are built on it.
+
+---
+
+# Body
+
+### The Mason — *Body / Building / Order*
+Stone-Read · Stonewise · Plain Weight · Keen Appraisal · Worth the Work · Thingcraft ·
+Boundary-Stone · Set Word · Shatterpoint · Reduction · Keystone Blow · Rising Step ·
+Unmaking of Walls
+**Building:** Raised Thing · Held Repair · Maker's-Eye — **Order:** Latticework
+**Pell's list, near enough** — and note Worth the Work and Set Word sit in a STONE tradition: **a
 mason's word is a mason's craft.**
 
-### THE SOUND-MASON — *Body / Death / Order*
-`echo_sense` · `sonic_resonance` · `sound_read` · `drumline_stride` · `chord_of_mending` · `sound_repair`
-⚑ **Death (threnodist):** `keening` · `harmonic_voice` · `made_elegy` — **Order:** `carrying_call` ·
-`sustained_chord` · `resonant_anchor`
-⛑ **A complete identity that lives in THREE domains and owns none of them** — ⚠️ **the Harmonic Heights'
-whole trade, and the strongest argument for the three-domain rule in the corpus.**
+### The Sound-mason — *Body / Death / Order*
+Echo Sense · Sonic Resonance · Sound Read · Drumline Stride · Chord of Mending · Made Whole
+**Death (threnodist):** Keening · Harmonic Voice · Made Elegy — **Order:** Carrying Call ·
+Sustained Chord · Resonant Anchor
+A complete identity that lives in THREE domains and owns none of them — the Harmonic Heights'
+whole trade, and the strongest argument for the three-domain rule in the corpus.
 
-### THE MONK — *Body / Spirit / Mind*
-`answered_motion` · `body_read` · `loose_limbed` · `second_wind` · `steady_hands` · `perfect_motion` ·
-`shaped_body` · `ki_thorns` · `skydancer` · `ki_wield`
-⚑ **Spirit:** `unbroken_practice` · `steady_soul` · `weight_of_practice` — **Mind:** `unmoving_mind`
-⚠️ **Survival is the class:** `shaped_body` (T3) *"stops taking harm the way bodies do"*, `ki_thorns`,
-`second_wind`.
+### The Monk — *Body / Spirit / Mind*
+Answered Motion · Body-Read · Loose-Limbed · Second Wind · Steady Hands · Perfect Motion ·
+Shaped Body · Ki Thorns · Skydancer · Ki Wield
+**Spirit:** Unbroken Practice · Steady the Soul · Weight of Practice — **Mind:** Unmoving Mind
+**Survival is the class:** Shaped Body (T3) *"stops taking harm the way bodies do"*, Ki Thorns,
+Second Wind.
 
-### THE SAMURAI — *Body / Breaking / Building*
-⚑ **Martial (complete):** `edge` · `dressed_edge` · `perfect_motion` · `held_line` · `read_the_fight` ·
-`disarm` · `answered_motion` · `false_stance` · `shieldwork` · `stand`
-⚑ **Honourable (complete):** `true_account` · `set_word` · `bound_witness` · `broker_truce` ·
-`mediators_tongue` · `calm_word` · `standing_word`
-⛔ **THE RULER HALF DOES NOT EXIST — see BUILDING.**
-
----
-
-# LIGHT — 37 · blazeborn 24 · verist 13
-
-### THE BLAZEBORN — *Light / Building / Order*
-`kindle` · `lightsense` · `radiant_ground` · `read_burn` · `sun_coax` · `radiance` · `blaze_wall` ·
-`radiant_lance` · `line_of_light` · `unshadow` · `revealing_burn` · `last_light` · `light_borne`
-⚑ **Building:** `glasswork` · `light_well` · `clarity_lens` — **Order:** `focused_array` · `beacon_chain`
-⚠️ **Survival:** `blaze_wall` (T2) · `kept_fire` · `afterimage` · `daybreak_mantle`
-
-### THE INQUISITOR — *Light / Mind / Angelic*
-**Verist:** `the_plain_seeing` · `held_truth` · `true_ground` · `unbearable_word` · `verity` ·
-`established_fact` · `weight_of_truth` · `whole_truth` · `the_unsurvivable_fact`
-⚑ **Mind:** `contradiction` · `case_closed` — **Angelic:** `the_measuring_eye` · `weighed_word` ·
-`measured_sentence`
-⛔ **`the_unsurvivable_fact` is T5 and carries `penetration: 3`** — ⚠️ **no ward answers being KNOWN.**
-⚠️ **Survival:** `felt_wall` · `shielding_light` · `standing_word`
-
-### THE LAMPLIGHTER — *Light / Span / Dark*
-`kindle` · `light_bending` · `beacon_chain` · `line_of_light` · `radiant_ground`
-⚑ **Span:** `wayfinding` · `known_way` · `road_ahead` — **Dark:** `darksight` · `long_dark`
-⛑ **The one who keeps a road lit** — ⚠️ **and takes DARK second, because you cannot light what you cannot
-first see the shape of.**
+### The Samurai — *Body / Breaking / Building*
+**Martial (complete):** Edge · Dressed Edge · Perfect Motion · Held Line · Read the Fight ·
+Disarming Strike · Answered Motion · False Stance · Shieldwork · Stand
+**Honourable (complete):** True Account · Set Word · Bound Witness · Broker Truce ·
+Mediator's Tongue · Calming Word · Standing Word
 
 ---
 
-# DARK — 42 · umbral 26 · veilwright 16
+# Light
 
-### THE THIEF — *Dark / Body / Chaos*
-`quiet_step` · `darksight` · `dim` · `felt_room` · `known_in_the_dark` · `shroud` · `false_trail` ·
-`shadowstep` · `unlit_step` · `never_there`
-⚑ **Body:** `quick_hands` · `loose_limbed` · `steady_hands` — **Chaos:** `the_way_out` · `misdirect`
-⚠️ **Survival IS the kit** — `never_there` (T5) is *"erasure of your passage."*
+### The Blazeborn — *Light / Building / Order*
+Kindle · Lightsense · Radiant Ground · Read Burn · Sun Coax · Radiance · Blaze Wall ·
+Radiant Lance · Line of Light · Unshadow · Revealing Burn · Last Light · Light-Borne
+**Building:** Glasswork · Light Well · Clarity Lens — **Order:** Focused Array · Beacon Chain
+**Survival:** Blaze Wall (T2) · Kept Fire · Afterimage · Daybreak Mantle
 
-### THE FACE — *Dark / Mind / Demonic*
-**Veilwright:** `ordinary_face` · `blend_in` · `borrowed_certainty` · `better_story` · `falsecraft` ·
-`maintained_veil` · `made_truth` · `perfect_veil` · `useful_lie`
-⚑ **Mind:** `mind_read_folk` · `pattern_sense` — **Demonic:** `the_read_want` · `offered_price` · `lever`
-⛔ **`useful_lie` is T5: *"a fiction so complete it becomes functionally true because all act upon it."***
+### The Inquisitor — *Light / Mind / Angelic*
+**Verist:** Plain Seeing · Held Truth · True Ground · Unbearable Word · Verity ·
+Established Fact · Weight of Truth · Whole Truth · Unsurvivable Fact
+**Mind:** Contradiction · Case Closed — **Angelic:** Weighing Look · Weighed Word ·
+Measured Sentence
+**Unsurvivable Fact is T5 and carries `penetration: 3`** — **no ward answers being KNOWN.**
+**Survival:** Felt Wall · Shielding Light · Standing Word
 
-### THE NIGHT-WARDEN — *Dark / Death / Building*
-`carried_dark` · `long_dark` · `harbor` · `the_kept_dark` · `standing_deep` · `shadowed_mending`
-⚑ **Death:** `kept_vigil` · `deathsense` — **Building:** `safe_ground` · `hearthbinding`
-⛑ **The Umbral who protects rather than steals** — ⚠️ **`harbor` and `the_kept_dark` are shelter crafts, and
-Hush's bond grant is one of them.**
-
-### THE ASSASSIN — *Dark / Breaking / Mind*
-`premeditate` · `slow_cup` · `swallowed_word` · `stopped_breath` · `uttered_name` · `cast_twin`
-⚑ **Breaking:** `hunters_strike` · `thrown_edge` · `who_falls_first` — **Mind:** `deduced_strike`
-⛔ **`stopped_breath` is T4 with per-rank sources — metaphysical at r1, VEIL at r2.**
+### The Lamplighter — *Light / Span / Dark*
+Kindle · Light Bending · Beacon Chain · Line of Light · Radiant Ground
+**Span:** Wayfinding · Known Way · Road Ahead — **Dark:** Darksight · Long Dark
+**The one who keeps a road lit** — and takes DARK second, because you cannot light what you cannot
+first see the shape of.
 
 ---
 
-# LIFE — 24 · rootkin 24 (single-pole)
+# Dark
 
-### THE RANGER — *Life / Breaking / Span*
-`lifesense` · `greenlore` · `pack_sense` · `beastfriend` · `snaring_green` · `root_road` · `green_road`
-⚑ **Breaking:** `hunters_strike` · `drawn_bow` · `read_field` — **Span:** `wayfinding` · `land_knowledge`
-⚠️ **Survival:** `bark_and_briar` (T2) · `staunch` · `snaring_green`
+### The Thief — *Dark / Body / Chaos*
+Quiet Step · Darksight · Dim · Felt Room · Known In The Dark · Shroud · False Trail ·
+Shadowstep · Unlit Step · Never-There
+**Body:** Quick Hands · Loose-Limbed · Steady Hands — **Chaos:** Way Out · Misdirect
+**Survival IS the kit** — Never-There (T5) is *"erasure of your passage."*
 
-### THE GREEN-WARDEN — *Life / Building / Death*
-`the_taking_root` · `quickening` · `speaking_grove` · `planted_years` · `root_that_holds` · `carried_green`
-· `the_small_kingdom`
-⚑ **Building:** `hearthbinding` · `safe_ground` — **Death:** `last_gift` · `kept_vigil`
-⛑ **The Thornmother's road** — ⚠️ **and `last_gift` at T4 is where the two domains meet.**
+### The Face — *Dark / Mind / Demonic*
+**Veilwright:** Ordinary Face · Blend In · Borrowed Certainty · Better Story · Falsecraft ·
+Maintained Veil · Made Truth · Perfect Veil · Necessary Fiction
+**Mind:** Cold-Read · Pattern-Sense — **Demonic:** Read Want · Offered Price · Lever
+**Necessary Fiction is T5: *"a fiction so complete it becomes functionally true because all act upon it."***
 
-### THE GRAFTER — *Life / Order / Body*
-`staunch` · `graftlife` · `forced_bloom` · `grown_guardian` · `quicken_the_ground` · `spark`
-⚑ **Order:** `set_to_rights` · `truename_order` — **Body:** `steady_hands` · `thingcraft`
-⚠️ **`spark` at T5 and `graftlife` at T3 are the domain's two hardest questions** — ⛔ *"the near edge of the
+### The Night-warden — *Dark / Death / Building*
+Carried Dark · Long Dark · Harbor · Kept Dark · Standing Deep · Shadowed Mending
+**Death:** Kept Vigil · Deathsense — **Building:** Safe Ground · Hearthbinding
+**The Umbral who protects rather than steals** — Harbor and Kept Dark are shelter crafts, and
+Hush's bond grant is one of them.
+
+### The Assassin — *Dark / Breaking / Mind*
+Premeditate · Slow Cup · Swallowed Word · Stopped Breath · Uttered Name · Cast Twin
+**Breaking:** Hunter's Strike · Thrown Edge · Who Falls First — **Mind:** Deduced Strike
+Stopped Breath is T4 with per-rank sources — metaphysical at r1, VEIL at r2.
+
+---
+
+# Life
+
+### The Ranger — *Life / Breaking / Span*
+Lifesense · Greenlore · Pack-Sense · Beastfriend · Snaring Green · Root Road · Green Road
+**Breaking:** Hunter's Strike · Drawn Bow · Read Field — **Span:** Wayfinding · Land Knowledge
+**Survival:** Bark and Briar (T2) · Staunch · Snaring Green
+
+### The Green-warden — *Life / Building / Death*
+Taking Root · Quickening · Speaking Grove · Planted Years · Root That Holds · Carried Green
+· Small Kingdom
+**Building:** Hearthbinding · Safe Ground — **Death:** Last Gift · Kept Vigil
+**The Thornmother's road** — **and Last Gift at T4 is where the two domains meet.**
+
+### The Grafter — *Life / Order / Body*
+Staunch · Graftlife · Forced Bloom · Grown Guardian · Quicken the Ground · Spark
+**Order:** Set to Rights · Set in Order — **Body:** Steady Hands · Thingcraft
+Spark at T5 and Graftlife at T3 are the domain's two hardest questions — *"the near edge of the
 Rootkin's own taboo."*
 
 ---
 
-# ANGELIC — 24 · seraphic 24 (single-pole)
+# Angelic
 
-### THE PALADIN — *Angelic / Breaking / Light*
-`shielding_light` · `sheltering_name` · `name_invoked` · `sustained_order` · `judged_strike` ·
-`shielding_word` · `guardian_angel` · `unfaltering_light` · `kept_flame`
-⚑ **Breaking:** `held_line` · `shieldwork` · `edge` · `in_the_way` — **Light:** `radiance` · `blaze_wall`
-⚠️ **Survival is the whole primary** — ⛑ **and `in_the_way` borrowed from Breaking is what makes it a
-PALADIN rather than a priest: you put your body where the blow was going.**
+### The Paladin — *Angelic / Breaking / Light*
+Shielding Light · Sheltering Name · Name Invoked · Sustained Order · Judged Strike ·
+Shielding Word · Guardian Angel · Unfaltering Light · Kept Flame
+**Breaking:** Held Line · Shieldwork · Edge · In the Way — **Light:** Radiance · Blaze Wall
+**Survival is the whole primary** — and In the Way borrowed from Breaking is what makes it a
+PALADIN rather than a priest: you put your body where the blow was going.
 
-### THE JUDGE — *Angelic / Light / Mind*
-`the_measuring_eye` · `weighed_word` · `measured_sentence` · `ascent` · `set_in_order` · `majesty` ·
-`lifted_word`
-⚑ **Light (verist):** `whole_truth` · `unbearable_word` · `held_truth` — **Mind:** `case_closed`
-⛔ **The Burning Certainty's road** — ⚠️ *"believes her foreclosure is mercy."*
+### The Judge — *Angelic / Light / Mind*
+Weighing Look · Weighed Word · Measured Sentence · Ascent · Proper Order · Majesty ·
+Lifted Word
+**Light (verist):** Whole Truth · Unbearable Word · Held Truth — **Mind:** Case Closed
+**The Burning Certainty's road** — *"believes her foreclosure is mercy."*
 
-### THE MERCY — *Angelic / Death / Life*
-`administered_mercy` · `carried_weight` · `answered_prayer` · `understudy` · `miracle`
-⚑ **Death:** `kept_vigil` · `the_attended_end` · `palework` — **Life:** `staunch` · `graftlife`
-⛑ **Oreth of the Quiet Ground is built here** — ⚠️ **and `closed: ["hastened_grey", "the_cut_thread"]` is
-what makes him a MERCY rather than an Ashwarden.**
-
----
-
-# DEMONIC — 23 · abyssal 23 (single-pole)
-
-### THE BARGAINER — *Demonic / Mind / Dark*
-`struck_term` · `offered_price` · `the_read_want` · `the_read_hunger` · `lever` · `descent` ·
-`deep_covenant` · `honest_bargain` · `borne_bargain` · `hollow_that_holds`
-⚑ **Mind:** `mind_read_folk` · `known_price` — **Dark:** `ordinary_face` · `borrowed_certainty`
-⛔ **The Hollow King and the Bright Bargain both live here** — ⚠️ **and neither holds a personal harm craft.**
-⚠️ **Survival:** `dread_mantle` · `offered_lesser` · `choir_sustains` — ⛑ **something else stands in front.**
-
-### THE HUNGRY — *Demonic / Body / Breaking*
-`appetite_sense` · `hungry_step` · `appetite_strike` · `consumed_wound` · `offered_mouth` · `collection` ·
-`drowning_deep`
-⚑ **Body:** `plain_weight` · `second_wind` — **Breaking:** `hunters_strike` · `who_falls_first`
-⛔ **`veil_stroke` at T1 is the domain's other half** — ⚠️ **the Abyssals reach the far side directly.**
+### The Mercy — *Angelic / Death / Life*
+Administered Mercy · Carried Weight · Answered Prayer · Understudy · Miracle
+**Death:** Kept Vigil · Attended End · Palework — **Life:** Staunch · Graftlife
+**Oreth of the Quiet Ground is built here** — and `closed: ["hastened_grey", "the_cut_thread"]` is
+what makes him a MERCY rather than an Ashwarden.
 
 ---
 
-# BREAKING — 39 · marcher 26 · unmaker 13
+# Demonic
 
-### THE MARCHER — *Breaking / Body / Building*
-`hunters_strike` · `held_line` · `disarm` · `read_field` · `read_the_fight` · `edge` · `dressed_edge` ·
-`advance` · `stand` · `weight` · `shieldwork` · `chosen_ground` · `break_the_line` · `last_form`
-⚑ **Body:** `perfect_motion` · `answered_motion` · `second_wind` — **Building:** `weapon_at_hand`
-⚠️ **Survival:** `shieldwork` (T3) · `stand` · `in_the_way` · `held_line`
+### The Bargainer — *Demonic / Mind / Dark*
+Struck Term · Offered Price · Read Want · Read Hunger · Lever · Descent ·
+Deep Covenant · Honest Bargain · Borne Bargain · Hollow That Holds
+**Mind:** Cold-Read · Known Price — **Dark:** Ordinary Face · Borrowed Certainty
+**The Hollow King and the Bright Bargain both live here** — **and neither holds a personal harm craft.**
+**Survival:** Dread Mantle · Offered Lesser · Choir Sustains — **something else stands in front.**
 
-### THE SCOUT-ARCHER — *Breaking / Span / Dark*
-`levelled_crossbow` · `sling_and_stone` · `thrown_edge` · `drawn_bow` · `read_field` · `long_road`
-⚑ **Span:** `wayfinding` · `road_ahead` · `kept_distance` — **Dark:** `quiet_step` · `false_trail`
-⛑ **`kept_distance` borrowed from Span is the class** — ⚠️ **an archer's survival is not armour.**
+### The Hungry — *Demonic / Body / Breaking*
+Appetite-Sense · Hungry Step · Appetite Strike · Consumed Wound · Offered Mouth · Collection ·
+Drowning Deep
+**Body:** Plain Weight · Second Wind — **Breaking:** Hunter's Strike · Who Falls First
+**Veil Stroke at T1 is the domain's other half** — **the Abyssals reach the far side directly.**
 
-### THE UNMAKER — *Breaking / Order / Body*
-`found_fault` · `fault_sense` · `clean_taking` · `given_way` · `clean_removal` · `ruinwork` ·
-`open_material` · `undoing_word` · `last_fault` · `last_unmaking`
-⚑ **Order:** `order_sense` · `unmake_seal` — **Body:** `stone_read` · `shatterpoint` · `keystone_blow`
-⛔ **`ended_threat` and `demonstrated_end` are the honest half** — ⚠️ *"the authority of someone who has shown
+---
+
+# Breaking
+
+### The Marcher — *Breaking / Body / Building*
+Hunter's Strike · Held Line · Disarming Strike · Read Field · Read the Fight · Edge · Dressed Edge ·
+Advance · Stand · Weight · Shieldwork · Chosen Ground · Breach · Last Form
+**Body:** Perfect Motion · Answered Motion · Second Wind — **Building:** Weapon at Hand
+**Survival:** Shieldwork (T3) · Stand · In the Way · Held Line
+
+### The Scout-archer — *Breaking / Span / Dark*
+Levelled Crossbow · Sling and Stone · Thrown Edge · Drawn Bow · Read Field · Hard Mile
+**Span:** Wayfinding · Road Ahead · Kept Distance — **Dark:** Quiet Step · False Trail
+**Kept Distance borrowed from Span is the class** — **an archer's survival is not armour.**
+
+### The Unmaker — *Breaking / Order / Body*
+Found Fault · Fault-Sense · Clean Taking · Given Way · Clean Removal · Ruinwork ·
+Open Material · Undoing Word · Last Fault · Last Unmaking
+**Order:** Order-Sense · Unmake Seal — **Body:** Stone-Read · Shatterpoint · Keystone Blow
+**Ended Threat and Demonstrated End are the honest half** — *"the authority of someone who has shown
 they can end things correctly."*
 
 ---
 
-# CHAOS — 14 · churnfolk 14 (thinnest pole)
+# Chaos
 
-### THE CHURNFOLK — *Chaos / Body / Dark*
-`chaos_sense` · `catch_as_catch_can` · `loose_thread` · `misdirect` · `the_way_out` ·
-`the_long_odds_come_in` · `scatter` · `wildcraft` · `wrong_target` · `probability_tilt` · `lucky_fall` ·
-`long_odds`
-⚑ **Body:** `loose_limbed` · `quick_hands` · `second_wind` — **Dark:** `quiet_step` · `blend_in`
-⚠️ **Survival:** `the_way_out` (T1) · `wrong_target` · `scatter` · `misdirect`
-⛑ **FOURTEEN CRAFTS AND THE CLASS IS COMPLETE** — ⚠️ **because ten of them are evasion, and evasion is what
-a chaos-worker survives on.** ⛔ **A thin pole is not automatically a hole.**
+### The Churnfolk — *Chaos / Body / Dark*
+Chaos-Sense · Catch as Catch Can · Loose Thread · Misdirect · Way Out ·
+Long Odds Come In · Scatter · Wildcraft · Wrong Target · Tilt · Fae Wings ·
+Long Odds
+**Body:** Loose-Limbed · Quick Hands · Second Wind — **Dark:** Quiet Step · Blend In
+**Survival:** Way Out (T1) · Wrong Target · Scatter · Misdirect
+**Fourteen crafts, and the class is complete** — because ten of them are evasion, and evasion is what
+a chaos-worker survives on. **A thin pole is not automatically a hole.**
 
-### THE FAE-COURTIER — *Chaos / Demonic / Dark*
-`churns_gift` · `wild_flowering` · `lucky_fall` · `probability_tilt` · `chaos_sense`
-⚑ **Demonic:** `struck_term` · `offered_price` · `lever` · `borne_bargain` — **Dark:** `ordinary_face`
-⛑ **The Hollow Court's own build** — ⚠️ **and the Unbought Court is the same primary with `hourkeeper` and
-`stillhold` instead, which is why they oppose without being opposites.**
+### The Fae-courtier — *Chaos / Demonic / Dark*
+Churn's Gift · Wild Flowering · Fae Wings · Tilt · Chaos-Sense
+**Demonic:** Struck Term · Offered Price · Lever · Borne Bargain — **Dark:** Ordinary Face
+**The Hollow Court's own build** — and the Unbought Court is the same primary with Hourkeeper and
+Stillhold instead, which is why they oppose without being opposites.
 
 ---
 
-# SPAN — 30 · horizon 16 · hourkeeper 14
+# Span
 
-### THE WAYFARER — *Span / Breaking / Life*
-`wayfinding` · `way_sense` · `known_way` · `road_ahead` · `shortened_road` · `folded_pace` · `rivercraft` ·
-`land_knowledge` · `long_reach` · `spanwork` · `made_crossing` · `far_step` · `edge_of_the_map`
-⚑ **Breaking:** `long_road` · `hunters_strike` — **Life:** `greenlore` · `staunch`
-⚠️ **Survival:** `kept_distance` · `fresh_horizon` · `the_way_out` borrowed
-⛑ **`edge_of_the_map` at T5** — ⚠️ **and trade is gated behind wayfaring, so this class is the economy.**
+### The Wayfarer — *Span / Breaking / Life*
+Wayfinding · Way-Sense · Known Way · Road Ahead · Shortened Road · Folded Pace · Rivercraft ·
+Land Knowledge · Long Reach · Spanwork · Made Crossing · Far Step · Edge of the Map
+**Breaking:** Hard Mile · Hunter's Strike — **Life:** Greenlore · Staunch
+**Survival:** Kept Distance · Fresh Horizon · Way Out borrowed
+**Edge of the Map at T5** — and trade is gated behind wayfaring, so this class is the economy.
 
-### THE HOURKEEPER — *Span / Order / Spirit*
-`hour_sense` · `kept_count` · `long_watch` · `spent_hour` · `stretched_hour` · `hourcraft` · `given_time` ·
-`wrong_moment` · `opened_moment` · `shaped_duration` · `held_hour` · `borrowed_hour` · `the_kept_hour`
-⚑ **Order:** `maintained_order` · `fixed_point` — **Spirit:** `unbroken_practice` · `weight_of_practice`
-⛑ **Aelith of the First Shape is built here** — ⚠️ **and `the_kept_hour` at T5 is *"what has not changed in
+### The Hourkeeper — *Span / Order / Spirit*
+Hour-Sense · Kept Count · Kept Vigil · Spent Hour · Stretched Hour · Hourcraft · Given Time ·
+Wrong Moment · Opened Moment · Shaped Duration · Held Hour · Borrowed Hour · Long Foreseeing
+**Order:** Maintained Order · Fixed Point — **Spirit:** Unbroken Practice · Weight of Practice
+**Aelith of the First Shape is built here** — **and Long Foreseeing at T5 is *"what has not changed in
 the place where nothing stays."***
 
 ---
 
-# SPIRIT — 13 · numinous 13 (thinnest domain)
+# Spirit
 
-### THE NUMINOUS — *Spirit / Death / Order*
-`numen_sense` · `bound_witness` · `hallowed_ground` · `steady_soul` · `thin_step` · `unbroken_practice` ·
-`answering` · `dimmed_meaning` · `plain_seeming` · `weight_of_practice` · `thin_place` · `open_threshold` ·
-`waygate`
-⚑ **Death:** `kept_vigil` · `carried_name` — **Order:** `address_sense` · `latticespeak`
-⚠️ **Survival:** `steady_soul` · `plain_seeming` · `hallowed_ground` — ⛔ **thin, and it is the domain's
+### The Numinous — *Spirit / Death / Order*
+Numen-Sense · Bound Witness · Hallowed Ground · Steady the Soul · Thin Step · Unbroken Practice ·
+Answering · Dimmed Meaning · Plain Seeming · Weight of Practice · Open the Thin Place · Open Threshold ·
+Waygate
+**Death:** Kept Vigil · Carried Name — **Order:** Address-Sense · Latticespeak
+**Survival:** Steady the Soul · Plain Seeming · Hallowed Ground — **thin, and it is the domain's
 honest weakness.**
-⛑ **THIRTEEN CRAFTS AND IT BUILDS A WHOLE CLASS**, but ⚠️ **Spirit is the one domain where the borrow is
-not optional: a numinous who takes nothing else has almost no way to survive a fight.**
+**Thirteen crafts, and they build a whole class**, but Spirit is the one domain where the borrow is
+not optional: a numinous who takes nothing else has almost no way to survive a fight.
 
-⬜ **AND R38b IS ITS OTHER PROBLEM:** ⛔ **it needs MEANING to work on and THIN APPARATUS to work through, and
-the places thick with meaning are usually thick with lattice.** ⚠️ **Measured: metaphysical is inside its
-band in 7 of 39 regions.**
+And the domain asks something awkward of the world: it needs meaning to work on and thin apparatus to work
+through, and the places thick with meaning are usually thick with lattice. A numinous is looking for ground
+that most settled country does not offer.
 
 ---
-
-# ⬜ WHAT THE PASS FOUND
-
-| ⛔ hole | |
-|---|---|
-| ⛔ **COMMAND AT BAND SCALE** | 30 `command` crafts, **none commands a band.** ⚠️ The standing ladder, `bandOps`, the garrison and `legionClash` are all waiting |
-| ⛔ **THE RAISING LADDER** | `set_hand` is the only raising craft. ⚠️ **One rung, no ladder, and `narrowed_dead` is a bestiary class nothing can produce** |
-
-| ⚑ confirmed sound | |
-|---|---|
-| **Chaos 14, Spirit 13, syllogist 7, figurist 9** | ⛑ **thin poles that all carry a complete class**, because the second and third domains carry the rest |
-| **every class has functional protection** | ⚠️ named per entry, per Erik's rule |
-| **the borrow IS the class** | ⛔ **Ash Warden vs Guardian Monk: same Death spine, Body or Spirit second** |

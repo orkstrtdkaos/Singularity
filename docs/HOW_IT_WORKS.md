@@ -1185,6 +1185,27 @@ folk crafts) is a pure reader in `engine/library.js` now, every string through `
 every field to prove none arrives. Coverage is asserted rather than assumed: every entry must be path-bearing or the circle, so the
 next pathless entry reddens the gate instead of being skipped by it.
 
+✅ **B2: nine registered rules files that reached nothing (Erik 2026-09-12: *"proceed with B2"*, `§185`).** Aevi's build list called
+these the second gate on 2.0.0 — authored intent with no consumer, the project's signature defect wearing content's face. Four now
+have a reader that reads what they *say*, in `scripts/authoring_checks.mjs`, run by content_ci and broken on a synthetic by §185 (a
+mention is not a reader: content_ci's orphan gate counts a file consumed when its name appears anywhere in `tests/`, so the cheapest
+way to green was a comment):
+
+| file | its reader | what it found |
+|---|---|---|
+| `energy_costs` | each level's documented median must still be the corpus's median (±1) | green — and **28 crafts priced outside their level's band**, which is what the file was written to make visible, plus five stale `n` counts (a stored copy of a derived number) |
+| `companion_template` | every companion carries the shape the template declares required | green, 9 of 9 across 13 fields — with the bond-grant stubs reported against the template's own full-schema rule |
+| `damage_types` | every declared type is in the enum, or in a named census | green — **five types the corpus uses and the enum does not admit** (force, psychic, radiance, spatial, corrosive); a sixth fails |
+| `ability_distribution_target` | the distance from the compass, measured and **never gated** | 9 domains grown, 5 shrunk — Death 23→44, Chaos 25→14; a compass that must agree with where you are is not a compass |
+
+The other five carry a reasoned classification naming what is built, what is owed and whose it is: `healing_intent` (SNG-474 — 57
+crafts heal, 27 carry dice, **not one number is read**; the largest unbuilt item here), `tempo` (the sense slot is built, the banked
+charge and its three visibility points are owed), `nexuses` (blocked on two of Erik's rulings — the moon does not exist in canon, and
+cogitant's source), `mechanic_effects` (its own `wired` flags disagree with the engine in **eight** places, six of them effects it
+calls unwired that were built after it was written — the existing CCODE-238 gate probes three and passes), and `death_domain`
+(permanent canon that shapes authoring; the engine reads the traditions and schools it produces). **content_ci: 8 failures → 6**, the
+six being the geography cluster, and its baseline lowered to match.
+
 ✅ **Eight stats (Erik 2026-09-11: *"there are 8 stats, not the 4 we started with. they now need a spread of the 8"*).** Every
 craft row rolls ONE sub-attribute — a dial, `craftSubAttributes.enabled`, on; off, every craft rolls its parent as before. An authored `subAttribute` on a craft wins; otherwise `resolution.craftSubAttributes` splits
 each parent's verbs between its power sub (strength, reason, presence, craft) and its finesse sub (agility, insight, rapport,

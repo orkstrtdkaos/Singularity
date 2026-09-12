@@ -1648,6 +1648,52 @@ for (const pack of PACKS) {
     `${undeclared.length} registered but read by nobody and named nowhere: ${undeclared.join(", ")} — wire it, or classify it in rules_classification.json`);
   check("…and each declaration carries a REASON, not just a name (SNG-342)", thin.length === 0,
     `${thin.join(", ")} declared with no substantive reason`);
+  // ══ B2 (Erik 2026-09-12: "proceed with B2") — FOUR OF THE NINE UNREAD RULES FILES NOW HAVE A READER, AND IT READS WHAT THEY SAY.
+  // ⛔ The orphan gate above counts a file consumed when its NAME appears in tests/, so the cheap way to green was a comment.
+  // These run the file's own rule over the live corpus (scripts/authoring_checks.mjs — §185 breaks each one on a synthetic).
+  {
+    const AC = await import("../scripts/authoring_checks.mjs");
+    const { loadContentHeadless: lchB2 } = await import("./headless_content.mjs");
+    const C = await lchB2();
+    const craftsB2 = Object.values(C.abilities || {}).filter(a => a && a.id);
+
+    // 1 · energy_costs.json — the documented structure must still describe the corpus it was derived from
+    const ecSpec = rj("content/packs/core/rules/energy_costs.json");
+    const ecR = AC.energyBandReport(craftsB2, ecSpec);
+    check("energy_costs: every level's DOCUMENTED median is still the corpus's median (±1) — SNG-497's structure has not drifted from the crafts",
+      ecR.drifted.length === 0, ecR.drifted.map(r => `T${r.tier} file ${r.fileMedian} live ${r.liveMedian}`).join(" · "));
+    console.log(`      energy_costs: ${ecR.rows.map(r => `T${r.tier} median ${r.liveMedian} band ${r.band} · ${r.outsideBand.length} outside`).join(" | ")}`);
+    if (ecR.staleCounts.length) console.log(`      note  energy_costs: the file's own counts are a stored copy of a derived number and ${ecR.staleCounts.length} are stale (${ecR.staleCounts.map(r => `T${r.tier} says ${r.fileN}, corpus ${r.liveN}`).join(" · ")}) — Aevi's to restamp or drop`);
+    const ecOut = ecR.rows.flatMap(r => r.outsideBand);
+    if (ecOut.length) console.log(`      note  energy_costs: ${ecOut.length} craft(s) priced outside their level's band — the outliers the file was written to make visible: ${ecOut.slice(0, 12).join(" · ")}${ecOut.length > 12 ? " …" : ""}`);
+
+    // 2 · companion_template.json — SNG-511's shape, held over all nine companions
+    const ctSpec = rj("content/packs/core/rules/companion_template.json");
+    const comps = Object.values(C.companions || {});
+    const ctGaps = AC.templateGaps(comps, ctSpec);
+    check(`companion_template: every companion carries the shape the template declares required (${comps.length} companions, ${Object.keys(ctSpec.required || {}).length} required fields)`,
+      comps.length > 0 && ctGaps.length === 0, ctGaps.map(g => `${g.id}: ${g.gaps.join(", ")}`).join(" · "));
+    const stubGrants = comps.flatMap(c => (Array.isArray(c.bondGrants) ? c.bondGrants : []).filter(g => g && !g.tree).map(g => `${c.id}:${g.id || g.abilityId || "?"}`));
+    if (stubGrants.length) console.log(`      note  companion_template: ${stubGrants.length} bond grant(s) are stubs — the template says a grant must carry the full ability schema (no tree/mechanic/bounds/plainly): ${stubGrants.slice(0, 6).join(" · ")}${stubGrants.length > 6 ? " …" : ""} — Aevi's`);
+
+    // 3 · damage_types.json — the authored enum against what the crafts declare, with the five it has not admitted named
+    const DT_CENSUS = ["force", "psychic", "radiance", "spatial", "corrosive"];   // measured 2026-09-12; widen the enum or retype the crafts (Aevi)
+    const dtR = AC.damageTypeReport(craftsB2, rj("content/packs/core/rules/damage_types.json"), DT_CENSUS);
+    check(`damage_types: every type a craft declares is in the authored enum, or in the census awaiting a content decision (${dtR.listed.length} listed, ${dtR.used.length} declared)`,
+      dtR.fresh.length === 0, `NEW type(s) outside both: ${dtR.fresh.join(", ")}`);
+    if (dtR.outside.length) console.log(`      note  damage_types: ${dtR.outside.length} declared type(s) the enum does not admit — ${dtR.outside.map(t => `${t} (${(dtR.used.find(u => u[0] === t) || [])[1] || 0})`).join(" · ")} — widen the enum or retype, Aevi's call`);
+    if (dtR.stale.length) console.log(`      note  damage_types: the census names ${dtR.stale.join(", ")}, which no craft declares any more — drop from the census`);
+
+    // 4 · ability_distribution_target.json — a compass, measured and never gated
+    const adR = AC.distributionDistance(craftsB2, rj("content/packs/core/rules/ability_distribution_target.json"), C.traditionIndex?.domainOfTrad || {});
+    console.log(`      note  ability_distribution_target: the corpus against its snapshot — ${adR.grown} domain(s) grown, ${adR.shrunk} shrunk: ${adR.rows.slice(0, 5).map(r => `${r.domain} ${r.snapshot}→${r.live}`).join(" · ")} … ${adR.rows.slice(-2).map(r => `${r.domain} ${r.snapshot}→${r.live}`).join(" · ")}`);
+
+    // 5 · mechanic_effects.json — its own `wired` claims, checked against the engine's vocabulary
+    const meClash = AC.wiredClaimClashes(rj("content/packs/core/rules/mechanic_effects.json"), readdirSync(join(root, "engine")).filter(f => f.endsWith(".js")).map(f => readFileSync(join(root, "engine", f), "utf8")).join("\n"));
+    if (meClash.length) console.log(`      note  mechanic_effects: ${meClash.length} of its \`wired\` claims disagree with the engine — ${meClash.map(r => `${r.name} (file: ${r.claim})`).join(" · ")} — six were built after the file was written; the flags are Aevi's to refresh`);
+  }
+
+
   // The gaps stay LOUD. runtime_unwired is content with no consumer — a real debt, reported every run so
   // it cannot settle into the background the way these ten did.
   // ⛔ SNG-344 — `kind` IS A CLOSED VOCABULARY, because it was never merely descriptive. The orphan loop

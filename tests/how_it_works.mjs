@@ -2267,8 +2267,12 @@ console.log("\n── §180 · the suites run in a pool; the hook skips a tree t
   check("§180: ⛔ the hook skips the ratchet for the tree the ship script verified, or one that differs only under characters/ — and runs it for anything else; both tracked copies are one text",
     hook180 === hook180b && /ratchet-verified-tree/.test(hook180) && /grep -v '\^characters\/'/.test(hook180) && /node scripts\/run_tests\.mjs --ratchet --quiet/.test(hook180) && /exit 1/.test(hook180));
   const base180 = JSON.parse(rd("tests/suite_baseline.json"));
-  check("§180: the baseline was LOWERED for wiring_audit (1 → 0) on Erik's word — the deliberate act the file's own note prescribes — and nothing was raised",
-    base180.suites.wiring_audit === 0 && base180.suites.content_ci === 8 && base180.suites.smoke === 0 && base180._updatedAt === "2026-09-12");
+  // ⛔ 2026-09-12: this pinned content_ci at 8 and smoke at 0 beside the claim it exists to make — so LOWERING content_ci to 6 on Erik's
+  // authorisation (B2, §185) reddened the gate that records that lowering is legitimate. A number allowed to fall is not a fixture.
+  // The claim is the ACT: wiring_audit is at its floor, every suite's baseline is a non-negative count, and the file is dated.
+  check("§180: the baseline was LOWERED for wiring_audit (1 → 0) on Erik's word — the deliberate act the file's own note prescribes — and a lowered count is never pinned by another gate",
+    base180.suites.wiring_audit === 0 && Object.values(base180.suites).every(v => Number.isInteger(v) && v >= 0) && /^2026-/.test(String(base180._updatedAt))
+    && !/base180\.suites\.content_ci ===/.test(rd("tests/how_it_works.mjs")));
 }
 
 
@@ -2448,6 +2452,73 @@ console.log("\n── §184 · the claim, not its capitals; the stamp keeps the 
   const entries184 = LB184.LIBRARY_INDEX.flatMap(c => c.entries);
   check(`§184: ⛔ every Library entry is covered by a gate that RENDERS it — ${entries184.filter(e => e.path).length} by path (§181), ${entries184.filter(e => !e.path).length} drawn (here)`,
     entries184.length >= 15 && entries184.every(e => e.path || e.kind === "circle"), entries184.filter(e => !e.path && e.kind !== "circle").map(e => e.id).join(", "));
+}
+
+/* ══════════ §185 — B2: NINE REGISTERED RULES FILES THAT REACHED NOTHING (Erik 2026-09-12: "proceed with B2") ══════════ */
+console.log("\n── §185 · four of the nine are read for what they say, and each rule can go red ──");
+{
+  const AC185 = await import("../scripts/authoring_checks.mjs");
+  const CL185 = rj("content/packs/core/rules_classification.json");
+  const { loadContentHeadless: lch185 } = await import("./headless_content.mjs");
+  const C185 = await lch185();
+  const crafts185 = Object.values(C185.abilities || {}).filter(a => a && a.id);
+  const NINE = ["ability_distribution_target", "companion_template", "damage_types", "death_domain", "energy_costs", "healing_intent", "mechanic_effects", "nexuses", "tempo"];
+  // ⛔ EVERY ONE OF THE NINE IS ACCOUNTED FOR, WITH A REASON. The gate content_ci runs accepts a 40-character reason; this asserts
+  // the nine are exactly the ones B2 was opened for, that none sits in two buckets, and that each reason names a reader or an owed build.
+  const bucketOf = (id) => Object.entries(CL185).filter(([k, v]) => v && typeof v === "object" && !k.startsWith("_")).filter(([, v]) => Object.prototype.hasOwnProperty.call(v, id)).map(([k]) => k);
+  const unplaced = NINE.filter(id => bucketOf(id).length !== 1);
+  check(`§185: ⛔ all nine unread rules files are classified exactly once, with a substantive reason (${NINE.length} files)`,
+    unplaced.length === 0 && NINE.every(id => String(CL185[bucketOf(id)[0]][id]).length >= 80), unplaced.join(", ") || NINE.filter(id => String(CL185[bucketOf(id)[0]]?.[id] || "").length < 80).join(", "));
+  check("§185: …and the four with a reader name it, while the five that are owed work name what is owed",
+    ["energy_costs", "companion_template", "damage_types", "ability_distribution_target"].every(id => bucketOf(id)[0] === "wired_elsewhere" && /authoring_checks|content_ci/.test(CL185.wired_elsewhere[id]))
+    && ["healing_intent", "tempo", "nexuses", "mechanic_effects"].every(id => bucketOf(id)[0] === "reference_pending_build" && /OWED|BLOCKED|Refreshing|owed/.test(CL185.reference_pending_build[id]))
+    && bucketOf("death_domain")[0] === "reference_permanent");
+
+  // 1 · energy_costs — green on the corpus, and red when the document drifts from it
+  const ec185 = rj("content/packs/core/rules/energy_costs.json");
+  const ecLive = AC185.energyBandReport(crafts185, ec185);
+  check(`§185: ⛔ energy_costs is READ — every level's documented median is the corpus's median (±1); ${ecLive.rows.map(r => "T" + r.tier + " " + r.liveMedian).join(" ")}`,
+    ecLive.drifted.length === 0, ecLive.drifted.map(r => `T${r.tier} file ${r.fileMedian} live ${r.liveMedian}`).join(" · "));
+  const ecBroken = JSON.parse(JSON.stringify(ec185)); ecBroken.byLevel["3"].median = 99;
+  check("§185: …and it goes RED when the document and the corpus disagree — the drift is what the file exists to make visible",
+    AC185.energyBandReport(crafts185, ecBroken).drifted.some(r => r.tier === 3));
+  check("§185: …the outliers the file was written to expose are counted, not hidden", ecLive.rows.some(r => r.outsideBand.length > 0) && ecLive.rows.every(r => Array.isArray(r.outsideBand)));
+
+  // 2 · companion_template — green on all nine, red on a companion missing a required field
+  const ct185 = rj("content/packs/core/rules/companion_template.json");
+  const comps185 = Object.values(C185.companions || {});
+  check(`§185: ⛔ companion_template is READ — all ${comps185.length} companions carry every required field`, comps185.length >= 9 && AC185.templateGaps(comps185, ct185).length === 0,
+    AC185.templateGaps(comps185, ct185).map(g => `${g.id}: ${g.gaps}`).join(" · "));
+  const { stages: _drop, ...noStages } = comps185[0];
+  check("§185: …and RED for a companion that does not — the gap is named with the field",
+    (() => { const g = AC185.templateGaps([noStages], ct185); return g.length === 1 && g[0].gaps.includes("stages"); })());
+
+  // 3 · damage_types — green with the census, red on a type outside both
+  const dt185 = rj("content/packs/core/rules/damage_types.json");
+  const CENSUS = ["force", "psychic", "radiance", "spatial", "corrosive"];
+  const dtLive = AC185.damageTypeReport(crafts185, dt185, CENSUS);
+  check(`§185: ⛔ damage_types is READ — ${dtLive.used.length} types declared, ${dtLive.listed.length} in the enum, ${dtLive.outside.length} in the census, 0 outside both`,
+    dtLive.fresh.length === 0, dtLive.fresh.join(", "));
+  check("§185: …and RED for a SIXTH type outside both the enum and the census — while the five wait on a content decision",
+    AC185.damageTypeReport([...crafts185, { id: "x", mechanic: { damageType: "sonorous" } }], dt185, CENSUS).fresh.join() === "sonorous"
+    && AC185.damageTypeReport(crafts185, dt185, []).fresh.length === 5);
+  check("§185: …and the census cannot rot unnoticed — a type nothing declares any more is reported", AC185.damageTypeReport(crafts185, dt185, [...CENSUS, "ectoplasm"]).stale.join() === "ectoplasm");
+
+  // 4 · ability_distribution_target — measured, never gated
+  const adLive = AC185.distributionDistance(crafts185, rj("content/packs/core/rules/ability_distribution_target.json"), C185.traditionIndex?.domainOfTrad || {});
+  check("§185: ⛔ ability_distribution_target is MEASURED and deliberately not gated — the compass names 14 domains and the distance to the corpus is reported both ways",
+    adLive.rows.length === 14 && adLive.grown > 0 && adLive.shrunk > 0 && adLive.rows.every(r => Number.isFinite(r.snapshot) && Number.isFinite(r.live)),
+    JSON.stringify(adLive.rows.slice(0, 3)));
+
+  // 5 · mechanic_effects — the file's own claim about the engine, checked
+  const meLive = AC185.wiredClaimClashes(rj("content/packs/core/rules/mechanic_effects.json"), rd("engine/skill_battle.js") + rd("engine/encounters.js") + rd("engine/conditions.js"));
+  check("§185: ⛔ mechanic_effects' `wired` claims are CHECKED against the engine — a claim about a mechanism is the one thing this project distrusts",
+    Array.isArray(meLive) && meLive.every(r => r.name && r.claim && r.why));
+  check("§185: …a claim of WIRED with nothing in the engine is a clash, and so is a claim of UNWIRED for something the engine plainly names",
+    AC185.wiredClaimClashes({ effects: { GHOST_STEP: { wired: true } } }, "nothing here").length === 1
+    && AC185.wiredClaimClashes({ effects: { SOAK: { wired: false } } }, "const soak = 0;").length === 1
+    && AC185.wiredClaimClashes({ effects: { SOAK: { wired: true } } }, "const soak = 0;").length === 0
+    && AC185.wiredClaimClashes({ effects: { PARTIAL_THING: { wired: "partial" } } }, "nothing").length === 0);
 }
 
 /* ══════════ §14 — THE FOLD CANNOT BEAT AN IMMUNITY THE BLOW COULD NOT ══════════ */

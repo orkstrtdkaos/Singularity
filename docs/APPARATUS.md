@@ -1,7 +1,7 @@
 # THE APPARATUS — every harness, what it is for, and whether it runs
 
 ⛔ **ERIK, 2026-08-29: *"I want this to be a well oiled factory."*** ⚠️ **A factory you cannot see is not
-well oiled.** 99 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
+well oiled.** 100 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
 were gates, which were reports, and which had quietly stopped being wired into anything.
 
 ```bash
@@ -10,7 +10,7 @@ node scripts/apparatus.mjs --md     # …as markdown for §5
 node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 ```
 
-**Last measured: 2026-09-12 · v1.9.463 · 99 files.**
+**Last measured: 2026-09-12 · v1.9.463 · 100 files.**
 
 ---
 
@@ -134,9 +134,9 @@ worthless.
 | harness | kind | assertions | purpose |
 |---|---|---|---|
 | `tests/smoke` | ✅ GATE | 3562 | — |
-| `tests/how_it_works` | ✅ GATE | 1850 | CCODE-285 |
+| `tests/how_it_works` | ✅ GATE | 1863 | CCODE-285 |
 | `tests/skill_battle_sim` | ✅ GATE | 217 | SNG-098: the two-sided contest + fog-of-war invariant |
-| `tests/content_ci` | ✅ GATE | 188 | SNG-BATCH-10 Phase 4 / SNG-040/064: the content integrity gate |
+| `tests/content_ci` | ✅ GATE | 191 | SNG-BATCH-10 Phase 4 / SNG-040/064: the content integrity gate |
 | `tests/craft_crit` | ✅ GATE | 43 | miss // it and YOU HAVE ONLY MADE CHAOS |
 | `tests/wiring_audit` | ✅ GATE | 41 | BATCH-11 §23 |
 | `tests/group_capability` | ✅ GATE | 26 | CCODE-307 |
@@ -202,6 +202,7 @@ worthless.
 | `scripts/apply_promotion_SNG-396` | 🔧 TOOL | — | applies Aevi's two ratifications, and ONLY what they say |
 | `scripts/atlas_inject` | 🔧 TOOL | — | regenerate the §13 table inside docs/FIELD_REFERENCE |
 | `scripts/audit_images` | 🔧 TOOL | — | — |
+| `scripts/authoring_checks` | 🔧 TOOL | — | THE AUTHORING RULES FOUR REGISTERED FILES CARRY, AS FUNCTIONS |
 | `scripts/axis_worklist` | 🔧 TOOL | — | THE GAIN-AXIS WORKLIST |
 | `scripts/battle_test_crafts` | 🔧 TOOL | — | CCODE-313 |
 | `scripts/bonus_dial` | 🔧 TOOL | — | CCODE-257 |

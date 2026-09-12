@@ -1,7 +1,7 @@
 # THE APPARATUS — every harness, what it is for, and whether it runs
 
 ⛔ **ERIK, 2026-08-29: *"I want this to be a well oiled factory."*** ⚠️ **A factory you cannot see is not
-well oiled.** 98 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
+well oiled.** 99 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
 were gates, which were reports, and which had quietly stopped being wired into anything.
 
 ```bash
@@ -10,7 +10,7 @@ node scripts/apparatus.mjs --md     # …as markdown for §5
 node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 ```
 
-**Last measured: 2026-09-11 · v1.9.446 · 98 files.**
+**Last measured: 2026-09-12 · v1.9.463 · 99 files.**
 
 ---
 
@@ -133,12 +133,12 @@ worthless.
 <!-- APPARATUS:BEGIN -->
 | harness | kind | assertions | purpose |
 |---|---|---|---|
-| `tests/smoke` | ✅ GATE | 3563 | — |
-| `tests/how_it_works` | ✅ GATE | 1576 | CCODE-285 |
+| `tests/smoke` | ✅ GATE | 3562 | — |
+| `tests/how_it_works` | ✅ GATE | 1850 | CCODE-285 |
 | `tests/skill_battle_sim` | ✅ GATE | 217 | SNG-098: the two-sided contest + fog-of-war invariant |
-| `tests/content_ci` | ✅ GATE | 184 | SNG-BATCH-10 Phase 4 / SNG-040/064: the content integrity gate |
+| `tests/content_ci` | ✅ GATE | 188 | SNG-BATCH-10 Phase 4 / SNG-040/064: the content integrity gate |
 | `tests/craft_crit` | ✅ GATE | 43 | miss // it and YOU HAVE ONLY MADE CHAOS |
-| `tests/wiring_audit` | ✅ GATE | 39 | BATCH-11 §23 |
+| `tests/wiring_audit` | ✅ GATE | 41 | BATCH-11 §23 |
 | `tests/group_capability` | ✅ GATE | 26 | CCODE-307 |
 | `tests/damage_sensitivity` | ✅ GATE | 22 | — |
 | `tests/interpose_wiring` | ✅ GATE | 19 | CCODE-311 |
@@ -189,6 +189,7 @@ worthless.
 | `scripts/substrate_atlas` | 🔧 TOOL+SELFTEST | 2 | 39 REGIONS × 6 SOURCES, PRINTED ONCE, BECAUSE NOBODY HAS EVER SEEN IT |
 | `scripts/apparatus` | 🔧 TOOL+SELFTEST | 1 | CCODE-301 |
 | `scripts/certify_counts` | 🔧 TOOL+SELFTEST | 1 | CCODE-327 |
+| `scripts/damage_sweep` | 🔧 TOOL+SELFTEST | 1 | SPEC_damage_make_it_vary §2: ONE HARNESS, ANY DIAL, THE NUMBER THAT MATTERS |
 | `scripts/encounter_types` | 🔧 TOOL+SELFTEST | 1 | CCODE-262 |
 | `scripts/engine_map` | 🔧 TOOL+SELFTEST | 1 | BATCH-12 §5 |
 | `scripts/prompt_grid` | 🔧 TOOL+SELFTEST | 1 | SNG-435 §B3: the ordering grid |
@@ -205,6 +206,7 @@ worthless.
 | `scripts/battle_test_crafts` | 🔧 TOOL | — | CCODE-313 |
 | `scripts/bonus_dial` | 🔧 TOOL | — | CCODE-257 |
 | `scripts/casualty_sim` | 🔧 TOOL | — | CCODE-304 |
+| `scripts/certify_claims` | 🔧 TOOL | — | HOW A CERTIFIED CLAIM IS MATCHED AND RESTAMPED |
 | `scripts/damage_map` | 🔧 TOOL | — | CCODE-280 / AEVI's SPEC_damage_type_system |
 | `scripts/derive_location_tiers` | 🔧 TOOL | — | SNG-383 §2 |
 | `scripts/duel_pell_vs_veth` | 🔧 TOOL | — | po/DUEL_pell_vs_veth |

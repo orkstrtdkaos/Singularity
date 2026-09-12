@@ -483,7 +483,7 @@ working papers; **this is the answer.**
 | 09-08 | ✅ **ONE ROSTER, DERIVED; THE OPPONENT GATE; R41's FORM; THE VEIL LOADED** | Erik: *"all NPCs should at least be referenced from a single source list… even if we need to keep separate lists for code"* · *"any condition must be an opposed roll"* stands unbuilt (§A) | `scripts/roster.mjs` reads six files from disk and asks `personOpponentFor` for each; 144 records, 125 reachable, **40 would fight at level 1** (ratchet, Aevi's §2 owns it); `npcs/legends.json`'s five are read by NOTHING and Corvane is a hinge on 4 of 6 arcs (§10 gap); `notAnOpponent: true` refuses by name; a Sovereign is ONE record with `forms.diminished`/`forms.final` chosen by the arc's live stage; `the_veil` + `power_cosmology` loaded, attached, and on the GM's ask view | `§147` · `§59` refixtured on Sister Alder · `roster --check` is a suite | §10 gains the hinge gap; docs/ROSTER.md is generated between markers, prose kept above |
 | 09-08 | ✅ **THE FORTY ARE DERIVED, NOT AUTHORED — ROLE → TIER → THE CHAIN THAT ALREADY RAN** | Erik: *"I thought you were going to have him make the generative engine build out the remaining empty NPCs?"* · Aevi, correcting her own spec: *"NOT A MISSING SHEET. NOT A MISSING KIT. ONE MISSING FIELD."* | 40 of 40 level-1 records were level 1 for one reason — no `tier` — while `tierFloor` already fired for the 64 who had one. `rules/tier_signals.json` (CONTENT, correctable without code) → `tierFromRole` → `derivedLevel`, consulted ONLY where a record is silent. **40 → 0**, ratchet tightened; 19 regional · 12 notable · 9 heroic. Guards: authored tier and level both outrank it; default `notable`; a hard `ceiling: heroic` so no regex reaches epic/legendary/mythic; `tierDerived` on the SHEET, never stamped onto the record; no code fallback, so an absent table derives nothing | `§148` · `§147`'s level-1 ratchet 40→0 | ⚠ **and my roster column was too generous**: R47's bare `_strike` was counting as a kit, so 62 records read as armed when they have no real craft — corrected, and it makes `domains` on the legends the same one-field problem one tier up |
 
-**Last verified: 2026-09-12 · v1.9.462 · 429 crafts.**
+**Last verified: 2026-09-12 · v1.9.463 · 429 crafts.**
 
 ---
 
@@ -1166,6 +1166,24 @@ its parent). `scale.json` — the world's physical size, five constants with no 
 says *about N days (about M miles) on foot*, the first distance a player has ever been shown in a unit; `walkingDays` stays on canon
 300/π and a gate holds the file's `walkingDaysPerDegree` to it within 1%. Aevi's 32 days from Longshore to the unnamed river mouth
 at −38.25, 52.25 reproduces from the seat's own coordinates.
+
+✅ **A gate may not pin the typography of prose it does not own (Aevi 2026-09-12, SNG-538 §5, `§184`).** Her register pass over the
+player documents hit three of my gates and she restored my emphasis to get a green run: two in this suite matched her headings'
+shouting *literally* — `/RANKS ARE ADDITIVE/` with no flag and a `.includes("PART I½ · WHERE EVERYTHING IS")` — and
+`certify_counts` refused to stamp the guide's *Last verified* line unless it kept its `**`. All three are loosened: the two gates
+match the claim in any register (as named objects `§184` proves both spellings against), and a certified claim's wrapper is now
+optional and *preserved* — `**`, `__`, or nothing, whatever the document wears is what the restamp comes back wearing, through
+`scripts/certify_claims.mjs`, the module the tool itself uses. The numbers stay mine; the emphasis is the author's. Six other
+caps-run pins in the suite read `docs/HOW_IT_WORKS.md`, which is mine, and they stay — the rule is ownership, not case-sensitivity.
+And the sweep that found them had the same shape of blind spot as the gate it was auditing: it read the subject only *after* the
+pattern, which is right for `/…/.test(pg)` and wrong for `pgSrc.includes("…")`, so §12's pin escaped the first pass.
+
+✅ **The Library surface the gate could not see (`§184`).** §181 renders every index entry that has a `path` — and the great circle
+has none, because it is drawn rather than fetched, so the gate reported coverage of fifteen documents while the sixteenth surface
+went to the page through `esc()` alone. Its prose (the peoples, their poles and civilizations, the antipode's name, the Valley's
+folk crafts) is a pure reader in `engine/library.js` now, every string through `playerText`, and the gate renders it with glyphs in
+every field to prove none arrives. Coverage is asserted rather than assumed: every entry must be path-bearing or the circle, so the
+next pathless entry reddens the gate instead of being skipped by it.
 
 ✅ **Eight stats (Erik 2026-09-11: *"there are 8 stats, not the 4 we started with. they now need a spread of the 8"*).** Every
 craft row rolls ONE sub-attribute — a dial, `craftSubAttributes.enabled`, on; off, every craft rolls its parent as before. An authored `subAttribute` on a craft wins; otherwise `resolution.craftSubAttributes` splits

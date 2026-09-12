@@ -40,7 +40,7 @@ import { ITEM_KINDS, itemKindsIn, itemKindLabel, wieldBonusFor, usableCombatItem
 import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive } from "./engine/earnedpower.js"; // SNG-251 §2c/§4: the earned-power economy (ceiling = f(level, craft rank); ~1 evolution/day)
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp, playerText } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
-import { LIBRARY_INDEX, loreToHtml, libMdToHtml } from "./engine/library.js";   // SNG-538 §4: the Library's index and renderers — pure, gated by §181
+import { LIBRARY_INDEX, loreToHtml, libMdToHtml, circleRows } from "./engine/library.js";   // SNG-538 §4: the Library's index and renderers — pure, gated by §181
 import { groundForDecl, groundTag, substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor, peoplePresentAt } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { sceneImage, itemImage, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
 import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, regionExtent, bendRoad, roadNetwork, clipToFrame } from "./engine/worldglobe.js";
@@ -130,7 +130,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.462";
+const APP_VERSION = "1.9.463";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12660,11 +12660,9 @@ function libGreatCircle() {
   const idx = CONTENT.traditionIndex;
   if (!idx) return "<div class='insight'>The great circle is not loaded.</div>";
   const circle = domainCircleSVG(idx, { selectable: () => false, centerTop: "the great circle", centerSub: "twelve axes · twenty-four peoples" });
-  const rows = ringOrder(idx).map(t => { const tr = idx.byId?.[t]; const st = (idx.stations || []).find(s => s.traditionId === t);
-    return tr ? `<div class="lore-entry"><h4 class="lore-h">${esc(tr.name || t)}${tr.craft ? ` <span class="hint">— ${esc(tr.craft)}</span>` : ""}</h4>
-      <div class="lore-field"><span class="lore-key">Pole:</span> ${esc(st?.pole || tr.pole || "?")} · <span class="lore-key">Across the ring:</span> ${esc(traditionLabel(antipodeOf(t, idx)))}</div>
-      ${tr.civilization ? `<p class="lore-p">${esc(tr.civilization)}</p>` : ""}${tr.aesthetic ? `<p class="lore-p"><em>${esc(tr.aesthetic)}</em></p>` : ""}</div>` : ""; }).join("");
-  const folk = (CONTENT.traditions?.folkTraditions || []).map(f => `<div class="lore-field"><span class="lore-key">${esc(f.name || f.traditionId)}:</span> ${esc(f.aesthetic || "a Valley folk-craft, open to all")}</div>`).join("");
+  // ✅ §184: the prose is a pure reader in engine/library.js now — every string through playerText, the one Library surface the
+  // gate could not render (no `path`, so §181 skipped it). The SVG and the label helper stay here, with the page.
+  const { rows, folk } = circleRows(idx, { folk: CONTENT.traditions?.folkTraditions || [], label: (id) => traditionLabel(id) });
   return `${circle}
     <p class="lore-p">Twelve axes of the world, each a tension between two peoples — and every craft sits directly across the ring from its antithesis. Kin stand beside kin; the far pole of what you are is the hardest ground you can walk. You may learn it and use it, but the deeper you lean one way the dearer the other becomes — and carry both ends evenly and they cost the same.</p>
     <h3 class="lore-h">The Twenty-Four Peoples</h3>${rows}

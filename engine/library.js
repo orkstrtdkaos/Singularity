@@ -8,6 +8,7 @@
 // `_`-prefixed key is private, as it is everywhere else in this repo. The capitals are content and Aevi's. Pure string builders, no DOM —
 // §181 renders every LIBRARY_INDEX document through exactly these functions and asserts that no glyph and no private key reaches the page.
 import { playerText } from "./namematch.js";
+import { ringOrder, antipodeOf } from "./traditions.js";   // §184: the great circle's own reads
 const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 export const LIBRARY_INDEX = [
@@ -59,6 +60,27 @@ const LIB_SECRET_NAMED = /^(whatHealingMustDo|segments|fragments)$/;
 const LIB_SECRET = /(gmeyes|eyes.?only|secret|hidden|hook|mandate|internal|_pat|token|guidance)/i;
 export function libSkipKey(k) { return /^_/.test(k) || LIB_SKIP.test(k) || LIB_SECRET_GM.test(k) || LIB_SECRET_NAMED.test(k) || LIB_SECRET.test(k); }
 export function libPretty(k) { return String(k).replace(/[_-]+/g, " ").replace(/([a-z])([A-Z])/g, "$1 $2").replace(/\b\w/g, c => c.toUpperCase()); }
+
+/** ✅ §184 (2026-09-12): THE GREAT CIRCLE'S PROSE — the peoples, their poles, what each civilization is, and the Valley's folk crafts.
+ *  ⛔ THE ONE LIBRARY SURFACE §181 COULD NOT SEE. Its index entry has no `path` (it is drawn, not fetched), so the gate that renders
+ *  every document could not render it, and this text went to the page through `esc()` alone — the same door SNG-538 §4.1 closed
+ *  everywhere else. A gate that silently skips what it cannot address reports the coverage it wishes it had.
+ *  Pure: the SVG and the tradition-label helper stay with the page; `label` names a tradition (app.js's `traditionLabel`).
+ *  Every string passes `playerText`. Returns { rows, folk } as HTML fragments. */
+export function circleRows(index, { folk = [], label = (id) => String(id) } = {}) {
+  const pt = (s) => esc(playerText(String(s ?? "")));
+  const rows = ringOrder(index).map(t => {
+    const tr = index?.byId?.[t];
+    if (!tr) return "";
+    const st = (index?.stations || []).find(s => s.traditionId === t);
+    return `<div class="lore-entry"><h4 class="lore-h">${pt(tr.name || t)}${tr.craft ? ` <span class="hint">— ${pt(tr.craft)}</span>` : ""}</h4>
+      <div class="lore-field"><span class="lore-key">Pole:</span> ${pt(st?.pole || tr.pole || "?")} · <span class="lore-key">Across the ring:</span> ${pt(label(antipodeOf(t, index)))}</div>
+      ${tr.civilization ? `<p class="lore-p">${pt(tr.civilization)}</p>` : ""}${tr.aesthetic ? `<p class="lore-p"><em>${pt(tr.aesthetic)}</em></p>` : ""}</div>`;
+  }).join("");
+  const folkRows = (Array.isArray(folk) ? folk : []).map(f =>
+    `<div class="lore-field"><span class="lore-key">${pt(f?.name || f?.traditionId)}:</span> ${pt(f?.aesthetic || "a Valley folk-craft, open to all")}</div>`).join("");
+  return { rows, folk: folkRows };
+}
 
 /** Generic lore → readable HTML. Walks objects/arrays into headings + prose; filters GM fields. */
 export function loreToHtml(value, depth = 0) {

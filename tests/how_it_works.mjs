@@ -24,6 +24,14 @@ import { fileURLToPath } from "node:url";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const rd = (p) => readFileSync(join(root, p), "utf8");
 const rj = (p) => JSON.parse(rd(p));
+// ✅ §184 (AEVI 2026-09-12, SNG-538 §5): THE CLAIM, NOT ITS CAPITALS. These two gates matched her headings' shouting register
+// literally — one `.test` with no flag, one `.includes` — so she could not re-register a PLAYER document without reddening a gate
+// she does not own, and the way to a green run was to put my emphasis back into her prose. §184 proves both registers against these
+// objects, which are the ones the gates below use. ⚠️ The six other caps-run pins in this suite read docs/HOW_IT_WORKS.md, which is
+// mine; they stay. The rule is ownership, not case-sensitivity.
+const PG_ADDITIVE = /ranks\s+are\s+additive/i;
+const PG_WHERE_EVERYTHING_IS = /part\s+i½\s*·\s*where\s+everything\s+is/i;
+
 
 let pass = 0; const fails = [], gaps = [];
 function check(name, ok, detail = "") {
@@ -657,7 +665,7 @@ console.log("── PG · the player's guide — the nouns-and-verbs manual ─�
     check(`PG: it names the '${fam}' family`, new RegExp(fam).test(pg));
   check("PG: it states the death ladder and that SEALED is reachable by nothing",
     /Threshold/.test(pg) && /Near Dark/.test(pg) && /Deep Dark/.test(pg) && /SEALED/.test(pg));
-  check("PG: it states ranks are additive", /RANKS ARE ADDITIVE/.test(pg));
+  check("PG: it states ranks are additive", PG_ADDITIVE.test(pg));
   check("PG: …and that a fully-answered blow lands nothing (the minHit 0 ruling)",
     Number(rj("content/packs/core/rules/skill_battle_system.json").engine?.damage?.minHit) === 0
       ? /LANDS NOTHING/i.test(pg) : /lands its floor/i.test(pg));
@@ -864,7 +872,7 @@ console.log("\n── §12 · the interface — reachability, phases, apparatus 
   // ⛔ THE THREE MISSING QUESTIONS ARE STATED IN BOTH DOCS AND MUST STAY IN SYNC. A player learning by
   // surprise that the game cannot ask is worse than reading it here.
   const pgSrc = rd("docs/PLAYERS_GUIDE.md");
-  check("§12: the player's guide carries PART I½ · WHERE EVERYTHING IS", pgSrc.includes("PART I½ · WHERE EVERYTHING IS"));
+  check("§12: the player's guide carries its Part I½ · Where everything is section", PG_WHERE_EVERYTHING_IS.test(pgSrc));
   // ⛔ THIS CHECK USED TO ASSERT A LIST THAT WAS TWO-THIRDS FALSE. It demanded both docs name three
   // "missing affordances"; `bringForward` has had a picker since CCODE-276 and `provoke` needs no pick.
   // ⚠️ A GATE ON AN UNMEASURED CLAIM DOES NOT MAKE IT TRUE — IT MAKES IT DURABLE. What it guards now is
@@ -2300,7 +2308,7 @@ console.log("\n── §181 · every Library document renders through playerText
     && /shouted/.test(LB181.loreToHtml({ text: "⛔ shouted" }, 0)) && !/private/.test(LB181.loreToHtml({ _note: "private", shown: "public" }, 0)) && /public/.test(LB181.loreToHtml({ _note: "private", shown: "public" }, 0)));
   const app181 = rd("app.js").replace(/^\s*\/\/.*$/gm, "");
   check("§181: ⛔ app.js renders the Library through the engine's renderers and keeps no copy of its own",
-    /import \{ LIBRARY_INDEX, loreToHtml, libMdToHtml \} from "\.\/engine\/library\.js";/.test(app181) && !/^function loreToHtml\b/m.test(app181) && !/^function libMdToHtml\b/m.test(app181)
+    /import \{[^}]*\bLIBRARY_INDEX\b[^}]*\bloreToHtml\b[^}]*\blibMdToHtml\b[^}]*\} from "\.\/engine\/library\.js";/.test(app181)   // §184: the names it needs, not the list as it stood && !/^function loreToHtml\b/m.test(app181) && !/^function libMdToHtml\b/m.test(app181)
     && !/^const LIBRARY_INDEX = \[/m.test(app181) && !/^const LIB_SKIP = /m.test(app181) && /entry\.kind === "md" \? libMdToHtml\(data\) : loreToHtml\(data, 0\)/.test(app181));
 }
 
@@ -2389,6 +2397,58 @@ console.log("\n── §183 · worldPos is movable off the seats, mintable with 
     /fetch\("content\/packs\/core\/world\/scale\.json\?v=" \+ APP_VERSION\)/.test(app183) && /const mi = milesFor\(days, WORLD_SCALE\);/.test(app183) && /\(about \$\{mi\} miles\)/.test(app183));
 }
 
+
+/* ══════════ §184 — A GATE MAY NOT PIN THE TYPOGRAPHY OF PROSE IT DOES NOT OWN (Aevi 2026-09-12, SNG-538 §5: "both mean a gate currently pins the typography of content it doesn't own") ══════════ */
+console.log("\n── §184 · the claim, not its capitals; the stamp keeps the author's emphasis; and the one Library surface the gate could not see ──");
+{
+  const CC184 = await import("../scripts/certify_claims.mjs");
+  const LB184 = await import("../engine/library.js");
+  // ⛔ (a) THE TWO PINS SHE NAMED. Both matched her headings' shouting register literally — one `.test` with no flag, one `.includes` —
+  // so she could not re-register a PLAYER document without reddening a gate she does not own, and she put the shouting back to get a
+  // green run. These are the very objects the gates above use, and both registers satisfy them.
+  check("§184: ⛔ the ranks-are-additive claim is matched in any register — hers today, hers tomorrow",
+    PG_ADDITIVE.test("**RANKS ARE ADDITIVE** — you never lose a lower rank's use") && PG_ADDITIVE.test("Ranks are additive — you never lose a lower rank's use")
+    && PG_ADDITIVE.test("ranks are additive") && !PG_ADDITIVE.test("ranks are cumulative"));
+  check("§184: ⛔ …and so is the where-everything-is section — the heading may be a heading, not a shout",
+    PG_WHERE_EVERYTHING_IS.test("# PART I½ · WHERE EVERYTHING IS") && PG_WHERE_EVERYTHING_IS.test("# Part I½ · Where everything is")
+    && !PG_WHERE_EVERYTHING_IS.test("# Part II · Where everything is"));
+  check("§184: …and the live guide satisfies both, whichever register it is in today",
+    PG_ADDITIVE.test(rd("docs/PLAYERS_GUIDE.md")) && PG_WHERE_EVERYTHING_IS.test(rd("docs/PLAYERS_GUIDE.md")));
+  // ⛔ (b) THE STAMPER. Every certified claim required `**`, so unbolding a line in the guide made certify_counts REFUSE and the way to
+  // a green run was to put my emphasis back into her prose. The wrapper is optional and preserved — proved through the tool's own module.
+  const body184 = "Last verified: [\\d-]+ · v[\\d.]+ · \\d+ crafts\\.";
+  const re184 = CC184.claimRe(body184), stamp184 = CC184.keepWrap(() => "Last verified: 2026-09-12 · v9.9.9 · 429 crafts.");
+  const bold = "**Last verified: 2026-01-01 · v1.0.0 · 1 crafts.**", bare = "Last verified: 2026-01-01 · v1.0.0 · 1 crafts.", und = "__Last verified: 2026-01-01 · v1.0.0 · 1 crafts.__";
+  check("§184: ⛔ a claim is found and restamped wearing whatever the document wears — bold, underscores, or nothing",
+    bold.replace(re184, stamp184) === "**Last verified: 2026-09-12 · v9.9.9 · 429 crafts.**"
+    && bare.replace(re184, stamp184) === "Last verified: 2026-09-12 · v9.9.9 · 429 crafts."
+    && und.replace(re184, stamp184) === "__Last verified: 2026-09-12 · v9.9.9 · 429 crafts.__",
+    JSON.stringify([bold.replace(re184, stamp184), bare.replace(re184, stamp184), und.replace(re184, stamp184)]));
+  check("§184: …a mismatched wrapper is not a claim — an opener with no closer does not let the stamp swallow the next sentence",
+    "**Last verified: 2026-01-01 · v1.0.0 · 1 crafts. And then **bold**".replace(re184, stamp184).includes("And then **bold**"));
+  const cc184 = rd("scripts/certify_counts.mjs");
+  check("§184: ⛔ …and the tool uses it for the two documents an author may re-register — the guide and its twin — not a copy of the rule",
+    /import \{ claimRe, keepWrap \} from "\.\/certify_claims\.mjs";/.test(cc184) && (cc184.match(/re: claimRe\(/g) || []).length === 2 && (cc184.match(/to: keepWrap\(/g) || []).length === 2
+    && /\{ file: "docs\/PLAYERS_GUIDE\.md",[\s\S]{0,600}re: claimRe\(/.test(cc184));   // the CLAIM ENTRY, not the first mention of the filename (which is a comment)
+  // ⛔ (c) THE SURFACE THE GATE COULD NOT SEE. §181 renders every index entry that has a `path`; the great circle is DRAWN, has none,
+  // and reached the page through esc() alone. Its prose is a pure reader now, and every string passes playerText.
+  // the index's own shape: `ringOrder` walks `stations` by position, `antipodeOf` reads `opposite` — the same reads the page makes
+  const idx184 = { byId: { a: { id: "a", name: "⛔ The Ashwardens", craft: "⚠️ attending", civilization: "✅ They bury the Drowned Year.", aesthetic: "⚑ ash and grey", opposite: "b" }, b: { id: "b", name: "The Radiant", opposite: "a" } },
+    stations: [{ traditionId: "a", position: 0, pole: "⛑ light" }, { traditionId: "b", position: 1, pole: "dark" }] };
+  const out184 = LB184.circleRows(idx184, { folk: [{ traditionId: "f", name: "⛔ Palework", aesthetic: "⚠️ chalk and counter" }], label: (id) => `⛔ ${id}` });
+  check("§184: ⛔ the great circle's prose passes playerText — no authoring glyph reaches the page from a name, a craft, a pole, a civilization, an aesthetic, the antipode's label, or a folk craft",
+    !/[⛔⚠⚑⛑⬜✅➡❌]/u.test(out184.rows + out184.folk) && /The Ashwardens/.test(out184.rows) && /attending/.test(out184.rows) && /They bury the Drowned Year/.test(out184.rows)
+    && /ash and grey/.test(out184.rows) && /light/.test(out184.rows) && /Palework/.test(out184.folk) && /chalk and counter/.test(out184.folk),
+    JSON.stringify(out184).slice(0, 300));
+  const app184 = rd("app.js").replace(/^\s*\/\/.*$/gm, "");
+  check("§184: …and the page uses it — libGreatCircle reads circleRows and keeps no copy of the assembly",
+    /const \{ rows, folk \} = circleRows\(idx, \{/.test(app184) && /circleRows[^\n]*from "\.\/engine\/library\.js"/.test(app184) && !/const rows = ringOrder\(idx\)\.map/.test(app184));
+  // ⛔ AND THE COVERAGE IS ASSERTED, NOT ASSUMED: every entry in the index is either rendered by §181 (it has a path) or by the check
+  // above (it is the circle). A new pathless entry fails here until it is covered, instead of being silently skipped.
+  const entries184 = LB184.LIBRARY_INDEX.flatMap(c => c.entries);
+  check(`§184: ⛔ every Library entry is covered by a gate that RENDERS it — ${entries184.filter(e => e.path).length} by path (§181), ${entries184.filter(e => !e.path).length} drawn (here)`,
+    entries184.length >= 15 && entries184.every(e => e.path || e.kind === "circle"), entries184.filter(e => !e.path && e.kind !== "circle").map(e => e.id).join(", "));
+}
 
 /* ══════════ §14 — THE FOLD CANNOT BEAT AN IMMUNITY THE BLOW COULD NOT ══════════ */
 // ⛔ FOUND BY RUNNING AEVI'S TWELVE CRAFTS THROUGH A MELEE-SCALE FIGHT (CCODE-313), which is the whole

@@ -38,6 +38,7 @@ import { readFileSync, writeFileSync, readdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { martialAbilityRecords } from "../engine/martial.js";
+import { claimRe, keepWrap } from "./certify_claims.mjs";   // ⛔ AEVI 2026-09-12: the numbers are mine, the emphasis is the author's
 import { loadContentHeadless } from "../tests/headless_content.mjs";   // ⛔ ONE definition of "a person": the loader's
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -148,14 +149,16 @@ const CLAIMS = [
 
   // ⚠️ AUTHORED. This doc describes what has been written, so it counts records.
   { file: "docs/HOW_IT_WORKS.md", name: "how-it-works · crafts (AUTHORED)",
-    re: /\*\*Last verified: [\d-]+ · v[\d.]+ · \d+ crafts\.\*\*/,
-    to: () => `**Last verified: ${today} · v${version} · ${counts.authored} crafts.**` },
+    re: claimRe("Last verified: [\\d-]+ · v[\\d.]+ · \\d+ crafts\\."),
+    to: keepWrap(() => `Last verified: ${today} · v${version} · ${counts.authored} crafts.`) },
 
   // ⛔ LOADED, and `people` CARRIED THROUGH UNTOUCHED — see the header. A player counts what they can reach,
   // which includes the martial floor; the number I cannot derive is preserved rather than invented.
   { file: "docs/PLAYERS_GUIDE.md", name: "player's guide · crafts (LOADED) · places · companions",
-    re: /\*\*Last verified: [\d-]+ · v[\d.]+ · \d+ crafts · \d+ places · (\d+) people · \d+ companions\.\*\*/,
-    to: (_m) => `**Last verified: ${today} · v${version} · ${counts.loaded} crafts · ${counts.places} places · ${counts.people} people · ${counts.companions} companions.**` },
+    // ⛔ 2026-09-12: the wrapper is optional and PRESERVED — her register pass unbolded this line, the stamper refused, and the way to a
+    // green run was to restore my emphasis in her document. (The old inner capture on `people` was never read; `to` reads the count.)
+    re: claimRe("Last verified: [\\d-]+ · v[\\d.]+ · \\d+ crafts · \\d+ places · \\d+ people · \\d+ companions\\."),
+    to: keepWrap(() => `Last verified: ${today} · v${version} · ${counts.loaded} crafts · ${counts.places} places · ${counts.people} people · ${counts.companions} companions.`) },
 
   // ⛔ MY OWN GATE CAUGHT MY OWN HAND-KEPT STAMP. §29 requires `BALANCE.md` to carry the live version, and
   // one `bump_version` later it did not — a stored copy of a derived value, in the document whose §5 is

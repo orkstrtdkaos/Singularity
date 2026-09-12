@@ -2091,7 +2091,12 @@ console.log("\n── §175 · two Corvins are two people; the fold runs above t
   const c175 = mk175(); const r175 = RC175.reconcile(c175, "character", {});
   const f = c175.npcRegistry.corvin, r = c175.npcRegistry["runner-whistling-woman-d16"];
   check("§175: ⛔ the two Corvins are split ON LOAD through reconcile() at version 49 — the farmer stands as on day 2, the runner takes her name, her role and what she said",
-    r175.applied.includes("two-corvins") && f.role === "Farmer, east furlong — hunt companion" && f.lastSeen.day === 2 && f.history.length === 10 && /^\[d1\] Holding the west fence-line/.test(f.history[0]) && f.met === undefined
+    r175.applied.includes("two-corvins") && f.role === "Farmer, east furlong — hunt companion" && f.lastSeen.day === 2 && f.history.length === 10 && /^\[d1\] Holding the west fence-line/.test(f.history[0])
+    // ⛔ HIS COUNT IS HIS OWN. This read `f.met === undefined` — which is how the restore LOOKED before step 55 began flooring
+    // `met` at the interactions already on a record. `two-corvins` still deletes the runner's inflated carry-over (the fixture's
+    // `met: 1`), and the farmer then counts his own ten rows, which is Erik's SNG-333 ruling and not a leak from her.
+    // ⚠️ THE CLAIM, NOT THE SPELLING: a gate pinning the absence of a field forbids any later step from deriving it.
+    && f.met === f.history.length && f.met !== 1
     && r.name === "Corvin Teth" && (r.aliases || []).includes("The Runner") && r.nameRevealed === true && r.role === "Third-circuit relay runner, Hub messenger" && r.lastSeen.day === 17
     && r.history.some(h => /named herself/.test(h)) && r.knownFacts.includes("Carries urgent word from the Hub") && !f.knownFacts.includes("Carries urgent word from the Hub")
     && c175.codex.topics["runner-whistling-woman-d16"].facts.includes("[d17] carried urgent word") && !c175.codex.topics.corvin.facts.includes("[d17] carried urgent word")
@@ -12228,6 +12233,94 @@ console.log("\n── §190 · the push rides on the save, a failure says so, an
   check("§190: …and the deriver itself proves the bag is the whole difference — the same record, the two bags, two answers",
     (() => { const e = silas190.npcRegistry["aldric"];
       return NS190.derivedLevel(e, { day: 19, cfg: subBlock }) === 1 && NS190.derivedLevel(e, { day: 19, cfg: merged }) > 1; })());
+}
+
+/* ══════════ §191 — SNG-544 · THE THREE REASONS A REAL PERSON READ AS LEVEL 1 (Erik 2026-09-12) ══════════ */
+console.log("\n── §191 · the meetings already on the record, the quest its giver was never credited for, and a seat nowhere a signal could see ──");
+{
+  const Q191 = await import("../engine/quests.js");
+  const RC191 = await import("../engine/reconcile.js");
+  const FW191 = await import("../engine/fellowship.js");
+  const { loadContentHeadless: lch191 } = await import("./headless_content.mjs");
+  const C191 = await lch191();
+  const opts191 = { content: C191, worldDay: 19 };
+
+  /* ---- 1 · creditQuestGiver — R37a's missing sibling ---- */
+  const mk = () => ({
+    id: "c191", npcRegistry: {
+      aldric: { id: "aldric", name: "Aldric", history: [] },
+      "mara-wells": { id: "mara-wells", name: "Mara Wells", history: [] },
+      sorel: { id: "sorel", name: "Sorel", history: [] },
+    },
+  });
+  // ⛔ THE GLOSS IS STRIPPED AND THE MESSENGER IS NOT THE GIVER. Six spellings on one real save, and "(via Mara Wells)" names who
+  // carried the word — crediting her for Sorel's errand would be the wrong person growing from someone else's work.
+  const g1 = mk(); check("§191: ⛔ the giver resolves through a parenthetical gloss — \"Aldric (smokehouse man)\" is Aldric",
+    Q191.creditQuestGiver(g1, { id: "q1", giver: "Aldric (smokehouse man)" }) === "aldric" && g1.npcRegistry.aldric.completions === 1);
+  const g2 = mk(); check("§191: ⛔ …and a \"(via X)\" credits the GIVER, never the messenger who carried the word",
+    Q191.creditQuestGiver(g2, { id: "q2", giver: "Sorel (via Mara Wells)" }) === "sorel"
+    && g2.npcRegistry.sorel.completions === 1 && !g2.npcRegistry["mara-wells"].completions);
+  const g3 = mk(); check("§191: …and an id, a slug or a name all reach the same record, while a name nobody holds credits nobody",
+    Q191.creditQuestGiver(g3, { id: "q3", giver: "aldric" }) === "aldric"
+    && Q191.creditQuestGiver(g3, { id: "q4", giver: "water_keeper" }) === null
+    && Q191.creditQuestGiver(g3, { id: "q5", giver: null }) === null);
+  // ⛔ IDEMPOTENT BY RECORD, not by caller — the live path and the one-shot backfill must not double-count each other.
+  const g4 = mk();
+  Q191.creditQuestGiver(g4, { id: "q6", giver: "Aldric" });
+  const twice = Q191.creditQuestGiver(g4, { id: "q6", giver: "Aldric" });
+  check("§191: ⛔ the quest ids already credited live ON THE PERSON, so the live path and the backfill cannot pay twice",
+    twice === null && g4.npcRegistry.aldric.completions === 1 && g4.npcRegistry.aldric.creditedQuests.join() === "q6");
+  check("§191: …and the live path credits on a completion at BOTH doors, and never on a failure",
+    /q\.status = "resolved";\s*\n\s*creditQuestGiver\(character, q\);/.test(rd("engine/quests.js"))
+    && /if \(existing\.status === "completed"\) creditQuestGiver\(character, existing\);/.test(rd("engine/quests.js"))
+    && !/failed"\) creditQuestGiver/.test(rd("engine/quests.js")));
+
+  /* ---- 2 · STEP 55, THROUGH THE RUNNER. ⚠️ Not `apply` on a copy: a step proven that way has never met the version gate, which
+       is exactly how the braid repair sat unrun on Silas's save at reconcileVersion 49. ---- */
+  const silas191 = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const seenBefore = silas191.reconcileVersion || 0;
+  const lvlBefore = Object.fromEntries([...FW191.atSideRows(silas191, opts191), ...FW191.poolRows(silas191, opts191)].map(r => [r.id, r.level]));
+  const metBefore = Object.fromEntries(Object.entries(silas191.npcRegistry || {}).map(([k, v]) => [k, Number(v.met) || 0]));
+  const out191 = RC191.reconcile(silas191, "character", { content: C191, day: 19 });
+  check(`§191: ⛔ step 55 RUNS through the runner's version gate on the live save (it was at ${seenBefore}) and says all three things it did`,
+    out191.applied.includes("the-people-who-never-counted") && silas191.reconcileVersion === 55
+    && out191.notes.some(n => /meetings already written/.test(n))
+    && out191.notes.some(n => /Work you finished for people counts/.test(n))
+    && out191.notes.some(n => /Ditch-Mother/.test(n)), out191.applied.join(", "));
+  // ⛔ A FLOOR, NEVER A LOWERING: Pell's 35 real meetings survive a history of ten.
+  check("§191: ⛔ `met` is FLOORED at the interactions already on the record and never lowered — SNG-333 was Erik's ask that interactions count, and three of the Fellowship's six had ten written of them and no count",
+    Object.entries(silas191.npcRegistry).every(([k, v]) => (Number(v.met) || 0) >= metBefore[k])
+    && (Number(silas191.npcRegistry.pell.met) || 0) === metBefore.pell
+    && (Number(silas191.npcRegistry.aldric.met) || 0) === (silas191.npcRegistry.aldric.history || []).length
+    && metBefore.aldric === 0,
+    `pell ${silas191.npcRegistry.pell.met} · aldric ${metBefore.aldric} → ${silas191.npcRegistry.aldric.met}`);
+  check("§191: ⛔ and the quest Aldric set him on years of play ago is paid — \"I ran a quest for Aldric so he should be leveled out\"",
+    silas191.npcRegistry.aldric.completions === 1
+    && silas191.npcRegistry.aldric.creditedQuests.includes("aldric-provisioning-deal"));
+  // ⛔ DARA'S SEAT: it was in her BAND's description and nowhere a signal could read it.
+  check("§191: ⛔ Dara's title and her council seat are ON HER RECORD now, with the aliases to be called by — \"Dara Holt is the ditchmother and on the Millbrook Council\"",
+    /the Ditch-Mother/.test(silas191.npcRegistry["dara-holt"].role) && /Millbrook Council/.test(silas191.npcRegistry["dara-holt"].role)
+    && (silas191.npcRegistry["dara-holt"].aliases || []).includes("the Ditch-Mother"),
+    silas191.npcRegistry["dara-holt"].role);
+  check("§191: …and the signal table READS the seat — a council seat is authority over a process, which is that row's own sentence, and Erik's ruling is recorded on it",
+    (() => { const ts = rj("content/packs/core/rules/tier_signals.json");
+      const row = ts.rules.find(r => /magistrate/.test(r.match || ""));
+      return /council/.test(row.match) && /ERIK 2026-09-12/.test(row.why)
+        && new RegExp(row.match, "i").test(silas191.npcRegistry["dara-holt"].role); })());
+
+  /* ---- 3 · WHAT ERIK SEES ---- */
+  const lvlAfter = Object.fromEntries([...FW191.atSideRows(silas191, opts191), ...FW191.poolRows(silas191, opts191)].map(r => [r.id, r.level]));
+  check(`§191: ⛔ LIVE — every one of the six rose or held, and the two he named are no longer read as nobodies: Aldric ${lvlBefore.aldric} → ${lvlAfter.aldric}, Dara ${lvlBefore["dara-holt"]} → ${lvlAfter["dara-holt"]}`,
+    Object.keys(lvlAfter).every(k => lvlAfter[k] >= lvlBefore[k])
+    && lvlAfter.aldric > lvlBefore.aldric && lvlAfter["dara-holt"] >= 12
+    && lvlAfter.pell === lvlBefore.pell,
+    Object.entries(lvlAfter).map(([k, v]) => `${k} ${lvlBefore[k]}→${v}`).join(" · "));
+  // ⛔ IDEMPOTENT: the gate is a version, and running it again must be free.
+  const snap191 = JSON.stringify(lvlAfter);
+  const out2 = RC191.reconcile(silas191, "character", { content: C191, day: 19 });
+  check("§191: ⛔ and a second run changes nothing — the version gate holds and the per-record credit list makes the payment idempotent on its own",
+    out2.applied.length === 0
+    && JSON.stringify(Object.fromEntries([...FW191.atSideRows(silas191, opts191), ...FW191.poolRows(silas191, opts191)].map(r => [r.id, r.level]))) === snap191);
 }
 
 /* ══════════ REPORT ══════════ */

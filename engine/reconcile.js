@@ -22,7 +22,7 @@ import { credit, debit } from "./purse.js";   // R48: the purse has ONE door in,
 import { mergeCodexTopics, ensureCodex, applyCodexUpdates, foldTopicsByIdPrefix } from "./codex.js";   // step 43: the named fold
 import { mergeRecovery, mergeReceiptLine } from "./recovery.js";   // step 41: the Settings door's merge, run where every copy passes
 import { SNAPSHOTS } from "./recovery_snapshots.js";              // step 41: the overwritten branch, as a diff
-import { dedupeQuests, normalizeProse } from "./quests.js";
+import { dedupeQuests, normalizeProse, creditQuestGiver } from "./quests.js";   // ⛔ step 55: a quest its giver was never credited for
 import { dedupeInventory } from "./inventory.js";
 import { inferDomains } from "./traditions.js";
 import { fallbackPersonalArc } from "./personalArc.js";
@@ -289,6 +289,49 @@ export const CHARACTER_STEPS = [
       if (sc && Array.isArray(sc.npcsPresent)) {
         const col = collapseScenePresence(sc, c.npcRegistry || {});
         if (col.collapsed.length) { c.activeScene.sceneState = col.scene; notes.push("One person, one seat: " + col.collapsed.map(x => `${x.dropped} is ${x.kept}`).join("; ") + "."); }
+      }
+      return notes.length ? { notes } : {};
+    }
+  },
+  {
+    version: 55, id: "the-people-who-never-counted", playerFacing: true,
+    // ✅ ERIK 2026-09-12, reading the new roster: "I ran a quest for Aldric so he should be leveled out... and Dara Holt is the
+    // ditchmother and on the Millbrook Council, she should be leveled too." THREE REASONS THEY READ LOW, and only one of them was
+    // the cfg bag fixed in v1.9.469:
+    //  ⛔ 1 · `met` COUNTS NOTHING BEFORE THE COUNTER EXISTED. SNG-333 added it on Erik's own ask — "if you interface with the
+    //    NPCs then it should count those interactions" — and three of the Fellowship's six have TEN recorded interactions each and
+    //    no count at all, because every one of those meetings happened before the field. The history already on the record is the
+    //    evidence, so it is the FLOOR: never lowers a real count, and capped-at-ten history means this under-counts rather than over.
+    //  ⛔ 2 · A QUEST THEY GAVE YOU CREDITED THEM NOTHING (`creditQuestGiver`, R37a's sibling). The live path now credits on
+    //    completion; this pays the ones already finished, which is where Aldric's provisioning deal has sat since day 5.
+    //  ⛔ 3 · DARA'S SEAT WAS NOWHERE A SIGNAL COULD SEE IT. "the Ditch-Mother" and her council seat were in her BAND's description
+    //    and never on her record, so `tierFromRole` read "Senior east-channel irrigator" and defaulted her. Erik's words put it on.
+    apply: (c) => {
+      const notes = [];
+      const reg = c?.npcRegistry || {};
+      let lifted = 0;
+      for (const n of Object.values(reg)) {
+        const rows = Array.isArray(n?.history) ? n.history.length : 0;
+        const had = Number(n?.met) || 0;
+        if (rows > had) { n.met = rows; lifted++; }
+      }
+      if (lifted) notes.push(`Time spent with people now counts from the record: ${lifted} ${lifted === 1 ? "person has" : "people have"} the meetings already written of them.`);
+      const paid = [];
+      for (const q of (c?.quests || [])) {
+        if (q?.status !== "completed" && q?.status !== "resolved") continue;
+        const id = creditQuestGiver(c, q);
+        if (id) paid.push(reg[id]?.name || id);
+      }
+      if (paid.length) notes.push(`Work you finished for people counts for them too: ${[...new Set(paid)].join(", ")}.`);
+      // ⚠️ HIS SAVE, HIS PEOPLE — the two facts are Erik's and they are about these records, so they are stamped on these records.
+      if (c?.id === "char-mrhs8286") {
+        const d = reg["dara-holt"];
+        if (d && !/Council/i.test(String(d.role || ""))) {
+          d.role = `${String(d.role || "").replace(/\s*$/, "")} \u00b7 the Ditch-Mother \u00b7 Millbrook Council`.trim();
+          const had = new Set(d.aliases || []);
+          d.aliases = [...(d.aliases || []), ...["the Ditch-Mother", "Ditch-Mother"].filter(a => !had.has(a))].slice(-4);
+          notes.push("Dara Holt is the Ditch-Mother and sits on the Millbrook Council — it is on her record now, and it is why she is no longer read as one more irrigator.");
+        }
       }
       return notes.length ? { notes } : {};
     }

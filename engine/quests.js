@@ -113,6 +113,8 @@ export function applyQuestUpdates(character, updates = [], ctx = {}) {
         notes.push(`Quest ready to resolve: ${existing.title} — its ending is yours to choose (that's what fires its effects).`);
       } else if (op === "complete" || op === "fail") {
         existing.status = op === "complete" ? "completed" : "failed";
+      // ⚠️ ONLY A COMPLETION CREDITS. A quest that failed is not work the giver is the better for.
+      if (existing.status === "completed") creditQuestGiver(character, existing);
         existing.resolvedAt = new Date().toISOString();
         if (u.note) existing.progress = [...(existing.progress || []), clampNote(u.note)].slice(-8);
         if (op === "complete") {
@@ -712,12 +714,42 @@ function xpHint(outcome, ctx = {}) {
   const eff = (outcome?.effects || []).find(e => e?.kind === "xp" || e?.xp != null);
   return eff?.xp ?? eff?.amount ?? ctx.xpReward ?? 30;
 }
+/** ⛔ R37a'S MISSING SIBLING, AND ERIK FOUND IT BY READING A ROSTER: "I ran a quest for Aldric so he should be leveled out."
+ *
+ *  A completed ASSIGNMENT credits the person a level — `worldtick` stamps `completions`, `derivedLevel` reads it, and that is
+ *  R37a as ruled on 2026-09-04. ⚠️ A QUEST THEY GAVE YOU AND YOU FINISHED CREDITED THEM NOTHING. Aldric's provisioning deal has
+ *  sat `completed` on Silas's save since day 5 and Aldric read as a level-1 nobody, which is the opposite of what the fiction did.
+ *
+ *  ⛑ THE GIVER IS A NAME, NOT AN ID, and it is written six different ways on one save: "Aldric (smokehouse man)", "Sorel (via
+ *  Mara Wells)", "fendt", "Edvar Crane", "water_keeper", null. So the parenthetical gloss is stripped before matching — and a
+ *  "(via X)" names the MESSENGER, never the giver, so it must not credit X. Then id, slug and the alias-aware namer in that order.
+ *
+ *  ⛔ IDEMPOTENT BY RECORD, not by caller: the quest ids already credited live on the person, so the live path and the one-shot
+ *  backfill cannot double-count each other, and a re-run of either is free. A FAILED quest credits nobody. Returns the id credited
+ *  or null. */
+export function creditQuestGiver(character, quest) {
+  const reg = character?.npcRegistry || {};
+  const qid = quest?.id ? slugify(quest.id) : null;
+  const raw = String(quest?.giver || "").trim();
+  if (!qid || !raw) return null;
+  const bare = raw.replace(/\s*\((?:via|through|from)\b[^)]*\)/gi, " ").replace(/\s*\([^)]*\)/g, " ").replace(/\s+/g, " ").trim();
+  if (!bare) return null;
+  const hit = reg[raw] || reg[bare] || reg[slugify(bare)] || resolveByName(bare, Object.values(reg));
+  if (!hit || !hit.id) return null;
+  const credited = Array.isArray(hit.creditedQuests) ? hit.creditedQuests : [];
+  if (credited.includes(qid)) return null;
+  hit.creditedQuests = [...credited, qid];
+  hit.completions = (Number(hit.completions) || 0) + 1;
+  return hit.id;
+}
+
 export function resolveStructuredQuest(character, questId, outcomeId, ctx = {}) {
   const q = (character.quests || []).find(x => x.id === slugify(questId) && x.structured);
   if (!q || q.status !== "active") return { ok: false, why: "not an active structured quest" };
   const outcome = q.outcomes.find(o => o.id === outcomeId);
   if (!outcome) return { ok: false, why: "unknown outcome" };
   q.status = "resolved";
+  creditQuestGiver(character, q);   // ⛔ R37a's sibling: the person who set you on it grew by it
   q.outcomeId = outcome.id; q.outcomeName = outcome.name;
   q.resolvedAt = ctx.nowISO || null; q.resolvedWorldDay = ctx.worldDay ?? null;
 

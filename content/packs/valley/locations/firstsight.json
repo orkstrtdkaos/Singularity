@@ -1,0 +1,67 @@
+{
+ "schemaVersion": 1,
+ "id": "firstsight",
+ "name": "Firstsight",
+ "regionId": "foothill_hardline",
+ "communityId": "firstsight",
+ "spectrum": {
+  "space_time": 0.3,
+  "concrete_abstract": -0.15,
+  "chaos_order": -0.2
+ },
+ "tags": [
+  "settlement",
+  "road",
+  "frontier",
+  "outward",
+  "river"
+ ],
+ "connections": [
+  "longshore",
+  "hardline",
+  "keelmouth"
+ ],
+ "descriptionSeed": "Firstsight — where the shore-road tops the divide and the water finally appears. Twenty-six days out of Longshore through mountain, and then the ground opens and there is the head of the Outrun below you with the sea beyond it, a hundred miles off and unmistakable. There is a cairn, a wayhouse, a smith who shoes for the descent and will not shoe for the climb, and a book where people write the date they first saw it. Nobody founded Firstsight. It is the place where everyone stopped walking for a moment, and eventually someone stayed.",
+ "loreRefs": [],
+ "npcsPresent": [],
+ "encounterFlavor": "keel-hunters heading down for timber they have not seen yet; people coming up from Keelmouth who talk about the sea like a job; the wayhouse keeper, who has read every entry in the book and will tell you about the liars",
+ "dangerLevel": 2,
+ "questSeeds": [
+  "A name in the wayhouse book is dated four years after the man who wrote it was buried at Keelmouth",
+  "The smith will not shoe for the climb and has stopped saying why"
+ ],
+ "map": {
+  "x": 500,
+  "y": 250
+ },
+ "encounterSeeds": [],
+ "poleIntensity": {
+  "space": 0.3,
+  "concrete": 0.15,
+  "chaos": 0.2
+ },
+ "axisVector": [
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  -0.15,
+  0.0,
+  -0.2,
+  0.0,
+  0.0,
+  0.3,
+  0.0,
+  0.0
+ ],
+ "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180). ⚠️ Nothing above |0.3|: a road-head on a frontier is not extreme on any axis — it is the place you pass through on the way to becoming so.",
+ "worldPos": {
+  "colatitude": 47.75,
+  "longitude": 52.75,
+  "depth": 0
+ },
+ "worldPosNote": "⛔ SNG-537: MINTED ONTO THE HEAD OF THE OUTRUN, at the river's first authored point (terrain path#33). Measured: land, river, stone_grass, elevation 148 (+20 above sea level). ⚠️ THE SITE IS THE BINDING: `placenames.json` binds a river by signature to a location within 3°, so the road-head and the river-head are the same coordinate on purpose. An arbitrary pass 6° away would have named the river and failed the gate in the same commit.",
+ "tier": "settlement",
+ "parentId": null,
+ "role": "waypoint"
+}

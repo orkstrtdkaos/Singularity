@@ -9,21 +9,27 @@
   "concrete_abstract": -0.2
  },
  "tags": [
-  "settlement",
   "foothill",
-  "market"
+  "market",
+  "outfitter",
+  "road",
+  "settlement"
  ],
  "connections": [
+  "firstsight",
   "the_crossing",
   "the_long_span"
  ],
- "descriptionSeed": "Longshore — the waygate town: outfitters, bridge-wrights, and people who know how long a road really takes. Everyone here is either leaving or has just arrived, and it is the one place on any road where nobody asks where you are from.",
+ "descriptionSeed": "Longshore — the waygate town: outfitters, bridge-wrights, and people who know how long a road really takes. Everyone here is either leaving or has just arrived, and it is the one place on any road where nobody asks where you are from. ⚠️ AND THE NAME IS NOT ABOUT THIS TOWN. Longshore is a mountain town at seventy-seven above the sea and four hundred and ninety-six miles from it; the shore in its name is the one at the far end of the road that starts here. THE LONG SHORE-ROAD — twenty-six days outward to Firstsight, seven more down the Outrun to Keelmouth and a hull. People arrive expecting a harbour about twice a season. The outfitters have stopped correcting them and started selling them boots.",
  "loreRefs": [],
  "npcsPresent": [],
  "encounterFlavor": "traders, apprentices and people from three domains who have learned to share a street",
  "dangerLevel": 1,
  "image": "content/packs/valley/assets/longshore.jpg",
- "questSeeds": [],
+ "questSeeds": [
+  "Someone has arrived expecting to hire a ship today, has paid for a berth that does not exist, and the outfitter who sold it is still in town",
+  "A keel-wright's letter from Keelmouth has been waiting at the wayhouse for two years"
+ ],
  "map": {
   "x": 390,
   "y": 380
@@ -63,5 +69,6 @@
  "startingLocation": true,
  "tier": "settlement",
  "parentId": null,
- "role": "waypoint"
+ "role": "waypoint",
+ "nameNote": "⛔ SNG-537, ratified by Erik 2026-09-11. MEASURED: biome `mountain`, elevation 205 against a sea level of 128 (+77), 416mi from the nearest sea, and its own namesake river The Longshore Water runs 174mi away and never touches it. ⚠️ THE GM HAD ALREADY TOLD A PLAYER OTHERWISE — Brynjar, in a live save: 'Longshore is the nearest deep-water hire port.' Nothing lied and nobody authored a port; the word *shore* was the only field carrying a claim and the GM read it, which is what a good reader does with the only evidence it has. ⛔ THE FIX IS NOT A RENAME AND NOT A MOVE. Longshore is the seat of `foothill_longshore` and terrain.json's voter array is baked and in sync across all 38 seats — moving a seat desyncs it, and terrain must not be rebuilt (Erik: 'the world stays as it is basically'). So the name becomes true instead: the long shore-road BEGINS here. Every existing line in the save survives, Brynjar's included, as the half-truth a waypoint-keeper would actually tell."
 }

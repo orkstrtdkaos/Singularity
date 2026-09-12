@@ -163,7 +163,7 @@ Untended, **the argument resumes with the world still standing in the middle of 
 
 ## VI · WHO IS OUT THERE
 
-Ninety-eight great figures walk Exesa, spread across a hundred and thirty-five authored places — and
+Ninety-eight great figures walk Exesa, spread across a hundred and thirty-seven authored places — and
 **most of them have never heard of you.** They are doing their own work — and the world counts what they do
 whether or not you are in the room. The trickster you brushed past in a market may be a gang leader when you
 meet again, and nobody arranged that.

@@ -1,0 +1,67 @@
+{
+ "schemaVersion": 1,
+ "id": "keelmouth",
+ "name": "Keelmouth",
+ "regionId": "foothill_hardline",
+ "communityId": "keelmouth",
+ "spectrum": {
+  "space_time": 0.35,
+  "destruction_creation": 0.3,
+  "chaos_order": -0.25
+ },
+ "tags": [
+  "settlement",
+  "harbour",
+  "frontier",
+  "outward",
+  "river",
+  "shipyard"
+ ],
+ "connections": [
+  "firstsight"
+ ],
+ "descriptionSeed": "Keelmouth — where the Outrun stops being a river. The water arrives flat and brown off the stone-grass and goes out into the sea without any argument about it, and the whole town is built on that one fact: this is the only place on four hundred miles of cliff where a hull can be put in the water without being dropped. They lay keels on the mud at low water and float them off at high. Half the people here came out from the foothills to build one boat and have now built nine. Nobody is from Keelmouth. Everybody is second-generation from somewhere else.",
+ "loreRefs": [],
+ "npcsPresent": [],
+ "encounterFlavor": "keel-wrights arguing about a curve; a crew short one hand and not saying why; somebody's first hull, being looked at by people who know",
+ "dangerLevel": 2,
+ "questSeeds": [
+  "A hull is finished, paid for, and the man who paid for it has not come out from the foothills",
+  "The tide-table the yard works from is forty years old and has started being wrong",
+  "Something came up the Outrun on the flood and the yard will not talk about it in front of the apprentices"
+ ],
+ "map": {
+  "x": 540,
+  "y": 205
+ },
+ "encounterSeeds": [],
+ "poleIntensity": {
+  "space": 0.35,
+  "creation": 0.3,
+  "chaos": 0.25
+ },
+ "axisVector": [
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  -0.25,
+  0.0,
+  0.0,
+  0.35,
+  0.0,
+  0.3
+ ],
+ "axisVectorNote": "Derived from authored spectrum against world_node_atlas.axisOrder (SNG-180). ⚠️ `destruction_creation` +0.3 is the highest component and it is the point: a shipyard is a place whose whole reason is that things leave it finished.",
+ "worldPos": {
+  "colatitude": 51.75,
+  "longitude": 52.25,
+  "depth": 0
+ },
+ "worldPosNote": "⛔ SNG-537: MINTED ONTO THE MOUTH OF THE OUTRUN — terrain path#33's final authored point, measured at elevation 127 against a sea level of 128, i.e. ONE BELOW: a tidal estuary, not a cliff. ⚠️ WHY HERE AND NOT NEARER: the coast directly outward from Longshore is 396mi away and reads +31 to +99 elevation — plateau falling into water. This mouth is 496mi and at sea level. 100 miles further bought the only landing on the coast, and that is the fiction as well as the terrain.",
+ "tier": "settlement",
+ "parentId": null,
+ "role": "waypoint"
+}

@@ -76,7 +76,7 @@ import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, 
 import { routeBetween, routeLine } from "./engine/journey.js";
 import { sendCaravan, caravansOf } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./engine/entityDetail.js";
-import { canonicalPersonId, personArtSeed, applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM, repairUnnamedPeople } from "./engine/npcs.js";   // SNG-431 §1: the pre-namer saves get their names
+import { collapseScenePresence, canonicalPersonId, personArtSeed, applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM, repairUnnamedPeople } from "./engine/npcs.js";   // SNG-431 §1: the pre-namer saves get their names
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent } from "./engine/places.js";
 import { activeArcEffects, craftCostNote, encounterBias, effectsInPlainWords, npcMoodLines, travelCostFactor } from "./engine/arceffects.js";   // SNG-273: an advanced arc is something you FEEL
 import { knownIndex, whoIs, figureArtRecord } from "./engine/whois.js";   // SNG-299: who is that, and where do I read more
@@ -129,7 +129,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.456";
+const APP_VERSION = "1.9.457";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7482,6 +7482,13 @@ function applyTurn(turn, resolution, playerWords = null) {
       character._correctionAside = [character._correctionAside, `Set right: pronouns for ${who} in the scene record.`].filter(Boolean).join(" ");
     }
     sceneState = rec.scene;
+    // ✅ §176 (Erik 2026-09-12: "Huginn and Maren are both in the scene when they're the same, and the runner and Corvin are as well"):
+    // a person present under two names is present once — the record's name keeps the seat, the other folds in, and it is said.
+    const col = collapseScenePresence(sceneState, character.npcRegistry || {});
+    if (col.collapsed.length) {
+      sceneState = col.scene;
+      character._correctionAside = [character._correctionAside, `One person, one seat: ${col.collapsed.map(x => `${x.dropped} is ${x.kept}`).join("; ")}.`].filter(Boolean).join(" ");
+    }
   }
   // SNG-075: the valley is alive in narrative play too — maybe turn something up (woven next turn)
   maybeNarrativeEncounter(turn, resolution);
@@ -15538,7 +15545,7 @@ function renderPlay(turn, opts = {}) {
   for (const btn of app.querySelectorAll("[data-partally]")) btn.onclick = () => {
     const id = btn.dataset.partally; const nm = character.npcRegistry?.[id]?.name || "They";
     if (!confirm(`Part ways with ${nm}?`)) return;
-    partCompany(character, id);
+    partCompany(character, id, { day: absoluteWorldDay(), why: "you parted ways" }); // §173 (Erik 2026-09-12): the day is what every roster reads — this passed none
     saveCharacter(character);
     renderPlay(character.activeScene?.lastTurn || null, { aside: `${nm} parts from your company — the road may cross again.` });
   };

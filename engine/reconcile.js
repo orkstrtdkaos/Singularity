@@ -31,7 +31,7 @@ import { namesMatch } from "./namematch.js";
 import { affiliationOf, regionHomeTradition, buildPeopleVocab } from "./affiliation.js";
 import { defaultSchoolsForDomains } from "./substrate.js"; // SNG-193b §3.2: seed a school per practised domain on old saves
 import { mintableBraidsFor, buildBraidDef, mintBraid, braidTreeFor } from "./braids.js"; // SNG-196: mint the braids a character already earned · ✅ 2026-09-12: braidTreeFor for the template-rank repair
-import { findExistingNpc, prettifyNpcName, REGISTRY_CAP } from "./npcs.js"; // SNG-199/205: registry + codex backfill
+import { findExistingNpc, prettifyNpcName, REGISTRY_CAP, collapseScenePresence } from "./npcs.js"; // SNG-199/205: registry + codex backfill
 import { bondOf, companionCodexUpdate, companionStageCount } from "./companions.js"; // SNG-200: stage + codex backfill
 import { isCoercedObjectArtefact, isDescriptiveNotName } from "./state.js"; // SNG-329: the artefact detector, shared with the mint that now refuses it
 import { startingSkills } from "./inventory.js"; // SNG-339b: the training an existing character came with
@@ -85,7 +85,10 @@ function renameTargets(spec, entry, character, known) {
 
 export const CHARACTER_STEPS = [
   {
-    version: 1, id: "braid-template-ranks", playerFacing: true,
+    version: 50, id: "braid-template-ranks", playerFacing: true,
+    // ⛔ 2026-09-12: this shipped at version 1. reconcile() skips every step at or below the save's reconcileVersion — Silas's is 49 —
+    // so it never ran, and his save still carried five template ranks the morning after. Re-versioned above every live save; §170 now
+    // proves it THROUGH the runner. Proving `apply` on a copy was not proving the gate.
     // ✅ ERIK 2026-09-11: Silas minted a braid whose r2 read "The braid deepens" — braids.js's old scaffold, which named nothing.
     // Every minted braid still carrying that template gets its ranks rebuilt from its parents (`braidTreeFor`), once, on load, so
     // he sees the fix without re-minting. Idempotent: a rebuilt rank no longer matches the template. A model-authored tree is not
@@ -95,11 +98,19 @@ export const CHARACTER_STEPS = [
       const fixed = [];
       for (const ab of Object.values(c.customAbilities || {})) {
         if (!ab?.minted || !Array.isArray(ab.tree) || !ab.tree.length) continue;
-        const sources = (ab.minted.from || []).map(id => catalog[id]).filter(Boolean);
+        // ⛔ 2026-09-12: Marrow's Wings kept its template through the rewrite — its parent is stored as `the_shadow_work`, the catalog key is
+        // `shadow_work`. A `the_`/`the-` prefix and a `-`/`_` spelling resolve; a parent truly absent still declines the braid. §175.
+        const find = (id) => { const s = String(id || ""); return catalog[s] || catalog[s.replace(/^the[-_]/, "")] || catalog[s.replace(/-/g, "_")] || catalog[s.replace(/^the[-_]/, "").replace(/-/g, "_")] || null; };
+        const sources = (ab.minted.from || []).map(find).filter(Boolean);
         if (sources.length < 2) continue;
         const template = ab.tree.some(t => /^The braid deepens/.test(String(t?.grants || "")) || String(t?.cannot || "") === "What neither parent could do apart.");
-        if (!template) continue;
-        ab.tree = braidTreeFor(sources, { name: ab.name, emergent: ab.minted.emergent || ab.minted.emergentFunction || null, functions: ab.functions || [], maxRank: ab.tree.length });
+        // §175: a minted braid with no r2/r3 does not match the pattern of any other craft — grown from its parents, but only as deep as
+        // the DEEPER parent goes (braidRankFromParents draws a rank from whichever parent has it): a rank NO parent has would be built
+        // from nothing and read as template on the next load (§170's idempotence).
+        const canGive = Math.min(3, Math.max(1, ...sources.map(s => Array.isArray(s.tree) && s.tree.length ? s.tree.length : 1)));
+        const short = ab.tree.length < canGive;
+        if (!template && !short) continue;
+        ab.tree = braidTreeFor(sources, { name: ab.name, emergent: ab.minted.emergent || ab.minted.emergentFunction || null, functions: ab.functions || [], maxRank: Math.max(ab.tree.length, canGive) });
         fixed.push(ab.name);
       }
       return fixed.length ? { notes: [`Braid ranks rewritten from their parents (${fixed.length}): ${fixed.join(", ")} — each rank now says what it carries and what it still cannot.`] } : {};
@@ -192,6 +203,94 @@ export const CHARACTER_STEPS = [
       }
       if (!merged.length) return {};
       return { notes: merged.map(m => `${m.name} was two people in your world and is one again — what you learned of her is kept.`) };
+    }
+  },
+  {
+    version: 51, id: "company-half-departed", playerFacing: true,
+    // ✅ ERIK 2026-09-12 ("i tried to remove Calvar and Siol from my party... but it didn't clear them from the sidebar"): the ✕ on
+    // the company row called partCompany with no day, which wrote `leftDay: null` and `departedWhy: null` — and every roster reads
+    // leftDay, so a null departure is a present member. That pair of null keys is the fingerprint of exactly that write (a rejoin
+    // DELETES the keys; a dated parting writes a number). Each such member departs on load, dated to the save's own day, and the
+    // player is told — and can ask them back from their record if the parting was not meant. Idempotent: a repaired entry no
+    // longer carries the fingerprint.
+    apply: (c) => {
+      const half = (Array.isArray(c.company) ? c.company : []).filter(m => m && m.leftDay === null && Object.prototype.hasOwnProperty.call(m, "departedWhy") && m.departedWhy === null);
+      if (!half.length) return {};
+      const day = Number.isFinite(Number(c.clock?.day)) ? Number(c.clock.day) : 1;
+      const names = [];
+      for (const m of half) { m.leftDay = day; m.departedWhy = "parted by your word — the parting had not been recorded"; names.push(c.npcRegistry?.[m.npcId]?.name || m.npcId); }
+      return { notes: [names.join(" and ") + (names.length === 1 ? " had been parted from your company and the parting never took hold; it has now. If they should still be with you, ask them again from their record." : " had been parted from your company and the partings never took hold; they have now. If either should still be with you, ask them again from their record.")] };
+    }
+  },
+  {
+    version: 52, id: "edge-district-folded-again", playerFacing: true,
+    // ⛔ 2026-09-12: step 43 ran on Silas's save BEFORE its parent topic (`radiant-plateau-edge`) existed, folded nothing, returned {},
+    // and was stamped — and the version gate then kept the five `edge-district-*` children unfolded forever (live save: version 49,
+    // all five present, parent present). §119 asserted the repo copy had none left; it was reading a file the fold had never touched.
+    // The same fold, once more, above every live save. foldTopicsByIdPrefix folds nothing when nothing is there — idempotent by record.
+    apply: (c) => {
+      if (c?.id !== "char-mrhs8286") return {};
+      const folded = foldTopicsByIdPrefix(c, "edge-district-", "radiant-plateau-edge");
+      if (!folded.length) return {};
+      return { notes: [`${folded.length} Edge District hooks are filed under the district itself now — nothing was dropped, and the district's reading is due again.`] };
+    }
+  },
+  {
+    version: 53, id: "two-corvins", playerFacing: true,
+    // ✅ ERIK 2026-09-12 ("The Runner just introduced herself as Corvin - but I already know a Corvin (Farmhand from millbrook). So we'll
+    // need to make sure they are seperated."): the GM put the runner's reveal on the FARMER's id — rule 14 ("never coin a second id for the
+    // same human") pushed it there, and nothing said two humans can share a name. On origin the farmer (met d1, a man) carried "Third-circuit
+    // relay runner, Hub messenger", seen d17 at the post, "[d17] … named herself"; the runner's own record ("The Runner", d16, a woman) was
+    // untouched. The farmer's record as it stood at the last push before the merge is embedded below; everything on `corvin` beyond it belongs
+    // to the runner and moves to her; she takes the name the scene already calls her by; the farmer stands as he was on day 2. Idempotent:
+    // once restored, nothing on the farmer is beyond the snapshot. Named for the one save that has the pair, as step 43 was.
+    apply: (c) => {
+      if (c?.id !== "char-mrhs8286") return {};
+      const reg = c.npcRegistry || {}; const f = reg.corvin, r = reg["runner-whistling-woman-d16"];
+      if (!f || !r) return {};
+      const FARMER = {
+        role: "Farmer, east furlong — hunt companion",
+        statusNote: "Departed the smokehouse for his east furlong — hunt fully concluded on his end.",
+        lastSeen: { locationId: "millbrook", day: 2 },
+        history: ["[d1] Holding the west fence-line with the corridor closed — watching for Silas's next signal.", "[d1] Landed the killing strike on the sow — clean, short-range, no wasted motion. Kneeling in the sedge now, settling before the dressing work.", "[d1] Received the acknowledgment with a nod and a palm-flat on the sow's flank — then drew his knife and began dressing without ceremony.", "[d1] Received the handoff cleanly — no argument, back to the dressing work.", "[d1] Dressing the sow in the sedge strip — out of earshot of the ridge work.", "[d1] Still dressing the sow thirty yards south — out of earshot of the ridge conversation.", "[d1] Cut the carrying pole, coordinated the haul down without fuss. Now inside the smokehouse, waiting to see if he's needed.", "[d2] Pole leaned against the wall — his part of the work is done. Ready to head back to his furlong.", "[d2] Received twenty cord-weight without objection — brief recalibration, short nod, then out the door with his pole.", "[d2] Received farewell nod, departed with his pole — clean parting."],
+        knownFacts: ["The tip is now his — he wrapped it himself", "Aware of the arrangement between Silas and Pell; choosing not to acknowledge it", "Boar sounder works the wet sedge strip along the fence-line, a quarter mile into the north wood — mornings only, back under canopy by midday", "Sounder: sow, last year's young, four to five reliable — bull present but not fixed to them", "Boar have been pushing rooting ground higher, away from streamside sedge, toward drier scrub — river smell on the low air driving it", "Can read a compressed-strike signal and execute it without hesitation", "Holds ground when an animal turns into a wound rather than fighting it off", "Silas paid him a share of the hunt without being asked"],
+        skillsObserved: ["practical acceptance", "clean boar strike under pressure", "ground-holding when a wounded animal commits", "receiving acknowledgment without excess", "immediate transition to post-kill work", "immediate transition to post-kill work without ceremony"],
+      };
+      const beyond = (arr, base) => (Array.isArray(arr) ? arr : []).filter(x => !base.includes(x));
+      const movedHistory = beyond(f.history, FARMER.history), movedFacts = beyond(f.knownFacts, FARMER.knownFacts), movedSkills = beyond(f.skillsObserved, FARMER.skillsObserved);
+      const merged = f.role !== FARMER.role || movedHistory.length || movedFacts.length || (Number(f.lastSeen?.day) || 0) > 2;
+      if (!merged) return {};
+      const add = (arr, more) => [...new Set([...(Array.isArray(arr) ? arr : []), ...more])];
+      if (f.role !== FARMER.role) r.role = f.role;
+      if (f.statusNote && f.statusNote !== FARMER.statusNote) r.statusNote = f.statusNote;
+      if ((Number(f.lastSeen?.day) || 0) > 2) r.lastSeen = f.lastSeen;
+      r.history = add(r.history, movedHistory).slice(-40); r.knownFacts = add(r.knownFacts, movedFacts).slice(-40); r.skillsObserved = add(r.skillsObserved, movedSkills).slice(-20);
+      if (r.name === "The Runner") { r.aliases = add(r.aliases, ["The Runner"]).slice(-4); r.name = "Corvin Teth"; r.nameRevealed = true; delete r.nameUnknown; }
+      f.role = FARMER.role; f.statusNote = FARMER.statusNote; f.lastSeen = { ...FARMER.lastSeen }; f.history = [...FARMER.history]; f.knownFacts = [...FARMER.knownFacts]; f.skillsObserved = [...FARMER.skillsObserved]; delete f.met;
+      const topics = c.codex?.topics; const tf = topics?.corvin, tr = topics?.["runner-whistling-woman-d16"];
+      if (tf && tr && Array.isArray(tf.facts)) { const late = tf.facts.filter(x => /^\[d(1[7-9]|[2-9]\d)\]/.test(String(x))); if (late.length) { tr.facts = add(tr.facts, late); tf.facts = tf.facts.filter(x => !late.includes(x)); } }
+      return { notes: [`Corvin the farmer of Millbrook and Corvin Teth the relay runner are two people again — what the runner said and did at the post (${movedHistory.length} entr${movedHistory.length === 1 ? "y" : "ies"}) is on her record now, and the farmer stands as he was on day 2.`] };
+    }
+  },
+  {
+    version: 54, id: "huginn-is-maren", playerFacing: true,
+    // ✅ ERIK 2026-09-12 ("Huginn and Maren are both in the scene when they're the same, and the runner and Corvin are as well"): Maren's
+    // record carried no alias for the names the story called her by before she gave her own, so the scene seated Huginn beside Maren and
+    // KNOWN PEOPLE could not say they were one. The aliases go on; the stored scene is collapsed to one seat per person — the same collapse
+    // every beat now runs (§176). Runs after two-corvins, so the runner already bears her name and her alias.
+    apply: (c) => {
+      if (c?.id !== "char-mrhs8286") return {};
+      const notes = []; const m = c.npcRegistry?.marrow;
+      if (m && m.name === "Maren Ossitide") {
+        const had = new Set(m.aliases || []); const add = ["Huginn", "Marrow"].filter(a => !had.has(a));
+        if (add.length) { m.aliases = [...(m.aliases || []), ...add].slice(-4); notes.push("Maren Ossitide answers to Huginn and Marrow — the names the story called her by before she gave her own."); }
+      }
+      const sc = c.activeScene?.sceneState;
+      if (sc && Array.isArray(sc.npcsPresent)) {
+        const col = collapseScenePresence(sc, c.npcRegistry || {});
+        if (col.collapsed.length) { c.activeScene.sceneState = col.scene; notes.push("One person, one seat: " + col.collapsed.map(x => `${x.dropped} is ${x.kept}`).join("; ") + "."); }
+      }
+      return notes.length ? { notes } : {};
     }
   },
   {

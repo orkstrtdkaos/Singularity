@@ -106,24 +106,31 @@ const DEFAULT_STAGE_FLOORS = { courting: 2, together: 4, committed: 6, partner: 
 export function findExistingNpc(reg, id, name = "") {
   if (reg[id]) return reg[id];
   const nameNorm = slugify(name);
-  for (const n of Object.values(reg)) {
+  const entries = Object.values(reg).filter(Boolean);
+  // ⛔ 2026-09-12 (two Corvins, §176): EXACT EVIDENCE FIRST, ACROSS EVERYONE — a name or alias that IS this name, a canon-equal id —
+  // and only then the id-kin guess. In one pass, in registry order, the farmer `corvin` won "Corvin Teth" by prefix ("corvin-teth"
+  // starts with "corvin") before the runner, whose NAME is Corvin Teth, was ever reached: her reveal, her pronouns and her whole day
+  // landed on him, and the scene record was "set right" to his pronouns every beat. A prefix is a guess; a name is a fact.
+  for (const n of entries) {
     if (nameNorm && slugify(n.name) === nameNorm) return n;
     // SNG-199: this module MAINTAINS `aliases` across five write sites (a renamed or re-revealed person
     // keeps their prior names) — but the matcher never READ them, so a person met again under a name the
     // registry already knew as an alias forked a second record. Match the alias ledger that was being
     // written all along. Exact slug-match only (an explicit prior name), never a lexical loosening.
     if (nameNorm && (n.aliases || []).some(a => slugify(a) === nameNorm)) return n;
+    // CCODE-24: bridge the `_` ↔ `-` id-convention gap. A quest/hunt-effect giver stub keys the registry by the
+    // RAW content id (keeper_ilma — quests.js deliberately never slugifies content ids); a MEET keys by
+    // slugify (keeper-ilma). Without a normalized compare the same person forks into two registry entries
+    // (verified live in a real save), and the ally/questState marker strands on the orphan. Treat `_`≡`-`.
+    if (n.id && id && canonNpcId(n.id) === canonNpcId(id)) return n;
+  }
+  for (const n of entries) {
     // CCODE-20: a registry entry can LACK an `id` — a quest/hunt-effect giver stub (quests.js writes
     // {name, questState} with no id). findExistingNpc runs on EVERY npcUpdate, so one id-less stub threw
     // `n.id.split(...)` and aborted the whole meet — poisoning every SUBSEQUENT person too (no name ever
     // stuck: the GM re-introduced the same character under a fresh name each turn). An id-less entry can't
     // match by id-prefix anyway (its name was already tried above), so guard both sides and skip it here.
     if (!n.id || !id) continue;
-    // CCODE-24: bridge the `_` ↔ `-` id-convention gap. A quest/hunt-effect giver stub keys the registry by the
-    // RAW content id (keeper_ilma — quests.js deliberately never slugifies content ids); a MEET keys by
-    // slugify (keeper-ilma). Without a normalized compare the same person forks into two registry entries
-    // (verified live in a real save), and the ally/questState marker strands on the orphan. Treat `_`≡`-`.
-    if (canonNpcId(n.id) === canonNpcId(id)) return n;
     const a = n.id.split("-")[0], b = id.split("-")[0];
     if (a === b && (n.id.startsWith(id) || id.startsWith(n.id) || a === id || b === n.id)) return n;
   }
@@ -245,6 +252,17 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
         gender: u.gender ? String(u.gender).slice(0, 40) : null,       // SNG-143: sex/gender is explicit DATA, captured the first time they appear (never inferred at render)
         pronouns: u.pronouns ? String(u.pronouns).slice(0, 40) : null
       };
+      // ✅ §174 (Erik 2026-09-12): a person the world MINTED earlier (generated.npc) who is met now takes the minted record's role,
+      // face, domains and people wherever the op left them blank — the lift reconcileGeneratedNpcWithMeet does for a SAME-turn mint,
+      // owed equally to a later one. Bryn Callowell was minted on d14 with a role, a face and three domains, and a meet of him would
+      // have registered a blank.
+      const minted = character.generated?.npc?.[id];
+      if (minted && typeof minted === "object") {
+        if (!n.role && minted.role) n.role = String(minted.role).slice(0, 100);
+        if (!n.description && minted.appearance) n.description = smartClamp(String(minted.appearance), 600);
+        for (const k of ["domains", "domainsSource", "people", "peopleSource", "gender", "sex"]) if (minted[k] != null && n[k] == null) n[k] = minted[k];
+        n._filledFromGenerate = true;
+      }
       // SNG-199 §5: meeting a person WRITES THE CODEX — the one mandatory mirror. Before this, the
       // codex was populated only by the GM volunteering codexUpdates (L2 permission-isn't-initiative),
       // so it reliably recorded what people did while the player was AWAY and unreliably recorded that
@@ -504,6 +522,47 @@ export function setNpcName(character, npcId, name, day = null) {
   return true;
 }
 
+
+/** ✅ ERIK 2026-09-12 ("Huginn and Maren are both in the scene when they're the same, and the runner and Corvin are as well"): a person
+ *  present under two names is present ONCE. Each present entry is resolved to a registry record — the exact name or an alias first,
+ *  then the fullest name token that appears (never a title word) — and entries that resolve to the same record fold into the one
+ *  whose name is the record's current name (else the first), states joined. Entries no record answers to are kept as they are.
+ *  Returns { scene, collapsed: [{ kept, dropped, id }] }. Runs at every beat (app.js, after the identity pass) and on the stored scene
+ *  at load (reconcile step 54). Pure — a new scene object. §176. */
+export function collapseScenePresence(scene, npcRegistry = {}) {
+  const present = Array.isArray(scene?.npcsPresent) ? scene.npcsPresent : null;
+  if (!present || present.length < 2) return { scene, collapsed: [] };
+  const people = Object.values(npcRegistry || {}).filter(n => n && n.id && n.name);
+  const TITLE = /^(?:warden|clerk|lord|lady|ser|sir|captain|elder|master|mistress|guard|scout|keeper|reverend|dame|goodman|goodwife|councillor|magistrate|high|luminary|overseer|the|runner|courier)$/i;
+  const low = (s) => String(s || "").trim().toLowerCase();
+  const resolve = (label) => {
+    const l = low(label).replace(/\s*\([^)]*\)\s*$/, "");   // "Corvin Teth (Runner)" → "corvin teth"
+    if (!l) return null;
+    for (const p of people) if (low(p.name) === l || (p.aliases || []).some(a => low(a) === l)) return p;
+    let best = null, len = 0;
+    for (const p of people) {
+      const toks = [String(p.name), ...(p.aliases || []).map(String)].flatMap(s => [s, ...s.trim().split(/\s+/)]).map(t => t.trim()).filter(t => t.length > 2 && !TITLE.test(t));
+      for (const t of toks) if (t.length > len && new RegExp("\\b" + t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b", "i").test(l)) { best = p; len = t.length; }
+    }
+    return best;
+  };
+  const byId = new Map(); const out = []; const collapsed = [];
+  for (const e of present) {
+    const rec = e && e.name ? resolve(e.name) : null;
+    if (!rec) { out.push(e); continue; }
+    const seat = byId.get(rec.id);
+    if (!seat) { const kept = { ...e }; byId.set(rec.id, kept); out.push(kept); continue; }
+    const seatIsRecord = low(seat.name).replace(/\s*\([^)]*\)\s*$/, "") === low(rec.name);
+    const entryIsRecord = low(e.name).replace(/\s*\([^)]*\)\s*$/, "") === low(rec.name);
+    const keep = !seatIsRecord && entryIsRecord ? e : seat, drop = keep === seat ? e : seat;
+    const keptName = String(keep.name), droppedName = String(drop.name);   // read before the seat is renamed
+    const states = [...new Set([String(seat.state || ""), String(e.state || "")].filter(Boolean))];
+    seat.name = keptName; seat.state = states.join(" · ");
+    collapsed.push({ kept: keptName, dropped: droppedName, id: rec.id });
+  }
+  return { scene: { ...scene, npcsPresent: out }, collapsed };
+}
+
 /** Heuristic: does this registry entry read as name-unknown (a role/placeholder)? */
 export function nameIsUnknown(n) {
   if (n.nameRevealed) return false;
@@ -670,7 +729,7 @@ export function npcRegistryForGM(character, { locationId = null, sceneNpcNames =
           (d.acknowledgeTone ? ` TONE (earned approval; sharp when crossed): ${d.acknowledgeTone}` : "")
         : ` ⟡ DRIVEN: ${d.driveSummary || (d.wants || [])[0] || "has their own wants"}`;
     }
-    return `- ${n.name}${n.role ? ` (${n.role})` : ""}${n.gender || n.pronouns ? ` [${[n.gender, n.pronouns].filter(Boolean).join(", ")} — use these pronouns]` : ""} — ${relationshipBand(n.relationship)} (${n.relationship}), status: ${n.status}.` +
+    return `- ${n.name}${Array.isArray(n.aliases) && n.aliases.length ? ` (also called ${n.aliases.slice(-3).join(", ")})` : ""}${n.role ? ` (${n.role})` : ""}${n.gender || n.pronouns ? ` [${[n.gender, n.pronouns].filter(Boolean).join(", ")} — use these pronouns]` : ""} — ${relationshipBand(n.relationship)} (${n.relationship}), status: ${n.status}.` +
       (n.bondType && n.bondType !== "platonic" ? ` BOND: ${relationshipLabel(n)} — established fact; honor the KIND of this relationship.` : "") +
       (desc ? ` ${desc}` : "") +
       (note ? ` CURRENT SITUATION: ${note}.` : "") +

@@ -679,7 +679,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `damageType` | 107 | `mechanic`×107 | ✅ READ | `craftmechanics.js`, `damagetypes.js`, `gm.js` |
 | `dice` | 105 | `mechanic`×105 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `gm.js` |
 | `crit` | 93 | `mechanic`×93 | ✅ READ | `craftmechanics.js`, `encounters.js`, `npcsheet.js` |
-| `range` | 81 | `mechanic`×81 | ✅ READ | `capabilities.js`, `craftmechanics.js` |
+| `range` | 81 | `mechanic`×81 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `reconcile.js` |
 | `backlashRung` | 80 | `root`×20 `tree`×60 | ✅ READ | `progression.js` |
 | `plus` | 73 | `mechanic`×73 | ✅ READ | `craftmechanics.js`, `damagetypes.js`, `gm.js` |
 | `schemaVersion` | 63 | `root`×63 | ✅ READ | `canon.js`, `codex.js`, `encounterFrame.js` |

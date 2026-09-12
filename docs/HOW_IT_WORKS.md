@@ -483,7 +483,7 @@ working papers; **this is the answer.**
 | 09-08 | ✅ **ONE ROSTER, DERIVED; THE OPPONENT GATE; R41's FORM; THE VEIL LOADED** | Erik: *"all NPCs should at least be referenced from a single source list… even if we need to keep separate lists for code"* · *"any condition must be an opposed roll"* stands unbuilt (§A) | `scripts/roster.mjs` reads six files from disk and asks `personOpponentFor` for each; 144 records, 125 reachable, **40 would fight at level 1** (ratchet, Aevi's §2 owns it); `npcs/legends.json`'s five are read by NOTHING and Corvane is a hinge on 4 of 6 arcs (§10 gap); `notAnOpponent: true` refuses by name; a Sovereign is ONE record with `forms.diminished`/`forms.final` chosen by the arc's live stage; `the_veil` + `power_cosmology` loaded, attached, and on the GM's ask view | `§147` · `§59` refixtured on Sister Alder · `roster --check` is a suite | §10 gains the hinge gap; docs/ROSTER.md is generated between markers, prose kept above |
 | 09-08 | ✅ **THE FORTY ARE DERIVED, NOT AUTHORED — ROLE → TIER → THE CHAIN THAT ALREADY RAN** | Erik: *"I thought you were going to have him make the generative engine build out the remaining empty NPCs?"* · Aevi, correcting her own spec: *"NOT A MISSING SHEET. NOT A MISSING KIT. ONE MISSING FIELD."* | 40 of 40 level-1 records were level 1 for one reason — no `tier` — while `tierFloor` already fired for the 64 who had one. `rules/tier_signals.json` (CONTENT, correctable without code) → `tierFromRole` → `derivedLevel`, consulted ONLY where a record is silent. **40 → 0**, ratchet tightened; 19 regional · 12 notable · 9 heroic. Guards: authored tier and level both outrank it; default `notable`; a hard `ceiling: heroic` so no regex reaches epic/legendary/mythic; `tierDerived` on the SHEET, never stamped onto the record; no code fallback, so an absent table derives nothing | `§148` · `§147`'s level-1 ratchet 40→0 | ⚠ **and my roster column was too generous**: R47's bare `_strike` was counting as a kit, so 62 records read as armed when they have no real craft — corrected, and it makes `domains` on the legends the same one-field problem one tier up |
 
-**Last verified: 2026-09-12 · v1.9.456 · 429 crafts.**
+**Last verified: 2026-09-12 · v1.9.457 · 429 crafts.**
 
 ---
 
@@ -1034,7 +1034,7 @@ group, summon, holdings and melee layer — features, each a wire-or-cut for Eri
 ✅ **Erik's three of 2026-09-11.** A **braid's ranks come from its parents**: rank *n* carries what both parents reach at rank *n*, in their own
 words (authoring glyphs stripped) plus the emergent function — better than either by construction; a model-authored rank stands unless it
 is template-thin, and a save's minted braid still carrying the old scaffold is rewritten from its parents once, on load
-(`braid-template-ranks`). **Raising a sub-attribute says what the next rank buys** — the sub's row and both grow buttons read
+(`braid-template-ranks` — re-versioned to 50 on 2026-09-12: it shipped at version 1, below every live save's `reconcileVersion`, and had never run; §170 now proves it through `reconcile()`). **Raising a sub-attribute says what the next rank buys** — the sub's row and both grow buttons read
 `ladderRungLine` / `ladderRoll`, the authored ladder the engine pays from, which had no reader until now. And **every craft shows its base
 chance here**, on the ability row and in the skill pop-up: `craftChanceHere` runs the same `successChance` stack the roll pays, with the
 ground's own penalty through `substrateForAction` — a preview that omits a term the roll pays is a preview that lies (SNG-116). `§170`.
@@ -1051,6 +1051,47 @@ its error, and whom it touched, with the instruction to restate those changes as
 same beat exposed are fixed beside it: an update may carry prior names (`aliases`) so a half-landed reveal keeps resolving, and a
 REFUSED join or raise (a full company, a band not ready) is said to the player in the beat's aside instead of computed for nobody.
 The crash itself was a kin-fact pin added without its import (`pinFact`), firing only when a bond change yields a fact.
+
+✅ **A parting is recorded on the day it happens, and a half-recorded one is repaired (Erik 2026-09-12: *"i tried to remove Calvar
+and Siol from my party... but it didn't clear them from the sidebar"*).** The ✕ on a company row called `partCompany` with no day, which
+wrote `leftDay: null` — and every roster reads `leftDay`, so a null departure was a present member. The button now passes the world-day
+and the reason (`§173`); the engine dates a parting to the character's own clock day when no day is given, so a departure is truthy
+however it was asked for; and a save carrying the fingerprint of the old write (`leftDay` null AND `departedWhy` null, both keys
+present — a rejoin deletes them, a dated parting writes numbers) departs those members on load with a note (`company-half-departed`,
+version 51), and they can be asked back from their record. The same family as §172: the aside said *"parts from your company"* in the
+system's own voice, and the state it rested on had not changed.
+
+✅ **People the world minted for the story reach the prompt before they are met (Erik 2026-09-12: *"I can't find the Radiant guy who
+helped finish the Made Gate... the GM doesn't recall him at all"*).** Bryn Callowell — a Blazeborn post-rider carrying something from
+Silas's father — was minted on d14 (twice) and never entered KNOWN PEOPLE: a minted person is registered only by an npcUpdates `meet`,
+and the GM was shown minted people only at their home place. Fourteen of Silas's twenty-one minted people sat in that limbo, real and
+invisible. A registry row (`mintedUnmetDetail`, `§174`, every view) now lists each minted person the registry does not know — id, role,
+home, when and why they were minted — with the instruction to meet them by THAT id and never re-request them; the registry's own matcher
+decides who is already known, so the block and the meet path cannot disagree. And a meet of a minted person LIFTS the minted record
+(role, face, domains, people) instead of registering a blank. §170's braid repair is corrected beside it: it shipped at `version: 1`,
+below every live save's `reconcileVersion`, and had never run; re-versioned to 50, and proven through `reconcile()` at a real version.
+
+✅ **Two people, one name; a fold stamped past; a parent under a `the_` (Erik 2026-09-12: *"The Runner just introduced herself as
+Corvin - but I already know a Corvin"*).** The GM put the runner's reveal on the farmer's id — rule 14's *"never coin a second id for
+the same human"* pushed it there, and nothing said two humans can share a name. Rule 14 now says it, and where a reveal goes: on the id
+of the person who is present, never the namesake's. The save is split on load (`two-corvins`, version 53, `§175`): everything on the
+farmer beyond his day-2 record moves to the runner, she takes the name the scene already calls her by, and he stands as he was. Two
+more gates found while proving it through the runner: step 43's Edge District fold ran before its parent topic existed, folded nothing,
+and was stamped — the version gate then kept the five children unfolded forever, and §119 was asserting a state of the live file the
+fold had never produced; the fold runs once more above every live save (version 52), and §119 now asserts the copy *brought up to date
+on load*, since a file every beat rewrites is a ledger, not a fixture. And Marrow's Wings kept its template through the §170 rewrite
+because its parent is stored as `the_shadow_work` while the catalog's key is `shadow_work`; the step resolves a `the_` prefix and a
+`-`/`_` spelling, and grows a one-rank minted braid to three from its parents, which is the pattern of every other craft.
+
+✅ **One person, one seat (Erik 2026-09-12: *"Huginn and Maren are both in the scene when they're the same, and the runner and Corvin
+are as well… it keeps stumbling over pronoun updates"*).** Three readers made two people of one. The registry matcher took the first
+person whose id was a prefix of the asked-for id — the farmer `corvin` for `corvin-teth` — before it ever reached the runner whose
+*name* is Corvin Teth; it now takes exact evidence (a name, an alias, a canon-equal id) across everyone before any prefix guess
+(`§176`). The scene-identity pass took the first person whose name appeared in "Corvin Teth (Runner)" and set her pronouns right to
+his every beat; it now counts aliases as names and lets the fullest name win. And nothing folded a person present under two names:
+`collapseScenePresence` now runs on every beat's scene after the identity pass and on the stored scene at load — the record's name keeps
+the seat, the other name folds in, states joined, and the aside says *"One person, one seat: Huginn is Maren Ossitide"*. Maren's record
+carries the aliases the story called her by (`huginn-is-maren`, version 54), and KNOWN PEOPLE says *(also called Huginn, Marrow)*.
 
 ✅ **Eight stats (Erik 2026-09-11: *"there are 8 stats, not the 4 we started with. they now need a spread of the 8"*).** Every
 craft row rolls ONE sub-attribute — a dial, `craftSubAttributes.enabled`, on; off, every craft rolls its parent as before. An authored `subAttribute` on a craft wins; otherwise `resolution.craftSubAttributes` splits

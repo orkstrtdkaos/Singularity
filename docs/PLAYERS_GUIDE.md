@@ -10,7 +10,7 @@ place, person and belief in X–XII is drawn from authored content — , ,
 , the nine companion files and — and where the world has not decided
 something, the guide says so rather than filling it in.
 
-**Last verified: 2026-09-12 · v1.9.456 · 438 crafts · 137 places · 146 people · 9 companions.**
+**Last verified: 2026-09-12 · v1.9.457 · 438 crafts · 137 places · 146 people · 9 companions.**
 
 **Every craft in the game, by domain and sect, is listed in [`SKILLS.md`](SKILLS.md)** — what each
 one costs, what it does, and what its three ranks give you.
@@ -43,6 +43,11 @@ the usual sense.** It has **places you go**, and each one answers a different qu
 
 **The play screen.** You type what you do; the world answers. Everything else is somewhere you step out
 to and come back from. **When in doubt, you are meant to be here.**
+
+**Two day-counts, and neither is wrong.** The sidebar's *Day N* is your character's story-day — it moves when the story does.
+The *world-day* on an image is the calendar of the world itself, which moves whether or not you play (the world's first day was
+its day 1; it runs into the seventies now). A picture stamped world-day 24 is from the world's twenty-fourth day, not your
+character's — the two numbers are different counts of different things.
 
 ## When it turns into a fight — or a contest
 
@@ -367,6 +372,9 @@ down, takes a named thing out of the world with them.
 **A folded companion is not safe.** They add to your blows when you are winning and **they take losses
 when you are not.** ⚠️ **Including the ones who cannot fight — being unable to swing is not being
 protected**, and the reverse would make non-combatants the smart thing to hide behind.
+
+**Parting.** The ✕ beside a name in your company parts you on the day you press it; they move to your former company, and you can
+ask them again from their record.
 
 ## Playing with other people
 

@@ -47,7 +47,7 @@ import { wakesForGM } from "./wake.js"; // SNG-204: the aftermath waiting to bec
 import { priceLine } from "./economy.js";   // SNG-302: what a thing fetches HERE, so the GM can be honest about it
 import { reachableDeadForGM } from "./death.js"; // SNG-209: the dead who are NOT gone — reachable in the death state, latent hooks
 import { threatToPlayer, guardiansFor, worldRoster } from "./worldtick.js"; // SNG-310: the mark the world engine leaves for the GM to narrate
-import { npcRegistryForGM, npcQuestSeedBlock, bearersOf, carriedForGM } from "./npcs.js";
+import { npcRegistryForGM, npcQuestSeedBlock, bearersOf, carriedForGM, findExistingNpc } from "./npcs.js";
 import { presenceForGM, resolvePresence } from "./presence.js";   // SPEC_npc_presence_cadence: who the day could offer
 import { placeMemoryForGM, recallForGM } from "./places.js";
 import { sheetsForGM } from "./npcsheet.js";     // the person-keyed sheet, first live caller
@@ -146,6 +146,13 @@ export const GM_CONTEXT = [
   { key: "npcRegistryDetail", builder: "npcs.npcRegistryForGM", carries: ["known people", "bonds", "gender/pronouns"],
     reachedBy: "always", spec: "§13", views: ALL,
     build: (env) => npcRegistryForGM(env.character, { locationId: env.character.currentLocationId, sceneNpcNames: (env.sceneState?.npcsPresent || []).map(n => n.name), interiority: env.CONTENT?.npcInteriority, communityId: env.location?.communityId ?? null, rules: env.CONTENT?.rules }) }, // SNG-233 §2b: drives fold into the NPC block
+  // ✅ ERIK 2026-09-12 ("I can't find the Radiant guy who helped finish the Made Gate... the GM doesn't recall him at all"): Bryn Callowell
+  // was minted on d14 (twice) and never entered KNOWN PEOPLE — a minted person is registered only by a `meet`, and the GM saw minted people
+  // only at their home place. 14 of Silas's 21 minted people sat in that limbo. This row shows every one of them, everywhere, with the id
+  // to meet them by. §174.
+  { key: "mintedUnmetDetail", builder: "gm_registry.mintedUnmetForGM (§174)", carries: ["people minted for this story not yet in the registry", "the stable ids to meet them by"],
+    reachedBy: "any beat while a minted person is unregistered", spec: "§174", views: ALL,
+    build: (env) => mintedUnmetForGM(env.character) },
 
   // SNG-167 §2: a LOCATION can start an arc and a PERSON cannot — rule 10 weaves the location's
   // questSeeds and there is no equivalent for anyone you meet. That is backwards: the memorable arcs
@@ -603,6 +610,32 @@ export function assembleGMContext(view, env) {
 
 /** ✅ §172: what the GM is told after an isolated op-group failure — the step, its error, and the people or things that step touched
  *  on the failed turn, so the GM restates them rather than assuming they landed. Empty when the last turn landed whole. Pure. */
+/** ✅ ERIK 2026-09-12 ("I can't find the Radiant guy who helped finish the Made Gate... the GM doesn't recall him at all"). Bryn
+ *  Callowell was minted on d14 — twice: once unnamed, once when he named himself — and never entered KNOWN PEOPLE, because a minted
+ *  person is registered only by an npcUpdates `meet`, and the GM sees minted people only at their HOME place (app.js filters
+ *  generated people by homeLocation === here). Silas had 21 minted people and 14 of them in that limbo: real, durable, with ids,
+ *  and invisible from anywhere but the room they were made in. This lists every minted person the registry does not know, from
+ *  anywhere, with the id to meet them by. The registry's own matcher (`findExistingNpc`, the one the meet path uses) decides
+ *  who is already known, so the block and the meet path cannot disagree; a record re-homed under a met id (`_mergedFrom`) is
+ *  known too. Newest mint first; capped. Pure. §174. */
+export function mintedUnmetForGM(character, { max = 16 } = {}) {
+  const gen = character?.generated?.npc;
+  if (!gen || typeof gen !== "object") return null;
+  const reg = character?.npcRegistry || {};
+  const merged = new Set(Object.values(reg).map(n => n?._mergedFrom).filter(Boolean));
+  const clip = (s, n) => { const t = String(s || "").replace(/\s+/g, " ").trim(); return t.length > n ? t.slice(0, n - 1) + "…" : t; };
+  const rows = Object.values(gen)
+    .filter(n => n && n.id && n.name && !merged.has(n.id) && !findExistingNpc(reg, n.id, n.name))
+    .sort((a, b) => (Number(b._gen?.provenance?.day) || -1) - (Number(a._gen?.provenance?.day) || -1))
+    .slice(0, max);
+  if (!rows.length) return null;
+  return rows.map(n => {
+    const p = n._gen?.provenance || {};
+    const minted = p.day != null ? " · minted d" + p.day + (p.locationId ? " at " + p.locationId : "") + (p.why ? ": " + clip(p.why, 100) : "") : "";
+    return "- [" + n.id + "] " + n.name + " — " + clip(n.role, 140) + " · home: " + (n.homeLocation || "unknown") + minted;
+  }).join("\n");
+}
+
 export function restateForGM(character) {
   const lt = character?.activeScene?.lastTurn;
   if (!lt || !lt._applyFailed) return null;

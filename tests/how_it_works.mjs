@@ -1901,6 +1901,14 @@ console.log("\n── §170 · braid ranks, raise tips, chance here ──");
   const res170 = step170 ? step170.apply(fix170, { content: { abilities: { pa: pA, pb: pB } } }) : null;
   check("§170: ⛔ …and a save's minted braid still carrying the template is rewritten from its parents ON LOAD, once (idempotent)",
     !!step170 && (res170?.notes || []).length === 1 && /Darken a room/.test(fix170.customAbilities.b.tree[1].grants) && Object.keys(step170.apply(fix170, { content: { abilities: { pa: pA, pb: pB } } })).length === 0, JSON.stringify(res170));
+  // ⛔ 2026-09-12: the step shipped at version 1. reconcile() skips every step at or below the save's reconcileVersion — Silas's is 49 —
+  // so it never ran, and his save still carried five template ranks the morning after. The check above proved `apply` on a copy; this
+  // one proves the step THROUGH THE RUNNER at a real version. Proving the producer is not proving the gate.
+  const gate170 = { reconcileVersion: 49, customAbilities: { b: { id: "b", name: "Shadowcast Model", functions: ["make"], minted: { from: ["pa", "pb"] }, tree: [{ rank: 1, name: "Shadowcast Model I", grants: "x", cannot: "What neither parent could do apart." }, { rank: 2, name: "Shadowcast Model II", grants: "The braid deepens; the two crafts answer together more surely.", cannot: "What neither parent could do apart." }] } } };
+  const gr170 = RC170.reconcile(gate170, "character", { content: { abilities: { pa: pA, pb: pB } } });
+  check("§170: ⛔ …and it runs THROUGH reconcile() on a save at version 49 — the step's version sits above every live save, not below it",
+    !!step170 && step170.version > 49 && gr170.applied.includes("braid-template-ranks") && /Darken a room/.test(gate170.customAbilities.b.tree[1].grants) && gate170.reconcileVersion >= step170.version,
+    JSON.stringify({ applied: gr170.applied, version: step170?.version, warnings: gr170.warnings }));
   // ⛔ "the bonuses for raising abilities needs to show up in the pop-up text for each"
   const ladder170 = rj("content/packs/core/rules/sub_attribute_ladder.json");
   const app170 = rd("app.js").replace(/^\s*\/\/.*$/gm, "");
@@ -1979,7 +1987,168 @@ console.log("\n── §172 · a beat's bookkeeping is restated, not lost ──
   // ⛔ the check the wiring audit made me write: the row is READ, not merely registered — gm.js destructures it and pushes its instruction
   const gm172 = rd("engine/gm.js").replace(/^\s*\/\/.*$/gm, "");
   check("§172: ⛔ …and the prompt assembler READS the row — gm.js takes bookkeepingRestate out of the context and pushes its instruction into the scene",
-    /const \{ bookkeepingRestate, character,/.test(gm172) && /scene\.push\(`## \$\{bookkeepingRestate\.instruction\}`\)/.test(gm172));
+    /const \{ bookkeepingRestate, [^}]*\} = ctx;/.test(gm172) && /scene\.push\(`## \$\{bookkeepingRestate\.instruction\}`\)/.test(gm172));
+}
+
+/* ══════════ §173 — A PARTING THAT WROTE NOTHING THE ROSTER READS (Erik 2026-09-12: "it didn't clear them from the sidebar") ══════════ */
+console.log("\n── §173 · a parting is recorded on the day it happens, and a half-recorded one is repaired on load ──");
+{
+  const CO173 = await import("../engine/company.js");
+  const RC173 = await import("../engine/reconcile.js");
+  const mk173 = () => ({ id: "c173", clock: { day: 17 }, company: [{ npcId: "pell", roles: ["ally"], joinedDay: 17 }, { npcId: "calvar", roles: ["ally"], joinedDay: 17 }], npcRegistry: { calvar: { id: "calvar", name: "Calvar" }, pell: { id: "pell", name: "Pell" } } });
+  // ⛔ the bug as it happened: partCompany with no day wrote leftDay: null — "departed", and still on every roster that reads leftDay
+  const c1 = mk173(); const ok1 = CO173.partCompany(c1, "calvar");
+  check("§173: ⛔ a parting with no day still LEAVES — the roster no longer lists them (leftDay was written null, and null read as present)",
+    ok1 === true && !CO173.activeCompany(c1).some(m => m.npcId === "calvar") && CO173.formerCompany(c1).some(m => m.npcId === "calvar") && c1.company[1].leftDay === 17, JSON.stringify(c1.company[1]));
+  const c2 = mk173(); CO173.partCompany(c2, "calvar", { day: 74, why: "you parted ways" });
+  check("§173: a parting with a day records that day and the reason", c2.company[1].leftDay === 74 && c2.company[1].departedWhy === "you parted ways");
+  const app173 = rd("app.js").replace(/^\s*\/\/.*$/gm, "");
+  check("§173: ⛔ the ✕ on the company row passes the day and the reason — it called partCompany(character, id) with neither",
+    /partCompany\(character, id, \{ day: absoluteWorldDay\(\), why: "you parted ways" \}\)/.test(app173));
+  // the repair: a save carrying the fingerprint of the no-day parting (leftDay null AND departedWhy null, both keys present) departs on
+  // load — THROUGH reconcile() at a real save version, which is where the braid step (§170) was never run
+  const c3 = mk173(); c3.reconcileVersion = 49; c3.company[1].leftDay = null; c3.company[1].departedWhy = null;
+  const r3 = RC173.reconcile(c3, "character", {});
+  check("§173: ⛔ the half-recorded parting is repaired ON LOAD through reconcile() at version 49 — Calvar departs on the save's day, Pell stays, and the player is told",
+    r3.applied.includes("company-half-departed") && !CO173.activeCompany(c3).some(m => m.npcId === "calvar") && CO173.activeCompany(c3).some(m => m.npcId === "pell") && c3.company[1].leftDay === 17 && r3.notes.some(n => /^Calvar had been parted/.test(n)) && r3.playerFacing === true,
+    JSON.stringify({ applied: r3.applied, notes: r3.notes, warnings: r3.warnings, calvar: c3.company[1] }));
+  const r3b = RC173.reconcile(c3, "character", {});
+  check("§173: …once — a second load applies nothing", !r3b.applied.includes("company-half-departed") && c3.reconcileVersion >= 51);
+  const c4 = mk173(); c4.reconcileVersion = 49; const r4 = RC173.reconcile(c4, "character", {});
+  check("§173: a member who never departed, and a rejoined one (keys deleted), are untouched by the repair", !r4.applied.includes("company-half-departed") && CO173.activeCompany(c4).length === 2);
+}
+
+/* ══════════ §174 — A MINTED PERSON THE GM COULD NOT RECALL (Erik 2026-09-12: "I can't find the Radiant guy who helped finish the Made Gate") ══════════ */
+console.log("\n── §174 · people minted for the story reach the prompt before they are met ──");
+{
+  const GR174 = await import("../engine/gm_registry.js");
+  const NP174 = await import("../engine/npcs.js");
+  const bryn174 = { id: "bryn-callowell", name: "Bryn Callowell", role: "Former south-circuit post rider turned deliberate messenger", homeLocation: "disputed_zone_left_branch_entrance", appearance: "A broad-chested man in his mid-thirties, built for endurance rather than force", domains: { primary: "wayfarer", secondary: "syllogist", tertiary: "umbral" }, people: "human", _gen: { provenance: { day: 14, locationId: "gen-disputed-zone-left-branch-entrance", why: "Named himself this beat; needs a stable id" } } };
+  const mk174 = () => ({ id: "c174", establishedFacts: [], codex: { topics: {} }, clock: { day: 17 },
+    npcRegistry: { pell: { id: "pell", name: "Pell Ran Marsh" }, siol: { id: "siol", name: "Siol" }, "bren-thalle": { id: "bren-thalle", name: "Bren Thalle", _mergedFrom: "bren-of-the-sheaf-and-bowl" } },
+    generated: { npc: {
+      "bryn-callowell": JSON.parse(JSON.stringify(bryn174)),
+      "siol-elven-traveler-at-the-hub-plaza": { id: "siol-elven-traveler-at-the-hub-plaza", name: "Siol", role: "traveler", homeLocation: "gen-waygate", _gen: { provenance: { day: 6 } } },
+      "bren-of-the-sheaf-and-bowl": { id: "bren-of-the-sheaf-and-bowl", name: "Bren of the Sheaf and Bowl", role: "stall-holder", homeLocation: "the_center", _gen: { provenance: { day: 14 } } },
+    } } });
+  const c174 = mk174();
+  const m174 = GR174.mintedUnmetForGM(c174);
+  check("§174: ⛔ a minted person no registry entry knows is listed with the id to meet them by, their role, home and provenance",
+    /\[bryn-callowell\] Bryn Callowell — Former south-circuit post rider/.test(m174 || "") && /home: disputed_zone_left_branch_entrance/.test(m174 || "") && /minted d14 at gen-disputed-zone-left-branch-entrance: Named himself/.test(m174 || ""), m174);
+  check("§174: …and one the registry already holds under a met id (Siol by id-kin; Bren re-homed) is NOT listed — the meet path's own matcher decides",
+    !/siol-elven/.test(m174 || "") && !/bren-of-the-sheaf/.test(m174 || ""));
+  check("§174: a save with nothing minted, or everyone met, carries nothing",
+    GR174.mintedUnmetForGM({ npcRegistry: {} }) === null && GR174.mintedUnmetForGM({ generated: { npc: { pell: { id: "pell", name: "Pell" } } }, npcRegistry: { pell: { id: "pell", name: "Pell" } } }) === null);
+  check("§174: the row is registered on every view", GR174.registryKeys("turn").includes("mintedUnmetDetail") && GR174.registryKeys("ask").includes("mintedUnmetDetail"));
+  // ⛔ the reader, not the registration (the lesson of §172): gm.js takes the key out of the context and pushes the block after KNOWN PEOPLE
+  const gm174 = rd("engine/gm.js").replace(/^\s*\/\/.*$/gm, "");
+  check("§174: ⛔ gm.js READS the row — destructured, and pushed as the block after KNOWN PEOPLE with the meet-by-this-id instruction",
+    /const \{ bookkeepingRestate, mintedUnmetDetail, character,/.test(gm174) && /## PEOPLE MINTED FOR THIS STORY, NOT YET IN KNOWN PEOPLE[^\n]*op:"meet"[^\n]*\\n\$\{mintedUnmetDetail\}/.test(gm174));
+  // and the meet, when it comes, LIFTS the minted record — a blank registry entry for a person the world already wrote is the other half of "doesn't recall him"
+  const c174b = mk174();
+  NP174.applyNpcUpdates(c174b, [{ op: "meet", npcId: "bryn-callowell", name: "Bryn Callowell" }], { day: 17, locationId: "gen-whistling-woman-post" });
+  const met = c174b.npcRegistry["bryn-callowell"];
+  check("§174: ⛔ meeting a minted person LIFTS the minted record — role, face, domains and people land on the registry entry, marked as filled",
+    !!met && /post rider/.test(met.role) && /broad-chested/.test(met.description || "") && met.domains?.primary === "wayfarer" && met.people === "human" && met._filledFromGenerate === true, JSON.stringify(met));
+  check("§174: …and once met, the block no longer lists them", !/bryn-callowell/.test(GR174.mintedUnmetForGM(c174b) || ""));
+}
+
+/* ══════════ §175 — TWO PEOPLE, ONE NAME; A FOLD STAMPED PAST; A PARENT UNDER A `the_` (Erik 2026-09-12) ══════════ */
+console.log("\n── §175 · two Corvins are two people; the fold runs above the save; a braid finds its parent under a the_ ──");
+{
+  const RC175 = await import("../engine/reconcile.js");
+  const BR175 = await import("../engine/braids.js");
+  // ⛔ "The Runner just introduced herself as Corvin - but I already know a Corvin": the GM put the reveal on the farmer's id
+  const farmerBase = { id: "corvin", name: "Corvin", role: "Farmer, east furlong — hunt companion", firstMet: { locationId: "millbrook", day: 1 }, gender: "man", history: ["[d1] Holding the west fence-line with the corridor closed — watching for Silas's next signal.", "[d2] Received farewell nod, departed with his pole — clean parting."], knownFacts: ["The tip is now his — he wrapped it himself"], skillsObserved: ["practical acceptance"], statusNote: "Departed the smokehouse for his east furlong — hunt fully concluded on his end.", lastSeen: { locationId: "millbrook", day: 2 } };
+  const mk175 = () => ({ id: "char-mrhs8286", reconcileVersion: 49, codex: { topics: { corvin: { id: "corvin", facts: ["[d1] farmer", "[d17] carried urgent word"] }, "runner-whistling-woman-d16": { id: "runner-whistling-woman-d16", facts: [] } } },
+    npcRegistry: {
+      corvin: { ...farmerBase, role: "Third-circuit relay runner, Hub messenger", statusNote: "Awake and mending at the Whistling Woman post.", lastSeen: { locationId: "gen-whistling-woman-post", day: 17 }, met: 1, history: [...farmerBase.history.slice(1), "[d17] Woke fever-clear at the Whistling Woman post and named herself."], knownFacts: [...farmerBase.knownFacts, "Carries urgent word from the Hub"] },
+      "runner-whistling-woman-d16": { id: "runner-whistling-woman-d16", name: "The Runner", role: "relay courier", gender: "woman", firstMet: { locationId: "gen-whistling-woman-post", day: 16 }, history: ["[d16] Arrived with cracked ribs."], knownFacts: [], met: 3 },
+    } });
+  const c175 = mk175(); const r175 = RC175.reconcile(c175, "character", {});
+  const f = c175.npcRegistry.corvin, r = c175.npcRegistry["runner-whistling-woman-d16"];
+  check("§175: ⛔ the two Corvins are split ON LOAD through reconcile() at version 49 — the farmer stands as on day 2, the runner takes her name, her role and what she said",
+    r175.applied.includes("two-corvins") && f.role === "Farmer, east furlong — hunt companion" && f.lastSeen.day === 2 && f.history.length === 10 && /^\[d1\] Holding the west fence-line/.test(f.history[0]) && f.met === undefined
+    && r.name === "Corvin Teth" && (r.aliases || []).includes("The Runner") && r.nameRevealed === true && r.role === "Third-circuit relay runner, Hub messenger" && r.lastSeen.day === 17
+    && r.history.some(h => /named herself/.test(h)) && r.knownFacts.includes("Carries urgent word from the Hub") && !f.knownFacts.includes("Carries urgent word from the Hub")
+    && c175.codex.topics["runner-whistling-woman-d16"].facts.includes("[d17] carried urgent word") && !c175.codex.topics.corvin.facts.includes("[d17] carried urgent word")
+    && r175.notes.some(n => /two people again/.test(n)) && r175.playerFacing === true, JSON.stringify({ applied: r175.applied, f: { role: f.role, n: f.history.length }, r: { name: r.name, aliases: r.aliases, role: r.role }, notes: r175.notes, warnings: r175.warnings }));
+  const again175 = RC175.reconcile(c175, "character", {});
+  check("§175: …once — and a farmer already restored is not touched again", !again175.applied.includes("two-corvins"));
+  const o175 = mk175(); o175.id = "someone-else"; RC175.reconcile(o175, "character", {});
+  check("§175: …and never another character", o175.npcRegistry.corvin.role === "Third-circuit relay runner, Hub messenger");
+  // ⛔ the GM is TOLD two people can share a name — the rule that pushed the reveal onto the namesake now says where a reveal goes
+  const gmSrc175 = rd("engine/gm.js");
+  check("§175: rule 14 says two people can share a name, and a reveal goes on the id of the person who is PRESENT, never the namesake's",
+    /TWO PEOPLE CAN SHARE A NAME/.test(gmSrc175) && /emit revealName on the id of the person who is actually in the scene/.test(gmSrc175) && /never an update on the id of the namesake/.test(gmSrc175));
+  // ⛔ step 43 folded nothing (no parent yet) and was stamped; the five children sat under a gate that would never reopen
+  const fold175 = { id: "char-mrhs8286", reconcileVersion: 49, codex: { topics: { "radiant-plateau-edge": { id: "radiant-plateau-edge", label: "Edge District", facts: ["[d3] the district"], aliases: [], links: [] }, "edge-district-contacts": { id: "edge-district-contacts", label: "Edge District Contacts", facts: ["[d2] Sorel"], aliases: [], links: [] }, "edge-district-route": { id: "edge-district-route", label: "Far Side of the Pass", facts: ["[d2] pine"], aliases: [], links: [] } } } };
+  const fr175 = RC175.reconcile(fold175, "character", {});
+  check("§175: ⛔ the fold runs again above the save's version — both children fold into the district, nothing dropped, said once",
+    fr175.applied.includes("edge-district-folded-again") && !Object.keys(fold175.codex.topics).some(k => k.startsWith("edge-district-")) && fold175.codex.topics["radiant-plateau-edge"].facts.length === 3 && fr175.notes.some(n => /2 Edge District hooks/.test(n)),
+    JSON.stringify({ applied: fr175.applied, keys: Object.keys(fold175.codex.topics), warnings: fr175.warnings }));
+  check("§175: …and a save with nothing to fold applies nothing", !RC175.reconcile({ id: "char-mrhs8286", reconcileVersion: 49, codex: { topics: { "radiant-plateau-edge": { id: "radiant-plateau-edge", facts: [], aliases: [], links: [] } } } }, "character", {}).applied.includes("edge-district-folded-again"));
+  // ⛔ Marrow's Wings kept its template through §170's rewrite: its parent is stored as `the_shadow_work` and the catalog key is `shadow_work`
+  const pa175 = { id: "working_model", name: "Working Model", functions: ["make"], tree: [{ rank: 1, name: "Working Model I", grants: "Working Model — Shape a model of a thing." }, { rank: 2, name: "Working Model II", grants: "Working Model — Shape a working model." }, { rank: 3, name: "Working Model III", grants: "Working Model — A model that runs." }] };
+  const pb175 = { id: "shadow_work", name: "Shadow Work", functions: ["make"], tree: [{ rank: 1, name: "Shadow Work I", grants: "Shadow Work — Darken a corner." }, { rank: 2, name: "Shadow Work II", grants: "Shadow Work — Darken a room." }, { rank: 3, name: "Shadow Work III", grants: "Shadow Work — Darken a street." }] };
+  const step175 = RC175.CHARACTER_STEPS.find(s => s.id === "braid-template-ranks");
+  const wings = { reconcileVersion: 49, customAbilities: { w: { id: "w", name: "Marrow's Wings", functions: ["make"], minted: { from: ["the_working_model", "the-shadow-work"] }, tree: [{ rank: 1, name: "Marrow's Wings I", grants: "x", cannot: "What neither parent could do apart." }, { rank: 2, name: "Marrow's Wings II", grants: "The braid deepens; the two crafts answer together more surely.", cannot: "What neither parent could do apart." }, { rank: 3, name: "Marrow's Wings III", grants: "The braid deepens; the two crafts answer together more surely.", cannot: "What neither parent could do apart." }] },
+    held: { id: "held", name: "You Shall Not Pass", functions: ["make"], minted: { from: ["working_model", "the_shadow_work"] }, tree: [{ rank: 1, name: "You Shall Not Pass I", grants: "Working Model and Shadow Work run as one craft: the move only their joining makes." }] } } };
+  const wr175 = step175.apply(wings, { content: { abilities: { working_model: pa175, shadow_work: pb175 } } });
+  check("§175: ⛔ a parent stored as `the_working_model` / `the-shadow-work` resolves to the catalog's `working_model` / `shadow_work` — the template ranks are rewritten",
+    /Darken a room/.test(wings.customAbilities.w.tree[1].grants) && /Darken a street/.test(wings.customAbilities.w.tree[2].grants) && (wr175.notes || []).some(n => /Marrow's Wings/.test(n)), JSON.stringify(wings.customAbilities.w.tree.map(t => t.grants.slice(0, 40))));
+  check("§175: ⛔ …and a minted braid with ONE rank — no r2, no r3 — is grown to three from its parents (the pattern of every other craft)",
+    wings.customAbilities.held.tree.length === 3 && /Darken a room/.test(wings.customAbilities.held.tree[1].grants) && (wr175.notes || []).some(n => /You Shall Not Pass/.test(n)), JSON.stringify(wings.customAbilities.held.tree.map(t => t.name)));
+  check("§175: …a braid whose parent truly is not in the catalog is left as it is", Object.keys(step175.apply({ customAbilities: { z: { id: "z", name: "Z", minted: { from: ["nothing_here", "shadow_work"] }, tree: [{ rank: 1, grants: "The braid deepens; x" }] } } }, { content: { abilities: { shadow_work: pb175 } } })).length === 0);
+}
+
+/* ══════════ §176 — ONE PERSON, ONE SEAT (Erik 2026-09-12: "Huginn and Maren are both in the scene when they're the same, and the runner and Corvin are as well… it keeps stumbling over pronoun updates") ══════════ */
+console.log("\n── §176 · a name is a fact and a prefix is a guess; a person present under two names is present once ──");
+{
+  const NP176 = await import("../engine/npcs.js");
+  const GM176 = await import("../engine/gm.js");
+  const RC176 = await import("../engine/reconcile.js");
+  const farmer = { id: "corvin", name: "Corvin", role: "Farmer, east furlong", gender: "man", pronouns: "he/him", relationship: 4, status: "active", history: [], knownFacts: [], skillsObserved: [] };
+  const runner = { id: "runner-whistling-woman-d16", name: "Corvin Teth", aliases: ["The Runner"], role: "Third-circuit relay runner", gender: "woman", pronouns: "she/her", relationship: 2, status: "active", history: [], knownFacts: [], skillsObserved: [] };
+  const maren = { id: "marrow", name: "Maren Ossitide", aliases: ["Huginn", "Marrow"], role: "Legendary Ashwarden warden", gender: "woman", pronouns: "she/her", relationship: 3, status: "active", history: [], knownFacts: [], skillsObserved: [] };
+  const veth = { id: "veth-ondra", name: "Veth (Stillwater) Ondra", role: "Former warden", gender: "woman", pronouns: "she/her", relationship: 3, status: "active", history: [], knownFacts: [], skillsObserved: [] };
+  const reg = { corvin: farmer, "runner-whistling-woman-d16": runner, marrow: maren, "veth-ondra": veth };
+  // ⛔ the matcher: the farmer was found FIRST by prefix ("corvin-teth" starts with "corvin") and the runner, whose NAME is Corvin Teth, never reached
+  check("§176: ⛔ an exact name beats a prefix guess — \"Corvin Teth\" is the runner, \"Corvin\" is the farmer, \"The Runner\" is her alias",
+    NP176.findExistingNpc(reg, "corvin-teth", "Corvin Teth") === runner && NP176.findExistingNpc(reg, "corvin", "Corvin") === farmer && NP176.findExistingNpc(reg, "the-runner", "The Runner") === runner && NP176.findExistingNpc(reg, "huginn", "Huginn") === maren);
+  check("§176: …and the id-kin bridge still holds where no exact name answers (keeper_ilma ≡ keeper-ilma; dock-master-2 → dock-master)",
+    NP176.findExistingNpc({ keeper_ilma: { id: "keeper_ilma", name: "Keeper Ilma" } }, "keeper-ilma", "") ?.id === "keeper_ilma" && NP176.findExistingNpc({ "dock-master": { id: "dock-master", name: "The Dock-master" } }, "dock-master-2", "")?.id === "dock-master" && NP176.findExistingNpc({ x: { name: "Stub with no id" } }, "stub-2", "") === null);
+  // ⛔ the scene identity pass took the FIRST person whose name appeared and set her pronouns right to HIS, every beat
+  const scene176 = { setting: "the relay vault", npcsPresent: [{ name: "Corvin Teth (Runner)", state: "rests on the cot, the crystal in her palm, the fever gone" }], threads: [] };
+  const rec176 = GM176.reconcileSceneIdentity(scene176, reg);
+  check("§176: ⛔ the fullest name wins the scene record — \"Corvin Teth (Runner)\" is the runner, her pronouns stand, nothing is 'set right'",
+    rec176.repaired.length === 0 && /in her palm/.test(rec176.scene.npcsPresent[0].state), JSON.stringify(rec176));
+  const rec176b = GM176.reconcileSceneIdentity({ npcsPresent: [{ name: "Huginn", state: "watches from the shelf, his eye on the door" }] }, reg);
+  check("§176: …and an alias names its person — Huginn's state is set right to Maren's pronouns", rec176b.repaired.length === 1 && /her eye/.test(rec176b.scene.npcsPresent[0].state), JSON.stringify(rec176b));
+  // ⛔ one person, one seat
+  const two176 = { setting: "the post", npcsPresent: [{ name: "Corvin Teth", state: "rests on the cot" }, { name: "The Runner", state: "sleeps" }, { name: "Maren Ossitide", state: "at the table" }, { name: "Huginn", state: "watches from the shelf" }, { name: "Veth (Stillwater) Ondra", state: "at the threshold" }, { name: "A stranger", state: "in the doorway" }], threads: ["x"] };
+  const col176 = NP176.collapseScenePresence(two176, reg);
+  check("§176: ⛔ a person present under two names is present once — The Runner folds into Corvin Teth, Huginn into Maren; Veth and a stranger keep their seats; states joined; order kept",
+    col176.scene.npcsPresent.length === 4 && col176.scene.npcsPresent.map(p => p.name).join("|") === "Corvin Teth|Maren Ossitide|Veth (Stillwater) Ondra|A stranger"
+    && col176.scene.npcsPresent[0].state === "rests on the cot · sleeps" && col176.scene.npcsPresent[1].state === "at the table · watches from the shelf"
+    && JSON.stringify(col176.collapsed) === JSON.stringify([{ kept: "Corvin Teth", dropped: "The Runner", id: "runner-whistling-woman-d16" }, { kept: "Maren Ossitide", dropped: "Huginn", id: "marrow" }])
+    && two176.npcsPresent.length === 6 && col176.scene.threads[0] === "x", JSON.stringify(col176));
+  const col176b = NP176.collapseScenePresence({ npcsPresent: [{ name: "Huginn", state: "on the shelf" }, { name: "Maren Ossitide", state: "at the table" }] }, reg);
+  check("§176: …the record's name is the seat whichever order they came in", col176b.scene.npcsPresent.length === 1 && col176b.scene.npcsPresent[0].name === "Maren Ossitide" && col176b.collapsed[0].dropped === "Huginn");
+  check("§176: …and a scene with one seat per person is returned as it is", NP176.collapseScenePresence({ npcsPresent: [{ name: "Maren Ossitide" }, { name: "Veth (Stillwater) Ondra" }] }, reg).collapsed.length === 0);
+  // ⛔ the readers: app.js collapses after the identity pass and SAYS it; KNOWN PEOPLE carries the aliases
+  const app176 = rd("app.js").replace(/^\s*\/\/.*$/gm, "");
+  check("§176: ⛔ app.js runs the collapse on every beat's scene after the identity pass, stores the collapsed scene, and says \"One person, one seat\"",
+    /const col = collapseScenePresence\(sceneState, character\.npcRegistry \|\| \{\}\);/.test(app176) && /sceneState = col\.scene;/.test(app176) && /One person, one seat: /.test(app176) && /collapseScenePresence[^\n]*from "\.\/engine\/npcs\.js"/.test(app176));
+  const known176 = NP176.npcRegistryForGM({ npcRegistry: { marrow: { ...maren, relationship: 3 } }, currentLocationId: "gen-whistling-woman-post" }, { locationId: "gen-whistling-woman-post", sceneNpcNames: ["Maren Ossitide"] });
+  check("§176: ⛔ KNOWN PEOPLE says the names a person also answers to — \"Maren Ossitide (also called Huginn, Marrow)\"", /Maren Ossitide \(also called Huginn, Marrow\)/.test(known176 || ""), String(known176).slice(0, 200));
+  // ⛔ the stored scene and Maren's aliases, on load, through the runner, after two-corvins
+  const c176 = { id: "char-mrhs8286", reconcileVersion: 53, npcRegistry: { marrow: { id: "marrow", name: "Maren Ossitide", history: [], knownFacts: [] }, "runner-whistling-woman-d16": { id: "runner-whistling-woman-d16", name: "Corvin Teth", aliases: ["The Runner"] } },
+    activeScene: { sceneState: { npcsPresent: [{ name: "Corvin Teth", state: "on the cot" }, { name: "The Runner", state: "sleeps" }, { name: "Maren Ossitide", state: "at the table" }, { name: "Huginn", state: "on the shelf" }] } } };
+  const r176 = RC176.reconcile(c176, "character", {});
+  check("§176: ⛔ on load: Maren answers to Huginn and Marrow, the stored scene holds two seats, and both are said",
+    r176.applied.includes("huginn-is-maren") && JSON.stringify(c176.npcRegistry.marrow.aliases) === JSON.stringify(["Huginn", "Marrow"]) && c176.activeScene.sceneState.npcsPresent.length === 2 && r176.notes.some(n => /answers to Huginn and Marrow/.test(n)) && r176.notes.some(n => /One person, one seat: The Runner is Corvin Teth; Huginn is Maren Ossitide\./.test(n)), JSON.stringify(r176));
+  check("§176: …once", !RC176.reconcile(c176, "character", {}).applied.includes("huginn-is-maren"));
 }
 
 /* ══════════ §14 — THE FOLD CANNOT BEAT AN IMMUNITY THE BLOW COULD NOT ══════════ */
@@ -9326,9 +9495,14 @@ console.log("\n── §119 · six hooks, one district, and a reading that arriv
     !!step && step.version === 43 && Array.isArray(out.notes) && /2 Edge District hooks/.test(out.notes[0]) && !again.notes);
   const o = mk(); o.id = "someone-else"; step.apply(o);
   check("§119: …and never another character", !!o.codex.topics["edge-district-contacts"]);
+  // ⛔ 2026-09-12: this read the LIVE file and asserted a state the fold had never produced on it — step 43 ran before the parent topic
+  // existed, folded nothing, and was stamped (§175). The repo copy is rewritten by every beat Erik plays; it is a ledger, not a fixture.
+  // The claim that survives: brought up to date on load (through reconcile(), every registered step), the copy has no edge-district-*
+  // topic left and the district stands.
   const disk = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
-  check("§119: ⚑ the repo copy has no edge-district-* topic left, and the folded one stands",
-    !Object.keys(disk.codex.topics).some(k => k.startsWith("edge-district-")) && !!disk.codex.topics["radiant-plateau-edge"] && disk.reconcileVersion >= 43);
+  RC.reconcile(disk, "character", {});
+  check("§119: ⚑ the repo copy, brought up to date on load, has no edge-district-* topic left, and the folded one stands",
+    !Object.keys(disk.codex.topics).some(k => k.startsWith("edge-district-")) && !!disk.codex.topics["radiant-plateau-edge"] && disk.reconcileVersion >= 52);
   // ⛔ AND THE READING ARRIVES UNASKED: the summariser fired on codex open only; twenty topics sat over the line.
   const app = rd("app.js");
   check("§119: ⛔ SUMMARIES FIRE ONCE PLAY STARTS, off the load path — not only when the codex is opened",

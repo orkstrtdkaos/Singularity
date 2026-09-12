@@ -114,7 +114,10 @@ export function partCompany(character, npcId, { day = null, why = null } = {}) {
   // recording that they left. Both halves are the same missing idea — that leaving is an EVENT.
   const entry = (character.company || []).find(m => m.npcId === npcId && !m.leftDay);
   if (!entry) return false;
-  entry.leftDay = day ?? entry.leftDay ?? null;
+  // ⛔ 2026-09-12 (Erik: "it didn't clear them from the sidebar"): the ✕ called this with no day, this wrote leftDay: null, and every
+  // roster reads leftDay — a null departure is a present member. A parting is truthy on the day it happens whatever the caller knew:
+  // the character's own clock day when no world-day was given. §173.
+  entry.leftDay = day ?? entry.leftDay ?? (Number.isFinite(Number(character?.clock?.day)) ? Number(character.clock.day) : 1);
   entry.departedWhy = why || entry.departedWhy || null;
   return true;
 }

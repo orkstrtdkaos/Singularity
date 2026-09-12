@@ -2518,10 +2518,17 @@ console.log("\n── §185 · four of the nine are read for what they say, and 
   check("§185: ⛔ EITHER CANON ADMITS A TYPE — the enum alone was the narrower source, and that is why five right crafts read as wrong",
     (() => { const craft = [{ id: "f", mechanic: { damageType: "tidal" } }], narrow = { types: { physical: { what: "x", wardedBy: "y" } } }, wide = { families: { water: { types: ["tidal"] } } };
       return AC185.damageTypeReport(craft, narrow, [], wide).fresh.length === 0 && AC185.damageTypeReport(craft, narrow, []).fresh.join() === "tidal"; })());
-  check("§185: …and a type listed with NO `wardedBy` is reported as unwarded — SNG-512's defect was typed attacks nothing answers, so the ward is the load-bearing half and an absent one must not read as done",
-    (() => { const owed = Object.entries(dt185.types).filter(([, v]) => !v?.wardedBy).map(([k]) => k);
-      return owed.length > 0 && owed.every(t => !dtLive.warded.includes(t)) && dtLive.unwarded.every(t => owed.includes(t))
+  check("§185: …and a type listed with NO `wardedBy` is reported as unwarded — proven on a FIXTURE, because the live enum's debt is a thing Aevi can close and did (she named this gate in her own commit subject)",
+    (() => { const craft = [{ id: "a", mechanic: { damageType: "warded" } }, { id: "b", mechanic: { damageType: "bare" } }];
+      const spec = { types: { warded: { what: "x", wardedBy: "a held vow" }, bare: { what: "y" } } };
+      const r = AC185.damageTypeReport(craft, spec, [], { families: { f: { types: ["warded", "bare"] } } });
+      return r.unwarded.join() === "bare" && r.warded.join() === "warded" && r.fresh.length === 0
         && AC185.damageTypeReport([{ id: "w", mechanic: { damageType: "physical" } }], dt185, [], fam185).unwarded.length === 0; })());
+  // ⛑ AEVI 2026-09-12, THE SAME DAY: all five wards written. SNG-512's defect was typed attacks that nothing can answer,
+  // and this is the state that says it is closed — asserted as the CLAIM ("every declared type has a ward") rather than as
+  // its opposite. ⚠️ It can go red again honestly: a new typed craft with no ward entry is exactly what it should catch.
+  check(`§185: ⛑ AND THE DEBT IS CLOSED — all ${dtLive.used.length} declared types carry a ward, so no typed attack in the game is unanswerable`,
+    dtLive.unwarded.length === 0, `still owed: ${dtLive.unwarded.join(", ")}`);
   check("§185: …and the census cannot rot unnoticed — a type nothing declares any more is reported", AC185.damageTypeReport(crafts185, dt185, ["ectoplasm"], fam185).stale.join() === "ectoplasm");
 
   // 4 · ability_distribution_target — measured, never gated

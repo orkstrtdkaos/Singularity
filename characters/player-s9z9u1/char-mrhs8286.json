@@ -2428,11 +2428,144 @@
     "Deep night at the Whistling Woman post: Bryn Calowell arrives to report that the Threshold Post is complete and ready—frame, lodge, temple, and mine all sound—but the moorland's stirring has caught Fendt's attention. The silence is wrong, and something moves wrong within it."
   ],
   "currentLocationId": "gen-whistling-woman-post",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "gen-whistling-woman-post",
+    "turns": [
+      {
+        "player": null,
+        "summary": "Deep night at the Whistling Woman post. Bryn brings urgent word: the moorland north is moving wrong. An encrypted Hub message waits unread. Maren listens to something in the dark.",
+        "narration": "The Whistling Woman post glows warm against the deep moorland night. Inside, the fire has burned down to a steady red core—the kind that holds heat without demanding attention. You are at the table with Pell across from you, Huginn perched on the high shelf where she can see the whole room, and Maren Ossitide sitting still as stone in the corner where the lamp-light catches her grey-ash hair.\n\nBryn arrived hours ago with word from Fendt. The Threshold Post frame stands. The mine is open and fractured but workable. The temple is done. And then he named what matters: the moorland north has stopped being silent. It is moving wrong now—a stirring that does not fit the natural patterns, and the ridge watchers felt it even at distance.\n\nMaren has not moved since he said it. Her attention is complete and undivided, the way a warden's attention is. She is listening to something you cannot hear yet, or waiting for something to arrive that she already knows is coming.\n\nThe encrypted message from the Hub sits on the table between you—sealed slate, unread, marked urgent-to-hand. Corvin brought it through fever and fracture. Whatever is stirring in the north, the Hub already knew it was moving. They sent word ahead.\n\nPell is watching you with the attention of someone who knows you are about to choose something that changes the shape of what comes next."
+      }
+    ],
+    "lastTurn": {
+      "narration": "The Whistling Woman post glows warm against the deep moorland night. Inside, the fire has burned down to a steady red core—the kind that holds heat without demanding attention. You are at the table with Pell across from you, Huginn perched on the high shelf where she can see the whole room, and Maren Ossitide sitting still as stone in the corner where the lamp-light catches her grey-ash hair.\n\nBryn arrived hours ago with word from Fendt. The Threshold Post frame stands. The mine is open and fractured but workable. The temple is done. And then he named what matters: the moorland north has stopped being silent. It is moving wrong now—a stirring that does not fit the natural patterns, and the ridge watchers felt it even at distance.\n\nMaren has not moved since he said it. Her attention is complete and undivided, the way a warden's attention is. She is listening to something you cannot hear yet, or waiting for something to arrive that she already knows is coming.\n\nThe encrypted message from the Hub sits on the table between you—sealed slate, unread, marked urgent-to-hand. Corvin brought it through fever and fracture. Whatever is stirring in the north, the Hub already knew it was moving. They sent word ahead.\n\nPell is watching you with the attention of someone who knows you are about to choose something that changes the shape of what comes next.",
+      "sceneSummary": "Deep night at the Whistling Woman post. Bryn brings urgent word: the moorland north is moving wrong. An encrypted Hub message waits unread. Maren listens to something in the dark.",
+      "choices": [
+        {
+          "label": "Break the seal on the encrypted message — read what the Hub sent urgent.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": "very easy",
+          "trivial": false,
+          "intentTags": [
+            "study"
+          ]
+        },
+        {
+          "label": "Ask Maren what she is listening for — the warden who hears endings might hear what is stirring in the north.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "easy",
+          "trivial": true,
+          "intentTags": [
+            "ask"
+          ]
+        },
+        {
+          "label": "Step outside the post and use Deathsense on the moorland — read what is moving out there and how far along its ending might be.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": "hard",
+          "trivial": false,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "deathsense",
+          "energyCost": 2
+        },
+        {
+          "label": "Ask Bryn for detail — how many watchers felt it, and what exactly they said was wrong about the stirring.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": "easy",
+          "trivial": true,
+          "intentTags": [
+            "ask"
+          ]
+        }
+      ],
+      "characterDeltas": {},
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
+      "scene": {
+        "setting": "Whistling Woman post interior — a single warm room lit by firelight and oil lamps, deep night, late spring. The fire has burned to steady coals. Outside, moorland dark and a wind that carries something wrong.",
+        "npcsPresent": [
+          {
+            "name": "Pell Ran Marsh",
+            "state": "Seated at the table across from you, watching. Alert and present."
+          },
+          {
+            "name": "Maren Ossitide (Huginn, Marrow)",
+            "state": "Seated in the corner, very still. Listening to something in the dark. Warden-attention complete and undivided."
+          },
+          {
+            "name": "Huginn",
+            "state": "Perched on the high shelf. Eyes on the whole room. Croaks once, low, and goes quiet."
+          },
+          {
+            "name": "Bryn Calowell",
+            "state": "Having delivered his message. Present but deferred, waiting for direction."
+          }
+        ],
+        "objects": [
+          "The table — sturdy, holding meal-leavings and water",
+          "The encrypted slate message — sealed, marked urgent-to-hand, waiting",
+          "The fire — red coals, steady heat",
+          "Oil lamps — casting warm light and long shadows",
+          "Bedroll and supplies on the shelf",
+          "The music-box relay mechanism — silent"
+        ],
+        "threads": [
+          "What the Hub knew to send urgent",
+          "What is stirring in the moorland north",
+          "What Maren is listening for in the dark",
+          "Fendt's assessment at the ridge — the fracture at the mine, the wrongness in the air"
+        ]
+      },
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "Whistling Woman post interior — a single warm room lit by firelight and oil lamps, deep night, late spring. The fire has burned to steady coals. Outside, moorland dark and a wind that carries something wrong.",
+      "npcsPresent": [
+        {
+          "name": "Pell Ran Marsh",
+          "state": "Seated at the table across from you, watching. Alert and present."
+        },
+        {
+          "name": "Maren Ossitide (Huginn, Marrow)",
+          "state": "Seated in the corner, very still. Listening to something in the dark. Warden-attention complete and undivided. · Perched on the high shelf. Eyes on the whole room. Croaks once, low, and goes quiet."
+        },
+        {
+          "name": "Bryn Calowell",
+          "state": "Having delivered his message. Present but deferred, waiting for direction."
+        }
+      ],
+      "objects": [
+        "The table — sturdy, holding meal-leavings and water",
+        "The encrypted slate message — sealed, marked urgent-to-hand, waiting",
+        "The fire — red coals, steady heat",
+        "Oil lamps — casting warm light and long shadows",
+        "Bedroll and supplies on the shelf",
+        "The music-box relay mechanism — silent"
+      ],
+      "threads": [
+        "What the Hub knew to send urgent",
+        "What is stirring in the moorland north",
+        "What Maren is listening for in the dark",
+        "Fendt's assessment at the ridge — the fracture at the mine, the wrongness in the air"
+      ]
+    },
+    "beats": 1
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 18,
-    "hour": 4,
+    "hour": 5,
     "realAnchor": null
   },
   "companions": [
@@ -3981,7 +4114,7 @@
     "corvin": {
       "id": "corvin",
       "name": "Corvin Teth (Runner)",
-      "role": "Third-circuit relay runner, Hub messenger",
+      "role": "Farmer, east furlong — hunt companion",
       "description": "Broad-shouldered, younger than Aldric, compact and weathered — the kind of man who maintains a place without being asked. Currently losing an argument with a fence-section.",
       "firstMet": {
         "locationId": "millbrook",
@@ -3989,16 +4122,16 @@
       },
       "relationship": 5,
       "history": [
+        "[d1] Holding the west fence-line with the corridor closed — watching for Silas's next signal.",
+        "[d1] Landed the killing strike on the sow — clean, short-range, no wasted motion. Kneeling in the sedge now, settling before the dressing work.",
+        "[d1] Received the acknowledgment with a nod and a palm-flat on the sow's flank — then drew his knife and began dressing without ceremony.",
         "[d1] Received the handoff cleanly — no argument, back to the dressing work.",
         "[d1] Dressing the sow in the sedge strip — out of earshot of the ridge work.",
         "[d1] Still dressing the sow thirty yards south — out of earshot of the ridge conversation.",
         "[d1] Cut the carrying pole, coordinated the haul down without fuss. Now inside the smokehouse, waiting to see if he's needed.",
         "[d2] Pole leaned against the wall — his part of the work is done. Ready to head back to his furlong.",
         "[d2] Received twenty cord-weight without objection — brief recalibration, short nod, then out the door with his pole.",
-        "[d2] Received farewell nod, departed with his pole — clean parting.",
-        "[d17] Woke fever-clear at the Whistling Woman post and named herself. Broke relay protocol to carry an encrypted message marked urgent-to-hand from the Hub to warden. She knows the shape of the crisis but not the plaintext.",
-        "[d18] You know this person's name now: Corvin Teth (Runner) (was \"Corvin\")",
-        "[d18] Offered a place at the Whistling Woman post running the runner-side operations alongside Deni Cors. Accepted crystal payment. Fever clear. Listening."
+        "[d2] Received farewell nod, departed with his pole — clean parting."
       ],
       "knownFacts": [
         "The tip is now his — he wrapped it himself",
@@ -4019,14 +4152,13 @@
         "immediate transition to post-kill work without ceremony"
       ],
       "status": "active",
-      "statusNote": "Awake and fever-clear at the Whistling Woman post. Offered work as runner-coordinator. Carrying urgent encrypted message from the Hub about moorland stirring.",
+      "statusNote": "Departed the smokehouse for his east furlong — hunt fully concluded on his end.",
       "lastSeen": {
-        "locationId": "gen-whistling-woman-post",
-        "day": 18
+        "locationId": "millbrook",
+        "day": 2
       },
       "gender": "man",
       "pronouns": "he/him",
-      "met": 2,
       "aliases": [
         "Corvin"
       ],
@@ -5175,8 +5307,8 @@
     },
     "runner-whistling-woman-d16": {
       "id": "runner-whistling-woman-d16",
-      "name": "The Runner",
-      "role": "relay courier",
+      "name": "Corvin Teth",
+      "role": "Third-circuit relay runner, Hub messenger",
       "description": "A lean woman in her early thirties, dust-covered and marked by hard riding. Quick-eyed and steady-handed despite the pain.",
       "firstMet": {
         "locationId": "gen-whistling-woman-post",
@@ -5186,7 +5318,10 @@
       "history": [
         "[d16] Arrived at the Whistling Woman waystation with cracked ribs from a fall. Tended by Silas Weir with Dawn Surgery. Grateful and resting.",
         "[d16] Still asleep on the cot, mending. Unaware of what just transpired. The encrypted message that brought her here is now partially answered.",
-        "[d17] She wakes speaking plainly, asking for water. The fever is broken and the body is mending. The urgency remains."
+        "[d17] She wakes speaking plainly, asking for water. The fever is broken and the body is mending. The urgency remains.",
+        "[d17] Woke fever-clear at the Whistling Woman post and named herself. Broke relay protocol to carry an encrypted message marked urgent-to-hand from the Hub to warden. She knows the shape of the crisis but not the plaintext.",
+        "[d18] You know this person's name now: Corvin Teth (Runner) (was \"Corvin\")",
+        "[d18] Offered a place at the Whistling Woman post running the runner-side operations alongside Deni Cors. Accepted crystal payment. Fever clear. Listening."
       ],
       "knownFacts": [],
       "skillsObserved": [],
@@ -5194,12 +5329,16 @@
       "sex": "female",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Awake at the Whistling Woman post, fever-clear, mending from cautery. Speaking for the first time since surgery—thirst-urgent, direct, the urgency that brought her still present.",
+      "statusNote": "Awake and fever-clear at the Whistling Woman post. Offered work as runner-coordinator. Carrying urgent encrypted message from the Hub about moorland stirring.",
       "lastSeen": {
         "locationId": "gen-whistling-woman-post",
-        "day": 17
+        "day": 18
       },
-      "met": 3
+      "met": 3,
+      "aliases": [
+        "The Runner"
+      ],
+      "nameRevealed": true
     },
     "courier-whistling-woman": {
       "id": "courier-whistling-woman",
@@ -5350,7 +5489,11 @@
         "locationId": "gen-whistling-woman-post",
         "day": 17
       },
-      "met": 5
+      "met": 5,
+      "aliases": [
+        "Huginn",
+        "Marrow"
+      ]
     },
     "cael": {
       "id": "cael",
@@ -6601,11 +6744,11 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-09-12T03:35:00.617Z",
+    "lastSharedReadAt": "2026-09-12T03:46:16.236Z",
     "lastTickWorldDay": 74,
     "lastCanonWorldDay": 74,
     "lastGenCount": 1779,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Cael, arrived via shadow-reach, brings word from Fendt at the ridge post",
@@ -15708,9 +15851,6 @@
         "label": "Huginn's Building — Edge District",
         "kind": "mystery",
         "facts": [
-          "[d3] Interior rear storage room: mostly-bare shelves (recently disturbed), one oil lamp burning, open staircase to upper floor. The room smells of water-treatment solvent — filtration array provenance. One",
-          "[d3] The figure's departure is voluntary and self-scheduled — he believes he has hours. The ending is institutional (the role closes in 3–4 days from outside pressure), not personal. The paper pocketed is ",
-          "[d3] The seventh-band monitoring blind spot was not an oversight — someone at original array setup deliberately excluded it from active monitoring windows, and then structured the documentation so that era",
           "[d3] Fendt's eleven years of readings flagged elevated particulate in the seventh band — consistent and directional, trending upstream over three weeks. Not natural sediment behavior. These are the figures",
           "[d3] Fendt names the implication: whoever targeted the seventh-band calibration files knew that band would matter before the readings started — the breach was preparation, not reaction. The sequence begins",
           "[d3] The original calibration files would have proven the seventh-band monitoring blind spot was a deliberate design specification written into the filtration array at setup — not an oversight. Whoever too",
@@ -15731,16 +15871,20 @@
           "[d3] The building has a rear service door in the parallel service lane — iron-banded, not latched. A cloth-wrapped bundle (working-kit or records-sized, tied with a single cord) leans beside it. Huginn wat",
           "[d3] you have walked here",
           "[d5] The Edge District's photonic order and layered mineral contamination in its groundwater interfere with death-reading crafts — The Attended End returned static noise rather than a clean read. The place…",
-          "[d5] The Edge District's photonic order and layered mineral contamination in its groundwater interfere with death-reading crafts — The Attended End returned static noise rather than a clean read. The place"
+          "[d5] The Edge District's photonic order and layered mineral contamination in its groundwater interfere with death-reading crafts — The Attended End returned static noise rather than a clean read. The place",
+          "[d2] Mara named two old pass circuit traders with Edge District knowledge: Sorel, a spice-broker who wintered there two years running (not heard from in a season), and Leth, an archivist type who kept care",
+          "[d2] Pell's read: three days to the Edge District if the pass and weather hold. Sorel is a broker — approach as a transaction. Leth is an archivist — come with a question worth writing down.",
+          "[d2] The far slope is sparse pine run, firm trail, old canopy. Quieter than the valley — no water-wheel, no hammer. The world news named boot prints here before the pass opened. Silas is now on that side."
         ],
         "links": [
-          "calvar",
-          "millbrook",
-          "pell",
+          "contact-names-sorel-leth",
+          "mountain-pass",
+          "sorel",
+          "contact-names-scrap",
+          "huginn",
           "leth",
-          "overseer-grael",
-          "mara-wells",
-          "fendt"
+          "millbrook",
+          "find-the-engineer"
         ],
         "aliases": [
           "Edge District Contacts",
@@ -15774,7 +15918,10 @@
           "[d2] Mara named two old pass circuit traders with Edge District knowledge: Sorel, a spice-broker who wintered there two years running (not heard from in a season), and Leth, an archivist type who kept care…",
           "[d2] Mara named two old pass circuit traders with Edge District knowledge: Sorel, a spice-broker who wintered there two years running (not heard from in a season), and Leth, an archivist type who kept care",
           "[d2] Pell's read: three days to the Edge District if the pass and weather hold. Sorel is a broker — approach as a transaction. Leth is an archivist — come with a question worth writing down.",
-          "[d2] The far slope is sparse pine run, firm trail, old canopy. Quieter than the valley — no water-wheel, no hammer. The world news named boot prints here before the pass opened. Silas is now on that side."
+          "[d2] The far slope is sparse pine run, firm trail, old canopy. Quieter than the valley — no water-wheel, no hammer. The world news named boot prints here before the pass opened. Silas is now on that side.",
+          "[d3] Interior rear storage room: mostly-bare shelves (recently disturbed), one oil lamp burning, open staircase to upper floor. The room smells of water-treatment solvent — filtration array provenance. One",
+          "[d3] The figure's departure is voluntary and self-scheduled — he believes he has hours. The ending is institutional (the role closes in 3–4 days from outside pressure), not personal. The paper pocketed is ",
+          "[d3] The seventh-band monitoring blind spot was not an oversight — someone at original array setup deliberately excluded it from active monitoring windows, and then structured the documentation so that era"
         ]
       },
       "leth": {
@@ -16134,89 +16281,6 @@
         "createdDay": 17,
         "entityId": "cael",
         "updatedDay": 17
-      },
-      "edge-district-contacts": {
-        "id": "edge-district-contacts",
-        "label": "Edge District Contacts",
-        "kind": "person",
-        "facts": [
-          "[d2] Mara named two old pass circuit traders with Edge District knowledge: Sorel, a spice-broker who wintered there two years running (not heard from in a season), and Leth, an archivist type who kept care"
-        ],
-        "links": [
-          "mara-wells",
-          "the-water-crisis",
-          "radiant-plateau-edge",
-          "pell"
-        ],
-        "aliases": [],
-        "createdDay": 2,
-        "updatedDay": 2
-      },
-      "edge-district-approach": {
-        "id": "edge-district-approach",
-        "label": "Edge District — Approach",
-        "kind": "lore",
-        "facts": [
-          "[d2] Pell's read: three days to the Edge District if the pass and weather hold. Sorel is a broker — approach as a transaction. Leth is an archivist — come with a question worth writing down."
-        ],
-        "links": [
-          "contact-names-sorel-leth",
-          "the-water-crisis",
-          "pell"
-        ],
-        "aliases": [],
-        "createdDay": 2,
-        "updatedDay": 2
-      },
-      "edge-district-route": {
-        "id": "edge-district-route",
-        "label": "Far Side of the Pass",
-        "kind": "place",
-        "facts": [
-          "[d2] The far slope is sparse pine run, firm trail, old canopy. Quieter than the valley — no water-wheel, no hammer. The world news named boot prints here before the pass opened. Silas is now on that side."
-        ],
-        "links": [
-          "mountain-pass",
-          "sorel",
-          "the-water-crisis",
-          "contact-names-scrap"
-        ],
-        "aliases": [],
-        "createdDay": 2,
-        "updatedDay": 2
-      },
-      "edge-district-outer-settlement": {
-        "id": "edge-district-outer-settlement",
-        "label": "Edge District — Outer Settlement",
-        "kind": "place",
-        "facts": [
-          "[d3] Visible from the pass overhang at dawn: gray stone buildings, two or three chimney-smokes, a pale worn track. Huginn marked the leftmost chimney smoke at dawn — quiet, not urgent, something running th"
-        ],
-        "links": [
-          "huginn",
-          "the-water-crisis",
-          "sorel",
-          "leth"
-        ],
-        "aliases": [],
-        "createdDay": 3,
-        "updatedDay": 3
-      },
-      "edge-district-interference": {
-        "id": "edge-district-interference",
-        "label": "Edge District — Craft Interference",
-        "kind": "lore",
-        "facts": [
-          "[d5] The Edge District's photonic order and layered mineral contamination in its groundwater interfere with death-reading crafts — The Attended End returned static noise rather than a clean read. The place"
-        ],
-        "links": [
-          "the-water-crisis",
-          "millbrook",
-          "find-the-engineer"
-        ],
-        "aliases": [],
-        "createdDay": 5,
-        "updatedDay": 5
       }
     },
     "notSame": [
@@ -16973,12 +17037,6 @@
     ],
     "swept": [
       {
-        "from": "fendt-falsified-ledger",
-        "label": "Fendt and the Falsified Ledger",
-        "to": "fendt",
-        "moved": 2
-      },
-      {
         "from": "edge-district-contacts",
         "label": "Edge District Contacts",
         "to": "radiant-plateau-edge",
@@ -17018,6 +17076,36 @@
         "from": "fendt-falsified-ledger",
         "label": "Fendt and the Falsified Ledger",
         "to": "fendt",
+        "moved": 0
+      },
+      {
+        "from": "edge-district-contacts",
+        "label": "Edge District Contacts",
+        "to": "radiant-plateau-edge",
+        "moved": 1
+      },
+      {
+        "from": "edge-district-approach",
+        "label": "Edge District — Approach",
+        "to": "radiant-plateau-edge",
+        "moved": 1
+      },
+      {
+        "from": "edge-district-route",
+        "label": "Far Side of the Pass",
+        "to": "radiant-plateau-edge",
+        "moved": 1
+      },
+      {
+        "from": "edge-district-outer-settlement",
+        "label": "Edge District — Outer Settlement",
+        "to": "radiant-plateau-edge",
+        "moved": 0
+      },
+      {
+        "from": "edge-district-interference",
+        "label": "Edge District — Craft Interference",
+        "to": "radiant-plateau-edge",
         "moved": 0
       }
     ],
@@ -17080,7 +17168,7 @@
   ],
   "actionCount": 982,
   "grantsVersion": 1,
-  "reconcileVersion": 49,
+  "reconcileVersion": 54,
   "gallery": [
     {
       "kind": "npc",
@@ -18010,8 +18098,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1789184372934,
-  "rev": 2014,
+  "updatedAt": 1789184793751,
+  "rev": 2018,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -21841,8 +21929,8 @@
         {
           "rank": 1,
           "name": "Marrow's Wings I",
-          "grants": "The Attended End and The Shadow Work run as one craft: the move only their joining makes.",
-          "cannot": "What neither parent could do apart.",
+          "grants": "The Attended End and Shadow Work run as one craft: Shadow Work — Shape a pocket of shadow into something functional for a short time — a screen, a concealing wall….",
+          "cannot": "There must be shadow to shape. A lit room gives you nothing to work in.",
           "functions": [
             "conceal",
             "make",
@@ -21852,8 +21940,8 @@
         {
           "rank": 2,
           "name": "Marrow's Wings II",
-          "grants": "The braid deepens; the two crafts answer together more surely.",
-          "cannot": "What neither parent could do apart.",
+          "grants": "At this depth the braid carries what each parent reaches here: Shadow Work — Transform a space's light conditions and give shadow the shape you need — it holds until you….",
+          "cannot": "It holds until you release it — and holding is attention you are spending.",
           "functions": [
             "conceal",
             "make",
@@ -21863,8 +21951,8 @@
         {
           "rank": 3,
           "name": "Marrow's Wings III",
-          "grants": "The braid deepens; the two crafts answer together more surely.",
-          "cannot": "What neither parent could do apart.",
+          "grants": "At this depth the braid carries what each parent reaches here: Shadow Work — Work in shadow as a master works in material — make things that persist, transform environments….",
+          "cannot": "Persisting shadow is a thing in the world. Other people can walk into it.",
           "functions": [
             "conceal",
             "make",
@@ -21916,9 +22004,33 @@
       "tree": [
         {
           "rank": 1,
-          "name": "You Shall Not Pass I",
-          "grants": "Boundary-Stone and The Shielding Word run as one craft: the move only their joining makes.",
-          "cannot": "What neither parent could do apart.",
+          "name": "Boundary-Stone · Shielding Word",
+          "grants": "Boundary-Stone and Shielding Word run as one craft: Boundary-Stone — Ward a camp or dwelling against animals, weather, and casual intrusion.; Shielding Word — Ward one person from one harm with a spoken certainty..",
+          "cannot": "A determined person walks through it; it deters, not stops. · You must actually believe it. A hollow word wards nothing, and everyone…",
+          "functions": [
+            "bind",
+            "ward",
+            "resist",
+            "shield"
+          ]
+        },
+        {
+          "rank": 2,
+          "name": "Kept Boundary · Standing Ward",
+          "grants": "At this depth the braid carries what each parent reaches here: Boundary-Stone — Set a boundary that holds — a threshold, a claim, a line that things notice and respect.; Shielding Word — The ward holds over a place and a people, for as long as you keep…",
+          "cannot": "A boundary is a claim, and claims are contested. It holds against what… · You must keep speaking. And you must keep meaning it, which is harder.",
+          "functions": [
+            "bind",
+            "ward",
+            "resist",
+            "shield"
+          ]
+        },
+        {
+          "rank": 3,
+          "name": "Old Boundary · Unbroken Word",
+          "grants": "At this depth the braid carries what each parent reaches here: Boundary-Stone — Set a boundary that has the weight of the old ones — it feels ANCIENT, and even things that do not…; Shielding Word — A ward that holds after you have gone — a word spoken so…",
+          "cannot": "The old boundaries were set by people who paid for them. Yours borrows… · It stands on what you meant when you said it. If you change, it does not…",
           "functions": [
             "bind",
             "ward",
@@ -21975,9 +22087,41 @@
       "tree": [
         {
           "rank": 1,
-          "name": "The Declared Threshold",
-          "grants": "Shadow Work and The Warding Mark run as one craft: a shadow-field is drawn around any opening or passage and then told its purpose via a warding declaration. The resulting frame is not visible in…",
-          "cannot": "What it has not yet grown to do.",
+          "name": "Single Thing · Shaped Pocket",
+          "grants": "Working Model and Shadow Work run as one craft: Working Model — HOLD ONE THING'S WORKING SHAPE AND SHOW IT — a lock, a brace, a splint, a door, a cart-repair, a…; Shadow Work — Shape a pocket of shadow into something functional for a short time — a screen, a…",
+          "cannot": "One object or one small space at a time. You must be able to examine it. · There must be shadow to shape. A lit room gives you nothing to work in.",
+          "functions": [
+            "make",
+            "mend",
+            "reveal",
+            "conceal",
+            "transform",
+            "bind",
+            "shield",
+            "ward"
+          ]
+        },
+        {
+          "rank": 2,
+          "name": "Whole Working · Held Dark",
+          "grants": "At this depth the braid carries what each parent reaches here: Working Model — HOLD AND SHOW A WORKING SYSTEM — a machine with parts moving against each other, a building, a…; Shadow Work — Transform a space's light conditions and give shadow the shape you…",
+          "cannot": "You must have access to the whole of it; a system half-hidden is modelled… · It holds until you release it — and holding is attention you are spending.",
+          "functions": [
+            "make",
+            "mend",
+            "reveal",
+            "conceal",
+            "transform",
+            "bind",
+            "shield",
+            "ward"
+          ]
+        },
+        {
+          "rank": 3,
+          "name": "Modelled Country · Shadow Craft",
+          "grants": "At this depth the braid carries what each parent reaches here: Working Model — HOLD A WORKING WITH MANY INTERACTING PARTS — a mill and its race, a fortification and its…; Shadow Work — Work in shadow as a master works in material — make things that persist…",
+          "cannot": "One such working at a time, and you must be able to get around the whole… · Persisting shadow is a thing in the world. Other people can walk into it.",
           "functions": [
             "make",
             "mend",
@@ -22118,9 +22262,9 @@
       "tree": [
         {
           "rank": 1,
-          "name": "The Received Ending I",
-          "grants": "Deathsense and The Attended End run as one craft: the move only their joining makes.",
-          "cannot": "What neither parent could do apart.",
+          "name": "Death's Purpose I",
+          "grants": "Deathsense and The Attended End run as one craft: Deathsense — Feel where a living thing is dying or near death. Judge how far along they are. Sense the failing….",
+          "cannot": "Reads the living and the dying, not the already-dead. A corpse has…",
           "functions": [
             "foresee",
             "reveal"
@@ -22128,9 +22272,9 @@
         },
         {
           "rank": 2,
-          "name": "The Received Ending II",
-          "grants": "The braid deepens; the two crafts answer together more surely.",
-          "cannot": "What neither parent could do apart.",
+          "name": "Death's Purpose II",
+          "grants": "At this depth the braid carries what each parent reaches here: Deathsense — Sense not only that something living is dying but HOW — the cause, the shape, roughly how long. A….",
+          "cannot": "Knowing the hour does not give you the power to move it, and it will not…",
           "functions": [
             "foresee",
             "reveal"
@@ -22138,9 +22282,9 @@
         },
         {
           "rank": 3,
-          "name": "The Received Ending III",
-          "grants": "The braid deepens; the two crafts answer together more surely.",
-          "cannot": "What neither parent could do apart.",
+          "name": "Death's Purpose III",
+          "grants": "At this depth the braid carries what each parent reaches here: Deathsense — The dying stands plain: you perceive its cause, its trajectory, and what would turn it aside — if….",
+          "cannot": "YOU KNOW EXACTLY WHAT IS HAPPENING AND NOTHING ABOUT WHAT TO DO. Reading…",
           "functions": [
             "foresee",
             "reveal"
@@ -22191,9 +22335,9 @@
       "tree": [
         {
           "rank": 1,
-          "name": "Shadowcast Model I",
-          "grants": "Working Model and Shadow Work run as one craft: the move only their joining makes.",
-          "cannot": "What neither parent could do apart.",
+          "name": "Single Thing · Shaped Pocket",
+          "grants": "Working Model and Shadow Work run as one craft: Working Model — HOLD ONE THING'S WORKING SHAPE AND SHOW IT — a lock, a brace, a splint, a door, a cart-repair, a…; Shadow Work — Shape a pocket of shadow into something functional for a short time — a screen, a…",
+          "cannot": "One object or one small space at a time. You must be able to examine it. · There must be shadow to shape. A lit room gives you nothing to work in.",
           "functions": [
             "make",
             "conceal"
@@ -22201,9 +22345,19 @@
         },
         {
           "rank": 2,
-          "name": "Shadowcast Model II",
-          "grants": "The braid deepens; the two crafts answer together more surely.",
-          "cannot": "What neither parent could do apart.",
+          "name": "Whole Working · Held Dark",
+          "grants": "At this depth the braid carries what each parent reaches here: Working Model — HOLD AND SHOW A WORKING SYSTEM — a machine with parts moving against each other, a building, a…; Shadow Work — Transform a space's light conditions and give shadow the shape you…",
+          "cannot": "You must have access to the whole of it; a system half-hidden is modelled… · It holds until you release it — and holding is attention you are spending.",
+          "functions": [
+            "make",
+            "conceal"
+          ]
+        },
+        {
+          "rank": 3,
+          "name": "Modelled Country · Shadow Craft",
+          "grants": "At this depth the braid carries what each parent reaches here: Working Model — HOLD A WORKING WITH MANY INTERACTING PARTS — a mill and its race, a fortification and its…; Shadow Work — Work in shadow as a master works in material — make things that persist…",
+          "cannot": "One such working at a time, and you must be able to get around the whole… · Persisting shadow is a thing in the world. Other people can walk into it.",
           "functions": [
             "make",
             "conceal"
@@ -22371,7 +22525,7 @@
   "syncedAt": 1788658062664,
   "teachers": {},
   "regionsKnown": {
-    "valley": 682,
+    "valley": 683,
     "the_palelands": 6,
     "the_center": 151,
     "the_echo_vale": 14
@@ -22682,10 +22836,10 @@
     {
       "id": "sess-33",
       "startedAt": "2026-09-11T22:48:54.873Z",
-      "lastAt": "2026-09-12T03:39:32.925Z",
+      "lastAt": "2026-09-12T03:46:33.741Z",
       "startDay": 73,
       "endDay": 74,
-      "beats": 36
+      "beats": 37
     }
   ],
   "company": [
@@ -22706,8 +22860,8 @@
       "teaches": null,
       "liaisonFor": null,
       "joinedDay": 17,
-      "leftDay": null,
-      "departedWhy": null
+      "leftDay": 18,
+      "departedWhy": "parted by your word — the parting had not been recorded"
     },
     {
       "npcId": "siol",
@@ -22717,8 +22871,8 @@
       "teaches": null,
       "liaisonFor": null,
       "joinedDay": 18,
-      "leftDay": null,
-      "departedWhy": null
+      "leftDay": 18,
+      "departedWhy": "parted by your word — the parting had not been recorded"
     },
     {
       "npcId": "veth-ondra",
@@ -23202,16 +23356,16 @@
     "choices": 359,
     "characterDeltas": 189,
     "scene": 360,
-    "npcUpdates": 315,
+    "npcUpdates": 314,
     "factUpdates": 38,
     "placeUpdates": 80,
-    "codexUpdates": 213,
+    "codexUpdates": 212,
     "timeOps": 321,
     "imagePrompt": 34,
     "sceneEnded": 133,
     "itemUpdates": 8,
     "questUpdates": 49,
-    "offer": 55,
+    "offer": 54,
     "moveTo": 20,
     "delegateOps": 4,
     "deeds": 24,
@@ -23225,12 +23379,12 @@
     "_applyFailedOp": 8,
     "newEncounter": 3,
     "encounterOps": 1,
-    "gambitApt": 63,
+    "gambitApt": 62,
     "markDefiningMoment": 1,
-    "_engineClosedScene": 6,
+    "_engineClosedScene": 5,
     "gambitOps": 1,
     "intentsHeard": 1,
-    "partyOps": 4,
+    "partyOps": 3,
     "stateOps": 1
   },
   "_opTurns": 360,

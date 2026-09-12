@@ -113,3 +113,34 @@ action as you do; the ground reaches every roll and says so in one vocabulary; t
 
 ⛑ **Where to look:** how the game works is `docs/HOW_IT_WORKS.md` (gates `§154`–`§167` assert it); the dials and their values are
 `docs/BALANCE.md`; the queue is `po/BACKLOG.md`; the measured fight tables are *The Fight Dials*.
+
+---
+
+## ADDENDUM · 2026-09-12 (late) — what moved since the stocktake above
+
+**Shipped, all on origin, each proven through the suite and, where a save was involved, on a copy of Silas's real save through the real loader:**
+
+| version | what |
+|---|---|
+| v1.9.456 | The Maren beat: the `pinFact` crash under her reveal fixed; a failed op step is RESTATED next beat (`bookkeepingRestate`, read by gm.js — the wiring audit caught the row registered and unread); aliases on an update; refused joins and raises SAID (§172). |
+| v1.9.457 | A parting recorded on its day and repaired on load (§173 — the ✕ wrote `leftDay: null`); people the world minted reach the prompt before they are met (§174 — Bryn Callowell and 13 others were invisible); the braid step re-versioned above every live save (it had NEVER run: `version: 1` vs `reconcileVersion` 49); the Edge District fold run again (step 43 had stamped past an absent parent); two Corvins split, rule 14 says two people can share a name (§175); one person, one seat — the matcher's two passes, the scene identity's fullest-name match, `collapseScenePresence` (§176). |
+| v1.9.458 | Aevi's three docstring-defects wired (§177: `debtRefusalAt` in the prompt; `actingSlots` CAPPING the forward pick; `summonSheetFor` called by a landed summon craft, sheets on the encounter state), her §4 docstring-claim gate (testOnlyExports 10 → 7, baseline); `bringForward` reading `Infinity` as 1 fixed; the holds ✕/Add-hands reading the select BESIDE the button and one `askable()` rule for both screens (§178). |
+| v1.9.459 | The holding card as labelled rows and chips; WHO'S HERE one line per person; "Huginn (Marrow)" reads Maren Ossitide (§179). The ratchet: 31 suites in a pool (~43s, was ~5 min), run ONCE per ship (the hook skips a verified tree, or one differing only under `characters/`), generators inside the ship script, `wiring_audit` baseline lowered 1 → 0 on Erik's word (§180). |
+| v1.9.460 | SNG-538 §4: the Library's index and renderers in `engine/library.js`, every string through `playerText` (741 glyphs in the files → 0 on the page), `_` keys private (108, none rendered), the gate §181. Aevi's §5 (capitals, staleness) is content and hers. |
+
+**Not lost data, three times (Erik's evening):** two day-counters (story-day 17 vs world-day 74); a Radiant helper minted twice and never registered; a runner's reveal landed on a namesake's record. Every one was a mechanism the player was told about that did not exist or read the wrong record — see `memory: a-message-is-a-claim-about-a-mechanism`.
+
+**Rulings open for Erik:**
+1. Should a *sworn* bond count as the recruit floor (the **+** on a person)? Today it is the ally band or above.
+2. At three or fewer combatants: everyone ACTS (MELEE_TIERS, R25 era) or everyone CONTRIBUTES from the fold (§150, later)? The tier caps the pick until ruled.
+3. (Earlier, still open) the peer fight at ~34% for the player with domains spread; +10 levels at ~54%; the roster spread 44–91% by domain.
+
+**The work list, restated:**
+- **B1** — at 7 test-only exports = baseline, green. Done unless Aevi moves her two (`ripeAxisTouchCombinations`, `unitComposition`).
+- **B2** — nine registered-unread rules files: classifications proposed in `REPLY_ccode_20260911i` §2, awaiting Aevi's confirmation; five gates to build when confirmed.
+- **B3** — the schema gate (a craft field the engine reads that the schema does not admit): not started.
+- **B4** — `verification_ledger` red: undiagnosed.
+- **B6a** — SPEC_SNG-537 §4 (movable `worldPos`, mint at authored coordinates, `scale.json` reader): not started.
+- **SNG-538 §5** — Aevi's content pass (ARCHETYPES, tradition_profiles, EXESA, PLAYERS_GUIDE, the tail), and the staleness pass after it.
+- **Tests still reading the live save** — 10 sites remain (6 in how_it_works, 4 in smoke); two were pinned tonight; the rest are derived fixtures or invariants, listed in memory `push-race-with-aevi`. Convert on sight.
+- **The Fight Dials page** — stale; nothing in it changed tonight; republish with the next balance round.

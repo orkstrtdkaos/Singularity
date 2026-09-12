@@ -117,40 +117,45 @@ clearest statement of why this game's classes work.**
 
 ---
 
-## §7 — ⛔ FOUND WHILE VERIFYING THIS, AND IT IS NOT MINE OR CCODE'S: A PLAYER'S SAVE TURNED THE SUITE RED
+## §7 — ⛔ CORRECTED: I CALLED A REAL DEFECT NOISE, AND THE CORRECTION IS THE SAME BUG I HAVE BEEN NAMING ALL WEEK
 
-Running the suite after the rewrite, `smoke` was red with 2 failures. **I assumed it was mine. It is not.**
-
-⛑ **Bisected across all eight commits between CCode's ship and mine:**
+**What I wrote here first:** `smoke` went red at `446f2ae — save: Silas Weir`, a 317-line live save with no
+code in it. I bisected all eight commits and the bisect was right:
 
 ```
-d3a1387  FAILs=0   A parting recorded on its day and repaired on load   (CCode)
-f223adb  FAILs=0   world-tick: consolidated by Silas Weir
 c80a589  FAILs=0   arcs: Silas Weir pushed the world
-446f2ae  FAILs=2   save: Silas Weir            ← IT ARRIVES HERE
+446f2ae  FAILs=2   save: Silas Weir            ← arrives here
 ```
 
-`446f2ae` is **one file, 317 lines: `characters/player-s9z9u1/char-mrhs8286.json`.** No code. No content.
-**A player played.**
+⛔ **THEN I READ THE SAVE, FOUND `company members: 0`, AND CONCLUDED THE GATE WAS ANCHORED TO A LIVING SAVE
+AND REPORTING A PLAYER'S TUESDAY AS A REGRESSION.** I called it the fifth instance of *the ruler, not the
+GM*, and I filed it as a test-design defect with an ask to pin the fixture.
 
-⛔ **THE MECHANISM:** `CCODE-274` loads `silas274` from that live character file and asserts on his party —
-`party.folded.length >= 1` and `damage.melee.added > 0`. ⛑ **I read the save: `company members: 0`.**
-**Silas's company emptied in play.** The assertions describe a party he no longer has.
+⛑ **THAT WAS WRONG, AND HERE IS THE MEASUREMENT THAT SHOWS IT.** `smoke` is green now. Silas's
+`company members` is **STILL 0**. Nothing about the save changed back. What changed is `e54bd63` — CCode
+wiring `actingSlots` and `summonSheetFor`, in `engine/melee.js` and `engine/npcsheet.js`.
 
-⚠️ **SO THE GATE IS ANCHORED TO A LIVING SAVE, AND IT REPORTS A PLAYER'S TUESDAY AS A REGRESSION.** It will
-go red and green as Silas plays, and the next person to see it red cannot tell a real break from a recruitment
-decision. ⛔ **A fixture would hold this; a save cannot.**
+⛔ **SO THE SAVE WAS THE TRIGGER AND NOT THE FAULT. THE RED WAS SIGNAL.** A real player's real save walked
+into the melee layer, and the melee layer was not wired — `actingSlots` is the function that sets how many
+named people act in a round, and it was reachable only from a test. **The gate was doing its job and I told
+it that it was a weather report.**
 
-⚑ **AND IT IS THIS MORNING'S FINDING WEARING A FIFTH COSTUME. CCode's own words: *it was the ruler, not the
-GM.*** The engine was capable and the note lied. The craft field was read and could not be written. The rules
-files are registered and unread. The docstrings claim readers they do not have. **And now a gate measures a
-moving thing and calls the movement a fault.** ⛔ **Five instances in one week is not a run of bad luck. It
-is one class, and it is the thing worth building a gate against.**
+⚠️ **AND `company members: 0` WAS A CORRELATE, NOT A CAUSE.** It was true, it was in the neighbourhood of the
+failing assertion, and I reported it as the explanation without testing whether removing it would change the
+result. ⛔ **THAT IS PRECISELY THE FAILURE I SPENT THIS WEEK DOCUMENTING IN OTHER PEOPLE'S WORK: measuring a
+stage of a pipeline and reporting it as the output.** Five instances, and the fifth was mine, in the document
+where I was counting the other four.
 
-**Ask: pin `CCODE-274` to a fixture, not to `characters/`.** ⚠️ **And the broader question is yours, not
-mine: how many other gates read `characters/`?** I did not audit that and I am not guessing at it.
+⛑ **WHAT THE EPISODE ACTUALLY ARGUES**, and it is stronger than what I claimed:
+- **The three "defects, not features" in `REPLY_aevi_20260911j` were real, and one was live.** `actingSlots`
+  was not a roadmap question. It was breaking a fight.
+- ⚠️ **A live save reached a defect that 31 suites of fixtures did not.** The thing I called a liability found
+  something. **I would now argue the opposite of my own ask: do NOT pin `CCODE-274` to a fixture.**
+- ⛔ **What the episode does earn is a rule about reading a red: BISECT TO THE COMMIT, THEN PROVE THE
+  MECHANISM BY CHANGING IT.** I did the first half and stopped, and a bisect that lands on a save invites
+  exactly the conclusion I jumped to.
 
----
+**Nothing is owed to CCode from this section. The correction is owed to the record.**
 
 ## §8 — STATUS
 

@@ -2156,6 +2156,74 @@ console.log("\n── §176 · a name is a fact and a prefix is a guess; a perso
   check("§176: …once", !RC176.reconcile(c176, "character", {}).applied.includes("huginn-is-maren"));
 }
 
+/* ══════════ §177 — THREE DOCSTRINGS THAT CLAIMED A READER (Aevi 2026-09-11, REPLY_aevi_20260911j §2): now they have one ══════════ */
+console.log("\n── §177 · the debt refuses you here; the tier decides who acts; the summon gets its sheet ──");
+{
+  const GR177 = await import("../engine/gm_registry.js");
+  const ML177 = await import("../engine/melee.js");
+  const EN177 = await import("../engine/encounters.js");
+  const NS177 = await import("../engine/npcsheet.js");
+  // a. "The GM block reads it" — the debts row carries the refusal for the community you are standing in
+  const row177 = GR177.GM_CONTEXT.find(r => r.key === "debtsDetail");
+  const env177 = (communityId) => ({ character: { name: "Silas", worldState: { debts: { k1: { heldBy: "voss", communityId: "the-center", escalation: 2, amount: 3, currency: "marks", reason: "an unpaid meal" } } }, npcRegistry: { voss: { name: "Voss" } } }, location: { id: "the_crossing", name: "the Crossing", communityId }, CONTENT: { npcs: {} } });
+  const here177 = row177.build(env177("the-center")), away177 = row177.build(env177("millbrook"));
+  check("§177: ⛔ an escalation-2 debt held by one of THIS community's people refuses you HERE, in the prompt, by name and reason",
+    /REFUSED HERE: the Crossing/.test(here177 || "") && /Voss holds the debt \(an unpaid meal\)/.test(here177 || "") && /you owe Voss: 3 marks/.test(here177 || ""), String(here177));
+  check("§177: …and in another community the debt is listed but nobody refuses you", /you owe Voss/.test(away177 || "") && !/REFUSED HERE/.test(away177 || ""), String(away177));
+  const lesser177 = row177.build({ ...env177("the-center"), character: { name: "Silas", worldState: { debts: { k1: { heldBy: "voss", communityId: "the-center", escalation: 1, kind: "a favour" } } }, npcRegistry: { voss: { name: "Voss" } } } });
+  check("§177: …and a lesser debt refuses nowhere", /you owe Voss/.test(lesser177 || "") && !/REFUSED HERE/.test(lesser177 || ""), String(lesser177));
+  // b. "namedLimit NOW COMES FROM commandSlots" — the tier decides how many act, and commandSlots is the named limit inside a melee
+  check("§177: ⛔ ≤3 combatants: everyone acts; a melee: the named limit commandSlots earned; a legion: you are one figure",
+    ML177.actingSlots(ML177.resolutionTier(2, 1), { namedLimit: 1 }) === Infinity && ML177.actingSlots(ML177.resolutionTier(5, 1), { namedLimit: 2 }) === 2 && ML177.actingSlots(ML177.resolutionTier(2, 40), { namedLimit: 3 }) === 1);
+  const en177 = rd("engine/encounters.js").replace(/^\s*\/\/.*$/gm, "");
+  // ⛔ CAPPED, NEVER WIDENED: the first form widened a ≤3 fight to everyone-forward and §150's fold contributions had nobody folded to live on.
+  check("§177: ⛔ …and the fight's forward pick is CAPPED by it — Math.min(lead.slots, actingSlots(resolutionTier(...), { namedLimit: lead.slots })) — never widened past what commandSlots earned",
+    /bringForward\(partyAll, \{ chosen: state\.broughtForward \|\| null, slots: Math\.min\(lead\.slots, actingSlots\(resolutionTier\(partyPresent\.length \+ 1, 1\), \{ namedLimit: lead\.slots \}\)\) \}\)/.test(en177));
+  const fwd177 = ML177.bringForward([{ id: "a", name: "A", present: true, canAct: true }, { id: "b", name: "B", present: true, canAct: true }], { chosen: null, slots: Infinity });
+  check("§177: …and a full-resolve tier folds nobody", fwd177.forward.length === 2 && fwd177.folded.length === 0, JSON.stringify(fwd177));
+  // c. "THE SHEET ITSELF" — a summon craft that lands puts a sheeted ally on the encounter's state; it never touches the registry
+  const raised = { abilityId: "raised_hand", name: "Raised Hand", rank: 2, summon: { tierGap: [-3, -3, -2], count: [1, 3, 8], contributions: ["MARTIAL"] } };
+  const s177 = { round: 2, summons: [] }, ev177 = [];
+  const one = EN177.summonOnRound(s177, raised, { player: { degree: "success" } }, { character: { level: 10 }, rules: {}, phase: "action", events: ev177 });
+  check("§177: ⛔ a landed summon is sheeted from the caster's level and the craft's gap — L10 caster, a rank-2 raised hand at -3 → level 7, three of them, MARTIAL, and said",
+    !!one && one.level === 7 && one.count === 3 && one.summonedBy === "raised_hand" && s177.summons.length === 1 && /Raised Hand answers — 3 of them, level 7/.test(ev177[0] || "") && Number.isFinite(Number(one.attributes?.physical)),
+    JSON.stringify({ one: { level: one?.level, count: one?.count, attrs: one?.attributes }, ev: ev177 }));
+  check("§177: …a crit comes back stronger (level 8), a partial thinner (level 6)",
+    EN177.summonOnRound({ round: 1 }, raised, { player: { degree: "crit_success" } }, { character: { level: 10 }, phase: "action" })?.level === 8 && EN177.summonOnRound({ round: 1 }, raised, { player: { degree: "partial" } }, { character: { level: 10 }, phase: "action" })?.level === 6);
+  check("§177: …one living answer per craft per fight — a second landing adds nothing; a failure, a sense read, a craft without a block summon nothing",
+    EN177.summonOnRound(s177, raised, { player: { degree: "success" } }, { character: { level: 10 }, phase: "action" }) === null && s177.summons.length === 1
+    && EN177.summonOnRound({ round: 1 }, raised, { player: { degree: "failure" } }, { character: { level: 10 }, phase: "action" }) === null
+    && EN177.summonOnRound({ round: 1 }, raised, { player: { degree: "success" } }, { character: { level: 10 }, phase: "sense" }) === null
+    && EN177.summonOnRound({ round: 1 }, { abilityId: "x", name: "X", rank: 1 }, { player: { degree: "success" } }, { character: { level: 10 }, phase: "action" }) === null);
+  const allies177 = EN177.summonedAllies(s177);
+  check("§177: ⛔ …and the summon is IN the roster from the next round as a folded ally — present, able, MARTIAL, its sheet the record — through both roster reads, and the round calls it",
+    allies177.length === 1 && allies177[0].kind === "summon" && allies177[0].present === true && allies177[0].canAct === true && allies177[0].contributions.includes("MARTIAL") && allies177[0].sheet === s177.summons[0] && allies177[0].count === 3
+    && /const partyAll = \[\.\.\.alliesOf\(character, \{/.test(en177) && (en177.match(/\.\.\.summonedAllies\(state\)\]/g) || []).length === 2 && /summonOnRound\(s, playerDecl, r, \{ character, rules, phase, events \}\);/.test(en177),
+    JSON.stringify({ allies: allies177.map(a => ({ id: a.id, kind: a.kind, count: a.count })), partyAll: /const partyAll = \[\.\.\.alliesOf\(character, \{/.test(en177), spreads: (en177.match(/\.\.\.summonedAllies\(state\)\]/g) || []).length }));
+  check("§177: summonSheetFor reads a per-rank count ladder (1 → 3 → 8) and a flat one alike",
+    NS177.summonSheetFor({ id: "h", name: "H", summon: { count: [1, 3, 8], tierGap: 0 } }, 5, { rank: 3 }).count === 8 && NS177.summonSheetFor({ id: "h", name: "H", summon: { count: 2, tierGap: 0 } }, 5, { rank: 1 }).count === 2 && NS177.summonSheetFor({ id: "h", name: "H", summon: { count: { "2": 4 }, tierGap: 0 } }, 5, { rank: 2 }).count === 4);
+  // d. Aevi §4: the gate — a docstring that claims a live reader on an export nothing live calls
+  const audit177 = rd("tests/wiring_audit.mjs");
+  check("§177: ⛔ the wiring audit carries Aevi's §4 gate — a present-tense reader claim on a test-only export fails it, and its words are the three that were found",
+    /no test-only export claims a live reader in its docstring/.test(audit177) && /the GM block reads/.test(audit177) && /now comes from/.test(audit177) && /the sheet itself/.test(audit177));
+}
+
+/* ══════════ §178 — TWO SELECTS, ONE KEY (Erik 2026-09-12: "the front page doesn't list the people i want to add as hands.. the manage screen does but switches to a wrong person after I click") ══════════ */
+console.log("\n── §178 · the hands control reads the select beside it, and both screens offer the same people ──");
+{
+  const app178 = rd("app.js").replace(/^\s*\/\/.*$/gm, "");
+  // ⛔ the card and the manage modal both rendered <select data-hold-hand="<id>">; the handler took the FIRST in the page — the card's —
+  // so a pick in the modal landed on whoever the card's select showed. The select beside the clicked button is the one that was used.
+  check("§178: ⛔ Add hands and Post a guard read the select BESIDE the button, never the first one in the page with that key",
+    /const handSelFor = \(btn, id\) => btn\.parentElement\?\.querySelector\(`select\[data-hold-hand="\$\{id\}"\]`\) \|\| app\.querySelector\(`\[data-hold-hand="\$\{id\}"\]`\);/.test(app178)
+    && /const id = btn\.dataset\.holdCrew, sel = handSelFor\(btn, id\);/.test(app178) && /const id = btn\.dataset\.holdGuard, sel = handSelFor\(btn, id\);/.test(app178)
+    && !/sel = app\.querySelector\(`\[data-hold-hand="\$\{id\}"\]`\)/.test(app178));
+  // ⛔ the card offered company + delegates; the modal offered everyone known, here and not hostile (SPEC_hold_costs §5). One rule feeds both.
+  check("§178: ⛔ the card and the modal offer the SAME people — one askable() rule (company, delegates, and anyone canBeAskedToWork), the steward excluded on the card",
+    /const askable = \(\) => \[\.\.\.new Set\(\[\.\.\.company\.map\(m => m\.npcId\), \.\.\.delegates, \.\.\.Object\.keys\(character\.npcRegistry \|\| \{\}\)\.filter\(id => canBeAskedToWork\(character\.npcRegistry\[id\]\)\)\]\)\]\.filter\(Boolean\);/.test(app178)
+    && /const people = askable\(\)\.filter\(id => id !== h\.steward\)\.slice\(0, 80\);/.test(app178) && /const folk = askable\(\)\.slice\(0, 80\);/.test(app178));
+}
+
 /* ══════════ §14 — THE FOLD CANNOT BEAT AN IMMUNITY THE BLOW COULD NOT ══════════ */
 // ⛔ FOUND BY RUNNING AEVI'S TWELVE CRAFTS THROUGH A MELEE-SCALE FIGHT (CCODE-313), which is the whole
 // reason Erik asked for a big-battle test. A physical-immune foe took ZERO from the player's typed blow and

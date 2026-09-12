@@ -715,10 +715,14 @@ export function summonSheetFor(ability, casterLevel, { rank = 1, degree = "succe
     role: entry?.role || ability?.summon?.role || "" };
   // `sheetFor` reads `leansOf` off the record, so a raised hand ends up physical and a driven shade
   // physical-and-mental without this function knowing either of those words.
+  // §177: `count` is a per-rank ladder on the authored blocks (1 → 3 → a crew) — read like tierGap; a flat number stays flat.
+  const ca = ability?.summon?.count;
+  const count = Array.isArray(ca) ? num(ca[Math.max(0, num(rank, 1) - 1)], num(ca[ca.length - 1], 1))
+    : ca && typeof ca === "object" ? num(ca[String(num(rank, 1))], 1) : num(ca, 1);
   const sheet = sheetFor(rec, { cfg, levelOverride: level });
   return {
     ...sheet, level, summonedBy: ability?.id || null, gap: g,
-    count: Math.max(1, num(ability?.summon?.count, 1)),
+    count: Math.max(1, count),
     duration: ability?.summon?.duration ?? null,
     contributions: ability?.summon?.contributions || null,
   };

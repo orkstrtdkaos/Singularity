@@ -531,6 +531,26 @@ check(`no // registry:internal marker is hiding a test-only export (${leverSuppr
   `these are marked internal but have NO same-module caller — the marker is lowering the ratchet, not describing the code:\n      ${leverSuppressed.join("\n      ")}`);
 
 // ---------- shared consumer corpus (used by the ratchets below AND the orphan sweep) ----------
+// ⛔ AEVI §4 (REPLY_aevi_20260911j): A DOCSTRING THAT CLAIMS A LIVE READER ON AN EXPORT NOTHING LIVE CALLS. Three of the ten test-only
+// exports said, in the present tense, that something read them — "The GM block reads it", "NOW COMES FROM `commandSlots`", "THE SHEET
+// ITSELF" — and a human reading the code believed them. The most dangerous face of the wall, because it defeats reading. The claim
+// words are the ones those three used; the seven that stand describe what they DO and match none of them.
+const READER_CLAIM = /(?:the GM block reads|\breads? it\b|is read by|read by the|now comes from|the sheet itself|is called (?:by|from)|\bcalled from|is wired|drives the|feeds the|\brenders? it\b|the app reads|app\.js reads)/i;
+const docAbove = (src, name) => {
+  const at = src.search(new RegExp(`^export (?:async )?(?:function|const|let) ${name}\\b`, "m"));
+  if (at < 0) return "";
+  const before = src.slice(0, at), open = before.lastIndexOf("/**");
+  return open >= 0 && before.slice(open).trim().endsWith("*/") ? before.slice(open) : "";
+};
+const claiming = testOnlyExports.filter(ref => { const [f, name] = ref.replace(/^engine\//, "").split("::"); return READER_CLAIM.test(docAbove(read(`engine/${f}`), name).replace(/\s+/g, " ")); });
+check(`no test-only export claims a live reader in its docstring (Aevi §4 — ${testOnlyExports.length} test-only, ${claiming.length} claiming)`, claiming.length === 0,
+  `a present-tense claim about live behaviour on an export nothing live calls — wire it, or say what is true:\n      ${claiming.join("\n      ")}`);
+check("…and the claim words are the three that were found, not a net that catches the seven",
+  READER_CLAIM.test("The GM block reads it; `canSpendHere` is scrip-shaped") && READER_CLAIM.test("`namedLimit` NOW COMES FROM `commandSlots` WHERE A CHARACTER IS AVAILABLE")
+  && READER_CLAIM.test("⛔ THE SHEET ITSELF. `sheetFor` unchanged underneath") && !READER_CLAIM.test("Reads `_canon.contributedBy` on every canonical record. Pure.")
+  && !READER_CLAIM.test("PURE. Stamp a scene closed (archives it out of the join path).") && !READER_CLAIM.test("Empty until combinations are authored + tagged.")
+  && !READER_CLAIM.test("Reads the contingents rather than the people") && !READER_CLAIM.test("The standing-gain multiplier for a given people (1 if no liaison for them)."));
+
 const engineFiles = readdirSync(join(root, "engine")).filter(f => f.endsWith(".js"));
 const allSrc = engineFiles.map(f => ({ f, src: read(`engine/${f}`) }));
 const readDirSrc = (dir, exts) => {

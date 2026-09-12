@@ -20890,6 +20890,10 @@ await (async () => {
     const EN274 = await import("../engine/encounters.js");
     const melee274 = await import("../engine/melee.js");
     const silas274 = JSON.parse(readFileSync(join(root, "characters/player-s9z9u1/char-mrhs8286.json"), "utf8"));
+    // ⛔ 2026-09-12: THE LIVE SAVE'S ROSTER IS A LEDGER, NOT A FIXTURE. Calvar and Siol departed on Erik's word, the fold emptied, and
+    // "three forward, one folded" went red at HEAD with no engine change. The registry stays live (names must resolve from the
+    // character's own records — that is the point of this block); the roster is the one this block was written against, pinned.
+    silas274.company = [{ npcId: "pell", roles: ["ally"], joinedDay: 17 }, { npcId: "calvar", roles: ["ally"], joinedDay: 17 }, { npcId: "siol", roles: ["ally"], joinedDay: 18 }, { npcId: "veth-ondra", roles: ["ally"], joinedDay: 19 }];
     const mf274 = JSON.parse(readFileSync(join(root, "content/packs/valley/companions/marrow.json"), "utf8"));
     const marrow274 = { ...((mf274.companions || [mf274])[0]), withdraws: { manner: "takes to the air", auto: true } };
     // ⚠️ LOADED LOCALLY. `C199` belongs to a block that closed long before this one — my first version

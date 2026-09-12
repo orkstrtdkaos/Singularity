@@ -8,7 +8,8 @@
 import { battleRound, opponentPolicy, synthesizeOpponentSheet, synthesizeStaticSheet, declaredSense, isObscureDecl } from "./skill_battle.js";
 import { wornSoak, wornSoakLayers, wieldBonusFor } from "./inventory.js";   // 2026-09-04: the PC’s authored armour reaches the fight seat
 import { targetableAllies, alliesOf } from "./combatants.js";
-import { commandSlots, bringForward, theatresOf, overmatchOf, answersOvermatch, scaleRank } from "./melee.js";   // CCODE-274: how many you lead is earned; who comes forward is chosen
+import { commandSlots, bringForward, theatresOf, overmatchOf, answersOvermatch, scaleRank, actingSlots, resolutionTier } from "./melee.js";
+import { summonSheetFor } from "./npcsheet.js";   // §177: the sheet a summon gets — "THE SHEET ITSELF" had no caller   // CCODE-274: how many you lead is earned; who comes forward is chosen
 import { currentStage } from "./evolution.js";   // CCODE-265: an earned item stage can lift a companion's canStrike:false   // CCODE-253: who a foe may aim at — DERIVED here, per this seam's own rule
 import { buildFunctionIndex } from "./functions.js";   // R36 for a human: a party member's crafts say what they bring
 import { encounterKind } from "./encounterFrame.js"; // SNG-247: which bounded thing this is — it picks the exit rule
@@ -262,6 +263,36 @@ export function enrichDecl(decl, abilities) {
   return out;
 }
 
+/** ✅ §177 (Aevi 2026-09-11: "THE SHEET ITSELF" had no caller). What a craft called in — for THIS fight, on the encounter's own state, so
+ *  it is gone with the encounter (NO PERMANENCE) and never enters the registry, the company or the codex (NO CRAFTS, NO GROWTH, NO KIT).
+ *  Read into the roster as a folded ally with the contributions the craft's block declares. Pure. */
+export function summonedAllies(state) {
+  return (Array.isArray(state?.summons) ? state.summons : []).map(s => ({
+    id: s.id, name: s.name, kind: "summon", present: true, canAct: true,
+    contributions: Array.isArray(s.contributions) && s.contributions.length ? s.contributions : ["MARTIAL"],
+    record: s, sheet: s, downed: null, summoned: true, count: s.count || 1, level: s.level,
+  }));
+}
+
+/** ✅ §177: a craft with a `summon` block that LANDS on the action phase calls its thing in — sheeted by `summonSheetFor` from the caster's
+ *  level and the roll's degree (a crit comes back stronger, a partial thinner), one living answer per craft per fight, in the roster from
+ *  the next round, said in the round's events. A failed summon summons nothing. `enrichDecl` has already merged the craft's body onto the
+ *  decl, so the block is read off the decl itself. Mutates `s` (the round's new state) and `events`; returns the summon or null. */
+export function summonOnRound(s, playerDecl, r, { character = null, rules = {}, phase = "action", events = null } = {}) {
+  const block = playerDecl?.summon;
+  if (phase !== "action" || !s || !block || typeof block !== "object") return null;
+  const degree = r?.player?.degree || "";
+  if (!["crit_success", "success", "partial"].includes(degree)) return null;
+  const abilityId = playerDecl.abilityId || playerDecl.id || null;
+  if (!abilityId) return null;
+  if ((s.summons || []).some(x => x.summonedBy === abilityId)) return null;   // one living answer per craft per fight
+  const sheet = summonSheetFor({ id: abilityId, name: playerDecl.name, summon: block, tierGap: playerDecl.tierGap }, character?.level, { rank: playerDecl.rank || 1, degree, cfg: rules?.summons || {} });
+  const one = { ...sheet, id: `summon-${abilityId}`, name: sheet.name || playerDecl.name || abilityId, summonedBy: abilityId, summonedRound: s.round ?? null };
+  s.summons = [...(s.summons || []), one];
+  if (Array.isArray(events)) events.push(`${one.name} answers — ${one.count > 1 ? `${one.count} of them, ` : ""}level ${one.level} (${sheet.gap?.why || "as the craft promises"}); in the fight from the next round.`);
+  return one;
+}
+
 export function skillBattleRound(state, def, playerDecl, { character, rules, sb, steps, seenTendency = null, rng = Math.random, flee = false, yield: doYield = false, fleeResolution = null,
   // CCODE-45: the TURN options must be ACCEPTED here and FORWARDED below. This wrapper hand-builds its call to
   // battleRound, so an option it does not name is silently dropped — which is exactly how the sense step ran as a
@@ -331,18 +362,18 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   // ⛔ THE FULL ROSTER, not the targetable slice — `alliesOf` includes the withdrawn, and `targetableAllies`
   // is exactly the filter that removes them. Deriving the party split from the filtered list made the
   // `withdrawn` array on the receipt permanently empty: a list that can never populate.
-  const partyAll = alliesOf(character, {
+  const partyAll = [...alliesOf(character, {
     catalog: abilityCatalog, fnIndex, party,
     companions: content?.companions || {}, npcs: npcLookup, company: character?.company || null,
-    stageOf: (itemId) => { try { return currentStage(itemId, character, content?.items || {})?.stage ?? null; } catch { return null; } } });
-  const partyPresent = targetableAllies(character, {
+    stageOf: (itemId) => { try { return currentStage(itemId, character, content?.items || {})?.stage ?? null; } catch { return null; } } }), ...summonedAllies(state)];
+  const partyPresent = [...targetableAllies(character, {
     // the same reading as `partyAll` above — a filtered view of a roster must not be built from a different rule.
     catalog: abilityCatalog, fnIndex, party,
     companions: content?.companions || {}, npcs: npcLookup, company: character?.company || null,
     // ⛔ CCODE-265 — THE WORLD'S ANSWER TO "what stage is that item at". Without it a companion whose
     // `canStrike: false` is liftable by an earned item can never actually lift it in a real fight, and the
     // override would be a field with a reader and no caller — this project's signature defect, one level up.
-    stageOf: (itemId) => { try { return currentStage(itemId, character, content?.items || {})?.stage ?? null; } catch { return null; } } });
+    stageOf: (itemId) => { try { return currentStage(itemId, character, content?.items || {})?.stage ?? null; } catch { return null; } } }), ...summonedAllies(state)];
   // ⛔ WHO IS STILL STANDING IN THIS FIGHT. `alliesOf` rebuilds every ally from the character's own entries each
   // round, and in real play `character.companions` holds bare ids — so a knockout written onto the per-round
   // wrapper (which is what the fold did) was gone by the next round. MEASURED: the fold downed Ember and the
@@ -380,7 +411,12 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
     powers: (character.abilities || []).map(a => content?.abilities?.[a.abilityId]).filter(Boolean),
     ground: state.preparedGround || [] }) : null;
   const split = partyAll.length > 1
-    ? bringForward(partyAll, { chosen: state.broughtForward || null, slots: lead.slots })
+    // ✅ §177 (Aevi 2026-09-11): `actingSlots` said "namedLimit NOW COMES FROM commandSlots" and was never called. Now it is, with
+    // commandSlots as the named limit — and the tier it reads (MELEE_TIERS, Erik's numbers) can only NARROW the pick: a legion leaves
+    // you one figure. ⛔ NEVER WIDENED: a full-resolve tier (≤3) would bring everyone forward and leave nobody folded, and §150's fold
+    // contributions — a folded warder takes the blow, a folded reader hands you the read — live on the folded (Erik: "being IN the
+    // party must be beneficial"). Whether ≤3 means everyone ACTS or everyone CONTRIBUTES is a ruling still open; until then, the cap.
+    ? bringForward(partyAll, { chosen: state.broughtForward || null, slots: Math.min(lead.slots, actingSlots(resolutionTier(partyPresent.length + 1, 1), { namedLimit: lead.slots })) })
     : null;
   // ⛔ SPEC_party_contributions, SHAPE B. A folded ally does the thing their family is FOR, once a fight each,
   // and it is named — Erik: "being IN the party must be beneficial", and a warder in slot 5 contributed exactly
@@ -615,6 +651,7 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   // ⚠️ THE SIGN IS THE POINT AND IT IS THE MIRROR OF THE DAMAGE BLOCK ABOVE: a heal on the PLAYER raises
   // `deltas.health`; a heal on the OPPONENT raises their pool. Getting that backwards would make every
   // mending craft a weapon, which is the one failure a healing branch must not have.
+  summonOnRound(s, playerDecl, r, { character, rules, phase, events });   // §177: a landed summon craft calls its thing in
   if (r.healing && r.healing.amount > 0) {
     if (r.healing.side === "player") {
       deltas.health += r.healing.amount;

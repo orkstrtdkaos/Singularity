@@ -129,7 +129,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.457";
+const APP_VERSION = "1.9.458";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -11224,15 +11224,19 @@ function wireHoldingOffers() {
     if (!r.ok) { alert(r.why); return; }
     saveCharacter(character); again();
   };
+  // ⛔ §178 (Erik 2026-09-12): the card and the manage modal each render <select data-hold-hand="<id>"> for the same place, and
+  // `app.querySelector` took the FIRST — the card's — so a pick in the modal landed on whoever the card's select showed. The select
+  // beside the clicked button is the one that was used.
+  const handSelFor = (btn, id) => btn.parentElement?.querySelector(`select[data-hold-hand="${id}"]`) || app.querySelector(`[data-hold-hand="${id}"]`);
   for (const btn of app.querySelectorAll("[data-hold-crew]")) btn.onclick = () => {
-    const id = btn.dataset.holdCrew, sel = app.querySelector(`[data-hold-hand="${id}"]`);
+    const id = btn.dataset.holdCrew, sel = handSelFor(btn, id);
     const h = (character.holdings || []).find(x => x.id === id);
     if (!h || !sel?.value) return;
     setCrew(character, id, [...(h.crew || []), sel.value], { cfg: CONTENT.rules?.economy?.holdStore, worldCount: worldCount(), nameOf: nmOf });
     saveCharacter(character); again();
   };
   for (const btn of app.querySelectorAll("[data-hold-guard]")) btn.onclick = () => {
-    const id = btn.dataset.holdGuard, sel = app.querySelector(`[data-hold-hand="${id}"]`);
+    const id = btn.dataset.holdGuard, sel = handSelFor(btn, id);
     const h = (character.holdings || []).find(x => x.id === id);
     if (!h || !sel?.value) return;
     setGarrison(character, id, [...(h.garrison || []), sel.value], { worldCount: worldCount(), nameOf: nmOf });
@@ -11331,6 +11335,9 @@ function renderHoldingsTab(manageId = null) {
   // delegates are the people who could take a place up. A community transfer is a narrative record (news +
   // history), and it is not offered as a button until something in the world model can hold property.
   const handTo = [...new Set([...company.map(m => m.npcId), ...delegates])].filter(Boolean);
+  // ⛔ §178: ONE RULE FOR WHO CAN BE PUT TO WORK — the card offered company + delegates, the modal everyone known, here and not hostile
+  // (SPEC_hold_costs §5), and Erik could not find on the card the people the modal showed. The modal's rule is the spec's.
+  const askable = () => [...new Set([...company.map(m => m.npcId), ...delegates, ...Object.keys(character.npcRegistry || {}).filter(id => canBeAskedToWork(character.npcRegistry[id]))])].filter(Boolean);
 
   // ⚠️ A BAR THAT READS AS A BAR. Used against earned, so "3 of 3" is legible as full without arithmetic.
   const meter = (label, used, total, why) => `<div class="codex-f" style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap">
@@ -11395,7 +11402,7 @@ function renderHoldingsTab(manageId = null) {
           if (!g) return "";
           const fns = new Set((g.improveFunctions || []).map(String));
           const crafts = (character.abilities || []).map(a => fullCatalog()[a.abilityId]).filter(d => d && (d.functions || []).some(v => fns.has(String(v))) && !(h.improvements || []).some(i => i.abilityId === d.id));
-          const people = [...new Set([...company.map(m => m.npcId), ...delegates])].filter(Boolean).filter(id => id !== h.steward);
+          const people = askable().filter(id => id !== h.steward).slice(0, 80);
           const hands = (h.crew || []).map(id => esc(nameOf(id))).join(", "), guards = (h.garrison || []).map(id => esc(nameOf(id))).join(", ");
           const done = (h.improvements || []).map(i => esc(i.name || i.abilityId)).join(", ");
           return `<div class="hint">grows: ${h.steward ? `one rung every ${g.passesPerClimb || 4} passes under a keeper, as far as their standing allows` : "<em>not while nobody keeps it</em>"}${done ? ` · improved with ${done}` : ""}${hands ? ` · hands: ${hands}` : ""}${guards ? ` · watch: ${guards}` : ""}</div>
@@ -11467,7 +11474,7 @@ function renderHoldingsTab(manageId = null) {
       // ⛔ SPEC_hold_costs §5 — COME AND WORK: known, here, and not hostile (canBeAskedToWork) — a far lower bar than the company's.
       // The registry alone had no bar at all. Whoever already keeps another place is said so (Q5: visible, not forbidden).
       const keeps = (id) => (character.holdings || []).find(o => o && o.id !== h.id && o.steward === id)?.name || null;
-      const folk = [...new Set([...company.map(m => m.npcId), ...delegates, ...Object.keys(character.npcRegistry || {}).filter(id => canBeAskedToWork(character.npcRegistry[id]))])].filter(Boolean).slice(0, 80);
+      const folk = askable().slice(0, 80);
       const folkOpts = folk.map(id => { const k = keeps(id); const tags = (character.npcRegistry?.[id]?.assistTags || []).slice(0, 2).join(", "); return `<option value="${esc(id)}">${esc(nameOf(id))}${tags ? ` — ${esc(tags)}` : ""}${k ? ` (keeps ${esc(k)})` : ""}</option>`; }).join("");
       const head = (t) => `<div class="hint" style="font-size:10px;text-transform:uppercase;letter-spacing:.6px;margin-top:12px">${t}</div>`;
       const art = ensureHoldingImage(h) || h.image || null;   // §1: the manage screen mints too — Erik: "and for the new manage screen that pops up"

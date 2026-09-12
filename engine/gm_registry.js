@@ -48,6 +48,7 @@ import { priceLine } from "./economy.js";   // SNG-302: what a thing fetches HER
 import { reachableDeadForGM } from "./death.js"; // SNG-209: the dead who are NOT gone — reachable in the death state, latent hooks
 import { threatToPlayer, guardiansFor, worldRoster } from "./worldtick.js"; // SNG-310: the mark the world engine leaves for the GM to narrate
 import { npcRegistryForGM, npcQuestSeedBlock, bearersOf, carriedForGM, findExistingNpc } from "./npcs.js";
+import { debtRefusalAt } from "./holdings.js";   // §177: "The GM block reads it" — now it does
 import { presenceForGM, resolvePresence } from "./presence.js";   // SPEC_npc_presence_cadence: who the day could offer
 import { placeMemoryForGM, recallForGM } from "./places.js";
 import { sheetsForGM } from "./npcsheet.js";     // the person-keyed sheet, first live caller
@@ -288,9 +289,17 @@ export const GM_CONTEXT = [
       // SPEC_holding_attributes: the join — the narrator knows when you are standing in a place you hold
       { hereId: env.location?.id || env.character?.currentLocationId || null, nameOf: (id) => env.character?.npcRegistry?.[id]?.name || env.CONTENT?.npcs?.[id]?.name || id }) },
   // ✅ Q5-B (SPEC_debts_and_reception): what the character OWES, and who remembers it.
-  { key: "debtsDetail", builder: "holdings.debtsForGM", carries: ["debts", "heldBy", "escalation"],
+  { key: "debtsDetail", builder: "holdings.debtsForGM + debtRefusalAt (§177)", carries: ["debts", "heldBy", "escalation", "the refusal HERE"],
     reachedBy: "always", spec: "SPEC_debts_and_reception", views: ["turn", "ask"],
-    build: (env) => debtsForGM(env.character, { nameOf: (id) => env.character?.npcRegistry?.[id]?.name || env.CONTENT?.npcs?.[id]?.name || id }) },
+    build: (env) => {
+      const nameOf = (id) => env.character?.npcRegistry?.[id]?.name || env.CONTENT?.npcs?.[id]?.name || id;
+      const rows = debtsForGM(env.character, { nameOf });
+      // ✅ §177 (Aevi 2026-09-11): debtRefusalAt said "The GM block reads it" and nothing did. An escalation-2 debt held by one of THIS
+      // community's people refuses the character here — no trade, hire or shelter, narrated at every door — until it is settled.
+      const here = debtRefusalAt(env.character, env.location?.communityId ?? null);
+      const refusal = here ? `⛔ REFUSED HERE: ${env.location?.name || "this place"} will not trade with, hire or shelter ${env.character?.name || "the character"} — ${nameOf(here.holder)} holds the debt (${here.why}). Narrate the refusal at every door until it is settled; never a welcome.` : null;
+      return [rows, refusal].filter(Boolean).join("\n") || null;
+    } },
   // ✅ R45c (2026-09-05): what OTHER PEOPLE carry of yours — a lent blade is a fact the narrator must hold, or the next
   // scene hands it back to a character who never had it.
   { key: "carriedDetail", builder: "npcs.carriedForGM", carries: ["inventory", "lentBy"],

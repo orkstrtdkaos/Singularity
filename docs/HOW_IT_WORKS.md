@@ -483,7 +483,7 @@ working papers; **this is the answer.**
 | 09-08 | ✅ **ONE ROSTER, DERIVED; THE OPPONENT GATE; R41's FORM; THE VEIL LOADED** | Erik: *"all NPCs should at least be referenced from a single source list… even if we need to keep separate lists for code"* · *"any condition must be an opposed roll"* stands unbuilt (§A) | `scripts/roster.mjs` reads six files from disk and asks `personOpponentFor` for each; 144 records, 125 reachable, **40 would fight at level 1** (ratchet, Aevi's §2 owns it); `npcs/legends.json`'s five are read by NOTHING and Corvane is a hinge on 4 of 6 arcs (§10 gap); `notAnOpponent: true` refuses by name; a Sovereign is ONE record with `forms.diminished`/`forms.final` chosen by the arc's live stage; `the_veil` + `power_cosmology` loaded, attached, and on the GM's ask view | `§147` · `§59` refixtured on Sister Alder · `roster --check` is a suite | §10 gains the hinge gap; docs/ROSTER.md is generated between markers, prose kept above |
 | 09-08 | ✅ **THE FORTY ARE DERIVED, NOT AUTHORED — ROLE → TIER → THE CHAIN THAT ALREADY RAN** | Erik: *"I thought you were going to have him make the generative engine build out the remaining empty NPCs?"* · Aevi, correcting her own spec: *"NOT A MISSING SHEET. NOT A MISSING KIT. ONE MISSING FIELD."* | 40 of 40 level-1 records were level 1 for one reason — no `tier` — while `tierFloor` already fired for the 64 who had one. `rules/tier_signals.json` (CONTENT, correctable without code) → `tierFromRole` → `derivedLevel`, consulted ONLY where a record is silent. **40 → 0**, ratchet tightened; 19 regional · 12 notable · 9 heroic. Guards: authored tier and level both outrank it; default `notable`; a hard `ceiling: heroic` so no regex reaches epic/legendary/mythic; `tierDerived` on the SHEET, never stamped onto the record; no code fallback, so an absent table derives nothing | `§148` · `§147`'s level-1 ratchet 40→0 | ⚠ **and my roster column was too generous**: R47's bare `_strike` was counting as a kit, so 62 records read as armed when they have no real craft — corrected, and it makes `domains` on the legends the same one-field problem one tier up |
 
-**Last verified: 2026-09-12 · v1.9.457 · 429 crafts.**
+**Last verified: 2026-09-12 · v1.9.458 · 429 crafts.**
 
 ---
 
@@ -1092,6 +1092,26 @@ his every beat; it now counts aliases as names and lets the fullest name win. An
 `collapseScenePresence` now runs on every beat's scene after the identity pass and on the stored scene at load — the record's name keeps
 the seat, the other name folds in, states joined, and the aside says *"One person, one seat: Huginn is Maren Ossitide"*. Maren's record
 carries the aliases the story called her by (`huginn-is-maren`, version 54), and KNOWN PEOPLE says *(also called Huginn, Marrow)*.
+
+✅ **Three docstrings that claimed a reader (Aevi 2026-09-11, `REPLY_aevi_20260911j` §2) now have one (`§177`).** `debtRefusalAt` said
+*"the GM block reads it"* and nothing did: the debts block now ends with the refusal for the community you are standing in — an
+escalation-2 debt held by one of its people means no trade, hire or shelter here, narrated at every door until it is settled.
+`actingSlots` said *"`namedLimit` NOW COMES FROM `commandSlots`"* and was never called: now it is, with `commandSlots` as the named
+limit, and the tier it reads (`MELEE_TIERS`, Erik's numbers) can only *narrow* the forward pick — a legion leaves you one figure. Never
+widened: a full-resolve tier (three or fewer) would bring everyone forward and leave nobody folded, and §150's fold contributions live
+on the folded; whether three-or-fewer means everyone *acts* or everyone *contributes* is a ruling still open. `summonSheetFor` said *"THE SHEET ITSELF"* and no fight ever asked for one: a craft with a `summon` block that lands on the
+action phase now calls its thing in — sheeted from the caster's level and the craft's gap, a crit stronger and a partial thinner, one
+living answer per craft per fight, in the roster from the next round as a folded ally with the block's contributions, said in the
+round's events, and gone with the encounter (no crafts, no growth, no kit, no permanence). A per-rank `count` ladder is read as
+authored (1 → 3 → a crew). And the gate Aevi asked for: the wiring audit fails on any test-only export whose docstring claims a live
+reader in the present tense — the words are the three that were found, and the seven that stand match none of them.
+
+✅ **Two selects, one key (Erik 2026-09-12: *"the manage screen… switches to a wrong person after I click to add as hands"*, `§178`).**
+The holding card and its manage modal each rendered `<select data-hold-hand>` for the same place, and the Add-hands and Post-a-guard
+handlers took the first such select in the page — the card's — so a pick in the modal landed on whoever the card's select showed. Each
+button now reads the select beside it. And the card offered company and delegates while the modal offered everyone known, here and
+not hostile (SPEC_hold_costs §5), which is why the people he wanted were on one screen and not the other; one `askable()` rule feeds
+both, the keeper excluded on the card.
 
 ✅ **Eight stats (Erik 2026-09-11: *"there are 8 stats, not the 4 we started with. they now need a spread of the 8"*).** Every
 craft row rolls ONE sub-attribute — a dial, `craftSubAttributes.enabled`, on; off, every craft rolls its parent as before. An authored `subAttribute` on a craft wins; otherwise `resolution.craftSubAttributes` splits

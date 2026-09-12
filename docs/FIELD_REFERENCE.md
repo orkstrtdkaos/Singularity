@@ -720,7 +720,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `peril` | 6 | `root`×6 | ✅ READ | `art.js`, `gm.js` |
 | `penetration` | 6 | `mechanic`×6 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
 | `persistUntilHealed` | 6 | `tree`×6 | ✅ READ | `battle_turn.js`, `capabilities.js`, `conditions.js` |
-| `summon` | 5 | `root`×5 | ✅ READ | `gm.js`, `npcsheet.js`, `roundreceipt.js` |
+| `summon` | 5 | `root`×5 | ✅ READ | `encounters.js`, `gm.js`, `npcsheet.js` |
 | `wildVariance` | 5 | `root`×5 | ✅ READ | `resolve.js`, `app.js` |
 | `companionStageName` | 3 | `tree`×3 | ⛔ DARK | — |
 | `read` | 3 | `root`×1 `tree`×2 | ✅ READ | `art.js`, `battle_turn.js`, `borncontract.js` |

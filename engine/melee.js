@@ -107,7 +107,9 @@ export function commandSlots(character, { cfg = {}, renownBand = null } = {}) {
  *  spend a slot on nobody. */
 export function bringForward(allies = [], { chosen = null, slots = 1 } = {}) {
   const live = (allies || []).filter(a => a && a.present !== false && !a.downed);
-  const n = Math.max(1, num(slots, 1));
+  // §177: a full-resolve tier passes Infinity — everyone comes forward. num() reads a non-finite as absent and would have made it ONE,
+  // folding everyone but one in exactly the fights where everyone acts; the §177 check caught it before it played.
+  const n = slots === Infinity ? Infinity : Math.max(1, num(slots, 1));
   const byId = new Map(live.map(a => [a.id, a]));
   const out = [];
   // ⚠️ THE PLAYER IS ALWAYS FORWARD AND DOES NOT SPEND A PICK. They are the one whose attention this models.

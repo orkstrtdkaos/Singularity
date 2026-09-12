@@ -184,9 +184,7 @@ export function leansOf(entry, { roleAttributes = null } = {}) {
 }
 
 /** The single strongest lean, kept for callers that want one. ⚠️ `leansOf` is the honest answer. */
-export function leanOf(entry, opts = {}) {
-  return leansOf(entry, opts)[0] || null;
-}
+// (leanOf removed — BUILD_LIST_2.0.0 §1: a one-line wrapper around leansOf, superseded the day leansOf was written; nothing called it.)
 
 /** ⛔ THE SHEET. Same shape a contest already takes, so an NPC can be a combatant without a second format.
  *  ⚠️ AN AUTHORED SHEET WINS OUTRIGHT — this fills in for people nobody has written down yet, and the

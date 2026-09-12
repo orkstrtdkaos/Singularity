@@ -31,7 +31,7 @@ import { frameModel, encounterKind, frameExits, frameSize, frameTransition, chas
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "../engine/recurrence.js";
 import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from "../engine/affinities.js";
 import { recordCoUse, coUseCount, currentStage, refreshEvolvingItems, noteCoUseAndRefresh, evolvedItemsForGM } from "../engine/evolution.js";
-import { tierPrice, homeClassOf, isCrossClass, skillPointCost, forkFor, forkPending, chosenFork, setFork, rankExpression, forkPaths, skillGraphModel, nativeGrantsFor, combinationsAvailableFor } from "../engine/skilltree.js";
+import { tierPrice, homeClassOf, isCrossClass, skillPointCost, forkFor, forkPending, chosenFork, setFork, rankExpression, forkPaths, skillGraphModel, combinationsAvailableFor } from "../engine/skilltree.js";
 import { combinationThresholdMet, ripeAxisTouchCombinations } from "../engine/practice.js";
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, familyClass, FUNCTION_FAMILIES, FAMILY_COLOR, FAMILY_GLYPH, FAMILY_SHAPE, shapeOfFamily } from "../engine/functions.js";
 import { arcSeed, fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc } from "../engine/personalArc.js";
@@ -2958,10 +2958,8 @@ await (async () => {
   check("combination with a co-activation trigger fires at the threshold", combinationThresholdMet(hunter, machineCombo, {}) === true);
   check("ripeAxisTouchCombinations surfaces the ripe, unowned, tagged combination", ripeAxisTouchCombinations(hunter, { sc2: machineCombo }, {}).some(a => a.id === "sc2"));
 
-  // nativeGrantsFor / combinationsAvailableFor read the tags; empty when nothing is classified
-  check("nativeGrantsFor returns [] when no ability is tagged native", nativeGrantsFor("umbral", catalog).length === 0);
-  const withNative = { ...catalog, born: { id: "born", name: "Born", tradition: "umbral", nativeOrCombination: "native", levelReq: 1 } };
-  check("nativeGrantsFor returns a tagged native of the tradition", nativeGrantsFor("umbral", withNative).some(a => a.id === "born"));
+  // (nativeGrantsFor deleted — BUILD_LIST_2.0.0 §1: a catalogue filter nobody called. The flag it read keeps its live readers.)
+  check("nativeOrCombination is still read by the live paths its catalogue filter was deleted from", /nativeOrCombination/.test(readFileSync(join(root, "engine/skilltree.js"), "utf8")));
 })();
 
 // --- SNG-100b: the standing bar (per-people standing + teacher gate) ---
@@ -17522,8 +17520,8 @@ await (async () => {
       SB211.isObscureDecl({ obscure: true, function: "strike" }) === true
       && SB211.isObscureDecl({ function: "conceal" }) === false
       && SB211.isObscureDecl({ function: "deceive" }) === false);
-    check("CCODE-211: and the sense tag is its own flag, not a guess from the verb",
-      SB211.isSenseDecl({ sense: true }) === true && SB211.isSenseDecl({ function: "reveal" }) === false);
+    // (isSenseDecl deleted — BUILD_LIST_2.0.0 §1: nothing ever set `decl.sense`; the sense step reads the verb through declaredSense.)
+    check("CCODE-211: the sense step reads the VERB — no declaration carries a `sense: true` flag anywhere", !/sense: true/.test(readFileSync(join(root, "engine/battle_turn.js"), "utf8")));
 
     // ⛔ THE TIE RULE, AT ITS BOUNDARY. Aevi named this as the rule most likely to be softened in
     // implementation because it looks unfair in a unit test. It is gated at the exact boundary so
@@ -19909,7 +19907,7 @@ await (async () => {
       sp.lean === "practical" && sp.attributes.practical > sp.attributes.mental);
     // ⚠️ THE LEAN IS CONTENT-SHAPED, not a table welded into the engine.
     check("CCODE-248: the role→attribute lean is injectable",
-      NS.leanOf({ role: "night-singer" }, { roleAttributes: { social: ["singer"] } }) === "social");
+      NS.leansOf({ role: "night-singer" }, { roleAttributes: { social: ["singer"] } })[0] === "social");   // leanOf deleted (BUILD_LIST_2.0.0 §1); the same assertion through the live function
 
     // ⛔ AN AUTHORED SHEET WINS OUTRIGHT. Aevi's 111 named people should get real ones over time, and the
     // moment one exists the derivation stops applying to that person.

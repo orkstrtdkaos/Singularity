@@ -31,7 +31,7 @@ import { effectiveEnergyCost, autoAdvancePracticedRanks, SUB_OF, craftSubAttribu
 import { capabilityMenu, resolveTier, offersFreeFloor } from "./capabilities.js";
 import { usableCombatItems, wieldBonusFor, consumeItem, removeItem, wornSoak, wornSoakLayers } from "./inventory.js";
 import { recordUse } from "./practice.js";
-import { applyCondition } from "./conditions.js";
+import { applyCondition, clearOnHeal, activeConditions } from "./conditions.js";
 import { protectionFromCraft, tickProtections } from "./intercept.js";
 import { authoredBlock } from "./craftmechanics.js";
 import { smartClamp } from "./namematch.js";
@@ -155,6 +155,14 @@ export function applyRoundToCharacter(character, rr, decl, { catalog = {}, rules
   character.health = Math.max(0, Math.min(character.maxHealth, character.health + (rr.deltas?.health || 0)));
   character.energy = Math.max(0, character.energy + (rr.deltas?.energy || 0));
   if (rr.sealed) character.craftSealedUntilRest = true;   // R35: a kill's seal outlives the fight
+  // ✅ BUILD_LIST_2.0.0 §1 / CCODE-216: THE OTHER HALF OF THE CLOCK. `clearOnHeal` was written with the rule ("a heal clears what rest
+  // could not — by id") and called by nothing, so a persist-until-healed condition never cleared: rest honoured the rule and nothing
+  // honoured its other half. A heal that LANDS on this character (the round's `healing`, player side, amount above zero — an inverted
+  // mending that burns a vulnerable subject is not a heal) clears the conditions a night would not touch, and only those.
+  if (rr.healing && rr.healing.side === "player" && Number(rr.healing.amount) > 0) {
+    const mendable = activeConditions(character).needMending.map(c => c.id);
+    if (mendable.length) { const { cleared } = clearOnHeal(character, mendable); if (cleared.length) beats.push(`mended: ${cleared.map(c => c.name || c.id).join(", ")}`); }
+  }
   if (rr.imposed && !rr.imposed.refused) {
     const cond = { id: rr.imposed.condition, name: rr.imposed.name || rr.imposed.condition,
       persistUntilHealed: !!rr.imposed.persistUntilHealed, sinceDay: character.clock?.day ?? null };

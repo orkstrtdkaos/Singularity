@@ -152,10 +152,8 @@ export function skillGraphModel(catalog, emergence, character, { attributeGates,
 /** The native abilities of a tradition — what being of this people simply IS. Granted at rank 1, free,
  *  at primary-domain selection (attribute-gated per attribute_gates.json). Reads `nativeOrCombination`;
  *  returns [] for a tradition whose abilities aren't classified yet (the engine never guesses). */
-export function nativeGrantsFor(tradition, catalog = {}) {
-  return Object.values(catalog).filter(ab =>
-    ab && ab.nativeOrCombination === "native" && (ab.tradition || ab.powerSystem) === tradition);
-}
+// (nativeGrantsFor removed — BUILD_LIST_2.0.0 §1: a catalogue filter nobody called; the grant table in progression.js is the live path,
+//  and `nativeOrCombination` keeps its readers in functions.js, practice.js and this file.)
 
 /** The axis-touch combinations a tradition can currently claim: `nativeOrCombination === "combination"`,
  *  of this tradition, not already owned, and whose narrative threshold is met. `thresholdMet(ab)` is

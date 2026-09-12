@@ -4967,7 +4967,7 @@ function renderCreate() {
     // SNG-192 §1: the by-right starter kit is computed HERE, not silently at commit, so a pick can never be
     // wasted on a craft the character already gets free. Grants are shown as a non-spendable group and
     // EXCLUDED from the choosable pool. (Recomputed on every entry, so a late attribute change is honoured.)
-    const grantIds = nativeGrantIdsFor({ domains: state.domains, attributes: state.attrs, nativeTradition: state.nativeTradition, origin: state.origin }, CONTENT.rules);
+    const grantIds = nativeGrantIdsFor({ domains: state.domains, attributes: state.attrs, nativeTradition: state.nativeTradition, origin: state.origin }, CONTENT.rules, CONTENT.traditionIndex);
     const grantSet = new Set(grantIds);
     const choosable = creationChoosable(state, grantSet);
     state.abilities = state.abilities.filter(id => choosable.some(a => a.id === id)).slice(0, maxAbilities());
@@ -5251,7 +5251,7 @@ function renderCreate() {
     ensureCodex(character);
     ensureCharacterStyle(character); // SNG-BATCH-7: this character earns its OWN play-style
     character.grantsVersion = 1; // born after banked growth — no retro grant owed
-    applyNativeGrants(character, CONTENT.rules); // SNG-101b: granted their primary tradition's basics by right of being what they are
+    applyNativeGrants(character, CONTENT.rules, CONTENT.traditionIndex); // SNG-101b: granted their primary tradition's basics by right of being what they are
     // SNG-345: the martial FLOOR, granted at creation so nobody plays a single beat helpless. Reconcile
     // step 27 covers characters who already exist; this covers the ones being born.
     { const m = grantMartialKit(character, CONTENT.rules.martialPaths); if (m.granted.length) console.log(`[chargen] baseline kit: ${m.granted.join(", ")}${m.kit ? ` (+${m.kit} form kit)` : ""} — ${m.why}`); }

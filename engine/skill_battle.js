@@ -827,7 +827,7 @@ export function senseResistOf(oppSheet = {}, sb) {
  *  a conceal craft (`senseResistOf`); this is the other thing — what you CHOSE this round.
  */
 export function isObscureDecl(decl) { return decl?.obscure === true; }
-export function isSenseDecl(decl) { return decl?.sense === true; }
+// (isSenseDecl removed — BUILD_LIST_2.0.0 §1: `decl.sense` was set nowhere, and the note below says why requiring it would be wrong.)
 
 /** ⛔ THE OBSCURER WINS TIES, AND THIS IS THE RULE AEVI FLAGGED AS MOST LIKELY TO BE SOFTENED.
  *

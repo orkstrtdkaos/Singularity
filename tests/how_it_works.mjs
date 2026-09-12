@@ -1833,6 +1833,51 @@ console.log("\n── §168 · a fold stays folded ──");
     /function sectionOpen\(key, defaultOpen\)/.test(app168) && /profile\.uiSidebar = \{ open:/.test(app168));
 }
 
+/* ══════════ §169 — SIX TEST-ONLY EXPORTS DECIDED (BUILD_LIST_2.0.0 §1, first slice) ══════════ */
+// ⛔ Aevi: "Each of the nine is a decision: wire, delete, or mark. The decision is the deliverable, not the number." The audit's lever
+// check forbids "mark" for any export with no same-module caller — so each is WIRED or DELETED, and this gate holds the PROPERTY:
+// a heal clears what rest could not and rest does not; pole-ness is asked by name and actually reached; three dead names are gone.
+console.log("\n── §169 · six test-only exports decided ──");
+{
+  const BT169 = await import("../engine/battle_turn.js");
+  const PR169 = await import("../engine/progression.js");
+  const TR169 = await import("../engine/traditions.js");
+  const GR169 = await import("../engine/gm_registry.js");
+  const LF169 = String.fromCharCode(10);
+  const mk169 = () => ({ id: "c169", health: 10, maxHealth: 40, energy: 20, maxEnergy: 50, abilities: [], clock: { day: 3 },
+    conditions: [{ id: "grey_hand", kind: "hobble", persistUntilHealed: true, sinceDay: 1 }, { id: "winded", kind: "hobble", rounds: 2 }] });
+  const healed169 = mk169();
+  BT169.applyRoundToCharacter(healed169, { deltas: { health: 6 }, healing: { side: "player", amount: 6 } }, { function: "heal" }, {});
+  check("§169: ⛔ WIRED clearOnHeal — a heal that LANDS on the player clears the persist-until-healed condition and leaves the timed one to tick",
+    !healed169.conditions.some(c => c.id === "grey_hand") && healed169.conditions.some(c => c.id === "winded"), JSON.stringify(healed169.conditions));
+  const notHealed169 = mk169();
+  BT169.applyRoundToCharacter(notHealed169, { deltas: { health: 3 } }, { function: "strike" }, {});
+  check("§169: …and health that returns WITHOUT a heal (a pressure tick, a rest) clears nothing — that is the whole rule", notHealed169.conditions.length === 2);
+  const burned169 = mk169();
+  BT169.applyRoundToCharacter(burned169, { deltas: { health: -6 }, healing: { side: "player", amount: -6, affinity: "vulnerable" } }, { function: "heal" }, {});
+  check("§169: …a mending that BURNS a vulnerable subject (amount below zero) is not a heal and clears nothing", burned169.conditions.length === 2);
+  const foeHeal169 = mk169();
+  BT169.applyRoundToCharacter(foeHeal169, { deltas: { health: 0 }, healing: { side: "opponent", amount: 9 } }, { function: "heal" }, {});
+  check("§169: …and the foe mending ITSELF clears nothing on you", foeHeal169.conditions.length === 2);
+  check("§169: …the round REALLY returns healing — the wire reads a field the fight emits, not one this gate invented",
+    (() => { const line = rd("engine/skill_battle.js").split(LF169).find(l => l.includes("const out = { state: newState")) || ""; return /healing/.test(line); })());
+  const idx169 = { ringPos: { umbral: 4 } };
+  const rules169 = { traditionNativeGrants: { umbral: { anchors: ["a1"] } }, folkOriginIds: ["valleyfolk"], folkAccessibleIds: ["f1", "f2"], grantCap: 5 };
+  check("§169: ⛔ WIRED isPoleTradition — a pole tradition's table is used; a folk origin with a stray table is NOT read as a pole",
+    TR169.isPoleTradition("umbral", idx169) === true && TR169.isPoleTradition("valleyfolk", idx169) === false
+      && PR169.nativeGrantIdsFor({ domains: { primary: "umbral" }, attributes: { mental: 5 } }, rules169, idx169).includes("a1")
+      && !PR169.nativeGrantIdsFor({ origin: "valleyfolk", domains: { primary: "valleyfolk" } }, { ...rules169, traditionNativeGrants: { valleyfolk: { anchors: ["stray"] } } }, idx169).includes("stray"));
+  check("§169: …and the index REACHES it from both app call sites — the predicate is asked, not merely named",
+    (rd("app.js").match(/nativeGrantIdsFor\([^;]*CONTENT\.traditionIndex/g) || []).length >= 1 && (rd("app.js").match(/applyNativeGrants\([^;]*CONTENT\.traditionIndex/g) || []).length >= 1);
+  check("§169: ⛔ WIRED registryKeys — assembleGMContext filters through it, so the audit is no longer its only reader",
+    /registryKeys\(view\)/.test(rd("engine/gm_registry.js").replace(/^\s*\/\/.*$/gm, "")) && Array.isArray(GR169.registryKeys("ask")) && GR169.registryKeys("ask").length > 0);
+  const gone169 = ["isSenseDecl", "leanOf", "nativeGrantsFor"].filter(n => new RegExp("export function " + n + "\\b").test(rd("engine/skill_battle.js") + rd("engine/npcsheet.js") + rd("engine/skilltree.js")));
+  check("§169: ⛔ DELETED isSenseDecl, leanOf, nativeGrantsFor — none is exported any more, and SYSTEM_SPEC's API line no longer names leanOf",
+    gone169.length === 0 && !/leanOf/.test(rd("SYSTEM_SPEC.md").split("\n").filter(l => /API/.test(l) && /npcsheet/.test(l)).join("")), gone169.join(", "));
+  check("§169: …and the flag nativeGrantsFor read keeps its OTHER readers — nativeOrCombination is not orphaned",
+    ["functions.js", "practice.js", "skilltree.js"].filter(f => /nativeOrCombination/.test(rd("engine/" + f).replace(/^\s*\/\/.*$/gm, ""))).length === 3);
+}
+
 /* ══════════ §14 — THE FOLD CANNOT BEAT AN IMMUNITY THE BLOW COULD NOT ══════════ */
 // ⛔ FOUND BY RUNNING AEVI'S TWELVE CRAFTS THROUGH A MELEE-SCALE FIGHT (CCODE-313), which is the whole
 // reason Erik asked for a big-battle test. A physical-immune foe took ZERO from the player's typed blow and

@@ -579,8 +579,10 @@ export const GM_CONTEXT = [
  *  This is the ONLY sanctioned way to build a gmTurn/gmAsk ctx. */
 export function assembleGMContext(view, env) {
   const ctx = {};
+  // ✅ BUILD_LIST_2.0.0 §1: the view's reach is asked through `registryKeys`, the function that answers it — one filter, not two.
+  const reach = new Set(registryKeys(view));
   for (const row of GM_CONTEXT) {
-    if (!row.views.includes(view)) continue;
+    if (!reach.has(row.key)) continue;
     ctx[row.key] = row.build(env);
   }
   // SNG-182 §2.5: THE GM GETS NAMES, NOT TOKENS. This is the single choke point every view already

@@ -10,7 +10,7 @@
 import { applyLadderGrants } from "./ladder.js";
 import { slugify } from "./quests.js";
 import { meetsLearnGate, meetsRank3Gate, atCapacity, skillPointCost, learnPointCost, rankExpression, forkPending, abilityTier, tierPrice } from "./skilltree.js";
-import { domainAccess, traditionOf, isFolkTradition, antipodeOf } from "./traditions.js";
+import { domainAccess, traditionOf, isFolkTradition, antipodeOf, isPoleTradition } from "./traditions.js";
 import { standingWithPeople } from "./reputation.js";
 import { trainerFor } from "./company.js";
 import { smartClamp } from "./namematch.js"; // SNG-152
@@ -185,9 +185,12 @@ export function retroLevelGrants(character, rules) {
  *  physical / practical / social, filling from the mental caster-spine when the lean pool is thin),
  *  capped at rules.grantCap. Data-driven from `rules.traditionNativeGrants` (SNG-101b content). The
  *  PRIMARY tradition is authoritative via `domains.primary` (SNG-094), with a legacy fallback. Pure. */
-export function nativeGrantIdsFor(character, rules) {
+export function nativeGrantIdsFor(character, rules, traditionIndex = null) {
   const primary = character?.domains?.primary || character?.nativeTradition || character?.origin;
+  // ✅ BUILD_LIST_2.0.0 §1: pole-ness asked BY NAME. `if (!table)` was `isPoleTradition` written by accident — a missing table and a
+  // folk origin read the same. With the index in hand the predicate decides; without one (old callers) the table's presence stands.
   const table = rules?.traditionNativeGrants?.[primary];
+  const pole = traditionIndex ? isPoleTradition(primary, traditionIndex) : !!table;
   // ⛔ OI-9 — A FOLK ORIGIN HAS NO POLE TABLE, AND USED TO GET NOTHING. The Valleyfolk are `nativeKind:
   // folk` with `nativeTradition: null`, so `primary` resolved to the origin id and no table matched — an
   // early `return []`. Erik ruled the pool is derived from the `folkAccessible` flag; `state.js` supplies
@@ -195,7 +198,7 @@ export function nativeGrantIdsFor(character, rules) {
   //
   // ⚠️ GATED ON THE ORIGIN BEING FOLK, not merely on a missing table — otherwise a typo’d tradition id
   // would silently hand out the folk kit instead of failing visibly.
-  if (!table) {
+  if (!table || !pole) {
     const folkOrigins = rules?.folkOriginIds || [];
     const pool = rules?.folkAccessibleIds || [];
     if (pool.length && folkOrigins.includes(character?.origin)) {
@@ -217,7 +220,7 @@ export function nativeGrantIdsFor(character, rules) {
 
 /** Grant any MISSING primary-tradition native basics at rank 1. Law 14: only ADDS — never lowers an
  *  owned rank (an already-earned basic keeps its rank), never removes. Idempotent. Returns granted ids. */
-export function applyNativeGrants(character, rules) {
+export function applyNativeGrants(character, rules, traditionIndex = null) {
   character.abilities = character.abilities || [];
   const owned = new Set(character.abilities.map(a => a.abilityId));
   const granted = [];
@@ -235,7 +238,7 @@ export function applyNativeGrants(character, rules) {
  *  ⚑ THIS RE-STAMPS WHAT IS ALREADY OWNED. It can only ever FREE capacity, never take it: an id must be in the
  *  character's own by-right set to be touched, and the rank and every other field are left exactly as they are.
  *  PURE-ish (mutates the entries), idempotent, and it returns what it corrected so the player can be told. */
-export function restampNativeGrants(character, rules) {
+export function restampNativeGrants(character, rules, traditionIndex = null) {
   const owned = new Map((character?.abilities || []).map(a => [a.abilityId, a]));
   const fixed = [];
   for (const id of nativeGrantIdsFor(character, rules)) {

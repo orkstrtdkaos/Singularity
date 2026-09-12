@@ -132,7 +132,14 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.470";
+// ⛔ 2026-09-12 — THE SOURCE OF TRUTH IS NOW `engine/version.js`. `state.js` loads the whole
+// content pack and could not reach a const declared here, so every authored file was fetched with no version
+// and a browser served them from cache: a new app.js reading last release's crafts, rules and signals. One
+// source of truth, four stamps, one generator (`scripts/module_map.mjs`) that writes and checks them.
+// ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
+// apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
+// `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
+const APP_VERSION = "1.9.471";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.

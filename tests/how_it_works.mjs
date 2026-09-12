@@ -12323,6 +12323,59 @@ console.log("\n── §191 · the meetings already on the record, the quest its
     && JSON.stringify(Object.fromEntries([...FW191.atSideRows(silas191, opts191), ...FW191.poolRows(silas191, opts191)].map(r => [r.id, r.level]))) === snap191);
 }
 
+/* ══════════ §192 — SNG-545 · A NEW app.js SERVED AGAINST LAST RELEASE'S ENGINE AND CONTENT (found while verifying v1.9.470) ══════════ */
+console.log("\n── §192 · the build stamps the modules and the content, or a browser answers a fresh app.js from a stale cache ──");
+{
+  const html192 = rd("index.html");
+  const app192 = rd("app.js");
+  const state192 = rd("engine/state.js");
+  const ver192 = (rd("engine/version.js").match(/export const APP_VERSION = "([^"]+)"/) || [])[1];
+
+  // ⛔ THE DEFECT, MEASURED IN THE BROWSER AND NOT REASONED ABOUT: index.html cache-busts app.js and the stylesheet, and app.js
+  // imports 107 engine modules by plain relative path — so the page fetched the new app.js and served a CACHED `quests.js` beside
+  // it: "The requested module './quests.js' does not provide an export named 'creditQuestGiver'". ⚠️ AND THE SILENT CASE IS WORSE:
+  // a stale module that still has every export just behaves like last release, which looks exactly like a bug in the new one.
+  const mapBlock = (html192.match(/<script type="importmap">([\s\S]*?)<\/script>/) || [])[1];
+  const map192 = mapBlock ? JSON.parse(mapBlock).imports : null;
+  const engineMods = readdirSync(join(root, "engine")).filter(f => /\.(js|mjs)$/.test(f)).map(f => `./engine/${f}`);
+  check(`§192: ⛔ every one of the ${engineMods.length} engine modules is pinned in index.html's import map at the running build`,
+    !!map192 && engineMods.every(p => map192[p] === `${p}?v=${ver192}`),
+    engineMods.filter(p => map192?.[p] !== `${p}?v=${ver192}`).slice(0, 6).join(", "));
+  // ⛑ ONE KEY CATCHES BOTH SPELLINGS: import-map keys resolve against the document and specifiers against their referrer, then the
+  // two are compared as URLs — so `./engine/melee.js` covers app.js's `./engine/melee.js` AND carriage.js's own `./melee.js`.
+  check("§192: …and the map sits BEFORE the first module script, which is the only place a browser will read one",
+    html192.indexOf('<script type="importmap">') > 0
+    && html192.indexOf('<script type="importmap">') < html192.indexOf('<script type="module" src="app.js'));
+  check("§192: …and the one module imported dynamically from outside engine/ is pinned too",
+    /import\("\.\/scripts\/world\/terrain\.mjs"/.test(app192) && map192?.["./scripts/world/terrain.mjs"] === `./scripts/world/terrain.mjs?v=${ver192}`);
+
+  // ⛔ THE OTHER HALF: THE CONTENT. With the modules pinned, the page still served a cached `tier_signals.json` and Dara read
+  // level 7 where the engine says 14 — a council member rendered as one more irrigator by a stale rules file. app.js had been
+  // versioning the five world files it fetches itself since SNG-537; the content pack never was.
+  check("§192: ⛔ the content loader stamps the build on EVERY authored file it fetches, both the JSON and the prose",
+    /const vq = \(path\) => path \+ \(String\(path\)\.includes\("\?"\) \? "&" : "\?"\) \+ "v=" \+ APP_VERSION;/.test(state192)
+    && /async function fetchJSON\(path\) \{\s*\n\s*const res = await fetch\(vq\(path\)\);/.test(state192)
+    && /async function fetchText\(path\) \{\s*\n\s*const res = await fetch\(vq\(path\)\);/.test(state192)
+    && /import \{ APP_VERSION \} from "\.\/version\.js"/.test(state192));
+  check("§192: …and a path that already carries a query gets `&` rather than a second `?`",
+    (() => { const vq = (path) => path + (String(path).includes("?") ? "&" : "?") + "v=" + ver192;
+      return vq("a/b.json") === `a/b.json?v=${ver192}` && vq("a/b.json?cb=1") === `a/b.json?cb=1&v=${ver192}`; })());
+
+  // ⛔ ONE NUMBER, THREE PLACES, AND SOMETHING THAT FAILS WHEN THEY DRIFT. app.js keeps a const because six readers take the
+  // version from it; that copy is only honest while a gate breaks on disagreement.
+  const stamps192 = [...new Set([...html192.matchAll(/\?v=([0-9.]+)/g)].map(m => m[1]))];
+  check(`§192: ⛔ engine/version.js, app.js's const and every stamp in index.html all read v${ver192}`,
+    !!ver192 && (app192.match(/const APP_VERSION = "([^"]+)"/) || [])[1] === ver192
+    && stamps192.length === 1 && stamps192[0] === ver192,
+    `version.js ${ver192} · app.js ${(app192.match(/const APP_VERSION = "([^"]+)"/) || [])[1]} · index.html ${stamps192.join("/")}`);
+  check("§192: …and the two writers know about all three — the bump script writes them and the map generator refuses when they disagree",
+    // ⚠️ `.includes()` rather than a regex, which is FIELD_REFERENCE §11's own rule: the question is whether a literal
+    // appears, and a regex carried through a patch script is exactly where this project loses its backslashes.
+    rd("scripts/bump_version.mjs").includes('join(root, "engine", "version.js")')
+    && rd("scripts/bump_version.mjs").includes("export const APP_VERSION")
+    && rd("scripts/module_map.mjs").includes("one build cannot have two versions"));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

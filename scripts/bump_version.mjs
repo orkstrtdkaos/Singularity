@@ -64,4 +64,13 @@ const idxSrc = read(INDEX);
 const stamps = [...idxSrc.matchAll(/\?v=([0-9.]+)/g)].map(m => m[1]);
 writeFileSync(INDEX, idxSrc.replace(/\?v=[0-9.]+/g, `?v=${next}`), "utf8");
 
-console.log(`${now} → ${next}   (app.js + ${stamps.length} cache stamp${stamps.length === 1 ? "" : "s"} in index.html)`);
+// ⛔ 2026-09-12 — AND THE THIRD FILE, which is now the SOURCE the other two are checked against:
+// `engine/version.js`. It exists because `state.js` loads the whole content pack and cannot reach a const
+// declared in app.js, so every authored file was fetched unversioned and a browser served them from cache —
+// a new app.js reading last release's rules and signals. ⚠️ Leaving it out here would be the very
+// two-files-kept-in-step-by-hand defect this script was written to end, one file wider.
+const VERSION_MOD = join(root, "engine", "version.js");
+writeFileSync(VERSION_MOD, read(VERSION_MOD).replace(/export const APP_VERSION = "[^"]+"/, `export const APP_VERSION = "${next}"`), "utf8");
+
+console.log(`${now} → ${next}   (app.js + engine/version.js + ${stamps.length} cache stamp${stamps.length === 1 ? "" : "s"} in index.html)`);
+console.log(`  run: node scripts/module_map.mjs   (it re-pins the ${stamps.length > 1 ? "import map" : "modules"} and fails if the three disagree)`);

@@ -1,7 +1,7 @@
 # THE APPARATUS — every harness, what it is for, and whether it runs
 
 ⛔ **ERIK, 2026-08-29: *"I want this to be a well oiled factory."*** ⚠️ **A factory you cannot see is not
-well oiled.** 101 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
+well oiled.** 102 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
 were gates, which were reports, and which had quietly stopped being wired into anything.
 
 ```bash
@@ -10,7 +10,7 @@ node scripts/apparatus.mjs --md     # …as markdown for §5
 node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 ```
 
-**Last measured: 2026-09-12 · v1.9.470 · 101 files.**
+**Last measured: 2026-09-12 · v1.9.471 · 102 files.**
 
 ---
 
@@ -134,7 +134,7 @@ worthless.
 | harness | kind | assertions | purpose |
 |---|---|---|---|
 | `tests/smoke` | ✅ GATE | 3562 | — |
-| `tests/how_it_works` | ✅ GATE | 1956 | CCODE-285 |
+| `tests/how_it_works` | ✅ GATE | 1963 | CCODE-285 |
 | `tests/skill_battle_sim` | ✅ GATE | 217 | SNG-098: the two-sided contest + fog-of-war invariant |
 | `tests/content_ci` | ✅ GATE | 192 | SNG-BATCH-10 Phase 4 / SNG-040/064: the content integrity gate |
 | `tests/craft_crit` | ✅ GATE | 43 | miss // it and YOU HAVE ONLY MADE CHAOS |
@@ -185,6 +185,7 @@ worthless.
 | `scripts/roster` | 🔧 TOOL+SELFTEST | 3 | ONE ROSTER, DERIVED, ACROSS SIX FILES THAT MUST NOT BE MERGED |
 | `scripts/run_tests` | 🔧 TOOL+SELFTEST | 3 | EVERY SUITE RUNS, EVEN AFTER ONE GOES RED |
 | `scripts/skills_inject` | 🔧 TOOL+SELFTEST | 3 | regenerate the derived half of docs/SKILLS |
+| `scripts/module_map` | 🔧 TOOL+SELFTEST | 2 | STAMP AN IMPORT MAP INTO index |
 | `scripts/npc_pipeline` | 🔧 TOOL+SELFTEST | 2 | THE DOORS A PERSON PASSES TO BECOME PLAYABLE, DRIVEN RATHER THAN DESCRIBED |
 | `scripts/substrate_atlas` | 🔧 TOOL+SELFTEST | 2 | 39 REGIONS × 6 SOURCES, PRINTED ONCE, BECAUSE NOBODY HAS EVER SEEN IT |
 | `scripts/apparatus` | 🔧 TOOL+SELFTEST | 1 | CCODE-301 |

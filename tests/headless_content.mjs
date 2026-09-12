@@ -26,8 +26,13 @@ export function installDiskFetch() {
     // Anything that looks like a URL is somebody else's business — pass it through untouched, so installing
     // this never silently intercepts a network call a test meant to make.
     if (/^[a-z]+:\/\//i.test(p)) return real ? real(path, ...rest) : Promise.reject(new Error("no network fetch available"));
+    // ⛔ A QUERY STRING IS THE SERVER'S BUSINESS, NOT THE FILE'S. SNG-545 puts `?v=<build>` on every content fetch so a browser
+    // cannot answer a new app.js out of last release's cache — and this shim, which stands in for the web server, 404'd the whole
+    // pack on `manifest.json?v=1.9.471`. ⚠️ A real server ignores an unknown query; so does this now. Found by the suite crashing
+    // on its first content load, one minute after I watched the same change work in the browser.
+    const onDisk = p.split("?")[0].split("#")[0];
     try {
-      const body = readFileSync(join(root, p), "utf8");
+      const body = readFileSync(join(root, onDisk), "utf8");
       return { ok: true, status: 200, json: async () => JSON.parse(body), text: async () => body };
     } catch (e) {
       // Mirror fetch's contract rather than throwing: loadContent branches on `res.ok`, and a thrown error

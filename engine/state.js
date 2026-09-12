@@ -3,6 +3,7 @@
 // via sync.js pushes character + player profile to the shared repo when a PAT is
 // configured. Content packs always load from the served repo files.
 
+import { APP_VERSION } from "./version.js";   // ⛔ every authored file carries the build, or a browser answers a new app.js from last release's cache
 import { walkingDays } from "./worldmap.js";   // resolveLocationId: the nearest of several same-name places
 import { martialAbilityRecords } from "./martial.js";
 import { reconcileContent } from "./reconcile.js";
@@ -878,13 +879,17 @@ export async function loadContent() {
   return content;
 }
 
+// ⛔ EVERY AUTHORED FILE CARRIES THE BUILD. app.js already did this for the five world files it fetches itself; the content
+// pack — rules, locations, npcs, abilities, the signal tables — went unversioned, and on a fresh load a cached
+// `tier_signals.json` made a council member read as one more irrigator while the engine said otherwise.
+const vq = (path) => path + (String(path).includes("?") ? "&" : "?") + "v=" + APP_VERSION;
 async function fetchJSON(path) {
-  const res = await fetch(path);
+  const res = await fetch(vq(path));
   if (!res.ok) throw new Error(`Failed to load ${path}: ${res.status}`);
   return res.json();
 }
 async function fetchText(path) {
-  const res = await fetch(path);
+  const res = await fetch(vq(path));
   if (!res.ok) throw new Error(`Failed to load ${path}: ${res.status}`);
   return res.text();
 }

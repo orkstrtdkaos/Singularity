@@ -12,6 +12,7 @@ import { applyCodexUpdates } from "./codex.js"; // SNG-199 §5: meeting someone 
 import { recordDeed, renownHeardAt } from "./reputation.js";   // CCODE-85: an NPC keeps a record the same way the player does
 import { personName, mintedWants, nameOf } from "./names.js";   // SNG-431 §1: the ONE namer — the GM path is one of the three that calls it
 import { noteSeen } from "./seeking.js";   // ⛔ the seeking clock EMPTIES when you meet — nothing called this
+import { pinFact } from "./facts.js";      // ✅ 2026-09-12: SNG-334's kin-fact pin was called here and never imported — Maren's reveal threw on it
 
 /** SNG-190 §2: a generateRequest:npc in the SAME turn as an op:"meet" for that person is ONE person.
  *  Both ops are mandatory by the contract (rule 14 + the generateRequest rule) and nothing reconciled
@@ -300,6 +301,13 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
         n.name = composed;
         n.nameRevealed = true;
       }
+    }
+    // ✅ 2026-09-12 (§172): an update may CARRY prior names. The rename paths above keep an old name as an alias only when the
+    // name CHANGES; a person whose reveal half-landed (Maren: named, then the step threw) has the new name and no aliases, and a
+    // restate with no rename could never put "Marrow" or "Huginn" back. Merged as the other five writes merge: deduped, capped at 4.
+    if (Array.isArray(u.aliases) && u.aliases.length) {
+      const given = u.aliases.map(a => prettifyNpcName(String(a || "").slice(0, 60))).filter(a => a && a !== n.name);
+      if (given.length) n.aliases = [...new Set([...(n.aliases || []), ...given])].slice(-4);
     }
     if (u.note) n.history = [...n.history, `[d${ctx.day ?? "?"}] ${smartClamp(String(u.note), 300)}`].slice(-CAPS.history); // SNG-152: high-cardinality (many NPCs x notes, all in the prompt) — 300, not 600
     if (u.learned) {

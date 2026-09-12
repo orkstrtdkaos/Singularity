@@ -1943,6 +1943,45 @@ console.log("\n── §171 · the repair note measures the state ──");
     fams171.length >= 16 && fams171.every(f => ["bandOps", "codexUpdates", "deathOps", "debtOps", "encounterOps", "exchangeOps", "factUpdates", "holdingOps", "newEncounter", "npcUpdates", "partyOps", "placeUpdates", "projectOps", "questUpdates", "refusalSignal", "relationshipDeltas"].includes(f)), fams171.join(","));
 }
 
+/* ══════════ §172 — A BEAT'S BOOKKEEPING THAT DID NOT LAND IS RESTATED, NOT LOST (Erik 2026-09-12: "make sure I don't lose anything") ══════════ */
+// ⛔ Silas met the woman Marrow is. Her name, role and history landed; then applyNpcUpdates threw "pinFact is not defined" (a kin-fact
+// pin added without its import), and her pinned facts, bond and aliases did not. The aside promised the GM would restate it next beat,
+// and nothing carried that promise into the prompt. Her join was refused (company full) into a note nobody rendered.
+console.log("\n── §172 · a beat's bookkeeping is restated, not lost ──");
+{
+  const NP172 = await import("../engine/npcs.js");
+  const GR172 = await import("../engine/gm_registry.js");
+  const CO172 = await import("../engine/company.js");
+  const { loadContentHeadless: lch172 } = await import("./headless_content.mjs");
+  const C172 = await lch172();
+  const mk172 = () => ({ id: "c172", npcRegistry: { marrow: { id: "marrow", name: "Maren Ossitide", relationship: 3, history: [], knownFacts: [], aliases: [] } }, establishedFacts: [], codex: { topics: {} }, clock: { day: 17 } });
+  const c172 = mk172();
+  let threw172 = null;
+  try { NP172.applyNpcUpdates(c172, [{ op: "update", npcId: "marrow", bondType: "sworn", bondStage: "sworn", note: "the road, chosen" }], { day: 17, rules: C172.rules, content: C172, recordFact: () => {} }); } catch (e) { threw172 = e; }
+  check("§172: ⛔ a bond change that yields a kin fact PINS it instead of throwing — the import that was missing on Maren's beat",
+    !threw172 && (c172.establishedFacts || []).some(f => f.pinned && /sworn/.test(f.text)), threw172 ? String(threw172.message) : JSON.stringify(c172.establishedFacts.map(f => f.text.slice(0, 50))));
+  const a172 = mk172();
+  NP172.applyNpcUpdates(a172, [{ op: "update", npcId: "marrow", aliases: ["Marrow", "Huginn", "Maren Ossitide"] }], { day: 17, rules: C172.rules, content: C172, recordFact: () => {} });
+  check("§172: ⛔ an update may CARRY prior names — Marrow and Huginn resolve to her again, the current name is not an alias of itself",
+    a172.npcRegistry.marrow.aliases.includes("Marrow") && a172.npcRegistry.marrow.aliases.includes("Huginn") && !a172.npcRegistry.marrow.aliases.includes("Maren Ossitide")
+      && NP172.findExistingNpc(a172.npcRegistry, "huginn", "Huginn") === a172.npcRegistry.marrow, JSON.stringify(a172.npcRegistry.marrow.aliases));
+  const failed172 = { activeScene: { lastTurn: { _applyFailed: true, _applyFailedOp: "npcUpdates", npcUpdates: [{ op: "meet", npcId: "marrow", name: "Maren Ossitide" }] } }, _turnApplyError: { message: "pinFact is not defined" } };
+  const r172 = GR172.restateForGM(failed172);
+  check("§172: ⛔ the restate the aside promised is CARRIED — the next prompt names the failed step, its error, and whom it touched",
+    r172?.failedSteps?.[0] === "npcUpdates" && /pinFact/.test(r172.error) && r172.touched.includes("Maren Ossitide") && /RESTATE/.test(r172.instruction) && GR172.registryKeys("turn").includes("bookkeepingRestate"), JSON.stringify(r172));
+  check("§172: …and it fires ONCE — a turn that landed whole carries nothing", GR172.restateForGM({ activeScene: { lastTurn: { narration: "x" } } }) === null);
+  const full172 = { company: [{ npcId: "a" }, { npcId: "b" }, { npcId: "c" }], subAttributes: { rapport: 7 }, npcRegistry: { marrow: { id: "marrow", name: "Maren Ossitide" } } };
+  const p172 = CO172.applyPartyOps(full172, [{ op: "join", npcId: "marrow" }], { day: 17, ladder: C172.rules.subAttributeLadder });
+  const app172 = rd("app.js").replace(/^\s*\/\/.*$/gm, "");
+  check("§172: ⛔ a REFUSED join is said to the player — the company-full note reaches the beat's aside instead of a note nobody reads",
+    (p172.notes || []).some(n => /would travel with you/.test(n)) && /character\._stepAsides = \[\.\.\.\(character\._stepAsides \|\| \[\]\), \.\.\.said\]/.test(app172) && /character\._stepAsides\.map\(s => /.test(app172) && /delete character\._stepAsides/.test(app172),
+    JSON.stringify(p172.notes));
+  // ⛔ the check the wiring audit made me write: the row is READ, not merely registered — gm.js destructures it and pushes its instruction
+  const gm172 = rd("engine/gm.js").replace(/^\s*\/\/.*$/gm, "");
+  check("§172: ⛔ …and the prompt assembler READS the row — gm.js takes bookkeepingRestate out of the context and pushes its instruction into the scene",
+    /const \{ bookkeepingRestate, character,/.test(gm172) && /scene\.push\(`## \$\{bookkeepingRestate\.instruction\}`\)/.test(gm172));
+}
+
 /* ══════════ §14 — THE FOLD CANNOT BEAT AN IMMUNITY THE BLOW COULD NOT ══════════ */
 // ⛔ FOUND BY RUNNING AEVI'S TWELVE CRAFTS THROUGH A MELEE-SCALE FIGHT (CCODE-313), which is the whole
 // reason Erik asked for a big-battle test. A physical-immune foe took ZERO from the player's typed blow and

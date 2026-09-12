@@ -467,6 +467,11 @@ export const GM_CONTEXT = [
   { key: "masteryDetail", builder: "app.masteryReadyForGM (ability-arch v2)", carries: ["rank-2 crafts ripe for a defining moment"],
     reachedBy: "practice", spec: "§7", views: ["turn"],
     build: (env) => env.app.masteryReadyForGM() },
+  // ✅ ERIK 2026-09-12 ("make sure I don't lose anything"): the aside promised the GM would restate a failed bookkeeping step next beat,
+  // and nothing carried that promise into the prompt. This row does — only while the previous turn carries `_applyFailed`, so once.
+  { key: "bookkeepingRestate", builder: "app.applyTurn failure flags → this row (§172)", carries: ["which op step failed last beat", "whom it touched", "restate them"],
+    reachedBy: "any beat after an isolated op-group failure", spec: "§172", views: ["turn"],
+    build: (env) => restateForGM(env.character) },
   { key: "anomalyDetail", builder: "corrections.detectAnomalies→anomaliesForGM (SNG-137)", carries: ["POSSIBLE ERROR repairs"],
     reachedBy: "Repair panel", spec: "§11", views: ["turn"],
     build: (env) => anomaliesForGM(detectAnomalies(env.character, { rules: env.CONTENT.rules })) },
@@ -595,6 +600,27 @@ export function assembleGMContext(view, env) {
 }
 
 /** The keys a view produces — for the wiring audit's parity check. */
+
+/** ✅ §172: what the GM is told after an isolated op-group failure — the step, its error, and the people or things that step touched
+ *  on the failed turn, so the GM restates them rather than assuming they landed. Empty when the last turn landed whole. Pure. */
+export function restateForGM(character) {
+  const lt = character?.activeScene?.lastTurn;
+  if (!lt || !lt._applyFailed) return null;
+  const steps = String(lt._applyFailedOp || "unknown").split(",").map(s => s.trim()).filter(Boolean);
+  const err = character?._turnApplyError?.message ? String(character._turnApplyError.message).slice(0, 120) : null;
+  const touched = [];
+  for (const step of steps) {
+    const ops = Array.isArray(lt[step]) ? lt[step] : [];
+    for (const o of ops.slice(0, 8)) { const who = o?.name || o?.npcId || o?.id || o?.questId || o?.holdingId || null; if (who && !touched.includes(who)) touched.push(String(who).slice(0, 60)); }
+  }
+  return {
+    failedSteps: steps, error: err, touched,
+    instruction: `LAST BEAT'S BOOKKEEPING DID NOT LAND: the ${steps.join(", ")} step failed${err ? ` (${err})` : ""}. The prose stood; the state change did not. ` +
+      `RESTATE that step's changes THIS beat, in full and as facts already true in the fiction — not as new events${touched.length ? `: ${touched.join(", ")}` : ""}. ` +
+      `Emit the same op group again with everything it should carry (names, aliases, facts learned, bonds, status).`,
+  };
+}
+
 export function registryKeys(view = null) {
   return GM_CONTEXT.filter(r => !view || r.views.includes(view)).map(r => r.key);
 }

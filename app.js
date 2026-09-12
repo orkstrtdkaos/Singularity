@@ -129,7 +129,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.9.455";
+const APP_VERSION = "1.9.456";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6853,6 +6853,12 @@ function applyTurn(turn, resolution, playerWords = null) {
   });
   const partyResult = applyStep("partyOps", () => applyPartyOps(character, turn.partyOps || [], { day: absoluteWorldDay(), ladder: CONTENT.rules.subAttributeLadder })) || { departed: [], proposed: [], notes: [] };
   if (partyResult.proposed?.length) character.pendingCompanyOffers = partyResult.proposed;
+  // ✅ ERIK 2026-09-12 (§172): a REFUSED join was computed and shown to nobody — Maren accepted the road and the company was full, and
+  // the note saying so went into `out.notes` with no reader. A state change nobody can see is worse than one that did not happen.
+  // Refusals and band notes ride the beat's one-shot aside, beside a correction.
+  { const said = [...(partyResult.notes || []), ...(character._bandNotes || [])].filter(Boolean);
+    if (said.length) character._stepAsides = [...(character._stepAsides || []), ...said].slice(-4);
+    character._bandNotes = null; }
   ensureBondPortraits(character); // SNG-136: a bond that crossed a high milestone this turn earns a portrait
   // §2 engagement: interacting with a grown NPC or accreting a fact about a grown entity is
   // attention — it keeps them real + surfacing. (Revisiting a grown place is signaled in travelTo.)
@@ -14775,6 +14781,8 @@ function renderPlay(turn, opts = {}) {
   }
   // SNG-070: surface a just-applied GM correction as an aside, whichever path rendered this turn.
   if (character?._correctionAside) { opts = { ...opts, aside: [opts.aside, character._correctionAside].filter(Boolean).join("\n\n") }; delete character._correctionAside; }
+  // ✅ §172: what a step REFUSED this beat (a full company, a band not raised) — said once, here, then cleared.
+  if (character?._stepAsides?.length) { opts = { ...opts, aside: [opts.aside, ...character._stepAsides.map(s => `*(${s})*`)].filter(Boolean).join("\n\n") }; delete character._stepAsides; }
   // CCODE-07: the beat survived but some of its bookkeeping didn't — say so plainly rather than
   // letting the player discover a quest/NPC update silently missing. The GM restates next turn.
   if (turn?._applyFailed) { opts = { ...opts, aside: [opts.aside, `*(The scene stands, but part of this turn's bookkeeping didn't land${turn._applyFailedOp && turn._applyFailedOp !== "unknown" ? ` — the ${turn._applyFailedOp} step` : ""} — the GM will restate it next beat.)*`].filter(Boolean).join("\n\n") }; }

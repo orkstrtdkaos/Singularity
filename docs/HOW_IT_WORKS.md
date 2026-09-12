@@ -483,7 +483,7 @@ working papers; **this is the answer.**
 | 09-08 | ✅ **ONE ROSTER, DERIVED; THE OPPONENT GATE; R41's FORM; THE VEIL LOADED** | Erik: *"all NPCs should at least be referenced from a single source list… even if we need to keep separate lists for code"* · *"any condition must be an opposed roll"* stands unbuilt (§A) | `scripts/roster.mjs` reads six files from disk and asks `personOpponentFor` for each; 144 records, 125 reachable, **40 would fight at level 1** (ratchet, Aevi's §2 owns it); `npcs/legends.json`'s five are read by NOTHING and Corvane is a hinge on 4 of 6 arcs (§10 gap); `notAnOpponent: true` refuses by name; a Sovereign is ONE record with `forms.diminished`/`forms.final` chosen by the arc's live stage; `the_veil` + `power_cosmology` loaded, attached, and on the GM's ask view | `§147` · `§59` refixtured on Sister Alder · `roster --check` is a suite | §10 gains the hinge gap; docs/ROSTER.md is generated between markers, prose kept above |
 | 09-08 | ✅ **THE FORTY ARE DERIVED, NOT AUTHORED — ROLE → TIER → THE CHAIN THAT ALREADY RAN** | Erik: *"I thought you were going to have him make the generative engine build out the remaining empty NPCs?"* · Aevi, correcting her own spec: *"NOT A MISSING SHEET. NOT A MISSING KIT. ONE MISSING FIELD."* | 40 of 40 level-1 records were level 1 for one reason — no `tier` — while `tierFloor` already fired for the 64 who had one. `rules/tier_signals.json` (CONTENT, correctable without code) → `tierFromRole` → `derivedLevel`, consulted ONLY where a record is silent. **40 → 0**, ratchet tightened; 19 regional · 12 notable · 9 heroic. Guards: authored tier and level both outrank it; default `notable`; a hard `ceiling: heroic` so no regex reaches epic/legendary/mythic; `tierDerived` on the SHEET, never stamped onto the record; no code fallback, so an absent table derives nothing | `§148` · `§147`'s level-1 ratchet 40→0 | ⚠ **and my roster column was too generous**: R47's bare `_strike` was counting as a kit, so 62 records read as armed when they have no real craft — corrected, and it makes `domains` on the legends the same one-field problem one tier up |
 
-**Last verified: 2026-09-12 · v1.9.455 · 429 crafts.**
+**Last verified: 2026-09-12 · v1.9.456 · 429 crafts.**
 
 ---
 
@@ -1044,6 +1044,13 @@ ground's own penalty through `substrateForAction` — a preview that omits a ter
 MOVED"* under a narration that said done. `repairFingerprint` serialises every collection the sixteen op families write (volatile keys
 dropped), and `repairNote` says one of three true things: changed; an op family did not take (the isolated failure `applyStep` records,
 with its message); or nothing was different afterwards — it may already have been so. `§171`.
+
+✅ **A beat's bookkeeping that did not land is restated, not lost (Erik 2026-09-12, the Maren beat).** An op step that throws is
+isolated and the beat stands; the aside says which step. Now the next prompt carries it too (`bookkeepingRestate`, `§172`): the step,
+its error, and whom it touched, with the instruction to restate those changes as facts already true. It fires once. Two things the
+same beat exposed are fixed beside it: an update may carry prior names (`aliases`) so a half-landed reveal keeps resolving, and a
+REFUSED join or raise (a full company, a band not ready) is said to the player in the beat's aside instead of computed for nobody.
+The crash itself was a kin-fact pin added without its import (`pinFact`), firing only when a bond change yields a fact.
 
 ✅ **Eight stats (Erik 2026-09-11: *"there are 8 stats, not the 4 we started with. they now need a spread of the 8"*).** Every
 craft row rolls ONE sub-attribute — a dial, `craftSubAttributes.enabled`, on; off, every craft rolls its parent as before. An authored `subAttribute` on a craft wins; otherwise `resolution.craftSubAttributes` splits

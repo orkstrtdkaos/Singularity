@@ -2463,187 +2463,16 @@
       }
     ],
     "lastTurn": {
-      "narration": "You sit on the edge of the cot, keeping your voice level and your presence steady. 'What's your name?' you ask. It's a simple question—foundational—and the asking is itself an answer: you are listening, not merely receiving.\n\nShe steadies the cup in her lap and meets your eye. 'Corvin,' she says. 'Corvin Teth, third-circuit runner.' Her voice is clearer now, the thirst-edge worn off, and something else surfaces—the weight of the urgency she carried. 'I know the route was broken. Direct to warden, no relay chain. That means—'\n\n'It means you ran because something matters,' you say plainly. 'And you got here. The message is in your hands now, and I am already moving on it.' You let that land. Maren, still seated at the table, shifts her attention fully toward you both—the legendary warden's regard, complete and unhurried. Veth's hand tightens fractionally on the threshold's warded frame. Huginn, perched on the shelf, cocks its head. 'You did what was asked. All will be well. Rest, and let the body finish mending.'",
-      "sceneSummary": "Morning at the Whistling Woman waystation: Corvin Teth, the urgency-runner who broke relay protocol, names herself and her circuit. Silas assures her that the message is received and he is already in motion.",
-      "choices": [
+      "holdingOps": [
         {
-          "label": "Ask her to tell you plainly what the encrypted shape of the message holds — what she knows the Hub feared enough to break protocol",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Let her rest and turn to Maren — ask what she heard in Corvin's words, in the shape of the break-protocol order",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Step outside to the threshold and read the moorland with Deathsense — Deni's warning about the changing quiet, the novel shadow-reach that frayed, Corvin's fractured death-thread — what is stirring north",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study",
-            "risky"
-          ],
-          "abilityId": "deathsense",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "op": "npcUpdate",
+          "npcId": "corvin",
+          "field": "name",
+          "value": "Teth"
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "standingOps": [],
-      "delegateOps": [],
-      "arcOps": [],
-      "adoptSchool": null,
-      "offer": {
-        "thing": "Corvin Teth — a third-circuit runner who broke protocol to carry an urgent message to the warden",
-        "from": "The Hub's break of relay discipline, and Deni's warning about the moorland's changed silence — something in the north has already begun to move"
-      },
-      "stageOps": [],
-      "scene": {
-        "setting": "Main room of the Whistling Woman waystation, pale morning light through the window. Fire banked low and steady. Corvin on the cot, holding a cup, fever-clear and speaking. Maren at the table, Veth near the threshold, Huginn on the shelf.",
-        "npcsPresent": [
-          {
-            "name": "Corvin Teth",
-            "state": "Awake, fever-clear, resting on the cot with water in hand, speaking plainly for the first time since surgery"
-          },
-          {
-            "name": "Maren Ossitide",
-            "state": "Seated at the table, attention turned fully toward Silas and Corvin, holding the watch"
-          },
-          {
-            "name": "Veth (Stillwater) Ondra",
-            "state": "Standing near the threshold, hand resting on the warded frame, present and steady"
-          },
-          {
-            "name": "Huginn",
-            "state": "Perched on the shelf, awake and watching, head cocked toward the Runner"
-          }
-        ],
-        "objects": [
-          "banked fire in the stove, low and steady",
-          "cup of water in Corvin's hands",
-          "table, worn smooth",
-          "oil lamp, dimmed",
-          "water barrel",
-          "cots with blankets",
-          "Deni's letter, folded on the table",
-          "music-box relay mechanism on the shelf"
-        ],
-        "threads": [
-          "What the encrypted Hub message contains, in the shape Corvin knows it",
-          "What stirred in the moorland north that broke relay protocol",
-          "Why Corvin's death-thread fractured — what pulled her through dying to deliver this",
-          "The shadows that tore when Silas reached for Cael — what that means",
-          "Three days until the convene votes on the water crisis"
-        ]
-      },
-      "npcUpdates": [
-        {
-          "op": "meet",
-          "npcId": "corvin-teth",
-          "name": "Corvin Teth",
-          "role": "Third-circuit relay runner, Hub messenger",
-          "sex": "female",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "description": "A lean woman in her early thirties, dust-covered from hard riding, fever-clear now but marked by the fracture that brought her here.",
-          "note": "Woke fever-clear at the Whistling Woman post and named herself. Broke relay protocol to carry an encrypted message marked urgent-to-hand from the Hub to warden. She knows the shape of the crisis but not the plaintext.",
-          "status": "active",
-          "statusNote": "Awake and mending at the Whistling Woman post. Fever broken. Carrying urgent word from the Hub about something stirring in the moorland north."
-        },
-        {
-          "op": "update",
-          "npcId": "maren-ossitide",
-          "note": "Held the warden's watch through the night at the Whistling Woman post. Attentive to Corvin's arrival and the shape of the urgency."
-        },
-        {
-          "op": "update",
-          "npcId": "veth-ondra",
-          "note": "Held the threshold watch through the night. Present and steady as Corvin woke and named the break-protocol order."
-        }
-      ],
-      "intentsHeard": [],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Corvin Teth, third-circuit runner, broke relay protocol carrying an encrypted message from the Hub marked urgent-to-hand. She reached the Whistling Woman post with a fractured death-thread, indicating something in the north has begun to move.",
-          "subjectId": "corvin-teth"
-        }
-      ],
-      "placeUpdates": [],
-      "discovery": null,
-      "codexUpdates": [
-        {
-          "topic": "the-water-crisis",
-          "kind": "mystery",
-          "fact": "A third-circuit relay runner broke protocol to carry an urgent message from the Hub to the warden—the encryption is sealed, but Corvin knows the shape: something is stirring in the moorland north, and it matters enough to abandon the standard relay chain.",
-          "links": [
-            "what-wakes-beneath",
-            "the-poles-pull",
-            "maren-ossitide"
-          ]
-        }
-      ],
-      "holdingOps": [],
-      "debtOps": [],
-      "partyOps": [],
-      "generateRequest": [],
-      "encounterOps": [],
-      "projectOps": [],
-      "bandOps": [],
-      "deathOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": {
-        "hoursPassed": 0,
-        "why": "morning talk, routine exchange"
-      },
-      "moveTo": null,
-      "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": null,
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "sceneEnded": false
+      "narration": "",
+      "sceneSummary": null
     },
     "sceneState": {
       "setting": "Main room of the Whistling Woman waystation, pale morning light through the window. Fire banked low and steady. Corvin on the cot, holding a cup, fever-clear and speaking. Maren at the table, Veth near the threshold, Huginn on the shelf.",
@@ -2687,8 +2516,8 @@
   },
   "clock": {
     "schemaVersion": 1,
-    "day": 17,
-    "hour": 23,
+    "day": 18,
+    "hour": 0,
     "realAnchor": null
   },
   "companions": [
@@ -6823,7 +6652,7 @@
     "lastTickWorldDay": 74,
     "lastCanonWorldDay": 74,
     "lastGenCount": 1779,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Maren Ossitide accepts co-wardenship of the Made Gate shrine and will travel with you—a legendary warden at your side, revealed and…",
@@ -18201,8 +18030,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1789182927499,
-  "rev": 2002,
+  "updatedAt": 1789183100724,
+  "rev": 2004,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -22869,10 +22698,10 @@
     {
       "id": "sess-33",
       "startedAt": "2026-09-11T22:48:54.873Z",
-      "lastAt": "2026-09-12T03:15:27.494Z",
+      "lastAt": "2026-09-12T03:18:20.710Z",
       "startDay": 73,
       "endDay": 74,
-      "beats": 31
+      "beats": 32
     }
   ],
   "company": [

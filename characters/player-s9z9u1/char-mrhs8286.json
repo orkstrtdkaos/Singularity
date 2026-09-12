@@ -191,6 +191,10 @@
       "level": 1,
       "braided": true,
       "discovered": true
+    },
+    {
+      "abilityId": "soul_stare",
+      "level": 1
     }
   ],
   "alignment": {
@@ -2396,22 +2400,56 @@
         "player": "Silas reflects on the scene when Maren and he entered the WW Post... Veth, Pell, and the others were there - Silas introduced Maren to each.",
         "summary": "Silas recalls introducing Maren to the company at the Whistling Woman post — Veth's recognition, Pell's reading, the quiet acceptance of a legend made manifest.",
         "narration": "You settle back in the chair and let the memory surface — the weight of it still fresh. Hours ago, you walked into this post with Maren at your side, and the air changed the moment Veth saw her.\n\nVeth was outside when you arrived, checking the ward. She came in at the threshold-call, and when she read what stood beside you — not the bird, but the woman — the stillness in her deepened into something else. Recognition, maybe. Or the particular quiet of someone who has just understood that a legend is real and standing in her warden post. You named Maren plainly: the legendary warden who buried the Drowned Year. Veth did not move for a long moment. Then she inclined her head, the gesture of one warden to another, and stepped aside to let Maren pass.\n\nPell came from the back room — she always reads a threshold first through ironsense, through the iron in blood and bone. You saw her whole frame sharpen when Maren crossed into the light. You said her name, said what Maren was, and Pell's jaw set the way it does when she is recalibrating something she thought she understood. But she reached forward and offered her hand, and Maren took it steadily. No ceremony. Just two women reading each other.\n\nThe Runner was still asleep then — her fever had broken but she was deep under, the kind of rest that mends. You let her rest.\n\nVeth prepared food. Maren sat at the table, still as stone, and did not perform gratitude or surprise or any of the things a stranger might have done. She simply was — present, attentive, waiting to see what came next. The post held it all without strain."
+      },
+      {
+        "player": "Ask if Cael, and Deni have arrived yet.",
+        "summary": "Deep night at the Whistling Woman post: Silas learns that Cael arrived at dusk and rode to report to Fendt, and that Deni passed through and left a sealed packet.",
+        "narration": "You surface from the memory with a breath, and ask Maren plainly: 'Has Cael arrived yet? Or Deni?'\n\nMaren turns her head slightly—not a full look, just enough to acknowledge the question. 'Cael came through the gate at dusk. Left his horse with the watch and went to the ridge post to report to Fendt. He will not sleep until the news is given.' Her voice is steady, matter-of-fact. The legendary warden does not embellish. 'Deni passed north an hour before dusk. She had no stopping here—the relay marks are clear, and she needed the moonlight for the moorland stretch. She left a sealed packet on the shelf.' Maren gestures with a subtle tilt of her chin toward the supply shelf, where a small canvas packet sits waiting, marked with Deni's neat hand.\n\nOutside, the moorland is quiet under the stars. The ward holds steady at the threshold. Pell sleeps on in the back room. The Runner's breathing remains deep and even. The night is moving toward the hour before dawn—that thin, still moment when the world pauses before the light returns."
       }
     ],
     "lastTurn": {
-      "narration": "You settle back in the chair and let the memory surface — the weight of it still fresh. Hours ago, you walked into this post with Maren at your side, and the air changed the moment Veth saw her.\n\nVeth was outside when you arrived, checking the ward. She came in at the threshold-call, and when she read what stood beside you — not the bird, but the woman — the stillness in her deepened into something else. Recognition, maybe. Or the particular quiet of someone who has just understood that a legend is real and standing in her warden post. You named Maren plainly: the legendary warden who buried the Drowned Year. Veth did not move for a long moment. Then she inclined her head, the gesture of one warden to another, and stepped aside to let Maren pass.\n\nPell came from the back room — she always reads a threshold first through ironsense, through the iron in blood and bone. You saw her whole frame sharpen when Maren crossed into the light. You said her name, said what Maren was, and Pell's jaw set the way it does when she is recalibrating something she thought she understood. But she reached forward and offered her hand, and Maren took it steadily. No ceremony. Just two women reading each other.\n\nThe Runner was still asleep then — her fever had broken but she was deep under, the kind of rest that mends. You let her rest.\n\nVeth prepared food. Maren sat at the table, still as stone, and did not perform gratitude or surprise or any of the things a stranger might have done. She simply was — present, attentive, waiting to see what came next. The post held it all without strain.",
-      "sceneSummary": "Silas recalls introducing Maren to the company at the Whistling Woman post — Veth's recognition, Pell's reading, the quiet acceptance of a legend made manifest.",
+      "narration": "You surface from the memory with a breath, and ask Maren plainly: 'Has Cael arrived yet? Or Deni?'\n\nMaren turns her head slightly—not a full look, just enough to acknowledge the question. 'Cael came through the gate at dusk. Left his horse with the watch and went to the ridge post to report to Fendt. He will not sleep until the news is given.' Her voice is steady, matter-of-fact. The legendary warden does not embellish. 'Deni passed north an hour before dusk. She had no stopping here—the relay marks are clear, and she needed the moonlight for the moorland stretch. She left a sealed packet on the shelf.' Maren gestures with a subtle tilt of her chin toward the supply shelf, where a small canvas packet sits waiting, marked with Deni's neat hand.\n\nOutside, the moorland is quiet under the stars. The ward holds steady at the threshold. Pell sleeps on in the back room. The Runner's breathing remains deep and even. The night is moving toward the hour before dawn—that thin, still moment when the world pauses before the light returns.",
+      "sceneSummary": "Deep night at the Whistling Woman post: Silas learns that Cael arrived at dusk and rode to report to Fendt, and that Deni passed through and left a sealed packet.",
       "choices": [
         {
-          "label": "Step outside to walk the ward with Veth — check the perimeter together and ask what she saw in that threshold moment.",
+          "label": "Open Deni's packet and read what she left",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Maren what she reads in Cael's arrival and why he rode straight through",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "presence",
           "axes": {},
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "careful",
-            "seek understanding"
+            "ask"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Step outside and walk the perimeter with Veth—check the wards and talk about what comes next",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {},
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "travel"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -2420,95 +2458,47 @@
           "emergenceId": null
         },
         {
-          "label": "Move to the back room and sit with Pell a moment — feel her presence and the child she carries, and the weight of what today has become.",
+          "label": "Go wake Pell—tell her Cael is at the ridge post and Deni left word",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": "very easy",
           "opposedDifficulty": null,
-          "intentTags": [
-            "romantic",
-            "seek comfort"
-          ],
+          "intentTags": [],
           "abilityId": null,
           "energyCost": null,
           "trivial": true,
           "encounterId": null,
           "emergenceId": null
-        },
-        {
-          "label": "Ask Maren directly — what made her reveal herself now, after all this time as a bird at your side? What changed when you stepped into this post?",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "seek understanding",
-            "confront"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Check on the Runner — her fever broke, but you want to read her ending with Deathsense and know if she is truly mending or if there is something else the cautery left behind.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "deathsense",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
         }
       ],
       "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
+      "characterDeltas": {},
       "ledgerEvents": [],
       "questUpdates": [],
       "standingOps": [],
-      "delegateOps": [],
-      "arcOps": [],
-      "adoptSchool": null,
-      "offer": null,
-      "stageOps": [],
       "scene": {
-        "setting": "Interior of the Whistling Woman waystation post—a single warm room with stove, table, chairs, shelf of supplies, water barrel, oil lamps. Fire banked low. Outside: moorland, late night, road from the south. Warded threshold. Deep quiet.",
+        "setting": "Interior of the Whistling Woman waystation post—a single warm room with stove, table, chairs, shelf of supplies, water barrel, oil lamps. Fire banked low. Outside: moorland under starlight, late night, the road quiet. Warded threshold holding steady. The hour before dawn approaches.",
         "npcsPresent": [
           {
             "name": "Maren Ossitide",
-            "state": "Seated across the table from Silas, still and present in warden-form, grey and weathered, eyes steady. Quiet but attentive."
+            "state": "Seated across the table from Silas in warden-form, grey and still, attentive"
           },
           {
             "name": "Huginn",
-            "state": "Perched on the shelf behind Silas, wholly awake, breathing the slow rhythm of the banked fire."
+            "state": "Perched on the shelf behind Silas, breathing the slow rhythm of the banked fire, wholly awake"
           },
           {
             "name": "Pell Ran Marsh",
-            "state": "Asleep in the back room, deep and settled, at rest after the day's work."
+            "state": "Asleep in the back room, deep and settled"
           },
           {
             "name": "Veth (Stillwater) Ondra",
-            "state": "Outside walking the perimeter, checking the ward in the night, moving with a warden's deliberation."
+            "state": "Outside walking the perimeter, checking the ward"
           },
           {
             "name": "The Runner (Hub relay courier)",
-            "state": "Asleep on a cot in the inner room, fever broken, mending steadily, breathing deep and untroubled."
+            "state": "Asleep on a cot in the inner room, fever broken, mending steadily"
           }
         ],
         "objects": [
@@ -2518,81 +2508,41 @@
           "oil lamps (one lit low)",
           "water barrel",
           "shelf of supplies",
-          "sleeping cots"
+          "sleeping cots",
+          "sealed canvas packet from Deni on the shelf"
         ],
         "threads": [
-          "What Maren sees in the shrine's purpose and Silas's role in it",
-          "Veth's recognition of the legendary warden",
-          "Pell's reading of what Maren means to the work ahead",
+          "What Deni left in the sealed packet",
+          "Cael's arrival at dusk and his ride to the ridge post",
+          "What Maren reads in the evening's movements",
+          "Veth's perimeter check and what the wards are holding against",
           "The Runner's recovery and what awaits when she wakes",
-          "The ward holding steady through the night",
-          "What comes next when morning arrives"
+          "What the dawn will bring when the watch changes"
         ]
-      },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "maren-ossitide",
-          "name": "Maren Ossitide",
-          "role": "Legendary Ashwarden warden; co-keeper of the Made Gate shrine; traveling companion",
-          "note": "Sits at the table in the Whistling Woman post in warden-form, revealed and no longer hidden. Accepted co-wardenship of the universal shrine. Present and attentive as Silas recalls the introductions.",
-          "learned": [
-            "She allowed the revelation at the shrine's completion—not before, not after, but at that exact threshold",
-            "She accepted Silas's invitation to travel with the company without ceremony or condition",
-            "She is comfortable in human form among the party, seated at a common table, present for dinner and counsel"
-          ],
-          "statusNote": "Active, traveling with the party, co-keeper of the Made Gate shrine, at rest at the Whistling Woman post"
-        }
-      ],
-      "intentsHeard": [],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "discovery": null,
-      "codexUpdates": [],
-      "holdingOps": [],
-      "debtOps": [],
-      "partyOps": [],
-      "generateRequest": [],
-      "encounterOps": [],
-      "projectOps": [],
-      "bandOps": [],
-      "deathOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": null,
-      "moveTo": null,
-      "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": null,
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "sceneEnded": false
+      }
     },
     "sceneState": {
-      "setting": "Interior of the Whistling Woman waystation post—a single warm room with stove, table, chairs, shelf of supplies, water barrel, oil lamps. Fire banked low. Outside: moorland, late night, road from the south. Warded threshold. Deep quiet.",
+      "setting": "Interior of the Whistling Woman waystation post—a single warm room with stove, table, chairs, shelf of supplies, water barrel, oil lamps. Fire banked low. Outside: moorland under starlight, late night, the road quiet. Warded threshold holding steady. The hour before dawn approaches.",
       "npcsPresent": [
         {
           "name": "Maren Ossitide",
-          "state": "Seated across the table from Silas, still and present in warden-form, grey and weathered, eyes steady. Quiet but attenti"
+          "state": "Seated across the table from Silas in warden-form, grey and still, attentive"
         },
         {
           "name": "Huginn",
-          "state": "Perched on the shelf behind Silas, wholly awake, breathing the slow rhythm of the banked fire."
+          "state": "Perched on the shelf behind Silas, breathing the slow rhythm of the banked fire, wholly awake"
         },
         {
           "name": "Pell Ran Marsh",
-          "state": "Asleep in the back room, deep and settled, at rest after the day's work."
+          "state": "Asleep in the back room, deep and settled"
         },
         {
           "name": "Veth (Stillwater) Ondra",
-          "state": "Outside walking the perimeter, checking the ward in the night, moving with a warden's deliberation."
+          "state": "Outside walking the perimeter, checking the ward"
         },
         {
           "name": "The Runner (Hub relay courier)",
-          "state": "Asleep on a cot in the inner room, fever broken, mending steadily, breathing deep and untroubled."
+          "state": "Asleep on a cot in the inner room, fever broken, mending steadily"
         }
       ],
       "objects": [
@@ -2602,22 +2552,23 @@
         "oil lamps (one lit low)",
         "water barrel",
         "shelf of supplies",
-        "sleeping cots"
+        "sleeping cots",
+        "sealed canvas packet from Deni on the shelf"
       ],
       "threads": [
-        "What Maren sees in the shrine's purpose and Silas's role in it",
-        "Veth's recognition of the legendary warden",
-        "Pell's reading of what Maren means to the work ahead",
-        "The Runner's recovery and what awaits when she wakes",
-        "The ward holding steady through the night"
+        "What Deni left in the sealed packet",
+        "Cael's arrival at dusk and his ride to the ridge post",
+        "What Maren reads in the evening's movements",
+        "Veth's perimeter check and what the wards are holding against",
+        "The Runner's recovery and what awaits when she wakes"
       ]
     },
-    "beats": 2
+    "beats": 3
   },
   "clock": {
     "schemaVersion": 1,
     "day": 17,
-    "hour": 5,
+    "hour": 6,
     "realAnchor": null
   },
   "companions": [
@@ -6708,7 +6659,7 @@
     "lastTickWorldDay": 74,
     "lastCanonWorldDay": 74,
     "lastGenCount": 1777,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "Marrow's explicit acknowledgment of her warden-nature and her choice to attend your endings in corvid form",
@@ -14498,7 +14449,7 @@
     "wits": 6
   },
   "pendingSubPoints": 0,
-  "skillPoints": 2,
+  "skillPoints": 0,
   "discoveries": [
     {
       "key": "the-attended-end+the_shadow_work:aerial-transit-via-atten",
@@ -16702,22 +16653,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 24.36551253512142,
-    "cerebral": 14.928748427735323,
-    "social": 14.260122857080347,
-    "generous": 4.201034786002379,
-    "cautious": 5.965614973527367,
-    "physical": 0.2566282247641454,
-    "risky": 0.7455737800363677,
-    "ruthless": 0.13397533082475216,
-    "carousing": 1.4073630752561646,
-    "amorous": 3.308820134059048,
-    "patient": 0.45046647603290435,
-    "stealth": 0.0000046823174422642976,
-    "devotion": 0.19133495001747786,
-    "craft": 3.728834181619583,
-    "leadership": 2.025955536525994,
-    "deception": 0.022422929671430458
+    "strategic": 24.756374721743384,
+    "cerebral": 14.55552971704194,
+    "social": 13.903619785653339,
+    "generous": 4.096008916352319,
+    "cautious": 5.816474599189182,
+    "physical": 0.2502125191450417,
+    "risky": 0.7269344355354584,
+    "ruthless": 0.13062594755413334,
+    "carousing": 1.3721789983747603,
+    "amorous": 3.226099630707572,
+    "patient": 0.43920481413208173,
+    "stealth": 0.00000456525950620769,
+    "devotion": 0.18655157626704091,
+    "craft": 3.6356133270790933,
+    "leadership": 1.975306648112844,
+    "deception": 0.021862356429644694
   },
   "aptitudes": [
     "strategist",
@@ -16726,10 +16677,20 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 972,
+  "actionCount": 973,
   "grantsVersion": 1,
   "reconcileVersion": 49,
   "gallery": [
+    {
+      "kind": "ability",
+      "prompt": "Convergent Strike",
+      "url": "https://image.pollinations.ai/prompt/Convergent%20Strike%3A%20Read%20every%20thread%20of%20threat%20in%20a%20contest%20at%20once%20%E2%80%94%20the%20unarmoured%20seam%2C%20the%20failing%20grip%2C%20the%20worst%20possible%20instant%2C%20the%20sharpest%20part%20of%20the%20blade%20or%20the%20finest%20edge%20of%20a%20psychic%20figure%20%E2%80%94%20and%20bring%20them%20all%20onto%20one%20point.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20cogitant%20tradition%3A%20cool%20slate%2C%20parchment%2C%20ink-blue%3B%20thin%20frames%2C%20vast%20implied%20interiors%2C%20memory-palaces%3B%20dim%2C%20inward%2C%20the%20glow%20of%20thought%20not%20sun%3B%20still%20body%2C%20immense%20interior%20%E2%80%94%20thought%20as%20force%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20cool%20slate%2C%20parchment%2C%20ink-blue%2C%20dim%2C%20inward%2C%20the%20glow%20of%20thought%20not%20sun%2C%20still%20body%2C%20immense%20interior?width=1024&height=512&seed=93225&nologo=true",
+      "caption": "Convergent Strike",
+      "worldDay": 74,
+      "at": "2026-09-12T02:01:58.523Z",
+      "subjectKind": "ability",
+      "subjectId": "convergent_strike"
+    },
     {
       "kind": "figure",
       "prompt": "",
@@ -17602,8 +17563,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1789178237658,
-  "rev": 1970,
+  "updatedAt": 1789178677840,
+  "rev": 1974,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -21924,7 +21885,7 @@
   "syncedAt": 1788658062664,
   "teachers": {},
   "regionsKnown": {
-    "valley": 670,
+    "valley": 671,
     "the_palelands": 6,
     "the_center": 151,
     "the_echo_vale": 14
@@ -22235,10 +22196,10 @@
     {
       "id": "sess-33",
       "startedAt": "2026-09-11T22:48:54.873Z",
-      "lastAt": "2026-09-12T01:57:17.652Z",
+      "lastAt": "2026-09-12T02:04:37.834Z",
       "startDay": 73,
       "endDay": 74,
-      "beats": 22
+      "beats": 23
     }
   ],
   "company": [
@@ -22751,10 +22712,10 @@
     "gen-whistling-woman-post": "https://image.pollinations.ai/prompt/Whistling%20Woman%20Post%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Whistling%20Woman%20Post.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=32614&nologo=true&_cb=1_1"
   },
   "_opEmitted": {
-    "sceneSummary": 348,
-    "choices": 347,
+    "sceneSummary": 349,
+    "choices": 348,
     "characterDeltas": 179,
-    "scene": 348,
+    "scene": 349,
     "npcUpdates": 308,
     "factUpdates": 36,
     "placeUpdates": 78,
@@ -22785,7 +22746,7 @@
     "intentsHeard": 1,
     "partyOps": 3
   },
-  "_opTurns": 348,
+  "_opTurns": 349,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -22959,30 +22920,30 @@
     ]
   },
   "_suggestCache": {
-    "level": 31,
+    "level": 32,
     "picks": [
       {
         "abilityId": "pattern_sense",
-        "why": "Your declared aspiration at 2/10 progress, and it fits this character exactly — you run Order-Sense 98 times because you read situations for structure; Pattern-Sense is that same instinct scaled up, letting you name what a set of particulars *is* and predict where it goes, which your cerebral/strategic fingerprint reaches for constantly. One point, and it's the thing you said you were building toward.",
+        "why": "You declared this an aspiration at 3/10 progress, you play strategically and cerebrally above all else, and Order-Sense (your single most-used craft at 99 uses) is already how you read the world — Pattern-Sense deepens that same axis into seeing *what a set of particulars means*, which is exactly the move a strategist/scholar/sage makes before every decision.",
         "fit": "aspiration"
       },
       {
         "abilityId": "memory_palace",
-        "why": "You carry cog_unaided as your cogitant school — this is the only reachable craft that trains the same way you already train, meaning it's a natural deepening of your existing discipline rather than a foreign method. Your scholar/sage aptitudes and 18-point cerebral score mean you live in recalled knowledge; Memory-Palace converts that into a mechanical edge mid-task, which Order-Sense and your KNOW-heavy kit have no current way to do.",
+        "why": "You train Cogitant by the unaided method and this is one of the few reachable crafts that matches that school exactly — same discipline, deepened; and for a cerebral character whose signature is reading situations (Order-Sense, Deathsense, Palework all at r3), a craft that lets you surface a remembered detail and sharpen your next action mid-scene is the purest expression of how you already play.",
         "fit": "synergy"
       },
       {
-        "abilityId": "dread",
-        "why": "Dread Mantle trains ash_plain — your own ashwarden school — and it fills a genuine gap: you have enormous KNOW and RESTORE depth in your ash kit (Palework, Attended End, Deathsense all rank 3) but almost no *offensive presence* as a necromancer. You keep Palework decent and discreet; this is what happens when you stop being discreet, and it gives your all-knowledge build a face that a room can feel.",
+        "abilityId": "kept_vigil",
+        "why": "Your kit is almost entirely offensive or informational — Shielding Word and Death-Ward sit unused, and Kept Breath is boosted but barely touched; Kept Vigil gives you a genuine sustain hold (stop a wound from turning fatal, freeze a failing thing in place) that your cautious streak and generous score say you'd reach for, and it costs only 1 point leaving you a second pick.",
         "fit": "gap"
       },
       {
         "abilityId": "soul_stare",
-        "why": "You have silver_tongue and a 10-point social score but zero INFLUENCE tools that work in adversarial reads — everything you own is knowledge or death-craft. Soul Stare closes that: you meet a gaze, show it its own ending, and it can no longer read *you* — which matters for a strategist who wins by knowing more than anyone else in the room, because right now a clever opponent can read you back.",
+        "why": "You are a strategist and silver-tongue with strong social scores, yet you have no craft that denies an opponent the ability to read *you* — Soul Stare closes that asymmetry by showing a target its own ending and stripping its ability to counter-read you, which pairs cleanly with the influence axis you already work through social play.",
         "fit": "gap"
       }
     ],
-    "note": "Two points to spend: Pattern-Sense (1pt aspiration) + Memory-Palace (1pt school-fit synergy) is the clean cerebral double; or trade Memory-Palace for Dread Mantle (2pt) if you want the one thing your deep ash kit currently lacks — an offensive face."
+    "note": "Pattern-Sense is the clear first pick — it is what you said you wanted and it fits who this character is down to the bone. The remaining point pairs best with Kept Vigil (a real functional gap) or Soul Stare (closes the one information-asymmetry your kit leaves open against you)."
   },
   "abilityImages": {
     "the_shielding_word": "https://image.pollinations.ai/prompt/The%20Shielding%20Word%3A%20Interpose%20a%20spoken%20certainty%20between%20harm%20and%20a%20person%20%E2%80%94%20the%20Seraphic%20ward%2C%20which%20is%20why%20the%20Orders%20are%20loved%20despite%20everything.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20seraphic%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=9311&nologo=true",
@@ -23025,7 +22986,8 @@
     "braid_deathsense_palework": "https://image.pollinations.ai/prompt/Pale%20Reckoning%3A%20Five%20times%20the%20ashwarden%20stood%20at%20the%20threshold%20where%20death%20whispers%20and%20pale%20force%20strikes%2C%20and%20the%20two%20crafts%20listened%20to%20each%20other%20until%20they%20became%20one.%20Deathsense%20no%20longer%20merely%20foresees%20endings%20%E2%80%94%20it%20feeds%20them%20to%20Palework%20like%20coordinates.%20Palework%20no%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20ashwarden%20tradition%3A%20greys%2C%20bone-white%2C%20faded%20charcoal%2C%20a%20single%20quiet%20ember%3B%20ash%2C%20grave-stone%2C%20worn%20iron%2C%20chalk%3B%20low%2C%20level%2C%20the%20grey%20light%20of%20a%20still%20morning%3B%20the%20mercy%20of%20stopping%20%E2%80%94%20solemn%2C%20tender%2C%20kept%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=90006&nologo=true",
     "scatter": "https://image.pollinations.ai/prompt/Scatter%3A%20Introduce%20sharp%20disorder%20%E2%80%94%20scatter%20a%20formation%2C%20foul%20a%20mechanism%2C%20open%20a%20gap%20in%20order.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20churnfolk%20tradition%3A%20clashing%20brights%2C%20mismatched%20everything%2C%20dust-gold%3B%20improvised%20gear%2C%20patched%20cloth%2C%20lucky%20junk%3B%20loose%2C%20sunlit%2C%20catch-as-catch-can%3B%20joyous%20mess%2C%20luck-riding%2C%20never%20twice%20the%20same%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=99739&nologo=true",
     "braid_deathsense_order_sense": "https://image.pollinations.ai/prompt/Undying%20Ledger%3A%20Where%20Deathsense%20reads%20the%20cold%20signatures%20of%20endings%20and%20Order-Sense%20traces%20the%20rigid%20lattice%20of%20what-must-be%2C%20The%20Undying%20Ledger%20fuses%20both%20into%20a%20single%20sovereign%20perception%3A%20the%20practitioner%20sees%20not%20merely%20that%20death%20approaches%2C%20nor%20merely%20that%20patterns%20h%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20ashwarden%20tradition%3A%20greys%2C%20bone-white%2C%20faded%20charcoal%2C%20a%20single%20quiet%20ember%3B%20ash%2C%20grave-stone%2C%20worn%20iron%2C%20chalk%3B%20low%2C%20level%2C%20the%20grey%20light%20of%20a%20still%20morning%3B%20the%20mercy%20of%20stopping%20%E2%80%94%20solemn%2C%20tender%2C%20kept%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=48974&nologo=true",
-    "last_form": "https://image.pollinations.ai/prompt/The%20Last%20Form%3A%20The%20duel%20capstone%3A%20read%20a%20single%20opponent%20so%20completely%20and%20strike%20so%20precisely%20that%20a%20formal%20fight%20ends%20in%20one%20decisive%20exchange.%20The%20Marcher's%20highest%20art%20%E2%80%94%20the%20fight%20already%20over%20when%20it%20begins.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20marcher%20tradition%3A%20steel-grey%2C%20blood-rust%2C%20weathered%20leather%3B%20honed%20blades%2C%20scarred%20armor%2C%20the%20held%20line%3B%20hard%20edge-light%2C%20a%20blade%20catching%20the%20sun%3B%20disciplined%2C%20scarred%2C%20holding%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=29546&nologo=true"
+    "last_form": "https://image.pollinations.ai/prompt/The%20Last%20Form%3A%20The%20duel%20capstone%3A%20read%20a%20single%20opponent%20so%20completely%20and%20strike%20so%20precisely%20that%20a%20formal%20fight%20ends%20in%20one%20decisive%20exchange.%20The%20Marcher's%20highest%20art%20%E2%80%94%20the%20fight%20already%20over%20when%20it%20begins.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20marcher%20tradition%3A%20steel-grey%2C%20blood-rust%2C%20weathered%20leather%3B%20honed%20blades%2C%20scarred%20armor%2C%20the%20held%20line%3B%20hard%20edge-light%2C%20a%20blade%20catching%20the%20sun%3B%20disciplined%2C%20scarred%2C%20holding%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=29546&nologo=true",
+    "convergent_strike": "https://image.pollinations.ai/prompt/Convergent%20Strike%3A%20Read%20every%20thread%20of%20threat%20in%20a%20contest%20at%20once%20%E2%80%94%20the%20unarmoured%20seam%2C%20the%20failing%20grip%2C%20the%20worst%20possible%20instant%2C%20the%20sharpest%20part%20of%20the%20blade%20or%20the%20finest%20edge%20of%20a%20psychic%20figure%20%E2%80%94%20and%20bring%20them%20all%20onto%20one%20point.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20cogitant%20tradition%3A%20cool%20slate%2C%20parchment%2C%20ink-blue%3B%20thin%20frames%2C%20vast%20implied%20interiors%2C%20memory-palaces%3B%20dim%2C%20inward%2C%20the%20glow%20of%20thought%20not%20sun%3B%20still%20body%2C%20immense%20interior%20%E2%80%94%20thought%20as%20force%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20cool%20slate%2C%20parchment%2C%20ink-blue%2C%20dim%2C%20inward%2C%20the%20glow%20of%20thought%20not%20sun%2C%20still%20body%2C%20immense%20interior?width=1024&height=512&seed=93225&nologo=true"
   },
   "authorEdits": [
     {
@@ -23943,7 +23905,7 @@
     "travel": 10,
     "careful": 6,
     "study": 12,
-    "scout": 9,
+    "scout": 10,
     "lead": 2,
     "ask": 4,
     "plan": 13,

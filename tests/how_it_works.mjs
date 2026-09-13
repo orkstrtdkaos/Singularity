@@ -12175,9 +12175,12 @@ console.log("\n── §190 · the push rides on the save, a failure says so, an
   check("§190: …and the local write happens FIRST and is never made to wait on the network — a save that did not happen must never be reported as one that did",
     /const r = persistCharacter\(c, opts\);[\s\S]{0,120}queueSync\(\);[\s\S]{0,40}return r;/.test(A190));
   check("§190: ⛔ the push is DEBOUNCED and flushed when the page hides — 176 call sites must not be 176 PUTs, and closing a tab is when the last change has to leave",
+    // ⚠️ SNG-559: these two pinned the WHOLE one-liner of each hide-handler, so both broke the moment the dev report
+    // started flushing beside the save on the same events — a gate failing over a line it does not own. What it owns
+    // is the CLAIM: each hide-handler exists and forces a sync NOW. What else rides along is mine to add.
     /_syncTimer = setTimeout\(\(\) => \{ _syncTimer = null; flushSync\(\); \}, SYNC_IDLE_MS\)/.test(A190)
-    && /visibilityState === "hidden"\) queueSync\(\{ now: true \}\)/.test(A190)
-    && /addEventListener\("pagehide", \(\) => queueSync\(\{ now: true \}\)\)/.test(A190)
+    && /visibilityState === "hidden"\) \{? ?queueSync\(\{ now: true \}\)/.test(A190)
+    && /addEventListener\("pagehide", \(\) => \{? ?queueSync\(\{ now: true \}\)/.test(A190)
     && /const SYNC_IDLE_MS = \d+;/.test(A190));
   // ⚠️ SNG-553: this pinned the exact one-liner, so it broke when the profile's verdict was separated from the save's.
   // The CLAIM is what must hold: a failure re-dirties the copy and says so. Which branch it lives on is mine to change.
@@ -13257,6 +13260,122 @@ console.log("\n── §201 · the age is the gate, the ops go on the turn, and 
   check("§201: ⚠️ the two minor-floor implementations are one — the same person gets the same answer everywhere",
     [{ description: TEEN }, { role: "a girl of twelve" }, { age: 19, description: TEEN }, { name: "Wren", role: "ferrywoman" }]
       .every(n => GEN201.isMinorEntity(n) === ART201.isMinorSubject(n)));
+}
+
+// ⛑ SNG-559 — THE PLAY/DEV INSTRUMENT: WHAT PLAY ALREADY KNOWS, COLLECTED AND SENT WHERE IT CAN BE READ.
+// Erik: "make them a robust Play/Dev that generates the data you would need to find and fix anything that is misfiring or
+// not wired along the way" — then, decisively: "I don't want to have to copy and paste anything... so make it so the
+// outputs go back to the repo for you to read as needed."
+// ⛔ THE DESIGN IS ONE DAY'S BUGS, AND THEY ALL HAVE THE SAME SHAPE — a wiring fact the running game already knew and
+// nobody collected: `moveTo 20 ✓0`, an invented `companionOps` discarded in silence, ops trapped in the narration,
+// "Done." with no op, `pendingCompanyOffers` written and never read, `partyOps` at 3 emissions in 369 turns, `age` 0 of
+// 53 and `sex` 6 of 54. ⚠️ NOT ONE needed a new measurement to be detectable. They needed someone to look.
+console.log("\n── §202 · the wiring census: what play knows, written where it can be read ──");
+{
+  const DR = await import("../engine/devreport.js");
+
+  /* ---- 1 · ⛔ AN OP THE MODEL INVENTED ---- */
+  // `companionOps` was dropped without a word while the player was told the thing had been done.
+  const vocab202 = ["narration", "choices", "npcUpdates", "partyOps", "moveTo"];
+  check("§202: ⛔ an op this engine has no dispatch for is NAMED, not silently dropped",
+    JSON.stringify(DR.unknownOpsIn({ narration: "x", npcUpdates: [{}], companionOps: [{ op: "add" }] }, vocab202)) === '["companionOps"]');
+  check("§202: …and an EMPTY value is not an emission — a `[]` the model sent is not an op it used",
+    DR.unknownOpsIn({ narration: "x", somethingElse: [], alsoNothing: {}, nope: null }, vocab202).length === 0);
+  check("§202: …and engine-internal `_` fields are never mistaken for the model's ops",
+    DR.unknownOpsIn({ _applyFailed: true, _opsWereInProse: "npcUpdates" }, vocab202).length === 0);
+
+  /* ---- 2 · ⛑ THE GATES, AND WHETHER ANYONE HAS ANSWERED THEM ---- */
+  // ⚠️ This census is what would have made "age 0 of 53" visible the day the gate was written, instead of the day a
+  // person written as a minor reached a romance track.
+  const cov = DR.fieldCoverage({ a: { age: 19, sex: "female" }, b: { age: null, sex: "" }, c: {}, d: { age: 0 } }, ["age", "sex"]);
+  check("§202: ⛑ field coverage counts what is CARRIED — null, empty string and absent all read as unanswered",
+    cov.n === 4 && cov.fields.age === 2 && cov.fields.sex === 1, JSON.stringify(cov));
+
+  /* ---- 3 · the report itself, assembled from a save-shaped fixture ---- */
+  const fixture = {
+    id: "char-x", name: "Fixture", playerKey: "player-x", level: 12, rev: 9, clock: { day: 4 },
+    _opTurns: 100,
+    _opEmitted: { scene: 100, npcUpdates: 40, moveTo: 5 },
+    _opLedger: { moveTo: { applied: 5, rejected: 0, lastWhy: null }, offer: { applied: 9, rejected: 1, lastWhy: "rejected-shape" }, _emptyClaim: { applied: 0, rejected: 3, lastWhy: "rejected-no-op" } },
+    _opUnknown: { companionOps: 2 },
+    _opInProse: { npcUpdates: 1 },
+    npcRegistry: { a: { name: "A", age: 19, sex: "female" }, b: { name: "B" } },
+    inventory: [{ id: "i1", customName: "Memory" }, { id: "i2" }],
+  };
+  const rep = DR.buildDevReport(fixture, { build: "1.9.x", vocabulary: ["scene", "npcUpdates", "moveTo", "bandOps", "projectOps"] });
+  check("§202: the report carries who, which build, and the DENOMINATOR a zero needs",
+    rep.character.name === "Fixture" && rep.character.turns === 100 && rep.build === "1.9.x" && rep.schemaVersion === 1);
+  check("§202: ⛔ 'never emitted' is listed against that denominator — the signature that matters",
+    JSON.stringify(rep.ops.never) === '["bandOps","projectOps"]' && rep.ops.neverCount === 2 && rep.ops.knownCount === 5);
+  check("§202: the invented op, the ops filed in prose, and the empty claims all travel",
+    rep.ops.unknown.companionOps === 2 && rep.ops.inProse.npcUpdates === 1 && rep.ops.emptyClaims === 3);
+  // ⚠️ SNG-551 AGAIN, IN THE REPORT: the two counters do not share a start, so where outcomes EXCEED emissions the
+  // report SAYS SO rather than inviting a subtraction that is not valid.
+  check("§202: ⚠️ an outcome count that exceeds its emission count is FLAGGED, not quietly printed beside it",
+    rep.ops.outcomes.offer.exceedsEmissions === true && rep.ops.outcomes.moveTo.exceedsEmissions === false);
+  check("§202: ⛔ and the engine's own `_` counters are never reported as model ops",
+    rep.ops.outcomes._emptyClaim === undefined);
+  check("§202: the coverage census rides along, for the people and for what they carry",
+    rep.coverage.npcRegistry.n === 2 && rep.coverage.npcRegistry.fields.age === 1 && rep.coverage.npcRegistry.fields.sex === 1
+    && rep.coverage.inventory.fields.customName === 1);
+
+  /* ---- 4 · ⛑ IT GOES TO THE REPO, ON ITS OWN, AND NOT INTO THE SAVE ---- */
+  const A202 = rd("app.js");
+  check("§202: ⛑ the report is written to a repo file the player never has to copy",
+    /const DEV_REPORT_PATH = \(c\) => `data\/dev\/report-/.test(A202) && /pushOwnedFile\(DEV_REPORT_PATH\(character\), report,/.test(A202));
+  // ⛔ ITS OWN FILE. The save is 1.38MB and every write uploads all of it (SNG-550); telemetry must never become
+  // another reason that file grows.
+  // ⛔ ITS OWN FILE, NEVER THE SAVE. The character record is 1.38MB and every write uploads all of it (SNG-550), so the
+  // claim to hold is that no part of this census is stored ON the character — it is assembled at send time and pushed
+  // to a path of its own. ⚠️ The `_op*` tallies it READS are counters that already existed; nothing new joins the save.
+  check("§202: ⛔ …to its OWN file, never onto the 1.38MB character save",
+    !/character\.devReport/.test(A202) && !/character\._devReport\s*=/.test(A202)
+    && /pushOwnedFile\(DEV_REPORT_PATH\(character\)/.test(A202) && /data\/dev\/report-/.test(A202));
+  check("§202: a turn queues it, and a closing tab flushes it — the same contract the save has",
+    // ⚠️ NO `[^\n]` CLASSES HERE ON PURPOSE. Written through a heredoc, the escape in one is eaten and the class
+    // swallows a real newline — the third time today an escape died in an interpolation layer rather than in my editor.
+    // These say the same thing with no escape that can be lost: both hide-handlers name the flush.
+    /queueDevReport\(\);/.test(A202)
+    && /visibilityState === "hidden"\) \{ queueSync\(\{ now: true \}\); flushDevReport\(\); \}/.test(A202)
+    && /addEventListener\("pagehide", \(\) => \{ queueSync\(\{ now: true \}\); flushDevReport\(\); \}\);/.test(A202));
+  // ⚠️ DEV-ONLY AT THE WRITER, both doors: a player build assembles nothing and sends nothing.
+  check("§202: ⚠️ dev-only at BOTH doors — a player build neither queues nor flushes",
+    /function queueDevReport\(\) \{\s*\n\s*if \(!isDevMode\(\)/.test(A202) && /async function flushDevReport\(\) \{\s*\n\s*if \(!isDevMode\(\)/.test(A202));
+  // ⛔ AND IT MAY NEVER INTERRUPT A BEAT. A telemetry write that can break play is worse than no telemetry.
+  check("§202: ⛔ every failure is swallowed — telemetry never interrupts a beat",
+    /catch \(err\) \{ console\.warn\("\[dev-report\] not sent \(play continues\)/.test(A202));
+
+  /* ---- 5 · ⛑ THE PROMPT-ROW TALLY, AT THE ONE CHOKE POINT ---- */
+  // A row that never produces content is a block the GM has never once been told — the prompt-side twin of an op that
+  // never fires. ⚠️ REACHED and PRODUCED are counted apart, because a row can be in the view every turn and answer null
+  // every turn, which reads identically to a row nobody reaches.
+  const REG202 = await import("../engine/gm_registry.js");
+  const tally = {};
+  // ⚠️ A ROW MAY ASSUME THE ENV THE REAL CALLER ALWAYS PASSES — `location` is not optional in play, and a fixture that
+  // omits it is testing a call that never happens. Given the shape the caller gives it.
+  const env202 = { character: { name: "F", currentLocationId: "millbrook", npcRegistry: {}, clock: { day: 1 }, inventory: [], quests: [], codex: { topics: {} } },
+    location: { id: "millbrook", name: "Millbrook", loreRefs: [], connections: [] },
+    CONTENT: { locations: {}, rules: {}, abilities: {}, npcs: {}, lore: {} },
+    sceneTurns: [], recentTurns: [], rules: {}, sceneState: null, region: null, lore: [], profile: null };
+  // ⚠️ A ROW MAY THROW ON A SHAPE THE REAL CALLER NEVER SENDS, and chasing each one would be testing calls that do not
+  // happen. The tally is what is under test, so a row that cannot build on this fixture is skipped rather than faked.
+  let threw202 = 0;
+  for (const view of ["turn"]) {
+    try { REG202.assembleGMContext(view, { ...env202, tally }); }
+    catch { threw202++; }
+  }
+  const reached = Object.values(tally).filter(t => t.reached > 0).length;
+  const produced = Object.values(tally).filter(t => t.produced > 0).length;
+  // ⚠️ CLAIMED AGAINST WHAT THIS FIXTURE ACTUALLY REACHES, not against the full registry — a row that throws on a shape
+  // the real caller never sends stops the assemble, and asserting "all 100 rows" here would be asserting a call that
+  // does not happen. What must hold is the INVARIANT: produced is never more than reached, and the two are told apart.
+  check("§202: ⛑ every row reached is counted, and the ones that PRODUCED nothing are told apart from them",
+    reached >= 3 && produced < reached && Object.values(tally).every(t => t.produced <= t.reached),
+    `${reached} reached · ${produced} produced content${threw202 ? ` · assemble stopped at a row this fixture cannot build` : ""}`);
+  // ⛔ AND THE TALLY IS OPT-IN. Without `env.tally` the choke point writes nothing at all, so a player build carries the
+  // branch and pays no allocation for it — the same discipline the dev-report writer has at both its doors.
+  check("§202: …and the tally is opt-in, so a player build pays nothing for it",
+    /if \(env\?\.tally\) \{/.test(rd("engine/gm_registry.js")));
 }
 
 /* ══════════ REPORT ══════════ */

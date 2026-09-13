@@ -30,7 +30,7 @@ import { receiptLine, roundVerdict } from "./engine/roundreceipt.js"; // the rou
 import { mintableBraidsFor, buildBraidDef, mintBraid, braidKey, registerDiscoveryAbility } from "./engine/braids.js"; // SNG-197 p2: in-play braid mint + the moment; SNG-226: a discovery becomes a usable craft
 import { ensureRecipeStore, buildRecipeRecord, recipeFor, recipeToAuthored, mergeRecipes, firstFinderName } from "./engine/recipes.js"; // SNG-201: shared braid recipes
 import { braidPlacement, compositionAngle, leanOffset, wheelRejects, inTraditions, matchesFunction, creationPool } from "./engine/wheelgeom.js"; // SNG-202: place a craft on the wheel by its composition
-import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, ghList, fetchRepoJSON, raceTimeout } from "./engine/sync.js";
+import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, pushOwnedFile, ghList, fetchRepoJSON, raceTimeout } from "./engine/sync.js";
 import { buildFeedPost, appendFeedPost, feedForViewer, FEED_PATH } from "./engine/feed.js"; // SNG-168 §2: the world feed (post a turn to the family — never canon)
 // ⚠️ `composeImagePrompt` ONLY. I imported `COMPOSED_MAX` beside it and never called it — the
 // importedNeverCalled ratchet caught it on the next run, which is the same "built, shipped, unreachable"
@@ -68,6 +68,7 @@ import { enterDeathState } from "./engine/death.js";
 wireDeathModel(DeathModel);
 import { carriageOf, voyageOf, isMoored, canSail, sailHolding, voyageLine, featureRuling, canBuildOn } from "./engine/carriage.js";   // B6b: the holding that moves
 import { featureCost, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
+import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady, applyPartyOps, activeCompany, formerCompany } from "./engine/company.js";
 import { unitsOf, unitLine, poolRows, atSideRows, wherePerson, canBringForward, rosterLine } from "./engine/fellowship.js";   // SNG-541: the roster, the pool, and EVERY band rather than one
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, suggestForCreation, archetypeFamilies, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
@@ -141,7 +142,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "1.9.492";
+const APP_VERSION = "1.9.494";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -873,8 +874,8 @@ function clearSyncNote() { document.getElementById("sync-note")?.remove(); }
 // ⚠️ Best effort by nature — an authenticated PUT cannot ride `sendBeacon` — which is exactly why the debounce
 // is short and every save re-arms it.
 if (typeof document !== "undefined") {
-  document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") queueSync({ now: true }); });
-  window.addEventListener("pagehide", () => queueSync({ now: true }));
+  document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") { queueSync({ now: true }); flushDevReport(); } });
+  window.addEventListener("pagehide", () => { queueSync({ now: true }); flushDevReport(); });
 }
 
 /** "Who's playing?" — pick an existing player on this device, or start a new one. */
@@ -2059,6 +2060,54 @@ function saveLegStatus(map) { try { localStorage.setItem("singularity.previewLeg
 // SNG-051 auto-verify: a leg's pass-condition is detected as it HAPPENS in real play (dev boxes
 // only), marks it pass, and — when sync is on — REPORTS it to Aevi via a synced status file so
 // the verified leg drops out of the active checklist. Never touches normal players (devEnabled).
+// ⛔ SNG-559 — THE ONE OP VOCABULARY. `SALVAGEABLE_OPS` is what the contract advertises; these four are dispatched and
+// deliberately NOT salvageable (a truncated reply must not half-apply them), so the vocabulary is the union and it is
+// written HERE ONCE. ⚠️ A second copy of this list is how "unknown op" becomes a false alarm that everyone learns to ignore.
+const OP_VOCABULARY = new Set([...SALVAGEABLE_OPS, "sceneEnded", "gambitApt", "narration", "choices"]);
+
+// ⛑ SNG-559 — THE OUTPUT GOES TO THE REPO, BECAUSE ERIK SHOULD NOT HAVE TO CARRY IT. His words: "I don't want to have
+// to copy and paste anything... so make it so the outputs go back to the repo for you to read as needed." So the loop is:
+// he plays, this file lands, I read it with git. The Legs panel has pushed its status to `data/` since SNG-051 — same
+// pattern, same fire-and-forget discipline, and the same rule that a failure here must never touch play.
+//
+// ⛔ ITS OWN FILE, NEVER THE SAVE. The character record is 1.38MB and every write uploads all of it (SNG-550). Telemetry
+// is counts, not content; it must never become another reason that file grows, and it is owned by one writer so it
+// needs no merge. ⚠️ DEV-ONLY AT THE WRITER: a player build assembles nothing and sends nothing.
+const DEV_REPORT_PATH = (c) => `data/dev/report-${c.playerKey || "unknown"}-${c.id || "unknown"}.json`;
+const DEV_REPORT_IDLE_MS = 120000;   // slower than the save: this is a census, not a record of play
+let _devReportTimer = null, _devReportInFlight = false, _devReportLastAt = 0;
+
+/** Assemble the report for the character in hand. Separated from the push so the panel and the suite can both
+ *  read exactly what would be sent — a report I cannot see before it ships is a report I cannot trust. */
+function devReportNow() {
+  return buildDevReport(character, {
+    build: APP_VERSION,
+    vocabulary: [...OP_VOCABULARY].filter(k => k !== "narration" && k !== "choices"),
+    promptRows: character?._promptRows || null,
+    contentCounts: CONTENT ? { locations: Object.keys(CONTENT.locations || {}).length,
+      abilities: Object.keys(CONTENT.abilities || {}).length, npcs: Object.keys(CONTENT.npcs || {}).length } : null,
+  });
+}
+
+/** Debounced, fire-and-forget. ⚠️ EVERY FAILURE IS SWALLOWED ON PURPOSE — a telemetry write that can interrupt a beat
+ *  is worse than no telemetry at all, and this is the one place in the app where being silent is correct. */
+function queueDevReport() {
+  if (!isDevMode() || !syncEnabled() || !character) return;
+  if (_devReportTimer) return;
+  _devReportTimer = setTimeout(() => { _devReportTimer = null; flushDevReport(); }, DEV_REPORT_IDLE_MS);
+}
+
+async function flushDevReport() {
+  if (!isDevMode() || !syncEnabled() || !character || _devReportInFlight) return;
+  _devReportInFlight = true;
+  try {
+    const report = devReportNow();
+    await pushOwnedFile(DEV_REPORT_PATH(character), report, `dev report: ${character.name || character.id}`);
+    _devReportLastAt = Date.now();
+  } catch (err) { console.warn("[dev-report] not sent (play continues):", err?.message || err); }
+  finally { _devReportInFlight = false; }
+}
+
 const LEG_STATUS_PATH = "data/preview_legs_status.json";
 let _reportingLegs = false;
 
@@ -2845,6 +2894,31 @@ function renderMachine() {
     ${modelBlock}
     ${combatBlock}
 
+    ${(() => {
+      // ⛑ SNG-559 — THE WIRING CENSUS, IN THE GAME AND IN THE REPO. Erik: "make them a robust Play/Dev that generates the
+      // data you would need to find and fix anything that is misfiring or not wired along the way" — and "I don't want to
+      // have to copy and paste anything". So this is the view; the FILE is the deliverable, and it goes up on its own.
+      // ⚠️ ITS FIRST RUN ON HIS SAVE FOUND TWO THINGS NOBODY WAS LOOKING FOR: `deeds` recorded for 0 of 41 known people
+      // though the contract has a `deed` field, and `domains` for 7 of 41 — both authored, both unwritten in play.
+      const rep = devReportNow();
+      const cov = rep.coverage.npcRegistry;
+      const bar = (n) => { const pct = cov.n ? Math.round((n / cov.n) * 100) : 0;
+        return `<span class="mach-op ${pct === 0 ? "mach-zero" : "mach-fired"}">${String(n)}/${cov.n} <b>${pct}%</b></span>`; };
+      const rows = Object.entries(cov.fields).sort((a, b) => a[1] - b[1]);
+      const unknown = Object.entries(rep.ops.unknown || {});
+      const inProse = Object.entries(rep.ops.inProse || {});
+      return `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Wiring census <span class="hint" style="text-transform:none">— what play knows, sent to <code>${esc(DEV_REPORT_PATH(character))}</code></span></h3>
+        <p class="hint" style="margin:0 0 8px">Every defect found today was a wiring fact the running game already knew and nobody collected. This collects them and writes them to the repo on its own — no copying. <strong>${rep.ops.neverCount}</strong> of ${rep.ops.knownCount} ops have never been emitted in ${rep.character.turns} turns.</p>
+        <div class="mach-tally"><span class="mach-label">known people · ${cov.n} · fields carried</span>
+          ${rows.map(([f, n]) => `<span title="${esc(f)}">${esc(f)} ${bar(n)}</span>`).join(" ")}</div>
+        ${unknown.length ? `<div class="mach-tally"><span class="mach-label">⛔ ops the GM invented (discarded)</span>${unknown.map(([k, n]) => `<span class="mach-op mach-rej">${esc(k)} <b>${n}</b></span>`).join(" ")}</div>` : ""}
+        ${inProse.length ? `<div class="mach-tally"><span class="mach-label">⚠️ ops filed in the prose (recovered)</span>${inProse.map(([k, n]) => `<span class="mach-op mach-rej">${esc(k)} <b>${n}</b></span>`).join(" ")}</div>` : ""}
+        ${rep.ops.emptyClaims ? `<div class="mach-tally"><span class="mach-label">⛔ beats that claimed a change and emitted nothing</span><span class="mach-op mach-rej"><b>${rep.ops.emptyClaims}</b></span></div>` : ""}
+        <button class="btn secondary" id="mach-report-now" style="margin-top:8px">Send the report now</button>
+        <span class="hint" id="mach-report-said" style="margin-left:8px">${_devReportLastAt ? `last sent ${esc(agoWords(_devReportLastAt))}` : "not sent this session — it goes up on its own as you play"}</span>
+      </div>`;
+    })()}
+
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Op emission — this character, cumulative <span class="hint" style="text-transform:none">(${turns} GM turn${turns === 1 ? "" : "s"} observed)</span></h3>
       <p class="hint" style="margin-bottom:8px">Counts are <strong>emissions</strong> — the model putting an op in a turn — tracked for every op. Applied/rejected outcome (✓/✗) is instrumented for <strong>${OUTCOME_INSTRUMENTED.size}</strong> ops (${[...OUTCOME_INSTRUMENTED].map(o => `<code>${esc(o)}</code>`).join(", ")}); for the rest the number is emission alone. <strong>✓—</strong> means no outcome was ever written, which is <em>not</em> the same as applied zero times. ${turns > 0 ? `A persistent <strong>0 after ${turns} turn${turns === 1 ? "" : "s"}</strong> is the real signature — a built op the model never reaches.` : `<strong>No turns observed yet</strong> — a 0 here just means this character has not played; it is not a finding.`}</p>
       ${firedOps.length ? `<div class="mach-tally"><span class="mach-label">emitted</span> ${firedOps.map(chip).join(" ")}</div>` : ""}
@@ -2871,6 +2945,13 @@ function renderMachine() {
     </div>
   </div>`);
 
+  { const b = app.querySelector("#mach-report-now"); if (b) b.onclick = async () => {
+      const said = app.querySelector("#mach-report-said");
+      b.disabled = true; if (said) said.textContent = "sending…";
+      await flushDevReport();
+      b.disabled = false;
+      if (said) said.textContent = _devReportLastAt ? `sent ${agoWords(_devReportLastAt)} — ${DEV_REPORT_PATH(character)}` : "could not send (sync off, or offline)";
+    }; }
   for (const b of app.querySelectorAll("[data-mach-copy]")) b.onclick = async () => {
     const c = devCaptures().find(x => x.id === b.dataset.machCopy);
     if (!c) return;
@@ -6108,6 +6189,9 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   // default from Settings (profile.narrationTier). The toggle is one-shot: consumed here so it doesn't stick.
   const tier = _richNextTurn ? "rich" : (["fast", "standard", "rich"].includes(profile?.narrationTier) ? profile.narrationTier : "standard");
   _richNextTurn = false;
+  // ⛑ SNG-559: the prompt-row tally rides IN on the env and `assembleGMContext` fills it at its one choke point,
+  // so no builder reports itself and no row can be forgotten. Dev-only: a player build passes no tally and counts nothing.
+  if (isDevMode()) env.tally = (character._promptRows = character._promptRows || {});
   const result = await gmTurn(assembleGMContext("turn", env), { tier });
   busy = false;
   if (!result.ok) { renderPlay(null, { error: result.error }); return null; }
@@ -6130,11 +6214,21 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   // existed and could not reach the one case that needed it. ⚠️ Trust is not widened: recovered ops go through the
   // same appliers and clamps as any other. And it is never silent, because a silent recovery teaches nobody.
   {
+    // ⛔ SNG-559 — AN OP THE MODEL INVENTED IS DISCARDED IN SILENCE. `companionOps` was dropped without a word while
+    // the player was told the thing had been done. A name here is either a missing op or a contract the model could not
+    // find, and BOTH are worth knowing — so it is counted on the record and travels in the dev report.
+    for (const k of unknownOpsIn(result.turn, OP_VOCABULARY)) {
+      character._opUnknown = character._opUnknown || {};
+      character._opUnknown[k] = (character._opUnknown[k] || 0) + 1;
+      console.warn(`[turn] the GM emitted "${k}", which this engine has no op for — discarded.`);
+    }
     const misfiled = opsFromNarration(result.turn?.narration);
     const took = Object.keys(misfiled).filter(k => result.turn[k] === undefined);
     if (took.length) {
       for (const k of took) result.turn[k] = misfiled[k];
       result.turn._opsWereInProse = took.join(", ");
+      character._opInProse = character._opInProse || {};
+      for (const k of took) character._opInProse[k] = (character._opInProse[k] || 0) + 1;
       console.warn(`[turn] recovered ops the GM filed in its narration instead of on the turn: ${took.join(", ")}`);
     }
   }
@@ -6201,6 +6295,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   const _opsFired = opsFiredIn(result.turn);
   if (_opsFired.length) { character._opEmitted = character._opEmitted || {}; for (const o of _opsFired) character._opEmitted[o.op] = (character._opEmitted[o.op] || 0) + 1; }
   character._opTurns = (character._opTurns || 0) + 1;
+  queueDevReport();   // SNG-559: dev-only, debounced, its own file, never blocks the beat
   annotateLatest("gm-narrate", { parsed: result.turn, opsFired: _opsFired, opLedger: character?._opLedger ? { ...character._opLedger } : null });
   // ability-arch v2: rank 2 is earned through use, not bought — surface any craft that just became
   // fluent this turn (deduped). Rank 3 is never here; it comes as a GM-marked defining moment.

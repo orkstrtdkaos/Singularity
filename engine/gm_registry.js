@@ -616,6 +616,17 @@ export function assembleGMContext(view, env) {
   for (const row of GM_CONTEXT) {
     if (!reach.has(row.key)) continue;
     ctx[row.key] = row.build(env);
+    // ⛔ SNG-559 — A ROW THAT NEVER PRODUCES CONTENT IS A BLOCK THE GM HAS NEVER ONCE BEEN TOLD. That is the prompt-side
+    // twin of an op that never fires, and just as invisible without a count: `partyOps` fired 3 times in 369 turns and
+    // nobody knew until someone went looking. ⚡ ONE CHOKE POINT, so no builder has to remember to report itself.
+    // ⚠️ REACHED and PRODUCED are different facts and both are kept: a row can be in the view every turn and answer
+    // null every turn, which reads identically to a row nobody reaches unless you count them apart.
+    if (env?.tally) {
+      const t = (env.tally[row.key] = env.tally[row.key] || { reached: 0, produced: 0 });
+      t.reached++;
+      const v = ctx[row.key];
+      if (v != null && v !== "" && !(Array.isArray(v) && !v.length)) t.produced++;
+    }
   }
   // SNG-182 §2.5: THE GM GETS NAMES, NOT TOKENS. This is the single choke point every view already
   // passes through, so resolving here means no builder has to remember to — and the model can never

@@ -1,16 +1,18 @@
 {
   "schemaVersion": 1,
   "id": "dev_report",
-  "at": "2026-09-13T15:52:12.288Z",
-  "build": "1.9.494",
+  "at": "2026-09-13T17:08:41.137Z",
+  "build": "1.9.498",
   "character": {
     "id": "char-mr4ejo8c",
     "name": "Cellaceron",
     "playerKey": "player-s9z9u1",
     "level": 12,
-    "rev": 262,
+    "rev": 265,
     "day": 9,
-    "turns": 66
+    "turns": 66,
+    "countingSince": null,
+    "countsCoverWholeLife": false
   },
   "ops": {
     "emitted": {
@@ -85,7 +87,7 @@
       "fields": {
         "age": 2,
         "sex": 1,
-        "gender": 8,
+        "gender": 9,
         "pronouns": 9,
         "role": 9,
         "description": 5,
@@ -95,7 +97,8 @@
         "knownFacts": 8,
         "skillsObserved": 8,
         "deeds": 0,
-        "domains": 7
+        "domains": 7,
+        "inventory": 0
       }
     },
     "inventory": {
@@ -107,6 +110,201 @@
         "description": 10
       }
     }
+  },
+  "fireTests": {
+    "at": "2026-09-13T17:08:41.137Z",
+    "build": "1.9.498",
+    "results": [
+      {
+        "op": "debtOps",
+        "verdict": "applied",
+        "moved": [
+          "activeScene",
+          "clock",
+          "rev",
+          "sessions",
+          "updatedAt",
+          "worldState"
+        ],
+        "why": null
+      },
+      {
+        "op": "projectOps",
+        "verdict": "applied",
+        "moved": [
+          "activeScene",
+          "clock",
+          "rev",
+          "sessions",
+          "updatedAt",
+          "worldState"
+        ],
+        "why": null
+      },
+      {
+        "op": "deathOps",
+        "verdict": "applied",
+        "moved": [
+          "activeScene",
+          "clock",
+          "rev",
+          "sessions",
+          "updatedAt",
+          "worldState"
+        ],
+        "why": null
+      },
+      {
+        "op": "markTeacher",
+        "verdict": "applied",
+        "moved": [
+          "activeScene",
+          "clock",
+          "rev",
+          "sessions",
+          "updatedAt",
+          "worldState"
+        ],
+        "why": null
+      },
+      {
+        "op": "deriveItem",
+        "verdict": "applied",
+        "moved": [
+          "activeScene",
+          "clock",
+          "rev",
+          "sessions",
+          "updatedAt",
+          "worldState"
+        ],
+        "why": null
+      },
+      {
+        "op": "unlockSubstrate",
+        "verdict": "applied",
+        "moved": [
+          "activeScene",
+          "clock",
+          "rev",
+          "sessions",
+          "updatedAt",
+          "worldState"
+        ],
+        "why": null
+      },
+      {
+        "op": "unlockPrecursor",
+        "verdict": "applied",
+        "moved": [
+          "activeScene",
+          "clock",
+          "rev",
+          "sessions",
+          "updatedAt",
+          "worldState"
+        ],
+        "why": null
+      },
+      {
+        "op": "arcOps",
+        "verdict": "not-applicable",
+        "moved": [],
+        "why": "needs at least one latent arc on the world state"
+      },
+      {
+        "op": "offerPromotion",
+        "verdict": "applied",
+        "moved": [
+          "activeScene",
+          "clock",
+          "rev",
+          "sessions",
+          "updatedAt",
+          "worldState"
+        ],
+        "why": null
+      },
+      {
+        "op": "offerAcquisition",
+        "verdict": "applied",
+        "moved": [
+          "activeScene",
+          "clock",
+          "rev",
+          "sessions",
+          "updatedAt",
+          "worldState"
+        ],
+        "why": null
+      },
+      {
+        "op": "offerIntent",
+        "verdict": "applied",
+        "moved": [
+          "activeScene",
+          "clock",
+          "rev",
+          "sessions",
+          "updatedAt",
+          "worldState"
+        ],
+        "why": null
+      },
+      {
+        "op": "holdingOps",
+        "verdict": "applied",
+        "moved": [
+          "activeScene",
+          "clock",
+          "holdings",
+          "rev",
+          "sessions",
+          "updatedAt",
+          "worldState"
+        ],
+        "why": null
+      },
+      {
+        "op": "bandOps",
+        "verdict": "applied",
+        "moved": [
+          "activeScene",
+          "clock",
+          "rev",
+          "sessions",
+          "updatedAt",
+          "worldState"
+        ],
+        "why": null
+      },
+      {
+        "op": "adoptSchool",
+        "verdict": "applied",
+        "moved": [
+          "activeScene",
+          "clock",
+          "rev",
+          "sessions",
+          "updatedAt",
+          "worldState"
+        ],
+        "why": null
+      },
+      {
+        "op": "newAbility",
+        "verdict": "applied",
+        "moved": [
+          "activeScene",
+          "clock",
+          "rev",
+          "sessions",
+          "updatedAt",
+          "worldState"
+        ],
+        "why": null
+      }
+    ]
   },
   "promptRows": {
     "character": {

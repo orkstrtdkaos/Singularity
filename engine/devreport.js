@@ -105,8 +105,13 @@ export function buildDevReport(character, { build = null, vocabulary = [], promp
     },
     // ⛑ THE GATES, AND WHETHER ANYONE HAS ANSWERED THEM.
     coverage: {
+      // ⚡ SNG-562 — THE SUB-FIELD PATTERN, WHICH IS WHY THESE ARE THE FIELDS COUNTED. Measured across 41 people on a
+      // level-33 save: plain strings 93%, string arrays 63-85%, enums 7-15%, and the two that take a NESTED OBJECT
+      // (`deed`, `carries` -> `inventory`) EXACTLY ZERO, though both are wired end to end and read back into the prompt.
+      // ⚠️ `inventory` is the R45c BEARER RECORD, the other end of `carries`; without it in this list the only evidence
+      // for whether the contract change worked would be me asking again.
       npcRegistry: fieldCoverage(c.npcRegistry, ["age", "sex", "gender", "pronouns", "role", "description",
-        "bondType", "relationship", "status", "knownFacts", "skillsObserved", "deeds", "domains"]),
+        "bondType", "relationship", "status", "knownFacts", "skillsObserved", "deeds", "domains", "inventory"]),
       inventory: fieldCoverage(Object.fromEntries((c.inventory || []).map((it, i) => [it?.id || i, it])), ["customName", "aliases", "kind", "description"]),
     },
     // ⛔ WHICH PROMPT ROWS EVER FIRE. A row that never produces content is a block the GM has never once been

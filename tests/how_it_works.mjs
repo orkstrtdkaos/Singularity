@@ -13521,6 +13521,66 @@ console.log("\n── §204 · the mint is asked for what it gates: sex and age,
     !!silent && silent.sex === undefined);
 }
 
+// ⛔ SNG-562 — TWO COMPLETE CHAINS THE MODEL HAS NEVER ONCE REACHED.
+// ⚑ MEASURED ACROSS 41 KNOWN PEOPLE ON A LEVEL-33 SAVE, and the pattern is inside a single op that fires 320 times:
+//      plain strings  (role, description, gender, pronouns)   93%
+//      string arrays  (learned -> knownFacts, skillsObserved)  63-85%
+//      enums          (sex, bondType)                           7-15%
+//      NESTED OBJECTS (deed, carries -> the bearer record)    EXACTLY 0 in 369 turns
+// ⛑ AND NEITHER IS A WIRING DEFECT — I checked before acting, twice. `deed` runs through the SAME `recordDeed` the
+// player's ledger uses and is read back as RENOWN in this very prompt; `carries` reaches `giveItemTo` at app.js and the
+// object really moves. ⚠️ MY FIRST READ OF `carries` WAS WRONG — I searched `npcs.js`, found no reader, and was about to
+// report a missing dispatch; the dispatch is in `app.js`. Second time today a zero read as a defect and was not.
+// ⛔ SO THE TIGHTEST COMPARISON AVAILABLE IS A MATCHED PAIR: top-level "deeds" (the player's, has an explicit prose
+// sentence, fires 25 times) against nested "deed" (the NPC's, no prose anywhere, fires 0). ⚠️ HELD AS A HYPOTHESIS, NOT
+// A FIX: this morning I claimed a prose block explains emission and the op-level census REFUTED it (20% of never-fired
+// ops have one, 22% of fired ones do). The coverage census now carries both fields, so the next report judges this.
+console.log("\n── §205 · the two sub-fields nothing has ever reached, given their occasion ──");
+{
+  const GM205 = rd("engine/gm.js");
+
+  /* ---- 1 · the occasion, riding the sentence that demonstrably works ---- */
+  check("§205: ⛑ the NPC deed is asked for as a RECORD, in the same ledger the player's deeds use",
+    /AN NPC HAS A RECORD TOO/.test(GM205) && /reads these back as RENOWN/.test(GM205));
+  // ⛔ THE DISTINCTION THAT MAKES IT USABLE: a deed is about THEM. What passed between the two of you is note/learned,
+  // and without saying so the op collapses into the one beside it that already fires 85% of the time.
+  check("§205: …and is told apart from `note`/`learned`, which is the field it would otherwise collapse into",
+    /ABOUT THEM, NOT ABOUT YOU TWO/.test(GM205));
+  check("§205: ⛑ and `carries` is asked for as a MOVE, with the consequence of omitting it named",
+    /AN ITEM HANDED OVER ACTUALLY MOVES/.test(GM205) && /the next beat will contradict the last one/.test(GM205));
+  // ⚠️ THE BLOCK CARRIES ITS OWN EVIDENCE. A directive that says "use this field" is a reminder; one that says "you have
+  // used it zero times in 369 turns while using its neighbours 93%" is an occasion, and the numbers are real.
+  check("§205: the block states the measurement it came from, rather than asserting a rule",
+    /EXACTLY ZERO times in 369 turns/.test(GM205) && /93% of the time/.test(GM205));
+
+  /* ---- 2 · ⛔ AND BOTH CHAINS ARE WHOLE — asserted, because "never fired" would otherwise read as "broken" ---- */
+  const NP205 = await import("../engine/npcs.js");
+  const c205 = { id: "you", npcRegistry: {}, inventory: [{ id: "i1", name: "Memory" }] };
+  NP205.applyNpcUpdates(c205, [{ op: "meet", npcId: "pell", name: "Pell", age: 40, sex: "female" }], { day: 1 });
+  NP205.applyNpcUpdates(c205, [{ op: "update", npcId: "pell", deed: { description: "held the mill gate alone", weight: 2, tags: ["valor"] } }], { day: 2 });
+  const pell = c205.npcRegistry.pell;
+  check("§205: ⛑ a deed emitted against a person LANDS on their record — the chain was always whole",
+    (pell.deeds || []).length === 1 && pell.deeds[0].description === "held the mill gate alone" && pell.deeds[0].weight === 2);
+  // ⛑ and it is the same shape the player's ledger uses, which is what makes an NPC's record comparable to yours
+  check("§205: …in the same ledger shape the player's own deeds carry",
+    !!pell.deeds[0].description && "weight" in pell.deeds[0] && Array.isArray(pell.deeds[0].tags));
+  const gave = NP205.giveItemTo(c205, "pell", "Memory", { day: 2 });
+  check("§205: ⛑ and `carries` reaches a bearer record — the object MOVES, it is not copied",
+    gave.ok === true && (pell.inventory || []).length === 1 && c205.inventory.length === 0,
+    `she holds ${(pell.inventory || []).length}, you hold ${c205.inventory.length}`);
+  const back = NP205.takeItemFrom(c205, "pell", "Memory");
+  check("§205: …and `returns` moves it back, with the lending marks taken off",
+    back.ok === true && c205.inventory.length === 1 && !("lentBy" in c205.inventory[0]));
+
+  /* ---- 3 · ⛑ THE HYPOTHESIS IS UNDER MEASUREMENT, not merely asserted ---- */
+  // ⚠️ I was wrong about exactly this claim once today already. So the two fields ride in the coverage census, and the
+  // next dev report says whether the contract change moved them — 0/41 is the baseline it will be read against.
+  const DR205 = await import("../engine/devreport.js");
+  const cov = DR205.buildDevReport({ id: "x", npcRegistry: { a: { deeds: [{ description: "d" }], inventory: [{ name: "i" }] }, b: {} } }, { vocabulary: [] }).coverage.npcRegistry;
+  check("§205: ⛔ both fields are COUNTED, so the next report judges this rather than me asking again",
+    cov.fields.deeds === 1 && cov.fields.inventory === 1 && cov.n === 2);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

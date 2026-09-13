@@ -12410,6 +12410,7 @@ console.log("\n── §192 · the build stamps the modules and the content, or 
 console.log("\n── §193 · a name that cannot vanish, four sources with their level, crafts by domain, and a sheet that says what is true today ──");
 {
   const SB193 = await import("../engine/substrate.js");
+  const TR193 = await import("../engine/traditions.js");   // ⛔ the antipode ruling is enforced here, so the gate asks the enforcer
   const ST193 = await import("../engine/skilltree.js");
   const FN193 = await import("../engine/functions.js");
   const { loadContentHeadless: lch193 } = await import("./headless_content.mjs");
@@ -12509,10 +12510,25 @@ console.log("\n── §193 · a name that cannot vanish, four sources with thei
   // ⛔ A RETIRED RULE PRINTED AS A LIVE ONE, on the character sheet: R9/R16 removed foreclosure and CCODE-339 replaced the
   // antipode wall with "learnable, never castable", and `domainAccessInner` says in its own words that `foreclosed` is read
   // nowhere. Silas's save still carries two, and the sheet was still calling them "reachable only as a braid".
-  check("§193: ⛔ Domains state the ACCESS RULING AS IT STANDS — the antipode is learnable and holdable but never castable, and a braid is what spends it",
-    /Across your axis/.test(A193) && /learnable and holdable, never castable/.test(A193)
-    && /antipodeOf\(t, CONTENT\.traditionIndex\)/.test(A193)
+  // ⛔ AND THIS GATE PINNED THE SECOND RETIRED RULING WITHIN THE HOUR. It asserted the literal words "learnable and holdable,
+  // never castable" — CCODE-339's rule — and Erik then ruled "It's both learnable and castable. Update those out of date
+  // statements." ⚠️ TWICE IN A DAY I PINNED PROSE THAT A RULING THEN MOVED. So it asserts the SHAPE that cannot go stale: the
+  // panel asks the ENGINE for each antipode and prints the engine's own verdict, rather than composing a sentence of its own.
+  check("§193: ⛔ Domains state the access ruling by ASKING THE ENGINE — each antipode carries `domainVerdict`'s own reason, not a sentence this file composed",
+    /across your axis/i.test(A193) && /const antiRow = \(t\) =>/.test(A193)
+    && /const v = ab \? domainVerdict\(ab\) : null;/.test(A193)
+    && /\$\{esc\(v\.reason\)\}/.test(A193)
+    && !/learnable and holdable, never castable/.test(A193)
     && !/Foreclosed — reachable only as a braid/.test(A193));
+  // ⛑ AND THE RULING ITSELF, AT THE LAYER THAT ENFORCES IT: castable, priced, and capped by how far you have leaned.
+  check("§193: …and the engine says the antipode is CASTABLE at a price, with a ceiling that moves with your balance",
+    (() => { const idx = C193.traditionIndex;
+      const TRd = TR193.antipodeOf(silas193.domains?.primary, idx);
+      const ab = Object.values(C193.abilities).find(a => a && a.tradition === TRd);
+      if (!ab) return false;
+      const v = TR193.domainAccess(ab, null, silas193.domains, idx, { skillCapacity: C193.skillCapacity });
+      return v.castable === true && v.band === "antipode" && v.penalty > 1 && /far pole of your own axis/.test(v.reason || "")
+        && Array.isArray(C193.skillCapacity?.antipodeCeilingByLean); })());
   check("§193: …and a save that still lists a foreclosed pole is UN-TOLD rather than left believing it",
     /That rule was retired — nothing forecloses a pole any more/.test(A193)
     && (silas193.foreclosed || []).length === 2);

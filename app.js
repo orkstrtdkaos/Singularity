@@ -141,7 +141,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "1.9.479";
+const APP_VERSION = "1.9.480";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -11899,15 +11899,23 @@ function renderCharacterScreen() {
       }).join("");
       const acq = (character.domainsAcquired || []).map(t => { const dom = CONTENT.traditionIndex?.domainOfTrad?.[t] || null;
         return `<div class="codex-fact"><strong class="trait-tap" data-trait="tradition:${esc(t)}" title="tap: lore + mechanics">${esc(traditionLabel(t))}</strong>${dom ? ` <span class="hint">of ${esc(dom)}</span>` : ""} — acquired, to Tier ${ROM[ceilOf(t, 1)]}</div>`; }).join("");
-      // ⛔ THE ACCESS RULING AS IT STANDS, AND THE OLD ONE UN-TOLD. R9/R16 removed foreclosure and CCODE-339 replaced the
-      // antipode WALL with a mark: "we need to rework the domain access model SO WE NO LONGER LOSE ACCESS TO THE ANTIPOLES… you
-      // can't use the skill itself, ONLY THE BRAIDABLE PART." ⚠️ `domainAccessInner` says so in its own words — "`opts.foreclosed`
-      // IS STILL READ NOWHERE ELSE — old saves may carry the array and it is simply ignored" — and this sheet was still telling
-      // Silas his two foreclosed poles were "reachable only as a braid". A retired restriction printed as a live one is the
-      // defect this project keeps finding, and it was on the character sheet.
+      // ⛔ THE ACCESS RULING AS IT STANDS — AND I HAVE NOW PRINTED TWO RETIRED ONES HERE IN A DAY. This sheet told Silas his two
+      // foreclosed poles were "reachable only as a braid" (R9/R16 had removed foreclosure); I replaced that with CCODE-339's
+      // "learnable, never castable" — and within the hour ERIK RULED: "It's both learnable and castable. Update those out of date
+      // statements." ⚠️ THE ENGINE HAD ALREADY MOVED: `domainAccess` returns `castable: true` with `band: "antipode"` and a
+      // ceiling that rises as your balance evens (`antipodeCeilingByLean`, 5 at even, 2 at full lean). Only the prose lagged.
+      // ⛑ SO THE PROSE STOPS BEING PROSE. Each antipode is asked of the engine and its OWN verdict sentence is shown — the same
+      // string the craft card uses — because a line I compose here is a line that can go stale behind a ruling, twice in a day.
       const anti = [...new Set([character.domains?.primary, character.domains?.secondary].filter(Boolean)
         .map(t => antipodeOf(t, CONTENT.traditionIndex)).filter(Boolean))];
-      const fore = `${anti.length ? `<div class="hint" style="margin-top:4px" title="CCODE-339: the antipode is no longer a wall. A craft across your axis can be learned and held — it simply cannot be cast, and a braid is what spends it.">Across your axis: <strong>${anti.map(traditionLabel).join(", ")}</strong> — learnable and holdable, never castable. Only a braid spends one.</div>` : ""}`
+      const antiRow = (t) => {
+        const ab = Object.values(fullCatalog()).find(a => a && a.tradition === t);
+        const v = ab ? domainVerdict(ab) : null;
+        // ⚠️ NO LABEL OF MY OWN BESIDE IT: the engine's reason already opens "the far pole of your own axis", and saying it twice
+        // in one row is how a sentence starts drifting from the thing it reports.
+        return `<div class="codex-fact"><strong class="trait-tap" data-trait="tradition:${esc(t)}" title="tap: lore + mechanics">${esc(traditionLabel(t))}</strong>${v?.reason ? ` — ${esc(v.reason)}` : ` <span class="hint">across your axis</span>`}${v && v.penalty > 1 ? ` <span class="hint">(at ${v.penalty}× the price)</span>` : ""}</div>`;
+      };
+      const fore = `${anti.length ? `<div style="margin-top:4px" title="Erik 2026-09-12: the antipode is learnable AND castable. It is not a wall and not a free door — it is a DISTANCE, priced by how far you have leaned from it, and the ceiling moves as your balance does.">${anti.map(antiRow).join("")}</div>` : ""}`
         + `${(character.foreclosed || []).length ? `<div class="hint" style="margin-top:2px">Your save still lists ${character.foreclosed.map(traditionLabel).join(" and ")} as foreclosed. That rule was retired — nothing forecloses a pole any more, and the line above is what governs instead.</div>` : ""}`;
       const promos = ["tertiary", "secondary"].map(k => {
         if (!character.domains?.[k]) return ""; const e = promotionEligible(character, k, CONTENT.rules, { catalog: fullCatalog(), traditionIndex: CONTENT.traditionIndex });

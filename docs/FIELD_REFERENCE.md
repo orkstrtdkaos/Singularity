@@ -342,9 +342,9 @@ but cited by its own note, extended by its `rankDeltas`, and named in its player
 |---|---|---|---|---|
 | ~~`ability_rename_map`~~ ✅ **WIRED** | 58.0 KB | | `mechanic_effects` | 16.5 KB |
 | `tempo` | 15.1 KB | | `ability_distribution_target` | 8.3 KB |
-| `the_veil` | 7.9 KB | | `power_cosmology` | 7.5 KB |
+| `the_veil` | 7.9 KB | | `power_cosmology` | 27.4 KB |
 | ⛔ `damage_types` | 6.8 KB | | `healing_intent` | 4.9 KB |
-| `nexuses` | 4.9 KB | | `death_domain` | 4.8 KB |
+| `nexuses` | 13.8 KB | | `death_domain` | 4.8 KB |
 | `companion_template` | 4.1 KB | | `energy_costs` | 2.1 KB |
 
 ⛔ **`damage_types.json` sits in the same folder as the `damage_families.json` that IS loaded, on the same

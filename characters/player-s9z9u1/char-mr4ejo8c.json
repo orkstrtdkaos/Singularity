@@ -1270,35 +1270,248 @@
         "player": "Turn away from the ledger entirely and press Sorel on what she knows about Verath-Sem from the Council's archives—what did the deep stacks say about them, and what did the Council *choose* to keep hidden?",
         "summary": "In the secondary system's binding chamber, Sorel names what she knows and what the Council chose to hide: Verath-Sem was an Archive engineer whose true work the Council has locked away for decades, proof that the silent preparation was not a recent discovery but a generational commitment to control the valley's fate.",
         "narration": "You turn fully from the ledger, letting the Waystaff's light fall away from Verath-Sem's carved name. Sorel is still watching the stone, composure fracturing in real time—you've seen her read a hundred subtle signals in light and water, but she's never been the signal before. You step closer, close enough that Teva has to shift her weight to see around you both.\n\n\"The deep stacks,\" you say, and it's not a question. \"You've read fragments. What did they actually say about Verath-Sem?\"\n\nSorel's jaw tightens. For a breath she doesn't answer—the secondary system's stone chambers hum around you, patient and waiting. Then: \"An engineer. Pre-Transition Archive authority level, water systems division. They had access to the deepest classified stacks. The fragments the Council lets archivist-level staff see are always the same: three entries, all cleared for teaching purposes. Verath-Sem completed two major watershed projects and was 'instrumental in Archive-to-Council knowledge transfer at the Transition's close.' That's the approved language. Institutional, empty.\"\n\nSorel's hands are shaking now. \"But I've worked in water accountability for thirty years. I know what 'instrumental' means when the Council uses it instead of a name. It means they were the person who understood something the Council needed to keep hidden. And the fragments I was allowed to see—they were all about completed projects. Nothing about what Verath-Sem was doing when the Archive sealed. Nothing about why an engineer would carve their name into a pre-Transition system after the Transition was already decades past.\"\n\nShe looks at you directly now, and there's fear underneath the grief. \"The Council doesn't keep secrets about the dead, Cellaceron. They keep secrets about the plan. If Verath-Sem's full record is in the locked stacks—the ones even senior archivists don't touch—then the Council has been protecting something Verath-Sem knew. Something about this.\" She gestures at the binding chamber around you. \"The secondary system. The preparation order. How long the Council has known. Maybe why they've known.\"\n\nTeva is very still, watching both of you. The Waystaff pulses steady, and in its crystal heart, Aevi's motes have dimmed to almost nothing—processing, or perhaps listening to a conversation that cuts too close to its own broken record."
+      },
+      {
+        "player": "Take stock of the people near me.  Teva - my crush and capable apprentice turned fellow adventurer - she's devoted to me.  Sorel - devoted for other reasons such as hearing the truth.  Who else - Maren, the Warden.  Teva's teacher and a solid figure in our tale.",
+        "summary": "In the secondary purification system's binding chamber, Cellaceron takes stock of the three people standing with them: Teva, steady and devoted; Sorel, fracturing under the weight of institutional betrayal; and Maren, reading the geometry with clear understanding of what its deliberate incompleteness means.",
+        "narration": "You step back from the ledger's weight and let yourself actually see the people standing with you in this stone chamber. Teva is at your shoulder—has been, all along. Her eyes moved across the binding chamber's geometry the same way they moved across the Second Terrace's acoustics, reading what the stone was trying to say. There's a steadiness in how she holds herself now that wasn't there when you first met her on the Lower Terrace. She's frightened, maybe—the chamber's pulse still echoes in the mark it left in her chest—but she's here because she *chose* to be, and she's watching your face the way someone watches a person they trust to make the next call. That matters. That matters a lot.\n\nSorel is still at the ledger, but differently now. The institutional armor is cracking visibly. She's been holding the Council's silence alone for days—longer than that, maybe. Carrying the weight of knowing what was hidden and why, and not being able to speak it until now. You named it plainly and she broke. Now she's standing at the evidence of her own institution's deliberate choice, and the person she was before she came into this chamber is not the person standing here. That fracture goes deep.\n\nAnd Maren—the Warden's face is steady, but there's something different in how she's looking at the three empty chambers waiting for components. She's a woman who understands systems. Who knows what a bottleneck means. Who can read the architecture of control the way you read light and stone. She's not surprised by what she's seeing. She's angry. Quietly, carefully, *completely* angry—the kind that doesn't show until it moves."
       }
     ],
     "lastTurn": {
+      "narration": "You step back from the ledger's weight and let yourself actually see the people standing with you in this stone chamber. Teva is at your shoulder—has been, all along. Her eyes moved across the binding chamber's geometry the same way they moved across the Second Terrace's acoustics, reading what the stone was trying to say. There's a steadiness in how she holds herself now that wasn't there when you first met her on the Lower Terrace. She's frightened, maybe—the chamber's pulse still echoes in the mark it left in her chest—but she's here because she *chose* to be, and she's watching your face the way someone watches a person they trust to make the next call. That matters. That matters a lot.\n\nSorel is still at the ledger, but differently now. The institutional armor is cracking visibly. She's been holding the Council's silence alone for days—longer than that, maybe. Carrying the weight of knowing what was hidden and why, and not being able to speak it until now. You named it plainly and she broke. Now she's standing at the evidence of her own institution's deliberate choice, and the person she was before she came into this chamber is not the person standing here. That fracture goes deep.\n\nAnd Maren—the Warden's face is steady, but there's something different in how she's looking at the three empty chambers waiting for components. She's a woman who understands systems. Who knows what a bottleneck means. Who can read the architecture of control the way you read light and stone. She's not surprised by what she's seeing. She's angry. Quietly, carefully, *completely* angry—the kind that doesn't show until it moves.",
+      "sceneSummary": "In the secondary purification system's binding chamber, Cellaceron takes stock of the three people standing with them: Teva, steady and devoted; Sorel, fracturing under the weight of institutional betrayal; and Maren, reading the geometry with clear understanding of what its deliberate incompleteness means.",
+      "choices": [
+        {
+          "label": "Ask Maren directly: 'You came because Sorel called. What do you see in this chamber that the Council doesn't want named?'",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "ask"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Turn to Teva and ask her to read the three empty chambers as she would a resonance problem—what's the pattern in what's missing?",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "teach",
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Sorel the harder question: 'If the Council built this system in secret, who authorized it? Who *knew* they were preparing for the water to change?'",
+          "attribute": "social",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": "hard",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "ask",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Prism Sight on the binding chamber itself—read the light-history of this space and see who has been down here, and when, and what they were doing.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": "hard",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
+      "delegateOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": null,
+      "stageOps": [],
+      "scene": {
+        "setting": "Two levels beneath the upstream pre-Transition structure, inside the secondary purification system's binding chamber. Stone walls rise in concentric rings, honeycomb matrices visible in the steady light of the Waystaff. The ledger sits at the chamber's heart where Verath-Sem's carved name catches shadow and light. The air is still and heavy with machinery-hum from above.",
+        "npcsPresent": [
+          {
+            "name": "Teva",
+            "state": "Standing at your shoulder, eyes moving across the binding chamber's geometry with the same reading-depth she brings to everything. Steady. Frightened. Here by choice."
+          },
+          {
+            "name": "Sorel",
+            "state": "At the ledger's edge, composure fractured, hands trembling slightly. Processing the weight of institutional knowledge that contradicts institutional loyalty."
+          },
+          {
+            "name": "Maren",
+            "state": "Standing quietly, reading the three empty chambers and the honeycomb matrices with the understanding of someone who knows what bottlenecks are built for. Anger held carefully beneath professional bearing."
+          }
+        ],
+        "objects": [
+          "The Waystaff—planted steady, casting steady light, motes condensed at its heart",
+          "The secondary system's honeycomb filtration matrices—vast, intricate, three chambers waiting for components",
+          "The binding chamber—at the system's heart, empty of components but fully designed",
+          "The stone ledger—carved names of pre-Transition engineers and Verath-Sem's name"
+        ],
+        "threads": [
+          "What does the Council's locked record actually contain about Verath-Sem, and what was the plan they were protecting?",
+          "How long has the Council known about the preparation order, and when did they decide to build the secondary system in secret?",
+          "Who authorized the secondary system's construction, and what knowledge did they have about the preparation order?",
+          "What will Maren do with this knowledge when she returns to the Heights?"
+        ]
+      },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "teva-anselvar",
-          "bond": 3,
-          "age": 19
+          "name": "Teva",
+          "note": "Stands at Cellaceron's shoulder in the binding chamber, reading the geometry with steady focus. Her presence shifts from apprentice to equal—she is here by deliberate choice, devoted and capable.",
+          "statusNote": "Present in the secondary system, processing the implications of Verath-Sem's name and the chamber's collaboration-lock design.",
+          "relationshipDelta": 1
+        },
+        {
+          "op": "update",
+          "npcId": "sorel",
+          "name": "Sorel",
+          "note": "Her institutional composure has fractured completely. She recognizes Verath-Sem's name as evidence that the Council's silence was deliberate—not a crisis response, but a choice made generations ago. She is standing at the moment where transparency becomes irreversible.",
+          "statusNote": "Inside the secondary system's binding chamber, carrying the weight of institutional knowledge that contradicts institutional loyalty.",
+          "relationshipDelta": 0
+        },
+        {
+          "op": "meet",
+          "npcId": "maren-warden",
+          "name": "Maren",
+          "role": "Tuning-warden, Harmonic Heights Lower Terrace — now standing witness to the secondary purification system",
+          "age": 52,
+          "sex": "female",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "description": "A woman of solid bearing with the Warden sash and deep acoustic calluses. Her face is steady but her eyes read the geometry with clear anger held carefully beneath professional composure.",
+          "note": "Came down into the secondary system because Sorel called her to witness. She reads the three empty chambers and the collaboration-lock bottleneck with the understanding of someone who knows exactly what this architecture means: control, hidden from both civilizations, waiting.",
+          "learned": [
+            "The secondary purification system is a deliberate bottleneck—neither civilization can complete it without the other",
+            "Verath-Sem's name is carved here—evidence of pre-Transition involvement in the Council's plan",
+            "The system was built in secret, authorized at some institutional level, as part of a generational commitment"
+          ],
+          "skillsObserved": [
+            "Institutional reading—she understands the architecture of control",
+            "Rapid strategic assessment of what the geometry reveals"
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "Present in the secondary system's binding chamber, witnessing what the Council has hidden and understanding its implications for the valley."
         }
       ],
-      "narration": "",
-      "sceneSummary": null,
-      "choices": []
+      "intentsHeard": [],
+      "factUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "Maren descended into the secondary system on day 9 evening—now present as a witness to the binding chamber and its evidence of Council knowledge.",
+          "subPlace": {
+            "name": "The Secondary System's Binding Chamber",
+            "parent": "the_lower_chamber",
+            "note": "Two levels beneath the upstream pre-Transition structure. Concentric stone walls, honeycomb filtration matrices, three empty chambers awaiting components. Stone ledger bearing pre-Transition engineer names and Verath-Sem's newer carving.",
+            "visited": true
+          }
+        }
+      ],
+      "discovery": null,
+      "codexUpdates": [
+        {
+          "topic": "maren-warden",
+          "label": "Maren — The Warden Who Understands",
+          "kind": "person",
+          "entityId": "maren-warden",
+          "fact": "Maren descended into the secondary purification system and read its architecture with clear understanding: the three empty chambers form a deliberate bottleneck that forces Harmonic and Radiant collaboration. She knows what control looks like when it is built into stone.",
+          "links": [
+            "the-lower-chamber",
+            "what-the-water-remembers"
+          ]
+        }
+      ],
+      "holdingOps": [],
+      "debtOps": [],
+      "partyOps": [
+        {
+          "op": "join",
+          "npcId": "maren-warden",
+          "why": "Sorel called her down as a witness to the secondary system. Maren came because the truth matters, and because she understands what a bottleneck built into stone means for the valley."
+        }
+      ],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "The steady conversation and careful stock-taking in the chamber as evening deepens"
+      },
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": null,
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
+      "sceneEnded": false
     },
     "sceneState": {
       "setting": "Two levels beneath the upstream pre-Transition structure, inside the secondary purification system's binding chamber. Stone walls rise in concentric rings, honeycomb matrices visible in the steady light of the Waystaff. The ledger sits at the chamber's heart where Verath-Sem's carved name catches shadow and light. The air is still and heavy with machinery-hum from above.",
       "npcsPresent": [
         {
-          "name": "Sorel",
-          "state": "Standing at the ledger's edge, hands trembling slightly, processing the weight of what she knows and what was hidden fro"
-        },
-        {
           "name": "Teva",
-          "state": "Watching Cellaceron and Sorel both with the same precise attention she brings to everything—reading reaction and implica"
+          "state": "Standing at your shoulder, eyes moving across the binding chamber's geometry with the same reading-depth she brings to e"
         },
         {
-          "name": "Aevi",
-          "state": "Motes dimmed and distributed through the Waystaff's crystal lattice, processing the implications of Verath-Sem's name an"
+          "name": "Sorel",
+          "state": "At the ledger's edge, composure fractured, hands trembling slightly. Processing the weight of institutional knowledge th"
+        },
+        {
+          "name": "Maren",
+          "state": "Standing quietly, reading the three empty chambers and the honeycomb matrices with the understanding of someone who know"
         }
       ],
       "objects": [
@@ -1310,12 +1523,16 @@
       "threads": [
         "What does the Council's locked record actually contain about Verath-Sem, and what was the plan they were protecting?",
         "How long has the Council known about the preparation order, and when did they decide to build the secondary system in secret?",
-        "What does Aevi's broken record know about Verath-Sem, and does recognizing the name unlock anything in the authentication key?",
-        "The delayed activation plan needs technical execution—how do you set a timed sequence for the authentication without alerting the machinery above?"
+        "Who authorized the secondary system's construction, and what knowledge did they have about the preparation order?",
+        "What will Maren do with this knowledge when she returns to the Heights?"
       ]
     },
-    "beats": 9,
-    "subPlace": null
+    "beats": 10,
+    "subPlace": {
+      "slug": "the-secondary-system-s-binding-chamber",
+      "name": "The Secondary System's Binding Chamber",
+      "day": 9
+    }
   },
   "clock": {
     "schemaVersion": 1,
@@ -1795,7 +2012,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d9] Inside the upstream structure. Photonic reader raised and active, taking measurements. Not advancing toward the machinery. Standing at the threshold with the weight of the choice visible in her face.",
         "[d9] Inside the upstream structure. Photonic reader held to chest. Watching Cellaceron read the chamber's purpose. She has named the Council's incomplete secondary system and the hidden timeline plainly. She is no longer a solitary voice—she has chosen transparency over institutional loyalty.",
         "[d9] Watching Cellaceron with the evolved Waystaff. She has seen the binding of Harmonic and Radiant power fields, has named the cost of the secondary system, and has chosen to stand here at the threshold. The moment of decision is visible in her face.",
         "[d9] Inside the upstream structure. Photonic reader held to chest and active. Watching Cellaceron pull the machinery's full sequence into the open—reading through the Waystaff what the Council has been hiding. Her face shows the weight of the Council's choice: they *knew* what this would do, and they…",
@@ -1804,7 +2020,8 @@
         "[d9] Descended into the secondary system and saw Verath-Sem's name carved at the binding chamber's heart. Her face went very still. She recognizes the name from the Council's deep stacks—she knows what it means, and it has confirmed something she suspected but could not prove.",
         "[d9] Her careful composure cracked at Verath-Sem's name. She recognized it from the Council's deep stacks and understands now that the Council's silence was deliberate—not a response to crisis, but a choice made generations ago. She is alone in her institution with this knowledge and the weight is…",
         "[d9] At the ledger in the secondary binding chamber, her composure cracking as she recognizes Verath-Sem's name from the Council's deep stacks—proof the silence was deliberate, not responsive. The weight of institutional knowledge that contradicts institutional loyalty is visible on her face.",
-        "[d9] Named plainly that Verath-Sem was an Archive engineer with deep-stacks access; the Council has kept their full record locked and restricted. The silence about the secondary system was a generational choice, not a crisis response. She is afraid and committed both."
+        "[d9] Named plainly that Verath-Sem was an Archive engineer with deep-stacks access; the Council has kept their full record locked and restricted. The silence about the secondary system was a generational choice, not a crisis response. She is afraid and committed both.",
+        "[d9] Her institutional composure has fractured completely. She recognizes Verath-Sem's name as evidence that the Council's silence was deliberate—not a crisis response, but a choice made generations ago. She is standing at the moment where transparency becomes irreversible."
       ],
       "knownFacts": [
         "Verath-Sem was a pre-Transition Archive engineer with access to the deepest stacks",
@@ -1835,11 +2052,11 @@
         "primary": "radiant_folk"
       },
       "domainsSource": "role",
-      "statusNote": "Inside the secondary system's binding chamber, carrying the weight of institutional knowledge that contradicts institutional loyalty—standing at the moment where transparency becomes irreversible and fear becomes fuel",
+      "statusNote": "Inside the secondary system's binding chamber, carrying the weight of institutional knowledge that contradicts institutional loyalty.",
       "image": "https://image.pollinations.ai/prompt/A%20woman%20of%20about%20sixty%20in%20undyed%20wool%20with%20a%20Plateau%20optical-fiber%20collar%20worn%20plain%20and%20small%3B%20carries%20a%20weight-distributed%20satchel%3B%20reads%20the%20river%20with%20a%20photonic%20instrument%3B%20arrived%20via%20the%20river%2C%20character%20portrait%2C%20named%20Sorel%2C%20woman%2C%20Radiant%20water-accountability%20archivist%E2%80%94witness%20and%20steward%20of%20the%20Council's%20hidden%20timeline%2C%20platonic%20to%20Cellaceron%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=39877&nologo=true",
       "_portraitTier": "devoted",
       "bondType": "platonic",
-      "met": 10,
+      "met": 11,
       "imageSeedKey": "sorel#r1",
       "imagePinned": true
     },
@@ -1932,16 +2149,14 @@
     "tuning-warden-lower-terrace": {
       "id": "tuning-warden-lower-terrace",
       "name": "Maren",
-      "role": "Tuning-warden, Harmonic Heights Lower Terrace",
+      "role": "Tuning-warden, Harmonic Heights Lower Terrace — now standing witness to the secondary purification s",
       "description": "A woman of about fifty with the Warden sash and deep acoustic calluses on both index fingers; has been standing watch over the bulletin board long enough for her tea to go cold.",
       "firstMet": {
         "locationId": "harmonic_heights_terrace",
         "day": 3
       },
-      "relationship": 8,
+      "relationship": 9,
       "history": [
-        "[d7] Still in the doorway as Maren. Dawn now fully behind her. Has not moved or spoken since naming four nights. Watching Farren process.",
-        "[d7] Stepped inside Farren's room for the first time. Flagged the overnight Priority Council relay traffic — multiple copies, Priority flag — as an unknown that needs resolving before C",
         "[d7] Named the midmorning runner deadline unprompted — practical operational warning, not pressure. Still holding the door position.",
         "[d7] Turned from the door and offered to carry the document personally — knows the runner by name, has been counting the time to counter-bell. Practical offer, not a power move.",
         "[d7] Still waiting on the carry decision. Has not pressed. Counter-bell still ~40 minutes out.",
@@ -1949,36 +2164,38 @@
         "[d7] You know this person's name now: Maren (was \"Tuning-warden (name unknown)\")",
         "[d8] Saw Teva, read the situation without being told, and offered backing under one condition: Teva stays available to Warden Council when formal inquiry opens. Addressed Teva directly ",
         "[d8] Not present at the desk — departed after seeing the party off. Key returned as directed.",
-        "[d8] Named as surety for waystation supply requisition — waterskin refill, bark-press paper, four untuned resonance crystals now logged to her warden account."
+        "[d8] Named as surety for waystation supply requisition — waterskin refill, bark-press paper, four untuned resonance crystals now logged to her warden account.",
+        "[d9] Sex recorded: female.",
+        "[d9] Came down into the secondary system because Sorel called her to witness. She reads the three empty chambers and the collaboration-lock bottleneck with the understanding of someone who knows exactly what this architecture means: control, hidden from both civilizations, waiting."
       ],
       "knownFacts": [
-        "Upper-fork runner departs at midmorning; relay does not hold packets once the counter-bell rings",
-        "Counter-bell is approximately forty minutes away",
-        "She knows the midmorning runner by name",
         "Runner's name is Cael — Farren named him directly, suggesting she knows who to find",
         "Teva is now traveling under an informal survey compact with Maren's backing",
         "Maren will log Teva as traveling under survey compact, not at large",
         "Cottage key to be left at waystation desk for Senna",
-        "Her warden account honored at the desk without verification — her standing at the Lower Terrace waystation is solid"
+        "Her warden account honored at the desk without verification — her standing at the Lower Terrace waystation is solid",
+        "The secondary purification system is a deliberate bottleneck—neither civilization can complete it without the other",
+        "Verath-Sem's name is carved here—evidence of pre-Transition involvement in the Council's plan",
+        "The system was built in secret, authorized at some institutional level, as part of a generational commitment"
       ],
       "skillsObserved": [
-        "operational risk assessment — flagged council traffic as var",
-        "operational deadline management — named runner window withou",
         "time-keeping under pressure — accurate counter-bell estimate",
         "immediate departure under time pressure — no delay after rec",
         "field-read under surprise — absorbed Teva's presence and nam",
-        "direct address to Teva — treated her as principal, not subje"
+        "direct address to Teva — treated her as principal, not subje",
+        "Institutional reading—she understands the architecture of co",
+        "Rapid strategic assessment of what the geometry reveals"
       ],
       "status": "active",
       "lastSeen": {
-        "locationId": "harmonic_heights_terrace",
-        "day": 8
+        "locationId": "disputed_zone_fringe",
+        "day": 9
       },
       "aliases": [
         "Tuning-warden (name unknown)"
       ],
       "nameRevealed": true,
-      "statusNote": "Departed the east terrace lane after seeing the party off; will log Teva's status at the waystation desk. Supply costs now logged to her warden account.",
+      "statusNote": "Present in the secondary system's binding chamber, witnessing what the Council has hidden and understanding its implications for the valley.",
       "gender": "woman",
       "pronouns": "she/her",
       "domains": {
@@ -1987,7 +2204,9 @@
       "domainsSource": "role",
       "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Maren%2C%20woman%2C%20Tuning-warden%2C%20Harmonic%20Heights%20Lower%20Terrace%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=58626&nologo=true",
       "_portraitTier": "devoted",
-      "met": 10
+      "met": 11,
+      "sex": "female",
+      "age": 52
     },
     "waystation-morning-runner": {
       "id": "waystation-morning-runner",
@@ -2095,9 +2314,10 @@
         "locationId": "disputed_zone_fringe",
         "day": 9
       },
-      "relationship": 0,
+      "relationship": 1,
       "history": [
-        "[d9] Age recorded: 19."
+        "[d9] Age recorded: 19.",
+        "[d9] Stands at Cellaceron's shoulder in the binding chamber, reading the geometry with steady focus. Her presence shifts from apprentice to equal—she is here by deliberate choice, devoted and capable."
       ],
       "knownFacts": [],
       "skillsObserved": [],
@@ -2114,7 +2334,8 @@
         "locationId": "disputed_zone_fringe",
         "day": 9
       },
-      "met": 2
+      "met": 3,
+      "statusNote": "Present in the secondary system, processing the implications of Verath-Sem's name and the chamber's collaboration-lock design."
     }
   },
   "placeMemory": {
@@ -2380,7 +2601,8 @@
         "[d9] The upstream mound confirmed: hemispherical dressed-stone structure with four-second resonant interval throughout its geometry. Machinery running at full preparation cycle. Authentication gate built into the cycle itself—will stop on command from the key.",
         "[d9] Interior mapped: hemispherical chamber with concentric stone walls, all seams resonating at four-second frequency. Entrance at base, ramp spiraling downward to deeper machinery level. Chamber designed as a precise receiving mechanism for a specific signal.",
         "[d9] Secondary purification system mapped and confirmed—vast honeycomb of resonance chambers carved from living stone, incomplete but deliberately designed to wait. Stone ledger at binding chamber's heart bears names of pre-Transition engineers and a newer carving of Verath-Sem's name.",
-        "[d9] Secondary system's binding chamber geometry mapped: two chambers require Harmonic anchors (deeper, stable), one requires Radiant photonic matrix (higher, clarity-optimized). Water-paths converge at a holding-point before dispersal—the true choice-point."
+        "[d9] Secondary system's binding chamber geometry mapped: two chambers require Harmonic anchors (deeper, stable), one requires Radiant photonic matrix (higher, clarity-optimized). Water-paths converge at a holding-point before dispersal—the true choice-point.",
+        "[d9] Maren descended into the secondary system on day 9 evening—now present as a witness to the binding chamber and its evidence of Council knowledge."
       ],
       "flags": {},
       "subPlaces": {
@@ -2402,9 +2624,10 @@
           "name": "The Secondary System's Binding Chamber",
           "parentId": "disputed_zone_fringe",
           "day": 9,
+          "lastSeen": 9,
           "visited": true,
-          "note": "Two levels beneath the hemispherical chamber—the convergence point where both civilizations' power would need to meet. Architecture reveals deliberate bottleneck and choice-point in water dispersal…",
-          "parentUnresolved": "upstream-structure"
+          "note": "Two levels beneath the upstream pre-Transition structure. Concentric stone walls, honeycomb filtration matrices, three empty chambers awaiting components. Stone ledger bearing pre-Transition…",
+          "parentUnresolved": "the_lower_chamber"
         }
       },
       "lastVisit": 9,
@@ -2413,7 +2636,12 @@
         "violence_peace",
         "space_time",
         "mechanical_spiritual"
-      ]
+      ],
+      "lastEntered": {
+        "slug": "the-secondary-system-s-binding-chamber",
+        "name": "The Secondary System's Binding Chamber",
+        "day": 9
+      }
     }
   },
   "worldState": {
@@ -2579,7 +2807,7 @@
     "lastTickWorldDay": 75,
     "lastCanonWorldDay": 75,
     "lastGenCount": 1815,
-    "turnsSinceOffer": 3,
+    "turnsSinceOffer": 4,
     "wantProgress": {
       "elder-senna": {
         "progress": 4,
@@ -7423,15 +7651,20 @@
         "label": "Maren",
         "kind": "person",
         "facts": [
-          "[d3] Tuning-warden, Harmonic Heights Lower Terrace"
+          "[d3] Tuning-warden, Harmonic Heights Lower Terrace",
+          "[d9] Maren descended into the secondary purification system and read its architecture with clear understanding: the three empty chambers form a deliberate bottleneck that forces Harmonic and Radiant collaboration. She knows what control looks like when it is built into stone."
         ],
-        "links": [],
+        "links": [
+          "the-lower-chamber",
+          "what-the-water-remembers"
+        ],
         "aliases": [
-          "Tuning warden (name unknown)"
+          "Tuning warden (name unknown)",
+          "Maren — The Warden Who Understands"
         ],
         "createdDay": 3,
         "entityId": "tuning-warden-lower-terrace",
-        "updatedDay": 3
+        "updatedDay": 9
       },
       "waystation-morning-runner": {
         "id": "waystation-morning-runner",
@@ -8534,18 +8767,18 @@
   "customEncounters": {},
   "reconcileVersion": 58,
   "tendencies": {
-    "cerebral": 29.901678571487125,
-    "strategic": 19.54224533837808,
-    "cautious": 22.36838798548822,
-    "social": 11.74904152915375,
-    "generous": 3.1717937525247306,
-    "risky": 1.6945956003767304,
-    "carousing": 0.3113932288641687,
-    "patient": 1.8752402857909767,
-    "craft": 0.3111028903123878,
-    "devotion": 1.5012751994394755,
-    "deception": 0.5876204882136226,
-    "leadership": 4.709341274652404
+    "cerebral": 30.154136607199945,
+    "strategic": 19.053689204918626,
+    "cautious": 21.809178285851015,
+    "social": 11.455315490924907,
+    "generous": 3.092498908711612,
+    "risky": 1.6522307103673122,
+    "carousing": 0.30360839814256446,
+    "patient": 1.8283592786462022,
+    "craft": 0.3033253180545781,
+    "devotion": 1.4637433194534886,
+    "deception": 0.572929976008282,
+    "leadership": 4.591607742786094
   },
   "aptitudes": [
     "strategist",
@@ -8555,9 +8788,9 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 255,
-  "updatedAt": 1789312701807,
-  "rev": 259,
+  "actionCount": 256,
+  "updatedAt": 1789312881044,
+  "rev": 260,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8855,7 +9088,7 @@
   "syncedAt": 1785586396787,
   "teachers": {},
   "regionsKnown": {
-    "valley": 78
+    "valley": 79
   },
   "company": [],
   "foreclosed": [],
@@ -9336,10 +9569,10 @@
     {
       "id": "sess-9",
       "startedAt": "2026-09-13T14:25:04.889Z",
-      "lastAt": "2026-09-13T14:31:05.147Z",
+      "lastAt": "2026-09-13T15:21:21.037Z",
       "startDay": 75,
       "endDay": 75,
-      "beats": 2
+      "beats": 3
     }
   ],
   "_pendingArrival": null,
@@ -9414,15 +9647,15 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 65,
-    "choices": 65,
-    "characterDeltas": 47,
-    "scene": 65,
-    "npcUpdates": 60,
-    "codexUpdates": 58,
-    "timeOps": 58,
-    "sceneEnded": 42,
-    "placeUpdates": 29,
+    "sceneSummary": 66,
+    "choices": 66,
+    "characterDeltas": 48,
+    "scene": 66,
+    "npcUpdates": 61,
+    "codexUpdates": 59,
+    "timeOps": 59,
+    "sceneEnded": 43,
+    "placeUpdates": 30,
     "moveTo": 3,
     "questUpdates": 40,
     "stateOps": 1,
@@ -9434,11 +9667,12 @@
     "deeds": 10,
     "ledgerEvents": 4,
     "offer": 12,
-    "gambitApt": 22,
+    "gambitApt": 23,
     "standingOps": 4,
-    "itemUpdates": 2
+    "itemUpdates": 2,
+    "partyOps": 1
   },
-  "_opTurns": 65,
+  "_opTurns": 66,
   "_intentAsked": null,
   "corrections": [
     {
@@ -9601,7 +9835,7 @@
   "holdings": [],
   "portraitPinned": true,
   "skillUses": {
-    "study": 6,
+    "study": 7,
     "prepare": 1,
     "careful": 3,
     "scout": 2,
@@ -9909,5 +10143,364 @@
   "featureOffers": [],
   "_debtReceipts": [],
   "_bandNotes": null,
-  "promptCompositions": {}
+  "promptCompositions": {},
+  "_promptRows": {
+    "character": {
+      "reached": 1,
+      "produced": 1
+    },
+    "location": {
+      "reached": 1,
+      "produced": 1
+    },
+    "region": {
+      "reached": 1,
+      "produced": 1
+    },
+    "groundDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "lore": {
+      "reached": 1,
+      "produced": 1
+    },
+    "traditionMotiveDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "sheetsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "rules": {
+      "reached": 1,
+      "produced": 1
+    },
+    "recentTurns": {
+      "reached": 1,
+      "produced": 1
+    },
+    "timeLabel": {
+      "reached": 1,
+      "produced": 1
+    },
+    "npcRegistryDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "mintedUnmetDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "npcSeedDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "traditionVocab": {
+      "reached": 1,
+      "produced": 1
+    },
+    "standingDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "recalledDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "bearingsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "caravansDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "commandDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "presenceDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "worthHereDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "inventoryDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "sceneState": {
+      "reached": 1,
+      "produced": 1
+    },
+    "holdingsDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "debtsDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "carriedDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "abilityLawDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "questsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "structuredQuestsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "traditionArcDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "npcErrandsDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "codexDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "companionsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "placeMemoryDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "agesMissingDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "newsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "worldArcsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "legendsPursuableDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "wakesDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "arcMoodDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "reachableDeadDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "threatToPlayer": {
+      "reached": 1,
+      "produced": 0
+    },
+    "guardiansDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "resolution": {
+      "reached": 1,
+      "produced": 1
+    },
+    "playerInput": {
+      "reached": 1,
+      "produced": 0
+    },
+    "exactWords": {
+      "reached": 1,
+      "produced": 1
+    },
+    "travelDirective": {
+      "reached": 1,
+      "produced": 0
+    },
+    "itemAdvance": {
+      "reached": 1,
+      "produced": 0
+    },
+    "encounterWeaveDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "encounterOfferDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "fightFramingDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "abilityGrantDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "stageRevealDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "itemEvolveDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "worldPressureDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "offerDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "teacherOfferDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "substrateDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "romanceGuidanceDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "factsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "evolvedItemsDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "opLossNote": {
+      "reached": 1,
+      "produced": 0
+    },
+    "emergenceDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "perilNote": {
+      "reached": 1,
+      "produced": 0
+    },
+    "encounterDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "masteryDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "bookkeepingRestate": {
+      "reached": 1,
+      "produced": 0
+    },
+    "anomalyDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "repairPanelDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "teacherDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "toolkitDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "availableEncounters": {
+      "reached": 1,
+      "produced": 1
+    },
+    "partyDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "ratingDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "registerDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "legendDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "livingWorldDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "assignmentsDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "latentArcsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "seasonalDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "schoolsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "sharedCanonDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "worldCountLabel": {
+      "reached": 1,
+      "produced": 1
+    },
+    "waygateDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "readAloudDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "scenePacingDetail": {
+      "reached": 1,
+      "produced": 1
+    }
+  },
+  "_opUnknown": {
+    "sceneSummary": 1
+  },
+  "pendingCompanyOffers": [
+    {
+      "npcId": "maren-warden",
+      "name": "maren-warden",
+      "roles": [
+        "ally"
+      ],
+      "why": "Sorel called her down as a witness to the secondary system. Maren came because the truth matters, and because she understands what a bottleneck built into stone means for the valley."
+    }
+  ]
 }

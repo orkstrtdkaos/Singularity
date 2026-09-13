@@ -1,0 +1,462 @@
+{
+  "schemaVersion": 1,
+  "id": "dev_report",
+  "at": "2026-09-13T15:23:32.633Z",
+  "build": "1.9.494",
+  "character": {
+    "id": "char-mr4ejo8c",
+    "name": "Cellaceron",
+    "playerKey": "player-s9z9u1",
+    "level": 12,
+    "rev": 262,
+    "day": 9,
+    "turns": 66
+  },
+  "ops": {
+    "emitted": {
+      "sceneSummary": 66,
+      "choices": 66,
+      "characterDeltas": 48,
+      "scene": 66,
+      "npcUpdates": 61,
+      "codexUpdates": 59,
+      "timeOps": 59,
+      "sceneEnded": 43,
+      "placeUpdates": 30,
+      "moveTo": 3,
+      "questUpdates": 40,
+      "stateOps": 1,
+      "factUpdates": 12,
+      "stageOps": 7,
+      "scene_ended": 1,
+      "imagePrompt": 20,
+      "generateRequest": 3,
+      "deeds": 10,
+      "ledgerEvents": 4,
+      "offer": 12,
+      "gambitApt": 23,
+      "standingOps": 4,
+      "itemUpdates": 2,
+      "partyOps": 1
+    },
+    "outcomes": {
+      "offer": {
+        "applied": 13,
+        "rejected": 0,
+        "lastWhy": null,
+        "exceedsEmissions": true
+      }
+    },
+    "never": [
+      "adoptSchool",
+      "arcOps",
+      "bandOps",
+      "deathOps",
+      "debtOps",
+      "delegateOps",
+      "deriveItem",
+      "discovery",
+      "encounterOps",
+      "gambitOps",
+      "holdingOps",
+      "intentsHeard",
+      "markDefiningMoment",
+      "markTeacher",
+      "newAbility",
+      "newEncounter",
+      "offerAcquisition",
+      "offerIntent",
+      "offerPromotion",
+      "projectOps",
+      "unlockPrecursor",
+      "unlockSubstrate"
+    ],
+    "neverCount": 22,
+    "knownCount": 43,
+    "unknown": {
+      "sceneSummary": 1
+    },
+    "inProse": {},
+    "emptyClaims": 0
+  },
+  "coverage": {
+    "npcRegistry": {
+      "n": 13,
+      "fields": {
+        "age": 2,
+        "sex": 1,
+        "gender": 8,
+        "pronouns": 9,
+        "role": 9,
+        "description": 5,
+        "bondType": 2,
+        "relationship": 13,
+        "status": 13,
+        "knownFacts": 8,
+        "skillsObserved": 8,
+        "deeds": 0,
+        "domains": 7
+      }
+    },
+    "inventory": {
+      "n": 11,
+      "fields": {
+        "customName": 1,
+        "aliases": 0,
+        "kind": 11,
+        "description": 10
+      }
+    }
+  },
+  "promptRows": {
+    "character": {
+      "reached": 1,
+      "produced": 1
+    },
+    "location": {
+      "reached": 1,
+      "produced": 1
+    },
+    "region": {
+      "reached": 1,
+      "produced": 1
+    },
+    "groundDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "lore": {
+      "reached": 1,
+      "produced": 1
+    },
+    "traditionMotiveDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "sheetsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "rules": {
+      "reached": 1,
+      "produced": 1
+    },
+    "recentTurns": {
+      "reached": 1,
+      "produced": 1
+    },
+    "timeLabel": {
+      "reached": 1,
+      "produced": 1
+    },
+    "npcRegistryDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "mintedUnmetDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "npcSeedDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "traditionVocab": {
+      "reached": 1,
+      "produced": 1
+    },
+    "standingDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "recalledDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "bearingsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "caravansDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "commandDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "presenceDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "worthHereDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "inventoryDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "sceneState": {
+      "reached": 1,
+      "produced": 1
+    },
+    "holdingsDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "debtsDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "carriedDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "abilityLawDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "questsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "structuredQuestsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "traditionArcDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "npcErrandsDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "codexDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "companionsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "placeMemoryDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "agesMissingDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "newsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "worldArcsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "legendsPursuableDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "wakesDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "arcMoodDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "reachableDeadDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "threatToPlayer": {
+      "reached": 1,
+      "produced": 0
+    },
+    "guardiansDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "resolution": {
+      "reached": 1,
+      "produced": 1
+    },
+    "playerInput": {
+      "reached": 1,
+      "produced": 0
+    },
+    "exactWords": {
+      "reached": 1,
+      "produced": 1
+    },
+    "travelDirective": {
+      "reached": 1,
+      "produced": 0
+    },
+    "itemAdvance": {
+      "reached": 1,
+      "produced": 0
+    },
+    "encounterWeaveDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "encounterOfferDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "fightFramingDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "abilityGrantDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "stageRevealDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "itemEvolveDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "worldPressureDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "offerDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "teacherOfferDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "substrateDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "romanceGuidanceDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "factsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "evolvedItemsDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "opLossNote": {
+      "reached": 1,
+      "produced": 0
+    },
+    "emergenceDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "perilNote": {
+      "reached": 1,
+      "produced": 0
+    },
+    "encounterDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "masteryDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "bookkeepingRestate": {
+      "reached": 1,
+      "produced": 0
+    },
+    "anomalyDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "repairPanelDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "teacherDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "toolkitDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "availableEncounters": {
+      "reached": 1,
+      "produced": 1
+    },
+    "partyDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "ratingDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "registerDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "legendDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "livingWorldDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "assignmentsDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "latentArcsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "seasonalDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "schoolsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "sharedCanonDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "worldCountLabel": {
+      "reached": 1,
+      "produced": 1
+    },
+    "waygateDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "readAloudDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "scenePacingDetail": {
+      "reached": 1,
+      "produced": 1
+    }
+  },
+  "world": {
+    "locations": 138,
+    "abilities": 438,
+    "npcs": 149
+  }
+}

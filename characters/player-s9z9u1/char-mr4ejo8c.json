@@ -1273,45 +1273,12 @@
       }
     ],
     "lastTurn": {
-      "partyOps": [
-        {
-          "op": "add",
-          "npcId": "teva-anselvar",
-          "role": "apprentice"
-        }
-      ],
       "npcUpdates": [
         {
-          "op": "meet",
+          "op": "update",
           "npcId": "teva-anselvar",
-          "name": "Teva Anselvar",
-          "role": "Apprentice resonance-reader, Harmonic Heights — traveling under survey compact with Cellaceron",
-          "age": 17,
-          "pronouns": "she/her",
-          "disposition": "friendly",
-          "dispositionScore": 4,
-          "appearance": "A slight young woman of seventeen with close-cropped dark hair and the undyed apprentice sash of the Heights. Ink-stained fingers. Carries a small niche-notebook worn soft at the corners. Moves quietly and watches everything.",
-          "persona": "Precise, self-contained, and intensely observant. She absorbed Farren's advanced geometry through an open door and recorded his vocabulary without being asked. She brings the same quality of attention to people that she brings to resonance intervals — nothing is incidental to her. Not cold; she simply processes before she speaks, and when she speaks it counts.",
-          "skills": [
-            "Directional interval-count — held an untrained eleven-second resonance note at fourteen; now reads the four-second interval as a compass bearing with confirmed accuracy",
-            "Resonance vocabulary absorption — recorded Farren's advanced geometry terms in personal niche notes from an open-door session",
-            "Precise observation under pressure — tracks reaction and implication simultaneously while watching Cellaceron and Sorel",
-            "Nanite-mark correspondence — carries a live nanite mark from the lower chamber, in real-time correspondence with that place"
-          ],
-          "knownFacts": [
-            "Brought to the Heights at fourteen after holding an untrained eleven-second resonance note — an Adaptor settlement child, two ridges east of Millbrook",
-            "Carries a nanite mark from the lower chamber that remains in live correspondence with that place, speaking posture and frequency",
-            "Her directional interval-count bearing diverges from the northeast-by-east seam and points toward the same destination the chamber identified",
-            "On Day 9 dawn the chamber's fifth-fold reply activated her mark in real time — she confirmed the northeast-by-east bearing at that moment",
-            "Has been quietly recording Farren's advanced geometry vocabulary in her niche-notebook; at least some of that material is not officially in her curriculum yet",
-            "Logged by Maren as traveling under survey compact, not at large"
-          ],
-          "historyWithCharacter": [
-            "[d9] Descended into the secondary system and witnessed Sorel's recognition of Verath-Sem's name — reading reaction and implication from both Sorel and Cellaceron with precise attention",
-            "[d9] Present at the lower chamber's convergence point when Aevi named Verath-Sem and the authentication key — has held that knowledge quietly since",
-            "[d9] Her nanite mark activated in real time at the chamber's fifth-fold reply; she confirmed the northeast-by-east bearing the moment it rang"
-          ],
-          "status": "active"
+          "bond": 3,
+          "age": 19
         }
       ],
       "narration": "",
@@ -1352,7 +1319,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 9,
-    "hour": 19,
+    "hour": 20,
     "realAnchor": null
   },
   "companions": [
@@ -2128,18 +2095,16 @@
         "day": 9
       },
       "relationship": 0,
-      "history": [],
+      "history": [
+        "[d9] Age recorded: 19."
+      ],
       "knownFacts": [],
       "skillsObserved": [],
       "status": "active",
       "sex": null,
       "gender": null,
       "pronouns": "she/her",
-      "age": 17,
-      "isMinor": true,
-      "_gen": {
-        "romanceEligible": false
-      },
+      "age": 19,
       "domains": {
         "primary": "harmonic"
       },
@@ -2148,7 +2113,7 @@
         "locationId": "disputed_zone_fringe",
         "day": 9
       },
-      "met": 1
+      "met": 2
     }
   },
   "placeMemory": {
@@ -2613,7 +2578,7 @@
     "lastTickWorldDay": 75,
     "lastCanonWorldDay": 75,
     "lastGenCount": 1814,
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 3,
     "wantProgress": {
       "elder-senna": {
         "progress": 4,
@@ -8590,8 +8555,8 @@
     "stalwart"
   ],
   "actionCount": 255,
-  "updatedAt": 1789309661223,
-  "rev": 252,
+  "updatedAt": 1789309865153,
+  "rev": 254,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9370,10 +9335,10 @@
     {
       "id": "sess-9",
       "startedAt": "2026-09-13T14:25:04.889Z",
-      "lastAt": "2026-09-13T14:25:04.889Z",
+      "lastAt": "2026-09-13T14:31:05.147Z",
       "startDay": 75,
       "endDay": 75,
-      "beats": 1
+      "beats": 2
     }
   ],
   "_pendingArrival": null,

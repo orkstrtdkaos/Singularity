@@ -775,7 +775,46 @@ for (const pack of PACKS) {
   const RA = await import("../scripts/world/reanchor.mjs");
   const pnDisk = rj("content/packs/core/world/placenames.json");
   const seedPos393 = {}; for (const s2 of canon.seeds) seedPos393[s2.id] = { lat: s2.lat, lon: s2.lon };
-  const res = RA.resolvePlaceNames(pnDisk, built.hydrology, { seedPos: seedPos393 });
+
+  // ⛔ SNG-565 (Aevi) — THIS RESOLVED AGAINST `built.hydrology`: A WORLD WE HAVE RULED NEVER TO BUILD.
+  //
+  // ⚑ MEASURED BOTH WAYS. Against the SHIPPED asset — the world Silas and Cellaceron are standing in — every name
+  // binds but two: 9/9 rivers, 11/11 fens, unresolved exactly [The Greenwater, The Axewater], which is precisely the
+  // census `terrain.json` already ships. Against a REBUILD, seven fail. ⛔ ALL SIX OF THE "BROKEN" NAMES BIND IN THE
+  // WORLD THAT EXISTS; they fail only against a regeneration Erik has ruled out: "we are moving forward with the
+  // unexplained diff — not intending to regenerate the world again any time soon."
+  //
+  // ⚠️ AND AEVI WAS ONE COMMAND FROM RESITING OR RETIRING THEM on that evidence, which would have destroyed six
+  // WORKING river names in the live world to satisfy a gate about a world nobody will ever load. Her words, and they
+  // belong here: "AN AUTHORISATION IS NOT A MEASUREMENT." The instrument disagreed with the instruction and the
+  // instrument was right.
+  //
+  // ⛔ TWO QUESTIONS, ONE GATE EACH. "Does the world drift from its inputs" is SNG-391's, and SNG-391 reports it
+  // correctly and loudly, baselined red on purpose. "Do the names fit the world" is this one — and until now it was
+  // answering the first, so ONE TRUE FACT WAS COUNTED ELEVEN TIMES and read as a broken corpus.
+  const shipped = JSON.parse(disk);
+  const res = RA.resolvePlaceNames(pnDisk, shipped.hydrology, { seedPos: seedPos393 });
+
+  // ⛑ AND THE RE-RESOLUTION MUST REPRODUCE WHAT THE ASSET SHIPS. Without this the gate could drift from the file it
+  // is meant to describe and nobody would know — the stored-copy-of-a-derived-value failure, one layer up.
+  {
+    const shippedUn = (shipped.placeNames?.unresolved || []).map((u) => u.id).sort().join(",");
+    const freshUn = res.placeNames.unresolved.map((u) => u.id).sort().join(",");
+    check("SNG-393: resolving the authored names against the SHIPPED hydrology reproduces the census the asset ships",
+      shippedUn === freshUn, `asset [${shippedUn}] vs resolver [${freshUn}]`);
+  }
+
+  // ⬜ SNG-565 §O3 (Aevi's optional, and it is worth having): a name that binds TODAY and would NOT bind after a
+  // rebuild is a FORECAST, not a failure. ⛔ It must never fail this gate — the whole finding is that it already did,
+  // eleven times — but it is real information for the day someone does rebuild, which is exactly the drift census
+  // Erik ratified: fail on an unexplained diff, REPORT an expected one.
+  {
+    const rebuilt = RA.resolvePlaceNames(pnDisk, built.hydrology, { seedPos: seedPos393 });
+    const shippedOk = new Set([...res.placeNames.rivers, ...res.placeNames.fens].filter((x) => x.resolved).map((x) => x.id));
+    const rebuiltOk = new Set([...rebuilt.placeNames.rivers, ...rebuilt.placeNames.fens].filter((x) => x.resolved).map((x) => x.id));
+    const wouldLose = [...shippedOk].filter((id) => !rebuiltOk.has(id));
+    if (wouldLose.length) console.log(`  note  SNG-393 FORECAST: ${wouldLose.length} name(s) bind today and would NOT after a rebuild — ${wouldLose.join(", ")}. Not a failure; SNG-391 owns the rebuild.`);
+  }
 
   // ⛔ THE CENSUS, NOT A PASS/FAIL: seven names cannot bind in the ORDER-FREE decomposition, and the
   // diagnosis says why — the Choirwater's best town-match is the 110° main stem at 46.3° with margin

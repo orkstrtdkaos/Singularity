@@ -1460,6 +1460,26 @@ the date it was taken (${MEASURED_ON}) and goes stale the moment anyone turns a 
 in §4d so any number here can be re-derived rather than trusted.
 <!-- END verification-ledger -->`;
 
+// ⛑ SNG-565 §O4 (Aevi, and Erik in the same hour) — THE VERDICT GOES FIRST.
+//
+// ⚠️ It printed on line 131 of 137, under the entire §4c block. In her words: "Neither Erik nor I could read what
+// `verification_ledger` was failing on until I redirected it to a file... A one-line summary FIRST would have saved
+// this whole investigation." ⛔ A DIAGNOSTIC NOBODY CAN READ WITHOUT REDIRECTING IT TO A FILE IS NOT A DIAGNOSTIC —
+// and this is the one suite the ratchet carries a known-red count for, so it is read more often than most.
+//
+// ⛑ SAID TWICE, DELIBERATELY: first for a human, last for a `| tail` and for every reader that has ever grepped the
+// final line. Moving WHERE a verdict lands must not change whether an existing reader still finds it — the same
+// courtesy a moved field owes its consumers.
+function sayVerdict() {
+  if (failures) {
+    console.log(`LEDGER: ${failures} PROBLEM(S) — a requirement is claiming a verification that is missing, ambiguous, or red:`);
+    for (const p of problems) console.log("  · " + p);
+  } else {
+    console.log(`LEDGER: ok — ${LEDGER.length} requirements, ${gateCount} gates, every one found and green.`);
+  }
+}
+sayVerdict();
+console.log("");
 if (process.argv.includes("--write")) {
   const specPath = join(root, "SYSTEM_SPEC.md");
   const spec = readFileSync(specPath, "utf8");
@@ -1479,10 +1499,5 @@ if (process.argv.includes("--write")) {
 }
 
 console.log("");
-if (failures) {
-  console.log(`LEDGER: ${failures} PROBLEM(S) — a requirement is claiming a verification that is missing, ambiguous, or red:`);
-  for (const p of problems) console.log("  · " + p);
-} else {
-  console.log(`LEDGER: ok — ${LEDGER.length} requirements, ${gateCount} gates, every one found and green.`);
-}
+sayVerdict();
 process.exit(failures ? 1 : 0);

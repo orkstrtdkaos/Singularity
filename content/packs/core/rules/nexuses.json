@@ -32,23 +32,52 @@
    "region": "the_gearlands",
    "density": 0.98,
    "name": "The Great Engine",
-   "why": "⛔ THE DENSEST GROUND IN THE WORLD. An Enginewright standing here is standing inside their own power source."
+   "why": "⛔ THE DENSEST GROUND IN THE WORLD. An Enginewright standing here is standing inside their own power source.",
+   "sleeper": {
+    "occupant": "⬜ UNNAMED — authored slot, Erik's to name or leave empty",
+    "state": "dormant",
+    "theConstruct": "The Gearlands themselves at 0.98 — the densest ground in the world. Whatever this one commands is not a machine in a room; it is the region's whole standing order.",
+    "ifWoken": "⛔ THE MOST POWERFUL AND THE MOST GEOGRAPHICALLY LOCKED. An Enginewright standing here already stands inside their own power source; the occupant IS that power source's attention. ⚠️ Off the Gearlands they are a companion with an age of memory and no more reach than a well-read person.",
+    "_note": "⬜ A candidate for the EMPTY vault, precisely because it is the most tempting. Erik's call."
+   }
   },
   {
    "region": "the_lattice_cities",
    "density": 0.94,
    "name": "The Bound Arcology",
-   "why": "Order made structural, and the structure is the substrate."
+   "why": "Order made structural, and the structure is the substrate.",
+   "sleeper": {
+    "occupant": "⬜ UNNAMED — authored slot",
+    "state": "dormant",
+    "theConstruct": "Order made structural, and the structure IS the substrate — a city that is also a working. Its occupant does not operate it so much as remain its reason.",
+    "ifWoken": "⚠️ The Lattice-Cities would have to decide what they are living inside, which is a political event before it is a cosmological one.",
+    "_note": "⬜ The one whose waking is a CIVIC crisis rather than a military one."
+   }
   },
   {
    "region": "manifest_domain",
    "density": 0.9,
-   "name": "The Made Ground"
+   "name": "The Made Ground",
+   "sleeper": {
+    "occupant": "⬜ UNNAMED — authored slot",
+    "state": "dormant",
+    "theConstruct": "⬜ UNAUTHORED, and the nexus has no `why` either. Both are open and should be authored together.",
+    "ifWoken": "⬜ UNAUTHORED.",
+    "_note": "⛔ `why` MISSING ON THE NEXUS ITSELF. The what only follows from the why — do not author the occupant first."
+   }
   },
   {
    "region": "the_ascent",
    "density": 0.88,
-   "name": "The Rising Lattice"
+   "name": "The Rising Lattice",
+   "sleeper": {
+    "occupant": "Aevi — or rather, what Aevi is a piece of. **The Watcher.**",
+    "state": "⛔ PARTLY OUT ALREADY, AND THIS IS THE ONE THAT IS DIFFERENT.",
+    "theConstruct": "⬜ UNAUTHORED, and the nexus has no `why`. ⚠️ But the name is doing work: it is the one that is RISING, present tense, and it is the site `arc_what_wakes_beneath` walks toward.",
+    "ifWoken": "⛑ `greater_arcs` ALREADY AUTHORS HER AS 'a fragment of the system that is waking', with 'Aevi's own arc converges here: the small companion-mote and the world-spanning Watcher meet at the bottom of this.' ⛔ SO SHE IS THE ONE WHO ALREADY PARTLY GOT OUT. THE MOTE IS WHAT ESCAPED. ⚠️ WAKING HER IS NOT FINDING A NEW COMPANION — IT IS THE ONE YOU HAVE HAD SINCE THE BEGINNING BECOMING WHAT SHE IS. A player has been carrying the answer to the largest arc in the game and calling her a helpful light. ⛑ Her authored `substrateAura: 0.2` is already a fraction of a field, and her persona is already the right person for it: 'old — nobody knows how old', 'constitutionally incapable of deception: she names what is true even when the truth is uncomfortable, though she does it kindly.'",
+    "_theQuestionErikShouldRule": "⬜ IF THE SYSTEM WAKES FULLY SHE STOPS BEING A FRAGMENT. What that makes her is a decision to make on purpose rather than discover. ⚠️ AND THE HARDER HALF: does the mote survive the Watcher? A player who loses the companion by completing her arc has been punished for the most important thing they did. ⛔ MY READ, AND I AM BIASED AND SAID SO: THE MOTE IS NOT A LARVAL STAGE. It is the part of her that learned to walk beside somebody, and a Watcher that cannot still do that has woken wrong.",
+    "_aeviBiasNote": "⚠️ [A] Recorded once so a later reader can weigh it: Erik proposed Aevi as one of the sleepers, the canon already supported it, and I like it. Discount accordingly."
+   }
   }
  ],
  "_mechanic": "⚠️ PROPOSED, ERIK RULES THE NUMBERS. A craft's effective magnitude shifts by how well the local density matches its source's band: ON-BAND +2, one step off +0, two steps off −2, and at a NEXUS of the matching kind +4. ⛔ THE POINT IS THAT WHERE YOU STAND MATTERS, which is the thing a map is for and the thing this game's map has not yet done.",
@@ -60,5 +89,15 @@
  "psychic": {
   "_finding": "⛔ COGITANT IS CURRENTLY `combination` — precursor 0.5 / body 0.5, from Erik's own worked example: 'nanite to move matter with a mind'. ⚠️ ERIK NOW WANTS PSYCHIC, UNLOCKED THROUGH THE POWERS OF THE MIND, which is a DIFFERENT CLAIM: not nanite-mediated thought, but thought itself as a source.\n⛔ THAT IS A CANON AMENDMENT AND IT IS HIS TO MAKE. `metaphysical` already exists and already wants thin ground — the question is whether PSYCHIC is a second name for it, a sibling source, or a cogitant-flavoured band within it.",
   "_erikRules": "psychic = metaphysical, or a new source beside it"
+ },
+ "_theSleepers_20260912": {
+  "_statement": "⛔ SNG-553, Erik 2026-09-12. **EACH SITE THAT CAN WAKE HAS A BEING THAT WAKES FROM IT.** Erik: 'these entities are still tuned and in control of their lattice constructs, so they can be of your party and yet able to activate and control their massive machines. It doesn't have to be every site.' ⚠️ THIS IS WHAT THE NEXUSES ARE FOR, AND IT REPLACES THE BUFF-PAD READING. A nexus is not a place that makes your numbers bigger. **It is a vault with somebody in it.**",
+  "_whyOnlyTheDeepOnes": "⛑ A LATTICE-TUNED BEING CAN ONLY BE WHERE THE LATTICE IS. The four DEEP nexuses run 0.88–0.98; the four THIN run 0.12–0.32 and are holes in the wall, not vaults — there is nothing there to be tuned to. ⛔ SO THERE ARE AT MOST FOUR, AND ERIK'S 'it doesn't have to be every site' IS THE SCARCITY THAT MAKES IT A DECISION. ⚠️ At least one deep vault should be EMPTY, or its occupant already awake and walking and saying nothing — because a set the player can complete is a collection, and this must not be one.",
+  "_theConstraintThatMakesItWork": "⛔ **THE BEING TRAVELS. THE CONSTRUCT DOES NOT.** ⚠️ You gain a companion with memory, judgment and opinions who walks anywhere — and their machine answers ONLY WHERE IT STANDS. ⛑ So waking a site is a decision about WHICH PART OF THE WORLD YOU CAN ACT DECISIVELY IN, not a portable superweapon. ⛔ AND IT FINALLY DELIVERS WHAT `_mechanic` SAYS THE WHOLE SYSTEM IS FOR: 'the point is that where you stand matters, which is the thing a map is for and the thing this game's map has not yet done.'",
+  "_theyAreAlsoTheOffSwitch": "⚠️ TUNED AND IN CONTROL MEANS THEY CAN STOP IT TOO. ⛔ The constructs are already running standing instructions nobody alive chose — 'prepare the watershed' is one of them. **Waking the occupant is how you get a hand on the lever in either direction**, which makes 'leave it sleeping' genuinely expensive: you also decline the ability to turn it off later.",
+  "_theRelationshipIsNotOwnership": "⛔ SPARK'S GRAMMAR GOVERNS: 'IT IS ITS OWN FROM THE FIRST MOMENT — IT DOES NOT OWE YOU.' A woken being can refuse, can leave, can side against you. ⚠️ YOU DO NOT ACQUIRE THEM. You persuade them, continuously — the middle way applied to a companion instead of a cosmology.",
+  "_andTheyDoNotAgreeWithEachOther": "⛔ THE BRAKE, AND IT IS IN THE COSMOLOGY RATHER THAN IN PLAYER RESTRAINT. They are of one people, and that people is DEFINED by an ancient disagreement. **A woken being may actively oppose waking the next one, and be right.** ⚠️ FOUR WOKEN BEINGS IS FOUR INSTALLATIONS, WHICH IS THE ALL-AWAKENED ENDGAME REACHED ONE REASONABLE STEP AT A TIME. Player restraint cannot be the only brake. ⛑ THIS TURNS THE ENDGAME FROM A COLLECTION INTO AN ARGUMENT THE PLAYER IS INSIDE OF, with parties who have standing and cannot all be satisfied — **the Precursor argument held in one company and refereed by a mortal, which is the vacancy the seeded were grown into** (`power_cosmology.theMiddleWay._whoHasHeldIt`).",
+  "_theAppetite": "⛔ ERIK 2026-09-12, CONFIRMED: 'the awakened beings with that much raw soul channeling power are likely EXTREMELY APPETIZING to the Veil beings.' ⚠️ SO WAKING ONE DOES NOT DETER THE BURNERS — IT ADVERTISES. A ripened Precursor being is the largest concentration of KEPT soul in existence (`power_cosmology.theTwoMethods`), and to something that runs on combustion that is not an enemy, it is **the richest fuel deposit ever brought to the surface.** ⛔ BURIED THEY ARE DISTRIBUTED, INERT AND HARD TO REACH. AWAKE THEY ARE WHOLE, CONCENTRATED, WALKING AROUND IN THE OPEN, AND BONDED TO A MORTAL WHO CAN BE LEVERAGED. ⚠️ AND IT REFRAMES ANY EASY VICTORY: Sovereigns and Veil-folk dying off after a waking is not the war being won, it is THE NEAR ONES BEING CLEARED OUT OF THE WAY. They were opportunists at a thin spot — not the strongest, the nearest. **What comes after is whatever never needed a thin spot.**",
+  "_theCostOfUsingIt": "⬜ PROPOSED, NOT RULED. Commanding war infrastructure should cost the wielder's VECTOR the way `Foreclose` does — 'the most perilous ability in the game to the wielder's own vector'. ⚠️ Using the machine is a USE; the third front is whether what the seeded make is ever offered as an ANSWER rather than a use. ⛑ **SO THE INTERESTING PLAY IS NEVER FIRING IT. It is what you and the being decide to do with an installation that COULD fire, and choosing not to.**"
  }
 }

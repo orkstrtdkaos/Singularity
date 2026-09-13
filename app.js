@@ -143,7 +143,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "1.9.498";
+const APP_VERSION = "1.9.500";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2095,6 +2095,18 @@ async function runFireTests({ apply = false, only = null } = {}) {
   if (!isDevMode() || !character) return [];
   const real = character;
   const out = [];
+  // ⛔ SNG-563 — THE FIRST REAL REPORT CAME BACK A FALSE GREEN, AND IT CAUGHT ITSELF. Every one of the fourteen ops
+  // read "applied — wrote activeScene, clock, rev, sessions, updatedAt, worldState", and not one of those is the op's
+  // doing: `applyTurn` writes them on EVERY turn whatever it carries. ⚠️ SO `no-op` COULD NEVER FIRE, and `no-op` is the
+  // single finding this harness exists to surface — an op that applies cleanly and moves nothing.
+  // ⛑ A CONTROL. Apply an EMPTY turn first; whatever moves is the turn's own bookkeeping, and the signal is what each
+  // op moves BEYOND it. The subtraction is the instrument — without it the diff measures applyTurn, not the op.
+  const control = JSON.parse(JSON.stringify(real));
+  let noise = [];
+  try { character = control; applyTurn({ narration: "", choices: [] }, null, null); }
+  catch { /* a control that throws is itself worth seeing, and the ops below still run */ }
+  finally { character = real; }
+  noise = new Set(diffKeys(JSON.parse(JSON.stringify(real)), control));
   for (const t of FIRE_TESTS) {
     if (only && t.op !== only) continue;
     const copy = JSON.parse(JSON.stringify(real));
@@ -2110,9 +2122,12 @@ async function runFireTests({ apply = false, only = null } = {}) {
       applyTurn({ narration: "", choices: [], ...frag }, null, null);
     } catch (err) { verdict = "threw"; why = String(err?.message || err).slice(0, 200); }   // prose-cap-ok: an Error message, not model prose
     finally { character = real; }             // ⛔ ALWAYS — a harness that can strand the live character is worse than none
-    const moved = diffKeys(before, copy);
-    if (verdict === "applied" && !moved.length) { verdict = "no-op"; why = "applied without error and wrote nothing"; }
-    out.push({ op: t.op, verdict, why, moved, what: t.what,
+    // ⛑ WHAT THIS OP MOVED, MINUS WHAT ANY TURN MOVES. `clock`, `rev`, `sessions`, `updatedAt`, `activeScene` and
+    // `worldState` advance on every beat; counting them as the op's work is how fourteen dead ops read as healthy.
+    const movedAll = diffKeys(before, copy);
+    const moved = movedAll.filter(k => !noise.has(k));
+    if (verdict === "applied" && !moved.length) { verdict = "no-op"; why = `applied without error and wrote nothing of its own (the turn moved ${movedAll.join(", ") || "nothing"})`; }
+    out.push({ op: t.op, verdict, why, moved, alsoMoved: movedAll.filter(k => noise.has(k)), what: t.what,
       failures: (copy._applyFailures || []).map(f => `${f.op}: ${f.message}`).slice(0, 2) });
     // ⛑ AND IT CAN BE FOR REAL WHEN HE WANTS IT TO BE — "actually test drive any part of the game I want" — but only
     // when asked, only for an op that already proved it applies, and it says so on the record.

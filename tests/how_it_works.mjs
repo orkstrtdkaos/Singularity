@@ -11101,8 +11101,13 @@ console.log("\n── §141 · a receipt that is saved is a description, not a h
     /o\.targetChoice = persistableChoice\(aimedAt\)/.test(rd("engine/skill_battle.js")));
   // ⛔ AND THE LIVE PROPERTY, MEASURED END TO END: play the step that threw on his save, and serialise.
   const c141 = JSON.parse(rd("characters/player-s9z9u1/char-mrum8y4d.json"));
-  const def141 = c141.customEncounters["re-beast_hollow_pace"];
-  if (!def141) check("§141: (his own opponent is on the save, so the failing step can be replayed)", false, "def missing");
+  // ⛔ SNG-563: THIS NAMED ONE ENCOUNTER OFF A LIVE SAVE, and `customEncounters` is CAPPED — `re-beast_hollow_pace`
+  // aged out of Loki's five and the gate went red for it, having tested nothing that changed. ⚠️ THE CLAIM IS ABOUT
+  // THE SHAPE, not about that opponent: a persisted choice keeps its identifiers and drops every live object, and the
+  // step serialises. Any real opponent on his save proves it, so it takes whichever one is there — third gate today
+  // that pinned a value legitimately allowed to move, and the same fix each time: assert the claim.
+  const def141 = Object.values(c141.customEncounters || {})[0];
+  if (!def141) check("§141: (an opponent of his own is on the save, so the failing step can be replayed)", false, "no customEncounters on the save at all");
   else {
     c141.activeEncounter = { defId: def141.id, state: EN141.startEncounter(def141, { oppSheet: EN141.contestSheetFor(def141, { content: C141 }) }) };
     const pick141 = (c141.abilities || []).map(a => C141.abilities[a.abilityId]).find(d => d && (d.functions || []).includes("reveal"));

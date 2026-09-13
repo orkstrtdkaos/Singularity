@@ -1278,225 +1278,15 @@
       }
     ],
     "lastTurn": {
-      "narration": "You step back from the ledger's weight and let yourself actually see the people standing with you in this stone chamber. Teva is at your shoulder—has been, all along. Her eyes moved across the binding chamber's geometry the same way they moved across the Second Terrace's acoustics, reading what the stone was trying to say. There's a steadiness in how she holds herself now that wasn't there when you first met her on the Lower Terrace. She's frightened, maybe—the chamber's pulse still echoes in the mark it left in her chest—but she's here because she *chose* to be, and she's watching your face the way someone watches a person they trust to make the next call. That matters. That matters a lot.\n\nSorel is still at the ledger, but differently now. The institutional armor is cracking visibly. She's been holding the Council's silence alone for days—longer than that, maybe. Carrying the weight of knowing what was hidden and why, and not being able to speak it until now. You named it plainly and she broke. Now she's standing at the evidence of her own institution's deliberate choice, and the person she was before she came into this chamber is not the person standing here. That fracture goes deep.\n\nAnd Maren—the Warden's face is steady, but there's something different in how she's looking at the three empty chambers waiting for components. She's a woman who understands systems. Who knows what a bottleneck means. Who can read the architecture of control the way you read light and stone. She's not surprised by what she's seeing. She's angry. Quietly, carefully, *completely* angry—the kind that doesn't show until it moves.",
-      "sceneSummary": "In the secondary purification system's binding chamber, Cellaceron takes stock of the three people standing with them: Teva, steady and devoted; Sorel, fracturing under the weight of institutional betrayal; and Maren, reading the geometry with clear understanding of what its deliberate incompleteness means.",
-      "choices": [
+      "narration": "",
+      "choices": [],
+      "unlockSubstrate": [
         {
-          "label": "Ask Maren directly: 'You came because Sorel called. What do you see in this chamber that the Council doesn't want named?'",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "ask"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Turn to Teva and ask her to read the three empty chambers as she would a resonance problem—what's the pattern in what's missing?",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "teach",
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Sorel the harder question: 'If the Council built this system in secret, who authorized it? Who *knew* they were preparing for the water to change?'",
-          "attribute": "social",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": "hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "ask",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Prism Sight on the binding chamber itself—read the light-history of this space and see who has been down here, and when, and what they were doing.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
-          "difficulty": "hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "prism_sight",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "source": "nanite",
+          "why": "fire test"
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "standingOps": [],
-      "delegateOps": [],
-      "arcOps": [],
-      "adoptSchool": null,
-      "offer": null,
-      "stageOps": [],
-      "scene": {
-        "setting": "Two levels beneath the upstream pre-Transition structure, inside the secondary purification system's binding chamber. Stone walls rise in concentric rings, honeycomb matrices visible in the steady light of the Waystaff. The ledger sits at the chamber's heart where Verath-Sem's carved name catches shadow and light. The air is still and heavy with machinery-hum from above.",
-        "npcsPresent": [
-          {
-            "name": "Teva",
-            "state": "Standing at your shoulder, eyes moving across the binding chamber's geometry with the same reading-depth she brings to everything. Steady. Frightened. Here by choice."
-          },
-          {
-            "name": "Sorel",
-            "state": "At the ledger's edge, composure fractured, hands trembling slightly. Processing the weight of institutional knowledge that contradicts institutional loyalty."
-          },
-          {
-            "name": "Maren",
-            "state": "Standing quietly, reading the three empty chambers and the honeycomb matrices with the understanding of someone who knows what bottlenecks are built for. Anger held carefully beneath professional bearing."
-          }
-        ],
-        "objects": [
-          "The Waystaff—planted steady, casting steady light, motes condensed at its heart",
-          "The secondary system's honeycomb filtration matrices—vast, intricate, three chambers waiting for components",
-          "The binding chamber—at the system's heart, empty of components but fully designed",
-          "The stone ledger—carved names of pre-Transition engineers and Verath-Sem's name"
-        ],
-        "threads": [
-          "What does the Council's locked record actually contain about Verath-Sem, and what was the plan they were protecting?",
-          "How long has the Council known about the preparation order, and when did they decide to build the secondary system in secret?",
-          "Who authorized the secondary system's construction, and what knowledge did they have about the preparation order?",
-          "What will Maren do with this knowledge when she returns to the Heights?"
-        ]
-      },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "teva-anselvar",
-          "name": "Teva",
-          "note": "Stands at Cellaceron's shoulder in the binding chamber, reading the geometry with steady focus. Her presence shifts from apprentice to equal—she is here by deliberate choice, devoted and capable.",
-          "statusNote": "Present in the secondary system, processing the implications of Verath-Sem's name and the chamber's collaboration-lock design.",
-          "relationshipDelta": 1
-        },
-        {
-          "op": "update",
-          "npcId": "sorel",
-          "name": "Sorel",
-          "note": "Her institutional composure has fractured completely. She recognizes Verath-Sem's name as evidence that the Council's silence was deliberate—not a crisis response, but a choice made generations ago. She is standing at the moment where transparency becomes irreversible.",
-          "statusNote": "Inside the secondary system's binding chamber, carrying the weight of institutional knowledge that contradicts institutional loyalty.",
-          "relationshipDelta": 0
-        },
-        {
-          "op": "meet",
-          "npcId": "maren-warden",
-          "name": "Maren",
-          "role": "Tuning-warden, Harmonic Heights Lower Terrace — now standing witness to the secondary purification system",
-          "age": 52,
-          "sex": "female",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "description": "A woman of solid bearing with the Warden sash and deep acoustic calluses. Her face is steady but her eyes read the geometry with clear anger held carefully beneath professional composure.",
-          "note": "Came down into the secondary system because Sorel called her to witness. She reads the three empty chambers and the collaboration-lock bottleneck with the understanding of someone who knows exactly what this architecture means: control, hidden from both civilizations, waiting.",
-          "learned": [
-            "The secondary purification system is a deliberate bottleneck—neither civilization can complete it without the other",
-            "Verath-Sem's name is carved here—evidence of pre-Transition involvement in the Council's plan",
-            "The system was built in secret, authorized at some institutional level, as part of a generational commitment"
-          ],
-          "skillsObserved": [
-            "Institutional reading—she understands the architecture of control",
-            "Rapid strategic assessment of what the geometry reveals"
-          ],
-          "relationshipDelta": 1,
-          "status": "active",
-          "statusNote": "Present in the secondary system's binding chamber, witnessing what the Council has hidden and understanding its implications for the valley."
-        }
-      ],
-      "intentsHeard": [],
-      "factUpdates": [],
-      "placeUpdates": [
-        {
-          "note": "Maren descended into the secondary system on day 9 evening—now present as a witness to the binding chamber and its evidence of Council knowledge.",
-          "subPlace": {
-            "name": "The Secondary System's Binding Chamber",
-            "parent": "the_lower_chamber",
-            "note": "Two levels beneath the upstream pre-Transition structure. Concentric stone walls, honeycomb filtration matrices, three empty chambers awaiting components. Stone ledger bearing pre-Transition engineer names and Verath-Sem's newer carving.",
-            "visited": true
-          }
-        }
-      ],
-      "discovery": null,
-      "codexUpdates": [
-        {
-          "topic": "maren-warden",
-          "label": "Maren — The Warden Who Understands",
-          "kind": "person",
-          "entityId": "maren-warden",
-          "fact": "Maren descended into the secondary purification system and read its architecture with clear understanding: the three empty chambers form a deliberate bottleneck that forces Harmonic and Radiant collaboration. She knows what control looks like when it is built into stone.",
-          "links": [
-            "the-lower-chamber",
-            "what-the-water-remembers"
-          ]
-        }
-      ],
-      "holdingOps": [],
-      "debtOps": [],
-      "partyOps": [
-        {
-          "op": "join",
-          "npcId": "maren-warden",
-          "why": "Sorel called her down as a witness to the secondary system. Maren came because the truth matters, and because she understands what a bottleneck built into stone means for the valley."
-        }
-      ],
-      "generateRequest": [],
-      "encounterOps": [],
-      "projectOps": [],
-      "bandOps": [],
-      "deathOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "The steady conversation and careful stock-taking in the chamber as evening deepens"
-      },
-      "moveTo": null,
-      "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": null,
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
-      "sceneEnded": false
+      "sceneSummary": null
     },
     "sceneState": {
       "setting": "Two levels beneath the upstream pre-Transition structure, inside the secondary purification system's binding chamber. Stone walls rise in concentric rings, honeycomb matrices visible in the steady light of the Waystaff. The ledger sits at the chamber's heart where Verath-Sem's carved name catches shadow and light. The air is still and heavy with machinery-hum from above.",
@@ -1537,7 +1327,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 9,
-    "hour": 20,
+    "hour": 21,
     "realAnchor": null
   },
   "companions": [
@@ -2323,7 +2113,7 @@
       "skillsObserved": [],
       "status": "active",
       "sex": null,
-      "gender": null,
+      "gender": "woman",
       "pronouns": "she/her",
       "age": 19,
       "domains": {
@@ -2806,8 +2596,8 @@
     "lastSharedReadAt": "2026-08-13T14:23:21.254Z",
     "lastTickWorldDay": 75,
     "lastCanonWorldDay": 75,
-    "lastGenCount": 1815,
-    "turnsSinceOffer": 4,
+    "lastGenCount": 1817,
+    "turnsSinceOffer": 5,
     "wantProgress": {
       "elder-senna": {
         "progress": 4,
@@ -2905,7 +2695,7 @@
         "kind": "shortage",
         "premise": "The valley's main irrigation channel is slowly silting closed, and by next dry season the lower fields will fail entirely.",
         "cause": "The valley's soil is unusually fine-grained and the spring floods this year ran higher and longer than usual, depositing sediment no one has yet thought to…",
-        "stage": 33,
+        "stage": 34,
         "seededAtCount": 618,
         "surfaced": true,
         "fate": "growing",
@@ -2918,7 +2708,7 @@
         "kind": "shortage",
         "premise": "A miller in the valley's upper settlement has quietly begun skimming and hiding portions of the communal seed grain, telling no one.",
         "cause": "The miller watched the irrigation channel silt worsen this season and has decided, privately, that next year's planting will be a disaster — and he intends…",
-        "stage": 25,
+        "stage": 26,
         "seededAtCount": 950,
         "surfaced": true,
         "fate": "growing",
@@ -8789,8 +8579,8 @@
     "stalwart"
   ],
   "actionCount": 256,
-  "updatedAt": 1789313012622,
-  "rev": 262,
+  "updatedAt": 1789319321053,
+  "rev": 266,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9579,10 +9369,10 @@
     {
       "id": "sess-9",
       "startedAt": "2026-09-13T14:25:04.889Z",
-      "lastAt": "2026-09-13T15:21:21.037Z",
+      "lastAt": "2026-09-13T17:08:41.053Z",
       "startDay": 75,
       "endDay": 75,
-      "beats": 3
+      "beats": 4
     }
   ],
   "_pendingArrival": null,
@@ -10164,9 +9954,7 @@
   "featureOffers": [],
   "_debtReceipts": [],
   "_bandNotes": null,
-  "promptCompositions": {
-    "cp1a8072p": "Fifty-year-old woman in Warden sash, calloused fingertips, stern face, cold tea cup beside her as she stands rigid before a bulletin board, deep focus, weathered hands, formal bearing."
-  },
+  "promptCompositions": {},
   "_promptRows": {
     "character": {
       "reached": 1,

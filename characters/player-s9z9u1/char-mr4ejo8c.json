@@ -1273,211 +1273,49 @@
       }
     ],
     "lastTurn": {
-      "narration": "You turn fully from the ledger, letting the Waystaff's light fall away from Verath-Sem's carved name. Sorel is still watching the stone, composure fracturing in real time—you've seen her read a hundred subtle signals in light and water, but she's never been the signal before. You step closer, close enough that Teva has to shift her weight to see around you both.\n\n\"The deep stacks,\" you say, and it's not a question. \"You've read fragments. What did they actually say about Verath-Sem?\"\n\nSorel's jaw tightens. For a breath she doesn't answer—the secondary system's stone chambers hum around you, patient and waiting. Then: \"An engineer. Pre-Transition Archive authority level, water systems division. They had access to the deepest classified stacks. The fragments the Council lets archivist-level staff see are always the same: three entries, all cleared for teaching purposes. Verath-Sem completed two major watershed projects and was 'instrumental in Archive-to-Council knowledge transfer at the Transition's close.' That's the approved language. Institutional, empty.\"\n\nSorel's hands are shaking now. \"But I've worked in water accountability for thirty years. I know what 'instrumental' means when the Council uses it instead of a name. It means they were the person who understood something the Council needed to keep hidden. And the fragments I was allowed to see—they were all about completed projects. Nothing about what Verath-Sem was doing when the Archive sealed. Nothing about why an engineer would carve their name into a pre-Transition system after the Transition was already decades past.\"\n\nShe looks at you directly now, and there's fear underneath the grief. \"The Council doesn't keep secrets about the dead, Cellaceron. They keep secrets about the plan. If Verath-Sem's full record is in the locked stacks—the ones even senior archivists don't touch—then the Council has been protecting something Verath-Sem knew. Something about this.\" She gestures at the binding chamber around you. \"The secondary system. The preparation order. How long the Council has known. Maybe why they've known.\"\n\nTeva is very still, watching both of you. The Waystaff pulses steady, and in its crystal heart, Aevi's motes have dimmed to almost nothing—processing, or perhaps listening to a conversation that cuts too close to its own broken record.",
-      "sceneSummary": "In the secondary system's binding chamber, Sorel names what she knows and what the Council chose to hide: Verath-Sem was an Archive engineer whose true work the Council has locked away for decades, proof that the silent preparation was not a recent discovery but a generational commitment to control the valley's fate.",
-      "choices": [
+      "partyOps": [
         {
-          "label": "Ask Sorel plainly: what would happen if you brought the full evidence back to Millbrook? Who would believe you, and what would they do with it?",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "chaos_order": 0.3,
-            "falsehood_truth": 0.6
-          },
-          "difficulty": "hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "negotiate",
-            "plan",
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Aevi directly: does recognizing Verath-Sem's name mean anything to what you carry in the authentication key? Is there something in your broken record about them?",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {
-            "mechanical_spiritual": 0.4,
-            "falsehood_truth": 0.5
-          },
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study",
-            "reveal"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Prism Sight on the carved ledger itself—read what light has touched this stone and when. The carving of Verath-Sem's name might tell you when it was left.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "concrete_abstract": 0.3,
-            "falsehood_truth": 0.4
-          },
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study",
-            "reveal"
-          ],
-          "abilityId": "prism_sight",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Move forward with the delayed-key plan: acknowledge what Sorel has told you, then descend to the hemispherical chamber and begin the technical work of setting the timed authentication sequence.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {
-            "chaos_order": 0.5,
-            "mechanical_spiritual": 0.4
-          },
-          "difficulty": "hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "craft",
-            "plan",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "op": "add",
+          "npcId": "teva-anselvar",
+          "role": "apprentice"
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "standingOps": [],
-      "delegateOps": [],
-      "arcOps": [],
-      "adoptSchool": null,
-      "offer": null,
-      "stageOps": [],
-      "scene": {
-        "setting": "Two levels beneath the upstream pre-Transition structure, inside the secondary purification system's binding chamber. Stone walls rise in concentric rings, honeycomb matrices visible in the steady light of the Waystaff. The ledger sits at the chamber's heart where Verath-Sem's carved name catches shadow and light. The air is still and heavy with machinery-hum from above.",
-        "npcsPresent": [
-          {
-            "name": "Sorel",
-            "state": "Standing at the ledger's edge, hands trembling slightly, processing the weight of what she knows and what was hidden from her by institutional design"
-          },
-          {
-            "name": "Teva",
-            "state": "Watching Cellaceron and Sorel both with the same precise attention she brings to everything—reading reaction and implication, silent and present"
-          },
-          {
-            "name": "Aevi",
-            "state": "Motes dimmed and distributed through the Waystaff's crystal lattice, processing the implications of Verath-Sem's name and what it means about its own origin"
-          }
-        ],
-        "objects": [
-          "The Waystaff—planted steady, casting steady light, motes condensed at its heart",
-          "The secondary system's honeycomb filtration matrices—vast, intricate, three chambers waiting for power",
-          "The binding chamber—at the system's heart, empty of components but fully designed",
-          "The stone ledger—carved names of pre-Transition engineers and Verath-Sem's name"
-        ],
-        "threads": [
-          "What does the Council's locked record actually contain about Verath-Sem, and what was the plan they were protecting?",
-          "How long has the Council known about the preparation order, and when did they decide to build the secondary system in secret?",
-          "What does Aevi's broken record know about Verath-Sem, and does recognizing the name unlock anything in the authentication key?",
-          "The delayed activation plan needs technical execution—how do you set a timed sequence for the authentication without alerting the machinery above?"
-        ]
-      },
       "npcUpdates": [
         {
-          "op": "update",
-          "npcId": "sorel",
-          "name": "Sorel",
-          "role": "Radiant water-accountability archivist—witness and steward of the Council's hidden timeline",
-          "gender": "woman",
+          "op": "meet",
+          "npcId": "teva-anselvar",
+          "name": "Teva Anselvar",
+          "role": "Apprentice resonance-reader, Harmonic Heights — traveling under survey compact with Cellaceron",
+          "age": 17,
           "pronouns": "she/her",
-          "description": null,
-          "note": "Named plainly that Verath-Sem was an Archive engineer with deep-stacks access; the Council has kept their full record locked and restricted. The silence about the secondary system was a generational choice, not a crisis response. She is afraid and committed both.",
-          "learned": [
-            "Verath-Sem was a pre-Transition Archive engineer, water systems division, with authority-level access to the deepest classified stacks",
-            "The Council allows only three sanitized entries in Verath-Sem's record: two about completed projects, one about 'knowledge transfer at the Transition's close'",
-            "Verath-Sem's full record is in the locked stacks that even senior archivists cannot access without explicit authorization",
-            "The Council uses 'instrumental' in official language to mark people whose true work must be hidden",
-            "Sorel recognizes that the Council does not protect secrets about the dead—they protect secrets about institutional plans"
+          "disposition": "friendly",
+          "dispositionScore": 4,
+          "appearance": "A slight young woman of seventeen with close-cropped dark hair and the undyed apprentice sash of the Heights. Ink-stained fingers. Carries a small niche-notebook worn soft at the corners. Moves quietly and watches everything.",
+          "persona": "Precise, self-contained, and intensely observant. She absorbed Farren's advanced geometry through an open door and recorded his vocabulary without being asked. She brings the same quality of attention to people that she brings to resonance intervals — nothing is incidental to her. Not cold; she simply processes before she speaks, and when she speaks it counts.",
+          "skills": [
+            "Directional interval-count — held an untrained eleven-second resonance note at fourteen; now reads the four-second interval as a compass bearing with confirmed accuracy",
+            "Resonance vocabulary absorption — recorded Farren's advanced geometry terms in personal niche notes from an open-door session",
+            "Precise observation under pressure — tracks reaction and implication simultaneously while watching Cellaceron and Sorel",
+            "Nanite-mark correspondence — carries a live nanite mark from the lower chamber, in real-time correspondence with that place"
           ],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Inside the secondary system's binding chamber, carrying the weight of institutional knowledge that contradicts institutional loyalty—standing at the moment where transparency becomes irreversible and fear becomes fuel",
-          "bondType": "ally",
-          "bondStage": null
-        },
-        {
-          "op": "update",
-          "npcId": "aevi",
-          "name": "Aevi",
-          "role": "Companion intelligence—authentication key, integrated into the Waystaff",
-          "gender": "nonbinary",
-          "pronouns": "they/them",
-          "description": null,
-          "note": "Went very quiet and dimmed its motes upon hearing Sorel name Verath-Sem. Processing the implications of its maker's name appearing here, carved into stone, as evidence of a plan that reaches back decades. Aevi is listening to a conversation that cuts too close to its own broken record.",
-          "learned": [],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Integrated into the Waystaff's lattice; carries the authentication key; now processing what Verath-Sem's involvement means about its own creation and the scope of the preparation order"
+          "knownFacts": [
+            "Brought to the Heights at fourteen after holding an untrained eleven-second resonance note — an Adaptor settlement child, two ridges east of Millbrook",
+            "Carries a nanite mark from the lower chamber that remains in live correspondence with that place, speaking posture and frequency",
+            "Her directional interval-count bearing diverges from the northeast-by-east seam and points toward the same destination the chamber identified",
+            "On Day 9 dawn the chamber's fifth-fold reply activated her mark in real time — she confirmed the northeast-by-east bearing at that moment",
+            "Has been quietly recording Farren's advanced geometry vocabulary in her niche-notebook; at least some of that material is not officially in her curriculum yet",
+            "Logged by Maren as traveling under survey compact, not at large"
+          ],
+          "historyWithCharacter": [
+            "[d9] Descended into the secondary system and witnessed Sorel's recognition of Verath-Sem's name — reading reaction and implication from both Sorel and Cellaceron with precise attention",
+            "[d9] Present at the lower chamber's convergence point when Aevi named Verath-Sem and the authentication key — has held that knowledge quietly since",
+            "[d9] Her nanite mark activated in real time at the chamber's fifth-fold reply; she confirmed the northeast-by-east bearing the moment it rang"
+          ],
+          "status": "active"
         }
       ],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "discovery": null,
-      "codexUpdates": [
-        {
-          "topic": "verath-sem",
-          "label": "Verath-Sem",
-          "kind": "person",
-          "entityId": null,
-          "fact": "Pre-Transition Archive engineer, water systems division, with authority-level access to the deepest classified stacks. The Council restricts their full record to locked files; only sanitized teaching entries are available to archivists. Sorel reads this as evidence the Council has protected something Verath-Sem knew about the preparation order and secondary system.",
-          "links": [
-            "the-preparation-order",
-            "the-secondary-system",
-            "sorel",
-            "what-the-water-remembers"
-          ]
-        }
-      ],
-      "holdingOps": [],
-      "partyOps": [],
-      "generateRequest": [],
-      "encounterOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": null,
-      "moveTo": null,
-      "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "sceneEnded": false
+      "narration": "",
+      "sceneSummary": null
     },
     "sceneState": {
       "setting": "Two levels beneath the upstream pre-Transition structure, inside the secondary purification system's binding chamber. Stone walls rise in concentric rings, honeycomb matrices visible in the steady light of the Waystaff. The ledger sits at the chamber's heart where Verath-Sem's carved name catches shadow and light. The air is still and heavy with machinery-hum from above.",
@@ -1508,12 +1346,13 @@
         "The delayed activation plan needs technical execution—how do you set a timed sequence for the authentication without alerting the machinery above?"
       ]
     },
-    "beats": 9
+    "beats": 9,
+    "subPlace": null
   },
   "clock": {
     "schemaVersion": 1,
     "day": 9,
-    "hour": 18,
+    "hour": 19,
     "realAnchor": null
   },
   "companions": [
@@ -2278,6 +2117,38 @@
       },
       "domainsSource": "role",
       "met": 10
+    },
+    "teva-anselvar": {
+      "id": "teva-anselvar",
+      "name": "Teva Anselvar",
+      "role": "Apprentice resonance-reader, Harmonic Heights — traveling under survey compact with Cellaceron",
+      "description": "",
+      "firstMet": {
+        "locationId": "disputed_zone_fringe",
+        "day": 9
+      },
+      "relationship": 0,
+      "history": [],
+      "knownFacts": [],
+      "skillsObserved": [],
+      "status": "active",
+      "sex": null,
+      "gender": null,
+      "pronouns": "she/her",
+      "age": 17,
+      "isMinor": true,
+      "_gen": {
+        "romanceEligible": false
+      },
+      "domains": {
+        "primary": "harmonic"
+      },
+      "domainsSource": "role",
+      "lastSeen": {
+        "locationId": "disputed_zone_fringe",
+        "day": 9
+      },
+      "met": 1
     }
   },
   "placeMemory": {
@@ -2742,7 +2613,7 @@
     "lastTickWorldDay": 75,
     "lastCanonWorldDay": 75,
     "lastGenCount": 1814,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "wantProgress": {
       "elder-senna": {
         "progress": 4,
@@ -8231,6 +8102,19 @@
         "createdDay": 8,
         "updatedDay": 9,
         "entityId": "northern-alcove-camp"
+      },
+      "teva-anselvar": {
+        "id": "teva-anselvar",
+        "label": "Teva Anselvar",
+        "kind": "person",
+        "facts": [
+          "[d9] Apprentice resonance-reader, Harmonic Heights — traveling under survey compact with Cellaceron"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 9,
+        "entityId": "teva-anselvar",
+        "updatedDay": 9
       }
     },
     "notSame": [
@@ -8706,8 +8590,8 @@
     "stalwart"
   ],
   "actionCount": 255,
-  "updatedAt": 1789309445084,
-  "rev": 245,
+  "updatedAt": 1789309504897,
+  "rev": 247,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9452,6 +9336,14 @@
       "startDay": 39,
       "endDay": 39,
       "beats": 4
+    },
+    {
+      "id": "sess-9",
+      "startedAt": "2026-09-13T14:25:04.889Z",
+      "lastAt": "2026-09-13T14:25:04.889Z",
+      "startDay": 75,
+      "endDay": 75,
+      "beats": 1
     }
   ],
   "_pendingArrival": null,
@@ -9992,5 +9884,7 @@
   "bands": [],
   "_silasGrantsRevoked": true,
   "_lastProjectDay": 9,
-  "featureOffers": []
+  "featureOffers": [],
+  "_debtReceipts": [],
+  "_bandNotes": null
 }

@@ -141,7 +141,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "1.9.480";
+const APP_VERSION = "1.9.481";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -757,7 +757,11 @@ async function syncPullCharacter(local) {
  *  so a save could stop going up for ten hours and the only symptom was a stale phone. ⚠️ THE STAMP LIVES
  *  OUTSIDE THE PUSHED OBJECT: written onto the character it would change it, bump `rev`, and need a push of
  *  its own, forever. */
-const SYNC_IDLE_MS = 12000;
+// ⛔ SNG-550 §6a (Erik 2026-09-13: "We can change the debounce"). Every save uploads the WHOLE file — the contents API has no
+// append — so at 12s a busy session sent 1.37MB every twelve seconds, and on a phone that is mobile data. 60s cuts that about
+// fivefold. ⚠️ IT COSTS ALMOST NO SAFETY, and the reason is that the debounce is not what protects a closing tab: the
+// `visibilitychange`/`pagehide` flush is, and it is unchanged. This only decides how often a tab that is still open writes.
+const SYNC_IDLE_MS = 60000;
 const LAST_PUSH_KEY = (id) => `singularity.sync.lastPush.${id}`;
 let _syncTimer = null, _syncInFlight = false, _syncDirty = false, _syncTarget = null;
 

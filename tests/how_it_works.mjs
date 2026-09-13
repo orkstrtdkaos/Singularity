@@ -12801,6 +12801,81 @@ console.log("\n── §196 · a guard that cannot see must refuse, and the game
     `lvl ${silas196.level} · xp ${silas196.xp} · day ${silas196.clock?.day} · ${(silas196.establishedFacts || []).length} facts · ${(silas196.deeds || []).length} deeds`);
 }
 
+// ⛔ SNG-552 — THE SAVE STOPPED GOING UP, AND THE ERROR NAMED A STATUS INSTEAD OF A REASON.
+// Erik, 2026-09-13, from the character list: "not going up: GH_PUT_422 · last good copy 15 hours ago" — and the last good copy
+// was the RESTORE I pushed through git at 21:53, meaning not one save had left his browser since. ⚠️ `pushOwnedFile` already
+// retried a 422 with a cold re-read, so the repeat proved it was never a stale sha: the contents API was refusing the PAYLOAD.
+// SNG-549 moved the READ off that API for exactly this reason and left the WRITE on it — the half that loses play.
+console.log("\n── §197 · a write the contents API refuses still lands, through the API git itself uses ──");
+{
+  const { fakeRemote } = await import("./lib/fake_remote.mjs");
+  const remote197 = fakeRemote();
+  const restore197 = remote197.install();
+  try {
+    const SY197 = await import("../engine/sync.js");
+    const PATH197 = "characters/player-s9z9u1/char-mrhs8286.json";
+    const rec = (rev) => ({ id: "char-mrhs8286", playerKey: "player-s9z9u1", name: "Silas Weir", level: 33, rev });
+
+    /* ---- the ordinary path is unchanged: one contents PUT, no git-data ---- */
+    await SY197.pushOwnedFile(PATH197, rec(2081), "save: Silas Weir");
+    check("§197: the contents API stays the fast path — an ordinary save never touches git-data",
+      remote197.read(PATH197)?.rev === 2081 && remote197.state.gitDataPuts === 0,
+      `rev ${remote197.read(PATH197)?.rev} · gitDataPuts ${remote197.state.gitDataPuts}`);
+
+    /* ---- now the failure Erik hit: every contents PUT refuses, whatever sha it is given ---- */
+    remote197.state.alwaysFailContentsPutWith = 422;
+    const putsBefore = remote197.state.puts;
+    await SY197.pushOwnedFile(PATH197, rec(2082), "save: Silas Weir");
+    // ⛑ THE BYTES LAND ANYWAY. This is the whole point: a save whose size the player cannot control, and which only ever grows,
+    // must not be hostage to a convenience wrapper's inline-payload limit.
+    check("§197: ⛑ a save the contents API refuses twice still reaches the remote, via git-data",
+      remote197.read(PATH197)?.rev === 2082 && remote197.state.gitDataPuts === 1,
+      `rev ${remote197.read(PATH197)?.rev} · gitDataPuts ${remote197.state.gitDataPuts}`);
+    // ⚠️ AND IT TRIED THE CHEAP CURE FIRST — a cold re-read and a second contents PUT — before spending five calls.
+    check("§197: the fallback runs only AFTER a fresh-sha retry, never instead of it",
+      remote197.state.puts - putsBefore === 2, `${remote197.state.puts - putsBefore} contents PUT(s) before falling back`);
+
+    /* ---- ⛔ THE SAFETY ARGUMENT: the ref is never forced ---- */
+    // Somebody else moves the branch between reading the head and updating the ref — Aevi's push, a ship, the other device.
+    // A FORCED update would drop whatever landed in that gap, which is the same clobber SNG-549 spent a day undoing.
+    // ⚠️ AND IT MUST HAPPEN INSIDE THE WINDOW. Moving the branch BEFORE the write proves nothing — the writer just reads the
+    // new head. The flag moves it between the head read and the ref update, which is the only place the race exists.
+    remote197.state.advanceBranchAfterNextRefRead = true;
+    const conflictsBefore = remote197.state.conflicts, headBefore = remote197.git.head;
+    await SY197.pushOwnedFile(PATH197, rec(2083), "save: Silas Weir");
+    check("§197: ⛔ the fallback REBASES onto a branch that moved under it and never force-updates the ref",
+      remote197.read(PATH197)?.rev === 2083 && remote197.state.conflicts === conflictsBefore + 1,
+      `rev ${remote197.read(PATH197)?.rev} · ${remote197.state.conflicts - conflictsBefore} refused non-fast-forward, then landed`);
+    // ⛑ AND THE OTHER WRITER'S COMMIT IS STILL IN THE HISTORY. That is the only difference between this fallback and the
+    // clobber SNG-549 spent a day undoing, so it is asserted against the ancestry, not against the write's own success:
+    // a forced ref update would ALSO have left rev 2083 on the remote, with the racing commit gone.
+    const chain197 = remote197.ancestry();
+    const racer197 = chain197.find(c => c !== chain197[0] && c !== headBefore);
+    check("§197: ⛑ the commit that landed in the race window is still an ancestor — nothing was discarded",
+      chain197.includes(headBefore) && chain197.length >= 3 && !!racer197,
+      `head → ${chain197.slice(0, 4).join(" → ")}${chain197.length > 4 ? " → …" : ""}`);
+
+    /* ---- and when everything fails, the player is told WHY, in GitHub's own words ---- */
+    // ⛔ `GH_PUT_422` is a status, not a cause. GitHub sends the cause in the response body and this threw it away, so fifteen
+    // hours of a broken save produced a number nobody could act on. That is SNG-549's lesson on the write side.
+    remote197.state.alwaysFailContentsPutWith = 403;      // not a 409/422 — nothing retries it, it surfaces straight through
+    let why197 = "";
+    try { await SY197.pushOwnedFile(PATH197, rec(2084), "save: Silas Weir"); } catch (e) { why197 = e.message; }
+    check("§197: a refused write carries GitHub's own reason, not just its status code",
+      /GH_PUT_403/.test(why197) && /content is too large/.test(why197), why197 || "(no error thrown)");
+
+    /* ---- ⛔ and the deadline has to survive the payload it is now carrying ---- */
+    // 12s was set in SNG-115 when a save was 23KB. At 1.84MB base64 it demands a sustained 1.2Mbps to finish — which is not a
+    // thing a phone on mobile data can promise — so the fix above would have failed as GH_TIMEOUT instead of GH_PUT_422.
+    // ⚠️ ASSERTED ON THE FUNCTION, NOT THE CONSTANT: a gate that pins 12000 pins a number that is allowed to move; what must
+    // hold is that a big body buys more time than a small one, and that a READ still fails fast.
+    const src197 = readFileSync(new URL('../engine/sync.js', import.meta.url), 'utf8');
+    check("§197: the request deadline scales with the bytes being SENT, and a read still fails fast",
+      /function deadlineFor/.test(src197) && /raceTimeout\(call, deadlineFor\(opts\)/.test(src197)
+      && /typeof opts\?\.body === "string" \? opts\.body\.length : 0/.test(src197));
+  } finally { restore197(); }
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

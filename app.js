@@ -141,7 +141,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "1.9.481";
+const APP_VERSION = "1.9.483";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2693,9 +2693,19 @@ function renderMachine() {
     const cls = (e > 0 || seen) ? "mach-fired" : "mach-zero";
     // Applied/rejected is shown ONLY where it is actually instrumented; for every other op the number
     // is emission alone, and the hover says so rather than implying an engine outcome we never measured.
-    const outcome = OUTCOME_INSTRUMENTED.has(op)
-      ? ` <span class="mach-x" title="engine outcome — instrumented: applied${r?.rejected ? "/rejected" : ""}">✓${r?.applied || 0}${r?.rejected ? `✗${r.rejected}` : ""}</span>`
-      : "";
+    // ⛔ SNG-551 — A MISSING ROW IS NOT A ZERO, and `r?.applied || 0` said it was. An op with no ledger row
+    // at all rendered "✓0", which is the STRONGEST claim this panel can make — *measured, and it never once
+    // applied* — from the total absence of a measurement. That is the same false-zero SNG-190 §3 fixed for
+    // EMISSION, reintroduced one column to the right. An unmeasured outcome now reads "✓—".
+    // ⚠️ AND THE TWO COUNTERS HAVE DIFFERENT BIRTHDAYS. `_opLedger` landed in SNG-179, `_opEmitted` two
+    // commits later in SNG-190, so a character who played across both carries outcomes the emission counter
+    // never saw — Silas: offer 57 emitted, 64 outcomes. Side by side they invite a subtraction that is not
+    // valid, so where outcomes EXCEED emissions the chip says so instead of letting the reader do arithmetic.
+    const outcomes = r ? (r.applied || 0) + (r.rejected || 0) : 0;
+    const preEpoch = r && outcomes > e;
+    const outcome = !OUTCOME_INSTRUMENTED.has(op) ? ""
+      : !r ? ` <span class="mach-x mach-unmeasured" title="NOT MEASURED — no applied/rejected outcome has ever been written for this op on this character. This is not 'applied zero times'.">✓—</span>`
+      : ` <span class="mach-x" title="engine outcome — applied ${r.applied || 0}${r.rejected ? `, rejected ${r.rejected} (last: ${r.lastWhy})` : ""}${preEpoch ? ` ⚠ ${outcomes} outcomes against ${e} emissions: this character's outcome ledger predates the emission counter (SNG-179 vs SNG-190), so the two do not share a start and must not be subtracted` : ""}">✓${r.applied || 0}${r.rejected ? `✗${r.rejected}` : ""}${preEpoch ? "⚠" : ""}</span>`;
     const tip = OUTCOME_INSTRUMENTED.has(op) ? "" : ` title="emission counted; applied/rejected NOT instrumented for this op — a 0 means not emitted, never 'rejected'"`;
     const count = e > 0 ? `<b>${e}</b>` : seen ? `<b title="seen in a captured exchange this session">seen</b>` : "<b>0</b>";
     return `<span class="mach-op ${cls}"${tip}>${esc(op)} ${count}${outcome}</span>`;
@@ -2822,7 +2832,7 @@ function renderMachine() {
     ${combatBlock}
 
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Op emission — this character, cumulative <span class="hint" style="text-transform:none">(${turns} GM turn${turns === 1 ? "" : "s"} observed)</span></h3>
-      <p class="hint" style="margin-bottom:8px">Counts are <strong>emissions</strong> — the model putting an op in a turn — tracked for every op. Applied/rejected outcome (✓/✗) is instrumented only for <code>markTeacher</code>; for the rest the number is emission alone. ${turns > 0 ? `A persistent <strong>0 after ${turns} turn${turns === 1 ? "" : "s"}</strong> is the real signature — a built op the model never reaches.` : `<strong>No turns observed yet</strong> — a 0 here just means this character has not played; it is not a finding.`}</p>
+      <p class="hint" style="margin-bottom:8px">Counts are <strong>emissions</strong> — the model putting an op in a turn — tracked for every op. Applied/rejected outcome (✓/✗) is instrumented for <strong>${OUTCOME_INSTRUMENTED.size}</strong> ops (${[...OUTCOME_INSTRUMENTED].map(o => `<code>${esc(o)}</code>`).join(", ")}); for the rest the number is emission alone. <strong>✓—</strong> means no outcome was ever written, which is <em>not</em> the same as applied zero times. ${turns > 0 ? `A persistent <strong>0 after ${turns} turn${turns === 1 ? "" : "s"}</strong> is the real signature — a built op the model never reaches.` : `<strong>No turns observed yet</strong> — a 0 here just means this character has not played; it is not a finding.`}</p>
       ${firedOps.length ? `<div class="mach-tally"><span class="mach-label">emitted</span> ${firedOps.map(chip).join(" ")}</div>` : ""}
       <div class="mach-tally"><span class="mach-label">not emitted${turns > 0 ? ` in ${turns} turn${turns === 1 ? "" : "s"}` : " (no turns yet)"} · ${neverOps.length}</span> ${neverOps.map(chip).join(" ") || "<span class='hint'>— none; every op has been emitted at least once</span>"}</div>
     </div>
@@ -7593,6 +7603,12 @@ function applyTurn(turn, resolution, playerWords = null) {
     }
     if (destId && destId !== character.currentLocationId) {
       character.currentLocationId = destId;
+      // ⛔ SNG-551: THE HALF-INSTRUMENTED OP. CCODE-158 added moveTo to the Machine panel's outcome set so a
+      // refused relocation would be visible — and instrumented ONLY the refusal, twelve lines up. THIS is
+      // where a move actually lands, and it wrote nothing. So the panel read `moveTo 20 ✓0` on Silas: the GM
+      // tried to move him twenty times and never once succeeded. ⚠️ A badge with only one branch wired is a
+      // number that CANNOT RISE, and a zero that cannot rise is indistinguishable from a broken system.
+      logOpOutcome("moveTo", "applied");
       addKnownPlace(destId);
       noteGeneratedAttention(destId, "revisit", readClock(character.clock).day);
       notePlaceVisit(character, destId, readClock(character.clock).day, CONTENT.locations[destId]?.name);

@@ -28,7 +28,19 @@ const OWNER = "test-owner", REPO = "test-repo";
 export function fakeRemote() {
   const files = new Map();            // path -> { content: string, sha: string }
   let n = 0;
-  const state = { gets: 0, puts: 0, conflicts: 0, dropNextPutResponse: false, failNextPutWith: null };
+  const state = { gets: 0, puts: 0, conflicts: 0, dropNextPutResponse: false, failNextPutWith: null,
+    // ⛔ SNG-552: a contents-API PUT that refuses EVERY time, whatever sha it is given — the shape of the real
+    // failure that stopped Erik's save for fifteen hours. A cold re-read cannot cure it, which is the point:
+    // it is what forces the git-data fallback, and nothing else in this fake can prove that path runs.
+    alwaysFailContentsPutWith: null, gitDataPuts: 0, advanceBranchAfterNextRefRead: false };
+  // ⛑ SNG-552: THE GIT DATA SIDE OF THE SERVICE, because a fallback nothing can answer is a fallback nothing proves.
+  // Modelled exactly as far as it must be: content-addressed blobs, trees that inherit from a base_tree, commits with a
+  // parent, and a ref that only moves FAST-FORWARD unless forced — that last is the whole safety argument of the fallback.
+  const blobs = new Map(), trees = new Map(), commits = new Map();
+  const git = { branch: "main", head: null };
+  /** Someone else lands a commit on the branch — Aevi's push, a ship, the other device. */
+  const advance = () => { const t = `tree${++n}`; trees.set(t, new Map(trees.get(commits.get(git.head)?.tree) || [])); const c = `commit${++n}`; commits.set(c, { tree: t, parents: [git.head] }); git.head = c; return c; };
+  { const t = `tree${++n}`; trees.set(t, new Map()); const c = `commit${++n}`; commits.set(c, { tree: t, parents: [] }); git.head = c; }
   const shaOf = () => `sha${++n}`;
   const b64 = (s) => Buffer.from(s, "utf8").toString("base64");
   const unb64 = (s) => Buffer.from(s, "base64").toString("utf8");
@@ -37,10 +49,56 @@ export function fakeRemote() {
   // and this stand-in had no `text()` at all, which turned every read in the suite into a throw. ⚠️ A fake that cannot do what the
   // real service does is a fake that certifies the wrong thing; the shape it returns is now the shape the caller asked for.
   const ok = (body, raw = null) => ({ ok: true, status: 200, json: async () => body, text: async () => (raw != null ? raw : JSON.stringify(body)) });
-  const err = (status) => ({ ok: false, status, json: async () => ({}), text: async () => "" });
+  // ⚠️ SNG-552: a real GitHub error carries a REASON in the body (`{message, errors}`) and this fake returned an empty
+  // object, so a reader that drops the reason and one that carries it looked identical here. It carries one now.
+  const err = (status, message = null) => {
+    const body = message ? { message } : {};
+    return { ok: false, status, json: async () => body, text: async () => JSON.stringify(body) };
+  };
   const pathOf = (url) => decodeURIComponent(String(url).split(`/repos/${OWNER}/${REPO}/contents/`)[1] || "");
 
   const transport = async (url, opts = {}) => {
+    const u = String(url);
+    // ⛔ SNG-552 — THE GIT DATA ENDPOINTS. Ordered before the contents branch because `pathOf` only understands /contents/.
+    if (/\/git\//.test(u) || new RegExp(`/repos/${OWNER}/${REPO}$`).test(u)) {
+      const body = opts.body ? JSON.parse(opts.body) : null;
+      if (new RegExp(`/repos/${OWNER}/${REPO}$`).test(u)) return ok({ default_branch: git.branch });
+      if (/\/git\/blobs$/.test(u) && opts.method === "POST") {
+        const sha = `blob${++n}`; blobs.set(sha, unb64(body.content)); return ok({ sha });
+      }
+      if (/\/git\/ref\/heads\//.test(u)) {
+        const seen = git.head;
+        // ⛔ SNG-552: THE RACE, WHERE IT ACTUALLY LIVES. Advancing the branch BEFORE a write proves nothing — the writer simply
+        // reads the new head. The dangerous window is between the head read and the ref update, so this moves it exactly there,
+        // one time: the caller gets a head that is stale by the time it PATCHes. That is what makes the retry loop real.
+        if (state.advanceBranchAfterNextRefRead) { state.advanceBranchAfterNextRefRead = false; advance(); }
+        return ok({ object: { sha: seen } });
+      }
+      if (/\/git\/commits\/[^/]+$/.test(u) && (!opts.method || opts.method === "GET")) {
+        const c = commits.get(u.split("/git/commits/")[1]);
+        return c ? ok({ tree: { sha: c.tree } }) : err(404);
+      }
+      if (/\/git\/trees$/.test(u) && opts.method === "POST") {
+        const sha = `tree${++n}`;
+        const next = new Map(trees.get(body.base_tree) || []);           // base_tree inheritance is why one file can be written alone
+        for (const e of body.tree || []) next.set(e.path, e.sha);
+        trees.set(sha, next); return ok({ sha });
+      }
+      if (/\/git\/commits$/.test(u) && opts.method === "POST") {
+        const sha = `commit${++n}`; commits.set(sha, { tree: body.tree, parents: body.parents || [] }); return ok({ sha });
+      }
+      if (/\/git\/refs\/heads\//.test(u) && opts.method === "PATCH") {
+        const c = commits.get(body.sha);
+        // ⛔ REAL FAST-FORWARD SEMANTICS. A commit whose parent is not the current head is a non-fast-forward and the real
+        // service answers 422 — which is what makes the fallback's retry loop meaningful instead of decorative.
+        if (!body.force && !(c?.parents || []).includes(git.head)) { state.conflicts++; return err(422); }
+        git.head = body.sha;
+        for (const [p, blobSha] of trees.get(c.tree) || []) files.set(p, { content: blobs.get(blobSha), sha: shaOf() });
+        state.gitDataPuts++;
+        return ok({ object: { sha: body.sha } });
+      }
+      return err(404);
+    }
     const path = pathOf(url);
     if (!opts.method || opts.method === "GET") {
       state.gets++;
@@ -53,6 +111,7 @@ export function fakeRemote() {
       state.puts++;
       const body = JSON.parse(opts.body);
       if (state.failNextPutWith) { const s = state.failNextPutWith; state.failNextPutWith = null; return err(s); }
+      if (state.alwaysFailContentsPutWith) return err(state.alwaysFailContentsPutWith, "content is too large to write through this endpoint");
       const cur = files.get(path);
       // ⛔ REAL CAS. A stale sha against an existing file, or any sha against a file that does not exist yet.
       if (cur && body.sha !== cur.sha) { state.conflicts++; return err(409); }
@@ -66,7 +125,13 @@ export function fakeRemote() {
   };
 
   return {
-    transport, state, files,
+    transport, state, files, git,
+    /** SNG-552: someone else lands a commit on the branch. Call it directly, or set
+     *  `state.advanceBranchAfterNextRefRead` to have it happen inside the write's own race window. */
+    advanceBranch: advance,
+    /** The commit chain from the branch head back to the root — so a test can prove a commit SURVIVED a
+     *  concurrent write rather than merely that the write succeeded. A forced ref update drops it here. */
+    ancestry() { const out = []; let c = git.head; while (c) { out.push(c); c = (commits.get(c)?.parents || [])[0]; } return out; },
     read: (p) => { const f = files.get(p); return f ? JSON.parse(f.content) : null; },
     has: (p) => files.has(p),
     /** Install this remote as the global transport. Returns a restore fn — ALWAYS call it in a finally. */

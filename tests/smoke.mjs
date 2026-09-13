@@ -8113,6 +8113,33 @@ await (async () => {
   if (missing.length) console.log("   outcome ops written but not shown: " + missing.join(", "));
   check("195 G3: every logOpOutcome-writing op is in OUTCOME_INSTRUMENTED (no display drift)", outcomeOps.size >= 5 && missing.length === 0);
   check("195 G3: the 5 known outcome ops are all shown", ["markTeacher", "delegateOps", "arcOps", "adoptSchool", "offer"].every(op => shown.has(op)));
+
+  // ⛔ SNG-551 — THE OTHER DIRECTION, WHICH IS THE ONE THAT BROKE. The check above asks "does every op that
+  // WRITES an outcome get DISPLAYED?" — the failure of SNG-195. It cannot see the inverse: an op that is
+  // DISPLAYED but wires only ONE of the two branches. CCODE-158 put `moveTo` in the set having instrumented
+  // the REFUSAL alone, so its ✓ could never leave 0 — and Erik's panel read `moveTo 20 ✓0`, which says the
+  // GM tried to relocate Silas twenty times and failed every one, on a save where they had all landed.
+  // ⚠️ A DISPLAYED COUNTER WITH ONE BRANCH WIRED IS A NUMBER THAT CANNOT RISE. Both branches, or no badge.
+  const branches = {};
+  for (const m of appSrc195.matchAll(/logOpOutcome\("(\w+)",\s*(?:\w+\s*\?\s*)?"([\w-]+)"(?:\s*:\s*"([\w-]+)")?/g)) {
+    const b = (branches[m[1]] = branches[m[1]] || { applied: false, other: false });
+    for (const outcome of [m[2], m[3]]) { if (!outcome) continue; if (outcome === "applied") b.applied = true; else b.other = true; }
+  }
+  const halfWired = [...shown].filter(op => !branches[op]?.applied || !branches[op]?.other);
+  if (halfWired.length) console.log("   displayed but only one branch wired: " + halfWired.map(op => `${op} (applied=${!!branches[op]?.applied}, rejected=${!!branches[op]?.other})`).join(", "));
+  check("551: every op whose badge is DISPLAYED writes BOTH an applied and a non-applied outcome", halfWired.length === 0);
+
+  // ⛔ AND A MISSING LEDGER ROW MUST NOT RENDER AS A MEASURED ZERO. `r?.applied || 0` turned "never measured"
+  // into "measured, and zero" — the strongest claim this panel makes, drawn from the absence of a measurement.
+  // That is SNG-190 §3's false zero one column to the right, so it is asserted the same way: by the glyph.
+  check("551: an op with no ledger row renders ✓— (not measured), never ✓0", /!r \?[^\n]*✓—/.test(appSrc195) && /mach-unmeasured/.test(appSrc195));
+  check("551: the caption counts the instrumented set rather than naming one op",
+    /instrumented for <strong>\$\{OUTCOME_INSTRUMENTED\.size\}<\/strong>/.test(appSrc195) && !/instrumented only for <code>markTeacher/.test(appSrc195));
+  // ⚠️ The two counters do not share a start — `_opLedger` landed in SNG-179, `_opEmitted` two commits later in
+  // SNG-190 — so a long-lived character carries outcomes the emission counter never saw (Silas: 57 offers
+  // emitted, 64 outcomes). Side by side they invite a subtraction that is not valid, so the panel says which.
+  check("551: outcomes exceeding emissions are flagged, not silently rendered beside the emission count",
+    /preEpoch/.test(appSrc195) && /do not share a start/.test(appSrc195));
 }
 
 // --- SNG-195 G2: teachers TAKE the initiative (engine-gated), and reactsToReputation reaches the offer ---

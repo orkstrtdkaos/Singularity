@@ -10,6 +10,7 @@
 
 const API = "https://api.github.com";
 const GH_TIMEOUT_MS = 12000; // SNG-115: per-request deadline — a stalled GitHub write must never hang the caller forever
+const GH_UPLOAD_MS_PER_MB = 20000; // SNG-552: …plus this much per MB of request body — see deadlineFor
 
 /** Race a promise against a deadline; on timeout, reject with `label` (and run onTimeout, e.g. an abort).
  *  Pure + testable: a never-resolving promise rejects within `ms`. Every ghGet/ghPut goes through this,
@@ -20,12 +21,23 @@ export function raceTimeout(promise, ms, label = "TIMEOUT", onTimeout = null) {
   return Promise.race([promise, deadline]).finally(() => clearTimeout(timer));
 }
 
+/** ⛔ SNG-552 — A FIXED DEADLINE ON A PAYLOAD THAT GROWS FOREVER IS A DEADLINE THAT WILL FAIL.
+ *  12s was set in SNG-115 when a save was 23KB. Silas's is 1.38MB — 1.84MB once base64'd — and the whole of
+ *  SNG-550 says it only goes up. ⚠️ At 12s that upload needs a sustained 1.2Mbps just to finish, which is not
+ *  a thing a phone on mobile data can promise, and the failure would land as GH_TIMEOUT on the very write this
+ *  commit exists to make succeed. So the deadline now buys time per megabyte sent, and only for what is sent:
+ *  a GET still gets the original 12s, because a read that stalls must still fail fast. */
+function deadlineFor(opts) {
+  const bytes = typeof opts?.body === "string" ? opts.body.length : 0;
+  return GH_TIMEOUT_MS + Math.ceil(bytes / 1e6) * GH_UPLOAD_MS_PER_MB;
+}
+
 /** fetch with an AbortController deadline: on timeout the request is CANCELLED and the await rejects
  *  (GH_TIMEOUT) so the caller's catch runs — routing feedback to its "never lose it" queue. */
 function ghFetch(url, opts) {
   const ctrl = new AbortController();
   const call = fetch(url, { ...opts, signal: ctrl.signal }).catch(e => { throw (e?.name === "AbortError" ? new Error("GH_TIMEOUT") : e); });
-  return raceTimeout(call, GH_TIMEOUT_MS, "GH_TIMEOUT", () => ctrl.abort());
+  return raceTimeout(call, deadlineFor(opts), "GH_TIMEOUT", () => ctrl.abort());
 }
 
 export function getSyncConfig() {
@@ -88,6 +100,20 @@ async function ghGetRaw(path) {
   return dl.text();
 }
 
+/** ⛔ SNG-552 — AN ERROR CODE IS NOT A REASON. `GH_PUT_422` is what Erik's play surface showed for fifteen
+ *  hours while his save stopped going up, and it named a status, not a cause. GitHub sends the cause in the
+ *  response body — `{message, errors:[…]}` — and this threw it away, so the one party who could act on it
+ *  (me, reading his screenshot) got a number. ⚠️ THIS IS SNG-549's LESSON ON THE WRITE SIDE: that read made
+ *  "I could not see it" and "it is not there" the same answer; this write made every possible refusal the
+ *  same answer. The body is now carried into the thrown message and onto the play surface. */
+async function ghErrorText(res) {
+  try {
+    const body = await res.json();
+    const detail = Array.isArray(body?.errors) ? body.errors.map(e => e?.message || e?.code || e?.field).filter(Boolean).join("; ") : "";
+    return [body?.message, detail].filter(Boolean).join(" — ").slice(0, 300);
+  } catch { return ""; }
+}
+
 async function ghPut(path, contentStr, message, sha = null) {
   const { owner, repo, pat } = getSyncConfig();
   const body = { message, content: btoa(unescape(encodeURIComponent(contentStr))) };
@@ -97,8 +123,51 @@ async function ghPut(path, contentStr, message, sha = null) {
     headers: { authorization: `Bearer ${pat}`, accept: "application/vnd.github+json", "content-type": "application/json" },
     body: JSON.stringify(body)
   });
-  if (!res.ok) throw new Error(`GH_PUT_${res.status}`);
+  if (!res.ok) { const why = await ghErrorText(res); throw new Error(`GH_PUT_${res.status}${why ? `: ${why}` : ""}`); }
   return res.json();
+}
+
+/** ⛔ SNG-552 — THE WRITE THAT DOES NOT CARE HOW BIG THE FILE IS.
+ *
+ *  The contents API is a convenience wrapper with the convenience's limits: it carries the whole file inline as base64 in a
+ *  JSON request body, and Silas's save is 1.38MB raw — 1.84MB encoded — on a path that grows ~22KB a day. SNG-549 already had
+ *  to move the READ off it for exactly this reason. ⚠️ THE WRITE WAS LEFT ON IT, and it is the half that loses play.
+ *
+ *  ⛑ THE GIT DATA API IS WHAT GIT ITSELF USES and it has no such ceiling (blobs to 100MB). It costs five calls instead of one,
+ *  so it is a FALLBACK, not the default: the contents API stays the fast path and this runs only when that path refuses.
+ *
+ *  ⛔ AND IT IS STILL COMPARE-AND-SWAP, WHICH IS THE ONLY REASON IT IS SAFE TO USE HERE. The new commit's parent is the head
+ *  this function read, and the ref update is NEVER forced — so if anyone (Aevi, a ship, the other device) moved the branch in
+ *  between, GitHub refuses it as a non-fast-forward and we retry from a fresh head. ⚠️ A forced ref update would silently
+ *  discard whatever landed in the gap, which is the same clobber SNG-549 spent a day undoing. Never force this.
+ */
+async function ghPutViaGitData(path, contentStr, message) {
+  const { owner, repo, pat } = getSyncConfig();
+  const base = `${API}/repos/${owner}/${repo}`;
+  const h = { authorization: `Bearer ${pat}`, accept: "application/vnd.github+json", "content-type": "application/json" };
+  const call = async (url, opts = {}) => {
+    const res = await ghFetch(url, { ...opts, headers: h });
+    if (!res.ok) { const why = await ghErrorText(res); throw new Error(`GH_GITDATA_${res.status}${why ? `: ${why}` : ""}`); }
+    return res.json();
+  };
+  const repoMeta = await call(base);
+  const branch = repoMeta?.default_branch || "main";
+  // the blob first: it is the only call carrying the payload, and it is content-addressed, so a retry re-uses it
+  const blob = await call(`${base}/git/blobs`, { method: "POST", body: JSON.stringify({ content: btoa(unescape(encodeURIComponent(contentStr))), encoding: "base64" }) });
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const ref = await call(`${base}/git/ref/heads/${branch}`);
+    const headSha = ref?.object?.sha;
+    const headCommit = await call(`${base}/git/commits/${headSha}`);
+    const tree = await call(`${base}/git/trees`, { method: "POST", body: JSON.stringify({ base_tree: headCommit?.tree?.sha, tree: [{ path, mode: "100644", type: "blob", sha: blob.sha }] }) });
+    const commit = await call(`${base}/git/commits`, { method: "POST", body: JSON.stringify({ message, tree: tree.sha, parents: [headSha] }) });
+    try {
+      // ⛔ force:false — a non-fast-forward must FAIL and be retried onto the new head, never overwrite it.
+      await call(`${base}/git/refs/heads/${branch}`, { method: "PATCH", body: JSON.stringify({ sha: commit.sha, force: false }) });
+      return { commit: commit.sha, via: "git-data" };
+    } catch (err) {
+      if (attempt === 2 || !/GITDATA_422/.test(err.message)) throw err;   // someone else moved the branch: rebuild on the new head
+    }
+  }
 }
 
 /** List file names in a repo directory. Returns [] if missing. */
@@ -132,13 +201,29 @@ export async function fetchLedger(monthsBack = 0) {
 /** Write a file the caller EXCLUSIVELY OWNS (character/profile). Retries once on
  *  SHA conflict with a cold re-read — same 409/422 discipline as Tether. */
 export async function pushOwnedFile(path, obj, message) {
+  const text = JSON.stringify(obj, null, 2);
   const existing = await ghGet(path);
   try {
-    return await ghPut(path, JSON.stringify(obj, null, 2), message, existing?.sha);
+    return await ghPut(path, text, message, existing?.sha);
   } catch (err) {
-    if (/409|422/.test(err.message)) {
-      const fresh = await ghGet(path);
-      return ghPut(path, JSON.stringify(obj, null, 2), message, fresh?.sha);
+    if (/GH_PUT_(409|422)/.test(err.message)) {
+      // a stale sha is the ordinary cause and a cold re-read is the ordinary cure — try that first
+      try {
+        const fresh = await ghGet(path);
+        return await ghPut(path, text, message, fresh?.sha);
+      } catch (err2) {
+        // ⛔ SNG-552 — TWICE, WITH A FRESH SHA, IS NOT A SHA PROBLEM. Erik's save stopped going up for fifteen
+        // hours on a repeated 422 that a re-read could never fix, because the contents API was refusing the
+        // PAYLOAD, not the version. ⚠️ The size of a character is not something the player can do anything
+        // about, and it only ever goes up — so the last resort is the API that has no size opinion at all.
+        // The thrown detail is kept either way: if the fallback also fails, the player sees BOTH reasons.
+        if (!/GH_PUT_(409|422)/.test(err2.message)) throw err2;
+        try {
+          return await ghPutViaGitData(path, text, message);
+        } catch (err3) {
+          throw new Error(`${err2.message} · and the git-data fallback: ${err3?.message || "failed"}`);
+        }
+      }
     }
     throw err;
   }

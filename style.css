@@ -1238,6 +1238,8 @@ img[data-lightbox] { cursor: zoom-in; }
 .mach-op.mach-rej { border-color: #c0a24a; color: #d8c07a; }
 .mach-op.mach-zero { border-color: var(--border); color: var(--ink-dim); }
 .mach-x { color: #c0524a; font-size: 11px; margin-left: 2px; }
+/* SNG-551: an UNMEASURED outcome must not look like a measured zero — muted, not alarm-red. */
+.mach-unmeasured { color: var(--muted, #8a8579); font-style: italic; }
 /* SNG-236/237/238: the prompt-weight breakdown — where the GM prompt's tokens sit + which sections fired */
 .mach-weight { padding: 4px 0 2px; }
 .mach-wblock { padding: 4px 0; border-bottom: 1px solid var(--border); }

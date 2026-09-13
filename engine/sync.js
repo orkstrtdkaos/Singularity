@@ -176,6 +176,37 @@ export async function ghList(path) {
   return Array.isArray(meta) ? meta.map(f => f.name) : [];
 }
 
+/** ⛔ SNG-554 — THE ANSWER, IN GITHUB'S OWN WORDS: `Invalid request. "sha" wasn't supplied.`
+ *
+ *  That sentence reached us only because SNG-552 stopped throwing the response body away, and it names a cause none of my
+ *  three guesses had: not the payload, not the token, not the branch. ⛑ THE WRITE WAS FINE. THE READ THAT FEEDS IT WAS NOT.
+ *
+ *  `pushOwnedFile` takes the sha from `ghGet(path)` — a single-file contents GET — and that endpoint stops answering usefully
+ *  for a file over 1MB. With no sha, the PUT is a CREATE, and GitHub refuses a create over a file that already exists. So the
+ *  save silently stopped going up the moment it crossed a megabyte, and every retry re-read the same unusable answer.
+ *  ⚠️ THIS IS THE THIRD FACE OF ONE DEFECT. SNG-549: the 1MB read returned no CONTENT. SNG-552: the write carried no REASON.
+ *  This: the same read returns no SHA. Each time the missing thing was read as an ordinary value — "", null, absent — instead
+ *  of as an answer the API declined to give.
+ *
+ *  ⛑ THE DIRECTORY LISTING HAS NO SUCH LIMIT. `GET /contents/<dir>` returns every entry's sha whatever the file's size,
+ *  because it never carries content. One extra call, only on the path where the cheap read came back shaless.
+ */
+async function shaFor(path) {
+  const meta = await ghGet(path);
+  if (meta && meta.sha) return meta.sha;                       // the ordinary path — one call, unchanged
+  if (meta == null) return null;                               // genuine 404: the file is new, and a create is CORRECT
+  // ⚠️ 200 WITHOUT A SHA IS NOT "NO FILE". It is the API declining to describe a file it knows is there, and treating it as
+  // absence is exactly what turned this into a create. Ask the parent directory, which answers for any size.
+  const dir = path.includes("/") ? path.slice(0, path.lastIndexOf("/")) : "";
+  const name = path.slice(path.lastIndexOf("/") + 1);
+  const listing = await ghGet(dir);
+  if (!Array.isArray(listing)) throw new Error(`GH_NO_SHA_${path}`);
+  const entry = listing.find(f => f?.name === name);
+  if (!entry) return null;                                     // really is not there
+  if (!entry.sha) throw new Error(`GH_NO_SHA_${path}`);         // ⛔ never fall through to a shaless PUT
+  return entry.sha;
+}
+
 /** Read a JSON file from the shared repo. ⛔ SNG-549: null now means ONE thing — the file is not there (404). Anything else
  *  THROWS, because the old `catch { return null }` turned "the API would not give me the body" into "there is no remote", and
  *  both of this module's protections are built on that distinction: the pull adopts a newer remote, and the push refuses to
@@ -202,15 +233,17 @@ export async function fetchLedger(monthsBack = 0) {
  *  SHA conflict with a cold re-read — same 409/422 discipline as Tether. */
 export async function pushOwnedFile(path, obj, message) {
   const text = JSON.stringify(obj, null, 2);
-  const existing = await ghGet(path);
+  // ⛔ SNG-554: `shaFor`, not `ghGet(path)?.sha`. Over 1MB the single-file read answers without a sha, and a PUT with no sha
+  // is a CREATE — which GitHub refuses over an existing file, which is how Silas's save stopped going up for sixteen hours.
+  const existing = await shaFor(path);
   try {
-    return await ghPut(path, text, message, existing?.sha);
+    return await ghPut(path, text, message, existing);
   } catch (err) {
     if (/GH_PUT_(409|422)/.test(err.message)) {
       // a stale sha is the ordinary cause and a cold re-read is the ordinary cure — try that first
       try {
-        const fresh = await ghGet(path);
-        return await ghPut(path, text, message, fresh?.sha);
+        const fresh = await shaFor(path);
+        return await ghPut(path, text, message, fresh);
       } catch (err2) {
         // ⛔ SNG-552 — TWICE, WITH A FRESH SHA, IS NOT A SHA PROBLEM. Erik's save stopped going up for fifteen
         // hours on a repeated 422 that a re-read could never fix, because the contents API was refusing the

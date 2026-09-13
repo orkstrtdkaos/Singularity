@@ -12935,6 +12935,54 @@ console.log("\n── §198 · the profile's failure is the profile's, and the s
   } finally { restore198(); }
 }
 
+// ⛔ SNG-554 — THE CAUSE, NAMED AT LAST, BY THE ERROR MESSAGE SNG-552 STOPPED DISCARDING:
+//     `GH_PUT_422: Invalid request. "sha" wasn't supplied.`
+// Not the payload, not the token, not the branch — all three of which I had proposed and the evidence had killed. ⛑ THE WRITE
+// WAS FINE; THE READ THAT FEEDS IT WAS NOT. `pushOwnedFile` takes the sha from a single-file contents GET, and that endpoint
+// stops describing a file over 1MB. With no sha the PUT is a CREATE, and GitHub refuses a create over a file that exists.
+// ⚠️ THIRD FACE OF ONE DEFECT: SNG-549, the 1MB read returned no CONTENT; SNG-552, the write carried no REASON; here, the same
+// read returns no SHA. Each time the missing thing was consumed as an ordinary value instead of as an answer declined.
+console.log("\n── §199 · above a megabyte the read stops giving a sha, and a write with no sha is a create ──");
+{
+  const { fakeRemote } = await import("./lib/fake_remote.mjs");
+  const remote199 = fakeRemote();
+  const restore199 = remote199.install();
+  try {
+    const SY199 = await import("../engine/sync.js");
+    const PATH199 = "characters/player-s9z9u1/char-mrhs8286.json";
+    // a record whose serialised form is comfortably over the fake's threshold, as Silas's 1.38MB is over the real one
+    const big = (rev) => ({ id: "char-mrhs8286", playerKey: "player-s9z9u1", name: "Silas Weir", level: 33, rev, bulk: "x".repeat(2000) });
+
+    await SY199.pushOwnedFile(PATH199, big(2080), "save: Silas Weir");   // the first write CREATES it, correctly, with no sha
+    check("§199: the first write of a character is a create and still lands", remote199.read(PATH199)?.rev === 2080);
+
+    // ⛔ now the file is "over a megabyte": the single-file read answers with no content and NO SHA, exactly as the real one does
+    remote199.state.hideShaAboveBytes = 1000;
+    const conflicts199 = remote199.state.conflicts;
+    await SY199.pushOwnedFile(PATH199, big(2081), "save: Silas Weir");
+    check("§199: ⛑ a save whose own read cannot supply a sha still goes up — the sha comes from the directory listing",
+      remote199.read(PATH199)?.rev === 2081, `remote rev ${remote199.read(PATH199)?.rev}`);
+    // ⚠️ AND IT NEVER SENT A SHALESS PUT AT ALL. Landing after a refused create would still be a bug: every such attempt is a
+    // round trip that cannot succeed, and it is what sixteen hours of retries were made of.
+    check("§199: ⛔ and it never sends the shaless PUT in the first place — no refused create, not even one",
+      remote199.state.conflicts === conflicts199, `${remote199.state.conflicts - conflicts199} refused create(s)`);
+
+    // ⛔ THE FAKE MUST BE ABLE TO PRODUCE THE FAILURE, or none of the above proves anything. Drive the old behaviour directly:
+    // a PUT with no sha over an existing file is a create, and the real API refuses it with 422 and that exact sentence.
+    const raw199 = await globalThis.fetch(`https://api.github.com/repos/test-owner/test-repo/contents/${PATH199}`, {
+      method: "PUT", body: JSON.stringify({ message: "no sha", content: Buffer.from("{}").toString("base64") })
+    });
+    const said199 = (await raw199.json())?.message || "";
+    check("§199: the fake reproduces the real refusal — a shaless PUT over an existing file is 422, not a curable 409",
+      raw199.status === 422 && /wasn't supplied/.test(said199), `${raw199.status} — ${said199}`);
+
+    /* ---- and a genuinely absent file must still create ---- */
+    await SY199.pushOwnedFile("characters/player-s9z9u1/char-brand-new.json", { id: "new", rev: 1 }, "save: new");
+    check("§199: a file that genuinely is not there is still CREATED — 'no sha' and 'no file' stay different answers",
+      remote199.read("characters/player-s9z9u1/char-brand-new.json")?.rev === 1);
+  } finally { restore199(); }
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

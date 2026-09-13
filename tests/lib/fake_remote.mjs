@@ -32,7 +32,9 @@ export function fakeRemote() {
     // ⛔ SNG-552: a contents-API PUT that refuses EVERY time, whatever sha it is given — the shape of the real
     // failure that stopped Erik's save for fifteen hours. A cold re-read cannot cure it, which is the point:
     // it is what forces the git-data fallback, and nothing else in this fake can prove that path runs.
-    alwaysFailContentsPutWith: null, gitDataPuts: 0, advanceBranchAfterNextRefRead: false };
+    alwaysFailContentsPutWith: null, gitDataPuts: 0, advanceBranchAfterNextRefRead: false,
+    // ⛔ SNG-554: above this many bytes the single-file contents GET answers with no content AND NO SHA, as the real one does.
+    hideShaAboveBytes: 0 };
   // ⛑ SNG-552: THE GIT DATA SIDE OF THE SERVICE, because a fallback nothing can answer is a fallback nothing proves.
   // Modelled exactly as far as it must be: content-addressed blobs, trees that inherit from a base_tree, commits with a
   // parent, and a ref that only moves FAST-FORWARD unless forced — that last is the whole safety argument of the fallback.
@@ -102,8 +104,20 @@ export function fakeRemote() {
     const path = pathOf(url);
     if (!opts.method || opts.method === "GET") {
       state.gets++;
+      // ⛑ SNG-554: A DIRECTORY READ ANSWERS FOR ANY SIZE, and that is the only reason the sha is recoverable at all. The real
+      // contents API never carries content in a listing, so the megabyte limit does not apply — each entry keeps its sha.
+      const asDir = [...files.entries()].filter(([p]) => path && p.startsWith(path + "/") && !p.slice(path.length + 1).includes("/"));
+      if (!files.has(path) && asDir.length) {
+        return ok(asDir.map(([p, f]) => ({ name: p.slice(path.length + 1), path: p, sha: f.sha, size: f.content.length, type: "file" })));
+      }
       const f = files.get(path);
       if (!f) return err(404);
+      // ⛔ SNG-554 — WHAT THE REAL API DOES OVER A MEGABYTE, which this fake did not do and so could not catch. The single-file
+      // contents GET stops describing a large file: no content, and NO SHA. Every caller read that as an ordinary answer, so a
+      // PUT went out with no sha, GitHub refused the implied CREATE over an existing file — `Invalid request. "sha" wasn't
+      // supplied.` — and Silas's save stopped going up for sixteen hours. ⚠️ A fake that always returns a sha certifies a
+      // reader that cannot survive the one case the reader exists to survive.
+      if (state.hideShaAboveBytes && f.content.length > state.hideShaAboveBytes) return ok({ content: "", encoding: "none", path }, f.content);
       // ⚠️ THE ACCEPT HEADER DECIDES, as it does on the real API: `…github.raw` gets the file body, everything else the envelope.
       return ok({ content: b64(f.content), sha: f.sha, path }, f.content);
     }
@@ -113,6 +127,10 @@ export function fakeRemote() {
       if (state.failNextPutWith) { const s = state.failNextPutWith; state.failNextPutWith = null; return err(s); }
       if (state.alwaysFailContentsPutWith) return err(state.alwaysFailContentsPutWith, "content is too large to write through this endpoint");
       const cur = files.get(path);
+      // ⛔ SNG-554 — NO SHA AT ALL OVER AN EXISTING FILE IS A *CREATE*, AND THE REAL API REFUSES IT WITH 422 AND SAYS SO.
+      // This fake answered 409 (a stale-sha conflict), which a caller cures with a cold re-read — so the one failure that a
+      // re-read can NEVER cure was being modelled as the one it always can. That is why sixteen hours of retries got nowhere.
+      if (cur && !body.sha) { state.conflicts++; return err(422, 'Invalid request. "sha" wasn\'t supplied.'); }
       // ⛔ REAL CAS. A stale sha against an existing file, or any sha against a file that does not exist yet.
       if (cur && body.sha !== cur.sha) { state.conflicts++; return err(409); }
       if (!cur && body.sha) { state.conflicts++; return err(422); }

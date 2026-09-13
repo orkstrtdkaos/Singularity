@@ -145,8 +145,11 @@
       },
       {
        "type": "world_arc",
-       "arc": "the_second_manifestation",
-       "note": "a MADE gate is proof of the new domain's argument — nudges The Second Manifestation arc: a new way of making has manifested where none was"
+       "note": "a MADE gate is proof of the new domain's argument — nudges The Second Manifestation arc: a new way of making has manifested where none was",
+       "arcId": "the_second_manifestation",
+       "push": 1,
+       "weight": 2,
+       "_fixed_20260912": "⛔ SNG-552: was `arc` + note with no magnitude, so the reader applied nothing. arcId + push + weight added; direction reasoned from the outcome's own text and flagged for Erik."
       },
       {
        "type": "waygate",
@@ -294,8 +297,11 @@
       },
       {
        "type": "world_arc",
-       "arc": "the_second_manifestation",
-       "note": "a made-and-given gate quietly changes what's possible — the new way spreads without a name on it"
+       "note": "a made-and-given gate quietly changes what's possible — the new way spreads without a name on it",
+       "arcId": "the_second_manifestation",
+       "push": 1,
+       "weight": 2,
+       "_fixed_20260912": "⛔ SNG-552: was `arc` + note with no magnitude. ⚠️ push +1 weight 2 — a made-and-given gate ADVANCES the second manifestation, quietly: the new way spreads and nobody's name is on it, which is a real push at modest weight rather than a loud one."
       }
      ],
      "wake": {

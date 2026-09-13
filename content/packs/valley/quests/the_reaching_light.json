@@ -98,8 +98,11 @@
     },
     {
      "type": "world_arc",
-     "arc": "the_poles_pull",
-     "note": "a finished one recalled toward the human pole — a small pull back from the drift toward the mechanical extreme"
+     "note": "a finished one recalled toward the human pole — a small pull back from the drift toward the mechanical extreme",
+     "arcId": "the_poles_pull",
+     "push": -1,
+     "weight": 2,
+     "_fixed_20260912": "⛔ SNG-552: was `arc` + note with no magnitude, so the reader applied nothing. arcId + push + weight added; direction reasoned from the outcome's own text and flagged for Erik."
     }
    ],
    "wake": {
@@ -200,8 +203,11 @@
     },
     {
      "type": "world_arc",
-     "arc": "the_second_manifestation",
-     "note": "a braided-pole body is a NEW thing where none was — strong nudge to The Second Manifestation: a domain manifesting in a living person"
+     "note": "a braided-pole body is a NEW thing where none was — strong nudge to The Second Manifestation: a domain manifesting in a living person",
+     "arcId": "the_second_manifestation",
+     "push": 2,
+     "weight": 3,
+     "_fixed_20260912": "⛔ SNG-552: was `arc` + note with no magnitude, so the reader applied nothing. arcId + push + weight added; direction reasoned from the outcome's own text and flagged for Erik."
     }
    ],
    "wake": {

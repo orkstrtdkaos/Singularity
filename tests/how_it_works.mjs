@@ -9991,8 +9991,10 @@ console.log("\n── §117 · the stale tab may not push over the copy that got
   t = io(null);
   r = await SY.pushCharacterGuarded(local, t.opts);
   check("§117: …no remote at all — the first push of a character still goes", r.ok === true && t.pushed.length === 1);
+  // ⚠️ SNG-553 asserts the CLAIM, not the declaration. This pinned `const r = await …`, and the `const` moved when the
+  // profile push was lifted out of the character's try — a gate failing over a keyword it does not own.
   check("§117: ⚑ the guard is the ONE door the autosave backup uses — and it consults the resolver, not the clock",
-    /const r = await pushCharacterGuarded\(character\)/.test(rd("engine/sync.js")) && /resolveSaveConflict\(character, remote\)\.reason === "remote-newer"/.test(rd("engine/sync.js")));
+    /\br = await pushCharacterGuarded\(character\)/.test(rd("engine/sync.js")) && /resolveSaveConflict\(character, remote\)\.reason === "remote-newer"/.test(rd("engine/sync.js")));
 }
 
 /* ═════ §118 — THE THRESHOLD POST STANDS WHERE THE SAVE SAYS IT STANDS (reconcile 42) ═════ */
@@ -12177,8 +12179,10 @@ console.log("\n── §190 · the push rides on the save, a failure says so, an
     && /visibilityState === "hidden"\) queueSync\(\{ now: true \}\)/.test(A190)
     && /addEventListener\("pagehide", \(\) => queueSync\(\{ now: true \}\)\)/.test(A190)
     && /const SYNC_IDLE_MS = \d+;/.test(A190));
+  // ⚠️ SNG-553: this pinned the exact one-liner, so it broke when the profile's verdict was separated from the save's.
+  // The CLAIM is what must hold: a failure re-dirties the copy and says so. Which branch it lives on is mine to change.
   check("§190: …and a refusal leaves the copy DIRTY, so the next save retries instead of waiting for a turn",
-    /if \(ok\) clearSyncNote\(\); else \{ _syncDirty = true; showSyncNote\(r\?\.reason\); \}/.test(A190)
+    /else \{ _syncDirty = true; showSyncNote\(/.test(A190)
     && /catch \(err\) \{\s*\n\s*_syncDirty = true;/.test(A190));
 
   /* ---- 2 · NOTHING FAILS QUIETLY, AND THE STATUS LINE MAY NOT LIE ---- */
@@ -12874,6 +12878,61 @@ console.log("\n── §197 · a write the contents API refuses still lands, thr
       /function deadlineFor/.test(src197) && /raceTimeout\(call, deadlineFor\(opts\)/.test(src197)
       && /typeof opts\?\.body === "string" \? opts\.body\.length : 0/.test(src197));
   } finally { restore197(); }
+}
+
+// ⛔ SNG-553 — ONE FAILING FILE WORE TWO CHARACTERS' NAMES.
+// Erik, minutes after the SNG-552 ship: the SAME `GH_PUT_422` on Usnea (410KB, written 11 minutes earlier) as on Silas
+// (1.38MB, last written the night before). Two characters whose only common file is the PLAYER PROFILE — and `backupSaves`
+// pushed the profile INSIDE the character's try, so the profile's error came back as the character's verdict. ⚠️ The banner
+// said "Your save is not going up" about a save that had gone up, and it said it on every character on the key.
+console.log("\n── §198 · the profile's failure is the profile's, and the save's verdict survives it ──");
+{
+  const { fakeRemote } = await import("./lib/fake_remote.mjs");
+  const remote198 = fakeRemote();
+  const restore198 = remote198.install();
+  try {
+    const SY198 = await import("../engine/sync.js");
+    const char198 = { id: "char-usnea", playerKey: "player-s9z9u1", name: "Usnea Beard", level: 5, xp: 469, rev: 40, clock: { day: 3 } };
+    const prof198 = { playerKey: "player-s9z9u1", characters: ["char-usnea"] };
+    const CHARPATH = "characters/player-s9z9u1/char-usnea.json", PROFPATH = "players/player-s9z9u1/profile.json";
+
+    /* ---- both land, and the verdict is a clean ok ---- */
+    const r1 = await SY198.backupSaves(char198, prof198);
+    check("§198: an ordinary backup writes the character AND the profile, and reports ok",
+      r1?.ok === true && remote198.read(CHARPATH)?.rev === 40 && !!remote198.read(PROFPATH));
+
+    /* ---- ⛔ now only the PROFILE refuses, which is the shape Erik hit ---- */
+    // The character's path is untouched; a 403 is used because nothing retries it, so it lands as a bare refusal.
+    const realFetch198 = globalThis.fetch;
+    globalThis.fetch = async (url, opts = {}) => {
+      if (opts.method === "PUT" && String(url).includes("profile.json")) {
+        return { ok: false, status: 403, json: async () => ({ message: "the profile is what refused" }), text: async () => "" };
+      }
+      return realFetch198(url, opts);
+    };
+    let r2;
+    try { char198.rev = 41; r2 = await SY198.backupSaves(char198, prof198); } finally { globalThis.fetch = realFetch198; }
+
+    // ⛑ THE SAVE WENT UP. That is the fact the old code destroyed, and the only one that matters to a player mid-session.
+    check("§198: ⛑ when only the profile refuses, the CHARACTER still reaches the remote",
+      remote198.read(CHARPATH)?.rev === 41, `remote rev ${remote198.read(CHARPATH)?.rev}`);
+    check("§198: ⛔ and the verdict stays ok — a failed profile can no longer speak for the save",
+      r2?.ok === true, `ok=${r2?.ok} reason=${r2?.reason}`);
+    // ⚠️ BUT IT IS NOT SWALLOWED EITHER. The profile carries the character list; a silent failure there is how a list goes
+    // stale with nobody told. It gets its own field, and the play surface gives it its own sentence.
+    check("§198: the profile's failure is still reported — in its own field, naming its own file",
+      /the profile is what refused/.test(String(r2?.profileFailed || "")), String(r2?.profileFailed || "(nothing)"));
+
+    /* ---- ⛔ and the guard's refusal must survive a profile failure too ---- */
+    // `pushCharacterGuarded` REFUSES WITHOUT THROWING (`remote-newer` = a fresher copy exists, do not clobber). The old catch
+    // discarded that verdict the moment the profile threw — replacing the one refusal a player most needs to see.
+    const appSrc198 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+    check("§198: a profile-only failure reads as 'your save went up', never as 'your save is not going up'",
+      /profile-only:/.test(appSrc198) && /Your save went up\. It is the player profile/.test(appSrc198));
+    const syncSrc198 = readFileSync(new URL('../engine/sync.js', import.meta.url), 'utf8');
+    check("§198: the profile push sits OUTSIDE the character's try, so it cannot overwrite the save's verdict",
+      /if \(r\?\.ok\) return \{ ok: true, reason: "pushed", profileFailed/.test(syncSrc198));
+  } finally { restore198(); }
 }
 
 /* ══════════ REPORT ══════════ */

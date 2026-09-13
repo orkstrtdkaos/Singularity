@@ -141,7 +141,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "1.9.483";
+const APP_VERSION = "1.9.484";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -804,8 +804,11 @@ async function flushSync() {
     const r = await backupSaves(c, profile);
     const ok = !!r?.ok;
     noteLastPush(id, { at: Date.now(), rev, ok, reason: r?.reason || null });
-    // ⚠️ A REFUSAL LEAVES THE COPY DIRTY, so the next save tries again instead of waiting for a turn.
-    if (ok) clearSyncNote(); else { _syncDirty = true; showSyncNote(r?.reason); }
+    // ⛔ SNG-553: THE SAVE'S VERDICT AND THE PROFILE'S ARE NOT THE SAME VERDICT. The character can land while the
+    // profile (shared by every character on this key) refuses — which is how one failing file came to wear Silas's
+    // name on one screen and Usnea's on the next. The save decides `ok`; the profile gets its own sentence.
+    if (ok) { clearSyncNote(); if (r?.profileFailed) showSyncNote(`profile-only:${r.profileFailed}`); }
+    else { _syncDirty = true; showSyncNote(r?.profileFailed && r?.reason ? `${r.reason} (and the profile: ${r.profileFailed})` : r?.reason); }
   } catch (err) {
     _syncDirty = true;
     noteLastPush(id, { at: Date.now(), rev, ok: false, reason: err?.message || "the push failed" });
@@ -833,6 +836,11 @@ function syncNoteLine(reason) {
   // ⚠️ NO `sync-off` BRANCH HERE ON PURPOSE: both `queueSync` and `flushSync` refuse when sync is off, so a
   // line about it could never be reached from this path — and an unreachable message is the defect this
   // project keeps finding. That fact belongs where a player can act on it, and the roster states it.
+  // ⛔ SNG-553: A PROFILE THAT FAILS IS NOT A SAVE THAT FAILS, and saying so in the same words cost a morning of
+  // looking at the wrong file. The profile carries the character LIST; losing a write to it loses nothing of play.
+  if (String(reason || "").startsWith("profile-only:")) {
+    return `Your save went up. It is the player profile — the character list — that is not: ${String(reason).slice("profile-only:".length)}. Play is safe; nothing of this character is at risk.`;
+  }
   const why = reason === "remote-newer"
     ? "Another device holds a fresher copy, so this one was not sent. Reload to take theirs in — nothing here is lost; this copy is kept as a recovery copy when you do."
     : `Your save is not going up: ${reason || "the network refused it"}.`;

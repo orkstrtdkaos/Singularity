@@ -367,13 +367,38 @@ export async function pushCharacterGuarded(character, { fetch = fetchRepoJSON, p
  *  the next open reconciles it. Failures log, never block play. */
 export async function backupSaves(character, profile) {
   if (!syncEnabled()) return { ok: false, reason: "sync-off" };
+  // ⛔ SNG-553 — TWO FILES GO UP HERE AND THE PLAYER WAS ONLY EVER TOLD ABOUT ONE.
+  //
+  // The profile write used to sit INSIDE the character's try. So a character that pushed fine, followed by a profile that
+  // threw, returned the PROFILE's error as the character's verdict — and the play surface said "Your save is not going up"
+  // about a save that had just gone up. ⚠️ AND THE PROFILE IS SHARED BY EVERY CHARACTER ON A PLAYER KEY, which is how Erik
+  // came to see the identical `GH_PUT_422` on Silas (1.38MB, last written last night) and Usnea (410KB, written minutes
+  // earlier): one failing file, wearing the name of whichever character happened to be open.
+  //
+  // ⛔ WORSE, IT ALSO ATE THE GUARD'S ANSWER. `pushCharacterGuarded` REFUSES without throwing — `remote-newer` means "a
+  // fresher copy exists, do not clobber it" — and that verdict was discarded by the catch as soon as the profile threw. The
+  // one refusal we most need to see, replaced by an unrelated status code.
+  //
+  // ⛑ SO THEY ARE PUSHED INDEPENDENTLY AND REPORTED SEPARATELY, and every reason now names its own file. A message that
+  // cannot say WHICH file failed cannot be acted on, and this one cost a morning of looking at the wrong one.
+  let r;
   try {
-    const r = await pushCharacterGuarded(character);
+    r = await pushCharacterGuarded(character);
     if (!r.ok && r.reason === "remote-newer") console.warn("[sync] a fresher remote exists — skipped push to avoid clobber; reopen to reconcile.");
-    if (profile) await pushOwnedFile(`players/${profile.playerKey}/profile.json`, profile, `profile: ${profile.playerKey}`);
-    return r;
   } catch (err) {
-    console.warn("[sync] backup failed (play continues):", err.message);
-    return { ok: false, reason: err.message };
+    console.warn("[sync] the character save failed (play continues):", err.message);
+    r = { ok: false, reason: err.message, file: "character" };
   }
+  if (profile) {
+    try {
+      await pushOwnedFile(`players/${profile.playerKey}/profile.json`, profile, `profile: ${profile.playerKey}`);
+    } catch (err) {
+      console.warn("[sync] the profile failed (play continues):", err.message);
+      // ⚠️ THE CHARACTER'S VERDICT SURVIVES THIS. A failed profile is worth saying out loud — it carries the character list —
+      // but it is not the save, and it must never again be able to overwrite the save's answer with its own.
+      if (r?.ok) return { ok: true, reason: "pushed", profileFailed: err.message, file: "profile" };
+      return { ...r, profileFailed: err.message };
+    }
+  }
+  return r;
 }

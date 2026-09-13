@@ -12,4 +12,4 @@
 //
 // ⛑ BUMP IT HERE AND NOWHERE ELSE. `scripts/module_map.mjs` stamps index.html from this value and its `--check` fails the ship
 // when they disagree.
-export const APP_VERSION = "1.9.478";
+export const APP_VERSION = "1.9.479";

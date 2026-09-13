@@ -55,6 +55,39 @@ async function ghGet(path) {
   return res.json();
 }
 
+/** ⛔ SNG-549 — THE READ THAT WENT BLIND AT ONE MEGABYTE, AND TOOK BOTH SYNC GUARANTEES WITH IT.
+ *
+ *  The contents API stops returning inline `content` above 1,000,000 bytes: it answers 200 with an EMPTY content field and
+ *  `encoding: "none"`. Silas's save crossed that line and stands at 1,403,541 bytes. So `atob("")` gave "", `JSON.parse("")`
+ *  threw, the catch returned NULL — and every caller reads null as "there is no remote".
+ *
+ *  ⚠️ TWO GUARANTEES DIED ON THE SAME LINE, in silence, and Erik hit both inside one minute:
+ *   · THE PULL kept the stale local copy ("nothing to adopt"), so his phone loaded a four-day-old Silas at level 31.
+ *   · THE PUSH GUARD waved that copy through ("nothing to clobber"), and it overwrote a save 267 revs ahead of it — level 33
+ *     down to 31, 61 established facts down to 48, 51 deeds down to 37.
+ *  ⛔ A GUARD THAT PASSES WHEN IT CANNOT SEE IS NOT A GUARD, and this one had been blind since the file crossed the line.
+ *
+ *  ⛑ THE RAW MEDIA TYPE HAS NO SUCH LIMIT (100MB), so the read asks for the body itself instead of a base64 envelope, with
+ *  `download_url` as the fallback for a host that ignores the accept header. ⚠️ AND IT THROWS RATHER THAN RETURNING NULL:
+ *  "I could not read it" and "it is not there" must never again be the same answer. */
+async function ghGetRaw(path) {
+  const { owner, repo, pat } = getSyncConfig();
+  const url = `${API}/repos/${owner}/${repo}/contents/${path}`;
+  const res = await ghFetch(url, { headers: { authorization: `Bearer ${pat}`, accept: "application/vnd.github.raw" } });
+  if (res.status === 404) return null;                       // genuinely absent — the ONE null this is allowed to return
+  if (!res.ok) throw new Error(`GH_GET_${res.status}`);
+  const text = await res.text();
+  if (text && text.trim()) return text;
+  // the host answered in the metadata shape anyway: take the body from `download_url`, which is never truncated
+  const meta = await ghGet(path);
+  if (!meta) return null;
+  if (meta.content && meta.content.trim()) return decodeURIComponent(escape(atob(meta.content.replace(/\n/g, ""))));
+  if (!meta.download_url) throw new Error("GH_GET_NO_BODY");
+  const dl = await ghFetch(meta.download_url, { headers: { authorization: `Bearer ${pat}` } });
+  if (!dl.ok) throw new Error(`GH_GET_DL_${dl.status}`);
+  return dl.text();
+}
+
 async function ghPut(path, contentStr, message, sha = null) {
   const { owner, repo, pat } = getSyncConfig();
   const body = { message, content: btoa(unescape(encodeURIComponent(contentStr))) };
@@ -74,13 +107,18 @@ export async function ghList(path) {
   return Array.isArray(meta) ? meta.map(f => f.name) : [];
 }
 
-/** Read a JSON file from the shared repo. Returns parsed object or null. */
+/** Read a JSON file from the shared repo. ⛔ SNG-549: null now means ONE thing — the file is not there (404). Anything else
+ *  THROWS, because the old `catch { return null }` turned "the API would not give me the body" into "there is no remote", and
+ *  both of this module's protections are built on that distinction: the pull adopts a newer remote, and the push refuses to
+ *  clobber one. Neither can be right about a remote it silently failed to read. */
 export async function fetchRepoJSON(path) {
-  const meta = await ghGet(path);
-  if (!meta) return null;
+  const body = await ghGetRaw(path);
+  if (body == null) return null;                             // 404 — genuinely absent
   try {
-    return JSON.parse(decodeURIComponent(escape(atob(meta.content.replace(/\n/g, "")))));
-  } catch { return null; }
+    return JSON.parse(body);
+  } catch (err) {
+    throw new Error(`GH_GET_UNPARSEABLE_${path}: ${err?.message || "bad JSON"}`);
+  }
 }
 
 /** Read this month's (and optionally last month's) shared ledger events. */
@@ -185,12 +223,33 @@ export function resolveSaveConflict(local, remote) {
   // difference means only that one autosaved more often — that is not evidence, so it falls through to the
   // clock exactly as before.
   const lr = local.rev || 0, rr = remote.rev || 0;
-  const remoteWins = (rr > lr + REV_LEAD) ? true
+  // ⛔ SNG-549 — AND THE GAME'S OWN STATE IS THE STRONGEST EVIDENCE OF ALL, stronger than either counter. Experience, level and
+  // the world's day only ever go FORWARD in play. A copy behind on all three is a copy that has not seen what the other has seen,
+  // whatever its clock says and whatever its save counter says. ⚠️ Measured on the overwrite this was written for: the stale phone
+  // copy was level 31 / 3032xp / day 16 against level 33 / 3200xp / day 18 — behind on every one, and it still won.
+  // ⛑ ALL THREE, AND STRICTLY. Any one of them alone is a bad witness (a repair may lower a level, a day may be re-stamped), and
+  // requiring unanimity means a genuinely divergent pair of saves — where each has something the other lacks — falls straight
+  // through to the counter and the clock, exactly as before.
+  // ⚠️ `num` IS DEFINED HERE because this module has no helpers of its own — `node --check` passes an undefined identifier
+  // happily and it would have thrown at the first sync, on the one path a player cannot see failing.
+  const num = (v) => (Number.isFinite(Number(v)) ? Number(v) : 0);
+  const behind = (a, b) => num(a?.xp) < num(b?.xp) && num(a?.level) < num(b?.level) && num(a?.clock?.day) < num(b?.clock?.day);
+  const localBehind = behind(local, remote), remoteBehind = behind(remote, local);
+  const remoteWins = (localBehind && !remoteBehind) ? true
+    : (remoteBehind && !localBehind) ? false
+    : (rr > lr + REV_LEAD) ? true
     : (lr > rr + REV_LEAD) ? false
     : (ru > lu || (ru === lu && rr > lr));
   const winner = remoteWins ? remote : local;
   const loser = remoteWins ? local : remote;
-  return { winner, loser: conflict ? loser : null, conflict, reason: remoteWins ? "remote-newer" : "local-newer" };
+  return {
+    winner, loser: conflict ? loser : null, conflict,
+    reason: remoteWins ? "remote-newer" : "local-newer",
+    // ⚠️ WHY IT DECIDED, because "the other copy won" is not a thing a player or a log can act on.
+    why: (localBehind && !remoteBehind) ? "local is behind on xp, level and world day"
+      : (remoteBehind && !localBehind) ? "remote is behind on xp, level and world day"
+      : (rr > lr + REV_LEAD || lr > rr + REV_LEAD) ? "a decisive rev lead" : "the clock",
+  };
 }
 
 /** PUSH GUARD: never let a stale local overwrite a fresher remote. Re-reads remote and
@@ -199,7 +258,14 @@ export function resolveSaveConflict(local, remote) {
 export async function pushCharacterGuarded(character, { fetch = fetchRepoJSON, push = pushOwnedFile, enabled = syncEnabled } = {}) { // registry:internal
   if (!enabled()) return { ok: false, reason: "sync-off" };
   const path = charPath(character.playerKey, character.id);
-  const remote = await fetch(path);
+  // ⛔ SNG-549 — FAIL CLOSED. This read used to answer `null` for BOTH "the file is not there" and "I could not read it", and a
+  // save over 1MB always took the second road: the API stops sending inline content, the parse threw, and the catch said null.
+  // ⚠️ SO THE GUARD BELOW WAS SKIPPED ENTIRELY — `if (remote && …)` — and a four-day-old phone copy overwrote a save 267 revs
+  // ahead of it. A guard that passes when it cannot see is not a guard. `fetchRepoJSON` throws now; this refuses on the throw,
+  // because the one thing we must never do on an unreadable remote is write over it.
+  let remote;
+  try { remote = await fetch(path); }
+  catch (err) { return { ok: false, reason: "remote-unreadable", why: err?.message || "could not read the remote copy" }; }
   // ⛔ THE SAME RESOLVER AS THE LOAD, OR THE LOAD'S RULE MEANS NOTHING. This guard judged "fresher" by the
   // clock alone, and a tab being played always has the newer clock — so a stale copy with a LOWER rev pushed
   // over a higher-rev remote three times on 2026-09-06 (1853 over 2500, then 1858, then 1794 over 1858).

@@ -32,8 +32,12 @@ export function fakeRemote() {
   const shaOf = () => `sha${++n}`;
   const b64 = (s) => Buffer.from(s, "utf8").toString("base64");
   const unb64 = (s) => Buffer.from(s, "base64").toString("utf8");
-  const ok = (body) => ({ ok: true, status: 200, json: async () => body });
-  const err = (status) => ({ ok: false, status, json: async () => ({}) });
+  // ⛔ SNG-549: THE FAKE MUST ANSWER THE RAW MEDIA TYPE, BECAUSE THE REAL ONE DOES. The contents API stops putting inline
+  // `content` in the JSON above 1,000,000 bytes, so the reader now asks for `application/vnd.github.raw` and takes the BODY —
+  // and this stand-in had no `text()` at all, which turned every read in the suite into a throw. ⚠️ A fake that cannot do what the
+  // real service does is a fake that certifies the wrong thing; the shape it returns is now the shape the caller asked for.
+  const ok = (body, raw = null) => ({ ok: true, status: 200, json: async () => body, text: async () => (raw != null ? raw : JSON.stringify(body)) });
+  const err = (status) => ({ ok: false, status, json: async () => ({}), text: async () => "" });
   const pathOf = (url) => decodeURIComponent(String(url).split(`/repos/${OWNER}/${REPO}/contents/`)[1] || "");
 
   const transport = async (url, opts = {}) => {
@@ -42,7 +46,8 @@ export function fakeRemote() {
       state.gets++;
       const f = files.get(path);
       if (!f) return err(404);
-      return ok({ content: b64(f.content), sha: f.sha, path });
+      // ⚠️ THE ACCEPT HEADER DECIDES, as it does on the real API: `…github.raw` gets the file body, everything else the envelope.
+      return ok({ content: b64(f.content), sha: f.sha, path }, f.content);
     }
     if (opts.method === "PUT") {
       state.puts++;

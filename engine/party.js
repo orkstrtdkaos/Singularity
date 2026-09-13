@@ -503,7 +503,13 @@ export async function listScenesAt(locationId) {
     }
     const scenes = [];
     for (const n of candidates) {
-      const sc = await fetchRepoJSON(`world/scenes/${n}`);
+      // ⛔ SNG-549: ONE BAD SCENE MUST NOT HIDE THE REST. `fetchRepoJSON` now THROWS on a remote it cannot read — it used to
+      // answer null for that and for "absent" alike, which is what blinded the save guard — and this loop sits inside one outer
+      // catch, so a single unreadable scene file aborted the scan and returned NO scenes at all. ⚠️ Skipping is the right
+      // tolerance here, for the reason the line below already gives: the index is a hint, the FILE is the truth, and a truth you
+      // cannot read is simply not one of the scenes you found.
+      let sc = null;
+      try { sc = await fetchRepoJSON(`world/scenes/${n}`); } catch { continue; }
       if (sc && sceneIsOpen(sc)) scenes.push(sc); // the scene FILE is the truth; the index is a hint
     }
     return scenes.slice(-5);

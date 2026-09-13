@@ -12710,6 +12710,81 @@ console.log("\n── §195 · the parser can see the canon, an item answers to 
     && /spectrumIds: \(CONTENT\.spectrums\?\.spectrums \|\| \[\]\)/.test(rd("app.js")));
 }
 
+/* ══════════ §196 — SNG-549 · THE READ WENT BLIND AT ONE MEGABYTE AND TOOK BOTH SYNC GUARANTEES WITH IT (Erik: "on mobile it still loads Silas back at lvl 31") ══════════ */
+console.log("\n── §196 · a guard that cannot see must refuse, and the game's own state outranks every clock ──");
+{
+  const SY196 = await import("../engine/sync.js");
+  const S196 = rd("engine/sync.js");
+  const silas196 = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+
+  // ⛔ THE CAUSE, AS A FACT ABOUT THE FILE: the GitHub contents API stops returning inline `content` above 1,000,000 bytes and
+  // answers 200 with an empty body. This save is past that line, so every read came back unparseable → null → "no remote".
+  const bytes196 = rd("characters/player-s9z9u1/char-mrhs8286.json").length;
+  check(`§196: ⛔ the save is ${bytes196.toLocaleString("en-US")} bytes — past the API's 1,000,000-byte inline limit, which is WHY the read went blind`,
+    bytes196 > 1_000_000);
+  check("§196: ⛔ so the read asks for the RAW body, which has no such limit, and falls back to `download_url` if a host ignores it",
+    /accept: "application\/vnd\.github\.raw"/.test(S196)
+    && /meta\.download_url/.test(S196)
+    && /async function ghGetRaw\(path\)/.test(S196));
+  // ⛔ ONE NULL, ONE MEANING. `catch { return null }` made "I could not read it" and "it is not there" the same answer, and both
+  // of this module's protections are built on telling those apart.
+  check("§196: ⛔ `fetchRepoJSON` returns null ONLY for a 404 — an unreadable remote THROWS instead of reading as absent",
+    /GH_GET_UNPARSEABLE_/.test(S196) && /if \(body == null\) return null;/.test(S196)
+    && !/return JSON\.parse\(decodeURIComponent\(escape\(atob\(meta\.content/.test(S196));
+
+  /* ---- the guard fails closed ---- */
+  const phone = { id: "c", playerKey: "p", rev: 1813, level: 31, xp: 3032, clock: { day: 16 }, updatedAt: 9_000, syncedAt: 1_000 };
+  const good = { id: "c", playerKey: "p", rev: 2080, level: 33, xp: 3200, clock: { day: 18 }, updatedAt: 5_000, syncedAt: 1_000 };
+  const closed = await SY196.pushCharacterGuarded(phone, {
+    fetch: async () => { throw new Error("GH_GET_UNPARSEABLE_x"); },
+    push: async () => { throw new Error("A PUSH HAPPENED ON AN UNREADABLE REMOTE"); }, enabled: () => true });
+  check("§196: ⛔ AN UNREADABLE REMOTE IS A REFUSAL, NOT A GO-AHEAD — the one thing never to do to a copy you cannot read is write over it",
+    closed.ok === false && closed.reason === "remote-unreadable", JSON.stringify(closed));
+  const refused = await SY196.pushCharacterGuarded(phone, { fetch: async () => good, push: async () => { throw new Error("MUST NOT PUSH"); }, enabled: () => true });
+  check("§196: …and a stale copy against a remote it CAN read is refused as before",
+    refused.ok === false && refused.reason === "remote-newer");
+  // ⚠️ AND A GENUINELY ABSENT REMOTE STILL TAKES THE FIRST COPY, or a new device could never seed the repo.
+  let wrote = false;
+  const first = await SY196.pushCharacterGuarded(good, { fetch: async () => null, push: async () => { wrote = true; }, enabled: () => true });
+  check("§196: …while a genuine 404 still writes the first copy up, so a new device can still seed the world",
+    first.ok === true && wrote === true);
+
+  /* ---- the game's own state is the strongest evidence ---- */
+  // ⛔ THE REAL PAIR, AS THEY STOOD AT THE OVERWRITE. The phone's clock was an hour NEWER and it was behind on everything that
+  // matters; under the old rule the clock won and 267 revs of play were written over.
+  const r196 = SY196.resolveSaveConflict(phone, good);
+  check("§196: ⛔ xp, level and world day only go FORWARD — a copy behind on all three loses however new its clock is",
+    r196.reason === "remote-newer" && /behind on xp, level and world day/.test(r196.why)
+    && phone.updatedAt > good.updatedAt, `${r196.reason} · ${r196.why}`);
+  check("§196: …and it is symmetric, so the same rule protects whichever side is ahead",
+    SY196.resolveSaveConflict(good, phone).reason === "local-newer");
+  // ⛑ UNANIMITY IS WHAT KEEPS IT HONEST: a genuinely divergent pair — each holding something the other lacks — falls straight
+  // through to the counter and the clock, exactly as before.
+  check("§196: …and a DIVERGENT pair (ahead on one, behind on another) falls through to the rev lead and the clock untouched",
+    (() => { const a = { rev: 100, level: 5, xp: 500, clock: { day: 9 }, updatedAt: 2000 };
+      const b = { rev: 101, level: 4, xp: 600, clock: { day: 9 }, updatedAt: 1000 };
+      const d = SY196.resolveSaveConflict(a, b);
+      return d.reason === "local-newer" && d.why === "the clock"; })());
+  check("§196: …and a decisive rev lead still decides when the game state is level, which is §117's rule kept whole",
+    (() => { const a = { rev: 1790, level: 5, xp: 500, clock: { day: 9 }, updatedAt: 9000 };
+      const b = { rev: 1834, level: 5, xp: 500, clock: { day: 9 }, updatedAt: 1000 };
+      const d = SY196.resolveSaveConflict(a, b);
+      return d.reason === "remote-newer" && /rev lead/.test(d.why); })());
+  check("§196: …and every verdict says WHY, because \"the other copy won\" is not something a player or a log can act on",
+    ["local is behind on xp, level and world day", "remote is behind on xp, level and world day", "a decisive rev lead", "the clock"]
+      .includes(SY196.resolveSaveConflict(phone, good).why));
+
+  /* ---- the restore ---- */
+  // ⛔ WHAT THE OVERWRITE COST, from the two copies in git: level 33→31, xp 3200→3032, day 18→16, 61 established facts→48,
+  // 51 deeds→37, 39 crafts→36, 1436 crystal→1182. ⛑ Restored BYTE-EXACT from the copy the app itself wrote at 21:24, so every
+  // byte in this save is still the game's own — no field of it was authored by hand, which is the rule this repair had to keep.
+  check("§196: ⛑ Silas is restored — level 33 at day 18, with every fact, deed and craft the overwrite took",
+    silas196.level === 33 && silas196.xp === 3200 && silas196.clock?.day === 18
+    && (silas196.establishedFacts || []).length === 61 && (silas196.deeds || []).length === 51
+    && (silas196.abilities || []).length === 39 && silas196.purse?.crystal === 1436 && silas196.rev === 2080,
+    `lvl ${silas196.level} · xp ${silas196.xp} · day ${silas196.clock?.day} · ${(silas196.establishedFacts || []).length} facts · ${(silas196.deeds || []).length} deeds`);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

@@ -13172,15 +13172,45 @@ console.log("\n── §201 · the age is the gate, the ops go on the turn, and 
   const askChar = { npcRegistry: {
     a: { id: "a", name: "Teva", relationship: 7, status: "active" },
     b: { id: "b", name: "Sorel", relationship: 3, status: "active" },
-    c: { id: "c", name: "Aevi", age: 24, status: "active" },
+    c: { id: "c", name: "Aevi", age: 24, sex: "female", status: "active" },
     d: { id: "d", name: "Ghost", status: "dead" } } };
   const ask = NP201.agesMissingForGM(askChar, { sceneNpcNames: ["Sorel"] });
-  check("§201: ⛑ the prompt ASKS for the missing ages, scene-first, skipping the aged and the dead",
-    /Sorel, Teva/.test(ask) && !/Aevi/.test(ask) && !/Ghost/.test(ask) && /ADULT IS 18/.test(ask), ask?.slice(0, 90));
-  check("§201: …and says nothing when everyone nearby has one",
-    NP201.agesMissingForGM({ npcRegistry: { x: { id: "x", name: "A", age: 30, status: "active" } } }) === null);
+  check("§201: ⛑ the prompt ASKS for what is missing, scene-first, skipping the answered and the dead",
+    /NO RECORDED AGE/.test(ask) && /Sorel, Teva/.test(ask) && !/Aevi/.test(ask) && !/Ghost/.test(ask) && /ADULT IS 18/.test(ask), ask?.slice(0, 90));
+  // ⛔ SNG-558 — THE SECOND GATE, AND THE SECOND WRITER WITH NO READER. `sex` is what R24 requires for romance and
+  // absence is a HARD EXCLUSION by design; 6 of 54 people on two live saves have one, so 48 are locked out by a field
+  // nothing collects. ⚠️ AND `sex` WAS NOT WRITTEN ON THE UPDATE PATH EITHER — found the same way as `age`, by driving
+  // the loop the prompt asks for instead of trusting it. Twice in one session, which is the whole argument for driving it.
+  check("§201: the prompt asks for a missing SEX too — the gate R24 makes absolute",
+    /NO RECORDED SEX/.test(ask) && /never be romanced/.test(ask) && /Sorel, Teva/.test(ask));
+  check("§201: ⛑ an ABSENT sex may be filled in, which is what answers R24 rather than arguing with it",
+    (() => { const c = { npcRegistry: {} };
+      NP201.applyNpcUpdates(c, [{ op: "meet", npcId: "t", name: "T" }], { day: 1 });
+      NP201.applyNpcUpdates(c, [{ op: "update", npcId: "t", sex: "female" }], { day: 2 });
+      return c.npcRegistry.t.sex === "female"; })());
+  check("§201: ⛔ …but a RECORDED sex is canonical and the GM may not change it, nor write junk into it",
+    (() => { const c = { npcRegistry: {} };
+      NP201.applyNpcUpdates(c, [{ op: "meet", npcId: "t", name: "T", sex: "female" }], { day: 1 });
+      NP201.applyNpcUpdates(c, [{ op: "update", npcId: "t", sex: "male" }], { day: 2 });
+      NP201.applyNpcUpdates(c, [{ op: "update", npcId: "t", sex: "banana" }], { day: 3 });
+      return c.npcRegistry.t.sex === "female"; })());
+
+  /* ---- 4d · ⛔ THE JOIN OP WROTE INTO A VOID, AND company.js HAD SAID SO SINCE SNG-390 ---- */
+  // "the GM's `join` op writes `pendingCompanyOffers`, which NOTHING READS. A cap on the path nobody travels is not a
+  // cap." ⚡ MEASURED ON ERIK'S SAVE the hour he asked: Teva reached the registry with the right age and `company: []`.
+  // ⚠️ PROPOSING IS RIGHT — who walks beside you is the player's call — so the offer is RENDERED, not forced.
+  const A558 = rd("app.js");
+  check("§201: ⛑ a proposed company seat is OFFERED to the player — the field the join op writes is finally read",
+    /character\?\.pendingCompanyOffers\?\.length/.test(A558) && /data-seat=/.test(A558));
+  check("§201: …and accepting goes through `recruit()`, the same door the button uses, so the cap is the proven one",
+    /const got = recruit\(character, id, \{ roles:/.test(A558) && /ladder: CONTENT\.rules\.subAttributeLadder \}\);/.test(A558));
+  check("§201: …and declining clears it rather than leaving a banner nobody can dismiss",
+    /data-seat-no=/.test(A558));
+
+  check("§201: …and says nothing when every gate nearby is already answered",
+    NP201.agesMissingForGM({ npcRegistry: { x: { id: "x", name: "A", age: 30, sex: "male", status: "active" } } }) === null);
   check("§201: ⛔ and the row is READ — registered is not the same as reaching the prompt",
-    /agesMissingDetail \} = ctx;/.test(rd("engine/gm.js")) && /AGES NOT YET RECORDED/.test(rd("engine/gm.js"))
+    /agesMissingDetail \} = ctx;/.test(rd("engine/gm.js")) && /FACTS NOT YET RECORDED ABOUT PEOPLE YOU KNOW/.test(rd("engine/gm.js"))
     && /key: "agesMissingDetail"/.test(rd("engine/gm_registry.js")));
 
   /* ---- 5 · ⛔ THE OPS WERE IN THE PROSE — recovered, from Erik's own reply ---- */

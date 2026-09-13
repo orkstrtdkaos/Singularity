@@ -141,7 +141,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "1.9.490";
+const APP_VERSION = "1.9.492";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -15780,6 +15780,20 @@ function renderPlay(turn, opts = {}) {
     const p = character._pendingArrival;
     main += `<div class="arrive-banner">You're on your way to <strong>${esc(p.name)}</strong>. <button class="btn arrive-btn" id="do-arrive">→ Arrive at ${esc(p.name)}</button></div>`;
   }
+  // ⛔ SNG-558 — THE OP WROTE HERE AND NOTHING EVER READ IT. `applyPartyOps` turns the GM's `join` into a PROPOSAL and
+  // stores it on `pendingCompanyOffers`; company.js has carried the confession since SNG-390 — "the GM's `join` op writes
+  // `pendingCompanyOffers`, which NOTHING READS. A cap on the path nobody travels is not a cap." ⚡ MEASURED ON ERIK'S SAVE:
+  // Teva reached the registry with the right age and `company: []`, because the seat was offered into a void.
+  // ⚠️ PROPOSING IS THE RIGHT DESIGN — who walks beside you is the player's call, the same rule travel has — so this
+  // renders the offer rather than forcing the seat. Same one-tap shape as the arrival above.
+  if (character?.pendingCompanyOffers?.length) {
+    for (const off of character.pendingCompanyOffers.slice(0, 3)) {
+      const who = esc(off.name || off.npcId);
+      main += `<div class="arrive-banner"><strong>${who}</strong> would travel with you${off.why ? ` — ${esc(off.why)}` : ""}. `
+        + `<button class="btn arrive-btn" data-seat="${esc(off.npcId)}">→ Take ${who} at your side</button> `
+        + `<button class="btn secondary" data-seat-no="${esc(off.npcId)}">Not now</button></div>`;
+    }
+  }
   if (opts.error) main += `<div class="error-card">The GM stumbled: ${esc(opts.error)}<br><button class="btn" id="retry" style="margin-top:8px">Try again</button></div>`;
 
   if (turn) {
@@ -16092,6 +16106,21 @@ function renderPlay(turn, opts = {}) {
   const breatherBtn = document.getElementById("do-breather"); if (breatherBtn) breatherBtn.onclick = () => rest("breather");
   const mapBtn = document.getElementById("open-map"); if (mapBtn) mapBtn.onclick = () => renderMap();
   const arriveBtn = document.getElementById("do-arrive"); if (arriveBtn) arriveBtn.onclick = () => arriveAtPending(); // SNG-122
+  // ⛑ SNG-558: the accept goes through `recruit()` — the SAME door the Character-screen button uses — so the cap, the
+  // rejoin rule and the role defaults are the ones already proven, not a second implementation beside them.
+  for (const b of document.querySelectorAll("[data-seat]")) b.onclick = () => {
+    const id = b.getAttribute("data-seat");
+    const off = (character.pendingCompanyOffers || []).find(o => o.npcId === id);
+    const got = recruit(character, id, { roles: off?.roles?.length ? off.roles : ["ally"], day: absoluteWorldDay(), ladder: CONTENT.rules.subAttributeLadder });
+    character.pendingCompanyOffers = (character.pendingCompanyOffers || []).filter(o => o.npcId !== id);
+    if (!got) { alert("There is no place at your side for them today — rapport is what widens that."); }
+    saveCharacter(character); renderPlay(character.activeScene?.lastTurn, {});
+  };
+  for (const b of document.querySelectorAll("[data-seat-no]")) b.onclick = () => {
+    const id = b.getAttribute("data-seat-no");
+    character.pendingCompanyOffers = (character.pendingCompanyOffers || []).filter(o => o.npcId !== id);
+    saveCharacter(character); renderPlay(character.activeScene?.lastTurn, {});
+  };
   for (const b of app.querySelectorAll("[data-intentopt]")) b.onclick = () => answerIntent(b.dataset.intentopt); // SNG-145
   const lSend = document.getElementById("ledger-send"); if (lSend) lSend.onclick = () => answerLedger(true);
   const lHold = document.getElementById("ledger-hold"); if (lHold) lHold.onclick = () => answerLedger(false);

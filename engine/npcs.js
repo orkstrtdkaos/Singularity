@@ -201,18 +201,22 @@ export function romanceable(person) {
 export function agesMissingForGM(character, { sceneNpcNames = [], limit = 6 } = {}) {
   const reg = character?.npcRegistry || {};
   const near = new Set(sceneNpcNames.map(n => String(n || "").toLowerCase()));
-  const missing = Object.values(reg)
-    .filter(n => n && n.status !== "dead" && n.status !== "departed" && ageGateGap(n).length)
-    .sort((a, b) => {
-      const an = near.has(String(a.name || "").toLowerCase()) ? 0 : 1, bn = near.has(String(b.name || "").toLowerCase()) ? 0 : 1;
-      return an - bn || (b.relationship ?? 0) - (a.relationship ?? 0);
-    })
-    .slice(0, limit);
-  if (!missing.length) return null;
-  return `These known people have NO recorded age, and age is the gate for every adult-only interaction: `
-    + missing.map(n => n.name || n.id).join(", ")
-    + `. When one of them next appears, emit npcUpdates {"op":"update","npcId":…,"age":N} with a number. ADULT IS 18. `
-    + `Give a grown person a grown person's age; never describe an adult in teenage terms.`;
+  const rank = (n) => (near.has(String(n.name || "").toLowerCase()) ? 0 : 1);
+  const live = Object.values(reg).filter(n => n && n.status !== "dead" && n.status !== "departed");
+  const order = (a, b) => rank(a) - rank(b) || (b.relationship ?? 0) - (a.relationship ?? 0);
+  const noAge = live.filter(n => ageGateGap(n).length).sort(order).slice(0, limit);
+  // ⛔ SNG-558 — THE SECOND UNANSWERED GATE, AND IT IS THE ONE ERIK'S STORY NEEDS. R24: "you can't romance until you
+  // know the sex... if there is no sex it's not romanceable", and ABSENCE IS A HARD EXCLUSION by design — the right rule,
+  // because a being of motes has no sex and needs nothing authored to exclude them. ⚡ MEASURED: `sex` is recorded for
+  // 6 of 54 people across two live saves, so 48 are excluded from romance by a field NOTHING EVER ASKED FOR. A gate
+  // whose answer nobody collects is not a gate, it is a wall. ⚠️ It is asked for, never inferred (SNG-143).
+  const noSex = live.filter(n => n.sex == null || String(n.sex).trim() === "").sort(order).slice(0, limit);
+  const lines = [];
+  if (noAge.length) lines.push(`NO RECORDED AGE — age is the gate for every adult-only interaction: ${noAge.map(n => n.name || n.id).join(", ")}. `
+    + `Emit npcUpdates {"op":"update","npcId":…,"age":N} with a number. ADULT IS 18. Give a grown person a grown person's age; never describe an adult in teenage terms.`);
+  if (noSex.length) lines.push(`NO RECORDED SEX — and without it a person can never be romanced, whatever the story does: ${noSex.map(n => n.name || n.id).join(", ")}. `
+    + `Emit npcUpdates {"op":"update","npcId":…,"sex":"male|female|none"}. Use "none" for a being that has none — that is a real answer, not a blank. Set it from what the fiction has already shown; do not invent a change.`);
+  return lines.length ? lines.join(String.fromCharCode(10)) : null;   // (a literal newline; an escape here has been eaten twice today)
 }
 
 export function applyNpcUpdates(character, updates = [], ctx = {}) {
@@ -325,6 +329,19 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
     // no reader, one minute old — the defect this project keeps finding, committed while fixing an instance of it.
     // ⚠️ THE STAMP FOLLOWS THE NUMBER, in both directions: a corrected age of 19 clears a minor marker set from prose,
     // and an age under 18 sets it however grown the description sounds. The age is the gate, so the age decides.
+    // ⛔ SNG-558 — AN ABSENT SEX MAY BE FILLED IN; A RECORDED ONE MAY NOT BE CHANGED. R24 says sex is set when a person is
+    // first written and never later, and that is right — it is canonical, and correcting a RENDERING must not quietly change
+    // who may be romanced. ⚡ BUT 48 OF 54 PEOPLE ON TWO LIVE SAVES HAVE NONE, because the meet that created them omitted it
+    // and nothing has ever asked since. Absence is a hard exclusion by design, so those 48 are romance-locked by a field
+    // nobody collects. ⚠️ Filling a blank is not a change: it answers the question R24 asks, and it is one-way. A genuine
+    // correction to a RECORDED sex still belongs to the player, through the repair ops, never to the GM mid-beat.
+    if (u.sex && (n.sex == null || String(n.sex).trim() === "")) {
+      const sx = String(u.sex).trim().toLowerCase();
+      if (["male", "female", "none"].includes(sx)) {
+        n.sex = sx;
+        n.history = [...(n.history || []), `[d${ctx.day ?? "?"}] Sex recorded: ${sx}.`].slice(-CAPS.history);
+      }
+    }
     if (u.age !== undefined && u.age !== null && u.age !== "") {
       const yrs = Number(u.age);
       if (Number.isFinite(yrs) && yrs >= 0 && yrs < 200) {

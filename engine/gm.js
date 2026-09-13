@@ -337,10 +337,12 @@ ${standingDetail}`);
   if (livingWorldDetail) world.push(`## LIVING WORLD — content GROWN through play that is ALREADY real here (durable; reference it naturally by name, honor its accumulated facts, and NEVER re-introduce it as if new). Tagged by canon tier + weight; established/nominated are firm personal canon.\n${livingWorldDetail}`);
   if (legendDetail) world.push(legendDetail);
   if (sharedCanonDetail) world.push(`## SHARED WORLD CANON — figures, places, and threads OTHER travelers grew real enough to enter the whole world's canon (already filtered to THIS player's content ceiling; a line marked [dialed to your ceiling] has been softened — honor that register, never sharpen it back up). Reference them as established parts of the wider world if the scene reaches that far; "rumored" ones are contested variants — speak them as hearsay, not settled fact. Do not re-introduce them as freshly invented.\n${sharedCanonDetail}`);
-  // ⛑ SNG-556: THE AGE GATE NEEDS ANSWERS. Erik ruled "you just need an age for any NPC to be the gate", and 0 of 53
-  // known people across his two live saves carried one — a gate universally unanswered, which is how a person written
-  // as "a young woman in her mid-teens" reached a romance track with nothing objecting.
-  if (agesMissingDetail) world.push(`## AGES NOT YET RECORDED — the gate for every adult-only interaction
+  // ⛑ SNG-556/558: TWO GATES, BOTH UNANSWERED. Erik ruled "you just need an age for any NPC to be the gate" — and 0 of 53
+  // known people across his two live saves carried one, which is how a person written as "a young woman in her mid-teens"
+  // reached a romance track with nothing objecting. ⚡ THE SAME COUNT FOR SEX: 6 of 54, and R24 makes absence a HARD
+  // EXCLUSION, so 48 people are romance-locked by a field nothing ever asked for. A gate whose answer nobody collects is
+  // not a gate, it is a wall. ⚠️ Both are ASKED FOR and neither is inferred (SNG-143).
+  if (agesMissingDetail) world.push(`## FACTS NOT YET RECORDED ABOUT PEOPLE YOU KNOW — each one gates something, and none of them can be guessed
 ${agesMissingDetail}`);
   if (placeMemoryDetail) world.push(`## PLACE HISTORY — what ${character.name} knows changed here (established fact — see rule 15)\n${placeMemoryDetail}`);
   if (waygateDetail) world.push(`## WAYGATE (SNG-148 — a door, offered lightly, never a menu)\n${waygateDetail}`);

@@ -13799,6 +13799,94 @@ console.log("\n── §207 · nothing is foreclosed: the readers that were stil
     `${anti207}: allowed ${v207.allowed} · castable ${v207.castable} · band ${v207.band}`);
 }
 
+// ⛔ SNG-542 §5.2 (Aevi) — "no player-facing quest surface may read `character.quests` directly."
+//
+// ⛑ HER REASON IS THE WHOLE ARGUMENT, and it is the sharpest sentence in the handoff: *"the `questsForGM` half has been
+// right for weeks BECAUSE SOMETHING GATED IT. The player half had nothing."* Three of her four asks were already
+// closed — `questsFor` is imported, eleven player surfaces go through `myQuests()`, and her one open question is
+// answered in `isRealQuest` (it was not the GM: the def had arity and nothing in it, and a hollow stage is now
+// unstartable). ⚠️ THIS IS THE ONE THAT KEEPS THEM CLOSED.
+//
+// ⚑ WHAT ERIK SAW: three active quests rendering the word `resolve` — `s?.objective || "resolve"`, the fallback string
+// itself — because `hydrateQuest` existed, worked on those exact records, and was never called on his side of the app.
+// ⛔ THE READER EXISTED, WAS CORRECT, AND WAS DOCUMENTED AS "the one call a consumer should make". The consumer the
+// content was written FOR was the one that did not make it.
+console.log("\n── §208 · the player reads the quest through the same door the GM does ──");
+{
+  const A208 = rd("app.js");
+
+  /* ---- 1 · the one reader exists and is the one thing that reads the raw list for prose ---- */
+  check("§208: ⛑ there is exactly ONE hydrating reader, and it is `questsFor` — not a second local copy",
+    /function myQuests\(\) \{ return questsFor\(character, CONTENT\.quests\); \}/.test(A208)
+    && (A208.match(/function myQuests\(\)/g) || []).length === 1);
+  // ⚠️ CCODE-186's shape, which Aevi names explicitly: one place eleven surfaces pass through, not eleven patches.
+  const uses = (A208.match(/myQuests\(\)/g) || []).length;
+  check("§208: …and the player's surfaces go through it — one door, not a patch per screen",
+    uses >= 10, `${uses} call site(s)`);
+
+  /* ---- 2 · ⛔ THE GATE: a raw read may ask WHO, never WHAT ---- */
+  // ⛑ THE LINE IS HYDRATION, AND IT IS A REAL LINE. `hydrateQuest` fills stage PROSE from the def; it does not invent
+  // or move an id. So a raw read that only asks identity (`q.id`, `q.arcId`) is correct and needs no door — the three
+  // that remain are a GM-context id set, a prestige-arc lookup, and an arc-taken check. ⛔ A raw read that touches
+  // `stages`, `objective`, `title` or `summary` is reading the UNHYDRATED record, and that is exactly what put the
+  // word `resolve` on his screen. ⚠️ NOT A BAN ON THE FIELD — a ban would have to be argued with every time somebody
+  // legitimately needs an id, and a rule that is argued with is a rule that gets waived.
+  const PROSE = /\b(stages|objective|title|summary|premise|stakes)\b/;
+  const rawReads = [];
+  for (const line of A208.split(String.fromCharCode(10))) {
+    if (!/character\.quests\b/.test(line)) continue;
+    if (/character\.quests\s*=/.test(line)) continue;            // a WRITE is not a read
+    if (/character\.quests\.push|character\.quests\.some\(q => q\.id === "dev-test/.test(line)) continue; // dev seeding
+    if (PROSE.test(line)) rawReads.push(line.trim().slice(0, 120));
+  }
+  check("§208: ⛔ no raw read of `character.quests` reaches for stage prose — that is what `myQuests()` is for",
+    rawReads.length === 0, rawReads.join(" · "));
+
+  /* ---- 3 · and the gate can fail, which is the only way to know it is a gate ---- */
+  // ⚠️ A CHECK THAT CANNOT FAIL IS A CHECK NOBODY HAS TESTED. Driven on a synthetic line of exactly the shape the
+  // defect had: a surface pulling a stage objective straight off the record.
+  const wouldFail = 'const s = (character.quests || []).find(q => q.id === id)?.stages?.[0]?.objective;';
+  check("§208: …and the gate CATCHES the shape the defect had, driven on a line of exactly that form",
+    /character\.quests\b/.test(wouldFail) && !/character\.quests\s*=/.test(wouldFail) && PROSE.test(wouldFail));
+  // ⛑ …while leaving the identity reads alone, which is the distinction the whole rule turns on
+  const wouldPass = 'questIds: new Set((character.quests || []).map(q => q && q.id).filter(Boolean)),';
+  check("§208: ⛑ …and leaves an identity-only read alone — hydration fills prose, it does not move an id",
+    !PROSE.test(wouldPass));
+
+  /* ---- 4 · ⛑ AND THE CURE IS PROVEN ON THE RECORDS ERIK IS LOOKING AT ---- */
+  // ⚑ Aevi measured these by hand; they are asserted here so the fix cannot quietly stop working. The three casualties
+  // hold `[{}, {}, {}]` on the save and everything else on the record is complete.
+  const QS208 = await import("../engine/quests.js");
+  const { loadContentHeadless: lch208 } = await import("./headless_content.mjs");
+  const C208 = await lch208();
+  const silas208 = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const blanks = (silas208.quests || []).filter(q => Array.isArray(q.stages) && q.stages.length && q.stages.every(s => !s || !Object.keys(s).length));
+  const read = QS208.questsFor(silas208, C208.quests);
+  const healed = blanks.map(b => read.find(q => q.id === b.id)).filter(Boolean);
+  check("§208: ⛑ every quest whose stored stages are empty reads back with real objectives",
+    blanks.length > 0 && healed.length === blanks.length
+    && healed.every(q => (q.stages || []).every(s => (s?.objective || "").length > 10)),
+    `${healed.length}/${blanks.length} hydrated — ${blanks.map(b => b.id).join(", ")}`);
+  // ⛔ AND THE WORD ON HIS SCREEN IS NO LONGER THE FALLBACK. `s?.objective || "resolve"` is still there and is still
+  // right as a guard; what changed is that it is now fed a hydrated stage, so it never fires.
+  check("§208: ⛔ …so the fallback string `resolve` is never what a started quest renders",
+    healed.every(q => { const s = q.stages?.[q.stageIndex] || q.stages?.[q.stages.length - 1]; return (s?.objective || "resolve") !== "resolve"; }));
+  // ⚠️ AND THE TRAILING EMPTY STAGE IS DROPPED, not filled with a def stage that does not correspond to it.
+  const mercy = read.find(q => /mercy/.test(q.id || ""));
+  // ⚠️ ASSERTED WITHOUT RE-FINDING THE DEF, on purpose. My first two forms looked the def up myself — first as a map
+  // (`CONTENT.quests` is an ARRAY), then by exact id (`hydrateQuest` matches through `normQuestId`, so the def's id is
+  // not the record's id). ⛔ BOTH FAILED A CHECK THE ENGINE WAS PASSING, which is a third implementation of a lookup
+  // arguing with the one that works — the exact thing this section exists to stop. The CLAIM needs no def: a record
+  // that stored four stages reads back as three, and every one of them carries prose.
+  if (mercy) {
+    const rawStages = ((silas208.quests || []).find(q => q.id === mercy.id)?.stages || []).length;
+    check("§208: …and a trailing empty stage the record carried is dropped, not filled with words that are not its own",
+      rawStages === 4 && (mercy.stages || []).length === 3
+      && (mercy.stages || []).every(st => (st?.objective || "").length > 10),
+      `record ${rawStages} → read ${(mercy.stages || []).length}`);
+  }
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

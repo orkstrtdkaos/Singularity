@@ -143,7 +143,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "1.9.502";
+const APP_VERSION = "1.9.503";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2160,6 +2160,21 @@ function maybeAutoFireTests() {
     } catch (err) { console.warn("[fire-tests] auto-run failed (play continues):", err?.message || err); }
     finally { _autoFiring = false; }
   });
+}
+
+/** ⛑ SNG-546 — THE ONE PLACE PUNCTUATION IS RECONCILED. Returns the CATALOGUE id a possibly-hyphenated id names,
+ *  or null when the catalogue has no such craft. ⚠️ NULL IS A REAL ANSWER AND THE CALLERS DEPEND ON IT: five crafts on
+ *  Silas's save (`marrow-s-wings`, `the-held-place`, `the-declared-threshold`, `the-received-ending`,
+ *  `shadowcast-model`) are hyphenated AND resolve to nothing — their `customAbilities` entry is their only
+ *  definition, and a migration that "normalised and dropped the copy" would DELETE FIVE OF HIS CRAFTS rather than
+ *  de-duplicate them. ⛔ Aevi measured five holdings; there are ten, and half of them must not be touched. */
+function normalisedCatalogId(id, catalog = null) {
+  const raw = String(id || "");
+  if (!raw) return null;
+  const cat = catalog || CONTENT?.abilities || {};
+  if (cat[raw]) return raw;                       // already canonical
+  const under = raw.replace(/-/g, "_");
+  return cat[under] ? under : null;               // ⚠️ never invents a craft that is not there
 }
 
 function devReportNow() {
@@ -7170,7 +7185,23 @@ function applyTurn(turn, resolution, playerWords = null) {
       if (resolution?.equipHelpers?.includes(c.name)) unlocked.push(...growBond(character, c.id, "assist", CONTENT.rules, c.stages, { catalog: fullCatalog(), companions: CONTENT.companions, worldDay: wdNow }).events);
       if (unlocked.includes("grant") && c.bondGrants) {
         const def = sanitizeNewAbility(c.bondGrants, { verbVocab: genContractDeps().vocabs["function_vocabulary.verbs"] }); // SNG-250 §3: born with real families
-        if (def && !character.abilities.some(a => a.abilityId === def.id)) {
+        // ⛔ SNG-546 (Aevi) — WHEN A BOND GRANT NAMES A CRAFT THAT EXISTS, GRANT THE CRAFT. DO NOT COPY IT.
+        //
+        // ⚡ ALL NINE `bondGrants` ARE HYPHENATED AND THE ABILITY CATALOGUE IS ENTIRELY UNDERSCORED, so they never
+        // collided — and that WAS the defect. Not shadowing: two parallel crafts with the same name, the authored one
+        // carrying a three-rung ladder that nothing in the game pointed at, the copy carrying one sentence.
+        // ⛑ SILAS EARNED RANK 3 OF `the-attended-end` — Deathly Premonition, "reads every ending in a place at once,
+        // ordered by when" — and the game showed him rank 1's line, because his key had hyphens in it.
+        // ⚠️ AND THE OBVIOUS CONTENT FIX IS THE WRONG ONE, in Aevi's words: giving the nine their own `tree` is a
+        // SECOND SOURCE OF TRUTH for nine crafts, and the day the catalogue ladder is revised the copy is stale.
+        // ⛑ So the stub becomes what it should always have been — a POINTER plus the teaching prose.
+        const canon = def && normalisedCatalogId(def.id);
+        if (canon && !character.abilities.some(a => a.abilityId === canon)) {
+          character.abilities.push({ abilityId: canon, level: 1 });
+          try { showBraidMoment({ ...CONTENT.abilities[canon], kind: "bondGift", _teacherName: compName(c) }); } catch { /* a ceremony must never break the turn */ }
+        } else if (def && !canon && !character.abilities.some(a => a.abilityId === def.id)) {
+          // ⚠️ A GRANT THAT NAMES NOTHING IN THE CATALOGUE IS STILL A REAL GIFT and keeps the old path: the sanitised
+          // copy IS its definition, and dropping it would delete the craft rather than de-duplicate it.
           character.customAbilities = character.customAbilities || {};
           character.customAbilities[def.id] = def;
           character.abilities.push({ abilityId: def.id, level: 1 });

@@ -13601,6 +13601,114 @@ console.log("\n── §205 · the two sub-fields nothing has ever reached, give
     cov.fields.deeds === 1 && cov.fields.inventory === 1 && cov.n === 2);
 }
 
+// ⛔ SNG-546 (Aevi) — SILAS HOLDS RANK 3 OF A CRAFT WHOSE RANK 3 IS IN THE CATALOGUE UNDER DIFFERENT PUNCTUATION.
+// ⚡ All nine companion `bondGrants` are hyphenated; the ability catalogue is entirely underscored. They never
+// collided, and THAT is the defect — not shadowing but two parallel crafts wearing one name: the authored one with a
+// three-rung ladder nothing pointed at, and a one-sentence copy minted because the reference would not resolve.
+// ⛑ He earned DEATHLY PREMONITION — "reads every ending in a place at once, ordered by when" — and the game showed
+// him rank 1's line for it, because his key had hyphens in it. Invisible at rank 1, which is why nothing caught it:
+// it needed a player to carry a companion relationship to its ceiling, and exactly one has.
+console.log("\n── §206 · the ladder under the other punctuation ──");
+{
+  const RC206 = await import("../engine/reconcile.js");
+  const { loadContentHeadless: lch206 } = await import("./headless_content.mjs");
+  const C206 = await lch206();
+  const cat206 = C206.abilities || {};
+
+  /* ---- 1 · the measurement the fix rests on, re-taken here so it cannot rot ---- */
+  const hyCat = Object.keys(cat206).filter(k => k.includes("-"));
+  check("§206: the ability catalogue is entirely underscored — so a hyphenated id can never collide with it",
+    hyCat.length === 0, hyCat.slice(0, 4).join(", "));
+  const grants = Object.values(C206.companions || {}).flatMap(c => {
+    const g = c?.bondGrants; return !g ? [] : (Array.isArray(g) ? g : [g]);
+  }).filter(g => g && g.id);
+  check("§206: every companion bond grant resolves to a real catalogue craft ONCE NORMALISED",
+    grants.length >= 9 && grants.every(g => cat206[String(g.id).replace(/-/g, "_")]),
+    `${grants.length} grant(s); unresolved: ${grants.filter(g => !cat206[String(g.id).replace(/-/g, "_")]).map(g => g.id).join(", ") || "none"}`);
+  check("§206: …and each one carries a ladder the copy never had — which is the whole loss",
+    grants.every(g => ((cat206[String(g.id).replace(/-/g, "_")]?.tree || []).length) > 1));
+
+  /* ---- 2 · ⛑ THE GRANT POINTS AT THE CRAFT INSTEAD OF COPYING IT ---- */
+  // ⚠️ Aevi's own reason for refusing the obvious content fix: giving the nine their own `tree` is a SECOND SOURCE
+  // OF TRUTH for nine crafts, and the day the catalogue ladder is revised the copy is stale and nobody knows.
+  const A206 = rd("app.js");
+  check("§206: ⛑ a bond grant that names a catalogue craft GRANTS IT — no sanitised copy is written",
+    /const canon = def && normalisedCatalogId\(def\.id\);/.test(A206)
+    && /character\.abilities\.push\(\{ abilityId: canon, level: 1 \}\);/.test(A206));
+  // ⛔ AND A GRANT THAT NAMES NOTHING IS STILL A REAL GIFT. Five crafts on his save resolve to nothing at all, and
+  // for those the sanitised copy IS the definition — the old path has to survive for them.
+  check("§206: ⛔ …and a grant naming nothing in the catalogue still mints its copy, because that copy is its only definition",
+    /else if \(def && !canon && !character\.abilities\.some/.test(A206));
+  check("§206: the normaliser never INVENTS a craft — an id the catalogue lacks returns null",
+    /return cat\[under\] \? under : null;/.test(A206));
+
+  /* ---- 3 · ⛑ THE MIGRATION, ON HIS ACTUAL SAVE, THROUGH THE RUNNER ---- */
+  // ⚠️ A reconcile step proven by calling `apply` is not proven: the gate that decides whether it runs in production
+  // is `reconcileVersion`, and that is the one that has lied here before.
+  const silas206 = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  silas206.reconcileVersion = 58;
+  const beforeCustom = Object.keys(silas206.customAbilities || {}).length;
+  const r206 = RC206.reconcile(silas206, "character", { content: C206 });
+  const held = (id) => (silas206.abilities || []).find(a => (a.abilityId || a.id) === id);
+  check("§206: ⛑ his rank 3 moves onto the craft that HAS a rank 3, and keeps the rank he earned",
+    r206.applied.includes("the-ladder-under-the-other-punctuation")
+    && held("the_attended_end")?.level === 3 && !held("the-attended-end"),
+    `the_attended_end @ ${held("the_attended_end")?.level}`);
+  check("§206: …and the note tells him what he can now read, rather than announcing a migration",
+    r206.notes.some(n => /rank 3 of 3/.test(n)), r206.notes.join(" | ").slice(0, 120));
+  check("§206: …and the hollow copy is dropped ONLY for the one that was replaced",
+    !(silas206.customAbilities || {})["the-attended-end"]
+    && Object.keys(silas206.customAbilities || {}).length === beforeCustom - 1);
+
+  /* ---- 4 · ⛔ AND THE FIVE THAT RESOLVE TO NOTHING ARE UNTOUCHED — the data-loss case ---- */
+  // ⛔ Aevi measured FIVE live holdings; there are TEN, and half of them (`marrow-s-wings`, `the-held-place`,
+  // `the-declared-threshold`, `the-received-ending`, `shadowcast-model` — all his) resolve to NOTHING. For those the
+  // `customAbilities` entry is the only definition there is. ⚠️ A blanket normalise-and-drop would have DELETED FIVE
+  // OF HIS CRAFTS, and it would have looked exactly like a successful migration.
+  const orphans206 = ["marrow-s-wings", "the-held-place", "the-declared-threshold", "the-received-ending", "shadowcast-model"];
+  check("§206: ⛔ a hyphenated craft the catalogue does NOT have is left exactly as it stands — id, level and definition",
+    orphans206.every(id => held(id) && (silas206.customAbilities || {})[id]),
+    orphans206.filter(id => !held(id) || !(silas206.customAbilities || {})[id]).join(", ") || "all five intact");
+  check("§206: …and none of them was silently renamed to a craft that does not exist",
+    orphans206.every(id => !held(id.replace(/-/g, "_"))));
+
+  /* ---- 5 · the rename carries the record that was keyed by the old id ---- */
+  // ⚠️ practice, aspirations and boosts are all keyed by ability id; a rename that leaves them behind loses the
+  // practice a player has already spent — which is the SNG-547 defect, one field over.
+  const prac = { abilities: [{ abilityId: "the-kept-dark", level: 2 }], customAbilities: { "the-kept-dark": { id: "the-kept-dark" } },
+    practice: { uses: { "the-kept-dark": 7 }, aspirations: [{ abilityId: "the-kept-dark", progress: 4 }] },
+    boosts: { "the-kept-dark": true }, reconcileVersion: 58 };
+  RC206.reconcile(prac, "character", { content: C206 });
+  check("§206: ⛑ practice, aspirations and boosts follow the craft to its new id — a rename must not lose spent practice",
+    prac.practice.uses.the_kept_dark === 7 && !prac.practice.uses["the-kept-dark"]
+    && prac.practice.aspirations[0].abilityId === "the_kept_dark" && prac.boosts.the_kept_dark === true);
+
+  /* ---- 6 · ⬜ AEVI'S GATE: no custom craft may shadow a catalogue one ---- */
+  // ⛑ Her words: the check that stops this being written again. A `customAbilities` entry whose normalised id names
+  // a real craft is a duplicate by construction, whatever punctuation either of them uses.
+  // ⛔ ASSERTED AFTER RECONCILE, NOT AGAINST THE DISK — and that distinction is the point. The saves on disk still
+  // shadow, because the migration runs when Erik OPENS each character, and his saves are his. A gate reading the raw
+  // file would go red today, green the moment he plays, and have measured nothing either time. ⚠️ FOURTH GATE TODAY
+  // THAT WOULD HAVE PINNED A VALUE LEGITIMATELY ALLOWED TO MOVE — the difference is that this one was caught before
+  // it shipped. The CLAIM is that the system does not PERMIT a shadow, and the way to ask that is to run the repair.
+  const shadowed = [], healed = [];
+  for (const f of ["char-mrhs8286", "char-mr4ejo8c", "char-mr6eq1a5", "char-msgpisca"]) {
+    let ch; try { ch = JSON.parse(rd(`characters/player-s9z9u1/${f}.json`)); } catch { continue; }
+    const before = Object.keys(ch.customAbilities || {}).filter(id => cat206[id.replace(/-/g, "_")]);
+    ch.reconcileVersion = 58;
+    RC206.reconcile(ch, "character", { content: C206 });
+    for (const id of Object.keys(ch.customAbilities || {})) {
+      const norm = id.replace(/-/g, "_");
+      if (cat206[norm]) shadowed.push(`${ch.name}: ${id} still shadows ${norm}`);
+    }
+    if (before.length) healed.push(`${ch.name}: ${before.join(", ")}`);
+  }
+  check("§206: ⬜ after the repair, no save carries a custom craft shadowing a catalogue one — whatever its punctuation",
+    shadowed.length === 0, shadowed.slice(0, 3).join(" · ") || `healed — ${healed.join(" · ") || "nothing was shadowing"}`);
+  check("§206: …and there WAS something to heal, so the check above is not vacuously green",
+    healed.length > 0, healed.join(" · "));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

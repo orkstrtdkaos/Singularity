@@ -362,6 +362,50 @@ export const CHARACTER_STEPS = [
     }
   },
   {
+    version: 59, id: "the-ladder-under-the-other-punctuation", playerFacing: true,
+    // ⛔ SNG-546 (Aevi) — SILAS HOLDS RANK 3 OF A CRAFT WHOSE RANK 3 IS IN THE CATALOGUE UNDER DIFFERENT PUNCTUATION.
+    //
+    // ⚡ All nine companion `bondGrants` are hyphenated; the ability catalogue is entirely underscored. They never
+    // collided, and that IS the defect — not shadowing but two parallel crafts with one name: the authored one with a
+    // three-rung ladder nothing pointed at, and a one-sentence copy minted because the reference would not resolve.
+    // ⛑ He earned DEATHLY PREMONITION — "reads every ending in a place at once, ordered by when" — and the game has
+    // been showing him rank 1's sentence, because his key had hyphens in it.
+    //
+    // ⛔ AND THE MIGRATION IS CONDITIONAL, WHICH IS THE WHOLE CARE OF IT. Aevi measured five holdings; there are TEN,
+    // and five of them (`marrow-s-wings`, `the-held-place`, `the-declared-threshold`, `the-received-ending`,
+    // `shadowcast-model` — all Silas) are hyphenated AND resolve to NOTHING. For those the `customAbilities` entry is
+    // the only definition there is. ⚠️ A blanket "normalise the id and drop the copy" would DELETE FIVE OF HIS CRAFTS.
+    // So: rewrite ONLY where the catalogue actually has the craft, and leave everything else exactly as it stands.
+    apply: (c, ctx) => {
+      const cat = ctx?.content?.abilities || {};
+      if (!Object.keys(cat).length) return {};          // ⛔ no catalogue, no judgement — never migrate blind
+      const moved = [];
+      for (const a of (c.abilities || [])) {
+        const id = a.abilityId || a.id;
+        if (!id || !id.includes("-") || cat[id]) continue;
+        const canon = id.replace(/-/g, "_");
+        if (!cat[canon]) continue;                      // ⚠️ THE FIVE THAT RESOLVE TO NOTHING STOP HERE, untouched
+        if ((c.abilities || []).some(x => (x.abilityId || x.id) === canon)) continue;   // already holds the real one
+        a.abilityId = canon;
+        const rungs = (cat[canon].tree || cat[canon].ranks || []).length;
+        // the hollow copy goes ONLY when the real craft has taken its place
+        if (c.customAbilities && c.customAbilities[id]) delete c.customAbilities[id];
+        // practice, aspirations and boosts are keyed by id too — a rename that leaves them behind loses the record
+        for (const bag of [c.practice?.uses, c.practice?.coUse, c.boosts]) {
+          if (bag && Object.prototype.hasOwnProperty.call(bag, id)) { bag[canon] = bag[canon] ?? bag[id]; delete bag[id]; }
+        }
+        for (const asp of (c.practice?.aspirations || [])) if (asp.abilityId === id) asp.abilityId = canon;
+        moved.push({ id: canon, name: cat[canon].name || canon, level: a.level || 1, rungs });
+      }
+      if (!moved.length) return {};
+      const gained = moved.filter(m => m.level > 1 && m.rungs > 1);
+      const say = moved.map(m => m.name).join(", ");
+      return { notes: [gained.length
+        ? `${say} was two crafts wearing one name — the one you earned and the one the game could find. They are one now, and the rungs you already hold are readable: ${gained.map(g => `${g.name} at rank ${g.level} of ${g.rungs}`).join("; ")}.`
+        : `${say} now points at the craft the world actually authored, instead of a copy of its first line.`] };
+    }
+  },
+  {
     version: 58, id: "which-room-were-you-in", playerFacing: true,
     // ⛔ SNG-555 (Erik 2026-09-13: "the narration put me back in time a bit... I was in Orla's workshop before. All i've
     // done is reload.") — THE PLACE WAS ON THE RECORD AND THE POSITION WAS NOT.

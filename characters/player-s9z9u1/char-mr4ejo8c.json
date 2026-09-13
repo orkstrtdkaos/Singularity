@@ -8789,8 +8789,8 @@
     "stalwart"
   ],
   "actionCount": 256,
-  "updatedAt": 1789312881044,
-  "rev": 260,
+  "updatedAt": 1789313012622,
+  "rev": 262,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9090,7 +9090,17 @@
   "regionsKnown": {
     "valley": 79
   },
-  "company": [],
+  "company": [
+    {
+      "npcId": "maren-warden",
+      "roles": [
+        "ally"
+      ],
+      "teaches": null,
+      "liaisonFor": null,
+      "joinedDay": 75
+    }
+  ],
   "foreclosed": [],
   "nativeGrantsVersion": 2,
   "domains": {
@@ -10126,6 +10136,17 @@
           "at": 75
         }
       ]
+    },
+    "npc:tuning-warden-lower-terrace": {
+      "keeps": [
+        {
+          "url": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Maren%2C%20woman%2C%20Tuning-warden%2C%20Harmonic%20Heights%20Lower%20Terrace%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=58626&nologo=true",
+          "prompt": "Strong willfull capable",
+          "note": "Strong willfull capable",
+          "seedKey": null,
+          "at": 75
+        }
+      ]
     }
   },
   "figureImages": {
@@ -10143,7 +10164,9 @@
   "featureOffers": [],
   "_debtReceipts": [],
   "_bandNotes": null,
-  "promptCompositions": {},
+  "promptCompositions": {
+    "cp1a8072p": "Fifty-year-old woman in Warden sash, calloused fingertips, stern face, cold tea cup beside her as she stands rigid before a bulletin board, deep focus, weathered hands, formal bearing."
+  },
   "_promptRows": {
     "character": {
       "reached": 1,
@@ -10493,14 +10516,5 @@
   "_opUnknown": {
     "sceneSummary": 1
   },
-  "pendingCompanyOffers": [
-    {
-      "npcId": "maren-warden",
-      "name": "maren-warden",
-      "roles": [
-        "ally"
-      ],
-      "why": "Sorel called her down as a witness to the secondary system. Maren came because the truth matters, and because she understands what a bottleneck built into stone means for the valley."
-    }
-  ]
+  "pendingCompanyOffers": []
 }

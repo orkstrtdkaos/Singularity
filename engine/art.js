@@ -398,16 +398,79 @@ export function bareImagePrompt(prompt) {
   return p;
 }
 
-/** Does this subject read as a minor? A record-level flag (isMinor / _gen.romanceEligible===false)
- *  or a child descriptor. Conservative — an image only goes child-safe when it clearly should. */
+const ADULT_AGE = 18;        // SNG-556 (Erik 2026-09-13): "adult is 18". Below it is a minor, absolutely, in every context.
+
+/** ⛔ SNG-556 — THE MINOR FLOOR READ FOUR FIELDS AND COULD BE TALKED OUT OF ITS ANSWER.
+ *
+ *  ⚑ MEASURED, on the exact text the GM wrote for a person Erik says is heading into a romance track:
+ *    "A young woman in her mid-teens…"            in `description` -> NOT A MINOR (description was never read)
+ *    the same sentence moved into `role`          -> NOT A MINOR (`woman` is an ADULT SIGNAL, and it CANCELLED `teens`)
+ *    "brought to the Heights at fourteen"         -> NOT A MINOR (a spelled-out age under 18 was invisible)
+ *    "a girl of twelve"                           -> minor. So it only ever caught blunt phrasings.
+ *
+ *  ⛔ THREE INDEPENDENT FAILURES, AND THE SECOND IS THE WORST: the adult-signal escape exists to stop a false
+ *  positive on "an old woman" or "a grown man", and any sentence naming a young woman's age carries the word
+ *  woman. So the more carefully a minor was described, the more certainly the floor let them through.
+ *
+ *  ⛑ SO AN EXPLICIT AGE IS NOW DECISIVE AND CANNOT BE CANCELLED. A number, a spelled-out number, or an explicit
+ *  age band (teens, adolescent, underage, schoolgirl) settles it; the adult-signal escape survives only for the
+ *  WEAK words — boy, girl, kid, youngster — which adults really are called, and which is the whole reason it was
+ *  written. ⚠️ AND IT READS EVERY FIELD A PERSON'S AGE CAN BE WRITTEN INTO, because `npcUpdates` writes
+ *  `description` and a companion sheet writes `persona`, and neither was ever looked at.
+ *
+ *  ⛑ ERIK'S RULING (2026-09-13): "adult is 18. I ruled that Teva is 19. So really you just need an age for any
+ *  NPC to be the gate." ⛔ SO THE AGE IS THE GATE and this heuristic is the fallback for a person nobody gave one
+ *  to. The contract asks for `age` on every meet; a recorded number outranks every descriptor in both directions
+ *  — a stated 19 survives prose that reads young, and a stated 16 survives prose that reads grown.
+ *
+ *  ⚠️ ONE IMPLEMENTATION. There were two — this one and `generate.js:isMinorEntity` — differing in which fields
+ *  they read. A safety floor with two implementations has two behaviours and you will be told about the wrong one.
+ */
+const AGE_FIELDS = ["role", "appearance", "name", "voiceHints", "description", "persona", "background", "statusNote", "knows"];
+// spelled-out ages that are unambiguously under eighteen; "eighteen"/"nineteen" are deliberately absent
+const YOUNG_WORDS = "(?:one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen)";
+// ⛔ DECISIVE: an explicit age band or a stated age under eighteen. No adult signal may cancel these.
+const EXPLICIT_MINOR = new RegExp(
+  "\\b(?:teens?|teenaged?|teenager|adolescent|underage|under-?age|schoolgirl|schoolboy|pre-?teen|juvenile|minor)\\b"
+  + "|\\b(?:aged?|of|at|turning|just)\\s+" + YOUNG_WORDS + "\\b"
+  + "|\\b" + YOUNG_WORDS + "[-\\s]years?[-\\s]old\\b"
+  + "|\\b(?:1[0-7]|[1-9])\\s*(?:-|\\s)?\\s*years?[-\\s]old\\b"
+  + "|\\b(?:aged?|of|at|turning|just)\\s+(?:1[0-7]|[1-9])\\b", "i");
+// weak words that adults are genuinely called — these alone, and only these, may be cancelled by an adult signal
+const WEAK_MINOR = /\b(child|children|kid|kids|toddler|infant|baby|boy|girl|youngster|little one)\b/i;
+const ADULT_SIGNALS = /\b(adult|grown|elder|old(er)?|woman|man|men|veteran|matron|patriarch|widow|widower|aged)\b/i;
+
+/** Is this subject a minor? An explicit flag, then a numeric age, then the text — explicit age bands
+ *  decisively, weak descriptors only when nothing says adult. Conservative in the safe direction. */
+// ⛔ SNG-556: `Number(null)` is ZERO, not NaN — so a record carrying `age: null` (which is what an NPC met without
+// one carries) read as a NEWBORN and every person the GM met became a minor. Caught by the SNG-108 bond test within
+// the hour. An age is ABSENT unless it is a real number; absent falls through to the text, present is decisive.
+const statedAge = (v) => { if (v == null || v === "") return null; const n = Number(v); return Number.isFinite(n) ? n : null; };
+
 export function isMinorSubject(subject = {}) {
-  if (subject.isMinor === true) return true;
+  if (subject?.isMinor === true) return true;
   if (subject._gen && subject._gen.romanceEligible === false) return true;
-  const age = Number(subject.age);
-  if (Number.isFinite(age)) return age < 18;
-  const text = [subject.role, subject.appearance, subject.name, subject.voiceHints].filter(Boolean).join(" ");
-  return /\b(child|children|kid|kids|toddler|infant|baby|boy|girl|adolescent|teenaged?|teens?|underage|minor|youngster|little one)\b/i.test(text)
-    && !/\b(adult|grown|elder|old(er)?|woman|man|men|veteran|matron|patriarch|widow|widower|aged)\b/i.test(text);
+  const age = statedAge(subject.age);
+  if (age != null) return age < ADULT_AGE;                   // ⛔ a recorded age is the answer; no text overrides it
+  const text = AGE_FIELDS.map(f => subject[f]).filter(v => typeof v === "string").join(" ");
+  if (EXPLICIT_MINOR.test(text)) return true;                // ⛔ cannot be cancelled
+  return WEAK_MINOR.test(text) && !ADULT_SIGNALS.test(text);
+}
+
+/** ⛔ SNG-556 (Erik 2026-09-13): "adult is 18. I ruled that Teva is 19. So really you just need an age for any NPC
+ *  to be the gate."
+ *
+ *  ⛑ SO THE GATE IS THE AGE, AND EVERYTHING ELSE IS A FALLBACK. A recorded number answers the question outright;
+ *  the text heuristic above exists only for a person nobody gave one to, and its job is to be conservative rather
+ *  than clever. ⚠️ THE TEXT IS NEVER PROMOTED INTO AN AGE — reading "mid-teens" and writing 19 would be inventing
+ *  a fact, and a guessed age that outranks every later descriptor is worse than no age at all.
+ *
+ *  Returns the fields an NPC record is MISSING for its age to be decidable, so a caller can ask for them rather
+ *  than guess. Empty means the record answers for itself. */
+export function ageGateGap(subject = {}) {
+  if (statedAge(subject?.age) != null) return [];
+  if (subject?.isMinor === true) return [];
+  return ["age"];
 }
 
 /** ⛔ CCODE-189 — AUTHOR-DIRECTED TEXT IS REACHING THE IMAGE MODEL.

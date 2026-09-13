@@ -11,7 +11,7 @@ import { recordDeed, standingWith, reputationSummary } from "./engine/reputation
 import { seedStandingAtCreation, accrueStandingForDays, applyStandingOps, standingRoster } from "./engine/standing.js"; // BATCH-12 §3
 import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, touchSession, endSession, sessionLog, buildSessionPrompt, authorshipStats, crossCharacterAuthorship } from "./engine/chronicle.js";
 import { newProfile, updateProfile, aptitudeMods, profileInsight, grantAptitudes, fadingAptitudes, ensureCharacterStyle, ensureRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, revokeAdultGate, RATING_ORDER, RATING_LEVEL, aptitudeStandingLine } from "./engine/playerprofile.js";
-import { gmTurn, refusalSignal, reNarrateRich, parseIntent, gmAsk, generateBio, suggestBuild, suggestNextCrafts, extractGambit, sanitizeScene, reconcileSceneIdentity, narrativeRegister, ratingRegister, bluntnessDirective, SALVAGEABLE_OPS } from "./engine/gm.js";
+import { gmTurn, refusalSignal, reNarrateRich, parseIntent, gmAsk, generateBio, suggestBuild, suggestNextCrafts, extractGambit, sanitizeScene, reconcileSceneIdentity, narrativeRegister, ratingRegister, bluntnessDirective, SALVAGEABLE_OPS, opsFromNarration, emptyClaim } from "./engine/gm.js";
 import { buildBattlePrompt, battleKey } from "./engine/battleprompt.js"; // SNG-400b: the battle image is a prompt BUILD, not a string join
 import { namesToAvoid, namesMatch } from "./engine/namematch.js"; // CCODE-166: the codebase already knew how to match a fuller name to a known one
 import { affiliationOf, regionHomeTradition, buildPeopleVocab } from "./engine/affiliation.js"; // SNG-185
@@ -141,7 +141,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "1.9.486";
+const APP_VERSION = "1.9.490";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6124,6 +6124,20 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   // narration vanished — while `character.activeScene.lastTurn` had ALREADY been persisted mid-way
   // through applyTurn, which is why navigating away and back made the "lost" turn appear.
   // The narration renders either way; a partial state-application is surfaced, never silent.
+  // ⛔ SNG-557 — THE OPS WERE IN THE PROSE. Asked to seat Teva, the GM put its ops inside a fenced JSON block in the
+  // NARRATION, wrapped in an invented `"ops"` envelope. The reply PARSED, so `salvageOps` — which would have found
+  // them, since it scans by key at any depth — never ran: it is reached only when parsing FAILS. So the recovery
+  // existed and could not reach the one case that needed it. ⚠️ Trust is not widened: recovered ops go through the
+  // same appliers and clamps as any other. And it is never silent, because a silent recovery teaches nobody.
+  {
+    const misfiled = opsFromNarration(result.turn?.narration);
+    const took = Object.keys(misfiled).filter(k => result.turn[k] === undefined);
+    if (took.length) {
+      for (const k of took) result.turn[k] = misfiled[k];
+      result.turn._opsWereInProse = took.join(", ");
+      console.warn(`[turn] recovered ops the GM filed in its narration instead of on the turn: ${took.join(", ")}`);
+    }
+  }
   try {
     applyTurn(result.turn, resolution, playerWords);
     // SNG-231 §2 (resilience): applyStep ISOLATED each op-group, so applyTurn completed even if one threw — the
@@ -6154,6 +6168,26 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
       character.activeScene = { locationId: character.currentLocationId, turns: sceneTurns, lastTurn: result.turn, sceneState, beats: sceneBeats, subPlace: sceneSubPlace };
       saveCharacter(character);
     } catch (err2) { console.error("[applyTurn] recovery save also failed:", err2); }
+  }
+  // ⛔ SNG-557 — A CLAIM WITH NOTHING BEHIND IT. The contract forbids the negative case in capitals ("An apology with
+  // no op leaves the error in place and is the WORST outcome — the player is told it's fixed and it isn't") and
+  // nothing ever checked the POSITIVE case, which is the same defect wearing a smile: "Done. Teva is now seated as a
+  // full companion" against a save where she is in neither the registry nor the party. ⚠️ CHECKED AFTER THE SALVAGE
+  // ABOVE, so a turn whose ops were merely misfiled is never accused of lying — and after apply, so it reflects what
+  // actually landed. It is TOLD TO THE PLAYER, because being quietly wrong is the thing this is for.
+  {
+    const empty = emptyClaim(result.turn);
+    if (empty) {
+      logOpOutcome("_emptyClaim", "rejected-no-op");
+      character._correctionAside = [character._correctionAside,
+        `⚠️ That beat said it had changed something ("${empty.phrase.trim()}") and sent no instruction to do it, so nothing moved. Say it again and it will be done properly — this is a fault in the telling, not in what you asked for.`]
+        .filter(Boolean).join(" ");
+      console.warn("[turn] EMPTY CLAIM — the narration asserted a change and carried no op:", empty.phrase);
+    } else if (result.turn?._opsWereInProse) {
+      character._correctionAside = [character._correctionAside,
+        `(The GM wrote this beat's ${result.turn._opsWereInProse} into its prose rather than filing it — it has been applied anyway.)`]
+        .filter(Boolean).join(" ");
+    }
   }
   // SNG-186 §2f: bind this turn's parsed result + what fired to the model exchange that produced it,
   // so "see the machine" shows prompt → raw → parsed → ops end to end. Dev-only; a no-op when disarmed.

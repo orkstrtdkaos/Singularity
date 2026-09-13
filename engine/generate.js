@@ -23,7 +23,8 @@ import { affiliationOf, regionHomeTradition, nearestHomeTradition } from "./affi
 import { validate, missingRequired, defaultFor } from "./genschema.js";
 import { isLegalEmergent } from "./braids.js";   // SNG-197 §4: the ONE emergent-verb gate (no second impl to drift)
 import { checkBorn, describeBorn } from "./borncontract.js";  // SNG-250 §4: the ONE born-whole gate (the same fn content_ci runs over authored content)
-import { drawTier, evidenceFor } from "./npcsheet.js";   // ⛔ SPEC §2.1/§2.2 — rarity + evidence at the mint
+import { drawTier, evidenceFor } from "./npcsheet.js";
+import { isMinorSubject } from "./art.js";   // SNG-556: the ONE minor floor - this file used to carry a second, differing copy   // ⛔ SPEC §2.1/§2.2 — rarity + evidence at the mint
 
 // SNG-250 §4 (CCODE-55): `creature` joins npc/location/arc. It is the type §6e calls out as the one
 // generatable-ish thing that was frozen, and §3's bar for it is the strictest — "a whole monster is
@@ -308,13 +309,11 @@ const ROMANTIC_MARKERS = /\b(romanc\w*|romantic|courtship|betroth\w*|paramour|lo
 
 /** Is this generated entity a minor? An explicit isMinor flag, an age under adulthood, or
  *  clear child descriptors WITHOUT an adult signal. Conservative — false unless it reads young. */
-export function isMinorEntity(entity) {
-  if (entity?.isMinor === true) return true;
-  const age = Number(entity?.age);
-  if (Number.isFinite(age)) return age < ADULT_AGE;
-  const text = [entity?.role, entity?.appearance, entity?.name, entity?.voiceHints].filter(Boolean).join(" ");
-  return MINOR_MARKERS.test(text) && !ADULT_SIGNALS.test(text);
-}
+// ⛔ SNG-556 — ONE FLOOR, NOT TWO. This was a SECOND implementation of the minor test, reading a different set of
+// fields from `art.js:isMinorSubject`, so the same person could be a minor to the image path and an adult to the
+// bond path. ⚠️ A SAFETY FLOOR WITH TWO IMPLEMENTATIONS HAS TWO BEHAVIOURS, and you will be told about the wrong
+// one. It delegates now; the name stays because four call sites and a doc use it.
+export function isMinorEntity(entity) { return isMinorSubject(entity || {}); }
 
 /** THE FLOORS. Returns { entity, action } — action: 'clean' | 'neutralized-minor' |
  *  'stubbed-floor'. A minor is NEVER romantic/sexual at ANY tier for ANY player: sexual

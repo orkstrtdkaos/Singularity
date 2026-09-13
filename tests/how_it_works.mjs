@@ -12604,8 +12604,12 @@ console.log("\n── §194 · acquiring a craft you aspired to carries the prac
   const rewound = JSON.parse(JSON.stringify(silas194));
   rewound.reconcileVersion = 55;
   rewound.practice.uses.hunters_strike = 1;
+  // ⛔ SNG-556: THE FIXTURE MUST NOT INHERIT LIVE PLAY. This kept whatever aspirations the save happened to hold, so when
+  // step 56 actually ran on Erik's save and emptied the list, the "one left afterwards" assertion failed — the gate broke
+  // because the thing it tests WORKED. ⚠️ A fixture built from a moving record is a correlation against the wrong
+  // population; the ability list below is still his real one, which is the point, but the aspirations are authored here.
   rewound.practice.aspirations = [{ abilityId: "hunters_strike", since: "2026-07-12T16:27:52.479Z", progress: 10 },
-    ...(rewound.practice.aspirations || []).filter(a => a.abilityId !== "hunters_strike")];
+    { abilityId: "pattern_sense", since: "2026-07-20T00:00:00.000Z", progress: 3 }];
   const out194 = RC194.reconcile(rewound, "character", { content: C194, day: 19 });
   check("§194: ⛔ step 56 pays the ones already stranded — the practice lands on the uses, the slot comes back, and the note says so",
     out194.applied.includes("aspirations-already-in-hand")
@@ -12801,7 +12805,11 @@ console.log("\n── §196 · a guard that cannot see must refuse, and the game
   check("§196: ⛑ Silas is restored — level 33 at day 18, with every fact, deed and craft the overwrite took",
     silas196.level === 33 && silas196.xp === 3200 && silas196.clock?.day === 18
     && (silas196.establishedFacts || []).length === 61 && (silas196.deeds || []).length === 51
-    && (silas196.abilities || []).length === 39 && silas196.purse?.crystal === 1436 && silas196.rev === 2080,
+    // ⛔ SNG-556: `rev === 2080` PINNED A NUMBER WHOSE WHOLE PURPOSE IS TO MOVE. It was the rev at the moment of the
+    // restore; the save then stopped going up for sixteen hours (SNG-554), and the first thing the fix did was advance it
+    // to 2090 — breaking this gate BECAUSE the repair worked. What must hold is that the restore's CONTENT survived and
+    // that the rev never goes BACKWARDS, which is the actual claim: a rev that fell is the overwrite happening again.
+    && (silas196.abilities || []).length === 39 && silas196.purse?.crystal === 1436 && (silas196.rev || 0) >= 2080,
     `lvl ${silas196.level} · xp ${silas196.xp} · day ${silas196.clock?.day} · ${(silas196.establishedFacts || []).length} facts · ${(silas196.deeds || []).length} deeds`);
 }
 
@@ -13073,6 +13081,152 @@ console.log("\n── §200 · which room, not just which place: a named interio
   const again = RC200.reconcile(resumed, "character", {});
   check("§200: …and it is idempotent — a second load neither re-applies it nor re-announces it",
     !again.applied.includes("which-room-were-you-in") && before200 === JSON.stringify(resumed.activeScene.subPlace));
+}
+
+// ⛔ SNG-556/557 — "DONE. TEVA IS NOW SEATED AS A FULL COMPANION." SHE WAS NOT, AND SHE WAS WRITTEN AS A CHILD.
+// Erik asked the GM to seat a person he had been adventuring with. It replied "Done… now seated as a full companion
+// with her own sheet", put its ops inside a fenced JSON block in the NARRATION under an invented op name
+// (`companionOps`, which exists nowhere in this engine), and described her as "A young woman in her mid-teens".
+// ⚑ MEASURED ON THE SAVE: Teva appears 87 times — codex, quests, deeds, established facts, scene state — and is in
+// NEITHER `npcRegistry` NOR `companions`. Nothing happened, the player was told it had, and the minor floor let the
+// description through. Erik's ruling: "adult is 18. I ruled that Teva is 19. So really you just need an age for any
+// NPC to be the gate."
+console.log("\n── §201 · the age is the gate, the ops go on the turn, and a claim with no op is caught ──");
+{
+  const ART201 = await import("../engine/art.js");
+  const GM201 = await import("../engine/gm.js");
+  const NP201 = await import("../engine/npcs.js");
+  const TEEN = "A young woman in her mid-teens, spare and precise in her movements.";
+
+  /* ---- 1 · ⛔ THE THREE WAYS THE FLOOR MISSED HER, each measured before the fix ---- */
+  // `description` was never one of the fields it read; `woman` cancelled `teens`; a spelled-out age was invisible.
+  check("§201: ⛔ a minor described in `description` is caught — the field npcUpdates actually writes",
+    ART201.isMinorSubject({ name: "Teva", description: TEEN }) === true);
+  check("§201: ⛔ 'a young WOMAN in her mid-teens' is a minor — an adult word may no longer cancel a stated age",
+    ART201.isMinorSubject({ name: "Teva", role: TEEN }) === true);
+  check("§201: ⛔ a spelled-out age under eighteen is caught ('brought to the Heights at fourteen')",
+    ART201.isMinorSubject({ name: "Teva", role: "Apprentice; brought to the Heights at fourteen" }) === true);
+
+  /* ---- 2 · ⚠️ AND IT DID NOT BECOME PARANOID, which is the failure mode of tightening a heuristic ---- */
+  // The adult-signal escape exists so "an old woman" is not a child. It survives for the WEAK words, and only those.
+  check("§201: an old woman and a grown man are not minors", ART201.isMinorSubject({ role: "an old woman; a grown man" }) === false);
+  check("§201: a grown woman called 'the miller girl' is not a minor", ART201.isMinorSubject({ role: "a grown woman, the miller girl" }) === false);
+
+  /* ---- 3 · ⛑ ERIK'S RULE: THE AGE IS THE GATE, and a recorded number outranks the prose in BOTH directions ---- */
+  check("§201: ⛑ Teva at 19 is an adult even though her description still reads young",
+    ART201.isMinorSubject({ name: "Teva", age: 19, description: TEEN }) === false);
+  check("§201: ⛔ …and 16 is a minor however grown the prose sounds — the number wins both ways",
+    ART201.isMinorSubject({ name: "V", age: 16, description: "a seasoned veteran adult" }) === true);
+  check("§201: adult is EIGHTEEN — 18 passes, 17 does not",
+    ART201.isMinorSubject({ age: 18 }) === false && ART201.isMinorSubject({ age: 17 }) === true);
+  // ⛔ `Number(null)` IS ZERO, NOT NaN. A record carrying `age: null` — which is what a meet without an age writes —
+  // read as a NEWBORN, and for one ratchet run every person the GM met was a minor. The bond suite caught it.
+  check("§201: ⛔ an ABSENT age is absent, not zero — null/''/undefined never means newborn",
+    [null, "", undefined].every(a => ART201.isMinorSubject({ name: "Wren", role: "ferrywoman", age: a }) === false)
+    && ART201.isMinorSubject({ age: 0 }) === true);
+  check("§201: …and the record says what it is MISSING, so the age can be asked for rather than guessed",
+    JSON.stringify(ART201.ageGateGap({ name: "Wren" })) === '["age"]' && ART201.ageGateGap({ age: 19 }).length === 0);
+
+  /* ---- 4 · ⛔ THE FLOOR RUNS ON THE PATH THE GM ACTUALLY USES ---- */
+  // `enforceFloors` guarded the GENERATED npc; nothing guarded the MET one. So the only people the GM writes himself
+  // were the only people nothing checked — and a romantic bond is refused on the marker this now stamps.
+  const live201 = { npcRegistry: {} };
+  NP201.applyNpcUpdates(live201, [{ op: "meet", npcId: "teva", name: "Teva", description: TEEN }], { day: 1 });
+  const met = live201.npcRegistry.teva;
+  check("§201: ⛑ meeting a person the fiction writes as a minor STAMPS the refusal marker, on the meet path",
+    met?.isMinor === true && met?._gen?.romanceEligible === false);
+  const bond = NP201.advanceBond(met, { bondType: "romantic", bondStage: "courting" }, null, 1);
+  check("§201: ⛔ …and a romantic bond on that person is refused",
+    bond.refused === "minor" && !met.bondType && !met.bondStage);
+  // an adult met the same way is untouched — the floor must not cost an ordinary person their story
+  const live2 = { npcRegistry: {} };
+  NP201.applyNpcUpdates(live2, [{ op: "meet", npcId: "teva", name: "Teva", age: 19, description: TEEN }], { day: 1 });
+  check("§201: ⛑ the same person with an age of 19 is an adult, unmarked, and may be romanced",
+    live2.npcRegistry.teva.isMinor !== true && live2.npcRegistry.teva.age === 19
+    && NP201.advanceBond(live2.npcRegistry.teva, { bondType: "romantic" }, null, 1).refused === undefined);
+
+  /* ---- 4b · ⛑ AND THE LOOP THE PROMPT ASKS FOR ACTUALLY CLOSES ---- */
+  // ⛔ FOUND BY DRIVING IT, NOT BY TRUSTING IT. The new prompt row asks the GM to emit {"op":"update", age:N} — and the
+  // update path did not write `age` at all, so the op would have been emitted forever and changed nothing. A writer with
+  // no reader, one minute old, while fixing an instance of exactly that. ⚠️ AND THE STAMP COULD NOT CLEAR: `isMinorSubject`
+  // reads the refusal marker FIRST, so asking it whether to UNSET the marker could only ever answer "still a minor" —
+  // a person mis-described once could never be corrected. The NUMBER decides, in both directions.
+  const loop = { npcRegistry: {} };
+  NP201.applyNpcUpdates(loop, [{ op: "meet", npcId: "teva", name: "Teva", description: TEEN }], { day: 1 });
+  const tv = loop.npcRegistry.teva;
+  NP201.applyNpcUpdates(loop, [{ op: "update", npcId: "teva", age: 19 }], { day: 2 });
+  check("§201: ⛑ the age the prompt asks for is WRITTEN, and it clears a marker set from prose",
+    tv.age === 19 && tv.isMinor === undefined && tv._gen === undefined, `age ${tv.age} · isMinor ${tv.isMinor}`);
+  check("§201: ⛑ …and the adult may then be romanced",
+    NP201.advanceBond(tv, { bondType: "romantic" }, null, 2).changed === true);
+  NP201.applyNpcUpdates(loop, [{ op: "update", npcId: "teva", age: 15 }], { day: 3 });
+  check("§201: ⛔ …and the gate CLOSES again on an age under eighteen — it is not a one-way door",
+    tv.isMinor === true
+    && NP201.advanceBond({ ...tv, bondType: null, bondStage: null }, { bondType: "romantic" }, null, 3).refused === "minor");
+  check("§201: a nonsense age is ignored rather than recorded",
+    (() => { const before = tv.age; NP201.applyNpcUpdates(loop, [{ op: "update", npcId: "teva", age: "quite young" }], { day: 4 }); return tv.age === before; })());
+
+  /* ---- 4c · ⛑ THE GATE HAS SOMETHING TO READ — the prompt ASKS for the ages nobody has ---- */
+  // ⚑ MEASURED: 0 of 53 known people across Erik's two live saves carried an age, so the gate he ruled on was
+  // universally unanswered. The row asks for the few nearest the player, because a list of forty is a list nobody fills.
+  const askChar = { npcRegistry: {
+    a: { id: "a", name: "Teva", relationship: 7, status: "active" },
+    b: { id: "b", name: "Sorel", relationship: 3, status: "active" },
+    c: { id: "c", name: "Aevi", age: 24, status: "active" },
+    d: { id: "d", name: "Ghost", status: "dead" } } };
+  const ask = NP201.agesMissingForGM(askChar, { sceneNpcNames: ["Sorel"] });
+  check("§201: ⛑ the prompt ASKS for the missing ages, scene-first, skipping the aged and the dead",
+    /Sorel, Teva/.test(ask) && !/Aevi/.test(ask) && !/Ghost/.test(ask) && /ADULT IS 18/.test(ask), ask?.slice(0, 90));
+  check("§201: …and says nothing when everyone nearby has one",
+    NP201.agesMissingForGM({ npcRegistry: { x: { id: "x", name: "A", age: 30, status: "active" } } }) === null);
+  check("§201: ⛔ and the row is READ — registered is not the same as reaching the prompt",
+    /agesMissingDetail \} = ctx;/.test(rd("engine/gm.js")) && /AGES NOT YET RECORDED/.test(rd("engine/gm.js"))
+    && /key: "agesMissingDetail"/.test(rd("engine/gm_registry.js")));
+
+  /* ---- 5 · ⛔ THE OPS WERE IN THE PROSE — recovered, from Erik's own reply ---- */
+  const reply201 = 'I will fix both right now.\n\n' + "```" + 'json\n{ "text": "Done. Teva Anselvar is now seated as a full companion.",'
+    + ' "ops": { "npcUpdates": [ { "op": "meet", "npcId": "teva-anselvar", "name": "Teva Anselvar" } ],'
+    + ' "companionOps": [ { "op": "add", "npcId": "teva-anselvar" } ] } }\n' + "```";
+  const rescued = GM201.opsFromNarration(reply201);
+  check("§201: ⛑ ops the GM filed in its own narration are recovered — including through an invented `ops` envelope",
+    Array.isArray(rescued.npcUpdates) && rescued.npcUpdates[0]?.npcId === "teva-anselvar", JSON.stringify(rescued.npcUpdates));
+  // ⛔ AND AN INVENTED OP NAME IS STILL DISCARDED. Recovery relocates ops; it never widens the vocabulary.
+  check("§201: ⛔ `companionOps` is NOT recovered — it exists nowhere in this engine and salvage widens no trust",
+    rescued.companionOps === undefined);
+  check("§201: prose that merely mentions an op name is prose, not an instruction",
+    Object.keys(GM201.opsFromNarration("You could ask her to join; the registrar keeps npcUpdates of every arrival.")).length === 0);
+
+  /* ---- 6 · ⛔ A CLAIM WITH NOTHING BEHIND IT ---- */
+  // The contract already forbids the negative case in capitals ("an apology with no op… is the WORST outcome").
+  // Nothing checked the positive case, which is the same defect wearing a smile.
+  check("§201: ⛔ 'Done… is now seated' with no op is caught",
+    GM201.emptyClaim({ narration: reply201 })?.phrase?.trim() === "Done.");
+  check("§201: ⛑ …and is NOT raised once the misfiled ops are merged — a beat is never accused of lying for filing badly",
+    GM201.emptyClaim({ narration: reply201, ...rescued }) === null);
+  check("§201: an ordinary beat is not a claim", GM201.emptyClaim({ narration: "You walk to the forge and Pell looks up from the anvil." }) === null);
+  check("§201: a claim backed by a real op is honest and passes",
+    GM201.emptyClaim({ narration: "Done. I have added her.", npcUpdates: [{ op: "meet" }] }) === null);
+  check("§201: …and an EMPTY op array does not count as backing — that is the same lie with punctuation",
+    GM201.emptyClaim({ narration: "Done. I have added her.", npcUpdates: [] })?.phrase !== undefined);
+
+  /* ---- 7 · the contract gained the guidance whose absence produced all of this ---- */
+  const GSRC = rd("engine/gm.js");
+  // `partyOps` had ONE schema line and no prose block — unlike holdingOps, which gets a full paragraph. It fired
+  // 3 times in 369 turns on Silas's save, and the GM invented `companionOps` rather than find it.
+  check("§201: partyOps has a 'when to reach for this' block, and names the two ops that seat a person",
+    /"partyOps": WHO TRAVELS WITH YOU IS STATE/.test(GSRC) && /THERE IS NO OTHER COMPANION OP/.test(GSRC));
+  check("§201: the contract forbids ops in the prose and forbids claiming a change without emitting it",
+    /EVERY OP GOES ON THE TURN OBJECT, NEVER INSIDE THE NARRATION/.test(GSRC) && /NEVER CLAIM A CHANGE YOU DID NOT EMIT/.test(GSRC));
+  check("§201: and it asks for an age on every person it writes, naming 18 as the line",
+    /THEIR AGE IN YEARS, a number/.test(GSRC) && /ADULT IS 18/.test(GSRC));
+
+  /* ---- 8 · ⚠️ ONE FLOOR, NOT TWO ---- */
+  // `generate.js` carried a SECOND implementation reading a different set of fields, so the same person could be a
+  // minor to the image path and an adult to the bond path.
+  const GEN201 = await import("../engine/generate.js");
+  check("§201: ⚠️ the two minor-floor implementations are one — the same person gets the same answer everywhere",
+    [{ description: TEEN }, { role: "a girl of twelve" }, { age: 19, description: TEEN }, { name: "Wren", role: "ferrywoman" }]
+      .every(n => GEN201.isMinorEntity(n) === ART201.isMinorSubject(n)));
 }
 
 /* ══════════ REPORT ══════════ */

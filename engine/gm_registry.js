@@ -48,7 +48,7 @@ import { wakesForGM } from "./wake.js"; // SNG-204: the aftermath waiting to bec
 import { priceLine } from "./economy.js";   // SNG-302: what a thing fetches HERE, so the GM can be honest about it
 import { reachableDeadForGM } from "./death.js"; // SNG-209: the dead who are NOT gone — reachable in the death state, latent hooks
 import { threatToPlayer, guardiansFor, worldRoster } from "./worldtick.js"; // SNG-310: the mark the world engine leaves for the GM to narrate
-import { npcRegistryForGM, npcQuestSeedBlock, bearersOf, carriedForGM, findExistingNpc } from "./npcs.js";
+import { npcRegistryForGM, npcQuestSeedBlock, bearersOf, carriedForGM, findExistingNpc, agesMissingForGM } from "./npcs.js";
 import { debtRefusalAt } from "./holdings.js";   // §177: "The GM block reads it" — now it does
 import { presenceForGM, resolvePresence } from "./presence.js";   // SPEC_npc_presence_cadence: who the day could offer
 import { placeMemoryForGM, recallForGM } from "./places.js";
@@ -341,6 +341,11 @@ export const GM_CONTEXT = [
     // SNG-555: the ROOM rides in with the place's history. `currentLocationId` names the parent by design, so
     // without this the prompt listed every interior known here and named none of them as the one they are IN.
     build: (env) => placeMemoryForGM(env.character, env.character.currentLocationId, { standingIn: env.sceneSubPlace || null }) },
+  // ⛑ SNG-556: the age gate needs ages. Nobody had one (0 of 53 across two live saves), so the prompt asks for the
+  // few who are nearby rather than guessing from prose — which is how a minor got written as a romance prospect.
+  { key: "agesMissingDetail", builder: "npcs.agesMissingForGM", carries: ["known people with no recorded age"],
+    reachedBy: "always", spec: "§556", views: ["turn", "ask"],
+    build: (env) => agesMissingForGM(env.character, { sceneNpcNames: (env.sceneState?.npcsPresent || []).map(n => n?.name).filter(Boolean) }) },
   { key: "newsDetail", builder: "worldtick.newsForGM", carries: ["world-tick news"],
     reachedBy: "always", spec: "§19", views: ["turn", "ask"],
     build: (env) => newsForGM(env.character) },

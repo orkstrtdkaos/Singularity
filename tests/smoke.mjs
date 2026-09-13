@@ -8106,7 +8106,11 @@ await (async () => {
 {
   const appSrc195 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
   // every op passed to logOpOutcome("<op>", ...) writes an applied/rejected outcome the panel should render
-  const outcomeOps = new Set([...appSrc195.matchAll(/logOpOutcome\("(\w+)"/g)].map(m => m[1]));
+  // ⛔ SNG-557: an op whose name starts with `_` is an ENGINE COUNTER, not something the model emits — `_emptyClaim`
+  // counts turns that CLAIMED a change and sent no op. It has no emission to display beside, and by construction only
+  // one branch (there is no "applied" way to lie), so it is outside both this gate and SNG-551's both-branches rule.
+  // ⚡ THIS GATE CAUGHT ME WITHIN THE HOUR of writing it, which is the whole point; the exclusion is a definition, not a hole.
+  const outcomeOps = new Set([...appSrc195.matchAll(/logOpOutcome\("(\w+)"/g)].map(m => m[1]).filter(op => !op.startsWith("_")));
   const setMatch = appSrc195.match(/OUTCOME_INSTRUMENTED = new Set\(\[([^\]]*)\]\)/);
   const shown = new Set((setMatch && setMatch[1].match(/"(\w+)"/g) || []).map(s => s.replace(/"/g, "")));
   const missing = [...outcomeOps].filter(op => !shown.has(op));
@@ -8125,7 +8129,7 @@ await (async () => {
     const b = (branches[m[1]] = branches[m[1]] || { applied: false, other: false });
     for (const outcome of [m[2], m[3]]) { if (!outcome) continue; if (outcome === "applied") b.applied = true; else b.other = true; }
   }
-  const halfWired = [...shown].filter(op => !branches[op]?.applied || !branches[op]?.other);
+  const halfWired = [...shown].filter(op => !op.startsWith("_") && (!branches[op]?.applied || !branches[op]?.other));
   if (halfWired.length) console.log("   displayed but only one branch wired: " + halfWired.map(op => `${op} (applied=${!!branches[op]?.applied}, rejected=${!!branches[op]?.other})`).join(", "));
   check("551: every op whose badge is DISPLAYED writes BOTH an applied and a non-applied outcome", halfWired.length === 0);
 

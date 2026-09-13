@@ -7,7 +7,8 @@
 
 import { slugify } from "./quests.js";
 import { smartClamp, normName } from "./namematch.js"; // SNG-152: model prose clamps on a word boundary, never mid-word
-import { isMinorSubject } from "./art.js";
+import { isMinorSubject, ageGateGap } from "./art.js";
+const ADULT_YEARS = 18;   // SNG-556 (Erik 2026-09-13): "adult is 18" — the one line the age gate turns on.
 import { applyCodexUpdates } from "./codex.js"; // SNG-199 §5: meeting someone MUST write the codex — direct, never injected
 import { recordDeed, renownHeardAt } from "./reputation.js";   // CCODE-85: an NPC keeps a record the same way the player does
 import { personName, mintedWants, nameOf } from "./names.js";   // SNG-431 §1: the ONE namer — the GM path is one of the three that calls it
@@ -188,6 +189,32 @@ export function romanceable(person) {
   if (person.romanceEligible !== true) return { ok: false, why: "not open to romance" };
   return { ok: true, why: null };
 }
+/** ⛔ SNG-556 — THE GATE HAD NOTHING TO READ. Erik: "you just need an age for any NPC to be the gate." ⚑ MEASURED
+ *  THE HOUR HE SAID IT: of 53 known people across his two live saves, ZERO carried a recorded age. So the gate was
+ *  real and universally unanswered, and every adult-only decision fell through to reading prose — which is exactly
+ *  how "a young woman in her mid-teens" came to be nobody's problem.
+ *
+ *  ⛑ SO THE PROMPT ASKS. Not for everyone at once — for the handful in the scene or closest to the player, because a
+ *  list of forty names is a list nobody fills in. ⚠️ IT ASKS, IT DOES NOT GUESS: nothing here writes an age, and a
+ *  person whose age is unknown stays protected by the conservative text check until a real number arrives.
+ *  Returns a prompt line, or null when everyone nearby has one. */
+export function agesMissingForGM(character, { sceneNpcNames = [], limit = 6 } = {}) {
+  const reg = character?.npcRegistry || {};
+  const near = new Set(sceneNpcNames.map(n => String(n || "").toLowerCase()));
+  const missing = Object.values(reg)
+    .filter(n => n && n.status !== "dead" && n.status !== "departed" && ageGateGap(n).length)
+    .sort((a, b) => {
+      const an = near.has(String(a.name || "").toLowerCase()) ? 0 : 1, bn = near.has(String(b.name || "").toLowerCase()) ? 0 : 1;
+      return an - bn || (b.relationship ?? 0) - (a.relationship ?? 0);
+    })
+    .slice(0, limit);
+  if (!missing.length) return null;
+  return `These known people have NO recorded age, and age is the gate for every adult-only interaction: `
+    + missing.map(n => n.name || n.id).join(", ")
+    + `. When one of them next appears, emit npcUpdates {"op":"update","npcId":…,"age":N} with a number. ADULT IS 18. `
+    + `Give a grown person a grown person's age; never describe an adult in teenage terms.`;
+}
+
 export function applyNpcUpdates(character, updates = [], ctx = {}) {
   character.npcRegistry = character.npcRegistry || {};
   const reg = character.npcRegistry;
@@ -250,8 +277,18 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
         // right value for a being that HAS no sex, not an omission waiting to be filled in.
         sex: u.sex ? String(u.sex).slice(0, 40) : null,
         gender: u.gender ? String(u.gender).slice(0, 40) : null,       // SNG-143: sex/gender is explicit DATA, captured the first time they appear (never inferred at render)
-        pronouns: u.pronouns ? String(u.pronouns).slice(0, 40) : null
+        pronouns: u.pronouns ? String(u.pronouns).slice(0, 40) : null,
+        // ⛔ SNG-556 — AGE IS A RECORD, NOT AN ADJECTIVE. The minor floor ran on PROSE and only on the generated-NPC
+        // path; a person the GM MET carried their age in `description`, which no floor read. Recording it makes the
+        // answer a number instead of a regex argument, and a recorded age beats every descriptor afterwards.
+        age: Number.isFinite(Number(u.age)) ? Math.max(0, Math.round(Number(u.age))) : null
       };
+      // (SNG-556: no age is INVENTED from prose. Erik: "you just need an age for any NPC to be the gate" -- so a record
+      // with no age falls through to the conservative text check below, and the contract asks the GM for the number.)
+      // ⛔ AND THE FLOOR RUNS ON THIS PATH NOW. It never did: `enforceFloors` guards the GENERATED npc and nothing
+      // guarded the MET one, so the only people the GM writes himself were the only people nothing checked. The marker
+      // is the same one `romanceable()` and `advanceBond()` already refuse on, so stamping it here closes both.
+      if (isMinorSubject(n)) { n.isMinor = true; n._gen = { ...(n._gen || {}), romanceEligible: false }; }
       // ✅ §174 (Erik 2026-09-12): a person the world MINTED earlier (generated.npc) who is met now takes the minted record's role,
       // face, domains and people wherever the op left them blank — the lift reconcileGeneratedNpcWithMeet does for a SAME-turn mint,
       // owed equally to a later one. Bryn Callowell was minted on d14 with a role, a face and three domains, and a meet of him would
@@ -283,6 +320,26 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
       if (late.nameUnknown) n.nameUnknown = true;
     }
     if (u.role) n.role = String(u.role).slice(0, 100);
+    // ⛔ SNG-556 — THE UPDATE PATH MUST WRITE THE AGE THE PROMPT ASKS FOR. It did not, and I found it by driving the
+    // exact loop the new prompt row requests: emit {"op":"update", age:19} and the record still read null. A writer with
+    // no reader, one minute old — the defect this project keeps finding, committed while fixing an instance of it.
+    // ⚠️ THE STAMP FOLLOWS THE NUMBER, in both directions: a corrected age of 19 clears a minor marker set from prose,
+    // and an age under 18 sets it however grown the description sounds. The age is the gate, so the age decides.
+    if (u.age !== undefined && u.age !== null && u.age !== "") {
+      const yrs = Number(u.age);
+      if (Number.isFinite(yrs) && yrs >= 0 && yrs < 200) {
+        n.age = Math.round(yrs);
+        // ⛔ THE NUMBER DECIDES DIRECTLY, NOT `isMinorSubject`. That function reads the stamp FIRST — correctly, it is a
+        // refusal marker — so asking it whether to CLEAR the stamp can only ever answer "still a minor". A marker that
+        // can set itself and never unset is not a gate, it is a trap: a person mis-described once could never be corrected.
+        if (n.age < ADULT_YEARS) { n.isMinor = true; n._gen = { ...(n._gen || {}), romanceEligible: false }; }
+        else if (n.isMinor === true || n._gen?.romanceEligible === false) {
+          delete n.isMinor;
+          if (n._gen) { const { romanceEligible, ...rest } = n._gen; n._gen = Object.keys(rest).length ? rest : undefined; }
+          n.history = [...(n.history || []), `[d${ctx.day ?? "?"}] Age recorded: ${n.age}.`].slice(-CAPS.history);
+        }
+      }
+    }
     if (u.description && !n.description) n.description = smartClamp(String(u.description), 600); // SNG-152
     if (u.gender && !n.gender) n.gender = String(u.gender).slice(0, 40);       // SNG-143: fill it the first time the GM records it
     if (u.pronouns && !n.pronouns) n.pronouns = String(u.pronouns).slice(0, 40);

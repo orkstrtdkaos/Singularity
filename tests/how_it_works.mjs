@@ -487,6 +487,21 @@ console.log("\n── FR · the field reference — measured claims stay measure
   check("FR: ⛔ the embedded atlas is FRESH — regenerating produces the same table",
     norm(embedded) === norm(live), "run: node scripts/atlas_inject.mjs");
 
+  // ⛔ SNG-564 — THE SIZE TABLE WAS HAND-TYPED, AND IT IS THE THIRD INSTANCE OF THIS DEFECT IN THIS FILE.
+  // ⛑ Aevi, 2026-09-13, flagging it against atlas_inject's own header: "a hand-maintained table is wrong within
+  // a week — the stored-copy-of-a-derived-value failure, committed in documentation." ⚡ SHE UNDERCOUNTED: at HEAD
+  // THREE rows were adrift, not two — `power_cosmology` said 7.5 KB against 27.5 on disk (267%) and `damage_types`
+  // said 6.8 against 13.1 (93%), which she did not flag. ⚠️ A TABLE THAT EXISTS TO ARGUE WHICH UNREAD FILES ARE BIG
+  // ENOUGH TO MATTER, WRONG BY 267%, ARGUES FOR THE WRONG FILE — generated, `power_cosmology` is the second largest
+  // in the list and the hand-typed figure had it ninth. The PROSE stays authored; only the numbers move.
+  {
+    let sizesOk = true, sizesWhy = "";
+    try { execFileSync(process.execPath, [join(root, "scripts/sizes_inject.mjs"), "--check"], { encoding: "utf8" }); }
+    // (the split char is built rather than escaped: a "\n" written through a heredoc has been eaten four times today)
+    catch (err) { sizesOk = false; sizesWhy = String(err.stdout || err.message).split(String.fromCharCode(10)).slice(0, 3).join(" · ").trim(); }
+    check("FR: ⛔ the unread-file size table is GENERATED from disk, not hand-typed", sizesOk, sizesWhy || "run: node scripts/sizes_inject.mjs");
+  }
+
   // ⚠️ AND THE BUCKET COUNTS IN THE PROSE MUST MATCH THE TABLE, since a reader trusts the summary.
   // ⚠️ COUNT BY CELL, NOT BY REGEX ACROSS AN EMOJI. My first form matched `| ✅ READ |` with a two-dot
   // wildcard — an emoji is not two characters, so it silently counted ZERO, and `0 === 0` passed. ⛔ A

@@ -338,14 +338,16 @@ but cited by its own note, extended by its `rankDeltas`, and named in its player
 
 **`CCODE-55` named twelve. ✅ `ability_rename_map` is now WIRED (CCODE-294) — it was not documentation, it was a live save-migration map, and 22 ability references across 7 real saves resolved only through it. ⚠️ THE REMAINING ELEVEN ARE MOSTLY AUTHORING AND GM DOCUMENTATION, not dark engine content — `energy_costs.byLevel` is a corpus census with "start at the level median" guidance for authors; `healing_intent.forCCode` is a spec whose ask (`mechanic.dice` must be read on a healing shape) is ALREADY SATISFIED by `resolveHeal`; `mechanic_effects` is consumed by `content_ci` CCODE-238. ⛔ THE GATE'S PREMISE IS WRONG FOR THAT CLASS, and the remedy it names — `rules_classification.json` — does not exist.**
 
+<!-- SIZES:BEGIN -->
 | file | size | | file | size |
 |---|---|---|---|---|
-| ~~`ability_rename_map`~~ ✅ **WIRED** | 58.0 KB | | `mechanic_effects` | 16.5 KB |
-| `tempo` | 15.1 KB | | `ability_distribution_target` | 8.3 KB |
-| `the_veil` | 7.9 KB | | `power_cosmology` | 27.4 KB |
-| ⛔ `damage_types` | 6.8 KB | | `healing_intent` | 4.9 KB |
-| `nexuses` | 13.8 KB | | `death_domain` | 4.8 KB |
-| `companion_template` | 4.1 KB | | `energy_costs` | 2.1 KB |
+| ~~`ability_rename_map`~~ ✅ **WIRED** | 61.7 KB | | `ability_distribution_target` | 8.1 KB |
+| `power_cosmology` | 27.5 KB | | `the_veil` | 7.7 KB |
+| `mechanic_effects` | 16.1 KB | | `healing_intent` | 4.8 KB |
+| `tempo` | 14.7 KB | | `death_domain` | 4.7 KB |
+| `nexuses` | 13.9 KB | | `companion_template` | 4.0 KB |
+| ⛔ `damage_types` | 13.1 KB | | `energy_costs` | 2.4 KB |
+<!-- SIZES:END -->
 
 ⛔ **`damage_types.json` sits in the same folder as the `damage_families.json` that IS loaded, on the same
 subject.** ⚠️ **`tempo` is 15 KB, and the tradition checklist calls tempo *"the strongest axis"*.**

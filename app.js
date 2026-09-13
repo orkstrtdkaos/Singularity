@@ -143,7 +143,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "1.9.500";
+const APP_VERSION = "1.9.502";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2138,6 +2138,28 @@ async function runFireTests({ apply = false, only = null } = {}) {
   }
   character._fireTests = { at: new Date().toISOString(), build: APP_VERSION, results: out.map(r => ({ op: r.op, verdict: r.verdict, moved: r.moved || [], why: r.why || null })) };
   return out;
+}
+
+/** SNG-564: the fire tests run themselves. Once per build per character, off the critical path, silent unless
+ *  something is worth saying. ⚠️ The verdicts ride up in the dev report either way — the point is that nobody
+ *  has to ask for them. */
+let _autoFiring = false;
+function maybeAutoFireTests() {
+  if (!isDevMode() || !character || _autoFiring) return;
+  if (character._fireTests?.build === APP_VERSION) return;   // already answered for this build
+  const idle = (fn) => (typeof requestIdleCallback === "function" ? requestIdleCallback(fn, { timeout: 8000 }) : setTimeout(fn, 1500));
+  _autoFiring = true;
+  idle(async () => {
+    try {
+      const res = await runFireTests({});
+      const bad = res.filter(r => r.verdict === "threw" || r.verdict === "no-op");
+      // ⛔ SILENT WHEN THERE IS NOTHING TO SAY, LOUD WHEN THERE IS. A console line per run would train him to ignore it.
+      if (bad.length) console.warn(`[fire-tests] ${bad.length} op(s) worth looking at on ${APP_VERSION}: `
+        + bad.map(r => `${r.op} (${r.verdict})`).join(", "));
+      queueDevReport();
+    } catch (err) { console.warn("[fire-tests] auto-run failed (play continues):", err?.message || err); }
+    finally { _autoFiring = false; }
+  });
 }
 
 function devReportNow() {
@@ -6390,6 +6412,15 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   // 64 outcomes` this morning, one field over. Stamped once, so every zero after this is interpretable.
   if (!character._opCountingSince) character._opCountingSince = new Date().toISOString();
   queueDevReport();   // SNG-559: dev-only, debounced, its own file, never blocks the beat
+  // ⛑ SNG-564 — ERIK: "So I need to hit fire all when I play? I figured you would make this automatic and seamless."
+  // ⛔ HE IS RIGHT, AND A BUTTON WAS THE WRONG SHAPE. The whole argument for this instrument was that he carries
+  // nothing — the report goes up on its own precisely so nobody has to remember it — and then I made the most
+  // valuable half of it opt-in, by hand, on a screen he has no reason to open while playing.
+  // ⚠️ ONCE PER BUILD PER CHARACTER, because that is when the answer can CHANGE: a new build is exactly the event that
+  // makes an old verdict stale, and running them every turn would pay for 15 deep copies of a 1.4MB save for nothing.
+  // ⛑ AND AFTER THE BEAT, NEVER DURING IT — deferred to an idle callback so the copies never sit between the player
+  // and their turn. A diagnostic that costs latency is a diagnostic that gets turned off.
+  maybeAutoFireTests();
   annotateLatest("gm-narrate", { parsed: result.turn, opsFired: _opsFired, opLedger: character?._opLedger ? { ...character._opLedger } : null });
   // ability-arch v2: rank 2 is earned through use, not bought — surface any craft that just became
   // fluent this turn (deduped). Rank 3 is never here; it comes as a GM-marked defining moment.

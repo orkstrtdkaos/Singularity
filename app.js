@@ -69,6 +69,7 @@ wireDeathModel(DeathModel);
 import { carriageOf, voyageOf, isMoored, canSail, sailHolding, voyageLine, featureRuling, canBuildOn } from "./engine/carriage.js";   // B6b: the holding that moves
 import { featureCost, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
+import { FIRE_TESTS, diffKeys } from "./engine/firetests.js";   // SNG-560: the parts that have never been used
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady, applyPartyOps, activeCompany, formerCompany } from "./engine/company.js";
 import { unitsOf, unitLine, poolRows, atSideRows, wherePerson, canBringForward, rosterLine } from "./engine/fellowship.js";   // SNG-541: the roster, the pool, and EVERY band rather than one
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, suggestForCreation, archetypeFamilies, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
@@ -142,7 +143,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "1.9.494";
+const APP_VERSION = "1.9.496";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2079,6 +2080,51 @@ let _devReportTimer = null, _devReportInFlight = false, _devReportLastAt = 0;
 
 /** Assemble the report for the character in hand. Separated from the push so the panel and the suite can both
  *  read exactly what would be sent — a report I cannot see before it ships is a report I cannot trust. */
+// ⛔ SNG-560 — FIRE THE OPS THAT HAVE NEVER FIRED, THROUGH THE APPLIER A REAL BEAT USES.
+//
+// ⚠️ NON-DESTRUCTIVE BY DEFAULT, and that is not timidity — it is what makes the instrument usable on a level-33 save
+// somebody cares about. `applyTurn` writes to the module-level `character`, so the runner SWAPS that binding to a deep
+// copy, applies, diffs, and puts the real one back in a finally. ⛑ THE APPLIER ITSELF IS UNTOUCHED AND UNAWARE: no stub,
+// no seam, no second implementation — Erik's own rule, that a harness must simulate the real game, and a harness with
+// its own copy of the logic certifies the copy.
+//
+// ⛔ WHAT IT ANSWERS is narrow and worth having: does this op, given a well-formed instance, WRITE ANYTHING? A "no" is
+// the `pendingCompanyOffers` shape — an op that applies cleanly and moves nothing. A throw is a live defect. A refusal
+// is correct behaviour and is reported as such, never as a failure.
+async function runFireTests({ apply = false, only = null } = {}) {
+  if (!isDevMode() || !character) return [];
+  const real = character;
+  const out = [];
+  for (const t of FIRE_TESTS) {
+    if (only && t.op !== only) continue;
+    const copy = JSON.parse(JSON.stringify(real));
+    let frag = null;
+    try { frag = t.build(copy); } catch (err) { out.push({ op: t.op, verdict: "build-threw", why: err?.message || String(err) }); continue; }
+    // ⚠️ A TEST THAT CANNOT BE HOSTED IS NOT A FAILURE. Firing deathOps at a character who knows nobody tests the
+    // refusal, not the op, and reporting that as "broken" would be the wrong population all over again.
+    if (!frag) { out.push({ op: t.op, verdict: "not-applicable", why: `needs ${t.need}` }); continue; }
+    const before = JSON.parse(JSON.stringify(copy));
+    let verdict = "applied", why = null;
+    try {
+      character = copy;                       // the applier writes here, and only here
+      applyTurn({ narration: "", choices: [], ...frag }, null, null);
+    } catch (err) { verdict = "threw"; why = String(err?.message || err).slice(0, 200); }   // prose-cap-ok: an Error message, not model prose
+    finally { character = real; }             // ⛔ ALWAYS — a harness that can strand the live character is worse than none
+    const moved = diffKeys(before, copy);
+    if (verdict === "applied" && !moved.length) { verdict = "no-op"; why = "applied without error and wrote nothing"; }
+    out.push({ op: t.op, verdict, why, moved, what: t.what,
+      failures: (copy._applyFailures || []).map(f => `${f.op}: ${f.message}`).slice(0, 2) });
+    // ⛑ AND IT CAN BE FOR REAL WHEN HE WANTS IT TO BE — "actually test drive any part of the game I want" — but only
+    // when asked, only for an op that already proved it applies, and it says so on the record.
+    if (apply && verdict === "applied") {
+      try { applyTurn({ narration: "", choices: [], ...frag }, null, null); saveCharacter(character); }
+      catch (err) { out[out.length - 1].liveError = String(err?.message || err).slice(0, 200); }   // prose-cap-ok: an Error message, not model prose
+    }
+  }
+  character._fireTests = { at: new Date().toISOString(), build: APP_VERSION, results: out.map(r => ({ op: r.op, verdict: r.verdict, moved: r.moved || [], why: r.why || null })) };
+  return out;
+}
+
 function devReportNow() {
   return buildDevReport(character, {
     build: APP_VERSION,
@@ -2919,6 +2965,23 @@ function renderMachine() {
       </div>`;
     })()}
 
+    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">⚡ Fire tests <span class="hint" style="text-transform:none">— the ops that have never fired, given an occasion</span></h3>
+      <p class="hint" style="margin:0 0 8px">Each one builds a real turn and hands it to the same <code>applyTurn</code> a beat uses — no stub, no seam. It runs on a COPY of ${esc(character.name || "this character")}, so nothing here touches your save unless you say so. <strong>no-op</strong> means the op applied cleanly and wrote nothing, which is how a dead op looks; <strong>threw</strong> is a live defect; <strong>n/a</strong> means this character cannot host the test, which is not a failure.</p>
+      <div id="fire-rows">${(() => {
+        const last = character._fireTests?.results || [];
+        const byOp = Object.fromEntries(last.map(r => [r.op, r]));
+        return FIRE_TESTS.map(t => { const r = byOp[t.op];
+          const cls = !r ? "mach-zero" : r.verdict === "applied" ? "mach-fired" : r.verdict === "not-applicable" ? "mach-zero" : "mach-rej";
+          return `<div class="mach-tally"><span class="mach-op ${cls}">${esc(t.op)}</span> <span class="hint">${esc(t.what)}</span>`
+            + (r ? ` <span class="mach-x">${esc(r.verdict)}${r.moved?.length ? ` — wrote ${esc(r.moved.join(", "))}` : ""}${r.why ? ` (${esc(r.why)})` : ""}</span>` : ` <span class="hint">— not yet fired</span>`)
+            + `</div>`; }).join("");
+      })()}</div>
+      <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+        <button class="btn secondary" id="fire-all">Fire all (on a copy)</button>
+        <span class="hint" id="fire-said">${character._fireTests ? `last run ${esc(agoWords(Date.parse(character._fireTests.at) || Date.now()))} · results ride in the dev report` : "never run — results ride in the dev report when you do"}</span>
+      </div>
+    </div>
+
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Op emission — this character, cumulative <span class="hint" style="text-transform:none">(${turns} GM turn${turns === 1 ? "" : "s"} observed)</span></h3>
       <p class="hint" style="margin-bottom:8px">Counts are <strong>emissions</strong> — the model putting an op in a turn — tracked for every op. Applied/rejected outcome (✓/✗) is instrumented for <strong>${OUTCOME_INSTRUMENTED.size}</strong> ops (${[...OUTCOME_INSTRUMENTED].map(o => `<code>${esc(o)}</code>`).join(", ")}); for the rest the number is emission alone. <strong>✓—</strong> means no outcome was ever written, which is <em>not</em> the same as applied zero times. ${turns > 0 ? `A persistent <strong>0 after ${turns} turn${turns === 1 ? "" : "s"}</strong> is the real signature — a built op the model never reaches.` : `<strong>No turns observed yet</strong> — a 0 here just means this character has not played; it is not a finding.`}</p>
       ${firedOps.length ? `<div class="mach-tally"><span class="mach-label">emitted</span> ${firedOps.map(chip).join(" ")}</div>` : ""}
@@ -2945,6 +3008,16 @@ function renderMachine() {
     </div>
   </div>`);
 
+  { const b = app.querySelector("#fire-all"); if (b) b.onclick = async () => {
+      const said = app.querySelector("#fire-said");
+      b.disabled = true; if (said) said.textContent = "firing…";
+      const res = await runFireTests({});
+      const bad = res.filter(r => r.verdict === "threw" || r.verdict === "no-op");
+      b.disabled = false;
+      if (said) said.textContent = `${res.length} fired · ${bad.length} worth looking at · sending the report…`;
+      await flushDevReport();
+      renderMachine();
+    }; }
   { const b = app.querySelector("#mach-report-now"); if (b) b.onclick = async () => {
       const said = app.querySelector("#mach-report-said");
       b.disabled = true; if (said) said.textContent = "sending…";
@@ -6295,6 +6368,12 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   const _opsFired = opsFiredIn(result.turn);
   if (_opsFired.length) { character._opEmitted = character._opEmitted || {}; for (const o of _opsFired) character._opEmitted[o.op] = (character._opEmitted[o.op] || 0) + 1; }
   character._opTurns = (character._opTurns || 0) + 1;
+  // ⛔ SNG-560 — A ZERO NEEDS AN EPOCH AS WELL AS A DENOMINATOR. `_opEmitted` began on 2026-07-19 (SNG-190); Silas has
+  // been played since 12 July, so "never emitted in 369 turns" has always meant "never since the counter existed" — and I
+  // read four ops as BYPASSED on that basis before checking. ⚠️ The state they write was made on world-days that may
+  // predate the counter entirely, so the comparison was against the wrong population. Same defect as `offer 57 emitted /
+  // 64 outcomes` this morning, one field over. Stamped once, so every zero after this is interpretable.
+  if (!character._opCountingSince) character._opCountingSince = new Date().toISOString();
   queueDevReport();   // SNG-559: dev-only, debounced, its own file, never blocks the beat
   annotateLatest("gm-narrate", { parsed: result.turn, opsFired: _opsFired, opLedger: character?._opLedger ? { ...character._opLedger } : null });
   // ability-arch v2: rank 2 is earned through use, not bought — surface any craft that just became

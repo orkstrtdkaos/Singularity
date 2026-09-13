@@ -13378,6 +13378,89 @@ console.log("\n── §202 · the wiring census: what play knows, written where
     /if \(env\?\.tally\) \{/.test(rd("engine/gm_registry.js")));
 }
 
+// ⛑ SNG-560 — THE PARTS THAT HAVE NEVER BEEN USED, GIVEN AN OCCASION.
+// Erik: "go after the 15 never-emitted ops" — and earlier, "fire testing every part of the game. There are still parts
+// that have never been used."
+// ⚑ MEASURED FIRST, AND THE FIFTEEN SPLIT IN TWO, which is why the measuring came before the building:
+//   ⬜ UNTRIED (11) — never fired AND the state they write is EMPTY. Unambiguous: no state, no emission, nothing to
+//      misread. debtOps · projectOps · deathOps · markTeacher · deriveItem · unlockSubstrate · unlockPrecursor ·
+//      arcOps · offerPromotion · offerAcquisition · offerIntent.
+//   ⚠️ UNKNOWN (4) — never fired but the state EXISTS: holdingOps (5 holdings), bandOps (1), adoptSchool (3),
+//      newAbility (39). ⛔ I READ THESE AS "BYPASSED" AND IT WAS UNSAFE — `_opEmitted` began 2026-07-19 and Silas has
+//      been played since 12 July, so the state may simply predate the counter. Same shape as `offer 57 emitted / 64
+//      outcomes` this morning: a correlation against the wrong population. The epoch is stamped now.
+console.log("\n── §203 · fire tests: the never-fired ops, driven through the applier a real beat uses ──");
+{
+  const FT = await import("../engine/firetests.js");
+
+  /* ---- 1 · every op that has never fired has an occasion built for it ---- */
+  const NEVER203 = ["debtOps", "projectOps", "deathOps", "markTeacher", "deriveItem", "unlockSubstrate",
+    "unlockPrecursor", "arcOps", "offerPromotion", "offerAcquisition", "offerIntent",
+    "holdingOps", "bandOps", "adoptSchool", "newAbility"];
+  const covered = new Set(FT.FIRE_TESTS.map(t => t.op));
+  check("§203: every one of the fifteen never-fired ops has a fire test",
+    NEVER203.every(op => covered.has(op)), NEVER203.filter(op => !covered.has(op)).join(", ") || "all covered");
+  check("§203: …and every test names what it needs and what it is FOR — a row nobody can read is a row nobody runs",
+    FT.FIRE_TESTS.every(t => t.what && t.need && typeof t.build === "function"));
+
+  /* ---- 2 · they build a real op against a realistic character, and say so when they cannot ---- */
+  // ⚠️ A TEST THAT CANNOT BE HOSTED IS NOT A FAILURE. Firing deathOps at a character who knows nobody tests the
+  // REFUSAL, not the op — reporting that as "broken" would be the wrong population all over again.
+  const rich = { id: "c", name: "Rich", level: 12, nativeTradition: "wright",
+    npcRegistry: { a: { id: "a", name: "A", status: "active" } },
+    inventory: [{ id: "i", name: "A Pack" }],
+    worldState: { latentArcs: [{ id: "arc-1" }] } };
+  const bare = { id: "c", name: "Bare", npcRegistry: {}, inventory: [], worldState: {} };
+  const builtRich = FT.FIRE_TESTS.map(t => [t.op, t.build(rich)]);
+  const builtBare = FT.FIRE_TESTS.map(t => [t.op, t.build(bare)]);
+  check("§203: on a character who has people, items and an arc, EVERY test builds an op",
+    builtRich.every(([, f]) => f && Object.keys(f).length === 1),
+    builtRich.filter(([, f]) => !f).map(([op]) => op).join(", ") || "all built");
+  check("§203: ⛔ and on a bare character the ones that CANNOT be hosted return null rather than a malformed op",
+    builtBare.filter(([, f]) => !f).map(([op]) => op).sort().join(",") === "arcOps,deathOps,deriveItem,markTeacher,offerIntent,offerPromotion",
+    builtBare.filter(([, f]) => !f).map(([op]) => op).sort().join(","));
+  check("§203: every built fragment is keyed by its own op name — a test that fires a different op proves nothing",
+    builtRich.every(([op, f]) => Object.keys(f)[0] === op));
+
+  /* ---- 3 · the diff is what a fire test is FOR ---- */
+  // ⛔ `no-op` — applied cleanly and wrote nothing — is the `pendingCompanyOffers` shape, and it is the finding this
+  // whole harness exists to surface. So the diff must be trustworthy, and must not drown in bookkeeping.
+  check("§203: the diff names what MOVED and ignores `_` bookkeeping, which always moves",
+    JSON.stringify(FT.diffKeys({ a: 1, _x: 1, b: 2 }, { a: 1, _x: 9, b: 3, c: 4 })) === '["b","c"]');
+  check("§203: …and an unchanged record diffs to nothing, so `no-op` means no-op",
+    FT.diffKeys({ a: [1, 2], b: { x: 1 } }, { a: [1, 2], b: { x: 1 } }).length === 0);
+
+  /* ---- 4 · ⛔ IT RUNS ON A COPY, THROUGH THE REAL APPLIER, AND ALWAYS PUTS THE CHARACTER BACK ---- */
+  const A203 = rd("app.js");
+  check("§203: ⛑ the runner drives `applyTurn` — the same one a beat uses, no stub and no second implementation",
+    /applyTurn\(\{ narration: "", choices: \[\], \.\.\.frag \}, null, null\);/.test(A203));
+  check("§203: ⛔ …on a deep COPY, so a level-33 save is never the thing under test",
+    /const copy = JSON\.parse\(JSON\.stringify\(real\)\);/.test(A203));
+  // ⛔ A HARNESS THAT CAN STRAND THE LIVE CHARACTER IS WORSE THAN NO HARNESS. The swap is restored in a `finally`, so
+  // a throw inside the applier — the exact thing being hunted — cannot leave the app pointed at a scratch copy.
+  check("§203: ⛔ …and the live character is restored in a FINALLY, so a throw cannot strand the app on the copy",
+    /finally \{ character = real; \}/.test(A203));
+  check("§203: dev-only, like every other instrument here",
+    /async function runFireTests\(\{ apply = false, only = null \} = \{\}\) \{\s*\n\s*if \(!isDevMode\(\)/.test(A203));
+  check("§203: a real application happens only when ASKED, and only for an op that already proved it applies",
+    /if \(apply && verdict === "applied"\)/.test(A203));
+
+  /* ---- 5 · ⛔ AND A ZERO NOW CARRIES ITS EPOCH ---- */
+  // "never emitted in 369 turns" has always meant "never since the counter existed", and I acted on the stronger
+  // reading before checking. `_opCountingSince` is stamped once so every future zero is interpretable.
+  const DR203 = await import("../engine/devreport.js");
+  const rep203 = DR203.buildDevReport({ id: "x", _opTurns: 10, _opCountingSince: "2026-07-19T00:00:00.000Z", createdAt: "2026-07-12T00:00:00.000Z" }, { vocabulary: ["a"] });
+  check("§203: ⛔ the report carries WHEN counting began, and says when it does not cover the whole life",
+    rep203.character.countingSince === "2026-07-19T00:00:00.000Z" && rep203.character.countsCoverWholeLife === false);
+  const rep203b = DR203.buildDevReport({ id: "x", _opTurns: 10, _opCountingSince: "2026-07-01T00:00:00.000Z", createdAt: "2026-07-12T00:00:00.000Z" }, { vocabulary: ["a"] });
+  check("§203: …and says so when it DOES — only then is a zero beside existing state safe to act on",
+    rep203b.character.countsCoverWholeLife === true);
+  check("§203: the epoch is stamped once, where the turn counter lives",
+    /if \(!character\._opCountingSince\) character\._opCountingSince = new Date\(\)\.toISOString\(\);/.test(A203));
+  check("§203: and the fire-test verdicts ride in the report, where I can read them without anyone copying anything",
+    /fireTests: c\._fireTests \|\| null,/.test(rd("engine/devreport.js")));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

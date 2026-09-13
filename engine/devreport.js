@@ -85,7 +85,12 @@ export function buildDevReport(character, { build = null, vocabulary = [], promp
     at: new Date().toISOString(),
     build,
     character: { id: c.id || null, name: c.name || null, playerKey: c.playerKey || null, level: c.level ?? null,
-      rev: c.rev ?? null, day: c.clock?.day ?? null, turns },
+      rev: c.rev ?? null, day: c.clock?.day ?? null, turns,
+      // ⛔ SNG-560: WHEN THE COUNTING STARTED. Without it every zero in this report is ambiguous — "never happened" and
+      // "never happened since we began looking" are different findings, and only one of them is a defect. A save older
+      // than the counter says so here, and `countsCoverWholeLife` is the flag that makes a zero safe to act on.
+      countingSince: c._opCountingSince || null,
+      countsCoverWholeLife: !!c._opCountingSince && !!c.createdAt && c._opCountingSince <= c.createdAt },
     ops: {
       emitted, outcomes, never,
       neverCount: never.length,
@@ -106,6 +111,9 @@ export function buildDevReport(character, { build = null, vocabulary = [], promp
     },
     // ⛔ WHICH PROMPT ROWS EVER FIRE. A row that never produces content is a block the GM has never once been
     // told — the prompt-side twin of an op that never fires, and just as invisible without a count.
+    // ⛑ SNG-560: what happened the last time the never-fired ops were given an occasion. A verdict of `no-op` is the
+    // `pendingCompanyOffers` shape — an op that applies cleanly and writes nothing — and `threw` is a live defect.
+    fireTests: c._fireTests || null,
     promptRows: promptRows || null,
     world: contentCounts || null,
   };

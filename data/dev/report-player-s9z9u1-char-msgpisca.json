@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "id": "dev_report",
+  "at": "2026-09-13T21:25:27.560Z",
+  "build": "1.9.502",
+  "character": {
+    "id": "char-msgpisca",
+    "name": "Splarf",
+    "playerKey": "player-s9z9u1",
+    "level": 2,
+    "rev": 275,
+    "day": 4,
+    "turns": 57,
+    "countingSince": null,
+    "countsCoverWholeLife": false
+  },
+  "ops": {
+    "emitted": {
+      "sceneSummary": 57,
+      "scene": 57,
+      "choices": 57,
+      "offer": 33,
+      "codexUpdates": 32,
+      "imagePrompt": 25,
+      "gambitApt": 43,
+      "sceneEnded": 56,
+      "characterDeltas": 45,
+      "arcOps": 1,
+      "factUpdates": 7,
+      "placeUpdates": 17,
+      "timeOps": 38,
+      "deeds": 10,
+      "ledgerEvents": 4,
+      "questUpdates": 18,
+      "npcUpdates": 49,
+      "generateRequest": 2,
+      "newEncounter": 1,
+      "encounterOps": 1,
+      "markDefiningMoment": 1,
+      "_engineClosedScene": 4,
+      "itemUpdates": 1,
+      "stageOps": 4,
+      "standingOps": 1,
+      "moveTo": 1
+    },
+    "outcomes": {
+      "offer": {
+        "applied": 37,
+        "rejected": 0,
+        "lastWhy": null,
+        "exceedsEmissions": true
+      }
+    },
+    "never": [
+      "adoptSchool",
+      "bandOps",
+      "deathOps",
+      "debtOps",
+      "delegateOps",
+      "deriveItem",
+      "discovery",
+      "gambitOps",
+      "holdingOps",
+      "intentsHeard",
+      "markTeacher",
+      "newAbility",
+      "offerAcquisition",
+      "offerIntent",
+      "offerPromotion",
+      "partyOps",
+      "projectOps",
+      "stateOps",
+      "unlockPrecursor",
+      "unlockSubstrate"
+    ],
+    "neverCount": 20,
+    "knownCount": 43,
+    "unknown": {},
+    "inProse": {},
+    "emptyClaims": 0
+  },
+  "coverage": {
+    "npcRegistry": {
+      "n": 3,
+      "fields": {
+        "age": 0,
+        "sex": 0,
+        "gender": 3,
+        "pronouns": 3,
+        "role": 3,
+        "description": 3,
+        "bondType": 1,
+        "relationship": 3,
+        "status": 3,
+        "knownFacts": 3,
+        "skillsObserved": 3,
+        "deeds": 1,
+        "domains": 3,
+        "inventory": 0
+      }
+    },
+    "inventory": {
+      "n": 3,
+      "fields": {
+        "customName": 0,
+        "aliases": 0,
+        "kind": 3,
+        "description": 3
+      }
+    }
+  },
+  "fireTests": null,
+  "promptRows": null,
+  "world": {
+    "locations": 138,
+    "abilities": 438,
+    "npcs": 151
+  }
+}

@@ -13461,6 +13461,66 @@ console.log("\n── §203 · fire tests: the never-fired ops, driven through t
     /fireTests: c\._fireTests \|\| null,/.test(rd("engine/devreport.js")));
 }
 
+// ⛔ SNG-561 — THE FIELD WAS DECLARED, DOCUMENTED, LOADED, AND NEVER ASKED FOR.
+// `npc.schema.json` has carried `sex` since 2026-09-05 with the note "⛔ R24: set at generation… Gates romance", and
+// `age` beside it. The generation prompt asks for `schema.required` and nothing else — six fields, neither among them.
+// ⚑ MEASURED ON ERIK'S TWO LIVE SAVES: 0 of 24 minted people carry a sex, and R24 makes absence a HARD EXCLUSION — so
+// EVERY GENERATED PERSON WAS PERMANENTLY NON-ROMANCEABLE BY CONSTRUCTION, by an omission in a prompt.
+// ⚠️ THE FOUR DOORS WITH A FIFTH: authored → registered → loaded → READ → **ASKED FOR**. The generator cannot answer a
+// question nobody puts to it, and "the schema declares it" is not the same as "the model was told".
+console.log("\n── §204 · the mint is asked for what it gates: sex and age, at generation ──");
+{
+  const GEN204 = await import("../engine/generate.js");
+  const schema204 = JSON.parse(rd("schemas/npc.schema.json"));
+  const sch = { required: ["schemaVersion", "id", "name", "role", "spectrum", "fears"] };
+
+  /* ---- 1 · the prompt now asks, and only where it should ---- */
+  const npcPrompt = GEN204.buildGeneratePrompt("npc", { location: { name: "Millbrook" } }, { schema: sch }).system;
+  check("§204: ⛑ the npc prompt asks for SEX, and says why absence is not a neutral answer",
+    /"sex": "male" \| "female" \| "none"/.test(npcPrompt) && /can NEVER be romanced/.test(npcPrompt));
+  check("§204: …and for an AGE, naming 18 as the line",
+    /"age": their age in years/.test(npcPrompt) && /ADULT IS 18/.test(npcPrompt));
+  check("§204: …and keeps gender/pronouns separate from sex, which is what gates",
+    /"gender" and "pronouns"/.test(npcPrompt) && /they gate nothing/.test(npcPrompt));
+  // ⚠️ A location has no sex. A block asked of every type would be noise, and noise in a prompt is how directives get dropped.
+  check("§204: ⛔ and no other type is asked — a location has no sex",
+    !/ALSO REQUIRED/.test(GEN204.buildGeneratePrompt("location", { location: {} }, { schema: sch }).system));
+
+  /* ---- 2 · ⛔ THREE DEFINITIONS OF `sex` DISAGREED, AND THE SCHEMA WAS THE ODD ONE ---- */
+  // The GM contract says male|female|none; applyNpcUpdates accepts [male, female, none]; the generation schema admitted
+  // `null` but NOT `none` — so a generator told to answer "none" would have been refused by its own validator.
+  check("§204: ⛔ the generation schema admits every value the engine does",
+    ["male", "female", "none"].every(v => schema204.properties.sex.enum.includes(v)));
+  // ⚠️ AND `null` STAYS, because the two are DIFFERENT ANSWERS and `romanceable()` reads them apart: null = never set
+  // (a gap), "none" = this being has no sex (an answer). Both refuse romance; only one of them is a defect.
+  check("§204: …and `null` survives beside it — never-set and has-none are different findings",
+    schema204.properties.sex.enum.includes(null) && /NEVER SET/.test(schema204.properties.sex.description));
+  const NP204 = await import("../engine/npcs.js");
+  check("§204: ⛑ and the engine tells them apart in its refusal, not just in its comments",
+    /never set/i.test(NP204.romanceable({ sex: null }).why) && /no sex/i.test(NP204.romanceable({ sex: "none" }).why));
+  // ⛔ ASKED FOR IS NOT VALIDATED-ON. 83 of 90 authored people carry no age; promoting it into `required` would red-line
+  // the corpus at once, which is the exact mistake this schema's own note records.
+  check("§204: ⛔ neither was promoted into `required` — the corpus is not red-lined to fix a prompt",
+    !schema204.required.includes("sex") && !schema204.required.includes("age"));
+
+  /* ---- 3 · ⛑ DRIVEN THROUGH THE REAL MINT, because twice today a prompt asked and a writer ignored ---- */
+  const mint = async (extra) => GEN204.generate("npc", { location: { id: "millbrook", name: "Millbrook", regionId: "valley", poleIntensity: {} }, rating: "PG-13" },
+    { callJSON: async () => ({ schemaVersion: 1, id: "gen-t", name: "T", role: "a wright's hand", spectrum: { chaos_order: 0.2 }, fears: "x", ...extra }), schema: schema204, budget: 5 });
+  const adult = await mint({ sex: "male", age: 34 });
+  check("§204: ⛑ a minted person KEEPS the sex and age the author gave them — read nothing, run it",
+    adult?.sex === "male" && adult?.age === 34, `sex=${adult?.sex} age=${adult?.age}`);
+  const mote = await mint({ sex: "none", age: 900 });
+  check("§204: …including \"none\", the value the schema used to refuse",
+    mote?.sex === "none" && mote?.age === 900, `sex=${mote?.sex}`);
+  // ⛔ AND THE FLOOR STILL CLOSES ON THE NUMBER. An age the author states under 18 marks the person, whatever else is said.
+  const minor = await mint({ sex: "female", age: 16 });
+  check("§204: ⛔ an authored age under eighteen marks the person and refuses romance at the mint",
+    minor?.isMinor === true && minor?._gen?.romanceEligible === false, `isMinor=${minor?.isMinor}`);
+  const silent = await mint({});
+  check("§204: ⚠️ and an author who answers neither still mints — the ask is a requirement of the PROMPT, not a gate that can lose a person",
+    !!silent && silent.sex === undefined);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

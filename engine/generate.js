@@ -784,6 +784,26 @@ export function buildGeneratePrompt(type, context = {}, { schema = {}, examples 
   const loc = context.location || {};
   const grammar = substrate?.generationGrammar || {};
   const req = (schema.required || []).join(", ");
+  // ⛔ SNG-561 — THE FIELD WAS DECLARED, DOCUMENTED, AND NEVER ASKED FOR. `npc.schema.json` carries `sex` with the note
+  // "R24: set at generation, documented at first materialisation. Gates romance", and `age`, and the prompt asks only for
+  // `schema.required` — six fields, neither of them among them. ⚡ MEASURED: 0 of 24 minted people on Erik's two live
+  // saves carry a sex, so EVERY GENERATED PERSON IS PERMANENTLY NON-ROMANCEABLE BY CONSTRUCTION, because R24 makes
+  // absence a hard exclusion. The four doors, with the prompt as the fourth: authored → registered → loaded → ASKED FOR.
+  //
+  // ⚠️ NOT ADDED TO `required`, deliberately. That list is also the VALIDATOR's, and 83 of 90 authored people carry no
+  // age — promoting it there would red-line the corpus at once, which is the exact mistake this schema's own note
+  // records ("closing it would red-line 43 existing files"). The generator is asked for more than it is validated on,
+  // which is what the schema description always said it did.
+  const GATED_FIELDS = type !== "npc" ? "" :
+    `
+
+ALSO REQUIRED, AND EACH ONE GATES SOMETHING THE ENGINE WILL NOT GUESS:`
+    + `
+- "sex": "male" | "female" | "none". Set it now; it is never inferred later, and a person with none recorded can NEVER be romanced whatever the story does. "none" is a REAL ANSWER for a being that has no sex, not a blank.`
+    + `
+- "age": their age in years, a number. ADULT IS 18. Give a grown person a grown person's age, and never write an adult in teenage terms.`
+    + `
+- "gender" and "pronouns": how they present and how narration addresses them. Separate from sex, and they gate nothing.`;
   const dispo = describeDisposition(loc);
   const roleLine = context.role ? `\nUNIVERSAL ROLE: ${context.role}${context.roleMethod ? ` — method here: ${context.roleMethod}` : ""}` : "";
   const seedLine = loc.seedFiction ? `\nMANIFEST DOMAIN — this place runs on: ${loc.seedFiction}${loc.nativeLogic ? ` (native law: ${loc.nativeLogic})` : ""}` : "";
@@ -796,7 +816,7 @@ export function buildGeneratePrompt(type, context = {}, { schema = {}, examples 
     grammar.inGrainGuarantee ? `IN-GRAIN LAW: ${grammar.inGrainGuarantee}` : "",
     grammar.asymmetry && type !== "npc" ? `ASYMMETRY: ${grammar.asymmetry}` : "",
     grammar.functionAwareness ? `FUNCTION-AWARENESS: ${grammar.functionAwareness}` : "",
-    `Output ONE JSON object and nothing else. REQUIRED fields: ${req}. Match the shape + voice of the examples exactly.`,
+    `Output ONE JSON object and nothing else. REQUIRED fields: ${req}. Match the shape + voice of the examples exactly.${GATED_FIELDS}`,
     ratingLine
   ].filter(Boolean).join("\n\n");
 

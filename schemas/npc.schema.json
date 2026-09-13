@@ -117,7 +117,8 @@
    "description": "how this locale's grain bends the universal role"
   },
   "age": {
-   "type": "integer"
+   "type": "integer",
+   "description": "⛑ SNG-561: THE AGE IS THE GATE (Erik 2026-09-13: \"adult is 18... you just need an age for any NPC to be the gate\"). Asked for at generation, never inferred from prose. Deliberately NOT in `required` — 83 of 90 authored people carry none, and promoting it there would red-line the corpus at once."
   },
   "gender": {
    "type": "string",
@@ -204,9 +205,10 @@
    "enum": [
     "male",
     "female",
+    "none",
     null
    ],
-   "description": "⛔ R24: set at generation, documented at first materialisation. Gates romance. `null` = undiscovered or genuinely neither."
+   "description": "⛔ R24: set at generation, documented at first materialisation. Gates romance. ⚡ SNG-561 — THREE DEFINITIONS DISAGREED AND THIS WAS THE ODD ONE: the GM contract says male|female|none, applyNpcUpdates accepts [male, female, none], and this enum admitted null but not none — so a generator told to answer 'none' would have been refused by the validator. ⚠️ THE TWO ARE DIFFERENT ANSWERS AND romanceable() READS THEM APART: null = NEVER SET (a hard exclusion, because R24 excludes rather than guesses); 'none' = THIS BEING HAS NO SEX (an answer, not a blank — a constellation of motes needs nothing authored to exclude it). Both refuse romance; only one of them is a gap."
   },
   "romanceEligible": {
    "type": "boolean",

@@ -143,7 +143,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "1.9.503";
+const APP_VERSION = "1.9.505";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3610,14 +3610,11 @@ function migrate(c) {
   // SNG-101: make the build-time closed-opposite set EXPLICIT (additive; the primary+secondary antipodes
   // that domainAccess already computes). Promotion appends promoted-domain antipodes to it. domainCeilings
   // / domainsAcquired stay unset → absent ⇒ station-derived ceilings, exactly as before.
-  if (!c.foreclosed) {
-    c.foreclosed = [];
-    const tidx = CONTENT.traditionIndex;
-    if (tidx && c.domains?.primary) for (const k of ["primary", "secondary"]) {
-      const a = c.domains[k] ? antipodeOf(c.domains[k], tidx) : null;
-      if (a && !c.foreclosed.includes(a)) c.foreclosed.push(a);
-    }
-  }
+  // ⛔ SNG-548 (Erik 2026-09-12: "It's both learnable and castable") — THIS WROTE THE RETIRED RULE ON EVERY LOAD.
+  // It computed the antipodes of primary+secondary and stored them as CLOSED, which is the SNG-101 model R9/R16
+  // replaced: the axis is governed by a price and a ceiling that both move with `lean`, and nothing is shut.
+  // ⚠️ IT WAS NOT LEGACY DATA. A character opened yesterday got the field written fresh, so the rule kept being
+  // applied to new play long after the ruling that removed it. Nothing writes `foreclosed` now; reconcile 60 clears it.
   if (!c.forkChoices) c.forkChoices = {}; // SNG-BATCH-5 Phase 2: permanent branch-fork picks
   retroLevelGrants(c, CONTENT.rules); // levels earned before banked growth existed pay out once
   { const ng = retroNativeGrants(c, CONTENT.rules); // SNG-101b: backfill by-right native basics once (Law-14-safe, survives the sync clobber)

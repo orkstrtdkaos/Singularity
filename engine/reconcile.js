@@ -362,6 +362,31 @@ export const CHARACTER_STEPS = [
     }
   },
   {
+    version: 60, id: "nothing-is-foreclosed", playerFacing: true,
+    // ⛔ SNG-548 (Erik 2026-09-12: "It's both learnable and castable") — A FIELD THAT OUTLIVED ITS RULING BY TWO RULINGS.
+    //
+    // `foreclosed` listed the antipodes of a character's primary and secondary as CLOSED. R9/R16 replaced that model —
+    // the axis is now governed by a price and a ceiling that both move with `lean` — and `domainAccess` stopped reading
+    // the field. ⚠️ BUT TWO OTHER READERS DID NOT: the skill tree rendered those crafts FORECLOSED ("you chose
+    // otherwise"), and `practicedTraditions` struck the people from the set a teacher could reach. And app.js REWROTE
+    // the field on every load, so it was never even legacy data.
+    //
+    // ⛑ AEVI'S REASON FOR ASKING IS THE BEST ARGUMENT FOR CLEARING IT: she read `foreclosed: ["rootkin","somatic"]` off
+    // Silas's live save, concluded he had shut two peoples out by name, and built a character argument on it to Erik —
+    // who answered "He doesn't have those two peoples foreclosed any more." ⛔ A STALE FIELD MADE THE PO WRONG ABOUT A
+    // PLAYER'S CHARACTER, OUT LOUD, TO THE PLAYER. The same shape as the spear: a record that outlived its ruling, and
+    // a reader that believed it. Leaving it on the save would leave the next reader the same trap.
+    apply: (c) => {
+      const had = Array.isArray(c.foreclosed) ? c.foreclosed.filter(Boolean) : [];
+      if (!had.length) { if (c.foreclosed) delete c.foreclosed; return {}; }
+      delete c.foreclosed;
+      // ⚠️ NAMED, NOT COUNTED. "A field was cleared" tells a player nothing; the point is that two peoples they were
+      // told they had shut out are open, and one of them is the far pole of their own axis.
+      const names = had.map(t => String(t).replace(/_/g, " "));
+      return { notes: [`Nothing is closed to you. ${names.join(" and ")} were marked as roads you had shut by choosing otherwise — that rule is retired. The far pole of your own axis is learnable and castable now, to a ceiling that rises as your balance does.`] };
+    }
+  },
+  {
     version: 59, id: "the-ladder-under-the-other-punctuation", playerFacing: true,
     // ⛔ SNG-546 (Aevi) — SILAS HOLDS RANK 3 OF A CRAFT WHOSE RANK 3 IS IN THE CATALOGUE UNDER DIFFERENT PUNCTUATION.
     //

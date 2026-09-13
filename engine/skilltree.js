@@ -169,9 +169,13 @@ export function skillGraphModel(catalog, emergence, character, { attributeGates,
     const lockedPath = fork && chosen ? forkPaths(ab.id, branchForks).find(p => p.key !== chosen.key) : null;
     const isOwned = owned.has(ab.id), rank = owned.get(ab.id) || 0;
     const locked = !isOwned && (!learnGate.ok || (cap && ab.powerSystem !== "learned"));
-    // SNG-101: a foreclosed antipode's NATIVE nodes read FORECLOSED ("you chose otherwise" — distinct from
-    // LOCKED's "not yet"). Owned ground is kept (foreclosure is directional), and braids are never foreclosed.
-    const foreclosed = !isOwned && ab.nativeOrCombination !== "combination" && (character?.foreclosed || []).includes(ab.tradition);
+    // ⛔ SNG-548 — THIS IS THE ONE THE PLAYER SEES, AND IT WAS SHOWING HIM A RETIRED LAW. A foreclosed antipode's
+    // native nodes rendered FORECLOSED — "you chose otherwise" — so Silas's rootkin crafts read as a door he had
+    // shut, when Erik's ruling is that the antipode is LEARNABLE AND CASTABLE, capped by lean.
+    // ⚠️ `antipodeCeiling` already computes the real answer ("the far pole of your own axis — to tier 2 at your
+    // present balance"), so the node falls through to the ordinary bands and gets its ceiling, which is a PRICE
+    // rather than a wall. Nothing is foreclosed any more; the const stays false so every reader below is unchanged.
+    const foreclosed = false;
     // ⛔ SNG-348 — THE MODEL KNEW WHETHER A NODE WAS OPEN AND NOT WHETHER IT WAS BUYABLE, and those are
     // different questions. `AVAILABLE` means the gates are met and you are under capacity — it says nothing
     // about the price, so the wheel showed Erik a field of open crafts he could not afford. Cost now rides

@@ -258,14 +258,20 @@ function domainAccessInner(ability, tier, domains, index, opts = {}) {
   // (nativeOrCombination === "combination") is the sanctioned road across the axis and is NEVER foreclosed.
   // ⛔ R9/R16 REMOVED THE FORECLOSURE. Promotion used to CLOSE the antipode of the domain you raised, and
   // this branch enforced it. The axis is now governed by a price and a ceiling that both move with `lean`,
-  // so nothing needs to be shut. ⚠️ `opts.foreclosed` IS STILL READ NOWHERE ELSE — old saves may carry the
-  // array and it is simply ignored, which is deliberate: they must not keep a restriction new characters
-  // never get.
+  // so nothing needs to be shut, and this module has ignored the array since.
+  //
+  // ⛔ SNG-548 — THIS COMMENT SAID "`opts.foreclosed` IS STILL READ NOWHERE ELSE" AND IT WAS NOT TRUE. Two other
+  // readers were enforcing the retired rule the whole time: `skilltree.js` rendered the antipode's nodes as
+  // FORECLOSED to the player, and `quests.js:practicedTraditions` struck it from the set a teacher can reach.
+  // ⚠️ THE MODULE THAT RETIRED A RULE ASSERTED THE SWEEP HAD BEEN DONE WITHOUT DOING IT — which is CCode's own
+  // note of 2026-09-01, quoted back by Aevi in this ticket: "a ruling that updates one reader leaves the others
+  // speaking the old law. I changed `domainAccess` and never asked who else enforced the same rule."
+  // ⛑ All three are corrected now, nothing writes the field, and reconcile 60 clears it from the saves.
 
   // ⛔ CCODE-339 / ERIK’S RULING: "we need to rework the domain access model SO WE NO LONGER LOSE ACCESS TO
   // THE ANTIPOLES… you can't use the skill itself, ONLY THE BRAIDABLE PART."
   //
-  // ⛔ LEARNABLE, NOT CASTABLE. The antipode used to return `allowed: false` — a WALL, and the only gate in
+  // ⛔ LEARNABLE, AND SINCE 2026-09-12 CASTABLE. The antipode used to return `allowed: false` — a WALL, and the only gate in
   // the model that was not a price. Measured before removing it (CCODE-332): it accounted for **67% of all
   // access denials in the game**, and it was not even-handed — stillhold lost 50 crafts to it and threnodist
   // 17, because a pole’s antipode may be richly authored or thin. An ACCESS rule was doing BALANCE work.

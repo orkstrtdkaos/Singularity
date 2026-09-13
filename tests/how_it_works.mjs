@@ -3754,7 +3754,11 @@ console.log("\n── §31D · the domain is a heading, and the sheet never says
     Object.values(sizes).some(n => n >= 2),
     Object.entries(sizes).filter(([, n]) => n >= 2).map(([d, n]) => `${d}:${n}`).join(" "));
 }
-/* ══════════ §32 — THE ANTIPODE IS LEARNABLE AND NOT CASTABLE ══════════ */
+/* ══════════ §32 — THE ANTIPODE IS LEARNABLE AND CASTABLE, TO A CEILING THAT MOVES WITH LEAN ══════════ */
+// ⛔ SNG-548 — THE BODY OF THIS SECTION WAS REWRITTEN AT R16 AND THE TITLE WAS NOT, so it has been printing a green
+// line asserting a retired rule ever since. ⚠️ A HEADER IS READ BY EVERYONE AND CHECKED BY NOBODY: the assertions
+// below say price-and-ceiling, and the banner above them said wall — the milder form of the failure the R16 note
+// inside already names, "a gate defending a retired ruling is worse than no gate". Erik: "It's both learnable and castable."
 // ⛔ ERIK: "rework the domain access model SO WE NO LONGER LOSE ACCESS TO THE ANTIPOLES… you can’t use the
 // skill itself, ONLY THE BRAIDABLE PART."
 //
@@ -3765,7 +3769,7 @@ console.log("\n── §31D · the domain is a heading, and the sheet never says
 // ⚠️ THE STAIRS ARE NOT GATED, ON PURPOSE. Erik: "we can figure out the stairs later." What tier it counts
 // as and what a braid needs from it are open, and a gate written against stub text is how a stub becomes
 // load-bearing.
-console.log("\n── §32 · the antipode is learnable, and it cannot be cast ──");
+console.log("\n── §32 · the antipode is learnable AND castable, to a ceiling that rises with balance ──");
 {
   const TRa = await import("../engine/traditions.js");
   const tfa = rj("content/packs/core/rules/traditions.json");
@@ -13707,6 +13711,92 @@ console.log("\n── §206 · the ladder under the other punctuation ──");
     shadowed.length === 0, shadowed.slice(0, 3).join(" · ") || `healed — ${healed.join(" · ") || "nothing was shadowing"}`);
   check("§206: …and there WAS something to heal, so the check above is not vacuously green",
     healed.length > 0, healed.join(" · "));
+}
+
+// ⛔ SNG-548 (Erik 2026-09-12: "It's both learnable and castable") — A RULING THAT UPDATES ONE READER LEAVES THE
+// OTHERS SPEAKING THE OLD LAW. That sentence is CCode's own note of 2026-09-01, and Aevi quoted it back in this
+// handoff because it had stayed true through TWO further rulings.
+//
+// ⚑ MEASURED: `domainAccess` retired the closed-opposite rule at R9/R16 and wrote a comment saying `opts.foreclosed`
+// "IS STILL READ NOWHERE ELSE". ⛔ IT WAS READ IN TWO OTHER PLACES, AND WRITTEN IN A THIRD:
+//    app.js          rewrote `foreclosed` from the primary/secondary antipodes ON EVERY LOAD — so it was never even
+//                    legacy data; a character opened yesterday got the retired rule applied fresh
+//    skilltree.js    rendered those crafts FORECLOSED — "you chose otherwise" — which is what Erik SAW
+//    quests.js       struck the people from `practicedTraditions`, so no teacher could ever reach the antipode
+// ⚠️ AND A SMOKE GATE ASSERTED THE LAST ONE WAS CORRECT, which is the failure Aevi predicted in the handoff: a gate
+// that pins a rule rather than a reader holds the rule in place, and PASSES while doing it.
+console.log("\n── §207 · nothing is foreclosed: the readers that were still enforcing it ──");
+{
+  const { loadContentHeadless: lch207 } = await import("./headless_content.mjs");
+  const C207 = await lch207();
+  const QS207 = await import("../engine/quests.js");
+  const RC207 = await import("../engine/reconcile.js");
+
+  /* ---- 1 · ⛔ NOTHING WRITES IT ANY MORE ---- */
+  // The load path computed the antipodes of primary+secondary and stored them as closed. That is the SNG-101 model
+  // R9/R16 replaced — the axis is a price and a ceiling that both move with lean, and nothing is shut.
+  const A207 = rd("app.js");
+  check("§207: ⛔ the load path no longer writes `foreclosed` from a character's domains",
+    !/c\.foreclosed = \[\];/.test(A207) && /SNG-548[\s\S]{0,200}THIS WROTE THE RETIRED RULE ON EVERY LOAD/.test(A207));
+
+  /* ---- 2 · ⛑ AND THE THREE READERS AGREE WITH THE RULING ---- */
+  // ⚠️ DRIVEN, NOT READ. A record carrying the legacy array must behave exactly like one that never had it.
+  // ⚠️ `teachers` IS THE UNAMBIGUOUS SOURCE and exactly what `foreclosed` used to delete from. My first fixture
+  // used an ability id and produced an EMPTY set either way — the assertion would have been vacuously true once
+  // inverted, which is the same trap as the gate it replaces.
+  const withLegacy = { teachers: { ashwarden: { met: true, willing: true } }, foreclosed: ["ashwarden"] };
+  const without = { teachers: { ashwarden: { met: true, willing: true } } };
+  check("§207: ⛑ a legacy `foreclosed` entry no longer removes a people from the practiced set — a teacher can reach it",
+    QS207.practicedTraditions(withLegacy, C207).has("ashwarden"));
+  check("§207: …and a save that carries the array behaves identically to one that never did",
+    JSON.stringify([...QS207.practicedTraditions(withLegacy, C207)].sort())
+    === JSON.stringify([...QS207.practicedTraditions(without, C207)].sort()));
+  // ⛔ THE ONE THE PLAYER SEES. Silas's rootkin crafts rendered as a door he had shut.
+  check("§207: ⛔ the skill tree never marks a node FORECLOSED — that badge belonged to a rule that is gone",
+    /const foreclosed = false;/.test(rd("engine/skilltree.js")));
+
+  /* ---- 3 · ⛔ AND THE COMMENT THAT ASSERTED THE SWEEP HAD BEEN DONE ---- */
+  // ⚠️ The module that retired the rule claimed nothing else enforced it, without checking. That claim is what let
+  // two readers survive eleven days and two rulings, and it is the thing most worth not repeating.
+  const T207 = rd("engine/traditions.js");
+  // ⚠️ ASSERTED ON THE CORRECTION, NOT ON THE ABSENCE OF THE OLD STRING. My first form required "IS STILL READ
+  // NOWHERE ELSE" to be absent — from a file whose new comment QUOTES that claim in order to correct it, and from a
+  // gate that quotes it too. A negative assertion about a phrase is unwritable in a codebase that discusses its own
+  // history; assert the correction is PRESENT instead.
+  check("§207: ⛔ the 'read nowhere else' claim is CORRECTED, naming the two readers that disproved it",
+    /AND IT WAS NOT TRUE/.test(T207) && /skilltree/.test(T207) && /practicedTraditions/.test(T207));
+  check("§207: …and the module says plainly that the antipode is castable now",
+    /LEARNABLE, AND SINCE 2026-09-12 CASTABLE/.test(T207));
+
+  /* ---- 4 · ⛑ THE SAVES ARE CLEARED, AND THE PLAYER IS TOLD WHAT OPENED ---- */
+  // ⛑ Aevi's reason for asking is the best argument for clearing rather than ignoring: she read
+  // `foreclosed: ["rootkin","somatic"]` off Silas's live save, concluded he had shut two peoples out by name, and
+  // built a character argument on it TO ERIK — who answered "He doesn't have those two peoples foreclosed any more."
+  // ⛔ A STALE FIELD MADE THE PO WRONG ABOUT A PLAYER'S CHARACTER, OUT LOUD, TO THE PLAYER. Leaving it on the save
+  // leaves the next reader the same trap; ignoring it in code does not make it stop being read by people.
+  const silas207 = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const had207 = [...(silas207.foreclosed || [])];
+  silas207.reconcileVersion = 59;
+  const r207 = RC207.reconcile(silas207, "character", {});
+  check("§207: ⛑ the legacy array is cleared from the save",
+    r207.applied.includes("nothing-is-foreclosed") && silas207.foreclosed === undefined,
+    `was ${JSON.stringify(had207)}`);
+  check("§207: …and the note NAMES the peoples that opened, rather than announcing a field",
+    had207.length === 0 || r207.notes.some(n => had207.every(t => n.includes(String(t).replace(/_/g, " ")))),
+    r207.notes.join(" | ").slice(0, 140));
+  const snap207 = JSON.stringify(silas207);
+  RC207.reconcile(silas207, "character", {});
+  check("§207: …and it is idempotent — a cleared save is not re-announced", snap207 === JSON.stringify(silas207));
+
+  /* ---- 5 · ⛑ AND THE ENGINE'S ANSWER IS THE ONE ERIK RULED: a price and a ceiling ---- */
+  const TR207 = await import("../engine/traditions.js");
+  const idx207 = C207.traditionIndex;
+  const D207 = { primary: "ashwarden", secondary: null, tertiary: null };
+  const anti207 = TR207.antipodeOf("ashwarden", idx207);
+  const v207 = TR207.domainAccess({ tradition: anti207 }, 2, D207, idx207);
+  check("§207: ⛑ the far pole of your own axis is reachable and castable, and says so in its own words",
+    v207.allowed === true && v207.castable !== false && /antipode/.test(String(v207.band || "")),
+    `${anti207}: allowed ${v207.allowed} · castable ${v207.castable} · band ${v207.band}`);
 }
 
 /* ══════════ REPORT ══════════ */

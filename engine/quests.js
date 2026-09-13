@@ -926,7 +926,9 @@ export function practicedTraditions(character, content = {}) {
     const t = ab ? traditionOf(ab, index) : (index?.abilityToTradition?.[o.abilityId] || null);
     if (t) set.add(t);
   }
-  for (const f of (character?.foreclosed || [])) set.delete(f);
+  // ⛔ SNG-548 — AND THIS SILENTLY UNTAUGHT THE ANTIPODE. A tradition in `foreclosed` was struck from the set of
+  // peoples the character counts as having practiced, so curricula and teacher offers could never reach it. Erik's
+  // ruling makes the antipode learnable; a reader that deletes it from the practiced set enforces the opposite.
   return set;
 }
 

@@ -3302,7 +3302,9 @@ await (async () => {
   const antiAb = { id: "z", tradition: "blazeborn", levelReq: 1 };
   // ⛔ RE-RULED (CCODE-339). This asserted the antipode was CLOSED. Erik: "rework the domain access model
   // SO WE NO LONGER LOSE ACCESS TO THE ANTIPOLES… you can’t use the skill itself, ONLY THE BRAIDABLE PART."
-  // ⚠️ LEARNABLE, NOT CASTABLE (CCODE-339) — so the claim inverts on `allowed` and survives on `castable`.
+  // ⚠️ SNG-548: CCODE-339's "learnable, not castable" was itself a halfway step, retired by R9/R16 and closed by
+  // Erik on 2026-09-12 — "It's both learnable and castable." The claim that survives is the BAND, which marks the far
+  // pole of your own axis; `castable` is no longer a wall and the checks below never asserted it was.
   {
     const va = domainAccess(antiAb, 1, domains, idx);
     check("SNG-055: the antipode of your primary is REACHABLE — the wall is gone", va.allowed === true, JSON.stringify(va));
@@ -8753,7 +8755,16 @@ await (async () => {
   const CONTENT203 = { traditionArcs: { ashwarden: arc }, abilities: { pale_touch: { id: "pale_touch", tradition: "ashwarden" }, [arc.capstoneAbility]: { id: arc.capstoneAbility, tradition: "ashwarden" } }, traditionIndex: { abilityToTradition: { pale_touch: "ashwarden" } }, npcQuests: errands };
   const practicer = { abilities: [{ abilityId: "pale_touch", level: 2 }] };
   check("203: practicedTraditions reads owned-ability tradition from the catalog", practicedTraditions(practicer, CONTENT203).has("ashwarden"));
-  check("203: a foreclosed tradition drops out of the practiced set", !practicedTraditions({ abilities: [{ abilityId: "pale_touch" }], foreclosed: ["ashwarden"] }, CONTENT203).has("ashwarden"));
+  // ⛔ SNG-548 — THIS GATE WAS DEFENDING THE RETIRED RULE, and it is exactly the failure Aevi predicted in the
+  // handoff: "a gate whose title asserts the old rule will fail when the rule changes, or — worse — PASS, because it
+  // is testing the behaviour Erik just retired." It passed. ⚠️ `practicedTraditions` was striking a foreclosed people
+  // from the set a teacher can reach, so the antipode could never be taught — and this line called that correct.
+  // ⛑ Erik, 2026-09-12: "It's both learnable and castable." Nothing forecloses; the assertion INVERTS.
+  check("203: ⛑ a legacy `foreclosed` entry no longer removes a people from the practiced set — nothing is closed",
+    // ⚠️ AND THE FIXTURE IS `teachers`, NOT AN ABILITY ID. Inverted with the old fixture this passed VACUOUSLY:
+    // `pale_touch` maps to no tradition, so the set was empty either way and `.has()` was false for the wrong reason.
+    // A gate that flips from "asserts the retired rule" to "asserts nothing" has not been fixed.
+    practicedTraditions({ teachers: { ashwarden: { met: true, willing: true } }, foreclosed: ["ashwarden"] }, CONTENT203).has("ashwarden"));
 
   // traditionArcBeat: the beat is chosen from teacher standing, mirroring the arc's own gate language.
   check("203: no teacher → the FINDING beat", traditionArcBeat(arc, practicer).beat === "finding");
@@ -16561,13 +16572,37 @@ await (async () => {
   const dead = tiles.filter(g => !g.prompt && !(g.subjectKind && g.subjectId));
   check(`CCODE-166: every one of Splarf's ${tiles.length} tiles has something to draw from`, tiles.length > 0 && dead.length === 0,
     () => dead.map(g => `${g.kind}: ${g.caption}`).join("; "));
-  const named = tiles.filter(g => g.kind === "npc" || g.kind === "portrait");
+  // ⛔ SNG-548: THIS COUNTED THE WRONG POPULATION AND MATCHED TOO NARROWLY, and Erik's play surfaced both at once when
+  // the tolerance of one ran out at 5/7. Neither failure was in the data:
+  //   • "someone tending the waystation fire" (x2) is a DESCRIPTION, not a name — it was in the set only because its
+  //     `kind` is "npc". A tile that names nobody cannot fail to resolve to someone, and counting it as a miss is a
+  //     correlation against the wrong population.
+  //   • "Cevaine of the Seventh Measure" IS Cevaine, who is in the registry and resolves from two other tiles. The
+  //     matcher was exact where the caption carries an epithet — the same compound-name head problem `resolveInventoryItem`
+  //     already solved for items.
+  // ⚠️ AND THE TOLERANCE OF ONE WAS HIDING IT: a "≥ named - 1" bar passes while one real miss sits underneath, and
+  // only reports when a second arrives. The claim is that a caption naming a KNOWN PERSON resolves; assert that.
+  // ⛔ THE \b IN THIS FILTER WAS EATEN INTO A LITERAL 0x08 BACKSPACE BYTE by the heredoc that wrote it — invisible
+  // to grep and to a plain read, so the filter silently matched nothing and the gate kept failing for a reason that
+  // was not there. ⚡ CCODE-191 CAUGHT IT — this repo has a gate for exactly this trap and it named the file, the
+  // line and the codepoint. ⚠️ Rewritten with no escape any interpolation layer can swallow: word boundaries are
+  // spelled as an explicit space-or-edge, which cannot be collapsed into a control character by anything.
+  const looksLikeAName = (n) => !!n && n.length < 60 && !/^(?:someone|somebody|a|an|the)(?: |$)/i.test(n) && !/(?: |^)(?:tending|holding|standing|sitting|walking|carrying)(?: |$)/i.test(n);
+  const named = tiles.filter(g => (g.kind === "npc" || g.kind === "portrait")
+    && looksLikeAName(String(g.caption || "").split("—")[0].trim()));
+  const knows = (n) => nm166(splarf.name, n) || Object.values(splarf.npcRegistry || {}).some(x => x?.name && nm166(x.name, n));
   const resolved = named.filter(g => {
     const n = String(g.caption || "").split("—")[0].trim();
-    return nm166(splarf.name, n) || Object.values(splarf.npcRegistry || {}).some(x => x?.name && nm166(x.name, n));
+    return knows(n) || knows(headOf(n));      // ⛑ the head of a compound caption is the name
   });
-  check("CCODE-166: the people-tiles that name a known person now resolve to them", named.length > 0 && resolved.length >= named.length - 1,
-    () => `${resolved.length}/${named.length} resolved`);
+  check("CCODE-166: every tile whose caption NAMES a known person resolves to them — no tolerance",
+    named.length > 0 && resolved.length === named.length,
+    () => `${resolved.length}/${named.length} — unresolved: ${named.filter(g => !resolved.includes(g)).map(g => g.caption).join("; ")}`);
+  // ⚠️ and the ones that name nobody are counted, not silently dropped — a descriptive caption is a real thing the
+  // gallery does, and a filter that hides them would be the same mistake in the other direction.
+  const descriptive = tiles.filter(g => (g.kind === "npc" || g.kind === "portrait") && !named.includes(g));
+  check(`CCODE-166: …and ${descriptive.length} tile(s) describe a person rather than naming one, which is allowed`,
+    descriptive.every(g => g.prompt || (g.subjectKind && g.subjectId)));
 }
 
 // ---- CCODE-164/165: Keep is a VOTE on the likeness, and the codex leads with its subject's face ----

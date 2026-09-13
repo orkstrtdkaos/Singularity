@@ -1280,13 +1280,10 @@
     "lastTurn": {
       "narration": "",
       "choices": [],
-      "bandOps": [
-        {
-          "op": "form",
-          "name": "The Fire-Test Hand",
-          "why": "fire test"
-        }
-      ],
+      "adoptSchool": {
+        "schoolId": "fire-test-school",
+        "why": "fire test"
+      },
       "sceneSummary": null
     },
     "sceneState": {
@@ -8580,7 +8577,7 @@
     "stalwart"
   ],
   "actionCount": 256,
-  "updatedAt": 1789319321115,
+  "updatedAt": 1789319321124,
   "rev": 266,
   "generated": {
     "schemaVersion": 1,
@@ -9370,7 +9367,7 @@
     {
       "id": "sess-9",
       "startedAt": "2026-09-13T14:25:04.889Z",
-      "lastAt": "2026-09-13T17:08:41.114Z",
+      "lastAt": "2026-09-13T17:08:41.123Z",
       "startDay": 75,
       "endDay": 75,
       "beats": 4

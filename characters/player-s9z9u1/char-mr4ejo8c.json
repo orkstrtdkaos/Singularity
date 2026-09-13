@@ -1280,10 +1280,13 @@
     "lastTurn": {
       "narration": "",
       "choices": [],
-      "adoptSchool": {
-        "schoolId": "fire-test-school",
-        "why": "fire test"
-      },
+      "newAbility": [
+        {
+          "abilityId": "fire_test_craft",
+          "name": "A fire-test craft",
+          "why": "fire test"
+        }
+      ],
       "sceneSummary": null
     },
     "sceneState": {
@@ -2594,7 +2597,7 @@
     "lastSharedReadAt": "2026-08-13T14:23:21.254Z",
     "lastTickWorldDay": 75,
     "lastCanonWorldDay": 75,
-    "lastGenCount": 1817,
+    "lastGenCount": 1820,
     "turnsSinceOffer": 5,
     "wantProgress": {
       "elder-senna": {
@@ -2693,7 +2696,7 @@
         "kind": "shortage",
         "premise": "The valley's main irrigation channel is slowly silting closed, and by next dry season the lower fields will fail entirely.",
         "cause": "The valley's soil is unusually fine-grained and the spring floods this year ran higher and longer than usual, depositing sediment no one has yet thought to…",
-        "stage": 34,
+        "stage": 35,
         "seededAtCount": 618,
         "surfaced": true,
         "fate": "growing",
@@ -2706,7 +2709,7 @@
         "kind": "shortage",
         "premise": "A miller in the valley's upper settlement has quietly begun skimming and hiding portions of the communal seed grain, telling no one.",
         "cause": "The miller watched the irrigation channel silt worsen this season and has decided, privately, that next year's planting will be a disaster — and he intends…",
-        "stage": 26,
+        "stage": 27,
         "seededAtCount": 950,
         "surfaced": true,
         "fate": "growing",
@@ -8577,8 +8580,8 @@
     "stalwart"
   ],
   "actionCount": 256,
-  "updatedAt": 1789319321124,
-  "rev": 266,
+  "updatedAt": 1789333105294,
+  "rev": 270,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8901,6 +8904,16 @@
   "form": "Cellaceron is a magically powerful human male - weilds the Waystaff a sonic/radiant staff artifact. He protects the attractive sonic warden apprentice Teva.",
   "portrait": "https://image.pollinations.ai/prompt/Cellaceron%20is%20a%20magically%20powerful%20human%20male%20-%20weilds%20the%20Waystaff%20a%20sonic%2Fradiant%20staff%20artifact.%20He%20protects%20the%20attractive%20sonic%20warden%20apprentice%20Teva.%2C%20full-body%20character%20portrait%2C%20named%20Cellaceron%2C%20of%20the%20valley%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20bark-paper%20sketch%20(lattice%20geometry)%2C%20dark%2C%20intense%2C%20dramatic%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=15431&nologo=true",
   "gallery": [
+    {
+      "kind": "location",
+      "prompt": "",
+      "url": "content/packs/valley/assets/disputed_zone_fringe.jpg",
+      "caption": "The Disputed Zone — Fringe",
+      "worldDay": 75,
+      "at": "2026-09-13T20:58:25.294Z",
+      "subjectKind": "location",
+      "subjectId": "disputed_zone_fringe"
+    },
     {
       "kind": "figure",
       "prompt": "pretty woman crystal resonance light rune marking on chest, standing full height elegant chatic energy background, teva anselvar, Teva Anselvar, adventurous, mild, no gore, a child, fully clothed, non",
@@ -9367,7 +9380,7 @@
     {
       "id": "sess-9",
       "startedAt": "2026-09-13T14:25:04.889Z",
-      "lastAt": "2026-09-13T17:08:41.123Z",
+      "lastAt": "2026-09-13T17:08:41.132Z",
       "startDay": 75,
       "endDay": 75,
       "beats": 4
@@ -9931,6 +9944,17 @@
           "url": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Maren%2C%20woman%2C%20Tuning-warden%2C%20Harmonic%20Heights%20Lower%20Terrace%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=58626&nologo=true",
           "prompt": "Strong willfull capable",
           "note": "Strong willfull capable",
+          "seedKey": null,
+          "at": 75
+        }
+      ]
+    },
+    "location:disputed_zone_fringe": {
+      "keeps": [
+        {
+          "url": "content/packs/valley/assets/disputed_zone_fringe.jpg",
+          "prompt": "",
+          "note": null,
           "seedKey": null,
           "at": 75
         }

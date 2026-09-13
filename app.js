@@ -81,7 +81,7 @@ import { routeBetween, routeLine } from "./engine/journey.js";
 import { sendCaravan, caravansOf } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./engine/entityDetail.js";
 import { collapseScenePresence, canonicalPersonId, personArtSeed, applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM, repairUnnamedPeople } from "./engine/npcs.js";   // SNG-431 §1: the pre-namer saves get their names
-import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent } from "./engine/places.js";
+import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent, lastEnteredSubPlace } from "./engine/places.js";
 import { activeArcEffects, craftCostNote, encounterBias, effectsInPlainWords, npcMoodLines, travelCostFactor } from "./engine/arceffects.js";   // SNG-273: an advanced arc is something you FEEL
 import { knownIndex, whoIs, figureArtRecord } from "./engine/whois.js";   // SNG-299: who is that, and where do I read more
 import { worldTabHtml } from "./engine/worldtab.js";   // SNG-276: the tab's markup, testable
@@ -141,7 +141,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "1.9.485";
+const APP_VERSION = "1.9.486";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -567,6 +567,12 @@ let pendingArcCostNote = null;   // SNG-273: why this craft just cost what it di
 // anything anyone reads. The chronicle keeps each scene's summary independently on scene end.
 const SCENE_TURN_CAP = 40;
 let sceneState = null;   // authoritative scene anchor: setting, npcsPresent, objects, threads
+// ⛔ SNG-555 — WHICH ROOM, NOT JUST WHICH PLACE. `currentLocationId` names the PARENT on purpose: the moveTo contract
+// says a named spot inside a location (a forge, a wayhouse, a workshop) is recorded as a sub-place and is NOT a
+// destination. That is right, and it left the record unable to say which of eleven known interiors the character was
+// standing in — so a reload rebuilt the scene from the parent and put Erik back outside Orla's workshop. ⚠️ THIS IS
+// THE LIVE ANSWER, cleared by every real move, and it rides `activeScene` so it survives a reload like the rest of it.
+let sceneSubPlace = null;   // { slug, name, day } — the named spot INSIDE currentLocationId, or null when in the open
 // §179 (Erik 2026-09-12): a companion whose person is in the registry is shown by the name the story knows them by — "Huginn (Marrow)"
 // is Maren Ossitide once she has said so. A player's rename still wins; the authored name is last.
 const compName = (c) => character.companionNames?.[c.id] || character.npcRegistry?.[c.id]?.name || c.name;
@@ -2619,7 +2625,7 @@ function devJumpTo(ref) {
   try { notePlaceVisit(character, id, day, CONTENT.locations[id]?.name); } catch { /* convenience */ }
   try { notePerception(character, id, CONTENT.locations[id], { visited: true, usedAbilityIds: [] }, CONTENT.rules); } catch { /* convenience */ }
   try { ensureLocationImage(id); } catch { /* art never blocks */ }
-  character.activeScene = null; sceneTurns = []; sceneState = null; // land fresh at the new place
+  character.activeScene = null; sceneTurns = []; sceneState = null; sceneSubPlace = null; // land fresh at the new place — SNG-555: a real move leaves every room behind
   markDevAction(`jumped to ${CONTENT.locations[id].name} (${id})`);
   saveCharacter(character);
   return { ok: true, id, msg: `Now at ${CONTENT.locations[id].name}` };
@@ -5839,6 +5845,9 @@ async function enterPlay() {
     sceneTurns = character.activeScene.turns;
     sceneBeats = character.activeScene.beats || sceneTurns.length;   // a reload must not restart the clock
     sceneState = character.activeScene.sceneState || null;
+    // ⛑ SNG-555: and the ROOM comes back with the scene. Without this line the reload rebuilt from the parent
+    // location alone, which is exactly how Erik came back outside a workshop he was standing inside of.
+    sceneSubPlace = character.activeScene.subPlace || null;
     renderPlay(character.activeScene.lastTurn, { resumed: true, newsFlash: news, aside: backfillAside });
   } else {
     startScene(undefined, news, backfillAside);
@@ -5917,7 +5926,7 @@ function masteryReadyForGM() {
  *  FN_INDEX is exposed as a getter — it is a mutable `let` rebuilt at load. */
 function gmEnv(extra = {}) {
   return {
-    character, location: hereNow(), CONTENT, sceneTurns, sceneState, sharedScene, profile,
+    character, location: hereNow(), CONTENT, sceneTurns, sceneState, sceneSubPlace, sharedScene, profile,
     arcMoods: npcMoodLines(arcEffectsNow()),   // SNG-273: an advanced arc changes how people carry themselves
     sceneBeats, rules: CONTENT.rules,          // SNG-266/1d: the pacing directive reads both — a builder
                                                // that reads an env key nobody puts here is the same dark wire.
@@ -6142,7 +6151,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
     // turn that state lagged the fiction — the same self-heal contract SNG-009 uses for lost ops.
     try {
       character.opLossPending = true;
-      character.activeScene = { locationId: character.currentLocationId, turns: sceneTurns, lastTurn: result.turn, sceneState, beats: sceneBeats };
+      character.activeScene = { locationId: character.currentLocationId, turns: sceneTurns, lastTurn: result.turn, sceneState, beats: sceneBeats, subPlace: sceneSubPlace };
       saveCharacter(character);
     } catch (err2) { console.error("[applyTurn] recovery save also failed:", err2); }
   }
@@ -6953,6 +6962,10 @@ function applyTurn(turn, resolution, playerWords = null) {
   // SNG-154: pass the resolver + catalog so a GM-named parent can be validated against real places
   // (containment on write, instead of inferring it from wherever we last thought we were standing).
   applyStep("placeUpdates", () => applyPlaceUpdates(character, location.id, turn.placeUpdates || [], { ...memCtx, resolveLocationId, locations: CONTENT.locations }));
+  // ⛑ SNG-555: a sub-place recorded as VISITED at the place we are standing is a move INTO it. `applyPlaceUpdates`
+  // is the only code that knows which of the many rooms here was just entered, so the scene takes its answer from
+  // there rather than re-deriving it — and it is read AFTER the step, so a refused or capped write cannot move us.
+  { const entered = lastEnteredSubPlace(character, location.id); if (entered && entered.slug !== sceneSubPlace?.slug) sceneSubPlace = entered; }
   applyStep("codexUpdates", () => applyCodexUpdates(character, turn.codexUpdates || [], memCtx));
   // ⛔ R49 — A MYSTERY THE CODEX REFUSED TO STORE BARE IS ASKED FOR AS A STORY, on this same turn. The
   // request rides the turn's own generateRequest list, which handleGenerateRequests reads after apply.
@@ -7717,7 +7730,7 @@ function applyTurn(turn, resolution, playerWords = null) {
     // path that ends one already nulls `activeScene`, and a counter needing six manual resets would
     // eventually miss one and leave a scene permanently "long".
     sceneBeats = (character.activeScene?.beats || 0) + 1;
-    if (turn.sceneEnded) { character.chronicle.push(turn.sceneSummary); sceneTurns = []; sceneState = null; character._intentAsked = null; } // SNG-145: a new scene may ask again
+    if (turn.sceneEnded) { character.chronicle.push(turn.sceneSummary); sceneTurns = []; sceneState = null; sceneSubPlace = null; character._intentAsked = null; } // SNG-145: a new scene may ask again
   }
   // THE HARD CLOSE (SNG-266/1d). The soft rung ASKS the GM to close; this rung does not ask. A scene that
   // runs forever is not a long scene — it is a scene with no chronicle entry, no per-scene XP boundary, and
@@ -7728,10 +7741,10 @@ function applyTurn(turn, resolution, playerWords = null) {
   if (!turn.sceneEnded && sceneBeats >= hardClose && !activeEnc() && turn.sceneSummary) {
     turn.sceneEnded = true;
     character.chronicle.push(turn.sceneSummary);
-    sceneTurns = []; sceneState = null; character._intentAsked = null;
+    sceneTurns = []; sceneState = null; sceneSubPlace = null; character._intentAsked = null;
     turn._engineClosedScene = sceneBeats;
   }
-  character.activeScene = turn.sceneEnded ? null : { locationId: character.currentLocationId, turns: sceneTurns, lastTurn: turn, sceneState, beats: sceneBeats };
+  character.activeScene = turn.sceneEnded ? null : { locationId: character.currentLocationId, turns: sceneTurns, lastTurn: turn, sceneState, beats: sceneBeats, subPlace: sceneSubPlace };
   saveCharacter(character); saveProfile(profile);
 
   // shared-world consequences (best-effort, never blocks play)
@@ -8820,7 +8833,7 @@ async function endSceneNow() {
   const summary = result?.turn?.sceneSummary || sceneTurns[sceneTurns.length - 1]?.summary || `A scene at ${hereNow()?.name || "this place"}, ${beats} beats long.`;
   character.chronicle = character.chronicle || [];
   character.chronicle.push(summary);
-  sceneTurns = []; sceneState = null; character._intentAsked = null;
+  sceneTurns = []; sceneState = null; sceneSubPlace = null; character._intentAsked = null;
   character.activeScene = null;
   saveCharacter(character);
   renderPlay(result?.turn || null, { aside: `Scene closed — ${beats} beats written into your chronicle.` });
@@ -15403,7 +15416,7 @@ function renderPlay(turn, opts = {}) {
   const encKindNow = (() => { const e = activeEnc(); return e ? encounterKind(e.def) : null; })();
   let main = `<div class="play${activeEnc()?.state?.mode === "skill_battle" ? " play-in-fight" : ""}${encKindNow ? ` enc-kind-${encKindNow}` : ""}">
     ${banner ? `<img class="scene-banner" data-lightbox="scene" src="${esc(banner)}" alt="${esc(location.name)}" onerror="this.style.display='none'">` : ""}
-    <div class="location-tag" ${sceneState?.setting ? `title="${esc(sceneState.setting)}"` : ""}>${esc(location.name)}${rep ? ` <span class="rep-band loc-standing ${rep.band}" title="Your standing with ${esc(CONTENT.locations[character.currentLocationId]?.name || "the people here")} — ${rep.band} (${rep.score})">· ${esc(rep.band)}</span>` : ""}${(() => {
+    <div class="location-tag" ${sceneState?.setting ? `title="${esc(sceneState.setting)}"` : ""}>${esc(location.name)}${sceneSubPlace?.name ? `<span class="loc-subplace" title="A named spot inside ${esc(location.name)}. You are in it; the header keeps the parent because a sub-place is not a destination.">&nbsp;&rsaquo;&nbsp;${esc(sceneSubPlace.name)}</span>` : ""}${rep ? ` <span class="rep-band loc-standing ${rep.band}" title="Your standing with ${esc(CONTENT.locations[character.currentLocationId]?.name || "the people here")} — ${rep.band} (${rep.score})">· ${esc(rep.band)}</span>` : ""}${(() => {
       // ⛔ SNG-381 — THE GROUND YOU ARE STANDING ON. Erik: "the current ground's power sources should
       // be viewable in the location banner. Remember there are bastions of power with auras."
       //

@@ -1586,3 +1586,7 @@ img[data-lightbox] { cursor: zoom-in; }
 .hold-tile-name { font-size: 12px; line-height: 1.2; }
 .hold-tile-sub { font-size: 10px; }
 .cs-lately { margin-top: 10px; border-top: 1px solid var(--border); padding-top: 6px; }
+
+/* SNG-555: the named spot INSIDE the location. The header still shows the parent — a sub-place is deliberately not a
+   destination — so the room reads as a continuation of it, quieter than the place name, never as a second place. */
+.loc-subplace { color: var(--ink-dim); font-weight: 400; }

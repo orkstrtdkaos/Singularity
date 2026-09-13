@@ -338,7 +338,9 @@ export const GM_CONTEXT = [
     build: (env) => companionsForGM(activeCompanions(env.character, env.CONTENT.companions), env.character, env.CONTENT.rules) },
   { key: "placeMemoryDetail", builder: "places.placeMemoryForGM", carries: ["what happened here before"],
     reachedBy: "always", spec: "§9", views: ["turn", "ask"],
-    build: (env) => placeMemoryForGM(env.character, env.character.currentLocationId) },
+    // SNG-555: the ROOM rides in with the place's history. `currentLocationId` names the parent by design, so
+    // without this the prompt listed every interior known here and named none of them as the one they are IN.
+    build: (env) => placeMemoryForGM(env.character, env.character.currentLocationId, { standingIn: env.sceneSubPlace || null }) },
   { key: "newsDetail", builder: "worldtick.newsForGM", carries: ["world-tick news"],
     reachedBy: "always", spec: "§19", views: ["turn", "ask"],
     build: (env) => newsForGM(env.character) },

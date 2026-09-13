@@ -98,11 +98,24 @@ export function applyPlaceUpdates(character, locationId, updates = [], ctx = {})
           name: prev.name || name,
           parentId: hostId,                       // EXPLICIT containment — never re-inferred
           day: prev.day ?? ctx.day ?? null,
+          // SNG-555: FIRST SEEN and LAST SEEN are different facts and there was only one field. `day` is the day this room
+          // was first recorded and never moved again, so a room entered on day 7 and lived in through day 12 still reads
+          // "day 7" -- which makes it impossible to ask "was I in here recently?", the exact question a resumed scene needs.
+          lastSeen: ctx.day ?? prev.lastSeen ?? prev.day ?? null,
           visited: prev.visited || u.subPlace.visited !== false,
           note: u.subPlace.note ? smartClamp(String(u.subPlace.note), 200) : prev.note || "", // SNG-152
           ...(named && !namedId ? { parentUnresolved: smartClamp(named, 60) } : {}) // named a place we don't know — keep the claim
         };
         if (mismatched) notes.push(`"${name}" was placed in ${namedId} (the fiction named it), not ${locationId}`);
+        // ⛔ SNG-555 — RECORDING THAT A ROOM EXISTS IS NOT RECORDING THAT YOU ARE IN IT.
+        // Erik walked Usnea into Orla's workshop, reloaded, and the game put him back outside. Both interiors were already
+        // on the record — `Amber Lath Wayhouse — Upstairs East Room` and `Edge District Lane — Orla's patch`, visited and
+        // correctly parented — and the record still could not say which one he was STANDING IN. `currentLocationId` names
+        // the PARENT, deliberately: the moveTo contract says a sub-place is not a destination. So the only trace of the
+        // interior was free text in `sceneState.setting`, which the model rewrites every beat. ⚠️ THE PLACE SURVIVED THE
+        // RELOAD AND THE POSITION DID NOT — eleven rooms known at that location, and no answer to "which one".
+        // ⛑ A VISIT IS A MOVE INTO, and the write that marks a room visited is the only moment that knows it.
+        if (host.subPlaces[slug].visited) host.lastEntered = { slug, name: host.subPlaces[slug].name, day: ctx.day ?? null };
       }
     }
     if (u.flag && typeof u.flag === "object") {
@@ -119,10 +132,23 @@ export function applyPlaceUpdates(character, locationId, updates = [], ctx = {})
 
 /** History block for the GM on arrival/each turn: what THIS character knows
  *  changed here. The GM must honor these as established fact. */
-export function placeMemoryForGM(character, locationId) {
+/** SNG-555: the sub-place this character was last recorded entering HERE, or null. ⚠️ This is place MEMORY, so after
+ *  leaving and returning it means "where you were last time" — the live answer lives on the scene, which is cleared on
+ *  every real move. Both matter and they are not the same fact; `standingIn` below is the one that is true right now. */
+export function lastEnteredSubPlace(character, locationId) {
+  const le = character?.placeMemory?.[locationId]?.lastEntered;
+  return le && le.slug ? le : null;
+}
+
+export function placeMemoryForGM(character, locationId, { standingIn = null } = {}) {
   const p = character.placeMemory?.[locationId];
   if (!p || (!p.notes.length && !Object.keys(p.flags).length && !Object.keys(p.subPlaces || {}).length && p.visits <= 1)) return null;
   const parts = [`Visits: ${p.visits}${p.lastVisit != null ? ` (last: day ${p.lastVisit})` : ""}`];
+  // ⛔ SNG-555 — SAY WHERE THEY ARE STANDING, FIRST. The block below lists every room known here; before this line it
+  // listed them all equally and the prompt had no way to say which one the character is IN. A model reading eleven
+  // interiors with no position picks one — usually the one it wrote about most — which is how a reload put Usnea back
+  // outside a workshop she was inside of. ⚠️ It is stated as a fact to honour, not a hint, because it IS the record.
+  if (standingIn?.name) parts.unshift(`STANDING IN: ${standingIn.name} — a named spot INSIDE this location. The character is INSIDE it right now; open the beat there and do not put them back outside it unless the fiction walks them out.`);
   if (p.notes.length) parts.push(`Durable changes & discoveries:\n${p.notes.map(n => `  - ${n}`).join("\n")}`);
   const flags = Object.entries(p.flags);
   if (flags.length) parts.push(`Standing facts: ${flags.map(([k, v]) => `${k}=${v}`).join(", ")}`);

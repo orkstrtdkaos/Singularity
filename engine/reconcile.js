@@ -362,6 +362,42 @@ export const CHARACTER_STEPS = [
     }
   },
   {
+    version: 58, id: "which-room-were-you-in", playerFacing: true,
+    // ⛔ SNG-555 (Erik 2026-09-13: "the narration put me back in time a bit... I was in Orla's workshop before. All i've
+    // done is reload.") — THE PLACE WAS ON THE RECORD AND THE POSITION WAS NOT.
+    //
+    // `currentLocationId` names the PARENT on purpose: the moveTo contract says a named spot inside a location — a forge,
+    // a wayhouse, a workshop — is recorded with `subPlace` and is NOT a destination. Right rule, and it left nothing able
+    // to say WHICH of eleven known interiors the character was standing in. The only trace was free text in
+    // `sceneState.setting`, which the model rewrites every beat, so a reload rebuilt the scene from the parent and put
+    // him back outside a workshop he was inside of. ⛑ The engine records it going forward; this pays the saves already open.
+    //
+    // ⚠️ IT INFERS ONLY FROM AN UNAMBIGUOUS MATCH. The scene's own setting text is the evidence — if exactly ONE sub-place
+    // known at this location is named in it, that is where they are. Two matches or none changes nothing, and the scene
+    // opens at the parent exactly as it does today. ⛔ A GUESS HERE WOULD MOVE A CHARACTER, which is the thing this whole
+    // ticket exists to stop something doing.
+    apply: (c) => {
+      const sc = c?.activeScene;
+      if (!sc || sc.subPlace) return {};                              // already answered, or no scene to answer for
+      const locId = sc.locationId || c.currentLocationId;
+      const subs = Object.entries(c?.placeMemory?.[locId]?.subPlaces || {});
+      const setting = String(sc.sceneState?.setting || "");
+      if (!locId || !subs.length || !setting.trim()) return {};
+      // the head of a sub-place name is its identity — "Amber Lath Wayhouse - Upstairs East Room" is the Amber Lath Wayhouse
+      const head = (n) => String(n || "").split(/\s+[—–-]\s+/)[0].replace(/^the\s+/i, "").trim();
+      const hit = subs.filter(([, sp]) => sp?.visited && head(sp.name).length >= 4
+        && setting.toLowerCase().includes(head(sp.name).toLowerCase()));
+      if (hit.length !== 1) return {};                                // ambiguous or absent: leave it in the open
+      const [slug, sp] = hit[0];
+      sc.subPlace = { slug, name: sp.name, day: sp.day ?? null };
+      const pm = c.placeMemory[locId];
+      if (pm && !pm.lastEntered) pm.lastEntered = { slug, name: sp.name, day: sp.day ?? null };
+      // the claim is exactly as strong as the evidence: the scene's OWN description names this room, and nothing else on
+      // the save can say where they stand. Say so, rather than asserting a position the record never actually held.
+      return { notes: [`Put back inside ${sp.name} — your scene still describes it, and the room you were standing in was known to the record but never held on it. If the story had moved you on, say where you are and it will follow.`] };
+    }
+  },
+  {
     version: 57, id: "a-word-that-held", playerFacing: true,
     // ✅ SNG-547 (Aevi) — THE NAME NEVER WROTE BACK, and it is the saddest defect in her report. `deeds[6]` on this save:
     //   "Named the repaired death-bound spear Memory in Pell's forge at dawn — a word that held."

@@ -12983,6 +12983,98 @@ console.log("\n── §199 · above a megabyte the read stops giving a sha, and
   } finally { restore199(); }
 }
 
+// ⛔ SNG-555 — THE PLACE WAS ON THE RECORD AND THE POSITION WAS NOT.
+// Erik, 2026-09-13: "the narration put me back in time a bit... I was in Orla's workshop before. All i've done is reload."
+// ⚑ MEASURED FIRST, AND IT KILLED THE OBVIOUS STORY: the interiors were already recorded. Usnea carries
+// `Amber Lath Wayhouse — Upstairs East Room` and `Edge District Lane — Orla's patch` at radiant_plateau_edge, visited and
+// correctly parented — eleven rooms there in all — and Silas carries `Pell's Forge — Interior` under millbrook, which is
+// Erik's own reference shape. ⚠️ SO THE SUB-PLACE MACHINERY WORKS. What nothing could say was WHICH ONE HE WAS IN.
+// `currentLocationId` names the PARENT by design (the moveTo contract: a sub-place is not a destination), so the only
+// trace of the interior was free text in `sceneState.setting` — which the model rewrites every beat. A reload rebuilt the
+// scene from the parent, and put him outside a workshop he was standing inside of.
+console.log("\n── §200 · which room, not just which place: a named interior survives a reload ──");
+{
+  const PL200 = await import("../engine/places.js");
+  const c200 = { placeMemory: {}, codex: { topics: {} } };
+  const ctx200 = { day: 12 };
+  const ROOM200 = "Amber Lath Wayhouse — Upstairs East Room";
+
+  /* ---- 1 · the write that marks a room visited is the one that knows you entered it ---- */
+  PL200.applyPlaceUpdates(c200, "radiant_plateau_edge", [{ subPlace: { name: ROOM200, parent: "radiant_plateau_edge", visited: true } }], ctx200);
+  const entered = PL200.lastEnteredSubPlace(c200, "radiant_plateau_edge");
+  check("§200: recording a sub-place as VISITED records that you are IN it, not merely that it exists",
+    entered?.name === ROOM200 && !!entered.slug, JSON.stringify(entered));
+
+  /* ---- 2 · a room only HEARD OF is not a room you are standing in ---- */
+  PL200.applyPlaceUpdates(c200, "radiant_plateau_edge", [{ subPlace: { name: "Eastern Rim Descent", parent: "radiant_plateau_edge", visited: false } }], ctx200);
+  check("§200: ⛔ a sub-place only HEARD OF never moves you into it",
+    PL200.lastEnteredSubPlace(c200, "radiant_plateau_edge")?.name === ROOM200);
+
+  /* ---- 3 · FIRST SEEN and LAST SEEN are different facts, and there was only one field ---- */
+  // ⚠️ MEASURED ON THE LIVE SAVE: every sub-place at Usnea's location reads day 6-8 while her clock says day 12, because
+  // `day` is stamped once and never moves. So "was I in here recently?" — the question a resumed scene asks — was unaskable.
+  PL200.applyPlaceUpdates(c200, "radiant_plateau_edge", [{ subPlace: { name: ROOM200, parent: "radiant_plateau_edge", visited: true } }], { day: 19 });
+  const sp200 = c200.placeMemory.radiant_plateau_edge.subPlaces[PL200.subPlaceSlug(ROOM200)];
+  check("§200: a re-entered room keeps its FIRST-seen day and moves its LAST-seen day",
+    sp200.day === 12 && sp200.lastSeen === 19, `day ${sp200.day} · lastSeen ${sp200.lastSeen}`);
+
+  /* ---- 4 · ⛑ THE DOOR THAT MATTERS: the GM is TOLD, in the prompt, which room they are in ---- */
+  // ⛔ A record nothing reads is the four-doors failure this project keeps finding. The prompt already listed every
+  // interior known here and named none of them as the one the character occupies.
+  const withStanding = PL200.placeMemoryForGM(c200, "radiant_plateau_edge", { standingIn: entered });
+  const without = PL200.placeMemoryForGM(c200, "radiant_plateau_edge");
+  check("§200: ⛑ the GM prompt STATES the room they are standing in, ahead of the list of rooms that exist",
+    /STANDING IN: Amber Lath Wayhouse/.test(withStanding) && /INSIDE it right now/.test(withStanding));
+  check("§200: …and says nothing when they are in the open — no invented position",
+    !/STANDING IN/.test(without || ""));
+  check("§200: the room is stated BEFORE the list of rooms known here, so it is not read as one more of them",
+    withStanding.indexOf("STANDING IN") < withStanding.indexOf("Known places within"));
+
+  /* ---- 5 · it is carried on the scene, restored with it, and cleared by a real move ---- */
+  const A200 = rd("app.js");
+  check("§200: the scene carries the room, at BOTH places a scene is written",
+    (A200.match(/beats: sceneBeats, subPlace: sceneSubPlace \}/g) || []).length === 2,
+    `${(A200.match(/beats: sceneBeats, subPlace: sceneSubPlace \}/g) || []).length} write site(s)`);
+  check("§200: ⛑ and a reload restores it — the line whose absence is the whole defect",
+    /sceneSubPlace = character\.activeScene\.subPlace \|\| null;/.test(A200));
+  check("§200: ⛔ a real move to another LOCATION leaves the room behind (a sub-place belongs to its parent)",
+    /character\.activeScene = null; sceneTurns = \[\]; sceneState = null; sceneSubPlace = null;/.test(A200));
+  check("§200: the player is shown the room beside the place, with the place still the header",
+    /loc-subplace/.test(A200) && /\.loc-subplace \{/.test(rd("style.css")));
+  check("§200: and the prompt row passes it — a record the GM cannot see is not a record",
+    /standingIn: env\.sceneSubPlace \|\| null/.test(rd("engine/gm_registry.js")));
+
+  /* ---- 6 · and the saves already open are paid, through the RUNNER and its version gate ---- */
+  // ⚠️ A RECONCILE STEP PROVEN BY CALLING `apply` IS NOT PROVEN. The gate that decides whether it runs in production is
+  // `reconcileVersion`, and that is the one that has lied here before — so this drives `reconcile()` itself.
+  const RC200 = await import("../engine/reconcile.js");
+  const resumed = {
+    id: "char-fixture", reconcileVersion: 57,
+    currentLocationId: "radiant_plateau_edge",
+    placeMemory: { radiant_plateau_edge: { visits: 3, notes: [], flags: {}, subPlaces: {
+      [PL200.subPlaceSlug(ROOM200)]: { name: ROOM200, parentId: "radiant_plateau_edge", day: 7, visited: true },
+      "eastern-rim-descent": { name: "Eastern Rim Descent", parentId: "radiant_plateau_edge", day: 6, visited: false },
+    } } },
+    activeScene: { locationId: "radiant_plateau_edge", turns: [{}], sceneState: { setting: "The Amber Lath Wayhouse, common room and threshold—a small, deliberate wayhouse." } },
+  };
+  const r200 = RC200.reconcile(resumed, "character", {});
+  check("§200: ⛑ a scene already open is put back in its room — inferred from the scene's own description",
+    r200.applied.includes("which-room-were-you-in") && resumed.activeScene.subPlace?.name === ROOM200,
+    JSON.stringify(resumed.activeScene.subPlace));
+  // ⛔ AND IT NEVER GUESSES. Two rooms named in the setting, or none, must leave the character exactly where they were —
+  // a step that moves someone on weak evidence is the defect this whole section exists to stop.
+  const ambiguous = JSON.parse(JSON.stringify({ ...resumed, reconcileVersion: 57, activeScene: { ...resumed.activeScene, subPlace: undefined } }));
+  ambiguous.activeScene.sceneState.setting = "Somewhere on the plateau, with no room named at all.";
+  RC200.reconcile(ambiguous, "character", {});
+  check("§200: ⛔ and it REFUSES to guess — a setting naming no known room leaves them in the open",
+    !ambiguous.activeScene.subPlace, JSON.stringify(ambiguous.activeScene.subPlace ?? null));
+  // running twice must change nothing: the version gate is the idempotence, and it is the part that is easy to get wrong
+  const before200 = JSON.stringify(resumed.activeScene.subPlace);
+  const again = RC200.reconcile(resumed, "character", {});
+  check("§200: …and it is idempotent — a second load neither re-applies it nor re-announces it",
+    !again.applied.includes("which-room-were-you-in") && before200 === JSON.stringify(resumed.activeScene.subPlace));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

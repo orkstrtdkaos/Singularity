@@ -91,12 +91,12 @@
      ]
     },
     {
-     "type": "world_arc",
+     "type": "arc_stage",
      "note": "a finished one recalled toward the human pole — a small pull back from the drift toward the mechanical extreme",
      "arcId": "the_poles_pull",
      "push": -1,
      "weight": 2,
-     "_fixed_20260912": "⛔ SNG-552: was `arc` + note with no magnitude, so the reader applied nothing. arcId + push + weight added; direction reasoned from the outcome's own text and flagged for Erik."
+     "_migrated_20260913": "⛔ SNG-552 CORRECTED (Aevi 2026-09-13, on CCode's finding). Originally `world_arc` + `arc` + note. I measured it against `case \"arc_stage\"` — THE WRONG HANDLER — concluded 11 of 11 were inert, and renamed `arc`→`arcId`. ⚠️ `case \"world_arc\"` reads `e.arc`, so they WERE firing, as a flat unsigned +1 regardless of what their prose said; my rename then made them fire not at all. **I shipped a regression on a bad measurement.** ⛑ Now migrated to `arc_stage`, which already has the exact shape and signs by `to − from` or `push`, with `weight` 1–3 and `note` left free as prose."
     },
     {
      "type": "standing",
@@ -206,12 +206,12 @@
      ]
     },
     {
-     "type": "world_arc",
+     "type": "arc_stage",
      "note": "a braided-pole body is a NEW thing where none was — strong nudge to The Second Manifestation: a domain manifesting in a living person",
      "arcId": "the_second_manifestation",
      "push": 2,
      "weight": 3,
-     "_fixed_20260912": "⛔ SNG-552: was `arc` + note with no magnitude, so the reader applied nothing. arcId + push + weight added; direction reasoned from the outcome's own text and flagged for Erik."
+     "_migrated_20260913": "⛔ SNG-552 CORRECTED (Aevi 2026-09-13, on CCode's finding). Originally `world_arc` + `arc` + note. I measured it against `case \"arc_stage\"` — THE WRONG HANDLER — concluded 11 of 11 were inert, and renamed `arc`→`arcId`. ⚠️ `case \"world_arc\"` reads `e.arc`, so they WERE firing, as a flat unsigned +1 regardless of what their prose said; my rename then made them fire not at all. **I shipped a regression on a bad measurement.** ⛑ Now migrated to `arc_stage`, which already has the exact shape and signs by `to − from` or `push`, with `weight` 1–3 and `note` left free as prose."
     },
     {
      "type": "standing",

@@ -514,12 +514,12 @@
        ]
       },
       {
-       "type": "world_arc",
+       "type": "arc_stage",
        "arcId": "arc_what_wakes_beneath",
        "push": -2,
        "weight": 2,
        "note": "the first tremor is pushed back down — the arc recedes, and the question is deferred rather than answered",
-       "_fixed_20260912": "⛔ SNG-552: was `arc: …` with a note and NO magnitude. The reader requires `arcId` AND (`push`|`to`), so this applied NOTHING — 11 of 11 world_arc effects in the corpus were dead. ⚠️ push: advance +, retreat −, HOLD 0; weight 1–3 scales it. A hold records the contribution and broadcasts no event, which is correct for a deferral."
+       "_migrated_20260913": "⛔ SNG-552 CORRECTED (Aevi 2026-09-13, on CCode's finding). Originally `world_arc` + `arc` + note. I measured it against `case \"arc_stage\"` — THE WRONG HANDLER — concluded 11 of 11 were inert, and renamed `arc`→`arcId`. ⚠️ `case \"world_arc\"` reads `e.arc`, so they WERE firing, as a flat unsigned +1 regardless of what their prose said; my rename then made them fire not at all. **I shipped a regression on a bad measurement.** ⛑ Now migrated to `arc_stage`, which already has the exact shape and signs by `to − from` or `push`, with `weight` 1–3 and `note` left free as prose."
       },
       {
        "type": "standing",
@@ -567,12 +567,12 @@
        ]
       },
       {
-       "type": "world_arc",
+       "type": "arc_stage",
        "arcId": "arc_what_wakes_beneath",
        "push": -3,
        "weight": 3,
        "note": "a stirring is ended outright — the arc loses a thread, and the Valley is left wondering what was lost",
-       "_fixed_20260912": "⛔ SNG-552: was `arc: …` with a note and NO magnitude. The reader requires `arcId` AND (`push`|`to`), so this applied NOTHING — 11 of 11 world_arc effects in the corpus were dead. ⚠️ push: advance +, retreat −, HOLD 0; weight 1–3 scales it. A hold records the contribution and broadcasts no event, which is correct for a deferral."
+       "_migrated_20260913": "⛔ SNG-552 CORRECTED (Aevi 2026-09-13, on CCode's finding). Originally `world_arc` + `arc` + note. I measured it against `case \"arc_stage\"` — THE WRONG HANDLER — concluded 11 of 11 were inert, and renamed `arc`→`arcId`. ⚠️ `case \"world_arc\"` reads `e.arc`, so they WERE firing, as a flat unsigned +1 regardless of what their prose said; my rename then made them fire not at all. **I shipped a regression on a bad measurement.** ⛑ Now migrated to `arc_stage`, which already has the exact shape and signs by `to − from` or `push`, with `weight` 1–3 and `note` left free as prose."
       },
       {
        "type": "standing",
@@ -620,12 +620,12 @@
        ]
       },
       {
-       "type": "world_arc",
+       "type": "arc_stage",
        "arcId": "arc_what_wakes_beneath",
        "push": 0,
        "weight": 1,
        "note": "the tremor is quieted without being resolved — the presence sleeps, the harm is undone, and the question defers intact",
-       "_fixed_20260912": "⛔ SNG-552: was `arc: …` with a note and NO magnitude. The reader requires `arcId` AND (`push`|`to`), so this applied NOTHING — 11 of 11 world_arc effects in the corpus were dead. ⚠️ push: advance +, retreat −, HOLD 0; weight 1–3 scales it. A hold records the contribution and broadcasts no event, which is correct for a deferral."
+       "_migrated_20260913": "⛔ SNG-552 CORRECTED (Aevi 2026-09-13, on CCode's finding). Originally `world_arc` + `arc` + note. I measured it against `case \"arc_stage\"` — THE WRONG HANDLER — concluded 11 of 11 were inert, and renamed `arc`→`arcId`. ⚠️ `case \"world_arc\"` reads `e.arc`, so they WERE firing, as a flat unsigned +1 regardless of what their prose said; my rename then made them fire not at all. **I shipped a regression on a bad measurement.** ⛑ Now migrated to `arc_stage`, which already has the exact shape and signs by `to − from` or `push`, with `weight` 1–3 and `note` left free as prose."
       },
       {
        "type": "standing",
@@ -679,12 +679,12 @@
        "note": "a precursor presence now walking the world, bonded to Silas as the one who woke it — a new power loose in the Valley, its intentions its own"
       },
       {
-       "type": "world_arc",
+       "type": "arc_stage",
        "arcId": "arc_what_wakes_beneath",
        "push": 3,
        "weight": 3,
        "note": "the arc is ANSWERED by waking — a precursor walks, and every other stirring is accelerated by it",
-       "_fixed_20260912": "⛔ SNG-552: was `arc: …` with a note and NO magnitude. The reader requires `arcId` AND (`push`|`to`), so this applied NOTHING — 11 of 11 world_arc effects in the corpus were dead. ⚠️ push: advance +, retreat −, HOLD 0; weight 1–3 scales it. A hold records the contribution and broadcasts no event, which is correct for a deferral."
+       "_migrated_20260913": "⛔ SNG-552 CORRECTED (Aevi 2026-09-13, on CCode's finding). Originally `world_arc` + `arc` + note. I measured it against `case \"arc_stage\"` — THE WRONG HANDLER — concluded 11 of 11 were inert, and renamed `arc`→`arcId`. ⚠️ `case \"world_arc\"` reads `e.arc`, so they WERE firing, as a flat unsigned +1 regardless of what their prose said; my rename then made them fire not at all. **I shipped a regression on a bad measurement.** ⛑ Now migrated to `arc_stage`, which already has the exact shape and signs by `to − from` or `push`, with `weight` 1–3 and `note` left free as prose."
       },
       {
        "type": "standing",
@@ -1967,12 +1967,12 @@
        "note": "held, not ended; standing world-threat"
       },
       {
-       "type": "world_arc",
+       "type": "arc_stage",
        "note": "becomes a standing epic-scale threat (ties the epic-arc system)",
        "arcId": "the_unmoored_choir",
        "push": -2,
        "weight": 2,
-       "_fixed_20260912": "⛔ SNG-552: was `arc` + note with no magnitude, so the reader applied nothing. arcId + push + weight added; direction reasoned from the outcome's own text and flagged for Erik."
+       "_migrated_20260913": "⛔ SNG-552 CORRECTED (Aevi 2026-09-13, on CCode's finding). Originally `world_arc` + `arc` + note. I measured it against `case \"arc_stage\"` — THE WRONG HANDLER — concluded 11 of 11 were inert, and renamed `arc`→`arcId`. ⚠️ `case \"world_arc\"` reads `e.arc`, so they WERE firing, as a flat unsigned +1 regardless of what their prose said; my rename then made them fire not at all. **I shipped a regression on a bad measurement.** ⛑ Now migrated to `arc_stage`, which already has the exact shape and signs by `to − from` or `push`, with `weight` 1–3 and `note` left free as prose."
       }
      ],
      "imagePrompt": "Contained, Not Ended: Held, but not destroyed."
@@ -2216,12 +2216,12 @@
        "delta": 2
       },
       {
-       "type": "world_arc",
+       "type": "arc_stage",
        "note": "a saga completed; the valley remembers who stood",
        "arcId": "the_ashen_wyrm",
        "push": -2,
        "weight": 2,
-       "_fixed_20260912": "⛔ SNG-552: was `arc` + note with no magnitude, so the reader applied nothing. arcId + push + weight added; direction reasoned from the outcome's own text and flagged for Erik."
+       "_migrated_20260913": "⛔ SNG-552 CORRECTED (Aevi 2026-09-13, on CCode's finding). Originally `world_arc` + `arc` + note. I measured it against `case \"arc_stage\"` — THE WRONG HANDLER — concluded 11 of 11 were inert, and renamed `arc`→`arcId`. ⚠️ `case \"world_arc\"` reads `e.arc`, so they WERE firing, as a flat unsigned +1 regardless of what their prose said; my rename then made them fire not at all. **I shipped a regression on a bad measurement.** ⛑ Now migrated to `arc_stage`, which already has the exact shape and signs by `to − from` or `push`, with `weight` 1–3 and `note` left free as prose."
       }
      ],
      "imagePrompt": "The Wyrm Felled: The dragon falls; the stilled season returns."
@@ -2242,12 +2242,12 @@
        "note": "unslain; a standing world-threat elsewhere"
       },
       {
-       "type": "world_arc",
+       "type": "arc_stage",
        "note": "open saga; may return",
        "arcId": "the_ashen_wyrm",
        "push": 1,
        "weight": 2,
-       "_fixed_20260912": "⛔ SNG-552: was `arc` + note with no magnitude, so the reader applied nothing. arcId + push + weight added; direction reasoned from the outcome's own text and flagged for Erik."
+       "_migrated_20260913": "⛔ SNG-552 CORRECTED (Aevi 2026-09-13, on CCode's finding). Originally `world_arc` + `arc` + note. I measured it against `case \"arc_stage\"` — THE WRONG HANDLER — concluded 11 of 11 were inert, and renamed `arc`→`arcId`. ⚠️ `case \"world_arc\"` reads `e.arc`, so they WERE firing, as a flat unsigned +1 regardless of what their prose said; my rename then made them fire not at all. **I shipped a regression on a bad measurement.** ⛑ Now migrated to `arc_stage`, which already has the exact shape and signs by `to − from` or `push`, with `weight` 1–3 and `note` left free as prose."
       }
      ],
      "imagePrompt": "It Passed On: Unslain; the wyrm moves beyond reach."

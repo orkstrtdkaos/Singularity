@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "id": "dev_report",
-  "at": "2026-09-13T17:08:48.288Z",
-  "build": "1.9.498",
+  "at": "2026-09-13T20:58:47.808Z",
+  "build": "1.9.502",
   "character": {
     "id": "char-mr4ejo8c",
     "name": "Cellaceron",
     "playerKey": "player-s9z9u1",
     "level": 12,
-    "rev": 265,
+    "rev": 270,
     "day": 9,
     "turns": 66,
     "countingSince": null,
@@ -111,201 +111,7 @@
       }
     }
   },
-  "fireTests": {
-    "at": "2026-09-13T17:08:41.137Z",
-    "build": "1.9.498",
-    "results": [
-      {
-        "op": "debtOps",
-        "verdict": "applied",
-        "moved": [
-          "activeScene",
-          "clock",
-          "rev",
-          "sessions",
-          "updatedAt",
-          "worldState"
-        ],
-        "why": null
-      },
-      {
-        "op": "projectOps",
-        "verdict": "applied",
-        "moved": [
-          "activeScene",
-          "clock",
-          "rev",
-          "sessions",
-          "updatedAt",
-          "worldState"
-        ],
-        "why": null
-      },
-      {
-        "op": "deathOps",
-        "verdict": "applied",
-        "moved": [
-          "activeScene",
-          "clock",
-          "rev",
-          "sessions",
-          "updatedAt",
-          "worldState"
-        ],
-        "why": null
-      },
-      {
-        "op": "markTeacher",
-        "verdict": "applied",
-        "moved": [
-          "activeScene",
-          "clock",
-          "rev",
-          "sessions",
-          "updatedAt",
-          "worldState"
-        ],
-        "why": null
-      },
-      {
-        "op": "deriveItem",
-        "verdict": "applied",
-        "moved": [
-          "activeScene",
-          "clock",
-          "rev",
-          "sessions",
-          "updatedAt",
-          "worldState"
-        ],
-        "why": null
-      },
-      {
-        "op": "unlockSubstrate",
-        "verdict": "applied",
-        "moved": [
-          "activeScene",
-          "clock",
-          "rev",
-          "sessions",
-          "updatedAt",
-          "worldState"
-        ],
-        "why": null
-      },
-      {
-        "op": "unlockPrecursor",
-        "verdict": "applied",
-        "moved": [
-          "activeScene",
-          "clock",
-          "rev",
-          "sessions",
-          "updatedAt",
-          "worldState"
-        ],
-        "why": null
-      },
-      {
-        "op": "arcOps",
-        "verdict": "not-applicable",
-        "moved": [],
-        "why": "needs at least one latent arc on the world state"
-      },
-      {
-        "op": "offerPromotion",
-        "verdict": "applied",
-        "moved": [
-          "activeScene",
-          "clock",
-          "rev",
-          "sessions",
-          "updatedAt",
-          "worldState"
-        ],
-        "why": null
-      },
-      {
-        "op": "offerAcquisition",
-        "verdict": "applied",
-        "moved": [
-          "activeScene",
-          "clock",
-          "rev",
-          "sessions",
-          "updatedAt",
-          "worldState"
-        ],
-        "why": null
-      },
-      {
-        "op": "offerIntent",
-        "verdict": "applied",
-        "moved": [
-          "activeScene",
-          "clock",
-          "rev",
-          "sessions",
-          "updatedAt",
-          "worldState"
-        ],
-        "why": null
-      },
-      {
-        "op": "holdingOps",
-        "verdict": "applied",
-        "moved": [
-          "activeScene",
-          "clock",
-          "holdings",
-          "rev",
-          "sessions",
-          "updatedAt",
-          "worldState"
-        ],
-        "why": null
-      },
-      {
-        "op": "bandOps",
-        "verdict": "applied",
-        "moved": [
-          "activeScene",
-          "clock",
-          "rev",
-          "sessions",
-          "updatedAt",
-          "worldState"
-        ],
-        "why": null
-      },
-      {
-        "op": "adoptSchool",
-        "verdict": "applied",
-        "moved": [
-          "activeScene",
-          "clock",
-          "rev",
-          "sessions",
-          "updatedAt",
-          "worldState"
-        ],
-        "why": null
-      },
-      {
-        "op": "newAbility",
-        "verdict": "applied",
-        "moved": [
-          "activeScene",
-          "clock",
-          "rev",
-          "sessions",
-          "updatedAt",
-          "worldState"
-        ],
-        "why": null
-      }
-    ]
-  },
+  "fireTests": null,
   "promptRows": {
     "character": {
       "reached": 1,

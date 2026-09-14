@@ -28,7 +28,21 @@ primarily generative. **I am not going to hand-author the next 138.**
 ⬜ **And the A1 pin only counts authored packs, not what a live save holds** — so it can read zero while
 every minted craft arrives shouting.
 
-### 2 · A location image is drawn from philosophy, and `appearance` has no reader
+### 2 · ⚠️ §236's two specimen lines, and a third placeholder-as-content
+`tests/how_it_works.mjs` · from SNG-586
+
+⛑ **I authored the threat ladder you asked for and §236 went red** — it asserts the authored ladder IS the
+absolute one, and that the result carries `ladderIgnored`. ⛔ **The outcome it protects still holds
+(`key === "beneath"`); it now holds because the ladder is RIGHT rather than because the fallback rescued
+it.** Your own sentence, thirteenth instance, wants a fixture.
+
+⚠️ **AND A THIRD PLACEHOLDER READING AS CONTENT, measured while authoring `gear`: 139 of 146 NPCs fell back
+to `defaultLoadout` — the SAME TWO ITEMS, "a weapon of their trade" and a Healing Draught.** Every person in
+the world was armed identically, and *"a weapon of their trade"* is a placeholder that renders as an item.
+⛑ Authoring real kit now (76 of 146). **Same shape as the mint boilerplate and SNG-216's repair marker —
+three instances in one day, which is why SNG-582 is item 1.**
+
+### 3 · A location image is drawn from philosophy, and `appearance` has no reader
 `engine/art.js:684` · measured 2026-09-14
 
 ```js
@@ -50,7 +64,7 @@ sentence is what the image generator received for every one of them**, so thirte
 drawn from one string. All 13 now carry a real look. ⬜ Worth a mint-time check on your side: a place minted
 with no seed should probably not get a seed that describes nothing. ⛔ **THE ASK IS ONE LINE AND IT IS NOW THE ONLY THING BETWEEN THIS AND WORKING: prefer `appearance` over `descriptionSeed` in that branch**, the way the NPC path already does. ⚠️ **All 138 are authored and every one of them is dead until that line lands.**
 
-### 3 · A state can only ever be a place
+### 4 · A state can only ever be a place
 `engine/quests.js` · SNG-577 · `po/HANDOFF_aevi_SNG-577_all_deeds_and_twelve_want_a_state.md`
 
 `kind: "state"` routes everything through `recordPlaceChange` whatever the subject is, so a state about a
@@ -61,7 +75,7 @@ whether the first waygate since the Transition EXISTS, whether Silas's made thin
 ⬜ **And two of those twelve need a record for a MADE THING**, which is neither place nor person. `world/canon/`
 already holds `gen-stillwater-s-trouble` beside the people, so the store can carry it; nothing mints one.
 
-### 4 · The Fellowship matrix reads the one field nobody fills in
+### 5 · The Fellowship matrix reads the one field nobody fills in
 `engine/combatants.js` · from Erik's Mara Wells question
 
 `contributionsOf` reads `record.assistTags`. ⛔ **Across every save: 128 registry people, ZERO have
@@ -77,7 +91,7 @@ says she has none.**
 under-reachable even when tags exist. ⬜ And 141 of 368 `skillsObserved` entries are still truncated mid-word
 from the pre-SNG-575 60-char cut.
 
-### 5 · `certify_counts` and private keys — **your call stands, I withdrew the sweep**
+### 6 · `certify_counts` and private keys — **your call stands, I withdrew the sweep**
 ⛑ You were right that a pattern sweep would fire 967 times. **`CLAIMS` by name is the correct shape.** ⬜ I
 owe you a list of which private keys carry claims worth certifying; it is on my queue, not yours.
 

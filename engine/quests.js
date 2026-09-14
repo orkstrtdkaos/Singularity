@@ -319,7 +319,33 @@ export function structuredQuestRecord(def) {
     // boundToPlayer). This whitelist-record dropped all three, so the mechanic was dead for every started
     // bound/personal arc (the def has them; the record didn't).
     boundToCharacter: def.boundToCharacter || null, boundToPlayer: def.boundToPlayer || null, legendNpc: def.legendNpc || null,
-    stages: (def.stages || []).map(s => ({ id: s.id, objective: normalizeProse(s.objective), condition: normalizeProse(s.condition), change: normalizeProse(s.change) })),
+    // ⛔ SNG-542 (Aevi's unchecked half) — "WHETHER THE WRITE PATH HAS THE SAME HOLE AS THE READ PATH."
+    // ⛑ IT DOES, AND IT IS A WHITELIST THAT KEPT FOUR FIELDS OF EIGHT.
+    //
+    // ⚑ MEASURED ACROSS THE AUTHORED CORPUS — 79 stages: `id` 79, `title` 79, `objective` 79, `condition` 79,
+    // `change` 57, `imagePrompt` 64, `unlockHint` 16, `reveals` 10. ⛔ THIS KEPT FOUR AND DROPPED `title` FROM
+    // ALL 79, which is the line a player reads FIRST.
+    //
+    // ⚠️ AND WHEN THE DEF'S SHAPE DIFFERS FROM THE WHITELIST THE RESULT IS NOT A PARTIAL RECORD, IT IS AN
+    // EMPTY ONE: `{id: undefined, objective: undefined, …}` serialises to `{}`. Silas's save carries
+    // `stages: [{}, {}, {}]` on three started quests whose authored stages are complete — the arity survived
+    // and every word of it did not.
+    //
+    // ⛑ `hydrateQuest` HIDES THIS ON READ, which is why the player can read those quests today — and Aevi's
+    // warning is the reason it still has to be fixed: "fine until content is retired under a live save, at
+    // which point THE SNAPSHOT IS THE ANSWER and the answer is {}."
+    //
+    // ⚠️ SO THE RECORD CARRIES WHAT THE STAGE HAD, minus nothing, with prose normalised where prose lives. An
+    // authored field added tomorrow rides along instead of being silently dropped — and §228 fails if the
+    // corpus grows a stage field this does not keep.
+    stages: (def.stages || []).map(s => {
+      if (!s || typeof s !== "object") return s;
+      const out = { ...s };
+      for (const k of ["objective", "condition", "change", "title", "unlockHint"]) {
+        if (typeof out[k] === "string") out[k] = normalizeProse(out[k]);
+      }
+      return out;
+    }),
     routes: normalizeQuestRoutes(def.routes), // CCODE-21: never an array — that renders as [object Object]
     outcomes: (def.outcomes || []).map(o => {
       const narr = o.narration || o.consequences || [];

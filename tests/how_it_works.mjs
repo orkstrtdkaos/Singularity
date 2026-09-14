@@ -15615,6 +15615,87 @@ console.log("\n── §227 · the look the world agrees on ──");
     /&& !!canonSubjectOf\(it\.regen\?\.subjectId\)/.test(A227));
 }
 
+
+// ⛔ SNG-542 (Aevi) — "AND ONE THING TO CHECK THAT I COULD NOT: whether the blank `def.stages` those records
+// were written from came from the GM emitting a structured quest with arity but no prose. IF SO THE WRITE PATH
+// HAS THE SAME HOLE AS THE READ PATH, and `hydrateQuest` is currently hiding it."
+//
+// ⛑ CHECKED, AND IT DOES — though not for the reason she guessed, which is better: it is not the GM. The
+// WRITE is a four-field whitelist over a stage the corpus authors with eight.
+//
+// ⚑ MEASURED ACROSS THE AUTHORED CORPUS — 79 stages: `id` 79 · `title` 79 · `objective` 79 · `condition` 79 ·
+// `change` 57 · `imagePrompt` 64 · `unlockHint` 16 · `reveals` 10. ⛔ IT KEPT FOUR AND DROPPED `title` FROM ALL
+// SEVENTY-NINE — the line a player reads first.
+//
+// ⚠️ AND WHEN A DEF'S SHAPE DIFFERS FROM THE WHITELIST THE RESULT IS NOT A PARTIAL RECORD BUT AN EMPTY ONE:
+// `{id: undefined, …}` serialises to `{}`. Silas's save carries `stages: [{}, {}, {}]` on three started quests
+// whose authored stages are complete — the arity survived and every word of it did not.
+console.log("\n── §228 · the stage arrived with its arity and none of its words ──");
+{
+  const Q228 = await import("../engine/quests.js");
+  const { loadContentHeadless: lch228 } = await import("./headless_content.mjs");
+  const C228 = await lch228();
+  const defs228 = (C228.quests || []).filter(d => d && (d.stages || []).length);
+
+  /* ---- 1 · ⛑ A STARTED QUEST KEEPS WHAT THE AUTHOR WROTE ---- */
+  // ⚠️ DRIVEN THROUGH `startStructuredQuest`, the door a quest is actually born through — not by inspecting
+  // the mapper, which is how the four-field whitelist read as correct for as long as it did.
+  const def228 = defs228.find(d => (d.stages || []).some(s => s && s.title));
+  const c228 = { quests: [], worldState: {} };
+  Q228.startStructuredQuest(c228, def228, { worldDay: 10 });
+  const q228 = c228.quests[0];
+  check("§228: ⛑ a started quest's stages are not empty objects",
+    (q228?.stages || []).length > 0 && (q228.stages || []).every(s => s && Object.keys(s).length > 0),
+    `${(q228?.stages || []).filter(s => !s || !Object.keys(s).length).length} empty of ${(q228?.stages || []).length}`);
+  check("§228: ⛔ …and the stage TITLE survives, which is the line a player reads first",
+    q228.stages[0].title && q228.stages[0].title === def228.stages[0].title,
+    JSON.stringify(String(q228.stages[0].title || "").slice(0, 46)));
+
+  /* ---- 2 · ⛔ AND NOT ONE AUTHORED STAGE FIELD IS DROPPED, ASSERTED AGAINST THE CORPUS ---- */
+  // ⚠️ THE CLASS, NOT THE FIVE FIELDS I HAPPEN TO KNOW ABOUT. A whitelist is exactly what caused this, so the
+  // gate is derived from what authors actually write — the day a stage grows a ninth field, this fails rather
+  // than the field vanishing into a save nobody inspects.
+  const authoredKeys = new Set();
+  for (const d of defs228) for (const st of (d.stages || [])) if (st && typeof st === "object") for (const k of Object.keys(st)) authoredKeys.add(k);
+  check("§228: the corpus really was read — a zero here would pass the claim below vacuously",
+    authoredKeys.size >= 6, `${authoredKeys.size} distinct stage fields across ${defs228.length} quests`);
+  const dropped = [];
+  for (const d of defs228.slice(0, 40)) {
+    const c = { quests: [], worldState: {} };
+    Q228.startStructuredQuest(c, d, { worldDay: 10 });
+    const stored = c.quests[0]?.stages || [];
+    (d.stages || []).forEach((src, i) => {
+      if (!src || typeof src !== "object") return;
+      for (const k of Object.keys(src)) if (stored[i] && !(k in stored[i])) dropped.push(`${d.id}.${k}`);
+    });
+  }
+  check("§228: ⛔ NO authored stage field is dropped on the way into the save",
+    dropped.length === 0, [...new Set(dropped)].slice(0, 6).join(", ") || "every field of every stage survives");
+
+  /* ---- 3 · ⚠️ AND THE PROSE IS STILL NORMALISED, because that was the whitelist's one real job ---- */
+  // ⛑ A literal "\\n" out of authored JSON has to become a newline or it renders as two characters on the
+  // player's screen. Widening the record must not lose the thing the narrow version did correctly.
+  // ⚠️ DRIVEN ON A REAL DEF with one field doctored, rather than a synthetic quest: my first fixture was
+  // REFUSED by `startStructuredQuest` and `c.quests[0]` came back undefined — a test that cannot start a quest
+  // proves nothing about what starting one stores.
+  const doctored = JSON.parse(JSON.stringify(def228));
+  doctored.id = String(doctored.id) + "-prose-check";
+  doctored.stages[0].objective = "one" + String.fromCharCode(92) + "nline";
+  const c3 = { quests: [], worldState: {} };
+  Q228.startStructuredQuest(c3, doctored, { worldDay: 1 });
+  check("§228: ⚠️ …and authored prose is still normalised on the way in",
+    c3.quests[0]?.stages?.[0]?.objective === "one" + String.fromCharCode(10) + "line",
+    JSON.stringify(c3.quests[0]?.stages?.[0]?.objective));
+
+  /* ---- 4 · ⛑ AND THE READ SIDE THAT WAS HIDING IT IS STILL THERE ---- */
+  // ⛔ `hydrateQuest` is why the player CAN read those three quests today, and it is NOT the fix: Aevi's own
+  // warning is that it holds "until content is retired under a live save, at which point THE SNAPSHOT IS THE
+  // ANSWER and the answer is {}". ⚠️ Both halves are wanted — the hydrate for old records, the write for new.
+  const QS228 = rd("engine/quests.js");
+  check("§228: ⛑ the hydrating reader still stands, because three live saves still carry the old shape",
+    /export function questsFor\(character, defs\)/.test(QS228) && /hydrateQuest/.test(QS228));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

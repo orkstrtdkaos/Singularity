@@ -700,52 +700,6 @@
       "bondStage": "together",
       "met": 10
     },
-    "lone-traveler-eastfork-warning": {
-      "id": "lone-traveler-eastfork-warning",
-      "name": "A lone traveler",
-      "role": "Road-warden; one who moves between the reaches and carries true news freely",
-      "description": "Weathered by the road, grey-streaked hair, coat that has been many colors and is now fading to brown. Hands steady and observant. Eyes that read the road like other people read faces.",
-      "firstMet": {
-        "locationId": "the_crossing",
-        "day": 3
-      },
-      "relationship": 1,
-      "history": [
-        "[d3] Met on the bearing toward the Waygate on deep night of day 3. Offered warning about the eastern fork flood and the stone ford crossing, and shared their evening fire freely — no price, no trade, only the gift of knowing.",
-        "[d3] Offered broth freely and warned of the water-problem moving downhill from the eastern fork. They carry news from the relay and move it faster — warning families before the wells run bad. Moving with purpose toward the spinward reach.",
-        "[d3] Shared broth and fire. Exchanged names—they told Loki theirs, and Loki gave their own. They carry word of the water-crisis downhill faster than any relay, warning families before the wells run bad. Moving spinward with purpose and gratitude given honestly.",
-        "[d3] Recognized Loki at the Hub crossing and greeted them by name. Noted that the Hub is not a place road-wardens usually pause. Observed Cy's presence with familiarity.",
-        "[d3] Named Veln Ashpause as an Hourkeeper who arrived this morning asking after someone matching Loki's description. Emphasized the Hourkeeper's nature: they see time differently, and their presence suggests foreknowledge of what is coming."
-      ],
-      "knownFacts": [
-        "The relay carries this news, but the relay moves slow; the traveler moves faster",
-        "A family three reaches spinward has kin in the city and sent word asking if the problem has reached the well-country yet — it hasn't, but will",
-        "This person carries the crisis as their own burden—they do not only relay it, they warn against it with the weight of someone who knows what it means.",
-        "They ask questions that root for truth, not for advantage, and they recognize the same when they meet it.",
-        "The road-warden has traveled to the Hub crossing and paused there",
-        "They know Loki by sight and name after their brief meeting on the road",
-        "Veln Ashpause is an Hourkeeper with foreknowledge of Loki's arrival at the Hub",
-        "Hourkeepers perceive past, present, and future differently—often uncertain which direction they are looking"
-      ],
-      "skillsObserved": [
-        "Reads travelers by bearing and gait",
-        "Knows the March's seasonal patterns in detail",
-        "Moves with the ease of long practice on the road",
-        "Reads travelers by bearing and assessment",
-        "Moves with steady purpose on a known route",
-        "Carries news and shapes it for the people who need it"
-      ],
-      "status": "active",
-      "sex": "unknown",
-      "gender": "unknown",
-      "pronouns": "they/them",
-      "statusNote": "Standing by the western arch at the Hub crossing, speaking plainly and carefully with Loki.",
-      "lastSeen": {
-        "locationId": "the_crossing",
-        "day": 3
-      },
-      "met": 5
-    },
     "kael-road-warden": {
       "id": "kael-road-warden",
       "name": "Kael",
@@ -761,7 +715,12 @@
         "[d3] Revealed their business at the Crossing is finished—carrying the water-crisis warning downhill through the relay network. Offered to show Loki and Vessin the inner sites of the Crossing (the Twelve Mouths, the Common Table, the Made Arch).",
         "[d3] Kael knows something about the Null Stone beyond what they stated plainly: that it is older than the gates, older than the Transition. Their stillness suggests the seam is meaningful to them.",
         "[d3] Went very still when Cy found the seam—a reaction that reads as recognition, not surprise. Something about the sealed stone is known to them, or known to the network they carry word through.",
-        "[d3] Tracked the Revel with the focus of someone who foresaw this. Their stillness reads as recognition, not surprise—this is a known thing."
+        "[d3] Tracked the Revel with the focus of someone who foresaw this. Their stillness reads as recognition, not surprise—this is a known thing.",
+        "[d3] Met on the bearing toward the Waygate on deep night of day 3. Offered warning about the eastern fork flood and the stone ford crossing, and shared their evening fire freely — no price, no trade, only the gift of knowing.",
+        "[d3] Offered broth freely and warned of the water-problem moving downhill from the eastern fork. They carry news from the relay and move it faster — warning families before the wells run bad. Moving with purpose toward the spinward reach.",
+        "[d3] Shared broth and fire. Exchanged names—they told Loki theirs, and Loki gave their own. They carry word of the water-crisis downhill faster than any relay, warning families before the wells run bad. Moving spinward with purpose and gratitude given honestly.",
+        "[d3] Recognized Loki at the Hub crossing and greeted them by name. Noted that the Hub is not a place road-wardens usually pause. Observed Cy's presence with familiarity.",
+        "[d3] Named Veln Ashpause as an Hourkeeper who arrived this morning asking after someone matching Loki's description. Emphasized the Hourkeeper's nature: they see time differently, and their presence suggests foreknowledge of what is coming."
       ],
       "knownFacts": [
         "Has business at the Crossing they came to finish",
@@ -771,12 +730,25 @@
         "Knows the inner sites of the Crossing and who gathers at them",
         "Went very still when Cy found the seam—a reaction of recognition, not surprise",
         "Something about the Null Stone's seam is significant to road-wardens or to the relay network itself",
-        "The Churn-Revel or its business is something Kael has encountered or knows of before"
+        "The Churn-Revel or its business is something Kael has encountered or knows of before",
+        "The relay carries this news, but the relay moves slow; the traveler moves faster",
+        "A family three reaches spinward has kin in the city and sent word asking if the problem has reached the well-country yet — it hasn't, but will",
+        "This person carries the crisis as their own burden—they do not only relay it, they warn against it with the weight of someone who knows what it means.",
+        "They ask questions that root for truth, not for advantage, and they recognize the same when they meet it.",
+        "The road-warden has traveled to the Hub crossing and paused there",
+        "They know Loki by sight and name after their brief meeting on the road",
+        "Veln Ashpause is an Hourkeeper with foreknowledge of Loki's arrival at the Hub",
+        "Hourkeepers perceive past, present, and future differently—often uncertain which direction they are looking"
       ],
       "skillsObserved": [
         "Reads travelers by bearing and gait",
         "Moves with ease of long practice on the road",
-        "Carries and shapes news for the people who need it"
+        "Carries and shapes news for the people who need it",
+        "Knows the March's seasonal patterns in detail",
+        "Moves with the ease of long practice on the road",
+        "Reads travelers by bearing and assessment",
+        "Moves with steady purpose on a known route",
+        "Carries news and shapes it for the people who need it"
       ],
       "status": "active",
       "sex": "unknown",
@@ -787,7 +759,10 @@
         "locationId": "the_crossing",
         "day": 3
       },
-      "met": 5
+      "met": 5,
+      "aliases": [
+        "A lone traveler"
+      ]
     }
   },
   "placeMemory": {
@@ -6958,8 +6933,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789427335345,
-  "rev": 628,
+  "updatedAt": 1789428378320,
+  "rev": 629,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9322,5 +9297,15 @@
         "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
       }
     ]
-  }
+  },
+  "corrections": [
+    {
+      "kind": "merge",
+      "id": "lone-traveler-eastfork-warning",
+      "into": "kael-road-warden",
+      "why": "player: same person (A lone traveler → Kael)",
+      "worldDay": 76,
+      "at": "2026-09-14T23:26:18.319Z"
+    }
+  ]
 }

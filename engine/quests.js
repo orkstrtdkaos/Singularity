@@ -543,8 +543,46 @@ function applyQuestEffects(character, quest, effects, ctx = {}) {
       }
       // SNG-235: a MEANINGFUL ending changes the world — the marquee-quest outcome vocab. Each maps the authored
       // effect onto the SAME engine store the GM path uses, so an ending DOES what its prose SAYS.
-      case "world_fact": {  // → the fact machinery (factUpdates): a permanent, findable world fact
-        if (e.text) { pinFact(e.text, e.secret); applied.push({ type: "world_fact", text: e.text, permanent: e.permanent !== false }); }
+      // ⛔ SNG-552 §4 — AEVI'S RULING: "A PERMANENT WORLD FACT IS TWO FACTS AND THE EFFECT CONFLATES THEM."
+      //
+      //   · THE DEED — what was done, and by whom → the LEDGER: dated, attributed, append-only, never contested.
+      //   · THE STATE — what is true NOW → CANON: weighted, contestable, overtakeable.
+      //
+      // ⛑ HER TEST SETTLES IT: Silas rewrote the instruction; Cellaceron seals it. THE DEED MUST SURVIVE —
+      // nothing Cellaceron does makes it not have happened, and a store that lets it be overwritten is lying
+      // about the past. THE STATE MUST BE OVERTAKEN — the facility is sealed; it is not ALSO cleansing.
+      // ⚠️ Ledger alone gives two contradictory entries, both true, and no answer to "what is it doing now".
+      // Canon alone lets a second player overwrite the first and the world forgets who did it — which is
+      // `contributionsBy`'s whole point, undone.
+      //
+      // ⛔ AND THE DEFAULT IS `deed`, DOWN AND NEVER UP (her O2, the tier-ladder guard again): a state wrongly
+      // filed as a deed costs nothing; a deed wrongly promoted to canon CAN OVERWRITE ANOTHER PLAYER'S WORLD.
+      // ⚑ And most facts ARE deeds — "Silas named the spear Memory" was never contestable.
+      case "world_fact": {
+        if (!e.text) break;
+        pinFact(e.text, e.secret);
+        // ⛑ THE DEED IS EMITTED ALWAYS, INCLUDING FOR A STATE. A state is still something somebody did.
+        if (typeof ctx.recordLedger === "function") {
+          try { ctx.recordLedger({ what: String(e.text), tags: ["quest", quest.id].filter(Boolean), visibility: e.secret ? "private" : "witnessed" }); }
+          catch (err) { if (typeof console !== "undefined") console.warn("[quest effects] world_fact ledger failed:", err?.message); }
+        }
+        // ⚠️ AND A STATE RIDES ITS SUBJECT. Her own examples are all facts ABOUT something that already exists
+        // — "the facility, a holding, a river, whether a presence sleeps" — so the state belongs ON that record,
+        // where the promotion path already carries it into canon and a contradicting state contests THE SAME
+        // record. ⛔ A separate "fact" entity type would have been a second store for facts the canon store
+        // already knows how to hold.
+        const kind = String(e.kind || "deed").toLowerCase();
+        const subject = e.subject || e.entityId || e.locationId || null;
+        let asState = false;
+        if (kind === "state" && subject && typeof ctx.recordPlaceChange === "function") {
+          try { ctx.recordPlaceChange(subject, String(e.text)); asState = true; }
+          catch (err) { if (typeof console !== "undefined") console.warn("[quest effects] world_fact state failed:", err?.message); }
+        } else if (kind === "state") {
+          // ⛔ DEFAULT DOWN, LOUDLY. A state with nothing to attach to cannot be contested by anyone, so it
+          // becomes what it actually is — a deed — and the author is told rather than left believing otherwise.
+          if (typeof console !== "undefined") console.warn(`[quest effects] world_fact kind:"state" needs a subject to be contestable — filed as a deed: "${String(e.text).slice(0, 60)}"`);
+        }
+        applied.push({ type: "world_fact", text: e.text, kind: asState ? "state" : "deed", permanent: e.permanent !== false });
         break;
       }
       case "codex_fact": {  // → the CODEX (codexUpdates). Aevi authors {topic,kind,fact,entityId?}; legacy is {text}.

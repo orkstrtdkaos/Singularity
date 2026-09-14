@@ -23,7 +23,7 @@ import { credit, debit } from "./purse.js";   // R48: the purse has ONE door in,
 import { mergeCodexTopics, ensureCodex, applyCodexUpdates, foldTopicsByIdPrefix } from "./codex.js";   // step 43: the named fold
 import { mergeRecovery, mergeReceiptLine } from "./recovery.js";   // step 41: the Settings door's merge, run where every copy passes
 import { SNAPSHOTS } from "./recovery_snapshots.js";              // step 41: the overwritten branch, as a diff
-import { dedupeQuests, normalizeProse, creditQuestGiver } from "./quests.js";   // ⛔ step 55: a quest its giver was never credited for
+import { dedupeQuests, normalizeProse, creditQuestGiver, slugify } from "./quests.js";   // ⛔ step 55: a quest its giver was never credited for
 import { settleAspiration } from "./progression.js";   // ⛔ step 56: an aspiration for a craft already in hand   // ⛔ step 55: a quest its giver was never credited for
 import { dedupeInventory } from "./inventory.js";
 import { inferDomains } from "./traditions.js";
@@ -86,6 +86,57 @@ function renameTargets(spec, entry, character, known) {
 // "has this entity seen this step yet" via entity.reconcileVersion.
 
 export const CHARACTER_STEPS = [
+  {
+    version: 62, id: "the-push-the-old-handler-flattened", playerFacing: true,
+    // ⛔ SNG-552 (Aevi, on her own regression) — "A DEFERRAL CURRENTLY READS AS AN ADVANCE ON THE ONE ARC THE
+    // ENDGAME TURNS ON."
+    //
+    // ⚑ MEASURED: Silas resolved `what_the_water_remembers` at the outcome `redirected` — "the tremor is quieted
+    // without being resolved: the presence sleeps, the harm is undone, and the question DEFERS INTACT" — which is
+    // authored `push: 0, weight: 1`, a HOLD that records the contribution and broadcasts nothing. ⛔ His save
+    // carries `push: 1`, because the OLD `world_arc` handler pushed a flat unsigned +1 regardless of what the
+    // outcome's prose said. The content was corrected; the save kept the pre-fix value.
+    //
+    // ⚠️ AND THE REPAIR BELONGS HERE, NOT ON THE SHARED STORE. `world/arcs/valley.json` looks like the wrong
+    // number's home, and it is only a PROJECTION: `pushMergedFile` writes `byActor[me] = ws.arcStages[id].push`
+    // from this save on every tick, so correcting the shared file alone would be undone by Silas's next turn.
+    // ⛑ Fixing the source lets the projection correct itself — the stored-copy-of-a-derived-value rule, applied
+    // to the copy rather than to the derivation.
+    //
+    // ⛑ AND IT RE-DERIVES RATHER THAN HARD-CODING A ZERO. The save records WHICH outcome was taken
+    // (`outcomeId: "redirected"`), so the authored push for that exact ending is readable — which means this
+    // repairs any character the old handler flattened, at any arc, not just the one Aevi found.
+    apply: (c, ctx) => {
+      const stages = c.worldState?.arcStages;
+      const quests = ctx?.content?.quests;
+      if (!stages || !quests) return {};
+      const defs = Array.isArray(quests) ? quests : Object.values(quests);
+      // ⚠️ THE IDS DISAGREE BY PUNCTUATION: a save says `what-the-water-remembers`, the corpus says
+      // `what_the_water_remembers`. `slugify` is what `resolveStructuredQuest` itself matches through.
+      const defFor = (id) => defs.find(d => d && slugify(d.id || "") === slugify(id || ""));
+      const pushOf = (e) => Number.isFinite(e?.push) ? e.push
+        : (Number.isFinite(e?.to) && Number.isFinite(e?.from)) ? e.to - e.from : null;
+      const fixed = [];
+      for (const [arcId, st] of Object.entries(stages)) {
+        if (!st || !Number.isFinite(st.push) || !st.byQuest) continue;
+        const taken = (c.quests || []).find(q => q && slugify(q.id || "") === slugify(st.byQuest));
+        if (!taken?.outcomeId) continue;
+        const def = defFor(st.byQuest);
+        const outcome = (def?.outcomes || []).find(o => o && o.id === taken.outcomeId);
+        if (!outcome) continue;
+        const authored = (outcome.effects || []).find(e => e && e.type === "arc_stage" && e.arcId === arcId);
+        const want = pushOf(authored);
+        if (want == null || want === st.push) continue;
+        fixed.push({ arcId, from: st.push, to: want, outcome: outcome.name || taken.outcomeId });
+        st.push = want;
+      }
+      if (!fixed.length) return {};
+      // ⛑ NAMED, NOT COUNTED. "An arc push was corrected" tells a player nothing; the point is that a choice they
+      // made to DEFER a thing had been recorded as advancing it, on the arc the endgame turns on.
+      const say = fixed.map(f => `${f.outcome}: ${f.from > f.to ? "recorded as pushing the world further than it did" : "recorded as pushing the world less than it did"} (${f.from} → ${f.to})`).join("; ");
+      return { notes: [`The world has re-read one of your endings. ${say}. What you chose is what the world now carries.`] };
+    }
+  },
   {
     version: 61, id: "the-tower-loki-got-moving", playerFacing: true,
     // ⛔ ERIK 2026-09-13: "Because Silas is the only PC played with a hold so far. Give a boat or a floating tower

@@ -14677,8 +14677,13 @@ console.log("\n── §217 · the first hold that moves ──");
   check("§217: ⛑ the tower arrives as a reconcile step, which applies to whichever copy of the save wins",
     !!step && step.version === 61 && step.playerFacing === true,
     step ? `version ${step.version}` : "no step");
-  check("§217: …and it is the top step, so a save that has seen 60 still runs it",
-    RC217.topReconcileVersion("character") === 61);
+  // ⚠️ THE CLAIM IS "IT STILL RUNS", NOT "IT IS LAST". This pinned `topReconcileVersion === 61` and went red
+  // the moment step 62 was written — for a step that is still perfectly reachable. ⛔ FIFTH GATE THIS WEEK to
+  // pin one instance of a general rule (§131, §212, §209, smoke 216 §3b were the others), and the pattern is
+  // mine: I keep asserting the CURRENT VALUE of something whose movement is the normal course of the project.
+  check("§217: …and it is at or below the top of the ladder, so a save that has seen 60 still runs it",
+    RC217.topReconcileVersion("character") >= step.version && step.version > 60,
+    `step ${step.version} · top ${RC217.topReconcileVersion("character")}`);
 
   /* ---- 2 · ⛔ DRIVEN THROUGH THE RUNNER, NOT `apply` ON A COPY ---- */
   // ⚠️ THE VERSION GATE IS THE HALF THAT HAS SILENTLY SKIPPED A STEP BEFORE: step 50 shipped at version 1, sat
@@ -14991,6 +14996,122 @@ console.log("\n── §220 · what you were to them reaches too ──");
   const held = dead(); D220.holdOpen(held, "a companion");
   check("§220: ⛑ …and a way held open does not seal, which is the shape her answer already has",
     D220.deepenDeaths([held], 4000, r220).length === 0 && !held.deathState.sealed);
+}
+
+
+// ⛔ SNG-552 §4 — AEVI'S RULING: "A PERMANENT WORLD FACT IS TWO FACTS AND THE EFFECT CONFLATES THEM."
+//
+//   · THE DEED — what was done, and by whom → the LEDGER: dated, attributed, append-only, never contested.
+//   · THE STATE — what is true NOW → CANON: weighted, contestable, overtakeable.
+//
+// ⛑ HER TEST SETTLES IT, and Erik ruled the same shape independently ("when it's an event that isn't in direct
+// conflict… it's a ledger entry type; if they conflict, the game resolves it with whomever is paying more
+// attention"): Silas rewrote the instruction, Cellaceron seals it. THE DEED MUST SURVIVE — nothing Cellaceron
+// does makes it not have happened. THE STATE MUST BE OVERTAKEN — the facility is sealed; it is not ALSO
+// cleansing. ⚠️ Ledger alone gives two contradictory entries, both true, and no answer to "what is it doing
+// now." Canon alone lets a second player overwrite the first and the world forgets who did it.
+console.log("\n── §221 · the deed and the state are two facts ──");
+{
+  const Q221 = await import("../engine/quests.js");
+  const { loadContentHeadless: lch221 } = await import("./headless_content.mjs");
+  const C221 = await lch221();
+
+  const run221 = (effects) => {
+    const ledger = [], places = [];
+    const c = { name: "T", holdings: [], npcRegistry: {}, inventory: [], worldState: {}, peopleDisposition: {},
+      quests: [{ id: "q", title: "Q", status: "active", structured: true, outcomes: [{ id: "o", name: "O", effects }] }] };
+    const r = Q221.resolveStructuredQuest(c, "q", "o", { worldDay: 40, content: C221,
+      recordFact: () => {}, recordLedger: (ev) => ledger.push(ev), recordPlaceChange: (l, ch) => places.push([l, ch]) });
+    return { r, ledger, places, fact: (r.applied || []).find(x => x.type === "world_fact") };
+  };
+
+  /* ---- 1 · ⛑ THE DEED IS EMITTED ALWAYS ---- */
+  const deed = run221([{ type: "world_fact", text: "Silas named the spear Memory." }]);
+  check("§221: ⛑ every world fact lands in the ledger — dated, attributed, and never contested",
+    deed.ledger.length === 1 && /named the spear/.test(deed.ledger[0].what));
+  // ⛔ AND THE DEFAULT IS `deed`, DOWN AND NEVER UP — her O2, which is the tier-ladder guard again: a state
+  // wrongly filed as a deed costs nothing; a deed wrongly promoted to canon CAN OVERWRITE ANOTHER PLAYER'S
+  // WORLD. ⚑ And most facts ARE deeds: "Silas named the spear Memory" was never contestable.
+  check("§221: ⛔ …and an undeclared fact is a DEED, never a state — the default goes down",
+    deed.fact?.kind === "deed" && deed.places.length === 0);
+
+  /* ---- 2 · ⛔ A STATE RIDES ITS SUBJECT INTO CANON ---- */
+  // ⚠️ HER OWN EXAMPLES ARE ALL FACTS ABOUT SOMETHING THAT ALREADY EXISTS — "the facility, a holding, a river,
+  // whether a presence sleeps" — so the state belongs ON that record, where the promotion path already carries
+  // it and a contradicting state contests THE SAME record. ⛔ A separate "fact" entity type would have been a
+  // second store for facts the canon store already knows how to hold.
+  const state = run221([{ type: "world_fact", kind: "state", subject: "the_facility", text: "The facility is sealed." }]);
+  check("§221: ⛔ a declared STATE attaches to its subject, where canon can contest it",
+    state.fact?.kind === "state" && state.places.length === 1 && state.places[0][0] === "the_facility");
+  check("§221: ⛑ …and it STILL emits the deed — a state is also something somebody did",
+    state.ledger.length === 1 && /facility is sealed/.test(state.ledger[0].what));
+
+  /* ---- 3 · ⚠️ AND A STATE WITH NOTHING TO ATTACH TO DEFAULTS DOWN, LOUDLY ---- */
+  // ⛔ A fact nobody can contest is not a state however it is labelled. It becomes what it actually is, and the
+  // author is told — where silence would leave them believing the world could be argued with about it.
+  const orphan = run221([{ type: "world_fact", kind: "state", text: "Something is true somewhere." }]);
+  check("§221: ⚠️ a state with no subject is filed as the deed it actually is",
+    orphan.fact?.kind === "deed" && orphan.places.length === 0);
+
+  /* ---- 4 · ⛑ AEVI'S SETTLING TEST, RUN ---- */
+  const first = run221([{ type: "world_fact", kind: "state", subject: "the_facility", text: "Silas rewrote the instruction; it is cleansing." }]);
+  const second = run221([{ type: "world_fact", kind: "state", subject: "the_facility", text: "Cellaceron sealed it; it is sealed." }]);
+  check("§221: ⛑ two players, one facility: BOTH deeds survive and BOTH states contest the same record",
+    first.ledger.length === 1 && second.ledger.length === 1
+    && first.places[0][0] === second.places[0][0],
+    `${first.places[0][0]} contested twice, ${first.ledger.length + second.ledger.length} deeds kept`);
+  // ⚑ AND THE LEDGER ROW CARRIES WHO, because `contributionsBy`'s whole point is that the world remembers who
+  // did it. Shaped in app.js, where `who`, `where` and the clock are known.
+  check("§221: ⚑ …and the row names its author, which is the half canon alone would forget",
+    /who: character\.id, playerKey: character\.playerKey \|\| getPlayerKey\(\)/.test(rd("app.js")));
+}
+
+// ⛔ SNG-552 · THE LIVE ARTIFACT OF AEVI'S OWN REGRESSION — "a deferral currently reads as an advance on the one
+// arc the endgame turns on."
+//
+// ⚑ MEASURED: Silas resolved `what_the_water_remembers` at `redirected` — "the tremor is quieted without being
+// resolved: the presence sleeps, the harm is undone, and the question DEFERS INTACT" — authored `push: 0`.
+// His save carried `push: 1`, because the OLD `world_arc` handler pushed a flat unsigned +1 whatever the prose
+// said. The content was corrected; the save kept the pre-fix value.
+console.log("\n── §222 · a deferral that was recorded as an advance ──");
+{
+  const RC222 = await import("../engine/reconcile.js");
+  const { loadContentHeadless: lch222 } = await import("./headless_content.mjs");
+  const C222 = await lch222();
+  const step = RC222.CHARACTER_STEPS.find(s => s.id === "the-push-the-old-handler-flattened");
+  check("§222: the repair is a reconcile step at the top of the ladder",
+    !!step && step.version === 62 && RC222.topReconcileVersion("character") === 62);
+
+  // ⚠️ THE REPAIR BELONGS ON THE SAVE, NOT ON THE SHARED STORE. `world/arcs/valley.json` looks like the wrong
+  // number's home and is only a PROJECTION: the tick writes `byActor[me] = ws.arcStages[id].push` from this
+  // save every time, so correcting the shared file alone would be undone by the next turn.
+  check("§222: ⛔ …and the shared arc file is written FROM the save, which is why the save is what is repaired",
+    /arcs\[arcId\] = \{ byActor: \{ \.\.\.\(arcs\[arcId\]\?\.byActor \|\| \{\}\), \[me\]: st\.push \} \}/.test(rd("engine/worldtick.js")));
+
+  /* ---- ⛑ AND IT RE-DERIVES FROM THE OUTCOME ACTUALLY CHOSEN ---- */
+  // ⚠️ NOT A HARD-CODED ZERO. The save records WHICH ending was taken, so the authored push for that exact
+  // outcome is readable — which repairs any character the old handler flattened, at any arc.
+  const c222 = { id: "char-x", reconcileVersion: 61, quests: [
+      { id: "what-the-water-remembers", status: "resolved", structured: true, outcomeId: "redirected" },
+      { id: "the-second-thread", status: "resolved", structured: true, outcomeId: "finished" }],
+    worldState: { arcStages: {
+      arc_what_wakes_beneath: { push: 1, byQuest: "what-the-water-remembers" },
+      the_second_manifestation: { push: 1, byQuest: "the-second-thread" } } } };
+  const r222 = RC222.reconcile(c222, "character", { content: C222 });
+  check("§222: ⛔ a deferral recorded as an advance is corrected to what the ending actually said",
+    c222.worldState.arcStages.arc_what_wakes_beneath.push === 0,
+    `push is now ${c222.worldState.arcStages.arc_what_wakes_beneath.push}`);
+  // ⛑ AND A PUSH THAT WAS RIGHT IS LEFT ALONE — Aevi called `the_second_manifestation` "correct by luck"; it is
+  // correct by VERIFICATION now, re-derived from its own authored outcome and found to be +1 already.
+  check("§222: ⛑ …and a push that was already right is untouched, because it was re-derived and agreed",
+    c222.worldState.arcStages.the_second_manifestation.push === 1);
+  check("§222: …and the player is told which ending the world re-read, not that a number changed",
+    (r222.notes || []).some(n => /re-read one of your endings/.test(n)));
+  // ⚠️ IDEMPOTENT BY RECORD, not only by the version gate — a second load must not re-announce it.
+  const again = RC222.reconcile(c222, "character", { content: C222 });
+  check("§222: ⚠️ …and a second load changes nothing and says nothing",
+    c222.worldState.arcStages.arc_what_wakes_beneath.push === 0
+    && !(again.notes || []).some(n => /re-read one of your endings/.test(n)));
 }
 
 /* ══════════ REPORT ══════════ */

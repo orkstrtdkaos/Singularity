@@ -144,7 +144,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "1.9.527";
+const APP_VERSION = "1.9.528";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -13008,6 +13008,17 @@ function resolveQuestOutcome(questId, outcomeId, { onDone } = {}) {
     teachAbility: (id, opts = {}) => learnAbility(character, id, fullCatalog(), CONTENT.rules,
       { free: opts.free !== false, attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, traditionIndex: CONTENT.traditionIndex }),
     recordPlaceChange: (locId, change) => applyPlaceUpdates(character, locId, [{ note: change }], { day }),
+    // ⛔ SNG-552 §4 — THE DEED, WHICH IS THE HALF THAT MUST SURVIVE BEING CONTRADICTED. Shaped here because
+    // `who`, `where` and the clock are the app's to know; `quests.js` passes only what it saw happen.
+    // ⚠️ Fire-and-forget like every other ledger write — a network failure must never cost the player a turn.
+    recordLedger: (ev) => {
+      const row = { schemaVersion: 1, at: new Date().toISOString(), worldDay: absoluteWorldDay(),
+        who: character.id, playerKey: character.playerKey || getPlayerKey(),
+        where: character.currentLocationId ?? null, what: String(ev?.what || ""),
+        tags: Array.isArray(ev?.tags) ? ev.tags.slice(0, 4).map(String) : [],
+        spectrumDeltas: {}, visibility: ev?.visibility || "witnessed", impactsLocal: false };
+      if (row.what) appendLedger([row], character.id).catch(err => console.warn("[ledger]", err?.message));
+    },
   });
   if (r.ok) {
     saveCharacter(character);

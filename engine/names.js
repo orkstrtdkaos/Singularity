@@ -19,7 +19,19 @@
 // NOT a template language (§4). Name resolution only. The moment it grows conditionals it becomes a
 // second program nobody can test.
 
-const KINDS = ["loc", "region", "npc", "tradition", "item", "ability"];
+// ⛔ SNG-552 §6 (Aevi) — "EVERY OUTCOME NAMES THE WRONG PLAYER. Cellaceron is the one deciding, so his permanent
+// world fact will read 'Silas Weir rewrote the facility's instruction.' On screen today."
+//
+// ⚑ MEASURED, and the count is not the interesting part — 13 effect strings carry the name, not 5. What matters is
+// WHICH: two of the three files record things SILAS ACTUALLY DID (he made the first waygate; he left a second
+// unfinished work in his hollow) and those are CANON, correct, and must not be templated away. ⛔ THE LIVE DEFECT IS
+// NARROWER AND SHARPER: an UNRESOLVED outcome — the one Cellaceron is standing at — pre-written with another
+// player's name, so whoever takes it inherits Silas's history. ⚠️ A blanket fix would have rewritten real history
+// into anonymous prose, which is SNG-546's near-miss in different clothes.
+//
+// ⛑ SO THE ENGINE GAINS THE TOOL AND THE CONTENT STAYS AEVI'S. `{{player:name}}` resolves to whoever is actually
+// deciding. A finished outcome keeps its name because the name is the fact; a pending one names the actor.
+const KINDS = ["loc", "region", "npc", "tradition", "item", "ability", "player"];
 
 /** Where each kind's records live in the CONTENT bag, and how to read a name off one. Kept as data
  *  so adding a kind is a row, not a branch. */
@@ -29,13 +41,22 @@ const SOURCES = {
   npc: (c) => c?.npcs || {},
   tradition: (c) => c?.traditionIndex?.byId || {},
   item: (c) => c?.items || {},
-  ability: (c) => c?.abilities || {}
+  ability: (c) => c?.abilities || {},
+  // ⚠️ THE PLAYER IS NOT IN THE CONTENT BAG — they are the one reading it. This source is deliberately empty and
+  // `nameOf` answers the kind before it ever gets here, because a player is per-character state and the whole
+  // reason token resolution cannot happen at content load (SNG-111's argument, one kind over).
+  player: () => ({})
 };
 
 /** The display name for one id. Returns null when the id resolves to nothing — the caller decides
  *  whether that is a loud failure (authored prose) or a quiet fallback (a generated reference). */
 export function nameOf(kind, id, content = {}, opts = {}) {
   if (!KINDS.includes(kind) || !id) return null;
+  // ⛑ SNG-552 §6: the acting character, by whatever they are actually called. `{{player:name}}` in authored prose
+  // becomes the person who took the decision — so an outcome written once reads truly for everyone who reaches it.
+  // ⚠️ NULL WHEN THERE IS NO CHARACTER, never a guess and never a placeholder: the caller decides whether an
+  // unresolvable token is a loud failure or a quiet fallback, and that judgement is not this function's to make.
+  if (kind === "player") return opts.character?.name || null;
   const rec = SOURCES[kind](content)[id];
   if (!rec) return null;
   // SNG-111: a per-character override — what THIS character calls them, if they have learned it.
@@ -61,6 +82,10 @@ export function renderNames(text, content = {}, opts = {}) {
     const name = nameOf(kind, id, content, opts);
     if (name) return name;
     if (onMissing) onMissing({ kind, id, raw });
+    // ⚠️ SNG-552 §6: the id-as-fallback reads as nonsense for a PLAYER token — "{{player:name}} did it" degraded to
+    // "name did it". Every other kind's id IS a readable thing ("echo_river_crossing"); a player's is a field label.
+    // ⛑ "they" is the least invention available and stays grammatical wherever the sentence put the name.
+    if (kind === "player") return "they";
     // readable degradation — never the raw token, never an empty hole
     return String(id).replace(/_/g, " ");
   });

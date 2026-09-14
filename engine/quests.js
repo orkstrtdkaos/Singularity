@@ -13,6 +13,7 @@ import { namesMatch, resolveByName, smartClamp } from "./namematch.js";
 import { traditionOf } from "./traditions.js";
 import { createWake } from "./wake.js"; // SNG-204: a significant outcome leaves a wake the world continues from
 import { recordDeed } from "./reputation.js";   // SNG-282: a resolved quest is a deed, and deeds travel
+import { renderNamesDeep } from "./names.js";   // SNG-552 §6: an effect that becomes a permanent world fact resolves its tokens first
 
 /** SNG-217: models often "type" \n / \t as the literal two-character escape inside their JSON strings.
  *  Valid JSON parses that as backslash-n (two chars), which then renders verbatim — literal `\n` on screen
@@ -303,7 +304,8 @@ export function normalizeQuestRoutes(r) {
   return out;
 }
 
-export function structuredQuestRecord(def) { // registry:internal
+export function structuredQuestRecord(def) {
+ // registry:internal
   return {
     id: slugify(def.id), title: def.name || def.id, structured: true, status: "available",
     premise: normalizeProse(def.premise || ""), stakes: normalizeProse(def.stakes || ""), axis: def.axis || null, // SNG-217: literal \n → real break on write
@@ -509,6 +511,12 @@ export function completeQuestStage(character, questId, stageId) {
  *  ctx.recordEvent is an optional sink (dated propagating events) so the engine stays decoupled
  *  from sync; ctx.recordFact pins a findable fact. Returns the list of applied changes + total xp. */
 function applyQuestEffects(character, quest, effects, ctx = {}) {
+  // ⛔ SNG-552 §6 — THE EFFECT PATH NEVER RESOLVED A TOKEN, so an author had no way to say "whoever is deciding".
+  // Prompt assembly has resolved `{{kind:id}}` since SNG-182; effects — the things that become PERMANENT WORLD
+  // FACTS — went through untouched. ⚠️ That is the wrong way round: a prompt is read once and a world fact is read
+  // forever. Resolved here, at the one door every effect passes through, so no effect type has to remember.
+  // ⛑ A no-op on the overwhelming majority: `renderNames` returns the string untouched unless it contains "{{".
+  if (ctx.content) effects = renderNamesDeep(effects, ctx.content, { character });
   const applied = [];
   character.peopleDisposition = character.peopleDisposition || {};
   character.worldEvents = character.worldEvents || [];

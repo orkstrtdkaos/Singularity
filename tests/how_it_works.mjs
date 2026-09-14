@@ -13961,6 +13961,92 @@ console.log("\n── §209 · a hold that can move: built, whole, and never onc
     /the PLAYER can put out from their own holdings panel/.test(blk));
 }
 
+// ⛔ SNG-552 §6 (Aevi) — "EVERY OUTCOME NAMES THE WRONG PLAYER. Cellaceron is the one deciding, so his permanent
+// world fact will read 'Silas Weir rewrote the facility's instruction.' On screen today."
+//
+// ⚑ MEASURED, AND THE COUNT IS NOT THE INTERESTING PART: 13 effect strings carry the name, not 5. WHICH ones is the
+// whole question — two of the three files record things SILAS ACTUALLY DID (he made the first waygate since the
+// Transition; he left a second unfinished work standing in his hollow), and those are CANON. ⛔ A BLANKET TEMPLATING
+// WOULD HAVE REWRITTEN REAL HISTORY INTO ANONYMOUS PROSE, which is SNG-546's near-miss in different clothes: a fix
+// that looks total and destroys the records it was meant to correct.
+//
+// ⛑ THE LIVE DEFECT IS NARROWER: an UNRESOLVED outcome, the one Cellaceron is standing at, pre-written with another
+// player's name — so whoever reaches it inherits Silas's history. So the ENGINE gains the tool and the CONTENT stays
+// Aevi's: a finished outcome keeps its name because the name is the fact; a pending one names whoever acts.
+console.log("\n── §210 · the outcome names whoever is standing at it ──");
+{
+  const NM210 = await import("../engine/names.js");
+
+  /* ---- 1 · ⛑ THE TOKEN, AND IT IS PER-ACTOR ---- */
+  const line = "{{player:name}} rewrote the facility's instruction.";
+  check("§210: ⛑ the same authored sentence names whoever is actually deciding",
+    NM210.renderNames(line, {}, { character: { name: "Cellaceron" } }) === "Cellaceron rewrote the facility's instruction."
+    && NM210.renderNames(line, {}, { character: { name: "Silas Weir" } }) === "Silas Weir rewrote the facility's instruction.");
+  // ⚠️ THE ID-AS-FALLBACK READS AS NONSENSE FOR THIS KIND. Every other kind's id IS a readable thing
+  // ("echo_river_crossing"); a player's is a field label, so the default degraded to "name did it".
+  check("§210: …and degrades to a grammatical word when there is no character, not to the field name",
+    NM210.renderNames("{{player:name}} did it.", {}, {}) === "they did it.");
+  // ⛔ AND IT NEVER TOUCHES PROSE THAT NAMES SOMEBODY OUTRIGHT. Silas made the first waygate; that is a fact about
+  // Silas and must survive every other player reading it.
+  check("§210: ⛔ a sentence that names a person outright is left exactly as authored",
+    NM210.renderNames("Silas Weir made the first waygate since the Transition.", {}, { character: { name: "Cellaceron" } })
+    === "Silas Weir made the first waygate since the Transition.");
+  check("§210: the player kind resolves through the same `nameOf` every other kind uses",
+    NM210.nameOf("player", "name", {}, { character: { name: "Usnea Beard" } }) === "Usnea Beard"
+    && NM210.nameOf("player", "name", {}, {}) === null);
+
+  /* ---- 2 · ⛔ THE EFFECT PATH NEVER RESOLVED A TOKEN, WHICH IS THE WRONG WAY ROUND ---- */
+  // Prompt assembly has resolved `{{kind:id}}` since SNG-182. Effects — the things that become PERMANENT WORLD
+  // FACTS — went through untouched. ⚠️ A prompt is read once; a world fact is read forever.
+  const QS210 = rd("engine/quests.js");
+  check("§210: ⛔ effects resolve their tokens before they are applied",
+    /if \(ctx\.content\) effects = renderNamesDeep\(effects, ctx\.content, \{ character \}\);/.test(QS210));
+  check("§210: …at the ONE door every effect type passes through, so none has to remember",
+    (QS210.match(/renderNamesDeep\(effects/g) || []).length === 1
+    && /function applyQuestEffects\(character, quest, effects, ctx = \{\}\) \{\s*\n\s*\/\/ ⛔ SNG-552/.test(QS210));
+  // ⛑ AND THE CALLER ALREADY FEEDS IT. `content: CONTENT` has ridden in this ctx since SNG-204's wake — a reader
+  // whose input nobody passes is the defect this whole session keeps finding, so it is asserted rather than assumed.
+  check("§210: ⛑ …and the app passes the content this reader needs — a reader nothing feeds is not a reader",
+    /content: CONTENT, \/\/ SNG-204/.test(rd("app.js")));
+
+  /* ---- 3 · driven on an effects array of the exact shape the water quest carries ---- */
+  const effects = [
+    { type: "world_fact", text: "{{player:name}} woke a thing from before the Transition.", permanent: true },
+    { type: "npc_state", npc: "the_awakened_precursor", state: "awakened", note: "bonded to {{player:name}} as the one who woke it" },
+    { type: "arc_stage", arcId: "arc_what_wakes_beneath", push: 3, weight: 3, note: "the arc is ANSWERED by waking" },
+  ];
+  const forCell = NM210.renderNamesDeep(effects, {}, { character: { name: "Cellaceron" } });
+  check("§210: ⛑ every string in an effects array is resolved, at any depth",
+    forCell[0].text.startsWith("Cellaceron woke") && /bonded to Cellaceron/.test(forCell[1].note));
+  // ⚠️ AND THE MACHINE-READABLE FIELDS ARE UNTOUCHED — an id is not prose, and resolving one would break the reader.
+  check("§210: ⛔ …and ids, numbers and types come through unchanged",
+    forCell[1].npc === "the_awakened_precursor" && forCell[2].arcId === "arc_what_wakes_beneath"
+    && forCell[2].push === 3 && forCell[2].weight === 3 && forCell[0].permanent === true);
+
+  /* ---- 4 · ⛑ AEVI'S MIGRATION, VERIFIED — the half of §3 that was hers ---- */
+  // ⚑ She converted all eleven `world_arc` effects to `arc_stage` after my reply. Measured at HEAD: zero `world_arc`
+  // remain, 21 `arc_stage`, and ALL 21 meet the reader's condition (`arcId` + a finite `to` or `push`).
+  const { loadContentHeadless: lch210 } = await import("./headless_content.mjs");
+  const C210 = await lch210();
+  const arcFx = [];
+  const dig210 = (n) => { if (!n || typeof n !== "object") return;
+    if (Array.isArray(n)) return n.forEach(dig210);
+    if (n.type === "arc_stage" || n.type === "world_arc") arcFx.push(n);
+    Object.values(n).forEach(dig210); };
+  dig210(C210.quests);
+  const inert = arcFx.filter(e => !(e.arcId && (Number.isFinite(e.to) || Number.isFinite(e.push))));
+  check("§210: ⛑ every arc effect in the loaded corpus carries a magnitude the reader will apply",
+    arcFx.length > 0 && inert.length === 0,
+    `${arcFx.length} arc effect(s), ${inert.length} inert`);
+  // ⛔ AND THE FOUR OUTCOMES OF THE WATER QUEST ARE NO LONGER IDENTICAL. Sealing it and waking it pushed the same arc
+  // the same distance the same way before this; two of them moved it OPPOSITE to their own prose.
+  const water = arcFx.filter(e => e.arcId === "arc_what_wakes_beneath");
+  const dirs = water.map(e => Math.sign(Number.isFinite(e.push) ? e.push : (e.to - (e.from ?? 0))));
+  check("§210: ⛔ the water quest's outcomes push DIFFERENT ways — a closing is no longer an advance",
+    water.length >= 4 && new Set(dirs).size >= 3 && dirs.includes(-1) && dirs.includes(1),
+    `directions: ${dirs.join(", ")}`);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

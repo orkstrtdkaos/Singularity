@@ -144,7 +144,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "1.9.528";
+const APP_VERSION = "1.9.529";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8749,6 +8749,22 @@ async function onFreeform(text) {
   // ⚠️ THE LOADED DOC IS THE WHOLE FILE, not the array — `CONTENT.spectrums.spectrums` is the list, and reading the envelope hands
   // the whitelist zero ids, which silently turns the check off. Measured before wiring it rather than after.
   const intent = await parseIntent(text, character, location, fullCatalog(), { spectrumIds: (CONTENT.spectrums?.spectrums || []).map(s => s && s.id).filter(Boolean) });
+  // ⛔ SNG-547 O5 — "AND COUNT A DROPPED AXIS IN THE TASK TELEMETRY." The validation was built and its RESULT
+  // had no reader: `axesDropped` was computed, returned, and consumed by nothing.
+  //
+  // ⚠️ WHICH IS THE EXACT FAILURE THE SPEC NAMES: "the response reads `stop:end_turn` with no error — a turn
+  // that silently lost its axis contribution looked exactly like a clean one, which is the thing we keep
+  // finding." ⚑ The guard held the dice safe (`Number.isFinite` rejecting `"mechanical_spiritual"` is the
+  // "roll 20 vs NaN" rule working); what was missing was anyone being TOLD.
+  //
+  // ⛑ SO IT IS COUNTED WHERE I ALREADY LOOK, and shown in dev where the person who can fix a contract is.
+  // A player sees nothing: their action still resolved, and a malformed axis is not their mistake to read.
+  if ((intent.axesDropped || []).length) {
+    character._axesDropped = [...(character._axesDropped || []).slice(-19),
+      ...intent.axesDropped.map(d => ({ at: new Date().toISOString(), key: d.key, value: d.value, why: d.why }))].slice(-20);
+    try { queueDevReport(); } catch { /* telemetry must never cost a turn */ }
+    if (isDevMode()) console.warn("[intent] axis dropped:", intent.axesDropped.map(d => `${d.key}=${JSON.stringify(d.value)} (${d.why})`).join(", "));
+  }
   if (intent.feasible === false) {
     renderPlay(character.activeScene?.lastTurn || null, { aside: intent.infeasibleReason || "That isn't possible here." });
     return;

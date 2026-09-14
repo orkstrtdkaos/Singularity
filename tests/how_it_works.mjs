@@ -15114,6 +15114,78 @@ console.log("\n── §222 · a deferral that was recorded as an advance ──
     && !(again.notes || []).some(n => /re-read one of your endings/.test(n)));
 }
 
+
+// ⛔ SNG-547 O5 (Aevi) — "THE AXES CONTRACT IS VALIDATED AND ITS FAILURES ARE AUDIBLE."
+//
+// ⚑ MEASURED AT HEAD BEFORE BUILDING, AND FOUR OF HER FIVE OUTCOMES WERE ALREADY DONE — O1's "the lists below
+// are PARTIAL" directive, O2's canon block, O3's naming write-back (Erik's spear now reads `customName:
+// "Memory — The Dual Spear"` in his own save), O4's aliases beside every item name. ⛔ O5 WAS HALF BUILT, AND
+// IT WAS THE HALF THAT MAKES A DEFECT VISIBLE: `axesDropped` was computed, returned, and READ BY NOBODY.
+//
+// ⚠️ WHICH IS THE EXACT FAILURE SHE NAMED: "the response reads `stop:end_turn` with no error — a turn that
+// silently lost its axis contribution looked exactly like a clean one, WHICH IS THE THING WE KEEP FINDING."
+// ⛑ The guard itself was right the whole time: `Number.isFinite` rejecting the placeholder returned literally
+// (`{"axes": {"spectrumId": "mechanical_spiritual"}}`) is the "a stray string produced roll 20 vs NaN" rule
+// holding exactly as designed. What was missing was anyone being TOLD.
+console.log("\n── §223 · the axis that was dropped in silence ──");
+{
+  const GM223 = await import("../engine/gm.js");
+  const DR223 = await import("../engine/devreport.js");
+  const { loadContentHeadless: lch223 } = await import("./headless_content.mjs");
+  const C223 = await lch223();
+  const ids223 = (C223.spectrums?.spectrums || []).map(s => s && s.id).filter(Boolean);
+  const who = { abilities: [], inventory: [] };
+
+  /* ---- 1 · ⛔ BOTH SHAPES OF WRONG, AND THE SECOND IS THE DANGEROUS ONE ---- */
+  check("§223: the world really does carry twelve spectrum ids for this to check against",
+    ids223.length >= 12, `${ids223.length} spectrum id(s)`);
+  // ⚠️ THE PLACEHOLDER RETURNED LITERALLY. The contract reads `"axes": {"spectrumId": -1..1}` and the model
+  // answered with the KEY's own name as the VALUE.
+  const literal = GM223.sanitizeIntent({ axes: { spectrumId: "mechanical_spiritual" } }, who, "x", { spectrumIds: ids223 });
+  check("§223: ⛔ a non-numeric axis never becomes a roll — the dice stay safe, as they always did",
+    Object.keys(literal.axes).length === 0 && literal.axesDropped.some(d => d.why === "not a number"));
+  // ⛔ AND THE ONE THAT WOULD HAVE BEEN STORED. A NUMBER under a misspelled key passes every finite check and
+  // becomes "a real axis that nothing will ever read" — the unread-content defect arriving through the MODEL
+  // instead of through an author.
+  const misspelled = GM223.sanitizeIntent({ axes: { mechnical_spiritual: 0.4 } }, who, "x", { spectrumIds: ids223 });
+  check("§223: ⛔ …and a NUMBER under a key the world does not have is refused, not stored",
+    Object.keys(misspelled.axes).length === 0 && misspelled.axesDropped.some(d => d.why === "not a spectrum id"));
+  // ⛑ AND A REAL AXIS IS UNTOUCHED, clamped to the band — a validator that also broke the good case would be
+  // the worse bug.
+  const good = GM223.sanitizeIntent({ axes: { [ids223[0]]: 0.4, [ids223[1]]: 9 } }, who, "x", { spectrumIds: ids223 });
+  check("§223: ⛑ …and a real axis passes through, clamped to its band",
+    good.axes[ids223[0]] === 0.4 && good.axes[ids223[1]] === 1 && good.axesDropped.length === 0);
+
+  /* ---- 2 · ⛑ AND THE DROP IS NOW AUDIBLE, WHICH IS THE WHOLE OUTCOME ---- */
+  // ⛔ A PRODUCER IS NOT A READER. This value existed, was returned, and reached nothing — the same shape as
+  // `skillsObserved`, `deathDepth` and `contributionsBy` this week. The gate is on the CHAIN, not the field.
+  const A223 = rd("app.js");
+  check("§223: ⛑ a dropped axis is recorded on the save where the report can find it",
+    /character\._axesDropped = \[/.test(A223) && /intent\.axesDropped/.test(A223));
+  const rep = DR223.buildDevReport({ id: "c", name: "T", _axesDropped: [
+    { at: "2026-09-14T00:00:00Z", key: "spectrumId", value: "mechanical_spiritual", why: "not a number" }] }, { vocabulary: [] });
+  check("§223: ⛔ …and the dev report carries it beside the op counts, where I already look",
+    rep.contract?.axesDroppedN === 1 && rep.contract.axesDropped[0].why === "not a number");
+  // ⚠️ AND THE PLAYER IS NOT TOLD. Their action resolved; a malformed axis is a CONTRACT failure between the
+  // engine and the model, and telling a player their turn was faulty when it was not is its own defect.
+  check("§223: ⚠️ …and it is shown in DEV only — a contract failure is not the player's mistake to read",
+    /if \(isDevMode\(\)\) console\.warn\("\[intent\] axis dropped:/.test(A223)
+    && !/renderPlay[^;]*axis dropped/.test(A223));
+
+  /* ---- 3 · ⛑ AND THE FOUR THAT WERE ALREADY BUILT STAY BUILT ---- */
+  // ⚑ Measured, not assumed — this is the section that would otherwise quietly rot back.
+  const G223 = rd("engine/gm.js");
+  check("§223: ⛑ O1 — absence from the prompt is still not absence from the world",
+    /THE LISTS BELOW ARE PARTIAL/.test(G223) && /NEVER return feasible:false because something was not in the lists/.test(G223));
+  check("§223: ⛑ O2 — the canon still reaches the classifier that rules on what exists",
+    /parserCanon\(character\)/.test(G223));
+  check("§223: ⛑ O4 — and an item still arrives with every name the fiction gave it",
+    /a player may name any of these; match on any name given/.test(G223));
+  // ⛔ O3 IS THE ONE THAT KEEPS MANUFACTURING THE BUG, so it is gated on the CONTRACT the GM reads, not on a save.
+  check("§223: ⛔ O3 — and a naming is still a record change, not flavour",
+    /AND A NAMING IS A RECORD CHANGE, NOT FLAVOUR/.test(G223) && /you MUST emit "itemUpdates" with "customName" in THAT SAME TURN/.test(G223));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

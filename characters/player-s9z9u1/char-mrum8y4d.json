@@ -243,14 +243,11 @@
     "lastTurn": {
       "narration": "",
       "choices": [],
-      "deriveItem": [
-        {
-          "fromName": "Traveler's Pack",
-          "name": "A fire-test offcut",
-          "description": "trimmed from it, and kept",
-          "why": "fire test"
-        }
-      ],
+      "offerPromotion": {
+        "npcId": "tessvel-cairn",
+        "to": "senior hand",
+        "why": "fire test"
+      },
       "sceneSummary": null
     },
     "sceneState": {
@@ -7045,7 +7042,7 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789426317038,
+  "updatedAt": 1789426317067,
   "rev": 605,
   "generated": {
     "schemaVersion": 1,
@@ -7994,7 +7991,7 @@
     {
       "id": "sess-10",
       "startedAt": "2026-09-14T22:51:56.902Z",
-      "lastAt": "2026-09-14T22:51:57.035Z",
+      "lastAt": "2026-09-14T22:51:57.067Z",
       "startDay": 76,
       "endDay": 76,
       "beats": 2

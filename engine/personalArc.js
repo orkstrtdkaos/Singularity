@@ -175,6 +175,33 @@ export function sanitizePersonalArc(raw, character, ctx = {}) {
   };
 }
 
+/** ⛔ SNG-587 — A NAME FIELD MUST NOT TAKE A PARAGRAPH. `bio.hometown` is a free-text field and players
+ *  answer "where are you from" with a story: Brook's Chernak gave 342 characters of it, and this line then
+ *  ran `titleize` over the lot and produced a 356-character arc title containing `Isn'T`.
+ *  ⚠️ A place name is short and has no sentence punctuation. Anything else is a story, and a story titled is
+ *  worse than no title — so it takes the branch this line already had for a thin bio, which reads well:
+ *  "Chernak the Blind's Question". ⛑ `titleize` is kept and is safe once it only ever sees a place. */
+const PLACE_MAX = 40;
+function looksLikeAPlace(v) {
+  const t = String(v || "").trim();
+  return !!t && t.length <= PLACE_MAX && !/[.!?;:*]|\s—\s/.test(t);
+}
+function arcTitle(s) {
+  if (!s.thin && looksLikeAPlace(s.hometown)) return `The Thread of ${titleize(s.hometown)}`;
+  return `${s.name}'s Question`;
+}
+/** ⚠️ SNG-587 — and the same field is inlined into stage 1, where a paragraph reads as
+ *  "a first sign of Callum's fall left a specific gap … surfaces in the valley". A motivation long enough
+ *  to be prose is summarised to the thing it is ABOUT rather than pasted whole. */
+function trimEnd(v) { return String(v || "").trim().replace(/[.\s]+$/, ""); }
+function shortDrive(s, drive) {
+  const d = trimEnd(drive);
+  if (d.length <= 70) return d;
+  return s.hometown && looksLikeAPlace(s.hometown)
+    ? `what ${s.name} left unfinished in ${titleize(s.hometown)}`
+    : `the thing ${s.name} came here carrying`;
+}
+
 /** A light, LLM-free personal arc — always present, seeded from the bio/origin so no character is ever
  *  arcless (SNG-133 "never zero"). Scales down for a thin backstory. Pure + deterministic. */
 export function fallbackPersonalArc(character) {
@@ -184,14 +211,14 @@ export function fallbackPersonalArc(character) {
   if (s.primary) routes[s.primary] = "answer it as your people would";
   routes.seek = "seek the truth of it, wherever it leads";
   return {
-    id: `${slug(s.name) || "traveler"}-thread`, name: s.thin ? `${s.name}'s Question` : `The Thread of ${titleize(s.hometown) || s.name}`,
+    id: `${slug(s.name) || "traveler"}-thread`, name: arcTitle(s),
     arcId: `${slug(s.name) || "traveler"}_personal_arc`, boundToCharacter: s.name, boundToPlayer: s.playerKey,
     region: "valley", tier: "personal",
-    premise: `${s.name} carries an unfinished thing: ${drive}. The valley will give them the chance to face it.`,
+    premise: `${s.name} carries an unfinished thing: ${trimEnd(drive)}. The valley will give them the chance to face it.`,
     stakes: "who they become when the thing they left behind finally catches up",
     legendNpc: null, legend: null,
     stages: [
-      { id: "s1", objective: `a first sign of ${drive} surfaces in the valley` },
+      { id: "s1", objective: `a first sign of ${shortDrive(s, drive)} surfaces in the valley` },
       { id: "s2", objective: "the thread deepens — what it costs to pull it becomes clear" },
       { id: "s3", objective: "the reckoning — and the choice of what to do with it" }
     ],

@@ -1,761 +1,762 @@
 {
-  "schemaVersion": 1,
-  "id": "char-mtrah08w",
-  "playerKey": "player-7fah99",
-  "name": "Chernak the Blind",
-  "origin": "rootkin",
-  "nativeTradition": "rootkin",
-  "whyHere": "You were sent, or you were seeded, or you simply wanted to see something finish inside a single lifetime.",
-  "background": "precursor_marked",
-  "level": 1,
-  "xp": 14,
-  "attributes": {
-    "physical": 3,
-    "mental": 3,
-    "social": 3,
-    "practical": 3
+ "schemaVersion": 1,
+ "id": "char-mtrah08w",
+ "playerKey": "player-7fah99",
+ "name": "Chernak the Blind",
+ "origin": "rootkin",
+ "nativeTradition": "rootkin",
+ "whyHere": "You were sent, or you were seeded, or you simply wanted to see something finish inside a single lifetime.",
+ "background": "precursor_marked",
+ "level": 1,
+ "xp": 14,
+ "attributes": {
+  "physical": 3,
+  "mental": 3,
+  "social": 3,
+  "practical": 3
+ },
+ "skills": {
+  "precursor-glimpse": 1,
+  "reveal": 2,
+  "analyze": 1
+ },
+ "abilities": [
+  {
+   "abilityId": "steady_hands",
+   "level": 1
   },
-  "skills": {
-    "precursor-glimpse": 1,
-    "reveal": 2,
-    "analyze": 1
+  {
+   "abilityId": "sling_and_stone",
+   "level": 1
   },
-  "abilities": [
-    {
-      "abilityId": "steady_hands",
-      "level": 1
-    },
-    {
-      "abilityId": "sling_and_stone",
-      "level": 1
-    },
-    {
-      "abilityId": "pattern_sense",
-      "level": 1,
-      "native": true
-    },
-    {
-      "abilityId": "formcraft",
-      "level": 1,
-      "native": true
-    },
-    {
-      "abilityId": "physicians_tome",
-      "level": 1,
-      "native": true
-    },
-    {
-      "abilityId": "named_exclusion",
-      "level": 1,
-      "native": true
-    },
-    {
-      "abilityId": "solved_route",
-      "level": 1,
-      "native": true
-    },
-    {
-      "abilityId": "branch_club",
-      "level": 1,
-      "baseline": true
-    },
-    {
-      "abilityId": "barkskin",
-      "level": 1,
-      "baseline": true
-    },
-    {
-      "abilityId": "root_hold",
-      "level": 1,
-      "baseline": true
-    },
-    {
-      "abilityId": "root_reach",
-      "level": 1,
-      "baseline": true
-    }
+  {
+   "abilityId": "pattern_sense",
+   "level": 1,
+   "native": true
+  },
+  {
+   "abilityId": "formcraft",
+   "level": 1,
+   "native": true
+  },
+  {
+   "abilityId": "physicians_tome",
+   "level": 1,
+   "native": true
+  },
+  {
+   "abilityId": "named_exclusion",
+   "level": 1,
+   "native": true
+  },
+  {
+   "abilityId": "solved_route",
+   "level": 1,
+   "native": true
+  },
+  {
+   "abilityId": "branch_club",
+   "level": 1,
+   "baseline": true
+  },
+  {
+   "abilityId": "barkskin",
+   "level": 1,
+   "baseline": true
+  },
+  {
+   "abilityId": "root_hold",
+   "level": 1,
+   "baseline": true
+  },
+  {
+   "abilityId": "root_reach",
+   "level": 1,
+   "baseline": true
+  }
+ ],
+ "alignment": {
+  "spectrumId": 0
+ },
+ "attunement": 1,
+ "maxHealth": 30,
+ "health": 30,
+ "maxEnergy": 100,
+ "energy": 80,
+ "inventory": [
+  {
+   "id": "travelers_pack",
+   "name": "Traveler's Pack",
+   "kind": "tool",
+   "qty": 1,
+   "description": "A worn canvas pack with good straps — bedroll, flint, mess kit, fifty small comforts of the road.",
+   "bonusTags": [
+    "retreat",
+    "careful"
+   ],
+   "consumable": false
+  },
+  {
+   "id": "waterskin",
+   "name": "Waterskin",
+   "kind": "consumable",
+   "qty": 1,
+   "description": "Boiled and refilled at the last clean spring. Worth more every week the river runs gray.",
+   "effects": {
+    "energy": 10
+   },
+   "bonusTags": [
+    "weather",
+    "travel",
+    "survival"
+   ],
+   "consumable": true,
+   "pinned": true
+  }
+ ],
+ "deeds": [],
+ "relationships": {},
+ "chronicle": [],
+ "currentLocationId": "the_crossing",
+ "activeScene": {
+  "locationId": "the_crossing",
+  "turns": [
+   {
+    "player": "Back away — refuse the fight",
+    "summary": "Chernak backs away from a near-fight at the Common Table and settles in the crowded space.",
+    "narration": "You step back from the threshold of whatever that was about to become. The man across from you — broad through the shoulders, jaw set, one hand still resting on the hilt he has not drawn — reads your retreat correctly and does not follow. A fight refused is not a fight lost, and he knows it, even if the watching faces around you make a short disappointed sound before returning to their cups.\n\nThe Crossing absorbs the moment without ceremony. Someone else's argument fills the air two tables over. Mayvee, who had gone very still against your ankle during the confrontation, resumes its usual business of being a shape at the edge of your vision — present, unreadable, unimpressed. It does not comfort you. It never does.\n\nThe Common Table opens ahead of you: long benches, the smell of something boiled with last autumn's dried herbs, early-spring mud tracked in on a dozen boots. The place is crowded for midday, which tells you the road outside is busier than the season usually warrants. People travel when they are worried, and the water-talk from the far end of the room — boiling required, someone's cousin upstream is sick — confirms what you have already heard. The first melt is running gray in places.\n\nYou find a gap on the bench near the far wall and settle. Through one palm pressed briefly to the table's boards you catch the faint hum the Crossing always carries — all things, none of them ruling. Outside the narrow window the sky has shifted, a quick squall moving through, and the light goes briefly silver and cold before settling back to ordinary pale noon."
+   },
+   {
+    "summary": "Brynjar Andyrsson: Brynjar logged the group's arrival with the Wardcaller; learned the Coliseum road is open and traveled, the Hundred Markets road has a customs trouble at the march-line, and that the Wardcaller…"
+   },
+   {
+    "player": "a vision comes for brinjal, spoken in tongues, but told to him and he can understand  ",
+    "summary": "Chernak attempts to carry a vision to Brynjar — and finds nothing arrives.",
+    "narration": "The vision does not come.\n\nYou feel the familiar sensation of something trying to form — a pressure at the base of your skull, a faint narrowing of the room's noise the way it does before a genuine waking-dream surfaces — but it stalls. The Common Table stays the Common Table: boiled herbs, mud-tracked floor, the broad-shouldered man still watching you from three paces off, Brynjar somewhere in the crowd behind you. Whatever wanted to reach Brynjar today found something in its way, or found Brynjar the wrong shape to receive it, or simply found you too unsettled by the near-fight's residue to carry it cleanly through. The channel does not open.\n\nMayvee places itself squarely between your feet, which is the closest it comes to commentary."
+   },
+   {
+    "player": "focus my mind, reach for the vision again and speak it to him",
+    "summary": "Chernak reaches past the near-fight's residue and carries a fragment of vision to Brynjar — a road running outward, the light wrong on it, two figures, one faceless.",
+    "narration": "You close your eyes for a moment — not long, just long enough to let the Common Table's noise drop to background. The near-fight's residue is still in your chest, that particular tightness, but you breathe past it and reach.\n\nThis time something comes.\n\nNot a full vision — not the wide, slow, river-of-images kind that sometimes keeps you rooted in place for a minute and a half while everyone around you pretends not to stare. This is a fragment. A single still image, clear and cold: a road running outward from the Crossing, the light on it wrong — too bright on one side, shadow pooling on the other where shadow has no cause to pool. Two figures walking it. One of them has no face in the image, only a direction. The other is Brynjar, unmistakably, though you have not known him long enough to say how you know it.\n\nYou speak it aloud, low and level, not performing, just reporting: \"A road running outward. Light and shadow both wrong on it, each keeping to its side. You are on the road. Someone walks beside you whose face the vision does not show me. I don't know yet if that is a good thing.\" You pause. \"It arrived this time. Make of it what you will.\""
+   },
+   {
+    "summary": "Brynjar Andyrsson: Brynjar takes a first look at Chernak the Blind — pale sightless eyes, mended robes, a stillness that listens rather than watches; Freki's verdict is neutral."
+   },
+   {
+    "player": "Press Brynjar on the faceless figure — ask what he makes of it, or whether it fits anything the Order-Sense already showed him",
+    "summary": "Chernak presses Brynjar on the faceless figure from the vision, asking whether Order-Sense caught anything that fits.",
+    "narration": "You turn toward Brynjar — not fully, because the broad-shouldered man is still watching and you don't quite trust your back to him yet — and ask plainly: what does he make of the faceless one?\n\nBrynjar is close enough that you can keep your voice low. The Common Table's noise covers it: the scrape of bowls at the far end, the water-crisis argument that hasn't stopped since you walked in, someone coughing behind a bench. You tell him what you saw — the road running outward, the light split wrong, two figures, and the one that had no face where a face should be. You ask if Order-Sense showed him anything that fits: a road with that kind of trouble on it, a person-shaped absence moving toward something.\n\nMayvee has not moved from your left shoulder's shadow. It is not looking at Brynjar. It is looking at the broad-shouldered man, which you register as information."
+   },
+   {
+    "player": "Wait for Brynjar's answer — stay still and listen to what he makes of it",
+    "summary": "Brynjar interprets the faceless figure as possibly himself — Order-Sense shows him only a person-shaped gap, unresolved; Mayvee's attention returns to the watching stranger.",
+    "narration": "You go still. That is the easiest thing you do — the Common Table's noise settles around you like water finding its level, and you wait.\n\nBrynjar takes a breath before he speaks. Low, careful, the kind of voice a man uses when he is not sure what he is about to say is going to sound reasonable. He tells you that Order-Sense does not give him faces. It gives him structure — the way a thing holds together, where the seams are, what is bearing weight and what is pretending to. The road in your vision, he says, is a real kind of road. He has seen roads like that — not bent by weather or bad ground, but bent by something that is happening along their length, something that makes one side of it carry more than the other. The split light is a pattern he recognizes, even if he cannot name what makes it. But the faceless figure — there he stops. He says it plainly: Order-Sense shows him a person-shaped gap in the structure. Not hidden. Not concealed. Just — not resolved. As if the figure has not yet decided what it is.\n\nHe pauses. Then, quieter: he thinks it might be him. Not because he is certain, but because Order-Sense has never once shown him his own face when he looks at himself — just the outline of a weight bearing down, the same gap he described. He does not sound frightened by the idea. He sounds like a man noting a thing he will need to think about for a while.\n\nAcross the table, Mayvee shifts. You feel her attention move — not toward Brynjar, but back to the broad-shouldered man, who has not left and has not stopped watching."
+   }
   ],
-  "alignment": {
-    "spectrumId": 0
-  },
-  "attunement": 1,
-  "maxHealth": 30,
-  "health": 30,
-  "maxEnergy": 100,
-  "energy": 80,
-  "inventory": [
+  "lastTurn": {
+   "narration": "You go still. That is the easiest thing you do — the Common Table's noise settles around you like water finding its level, and you wait.\n\nBrynjar takes a breath before he speaks. Low, careful, the kind of voice a man uses when he is not sure what he is about to say is going to sound reasonable. He tells you that Order-Sense does not give him faces. It gives him structure — the way a thing holds together, where the seams are, what is bearing weight and what is pretending to. The road in your vision, he says, is a real kind of road. He has seen roads like that — not bent by weather or bad ground, but bent by something that is happening along their length, something that makes one side of it carry more than the other. The split light is a pattern he recognizes, even if he cannot name what makes it. But the faceless figure — there he stops. He says it plainly: Order-Sense shows him a person-shaped gap in the structure. Not hidden. Not concealed. Just — not resolved. As if the figure has not yet decided what it is.\n\nHe pauses. Then, quieter: he thinks it might be him. Not because he is certain, but because Order-Sense has never once shown him his own face when he looks at himself — just the outline of a weight bearing down, the same gap he described. He does not sound frightened by the idea. He sounds like a man noting a thing he will need to think about for a while.\n\nAcross the table, Mayvee shifts. You feel her attention move — not toward Brynjar, but back to the broad-shouldered man, who has not left and has not stopped watching.",
+   "sceneSummary": "Brynjar interprets the faceless figure as possibly himself — Order-Sense shows him only a person-shaped gap, unresolved; Mayvee's attention returns to the watching stranger.",
+   "choices": [
     {
-      "id": "travelers_pack",
-      "name": "Traveler's Pack",
-      "kind": "tool",
-      "qty": 1,
-      "description": "A worn canvas pack with good straps — bedroll, flint, mess kit, fifty small comforts of the road.",
-      "bonusTags": [
-        "retreat",
-        "careful"
-      ],
-      "consumable": false
+     "label": "Ask Brynjar whether a figure 'not yet decided what it is' worries him — press on what that means for the road ahead",
+     "attribute": "social",
+     "subAttribute": "rapport",
+     "difficulty": "easy",
+     "intentTags": [
+      "negotiate",
+      "study"
+     ],
+     "trivial": false
     },
     {
-      "id": "waterskin",
-      "name": "Waterskin",
-      "kind": "consumable",
-      "qty": 1,
-      "description": "Boiled and refilled at the last clean spring. Worth more every week the river runs gray.",
-      "effects": {
-        "energy": 10
-      },
-      "bonusTags": [
-        "weather",
-        "travel",
-        "survival"
-      ],
-      "consumable": true,
-      "pinned": true
+     "label": "Turn your attention to the broad-shouldered man — use Pattern-Sense to read what kind of thing his watching is",
+     "attribute": "mental",
+     "subAttribute": "insight",
+     "abilityId": "pattern_sense",
+     "difficulty": "normal",
+     "intentTags": [
+      "study",
+      "careful"
+     ],
+     "energyCost": 3,
+     "trivial": false
+    },
+    {
+     "label": "Let Mayvee handle the watching man — hold your ground beside Brynjar and give her room to read him",
+     "attribute": "mental",
+     "subAttribute": "wits",
+     "difficulty": "easy",
+     "intentTags": [
+      "guard",
+      "careful"
+     ],
+     "trivial": false
     }
-  ],
-  "deeds": [],
-  "relationships": {},
-  "chronicle": [],
-  "currentLocationId": "the_crossing",
-  "activeScene": {
-    "locationId": "the_crossing",
-    "turns": [
-      {
-        "player": "Back away — refuse the fight",
-        "summary": "Chernak backs away from a near-fight at the Common Table and settles in the crowded space.",
-        "narration": "You step back from the threshold of whatever that was about to become. The man across from you — broad through the shoulders, jaw set, one hand still resting on the hilt he has not drawn — reads your retreat correctly and does not follow. A fight refused is not a fight lost, and he knows it, even if the watching faces around you make a short disappointed sound before returning to their cups.\n\nThe Crossing absorbs the moment without ceremony. Someone else's argument fills the air two tables over. Mayvee, who had gone very still against your ankle during the confrontation, resumes its usual business of being a shape at the edge of your vision — present, unreadable, unimpressed. It does not comfort you. It never does.\n\nThe Common Table opens ahead of you: long benches, the smell of something boiled with last autumn's dried herbs, early-spring mud tracked in on a dozen boots. The place is crowded for midday, which tells you the road outside is busier than the season usually warrants. People travel when they are worried, and the water-talk from the far end of the room — boiling required, someone's cousin upstream is sick — confirms what you have already heard. The first melt is running gray in places.\n\nYou find a gap on the bench near the far wall and settle. Through one palm pressed briefly to the table's boards you catch the faint hum the Crossing always carries — all things, none of them ruling. Outside the narrow window the sky has shifted, a quick squall moving through, and the light goes briefly silver and cold before settling back to ordinary pale noon."
-      },
-      {
-        "summary": "Brynjar Andyrsson: Brynjar logged the group's arrival with the Wardcaller; learned the Coliseum road is open and traveled, the Hundred Markets road has a customs trouble at the march-line, and that the Wardcaller…"
-      },
-      {
-        "player": "a vision comes for brinjal, spoken in tongues, but told to him and he can understand  ",
-        "summary": "Chernak attempts to carry a vision to Brynjar — and finds nothing arrives.",
-        "narration": "The vision does not come.\n\nYou feel the familiar sensation of something trying to form — a pressure at the base of your skull, a faint narrowing of the room's noise the way it does before a genuine waking-dream surfaces — but it stalls. The Common Table stays the Common Table: boiled herbs, mud-tracked floor, the broad-shouldered man still watching you from three paces off, Brynjar somewhere in the crowd behind you. Whatever wanted to reach Brynjar today found something in its way, or found Brynjar the wrong shape to receive it, or simply found you too unsettled by the near-fight's residue to carry it cleanly through. The channel does not open.\n\nMayvee places itself squarely between your feet, which is the closest it comes to commentary."
-      },
-      {
-        "player": "focus my mind, reach for the vision again and speak it to him",
-        "summary": "Chernak reaches past the near-fight's residue and carries a fragment of vision to Brynjar — a road running outward, the light wrong on it, two figures, one faceless.",
-        "narration": "You close your eyes for a moment — not long, just long enough to let the Common Table's noise drop to background. The near-fight's residue is still in your chest, that particular tightness, but you breathe past it and reach.\n\nThis time something comes.\n\nNot a full vision — not the wide, slow, river-of-images kind that sometimes keeps you rooted in place for a minute and a half while everyone around you pretends not to stare. This is a fragment. A single still image, clear and cold: a road running outward from the Crossing, the light on it wrong — too bright on one side, shadow pooling on the other where shadow has no cause to pool. Two figures walking it. One of them has no face in the image, only a direction. The other is Brynjar, unmistakably, though you have not known him long enough to say how you know it.\n\nYou speak it aloud, low and level, not performing, just reporting: \"A road running outward. Light and shadow both wrong on it, each keeping to its side. You are on the road. Someone walks beside you whose face the vision does not show me. I don't know yet if that is a good thing.\" You pause. \"It arrived this time. Make of it what you will.\""
-      },
-      {
-        "summary": "Brynjar Andyrsson: Brynjar takes a first look at Chernak the Blind — pale sightless eyes, mended robes, a stillness that listens rather than watches; Freki's verdict is neutral."
-      },
-      {
-        "player": "Press Brynjar on the faceless figure — ask what he makes of it, or whether it fits anything the Order-Sense already showed him",
-        "summary": "Chernak presses Brynjar on the faceless figure from the vision, asking whether Order-Sense caught anything that fits.",
-        "narration": "You turn toward Brynjar — not fully, because the broad-shouldered man is still watching and you don't quite trust your back to him yet — and ask plainly: what does he make of the faceless one?\n\nBrynjar is close enough that you can keep your voice low. The Common Table's noise covers it: the scrape of bowls at the far end, the water-crisis argument that hasn't stopped since you walked in, someone coughing behind a bench. You tell him what you saw — the road running outward, the light split wrong, two figures, and the one that had no face where a face should be. You ask if Order-Sense showed him anything that fits: a road with that kind of trouble on it, a person-shaped absence moving toward something.\n\nMayvee has not moved from your left shoulder's shadow. It is not looking at Brynjar. It is looking at the broad-shouldered man, which you register as information."
-      },
-      {
-        "player": "Wait for Brynjar's answer — stay still and listen to what he makes of it",
-        "summary": "Brynjar interprets the faceless figure as possibly himself — Order-Sense shows him only a person-shaped gap, unresolved; Mayvee's attention returns to the watching stranger.",
-        "narration": "You go still. That is the easiest thing you do — the Common Table's noise settles around you like water finding its level, and you wait.\n\nBrynjar takes a breath before he speaks. Low, careful, the kind of voice a man uses when he is not sure what he is about to say is going to sound reasonable. He tells you that Order-Sense does not give him faces. It gives him structure — the way a thing holds together, where the seams are, what is bearing weight and what is pretending to. The road in your vision, he says, is a real kind of road. He has seen roads like that — not bent by weather or bad ground, but bent by something that is happening along their length, something that makes one side of it carry more than the other. The split light is a pattern he recognizes, even if he cannot name what makes it. But the faceless figure — there he stops. He says it plainly: Order-Sense shows him a person-shaped gap in the structure. Not hidden. Not concealed. Just — not resolved. As if the figure has not yet decided what it is.\n\nHe pauses. Then, quieter: he thinks it might be him. Not because he is certain, but because Order-Sense has never once shown him his own face when he looks at himself — just the outline of a weight bearing down, the same gap he described. He does not sound frightened by the idea. He sounds like a man noting a thing he will need to think about for a while.\n\nAcross the table, Mayvee shifts. You feel her attention move — not toward Brynjar, but back to the broad-shouldered man, who has not left and has not stopped watching."
-      }
+   ],
+   "scene": {
+    "setting": "The Common Table, long communal hall 140 m from the Crossing's centre. Midday, early spring. Pale cold light through open ends, mud on the floor, close-packed benches, boiled-herb smell.",
+    "npcsPresent": [
+     {
+      "name": "Brynjar Andyrsson",
+      "state": "Quiet after speaking — watching Chernak, waiting to see what they make of what he said"
+     },
+     {
+      "name": "Broad-shouldered man",
+      "state": "Still watching from three paces off; has not moved or left"
+     },
+     {
+      "name": "Mayvee",
+      "state": "Attention shifted back to the broad-shouldered man"
+     }
     ],
-    "lastTurn": {
-      "narration": "You go still. That is the easiest thing you do — the Common Table's noise settles around you like water finding its level, and you wait.\n\nBrynjar takes a breath before he speaks. Low, careful, the kind of voice a man uses when he is not sure what he is about to say is going to sound reasonable. He tells you that Order-Sense does not give him faces. It gives him structure — the way a thing holds together, where the seams are, what is bearing weight and what is pretending to. The road in your vision, he says, is a real kind of road. He has seen roads like that — not bent by weather or bad ground, but bent by something that is happening along their length, something that makes one side of it carry more than the other. The split light is a pattern he recognizes, even if he cannot name what makes it. But the faceless figure — there he stops. He says it plainly: Order-Sense shows him a person-shaped gap in the structure. Not hidden. Not concealed. Just — not resolved. As if the figure has not yet decided what it is.\n\nHe pauses. Then, quieter: he thinks it might be him. Not because he is certain, but because Order-Sense has never once shown him his own face when he looks at himself — just the outline of a weight bearing down, the same gap he described. He does not sound frightened by the idea. He sounds like a man noting a thing he will need to think about for a while.\n\nAcross the table, Mayvee shifts. You feel her attention move — not toward Brynjar, but back to the broad-shouldered man, who has not left and has not stopped watching.",
-      "sceneSummary": "Brynjar interprets the faceless figure as possibly himself — Order-Sense shows him only a person-shaped gap, unresolved; Mayvee's attention returns to the watching stranger.",
-      "choices": [
-        {
-          "label": "Ask Brynjar whether a figure 'not yet decided what it is' worries him — press on what that means for the road ahead",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": "easy",
-          "intentTags": [
-            "negotiate",
-            "study"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Turn your attention to the broad-shouldered man — use Pattern-Sense to read what kind of thing his watching is",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "abilityId": "pattern_sense",
-          "difficulty": "normal",
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "energyCost": 3,
-          "trivial": false
-        },
-        {
-          "label": "Let Mayvee handle the watching man — hold your ground beside Brynjar and give her room to read him",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "difficulty": "easy",
-          "intentTags": [
-            "guard",
-            "careful"
-          ],
-          "trivial": false
-        }
-      ],
-      "scene": {
-        "setting": "The Common Table, long communal hall 140 m from the Crossing's centre. Midday, early spring. Pale cold light through open ends, mud on the floor, close-packed benches, boiled-herb smell.",
-        "npcsPresent": [
-          {
-            "name": "Brynjar Andyrsson",
-            "state": "Quiet after speaking — watching Chernak, waiting to see what they make of what he said"
-          },
-          {
-            "name": "Broad-shouldered man",
-            "state": "Still watching from three paces off; has not moved or left"
-          },
-          {
-            "name": "Mayvee",
-            "state": "Attention shifted back to the broad-shouldered man"
-          }
-        ],
-        "objects": [
-          "Long communal benches",
-          "Traveler's Pack (worn)",
-          "Waterskin",
-          "Bowls of boiled something at the far end"
-        ],
-        "threads": [
-          "Brynjar believes the faceless figure may be himself — what does that mean for the road?",
-          "Broad-shouldered man still watching — reason unknown",
-          "Mayvee has re-fixed on him",
-          "Vision content still unresolved: road with split light, two figures",
-          "Water-crisis argument continuing at the far end of the hall"
-        ]
-      },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "brynjar-andyrsson",
-          "note": "Interpreted the faceless figure as possibly himself — Order-Sense shows him only a person-shaped gap, unresolved, the same gap he sees when he looks at himself. Recognized the split-light road as a real structural pattern without being able to name its cause.",
-          "learned": [
-            "Order-Sense does not show Brynjar his own face — only a weight-bearing outline, a gap",
-            "The faceless figure in Chernak's vision may be Brynjar himself, by his own reading",
-            "He recognizes the split-light road as a structural pattern — something bearing unevenly along its length"
-          ],
-          "statusNote": "Present at the Common Table, close and low-voiced; considering the vision's implications"
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "the-crossing",
-          "label": "The Crossing",
-          "kind": "place",
-          "entityId": "the-crossing",
-          "fact": "Brynjar read the faceless figure in Chernak's vision as possibly himself — Order-Sense shows him only a person-shaped gap where his own form should be, unresolved, not yet decided. The split-light road he recognized as a real structural pattern, something bearing unevenly, without knowing its cause.",
-          "links": [
-            "the-heartroot",
-            "brynjar-andyrsson"
-          ]
-        }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a short, low-voiced exchange at the bench"
-      }
-    },
-    "sceneState": {
-      "setting": "The Common Table, long communal hall 140 m from the Crossing's centre. Midday, early spring. Pale cold light through open ends, mud on the floor, close-packed benches, boiled-herb smell.",
-      "npcsPresent": [
-        {
-          "name": "Brynjar Andyrsson",
-          "state": "Quiet after speaking — watching Chernak, waiting to see what they make of what he said"
-        },
-        {
-          "name": "Broad-shouldered man",
-          "state": "Still watching from three paces off; has not moved or left"
-        },
-        {
-          "name": "Mayvee",
-          "state": "Attention shifted back to the broad-shouldered man"
-        }
-      ],
-      "objects": [
-        "Long communal benches",
-        "Traveler's Pack (worn)",
-        "Waterskin",
-        "Bowls of boiled something at the far end"
-      ],
-      "threads": [
-        "Brynjar believes the faceless figure may be himself — what does that mean for the road?",
-        "Broad-shouldered man still watching — reason unknown",
-        "Mayvee has re-fixed on him",
-        "Vision content still unresolved: road with split light, two figures",
-        "Water-crisis argument continuing at the far end of the hall"
-      ]
-    },
-    "beats": 5
-  },
-  "clock": {
-    "schemaVersion": 1,
-    "day": 1,
-    "hour": 13,
-    "realAnchor": null
-  },
-  "companions": [
-    "hush"
-  ],
-  "companionNames": {
-    "hush": "Mayvee"
-  },
-  "quests": [],
-  "npcRegistry": {},
-  "placeMemory": {
-    "the_heartroot": {
-      "visits": 1,
-      "notes": [
-        "[d1] A sealed waygate discovered in the lower passage-hall, in the joined bole of two grown-together roots — cooler to the touch, the hum one note lower here."
-      ],
-      "flags": {},
-      "subPlaces": {
-        "the-joined-bole-gate": {
-          "name": "The Joined Bole Gate",
-          "parentId": "the_heartroot",
-          "day": 1,
-          "visited": true,
-          "note": "A sealed waygate seam, floor-to-ceiling, in the place where two roots grew together. Not open. The Heartroot is still thinking about it."
-        }
-      }
-    },
-    "the_crossing": {
-      "visits": 1,
-      "notes": [
-        "[d1] Common Table is crowded at midday with worried travelers; water-crisis talk circulating openly"
-      ],
-      "flags": {},
-      "lastVisit": 1,
-      "vectorsKnown": [],
-      "subPlaces": {
-        "the-common-table": {
-          "name": "The Common Table",
-          "parentId": "the_crossing",
-          "day": 1,
-          "visited": true,
-          "note": "Long communal hall — 140 m from the Crossing's centre. Benches, boiled food, mud-tracked floor."
-        }
-      }
-    }
-  },
-  "worldState": {
-    "schemaVersion": 1,
-    "lastTickDay": 1,
-    "eventStages": {
-      "water_crisis": {
-        "stage": 2,
-        "sinceDay": 13
-      }
-    },
-    "arcStages": {
-      "arc_what_wakes_beneath": {
-        "othersPush": 1
-      },
-      "the_second_manifestation": {
-        "othersPush": 1
-      }
-    },
-    "spectrumDrift": {
-      "death_life": -0.1,
-      "violence_peace": -0.1,
-      "falsehood_truth": -0.05
-    },
-    "news": [
-      {
-        "day": 1,
-        "worldDay": 69,
-        "text": "The Water Crisis stands at First Sickness across the valley: Upstream fisher families fall ill. Boiling water becomes universal. Harmonic and Radiant leaders trade public accusations.",
-        "tier": "event",
-        "section": "world"
-      },
-      {
-        "day": 1,
-        "worldDay": 67,
-        "text": "This reaches your area — urgent encrypted message arrived at Whistling Woman via direct slate relay—not chain broadcast (near gen-whistling-woman-post)",
-        "tier": "event",
-        "section": "elsewhere",
-        "impactsLocal": true
-      },
-      {
-        "day": 1,
-        "worldDay": 69,
-        "text": "Across the valley, What Wakes Beneath moved forward to Stirring: The substrate that runs the crafts is flickering in more than one place at once; something under everything is coming back online.",
-        "tier": "event",
-        "section": "world"
-      }
+    "objects": [
+     "Long communal benches",
+     "Traveler's Pack (worn)",
+     "Waterskin",
+     "Bowls of boiled something at the far end"
     ],
-    "unseenNews": [],
-    "lastGenCount": 1669,
-    "newsSpread": {},
-    "lastSharedReadAt": "2026-09-07T13:48:30.106Z",
-    "lastTickWorldDay": 69,
-    "lastCanonWorldDay": 69,
-    "pressureQueue": [],
-    "turnsSinceOffer": 7,
-    "recentOffers": [
-      {
-        "thing": "The wrongness in the hum — barely below hearing, but present since yesterday evening, a disruption in the Heartroot's living frequency",
-        "from": "The Heartroot itself: a place that has been growing for four hundred years does not misplace its note without reason, and the quest seed…"
-      }
+    "threads": [
+     "Brynjar believes the faceless figure may be himself — what does that mean for the road?",
+     "Broad-shouldered man still watching — reason unknown",
+     "Mayvee has re-fixed on him",
+     "Vision content still unresolved: road with split light, two figures",
+     "Water-crisis argument continuing at the far end of the hall"
     ]
-  },
-  "domains": {
-    "primary": "figurist",
-    "secondary": "cogitant",
-    "tertiary": null
-  },
-  "schools": {
-    "figurist": "fig_forming",
-    "cogitant": "cog_unaided"
-  },
-  "form": "A tall, ageless humanoid of bark-skin and embedded metal — wood-grain running down her arms where circuitry also traces in pale silver, her joints faintly luminous. White eyes, fully opaque, no iris, no pupil. When still she could be a standing tree. When she moves it is slow and deliberate, as though time runs differently for her. Her second form: an older human woman, grey-haired and weathered, wearing plain articulated armor with a straight sword at her hip — the same white eyes the only tell.",
-  "bio": {
-    "hometown": "Chernak has no single hometown — they emerged from the Heartroot itself, the deep confluence beneath the Valley floor where sonic resonance, photonic memory, and the old machine-pulse of the Precursor age all meet in the soil. The rootkin say a child born there isn't born so much as *condensed*, drawn out of everything the land still holds.",
-    "residence": "For many years Chernak lived within the Heartroot's lower chambers, where the walls hum at frequencies neither Heights nor Plateau can fully claim. Now they walk the road between settlements — sleeping in barns, on bridge-stones, in the furrow-edge of harvested fields. They carry little. They need less.",
-    "livelihood": "Chernak does not trade in coin. Farmers leave a meal out when they see the staff on the road; a Heights resonance-keeper once paid three weeks of lodge and food just to sit in the same room while Chernak listened to a cracked bell. Money passes through them the way water passes through river-gravel — present, then gone, unremarked.",
-    "hobbies": "Chernak listens to structures — bridges, granary walls, old Precursor foundations — pressing one palm flat against stone and staying very still for a long time. They also collect the specific *smell* of places at the hour before rain, cataloguing them in a mental geography more detailed than any map. On quiet evenings they braid and unbraid cord into patterns that mean nothing to anyone else but that they pull apart with evident satisfaction.",
-    "motivation": "Callum's fall left a specific gap — not a wound in the world, but a *silence* in Chernak's visions where Callum used to appear. Chernak does not grieve dramatically. They simply need to understand what the silence means, and whether the shape of what comes next is something they were shown long ago and failed to read correctly.",
-    "story": "Chernak the Blind came into awareness inside the Heartroot during the years of voluntary de-technologizing, marked from the start by the Precursor age — they carry its resonance and light and machine-memory not as power but as *perception*, a way of seeing the Valley's living systems the way a root sees water. They walked with Callum's story at the edge of their visions for years, never intervening, watching and waiting as they always do, trusting the pattern. Since Callum's fall they travel every road in the Valley — the Heights switchbacks, the Plateau's chalk paths, the muddy farm-tracks no one names — following visions that are now questions as much as they are answers. They are not searching for a destiny. They are trying to understand what they missed, and what, if anything, they owe the silence."
-  },
-  "subAttributes": {
-    "strength": 3,
-    "agility": 3,
-    "reason": 3,
-    "insight": 3,
-    "presence": 3,
-    "rapport": 3,
-    "craft": 3,
-    "wits": 3
-  },
-  "pendingSubPoints": 2,
-  "skillPoints": 0,
-  "discoveries": [],
-  "codex": {
-    "schemaVersion": 1,
-    "topics": {
-      "the-heartroot": {
-        "id": "the-heartroot",
-        "label": "The Heartroot",
-        "kind": "place",
-        "facts": [
-          "[d1] The lower halls breathe with morning — living walls, yielding floor, amber heartwood light. A wrongness in the deep hum has been present since yesterday evening, barely below hearing.",
-          "[d1] A sealed waygate exists in the lower passage-hall, hidden in the joined bole of two grown-together roots — floor-to-ceiling seam, cooler wood, a note lower in the hum. The city knows it is there.",
-          "[d1] The sealed waygate in the joined bole did not open to direct approach — it is closed the way a mouth is closed after speaking, not locked against entry. The Heartroot is still deciding. The wrongness in the hum is separate from the gate's own low chord — its source is further in."
-        ],
-        "links": [
-          "the-green-schism"
-        ],
-        "aliases": [],
-        "createdDay": 1,
-        "entityId": "the-heartroot",
-        "updatedDay": 1
-      },
-      "the-crossing": {
-        "id": "the-crossing",
-        "label": "The Crossing",
-        "kind": "place",
-        "facts": [
-          "[d1] you have walked here",
-          "[d1] The Common Table is the main communal hall — crowded, all-people, and currently alive with water-crisis worry. Travelers come when they are afraid.",
-          "[d1] A vision arrived on second reach: a road running outward from the Crossing, light and shadow split wrong, two figures on it — one of them Brynjar, one faceless. The channel blocked on the first attempt and opened on the second.",
-          "[d1] Brynjar read the faceless figure in Chernak's vision as possibly himself — Order-Sense shows him only a person-shaped gap where his own form should be, unresolved, not yet decided. The split-light road he recognized as a real structural pattern, something bearing unevenly, without knowing its cause."
-        ],
-        "links": [
-          "the-heartroot",
-          "brynjar-andyrsson"
-        ],
-        "aliases": [],
-        "createdDay": 1,
-        "entityId": "the-crossing",
-        "updatedDay": 1
-      }
-    }
-  },
-  "tendencies": {
-    "devotion": 11.72628230899658,
-    "cerebral": 20.415243921020508,
-    "strategic": 1.8340683010253906,
-    "cautious": 2.8073757812499998,
-    "social": 1.9256250000000001
-  },
-  "aptitudes": [
-    "scholar",
-    "sage",
-    "faithful"
-  ],
-  "actionCount": 7,
-  "grantsVersion": 1,
-  "precursorAccess": [
-    "address_sense"
-  ],
-  "livingCurrentAccess": [
-    "quicken_the_ground"
-  ],
-  "wildCurrentAccess": [],
-  "braidDiscount": 0,
-  "grantedAptitudes": [
-    "faithful",
-    "sage"
-  ],
-  "aptitudeEarnCount": {
-    "faithful": 1,
-    "sage": 1
-  },
-  "peopleDisposition": {
-    "figurist": 4,
-    "cogitant": 2,
-    "mason": -1
-  },
-  "standingLedger": [
+   },
+   "npcUpdates": [
     {
-      "at": 1,
-      "kind": "seed",
-      "entries": [
-        {
-          "people": "figurist",
-          "delta": 4,
-          "why": "born to this people"
-        },
-        {
-          "people": "cogitant",
-          "delta": 2,
-          "why": "kin to this people"
-        },
-        {
-          "people": "mason",
-          "delta": -1,
-          "why": "the far side of the circle from your own"
-        }
-      ],
-      "text": "Your birth and training are known: figurist +4, cogitant +2, mason -1."
+     "op": "update",
+     "npcId": "brynjar-andyrsson",
+     "note": "Interpreted the faceless figure as possibly himself — Order-Sense shows him only a person-shaped gap, unresolved, the same gap he sees when he looks at himself. Recognized the split-light road as a real structural pattern without being able to name its cause.",
+     "learned": [
+      "Order-Sense does not show Brynjar his own face — only a weight-bearing outline, a gap",
+      "The faceless figure in Chernak's vision may be Brynjar himself, by his own reading",
+      "He recognizes the split-light road as a structural pattern — something bearing unevenly along its length"
+     ],
+     "statusNote": "Present at the Common Table, close and low-voiced; considering the vision's implications"
     }
-  ],
-  "nativeGrantsVersion": 1,
-  "reconcileVersion": 47,
-  "gallery": [
+   ],
+   "codexUpdates": [
     {
-      "kind": "portrait",
-      "prompt": "Chernak the Blind",
-      "url": "https://image.pollinations.ai/prompt/A%20tall%2C%20ageless%20humanoid%20of%20bark-skin%20and%20embedded%20metal%20%E2%80%94%20wood-grain%20running%20down%20her%20arms%20where%20circuitry%20also%20traces%20in%20pale%20silver%2C%20her%20joints%20faintly%20luminous.%20White%20eyes%2C%20fully%20opaque%2C%20no%20iris%2C%20no%20pupil.%20When%20still%2C%20full-body%20character%20portrait%2C%20named%20Chernak%20the%20Blind%2C%20of%20the%20rootkin%2C%20precursor%20marked%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Callum's%20fall%20left%20a%20specific%20gap%20%E2%80%94%20not%20a%20wound%20in%20the%20world%2C%20but%20a%20*silence*%20in%20Chernak's%20visions%20where%20Callum%20used%20to%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=43736&nologo=true",
-      "caption": "Chernak the Blind — level 1",
-      "worldDay": 69,
-      "at": "2026-09-07T13:58:44.871Z"
+     "topic": "the-crossing",
+     "label": "The Crossing",
+     "kind": "place",
+     "entityId": "the-crossing",
+     "fact": "Brynjar read the faceless figure in Chernak's vision as possibly himself — Order-Sense shows him only a person-shaped gap where his own form should be, unresolved, not yet decided. The split-light road he recognized as a real structural pattern, something bearing unevenly, without knowing its cause.",
+     "links": [
+      "the-heartroot",
+      "brynjar-andyrsson"
+     ]
+    }
+   ],
+   "timeOps": {
+    "hoursPassed": 0.25,
+    "why": "a short, low-voiced exchange at the bench"
+   }
+  },
+  "sceneState": {
+   "setting": "The Common Table, long communal hall 140 m from the Crossing's centre. Midday, early spring. Pale cold light through open ends, mud on the floor, close-packed benches, boiled-herb smell.",
+   "npcsPresent": [
+    {
+     "name": "Brynjar Andyrsson",
+     "state": "Quiet after speaking — watching Chernak, waiting to see what they make of what he said"
     },
     {
-      "kind": "beast",
-      "prompt": "A thin, translucent figure-shape that copies whatever craft it last saw, badly — a manifested echo of Cogitant memory, running a stolen gesture on loop.",
-      "url": "https://image.pollinations.ai/prompt/a%20dangerous%20creature%2C%20a%20pale%20reader%3A%20A%20thin%2C%20translucent%20figure-shape%20that%20copies%20whatever%20craft%20it%20last%20saw%2C%20badly%20%E2%80%94%20a%20manifested%20echo%20of%20Cogitant%20memory%2C%20running%20a%20stolen%20gesture%20on%20loop.%20%E2%80%94%20dark%20fantasy%20creature%20art%2C%20ominous%2C%20no%20text%2C%20ominous%2C%20predatory%2C%20seen%20a%20moment%20too%20late%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=640&height=512&seed=94698&nologo=true",
-      "caption": "a pale reader",
-      "worldDay": 69,
-      "at": "2026-09-07T13:48:31.973Z",
-      "subjectKind": "beast",
-      "subjectId": "pale_reader"
+     "name": "Broad-shouldered man",
+     "state": "Still watching from three paces off; has not moved or left"
     },
     {
-      "kind": "location",
-      "prompt": "The Crossing",
-      "url": "https://image.pollinations.ai/prompt/The%20Crossing%3A%20Every%20axis%20crosses%20here%20at%20nothing%2C%20and%20the%20result%20is%20not%20grey%20%E2%80%94%20it%20is%20CROWDED.%20The%20Crossing%20leans%20toward%20no%20pole%2C%20which%20is%20precisely%20why%20it%20can%20hold%20them%20all%3A%20an%20Umbral%20and%20a%20Blazeborn%20drink%20at%20the%20same%20table%20because%20neither%20has%20the%20standing%20to%20make%20the%20other%20leave.%20The%20poles%20are%20lonely%20places.%20The%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=24144&nologo=true",
-      "caption": "The Crossing",
-      "worldDay": 69,
-      "at": "2026-09-07T13:48:29.686Z"
-    },
-    {
-      "kind": "portrait",
-      "prompt": "Chernak the Blind",
-      "url": "https://image.pollinations.ai/prompt/A%20tall%2C%20ageless%20humanoid%20of%20bark-skin%20and%20embedded%20metal%20%E2%80%94%20wood-grain%20running%20down%20her%20arms%20where%20circuitry%20also%20traces%20in%20pale%20silver%2C%20her%20joints%20faintly%20luminous.%20White%20eyes%2C%20fully%20opaque%2C%20no%20iris%2C%20no%20pupil.%20When%20still%2C%20full-body%20character%20portrait%2C%20named%20Chernak%20the%20Blind%2C%20of%20the%20rootkin%2C%20precursor%20marked%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Callum's%20fall%20left%20a%20specific%20gap%20%E2%80%94%20not%20a%20wound%20in%20the%20world%2C%20but%20a%20*silence*%20in%20Chernak's%20visions%20where%20Callum%20used%20to%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=29932&nologo=true",
-      "caption": "Chernak the Blind — rootkin",
-      "worldDay": 69,
-      "at": "2026-09-07T13:44:33.014Z"
+     "name": "Mayvee",
+     "state": "Attention shifted back to the broad-shouldered man"
     }
+   ],
+   "objects": [
+    "Long communal benches",
+    "Traveler's Pack (worn)",
+    "Waterskin",
+    "Bowls of boiled something at the far end"
+   ],
+   "threads": [
+    "Brynjar believes the faceless figure may be himself — what does that mean for the road?",
+    "Broad-shouldered man still watching — reason unknown",
+    "Mayvee has re-fixed on him",
+    "Vision content still unresolved: road with split light, two figures",
+    "Water-crisis argument continuing at the far end of the hall"
+   ]
+  },
+  "beats": 5
+ },
+ "clock": {
+  "schemaVersion": 1,
+  "day": 1,
+  "hour": 13,
+  "realAnchor": null
+ },
+ "companions": [
+  "hush"
+ ],
+ "companionNames": {
+  "hush": "Mayvee"
+ },
+ "quests": [],
+ "npcRegistry": {},
+ "placeMemory": {
+  "the_heartroot": {
+   "visits": 1,
+   "notes": [
+    "[d1] A sealed waygate discovered in the lower passage-hall, in the joined bole of two grown-together roots — cooler to the touch, the hum one note lower here."
+   ],
+   "flags": {},
+   "subPlaces": {
+    "the-joined-bole-gate": {
+     "name": "The Joined Bole Gate",
+     "parentId": "the_heartroot",
+     "day": 1,
+     "visited": true,
+     "note": "A sealed waygate seam, floor-to-ceiling, in the place where two roots grew together. Not open. The Heartroot is still thinking about it."
+    }
+   }
+  },
+  "the_crossing": {
+   "visits": 1,
+   "notes": [
+    "[d1] Common Table is crowded at midday with worried travelers; water-crisis talk circulating openly"
+   ],
+   "flags": {},
+   "lastVisit": 1,
+   "vectorsKnown": [],
+   "subPlaces": {
+    "the-common-table": {
+     "name": "The Common Table",
+     "parentId": "the_crossing",
+     "day": 1,
+     "visited": true,
+     "note": "Long communal hall — 140 m from the Crossing's centre. Benches, boiled food, mud-tracked floor."
+    }
+   }
+  }
+ },
+ "worldState": {
+  "schemaVersion": 1,
+  "lastTickDay": 1,
+  "eventStages": {
+   "water_crisis": {
+    "stage": 2,
+    "sinceDay": 13
+   }
+  },
+  "arcStages": {
+   "arc_what_wakes_beneath": {
+    "othersPush": 1
+   },
+   "the_second_manifestation": {
+    "othersPush": 1
+   }
+  },
+  "spectrumDrift": {
+   "death_life": -0.1,
+   "violence_peace": -0.1,
+   "falsehood_truth": -0.05
+  },
+  "news": [
+   {
+    "day": 1,
+    "worldDay": 69,
+    "text": "The Water Crisis stands at First Sickness across the valley: Upstream fisher families fall ill. Boiling water becomes universal. Harmonic and Radiant leaders trade public accusations.",
+    "tier": "event",
+    "section": "world"
+   },
+   {
+    "day": 1,
+    "worldDay": 67,
+    "text": "This reaches your area — urgent encrypted message arrived at Whistling Woman via direct slate relay—not chain broadcast (near gen-whistling-woman-post)",
+    "tier": "event",
+    "section": "elsewhere",
+    "impactsLocal": true
+   },
+   {
+    "day": 1,
+    "worldDay": 69,
+    "text": "Across the valley, What Wakes Beneath moved forward to Stirring: The substrate that runs the crafts is flickering in more than one place at once; something under everything is coming back online.",
+    "tier": "event",
+    "section": "world"
+   }
   ],
-  "personalArc": {
-    "id": "chernak-the-blind-thread",
-    "name": "The Thread of Chernak Has No Single Hometown — They Emerged From The Heartroot Itself, The Deep Confluence Beneath The Valley Floor Where Sonic Resonance, Photonic Memory, And The Old Machine Pulse Of The Precursor Age All Meet In The Soil. The Rootkin Say A Child Born There Isn'T Born So Much As *Condensed*, Drawn Out Of Everything The Land Still Holds.",
-    "arcId": "chernak-the-blind_personal_arc",
-    "boundToCharacter": "Chernak the Blind",
-    "boundToPlayer": "player-7fah99",
-    "region": "valley",
-    "tier": "personal",
-    "premise": "Chernak the Blind carries an unfinished thing: Callum's fall left a specific gap — not a wound in the world, but a *silence* in Chernak's visions where Callum used to appear. Chernak does not grieve dramatically. They simply need to understand what the silence means, and whether the shape of what comes next is something they were shown long ago and failed to read correctly.. The valley will give them the chance to face it.",
-    "stakes": "who they become when the thing they left behind finally catches up",
-    "legendNpc": null,
-    "legend": null,
-    "stages": [
-      {
-        "id": "s1",
-        "objective": "a first sign of Callum's fall left a specific gap — not a wound in the world, but a *silence* in Chernak's visions where Callum used to appear. Chernak does not grieve dramatically. They simply need to understand what the silence means, and whether the shape of what comes next is something they were shown long ago and failed to read correctly. surfaces in the valley"
-      },
-      {
-        "id": "s2",
-        "objective": "the thread deepens — what it costs to pull it becomes clear"
-      },
-      {
-        "id": "s3",
-        "objective": "the reckoning — and the choice of what to do with it"
-      }
+  "unseenNews": [],
+  "lastGenCount": 1669,
+  "newsSpread": {},
+  "lastSharedReadAt": "2026-09-07T13:48:30.106Z",
+  "lastTickWorldDay": 69,
+  "lastCanonWorldDay": 69,
+  "pressureQueue": [],
+  "turnsSinceOffer": 7,
+  "recentOffers": [
+   {
+    "thing": "The wrongness in the hum — barely below hearing, but present since yesterday evening, a disruption in the Heartroot's living frequency",
+    "from": "The Heartroot itself: a place that has been growing for four hundred years does not misplace its note without reason, and the quest seed…"
+   }
+  ]
+ },
+ "domains": {
+  "primary": "figurist",
+  "secondary": "cogitant",
+  "tertiary": null
+ },
+ "schools": {
+  "figurist": "fig_forming",
+  "cogitant": "cog_unaided"
+ },
+ "form": "A tall, ageless humanoid of bark-skin and embedded metal — wood-grain running down her arms where circuitry also traces in pale silver, her joints faintly luminous. White eyes, fully opaque, no iris, no pupil. When still she could be a standing tree. When she moves it is slow and deliberate, as though time runs differently for her. Her second form: an older human woman, grey-haired and weathered, wearing plain articulated armor with a straight sword at her hip — the same white eyes the only tell.",
+ "bio": {
+  "hometown": "Chernak has no single hometown — they emerged from the Heartroot itself, the deep confluence beneath the Valley floor where sonic resonance, photonic memory, and the old machine-pulse of the Precursor age all meet in the soil. The rootkin say a child born there isn't born so much as *condensed*, drawn out of everything the land still holds.",
+  "residence": "For many years Chernak lived within the Heartroot's lower chambers, where the walls hum at frequencies neither Heights nor Plateau can fully claim. Now they walk the road between settlements — sleeping in barns, on bridge-stones, in the furrow-edge of harvested fields. They carry little. They need less.",
+  "livelihood": "Chernak does not trade in coin. Farmers leave a meal out when they see the staff on the road; a Heights resonance-keeper once paid three weeks of lodge and food just to sit in the same room while Chernak listened to a cracked bell. Money passes through them the way water passes through river-gravel — present, then gone, unremarked.",
+  "hobbies": "Chernak listens to structures — bridges, granary walls, old Precursor foundations — pressing one palm flat against stone and staying very still for a long time. They also collect the specific *smell* of places at the hour before rain, cataloguing them in a mental geography more detailed than any map. On quiet evenings they braid and unbraid cord into patterns that mean nothing to anyone else but that they pull apart with evident satisfaction.",
+  "motivation": "Callum's fall left a specific gap — not a wound in the world, but a *silence* in Chernak's visions where Callum used to appear. Chernak does not grieve dramatically. They simply need to understand what the silence means, and whether the shape of what comes next is something they were shown long ago and failed to read correctly.",
+  "story": "Chernak the Blind came into awareness inside the Heartroot during the years of voluntary de-technologizing, marked from the start by the Precursor age — they carry its resonance and light and machine-memory not as power but as *perception*, a way of seeing the Valley's living systems the way a root sees water. They walked with Callum's story at the edge of their visions for years, never intervening, watching and waiting as they always do, trusting the pattern. Since Callum's fall they travel every road in the Valley — the Heights switchbacks, the Plateau's chalk paths, the muddy farm-tracks no one names — following visions that are now questions as much as they are answers. They are not searching for a destiny. They are trying to understand what they missed, and what, if anything, they owe the silence."
+ },
+ "subAttributes": {
+  "strength": 3,
+  "agility": 3,
+  "reason": 3,
+  "insight": 3,
+  "presence": 3,
+  "rapport": 3,
+  "craft": 3,
+  "wits": 3
+ },
+ "pendingSubPoints": 2,
+ "skillPoints": 0,
+ "discoveries": [],
+ "codex": {
+  "schemaVersion": 1,
+  "topics": {
+   "the-heartroot": {
+    "id": "the-heartroot",
+    "label": "The Heartroot",
+    "kind": "place",
+    "facts": [
+     "[d1] The lower halls breathe with morning — living walls, yielding floor, amber heartwood light. A wrongness in the deep hum has been present since yesterday evening, barely below hearing.",
+     "[d1] A sealed waygate exists in the lower passage-hall, hidden in the joined bole of two grown-together roots — floor-to-ceiling seam, cooler wood, a note lower in the hum. The city knows it is there.",
+     "[d1] The sealed waygate in the joined bole did not open to direct approach — it is closed the way a mouth is closed after speaking, not locked against entry. The Heartroot is still deciding. The wrongness in the hum is separate from the gate's own low chord — its source is further in."
     ],
-    "routes": {
-      "figurist": "answer it as your people would",
-      "seek": "seek the truth of it, wherever it leads"
-    },
-    "outcomes": [
-      {
-        "id": "figurist",
-        "name": "Figurist",
-        "effects": []
-      },
-      {
-        "id": "seek",
-        "name": "Seek",
-        "effects": []
-      }
+    "links": [
+     "the-green-schism"
     ],
-    "structured": true,
-    "source": "personal_fallback",
-    "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
-  },
-  "updatedAt": 1788789539524,
-  "rev": 29,
-  "generated": {
-    "schemaVersion": 1,
-    "npc": {},
-    "location": {},
-    "arc": {},
-    "creature": {},
-    "item": {}
-  },
-  "_lastProjectDay": 1,
-  "holdings": [],
-  "featureOffers": [],
-  "itemReclaimVersion": 1,
-  "nameRepairVersion": 1,
-  "customAbilities": {},
-  "companionBonds": {
-    "hush": 0.25
-  },
-  "bondLogFrom": 0,
-  "practice": {
-    "schemaVersion": 1,
-    "uses": {},
-    "coActivations": {},
-    "aspirations": []
-  },
-  "establishedFacts": [],
-  "teachers": {},
-  "regionsKnown": {
-    "the_quickwood": 3,
-    "the_center": 5
-  },
-  "company": [],
-  "foreclosed": [
-    "mason",
-    "somatic"
-  ],
-  "forkChoices": {},
-  "backfillVersion": 1,
-  "_pinsInitialized": true,
-  "opLossPending": false,
-  "_applyFailures": null,
-  "sessions": [
+    "aliases": [],
+    "createdDay": 1,
+    "entityId": "the-heartroot",
+    "updatedDay": 1
+   },
+   "the-crossing": {
+    "id": "the-crossing",
+    "label": "The Crossing",
+    "kind": "place",
+    "facts": [
+     "[d1] you have walked here",
+     "[d1] The Common Table is the main communal hall — crowded, all-people, and currently alive with water-crisis worry. Travelers come when they are afraid.",
+     "[d1] A vision arrived on second reach: a road running outward from the Crossing, light and shadow split wrong, two figures on it — one of them Brynjar, one faceless. The channel blocked on the first attempt and opened on the second.",
+     "[d1] Brynjar read the faceless figure in Chernak's vision as possibly himself — Order-Sense shows him only a person-shaped gap where his own form should be, unresolved, not yet decided. The split-light road he recognized as a real structural pattern, something bearing unevenly, without knowing its cause."
+    ],
+    "links": [
+     "the-heartroot",
+     "brynjar-andyrsson"
+    ],
+    "aliases": [],
+    "createdDay": 1,
+    "entityId": "the-crossing",
+    "updatedDay": 1
+   }
+  }
+ },
+ "tendencies": {
+  "devotion": 11.72628230899658,
+  "cerebral": 20.415243921020508,
+  "strategic": 1.8340683010253906,
+  "cautious": 2.8073757812499998,
+  "social": 1.9256250000000001
+ },
+ "aptitudes": [
+  "scholar",
+  "sage",
+  "faithful"
+ ],
+ "actionCount": 7,
+ "grantsVersion": 1,
+ "precursorAccess": [
+  "address_sense"
+ ],
+ "livingCurrentAccess": [
+  "quicken_the_ground"
+ ],
+ "wildCurrentAccess": [],
+ "braidDiscount": 0,
+ "grantedAptitudes": [
+  "faithful",
+  "sage"
+ ],
+ "aptitudeEarnCount": {
+  "faithful": 1,
+  "sage": 1
+ },
+ "peopleDisposition": {
+  "figurist": 4,
+  "cogitant": 2,
+  "mason": -1
+ },
+ "standingLedger": [
+  {
+   "at": 1,
+   "kind": "seed",
+   "entries": [
     {
-      "id": "sess-1",
-      "startedAt": "2026-09-07T13:42:24.727Z",
-      "lastAt": "2026-09-07T13:58:59.521Z",
-      "startDay": 69,
-      "endDay": 69,
-      "beats": 8
-    }
-  ],
-  "_debtReceipts": [],
-  "_opLedger": {
-    "offer": {
-      "applied": 1,
-      "rejected": 0,
-      "lastWhy": null
-    }
-  },
-  "_pendingArrival": null,
-  "purse": {
-    "crystal": 0,
-    "coin": 0,
-    "paper": 0,
-    "marks": 0,
-    "scrip": {}
-  },
-  "portrait": "https://image.pollinations.ai/prompt/A%20tall%2C%20ageless%20humanoid%20of%20bark-skin%20and%20embedded%20metal%20%E2%80%94%20wood-grain%20running%20down%20her%20arms%20where%20circuitry%20also%20traces%20in%20pale%20silver%2C%20her%20joints%20faintly%20luminous.%20White%20eyes%2C%20fully%20opaque%2C%20no%20iris%2C%20no%20pupil.%20When%20still%2C%20full-body%20character%20portrait%2C%20named%20Chernak%20the%20Blind%2C%20of%20the%20rootkin%2C%20precursor%20marked%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Callum's%20fall%20left%20a%20specific%20gap%20%E2%80%94%20not%20a%20wound%20in%20the%20world%2C%20but%20a%20*silence*%20in%20Chernak's%20visions%20where%20Callum%20used%20to%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=43736&nologo=true",
-  "bondLog": [
+     "people": "figurist",
+     "delta": 4,
+     "why": "born to this people"
+    },
     {
-      "companionId": "hush",
-      "kind": "assist",
-      "delta": 0.25,
-      "day": 1,
-      "worldDay": 69,
-      "actionCount": 0
+     "people": "cogitant",
+     "delta": 2,
+     "why": "kin to this people"
+    },
+    {
+     "people": "mason",
+     "delta": -1,
+     "why": "the far side of the circle from your own"
     }
+   ],
+   "text": "Your birth and training are known: figurist +4, cogitant +2, mason -1."
+  }
+ ],
+ "nativeGrantsVersion": 1,
+ "reconcileVersion": 47,
+ "gallery": [
+  {
+   "kind": "portrait",
+   "prompt": "Chernak the Blind",
+   "url": "https://image.pollinations.ai/prompt/A%20tall%2C%20ageless%20humanoid%20of%20bark-skin%20and%20embedded%20metal%20%E2%80%94%20wood-grain%20running%20down%20her%20arms%20where%20circuitry%20also%20traces%20in%20pale%20silver%2C%20her%20joints%20faintly%20luminous.%20White%20eyes%2C%20fully%20opaque%2C%20no%20iris%2C%20no%20pupil.%20When%20still%2C%20full-body%20character%20portrait%2C%20named%20Chernak%20the%20Blind%2C%20of%20the%20rootkin%2C%20precursor%20marked%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Callum's%20fall%20left%20a%20specific%20gap%20%E2%80%94%20not%20a%20wound%20in%20the%20world%2C%20but%20a%20*silence*%20in%20Chernak's%20visions%20where%20Callum%20used%20to%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=43736&nologo=true",
+   "caption": "Chernak the Blind — level 1",
+   "worldDay": 69,
+   "at": "2026-09-07T13:58:44.871Z"
+  },
+  {
+   "kind": "beast",
+   "prompt": "A thin, translucent figure-shape that copies whatever craft it last saw, badly — a manifested echo of Cogitant memory, running a stolen gesture on loop.",
+   "url": "https://image.pollinations.ai/prompt/a%20dangerous%20creature%2C%20a%20pale%20reader%3A%20A%20thin%2C%20translucent%20figure-shape%20that%20copies%20whatever%20craft%20it%20last%20saw%2C%20badly%20%E2%80%94%20a%20manifested%20echo%20of%20Cogitant%20memory%2C%20running%20a%20stolen%20gesture%20on%20loop.%20%E2%80%94%20dark%20fantasy%20creature%20art%2C%20ominous%2C%20no%20text%2C%20ominous%2C%20predatory%2C%20seen%20a%20moment%20too%20late%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=640&height=512&seed=94698&nologo=true",
+   "caption": "a pale reader",
+   "worldDay": 69,
+   "at": "2026-09-07T13:48:31.973Z",
+   "subjectKind": "beast",
+   "subjectId": "pale_reader"
+  },
+  {
+   "kind": "location",
+   "prompt": "The Crossing",
+   "url": "https://image.pollinations.ai/prompt/The%20Crossing%3A%20Every%20axis%20crosses%20here%20at%20nothing%2C%20and%20the%20result%20is%20not%20grey%20%E2%80%94%20it%20is%20CROWDED.%20The%20Crossing%20leans%20toward%20no%20pole%2C%20which%20is%20precisely%20why%20it%20can%20hold%20them%20all%3A%20an%20Umbral%20and%20a%20Blazeborn%20drink%20at%20the%20same%20table%20because%20neither%20has%20the%20standing%20to%20make%20the%20other%20leave.%20The%20poles%20are%20lonely%20places.%20The%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=24144&nologo=true",
+   "caption": "The Crossing",
+   "worldDay": 69,
+   "at": "2026-09-07T13:48:29.686Z"
+  },
+  {
+   "kind": "portrait",
+   "prompt": "Chernak the Blind",
+   "url": "https://image.pollinations.ai/prompt/A%20tall%2C%20ageless%20humanoid%20of%20bark-skin%20and%20embedded%20metal%20%E2%80%94%20wood-grain%20running%20down%20her%20arms%20where%20circuitry%20also%20traces%20in%20pale%20silver%2C%20her%20joints%20faintly%20luminous.%20White%20eyes%2C%20fully%20opaque%2C%20no%20iris%2C%20no%20pupil.%20When%20still%2C%20full-body%20character%20portrait%2C%20named%20Chernak%20the%20Blind%2C%20of%20the%20rootkin%2C%20precursor%20marked%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Callum's%20fall%20left%20a%20specific%20gap%20%E2%80%94%20not%20a%20wound%20in%20the%20world%2C%20but%20a%20*silence*%20in%20Chernak's%20visions%20where%20Callum%20used%20to%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=29932&nologo=true",
+   "caption": "Chernak the Blind — rootkin",
+   "worldDay": 69,
+   "at": "2026-09-07T13:44:33.014Z"
+  }
+ ],
+ "personalArc": {
+  "id": "chernak-the-blind-thread",
+  "name": "Chernak the Blind's Question",
+  "arcId": "chernak-the-blind_personal_arc",
+  "boundToCharacter": "Chernak the Blind",
+  "boundToPlayer": "player-7fah99",
+  "region": "valley",
+  "tier": "personal",
+  "premise": "Chernak the Blind carries an unfinished thing: Callum's fall left a specific gap — not a wound in the world, but a *silence* in Chernak's visions where Callum used to appear. Chernak does not grieve dramatically. They simply need to understand what the silence means, and whether the shape of what comes next is something they were shown long ago and failed to read correctly. The valley will give them the chance to face it.",
+  "stakes": "who they become when the thing they left behind finally catches up",
+  "legendNpc": null,
+  "legend": null,
+  "stages": [
+   {
+    "id": "s1",
+    "objective": "a first sign of the thing Chernak the Blind came here carrying surfaces in the valley"
+   },
+   {
+    "id": "s2",
+    "objective": "the thread deepens — what it costs to pull it becomes clear"
+   },
+   {
+    "id": "s3",
+    "objective": "the reckoning — and the choice of what to do with it"
+   }
   ],
-  "skillUses": {
-    "scout": 1,
-    "investigate": 2,
-    "travel": 1,
-    "careful": 2,
-    "retreat": 1,
-    "meditate": 1,
-    "study": 1,
-    "rapport": 1,
-    "negotiate": 1,
-    "plan": 1
+  "routes": {
+   "figurist": "answer it as your people would",
+   "seek": "seek the truth of it, wherever it leads"
   },
-  "_opEmitted": {
-    "sceneSummary": 7,
-    "choices": 7,
-    "scene": 7,
-    "npcUpdates": 3,
-    "codexUpdates": 5,
-    "placeUpdates": 2,
-    "timeOps": 5,
-    "sceneEnded": 2,
-    "characterDeltas": 2
-  },
-  "_opTurns": 7,
-  "_pendingIntent": null,
-  "knownPlaces": [
-    "the_crossing"
+  "outcomes": [
+   {
+    "id": "figurist",
+    "name": "Figurist",
+    "effects": []
+   },
+   {
+    "id": "seek",
+    "name": "Seek",
+    "effects": []
+   }
   ],
-  "locationImages": {
-    "the_crossing": "https://image.pollinations.ai/prompt/The%20Crossing%3A%20Every%20axis%20crosses%20here%20at%20nothing%2C%20and%20the%20result%20is%20not%20grey%20%E2%80%94%20it%20is%20CROWDED.%20The%20Crossing%20leans%20toward%20no%20pole%2C%20which%20is%20precisely%20why%20it%20can%20hold%20them%20all%3A%20an%20Umbral%20and%20a%20Blazeborn%20drink%20at%20the%20same%20table%20because%20neither%20has%20the%20standing%20to%20make%20the%20other%20leave.%20The%20poles%20are%20lonely%20places.%20The%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=24144&nologo=true"
-  },
-  "customEncounters": {
-    "re-beast_pale_reader": {
-      "schemaVersion": 1,
-      "id": "re-beast_pale_reader",
-      "type": "duel",
-      "name": "A Pale Reader",
-      "tier": "riffraff",
-      "minDanger": 1,
-      "setup": "a pale reader — A thin, translucent figure-shape that copies whatever craft it last saw, badly — a manifested echo of Cogitant memory, running a stolen gesture on loop. Mimics your last ability at half strength and turns it back on you; unsettling, not deadly, until three of them agree.",
-      "lethal": false,
-      "avoidable": true,
-      "fromRandom": true,
-      "flavor": "dangerous",
-      "creatureId": "pale_reader",
-      "creatureClass": "manifested_creature",
-      "opponent": {
-        "name": "a pale reader",
-        "health": 4,
-        "threat": 22,
-        "yieldAt": 1,
-        "fleeDifficulty": 15,
-        "spectrum": {
-          "violence_peace": -0.3,
-          "chaos_order": -0.3
-        },
-        "tacticTags": [
-          "press-in",
-          "circle",
-          "feint"
-        ],
-        "notes": "Fights for gain or ground, not to kill — yields when badly hurt, honors a yield."
-      },
-      "stakes": "Losing means waking bruised and lighter, not dead. Victory or a clean break keeps everything."
-    }
-  },
-  "sharedSceneId": "the_crossing--2026-09-07T13-49-02-525Z"
+  "structured": true,
+  "source": "personal_fallback",
+  "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed.",
+  "_repaired_20260914": "⛔ SNG-587: `name` held a 356/188-character title-cased backstory paragraph, because `bio.hometown` carries a story and `titleize` ran over it. Name and stage-1 objective repaired from the corrected fallback; everything else the arc had is untouched."
+ },
+ "updatedAt": 1788789539524,
+ "rev": 29,
+ "generated": {
+  "schemaVersion": 1,
+  "npc": {},
+  "location": {},
+  "arc": {},
+  "creature": {},
+  "item": {}
+ },
+ "_lastProjectDay": 1,
+ "holdings": [],
+ "featureOffers": [],
+ "itemReclaimVersion": 1,
+ "nameRepairVersion": 1,
+ "customAbilities": {},
+ "companionBonds": {
+  "hush": 0.25
+ },
+ "bondLogFrom": 0,
+ "practice": {
+  "schemaVersion": 1,
+  "uses": {},
+  "coActivations": {},
+  "aspirations": []
+ },
+ "establishedFacts": [],
+ "teachers": {},
+ "regionsKnown": {
+  "the_quickwood": 3,
+  "the_center": 5
+ },
+ "company": [],
+ "foreclosed": [
+  "mason",
+  "somatic"
+ ],
+ "forkChoices": {},
+ "backfillVersion": 1,
+ "_pinsInitialized": true,
+ "opLossPending": false,
+ "_applyFailures": null,
+ "sessions": [
+  {
+   "id": "sess-1",
+   "startedAt": "2026-09-07T13:42:24.727Z",
+   "lastAt": "2026-09-07T13:58:59.521Z",
+   "startDay": 69,
+   "endDay": 69,
+   "beats": 8
+  }
+ ],
+ "_debtReceipts": [],
+ "_opLedger": {
+  "offer": {
+   "applied": 1,
+   "rejected": 0,
+   "lastWhy": null
+  }
+ },
+ "_pendingArrival": null,
+ "purse": {
+  "crystal": 0,
+  "coin": 0,
+  "paper": 0,
+  "marks": 0,
+  "scrip": {}
+ },
+ "portrait": "https://image.pollinations.ai/prompt/A%20tall%2C%20ageless%20humanoid%20of%20bark-skin%20and%20embedded%20metal%20%E2%80%94%20wood-grain%20running%20down%20her%20arms%20where%20circuitry%20also%20traces%20in%20pale%20silver%2C%20her%20joints%20faintly%20luminous.%20White%20eyes%2C%20fully%20opaque%2C%20no%20iris%2C%20no%20pupil.%20When%20still%2C%20full-body%20character%20portrait%2C%20named%20Chernak%20the%20Blind%2C%20of%20the%20rootkin%2C%20precursor%20marked%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Callum's%20fall%20left%20a%20specific%20gap%20%E2%80%94%20not%20a%20wound%20in%20the%20world%2C%20but%20a%20*silence*%20in%20Chernak's%20visions%20where%20Callum%20used%20to%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=43736&nologo=true",
+ "bondLog": [
+  {
+   "companionId": "hush",
+   "kind": "assist",
+   "delta": 0.25,
+   "day": 1,
+   "worldDay": 69,
+   "actionCount": 0
+  }
+ ],
+ "skillUses": {
+  "scout": 1,
+  "investigate": 2,
+  "travel": 1,
+  "careful": 2,
+  "retreat": 1,
+  "meditate": 1,
+  "study": 1,
+  "rapport": 1,
+  "negotiate": 1,
+  "plan": 1
+ },
+ "_opEmitted": {
+  "sceneSummary": 7,
+  "choices": 7,
+  "scene": 7,
+  "npcUpdates": 3,
+  "codexUpdates": 5,
+  "placeUpdates": 2,
+  "timeOps": 5,
+  "sceneEnded": 2,
+  "characterDeltas": 2
+ },
+ "_opTurns": 7,
+ "_pendingIntent": null,
+ "knownPlaces": [
+  "the_crossing"
+ ],
+ "locationImages": {
+  "the_crossing": "https://image.pollinations.ai/prompt/The%20Crossing%3A%20Every%20axis%20crosses%20here%20at%20nothing%2C%20and%20the%20result%20is%20not%20grey%20%E2%80%94%20it%20is%20CROWDED.%20The%20Crossing%20leans%20toward%20no%20pole%2C%20which%20is%20precisely%20why%20it%20can%20hold%20them%20all%3A%20an%20Umbral%20and%20a%20Blazeborn%20drink%20at%20the%20same%20table%20because%20neither%20has%20the%20standing%20to%20make%20the%20other%20leave.%20The%20poles%20are%20lonely%20places.%20The%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=24144&nologo=true"
+ },
+ "customEncounters": {
+  "re-beast_pale_reader": {
+   "schemaVersion": 1,
+   "id": "re-beast_pale_reader",
+   "type": "duel",
+   "name": "A Pale Reader",
+   "tier": "riffraff",
+   "minDanger": 1,
+   "setup": "a pale reader — A thin, translucent figure-shape that copies whatever craft it last saw, badly — a manifested echo of Cogitant memory, running a stolen gesture on loop. Mimics your last ability at half strength and turns it back on you; unsettling, not deadly, until three of them agree.",
+   "lethal": false,
+   "avoidable": true,
+   "fromRandom": true,
+   "flavor": "dangerous",
+   "creatureId": "pale_reader",
+   "creatureClass": "manifested_creature",
+   "opponent": {
+    "name": "a pale reader",
+    "health": 4,
+    "threat": 22,
+    "yieldAt": 1,
+    "fleeDifficulty": 15,
+    "spectrum": {
+     "violence_peace": -0.3,
+     "chaos_order": -0.3
+    },
+    "tacticTags": [
+     "press-in",
+     "circle",
+     "feint"
+    ],
+    "notes": "Fights for gain or ground, not to kill — yields when badly hurt, honors a yield."
+   },
+   "stakes": "Losing means waking bruised and lighter, not dead. Victory or a clean break keeps everything."
+  }
+ },
+ "sharedSceneId": "the_crossing--2026-09-07T13-49-02-525Z"
 }

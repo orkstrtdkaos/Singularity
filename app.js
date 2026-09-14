@@ -144,7 +144,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "1.9.545";
+const APP_VERSION = "2.0.0";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -9678,7 +9678,19 @@ async function onAsk(text) {
       applyTurn({ ...result.ops, narration: "" }, null, null);
       saveCharacter(character);
       const after = repairFingerprint(character);
-      askOpsNote = "\n\n" + repairNote(Object.keys(result.ops), { before, after, failures: character._applyFailures || [] });
+      // ⛔ SNG-580 (Erik, in play) — AND IT NAMED AN OP THAT WAS AN EMPTY ARRAY. He asked the GM for an item,
+      // got one, and the footer read "the GM changed: holdingOps" — while that turn's `holdingOps` was `[]`
+      // and the waterskin arrived by another road entirely.
+      //
+      // ⚠️ THE COMMENT ABOVE THIS LINE IS ABOUT THE SAME SENTENCE, one layer in. The first version announced
+      // the CALL; this one measures the CHANGE and then still named every key the model sent, empty or not —
+      // a turn carries all forty op keys and most of them are `[]`. ⛑ So the note was true about THAT something
+      // changed and wrong about WHAT, which is the harder half to notice and the half a player reads.
+      //
+      // ⚑ `opsFiredIn` has always had the right rule — skip the empties — which is why the op COUNTER never
+      // recorded a `holdingOps` here and the footer did. One rule now, and the note names what actually fired.
+      const firedKeys = opsFiredIn(result.ops).map(o => o.op);
+      askOpsNote = "\n\n" + repairNote(firedKeys, { before, after, failures: character._applyFailures || [] });
     } catch (err) {
       console.error("[ask] repair ops failed:", err);
       askOpsNote = "\n\n— *the GM tried to change something and it did not take; nothing was written.*";

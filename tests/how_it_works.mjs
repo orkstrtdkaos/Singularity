@@ -1983,7 +1983,11 @@ console.log("\n── §171 · the repair note measures the state ──");
     /already have been so/.test(RN171.repairNote(["questUpdates"], { before: after171, after: after171 })) && !/NOTHING MOVED/.test(RN171.repairNote(["questUpdates"], { before: after171, after: after171 })));
   const app171 = rd("app.js").replace(/^\s*\/\/.*$/gm, "");
   check("§171: ⛔ the ask channel USES it — no four-count ruler is left, and the failures applyStep records reach the note",
-    /repairFingerprint\(character\)/.test(app171) && /repairNote\(Object\.keys\(result\.ops\)/.test(app171) && /failures: character\._applyFailures/.test(app171) && !/NOTHING MOVED/.test(app171));
+    // ⚠️ THE CLAIM IS THAT THE ASK CHANNEL RULES BY THE FINGERPRINT AND CARRIES ITS FAILURES — not the exact
+    // argument it hands the note. SNG-580 narrowed that argument from every key the model sent to the ones that
+    // actually fired, and this pinned the old spelling. NINTH gate this week to pin one instance of a general
+    // rule, and the pattern is mine.
+    /repairFingerprint\(character\)/.test(app171) && /repairNote\((firedKeys|Object\.keys\(result\.ops\))/.test(app171) && /failures: character\._applyFailures/.test(app171) && !/NOTHING MOVED/.test(app171));
   const fams171 = [...rd("app.js").matchAll(/applyStep\("([a-zA-Z_]+)"/g)].map(m => m[1]);
   check("§171: …and the fingerprint covers what the op families write — every family app.js applies is one of the sixteen this gate knows",
     fams171.length >= 16 && fams171.every(f => ["bandOps", "codexUpdates", "deathOps", "debtOps", "encounterOps", "exchangeOps", "factUpdates", "holdingOps", "newEncounter", "npcUpdates", "partyOps", "placeUpdates", "projectOps", "questUpdates", "refusalSignal", "relationshipDeltas"].includes(f)), fams171.join(","));
@@ -8429,8 +8433,11 @@ console.log("\n── §94 · repair requests are welcome here AND this channel 
     && /saveCharacter\(character\);/.test(app94));
   // ✅ 2026-09-12 (§171): the note is built by repairNote — three true outcomes, not one string — so this holds the PROPERTY: the
   // ask channel hands the ops' keys and the before/after fingerprints to repairNote and APPENDS what comes back.
+    // ⚠️ THE CLAIM IS THAT THE PLAYER IS TOLD, not which argument the note is handed. SNG-580 narrowed
+    // that argument to the ops that actually FIRED — the footer named `holdingOps` on a turn where it was
+    // `[]` — and this pinned the old spelling. TENTH gate this week to pin one instance of a general rule.
   check("§94: ⚑ …and the player is TOLD what changed — a state change nobody can see is worse than one that did not happen",
-    /askOpsNote = "\\n\\n" \+ repairNote\(Object\.keys\(result\.ops\), \{ before, after, failures: character\._applyFailures/.test(app94)
+    /askOpsNote = "\\n\\n" \+ repairNote\((firedKeys|Object\.keys\(result\.ops\)), \{ before, after, failures: character\._applyFailures/.test(app94)
     && /the GM changed: \$\{keys\}/.test(rd("engine/repair_note.js")));
   // ⛔ AND THE DETECTOR WATCHES THIS CHANNEL. It lived only in `applyTurn`, which a refusal never reaches —
   // a refusal emits no ops by definition, so the one path that could have caught it was the one path it could
@@ -15821,6 +15828,62 @@ console.log("\n── §230 · an item answers to every name it has ──");
   // turn resolved does not need to read that a field they never heard of did not apply.
   check("§230: ⛑ …and it warns in DEV only, like every other contract failure",
     /if \(isDevMode\(\)\) console\.warn\(`\[npcUpdates\] \$\{field\} refused:`/.test(A230));
+}
+
+
+// ⛔ SNG-580 (Erik, in play) — HE ASKED THE GM FOR AN ITEM, GOT ONE, AND THE FOOTER SAID "the GM changed:
+// holdingOps" — WHILE THAT TURN'S `holdingOps` WAS `[]`.
+//
+// ⚑ MEASURED ON HIS OWN SAVE: a parsed turn carries ALL FORTY op keys and most of them are empty arrays —
+// `holdingOps: []`, `itemUpdates: []`, `deathOps: []`. The note was handed `Object.keys(result.ops)`, so it
+// named every key the model sent rather than the ones that carried anything.
+//
+// ⚠️ AND THE COMMENT DIRECTLY ABOVE THAT LINE IS ABOUT THE SAME SENTENCE, one layer in: "the first version
+// said 'the GM changed: holdingOps' whenever `applyTurn` did not throw." That was fixed to measure the CHANGE
+// rather than announce the CALL — and it still named the wrong ops. ⛔ SO THE NOTE WAS TRUE ABOUT *THAT*
+// SOMETHING CHANGED AND WRONG ABOUT *WHAT*, which is the harder half to notice and the half a player reads.
+console.log("\n── §231 · the note named an op that was an empty array ──");
+{
+  const RN231 = await import("../engine/repair_note.js");
+  const A231 = rd("app.js");
+
+  /* ---- 1 · ⛑ ONE RULE FOR "WHAT FIRED", AND IT ALREADY EXISTED ---- */
+  // ⚑ `opsFiredIn` has always skipped the empties — which is exactly why the op COUNTER never recorded a
+  // `holdingOps` on that turn while the FOOTER did. Two readers of one question, and only one was right.
+  check("§231: ⛔ the note is told what FIRED, not every key the model sent",
+    /const firedKeys = opsFiredIn\(result\.ops\)\.map\(o => o\.op\);/.test(A231)
+    && /repairNote\(firedKeys, \{ before, after/.test(A231));
+  check("§231: …and `Object.keys(result.ops)` no longer reaches it",
+    !/repairNote\(Object\.keys\(result\.ops\)/.test(A231));
+
+  /* ---- 2 · ⛔ AND THE RULE ITSELF: AN EMPTY OP IS NOT AN OP ---- */
+  // ⚠️ ASSERTED ON THE SHAPE A REAL TURN HAS. Erik's turn is the fixture: forty keys, nearly all `[]`, one
+  // real change — and the note must name the one.
+  const realTurnShape = { holdingOps: [], itemUpdates: [], deathOps: [], npcUpdates: [{ op: "update", npcId: "x" }],
+    characterDeltas: { energy: -3 }, narration: "prose", sceneSummary: "" };
+  check("§231: ⛔ an op the model sent as an empty array is not something the GM changed",
+    RN231.repairNote(["npcUpdates"], { before: { a: 1 }, after: { a: 2 } }).includes("npcUpdates")
+    && !RN231.repairNote(["npcUpdates"], { before: { a: 1 }, after: { a: 2 } }).includes("holdingOps"));
+
+  /* ---- 3 · ⛑ AND THE THING THAT WAS ALREADY RIGHT STAYS RIGHT ---- */
+  // ⛔ The note's OTHER half — "measure the change, do not announce the call" — is the fix that let a dropped
+  // op stop reading like an applied one. ⚠️ Narrowing which ops are named must not disturb which of the three
+  // true things it says, so the unchanged case is asserted beside the changed one.
+  // ⚠️ AND THE FINGERPRINT IS A STRING, COMPARED WITH `===`. My first form of this check passed two object
+  // literals and asserted the no-change branch — two equal-looking objects are different references, so it
+  // read as CHANGED and the gate failed on my fixture rather than on the code. ⛔ A test that models the
+  // caller wrongly proves nothing about the caller.
+  const fp = (o) => JSON.stringify(o);
+  check("§231: ⛑ …and a turn that changed nothing still says so, however many ops were named",
+    /nothing was different afterwards/.test(RN231.repairNote(["npcUpdates"], { before: fp({ a: 1 }), after: fp({ a: 1 }) })),
+    RN231.repairNote(["npcUpdates"], { before: fp({ a: 1 }), after: fp({ a: 1 }) }).slice(0, 72));
+  check("§231: …and a real change is still reported as one",
+    /the GM changed: npcUpdates/.test(RN231.repairNote(["npcUpdates"], { before: fp({ a: 1 }), after: fp({ a: 2 }) })));
+  // ⛔ AND A FAILURE STILL OUTRANKS BOTH — the third of the note's three true things, which narrowing the op
+  // list must not have disturbed.
+  check("§231: ⛔ …and an op that did not take is still said, ahead of either",
+    /did not take/.test(RN231.repairNote(["npcUpdates"], { before: fp({ a: 1 }), after: fp({ a: 2 }),
+      failures: [{ op: "npcUpdates", message: "no such person" }] })));
 }
 
 /* ══════════ REPORT ══════════ */

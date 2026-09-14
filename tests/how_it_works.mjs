@@ -1741,11 +1741,38 @@ console.log("\n── §165 · craft prose reaches the player clean ──");
   const G165 = /[⛔⚠⚑⛑⬜✅➡❌]/u;
   check("§165: ⛔ playerText strips the authoring glyphs and keeps every word — the capitals are Aevi's to rewrite, not a regex's",
     NM165.playerText("⛔ IT DETERS. ⚠️ It does not stop anyone") === "IT DETERS. It does not stop anyone", NM165.playerText("⛔ IT DETERS. ⚠️ It does not stop anyone"));
-  const worst165 = Object.values(C165.abilities).find(a => G165.test(String(a.notFor || "")) && (a.tree || []).length > 1 && (a.tree || []).some(t => G165.test(String(t.grants || "") + String(t.cannot || ""))));
-  const card165 = worst165 ? ED165.skillDetail(worst165, { owned: true, level: 2, maxRank: 3, ladder: worst165.tree.map(t => ({ rank: t.rank, name: t.name, grants: t.grants, cannot: t.cannot })) }) : "";
-  check("§165: ⛔ …the craft card carries none of them, for a craft whose notFor and ladder both do", !!worst165 && !G165.test(card165), worst165?.id);
+  // ⛔ AND THE FIXTURE WAS THE GAP. Aevi finished `notFor` — 100 glyph-bearing lines to ZERO, the whole field
+  // — and this gate went RED FOR THE GOOD NEWS: it searched for a craft whose notFor AND ladder both carried
+  // glyphs, found none, and asserted `!!worst165`. ⚠️ A gate that fails when a gap CLOSES is measuring the gap,
+  // not the rule. That is the sentence smoke 272/273 already carries about itself, and the TWELFTH gate this
+  // week to pin one instance of something general.
+  //
+  // ⛑ THE RULE IS THE DISPLAY HALF, AND IT IS MINE: whatever an author writes, the card strips it. So it is
+  // proven on a SYNTHETIC craft that carries glyphs in every player-facing field and always will — the gate
+  // now survives the content going clean — and on the worst REAL craft as well, while one still exists, so
+  // the live pipeline is exercised and not just the shape.
+  const mkCard165 = (ab) => ED165.skillDetail(ab, { owned: true, level: 2, maxRank: 3,
+    ladder: (ab.tree || []).map(t => ({ rank: t.rank, name: t.name, grants: t.grants, cannot: t.cannot })) });
+  const synth165 = { id: "synthetic_glyph_craft", name: "A Craft The Author Marked Up",
+    description: "⛔ IT DETERS. ⚠️ It does not stop anyone.",
+    notFor: "⛔ NOT FOR stopping a blade mid-swing.",
+    tree: [{ rank: 1, name: "First", grants: "⚑ a held line", cannot: "⚠️ not a wall" },
+           { rank: 2, name: "Second", grants: "⛑ two held lines", cannot: "⬜ still not a wall" },
+           { rank: 3, name: "Third", grants: "✅ three", cannot: "❌ never a wall" }] };
+  const synthCard165 = mkCard165(synth165);
+  check("§165: ⛔ …the card carries none of them, wherever the author put them — on a craft that always carries them",
+    !G165.test(synthCard165), synthCard165.slice(0, 120).replace(/\n/g, " · "));
   check("§165: …one limits block — Cannot, then the held rank's limit ONCE — and the ladder shows what each rank grants",
-    !!worst165 && /Cannot: /.test(card165) && (card165.match(/Still can't at rank/g) || []).length <= 1 && !/still can't:/.test(card165), card165.slice(0, 200));
+    /Cannot: /.test(synthCard165) && (synthCard165.match(/Still can't at rank/g) || []).length <= 1 && !/still can't:/.test(synthCard165),
+    synthCard165.slice(0, 200).replace(/\n/g, " · "));
+  // ⬜ AND THE WORST REAL ONE TOO — glyphs ANYWHERE player-facing now, not just `notFor`, because that field is
+  // finished and the next one to be finished must not break this again. No such craft is a WIN, and says so.
+  const worst165 = Object.values(C165.abilities).find(a =>
+    (G165.test(String(a.notFor || "")) || G165.test(String(a.description || "")) || G165.test(String(a.plainly || "")))
+    && (a.tree || []).length > 1 && (a.tree || []).some(t => G165.test(String(t.grants || "") + String(t.cannot || ""))));
+  check("§165: ⬜ …and the worst REAL craft's card is clean too (or the content has gone clean, which is the win)",
+    !worst165 || !G165.test(mkCard165(worst165)),
+    worst165 ? worst165.id : "no glyph-bearing craft left in content — Aevi's half is done");
   const app165 = rd("app.js").split("\n");
   const raw165 = app165.filter(l => /esc\(/.test(l) && /\.(grants|cannot|notFor)\b/.test(l) && !/playerText\(/.test(l));
   check("§165: ⛔ every app surface that shows a craft's grants, limits or notFor passes it through playerText",
@@ -15884,6 +15911,118 @@ console.log("\n── §231 · the note named an op that was an empty array ─�
   check("§231: ⛔ …and an op that did not take is still said, ahead of either",
     /did not take/.test(RN231.repairNote(["npcUpdates"], { before: fp({ a: 1 }), after: fp({ a: 2 }),
       failures: [{ op: "npcUpdates", message: "no such person" }] })));
+}
+
+
+// ⛔ SNG-581 — THE ENV BAG HAD ONE DARK KEY, AND app.js HAS NAMED THAT DEFECT IN A COMMENT SINCE SNG-266:
+// "a builder that reads an env key nobody puts here is the same dark wire." ⚠️ A rule stated in a comment
+// beside the very bag it governs, and enforced by nothing — which is the whole shape of this file's job.
+//
+// ⚑ WHAT IT COST: `worthHereDetail` reads `env.arcEffects`; nothing set it; `priceLine` took its `|| []`
+// default every turn. ELEVEN of the fifty-four authored arc-stage effects are `priceShift`, and that key is
+// their only road to a player. ⛑ The arcs moved the world's prices and the GM quoted the unmoved ones —
+// the FOURTH door, with authored, loaded and read all green behind it.
+//
+// ⚠️ AND IT IS GATED AS THE GENERAL RULE, not as `arcEffects`. A gate naming one key is the tenth-gate
+// mistake this week; a gate that reads BOTH sides and subtracts them catches the next one too.
+console.log("\n── §232 · an env key a builder reads and nobody sets ──");
+{
+  const AE232 = await import("../engine/arceffects.js");
+  const reg232 = rd("engine/gm_registry.js");
+  const app232 = rd("app.js");
+
+  // ⛔ STRIP COMMENTS FIRST. My first pass at this parsed the object literal with a shorthand regex and a
+  // trailing COMMENT between two keys broke the scan — `sceneBeats` read as dark when it is two lines above.
+  // ⚠️ Third time a regex in this file has been fooled by prose sitting inside the thing it measures.
+  const decomment = (t) => t.replace(/\/\*[\s\S]*?\*\//g, "").replace(/(^|[^:])\/\/[^\n]*/g, "$1");
+
+  /* ---- 1 · ⛑ BOTH SIDES, READ FROM SOURCE ---- */
+  // ⚑ `env?.K` is an EXPLICIT option — the author wrote the guard, so the key is allowed to be absent
+  // (`tally` is instrumentation a test supplies). `env.K` is a promise the bag has to keep.
+  const required232 = new Set(), optional232 = new Set();
+  for (const m of decomment(reg232).matchAll(/\benv\s*(\?)?\.\s*([A-Za-z_$][\w$]*)/g)) {
+    (m[1] ? optional232 : required232).add(m[2]);
+  }
+  const litKeys232 = (src, open) => {
+    let d = 0, end = open;
+    for (let i = open; i < src.length; i++) {
+      const c = src[i];
+      if (c === "{") d++; else if (c === "}") { d--; if (d === 0) { end = i; break; } }
+    }
+    const keys = new Set(); let depth = 0, seg = "";
+    const take = (t0) => {
+      const t = t0.trim(); if (!t || t.startsWith("...")) return;
+      const named = t.match(/^([A-Za-z_$][\w$]*)\s*:/); if (named) { keys.add(named[1]); return; }
+      const short = t.match(/^([A-Za-z_$][\w$]*)$/); if (short) keys.add(short[1]);
+    };
+    for (const c of src.slice(open + 1, end)) {
+      if ("{[(".includes(c)) depth++; else if ("}])".includes(c)) depth--;
+      if (c === "," && depth === 0) { take(seg); seg = ""; } else seg += c;
+    }
+    take(seg); return keys;
+  };
+  const clean232 = decomment(app232);
+  const gi232 = clean232.indexOf("function gmEnv(extra = {})");
+  const provided232 = litKeys232(clean232, clean232.indexOf("return {", gi232) + "return ".length);
+  // ⚑ AND THE CALL SITES COUNT. `gmEnv({ ... })` spreads its argument in, so a key supplied by every caller
+  // is supplied — reading only the base bag would cry wolf on twenty of them.
+  for (const m of clean232.matchAll(/gmEnv\(\s*\{/g)) {
+    for (const k of litKeys232(clean232, clean232.indexOf("{", m.index))) provided232.add(k);
+  }
+
+  /* ---- 2 · ⛔ AND THE SUBTRACTION IS THE GATE ---- */
+  // ⚠️ WITH A FLOOR UNDER THE DETECTOR, because "0 dark of 0 read" is the vacuous-gate shape this file has
+  // already committed once: a broken regex and a clean bill of health look identical from the outside.
+  check("§232: ⛑ the detector actually reads the registry — a zero here would be a broken scan, not a clean bag",
+    required232.size >= 20, `${required232.size} env keys read by builders`);
+  const dark232 = [...required232].filter(k => !provided232.has(k) && !optional232.has(k)).sort();
+  check("§232: ⛔ every env key a builder READS is a key some caller SETS — no dark wires",
+    dark232.length === 0, dark232.length ? `DARK: ${dark232.join(", ")}` : `${provided232.size} set, ${optional232.size} explicitly optional`);
+  check("§232: ⚑ …and `arcEffects` is the one this found — set once, in the bag, not recomputed per consumer",
+    provided232.has("arcEffects")
+    && /const arcFx = arcEffectsNow\(\);/.test(app232)
+    && /arcEffects: arcFx,/.test(app232)
+    && /arcMoods: npcMoodLines\(arcFx\),/.test(app232));
+
+  /* ---- 3 · ⛔ AND THE EFFECT VOCABULARY CLOSES IN BOTH DIRECTIONS ---- */
+  // ⛑ An authored kind with no consumer is a producer nobody reads; a consumer row for a kind nobody
+  // authors is a claim about a wire that carries nothing. ⚠️ Both are the same defect seen from each end,
+  // and only comparing the two sets catches either.
+  const arcsDoc232 = JSON.parse(rd("content/packs/valley/lore/greater_arcs.json"));
+  const arcs232 = Array.isArray(arcsDoc232) ? arcsDoc232 : (arcsDoc232.arcs || Object.values(arcsDoc232).find(Array.isArray) || []);
+  check("§232: the arcs load — a shape change must fail here, not silently measure an empty list",
+    arcs232.length >= 6, `${arcs232.length} greater arcs`);
+  const kinds232 = new Set();
+  let stages232 = 0, withFx232 = 0, effects232 = 0;
+  const bare232 = [];
+  for (const a of arcs232) {
+    const st = a.stages || [];
+    const bare = st.filter(x => !(x.effects || []).length);
+    if (st.length && bare.length === st.length) bare232.push(a.id || a.name);
+    for (const x of st) {
+      stages232++;
+      if ((x.effects || []).length) withFx232++;
+      for (const e of (x.effects || [])) { effects232++; kinds232.add(e.kind); }
+    }
+  }
+  const consumers232 = Object.keys(AE232.EFFECT_CONSUMERS || {});
+  check("§232: ⛔ every effect KIND an arc stage authors has a named consumer",
+    [...kinds232].every(k => consumers232.includes(k)),
+    [...kinds232].filter(k => !consumers232.includes(k)).join(", ") || `${kinds232.size} kinds, all consumed`);
+  check("§232: ⚠️ …and every consumer row names a kind somebody actually authors — no phantom wires",
+    consumers232.every(k => kinds232.has(k)),
+    consumers232.filter(k => !kinds232.has(k)).join(", ") || `${consumers232.length} rows, all carrying`);
+
+  /* ---- 4 · ⛑ THE FLOOR THE 2.0.0 CUT WAS MEASURED AGAINST ---- */
+  // ⚑ SPEC §25.7 cut 2.0.0 on this number, so it is a RATCHET: it may rise and may not fall. A stage that
+  // loses its `effects` takes the world back to the sentence it used to be, and §25.7's receipt with it.
+  check("§232: ⛑ …and a stage still CHANGES THE WORLD — the §25.7 floor the 2.0.0 cut was measured against",
+    withFx232 >= 18 && effects232 >= 54, `${withFx232}/${stages232} stages carry ${effects232} effects`);
+  // ⬜ AND WHAT IS STILL BARE IS NAMED, so the next reader inherits the fact rather than the trip — and so
+  // that authoring it CLOSES a gate instead of leaving a green one behind.
+  check("§232: ⬜ …and the one arc that still changes nothing is named, not rounded away",
+    bare232.length <= 1 && (!bare232.length || bare232[0] === "arc_the_disagreement"),
+    bare232.join(", ") || "every arc carries a mechanical stage");
 }
 
 /* ══════════ REPORT ══════════ */

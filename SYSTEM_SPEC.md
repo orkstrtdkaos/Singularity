@@ -1313,6 +1313,16 @@ with `effects` — The Pause Holds, Attention, The Question Reopens, Resumption.
 whole. That is an AUTHORING row, not an engine one: the reader is built, wired and gated, and it will read
 those four the day they exist. ⬜ Aevi's.
 
+⛔ **AND A SEVENTH WIRE WAS DARK, FOUND THE SAME HOUR THIS RECORD WAS WRITTEN.** The six above are the
+ones this section could honestly name; checking the rest turned up `priceShift` — **11 of the 54 authored
+effects** — whose only road to a player runs through `env.arcEffects`, a key `gm_registry`'s `worthHereDetail`
+reads and **nothing ever set**. `priceLine` took its `|| []` default every turn, so the arcs moved the
+world's prices and the GM quoted the unmoved ones. ⚠️ Authored, loaded and read were all green behind it;
+the fourth door was one missing line in `gmEnv`. ⛑ Wired, and **§232 now subtracts the keys builders READ
+from the keys callers SET** — the rule `app.js` had stated in a comment since SNG-266 (*"a builder that reads
+an env key nobody puts here is the same dark wire"*) and nothing enforced. The gate was run against the
+pre-fix tree and fails on it; a gate never seen to fail is not a gate.
+
 **2.0 is this cluster, whole — and that is all it is.** No architectural break ships with this number. The
 generational change was the world-model becoming a system, and the last piece of it was a stage that does
 something. `node scripts/bump_version.mjs major` moved `engine/version.js` and 120 cache stamps in one step,

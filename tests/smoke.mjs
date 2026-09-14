@@ -14477,9 +14477,20 @@ await (async () => {
     const draws = (appSrcB.match(/pickEncounter\(/g) || []).length;
     return wired === draws && draws >= 3;   // every draw, or the world tilts some encounters and not others
   })());
+  // ⚠️ AND THE ARGUMENT IS NOT THE CLAIM. SNG-581 wired `env.arcEffects` — the dark key `priceShift` had
+  // been waiting on — which meant reading the effects ONCE into `arcFx` instead of calling `arcEffectsNow()`
+  // twice in the same object literal. This gate had pinned the inline spelling, so it went red for a fix.
+  // ⛔ ELEVENTH gate this week to pin one instance of a general rule, and the comment eight lines below
+  // says exactly this about a different one: THE MECHANISM, NOT TODAY'S EXAMPLE.
+  const fedArcFx = /(arcFx|arcEffectsNow\(\))/.source;
   check("272/273: the roads and the mood are wired too",
-    /travelCostFactor\(arcEffectsNow\(\)\)/.test(appA) && /arcMoods: npcMoodLines\(arcEffectsNow\(\)\)/.test(appA)
+    /travelCostFactor\(arcEffectsNow\(\)\)/.test(appA)
+    && new RegExp(`arcMoods: npcMoodLines\\(${fedArcFx}\\)`).test(appA)
     && /arcMoodDetail/.test(readFileSync(join(root, "engine/gm.js"), "utf8")));
+  // ⛑ AND THE READ THAT FEEDS THEM BOTH IS ONE READ. Two calls in one bag were two chances to disagree
+  // about what the world is doing on the same turn.
+  check("272/273: …and the bag reads the arcs ONCE, so every builder sees the same world",
+    /const arcFx = arcEffectsNow\(\);/.test(appA) && /arcEffects: arcFx,/.test(appA));
 
   // ⚠️ An effect kind with no consumer must be VISIBLE as such, not silently inert.
   // ⚠️ THE MECHANISM, NOT TODAY'S EXAMPLE. This gate used to assert `EFFECT_CONSUMERS.priceShift === null` —

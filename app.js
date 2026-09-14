@@ -144,7 +144,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.0";
+const APP_VERSION = "2.0.1";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6342,9 +6342,20 @@ function masteryReadyForGM() {
  *  "what can a GM-context builder see" is as enumerable as the registry itself.
  *  FN_INDEX is exposed as a getter — it is a mutable `let` rebuilt at load. */
 function gmEnv(extra = {}) {
+  // ⛔ SNG-581 — `arcEffects` WAS THE ONE DARK KEY IN THIS BAG, and the comment four lines below has named
+  // the defect since SNG-266: "a builder that reads an env key nobody puts here is the same dark wire."
+  // `worthHereDetail` reads `env.arcEffects` and nothing ever set it, so `priceLine` took the `|| []`
+  // default every turn — ⚑ ELEVEN of the fifty-four authored arc-stage effects are `priceShift`, and
+  // their only road to a player runs through that key. The arcs moved the world's prices and the GM
+  // quoted the unmoved ones.
+  //
+  // ⚠️ ONE READ, TWO USES. `arcMoods` already called `arcEffectsNow()` from this very line, so the effects
+  // were being computed here and thrown away after one consumer took a slice of them.
+  const arcFx = arcEffectsNow();
   return {
     character, location: hereNow(), CONTENT, sceneTurns, sceneState, sceneSubPlace, sharedScene, profile,
-    arcMoods: npcMoodLines(arcEffectsNow()),   // SNG-273: an advanced arc changes how people carry themselves
+    arcEffects: arcFx,                         // SNG-273/302: what a carried thing fetches HERE, with the arc in force
+    arcMoods: npcMoodLines(arcFx),             // SNG-273: an advanced arc changes how people carry themselves
     sceneBeats, rules: CONTENT.rules,          // SNG-266/1d: the pacing directive reads both — a builder
                                                // that reads an env key nobody puts here is the same dark wire.
     time: readClock(character.clock),

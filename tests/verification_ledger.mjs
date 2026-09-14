@@ -1226,7 +1226,7 @@ const LEDGER = [
   },
   {
     id: "SNG-273", ask: "stage 2 of the Bleed is in effect, so what?",
-    how: "engine/arceffects.js — a stage's effects reach the cost path, the roads, the encounter pool and the GM's NPC block",
+    how: "engine/arceffects.js — a stage's effects reach the cost path, the roads, the encounter pool, the GM's NPC block, and (SNG-581) what a carried thing FETCHES here: `priceShift` reached nobody until `env.arcEffects` was set",
     gates: ["272/273: every authored stage effect is REACHABLE by the reader",
             "272/273: a stage changes what a CRAFT costs, and says which arc did it",
             "272/273: a craft the world is NOT touching is unchanged (no blanket tax)",
@@ -1235,6 +1235,7 @@ const LEDGER = [
             "272/273: …and on the World tab in plain words",
             "272/273: the encounter POOL leans with the world, at every draw site",
             "272/273: the roads and the mood are wired too",
+            "272/273: …and the bag reads the arcs ONCE, so every builder sees the same world",
             "272/273: an effect kind with NO consumer is declared, not left looking live",
             "272/273: the inert flag reads the consumer register rather than naming a kind",
             "272/273: ⛑ the place filter is INERT on authored content — no authored arc scopes itself yet",

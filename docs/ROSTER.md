@@ -138,7 +138,7 @@
 | `sworn_rival` | Ren of the Crimson Ledger | challenger | `npcs/saehara_challengers.json` | — | — | — | — | ⛔ challenger pool — kept out of the person map on purpose (SNG-138) | — | — | — |
 | `the_last_blade` | The Blade Without a Name | challenger | `npcs/saehara_challengers.json` | — | — | — | — | ⛔ challenger pool — kept out of the person map on purpose (SNG-138) | — | — | — |
 | `halvex_coil` | Halvex Coil, the Rewriter | lore figure | `lore/legends.json` | legendary | →60 | — | — | ✅ | — | — | — |
-| `maren_ossitide` | Maren Ossitide, Who Buried the Drowned Year | lore figure | `lore/legends.json` | epic | →40 | — | — | ✅ | — | — | — |
+| `maren_ossitide` | Maren Ossitide, Who Buried the Drowned Year | lore figure | `lore/legends.json` | legendary | →60 | — | — | ✅ | — | — | — |
 | `overseer_grael` | Overseer Grael of the Edge District | lore figure | `lore/legends.json` | heroic | →25 | — | — | ✅ | — | — | — |
 | `sister_alder` | Sister Alder, the Ward That Does Not Break | lore figure | `lore/legends.json` | epic | →40 | — | — | ✅ | — | — | — |
 | `cinder_vael` | Cinder Vael, the Wright Who Would Not Stop | epic | `tradition_epics.json` | epic | →40 | — | — | ✅ | — | — | — |

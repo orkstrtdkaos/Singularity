@@ -234,15 +234,84 @@
  "_craftSubAttributes": "✅ ERIK 2026-09-11: 'there are 8 stats, not the 4 we started with. they now need a spread of the 8.' Each craft row rolls ONE sub-attribute. An authored `subAttribute` on a craft wins; otherwise a parent's verbs split between its POWER sub and its FINESSE sub (`finesseVerbs`), and a harm verb (`harmVerbs`) goes to the finesse sub when the craft's operativeAxis names one of `finesseAxes`. Stamped onto the in-memory catalog at load as `subAttributeByFunction` (progression.stampCraftSubAttributes), never onto the files. A bow, a sling and a crossbow read as strength under this rule because their operativeAxis never says precision — author `subAttribute: \"agility\"` on them. Aevi's to retune.",
  "craftSubAttributes": {
   "enabled": true,
-  "power": { "physical": "strength", "mental": "reason", "social": "presence", "practical": "craft" },
-  "finesse": { "physical": "agility", "mental": "insight", "social": "rapport", "practical": "wits" },
-  "harmVerbs": ["strike", "break"],
-  "finesseAxes": ["precision", "foresight", "range"],
+  "power": {
+   "physical": "strength",
+   "mental": "reason",
+   "social": "presence",
+   "practical": "craft"
+  },
+  "finesse": {
+   "physical": "agility",
+   "mental": "insight",
+   "social": "rapport",
+   "practical": "wits"
+  },
+  "harmVerbs": [
+   "strike",
+   "break"
+  ],
+  "finesseAxes": [
+   "precision",
+   "foresight",
+   "range"
+  ],
   "finesseVerbs": {
-   "physical": ["move", "travel", "conceal", "deceive", "reveal", "foresee", "open", "soothe", "track", "evade"],
-   "mental": ["reveal", "foresee", "track", "conceal", "deceive", "soothe", "heal", "restore", "resist", "provoke"],
-   "social": ["persuade", "soothe", "heal", "restore", "bargain", "reveal", "sustain", "deceive", "track", "conceal", "foresee", "open", "make", "travel", "transform", "bind"],
-   "practical": ["move", "travel", "reveal", "track", "conceal", "deceive", "open", "hinder", "foresee", "command", "resist", "bargain"]
+   "physical": [
+    "move",
+    "travel",
+    "conceal",
+    "deceive",
+    "reveal",
+    "foresee",
+    "open",
+    "soothe",
+    "track",
+    "evade"
+   ],
+   "mental": [
+    "reveal",
+    "foresee",
+    "track",
+    "conceal",
+    "deceive",
+    "soothe",
+    "heal",
+    "restore",
+    "resist",
+    "provoke"
+   ],
+   "social": [
+    "persuade",
+    "soothe",
+    "heal",
+    "restore",
+    "bargain",
+    "reveal",
+    "sustain",
+    "deceive",
+    "track",
+    "conceal",
+    "foresee",
+    "open",
+    "make",
+    "travel",
+    "transform",
+    "bind"
+   ],
+   "practical": [
+    "move",
+    "travel",
+    "reveal",
+    "track",
+    "conceal",
+    "deceive",
+    "open",
+    "hinder",
+    "foresee",
+    "command",
+    "resist",
+    "bargain"
+   ]
   }
  },
  "subAttributes": {
@@ -1192,18 +1261,69 @@
   "body": "player",
   "_defaultLoadout": "✅ ERIK 2026-09-11 (Q3): 'they should and can use weapons and items. These things need to be on their npc sheets.' What a PERSON carries when their record authors neither `inventory` nor `gear` — a weapon of their trade (+4 to a strike or break, the same `wieldBonusFor` a PC gets) and one draught they drink when low. ⬜ AEVI: a placeholder for every person at once; a role- or people-shaped loadout, or real gear on the record, replaces it. An authored `gear` that names nothing usable ('no weapon at all') is a fact and gets no default.",
   "defaultLoadout": [
-   { "name": "a weapon of their trade", "kind": "weapon", "bonusTags": ["melee"] },
-   { "item": "healing_draught", "qty": 1 }
+   {
+    "name": "a weapon of their trade",
+    "kind": "weapon",
+    "bonusTags": [
+     "melee"
+    ]
+   },
+   {
+    "item": "healing_draught",
+    "qty": 1
+   }
   ],
   "_gearWords": "How a record's `gear` PROSE becomes something a fight can read (npcsheet.npcGear): a line that names a catalogue item is that item; otherwise a word here names its tag (items.tagFunctions says what each tag helps). A line no word names — a token, a coat, a cord — carries nothing into a fight. ⬜ Aevi's vocabulary to grow.",
   "gearWords": {
-   "blade": ["sword", "longsword", "shortsword", "cutlass", "sabre", "saber", "blade", "knife", "dagger"],
-   "axe": ["axe", "hatchet"],
-   "spear": ["spear", "lance", "pike", "glaive", "trident"],
-   "bow": ["bow", "crossbow", "sling"],
-   "melee": ["hammer", "mace", "club", "maul", "cudgel", "flail", "staff"],
-   "shield": ["shield", "buckler"],
-   "armor": ["brigandine", "mail", "hauberk", "plate", "armour", "armor", "cuirass"]
+   "blade": [
+    "sword",
+    "longsword",
+    "shortsword",
+    "cutlass",
+    "sabre",
+    "saber",
+    "blade",
+    "knife",
+    "dagger"
+   ],
+   "axe": [
+    "axe",
+    "hatchet"
+   ],
+   "spear": [
+    "spear",
+    "lance",
+    "pike",
+    "glaive",
+    "trident"
+   ],
+   "bow": [
+    "bow",
+    "crossbow",
+    "sling"
+   ],
+   "melee": [
+    "hammer",
+    "mace",
+    "club",
+    "maul",
+    "cudgel",
+    "flail",
+    "staff"
+   ],
+   "shield": [
+    "shield",
+    "buckler"
+   ],
+   "armor": [
+    "brigandine",
+    "mail",
+    "hauberk",
+    "plate",
+    "armour",
+    "armor",
+    "cuirass"
+   ]
   },
   "note": "⛔ DUEL_pell_vs_veth §A.1 / DECISIONS_OWED Q1 (CCode 2026-09-04): these two are the code defaults `npcsheet.sheetFor` has always used, AUTHORED AT IDENTITY so they are real dials rather than constants hiding in a function. ⚠️ A person is level×3 health and a FLAT 40 energy; a pressure tick costs the opponent 22, so two authored people are spent by round four. ⬜ THE NUMBERS ARE ERIK’S — nothing here is a ruling, only the place a ruling lands. ⚠️ ⛔ CCODE-310 / AEVI's SPEC_mythicals_and_the_npc_cap §4: \"REMOVE THE HARD 20. Do not replace it with 100 — a Mythical is NEAR 100 and the number is a consequence of the ladder, not a cap on it. If a bound is needed for arithmetic safety, put it in CONTENT with a reason, at a height no ordinary NPC reaches.\" ⚠️ MY FIRST FIX CLAMPED TO 100 IN CODE, which is the same shape Erik has ruled against four times: a default acting as a ceiling. This is the correction. ⛔ AND THE CROSSING IS CANON, NOT A DIAL: at or around level 100 a character or NPC ascends or falls across the Veil (Erik, new canon 2026-08-29). That lives in `legends.json` and `the_veil.json`. It is deliberately NOT a constant here — nothing in the engine reads it yet, and a dial with nothing on the other end is exactly what `wiring_audit` exists to catch. · ✅ R34/Q1 (Erik 2026-09-04, GO_LIST_20260904 §1): the NPC pools run on the PLAYER'S shape — base + per-level, both currencies. PC: maxHealth 15+physical×5 (or 30) +5/level; maxEnergy 100 +5/level. These sit just under that curve so an equal-level person is a near-equal body. The old numbers (level×3 health, 40 flat energy) gave a level-33 figure a novice's wind, which is why every duel ended by break.",
   "_tierFloor": "⛔ WHAT AN NPC IS, BEFORE THE PLAYER HAS ANYTHING TO DO WITH IT. The rung ladder is canon and lives in `arc_response.attentionByTier` — mythic · legendary · epic · heroic · regional · notable · riffraff (SNG-280, 126 uses). ⚠️ A FLOOR, NOT A VALUE: deeds, time known and standing still add on top, so tier is a thing that MOVES rather than a label — Erik: \"they grow in tier\".",
@@ -1227,7 +1347,9 @@
   "energyBase": 100,
   "energyPerLevel": 5,
   "levelPerCompletion": 1,
-  "levelPerConditionStep": 1
+  "levelPerConditionStep": 1,
+  "_earnedRungOutranksTheGuess_20260913": "⛔ AEVI'S RULING, on CCode's handoff (SNG-572): **A LEVEL THAT HAS OUTGROWN ITS ROLE GUESS PROMOTES. A LEVEL BELOW ITS GUESS NEVER DEMOTES.** ⚠️ THE CASE: `tierFromRole` reads \"Warden\" as `regional` (floor 12), which is right for a nameless warden and wrong for a legend — and the only thing between those two readings is whether somebody authored a tier. Fine for the 98 who carry one; ⛔ **a GENERATED warden who fights their way to level 60 has no authored tier and would read `regional` forever.** ⛑ `tierOf(level)` already answers it — the rung the level has REACHED — and the sheet already reports it as `tierNow`. **What was missing is a rule about which one wins, and this is it.** ⚠️ ONE-DIRECTIONAL, AND THAT IS WHAT KEEPS `_theGuardThatMatters` INTACT: 'default down, never up — a wrong guess that makes someone weaker is a disappointment; one that makes them stronger is an ambush.' ⛔ **AN EARNED LEVEL IS NOT A GUESS.** It is the world's own record of what somebody survived, so promoting on it is not the regex claiming a rung — it is the ladder reporting one. The guess may only ever be the FLOOR a person starts from; it may never be the ceiling they are held under.",
+  "_threeRoadsToEveryRung_20260913": "⛑ ERIK 2026-09-13: \"we need to be able to meet and join with any level of authored character… I'm tempted to remove the what-this-cannot-do rule.\" ⛔ **THE RULE IS NOT WHAT WAS BLOCKING IT, AND REMOVING IT WOULD COST SOMETHING FOR NOTHING.** `_whatThisCannotDo_20260908` binds ONE road — a regex reading a role string — and says any being above heroic must carry an AUTHORED tier. ⚠️ **EVERY RUNG IS ALREADY REACHABLE BY THREE ROADS AND NONE OF THEM IS A GUESS:** ⛑ (1) **AUTHORED** — 98 NPCs carry a tier and Marrow now sheets at legendary, level 60, `tierNow: legendary`, with the role guess correctly never running. **That road was never closed; a bare `sheetFor` call was flattening it, and CCode fixed the call.** ⛑ (2) **GENERATED** — Erik already overruled the ceiling on 2026-09-08 (\"ELIMINATE THE NO-GENERATED-NPCS-PAST-THIS-TIER RULE\"), replaced by rarity-by-population-shape. **Generation reaches every rung and is rare at the top, which is what a pyramid is.** ⛑ (3) **EARNED** — `_earnedRungOutranksTheGuess_20260913` above. A generated person who climbs is promoted by the climb. ⛔ **SO WHAT THE RULE STILL FORBIDS IS EXACTLY ONE THING: A ROLE STRING ALONE MINTING A LEGENDARY.** ⚠️ `_rarityReplacesCeiling_20260908` already states the principle it serves — **EVIDENCE PROPORTIONAL TO CLAIM** — and a role string is the weakest evidence in the system. **Keep the rule. Erik loses nothing and the ambush stays shut.**"
  },
  "capabilityByTier": {
   "note": "⛔ ERIK 2026-08-30: \"notable · regional · heroic need to be split out — they are INCREASING CAPABILITIES.\" They sat at an identical 0.5 in `arc_response.attentionByTier`, so a Hero steadied a line and bent a battle exactly as much as a Notable. ⚠️ AND THIS IS A SECOND TABLE ON PURPOSE, WHICH IS NORMALLY THE THING THIS PROJECT FORBIDS. `attentionByTier` is read by `worldtick.js` as an ARC-ATTENTION BUDGET — how much of the world's notice a rung commands — and its three-way tie at 0.5 is CORRECT for that: a notable, a regional and a heroic figure can draw equal notice while differing in what they can DO. ⛔ MOVING THE ARC BUDGET TO FIX A COMBAT LADDER WOULD HAVE CHANGED HOW ARCS SPEND ATTENTION, SILENTLY. Two facts, two tables — and `how_it_works` asserts they carry the SAME RUNGS so they cannot drift apart in name. ⚠️ epic 1.0 is the anchor and must not move: it is the 0.15 hero swing that shipped, and every existing gate is measured against it. riffraff · legendary · mythic keep the values Erik has already seen ruled on. ⚠️ AND I MADE THE SAME DOC-KEY MISTAKE TWICE: `wiring_audit` exempts a `_foo` ONLY where a real sibling `foo` exists, and its own header says that exemption must not become a hiding place. `_why` has no sibling `why`. Section prose belongs in `note`, which is an annotation key the audit already exempts.",

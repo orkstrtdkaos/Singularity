@@ -58,10 +58,32 @@ export const DEFAULT_BANDS = [
  *  real fight at level 5 and beneath notice at level 20, which is the whole point of Erik's model. `bands` comes
  *  from content when authored (Aevi), else the plain defaults. Pure. */
 export function threatBand(power, threat, bands = null) {
-  const ladder = (bands && bands.length) ? bands : DEFAULT_BANDS;
+  // ⛔ SNG-586 — THIS READ `atRatio` OFF A LADDER AUTHORED ON THE OLD ABSOLUTE SCALE, AND CALLED EVERY FOE
+  // IN THE GAME DEADLY.
+  //
+  // ⚑ `skill_battle_system.json` carries `threatBands: [{at: 80, label: "deadly"}, {at: 60, …}]` — written
+  // BEFORE Erik's CCODE-52 ruling made the rung relative ("the rung is threat ÷ YOUR power"). Not one rung
+  // has an `atRatio`, so `?? 0` made the first rung match every ratio, and `find` returned the hardest one.
+  // ⚠️ Measured on Erik's own save: Loki at power 104 against a threat-30 Churn-Revel read **deadly**, a foe
+  // he outclasses better than three to one — and the panel said "deadly" and "An even contest" in the same
+  // breath, because the authored rungs carry no `key` either, so the band's counsel could never outrank the
+  // craft-vs-prowess line.
+  //
+  // ⛑ AND THE FAILURE DIRECTION IS THE WORST ONE AVAILABLE. Falling to the hardest rung tells every player
+  // to run from everything; a panel that cries deadly at a rat is a panel you stop reading, which is worse
+  // than no panel. A ladder nobody can read must not be silently obeyed.
+  //
+  // ⚠️ DETECTED, NOT ASSUMED: a ratio ladder has at least one rung that states a ratio. One that states none
+  // is a different schema, and the defaults — which carry `key` and `counsel` as well — are used instead.
+  // ⬜ Aevi's labels are better prose than mine and come back the moment her rungs carry `atRatio`/`key`.
+  const offered = (bands && bands.length) ? bands : null;
+  const isRatioLadder = !!offered && offered.some(b => Number.isFinite(Number(b?.atRatio)));
+  const ladder = isRatioLadder ? offered : DEFAULT_BANDS;
   const ratio = num(threat) / Math.max(1, num(power));
   const rung = ladder.find(b => ratio >= (b.atRatio ?? 0)) || ladder[ladder.length - 1];
-  return { ...rung, ratio: Math.round(ratio * 100) / 100, power: num(power), threat: num(threat) };
+  return { ...rung, ratio: Math.round(ratio * 100) / 100, power: num(power), threat: num(threat),
+    // ⛑ SO A READER CAN TELL "the content had no ratio ladder" from "the content said beneath notice".
+    ...(offered && !isRatioLadder ? { ladderIgnored: "the authored threatBands state `at` (absolute), not `atRatio` (relative to your power) — CCODE-52's ladder is not authored yet" } : {}) };
 }
 
 /** CCODE-52: is this foe worth being an encounter at all? Erik: "a boar at lvl 20 isn't really an encounter

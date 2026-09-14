@@ -111,7 +111,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "./engine/recurrence.js";
 import { isEventfulTurn, pressureTier, pressureDirective, drivenPressureDirective, roomForAnOffer, roomForATeacherOffer } from "./engine/pacing.js";
 import { ensurePressureQueue, enqueuePressure, pullTopPressure, npcWantPressures, threatAttackPressure } from "./engine/pressure.js"; // SNG-245: the pressure queue — the world DRIVES
-import { lethalOfferClamp, isLethalEncounter, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps, contestSheetFor as engineContestSheetFor, withKind } from "./engine/encounters.js";
+import { lethalOfferClamp, isLethalEncounter, sanitizeNewEncounter, encounterArrival, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps, contestSheetFor as engineContestSheetFor, withKind } from "./engine/encounters.js";
 // ⛔ CCODE-227 (Erik backlog 7, step 1): conditions.js was built, gated, shipped — and imported by NOTHING.
 // Six exports reachable only from smoke.mjs. A rest cleared nothing because the module that decides what a
 // rest clears was never in the room. Wired at `rest()`, which is the one door both kinds of rest go through.
@@ -144,7 +144,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.5";
+const APP_VERSION = "2.0.6";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7823,14 +7823,58 @@ function applyTurn(turn, resolution, playerWords = null) {
     // nothing already engages this new encounter, inject a deterministic ENGAGE choice (routes through path A).
     // The GM's other options + the freefield stay the decline path; for a LETHAL fight, add an explicit "step
     // back" so decline-before-engagement (rule 18 — lethal is offered, never imposed) is never missing.
+    // ⛔ SNG-586 (Erik, in play) — AND CCODE-19's FIX ASSUMED THE FIGHT HAD BEEN NARRATED. Its note above
+    // says "the duel it just narrated never begins"; it fires identically when the GM emits the def and
+    // narrates something else entirely, which is what happened to Erik: 300 words about the Null Stone, four
+    // choices about the Null Stone, and `⚔ Face A Churn-Revel` prepended above all of them.
+    //
+    // ⚑ THE ARRIVAL EXISTED. The same turn's `newEncounter.setup` — "a sudden carnival of deliberate chaos
+    // erupts from one of the waygate arches" — was stored and shown only to players who had already said
+    // yes, because `def.setup`'s only other reader is `beginEncounter`, AFTER the commit.
+    //
+    // ⛑ SO THE PARAGRAPH COMES FIRST AND THE BUTTON FOLLOWS IT. `encounterArrival` is pure and invents no
+    // prose: it restores the GM's own line, or — when there is no line and no mention — says there is
+    // nothing honest to offer, and the fight is not offered at all.
     if (nd && !character.activeEncounter && !(turn.choices || []).some(c => c.encounterId === nd.id)) {
-      const foe = nd.opponent?.name || nd.name || "your opponent";
-      const engage = nd.type === "duel"
-        ? { label: `⚔ Face ${foe}${nd.lethal ? " — blood is on the table" : ""}`, encounterId: nd.id, attribute: "physical", subAttribute: "strength", axes: {}, difficulty: 0, intentTags: ["risky", "commit"] }
-        : { label: `▶ Take on ${nd.name || "the encounter"}`, encounterId: nd.id, attribute: "physical", subAttribute: "agility", axes: {}, difficulty: 0, intentTags: ["risky", "commit"] };
-      const inject = [engage];
-      if (nd.lethal) inject.push({ label: "Step back — not this fight", attribute: "practical", subAttribute: "wits", axes: {}, difficulty: 0, intentTags: ["careful", "retreat"], trivial: true });
-      turn.choices = [...inject, ...(turn.choices || [])];
+      const arrival = encounterArrival(turn.narration, nd);
+      // ⚠️ ITALIC AND ITS OWN PARAGRAPH, the same shape every other engine-restored beat in applyTurn wears,
+      // so a player can see where the scene ends and the thing that just walked into it begins.
+      if (arrival.arrival) turn.narration = `${String(turn.narration || "").trimEnd()}\n\n*${arrival.arrival}*`;
+      if (arrival.offer) {
+        const foe = nd.opponent?.name || nd.name || "your opponent";
+        const engage = nd.type === "duel"
+          ? { label: `⚔ Face ${foe}${nd.lethal ? " — blood is on the table" : ""}`, encounterId: nd.id, attribute: "physical", subAttribute: "strength", axes: {}, difficulty: 0, intentTags: ["risky", "commit"] }
+          : { label: `▶ Take on ${nd.name || "the encounter"}`, encounterId: nd.id, attribute: "physical", subAttribute: "agility", axes: {}, difficulty: 0, intentTags: ["risky", "commit"] };
+        const inject = [engage];
+        if (nd.lethal) inject.push({ label: "Step back — not this fight", attribute: "practical", subAttribute: "wits", axes: {}, difficulty: 0, intentTags: ["careful", "retreat"], trivial: true });
+        // ⛔ AND THE WAY OUT IS THERE FOR ANY UNBIDDEN ARRIVAL, not only a lethal one. Erik's whole objection
+        // was the shape of the ask — "do you want to fight this thing that you have 30% chance of beating?
+        // Uh, no." — and a thing that walks into a scene uninvited must be declinable in one click, not only
+        // by ignoring it. The GM's own choices are still the other way out; this one says so out loud.
+        if (!nd.lethal && !arrival.mentioned) inject.push({ label: `Leave it be — keep to what you were doing`,
+          attribute: "practical", subAttribute: "wits", axes: {}, difficulty: 0, intentTags: ["careful"], trivial: true });
+        turn.choices = [...inject, ...(turn.choices || [])];
+        // ⛔ AND THE READ THAT ALREADY EXISTS RUNS HERE TOO. CCODE-44 was built on Erik's own words — "you
+        // should be able to tell something about how hard the opponent will be to beat" — and `appraiseOpponent`
+        // gives exactly that: relative craft, relative prowess, disposition, a threat band RELATIVE to this
+        // character's power, and counsel that says "this is a fight you may not win" when it is.
+        // ⚠️ IT WAS WIRED TO THE RANDOM-ENCOUNTER OFFER PATH ONLY. A GM-invented duel — the path that produced
+        // Erik's Churn-Revel — reached the same button with none of it. ⚑ Two doors into one decision and only
+        // one of them was informed, which is why the other read as a coin flip with a number on it.
+        if (nd.type === "duel" && nd.opponent) {
+          try {
+            const sheet586 = synthesizeOpponentSheet(withKind(nd.opponent, nd), CONTENT.skillBattle?.engine || {});
+            turn._appraisal = appraiseOpponent(character, nd, sheet586, CONTENT.rules,
+              CONTENT.skillBattle?.engine || {}, CONTENT.skillBattle?.engine?.appraisal || {});
+          } catch { /* a read is a grace, never a blocker on the offer — same rule as the offer path */ }
+        }
+      } else {
+        // ⚠️ COUNTED, NOT SILENT. A guard that is right and says nothing reads exactly like a guard that never
+        // fired — third time this week. The def stays registered so the fiction can still bring it in later.
+        character._encounterNotIntroduced = [...(character._encounterNotIntroduced || []).slice(-4),
+          { id: nd.id, name: nd.name, why: arrival.why, worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })() }];
+        if (typeof console !== "undefined") console.warn(`[encounter] "${nd.name}" was not offered — ${arrival.why}`);
+      }
     }
   }
   // spectrum fingerprint drifts toward the axes of what you actually did (EWMA)
@@ -16699,11 +16743,15 @@ function renderPlay(turn, opts = {}) {
     if (opts.degraded) main += `<div class="degraded-note">(${esc(turn._opNote || "The GM's structured reply failed — plain narration mode this turn.")})</div>`;
     // CCODE-44: the pre-fight READ — how hard, and why. Sits directly above stand-and-fight / back-away, because
     // it exists to make that choice a decision rather than a coin flip.
+    // ⛔ SNG-586 — THE CHIP TOOK THE LABEL AS A CLASS AND THE LABEL IS A PHRASE. `appraise-${_a.threat}` with
+    // the ratio ladder's wording produced `class="appraise-beneath notice"` — a SPACE inside a class name,
+    // which the browser splits into two classes, neither of which exists. ⚠️ And "${label} threat" read
+    // "beneath notice threat". The key is the slug, the label is the prose, and they are not interchangeable.
     if (turn._appraisal) {
       const _a = turn._appraisal;
       const _rc = r => r === "high" ? "worse" : r === "low" ? "better" : "even";
       main += `<div class="appraise">
-        <div class="appraise-top"><span class="appraise-title">⚖ Sizing them up</span><span class="appraise-threat appraise-${esc(_a.threat)}">${esc(_a.threat)} threat</span></div>
+        <div class="appraise-top"><span class="appraise-title">⚖ Sizing them up</span><span class="appraise-threat appraise-${esc(_a.band?.key || _a.threat)}">${esc(_a.threat)}</span></div>
         ${_a.lines.map(l => `<div class="appraise-line ${_rc(l.rel)}">${esc(l.text)}</div>`).join("")}
         <div class="appraise-line">They are <strong>${esc(_a.disposition)}</strong></div>
         <div class="appraise-counsel">${esc(_a.counsel)}</div>
@@ -16726,6 +16774,17 @@ function renderPlay(turn, opts = {}) {
       }
       if (c.trivial && !c.abilityId) {
         senseHtml = `<span class="sense trivial-tag">no roll — just do it</span>`;
+      } else if (c.encounterId) {
+        // ⛔ SNG-586 (Erik, in play) — "do you want to fight this thing that you have 30% chance of beating?
+        // Uh, no." ⚠️ THAT NUMBER WAS NEVER THE CHANCE OF BEATING IT. An engage choice carries `difficulty: 0`
+        // and a physical/strength attribute it never rolls; the contest happens INSIDE the encounter, round by
+        // round, with its own numbers. So the line read "roughly 30 in a hundred" about nothing at all, and a
+        // player did the only sensible thing with it — declined.
+        //
+        // ⛑ THE CODE ALREADY KNEW THIS ROW WAS DIFFERENT: `canTune` excludes `encounterId` from the ⚙ tuner,
+        // because there is no ability or intensity to tune on a commitment. It just kept printing odds for it.
+        // ⚑ How hard they are is the appraisal panel's job, directly above; this says what the button DOES.
+        senseHtml = `<span class="sense trivial-tag">no roll — this joins the contest, which is fought round by round</span>`;
       } else {
         action.subAttribute = SUBS.includes(c.subAttribute) ? c.subAttribute : null;
         const equip = equipmentBonus(character, action.tags, rules);

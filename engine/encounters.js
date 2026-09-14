@@ -918,6 +918,62 @@ export function sanitizeNewEncounter(raw) {
         tier: Math.max(1, Math.min(5, s.tier | 0 || 1)), attribute: String(s.attribute || "practical").slice(0, 12) })) } : {}) } };
 }
 
+/** ⛔ SNG-586 (Erik, in play) — "I can choose to face a creature… but the narrative didn't say anything
+ *  about it. I would hope that the narration actually indicates something before i go into battle — or — at
+ *  least says i get ambushed or something… this looks like it's just an option — oh hey, do you want to
+ *  fight this thing that you have 30% chance of beating? Uh, no."
+ *
+ *  ⚑ HIS OWN SAVE IS THE EVIDENCE, and it is exact. The turn's `narration` is 300 words about the Null
+ *  Stone, Cy, Vessin, Kael and Veln Ashpause — not one word about a Churn-Revel. The GM's four choices are
+ *  all about the stone. And the engine PREPENDED `⚔ Face A Churn-Revel` above all of them.
+ *
+ *  ⛔ THE INTRODUCTION EXISTED AND WAS SHOWN ONLY TO PEOPLE WHO HAD ALREADY SAID YES. The same turn's
+ *  `newEncounter.setup` reads: "The Hub crossing's steady order fractures — a sudden carnival of deliberate
+ *  chaos erupts from one of the waygate arches…" ⚠️ `def.setup` has exactly two readers: the GM's prompt,
+ *  and `beginEncounter`, which feeds it back to the model AFTER the player commits. So the arrival was
+ *  written, stored, and withheld until it no longer mattered.
+ *
+ *  ⛑ AND CCODE-19'S FIX ASSUMED THE OPPOSITE CASE. Its comment says "the duel it just narrated never
+ *  begins" — it was built for a GM that narrates the fight and forgets the choice, and it fires identically
+ *  for a GM that emits the def and narrates something else. One of those needs a button; the other needs a
+ *  paragraph, and it was getting the button.
+ *
+ *  ⚠️ PURE, AND IT INVENTS NO PROSE. The arrival it returns is the GM's OWN `setup` from the same turn —
+ *  restoring a paragraph the engine dropped, not writing one. If there is no setup and no mention, there is
+ *  nothing honest to say and `offer` is false: a fight the fiction never introduced is not offered at all.
+ *
+ *  @returns {{mentioned: boolean, arrival: string|null, offer: boolean, why: string}}
+ */
+export function encounterArrival(narration, def) {
+  const text = String(narration || "");
+  const raw = String(def?.opponent?.name || def?.name || "").trim();
+  // ⚠️ A GENERIC NAME IS NOT A NAME. "your opponent" appears in prose constantly and matching on it would
+  // report every turn as already-introduced — the false-positive direction, which silently keeps the bug.
+  const GENERIC = /^(your |the |a |an )?(opponent|foe|enemy|encounter|challenger|attacker|stranger)$/i;
+  const name = GENERIC.test(raw) ? "" : raw.replace(/^(a|an|the)\s+/i, "").trim();
+
+  // whole-word, case-insensitive, and NEVER a substring: "Revel" must not match "revelation".
+  const saysIt = (needle) => {
+    const n = String(needle || "").toLowerCase();
+    if (n.length < 4) return false;
+    const hay = text.toLowerCase();
+    const WORDY = /[a-z0-9]/;
+    for (let i = hay.indexOf(n); i !== -1; i = hay.indexOf(n, i + 1)) {
+      const before = i === 0 || !WORDY.test(hay[i - 1]);
+      const after = i + n.length >= hay.length || !WORDY.test(hay[i + n.length]);
+      if (before && after) return true;
+    }
+    return false;
+  };
+  // the full name first, then any single distinctive word of it — "A Churn-Revel" → "Churn-Revel".
+  const mentioned = !!name && (saysIt(name) || name.split(/\s+/).filter(w => w.length >= 5).some(saysIt));
+
+  const setup = String(def?.setup || "").trim();
+  if (mentioned) return { mentioned: true, arrival: null, offer: true, why: "the narration already names it" };
+  if (setup) return { mentioned: false, arrival: setup, offer: true, why: "the GM wrote an arrival and the engine had dropped it" };
+  return { mentioned: false, arrival: null, offer: false, why: "nothing introduced it, so there is nothing to accept" };
+}
+
 /** SNG-322 — THE BAND DECIDES, NOT A HAND-SET FLAG. Aevi's threat ladder (`rules.threat`) carries `lethal`
  *  and `warn` per band, and it was authored onto 62 encounters — while nothing in the engine read
  *  `rules.threat` at all, so `def.lethal` was still hand-set on exactly 2 defs. That is CCODE-52's whole

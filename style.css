@@ -1360,9 +1360,14 @@ img[data-lightbox] { cursor: zoom-in; }
 .appraise-top { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 5px; }
 .appraise-title { font-family: var(--font); font-size: 13px; color: var(--accent, #c9a227); letter-spacing: 1px; }
 .appraise-threat { font-family: var(--font-ui); font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; padding: 1px 7px; border-radius: 9px; border: 1px solid var(--border); }
-.appraise-deadly, .appraise-dangerous { color: var(--danger); border-color: color-mix(in srgb, var(--danger) 50%, var(--border)); }
-.appraise-serious { color: var(--accent, #c9a227); }
-.appraise-modest, .appraise-slight { color: var(--ink-dim); }
+/* ⚠️ TWO LADDERS WEAR THIS CHIP. The authored labels (deadly…slight) are the absolute ladder; the relative
+   rungs CCODE-52 actually uses are keyed flee/dire/hard/even/trivial/beneath, and none of them matched a rule
+   here — so the chip lost its colour the moment the band started reading correctly (SNG-586). Both ladders
+   are coloured now, by the same intent, and the authored one lights up again the day its rungs carry ratios. */
+.appraise-deadly, .appraise-dangerous, .appraise-flee, .appraise-dire { color: var(--danger); border-color: color-mix(in srgb, var(--danger) 50%, var(--border)); }
+.appraise-serious, .appraise-hard { color: var(--accent, #c9a227); border-color: color-mix(in srgb, var(--accent) 40%, var(--border)); }
+.appraise-even { color: var(--ink); }
+.appraise-modest, .appraise-slight, .appraise-trivial, .appraise-beneath { color: var(--ink-dim); }
 .appraise-line { font-family: var(--font-ui); font-size: 12px; line-height: 1.5; color: var(--ink); }
 .appraise-line.worse { color: var(--danger); }
 .appraise-line.better { color: var(--accent2, #7a9); }

@@ -16310,6 +16310,98 @@ console.log("\n── §235 · the game is called what Erik named it ──");
     `${absent235.length} of ${declared235} declared images are not in the repo`);
 }
 
+
+// ⛔ SNG-586 (Erik, in play) — "I can choose to face a creature… but the narrative didn't say anything about
+// it… this looks like it's just an option — oh hey, do you want to fight this thing that you have 30% chance
+// of beating? Uh, no."
+//
+// ⚑ HIS SAVE IS THE FIXTURE AND IT IS EXACT. `char-mrum8y4d`, the live turn: 300 words about the Null Stone,
+// Cy, Vessin, Kael and Veln Ashpause. Four GM choices, all about the stone. `newEncounter: A Churn-Revel`, and
+// `⚔ Face A Churn-Revel` PREPENDED above everything. Three separate things were wrong at once:
+//
+//   1 ⛔ THE ARRIVAL WAS WRITTEN AND WITHHELD. The same turn's `setup` — "a sudden carnival of deliberate chaos
+//     erupts from one of the waygate arches" — has two readers: the GM prompt, and `beginEncounter`, which
+//     runs AFTER the player commits. So the introduction was shown only to people who had already said yes.
+//   2 ⛔ THE ODDS LINE WAS ABOUT NOTHING. An engage choice carries `difficulty: 0` and an attribute it never
+//     rolls; the contest is fought inside the encounter. "roughly 30 in a hundred" described no event, and
+//     Erik read it as the chance of WINNING, which is the only sane thing to do with it.
+//   3 ⛔ AND THE READ THAT WOULD HAVE ANSWERED HIM WAS WIRED TO THE OTHER DOOR. `appraiseOpponent` — built on
+//     his own CCODE-44 words — ran on the random-encounter offer and never on a GM-invented duel.
+console.log("\n── §236 · a fight nobody introduced ──");
+{
+  const ENC236 = await import("../engine/encounters.js");
+  const T236 = await import("../engine/threat.js");
+  const S236 = await import("../engine/sense.js");
+  const APP236 = rd("app.js");
+
+  /* ---- 1 · ⛔ THE FICTION INTRODUCES IT, OR IT IS NOT OFFERED ---- */
+  const revel236 = { id: "gm-a-churn-revel", type: "duel", name: "A Churn-Revel",
+    setup: "The Hub crossing's steady order fractures—a sudden carnival of deliberate chaos erupts.",
+    opponent: { name: "A Churn-Revel", threat: 30 } };
+  const stoneProse236 = "You circle the Null Stone slowly, keeping pace with Cy. Veln Ashpause has not moved from the western arch.";
+  const a236 = ENC236.encounterArrival(stoneProse236, revel236);
+  check("§236: ⛔ a turn that never names the foe gets the GM's own arrival restored to the prose",
+    a236.mentioned === false && a236.offer === true && /carnival of deliberate chaos/.test(a236.arrival || ""),
+    a236.why);
+  check("§236: …and a turn that DOES name it is not told twice",
+    (() => { const r = ENC236.encounterArrival("The Churn-Revel spills from the arch.", revel236);
+      return r.mentioned === true && r.arrival === null && r.offer === true; })());
+  // ⛔ THE HALF THAT ANSWERS ERIK'S ACTUAL OBJECTION: nothing introduced it and nothing CAN introduce it, so
+  // it is not put in front of him at all. The def stays registered; the fiction can still bring it in later.
+  check("§236: ⛔ …and with no arrival and no mention there is nothing honest to accept, so it is NOT offered",
+    (() => { const r = ENC236.encounterArrival("Nothing happens.", { ...revel236, setup: "" });
+      return r.offer === false && r.arrival === null; })());
+  // ⚠️ THE TWO FALSE-POSITIVE DIRECTIONS, both of which would silently keep the bug by reporting "already
+  // introduced": a substring match, and a name that is not a name.
+  check("§236: ⚠️ …and a REVELATION does not count as naming the Revel — whole words only",
+    ENC236.encounterArrival("A revelation strikes you.", revel236).mentioned === false);
+  check("§236: …nor does the phrase your-opponent, which is prose everywhere and a name nowhere",
+    ENC236.encounterArrival("your opponent waits", { name: "your opponent", setup: "x", opponent: { name: "your opponent" } }).mentioned === false);
+
+  /* ---- 2 · ⛔ AND THE LADDER CALLED EVERY FOE IN THE GAME DEADLY ---- */
+  // ⚑ THE AUTHORED `threatBands` STATE `at` (absolute 80/60/40…), WRITTEN BEFORE CCODE-52 MADE THE RUNG
+  // RELATIVE. `threatBand` reads `atRatio`; none existed; `?? 0` matched the first rung for every ratio and
+  // `find` returned the HARDEST one. ⚠️ Measured on Erik's save: power 104 against threat 30 read **deadly**.
+  // ⛑ Asserted against the REAL authored content, not a fixture — a fixture of my own `at`-ladder would prove
+  // the shape and not the corpus.
+  const { loadContentHeadless: lch236 } = await import("./headless_content.mjs");
+  const C236 = await lch236();
+  const authored236 = C236.skillBattle?.engine?.appraisal?.threatBands || null;
+  check("§236: ⚑ the authored ladder really is the absolute one — or this gate is about nothing",
+    Array.isArray(authored236) && authored236.length > 0 && authored236.every(b => b?.atRatio === undefined),
+    `${(authored236 || []).length} rungs, none carrying atRatio`);
+  const weak236 = T236.threatBand(104, 30, authored236);
+  check("§236: ⛔ a foe you outclass three to one does NOT read as the hardest rung",
+    weak236.key === "beneath" && !!weak236.ladderIgnored,
+    `${weak236.label} at ratio ${weak236.ratio}`);
+  // ⛔ AND THE FAILURE DIRECTION IS NAMED. Falling to the hardest rung tells every player to run from
+  // everything; a panel that cries deadly at a rat is a panel you stop reading.
+  check("§236: …and a real ratio ladder is still obeyed, so the fallback is a repair and not a takeover",
+    T236.threatBand(100, 250, [{ key: "flee", atRatio: 2.0, label: "beyond you" }, { key: "even", atRatio: 0, label: "a fight" }]).key === "flee");
+
+  /* ---- 3 · ⚠️ AND THE PANEL NO LONGER CONTRADICTS ITSELF ---- */
+  // ⛑ With the ladder readable, "beneath notice" arrived beside "An even contest" — the same defect seen from
+  // the easy side. The band speaks at BOTH extremes now; the craft-vs-prowess compare keeps the middle.
+  const appr236 = S236.appraiseOpponent({ attributes: { physical: 6, practical: 6 }, abilities: [{ level: 3 }] },
+    revel236, { attributes: { physical: 2, practical: 2 }, skills: [{ tier: 1 }] },
+    C236.rules, C236.skillBattle?.engine || {}, C236.skillBattle?.engine?.appraisal || {});
+  check("§236: ⚠️ a rung at either extreme speaks for itself — the band and the counsel agree",
+    !["flee", "dire", "beneath"].includes(appr236.band.key) || appr236.counsel === appr236.band.counsel,
+    `${appr236.band.key}: "${appr236.counsel}"`);
+
+  /* ---- 4 · ⛔ THE THREE APP WIRES, EACH ASSERTED AS THE CLAIM ---- */
+  check("§236: ⛔ the engage choice says what it DOES, and never prints odds for a roll it will not make",
+    /\} else if \(c\.encounterId\) \{/.test(APP236)
+    && /no roll — this joins the contest/.test(APP236));
+  check("§236: ⛑ …and the pre-fight read runs on a GM-invented duel, not only on the offer path",
+    (APP236.match(/appraiseOpponent\(character, /g) || []).length >= 2);
+  // ⚠️ A CLASS NAME WITH A SPACE IN IT IS TWO CLASSES. `appraise-${label}` with the ratio ladder's wording
+  // produced `class="appraise-beneath notice"`, and neither half exists. The key is the slug.
+  check("§236: ⚠️ …and the threat chip takes the band's KEY as its class, never its prose label",
+    /appraise-\$\{esc\(_a\.band\?\.key \|\| _a\.threat\)\}/.test(APP236)
+    && /\.appraise-beneath\b/.test(rd("style.css")));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

@@ -159,7 +159,13 @@ export function appraiseOpponent(character, def, oppSheet, rules, sb, content = 
     : "An even contest.";
   // CCODE-52: on the hard rungs the BAND's counsel wins — "do not fight this" outranks a craft-vs-prowess compare,
   // and this is the line that has to stop a player walking into a death.
-  const finalCounsel = ["flee", "dire"].includes(rung.key) ? (rung.counsel || counsel) : counsel;
+  //
+  // ⛔ SNG-586 — AND IT HAS TO WIN AT THE OTHER END TOO. With the ratio ladder finally readable, Erik's
+  // Churn-Revel came out "beneath notice" while this line still said "An even contest" — the panel
+  // contradicting itself in two adjacent rows, which is the same defect the always-deadly band had, seen from
+  // the easy side. ⚠️ The craft-vs-prowess compare is the interesting reading in the MIDDLE, where the fight
+  // is genuinely in doubt; at either extreme the power gap is the whole story and the band should say it.
+  const finalCounsel = ["flee", "dire", "beneath"].includes(rung.key) ? (rung.counsel || counsel) : counsel;
   return { skill, prowess, disposition: dispositionOf(def, content), threat: band, threatScore: threat,
     power, band: rung, counsel: finalCounsel,
     lines: [{ label: "how they stand to you", rel: rung.key, text: `${rung.label} — threat ${threat} against your ${power}` },

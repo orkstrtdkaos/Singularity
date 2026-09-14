@@ -15696,6 +15696,71 @@ console.log("\n── §228 · the stage arrived with its arity and none of its 
     /export function questsFor\(character, defs\)/.test(QS228) && /hydrateQuest/.test(QS228));
 }
 
+
+// ⛔ ASK_20260912 §4.2 (Aevi) — "A GATE THAT ANY COUNT OF 'THE TRADITIONS' IS 24. I reported EXESA's
+// 'twenty-four traditions' as stale yesterday and it was right; I WAS WRONG BECAUSE I COUNTED THE ARRAY. The
+// next person counts the array too."
+//
+// ⛑ SHE IS RIGHT ABOUT THE TRAP AND THERE ARE THREE NUMBERS, NOT TWO — every one of them defensible, none of
+// them labelled, which is exactly why counting gives a confident wrong answer:
+//
+//     24  the RING — the poles of the great circle. `ringOrder(idx)`.
+//     26  `traditions.json`'s own array — the 24 poles PLUS the God-Named and the Bargainers.
+//     29  `traditionIndex.byId` — those 26 PLUS the three folk (harmonic, radiant_folk, valley_craft).
+//
+// ⚑ AND NOTHING WAS STALE. 24 + 2 = 26, 26 + 3 = 29; SYSTEM_SPEC's stamped "26 traditions (+3 folk)" is the
+// middle one saying so out loud, and HOW_IT_WORKS's "29 of 29 traditions | 24 poles · 4 foothills · 1 braid
+// group" is the same arithmetic in the same line. ⛔ THE DEFECT WAS NEVER A NUMBER. It was that a reader has
+// to derive the distinction to avoid tripping on it, and the PO tripped on it and filed the trip.
+console.log("\n── §229 · three true counts of the traditions, and which is which ──");
+{
+  const TR229 = await import("../engine/traditions.js");
+  const { loadContentHeadless: lch229 } = await import("./headless_content.mjs");
+  const C229 = await lch229();
+  const idx229 = C229.traditionIndex || {};
+  const ring229 = TR229.ringOrder(idx229) || [];
+  const byId229 = Object.keys(idx229.byId || {});
+
+  /* ---- 1 · ⛑ THE THREE, EACH DERIVED FROM ITS OWN SOURCE ---- */
+  check("§229: ⛑ THE RING is 24 — the poles of the great circle, and what 'the traditions' means in prose",
+    ring229.length === 24, `${ring229.length} on the ring`);
+  check("§229: ⛔ …and the INDEX is larger, which is the array a reader counts and is not the same question",
+    byId229.length > ring229.length, `${byId229.length} in byId vs ${ring229.length} on the ring`);
+  // ⚠️ AND THE DIFFERENCE IS NAMED, NOT MERELY MEASURED. A gate that says "these two numbers differ" teaches
+  // nothing; the useful fact is WHICH records are in one and not the other.
+  const offRing = byId229.filter(t => !ring229.includes(t));
+  check("§229: ⚠️ …and the extras are NAMED, so the next reader inherits the distinction instead of the trip",
+    offRing.length === 5 && ["god_named", "bargainers", "harmonic", "radiant_folk", "valley_craft"].every(t => offRing.includes(t)),
+    offRing.join(", "));
+
+  /* ---- 2 · ⛔ AND THE ARITHMETIC CLOSES, which is what proves none of them is stale ---- */
+  // ⛑ If these ever stop adding up, ONE of the three sources has drifted and this says which — where three
+  // separate hand-checked constants would only say that somebody disagrees.
+  const FOLK = ["harmonic", "radiant_folk", "valley_craft"];
+  const folkPresent = FOLK.filter(t => byId229.includes(t));
+  const peoples = offRing.filter(t => !FOLK.includes(t));
+  check("§229: ⛔ the ring plus the unringed peoples plus the folk IS the index — the three counts reconcile",
+    ring229.length + peoples.length + folkPresent.length === byId229.length,
+    `${ring229.length} + ${peoples.length} + ${folkPresent.length} = ${byId229.length}`);
+  // ⚠️ AND THE STAMPER'S MIDDLE NUMBER IS THE MIDDLE ONE. `certify_counts` writes SYSTEM_SPEC's "N traditions
+  // (+N folk)" from `traditions.json`'s array — so the doc says the ring plus the two unringed peoples, and
+  // the folk separately. That is correct and it is the one a reader is most likely to mistake for the ring.
+  const authoredArray = (C229.rules?.traditionsFile?.traditions || []).length
+    || JSON.parse(rd("content/packs/core/rules/traditions.json")).traditions.length;
+  check("§229: ⚠️ …and the number the docs are STAMPED with is the array, not the ring — which is the trap",
+    authoredArray === ring229.length + peoples.length && authoredArray !== ring229.length,
+    `stamped ${authoredArray} · ring ${ring229.length} · folk ${folkPresent.length}`);
+
+  /* ---- 3 · ⛑ AND THE DOC THAT CARRIES BOTH SAYS SO IN ITS OWN LINE ---- */
+  // ⛔ THIS IS THE PART THAT MAKES THE TRIP AVOIDABLE. HOW_IT_WORKS carries "29 of 29 traditions" and "24
+  // poles" in the SAME ROW — the arithmetic is already written down beside the number, and Aevi read one
+  // without the other. ⚠️ Asserted so an edit that keeps one and drops the other fails here.
+  const HW229 = rd("docs/HOW_IT_WORKS.md");
+  const row = (HW229.split(String.fromCharCode(10)).find(l => /of \d+ traditions/.test(l)) || "");
+  check("§229: ⛑ the doc's own count carries its breakdown in the same line, or the number teaches the error",
+    /\d+ traditions/.test(row) && /\d+ poles/.test(row), row.slice(0, 96));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

@@ -14877,6 +14877,81 @@ console.log("\n── §219 · who made this world ──");
     handRolled.length === 0, handRolled.join(" · "));
 }
 
+
+// ⛔ SNG-567 §3.2 (Aevi, on Erik's ruling 2: "legends sometimes come; mostly it is the ones you have grown
+// closest to") — REACH IS RANK **AND BOND**, and `canReach` read craft rank and nothing else.
+//
+// ⛑ AND IT IS THE ANSWER TO ERIK'S RULING 6 AT THE SAME TIME — "in your saved game we would need to make sure
+// the player is limited". ⚠️ NO ANTI-ALT RULE IS NEEDED: swapping to your own second character is ALLOWED and
+// NATURALLY WEAK, because an alt who never met you is a stranger holding a craft. The fiction is the limit,
+// which is the only kind this design has ever wanted.
+console.log("\n── §220 · what you were to them reaches too ──");
+{
+  const D220 = await import("../engine/death.js");
+  const { loadContentHeadless: lch220 } = await import("./headless_content.mjs");
+  const C220 = await lch220();
+  const r220 = C220.rules || {};
+  const dead = (diedDay = 0) => { const e = { name: "X" }; D220.enterDeathState(e, { diedDay }); return e; };
+  const DEEP = 60, NEAR = 15;   // ⚠️ derived below rather than asserted — the spans are a content dial
+
+  /* ---- 1 · ⛑ THE SPEC'S OWN TWO WORKED EXAMPLES, WHICH ARE THE CONTRACT ---- */
+  // ⚠️ THE DIAL IS SET TO MAKE THESE TRUE rather than picked and then described. Aevi wrote both sentences; if
+  // `bondPerRung` ever moves, these fail — which is the point, because they are the design.
+  const deepDay = D220.deathDepth(dead(), DEEP, r220);
+  check("§220: ⛑ the day used here really is the deep dark, so the two examples are tested where they were written",
+    deepDay === 2, `depth ${deepDay}`);
+  const alt = D220.canReach(dead(), { rank: 1, bond: 0, currentDay: DEEP, rules: r220 });
+  check("§220: ⛔ \"an alt who never met you is a stranger with a craft\" — bond 0 does not reach the deep dark",
+    alt.ok === false && alt.refused === true && alt.fromBond === 0);
+  const marrow = D220.canReach(dead(), { rank: 1, bond: 10, currentDay: DEEP, rules: r220 });
+  check("§220: ⛑ \"Marrow at bond 10 reaches the deep dark\" — and she does it on the bond, at rank 1",
+    marrow.ok === true && marrow.fromBond === 2, `reach ${marrow.reach} · +${marrow.fromBond} from bond`);
+
+  /* ---- 2 · ⚠️ AND A REFUSAL IS STILL FREE, WHICH IS THE WHOLE SAFETY OF THE MECHANIC ---- */
+  // ⛔ `canReach`'s own comment: "a FAILURE sinks them, so being told 'that is past your reach' must not cost
+  // the person you were reaching for." A bond term that turned a refusal into an attempt would have quietly
+  // made trying dangerous.
+  check("§220: ⚠️ a reach the bond cannot close is REFUSED, never failed — the dead are not moved by being asked",
+    alt.refused === true && alt.sealed !== true && !("outcome" in alt));
+
+  /* ---- 3 · ⛔ AND THE REFUSAL SAYS WHICH HALF WAS SHORT ---- */
+  // ⚠️ "You would need rank 3" is unactionable for someone whose rank IS 3 and whose standing is what is
+  // missing — and it reads as a bug rather than as a rule.
+  const ranked = D220.canReach(dead(), { rank: 1, bond: 0, currentDay: NEAR, rules: r220 });
+  check("§220: ⛔ …and it names the bond as a road, not only the rank",
+    /closer bond/.test(ranked.why || ""), ranked.why);
+
+  /* ---- 4 · ⛑ THE BOND BUYS RUNGS, AND IT CANNOT BUY THE SEALED ---- */
+  check("§220: ⛑ standing buys rungs on a bounded ladder, and hostility buys nothing back",
+    D220.bondRungs(0, r220) === 0 && D220.bondRungs(4, r220) === 0 && D220.bondRungs(5, r220) === 1
+    && D220.bondRungs(10, r220) === 2 && D220.bondRungs(999, r220) === 2 && D220.bondRungs(-40, r220) === 0,
+    `0,4,5,10,999,-40 → ${[0, 4, 5, 10, 999, -40].map(b => D220.bondRungs(b, r220)).join(",")}`);
+  // ⛔ ERIK RULED THE SEALED IS SEALED. `canReach` refuses depth 3 BEFORE the bond is ever consulted, so no
+  // amount of love reaches it — the one place in this mechanic where a relationship must not help.
+  const sealedOne = dead(); sealedOne.deathState.sealed = true;
+  const loved = D220.canReach(sealedOne, { rank: 3, bond: 999, currentDay: DEEP, rules: r220 });
+  check("§220: ⛔ …and nothing reaches the sealed — not rank 3, not a bond of any size",
+    loved.ok === false && loved.sealed === true);
+
+  /* ---- 5 · ⚠️ AND THE PLAYER'S OWN RETRIEVAL PASSES IT ---- */
+  // ⛑ A door nobody walks through is a door that is closed: the parameter existing is not the feature.
+  check("§220: ⚠️ the retrieval op passes what you were to them, not only what you can cast",
+    /bond: Number\(ent\?\.relationship\) \|\| 0/.test(rd("app.js")));
+
+  /* ---- 6 · ⬜ AND ONE THING MEASURED THAT IS NOT MINE TO DECIDE ---- */
+  // ⚑ `deathDepth` NEVER RETURNS 3 ON ITS OWN — it caps at the deep dark, and the SEALED only ever arrives
+  // through `deepenDeaths` (the world tick) or an explicit seal. ⚠️ So Aevi's §4 alarm is real and its
+  // mechanism is one layer over from where she pointed: the tick seals at `sealAfterDays`, and a player away
+  // that long comes back to it. ⛑ Her own answer is already in the engine — `deepenDeaths` skips anyone whose
+  // way is HELD OPEN — and whether a bonded companion holds it indefinitely is Erik's ruling, not a build.
+  const old = dead();
+  check("§220: ⬜ the clock alone never seals — only the tick does, which is where Erik's §4 ruling lands",
+    D220.deathDepth(old, 4000, r220) === 2 && D220.deepenDeaths([old], 4000, r220).length === 1 && old.deathState.sealed === true);
+  const held = dead(); D220.holdOpen(held, "a companion");
+  check("§220: ⛑ …and a way held open does not seal, which is the shape her answer already has",
+    D220.deepenDeaths([held], 4000, r220).length === 0 && !held.deathState.sealed);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

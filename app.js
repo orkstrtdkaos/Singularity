@@ -144,7 +144,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "1.9.525";
+const APP_VERSION = "1.9.526";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7547,8 +7547,11 @@ function applyTurn(turn, resolution, playerWords = null) {
         // not the same event as watching them slip further because you tried.
         const ab = fullCatalog()[String(op.abilityId || "")];
         const owned = ab ? (character.abilities || []).find(x => x.abilityId === ab.id) : null;
+        // ⛔ SNG-567 §3.2 — AND WHAT YOU WERE TO THEM REACHES TOO. Erik: "mostly it would be the ones you've
+        // grown closest to." The standing on their own record is the bond: a stranger with a rank-3 craft gets
+        // the threshold, and someone you travelled with goes deeper than their rank alone would carry them.
         const gate = canReach(ent, { rank: owned?.level || 1, intensity: String(op.intensity || "standard"),
-          currentDay: day, rules: CONTENT.rules });
+          currentDay: day, rules: CONTENT.rules, bond: Number(ent?.relationship) || 0 });
         if (!gate.ok) { character._deathNotes = [...(character._deathNotes || []).slice(-2), gate.why]; continue; }
         const won = String(op.outcome || "") === "return";
         const res = resolveRetrieval(ent, won ? "return" : "fail", { currentDay: day, changed: op.changed || null });

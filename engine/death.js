@@ -8,7 +8,14 @@
 // the current world-day + rules. This is the substrate; the roads BACK (per-tradition method, the retrieval
 // quests, player-death UX) are content/design that build ON this model (SNG-209 §3/§4, ROUND 2).
 
-const DEFAULTS = { thresholdDays: 1, nearDarkDays: 30, sealAfterDays: 120 };
+// ⛔ SNG-567 §3.2 (Aevi, on Erik's ruling 2: "mostly it is the ones you have grown closest to") — REACH IS
+// RANK **AND BOND**. `bondReach` is how much standing buys a rung: at `bondPerRung` a reacher gains one rung,
+// to a ceiling of `bondRungs`. ⚠️ Authorable through `rules.death` like every other dial in this module — the
+// numbers are a balance question and they are Erik's and Aevi's to move.
+// ⛑ 5 IS NOT A GUESS: it is the number that makes the spec's own worked example true. Aevi wrote "Marrow at
+// bond 10 reaches the deep dark" — two rungs at bond 10 — and "an alt who never met you is a stranger with a
+// craft, and reaches the threshold at best" — zero rungs at bond 0. Both hold at 5 and the first does not at 6.
+const DEFAULTS = { thresholdDays: 1, nearDarkDays: 30, sealAfterDays: 120, bondPerRung: 5, bondRungs: 2 };
 export const DEATH_DEPTH_NAMES = ["the threshold", "the near dark", "the deep dark", "the sealed"];
 
 /** Put an entity INTO the death state — a STATUS extension, never a delete. Preserves an existing state
@@ -214,16 +221,42 @@ export function reachOf(rank, intensity = "standard") {
 /** Can this reach even be attempted? ⚠️ REFUSED IS NOT FAILED, and the distinction is the whole safety of
  *  the mechanic: a FAILURE sinks them, so being told "that is past your reach" must not cost the person you
  *  were reaching for. `resolveRetrieval(entity, "fail")` is the costly path; this is the free one. */
-export function canReach(entity, { rank = 1, intensity = "standard", currentDay = null, rules = {} } = {}) {
+export function canReach(entity, { rank = 1, intensity = "standard", currentDay = null, rules = {}, bond = 0 } = {}) {
   if (!entity || entity.status !== "dead") return { ok: false, why: "there is nobody there to reach for" };
   const at = deathDepth(entity, currentDay, rules);
   if (at >= 3) return { ok: false, sealed: true, why: "they are sealed — no rank reaches this" };
-  const reach = reachOf(rank, intensity);
+  // ⛔ SNG-567 §3.2 — AND THE BOND REACHES TOO. Erik: "mostly it would be the ones you've grown closest to."
+  // ⚠️ THIS IS ALSO THE ANSWER TO HIS RULING 6, "make sure the player is limited", and it needs no anti-alt
+  // rule: swapping to your own second character is ALLOWED and NATURALLY WEAK, because an alt who never met you
+  // is a stranger holding a craft and reaches the threshold at best. A companion at high bond reaches the deep
+  // dark. ⛑ THE FICTION IS THE LIMIT, which is the only kind this design has ever wanted.
+  const fromBond = bondRungs(bond, rules);
+  const reach = Math.min(2, reachOf(rank, intensity) + fromBond);
   if (reach < at) {
-    return { ok: false, refused: true, at, reach,
-      why: `${DEATH_DEPTH_NAMES[at]} is past your reach — you would need rank ${at + 1}${at < 2 ? " or a surge" : ""}` };
+    // ⚠️ AND THE REFUSAL SAYS WHICH HALF WAS SHORT. "You would need rank 3" is unactionable advice for someone
+    // whose rank is already 3 and whose standing is the thing that is missing — and it would read as a bug.
+    const need = at - reachOf(rank, intensity);
+    const why = fromBond > 0
+      ? `${DEATH_DEPTH_NAMES[at]} is past your reach — your craft and what you were to them together fall ${at - reach} short`
+      : need > 0 && rank >= 3
+        ? `${DEATH_DEPTH_NAMES[at]} is past your reach — rank alone does not go this deep; it takes someone who was close to them`
+        : `${DEATH_DEPTH_NAMES[at]} is past your reach — you would need rank ${at + 1}${at < 2 ? ", a surge, or a closer bond" : " or a closer bond"}`;
+    return { ok: false, refused: true, at, reach, fromBond, why };
   }
-  return { ok: true, at, reach };
+  return { ok: true, at, reach, fromBond };
+}
+
+/** ⛔ SNG-567 §3.2 — HOW MANY RUNGS STANDING BUYS. Pure, and bounded by a ceiling so that a bond can carry a
+ *  reacher deeper but can never reach the SEALED: `canReach` refuses depth 3 before this is ever consulted, and
+ *  Erik's ruling on the sealed is that nothing reaches it. ⚠️ NEGATIVE STANDING BUYS NOTHING — it does not push
+ *  a reacher backwards, because someone who hated you still knows the way; they simply have no help from it. */
+export function bondRungs(bond = 0, rules = {}) {
+  const cfg = { ...DEFAULTS, ...(rules.death || {}) };
+  const per = Math.max(1, Number(cfg.bondPerRung) || 6);
+  const cap = Math.max(0, Number(cfg.bondRungs) ?? 2);
+  const b = Number(bond);
+  if (!Number.isFinite(b) || b <= 0) return 0;
+  return Math.min(cap, Math.floor(b / per));
 }
 
 /** ⛔ A WAY HELD OPEN, AND ITS OWNER MAY WALK AWAY. Aevi's point 4 — `open_threshold` r3 leaves one standing

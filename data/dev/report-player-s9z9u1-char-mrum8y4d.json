@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
   "id": "dev_report",
-  "at": "2026-09-14T23:08:41.748Z",
+  "at": "2026-09-14T23:10:55.362Z",
   "build": "2.0.7",
   "character": {
     "id": "char-mrum8y4d",
     "name": "Loki",
     "playerKey": "player-s9z9u1",
     "level": 7,
-    "rev": 627,
+    "rev": 628,
     "day": 3,
-    "turns": 183,
+    "turns": 184,
     "countingSince": "2026-09-14T22:51:56.913Z",
     "countsCoverWholeLife": false
   },
@@ -22,30 +22,31 @@
   },
   "ops": {
     "emitted": {
-      "sceneSummary": 183,
-      "choices": 183,
-      "characterDeltas": 74,
-      "scene": 183,
+      "sceneSummary": 184,
+      "choices": 184,
+      "characterDeltas": 75,
+      "scene": 184,
       "placeUpdates": 21,
       "codexUpdates": 103,
-      "timeOps": 162,
+      "timeOps": 163,
       "offer": 17,
       "generateRequest": 6,
-      "sceneEnded": 58,
-      "npcUpdates": 149,
+      "sceneEnded": 59,
+      "npcUpdates": 150,
       "moveTo": 6,
-      "gambitApt": 22,
-      "deeds": 3,
+      "gambitApt": 23,
+      "deeds": 4,
       "questUpdates": 17,
-      "standingOps": 1,
+      "standingOps": 2,
       "factUpdates": 5,
       "stageOps": 7,
       "encounterOps": 9,
       "ledgerEvents": 2,
       "newEncounter": 3,
-      "imagePrompt": 10,
+      "imagePrompt": 11,
       "scene_ended": 1,
-      "stateOps": 1
+      "stateOps": 1,
+      "_engineClosedScene": 1
     },
     "outcomes": {
       "offer": {
@@ -82,7 +83,7 @@
     "neverCount": 22,
     "knownCount": 43,
     "unknown": {
-      "sceneSummary": 4
+      "sceneSummary": 5
     },
     "inProse": {},
     "emptyClaims": 0

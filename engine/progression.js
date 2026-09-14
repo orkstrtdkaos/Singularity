@@ -787,15 +787,38 @@ export function canLearnAbility(character, abilityId, catalog, rules, opts = {})
   // grown) — both route to effectiveLevelReq's access gate, NOT the domain gate (else any rootkin-domain
   // character could learn the living current, defeating "innate to the people").
   const innateAccess = ab.powerSystem === "precursor" || ab.powerSystem === "living_current" || ab.powerSystem === "wild_current";
-  const req = ab.accord ? (ab.levelReq || 1)
+  let req = ab.accord ? (ab.levelReq || 1)
     : innateAccess ? effectiveLevelReq(ab, character, rules, opts.catalog || catalog || null)
     : (character?.domains?.primary && idx) ? (domainGateFor(ab, character, idx).allowed ? (ab.levelReq || 1) : null)
     : effectiveLevelReq(ab, character, rules, opts.catalog || catalog || null);
-  if (req === null) return { ok: false, why: character?.domains?.primary ? "outside your domains" : "wrong tradition", gate: "domain" };
+  // ⛔ ERIK 2026-09-13 — "If Orrin is a teacher who is willing, that qualifies a player to learn the craft."
+  //
+  // ⚑ THE RULING ANSWERS EXACTLY THE LINE THAT REFUSED. Measured on the live save: `break_the_line` and
+  // `who_falls_first` come back band "adjacent", allowed false, reason "NEAR A PEOPLE IS NOT BEING OF THEM — NO
+  // CAPSTONES". Marcher is kin to Silas's primary, so that people's entry and mid crafts stand open to him and
+  // their capstones do not — and Orrun, a marcher who is willing to teach, is precisely the thing that answers
+  // "you are near them but not of them".
+  //
+  // ⛑ AND IT IS NOT A NEW PRINCIPLE, IT IS A MISSING TERM. `acquirable` already asks for "a willing teacher of
+  // this people, or their tome" before you may take the whole domain, and SNG-100b already turns a pole-tradition
+  // capstone on "willing teacher + earned reputation". THE TEACHER WAS A TERM EVERYWHERE EXCEPT THE ONE GATE THAT
+  // SAID NO. ⚠️ And it is a DURABLE, EARNED record — `character.teachers[tid].willing` is written by the GM's
+  // `markTeacher` op when someone actually agrees to teach, not a flag a player can set.
+  //
+  // ⚠️ IT OPENS THE DOOR; IT DOES NOT CARRY YOU THROUGH. The level bar, the attribute gates and SNG-100b's
+  // standing bar all still run below this line, so a willing teacher QUALIFIES you and the rest is still earned.
+  const taughtTid = traditionOf(ab, idx);
+  const taughtBy = taughtTid ? character?.teachers?.[taughtTid] : null;
+  const willingTeacher = !!(taughtBy && taughtBy.willing);
+  if (req === null && !willingTeacher) return { ok: false, why: character?.domains?.primary ? "outside your domains" : "wrong tradition", gate: "domain" };
+  if (req === null) req = ab.levelReq || 1;
   if (character.level < req) return { ok: false, why: `requires level ${req}${req !== (ab.levelReq || 1) ? " (cross-training)" : ""}`, gate: "level" };
   // SNG-BATCH-10: the great-circle domain gate — antipode closed, tier caps, capstone rule.
   const verdict = domainGateFor(ab, character, opts.traditionIndex, catalog, opts.skillCapacity);
-  if (!verdict.allowed) return { ok: false, why: verdict.reason || "outside your domains", gate: "domain" };
+  // ⛔ AND THE SAME RULING HERE, WHICH IS THE LINE THAT ACTUALLY REFUSED ORRUN'S TWO CRAFTS. ⚠️ The refusal is
+  // reported back on success as `taughtBy`, because a craft you hold only because somebody taught you it is a
+  // different fact from one your own people gave you — and a mechanism nobody can see is one nobody trusts.
+  if (!verdict.allowed && !willingTeacher) return { ok: false, why: verdict.reason || "outside your domains", gate: "domain" };
   if (opts.attributeGates) {
     const g = meetsLearnGate(character, abilityId, opts.attributeGates);
     if (!g.ok) return { ok: false, why: g.why, gate: "attribute" };

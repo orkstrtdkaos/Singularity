@@ -14724,6 +14724,87 @@ console.log("\n── §217 · the first hold that moves ──");
     (other.holdings || []).length === 0);
 }
 
+
+// ⛔ ERIK 2026-09-13 — "If Orrin is a teacher who is willing, that qualifies a player to learn the craft."
+//
+// ⚑ THE RULING ANSWERS EXACTLY THE LINE THAT REFUSED. Measured on the live save: `break_the_line` and
+// `who_falls_first` came back band "adjacent", allowed false, reason "NEAR A PEOPLE IS NOT BEING OF THEM — NO
+// CAPSTONES". Marcher is kin to Silas's primary, so that people's entry and mid crafts stood open to him and their
+// capstones did not — and Orrun, a marcher willing to teach, is precisely what answers "near them but not of them".
+//
+// ⛑ AND IT IS NOT A NEW PRINCIPLE, IT IS A MISSING TERM. `acquirable` already asks for "a willing teacher of this
+// people, or their tome" before you may take the whole domain; SNG-100b already turns a pole capstone on "willing
+// teacher + earned reputation". THE TEACHER WAS A TERM EVERYWHERE EXCEPT THE ONE GATE THAT SAID NO.
+console.log("\n── §218 · a willing teacher is what makes you of a people, not near them ──");
+{
+  const PR218 = await import("../engine/progression.js");
+  const Q218 = await import("../engine/quests.js");
+  const { loadContentHeadless: lch218 } = await import("./headless_content.mjs");
+  const C218 = await lch218();
+  const o218 = { attributeGates: C218.attributeGates, skillCapacity: C218.skillCapacity, traditionIndex: C218.traditionIndex };
+  // ⚠️ A CAPSTONE OF A PEOPLE THE LEARNER IS ONLY KIN TO — derived, not named, so this gate does not pin one craft.
+  const capstone = Object.values(C218.abilities).find(a => a.id === "break_the_line");
+  const learner = (teachers) => ({ name: "T", level: 33, abilities: [], peopleDisposition: {},
+    domains: { primary: "ashwarden", secondary: "cogitant", tertiary: "figurist" }, teachers: teachers || {} });
+  const why = (c) => PR218.canLearnAbility(c, capstone.id, C218.abilities, C218.rules, o218);
+
+  /* ---- 1 · ⛔ WITHOUT A TEACHER THE DOOR IS SHUT, AND IT IS THE DOMAIN THAT SHUTS IT ---- */
+  const shut = why(learner(null));
+  check("§218: ⛔ a capstone of a people you are merely KIN to is refused — on the domain, not on anything else",
+    shut.ok === false && shut.gate === "domain", `${shut.gate}: ${shut.why}`);
+
+  /* ---- 2 · ⛑ A WILLING TEACHER OF THAT PEOPLE QUALIFIES YOU ---- */
+  // ⚠️ ASSERTED AS A MOVE, NOT AS AN "ok". The ruling qualifies a learner; it does not hand them the craft. So the
+  // proof is that the DOMAIN refusal is gone — if this only checked `ok === false` it would pass for both states.
+  const taught = why(learner({ [capstone.tradition]: { met: true, willing: true, npcId: "orrun" } }));
+  check("§218: ⛑ …and a willing teacher OF THAT PEOPLE clears the domain gate — the refusal moves on",
+    taught.gate !== "domain", `${taught.gate}: ${taught.why}`);
+  // ⛔ IT OPENS THE DOOR; IT DOES NOT CARRY YOU THROUGH. SNG-100b's bar is "willing teacher AND earned reputation",
+  // and it is a ratified rule — a ruling about the first half is not licence to delete the second.
+  check("§218: ⛔ …and what stops them next is the standing bar, which is still earned",
+    taught.gate === "standing" && /deep standing/.test(taught.why));
+
+  /* ---- 3 · ⚠️ AND THE RECORD HAS TO MEAN WHAT IT SAYS ---- */
+  // `character.teachers[tid]` carries `met` AND `willing`, written by the GM's `markTeacher` op when someone
+  // actually agrees. ⛔ MEETING A TEACHER IS NOT CONSENT, and a gate that read only `met` would turn every
+  // introduction into a licence.
+  check("§218: ⚠️ a teacher you have MET but who is not willing changes nothing",
+    why(learner({ [capstone.tradition]: { met: true, willing: false, npcId: "orrun" } })).gate === "domain");
+  // ⚠️ AND IT IS THEIR PEOPLE'S CRAFT THEY OPEN, NOT EVERY CRAFT. A willing rootkin teacher says nothing about a
+  // marcher capstone.
+  const other218 = Object.keys(C218.traditionIndex?.byId || {}).find(t => t !== capstone.tradition);
+  check("§218: …and a willing teacher of ANOTHER people opens nothing here",
+    why(learner({ [other218]: { met: true, willing: true, npcId: "someone" } })).gate === "domain",
+    `willing ${other218} teacher, asking for a ${capstone.tradition} capstone`);
+
+  /* ---- 4 · ⛑ AND THE ENDING THAT MADE HIM WILLING CAN EARN THE STANDING IN THE SAME BREATH ---- */
+  // ⛑ NO FURTHER ENGINE WORK IS NEEDED FOR THIS: `standing` has been in the effect vocabulary all along, and
+  // effects apply IN ORDER. So `the_tenth_season`'s "he gives it to you because you brought his people home" can
+  // grant the reputation and then teach — and all three crafts land.
+  const c218 = { ...learner({ marcher: { met: true, willing: true, npcId: "orrun" } }), holdings: [], npcRegistry: {}, inventory: [], worldState: {} };
+  c218.quests = [{ id: "the-tenth-season", title: "The Tenth Season", status: "active", structured: true,
+    outcomes: [{ id: "taught", name: "Taught", effects: [
+      { type: "standing", people: "marcher", delta: 10, why: "you brought his people home" },
+      { type: "teach", abilities: ["break_the_line", "who_falls_first", "small_company"] }] }] }];
+  const r218 = Q218.resolveStructuredQuest(c218, "the-tenth-season", "taught", { worldDay: 400, content: C218,
+    teachAbility: (id) => PR218.learnAbility(c218, id, C218.abilities, C218.rules, { free: true, ...o218 }) });
+  const got = (c218.abilities || []).map(a => a.abilityId);
+  check("§218: ⛑ an ending can earn the standing and THEN teach, and all three crafts land",
+    ["break_the_line", "who_falls_first", "small_company"].every(id => got.includes(id))
+    && !r218.applied?.some(a => a.type === "teach" && a.refused),
+    got.join(", ") || "none");
+  // ⚠️ AND THE ORDER IS LOad-BEARING, which is worth a check rather than a comment: teach-then-standing delivers one.
+  const c218b = { ...learner({ marcher: { met: true, willing: true, npcId: "orrun" } }), holdings: [], npcRegistry: {}, inventory: [], worldState: {} };
+  c218b.quests = [{ id: "the-tenth-season", title: "T", status: "active", structured: true,
+    outcomes: [{ id: "taught", name: "T", effects: [
+      { type: "teach", abilities: ["break_the_line"] },
+      { type: "standing", people: "marcher", delta: 10 }] }] }];
+  Q218.resolveStructuredQuest(c218b, "the-tenth-season", "taught", { worldDay: 400, content: C218,
+    teachAbility: (id) => PR218.learnAbility(c218b, id, C218.abilities, C218.rules, { free: true, ...o218 }) });
+  check("§218: ⚠️ …and the ORDER carries weight — taught before the standing is earned, it does not land",
+    !(c218b.abilities || []).some(a => a.abilityId === "break_the_line"));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

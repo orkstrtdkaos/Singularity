@@ -1,70 +1,71 @@
 {
-  "schemaVersion": 1,
-  "id": "the_long_span",
-  "name": "The Long Span",
-  "regionId": "the_open_reach",
-  "communityId": "horizon.longspan",
-  "axisVector": [
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    -0.3,
-    0.0,
-    0.0,
-    -0.7,
-    -0.2,
-    0.0
-  ],
-  "spectrum": {
-    "space_time": -0.7,
-    "chaos_order": -0.3,
-    "body_mind": -0.2
-  },
-  "tags": [
-    "horizon",
-    "space",
-    "travel",
-    "road",
-    "home",
-    "nomad"
-  ],
-  "connections": [
-    "the_wayhouse",
-    "the_unlanded",
-    "longshore",
-    "waystone",
-    "the_measured_engine"
-  ],
-  "descriptionSeed": "Not a city — a MOVING settlement, tents and roads and a people for whom everywhere is a place not yet arrived. The Horizon-Walkers have no fixed anything and consider that a completed thought rather than a lack. Staying, to them, is the strange behavior that requires explanation.",
-  "loreRefs": [
-    "the_twelve_reaches",
-    "traditions"
-  ],
-  "encounterFlavor": "Walkers who will take you anywhere and will not stay; a settlement that will be somewhere else next month; someone who stopped walking, and what it did to them.",
-  "dangerLevel": 2,
-  "questSeeds": [
-    "A Walker has stopped, and their people are treating it like a death",
-    "The Span's route has been blocked, and they have never had to go AROUND anything"
-  ],
-  "map": {
-    "x": 440,
-    "y": 470
-  },
-  "poleIntensity": {
-    "space": 0.7,
-    "chaos": 0.3,
-    "body": 0.2
-  },
-  "startingLocation": true,
-  "worldPos": {
-    "colatitude": 72.0,
-    "longitude": 136.0,
-    "depth": 0
-  },
-  "worldPosNote": "A place people pass through or live in — pulled inward of its Reach's pole. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "region",
-  "parentId": null
+ "schemaVersion": 1,
+ "id": "the_long_span",
+ "name": "The Long Span",
+ "regionId": "the_open_reach",
+ "communityId": "horizon.longspan",
+ "axisVector": [
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  -0.3,
+  0.0,
+  0.0,
+  -0.7,
+  -0.2,
+  0.0
+ ],
+ "spectrum": {
+  "space_time": -0.7,
+  "chaos_order": -0.3,
+  "body_mind": -0.2
+ },
+ "tags": [
+  "horizon",
+  "space",
+  "travel",
+  "road",
+  "home",
+  "nomad"
+ ],
+ "connections": [
+  "the_wayhouse",
+  "the_unlanded",
+  "longshore",
+  "waystone",
+  "the_measured_engine"
+ ],
+ "descriptionSeed": "Not a city — a MOVING settlement, tents and roads and a people for whom everywhere is a place not yet arrived. The Horizon-Walkers have no fixed anything and consider that a completed thought rather than a lack. Staying, to them, is the strange behavior that requires explanation.",
+ "loreRefs": [
+  "the_twelve_reaches",
+  "traditions"
+ ],
+ "encounterFlavor": "Walkers who will take you anywhere and will not stay; a settlement that will be somewhere else next month; someone who stopped walking, and what it did to them.",
+ "dangerLevel": 2,
+ "questSeeds": [
+  "A Walker has stopped, and their people are treating it like a death",
+  "The Span's route has been blocked, and they have never had to go AROUND anything"
+ ],
+ "map": {
+  "x": 440,
+  "y": 470
+ },
+ "poleIntensity": {
+  "space": 0.7,
+  "chaos": 0.3,
+  "body": 0.2
+ },
+ "startingLocation": true,
+ "worldPos": {
+  "colatitude": 72.0,
+  "longitude": 136.0,
+  "depth": 0
+ },
+ "worldPosNote": "A place people pass through or live in — pulled inward of its Reach's pole. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+ "tier": "region",
+ "parentId": null,
+ "appearance": "A moving settlement of tents and awnings pitched in loose rows along a broad track, with carts and pack animals drawn up between them. Nothing permanent. Ruts in the ground behind it, open country ahead."
 }

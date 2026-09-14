@@ -1,68 +1,69 @@
 {
-  "schemaVersion": 1,
-  "id": "the_lensward",
-  "name": "The Lensward",
-  "regionId": "radiant_wastes",
-  "communityId": "blazeborn.lensward",
-  "axisVector": [
-    0,
-    0,
-    0,
-    0,
-    -0.2,
-    -0.2,
-    0,
-    0.5,
-    0,
-    0,
-    0,
-    0
-  ],
-  "spectrum": {
-    "dark_light": 0.5,
-    "mechanical_spiritual": -0.2,
-    "concrete_abstract": -0.2
-  },
-  "tags": [
-    "blazeborn",
-    "light",
-    "craft",
-    "border",
-    "market"
-  ],
-  "connections": [
-    "glasshome",
-    "the_axis_gate"
-  ],
-  "descriptionSeed": "Where the Blazeborn work light instead of merely living in it — lenses, mirrors, the great focusing arrays, and the beam-craft that makes them feared. The Lensward is the border where the Radiant Wastes meet the rest of the world, and it is the only place Blazeborn learn tact, because it is the only place they meet people who can leave. The Lensward's waygate is shuttered against the light and opened by hand. Arriving unprepared into the Wastes has killed people, so the blazeborn make you knock.",
-  "loreRefs": [
-    "the_twelve_reaches",
-    "traditions",
-    "the_coordinate_world"
-  ],
-  "encounterFlavor": "Lens-wrights whose work is genuinely beautiful; a beam-array pointed at something; Valley folk-Radiants who came to learn and are being gently patronized.",
-  "dangerLevel": 3,
-  "questSeeds": [
-    "The great array is being aimed, slowly, at a direction nobody will discuss",
-    "A Valley Radiant has been told their whole tradition is a childish shadow of the real thing, and they are not sure it isn't true"
-  ],
-  "map": {
-    "x": 640,
-    "y": 320
-  },
-  "poleIntensity": {
-    "light": 0.5,
-    "mechanical": 0.2,
-    "concrete": 0.2
-  },
-  "waygate": true,
-  "waygateTier": 3,
-  "worldPos": {
-    "colatitude": 67,
-    "longitude": 183,
-    "depth": 0
-  },
-  "worldPosNote": "A place people pass through or live in — pulled inward of its Reach's pole. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "settlement",
-  "parentId": "glasshome"
+ "schemaVersion": 1,
+ "id": "the_lensward",
+ "name": "The Lensward",
+ "regionId": "radiant_wastes",
+ "communityId": "blazeborn.lensward",
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  -0.2,
+  -0.2,
+  0,
+  0.5,
+  0,
+  0,
+  0,
+  0
+ ],
+ "spectrum": {
+  "dark_light": 0.5,
+  "mechanical_spiritual": -0.2,
+  "concrete_abstract": -0.2
+ },
+ "tags": [
+  "blazeborn",
+  "light",
+  "craft",
+  "border",
+  "market"
+ ],
+ "connections": [
+  "glasshome",
+  "the_axis_gate"
+ ],
+ "descriptionSeed": "Where the Blazeborn work light instead of merely living in it — lenses, mirrors, the great focusing arrays, and the beam-craft that makes them feared. The Lensward is the border where the Radiant Wastes meet the rest of the world, and it is the only place Blazeborn learn tact, because it is the only place they meet people who can leave. The Lensward's waygate is shuttered against the light and opened by hand. Arriving unprepared into the Wastes has killed people, so the blazeborn make you knock.",
+ "loreRefs": [
+  "the_twelve_reaches",
+  "traditions",
+  "the_coordinate_world"
+ ],
+ "encounterFlavor": "Lens-wrights whose work is genuinely beautiful; a beam-array pointed at something; Valley folk-Radiants who came to learn and are being gently patronized.",
+ "dangerLevel": 3,
+ "questSeeds": [
+  "The great array is being aimed, slowly, at a direction nobody will discuss",
+  "A Valley Radiant has been told their whole tradition is a childish shadow of the real thing, and they are not sure it isn't true"
+ ],
+ "map": {
+  "x": 640,
+  "y": 320
+ },
+ "poleIntensity": {
+  "light": 0.5,
+  "mechanical": 0.2,
+  "concrete": 0.2
+ },
+ "waygate": true,
+ "waygateTier": 3,
+ "worldPos": {
+  "colatitude": 67,
+  "longitude": 183,
+  "depth": 0
+ },
+ "worldPosNote": "A place people pass through or live in — pulled inward of its Reach's pole. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+ "tier": "settlement",
+ "parentId": "glasshome",
+ "appearance": "A complex of mounted lenses and standing mirrors on stepped stone platforms, each rig aimed and braced, some the height of a building. Bright beams cross between them. Glass, brass fittings, and hard-edged shadow everywhere."
 }

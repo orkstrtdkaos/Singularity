@@ -1,75 +1,76 @@
 {
-  "schemaVersion": 1,
-  "id": "the_stillhold",
-  "name": "The Stillhold",
-  "regionId": "riven_marches",
-  "communityId": "riven.stillhold",
-  "poleIntensity": {
-    "peace": 0.85,
-    "order": 0.4,
-    "falsehood": 0.3
-  },
-  "spectrum": {
-    "violence_peace": 0.85,
-    "chaos_order": 0.4,
-    "falsehood_truth": -0.3
-  },
-  "tags": [
-    "marches",
-    "peace",
-    "walled",
-    "sacred",
-    "sealed"
-  ],
-  "connections": [
-    "the_marchward",
-    "the_held_yard"
-  ],
-  "descriptionSeed": "A walled city of absolute peace — no violence in living memory, no weapons, no raised voices. Beautiful, ordered, and subtly WRONG. What rides with the peace here is FALSEHOOD: the stillness rests on something no one is allowed to say, a load-bearing untruth so old it has become the air. The peace is real and the peace is a prison, and both are true. The counter-image of the Redline — and arguably the more dangerous place, because its foreclosure wears serenity.",
-  "loreRefs": [
-    "the_twelve_reaches",
-    "reach_violence_peace"
-  ],
-  "encounterFlavor": "Serene wrongness — a kindness with a warning under it, a question that makes everyone go quiet, a peace so total it reads as held breath, the slow realization that no one here is allowed to leave the subject alone.",
-  "dangerLevel": 2,
-  "questSeeds": [
-    "You're welcomed warmly and gently steered away from one question; following it is the whole arc, and the Stillhold will resist you with kindness, not force",
-    "Someone inside wants OUT — not of the city, of the silence; helping them speak the unsayable thing might free them or shatter the peace of thousands",
-    "The truth the Stillhold is built on is discoverable, and learning it forces the framework's exact question: is a peace built on a buried injustice worth keeping"
-  ],
-  "map": {
-    "x": 940,
-    "y": 460
-  },
-  "substrateSource": {
-    "kind": "sink",
-    "delta": -0.14,
-    "radius": 130,
-    "reason": "Sealed and at peace. The Stillhold gave the lattice up as part of the same vow that gave up the war.",
-    "radiusWorld": 0.078,
-    "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
-  },
-  "axisVector": [
-    0,
-    -0.3,
-    0,
-    0.85,
-    0,
-    0,
-    0.4,
-    0,
-    0,
-    0,
-    0,
-    0
-  ],
-  "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
-  "worldPos": {
-    "colatitude": 86,
-    "longitude": 84,
-    "depth": 0
-  },
-  "worldPosNote": "Sealed and at peace. Marches, but its own vow. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "settlement",
-  "parentId": "the_marchward"
+ "schemaVersion": 1,
+ "id": "the_stillhold",
+ "name": "The Stillhold",
+ "regionId": "riven_marches",
+ "communityId": "riven.stillhold",
+ "poleIntensity": {
+  "peace": 0.85,
+  "order": 0.4,
+  "falsehood": 0.3
+ },
+ "spectrum": {
+  "violence_peace": 0.85,
+  "chaos_order": 0.4,
+  "falsehood_truth": -0.3
+ },
+ "tags": [
+  "marches",
+  "peace",
+  "walled",
+  "sacred",
+  "sealed"
+ ],
+ "connections": [
+  "the_marchward",
+  "the_held_yard"
+ ],
+ "descriptionSeed": "A walled city of absolute peace — no violence in living memory, no weapons, no raised voices. Beautiful, ordered, and subtly WRONG. What rides with the peace here is FALSEHOOD: the stillness rests on something no one is allowed to say, a load-bearing untruth so old it has become the air. The peace is real and the peace is a prison, and both are true. The counter-image of the Redline — and arguably the more dangerous place, because its foreclosure wears serenity.",
+ "loreRefs": [
+  "the_twelve_reaches",
+  "reach_violence_peace"
+ ],
+ "encounterFlavor": "Serene wrongness — a kindness with a warning under it, a question that makes everyone go quiet, a peace so total it reads as held breath, the slow realization that no one here is allowed to leave the subject alone.",
+ "dangerLevel": 2,
+ "questSeeds": [
+  "You're welcomed warmly and gently steered away from one question; following it is the whole arc, and the Stillhold will resist you with kindness, not force",
+  "Someone inside wants OUT — not of the city, of the silence; helping them speak the unsayable thing might free them or shatter the peace of thousands",
+  "The truth the Stillhold is built on is discoverable, and learning it forces the framework's exact question: is a peace built on a buried injustice worth keeping"
+ ],
+ "map": {
+  "x": 940,
+  "y": 460
+ },
+ "substrateSource": {
+  "kind": "sink",
+  "delta": -0.14,
+  "radius": 130,
+  "reason": "Sealed and at peace. The Stillhold gave the lattice up as part of the same vow that gave up the war.",
+  "radiusWorld": 0.078,
+  "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
+ },
+ "axisVector": [
+  0,
+  -0.3,
+  0,
+  0.85,
+  0,
+  0,
+  0.4,
+  0,
+  0,
+  0,
+  0,
+  0
+ ],
+ "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
+ "worldPos": {
+  "colatitude": 86,
+  "longitude": 84,
+  "depth": 0
+ },
+ "worldPosNote": "Sealed and at peace. Marches, but its own vow. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+ "tier": "settlement",
+ "parentId": "the_marchward",
+ "appearance": "A walled city of pale ordered buildings on a regular plan, gardens at every junction, streets swept and level. No weapons, no guard posts, no gates on the inner ways. Everything immaculate and very quiet."
 }

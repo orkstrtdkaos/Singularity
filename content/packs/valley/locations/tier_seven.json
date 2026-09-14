@@ -1,70 +1,71 @@
 {
-  "schemaVersion": 1,
-  "id": "tier_seven",
-  "name": "Tier Seven",
-  "regionId": "the_lattice_cities",
-  "communityId": "lattice.tier7",
-  "axisVector": [
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    -0.2,
-    -0.3,
-    0.7,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0
-  ],
-  "spectrum": {
-    "chaos_order": 0.7,
-    "mechanical_spiritual": -0.3,
-    "concrete_abstract": -0.2
-  },
-  "tags": [
-    "lattice",
-    "order",
-    "city",
-    "arcology",
-    "home"
-  ],
-  "connections": [
-    "the_unplanned_room",
-    "the_grand_lattice",
-    "the_axis_gate"
-  ],
-  "descriptionSeed": "One level of one arcology, and it is a perfect machine for living. Nothing is unplanned. Your work, your meal, your route, your hour of rest, your suitable partner — all optimized, all correct, all genuinely BETTER than what you would have chosen. The Lattice-folk are not oppressed; they are well-served, and they will tell you so, and they will be telling the truth, and the truth is somehow the most disturbing part. Tier Seven's waygate is scheduled: arrivals land in assigned slots, and the Lattice regards an unscheduled gating as a minor structural offence rather than a rudeness.",
-  "loreRefs": [
-    "the_twelve_reaches",
-    "traditions",
-    "the_coordinate_world"
-  ],
-  "encounterFlavor": "Citizens who are content and correct; a scheduler who knows where you will be tomorrow; someone who deviated by four minutes and is being gently, thoroughly helped.",
-  "dangerLevel": 2,
-  "questSeeds": [
-    "A citizen has begun doing one small thing that was not on their schedule, every day, and the Lattice has noticed",
-    "The optimizer has produced an outcome that is optimal and monstrous, and it is not wrong"
-  ],
-  "map": {
-    "x": 520,
-    "y": 180
-  },
-  "poleIntensity": {
-    "order": 0.7,
-    "mechanical": 0.3,
-    "concrete": 0.2
-  },
-  "startingLocation": true,
-  "waygate": true,
-  "waygateTier": 2,
-  "worldPos": {
-    "colatitude": 80.0,
-    "longitude": 227.0,
-    "depth": 0
-  },
-  "worldPosNote": "Ordinary ground within the_lattice_cities, on its bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "region",
-  "parentId": null
+ "schemaVersion": 1,
+ "id": "tier_seven",
+ "name": "Tier Seven",
+ "regionId": "the_lattice_cities",
+ "communityId": "lattice.tier7",
+ "axisVector": [
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  -0.2,
+  -0.3,
+  0.7,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0
+ ],
+ "spectrum": {
+  "chaos_order": 0.7,
+  "mechanical_spiritual": -0.3,
+  "concrete_abstract": -0.2
+ },
+ "tags": [
+  "lattice",
+  "order",
+  "city",
+  "arcology",
+  "home"
+ ],
+ "connections": [
+  "the_unplanned_room",
+  "the_grand_lattice",
+  "the_axis_gate"
+ ],
+ "descriptionSeed": "One level of one arcology, and it is a perfect machine for living. Nothing is unplanned. Your work, your meal, your route, your hour of rest, your suitable partner — all optimized, all correct, all genuinely BETTER than what you would have chosen. The Lattice-folk are not oppressed; they are well-served, and they will tell you so, and they will be telling the truth, and the truth is somehow the most disturbing part. Tier Seven's waygate is scheduled: arrivals land in assigned slots, and the Lattice regards an unscheduled gating as a minor structural offence rather than a rudeness.",
+ "loreRefs": [
+  "the_twelve_reaches",
+  "traditions",
+  "the_coordinate_world"
+ ],
+ "encounterFlavor": "Citizens who are content and correct; a scheduler who knows where you will be tomorrow; someone who deviated by four minutes and is being gently, thoroughly helped.",
+ "dangerLevel": 2,
+ "questSeeds": [
+  "A citizen has begun doing one small thing that was not on their schedule, every day, and the Lattice has noticed",
+  "The optimizer has produced an outcome that is optimal and monstrous, and it is not wrong"
+ ],
+ "map": {
+  "x": 520,
+  "y": 180
+ },
+ "poleIntensity": {
+  "order": 0.7,
+  "mechanical": 0.3,
+  "concrete": 0.2
+ },
+ "startingLocation": true,
+ "waygate": true,
+ "waygateTier": 2,
+ "worldPos": {
+  "colatitude": 80.0,
+  "longitude": 227.0,
+  "depth": 0
+ },
+ "worldPosNote": "Ordinary ground within the_lattice_cities, on its bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+ "tier": "region",
+ "parentId": null,
+ "appearance": "One level of an arcology: a continuous engineered floor of identical dwellings along curved corridors, everything fitted and flush. Uniform lighting from recessed strips. No windows, no variation, no visible seams."
 }

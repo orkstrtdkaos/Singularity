@@ -1,74 +1,75 @@
 {
-  "schemaVersion": 1,
-  "id": "the_maw",
-  "name": "The Maw",
-  "regionId": "the_descent",
-  "communityId": "abyssal.maw",
-  "axisVector": [
-    0,
-    0,
-    -1,
-    0,
-    0,
-    0,
-    -0.5,
-    0,
-    -0.3,
-    0,
-    0,
-    0
-  ],
-  "spectrum": {
-    "demonic_angelic": -1,
-    "chaos_order": -0.5,
-    "death_life": -0.3
-  },
-  "tags": [
-    "abyssal",
-    "demonic",
-    "locus",
-    "cult",
-    "dangerous",
-    "sacred"
-  ],
-  "connections": [
-    "the_bargain_gate",
-    "the_low_market"
-  ],
-  "descriptionSeed": "The pure pole: appetite without limit. The Devouring have stopped bargaining, because a bargain implies a price, and they have concluded that wanting is its own justification. They will take, and they will be honest that they are taking, and honesty at the Maw is not a virtue — it is a technique.",
-  "loreRefs": [
-    "the_twelve_reaches",
-    "traditions"
-  ],
-  "encounterFlavor": "The Devouring, who want and do not pretend otherwise; something that was a person and is now only a hunger; your own want, amplified until you cannot hear anything else.",
-  "dangerLevel": 5,
-  "questSeeds": [
-    "The Devouring have taken a Choir settlement, and the Choir will not act, and their reasons are appalling and coherent",
-    "Someone must go to the Maw and come back still wanting the right things"
-  ],
-  "map": {
-    "x": 355,
-    "y": 510
-  },
-  "poleIntensity": {
-    "demonic": 1,
-    "chaos": 0.5,
-    "death": 0.3
-  },
-  "substrateSource": {
-    "kind": "pool",
-    "delta": 0.14,
-    "radius": 140,
-    "reason": "The Maw takes. It has been taking substrate for as long as it has been taking everything else.",
-    "radiusWorld": 0.084,
-    "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
-  },
-  "worldPos": {
-    "colatitude": 90,
-    "longitude": 30,
-    "depth": -3
-  },
-  "worldPosNote": "The Descent's mouth. Equator and falling. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "settlement",
-  "parentId": "the_bargain_gate"
+ "schemaVersion": 1,
+ "id": "the_maw",
+ "name": "The Maw",
+ "regionId": "the_descent",
+ "communityId": "abyssal.maw",
+ "axisVector": [
+  0,
+  0,
+  -1,
+  0,
+  0,
+  0,
+  -0.5,
+  0,
+  -0.3,
+  0,
+  0,
+  0
+ ],
+ "spectrum": {
+  "demonic_angelic": -1,
+  "chaos_order": -0.5,
+  "death_life": -0.3
+ },
+ "tags": [
+  "abyssal",
+  "demonic",
+  "locus",
+  "cult",
+  "dangerous",
+  "sacred"
+ ],
+ "connections": [
+  "the_bargain_gate",
+  "the_low_market"
+ ],
+ "descriptionSeed": "The pure pole: appetite without limit. The Devouring have stopped bargaining, because a bargain implies a price, and they have concluded that wanting is its own justification. They will take, and they will be honest that they are taking, and honesty at the Maw is not a virtue — it is a technique.",
+ "loreRefs": [
+  "the_twelve_reaches",
+  "traditions"
+ ],
+ "encounterFlavor": "The Devouring, who want and do not pretend otherwise; something that was a person and is now only a hunger; your own want, amplified until you cannot hear anything else.",
+ "dangerLevel": 5,
+ "questSeeds": [
+  "The Devouring have taken a Choir settlement, and the Choir will not act, and their reasons are appalling and coherent",
+  "Someone must go to the Maw and come back still wanting the right things"
+ ],
+ "map": {
+  "x": 355,
+  "y": 510
+ },
+ "poleIntensity": {
+  "demonic": 1,
+  "chaos": 0.5,
+  "death": 0.3
+ },
+ "substrateSource": {
+  "kind": "pool",
+  "delta": 0.14,
+  "radius": 140,
+  "reason": "The Maw takes. It has been taking substrate for as long as it has been taking everything else.",
+  "radiusWorld": 0.084,
+  "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
+ },
+ "worldPos": {
+  "colatitude": 90,
+  "longitude": 30,
+  "depth": -3
+ },
+ "worldPosNote": "The Descent's mouth. Equator and falling. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+ "tier": "settlement",
+ "parentId": "the_bargain_gate",
+ "appearance": "A city built downward into a vast opening — tiers of dark buildings descending around the shaft, walkways spiralling the walls. Nothing grows. Lights get sparser further down, and the bottom is not visible."
 }

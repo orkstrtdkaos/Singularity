@@ -1,74 +1,75 @@
 {
-  "schemaVersion": 1,
-  "id": "the_slow_orchard",
-  "name": "The Slow Orchard",
-  "regionId": "the_quickwood",
-  "communityId": "rootkin.orchard",
-  "axisVector": [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0.2,
-    0,
-    0,
-    0.7,
-    0.3,
-    0,
-    0
-  ],
-  "spectrum": {
-    "death_life": 0.7,
-    "space_time": 0.3,
-    "mechanical_spiritual": 0.2
-  },
-  "tags": [
-    "rootkin",
-    "life",
-    "sacred",
-    "temporal",
-    "strange"
-  ],
-  "connections": [
-    "the_heartroot",
-    "grovehome"
-  ],
-  "descriptionSeed": "Trees that take a human lifetime to fruit, tended by people who will taste them. The Orchard is where the Rootkin explain themselves, and they explain themselves by walking you through it and saying nothing. There is a tree here planted for a woman who has not been born. There is a tree here planted BY someone for themselves and they are still waiting and they are not impatient. The whole Rootkin argument with the world is in this orchard and it does not need a word.",
-  "loreRefs": [
-    "the_twelve_reaches",
-    "traditions",
-    "world_framing"
-  ],
-  "encounterFlavor": "Orchard-tenders who plant for strangers; a tree that was planted for YOU, by someone, and nobody will say who; the long silence of people who are not in a hurry.",
-  "dangerLevel": 1,
-  "questSeeds": [
-    "A tree planted three hundred years ago is about to fruit and the person it was planted for is missing",
-    "Someone has come to cut a tree that was planted for their own grandchild, and they have a reason, and it is a good one"
-  ],
-  "map": {
-    "x": 600,
-    "y": 250
-  },
-  "poleIntensity": {
-    "life": 0.7,
-    "time": 0.3,
-    "spiritual": 0.2
-  },
-  "substrateSource": {
-    "kind": "sink",
-    "delta": -0.08,
-    "radius": 130,
-    "reason": "Grown, not built. Nothing in the orchard has ever needed the lattice, and it has not stayed where it was not needed.",
-    "radiusWorld": 0.078,
-    "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
-  },
-  "worldPos": {
-    "colatitude": 86,
-    "longitude": 260,
-    "depth": 0
-  },
-  "worldPosNote": "Deep expression of its Reach — placed near the equator on the the_quickwood bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "settlement",
-  "parentId": "the_heartroot"
+ "schemaVersion": 1,
+ "id": "the_slow_orchard",
+ "name": "The Slow Orchard",
+ "regionId": "the_quickwood",
+ "communityId": "rootkin.orchard",
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0.2,
+  0,
+  0,
+  0.7,
+  0.3,
+  0,
+  0
+ ],
+ "spectrum": {
+  "death_life": 0.7,
+  "space_time": 0.3,
+  "mechanical_spiritual": 0.2
+ },
+ "tags": [
+  "rootkin",
+  "life",
+  "sacred",
+  "temporal",
+  "strange"
+ ],
+ "connections": [
+  "the_heartroot",
+  "grovehome"
+ ],
+ "descriptionSeed": "Trees that take a human lifetime to fruit, tended by people who will taste them. The Orchard is where the Rootkin explain themselves, and they explain themselves by walking you through it and saying nothing. There is a tree here planted for a woman who has not been born. There is a tree here planted BY someone for themselves and they are still waiting and they are not impatient. The whole Rootkin argument with the world is in this orchard and it does not need a word.",
+ "loreRefs": [
+  "the_twelve_reaches",
+  "traditions",
+  "world_framing"
+ ],
+ "encounterFlavor": "Orchard-tenders who plant for strangers; a tree that was planted for YOU, by someone, and nobody will say who; the long silence of people who are not in a hurry.",
+ "dangerLevel": 1,
+ "questSeeds": [
+  "A tree planted three hundred years ago is about to fruit and the person it was planted for is missing",
+  "Someone has come to cut a tree that was planted for their own grandchild, and they have a reason, and it is a good one"
+ ],
+ "map": {
+  "x": 600,
+  "y": 250
+ },
+ "poleIntensity": {
+  "life": 0.7,
+  "time": 0.3,
+  "spiritual": 0.2
+ },
+ "substrateSource": {
+  "kind": "sink",
+  "delta": -0.08,
+  "radius": 130,
+  "reason": "Grown, not built. Nothing in the orchard has ever needed the lattice, and it has not stayed where it was not needed.",
+  "radiusWorld": 0.078,
+  "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
+ },
+ "worldPos": {
+  "colatitude": 86,
+  "longitude": 260,
+  "depth": 0
+ },
+ "worldPosNote": "Deep expression of its Reach — placed near the equator on the the_quickwood bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+ "tier": "settlement",
+ "parentId": "the_heartroot",
+ "appearance": "Widely spaced old fruit trees in long straight rows on mown grass, trunks thick and heavily pruned, supported where limbs have grown out. Low stone walls between the plots, and a path down every row."
 }

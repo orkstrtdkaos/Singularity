@@ -1,73 +1,74 @@
 {
-  "schemaVersion": 1,
-  "id": "the_stopped",
-  "name": "The Stopped",
-  "regionId": "the_kept_reach",
-  "communityId": "hourkeeper.stopped",
-  "axisVector": [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0.5,
-    0,
-    -0.3,
-    1,
-    0,
-    0
-  ],
-  "spectrum": {
-    "space_time": 1,
-    "death_life": -0.3,
-    "chaos_order": 0.5
-  },
-  "tags": [
-    "hourkeeper",
-    "time",
-    "locus",
-    "cult",
-    "dangerous",
-    "sacred"
-  ],
-  "connections": [
-    "the_slow_hour"
-  ],
-  "descriptionSeed": "The pure pole: those who will not let a moment pass. The Stopped have held one hour so hard that they are still inside it, and they will invite you in, and it is the most beautiful hour of their lives, and they have been in it for two hundred years.",
-  "loreRefs": [
-    "the_twelve_reaches",
-    "traditions"
-  ],
-  "encounterFlavor": "The Stopped, who are radiant and not moving; an hour offered to you, and it is a good hour; time behaving very badly at the edges.",
-  "dangerLevel": 5,
-  "questSeeds": [
-    "Someone has entered a Stopped hour to bring a person out and has not returned",
-    "The Stopped hour is SPREADING, slowly, and the things inside it have stopped too"
-  ],
-  "map": {
-    "x": 430,
-    "y": 80
-  },
-  "poleIntensity": {
-    "time": 1,
-    "death": 0.3,
-    "order": 0.5
-  },
-  "substrateSource": {
-    "kind": "pool",
-    "delta": 0.17,
-    "radius": 155,
-    "reason": "Duration pools here the way water pools in a low place — the Stopped is a basin in time and the lattice fell into it.",
-    "radiusWorld": 0.093,
-    "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
-  },
-  "worldPos": {
-    "colatitude": 87,
-    "longitude": 315,
-    "depth": 0
-  },
-  "worldPosNote": "Deep expression of its Reach — placed near the equator on the the_kept_reach bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "settlement",
-  "parentId": "the_slow_hour"
+ "schemaVersion": 1,
+ "id": "the_stopped",
+ "name": "The Stopped",
+ "regionId": "the_kept_reach",
+ "communityId": "hourkeeper.stopped",
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0.5,
+  0,
+  -0.3,
+  1,
+  0,
+  0
+ ],
+ "spectrum": {
+  "space_time": 1,
+  "death_life": -0.3,
+  "chaos_order": 0.5
+ },
+ "tags": [
+  "hourkeeper",
+  "time",
+  "locus",
+  "cult",
+  "dangerous",
+  "sacred"
+ ],
+ "connections": [
+  "the_slow_hour"
+ ],
+ "descriptionSeed": "The pure pole: those who will not let a moment pass. The Stopped have held one hour so hard that they are still inside it, and they will invite you in, and it is the most beautiful hour of their lives, and they have been in it for two hundred years.",
+ "loreRefs": [
+  "the_twelve_reaches",
+  "traditions"
+ ],
+ "encounterFlavor": "The Stopped, who are radiant and not moving; an hour offered to you, and it is a good hour; time behaving very badly at the edges.",
+ "dangerLevel": 5,
+ "questSeeds": [
+  "Someone has entered a Stopped hour to bring a person out and has not returned",
+  "The Stopped hour is SPREADING, slowly, and the things inside it have stopped too"
+ ],
+ "map": {
+  "x": 430,
+  "y": 80
+ },
+ "poleIntensity": {
+  "time": 1,
+  "death": 0.3,
+  "order": 0.5
+ },
+ "substrateSource": {
+  "kind": "pool",
+  "delta": 0.17,
+  "radius": 155,
+  "reason": "Duration pools here the way water pools in a low place — the Stopped is a basin in time and the lattice fell into it.",
+  "radiusWorld": 0.093,
+  "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
+ },
+ "worldPos": {
+  "colatitude": 87,
+  "longitude": 315,
+  "depth": 0
+ },
+ "worldPosNote": "Deep expression of its Reach — placed near the equator on the the_kept_reach bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+ "tier": "settlement",
+ "parentId": "the_slow_hour",
+ "appearance": "A place where nothing moves — dust suspended, a spilled cup hanging, people mid-step and mid-gesture. The light holds one angle. Everything is exactly as it was at one instant, indefinitely."
 }

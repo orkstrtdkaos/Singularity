@@ -89,5 +89,6 @@
  "tier": "settlement",
  "parentId": "cairnhold",
  "_substrateSourceWas": "thin-unreached",
- "_shapeFix_20260908": "⛔ CCODE FOUND IT: `substrateSource` HAD TWO SHAPES IN THE CORPUS. Every other source is an object; THIS ONE WAS THE STRING \"thin-unreached\" — so `resolveSubstrateField` read `src.delta`, found nothing, and SKIPPED IT. ⚠️ THE PLACE'S STATED INTENT DID NOTHING AT ALL. ⚑ AND IT IS THE WEEK'S FAILURE IN ITS SMALLEST COSTUME: authored, correct in meaning, loaded, and unreadable — not because nothing read the field, but because ONE RECORD SPOKE A DIFFERENT DIALECT. ⬜ CCode: a shape check on `substrateSource` would have caught this the day it was written, and would catch the next one."
+ "_shapeFix_20260908": "⛔ CCODE FOUND IT: `substrateSource` HAD TWO SHAPES IN THE CORPUS. Every other source is an object; THIS ONE WAS THE STRING \"thin-unreached\" — so `resolveSubstrateField` read `src.delta`, found nothing, and SKIPPED IT. ⚠️ THE PLACE'S STATED INTENT DID NOTHING AT ALL. ⚑ AND IT IS THE WEEK'S FAILURE IN ITS SMALLEST COSTUME: authored, correct in meaning, loaded, and unreadable — not because nothing read the field, but because ONE RECORD SPOKE A DIFFERENT DIALECT. ⬜ CCode: a shape check on `substrateSource` would have caught this the day it was written, and would catch the next one.",
+ "appearance": "A small stone watch-post on a shoulder of open ground — three rooms and a stair, a square corner tower, slate roof half sound. Heath around it, the road below, and a fold of ground sheltering it from the north."
 }

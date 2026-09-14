@@ -1,64 +1,65 @@
 {
-  "schemaVersion": 1,
-  "id": "the_lampless_hermitage",
-  "name": "The Lampless Hermitage",
-  "regionId": "the_numinous_reach",
-  "communityId": "numinous.hermitage",
-  "axisVector": [
-    -0.2,
-    0,
-    0,
-    0,
-    0,
-    0.5,
-    0,
-    0,
-    0,
-    0,
-    0.4,
-    0
-  ],
-  "spectrum": {
-    "mechanical_spiritual": 0.5,
-    "body_mind": 0.4,
-    "emotional_logical": -0.2
-  },
-  "tags": [
-    "numinous",
-    "spiritual",
-    "sacred",
-    "quiet",
-    "refuge"
-  ],
-  "connections": [
-    "the_thinning"
-  ],
-  "descriptionSeed": "Where the Numinous train — which is to say, where they sit, for years, doing what looks to a visitor like absolutely nothing and is in fact the hardest thing anyone in this world attempts. Hermits here have not spoken in a decade and are perfectly happy to have you stay, and will not entertain you, and will not explain.",
-  "loreRefs": [
-    "the_twelve_reaches",
-    "traditions"
-  ],
-  "encounterFlavor": "Hermits who say nothing and mean it; a novice failing, publicly and painfully; someone who came here to escape and is discovering it does not work that way.",
-  "dangerLevel": 1,
-  "questSeeds": [
-    "A hermit has broken a twenty-year silence to say one sentence, and it was about you",
-    "A novice has been sitting for three years and something has begun sitting WITH them"
-  ],
-  "map": {
-    "x": 380,
-    "y": 110
-  },
-  "poleIntensity": {
-    "spiritual": 0.5,
-    "mind": 0.4,
-    "emotional": 0.2
-  },
-  "worldPos": {
-    "colatitude": 85,
-    "longitude": 335,
-    "depth": 0
-  },
-  "worldPosNote": "Deep expression of its Reach — placed near the equator on the the_numinous_reach bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "settlement",
-  "parentId": "the_thinning"
+ "schemaVersion": 1,
+ "id": "the_lampless_hermitage",
+ "name": "The Lampless Hermitage",
+ "regionId": "the_numinous_reach",
+ "communityId": "numinous.hermitage",
+ "axisVector": [
+  -0.2,
+  0,
+  0,
+  0,
+  0,
+  0.5,
+  0,
+  0,
+  0,
+  0,
+  0.4,
+  0
+ ],
+ "spectrum": {
+  "mechanical_spiritual": 0.5,
+  "body_mind": 0.4,
+  "emotional_logical": -0.2
+ },
+ "tags": [
+  "numinous",
+  "spiritual",
+  "sacred",
+  "quiet",
+  "refuge"
+ ],
+ "connections": [
+  "the_thinning"
+ ],
+ "descriptionSeed": "Where the Numinous train — which is to say, where they sit, for years, doing what looks to a visitor like absolutely nothing and is in fact the hardest thing anyone in this world attempts. Hermits here have not spoken in a decade and are perfectly happy to have you stay, and will not entertain you, and will not explain.",
+ "loreRefs": [
+  "the_twelve_reaches",
+  "traditions"
+ ],
+ "encounterFlavor": "Hermits who say nothing and mean it; a novice failing, publicly and painfully; someone who came here to escape and is discovering it does not work that way.",
+ "dangerLevel": 1,
+ "questSeeds": [
+  "A hermit has broken a twenty-year silence to say one sentence, and it was about you",
+  "A novice has been sitting for three years and something has begun sitting WITH them"
+ ],
+ "map": {
+  "x": 380,
+  "y": 110
+ },
+ "poleIntensity": {
+  "spiritual": 0.5,
+  "mind": 0.4,
+  "emotional": 0.2
+ },
+ "worldPos": {
+  "colatitude": 85,
+  "longitude": 335,
+  "depth": 0
+ },
+ "worldPosNote": "Deep expression of its Reach — placed near the equator on the the_numinous_reach bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+ "tier": "settlement",
+ "parentId": "the_thinning",
+ "appearance": "Bare stone cells cut into a hillside, each with an open doorway and nothing inside but a mat and a sill. No lamps, no decoration, no glass. A swept path runs between them; the ground outside is worn only where feet go."
 }

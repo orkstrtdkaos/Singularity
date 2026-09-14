@@ -1,73 +1,74 @@
 {
-  "schemaVersion": 1,
-  "id": "the_last_mask",
-  "name": "The Last Mask",
-  "regionId": "the_veiled_reach",
-  "communityId": "veilwright.lastmask",
-  "axisVector": [
-    0,
-    -1,
-    0,
-    0,
-    0.4,
-    0,
-    0,
-    -0.3,
-    0,
-    0,
-    0,
-    0
-  ],
-  "spectrum": {
-    "falsehood_truth": -1,
-    "dark_light": -0.3,
-    "concrete_abstract": 0.4
-  },
-  "tags": [
-    "veilwright",
-    "falsehood",
-    "locus",
-    "cult",
-    "dangerous",
-    "sacred"
-  ],
-  "connections": [
-    "the_hall_of_mirrors"
-  ],
-  "descriptionSeed": "The pure pole: falsehood so total it erases the possibility of truth. The ones here have unmade themselves — no original remains under the masks, and they will tell you that cheerfully, and you cannot check. **Halvex Coil's rewriting is this doctrine with better tools.** They regard him as a promising student who took it literally.",
-  "loreRefs": [
-    "the_twelve_reaches",
-    "traditions"
-  ],
-  "encounterFlavor": "Masked ones with nothing behind the mask; a version of someone you know, and it is better, and it is not them; your own face, worn well.",
-  "dangerLevel": 5,
-  "questSeeds": [
-    "Someone has come back from the Last Mask and everybody insists they are the same and you are not sure",
-    "A Veilwright of the Hall has begun quietly agreeing with the Last Mask"
-  ],
-  "map": {
-    "x": 90,
-    "y": 205
-  },
-  "poleIntensity": {
-    "falsehood": 1,
-    "dark": 0.3,
-    "abstract": 0.4
-  },
-  "substrateSource": {
-    "kind": "pool",
-    "delta": 0.14,
-    "radius": 140,
-    "reason": "A place that has been many places. Each one left its lattice behind and none of them left honestly.",
-    "radiusWorld": 0.084,
-    "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
-  },
-  "worldPos": {
-    "colatitude": 87,
-    "longitude": 11,
-    "depth": 0
-  },
-  "worldPosNote": "Deep expression of its Reach — placed near the equator on the the_veiled_reach bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "settlement",
-  "parentId": "the_hall_of_mirrors"
+ "schemaVersion": 1,
+ "id": "the_last_mask",
+ "name": "The Last Mask",
+ "regionId": "the_veiled_reach",
+ "communityId": "veilwright.lastmask",
+ "axisVector": [
+  0,
+  -1,
+  0,
+  0,
+  0.4,
+  0,
+  0,
+  -0.3,
+  0,
+  0,
+  0,
+  0
+ ],
+ "spectrum": {
+  "falsehood_truth": -1,
+  "dark_light": -0.3,
+  "concrete_abstract": 0.4
+ },
+ "tags": [
+  "veilwright",
+  "falsehood",
+  "locus",
+  "cult",
+  "dangerous",
+  "sacred"
+ ],
+ "connections": [
+  "the_hall_of_mirrors"
+ ],
+ "descriptionSeed": "The pure pole: falsehood so total it erases the possibility of truth. The ones here have unmade themselves — no original remains under the masks, and they will tell you that cheerfully, and you cannot check. **Halvex Coil's rewriting is this doctrine with better tools.** They regard him as a promising student who took it literally.",
+ "loreRefs": [
+  "the_twelve_reaches",
+  "traditions"
+ ],
+ "encounterFlavor": "Masked ones with nothing behind the mask; a version of someone you know, and it is better, and it is not them; your own face, worn well.",
+ "dangerLevel": 5,
+ "questSeeds": [
+  "Someone has come back from the Last Mask and everybody insists they are the same and you are not sure",
+  "A Veilwright of the Hall has begun quietly agreeing with the Last Mask"
+ ],
+ "map": {
+  "x": 90,
+  "y": 205
+ },
+ "poleIntensity": {
+  "falsehood": 1,
+  "dark": 0.3,
+  "abstract": 0.4
+ },
+ "substrateSource": {
+  "kind": "pool",
+  "delta": 0.14,
+  "radius": 140,
+  "reason": "A place that has been many places. Each one left its lattice behind and none of them left honestly.",
+  "radiusWorld": 0.084,
+  "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
+ },
+ "worldPos": {
+  "colatitude": 87,
+  "longitude": 11,
+  "depth": 0
+ },
+ "worldPosNote": "Deep expression of its Reach — placed near the equator on the the_veiled_reach bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+ "tier": "settlement",
+ "parentId": "the_hall_of_mirrors",
+ "appearance": "Buildings whose facades are false fronts — doorways onto nothing, painted windows, streets that are stage flats braced from behind. Everything freshly finished and slightly too clean."
 }

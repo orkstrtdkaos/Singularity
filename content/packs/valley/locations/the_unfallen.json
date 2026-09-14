@@ -1,73 +1,74 @@
 {
-  "schemaVersion": 1,
-  "id": "the_unfallen",
-  "name": "The Unfallen",
-  "regionId": "the_ascent",
-  "communityId": "seraphic.unfallen",
-  "axisVector": [
-    0,
-    0,
-    1,
-    -0.4,
-    0,
-    0,
-    0,
-    0.6,
-    0,
-    0,
-    0,
-    0
-  ],
-  "spectrum": {
-    "demonic_angelic": 1,
-    "violence_peace": -0.4,
-    "dark_light": 0.6
-  },
-  "tags": [
-    "seraphic",
-    "angelic",
-    "locus",
-    "cult",
-    "dangerous",
-    "sacred"
-  ],
-  "connections": [
-    "choirheight"
-  ],
-  "descriptionSeed": "The pure pole: purity that would burn the impure, and is beginning to. The Unfallen have concluded that mercy without judgment is complicity, and that the world is very impure, and they are luminous and certain and entirely without doubt. They are the only people in the world the Blaze respects.",
-  "loreRefs": [
-    "the_twelve_reaches",
-    "traditions"
-  ],
-  "encounterFlavor": "The Unfallen, who are beautiful and are weighing you; a purification, in progress, of someone who was mostly good; certainty, which is contagious.",
-  "dangerLevel": 5,
-  "questSeeds": [
-    "The Unfallen have condemned an entire settlement and the condemnation is not baseless",
-    "A Seraph of the Orders agrees with them, publicly, and others are listening"
-  ],
-  "map": {
-    "x": 380,
-    "y": 35
-  },
-  "poleIntensity": {
-    "angelic": 1,
-    "violence": 0.4,
-    "light": 0.6
-  },
-  "substrateSource": {
-    "kind": "pool",
-    "delta": 0.18,
-    "radius": 160,
-    "reason": "The Orders never abandoned the old frequencies. What the Seraphs kept, kept them.",
-    "radiusWorld": 0.096,
-    "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
-  },
-  "worldPos": {
-    "colatitude": 84,
-    "longitude": 213,
-    "depth": 0
-  },
-  "worldPosNote": "Deep expression of its Reach — placed near the equator on the the_ascent bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "settlement",
-  "parentId": "choirheight"
+ "schemaVersion": 1,
+ "id": "the_unfallen",
+ "name": "The Unfallen",
+ "regionId": "the_ascent",
+ "communityId": "seraphic.unfallen",
+ "axisVector": [
+  0,
+  0,
+  1,
+  -0.4,
+  0,
+  0,
+  0,
+  0.6,
+  0,
+  0,
+  0,
+  0
+ ],
+ "spectrum": {
+  "demonic_angelic": 1,
+  "violence_peace": -0.4,
+  "dark_light": 0.6
+ },
+ "tags": [
+  "seraphic",
+  "angelic",
+  "locus",
+  "cult",
+  "dangerous",
+  "sacred"
+ ],
+ "connections": [
+  "choirheight"
+ ],
+ "descriptionSeed": "The pure pole: purity that would burn the impure, and is beginning to. The Unfallen have concluded that mercy without judgment is complicity, and that the world is very impure, and they are luminous and certain and entirely without doubt. They are the only people in the world the Blaze respects.",
+ "loreRefs": [
+  "the_twelve_reaches",
+  "traditions"
+ ],
+ "encounterFlavor": "The Unfallen, who are beautiful and are weighing you; a purification, in progress, of someone who was mostly good; certainty, which is contagious.",
+ "dangerLevel": 5,
+ "questSeeds": [
+  "The Unfallen have condemned an entire settlement and the condemnation is not baseless",
+  "A Seraph of the Orders agrees with them, publicly, and others are listening"
+ ],
+ "map": {
+  "x": 380,
+  "y": 35
+ },
+ "poleIntensity": {
+  "angelic": 1,
+  "violence": 0.4,
+  "light": 0.6
+ },
+ "substrateSource": {
+  "kind": "pool",
+  "delta": 0.18,
+  "radius": 160,
+  "reason": "The Orders never abandoned the old frequencies. What the Seraphs kept, kept them.",
+  "radiusWorld": 0.096,
+  "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
+ },
+ "worldPos": {
+  "colatitude": 84,
+  "longitude": 213,
+  "depth": 0
+ },
+ "worldPosNote": "Deep expression of its Reach — placed near the equator on the the_ascent bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+ "tier": "settlement",
+ "parentId": "choirheight",
+ "appearance": "White buildings burning at the edges with a light that has begun to scorch what stands near them — walls blackened on the facing sides, ground scorched in clean arcs. Everything else immaculate, too bright to look at directly."
 }

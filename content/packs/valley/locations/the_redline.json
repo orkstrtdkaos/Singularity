@@ -1,76 +1,77 @@
 {
-  "schemaVersion": 1,
-  "id": "the_redline",
-  "name": "The Redline",
-  "regionId": "riven_marches",
-  "communityId": "riven.redline",
-  "poleIntensity": {
-    "violence": 0.75,
-    "chaos": 0.3,
-    "body": 0.3
-  },
-  "spectrum": {
-    "violence_peace": -0.75,
-    "chaos_order": -0.3,
-    "body_mind": -0.3
-  },
-  "tags": [
-    "marches",
-    "warrior",
-    "dangerous",
-    "honor",
-    "frontier"
-  ],
-  "connections": [
-    "the_gralloch",
-    "the_marchward",
-    "hardline",
-    "the_grindstone"
-  ],
-  "descriptionSeed": "The violent frontier of the Marches — but honed, not feral. A warrior culture whose entire society is disciplined conflict: duels settle law, standing is won on the training-ground, and the Edge is taught to children as literacy. What rides with the violence here is BODY — the perfected physical, movement as language. Terrifying to a stranger, and rigorously fair once you learn the forms. Not the Gralloch's lawlessness; the opposite — violence with rules so strict they're almost peace.",
-  "loreRefs": [
-    "the_twelve_reaches",
-    "reach_violence_peace"
-  ],
-  "encounterFlavor": "Honed conflict as culture — a formal duel with witnesses, a child besting an adult by the forms, a challenge you can accept or honorably decline, a warrior reading your stance before your words.",
-  "dangerLevel": 4,
-  "encounterSeeds": [
-    {
-      "encounterId": "duel_redline_challenge",
-      "hint": "A challenge issued here becomes public record the moment it is spoken"
-    }
-  ],
-  "questSeeds": [
-    "You're challenged on arrival by custom — how you handle a duel you didn't want (fight, decline, turn it to a Contest) sets your whole standing in the Marches",
-    "A Marcher champion is being pushed toward a war they know is unjust; they want an outsider to give them a way to refuse without dishonor",
-    "The Edge is being taught to someone who shouldn't have it — a person whose rage the discipline can't hold; the Marchers are afraid of what they made"
-  ],
-  "map": {
-    "x": 880,
-    "y": 380
-  },
-  "axisVector": [
-    0,
-    0,
-    0,
-    -0.75,
-    0,
-    0,
-    -0.3,
-    0,
-    0,
-    0,
-    -0.3,
-    0
-  ],
-  "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
-  "worldPos": {
-    "colatitude": 89,
-    "longitude": 92,
-    "depth": 0
-  },
-  "worldPosNote": "Marcher country at its sharpest. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "settlement",
-  "parentId": "the_marchward",
-  "role": "gate"
+ "schemaVersion": 1,
+ "id": "the_redline",
+ "name": "The Redline",
+ "regionId": "riven_marches",
+ "communityId": "riven.redline",
+ "poleIntensity": {
+  "violence": 0.75,
+  "chaos": 0.3,
+  "body": 0.3
+ },
+ "spectrum": {
+  "violence_peace": -0.75,
+  "chaos_order": -0.3,
+  "body_mind": -0.3
+ },
+ "tags": [
+  "marches",
+  "warrior",
+  "dangerous",
+  "honor",
+  "frontier"
+ ],
+ "connections": [
+  "the_gralloch",
+  "the_marchward",
+  "hardline",
+  "the_grindstone"
+ ],
+ "descriptionSeed": "The violent frontier of the Marches — but honed, not feral. A warrior culture whose entire society is disciplined conflict: duels settle law, standing is won on the training-ground, and the Edge is taught to children as literacy. What rides with the violence here is BODY — the perfected physical, movement as language. Terrifying to a stranger, and rigorously fair once you learn the forms. Not the Gralloch's lawlessness; the opposite — violence with rules so strict they're almost peace.",
+ "loreRefs": [
+  "the_twelve_reaches",
+  "reach_violence_peace"
+ ],
+ "encounterFlavor": "Honed conflict as culture — a formal duel with witnesses, a child besting an adult by the forms, a challenge you can accept or honorably decline, a warrior reading your stance before your words.",
+ "dangerLevel": 4,
+ "encounterSeeds": [
+  {
+   "encounterId": "duel_redline_challenge",
+   "hint": "A challenge issued here becomes public record the moment it is spoken"
+  }
+ ],
+ "questSeeds": [
+  "You're challenged on arrival by custom — how you handle a duel you didn't want (fight, decline, turn it to a Contest) sets your whole standing in the Marches",
+  "A Marcher champion is being pushed toward a war they know is unjust; they want an outsider to give them a way to refuse without dishonor",
+  "The Edge is being taught to someone who shouldn't have it — a person whose rage the discipline can't hold; the Marchers are afraid of what they made"
+ ],
+ "map": {
+  "x": 880,
+  "y": 380
+ },
+ "axisVector": [
+  0,
+  0,
+  0,
+  -0.75,
+  0,
+  0,
+  -0.3,
+  0,
+  0,
+  0,
+  -0.3,
+  0
+ ],
+ "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
+ "worldPos": {
+  "colatitude": 89,
+  "longitude": 92,
+  "depth": 0
+ },
+ "worldPosNote": "Marcher country at its sharpest. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+ "tier": "settlement",
+ "parentId": "the_marchward",
+ "role": "gate",
+ "appearance": "A city of training grounds and duelling floors — sanded circles set into paved squares, weapon racks along the walls, banked seating around the larger rings. Red-painted lines mark every boundary. Barracks halls behind."
 }

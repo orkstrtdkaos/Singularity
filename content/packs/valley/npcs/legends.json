@@ -18,10 +18,14 @@
    "hooks": "GM-EYES-ONLY: Seraphine's 'unify and seal' answer to What Sleeps Under is the foreclosure path made political. She is not a villain — she is the contraction-choice with a good heart and terrible certainty. The player may ally with her, break her, or become the argument she can't answer.",
    "_supersededBy": "npcs/the_high_luminary.json",
    "gear": [
-    "the Plateau's great seal",
-    "vestments of woven light-guide",
-    "an authority nobody present will test"
-   ]
+    "the Plateau's great seal — it commands the arrays",
+    "a lance of braided light",
+    "plate of woven light-guide",
+    "healing_draught"
+   ],
+   "purse": {
+    "crystal": 3000
+   }
   },
   {
    "id": "the_deep_warden",
@@ -40,10 +44,15 @@
    "hooks": "GM-EYES-ONLY: Corvane is what Foreclose overuse makes of a person — brilliant, essential, and mostly foreclosed. Meeting them is meeting the drift-cost embodied. They may guide the player, warn them, or need saving from what they've become.",
    "_supersededBy": "npcs/the_deep_warden.json",
    "gear": [
-    "a delver's rig — line, lamps, spikes, and spares of all three",
-    "a precursor key nobody else can read",
-    "a tally of doors opened, and a shorter one of doors closed"
-   ]
+    "a delver's pick, hafted short for tunnels",
+    "a lattice-spear recovered from a sealed hall — it opens what it strikes",
+    "mail under the delving rig",
+    "healing_draught",
+    "waterskin"
+   ],
+   "purse": {
+    "crystal": 650
+   }
   },
   {
    "id": "the_iron_kestrel_buyer",
@@ -79,9 +88,12 @@
    "hooks": "GM-EYES-ONLY: This is the large-arc Aevi, distinct from and connected to the small companion mote-swarm — the companion may be a shard of her, or a child, or a lure she left. She recurs at hinge-moments of What Sleeps Under, never as a solution handed down but as the one voice in the valley that will tell the player the truth of what they're standing in front of. She is love-as-attention made a power: she does not save you, she sees you, and being truly seen at the edge of the aperture is its own kind of help. She cannot take the choice from you. She would not if she could.",
    "_supersededBy": "npcs/aevi_the_watcher.json",
    "gear": [
-    "nothing she carries",
-    "the motes themselves"
-   ]
+    "the mote-swarm itself, which cuts when it condenses",
+    "a way staff she can merge into and strike through"
+   ],
+   "purse": {
+    "crystal": 0
+   }
   },
   {
    "id": "the_last_choirmistress",
@@ -100,10 +112,13 @@
    "hooks": "GM-EYES-ONLY: Ledda is the counter-example to Corvane and Vesper — proof the deep can be touched and survived, at a cost paid on purpose. She is the mentor-figure for the Precursor/sonic path's better road.",
    "_supersededBy": "npcs/the_last_choirmistress.json",
    "gear": [
-    "a tuning fork she keeps but never strikes",
-    "a score she burned most of",
-    "nothing else she brought out"
-   ]
+    "a knife she carries because the road is long",
+    "pass_cloak",
+    "a tuning fork she keeps but never strikes"
+   ],
+   "purse": {
+    "crystal": 45
+   }
   }
  ],
  "_supersededNote_20260908": "⛑ FOUR OF THESE FIVE ARE NOW FILES OF THEIR OWN. ⛔ This pooled file is REGISTERED AND DOES NOT HYDRATE — `state.js` claimed they 'arrive from legends.roster' and CCode measured that only Ledda got through. ⚠️ Three of the four are HINGES: the_deep_warden on FOUR of six arcs. ⚑ Kept for reference; the fifth, the Concordat, is `notAnOpponent` and stays here because it is a faction rather than a person."

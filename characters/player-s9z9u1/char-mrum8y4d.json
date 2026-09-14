@@ -1520,7 +1520,7 @@
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 1837,
+    "lastGenCount": 1845,
     "lastSharedReadAt": "2026-09-07T22:27:40.544Z",
     "lastTickWorldDay": 76,
     "lastCanonWorldDay": 76,
@@ -1622,7 +1622,7 @@
         "kind": "shortage",
         "premise": "The shallow wells that sustain the scattered settlements are dropping faster each season than anyone has yet admitted aloud.",
         "cause": "The Palelands' sparse, chalky soil has always demanded more water to work than it naturally holds, and the settlements were founded at the margins of what the…",
-        "stage": 46,
+        "stage": 47,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1635,7 +1635,7 @@
         "kind": "rot",
         "premise": "A slow fungal bloom is working through the oldest grain stores, and the steward responsible has been quietly discarding the worst sacks rather than reporting the loss.",
         "cause": "The valley's mild, damp winters make its granaries prone to moisture, and the current steward was appointed for loyalty rather than knowledge of grain-keeping.",
-        "stage": 46,
+        "stage": 47,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1660,7 +1660,7 @@
         "kind": "rot",
         "premise": "A key sequence in the primary record is being quietly re-threaded by someone who made an error years ago and cannot bear to have it discovered.",
         "cause": "Unspooling's knowledge is stored in physical cordage whose integrity depends entirely on the honesty of the hands that maintain it.",
-        "stage": 41,
+        "stage": 42,
         "seededAtCount": 758,
         "surfaced": true,
         "fate": "growing",
@@ -1697,7 +1697,7 @@
         "kind": "shortage",
         "premise": "Certain materials or substances needed for whatever work the Unmade does are being quietly stockpiled by one practitioner at the expense of communal supply, because she no longer trusts the…",
         "cause": "The Unmade is a place where things are taken apart, and grief for what is lost has no formal channel — it is expected to simply disperse, as everything else…",
-        "stage": 9,
+        "stage": 10,
         "seededAtCount": 1675,
         "surfaced": true,
         "fate": "growing",
@@ -1710,7 +1710,7 @@
         "kind": "rot",
         "premise": "A run of subtle flaws has begun appearing in work passing through one bench — small enough to escape immediate notice, deep enough to fail later — and the cause is a senior apprentice who has been…",
         "cause": "The two workshops already contesting the shared tool have each told their apprentices, in different words, that the other side cannot be trusted — and one…",
-        "stage": 9,
+        "stage": 10,
         "seededAtCount": 1675,
         "surfaced": true,
         "fate": "growing",
@@ -1723,7 +1723,7 @@
         "kind": "shortage",
         "premise": "A foundational material used in the Making's core work has quietly been substituted with an inferior source for several production cycles, and nothing built from it has yet been tested under real…",
         "cause": "The two workshops already deadlocked over the shared tool have each independently begun sourcing their own materials rather than drawing from the common…",
-        "stage": 2,
+        "stage": 3,
         "seededAtCount": 1826,
         "surfaced": true,
         "fate": "growing",
@@ -1739,7 +1739,23 @@
         "othersPush": 1
       }
     },
-    "pressureQueue": [],
+    "pressureQueue": [
+      {
+        "source": "threat-attack",
+        "kind": "threat-attack",
+        "subjectId": "beast_mire_gulper",
+        "aimedAtPlayer": true,
+        "urgency": 3,
+        "oneLineHook": "A a mire-gulper has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
+        "becomes": {
+          "type": "encounter",
+          "encounterId": "beast_mire_gulper",
+          "name": "a mire-gulper"
+        },
+        "addedDay": 3,
+        "locationId": "the_crossing"
+      }
+    ],
     "offscreenCursor": 12,
     "retrievalWanted": [],
     "arcRetrievals": [],
@@ -6731,7 +6747,7 @@
     }
   ],
   "nativeGrantsVersion": 2,
-  "reconcileVersion": 61,
+  "reconcileVersion": 62,
   "gallery": [
     {
       "kind": "holding",
@@ -7211,8 +7227,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789391432499,
-  "rev": 582,
+  "updatedAt": 1789421945953,
+  "rev": 585,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8685,7 +8701,7 @@
     "lastDeployDay": 31,
     "lastBeat": "witness_power"
   },
-  "syncedAt": 1789389621363,
+  "syncedAt": 1789391432499,
   "_applyFailures": null,
   "companionMemory": {
     "coil": [

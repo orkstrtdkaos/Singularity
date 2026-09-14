@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 7,
-  "xp": 622,
+  "xp": 652,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -105,7 +105,7 @@
   "maxHealth": 68,
   "health": 68,
   "maxEnergy": 146,
-  "energy": 73,
+  "energy": 69,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -7199,8 +7199,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789427211059,
-  "rev": 621,
+  "updatedAt": 1789427311891,
+  "rev": 627,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8069,7 +8069,7 @@
     "the_gearlands": 33,
     "umbral_depths": 54,
     "the_quickwood": 101,
-    "the_center": 19
+    "the_center": 20
   },
   "opLossPending": false,
   "sessions": [
@@ -8229,7 +8229,7 @@
   "_opTurns": 183,
   "customAbilities": {},
   "companionBonds": {
-    "coil": 2.25
+    "coil": 3.75
   },
   "practice": {
     "schemaVersion": 1,
@@ -8244,7 +8244,8 @@
       "hunters_strike": 3,
       "descent": 9,
       "wayfinding": 1,
-      "misdirect": 2
+      "misdirect": 2,
+      "wrong_reality": 1
     },
     "coActivations": {
       "falsecraft+the_wrong_reality": 1,
@@ -8277,7 +8278,8 @@
       "hunters_strike": 32,
       "descent": 76,
       "wayfinding": 69,
-      "misdirect": 69
+      "misdirect": 69,
+      "wrong_reality": 76
     }
   },
   "teachers": {},
@@ -8698,298 +8700,7 @@
       }
     }
   },
-  "activeEncounter": {
-    "defId": "gm-a-churn-revel",
-    "state": {
-      "schemaVersion": 1,
-      "encounterId": "gm-a-churn-revel",
-      "type": "duel",
-      "status": "ended",
-      "round": 2,
-      "log": [
-        "r1: reveal vs reveal → momentum 0",
-        "r1: bind vs command → momentum 4",
-        "r1: foresee vs resist → momentum 7",
-        "r2: shield vs reveal → momentum 7 — opponent_yielded"
-      ],
-      "opponentHealth": 5,
-      "opponentYieldAt": 1,
-      "opponentMaxHealth": 5,
-      "tactic": null,
-      "mode": "skill_battle",
-      "opponentSheet": {
-        "name": "A Churn-Revel",
-        "attributes": {
-          "practical": 2,
-          "physical": 2,
-          "mental": 2,
-          "social": 2
-        },
-        "energy": 76,
-        "maxEnergy": 76,
-        "tacticTags": [
-          "misdirection",
-          "overwhelming sensory input",
-          "deliberate choreography",
-          "contagious energy"
-        ],
-        "skills": [
-          {
-            "function": "command",
-            "name": "presses a point",
-            "tier": 2,
-            "attribute": "social"
-          },
-          {
-            "function": "resist",
-            "name": "holds the line",
-            "tier": 2,
-            "attribute": "social"
-          },
-          {
-            "function": "reveal",
-            "name": "reads your certainty",
-            "tier": 2,
-            "attribute": "mental"
-          },
-          {
-            "function": "bind",
-            "name": "presses their advantage",
-            "tier": 2,
-            "attribute": "social"
-          }
-        ],
-        "health": 5,
-        "soak": 1,
-        "soakLayers": [
-          {
-            "rank": 1,
-            "value": 1
-          }
-        ],
-        "level": 15,
-        "synthesized": true
-      },
-      "momentum": 6.5,
-      "opponentEnergy": 33,
-      "turn": {
-        "phase": "action",
-        "sel": {
-          "sense": [
-            16
-          ],
-          "action": [],
-          "bonus": []
-        },
-        "text": {
-          "sense": "",
-          "action": "",
-          "bonus": ""
-        },
-        "setupBonus": 0,
-        "bonusEarned": false,
-        "foeBonusEarned": false,
-        "senseDone": true,
-        "senseLine": "You read with False Target — failure. Neither of you learns much. You learn nothing usable this time. Had it landed you would have seen which craft A Churn-Revel leans on, and whether their wind is going — enough to pick the counter.",
-        "readPayoff": "You learn nothing usable this time. Had it landed you would have seen which craft A Churn-Revel leans on, and whether their wind is going — enough to pick the counter."
-      },
-      "broughtForward": [
-        "coil"
-      ],
-      "playerReads": 1,
-      "effects": [
-        {
-          "kind": "bound",
-          "label": "bound",
-          "value": -4,
-          "roundsLeft": 3,
-          "applies": "always",
-          "side": "opponent",
-          "rank": 2,
-          "source": "Descent",
-          "from": "player"
-        },
-        {
-          "kind": "insight",
-          "label": "reading their next beat",
-          "value": 4,
-          "roundsLeft": 2,
-          "applies": "always",
-          "side": "player",
-          "rank": 1,
-          "source": "See the Made Thing",
-          "from": "player"
-        },
-        {
-          "kind": "brace",
-          "label": "braced",
-          "value": 2,
-          "roundsLeft": 1,
-          "applies": "whenAttacked",
-          "side": "opponent",
-          "rank": 2,
-          "source": "holds the line",
-          "from": "opponent"
-        },
-        {
-          "kind": "insight",
-          "label": "you have their measure",
-          "value": 2,
-          "roundsLeft": 2,
-          "applies": "always",
-          "side": "opponent",
-          "rank": 2,
-          "source": "reads your certainty",
-          "from": "opponent"
-        }
-      ],
-      "pressure": {
-        "player": 0,
-        "opponent": 1
-      },
-      "spent": {
-        "player": false,
-        "opponent": false
-      },
-      "lastOppFn": "reveal",
-      "breakAt": {
-        "opponent": 1,
-        "player": 1
-      },
-      "foeReadTier": 1,
-      "theatres": [
-        {
-          "scale": "individual",
-          "who": "A Churn-Revel",
-          "why": null
-        }
-      ],
-      "yourScale": "party",
-      "overmatch": null,
-      "outweighed": null,
-      "lastOppReceipt": {
-        "roll": 16,
-        "chance": 26,
-        "degree": "partial",
-        "action": {
-          "attribute": "mental",
-          "abilityLevel": 2,
-          "label": "reads your certainty",
-          "axes": {}
-        },
-        "breakdown": {
-          "components": [
-            {
-              "label": "mental 2",
-              "value": 20
-            },
-            {
-              "label": "training",
-              "value": 0,
-              "zero": true
-            },
-            {
-              "label": "ability rank 2",
-              "value": 10
-            },
-            {
-              "label": "equipment",
-              "value": 0,
-              "zero": true
-            },
-            {
-              "label": "momentum (you're on the back foot)",
-              "value": -3
-            },
-            {
-              "label": "you have their measure",
-              "value": 3
-            },
-            {
-              "label": "bound (3 rounds)",
-              "value": -4
-            }
-          ],
-          "total": 26,
-          "clampedFrom": null,
-          "base": "mental",
-          "opposed": null
-        },
-        "critRoll": 62,
-        "crit": {
-          "successChance": 11,
-          "failChance": 1,
-          "successComponents": [
-            {
-              "label": "base",
-              "value": 5
-            },
-            {
-              "label": "ability rank 2",
-              "value": 6
-            }
-          ],
-          "failComponents": [
-            {
-              "label": "base",
-              "value": 5
-            },
-            {
-              "label": "ability rank 2",
-              "value": -4
-            }
-          ],
-          "successClampedFrom": null,
-          "failClampedFrom": null
-        },
-        "rawChance": 26,
-        "margin": -6,
-        "matchup": 0,
-        "intensity": "standard",
-        "tier": 2,
-        "function": "reveal",
-        "name": "reads your certainty",
-        "effectMods": [
-          {
-            "label": "you have their measure",
-            "value": 3
-          },
-          {
-            "label": "bound (3 rounds)",
-            "value": -4
-          }
-        ],
-        "woven": null,
-        "evaded": {
-          "by": "player",
-          "evasion": 4,
-          "rank": 2,
-          "degreeFrom": "success",
-          "marginFrom": 10
-        },
-        "targetChoice": {
-          "policy": "threat",
-          "why": "Loki is doing it the most harm",
-          "target": {
-            "id": "char-mrum8y4d",
-            "name": "Loki",
-            "kind": "player",
-            "isPlayer": true,
-            "present": true,
-            "canAct": true,
-            "downed": null
-          }
-        }
-      },
-      "lastReadWasSense": true,
-      "senseTierEarned": 0,
-      "senseResist": {
-        "value": 6,
-        "label": "their natural guardedness",
-        "from": "passive"
-      }
-    }
-  },
+  "activeEncounter": null,
   "legendGovernor": {
     "lastDeployDay": 76,
     "lastBeat": "witness_power"
@@ -9241,6 +8952,14 @@
       "day": 3,
       "worldDay": 76,
       "actionCount": 153
+    },
+    {
+      "companionId": "coil",
+      "kind": "encounter",
+      "delta": 1.5,
+      "day": 3,
+      "worldDay": 76,
+      "actionCount": 153
     }
   ],
   "_exchangeReceipts": [],
@@ -9384,348 +9103,348 @@
   },
   "_promptRows": {
     "character": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "location": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "region": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "groundDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "lore": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "traditionMotiveDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "sheetsDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "rules": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "recentTurns": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "timeLabel": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "npcRegistryDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "mintedUnmetDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "npcSeedDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "traditionVocab": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "standingDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "recalledDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 1
     },
     "bearingsDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "caravansDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "commandDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "presenceDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "worthHereDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "sceneState": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "holdingsDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "debtsDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "questsDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "structuredQuestsDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "companionsDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "placeMemoryDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "agesMissingDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "newsDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "worldArcsDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "legendsPursuableDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "wakesDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "reachableDeadDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "threatToPlayer": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "resolution": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "playerInput": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "exactWords": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "travelDirective": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "itemAdvance": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "encounterOfferDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "fightFramingDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "offerDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "teacherOfferDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "romanceGuidanceDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "factsDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "evolvedItemsDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "perilNote": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 4
     },
     "masteryDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "bookkeepingRestate": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "repairPanelDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "teacherDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "availableEncounters": {
-      "reached": 4,
-      "produced": 0
+      "reached": 5,
+      "produced": 1
     },
     "partyDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "registerDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "legendDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "assignmentsDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "latentArcsDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "seasonalDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "schoolsDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "sharedCanonDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "worldCountLabel": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "waygateDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "readAloudDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     },
     "scenePacingDetail": {
-      "reached": 4,
-      "produced": 4
+      "reached": 5,
+      "produced": 5
     }
   },
   "_opUnknown": {

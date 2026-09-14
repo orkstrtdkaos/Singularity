@@ -27,6 +27,7 @@
 // this: beat them off and they take NOTHING. A carrier can die on a won road and the goods still arrive.
 
 import { legionClash, contingentsFromPeople } from "./melee.js";
+import { contributionsOf } from "./combatants.js";   // SNG-541c / Erik: a defender is what they can DO, not one more body
 import { unitWorth } from "./holdings.js";
 import { credit } from "./purse.js";
 import { enterDeathState } from "./death.js";
@@ -156,7 +157,14 @@ export function resolveRoadHazard(character, car, { rng = Math.random, cfg = nul
     return { fought: false, held: false, wiped: false, taken, fallen: [] };
   }
 
-  const defenders = contingentsFromPeople(escort, { levelOf: (p) => num(p?.level, 1) });
+    // ⛔ ERIK 2026-09-14: "these aren't just bodies that can hit something — they have skills and abilities they
+    // can bring to bear." ⛑ So the defenders are read for what they ACTUALLY DO, out of the GM's own prose about
+    // them, and a filtration engineer on the watch stops counting as one more sword.
+    // ⚠️ BEFORE THIS, NO CALLER INJECTED `contributionsOf` AT ALL — `does` fell through to `p.contributions`,
+    // which a registry record has never carried, so EVERY defender landed in the anonymous block. The named/plain
+    // split existed and nothing could ever reach the named half.
+    const defenders = contingentsFromPeople(escort, { levelOf: (p) => num(p?.level, 1),
+      contributionsOf: (p) => contributionsOf(p, { evidence: true }) });
   const d = Math.max(1, Math.round(num(car.danger, 1)));
   const raiders = [{ n: d, quality: Math.max(1, Math.round(d / 2)), what: "raiders" }];
   const clash = legionClash(defenders, raiders, { rng, cfg: raidCfg.clash || {} });

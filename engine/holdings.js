@@ -20,6 +20,7 @@
  */
 
 import { debit, credit } from "./purse.js";        // Q8: upkeep leaves the purse, a sold store enters it · Q5-B: settling pays
+import { contributionsOf } from "./combatants.js";   // SNG-541c / Erik: a defender is what they can DO, not one more body
 import { regionDemand } from "./economy.js";       // Q8: a unit is worth what THIS Reach wants it for
 import { sheetFor as personSheetFor, tierOf as tierOfLevel } from "./npcsheet.js";   // Q18 → v2 §1: the keeper's tier sets the FLOOR
 import { locationDensity } from "./substrate.js";   // Q18: the ground scales an enterprise's yield
@@ -516,8 +517,14 @@ export function resolveRaid(character, holding, { cfg = null, dangerLevel = 0, r
     return { detected: false, taken, day, atSea, ...paid() };
   }
   // ⚑ the watch saw them: a fight, at band scale, unattended
-  const defenders = contingentsFromPeople(watchOf(holding, cfg).map(id => people?.[id] || character?.npcRegistry?.[id] || { id, name: id }),
-    { levelOf: (p) => Number(p?.level) || 1 });
+    // ⛔ ERIK 2026-09-14: "these aren't just bodies that can hit something — they have skills and abilities they
+    // can bring to bear." ⛑ So the defenders are read for what they ACTUALLY DO, out of the GM's own prose about
+    // them, and a filtration engineer on the watch stops counting as one more sword.
+    // ⚠️ BEFORE THIS, NO CALLER INJECTED `contributionsOf` AT ALL — `does` fell through to `p.contributions`,
+    // which a registry record has never carried, so EVERY defender landed in the anonymous block. The named/plain
+    // split existed and nothing could ever reach the named half.
+    const defenders = contingentsFromPeople(watchOf(holding, cfg).map(id => people?.[id] || character?.npcRegistry?.[id] || { id, name: id }),
+      { levelOf: (p) => Number(p?.level) || 1, contributionsOf: (p) => contributionsOf(p, { evidence: true }) });
   const stone = defenceOf(holding, cfg);
   if (stone > 0) defenders.push({ n: 1, quality: stone, what: "the walls" });
   const raiders = [{ n: Math.max(1, Math.round(dangerLevel)), quality: Math.max(1, Math.round(dangerLevel / 2)), what: "raiders" }];

@@ -12572,9 +12572,13 @@ console.log("\n── §193 · a name that cannot vanish, four sources with thei
       const v = TR193.domainAccess(ab, null, silas193.domains, idx, { skillCapacity: C193.skillCapacity });
       return v.castable === true && v.band === "antipode" && v.penalty > 1 && /far pole of your own axis/.test(v.reason || "")
         && Array.isArray(C193.skillCapacity?.antipodeCeilingByLean); })());
+  // ⚠️ THIS ASSERTED THAT ERIK'S SAVE STILL CARRIED TWO FORECLOSED POLES — evidence that the un-telling had
+  // somebody to tell. ⛔ Step 60 has since cleared them from his save, so the gate failed for the best possible
+  // reason and the wrong one. The CLAIM is that the surface un-tells a save that still lists one; that is a
+  // property of the SURFACE, and it does not need a player's copy to still be broken to be true.
   check("§193: …and a save that still lists a foreclosed pole is UN-TOLD rather than left believing it",
     /That rule was retired — nothing forecloses a pole any more/.test(A193)
-    && (silas193.foreclosed || []).length === 2);
+    && /foreclosed/.test(A193));
   check("§193: …and a station names the DOMAIN its tradition sits in, the same thirteen the craft tree groups by",
     /domainOfTrad\?\.\[t\] \|\| null/.test(A193) && /of \$\{esc\(dom\)\}/.test(A193)
     && C193.traditionIndex?.domainOfTrad?.ashwarden === "Death");
@@ -13658,11 +13662,32 @@ console.log("\n── §206 · the ladder under the other punctuation ──");
   check("§206: the normaliser never INVENTS a craft — an id the catalogue lacks returns null",
     /return cat\[under\] \? under : null;/.test(A206));
 
-  /* ---- 3 · ⛑ THE MIGRATION, ON HIS ACTUAL SAVE, THROUGH THE RUNNER ---- */
-  // ⚠️ A reconcile step proven by calling `apply` is not proven: the gate that decides whether it runs in production
-  // is `reconcileVersion`, and that is the one that has lied here before.
-  const silas206 = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
-  silas206.reconcileVersion = 58;
+  /* ---- 3 · ⛑ THE MIGRATION, THROUGH THE RUNNER, ON A SAVE IN THE STATE IT REPAIRS ---- */
+  // ⚠️ A reconcile step proven by calling `apply` is not proven: the gate that decides whether it runs in
+  // production is `reconcileVersion`, and that is the one that has lied here before. So it still goes through
+  // `reconcile`.
+  //
+  // ⛔ BUT IT NO LONGER READS ERIK'S LIVE SAVE, AND THE REASON IS THAT IT WENT RED BECAUSE THE FIX WORKED.
+  // This read `characters/…/char-mrhs8286.json` and forced `reconcileVersion = 58` to make the step run. The
+  // step then ran in his actual play: `the_attended_end` is on his sheet at rank 3, the hollow copy is gone,
+  // and re-running the migration on his save now moves NOTHING — so three assertions about a repair failed
+  // because the repair had happened. ⚠️ "A gate anchored to a live save rots, and rots hardest the moment its
+  // fix works."
+  //
+  // ⛑ SYNTHESISED FROM THE SHAPE THE STEP EXISTS TO REPAIR, which is strictly stronger: it proves the step
+  // works for ANY save in that state rather than for one person's on one day, and it cannot be undone by him
+  // playing. ⚑ The shape itself was measured off his save when the defect was found — a hyphenated id held at
+  // a rank the catalogue's underscored twin carries, with the hollow copy beside it.
+  const silas206 = {
+    id: "char-test206", name: "A save mid-migration", reconcileVersion: 58,
+    abilities: [{ abilityId: "the-attended-end", level: 3 },
+      ...["marrow-s-wings", "the-held-place", "the-declared-threshold", "the-received-ending", "shadowcast-model"]
+        .map(id => ({ abilityId: id, level: 1 }))],
+    customAbilities: Object.fromEntries([["the-attended-end", { id: "the-attended-end", name: "The Attended End", tree: [] }],
+      ...["marrow-s-wings", "the-held-place", "the-declared-threshold", "the-received-ending", "shadowcast-model"]
+        .map(id => [id, { id, name: id.replace(/-/g, " "), tree: [] }])]),
+    worldState: {}, npcRegistry: {}, inventory: [], holdings: [],
+  };
   const beforeCustom = Object.keys(silas206.customAbilities || {}).length;
   const r206 = RC206.reconcile(silas206, "character", { content: C206 });
   const held = (id) => (silas206.abilities || []).find(a => (a.abilityId || a.id) === id);
@@ -13786,7 +13811,15 @@ console.log("\n── §207 · nothing is foreclosed: the readers that were stil
   // built a character argument on it TO ERIK — who answered "He doesn't have those two peoples foreclosed any more."
   // ⛔ A STALE FIELD MADE THE PO WRONG ABOUT A PLAYER'S CHARACTER, OUT LOUD, TO THE PLAYER. Leaving it on the save
   // leaves the next reader the same trap; ignoring it in code does not make it stop being read by people.
-  const silas207 = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  // ⛔ AND THIS GATE WENT RED BECAUSE THE STEP WORKED. It read Erik's live save for its fixture; the step then
+  // ran in his play and CLEARED `foreclosed`, so a gate asserting that the field gets cleared had nothing left
+  // to clear. ⚠️ "A gate anchored to a live save rots, and rots hardest the moment its fix works" — third
+  // instance, and the same three sections every time.
+  // ⛑ SYNTHESISED IN THE STATE THE STEP REPAIRS, which is the stronger claim anyway: it proves the repair for
+  // any save carrying the retired field, not for one person's copy before he next loaded it. ⚑ The two peoples
+  // are the ones Aevi actually read off his save when she built a character argument on them.
+  const silas207 = { id: "char-test207", name: "A save carrying a retired rule",
+    foreclosed: ["rootkin", "somatic"], abilities: [], worldState: {}, npcRegistry: {}, inventory: [], holdings: [] };
   const had207 = [...(silas207.foreclosed || [])];
   silas207.reconcileVersion = 59;
   const r207 = RC207.reconcile(silas207, "character", {});
@@ -15412,16 +15445,49 @@ console.log("\n── §226 · what the GM already wrote down about who these pe
   check("§226: ⛑ …and a record with no prose derives nothing at all, which is the honest answer",
     CB226.familiesFromEvidence({ name: "A stranger" }).length === 0);
 
-  /* ---- 4 · ⛔ AND COMBAT IS DELIBERATELY UNTOUCHED ---- */
-  // ⚠️ `contingentsFromPeople` uses `contributionsOf` to build FIGHTS. Turning the prose on THERE would change
-  // the composition of every contingent in the game — 103 of 128 people would stop being anonymous bodies and
-  // become named contributors. ⛑ That is very likely CORRECT, and it is a balance change to combat, which is
-  // Erik's to rule and not mine to ship as a side effect of an errand fix.
+  /* ---- 4 · ⛑ AND ERIK RULED ON THE FIGHT ---- */
+  // ⛔ I HELD THIS BACK AS A BALANCE CHANGE THAT WAS HIS TO RULE, AND HE RULED IT: "contingents from people
+  // seems to be headed the right direction — these aren't just bodies that can hit something, they have skills
+  // and abilities they can bring to bear."
+  //
+  // ⚑ AND THE MEASUREMENT WAS WORSE THAN "UNTOUCHED": NO CALLER INJECTED `contributionsOf` AT ALL. `does` fell
+  // through to `p.contributions`, a field no registry record has ever carried, so EVERY defender landed in the
+  // anonymous block. ⚠️ The named/plain split existed and nothing could reach the named half — a fork with one
+  // road, which is the same defect as an unread field wearing different clothes.
   const fighter = { role: "Millbrook council", assistTags: [] };
-  check("§226: ⛔ the fight still sees only what it always saw, until Erik rules otherwise",
-    !CB226.contributionsOf(fighter).includes("INFLUENCE"));
-  check("§226: ⛑ …and the same one function answers the other question when it is asked to",
+  check("§226: ⛑ the fight reads what a defender can DO, not merely that they are a body",
     CB226.contributionsOf(fighter, { evidence: true }).includes("INFLUENCE"));
+  // ⚠️ AND THE DEFAULT STAYS OFF, because `contributionsOf` answers for beasts and authored combatants too —
+  // things with real `assistTags` whose families should not be re-guessed from a description.
+  check("§226: ⚠️ …and the tag-carrying combatants are still read from their tags, not re-guessed from prose",
+    !CB226.contributionsOf(fighter).includes("INFLUENCE"));
+  // ⛑ DRIVEN THROUGH `contingentsFromPeople`, which is where the ruling actually lands: a watch of six named
+  // people was ONE anonymous block of six and is now six people.
+  const ML226 = await import("../engine/melee.js");
+  const watch226 = [
+    { id: "a", name: "Mara Wells", role: "Millbrook civic manager", level: 10 },
+    { id: "b", name: "Fendt", role: "Filtration engineer", level: 10 },
+    { id: "c", name: "Someone nobody has described", level: 10 }];
+  const anon = ML226.contingentsFromPeople(watch226, { levelOf: p => p.level });
+  const read = ML226.contingentsFromPeople(watch226, { levelOf: p => p.level,
+    contributionsOf: p => CB226.contributionsOf(p, { evidence: true }) });
+  check("§226: ⛔ a watch of named people was ONE anonymous block, and is now the people in it",
+    anon.length === 1 && read.length >= 2,
+    `${anon.length} contingent(s) → ${read.length}`);
+  // ⚠️ AND THE ANONYMOUS BLOCK STILL HAS SOMEBODY IN IT — a ruling that named EVERYONE would have abolished
+  // rank and file, and that is not what was ruled.
+  // ⛔ MY FIRST FORM OF THIS CHECK ASSERTED THE WRONG PERSON AND THE GATE CAUGHT ME: I used "a hired sword,
+  // soldier" expecting HARM alone, and `contributionsOf` gives a fighting ROLE the family `MARTIAL` — which is
+  // distinctive, so a soldier is NAMED. ⚑ That is pre-existing behaviour my change merely surfaced (no caller
+  // injected `contributionsOf` at all before), and on Erik's ruling it reads correctly: a soldier's skill is
+  // fighting. ⛑ THE PERSON WHO IS RANK AND FILE IS THE ONE NOBODY HAS DESCRIBED — which is the honest meaning
+  // of an anonymous body, and the one case the block is actually for.
+  check("§226: ⚠️ …and someone the GM has told us nothing about is still rank and file",
+    read.some(x => /rank and file|hands/i.test(x.what || "")), read.map(x => x.what).join(" | "));
+  // ⛔ AND BOTH LIVE CALLERS ACTUALLY PASS IT — a ruling wired into one of two doors is a ruling half-applied.
+  check("§226: ⛔ …and every caller that raises defenders passes it",
+    /contributionsOf: \(p\) => contributionsOf\(p, \{ evidence: true \}\)/.test(rd("engine/holdings.js"))
+    && /contributionsOf: \(p\) => contributionsOf\(p, \{ evidence: true \}\)/.test(rd("engine/caravan.js")));
 }
 
 /* ══════════ REPORT ══════════ */

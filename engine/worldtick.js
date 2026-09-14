@@ -11,6 +11,7 @@
 // the shapes here are designed to lift straight into that.
 
 import { callClaudeJSON } from "./claude.js";
+import { canonLookRecord } from "./art.js";   // SNG-576: the shared look, shaped once
 import { advanceSeeking } from "./seeking.js"; // CCODE-222: a reason for the engine to bring someone to you
 import { battleRound, synthesizeOpponentSheet } from "./skill_battle.js";   // CCODE-113: an arc is CONTESTED with the same dice the player rolls
 import { applyNpcUpdates } from "./npcs.js";
@@ -984,6 +985,46 @@ const CANON_PATH = (region = "valley") => `world/canon/${region}.json`;
  *  landed entity never re-promotes. Gated: promotes whenever candidates exist; refreshes the
  *  view at most once per elapsed world-day when there's nothing to promote (network thrift).
  *  region + authoredFor + now injectable for tests. */
+/** ⛔ SNG-576 O2 (Erik) — "I want to be able to have the place look a certain way as I use my characters to
+ *  build the world." A LOOK PROMOTED TO THE SHARED STORE, SO IT IS THE ONE EVERYONE SEES BY DEFAULT.
+ *
+ *  ⛑ THROUGH THE ONE SAFE DOOR, AND THAT IS NOT A STYLE CHOICE. SNG-552 §2 ruled it: a second door onto the
+ *  canon store IS the bug, because a post-hoc write cannot re-run the weighted contest and the loser's weight
+ *  is lost. So this is `pushMergedFile` on the SAME path `syncSharedCanon` uses, contesting against the
+ *  freshly-read remote — two builders promoting different looks for the same inn meet the machinery the store
+ *  already runs, rather than a second rule invented for images.
+ *
+ *  ⚠️ AND IT ONLY EVER TOUCHES AN ENTITY THAT IS ALREADY THERE. Promotion is EARNED — `promoteInto` decides
+ *  what joins the shared world, and a look is a property OF a shared entity rather than a way to smuggle one
+ *  in. A subject the store has never heard of returns `{ ok: false }` and says why.
+ *
+ *  ⛑ Best-effort and never throws: a picture is never worth breaking a turn for. */
+export async function pushCanonLook({ entityId, url = null, appearance = null, by = null, worldDay = null, region = "valley" } = {}) {
+  if (!syncEnabled()) return { ok: false, why: "sync is off — a canon look needs the shared world" };
+  const id = String(entityId || "").trim();
+  if (!id) return { ok: false, why: "nothing named" };
+  let landed = null, missing = false;
+  try {
+    await pushMergedFile(CANON_PATH(region), (remote) => {
+      const store = ensureCanonStore(remote || {}, region);
+      const found = store.entities?.[id]
+        || Object.values(store.entities || {}).find(e => e && e.id === id);
+      if (!found) { missing = true; return null; }          // ⚠️ returning null aborts the write cleanly
+      const next = canonLookRecord(found, { url, appearance, by, worldDay });
+      if (!next) { missing = true; return null; }
+      store.entities[found.id || id] = next;
+      landed = next;
+      return store;
+    }, `canon look: ${id}${by ? ` by ${by}` : ""}`);
+  } catch (err) {
+    return { ok: false, why: err?.message || "the shared world could not be reached" };
+  }
+  if (missing || !landed) {
+    return { ok: false, why: "that is not in the shared world yet — a look is a property of something already in it, and joining is earned" };
+  }
+  return { ok: true, entityId: landed.id || id, image: landed.image || null, appearance: landed.appearance || null };
+}
+
 export async function syncSharedCanon({ character, profile, content, region = "valley", now = Date.now(), authoredFor = null } = {}) {
   if (!syncEnabled() || !character) return { synced: false, promoted: [], view: [] };
   if (!character.worldState) character.worldState = initWorldState(1);

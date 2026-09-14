@@ -15490,6 +15490,131 @@ console.log("\n── §226 · what the GM already wrote down about who these pe
     && /contributionsOf: \(p\) => contributionsOf\(p, \{ evidence: true \}\)/.test(rd("engine/caravan.js")));
 }
 
+
+// ⛔ SNG-576 (Erik) — "I want the ability to set an image for people and places and have it be THE ONE EVERYONE
+// SEES BY DEFAULT. People can regen on their own if they want, but I want to be able to have the place look a
+// certain way as I use my characters to build the world."
+//
+// ⚑ AEVI MEASURED WHY THIS IS NOW BUILDABLE WHEN IT WAS NOT IN AUGUST: SNG-402's half that shipped is the RIGHT
+// half — `appearance`, the WORDS, has 42 readers — and the lock half (`canonPortrait`/`canonSeed`/`canonLookAt`)
+// had ZERO readers and ZERO records. ⛑ And `world/canon/valley.json` now holds 15 promoted entities, 14 of them
+// ALREADY CARRYING AN `image`, with places sitting beside the people — so Erik's "people and places" is one
+// mechanism rather than two, and the shared look has somewhere to live.
+console.log("\n── §227 · the look the world agrees on ──");
+{
+  const ART227 = await import("../engine/art.js");
+  const A227 = rd("app.js");
+
+  /* ---- 1 · ⛑ THE PRECEDENCE ORDER, WHICH IS THE WHOLE RULING ---- */
+  // ⛔ IT INVERTS SNG-402 DELIBERATELY, AND SNG-402 SURVIVES INSIDE IT. That ruling said a player who has
+  // decided what the Thornmother looks like AT THEIR TABLE wins there — still rung 1. ⚠️ WHAT CHANGED IS THE
+  // FALLBACK BENEATH THEM: it used to be a generator, and now it is somebody's decision.
+  const canon227 = { image: "https://shared.png", _canon: { lookBy: "player-s9z9u1", lookAt: 74 } };
+  const authored227 = { image: "https://authored.png" };
+  check("§227: ⛑ a player's OWN locked look wins at their table — Erik's \"people can regen on their own\"",
+    ART227.lookFor("x", { mine: "https://mine.png", canon: canon227, authored: authored227 }).source === "yours");
+  check("§227: ⛔ …and beneath it is the WORLD'S look, which is what everyone else sees by default",
+    ART227.lookFor("x", { canon: canon227, authored: authored227 }).source === "canon");
+  check("§227: …then the authored look, and only then a generated one",
+    ART227.lookFor("x", { authored: authored227 }).source === "authored"
+    && ART227.lookFor("x", {}).source === "none");
+  // ⚠️ AND IT SAYS WHY. A look a player cannot account for is one they cannot argue with, and "why am I seeing
+  // this face" is the question this whole ticket exists to answer.
+  check("§227: ⚠️ …and every answer carries its reason, including the empty one",
+    ["yours", "canon", "authored", "none"].every(src => {
+      const r = src === "yours" ? ART227.lookFor("x", { mine: "m" })
+        : src === "canon" ? ART227.lookFor("x", { canon: canon227 })
+        : src === "authored" ? ART227.lookFor("x", { authored: authored227 }) : ART227.lookFor("x", {});
+      return typeof r.why === "string" && r.why.length > 10;
+    }));
+  // ⛑ AND THE SHARED LOOK NAMES ITS AUTHOR, because a world-scale look is a contribution like any other and
+  // "who made this world" should be able to say who decided what the Low Lamp looks like.
+  check("§227: ⛑ …and the world's look says whose decision it was, and when",
+    ART227.lookFor("x", { canon: canon227 }).by === "player-s9z9u1"
+    && ART227.lookFor("x", { canon: canon227 }).at === 74);
+
+  /* ---- 2 · ⛔ THE WORDS GO WITH THE URL, WHICH IS SNG-402'S FINDING ---- */
+  // "PINNING A URL FIXES ONE CARD. LOCKING THE WORDS FIXES EVERY FUTURE IMAGE" — the same person also appears
+  // in a battle image, a death image and scene art, each a SEPARATE generation, and the drift is BETWEEN
+  // pictures of the same subject. ⚠️ If only one half ships, ship the words.
+  const ent227 = { id: "the-low-lamp-inn", name: "The Low Lamp", _canon: { type: "location", weight: 6 } };
+  const promoted = ART227.canonLookRecord(ent227, { url: "u", appearance: "low beams, tallow light", by: "p", worldDay: 74 });
+  check("§227: ⛔ a promoted look carries the WORDS, not only the picture",
+    promoted.appearance === "low beams, tallow light" && promoted.image === "u");
+  // ⛑ AND THE DAY IS STAMPED. SNG-402 asked for this and it was never built: someone maimed, aged, or raised
+  // as an Afterling should not keep a look locked before it happened — so a stale look is FINDABLE.
+  check("§227: ⛑ …and the day it was decided, so a look that outlived its subject can be found",
+    promoted._canon.lookAt === 74 && promoted._canon.lookBy === "p");
+  // ⚠️ AND IT NEVER TOUCHES THE CONTEST. Two builders promoting different looks for the same inn is the
+  // weighted path the store already runs — "do not invent a second rule for images."
+  check("§227: ⚠️ …and the entity's weight and type are untouched, so the contest still owns it",
+    promoted._canon.weight === 6 && promoted._canon.type === "location");
+  check("§227: …and a promote with neither words nor picture writes nothing at all",
+    ART227.canonLookRecord(ent227, {}) === null);
+
+  /* ---- 3 · ⛑ ONE DOOR ONTO THE SHARED STORE, WHICH WAS RULED IN SNG-552 ---- */
+  // ⛔ A SECOND DOOR IS THE BUG: a post-hoc write cannot re-run the weighted contest, so the loser's weight is
+  // lost. The promote goes through `pushMergedFile` on the SAME path `syncSharedCanon` uses.
+  const WT227 = rd("engine/worldtick.js");
+  check("§227: ⛑ the promote rides the one safe door, contesting against the freshly-read remote",
+    /export async function pushCanonLook/.test(WT227)
+    && /await pushMergedFile\(CANON_PATH\(region\)/.test(WT227.slice(WT227.indexOf("export async function pushCanonLook"))));
+  // ⚠️ AND JOINING THE SHARED WORLD IS EARNED. A look is a property OF a shared entity, never a way to smuggle
+  // one in — promotion is `promoteInto`'s decision and this must not become a side road around it.
+  check("§227: ⚠️ …and a subject the world has never promoted is refused, and told why",
+    /that is not in the shared world yet/.test(WT227));
+
+  /* ---- 4 · ⛔ AND IT REACHES THE PLAYER ---- */
+  check("§227: ⛔ every figure surface asks the one resolver, so three cards cannot disagree about one face",
+    (A227.match(/lookOf\(canonSubjectOf\(artSeed\)/g) || []).length === 3,
+    `${(A227.match(/lookOf\(canonSubjectOf\(artSeed\)/g) || []).length} of 3 surfaces`);
+  // ⚠️ AN ART SEED IS NOT AN ENTITY ID — the three surfaces seed on `whois-…`, `companion-…` and a person seed,
+  // which are stable for DRAWING and none of them is what the shared store is keyed by.
+  check("§227: ⚠️ …and the surface prefix is stripped, or one canon look could never answer all three",
+    /function canonSubjectOf\(artSeed\)/.test(A227) && /replace\(\/\^\(whois-\|companion-\)\//.test(A227));
+  check("§227: ⛑ and the control is on the picture the player is looking at",
+    /data-lbcanon/.test(A227) && /☑ Canon look/.test(A227));
+  // ⛔ AND A BUTTON THAT CANNOT WORK IS NOT SHOWN. This file has shipped a silently-dead control twice.
+  check("§227: ⛔ …and only a kind that knows how to tell the world offers it",
+    /const canCanon = !!regenSubject\(it\.regen\)\?\.spec\?\.canon/.test(A227));
+  check("§227: ⚠️ …and a refusal is SAID, not a greyed button that reads as a bug",
+    /alert\(r\?\.why \|\| "That could not be made canon\."\)/.test(A227));
+
+  /* ---- 5 · ⛔ EVERY IMAGE TYPE THAT HAS A SUBJECT, WHICH IS ERIK'S SECOND RULING ---- */
+  // "I want the default canon look applied to ALL image types." ⛑ ASSERTED AS A CLASS over the kind table, not
+  // as a list I typed — so the next kind someone adds either carries a canon look or fails this.
+  // ⚠️ AND "ALL" MEANS "ALL THAT HAVE A SUBJECT". A moment, a battle and a death scene are one-off tiles with
+  // no durable subject (`needsId` absent) — there is nothing for a shared look to be ABOUT, and inventing an id
+  // so the button could appear would be the button doing nothing wearing a costume.
+  const table227 = A227.slice(A227.indexOf("const REGEN_KINDS = {"));
+  const kinds227 = [];
+  for (const m of table227.matchAll(/^  ([a-zA-Z]+): \{/gm)) {
+    const from = m.index + m[0].length;
+    const nextM = table227.slice(from).match(/^  [a-zA-Z]+: \{/m);
+    const body = table227.slice(from, nextM ? from + nextM.index : from + 4000);
+    kinds227.push({ kind: m[1], canon: /canon:/.test(body), subject: /needsId/.test(body) });
+    if (kinds227.length > 24) break;
+  }
+  check("§227: the kind table really was read — a zero-match here would pass every claim below vacuously",
+    kinds227.length >= 10, `${kinds227.length} kinds`);
+  const missing227 = kinds227.filter(k => k.subject && !k.canon).map(k => k.kind);
+  check("§227: ⛔ EVERY image type with a subject can be made canon",
+    missing227.length === 0, missing227.join(", ") || kinds227.filter(k => k.canon).map(k => k.kind).join(", "));
+  const wrong227 = kinds227.filter(k => !k.subject && k.canon).map(k => k.kind);
+  check("§227: ⚠️ …and the ones with no subject do NOT offer it, because there is nothing to be canon about",
+    wrong227.length === 0, wrong227.join(", ") || kinds227.filter(k => !k.subject).map(k => k.kind).join(", ") + " carry none");
+
+  /* ---- 6 · ⛔ AND A DEATH LOOK IS NOT HOW THEY LOOK ---- */
+  // ⚑ FOUND AUDITING MY OWN BUILD, an hour after writing it: `canonSubjectOf` stripped `whois-death-` to the
+  // same subject as `whois-`, so pressing Canon look on a figure's DEATH portrait would have made their corpse
+  // the face the whole family sees. ⚠️ SNG-399b already ruled this shape — `deathImagePrompt` rides as a
+  // SEPARATE field "so the card can show the life or the end without one overwriting the other's cached mint."
+  check("§227: ⛔ a death portrait resolves to NO shared subject, so it can never become anyone's canon look",
+    /if \(\/\^whois-death-\/\.test\(raw\)\) return null;/.test(A227));
+  check("§227: ⚠️ …and the control is not offered for one, rather than offered and refused",
+    /&& !!canonSubjectOf\(it\.regen\?\.subjectId\)/.test(A227));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

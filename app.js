@@ -44,7 +44,7 @@ import { LIBRARY_INDEX, loreToHtml, libMdToHtml, circleRows } from "./engine/lib
 import { contributionsBy } from "./engine/canon.js";   // ⛔ SNG-584: who made the shared world — tallied since SNG-128, read by nobody until now   // SNG-538 §4: the Library's index and renderers — pure, gated by §181
 import { sourcesHere } from "./engine/substrate.js";   // ⛔ Erik 2026-09-12: the four sources and how well each answers HERE
 import { groundForDecl, groundTag, substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor, peoplePresentAt } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
-import { sceneImage, itemImage, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
+import { sceneImage, itemImage, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor, lookFor} from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
 import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, regionExtent, bendRoad, roadNetwork, clipToFrame } from "./engine/worldglobe.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, milesFor, worldPosForGenerated, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
@@ -88,7 +88,7 @@ import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent
 import { activeArcEffects, craftCostNote, encounterBias, effectsInPlainWords, npcMoodLines, travelCostFactor } from "./engine/arceffects.js";   // SNG-273: an advanced arc is something you FEEL
 import { knownIndex, whoIs, figureArtRecord } from "./engine/whois.js";   // SNG-299: who is that, and where do I read more
 import { worldTabHtml } from "./engine/worldtab.js";   // SNG-276: the tab's markup, testable
-import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter, arcStageNow, worldRoster, NEWS_SECTIONS } from "./engine/worldtick.js";
+import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter, arcStageNow, worldRoster, NEWS_SECTIONS, pushCanonLook} from "./engine/worldtick.js";
 import { runWakeGeneration } from "./engine/wake.js"; // SNG-204 Phase 2: open wakes generate the next thread
 import { addAssignment, delegationRefusal, activeDelegates, MISSION_KINDS, MISSION_KIND_IDS, canSendOn, sayFamilies } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
 import { setArcFate } from "./engine/latentarcs.js"; // SNG-191 §7: the player closing a surfaced arc (the handled/resolved fate)
@@ -144,7 +144,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "1.9.538";
+const APP_VERSION = "1.9.542";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -416,7 +416,10 @@ function showWhoIs(known) {
       // ⛔ SNG-401 (Erik, testing): A PICTURE THE PLAYER CHOSE WINS. This card re-mints from a stable seed
       // every time it opens, so without this the chosen one would be drawn away again on the next open —
       // and surviving is the entire point of Keep.
-      const chosen = character?.figureImages?.[artSeed] || null;
+      // ⛔ SNG-576: a player's OWN locked look wins at their table; beneath it is the WORLD'S look, not a
+    // generator. `lookOf` owns the order so these three surfaces cannot disagree about one person again —
+    // which is SNG-402's finding exactly: "the drift is BETWEEN pictures of the same subject".
+    const chosen = lookOf(canonSubjectOf(artSeed), { mine: character?.figureImages?.[artSeed] || null }).url;
       // ⛔ CCODE-173: ONE RECORD, so the card and the Draw-again button describe the same person. This built
       // its own synthetic object while the re-roll used the roster figure — two records, two fields, two
       // people. `figureArtRecord` is now the only description either of them draws from.
@@ -1312,7 +1315,10 @@ function codexTopImage(open) {
     // CCODE-171: the same identity the popup resolves, so the page and the card are one person.
     // CCODE-171: ONE helper builds the seed, so the page cannot drift from the card by being written twice.
     const artSeed = personArtSeed(character, { entityId: open.entityId || open.id, topicId: open.id, label: open.label });
-    const chosen = character?.figureImages?.[artSeed] || null;
+    // ⛔ SNG-576: a player's OWN locked look wins at their table; beneath it is the WORLD'S look, not a
+    // generator. `lookOf` owns the order so these three surfaces cannot disagree about one person again —
+    // which is SNG-402's finding exactly: "the drift is BETWEEN pictures of the same subject".
+    const chosen = lookOf(canonSubjectOf(artSeed), { mine: character?.figureImages?.[artSeed] || null }).url;
     const fig = rosterFigureOf(artSeed);
     const isPlace = open.kind === "place";
     const url = chosen || ensureImage(
@@ -1339,6 +1345,39 @@ function rosterFigureOf(seed) {
   return (worldRoster(character?.worldState || {}, CONTENT) || []).find(f => f.id === id) || null;
 }
 
+/** ⛔ SNG-576 — THE SHARED WORLD'S OWN LOOK FOR A SUBJECT, from the slice this viewer already holds.
+ *  ⚠️ `sharedCanonView` is fetched once per tick and cached, so this costs nothing per render — and it is
+ *  empty before the first sync, which is exactly right: no canon look is the same answer as no sync. */
+function canonEntityOf(id) {
+  const want = String(id || "");
+  if (!want) return null;
+  for (const v of sharedCanonView || []) {
+    const rec = v?.record;
+    if (rec && (rec.id === want || rec._canon?.entityId === want)) return rec;
+  }
+  return null;
+}
+
+/** ⚠️ AN ART SEED IS NOT AN ENTITY ID. The three figure surfaces seed their pictures on `whois-<key>`,
+ *  `companion-<id>` and a person seed — stable for DRAWING, and none of them is what the shared store is keyed
+ *  by. Stripping the surface prefix is what lets one canon look answer all three. */
+function canonSubjectOf(artSeed) {
+  const raw = String(artSeed || "");
+  // ⛔ A DEATH LOOK IS NOT HOW THEY LOOK. Found auditing my own build: this stripped `whois-death-` to the
+  // same subject as `whois-`, so pressing Canon look on a figure's DEATH portrait would have made their corpse
+  // the face the whole family sees. ⚠️ SNG-399b already ruled this shape — `deathImagePrompt` rides as a
+  // SEPARATE field "so the card can show the life or the end without one overwriting the other's cached mint."
+  if (/^whois-death-/.test(raw)) return null;
+  return raw.replace(/^(whois-|companion-)/, "");
+}
+
+/** ⛑ AND THE ONE PLACE A LOOK IS DECIDED. Every surface asks this, so the precedence order lives in
+ *  `engine/art.js` ONCE rather than being re-argued at each call site — which is how the whois card, the codex
+ *  card and the companion panel came to disagree about the same person. */
+function lookOf(id, { mine = null, authored = null } = {}) {
+  return lookFor(id, { mine, canon: canonEntityOf(id), authored });
+}
+
 const REGEN_KINDS = {
   npc: {
     needsId: true,
@@ -1346,6 +1385,15 @@ const REGEN_KINDS = {
     find: id => character?.npcRegistry?.[id] || null,
     current: id => character?.npcRegistry?.[id]?.image || null,
     keep: (id, url, seedKey) => { const n = character.npcRegistry?.[id]; return n ? acceptImage(n, { url, seedKey }) : false; },
+    // ⛔ SNG-576 O1/O2 — "☑ Canon look": the same accept, and THEN the world hears about it. ⛑ THE WORDS GO
+    // WITH THE URL, because SNG-402's finding is that pinning a URL fixes ONE CARD while locking the WORDS
+    // fixes every future image — the battle image, the death image and the scene art are separate generations.
+    canon: (id, url, seedKey) => {
+      const n = character.npcRegistry?.[id];
+      if (n) acceptImage(n, { url, seedKey });
+      return pushCanonLook({ entityId: canonSubjectOf(id), url, appearance: n?.appearance || null,
+        by: character.playerKey || getPlayerKey(), worldDay: absoluteWorldDay() });
+    },
     promptOpts: rec => ({ character, aesthetic: npcAesthetic(rec) })
   },
   character: {
@@ -1353,7 +1401,14 @@ const REGEN_KINDS = {
     label: () => character?.name || "your portrait",
     find: () => character || null,
     current: () => character?.portrait || null,
-    keep: (id, url, seedKey) => { const ok = acceptImage(character, { url, seedKey }, { field: "portrait" }); if (ok) character.portraitPinned = true; return ok; }
+    keep: (id, url, seedKey) => { const ok = acceptImage(character, { url, seedKey }, { field: "portrait" }); if (ok) character.portraitPinned = true; return ok; },
+    // ⛔ SNG-576 (Erik: "applied to all image types") — YOUR OWN CHARACTER TOO. In a shared family world the
+    // others see Silas; his face is as much world content as the Low Lamp's.
+    canon: (id, url, seedKey) => {
+      acceptImage(character, { url, seedKey }, { field: "portrait" });
+      return pushCanonLook({ entityId: canonSubjectOf(character.id), url, appearance: character.bio?.appearance || null,
+        by: character.playerKey || getPlayerKey(), worldDay: absoluteWorldDay() });
+    },
   },
   // ⛔ THE NINTH SURFACE. Erik: "the popups that read the codex entry don't have an image popup at all."
   // He is right, and it is the one that most needed it — a world FIGURE is someone you only ever meet in a
@@ -1372,6 +1427,14 @@ const REGEN_KINDS = {
       || character?.npcRegistry?.[String(id).replace(/^whois-(?:death-)?/, "")] || null,
     current: id => character?.figureImages?.[id] || null,
     keep: (id, url) => { character.figureImages = character.figureImages || {}; character.figureImages[id] = url; return true; },
+    // ⛔ SNG-576: a world FIGURE is the clearest case Erik's ask covers — someone you only ever meet in a tick
+    // digest, whose face the whole family sees or does not.
+    canon: (id, url, seedKey) => {
+      character.figureImages = character.figureImages || {}; character.figureImages[id] = url;
+      const fig = rosterFigureOf(id);
+      return pushCanonLook({ entityId: canonSubjectOf(id), url, appearance: fig?.appearance || fig?.imagePrompt || null,
+      by: character.playerKey || getPlayerKey(), worldDay: absoluteWorldDay() });
+    },
     promptOpts: rec => ({ aesthetic: npcAesthetic(rec) })
   },
   // ⛔ ERIK — the celebration image must be REGENERABLE, which means the lightbox has to find the record
@@ -1384,21 +1447,42 @@ const REGEN_KINDS = {
     label: id => holdingOf(id)?.name || "this place",
     find: id => holdingOf(id),
     current: id => holdingOf(id)?.image || null,
-    keep: (id, url, seedKey) => { const h = holdingOf(id); return h ? acceptImage(h, { url, seedKey }) : false; }
+    keep: (id, url, seedKey) => { const h = holdingOf(id); return h ? acceptImage(h, { url, seedKey }) : false; },
+    // ⛑ A HOLD IS A PLACE, and "people and places" is one mechanism rather than two — the shared store already
+    // holds `the-low-lamp-inn` beside the people in it.
+    canon: (id, url, seedKey) => {
+      const h = holdingOf(id); if (h) acceptImage(h, { url, seedKey });
+      return pushCanonLook({ entityId: canonSubjectOf(id), url, appearance: h?.appearance || null,
+      by: character.playerKey || getPlayerKey(), worldDay: absoluteWorldDay() });
+    }
   },
   location: {
     needsId: true,
     label: id => CONTENT.locations?.[id]?.name || "this place",
     find: id => CONTENT.locations?.[id] || null,
     current: id => character?.locationImages?.[id] || null,
-    keep: (id, url) => { character.locationImages = character.locationImages || {}; character.locationImages[id] = url; return true; }
+    keep: (id, url) => { character.locationImages = character.locationImages || {}; character.locationImages[id] = url; return true; },
+    // ⛔ AND THIS IS THE ONE ERIK NAMED FIRST: "I want to be able to have THE PLACE look a certain way as I use
+    // my characters to build the world."
+    canon: (id, url) => {
+      character.locationImages = character.locationImages || {}; character.locationImages[id] = url;
+      const loc = CONTENT.locations?.[id] || character.generated?.location?.[id] || null;
+      return pushCanonLook({ entityId: canonSubjectOf(id), url, appearance: loc?.appearance || null,
+      by: character.playerKey || getPlayerKey(), worldDay: absoluteWorldDay() });
+    }
   },
   item: {
     needsId: true,
     label: id => findItem(character, id)?.name || "this item",
     find: id => findItem(character, id) || null,
     current: id => findItem(character, id)?.image || null,
-    keep: (id, url) => { const it = findItem(character, id); if (!it) return false; it.image = url; it.imageDirty = false; return true; }
+    keep: (id, url) => { const it = findItem(character, id); if (!it) return false; it.image = url; it.imageDirty = false; return true; },
+    // ⛑ AN ITEM IS A SUBJECT — a spear the fiction named Memory should look like Memory wherever it appears.
+    canon: (id, url) => {
+      const it = findItem(character, id); if (it) { it.image = url; it.imageDirty = false; }
+      return pushCanonLook({ entityId: canonSubjectOf(id), url, appearance: it?.appearance || null,
+        by: character.playerKey || getPlayerKey(), worldDay: absoluteWorldDay() });
+    }
   },
   ability: {
     needsId: true,
@@ -1410,7 +1494,18 @@ const REGEN_KINDS = {
     // all, so a RE-ROLL dropped it — losing both the "rendered in the aesthetic of…" clause and the style
     // wrapper, and falling back to the house palette. A Radiant craft was being drawn in muted earth tones.
     promptOpts: rec => ({ aesthetic: rec ? aestheticFor({ tradition: abilityTradition(rec), powerSystem: rec.powerSystem }, CONTENT.visualAesthetics) : null }),   // SNG-435 §C3
-    keep: (id, url) => { character.abilityImages = character.abilityImages || {}; character.abilityImages[id] = url; return true; }
+    keep: (id, url) => { character.abilityImages = character.abilityImages || {}; character.abilityImages[id] = url; return true; },
+    // ⛔ SNG-576 (Erik: "applied to all image types") — A CRAFT'S ART IS WORLD CONTENT. Everyone at the table
+    // casts the same Ashen Meridian; there is no reason it should look different in each of their games.
+    canon: (id, url) => {
+      character.abilityImages = character.abilityImages || {}; character.abilityImages[id] = url;
+      // ⚠️ NO WORDS FOR A CRAFT, AND I CHECKED RATHER THAN ASSUMED: §182 caught me reading `appearance` off an
+      // ability, and ZERO of 440 carry it — I had invented the field. ⛔ So the URL is promoted and the words are
+      // not, which is SNG-402's "if only one half ships, ship the words" failing honestly: for a craft there is
+      // no look-words field to ship yet, and that is content work rather than something to fake here.
+      return pushCanonLook({ entityId: canonSubjectOf(id), url, appearance: null,
+        by: character.playerKey || getPlayerKey(), worldDay: absoluteWorldDay() });
+    }
   },
   // No record behind these — the gallery tile IS the record, so keeping one is keeping the tile.
   // ⛔ CCODE-186: …and it needs somewhere for "the one to show" to LIVE, or ★ Set as default is a button
@@ -1429,7 +1524,16 @@ const REGEN_KINDS = {
     label: id => bestiaryOf(id)?.name || "this creature",
     find: id => bestiaryOf(id),
     current: id => character?.beastImages?.[id] || null,
-    keep: (id, url) => { character.beastImages = character.beastImages || {}; character.beastImages[id] = url; return true; }
+    keep: (id, url) => { character.beastImages = character.beastImages || {}; character.beastImages[id] = url; return true; },
+    // ⛑ AND A CREATURE MOST OF ALL — `SHARE_ON_SIGHT_TYPES` already holds "creature" for exactly this reason:
+    // "a CREATURE is a fact about the country, not a relationship — if a thing like that is out there, it is
+    // out there for everyone." A shared fact should have a shared face.
+    canon: (id, url) => {
+      character.beastImages = character.beastImages || {}; character.beastImages[id] = url;
+      // ⚠️ SAME MEASUREMENT, SAME ANSWER: 0 of 8 bestiary records carry a look-words field either.
+      return pushCanonLook({ entityId: canonSubjectOf(id), url, appearance: null,
+        by: character.playerKey || getPlayerKey(), worldDay: absoluteWorldDay() });
+    }
   },
   // SNG-400b × SNG-401: a battle is prompt-only ON PURPOSE. Its prompt was BUILT once, deterministically,
   // so re-assembling it would return the same words — the re-roll varies the seed against the stored
@@ -1793,6 +1897,11 @@ function openLightbox(items, start = 0, { onClose = null } = {}) {
     // likeness key is null — so the button would report "kept" and record nothing. Keeping a look is a
     // statement about a SUBJECT; a one-off moment has none, and offering it there is a lie that looks
     // like a feature.
+    // ⛔ SNG-576: only a kind that KNOWS how to tell the world offers the control — never a button that
+    // silently does nothing, which is the shape this file has shipped twice and been caught on both times.
+    // ⚠️ AND A SUBJECT THAT CANNOT CARRY A SHARED LOOK DOES NOT OFFER ONE — a death portrait resolves to null
+    // above, and a button that would do the wrong thing is worse than no button.
+    const canCanon = !!regenSubject(it.regen)?.spec?.canon && !!canonSubjectOf(it.regen?.subjectId);
     const canKeep = !!it.regen?.subjectId && !!spec?.keep;
     // CCODE-184: which picture REPRESENTS this subject — the one the stack shows and the game uses.
     const canSetDefault = !!it.regen?.subjectId && !!spec?.keep && !isCurrent;
@@ -1867,6 +1976,7 @@ function openLightbox(items, start = 0, { onClose = null } = {}) {
       ${canRebuild ? `<button class="lightbox-rebuild" data-lbrebuild title="Describe ${esc(it.regen.label || "this")} differently — for when the picture is not merely unlucky but wrong (wrong place, wrong look, the wrong thing happening)">✎ Describe differently</button>` : ""}
       ${canDiscard ? `<button class="lightbox-discard" data-lbdiscard title="${isDraw172 ? "Throw this draw away — it was never saved" : "Delete this picture from your gallery, and stop it guiding what they look like"}">✕ Discard</button>` : ""}
       ${canSetDefault ? `<button class="lightbox-default" data-lbdefault title="Make this the picture shown for ${esc(it.regen.label || "this")} everywhere — the others stay in the stack">★ Set as default</button>` : ""}
+      ${canCanon ? `<button class="lightbox-keep" data-lbcanon title="Make this how ${esc(it.regen.label || "this")} looks for EVERYONE by default — anyone can still draw their own; theirs wins at their table.">☑ Canon look</button>` : ""}
       ${canKeep ? `<button class="lightbox-keep${isKept ? " kept" : ""}" data-lbkeep title="${isKept ? "Stop using this one as a guide to what they look like" : `Keep this look for ${esc(it.regen.label || "them")} — future pictures of them will be drawn toward it. Keep as many as you like; what they agree on counts most.`}">${isKept ? "★ kept — remove" : "☆ Keep this look"}</button>` : ""}
       </div>
     </div>`;
@@ -1956,6 +2066,23 @@ It leaves your gallery, and stops guiding what ${it.regen?.label || "they"} look
       if (!ok) { defBtn.textContent = "✕ couldn't set"; return; }
       saveCharacter(character);
       render();
+    };
+    // ⛔ SNG-576 — AND THE WORLD HEARS ABOUT IT. ⚠️ Its own failures are SAID: a subject the shared store has
+    // never promoted cannot carry a world look (joining is EARNED), and sync being off is a different sentence
+    // from a refusal. An unexplained greyed button is indistinguishable from a bug.
+    const canonBtn = el.querySelector("[data-lbcanon]");
+    if (canonBtn) canonBtn.onclick = async (ev) => {
+      ev.stopPropagation();
+      const sub = regenSubject(it.regen);
+      if (!sub?.spec?.canon) return;
+      canonBtn.disabled = true;
+      canonBtn.textContent = "☑ telling the world…";
+      let r = null;
+      try { r = await sub.spec.canon(it.regen.subjectId, shownUrl(it.url), it.seedKey); }
+      catch (err) { r = { ok: false, why: err?.message || "that did not reach the world" }; }
+      saveCharacter(character);
+      if (r?.ok) { canonBtn.textContent = "☑ canon"; }
+      else { canonBtn.disabled = false; canonBtn.textContent = "☑ Canon look"; alert(r?.why || "That could not be made canon."); }
     };
     const keepBtn = el.querySelector("[data-lbkeep]");
     if (keepBtn) keepBtn.onclick = (ev) => {
@@ -6643,7 +6770,10 @@ function showCompanionPanel(companionId) {
     // `data-lightbox` — the identical gap Erik reported on the codex card, still open one panel over, and
     // found by counting <img> tags rather than by waiting for him to hit it.
     const artSeed = `companion-${c.id}`;
-    const chosen = character?.figureImages?.[artSeed] || null;
+    // ⛔ SNG-576: a player's OWN locked look wins at their table; beneath it is the WORLD'S look, not a
+    // generator. `lookOf` owns the order so these three surfaces cannot disagree about one person again —
+    // which is SNG-402's finding exactly: "the drift is BETWEEN pictures of the same subject".
+    const chosen = lookOf(canonSubjectOf(artSeed), { mine: character?.figureImages?.[artSeed] || null }).url;
     const url = chosen || ensureImage({ id: artSeed, name: dn, role: c.role, appearance: c.appearance, look: c.appearance },
       "npc", { ratingLevel: viewerRatingLevel(), seedKey: artSeed, isMinor: false, promptOpts: { keeps: keepsForSubject("figure", artSeed) } });
     if (url) portrait = `<img class="comp-portrait" src="${esc(url)}" alt="${esc(dn)}" data-lightbox="figure" data-regen-kind="figure" data-regen-subject="${esc(artSeed)}" loading="lazy" title="Open it — draw again, or keep this look" style="width:100%; max-height:220px; object-fit:cover; border-radius:6px; margin-bottom:8px; cursor:zoom-in">`;

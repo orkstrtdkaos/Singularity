@@ -942,6 +942,73 @@ export function isGeneratedImage(url) {
  *  relationship deepened — the exact complaint this feature exists to answer. `character.portraitPinned`
  *  already establishes the rule for the player's own portrait; this is the same rule for everyone else.
  *  Returns true when it took. */
+/** ⛔ SNG-576 (Erik) — "I want the ability to set an image for people and places and have it be THE ONE
+ *  EVERYONE SEES BY DEFAULT. People can regen on their own if they want, but I want to be able to have the
+ *  place look a certain way as I use my characters to build the world."
+ *
+ *  ⛑ THE PRECEDENCE ORDER, AND IT INVERTS SNG-402 DELIBERATELY — which is why it is written here once rather
+ *  than decided at each of the call sites that need it:
+ *
+ *      1. a player's OWN locked look   → what THEY see
+ *      2. the SHARED canon look        → what everyone else sees by default
+ *      3. the authored `appearance`    → the fallback
+ *      4. a generated look             → when there is none of the above
+ *
+ *  ⚠️ SNG-402'S RULING SURVIVES INSIDE THIS ONE. It said a player who has decided what the Thornmother looks
+ *  like at their table wins AT THEIR TABLE, and that is still rung 1. ⛔ WHAT CHANGED IS THE FALLBACK BENEATH
+ *  THEM: it used to be a generator, and now it is somebody's decision. Erik's world-building look is the
+ *  default and never a cage — "people can regen on their own if they want" is rung 1 doing its job.
+ *
+ *  ⚑ AND THE SHARED LOOK HAS SOMEWHERE TO LIVE NOW, which is why this is a different ticket from August:
+ *  `world/canon/valley.json` holds 15 promoted entities and 14 of them ALREADY CARRY AN `image` — people and
+ *  places side by side, so Erik's "people and places" is one mechanism rather than two.
+ *
+ *  ⚠️ RETURNS THE REASON, NOT ONLY THE URL. A look a player cannot account for is one they cannot argue with,
+ *  and "why am I seeing this face" is the question this whole ticket exists to answer. PURE. */
+export function lookFor(subjectId, { mine = null, canon = null, authored = null } = {}) {
+  const url = (v) => (typeof v === "string" && v.trim() ? v.trim() : null);
+  const own = url(mine);
+  if (own) return { url: own, source: "yours", why: "you decided what this looks like" };
+  // ⛔ THE SHARED STORE'S OWN RECORD, through the entity the canon store already holds — never a second field
+  // invented beside it. `_canon.lookBy` says WHOSE decision it was, because a world-scale look is a
+  // contribution like any other and "who made this world" should be able to name it.
+  const shared = url(canon?.image);
+  if (shared) {
+    return { url: shared, source: "canon", by: canon?._canon?.lookBy || canon?._canon?.contributedBy?.playerKey || null,
+      at: canon?._canon?.lookAt || null,
+      why: "this is how the world has settled on it looking" };
+  }
+  const said = url(authored?.image);
+  if (said) return { url: said, source: "authored", why: "this is the look it was written with" };
+  return { url: null, source: "none", why: "nobody has decided yet — a picture will be made" };
+}
+
+/** ⛔ SNG-576 O2 — PROMOTE A LOOK TO THE SHARED STORE. Pure: it returns the ENTITY as it should be written,
+ *  and the caller pushes it through `syncSharedCanon`/`pushMergedFile`.
+ *
+ *  ⚠️ THAT SPLIT IS THE SNG-552 §2 RULING BEING HONOURED RATHER THAN RE-ARGUED: a second door onto the canon
+ *  store IS the bug, because a post-hoc write cannot re-run the weighted contest and the loser's weight is
+ *  lost. This module does not know how to reach the network and must not learn.
+ *
+ *  ⛑ AND IT STAMPS THE DAY. SNG-402 asked for this and it was never built: a person who is maimed, ages, or
+ *  is raised as an Afterling should not keep a look locked before it happened — so a stale look is FINDABLE
+ *  rather than permanent. */
+export function canonLookRecord(entity, { url = null, appearance = null, by = null, worldDay = null } = {}) {
+  if (!entity || typeof entity !== "object") return null;
+  const u = typeof url === "string" && url.trim() ? url.trim() : null;
+  const words = typeof appearance === "string" && appearance.trim() ? appearance.trim() : null;
+  if (!u && !words) return null;
+  const out = { ...entity, _canon: { ...(entity._canon || {}) } };
+  // ⛔ THE WORDS FIRST, AND THAT IS THE WHOLE OF SNG-402'S FINDING: "PINNING A URL FIXES ONE CARD. LOCKING THE
+  // WORDS FIXES EVERY FUTURE IMAGE" — the same person also appears in a battle image, a death image and scene
+  // art, each a separate generation, and the drift is BETWEEN pictures of the same subject.
+  if (words) out.appearance = words;
+  if (u) out.image = u;
+  out._canon.lookBy = by || out._canon.lookBy || null;
+  out._canon.lookAt = Number.isFinite(Number(worldDay)) ? Number(worldDay) : (out._canon.lookAt ?? null);
+  return out;
+}
+
 export function acceptImage(record, chosen = {}, { field = "image", pin = true } = {}) {
   if (!record || !chosen.url) return false;
   record[field] = chosen.url;

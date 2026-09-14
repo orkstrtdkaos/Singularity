@@ -23,7 +23,7 @@ import { standingWithPeople } from "../engine/reputation.js";
 import { seedStandingAtCreation, accrueStandingForDays, companyStandingRates, applyStandingOps, standingFor, standingRoster, dripScale, DRIP, CREATION_SEEDS } from "../engine/standing.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, resolveTopic, namesMatch, mergeCodexTopics, mergeInto, suggestMerges, markNotSame } from "../engine/codex.js";
 import { reconcile, reconcileContent, CHARACTER_STEPS, CONTENT_STEPS, topReconcileVersion } from "../engine/reconcile.js";
-import { sceneImage } from "../engine/art.js";
+import { sceneImage, lookFor as lookFor163} from "../engine/art.js";
 import { resolveSaveConflict, raceTimeout } from "../engine/sync.js";
 import { namesMatch as nm2, smartClamp } from "../engine/namematch.js";
 import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf, deriveDangerLevel, bestiaryEncounters, eligibleEncountersFor, narrativeTimeChance, rollNarrativeTime, classifyNarrativeKind, resolvePacing, beatHours } from "../engine/random_encounters.js";
@@ -16434,7 +16434,7 @@ await (async () => {
   // the companion's panel re-mints on every open, so a kept look has to outrank the mint there too
   const compBlock = appSrc169.slice(appSrc169.indexOf("const artSeed = `companion-"), appSrc169.indexOf("const artSeed = `companion-") + 700);
   check("CCODE-169: a companion's kept look survives the re-mint, like every other person's",
-    /const chosen = character\?\.figureImages/.test(compBlock) && /const url = chosen \|\| ensureImage/.test(compBlock));
+    /mine: character\?\.figureImages\?\.\[artSeed\]/.test(compBlock) && /const url = chosen \|\| ensureImage/.test(compBlock));
 }
 
 // ---- CCODE-168: an item in a kind nobody listed is counted and never shown ----
@@ -16672,7 +16672,8 @@ await (async () => {
     /personArtSeed\(character, \{ entityId: open\.entityId \|\| open\.id, topicId: open\.id, label: open\.label \}\)/.test(codexFn));
   check("CCODE-165: it opens into the lightbox with the same controls", /class="codex-top-art"[^`]*data-lightbox="figure"[^`]*data-regen-kind="figure"/.test(src165));
   check("CCODE-165: only entries that HAVE a subject get a face (an event or a mystery is not a person)", /CODEX_PICTURABLE = new Set\(\["person", "place"\]\)/.test(src165));
-  check("CCODE-165: a kept look wins on the codex page too", /const chosen = character\?\.figureImages\?\.\[artSeed\] \|\| null;/.test(codexFn) && /const url = chosen \|\|/.test(codexFn));
+  check("CCODE-165: a kept look wins on the codex page too",
+    /lookOf\(canonSubjectOf\(artSeed\), \{ mine: character\?\.figureImages\?\.\[artSeed\] \|\| null \}\)\.url/.test(codexFn) && /const url = chosen \|\|/.test(codexFn));
   check("CCODE-164: the votes reach the paths that draw people (bond portraits and figure cards)", (src165.match(/keeps: keepsForSubject\(/g) || []).length >= 2);
   if (was164) localStorage.setItem("singularity.artMode", was164);
 }
@@ -16701,9 +16702,20 @@ await (async () => {
       && /current: id => character\?\.figureImages/.test(blk) && /keep: \(id, url\) =>/.test(blk);
   })());
   check("CCODE-163: a figure's seed maps back to the person, alive or dead", /replace\(\/\^whois-\(\?:death-\)\?\/, ""\)/.test(src163));
+  // ⛑ AND PROVEN THROUGH THE RESOLVER ITSELF, not only spelled at the call sites: the order is a property of
+  // `lookFor`, so it is asserted where it lives.
+  check("CCODE-163: ⛑ …and the player's own look outranks the world's and the mint, in the resolver itself",
+    lookFor163("x", { mine: "m", canon: { image: "c" }, authored: { image: "a" } }).source === "yours"
+    && lookFor163("x", { canon: { image: "c" }, authored: { image: "a" } }).source === "canon"
+    && lookFor163("x", {}).url === null);
   // ⛔ the card re-mints from a stable seed on every open, so a chosen picture MUST outrank the mint
+  // ⚠️ THE CLAIM IS THE PRECEDENCE, NOT THE LINE. This pinned `const chosen = character?.figureImages?.[artSeed]
+  // || null;` — the exact literal SNG-576 lifted into one resolver so three surfaces could stop disagreeing
+  // about the same face. ⛔ The claim held throughout: a player's OWN kept look is still rung 1, above the
+  // world's and above the mint. Sixth, seventh and eighth gate this week to pin one instance of a general rule.
   check("CCODE-163: a picture the player chose beats the re-mint (else Keep is undone on the next open)",
-    /const chosen = character\?\.figureImages\?\.\[artSeed\] \|\| null;/.test(src163) && /const url = chosen \|\| ensureImage\(/.test(src163));
+    /lookOf\(canonSubjectOf\(artSeed\), \{ mine: character\?\.figureImages\?\.\[artSeed\] \|\| null \}\)\.url/.test(src163)
+    && /const url = chosen \|\| ensureImage\(/.test(src163));
 
   // (1) SELECT AN EXISTING PICTURE AS THE ONE — Keep was reachable only from a fresh draw
   // ⚠️ SUPERSEDED BY CCODE-164 AND THE CHANGE IS THE POINT. When Keep meant "make this the portrait", it

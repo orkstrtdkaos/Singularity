@@ -4232,8 +4232,8 @@
   "actionCount": 16,
   "grantsVersion": 1,
   "reconcileVersion": 62,
-  "updatedAt": 1789408359196,
-  "rev": 200,
+  "updatedAt": 1789408418313,
+  "rev": 201,
   "activeEncounter": null,
   "customEncounters": {
     "re-enc_the_sealed_door": {
@@ -4568,6 +4568,16 @@
     "item": {}
   },
   "gallery": [
+    {
+      "kind": "figure",
+      "prompt": "",
+      "url": "https://image.pollinations.ai/prompt/Lira's%20Healing%20Craft%2C%20character%20portrait%2C%20named%20Lira's%20Healing%20Craft%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=83889&nologo=true",
+      "caption": "Lira's Healing Craft",
+      "worldDay": 76,
+      "at": "2026-09-14T17:53:38.313Z",
+      "subjectKind": "figure",
+      "subjectId": "whois-lira"
+    },
     {
       "kind": "moment",
       "prompt": "Two bodies tangled in starlight on moss, breath mingling, the birch branches overhead stark and bare, the stream's silver thread catching what little light falls through. Heat and tenderness and the p",
@@ -4922,6 +4932,17 @@
           "note": null,
           "seedKey": null,
           "at": 68
+        }
+      ]
+    },
+    "figure:whois-lira": {
+      "keeps": [
+        {
+          "url": "https://image.pollinations.ai/prompt/Lira's%20Healing%20Craft%2C%20character%20portrait%2C%20named%20Lira's%20Healing%20Craft%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=83889&nologo=true",
+          "prompt": "Blonde stunning beauty radiant harmonic sexy",
+          "note": "Blonde stunning beauty radiant harmonic sexy",
+          "seedKey": null,
+          "at": 76
         }
       ]
     }

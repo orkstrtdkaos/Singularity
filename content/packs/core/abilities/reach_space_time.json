@@ -2070,111 +2070,6 @@
   },
   {
    "schemaVersion": 1,
-   "id": "held_hour",
-   "name": "Held Hour",
-   "levelReq": 4,
-   "tier": 4,
-   "energyCost": 12,
-   "powerSystem": "precursor",
-   "tradition": "hourkeeper",
-   "attribute": "mental",
-   "axes": {
-    "space_time": 0.6
-   },
-   "functions": [
-    "bind",
-    "sustain"
-   ],
-   "narrationHints": "You take the hour and HOLD it — not stopping time, but holding one hour of it open, refusing to let it pass until what needs doing in it is done.",
-   "description": "Hold a single hour open past its passing, keeping time for what must be finished in it. The Hourkeeper art of the held hour — not stopping time, refusing to let one hour of it go.",
-   "notFor": "It holds time, it does not reverse it — a held hour ends and cannot be held twice over the same ground. And holding an hour costs you the holding of it; you do not rest inside kept time, you carry it.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Held Hour",
-     "grants": "Hold a single hour open past its passing, keeping time for what must be finished.",
-     "cannot": "It cannot rewind, only delay the passing; the same hour cannot be re-held; and the one holding time does not get to rest in it.",
-     "functions": [
-      "bind",
-      "sustain"
-     ],
-     "gains": "broaden",
-     "harmRung": "none",
-     "_nameWas": "The Held Hour",
-     "gainAxes": []
-    },
-    {
-     "rank": 2,
-     "name": "Kept Hours",
-     "grants": "Hold more than a single hour — a night's work finished inside a kept evening, a siege's preparation inside one afternoon. And those working within it now benefit fully: what they finish in kept time is genuinely finished.",
-     "cannot": "The holder still does not rest, and holding several hours ages the holder for real. The same ground cannot be re-held. And an hour kept too long is noticed — the Hourkeepers hold that time collects its debts, and the GM decides when.",
-     "functions": [
-      "bind",
-      "sustain"
-     ],
-     "gains": "deepen",
-     "harmRung": "none",
-     "_nameWas": "The Kept Hours",
-     "gainAxes": [
-      "duration",
-      "quality"
-     ]
-    }
-   ],
-   "gated": "learned",
-   "nativeOrCombination": "native",
-   "challengeTypes": [
-    "DEFEND"
-   ],
-   "harmRung": "none",
-   "shape": "construct",
-   "operativeAxis": [
-    "duration",
-    "scope"
-   ],
-   "mechanic": {
-    "magnitude": 7,
-    "duration": 1,
-    "scope": 2
-   },
-   "rankDeltas": [
-    {
-     "rank": 2,
-     "kind": "extend",
-     "axis": "scope",
-     "delta": "hold MORE THAN A SINGLE HOUR — a night's work finished inside a kept evening, a siege's preparation inside one afternoon",
-     "from": "r2 grants"
-    }
-   ],
-   "intensity": {
-    "conserve": "hold part of it — half the kept time, and the cost is light",
-    "surge": "double it; THE HOLDER STILL DOES NOT REST, and holding several hours ages you through all of them"
-   },
-   "bounds": [
-    {
-     "text": "IT CANNOT REWIND, ONLY DELAY THE PASSING",
-     "class": "hard"
-    },
-    {
-     "text": "THE SAME HOUR CANNOT BE HELD TWICE",
-     "class": "hard"
-    },
-    {
-     "text": "THE HOLDER STILL DOES NOT REST — holding several hours ages you through all of them",
-     "class": "cost"
-    }
-   ],
-   "plainly": "A defend action that refuses to let ONE hour finish — not stopping time, holding a single one open for what must be done in it. Its strength is rated 7 out of 10 across a scope of 2, and lasts for about an hour Ranks: rank 2 extends scope. Limit: iT Cannot Rewind, Only Delay The Passing.",
-   "_descriptionWas": "The Hourkeeper art of the held hour — keeping a single hour open past its natural passing, a pocket of kept time in which the necessary can be finished. The timekeepers' patient gift.",
-   "_nameWas": "The Held Hour",
-   "_idWas": "the_held_hour",
-   "_powerSystemWas": "reach_space_time",
-   "_powerSystemFix": "⛔ SNG-524. Was `reach_space_time` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
-   "_plainlyWas": "A defend action that makes or animates something. Its strength is rated 7 out of 10 across a scope of 2, and lasts for about an hour Ranks: rank 2 extends scope. Limit: iT Cannot Rewind, Only Delay The Passing.",
-   "_glossFix_20260908": "⛔ TIER 1 OF `SPEC_tradition_narrative_npc_pass` — A WRONG GLOSS IS A CORRECTNESS BUG, NOT POLISH. ⚠️ MEASURED 2026-09-08: 42 crafts carry a stock gloss and TWELVE named a verb family the craft does not have — and ALL TWELVE SAID THE SAME SENTENCE, 'makes or animates something'. ⛑ ONE STALE DEFAULT, not twelve errors: a concealment craft, a bargain, a truce and an hour held open were all being described to the GM as though they built something. ⚑ THE DESCRIPTION WAS RIGHT IN EVERY CASE. The gloss is the only thing that was wrong, and the fix is to say what the GM NARRATES CHANGING — T7: 'a dice roll is not an answer.' ⬜ The spec's estimate was ~48; the real number is 12, because the corpus has been repaired since 08-31. ⚠️ MEASURE BEFORE AUTHORING — an eight-day-old count is a claim about eight days ago."
-  },
-  {
-   "schemaVersion": 1,
    "id": "stepped_span",
    "name": "Stepped Span",
    "levelReq": 4,
@@ -3407,6 +3302,249 @@
    "_powerSystemWas": "reach_space_time",
    "_powerSystemFix": "⛔ SNG-524. Was `reach_space_time` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `hourkeeper` — 'Archives that RUN FORWARD.' Only one thing in this world does that.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_theHabit": "⚠️ Article stripped from craft AND rank — `craft_lint` check 10."
+  },
+  {
+   "schemaVersion": 1,
+   "id": "timeout",
+   "name": "Timeout",
+   "levelReq": 4,
+   "tier": 4,
+   "energyCost": 12,
+   "attribute": "practical",
+   "subAttribute": "wits",
+   "_subAttributeReviewed": true,
+   "_subAttributeWhy": "⛔ AUTHORED TO OVERRIDE THE DERIVATION. `bind` is not in `craftSubAttributes.finesseVerbs.practical`, so the derivation routes this to the POWER sub, `craft` — and craft is making and precise tool work, which is not what a stopped second asks of you. ⚠️ THE ROLL IS NOT 'DO YOU UNDERSTAND THE HOUR', IT IS 'WHAT DO YOU DO WITH THE BEAT YOU JUST BOUGHT'. A spike set in front of a charge is improvisation under pressure, which is `wits` exactly.",
+   "axes": {
+    "space_time": 0.5,
+    "chaos_order": 0.15
+   },
+   "functions": [
+    "bind",
+    "sustain",
+    "ward"
+   ],
+   "narrationHints": "Dust stops falling. A thrown cup hangs. You walk through it, do the one thing, and step back — and then the cup finishes falling as though nothing happened.",
+   "description": "Stop time in a space you can see and take one action inside it. Set a spike in front of a charge, close a door, cut a rope, put yourself somewhere else. Then it resumes and the world arrives at whatever you just changed. The Hourkeeper art: every other hour-craft gives, spends or stretches time — this one stops it.",
+   "notFor": "Touching anyone held. You may rearrange the ground they are about to cross; you may not strike, take from, disarm or move the people crossing it. Undoing anything — what resumes, resumes exactly. And it takes the whole space, your own people included.",
+   "plainly": "Stop time in a space, do one thing, let it go. You can change the ground; you cannot touch the people.",
+   "powerSystem": "metaphysical",
+   "gated": "learned",
+   "challengeTypes": [
+    "FIGHT",
+    "DUEL",
+    "CRISIS"
+   ],
+   "tradition": "hourkeeper",
+   "harmRung": "none",
+   "nativeOrCombination": "native",
+   "shape": "guard",
+   "operativeAxis": [
+    "duration",
+    "targets",
+    "conditions"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 1,
+    "scope": 2,
+    "wardTypes": [
+     "temporal",
+     "physical"
+    ],
+    "note": "T-IV. ⛔ MECHANICALLY IT IS AN EXTRA ACTION (r1) OR THE OPPONENTS LOSING ONE (r3) — Erik 2026-09-13. ⚠️ THE LIMIT IS THE `cannot`, NOT A COUNTER: you cannot act on anything held, which is what stops a time-stop from being a free round of unopposed strikes. ⛑ ABSORBS `held_hour` AT r3 — that craft said in its own words 'not stopping time, refusing to let one hour of it go'; nobody held it and its only other reference was a rename-map entry. ⛔ THE r2 DESCENT-HOLD CALLS `holdOpen` (death.js), which exists — `deepenDeaths` already skips a held way."
+   },
+   "intensity": {
+    "conserve": "the space shrinks to what you can reach without moving your feet",
+    "surge": "double the scope; THE WIELDER DRIFTS SPACE-TIME-HOT, and an Hourkeeper who stops time twice in a day begins arriving at moments a little before they happen"
+   },
+   "bounds": [
+    {
+     "text": "YOU MAY NOT ACT ON ANYTHING HELD — a stopped thing has no give in it",
+     "class": "hard"
+    },
+    {
+     "text": "IT TAKES THE SPACE, NOT A PERSON — your own people are held too",
+     "class": "hard"
+    },
+    {
+     "text": "NOTHING IS UNDONE — what resumes, resumes exactly where it was",
+     "class": "hard"
+    },
+    {
+     "text": "the ground you change is the only argument you get to make",
+     "class": "soft"
+    }
+   ],
+   "taughtBy": "Hourkeepers",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Glitch",
+     "grants": "Stop time in a space you can see and take one action inside it, using yourself and what you carry — a spike set, a door closed, a rope cut, yourself moved. Then it resumes.",
+     "cannot": "You cannot touch, strike, take from or move anything held. You change the ground they arrive at; you do not touch the people arriving.",
+     "functions": [
+      "bind",
+      "sustain"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "The Long Second",
+     "grants": "Bring one person through with you, and they take an action of their own. And a dying person inside the stop does not descend while it holds.",
+     "cannot": "Whoever you carry through is bound by the same rule you are — they may move and place and cut, and touch nobody held. A held descent is paused, never reversed.",
+     "functions": [
+      "bind",
+      "sustain",
+      "ward"
+     ],
+     "gains": "targets",
+     "harmRung": "none",
+     "gainAxes": [
+      "targets",
+      "conditions"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "Behind the Beat",
+     "grants": "Everyone held loses their next action. They resume a beat late, still braced for a world that has moved — and you have had the whole of it to arrange what they resume into.",
+     "cannot": "It costs them a turn, not their footing: nothing is knocked down, disarmed or hurt by the stopping itself. And it still takes everyone, so your own people lose the beat too unless you carried them.",
+     "functions": [
+      "bind",
+      "sustain",
+      "ward"
+     ],
+     "gains": "conditions",
+     "harmRung": "none",
+     "gainAxes": [
+      "conditions",
+      "duration"
+     ]
+    }
+   ]
+  },
+  {
+   "schemaVersion": 1,
+   "id": "widdershins",
+   "name": "Widdershins",
+   "levelReq": 5,
+   "tier": 5,
+   "energyCost": 15,
+   "attribute": "mental",
+   "subAttribute": "insight",
+   "_subAttributeReviewed": true,
+   "_subAttributeWhy": "⚠️ AUTHORED TO PIN WHAT THE DERIVATION WOULD GIVE BY LUCK. `restore` sits in `finesseVerbs.mental`, so the derivation lands on `insight` today — but a single function change would silently move it to `reason`. ⛑ AND `insight` IS RIGHT ON THE PROSE: r1 reaches back only into what you actually SAW happen, so the craft is built on having perceived the moment precisely enough to find it again.",
+   "axes": {
+    "space_time": 0.65,
+    "death_life": 0.3
+   },
+   "functions": [
+    "restore",
+    "transform",
+    "heal"
+   ],
+   "narrationHints": "The world runs backwards in a small place and only there — smoke returning, glass gathering, blood going back in. The Hourkeeper is not hurrying. They are reading for the exact moment and taking one thing out of it.",
+   "description": "Run time backwards in a small place and take one thing out of the hour it happened in. A bomb un-explodes into your hands, whole, and you may throw it back. A wound that has just been made un-makes. And at rank, a person who has died has not died — which is the Hourkeepers' road back, and it is not the Ashwardens'.",
+   "notFor": "Anything you did not witness — you cannot reverse what you only heard about. Changing what a person chose: you take a thing out of an hour, you do not rewrite the hour. And the sealed, who are past every road there is.",
+   "plainly": "You run time backwards in one small place and take one thing out of it — an object, a wound, or at rank, a death.",
+   "powerSystem": "metaphysical",
+   "gated": "learned",
+   "challengeTypes": [
+    "CRISIS",
+    "FIGHT",
+    "RITUAL"
+   ],
+   "tradition": "hourkeeper",
+   "harmRung": "none",
+   "nativeOrCombination": "native",
+   "shape": "restore",
+   "operativeAxis": [
+    "reach",
+    "targets",
+    "conditions"
+   ],
+   "mechanic": {
+    "magnitude": 8,
+    "duration": 0,
+    "targets": 1,
+    "damageType": "temporal",
+    "reachesDepth": "threshold at r2, deep dark at r3",
+    "note": "T-V. ⛔ THE HOURKEEPERS' ROAD BACK, PARALLEL TO `calling_back` AND DIFFERENT IN METHOD — an Ashwarden walks the dead up the ladder; an Hourkeeper reaches into the hour it happened and takes them out of it. ⚠️ THE RANKS MAP ONTO `canReach`'s EXISTING DEPTHS (death.js): threshold · near dark · deep dark · sealed, and the sealed are past this as they are past everything. ⛑ COST IS ENERGY LIKE ANY OTHER CRAFT (Erik 2026-09-13) — the life-substitution at r3 is an OPTION a player may take, not a tax the craft levies."
+   },
+   "intensity": {
+    "conserve": "seconds only, and the thing must already be in your hands",
+    "surge": "reach further back; THE WIELDER DRIFTS SPACE-TIME-HOT, and an Hourkeeper who surges this begins to misremember which version of an hour actually happened"
+   },
+   "bounds": [
+    {
+     "text": "ONLY WHAT YOU WITNESSED — hearsay has no hour you can find",
+     "class": "hard"
+    },
+    {
+     "text": "YOU TAKE A THING OUT OF AN HOUR, YOU DO NOT REWRITE THE HOUR — everything else that happened still happened",
+     "class": "hard"
+    },
+    {
+     "text": "THE SEALED ARE PAST THIS, as they are past every road",
+     "class": "hard"
+    },
+    {
+     "text": "a life offered to power it is a life spent, and the Hourkeepers keep a count",
+     "class": "soft"
+    }
+   ],
+   "taughtBy": "Hourkeepers",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Widdershins",
+     "grants": "Run a few seconds backwards on one object. The bomb un-explodes, the rope un-snaps, the seal un-breaks — and it is in your hands, whole, and yours to throw back.",
+     "cannot": "Objects only, and only what you saw happen. The hour comes back with it: everything else in those seconds happened exactly as it did.",
+     "functions": [
+      "restore",
+      "transform"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "The Unmade Wound",
+     "grants": "Reach into a person's last minutes instead of an object's last seconds. A wound just made un-makes; someone who has just died has not yet died.",
+     "cannot": "The threshold only — a person already sinking into the dark is past this, and the reversal has to arrive before the ending settles.",
+     "functions": [
+      "restore",
+      "heal"
+     ],
+     "gains": "targets",
+     "harmRung": "none",
+     "gainAxes": [
+      "targets",
+      "conditions"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "The Hour Turned Back",
+     "grants": "Reach past the threshold and into the deep dark: an ending that finished days ago is taken out of the hour it happened in. And where the reaching is too far for one Hourkeeper, a life may power the call — an animal given, or the one who caused the death, if they are to hand and you judge it so.",
+     "cannot": "Not the sealed, who refuse every road. And a life spent this way is spent: a beast does not come back, and an enemy fed to the reaching is an execution, whatever else it is.",
+     "functions": [
+      "restore",
+      "heal",
+      "transform"
+     ],
+     "gains": "range",
+     "harmRung": "none",
+     "gainAxes": [
+      "range",
+      "conditions"
+     ]
+    }
+   ]
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

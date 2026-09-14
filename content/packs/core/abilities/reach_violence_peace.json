@@ -3046,6 +3046,130 @@
    "_powerSystemFix": "⛔ SNG-524. Was `reach_violence_peace` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `stillhold` — Inner stillness as a held power, not an absence of one.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",
    "_theHabit": "⚠️ Articles stripped — `craft_lint` check 10.",
    "tier": 1
+  },
+  {
+   "schemaVersion": 1,
+   "id": "stasis",
+   "name": "Stasis",
+   "levelReq": 3,
+   "tier": 3,
+   "energyCost": 8,
+   "attribute": "social",
+   "subAttribute": "presence",
+   "_subAttributeReviewed": true,
+   "_subAttributeWhy": "⛔ AUTHORED TO OVERRIDE THE DERIVATION, AND THE REASON IS THE USE AND NOT THE TRADITION. `bind` is in `finesseVerbs.social`, so the derivation gives `rapport` — charm and empathy, which is not what this does to a man mid-swing. ⚠️ THE ACT IS IMPOSING YOUR WILL ON A THING UNTIL IT STOPS, which is `presence`. ⛑ `stillcraft` names the same verb — 'make yourself the still point a room organizes around' — and this is that, applied to one body.",
+   "axes": {
+    "violence_peace": 0.4,
+    "space_time": 0.15
+   },
+   "functions": [
+    "bind",
+    "shield",
+    "sustain"
+   ],
+   "narrationHints": "Not a cage and not a sleep. The thing simply stops — mid-step, mid-breath, mid-bleed — and the room goes on around it.",
+   "description": "Hold one person or thing entirely still for 2 rounds. They take no actions, and nothing that was happening to them continues: a wound stops worsening, a poison stops spreading, a dying person stops dying. The Stillhold's hardest answer to a fight, and the only one that also works on somebody already past arguing.",
+   "notFor": "Healing. Nothing is undone and nothing mended — what was true when you closed it is exactly what is true when it opens. Anything already finished: a dead body holds where it is, a destroyed one stays destroyed. And you must be able to see the whole of what you hold.",
+   "plainly": "You stop one thing completely for two rounds, including whatever was killing it.",
+   "powerSystem": "metaphysical",
+   "gated": "learned",
+   "challengeTypes": [
+    "FIGHT",
+    "DUEL",
+    "CRISIS"
+   ],
+   "tradition": "stillhold",
+   "harmRung": "none",
+   "nativeOrCombination": "native",
+   "shape": "guard",
+   "operativeAxis": [
+    "duration",
+    "targets",
+    "conditions"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 2,
+    "targets": 1,
+    "wardTypes": [
+     "physical",
+     "decay",
+     "corrosive"
+    ],
+    "note": "T-III. A HOLD, NOT A WARD — the target takes no actions AND no ongoing effect advances on them: bleed, poison, rot, a death-ladder descent. ⛔ NOTHING IS HEALED, and the `cannot` is the limit rather than any counter. ⛑ THE DESCENT-HOLD CALLS `holdOpen` (death.js) — `deepenDeaths` already skips a held way, so that half needs no new rule (CCode 2026-09-13). ⚠️ AND IT CUTS BOTH WAYS: a held ally is out of the fight too, and cannot be reached or mended while held."
+   },
+   "intensity": {
+    "conserve": "one round instead of two, and you must be within arm's reach",
+    "surge": "double the duration; THE WIELDER DRIFTS PEACE-HOT, and a stillness held past its moment is how a Stillhold learns that stopping a thing is not the same as settling it"
+   },
+   "bounds": [
+    {
+     "text": "IT HEALS NOTHING — what was true going in is true coming out",
+     "class": "hard"
+    },
+    {
+     "text": "CANNOT HOLD WHAT IS ALREADY FINISHED — a completed ending does not pause",
+     "class": "hard"
+    },
+    {
+     "text": "A HELD ALLY IS OUT OF THE FIGHT TOO, and cannot be reached, moved or mended while held",
+     "class": "hard"
+    },
+    {
+     "text": "it buys the time; it does not tell you what to do with it",
+     "class": "soft"
+    }
+   ],
+   "taughtBy": "Stillhold",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Stasis",
+     "grants": "Hold one person or thing entirely still for 2 rounds. They act not at all, and nothing ongoing advances on them — a bleed stops, a poison stops, a spreading rot stops where it is.",
+     "cannot": "It heals nothing. A held ally is as out of the fight as a held foe, and cannot be reached or mended while held.",
+     "functions": [
+      "bind",
+      "shield"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "Kept Still",
+     "grants": "Hold two, and hold them through a descent: a dying person's fall toward the dark stops for as long as you hold, and a held death does not deepen.",
+     "cannot": "Two is the limit and both must be in sight. Holding a dying person does not treat them — when you let go they are exactly as far gone as they were.",
+     "functions": [
+      "bind",
+      "shield",
+      "sustain"
+     ],
+     "gains": "targets",
+     "harmRung": "none",
+     "gainAxes": [
+      "targets",
+      "conditions"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "The Still Point",
+     "grants": "Set the stillness on a place rather than a person and let go of it. It holds without your attention until something crosses it or you end it, and whatever crosses is held with it.",
+     "cannot": "You cannot choose what it catches once it is set — it takes the next thing across, yours or otherwise. And a set stillness is a thing in the world that other people can find.",
+     "functions": [
+      "bind",
+      "shield",
+      "sustain"
+     ],
+     "gains": "autonomy",
+     "harmRung": "none",
+     "gainAxes": [
+      "autonomy",
+      "duration"
+     ]
+    }
+   ]
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

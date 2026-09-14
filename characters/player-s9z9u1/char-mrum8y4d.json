@@ -211,11 +211,183 @@
     "At the Hub crossing, Loki confronted a Churn-Revel sent to break the Null Stone's sealed seam. Through misdirection and bargaining, Loki bound the orchestrator's certainty and drove them to yield—the Revel's hand fell, the ribbons collapsed, and the stone stands unbroken. The seam's mystery persists. The question of who sent the Revel remains open."
   ],
   "currentLocationId": "the_crossing",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "the_crossing",
+    "turns": [
+      {
+        "player": null,
+        "summary": "At the Hub crossing after the Revel's binding, the Null Stone stands unbroken. The waygate back to Quickwood Eaves remains sealed with deliberate interference. Vessin names the problem plainly. Veln Ashpause has not yet appeared.",
+        "narration": "The Crossing's Hub at night is a study in angles and echo. Five massive waygate arches converge here, their stones worn smooth by ten thousand arrivals. The Null Stone sits at the center—a pale, unremarkable thing, roughly the size of a table. You are standing twenty paces from it, breathing steady. Cy walks a slow spiral around the perimeter, lens irised half-closed, taking inventory of the space as if checking off a list only it can read.\n\nThe Churn-Revel's ribbons have dissolved. The orchestrator lies curled on the stone, spent—their certainty bargained away, their mandate broken. The air still tastes of ash and ozone. The stone itself stands unmarked. Whatever the Revel meant to shatter or unseal has held.\n\nVessin approaches from the direction of the southern arch, where she retreated when the chaos began. Her coat is dust-marked but her hands are steady. She stops a few paces from you and reads your face in the light bleeding down from the vaults above. The quiet here is deep—not the peace of an empty place, but the quiet that comes after something large has been put down.\n\n'The waygate to Quickwood is still sealed,' she says. It is not a question. She means the one we came through. She means something has made that choice deliberate."
+      }
+    ],
+    "lastTurn": {
+      "narration": "The Crossing's Hub at night is a study in angles and echo. Five massive waygate arches converge here, their stones worn smooth by ten thousand arrivals. The Null Stone sits at the center—a pale, unremarkable thing, roughly the size of a table. You are standing twenty paces from it, breathing steady. Cy walks a slow spiral around the perimeter, lens irised half-closed, taking inventory of the space as if checking off a list only it can read.\n\nThe Churn-Revel's ribbons have dissolved. The orchestrator lies curled on the stone, spent—their certainty bargained away, their mandate broken. The air still tastes of ash and ozone. The stone itself stands unmarked. Whatever the Revel meant to shatter or unseal has held.\n\nVessin approaches from the direction of the southern arch, where she retreated when the chaos began. Her coat is dust-marked but her hands are steady. She stops a few paces from you and reads your face in the light bleeding down from the vaults above. The quiet here is deep—not the peace of an empty place, but the quiet that comes after something large has been put down.\n\n'The waygate to Quickwood is still sealed,' she says. It is not a question. She means the one we came through. She means something has made that choice deliberate.",
+      "sceneSummary": "At the Hub crossing after the Revel's binding, the Null Stone stands unbroken. The waygate back to Quickwood Eaves remains sealed with deliberate interference. Vessin names the problem plainly. Veln Ashpause has not yet appeared.",
+      "scene": {
+        "setting": "The Hub crossing of the Waygate network at night—a vast circular chamber where five waygate arches converge. Pale stone worn by countless arrivals. The Null Stone sits at the center, precise and ordinary. Cy moves in measured spirals; the Churn-Revel orchestrator lies spent on the ground. Light from the vaults above casts long angles.",
+        "npcsPresent": [
+          {
+            "name": "Vessin Tallow-bark",
+            "state": "standing near the southern arch, reading Loki's face, speaking plainly about the sealed waygate"
+          },
+          {
+            "name": "Cy",
+            "state": "walking a slow spiral around the Hub's perimeter, lens half-closed, taking inventory"
+          },
+          {
+            "name": "The Churn-Revel orchestrator",
+            "state": "curled on the stone, spent, certainty bargained away"
+          }
+        ],
+        "objects": [
+          "The Null Stone—pale, unremarkable, precisely cut with a vertical seam on its far face",
+          "Five waygate arches (sealed, active, or unknown state)",
+          "Traces of dissolved ribbons, ash, ozone-scent"
+        ],
+        "threads": [
+          "The sealed waygate to Quickwood Eaves—who deliberate made this choice and why",
+          "The man in the lower Annex with the crooked jaw—the employer behind the hired striker and, likely, behind the Revel itself",
+          "What the Null Stone's seam conceals and why someone sent a Revel to break it",
+          "Veln Ashpause—an Hourkeeper who arrived at dawn and has not yet been seen in the aftermath"
+        ]
+      },
+      "choices": [
+        {
+          "label": "Ask Vessin what she knows about who sealed the gate—has she read it?",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Approach the Null Stone itself and examine the seam closely—See the Made Thing again, now that the Revel is no longer a distraction.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "see_the_made_thing",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Check on the Churn-Revel orchestrator—they're alive, they know who sent them, and the night is still young.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "question"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Look for Veln Ashpause—you've felt their presence since dawn, and a Hourkeeper who foreknew this moment should still be here.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": "hard",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "search"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {},
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
+      "offer": {
+        "thing": "The Waygate network's five arches are in different states—only one reads as stable and ready. The others hum faintly or are silent entirely. The network itself is damaged or being altered.",
+        "from": "The deliberate sealing of the Quickwood gate and the Revel's attack on the Null Stone itself—the network is not simply blocked, it is BEING CHANGED by someone with precision and patience."
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "vessin-tallow-bark",
+          "name": "Vessin Tallow-bark",
+          "role": "Lone traveler; reader of falsecrafts",
+          "note": "Named plainly that the waygate we came through is sealed by deliberate interference. Reads the Hub's quiet as aftermath. Standing beside you without touching—the night's intimacy has not dissolved into awkwardness, but she is all business now."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "gen-the-waygate-path",
+          "label": "The Waygate Network",
+          "kind": "place",
+          "fact": "The Waygate to the Quickwood Eaves remains sealed with deliberate interference—the same kind of doubled pattern that blocks the return passage. The sealing is active and intentional. Someone is systematically altering the network's gates.",
+          "links": [
+            "the-crossing",
+            "the-quickwood-eaves",
+            "the-annex-sender"
+          ]
+        }
+      ]
+    },
+    "sceneState": {
+      "setting": "The Hub crossing of the Waygate network at night—a vast circular chamber where five waygate arches converge. Pale stone worn by countless arrivals. The Null Stone sits at the center, precise and ordinary. Cy moves in measured spirals; the Churn-Revel orchestrator lies spent on the ground. Light from the vaults above casts long angles.",
+      "npcsPresent": [
+        {
+          "name": "Vessin Tallow-bark",
+          "state": "standing near the southern arch, reading Loki's face, speaking plainly about the sealed waygate"
+        },
+        {
+          "name": "Cy",
+          "state": "walking a slow spiral around the Hub's perimeter, lens half-closed, taking inventory"
+        },
+        {
+          "name": "The Churn-Revel orchestrator",
+          "state": "curled on the stone, spent, certainty bargained away"
+        }
+      ],
+      "objects": [
+        "The Null Stone—pale, unremarkable, precisely cut with a vertical seam on its far",
+        "Five waygate arches (sealed, active, or unknown state)",
+        "Traces of dissolved ribbons, ash, ozone-scent"
+      ],
+      "threads": [
+        "The sealed waygate to Quickwood Eaves—who deliberate made this choice and why",
+        "The man in the lower Annex with the crooked jaw—the employer behind the hired striker and, likely, behind the Revel itself",
+        "What the Null Stone's seam conceals and why someone sent a Revel to break it",
+        "Veln Ashpause—an Hourkeeper who arrived at dawn and has not yet been seen in the aftermath"
+      ]
+    },
+    "beats": 1,
+    "subPlace": {
+      "slug": "the-hub-crossing",
+      "name": "The Hub Crossing",
+      "day": 3
+    }
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 3,
-    "hour": 22,
+    "hour": 23,
     "realAnchor": null
   },
   "companions": [
@@ -651,7 +823,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Heard Cy's report alongside Loki — said eleven minutes is not someone who got lost. Appraiser's composure mostly restored.",
         "[d2] Received Cy's report on the listener — four hours seventeen minutes of engagement, eleven of them overheard. Responded with contained composure and named the right question: intentional surveillance or accidental witness.",
         "[d2] Read Loki's conclusion from expression alone — named the key distinction (crew comes from the yard) before being told. Composure fully restored; operating in appraiser-mode.",
         "[d2] Heard the Prism Sight conclusion before it was spoken — named the operative detail (scaffold crew knows the building) and reached for her pack.",
@@ -660,7 +831,8 @@
         "[d2] Assesses the Waygate detour—reads it as fast and obvious, not quiet. Agrees to move. Does not ask why. Appraising the cost of visibility while the scaffold crew arrives.",
         "[d2] Left the Half-Cathedral alcove at dawn before the scaffold crew arrived—shoulders settling lower now that the cathedral is behind, reading the open road with the same appraising eye she brought to everything else. Moving toward the Waygate without question or hesitation.",
         "[d3] Stopped at the gate and read it as wrong. Named plainly that it was not like this before. Standing ready and careful.",
-        "[d3] Stepped closer and is reading Loki's face—she can read the shape of what was found in your expression, even if she cannot see the seam itself from where she stands."
+        "[d3] Stepped closer and is reading Loki's face—she can read the shape of what was found in your expression, even if she cannot see the seam itself from where she stands.",
+        "[d3] Named plainly that the waygate we came through is sealed by deliberate interference. Reads the Hub's quiet as aftermath. Standing beside you without touching—the night's intimacy has not dissolved into awkwardness, but she is all business now."
       ],
       "knownFacts": [
         "Descent can bind a genuine bargain between them — she recognized the shape of it and agreed without deflection.",
@@ -698,7 +870,7 @@
       "_portraitTier": "devoted",
       "bondType": "romantic",
       "bondStage": "together",
-      "met": 10
+      "met": 11
     },
     "kael-road-warden": {
       "id": "kael-road-warden",
@@ -1162,16 +1334,12 @@
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 1846,
+    "lastGenCount": 1847,
     "lastSharedReadAt": "2026-09-07T22:27:40.544Z",
     "lastTickWorldDay": 76,
     "lastCanonWorldDay": 76,
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "A figure in grey standing by the western arch, watching the gates with absolute stillness and patience.",
-        "from": "The Hub crossing itself — a place of convergence where travelers arrive and depart, and where watchers naturally gather"
-      },
       {
         "thing": "Kael's unfinished business at the Crossing—something concrete they came to do, not yet named",
         "from": "A road-warden who carries warnings of the water-crisis downhill and has business of their own at the hub; they offered you a choice of…"
@@ -1187,6 +1355,10 @@
       {
         "thing": "Kael's stillness—a recognition that reads as knowing something they have not yet named",
         "from": "Kael's own knowledge of this place and what it holds; the road-warden's work carries them through hidden channels of information"
+      },
+      {
+        "thing": "The Waygate network's five arches are in different states—only one reads as stable and ready. The others hum faintly or are silent…",
+        "from": "The deliberate sealing of the Quickwood gate and the Revel's attack on the Null Stone itself—the network is not simply blocked, it is…"
       }
     ],
     "wantProgress": {
@@ -1264,7 +1436,7 @@
         "kind": "shortage",
         "premise": "The shallow wells that sustain the scattered settlements are dropping faster each season than anyone has yet admitted aloud.",
         "cause": "The Palelands' sparse, chalky soil has always demanded more water to work than it naturally holds, and the settlements were founded at the margins of what the…",
-        "stage": 48,
+        "stage": 49,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1277,7 +1449,7 @@
         "kind": "rot",
         "premise": "A slow fungal bloom is working through the oldest grain stores, and the steward responsible has been quietly discarding the worst sacks rather than reporting the loss.",
         "cause": "The valley's mild, damp winters make its granaries prone to moisture, and the current steward was appointed for loyalty rather than knowledge of grain-keeping.",
-        "stage": 48,
+        "stage": 49,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1302,7 +1474,7 @@
         "kind": "rot",
         "premise": "A key sequence in the primary record is being quietly re-threaded by someone who made an error years ago and cannot bear to have it discovered.",
         "cause": "Unspooling's knowledge is stored in physical cordage whose integrity depends entirely on the honesty of the hands that maintain it.",
-        "stage": 43,
+        "stage": 44,
         "seededAtCount": 758,
         "surfaced": true,
         "fate": "growing",
@@ -1339,7 +1511,7 @@
         "kind": "shortage",
         "premise": "Certain materials or substances needed for whatever work the Unmade does are being quietly stockpiled by one practitioner at the expense of communal supply, because she no longer trusts the…",
         "cause": "The Unmade is a place where things are taken apart, and grief for what is lost has no formal channel — it is expected to simply disperse, as everything else…",
-        "stage": 11,
+        "stage": 12,
         "seededAtCount": 1675,
         "surfaced": true,
         "fate": "growing",
@@ -1352,7 +1524,7 @@
         "kind": "rot",
         "premise": "A run of subtle flaws has begun appearing in work passing through one bench — small enough to escape immediate notice, deep enough to fail later — and the cause is a senior apprentice who has been…",
         "cause": "The two workshops already contesting the shared tool have each told their apprentices, in different words, that the other side cannot be trusted — and one…",
-        "stage": 11,
+        "stage": 12,
         "seededAtCount": 1675,
         "surfaced": true,
         "fate": "growing",
@@ -1365,7 +1537,7 @@
         "kind": "shortage",
         "premise": "A foundational material used in the Making's core work has quietly been substituted with an inferior source for several production cycles, and nothing built from it has yet been tested under real…",
         "cause": "The two workshops already deadlocked over the shared tool have each independently begun sourcing their own materials rather than drawing from the common…",
-        "stage": 4,
+        "stage": 5,
         "seededAtCount": 1826,
         "surfaced": true,
         "fate": "growing",
@@ -6145,13 +6317,17 @@
         "facts": [
           "[d2] you have walked here",
           "[d2] The path reads clearly to Wayfinding—shortcuts visible, water-fords passable, the passage eased by recognition of the land's own memory. The Quickwood Eaves gate lies ahead, reached by late afternoon of day 2.",
-          "[d3] The eastern fork of the Disputed Zone March has swollen past normal crossing due to spring melt. A stone ford exists two reaches spinward from the main pass — less direct but passable. This route adds roughly a day and a half to the journey but avoids the swollen water."
+          "[d3] The eastern fork of the Disputed Zone March has swollen past normal crossing due to spring melt. A stone ford exists two reaches spinward from the main pass — less direct but passable. This route adds roughly a day and a half to the journey but avoids the swollen water.",
+          "[d3] The Waygate to the Quickwood Eaves remains sealed with deliberate interference—the same kind of doubled pattern that blocks the return passage. The sealing is active and intentional. Someone is systematically altering the network's gates."
         ],
         "links": [
           "the-crossing",
-          "the-quickwood-eaves"
+          "the-quickwood-eaves",
+          "the-annex-sender"
         ],
-        "aliases": [],
+        "aliases": [
+          "The Waygate Network"
+        ],
         "createdDay": 2,
         "entityId": "gen-the-waygate-path",
         "updatedDay": 3
@@ -6186,14 +6362,17 @@
         "facts": [
           "[d3] Road-warden; one who moves between the reaches and carries true news freely",
           "[d3] The traveler's name was exchanged at the fire on the road west of the Waygate Path—they have given it freely and without condition, as they give all their service freely.",
-          "[d3] [while away] The traveler accepted a second errand on their eastward route — a sealed letter from a miller's widow to her son in the outer settlements — and has begun moving between reaches with purpose rather than wandering."
+          "[d3] [while away] The traveler accepted a second errand on their eastward route — a sealed letter from a miller's widow to her son in the outer settlements — and has begun moving between reaches with purpose rather than wandering.",
+          "[d3] Road-warden; a traveler who moves between the reaches and carries true news",
+          "[d3] [while away] Kael has been waiting at the Eastfork waystation for a reliable runner to arrive, but no one has come through worth trusting yet."
         ],
         "links": [
           "gen-the-waygate-path",
           "water-crisis-pressureholt"
         ],
         "aliases": [
-          "lone-traveler-eastfork-warning"
+          "lone-traveler-eastfork-warning",
+          "Kael"
         ],
         "createdDay": 3,
         "entityId": "lone-traveler-eastfork-warning",
@@ -6210,20 +6389,6 @@
         "aliases": [],
         "createdDay": 3,
         "entityId": "the-quickwood-eaves",
-        "updatedDay": 3
-      },
-      "kael-road-warden": {
-        "id": "kael-road-warden",
-        "label": "Kael",
-        "kind": "person",
-        "facts": [
-          "[d3] Road-warden; a traveler who moves between the reaches and carries true news",
-          "[d3] [while away] Kael has been waiting at the Eastfork waystation for a reliable runner to arrive, but no one has come through worth trusting yet."
-        ],
-        "links": [],
-        "aliases": [],
-        "createdDay": 3,
-        "entityId": "kael-road-warden",
         "updatedDay": 3
       }
     },
@@ -6312,6 +6477,42 @@
             "Veln Ashpause"
           ],
           "entityId": "hourkeeper-confluence"
+        },
+        "relinked": []
+      },
+      {
+        "at": "2026-09-14T23:45:01.737Z",
+        "source": {
+          "id": "kael-road-warden",
+          "label": "Kael",
+          "kind": "person",
+          "facts": [
+            "[d3] Road-warden; a traveler who moves between the reaches and carries true news",
+            "[d3] [while away] Kael has been waiting at the Eastfork waystation for a reliable runner to arrive, but no one has come through worth trusting yet."
+          ],
+          "links": [],
+          "aliases": [
+            "A lone traveler"
+          ],
+          "createdDay": 3,
+          "entityId": "kael-road-warden",
+          "updatedDay": 3
+        },
+        "targetId": "lone-traveler-eastfork-warning",
+        "targetBefore": {
+          "facts": [
+            "[d3] Road-warden; one who moves between the reaches and carries true news freely",
+            "[d3] The traveler's name was exchanged at the fire on the road west of the Waygate Path—they have given it freely and without condition, as they give all their service freely.",
+            "[d3] [while away] The traveler accepted a second errand on their eastward route — a sealed letter from a miller's widow to her son in the outer settlements — and has begun moving between reaches with purpose rather than wandering."
+          ],
+          "links": [
+            "gen-the-waygate-path",
+            "water-crisis-pressureholt"
+          ],
+          "aliases": [
+            "lone-traveler-eastfork-warning"
+          ],
+          "entityId": "lone-traveler-eastfork-warning"
         },
         "relinked": []
       }
@@ -6933,8 +7134,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789428378320,
-  "rev": 629,
+  "updatedAt": 1789429521083,
+  "rev": 632,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -7803,7 +8004,7 @@
     "the_gearlands": 33,
     "umbral_depths": 54,
     "the_quickwood": 101,
-    "the_center": 20
+    "the_center": 21
   },
   "opLossPending": false,
   "sessions": [
@@ -7882,10 +8083,10 @@
     {
       "id": "sess-10",
       "startedAt": "2026-09-14T22:51:56.902Z",
-      "lastAt": "2026-09-14T23:08:55.342Z",
+      "lastAt": "2026-09-14T23:45:21.078Z",
       "startDay": 76,
       "endDay": 76,
-      "beats": 5
+      "beats": 6
     }
   ],
   "establishedFacts": [
@@ -7928,24 +8129,24 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 20,
+      "applied": 21,
       "rejected": 1,
       "lastWhy": "rejected-shape"
     }
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 184,
-    "choices": 184,
+    "sceneSummary": 185,
+    "choices": 185,
     "characterDeltas": 75,
-    "scene": 184,
+    "scene": 185,
     "placeUpdates": 21,
-    "codexUpdates": 103,
+    "codexUpdates": 104,
     "timeOps": 163,
-    "offer": 17,
+    "offer": 18,
     "generateRequest": 6,
     "sceneEnded": 59,
-    "npcUpdates": 150,
+    "npcUpdates": 151,
     "moveTo": 6,
     "gambitApt": 23,
     "deeds": 4,
@@ -7961,7 +8162,7 @@
     "stateOps": 1,
     "_engineClosedScene": 1
   },
-  "_opTurns": 184,
+  "_opTurns": 185,
   "customAbilities": {},
   "companionBonds": {
     "coil": 4.25
@@ -8851,352 +9052,352 @@
   },
   "_promptRows": {
     "character": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "location": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "region": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "groundDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "lore": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "traditionMotiveDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "sheetsDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 5
     },
     "rules": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "recentTurns": {
-      "reached": 5,
+      "reached": 6,
       "produced": 5
     },
     "timeLabel": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "npcRegistryDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "mintedUnmetDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "npcSeedDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "traditionVocab": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "standingDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "recalledDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 1
     },
     "bearingsDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "caravansDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "commandDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "presenceDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "worthHereDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "sceneState": {
-      "reached": 5,
+      "reached": 6,
       "produced": 5
     },
     "holdingsDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "debtsDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "questsDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "structuredQuestsDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "companionsDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "placeMemoryDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "agesMissingDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "newsDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "worldArcsDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "legendsPursuableDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "wakesDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "reachableDeadDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "threatToPlayer": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "resolution": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "playerInput": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "exactWords": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "travelDirective": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "itemAdvance": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "encounterOfferDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "fightFramingDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "offerDetail": {
-      "reached": 5,
-      "produced": 0
+      "reached": 6,
+      "produced": 1
     },
     "teacherOfferDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "romanceGuidanceDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "factsDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "evolvedItemsDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "perilNote": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 4
     },
     "masteryDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "bookkeepingRestate": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "repairPanelDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "teacherDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "availableEncounters": {
-      "reached": 5,
-      "produced": 1
+      "reached": 6,
+      "produced": 2
     },
     "partyDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "registerDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "legendDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "assignmentsDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "latentArcsDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "seasonalDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "schoolsDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "sharedCanonDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "worldCountLabel": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "waygateDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "readAloudDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "scenePacingDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 5
     }
   },
   "_opUnknown": {
-    "sceneSummary": 5
+    "sceneSummary": 6
   },
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T22:51:56.913Z",

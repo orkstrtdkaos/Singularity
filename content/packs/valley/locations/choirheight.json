@@ -1,71 +1,72 @@
 {
-  "schemaVersion": 1,
-  "id": "choirheight",
-  "name": "Choir-Height",
-  "regionId": "the_ascent",
-  "communityId": "seraphic.choirheight",
-  "axisVector": [
-    0.0,
-    0.0,
-    0.7,
-    0.0,
-    0.0,
-    0.0,
-    0.4,
-    0.3,
-    0.0,
-    0.0,
-    0.0,
-    0.0
-  ],
-  "spectrum": {
-    "demonic_angelic": 0.7,
-    "chaos_order": 0.4,
-    "dark_light": 0.3
-  },
-  "tags": [
-    "seraphic",
-    "angelic",
-    "city",
-    "tiered",
-    "home",
-    "sacred"
-  ],
-  "connections": [
-    "the_mercy_house",
-    "the_unfallen",
-    "the_axis_gate",
-    "stair_hollow"
-  ],
-  "descriptionSeed": "Tiered spires, choral certainty that is genuinely hard to bear, and a mercy that is entirely real and administered from above. The Seraphic Orders will forgive you, and it will not be a formality, and it will change you — and they will also judge you, and that will not be a formality either, and there is no appeal. A waygate opens on Choir-Height's lowest tier, never its upper ones. The Orders are clear that arrival grants you the city's floor and nothing above it.",
-  "loreRefs": [
-    "the_twelve_reaches",
-    "traditions"
-  ],
-  "encounterFlavor": "Seraphs whose kindness is real and whose certainty is total; a judgment being pronounced, correctly; someone forgiven and visibly remade by it.",
-  "dangerLevel": 2,
-  "questSeeds": [
-    "A judgment was pronounced on an innocent and it BOUND, and the Orders cannot unmake it and will not admit that",
-    "A Seraph has begun to doubt, and doubt is not a thing this people has a procedure for"
-  ],
-  "map": {
-    "x": 360,
-    "y": 60
-  },
-  "poleIntensity": {
-    "angelic": 0.7,
-    "order": 0.4,
-    "light": 0.3
-  },
-  "startingLocation": true,
-  "waygate": true,
-  "waygateTier": 3,
-  "worldPos": {
-    "colatitude": 84.0,
-    "longitude": 216.0,
-    "depth": 0
-  },
-  "worldPosNote": "Deep expression of its Reach — placed near the equator on the the_ascent bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "region",
-  "parentId": null
+ "schemaVersion": 1,
+ "id": "choirheight",
+ "name": "Choir-Height",
+ "regionId": "the_ascent",
+ "communityId": "seraphic.choirheight",
+ "axisVector": [
+  0.0,
+  0.0,
+  0.7,
+  0.0,
+  0.0,
+  0.0,
+  0.4,
+  0.3,
+  0.0,
+  0.0,
+  0.0,
+  0.0
+ ],
+ "spectrum": {
+  "demonic_angelic": 0.7,
+  "chaos_order": 0.4,
+  "dark_light": 0.3
+ },
+ "tags": [
+  "seraphic",
+  "angelic",
+  "city",
+  "tiered",
+  "home",
+  "sacred"
+ ],
+ "connections": [
+  "the_mercy_house",
+  "the_unfallen",
+  "the_axis_gate",
+  "stair_hollow"
+ ],
+ "descriptionSeed": "Tiered spires, choral certainty that is genuinely hard to bear, and a mercy that is entirely real and administered from above. The Seraphic Orders will forgive you, and it will not be a formality, and it will change you — and they will also judge you, and that will not be a formality either, and there is no appeal. A waygate opens on Choir-Height's lowest tier, never its upper ones. The Orders are clear that arrival grants you the city's floor and nothing above it.",
+ "loreRefs": [
+  "the_twelve_reaches",
+  "traditions"
+ ],
+ "encounterFlavor": "Seraphs whose kindness is real and whose certainty is total; a judgment being pronounced, correctly; someone forgiven and visibly remade by it.",
+ "dangerLevel": 2,
+ "questSeeds": [
+  "A judgment was pronounced on an innocent and it BOUND, and the Orders cannot unmake it and will not admit that",
+  "A Seraph has begun to doubt, and doubt is not a thing this people has a procedure for"
+ ],
+ "map": {
+  "x": 360,
+  "y": 60
+ },
+ "poleIntensity": {
+  "angelic": 0.7,
+  "order": 0.4,
+  "light": 0.3
+ },
+ "startingLocation": true,
+ "waygate": true,
+ "waygateTier": 3,
+ "worldPos": {
+  "colatitude": 84.0,
+  "longitude": 216.0,
+  "depth": 0
+ },
+ "worldPosNote": "Deep expression of its Reach — placed near the equator on the the_ascent bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+ "tier": "region",
+ "parentId": null,
+ "appearance": "White tiered spires rising in stepped rings, each tier narrower than the one below, connected by open galleries and long stairs. Gold light spills from high arched openings. Banners hang the full height of the towers, and the stone is kept scrubbed pale."
 }

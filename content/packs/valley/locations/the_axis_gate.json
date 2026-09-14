@@ -1,96 +1,97 @@
 {
-  "schemaVersion": 1,
-  "id": "the_axis_gate",
-  "name": "The Axis Gate",
-  "regionId": "the_center",
-  "communityId": "center.gate",
-  "axisVector": [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    -0.3,
-    0,
-    0
-  ],
-  "spectrum": {
-    "space_time": -0.3
-  },
-  "tags": [
-    "center",
-    "travel",
-    "road",
-    "liminal",
-    "threshold"
-  ],
-  "connections": [
-    "the_crossing",
-    "the_hundred_markets",
-    "echo_river_crossing",
-    "the_slow_stair",
-    "the_lensward",
-    "the_greenward",
-    "the_marchward",
-    "the_middle_way",
-    "the_wend",
-    "dw_the_thinedge",
-    "tier_seven",
-    "the_service_ways",
-    "the_thinning",
-    "wellspring",
-    "the_axiom",
-    "the_hall_of_mirrors",
-    "the_unblinking_stone",
-    "the_bargain_gate",
-    "choirheight",
-    "bedrock",
-    "cloudform",
-    "the_wayhouse",
-    "the_slow_hour",
-    "the_scour",
-    "the_forge_eternal"
-  ],
-  "descriptionSeed": "Twelve roads leave the Crossing, one per axis, each running out toward a pole and its opposite beyond. Stand at the Gate and you can see, faintly, the direction of every people in the world. Travelers arrive here having walked a thing they cannot describe; travelers leave here knowing exactly how far the far side is. Every journey in this world begins and ends at the Axis Gate, and everyone who works here has watched someone walk out toward a pole and not come back.",
-  "loreRefs": [
-    "the_twelve_reaches",
-    "traditions",
-    "the_coordinate_world"
-  ],
-  "encounterFlavor": "Travelers from every direction; gate-keepers who have seen every kind of person there is; someone who came from a road that should not have anyone on it.",
-  "dangerLevel": 2,
-  "questSeeds": [
-    "A road has gone quiet — nobody has come in from one of the twelve in a season",
-    "Someone is walking out toward their own antipode, deliberately, and will not say why"
-  ],
-  "map": {
-    "x": 300,
-    "y": 270
-  },
-  "poleIntensity": {
-    "space": 0.3
-  },
-  "waygate": true,
-  "waygateTier": 2,
-  "substrateSource": {
-    "kind": "pool",
-    "delta": 0.16,
-    "radius": 150,
-    "reason": "Every waygate in the world routes through here. The traffic itself keeps the lattice thick.",
-    "radiusWorld": 0.09,
-    "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
-  },
-  "worldPos": {
-    "colatitude": 8,
-    "longitude": 0,
-    "depth": 0
-  },
-  "worldPosNote": "The hub's gate. As near the pole as a built thing gets. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "settlement",
-  "parentId": "the_crossing",
-  "role": "gate"
+ "schemaVersion": 1,
+ "id": "the_axis_gate",
+ "name": "The Axis Gate",
+ "regionId": "the_center",
+ "communityId": "center.gate",
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  -0.3,
+  0,
+  0
+ ],
+ "spectrum": {
+  "space_time": -0.3
+ },
+ "tags": [
+  "center",
+  "travel",
+  "road",
+  "liminal",
+  "threshold"
+ ],
+ "connections": [
+  "the_crossing",
+  "the_hundred_markets",
+  "echo_river_crossing",
+  "the_slow_stair",
+  "the_lensward",
+  "the_greenward",
+  "the_marchward",
+  "the_middle_way",
+  "the_wend",
+  "dw_the_thinedge",
+  "tier_seven",
+  "the_service_ways",
+  "the_thinning",
+  "wellspring",
+  "the_axiom",
+  "the_hall_of_mirrors",
+  "the_unblinking_stone",
+  "the_bargain_gate",
+  "choirheight",
+  "bedrock",
+  "cloudform",
+  "the_wayhouse",
+  "the_slow_hour",
+  "the_scour",
+  "the_forge_eternal"
+ ],
+ "descriptionSeed": "Twelve roads leave the Crossing, one per axis, each running out toward a pole and its opposite beyond. Stand at the Gate and you can see, faintly, the direction of every people in the world. Travelers arrive here having walked a thing they cannot describe; travelers leave here knowing exactly how far the far side is. Every journey in this world begins and ends at the Axis Gate, and everyone who works here has watched someone walk out toward a pole and not come back.",
+ "loreRefs": [
+  "the_twelve_reaches",
+  "traditions",
+  "the_coordinate_world"
+ ],
+ "encounterFlavor": "Travelers from every direction; gate-keepers who have seen every kind of person there is; someone who came from a road that should not have anyone on it.",
+ "dangerLevel": 2,
+ "questSeeds": [
+  "A road has gone quiet — nobody has come in from one of the twelve in a season",
+  "Someone is walking out toward their own antipode, deliberately, and will not say why"
+ ],
+ "map": {
+  "x": 300,
+  "y": 270
+ },
+ "poleIntensity": {
+  "space": 0.3
+ },
+ "waygate": true,
+ "waygateTier": 2,
+ "substrateSource": {
+  "kind": "pool",
+  "delta": 0.16,
+  "radius": 150,
+  "reason": "Every waygate in the world routes through here. The traffic itself keeps the lattice thick.",
+  "radiusWorld": 0.09,
+  "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
+ },
+ "worldPos": {
+  "colatitude": 8,
+  "longitude": 0,
+  "depth": 0
+ },
+ "worldPosNote": "The hub's gate. As near the pole as a built thing gets. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+ "tier": "settlement",
+ "parentId": "the_crossing",
+ "role": "gate",
+ "appearance": "A wide paved circle at a crossroads where twelve roads leave in twelve directions, each marked by a tall standing pillar. Milestones and waymarkers crowd the verges. Open sky, flat ground, and the roads visible running to the horizon."
 }

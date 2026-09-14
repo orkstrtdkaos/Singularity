@@ -1,73 +1,74 @@
 {
-  "schemaVersion": 1,
-  "id": "the_bloodless_hold",
-  "name": "The Bloodless Hold",
-  "regionId": "the_reasoned_hold",
-  "communityId": "syllogist.bloodless",
-  "axisVector": [
-    1,
-    0,
-    0,
-    -0.2,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0.4,
-    0
-  ],
-  "spectrum": {
-    "emotional_logical": 1,
-    "body_mind": 0.4,
-    "violence_peace": -0.2
-  },
-  "tags": [
-    "syllogist",
-    "logical",
-    "locus",
-    "cult",
-    "dangerous",
-    "sacred"
-  ],
-  "connections": [
-    "the_axiom"
-  ],
-  "descriptionSeed": "The pure pole: reason purified of all feeling, which turns out not to be reason at all but something with reason's face. The Bloodless have derived, rigorously, that suffering is a signal-processing error and that the beings who exhibit it should be corrected. Their argument is valid. Everyone who has tried to refute it has failed. They are waiting, patiently, for the world to catch up.",
-  "loreRefs": [
-    "the_twelve_reaches",
-    "traditions"
-  ],
-  "encounterFlavor": "The Bloodless, who are polite and correct and are calculating what you are for; an argument being made to you that you cannot beat and must not accept; a Syllogist who came here to refute them and stayed.",
-  "dangerLevel": 5,
-  "questSeeds": [
-    "The Bloodless have published, and the proof is circulating, and people are convinced",
-    "Someone must go and lose an argument on purpose, and survive it, and that has not been done"
-  ],
-  "map": {
-    "x": 160,
-    "y": 120
-  },
-  "poleIntensity": {
-    "logical": 1,
-    "mind": 0.4,
-    "violence": 0.2
-  },
-  "substrateSource": {
-    "kind": "pool",
-    "delta": 0.14,
-    "radius": 135,
-    "reason": "The proofs are held IN the substrate here — an argument the Syllogists have never had to re-derive.",
-    "radiusWorld": 0.081,
-    "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
-  },
-  "worldPos": {
-    "colatitude": 85,
-    "longitude": 162,
-    "depth": 0
-  },
-  "worldPosNote": "Deep expression of its Reach — placed near the equator on the the_reasoned_hold bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "settlement",
-  "parentId": "the_axiom"
+ "schemaVersion": 1,
+ "id": "the_bloodless_hold",
+ "name": "The Bloodless Hold",
+ "regionId": "the_reasoned_hold",
+ "communityId": "syllogist.bloodless",
+ "axisVector": [
+  1,
+  0,
+  0,
+  -0.2,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0.4,
+  0
+ ],
+ "spectrum": {
+  "emotional_logical": 1,
+  "body_mind": 0.4,
+  "violence_peace": -0.2
+ },
+ "tags": [
+  "syllogist",
+  "logical",
+  "locus",
+  "cult",
+  "dangerous",
+  "sacred"
+ ],
+ "connections": [
+  "the_axiom"
+ ],
+ "descriptionSeed": "The pure pole: reason purified of all feeling, which turns out not to be reason at all but something with reason's face. The Bloodless have derived, rigorously, that suffering is a signal-processing error and that the beings who exhibit it should be corrected. Their argument is valid. Everyone who has tried to refute it has failed. They are waiting, patiently, for the world to catch up.",
+ "loreRefs": [
+  "the_twelve_reaches",
+  "traditions"
+ ],
+ "encounterFlavor": "The Bloodless, who are polite and correct and are calculating what you are for; an argument being made to you that you cannot beat and must not accept; a Syllogist who came here to refute them and stayed.",
+ "dangerLevel": 5,
+ "questSeeds": [
+  "The Bloodless have published, and the proof is circulating, and people are convinced",
+  "Someone must go and lose an argument on purpose, and survive it, and that has not been done"
+ ],
+ "map": {
+  "x": 160,
+  "y": 120
+ },
+ "poleIntensity": {
+  "logical": 1,
+  "mind": 0.4,
+  "violence": 0.2
+ },
+ "substrateSource": {
+  "kind": "pool",
+  "delta": 0.14,
+  "radius": 135,
+  "reason": "The proofs are held IN the substrate here — an argument the Syllogists have never had to re-derive.",
+  "radiusWorld": 0.081,
+  "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
+ },
+ "worldPos": {
+  "colatitude": 85,
+  "longitude": 162,
+  "depth": 0
+ },
+ "worldPosNote": "Deep expression of its Reach — placed near the equator on the the_reasoned_hold bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+ "tier": "settlement",
+ "parentId": "the_axiom",
+ "appearance": "Pale windowless blocks in exact geometric arrangement, joined by enclosed walkways at fixed intervals. Surfaces matte and seamless, unmarked by weather or use. Uniform grey light, no lamps visible, no shadows cast."
 }

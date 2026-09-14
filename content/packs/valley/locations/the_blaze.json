@@ -1,76 +1,77 @@
 {
-  "schemaVersion": 1,
-  "id": "the_blaze",
-  "name": "The Blaze",
-  "regionId": "radiant_wastes",
-  "communityId": "blazeborn.blaze",
-  "axisVector": [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    1,
-    -0.4,
-    0,
-    0,
-    -0.4
-  ],
-  "spectrum": {
-    "dark_light": 1,
-    "death_life": -0.4,
-    "destruction_creation": -0.4
-  },
-  "tags": [
-    "blazeborn",
-    "light",
-    "locus",
-    "cult",
-    "dangerous",
-    "sacred"
-  ],
-  "connections": [
-    "glasshome",
-    "kindlerow",
-    "the_second_reading"
-  ],
-  "descriptionSeed": "The pure pole, and it is expanding. A light so total it has sterilized the land to glass and is still going — and the ones who live IN it are not a civilization anymore, they are a devotion. They have burned away everything that could cast a shadow, including most of what made them people, and they are radiantly happy about it. The Blazeborn do not go here. The Blaze comes to them, a little further every year.",
-  "loreRefs": [
-    "the_twelve_reaches",
-    "traditions",
-    "the_coordinate_world"
-  ],
-  "encounterFlavor": "The Blaze-devoted, who are joyous and empty; land that was a town last decade; something that survived in there and should not have.",
-  "dangerLevel": 5,
-  "questSeeds": [
-    "The Blaze has taken a settlement and the Blazeborn are pretending it was a planned evacuation",
-    "Someone has walked INTO the Blaze on purpose and sent back a message"
-  ],
-  "map": {
-    "x": 680,
-    "y": 360
-  },
-  "poleIntensity": {
-    "light": 1,
-    "death": 0.4,
-    "destruction": 0.4
-  },
-  "substrateSource": {
-    "kind": "pool",
-    "delta": 0.18,
-    "radius": 160,
-    "reason": "The Blaze burns on lattice, not on fuel. It has been drawing it inward since before the Transition.",
-    "radiusWorld": 0.096,
-    "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
-  },
-  "worldPos": {
-    "colatitude": 90,
-    "longitude": 180,
-    "depth": 0
-  },
-  "worldPosNote": "Burns on lattice. The Radiant locus sits at the equator. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "settlement",
-  "parentId": "glasshome"
+ "schemaVersion": 1,
+ "id": "the_blaze",
+ "name": "The Blaze",
+ "regionId": "radiant_wastes",
+ "communityId": "blazeborn.blaze",
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  1,
+  -0.4,
+  0,
+  0,
+  -0.4
+ ],
+ "spectrum": {
+  "dark_light": 1,
+  "death_life": -0.4,
+  "destruction_creation": -0.4
+ },
+ "tags": [
+  "blazeborn",
+  "light",
+  "locus",
+  "cult",
+  "dangerous",
+  "sacred"
+ ],
+ "connections": [
+  "glasshome",
+  "kindlerow",
+  "the_second_reading"
+ ],
+ "descriptionSeed": "The pure pole, and it is expanding. A light so total it has sterilized the land to glass and is still going — and the ones who live IN it are not a civilization anymore, they are a devotion. They have burned away everything that could cast a shadow, including most of what made them people, and they are radiantly happy about it. The Blazeborn do not go here. The Blaze comes to them, a little further every year.",
+ "loreRefs": [
+  "the_twelve_reaches",
+  "traditions",
+  "the_coordinate_world"
+ ],
+ "encounterFlavor": "The Blaze-devoted, who are joyous and empty; land that was a town last decade; something that survived in there and should not have.",
+ "dangerLevel": 5,
+ "questSeeds": [
+  "The Blaze has taken a settlement and the Blazeborn are pretending it was a planned evacuation",
+  "Someone has walked INTO the Blaze on purpose and sent back a message"
+ ],
+ "map": {
+  "x": 680,
+  "y": 360
+ },
+ "poleIntensity": {
+  "light": 1,
+  "death": 0.4,
+  "destruction": 0.4
+ },
+ "substrateSource": {
+  "kind": "pool",
+  "delta": 0.18,
+  "radius": 160,
+  "reason": "The Blaze burns on lattice, not on fuel. It has been drawing it inward since before the Transition.",
+  "radiusWorld": 0.096,
+  "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
+ },
+ "worldPos": {
+  "colatitude": 90,
+  "longitude": 180,
+  "depth": 0
+ },
+ "worldPosNote": "Burns on lattice. The Radiant locus sits at the equator. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+ "tier": "settlement",
+ "parentId": "glasshome",
+ "appearance": "Land burned to flat glass, reflecting a white sky, stretching to the horizon without feature. The light is total and shadowless. At the edge, the ground is still fusing — a slow bright line advancing across the scrub."
 }

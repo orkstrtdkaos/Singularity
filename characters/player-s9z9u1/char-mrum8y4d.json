@@ -1362,13 +1362,6 @@
       {
         "day": 2,
         "worldDay": 69,
-        "text": "Sister Alder, the Ward That Does Not Break has not been seen at home in a long while — whatever is happening has all of them.",
-        "tier": "murmur",
-        "section": "world"
-      },
-      {
-        "day": 2,
-        "worldDay": 69,
         "text": "Maren Ossitide, Who Buried the Drowned Year has not been seen at home in a long while — whatever is happening has all of them.",
         "tier": "murmur",
         "section": "world"
@@ -1517,10 +1510,17 @@
         "text": "Vessin of the Long Bough has hit trouble — A package Vessin was carrying — personal letters between a Grovehome family and a cousin in the outer settlements — was lost when his satchel was torn open by a branch-fall during the night; he arrived empty-handed and the family is coldly furious.",
         "tier": "event",
         "section": "world"
+      },
+      {
+        "day": 3,
+        "worldDay": 76,
+        "text": "Something has been building in the making: A foundational material used in the Making's core work has quietly been substituted with an inferior source for several production cycles, and nothing built from it has yet been tested under real…",
+        "tier": "event",
+        "section": "world"
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 1836,
+    "lastGenCount": 1837,
     "lastSharedReadAt": "2026-09-07T22:27:40.544Z",
     "lastTickWorldDay": 76,
     "lastCanonWorldDay": 76,
@@ -1622,7 +1622,7 @@
         "kind": "shortage",
         "premise": "The shallow wells that sustain the scattered settlements are dropping faster each season than anyone has yet admitted aloud.",
         "cause": "The Palelands' sparse, chalky soil has always demanded more water to work than it naturally holds, and the settlements were founded at the margins of what the…",
-        "stage": 45,
+        "stage": 46,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1635,7 +1635,7 @@
         "kind": "rot",
         "premise": "A slow fungal bloom is working through the oldest grain stores, and the steward responsible has been quietly discarding the worst sacks rather than reporting the loss.",
         "cause": "The valley's mild, damp winters make its granaries prone to moisture, and the current steward was appointed for loyalty rather than knowledge of grain-keeping.",
-        "stage": 45,
+        "stage": 46,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1660,7 +1660,7 @@
         "kind": "rot",
         "premise": "A key sequence in the primary record is being quietly re-threaded by someone who made an error years ago and cannot bear to have it discovered.",
         "cause": "Unspooling's knowledge is stored in physical cordage whose integrity depends entirely on the honesty of the hands that maintain it.",
-        "stage": 40,
+        "stage": 41,
         "seededAtCount": 758,
         "surfaced": true,
         "fate": "growing",
@@ -1697,7 +1697,7 @@
         "kind": "shortage",
         "premise": "Certain materials or substances needed for whatever work the Unmade does are being quietly stockpiled by one practitioner at the expense of communal supply, because she no longer trusts the…",
         "cause": "The Unmade is a place where things are taken apart, and grief for what is lost has no formal channel — it is expected to simply disperse, as everything else…",
-        "stage": 8,
+        "stage": 9,
         "seededAtCount": 1675,
         "surfaced": true,
         "fate": "growing",
@@ -1710,7 +1710,7 @@
         "kind": "rot",
         "premise": "A run of subtle flaws has begun appearing in work passing through one bench — small enough to escape immediate notice, deep enough to fail later — and the cause is a senior apprentice who has been…",
         "cause": "The two workshops already contesting the shared tool have each told their apprentices, in different words, that the other side cannot be trusted — and one…",
-        "stage": 8,
+        "stage": 9,
         "seededAtCount": 1675,
         "surfaced": true,
         "fate": "growing",
@@ -1723,11 +1723,12 @@
         "kind": "shortage",
         "premise": "A foundational material used in the Making's core work has quietly been substituted with an inferior source for several production cycles, and nothing built from it has yet been tested under real…",
         "cause": "The two workshops already deadlocked over the shared tool have each independently begun sourcing their own materials rather than drawing from the common…",
-        "stage": 1,
+        "stage": 2,
         "seededAtCount": 1826,
-        "surfaced": false,
+        "surfaced": true,
         "fate": "growing",
-        "lastMovedCount": 1826
+        "lastMovedCount": 1826,
+        "surfacedAtCount": 1837
       }
     },
     "arcStages": {
@@ -7210,8 +7211,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789389621363,
-  "rev": 579,
+  "updatedAt": 1789391432499,
+  "rev": 582,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8684,7 +8685,7 @@
     "lastDeployDay": 31,
     "lastBeat": "witness_power"
   },
-  "syncedAt": 1789354730289,
+  "syncedAt": 1789389621363,
   "_applyFailures": null,
   "companionMemory": {
     "coil": [

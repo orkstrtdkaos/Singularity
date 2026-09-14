@@ -3312,8 +3312,7 @@
    "energyCost": 12,
    "attribute": "practical",
    "subAttribute": "wits",
-   "_subAttributeReviewed": true,
-   "_subAttributeWhy": "⛔ AUTHORED TO OVERRIDE THE DERIVATION. `bind` is not in `craftSubAttributes.finesseVerbs.practical`, so the derivation routes this to the POWER sub, `craft` — and craft is making and precise tool work, which is not what a stopped second asks of you. ⚠️ THE ROLL IS NOT 'DO YOU UNDERSTAND THE HOUR', IT IS 'WHAT DO YOU DO WITH THE BEAT YOU JUST BOUGHT'. A spike set in front of a charge is improvisation under pressure, which is `wits` exactly.",
+   "_subAttributeReviewed": "⛑ §166 REVIEW, 2026-09-13. Authored `wits` to OVERRIDE the derivation: `bind` is not in `craftSubAttributes.finesseVerbs.practical`, so the derivation routes this to the POWER sub `craft` — making and precise tool work, which is not what a stopped second asks of you. ⛔ THE ROLL IS NOT 'DO YOU UNDERSTAND THE HOUR', IT IS 'WHAT DO YOU DO WITH THE BEAT YOU JUST BOUGHT'. A spike set in front of a charge is improvisation under pressure. ⚠️ AND THE CHOICE IS BY USE, NOT BY TRADITION — Erik corrected that reasoning on this batch: picking the sub a tradition already has a lot of is picking by census.",
    "axes": {
     "space_time": 0.5,
     "chaos_order": 0.15
@@ -3435,8 +3434,7 @@
    "energyCost": 15,
    "attribute": "mental",
    "subAttribute": "insight",
-   "_subAttributeReviewed": true,
-   "_subAttributeWhy": "⚠️ AUTHORED TO PIN WHAT THE DERIVATION WOULD GIVE BY LUCK. `restore` sits in `finesseVerbs.mental`, so the derivation lands on `insight` today — but a single function change would silently move it to `reason`. ⛑ AND `insight` IS RIGHT ON THE PROSE: r1 reaches back only into what you actually SAW happen, so the craft is built on having perceived the moment precisely enough to find it again.",
+   "_subAttributeReviewed": "⛑ §166 REVIEW, 2026-09-13. Authored `insight` to PIN WHAT THE DERIVATION GIVES BY LUCK: `restore` sits in `finesseVerbs.mental`, so it lands on `insight` today and a single function change would move it silently to `reason`. ⛔ AND `insight` IS RIGHT ON THE PROSE: r1 reaches back only into what you actually SAW happen, so the craft rests on having perceived the moment precisely enough to find it again.",
    "axes": {
     "space_time": 0.65,
     "death_life": 0.3
@@ -3471,8 +3469,13 @@
     "duration": 0,
     "targets": 1,
     "damageType": "temporal",
-    "reachesDepth": "threshold at r2, deep dark at r3",
-    "note": "T-V. ⛔ THE HOURKEEPERS' ROAD BACK, PARALLEL TO `calling_back` AND DIFFERENT IN METHOD — an Ashwarden walks the dead up the ladder; an Hourkeeper reaches into the hour it happened and takes them out of it. ⚠️ THE RANKS MAP ONTO `canReach`'s EXISTING DEPTHS (death.js): threshold · near dark · deep dark · sealed, and the sealed are past this as they are past everything. ⛑ COST IS ENERGY LIKE ANY OTHER CRAFT (Erik 2026-09-13) — the life-substitution at r3 is an OPTION a player may take, not a tax the craft levies."
+    "reachesDepth": [
+     0,
+     1,
+     2
+    ],
+    "note": "T-V. ⛔ THE HOURKEEPERS' ROAD BACK, PARALLEL TO `calling_back` AND DIFFERENT IN METHOD — an Ashwarden walks the dead up the ladder; an Hourkeeper reaches into the hour it happened and takes them out of it. ⚠️ THE RANKS MAP ONTO `canReach`'s EXISTING DEPTHS (death.js): threshold · near dark · deep dark · sealed, and the sealed are past this as they are past everything. ⛑ COST IS ENERGY LIKE ANY OTHER CRAFT (Erik 2026-09-13) — the life-substitution at r3 is an OPTION a player may take, not a tax the craft levies.",
+    "_reachesDepthWhy": "⛑ DEPTH INDICES, matching `ask_the_dead`'s [0,1,2]: the threshold (0), the near dark (1), the deep dark (2) — and NOT the sealed (3), who refuse every road. r2 reaches the threshold; r3 reaches past it into the deep dark."
    },
    "intensity": {
     "conserve": "seconds only, and the thing must already be in your hands",

@@ -105,7 +105,7 @@
   "maxHealth": 68,
   "health": 68,
   "maxEnergy": 146,
-  "energy": 85,
+  "energy": 77,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -158,6 +158,21 @@
       "_bonusApplied": 0.15,
       "day": 3,
       "worldDay": 69
+    },
+    {
+      "at": "2026-09-14T23:01:28.307Z",
+      "locationId": "the_crossing",
+      "communityId": "the.crossing",
+      "description": "Read a Churn-Revel's command-orchestration and bound them with a true bargain at the Null Stone's heart, holding ground against deliberate chaos.",
+      "tags": [
+        "precision",
+        "clarity",
+        "stood ground"
+      ],
+      "weight": 1,
+      "spread": [],
+      "day": 3,
+      "worldDay": 76
     }
   ],
   "relationships": {},
@@ -243,74 +258,105 @@
         "player": null,
         "summary": "The Churn-Revel erupts at the Null Stone—a commander orchestrating chaos as a tool.",
         "narration": "You let Prism Sight settle into the chaos—and suddenly the Revel's motion has *shape*. The figure vaulting toward the Null Stone is not random; they are *commanding* the ribbons, the horn, the impossible angles—orchestrating the disorder like a musician conducts silence. They favour command the way a weaver favours thread: every trailing ribbon is a gestured instruction, every shimmer from the horn a signal reshaping what the others do. The Revel reads as someone conducting a thing that has no music, making it move precisely by refusing it any predictability at all."
+      },
+      {
+        "player": null,
+        "summary": "At the Hub crossing, Loki read the Churn-Revel's command-shape and bound them with a true bargain; the Revel's next move is known. The Null Stone stands between them.",
+        "narration": "You hold still in the chaos—let Prism Sight settle into the ribbons and the shimmer, and suddenly the Revel's orchestration reads like a score written in light. They *favour command*. Every gesture reaches for control. You see exactly how the next motion will move, and you know what they are reaching for when they reach.\n\nYou step into their path and speak a Descent—not a bargain shouted across noise, but a bargain *named* at close range, one thing offered for another, both true. The Revel hears it. Their eyes lock on yours. For one breath the chaos *steadies*—they are bound by the fairness of what you named, and they *feel* it. The ribbons go taut. The horn's shimmer holds. They have swayed toward your frame instead of pushing through it.\n\nBut they are Churn-folk, and chaos is their native air. They press a point—a gesture that makes the moment *uncertain* again, just enough for them to hold ground. The bind takes, but it bends.\n\nYou do not let go. You reach for See the Made Thing and read what they are *about* to do next—the construction behind the apparent chaos, the real intention beneath the false randomness. The Revel is *braced* now, defending the shape of their next move against your knowing. But you have read them. You know what comes.\n\nThe two of you stand almost within arm's reach of the Null Stone. The chaos has *quieted* around you—your companions have stepped back, the merchants are frozen, even Kael is watching without moving. The Revel's breath is steady. Their eyes are locked on yours. The ribbons hang in the air like a question.\n\n\"What are you protecting?\" you ask quietly. The Revel does not answer—not yet. But their hand has stopped reaching for the seam."
       }
     ],
     "lastTurn": {
-      "narration": "You let Prism Sight settle into the chaos—and suddenly the Revel's motion has *shape*. The figure vaulting toward the Null Stone is not random; they are *commanding* the ribbons, the horn, the impossible angles—orchestrating the disorder like a musician conducts silence. They favour command the way a weaver favours thread: every trailing ribbon is a gestured instruction, every shimmer from the horn a signal reshaping what the others do. The Revel reads as someone conducting a thing that has no music, making it move precisely by refusing it any predictability at all.",
-      "sceneSummary": "The Churn-Revel erupts at the Null Stone—a commander orchestrating chaos as a tool.",
+      "narration": "You hold still in the chaos—let Prism Sight settle into the ribbons and the shimmer, and suddenly the Revel's orchestration reads like a score written in light. They *favour command*. Every gesture reaches for control. You see exactly how the next motion will move, and you know what they are reaching for when they reach.\n\nYou step into their path and speak a Descent—not a bargain shouted across noise, but a bargain *named* at close range, one thing offered for another, both true. The Revel hears it. Their eyes lock on yours. For one breath the chaos *steadies*—they are bound by the fairness of what you named, and they *feel* it. The ribbons go taut. The horn's shimmer holds. They have swayed toward your frame instead of pushing through it.\n\nBut they are Churn-folk, and chaos is their native air. They press a point—a gesture that makes the moment *uncertain* again, just enough for them to hold ground. The bind takes, but it bends.\n\nYou do not let go. You reach for See the Made Thing and read what they are *about* to do next—the construction behind the apparent chaos, the real intention beneath the false randomness. The Revel is *braced* now, defending the shape of their next move against your knowing. But you have read them. You know what comes.\n\nThe two of you stand almost within arm's reach of the Null Stone. The chaos has *quieted* around you—your companions have stepped back, the merchants are frozen, even Kael is watching without moving. The Revel's breath is steady. Their eyes are locked on yours. The ribbons hang in the air like a question.\n\n\"What are you protecting?\" you ask quietly. The Revel does not answer—not yet. But their hand has stopped reaching for the seam.",
+      "sceneSummary": "At the Hub crossing, Loki read the Churn-Revel's command-shape and bound them with a true bargain; the Revel's next move is known. The Null Stone stands between them.",
       "choices": [
         {
-          "label": "Use Misdirect to scatter their attention—make them believe the stone is elsewhere, or that one of the ribbons has come loose from the pattern",
+          "label": "Speak plainly: tell the Revel what you read in the stone—that it was *made*, deliberately sealed—and ask who sent them.",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {},
           "difficulty": "normal",
-          "opposedDifficulty": 32,
+          "opposedDifficulty": null,
           "intentTags": [
-            "feint",
-            "careful"
+            "speak",
+            "confront"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Misdirect—create a false signal that sends their attention *away* from the Null Stone and toward the arch they came through, buying one clean move for someone else.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "deceive",
+            "defend"
           ],
           "abilityId": "misdirect",
           "energyCost": 3,
-          "trivial": false
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Strike at the Revel's hands or wrists—the moment they gesture is the moment you move, aiming to disrupt the command itself",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Step closer and ask what price they were *paid*—make them name the hand that sent them. Descent can reach that far if it's a real question.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {},
           "difficulty": "hard",
-          "opposedDifficulty": 35,
+          "opposedDifficulty": null,
           "intentTags": [
-            "attack",
-            "risky"
+            "confront",
+            "bargain"
           ],
-          "abilityId": "hunters_strike",
-          "energyCost": 4,
-          "trivial": false
-        },
-        {
-          "label": "Use Harmonic Voice to cut through the chaos—project a single clear tone that holds just long enough to freeze the Revel's next gesture",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": 32,
-          "intentTags": [
-            "defend",
-            "careful"
-          ],
-          "abilityId": "harmonic_voice",
+          "abilityId": "descent",
           "energyCost": 5,
-          "trivial": false
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Move—dodge sideways and position yourself between the Revel and the stone, using the Null Stone itself as a physical block",
+          "label": "Break away—step back from the Revel and move toward Veln Ashpause by the western arch. An Hourkeeper may know who sent something this deliberately timed.",
           "attribute": "physical",
           "subAttribute": "agility",
           "axes": {},
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "defend"
+            "move",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
-      "deeds": [],
-      "characterDeltas": {},
+      "deeds": [
+        {
+          "description": "Read a Churn-Revel's command-orchestration and bound them with a true bargain at the Null Stone's heart, holding ground against deliberate chaos.",
+          "tags": [
+            "precision",
+            "clarity",
+            "stood ground"
+          ],
+          "weight": 1,
+          "communityId": "the.crossing"
+        }
+      ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -8,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
       "ledgerEvents": [],
       "questUpdates": [],
       "standingOps": [],
@@ -320,52 +366,74 @@
       "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "The Hub crossing at late afternoon—five waygate arches converge around the Null Stone at the chamber's heart. Pale stone floor worn smooth. High windows cast long slanting bars of light. One spinward arch spills chaos: ribbons, laughter, impossible motion. A brass horn produces only shimmer. The Null Stone sits at the centre, its seam now visible.",
+        "setting": "The Hub crossing at late evening—five waygate arches surround the Null Stone at the chamber's heart. Pale stone floor worn smooth. The spinward arch still spills faint traces of chaos-motion, now quieting. High windows cast long shadows. The sealed Null Stone sits at the centre, its seam visible.",
         "npcsPresent": [
           {
             "name": "Vessin Tallow-bark",
-            "state": "Hand at her coat, reading the chaos with the focus of someone assessing threat"
+            "state": "Stepped back from the confrontation, hand still at her coat, watching Loki and the Revel with the focus of someone reading what will happen next"
           },
           {
             "name": "Kael",
-            "state": "Motionless, eyes tracking the Revel with the focus of someone who foresaw this"
+            "state": "Motionless by the hub's edge, eyes tracking the Revel without moving, witnessing"
           },
           {
             "name": "Veln Ashpause",
-            "state": "Still by the western arch, gaze shifted to the chaos, watching with foreknowledge"
-          },
-          {
-            "name": "Cy",
-            "state": "Lens snapped closed, perched at the base of the Null Stone"
+            "state": "Still by the western arch, gaze moved to the confrontation, watching with foreknowledge—their expression unchanged"
           },
           {
             "name": "A Churn-Revel",
-            "state": "Vaulted through the spinward arch, now moving toward the Null Stone with reaching hands—orchestrating the chaos through gesture and command"
+            "state": "Standing almost within arm's reach of Loki, breath steady, eyes locked, hand stopped mid-reach toward the seam, ribbons hanging in the air"
+          },
+          {
+            "name": "Cy",
+            "state": "At the base of the Null Stone, lens closed, present and motionless"
           },
           {
             "name": "The relay desk attendant",
-            "state": "Bolted from their seat, backing away from the chaos"
+            "state": "Pressed against the far wall, watching, not moving"
           },
           {
             "name": "Two merchants",
-            "state": "Pressed against the carved bench, eyes wide"
+            "state": "Frozen against the carved bench, eyes wide, silent"
           }
         ],
         "objects": [
-          "The Null Stone at the center—pale, sealed, its seam now visible",
-          "Five waygate arches (the spinward one spilling chaos)",
-          "Pale worn stone floor",
-          "Ribbons of cloth trailing through the air",
-          "A brass horn (producing no sound, only shimmer)",
-          "The carved bench"
+          "The Null Stone at the center—pale, sealed, its seam visible, the focus of the confrontation",
+          "Five waygate arches—the spinward one quieting from chaos-motion",
+          "Ribbons of cloth hanging in the air between Loki and the Revel",
+          "A brass horn in the Revel's companion's hands, producing no sound",
+          "The carved bench where merchants press back",
+          "Pale worn stone floor"
         ],
         "threads": [
-          "What does the Revel want with the Null Stone?",
-          "Who sent the Churn-Revel, and why now?",
-          "Does Veln Ashpause know this was coming?"
+          "What is the Revel protecting in the Null Stone?",
+          "Who sent them—the man in the lower Annex, or someone else?",
+          "Will the Revel answer, or press the confrontation further?",
+          "What does Veln Ashpause know about this moment?"
         ]
       },
-      "npcUpdates": [],
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "churn-revel-one",
+          "name": "A Churn-Revel",
+          "role": "Orchestrator of chaos directed at the Null Stone",
+          "note": "Bound by Loki's Descent and held by See the Made Thing—their next move is known. Standing motionless at the Null Stone's edge, eyes locked on Loki, hand stopped from reaching the seam. Braced against revelation.",
+          "learned": [
+            "They favour command above chaos—every gesture is orchestrated, not random",
+            "They know the seam in the Null Stone—what they were reaching for is specific, not exploratory",
+            "The price they were paid is significant enough to hold them against a binding bargain"
+          ],
+          "skillsObserved": [
+            "Orchestrates multiple agents through gesture alone",
+            "Moves geometrically impossible in ways that read as controlled rather than frantic",
+            "Holds ground against binding despite being Churn-folk"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Bound and held at the Null Stone—braced against Loki's read of their next move"
+        }
+      ],
       "intentsHeard": [],
       "factUpdates": [],
       "placeUpdates": [],
@@ -375,71 +443,77 @@
       "debtOps": [],
       "partyOps": [],
       "generateRequest": [],
-      "encounterOps": [],
+      "encounterOps": [
+        {
+          "op": "tactic",
+          "tag": "commanded"
+        }
+      ],
       "projectOps": [],
       "bandOps": [],
       "deathOps": [],
       "newEncounter": null,
       "unlockPrecursor": null,
       "unlockSubstrate": null,
-      "timeOps": null,
+      "timeOps": {},
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": null,
+      "imagePrompt": "Loki and the Churn-Revel stand almost within arm's reach at the Null Stone's heart—the chaos quieted, ribbons hanging frozen in the fading evening light, their eyes locked. The Revel's hand has stopped reaching. The sealed stone sits between them like a held breath.",
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Hub crossing at late afternoon—five waygate arches converge around the Null Stone at the chamber's heart. Pale stone floor worn smooth. High windows cast long slanting bars of light. One spinward arch spills chaos: ribbons, laughter, impossible motion. A brass horn produces only shimmer. The Null Stone sits at the centre, its seam now visible.",
+      "setting": "The Hub crossing at late evening—five waygate arches surround the Null Stone at the chamber's heart. Pale stone floor worn smooth. The spinward arch still spills faint traces of chaos-motion, now quieting. High windows cast long shadows. The sealed Null Stone sits at the centre, its seam visible.",
       "npcsPresent": [
         {
           "name": "Vessin Tallow-bark",
-          "state": "Hand at her coat, reading the chaos with the focus of someone assessing threat"
+          "state": "Stepped back from the confrontation, hand still at her coat, watching Loki and the Revel with the focus of someone readi"
         },
         {
           "name": "Kael",
-          "state": "Motionless, eyes tracking the Revel with the focus of someone who foresaw this"
+          "state": "Motionless by the hub's edge, eyes tracking the Revel without moving, witnessing"
         },
         {
           "name": "Veln Ashpause",
-          "state": "Still by the western arch, gaze shifted to the chaos, watching with foreknowledge"
-        },
-        {
-          "name": "Cy",
-          "state": "Lens snapped closed, perched at the base of the Null Stone"
+          "state": "Still by the western arch, gaze moved to the confrontation, watching with foreknowledge—their expression unchanged"
         },
         {
           "name": "A Churn-Revel",
-          "state": "Vaulted through the spinward arch, now moving toward the Null Stone with reaching hands—orchestrating the chaos through "
+          "state": "Standing almost within arm's reach of Loki, breath steady, eyes locked, hand stopped mid-reach toward the seam, ribbons "
+        },
+        {
+          "name": "Cy",
+          "state": "At the base of the Null Stone, lens closed, present and motionless"
         },
         {
           "name": "The relay desk attendant",
-          "state": "Bolted from their seat, backing away from the chaos"
+          "state": "Pressed against the far wall, watching, not moving"
         },
         {
           "name": "Two merchants",
-          "state": "Pressed against the carved bench, eyes wide"
+          "state": "Frozen against the carved bench, eyes wide, silent"
         }
       ],
       "objects": [
-        "The Null Stone at the center—pale, sealed, its seam now visible",
-        "Five waygate arches (the spinward one spilling chaos)",
-        "Pale worn stone floor",
-        "Ribbons of cloth trailing through the air",
-        "A brass horn (producing no sound, only shimmer)",
-        "The carved bench"
+        "The Null Stone at the center—pale, sealed, its seam visible, the focus of the co",
+        "Five waygate arches—the spinward one quieting from chaos-motion",
+        "Ribbons of cloth hanging in the air between Loki and the Revel",
+        "A brass horn in the Revel's companion's hands, producing no sound",
+        "The carved bench where merchants press back",
+        "Pale worn stone floor"
       ],
       "threads": [
-        "What does the Revel want with the Null Stone?",
-        "Who sent the Churn-Revel, and why now?",
-        "Does Veln Ashpause know this was coming?"
+        "What is the Revel protecting in the Null Stone?",
+        "Who sent them—the man in the lower Annex, or someone else?",
+        "Will the Revel answer, or press the confrontation further?",
+        "What does Veln Ashpause know about this moment?"
       ]
     },
-    "beats": 12,
+    "beats": 13,
     "subPlace": {
       "slug": "the-hub-crossing",
       "name": "The Hub Crossing",
@@ -449,7 +523,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 3,
-    "hour": 20,
+    "hour": 21,
     "realAnchor": null
   },
   "companions": [
@@ -1425,7 +1499,7 @@
     "lastSharedReadAt": "2026-09-07T22:27:40.544Z",
     "lastTickWorldDay": 76,
     "lastCanonWorldDay": 76,
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 3,
     "recentOffers": [
       {
         "thing": "A figure in grey standing by the western arch, watching the gates with absolute stillness and patience.",
@@ -7184,8 +7258,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789426860672,
-  "rev": 616,
+  "updatedAt": 1789426888311,
+  "rev": 617,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8133,10 +8207,10 @@
     {
       "id": "sess-10",
       "startedAt": "2026-09-14T22:51:56.902Z",
-      "lastAt": "2026-09-14T22:55:18.399Z",
+      "lastAt": "2026-09-14T23:01:28.307Z",
       "startDay": 76,
       "endDay": 76,
-      "beats": 2
+      "beats": 3
     }
   ],
   "establishedFacts": [
@@ -8186,35 +8260,35 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 181,
-    "choices": 181,
-    "characterDeltas": 73,
-    "scene": 181,
+    "sceneSummary": 182,
+    "choices": 182,
+    "characterDeltas": 74,
+    "scene": 182,
     "placeUpdates": 21,
     "codexUpdates": 103,
     "timeOps": 162,
     "offer": 17,
     "generateRequest": 6,
-    "sceneEnded": 56,
-    "npcUpdates": 148,
+    "sceneEnded": 57,
+    "npcUpdates": 149,
     "moveTo": 6,
-    "gambitApt": 20,
-    "deeds": 2,
+    "gambitApt": 21,
+    "deeds": 3,
     "questUpdates": 17,
     "standingOps": 1,
     "factUpdates": 5,
     "stageOps": 7,
-    "encounterOps": 8,
+    "encounterOps": 9,
     "ledgerEvents": 2,
     "newEncounter": 3,
-    "imagePrompt": 9,
+    "imagePrompt": 10,
     "scene_ended": 1,
     "stateOps": 1
   },
-  "_opTurns": 181,
+  "_opTurns": 182,
   "customAbilities": {},
   "companionBonds": {
-    "coil": 1.75
+    "coil": 2.25
   },
   "practice": {
     "schemaVersion": 1,
@@ -8986,6 +9060,11 @@
         "text": "Carried a genuine thanks to a road-warden who holds the water-crisis and the suffering it brings as their own burden to warn against.",
         "weight": 1,
         "day": 3
+      },
+      {
+        "text": "Read a Churn-Revel's command-orchestration and bound them with a true bargain at the Null Stone's heart, holding ground against deliberate chaos.",
+        "weight": 1,
+        "day": 3
       }
     ]
   },
@@ -9207,6 +9286,14 @@
       "day": 3,
       "worldDay": 69,
       "actionCount": 140
+    },
+    {
+      "companionId": "coil",
+      "kind": "deed",
+      "delta": 0.5,
+      "day": 3,
+      "worldDay": 76,
+      "actionCount": 153
     }
   ],
   "_exchangeReceipts": [],
@@ -9695,7 +9782,7 @@
     }
   },
   "_opUnknown": {
-    "sceneSummary": 2
+    "sceneSummary": 3
   },
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T22:51:56.913Z",

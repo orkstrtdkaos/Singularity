@@ -64,6 +64,7 @@ export function buildDevReport(character, { build = null, vocabulary = [], promp
   // read as clean. It belongs beside the op-emission counts, which is the other place this report says "the
   // machinery ran and something the machinery needed never arrived."
   const axesDropped = Array.isArray(c._axesDropped) ? c._axesDropped.slice(-20) : [];
+  const handoverRefused = Array.isArray(c._handoverRefused) ? c._handoverRefused.slice(-20) : [];
   const emitted = c._opEmitted || {};
   const ledger = c._opLedger || {};
   const turns = c._opTurns || 0;
@@ -98,7 +99,11 @@ export function buildDevReport(character, { build = null, vocabulary = [], promp
     // ⛔ SNG-547 O5: the contract failures nobody heard. A dropped axis means the model answered the SHAPE
     // wrongly — `{"axes": {"spectrumId": "mechanical_spiritual"}}`, the placeholder returned literally — and
     // the turn still read as clean, because the guard that kept the dice safe said nothing on its way past.
-    contract: { axesDropped, axesDroppedN: axesDropped.length },
+    // ⛔ SNG-578: and the hand-overs that were ASKED FOR and refused. ⚠️ Without this, `carries: 0` reads as
+    // "the GM never tries" when it may equally be "the GM tries and the engine says no" — and those two call
+    // for opposite fixes: a sharper directive, or a repair.
+    contract: { axesDropped, axesDroppedN: axesDropped.length,
+      handoverRefused, handoverRefusedN: handoverRefused.length },
     ops: {
       emitted, outcomes, never,
       neverCount: never.length,

@@ -1076,9 +1076,28 @@ export function bearersOf(character) {
   return Object.values(character?.npcRegistry || {}).filter(n => n && Array.isArray(n.inventory) && n.inventory.length);
 }
 
+/** ⛔ SNG-578 — AN ITEM ANSWERS TO EVERY NAME IT HAS, AND THIS ANSWERED TO ONE.
+ *
+ *  ⚑ FOUND BY THE DEV REPORT, which is what it was built for: `carries` is emitted ZERO times across 128
+ *  people, and the GM contract has said so about itself for weeks. ⚠️ Part of the reason is that it could not
+ *  have succeeded: `customName || name` SHORT-CIRCUITS — the moment the fiction names a thing, its original
+ *  name stops matching — and `aliases` were never consulted at all.
+ *
+ *  ⛑ SILAS'S SPEAR IS THE CASE: `customName` "Memory — The Dual Spear", `name` "Assembled Mid-Weight Spear".
+ *  The parser now tells the GM BOTH (SNG-547 O4 lists every name beside the item) — and whichever one it
+ *  answered with, this refused it. "Memory" is not the customName either; it is a word inside it.
+ *
+ *  ⚠️ SAME BUG, SAME SENTENCE, ONE NOUN OVER — which is what SNG-547 §2C said about the parser being fed
+ *  abilities by id only. That half was fixed by listing the names; this half kept matching one of them.
+ *
+ *  ⛔ AND IT IS EXACT, NEVER FUZZY. Aevi's O4 ruling stands: "do not put fuzzy matching in the model" — and
+ *  not here either. A substring match would hand over the wrong spear, and handing over the wrong object is
+ *  worse than refusing. Every name is compared whole. */
 const sameItem = (it, name) => {
   const want = String(name || "").toLowerCase().trim();
-  return String(it?.customName || it?.name || "").toLowerCase().trim() === want || String(it?.id || "").toLowerCase() === want;
+  if (!want) return false;
+  const names = [it?.customName, it?.name, it?.id, ...(Array.isArray(it?.aliases) ? it.aliases : [])];
+  return names.some(n => String(n || "").toLowerCase().trim() === want);
 };
 
 /** Hand an item the character holds to a person. The OBJECT moves — there is one of it, and it is now hers. */

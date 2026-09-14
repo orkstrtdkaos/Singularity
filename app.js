@@ -144,7 +144,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "1.9.544";
+const APP_VERSION = "1.9.545";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1343,6 +1343,16 @@ function bestiaryOf(id) {
 function rosterFigureOf(seed) {
   const id = String(seed || "").replace(/^whois-(?:death-)?/, "");
   return (worldRoster(character?.worldState || {}, CONTENT) || []).find(f => f.id === id) || null;
+}
+
+/** ⛔ SNG-578 — AN OBJECT THAT DID NOT CHANGE HANDS, AND WHY. ⚑ The whole point is that it is COUNTED rather
+ *  than logged: a field the GM has never emitted and a field it emits into a refusal look the same in a report
+ *  that only counts emissions, and they call for opposite fixes. */
+function noteHandoverRefused(field, npcId, itemName, why) {
+  character._handoverRefused = [...(character._handoverRefused || []).slice(-19),
+    { at: new Date().toISOString(), field, npcId: String(npcId || ""), item: String(itemName || ""), why: String(why || "") }].slice(-20);
+  try { queueDevReport(); } catch { /* telemetry must never cost a turn */ }
+  if (isDevMode()) console.warn(`[npcUpdates] ${field} refused:`, why);
 }
 
 /** ⛔ SNG-576 — THE SHARED WORLD'S OWN LOOK FOR A SUBJECT, from the slice this viewer already holds.
@@ -7563,13 +7573,17 @@ function applyTurn(turn, resolution, playerWords = null) {
   // ✅ R45c: the fiction hands something over, and the object MOVES — one of it, and it stays with them across scenes.
   for (const u of turn.npcUpdates || []) {
     if (!u?.npcId) continue;
+    // ⛔ SNG-578 — A REFUSAL HERE WAS CONSOLE-ONLY, AND THAT IS WHY THE INSTRUMENT COULD NOT ANSWER ITS OWN
+    // QUESTION. `carries` reads ZERO across 128 people and the GM contract says so about itself — but "never
+    // emitted" and "emitted and silently refused" looked IDENTICAL from the outside, and only one of those is
+    // the GM's fault. ⛑ Counted now, the same way `axesDropped` was: the dev report can tell them apart.
     for (const nm of (Array.isArray(u.carries) ? u.carries : []).slice(0, 4)) {
       const r = giveItemTo(character, u.npcId, nm, { day: absoluteWorldDay() });
-      if (!r.ok) console.warn("[npcUpdates] carries refused:", r.why);
+      if (!r.ok) noteHandoverRefused("carries", u.npcId, nm, r.why);
     }
     for (const nm of (Array.isArray(u.returns) ? u.returns : []).slice(0, 4)) {
       const r = takeItemFrom(character, u.npcId, nm);
-      if (!r.ok) console.warn("[npcUpdates] returns refused:", r.why);
+      if (!r.ok) noteHandoverRefused("returns", u.npcId, nm, r.why);
     }
   }
   for (const u of turn.npcUpdates || []) noteGeneratedAttention(u.npcId, "interact", memCtx.day);

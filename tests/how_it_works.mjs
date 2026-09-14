@@ -15761,6 +15761,68 @@ console.log("\n── §229 · three true counts of the traditions, and which is
     /\d+ traditions/.test(row) && /\d+ poles/.test(row), row.slice(0, 96));
 }
 
+
+// ⛔ SNG-578 — FOUND BY THE DEV REPORT, WHICH IS WHAT ERIK ASKED IT FOR: "let's make them a robust Play/Dev
+// that generates the data you would need to find and fix anything that is misfiring or not wired along the
+// way."
+//
+// ⚑ MEASURED ACROSS EVERY SAVE — 128 registry people: `carries` is emitted ZERO times. The GM contract has
+// SAID SO ABOUT ITSELF for weeks ("'deed' and 'carries' EXACTLY ZERO times in 369 turns, though both are
+// wired end to end"). ⛑ Age and deeds have since moved — 2 people carry an age (Teva at 19, on Erik's own
+// ruling) and 1 a deed — so the directives do work. `carries` did not move.
+//
+// ⛔ AND PART OF THE REASON IS THAT IT COULD NOT HAVE SUCCEEDED.
+console.log("\n── §230 · an item answers to every name it has ──");
+{
+  const N230 = await import("../engine/npcs.js");
+  const DR230 = await import("../engine/devreport.js");
+
+  /* ---- 1 · ⛔ THE SHORT-CIRCUIT: A RENAMED THING STOPPED ANSWERING TO ITS OWN NAME ---- */
+  // ⚠️ `customName || name` means the moment the fiction names a thing, its ORIGINAL name stops matching —
+  // and `aliases` were never consulted at all. ⛑ Silas's spear is the case: `customName` "Memory — The Dual
+  // Spear", `name` "Assembled Mid-Weight Spear", and SNG-547 O4 now tells the GM BOTH.
+  const mk230 = () => ({
+    npcRegistry: { pell: { id: "pell", name: "Pell" } },
+    inventory: [{ id: "spear-1", name: "Assembled Mid-Weight Spear", customName: "Memory — The Dual Spear",
+      aliases: ["Memory"], qty: 1 }],
+  });
+  const handed = (say) => N230.giveItemTo(mk230(), "pell", say, { day: 10 }).ok;
+  check("§230: ⛔ a renamed item still answers to the name it was made with",
+    handed("Assembled Mid-Weight Spear") === true);
+  check("§230: ⛑ …and to the name the fiction gave it",
+    handed("Memory — The Dual Spear") === true);
+  check("§230: …and to an alias, which is the shape SNG-547 O4 already asks the GM to record",
+    handed("Memory") === true);
+  // ⛔ AND IT IS EXACT, NEVER FUZZY. Aevi's O4 ruling stands: "do not put fuzzy matching in the model" — and
+  // not here either. ⚠️ HANDING OVER THE WRONG OBJECT IS WORSE THAN REFUSING, because the refusal is visible
+  // and the wrong spear is not.
+  check("§230: ⚠️ …and a name it does not have is still refused — no substring, no near-miss",
+    handed("spear") === false && handed("Memory the Dual") === false && handed("") === false);
+
+  /* ---- 2 · ⛑ AND THE REFUSAL IS COUNTED, SO THE INSTRUMENT CAN ANSWER ITS OWN QUESTION ---- */
+  // ⛔ THE REFUSAL WAS CONSOLE-ONLY, and that is why `carries: 0` was unreadable: "the GM never tries" and
+  // "the GM tries and the engine says no" LOOK IDENTICAL in a report that counts only emissions — and they
+  // call for opposite fixes, a sharper directive or a repair.
+  const A230 = rd("app.js");
+  check("§230: ⛑ a refused hand-over is recorded on the save rather than written to a console nobody reads",
+    /noteHandoverRefused\("carries", u\.npcId, nm, r\.why\)/.test(A230)
+    && /noteHandoverRefused\("returns", u\.npcId, nm, r\.why\)/.test(A230));
+  const rep230 = DR230.buildDevReport({ id: "c", name: "T", _handoverRefused: [
+    { at: "2026-09-14T00:00:00Z", field: "carries", npcId: "pell", item: "Memory", why: "you are not carrying Memory" }] }, { vocabulary: [] });
+  check("§230: ⛔ …and it reaches the dev report, beside the other contract failures",
+    rep230.contract?.handoverRefusedN === 1 && rep230.contract.handoverRefused[0].field === "carries");
+  // ⚠️ AND IT NAMES WHAT WAS ASKED FOR. "A hand-over was refused" is unactionable; the ITEM and the REASON are
+  // what say whether the GM used a name the player's record does not carry, or reached for something it has
+  // not got.
+  check("§230: ⚠️ …carrying the item and the reason, because a count alone cannot be acted on",
+    rep230.contract.handoverRefused[0].item === "Memory"
+    && /not carrying/.test(rep230.contract.handoverRefused[0].why));
+  // ⛑ AND THE PLAYER IS NOT TOLD. This is a contract failure between the engine and the model; a player whose
+  // turn resolved does not need to read that a field they never heard of did not apply.
+  check("§230: ⛑ …and it warns in DEV only, like every other contract failure",
+    /if \(isDevMode\(\)\) console\.warn\(`\[npcUpdates\] \$\{field\} refused:`/.test(A230));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

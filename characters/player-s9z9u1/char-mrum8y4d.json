@@ -241,217 +241,9 @@
       }
     ],
     "lastTurn": {
-      "narration": "The afternoon light splinters.\n\nOne of the five waygate arches—the one facing spinward—detonates into *motion*. Not violence: motion. A figure vaults through the arch in a tumble that makes no sense geometrically, lands twisted, and springs upright in the same breath. Behind them come others, three or four, moving in a pattern that has no pattern. They are *laughing*. One carries a brass horn that produces no sound at all—only a shimmer in the air. Another trails ribbons of cloth that move against the wind. The chaos spreads like water finding cracks in stone.\n\nThe relay desk attendant bolts from their seat. The merchants by the carved bench press backward. Cy's lens snaps closed. Vessin's hand moves to her coat.\n\nKael does not move. Their eyes track the Revel with the focus of someone reading a text they already know the shape of.\n\nVeln Ashpause's grey-coat does not flicker. But their gaze—fixed until now on you and the Null Stone—shifts. Watches the chaos with the terrible attention of someone who foresaw exactly this.\n\nOne of the Revel figures breaks from the knot and moves *toward* the stone. Not running. Flowing. Their hands are already reaching, and you realize: this is not random carnival madness. Something about the Null Stone has drawn them here. The sealed seam you just found. The thing hidden inside it. This *chaos* is a door—and someone is opening it while the Hub crossing's ordinary eye is turned elsewhere.\n\nThe choice is yours. The moment is *now*.",
-      "sceneSummary": "At the Hub crossing, a Churn-Revel erupts from one of the waygate arches—deliberate chaos masking a theft or tampering directed at the Null Stone itself. The sealed seam you uncovered is the target.",
-      "choices": [
-        {
-          "label": "Press into the chaos—cut a line toward the Revel figure moving on the stone",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
-          "difficulty": "hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "attack",
-            "defend",
-            "risky"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Misdirect to fracture the Revel's focus—buy Kael or Vessin a clean move",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "misdirect",
-            "defend"
-          ],
-          "abilityId": "misdirect",
-          "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Kael plainly—do they know what this Revel is, and what it wants",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "ask"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Stay at the stone and shield it—physical presence between the Revel and the seam",
-          "attribute": "physical",
-          "subAttribute": "strength",
-          "axes": {},
-          "difficulty": "hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "defend",
-            "guard"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        }
-      ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "standingOps": [],
-      "delegateOps": [],
-      "arcOps": [],
-      "adoptSchool": null,
-      "offer": null,
-      "stageOps": [],
-      "scene": {
-        "setting": "The Hub crossing at late afternoon—five waygate arches converge around the Null Stone at the chamber's heart. Pale stone floor worn smooth. High windows cast long slanting bars of light. One spinward arch now vomits chaos: ribbons, laughter, impossible motion.",
-        "npcsPresent": [
-          {
-            "name": "Vessin Tallow-bark",
-            "state": "Hand moving to her coat, reading the chaos with the focus of someone assessing a threat"
-          },
-          {
-            "name": "Kael",
-            "state": "Motionless, eyes tracking the Revel with the focus of someone who foresaw this"
-          },
-          {
-            "name": "Veln Ashpause",
-            "state": "Still by the western arch, gaze shifted from Loki and the stone to the chaos, watching with foreknowledge"
-          },
-          {
-            "name": "Cy",
-            "state": "Lens snapped closed, perched at the base of the Null Stone"
-          },
-          {
-            "name": "A Revel figure",
-            "state": "Breaking from the chaos-knot, moving toward the Null Stone with reaching hands"
-          },
-          {
-            "name": "The relay desk attendant",
-            "state": "Bolted from their seat, now backing away from the chaos"
-          },
-          {
-            "name": "Two merchants",
-            "state": "Pressed against the carved bench, eyes wide"
-          }
-        ],
-        "objects": [
-          "The Null Stone at the center—pale, sealed, its seam now visible",
-          "Five waygate arches (the spinward one spilling chaos)",
-          "Pale worn stone floor",
-          "Ribbons of cloth trailing through the air",
-          "A brass horn (producing no sound, only shimmer)",
-          "The carved bench"
-        ],
-        "threads": [
-          "What does the Revel want with the Null Stone?",
-          "Who sent the Churn-Revel, and why now?",
-          "Does Veln Ashpause know this was coming?",
-          "What is sealed behind the seam, and why is someone willing to risk the Hub crossing to reach it?"
-        ]
-      },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "kael",
-          "note": "Tracked the Revel with the focus of someone who foresaw this. Their stillness reads as recognition, not surprise—this is a known thing.",
-          "learned": [
-            "The Churn-Revel or its business is something Kael has encountered or knows of before"
-          ],
-          "statusNote": "Standing at the Hub crossing, tracking the chaos with fore-knowledge"
-        },
-        {
-          "op": "update",
-          "npcId": "veln-ashpause",
-          "note": "Gaze shifted from Loki and the seam to the Revel the moment it erupted. Their foreknowledge now visibly points at this moment.",
-          "statusNote": "By the western arch, watching the Revel with the terrible attention of someone who foresaw this"
-        }
-      ],
-      "intentsHeard": [],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "discovery": null,
-      "codexUpdates": [
-        {
-          "topic": "the-crossing",
-          "label": "The Crossing",
-          "kind": "place",
-          "fact": "A Churn-Revel erupted from the spinward waygate arch at late afternoon on day 3—deliberate chaos masking a coordinated attempt on the Null Stone. The seam's discovery triggered the arrival, or the Revel was already positioned to act the moment the seam was found.",
-          "links": [
-            "the-null-stone",
-            "the-annex-sender"
-          ]
-        }
-      ],
-      "holdingOps": [],
-      "deathOps": [],
-      "newEncounter": {
-        "type": "duel",
-        "flavor": "standoff",
-        "name": "The Churn-Revel",
-        "setup": "A carnival of deliberate chaos erupts from the spinward waygate arch—laughter, ribbons, impossible motion. Beneath the revelry, a coordinated action: the Revel moves to seize or tamper with the Null Stone and its sealed seam. The chaos is the distraction. The stone is the prize. You stand at its base with Vessin, Kael, and Cy nearby. Veln Ashpause watches from the western arch. The Hub crossing's ordinary eye—the merchants, the relay attendant—is in flight.",
-        "lethal": false,
-        "opponent": {
-          "name": "The Churn-Revel",
-          "health": 5,
-          "threat": 25,
-          "yieldAt": 1,
-          "fleeDifficulty": 12,
-          "pursuit": "never",
-          "tacticTags": [
-            "distraction",
-            "misdirection",
-            "charm",
-            "overwhelming-numbers",
-            "flow-like",
-            "adaptive"
-          ]
-        }
-      },
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": null,
-      "moveTo": null,
-      "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": "A moment of fracture at the Hub crossing's heart: pale worn stone beneath high afternoon light. One of five waygate arches erupts in impossible motion—ribbons flowing against the wind, a figure tumbling and rising in a pattern that breaks geometry, laughter that rings like a warning. The Null Stone stands untouched at the chamber's center, its sealed seam catching the light. Around it: Loki kneeling, Vessin's hand at her coat, Kael's motionless focus, and Veln Ashpause in grey watching from the arch with the foreknowledge of an Hourkeeper. Chaos and order colliding at the world's center.",
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "partyOps": [],
-      "generateRequest": [],
-      "encounterOps": [],
-      "projectOps": [],
-      "bandOps": [],
-      "sceneEnded": false,
-      "momentArt": "https://image.pollinations.ai/prompt/A%20moment%20of%20fracture%20at%20the%20Hub%20crossing's%20heart%3A%20pale%20worn%20stone%20beneath%20high%20afternoon%20light.%20One%20of%20five%20waygate%20arches%20erupts%20in%20impossible%20motion%E2%80%94ribbons%20flowing%20against%20the%20wind%2C%20a%20figure%20tumbling%20and%20rising%20in%20a%20pattern%20that%20breaks%20geometry%2C%20laughter%20that%20rings%20like%20a%20warning.%20The%20Null%20Stone%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=22875&nologo=true"
+      "narration": "",
+      "choices": [],
+      "sceneSummary": null
     },
     "sceneState": {
       "setting": "The Hub crossing at late afternoon—five waygate arches converge around the Null Stone at the chamber's heart. Pale stone floor worn smooth. High windows cast long slanting bars of light. One spinward arch now vomits chaos: ribbons, laughter, impossible motion.",
@@ -510,7 +302,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 3,
-    "hour": 19,
+    "hour": 20,
     "realAnchor": null
   },
   "companions": [
@@ -1486,7 +1278,7 @@
     "lastSharedReadAt": "2026-09-07T22:27:40.544Z",
     "lastTickWorldDay": 76,
     "lastCanonWorldDay": 76,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "A figure in grey standing by the western arch, watching the gates with absolute stillness and patience.",
@@ -7245,8 +7037,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789426316914,
-  "rev": 604,
+  "updatedAt": 1789426316989,
+  "rev": 605,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8194,10 +7986,10 @@
     {
       "id": "sess-10",
       "startedAt": "2026-09-14T22:51:56.902Z",
-      "lastAt": "2026-09-14T22:51:56.902Z",
+      "lastAt": "2026-09-14T22:51:56.988Z",
       "startDay": 76,
       "endDay": 76,
-      "beats": 1
+      "beats": 2
     }
   ],
   "establishedFacts": [

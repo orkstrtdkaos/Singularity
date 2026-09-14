@@ -105,7 +105,7 @@
   "maxHealth": 68,
   "health": 68,
   "maxEnergy": 146,
-  "energy": 77,
+  "energy": 73,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -263,73 +263,77 @@
         "player": null,
         "summary": "At the Hub crossing, Loki read the Churn-Revel's command-shape and bound them with a true bargain; the Revel's next move is known. The Null Stone stands between them.",
         "narration": "You hold still in the chaos—let Prism Sight settle into the ribbons and the shimmer, and suddenly the Revel's orchestration reads like a score written in light. They *favour command*. Every gesture reaches for control. You see exactly how the next motion will move, and you know what they are reaching for when they reach.\n\nYou step into their path and speak a Descent—not a bargain shouted across noise, but a bargain *named* at close range, one thing offered for another, both true. The Revel hears it. Their eyes lock on yours. For one breath the chaos *steadies*—they are bound by the fairness of what you named, and they *feel* it. The ribbons go taut. The horn's shimmer holds. They have swayed toward your frame instead of pushing through it.\n\nBut they are Churn-folk, and chaos is their native air. They press a point—a gesture that makes the moment *uncertain* again, just enough for them to hold ground. The bind takes, but it bends.\n\nYou do not let go. You reach for See the Made Thing and read what they are *about* to do next—the construction behind the apparent chaos, the real intention beneath the false randomness. The Revel is *braced* now, defending the shape of their next move against your knowing. But you have read them. You know what comes.\n\nThe two of you stand almost within arm's reach of the Null Stone. The chaos has *quieted* around you—your companions have stepped back, the merchants are frozen, even Kael is watching without moving. The Revel's breath is steady. Their eyes are locked on yours. The ribbons hang in the air like a question.\n\n\"What are you protecting?\" you ask quietly. The Revel does not answer—not yet. But their hand has stopped reaching for the seam."
+      },
+      {
+        "player": null,
+        "summary": "At the Hub crossing, Loki attempted to read the Churn-Revel's false movements—and failed to pierce the orchestrated chaos.",
+        "narration": "You reach for False Target—trying to read which of the Revel's movements is real and which is orchestrated shadow—but the chaos resists your grasp. The ribbons tangle the sight-line. The shimmer from the horn bends what you see into something that refuses to hold a shape long enough to read. The Revel's hand is still suspended mid-reach toward the seam, but whether they move next or wait is unreadable.\n\nVessin's breath catches. Cy remains motionless at the stone's base."
       }
     ],
     "lastTurn": {
-      "narration": "You hold still in the chaos—let Prism Sight settle into the ribbons and the shimmer, and suddenly the Revel's orchestration reads like a score written in light. They *favour command*. Every gesture reaches for control. You see exactly how the next motion will move, and you know what they are reaching for when they reach.\n\nYou step into their path and speak a Descent—not a bargain shouted across noise, but a bargain *named* at close range, one thing offered for another, both true. The Revel hears it. Their eyes lock on yours. For one breath the chaos *steadies*—they are bound by the fairness of what you named, and they *feel* it. The ribbons go taut. The horn's shimmer holds. They have swayed toward your frame instead of pushing through it.\n\nBut they are Churn-folk, and chaos is their native air. They press a point—a gesture that makes the moment *uncertain* again, just enough for them to hold ground. The bind takes, but it bends.\n\nYou do not let go. You reach for See the Made Thing and read what they are *about* to do next—the construction behind the apparent chaos, the real intention beneath the false randomness. The Revel is *braced* now, defending the shape of their next move against your knowing. But you have read them. You know what comes.\n\nThe two of you stand almost within arm's reach of the Null Stone. The chaos has *quieted* around you—your companions have stepped back, the merchants are frozen, even Kael is watching without moving. The Revel's breath is steady. Their eyes are locked on yours. The ribbons hang in the air like a question.\n\n\"What are you protecting?\" you ask quietly. The Revel does not answer—not yet. But their hand has stopped reaching for the seam.",
-      "sceneSummary": "At the Hub crossing, Loki read the Churn-Revel's command-shape and bound them with a true bargain; the Revel's next move is known. The Null Stone stands between them.",
+      "narration": "You reach for False Target—trying to read which of the Revel's movements is real and which is orchestrated shadow—but the chaos resists your grasp. The ribbons tangle the sight-line. The shimmer from the horn bends what you see into something that refuses to hold a shape long enough to read. The Revel's hand is still suspended mid-reach toward the seam, but whether they move next or wait is unreadable.\n\nVessin's breath catches. Cy remains motionless at the stone's base.",
+      "sceneSummary": "At the Hub crossing, Loki attempted to read the Churn-Revel's false movements—and failed to pierce the orchestrated chaos.",
       "choices": [
         {
-          "label": "Speak plainly: tell the Revel what you read in the stone—that it was *made*, deliberately sealed—and ask who sent them.",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Strike before they can reach the seam",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "axes": {},
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "speak",
-            "confront"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Misdirect—create a false signal that sends their attention *away* from the Null Stone and toward the arch they came through, buying one clean move for someone else.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "deceive",
+            "attack",
             "defend"
           ],
-          "abilityId": "misdirect",
-          "energyCost": 3,
+          "abilityId": "hunters_strike",
+          "energyCost": 4,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Step closer and ask what price they were *paid*—make them name the hand that sent them. Descent can reach that far if it's a real question.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Thin the veil at the Revel with Veil Stroke—force them to move or be wounded",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "axes": {},
           "difficulty": "hard",
           "opposedDifficulty": null,
           "intentTags": [
-            "confront",
-            "bargain"
+            "attack",
+            "risky"
           ],
-          "abilityId": "descent",
+          "abilityId": "veil_stroke",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Call out a warning to Vessin—move her clear of the Revel's path",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "defend",
+            "help"
+          ],
+          "abilityId": "harmonic_voice",
           "energyCost": 5,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Break away—step back from the Revel and move toward Veln Ashpause by the western arch. An Hourkeeper may know who sent something this deliberately timed.",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Ask the Revel plainly what they want from the stone—buy a breath to think",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {},
-          "difficulty": "easy",
+          "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "move",
-            "careful"
+            "negotiate"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -338,25 +342,8 @@
           "emergenceId": null
         }
       ],
-      "deeds": [
-        {
-          "description": "Read a Churn-Revel's command-orchestration and bound them with a true bargain at the Null Stone's heart, holding ground against deliberate chaos.",
-          "tags": [
-            "precision",
-            "clarity",
-            "stood ground"
-          ],
-          "weight": 1,
-          "communityId": "the.crossing"
-        }
-      ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -8,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
+      "deeds": [],
+      "characterDeltas": {},
       "ledgerEvents": [],
       "questUpdates": [],
       "standingOps": [],
@@ -366,74 +353,43 @@
       "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "The Hub crossing at late evening—five waygate arches surround the Null Stone at the chamber's heart. Pale stone floor worn smooth. The spinward arch still spills faint traces of chaos-motion, now quieting. High windows cast long shadows. The sealed Null Stone sits at the centre, its seam visible.",
+        "setting": "The Hub crossing at the Null Stone's heart—five waygate arches surrounding pale worn stone. The spinward arch still shimmers with fading chaos-motion. Evening light casts long shadows. The sealed Null Stone sits at the centre, its seam visible and still the focus of the Revel's suspended hand.",
         "npcsPresent": [
           {
             "name": "Vessin Tallow-bark",
-            "state": "Stepped back from the confrontation, hand still at her coat, watching Loki and the Revel with the focus of someone reading what will happen next"
+            "state": "Standing back from the confrontation, hand still at her coat, breath caught, watching"
           },
           {
             "name": "Kael",
-            "state": "Motionless by the hub's edge, eyes tracking the Revel without moving, witnessing"
+            "state": "Motionless by the hub's edge, eyes tracking the Revel without moving"
           },
           {
             "name": "Veln Ashpause",
-            "state": "Still by the western arch, gaze moved to the confrontation, watching with foreknowledge—their expression unchanged"
+            "state": "Still by the western arch, gaze now on the confrontation, expression unchanged"
           },
           {
             "name": "A Churn-Revel",
-            "state": "Standing almost within arm's reach of Loki, breath steady, eyes locked, hand stopped mid-reach toward the seam, ribbons hanging in the air"
+            "state": "Hand suspended mid-reach toward the seam, breathing steady, eyes locked on Loki, ribbons hanging in the air"
           },
           {
             "name": "Cy",
             "state": "At the base of the Null Stone, lens closed, present and motionless"
-          },
-          {
-            "name": "The relay desk attendant",
-            "state": "Pressed against the far wall, watching, not moving"
-          },
-          {
-            "name": "Two merchants",
-            "state": "Frozen against the carved bench, eyes wide, silent"
           }
         ],
         "objects": [
-          "The Null Stone at the center—pale, sealed, its seam visible, the focus of the confrontation",
+          "The Null Stone at the center—pale, sealed, its seam visible",
           "Five waygate arches—the spinward one quieting from chaos-motion",
-          "Ribbons of cloth hanging in the air between Loki and the Revel",
-          "A brass horn in the Revel's companion's hands, producing no sound",
-          "The carved bench where merchants press back",
-          "Pale worn stone floor"
+          "Ribbons of cloth hanging in the air",
+          "A brass horn in a companion's hands",
+          "The carved bench where merchants press back"
         ],
         "threads": [
-          "What is the Revel protecting in the Null Stone?",
-          "Who sent them—the man in the lower Annex, or someone else?",
-          "Will the Revel answer, or press the confrontation further?",
-          "What does Veln Ashpause know about this moment?"
+          "The Revel's hand is still suspended toward the seam",
+          "What the Revel truly wants from the Null Stone",
+          "Whether the chaos-command will press forward or hold"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "churn-revel-one",
-          "name": "A Churn-Revel",
-          "role": "Orchestrator of chaos directed at the Null Stone",
-          "note": "Bound by Loki's Descent and held by See the Made Thing—their next move is known. Standing motionless at the Null Stone's edge, eyes locked on Loki, hand stopped from reaching the seam. Braced against revelation.",
-          "learned": [
-            "They favour command above chaos—every gesture is orchestrated, not random",
-            "They know the seam in the Null Stone—what they were reaching for is specific, not exploratory",
-            "The price they were paid is significant enough to hold them against a binding bargain"
-          ],
-          "skillsObserved": [
-            "Orchestrates multiple agents through gesture alone",
-            "Moves geometrically impossible in ways that read as controlled rather than frantic",
-            "Holds ground against binding despite being Churn-folk"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Bound and held at the Null Stone—braced against Loki's read of their next move"
-        }
-      ],
+      "npcUpdates": [],
       "intentsHeard": [],
       "factUpdates": [],
       "placeUpdates": [],
@@ -443,77 +399,62 @@
       "debtOps": [],
       "partyOps": [],
       "generateRequest": [],
-      "encounterOps": [
-        {
-          "op": "tactic",
-          "tag": "commanded"
-        }
-      ],
+      "encounterOps": [],
       "projectOps": [],
       "bandOps": [],
       "deathOps": [],
       "newEncounter": null,
       "unlockPrecursor": null,
       "unlockSubstrate": null,
-      "timeOps": {},
+      "timeOps": null,
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": "Loki and the Churn-Revel stand almost within arm's reach at the Null Stone's heart—the chaos quieted, ribbons hanging frozen in the fading evening light, their eyes locked. The Revel's hand has stopped reaching. The sealed stone sits between them like a held breath.",
+      "imagePrompt": null,
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Hub crossing at late evening—five waygate arches surround the Null Stone at the chamber's heart. Pale stone floor worn smooth. The spinward arch still spills faint traces of chaos-motion, now quieting. High windows cast long shadows. The sealed Null Stone sits at the centre, its seam visible.",
+      "setting": "The Hub crossing at the Null Stone's heart—five waygate arches surrounding pale worn stone. The spinward arch still shimmers with fading chaos-motion. Evening light casts long shadows. The sealed Null Stone sits at the centre, its seam visible and still the focus of the Revel's suspended hand.",
       "npcsPresent": [
         {
           "name": "Vessin Tallow-bark",
-          "state": "Stepped back from the confrontation, hand still at her coat, watching Loki and the Revel with the focus of someone readi"
+          "state": "Standing back from the confrontation, hand still at her coat, breath caught, watching"
         },
         {
           "name": "Kael",
-          "state": "Motionless by the hub's edge, eyes tracking the Revel without moving, witnessing"
+          "state": "Motionless by the hub's edge, eyes tracking the Revel without moving"
         },
         {
           "name": "Veln Ashpause",
-          "state": "Still by the western arch, gaze moved to the confrontation, watching with foreknowledge—their expression unchanged"
+          "state": "Still by the western arch, gaze now on the confrontation, expression unchanged"
         },
         {
           "name": "A Churn-Revel",
-          "state": "Standing almost within arm's reach of Loki, breath steady, eyes locked, hand stopped mid-reach toward the seam, ribbons "
+          "state": "Hand suspended mid-reach toward the seam, breathing steady, eyes locked on Loki, ribbons hanging in the air"
         },
         {
           "name": "Cy",
           "state": "At the base of the Null Stone, lens closed, present and motionless"
-        },
-        {
-          "name": "The relay desk attendant",
-          "state": "Pressed against the far wall, watching, not moving"
-        },
-        {
-          "name": "Two merchants",
-          "state": "Frozen against the carved bench, eyes wide, silent"
         }
       ],
       "objects": [
-        "The Null Stone at the center—pale, sealed, its seam visible, the focus of the co",
+        "The Null Stone at the center—pale, sealed, its seam visible",
         "Five waygate arches—the spinward one quieting from chaos-motion",
-        "Ribbons of cloth hanging in the air between Loki and the Revel",
-        "A brass horn in the Revel's companion's hands, producing no sound",
-        "The carved bench where merchants press back",
-        "Pale worn stone floor"
+        "Ribbons of cloth hanging in the air",
+        "A brass horn in a companion's hands",
+        "The carved bench where merchants press back"
       ],
       "threads": [
-        "What is the Revel protecting in the Null Stone?",
-        "Who sent them—the man in the lower Annex, or someone else?",
-        "Will the Revel answer, or press the confrontation further?",
-        "What does Veln Ashpause know about this moment?"
+        "The Revel's hand is still suspended toward the seam",
+        "What the Revel truly wants from the Null Stone",
+        "Whether the chaos-command will press forward or hold"
       ]
     },
-    "beats": 13,
+    "beats": 14,
     "subPlace": {
       "slug": "the-hub-crossing",
       "name": "The Hub Crossing",
@@ -523,7 +464,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 3,
-    "hour": 21,
+    "hour": 22,
     "realAnchor": null
   },
   "companions": [
@@ -1499,7 +1440,7 @@
     "lastSharedReadAt": "2026-09-07T22:27:40.544Z",
     "lastTickWorldDay": 76,
     "lastCanonWorldDay": 76,
-    "turnsSinceOffer": 3,
+    "turnsSinceOffer": 4,
     "recentOffers": [
       {
         "thing": "A figure in grey standing by the western arch, watching the gates with absolute stillness and patience.",
@@ -7258,8 +7199,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789426888311,
-  "rev": 617,
+  "updatedAt": 1789427185173,
+  "rev": 620,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8128,7 +8069,7 @@
     "the_gearlands": 33,
     "umbral_depths": 54,
     "the_quickwood": 101,
-    "the_center": 18
+    "the_center": 19
   },
   "opLossPending": false,
   "sessions": [
@@ -8207,10 +8148,10 @@
     {
       "id": "sess-10",
       "startedAt": "2026-09-14T22:51:56.902Z",
-      "lastAt": "2026-09-14T23:01:28.307Z",
+      "lastAt": "2026-09-14T23:06:25.171Z",
       "startDay": 76,
       "endDay": 76,
-      "beats": 3
+      "beats": 4
     }
   ],
   "establishedFacts": [
@@ -8260,19 +8201,19 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 182,
-    "choices": 182,
+    "sceneSummary": 183,
+    "choices": 183,
     "characterDeltas": 74,
-    "scene": 182,
+    "scene": 183,
     "placeUpdates": 21,
     "codexUpdates": 103,
     "timeOps": 162,
     "offer": 17,
     "generateRequest": 6,
-    "sceneEnded": 57,
+    "sceneEnded": 58,
     "npcUpdates": 149,
     "moveTo": 6,
-    "gambitApt": 21,
+    "gambitApt": 22,
     "deeds": 3,
     "questUpdates": 17,
     "standingOps": 1,
@@ -8285,7 +8226,7 @@
     "scene_ended": 1,
     "stateOps": 1
   },
-  "_opTurns": 182,
+  "_opTurns": 183,
   "customAbilities": {},
   "companionBonds": {
     "coil": 2.25
@@ -8763,12 +8704,13 @@
       "schemaVersion": 1,
       "encounterId": "gm-a-churn-revel",
       "type": "duel",
-      "status": "active",
+      "status": "ended",
       "round": 2,
       "log": [
         "r1: reveal vs reveal → momentum 0",
         "r1: bind vs command → momentum 4",
-        "r1: foresee vs resist → momentum 7"
+        "r1: foresee vs resist → momentum 7",
+        "r2: shield vs reveal → momentum 7 — opponent_yielded"
       ],
       "opponentHealth": 5,
       "opponentYieldAt": 1,
@@ -8829,11 +8771,13 @@
         "synthesized": true
       },
       "momentum": 6.5,
-      "opponentEnergy": 38,
+      "opponentEnergy": 33,
       "turn": {
-        "phase": "sense",
+        "phase": "action",
         "sel": {
-          "sense": [],
+          "sense": [
+            16
+          ],
           "action": [],
           "bonus": []
         },
@@ -8845,8 +8789,9 @@
         "setupBonus": 0,
         "bonusEarned": false,
         "foeBonusEarned": false,
-        "senseDone": false,
-        "senseLine": ""
+        "senseDone": true,
+        "senseLine": "You read with False Target — failure. Neither of you learns much. You learn nothing usable this time. Had it landed you would have seen which craft A Churn-Revel leans on, and whether their wind is going — enough to pick the counter.",
+        "readPayoff": "You learn nothing usable this time. Had it landed you would have seen which craft A Churn-Revel leans on, and whether their wind is going — enough to pick the counter."
       },
       "broughtForward": [
         "coil",
@@ -8854,17 +8799,6 @@
       ],
       "playerReads": 1,
       "effects": [
-        {
-          "kind": "insight",
-          "label": "you have their measure",
-          "value": 3,
-          "roundsLeft": 1,
-          "applies": "always",
-          "side": "opponent",
-          "rank": 2,
-          "source": "reads your certainty",
-          "from": "opponent"
-        },
         {
           "kind": "bound",
           "label": "bound",
@@ -8897,6 +8831,17 @@
           "rank": 2,
           "source": "holds the line",
           "from": "opponent"
+        },
+        {
+          "kind": "insight",
+          "label": "you have their measure",
+          "value": 2,
+          "roundsLeft": 2,
+          "applies": "always",
+          "side": "opponent",
+          "rank": 2,
+          "source": "reads your certainty",
+          "from": "opponent"
         }
       ],
       "pressure": {
@@ -8907,12 +8852,12 @@
         "player": false,
         "opponent": false
       },
-      "lastOppFn": "resist",
+      "lastOppFn": "reveal",
       "breakAt": {
-        "opponent": 2,
-        "player": 2
+        "opponent": 1,
+        "player": 1
       },
-      "foeReadTier": 2,
+      "foeReadTier": 1,
       "theatres": [
         {
           "scale": "individual",
@@ -8924,19 +8869,19 @@
       "overmatch": null,
       "outweighed": null,
       "lastOppReceipt": {
-        "roll": 41,
-        "chance": 37,
+        "roll": 16,
+        "chance": 26,
         "degree": "partial",
         "action": {
-          "attribute": "social",
+          "attribute": "mental",
           "abilityLevel": 2,
-          "label": "holds the line",
+          "label": "reads your certainty",
           "axes": {}
         },
         "breakdown": {
           "components": [
             {
-              "label": "social 2",
+              "label": "mental 2",
               "value": 20
             },
             {
@@ -8954,28 +8899,24 @@
               "zero": true
             },
             {
-              "label": "surge",
-              "value": 10
-            },
-            {
               "label": "momentum (you're on the back foot)",
-              "value": -2
+              "value": -3
             },
             {
-              "label": "you have their measure (2 rounds)",
+              "label": "you have their measure",
               "value": 3
             },
             {
-              "label": "bound (4 rounds)",
+              "label": "bound (3 rounds)",
               "value": -4
             }
           ],
-          "total": 37,
+          "total": 26,
           "clampedFrom": null,
-          "base": "social",
+          "base": "mental",
           "opposed": null
         },
-        "critRoll": null,
+        "critRoll": 62,
         "crit": {
           "successChance": 11,
           "failChance": 1,
@@ -9002,24 +8943,31 @@
           "successClampedFrom": null,
           "failClampedFrom": null
         },
-        "rawChance": 37,
-        "margin": -4,
+        "rawChance": 26,
+        "margin": -6,
         "matchup": 0,
-        "intensity": "surge",
+        "intensity": "standard",
         "tier": 2,
-        "function": "resist",
-        "name": "holds the line",
+        "function": "reveal",
+        "name": "reads your certainty",
         "effectMods": [
           {
-            "label": "you have their measure (2 rounds)",
+            "label": "you have their measure",
             "value": 3
           },
           {
-            "label": "bound (4 rounds)",
+            "label": "bound (3 rounds)",
             "value": -4
           }
         ],
         "woven": null,
+        "evaded": {
+          "by": "player",
+          "evasion": 4,
+          "rank": 2,
+          "degreeFrom": "success",
+          "marginFrom": 10
+        },
         "targetChoice": {
           "policy": "threat",
           "why": "Loki is doing it the most harm",
@@ -9034,8 +8982,8 @@
           }
         }
       },
-      "lastReadWasSense": false,
-      "senseTierEarned": null,
+      "lastReadWasSense": true,
+      "senseTierEarned": 0,
       "senseResist": {
         "value": 6,
         "label": "their natural guardedness",
@@ -9437,352 +9385,352 @@
   },
   "_promptRows": {
     "character": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "location": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "region": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "groundDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "lore": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "traditionMotiveDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "sheetsDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "rules": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "recentTurns": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "timeLabel": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "npcRegistryDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "mintedUnmetDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "npcSeedDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "traditionVocab": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "standingDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "recalledDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 1
     },
     "bearingsDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "caravansDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "commandDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "presenceDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "worthHereDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "sceneState": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "holdingsDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "debtsDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "questsDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "structuredQuestsDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "companionsDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "placeMemoryDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "agesMissingDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "newsDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "worldArcsDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "legendsPursuableDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "wakesDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "reachableDeadDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "threatToPlayer": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "resolution": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "playerInput": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "exactWords": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "travelDirective": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "itemAdvance": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "encounterOfferDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "fightFramingDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "offerDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "teacherOfferDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "romanceGuidanceDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "factsDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "evolvedItemsDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "perilNote": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "masteryDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "bookkeepingRestate": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "repairPanelDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "teacherDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "availableEncounters": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "partyDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "registerDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "legendDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "assignmentsDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "latentArcsDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "seasonalDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "schoolsDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "sharedCanonDetail": {
-      "reached": 3,
+      "reached": 4,
       "produced": 0
     },
     "worldCountLabel": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "waygateDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "readAloudDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     },
     "scenePacingDetail": {
-      "reached": 3,
-      "produced": 3
+      "reached": 4,
+      "produced": 4
     }
   },
   "_opUnknown": {
-    "sceneSummary": 3
+    "sceneSummary": 4
   },
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T22:51:56.913Z",

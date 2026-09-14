@@ -142,27 +142,16 @@
       }
     ],
     "lastTurn": {
-      "npcUpdates": [
+      "holdingOps": [
         {
-          "op": "meet",
-          "npcId": "lira",
-          "name": "Lira",
-          "role": "Healer and teacher of the valley — consent-centered, deliberate in presence and touch; ties to harmonic, radiant, and valley craft traditions"
-        },
-        {
-          "op": "update",
-          "npcId": "lira",
-          "age": 25
-        },
-        {
-          "op": "update",
-          "npcId": "lira",
-          "sex": "female"
-        },
-        {
-          "op": "update",
-          "npcId": "lira",
-          "standing": 1
+          "op": "characterDeltas",
+          "inventoryAdd": [
+            {
+              "name": "Waterskin",
+              "type": "tool",
+              "description": "A stitched leather waterskin, stoppered with a wooden bung. Holds enough water for a day's travel. Needs refilling."
+            }
+          ]
         }
       ],
       "narration": "",
@@ -191,7 +180,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 2,
-    "hour": 3,
+    "hour": 4,
     "realAnchor": null
   },
   "companions": [],
@@ -471,7 +460,7 @@
       }
     ],
     "unseenNews": [],
-    "turnsSinceOffer": 3,
+    "turnsSinceOffer": 4,
     "lastGenCount": 1841,
     "lastSharedReadAt": "2026-09-06T00:06:33.931Z",
     "lastTickWorldDay": 76,
@@ -4232,8 +4221,8 @@
   "actionCount": 16,
   "grantsVersion": 1,
   "reconcileVersion": 62,
-  "updatedAt": 1789408448919,
-  "rev": 204,
+  "updatedAt": 1789409059770,
+  "rev": 206,
   "activeEncounter": null,
   "customEncounters": {
     "re-enc_the_sealed_door": {
@@ -4399,10 +4388,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-09-14T17:51:06.579Z",
-      "lastAt": "2026-09-14T17:52:39.193Z",
+      "lastAt": "2026-09-14T18:04:19.768Z",
       "startDay": 76,
       "endDay": 76,
-      "beats": 2
+      "beats": 3
     }
   ],
   "establishedFacts": [

@@ -412,7 +412,16 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
     if (u.skillsObserved) {
       const skills = Array.isArray(u.skillsObserved) ? u.skillsObserved : [u.skillsObserved];
       for (const s of skills.slice(0, 3)) {
-        const skill = String(s).slice(0, 60);
+        // ⛔ SNG-575 — THIS WAS A RAW 60-CHARACTER CUT ON MODEL PROSE, AND IT SEVERED MID-WORD. Found the hour
+        // the sheet first rendered: Pell's live record holds "Understanding the cost of pushing a craft past its
+        // boundarie" — ONE CHARACTER short of the word. Three of her six witnessed crafts are exactly 60 long.
+        // ⚠️ ITS TWO SIBLINGS EIGHT LINES UP ALREADY DO THIS RIGHT: `note` clamps at 300 and `learned` at 200,
+        // both through `smartClamp`, which cuts at a WORD boundary and marks the cut. This one field was capped as
+        // if it were an identifier — and while nothing read it back, nobody could see the difference.
+        // ⚑ 60 IS ALSO SIMPLY TOO SHORT FOR THE SENTENCE THE GM IS ASKED FOR ("skill they demonstrated"): the
+        // median witnessed craft across the live saves runs past it. 120 fits the phrase; the cut that remains is
+        // a clean one.
+        const skill = smartClamp(String(s), 120);
         if (!n.skillsObserved.includes(skill)) n.skillsObserved = [...n.skillsObserved, skill].slice(-CAPS.skills);
       }
     }

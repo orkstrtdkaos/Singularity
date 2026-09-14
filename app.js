@@ -143,7 +143,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "1.9.514";
+const APP_VERSION = "1.9.518";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -307,6 +307,76 @@ function whoIsCtx() {
 /** The popup itself. Deliberately shaped like the roll breakdown: what it is, what is known, and a way
  *  through to the full record — the codex button appears ONLY when a codex page actually exists, because an
  *  offer to "read more" that leads nowhere is worse than not offering. */
+/** ⛔ SNG-577 (Erik) — "the in game popup that lets you merge two people doesn't have a long enough list to
+ *  effectively merge. I think the limit it shows right now is around 12 and I know a lot more people than that."
+ *
+ *  ⚑ HE IS RIGHT ABOUT WHAT HE SEES AND THE CAUSE IS NOT A CAP. This was a native `prompt()` holding a numbered
+ *  list of every other person you know — FORTY OF THEM on Silas's save — and asking you to type an index. The
+ *  browser's own dialog is what clipped it to about a dozen lines, so the twelve was real and there was no number
+ *  anywhere in the code to find. ⚠️ A LIST YOU CANNOT SEE THE BOTTOM OF IS A LIST THAT ENDS THERE.
+ *
+ *  ⛑ AND IT IS THE SNG-370 SHAPE AGAIN: "A CAP ON A REPAIR TOOL IS A REPAIR YOU CANNOT PERFORM." Merging is how
+ *  a player fixes the game's own mistake — one person written down twice — so it is exactly the tool that must
+ *  reach every record. This one shows all of them, filters as you type, and says who each person is so two people
+ *  with the same first name can be told apart. */
+function showMergePicker(fromId) {
+  document.getElementById("help-pop")?.remove();
+  const reg = character.npcRegistry || {};
+  const from = reg[fromId];
+  if (!from) return;
+  // ⚠️ SORTED BY HOW WELL YOU KNOW THEM, not alphabetically: a duplicate is almost always someone you have just
+  // met being written down beside someone you already knew, so the strong bonds belong at the top of the list.
+  const others = Object.entries(reg).filter(([id]) => id !== fromId)
+    .map(([id, n]) => ({ id, n }))
+    .sort((a, b) => Math.abs(b.n.relationship || 0) - Math.abs(a.n.relationship || 0)
+      || String(a.n.name || "").localeCompare(String(b.n.name || "")));
+  if (!others.length) { alert("There's no one else you know to merge them with yet."); return; }
+  const pop = document.createElement("div");
+  pop.id = "help-pop"; pop.className = "help-overlay";
+  const line = ({ id, n }) => {
+    // ⚠️ RESOLVED AGAINST BOTH MAPS. A place you met someone at is as often one the world generated in play as
+    // one that was authored, and `nameOf` here is a function-local NPC namer three thousand lines away — reaching
+    // for it threw `ReferenceError` and swallowed the whole popup, which is why this is verified in the browser.
+    const placeOf = (lid) => CONTENT.locations?.[lid]?.name || character.generated?.location?.[lid]?.name || null;
+    const where = n.lastSeen?.locationId ? placeOf(n.lastSeen.locationId) : null;
+    const who = [n.role, where ? `last seen at ${where}` : null].filter(Boolean).join(" · ");
+    return `<button class="opt codex-merge-target" data-mergeinto="${esc(id)}" data-hay="${esc(String(n.name || "").toLowerCase() + " " + String(n.role || "").toLowerCase())}">
+      ${esc(n.name || id)}${who ? ` <span class="cost">${esc(who)}</span>` : ""}</button>`;
+  };
+  pop.innerHTML = `<div class="help-card" role="dialog" aria-label="Merge ${esc(from.name || fromId)}" style="max-height:min(86vh,760px); display:flex; flex-direction:column; overflow:hidden">
+    <div class="whois-head" style="flex:0 0 auto">"${esc(from.name || fromId)}" is really the same person as…</div>
+    <div style="flex:0 0 auto; padding:6px 0">
+      <input id="merge-filter" type="text" placeholder="Type to narrow — ${others.length} people you know" style="width:100%" autocomplete="off">
+    </div>
+    <div id="merge-list" style="flex:1 1 auto; overflow-y:auto; -webkit-overflow-scrolling:touch">${others.map(line).join("")}</div>
+    <div class="help-foot" style="flex:0 0 auto">
+      <span class="hint">Their records combine; the kept name is the one you pick. Permanent.</span>
+      <button class="btn" id="help-close">Cancel</button>
+    </div></div>`;
+  document.body.appendChild(pop);
+  const close = () => pop.remove();
+  pop.addEventListener("click", ev => { if (ev.target === pop) close(); });
+  document.getElementById("help-close").onclick = close;
+  const filter = document.getElementById("merge-filter");
+  filter.oninput = () => {
+    const q = filter.value.trim().toLowerCase();
+    for (const el of pop.querySelectorAll("[data-mergeinto]")) el.hidden = !!q && !el.dataset.hay.includes(q);
+  };
+  filter.focus();
+  for (const el of pop.querySelectorAll("[data-mergeinto]")) el.onclick = () => {
+    const intoId = el.dataset.mergeinto;
+    const into = reg[intoId];
+    close();
+    const r = applyStateOps(character, [{ op: "mergeEntity", fromId, intoId, why: `player: same person (${from.name} → ${into?.name || intoId})` }], {
+      backgrounds: CONTENT.backgrounds || [], traditionIndex: CONTENT.traditionIndex, locations: CONTENT.locations,
+      resolveLocationId, worldDay: absoluteWorldDay(), nowISO: new Date().toISOString()
+    });
+    saveCharacter(character);
+    const ok = r.applied.length > 0;
+    renderPlay(character.activeScene?.lastTurn || null, { aside: ok ? `Merged — ${from.name} and ${into?.name || intoId} are one person now.` : (r.refused?.[0]?.reason || "Couldn't merge those two.") });
+  };
+}
+
 function showWhoIs(known) {
   document.getElementById("help-pop")?.remove();
   const pop = document.createElement("div");
@@ -365,6 +435,12 @@ function showWhoIs(known) {
     <div class="whois-head" style="flex:0 0 auto">${esc(known.label)} <span class="hint">· ${esc(known.kind)}</span></div>
     <div style="flex:1 1 auto; overflow-y:auto; -webkit-overflow-scrolling:touch">${whoPortrait}
       <div class="help-short">${known.lines.map(l => `<div class="whois-line">${esc(l)}</div>`).join("")}</div>
+      ${/* ⛔ THE GATE IS "DO I HAVE A RECORD OF THEM", NOT WHICH BRANCH OF `whoIs` ANSWERED. Measured in the
+           running game: clicking Pell gave a card with `kind: "person"` — the CODEX branch answers before the
+           registry one, and it returns no `id` at all — so a `kind === "npc"` guard showed the sheet to exactly
+           the people who did NOT have a codex page and hid it from everyone who did. ⚠️ Reading the registry is
+           the whole test: `personSheetHtml` returns nothing for someone I have no record of, and `codexId` is
+           the topic id, which IS the registry key wherever the two join. */""}${personSheetHtml(character?.npcRegistry?.[known.id || known.codexId])}
     </div>
     <div class="help-foot" style="flex:0 0 auto">
       ${known.codexId ? `<button class="btn secondary" id="whois-codex">📖 Read the codex page</button>` : ""}
@@ -13540,6 +13616,45 @@ async function maybeAdjudicateMerges(query = "") {
   } finally { _adjudicating = false; }
 }
 
+/** ⛔ SNG-570/571 — ONE RENDERER, EVERY SURFACE A PERSON APPEARS ON.
+ *
+ *  ⚑ MEASURED AFTER SHIPPING IT TO THE CODEX ALONE, WHICH IS WHY THIS FUNCTION EXISTS: Silas knows 41 people and
+ *  has 26 codex person-topics, of which 14 join a registry record. So the sheet reached 14 of 41 — and Erik asked
+ *  for "any NPC".
+ *
+ *  ⚠️ THE OTHER 27 ARE NOT UNREACHABLE — THEY ARE SOMEWHERE ELSE. SNG-369 made every person in the registry
+ *  CLICKABLE in prose, and for someone with no codex page the whois card is their ENTIRE presence. It showed their
+ *  role, their description, and nothing whatever of what you had watched them do — the same two fields, unread on
+ *  a second screen.
+ *
+ *  ⛑ SO THE MARKUP LIVES IN ONE FUNCTION AND BOTH SURFACES CALL IT. A second copy would have drifted the moment
+ *  either was touched, and the reveal ORDER is the design: it must not be allowed to differ by screen. */
+function personSheetHtml(rec) {
+  if (!rec) return "";
+  const s = playerSheetFor(rec, { cfg: CONTENT.rules?.npcStanding || {}, day: absoluteWorldDay(), npcs: CONTENT.npcs || null });
+  if (!s) return "";
+  const row = (label, val) => val ? `<div class="codex-fact"><strong>${esc(label)}</strong> ${esc(String(val))}</div>` : "";
+  // ⛔ THE NUMBERS ARE PRINTED, NOT PIPPED. The first cut drew a five-pip bar at `round(v / 6)`, and on Pell's
+  // real sheet that rendered physical 4, mental 4, social 4 and practical 10 as one pip, one, one and two — every
+  // person in the game reduced to the same near-flat row. ⚠️ THAT IS THE EXACT FAILURE ERIK RULED AGAINST: "we
+  // have to be able to see the numbers and stats too. We can make them tasteful." A lossy bar is not tasteful, it
+  // is hidden. ⛑ SORTED STRONGEST-FIRST so the SHAPE of a person reads at a glance and the magnitude is exact.
+  const attrRow = (attrs) => Object.entries(attrs).sort((a, b) => (Number(b[1]) || 0) - (Number(a[1]) || 0))
+    .map(([k, v], i) => i === 0 ? `<strong>${esc(k)} ${Number(v) || 0}</strong>` : `${esc(k)} ${Number(v) || 0}`).join(" · ");
+  return `<div class="cs-block" style="margin-top:10px"><h3 class="codex-title" style="font-size:14px">Their sheet <span class="hint" style="text-transform:none">— as much of it as you have seen</span></h3>
+    ${s.witnessed.length ? `<div class="hint" style="margin:0 0 4px">What you have watched them do</div>
+      ${s.witnessed.map(w => `<div class="codex-fact">${esc(w)}</div>`).join("")}` : ""}
+    ${s.is ? `<div class="hint" style="margin:8px 0 4px">What they are</div>
+      ${row("", s.is.role)}${row("", s.is.description)}
+      ${s.standing?.bondType ? row("Bond", `${s.standing.bondType}${s.standing.bondStage ? " · " + s.standing.bondStage : ""}`) : ""}
+      ${s.is.status && s.is.status !== "active" ? row("Status", `${s.is.status}${s.is.statusNote ? " — " + s.is.statusNote : ""}`) : ""}` : ""}
+    ${s.numbers ? `<div class="hint" style="margin:8px 0 4px">And the numbers underneath</div>
+      <div class="codex-fact"><strong>Level ${s.numbers.level}</strong>${s.numbers.tier ? ` · ${esc(s.numbers.tier)}` : ""}${s.numbers.tierGuessed ? ` <span class="hint">(rung guessed from their role)</span>` : ""}</div>
+      ${s.numbers.attributes ? `<div class="codex-fact hint">${attrRow(s.numbers.attributes)}</div>` : ""}`
+      : `<div class="hint" style="margin:8px 0 0">— ${esc(s.reveal.why)}. <strong>Travel with them and watch what they do.</strong></div>`}
+  </div>`;
+}
+
 function renderCodexScreen(query = "", openTopicId = null, mergeMode = false) {
   const results = searchCodex(character, query);
   const open = openTopicId ? character.codex?.topics?.[openTopicId] : null;
@@ -13607,25 +13722,12 @@ function renderCodexScreen(query = "", openTopicId = null, mergeMode = false) {
           // withheld and nothing leads with an integer. The codex entry is where a player already goes to read about
           // a person, so the sheet belongs here rather than on a screen of its own.
           if (open.kind !== "npc" && open.kind !== "person") return "";
+          // ⚠️ THE JOIN IS BY ID FIRST, THEN BY NAME. Measured across the live saves: the topic id IS the registry
+          // key for every person-topic that joins at all (14 of Silas's 26), and the name pass adds none of them — it
+          // stays because a topic the player RENAMED is exactly the case the id cannot answer.
           const rec = character.npcRegistry?.[open.id]
             || Object.values(character.npcRegistry || {}).find(n => n && namesMatch(n.name, open.label));
-          if (!rec) return "";
-          const s = playerSheetFor(rec, { cfg: CONTENT.rules?.npcStanding || {}, day: absoluteWorldDay() });
-          if (!s) return "";
-          const row = (label, val) => val ? `<div class="codex-fact"><strong>${esc(label)}</strong> ${esc(String(val))}</div>` : "";
-          const pips = (n) => "●".repeat(Math.max(0, Math.min(5, Math.round(Number(n) / 6)))) + "○".repeat(Math.max(0, 5 - Math.min(5, Math.round(Number(n) / 6))));
-          return `<div class="cs-block" style="margin-top:10px"><h3 class="codex-title" style="font-size:14px">Their sheet <span class="hint" style="text-transform:none">— as much of it as you have seen</span></h3>
-            ${s.witnessed.length ? `<div class="hint" style="margin:0 0 4px">What you have watched them do</div>
-              ${s.witnessed.map(w => `<div class="codex-fact">${esc(w)}</div>`).join("")}` : ""}
-            ${s.is ? `<div class="hint" style="margin:8px 0 4px">What they are</div>
-              ${row("", s.is.role)}${row("", s.is.description)}
-              ${s.standing?.bondType ? row("Bond", `${s.standing.bondType}${s.standing.bondStage ? " · " + s.standing.bondStage : ""}`) : ""}
-              ${s.is.status && s.is.status !== "active" ? row("Status", `${s.is.status}${s.is.statusNote ? " — " + s.is.statusNote : ""}`) : ""}` : ""}
-            ${s.numbers ? `<div class="hint" style="margin:8px 0 4px">And the numbers underneath</div>
-              <div class="codex-fact"><strong>Level ${s.numbers.level}</strong>${s.numbers.tier ? ` · ${esc(s.numbers.tier)}` : ""}${s.numbers.tierGuessed ? ` <span class="hint">(rung guessed from their role)</span>` : ""}</div>
-              ${s.numbers.attributes ? `<div class="codex-fact hint">${Object.entries(s.numbers.attributes).map(([k, v]) => `${esc(k)} ${pips(v)}`).join(" · ")}</div>` : ""}`
-              : `<div class="hint" style="margin:8px 0 0">— ${esc(s.reveal.why)}. <strong>Travel with them and watch what they do.</strong></div>`}
-          </div>`;
+          return personSheetHtml(rec);
         })()}
         ${open.links.length ? `<div class="codex-links">linked: ${open.links.map(l => {
           const t = character.codex.topics[l];
@@ -16383,24 +16485,7 @@ function renderPlay(turn, opts = {}) {
   // kept, the absorbed name retained as an alias, logged + reversible in the Repair panel).
   for (const b of app.querySelectorAll("[data-mergenpc]")) b.onclick = (e) => {
     e.stopPropagation();
-    const fromId = b.dataset.mergenpc;
-    const reg = character.npcRegistry || {};
-    const from = reg[fromId];
-    if (!from) return;
-    const others = Object.entries(reg).filter(([id]) => id !== fromId);
-    if (!others.length) { alert("There's no one else you know to merge them with yet."); return; }
-    const listed = others.map(([id, n], i) => `${i + 1}. ${n.name}`).join("\n");
-    const pick = prompt(`"${from.name}" is really the same person as which of these?\n\n${listed}\n\nType the number. Their records combine; the kept name is the one you choose.`);
-    const idx = Number(pick) - 1;
-    if (!Number.isInteger(idx) || idx < 0 || idx >= others.length) return;
-    const intoId = others[idx][0];
-    const r = applyStateOps(character, [{ op: "mergeEntity", fromId, intoId, why: `player: same person (${from.name} → ${others[idx][1].name})` }], {
-      backgrounds: CONTENT.backgrounds || [], traditionIndex: CONTENT.traditionIndex, locations: CONTENT.locations,
-      resolveLocationId, worldDay: absoluteWorldDay(), nowISO: new Date().toISOString()
-    });
-    saveCharacter(character);
-    const ok = r.applied.length > 0;
-    renderPlay(character.activeScene?.lastTurn || null, { aside: ok ? `Merged — ${from.name} and ${others[idx][1].name} are one person now.` : (r.refused?.[0]?.reason || "Couldn't merge those two.") });
+    showMergePicker(b.dataset.mergenpc);
   };
   for (const d of app.querySelectorAll("[data-npcgroup]")) d.ontoggle = () => {
     const k = d.dataset.npcgroup;

@@ -14304,6 +14304,188 @@ console.log("\n── §213 · a person's sheet, as much of it as you have witne
   // a player meets it.
   check("§213: …as an invitation to the play that would fill it, not as a missing-data notice",
     /Travel with them and watch what they do/.test(A213));
+
+  /* ---- 6 · ⛑ ON EVERY SURFACE A PERSON APPEARS ON, FROM ONE RENDERER ---- */
+  // ⚑ MEASURED AFTER SHIPPING IT TO THE CODEX ALONE, which is the only reason this section exists: across all 15
+  // saves the players know 126 people between them, and only 74 of those people have a CODEX PAGE. The first cut of
+  // this sheet reached 59% of the population it was written for — and Erik asked for "any NPC".
+  //
+  // ⚠️ THE OTHER 52 WERE NEVER UNREACHABLE, THEY WERE SOMEWHERE ELSE. SNG-369 made every registered person
+  // clickable in prose, and for someone with no codex page the whois card IS their whole presence — showing role and
+  // description and nothing of what you had watched them do. The same two fields, unread again, on a second screen.
+  // ⛔ SHIPPING A READER IS NOT THE SAME AS REACHING THE POPULATION IT WAS WRITTEN FOR.
+  check("§213: ⛑ the sheet's markup exists EXACTLY ONCE — the reveal order cannot differ by screen",
+    A213.split(`Their sheet <span`).length - 1 === 1,
+    `${A213.split("Their sheet <span").length - 1} copies`);
+  // ⚠️ AND THE CARD'S GATE IS THE REGISTRY, NOT `known.kind`. Measured in the running game: clicking Pell gives a
+  // card whose kind is "person", because the CODEX branch of `whoIs` answers before the registry branch and returns
+  // no `id` at all — so a `kind === "npc"` guard showed the sheet to exactly the people WITHOUT a codex page and hid
+  // it from everyone who had one. ⛔ THE FIRST FIX FOR A REACH GAP REACHED THE COMPLEMENT OF THE POPULATION IT MISSED.
+  check("§213: ⛔ …and the whois card renders it for anyone I have a record of — not for one branch's `kind`",
+    /personSheetHtml\(character\?\.npcRegistry\?\.\[known\.id \|\| known\.codexId\]\)/.test(A213)
+    && !/known\.kind === "npc" \? personSheetHtml/.test(A213));
+  check("§213: …so both surfaces go through one function rather than a copy that drifts the moment either is touched",
+    (A213.match(/personSheetHtml\(/g) || []).length >= 3,
+    `${(A213.match(/personSheetHtml\(/g) || []).length} sites (1 definition + every caller)`);
+
+  /* ---- 7 · ⛔ AND WHAT IT RENDERS IS NOT ALREADY SEVERED ---- */
+  // ⚑ FOUND THE HOUR THE SHEET FIRST RENDERED, which is the whole argument for building the reader: Pell's LIVE
+  // record holds "Understanding the cost of pushing a craft past its boundarie" — one character short of the word.
+  // Three of her six witnessed crafts are exactly 60 characters long. ⛔ A RAW `.slice(0, 60)` ON MODEL PROSE, cut
+  // at store time, so nothing rendered later can bring the rest back.
+  //
+  // ⚠️ ITS TWO SIBLINGS EIGHT LINES ABOVE IT WERE ALREADY RIGHT — `note` at 300 and `learned` at 200, both through
+  // `smartClamp`. One field of the three was capped as though it were an identifier, and while nothing read it back
+  // NOBODY COULD SEE THE DIFFERENCE. That is this session's defect class exactly: the unread field is where the rot
+  // is, and building the reader is what exposes it.
+  //
+  // ⛑ GATED ON THE ROUND TRIP, NOT ON THE SOURCE. `wiring_audit` already sweeps for raw prose caps — and its regex
+  // reads `\d{3,}`, so a 60 was invisible to it while a 200 was not. ⚠️ I DID NOT SIMPLY LOWER THAT FLOOR: measured,
+  // it would surface 156 more sites, nearly all of them ARRAY slices and slug caps, and a detector that cries wolf
+  // 150 times is how the next real one gets waved through. This asserts the property the player actually sees.
+  const NP213 = await import("../engine/npcs.js");
+  const whole213 = "Understanding the true cost of pushing a craft past its own boundaries";  // 70 chars — severed at 60
+  const c213 = { npcRegistry: {} };
+  NP213.applyNpcUpdates(c213, [{ op: "meet", npcId: "pell", name: "Pell", skillsObserved: [whole213] }],
+    { day: 12, rules: C213.rules, content: C213, recordFact: () => {} });
+  const stored213 = c213.npcRegistry?.pell?.skillsObserved?.[0] || "";
+  check("§213: ⛔ a witnessed craft the GM wrote is STORED WHOLE — not severed one letter short of the word",
+    stored213 === whole213, `${stored213.length} of ${whole213.length} chars kept`);
+  // ⛑ AND WHEN A CAP DOES BITE, IT BITES AT A WORD BOUNDARY AND SAYS SO. A cap still exists — this is a bag that
+  // rides in every prompt — but a clamped phrase must never end mid-word again.
+  const long213 = "Holding a whole making steady through partnership-binding while another hand works the far side of the iron and the strain runs back through both of them together";
+  const c213b = { npcRegistry: {} };
+  NP213.applyNpcUpdates(c213b, [{ op: "meet", npcId: "veth", name: "Veth", skillsObserved: [long213] }],
+    { day: 12, rules: C213.rules, content: C213, recordFact: () => {} });
+  const cut213 = c213b.npcRegistry?.veth?.skillsObserved?.[0] || "";
+  check("§213: ⛑ …and a phrase past the cap ends at a WORD boundary, marked, never mid-word",
+    cut213.length < long213.length && cut213.endsWith("\u2026")
+    && long213.startsWith(cut213.slice(0, -1).replace(/[\s,;:.!?—-]+$/, "")),
+    `…${cut213.slice(-28)}`);
+}
+
+
+// ⛔ SNG-572 O1/O2 (Aevi) — "A LEGEND WHO JOINS YOU STOPS BEING ONE."
+//
+// ⚑ ERIK FOUND IT BY READING A LEVEL OFF A SHEET THAT HAD EXISTED FOR ONE HOUR. Marrow — authored legendary,
+// floor 60 — rendered at 14, and his own note was "Pell should be in the mid 30s level-wise"; she rendered 13.
+// ⛑ WHICH IS AEVI'S ARGUMENT FOR SHOWING THE NUMBERS, MADE BY THE THING ITSELF: "a prose-only sheet would have
+// read beautifully and said nothing false. The number is what could not hide."
+//
+// ⛔ THE DEFECT WAS A MISSING JOIN. The registry has no tier field and no route back to the authored figures, so
+// a rung is correct right up until the moment that person matters most to you. ⚑ MEASURED ACROSS EVERY SAVE:
+// 126 people known, 20 resolving to an authored figure, SEVEN OF THE TWENTY SILENTLY DEMOTED.
+//
+// ⚠️ AND THE TABLE IS INNOCENT — Aevi nearly added rank words to `tier_signals.json` and stopped, because a rule
+// she ratified twice forbids it: "THIS TABLE CANNOT MINT ANYTHING ABOVE `heroic`, BY DESIGN… a regex is not
+// entitled to make that claim." Nothing here touches it.
+console.log("\n── §214 · a legend who joins you is still a legend ──");
+{
+  const NS214 = await import("../engine/npcsheet.js");
+  const { loadContentHeadless: lch214 } = await import("./headless_content.mjs");
+  const C214 = await lch214();
+  const cfg214 = C214.rules?.npcStanding || {};
+  const npcs214 = C214.npcs || {};
+  const floors214 = cfg214.tierFloor || {};
+
+  /* ---- 1 · ⛑ THE BRIDGE WAS ALREADY IN THE RECORD ---- */
+  // Her registry aliases read ["Huginn", "Marrow", "Maren Ossitide"]; the legend is "Maren Ossitide, Who Buried
+  // the Drowned Year". ⚠️ The epithet after the comma is a TITLE, so the join reads the leading clause too.
+  const marrowRec = { id: "marrow", name: "Maren (Marrow) Ossitide", aliases: ["Huginn", "Marrow", "Maren Ossitide"],
+    role: "Legendary Ashwarden warden; traveling companion", skillsObserved: ["reading a warding through touch"] };
+  const found214 = NS214.authoredFor(marrowRec, { npcs: npcs214 });
+  check("§214: ⛑ a registry entry resolves to its authored figure through an alias and an epithet clause",
+    !!found214 && !!found214.tier, `resolved "${found214?.name}" [${found214?.tier}]`);
+
+  /* ---- 2 · ⛔ AND SHE IS NO LONGER DEMOTED BY TRAVELLING WITH YOU ---- */
+  const before214 = NS214.playerSheetFor(marrowRec, { cfg: cfg214, day: 400 });
+  const after214 = NS214.playerSheetFor(marrowRec, { cfg: cfg214, day: 400, npcs: npcs214 });
+  check("§214: ⛔ …and she sheets at her authored rung's floor or above, where before she sheeted at a guess",
+    after214.numbers.level >= floors214[found214.tier] && after214.numbers.level > before214.numbers.level,
+    `${before214.numbers.level} → ${after214.numbers.level} (${found214.tier} floor ${floors214[found214.tier]})`);
+  check("§214: …and the rung shown is the authored one, not the one a role string suggested",
+    after214.numbers.tierAuthored === found214.tier && before214.numbers.tierAuthored === null,
+    `authored ${after214.numbers.tierAuthored} · was guessing ${before214.numbers.tierGuessed}`);
+
+  /* ---- 3 · ⚠️ THE AMBUSH GUARD: AN AMBIGUOUS ONE-WORD NAME RESOLVES TO NOBODY ---- */
+  // ⛔ AEVI'S RULE, WHICH I AM NOT GOING TO BE THE ONE TO BREAK: "a wrong guess that makes someone weaker is a
+  // disappointment; one that makes them stronger is an AMBUSH." A bare first name that two authored figures
+  // answer to must promote neither — a generated villager called Pell is not the authored Pell.
+  const single = new Map();
+  for (const a of Object.values(npcs214)) {
+    if (!a?.name) continue;
+    const lead = String(a.name).split(",")[0].trim();
+    if (/\s/.test(lead)) continue;                                  // one token only
+    single.set(lead.toLowerCase(), (single.get(lead.toLowerCase()) || 0) + 1);
+  }
+  const shared = [...single.entries()].filter(([, n]) => n > 1).map(([n]) => n);
+  check("§214: ⚠️ a one-word name that two authored figures answer to promotes NEITHER of them",
+    shared.every(nm => NS214.authoredFor({ name: nm }, { npcs: npcs214 }) === null),
+    shared.length ? `refused for: ${shared.slice(0, 4).join(", ")}` : "no shared one-word names authored today");
+  check("§214: …and a name the world has never heard resolves to nothing at all",
+    NS214.authoredFor({ name: "Ondrel of the Nine Doors" }, { npcs: npcs214 }) === null);
+
+  /* ---- 4 · ⛔ THE POPULATION GATE — NOT "HAS A TIER", BUT "IS NEVER BELOW ONE" ---- */
+  // ⚠️ AEVI ASKED FOR EXACTLY THIS DISTINCTION: "not 'has a tier' — the specific failure is SILENT DEMOTION, and
+  // a gate that only checks presence would have passed every day of this bug."
+  const tiered214 = Object.entries(npcs214).filter(([, a]) => a?.name && a.tier && floors214[a.tier]);
+  const demoted214 = [];
+  for (const [key, a] of tiered214) {
+    const asMet = { id: key, name: a.name, skillsObserved: ["something you watched them do"] };
+    const s = NS214.playerSheetFor(asMet, { cfg: cfg214, day: 400, npcs: npcs214 });
+    if (!s.numbers) continue;
+    if (s.numbers.level < floors214[a.tier]) demoted214.push(`${a.name} ${s.numbers.level}<${floors214[a.tier]}`);
+  }
+  check("§214: ⛔ NO authored figure, met and witnessed, sheets BELOW their own rung's floor",
+    tiered214.length > 20 && demoted214.length === 0,
+    `${tiered214.length} tiered figures checked · ${demoted214.length} demoted ${demoted214.slice(0, 3).join(" · ")}`);
+
+  /* ---- 5 · ⛑ AND THE JOIN CAN PROMOTE, NEVER DEMOTE ---- */
+  // A record that carries its own rung keeps it: the authored tier fills a silence, it does not overrule a fact.
+  const ownTier = { id: "marrow", name: "Maren Ossitide", tier: "mythic", skillsObserved: ["x"] };
+  check("§214: ⛑ a record carrying its own rung keeps it — the join fills a silence, it never overrules",
+    NS214.playerSheetFor(ownTier, { cfg: cfg214, day: 400, npcs: npcs214 }).numbers.level >= floors214.mythic);
+
+  /* ---- 6 · ⛑ AND THE READER HANDS OVER THE CORPUS ---- */
+  // ⛔ THE PARAMETER EXISTED THE WHOLE TIME. `sheetFor` has taken `authored` since it was written and every caller
+  // passed null — a door nobody walks through is a door that is closed. So the join happens INSIDE the reader and
+  // no future surface has to remember it; this gate holds the one wire that feeds it.
+  check("§214: ⛑ the player's sheet is handed the authored corpus, so no new surface has to remember the join",
+    /playerSheetFor\(rec, \{ cfg: CONTENT\.rules\?\.npcStanding \|\| \{\}, day: absoluteWorldDay\(\), npcs: CONTENT\.npcs/.test(rd("app.js")));
+}
+
+
+// ⛔ SNG-577 (Erik) — "the in game popup that lets you merge two people doesn't have a long enough list to
+// effectively merge. I think the limit it shows right now is around 12 and I know a lot more people than that."
+//
+// ⚑ HE IS RIGHT ABOUT WHAT HE SEES AND THERE WAS NO NUMBER IN THE CODE TO FIND. The picker was a native
+// `prompt()` carrying a numbered list of every other person you know — FORTY on his save — and asking him to type
+// an index. The browser's own dialog clipped it at about a dozen lines. ⚠️ SO THE CAP WAS REAL AND LIVED IN
+// CHROME, NOT IN THE SOURCE: grepping for the twelve he reported would have found nothing and closed the ticket.
+//
+// ⛑ AND IT IS THE SNG-370 SHAPE AGAIN: "A CAP ON A REPAIR TOOL IS A REPAIR YOU CANNOT PERFORM." Merging is how a
+// player fixes the GAME'S OWN mistake — one person written into the registry twice — so it is precisely the tool
+// that must reach every record.
+console.log("\n── §215 · the repair tool reaches every record ──");
+{
+  const A215 = rd("app.js");
+  const fn215 = A215.slice(A215.indexOf("function showMergePicker("), A215.indexOf("function showWhoIs("));
+  check("§215: ⛔ the merge picker exists as a real surface, and the control opens it",
+    fn215.length > 400 && /showMergePicker\(b\.dataset\.mergenpc\)/.test(A215));
+  // ⚠️ AND THE NATIVE DIALOG IS GONE — the mechanism that did the clipping, not merely the symptom.
+  check("§215: ⛔ …and no `prompt()` numbered list survives, which is what chrome was truncating",
+    !/const listed = others\.map/.test(A215) && !/prompt\(`"\$\{from\.name\}"/.test(A215));
+  // ⛑ NO CAP ANYWHERE IN THE PICKER. Asserted over the whole function rather than at one line, because the next
+  // cap will be written somewhere else in it.
+  check("§215: ⛑ …and nothing in the picker caps the list — every person you know is offered",
+    !/\.slice\(\s*0\s*,\s*\d+\s*\)/.test(fn215) && /Object\.entries\(reg\)\.filter\(\(\[id\]\) => id !== fromId\)/.test(fn215));
+  // ⚠️ A LIST OF FORTY NEEDS A WAY IN. Erik knows 41 people; scrolling forty buttons to find one is the same
+  // failure one step later, so the picker filters as you type — over the role as well as the name, because two
+  // people called Maret are told apart by what they do.
+  check("§215: ⚠️ …and a list that long is searchable, over the role as well as the name",
+    /id="merge-filter"/.test(fn215) && /data-hay=/.test(fn215) && /el\.hidden = !!q/.test(fn215));
+  check("§215: …and each row says who the person IS, so two people with one name can be told apart",
+    /last seen at \$\{where\}/.test(fn215) && /n\.role/.test(fn215));
 }
 
 /* ══════════ REPORT ══════════ */

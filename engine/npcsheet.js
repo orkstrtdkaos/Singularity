@@ -22,6 +22,7 @@
 // exists it is the truth and this file fills nothing in. Derivation is for the ones nobody wrote down.
 
 import { abilityTier } from "./skilltree.js";
+import { normName } from "./namematch.js";              // SNG-572: the registry-to-authored join matches on normalised names
 import { offersFreeFloor } from "./capabilities.js";   // R47: a kit with a free floor needs no bare strike
 import { pcBodyAt, SUB_OF, craftSubAttribute } from "./progression.js";   // ✅ Erik 2026-09-11: a person carries a player's body
 const num = (v, d = 0) => (v == null || v === "" || !Number.isFinite(Number(v)) ? d : Number(v));
@@ -332,7 +333,7 @@ export function drawTier(census = {}, { cfg = {}, rng = Math.random, evidence = 
  *  ⛑ AND THE NUMBERS ARE GATED ON HAVING SEEN THEM ACT, which is SNG-571 §4's argument and gives the will its bound
  *  for free: "YOU CANNOT NAME SOMEONE WHOSE REACH YOU HAVE NEVER SEEN." Watching Marrow read a warding through touch
  *  stops being colour and becomes the reason you are able to name her at the deep dark. PURE. */
-export function playerSheetFor(entry, { day = null, cfg = {}, roleAttributes = null } = {}) {
+export function playerSheetFor(entry, { day = null, cfg = {}, roleAttributes = null, npcs = null } = {}) {
   if (!entry || typeof entry !== "object") return null;
   const arr = (v) => (Array.isArray(v) ? v.filter(Boolean) : []);
   const witnessed = arr(entry.skillsObserved);
@@ -344,7 +345,23 @@ export function playerSheetFor(entry, { day = null, cfg = {}, roleAttributes = n
   // ⛔ THE NUMBERS NEED EVIDENCE, AND THE EVIDENCE IS HAVING WATCHED THEM WORK. Not relationship — you can be fond of
   // someone whose capability you have never seen, and fondness is not knowledge of their reach.
   const seenAct = witnessed.length > 0;
-  const sheet = seenAct ? sheetFor(entry, { day, cfg, roleAttributes }) : null;
+  // ⛔ SNG-572 O1 — AND THE AUTHORED FIGURE IS RESOLVED HERE, NOT BY THE CALLER. `sheetFor` has taken an
+  // `authored` parameter since the day it was written and every caller passed null, which is how a legendary
+  // warden came to sheet nineteen levels below the man she travels with. ⚠️ A door nobody walks through is a
+  // door that is closed — so the join happens inside the reader, and no future surface has to remember it.
+  const authored = seenAct ? authoredFor(entry, { npcs }) : null;
+  // ⚠️ AND IT IS NOT PASSED AS `sheetFor`'s `authored` — I TRIED THAT FIRST AND IT MADE MARROW WORSE. That
+  // parameter returns the authored record WHOLESALE, which is right for a figure whose entire sheet is authored
+  // and wrong here: the legend carries a tier and no level, so the sheet came back with no level AT ALL, and Pell
+  // came back at her authored 27 with the twelve levels of knowing Silas thrown away.
+  // ⛑ WHAT A REGISTRY RECORD NEEDS IS THE AUTHORED RUNG AS ITS FLOOR, which `derivedLevel` has always read. So
+  // the authored facts are merged onto the record as a BASIS and every existing rule then applies unchanged —
+  // the tier only where the record is silent (measured: zero registry entries carry one), so this can promote a
+  // person and can never demote one.
+  const basis = authored
+    ? { ...entry, tier: entry.tier || authored.tier || undefined, level: entry.level ?? authored.level ?? undefined }
+    : entry;
+  const sheet = seenAct ? sheetFor(basis, { day, cfg, roleAttributes }) : null;
 
   return {
     id: entry.id || null,
@@ -383,6 +400,9 @@ export function playerSheetFor(entry, { day = null, cfg = {}, roleAttributes = n
       // ⚠️ A GUESSED RUNG IS MARKED AS ONE (SNG-572): `tierDerived` is what a role STRING suggested, and it must never
       // read as the same kind of fact as a tier somebody authored.
       tierGuessed: sheet.tierDerived ? sheet.tierDerived.tier : null,
+      // ⛑ SNG-572: WHOSE CLAIM THIS RUNG IS. A tier the world authored is a different kind of fact from one this
+      // person's own record carries, and both are different from a guess off a role string.
+      tierAuthored: authored?.tier || null,
       attributes: sheet.attributes || null,
       subAttributes: sheet.subAttributes || null,
     } : null,
@@ -395,6 +415,45 @@ export function playerSheetFor(entry, { day = null, cfg = {}, roleAttributes = n
         : "you have not met them properly",
     },
   };
+}
+
+/** ⛔ SNG-572 O1 (Aevi) — "A LEGEND WHO JOINS YOU STOPS BEING ONE." The registry has no tier field and no route
+ *  back to the authored figures, so the rung is correct right up until the moment they matter most to you.
+ *
+ *  ⚑ MEASURED ACROSS EVERY SAVE: 126 people are known between them, 20 of those resolve to an authored figure,
+ *  and SEVEN OF THE TWENTY WERE SILENTLY DEMOTED — Marrow (authored legendary, floor 60) sheeting at 14; Pell
+ *  (authored heroic) at 13; Aevi the Watcher (legendary) likewise. ⚠️ Erik found it by reading a level off a sheet
+ *  that had only existed for an hour, which is Aevi's own argument for showing the numbers: "a prose-only sheet
+ *  would have read beautifully and said nothing false. The number is what could not hide."
+ *
+ *  ⛑ THE BRIDGE WAS ALREADY IN THE RECORD. Marrow's registry aliases read ["Huginn", "Marrow", "Maren Ossitide"]
+ *  and the legend is "Maren Ossitide, Who Buried the Drowned Year" — an epithet clause after a comma. So the join
+ *  is: the id, then any name or alias, then the LEADING CLAUSE of either, normalised.
+ *
+ *  ⚠️ AND IT REFUSES AN AMBIGUOUS ONE-WORD MATCH. Aevi's rule, which I am not going to be the one to break: "a
+ *  wrong guess that makes someone weaker is a disappointment; one that makes them stronger is an AMBUSH." A
+ *  single-token name matches only where exactly one authored figure answers to it — two claimants and this returns
+ *  nothing, leaving the record exactly as it is today. PURE. */
+export function authoredFor(entry, { npcs = null } = {}) {
+  if (!entry || !npcs) return null;
+  if (entry.id && npcs[entry.id]) return npcs[entry.id];
+  const lead = (s) => String(s || "").split(",")[0];
+  const keys = new Set();
+  for (const nm of [entry.name, lead(entry.name), ...(entry.aliases || []), ...(entry.aliases || []).map(lead)]) {
+    const k = normName(nm);
+    if (k) keys.add(k);
+  }
+  if (!keys.size) return null;
+  const hits = [];
+  for (const rec of Object.values(npcs)) {
+    if (!rec || !rec.name) continue;
+    if (keys.has(normName(rec.name)) || keys.has(normName(lead(rec.name)))) hits.push(rec);
+  }
+  if (hits.length !== 1) return null;                       // ⚠️ none, or more than one claimant — say nothing
+  const hit = hits[0];
+  // ⛔ ONE WORD IS ONLY ENOUGH WHEN IT IS UNIQUE, and `hits.length === 1` is exactly that test: the sweep above
+  // ran over every authored figure, so a second "Branch" would already have disqualified this.
+  return hit;
 }
 
 export function sheetFor(entry, { day = null, cfg = {}, roleAttributes = null, authored = null, levelOverride = null } = {}) {

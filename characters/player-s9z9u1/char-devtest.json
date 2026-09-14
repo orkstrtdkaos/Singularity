@@ -142,15 +142,30 @@
       }
     ],
     "lastTurn": {
-      "narration": "",
-      "choices": [],
-      "deathOps": [
+      "npcUpdates": [
         {
-          "op": "incapacitate",
-          "npcId": "stranger-at-the-gate",
-          "why": "fire test — a fall on the stair"
+          "op": "meet",
+          "npcId": "lira",
+          "name": "Lira",
+          "role": "Healer and teacher of the valley — consent-centered, deliberate in presence and touch; ties to harmonic, radiant, and valley craft traditions"
+        },
+        {
+          "op": "update",
+          "npcId": "lira",
+          "age": 25
+        },
+        {
+          "op": "update",
+          "npcId": "lira",
+          "sex": "female"
+        },
+        {
+          "op": "update",
+          "npcId": "lira",
+          "standing": 1
         }
       ],
+      "narration": "",
       "sceneSummary": null
     },
     "sceneState": {
@@ -220,6 +235,32 @@
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
+      },
+      "met": 4
+    },
+    "lira": {
+      "id": "lira",
+      "name": "Lira",
+      "role": "Healer and teacher of the valley — consent-centered, deliberate in presence and touch; ties to harmo",
+      "description": "",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 2
+      },
+      "relationship": 0,
+      "history": [
+        "[d2] Sex recorded: female."
+      ],
+      "knownFacts": [],
+      "skillsObserved": [],
+      "status": "active",
+      "sex": "female",
+      "gender": null,
+      "pronouns": null,
+      "age": 25,
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 2
       },
       "met": 4
     }
@@ -4120,7 +4161,8 @@
           "[d1] She is a woman who asks to be asked — who values the specificity of consent and choice. She has known something about the stranger or the threat since before the gate, and she chose to stand beside Loki anyway. She heals through a craft that moves light and motion together, bound into translucent…",
           "[d1] Her craft is not the only power she wields—she is deliberate about consent and presence. She will not be read by light-bending craft; she chooses what to reveal and to whom.",
           "[d1] She values presence and specificity over craft or assumption—she teaches through direct ask and guided touch, a consent-centered intimacy that reveals who someone actually is",
-          "[d1] Lira's intimacy is built on consent and specificity—she teaches through guided touch and direct asking, binding her craft and her presence into clarity about what is wanted and what is chosen. In the glade, she shows Loki that craft without presence is a failure, and that asking plainly is the…"
+          "[d1] Lira's intimacy is built on consent and specificity—she teaches through guided touch and direct asking, binding her craft and her presence into clarity about what is wanted and what is chosen. In the glade, she shows Loki that craft without presence is a failure, and that asking plainly is the…",
+          "[d2] Healer and teacher of the valley — consent-centered, deliberate in presence and touch; ties to harmo"
         ],
         "links": [
           "harmonic",
@@ -4132,7 +4174,7 @@
         ],
         "createdDay": 1,
         "entityId": "lira",
-        "updatedDay": 1
+        "updatedDay": 2
       },
       "the-edge-that-holds": {
         "id": "the-edge-that-holds",
@@ -4190,8 +4232,8 @@
   "actionCount": 16,
   "grantsVersion": 1,
   "reconcileVersion": 62,
-  "updatedAt": 1789408266627,
-  "rev": 199,
+  "updatedAt": 1789408359196,
+  "rev": 200,
   "activeEncounter": null,
   "customEncounters": {
     "re-enc_the_sealed_door": {
@@ -4357,7 +4399,7 @@
     {
       "id": "sess-5",
       "startedAt": "2026-09-14T17:51:06.579Z",
-      "lastAt": "2026-09-14T17:51:06.626Z",
+      "lastAt": "2026-09-14T17:52:39.193Z",
       "startDay": 76,
       "endDay": 76,
       "beats": 2
@@ -5263,5 +5305,103 @@
     "sceneSummary": 1
   },
   "_bandNotes": null,
-  "_opCountingSince": "2026-09-14T17:51:06.584Z"
+  "_opCountingSince": "2026-09-14T17:51:06.584Z",
+  "_fireTests": {
+    "at": "2026-09-14T17:51:06.665Z",
+    "build": "1.9.545",
+    "results": [
+      {
+        "op": "debtOps",
+        "verdict": "no-op",
+        "moved": [],
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+      },
+      {
+        "op": "projectOps",
+        "verdict": "no-op",
+        "moved": [],
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+      },
+      {
+        "op": "deathOps",
+        "verdict": "no-op",
+        "moved": [],
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+      },
+      {
+        "op": "markTeacher",
+        "verdict": "no-op",
+        "moved": [],
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+      },
+      {
+        "op": "deriveItem",
+        "verdict": "no-op",
+        "moved": [],
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+      },
+      {
+        "op": "unlockSubstrate",
+        "verdict": "no-op",
+        "moved": [],
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+      },
+      {
+        "op": "unlockPrecursor",
+        "verdict": "no-op",
+        "moved": [],
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+      },
+      {
+        "op": "arcOps",
+        "verdict": "not-applicable",
+        "moved": [],
+        "why": "needs at least one latent arc on the world state"
+      },
+      {
+        "op": "offerPromotion",
+        "verdict": "no-op",
+        "moved": [],
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+      },
+      {
+        "op": "offerAcquisition",
+        "verdict": "no-op",
+        "moved": [],
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+      },
+      {
+        "op": "offerIntent",
+        "verdict": "no-op",
+        "moved": [],
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+      },
+      {
+        "op": "holdingOps",
+        "verdict": "applied",
+        "moved": [
+          "holdings"
+        ],
+        "why": null
+      },
+      {
+        "op": "bandOps",
+        "verdict": "no-op",
+        "moved": [],
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+      },
+      {
+        "op": "adoptSchool",
+        "verdict": "no-op",
+        "moved": [],
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+      },
+      {
+        "op": "newAbility",
+        "verdict": "no-op",
+        "moved": [],
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+      }
+    ]
+  }
 }

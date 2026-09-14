@@ -134,155 +134,33 @@
         "player": "Snuggle Lira close and smoosh your mush together - see if Lira wants more.",
         "summary": "In the glade after intimacy, Lira checks if you want more—and asks plainly.",
         "narration": "You shift closer, drawing Lira against you fully—chest to chest, the warmth of her still-heated skin meeting yours in the cool spring air. Your foreheads meet, and you feel her breath catch slightly before steadying. She's still here, still present, which is its own answer.\n\nShe pulls back just enough to see your face in the starlight, and there's a question in her eyes—not doubt, something more like *are we doing this again?* You can feel her heartbeat against your ribs, feel the way her hand has moved from your side to your shoulder, fingers tracing the line of muscle there with deliberate attention.\n\n\"Again?\" she asks quietly, and her voice carries neither permission nor refusal—just the asking. Direct. Exact. That's how she moves through the world: by asking plainly and waiting for a plain answer. She doesn't assume. She *knows* you're interested—your body has already said so—but she wants to hear it named.\n\nThe glade holds quiet around you both. The stream keeps its small voice. The stars don't move."
+      },
+      {
+        "player": "With heat in your voice - you say, How could I not!  Then reflect on how old you think Lira is.",
+        "summary": "In the glade after intimacy, Loki and Lira begin again—heat and certainty, with questions held quietly in the space between knowing and not knowing.",
+        "narration": "Heat rises in your chest—a simple, true thing. \"How could I not?\" you say, and mean it utterly. Your hand finds the curve of her jaw, thumb tracing the line of it, and you kiss her again—slower this time, deeper, the kind of kiss that says *yes, again, absolutely*.\n\nBut even as you move into it, something in the back of your mind catches on a thread. Lira's hands are assured, her body confident in its own knowledge—but there's a quality to her presence, a kind of deliberate care in how she touches you, that speaks to someone still young enough to be *learning* what her own body wants. Her face in the starlight shows no lines, no weathering. You think maybe twenty-five, perhaps younger—somewhere in that reach where a person has left childhood but hasn't yet accumulated years. And there's a moment where you wonder if she's thought about the gap between you, or if she simply doesn't care, or if she's made a choice about it so quietly you didn't hear it happen.\n\nShe meets your kiss with equal heat, and the wondering dissolves."
       }
     ],
     "lastTurn": {
-      "narration": "You shift closer, drawing Lira against you fully—chest to chest, the warmth of her still-heated skin meeting yours in the cool spring air. Your foreheads meet, and you feel her breath catch slightly before steadying. She's still here, still present, which is its own answer.\n\nShe pulls back just enough to see your face in the starlight, and there's a question in her eyes—not doubt, something more like *are we doing this again?* You can feel her heartbeat against your ribs, feel the way her hand has moved from your side to your shoulder, fingers tracing the line of muscle there with deliberate attention.\n\n\"Again?\" she asks quietly, and her voice carries neither permission nor refusal—just the asking. Direct. Exact. That's how she moves through the world: by asking plainly and waiting for a plain answer. She doesn't assume. She *knows* you're interested—your body has already said so—but she wants to hear it named.\n\nThe glade holds quiet around you both. The stream keeps its small voice. The stars don't move.",
-      "sceneSummary": "In the glade after intimacy, Lira checks if you want more—and asks plainly.",
-      "choices": [
+      "narration": "",
+      "choices": [],
+      "holdingOps": [
         {
-          "label": "Yes, plainly and without hesitation",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": "very easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "romantic"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Tell her what you felt—how this mattered, how *she* matters",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "romantic"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Hold her face and kiss her instead of answering",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": "very easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "romantic"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask *her* what she wants—turn the asking back",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "romantic"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "op": "claim",
+          "kind": "post",
+          "name": "A fire-test post",
+          "locationId": null,
+          "why": "fire test"
         }
       ],
-      "deeds": [],
-      "characterDeltas": {},
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "standingOps": [],
-      "delegateOps": [],
-      "arcOps": [],
-      "adoptSchool": {},
-      "offer": {},
-      "stageOps": [],
-      "scene": {
-        "setting": "A secluded glade deep in the wood behind Millbrook's orchard, early spring night. Moss-soft ground, birch and hawthorn bare-branched above, starlight falling through. A narrow melt-water stream catches the light. Dark but luminous. The air is cool and carries the smell of spring earth.",
-        "npcsPresent": [
-          {
-            "name": "Lira",
-            "state": "Resting beside Loki, arm across their ribs, now propped on an elbow to see your face, eyes asking a direct question, still warm from lovemaking, entirely present"
-          }
-        ],
-        "objects": [
-          "Bedroll (yours, laid on the moss)",
-          "The stream (narrow, cold, carrying melt-water from the heights)"
-        ],
-        "threads": [
-          "Lira has asked plainly: do you want more?",
-          "Veln Ashpause's death is becoming a story in the valley—the wrongness of his relieved face reaching other ears"
-        ]
-      },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "lira",
-          "name": "Lira",
-          "role": "Healer, lover, teacher of consent and presence",
-          "note": "She asks plainly, without assumption—expecting a direct answer. In the glade after lovemaking, she checks if you want more, giving you the space to answer truthfully",
-          "learned": [
-            "She does not rush past important moments—she holds space for the other person to choose"
-          ],
-          "statusNote": "Present in the glade, warm from intimacy, waiting for your answer"
-        }
-      ],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "discovery": {},
-      "codexUpdates": [],
-      "holdingOps": [],
-      "debtOps": [],
-      "partyOps": [],
-      "generateRequest": [],
-      "encounterOps": [],
-      "projectOps": [],
-      "bandOps": [],
-      "deathOps": [],
-      "newEncounter": {},
-      "unlockPrecursor": {},
-      "unlockSubstrate": {},
-      "timeOps": {},
-      "moveTo": {},
-      "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": {},
-      "imagePrompt": "Lira's face in starlight, close enough to yours that you can see the question in her eyes, her hand on your shoulder—the moment balanced between yes and the asking of it",
-      "newAbility": {},
-      "gambitOps": {},
-      "gambitApt": false,
-      "markDefiningMoment": {},
-      "markTeacher": {},
-      "offerPromotion": {},
-      "offerAcquisition": {},
-      "offerIntent": {},
-      "sceneEnded": false,
-      "momentArt": "https://image.pollinations.ai/prompt/Lira's%20face%20in%20starlight%2C%20close%20enough%20to%20yours%20that%20you%20can%20see%20the%20question%20in%20her%20eyes%2C%20her%20hand%20on%20your%20shoulder%E2%80%94the%20moment%20balanced%20between%20yes%20and%20the%20asking%20of%20it%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=10112&nologo=true"
+      "sceneSummary": null
     },
     "sceneState": {
       "setting": "A secluded glade deep in the wood behind Millbrook's orchard, early spring night. Moss-soft ground, birch and hawthorn bare-branched above, starlight falling through. A narrow melt-water stream catches the light. Dark but luminous. The air is cool and carries the smell of spring earth.",
       "npcsPresent": [
         {
           "name": "Lira",
-          "state": "Resting beside Loki, arm across their ribs, now propped on an elbow to see your face, eyes asking a direct question, sti"
+          "state": "Kissing you in return, her hands moving with deliberate intention, heat rising between you both"
         }
       ],
       "objects": [
@@ -290,16 +168,17 @@
         "The stream (narrow, cold, carrying melt-water from the heights)"
       ],
       "threads": [
-        "Lira has asked plainly: do you want more?",
-        "Veln Ashpause's death is becoming a story in the valley—the wrongness of his relieved face reaching other ears"
+        "Veln Ashpause's death becoming a story in the valley",
+        "The weight of unfinished things you carry into this moment"
       ]
     },
-    "beats": 2
+    "beats": 3,
+    "subPlace": null
   },
   "clock": {
     "schemaVersion": 1,
     "day": 2,
-    "hour": 1,
+    "hour": 3,
     "realAnchor": null
   },
   "companions": [],
@@ -553,7 +432,7 @@
       }
     ],
     "unseenNews": [],
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 3,
     "lastGenCount": 1841,
     "lastSharedReadAt": "2026-09-06T00:06:33.931Z",
     "lastTickWorldDay": 76,
@@ -4299,22 +4178,22 @@
     }
   },
   "tendencies": {
-    "physical": 0.70155967750146,
-    "risky": 1.457546733007636,
-    "social": 3.4235286901436988,
-    "amorous": 15.17735084736022,
-    "generous": 0.8375915934997556
+    "physical": 0.6840206855639235,
+    "risky": 1.421108064682445,
+    "social": 3.3379404728901063,
+    "amorous": 14.797917076176214,
+    "generous": 0.8166518036622618
   },
   "aptitudes": [
     "charmer",
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 15,
+  "actionCount": 16,
   "grantsVersion": 1,
   "reconcileVersion": 62,
-  "updatedAt": 1789408161075,
-  "rev": 196,
+  "updatedAt": 1789408266654,
+  "rev": 199,
   "activeEncounter": null,
   "customEncounters": {
     "re-enc_the_sealed_door": {
@@ -4440,7 +4319,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "valley": 36
+    "valley": 37
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -4476,6 +4355,14 @@
       "startDay": 68,
       "endDay": 68,
       "beats": 1
+    },
+    {
+      "id": "sess-5",
+      "startedAt": "2026-09-14T17:51:06.579Z",
+      "lastAt": "2026-09-14T17:51:06.654Z",
+      "startDay": 76,
+      "endDay": 76,
+      "beats": 2
     }
   ],
   "establishedFacts": [
@@ -4500,24 +4387,24 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 27,
-    "choices": 27,
-    "scene": 27,
+    "sceneSummary": 28,
+    "choices": 28,
+    "scene": 28,
     "stateOps": 1,
-    "characterDeltas": 18,
+    "characterDeltas": 19,
     "timeOps": 14,
-    "sceneEnded": 14,
+    "sceneEnded": 15,
     "encounterOps": 4,
-    "npcUpdates": 16,
+    "npcUpdates": 17,
     "generateRequest": 1,
     "offer": 5,
     "placeUpdates": 1,
     "moveTo": 1,
-    "imagePrompt": 11,
-    "gambitApt": 11,
+    "imagePrompt": 12,
+    "gambitApt": 12,
     "codexUpdates": 5
   },
-  "_opTurns": 27,
+  "_opTurns": 28,
   "practice": {
     "schemaVersion": 1,
     "uses": {
@@ -4641,6 +4528,14 @@
     "item": {}
   },
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "Two bodies tangled in starlight on moss, breath mingling, the birch branches overhead stark and bare, the stream's silver thread catching what little light falls through. Heat and tenderness and the p",
+      "url": "https://image.pollinations.ai/prompt/Two%20bodies%20tangled%20in%20starlight%20on%20moss%2C%20breath%20mingling%2C%20the%20birch%20branches%20overhead%20stark%20and%20bare%2C%20the%20stream's%20silver%20thread%20catching%20what%20little%20light%20falls%20through.%20Heat%20and%20tenderness%20and%20the%20particular%20vulnerability%20of%20knowing%20someone%20is%20choosing%20you.%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=84335&nologo=true",
+      "caption": "In the glade after intimacy, Loki and Lira begin again—heat and certainty, with questions ",
+      "worldDay": 76,
+      "at": "2026-09-14T17:51:06.586Z"
+    },
     {
       "kind": "moment",
       "prompt": "Lira's face in starlight, close enough to yours that you can see the question in her eyes, her hand on your shoulder—the moment balanced between yes and the asking of it",
@@ -4848,7 +4743,8 @@
     "romantic": 10,
     "flirt": 7,
     "honest": 1,
-    "help": 1
+    "help": 1,
+    "discuss": 1
   },
   "aptitudeEarnCount": {
     "charmer": 1,
@@ -4865,7 +4761,20 @@
   "itemReclaimVersion": 1,
   "nameRepairVersion": 1,
   "bondLogFrom": 14,
-  "holdings": [],
+  "holdings": [
+    {
+      "id": "a-fire-test-post",
+      "kind": "post",
+      "name": "A fire-test post",
+      "locationId": "millbrook",
+      "steward": null,
+      "obligation": null,
+      "condition": "holding",
+      "claimedDay": 76,
+      "lastMovedWorldCount": null,
+      "history": []
+    }
+  ],
   "likeness": {
     "figure:whois-death-sunwrack_valen": {
       "keeps": [
@@ -5018,5 +4927,356 @@
   "_debtReceipts": [],
   "bands": [],
   "_silasGrantsRevoked": true,
-  "featureOffers": []
+  "featureOffers": [],
+  "_promptRows": {
+    "character": {
+      "reached": 1,
+      "produced": 1
+    },
+    "location": {
+      "reached": 1,
+      "produced": 1
+    },
+    "region": {
+      "reached": 1,
+      "produced": 1
+    },
+    "groundDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "lore": {
+      "reached": 1,
+      "produced": 1
+    },
+    "traditionMotiveDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "sheetsDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "rules": {
+      "reached": 1,
+      "produced": 1
+    },
+    "recentTurns": {
+      "reached": 1,
+      "produced": 1
+    },
+    "timeLabel": {
+      "reached": 1,
+      "produced": 1
+    },
+    "npcRegistryDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "mintedUnmetDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "npcSeedDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "traditionVocab": {
+      "reached": 1,
+      "produced": 1
+    },
+    "standingDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "recalledDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "bearingsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "caravansDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "commandDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "presenceDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "worthHereDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "inventoryDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "sceneState": {
+      "reached": 1,
+      "produced": 1
+    },
+    "holdingsDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "debtsDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "carriedDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "abilityLawDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "questsDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "structuredQuestsDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "traditionArcDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "npcErrandsDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "codexDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "companionsDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "placeMemoryDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "agesMissingDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "newsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "worldArcsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "legendsPursuableDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "wakesDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "arcMoodDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "reachableDeadDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "threatToPlayer": {
+      "reached": 1,
+      "produced": 0
+    },
+    "guardiansDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "resolution": {
+      "reached": 1,
+      "produced": 1
+    },
+    "playerInput": {
+      "reached": 1,
+      "produced": 0
+    },
+    "exactWords": {
+      "reached": 1,
+      "produced": 1
+    },
+    "travelDirective": {
+      "reached": 1,
+      "produced": 0
+    },
+    "itemAdvance": {
+      "reached": 1,
+      "produced": 0
+    },
+    "encounterWeaveDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "encounterOfferDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "fightFramingDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "abilityGrantDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "stageRevealDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "itemEvolveDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "worldPressureDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "offerDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "teacherOfferDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "substrateDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "romanceGuidanceDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "factsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "evolvedItemsDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "opLossNote": {
+      "reached": 1,
+      "produced": 0
+    },
+    "emergenceDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "perilNote": {
+      "reached": 1,
+      "produced": 0
+    },
+    "encounterDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "masteryDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "bookkeepingRestate": {
+      "reached": 1,
+      "produced": 0
+    },
+    "anomalyDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "repairPanelDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "teacherDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "toolkitDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "availableEncounters": {
+      "reached": 1,
+      "produced": 1
+    },
+    "partyDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "ratingDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "registerDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "legendDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "livingWorldDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "assignmentsDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "latentArcsDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "seasonalDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "schoolsDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "sharedCanonDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "worldCountLabel": {
+      "reached": 1,
+      "produced": 1
+    },
+    "waygateDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "readAloudDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "scenePacingDetail": {
+      "reached": 1,
+      "produced": 0
+    }
+  },
+  "_opUnknown": {
+    "sceneSummary": 1
+  },
+  "_bandNotes": null,
+  "_opCountingSince": "2026-09-14T17:51:06.584Z"
 }

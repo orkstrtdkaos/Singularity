@@ -16226,6 +16226,90 @@ console.log("\n── §234 · an authored tag that reaches no family ──");
     && !/which is Erik's to rule and not mine to ship/.test(CMB234));
 }
 
+
+// ⛔ SNG-585 — ERIK: "the title page still says the valley of echoes." ⚑ AND HE HAD RULED THE TITLE TWO
+// WEEKS EARLIER. `world_framing.json`, 2026-08-29, in as many words:
+//
+//   "⛔ THE GAME IS NAMED FOR THIS: SINGULARITY — THE ARCS OF EXESA (Erik). ⚠️ It was 'Singularity — The
+//    Valley of Echoes', which titled the whole game after ONE REGION OF 135 PLACES — the same drift that
+//    made the setting read small, sitting in the `<title>` tag."
+//
+// ⚠️ THE `<title>` TAG WAS FIXED. THE HEADER ON THE SCREEN WAS NOT — which is the four doors again, and the
+// funniest possible instance of it: the ruling reached the browser tab and not the page under it. The Valley
+// of Echoes is 11 places of 138, about 8% of Exesa, and the banner called the whole world by that eighth.
+//
+// ⛑ SO THE SHELL'S TITLE IS GATED AGAINST THE CANON FILE. The loader flattens lore documents to text, so the
+// name is not reachable as DATA at runtime; a gate that reads the JSON is the same protection without a
+// loader change, and it is the only thing that stops this drifting a third time.
+console.log("\n── §235 · the game is called what Erik named it ──");
+{
+  const APP235 = rd("app.js");
+  const HTML235 = rd("index.html");
+  const CSS235 = rd("style.css");
+  const WF235 = JSON.parse(rd("content/packs/valley/lore/world_framing.json"));
+  const { existsSync: ex235f, readdirSync: rdd235 } = await import("node:fs");
+  const ex = (p) => ex235f(join(root, p));
+  const named235 = WF235.the_world_is_named || {};
+
+  /* ---- 1 · ⛔ THE NAME COMES FROM CANON, NOT FROM A STRING I LIKED ---- */
+  check("§235: ⛔ the world's name in the shell is the one canon gives it",
+    typeof named235.name === "string" && named235.name.length > 2
+    && new RegExp(`const WORLD_NAME = "${named235.name}";`).test(APP235),
+    named235.name || "(canon names no world)");
+  // ⚠️ AND THE RULED TITLE IS QUOTED FROM THE FILE THAT CARRIES THE RULING, so a gate cannot agree with a
+  // typo of mine. `_gameTitle` is the ruling; the shell has to contain both halves of what it names.
+  const ruled235 = String(named235._gameTitle || "");
+  check("§235: …and the ruling itself still says so, where the gate can read it",
+    /SINGULARITY/.test(ruled235) && /ARCS OF EXESA/i.test(ruled235),
+    ruled235.slice(0, 70));
+  check("§235: ⚑ …and the shell's subtitle is built from the world name rather than spelled again",
+    /const GAME_SUBTITLE = `The Arcs of \$\{WORLD_NAME\}`;/.test(APP235));
+
+  /* ---- 2 · ⛔ AND THE REGION IS NO LONGER WEARING THE WORLD'S NAME ---- */
+  // ⚠️ SCOPED TO THE SHELL. "The Valley of Echoes" is a correct, living name for ONE REGION and appears all
+  // over lore, where it belongs — a repo-wide negative here would be a claim about the content pack, and the
+  // claim is about the three files a player's browser paints the frame from.
+  for (const [label, src] of [["app.js", APP235], ["index.html", HTML235], ["style.css", CSS235]]) {
+    // ⛑ comments that NARRATE the fix are not the fix drifting back — strip them, the same lesson as §232.
+    const bare = src.replace(/\/\*[\s\S]*?\*\//g, "").replace(/(^|[^:])\/\/[^\n]*/g, "$1");
+    check(`§235: ⛔ the shell (${label}) no longer titles the world after one of its regions`,
+      !/Valley of Echoes/.test(bare));
+  }
+  check("§235: …and the browser tab and the page under it finally agree",
+    /<title>[^<]*Arcs of Exesa[^<]*<\/title>/.test(HTML235)
+    && /class="th-sub">\$\{esc\(GAME_SUBTITLE\)\}/.test(APP235));
+
+  /* ---- 3 · ⛔ AND THE TITLE PAGE'S IMAGERY EXISTS ---- */
+  // ⚑ THE CENSUS THAT FOUND THIS: 34 locations declare an `image` and 28 of those files ARE NOT IN THE REPO.
+  // ⚠️ So the plates are NAMED rather than derived — deriving the list from content would have put five
+  // sixths of a 404 on the first screen of the game.
+  const heroPlates235 = [...APP235.matchAll(/const HERO_PLATES = \[([^\]]*)\]/gs)]
+    .flatMap(m => [...m[1].matchAll(/"([^"]+)"/g)].map(x => x[1]));
+  check("§235: ⛔ every plate the title band names is a file that exists",
+    heroPlates235.length >= 4
+    && heroPlates235.every(p => ex(`content/packs/valley/assets/${p}.jpg`)),
+    heroPlates235.filter(p => !ex(`content/packs/valley/assets/${p}.jpg`)).join(", ") || `${heroPlates235.length} plates, all present`);
+
+  /* ---- 4 · ⬜ AND THE 28 THAT DO NOT ARE COUNTED, NOT HIDDEN ---- */
+  // ⛔ A PLACE THAT DECLARES ART IT DOES NOT HAVE IS A BROKEN IMAGE IN PLAY, and the field has been lying
+  // quietly for months because nothing ever asked. ⬜ It is Aevi's to fill or to unset — so this is a CEILING,
+  // not a failure: it may fall and may not rise, and the day it reaches zero the pin comes down with it.
+  const locDir235 = join(root, "content/packs/valley/locations");
+  let declared235 = 0, absent235 = [];
+  for (const f of rdd235(locDir235)) {
+    if (!f.endsWith(".json")) continue;
+    let doc; try { doc = JSON.parse(rd(`content/packs/valley/locations/${f}`)); } catch { continue; }
+    for (const L of (doc.locations ? Object.values(doc.locations) : [doc])) {
+      if (!L?.image) continue;
+      declared235++;
+      if (!ex(L.image)) absent235.push(L.id || f);
+    }
+  }
+  check("§235: ⬜ declared-but-absent location art is pinned at 28 and may only FALL",
+    declared235 >= 30 && absent235.length <= 28,
+    `${absent235.length} of ${declared235} declared images are not in the repo`);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

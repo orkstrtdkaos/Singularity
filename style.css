@@ -1,4 +1,4 @@
-/* Singularity — Valley of Echoes. Dark, warm, readable. */
+/* Singularity — The Arcs of Exesa. Dark, warm, readable. */
 :root {
   --bg: #131417;
   --panel: #1c1e24;
@@ -41,6 +41,100 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .topbar .sub { color: var(--ink-dim); font-size: 13px; font-style: italic; }
 .topbar .actions button { background: none; border: 1px solid var(--border); color: var(--ink-dim); border-radius: 6px; padding: 4px 10px; font-size: 12px; margin-left: 6px; }
 .topbar .actions button:hover { color: var(--ink); border-color: var(--ink-dim); }
+/* ⛔ SNG-585 — ON THE LANDING SCREEN THE TOPBAR GIVES UP THE NAME. The band below carries it at full size,
+   and two SINGULARITYs stacked would read as a mistake rather than a title. The nav stays exactly where it
+   sits on every other screen, which is the half a returning player navigates by. */
+.topbar-hero { border-bottom: none; padding-bottom: 0; margin-bottom: 10px; }
+
+/* ---------- the title band (SNG-585) ----------
+   ⛑ THE ART DIRECTION IS THE NAME'S OWN MEANING. `Exesa` is Latin — exedō, to gnaw hollow from within —
+   and canon says the world is a third the size it was, spent by its own people one working at a time. So:
+   gold worn thin over a dark ground, a rule that frays at both ends rather than meeting its margins, and
+   real ground underneath that never quite resolves. Nothing here is decoration borrowed from elsewhere.
+   ⚠️ Six plates, 1024×320, ~50KB each — the only six of 34 declared location images that exist. */
+.title-hero {
+  position: relative; overflow: hidden; isolation: isolate;
+  border: 1px solid var(--border); border-radius: 10px;
+  margin: 0 0 18px; min-height: 216px;
+  display: flex; align-items: flex-end;
+  background: #0d0e11;                   /* the ground the plates fade over, and the look if none load */
+}
+.th-plates { position: absolute; inset: 0; z-index: 0; }
+/* ⚠️ DARKENED AND PULLED TOWARD THE PALETTE, not shown raw: six photographs at full strength behind a
+   serif wordmark is a collage, and the band has to read as ONE thing with the page it opens. */
+.th-plate {
+  position: absolute; inset: 0; opacity: 0;
+  background-size: cover; background-position: center 58%;
+  filter: grayscale(0.34) sepia(0.26) contrast(1.08) brightness(0.6);
+  animation: th-cycle 72s linear infinite;
+  will-change: opacity;
+}
+.th-plate-0 { animation-delay: 0s; }
+.th-plate-1 { animation-delay: 12s; }
+.th-plate-2 { animation-delay: 24s; }
+.th-plate-3 { animation-delay: 36s; }
+.th-plate-4 { animation-delay: 48s; }
+.th-plate-5 { animation-delay: 60s; }
+/* six 12s slots in 72s: up over 2s, held ~9s, gone by the next one's second */
+@keyframes th-cycle {
+  0%   { opacity: 0 }
+  2.8% { opacity: 1 }
+  13.9% { opacity: 1 }
+  16.7% { opacity: 0 }
+  100% { opacity: 0 }
+}
+/* the gold is a light IN the scene at the top left, and the bottom dissolves into the page itself */
+.th-veil {
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    radial-gradient(115% 130% at 16% 26%, rgba(212, 162, 74, 0.13), transparent 58%),
+    linear-gradient(90deg, rgba(13, 14, 17, 0.93) 0%, rgba(13, 14, 17, 0.66) 48%, rgba(13, 14, 17, 0.34) 100%),
+    linear-gradient(0deg, var(--bg) 1%, rgba(19, 20, 23, 0.25) 46%, transparent 76%);
+}
+.th-text { position: relative; z-index: 2; padding: 26px 28px 22px; --ls: clamp(7px, 1.7vw, 17px); }
+/* ⚠️ THE NEGATIVE MARGIN IS NOT A HACK. Letter-spacing adds its space AFTER the final letter too, so a
+   spaced wordmark sits visibly off its own left margin against the rule below it unless the trailing space
+   is taken back. Same on the small-caps line. */
+.th-mark {
+  font-family: var(--font); font-weight: normal; line-height: 1;
+  font-size: clamp(30px, 6.4vw, 58px);
+  letter-spacing: var(--ls); margin-right: calc(var(--ls) * -1);
+  color: var(--accent);
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.55), 0 0 30px rgba(212, 162, 74, 0.16);
+}
+/* ⛑ THE RULE FRAYS AT BOTH ENDS — the one place the name's meaning is drawn rather than written. */
+.th-rule {
+  height: 1px; max-width: 540px; margin: 13px 0 11px;
+  background: linear-gradient(90deg, transparent 0%, rgba(212, 162, 74, 0.5) 9%,
+    rgba(212, 162, 74, 0.5) 58%, rgba(212, 162, 74, 0.16) 80%, transparent 100%);
+}
+/* teal against the gold: the two valley civilisations are the palette, so the subtitle wears the other one */
+.th-sub {
+  font-size: clamp(11px, 1.55vw, 14px);
+  letter-spacing: 0.34em; margin-right: -0.34em;
+  text-transform: uppercase; color: var(--accent2);
+}
+.th-line {
+  margin-top: 11px; max-width: 62ch;
+  font-style: italic; font-size: 13px; line-height: 1.5; color: var(--ink-dim);
+}
+.th-stamp {
+  position: absolute; z-index: 2; top: 12px; right: 15px;
+  font-family: var(--font-ui); font-size: 11px; letter-spacing: 1px; color: var(--ink-dim);
+}
+/* ⛔ ONE PLATE, NO MOTION, AND THE OTHER FIVE ARE NEVER FETCHED. `display:none` is the point: an opacity
+   rule would still pull 250KB of images at someone who asked the browser to stop moving things. */
+@media (prefers-reduced-motion: reduce) {
+  .th-plate { display: none; }
+  .th-plate-0 { display: block; opacity: 1; animation: none; }
+}
+/* 2026-09-14 measured at 375px: the band keeps its proportions, the world line stands down. */
+@media (max-width: 600px) {
+  .title-hero { min-height: 158px; border-radius: 8px; }
+  .th-text { padding: 18px 18px 16px; }
+  .th-line { display: none; }
+  .th-rule { max-width: 200px; margin: 10px 0 9px; }
+}
 
 /* ---------- sidebar / sheet ---------- */
 .sheet { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px; font-family: var(--font-ui); font-size: 13px; position: sticky; top: 12px; }

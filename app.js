@@ -144,7 +144,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.4";
+const APP_VERSION = "2.0.5";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -999,10 +999,56 @@ function renderPlayerPick(msg = "") {
 
 // ---------- shared chrome ----------
 
-function chrome(inner) {
+/** ⛔ SNG-585 (Erik: "the title page still says the valley of echoes") — AND HE HAD ALREADY RULED THE TITLE,
+ *  TWO WEEKS BEFORE. `world_framing.json`, 2026-08-29, in as many words:
+ *
+ *    "⛔ THE GAME IS NAMED FOR THIS: **SINGULARITY — THE ARCS OF EXESA** (Erik, 2026-08-29). ⚠️ It was
+ *     'Singularity — The Valley of Echoes', which titled the whole game after ONE REGION OF 135 PLACES — the
+ *     same drift that made the setting read small, sitting in the `<title>` tag."
+ *
+ *  ⚑ AUTHORED, LOADED, AND READ BY NOBODY — on the most-looked-at surface in the game. The Valley of Echoes
+ *  is 11 places of 138, about 8% of Exesa, and the header called the whole world by that eighth for a
+ *  fortnight after the ruling that fixed it.
+ *
+ *  ⚠️ SO THE STRINGS LIVE HERE, ONCE, AND §235 HOLDS THEM AGAINST THE CANON FILE. The loader flattens lore
+ *  documents to text, so `the_world_is_named.name` is not reachable as DATA at runtime — a gate that reads
+ *  the JSON and compares is the same protection without a loader change, and it is the only thing that stops
+ *  this drifting a third time. */
+const WORLD_NAME = "Exesa";                       // world_framing.json → the_world_is_named.name
+const GAME_MARK = "SINGULARITY";
+const GAME_SUBTITLE = `The Arcs of ${WORLD_NAME}`; // ← Erik's ruled title, the half that was missing
+// ⛑ AND THE LINE UNDER IT IS CANON'S OWN, not copy I wrote: "The world is about a third the size it was…
+// It was spent, by its own inhabitants, on their own workings, one working at a time." The name is Latin
+// — `exedō`, to gnaw hollow from within — and that is the art direction for everything below.
+const WORLD_LINE = "A third the size it was — spent by its own people, one working at a time.";
+
+/** ⛑ THE SIX PLATES THAT EXIST. 34 locations declare an `image` and 28 of those files are NOT IN THE REPO
+ *  (SNG-585 census) — so this names the six that are, rather than deriving a list that would 404 on five
+ *  sixths of it. ⚠️ They are 1024×320 banners, which is the aspect this band was always for. */
+const HERO_PLATES = ["echo_river_crossing", "harmonic_heights_terrace", "radiant_plateau_edge",
+  "archive_hollow", "millbrook", "disputed_zone_fringe"];
+
+/** The landing band. Pure string — no state, no clock, nothing to tear down. */
+function titleHero() {
+  return `
+    <div class="title-hero">
+      <div class="th-plates" aria-hidden="true">${HERO_PLATES.map((p, i) =>
+        `<div class="th-plate th-plate-${i}" style="background-image:url('content/packs/valley/assets/${p}.jpg')"></div>`).join("")}</div>
+      <div class="th-veil" aria-hidden="true"></div>
+      <div class="th-text">
+        <h1 class="th-mark">${esc(GAME_MARK)}</h1>
+        <div class="th-rule" aria-hidden="true"></div>
+        <div class="th-sub">${esc(GAME_SUBTITLE)}</div>
+        <p class="th-line">${esc(WORLD_LINE)}</p>
+      </div>
+      <div class="th-stamp">v${esc(APP_VERSION)}${isDevMode() ? ` <span class="dev-badge" title="Developer mode is ON. Turn it off in Settings, or reload without ?dev=1.">DEV</span>` : ""}</div>
+    </div>`;
+}
+
+function chrome(inner, { hero = false } = {}) {
   app.innerHTML = `
-    <div class="topbar">
-      <div><h1>SINGULARITY</h1><span class="sub">The Valley of Echoes — v${APP_VERSION}</span>${isDevMode() ? ` <span class="dev-badge" title="Developer mode is ON. Turn it off in Settings, or reload without ?dev=1.">DEV</span>` : ""}</div>
+    <div class="topbar${hero ? " topbar-hero" : ""}">
+      <div>${hero ? "" : `<h1>${esc(GAME_MARK)}</h1><span class="sub">${esc(GAME_SUBTITLE)} — v${esc(APP_VERSION)}</span>${isDevMode() ? ` <span class="dev-badge" title="Developer mode is ON. Turn it off in Settings, or reload without ?dev=1.">DEV</span>` : ""}`}</div>
       <div class="actions">
         <button id="nav-roster">Characters</button>
         <button id="nav-settings">Settings</button>
@@ -1012,6 +1058,7 @@ function chrome(inner) {
         ${devEnabled() ? `<button id="nav-author" title="SNG-207b — AUTHOR god-mode: set anything on this character (xp, level, items, abilities, world arcs), no fairness check. Dev only.">⚙ Author</button>` : ""}
       </div>
     </div>
+    ${hero ? titleHero() : ""}
     ${inner}`;
   document.getElementById("nav-roster").onclick = () => renderRoster();
   document.getElementById("nav-settings").onclick = () => renderSettings();
@@ -3590,7 +3637,7 @@ function renderRoster() {
       <button class="btn secondary" id="export-save">Export saves</button>
       <button class="btn secondary" id="import-save">Import</button>
     </div>
-  </div>`);
+  </div>`, { hero: true });   // ⛔ SNG-585: the roster IS the title page — the one screen a player sees before a world exists
   const discBtn = document.getElementById("discover-chars");
   if (discBtn) discBtn.onclick = () => renderDiscover();
   const sw = document.getElementById("switch-player");

@@ -49,7 +49,7 @@ import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a
 import { walkingDays, milesFor, worldPosForGenerated, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal, domainOf, domainOfTradition, sectOf } from "./engine/traditions.js";
-import { sheetFor as personSheetFor, battleSkillsFor } from "./engine/npcsheet.js";  // the person-keyed sheet
+import { sheetFor as personSheetFor, battleSkillsFor, playerSheetFor } from "./engine/npcsheet.js";  // the person-keyed sheet, and SNG-571's player-facing one
 import { companyPlaces, delegationCapacity, ladderRungLine, ladderRoll } from "./engine/ladder.js";
 import { repairFingerprint, repairNote } from "./engine/repair_note.js";   // ✅ ERIK 2026-09-11: the ask channel's repair note measures the state, not four counts   // SNG-390: how many places rapport has earned · R25b: how many can run things in your name
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs, companionCodexUpdate, noteCompanionWitnessed, companionStageThresholds, shareAtOrAbove, syncStageTaughtRanks, stageTaughtBy } from "./engine/companions.js";
@@ -143,7 +143,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "1.9.513";
+const APP_VERSION = "1.9.514";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -13592,6 +13592,40 @@ function renderCodexScreen(query = "", openTopicId = null, mergeMode = false) {
           if (!r.summary) return facts;
           return `<p class="codex-summary">${esc(r.summary)}</p>
           <details class="codex-details"><summary class="hint">Details — ${r.evidence.length} fact${r.evidence.length === 1 ? "" : "s"} on record${r.archived ? `, ${r.archived} older in the archive` : ""}</summary>${facts}</details>`;
+        })()}
+        ${(() => {
+          // ⛑ SNG-570/571 (Erik) — "a tidy version of [a sheet] for any NPC… revealed over time, based on what the PC
+          // knows or witnesses." ⚑ MEASURED: the GM has had a full sheet for every person in the game since SNG-486;
+          // `skillsObserved` and `knownFacts` had ZERO readers in app.js, so the player has had a name and a portrait.
+          //
+          // ⛔ ERIK RULED THE NUMBERS SHOW: "We have to be able to see the numbers and stats too. We can make them
+          // tasteful. The prose and real experiences are what people will remember anyway." ⚠️ And Aevi's correction
+          // beside it — her SECOND in one day where she reached for concealment to protect tone: "when the instinct is
+          // to hide a mechanic for the sake of the fiction, the answer is almost always to render it better instead."
+          //
+          // ⛑ SO THE ORDER IS THE DESIGN: what they DID, then what they ARE, then the numbers underneath. Nothing is
+          // withheld and nothing leads with an integer. The codex entry is where a player already goes to read about
+          // a person, so the sheet belongs here rather than on a screen of its own.
+          if (open.kind !== "npc" && open.kind !== "person") return "";
+          const rec = character.npcRegistry?.[open.id]
+            || Object.values(character.npcRegistry || {}).find(n => n && namesMatch(n.name, open.label));
+          if (!rec) return "";
+          const s = playerSheetFor(rec, { cfg: CONTENT.rules?.npcStanding || {}, day: absoluteWorldDay() });
+          if (!s) return "";
+          const row = (label, val) => val ? `<div class="codex-fact"><strong>${esc(label)}</strong> ${esc(String(val))}</div>` : "";
+          const pips = (n) => "●".repeat(Math.max(0, Math.min(5, Math.round(Number(n) / 6)))) + "○".repeat(Math.max(0, 5 - Math.min(5, Math.round(Number(n) / 6))));
+          return `<div class="cs-block" style="margin-top:10px"><h3 class="codex-title" style="font-size:14px">Their sheet <span class="hint" style="text-transform:none">— as much of it as you have seen</span></h3>
+            ${s.witnessed.length ? `<div class="hint" style="margin:0 0 4px">What you have watched them do</div>
+              ${s.witnessed.map(w => `<div class="codex-fact">${esc(w)}</div>`).join("")}` : ""}
+            ${s.is ? `<div class="hint" style="margin:8px 0 4px">What they are</div>
+              ${row("", s.is.role)}${row("", s.is.description)}
+              ${s.standing?.bondType ? row("Bond", `${s.standing.bondType}${s.standing.bondStage ? " · " + s.standing.bondStage : ""}`) : ""}
+              ${s.is.status && s.is.status !== "active" ? row("Status", `${s.is.status}${s.is.statusNote ? " — " + s.is.statusNote : ""}`) : ""}` : ""}
+            ${s.numbers ? `<div class="hint" style="margin:8px 0 4px">And the numbers underneath</div>
+              <div class="codex-fact"><strong>Level ${s.numbers.level}</strong>${s.numbers.tier ? ` · ${esc(s.numbers.tier)}` : ""}${s.numbers.tierGuessed ? ` <span class="hint">(rung guessed from their role)</span>` : ""}</div>
+              ${s.numbers.attributes ? `<div class="codex-fact hint">${Object.entries(s.numbers.attributes).map(([k, v]) => `${esc(k)} ${pips(v)}`).join(" · ")}</div>` : ""}`
+              : `<div class="hint" style="margin:8px 0 0">— ${esc(s.reveal.why)}. <strong>Travel with them and watch what they do.</strong></div>`}
+          </div>`;
         })()}
         ${open.links.length ? `<div class="codex-links">linked: ${open.links.map(l => {
           const t = character.codex.topics[l];

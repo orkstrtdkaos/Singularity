@@ -312,6 +312,91 @@ export function drawTier(census = {}, { cfg = {}, rng = Math.random, evidence = 
 }
 
 
+/** ⛔ SNG-570/571 (Erik) — "a tidy version of [a sheet] for any NPC… revealed over time, based on what the PC knows or
+ *  witnesses." ⛑ AND AEVI: "THIS IS ALREADY HOW THE DATA WORKS. NOTHING NEEDS INVENTING — IT NEEDS RENDERING."
+ *
+ *  ⚑ MEASURED ON THE LIVE SAVE: of the 41 people Silas knows, 26 carry `skillsObserved` — crafts he has WATCHED them
+ *  use — and 35 carry `knownFacts`. The ones carrying neither are genuine strangers. ⛔ AND BOTH FIELDS HAD ZERO
+ *  READERS IN app.js: the GM has had a full character sheet for every person in the game and the player has had a
+ *  name and a portrait.
+ *
+ *  ⛑ ERIK RULED THE NUMBERS SHOW (SNG-571 §O3): "We have to be able to see the numbers and stats too. We can make
+ *  them tasteful. The prose and real experiences are what people will remember anyway." ⚠️ And Aevi's own correction
+ *  beside it, filed so it is not re-derived: "this is the second ruling in one day where I reached for concealment to
+ *  protect tone… when the instinct is to hide a mechanic for the sake of the fiction, the answer is almost always to
+ *  render it better instead."
+ *
+ *  ⛔ SO NOTHING IS WITHHELD AND NOTHING LEADS WITH AN INTEGER. The order is the finding: WHAT THEY DID, then WHAT
+ *  THEY ARE, then the numbers underneath — and each tier is gated by the evidence the record already holds.
+ *
+ *  ⛑ AND THE NUMBERS ARE GATED ON HAVING SEEN THEM ACT, which is SNG-571 §4's argument and gives the will its bound
+ *  for free: "YOU CANNOT NAME SOMEONE WHOSE REACH YOU HAVE NEVER SEEN." Watching Marrow read a warding through touch
+ *  stops being colour and becomes the reason you are able to name her at the deep dark. PURE. */
+export function playerSheetFor(entry, { day = null, cfg = {}, roleAttributes = null } = {}) {
+  if (!entry || typeof entry !== "object") return null;
+  const arr = (v) => (Array.isArray(v) ? v.filter(Boolean) : []);
+  const witnessed = arr(entry.skillsObserved);
+  const learned = arr(entry.knownFacts);
+  const history = arr(entry.history);
+  // ⚠️ MET is not the same as KNOWN. A name in the registry with no history, no facts and no relationship is someone
+  // you walked past — the sheet must say so rather than render an empty form that looks like a missing record.
+  const met = !!(history.length || learned.length || witnessed.length || (entry.relationship ?? 0) !== 0);
+  // ⛔ THE NUMBERS NEED EVIDENCE, AND THE EVIDENCE IS HAVING WATCHED THEM WORK. Not relationship — you can be fond of
+  // someone whose capability you have never seen, and fondness is not knowledge of their reach.
+  const seenAct = witnessed.length > 0;
+  const sheet = seenAct ? sheetFor(entry, { day, cfg, roleAttributes }) : null;
+
+  return {
+    id: entry.id || null,
+    name: entry.name || null,
+    met,
+    // ⛑ FIRST: what they DID. In the GM's words, dated by the history beside it — "not a craft list, a record of
+    // things the player watched them do", which Aevi is right to say is better than a craft list.
+    witnessed,
+    learned,
+    lastSeen: entry.lastSeen ?? entry.firstMet?.day ?? null,
+    firstMet: entry.firstMet || null,
+    // ⛑ THEN: what they ARE. Everything here is authored or established; none of it is derived.
+    is: met ? {
+      role: entry.role || null,
+      description: entry.description || null,
+      people: entry.people || null,
+      domains: entry.domains || null,
+      // ⚠️ AGE AND SEX ONLY IF RECORDED — SNG-556 made the age the gate, and a sheet that guessed one would be
+      // inventing the very fact that gate turns on.
+      age: Number.isFinite(Number(entry.age)) ? Number(entry.age) : null,
+      sex: entry.sex || null,
+      pronouns: entry.pronouns || null,
+      status: entry.status || null,
+      statusNote: entry.statusNote || null,
+    } : null,
+    standing: met ? {
+      relationship: entry.relationship ?? 0,
+      bondType: entry.bondType || null,
+      bondStage: entry.bondStage || null,
+      kin: entry.kin || null,
+    } : null,
+    // ⛑ THEN the numbers, underneath, and only where they were earned by watching.
+    numbers: sheet ? {
+      level: sheet.level ?? null,
+      tier: sheet.tierNow || entry.tier || null,
+      // ⚠️ A GUESSED RUNG IS MARKED AS ONE (SNG-572): `tierDerived` is what a role STRING suggested, and it must never
+      // read as the same kind of fact as a tier somebody authored.
+      tierGuessed: sheet.tierDerived ? sheet.tierDerived.tier : null,
+      attributes: sheet.attributes || null,
+      subAttributes: sheet.subAttributes || null,
+    } : null,
+    // ⛔ AND THE SHEET SAYS WHY A NUMBER IS ABSENT, rather than showing a blank that reads as a broken record.
+    // "Revealed-when-known is not the same as hidden, and conflating those two was my error" — Aevi, SNG-571.
+    reveal: {
+      numbers: seenAct ? "seen" : "unwitnessed",
+      why: seenAct ? `you have watched ${witnessed.length} thing${witnessed.length === 1 ? "" : "s"} they can do`
+        : met ? "you know them, but you have never watched them work"
+        : "you have not met them properly",
+    },
+  };
+}
+
 export function sheetFor(entry, { day = null, cfg = {}, roleAttributes = null, authored = null, levelOverride = null } = {}) {
   if (authored) return { ...authored, id: entry?.id || authored.id, authored: true };
   // ⛔ SNG-486 — see sheetFrom: a record carrying its own sub-attributes IS an authored sheet.

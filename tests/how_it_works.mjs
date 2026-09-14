@@ -14200,6 +14200,101 @@ console.log("\n── §212 · the sheet was right and the call was bare ──"
     /sheetFor\(pro, \{ cfg: rules\?\.npcStanding \|\| \{\} \}\)/.test(rd("engine/worldtick.js")));
 }
 
+
+// ⛔ SNG-570/571 (Erik) — "a tidy version of [a sheet] for any NPC… revealed over time, based on what the PC knows or
+// witnesses." ⛑ AEVI: "THIS IS ALREADY HOW THE DATA WORKS. NOTHING NEEDS INVENTING — IT NEEDS RENDERING."
+//
+// ⚑ MEASURED ON THE LIVE SAVE: of the 41 people Silas knows, 26 carry `skillsObserved` — crafts he has WATCHED them
+// use, in the GM's own words and dated by the history beside them — and 35 carry `knownFacts`. ⛔ AND BOTH FIELDS HAD
+// ZERO READERS IN app.js. The GM has had a full character sheet for every person in the game since SNG-486; the player
+// has had a name and a portrait.
+//
+// ⛑ ERIK RULED THE NUMBERS SHOW: "We have to be able to see the numbers and stats too. We can make them tasteful. The
+// prose and real experiences are what people will remember anyway." ⚠️ And Aevi filed her own correction beside it,
+// her SECOND in one day where she reached for concealment to protect tone: "when the instinct is to hide a mechanic
+// for the sake of the fiction, the answer is almost always to render it better instead."
+console.log("\n── §213 · a person's sheet, as much of it as you have witnessed ──");
+{
+  const NS213 = await import("../engine/npcsheet.js");
+  const { loadContentHeadless: lch213 } = await import("./headless_content.mjs");
+  const C213 = await lch213();
+  const cfg213 = C213.rules?.npcStanding || {};
+  const of213 = (e) => NS213.playerSheetFor(e, { cfg: cfg213, day: 400 });
+
+  /* ---- 1 · ⛔ THE ORDER IS THE DESIGN: what they did, then what they are, then the numbers ---- */
+  const watched = { id: "pell", name: "Pell", role: "Blacksmith", relationship: 8,
+    skillsObserved: ["Reading novel craft-strain through ironsense", "Steadying a making through partnership"],
+    knownFacts: ["She dropped her own roof rather than yield the forge"], history: ["[d12] you worked her bellows"],
+    tier: "regional" };
+  const s213 = of213(watched);
+  check("§213: ⛑ a person you have watched leads with what you SAW — prose in the GM's words, not a craft list",
+    s213.witnessed.length === 2 && /ironsense/.test(s213.witnessed[0]) && s213.learned.length === 1);
+  check("§213: …then what they ARE, every field of it authored or established rather than derived",
+    s213.is?.role === "Blacksmith" && s213.standing?.relationship === 8);
+  check("§213: ⛑ …and then the numbers underneath, because Erik ruled the numbers show",
+    s213.numbers?.level > 1 && !!s213.numbers?.tier && !!s213.numbers?.attributes,
+    `level ${s213.numbers?.level} · ${s213.numbers?.tier}`);
+
+  /* ---- 2 · ⛔ THE NUMBERS ARE EARNED BY WATCHING — WHICH IS WHAT BOUNDS THE WILL ---- */
+  // ⛑ SNG-571 §4: "YOU CANNOT NAME SOMEONE WHOSE REACH YOU HAVE NEVER SEEN." So `skillsObserved` stops being colour
+  // and becomes the reason you may name someone at a given depth.
+  // ⚠️ AND THE GATE IS WATCHING, NOT FONDNESS — asserted as a PAIR, because one fixture alone would leave the reading
+  // "closeness reveals them" standing. You can love someone whose capability you have never seen, and you can watch a
+  // stranger work. The sheet follows the second.
+  const fondUnwatched = { id: "fendt", name: "Fendt", role: "Miller", relationship: 9,
+    knownFacts: ["He keeps the mill running"], history: ["[d3] you shared bread"] };
+  const coldButWatched = { id: "surl", name: "Surl", role: "Miller", relationship: 0,
+    skillsObserved: ["Setting a millstone true by ear alone"] };
+  const fond = of213(fondUnwatched), cold = of213(coldButWatched);
+  check("§213: ⛔ a person you are CLOSE to but have never watched work shows no numbers",
+    fond.met === true && fond.numbers === null && fond.reveal.numbers === "unwitnessed");
+  check("§213: ⛑ …and a person you feel NOTHING for but have watched work does — watching is the gate, not fondness",
+    cold.numbers?.level > 1 && cold.reveal.numbers === "seen",
+    `fond(rel ${fond.standing.relationship}) none · watched(rel ${cold.standing.relationship}) level ${cold.numbers?.level}`);
+  // ⛔ AND THE SHEET SAYS WHY, rather than showing a blank that reads as a broken record. "Revealed-when-known is not
+  // the same as hidden, and conflating those two was my error" — Aevi, SNG-571.
+  check("§213: …and it says WHY a number is absent, in terms a player can act on",
+    /never watched them work/.test(fond.reveal.why));
+
+  /* ---- 3 · ⛑ A STRANGER IS A STRANGER, and the sheet does not render an empty form ---- */
+  // ⚠️ MET IS NOT KNOWN. A name in the registry with no history, no facts, no witnessed craft and no relationship is
+  // someone you walked past — and an empty form under their name reads as a broken record, not as an unknown person.
+  const stranger213 = of213({ id: "guardian", name: "Archive Guardian" });
+  check("§213: ⛑ a name you walked past shows nothing, and is marked NOT-MET rather than rendered as empty",
+    stranger213.met === false && stranger213.is === null && stranger213.standing === null
+    && stranger213.numbers === null && /not met them properly/.test(stranger213.reveal.why));
+
+  /* ---- 4 · ⚠️ AND NOTHING IS INVENTED — authored, established, or derived-and-marked ---- */
+  // ⛔ SNG-556 made the age the gate. A sheet that guessed one would be inventing the very fact that gate turns on.
+  check("§213: ⛔ an age shows only where one was recorded — the sheet never guesses the fact SNG-556 gates on",
+    of213({ name: "A", history: ["x"], skillsObserved: ["y"] }).is.age === null
+    && of213({ name: "B", age: 19, history: ["x"], skillsObserved: ["y"] }).is.age === 19);
+  // ⚠️ SNG-572: a rung a ROLE STRING suggested must never read as the same kind of fact as one somebody authored.
+  const guessed213 = of213({ name: "C", role: "Warden", skillsObserved: ["seen something"] });
+  check("§213: ⚠️ a rung guessed from a role string is carried as a guess and rendered as one",
+    guessed213.numbers?.tierGuessed === "regional" && /rung guessed from their role/.test(rd("app.js")),
+    `guessed ${guessed213.numbers?.tierGuessed}`);
+
+  /* ---- 5 · ⛑ AND IT REACHES THE PLAYER — the two zeroes, closed ---- */
+  const A213 = rd("app.js");
+  check("§213: ⛑ `skillsObserved` and `knownFacts` finally have a player-facing reader",
+    /playerSheetFor\(rec, \{ cfg: CONTENT\.rules\?\.npcStanding/.test(A213));
+  // ⛔ AND IT PASSES THE STANDING BAG. SNG-572's defect one commit ago was a bare call; a NEW surface repeating it
+  // would have rendered every person in the game at level 1 and looked entirely correct doing it.
+  check("§213: ⛔ …and it passes the standing bag, so nobody is rendered at level 1",
+    /cfg: CONTENT\.rules\?\.npcStanding \|\| \{\}/.test(A213));
+  check("§213: …in the codex entry for a person, which is where a player already goes to read about one",
+    /open\.kind !== "npc" && open\.kind !== "person"/.test(A213));
+  // ⚑ PROVING THE PRODUCER IS NOT PROVING THE READER: `reveal.why` is computed above, and this is the line that puts
+  // it on the screen. Without it the absence is a blank, which is the exact failure the field exists to prevent.
+  check("§213: ⛑ and the reason a number is missing is RENDERED, not merely computed",
+    /esc\(s\.reveal\.why\)/.test(A213));
+  // ⛑ AND THE ABSENCE IS AN INVITATION rather than an error message — the design arguing for itself in the one place
+  // a player meets it.
+  check("§213: …as an invitation to the play that would fill it, not as a missing-data notice",
+    /Travel with them and watch what they do/.test(A213));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

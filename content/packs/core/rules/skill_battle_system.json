@@ -512,24 +512,40 @@
    "relativeTolerance": 1,
    "threatBands": [
     {
-     "at": 80,
-     "label": "deadly"
+     "key": "flee",
+     "atRatio": 2.5,
+     "label": "deadly",
+     "counsel": "Do not fight this. Run, hide, or find another road — there is no version of this that goes well."
     },
     {
-     "at": 60,
-     "label": "dangerous"
+     "key": "dire",
+     "atRatio": 1.75,
+     "label": "dangerous",
+     "counsel": "This will most likely kill you. Leaving is not cowardice here, it is arithmetic."
     },
     {
-     "at": 40,
-     "label": "serious"
+     "key": "hard",
+     "atRatio": 1.25,
+     "label": "serious",
+     "counsel": "Winnable if everything goes right, and it will cost you something either way."
     },
     {
-     "at": 20,
-     "label": "modest"
+     "key": "even",
+     "atRatio": 0.8,
+     "label": "an even match",
+     "counsel": "A true contest. Your choices decide it, and so does what you brought."
     },
     {
-     "at": 0,
-     "label": "slight"
+     "key": "trivial",
+     "atRatio": 0.45,
+     "label": "modest",
+     "counsel": "You should win this. It can still take a piece out of you if you are careless."
+    },
+    {
+     "key": "beneath",
+     "atRatio": 0.0,
+     "label": "beneath notice",
+     "counsel": "Not a fight. If this matters, it matters for some reason other than the danger."
     }
    ],
    "dispositionByTag": {
@@ -541,7 +557,8 @@
     "skirmisher": "out to wound you and withdraw",
     "coward": "looking for a way out already",
     "guardian": "out to stop you passing — no more than that"
-   }
+   },
+   "_threatBandsAuthored_20260914": "⛔ SNG-586, on CCode's handoff. WAS FIVE RUNGS OF ABSOLUTE THREAT — `{at: 80, label: 'deadly'}` — written before Erik's CCODE-52 ruling made the rung RELATIVE: 'your level sets the mean about which the encounters revolve'. ⚠️ `threatBand()` reads `atRatio`; not one rung had one, so `?? 0` matched the FIRST rung against every ratio and `find` returned the HARDEST. **Loki at power 104 was told a threat-30 Churn-Revel was 'deadly' — a foe he outclasses three to one.** ⛑ NOW SIX RUNGS ON THREAT ÷ POWER, hardest first. Keys are CCode's — they already have their chip colours in style.css and they must never be the label, because `appraise-beneath notice` is two class names and neither exists. ⛔ THE COUNSEL IS THE POINT OF THE ROW: it is the sentence that has to stop someone walking into a death, and — since SNG-586 — the one that says 'not a fight' at the bottom, where the old ladder had nothing to say at all."
   },
   "items": {
    "note": "CCODE-43 (Erik): 'Item use itself needs to be weaved in as well... do I use my dagger, or my axe... my metal shield or my energy shield? Inventory becomes functional - throw a chemical at them or drink a potion.' Two ways an item reaches a fight. (1) WIELDED: what you carry quietly modifies the moves it suits — a blade helps a strike, a shield helps a guard — as a NAMED line in the roll, read off the item's own bonusTags (the same field normal play already uses, so nothing needs re-authoring). (2) USED: a consumable is a MOVE you spend a step on — drink it to restore, throw it to harm. Spending an item is the honest answer to being spent, which is why drinking is a real option when your crafts have gone quiet.",

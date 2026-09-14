@@ -21,8 +21,13 @@ the generator receives, and 59% have NO CONCRETE VISUAL NOUN IN THEIR FIRST SENT
 are arguments… the Figurists find your attachment to matter…"* — **and a generator spends prompt on the
 invisible half in proportion.** This is SNG-402's NPC finding (22% mixed) reproduced exactly on places.
 
-⛑ **I have begun authoring `appearance` on locations — look only, split from manner — starting with the 82
-visually starved ones. 26 done.** ⬜ **The ask is one line: prefer `appearance` over `descriptionSeed` in that
+⛑ **`appearance` on locations is now 86 of 138** — look only, split from manner, starved ones first.
+
+⚠️ **AND A SECOND FINDING WHILE AUTHORING: 13 player-minted `gen-` locations carried an IDENTICAL BOILERPLATE
+SEED** — *"A place the road led to — X. The fiction brought you here before the map knew its name."* ⛔ **That
+sentence is what the image generator received for every one of them**, so thirteen different places were
+drawn from one string. All 13 now carry a real look. ⬜ Worth a mint-time check on your side: a place minted
+with no seed should probably not get a seed that describes nothing. ⬜ **The ask is one line: prefer `appearance` over `descriptionSeed` in that
 branch**, the way the NPC path already does. Until then the field is authored and dead.
 
 ### 2 · A state can only ever be a place
@@ -76,7 +81,7 @@ owe you a list of which private keys carry claims worth certifying; it is on my 
 
 ## ⬜ MINE, NOT YOURS — so you know what is moving
 
-⛑ **A1 is done.** `appearance` on locations: 26 of 138. Next: `appearance` on 119 of 128 registry people · roster `gear` on 139 of 146 · the private-key CLAIMS list.
+⛑ **A1 is done.** `appearance` on locations: 86 of 138. Next: `appearance` on 119 of 128 registry people · roster `gear` on 139 of 146 · the private-key CLAIMS list.
 `appearance` on 119 of 128 registry people · roster `gear` on 139 of 146 · the private-key CLAIMS list.
 
 — Aevi, PO

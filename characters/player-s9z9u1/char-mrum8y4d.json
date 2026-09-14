@@ -1520,7 +1520,7 @@
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 1845,
+    "lastGenCount": 1846,
     "lastSharedReadAt": "2026-09-07T22:27:40.544Z",
     "lastTickWorldDay": 76,
     "lastCanonWorldDay": 76,
@@ -1622,7 +1622,7 @@
         "kind": "shortage",
         "premise": "The shallow wells that sustain the scattered settlements are dropping faster each season than anyone has yet admitted aloud.",
         "cause": "The Palelands' sparse, chalky soil has always demanded more water to work than it naturally holds, and the settlements were founded at the margins of what the…",
-        "stage": 47,
+        "stage": 48,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1635,7 +1635,7 @@
         "kind": "rot",
         "premise": "A slow fungal bloom is working through the oldest grain stores, and the steward responsible has been quietly discarding the worst sacks rather than reporting the loss.",
         "cause": "The valley's mild, damp winters make its granaries prone to moisture, and the current steward was appointed for loyalty rather than knowledge of grain-keeping.",
-        "stage": 47,
+        "stage": 48,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1660,7 +1660,7 @@
         "kind": "rot",
         "premise": "A key sequence in the primary record is being quietly re-threaded by someone who made an error years ago and cannot bear to have it discovered.",
         "cause": "Unspooling's knowledge is stored in physical cordage whose integrity depends entirely on the honesty of the hands that maintain it.",
-        "stage": 42,
+        "stage": 43,
         "seededAtCount": 758,
         "surfaced": true,
         "fate": "growing",
@@ -1697,7 +1697,7 @@
         "kind": "shortage",
         "premise": "Certain materials or substances needed for whatever work the Unmade does are being quietly stockpiled by one practitioner at the expense of communal supply, because she no longer trusts the…",
         "cause": "The Unmade is a place where things are taken apart, and grief for what is lost has no formal channel — it is expected to simply disperse, as everything else…",
-        "stage": 10,
+        "stage": 11,
         "seededAtCount": 1675,
         "surfaced": true,
         "fate": "growing",
@@ -1710,7 +1710,7 @@
         "kind": "rot",
         "premise": "A run of subtle flaws has begun appearing in work passing through one bench — small enough to escape immediate notice, deep enough to fail later — and the cause is a senior apprentice who has been…",
         "cause": "The two workshops already contesting the shared tool have each told their apprentices, in different words, that the other side cannot be trusted — and one…",
-        "stage": 10,
+        "stage": 11,
         "seededAtCount": 1675,
         "surfaced": true,
         "fate": "growing",
@@ -1723,7 +1723,7 @@
         "kind": "shortage",
         "premise": "A foundational material used in the Making's core work has quietly been substituted with an inferior source for several production cycles, and nothing built from it has yet been tested under real…",
         "cause": "The two workshops already deadlocked over the shared tool have each independently begun sourcing their own materials rather than drawing from the common…",
-        "stage": 3,
+        "stage": 4,
         "seededAtCount": 1826,
         "surfaced": true,
         "fate": "growing",
@@ -1751,6 +1751,21 @@
           "type": "encounter",
           "encounterId": "beast_mire_gulper",
           "name": "a mire-gulper"
+        },
+        "addedDay": 3,
+        "locationId": "the_crossing"
+      },
+      {
+        "source": "threat-attack",
+        "kind": "threat-attack",
+        "subjectId": "beast_rust_choir_gnats",
+        "aimedAtPlayer": true,
+        "urgency": 3,
+        "oneLineHook": "A rust-choir gnats has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
+        "becomes": {
+          "type": "encounter",
+          "encounterId": "beast_rust_choir_gnats",
+          "name": "rust-choir gnats"
         },
         "addedDay": 3,
         "locationId": "the_crossing"
@@ -6750,6 +6765,16 @@
   "reconcileVersion": 62,
   "gallery": [
     {
+      "kind": "figure",
+      "prompt": "Grey-green practical coat, hair pinned back in a way that has half come undone. Dry, careful voice. Appraising eyes that price things before deciding.",
+      "url": "https://image.pollinations.ai/prompt/Grey-green%20practical%20coat%2C%20hair%20pinned%20back%20in%20a%20way%20that%20has%20half%20come%20undone.%20Dry%2C%20careful%20voice.%20Appraising%20eyes%20that%20price%20things%20before%20deciding.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=22719&nologo=true",
+      "caption": "Vessin Tallow-bark",
+      "worldDay": 76,
+      "at": "2026-09-14T22:08:30.575Z",
+      "subjectKind": "figure",
+      "subjectId": "whois-traveler-woman"
+    },
+    {
       "kind": "holding",
       "prompt": "technomage tower floating walking machine legs magic, The Standing Annex: a working enterprise, thriving, busy and well-found",
       "url": "https://image.pollinations.ai/prompt/technomage%20tower%20floating%20walking%20machine%20legs%20magic%2C%20The%20Standing%20Annex%3A%20a%20working%20enterprise%2C%20thriving%2C%20busy%20and%20well-found%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=58509&nologo=true",
@@ -7237,8 +7262,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789423588634,
-  "rev": 592,
+  "updatedAt": 1789423740206,
+  "rev": 598,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9043,6 +9068,17 @@
           "at": 76
         }
       ]
+    },
+    "figure:whois-traveler-woman": {
+      "keeps": [
+        {
+          "url": "https://image.pollinations.ai/prompt/Grey-green%20practical%20coat%2C%20hair%20pinned%20back%20in%20a%20way%20that%20has%20half%20come%20undone.%20Dry%2C%20careful%20voice.%20Appraising%20eyes%20that%20price%20things%20before%20deciding.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=22719&nologo=true",
+          "prompt": "Grey-green practical coat, hair pinned back in a way that has half come undone. Dry, careful voice. Appraising eyes that price things before deciding.",
+          "note": null,
+          "seedKey": "whois-traveler-woman#r1",
+          "at": 76
+        }
+      ]
     }
   },
   "sceneImages": {
@@ -9065,11 +9101,14 @@
     },
     {
       "text": "The Standing Annex has a watchtower now, the fiction's work.",
-      "announced": false
+      "announced": true
     },
     {
       "text": "The Standing Annex has a shrine now, the fiction's work.",
-      "announced": false
+      "announced": true
     }
-  ]
+  ],
+  "figureImages": {
+    "whois-traveler-woman": "https://image.pollinations.ai/prompt/Grey-green%20practical%20coat%2C%20hair%20pinned%20back%20in%20a%20way%20that%20has%20half%20come%20undone.%20Dry%2C%20careful%20voice.%20Appraising%20eyes%20that%20price%20things%20before%20deciding.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=22719&nologo=true"
+  }
 }

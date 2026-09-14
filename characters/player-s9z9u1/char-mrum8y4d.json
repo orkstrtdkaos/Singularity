@@ -105,7 +105,7 @@
   "maxHealth": 68,
   "health": 68,
   "maxEnergy": 146,
-  "energy": 103,
+  "energy": 95,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -7210,8 +7210,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789354595180,
-  "rev": 574,
+  "updatedAt": 1789354730289,
+  "rev": 576,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8801,12 +8801,25 @@
       "kind": "enterprise",
       "name": "The Standing Annex",
       "locationId": "the_crossing",
-      "steward": null,
+      "steward": "traveler-woman",
       "obligation": null,
-      "condition": "holding",
+      "condition": "thriving",
       "claimedDay": 3,
       "lastMovedWorldCount": 1826,
-      "history": [],
+      "history": [
+        {
+          "at": 1826,
+          "from": "holding",
+          "to": "thriving",
+          "note": "improved with Maintained Veil"
+        },
+        {
+          "at": 1826,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "Vessin Tallow-bark appointed keeper"
+        }
+      ],
       "carriage": {
         "moves": "powered",
         "speed": 0.8
@@ -8818,7 +8831,17 @@
       },
       "arrears": 4,
       "lastFeatureOfferCount": 1826,
-      "image": "https://image.pollinations.ai/prompt/The%20Standing%20Annex%3A%20a%20working%20enterprise%2C%20steady%2C%20kept%20up%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=98735&nologo=true"
+      "image": "https://image.pollinations.ai/prompt/The%20Standing%20Annex%3A%20a%20working%20enterprise%2C%20steady%2C%20kept%20up%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=98735&nologo=true",
+      "improvements": [
+        {
+          "abilityId": "maintained_veil",
+          "name": "Maintained Veil",
+          "day": 76,
+          "energy": 8,
+          "expiresDay": 88,
+          "refreshCost": 8
+        }
+      ]
     }
   ],
   "_lastProjectDay": 3,
@@ -8956,5 +8979,15 @@
     "better_story",
     "wrong_reality"
   ],
-  "precursorAxes": []
+  "precursorAxes": [],
+  "holdingEvents": [
+    {
+      "text": "You put Maintained Veil to The Standing Annex — it comes up to thriving.",
+      "announced": false
+    },
+    {
+      "text": "Vessin Tallow-bark keeps The Standing Annex now.",
+      "announced": false
+    }
+  ]
 }

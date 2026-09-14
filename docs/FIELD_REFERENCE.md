@@ -705,13 +705,13 @@ contribute to authored dice without recreating the double-scaling bug.
 | `upkeep` | 18 | `root`×18 | ✅ READ | `combatants.js`, `holdings.js`, `app.js` |
 | `schoolAffinity` | 18 | `root`×18 | ✅ READ | `app.js` |
 | `obscure` | 16 | `root`×16 | ✅ READ | `encounters.js`, `npcsheet.js`, `skill_battle.js` |
+| `subAttribute` | 16 | `root`×16 | ✅ READ | `affinities.js`, `battle_turn.js`, `encounters.js` |
 | `variance` | 15 | `mechanic`×15 | ✅ READ | `craftmechanics.js`, `app.js` |
 | `ongoingHarm` | 15 | `tree`×15 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
 | `area` | 14 | `mechanic`×14 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `gm.js` |
 | `damageMix` | 13 | `mechanic`×13 | ✅ READ | `damagetypes.js` |
 | `sectFlavour` | 12 | `root`×12 | ✅ READ | `progression.js` |
 | `taughtBy` | 12 | `root`×12 | ✅ READ | `companions.js`, `gm.js`, `progression.js` |
-| `subAttribute` | 12 | `root`×12 | ✅ READ | `affinities.js`, `battle_turn.js`, `encounters.js` |
 | `interceptDamage` | 11 | `tree`×11 | ✅ READ | `battle_turn.js`, `intercept.js` |
 | `powerMix` | 10 | `root`×10 | ⛔ DARK | — |
 | `companionTaught` | 9 | `root`×9 | ⛔ DARK | — |

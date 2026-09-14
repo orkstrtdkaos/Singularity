@@ -144,13 +144,11 @@
     "lastTurn": {
       "narration": "",
       "choices": [],
-      "holdingOps": [
+      "deathOps": [
         {
-          "op": "claim",
-          "kind": "post",
-          "name": "A fire-test post",
-          "locationId": null,
-          "why": "fire test"
+          "op": "incapacitate",
+          "npcId": "stranger-at-the-gate",
+          "why": "fire test — a fall on the stair"
         }
       ],
       "sceneSummary": null
@@ -4192,7 +4190,7 @@
   "actionCount": 16,
   "grantsVersion": 1,
   "reconcileVersion": 62,
-  "updatedAt": 1789408266654,
+  "updatedAt": 1789408266627,
   "rev": 199,
   "activeEncounter": null,
   "customEncounters": {
@@ -4359,7 +4357,7 @@
     {
       "id": "sess-5",
       "startedAt": "2026-09-14T17:51:06.579Z",
-      "lastAt": "2026-09-14T17:51:06.654Z",
+      "lastAt": "2026-09-14T17:51:06.626Z",
       "startDay": 76,
       "endDay": 76,
       "beats": 2
@@ -4761,20 +4759,7 @@
   "itemReclaimVersion": 1,
   "nameRepairVersion": 1,
   "bondLogFrom": 14,
-  "holdings": [
-    {
-      "id": "a-fire-test-post",
-      "kind": "post",
-      "name": "A fire-test post",
-      "locationId": "millbrook",
-      "steward": null,
-      "obligation": null,
-      "condition": "holding",
-      "claimedDay": 76,
-      "lastMovedWorldCount": null,
-      "history": []
-    }
-  ],
+  "holdings": [],
   "likeness": {
     "figure:whois-death-sunwrack_valen": {
       "keeps": [

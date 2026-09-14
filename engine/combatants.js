@@ -41,15 +41,48 @@ const num = (v, d = 0) => (v == null || v === "" || !Number.isFinite(Number(v)) 
 export const DEFAULT_FIGHTING_ROLES = ["warden", "guard", "soldier", "reaver", "hunter", "sentinel",
   "marshal", "champion", "duelist", "blade"];
 
+/** ⛔ SNG-583 (Aevi's queue §3: "INFLUENCE is only intimidate·distract·talk where KNOW has 13, so it is
+ *  under-reachable even when tags exist") — AND THE MEASUREMENT FOUND THE BIGGER HALF OF IT.
+ *
+ *  ⚑ THE AUTHORED VOCABULARY IS 46 TAGS AND THIS MAP REACHED 30. Sixteen tags — 60 occurrences across the
+ *  content pack — translated to NO family whatsoever: `bargain`, `travel`, `reveal`, `read-people`,
+ *  `read-a-fight`, `make`, `hold`, `lead`, `bind`, `misdirect`, `move`. Authored, loaded, and read by
+ *  nobody: the four-doors defect, in the vocabulary itself rather than in a wire.
+ *
+ *  ⛑ TWELVE MAP PLAINLY AND ARE MAPPED HERE. `bargain` and `lead` and `read-people` and `misdirect` are
+ *  INFLUENCE by the plain meaning of the family's name — no judgement call is being smuggled in.
+ *
+ *  ⚠️ AND THREE ARE NOT MINE TO DECIDE: `empower`, `summon`, `teach`. None of the six families is their
+ *  obvious home, and a guess here would make the tag mean whatever the first reader assumed. ⬜ Aevi's, and
+ *  §234 names them rather than letting them stay silently inert.
+ *
+ *  ⛑ `strike` and `break` are deliberately absent: HARM is the DEFAULT for anyone with hands (Erik, twice),
+ *  so a tag for it would add nothing anyone lacks.
+ *
+ *  ⛔ HONEST ABOUT THE SIZE OF THE WIN: 13 tagged records gain a family they did not have. INFLUENCE's
+ *  headcount does not move at all — `talk` appears 38 times and was already carrying it. The value here is
+ *  that twelve authored tags stop being decoration, not that the matrix suddenly reads differently. */
 export const DEFAULT_TAG_FAMILIES = {
   RESTORE: ["mend", "heal", "tend", "comfort", "warm", "grow"],
-  PROTECT: ["guard", "watch", "conceal", "dark", "green"],
+  PROTECT: ["guard", "watch", "conceal", "dark", "green", "hold", "bind"],
   KNOW: ["analyze", "study", "investigate", "scout", "track", "sense-danger", "deathsense",
-    "sense-precursor", "precursor-lore", "precursor", "recall", "learn", "light"],
-  INFLUENCE: ["intimidate", "distract", "talk"],
-  SHAPE: ["craft"],
-  MOVE: ["navigate-wilds", "carry"],
+    "sense-precursor", "precursor-lore", "precursor", "recall", "learn", "light", "reveal", "read-a-fight"],
+  INFLUENCE: ["intimidate", "distract", "talk", "bargain", "read-people", "lead", "misdirect"],
+  SHAPE: ["craft", "make"],
+  MOVE: ["navigate-wilds", "carry", "travel", "move"],
 };
+
+/** ⛔ THE TAGS HARM ALREADY COVERS, named so §234 can tell "inert" from "redundant by design". */
+export const HARM_BY_DEFAULT_TAGS = ["strike", "break"];
+
+/** ⬜ AUTHORED, AND WAITING ON A RULING RATHER THAN ON CODE. None of the six families is the obvious home
+ *  for these, and guessing would make the tag mean whatever the first reader assumed.
+ *
+ *  ⚠️ THE LIST IS HERE, BESIDE THE VOCABULARY IT BELONGS TO, so §234 can tell a tag nobody has ruled on
+ *  from a tag somebody forgot. ⛑ It is a CEILING: it may shrink when Aevi maps one, and a new inert tag
+ *  fails the gate instead of joining the list quietly. A "pending" list that grows is a silence with
+ *  paperwork. */
+export const PENDING_FAMILY_TAGS = ["empower", "summon", "teach"];
 
 /** ⛔ SNG-541c (Aevi, on Erik: "Mara Wells is a town leader, so I'm certain she has the ability to treat with
  *  others") — THE EVIDENCE WAS SITTING RIGHT THERE AND NOTHING TRANSLATED IT.
@@ -126,11 +159,16 @@ export function familiesFromEvidence(record, { familySignals = null } = {}) {
 /** The families an entity can act in. ⚠️ EMPTY IS A REAL ANSWER — an entity with no tags contributes
  *  nothing mechanical yet, which is a prompt to author rather than a reason to exclude it.
  *
- *  ⛔ `evidence: true` ALSO READS THE PROSE (SNG-541c). ⚠️ IT IS OFF BY DEFAULT ON PURPOSE, and that is a
+ *  ⛔ `evidence: true` ALSO READS THE PROSE (SNG-541c). ⚠️ IT IS OFF BY DEFAULT, and that default is a
  *  restraint rather than an oversight: `contingentsFromPeople` uses this to build FIGHTS, and turning it on
- *  there would change the composition of every contingent in the game — 103 of 128 people would stop being
- *  anonymous bodies and become named contributors. That is very likely CORRECT and it is a balance change to
- *  combat, which is Erik's to rule and not mine to ship as a side effect of an errand fix. */
+ *  there changes the composition of every contingent in the game — 103 of 128 people stop being anonymous
+ *  bodies and become named contributors. That was a balance change to combat, so it waited on a ruling.
+ *
+ *  ✅ AND THE RULING CAME (Erik, 2026-09-14): "contingents from people seems to be headed the right
+ *  direction… these aren't just bodies that can hit something — they have skills and abilities they can
+ *  bring to bear." ⛑ BOTH FIGHT CALLERS NOW PASS IT — `caravan.js` for an escort and `holdings.js` for a
+ *  watch — and each quotes him at the call site. The default stays off because a DEFAULT is the right place
+ *  for a restraint: a new caller should have to decide, not inherit. */
 /** ⛔ CCODE-265 — DOES THE WORLD SATISFY A NAMED EXCEPTION? Returns the override that lifts a flat
  *  `canStrike: false`, or null.
  *

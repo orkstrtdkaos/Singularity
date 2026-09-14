@@ -16104,6 +16104,87 @@ console.log("\n── §233 · the world is frozen, and the place list still mov
     `${Object.keys(GW233.locationRows(canon233)).length} placed · ${(terrain233.points || []).length} seeds`);
 }
 
+
+// ⛔ SNG-583 — AEVI'S QUEUE §3: "DEFAULT_TAG_FAMILIES.INFLUENCE is only intimidate·distract·talk where KNOW
+// has 13, so it is under-reachable even when tags exist." ⚑ MEASURING IT FOUND THE BIGGER HALF: the authored
+// vocabulary is 46 tags and the map reached 30. SIXTEEN TAGS — 60 occurrences — translated to no family at
+// all. `bargain`, `lead`, `read-people`, `misdirect`, `travel`, `reveal`, `make`, `hold`, `bind`… authored,
+// loaded, and read by nobody. ⚠️ The four-doors defect in the VOCABULARY rather than in a wire, which is why
+// no amount of staring at the readers would have found it.
+//
+// ⛑ AND THE GATE IS THE COVERAGE RULE, NOT TODAY'S TWELVE. A gate listing the tags I happened to map would
+// pass forever while the next authored tag went inert in silence — which is exactly how these sixteen got
+// here. This subtracts the vocabulary the CONTENT uses from the vocabulary the ENGINE reads.
+console.log("\n── §234 · an authored tag that reaches no family ──");
+{
+  const CB234 = await import("../engine/combatants.js");
+  const { readdirSync: rdd234, readFileSync: rdf234, statSync: st234 } = await import("node:fs");
+  const { join: j234 } = await import("node:path");
+
+  /* ---- 1 · ⚑ THE VOCABULARY THE CONTENT ACTUALLY USES ---- */
+  const tags234 = new Map();
+  const walk234 = (dir) => {
+    for (const name of rdd234(dir)) {
+      const p = j234(dir, name);
+      if (st234(p).isDirectory()) { walk234(p); continue; }
+      if (!name.endsWith(".json")) continue;
+      let doc; try { doc = JSON.parse(rdf234(p, "utf8")); } catch { continue; }
+      const scan = (o) => {
+        if (!o || typeof o !== "object") return;
+        if (Array.isArray(o.assistTags)) for (const t of o.assistTags) {
+          const k = String(t).toLowerCase();
+          tags234.set(k, (tags234.get(k) || 0) + 1);
+        }
+        for (const v of Object.values(o)) scan(v);
+      };
+      scan(doc);
+    }
+  };
+  walk234(j234(root, "content"));
+
+  // ⚠️ A FLOOR UNDER THE SCANNER FIRST. "0 inert of 0 found" is the vacuous shape, and this file has shipped
+  // it once already — a broken walk and a clean vocabulary are indistinguishable from the outside.
+  check("§234: ⛑ the scanner actually reads the content pack — a zero here is a broken walk, not a tidy corpus",
+    tags234.size >= 40, `${tags234.size} distinct assistTags across the pack`);
+
+  /* ---- 2 · ⛔ AND EVERY ONE OF THEM REACHES A READER, OR IS NAMED ---- */
+  const mapped234 = new Set(Object.values(CB234.DEFAULT_TAG_FAMILIES).flat().map(t => String(t).toLowerCase()));
+  const harm234 = new Set((CB234.HARM_BY_DEFAULT_TAGS || []).map(t => String(t).toLowerCase()));
+  const pending234 = new Set((CB234.PENDING_FAMILY_TAGS || []).map(t => String(t).toLowerCase()));
+  const inert234 = [...tags234.keys()].filter(t => !mapped234.has(t) && !harm234.has(t) && !pending234.has(t)).sort();
+  check("§234: ⛔ every authored assistTag reaches a family, is covered by HARM-by-default, or is NAMED as pending",
+    inert234.length === 0,
+    inert234.map(t => `${t}×${tags234.get(t)}`).join(", ") || `${tags234.size} tags, none inert`);
+
+  /* ---- 3 · ⬜ THE PENDING LIST IS A CEILING, NOT A DRAWER ---- */
+  // ⚠️ A "pending" list that may GROW is a silence with paperwork: the next inert tag joins it and the gate
+  // stays green. It may only shrink, and every name on it must still be authored somewhere — a pending tag
+  // nobody writes any more is a decision that already made itself.
+  check("§234: ⬜ the pending list is three and shrinking — empower, summon, teach, and Aevi's to rule",
+    pending234.size <= 3 && [...pending234].every(t => tags234.has(t)),
+    [...pending234].map(t => `${t}×${tags234.get(t) ?? 0}`).join(", "));
+  // ⛑ AND HARM'S TWO ARE REDUNDANT BY DESIGN, not forgotten — Erik corrected me twice toward "anyone with
+  // hands can swing", so a tag granting HARM would grant nothing anyone lacks.
+  check("§234: ⛑ …and the HARM-covered tags really are covered — a plain record contributes HARM with no tag at all",
+    CB234.contributionsOf({ id: "nobody", name: "Nobody" }).includes("HARM")
+    && [...harm234].every(t => !mapped234.has(t)));
+
+  /* ---- 4 · ✅ AND THE RULING THE RESTRAINT WAS WAITING FOR ---- */
+  // ⛔ THE SOURCE SAID "Erik's to rule and not mine to ship". He ruled on 2026-09-14 — "these aren't just
+  // bodies that can hit something" — and both fight callers pass it. ⚠️ The comment describing the restraint
+  // as UNRULED outlived the ruling by a week, which would have had the next reader either re-asking a settled
+  // question or re-implementing a live one.
+  const CAR234 = rd("engine/caravan.js"), HOLD234 = rd("engine/holdings.js"), CMB234 = rd("engine/combatants.js");
+  check("§234: ✅ both fight callers read people for what they DO, on Erik's ruling",
+    /contributionsOf: \(p\) => contributionsOf\(p, \{ evidence: true \}\)/.test(CAR234)
+    && /contributionsOf: \(p\) => contributionsOf\(p, \{ evidence: true \}\)/.test(HOLD234));
+  check("§234: …and the default stays OFF, so a new caller decides instead of inheriting",
+    /evidence = false/.test(CMB234) && !/evidence = true/.test(CMB234));
+  check("§234: ⚠️ …and the note beside it no longer calls the ruling outstanding",
+    /AND THE RULING CAME \(Erik, 2026-09-14\)/.test(CMB234)
+    && !/which is Erik's to rule and not mine to ship/.test(CMB234));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

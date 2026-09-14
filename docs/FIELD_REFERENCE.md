@@ -341,12 +341,12 @@ but cited by its own note, extended by its `rankDeltas`, and named in its player
 <!-- SIZES:BEGIN -->
 | file | size | | file | size |
 |---|---|---|---|---|
-| ~~`ability_rename_map`~~ ✅ **WIRED** | 61.7 KB | | `ability_distribution_target` | 8.1 KB |
-| `power_cosmology` | 27.5 KB | | `the_veil` | 7.7 KB |
-| `mechanic_effects` | 16.1 KB | | `healing_intent` | 4.8 KB |
-| `tempo` | 14.7 KB | | `death_domain` | 4.7 KB |
-| `nexuses` | 13.9 KB | | `companion_template` | 4.0 KB |
-| ⛔ `damage_types` | 13.1 KB | | `energy_costs` | 2.4 KB |
+| ~~`ability_rename_map`~~ ✅ **WIRED** | 60.1 KB | | `ability_distribution_target` | 7.8 KB |
+| `power_cosmology` | 27.4 KB | | `the_veil` | 7.6 KB |
+| `mechanic_effects` | 15.9 KB | | `healing_intent` | 4.8 KB |
+| `tempo` | 14.6 KB | | `death_domain` | 4.6 KB |
+| `nexuses` | 13.8 KB | | `companion_template` | 4.0 KB |
+| ⛔ `damage_types` | 13.0 KB | | `energy_costs` | 2.3 KB |
 <!-- SIZES:END -->
 
 ⛔ **`damage_types.json` sits in the same folder as the `damage_families.json` that IS loaded, on the same
@@ -697,6 +697,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `sense` | 31 | `root`×31 | ✅ READ | `battle_turn.js`, `combatants.js`, `encounters.js` |
 | `stage` | 27 | `tree`×27 | ✅ READ | `arceffects.js`, `art.js`, `authormode.js` |
 | `push` | 26 | `mechanic`×26 | ✅ READ | `affinities.js`, `arceffects.js`, `art.js` |
+| `subAttribute` | 26 | `root`×26 | ✅ READ | `affinities.js`, `battle_turn.js`, `encounters.js` |
 | `backlash` | 23 | `root`×23 | ✅ READ | `gm.js`, `intensity.js`, `app.js` |
 | `conserveSuppresses` | 23 | `root`×23 | ✅ READ | `app.js` |
 | `traditionV2` | 21 | `root`×21 | ⛔ DARK | — |
@@ -705,7 +706,6 @@ contribute to authored dice without recreating the double-scaling bug.
 | `upkeep` | 18 | `root`×18 | ✅ READ | `combatants.js`, `holdings.js`, `app.js` |
 | `schoolAffinity` | 18 | `root`×18 | ✅ READ | `app.js` |
 | `obscure` | 16 | `root`×16 | ✅ READ | `encounters.js`, `npcsheet.js`, `skill_battle.js` |
-| `subAttribute` | 16 | `root`×16 | ✅ READ | `affinities.js`, `battle_turn.js`, `encounters.js` |
 | `variance` | 15 | `mechanic`×15 | ✅ READ | `craftmechanics.js`, `app.js` |
 | `ongoingHarm` | 15 | `tree`×15 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
 | `area` | 14 | `mechanic`×14 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `gm.js` |

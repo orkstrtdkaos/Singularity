@@ -14123,15 +14123,20 @@ console.log("\n── §211 · death is a state, and the player can finally read
 //
 // ⚑ I MEASURED THE WHOLE CHAIN BEFORE BUILDING AND IT IS NOT QUITE THAT, WHICH MATTERS BECAUSE THE REAL ONE IS
 // SMALLER AND LIVE:
-//   · Maren Ossitide ("Marrow") is authored `tier: "epic"` with NO authored level. The epic floor is 40, not 60.
-//   · WITH the cfg she derives to level 40 and `tierNow: "epic"` — exactly her authored rung. CORRECT.
-//   · BARE she derives to level 1.
+//   · Maren Ossitide ("Marrow") is authored a tier with NO authored level, so she derives to that rung's floor.
+//   · WITH the cfg she lands exactly on it. BARE she derives to level 1. That is the whole defect.
 //   · `tier_signals` DOES carry patterns — "Warden" matches /keeper|warden|guardian|steward|custodian/ → regional —
 //     but `tierFromRole` only runs for a record with NO authored tier or level, so it never touches her. Also correct.
 //   · `sheetFor` does not "drop the tier": it returns `tierDerived` (what the engine guessed, marked as a guess) and
 //     `tierNow` (the rung the level has REACHED), deliberately named apart so an authored tier is never overwritten.
 //   · AND A CFG CARRYING BOTH DOES EXIST — `rules.npcStanding` holds `tierFloor` AND `tierSignals`, and is the only
 //     bag that holds both.
+//
+// ⚑ AND ERIK'S "60" WAS NOT A MISREADING — IT WAS THE RULED STATE ARRIVING BEFORE THE ENGINE. I measured HEAD and
+// corrected him to "epic, floor 40"; one commit later Aevi landed his ruling and Marrow is LEGENDARY, floor 60 —
+// exactly the number he gave. ⚠️ SO NOT ONE CHECK BELOW NAMES A RUNG ANY MORE. They pin the MECHANISM — an authored
+// rung wins, its floor is applied, a bare call flattens it — and read the specimen's rung from content, because the
+// rung is Erik's to move and a gate that pins it goes red the day he does.
 //
 // ⛔ SO THE DEFECT IS ONE LINE, AND IT IS A LEGEND FIGHT. `worldtick.js:contestArc` called `sheetFor(pro)` and
 // `sheetFor(con)` with no cfg at all, while the caller two frames up was already passing `content.rules`.
@@ -14158,12 +14163,17 @@ console.log("\n── §212 · the sheet was right and the call was bare ──"
   // Maren is authored `epic`. A role reading "Warden" guesses `regional`, which would DEMOTE her — and it does not
   // run, because `tierFromRole` is a fallback for records that have neither a tier nor a level.
   const maren = C212.npcs?.maren_ossitide;
+  // ⚠️ HER RUNG IS READ, NEVER NAMED. It is a ruling, and rulings move: this gate pinned "epic" and 40 as literals
+  // and went red the same day Erik ruled her legendary — testing the mechanism correctly and failing anyway.
+  const marenRung = maren?.tier || null;
+  const marenFloor = cfg212.tierFloor?.[marenRung];
   const withCfg = NS212.sheetFor(maren, { cfg: cfg212, day: 400 });
   check("§212: ⛔ an authored tier wins — the role guess never runs for a record that has one",
-    maren?.tier === "epic" && withCfg.tierDerived === undefined && withCfg.tierNow === "epic",
-    `authored ${maren?.tier} · derived ${JSON.stringify(withCfg.tierDerived)} · now ${withCfg.tierNow}`);
+    !!marenRung && withCfg.tierDerived === undefined && withCfg.tierNow === marenRung,
+    `authored ${marenRung} · derived ${JSON.stringify(withCfg.tierDerived)} · now ${withCfg.tierNow}`);
   check("§212: ⛑ …and her level is her authored rung's floor, not a guess",
-    withCfg.level === cfg212.tierFloor.epic, `level ${withCfg.level} vs epic floor ${cfg212.tierFloor.epic}`);
+    Number.isFinite(marenFloor) && withCfg.level === marenFloor,
+    `level ${withCfg.level} vs ${marenRung} floor ${marenFloor}`);
   // ⚠️ THE SHEET REPORTS TWO TIER FACTS AND NEITHER IS CALLED `tier`, which is why a reader looking for `.tier` sees
   // undefined and concludes the sheet dropped it. `tierDerived` is a GUESS, marked; `tierNow` is where the level lands.
   check("§212: …and the sheet names its two tier facts apart — a guess is marked, a reached rung is not",
@@ -14171,8 +14181,9 @@ console.log("\n── §212 · the sheet was right and the call was bare ──"
 
   /* ---- 3 · ⛔ THE BARE CALL, AND ITS BLAST RADIUS ---- */
   const bare = NS212.sheetFor(maren, {});
-  check("§212: ⛔ a bare call flattens an epic legend to level 1",
-    bare.level === 1 && withCfg.level === 40, `bare ${bare.level} · with cfg ${withCfg.level}`);
+  check("§212: ⛔ a bare call flattens a legend to level 1 — whatever rung she has been ruled",
+    bare.level === 1 && withCfg.level === marenFloor && marenFloor > 1,
+    `bare ${bare.level} · with cfg ${withCfg.level} (${marenRung})`);
   // ⚠️ COUNTED, NOT ASSERTED FROM ONE CASE. One example is an anecdote; 58 of 98 is the reason this is a gate.
   const authoredTiered = Object.values(C212.npcs || {}).filter(n => n && n.tier);
   const differ = authoredTiered.filter(n => NS212.sheetFor(n, { cfg: cfg212, day: 400 }).level !== NS212.sheetFor(n, {}).level);

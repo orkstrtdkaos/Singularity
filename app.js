@@ -129,6 +129,7 @@ import { capabilityMenu, resolveTier } from "./engine/capabilities.js";
 import { tickAllProjects, openProject, projectProgress, interruptProject, resumeProject, sabotageProject, inheritProject } from "./engine/projects.js";   // CCODE-295: the four verbs the content already depends on
 import { holdOpen, releaseHold, slowSink, canReach, resolveRetrieval } from "./engine/death.js"; // CCODE-270: the player's road back — the seven retrieval crafts had no door
 import { alliesOf } from "./engine/combatants.js"; // CCODE-276: the roster the party block renders
+import { championsFor, resolveChampion, creditChampion, championLine, sendingIsGrim } from "./engine/champion.js"; // SNG-587: somebody else takes the fight
 import { commandSlots, bringForward, canRaiseBand, raiseBand, bandStrength, bandThreat, bloodBand, recoverBand, legionClash } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
 import { groupCapability, loadBearing } from "./engine/group.js";   // CCODE-317/322: what your line covers, and who holds it alone
 import { characterPower, threatBand } from "./engine/threat.js"; // CCODE-52: built power sets the mean the encounter pool revolves around
@@ -144,7 +145,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.6";
+const APP_VERSION = "2.0.7";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4777,6 +4778,34 @@ function listAvailableEncounters() {
   return lines.length ? lines.join("\n") : null;
 }
 
+/** ⛔ SNG-587 (Erik) — WHO ELSE COULD TAKE THIS. "if it's too easy for the main PC, he could have someone else
+ *  deal with it and get the experience. If it's too hard for the PC, having a legendary companion take care of
+ *  it would make sense."
+ *
+ *  ⚠️ THE MODULE IS PURE AND THIS IS WHERE THE COST LIVES. `personOpponentFor` needs the catalog, the tradition
+ *  index, the items and the clock; `characterPower` needs the appraisal dials. `champion.js` is handed two
+ *  functions and knows about neither — the same seam `arceffects` has against the world-tick.
+ *
+ *  ⛑ AND THE SHEET IS THE ONE A FIGHT WOULD ACTUALLY USE. Scoring them off anything else would make the read
+ *  a different question from the fight, which is the defect the appraisal panel exists to avoid. */
+function championsNow(def) {
+  try {
+    const allies = alliesOf(character, { companions: CONTENT.companions || {}, npcs: CONTENT.npcs || {},
+      company: character.company || null, party: character.party || null, catalog: fullCatalog(), fnIndex: FN_INDEX });
+    const cfg = CONTENT.rules?.npcStanding || {};
+    const day = (() => { try { return absoluteWorldDay(); } catch { return null; } })();
+    const sheetOf = (rec) => personOpponentFor(rec, { catalog: fullCatalog(), cfg, day,
+      // ⛔ `rules.leveling`, NOT `rules.progression` — I invented the second name and the wiring ratchet caught
+      // it the same hour. ⚠️ An unauthored dial behaves EXACTLY like one set to its default, so the only symptom
+      // would have been that these sheets quietly skipped Erik's "they should follow the same rules as players"
+      // body. Same key the duel path has always used, one screen over.
+      traditionIndex: CONTENT.traditionIndex, items: CONTENT.items, leveling: CONTENT.rules?.leveling || null });
+    const powerOf = (sh) => characterPower({ attributes: sh.attributes, abilities: (sh.skills || []).map(x => ({ level: x.rank || 1 })) },
+      CONTENT.skillBattle?.engine?.appraisal?.power || {});
+    return championsFor(allies, def, { sheetOf, powerOf, bands: CONTENT.skillBattle?.engine?.appraisal?.threatBands || null });
+  } catch (err) { console.warn("[champion] roster read failed:", err?.message); return []; }
+}
+
 /** SNG-236 UX: the ⚙ Moves gear for an active encounter. Groups the encounter's contextual actions (attempt/
  *  stage/unlock + the ways out) and the player's owned abilities BY FUNCTION FAMILY (ward=PROTECT, sense=KNOW,
  *  strike=HARM …, the 24-verb vocabulary) into one tidy panel. The exits/primary fire through the existing
@@ -7853,6 +7882,18 @@ function applyTurn(turn, resolution, playerWords = null) {
         // by ignoring it. The GM's own choices are still the other way out; this one says so out loud.
         if (!nd.lethal && !arrival.mentioned) inject.push({ label: `Leave it be — keep to what you were doing`,
           attribute: "practical", subAttribute: "wits", axes: {}, difficulty: 0, intentTags: ["careful"], trivial: true });
+        // ⛔ SNG-587 (Erik) — AND YOU ARE NOT THE ONLY ONE WHO COULD TAKE IT. "this could be an opportunity for
+        // someone else in his party to fight it… if it's too easy for the main PC, he could have someone else
+        // deal with it and get the experience. If it's too hard for the PC, having a legendary companion take
+        // care of it would make sense."
+        // ⚠️ THE TWO CASES ARE ONE READING. The band is relative (CCODE-52), so the same foe is `beneath notice`
+        // to Silas and `a real fight` to Veth — and `championsFor` sorts by what it MEANS to them, which puts
+        // the person who would actually be tested first. ⛑ A send that would be a killing is not offered at all.
+        for (const ch of championsNow(nd).filter(c => !sendingIsGrim(c)).slice(0, 2)) {
+          inject.push({ label: `➤ Send ${ch.name}`, championId: ch.id, encounterRef: nd.id,
+            attribute: "social", subAttribute: "presence", axes: {}, difficulty: 0, intentTags: ["careful", "delegate"], trivial: true,
+            championNote: championLine(ch) });
+        }
         turn.choices = [...inject, ...(turn.choices || [])];
         // ⛔ AND THE READ THAT ALREADY EXISTS RUNS HERE TOO. CCODE-44 was built on Erik's own words — "you
         // should be able to tell something about how hard the opponent will be to beat" — and `appraiseOpponent`
@@ -8676,6 +8717,51 @@ async function onChoice(choice) {
         return;
       }
     }
+  }
+  // ⛔ SNG-587 (Erik) — SENDING SOMEBODY ELSE. "have someone else deal with it and get the experience… having
+  // a legendary companion take care of it would make sense."
+  //
+  // ⚠️ DELIBERATELY NOT THE ROUND PANEL. A player who sends a champion is choosing NOT to fight; handing them
+  // a six-round mini-game would be the opposite of what they asked for. It resolves in one call and the GM
+  // narrates what happened — the same shape as the encounter OPENING, which also hands the model a settled
+  // fact and asks for prose.
+  //
+  // ⛑ AND THE OUTCOME IS DECIDED HERE, BEFORE THE MODEL IS TOLD. The prompt states it as done. A model that
+  // could choose the winner would be rolling the dice in prose, which is the one thing rule 18 exists to stop.
+  if (choice.championId && choice.encounterRef && !character.activeEncounter) {
+    const def = CONTENT.encounters?.[choice.encounterRef] || character.customEncounters?.[choice.encounterRef];
+    const ch = def ? championsNow(def).find(c => c.id === choice.championId) : null;
+    // ⚠️ RE-READ, NEVER TRUSTED FROM THE CHOICE. The roster can have changed since the row was rendered —
+    // someone sent on a charge, someone hurt — and a stale champion would fight from a body they no longer have.
+    if (!def || !ch) { renderPlay(character.activeScene?.lastTurn || null, { aside: "They are not here to send." }); return; }
+    const out = resolveChampion(ch, { rng: Math.random, cfg: CONTENT.skillBattle?.engine?.appraisal || {} });
+    const day587 = (() => { try { return absoluteWorldDay(); } catch { return null; } })();
+    const rec = character.npcRegistry?.[ch.id] || null;
+    // ⛑ THE CREDIT GOES THROUGH R37a'S DOOR: `completions` is what `derivedLevel` already reads, authored at a
+    // level apiece. Idempotent by record, so a reload or a replayed turn cannot double-count it.
+    const credited = (out.won && rec) ? creditChampion(rec, def.id) : false;
+    // and what happened goes on their record through the writer that clamps and caps it
+    try {
+      applyNpcUpdates(character, [{ op: "update", npcId: ch.id,
+        note: out.won ? `Took ${def.name} on in your place, and won.` : `Went against ${def.name} in your place, and came off worse.` }], { day: day587 });
+    } catch (err) { console.warn("[champion] note failed:", err?.message); }
+    // ⛔ COUNTED LIKE EVERY OTHER ENGINE DECISION, so "nobody ever sends anyone" can be told apart from
+    // "sending is broken" without going looking — the lesson `carries` and `axesDropped` both taught.
+    character._championSends = [...(character._championSends || []).slice(-4),
+      { id: ch.id, name: ch.name, foe: def.name, won: out.won, band: out.band, chance: out.chance, credited, worldDay: day587 }];
+    saveCharacter(character);
+    busy = true;
+    try {
+      const told = `(${ch.name} took the fight with ${def.name} in ${character.name}'s place — ${character.name} sent them and did not fight it. `
+        + `${def.setup ? def.setup + " " : ""}`
+        + `IT IS ALREADY DECIDED: ${ch.name} ${out.won ? "WON" : "LOST"}. `
+        + `To ${ch.name} this was ${ch.band.label}${out.margin < 0.15 ? ", and it was closer than anyone liked" : ""}. `
+        + `${out.won && out.harmFraction > 0.2 ? `They are hurt. ` : ""}${!out.won ? `They are hurt and did not stop it. ` : ""}`
+        + `Narrate what ${character.name} saw of it and what it cost. Do NOT re-decide the outcome, and do NOT emit a newEncounter for this.)`;
+      const result = await runGM({ resolution: null, playerInput: told });
+      if (result) renderPlay(result.turn, { playerBeat: { label: choice.label }, degraded: result.degraded });
+    } finally { busy = false; }
+    return;
   }
   // starting an encounter (GM-offered choice carrying a real encounterId)
   if (choice.encounterId && (CONTENT.encounters?.[choice.encounterId] || character.customEncounters?.[choice.encounterId]) && !character.activeEncounter) {
@@ -16772,7 +16858,12 @@ function renderPlay(turn, opts = {}) {
         action.abilityLevel = character.abilities.find(a => a.abilityId === c.abilityId).level;
         abilityHtml = `<span class="ability-tag"> ✦ ${esc(fullCatalog()[c.abilityId]?.name || c.abilityId)}</span>`;
       }
-      if (c.trivial && !c.abilityId) {
+      if (c.championNote) {
+        // ⛔ SNG-587 — THE ROW HAS TO SAY WHAT THE FIGHT IS TO *THEM*, or "Send Veth" is the same blind ask
+        // Erik objected to, one name over. The band is relative, so this is the only line that makes the
+        // choice a decision: beneath notice to Silas, a real fight to Veth, and that difference IS the offer.
+        senseHtml = `<span class="sense trivial-tag">${esc(c.championNote)}</span>`;
+      } else if (c.trivial && !c.abilityId) {
         senseHtml = `<span class="sense trivial-tag">no roll — just do it</span>`;
       } else if (c.encounterId) {
         // ⛔ SNG-586 (Erik, in play) — "do you want to fight this thing that you have 30% chance of beating?

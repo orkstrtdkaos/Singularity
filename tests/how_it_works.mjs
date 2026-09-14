@@ -16367,13 +16367,29 @@ console.log("\n── §236 · a fight nobody introduced ──");
   const { loadContentHeadless: lch236 } = await import("./headless_content.mjs");
   const C236 = await lch236();
   const authored236 = C236.skillBattle?.engine?.appraisal?.threatBands || null;
-  check("§236: ⚑ the authored ladder really is the absolute one — or this gate is about nothing",
-    Array.isArray(authored236) && authored236.length > 0 && authored236.every(b => b?.atRatio === undefined),
-    `${(authored236 || []).length} rungs, none carrying atRatio`);
+  // ⛔ AND AEVI FIXED THE LADDER FOUR HOURS AFTER I FILED IT, WHICH BROKE BOTH OF MY CHECKS — for the good
+  // news, twice, in the same session I spent closing twelve of these in other people's gates. The first
+  // asserted "the authored ladder really IS the absolute one" and the second required `ladderIgnored` to be
+  // present. ⚠️ BOTH PINNED THE DEFECT. A gate written from the broken corpus in front of me instead of the
+  // rule behind it: thirteen and fourteen this week, and these two were mine.
+  //
+  // ⛑ THE RULE IS THE SAME UNDER EITHER LADDER: a foe far beneath you reads at the easy end, one far above
+  // reads at the hard end, and neither depends on whose rungs are in force.
   const weak236 = T236.threatBand(104, 30, authored236);
+  const huge236 = T236.threatBand(104, 400, authored236);
   check("§236: ⛔ a foe you outclass three to one does NOT read as the hardest rung",
-    weak236.key === "beneath" && !!weak236.ladderIgnored,
+    ["beneath", "trivial"].includes(weak236.key) && weak236.ratio < 0.5,
     `${weak236.label} at ratio ${weak236.ratio}`);
+  check("§236: ⚑ …and the ladder still has a hard end, so the easy read is a reading and not a floor",
+    ["flee", "dire"].includes(huge236.key), `${huge236.label} at ratio ${huge236.ratio}`);
+  // ⛔ THE SUBSTITUTION IS GATED ON A SYNTHETIC ABSOLUTE LADDER, NEVER ON THE CORPUS. That is what let the
+  // corpus being FIXED break this gate; the repair has to stay proven whether or not anyone is still shipping
+  // the broken shape.
+  const absLadder236 = [{ at: 80, label: "deadly" }, { at: 40, label: "serious" }, { at: 0, label: "slight" }];
+  const subbed236 = T236.threatBand(104, 30, absLadder236);
+  check("§236: ⛔ …and a ladder stating `at` instead of `atRatio` is refused, not obeyed into calling a rat deadly",
+    subbed236.key === "beneath" && !!subbed236.ladderIgnored,
+    `${subbed236.label}${subbed236.ladderIgnored ? " (named)" : ""}`);
   // ⛔ AND THE FAILURE DIRECTION IS NAMED. Falling to the hardest rung tells every player to run from
   // everything; a panel that cries deadly at a rat is a panel you stop reading.
   check("§236: …and a real ratio ladder is still obeyed, so the fallback is a repair and not a takeover",
@@ -16400,6 +16416,114 @@ console.log("\n── §236 · a fight nobody introduced ──");
   check("§236: ⚠️ …and the threat chip takes the band's KEY as its class, never its prose label",
     /appraise-\$\{esc\(_a\.band\?\.key \|\| _a\.threat\)\}/.test(APP236)
     && /\.appraise-beneath\b/.test(rd("style.css")));
+}
+
+
+// ⛔ SNG-587 — ERIK, ON THE FIGHT THAT READ `beneath notice`: "this could be an opportunity for someone else
+// in his party to fight it… if it's too easy for the main PC, he could have someone else deal with it and get
+// the experience. If it's too hard for the PC, having a legendary companion take care of it would make sense."
+//
+// ⚑ AND AEVI'S RULING IS WHY THERE IS A FEATURE HERE AT ALL: the relevance floor "should stop the dice
+// offering a rat, not stop the fiction offering one… That's the version where the player decides and the
+// engine informs." A fight beneath the PC is not an error to suppress — it has somebody else's name on it.
+//
+// ⛑ THE WHOLE THING FALLS OUT OF ONE FACT ALREADY IN THE ENGINE: the band is RELATIVE (CCODE-52), so the same
+// foe is `beneath notice` to Silas and `a real fight` to Veth. Both of Erik's cases are that one reading, and
+// the growth term was already authored — R37a's `completions × levelPerCompletion`, at 1.
+console.log("\n── §237 · somebody else takes the fight ──");
+{
+  const CH237 = await import("../engine/champion.js");
+  const CB237 = await import("../engine/combatants.js");
+  const BT237 = await import("../engine/battle_turn.js");
+  const TH237 = await import("../engine/threat.js");
+  const { loadContentHeadless: lch237 } = await import("./headless_content.mjs");
+  const C237 = await lch237();
+  const A237 = rd("app.js");
+
+  // ⚠️ A REAL PARTY OFF A REAL SAVE. A fixture party would prove the sort and nothing about whether the
+  // sheets these people actually have can be built — which is the half that failed first.
+  const save237 = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const allies237 = CB237.alliesOf(save237, { companions: C237.companions || {}, npcs: C237.npcs || {}, party: save237.party || null });
+  const cfg237 = C237.rules?.npcStanding || {};
+  const sheetOf237 = (rec) => BT237.personOpponentFor(rec, { catalog: C237.abilities || {}, cfg: cfg237, day: 400,
+    traditionIndex: C237.traditionIndex, items: C237.items, leveling: C237.rules?.progression });
+  const powerOf237 = (sh) => TH237.characterPower({ attributes: sh.attributes, abilities: (sh.skills || []).map(x => ({ level: x.rank || 1 })) },
+    C237.skillBattle?.engine?.appraisal?.power || {});
+  const forThreat = (t) => CH237.championsFor(allies237, { opponent: { threat: t } }, { sheetOf: sheetOf237, powerOf: powerOf237 });
+
+  /* ---- 1 · ⛑ THE ROSTER READS, AND IT IS NOT THE PLAYER ---- */
+  const easy237 = forThreat(30);
+  check("§237: ⛑ a real party yields real candidates — a zero here is a broken sheet, not an empty party",
+    easy237.length >= 3 && easy237.every(c => c.power > 0 && c.level != null),
+    easy237.map(c => `${c.name} ${c.power}`).join(", "));
+  check("§237: ⛔ …and the player is never one of them — they are the person being asked",
+    !easy237.some(c => c.id === save237.id || c.kind === "player"));
+
+  /* ---- 2 · ⛔ BOTH OF ERIK'S CASES, ON THE SAME PARTY ---- */
+  // ⚑ TOO EASY FOR THE PC: the one who would actually be TESTED sorts first, because that is the send that
+  // means something and the one they grow from. Not the strongest — the most tested.
+  const hard237 = forThreat(400);
+  check("§237: ⛔ too hard for the PC — the people it is a REAL FIGHT for lead the list",
+    hard237.length > 0 && ["even", "hard"].includes(hard237[0].band.key),
+    hard237.map(c => `${c.name}: ${c.band.label}`).join(" · "));
+  check("§237: ⚑ …and the same foe reads differently for different bodies — which is the whole feature",
+    new Set(hard237.map(c => c.band.key)).size > 1,
+    hard237.map(c => `${c.name}=${c.band.key}`).join(" "));
+  // ⛔ AND A SEND THAT WOULD BE A KILLING IS NAMED AS ONE. The app filters these out of the offer entirely;
+  // the module reports rather than decides, so a different caller can still choose to show them.
+  check("§237: ⛔ …and sending someone into `flee`/`dire` is named grim, and the app does not offer it",
+    hard237.filter(c => CH237.sendingIsGrim(c)).every(c => ["flee", "dire"].includes(c.band.key))
+    && /championsNow\(nd\)\.filter\(c => !sendingIsGrim\(c\)\)/.test(A237));
+
+  /* ---- 3 · ⚠️ THE CURVE, AND THE DEFAULT THAT BEHAVED LIKE A VALUE ---- */
+  // ⛔ MY FIRST `championsFor` READ `Number.isFinite(Number(foeThreat))` TO DECIDE WHETHER AN OVERRIDE WAS
+  // PASSED — and `Number(null)` is 0, which IS finite, so the override branch won every time it was absent and
+  // every caller got a threat of zero and an empty list. ⚠️ Gated, because it cost twenty minutes and reads
+  // right: a default that behaves like a value is the same shape as three other defects fixed this week.
+  check("§237: ⚠️ an unpassed `foeThreat` does not read as a threat of zero",
+    CH237.championsFor(allies237, { opponent: { threat: 30 } }, { sheetOf: sheetOf237, powerOf: powerOf237, foeThreat: null }).length >= 3);
+  // ⛑ THE CURVE IS DERIVED AND SYMMETRIC: even at parity, and never certain in either direction — the
+  // legendary companion can be embarrassed and the outmatched friend can come home.
+  const at = (ratio, roll) => CH237.resolveChampion({ ratio, band: { key: "even" } }, { rng: () => roll });
+  check("§237: ⛑ the curve is even at parity and never certain either way",
+    Math.abs(at(1, 0).chance - 0.5) < 0.001 && at(0.2, 0.99).won === false && at(5, 0.001).won === true,
+    `parity ${at(1, 0).chance} · beneath ${at(0.2, 0).chance} · above ${at(5, 0).chance}`);
+  check("§237: …and it costs more to win something above you than to lose to something beneath you",
+    at(2.5, 0).harmFraction > at(0.2, 0.99).harmFraction);
+
+  /* ---- 4 · ⛑ AND THE EXPERIENCE GOES THROUGH THE DOOR THAT ALREADY EXISTED ---- */
+  // ⚑ R37a: `derivedLevel` reads `completions × levelPerCompletion`, and the dial IS authored — so "someone
+  // else gets the experience" needed no new store and no second ladder.
+  check("§237: ⚑ the growth term this rides on is authored, not a default I hoped for",
+    Number(cfg237.levelPerCompletion) >= 1, `levelPerCompletion = ${cfg237.levelPerCompletion}`);
+  const rec237 = { id: "veth-ondra", completions: 2 };
+  check("§237: ⛑ a won fight credits a completion, exactly as a finished errand does",
+    CH237.creditChampion(rec237, "gm-a-churn-revel") === true && rec237.completions === 3);
+  // ⛔ IDEMPOTENT BY RECORD, NOT BY CALLER — `creditQuestGiver`'s rule, and the reason a reload or a replayed
+  // turn cannot quietly double a companion's level.
+  check("§237: ⛔ …and crediting the same fight twice does nothing",
+    CH237.creditChampion(rec237, "gm-a-churn-revel") === false && rec237.completions === 3);
+  // ⬜ and the level really moves, which is the claim the player cares about
+  const NS237 = await import("../engine/npcsheet.js");
+  const lvlBefore = NS237.derivedLevel({ met: 1, completions: 0 }, { cfg: cfg237, day: 400 });
+  const lvlAfter = NS237.derivedLevel({ met: 1, completions: 3 }, { cfg: cfg237, day: 400 });
+  check("§237: ⬜ …and three completions really move a person's level",
+    lvlAfter > lvlBefore, `${lvlBefore} → ${lvlAfter}`);
+
+  /* ---- 5 · ⛔ THE APP WIRES, EACH ASSERTED AS THE CLAIM ---- */
+  check("§237: ⛔ the row says what the fight is TO THEM — or it is the same blind ask, one name over",
+    /championNote: championLine\(ch\)/.test(A237) && /if \(c\.championNote\) \{/.test(A237));
+  // ⚠️ THE OUTCOME IS DECIDED BEFORE THE MODEL IS TOLD, and told as settled. A model that could pick the
+  // winner would be rolling dice in prose, which is the one thing rule 18 exists to stop.
+  check("§237: ⚠️ …and the GM is handed a settled outcome, never asked to choose one",
+    /IT IS ALREADY DECIDED: \$\{ch\.name\} \$\{out\.won \? "WON" : "LOST"\}/.test(A237)
+    && /Do NOT re-decide the outcome/.test(A237));
+  // ⛔ RE-READ AT THE MOMENT OF SENDING. The roster can change between render and click — someone sent on a
+  // charge, someone hurt — and a stale champion would fight from a body they no longer have.
+  check("§237: ⛔ …and the champion is re-read on the click, never trusted from the rendered row",
+    /const ch = def \? championsNow\(def\)\.find\(c => c\.id === choice\.championId\) : null;/.test(A237));
+  check("§237: …and a send is counted, so nobody-sends-anyone can be told from sending-is-broken",
+    /character\._championSends = \[/.test(A237));
 }
 
 /* ══════════ REPORT ══════════ */

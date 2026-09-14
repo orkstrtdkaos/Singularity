@@ -7237,8 +7237,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789423498246,
-  "rev": 590,
+  "updatedAt": 1789423588634,
+  "rev": 592,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8845,6 +8845,18 @@
           "from": "thriving",
           "to": "thriving",
           "note": "Vessin Tallow-bark appointed keeper"
+        },
+        {
+          "at": 1846,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "built a watchtower (the fiction)"
+        },
+        {
+          "at": 1846,
+          "from": "thriving",
+          "to": "thriving",
+          "note": "built a shrine (the fiction)"
         }
       ],
       "carriage": {
@@ -8870,7 +8882,29 @@
         }
       ],
       "imageSeedKey": "the_standing_annex#r1",
-      "imagePinned": true
+      "imagePinned": true,
+      "features": [
+        {
+          "kind": "tower",
+          "family": "martial",
+          "name": "a watchtower",
+          "by": "the fiction",
+          "craftIds": [],
+          "count": 1,
+          "day": 76,
+          "via": "granted"
+        },
+        {
+          "kind": "shrine",
+          "family": "meaning",
+          "name": "a shrine",
+          "by": "the fiction",
+          "craftIds": [],
+          "count": 1,
+          "day": 76,
+          "via": "granted"
+        }
+      ]
     }
   ],
   "_lastProjectDay": 3,
@@ -8881,20 +8915,6 @@
       "kind": "forge",
       "why": "the record reads: “forge”",
       "from": "its own record"
-    },
-    {
-      "holdingId": "the_standing_annex",
-      "holdingName": "The Standing Annex",
-      "kind": "tower",
-      "why": "the record reads: “floating tower”",
-      "from": "its own record"
-    },
-    {
-      "holdingId": "the_standing_annex",
-      "holdingName": "The Standing Annex",
-      "kind": "shrine",
-      "why": "this place is authored as sacred",
-      "from": "the place's authored tags"
     }
   ],
   "_debtReceipts": [],
@@ -9042,6 +9062,14 @@
     {
       "text": "Vessin Tallow-bark keeps The Standing Annex now.",
       "announced": true
+    },
+    {
+      "text": "The Standing Annex has a watchtower now, the fiction's work.",
+      "announced": false
+    },
+    {
+      "text": "The Standing Annex has a shrine now, the fiction's work.",
+      "announced": false
     }
   ]
 }

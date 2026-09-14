@@ -10576,9 +10576,21 @@ console.log("\n── §131 · another player's wife's forge is not your holding
   // ── the class, not the instance
   const src = rd("engine/reconcile.js");
   const bodies = src.split(/\n  \{\n    version: /).slice(1);
-  const leaky = bodies.filter(b2 => /addHolding\(|raiseBand\(|credit\(c, cur, \d/.test(b2) && !/char-mrhs8286/.test(b2) && !/SNAPSHOTS/.test(b2))
+  // ⚠️ THE RULE IS "NAMES A CHARACTER", NOT "NAMES SILAS". This read `!/char-mrhs8286/` — his id, hard-coded,
+  // because his was the only story a step had ever granted into. ⛔ SNG-581 GAVE LOKI A FLOATING TOWER AND THIS
+  // GATE WENT RED FOR A STEP THAT DOES EXACTLY WHAT IT ASKS: it names `char-mrum8y4d` in its first line. A gate
+  // that pins one instance of a general rule fails the next correct use of it — the third time this week (§212
+  // pinned Marrow's rung, §213's first form pinned a heading). ⛑ The claim is unchanged and now it is the claim
+  // that is asserted: a step handing out a holding, a band or a sum must say WHOSE.
+  const leaky = bodies.filter(b2 => /addHolding\(|raiseBand\(|credit\(c, cur, \d/.test(b2) && !/char-[a-z0-9]{6,}/.test(b2) && !/SNAPSHOTS/.test(b2))
     .map(b2 => (b2.match(/^(\d+), id: "([^"]+)"/) || [])[2]).filter(Boolean);
   check("§131: ⛔ NO STEP GRANTS A HOLDING, A BAND OR A FIXED SUM WITHOUT NAMING WHOSE STORY IT IS", leaky.length === 0, leaky.join(", "));
+  // ⛑ AND THE GATE CAN STILL FAIL, which a widened pattern always has to be shown to do: a step body that grants
+  // without naming anybody is still caught.
+  check("§131: ⛑ …and an unscoped grant would still be caught — the pattern was widened, not switched off",
+    [`61, id: "x"
+    apply: (c) => { addHolding(c, { id: "free_gift" }); }`]
+      .filter(b2 => /addHolding\(/.test(b2) && !/char-[a-z0-9]{6,}/.test(b2)).length === 1);
 }
 
 /* ═════ §132 — PARTY PLAY: THE FOURTH DOOR (SPEC_party_mode_phase2, all of it) ═════ */
@@ -13950,8 +13962,17 @@ console.log("\n── §209 · a hold that can move: built, whole, and never onc
     /AND A HOLD CAN MOVE/.test(G209) && /hull bought at a yard/.test(G209));
   // ⚠️ AND IT CARRIES ITS OWN MEASUREMENT, the same shape as SNG-562's deed block: a directive that says "use this op"
   // is a reminder; one that says "you have never emitted it and the control has never appeared" is an occasion.
-  check("§209: …and states the measurement rather than asserting a rule",
-    /NOT ONE HOLD IN PLAY HAS EVER BEEN GIVEN A CARRIAGE/.test(G209));
+  // ⚠️ AND THE MEASUREMENT IS DATED, BECAUSE A MEASUREMENT GOES STALE AND A RULE DOES NOT. This gate pinned the
+  // words "NOT ONE HOLD IN PLAY HAS EVER BEEN GIVEN A CARRIAGE" — true when written, and falsified by SNG-581
+  // giving Loki a floating tower. ⛔ A DIRECTIVE WHOSE EVIDENCE THE READER CAN SEE IS WRONG LOSES THE FORCE THAT
+  // MADE IT WORK: the GM reads the holdings block and the contract in the same breath. So the claim asserted here
+  // is that the line carries a DATE and names what is still true — not the sentence it happened to say first.
+  check("§209: …and states a DATED measurement rather than asserting a rule",
+    /⚡ MEASURED 2026-\d\d-\d\d: the engine has carried voyages/.test(G209)
+    && /YOU HAVE NEVER ONCE EMITTED THIS OP/.test(G209));
+  // ⛑ AND THE PART THAT IS STILL TRUE IS THE PART THAT IS STILL THE ASK. One tower exists and no GM put it there.
+  check("§209: ⛑ …and it tells the GM which half of the gap is still open — the fiction has never given one",
+    /the FICTION giving one, which is what this op is for/.test(G209));
   // ⛔ THE BEARER IS NOT PROPERTY, or the GM will narrate ownership of a living thing.
   check("§209: ⛔ …and says a willed or living bearer carries by standing, not by being owned",
     /IS NOT PROPERTY/.test(blk) && /narrate the asking, not the owning/.test(blk));
@@ -14627,6 +14648,80 @@ console.log("\n── §216 · an ending that grants a ship ──");
   // dropped without a word, is the exact failure this case exists to end.
   check("§216: ⚑ …and with no teacher wired in, it grants nothing and does not pretend otherwise",
     !teachOn(["small_company"], { noCtx: true }).r.applied?.some(a => a.type === "teach"));
+}
+
+
+// ⛔ SNG-581 (Erik) — "Because Silas is the only PC played with a hold so far. Give a boat or a floating tower to
+// Loki. He's my text character."
+//
+// ⚑ §209 PROVED THE ENGINE AND MEASURED THE GAP: five holdings across every save, all Silas's, all moored, and a
+// carriage machinery nobody had ever seen move. This is the first one in the game's history.
+//
+// ⛑ A TOWER AND NOT A BOAT, ON MEASURED GROUNDS. A `crewed` hull may only ARRIVE where the ground carries a water
+// tag, and 5 of 138 places do — Aevi's own `_needsTagsWhy` says "the world a ship can reach is exactly as large as
+// that list". It also needs bodies on the benches; Loki is level 6 with one companion. ⚠️ A BOAT WOULD HAVE BEEN A
+// GIFT HE COULD NOT USE. `powered` needs no tag at all.
+console.log("\n── §217 · the first hold that moves ──");
+{
+  const RC217 = await import("../engine/reconcile.js");
+  const CR217 = await import("../engine/carriage.js");
+  const { loadContentHeadless: lch217 } = await import("./headless_content.mjs");
+  const C217 = await lch217();
+  const ccfg217 = C217.rules?.economy?.carriage || {};
+
+  /* ---- 1 · ⛑ IT IS A RECONCILE STEP BECAUSE A SAVE FILE LOSES ---- */
+  // ⛔ `resolveSaveConflict` ranks state over a decisive rev lead over the clock, so a tab played after the push
+  // wins and an edit written into the JSON would simply be gone — the exact overwrite that cost a real save twice
+  // (rev 1834 beaten by rev 1790, then 1797). ⚑ A STEP APPLIES ON LOAD, TO WHICHEVER COPY WON.
+  const step = RC217.CHARACTER_STEPS.find(s => s.id === "the-tower-loki-got-moving");
+  check("§217: ⛑ the tower arrives as a reconcile step, which applies to whichever copy of the save wins",
+    !!step && step.version === 61 && step.playerFacing === true,
+    step ? `version ${step.version}` : "no step");
+  check("§217: …and it is the top step, so a save that has seen 60 still runs it",
+    RC217.topReconcileVersion("character") === 61);
+
+  /* ---- 2 · ⛔ DRIVEN THROUGH THE RUNNER, NOT `apply` ON A COPY ---- */
+  // ⚠️ THE VERSION GATE IS THE HALF THAT HAS SILENTLY SKIPPED A STEP BEFORE: step 50 shipped at version 1, sat
+  // below every live save's `reconcileVersion`, and never ran — proven by `apply` and never through the runner.
+  const loki = { id: "char-mrum8y4d", name: "Loki", reconcileVersion: 58, currentLocationId: "grovehome",
+    clock: { day: 2 }, holdings: [], abilities: [], npcRegistry: {} };
+  RC217.reconcile(loki, "character");
+  const tower = (loki.holdings || []).find(h => h.id === "the_standing_annex");
+  check("§217: ⛔ his save comes out of the runner holding a tower, at the place he is standing",
+    !!tower && tower.kind === "enterprise" && tower.locationId === "grovehome",
+    tower ? `${tower.id} at ${tower.locationId}` : "nothing granted");
+  // ⛑ AND IT MOVES — validated by `carriageOf`, the one reader that matters. §209: a carriage naming a kind the
+  // engine does not have is silently no carriage at all, and a tower that reads movable and never moves is worse
+  // than no tower.
+  const car = CR217.carriageOf(tower);
+  check("§217: ⛑ …and she moves, under her own engine, which is what an enginewright's tower would do",
+    car?.moves === "powered" && car.speed === 0.8 && car.needsCrew === 0,
+    `${car?.moves} · ${car?.speed}× · crew ${car?.needsCrew}`);
+
+  /* ---- 3 · ⛔ AND SHE GOES ANYWHERE, WHICH IS THE WHOLE REASON SHE IS NOT A BOAT ---- */
+  // ⚠️ ASSERTED AGAINST THE WATER GATE, not merely "ok === true": the claim is that a `powered` hold is NOT bound
+  // to the five places a hull can reach, so it is tested at a place that carries no water tag at all.
+  const dryPlace = Object.entries(C217.locations || {}).find(([, l]) =>
+    !(l.tags || []).some(t => (ccfg217.needsTags?.crewed || []).includes(String(t).toLowerCase())));
+  const gate217 = CR217.canSail(loki, tower, dryPlace[0], { locations: C217.locations, npcs: {}, cfg: ccfg217, routeDays: 5 });
+  check("§217: ⛔ she puts in at a place with no water anywhere near it — a hull could not",
+    gate217.ok === true, `${dryPlace[0]} · ${gate217.ok ? gate217.days.toFixed(1) + " days" : gate217.why}`);
+  // ⛑ AND SLOWER THAN WALKING, which is the honest trade: you do not take a tower somewhere to arrive sooner.
+  check("§217: ⛑ …and slower than walking, because a tower is a home you carry, not a shortcut",
+    gate217.days > 5, `${gate217.days?.toFixed(1)} days for a 5-day walk`);
+
+  /* ---- 4 · ⚠️ AND IT IS HIS, ONCE ---- */
+  const n = loki.holdings.length;
+  RC217.reconcile(loki, "character");
+  check("§217: ⚠️ a second load does not mint a second tower — a step runs on EVERY load",
+    loki.holdings.length === n, `${n} → ${loki.holdings.length}`);
+  // ⛔ AND NOBODY ELSE GETS ONE. A step that gave every save a tower would be a gift nobody asked for and, for the
+  // eleven other characters, a holding they never earned.
+  const other = { id: "char-someone", name: "Someone Else", reconcileVersion: 58, currentLocationId: "millbrook",
+    clock: { day: 2 }, holdings: [], abilities: [], npcRegistry: {} };
+  RC217.reconcile(other, "character");
+  check("§217: ⛔ …and no other character is handed one",
+    (other.holdings || []).length === 0);
 }
 
 /* ══════════ REPORT ══════════ */

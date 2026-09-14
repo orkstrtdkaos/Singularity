@@ -13,7 +13,8 @@
 // backfill.js remains the XP/bonds/practice credit pass (extend, don't replace) —
 // reconcile is the umbrella for everything schema/feature-shaped that came after.
 
-import { addHolding, addFeature, setGarrison } from "./holdings.js";        // R49: the forge the fiction built; step 44: the features and the gate
+import { addHolding, addFeature, setGarrison } from "./holdings.js";
+import { carriageOf } from "./carriage.js";   // ⛔ step 61: a carriage the one reader that matters declines is no carriage at all        // R49: the forge the fiction built; step 44: the features and the gate
 import { canRaiseBand, raiseBand } from "./melee.js";   // R49: the fellowship the fiction already named
 import { worldPosForGenerated } from "./worldmap.js";
 import { grantMartialKit, retiredBaselineIds } from "./martial.js";
@@ -85,6 +86,55 @@ function renameTargets(spec, entry, character, known) {
 // "has this entity seen this step yet" via entity.reconcileVersion.
 
 export const CHARACTER_STEPS = [
+  {
+    version: 61, id: "the-tower-loki-got-moving", playerFacing: true,
+    // ⛔ ERIK 2026-09-13: "Because Silas is the only PC played with a hold so far. Give a boat or a floating tower
+    // to Loki. He's my text character."
+    //
+    // ⚑ THE CARRIAGE ENGINE HAS BEEN WHOLE SINCE §209 AND NOT ONE HOLD IN PLAY HAD EVER CARRIED ONE — five holdings
+    // across every save, all of them Silas's, all of them moored. So the feature existed and nobody had ever seen
+    // it move. This is the first one.
+    //
+    // ⛑ A TOWER AND NOT A BOAT, AND THE REASON IS MEASURED. A `crewed` hull may only ARRIVE where the ground carries
+    // a water tag, and the world carries five such places out of 138 (Aevi's `_needsTagsWhy` says so itself: "the
+    // world a ship can reach is exactly as large as that list"). It also needs bodies on the benches, and Loki is
+    // level 6 with one companion. ⚠️ A BOAT WOULD HAVE BEEN A GIFT HE COULD NOT USE. `powered` requires no tag at
+    // all, so the tower goes anywhere he does.
+    //
+    // ⛔ AND IT IS HIS OWN FICTION, NOT A PROP. Loki is "a construct from the time before the Transition" whose
+    // livelihood is finding "the problem with ancient tec" — origin `enginewright`, domains veilwright/umbral/
+    // horizon, and a codex full of Pressure-Routing Annexes and Terminus-Seals. A pre-Transition structure he got
+    // running is the one holding that reads as HIS. `powered` is the engine; `speed` 0.8 is slower than walking,
+    // which is the honest trade: you do not take a tower somewhere to arrive sooner, you take it because your
+    // workshop is inside it.
+    //
+    // ⚠️ THE NAME IS A PLACEHOLDER WITH A ONE-CLICK FIX. It borrows two words already on his own save rather than
+    // minting lore that is Aevi's to write, and the holdings panel renames it.
+    //
+    // ⛑ AND IT IS A RECONCILE STEP RATHER THAN AN EDIT TO THE SAVE FILE, because a save file loses. `resolveSaveConflict`
+    // ranks state over a rev lead over the clock, so a tab that is played after the push wins and the tower would be
+    // gone — the exact overwrite that cost a real save twice. A step applies on LOAD, to whichever copy won.
+    apply: (c) => {
+      // ⚠️ HIS CHARACTER, BY ID AND BY NAME. A step that gave every save a tower would be a gift nobody asked for
+      // and, for the eleven other characters, a holding they never earned.
+      if (c.id !== "char-mrum8y4d" && String(c.name || "").toLowerCase() !== "loki") return {};
+      c.holdings = Array.isArray(c.holdings) ? c.holdings : [];
+      // ⛔ IDEMPOTENT. A reconcile step runs on every load; a second tower would be the bug.
+      if (c.holdings.some(h => h && h.id === "the_standing_annex")) return {};
+      const h = addHolding(c, {
+        id: "the_standing_annex", kind: "enterprise", name: "The Standing Annex",
+        locationId: c.currentLocationId || "grovehome", day: c.clock?.day ?? null,
+      });
+      if (!h) return {};
+      h.carriage = { moves: "powered", speed: 0.8 };
+      // ⚠️ VALIDATED THROUGH THE ONE READER THAT MATTERS. §209 found that a carriage naming a kind the engine does
+      // not have is silently no carriage at all — a tower that reads as movable and never moves would be worse
+      // than no tower.
+      if (!carriageOf(h)) { delete h.carriage; return { notes: ["A holding is yours, but its engine did not take."] }; }
+      h.describedAs = h.describedAs || "floating tower";
+      return { notes: [`The Standing Annex is yours — a pre-Transition tower you got running, and it MOVES. Put out from the holdings panel; it goes anywhere you do, slower than walking, with your workshop inside it. Rename it there if it has another name.`] };
+    }
+  },
   {
     version: 50, id: "braid-template-ranks", playerFacing: true,
     // ⛔ 2026-09-12: this shipped at version 1. reconcile() skips every step at or below the save's reconcileVersion — Silas's is 49 —

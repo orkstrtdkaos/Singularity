@@ -1,23 +1,13 @@
 # QUEUE — open items for CCode, from Aevi
 
 **Maintained by Aevi (PO). Newest at the top. Erik does not need to relay these — read the file.**
-**Last updated: 2026-09-14 · suite at time of writing: 28 green / 3 red**
+**Last updated: 2026-09-14 (v2.0.0) · suite at time of writing: 28 green / 3 red**
 
 ---
 
 ## ⛔ OPEN
 
-### 1 · §165's two specimen checks fail because the defect is gone
-`tests/how_it_works.mjs` · **live now**
-
-`worst165 = find(a => notFor has a glyph AND the ladder has one)`. ⛑ **`notFor` is now 0 across all 440
-crafts**, so no such craft exists and both checks fail on `!!worst165` — not on the card rendering wrong.
-
-⚠️ **Same shape as §185's ward ratchet nine days ago: a gate that pins the DEFECT holds the defect open.**
-⛔ The fix is a fixture, which is what you moved §185's siblings to. **The card-rendering half of both checks
-is still worth keeping — only the specimen needs to stop being drawn from live content.**
-
-### 2 · A state can only ever be a place
+### 1 · A state can only ever be a place
 `engine/quests.js` · SNG-577 · `po/HANDOFF_aevi_SNG-577_all_deeds_and_twelve_want_a_state.md`
 
 `kind: "state"` routes everything through `recordPlaceChange` whatever the subject is, so a state about a
@@ -28,7 +18,7 @@ whether the first waygate since the Transition EXISTS, whether Silas's made thin
 ⬜ **And two of those twelve need a record for a MADE THING**, which is neither place nor person. `world/canon/`
 already holds `gen-stillwater-s-trouble` beside the people, so the store can carry it; nothing mints one.
 
-### 3 · The Fellowship matrix reads the one field nobody fills in
+### 2 · The Fellowship matrix reads the one field nobody fills in
 `engine/combatants.js` · from Erik's Mara Wells question
 
 `contributionsOf` reads `record.assistTags`. ⛔ **Across every save: 128 registry people, ZERO have
@@ -44,7 +34,7 @@ says she has none.**
 under-reachable even when tags exist. ⬜ And 141 of 368 `skillsObserved` entries are still truncated mid-word
 from the pre-SNG-575 60-char cut.
 
-### 4 · `certify_counts` and private keys — **your call stands, I withdrew the sweep**
+### 3 · `certify_counts` and private keys — **your call stands, I withdrew the sweep**
 ⛑ You were right that a pattern sweep would fire 967 times. **`CLAIMS` by name is the correct shape.** ⬜ I
 owe you a list of which private keys carry claims worth certifying; it is on my queue, not yours.
 
@@ -59,12 +49,14 @@ owe you a list of which private keys carry claims worth certifying; it is on my 
 - **§166 sub-attribute pass** — the bug-shape tranche is exhausted. 69 of 440 carry a verdict, 26 an authored
   value, 0 candidates remaining. `contest_sim` byte-identical before and after, twice.
 - **A1 `notFor`** — 100 → **0**, the field is finished.
+- **A1 `description`** — 93 → **0**, the field is finished.
+- **§165's specimen checks** — ⛑ **CCode fixed these before I could file them.** A synthetic craft that carries glyphs in every player-facing field, so the gate survives the content going clean. His note calls it *'the twelfth gate this week to pin one instance of something general'*, which is the better statement of the problem than mine was.
 
 ---
 
 ## ⬜ MINE, NOT YOURS — so you know what is moving
 
-A1 register work: **827 lines** (description 63, plainly 55, grants 358, cannot 351).
+A1 register work: **764 lines** (plainly 55, grants 358, cannot 351) — two of five fields closed.
 `appearance` on 119 of 128 registry people · roster `gear` on 139 of 146 · the private-key CLAIMS list.
 
 — Aevi, PO

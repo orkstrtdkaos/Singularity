@@ -834,8 +834,29 @@ export function canLearnAbility(character, abilityId, catalog, rules, opts = {})
       if (!bar.ok) return { ok: false, why: bar.why, gate: "standing" }; // aspirational — deepen standing to open it
     }
   }
-  if (opts.skillCapacity && ab.powerSystem !== "learned" && atCapacity(character, opts.skillCapacity)) {
-    return { ok: false, why: "at skill capacity — deepen an owned skill instead of learning a new one", gate: "capacity" };
+  // ⛔ SNG-589 (Erik, in play) — "this ripe skill won't be learned because i'm at capacity… i thought we fixed
+  // capacity to increase with minted and learned skills?"
+  //
+  // ⚑ THE RULE IS RULED, AND IT IS IN SPEC_SNG-260 §C IN AS MANY WORDS: "Braids, discoveries, and bonus/
+  // story-granted skills are ALWAYS possible ON TOP of the base (they already bypass the cap by design…). So the
+  // base cap defines the CHOSEN, point-bought kit; the extras are earned narrative breadth."
+  //
+  // ⚠️ TWO OF THE THREE EXEMPTIONS WERE BUILT AND THE THIRD WAS NOT. A `learned` power system skips this line;
+  // a minted craft never counts against it (`breadthUsed` excludes `customAbilities`). ⛔ BUT A SKILL EARNED BY
+  // PRACTICE DID NOT SKIP IT — and that is the purest case of the rule: the aspiration panel says "declare what
+  // you're working toward — practice makes it free", the player spent TEN USES getting there, no point is paid,
+  // and the cap on the point-bought kit refused it anyway.
+  //
+  // ⛑ `opts.free` IS EXACTLY THE RIGHT HOOK AND IT ALREADY MEANS THIS. Its two callers are the ripe aspiration
+  // and a teacher's gift from a quest — earned and story-granted, the spec's own two categories. Nothing that
+  // costs a point reaches it.
+  //
+  // ⚠️ AND THE REFUSAL NOW SAYS WHICH CAP IT IS, because "at skill capacity" over a craft the player EARNED
+  // reads as a bug even when it is a rule, which is how this one hid: it is the bought-kit cap, and the sentence
+  // has to say so.
+  if (opts.skillCapacity && !opts.free && ab.powerSystem !== "learned" && atCapacity(character, opts.skillCapacity)) {
+    return { ok: false, gate: "capacity",
+      why: "your chosen kit is full for this level — deepen one you own, or earn this one through practice (a craft you earn sits on top of the cap)" };
   }
   // Affordability last. When domains are set, the ring-distance penalty is the cost multiplier
   // (supersedes the legacy home-class 2x); otherwise fall back to the legacy cross-class cost.

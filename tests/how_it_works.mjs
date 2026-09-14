@@ -16623,6 +16623,75 @@ console.log("\n── §238 · the frame the receipt is printed inside ──");
     /The fight is over — telling/.test(A238));
 }
 
+
+// ⛔ SNG-589 — TWO THINGS ERIK READ OFF ONE SCREEN, and both are about a number meaning what it says.
+//
+//   1 ⛔ "this ripe skill won't be learned because i'm at capacity… i thought we fixed capacity to increase
+//     with minted and learned skills?" ⚑ THE RULE IS RULED — SPEC_SNG-260 §C: "Braids, discoveries, and
+//     bonus/story-granted skills are ALWAYS possible ON TOP of the base… the base cap defines the CHOSEN,
+//     point-bought kit; the extras are earned narrative breadth." TWO of the three exemptions were built
+//     (`learned` skips the gate; minted never counts) and the third — EARNED BY PRACTICE — was not. ⚠️ The
+//     panel says "practice makes it free", he spent ten uses, and the cap on the BOUGHT kit refused it.
+//
+//   2 ⛔ "the success chances said 74 or so mostly, but the ROLL was at 55%… very misleading." ⚑ BOTH NUMBERS
+//     WERE HONEST AND THEY ANSWER DIFFERENT QUESTIONS — the card prices WINNING THE EXCHANGE against their
+//     stack, the popover prices THE ROLL LANDING against your own. Two bare percentages, one move, twenty
+//     points apart, and neither said of what.
+console.log("\n── §239 · what a number is a number OF ──");
+{
+  const PR239 = await import("../engine/progression.js");
+  const SB239 = await import("../engine/skill_battle.js");
+  const { loadContentHeadless: lch239 } = await import("./headless_content.mjs");
+  const C239 = await lch239();
+
+  /* ---- 1 · ⛔ THE CAP IS ON THE BOUGHT KIT, NOT ON WHAT YOU EARNED ---- */
+  // ⚠️ ON ERIK'S REAL SAVE, AT REAL CAPACITY. A synthetic character at a made-up cap would prove the branch and
+  // nothing about the ladder he is actually standing on — he is level 7 with 8 of 8 non-native crafts.
+  const loki239 = JSON.parse(rd("characters/player-s9z9u1/char-mrum8y4d.json"));
+  const ST239 = await import("../engine/skilltree.js");
+  check("§239: ⚠️ the fixture is a character who really is at capacity — or this section proves nothing",
+    ST239.atCapacity(loki239, C239.skillCapacity),
+    `${ST239.breadthUsed(loki239)} of ${ST239.breadthCap(loki239, C239.skillCapacity)} at level ${loki239.level}`);
+  const cat239 = C239.abilities || {};
+  const opts239 = { attributeGates: C239.attributeGates, skillCapacity: C239.skillCapacity, traditionIndex: C239.traditionIndex };
+  // ⛔ THE FIXTURE HAS TO REACH THE GATE UNDER TEST. My first form took the first craft he does not own — and
+  // it was refused for STANDING, several gates earlier, so all three checks failed on a craft capacity never
+  // saw. ⚠️ Searched for one that actually lands on `capacity`: a gate asserted through a fixture that never
+  // reaches it is the vacuous shape wearing a red light.
+  const want239 = Object.keys(cat239).find(k => !(loki239.abilities || []).some(a => a.abilityId === k)
+    && PR239.canLearnAbility(loki239, k, cat239, C239.rules, { ...opts239, free: false }).gate === "capacity");
+  check("§239: ⛔ …and a craft exists that the BOUGHT path refuses for capacity and nothing earlier",
+    !!want239, want239 || "(no craft reaches the capacity gate — the fixture cannot test it)");
+  const paid239 = PR239.canLearnAbility(loki239, want239, cat239, C239.rules, { ...opts239, free: false });
+  const earned239 = PR239.canLearnAbility(loki239, want239, cat239, C239.rules, { ...opts239, free: true });
+  check("§239: ⛔ a craft you EARNED sits on top of the cap — the spec's third exemption, finally built",
+    earned239.ok === true, earned239.ok ? "learnable" : `${earned239.gate}: ${earned239.why}`);
+  check("§239: ⛑ …and the BOUGHT kit is still capped, or the cap has stopped being a cap",
+    paid239.ok === false && paid239.gate === "capacity", `${paid239.gate}: ${String(paid239.why).slice(0, 60)}`);
+  // ⬜ AND THE REFUSAL SAYS WHICH CAP IT IS. "at skill capacity" over a craft the player earned reads as a bug
+  // even when it is a rule — which is exactly how this one hid for as long as it did.
+  check("§239: ⬜ …and the refusal names the bought kit, and names the way around it",
+    /chosen kit is full/.test(String(paid239.why)) && /practice/.test(String(paid239.why)));
+
+  /* ---- 2 · ⛔ A PERCENTAGE SAYS WHAT IT IS A PERCENTAGE OF ---- */
+  // ⛑ AT FULL CONFIDENCE THE LABEL WAS A BARE NUMBER — maximum precision, zero framing, the worst of the three
+  // rungs. At confidence 1 and 2 the BAND WORD framed it, which is why this only bit once a character could
+  // read a foe exactly.
+  const sbEng239 = C239.skillBattle?.engine || {};
+  const ex239 = (fog) => SB239.estimateExchange({ myStack: 120, theirStack: 100, fogTier: fog, sb: sbEng239 });
+  check("§239: ⛔ the exact number says what it is the odds OF",
+    /%.+\w/.test(ex239(3).label) && ex239(3).show === "exact", ex239(3).label);
+  check("§239: …and so does the rough one, which carries a band word as well",
+    /%/.test(ex239(2).label) && /\w\s*\(/.test(ex239(2).label), ex239(2).label);
+  // ⚠️ AND THE BAND-ONLY RUNG STAYS WORDS. A number there would be precision the fog says you do not have.
+  check("§239: ⚠️ …while a band-only read stays wordless of numbers — the fog owes you no precision",
+    !/%/.test(ex239(1).label), ex239(1).label);
+  // ⛔ AND THE OTHER NUMBER NAMES ITS OWN QUESTION, so the two can be told apart without hovering either.
+  const A239 = rd("app.js");
+  check("§239: ⛔ …and the roll popover says it is about the ROLL, and points at the other number",
+    /This roll lands \$\{bd\.total\}%/.test(A239) && /WINNING the exchange against theirs/.test(A239));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

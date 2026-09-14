@@ -1439,7 +1439,14 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
     rankUpAbility(r3, "shatterpoint", rules, { attributeGates: gates3, viaPractice: true }).ok);
   // capacity blocks a fresh learn at cap; rank-up still allowed
   const capped = { origin: "valley", level: 1, skillPoints: 3, abilities: [{ abilityId: "wayfinding", level: 1 }, { abilityId: "greenlore", level: 1 }], subAttributes: {}, customAbilities: {} };
-  check("learn blocked at breadth capacity", learnAbility(capped, "stonewise", cat3, rules, { skillCapacity: cap3 }).why.includes("capacity"));
+  // ⛔ THE GATE, NOT ITS WORDING. This read `.why.includes("capacity")` and went red when SNG-589 reworded the
+  // refusal to name WHICH cap it is — sixteenth gate this week to pin a spelling, and this one was mine, ten
+  // minutes old. The claim is that the BOUGHT path is refused for capacity; `gate` is how the engine says so.
+  check("learn blocked at breadth capacity", learnAbility(capped, "stonewise", cat3, rules, { skillCapacity: cap3 }).gate === "capacity");
+  // ⛑ AND THE RULE'S OTHER HALF, WHICH SPEC_SNG-260 §C HAS ALWAYS SAID AND NOTHING ENFORCED: the cap is on the
+  // CHOSEN, point-bought kit — a craft you EARNED (a ripe aspiration, a teacher's gift) sits on top of it.
+  check("…and a craft EARNED rather than bought sits on top of that cap",
+    learnAbility({ ...capped, abilities: [...capped.abilities] }, "stonewise", cat3, rules, { skillCapacity: cap3, free: true }).ok === true);
   check("rank-up still allowed at capacity", rankUpAbility({ ...capped, level: 21 }, "wayfinding", rules, {}).ok);
   // ungated + under cap learns fine
   const room = { origin: "valley", level: 3, skillPoints: 3, abilities: [{ abilityId: "wayfinding", level: 1 }], subAttributes: {}, customAbilities: {} };

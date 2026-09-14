@@ -693,13 +693,28 @@ export function estimateExchange({ myStack, theirStack, fogTier = 0, counterCraf
   const bands = cfg.bands || [{ at: 80, label: "near certain" }, { at: 62, label: "likely" },
     { at: 45, label: "even odds" }, { at: 28, label: "unlikely" }, { at: 0, label: "a long shot" }];
   const band = (bands.find(b => pct >= b.at) || bands[bands.length - 1]).label;
+  // ⛔ SNG-589 (Erik, in play) — "the success chances said 74 or so mostly, but the ROLL was at 55%… very
+  // misleading."
+  //
+  // ⚑ BOTH NUMBERS WERE HONEST AND THEY ANSWER DIFFERENT QUESTIONS. This one is the odds you WIN THE EXCHANGE
+  // — opposed, against their estimated stack, with matchup and ground in it. The popover's is the chance THE
+  // ROLL LANDS — a d100 against your own additive stack, where momentum and having their measure and being
+  // swayed all appear and their stack does not. ⚠️ Two percentages, one move, twenty points apart.
+  //
+  // ⛔ AND AT FULL CONFIDENCE THIS LABEL WAS A BARE NUMBER — maximum precision, zero framing, which is the worst
+  // of the three rungs. At confidence 1 and 2 the BAND WORD does the framing ("likely", "even odds"), which is
+  // why nobody hit this until a character could read a foe exactly.
+  //
+  // ⛑ THE NUMBER SAYS WHAT IT IS OF, at every rung. The tip has explained it since CCODE-46 and a tip is a
+  // thing you have to already suspect to go looking for. ⬜ Content may reword it (`winSuffix`).
+  const suffix = cfg.winSuffix ?? " to win it";
   // conf 0 = you cannot price them at all; 1 = a band only; 2 = a band + a rough number; 3 = the number.
   return { pct, band, confidence: conf,
     show: conf <= 0 ? "none" : conf === 1 ? "band" : conf === 2 ? "rough" : "exact",
     label: conf <= 0 ? (cfg.unreadableLabel || "you cannot price this yet")
       : conf === 1 ? band
-      : conf === 2 ? `${band} (~${Math.round(pct / 10) * 10}%)`
-      : `${pct}%` };
+      : conf === 2 ? `${band} (~${Math.round(pct / 10) * 10}%${suffix})`
+      : `${pct}%${suffix}` };
 }
 
 /** CCODE-46 (Erik): "the finish It button should be an indicator on skills instead of a button. any harm skill,

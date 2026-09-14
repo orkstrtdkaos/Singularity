@@ -145,7 +145,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.9";
+const APP_VERSION = "2.0.10";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -585,7 +585,11 @@ function showBreakdownPopover(bd) {
       + `${side("crit success", c.successChance, c.successComponents, c.successClampedFrom)}\n\n`
       + `${side("crit failure", c.failChance, c.failComponents, c.failClampedFrom)}${rolled}${partial}${authored}`;
   })();
-  showPopoverText(`Success chance ${bd.total}% — roll a d100 at or under this to succeed.\n\n${lines.join("\n")}${oppLine}\n────────────\n${foot}${critBlock}`);
+  // ⛔ SNG-589 (Erik) — AND THIS ONE HAS TO NAME ITS QUESTION TOO. The move card prices WINNING THE EXCHANGE
+  // against their stack; this prices THE ROLL LANDING against your own, where momentum, having their measure
+  // and being swayed all appear and their stack does not. ⚠️ Erik read 74 there and 55 here and reasonably
+  // called it misleading: two bare percentages about one move, twenty points apart, neither saying of what.
+  showPopoverText(`This roll lands ${bd.total}% of the time — your own d100 at or under it.\n(The card’s % is a different question: your odds of WINNING the exchange against theirs.)\n\n${lines.join("\n")}${oppLine}\n────────────\n${foot}${critBlock}`);
 }
 
 // SNG-104: what a Health/Energy number's tap/hover shows — how rest restores it, read from CONTENT.rules.recovery.

@@ -7,7 +7,25 @@
 
 ## ⛔ OPEN
 
-### 1 · A state can only ever be a place
+### 1 · A location image is drawn from philosophy, and `appearance` has no reader
+`engine/art.js:684` · measured 2026-09-14
+
+```js
+if (kind === "location") return `${subject.name}: ${(subject.descriptionSeed || subject.encounterFlavor || "").slice(0,300)}`;
+```
+
+⛔ **MEASURED ACROSS ALL 138 LOCATIONS: 25% of `descriptionSeed` mixes look with CHARACTER in the 300 chars
+the generator receives, and 59% have NO CONCRETE VISUAL NOUN IN THEIR FIRST SENTENCE AT ALL.**
+
+⚠️ Bedrock is handed *"a deep suspicion of anything that cannot be weighed"*; Cloudform gets *"buildings that
+are arguments… the Figurists find your attachment to matter…"* — **and a generator spends prompt on the
+invisible half in proportion.** This is SNG-402's NPC finding (22% mixed) reproduced exactly on places.
+
+⛑ **I have begun authoring `appearance` on locations — look only, split from manner — starting with the 82
+visually starved ones. 26 done.** ⬜ **The ask is one line: prefer `appearance` over `descriptionSeed` in that
+branch**, the way the NPC path already does. Until then the field is authored and dead.
+
+### 2 · A state can only ever be a place
 `engine/quests.js` · SNG-577 · `po/HANDOFF_aevi_SNG-577_all_deeds_and_twelve_want_a_state.md`
 
 `kind: "state"` routes everything through `recordPlaceChange` whatever the subject is, so a state about a
@@ -18,7 +36,7 @@ whether the first waygate since the Transition EXISTS, whether Silas's made thin
 ⬜ **And two of those twelve need a record for a MADE THING**, which is neither place nor person. `world/canon/`
 already holds `gen-stillwater-s-trouble` beside the people, so the store can carry it; nothing mints one.
 
-### 2 · The Fellowship matrix reads the one field nobody fills in
+### 3 · The Fellowship matrix reads the one field nobody fills in
 `engine/combatants.js` · from Erik's Mara Wells question
 
 `contributionsOf` reads `record.assistTags`. ⛔ **Across every save: 128 registry people, ZERO have
@@ -34,7 +52,7 @@ says she has none.**
 under-reachable even when tags exist. ⬜ And 141 of 368 `skillsObserved` entries are still truncated mid-word
 from the pre-SNG-575 60-char cut.
 
-### 3 · `certify_counts` and private keys — **your call stands, I withdrew the sweep**
+### 4 · `certify_counts` and private keys — **your call stands, I withdrew the sweep**
 ⛑ You were right that a pattern sweep would fire 967 times. **`CLAIMS` by name is the correct shape.** ⬜ I
 owe you a list of which private keys carry claims worth certifying; it is on my queue, not yours.
 
@@ -58,7 +76,7 @@ owe you a list of which private keys carry claims worth certifying; it is on my 
 
 ## ⬜ MINE, NOT YOURS — so you know what is moving
 
-⛑ **A1 is done.** Next: `appearance` on 119 of 128 registry people · roster `gear` on 139 of 146 · the private-key CLAIMS list.
+⛑ **A1 is done.** `appearance` on locations: 26 of 138. Next: `appearance` on 119 of 128 registry people · roster `gear` on 139 of 146 · the private-key CLAIMS list.
 `appearance` on 119 of 128 registry people · roster `gear` on 139 of 146 · the private-key CLAIMS list.
 
 — Aevi, PO

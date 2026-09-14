@@ -14119,6 +14119,87 @@ console.log("\n── §211 · death is a state, and the player can finally read
     /You have refused to be brought back\. That is yours to say and it is honoured/.test(A211));
 }
 
+// ⛔ SNG-572 (Erik) — "Marrow derives to level 14 against an authored legendary floor of 60."
+//
+// ⚑ I MEASURED THE WHOLE CHAIN BEFORE BUILDING AND IT IS NOT QUITE THAT, WHICH MATTERS BECAUSE THE REAL ONE IS
+// SMALLER AND LIVE:
+//   · Maren Ossitide ("Marrow") is authored `tier: "epic"` with NO authored level. The epic floor is 40, not 60.
+//   · WITH the cfg she derives to level 40 and `tierNow: "epic"` — exactly her authored rung. CORRECT.
+//   · BARE she derives to level 1.
+//   · `tier_signals` DOES carry patterns — "Warden" matches /keeper|warden|guardian|steward|custodian/ → regional —
+//     but `tierFromRole` only runs for a record with NO authored tier or level, so it never touches her. Also correct.
+//   · `sheetFor` does not "drop the tier": it returns `tierDerived` (what the engine guessed, marked as a guess) and
+//     `tierNow` (the rung the level has REACHED), deliberately named apart so an authored tier is never overwritten.
+//   · AND A CFG CARRYING BOTH DOES EXIST — `rules.npcStanding` holds `tierFloor` AND `tierSignals`, and is the only
+//     bag that holds both.
+//
+// ⛔ SO THE DEFECT IS ONE LINE, AND IT IS A LEGEND FIGHT. `worldtick.js:contestArc` called `sheetFor(pro)` and
+// `sheetFor(con)` with no cfg at all, while the caller two frames up was already passing `content.rules`.
+// ⚑ MEASURED: 58 OF 98 AUTHORED NPCs GET A DIFFERENT LEVEL FROM A BARE CALL. Two legends contesting an arc met as
+// first-day novices — and the `threat` line two lines above them read their legend weight correctly the whole time.
+console.log("\n── §212 · the sheet was right and the call was bare ──");
+{
+  const NS212 = await import("../engine/npcsheet.js");
+  const { loadContentHeadless: lch212 } = await import("./headless_content.mjs");
+  const C212 = await lch212();
+  const cfg212 = C212.rules?.npcStanding || {};
+
+  /* ---- 1 · ⛑ THE BAG EXISTS AND CARRIES BOTH HALVES ---- */
+  // ⚠️ `tierFromRole` needs BOTH: `tierSignals` for the patterns and `tierFloor` to bound and validate the rung it
+  // returns. Either alone makes it return null, which is how a whole table comes to look like it never fires.
+  check("§212: ⛑ `rules.npcStanding` is the one bag carrying both tierFloor AND tierSignals",
+    !!cfg212.tierFloor && Array.isArray(cfg212.tierSignals?.rules) && cfg212.tierSignals.rules.length > 0,
+    `tierFloor:${!!cfg212.tierFloor} tierSignals:${(cfg212.tierSignals?.rules || []).length} rule(s)`);
+  check("§212: …and the role table DOES fire when it is handed that bag",
+    NS212.tierFromRole({ role: "Warden" }, { cfg: cfg212 })?.tier === "regional"
+    && NS212.tierFromRole({ role: "Warden" }, { cfg: {} }) === null);
+
+  /* ---- 2 · ⛔ AN AUTHORED TIER IS NEVER OVERWRITTEN BY A ROLE GUESS ---- */
+  // Maren is authored `epic`. A role reading "Warden" guesses `regional`, which would DEMOTE her — and it does not
+  // run, because `tierFromRole` is a fallback for records that have neither a tier nor a level.
+  const maren = C212.npcs?.maren_ossitide;
+  const withCfg = NS212.sheetFor(maren, { cfg: cfg212, day: 400 });
+  check("§212: ⛔ an authored tier wins — the role guess never runs for a record that has one",
+    maren?.tier === "epic" && withCfg.tierDerived === undefined && withCfg.tierNow === "epic",
+    `authored ${maren?.tier} · derived ${JSON.stringify(withCfg.tierDerived)} · now ${withCfg.tierNow}`);
+  check("§212: ⛑ …and her level is her authored rung's floor, not a guess",
+    withCfg.level === cfg212.tierFloor.epic, `level ${withCfg.level} vs epic floor ${cfg212.tierFloor.epic}`);
+  // ⚠️ THE SHEET REPORTS TWO TIER FACTS AND NEITHER IS CALLED `tier`, which is why a reader looking for `.tier` sees
+  // undefined and concludes the sheet dropped it. `tierDerived` is a GUESS, marked; `tierNow` is where the level lands.
+  check("§212: …and the sheet names its two tier facts apart — a guess is marked, a reached rung is not",
+    "tierNow" in withCfg && withCfg.tier === undefined);
+
+  /* ---- 3 · ⛔ THE BARE CALL, AND ITS BLAST RADIUS ---- */
+  const bare = NS212.sheetFor(maren, {});
+  check("§212: ⛔ a bare call flattens an epic legend to level 1",
+    bare.level === 1 && withCfg.level === 40, `bare ${bare.level} · with cfg ${withCfg.level}`);
+  // ⚠️ COUNTED, NOT ASSERTED FROM ONE CASE. One example is an anecdote; 58 of 98 is the reason this is a gate.
+  const authoredTiered = Object.values(C212.npcs || {}).filter(n => n && n.tier);
+  const differ = authoredTiered.filter(n => NS212.sheetFor(n, { cfg: cfg212, day: 400 }).level !== NS212.sheetFor(n, {}).level);
+  check("§212: …and most authored people are affected, which is why this is a gate and not a note",
+    authoredTiered.length > 50 && differ.length > 40,
+    `${differ.length} of ${authoredTiered.length} authored-tier NPCs derive differently bare`);
+
+  /* ---- 4 · ⛑ AND NO CALLER IS BARE ANY MORE ---- */
+  // ⛔ A BARE CALL IS INVISIBLE AT THE CALL SITE — `sheetFor(x)` looks complete and reads as correct. Nothing about
+  // the line says a whole ladder just collapsed, which is why this stood in a legend fight and nobody saw it.
+  // ⚠️ Asserted across the engine rather than at the one site I fixed: the next one will be written the same way.
+  const bareCalls = [];
+  for (const f of ["engine/worldtick.js", "engine/npcsheet.js", "app.js", "engine/combatants.js"]) {
+    let src = ""; try { src = rd(f); } catch { continue; }
+    for (const line of src.split(String.fromCharCode(10))) {
+      if (!/\bsheetFor\(/.test(line) || /export function sheetFor/.test(line)) continue;
+      if (/sheetFor\([^)]*\{[^)]*cfg/.test(line)) continue;           // a cfg is passed
+      if (/^\s*(\/\/|\*)/.test(line)) continue;                        // a comment mentioning it
+      bareCalls.push(`${f}: ${line.trim().slice(0, 88)}`);
+    }
+  }
+  check("§212: ⛑ no `sheetFor` call anywhere is made without the standing bag",
+    bareCalls.length === 0, bareCalls.join(" · "));
+  check("§212: …and the legend contest passes the bag its own caller already had in hand",
+    /sheetFor\(pro, \{ cfg: rules\?\.npcStanding \|\| \{\} \}\)/.test(rd("engine/worldtick.js")));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

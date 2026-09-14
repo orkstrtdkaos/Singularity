@@ -1105,7 +1105,14 @@ export function contestArc({ pro, con, sb, rules, steps, rng = Math.random }) {
   let out = null;
   try {
     out = battleRound({
-      playerSheet: sheetFor(pro), oppSheet: sheetFor(con),
+      // ⛔ SNG-572 (Erik) — THESE TWO CALLS WERE BARE, AND IT IS A LEGEND FIGHT. `sheetFor` derives a level from
+      // `cfg.tierFloor` — the authored tier's own floor — and with no cfg every figure falls to LEVEL 1.
+      // ⚡ MEASURED: 58 OF 98 AUTHORED NPCs GET A DIFFERENT LEVEL FROM A BARE CALL. Maren Ossitide is authored `epic`,
+      // whose floor is 40; bare she fought at 1. So two legends contesting an arc met as first-day novices, the
+      // `threat` line two lines above correctly read their legend weight, and the sheets underneath did not.
+      // ⚠️ AND `rules` WAS ALREADY IN SCOPE — the caller passes `content.rules`, so the bag was here the whole time.
+      // ⛑ `rules.npcStanding` is the one bag carrying BOTH `tierFloor` and `tierSignals`; there is no other.
+      playerSheet: sheetFor(pro, { cfg: rules?.npcStanding || {} }), oppSheet: sheetFor(con, { cfg: rules?.npcStanding || {} }),
       playerDecl: declFor(pro), oppDecl: declFor(con),
       state: { momentum: 0, effects: [], opponentHealth: 99 },
       rules, sb, steps, rng,

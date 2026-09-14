@@ -12,6 +12,8 @@
 import { namesMatch, resolveByName, smartClamp } from "./namematch.js";
 import { traditionOf } from "./traditions.js";
 import { createWake } from "./wake.js"; // SNG-204: a significant outcome leaves a wake the world continues from
+import { addHolding } from "./holdings.js";              // ⛔ SNG-579: an ending that says "you own a ship" has to hand one over
+import { carriageOf, CARRIAGE_KINDS } from "./carriage.js"; // …and a hold that moves is validated, never taken on trust
 import { recordDeed } from "./reputation.js";   // SNG-282: a resolved quest is a deed, and deeds travel
 import { renderNamesDeep } from "./names.js";   // SNG-552 §6: an effect that becomes a permanent world fact resolves its tokens first
 
@@ -609,6 +611,100 @@ function applyQuestEffects(character, quest, effects, ctx = {}) {
       }
       case "quest_seed": {
         if (e.text) { pinFact(`A thread opens: ${e.text}`, false); applied.push({ type: "quest_seed", text: e.text }); }
+        break;
+      }
+      // ⛔ SNG-579 (Erik, twice: "we need moving holds/enterprises as well") — AN ENDING THAT SAYS YOU OWN A SHIP
+      // HAS TO HAND ONE OVER.
+      //
+      // ⚑ MEASURED: `the_first_season` — Aevi's "third rung", the top of the Commander ladder — ends with
+      // "⛑ THE LONGSHIP IS AN ENTERPRISE — a holding that moves" and, on the other branch, "You own a ship."
+      // ⚠️ BOTH OUTCOMES CARRY EXACTLY ONE EFFECT AND IT IS A `world_fact`: a sentence. The prose promises a
+      // holding and a carriage; the machinery grants a line of text.
+      //
+      // ⛔ AND NOTHING WAS RED, WHICH IS THE POINT. The seam auditor gates that every effect type USED is
+      // HANDLED — `world_fact` is handled, so the quest passed every gate it has while promising a ship it could
+      // not give. ⚠️ A vocabulary with no word for the thing the story just did is a quieter failure than a typo.
+      //
+      // ⛑ SO THE WORD EXISTS NOW. One type does both jobs, because they are the same sentence: a holding you are
+      // given, and a holding that can move. Naming an EXISTING holding just gives that one a carriage
+      // ("the Fell Pell gets wheels"); naming a new one mints it through `addHolding`, the same door the player's
+      // own claim goes through — never a second constructor beside it.
+      case "holding": {
+        const want = String(e.id || e.holdingId || e.name || "").trim();
+        if (!want) break;
+        character.holdings = character.holdings || [];
+        const key = (s) => String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
+        let h = character.holdings.find(x => x && (key(x.id) === key(want) || namesMatch(x.name, e.name || want)));
+        let minted = false;
+        if (!h) {
+          // ⚠️ THROUGH `addHolding`, not a literal push: it stamps the id, the day, the ledger and the history
+          // that every other holding carries, and a quest-granted enterprise that skipped them would be a holding
+          // the rest of the machinery half-recognises.
+          // ⚠️ AN ID IS REQUIRED OR `addHolding` REFUSES AND RETURNS NULL — silently, which for an authored
+          // ending would mean the prose hands you a longship and the save records nothing at all. So a name-only
+          // grant is slugified here rather than dropped there.
+          const hid = e.id || slugify(String(e.name || want).slice(0, 40)) || null;
+          h = addHolding(character, { id: hid, kind: e.kind || "enterprise", name: e.name || want,
+            locationId: e.at || e.locationId || null, steward: e.steward || null, day: ctx.worldDay ?? null });
+          minted = !!h;
+          // ⛔ AND A REFUSAL IS SAID OUT LOUD. `addHolding` declines a household ("a family is not a holding" —
+          // Aevi, SNG-358) and anything id-less; an ending that hit one of those would otherwise do nothing while
+          // reading as though it had.
+          if (!h) { if (typeof console !== "undefined") console.warn(`[quest effects] holding "${e.name || want}" was refused by addHolding — the ending granted nothing.`); break; }
+        }
+        if (!h) break;
+        if (e.at && !h.locationId) h.locationId = e.at;
+        let gave = null;
+        if (e.carriage && typeof e.carriage === "object") {
+          // ⛔ VALIDATED THROUGH `carriageOf`, WHICH IS THE ONLY READER THAT MATTERS. §209 found that a carriage
+          // naming a kind the engine does not have is silently no carriage at all — I had written "hauled" into the
+          // GM contract an hour before and nothing would have told me. An authored typo here would produce a
+          // holding that reads as movable in the prose and refuses to move for the rest of the save.
+          const proposed = { ...(h.carriage || {}), ...e.carriage };
+          if (carriageOf({ ...h, carriage: proposed })) { h.carriage = proposed; gave = proposed.moves; }
+          else if (typeof console !== "undefined") {
+            console.warn(`[quest effects] holding "${h.name || h.id}": carriage kind "${e.carriage.moves}" is not one of ${CARRIAGE_KINDS.join("/")} — the holding stands, but it does not move.`);
+          }
+        }
+        applied.push({ type: "holding", id: h.id, minted, carriage: gave });
+        if (minted) pinFact(`${h.name || h.id} is yours${gave ? " — and she moves" : ""}.`, false);
+        break;
+      }
+      // ⛔ SNG-579 · THE SECOND MISSING WORD, FOUND BY THE SAME MEASUREMENT. `the_tenth_season :: taught` ends
+      // "⛑ He teaches you. `break_the_line`, `who_falls_first`, `small_company` — THE CLOSEST THING THE GAME HAS
+      // TO COMMAND, and he gives it to you because you brought his people home."
+      //
+      // ⚑ ALL THREE CRAFTS ARE AUTHORED AND LOADED. Only the word was missing: fifteen effect types and not one
+      // of them could teach. ⚠️ So the top of the Commander ladder named three real crafts by id and handed over
+      // a sentence — the same shape as the longship, one file over.
+      //
+      // ⛑ THROUGH `ctx.teachAbility` so this module stays transport-free, the same injection as `createWaygate`:
+      // the catalog a craft is learned from is assembled by the app (authored + the player's own minted ones) and
+      // has never been reachable from here.
+      case "teach": {
+        const want = Array.isArray(e.abilities) ? e.abilities : [e.ability || e.abilityId].filter(Boolean);
+        if (!want.length) break;
+        if (typeof ctx.teachAbility !== "function") {
+          // ⚠️ NEVER SILENTLY. A teaching scene the player has just read, dropped without a word, is the exact
+          // failure this case exists to end.
+          if (typeof console !== "undefined") console.warn(`[quest effects] teach: no ctx.teachAbility — ${want.join(", ")} was NOT taught.`);
+          break;
+        }
+        for (const id of want) {
+          try {
+            const got = ctx.teachAbility(String(id), { free: true, why: e.why || quest.title || quest.id });
+            // ⛔ AND A REFUSAL IS REPORTED AS A REFUSAL. `learnAbility` declines on a gate the player has not met,
+            // and a teacher whose gift does not arrive is a promise broken on screen; the GM can then play the
+            // lesson that does not land, which is a scene, where silence is a bug.
+            if (got && got.ok !== false) applied.push({ type: "teach", ability: String(id) });
+            else {
+              applied.push({ type: "teach", ability: String(id), refused: got?.why || "not learnable yet" });
+              if (typeof console !== "undefined") console.warn(`[quest effects] teach "${id}": ${got?.why || "refused"}`);
+            }
+          } catch (err) {
+            if (typeof console !== "undefined") console.warn(`[quest effects] teach "${id}" failed:`, err?.message);
+          }
+        }
         break;
       }
       case "ally": {

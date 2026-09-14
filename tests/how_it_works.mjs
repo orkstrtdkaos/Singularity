@@ -14488,6 +14488,147 @@ console.log("\n── §215 · the repair tool reaches every record ──");
     /last seen at \$\{where\}/.test(fn215) && /n\.role/.test(fn215));
 }
 
+
+// ⛔ SNG-579 (Erik, twice: "don't forget that we need moving holds/enterprises as well") — AN ENDING THAT SAYS
+// "YOU OWN A SHIP" HAS TO HAND ONE OVER.
+//
+// ⛑ §209 established that the carriage engine is whole and the player's sail control works. Its own measurement
+// was the gap: NOT ONE HOLD IN PLAY HAS EVER BEEN GIVEN A CARRIAGE. ⚑ AND THE REASON IS NOT THAT NOBODY TRIED —
+// Aevi authored three quests for `SPEC_mobile_holdings` whose endings are `hull_and_ally`, `hull_alone`,
+// `a_ship` and `enterprise`, and her own note on the last says "until `carriage` lands, the reward has nowhere
+// to live and the GM should hold this at stage 3."
+//
+// ⛔ CARRIAGE LANDED, AND THE REWARD STILL HAD NOWHERE TO LIVE: `applyQuestEffects` had fifteen effect types and
+// NOT ONE OF THEM GRANTED A HOLDING. ⚠️ MEASURED ACROSS THE WHOLE CORPUS, and this is the part that needs no
+// reading of prose: of 59 authored outcomes, 51 change something real, 8 change nothing but a sentence — AND ALL
+// EIGHT ARE THE THREE MOBILE-HOLDINGS QUESTS. The distribution IS the finding.
+//
+// ⚠️ AND NOTHING WAS RED. The seam auditor gates that every effect type USED is HANDLED — `world_fact` is
+// handled — so a quest promising a longship passed every gate it has. A vocabulary with no word for the thing
+// the story just did is a quieter failure than a typo.
+console.log("\n── §216 · an ending that grants a ship ──");
+{
+  const Q216 = await import("../engine/quests.js");
+  const CR216 = await import("../engine/carriage.js");
+  const { loadContentHeadless: lch216 } = await import("./headless_content.mjs");
+  const C216 = await lch216();
+  const ccfg216 = C216.rules?.economy?.carriage || {};
+
+  // ⛑ DRIVEN THROUGH THE EXPORTED DOOR, never the internal one: `applyQuestEffects` is not exported, and a test
+  // that reached past `resolveStructuredQuest` would prove the case body and not the path play takes.
+  const mk216 = (effects) => {
+    const c = { name: "T", holdings: [], npcRegistry: {}, inventory: [], worldState: {}, peopleDisposition: {},
+      quests: [{ id: "the-first-season", title: "The First Season", status: "active", structured: true,
+        outcomes: [{ id: "enterprise", name: "The Longship", effects }] }] };
+    const r = Q216.resolveStructuredQuest(c, "the-first-season", "enterprise", { worldDay: 40 });
+    return { c, r };
+  };
+
+  /* ---- 1 · ⛔ THE GRANT AEVI'S ENDING DESCRIBES ---- */
+  const g216 = mk216([{ type: "holding", name: "The Longship", kind: "enterprise", at: "keelmouth",
+    carriage: { moves: "crewed", needsCrew: 4, speed: 1.4 } }]);
+  const hull = g216.c.holdings[0];
+  check("§216: ⛔ an outcome can hand over a holding, which fifteen effect types could not do before",
+    !!hull && hull.kind === "enterprise" && hull.locationId === "keelmouth"
+    && g216.r.applied?.some(a => a.type === "holding" && a.minted),
+    hull ? `${hull.id} "${hull.name}" at ${hull.locationId}` : "nothing granted");
+  // ⚠️ AND `carriageOf` IS THE JUDGE, because it is the only reader that matters — a carriage it declines is no
+  // carriage at all, whatever the JSON says.
+  check("§216: ⛑ …and she moves, as the prose has been promising since the quest was authored",
+    CR216.carriageOf(hull)?.moves === "crewed" && CR216.carriageOf(hull)?.needsCrew === 4);
+
+  /* ---- 2 · ⛑ AND SHE ACTUALLY SAILS, WHICH IS THE WHOLE CLAIM ---- */
+  // ⛔ END TO END, through `canSail`: granting a carriage that the sailing gate then refuses would be the same
+  // empty promise one layer further down.
+  const dry = CR216.canSail(g216.c, hull, "echo_river_crossing", { locations: C216.locations, npcs: {}, cfg: ccfg216, routeDays: 6 });
+  hull.garrison = ["a", "b", "c", "d"];
+  const wet = CR216.canSail(g216.c, hull, "echo_river_crossing", { locations: C216.locations, npcs: {}, cfg: ccfg216, routeDays: 6 });
+  check("§216: ⛔ …and below her crew she does not sail — the benches are the quest's own first stage",
+    dry.ok === false && /needs 4 aboard/.test(dry.why), dry.why);
+  check("§216: ⛑ …and with the benches filled she puts out, and the days come off her speed",
+    wet.ok === true && wet.days > 0 && wet.days < 6,
+    `${wet.days?.toFixed(2)} days at speed ${CR216.carriageOf(hull).speed}`);
+
+  /* ---- 3 · ⛑ ONE DOOR, NOT A SECOND CONSTRUCTOR BESIDE IT ---- */
+  // ⚠️ A quest-granted enterprise that skipped `addHolding` would miss the id, the day, the ledger and the
+  // history every other holding carries — a holding the rest of the machinery only half-recognises.
+  check("§216: ⛑ a granted holding goes through `addHolding`, the same door the player's own claim uses",
+    /addHolding\(character, \{ id: hid, kind: e\.kind \|\| "enterprise"/.test(rd("engine/quests.js")));
+  // ⛔ AND NAMING AN EXISTING HOLDING GIVES THAT ONE A CARRIAGE rather than minting a twin — "the Fell Pell gets
+  // wheels" is the same sentence as "you are given a ship", one field apart.
+  const ex216 = mk216([{ type: "holding", id: "fell_pell", name: "The Fell Pell", kind: "enterprise", at: "millbrook" }]);
+  ex216.c.quests[0].status = "active";
+  ex216.c.quests[0].outcomes[0].effects = [{ type: "holding", id: "fell_pell", carriage: { moves: "living", bearerId: "corvane" } }];
+  const r2 = Q216.resolveStructuredQuest(ex216.c, "the-first-season", "enterprise", { worldDay: 41 });
+  check("§216: ⛔ …and naming a holding you already hold gives THAT one a carriage, never a twin",
+    ex216.c.holdings.length === 1 && CR216.carriageOf(ex216.c.holdings[0])?.moves === "living"
+    && r2.applied?.some(a => a.type === "holding" && a.minted === false),
+    `${ex216.c.holdings.length} holding(s) · ${CR216.carriageOf(ex216.c.holdings[0])?.moves}`);
+
+  /* ---- 4 · ⚠️ AND THE TWO SILENT FAILURES ARE BOTH LOUD ---- */
+  // ⛔ §209 FOUND THAT AN INVALID KIND IS DROPPED SILENTLY — I had written "hauled" into the GM contract an hour
+  // before and nothing would have told me. An authored typo here would mint a holding that reads as movable in
+  // the prose and refuses to move for the rest of the save.
+  const bad216 = mk216([{ type: "holding", name: "The Wrong", carriage: { moves: "hauled" } }]);
+  check("§216: ⚠️ a carriage kind the engine does not have leaves NO phantom — the holding stands, and it is said",
+    bad216.c.holdings.length === 1 && !bad216.c.holdings[0].carriage
+    && bad216.r.applied?.some(a => a.type === "holding" && a.carriage === null));
+  // ⛔ AND `addHolding` REFUSES SOME THINGS ON PURPOSE — "a family is not a holding" (Aevi, SNG-358). An ending
+  // that hit one of those would otherwise grant nothing while reading as though it had.
+  const ref216 = mk216([{ type: "holding", name: "The Weir Household", kind: "household" }]);
+  check("§216: ⛔ …and a refusal grants nothing and says so, rather than reading as though it worked",
+    ref216.c.holdings.length === 0 && !ref216.r.applied?.some(a => a.type === "holding"));
+
+  /* ---- 5 · ⛑ AND THE WORD IS IN THE VOCABULARY, not merely in a switch ---- */
+  // ⚠️ `applyQuestEffects` warns and pushes `{type:"unknown"}` for a type it does not handle — that is the seam
+  // the auditor watches. This asserts the new type does NOT take that road.
+  check("§216: ⛑ `holding` is a word the effect vocabulary knows — it never falls through to unknown",
+    !g216.r.applied?.some(a => a.type === "unknown"));
+
+  /* ---- 6 · ⛔ THE SECOND MISSING WORD, FOUND BY THE SAME MEASUREMENT ---- */
+  // `the_tenth_season :: taught` ends "⛑ He teaches you. `break_the_line`, `who_falls_first`, `small_company` —
+  // THE CLOSEST THING THE GAME HAS TO COMMAND." ⚑ ALL THREE ARE AUTHORED AND LOADED; only the word was missing.
+  // ⚠️ So the top of the Commander ladder named three real crafts BY ID and handed over a sentence.
+  const PR216 = await import("../engine/progression.js");
+  const teachOn = (abilities, opts = {}) => {
+    const c = { name: "T", level: 33, abilities: [], holdings: [], npcRegistry: {}, inventory: [], worldState: {},
+      peopleDisposition: {}, domains: { primary: "marcher" }, ...(opts.character || {}),
+      quests: [{ id: "the-tenth-season", title: "The Tenth Season", status: "active", structured: true,
+        outcomes: [{ id: "taught", name: "Taught", effects: [{ type: "teach", abilities }] }] }] };
+    const ctx = { worldDay: 400, content: C216,
+      teachAbility: (id) => PR216.learnAbility(c, id, C216.abilities, C216.rules,
+        { free: true, attributeGates: C216.attributeGates, skillCapacity: C216.skillCapacity, traditionIndex: C216.traditionIndex }) };
+    return { c, r: opts.noCtx
+      ? Q216.resolveStructuredQuest(c, "the-tenth-season", "taught", { worldDay: 400 })
+      : Q216.resolveStructuredQuest(c, "the-tenth-season", "taught", ctx) };
+  };
+  const taught = teachOn(["small_company"]);
+  const held = (c) => (c.abilities || []).map(a => a.abilityId || a.id || a);
+  check("§216: ⛔ an ending can TEACH, and the craft lands on the sheet the rest of the game reads",
+    held(taught.c).includes("small_company") && taught.r.applied?.some(a => a.type === "teach" && !a.refused),
+    held(taught.c).join(", ") || "nothing learned");
+  // ⛑ THROUGH THE SAME `learnAbility` THE LEVEL-UP MODAL USES, with the same catalog — so a craft a quest grants
+  // can never be one the rest of the game does not recognise.
+  check("§216: ⛑ …through `ctx.teachAbility`, the same injection pattern as `createWaygate`",
+    /teachAbility: \(id, opts = \{\}\) => learnAbility\(character, id, fullCatalog\(\)/.test(rd("app.js")));
+
+  /* ---- 7 · ⚠️ AND A GIFT THAT DOES NOT ARRIVE IS SAID OUT LOUD ---- */
+  // ⛔ MEASURED ON THE LIVE SAVE, AND IT IS A CONTENT FINDING, NOT A BUG: all three crafts are `marcher`, and
+  // Silas is ashwarden/cogitant/figurist. `small_company` is tier 3 and reaches him; the two tier-4 crafts are
+  // refused "outside your domains". ⚠️ So the ending as authored can deliver ONE of the three it names — which
+  // is Aevi's and Erik's call, not mine, and it is reported rather than silently half-applied.
+  const partly = teachOn(["break_the_line"], { character: { domains: { primary: "ashwarden" } } });
+  check("§216: ⚠️ a craft the learner cannot hold is REFUSED WITH ITS REASON, never dropped in silence",
+    partly.r.applied?.some(a => a.type === "teach" && a.refused) && !held(partly.c).includes("break_the_line"),
+    partly.r.applied?.find(a => a.type === "teach")?.refused || "no reason carried");
+  check("§216: ⛔ …and a craft nobody authored is refused as unknown rather than minted from a typo",
+    teachOn(["command_field"]).r.applied?.some(a => a.type === "teach" && /unknown/.test(a.refused || "")));
+  // ⚑ AND WITHOUT THE INJECTION IT TEACHES NOTHING AND SAYS SO. A teaching scene the player has just read,
+  // dropped without a word, is the exact failure this case exists to end.
+  check("§216: ⚑ …and with no teacher wired in, it grants nothing and does not pretend otherwise",
+    !teachOn(["small_company"], { noCtx: true }).r.applied?.some(a => a.type === "teach"));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

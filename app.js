@@ -143,7 +143,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "1.9.518";
+const APP_VERSION = "1.9.519";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12994,6 +12994,11 @@ function resolveQuestOutcome(questId, outcomeId, { onDone } = {}) {
     recordCodex: entry => applyCodexUpdates(character, [entry], { day }),
     recordStanding: ops => applyStandingOps(character, ops, { rules: CONTENT.rules, knownPeople: (() => { const k = new Set(Object.keys(CONTENT.traditionIndex?.byId || {})); return k.size ? k : null; })(), day, liaisonMult: liaisonFactions(character) }),
     createWaygate: spec => mintWaygate(spec), // SNG-235: an ending can MAKE a real, travelable waygate (Erik's Second Thread)
+    // ⛔ SNG-579: an ending can TEACH — through the same `learnAbility` the Level-Up modal uses, with the same
+    // catalog, so a craft a quest grants can never be one the rest of the game does not recognise. `free` because
+    // a teacher's gift is not bought with the player's points.
+    teachAbility: (id, opts = {}) => learnAbility(character, id, fullCatalog(), CONTENT.rules,
+      { free: opts.free !== false, attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, traditionIndex: CONTENT.traditionIndex }),
     recordPlaceChange: (locId, change) => applyPlaceUpdates(character, locId, [{ note: change }], { day }),
   });
   if (r.ok) {

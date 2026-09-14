@@ -1,69 +1,70 @@
 {
-  "schemaVersion": 1,
-  "id": "the_gearlands_verge",
-  "name": "The Gearlands Verge",
-  "regionId": "the_gearlands",
-  "communityId": "enginewright.verge",
-  "axisVector": [
-    0,
-    0,
-    0,
-    0,
-    -0.2,
-    -0.4,
-    0.2,
-    0,
-    0,
-    0,
-    0,
-    0
-  ],
-  "spectrum": {
-    "mechanical_spiritual": -0.4,
-    "chaos_order": 0.2,
-    "concrete_abstract": -0.2
-  },
-  "tags": [
-    "enginewright",
-    "mechanical",
-    "border",
-    "road",
-    "craft",
-    "liminal"
-  ],
-  "connections": [
-    "the_service_ways",
-    "the_blocklands",
-    "pressureholt"
-  ],
-  "descriptionSeed": "The border-works: where the Gearlands' mechanism meets ground that is not yet mechanism. Everything here is under construction, or under repair, or under a tarpaulin with a very precise label. The Wrights are extending, patiently, and they are not asking. The Verge gate is Precursor work the enginewrights merely maintain, and they are candid that they do not fully understand it — it is inspected weekly and has never once failed.",
-  "loreRefs": [
-    "the_twelve_reaches",
-    "traditions"
-  ],
-  "encounterFlavor": "Verge-crews extending the works; a boundary-marker that has moved since last season; someone from the Blocklands come to complain, again, and be listened to, and be ignored, kindly.",
-  "dangerLevel": 2,
-  "questSeeds": [
-    "The Verge has extended over something that was being used",
-    "A Blocklands community has been offered improvement and does not want it and the Wrights genuinely cannot parse the refusal"
-  ],
-  "map": {
-    "x": 500,
-    "y": 145
-  },
-  "poleIntensity": {
-    "mechanical": 0.4,
-    "order": 0.2,
-    "concrete": 0.2
-  },
-  "waygate": true,
-  "waygateTier": 2,
-  "worldPos": {
-    "colatitude": 68,
-    "longitude": 158,
-    "depth": 0
-  },
-  "worldPosNote": "A place people pass through or live in — pulled inward of its Reach's pole. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "settlement",
-  "parentId": "pressureholt"
+ "schemaVersion": 1,
+ "id": "the_gearlands_verge",
+ "name": "The Gearlands Verge",
+ "regionId": "the_gearlands",
+ "communityId": "enginewright.verge",
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  -0.2,
+  -0.4,
+  0.2,
+  0,
+  0,
+  0,
+  0,
+  0
+ ],
+ "spectrum": {
+  "mechanical_spiritual": -0.4,
+  "chaos_order": 0.2,
+  "concrete_abstract": -0.2
+ },
+ "tags": [
+  "enginewright",
+  "mechanical",
+  "border",
+  "road",
+  "craft",
+  "liminal"
+ ],
+ "connections": [
+  "the_service_ways",
+  "the_blocklands",
+  "pressureholt"
+ ],
+ "descriptionSeed": "The border-works: where the Gearlands' mechanism meets ground that is not yet mechanism. Everything here is under construction, or under repair, or under a tarpaulin with a very precise label. The Wrights are extending, patiently, and they are not asking. The Verge gate is Precursor work the enginewrights merely maintain, and they are candid that they do not fully understand it — it is inspected weekly and has never once failed.",
+ "loreRefs": [
+  "the_twelve_reaches",
+  "traditions"
+ ],
+ "encounterFlavor": "Verge-crews extending the works; a boundary-marker that has moved since last season; someone from the Blocklands come to complain, again, and be listened to, and be ignored, kindly.",
+ "dangerLevel": 2,
+ "questSeeds": [
+  "The Verge has extended over something that was being used",
+  "A Blocklands community has been offered improvement and does not want it and the Wrights genuinely cannot parse the refusal"
+ ],
+ "map": {
+  "x": 500,
+  "y": 145
+ },
+ "poleIntensity": {
+  "mechanical": 0.4,
+  "order": 0.2,
+  "concrete": 0.2
+ },
+ "waygate": true,
+ "waygateTier": 2,
+ "worldPos": {
+  "colatitude": 68,
+  "longitude": 158,
+  "depth": 0
+ },
+ "worldPosNote": "A place people pass through or live in — pulled inward of its Reach's pole. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+ "tier": "settlement",
+ "parentId": "pressureholt",
+ "appearance": "A border-works of half-assembled machinery and open trenches, plant sheeted under tarpaulins, pipe runs stopping mid-air where the works stop. Scaffolding, spoil heaps, and raw ground beyond."
 }

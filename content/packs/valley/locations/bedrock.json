@@ -1,71 +1,72 @@
 {
-  "schemaVersion": 1,
-  "id": "bedrock",
-  "name": "Bedrock",
-  "regionId": "the_given_land",
-  "communityId": "mason.bedrock",
-  "axisVector": [
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    -0.7,
-    0.0,
-    0.2,
-    0.0,
-    0.0,
-    0.0,
-    -0.3,
-    0.0
-  ],
-  "spectrum": {
-    "concrete_abstract": -0.7,
-    "body_mind": -0.3,
-    "chaos_order": 0.2
-  },
-  "tags": [
-    "mason",
-    "concrete",
-    "city",
-    "stone",
-    "craft",
-    "home"
-  ],
-  "connections": [
-    "the_weighing_yard",
-    "the_leaden_deep",
-    "the_axis_gate",
-    "waystone"
-  ],
-  "descriptionSeed": "Stone, weight, ledgers, and a deep suspicion of anything that cannot be weighed. The Masons build things that outlast the arguments about them, and they are the most reliable people in the world and the hardest to have a conversation with, because roughly half of what you want to say to them is, to them, not real. Bedrock's waygate is set in dressed stone with its tolerances carved beside it, because the masons refuse to use a thing whose limits are not written down.",
-  "loreRefs": [
-    "the_twelve_reaches",
-    "traditions"
-  ],
-  "encounterFlavor": "Masons who assess you by touch and are usually right; a building that will still be here in six hundred years; a Figurist envoy being politely disbelieved out of existence.",
-  "dangerLevel": 2,
-  "questSeeds": [
-    "A structure is failing and the fault is not physical, and the Masons cannot admit that category exists",
-    "Something invisible is real and killing people and Bedrock will not act until it can be weighed"
-  ],
-  "map": {
-    "x": 140,
-    "y": 300
-  },
-  "poleIntensity": {
-    "concrete": 0.7,
-    "body": 0.3,
-    "order": 0.2
-  },
-  "startingLocation": true,
-  "waygate": true,
-  "waygateTier": 2,
-  "worldPos": {
-    "colatitude": 80.0,
-    "longitude": 115.0,
-    "depth": 0
-  },
-  "worldPosNote": "Ordinary ground within the_given_land, on its bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "region",
-  "parentId": null
+ "schemaVersion": 1,
+ "id": "bedrock",
+ "name": "Bedrock",
+ "regionId": "the_given_land",
+ "communityId": "mason.bedrock",
+ "axisVector": [
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  -0.7,
+  0.0,
+  0.2,
+  0.0,
+  0.0,
+  0.0,
+  -0.3,
+  0.0
+ ],
+ "spectrum": {
+  "concrete_abstract": -0.7,
+  "body_mind": -0.3,
+  "chaos_order": 0.2
+ },
+ "tags": [
+  "mason",
+  "concrete",
+  "city",
+  "stone",
+  "craft",
+  "home"
+ ],
+ "connections": [
+  "the_weighing_yard",
+  "the_leaden_deep",
+  "the_axis_gate",
+  "waystone"
+ ],
+ "descriptionSeed": "Stone, weight, ledgers, and a deep suspicion of anything that cannot be weighed. The Masons build things that outlast the arguments about them, and they are the most reliable people in the world and the hardest to have a conversation with, because roughly half of what you want to say to them is, to them, not real. Bedrock's waygate is set in dressed stone with its tolerances carved beside it, because the masons refuse to use a thing whose limits are not written down.",
+ "loreRefs": [
+  "the_twelve_reaches",
+  "traditions"
+ ],
+ "encounterFlavor": "Masons who assess you by touch and are usually right; a building that will still be here in six hundred years; a Figurist envoy being politely disbelieved out of existence.",
+ "dangerLevel": 2,
+ "questSeeds": [
+  "A structure is failing and the fault is not physical, and the Masons cannot admit that category exists",
+  "Something invisible is real and killing people and Bedrock will not act until it can be weighed"
+ ],
+ "map": {
+  "x": 140,
+  "y": 300
+ },
+ "poleIntensity": {
+  "concrete": 0.7,
+  "body": 0.3,
+  "order": 0.2
+ },
+ "startingLocation": true,
+ "waygate": true,
+ "waygateTier": 2,
+ "worldPos": {
+  "colatitude": 80.0,
+  "longitude": 115.0,
+  "depth": 0
+ },
+ "worldPosNote": "Ordinary ground within the_given_land, on its bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+ "tier": "region",
+ "parentId": null,
+ "appearance": "A city of massive dressed stone blocks laid in deep courses, buildings squat and wide rather than tall. Cranes and block-and-tackle rigs stand at every corner. Wide stone-flagged streets, cut kerbs, and stacks of quarried stone waiting in open yards."
 }

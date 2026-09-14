@@ -1,76 +1,77 @@
 {
-  "schemaVersion": 1,
-  "id": "the_cogitarium",
-  "name": "The Cogitarium",
-  "regionId": "somatic_reaches",
-  "communityId": "somatic.cogitarium",
-  "poleIntensity": {
-    "mind": 0.85,
-    "abstract": 0.5,
-    "dark": 0.3
-  },
-  "spectrum": {
-    "body_mind": 0.85,
-    "concrete_abstract": 0.5,
-    "dark_light": -0.3
-  },
-  "tags": [
-    "mind",
-    "floating",
-    "cold",
-    "abstract",
-    "declining"
-  ],
-  "connections": [
-    "the_middle_way",
-    "the_held_yard",
-    "gen-cogitarium-entrance-hall"
-  ],
-  "descriptionSeed": "Floating thought-halls where the Cogitants have nearly left their bodies behind for pure mind — and are dying of it. What rides with the mind-pole here is ABSTRACT and a growing DARK: brilliance shading into a cold that forgets warmth, forgets the body, forgets the world thought was ever meant to serve. The most intelligent place in the world, quietly starving to death because it has decided the body is beneath it. Chilling, and pitiable, and a warning.",
-  "loreRefs": [
-    "the_twelve_reaches",
-    "reach_body_mind"
-  ],
-  "encounterFlavor": "Cold brilliance in decline — a mind that solves your problem and can't feed itself, a hall of thinkers who've forgotten to eat, a solution of terrifying elegance and no mercy, the slow horror of watching genius forget it has a body.",
-  "dangerLevel": 3,
-  "questSeeds": [
-    "A Cogitant has calculated the correct answer to a valley crisis and it's monstrous because it left out everything the body knows; the arc is showing them what their elegance costs",
-    "The Cogitarium is literally dying — bodies failing while minds soar — and some of them want to be saved and can't admit it; reaching them means arguing for the flesh they've abandoned",
-    "A young Cogitant hasn't gone cold yet and wants out before they do; getting them to the Temple, or the Middle Way, before the Cogitarium claims them"
-  ],
-  "map": {
-    "x": 120,
-    "y": 480
-  },
-  "substrateSource": {
-    "kind": "sink",
-    "delta": -0.12,
-    "radius": 110,
-    "reason": "Declining, and the decline is the mechanism — a mind-work that has been letting go of its substrate for generations.",
-    "radiusWorld": 0.066,
-    "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
-  },
-  "axisVector": [
-    0,
-    0,
-    0,
-    0,
-    0.5,
-    0,
-    0,
-    -0.3,
-    0,
-    0,
-    0.85,
-    0
-  ],
-  "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
-  "worldPos": {
-    "colatitude": 78,
-    "longitude": 99,
-    "depth": 0
-  },
-  "worldPosNote": "Ordinary ground within somatic_reaches, on its bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "settlement",
-  "parentId": "the_middle_way"
+ "schemaVersion": 1,
+ "id": "the_cogitarium",
+ "name": "The Cogitarium",
+ "regionId": "somatic_reaches",
+ "communityId": "somatic.cogitarium",
+ "poleIntensity": {
+  "mind": 0.85,
+  "abstract": 0.5,
+  "dark": 0.3
+ },
+ "spectrum": {
+  "body_mind": 0.85,
+  "concrete_abstract": 0.5,
+  "dark_light": -0.3
+ },
+ "tags": [
+  "mind",
+  "floating",
+  "cold",
+  "abstract",
+  "declining"
+ ],
+ "connections": [
+  "the_middle_way",
+  "the_held_yard",
+  "gen-cogitarium-entrance-hall"
+ ],
+ "descriptionSeed": "Floating thought-halls where the Cogitants have nearly left their bodies behind for pure mind — and are dying of it. What rides with the mind-pole here is ABSTRACT and a growing DARK: brilliance shading into a cold that forgets warmth, forgets the body, forgets the world thought was ever meant to serve. The most intelligent place in the world, quietly starving to death because it has decided the body is beneath it. Chilling, and pitiable, and a warning.",
+ "loreRefs": [
+  "the_twelve_reaches",
+  "reach_body_mind"
+ ],
+ "encounterFlavor": "Cold brilliance in decline — a mind that solves your problem and can't feed itself, a hall of thinkers who've forgotten to eat, a solution of terrifying elegance and no mercy, the slow horror of watching genius forget it has a body.",
+ "dangerLevel": 3,
+ "questSeeds": [
+  "A Cogitant has calculated the correct answer to a valley crisis and it's monstrous because it left out everything the body knows; the arc is showing them what their elegance costs",
+  "The Cogitarium is literally dying — bodies failing while minds soar — and some of them want to be saved and can't admit it; reaching them means arguing for the flesh they've abandoned",
+  "A young Cogitant hasn't gone cold yet and wants out before they do; getting them to the Temple, or the Middle Way, before the Cogitarium claims them"
+ ],
+ "map": {
+  "x": 120,
+  "y": 480
+ },
+ "substrateSource": {
+  "kind": "sink",
+  "delta": -0.12,
+  "radius": 110,
+  "reason": "Declining, and the decline is the mechanism — a mind-work that has been letting go of its substrate for generations.",
+  "radiusWorld": 0.066,
+  "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
+ },
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  0.5,
+  0,
+  0,
+  -0.3,
+  0,
+  0,
+  0.85,
+  0
+ ],
+ "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
+ "worldPos": {
+  "colatitude": 78,
+  "longitude": 99,
+  "depth": 0
+ },
+ "worldPosNote": "Ordinary ground within somatic_reaches, on its bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+ "tier": "settlement",
+ "parentId": "the_middle_way",
+ "appearance": "Pale halls floating unsupported above open ground, arranged in tiers, connected by thin walkways. Beneath them, nothing. Tall narrow openings instead of windows; the structures barely move."
 }

@@ -1,76 +1,77 @@
 {
-  "schemaVersion": 1,
-  "id": "the_hall_of_mirrors",
-  "name": "The Hall of Mirrors",
-  "regionId": "the_veiled_reach",
-  "communityId": "veilwright.hall",
-  "axisVector": [
-    0.0,
-    -0.7,
-    0.0,
-    0.0,
-    0.3,
-    0.0,
-    0.0,
-    -0.2,
-    0.0,
-    0.0,
-    0.0,
-    0.0
-  ],
-  "spectrum": {
-    "falsehood_truth": -0.7,
-    "concrete_abstract": 0.3,
-    "dark_light": -0.2
-  },
-  "tags": [
-    "veilwright",
-    "falsehood",
-    "city",
-    "strange",
-    "home",
-    "social"
-  ],
-  "connections": [
-    "the_kindly_court",
-    "the_last_mask",
-    "the_axis_gate"
-  ],
-  "descriptionSeed": "A city where every truth is understood to be a made thing, so the Veilwrights simply make better ones. Nothing is quite where it appears; hospitality is lavish and cannot be trusted; and everyone is scrupulously honest about the fact that they are lying, which they consider a higher form of candor than the Verists' brutality. They are charming. They mean it. Both of those are also true. There is a waygate in the Hall of Mirrors, and there are several things that look like one. The Veilwrights find this funny and will tell you which is which for a fair price.",
-  "loreRefs": [
-    "the_twelve_reaches",
-    "traditions"
-  ],
-  "encounterFlavor": "Hosts of impeccable warmth who have told you nine untrue things; a mask that fits too well; a Verist envoy visibly aging by the hour.",
-  "dangerLevel": 3,
-  "questSeeds": [
-    "A truth has gotten loose in the Hall and is doing damage",
-    "Someone made a false version of a person and the false version is better and the person knows"
-  ],
-  "map": {
-    "x": 120,
-    "y": 230
-  },
-  "poleIntensity": {
-    "falsehood": 0.7,
-    "abstract": 0.3,
-    "dark": 0.2
-  },
-  "startingLocation": true,
-  "waygate": true,
-  "waygateTier": 3,
-  "encounterSeeds": [
-    {
-      "encounterId": "duel_hall_of_mirrors",
-      "hint": "Someone has challenged you, and in this hall that means less than it should"
-    }
-  ],
-  "worldPos": {
-    "colatitude": 81.0,
-    "longitude": 9.0,
-    "depth": 0
-  },
-  "worldPosNote": "Ordinary ground within the_veiled_reach, on its bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "region",
-  "parentId": null
+ "schemaVersion": 1,
+ "id": "the_hall_of_mirrors",
+ "name": "The Hall of Mirrors",
+ "regionId": "the_veiled_reach",
+ "communityId": "veilwright.hall",
+ "axisVector": [
+  0.0,
+  -0.7,
+  0.0,
+  0.0,
+  0.3,
+  0.0,
+  0.0,
+  -0.2,
+  0.0,
+  0.0,
+  0.0,
+  0.0
+ ],
+ "spectrum": {
+  "falsehood_truth": -0.7,
+  "concrete_abstract": 0.3,
+  "dark_light": -0.2
+ },
+ "tags": [
+  "veilwright",
+  "falsehood",
+  "city",
+  "strange",
+  "home",
+  "social"
+ ],
+ "connections": [
+  "the_kindly_court",
+  "the_last_mask",
+  "the_axis_gate"
+ ],
+ "descriptionSeed": "A city where every truth is understood to be a made thing, so the Veilwrights simply make better ones. Nothing is quite where it appears; hospitality is lavish and cannot be trusted; and everyone is scrupulously honest about the fact that they are lying, which they consider a higher form of candor than the Verists' brutality. They are charming. They mean it. Both of those are also true. There is a waygate in the Hall of Mirrors, and there are several things that look like one. The Veilwrights find this funny and will tell you which is which for a fair price.",
+ "loreRefs": [
+  "the_twelve_reaches",
+  "traditions"
+ ],
+ "encounterFlavor": "Hosts of impeccable warmth who have told you nine untrue things; a mask that fits too well; a Verist envoy visibly aging by the hour.",
+ "dangerLevel": 3,
+ "questSeeds": [
+  "A truth has gotten loose in the Hall and is doing damage",
+  "Someone made a false version of a person and the false version is better and the person knows"
+ ],
+ "map": {
+  "x": 120,
+  "y": 230
+ },
+ "poleIntensity": {
+  "falsehood": 0.7,
+  "abstract": 0.3,
+  "dark": 0.2
+ },
+ "startingLocation": true,
+ "waygate": true,
+ "waygateTier": 3,
+ "encounterSeeds": [
+  {
+   "encounterId": "duel_hall_of_mirrors",
+   "hint": "Someone has challenged you, and in this hall that means less than it should"
+  }
+ ],
+ "worldPos": {
+  "colatitude": 81.0,
+  "longitude": 9.0,
+  "depth": 0
+ },
+ "worldPosNote": "Ordinary ground within the_veiled_reach, on its bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+ "tier": "region",
+ "parentId": null,
+ "appearance": "A city whose surfaces reflect — glazed facades, polished stone, still water channels running the streets, so every view is doubled and it is hard to tell depth from image. Lavish frontages, ornamented, immaculately maintained."
 }

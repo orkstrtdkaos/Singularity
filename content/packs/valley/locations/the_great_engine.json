@@ -1,76 +1,77 @@
 {
-  "schemaVersion": 1,
-  "id": "the_great_engine",
-  "name": "The Great Engine",
-  "regionId": "the_gearlands",
-  "communityId": "enginewright.engine",
-  "axisVector": [
-    0.5,
-    0,
-    0,
-    0,
-    0,
-    -1,
-    0,
-    0,
-    0,
-    0,
-    0.4,
-    0
-  ],
-  "spectrum": {
-    "mechanical_spiritual": -1,
-    "body_mind": 0.4,
-    "emotional_logical": 0.5
-  },
-  "tags": [
-    "enginewright",
-    "mechanical",
-    "locus",
-    "cult",
-    "dangerous",
-    "sacred",
-    "precursor"
-  ],
-  "connections": [
-    "pressureholt",
-    "gearsflat",
-    "the_measured_engine"
-  ],
-  "descriptionSeed": "The pure pole: a mechanism the size of a mountain range, still running, and the people who tend it have become part of it in ways they will describe cheerfully and you will not sleep after hearing. Here mechanism stopped being a craft and became an ontology — everything is a machine, including you, and a badly-running machine ought to be corrected. **This is where Halvex Coil learned.** They are very proud of him.",
-  "loreRefs": [
-    "the_twelve_reaches",
-    "traditions"
-  ],
-  "encounterFlavor": "Tenders who are partly mechanism and entirely serene; a correction being performed on someone who did not ask; the Engine's noise, which gets into your teeth and then your thinking.",
-  "dangerLevel": 5,
-  "questSeeds": [
-    "The Engine's tenders want to correct someone you love, and their argument is good",
-    "Something the Engine has been doing for four hundred years is about to finish"
-  ],
-  "map": {
-    "x": 440,
-    "y": 95
-  },
-  "poleIntensity": {
-    "mechanical": 1,
-    "mind": 0.4,
-    "logical": 0.5
-  },
-  "substrateSource": {
-    "kind": "pool",
-    "delta": 0.22,
-    "radius": 170,
-    "reason": "The machines here never stopped. Four hundred years of running and the lattice has pooled around them like heat around a forge.",
-    "radiusWorld": 0.102,
-    "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
-  },
-  "worldPos": {
-    "colatitude": 89,
-    "longitude": 150,
-    "depth": -3
-  },
-  "worldPosNote": "Deep works. The densest site in the world sits at the Gearlands' equator and well below the surface. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "settlement",
-  "parentId": "pressureholt"
+ "schemaVersion": 1,
+ "id": "the_great_engine",
+ "name": "The Great Engine",
+ "regionId": "the_gearlands",
+ "communityId": "enginewright.engine",
+ "axisVector": [
+  0.5,
+  0,
+  0,
+  0,
+  0,
+  -1,
+  0,
+  0,
+  0,
+  0,
+  0.4,
+  0
+ ],
+ "spectrum": {
+  "mechanical_spiritual": -1,
+  "body_mind": 0.4,
+  "emotional_logical": 0.5
+ },
+ "tags": [
+  "enginewright",
+  "mechanical",
+  "locus",
+  "cult",
+  "dangerous",
+  "sacred",
+  "precursor"
+ ],
+ "connections": [
+  "pressureholt",
+  "gearsflat",
+  "the_measured_engine"
+ ],
+ "descriptionSeed": "The pure pole: a mechanism the size of a mountain range, still running, and the people who tend it have become part of it in ways they will describe cheerfully and you will not sleep after hearing. Here mechanism stopped being a craft and became an ontology — everything is a machine, including you, and a badly-running machine ought to be corrected. **This is where Halvex Coil learned.** They are very proud of him.",
+ "loreRefs": [
+  "the_twelve_reaches",
+  "traditions"
+ ],
+ "encounterFlavor": "Tenders who are partly mechanism and entirely serene; a correction being performed on someone who did not ask; the Engine's noise, which gets into your teeth and then your thinking.",
+ "dangerLevel": 5,
+ "questSeeds": [
+  "The Engine's tenders want to correct someone you love, and their argument is good",
+  "Something the Engine has been doing for four hundred years is about to finish"
+ ],
+ "map": {
+  "x": 440,
+  "y": 95
+ },
+ "poleIntensity": {
+  "mechanical": 1,
+  "mind": 0.4,
+  "logical": 0.5
+ },
+ "substrateSource": {
+  "kind": "pool",
+  "delta": 0.22,
+  "radius": 170,
+  "reason": "The machines here never stopped. Four hundred years of running and the lattice has pooled around them like heat around a forge.",
+  "radiusWorld": 0.102,
+  "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
+ },
+ "worldPos": {
+  "colatitude": 89,
+  "longitude": 150,
+  "depth": -3
+ },
+ "worldPosNote": "Deep works. The densest site in the world sits at the Gearlands' equator and well below the surface. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+ "tier": "settlement",
+ "parentId": "pressureholt",
+ "appearance": "A mechanism the size of a mountain range — flywheels and gear-trains larger than buildings, turning slowly, shafts running for miles. Catwalks and ladder-runs threaded through the works. Steam venting; everything oil-dark and moving."
 }

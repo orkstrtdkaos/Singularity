@@ -1,88 +1,89 @@
 {
-  "schemaVersion": 1,
-  "id": "the_crossing",
-  "name": "The Crossing",
-  "regionId": "the_center",
-  "communityId": "center.crossing",
-  "aliases": [
-    "Center",
-    "the Hub",
-    "the Crossroads",
-    "the crossing where all the waygates are"
-  ],
-  "supersedes": [
-    "gen-center"
-  ],
-  "axisVector": [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0
-  ],
-  "spectrum": {},
-  "tags": [
-    "center",
-    "cosmopolitan",
-    "city",
-    "neutral",
-    "home",
-    "sacred"
-  ],
-  "connections": [
-    "the_great_coliseum",
-    "the_hundred_markets",
-    "the_quiet_house",
-    "the_axis_gate",
-    "greyhearth",
-    "kindlerow",
-    "greenmarch",
-    "hardline",
-    "the_low_market",
-    "stair_hollow",
-    "gearsflat",
-    "thinwater",
-    "dusklow",
-    "plainstead",
-    "longshore",
-    "the_worn_yard",
-    "gen-the-made-gate",
-    "gen-north-gate-registry-ossian-office"
-  ],
-  "descriptionSeed": "Every axis crosses here at nothing, and the result is not grey — it is CROWDED. The Crossing leans toward no pole, which is precisely why it can hold them all: an Umbral and a Blazeborn drink at the same table because neither has the standing to make the other leave. The poles are lonely places. The center is where the world comes to meet its opposite, and the fact that this is possible at all is the most hopeful thing in existence. Nobody is from here. Everybody is here.",
-  "loreRefs": [
-    "the_twelve_reaches",
-    "traditions",
-    "the_coordinate_world"
-  ],
-  "encounterFlavor": "Every people, all at once; a Verist and a Veilwright in the same tavern, aggressively polite; someone from a Reach you have never heard of.",
-  "dangerLevel": 2,
-  "questSeeds": [
-    "Someone is trying to make the Crossing take a side, and it would be the end of it",
-    "A murder has been done here and there are twelve legal traditions with a claim on the body"
-  ],
-  "map": {
-    "x": 340,
-    "y": 290
-  },
-  "poleIntensity": {},
-  "startingLocation": true,
-  "waygate": true,
-  "waygateHub": true,
-  "waygateTier": 1,
-  "worldPos": {
-    "colatitude": 0,
-    "longitude": 0,
-    "depth": 0
-  },
-  "worldPosNote": "The pole itself. Every axis crosses here and none of them dominates — colatitude 0 by definition. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "region",
-  "parentId": null
+ "schemaVersion": 1,
+ "id": "the_crossing",
+ "name": "The Crossing",
+ "regionId": "the_center",
+ "communityId": "center.crossing",
+ "aliases": [
+  "Center",
+  "the Hub",
+  "the Crossroads",
+  "the crossing where all the waygates are"
+ ],
+ "supersedes": [
+  "gen-center"
+ ],
+ "axisVector": [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0
+ ],
+ "spectrum": {},
+ "tags": [
+  "center",
+  "cosmopolitan",
+  "city",
+  "neutral",
+  "home",
+  "sacred"
+ ],
+ "connections": [
+  "the_great_coliseum",
+  "the_hundred_markets",
+  "the_quiet_house",
+  "the_axis_gate",
+  "greyhearth",
+  "kindlerow",
+  "greenmarch",
+  "hardline",
+  "the_low_market",
+  "stair_hollow",
+  "gearsflat",
+  "thinwater",
+  "dusklow",
+  "plainstead",
+  "longshore",
+  "the_worn_yard",
+  "gen-the-made-gate",
+  "gen-north-gate-registry-ossian-office"
+ ],
+ "descriptionSeed": "Every axis crosses here at nothing, and the result is not grey — it is CROWDED. The Crossing leans toward no pole, which is precisely why it can hold them all: an Umbral and a Blazeborn drink at the same table because neither has the standing to make the other leave. The poles are lonely places. The center is where the world comes to meet its opposite, and the fact that this is possible at all is the most hopeful thing in existence. Nobody is from here. Everybody is here.",
+ "loreRefs": [
+  "the_twelve_reaches",
+  "traditions",
+  "the_coordinate_world"
+ ],
+ "encounterFlavor": "Every people, all at once; a Verist and a Veilwright in the same tavern, aggressively polite; someone from a Reach you have never heard of.",
+ "dangerLevel": 2,
+ "questSeeds": [
+  "Someone is trying to make the Crossing take a side, and it would be the end of it",
+  "A murder has been done here and there are twelve legal traditions with a claim on the body"
+ ],
+ "map": {
+  "x": 340,
+  "y": 290
+ },
+ "poleIntensity": {},
+ "startingLocation": true,
+ "waygate": true,
+ "waygateHub": true,
+ "waygateTier": 1,
+ "worldPos": {
+  "colatitude": 0,
+  "longitude": 0,
+  "depth": 0
+ },
+ "worldPosNote": "The pole itself. Every axis crosses here and none of them dominates — colatitude 0 by definition. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+ "tier": "region",
+ "parentId": null,
+ "appearance": "A dense crossroads city where nothing matches — grown wood beside dressed stone beside riveted plate, roofs at every height, stairs and bridges linking upper floors. Crowded streets, hanging signs in many scripts, no single style anywhere."
 }

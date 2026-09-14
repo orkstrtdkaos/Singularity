@@ -1,74 +1,75 @@
 {
-  "schemaVersion": 1,
-  "id": "the_grand_lattice",
-  "name": "The Grand Lattice",
-  "regionId": "the_lattice_cities",
-  "communityId": "lattice.grand",
-  "axisVector": [
-    0.4,
-    0,
-    0,
-    0,
-    0,
-    0,
-    1,
-    0,
-    0,
-    0,
-    0.3,
-    0
-  ],
-  "spectrum": {
-    "chaos_order": 1,
-    "body_mind": 0.3,
-    "emotional_logical": 0.4
-  },
-  "tags": [
-    "lattice",
-    "order",
-    "locus",
-    "cult",
-    "dangerous",
-    "sacred"
-  ],
-  "connections": [
-    "tier_seven"
-  ],
-  "descriptionSeed": "The inner ring, where order stopped being a method and became a faith. Here nothing is unplanned and nothing is free, and the second clause is not a cost of the first — it is the POINT. Freedom, in the Grand Lattice's mature doctrine, is a defect: the residue of an unsolved optimization. They are not cruel. They are finishing the work. The other tiers do not come here and do not discuss why.",
-  "loreRefs": [
-    "the_twelve_reaches",
-    "traditions",
-    "the_coordinate_world"
-  ],
-  "encounterFlavor": "The inner-ring devoted, who are serene and have solved you; a plan that includes you and that you did not consent to; a citizen who has been optimized past personhood and is grateful.",
-  "dangerLevel": 5,
-  "questSeeds": [
-    "The inner ring has produced a plan for the entire world and it is elegant and it is coming",
-    "Someone you know has been scheduled, and the schedule is correct, and it ends them"
-  ],
-  "map": {
-    "x": 480,
-    "y": 150
-  },
-  "poleIntensity": {
-    "order": 1,
-    "mind": 0.3,
-    "logical": 0.4
-  },
-  "substrateSource": {
-    "kind": "pool",
-    "delta": 0.2,
-    "radius": 165,
-    "reason": "The Lattice was built INTO the substrate rather than on top of it; the city and the pool are the same structure.",
-    "radiusWorld": 0.099,
-    "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
-  },
-  "worldPos": {
-    "colatitude": 86,
-    "longitude": 230,
-    "depth": 0
-  },
-  "worldPosNote": "Deep expression of its Reach — placed near the equator on the the_lattice_cities bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "settlement",
-  "parentId": "tier_seven"
+ "schemaVersion": 1,
+ "id": "the_grand_lattice",
+ "name": "The Grand Lattice",
+ "regionId": "the_lattice_cities",
+ "communityId": "lattice.grand",
+ "axisVector": [
+  0.4,
+  0,
+  0,
+  0,
+  0,
+  0,
+  1,
+  0,
+  0,
+  0,
+  0.3,
+  0
+ ],
+ "spectrum": {
+  "chaos_order": 1,
+  "body_mind": 0.3,
+  "emotional_logical": 0.4
+ },
+ "tags": [
+  "lattice",
+  "order",
+  "locus",
+  "cult",
+  "dangerous",
+  "sacred"
+ ],
+ "connections": [
+  "tier_seven"
+ ],
+ "descriptionSeed": "The inner ring, where order stopped being a method and became a faith. Here nothing is unplanned and nothing is free, and the second clause is not a cost of the first — it is the POINT. Freedom, in the Grand Lattice's mature doctrine, is a defect: the residue of an unsolved optimization. They are not cruel. They are finishing the work. The other tiers do not come here and do not discuss why.",
+ "loreRefs": [
+  "the_twelve_reaches",
+  "traditions",
+  "the_coordinate_world"
+ ],
+ "encounterFlavor": "The inner-ring devoted, who are serene and have solved you; a plan that includes you and that you did not consent to; a citizen who has been optimized past personhood and is grateful.",
+ "dangerLevel": 5,
+ "questSeeds": [
+  "The inner ring has produced a plan for the entire world and it is elegant and it is coming",
+  "Someone you know has been scheduled, and the schedule is correct, and it ends them"
+ ],
+ "map": {
+  "x": 480,
+  "y": 150
+ },
+ "poleIntensity": {
+  "order": 1,
+  "mind": 0.3,
+  "logical": 0.4
+ },
+ "substrateSource": {
+  "kind": "pool",
+  "delta": 0.2,
+  "radius": 165,
+  "reason": "The Lattice was built INTO the substrate rather than on top of it; the city and the pool are the same structure.",
+  "radiusWorld": 0.099,
+  "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
+ },
+ "worldPos": {
+  "colatitude": 86,
+  "longitude": 230,
+  "depth": 0
+ },
+ "worldPosNote": "Deep expression of its Reach — placed near the equator on the the_lattice_cities bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+ "tier": "settlement",
+ "parentId": "tier_seven",
+ "appearance": "Concentric rings of identical pale buildings, each ring exactly spaced from the next, streets running radially between them. Nothing added, nothing weathered, nothing out of place. Uniform light, no signage."
 }

@@ -1,67 +1,68 @@
 {
-  "schemaVersion": 1,
-  "id": "glasshome",
-  "name": "Glasshome",
-  "regionId": "radiant_wastes",
-  "communityId": "blazeborn.glasshome",
-  "axisVector": [
-    0.0,
-    0.3,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.3,
-    0.7,
-    0.0,
-    0.0,
-    0.0,
-    0.0
-  ],
-  "spectrum": {
-    "dark_light": 0.7,
-    "chaos_order": 0.3,
-    "falsehood_truth": 0.3
-  },
-  "tags": [
-    "blazeborn",
-    "light",
-    "city",
-    "glass",
-    "home"
-  ],
-  "connections": [
-    "the_lensward",
-    "the_blaze"
-  ],
-  "descriptionSeed": "A city built on the glass plain the Blaze made, by the people the Blaze made. Everything is visible. There are no interior walls in Blazeborn architecture because the idea of a room nobody can see into strikes them as a confession. They are generous, direct, exhausting, and they genuinely do not understand why the rest of the world finds constant total visibility oppressive. Nothing is hidden here. NOTHING is hidden here.",
-  "loreRefs": [
-    "the_twelve_reaches",
-    "traditions",
-    "the_coordinate_world"
-  ],
-  "encounterFlavor": "Blazeborn who tell you the truth immediately and completely; a visitor slowly unravelling under permanent visibility; someone hiding something, badly, and everyone knows.",
-  "dangerLevel": 2,
-  "questSeeds": [
-    "Someone in Glasshome has successfully hidden something, and that is the most frightening event in a generation",
-    "A refugee from the Harborward has been found, and the city must decide what it is"
-  ],
-  "map": {
-    "x": 600,
-    "y": 340
-  },
-  "poleIntensity": {
-    "light": 0.7,
-    "order": 0.3,
-    "truth": 0.3
-  },
-  "startingLocation": true,
-  "worldPos": {
-    "colatitude": 81.0,
-    "longitude": 175.0,
-    "depth": 0
-  },
-  "worldPosNote": "Ordinary ground within radiant_wastes, on its bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "region",
-  "parentId": null
+ "schemaVersion": 1,
+ "id": "glasshome",
+ "name": "Glasshome",
+ "regionId": "radiant_wastes",
+ "communityId": "blazeborn.glasshome",
+ "axisVector": [
+  0.0,
+  0.3,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.3,
+  0.7,
+  0.0,
+  0.0,
+  0.0,
+  0.0
+ ],
+ "spectrum": {
+  "dark_light": 0.7,
+  "chaos_order": 0.3,
+  "falsehood_truth": 0.3
+ },
+ "tags": [
+  "blazeborn",
+  "light",
+  "city",
+  "glass",
+  "home"
+ ],
+ "connections": [
+  "the_lensward",
+  "the_blaze"
+ ],
+ "descriptionSeed": "A city built on the glass plain the Blaze made, by the people the Blaze made. Everything is visible. There are no interior walls in Blazeborn architecture because the idea of a room nobody can see into strikes them as a confession. They are generous, direct, exhausting, and they genuinely do not understand why the rest of the world finds constant total visibility oppressive. Nothing is hidden here. NOTHING is hidden here.",
+ "loreRefs": [
+  "the_twelve_reaches",
+  "traditions",
+  "the_coordinate_world"
+ ],
+ "encounterFlavor": "Blazeborn who tell you the truth immediately and completely; a visitor slowly unravelling under permanent visibility; someone hiding something, badly, and everyone knows.",
+ "dangerLevel": 2,
+ "questSeeds": [
+  "Someone in Glasshome has successfully hidden something, and that is the most frightening event in a generation",
+  "A refugee from the Harborward has been found, and the city must decide what it is"
+ ],
+ "map": {
+  "x": 600,
+  "y": 340
+ },
+ "poleIntensity": {
+  "light": 0.7,
+  "order": 0.3,
+  "truth": 0.3
+ },
+ "startingLocation": true,
+ "worldPos": {
+  "colatitude": 81.0,
+  "longitude": 175.0,
+  "depth": 0
+ },
+ "worldPosNote": "Ordinary ground within radiant_wastes, on its bearing. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+ "tier": "region",
+ "parentId": null,
+ "appearance": "A city of transparent structures on a flat glass plain — walls, floors and stairs all clear, so the whole city is visible through itself. No interior partitions anywhere. Hard white light from every direction, no shadows."
 }

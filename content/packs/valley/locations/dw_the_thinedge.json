@@ -1,82 +1,83 @@
 {
-  "schemaVersion": 1,
-  "id": "dw_the_thinedge",
-  "name": "The Thin Edge",
-  "regionId": "manifest_domain",
-  "communityId": "domain.deepwood",
-  "poleIntensity": {
-    "life": 0.6,
-    "spiritual": 0.4,
-    "peace": 0.4,
-    "time": 0.3
-  },
-  "spectrum": {
-    "death_life": 0.6,
-    "mechanical_spiritual": 0.4,
-    "violence_peace": 0.4,
-    "space_time": 0.3
-  },
-  "tags": [
-    "manifest-domain",
-    "ent",
-    "deepwood",
-    "approach",
-    "habitable"
-  ],
-  "connections": [
-    "thornwake_glade",
-    "the_quickwood_eaves",
-    "dw_the_moot",
-    "dw_the_burnscar",
-    "the_axis_gate"
-  ],
-  "seedFiction": "the ENT race manifested",
-  "nativeLogic": "The outer Deepwood — slow-time is mild here, the Ents youngest (mere centuries), haste merely frowned on rather than punished. An outsider can treat with Ents without losing years. The Green Accord that reaches Thornwake was made here. GM enforces Ent-patience gently: this is where humans and the wood still meet on speakable terms.",
-  "descriptionSeed": "Where the wider world thins into the Deepwood — trees growing older and more aware with each step in, the light going green and deep, the first Ents standing like patient towers who turn, slowly, to consider you. An Ent coming from Thornwake feels the pull of home here, the pace of the world finally matching their own. Habitable, watchful, the threshold of something vast and unhurried. A waygate stands at the Thin Edge because nobody would place one deeper. Aiming at it takes real wayfaring; the Deepwood does not make itself easy to find on purpose.",
-  "loreRefs": [
-    "manifest_locals",
-    "domain_detail_and_connections"
-  ],
-  "encounterFlavor": "The threshold of deep green — a young Ent (three centuries) willing to speak at merely-slow pace, a Walker scout weighing whether you're worth the Moot's time, the Accord's old boundary-stones, the vertigo of time beginning to pool.",
-  "dangerLevel": 2,
-  "questSeeds": [
-    "An Ent of the Thin Edge carries the Walker argument and wants a human ally to bring before the Moot — proof the hasty world holds trust worth keeping; for an Ent-character, this is coming home to a fight already underway",
-    "The Accord's boundary-stones are being moved — by whom, and whether it's the Rootbound testing the edge, is the first thread inward",
-    "A human lost the ordinary way in from Thornwake and time-slipped; guiding them back before years pass outside"
-  ],
-  "map": {
-    "x": 90,
-    "y": 320
-  },
-  "waygate": true,
-  "waygateTier": 3,
-  "encounterSeeds": [
-    {
-      "encounterId": "ruin_delve_collapse",
-      "hint": "The ruin below the Thin Edge is enterable, and it is settling"
-    }
-  ],
-  "axisVector": [
-    0.0,
-    0.0,
-    0.0,
-    0.4,
-    0.0,
-    0.4,
-    0.0,
-    0.0,
-    0.6,
-    0.3,
-    0.0,
-    0.0
-  ],
-  "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
-  "worldPos": {
-    "colatitude": 72.0,
-    "longitude": 256.0,
-    "depth": -2
-  },
-  "worldPosNote": "The Deepwood is a POCKET-REALITY — slow time, its own hours. The whole manifest domain sits one layer off the surface plane rather than beside the Quickwood on it. This is why Ent country can share a bearing with life-country and still be somewhere else. (SNG-180: authored position — WHERE it sits, independent of axisVector.)",
-  "tier": "region",
-  "parentId": null
+ "schemaVersion": 1,
+ "id": "dw_the_thinedge",
+ "name": "The Thin Edge",
+ "regionId": "manifest_domain",
+ "communityId": "domain.deepwood",
+ "poleIntensity": {
+  "life": 0.6,
+  "spiritual": 0.4,
+  "peace": 0.4,
+  "time": 0.3
+ },
+ "spectrum": {
+  "death_life": 0.6,
+  "mechanical_spiritual": 0.4,
+  "violence_peace": 0.4,
+  "space_time": 0.3
+ },
+ "tags": [
+  "manifest-domain",
+  "ent",
+  "deepwood",
+  "approach",
+  "habitable"
+ ],
+ "connections": [
+  "thornwake_glade",
+  "the_quickwood_eaves",
+  "dw_the_moot",
+  "dw_the_burnscar",
+  "the_axis_gate"
+ ],
+ "seedFiction": "the ENT race manifested",
+ "nativeLogic": "The outer Deepwood — slow-time is mild here, the Ents youngest (mere centuries), haste merely frowned on rather than punished. An outsider can treat with Ents without losing years. The Green Accord that reaches Thornwake was made here. GM enforces Ent-patience gently: this is where humans and the wood still meet on speakable terms.",
+ "descriptionSeed": "Where the wider world thins into the Deepwood — trees growing older and more aware with each step in, the light going green and deep, the first Ents standing like patient towers who turn, slowly, to consider you. An Ent coming from Thornwake feels the pull of home here, the pace of the world finally matching their own. Habitable, watchful, the threshold of something vast and unhurried. A waygate stands at the Thin Edge because nobody would place one deeper. Aiming at it takes real wayfaring; the Deepwood does not make itself easy to find on purpose.",
+ "loreRefs": [
+  "manifest_locals",
+  "domain_detail_and_connections"
+ ],
+ "encounterFlavor": "The threshold of deep green — a young Ent (three centuries) willing to speak at merely-slow pace, a Walker scout weighing whether you're worth the Moot's time, the Accord's old boundary-stones, the vertigo of time beginning to pool.",
+ "dangerLevel": 2,
+ "questSeeds": [
+  "An Ent of the Thin Edge carries the Walker argument and wants a human ally to bring before the Moot — proof the hasty world holds trust worth keeping; for an Ent-character, this is coming home to a fight already underway",
+  "The Accord's boundary-stones are being moved — by whom, and whether it's the Rootbound testing the edge, is the first thread inward",
+  "A human lost the ordinary way in from Thornwake and time-slipped; guiding them back before years pass outside"
+ ],
+ "map": {
+  "x": 90,
+  "y": 320
+ },
+ "waygate": true,
+ "waygateTier": 3,
+ "encounterSeeds": [
+  {
+   "encounterId": "ruin_delve_collapse",
+   "hint": "The ruin below the Thin Edge is enterable, and it is settling"
+  }
+ ],
+ "axisVector": [
+  0.0,
+  0.0,
+  0.0,
+  0.4,
+  0.0,
+  0.4,
+  0.0,
+  0.0,
+  0.6,
+  0.3,
+  0.0,
+  0.0
+ ],
+ "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position.",
+ "worldPos": {
+  "colatitude": 72.0,
+  "longitude": 256.0,
+  "depth": -2
+ },
+ "worldPosNote": "The Deepwood is a POCKET-REALITY — slow time, its own hours. The whole manifest domain sits one layer off the surface plane rather than beside the Quickwood on it. This is why Ent country can share a bearing with life-country and still be somewhere else. (SNG-180: authored position — WHERE it sits, independent of axisVector.)",
+ "tier": "region",
+ "parentId": null,
+ "appearance": "Forest thickening as it goes — ordinary trees giving way to far larger ones, trunks widening, spacing opening out. The light turns green and deep. At the inner edge, enormous moss-hung trees stand like towers."
 }

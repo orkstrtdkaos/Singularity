@@ -1,74 +1,75 @@
 {
-  "schemaVersion": 1,
-  "id": "the_greenward",
-  "name": "The Greenward",
-  "regionId": "the_quickwood",
-  "communityId": "rootkin.greenward",
-  "axisVector": [
-    0.0,
-    0.0,
-    0.0,
-    -0.2,
-    0.0,
-    0.0,
-    0.2,
-    0.0,
-    0.5,
-    0.0,
-    0.0,
-    0.0
-  ],
-  "spectrum": {
-    "death_life": 0.5,
-    "violence_peace": -0.2,
-    "chaos_order": 0.2
-  },
-  "tags": [
-    "rootkin",
-    "life",
-    "border",
-    "ward",
-    "liminal"
-  ],
-  "connections": [
-    "the_heartroot",
-    "the_hollowing",
-    "the_axis_gate",
-    "the_quickwood_eaves"
-  ],
-  "descriptionSeed": "The border, and the Rootkin's only concession to urgency. Here the growth is deliberate, thorned, and unmistakably a wall — grown by people who would rather not have needed to, over the objections of people who said it was the beginning of something bad. It has held for a century. The argument about whether it should exist has been running the entire time and both sides are still speaking, because that is how the Rootkin do it.",
-  "loreRefs": [
-    "the_twelve_reaches",
-    "traditions",
-    "world_framing"
-  ],
-  "encounterFlavor": "Greenwardens who are gentle and completely immovable; the century-long argument, still going; something at the wall that the wall was grown for.",
-  "dangerLevel": 3,
-  "questSeeds": [
-    "The wall is growing faster than it was planted to, and nobody gave it that instruction",
-    "Something is pushing at the Greenward from the Hollowing side, and it is not an animal"
-  ],
-  "map": {
-    "x": 590,
-    "y": 290
-  },
-  "poleIntensity": {
-    "life": 0.5,
-    "violence": 0.2,
-    "order": 0.2
-  },
-  "encounterSeeds": [
-    {
-      "encounterId": "wild_greatcat_quickwood",
-      "hint": "Something has been pacing you for the last mile without showing itself"
-    }
-  ],
-  "worldPos": {
-    "colatitude": 66.0,
-    "longitude": 254.0,
-    "depth": 0
-  },
-  "worldPosNote": "A place people pass through or live in — pulled inward of its Reach's pole. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
-  "tier": "settlement",
-  "parentId": "the_heartroot"
+ "schemaVersion": 1,
+ "id": "the_greenward",
+ "name": "The Greenward",
+ "regionId": "the_quickwood",
+ "communityId": "rootkin.greenward",
+ "axisVector": [
+  0.0,
+  0.0,
+  0.0,
+  -0.2,
+  0.0,
+  0.0,
+  0.2,
+  0.0,
+  0.5,
+  0.0,
+  0.0,
+  0.0
+ ],
+ "spectrum": {
+  "death_life": 0.5,
+  "violence_peace": -0.2,
+  "chaos_order": 0.2
+ },
+ "tags": [
+  "rootkin",
+  "life",
+  "border",
+  "ward",
+  "liminal"
+ ],
+ "connections": [
+  "the_heartroot",
+  "the_hollowing",
+  "the_axis_gate",
+  "the_quickwood_eaves"
+ ],
+ "descriptionSeed": "The border, and the Rootkin's only concession to urgency. Here the growth is deliberate, thorned, and unmistakably a wall — grown by people who would rather not have needed to, over the objections of people who said it was the beginning of something bad. It has held for a century. The argument about whether it should exist has been running the entire time and both sides are still speaking, because that is how the Rootkin do it.",
+ "loreRefs": [
+  "the_twelve_reaches",
+  "traditions",
+  "world_framing"
+ ],
+ "encounterFlavor": "Greenwardens who are gentle and completely immovable; the century-long argument, still going; something at the wall that the wall was grown for.",
+ "dangerLevel": 3,
+ "questSeeds": [
+  "The wall is growing faster than it was planted to, and nobody gave it that instruction",
+  "Something is pushing at the Greenward from the Hollowing side, and it is not an animal"
+ ],
+ "map": {
+  "x": 590,
+  "y": 290
+ },
+ "poleIntensity": {
+  "life": 0.5,
+  "violence": 0.2,
+  "order": 0.2
+ },
+ "encounterSeeds": [
+  {
+   "encounterId": "wild_greatcat_quickwood",
+   "hint": "Something has been pacing you for the last mile without showing itself"
+  }
+ ],
+ "worldPos": {
+  "colatitude": 66.0,
+  "longitude": 254.0,
+  "depth": 0
+ },
+ "worldPosNote": "A place people pass through or live in — pulled inward of its Reach's pole. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
+ "tier": "settlement",
+ "parentId": "the_heartroot",
+ "appearance": "A living wall of grown thorn and interlocked trunk, dense and many-layered, running across open country. Gaps are cut and gated rather than found. Bare ground kept clear along both faces."
 }

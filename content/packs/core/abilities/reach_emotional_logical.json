@@ -169,7 +169,7 @@
      "class": "drawback"
     }
    ],
-   "plainly": "A social/fight action. Name an emotion you genuinely feel and kindle it in a willing person for about six hours: RAGE +damage and immune to fear · JOY energy relief · GRIEF cannot be frightened · LOVE +resist while protecting another · HOPE sheds one imposed condition. r1 one person, r2 a handful or a crowd, r3 a whole gathering at reach. ⛔ One emotion per use, and it must be true.",
+   "plainly": "A social/fight action. Name an emotion you genuinely feel and kindle it in a willing person for about six hours. Rage: more damage and immune to fear. Joy: energy relief. Grief: cannot be frightened. Love: more resist while protecting another. Hope: sheds one imposed condition. Rank 1 one person, rank 2 a handful or a crowd, rank 3 a whole gathering at reach. One emotion per use, and it must be true.",
    "_descriptionWas": "The emotional-pole mastery: reading, moving, and sharing feeling as a real force. Not manipulation — resonance; the Deepfeelers' art.",
    "_functionsWas": [
     "command",
@@ -619,7 +619,7 @@
      "class": "drawback"
     }
    ],
-   "plainly": "A fight/social/defend action, declared in the SENSE slot. ⛔ IT IS EVASION, NOT ARMOUR — rated 4, evasion rank 2, soaking nothing: you feel harm forming in the emotional weather and are elsewhere when it lands. One person at r1, another at r2, the whole space at r3, about four hours. ⚠️ Blind to anything with no intent to read — a mechanism, a deadfall, or a mindless raised crew.",
+   "plainly": "A fight/social/defend action, declared in the sense slot. It is evasion, not armour — rated 4, evasion rank 2, soaking nothing: you feel harm forming in the emotional weather and are elsewhere when it lands. One person at rank 1, another at rank 2, the whole space at rank 3, about four hours. Blind to anything with no intent to read — a mechanism, a deadfall, or a mindless raised crew.",
    "_functionsWas": [
     "foresee",
     "shield"
@@ -778,7 +778,7 @@
      "class": "hard"
     }
    ],
-   "plainly": "A create/social action. Put one named emotion — rage, joy, grief, love or hope, the same five as Pathos — into a made thing. ⛔ r1 IS A GIFT: whoever takes it up willingly gets that emotion's grant. r2 CAN INFLICT IT on whoever holds or carries the object, wanted or not — which Pathos cannot do at all. r3 NEEDS NO HOLDER: it becomes a fixture of a place and works on everyone there, for years. One feeling per work, true and yours.",
+   "plainly": "A create/social action. Put one named emotion — rage, joy, grief, love or hope, the same five as Pathos — into a made thing. Rank 1 is a gift: whoever takes it up willingly gets that emotion's grant. Rank 2 can inflict it on whoever holds or carries the object, wanted or not, which Pathos cannot do at all. Rank 3 needs no holder: it becomes a fixture of a place and works on everyone there, for years. One feeling per work, true and yours.",
    "_nameWas": "The Made Elegy",
    "_idWas": "the_made_elegy",
    "_powerSystemWas": "attribute",
@@ -1427,7 +1427,7 @@
      "class": "drawback"
     }
    ],
-   "plainly": "A social/survive action, once, for your entire energy pool. ⛔ EVERY IMPOSED CONDITION IS CLEARED FROM EVERYONE WHO HEARS IT — staggered, action-loss, unconscious, fear, despair, grief-weight — across a scope of 4, friend and stranger alike. ⚠️ IT DOES NOT HEAL: wounds, poison and illness are untouched. You end at zero energy and can use no craft until a full night's rest, and both conserve and surge are refused.",
+   "plainly": "A social/survive action, once, for your entire energy pool. Every imposed condition is cleared from everyone who hears it — staggered, action-loss, unconscious, fear, despair, grief-weight — across a scope of 4, friend and stranger alike. It does not heal: wounds, poison and illness are untouched. You end at zero energy and can use no craft until a full night's rest, and both conserve and surge are refused.",
    "_nameWas": "The Last Lament",
    "_idWas": "the_last_lament",
    "_powerSystemWas": "reach_emotional_logical",
@@ -2290,7 +2290,7 @@
      "class": "hard"
     }
    ],
-   "plainly": "A social/investigate action. r1 hears what someone actually feels beneath what they are showing. r2 tracks a feeling over time and across ground. ⛔ r3 READS A PLACE'S EMOTIONAL HISTORY IN SEQUENCE — years of it, with no witness, no survivor and no record needed. ⚠️ It gives feelings in order and never events: not who, not what, not why.",
+   "plainly": "A social/investigate action. Rank 1 hears what someone actually feels beneath what they are showing. Rank 2 tracks a feeling over time and across ground. Rank 3 reads a place's emotional history in sequence — years of it, with no witness, no survivor and no record needed. It gives feelings in order and never events: not who, not what, not why.",
    "_fromTemplate": "first_gift_template",
    "_powerSystemWas": "attribute",
    "_powerSystemFix": "⛔ SNG-524. Was `attribute` — a REACH ID, the field name `attribute`, or a tradition name. NONE OF THOSE ARE POWER SOURCES; there are four.\n⛔ canon primary for `threnodist` — ⚠️ Tidal, public, ungoverned. Emotion is not an ordered process and the Keening lands on the singer too.\n⚠️ 321 of 373 carried a wrong value. `aestheticFor` resolves `powerSystems[ps]` and was falling through to the house palette for all of them, and every nexus and density calculation keyed on source was reading a reach id.",

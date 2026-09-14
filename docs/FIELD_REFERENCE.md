@@ -341,12 +341,12 @@ but cited by its own note, extended by its `rankDeltas`, and named in its player
 <!-- SIZES:BEGIN -->
 | file | size | | file | size |
 |---|---|---|---|---|
-| ~~`ability_rename_map`~~ ✅ **WIRED** | 61.7 KB | | `ability_distribution_target` | 8.1 KB |
-| `power_cosmology` | 27.5 KB | | `the_veil` | 7.7 KB |
-| `mechanic_effects` | 16.1 KB | | `healing_intent` | 4.8 KB |
-| `tempo` | 14.7 KB | | `death_domain` | 4.7 KB |
-| `nexuses` | 13.9 KB | | `companion_template` | 4.0 KB |
-| ⛔ `damage_types` | 13.1 KB | | `energy_costs` | 2.4 KB |
+| ~~`ability_rename_map`~~ ✅ **WIRED** | 60.1 KB | | `ability_distribution_target` | 7.8 KB |
+| `power_cosmology` | 27.4 KB | | `the_veil` | 7.6 KB |
+| `mechanic_effects` | 15.9 KB | | `healing_intent` | 4.8 KB |
+| `tempo` | 14.6 KB | | `death_domain` | 4.6 KB |
+| `nexuses` | 13.8 KB | | `companion_template` | 4.0 KB |
+| ⛔ `damage_types` | 13.0 KB | | `energy_costs` | 2.3 KB |
 <!-- SIZES:END -->
 
 ⛔ **`damage_types.json` sits in the same folder as the `damage_families.json` that IS loaded, on the same

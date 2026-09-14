@@ -14047,6 +14047,78 @@ console.log("\n── §210 · the outcome names whoever is standing at it ─�
     `directions: ${dirs.join(", ")}`);
 }
 
+// ⛔ SNG-566/569 (Aevi, Erik) — "THE ENGINE KNOWS EXACTLY WHERE YOU ARE AND HAS NO WAY TO SAY SO."
+//
+// ⚑ MEASURED AT HEAD before building: `deathDepth` had ELEVEN readers across the engine and ZERO in `app.js`. Four
+// depths, a world clock that reaches the player, holds that stop it and slows that lengthen it — the SNG-209 model is
+// correct, wired, world-clocked, and applies to the player. ⛑ Aevi: "most of this is already built, and it is right."
+// The missing half was never the model. It was a surface.
+//
+// ⛔ AND SNG-569 DECIDED ITS SHAPE, against Aevi's own first position. She argued the mechanic should be INVISIBLE
+// while alive, lest a devotion read as a stat line. Erik: "The game needs to show the mechanics somewhere. If Maren IS
+// holding your name and can use crafts for you, it should indicate that." ⚠️ HER CORRECTION IS THE ARGUMENT FOR THIS
+// SECTION: "hiding a mechanic does not protect it from becoming a stat line. It just hides it — and a player cannot
+// make a decision about a system they cannot see." The fact, its owner, and the door to the conversation.
+console.log("\n── §211 · death is a state, and the player can finally read which one ──");
+{
+  const D211 = await import("../engine/death.js");
+  const at = (e, day) => D211.deathStandingFor(e, { currentDay: day, rules: {} });
+
+  /* ---- 1 · ⛑ IT ANSWERS FOR THE LIVING, which is the whole point of a will declared in advance ---- */
+  const alive = at({ status: "active" }, 10);
+  check("§211: ⛑ a living character gets the ladder and no deadline — you read this BEFORE it is about you",
+    alive.dead === false && alive.daysLeft === null && alive.ladder.length === 4 && alive.ladder.every(r => !r.here));
+  // ⚠️ A SURGE IS A RUNG, NOT A SENTENCE. My first draft offered "a surge from rank 0", which is not a thing.
+  check("§211: …and the ladder says what reaches each rung, without offering a surge that cannot exist",
+    alive.ladder[0].reachedBy === "rank 1" && /rank 1 with a surge/.test(alive.ladder[1].reachedBy)
+    && alive.ladder[3].reachedBy === null, alive.ladder.map(r => r.reachedBy).join(" | "));
+
+  /* ---- 2 · the rungs, walked on the clock ---- */
+  const d = { status: "dead" }; D211.enterDeathState(d, { diedDay: 10, cause: "a fall on the stair" });
+  check("§211: the day you die you are at the threshold, with a day before you sink",
+    at(d, 10).depth === 0 && at(d, 10).depthName === "the threshold" && at(d, 10).daysLeft === 1);
+  check("§211: …two days on, the near dark, and the count is the one you can act inside",
+    at(d, 12).depth === 1 && at(d, 12).daysLeft === 28, `${at(d, 12).depthName} · ${at(d, 12).daysLeft}`);
+  // ⛔ THE DEEP DARK HAS NO DEADLINE ON TIME ALONE — printing a countdown there would claim a clock that is not running.
+  check("§211: ⛔ …and the deep dark reports NO countdown, because time alone does not sink you further",
+    at(d, 50).depth === 2 && at(d, 50).daysLeft === null);
+
+  /* ---- 3 · ⛑ A SLOW BUYS TIME, AND THE NUMBER SAYS SO IN DAYS A PLAYER CAN COUNT ---- */
+  // ⚠️ The spans are compared in SUNK-days (`sinkFactor` divides before the test), so a raw span would have told a
+  // slowed player they had LESS time than they do — and buying time is the entire purpose of Threnody's slow.
+  const slow = { status: "dead" }; D211.enterDeathState(slow, { diedDay: 10 }); D211.slowSink(slow, 2);
+  const s40 = at(slow, 50);
+  check("§211: ⛑ a slowed sink is still shallower after forty days, and the days left are calendar days",
+    s40.depth === 1 && s40.sinkFactor === 2 && s40.daysLeft === 20 && at(d, 50).depth === 2,
+    `slowed: ${s40.depthName} ${s40.daysLeft}d · unslowed: ${at(d, 50).depthName}`);
+
+  /* ---- 4 · ⛔ A HELD WAY HAS NO DEADLINE AT ALL — that is what holding MEANS ---- */
+  const held = { status: "dead" }; D211.enterDeathState(held, { diedDay: 10 }); D211.holdOpen(held, "maren", { willing: true });
+  const h60 = at(held, 60);
+  check("§211: ⛔ while someone holds the way open you do not sink, and no countdown is printed beside it",
+    h60.depth === 0 && h60.heldOpenBy === "maren" && h60.daysLeft === null && h60.daysDead === 50);
+  // ⚠️ CONSENT IS A FACT ABOUT THE DEAD, and `null` is "never asked" — a third answer, not a refusal. SNG-568 exists
+  // because the one person whose will it is is the one person who cannot state it.
+  check("§211: …and consent has three states, not two — asked-and-yes, asked-and-no, and never asked",
+    h60.willing === true && at(d, 12).willing === null);
+  const sealed = { status: "dead" }; D211.enterDeathState(sealed, { diedDay: 1, sealed: true });
+  check("§211: ⛔ the sealed rung reports itself as sealed and offers no rank that reaches it",
+    at(sealed, 5).sealed === true && at(sealed, 5).depth === 3 && at(sealed, 5).ladder[3].reachedBy === null);
+
+  /* ---- 5 · ⛑ AND IT REACHES THE PLAYER — the finding, closed ---- */
+  const A211 = rd("app.js");
+  check("§211: ⛑ `deathDepth` finally has a player-facing reader — the zero that named this ticket",
+    /DeathModel\.deathStandingFor\(character,/.test(A211));
+  check("§211: …and the panel names the person holding the way open, not just the fact",
+    /is holding the way open/.test(A211) && /is holding your name/.test(A211));
+  // ⛑ SNG-569's second half, and the sentence that keeps a stat from replacing a relationship.
+  check("§211: ⛑ …and opens the door to the conversation rather than offering a setting",
+    /That is a conversation to have with them, not a setting/.test(A211));
+  // ⛔ A REFUSAL IS HONOURED AND SAID. `willing: false` is the player's own word about their own ending.
+  check("§211: ⛔ a refusal to be brought back is shown as honoured, not as a flag",
+    /You have refused to be brought back\. That is yours to say and it is honoured/.test(A211));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

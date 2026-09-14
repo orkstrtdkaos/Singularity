@@ -665,7 +665,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `intensity` | 429 | `root`×429 | ✅ READ | `battle_turn.js`, `canon.js`, `craftmechanics.js` |
 | `plainly` | 429 | `root`×429 | ✅ READ | `gm.js`, `narration_voice.js`, `recovery_snapshots.js` |
 | `tree` | 429 | `root`×429 | ✅ READ | `backfill.js`, `braids.js`, `capabilities.js` |
-| `bounds` | 427 | `root`×427 | ✅ READ | `gm.js` |
+| `bounds` | 427 | `root`×427 | ✅ READ | `death.js`, `gm.js` |
 | `mechanic` | 422 | `root`×422 | ✅ READ | `battle_turn.js`, `braids.js`, `capabilities.js` |
 | `challengeTypes` | 414 | `root`×414 | ⚠️ CI-ONLY | _4 test/script only_ |
 | `energyCost` | 411 | `root`×411 | ✅ READ | `battle_turn.js`, `braids.js`, `capabilities.js` |

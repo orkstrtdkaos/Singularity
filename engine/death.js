@@ -49,6 +49,63 @@ export function deathDepth(entity, currentDay = null, rules = {}) {
 }
 
 export function isSealed(entity, currentDay, rules) { return deathDepth(entity, currentDay, rules) >= 3; }
+
+/** ⛔ SNG-566 (Aevi) — "THE ENGINE KNOWS EXACTLY WHERE YOU ARE AND HAS NO WAY TO SAY SO."
+ *
+ *  ⚑ MEASURED: `deathDepth` has ELEVEN readers across the engine and ZERO in `app.js`. Four depths, a world clock
+ *  that reaches the player, holds that stop it and slows that lengthen it — all correct, all wired, and none of it
+ *  sayable to the person it is happening to. ⛑ Aevi: "most of this is already built, and it is right." The missing
+ *  half was never the model; it was a surface.
+ *
+ *  ⛔ AND SNG-569 IS THE RULING THAT SHAPES IT. Aevi first argued this should be INVISIBLE while alive, lest a
+ *  devotion become a stat line. Erik: "The game needs to show the mechanics somewhere. If Maren IS holding your name
+ *  and can use crafts for you, it should indicate that. You can also have it indicate you should have the
+ *  conversation with her." ⚠️ HER OWN CORRECTION IS THE BEST ARGUMENT FOR THIS FUNCTION: "hiding a mechanic does not
+ *  protect it from becoming a stat line. It just hides it — and a player cannot make a decision about a system they
+ *  cannot see." So this returns the FACT and the fact's OWNER, and the surface says both.
+ *
+ *  ⚠️ PURE, AND IT ANSWERS FOR THE LIVING TOO — `{ dead: false }` with the ladder still described, because the whole
+ *  point of a will declared in advance (SNG-568) is that you read this BEFORE it is about you.
+ *  Returns { dead, depth, depthName, sealed, daysDead, daysHere, daysLeft, heldOpenBy, willing, sinkFactor, ladder }. */
+export function deathStandingFor(entity, { currentDay = null, rules = {} } = {}) {
+  const cfg = { ...DEFAULTS, ...(rules.death || {}) };
+  const ds = entity?.deathState || null;
+  const dead = entity?.status === "dead";
+  const depth = dead || ds ? deathDepth(entity, currentDay, rules) : 0;
+  const sinkFactor = Math.max(1, Number(ds?.sinkFactor) || 1);
+  const rawDays = (currentDay != null && ds?.diedDay != null) ? Math.max(0, currentDay - ds.diedDay) : 0;
+  // ⚠️ THE SPANS ARE IN SUNK-DAYS, NOT CALENDAR DAYS, because `sinkFactor` divides before the comparison. Reporting a
+  // calendar figure beside a slowed sink would tell a player they have less time than they do — and the whole reason
+  // Threnody's slow exists is that it BUYS time. Converted back so the number on the panel is days they can count.
+  const bounds = [cfg.thresholdDays, cfg.nearDarkDays, Infinity];
+  const sunk = rawDays / sinkFactor;
+  const edge = bounds[Math.min(2, depth)];
+  // ⛔ A HELD WAY HAS NO DEADLINE AT ALL — that is what holding MEANS, and printing a countdown beside it would be a
+  // message claiming a mechanism that is not running.
+  const daysLeft = (!dead || ds?.heldOpenBy || !Number.isFinite(edge)) ? null
+    : Math.max(0, Math.ceil((edge - sunk) * sinkFactor));
+
+  return {
+    dead, depth, depthName: DEATH_DEPTH_NAMES[depth], sealed: depth >= 3,
+    daysDead: dead ? Math.round(rawDays) : 0,
+    daysLeft,
+    heldOpenBy: ds?.heldOpenBy || null,
+    // ⚠️ `willing` IS A FACT ABOUT THE DEAD and `holdOpen` says so; null is "never asked", which is a third answer
+    // and not the same as a refusal. SNG-568 exists because the one person whose will it is cannot state it.
+    willing: ds?.willing ?? null,
+    sinkFactor,
+    cause: ds?.cause || null,
+    bodyStatus: ds?.bodyStatus || null,
+    // ⛑ THE LADDER ITSELF, always — a living player reading this is the point, not a side effect.
+    ladder: DEATH_DEPTH_NAMES.map((name, i) => ({
+      depth: i, name,
+      // ⚠️ A SURGE IS A RUNG, NOT A SENTENCE. `reachOf` gives surge = base + 1, so only depths 1 and 2 have a
+      // lower rank that a surge can lift; "a surge from rank 0" is not a thing anyone can do.
+      reachedBy: i >= 3 ? null : `rank ${i + 1}${i >= 1 ? ` — or rank ${i} with a surge` : ""}`,
+      here: i === depth && (dead || !!ds),
+    })),
+  };
+}
 /** Dead, but not sealed — a latent retrieval hook, not a void (§1: dead ≠ gone). */
 export function isRetrievable(entity, currentDay, rules) { return entity?.status === "dead" && !isSealed(entity, currentDay, rules); }
 

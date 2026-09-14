@@ -143,7 +143,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "1.9.510";
+const APP_VERSION = "1.9.512";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12180,6 +12180,45 @@ function renderCharacterScreen() {
         ${hs.length ? `<div class="hold-shelf">${hs.map(tile).join("")}</div>` : ""}
         ${offers.length ? `<p class="hint" style="margin-top:4px;color:var(--warn,#e0b25a)">${offers.length} assignment${offers.length === 1 ? "" : "s"} may describe a place you hold — review ${offers.length === 1 ? "it" : "them"}.</p>` : ""}
         <button class="opt" id="cs-goto-holdings" style="margin-top:6px">⌂ Holdings</button></div>`;
+    })()}
+    ${(() => {
+      // ⛔ SNG-566 (Aevi) — "THE ENGINE KNOWS EXACTLY WHERE YOU ARE AND HAS NO WAY TO SAY SO."
+      //
+      // ⚑ `deathDepth` had ELEVEN readers in the engine and ZERO here. Four depths, a world clock that reaches the
+      // player, holds that stop it and slows that lengthen it — all correct, all wired, none of it sayable to the
+      // person it is happening to. ⛑ Aevi: "most of this is already built, and it is right."
+      //
+      // ⛔ AND SNG-569 DECIDED THE SHAPE. She first argued this should be INVISIBLE while alive, lest a devotion read
+      // as a stat line. Erik: "The game needs to show the mechanics somewhere. If Maren IS holding your name and can
+      // use crafts for you, it should indicate that. You can also have it indicate you should have the conversation
+      // with her." ⚠️ HER OWN CORRECTION IS THE ARGUMENT: "hiding a mechanic does not protect it from becoming a stat
+      // line. It just hides it — and a player cannot make a decision about a system they cannot see."
+      // ⛑ So: the fact AND its owner, and the door to the conversation beside it.
+      const st = DeathModel.deathStandingFor(character, { currentDay: absoluteWorldDay(), rules: CONTENT.rules });
+      const rung = (r) => `<div class="codex-fact${r.here ? " mach-fired" : ""}"><strong>${esc(r.name)}</strong> — ${r.reachedBy ? esc(r.reachedBy) : "reached by nothing, at any rank"}${r.here ? " ← <strong>you are here</strong>" : ""}</div>`;
+      const held = st.heldOpenBy ? (character.npcRegistry?.[st.heldOpenBy]?.name || st.heldOpenBy) : null;
+      return `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">${st.dead ? "Where you are" : "If it goes badly"} <span class="hint" style="text-transform:none">— death is a state, not a terminus</span></h3>
+        ${st.dead
+          ? `<p class="hint" style="margin:0 0 6px">You are at <strong>${esc(st.depthName)}</strong>${st.cause ? `, ${esc(st.cause)}` : ""} — ${st.daysDead} day${st.daysDead === 1 ? "" : "s"} gone.${
+              st.sealed ? " <strong>Sealed.</strong> No rank reaches this."
+              : held ? ` <strong>${esc(held)} is holding the way open.</strong> While they hold it you do not sink at all.`
+              : st.daysLeft != null ? ` <strong>${st.daysLeft} day${st.daysLeft === 1 ? "" : "s"}</strong> before you sink further.`
+              : " You do not sink further from here on time alone."}${
+              st.sinkFactor > 1 ? ` Your sinking is slowed ${st.sinkFactor}× — every span is that much longer.` : ""}</p>`
+          : `<p class="hint" style="margin:0 0 6px">Dying is a <strong>state</strong> here, and it has rungs. Someone can come for you — how deep they can reach is set by their rank, and how long they have is set by the clock.${
+              held ? ` <strong>${esc(held)} is holding your name.</strong>` : ""}</p>`}
+        ${st.ladder.map(rung).join("")}
+        ${(() => {
+          // ⛑ SNG-569's second half: OPEN THE DOOR TO THE CONVERSATION. The mechanic named, and the person named
+          // beside it — because the stat was never the problem; the stat INSTEAD OF the relationship would have been.
+          const closest = Object.values(character.npcRegistry || {})
+            .filter(n => n && n.status === "active" && (n.relationship ?? 0) >= 5)
+            .sort((a, b) => (b.relationship ?? 0) - (a.relationship ?? 0)).slice(0, 3);
+          if (st.dead || !closest.length) return "";
+          return `<p class="hint" style="margin:6px 0 0">${esc(closest.map(n => n.name).join(", "))} — close enough that it would be them. <strong>That is a conversation to have with them, not a setting.</strong></p>`;
+        })()}
+        ${st.willing === false ? `<p class="hint" style="margin:6px 0 0;color:var(--warn,#e0b25a)">You have refused to be brought back. That is yours to say and it is honoured.</p>` : ""}
+      </div>`;
     })()}
     ${Object.values(b).some(v => v) ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Story</h3>
       ${["hometown", "residence", "livelihood", "hobbies", "motivation"].filter(k => b[k]).map(k => `<div class="codex-fact"><strong style="text-transform:capitalize">${k}:</strong> ${esc(b[k])}</div>`).join("")}

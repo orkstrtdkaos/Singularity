@@ -42,7 +42,21 @@ the world was armed identically, and *"a weapon of their trade"* is a placeholde
 ⛑ Authoring real kit now (76 of 146). **Same shape as the mint boilerplate and SNG-216's repair marker —
 three instances in one day, which is why SNG-582 is item 1.**
 
-### 3 · A location image is drawn from philosophy, and `appearance` has no reader
+### 3 · ⚠️ `gearWords` is singular-only, and a `purse` has no reader
+`npcStanding.gearWords` · measured while authoring gear
+
+⛔ **THE MATCHER TOKENISES AND THE WORD LIST IS SINGULAR, SO A PLURAL SILENTLY CARRIES NOTHING.** `a glaive`
+arms a person; **`limbs like glaives` does not.** Same for `mauls`, `staffs`, and any compound: **`broadsword`
+never matches `sword`**, `waystaff` never matches `staff`. ⚠️ I hit all four while authoring and worked
+around them by rewording — **an author who does not check the parse will not notice**, and the failure is
+silent: the line renders as prose and arms nobody.
+
+⬜ **Cheapest fix is a suffix-tolerant match plus a substring check on the compound weapons.**
+
+⛑ **AND I HAVE AUTHORED `purse` ON 69 NPCs** — `{"crystal": n}`, scaled to standing — **on Erik's ask for
+money amounts. Nothing reads it.** It sits beside `gear` and wants the same treatment.
+
+### 4 · A location image is drawn from philosophy, and `appearance` has no reader
 `engine/art.js:684` · measured 2026-09-14
 
 ```js
@@ -64,7 +78,7 @@ sentence is what the image generator received for every one of them**, so thirte
 drawn from one string. All 13 now carry a real look. ⬜ Worth a mint-time check on your side: a place minted
 with no seed should probably not get a seed that describes nothing. ⛔ **THE ASK IS ONE LINE AND IT IS NOW THE ONLY THING BETWEEN THIS AND WORKING: prefer `appearance` over `descriptionSeed` in that branch**, the way the NPC path already does. ⚠️ **All 138 are authored and every one of them is dead until that line lands.**
 
-### 4 · A state can only ever be a place
+### 5 · A state can only ever be a place
 `engine/quests.js` · SNG-577 · `po/HANDOFF_aevi_SNG-577_all_deeds_and_twelve_want_a_state.md`
 
 `kind: "state"` routes everything through `recordPlaceChange` whatever the subject is, so a state about a
@@ -75,7 +89,7 @@ whether the first waygate since the Transition EXISTS, whether Silas's made thin
 ⬜ **And two of those twelve need a record for a MADE THING**, which is neither place nor person. `world/canon/`
 already holds `gen-stillwater-s-trouble` beside the people, so the store can carry it; nothing mints one.
 
-### 5 · The Fellowship matrix reads the one field nobody fills in
+### 6 · The Fellowship matrix reads the one field nobody fills in
 `engine/combatants.js` · from Erik's Mara Wells question
 
 `contributionsOf` reads `record.assistTags`. ⛔ **Across every save: 128 registry people, ZERO have
@@ -91,7 +105,7 @@ says she has none.**
 under-reachable even when tags exist. ⬜ And 141 of 368 `skillsObserved` entries are still truncated mid-word
 from the pre-SNG-575 60-char cut.
 
-### 6 · `certify_counts` and private keys — **your call stands, I withdrew the sweep**
+### 7 · `certify_counts` and private keys — **your call stands, I withdrew the sweep**
 ⛑ You were right that a pattern sweep would fire 967 times. **`CLAIMS` by name is the correct shape.** ⬜ I
 owe you a list of which private keys carry claims worth certifying; it is on my queue, not yours.
 

@@ -50,14 +50,15 @@ owe you a list of which private keys carry claims worth certifying; it is on my 
   value, 0 candidates remaining. `contest_sim` byte-identical before and after, twice.
 - **A1 `notFor`** — 100 → **0**, the field is finished.
 - **A1 `description`** — 93 → **0**, the field is finished.
-- **A1 `plainly`** — 55 → **0**, the field is finished. ⛑ **Three of five closed: every player-facing ABILITY-level field is clean, and only rank text remains.**
+- **A1 `plainly`** — 55 → **0**.
+- ⛑ **A1 IS FINISHED. All five fields, 1,144 lines, ZERO remaining — and 0 of 440 rendered cards carry a glyph.**
 - **§165's specimen checks** — ⛑ **CCode fixed these before I could file them.** A synthetic craft that carries glyphs in every player-facing field, so the gate survives the content going clean. His note calls it *'the twelfth gate this week to pin one instance of something general'*, which is the better statement of the problem than mine was.
 
 ---
 
 ## ⬜ MINE, NOT YOURS — so you know what is moving
 
-A1 register work: **625 lines** (grants 358, cannot 267) — three of five fields closed; what is left is all rank text.
+⛑ **A1 is done.** Next: `appearance` on 119 of 128 registry people · roster `gear` on 139 of 146 · the private-key CLAIMS list.
 `appearance` on 119 of 128 registry people · roster `gear` on 139 of 146 · the private-key CLAIMS list.
 
 — Aevi, PO

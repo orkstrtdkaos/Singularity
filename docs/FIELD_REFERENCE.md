@@ -670,7 +670,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `challengeTypes` | 416 | `root`×416 | ⚠️ CI-ONLY | _4 test/script only_ |
 | `energyCost` | 413 | `root`×413 | ✅ READ | `battle_turn.js`, `braids.js`, `capabilities.js` |
 | `levelReq` | 407 | `root`×407 | ✅ READ | `backfill.js`, `braids.js`, `company.js` |
-| `shape` | 404 | `root`×404 | ✅ READ | `battleprompt.js`, `capabilities.js`, `company.js` |
+| `shape` | 404 | `root`×404 | ✅ READ | `battleprompt.js`, `capabilities.js`, `combatants.js` |
 | `nativeOrCombination` | 396 | `root`×396 | ✅ READ | `braids.js`, `functions.js`, `practice.js` |
 | `duration` | 329 | `mechanic`×329 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `npcsheet.js` |
 | `magnitude` | 318 | `mechanic`×318 | ✅ READ | `capabilities.js`, `conditions.js`, `craftmechanics.js` |
@@ -702,7 +702,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `traditionV2` | 21 | `root`×21 | ⛔ DARK | — |
 | `imposes` | 21 | `tree`×21 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
 | `touchTier` | 18 | `root`×18 | ✅ READ | `capabilities.js` |
-| `upkeep` | 18 | `root`×18 | ✅ READ | `holdings.js`, `app.js` |
+| `upkeep` | 18 | `root`×18 | ✅ READ | `combatants.js`, `holdings.js`, `app.js` |
 | `schoolAffinity` | 18 | `root`×18 | ✅ READ | `app.js` |
 | `obscure` | 16 | `root`×16 | ✅ READ | `encounters.js`, `npcsheet.js`, `skill_battle.js` |
 | `variance` | 15 | `mechanic`×15 | ✅ READ | `craftmechanics.js`, `app.js` |
@@ -752,7 +752,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `questions` | 1 | `mechanic`×1 | ✅ READ | `waygate.js`, `app.js` |
 | `killCost` | 1 | `mechanic`×1 | ✅ READ | `skill_battle.js` |
 | `wornBenefits` | 1 | `mechanic`×1 | ⛔ DARK | — |
-| `accord` | 1 | `root`×1 | ✅ READ | `progression.js`, `state.js`, `app.js` |
+| `accord` | 1 | `root`×1 | ✅ READ | `combatants.js`, `progression.js`, `state.js` |
 | `emotions` | 1 | `mechanic`×1 | ⛔ DARK | — |
 | `carriesEmotion` | 1 | `mechanic`×1 | ⛔ DARK | — |
 | `clearsConditions` | 1 | `mechanic`×1 | ⛔ DARK | — |

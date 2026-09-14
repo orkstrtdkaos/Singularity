@@ -9,7 +9,8 @@
 // what MOVED — never authored beside it. Pure: no DOM, no fetch, no clock (the caller passes the count).
 
 import { delegationCapacity, serviceStates } from "./ladder.js";
-import { smartClamp } from "./namematch.js"; // SNG-152: model text clamps on a word boundary
+import { smartClamp } from "./namematch.js";   // SNG-152: model text clamps on a word boundary
+import { familiesFromEvidence } from "./combatants.js";   // SNG-541c: what someone is good for, read from the GM's own prose
 const slugCharge = s => String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "").slice(0, 40);
 
 export function ensureAssignments(worldState) {
@@ -156,13 +157,19 @@ export const MISSION_KIND_IDS = Object.keys(MISSION_KINDS);
 
 /** ⛑ THE FAMILIES A PERSON ACTUALLY CARRIES, read off the same `does` the roster row prints. Accepts a
  *  contingent, a roster row or a bare list, because all three reach this from different surfaces. PURE. */
-export function familiesOf(who) {
+export function familiesOf(who, { familySignals = null } = {}) {
   const raw = Array.isArray(who) ? who
     : Array.isArray(who?.does) ? who.does
     : Array.isArray(who?.families) ? who.families
     : typeof who?.does === "string" ? String(who.does).split(/[\/,\s]+/)
     : [];
-  return [...new Set(raw.map(f => String(f || "").trim().toUpperCase()).filter(Boolean))];
+  const out = new Set(raw.map(f => String(f || "").trim().toUpperCase()).filter(Boolean));
+  // ⛔ SNG-541c — AND WHAT THE GM'S OWN PROSE SAYS THEY DO. Aevi measured that ZERO of 128 registry people
+  // carry `assistTags`, so a hand-authored `does` was the only thing this ever saw — and Erik caught the result
+  // in one sentence: "Mara Wells is a town leader, so I'm certain she has the ability to treat with others."
+  // ⚠️ ADDITIVE ONLY. A family found in prose is added; nothing authored is ever removed.
+  for (const f of familiesFromEvidence(who, { familySignals })) out.add(f);
+  return [...out];
 }
 
 /** ⛔ WHO MAY BE SENT TO THIS, and WHY NOT when they may not.

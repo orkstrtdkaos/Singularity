@@ -15351,6 +15351,79 @@ console.log("\n── §225 · the errand you can actually give ──");
     /out: \$\{esc\(k \? k\.verb : "working"\)\}/.test(A225));
 }
 
+
+// ⛔ SNG-541c — ERIK, READING §224's OWN MATRIX: "Mara Wells is a town leader, so I'm certain she has the
+// ability to treat with others." ⛑ HE IS RIGHT, AND AEVI FOUND THE TRANSLATION GAP UNDER IT.
+//
+// ⚑ MEASURED ACROSS EVERY SAVE: 128 registry people and ZERO of them carry `assistTags` — only the nine
+// AUTHORED companions do. So `contributionsOf` answered `["HARM"]` FOR ALL 128, and the matrix I showed Erik
+// was reading a hand-authored `contingent.does` rather than anything about the people.
+//
+// ⚠️ AND THE EVIDENCE WAS SITTING RIGHT THERE: 87 of the 128 carry `skillsObserved` — 368 entries of the GM's
+// own prose about what it watched them DO — and nothing turned any of it into a family. Mara Wells, "Millbrook
+// civic manager", "calm authority", "information economy", read as a person whose contribution is violence.
+console.log("\n── §226 · what the GM already wrote down about who these people are ──");
+{
+  const CB226 = await import("../engine/combatants.js");
+  const AS226 = await import("../engine/assignments.js");
+
+  /* ---- 1 · ⛑ THE PROSE IS READ, AND ERIK'S OWN CASE IS THE FIXTURE ---- */
+  const mara = { name: "Mara Wells", role: "Millbrook's supply-store operator — now the Hub committee's fastest messenger",
+    skillsObserved: ["reading a political situation plainly and naming it", "calm authority"] };
+  const fams = CB226.familiesFromEvidence(mara);
+  check("§226: ⛑ a town leader reads as INFLUENCE, which is the whole of Erik's correction",
+    fams.includes("INFLUENCE"), fams.join("/"));
+  check("§226: ⛔ …and she may now be sent to treat with someone, which she could not be an hour ago",
+    AS226.canSendOn(mara, "treat").ok === true && AS226.canSendOn(mara, "treat").fit === "apt");
+  // ⛑ AND IT IS ADDITIVE ONLY. Erik, on the neighbouring ruling: "let's not put rules in place that stop good
+  // play." A family found in prose is ADDED; nothing authored is ever taken away.
+  const authored = { does: ["HARM"], role: "Millbrook council" };
+  check("§226: ⛑ …and an authored family is never removed by what the prose says",
+    AS226.familiesOf(authored).includes("HARM") && AS226.familiesOf(authored).includes("INFLUENCE"));
+
+  /* ---- 2 · ⛔ A STEM MATCHES AT A WORD BOUNDARY, NEVER INSIDE A WORD ---- */
+  // ⚑ FOUND BY TRACING WHY CALVAR READ AS A DIPLOMAT: the stem "mediat" matched inside "moving IMMEDIATEly to
+  // planning". ⚠️ A bare `includes` over prose finds a stem inside an unrelated word forever, and the result
+  // looks like a JUDGEMENT rather than an accident — which is how a heuristic earns distrust it cannot shake.
+  check("§226: ⛔ \"moving immediately\" is not a mediator",
+    CB226.familiesFromEvidence({ role: "moving immediately to planning" }).length === 0);
+  check("§226: ⛑ …and an actual mediator still is",
+    CB226.familiesFromEvidence({ role: "a mediator of disputes" }).includes("INFLUENCE"));
+  // ⚠️ AND A NEGATION IS NOT EVIDENCE. "charm" matched Pell on "reacts to competence over CHARM" — a sentence
+  // saying charm does NOT work on her. A stem that reads a negation as proof is worse than one that finds
+  // nothing, so that stem is gone rather than special-cased.
+  check("§226: ⚠️ …and a sentence saying charm does NOT work on someone is not evidence that it does",
+    CB226.familiesFromEvidence({ description: "reacts to competence over charm" }).length === 0);
+  // ⛑ AND THE VOCABULARY OWES THE BOUNDARY RULE THE FORMS PEOPLE ACTUALLY WRITE: "smith" does not start a word
+  // inside "blacksmith", so the rule is right and the list carries the compound.
+  check("§226: ⛑ …and a blacksmith still shapes, because the list carries the word people write",
+    CB226.familiesFromEvidence({ role: "Blacksmith" }).includes("SHAPE"));
+
+  /* ---- 3 · ⚠️ AND THE VOCABULARY IS TUNED AGAINST THE CORPUS, NOT GUESSED ---- */
+  // ⛔ MY FIRST DRAFT PUT KNOW ON 73 OF 128 because "read", "watch", "notice" and "sense" are everywhere in
+  // prose. ⚠️ A FAMILY THAT MATCHES EVERYONE RANKS NOBODY — the eligibility rule stops meaning anything, which
+  // is the opposite of what it is for. Tightened to specific stems it sits near a quarter of the corpus.
+  const generic = ["read", "watch", "notice", "sense", "see"];
+  const inKnow = (CB226.DEFAULT_FAMILY_SIGNALS.KNOW || []).map(w => String(w).toLowerCase());
+  check("§226: ⚠️ the broadest family does not carry the words that appear in every sentence",
+    generic.every(w => !inKnow.includes(w)), `KNOW has ${inKnow.length} stems`);
+  // ⛑ AND "NOTHING" REMAINS A REAL ANSWER. A person the GM has told us nothing about is not a person who is
+  // good at nothing — and a translator that always finds something would be inventing people.
+  check("§226: ⛑ …and a record with no prose derives nothing at all, which is the honest answer",
+    CB226.familiesFromEvidence({ name: "A stranger" }).length === 0);
+
+  /* ---- 4 · ⛔ AND COMBAT IS DELIBERATELY UNTOUCHED ---- */
+  // ⚠️ `contingentsFromPeople` uses `contributionsOf` to build FIGHTS. Turning the prose on THERE would change
+  // the composition of every contingent in the game — 103 of 128 people would stop being anonymous bodies and
+  // become named contributors. ⛑ That is very likely CORRECT, and it is a balance change to combat, which is
+  // Erik's to rule and not mine to ship as a side effect of an errand fix.
+  const fighter = { role: "Millbrook council", assistTags: [] };
+  check("§226: ⛔ the fight still sees only what it always saw, until Erik rules otherwise",
+    !CB226.contributionsOf(fighter).includes("INFLUENCE"));
+  check("§226: ⛑ …and the same one function answers the other question when it is asked to",
+    CB226.contributionsOf(fighter, { evidence: true }).includes("INFLUENCE"));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

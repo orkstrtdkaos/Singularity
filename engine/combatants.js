@@ -51,8 +51,86 @@ export const DEFAULT_TAG_FAMILIES = {
   MOVE: ["navigate-wilds", "carry"],
 };
 
+/** ⛔ SNG-541c (Aevi, on Erik: "Mara Wells is a town leader, so I'm certain she has the ability to treat with
+ *  others") — THE EVIDENCE WAS SITTING RIGHT THERE AND NOTHING TRANSLATED IT.
+ *
+ *  ⚑ MEASURED ACROSS EVERY SAVE: 128 registry people, and ZERO of them carry `assistTags` — only the nine
+ *  authored companions do. So `contributionsOf` answered HARM for all 128, and Mara Wells, "Millbrook civic
+ *  manager", "calm authority", "information economy — shares just enough to create interest", read as a person
+ *  whose contribution is violence. ⚠️ 87 of the 128 carry `skillsObserved` — 368 entries of the GM's own prose
+ *  about what it watched them DO — and no reader turned any of it into a family.
+ *
+ *  ⛑ SO THE PROSE IS READ. `role`, `description` and `skillsObserved` are matched against a stem vocabulary,
+ *  and it is ADDITIVE ONLY: a family can be found this way, never taken away. (Erik, on a neighbouring ruling:
+ *  "let's not put rules in place that stop good play.")
+ *
+ *  ⚠️ AND THE VOCABULARY IS TUNED AGAINST THE CORPUS, NOT GUESSED. My first draft put KNOW on 73 of 128
+ *  because "read", "watch", "notice" and "sense" are everywhere in prose — a family that matches everyone ranks
+ *  nobody. Tightened to specific stems it sits at 30, most people carry one or two families, and 25 still derive
+ *  NOTHING, which is the honest answer for a person the GM has told us nothing about.
+ *
+ *  ⛔ IT IS A DEFAULT, NOT A RULING: pass `familySignals` from content to replace it entirely, the same way
+ *  `tagFamilies` already overrides the tag map. The stems are a starting corpus and they are Aevi's to own. */
+export const DEFAULT_FAMILY_SIGNALS = {
+  INFLUENCE: ["committee", "council", "civic", "politic", "negotiat", "broker", "terms", "accord", "diplomat",
+    "persuad", "speech", "speak", "authority", "leader", "elder", "steward", "envoy", "delegate", "mediat",
+    // ⚠️ "charm" IS GONE: it matched Pell on "reacts to competence over CHARM" — a sentence saying charm does
+    // NOT work on her. A stem that reads a negation as evidence is worse than a stem that finds nothing.
+    "bargain", "command", "rally", "vouch", "intimidat", "keeper of difficult", "manager"],
+  KNOW: ["analy", "study", "investigat", "scout", "track", "lore", "recall", "scholar", "archiv",
+    "records", "accountant", "pattern recognition", "synthes", "reads the", "reading a", "deathsense"],
+  // ⚠️ THE COMPOUNDS ARE LISTED BECAUSE THE BOUNDARY RULE CORRECTLY MISSES THEM: "smith" does not start a
+  // word inside "blacksmith". The rule is right and the vocabulary owes it the forms people actually write.
+  SHAPE: ["smith", "blacksmith", "goldsmith", "forge", "craft", "build", "make", "repair", "engineer",
+    "mason", "carpent", "weav", "filtration", "construct", "fabricat", "shape", "wright", "shipwright"],
+  RESTORE: ["heal", "mend", "tend", "physician", "medic", "comfort", "nurse", "restor", "cure"],
+  PROTECT: ["guard", "warden", "shield", "protect", "sentry", "watchman", "defend", "escort"],
+  MOVE: ["messenger", "runner", "courier", "carry", "haul", "travel", "navigat", "guide", "relay", "ferry", "ride"],
+  SUSTAIN: ["supply", "supplies", "logistic", "provision", "quartermaster", "store", "stock", "victual",
+    "farm", "mill", "granary", "feed", "water", "sustain", "upkeep", "ditch", "irrigat"],
+  HARM: ["fight", "strike", "duel", "soldier", "warrior", "blade", "spear", "sword", "hunt", "kill", "war"],
+};
+
+/** ⛑ THE FAMILIES THE GM'S OWN PROSE ARGUES FOR. Pure, additive, and EMPTY IS A REAL ANSWER — a person nobody
+ *  has watched do anything is not a person who is good at nothing, they are a person we have not seen yet. */
+/** ⛔ A STEM MATCHES AT A WORD BOUNDARY, NEVER ANYWHERE INSIDE A WORD. Found by tracing why Calvar read as a
+ *  diplomat: the stem "mediat" matched inside "moving IMMEDIATEly to planning".
+ *
+ *  ⚠️ A BARE `includes` OVER PROSE WILL FIND A STEM IN THE MIDDLE OF AN UNRELATED WORD FOREVER, and the
+ *  result looks like a judgement rather than an accident — which is exactly how a heuristic earns distrust it
+ *  cannot shake. ⛑ Written without a single escape on purpose: this file has eaten `\b` twice in patching, and
+ *  an escaped boundary that silently becomes a BACKSPACE byte is a bug that passes every check but the one
+ *  that matters. Walking the indices needs no escapes and cannot be mangled. */
+function hasStem(text, stem) {
+  const w = String(stem || "").toLowerCase().trim();
+  if (!w) return false;
+  const WORDY = /[a-z0-9]/;
+  for (let i = text.indexOf(w); i !== -1; i = text.indexOf(w, i + 1)) {
+    if (i === 0 || !WORDY.test(text[i - 1])) return true;
+  }
+  return false;
+}
+
+export function familiesFromEvidence(record, { familySignals = null } = {}) {
+  const map = familySignals || DEFAULT_FAMILY_SIGNALS;
+  const bits = [record?.role, record?.description, ...(Array.isArray(record?.skillsObserved) ? record.skillsObserved : [])]
+    .filter(Boolean).join(" ").toLowerCase();
+  if (!bits) return [];
+  const out = [];
+  for (const [family, stems] of Object.entries(map)) {
+    if ((stems || []).some(w => hasStem(bits, w))) out.push(family);
+  }
+  return out;
+}
+
 /** The families an entity can act in. ⚠️ EMPTY IS A REAL ANSWER — an entity with no tags contributes
- *  nothing mechanical yet, which is a prompt to author rather than a reason to exclude it. */
+ *  nothing mechanical yet, which is a prompt to author rather than a reason to exclude it.
+ *
+ *  ⛔ `evidence: true` ALSO READS THE PROSE (SNG-541c). ⚠️ IT IS OFF BY DEFAULT ON PURPOSE, and that is a
+ *  restraint rather than an oversight: `contingentsFromPeople` uses this to build FIGHTS, and turning it on
+ *  there would change the composition of every contingent in the game — 103 of 128 people would stop being
+ *  anonymous bodies and become named contributors. That is very likely CORRECT and it is a balance change to
+ *  combat, which is Erik's to rule and not mine to ship as a side effect of an errand fix. */
 /** ⛔ CCODE-265 — DOES THE WORLD SATISFY A NAMED EXCEPTION? Returns the override that lifts a flat
  *  `canStrike: false`, or null.
  *
@@ -78,13 +156,16 @@ export function liftedBy(record, { stageOf = null } = {}) {
   return null;
 }
 
-export function contributionsOf(record, { tagFamilies = null, fightingRoles = null, stageOf = null } = {}) {
+export function contributionsOf(record, { tagFamilies = null, fightingRoles = null, stageOf = null, evidence = false, familySignals = null } = {}) {
   const map = tagFamilies || DEFAULT_TAG_FAMILIES;
   const tags = new Set((record?.assistTags || []).map(t => String(t).toLowerCase()));
   const out = [];
   for (const [family, list] of Object.entries(map)) {
     if ((list || []).some(t => tags.has(String(t).toLowerCase()))) out.push(family);
   }
+  // ⛑ AND THE PROSE, WHERE THE CALLER ASKS FOR IT. Additive: a family the tags already found is not added
+  // twice, and nothing the tags found is ever removed.
+  if (evidence) for (const f of familiesFromEvidence(record, { familySignals })) if (!out.includes(f)) out.push(f);
   // ⛔ WHO BRINGS HARM — AND ERIK CORRECTED ME TWICE HERE, IN THE SAME DIRECTION BOTH TIMES.
   //
   // First I asked whether a companion could fight at all. Then I gated HARM behind a FIGHTING OCCUPATION,

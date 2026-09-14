@@ -13887,6 +13887,80 @@ console.log("\n── §208 · the player reads the quest through the same door 
   }
 }
 
+// ⛔ SNG-566 (Erik: "we need moving holds/enterprises as well") — AND THE MEASUREMENT SAID: BUILT, WHOLE, AND NEVER USED.
+//
+// ⚑ I ASSUMED IT WAS MISSING AND STARTED BUILDING A PLAYER CONTROL. It already exists, and it is better than the one I
+// was writing: `renderHoldingsTab` has a "Sail her / Put out" control that runs `canSail` PER DESTINATION, disables the
+// unreachable ones, shows the days at her speed and the refusal inline; the handler says the refusal in the fiction's
+// voice and advances the clock. ⛔ I HAD WRITTEN A SECOND, WORSE COPY — bound to the same selector, so the real one
+// would have overwritten mine anyway — while writing a gate that asserts "one function, two doors". It is reverted.
+//
+// ⚠️ AND I GOT A FACT WRONG IN THE CONTRACT I ADDED: I told the GM to emit `"hauled"`, which is not a carriage kind, so
+// `carriageOf` would have dropped it silently. THE GATE BELOW IS THE ONE THAT WOULD HAVE CAUGHT ME.
+//
+// ⛑ WHAT IS ACTUALLY TRUE: every piece is built — engine, op, applier, player control — and NOT ONE HOLD IN PLAY HAS
+// EVER BEEN GIVEN A CARRIAGE. `holdingOps` is one of the fifteen ops that has never fired in 369 turns, and the
+// contract mentioned `carriage` exactly once, inside the enum, with no sentence saying when to reach for it. That
+// sentence is the whole of this ticket.
+console.log("\n── §209 · a hold that can move: built, whole, and never once used ──");
+{
+  const CR209 = await import("../engine/carriage.js");
+  const A209 = rd("app.js");
+  const G209 = rd("engine/gm.js");
+
+  /* ---- 1 · the engine's half, which was never the problem ---- */
+  const moored = { id: "h1", name: "The Fell Pell", locationId: "millbrook" };
+  const willed = { id: "h3", name: "The Ent-Borne", locationId: "millbrook", carriage: { moves: "willed", bearerId: "corvane" } };
+  check("§209: a hold with no carriage does not move, and one with a real carriage kind does",
+    !CR209.carriageOf(moored) && CR209.carriageOf(willed)?.moves === "willed");
+  // ⛔ AN INVALID KIND IS DROPPED SILENTLY, which is exactly why the contract must name the real ones — I wrote
+  // "hauled" into it an hour ago and nothing would have told me.
+  check("§209: ⛔ a carriage naming a kind the engine does not have is no carriage at all",
+    CR209.carriageOf({ carriage: { moves: "hauled" } }) === null);
+
+  /* ---- 2 · ⛑ THE GATE THAT WOULD HAVE CAUGHT MY ERROR: the contract's kinds ARE the engine's enum ---- */
+  // ⚠️ DERIVED FROM THE ENUM, NEVER RE-TYPED. A hand-kept list here would drift from `CARRIAGE_KINDS` the first time
+  // somebody adds one — the stored-copy-of-a-derived-value failure, in a gate about that failure.
+  const blk = G209.slice(G209.indexOf("AND A HOLD CAN MOVE"), G209.indexOf('"holdingOps": WHAT YOU HOLD'));
+  check("§209: ⛑ every carriage kind the engine accepts is named in the contract",
+    CR209.CARRIAGE_KINDS.every(k => blk.includes(`"${k}"`)),
+    CR209.CARRIAGE_KINDS.filter(k => !blk.includes(`"${k}"`)).join(", ") || "all named");
+  // ⚠️ THE CAPTURE GROUP, NOT A SLICE. My first form used `.match(/g)` and trimmed the delimiters by index, which left
+  // the closing quote on every token and reported all five valid kinds as invalid — a detector wrong in the safe
+  // direction, which is still wrong, and would have cried wolf at the next person to read it.
+  const quoted = [...blk.matchAll(/"(\w+)" \(/g)].map(m => m[1]);
+  check("§209: ⛔ …and the contract names no kind the engine would drop",
+    quoted.length >= 5 && quoted.every(k => CR209.CARRIAGE_KINDS.includes(k)),
+    quoted.filter(k => !CR209.CARRIAGE_KINDS.includes(k)).join(", ") || `checked ${quoted.length}, none invented`);
+
+  /* ---- 3 · ⛔ ONE PLAYER DOOR, NOT TWO ---- */
+  // The duplicate I wrote bound the same selector, so the later handler silently won and mine was dead code that
+  // still looked like a feature. ⚠️ Counted rather than described, because "there is one" is the claim.
+  check("§209: ⛔ there is exactly ONE sail control and ONE handler for it",
+    (A209.match(/data-hold-sail="/g) || []).length === 1 && (A209.match(/querySelectorAll\("\[data-hold-sail\]"\)/g) || []).length === 1);
+  check("§209: ⛑ and it offers each destination with its days and its refusal, rather than a bare list",
+    /Sail her/.test(A209) && /canSail\(character, h, id,/.test(A209) && /g\.ok \? "" : " disabled"/.test(A209));
+  // ⛔ AND BOTH DOORS GO THROUGH `sailHolding` — the player's button and the GM's op — so the bearer's willingness and
+  // the route length are the ones already proven, never a second opinion beside them.
+  check("§209: ⛔ the player's control and the GM's op both apply through `sailHolding`",
+    (A209.match(/sailHolding\(character, h, to,/g) || []).length === 2);
+
+  /* ---- 4 · ⛑ THE ONE THING THAT WAS ACTUALLY MISSING ---- */
+  check("§209: ⛑ the contract now says WHEN a hold gets a carriage, where it only had an enum entry",
+    /AND A HOLD CAN MOVE/.test(G209) && /hull bought at a yard/.test(G209));
+  // ⚠️ AND IT CARRIES ITS OWN MEASUREMENT, the same shape as SNG-562's deed block: a directive that says "use this op"
+  // is a reminder; one that says "you have never emitted it and the control has never appeared" is an occasion.
+  check("§209: …and states the measurement rather than asserting a rule",
+    /NOT ONE HOLD IN PLAY HAS EVER BEEN GIVEN A CARRIAGE/.test(G209));
+  // ⛔ THE BEARER IS NOT PROPERTY, or the GM will narrate ownership of a living thing.
+  check("§209: ⛔ …and says a willed or living bearer carries by standing, not by being owned",
+    /IS NOT PROPERTY/.test(blk) && /narrate the asking, not the owning/.test(blk));
+  // ⛑ AND IT TELLS THE GM NOT TO SAIL IT FOR HIM. Where an enterprise lives is a player decision and there is already
+  // a panel for it; the op is for when the fiction itself moves the thing.
+  check("§209: ⛑ …and leaves the DEPARTURE to the player, whose panel already does it",
+    /the PLAYER can put out from their own holdings panel/.test(blk));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

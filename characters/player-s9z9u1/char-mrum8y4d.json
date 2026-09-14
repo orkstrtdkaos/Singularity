@@ -105,7 +105,7 @@
   "maxHealth": 68,
   "health": 68,
   "maxEnergy": 146,
-  "energy": 69,
+  "energy": 65,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -173,6 +173,20 @@
       "spread": [],
       "day": 3,
       "worldDay": 76
+    },
+    {
+      "at": "2026-09-14T23:08:55.342Z",
+      "locationId": "the_crossing",
+      "communityId": "the_crossing",
+      "description": "Bound a Churn-Revel's orchestrated chaos with a true bargain and drove them to yield rather than break the Null Stone—held the center against deliberate disorder.",
+      "tags": [
+        "valor",
+        "craft"
+      ],
+      "weight": 2,
+      "spread": [],
+      "day": 3,
+      "worldDay": 76
     }
   ],
   "relationships": {},
@@ -193,274 +207,11 @@
     "At the braided confluence in the Disputed Zone, a hired stranger came at Loki with a fabricated charge — that Loki had pulled something sealed loose from the Deep and was carrying it out. The name behind it: a man in the lower Annex, who paid in coin. Veln Ashpause watched from the brush without surprise. The question is answered; the person who set it in motion is not yet named.",
     "In the dry storage alcove of the Half-Cathedral's eastern tower, deep in early-spring night, Loki and Vessin Tallow-bark came to rest — she named what she wanted and had it, and afterward lay quiet in the candlelight and said the night was worth not knowing what morning brings.",
     "Loki and Vessin slipped out of the alcove in the grey dawn and crossed the empty nave before the scaffold crew filled the landing — stepping into the yard with the Half-Cathedral at their backs and the man with the crooked jaw still the open thread between them.",
-    "Shared broth and thanks with a road-warden who carries word of the water-crisis moving downhill faster than any official channel. Exchanged names and parted on the spinward road, heading toward the Waygate Path."
+    "Shared broth and thanks with a road-warden who carries word of the water-crisis moving downhill faster than any official channel. Exchanged names and parted on the spinward road, heading toward the Waygate Path.",
+    "At the Hub crossing, Loki confronted a Churn-Revel sent to break the Null Stone's sealed seam. Through misdirection and bargaining, Loki bound the orchestrator's certainty and drove them to yield—the Revel's hand fell, the ribbons collapsed, and the stone stands unbroken. The seam's mystery persists. The question of who sent the Revel remains open."
   ],
   "currentLocationId": "the_crossing",
-  "activeScene": {
-    "locationId": "the_crossing",
-    "turns": [
-      {
-        "player": "Back away — refuse the fight",
-        "summary": "Loki refused the passage into the Deepwood at the Quickwood Eaves and turned back toward the known road.",
-        "narration": "You step back from the threshold of the Quickwood Eaves, your hand steady on the pack strap. The morning light filters green through the canopy above, and the trees—still, patient, wholly uninterested in you—seem to settle at the withdrawal. Cy clicks softly at your ankle, a sound like agreement, and you turn from the waygate.\n\nBehind you, the living wood closes the way you came without fanfare. Ahead, the Eaves thin toward the deeper forest—ancient growth that has learned to be interested in visitors only on its own terms. The road back spinward toward the Waygate Path is still open, still yours to walk. The springs and the careful earth are here. The choice to go further inward—to cross the threshold into what the Deepwood wants—is a different shape of decision, and one that waits.\n\nCy's lens irisses once, a small mechanical breath. It does not ask. It knows what you are holding."
-      },
-      {
-        "player": "Enter the Waygate and arrive at the crossing. The hub where all Waygates land, just outside The Crosssroads.",
-        "summary": "Loki traveled via the Quickwood Eaves waygate and arrived at the Hub crossing outside The Crossing.",
-        "narration": "You turn from the Deepwood threshold and walk back toward the living waygate. The trees seem to release their attention as you move—not hostile, simply indifferent now that you've declined the crossing. Cy clicks in rhythm with your steps, lens irising open and closed in what might be satisfaction.\n\nThe waygate stands among the eaves-trees as it did when you arrived, the latticed wood grown smooth by centuries of passage. You step into the threshold. The light shifts—green to grey to the particular stillness that lives inside the gate-structure—and for a moment you are nowhere, held in the fold between places.\n\nThen the air changes temperature. You step out onto stone.\n\nThe Hub crossing opens around you: a vast circular chamber where five waygate arches converge, each one a living frame of different wood or metal or grown-thing, all of them humming at a frequency just below hearing. The floor beneath your boots is pale stone, worn smooth by uncounted arrivals. Morning light falls through high windows—the sun here is where it should be, not filtered green through the Deepwood canopy. The Crossing lies just beyond the archway to the east, its towers visible through the stone portal. Cy's clicks grow more elaborate, almost musical—it has returned to a place it understands, where the old works still hum their maintenance songs.\n\nYou are not alone. A handful of people move through the Hub with the ease of those who know these paths—a courier checking a slate, two merchants speaking in low voices near a carved bench, and by the western arch, a figure in grey standing utterly still, watching the gates with the particular patience of someone who has all the time the world requires."
-      },
-      {
-        "player": "Walk over to the lone traveler and say Hi.",
-        "summary": "Loki arrived at the Hub crossing via the Quickwood Eaves waygate and greeted the road-warden, who recognized them by name.",
-        "narration": "You cross the Hub's pale stone toward the figure in grey by the western arch. The sound of the gates fades under your footsteps—five waygate arches humming at the edge of hearing, and you moving through it like moving through water. The grey-coated figure doesn't turn until you're close enough to speak.\n\n'Hi,' you say.\n\nThey turn slowly. You recognize them now—the road-warden you met days ago on the road west of the Waygate Path, the one who carries true news and warns families downhill of what's coming. Their face is weathered, lined in the way of someone who spends seasons on open ground. Grey-streaked hair, coat faded to brown. Eyes that read roads and people with the same steady attention.\n\nThey nod—a small, genuine motion. 'Loki,' they say, and their voice carries the same unhurried certainty it did by the fire. 'I didn't expect to find you here. The Hub's not usually a place the road-bound pause.' They glance at Cy, who has positioned itself precisely at your ankle and is making a low, approving click. 'Still carrying your assignment, I see.'\n\nThe courier near the chamber's center has glanced your way once and returned to their slate. The merchants by the bench are oblivious. The grey figure by the western arch—Veln Ashpause—has not moved."
-      },
-      {
-        "player": "Ask the road-warden plainly: who is the grey figure watching the gates, and why do they seem to know something about you",
-        "summary": "At the Hub crossing, the road-warden identifies the watching figure as Veln Ashpause, an Hourkeeper, who arrived this morning asking after someone matching Loki's description and is now waiting with clear foreknowledge.",
-        "narration": "The road-warden's weathered face settles into something careful—not suspicion, but recognition of a question they were half-expecting. They glance toward the grey figure by the western arch, then back to you.\n\n'That,' they say quietly, 'is Veln Ashpause. An Hourkeeper.' They let the word sit. 'I don't know what they know about you specifically—Hourkeepers don't traffic in gossip—but they arrived here this morning asking after someone matching your description. Not hostile. Just... present. Waiting.'\n\nYou follow their gaze. Veln stands exactly where they were, unmoving, grey-coated and still. But now that you're looking directly, you catch it: the way their attention is anchored on you like a weight. Not aggressive. Observant in a way that suggests they've already seen what comes next.\n\nThe road-warden lowers their voice further. 'Hourkeepers keep time in a different way than the rest of us. Past, present, future—they're not always sure which direction they're looking. I'd tread carefully, if I were you. Whatever they're waiting to witness, it likely concerns you.'"
-      },
-      {
-        "player": "I see, thank you (what was their name).  And what is your plan for the crossing? Perhaps we should see the sites together... we can attempt to repay your kindness for the meal.  Isn't that right Vess? ",
-        "summary": "At the Hub crossing, Loki greeted Kael the road-warden by name, asked about their plans, and suggested sightseeing together—a small kindness returned for warnings carried. Veln Ashpause remains motionless by the western arch, watching.",
-        "narration": "You turn to the road-warden with a steady nod of thanks. 'I see. Thank you—' you pause, realizing you never caught their name in the rush of recognition and warning. The road-warden catches the hesitation and fills it without ceremony: 'Kael. Just Kael.' Their voice carries the ease of someone who has given their name to a hundred travelers and never expected it to stick.\n\nYou glance back toward Vessin, who has drifted closer during the exchange, her practical coat catching the morning light filtering through the high windows. 'And what is your plan for the Crossing?' you ask Kael. 'Perhaps we should see the sites together. We can attempt to repay your kindness for the meal. Isn't that right, Vess?'\n\nVessin's mouth tightens at the edges—the smallest corrective—but she nods. 'If Kael hasn't other business.' She doesn't mention Veln Ashpause, still motionless by the western arch. You both feel the Hourkeeper's attention like weight.\n\nKael considers this with the deliberate patience of someone accustomed to weighing journeys against necessity. 'The Crossing has its draw—the Null Stone at the centre, the Twelve Mouths for those who want to hear old voices, the Made Arch if you like the Precursor bones.' A pause. 'But I came here for one reason and I'm close to finishing it. I can walk the sights with you, or I can finish what brought me and move on. Both are honest choices.' The question sits between you without pressure: Kael is simply offering the shape of their time, not asking permission to have one."
-      },
-      {
-        "player": "Ask Kael what business brought them here—and whether you can help finish it",
-        "summary": "At the Hub crossing, Kael reveals their business is already finished—carrying warning of the water crisis downhill through the relay network. They offer to show Loki the Crossing's inner sites, while Veln Ashpause watches from the western arch.",
-        "narration": "Kael's weathered face settles into something that reads like gratitude—not the reflexive kind, but the sort that comes from someone recognizing a genuine offer. 'My business here is simple enough,' they say, and there's a note of finality in it. 'Word needs to reach the Reach-wardens about the water moving wrong downhill. The official channels are slow; I carry it faster.' They pause, glancing toward the Null Stone at the chamber's center, then back to you. 'It's already done. I came here to pass the word through the Crossing's relay network—the kind that doesn't wait for bureaucracy. By tomorrow, settlements spinward will know what I know.'\n\nThere's no hesitation in them, no sense that this errand requires help. It's the work of someone who has done this before, who knows exactly how the message moves through the Crossing and beyond. 'You can't speed it up,' Kael says plainly. 'But you could walk the Crossing with me if you wanted. Show you the Twelve Mouths, the Common Table, the Made Arch—the places the peoples gather when they come here. It's not every day you get to see the center like this, and...' they trail off, glancing toward Veln Ashpause, who has not moved, 'it might help you figure out what that Hourkeeper wants before they decide you need to know.'\n\nVessin has shifted closer, her practical coat catching the slanting light. She doesn't speak, but there's a question in how she's watching you—whether you're staying or moving, and what the grey-coated figure by the arch means either way."
-      },
-      {
-        "player": "Use Prism Sight on Veln Ashpause from here—read the light around them for what they're carrying",
-        "summary": "At the Hub crossing, Loki reads Veln Ashpause's light-history and glimpses something wrong—the Hourkeeper seems to exist in two moments at once.",
-        "narration": "You hold your ground near the Null Stone and let your sight sharpen—the Prism Sight unfolds like a lens opening, drawing the thin shimmer of light-history from the air around Veln Ashpause. Afternoon sun through the high windows catches the grey coat in slanting bars, and for a moment the light-traces bloom.\n\nWhat you read is fragmentary—the Prism Sight works on still places, and the Hub crossing is a place of constant arrival and departure. But what catches is this: Veln has been here since dawn, unmoved. The light-trace shows them in exactly this posture for hours, a grey pillar of absolute stillness. More than that—the trace shows *arrival*. Not an hour of standing, but a moment of appearing, and then nothing changing. As if they *stepped* into this spot fully formed, ready.\n\nBut the harder part, the thing that makes your breath catch: in the traces of light around them, you catch *layers*. A moment that was present, and a moment that hasn't happened yet, existing in the same space. It's the kind of interference pattern you'd see if someone were occupying two positions on the same timeline, which is not how light works. Which is not how *anything* works.\n\nVeln's expression doesn't shift. But their attention on you sharpens infinitesimally—as though they felt the moment your sight touched whatever it is they're carrying."
-      },
-      {
-        "player": "Walk together to inspect the  ull stone.",
-        "summary": "At the Hub crossing's heart, Loki examined the Null Stone with Kael and Vessin—an ordinary pale stone that refuses to explain itself, older than the gates and untouched since before the Transition.",
-        "narration": "You cross the Hub crossing toward the Null Stone with Kael at your shoulder and Vessin trailing close enough to read the ground. The stone sits at the chamber's heart like a weight that refuses to settle—pale, worn smooth by uncounted arrivals, utterly ordinary except for the way eyes slide away from it and then snap back.\n\nKael moves with the ease of someone who has stood here before and knows where the eye wants to go. 'Most people avoid looking straight at it,' they say without judgment. 'The Crossing's heart. Nobody knows what it does or why it won't break. Older than the gates. Older than the Transition.' They stop a pace away, feet planted as if respecting a boundary that isn't marked.\n\nVessin stands to your left, shoulders set steady, examining it with the same methodical patience she brought to the waygate. Cy skitters ahead of you in precise spirals, its lens irising open and closed, open and closed. After three full circuits it falls still. The lens catches afternoon light and throws it back, and then Cy turns toward you with a click that reads almost like frustration.\n\nFrom the western arch, Veln Ashpause has not moved. But you feel the weight of their attention shift—not toward the stone, but toward you, watching to see what you will do here."
-      },
-      {
-        "player": "Follow Cy's lead—watch where its attention goes and what it does next with the stone",
-        "summary": "At the Hub crossing, Loki sent Cy to read the Null Stone—and the construct found what Prism Sight could not: a concealed seam running through its face, too precise to be natural breakage.",
-        "narration": "Cy descends from your shoulder with the deliberate precision of something that has examined every stone in a radius you cannot guess. Its legs carry it toward the Null Stone in a path that seems to bend around the eye's pull—as if it knows exactly where NOT to look to stay on course. The lens irises sharp.\n\nIt reaches the stone's base and moves along the perimeter, clicking softly. The sound is neither inspection nor alarm—it is the rhythm of something reading. Its legs trace the curve where the pale surface meets the worn floor, and twice it stops, reversing a pace or two as though disagreeing with its own findings.\n\nVessin watches without comment. Kael has gone very still. The relay courier at the desk has not looked up.\n\nCy arrives at a spot roughly opposite where you stand—facing the stone's far face—and stops. Its lamp flickers. For a moment, the light catches something you had not seen before: a hairline discontinuity in the stone's surface, running vertically from base to what would be the stone's crown. Not a crack. Too precise. Too *placed*.\n\nCy touches the seam with one foreleg and holds. Its lens opens wide. The click-pattern changes—faster, almost agitated. It does not attempt to pry or wedge. It simply *holds*, as though asking the stone a question it expects the stone itself to answer."
-      },
-      {
-        "player": "Walk around to Cy's side and examine the seam it found—use See the Made Thing to read what that precision means",
-        "summary": "At the Hub crossing's center, Loki read the Null Stone's sealed construction—old, precise, and deliberately concealing something. Cy found what sight alone could not.",
-        "narration": "You circle the Null Stone slowly, keeping pace with Cy as it completes its perimeter trace. The construct's clicking falls silent as you kneel beside it, your fingers hovering just above the pale surface. The seam catches the afternoon light—a hairline crack that runs vertically through the stone's far face, so precise it could have been drawn with a measure.\n\nYou reach for See the Made Thing and let the craft settle into your sight. The falsecrafts in this moment bloom into clarity: the Null Stone is not what it appears. Beneath the worn, ordinary surface runs a deliberate construction—the seam was *made*, not broken. Someone cut this stone to conceal something, or to hold something. The precision speaks of intention, and the age of the work speaks of intention that has held for a very long time. Whatever was sealed here was sealed well, and sealed to *last*.\n\nBut the craft shows you only the *making*. Not what lies behind the seam. Not what was meant to be hidden—only that hiding was the purpose.\n\nCy's lens clicks shut. It does not retreat from the stone, but its attention shifts—a small, deliberate movement that might be disagreement or recognition. Vessin has stepped closer, reading your face. Kael remains motionless, and in that stillness you feel the weight of something recognized but not yet named. Veln Ashpause has not moved from the western arch, but their gaze is now entirely on you and the stone."
-      },
-      {
-        "player": null,
-        "summary": "At the Hub crossing, a Churn-Revel erupts from one of the waygate arches—deliberate chaos masking a theft or tampering directed at the Null Stone itself. The sealed seam you uncovered is the target.",
-        "narration": "The afternoon light splinters.\n\nOne of the five waygate arches—the one facing spinward—detonates into *motion*. Not violence: motion. A figure vaults through the arch in a tumble that makes no sense geometrically, lands twisted, and springs upright in the same breath. Behind them come others, three or four, moving in a pattern that has no pattern. They are *laughing*. One carries a brass horn that produces no sound at all—only a shimmer in the air. Another trails ribbons of cloth that move against the wind. The chaos spreads like water finding cracks in stone.\n\nThe relay desk attendant bolts from their seat. The merchants by the carved bench press backward. Cy's lens snaps closed. Vessin's hand moves to her coat.\n\nKael does not move. Their eyes track the Revel with the focus of someone reading a text they already know the shape of.\n\nVeln Ashpause's grey-coat does not flicker. But their gaze—fixed until now on you and the Null Stone—shifts. Watches the chaos with the terrible attention of someone who foresaw exactly this.\n\nOne of the Revel figures breaks from the knot and moves *toward* the stone. Not running. Flowing. Their hands are already reaching, and you realize: this is not random carnival madness. Something about the Null Stone has drawn them here. The sealed seam you just found. The thing hidden inside it. This *chaos* is a door—and someone is opening it while the Hub crossing's ordinary eye is turned elsewhere.\n\nThe choice is yours. The moment is *now*."
-      },
-      {
-        "player": null,
-        "summary": "The Churn-Revel erupts at the Null Stone—a commander orchestrating chaos as a tool.",
-        "narration": "You let Prism Sight settle into the chaos—and suddenly the Revel's motion has *shape*. The figure vaulting toward the Null Stone is not random; they are *commanding* the ribbons, the horn, the impossible angles—orchestrating the disorder like a musician conducts silence. They favour command the way a weaver favours thread: every trailing ribbon is a gestured instruction, every shimmer from the horn a signal reshaping what the others do. The Revel reads as someone conducting a thing that has no music, making it move precisely by refusing it any predictability at all."
-      },
-      {
-        "player": null,
-        "summary": "At the Hub crossing, Loki read the Churn-Revel's command-shape and bound them with a true bargain; the Revel's next move is known. The Null Stone stands between them.",
-        "narration": "You hold still in the chaos—let Prism Sight settle into the ribbons and the shimmer, and suddenly the Revel's orchestration reads like a score written in light. They *favour command*. Every gesture reaches for control. You see exactly how the next motion will move, and you know what they are reaching for when they reach.\n\nYou step into their path and speak a Descent—not a bargain shouted across noise, but a bargain *named* at close range, one thing offered for another, both true. The Revel hears it. Their eyes lock on yours. For one breath the chaos *steadies*—they are bound by the fairness of what you named, and they *feel* it. The ribbons go taut. The horn's shimmer holds. They have swayed toward your frame instead of pushing through it.\n\nBut they are Churn-folk, and chaos is their native air. They press a point—a gesture that makes the moment *uncertain* again, just enough for them to hold ground. The bind takes, but it bends.\n\nYou do not let go. You reach for See the Made Thing and read what they are *about* to do next—the construction behind the apparent chaos, the real intention beneath the false randomness. The Revel is *braced* now, defending the shape of their next move against your knowing. But you have read them. You know what comes.\n\nThe two of you stand almost within arm's reach of the Null Stone. The chaos has *quieted* around you—your companions have stepped back, the merchants are frozen, even Kael is watching without moving. The Revel's breath is steady. Their eyes are locked on yours. The ribbons hang in the air like a question.\n\n\"What are you protecting?\" you ask quietly. The Revel does not answer—not yet. But their hand has stopped reaching for the seam."
-      },
-      {
-        "player": null,
-        "summary": "At the Hub crossing, Loki attempted to read the Churn-Revel's false movements—and failed to pierce the orchestrated chaos.",
-        "narration": "You reach for False Target—trying to read which of the Revel's movements is real and which is orchestrated shadow—but the chaos resists your grasp. The ribbons tangle the sight-line. The shimmer from the horn bends what you see into something that refuses to hold a shape long enough to read. The Revel's hand is still suspended mid-reach toward the seam, but whether they move next or wait is unreadable.\n\nVessin's breath catches. Cy remains motionless at the stone's base."
-      }
-    ],
-    "lastTurn": {
-      "narration": "You reach for False Target—trying to read which of the Revel's movements is real and which is orchestrated shadow—but the chaos resists your grasp. The ribbons tangle the sight-line. The shimmer from the horn bends what you see into something that refuses to hold a shape long enough to read. The Revel's hand is still suspended mid-reach toward the seam, but whether they move next or wait is unreadable.\n\nVessin's breath catches. Cy remains motionless at the stone's base.",
-      "sceneSummary": "At the Hub crossing, Loki attempted to read the Churn-Revel's false movements—and failed to pierce the orchestrated chaos.",
-      "choices": [
-        {
-          "label": "Strike before they can reach the seam",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "attack",
-            "defend"
-          ],
-          "abilityId": "hunters_strike",
-          "energyCost": 4,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Thin the veil at the Revel with Veil Stroke—force them to move or be wounded",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
-          "difficulty": "hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "attack",
-            "risky"
-          ],
-          "abilityId": "veil_stroke",
-          "energyCost": 4,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Call out a warning to Vessin—move her clear of the Revel's path",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "defend",
-            "help"
-          ],
-          "abilityId": "harmonic_voice",
-          "energyCost": 5,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask the Revel plainly what they want from the stone—buy a breath to think",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "negotiate"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        }
-      ],
-      "deeds": [],
-      "characterDeltas": {},
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "standingOps": [],
-      "delegateOps": [],
-      "arcOps": [],
-      "adoptSchool": null,
-      "offer": null,
-      "stageOps": [],
-      "scene": {
-        "setting": "The Hub crossing at the Null Stone's heart—five waygate arches surrounding pale worn stone. The spinward arch still shimmers with fading chaos-motion. Evening light casts long shadows. The sealed Null Stone sits at the centre, its seam visible and still the focus of the Revel's suspended hand.",
-        "npcsPresent": [
-          {
-            "name": "Vessin Tallow-bark",
-            "state": "Standing back from the confrontation, hand still at her coat, breath caught, watching"
-          },
-          {
-            "name": "Kael",
-            "state": "Motionless by the hub's edge, eyes tracking the Revel without moving"
-          },
-          {
-            "name": "Veln Ashpause",
-            "state": "Still by the western arch, gaze now on the confrontation, expression unchanged"
-          },
-          {
-            "name": "A Churn-Revel",
-            "state": "Hand suspended mid-reach toward the seam, breathing steady, eyes locked on Loki, ribbons hanging in the air"
-          },
-          {
-            "name": "Cy",
-            "state": "At the base of the Null Stone, lens closed, present and motionless"
-          }
-        ],
-        "objects": [
-          "The Null Stone at the center—pale, sealed, its seam visible",
-          "Five waygate arches—the spinward one quieting from chaos-motion",
-          "Ribbons of cloth hanging in the air",
-          "A brass horn in a companion's hands",
-          "The carved bench where merchants press back"
-        ],
-        "threads": [
-          "The Revel's hand is still suspended toward the seam",
-          "What the Revel truly wants from the Null Stone",
-          "Whether the chaos-command will press forward or hold"
-        ]
-      },
-      "npcUpdates": [],
-      "intentsHeard": [],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "discovery": null,
-      "codexUpdates": [],
-      "holdingOps": [],
-      "debtOps": [],
-      "partyOps": [],
-      "generateRequest": [],
-      "encounterOps": [],
-      "projectOps": [],
-      "bandOps": [],
-      "deathOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": null,
-      "moveTo": null,
-      "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": null,
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "sceneEnded": false
-    },
-    "sceneState": {
-      "setting": "The Hub crossing at the Null Stone's heart—five waygate arches surrounding pale worn stone. The spinward arch still shimmers with fading chaos-motion. Evening light casts long shadows. The sealed Null Stone sits at the centre, its seam visible and still the focus of the Revel's suspended hand.",
-      "npcsPresent": [
-        {
-          "name": "Vessin Tallow-bark",
-          "state": "Standing back from the confrontation, hand still at her coat, breath caught, watching"
-        },
-        {
-          "name": "Kael",
-          "state": "Motionless by the hub's edge, eyes tracking the Revel without moving"
-        },
-        {
-          "name": "Veln Ashpause",
-          "state": "Still by the western arch, gaze now on the confrontation, expression unchanged"
-        },
-        {
-          "name": "A Churn-Revel",
-          "state": "Hand suspended mid-reach toward the seam, breathing steady, eyes locked on Loki, ribbons hanging in the air"
-        },
-        {
-          "name": "Cy",
-          "state": "At the base of the Null Stone, lens closed, present and motionless"
-        }
-      ],
-      "objects": [
-        "The Null Stone at the center—pale, sealed, its seam visible",
-        "Five waygate arches—the spinward one quieting from chaos-motion",
-        "Ribbons of cloth hanging in the air",
-        "A brass horn in a companion's hands",
-        "The carved bench where merchants press back"
-      ],
-      "threads": [
-        "The Revel's hand is still suspended toward the seam",
-        "What the Revel truly wants from the Null Stone",
-        "Whether the chaos-command will press forward or hold"
-      ]
-    },
-    "beats": 14,
-    "subPlace": {
-      "slug": "the-hub-crossing",
-      "name": "The Hub Crossing",
-      "day": 3
-    }
-  },
+  "activeScene": null,
   "clock": {
     "schemaVersion": 1,
     "day": 3,
@@ -1440,7 +1191,7 @@
     "lastSharedReadAt": "2026-09-07T22:27:40.544Z",
     "lastTickWorldDay": 76,
     "lastCanonWorldDay": 76,
-    "turnsSinceOffer": 4,
+    "turnsSinceOffer": 5,
     "recentOffers": [
       {
         "thing": "A figure in grey standing by the western arch, watching the gates with absolute stillness and patience.",
@@ -6635,7 +6386,8 @@
     "veilwright": 4,
     "umbral": 3.99,
     "horizon": 1,
-    "verist": -1
+    "verist": -1,
+    "churnfolk": 0
   },
   "standingLedger": [
     {
@@ -6678,6 +6430,13 @@
       "people": "umbral",
       "delta": 0.99,
       "text": "Offered the elder a true shape for what was being asked — not a request for craft, but a promise to carry the right question outward honestly; the elder acknowledged it with their first real movement"
+    },
+    {
+      "at": 76,
+      "kind": "act",
+      "people": "churnfolk",
+      "delta": 0,
+      "text": "sent an orchestrator to break a sealed thing and lost them to a standing bargain instead"
     }
   ],
   "nativeGrantsVersion": 2,
@@ -7199,8 +6958,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789427311891,
-  "rev": 627,
+  "updatedAt": 1789427335345,
+  "rev": 628,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8148,10 +7907,10 @@
     {
       "id": "sess-10",
       "startedAt": "2026-09-14T22:51:56.902Z",
-      "lastAt": "2026-09-14T23:06:25.171Z",
+      "lastAt": "2026-09-14T23:08:55.342Z",
       "startDay": 76,
       "endDay": 76,
-      "beats": 4
+      "beats": 5
     }
   ],
   "establishedFacts": [
@@ -8201,35 +7960,36 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 183,
-    "choices": 183,
-    "characterDeltas": 74,
-    "scene": 183,
+    "sceneSummary": 184,
+    "choices": 184,
+    "characterDeltas": 75,
+    "scene": 184,
     "placeUpdates": 21,
     "codexUpdates": 103,
-    "timeOps": 162,
+    "timeOps": 163,
     "offer": 17,
     "generateRequest": 6,
-    "sceneEnded": 58,
-    "npcUpdates": 149,
+    "sceneEnded": 59,
+    "npcUpdates": 150,
     "moveTo": 6,
-    "gambitApt": 22,
-    "deeds": 3,
+    "gambitApt": 23,
+    "deeds": 4,
     "questUpdates": 17,
-    "standingOps": 1,
+    "standingOps": 2,
     "factUpdates": 5,
     "stageOps": 7,
     "encounterOps": 9,
     "ledgerEvents": 2,
     "newEncounter": 3,
-    "imagePrompt": 10,
+    "imagePrompt": 11,
     "scene_ended": 1,
-    "stateOps": 1
+    "stateOps": 1,
+    "_engineClosedScene": 1
   },
-  "_opTurns": 183,
+  "_opTurns": 184,
   "customAbilities": {},
   "companionBonds": {
-    "coil": 3.75
+    "coil": 4.25
   },
   "practice": {
     "schemaVersion": 1,
@@ -8723,6 +8483,11 @@
         "text": "Read a Churn-Revel's command-orchestration and bound them with a true bargain at the Null Stone's heart, holding ground against deliberate chaos.",
         "weight": 1,
         "day": 3
+      },
+      {
+        "text": "Bound a Churn-Revel's orchestrated chaos with a true bargain and drove them to yield rather than break the Null Stone—held the center against deliberate disorder.",
+        "weight": 2,
+        "day": 3
       }
     ]
   },
@@ -8957,6 +8722,14 @@
       "companionId": "coil",
       "kind": "encounter",
       "delta": 1.5,
+      "day": 3,
+      "worldDay": 76,
+      "actionCount": 153
+    },
+    {
+      "companionId": "coil",
+      "kind": "deed",
+      "delta": 0.5,
       "day": 3,
       "worldDay": 76,
       "actionCount": 153
@@ -9448,7 +9221,7 @@
     }
   },
   "_opUnknown": {
-    "sceneSummary": 4
+    "sceneSummary": 5
   },
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T22:51:56.913Z",

@@ -7,7 +7,28 @@
 
 ## ⛔ OPEN
 
-### 1 · A location image is drawn from philosophy, and `appearance` has no reader
+### 1 · ⛔ THE GENERATORS ARE THE AUTHOR NOW — `po/SPEC_SNG-582_the_generators_are_the_author_now.md`
+**Erik, and it is the item that makes the rest of today last:** *"All of this authoring will fall to the
+generators, so they need to be able to faithfully continue what you are doing."*
+
+⛔ **Today I closed A1 (1,144 lines), location `appearance` (138 of 138), the sub-attribute pass and the
+world-fact `kind` pass BY HAND. Every one is now a standard the mint has to meet**, and the game is
+primarily generative. **I am not going to hand-author the next 138.**
+
+**Four measured gaps, full detail in the spec:**
+- ⛔ `generate.js:119` mints `descriptionSeed: name` — **a place is handed its own name as its description**,
+  and `art.js:684` draws the picture from it.
+- ⚠️ 13 minted places share one boilerplate seed. I authored looks for all 13; **the next one gets the
+  boilerplate again.**
+- ⛑ **No generator emits `appearance` for a location at all**, so 138 authored is a one-time fix on a
+  growing set.
+- ⛔ **`playerText` strips the glyphs and LEAVES THE CAPITALS** — and the capitals are the whole of what I
+  rewrote today. `gm.js` carries 94 glyph markers. **A1 re-accumulates from the first generated craft.**
+
+⬜ **And the A1 pin only counts authored packs, not what a live save holds** — so it can read zero while
+every minted craft arrives shouting.
+
+### 2 · A location image is drawn from philosophy, and `appearance` has no reader
 `engine/art.js:684` · measured 2026-09-14
 
 ```js
@@ -29,7 +50,7 @@ sentence is what the image generator received for every one of them**, so thirte
 drawn from one string. All 13 now carry a real look. ⬜ Worth a mint-time check on your side: a place minted
 with no seed should probably not get a seed that describes nothing. ⛔ **THE ASK IS ONE LINE AND IT IS NOW THE ONLY THING BETWEEN THIS AND WORKING: prefer `appearance` over `descriptionSeed` in that branch**, the way the NPC path already does. ⚠️ **All 138 are authored and every one of them is dead until that line lands.**
 
-### 2 · A state can only ever be a place
+### 3 · A state can only ever be a place
 `engine/quests.js` · SNG-577 · `po/HANDOFF_aevi_SNG-577_all_deeds_and_twelve_want_a_state.md`
 
 `kind: "state"` routes everything through `recordPlaceChange` whatever the subject is, so a state about a
@@ -40,7 +61,7 @@ whether the first waygate since the Transition EXISTS, whether Silas's made thin
 ⬜ **And two of those twelve need a record for a MADE THING**, which is neither place nor person. `world/canon/`
 already holds `gen-stillwater-s-trouble` beside the people, so the store can carry it; nothing mints one.
 
-### 3 · The Fellowship matrix reads the one field nobody fills in
+### 4 · The Fellowship matrix reads the one field nobody fills in
 `engine/combatants.js` · from Erik's Mara Wells question
 
 `contributionsOf` reads `record.assistTags`. ⛔ **Across every save: 128 registry people, ZERO have
@@ -56,7 +77,7 @@ says she has none.**
 under-reachable even when tags exist. ⬜ And 141 of 368 `skillsObserved` entries are still truncated mid-word
 from the pre-SNG-575 60-char cut.
 
-### 4 · `certify_counts` and private keys — **your call stands, I withdrew the sweep**
+### 5 · `certify_counts` and private keys — **your call stands, I withdrew the sweep**
 ⛑ You were right that a pattern sweep would fire 967 times. **`CLAIMS` by name is the correct shape.** ⬜ I
 owe you a list of which private keys carry claims worth certifying; it is on my queue, not yours.
 

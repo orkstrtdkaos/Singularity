@@ -68,7 +68,7 @@
     {
      "rank": 1,
      "name": "False Stance",
-     "grants": "⛔ DECLARE THIS IN THE SENSE SLOT TO DENY THEIR READ. Your body says one thing and does another; whatever they learned about you this exchange is wrong.",
+     "grants": "Declare this in the sense slot to deny their read. Your body says one thing and does another; whatever they learned about you this exchange is wrong.",
      "cannot": "They must be reading you. One per exchange.",
      "functions": [
       "deceive"
@@ -80,7 +80,7 @@
     {
      "rank": 2,
      "name": "Wrong Fight",
-     "grants": "⛔ DECLARE IN THE SENSE SLOT. Your body says one thing and does another, and they ACT ON THE FALSE READ — it is wrong for the fight that happens, and they carry the penalty into it.",
+     "grants": "Declare in the sense slot. Your body says one thing and does another, and they act on the false read — it is wrong for the fight that happens, and they carry the penalty into it.",
      "cannot": "They must commit to the false read before it costs them.",
      "functions": [
       "deceive",
@@ -97,7 +97,7 @@
     {
      "rank": 3,
      "name": "Nothing True",
-     "grants": "⛔ DECLARE IN THE SENSE SLOT. Every foe watching you takes a false read, and you may give different ones different fights.",
+     "grants": "Declare in the sense slot. Every foe watching you takes a false read, and you may give different ones different fights.",
      "cannot": "Everyone in sight of you. A foe who stops watching is unaffected.",
      "functions": [
       "deceive",
@@ -177,7 +177,7 @@
     {
      "rank": 1,
      "name": "Days and Stone",
-     "grants": "⛔ NAME WHAT A JOB ACTUALLY COSTS in labour, material and time, and be believed. Nobody overcharges you and nobody underpays you.",
+     "grants": "Name what a job actually costs in labour, material and time, and be believed. Nobody overcharges you and nobody underpays you.",
      "cannot": "You must have seen the job or the thing.",
      "functions": [
       "bargain"
@@ -189,7 +189,7 @@
     {
      "rank": 2,
      "name": "Paid in Work",
-     "grants": "⛔ PAY IN WORK. Settle a debt, buy passage or secure lodging by doing the thing they need done — accepted at full value where you have no coin they want.",
+     "grants": "Pay in work. Settle a debt, buy passage or secure lodging by doing the thing they need done — accepted at full value where you have no coin they want.",
      "cannot": "The work must be worth what you are taking, and they must need it now.",
      "functions": [
       "bargain",
@@ -211,7 +211,7 @@
     {
      "rank": 3,
      "name": "Standing Account",
-     "grants": "⛔ YOUR WORD ON A PRICE IS TAKEN IN ADVANCE ACROSS A WHOLE REGION. Materials, tools, passage and hands are extended before you have paid.",
+     "grants": "Your word on a price is taken in advance across a whole region. Materials, tools, passage and hands are extended before you have paid.",
      "cannot": "One region. Defaulting ends it there permanently.",
      "functions": [
       "bargain",
@@ -302,7 +302,7 @@
     {
      "rank": 1,
      "name": "Hand On Them",
-     "grants": "⛔ END FEAR, PANIC OR RAGE IN ONE PERSON YOU CAN TOUCH. The shaking stops, the breath comes back, and they can act this round.",
+     "grants": "End fear, panic or rage in one person you can touch. The shaking stops, the breath comes back, and they can act this round.",
      "cannot": "Contact range, one person, and they must permit it.",
      "functions": [
       "soothe"
@@ -314,7 +314,7 @@
     {
      "rank": 2,
      "name": "Held Together",
-     "grants": "⛔ END FEAR, PANIC OR RAGE BY TOUCH AND HOLD IT. They stay steady while you keep a hand on them — enough to be carried, stitched, talked to, or walked out.",
+     "grants": "End fear, panic or rage by touch and hold it. They stay steady while you keep a hand on them — enough to be carried, stitched, talked to, or walked out.",
      "cannot": "You are occupied while you hold them.",
      "functions": [
       "soothe",
@@ -331,7 +331,7 @@
     {
      "rank": 3,
      "name": "Everyone Standing",
-     "grants": "⛔ END FEAR, PANIC OR RAGE IN EVERYONE WITHIN ARM'S REACH AT ONCE — a stretcher line, a shield wall about to break, a crew in a storm.",
+     "grants": "End fear, panic or rage in everyone within arm's reach at once — a stretcher line, a shield wall about to break, a crew in a storm.",
      "cannot": "Arm's reach. One use per contest.",
      "functions": [
       "soothe",
@@ -445,8 +445,8 @@
      "gains": "broaden",
      "harmRung": "damaging",
      "gainAxes": [],
-     "grants": "⛔ ANYONE WHO LANDS A MELEE BLOW ON YOU TAKES 1d6 FORCE BACK, and you spend nothing to answer. ⚠️ The blow still lands on you in full — this is a price on hitting you, not a defence against it.",
-     "cannot": "Three rounds, melee attacks only, one answer per strike. ⚠️ An arrow, a working or a fall goes unanswered. ⛔ And it answers what is meant as a blow — not a hand laid on you."
+     "grants": "Anyone who lands a melee Blow on you takes 1d6 force Back, and you spend nothing to answer. The blow still lands on you in full — this is a price on hitting you, not a defence against it.",
+     "cannot": "Three rounds, melee attacks only, one answer per strike. An arrow, a working or a fall goes unanswered. And it answers what is meant as a blow — not a hand laid on you."
     },
     {
      "rank": 2,
@@ -462,8 +462,8 @@
       "damage",
       "quality"
      ],
-     "grants": "⛔ 2d6 BACK, AND A STRIKER WHO COMMITTED HARD IS STAGGERED BY THEIR OWN BLOW — the heavier the swing, the worse the answer. ⚠️ Careful fighters learn to tap at you, which is itself the point.",
-     "cannot": "⛔ It still does not reduce what you take, and a patient enemy simply stops closing. ⚠️ You cannot make anyone hit you."
+     "grants": "2d6 Back, and a striker who committed Hard is staggered by their own Blow — the heavier the swing, the worse the answer. Careful fighters learn to tap at you, which is itself the point.",
+     "cannot": "It still does not reduce what you take, and a patient enemy simply stops closing. You cannot make anyone hit you."
     },
     {
      "rank": 3,
@@ -479,8 +479,8 @@
       "targets",
       "duration"
      ],
-     "grants": "⛔ EVERY HAND THAT REACHES YOU IS ANSWERED, from all sides at once, and it holds until the fighting stops rather than for a count of rounds. ⚠️ A somatic at this rank is not hard to kill — they are EXPENSIVE, and a line that has to grapple them arrives at the far side shorter than it started.",
-     "cannot": "⛔ IT STILL ANSWERS ONLY ARMS: an arrow, a working, or a fall goes unanswered at every rank. ⚠️ And it does not reduce what you take — the strike lands in full."
+     "grants": "Every hand that reaches you is Answered, from all sides at once, and it holds until the fighting stops rather than for a count of rounds. A somatic at this rank is not hard to kill — they are expensive, and a line that has to grapple them arrives at the far side shorter than it started.",
+     "cannot": "It Still answers only arms: an arrow, a working, or a fall goes unanswered at every rank. And it does not reduce what you take — the strike lands in full."
     }
    ],
    "_authored": "⛔ ERIK 2026-08-29: 'I think KI THORNS might be cool too — something that damages someone who hits you.' ⚠️ MEASURED FIRST: NOTHING IN 380 CRAFTS RETALIATES. `reflectByDegree` exists and reflects CONDITIONS on an intercepted binding (built for `shared_weight` r3); this is a PASSIVE answer to DAMAGE, which is a different mechanism. ⛔ AND IT IS THE STRONGEST ARGUMENT FOR ERIK'S RULE 8 SO FAR: I had just written that Body's missing verbs 'read as characterisation'. Body had no retaliation because nobody had thought of it, and 'ki is energy and this is a fantasy game' produced two crafts in one sitting.",

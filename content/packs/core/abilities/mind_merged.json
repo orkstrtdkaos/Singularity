@@ -56,7 +56,7 @@
       "move",
       "travel"
      ],
-     "grants": "⛔ THE SPACE IS NOW ALLOWED TO MOVE. Cross a shifting one — a crowd, a patrol, a running fight — without friction, staying two steps ahead of everyone in it. Adds unseen ground: derive the route through terrain you have not entered.",
+     "grants": "The space is now allowed to Move. Cross a shifting one — a crowd, a patrol, a running fight — without friction, staying two steps ahead of everyone in it. Adds unseen ground: derive the route through terrain you have not entered.",
      "cannot": "Cannot route around what you have no information about at all.",
      "gains": "broaden",
      "harmRung": "none",
@@ -74,7 +74,7 @@
       "move",
       "travel"
      ],
-     "grants": "⛔ WALK A WHOLE PARTY THROUGH ON YOUR LINE, calling it as you go — and hold the route through a space actively working against you: a rout, a fire, a collapsing floor.",
+     "grants": "Walk a whole party through on your line, calling it as you go — and hold the route through a space actively working against you: a rout, a fire, a collapsing floor.",
      "cannot": "They must follow closely and trust it; one person breaking away breaks their own line, not yours.",
      "gains": "broaden",
      "harmRung": "none",
@@ -179,7 +179,7 @@
      "functions": [
       "heal"
      ],
-     "grants": "⛔ NAME WHAT IS ACTUALLY WRONG — the real fault, not the presenting one — AND TREAT IT. A small heal on top of the diagnosis: the bleeding stopped, the joint set, the fever broken tonight.",
+     "grants": "Name what is actually Wrong — the real fault, not the presenting one — and treat it. A small heal on top of the diagnosis: the bleeding stopped, the joint set, the fever broken tonight.",
      "cannot": "One patient or one object; the fault must be present, not historical.",
      "gains": "deepen",
      "harmRung": "none",
@@ -197,7 +197,7 @@
       "restore",
       "mend"
      ],
-     "grants": "⚠️ A BIG HEAL. The whole correct sequence, in order, nothing left out — they get up, and they can fight or walk today.",
+     "grants": "A big heal. The whole correct sequence, in order, nothing left out — they get up, and they can fight or walk today.",
      "cannot": "Cannot regrow what is gone; cannot work on what you cannot examine.",
      "gains": "deepen",
      "harmRung": "none",
@@ -215,7 +215,7 @@
       "restore",
       "mend"
      ],
-     "grants": "⛔ A FULL HEAL — whole, to the bone, in one working — and you can carry it to a SECOND subject in the same working if they are within reach.",
+     "grants": "A full heal — whole, to the bone, in one working — and you can carry it to a second subject in the same working if they are within reach.",
      "cannot": "Two subjects at most, and you must be able to reach the whole of each.",
      "gains": "deepen",
      "harmRung": "none",
@@ -325,7 +325,7 @@
     {
      "rank": 1,
      "name": "Matter Settled",
-     "grants": "⛔ SET A MATTER OUT TO PEOPLE WILLING TO FOLLOW. A dispute resolves, a council decides, a wrong belief comes apart, and it stays resolved.",
+     "grants": "Set a matter Out to People willing to follow. A dispute resolves, a council decides, a wrong belief comes apart, and it stays resolved.",
      "cannot": "They must be willing to follow. Does nothing to someone who refuses to engage.",
      "functions": [
       "persuade"
@@ -338,8 +338,8 @@
     {
      "rank": 2,
      "name": "Inescapable",
-     "grants": "⛔ LAY PREMISES A BODY OF REASONING MINDS MUST EACH AGREE TO until they arrive by their own reasoning at a conclusion they would have fled — AND THEY CANNOT ACT AGAINST IT while it holds. A council, a court, a company.",
-     "cannot": "⚠️ It must be honest. A reasoning mind that finds the false premise is freed, and knows you tried.",
+     "grants": "Lay premises a body of reasoning minds must each agree to until they arrive by their own reasoning at a conclusion they would have fled — and they cannot act against it while it holds. A council, a court, a company.",
+     "cannot": "It must be honest. A reasoning mind that finds the false premise is freed, and knows you tried.",
      "functions": [
       "persuade",
       "bind"
@@ -355,8 +355,8 @@
     {
      "rank": 3,
      "name": "Only Consistent Act",
-     "grants": "⛔ WALK ONE PERSON TO THE CONCLUSION WHERE THE CONSISTENT ACT IS A FINAL ONE — that the post cannot be held, that they should not continue — AND THEN STOP TALKING. Built as a written or taught case, it goes on working after you have gone.",
-     "cannot": "⛔ One person for the final form, and it cannot be withdrawn. Everyone who heard it heard it.",
+     "grants": "Walk one person to the conclusion where the consistent act is a Final one — that the post cannot be held, that they should not continue — and then Stop talking. Built as a written or taught case, it goes on working after you have gone.",
+     "cannot": "One person for the final form, and it cannot be withdrawn. Everyone who heard it heard it.",
      "functions": [
       "persuade",
       "bind",
@@ -549,7 +549,7 @@
      "gains": "broaden",
      "harmRung": "none",
      "gainAxes": [],
-     "grants": "⛔ ASK THE RECORD: has this been tried, by whom, and how did it fail? ⚠️ You get the precedent and the annotation — including which of the catalogued errors you are currently making.",
+     "grants": "Ask the Record: has this been tried, by whom, and how did it fail? You get the precedent and the annotation — including which of the catalogued errors you are currently making.",
      "cannot": "From the record only. A new problem gets you little, and it takes time."
     }
    ],

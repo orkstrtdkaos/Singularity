@@ -597,16 +597,38 @@ function applyQuestEffects(character, quest, effects, ctx = {}) {
         // where the promotion path already carries it into canon and a contradicting state contests THE SAME
         // record. ⛔ A separate "fact" entity type would have been a second store for facts the canon store
         // already knows how to hold.
+        // ⛔ SNG-584 (Aevi's queue §2: "a state can only ever be a place") — AND IT WAS WORSE THAN FILING IT
+        // WRONG. This called `ctx.recordPlaceChange(subject, …)` for ANY subject, and app.js wires that to
+        // `applyPlaceUpdates`, which CREATES the record it is handed: `placeMemory[id] || (placeMemory[id] = …)`.
+        // ⚑ So a state about a PERSON did not merely land in the wrong store — it MINTED A PHANTOM PLACE named
+        // after them, in the save, which the place surfaces then read back as somewhere the character had been.
+        //
+        // ⚠️ ALL 24 WORLD FACTS ARE `deed` TODAY, so nothing has fired it yet. Aevi's count is that TWELVE want
+        // a state — what Saehara became, what happened to the Lightless Seraph, whether Silas's made thing
+        // stands — and most of those subjects are not places. The bug was waiting for the content.
+        //
+        // ⛑ THE HOOK IS NAMED FOR THE QUESTION NOW, not for one of its answers. `recordStateOn` resolves the
+        // subject to the record that can HOLD a state — a place, or a person — and RETURNS WHICH, so this can
+        // tell "filed" from "nothing took it". ⛔ `recordPlaceChange` stays, and still means a place: the
+        // `location_state` effect below is genuinely about one.
         const kind = String(e.kind || "deed").toLowerCase();
         const subject = e.subject || e.entityId || e.locationId || null;
         let asState = false;
-        if (kind === "state" && subject && typeof ctx.recordPlaceChange === "function") {
-          try { ctx.recordPlaceChange(subject, String(e.text)); asState = true; }
-          catch (err) { if (typeof console !== "undefined") console.warn("[quest effects] world_fact state failed:", err?.message); }
-        } else if (kind === "state") {
-          // ⛔ DEFAULT DOWN, LOUDLY. A state with nothing to attach to cannot be contested by anyone, so it
-          // becomes what it actually is — a deed — and the author is told rather than left believing otherwise.
-          if (typeof console !== "undefined") console.warn(`[quest effects] world_fact kind:"state" needs a subject to be contestable — filed as a deed: "${String(e.text).slice(0, 60)}"`);
+        if (kind === "state") {
+          // ⛔ DEFAULT DOWN, LOUDLY, AND SAY WHICH WAY IT FAILED. A state nobody can contest is not a state
+          // however it is labelled — it becomes what it actually is, and the author is told. ⚠️ Three different
+          // failures used to share one message ("needs a subject"), so an author who HAD given a subject was
+          // told they had not.
+          const warn = (why) => { if (typeof console !== "undefined") console.warn(`[quest effects] world_fact kind:"state" ${why} — filed as a deed: "${String(e.text).slice(0, 60)}"`); };
+          if (!subject) warn("needs a subject to be contestable");
+          else if (typeof ctx.recordStateOn !== "function") warn("has no recordStateOn to hold it");
+          else {
+            try {
+              const filedAs = ctx.recordStateOn(subject, String(e.text));
+              asState = !!filedAs;
+              if (!filedAs) warn(`subject "${subject}" is neither a place nor anyone met`);
+            } catch (err) { warn(`failed: ${err?.message}`); }
+          }
         }
         applied.push({ type: "world_fact", text: e.text, kind: asState ? "state" : "deed", permanent: e.permanent !== false });
         break;

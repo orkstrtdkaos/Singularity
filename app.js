@@ -83,7 +83,7 @@ import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, 
 import { routeBetween, routeLine } from "./engine/journey.js";
 import { sendCaravan, caravansOf } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./engine/entityDetail.js";
-import { collapseScenePresence, canonicalPersonId, personArtSeed, applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM, repairUnnamedPeople } from "./engine/npcs.js";   // SNG-431 §1: the pre-namer saves get their names
+import { collapseScenePresence, canonicalPersonId, personArtSeed, applyNpcUpdates, findExistingNpc, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM, repairUnnamedPeople } from "./engine/npcs.js";   // SNG-431 §1: the pre-namer saves get their names
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent, lastEnteredSubPlace } from "./engine/places.js";
 import { activeArcEffects, craftCostNote, encounterBias, effectsInPlainWords, npcMoodLines, travelCostFactor } from "./engine/arceffects.js";   // SNG-273: an advanced arc is something you FEEL
 import { knownIndex, whoIs, figureArtRecord } from "./engine/whois.js";   // SNG-299: who is that, and where do I read more
@@ -144,7 +144,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.3";
+const APP_VERSION = "2.0.4";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -13191,6 +13191,31 @@ function resolveQuestOutcome(questId, outcomeId, { onDone } = {}) {
     teachAbility: (id, opts = {}) => learnAbility(character, id, fullCatalog(), CONTENT.rules,
       { free: opts.free !== false, attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, traditionIndex: CONTENT.traditionIndex }),
     recordPlaceChange: (locId, change) => applyPlaceUpdates(character, locId, [{ note: change }], { day }),
+    // ⛔ SNG-584 (Aevi's queue §2) — A STATE IS NOT ONLY EVER ABOUT A PLACE, and routing every one through
+    // the line above did not merely file them wrong: `applyPlaceUpdates` CREATES the record it is handed, so a
+    // state about a person MINTED A PHANTOM PLACE NAMED AFTER THEM in the save.
+    //
+    // ⛑ RESOLVES, THEN WRITES THROUGH THE DOOR THAT ALREADY EXISTS — `placeMemory` for a place, `knownFacts`
+    // for a person — and RETURNS WHICH, so `quests.js` can default a state down to a deed when nothing took
+    // it instead of reporting a state nobody holds.
+    //
+    // ⚠️ PLACE IS ASKED OF `CONTENT.locations`, NEVER OF `placeMemory`. Memory is where the phantoms landed,
+    // so trusting it would let this bug's own output prove itself right.
+    //
+    // ⬜ AND A MADE THING IS NOT HERE. Aevi: two of the twelve want a record for something that is neither
+    // place nor person, and `world/canon/` can already hold one — nothing mints it. Unresolved returns null
+    // and the fact files down as a deed, which loses nothing and states nothing false.
+    recordStateOn: (subjectId, text) => {
+      const id = String(subjectId || "").trim();
+      if (!id) return null;
+      if (CONTENT.locations?.[id] || CONTENT.locations?.[slugify(id)]) {
+        applyPlaceUpdates(character, CONTENT.locations?.[id] ? id : slugify(id), [{ note: text }], { day });
+        return "place";
+      }
+      const person = findExistingNpc(character.npcRegistry || {}, slugify(id), id);
+      if (person?.id) { applyNpcUpdates(character, [{ op: "update", npcId: person.id, learned: text }], { day }); return "person"; }
+      return null;
+    },
     // ⛔ SNG-552 §4 — THE DEED, WHICH IS THE HALF THAT MUST SURVIVE BEING CONTRADICTED. Shaped here because
     // `who`, `where` and the clock are the app's to know; `quests.js` passes only what it saw happen.
     // ⚠️ Fire-and-forget like every other ledger write — a network failure must never cost the player a turn.

@@ -15088,12 +15088,17 @@ console.log("\n── §221 · the deed and the state are two facts ──");
   const { loadContentHeadless: lch221 } = await import("./headless_content.mjs");
   const C221 = await lch221();
 
-  const run221 = (effects) => {
+  // ⛔ SNG-584 — THE HARNESS MODELS THE RESOLVER, because the caller's ANSWER is now part of the contract.
+  // `recordStateOn` returns the kind of record that took the state, or null when nothing could — and a fixture
+  // that always returned truthy would prove the happy path and nothing else. ⚠️ That is §231's mistake from the
+  // other direction, ten sections down: a test that models the caller wrongly proves nothing about the caller.
+  const run221 = (effects, resolve = (id) => (id === "the_facility" ? "place" : null)) => {
     const ledger = [], places = [];
     const c = { name: "T", holdings: [], npcRegistry: {}, inventory: [], worldState: {}, peopleDisposition: {},
       quests: [{ id: "q", title: "Q", status: "active", structured: true, outcomes: [{ id: "o", name: "O", effects }] }] };
     const r = Q221.resolveStructuredQuest(c, "q", "o", { worldDay: 40, content: C221,
-      recordFact: () => {}, recordLedger: (ev) => ledger.push(ev), recordPlaceChange: (l, ch) => places.push([l, ch]) });
+      recordFact: () => {}, recordLedger: (ev) => ledger.push(ev),
+      recordStateOn: (id, ch) => { const kind = resolve(id); if (kind) places.push([id, ch, kind]); return kind; } });
     return { r, ledger, places, fact: (r.applied || []).find(x => x.type === "world_fact") };
   };
 
@@ -15136,6 +15141,42 @@ console.log("\n── §221 · the deed and the state are two facts ──");
   // did it. Shaped in app.js, where `who`, `where` and the clock are known.
   check("§221: ⚑ …and the row names its author, which is the half canon alone would forget",
     /who: character\.id, playerKey: character\.playerKey \|\| getPlayerKey\(\)/.test(rd("app.js")));
+
+  /* ---- 5 · ⛔ AND A STATE IS NOT ONLY EVER ABOUT A PLACE (SNG-584, Aevi's queue §2) ---- */
+  // ⚑ THE OLD HOOK WAS `recordPlaceChange` FOR EVERY SUBJECT, and app.js wires that to `applyPlaceUpdates`,
+  // which CREATES the record it is handed. So a state about a PERSON did not merely land in the wrong store —
+  // it MINTED A PHANTOM PLACE NAMED AFTER THEM, which the place surfaces then read back as somewhere the
+  // character had been. ⚠️ All 24 world facts are `deed` today, so nothing had fired it; Aevi counts twelve
+  // that want a state, and most of those subjects are not places. The bug was waiting for the content.
+  const person221 = run221([{ type: "world_fact", kind: "state", subject: "mara_wells", text: "Mara speaks for Millbrook now." }],
+    (id) => (id === "mara_wells" ? "person" : null));
+  check("§221: ⛔ a state about a PERSON is filed as one — not as a place named after them",
+    person221.fact?.kind === "state" && person221.places.length === 1 && person221.places[0][2] === "person",
+    JSON.stringify(person221.places[0] || null));
+  // ⛔ AND THE RESOLVER'S "NO" IS HONOURED. Before this the branch set `asState = true` whenever the call did
+  // not THROW, so a subject nothing could hold still reported a state — the author believed the world could be
+  // argued with about a fact no record carries.
+  const nowhere221 = run221([{ type: "world_fact", kind: "state", subject: "a_thing_silas_made", text: "It still stands." }],
+    () => null);
+  check("§221: ⛔ …and a subject nothing can hold defaults DOWN to a deed, rather than claiming a state nobody holds",
+    nowhere221.fact?.kind === "deed" && nowhere221.places.length === 0);
+  check("§221: ⛑ …and the deed still survives it — defaulting down must never cost the record of what was done",
+    nowhere221.ledger.length === 1 && /It still stands/.test(nowhere221.ledger[0].what));
+  // ⚠️ AND THE APP'S RESOLVER ASKS `CONTENT.locations`, NEVER `placeMemory` — memory is where the phantoms
+  // landed, so trusting it would let this bug's own output prove itself right.
+  //
+  // ⛔ SCOPED TO THE RESOLVER, and my first form was not. A file-wide `!/placeMemory\?\.\[id\]/` failed on an
+  // unrelated `isVisited` helper three thousand lines away — a NEGATIVE asserted over a whole file is a claim
+  // about the file, and the claim here is about one function. Same lesson as stripping comments before
+  // parsing: measure the region the claim is about.
+  const APP221 = rd("app.js");
+  const i221 = APP221.indexOf("recordStateOn: (subjectId, text)");
+  const resolver221 = i221 >= 0 ? APP221.slice(i221, APP221.indexOf("\n    },", i221)) : "";
+  check("§221: ⚠️ …and the resolver asks the CONTENT for a place, never the memory the phantoms were written into",
+    resolver221.length > 100
+    && /CONTENT\.locations\?\.\[id\] \|\| CONTENT\.locations\?\.\[slugify\(id\)\]/.test(resolver221)
+    && !/placeMemory/.test(resolver221),
+    `${resolver221.length} chars of resolver; reads placeMemory: ${/placeMemory/.test(resolver221)}`);
 }
 
 // ⛔ SNG-552 · THE LIVE ARTIFACT OF AEVI'S OWN REGRESSION — "a deferral currently reads as an advance on the one

@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "id": "dev_report",
+  "at": "2026-09-14T15:29:02.288Z",
+  "build": "1.9.526",
+  "character": {
+    "id": "char-mrhs8286",
+    "name": "Silas Weir",
+    "playerKey": "player-s9z9u1",
+    "level": 33,
+    "rev": 2093,
+    "day": 18,
+    "turns": 369,
+    "countingSince": null,
+    "countsCoverWholeLife": false
+  },
+  "ops": {
+    "emitted": {
+      "sceneSummary": 369,
+      "choices": 368,
+      "characterDeltas": 195,
+      "scene": 369,
+      "npcUpdates": 320,
+      "factUpdates": 40,
+      "placeUpdates": 80,
+      "codexUpdates": 218,
+      "timeOps": 328,
+      "imagePrompt": 41,
+      "sceneEnded": 142,
+      "itemUpdates": 8,
+      "questUpdates": 50,
+      "offer": 57,
+      "moveTo": 20,
+      "delegateOps": 6,
+      "deeds": 25,
+      "standingOps": 6,
+      "ledgerEvents": 14,
+      "discovery": 6,
+      "stageOps": 15,
+      "generateRequest": 13,
+      "inventoryAdd": 2,
+      "scene_ended": 2,
+      "_applyFailedOp": 8,
+      "newEncounter": 3,
+      "encounterOps": 1,
+      "gambitApt": 70,
+      "markDefiningMoment": 1,
+      "_engineClosedScene": 5,
+      "gambitOps": 1,
+      "intentsHeard": 3,
+      "partyOps": 3,
+      "stateOps": 1
+    },
+    "outcomes": {
+      "offer": {
+        "applied": 62,
+        "rejected": 2,
+        "lastWhy": "rejected-shape",
+        "exceedsEmissions": true
+      },
+      "delegateOps": {
+        "applied": 4,
+        "rejected": 2,
+        "lastWhy": "refused-capacity",
+        "exceedsEmissions": false
+      }
+    },
+    "never": [
+      "adoptSchool",
+      "arcOps",
+      "bandOps",
+      "deathOps",
+      "debtOps",
+      "deriveItem",
+      "holdingOps",
+      "markTeacher",
+      "newAbility",
+      "offerAcquisition",
+      "offerIntent",
+      "offerPromotion",
+      "projectOps",
+      "unlockPrecursor",
+      "unlockSubstrate"
+    ],
+    "neverCount": 15,
+    "knownCount": 43,
+    "unknown": {},
+    "inProse": {},
+    "emptyClaims": 0
+  },
+  "coverage": {
+    "npcRegistry": {
+      "n": 41,
+      "fields": {
+        "age": 0,
+        "sex": 6,
+        "gender": 38,
+        "pronouns": 38,
+        "role": 38,
+        "description": 38,
+        "bondType": 3,
+        "relationship": 38,
+        "status": 38,
+        "knownFacts": 35,
+        "skillsObserved": 26,
+        "deeds": 0,
+        "domains": 7,
+        "inventory": 0
+      }
+    },
+    "inventory": {
+      "n": 29,
+      "fields": {
+        "customName": 1,
+        "aliases": 3,
+        "kind": 29,
+        "description": 29
+      }
+    }
+  },
+  "fireTests": null,
+  "promptRows": null,
+  "world": {
+    "locations": 143,
+    "abilities": 438,
+    "npcs": 172
+  }
+}

@@ -46,14 +46,42 @@ export function gainPhrase(verdict) {
     : "neither gains — it's even";
 }
 
-/** The interaction clause — how the two declared moves READ against each other. Pure. */
-export function interactionClause(playerVerb, opponentVerb) {
+/** ⛔ SNG-588 (Erik, in play) — "this was a contest of wills — so no damage skills… yet some of it still read
+ *  as 'turning a blow' etc."
+ *
+ *  ⚑ HE IS QUOTING THE ENGINE. This clause was four hardcoded sentences in BLADE vocabulary — "your blow is
+ *  turned aside", "the blows meet and both scatter" — printed over a STANDOFF, whose whole definition (rule 18,
+ *  in as many words) is "a confrontation where nobody has drawn and the meter is THEIR WILL, not their blood."
+ *
+ *  ⚠️ AND THE MODULE ALREADY KNEW BETTER ONE LINE DOWN: `meterWord` is injected precisely so a standoff's
+ *  meter can read "their resolve" instead of "momentum" — which it did, in the same receipt, two words from a
+ *  blow nobody threw. ⛑ One half of the sentence adapted to the frame and the other half never did.
+ *
+ *  ⛔ SO THE CLAUSES ARE DATA, LIKE `SB_VERB`, and for the reason its own comment gives: so the app and the sim
+ *  can never describe one round in two vocabularies. ⬜ Content may replace any kind's set outright
+ *  (`frameKinds[kind].clauses`); these are the defaults, and `fight` is the shape the others depart from. */
+export const SB_CLAUSES = {
+  fight: { youHold: "you turn it aside", theyHold: "your blow is turned aside",
+    bothPress: "the blows meet and both scatter", bothWait: "you both circle, testing" },
+  // ⚠️ NOBODY HAS DRAWN. A standoff is won by bending them, so nothing here may break, land or turn a blade.
+  standoff: { youHold: "you give no ground", theyHold: "they do not budge",
+    bothPress: "you press past each other, and neither bends", bothWait: "you both wait, and the silence works" },
+  chase: { youHold: "you slip it", theyHold: "they close the line you wanted",
+    bothPress: "you both surge, and the gap holds", bothWait: "you both feint for the opening" },
+};
+
+/** The interaction clause — how the two declared moves READ against each other. Pure.
+ *  `kind` selects the vocabulary; `clauses` lets content override a kind's set outright. */
+export function interactionClause(playerVerb, opponentVerb, { kind = "fight", clauses = null } = {}) {
   const oPhrase = SB_VERB[opponentVerb] || opponentVerb;
   const pDef = SB_DEFENSIVE.has(playerVerb), oDef = SB_DEFENSIVE.has(opponentVerb);
-  return pDef && !oDef ? `they ${oPhrase} — you turn it aside`
-    : !pDef && oDef ? `they ${oPhrase} — your blow is turned aside`
-    : !pDef && !oDef ? `they ${oPhrase} — the blows meet and both scatter`
-    : `they ${oPhrase} — you both circle, testing`;
+  // ⛑ AN UNKNOWN KIND FALLS TO THE FIGHT SET, never to nothing — a missing clause would print "undefined"
+  // into a player's receipt, which is worse than the wrong metaphor.
+  const set = { ...SB_CLAUSES.fight, ...(SB_CLAUSES[kind] || {}), ...(clauses || {}) };
+  return pDef && !oDef ? `they ${oPhrase} — ${set.youHold}`
+    : !pDef && oDef ? `they ${oPhrase} — ${set.theyHold}`
+    : !pDef && !oDef ? `they ${oPhrase} — ${set.bothPress}`
+    : `they ${oPhrase} — ${set.bothWait}`;
 }
 
 /** Build the whole receipt line. Everything the app knows is INJECTED (`meterWord`, `meterMax`), so this
@@ -61,7 +89,8 @@ export function interactionClause(playerVerb, opponentVerb) {
  *
  *  `rr` is the round result; `playerDecl` the declared move; `beforeMom` the momentum BEFORE this round —
  *  the argument whose corruption caused the bug, and which the sim now samples directly. */
-export function receiptLine({ rr, playerDecl, beforeMom, scouting = false, meterWord = "momentum", meterMax = 16 }) {
+export function receiptLine({ rr, playerDecl, beforeMom, scouting = false, meterWord = "momentum", meterMax = 16,
+  kind = "fight", clauses = null, icon = null }) {
   const after = rr?.state?.momentum ?? beforeMom;
   const { verdict } = roundVerdict(beforeMom, after);
   const oVerb = rr?.oppDecl?.function || "press in", pVerb = playerDecl?.function;
@@ -76,5 +105,8 @@ export function receiptLine({ rr, playerDecl, beforeMom, scouting = false, meter
   if (scouting) return `👁 You read them — they ${oPhrase}. You give nothing away.${meter}${enBit}${prox}${fxBit}`;
   // CCODE-37: a woven round says so — you did two things in one turn, and it cost you for both.
   const wov = playerDecl?.woven ? ` ⋈ woven with ${playerDecl.woven.name}` : "";
-  return `⚔ You ${SB_VERB[pVerb] || pVerb} with ${playerDecl?.name}${wov} · ${interactionClause(pVerb, oVerb)} · ${gainPhrase(verdict)} ·${meter}${enBit}${hpBit}${prox}${fxBit}`;
+  // ⛔ SNG-588 — AND THE ICON WAS A BLADE ON A STANDOFF TOO. `frameKinds` authors one per kind (🗣 for a
+  // standoff) and this printed ⚔ over a confrontation where nobody has drawn — the same half-adapted sentence
+  // as the clause beside it, in a single character.
+  return `${icon || "⚔"} You ${SB_VERB[pVerb] || pVerb} with ${playerDecl?.name}${wov} · ${interactionClause(pVerb, oVerb, { kind, clauses })} · ${gainPhrase(verdict)} ·${meter}${enBit}${hpBit}${prox}${fxBit}`;
 }

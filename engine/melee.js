@@ -105,6 +105,43 @@ export function commandSlots(character, { cfg = {}, renownBand = null } = {}) {
  *  `chosen` is the player's pick, in order. ⛔ INVALID PICKS ARE DROPPED, NOT HONOURED: someone who has
  *  withdrawn, gone down, or is not on the roster cannot be brought forward, and silently keeping them would
  *  spend a slot on nobody. */
+/** ⛔ SNG-588 (Erik, in play) — "clicking 'bring forward' on vessin doesn't appear to do anything" and
+ *  "I didn't see any actions from the folded party." ⚑ THOSE ARE ONE DEFECT, AND IT IS THE FIFTH TWO-READERS
+ *  BUG THIS WEEK: the panel computed the forward/folded split ONE way and the engine that resolves the round
+ *  computed it ANOTHER.
+ *
+ *  ⚠️ MEASURED ON HIS SAVE. Loki is level 7 with presence 4, so `commandSlots` gives him ONE slot — himself.
+ *  The panel called `bringForward(all, { slots: 1 })`, which puts the player in the only slot and can never
+ *  admit anyone else, so every pip was inert and Vessin and Cy both drew as folded. ⛑ MEANWHILE THE ENGINE
+ *  ASKED A DIFFERENT QUESTION: two allies present is a `skirmish`, `actingSlots` returns Infinity, and
+ *  EVERYONE WAS ALREADY FORWARD — which is Erik's own ruling of 2026-09-12, "3 or fewer combatants in your
+ *  party means everyone acts and no one is folded."
+ *
+ *  ⛔ SO THE PANEL WAS CONTRADICTING HIS RULING ON SCREEN, and the missing fold contributions were not
+ *  missing at all: nobody was folded, so there was nothing to contribute. Both halves of what he saw follow
+ *  from the two readers, and neither is visible if you only read one of them.
+ *
+ *  ⛑ THIS IS THE ONE COMPUTATION. `encounters.js` resolves the round from it and the panel draws from it, so
+ *  the picture and the fight can no longer disagree. Pure; `lead` and the present count are injected. */
+export function lineSplit(allies = [], { chosen = null, lead = null, presentCount = null } = {}) {
+  const all = allies || [];
+  const named = Math.max(1, num(lead?.slots, 1));
+  const present = Number.isFinite(Number(presentCount))
+    ? Number(presentCount)
+    : all.filter(a => a && a.present !== false && !a.isPlayer && a.kind !== "player").length;
+  const t = actingSlots(resolutionTier(present, 1), { namedLimit: named });
+  const slots = t === Infinity ? Infinity : Math.min(named, t);
+  const split = bringForward(all, { chosen, slots });
+  // ⚑ AND THE PANEL NEEDS TO SAY *WHY* THE PIPS CANNOT MOVE, which is a different fact from who is forward:
+  // at a full-resolve tier everyone acts and the pick is moot; below it, the pick is real but bounded by the
+  // slots you lead. ⚠️ `lead.why` has said "yourself, and nobody else yet" since CCODE-276 and nothing
+  // rendered it — an authored explanation with no reader, next to a control nobody could work.
+  return { ...split, slots, everyoneActs: t === Infinity, namedLimit: named,
+    why: t === Infinity
+      ? "everyone acts — a party this size leaves nobody folded"
+      : (lead?.why || `you lead ${slots}`) };
+}
+
 export function bringForward(allies = [], { chosen = null, slots = 1 } = {}) {
   const live = (allies || []).filter(a => a && a.present !== false && !a.downed);
   // §177: a full-resolve tier passes Infinity — everyone comes forward. num() reads a non-finite as absent and would have made it ONE,

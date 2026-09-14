@@ -130,7 +130,7 @@ import { tickAllProjects, openProject, projectProgress, interruptProject, resume
 import { holdOpen, releaseHold, slowSink, canReach, resolveRetrieval } from "./engine/death.js"; // CCODE-270: the player's road back — the seven retrieval crafts had no door
 import { alliesOf } from "./engine/combatants.js"; // CCODE-276: the roster the party block renders
 import { championsFor, resolveChampion, creditChampion, championLine, sendingIsGrim } from "./engine/champion.js"; // SNG-587: somebody else takes the fight
-import { commandSlots, bringForward, canRaiseBand, raiseBand, bandStrength, bandThreat, bloodBand, recoverBand, legionClash } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
+import { commandSlots, bringForward, lineSplit, canRaiseBand, raiseBand, bandStrength, bandThreat, bloodBand, recoverBand, legionClash } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
 import { groupCapability, loadBearing } from "./engine/group.js";   // CCODE-317/322: what your line covers, and who holds it alone
 import { characterPower, threatBand } from "./engine/threat.js"; // CCODE-52: built power sets the mean the encounter pool revolves around
 import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine, FRAME_FREEFORM_CUE } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c). SNG-246 Fix D: playerReceiptLine = the mechanical receipt SHOWN to the player
@@ -145,7 +145,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.7";
+const APP_VERSION = "2.0.8";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14952,7 +14952,13 @@ function fogLadderLine(fog) {
  *  every fight as "neither gains — it's even". tests/contest_sim.mjs Monte-Carlos it now. */
 function sbRoundReceipt(rr, playerDecl, beforeMom, scouting) {
   return receiptLine({ rr, playerDecl, beforeMom, scouting,
-    meterWord: sbMeterWord(), meterMax: CONTENT.skillBattle?.engine?.momentum?.meterMax ?? 16 });
+    meterWord: sbMeterWord(), meterMax: CONTENT.skillBattle?.engine?.momentum?.meterMax ?? 16,
+    // ⛔ SNG-588 (Erik) — "this was a contest of wills … yet some of it still read as 'turning a blow'." The
+    // meter word has adapted to the frame since SNG-247 and the SENTENCE AROUND IT never did. The kind rides
+    // now, so the clause and the icon come from the same place the meter label always has.
+    ...(() => { const k = (() => { const e = activeEnc(); return e ? (encounterKind(e.def) || "fight") : "fight"; })();
+      return { kind: k, clauses: CONTENT.frameKinds?.[k]?.clauses || null,
+        icon: CONTENT.frameKinds?.[k]?.icon || FRAME_KINDS_FALLBACK_FULL[k]?.icon || null }; })() });
 }
 
 // CCODE-36 (Erik): one round as a compact line for the END-OF-FIGHT narration. This is the GM's raw material for
@@ -15274,12 +15280,21 @@ function skillBattlePanel() {
         npcs: { ...(CONTENT.npcs || {}), ...(character.npcRegistry || {}) }, company: character.company || null });
       if (all.length < 2) return "";
       const lead = commandSlots(character, { cfg: meleeCfg() });
-      const split = bringForward(all, { chosen: st.broughtForward || null, slots: lead.slots });
+      // ⛔ SNG-588 — THE SAME SPLIT THE FIGHT RESOLVES FROM. This called `bringForward(all, { slots: lead.slots })`
+      // while `encounters.js` asked `actingSlots(resolutionTier(…))` — two readers of one question, and Erik saw
+      // both halves of the disagreement: inert pips, and no contributions from a "folded" party that the engine
+      // had never folded. ⚠️ The present count excludes the player, exactly as the engine's does.
+      const split = lineSplit(all, { chosen: st.broughtForward || null, lead,
+        presentCount: all.filter(a => a.present !== false && !a.isPlayer && a.kind !== "player").length });
       const fwd = new Set(split.forward.map(a => a.id));
-      const pip = (a) => `<button class="opt sb-fwd${fwd.has(a.id) ? " on" : ""}" data-sbfwd="${esc(a.id)}"${a.isPlayer ? " disabled" : ""} title="${a.isPlayer ? "you are always forward" : fwd.has(a.id) ? "acting this round — click to fold back" : "bring forward"}">${esc(String(a.name).split(" ")[0])}</button>`;
+      // ⛑ AND A PIP THAT CANNOT MOVE IS NOT OFFERED AS IF IT CAN. When everyone already acts there is nothing
+      // to pick; when you lead one, the only slot is you. Either way the reason is SAID — `lead.why` has read
+      // "yourself, and nobody else yet" since CCODE-276 and nothing has ever rendered it.
+      const pickable = !split.everyoneActs && split.slots > 1;
+      const pip = (a) => `<button class="opt sb-fwd${fwd.has(a.id) ? " on" : ""}" data-sbfwd="${esc(a.id)}"${a.isPlayer || !pickable ? " disabled" : ""} title="${a.isPlayer ? "you are always forward" : !pickable ? esc(split.why) : fwd.has(a.id) ? "acting this round — click to fold back" : "bring forward"}">${esc(String(a.name).split(" ")[0])}</button>`;
       const canPick = all.filter(a => a.present !== false && !a.downed);
       return `<div class="sb-party">
-        <div class="sys-label">Your line — you lead ${lead.slots}${lead.capped ? " <span class=\"hint\">(the most, for now)</span>" : ""}</div>
+        <div class="sys-label">Your line — ${esc(split.why)}${lead.capped ? " <span class=\"hint\">(the most, for now)</span>" : ""}</div>
         <div class="sb-fwd-row">${canPick.map(pip).join("")}</div>
         ${(() => {
           // ⛔ CCODE-317 — WHAT YOUR LINE COVERS, AND WHAT ONLY ONE PERSON HOLDS. `groupCapability` has
@@ -16071,7 +16086,9 @@ async function sbEndInner(rr) {
   // and it follows the rule every other step in this file obeys (§135): SETTLE AND SAVE BEFORE YOU TELL.
   character.activeEncounter = null;
   saveCharacter(character);
-  renderPlay(null, { thinking: transcript.length > 1 ? "Telling the whole fight…" : "…" });
+  // ⛔ SNG-588 — AND THIS ONE SAID "…" WHEN THE FIGHT WAS SHORT, at the exact moment the panel disappears
+  // and the player has nothing else to read. It is the hardest wait in the game to sit through blind.
+  renderPlay(null, { thinking: transcript.length > 1 ? "The fight is over — telling the whole of it…" : "The fight is over — telling it…" });
   // SNG-230 §6b: a collapse is a DECISIVE one-beat finish, not a worn-down win — narrate it as such.
   const finisherNote = rr._collapse ? " This was a single decisive finishing stroke — end it fast and hard, not as a drawn-out win." : "";
   const mechForGM = decidingLine ? ` The deciding exchange, mechanically: ${decidingLine}. ${eventLine}` : "";
@@ -16766,7 +16783,19 @@ function renderPlay(turn, opts = {}) {
     }
   }
   if (opts.itemsAdvanced?.length) main += opts.itemsAdvanced.map(a => `<div class="beat item-woke">✦ ${esc(a.itemName)} stirs — <em>${esc(a.stageName)}</em></div>`).join("");
-  if (opts.thinking) main += `<div class="thinking">${esc(opts.thinking)}</div>`;
+  // ⛔ SNG-588 (Erik, in play) — "it dumped me out of combat with NO narration… but I was wrong… i just
+  // couldn't Tell it was waiting on the response."
+  //
+  // ⚠️ IT WAS WAITING, AND IT SAID SO IN DIM GREY ITALIC WITH NO MOTION — appended to the bottom of a page
+  // whose entire battle panel had just vanished, while he was scrolled to where the moves used to be. ⚑ A
+  // waiting state that does not move does not read as waiting; it reads as the end of the page.
+  //
+  // ⛑ AND HALF THE CALL SITES PASS THE LITERAL STRING "…". Three dots is not a message. One default here
+  // covers every one of them rather than five edits that would drift apart.
+  if (opts.thinking) {
+    const said = /^[\s.…]*$/.test(String(opts.thinking)) ? "The GM is writing…" : String(opts.thinking);
+    main += `<div class="thinking" id="thinking-now"><span class="think-dot" aria-hidden="true"></span>${esc(said)}</div>`;
+  }
   if (opts.aside) main += `<div class="beat"><em>${opts.aside.split("\n").map(esc).join("<br>")}</em></div>`;
   if (opts.gmAside) main += `<div class="gm-aside">${opts.gmAside.split(/\n\n+/).map(p => `<p>${esc(p)}</p>`).join("")}</div>`;
   // SNG-122: the safety net — a travel intent that didn't move the player gets a one-tap "arrive" so
@@ -16951,6 +16980,15 @@ function renderPlay(turn, opts = {}) {
   main += `</div>`;
 
   chrome(`<div class="layout">${sheet}${main}</div>`);
+  // ⛔ SNG-588 — AND IT HAS TO BE WHERE THE EYE IS. Erik was scrolled to where the battle moves had been when
+  // the panel vanished; the waiting line rendered far below him and he read the silence as a crash.
+  // ⚠️ ONLY THE WAITING STATE SCROLLS, and only when it is present — that is the one moment in the game where
+  // the player has nothing to do and no way to tell whether anything is happening. Moving the page under them
+  // at any other time would be taking the scroll away from a reader who is using it.
+  if (opts.thinking) {
+    try { document.getElementById("thinking-now")?.scrollIntoView({ block: "center", behavior: "smooth" }); }
+    catch { /* an older view engine: the line is still on the page, just not centred */ }
+  }
 
   if (turn) {
     for (const btn of app.querySelectorAll("[data-choice]")) {

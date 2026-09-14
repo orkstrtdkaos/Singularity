@@ -8,7 +8,7 @@
 import { battleRound, opponentPolicy, synthesizeOpponentSheet, synthesizeStaticSheet, declaredSense, isObscureDecl } from "./skill_battle.js";
 import { wornSoak, wornSoakLayers, wieldBonusFor } from "./inventory.js";   // 2026-09-04: the PC’s authored armour reaches the fight seat
 import { targetableAllies, alliesOf } from "./combatants.js";
-import { commandSlots, bringForward, theatresOf, overmatchOf, answersOvermatch, scaleRank, actingSlots, resolutionTier } from "./melee.js";
+import { commandSlots, bringForward, lineSplit, theatresOf, overmatchOf, answersOvermatch, scaleRank, actingSlots, resolutionTier } from "./melee.js";
 import { summonSheetFor } from "./npcsheet.js";   // §177: the sheet a summon gets — "THE SHEET ITSELF" had no caller   // CCODE-274: how many you lead is earned; who comes forward is chosen
 import { currentStage } from "./evolution.js";   // CCODE-265: an earned item stage can lift a companion's canStrike:false   // CCODE-253: who a foe may aim at — DERIVED here, per this seam's own rule
 import { buildFunctionIndex } from "./functions.js";   // R36 for a human: a party member's crafts say what they bring
@@ -410,13 +410,15 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   const answer = over?.overmatched ? answersOvermatch(over, {
     powers: (character.abilities || []).map(a => content?.abilities?.[a.abilityId]).filter(Boolean),
     ground: state.preparedGround || [] }) : null;
+  // ✅ ERIK RULED IT 2026-09-12: "3 or fewer combatants in your party means everyone acts and no one is folded." So a full-resolve
+  // tier is NOT capped by commandSlots — it is the tier saying every ally takes a real turn, and §150's fold contributions simply
+  // do not arise in a fight that small. ⛔ AND THE COUNT IS THE ALLIES, NOT THE ALLIES PLUS YOU: counting the player made a party of
+  // three read as four combatants and folded one of them, which is the thing he was looking at when he ruled.
+  // ⛑ SNG-588 — AND THIS EXPRESSION IS NOW `lineSplit`, SHARED WITH THE PANEL. It lived here alone while the panel
+  // computed its own split from `lead.slots` and nothing else, so the picture and the fight disagreed about who
+  // was folded: Erik's pips were inert and his "folded" party was never folded at all.
   const split = partyAll.length > 1
-    // ✅ ERIK RULED IT 2026-09-12: "3 or fewer combatants in your party means everyone acts and no one is folded." So a full-resolve
-    // tier is NOT capped by commandSlots — it is the tier saying every ally takes a real turn, and §150's fold contributions simply
-    // do not arise in a fight that small. ⛔ AND THE COUNT IS THE ALLIES, NOT THE ALLIES PLUS YOU: counting the player made a party of
-    // three read as four combatants and folded one of them, which is the thing he was looking at when he ruled. commandSlots still
-    // decides who comes forward once the party is bigger than the tier resolves in full, and a legion still leaves you one figure.
-    ? bringForward(partyAll, { chosen: state.broughtForward || null, slots: (() => { const t = actingSlots(resolutionTier(partyPresent.length, 1), { namedLimit: lead.slots }); return t === Infinity ? Infinity : Math.min(lead.slots, t); })() })
+    ? lineSplit(partyAll, { chosen: state.broughtForward || null, lead, presentCount: partyPresent.length })
     : null;
   // ⛔ SPEC_party_contributions, SHAPE B. A folded ally does the thing their family is FOR, once a fight each,
   // and it is named — Erik: "being IN the party must be beneficial", and a warder in slot 5 contributed exactly

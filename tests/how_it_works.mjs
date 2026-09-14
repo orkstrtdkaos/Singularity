@@ -2247,8 +2247,25 @@ console.log("\n── §177 · the debt refuses you here; the tier decides who a
   const en177 = rd("engine/encounters.js").replace(/^\s*\/\/.*$/gm, "");
   // ⛔ ERIK RULED THE OPEN QUESTION 2026-09-12: at three or fewer allies everyone acts. So a FULL tier passes through uncapped and
   // commandSlots decides only once the party is bigger — and the count is the allies, not the allies plus you (§186).
+  // ⛔ SNG-588 — THIS PINNED THE EXPRESSION'S SOURCE TEXT IN `encounters.js`, and the expression MOVED. Erik
+  // found the reason it had to: the panel computed the split a second way, from `lead.slots` alone, so his pips
+  // were inert and his "folded" party was never folded. ⛑ One computation now — `lineSplit` — and BOTH callers
+  // read it, which is the claim this check should always have made.
+  //
+  // ⚠️ Fifteenth gate this week to pin one instance of something general, and this one pinned a LOCATION:
+  // asserted on behaviour it would have survived the move and still caught the defect.
+  const split177 = (n, named) => ML177.lineSplit(
+    Array.from({ length: n + 1 }, (_, k) => ({ id: k ? `a${k}` : "you", name: k ? `A${k}` : "You",
+      present: true, canAct: true, ...(k ? {} : { isPlayer: true }) })),
+    { chosen: null, lead: { slots: named, why: `you lead ${named}` }, presentCount: n });
   check("§177: ⛔ …and the tier decides the forward pick — a full-resolve tier passes through uncapped, a narrower one is capped by what commandSlots earned",
-    /const t = actingSlots\(resolutionTier\(partyPresent\.length, 1\), \{ namedLimit: lead\.slots \}\); return t === Infinity \? Infinity : Math\.min\(lead\.slots, t\);/.test(en177));
+    split177(2, 1).everyoneActs === true && split177(2, 1).folded.length === 0
+    && split177(5, 2).slots === 2 && split177(5, 2).folded.length > 0,
+    `${split177(2, 1).why} | 5 allies at 2 named → ${split177(5, 2).forward.length} forward, ${split177(5, 2).folded.length} folded`);
+  // ⚑ AND BOTH READERS ASK THE ONE FUNCTION. Two readers of "who is forward" is exactly what Erik was looking at.
+  check("§177: ⚑ …and the panel and the fight ask the SAME function, so the picture cannot disagree with the round",
+    /lineSplit\(partyAll, \{ chosen: state\.broughtForward/.test(en177)
+    && /lineSplit\(all, \{ chosen: st\.broughtForward/.test(rd("app.js")));
   const fwd177 = ML177.bringForward([{ id: "a", name: "A", present: true, canAct: true }, { id: "b", name: "B", present: true, canAct: true }], { chosen: null, slots: Infinity });
   check("§177: …and a full-resolve tier folds nobody", fwd177.forward.length === 2 && fwd177.folded.length === 0, JSON.stringify(fwd177));
   // c. "THE SHEET ITSELF" — a summon craft that lands puts a sheeted ally on the encounter's state; it never touches the registry
@@ -16524,6 +16541,86 @@ console.log("\n── §237 · somebody else takes the fight ──");
     /const ch = def \? championsNow\(def\)\.find\(c => c\.id === choice\.championId\) : null;/.test(A237));
   check("§237: …and a send is counted, so nobody-sends-anyone can be told from sending-is-broken",
     /character\._championSends = \[/.test(A237));
+}
+
+
+// ⛔ SNG-588 — FOUR THINGS ERIK HIT IN ONE STANDOFF, AND TWO OF THEM WERE THE SAME DEFECT.
+//
+//   1 ⛔ "clicking 'bring forward' on vessin doesn't appear to do anything" — and —
+//   2 ⛔ "I didn't see any actions from the folded party"
+//     ⚑ ONE BUG. The panel computed the forward/folded split from `lead.slots` (Loki leads ONE, himself) while
+//     `encounters.js` asked `actingSlots(resolutionTier(…))`, which for two allies is a SKIRMISH — Infinity,
+//     everyone acts, nobody folded. So the pips were inert AND the "folded" party he was waiting on had never
+//     been folded. ⛑ The panel was contradicting Erik's own 2026-09-12 ruling on screen. §177 now holds the one
+//     computation; this section holds what the panel does with it.
+//
+//   3 ⛔ "this was a contest of wills — so no damage skills… yet some of it still read as 'turning a blow'"
+//     ⚑ He was quoting the engine. The clause was four hardcoded blade sentences printed over a frame whose
+//     definition is "nobody has drawn and the meter is THEIR WILL, not their blood" — while the METER WORD in
+//     the same sentence had adapted correctly since SNG-247. Half the receipt knew what frame it was in.
+//
+//   4 ⚠️ "it dumped me out of combat with NO narration… i just couldn't Tell it was waiting on the response."
+//     It was waiting, in dim grey italic, motionless, below the fold of a page whose battle panel had vanished.
+console.log("\n── §238 · the frame the receipt is printed inside ──");
+{
+  const RR238 = await import("../engine/roundreceipt.js");
+  const A238 = rd("app.js");
+  const CSS238 = rd("style.css");
+
+  /* ---- 1 · ⛔ A STANDOFF HAS NO BLADES IN IT ---- */
+  // ⚠️ ASSERTED AS THE RULE, not as today's four sentences: no clause for a frame where nobody has drawn may
+  // use fighting vocabulary, whichever words end up in it.
+  const BLADEY = /\b(blow|blows|strike|struck|blade|wound|scatter|parr(y|ied)|cut)\b/i;
+  const standoff238 = Object.values(RR238.SB_CLAUSES.standoff || {});
+  check("§238: ⛔ no standoff clause reaches for a weapon — the meter is their will, not their blood",
+    standoff238.length >= 4 && standoff238.every(c => !BLADEY.test(c)),
+    standoff238.filter(c => BLADEY.test(c)).join(" | ") || `${standoff238.length} clauses, none bladed`);
+  // ⛑ AND THE FIGHT SET STILL IS BLADED, or the check above passes on an empty vocabulary.
+  check("§238: ⛑ …while a FIGHT still reads as one, so the guard measures a difference and not a silence",
+    Object.values(RR238.SB_CLAUSES.fight).some(c => BLADEY.test(c)));
+  check("§238: …and an unknown frame falls to the fight set rather than printing `undefined` at a player",
+    /— [a-z]/.test(RR238.interactionClause("strike", "resist", { kind: "no-such-frame" })),
+    RR238.interactionClause("strike", "resist", { kind: "no-such-frame" }));
+
+  /* ---- 2 · ⚑ THE WHOLE RECEIPT WEARS THE FRAME, not half of it ---- */
+  const mk238 = (kind, icon, meter) => RR238.receiptLine({ rr: { state: { momentum: -3 }, oppDecl: { function: "resist" } },
+    playerDecl: { function: "deceive", name: "Wrong Reality" }, beforeMom: 0, meterWord: meter, kind, icon });
+  const sd238 = mk238("standoff", "🗣", "their resolve");
+  check("§238: ⚑ a standoff receipt carries its own icon, its own meter AND its own clause — all three, or none",
+    sd238.startsWith("🗣") && /their resolve/.test(sd238) && !BLADEY.test(sd238), sd238.slice(0, 96));
+  // ⚠️ THE REGRESSION THAT MADE THIS POSSIBLE: the meter adapted and nothing else did. If that recurs the two
+  // halves will disagree again, so they are asserted TOGETHER on one line rather than as two checks.
+  check("§238: ⚠️ …and the app hands it the kind, not just the meter word",
+    /kind: k, clauses: CONTENT\.frameKinds\?\.\[k\]\?\.clauses/.test(A238));
+
+  /* ---- 3 · ⛔ A CONTROL THAT CANNOT MOVE IS NOT OFFERED AS IF IT CAN ---- */
+  check("§238: ⛔ the forward pips disable themselves when nothing can be picked, and SAY why",
+    /const pickable = !split\.everyoneActs && split\.slots > 1;/.test(A238)
+    && /a\.isPlayer \|\| !pickable \? " disabled" : ""/.test(A238)
+    && /Your line — \$\{esc\(split\.why\)\}/.test(A238));
+  // ⬜ AND THE REASON IS THE ENGINE'S OWN SENTENCE. `lead.why` has read "yourself, and nobody else yet" since
+  // CCODE-276 with nothing rendering it — an authored explanation with no reader, beside a dead control.
+  const ML238 = await import("../engine/melee.js");
+  const solo238 = ML238.lineSplit(
+    [{ id: "you", name: "You", isPlayer: true, present: true, canAct: true },
+     ...Array.from({ length: 5 }, (_, k) => ({ id: `a${k}`, name: `A${k}`, present: true, canAct: true }))],
+    { chosen: null, lead: { slots: 1, why: "you lead 1: yourself, and nobody else yet" }, presentCount: 5 });
+  check("§238: ⬜ …and when you lead only yourself it is the engine's sentence that says so",
+    solo238.slots === 1 && /nobody else yet/.test(solo238.why), solo238.why);
+
+  /* ---- 4 · ⚠️ AND THE WAIT IS VISIBLE, FINDABLE, AND IN WORDS ---- */
+  check("§238: ⚠️ a bare … is not a message — one default covers every call site that passes one",
+    /The GM is writing…/.test(A238) && /test\(String\(opts\.thinking\)\)/.test(A238));
+  check("§238: ⛑ …it MOVES, because a still line reads as the end of the page",
+    /think-dot/.test(A238) && /@keyframes think-pulse/.test(CSS238)
+    && /prefers-reduced-motion: reduce\) \{ \.think-dot \{ animation: none/.test(CSS238));
+  // ⛔ AND IT GOES TO THE PLAYER. Erik was scrolled to where the moves had been; the line rendered far below.
+  // ⚠️ ONLY the waiting state scrolls — moving the page at any other time takes the scroll from a reader.
+  check("§238: ⛔ …and only the waiting state scrolls itself into view, never anything else",
+    /getElementById\("thinking-now"\)\?\.scrollIntoView/.test(A238)
+    && (A238.match(/scrollIntoView/g) || []).length === 1);
+  check("§238: …and the hardest wait in the game — the fight ending — says what it is doing",
+    /The fight is over — telling/.test(A238));
 }
 
 /* ══════════ REPORT ══════════ */

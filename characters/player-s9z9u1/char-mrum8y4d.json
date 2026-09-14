@@ -233,86 +233,78 @@
         "player": "Walk around to Cy's side and examine the seam it found—use See the Made Thing to read what that precision means",
         "summary": "At the Hub crossing's center, Loki read the Null Stone's sealed construction—old, precise, and deliberately concealing something. Cy found what sight alone could not.",
         "narration": "You circle the Null Stone slowly, keeping pace with Cy as it completes its perimeter trace. The construct's clicking falls silent as you kneel beside it, your fingers hovering just above the pale surface. The seam catches the afternoon light—a hairline crack that runs vertically through the stone's far face, so precise it could have been drawn with a measure.\n\nYou reach for See the Made Thing and let the craft settle into your sight. The falsecrafts in this moment bloom into clarity: the Null Stone is not what it appears. Beneath the worn, ordinary surface runs a deliberate construction—the seam was *made*, not broken. Someone cut this stone to conceal something, or to hold something. The precision speaks of intention, and the age of the work speaks of intention that has held for a very long time. Whatever was sealed here was sealed well, and sealed to *last*.\n\nBut the craft shows you only the *making*. Not what lies behind the seam. Not what was meant to be hidden—only that hiding was the purpose.\n\nCy's lens clicks shut. It does not retreat from the stone, but its attention shifts—a small, deliberate movement that might be disagreement or recognition. Vessin has stepped closer, reading your face. Kael remains motionless, and in that stillness you feel the weight of something recognized but not yet named. Veln Ashpause has not moved from the western arch, but their gaze is now entirely on you and the stone."
+      },
+      {
+        "player": null,
+        "summary": "At the Hub crossing, a Churn-Revel erupts from one of the waygate arches—deliberate chaos masking a theft or tampering directed at the Null Stone itself. The sealed seam you uncovered is the target.",
+        "narration": "The afternoon light splinters.\n\nOne of the five waygate arches—the one facing spinward—detonates into *motion*. Not violence: motion. A figure vaults through the arch in a tumble that makes no sense geometrically, lands twisted, and springs upright in the same breath. Behind them come others, three or four, moving in a pattern that has no pattern. They are *laughing*. One carries a brass horn that produces no sound at all—only a shimmer in the air. Another trails ribbons of cloth that move against the wind. The chaos spreads like water finding cracks in stone.\n\nThe relay desk attendant bolts from their seat. The merchants by the carved bench press backward. Cy's lens snaps closed. Vessin's hand moves to her coat.\n\nKael does not move. Their eyes track the Revel with the focus of someone reading a text they already know the shape of.\n\nVeln Ashpause's grey-coat does not flicker. But their gaze—fixed until now on you and the Null Stone—shifts. Watches the chaos with the terrible attention of someone who foresaw exactly this.\n\nOne of the Revel figures breaks from the knot and moves *toward* the stone. Not running. Flowing. Their hands are already reaching, and you realize: this is not random carnival madness. Something about the Null Stone has drawn them here. The sealed seam you just found. The thing hidden inside it. This *chaos* is a door—and someone is opening it while the Hub crossing's ordinary eye is turned elsewhere.\n\nThe choice is yours. The moment is *now*."
       }
     ],
     "lastTurn": {
-      "narration": "You circle the Null Stone slowly, keeping pace with Cy as it completes its perimeter trace. The construct's clicking falls silent as you kneel beside it, your fingers hovering just above the pale surface. The seam catches the afternoon light—a hairline crack that runs vertically through the stone's far face, so precise it could have been drawn with a measure.\n\nYou reach for See the Made Thing and let the craft settle into your sight. The falsecrafts in this moment bloom into clarity: the Null Stone is not what it appears. Beneath the worn, ordinary surface runs a deliberate construction—the seam was *made*, not broken. Someone cut this stone to conceal something, or to hold something. The precision speaks of intention, and the age of the work speaks of intention that has held for a very long time. Whatever was sealed here was sealed well, and sealed to *last*.\n\nBut the craft shows you only the *making*. Not what lies behind the seam. Not what was meant to be hidden—only that hiding was the purpose.\n\nCy's lens clicks shut. It does not retreat from the stone, but its attention shifts—a small, deliberate movement that might be disagreement or recognition. Vessin has stepped closer, reading your face. Kael remains motionless, and in that stillness you feel the weight of something recognized but not yet named. Veln Ashpause has not moved from the western arch, but their gaze is now entirely on you and the stone.",
-      "sceneSummary": "At the Hub crossing's center, Loki read the Null Stone's sealed construction—old, precise, and deliberately concealing something. Cy found what sight alone could not.",
+      "narration": "The afternoon light splinters.\n\nOne of the five waygate arches—the one facing spinward—detonates into *motion*. Not violence: motion. A figure vaults through the arch in a tumble that makes no sense geometrically, lands twisted, and springs upright in the same breath. Behind them come others, three or four, moving in a pattern that has no pattern. They are *laughing*. One carries a brass horn that produces no sound at all—only a shimmer in the air. Another trails ribbons of cloth that move against the wind. The chaos spreads like water finding cracks in stone.\n\nThe relay desk attendant bolts from their seat. The merchants by the carved bench press backward. Cy's lens snaps closed. Vessin's hand moves to her coat.\n\nKael does not move. Their eyes track the Revel with the focus of someone reading a text they already know the shape of.\n\nVeln Ashpause's grey-coat does not flicker. But their gaze—fixed until now on you and the Null Stone—shifts. Watches the chaos with the terrible attention of someone who foresaw exactly this.\n\nOne of the Revel figures breaks from the knot and moves *toward* the stone. Not running. Flowing. Their hands are already reaching, and you realize: this is not random carnival madness. Something about the Null Stone has drawn them here. The sealed seam you just found. The thing hidden inside it. This *chaos* is a door—and someone is opening it while the Hub crossing's ordinary eye is turned elsewhere.\n\nThe choice is yours. The moment is *now*.",
+      "sceneSummary": "At the Hub crossing, a Churn-Revel erupts from one of the waygate arches—deliberate chaos masking a theft or tampering directed at the Null Stone itself. The sealed seam you uncovered is the target.",
       "choices": [
         {
-          "label": "⚔ Face A Churn-Revel",
-          "encounterId": "gm-a-churn-revel",
+          "label": "Press into the chaos—cut a line toward the Revel figure moving on the stone",
           "attribute": "physical",
-          "subAttribute": "strength",
+          "subAttribute": "agility",
           "axes": {},
-          "difficulty": 0,
+          "difficulty": "hard",
+          "opposedDifficulty": null,
           "intentTags": [
-            "risky",
-            "commit"
-          ]
+            "attack",
+            "defend",
+            "risky"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ask Kael what they know about the Null Stone's seam—plainly, no pretense.",
+          "label": "Use Misdirect to fracture the Revel's focus—buy Kael or Vessin a clean move",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "presence",
           "axes": {},
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "ask",
-            "direct"
+            "misdirect",
+            "defend"
+          ],
+          "abilityId": "misdirect",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Kael plainly—do they know what this Revel is, and what it wants",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "ask"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Use Descent to bargain with Cy directly—offer it a choice: name what it knows about this stone, or accept that you will have to break the seam yourself to find out.",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Stay at the stone and shield it—physical presence between the Revel and the seam",
+          "attribute": "physical",
+          "subAttribute": "strength",
           "axes": {},
           "difficulty": "hard",
           "opposedDifficulty": null,
           "intentTags": [
-            "negotiate",
-            "risky"
-          ],
-          "abilityId": "descent",
-          "energyCost": 5,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Walk to Veln Ashpause and ask them directly what they know—why they came here, why they are watching, what they already know about this moment.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": "hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "confront",
-            "direct",
-            "risky"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Examine the seam more carefully—touch it, test whether it gives, look for any way to open it without breaking the stone.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
-          "difficulty": "hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study",
-            "careful"
+            "defend",
+            "guard"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -323,7 +315,11 @@
       ],
       "deeds": [],
       "characterDeltas": {
-        "energy": -3
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
       },
       "ledgerEvents": [],
       "questUpdates": [],
@@ -331,107 +327,74 @@
       "delegateOps": [],
       "arcOps": [],
       "adoptSchool": null,
-      "offer": {
-        "thing": "Kael's stillness—a recognition that reads as knowing something they have not yet named",
-        "from": "Kael's own knowledge of this place and what it holds; the road-warden's work carries them through hidden channels of information"
-      },
+      "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "The Hub crossing at afternoon—five waygate arches converging around the central Null Stone. Pale stone floor worn smooth by uncounted arrivals. High windows cast slanting bars of light. The sealed seam on the stone's far face now visible and examined.",
+        "setting": "The Hub crossing at late afternoon—five waygate arches converge around the Null Stone at the chamber's heart. Pale stone floor worn smooth. High windows cast long slanting bars of light. One spinward arch now vomits chaos: ribbons, laughter, impossible motion.",
         "npcsPresent": [
           {
-            "name": "Cy",
-            "state": "Perched at the base of the Null Stone, lens closed, attention shifted but still present"
-          },
-          {
             "name": "Vessin Tallow-bark",
-            "state": "Stepped closer, reading Loki's face in silence"
+            "state": "Hand moving to her coat, reading the chaos with the focus of someone assessing a threat"
           },
           {
             "name": "Kael",
-            "state": "Motionless near the Null Stone, recognition weighing in the stillness"
+            "state": "Motionless, eyes tracking the Revel with the focus of someone who foresaw this"
           },
           {
             "name": "Veln Ashpause",
-            "state": "Still by the western arch, grey-coated and unmoved, gaze now fixed entirely on Loki and the seam"
+            "state": "Still by the western arch, gaze shifted from Loki and the stone to the chaos, watching with foreknowledge"
           },
           {
-            "name": "A courier",
-            "state": "At the relay desk, still unaware of the moment at the stone"
+            "name": "Cy",
+            "state": "Lens snapped closed, perched at the base of the Null Stone"
+          },
+          {
+            "name": "A Revel figure",
+            "state": "Breaking from the chaos-knot, moving toward the Null Stone with reaching hands"
+          },
+          {
+            "name": "The relay desk attendant",
+            "state": "Bolted from their seat, now backing away from the chaos"
           },
           {
             "name": "Two merchants",
-            "state": "By the carved bench, conducting quiet business, oblivious"
+            "state": "Pressed against the carved bench, eyes wide"
           }
         ],
         "objects": [
-          "The Null Stone at the center—pale, worn, now showing its precise seam on the far face",
-          "Five waygate arches (wood, metal, and grown-thing)",
+          "The Null Stone at the center—pale, sealed, its seam now visible",
+          "Five waygate arches (the spinward one spilling chaos)",
           "Pale worn stone floor",
-          "Carved bench",
-          "A slate at the relay desk",
-          "High windows letting afternoon light fall in slanting bars"
+          "Ribbons of cloth trailing through the air",
+          "A brass horn (producing no sound, only shimmer)",
+          "The carved bench"
         ],
         "threads": [
-          "What is sealed behind the seam in the Null Stone?",
-          "Why does Cy recognize something in this stone that other Precursor things do not?",
-          "What does Veln Ashpause know, and will they speak?",
-          "What does Kael's stillness mean—do they know what is sealed here?",
-          "The man in the lower Annex and his tampering with the waygate—still unresolved"
+          "What does the Revel want with the Null Stone?",
+          "Who sent the Churn-Revel, and why now?",
+          "Does Veln Ashpause know this was coming?",
+          "What is sealed behind the seam, and why is someone willing to risk the Hub crossing to reach it?"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "kael",
-          "name": "Kael",
-          "role": "Road-warden; a traveler who moves between the reaches and carries true news",
-          "note": "Went very still when Cy found the seam—a reaction that reads as recognition, not surprise. Something about the sealed stone is known to them, or known to the network they carry word through.",
+          "note": "Tracked the Revel with the focus of someone who foresaw this. Their stillness reads as recognition, not surprise—this is a known thing.",
           "learned": [
-            "Something about the Null Stone's seam is significant to road-wardens or to the relay network itself"
+            "The Churn-Revel or its business is something Kael has encountered or knows of before"
           ],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Standing near the Null Stone, very still, recognition weighing visibly"
+          "statusNote": "Standing at the Hub crossing, tracking the chaos with fore-knowledge"
         },
         {
           "op": "update",
           "npcId": "veln-ashpause",
-          "name": "Veln Ashpause",
-          "role": "Hourkeeper",
-          "note": "Gaze fixed entirely on Loki and the seam. Their stillness has deepened—they are not waiting anymore; they are witnessing.",
-          "learned": [
-            "They came to this place knowing this moment would happen—the seam's discovery is what they foreknew"
-          ],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "By the western arch, grey-coated, gaze locked on Loki and the Null Stone. Witnessing."
-        },
-        {
-          "op": "update",
-          "npcId": "vessin-tallow-bark",
-          "name": "Vessin Tallow-bark",
-          "role": "Lone traveler; reader of falsecrafts",
-          "note": "Stepped closer and is reading Loki's face—she can read the shape of what was found in your expression, even if she cannot see the seam itself from where she stands.",
-          "learned": [],
-          "skillsObserved": [
-            "Reads her companion's face for information her own senses cannot reach"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At Loki's side, having stepped closer, reading their face in silence"
+          "note": "Gaze shifted from Loki and the seam to the Revel the moment it erupted. Their foreknowledge now visibly points at this moment.",
+          "statusNote": "By the western arch, watching the Revel with the terrible attention of someone who foresaw this"
         }
       ],
       "intentsHeard": [],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "The Null Stone at the Hub crossing contains a deliberately sealed seam running vertically through its far face. The stone was cut to conceal or contain something. The precision and age of the work speaks of intention built to last. What it hides remains unknown.",
-          "subjectId": "the-crossing"
-        }
-      ],
+      "factUpdates": [],
       "placeUpdates": [],
       "discovery": null,
       "codexUpdates": [
@@ -439,40 +402,35 @@
           "topic": "the-crossing",
           "label": "The Crossing",
           "kind": "place",
-          "entityId": "the-crossing",
-          "fact": "The Null Stone at the Hub was deliberately sealed with a hairline seam running vertically through its face—someone cut this to conceal or hold something. The work is old and precise, built to endure. What lies behind the seam is unknown. Cy detected it where Prism Sight could not.",
+          "fact": "A Churn-Revel erupted from the spinward waygate arch at late afternoon on day 3—deliberate chaos masking a coordinated attempt on the Null Stone. The seam's discovery triggered the arrival, or the Revel was already positioned to act the moment the seam was found.",
           "links": [
-            "cy-s-construction",
-            "halfex"
+            "the-null-stone",
+            "the-annex-sender"
           ]
         }
       ],
       "holdingOps": [],
-      "debtOps": [],
-      "partyOps": [],
-      "generateRequest": [],
-      "encounterOps": [],
-      "projectOps": [],
-      "bandOps": [],
       "deathOps": [],
       "newEncounter": {
         "type": "duel",
         "flavor": "standoff",
-        "name": "A Churn-Revel",
-        "setup": "The Hub crossing's steady order fractures—a sudden carnival of deliberate chaos erupts from one of the waygate arches. It moves with purpose beneath the revelry: something is being stolen, something is being changed, and the chaos is *meant* to obscure it. The Revel moves like a living thing, and it wants distraction.",
+        "name": "The Churn-Revel",
+        "setup": "A carnival of deliberate chaos erupts from the spinward waygate arch—laughter, ribbons, impossible motion. Beneath the revelry, a coordinated action: the Revel moves to seize or tamper with the Null Stone and its sealed seam. The chaos is the distraction. The stone is the prize. You stand at its base with Vessin, Kael, and Cy nearby. Veln Ashpause watches from the western arch. The Hub crossing's ordinary eye—the merchants, the relay attendant—is in flight.",
         "lethal": false,
         "opponent": {
-          "name": "A Churn-Revel",
+          "name": "The Churn-Revel",
           "health": 5,
-          "threat": 30,
+          "threat": 25,
           "yieldAt": 1,
           "fleeDifficulty": 12,
           "pursuit": "never",
           "tacticTags": [
+            "distraction",
             "misdirection",
-            "overwhelming sensory input",
-            "deliberate choreography",
-            "contagious energy"
+            "charm",
+            "overwhelming-numbers",
+            "flow-like",
+            "adaptive"
           ]
         }
       },
@@ -480,66 +438,69 @@
       "unlockSubstrate": null,
       "timeOps": null,
       "moveTo": null,
-      "stateOps": [
-        {
-          "op": "correctAbilityRank",
-          "id": "better_story",
-          "to": 2
-        }
-      ],
+      "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": "The Null Stone's far face in afternoon light—a hairline seam running vertically, precise and deliberate, the stone pale and worn smooth except for that razor-thin line where something was sealed. Cy's brass segments perched at the stone's base, lens dark. Veln Ashpause's grey form watching from the arch across the chamber, expression fixed between foreknowledge and sorrow.",
+      "imagePrompt": "A moment of fracture at the Hub crossing's heart: pale worn stone beneath high afternoon light. One of five waygate arches erupts in impossible motion—ribbons flowing against the wind, a figure tumbling and rising in a pattern that breaks geometry, laughter that rings like a warning. The Null Stone stands untouched at the chamber's center, its sealed seam catching the light. Around it: Loki kneeling, Vessin's hand at her coat, Kael's motionless focus, and Veln Ashpause in grey watching from the arch with the foreknowledge of an Hourkeeper. Chaos and order colliding at the world's center.",
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
-      "sceneEnded": false
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "sceneEnded": false,
+      "momentArt": "https://image.pollinations.ai/prompt/A%20moment%20of%20fracture%20at%20the%20Hub%20crossing's%20heart%3A%20pale%20worn%20stone%20beneath%20high%20afternoon%20light.%20One%20of%20five%20waygate%20arches%20erupts%20in%20impossible%20motion%E2%80%94ribbons%20flowing%20against%20the%20wind%2C%20a%20figure%20tumbling%20and%20rising%20in%20a%20pattern%20that%20breaks%20geometry%2C%20laughter%20that%20rings%20like%20a%20warning.%20The%20Null%20Stone%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=22875&nologo=true"
     },
     "sceneState": {
-      "setting": "The Hub crossing at afternoon—five waygate arches converging around the central Null Stone. Pale stone floor worn smooth by uncounted arrivals. High windows cast slanting bars of light. The sealed seam on the stone's far face now visible and examined.",
+      "setting": "The Hub crossing at late afternoon—five waygate arches converge around the Null Stone at the chamber's heart. Pale stone floor worn smooth. High windows cast long slanting bars of light. One spinward arch now vomits chaos: ribbons, laughter, impossible motion.",
       "npcsPresent": [
         {
-          "name": "Cy",
-          "state": "Perched at the base of the Null Stone, lens closed, attention shifted but still present"
-        },
-        {
           "name": "Vessin Tallow-bark",
-          "state": "Stepped closer, reading Loki's face in silence"
+          "state": "Hand moving to her coat, reading the chaos with the focus of someone assessing a threat"
         },
         {
           "name": "Kael",
-          "state": "Motionless near the Null Stone, recognition weighing in the stillness"
+          "state": "Motionless, eyes tracking the Revel with the focus of someone who foresaw this"
         },
         {
           "name": "Veln Ashpause",
-          "state": "Still by the western arch, grey-coated and unmoved, gaze now fixed entirely on Loki and the seam"
+          "state": "Still by the western arch, gaze shifted from Loki and the stone to the chaos, watching with foreknowledge"
         },
         {
-          "name": "A courier",
-          "state": "At the relay desk, still unaware of the moment at the stone"
+          "name": "Cy",
+          "state": "Lens snapped closed, perched at the base of the Null Stone"
+        },
+        {
+          "name": "A Revel figure",
+          "state": "Breaking from the chaos-knot, moving toward the Null Stone with reaching hands"
+        },
+        {
+          "name": "The relay desk attendant",
+          "state": "Bolted from their seat, now backing away from the chaos"
         },
         {
           "name": "Two merchants",
-          "state": "By the carved bench, conducting quiet business, oblivious"
+          "state": "Pressed against the carved bench, eyes wide"
         }
       ],
       "objects": [
-        "The Null Stone at the center—pale, worn, now showing its precise seam on the far",
-        "Five waygate arches (wood, metal, and grown-thing)",
+        "The Null Stone at the center—pale, sealed, its seam now visible",
+        "Five waygate arches (the spinward one spilling chaos)",
         "Pale worn stone floor",
-        "Carved bench",
-        "A slate at the relay desk",
-        "High windows letting afternoon light fall in slanting bars"
+        "Ribbons of cloth trailing through the air",
+        "A brass horn (producing no sound, only shimmer)",
+        "The carved bench"
       ],
       "threads": [
-        "What is sealed behind the seam in the Null Stone?",
-        "Why does Cy recognize something in this stone that other Precursor things do not?",
-        "What does Veln Ashpause know, and will they speak?",
-        "What does Kael's stillness mean—do they know what is sealed here?",
-        "The man in the lower Annex and his tampering with the waygate—still unresolved"
+        "What does the Revel want with the Null Stone?",
+        "Who sent the Churn-Revel, and why now?",
+        "Does Veln Ashpause know this was coming?",
+        "What is sealed behind the seam, and why is someone willing to risk the Hub crossing to reach it?"
       ]
     },
-    "beats": 10,
+    "beats": 11,
     "subPlace": {
       "slug": "the-hub-crossing",
       "name": "The Hub Crossing",
@@ -549,7 +510,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 3,
-    "hour": 18,
+    "hour": 19,
     "realAnchor": null
   },
   "companions": [
@@ -1094,17 +1055,18 @@
         "[d3] Recognized Loki at the Hub crossing and introduced themselves by name after being asked. Offered a straightforward choice about their own business versus sightseeing together. Carries knowledge of the water-crisis and moves downhill routes faster than official channels.",
         "[d3] Revealed their business at the Crossing is finished—carrying the water-crisis warning downhill through the relay network. Offered to show Loki and Vessin the inner sites of the Crossing (the Twelve Mouths, the Common Table, the Made Arch).",
         "[d3] Kael knows something about the Null Stone beyond what they stated plainly: that it is older than the gates, older than the Transition. Their stillness suggests the seam is meaningful to them.",
-        "[d3] Went very still when Cy found the seam—a reaction that reads as recognition, not surprise. Something about the sealed stone is known to them, or known to the network they carry word through."
+        "[d3] Went very still when Cy found the seam—a reaction that reads as recognition, not surprise. Something about the sealed stone is known to them, or known to the network they carry word through.",
+        "[d3] Tracked the Revel with the focus of someone who foresaw this. Their stillness reads as recognition, not surprise—this is a known thing."
       ],
       "knownFacts": [
-        "Carries word of the water-crisis moving downhill faster than any official channel can track",
         "Has business at the Crossing they came to finish",
         "Knows the Null Stone, the Twelve Mouths, and the Made Arch as sites within the Crossing",
         "Carries word through the relay network, which moves faster than official channels",
         "Has already passed their warning; the work is complete",
         "Knows the inner sites of the Crossing and who gathers at them",
         "Went very still when Cy found the seam—a reaction of recognition, not surprise",
-        "Something about the Null Stone's seam is significant to road-wardens or to the relay network itself"
+        "Something about the Null Stone's seam is significant to road-wardens or to the relay network itself",
+        "The Churn-Revel or its business is something Kael has encountered or knows of before"
       ],
       "skillsObserved": [
         "Reads travelers by bearing and gait",
@@ -1115,12 +1077,12 @@
       "sex": "unknown",
       "gender": "unknown",
       "pronouns": "they/them",
-      "statusNote": "Standing near the Null Stone, very still, recognition weighing visibly",
+      "statusNote": "Standing at the Hub crossing, tracking the chaos with fore-knowledge",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 3
       },
-      "met": 4
+      "met": 5
     }
   },
   "placeMemory": {
@@ -1524,7 +1486,7 @@
     "lastSharedReadAt": "2026-09-07T22:27:40.544Z",
     "lastTickWorldDay": 76,
     "lastCanonWorldDay": 76,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "A figure in grey standing by the western arch, watching the gates with absolute stillness and patience.",
@@ -6521,11 +6483,14 @@
         "facts": [
           "[d3] you have walked here",
           "[d3] The Null Stone at the hub of the Crossing conceals a hairline seam running vertically through its face—too precise to be natural breakage. Cy detected it through direct contact; Prism Sight could not resolve it. The seam's placement and precision suggest deliberate construction or concealment.",
-          "[d3] The Null Stone at the Hub was deliberately sealed with a hairline seam running vertically through its face—someone cut this to conceal or hold something. The work is old and precise, built to endure. What lies behind the seam is unknown. Cy detected it where Prism Sight could not."
+          "[d3] The Null Stone at the Hub was deliberately sealed with a hairline seam running vertically through its face—someone cut this to conceal or hold something. The work is old and precise, built to endure. What lies behind the seam is unknown. Cy detected it where Prism Sight could not.",
+          "[d3] A Churn-Revel erupted from the spinward waygate arch at late afternoon on day 3—deliberate chaos masking a coordinated attempt on the Null Stone. The seam's discovery triggered the arrival, or the Revel was already positioned to act the moment the seam was found."
         ],
         "links": [
           "cy-s-construction",
-          "halfex"
+          "halfex",
+          "the-null-stone",
+          "the-annex-sender"
         ],
         "aliases": [
           "The Null Stone's Seam"
@@ -6764,6 +6729,24 @@
   "nativeGrantsVersion": 2,
   "reconcileVersion": 62,
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "A moment of fracture at the Hub crossing's heart: pale worn stone beneath high afternoon light. One of five waygate arches erupts in impossible motion—ribbons flowing against the wind, a figure tumbli",
+      "url": "https://image.pollinations.ai/prompt/A%20moment%20of%20fracture%20at%20the%20Hub%20crossing's%20heart%3A%20pale%20worn%20stone%20beneath%20high%20afternoon%20light.%20One%20of%20five%20waygate%20arches%20erupts%20in%20impossible%20motion%E2%80%94ribbons%20flowing%20against%20the%20wind%2C%20a%20figure%20tumbling%20and%20rising%20in%20a%20pattern%20that%20breaks%20geometry%2C%20laughter%20that%20rings%20like%20a%20warning.%20The%20Null%20Stone%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=22875&nologo=true",
+      "caption": "At the Hub crossing, a Churn-Revel erupts from one of the waygate arches—deliberate chaos ",
+      "worldDay": 76,
+      "at": "2026-09-14T22:51:56.914Z"
+    },
+    {
+      "kind": "beast",
+      "prompt": "Churnfolk chaos manifested into a rolling knot of improvised limbs and salvage, laughing in a language of breaking things, never the same shape twice.",
+      "url": "https://image.pollinations.ai/prompt/a%20dangerous%20creature%2C%20a%20churn-revel%3A%20Churnfolk%20chaos%20manifested%20into%20a%20rolling%20knot%20of%20improvised%20limbs%20and%20salvage%2C%20laughing%20in%20a%20language%20of%20breaking%20things%2C%20never%20the%20same%20shape%20twice.%20%E2%80%94%20dark%20fantasy%20creature%20art%2C%20ominous%2C%20no%20text%2C%20ominous%2C%20predatory%2C%20seen%20a%20moment%20too%20late%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=640&height=512&seed=82633&nologo=true",
+      "caption": "a churn-revel",
+      "worldDay": 76,
+      "at": "2026-09-14T22:51:30.900Z",
+      "subjectKind": "beast",
+      "subjectId": "churn_revel"
+    },
     {
       "kind": "figure",
       "prompt": "Grey-green practical coat, hair pinned back in a way that has half come undone. Dry, careful voice. Appraising eyes that price things before deciding.",
@@ -7262,8 +7245,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789423740206,
-  "rev": 598,
+  "updatedAt": 1789426316914,
+  "rev": 604,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8132,7 +8115,7 @@
     "the_gearlands": 33,
     "umbral_depths": 54,
     "the_quickwood": 101,
-    "the_center": 15
+    "the_center": 16
   },
   "opLossPending": false,
   "sessions": [
@@ -8207,6 +8190,14 @@
       "startDay": 69,
       "endDay": 69,
       "beats": 21
+    },
+    {
+      "id": "sess-10",
+      "startedAt": "2026-09-14T22:51:56.902Z",
+      "lastAt": "2026-09-14T22:51:56.902Z",
+      "startDay": 76,
+      "endDay": 76,
+      "beats": 1
     }
   ],
   "establishedFacts": [
@@ -8256,19 +8247,19 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 179,
-    "choices": 179,
-    "characterDeltas": 72,
-    "scene": 179,
+    "sceneSummary": 180,
+    "choices": 180,
+    "characterDeltas": 73,
+    "scene": 180,
     "placeUpdates": 21,
-    "codexUpdates": 102,
+    "codexUpdates": 103,
     "timeOps": 162,
     "offer": 17,
     "generateRequest": 6,
-    "sceneEnded": 54,
-    "npcUpdates": 147,
+    "sceneEnded": 55,
+    "npcUpdates": 148,
     "moveTo": 6,
-    "gambitApt": 18,
+    "gambitApt": 19,
     "deeds": 2,
     "questUpdates": 17,
     "standingOps": 1,
@@ -8276,12 +8267,12 @@
     "stageOps": 7,
     "encounterOps": 8,
     "ledgerEvents": 2,
-    "newEncounter": 2,
-    "imagePrompt": 8,
+    "newEncounter": 3,
+    "imagePrompt": 9,
     "scene_ended": 1,
     "stateOps": 1
   },
-  "_opTurns": 179,
+  "_opTurns": 180,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1.75
@@ -8729,11 +8720,121 @@
           "contagious energy"
         ]
       }
+    },
+    "gm-the-churn-revel": {
+      "schemaVersion": 1,
+      "id": "gm-the-churn-revel",
+      "type": "duel",
+      "name": "The Churn-Revel",
+      "setup": "A carnival of deliberate chaos erupts from the spinward waygate arch—laughter, ribbons, impossible motion. Beneath the revelry, a coordinated action: the Revel moves to seize or tamper with the Null Stone and its sealed seam. The chaos is the distraction. The stone is the prize. You stand at its base with Vessin, Kael, and Cy nearby. Veln Ashpause watches from the western arch. The Hub…",
+      "flavor": "standoff",
+      "lethal": false,
+      "opponent": {
+        "name": "The Churn-Revel",
+        "health": 5,
+        "threat": 25,
+        "yieldAt": 1,
+        "fleeDifficulty": 12,
+        "tacticTags": [
+          "distraction",
+          "misdirection",
+          "charm",
+          "overwhelming-numbers"
+        ]
+      }
     }
   },
-  "activeEncounter": null,
+  "activeEncounter": {
+    "defId": "gm-a-churn-revel",
+    "state": {
+      "schemaVersion": 1,
+      "encounterId": "gm-a-churn-revel",
+      "type": "duel",
+      "status": "active",
+      "round": 1,
+      "log": [],
+      "opponentHealth": 5,
+      "opponentYieldAt": 1,
+      "opponentMaxHealth": 5,
+      "tactic": null,
+      "mode": "skill_battle",
+      "opponentSheet": {
+        "name": "A Churn-Revel",
+        "attributes": {
+          "practical": 2,
+          "physical": 2,
+          "mental": 2,
+          "social": 2
+        },
+        "energy": 76,
+        "maxEnergy": 76,
+        "tacticTags": [
+          "misdirection",
+          "overwhelming sensory input",
+          "deliberate choreography",
+          "contagious energy"
+        ],
+        "skills": [
+          {
+            "function": "command",
+            "name": "presses a point",
+            "tier": 2,
+            "attribute": "social"
+          },
+          {
+            "function": "resist",
+            "name": "holds the line",
+            "tier": 2,
+            "attribute": "social"
+          },
+          {
+            "function": "reveal",
+            "name": "reads your certainty",
+            "tier": 2,
+            "attribute": "mental"
+          },
+          {
+            "function": "bind",
+            "name": "presses their advantage",
+            "tier": 2,
+            "attribute": "social"
+          }
+        ],
+        "health": 5,
+        "soak": 1,
+        "soakLayers": [
+          {
+            "rank": 1,
+            "value": 1
+          }
+        ],
+        "level": 15,
+        "synthesized": true
+      },
+      "momentum": 0,
+      "opponentEnergy": 76,
+      "turn": {
+        "phase": "sense",
+        "sel": {
+          "sense": [],
+          "action": [],
+          "bonus": []
+        },
+        "text": {
+          "sense": "",
+          "action": "",
+          "bonus": ""
+        },
+        "setupBonus": 0,
+        "bonusEarned": false,
+        "foeBonusEarned": false,
+        "senseDone": false,
+        "senseLine": ""
+      }
+    }
+  },
   "legendGovernor": {
-    "lastDeployDay": 31,
+    "lastDeployDay": 76,
     "lastBeat": "witness_power"
   },
   "syncedAt": 1789391432499,
@@ -9110,5 +9211,356 @@
   ],
   "figureImages": {
     "whois-traveler-woman": "https://image.pollinations.ai/prompt/Grey-green%20practical%20coat%2C%20hair%20pinned%20back%20in%20a%20way%20that%20has%20half%20come%20undone.%20Dry%2C%20careful%20voice.%20Appraising%20eyes%20that%20price%20things%20before%20deciding.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=22719&nologo=true"
-  }
+  },
+  "_promptRows": {
+    "character": {
+      "reached": 1,
+      "produced": 1
+    },
+    "location": {
+      "reached": 1,
+      "produced": 1
+    },
+    "region": {
+      "reached": 1,
+      "produced": 1
+    },
+    "groundDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "lore": {
+      "reached": 1,
+      "produced": 1
+    },
+    "traditionMotiveDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "sheetsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "rules": {
+      "reached": 1,
+      "produced": 1
+    },
+    "recentTurns": {
+      "reached": 1,
+      "produced": 1
+    },
+    "timeLabel": {
+      "reached": 1,
+      "produced": 1
+    },
+    "npcRegistryDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "mintedUnmetDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "npcSeedDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "traditionVocab": {
+      "reached": 1,
+      "produced": 1
+    },
+    "standingDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "recalledDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "bearingsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "caravansDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "commandDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "presenceDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "worthHereDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "inventoryDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "sceneState": {
+      "reached": 1,
+      "produced": 1
+    },
+    "holdingsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "debtsDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "carriedDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "abilityLawDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "questsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "structuredQuestsDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "traditionArcDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "npcErrandsDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "codexDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "companionsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "placeMemoryDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "agesMissingDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "newsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "worldArcsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "legendsPursuableDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "wakesDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "arcMoodDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "reachableDeadDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "threatToPlayer": {
+      "reached": 1,
+      "produced": 0
+    },
+    "guardiansDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "resolution": {
+      "reached": 1,
+      "produced": 0
+    },
+    "playerInput": {
+      "reached": 1,
+      "produced": 1
+    },
+    "exactWords": {
+      "reached": 1,
+      "produced": 0
+    },
+    "travelDirective": {
+      "reached": 1,
+      "produced": 0
+    },
+    "itemAdvance": {
+      "reached": 1,
+      "produced": 0
+    },
+    "encounterWeaveDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "encounterOfferDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "fightFramingDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "abilityGrantDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "stageRevealDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "itemEvolveDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "worldPressureDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "offerDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "teacherOfferDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "substrateDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "romanceGuidanceDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "factsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "evolvedItemsDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "opLossNote": {
+      "reached": 1,
+      "produced": 0
+    },
+    "emergenceDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "perilNote": {
+      "reached": 1,
+      "produced": 0
+    },
+    "encounterDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "masteryDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "bookkeepingRestate": {
+      "reached": 1,
+      "produced": 0
+    },
+    "anomalyDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "repairPanelDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "teacherDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "toolkitDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "availableEncounters": {
+      "reached": 1,
+      "produced": 0
+    },
+    "partyDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "ratingDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "registerDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "legendDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "livingWorldDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "assignmentsDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "latentArcsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "seasonalDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "schoolsDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "sharedCanonDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "worldCountLabel": {
+      "reached": 1,
+      "produced": 1
+    },
+    "waygateDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "readAloudDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "scenePacingDetail": {
+      "reached": 1,
+      "produced": 1
+    }
+  },
+  "_opUnknown": {
+    "sceneSummary": 1
+  },
+  "_bandNotes": null,
+  "_opCountingSince": "2026-09-14T22:51:56.913Z"
 }

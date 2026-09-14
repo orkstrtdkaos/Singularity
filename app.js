@@ -144,7 +144,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "1.9.526";
+const APP_VERSION = "1.9.527";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12291,8 +12291,12 @@ function renderCharacterScreen() {
         ${(() => {
           // ⛑ SNG-569's second half: OPEN THE DOOR TO THE CONVERSATION. The mechanic named, and the person named
           // beside it — because the stat was never the problem; the stat INSTEAD OF the relationship would have been.
+          // ⛔ ERIK 2026-09-14: the bond "gates whether they would BOTHER to". That question now has one home in
+          // the engine — this read was a hard-coded `>= 5` sitting where a dial belongs, and it is the SAME
+          // question the GM asks when it decides whether anyone comes.
           const closest = Object.values(character.npcRegistry || {})
-            .filter(n => n && n.status === "active" && (n.relationship ?? 0) >= 5)
+            .filter(n => n && n.status === "active"
+              && DeathModel.wouldReachFor(character, n, { rules: CONTENT.rules }).would)
             .sort((a, b) => (b.relationship ?? 0) - (a.relationship ?? 0)).slice(0, 3);
           if (st.dead || !closest.length) return "";
           return `<p class="hint" style="margin:6px 0 0">${esc(closest.map(n => n.name).join(", "))} — close enough that it would be them. <strong>That is a conversation to have with them, not a setting.</strong></p>`;

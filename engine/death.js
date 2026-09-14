@@ -15,7 +15,7 @@
 // ⛑ 5 IS NOT A GUESS: it is the number that makes the spec's own worked example true. Aevi wrote "Marrow at
 // bond 10 reaches the deep dark" — two rungs at bond 10 — and "an alt who never met you is a stranger with a
 // craft, and reaches the threshold at best" — zero rungs at bond 0. Both hold at 5 and the first does not at 6.
-const DEFAULTS = { thresholdDays: 1, nearDarkDays: 30, sealAfterDays: 120, bondPerRung: 5, bondRungs: 2 };
+const DEFAULTS = { thresholdDays: 1, nearDarkDays: 30, sealAfterDays: 120, bondPerRung: 5, bondRungs: 2, botherAt: 5 };
 export const DEATH_DEPTH_NAMES = ["the threshold", "the near dark", "the deep dark", "the sealed"];
 
 /** Put an entity INTO the death state — a STATUS extension, never a delete. Preserves an existing state
@@ -235,12 +235,17 @@ export function canReach(entity, { rank = 1, intensity = "standard", currentDay 
   if (reach < at) {
     // ⚠️ AND THE REFUSAL SAYS WHICH HALF WAS SHORT. "You would need rank 3" is unactionable advice for someone
     // whose rank is already 3 and whose standing is the thing that is missing — and it would read as a bug.
-    const need = at - reachOf(rank, intensity);
+    // ⛔ ERIK 2026-09-14, CORRECTING ME: "the bond shouldn't gate whether someone CAN resurrect you — it gates
+    // whether they would BOTHER to. Let's not put rules in place that stop good play."
+    // ⚠️ He is right, and a line I had written here said the opposite: "rank alone does not go this deep; it
+    // takes someone who was close to them." ⛑ THAT WAS FALSE AND UNREACHABLE AT ONCE — rank 3 already reaches the
+    // deep dark, so the branch could never fire, and it still stated a rule the design does not have. A dead
+    // branch that lies is worse than one that does nothing: the next reader believes it.
+    // ⚑ THE BOND ONLY EVER ADDS. Every reach that worked before this term existed works now (gated in §220), so
+    // the refusal names it as a ROAD and never as a requirement.
     const why = fromBond > 0
       ? `${DEATH_DEPTH_NAMES[at]} is past your reach — your craft and what you were to them together fall ${at - reach} short`
-      : need > 0 && rank >= 3
-        ? `${DEATH_DEPTH_NAMES[at]} is past your reach — rank alone does not go this deep; it takes someone who was close to them`
-        : `${DEATH_DEPTH_NAMES[at]} is past your reach — you would need rank ${at + 1}${at < 2 ? ", a surge, or a closer bond" : " or a closer bond"}`;
+      : `${DEATH_DEPTH_NAMES[at]} is past your reach — you would need rank ${at + 1}${at < 2 ? ", a surge, or someone closer to them" : ", or someone closer to them"}`;
     return { ok: false, refused: true, at, reach, fromBond, why };
   }
   return { ok: true, at, reach, fromBond };
@@ -250,6 +255,33 @@ export function canReach(entity, { rank = 1, intensity = "standard", currentDay 
  *  reacher deeper but can never reach the SEALED: `canReach` refuses depth 3 before this is ever consulted, and
  *  Erik's ruling on the sealed is that nothing reaches it. ⚠️ NEGATIVE STANDING BUYS NOTHING — it does not push
  *  a reacher backwards, because someone who hated you still knows the way; they simply have no help from it. */
+/** ⛔ SNG-567 · ERIK 2026-09-14 — "THE BOND GATES WHETHER THEY WOULD BOTHER TO."
+ *
+ *  ⛑ THIS IS WHERE STANDING BELONGS, AND IT FORBIDS NOTHING. A player may always ask anyone; a person with no
+ *  reason to come simply does not volunteer, which is a scene rather than a rule. ⚠️ `canReach` answers CAN;
+ *  this answers WOULD, and the two must never be the same function — conflating them is how a design ends up
+ *  telling a player that love is a prerequisite for a craft.
+ *
+ *  ⛔ AND A REFUSAL TO BE BROUGHT BACK OUTRANKS EVERY BOND. `open_threshold` already rules it in its own words:
+ *  "it is up to the one in the dark whether they come — the only one that can fail because THEY CHOSE NOT TO."
+ *  Erik: "depending on what the bonded NPC wants AND WHAT YOUR WILL WAS." The will is the dead person's, it is
+ *  stored on them rather than on the caster, and it is honoured first. PURE. */
+export function wouldReachFor(dead, reacher, { rules = {} } = {}) {
+  const cfg = { ...DEFAULTS, ...(rules.death || {}) };
+  const at = Math.max(0, Number(cfg.botherAt) || 0);
+  const bond = Number(reacher?.relationship);
+  const name = reacher?.name || "they";
+  if (dead?.deathState?.willing === false) {
+    return { would: false, honoured: true, bond: Number.isFinite(bond) ? bond : 0,
+      why: `${name} would come — but you have refused to be brought back, and that is honoured` };
+  }
+  if (!Number.isFinite(bond) || bond < at) {
+    return { would: false, bond: Number.isFinite(bond) ? bond : 0,
+      why: `${name} has no particular reason to go down after you` };
+  }
+  return { would: true, bond, why: `${name} would come for you` };
+}
+
 export function bondRungs(bond = 0, rules = {}) {
   const cfg = { ...DEFAULTS, ...(rules.death || {}) };
   const per = Math.max(1, Number(cfg.bondPerRung) || 6);

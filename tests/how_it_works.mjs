@@ -14901,11 +14901,52 @@ console.log("\n── §220 · what you were to them reaches too ──");
   check("§220: ⛑ the day used here really is the deep dark, so the two examples are tested where they were written",
     deepDay === 2, `depth ${deepDay}`);
   const alt = D220.canReach(dead(), { rank: 1, bond: 0, currentDay: DEEP, rules: r220 });
-  check("§220: ⛔ \"an alt who never met you is a stranger with a craft\" — bond 0 does not reach the deep dark",
-    alt.ok === false && alt.refused === true && alt.fromBond === 0);
   const marrow = D220.canReach(dead(), { rank: 1, bond: 10, currentDay: DEEP, rules: r220 });
   check("§220: ⛑ \"Marrow at bond 10 reaches the deep dark\" — and she does it on the bond, at rank 1",
     marrow.ok === true && marrow.fromBond === 2, `reach ${marrow.reach} · +${marrow.fromBond} from bond`);
+
+  /* ---- 1b · ⛔ AND THE BOND ONLY EVER ADDS — ERIK'S CORRECTION, AS AN INVARIANT ---- */
+  // ⛔ ERIK 2026-09-14: "the bond shouldn't gate whether someone CAN resurrect you — it gates whether they would
+  // BOTHER to. Let's not put rules in place that stop good play."
+  // ⚠️ MY FIRST FORM OF THIS SECTION ASSERTED THE WRONG THING. It paired Marrow with "an alt who never met you
+  // does not reach the deep dark" and read as though BOND were the limit — when the alt in that example is held
+  // back by RANK 1, and a rank-3 stranger reaches exactly as deep as they always did. The code only ever added;
+  // the GATE implied a rule the design does not have, and a gate that misstates the design teaches it wrongly.
+  // ⛑ SO THE CLAIM IS NOW THE INVARIANT: no reach that worked before the bond term exists fails because of it.
+  const shrunk = [];
+  for (const rank of [1, 2, 3, 4]) for (const intensity of ["standard", "surge"]) for (const day of [0, 2, 15, 31, 60]) {
+    const g = D220.canReach(dead(), { rank, intensity, bond: 0, currentDay: day, rules: r220 });
+    if (g.reach !== undefined && g.reach !== D220.reachOf(rank, intensity)) shrunk.push(`r${rank}/${intensity}/d${day}`);
+  }
+  check("§220: ⛔ a reacher with NO bond reaches exactly as far as they did before the term existed",
+    shrunk.length === 0, shrunk.join(", ") || "40 rank/intensity/depth combinations, none diminished");
+  check("§220: ⛑ …so a stranger with a rank-3 craft still reaches the deep dark, bond or no bond",
+    D220.canReach(dead(), { rank: 3, bond: 0, currentDay: DEEP, rules: r220 }).ok === true);
+  // ⚠️ AND NOTHING TELLS A PLAYER THAT LOVE IS A PREREQUISITE FOR A CRAFT.
+  // ⚠️ ASSERTED AGAINST CODE, NOT COMMENTARY. My first form of this check grepped the whole file — and the
+  // comment that EXPLAINS the removal quotes the removed sentence, so the gate failed on its own documentation.
+  // ⛔ Third time I have written a self-referential regex; the fix is to strip the comments and ask the code.
+  const deathCode = rd("engine/death.js").split(String.fromCharCode(10))
+    .filter(l => !/^\s*(\/\/|\*|\/\*)/.test(l)).join(String.fromCharCode(10));
+  check("§220: ⚠️ …and no refusal TELLS a player that rank alone cannot go deep — it never could not",
+    !/rank alone does not go this deep/.test(deathCode));
+
+  /* ---- 1c · ⛑ AND WHAT THE BOND IS ACTUALLY FOR: WOULD THEY BOTHER ---- */
+  // ⚠️ `canReach` answers CAN; `wouldReachFor` answers WOULD, and the two must never be one function. A player
+  // may always ASK anyone — a person with no reason to come simply does not volunteer, which is a scene.
+  const you = dead();
+  check("§220: ⛑ standing decides whether someone would BOTHER, and it forbids nothing",
+    D220.wouldReachFor(you, { name: "Marrow", relationship: 10 }, { rules: r220 }).would === true
+    && D220.wouldReachFor(you, { name: "a stranger", relationship: 0 }, { rules: r220 }).would === false);
+  // ⛔ AND THE DEAD PERSON'S OWN WILL OUTRANKS EVERY BOND. `open_threshold` rules it in its own words: "it is
+  // up to the one in the dark whether they come — the only one that can fail because THEY CHOSE NOT TO."
+  const refused220 = dead(); D220.holdOpen(refused220, "someone", { willing: false });
+  const honoured = D220.wouldReachFor(refused220, { name: "Marrow", relationship: 10 }, { rules: r220 });
+  check("§220: ⛔ …and a refusal to be brought back outranks the deepest bond, and says it was honoured",
+    honoured.would === false && honoured.honoured === true);
+  // ⛑ AND THE SURFACE THAT NAMES WHO WOULD COME ASKS THIS FUNCTION rather than a hard-coded number.
+  check("§220: ⛑ …and the death screen's \"it would be them\" reads the engine, not an inline threshold",
+    /DeathModel\.wouldReachFor\(character, n, \{ rules: CONTENT\.rules \}\)\.would/.test(rd("app.js")));
 
   /* ---- 2 · ⚠️ AND A REFUSAL IS STILL FREE, WHICH IS THE WHOLE SAFETY OF THE MECHANIC ---- */
   // ⛔ `canReach`'s own comment: "a FAILURE sinks them, so being told 'that is past your reach' must not cost
@@ -14918,8 +14959,8 @@ console.log("\n── §220 · what you were to them reaches too ──");
   // ⚠️ "You would need rank 3" is unactionable for someone whose rank IS 3 and whose standing is what is
   // missing — and it reads as a bug rather than as a rule.
   const ranked = D220.canReach(dead(), { rank: 1, bond: 0, currentDay: NEAR, rules: r220 });
-  check("§220: ⛔ …and it names the bond as a road, not only the rank",
-    /closer bond/.test(ranked.why || ""), ranked.why);
+  check("§220: ⛔ …and it names the relationship as a ROAD, never as a requirement",
+    /someone closer to them/.test(ranked.why || "") && !/need.*bond/i.test(ranked.why || ""), ranked.why);
 
   /* ---- 4 · ⛑ THE BOND BUYS RUNGS, AND IT CANNOT BUY THE SEALED ---- */
   check("§220: ⛑ standing buys rungs on a bounded ladder, and hostility buys nothing back",

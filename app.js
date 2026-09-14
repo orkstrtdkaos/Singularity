@@ -40,7 +40,8 @@ import { ITEM_KINDS, itemKindsIn, itemKindLabel, wieldBonusFor, usableCombatItem
 import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive } from "./engine/earnedpower.js"; // SNG-251 §2c/§4: the earned-power economy (ceiling = f(level, craft rank); ~1 evolution/day)
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp, playerText } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
-import { LIBRARY_INDEX, loreToHtml, libMdToHtml, circleRows } from "./engine/library.js";   // SNG-538 §4: the Library's index and renderers — pure, gated by §181
+import { LIBRARY_INDEX, loreToHtml, libMdToHtml, circleRows } from "./engine/library.js";
+import { contributionsBy } from "./engine/canon.js";   // ⛔ SNG-584: who made the shared world — tallied since SNG-128, read by nobody until now   // SNG-538 §4: the Library's index and renderers — pure, gated by §181
 import { sourcesHere } from "./engine/substrate.js";   // ⛔ Erik 2026-09-12: the four sources and how well each answers HERE
 import { groundForDecl, groundTag, substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor, peoplePresentAt } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { sceneImage, itemImage, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor } from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
@@ -143,7 +144,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "1.9.522";
+const APP_VERSION = "1.9.525";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -9313,7 +9314,7 @@ function mintTransitLocation(moveRef) {
     // SNG-225 §4a: a real dangerLevel, never null — a null danger reads as 0 (safest possible) and STARVES the
     // encounter pool (every minDanger>0 encounter becomes ineligible). Inherit the neighbourhood's danger.
     dangerLevel: deriveDangerLevel({ tags: ["transitional"] }, { baseDanger: here?.dangerLevel }),
-    _gen: { type: "location", tier: "fresh", engagementScore: 0, birthWeight: 1, rating: null, attentionHistory: [], createdDay: (() => { try { return readClock(character.clock).day; } catch { return null; } })(), provenance: { locationId: here?.id || null, day: null, hint: "transit" } },
+    _gen: mintedLocationGen({ locationId: here?.id || null, day: null, hint: "transit" }),
     map: coordForGenerated(id, here?.map, existing)
   };
   // CCODE-15 observability: a mint means the GM named a place that matched NOTHING existing (resolveLocationId
@@ -9390,7 +9391,7 @@ function mintWaygate({ id, gateId, name, description, connectsTo, connects, at, 
     ...(networkCapable ? { networkCapable: true } : {}),
     ...(defaultTo ? { waygateDefaultTo: defaultTo } : {}),
     dangerLevel: deriveDangerLevel({ tags: ["waygate"] }, { baseDanger: anchor?.dangerLevel }),
-    _gen: { type: "location", tier: "fresh", engagementScore: 0, birthWeight: 1, rating: null, attentionHistory: [], createdDay: (() => { try { return readClock(character.clock).day; } catch { return null; } })(), provenance: { hint: "made-waygate", questMade: true } },
+    _gen: mintedLocationGen({ hint: "made-waygate", questMade: true }),
     _mintedAs: "made_waygate",
     map: coordForGenerated(gid, anchor?.map, existingMaps)
   };
@@ -13543,11 +13544,72 @@ function libGreatCircle() {
     ${folk ? `<h3 class="lore-h">The Valley's Folk Crafts (open to all)</h3>${folk}` : ""}`;
 }
 
+/** ⛔ SNG-584 (SNG-552 §4, Aevi: "two of them have just become the critical path") — WHO MADE THIS WORLD.
+ *
+ *  ⚑ MEASURED BEFORE BUILDING, AND HER §4 IS MOSTLY BUILT ALREADY: the shared canon store is live
+ *  (`world/canon/valley.json`, 15 entities + 6 variants), the shared ARC store is live and carries per-actor net
+ *  vectors (`world/arcs/valley.json`, `byActor` — committed by the game itself, "arcs: Silas Weir pushed the
+ *  world"), and a cross-player ledger runs in `world/ledger/`.
+ *
+ *  ⚠️ AND `mergeCanonStores` IS NOT MISSING A CALLER — IT IS SUPERSEDED. `syncSharedCanon` contests inside
+ *  `pushMergedFile` against the freshly-read remote, so concurrent promoters re-contest instead of clobbering;
+ *  merging two whole stores after the fact is strictly weaker. Reporting it as an unbuilt gap would have been
+ *  wrong, and building a caller for it would have been worse.
+ *
+ *  ⛑ `contributionsBy` IS THE ONE THAT WAS GENUINELY UNREAD, and it answers something no screen could: the
+ *  shared world has TWO authors and says so nowhere. Today it reads player-s9z9u1 at weight 375 across three
+ *  characters, and player-7bxzzd at weight 7.
+ *
+ *  ⚠️ READ FROM THE SHARED COPY AS OF THE LAST SYNC, and the page says so — a number that lags without
+ *  admitting it is how a reader comes to distrust every number beside it. */
+async function libWhoMadeThis(path) {
+  const store = await libFetch(path, "json");
+  if (!store) return "<div class='insight'>The shared world could not be read from here — it lives in the family repo, and this page shows it as of the last sync.</div>";
+  let tally = {};
+  try { tally = contributionsBy(store) || {}; } catch { return "<div class='insight'>The shared world could not be tallied.</div>"; }
+  const rows = Object.values(tally).sort((x, y) => (y.weight || 0) - (x.weight || 0));
+  if (!rows.length) return "<div class='insight'>Nobody has made anything real here yet. Names, places and creatures earn their way into the shared world by being USED — not by being written down.</div>";
+  const mine = getPlayerKey();
+  // ⛔ AND THE OTHER PLAYERS ARE NAMED, NOT KEYED. `loadProfile` is LOCAL storage, so it can only ever name the
+  // person sitting here — every other contributor rendered as "player-7bxzzd", which on a page about who made
+  // this world is the one thing it must not say. ⛑ Their profiles ride the same synced repo the canon store does
+  // (`players/<key>/profile.json`), so the page reads the name from where the name already is.
+  // ⚠️ BEST-EFFORT, AND THE KEY IS THE FALLBACK: a profile that will not load leaves the row readable rather
+  // than blanking a contributor out of the history of the world.
+  const names = {};
+  await Promise.all(rows.map(async (r) => {
+    const k = r.playerKey;
+    if (!k || k === "unknown" || k === mine) return;
+    try { names[k] = (await libFetch(`players/${k}/profile.json`, "json"))?.displayName || null; } catch { names[k] = null; }
+  }));
+  const who = (k) => {
+    if (k === "unknown") return "no one this world can name";
+    if (k === mine) return (profile?.displayName || "you") + " — you";
+    try { return loadProfile(k)?.displayName || names[k] || k; } catch { return names[k] || k; }
+  };
+  const total = rows.reduce((n, r) => n + (r.weight || 0), 0) || 1;
+  const body = rows.map(r => {
+    const pct = Math.round((r.weight || 0) / total * 100);
+    const chars = (r.characters || []).length;
+    return `<div class="codex-fact"><strong>${esc(who(r.playerKey))}</strong>
+      <span class="hint">— ${r.promoted} thing${r.promoted === 1 ? "" : "s"} made real${r.variant ? `, and ${r.variant} that another version overtook` : ""}${chars ? `, through ${chars} character${chars === 1 ? "" : "s"}` : ""}</span>
+      <div class="hint" style="margin-top:2px">weight ${r.weight} · ${pct}% of what has been earned into this world</div></div>`;
+  }).join("");
+  // ⛔ AND THE UNATTRIBUTED ROW IS EXPLAINED RATHER THAN LEFT LOOKING LIKE A BUG. Six records in the live store
+  // carry only SNG-216's repair marker where an author should be — the writer never ran; it did not run and find
+  // nobody. ⚠️ That distinction is exactly why `contributedBy` is null there now instead of a pair of nulls.
+  return `<div class="insight">A name, a place or a creature becomes part of the shared world by being USED — attention earns it in, and where two players made the same thing, the heavier one is what everyone else meets. This is who has done that.</div>
+    ${body}
+    ${tally.unknown ? `<div class="hint" style="margin-top:8px">— the unnamed row is not a mystery about a person: those records were repaired by a migration that could not recover who first made them. Anything made from here on carries its author.</div>` : ""}
+    <div class="hint" style="margin-top:8px">Read from the shared copy as of the last sync.</div>`;
+}
+
 async function renderLibrary(catIdx = 0, entryId = null) {
   const cat = LIBRARY_INDEX[catIdx] || LIBRARY_INDEX[0];
   const entry = (cat.entries.find(e => e.id === entryId)) || cat.entries[0];
   let body = "";
   if (entry.kind === "circle") body = libGreatCircle();
+  else if (entry.kind === "made") body = await libWhoMadeThis(entry.path);
   else { const data = await libFetch(entry.path, entry.kind);
     body = data == null ? "<div class='insight'>This entry could not be loaded.</div>"
       : entry.kind === "md" ? libMdToHtml(data) : loreToHtml(data, 0); }
@@ -13658,6 +13720,32 @@ function personSheetHtml(rec) {
       ${s.numbers.attributes ? `<div class="codex-fact hint">${attrRow(s.numbers.attributes)}</div>` : ""}`
       : `<div class="hint" style="margin:8px 0 0">— ${esc(s.reveal.why)}. <strong>Travel with them and watch what they do.</strong></div>`}
   </div>`;
+}
+
+/** ⛔ SNG-583 (SNG-552 §4, Aevi: "per-actor attribution") — A PLACE A PLAYER MADE WAS ENTERING THE SHARED
+ *  WORLD WITH NO AUTHOR.
+ *
+ *  ⚑ MEASURED ON THE LIVE SHARED STORE (`world/canon/valley.json`, 15 entities + 6 variants, TWO players):
+ *  `contributionsBy` reads player-s9z9u1 at weight 375 across three characters and player-7bxzzd at weight 7 —
+ *  and buckets SIX RECORDS UNDER "unknown". Every one of the six is a `gen-` PLACE.
+ *
+ *  ⛑ AND THE CANONICAL BUILDER DOES IT RIGHT. `generate.js` stamps `playerKey` and `characterId` into
+ *  `_gen.provenance` on everything it mints, which is why every NPC in that store is attributed. ⚠️ THESE TWO
+ *  SITES HAND-ROLLED THE SAME OBJECT AND LEFT THE AUTHOR OFF — a second constructor beside the real one, which
+ *  is the third time this week (a duplicate sail control, a duplicated sheet markup).
+ *
+ *  ⛔ SO THERE IS ONE BUILDER NOW, and the author is not a field a caller passes: it is taken from whoever is
+ *  playing. A caller that forgets cannot forget it. */
+function mintedLocationGen(provenance = {}) {
+  return {
+    type: "location", tier: "fresh", engagementScore: 0, birthWeight: 1, rating: null, attentionHistory: [],
+    createdDay: (() => { try { return readClock(character.clock).day; } catch { return null; } })(),
+    provenance: {
+      playerKey: character?.playerKey || getPlayerKey() || null,
+      characterId: character?.id || null,
+      ...provenance,
+    },
+  };
 }
 
 function renderCodexScreen(query = "", openTopicId = null, mergeMode = false) {

@@ -14805,6 +14805,78 @@ console.log("\n── §218 · a willing teacher is what makes you of a people, 
     !(c218b.abilities || []).some(a => a.abilityId === "break_the_line"));
 }
 
+
+// ⛔ SNG-552 §4 (Aevi) — "THERE IS NO SHARED WORLD… the two exports that would do it are on the test-only list —
+// `contributionsBy` and `mergeCanonStores`. Two of them have just become the critical path."
+//
+// ⚑ I MEASURED HER §4 BEFORE BUILDING AND MOST OF IT IS ALREADY LIVE, which matters because the two halves have
+// different answers:
+//   · The shared CANON store is live — `world/canon/valley.json`, 15 entities + 6 variants, TWO players.
+//   · The shared ARC store is live and carries PER-ACTOR NET VECTORS — `world/arcs/valley.json` holds
+//     `{"arc_what_wakes_beneath":{"byActor":{"char-mrhs8286":1}}}`, committed by the game itself ("arcs: Silas
+//     Weir pushed the world"). ⛑ That IS Erik's "net resultant of vector fields", built and running.
+//   · A cross-player ledger runs in `world/ledger/`.
+//
+// ⚠️ AND `mergeCanonStores` IS NOT MISSING A CALLER — IT IS SUPERSEDED. `syncSharedCanon` contests inside
+// `pushMergedFile` against the freshly-read remote, so concurrent promoters RE-CONTEST instead of clobbering;
+// merging two whole stores after the fact is strictly weaker. ⛔ BUILDING A CALLER FOR IT WOULD HAVE BEEN WORSE
+// THAN LEAVING IT — a second door onto a store whose one door is already safe.
+//
+// ⛑ `contributionsBy` IS THE ONE THAT WAS GENUINELY UNREAD, and it answers what no screen in the game could:
+// the shared world has TWO AUTHORS AND SAYS SO NOWHERE.
+console.log("\n── §219 · who made this world ──");
+{
+  const CN219 = await import("../engine/canon.js");
+  const A219 = rd("app.js");
+  const L219 = rd("engine/library.js");
+
+  /* ---- 1 · ⛑ THE TALLY HAS A READER, AND IT IS A PLACE A PLAYER GOES ---- */
+  check("§219: ⛑ `contributionsBy` finally has a player-facing reader",
+    /import \{ contributionsBy \} from "\.\/engine\/canon\.js"/.test(A219)
+    && /tally = contributionsBy\(store\)/.test(A219));
+  check("§219: …in the Library, which is where the world explains itself",
+    /kind: "made"/.test(L219) && /Who made this world/.test(L219)
+    && /entry\.kind === "made"\) body = await libWhoMadeThis/.test(A219));
+  // ⚠️ AND IT NAMES PEOPLE, NOT KEYS. `loadProfile` is LOCAL storage and can only ever name the person sitting
+  // here, so every other contributor rendered as "player-7bxzzd" — on a page about who made this world, the one
+  // thing it must not say. Their profiles ride the same synced repo the canon store does.
+  check("§219: ⛔ …and it names the other players from the synced profiles, never as a key",
+    /players\/\$\{k\}\/profile\.json/.test(A219) && /names\[k\] \|\| k/.test(A219));
+
+  /* ---- 2 · ⛔ AND A RECORD WITH NO AUTHOR SAYS "NOBODY KNOWS", NOT "NOBODY MADE IT" ---- */
+  // ⚑ SIX RECORDS IN THE LIVE STORE carry only SNG-216's repair marker where an author should be. `contributedBy`
+  // read `g.provenance ? {...} : null`, so ANY truthy provenance — including `{healed: "sng-216-backfill"}` —
+  // produced `{playerKey: null, characterId: null}`. ⚠️ That is "the writer ran and found no author" where the
+  // truth is "the writer never ran", and the two must not read alike.
+  const healed = { id: "x", name: "X", _gen: { type: "location", provenance: { healed: "sng-216-backfill" }, birthWeight: 1 } };
+  check("§219: ⛔ a repair marker is not an attribution — it reads as unknown, not as recorded-nobody",
+    CN219.buildCanonRecord(healed, { worldDay: 1 })._canon.contributedBy === null);
+  const authored = { id: "y", name: "Y", _gen: { type: "location", provenance: { playerKey: "player-s9z9u1", characterId: "char-mrum8y4d" }, birthWeight: 1 } };
+  check("§219: ⛑ …and a real author survives exactly as before",
+    CN219.buildCanonRecord(authored, { worldDay: 1 })._canon.contributedBy?.playerKey === "player-s9z9u1");
+
+  /* ---- 3 · ⛔ AND A PLACE A PLAYER MAKES CARRIES ITS AUTHOR ---- */
+  // ⚑ THIS IS WHY THE UNKNOWN BUCKET EXISTED AT ALL. `generate.js` stamps `playerKey` and `characterId` into
+  // `_gen.provenance` on everything it mints — which is why every NPC in the live store is attributed — and two
+  // sites in app.js HAND-ROLLED THE SAME OBJECT and left the author off. ⚠️ A second constructor beside the real
+  // one, for the third time this week (a duplicate sail control, a duplicated sheet markup).
+  check("§219: ⛔ a minted place gets its `_gen` from ONE builder, and the author is not a field a caller passes",
+    /function mintedLocationGen\(provenance = \{\}\)/.test(A219)
+    && /playerKey: character\?\.playerKey \|\| getPlayerKey\(\) \|\| null/.test(A219));
+  // ⛑ ASSERTED AS A CLASS, not at the two sites I fixed: the next hand-rolled `_gen` will be written the same way.
+  const handRolled = [];
+  for (const f of ["app.js", "engine/worldtick.js", "engine/quests.js"]) {
+    let src = ""; try { src = rd(f); } catch { continue; }
+    for (const line of src.split(String.fromCharCode(10))) {
+      if (!/_gen: \{ type: "location"/.test(line)) continue;
+      if (/mintedLocationGen/.test(line)) continue;
+      handRolled.push(`${f}: ${line.trim().slice(0, 70)}`);
+    }
+  }
+  check("§219: ⛑ …and no location `_gen` is hand-rolled beside it any more",
+    handRolled.length === 0, handRolled.join(" · "));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

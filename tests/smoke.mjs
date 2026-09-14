@@ -9296,7 +9296,15 @@ await (async () => {
 
   // §3b — the writer: the transit-mint now emits the tracking OBJECT, never the boolean flag.
   const appSrc216 = readFileSync(join(root, "app.js"), "utf8");
-  check("216 §3b: the transit-mint writer emits a _gen OBJECT (never `_gen: true`)", /_mintedAs: "transit"/.test(appSrc216) && /_gen: \{ type: "location", tier: "fresh"/.test(appSrc216) && !/_gen: true, _mintedAs/.test(appSrc216));
+  // ⚠️ THE CLAIM IS "AN OBJECT, NEVER THE BOOLEAN" — NOT "THIS OBJECT LITERAL". This pinned the inline
+  // `_gen: { type: "location", tier: "fresh"` and went red when SNG-583 lifted that literal into ONE builder so a
+  // minted place could not lose its author. ⛔ The claim was true throughout; the source form was not the claim.
+  // (Fourth gate this week to pin one instance of a general rule — §131, §212, §209 were the others.)
+  const mintedGen216 = /function mintedLocationGen\(/.test(appSrc216)
+    && /type: "location", tier: "fresh"/.test(appSrc216.slice(appSrc216.indexOf("function mintedLocationGen(")));
+  check("216 §3b: the transit-mint writer emits a _gen OBJECT (never `_gen: true`)",
+    /_mintedAs: "transit"/.test(appSrc216) && mintedGen216
+    && /_gen: mintedLocationGen\(/.test(appSrc216) && !/_gen: true, _mintedAs/.test(appSrc216));
 
   // §3b — the backfill: an old save with a boolean `_gen` heals on load, then rejoins the attention system.
   const save = { reconcileVersion: 16, generated: { schemaVersion: 1, npc: {}, location: { gx: { id: "gx", type: "location", _gen: true } }, arc: {} } };

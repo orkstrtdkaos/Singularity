@@ -104,7 +104,13 @@ export function buildCanonRecord(record, { worldDay = null, tier = "canonical" }
     provenance: g.provenance || null,
     // SNG-128: a friendly attribution alias so the authorship readout can name WHO authored this shared
     // record without reaching into provenance (the data was always there; this surfaces it cleanly).
-    contributedBy: g.provenance ? { playerKey: g.provenance.playerKey || null, characterId: g.provenance.characterId || null } : null,
+    // ⚠️ AND AN EMPTY ATTRIBUTION IS NULL, NOT AN OBJECT OF NULLS. This read `g.provenance ? {...} : null`, so a
+    // provenance carrying anything at all — including SNG-216's repair marker `{healed: "sng-216-backfill"}` —
+    // produced `contributedBy: {playerKey: null, characterId: null}`. ⛔ THAT IS "WE RECORDED THAT NOBODY MADE
+    // THIS" WHERE THE TRUTH IS "NOBODY KNOWS", and the two must not read alike: the first says the writer ran and
+    // found no author, the second says the writer never ran. Six records in the live store carry exactly that.
+    contributedBy: (g.provenance && (g.provenance.playerKey || g.provenance.characterId))
+      ? { playerKey: g.provenance.playerKey || null, characterId: g.provenance.characterId || null } : null,
     promotedWorldDay: worldDay,
     birthWeight: g.birthWeight ?? null
   };

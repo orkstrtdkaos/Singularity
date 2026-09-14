@@ -15,6 +15,10 @@ export const LIBRARY_INDEX = [
   { cat: "The World", entries: [
     { id: "exesa", label: "Exesa \u2014 the world, entire", path: "docs/EXESA.md", kind: "md" },
     { id: "guide", label: "A Player's Guide", path: "docs/PLAYERS_GUIDE.md", kind: "md" },
+    // ⛔ SNG-584 (SNG-552 §4) — WHO MADE THIS WORLD. `canon.js::contributionsBy` has tallied per-player
+    // authorship of the shared store since SNG-128 and had NO READER IN PLAY — the one export on Aevi's
+    // "critical path" that was genuinely unreached. ⚑ It reads TWO players off the live store today.
+    { id: "made_by", label: "Who made this world", path: "world/canon/valley.json", kind: "made" },
   ] },
   { cat: "What You Can Be", entries: [
     { id: "vocations", label: "The Eight Vocations", path: "docs/VOCATIONS.md", kind: "md" },

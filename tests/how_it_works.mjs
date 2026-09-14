@@ -15287,6 +15287,70 @@ console.log("\n── §224 · an errand that can go wrong ──");
     /for \(const m of moved\) if \(m\.cost\?\.line\) news\.push\(m\.cost\.line\)/.test(WT224));
 }
 
+
+// ⛔ SNG-541 §3/§4 — SENDING SOMEONE, WHICH IS THE GESTURE THE ENGINE WAS READY FOR AND NO SCREEN OFFERED.
+//
+// ⚠️ I BUILT THE ERRAND MACHINERY IN §224 AND IT WAS UNREACHABLE THE SAME HOUR — seven kinds, an eligibility
+// rule, a cost that lands, and not one control anywhere that could send anybody. ⛑ That is the defect this
+// whole session keeps finding, committed by me, one commit after writing the gate that names it.
+console.log("\n── §225 · the errand you can actually give ──");
+{
+  const A225 = rd("app.js");
+
+  /* ---- 1 · ⛑ THE CONTROL EXISTS, ON THE ROSTER, FOR A PERSON ---- */
+  // ⚠️ AND KEYED ON `id`, WHICH IS WHAT A ROSTER ROW CARRIES. My first form read `r.npcId` — a field the row
+  // does not have — so every button rendered as an empty string and the tab looked exactly as it had before.
+  // ⛔ `node --check` passes a wrong field name happily; the browser is what said zero.
+  check("§225: ⛑ every person on the roster can be given a charge",
+    /data-band-send="\$\{esc\(r\.id\)\}"/.test(A225) && /r\.kind === "person" && r\.id/.test(A225));
+  // ⚠️ A BLOCK OF ANONYMOUS HANDS IS NOT A PERSON and cannot be sent — `memberRows` gives those `id: null`,
+  // which is exactly why the guard is on `kind`, not on truthiness alone.
+  check("§225: …and a block of anonymous hands is not offered one, because it is not a person",
+    /r\.kind === "person"/.test(A225));
+
+  /* ---- 2 · ⛔ EVERY KIND IS SHOWN, AND A REFUSAL SPEAKS ---- */
+  // ⛑ A picker that HID what someone cannot do would teach the player nothing about who they have — and the
+  // refusal is the content: "a refusal that explains itself is content and a refusal that does not is a locked
+  // door." So a kind they will not take is disabled WITH the sentence beside it.
+  check("§225: ⛔ all seven are shown with their fit — a hidden option teaches nothing about who you have",
+    /MISSION_KIND_IDS\.map\(k => \{/.test(A225) && /const fit = canSendOn\(who, k\)/.test(A225)
+    && /\$\{esc\(fit\.why\)\}/.test(A225));
+
+  /* ---- 3 · ⛑ ONE GESTURE, BECAUSE THEY CANNOT BE HERE AND THERE ---- */
+  // ⛔ AEVI'S §3.4: "nobody may be sent who is in the party today. NOT A RULE ABOUT CONSENT — A RULE ABOUT
+  // PHYSICS. They are here. The control should therefore be one gesture: sending someone moves them out of the
+  // party first, and the panel SAYS SO rather than refusing."
+  check("§225: ⛑ sending someone at your side parts them from the company rather than refusing",
+    /if \(atSide && row\?\.id\) partCompany\(character, row\.id, \{ day, why: "sent on an errand" \}\)/.test(A225));
+  check("§225: …and the panel says so before they click, not after",
+    /They are at your side today — sending them parts them from your company first/.test(A225));
+
+  /* ---- 4 · ⚠️ AND THE CHARGE STAYS THE PLAYER'S SENTENCE ---- */
+  // "`charge` stays free text and stays the thing the player writes — the kind is the mechanism, the charge is
+  // the sentence." ⛔ So an empty charge is refused by the CONTROL, in the player's own terms, rather than
+  // stored as an errand nobody wrote.
+  check("§225: ⚠️ the charge is the player's own sentence, and an empty one is not an errand",
+    /Say what they are to do — the charge is yours to write/.test(A225));
+  check("§225: ⛑ …and what goes with them is named as the first thing lost if it goes wrong",
+    /and the first thing lost if it goes wrong/.test(A225));
+
+  /* ---- 5 · ⛔ AND THE CAPACITY REFUSAL IS THE ONE THAT IS NOT THIS PERSON'S TO EXPLAIN ---- */
+  // ⚠️ Asked ONCE, up front, about the PLAYER rather than the charge — and it keeps its existing line, which
+  // Aevi said she would not rewrite.
+  check("§225: ⛔ the capacity refusal is asked once and shown once, and it is not the person's voice",
+    /const full = delegationRefusal\(character\.worldState \|\| \{\}, npcId, \{ ladder, character \}\)/.test(A225)
+    && /\$\{full \? `<div class="insight">\$\{esc\(full\.note \|\| full\.why\)\}/.test(A225));
+
+  /* ---- 6 · ⚠️ AND A DESTINATION IS A PLACE, NOT A SLUG ---- */
+  // ⛔ The same lesson as the merge picker two commits ago: a destination is as often one the world generated
+  // in play as one that was authored, and a row that prints `gen-whistling-woman-post` at a player is broken.
+  check("§225: ⚠️ a destination reads as a place from either map, never as an id",
+    /function nameOfPlace\(id\)/.test(A225)
+    && /CONTENT\.locations\?\.\[id\]\?\.name \|\| character\?\.generated\?\.location\?\.\[id\]\?\.name/.test(A225));
+  check("§225: …and what someone is already out doing is on their row, so nobody is sent twice",
+    /out: \$\{esc\(k \? k\.verb : "working"\)\}/.test(A225));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

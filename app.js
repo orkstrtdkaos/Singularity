@@ -90,7 +90,7 @@ import { knownIndex, whoIs, figureArtRecord } from "./engine/whois.js";   // SNG
 import { worldTabHtml } from "./engine/worldtab.js";   // SNG-276: the tab's markup, testable
 import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter, arcStageNow, worldRoster, NEWS_SECTIONS } from "./engine/worldtick.js";
 import { runWakeGeneration } from "./engine/wake.js"; // SNG-204 Phase 2: open wakes generate the next thread
-import { addAssignment, delegationRefusal, activeDelegates } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
+import { addAssignment, delegationRefusal, activeDelegates, MISSION_KINDS, MISSION_KIND_IDS, canSendOn, sayFamilies } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
 import { setArcFate } from "./engine/latentarcs.js"; // SNG-191 §7: the player closing a surfaced arc (the handled/resolved fate)
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
 import { trainableTier, SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, canLearnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, retroNativeGrants, applyNativeGrants, nativeGrantIdsFor, seedInnateSubstrate, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility, autoAdvancePracticedRanks, markDefiningMoment, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy } from "./engine/progression.js";
@@ -144,7 +144,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "1.9.530";
+const APP_VERSION = "1.9.534";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -13226,6 +13226,92 @@ function arcEffectsNow() {
  *  ⚠️ THE POOL IS NOT A LIST HELD ANYWHERE — it is everyone sworn who is not at your side today (Aevi's §1: "nothing to migrate,
  *  nothing to keep in sync, and no way for the two lists to disagree"). So this screen cannot drift from the party sidebar: both
  *  read the same two independent facts, membership and posture. */
+/** ⛔ SNG-541 §2–§4 — SENDING SOMEONE, WHICH IS THE GESTURE THE ENGINE HAS BEEN READY FOR AND NO SCREEN OFFERED.
+ *
+ *  ⛑ THE ELIGIBILITY IS THE ROSTER'S OWN COLUMN. Aevi's keying principle: `does` is authored and already
+ *  printed on every row, so what someone is good for decides what you may send them to do — no second list.
+ *  Every one of the seven is SHOWN, with its fit, because a picker that hides what someone cannot do teaches
+ *  the player nothing about who they have.
+ *
+ *  ⚠️ AND A REFUSAL SPEAKS IN THEIR VOICE. "A refusal that explains itself is content and a refusal that does
+ *  not is a locked door" — so a kind they will not take is disabled WITH THE SENTENCE beside it, never greyed
+ *  out in silence.
+ *
+ *  ⛔ NOBODY MAY BE SENT WHO IS IN THE PARTY TODAY — "not a rule about consent, a rule about physics. They are
+ *  here." ⛑ So it is ONE GESTURE: sending someone at your side parts them from the company first, and the
+ *  panel SAYS SO rather than refusing. */
+function showErrandPicker(npcId) {
+  document.getElementById("help-pop")?.remove();
+  const ladder = CONTENT.rules.subAttributeLadder;
+  const day = absoluteWorldDay();
+  const rec = character.npcRegistry?.[npcId];
+  const row = [...poolRows(character, { content: CONTENT, worldDay: day }), ...atSideRows(character, { content: CONTENT, worldDay: day })]
+    .find(r => r.id === npcId);
+  const who = { npcId, npcName: rec?.name || row?.name || npcId, does: row?.does || [] };
+  const atSide = !!row?.atSide;
+  // ⚠️ THE CAPACITY REFUSAL IS ASKED ONCE, UP FRONT, because it is about the player rather than the charge —
+  // and it is the one refusal that is not this person's to explain.
+  const full = delegationRefusal(character.worldState || {}, npcId, { ladder, character });
+  const places = Object.entries({ ...(CONTENT.locations || {}), ...(character.generated?.location || {}) })
+    .filter(([id]) => id && id !== character.currentLocationId)
+    .map(([id, l]) => ({ id, name: l?.name || id })).sort((x, y) => x.name.localeCompare(y.name)).slice(0, 200);   // prose-cap-ok: a list of PLACES, not a string — an errand may be sent anywhere the player knows
+
+  const pop = document.createElement("div");
+  pop.id = "help-pop"; pop.className = "help-overlay";
+  pop.innerHTML = `<div class="help-card" role="dialog" aria-label="Send ${esc(who.npcName)}" style="max-height:min(86vh,760px); display:flex; flex-direction:column; overflow:hidden">
+    <div class="whois-head" style="flex:0 0 auto">Send ${esc(who.npcName)} <span class="hint">· ${esc(sayFamilies(who.does))}</span></div>
+    <div style="flex:1 1 auto; overflow-y:auto; -webkit-overflow-scrolling:touch">
+      ${full ? `<div class="insight">${esc(full.note || full.why)}</div>` : ""}
+      ${atSide ? `<div class="hint" style="margin-bottom:6px">They are at your side today — sending them parts them from your company first.</div>` : ""}
+      <div class="hint" style="margin:0 0 4px">What are they to do</div>
+      ${MISSION_KIND_IDS.map(k => {
+        const fit = canSendOn(who, k);
+        return `<button class="opt codex-merge-target" data-errand="${esc(k)}"${fit.ok && !full ? "" : " disabled"}>
+          ${esc(MISSION_KINDS[k].label)} <span class="cost">${esc(fit.why)}</span></button>`;
+      }).join("")}
+      <div class="hint" style="margin:10px 0 4px">Where</div>
+      <select id="errand-where" style="width:100%"><option value="">— nowhere in particular —</option>
+        ${places.map(p => `<option value="${esc(p.id)}">${esc(p.name)}</option>`).join("")}</select>
+      <div class="hint" style="margin:10px 0 4px">The charge — in your words</div>
+      <input id="errand-charge" type="text" placeholder="say what they are to do" style="width:100%" autocomplete="off">
+      <div class="hint" style="margin:10px 0 4px">What goes with them <span class="hint">(optional — and the first thing lost if it goes wrong)</span></div>
+      <input id="errand-stake" type="text" placeholder="eleven crystal, the sealed letter…" style="width:100%" autocomplete="off">
+    </div>
+    <div class="help-foot" style="flex:0 0 auto">
+      <span class="hint" id="errand-hint">Pick what they are to do.</span>
+      <button class="btn" id="help-close">Cancel</button>
+    </div></div>`;
+  document.body.appendChild(pop);
+  const close = () => pop.remove();
+  pop.addEventListener("click", ev => { if (ev.target === pop) close(); });
+  document.getElementById("help-close").onclick = close;
+  for (const el of pop.querySelectorAll("[data-errand]")) el.onclick = () => {
+    const kind = el.dataset.errand;
+    const charge = String(document.getElementById("errand-charge")?.value || "").trim();
+    if (!charge) { document.getElementById("errand-hint").textContent = "Say what they are to do — the charge is yours to write."; return; }
+    const destination = document.getElementById("errand-where")?.value || null;
+    const stake = String(document.getElementById("errand-stake")?.value || "").trim() || null;
+    // ⛔ ONE GESTURE: they leave the company first, because they cannot be here and there.
+    if (atSide && row?.id) partCompany(character, row.id, { day, why: "sent on an errand" });
+    character.worldState = character.worldState || {};
+    const made = addAssignment(character.worldState, { npcId, npcName: who.npcName, charge, kind, destination, stake }, worldCount());
+    close();
+    saveCharacter(character);
+    renderBandsTab();
+    if (made) {
+      const where = destination ? ` to ${nameOfPlace(destination)}` : "";
+      alert(`${who.npcName} is ${MISSION_KINDS[kind].verb}${where}. ${stake ? `${stake} goes with them.` : "They go empty-handed."}`);
+    }
+  };
+  document.getElementById("errand-charge")?.focus();
+}
+
+/** ⚠️ A PLACE'S NAME FROM EITHER MAP — a destination is as often one the world generated in play as one that
+ *  was authored, and the errand row must not print a slug at a player. */
+function nameOfPlace(id) {
+  return CONTENT.locations?.[id]?.name || character?.generated?.location?.[id]?.name || String(id || "");
+}
+
 function renderBandsTab() {
   const ladder = CONTENT.rules.subAttributeLadder;
   const day = absoluteWorldDay();
@@ -13249,7 +13335,17 @@ function renderBandsTab() {
       <span>${r.verbs ? esc(r.verbs) : `<span class="hint">nothing named</span>`}</span>
       ${r.level != null ? `<span class="hint" style="font-variant-numeric:tabular-nums">level ${r.level}</span>` : ""}
       <span class="hint" style="width:100%">${esc(w.line)}</span>
+      ${(() => {
+        // ⛑ SNG-541 §4.4 — "out: carrying word to Hardline, back in six". An errand someone is ALREADY on is the
+        // most useful thing this row can say, and it is the thing that stops a player sending them twice.
+        const out = Object.values(character.worldState?.assignments || {})
+          .find(x => x && x.npcId === r.id && x.status !== "done");
+        if (!out) return "";
+        const k = MISSION_KINDS[out.kind || ""];
+        return `<span class="hint" style="width:100%">out: ${esc(k ? k.verb : "working")}${out.destination ? ` to ${esc(nameOfPlace(out.destination))}` : ""}${out.status === "problem" ? " — <strong>in trouble</strong>" : out.status === "stalled" ? " — stuck" : ""}</span>`;
+      })()}
       <div class="opt-row" style="gap:6px;flex-wrap:wrap;width:100%">
+        ${r.kind === "person" && r.id ? `<button class="opt" data-band-send="${esc(r.id)}" title="Give them a charge and a place to take it">Send on an errand…</button>` : ""}
         ${r.atSide
           ? `<button class="opt" data-band-part="${esc(r.id)}" title="They stay sworn — they stop walking with you">Send back to the band</button>`
           : `<button class="opt" data-band-bring="${esc(r.id)}"${gate?.ok ? "" : " disabled"} title="${esc(gate?.ok ? "They walk with you from here" : gate?.why || "")}">Bring to your side</button>`}
@@ -13291,6 +13387,7 @@ function renderBandsTab() {
     partCompany(character, b.dataset.bandPart, { day, why: "sent back to the band" });
     saveCharacter(character); renderBandsTab();
   };
+  for (const b of app.querySelectorAll("[data-band-send]")) b.onclick = () => showErrandPicker(b.dataset.bandSend);
   const back = document.getElementById("cs-back"); if (back) back.onclick = () => renderCharacterScreen();
 }
 

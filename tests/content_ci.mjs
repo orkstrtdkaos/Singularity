@@ -646,24 +646,45 @@ for (const pack of PACKS) {
   // ⛔ SEED DRIFT — genparams.pts proved to be a byte-exact derivation of canon worldPos (118/118), so
   // the pipeline derives seeds itself and this gate fails if the cache and canon ever disagree.
   const seedBad = GW.verifySeeds(canon);
-  // §183 (2026-09-12): this label claimed a moved seat fails here; verifySeeds checks the pts COUNT. A moved seat shows in seedDrift and fails the determinism gate below.
-  check("SNG-391: genparams.pts is the authored 118 — the LAND did not change size (a moved seat shows in seedDrift and fails the determinism gate, §183)",
+  // §183 (2026-09-12): this label claimed a moved seat fails here; verifySeeds checks the pts COUNT.
+  // ⛔ AND ITS SECOND HALF NAMED THE DETERMINISM GATE, WHICH THE FROZEN-WORLD RULING RETIRED (SNG-582).
+  // A moved seat is now REPORTED by the drift census and nothing fails, which is the ruled behaviour —
+  // ⚠️ a label that points at a retired gate is the same defect as a gate that pins a retired rule.
+  check("SNG-391: genparams.pts is the authored 118 — the LAND did not change size (a moved seat shows by name in the drift census; under the frozen-world ruling that census is the report, not a failure)",
     seedBad.length === 0, seedBad.slice(0, 4).join(" · "));
 
   const built = GW.buildWorld(canon);
   const disk = readFileSync(join(root, "content/packs/core/world/terrain.json"), "utf8");
 
-  // 1 · DETERMINISM — regenerate → byte-identical. "Silent drift" is the bug; a diff is the information.
-  check("SNG-391: determinism — the regenerated world is byte-identical to the shipped asset",
-    JSON.stringify(GW.serialise(built, canon)) === disk);
-
-  const EW = 720, EH = 360;
+  // 1 · ⛔ DETERMINISM IS RETIRED, BY RULING. Erik 2026-09-14: "i've already ruled that I don't intend to ever
+  // regenerate the world again… so the new normal are authored locations and mods to what we have."
+  //
+  // ⚠️ This asked whether regenerating reproduces the shipped asset byte for byte. Under the ruling that
+  // question can only ever answer NO — every authored place changes what a rebuild WOULD produce while the
+  // committed asset correctly stays put — and it can never be worth fixing, because fixing it means running
+  // the command the ruling forbids. ⚑ MEASURED TODAY: not one part still reproduces. Not the layers, not the
+  // points, not the seats, not the hydrology. The generator is a DESCRIPTION of where this world came from,
+  // not a producer of it.
+  //
+  // ⛑ AND AEVI ALREADY PAID FOR THIS LESSON TWO GATES DOWN (SNG-565): resolving place names against
+  // `built.hydrology` had six WORKING river names reading as broken, and she was one command from retiring
+  // them "to satisfy a gate about a world nobody will ever load." Her words hold here: AN AUTHORISATION IS
+  // NOT A MEASUREMENT. ⛔ The same correction, applied to the neighbouring gates: the land questions below
+  // now read the world PLAYERS STAND IN, not a regeneration.
+  //
+  // ⬜ Whether the frozen asset is INTACT and knows every place is a real question and it has its own door:
+  // `node scripts/world/generate_world.mjs --check`, which no longer builds anything.
+  const shippedWorld = JSON.parse(disk);
+  const SG = shippedWorld.encoding?.grid || { w: 480, h: 240 };
+  const shippedC0 = Buffer.from(String(shippedWorld.layers?.c0 || ""), "base64");
   const landAt = (lat, lon) => {
-    const fx = Math.min(EW - 1, Math.floor((((lon + 180) % 360 + 360) % 360) / 360 * EW));
-    const fy = Math.min(EH - 1, Math.floor((90 - lat) / 180 * EH));
-    const t = built.type[fy * EW + fx];
+    const fx = Math.min(SG.w - 1, Math.floor((((lon + 180) % 360 + 360) % 360) / 360 * SG.w));
+    const fy = Math.min(SG.h - 1, Math.floor((90 - lat) / 180 * SG.h));
+    const t = shippedC0[fy * SG.w + fx] & 3;     // bits 0-1 = surface type (0 water, 1 land, 2 volcanic)
     return t === 1 || t === 2;
   };
+  check("SNG-582: the shipped world's surface layer decodes to its own declared grid — or every land check below is reading noise",
+    shippedC0.length >= SG.w * SG.h && SG.w > 0 && SG.h > 0, `${shippedC0.length} bytes for ${SG.w}×${SG.h}`);
 
   // 2 · STRANDED — "happened 3×": a land-wanting location in water.
   const stranded = canon.gp.landwant.filter((p) => !landAt(p[0], p[1]));
@@ -672,13 +693,20 @@ for (const pack of PACKS) {
 
   // 3 · SEATS — "happened 2×": a region jump target in the ocean. Medoid-over-on-land makes it
   // impossible by construction; the gate also demands NO region lost its seat entirely.
-  const seatBad = Object.entries(built.seats).filter(([, v]) => !landAt(v[0], v[1]));
+  // ⛔ THE SHIPPED SEATS, for the same reason as `landAt` above — a seat the map draws in water is a bug a
+  // player can see, and a seat a regeneration would draw in water is a fact about a world nobody loads.
+  const seatBad = Object.entries(shippedWorld.seats || {}).filter(([, v]) => !landAt(v[0], v[1]));
   const regions = new Set(canon.seeds.map((s) => s.region));
-  const seatless = [...regions].filter((r) => r && !built.seats[r]);
+  const seatless = [...regions].filter((r) => r && !(shippedWorld.seats || {})[r]);
   check("SNG-391: every region seat is on land, and no region lost its seat", seatBad.length === 0 && seatless.length === 0,
     [...seatBad.map(([k]) => k + " in water"), ...seatless.map((r) => r + " seatless")].join(" · "));
 
   // 4 · CONNECTIVITY — "4 marooned": every land-wanting location on the Crossing's mainland.
+  // ⚠️ THIS ONE STILL WALKS THE REGENERATED FINE GRID, and deliberately: flood-filling a continent needs the
+  // 720×360 `built.type`, where the shipped asset carries the 480×240 bake. ⛔ SO THE TWO GRIDS ARE NAMED APART
+  // rather than sharing a constant — `SG` above is the world players stand in, `EW/EH` here is the derivation.
+  // ⬜ Moving this one onto the shipped layer is part of Aevi's SNG-565 thread, not a side effect of mine.
+  const EW = 720, EH = 360;
   const comp = new Int32Array(EW * EH).fill(-1);
   const cross = canon.seeds.find((s) => s.id === "the_crossing");
   const idxOf = (lat, lon) => Math.min(EH - 1, Math.floor((90 - lat) / 180 * EH)) * EW

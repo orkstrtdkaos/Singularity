@@ -375,9 +375,9 @@ const LEDGER = [
   },
   {
     id: "SNG-391", ask: "(Aevi, handoff) the prototype works; the PIPELINE does not exist, and that is the whole ticket — a build step cannot forget to rebuild; I can, and did, repeatedly",
-    how: "scripts/world/generate_world.mjs: canon in, terrain out, deterministic; seeds derived from worldPos at build time; nine gates in content_ci fed by one regeneration",
-    gates: ["SNG-391: genparams.pts is the authored 118 — the LAND did not change size (a moved seat shows in seedDrift and fails the determinism gate, §183)",
-            "SNG-391: determinism — the regenerated world is byte-identical to the shipped asset",
+    how: "scripts/world/generate_world.mjs: canon in, terrain out, deterministic; seeds derived from worldPos at build time; nine gates in content_ci fed by one regeneration. ⛔ RETIRED AS A BUILD 2026-09-14 (SNG-582) — Erik: 'I don't intend to ever regenerate the world again… so the new normal are authored locations and mods to what we have.' The DETERMINISM gate went with it: under the ruling it can only ever answer no, and fixing it means running the forbidden command. Measured that day, not one part still reproduced — not the layers, not the points, not the seats, not the hydrology. ⛑ What replaces it is the question the ruling makes real: is the FROZEN asset intact, and does it still know every place canon has? It did not — three placed locations (Firstsight, Keelmouth, The Mountain Pass) had no row and therefore no pin on the map, and four more (the Crossing among them) carried a region canon had reassigned. `scripts/world/place_rows.mjs` is the door that moves the place list without touching a layer byte, and the write path now refuses without an explicit override.",
+    gates: ["SNG-391: genparams.pts is the authored 118 — the LAND did not change size (a moved seat shows by name in the drift census; under the frozen-world ruling that census is the report, not a failure)",
+            "SNG-582: the shipped world's surface layer decodes to its own declared grid — or every land check below is reading noise",
             "SNG-391: no land-wanting location stands in water",
             "SNG-391: every region seat is on land, and no region lost its seat",
             "SNG-391: off-mainland is EXACTLY the designed archipelago — a dead bridge floods this census",

@@ -4,8 +4,13 @@
 // derived layers by hand, with scripts I wrote in the moment. That is not a pipeline; it is me
 // remembering. A build step cannot forget to rebuild. I can, and did, repeatedly."
 //
-// Run:   node scripts/world/generate_world.mjs           # rebuild content/packs/core/world/terrain.json
-//        node scripts/world/generate_world.mjs --check   # regenerate in memory, diff against disk (gate)
+// ⛔ RETIRED AS A BUILD, 2026-09-14 (Erik): "I don't intend to ever regenerate the world again … so the new
+// normal are authored locations and mods to what we have." The write path REFUSES without an explicit
+// override; `terrain.json` is ground truth now, not a derived artifact, and this file is kept as the
+// documented derivation behind it rather than as a step anyone runs.
+//
+// Run:   node scripts/world/generate_world.mjs --check   # is the frozen asset intact, and does it know every place?
+//        node scripts/world/place_rows.mjs               # THE OPEN DOOR: splice a place's row into the frozen world
 //
 // ⛔ CANON IN, TERRAIN OUT. The 118 seeds are DERIVED from worldPos at build time (map lat = colatitude
 // − 90 — the Crossing sits at the map frame's south pole, which is why the generator's three pole fixes
@@ -277,23 +282,31 @@ export function buildWorld(canon) {
 }
 
 /** Serialise in the exact schema engine/worldglobe.js already reads. */
-export function serialise(built, canon) {
-  const b64 = (u8) => Buffer.from(u8).toString("base64");
-  // ⚠️ NORMALISED BEFORE HASHING — the determinism gate's first red was this hash catching ITSELF:
-  // git's autocrlf rewrites the generator's line endings on checkout, so hashing raw working-copy bytes
-  // made the provenance stamp machine-dependent. Same code, different sha, "drift" with no drift.
-  const genHash = createHash("sha256").update(readFileSync(join(root, "scripts/world/terrain.mjs"), "utf8").split(String.fromCharCode(13)).join("")).digest("hex").slice(0, 16);
-  const gpHash = createHash("sha256").update(JSON.stringify(canon.gp)).digest("hex").slice(0, 16);
+export const TERRAIN_PATH = "content/packs/core/world/terrain.json";
+
+/** The frozen asset, or null if it has never been written. */
+export function readTerrain() {
+  return existsSync(join(root, TERRAIN_PATH)) ? rj(TERRAIN_PATH) : null;
+}
+
+/** ⛔ THE MAP'S LOCATION ROWS — name, region, waygate, tier, role, kind — for every PLACED location.
+ *
+ *  ⚠️ TIER AND ROLE RIDE THE ASSET so the map can draw a hold differently from a room differently from
+ *  a gate. They are CANON (SNG-396/398 ratified them) and the viewer must not re-derive them — it reads
+ *  what the pipeline stamped, the same rule that keeps worldPos the sole authority on position.
+ *
+ *  ⛔ THE MAP'S LOCATION LIST IS NOT THE TERRAIN'S SEED LIST, and conflating them silently deleted
+ *  fourteen places from the map. Seeds exclude `worldPosInherited` because a room must not cast a
+ *  second biome vote at its building's point (SNG-402) — but a room is still somewhere a player
+ *  STANDS, and it still needs a pin. Iterate every placed location, not the seeds.
+ *
+ *  ⛑ EXPORTED SINCE SNG-582, because under Erik's frozen-world ruling this is the ONE part of the asset
+ *  that still has to move: a place authored today needs its row today, and there will never be another
+ *  rebuild to fold it in. `scripts/world/place_rows.mjs` splices the output of this same function into the
+ *  frozen file — ⚠️ ONE derivation with two callers, because two copies of it would drift the day a field
+ *  is added and the map would disagree with itself about places nobody touched. */
+export function locationRows(canon, oldMeta = {}) {
   const meta = {};
-  const oldMeta = existsSync(join(root, "content/packs/core/world/terrain.json"))
-    ? (rj("content/packs/core/world/terrain.json").locations || {}) : {};
-  // ⚠️ TIER AND ROLE RIDE THE ASSET so the map can draw a hold differently from a room differently from
-  // a gate. They are CANON (SNG-396/398 ratified them) and the viewer must not re-derive them — it reads
-  // what the pipeline stamped, the same rule that keeps worldPos the sole authority on position.
-  // ⛔ THE MAP'S LOCATION LIST IS NOT THE TERRAIN'S SEED LIST, and conflating them silently deleted
-  // fourteen places from the map. Seeds exclude `worldPosInherited` because a room must not cast a
-  // second biome vote at its building's point (SNG-402) — but a room is still somewhere a player
-  // STANDS, and it still needs a pin. Iterate every placed location, not the seeds.
   for (const l of Object.values(canon.locs)) {
     const wp = l.worldPos;
     if (!wp || !Number.isFinite(wp.colatitude) || !Number.isFinite(wp.longitude)) continue;
@@ -302,6 +315,25 @@ export function serialise(built, canon) {
       wg: (l.waygate || oldMeta[l.id]?.wg) ? 1 : 0, t: l.tier || null, ro: l.role || null,
       k: (typeof kRow === "string" ? kRow : kRow?.kind) || null };
   }
+  return meta;
+}
+
+/** ⛔ WHICH PLACED LOCATIONS THE FROZEN WORLD DOES NOT KNOW. Under the old rule this was always zero on
+ *  the next rebuild; under the frozen-world ruling it is a real, permanent hole until somebody splices the
+ *  row in — a place with no row has no pin and no metadata on the world map, while existing in the fiction. */
+export function rowsMissing(canon, terrain) {
+  const have = terrain?.locations || {};
+  return Object.keys(locationRows(canon)).filter((id) => !have[id]).sort();
+}
+
+export function serialise(built, canon) {
+  const b64 = (u8) => Buffer.from(u8).toString("base64");
+  // ⚠️ NORMALISED BEFORE HASHING — the determinism gate's first red was this hash catching ITSELF:
+  // git's autocrlf rewrites the generator's line endings on checkout, so hashing raw working-copy bytes
+  // made the provenance stamp machine-dependent. Same code, different sha, "drift" with no drift.
+  const genHash = createHash("sha256").update(readFileSync(join(root, "scripts/world/terrain.mjs"), "utf8").split(String.fromCharCode(13)).join("")).digest("hex").slice(0, 16);
+  const gpHash = createHash("sha256").update(JSON.stringify(canon.gp)).digest("hex").slice(0, 16);
+  const meta = locationRows(canon, readTerrain()?.locations || {});
   return {
     schemaVersion: 2,
     id: "terrain",
@@ -317,7 +349,7 @@ export function serialise(built, canon) {
       c3: "elevation 0-254 at 720x360; 128 is sea level; water packs 0-127 by the same normalisation",
     },
     biomes: built.blist,
-    features: existsSync(join(root, "content/packs/core/world/terrain.json")) ? (rj("content/packs/core/world/terrain.json").features || {}) : {},
+    features: readTerrain()?.features || {},
     locations: meta,
     seats: built.seats,
     hydrology: built.hydrology,
@@ -343,17 +375,62 @@ if (isMain) {
     for (const b of seedBad.slice(0, 8)) console.error("   " + b);
     process.exit(1);
   }
-  const built = buildWorld(canon);
-  const doc = serialise(built, canon);
-  const out = JSON.stringify(doc);
-  const path = join(root, "content/packs/core/world/terrain.json");
+  const path = join(root, TERRAIN_PATH);
+
+  // ⛔ ERIK 2026-09-14 — THE WORLD IS FROZEN: "i've already ruled that I don't intend to ever regenerate the
+  // world again… so the new normal are authored locations and mods to what we have."
+  //
+  // ⚠️ SO THE --check ABOVE THIS LINE USED TO ASSERT DETERMINISM — that regenerating reproduces disk byte for
+  // byte — and under the ruling that question can only ever answer NO and can never be worth fixing. Every
+  // authored place changes what a rebuild WOULD produce while the committed asset correctly stays put, so
+  // the gate went permanently red for doing the right thing. ⛑ A gate that fails for the ruled behaviour
+  // trains people to ignore it, and it had already been baselined as an accepted failure, which is the same
+  // thing more quietly.
+  //
+  // ⚑ WHAT REPLACES IT IS THE QUESTION THE RULING MAKES REAL: the asset is now ground truth, so is it INTACT,
+  // and does it still know every place canon has? The second half was already broken when he ruled — three
+  // placed locations had no row and therefore no pin on the map. `place_rows.mjs` is the door that moves it.
   if (process.argv.includes("--check")) {
-    const disk = readFileSync(path, "utf8");
-    const same = disk === out;
-    console.log(same ? "✅ determinism: regenerated world is byte-identical to disk"
-      : `⛔ DRIFT: regenerated world differs from disk (${disk.length} vs ${out.length} bytes) — content changed without a rebuild, or the generator moved`);
-    process.exit(same ? 0 : 1);
+    const t = readTerrain();
+    const problems = [];
+    if (!t) problems.push("terrain.json is absent — and nothing may rebuild it");
+    else {
+      // ⛑ INTACT: the shape a half-written or truncated asset would fail. The layer sizes are the encoding's
+      // own numbers, not retyped constants — a grid change would have to move them together.
+      const g = t.encoding?.grid || {}, eg = t.encoding?.elevationGrid || {};
+      const want = { c0: g.w * g.h, c1: g.w * g.h, c2: g.w * g.h, c3: eg.w * eg.h };
+      for (const [k, n] of Object.entries(want)) {
+        const got = Math.floor(String(t.layers?.[k] || "").length / 4) * 3;   // base64 → bytes, less padding
+        if (!Number.isFinite(n) || n <= 0 || Math.abs(got - n) > 3) problems.push(`layer ${k} is ${got} bytes, not the ${n} its own encoding declares`);
+      }
+      if ((t.points || []).length !== 118) problems.push(`points is ${(t.points || []).length}, not the frozen 118`);
+      if (!(t.biomes || []).length) problems.push("biomes list is empty");
+      // ⛔ COMPLETE: every placed location has a row, or it has no pin and no metadata on the map.
+      const missing = rowsMissing(canon, t);
+      if (missing.length) problems.push(`${missing.length} placed location(s) have no row — ${missing.join(", ")} — run: node scripts/world/place_rows.mjs`);
+    }
+    if (problems.length) { console.error("⛔ THE FROZEN WORLD IS NOT WHOLE:"); for (const p of problems) console.error("   " + p); process.exit(1); }
+    console.log(`✅ frozen world intact: ${(t.points || []).length} seeds · ${Object.keys(t.locations || {}).length} place rows · ${(t.biomes || []).length} biomes · 4 layers at their declared sizes`);
+    process.exit(0);
   }
+
+  // ⛔ AND THE WRITE PATH REFUSES. Running this would replace Erik's frozen ground with a fresh derivation
+  // — silently, in one command, with no diff a reader could check, because the layers are base64. ⚠️ THE
+  // RULING IS THE REASON, so the refusal quotes it rather than inventing a policy of its own, and it names
+  // the door that IS open. A ruling that lives only in a transcript gets re-broken by whoever did not read it.
+  if (!process.argv.includes("--i-am-regenerating-the-world")) {
+    console.error("⛔ REFUSED — the world is frozen (Erik, 2026-09-14): \"I don't intend to ever regenerate the");
+    console.error("   world again… so the new normal are authored locations and mods to what we have.\"");
+    console.error("");
+    console.error("   To add or correct a PLACE:  node scripts/world/place_rows.mjs");
+    console.error("   To check the asset:         node scripts/world/generate_world.mjs --check");
+    console.error("   To override anyway (his call, not yours): --i-am-regenerating-the-world");
+    process.exit(1);
+  }
+
+  const built = buildWorld(canon);
+  const out = JSON.stringify(serialise(built, canon));
   writeFileSync(path, out);
   console.log(`wrote ${path} — ${(out.length / 1024).toFixed(0)}KB · RLO ${built.RLO.toFixed(4)} RHI ${built.RHI.toFixed(4)} · ${built.blist.length} biomes · ${Object.keys(built.seats).length} seats`);
+  console.log("⚠️ the frozen world was overwritten on an explicit override — check the place rows and the map before shipping");
 }

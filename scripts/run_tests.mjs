@@ -69,10 +69,16 @@ const SUITES = [
   // DECIDES FROM — whether veil working in 5 of 39 regions is design or accident is his ruling — so a stale
   // one is worse than none: it would be a table of numbers that no longer describe the world.
   ["substrate_atlas --check", "node", ["scripts/substrate_atlas.mjs", "--check"]],
-  // ⛔ THE DRIFT GATE THE WORLD README SAYS TO RUN IN CI, AND NOBODY DID. "A red --check means the
-  // committed terrain no longer matches the generator that claims to produce it." ⚠️ Measured 2026-09-09:
-  // terrain.json was last rebuilt 2026-08-10 and its INPUTS have moved since, so the world has been stale
-  // for a month with nothing saying so. ⛑ Nine seconds to run — it was never a cost question.
+  // ⛔ THIS ASKED "does the committed terrain still match the generator that claims to produce it", and
+  // ERIK RETIRED THE QUESTION (2026-09-14): "I don't intend to ever regenerate the world again… so the new
+  // normal are authored locations and mods to what we have."
+  //
+  // ⚠️ Under that ruling the old gate could only ever answer NO, and fixing it meant running the command the
+  // ruling forbids — so it sat baselined as an accepted failure, which is how a gate dies quietly. ⚑ The
+  // reformulated one asks what the ruling makes real: is the FROZEN asset intact, and does it still know
+  // every place canon has? It did not — three placed locations had no row and therefore no pin on the map.
+  // ⛑ It also stopped rebuilding the world to answer a question about a file, so it runs in under a second
+  // instead of nine.
   ["world --check", "node", ["scripts/world/generate_world.mjs", "--check"]],
 ];
 

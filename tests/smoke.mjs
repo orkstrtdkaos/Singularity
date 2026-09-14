@@ -7412,8 +7412,17 @@ await (async () => {
     // ⚠️ 118 → 135: SNG-396 promoted the play-authored sites, and SNG-402 made the asset's location list
     // cover every PLACED location rather than only the terrain SEEDS — conflating those two had silently
     // dropped fourteen rooms off the map while the terrain was right to exclude them from its vote.
+    //
+    // ⛔ 135 → DERIVED (SNG-582). Erik froze the world — "the new normal are authored locations and mods to
+    // what we have" — so this number now moves every time Aevi authors a place, and it moved to 138 the same
+    // hour. ⚠️ A LITERAL HERE WOULD GO RED FOR AUTHORING, which is the ruled behaviour; the CLAIM is that the
+    // asset knows every PLACED location, so the count is read from canon and the gate keeps its meaning.
+    const GW390 = await import("../scripts/world/generate_world.mjs");
+    const placed390 = Object.keys(GW390.locationRows(GW390.loadCanon())).length;
     check("390: the terrain asset decodes — four channels, two grids, every placed location",
-      !!t && t.w === 480 && t.h === 240 && t.ew === 720 && t.eh === 360 && Object.keys(t.locations).length === 135);
+      !!t && t.w === 480 && t.h === 240 && t.ew === 720 && t.eh === 360
+      && placed390 >= 118 && Object.keys(t.locations).length === placed390,
+      `${Object.keys(t.locations).length} rows for ${placed390} placed`);
     // ⚠️ THIS GATE FLIPPED WITH THE FACT, WHICH IS WHAT A GATE ON A LABEL SHOULD DO. It used to
     // assert the asset admitted to being baked output with no generator; SNG-391 delivered the generator
     // and the pipeline, so the asset now asserts the opposite — provenance, hashes, and "do not edit,
@@ -7496,9 +7505,14 @@ await (async () => {
       return { wet, seen };
     };
     const cen394 = waterCensus(wpos394);
+    // ⛔ SEEN IS DERIVED TOO (SNG-582) — same reason as 390: under the frozen-world ruling the place list
+    // grows with authoring and the ground does not, so a literal would fail for the ruled behaviour. ⚑ The
+    // floor keeps it honest: a census that saw NOTHING would satisfy "wet: none" perfectly.
+    const GW394 = await import("../scripts/world/generate_world.mjs");
+    const placed394 = Object.keys(GW394.locationRows(GW394.loadCanon())).length;
     check("394b: every pin stands on its own terrain — the water census is EMPTY across all of them, via the viewer's own conversion",
-      cen394.seen.size === 135 && cen394.wet.size === 0,
-      `${cen394.seen.size} seen; wet: ${[...cen394.wet].sort().join(", ") || "none"}`);
+      placed394 >= 118 && cen394.seen.size === placed394 && cen394.wet.size === 0,
+      `${cen394.seen.size} seen of ${placed394} placed; wet: ${[...cen394.wet].sort().join(", ") || "none"}`);
     const flood394 = waterCensus((id) => { const w = wpos394(id); return w ? { longitude: w.longitude, colatitude: 180 - w.colatitude } : null; });
     check("394b: …and the MIRRORED frame — the shipped bug, replayed — floods the census, so the gate is known to fire",
       flood394.wet.size > 50, `mirrored water pins: ${flood394.wet.size}`);

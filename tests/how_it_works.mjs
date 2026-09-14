@@ -15186,6 +15186,107 @@ console.log("\n── §223 · the axis that was dropped in silence ──");
     /AND A NAMING IS A RECORD CHANGE, NOT FLAVOUR/.test(G223) && /you MUST emit "itemUpdates" with "customName" in THAT SAME TURN/.test(G223));
 }
 
+
+// ⛔ SNG-541 §2 (Aevi) — THE SEVEN MISSION KINDS, AND A `problem` THAT COSTS SOMETHING.
+//
+// ⚑ MEASURED AT HEAD FIRST, AND THE ROSTER HALF WAS ALREADY BUILT — `renderBandsTab`, `engine/fellowship.js`,
+// every export with a reader, answering Erik's own words ("I don't see where it lists who's in it and how I
+// can manage it"). ⛔ THE ERRAND HALF WAS NOT, AND HER MEASUREMENT OF WHY WAS EXACT: `advanceAssignment` set
+// `status = "problem"` and the ONLY reader — `progressAgainst` — merely EXCLUDED those assignments from a
+// count. An errand could go wrong and the world was exactly as it had been.
+//
+// ⚠️ "THE OUTCOME MUST BE ABLE TO BE BAD OR NONE OF THIS IS A DECISION… a 'problem' that only prints a line is
+// the theatre we keep catching."
+console.log("\n── §224 · an errand that can go wrong ──");
+{
+  const AS224 = await import("../engine/assignments.js");
+
+  /* ---- 1 · ⛑ THE KEYING PRINCIPLE: WHAT SOMEONE IS GOOD FOR DECIDES WHAT YOU MAY SEND THEM TO DO ---- */
+  // ⚠️ NO NEW TAXONOMY. `does` is authored and live on every contingent in Silas's save, and is exactly the
+  // field Erik asked to see on the roster — so the panel's most useful column becomes its eligibility rule for
+  // free, and there is no second list to keep in step with the first.
+  check("§224: ⛑ there are seven errands, and every one wants a family a contingent already carries",
+    AS224.MISSION_KIND_IDS.length === 7
+    && AS224.MISSION_KIND_IDS.every(k => /^(SHAPE|HARM|PROTECT|KNOW|RESTORE|MOVE|INFLUENCE|SUSTAIN)$/.test(AS224.MISSION_KINDS[k].wants)),
+    AS224.MISSION_KIND_IDS.join(", "));
+  // ⛔ EVERY FAMILY HAS A DOOR — asserted over the eight rather than spot-checked, because her point is that
+  // NONE of them is left with nothing to do. HARM and RESTORE are second choices "which is the point and not an
+  // oversight: an errand is rarely a fight, and a Fellowship whose only use is violence is a war-band."
+  const doors = new Set(AS224.MISSION_KIND_IDS.flatMap(k => [AS224.MISSION_KINDS[k].wants, AS224.MISSION_KINDS[k].also].filter(Boolean)));
+  check("§224: ⛔ …and all eight families have a door — none of the Fellowship is good for nothing",
+    ["SHAPE", "HARM", "PROTECT", "KNOW", "RESTORE", "MOVE", "INFLUENCE", "SUSTAIN"].every(f => doors.has(f)),
+    [...doors].sort().join(", "));
+
+  /* ---- 2 · ⛔ A REFUSAL IS THE CHARACTER, NOT A GATE ---- */
+  // ⛑ HER §3.2: "a warden does not run contraband. The refusal is the character, not a gate — and it should say
+  // WHY IN THEIR OWN VOICE, because a refusal that explains itself is content and a refusal that does not is a
+  // locked door."
+  const pell = { npcId: "pell", npcName: "Pell Ran Marsh", does: ["SHAPE", "HARM"] };
+  const apt = AS224.canSendOn(pell, "work");
+  const no = AS224.canSendOn(pell, "treat");
+  check("§224: ⛑ the person you send to work a place is the one who shapes",
+    apt.ok === true && apt.fit === "apt");
+  check("§224: ⛔ …and a charge their record argues against is refused IN THEIR OWN TERMS, never as a bare no",
+    no.ok === false && /will not take that on/.test(no.why) && /shapes and harms/.test(no.why), no.why);
+  // ⚠️ FAMILIES READ AS VERBS, NOT TAGS: "SHAPE/HARM on a card is a database. 'shapes and harms' is a person."
+  // And two is the limit, because a row that lists everything ranks nothing.
+  check("§224: ⚠️ …and families speak as verbs, at most two of them",
+    AS224.sayFamilies(["SHAPE", "HARM", "KNOW"]) === "shapes and harms"
+    && AS224.sayFamilies(["KNOW"]) === "knows");
+  // ⛑ AND SOMEONE UNPROVEN IS NOT REFUSED — sworn is consent to be sent, and a person who has shown you
+  // nothing yet is a guess rather than a locked door.
+  check("§224: ⛑ …and someone who has shown you nothing may still be sent — it is a guess on both sides",
+    AS224.canSendOn({ npcName: "A newcomer" }, "seek").ok === true);
+
+  /* ---- 3 · ⛔ ONE REFUSAL PATH, WIDENED — NEVER A SECOND ---- */
+  // ⚠️ HER §3.3, VERBATIM: "DO NOT BUILD A SECOND REFUSAL PATH — widen that one to carry a `why: 'would not'`
+  // beside its `why: 'delegation is full'`."
+  const wontRefusal = AS224.delegationRefusal({}, "pell", { capacity: 5, kind: "treat", who: pell });
+  check("§224: ⛔ the person's refusal comes through the SAME door as the capacity refusal",
+    wontRefusal?.why === "would not" && /will not take that on/.test(wontRefusal.note || ""));
+  check("§224: ⛑ …and a charge they are fit for is not refused at all",
+    AS224.delegationRefusal({}, "pell", { capacity: 5, kind: "work", who: pell }) === null);
+  // ⛔ AND THE PERSON'S REFUSAL COMES FIRST: someone who will not take the charge does not care whether a seat
+  // was free, and telling them the roster is full would be the wrong sentence about the right refusal.
+  check("§224: ⛔ …and a refusal of the CHARGE outranks a full roster — the right sentence, not the other one",
+    AS224.delegationRefusal({ assignments: { x: { npcId: "a", status: "working" } } }, "pell",
+      { capacity: 1, kind: "treat", who: pell })?.why === "would not");
+
+  /* ---- 4 · ⛑ A MISSION CARRIES ITS MECHANISM, AND THE CHARGE STAYS THE PLAYER'S SENTENCE ---- */
+  const ws224 = {};
+  const m224 = AS224.addAssignment(ws224, { npcId: "dara-holt", npcName: "Dara Holt",
+    charge: "bring back salt from Greyhearth", kind: "trade", destination: "greyhearth", stake: "eleven crystal" }, 10);
+  check("§224: ⛑ an errand records its kind, its destination and what went out with it",
+    m224.kind === "trade" && m224.destination === "greyhearth" && m224.stake === "eleven crystal"
+    && /bring back salt/.test(m224.charge));
+  // ⚠️ AND A KIND THE WORLD DOES NOT HAVE IS NOT STORED — the same refusal `carriageOf` makes, for the same
+  // reason: a mission that reads as a trade trip and is not one would misfire for the rest of the save.
+  check("§224: ⚠️ …and a kind nobody authored is refused rather than stored",
+    AS224.addAssignment({}, { npcId: "x", npcName: "X", charge: "c", kind: "smuggle" }, 1).kind === null);
+
+  /* ---- 5 · ⛔ AND THE PROBLEM COSTS, WHICH IS THE WHOLE DESIGN ---- */
+  AS224.advanceAssignment(m224, "problem", 12);
+  const bill = AS224.problemCost(m224);
+  check("§224: ⛔ a stake that went out and did not come back is the first and truest cost",
+    bill?.lost === "eleven crystal" && /is not\./.test(bill.line), bill?.line);
+  // ⛑ AND EVERY KIND CAN GO WRONG — asserted across all seven, because her one hard rule is that `problem`
+  // must be REACHABLE FOR EVERY KIND.
+  const noCost = AS224.MISSION_KIND_IDS.filter(k => {
+    const a = AS224.addAssignment({}, { npcId: "p", npcName: "P", charge: "c", kind: k, destination: "there" }, 1);
+    const c = AS224.problemCost(a);
+    return !c || !c.line;
+  });
+  check("§224: ⛔ …and EVERY one of the seven has a way to go wrong that lands on something",
+    noCost.length === 0, noCost.join(", ") || "all seven carry a cost");
+  // ⚠️ AND THE TICK PAYS THE BILL. `problemCost` is pure and returns what is owed; a producer with no reader is
+  // the defect this whole session keeps finding, so the chain is what is gated.
+  const WT224 = rd("engine/worldtick.js");
+  check("§224: ⚠️ …and the world tick actually pays it, rather than computing a bill nobody reads",
+    /cost = problemCost\(a\)/.test(WT224) && /n\.relationship = \(Number\(n\.relationship\) \|\| 0\) \+ cost\.standing/.test(WT224));
+  check("§224: ⛑ …and it says so plainly and does not apologise",
+    /for \(const m of moved\) if \(m\.cost\?\.line\) news\.push\(m\.cost\.line\)/.test(WT224));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

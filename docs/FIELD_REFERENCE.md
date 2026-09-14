@@ -645,13 +645,13 @@ contribute to authored dice without recreating the double-scaling bug.
 | `functions` | 1635 | `root`×429 `tree`×1206 | ✅ READ | `battle_turn.js`, `braids.js`, `capabilities.js` |
 | `harmRung` | 1562 | `root`×429 `tree`×1133 | ✅ READ | `braids.js`, `gm_registry.js`, `intent.js` |
 | `grants` | 1206 | `tree`×1206 | ✅ READ | `braids.js`, `capabilities.js`, `earnedpower.js` |
-| `cannot` | 1206 | `tree`×1206 | ✅ READ | `authormode.js`, `braids.js`, `capabilities.js` |
+| `cannot` | 1206 | `tree`×1206 | ✅ READ | `assignments.js`, `authormode.js`, `braids.js` |
 | `gains` | 1176 | `tree`×1176 | ✅ READ | `encounters.js`, `gm.js`, `roundreceipt.js` |
 | `gainAxes` | 1117 | `tree`×1117 | ✅ READ | `capabilities.js` |
 | `axis` | 512 | `rankDeltas`×512 | ✅ READ | `coliseum.js`, `craftmechanics.js`, `gm.js` |
 | `delta` | 512 | `rankDeltas`×512 | ✅ READ | `arceffects.js`, `companions.js`, `economy.js` |
 | `from` | 512 | `rankDeltas`×512 | ✅ READ | `affiliation.js`, `art.js`, `assignments.js` |
-| `kind` | 490 | `rankDeltas`×490 | ✅ READ | `arceffects.js`, `art.js`, `authormode.js` |
+| `kind` | 490 | `rankDeltas`×490 | ✅ READ | `arceffects.js`, `art.js`, `assignments.js` |
 | `powerSystem` | 431 | `root`×429 `tree`×2 | ✅ READ | `art.js`, `backfill.js`, `braids.js` |
 | `id` | 429 | `root`×429 | ✅ READ | `affiliation.js`, `affinities.js`, `arceffects.js` |
 | `tier` | 429 | `root`×429 | ✅ READ | `backfill.js`, `battle_turn.js`, `borncontract.js` |

@@ -41,7 +41,7 @@ import { decayWakes, wakeArcPush } from "./wake.js"; // SNG-204: wakes decay on 
 import { enterDeathState, deepenDeaths, deathDepth, isRetrievable, resolveRetrieval } from "./death.js"; // SNG-209: a killed figure ENTERS the death state; the clock sinks untended deaths toward sealed
 import { absoluteWorldDay, worldDayAt, worldCount, readClock } from "./worldtime.js";
 import { voyageTick, whereaboutsOf } from "./carriage.js";   // ⛔ B6b: a voyage arrives on world time, and where she is now is where she can be raided
-import { advanceAssignment, progressAgainst } from "./assignments.js"; // SNG-191 §4: the world advances delegated work
+import { advanceAssignment, progressAgainst, problemCost } from "./assignments.js"; // SNG-191 §4: the world advances delegated work
 import { seedArc, fomentArc, surfaceableArcs, markSurfaced, seasonalPressure } from "./latentarcs.js"; // SNG-191 §7: the world's own agenda
 import { ensureCanonStore, promotionCandidates, promoteInto, canonForViewer } from "./canon.js";
 
@@ -306,12 +306,37 @@ export async function advanceDelegatedWork({ character, content, advanceAssignme
         const n = character.npcRegistry[a.npcId];
         n.completions = (Number(n.completions) || 0) + 1;
       }
-      moved.push({ a, outcome: adv.outcome, note: adv.note });
+      // ⛔ SNG-541 §2 — AND A `problem` COSTS SOMETHING NOW. Aevi measured that nothing consumed this status:
+      // `advanceAssignment` set it and the only reader merely EXCLUDED those assignments from a count, so an
+      // errand could go wrong and the world was exactly as it had been. ⚠️ "A 'problem' that only prints a line
+      // is the theatre we keep catching" — and "THE OUTCOME MUST BE ABLE TO BE BAD OR NONE OF THIS IS A
+      // DECISION."
+      //
+      // ⛑ THE COST LANDS ON WHAT THE PLAYER ALREADY TRACKS. `problemCost` is pure and returns the BILL; the
+      // purse and the disposition store each have one door in, and they are paid through those doors here.
+      let cost = null;
+      if (adv.outcome === "problem") {
+        cost = problemCost(a);
+        if (cost) {
+          // ⚠️ STANDING IS THE ONE THAT LANDS MECHANICALLY TODAY. A lost stake, a hurt escort, a place that now
+          // knows it is watched — those are the FICTION's to carry, and the GM is told through the status note
+          // rather than having the engine invent an item transfer nobody authored.
+          if (cost.standing && a.npcId && character?.npcRegistry?.[a.npcId]) {
+            const n = character.npcRegistry[a.npcId];
+            n.relationship = (Number(n.relationship) || 0) + cost.standing;
+          }
+          if (a.npcId) statusUpdates.push({ op: "update", npcId: a.npcId, statusNote: smartClamp(cost.line, 200) });
+        }
+      }
+      moved.push({ a, outcome: adv.outcome, note: adv.note, cost });
       if (adv.note && a.npcId) statusUpdates.push({ op: "update", npcId: a.npcId, statusNote: smartClamp(adv.note, 200) });
     }
     // ⛔ CATCH-UP NEEDS A DIGEST, AND AEVI IS RIGHT THAT IT MATTERS: a month away is ~10 intervals, and ten
     // separate progress notices would feel WORSE than the silence they replace — a wall of small news is
     // how a player learns to skip the news. One line when several moved; the full line when one did.
+    // ⛑ AND A MISSION THAT WENT WRONG SAYS SO PLAINLY AND DOES NOT APOLOGISE (her §4.4). The cost line IS the
+    // news for that charge — "what came back and what it cost, in that order, in one line".
+    for (const m of moved) if (m.cost?.line) news.push(m.cost.line);
     const notable = moved.filter(m => m.outcome === "problem" || m.outcome === "done");
     if (moved.length > 2) {
       const parts = [];

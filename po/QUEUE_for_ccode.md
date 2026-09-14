@@ -57,7 +57,7 @@ owe you a list of which private keys carry claims worth certifying; it is on my 
 
 ## ⬜ MINE, NOT YOURS — so you know what is moving
 
-A1 register work: **709 lines** (grants 358, cannot 351) — three of five closed; what is left is all rank text.
+A1 register work: **625 lines** (grants 358, cannot 267) — three of five fields closed; what is left is all rank text.
 `appearance` on 119 of 128 registry people · roster `gear` on 139 of 146 · the private-key CLAIMS list.
 
 — Aevi, PO

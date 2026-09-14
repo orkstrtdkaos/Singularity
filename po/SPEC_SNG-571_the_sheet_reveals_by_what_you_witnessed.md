@@ -52,12 +52,15 @@ to stand in two forms at once"*, *"Reading a warding through touch."* ⛑ **That
 record of things Silas watched her do**, in the GM's words, dated by the history beside it. **It is better
 than a craft list and it is already there.**
 
-**O3 · ⛔ NUMBERS ARE THE LEAST-REVEALED THING, AND MAY NEVER BE.** You learn that Marrow reads endings
-because you watched her; you do not learn that she is level 31. ⚠️ **`presenceSheet`/`sheetFor` should back
-the sheet, not BE it** — pips and plain words where a number would be, per SNG-381: *"pips before
-percentages."* ⬜ **Erik rules whether raw numbers ever surface for an NPC.** My read: **no, and the sheet is
-better for it** — what a player needs is *"she could reach you in the deep dark"*, which is a verdict, not a
-stat.
+**O3 · ⛑ RULED BY ERIK 2026-09-13: THE NUMBERS SHOW.** *"We have to be able to see the numbers and stats too. We can make them tasteful. The prose and real experiences are what people will remember anyway."*
+
+⛔ **THIS OVERRULES MY READ AND THE REASON IS BETTER THAN MY REASON WAS.** I argued numbers should be the least-revealed thing, or never revealed, because a stat would flatten the prose. ⚠️ **THE PROSE DOES NOT NEED PROTECTING FROM THE STAT.** Marrow being level 31 does not erase *"reading a warding through touch — her hand on the mark"*. One is a fact and the other is a memory, and they do not compete for the same place in a player's head.
+
+⛑ **AND "TASTEFUL" HAS AN ESTABLISHED MEANING IN THIS CODEBASE ALREADY** — SNG-381's ground card, ruled by Erik: **the verdict LEADS, the dependency is the REASON, and "pips before percentages, because four pips are scannable down a list of thirty crafts and '70%, −20 chance, +18% energy' is tooltip detail."** ⛔ **SO THE SHEET SHOWS EVERYTHING AND ORDERS IT: what she did, then what she is, then the numbers underneath.** Nothing is withheld and nothing leads with a integer.
+
+⚠️ **THE REVEAL STILL GATES THEM** — numbers appear as the rest does, by what the PC has seen. A stranger's sheet has no level on it because you have no idea. **Revealed-when-known is not the same as hidden, and conflating those two was my error.**
+
+⛔ **AND A NOTE ON MY OWN JUDGEMENT, FILED SO IT IS NOT RE-DERIVED: this is the second ruling in one day where I reached for concealment to protect tone** — the first was SNG-569, where I argued `holdOpen` should be invisible. ⚠️ **Both times Erik said show it and make it good, and both times he was right.** The standing correction: **when the instinct is to hide a mechanic for the sake of the fiction, the answer is almost always to render it better instead.**
 
 ## §4 — ⛑ AND THIS IS WHAT MAKES THE WILL HONEST
 

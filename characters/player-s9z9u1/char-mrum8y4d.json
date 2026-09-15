@@ -1524,8 +1524,8 @@
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 1860,
-    "lastSharedReadAt": "2026-09-15T12:54:21.256Z",
+    "lastGenCount": 1862,
+    "lastSharedReadAt": "2026-09-15T14:47:59.164Z",
     "lastTickWorldDay": 77,
     "lastCanonWorldDay": 77,
     "turnsSinceOffer": 0,
@@ -1626,7 +1626,7 @@
         "kind": "shortage",
         "premise": "The shallow wells that sustain the scattered settlements are dropping faster each season than anyone has yet admitted aloud.",
         "cause": "The Palelands' sparse, chalky soil has always demanded more water to work than it naturally holds, and the settlements were founded at the margins of what the…",
-        "stage": 50,
+        "stage": 51,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1639,7 +1639,7 @@
         "kind": "rot",
         "premise": "A slow fungal bloom is working through the oldest grain stores, and the steward responsible has been quietly discarding the worst sacks rather than reporting the loss.",
         "cause": "The valley's mild, damp winters make its granaries prone to moisture, and the current steward was appointed for loyalty rather than knowledge of grain-keeping.",
-        "stage": 50,
+        "stage": 51,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1664,7 +1664,7 @@
         "kind": "rot",
         "premise": "A key sequence in the primary record is being quietly re-threaded by someone who made an error years ago and cannot bear to have it discovered.",
         "cause": "Unspooling's knowledge is stored in physical cordage whose integrity depends entirely on the honesty of the hands that maintain it.",
-        "stage": 45,
+        "stage": 46,
         "seededAtCount": 758,
         "surfaced": true,
         "fate": "growing",
@@ -1701,7 +1701,7 @@
         "kind": "shortage",
         "premise": "Certain materials or substances needed for whatever work the Unmade does are being quietly stockpiled by one practitioner at the expense of communal supply, because she no longer trusts the…",
         "cause": "The Unmade is a place where things are taken apart, and grief for what is lost has no formal channel — it is expected to simply disperse, as everything else…",
-        "stage": 13,
+        "stage": 14,
         "seededAtCount": 1675,
         "surfaced": true,
         "fate": "growing",
@@ -1714,7 +1714,7 @@
         "kind": "rot",
         "premise": "A run of subtle flaws has begun appearing in work passing through one bench — small enough to escape immediate notice, deep enough to fail later — and the cause is a senior apprentice who has been…",
         "cause": "The two workshops already contesting the shared tool have each told their apprentices, in different words, that the other side cannot be trusted — and one…",
-        "stage": 13,
+        "stage": 14,
         "seededAtCount": 1675,
         "surfaced": true,
         "fate": "growing",
@@ -1727,7 +1727,7 @@
         "kind": "shortage",
         "premise": "A foundational material used in the Making's core work has quietly been substituted with an inferior source for several production cycles, and nothing built from it has yet been tested under real…",
         "cause": "The two workshops already deadlocked over the shared tool have each independently begun sourcing their own materials rather than drawing from the common…",
-        "stage": 6,
+        "stage": 7,
         "seededAtCount": 1826,
         "surfaced": true,
         "fate": "growing",
@@ -1743,7 +1743,23 @@
         "othersPush": 1
       }
     },
-    "pressureQueue": [],
+    "pressureQueue": [
+      {
+        "source": "threat-attack",
+        "kind": "threat-attack",
+        "subjectId": "beast_cinder_mote_drift",
+        "aimedAtPlayer": true,
+        "urgency": 3,
+        "oneLineHook": "A a cinder-mote drift has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
+        "becomes": {
+          "type": "encounter",
+          "encounterId": "beast_cinder_mote_drift",
+          "name": "a cinder-mote drift"
+        },
+        "addedDay": 4,
+        "locationId": "the_crossing"
+      }
+    ],
     "offscreenCursor": 2,
     "retrievalWanted": [
       {
@@ -7160,7 +7176,7 @@
     }
   ],
   "nativeGrantsVersion": 2,
-  "reconcileVersion": 62,
+  "reconcileVersion": 63,
   "gallery": [
     {
       "kind": "ability",
@@ -7199,8 +7215,8 @@
       "caption": "The Churn-Revel orchestrator",
       "worldDay": 77,
       "at": "2026-09-15T00:28:49.036Z",
-      "subjectKind": "figure",
-      "subjectId": "whois-churn-revel-orchestrator"
+      "subjectKind": "npc",
+      "subjectId": "churn-revel-orchestrator"
     },
     {
       "kind": "figure",
@@ -7209,8 +7225,8 @@
       "caption": "The Churn-Revel orchestrator",
       "worldDay": 77,
       "at": "2026-09-15T00:28:01.272Z",
-      "subjectKind": "figure",
-      "subjectId": "whois-churn-revel-orchestrator"
+      "subjectKind": "npc",
+      "subjectId": "churn-revel-orchestrator"
     },
     {
       "kind": "moment",
@@ -7253,8 +7269,8 @@
       "caption": "Vessin Tallow-bark",
       "worldDay": 76,
       "at": "2026-09-14T22:08:30.575Z",
-      "subjectKind": "figure",
-      "subjectId": "whois-traveler-woman"
+      "subjectKind": "npc",
+      "subjectId": "traveler-woman"
     },
     {
       "kind": "holding",
@@ -7510,7 +7526,9 @@
       "url": "https://image.pollinations.ai/prompt/A%20woman%20in%20her%20mid-forties%2C%20neither%20tall%20nor%20short%2C%20built%20for%20endurance%20rather%20than%20strength.%20Quickwood-dark%20skin%20with%20the%20faint%20silver%20tracery%20of%20old%20briar-scarring%20along%20her%20left%20forearm%20and%20jaw.%20Ha%2C%20character%20portrait%2C%20named%20Vessin%20Tallow-bark%2C%20woman%2C%20Lone%20traveler%20resting%20at%20the%20Half-Cathedral%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=98296&nologo=true",
       "caption": "Vessin Tallow-bark — devoted",
       "worldDay": 32,
-      "at": "2026-08-01T21:48:48.230Z"
+      "at": "2026-08-01T21:48:48.230Z",
+      "subjectKind": "npc",
+      "subjectId": "traveler-woman"
     },
     {
       "kind": "beast",
@@ -7590,7 +7608,9 @@
       "url": "https://image.pollinations.ai/prompt/A%20woman%20in%20her%20mid-forties%2C%20neither%20tall%20nor%20short%2C%20built%20for%20endurance%20rather%20than%20strength.%20Quickwood-dark%20skin%20with%20the%20faint%20silver%20tracery%20of%20old%20briar-scarring%20along%20her%20left%20forearm%20and%20jaw.%20Ha%2C%20character%20portrait%2C%20named%20Vessin%20Tallow-bark%2C%20Itinerant%20assessor%20of%20salvage%2C%20ruins%2C%20and%20risk%20%E2%80%94%20she%20prices%20things%20so%20others%20don't%20have%20to%20learn%20the%2C%20Dry%20and%20flat%20as%20bark-peel%20in%20a%20dry%20year.%20Offers%20assessments%2C%20not%20comfort.%20When%20she%20says%20something%20is%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=64361&nologo=true",
       "caption": "Vessin Tallow-bark",
       "worldDay": 32,
-      "at": "2026-08-01T19:59:44.550Z"
+      "at": "2026-08-01T19:59:44.550Z",
+      "subjectKind": "npc",
+      "subjectId": "traveler-woman"
     },
     {
       "kind": "npc",
@@ -7622,7 +7642,9 @@
       "url": "https://image.pollinations.ai/prompt/A%20human%20woman%2C%20late%20fifties%2C%20with%20the%20pale-olive%20complexion%20of%20someone%20who%20lives%20under%20canopy%20rather%20than%20sky.%20The%20grey%20coat%20falls%20to%20mid-calf%2C%20unmarked%2C%20unweathered%2C%20impossibly%20clean%20for%20the%20Orchard'%2C%20character%20portrait%2C%20named%20Veln%20Ashpause%2C%20Hourkeeper%20of%20the%20Confluence%20%E2%80%94%20she%20holds%20the%20moment%20before%20the%20moment%2C%20says%20nothing%20of%20what%20she%20carr%2C%20Almost%20nothing.%20What%20she%20does%20say%20comes%20out%20like%20the%20creak%20of%20a%20bough%20settling%20%E2%80%94%20not%20alarming%2C%20not%20c%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=12708&nologo=true",
       "caption": "Veln Ashpause",
       "worldDay": 31,
-      "at": "2026-07-31T16:21:39.719Z"
+      "at": "2026-07-31T16:21:39.719Z",
+      "subjectKind": "npc",
+      "subjectId": "hourkeeper-confluence"
     },
     {
       "kind": "npc",
@@ -7630,7 +7652,9 @@
       "url": "https://image.pollinations.ai/prompt/A%20man%20in%20his%20late%20sixties%2C%20heavyset%20and%20deliberate%20in%20the%20way%20of%20someone%20who%20has%20carried%20things%20all%20his%20life%20and%20made%20peace%20with%20the%20carrying.%20Skin%20the%20colour%20of%20old%20heartwood%20%E2%80%94%20deep%20reddish-brown%2C%20we%2C%20character%20portrait%2C%20named%20Ossivyn%20Tallow%2C%20Tender%20of%20the%20Slow%20Orchard%20%E2%80%94%20he%20is%20planting%20a%20tree%20today%20for%20a%20child%20not%20yet%20conceived%2C%20because%20the%20%2C%20Unhurried%20but%20not%20dreamy%20%E2%80%94%20fully%20present%2C%20like%20a%20man%20who%20has%20decided%20time%20is%20not%20his%20enemy.%20Speaks%20i%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13169&nologo=true",
       "caption": "Ossivyn Tallow",
       "worldDay": 27,
-      "at": "2026-07-27T22:23:25.807Z"
+      "at": "2026-07-27T22:23:25.807Z",
+      "subjectKind": "npc",
+      "subjectId": "ossivyn-tallow"
     },
     {
       "kind": "location",
@@ -7662,7 +7686,9 @@
       "url": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Tessvel%20Cairn%2C%20woman%2C%20Junior%20wright%20on%20posting-duty%20at%20the%20Eastern%20Intake%20notice%20board%2C%20courting%20romantic%20to%20Loki%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=98414&nologo=true",
       "caption": "Tessvel Cairn — courting · devoted",
       "worldDay": 21,
-      "at": "2026-07-21T22:26:05.173Z"
+      "at": "2026-07-21T22:26:05.173Z",
+      "subjectKind": "npc",
+      "subjectId": "tessvel-cairn"
     },
     {
       "kind": "npc",
@@ -7670,7 +7696,9 @@
       "url": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20early%20twenties%2C%20lean%20and%20upright%20with%20the%20unconscious%20posture%20of%20someone%20accustomed%20to%20working%20in%20confined%20valve-spaces.%20Rust-orange%20apprentice's%20coat%2C%20sleeves%20rolled%20to%20the%20elbow%2C%20character%20portrait%2C%20named%20Tessvel%20Cairn%2C%20Junior%20wright%20on%20posting-duty%20at%20the%20Eastern%20Intake%20notice%20board%20%E2%80%94%20the%20person%20who%20makes%20the%20official%2C%20Economical%20to%20the%20point%20of%20clipped.%20Speaks%20in%20specifications%20and%20corrections%20%E2%80%94%20not%20rudely%2C%20but%20as%20so%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=43130&nologo=true",
       "caption": "Tessvel Cairn",
       "worldDay": 21,
-      "at": "2026-07-21T18:19:43.074Z"
+      "at": "2026-07-21T18:19:43.074Z",
+      "subjectKind": "npc",
+      "subjectId": "tessvel-cairn"
     },
     {
       "kind": "npc",
@@ -7736,8 +7764,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789483289140,
-  "rev": 659,
+  "updatedAt": 1789483680790,
+  "rev": 662,
   "generated": {
     "schemaVersion": 1,
     "npc": {

@@ -1,0 +1,72 @@
+{
+ "schemaVersion": 1,
+ "id": "power_bands",
+ "kind": "rules",
+ "note": "⛔ SNG-590 / SNG-260 §A — ONE NUMERIC BAND, TWO VOCABULARIES. The player side and the opponent side name the same rung differently, and the engine reasons in the NUMBER. Authored 2026-09-14 because the table was ratified as prose in a po file and nothing in content/ carried it, so `tierForArc` was standing in with three hardcoded cuts — legendary from level 7, in a game whose levels run past 60.",
+ "bands": [
+  {
+   "band": 0,
+   "levels": [
+    1,
+    10
+   ],
+   "player": "novice",
+   "opponent": "riffraff",
+   "of": "the world as it is before anyone has heard of you"
+  },
+  {
+   "band": 1,
+   "levels": [
+    11,
+    25
+   ],
+   "player": "adept",
+   "opponent": "notable",
+   "of": "known in one place, by the people who work there"
+  },
+  {
+   "band": 2,
+   "levels": [
+    26,
+    45
+   ],
+   "player": "master",
+   "opponent": "regional",
+   "of": "a name a whole reach would recognise"
+  },
+  {
+   "band": 3,
+   "levels": [
+    46,
+    70
+   ],
+   "player": "heroic",
+   "opponent": "epic",
+   "of": "spoken of past the borders of the country that made them"
+  },
+  {
+   "band": 4,
+   "levels": [
+    71,
+    100
+   ],
+   "player": "legendary",
+   "opponent": "legendary",
+   "of": "they have lasted, and been counted"
+  }
+ ],
+ "_bandsRatified": "⛑ THE FIVE BANDS AND BOTH LABEL SETS ARE ERIK'S, ratified in SNG-260 §B — 'Bands stand as drafted'. ⚠️ `legendary` is deliberately shared at the top: at that rung the two sides stop being different kinds of thing.",
+ "tierToBand": {
+  "riffraff": 0,
+  "notable": 1,
+  "regional": 2,
+  "heroic": 3,
+  "epic": 3,
+  "legendary": 4,
+  "mythic": 4
+ },
+ "_tierToBand": "⛔ THE SEVEN AUTHORED TIERS DO NOT MAP ONE-TO-ONE ONTO FIVE BANDS, AND TWO OF THEM SHARE. `heroic` and `epic` both sit at band 3, and `legendary` and `mythic` both at band 4 — the band is the COARSE layer the engine matches on, the tier stays the fine one the roster is authored in. ⚠️ THIS REPLACES `tierRank`, WHERE `heroic` AND `regional` SHARED RANK 2 — one word from each vocabulary flattened into a single ladder, so a master/regional threat and a heroic character compared wrong. ⛑ AND IT GIVES `mythic` A HOME: it appears in neither of Erik's label sets and sits on 5 authored NPCs, so it bands with `legendary` rather than being renamed out from under them.",
+ "_theConflictErikMustSettle": "⛔ THE RATIFIED LABEL TABLE AND THE LIVE `npcStanding.tierFloor` DISAGREE BY ROUGHLY ONE BAND, AND I HAVE NOT SILENTLY PICKED. Measured 2026-09-14:\n    tier floors (live, 146 NPCs depend on them): riffraff 1 · notable 5 · regional 12 · heroic 25 · epic 40 · legendary 60 · mythic 85\n    where each floor lands in the ratified ranges: riffraff→0 · notable→0 · regional→1 · heroic→1 · epic→2 · legendary→3 · mythic→4\n⚠️ SO BY FLOOR, `legendary` OPENS AT 60 AND IS BAND 3; THE LABEL TABLE CALLS BAND 4 LEGENDARY. Every rung from `notable` up sits one band lower than its name suggests. ⛑ `tierToBand` above follows THE LABEL TABLE, because Erik ratified it and because the floors were set for a different purpose — they answer 'what level is this person', not 'who should meet whom'. ⬜ ERIK RULES WHICH MOVES. If the labels are right, `tierFloor` wants raising: heroic ~46, epic ~55, legendary ~71, mythic ~85. If the floors are right, band 3's opponent name is `legendary` and band 4 is `mythic`. **The two cannot both stand as written.**",
+ "_whereHeroicStarts": "⬜ OPEN, ERIK'S, AND THE FILE NEEDS A NUMBER. SNG-260 flagged it: 'Silas L29 just becoming heroic ⇒ maybe heroic starts lower (~L29–35); Erik to place.' ⚠️ As drafted, band 3 opens at 46 and Silas at 33 is band 2 — `master`, not heroic. His own read in play was that he was just becoming heroic at 29. ⛑ If that stands, band 2 ends around 28 and band 3 runs 29–70, which compresses `master` hard and is worth him seeing before it is chosen.",
+ "_whatThisUnblocks": "⛑ CCode's SNG-590 list, all of which reads this one table: the `powerBand` layer under both vocabularies, `tierRank` rebuilt on band numbers, band-gating the GM-figure door, and folding `tierForArc` in so a level-7 character stops meeting the same figures as a level-61 one."
+}

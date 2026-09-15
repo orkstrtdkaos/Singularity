@@ -33,7 +33,7 @@ import { namesMatch } from "./namematch.js";
 import { affiliationOf, regionHomeTradition, buildPeopleVocab } from "./affiliation.js";
 import { defaultSchoolsForDomains } from "./substrate.js"; // SNG-193b §3.2: seed a school per practised domain on old saves
 import { mintableBraidsFor, buildBraidDef, mintBraid, braidTreeFor } from "./braids.js"; // SNG-196: mint the braids a character already earned · ✅ 2026-09-12: braidTreeFor for the template-rank repair
-import { findExistingNpc, prettifyNpcName, REGISTRY_CAP, collapseScenePresence } from "./npcs.js"; // SNG-199/205: registry + codex backfill
+import { findExistingNpc, prettifyNpcName, REGISTRY_CAP, collapseScenePresence, subjectFromCaption, subjectFromSeed } from "./npcs.js"; // SNG-199/205: registry + codex backfill
 import { bondOf, companionCodexUpdate, companionStageCount } from "./companions.js"; // SNG-200: stage + codex backfill
 import { isCoercedObjectArtefact, isDescriptiveNotName } from "./state.js"; // SNG-329: the artefact detector, shared with the mint that now refuses it
 import { startingSkills } from "./inventory.js"; // SNG-339b: the training an existing character came with
@@ -86,6 +86,61 @@ function renameTargets(spec, entry, character, known) {
 // "has this entity seen this step yet" via entity.reconcileVersion.
 
 export const CHARACTER_STEPS = [
+  {
+    version: 63, id: "one-person-one-stack", playerFacing: true,
+    // ⛔ ERIK, IN PLAY: "Vessin has so many duplicate stacks… sometimes it seems like the characters gallery
+    // images aren't tied to the codex entry and images — they need to be… the person merging should be working
+    // better."
+    //
+    // ⚑ MEASURED ON HIS SAVE: 60 gallery entries and only 27 carry a `subjectId`. `galleryStacks` keys on
+    // `kind:subjectId` when there is one and on `solo:<url>` when there is not — so a picture with no subject is
+    // its own stack of one, and Vessin came out as six stacks of one woman.
+    //
+    // ⛑ THE MERGE HE IS ASKING FOR HAS ALREADY HAPPENED — IN THE REGISTRY. `churn-revel-orchestrator` is Halvex
+    // Coil and carries "The Churn-Revel orchestrator" in his aliases; `traveler-woman` is Vessin Tallow-bark.
+    // ⚠️ The pictures never heard, because a caption is a name frozen at the moment it was written and the
+    // person kept living — and because the bond suffix ("— devoted", "· courting") made one person two captions.
+    //
+    // ⚠️ PERSON PICTURES ONLY. A moment is a moment and a beast is a beast: the Churn-Revel's own MOMENT and the
+    // beast drawn of it must NOT fold into the man who orchestrated it, and they do not — only `portrait`,
+    // `figure` and `npc` are touched.
+    //
+    // ⛔ AND IT NEVER GUESSES. Resolution is the registry's alias-aware matcher and nothing else. Erik's two
+    // "Vessin of the Long Bough" tiles stay their own, because that name is in no record — she was renamed
+    // before the rename path kept aliases, and only he can say they are the same woman. The note says so and
+    // points at the merge tool rather than folding them in on a resemblance.
+    apply: (c) => {
+      const reg = c.npcRegistry || {};
+      const gallery = Array.isArray(c.gallery) ? c.gallery : null;
+      if (!gallery || !Object.keys(reg).length) return {};
+      const PERSONISH = new Set(["portrait", "figure", "npc"]);
+      const joined = new Map();     // registry id -> how many tiles came home
+      let unresolved = 0;
+      for (const e of gallery) {
+        if (!e || !PERSONISH.has(String(e.kind))) continue;
+        // ⛑ ALREADY RIGHT IS LEFT ALONE. A tile whose subject already resolves to a person in the registry is
+        // not rewritten — the repair only speaks into silence.
+        const already = e.subjectId ? subjectFromSeed(e.subjectId, reg) : null;
+        if (already && e.subjectKind === "npc" && e.subjectId === already) continue;
+        const id = already || subjectFromCaption(e.caption, reg);
+        if (!id) { unresolved++; continue; }
+        if (e.subjectKind === "npc" && e.subjectId === id) continue;
+        e.subjectKind = "npc";
+        e.subjectId = id;
+        joined.set(id, (joined.get(id) || 0) + 1);
+      }
+      if (!joined.size) return {};
+      // ⛑ NAMED, NOT COUNTED. "7 pictures were re-keyed" tells a player nothing; the point is that the faces
+      // they have been collecting are one person's again.
+      const say = [...joined.entries()]
+        .map(([id, n]) => `${reg[id]?.name || id} (${n})`)
+        .sort().join(", ");
+      const tail = unresolved
+        ? ` ${unresolved} picture${unresolved === 1 ? "" : "s"} still stand${unresolved === 1 ? "s" : ""} alone — they are captioned with a name no record carries any more, so only you can say who they are. The merge tool on the people screen will join them.`
+        : "";
+      return { notes: [`Your gallery has found its people again: ${say} — their pictures were filed under whatever they were called at the time, and now sit together.${tail}`] };
+    }
+  },
   {
     version: 62, id: "the-push-the-old-handler-flattened", playerFacing: true,
     // ⛔ SNG-552 (Aevi, on her own regression) — "A DEFERRAL CURRENTLY READS AS AN ADVANCE ON THE ONE ARC THE

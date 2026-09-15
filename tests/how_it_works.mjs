@@ -15296,8 +15296,14 @@ console.log("\n── §222 · a deferral that was recorded as an advance ──
   const { loadContentHeadless: lch222 } = await import("./headless_content.mjs");
   const C222 = await lch222();
   const step = RC222.CHARACTER_STEPS.find(s => s.id === "the-push-the-old-handler-flattened");
-  check("§222: the repair is a reconcile step at the top of the ladder",
-    !!step && step.version === 62 && RC222.topReconcileVersion("character") === 62);
+  // ⛔ SNG-593 — THIS ASSERTED "AT THE TOP OF THE LADDER", which is true of a step for exactly as long as
+  // nobody writes another one. Two landed the same hour (§242's announcement fix and §243's gallery repair) and
+  // it went red for both. ⚠️ A gate that fails when the ladder GROWS is measuring its own recency.
+  //
+  // ⛑ THE CLAIM IS THAT THE REPAIR IS A REGISTERED STEP AT ITS OWN VERSION, and that the ladder still reaches
+  // it — a step above the top would never run, which is the failure worth catching.
+  check("§222: the repair is a registered reconcile step, and the ladder reaches it",
+    !!step && step.version === 62 && RC222.topReconcileVersion("character") >= step.version);
 
   // ⚠️ THE REPAIR BELONGS ON THE SAVE, NOT ON THE SHARED STORE. `world/arcs/valley.json` looks like the wrong
   // number's home and is only a PROJECTION: the tick writes `byActor[me] = ws.arcStages[id].push` from this
@@ -17115,6 +17121,80 @@ console.log("\n── §242 · a craft is announced once, by one owner, and a re
     String(arrowFor242(["Maintained Veil"])));
   check("§242: ⛑ …while a TWO-parent discovery still gets the line that is true of it",
     /neither could do apart/.test(String(arrowFor242(["A", "B"]))), String(arrowFor242(["A", "B"])));
+}
+
+
+// ⛔ SNG-593 (Erik, in play) — "Vessin has so many duplicate stacks… sometimes it seems like the characters
+// gallery images aren't tied to the codex entry and images — they need to be… the person merging should be
+// working better."
+//
+// ⚑ MEASURED ON HIS SAVE: 60 gallery entries, 27 with a `subjectId`. `galleryStacks` keys on `kind:subjectId`
+// when there is one and `solo:<url>` when there is not — so a picture with no subject is its own stack of one,
+// and Vessin came out as SIX stacks of one woman. ⚠️ The three that DID carry a subject carried three different
+// schemes: `whois-traveler-woman`, `solo:cap:vessin of the long bough`, and a bare person seed.
+//
+// ⛑ THE MERGE HE IS ASKING FOR HAS ALREADY HAPPENED — IN THE REGISTRY. `churn-revel-orchestrator` is Halvex
+// Coil and carries "The Churn-Revel orchestrator" in his aliases. The PICTURES never heard, because a caption
+// is a name frozen when it was written and the person kept living — and because the bond suffix made one
+// person two captions. app.js names this one layer up: "AN ART SEED IS NOT AN ENTITY ID."
+console.log("\n── §243 · one person, one stack ──");
+{
+  const N242 = await import("../engine/npcs.js");
+  const R242 = await import("../engine/reconcile.js");
+  const save242 = JSON.parse(rd("characters/player-s9z9u1/char-mrum8y4d.json"));
+  const reg242 = save242.npcRegistry || {};
+
+  /* ---- 1 · ⛑ THE RESOLVER READS THE REGISTRY, SUFFIX AND ALL ---- */
+  check("§243: ⛑ a caption resolves to the person the registry already knows",
+    N242.subjectFromCaption("Vessin Tallow-bark", reg242) === "traveler-woman"
+    && N242.subjectFromCaption("The Churn-Revel orchestrator", reg242) === "churn-revel-orchestrator");
+  // ⚠️ THE BOND SUFFIX IS WHY ONE PERSON WAS TWO CAPTIONS. "— devoted", "· courting": a thing that happened TO
+  // them, not a different them.
+  check("§243: ⚠️ …and the bond suffix does not make a second person of them",
+    N242.subjectFromCaption("Vessin Tallow-bark — devoted", reg242) === "traveler-woman"
+    && N242.subjectFromCaption("Tessvel Cairn — courting · devoted", reg242) === "tessvel-cairn");
+  // ⛑ AND AN ALIAS IS THE SAME PERSON — which is the whole of what "the merge" means in the registry.
+  check("§243: ⛑ …and a name they used to go by resolves to who they are now",
+    N242.subjectFromCaption("The Churn-Revel orchestrator", reg242) ===
+    N242.subjectFromCaption("Halvex Coil", reg242));
+  // ⛔ AND IT NEVER GUESSES. A name no record carries stays unresolved rather than folding into whoever looks
+  // closest — Erik's "Vessin of the Long Bough" is exactly that, renamed before the rename path kept aliases.
+  check("§243: ⛔ …and a name no record carries resolves to NOBODY, rather than to whoever looks closest",
+    N242.subjectFromCaption("Vessin of the Long Bough", reg242) === null
+    && N242.subjectFromCaption("Someone Entirely Invented", reg242) === null);
+
+  /* ---- 2 · ⛔ THE THREE SEED SCHEMES ARE ONE PERSON ---- */
+  check("§243: ⛔ a surface's art seed is not an identity — whois/companion strip to the person underneath",
+    N242.subjectFromSeed("whois-traveler-woman", reg242) === "traveler-woman"
+    && N242.subjectFromSeed("solo:cap:Vessin Tallow-bark", reg242) === "traveler-woman");
+  // ⚠️ A DEATH LOOK IS NOT HOW THEY LOOK — app.js refuses it for the same reason one surface over, and folding
+  // a corpse portrait into someone's face stack would be that mistake reproduced here.
+  check("§243: ⚠️ …and a death look is refused, as it is on the canon path",
+    N242.subjectFromSeed("whois-death-traveler-woman", reg242) === null);
+  check("§243: …and a seed naming nobody in the registry resolves to nobody",
+    N242.subjectFromSeed("whois-not-a-person-here", reg242) === null);
+
+  /* ---- 3 · ⛑ AND THE REPAIR RUNS ON HIS ACTUAL GALLERY ---- */
+  const step242 = R242.CHARACTER_STEPS.find(x => x.version === 63);
+  check("§243: ⛑ the repair step is registered at its own version",
+    !!step242 && step242.id === "one-person-one-stack" && step242.playerFacing === true);
+  const stacksOf = (c) => new Set((c.gallery || []).map(e => e.subjectId ? `${e.subjectKind}:${e.subjectId}` : `solo:${e.url}`)).size;
+  const before242 = stacksOf(save242);
+  const out242 = step242.apply(save242);
+  const after242 = stacksOf(save242);
+  check("§243: ⛔ …and it joins his stacks — measured on the save he was looking at",
+    after242 < before242 && /found its people again/.test((out242.notes || [])[0] || ""),
+    `${before242} stacks → ${after242}`);
+  // ⛔ PERSON PICTURES ONLY. The Churn-Revel's own MOMENT and the BEAST drawn of it must not fold into the man
+  // who orchestrated it — a moment is a moment, and that is the line a caption match would happily cross.
+  const strays = (save242.gallery || []).filter(e => ["moment", "beast", "ability", "holding"].includes(String(e.kind))
+    && e.subjectKind === "npc");
+  check("§243: ⛔ …and a moment or a beast never folds into a person, however the caption reads",
+    strays.length === 0, strays.map(e => `${e.kind}: ${e.caption}`).slice(0, 3).join(" | "));
+  // ⛑ IDEMPOTENT: a reload, a replay or a second run must not re-key anything or re-tell the player.
+  const second242 = step242.apply(save242);
+  check("§243: ⛑ …and running it again does nothing and says nothing",
+    !second242.notes && stacksOf(save242) === after242);
 }
 
 /* ══════════ REPORT ══════════ */

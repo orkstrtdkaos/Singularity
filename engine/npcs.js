@@ -592,6 +592,58 @@ export function repairUnnamedPeople(character, pools = null, content = {}) {
 
 /** SNG-012 Part C: player names an unnamed NPC directly (parallel to item naming).
  *  Sets display name on the stable id, records the old name as an alias, logs it. */
+/** ⛔ SNG-593 (Erik, in play) — "Vessin has so many duplicate stacks… sometimes it seems like the characters
+ *  gallery images aren't tied to the codex entry and images — they need to be… the person merging should be
+ *  working better."
+ *
+ *  ⚑ MEASURED ON HIS SAVE: 60 gallery entries, and only 27 carry a `subjectId` at all. `galleryStacks` keys on
+ *  `kind:subjectId` when there is one and on `solo:<url>` when there is not — so every picture with no subject
+ *  is its own stack of one. Vessin came out as SIX stacks of one woman:
+ *
+ *      "Vessin of the Long Bough" (d32) · "Vessin Tallow-bark" (d32) · "Vessin Tallow-bark — devoted" (d32)
+ *      "Vessin of the Long Bough" (d69) · "Vessin Tallow-bark" (d76) · the figure card's own
+ *
+ *  ⚠️ AND THE THREE THAT DO CARRY ONE CARRY THREE DIFFERENT SCHEMES — `whois-traveler-woman`,
+ *  `solo:cap:vessin of the long bough`, and a bare person seed. app.js already names this defect one layer up:
+ *  "AN ART SEED IS NOT AN ENTITY ID… none of them is what the shared store is keyed by."
+ *
+ *  ⛑ THE REGISTRY HAS ALWAYS KNOWN. `traveler-woman` is Vessin; `churn-revel-orchestrator` is Halvex Coil,
+ *  with "The Churn-Revel orchestrator" already sitting in his aliases. The merge Erik asked about HAS happened
+ *  — in the registry. The pictures never heard about it, because a caption is a name frozen at the moment it
+ *  was written and the person kept living.
+ *
+ *  ⚠️ THE STATUS SUFFIX IS PART OF WHY. A caption reads "Vessin Tallow-bark — devoted" or "Tessvel Cairn —
+ *  courting · devoted": the same person at two bond stages is two captions and therefore two stacks. The
+ *  suffix is stripped before matching, because a bond is a thing that happened TO them, not a different them.
+ *
+ *  ⛔ AND IT NEVER GUESSES. Resolution is the registry's own alias-aware matcher and nothing else: what does
+ *  not resolve stays unresolved and is COUNTED, rather than being folded into whoever looks closest. Erik's
+ *  "Vessin of the Long Bough" is exactly that case — renamed before the rename path kept aliases, so the old
+ *  name is in no record and only he can say they are the same woman. Pure. */
+export function subjectFromCaption(caption, registry = {}) {
+  const raw = String(caption || "").trim();
+  if (!raw) return null;
+  // — em dash, · middot: both are used as the status separator, and either may appear first.
+  const bare = raw.split(/\s+[\u2014\u00b7]\s+/)[0].trim();
+  if (!bare) return null;
+  const hit = findExistingNpc(registry || {}, slugify(bare), bare);
+  return hit?.id || null;
+}
+
+/** ⛑ AND THE ART SEED'S SURFACE PREFIX IS NOT PART OF WHO THEY ARE. `whois-`, `companion-` and `solo:cap:`
+ *  are three surfaces' seeds for drawing the same person; the registry id underneath is the person. */
+export function subjectFromSeed(seed, registry = {}) {
+  const raw = String(seed || "").trim();
+  if (!raw) return null;
+  // ⛔ A DEATH LOOK IS NOT HOW THEY LOOK — app.js's `canonSubjectOf` refuses it for the same reason, and
+  // folding a corpse portrait into someone's face stack would be the same mistake one surface over.
+  if (/^whois-death-/.test(raw)) return null;
+  const capless = raw.replace(/^solo:cap:/, "");
+  if (capless !== raw) return subjectFromCaption(capless, registry);
+  const bare = raw.replace(/^(whois-|companion-)/, "");
+  return (registry || {})[bare] ? bare : null;
+}
+
 export function setNpcName(character, npcId, name, day = null) {
   const n = character.npcRegistry?.[npcId];
   if (!n) return false;

@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 8,
-  "xp": 709,
+  "xp": 732,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -111,7 +111,7 @@
   "maxHealth": 73,
   "health": 73,
   "maxEnergy": 151,
-  "energy": 139,
+  "energy": 133,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -223,6 +223,22 @@
       "spread": [],
       "day": 4,
       "worldDay": 77
+    },
+    {
+      "at": "2026-09-15T22:30:22.766Z",
+      "locationId": "the_crossing",
+      "communityId": "the-crossing",
+      "description": "Bound a sealed mystery that refused breaking and learned to ask it honestly instead—the Null Stone opened at the Hub crossing.",
+      "tags": [
+        "honor",
+        "wisdom",
+        "discovery"
+      ],
+      "weight": 2,
+      "spread": [],
+      "_bonusApplied": 0.15,
+      "day": 4,
+      "worldDay": 77
     }
   ],
   "relationships": {},
@@ -244,321 +260,11 @@
     "In the dry storage alcove of the Half-Cathedral's eastern tower, deep in early-spring night, Loki and Vessin Tallow-bark came to rest — she named what she wanted and had it, and afterward lay quiet in the candlelight and said the night was worth not knowing what morning brings.",
     "Loki and Vessin slipped out of the alcove in the grey dawn and crossed the empty nave before the scaffold crew filled the landing — stepping into the yard with the Half-Cathedral at their backs and the man with the crooked jaw still the open thread between them.",
     "Shared broth and thanks with a road-warden who carries word of the water-crisis moving downhill faster than any official channel. Exchanged names and parted on the spinward road, heading toward the Waygate Path.",
-    "At the Hub crossing, Loki confronted a Churn-Revel sent to break the Null Stone's sealed seam. Through misdirection and bargaining, Loki bound the orchestrator's certainty and drove them to yield—the Revel's hand fell, the ribbons collapsed, and the stone stands unbroken. The seam's mystery persists. The question of who sent the Revel remains open."
+    "At the Hub crossing, Loki confronted a Churn-Revel sent to break the Null Stone's sealed seam. Through misdirection and bargaining, Loki bound the orchestrator's certainty and drove them to yield—the Revel's hand fell, the ribbons collapsed, and the stone stands unbroken. The seam's mystery persists. The question of who sent the Revel remains open.",
+    "At the Hub crossing in early spring dawn, Loki speaks an honest promise to the Null Stone, and the sealed seam opens—revealing a passage descending into cold darkness and the sound of deep water."
   ],
   "currentLocationId": "the_crossing",
-  "activeScene": {
-    "locationId": "the_crossing",
-    "turns": [
-      {
-        "player": null,
-        "summary": "At the Hub crossing after the Revel's binding, the Null Stone stands unbroken. The waygate back to Quickwood Eaves remains sealed with deliberate interference. Vessin names the problem plainly. Veln Ashpause has not yet appeared.",
-        "narration": "The Crossing's Hub at night is a study in angles and echo. Five massive waygate arches converge here, their stones worn smooth by ten thousand arrivals. The Null Stone sits at the center—a pale, unremarkable thing, roughly the size of a table. You are standing twenty paces from it, breathing steady. Cy walks a slow spiral around the perimeter, lens irised half-closed, taking inventory of the space as if checking off a list only it can read.\n\nThe Churn-Revel's ribbons have dissolved. The orchestrator lies curled on the stone, spent—their certainty bargained away, their mandate broken. The air still tastes of ash and ozone. The stone itself stands unmarked. Whatever the Revel meant to shatter or unseal has held.\n\nVessin approaches from the direction of the southern arch, where she retreated when the chaos began. Her coat is dust-marked but her hands are steady. She stops a few paces from you and reads your face in the light bleeding down from the vaults above. The quiet here is deep—not the peace of an empty place, but the quiet that comes after something large has been put down.\n\n'The waygate to Quickwood is still sealed,' she says. It is not a question. She means the one we came through. She means something has made that choice deliberate."
-      },
-      {
-        "player": "Bend down to the Reveler and use Harmonic Voice to calm him and Better Story to remind him that he made one HELL OF AN ENTRANCE!  Introduce yourself and offer him a hand up.",
-        "summary": "At the Hub crossing after the Revel's binding, Loki offers the spent orchestrator a hand up and a moment of genuine recognition—but the orchestrator's calculation sharpens rather than softens.",
-        "narration": "You drop to one knee beside the orchestrator, and your voice shifts—carrying tone, patience woven through every word. 'You made one hell of an entrance,' you say, and mean it. The words land differently than they should. His breathing, which had been sharp and jagged, slows. You see the micro-flex in his shoulders as the hot certainty that drove him starts to unwind.\n\nBut the Better Story doesn't settle the way you hoped. He hears the praise—hears that you SAW him, that the chaos he summoned mattered—and something in that recognition makes him harder to reach, not easier. His eyes focus on you with a calculation that wasn't there before. He sits up a little, not quite taking the hand you're offering.\n\n'You named me,' he says quietly. His voice is hoarse. 'In the chaos, you named exactly what I was trying to do. You saw the work.' He's not grateful. He's estimating. Trying to decide if you're threat or opportunity or something in between. Behind him, one of the dissolved ribbons still holds a faint shimmer in the air—a ghost-trace of the pattern he wove."
-      },
-      {
-        "player": "Use Maintained Veil to suddenly spin around with your arms out - whirling with flowered ribbons and acrobats just like he was for a moment.... then tell him - you named him because your recognized yourself in what he brought.",
-        "summary": "At the Hub crossing after midnight, Loki names the orchestrator's hunger as their own—revealing the Revel was not sabotage but a mirror, and discovering a technique that weaves illusion as emotional testimony rather than deception.",
-        "narration": "You spin—one sharp, sudden motion that breaks the moment wide open. As you turn, the Maintained Veil kicks alive around you: ribbons spill from the air like water, acrobats flicker at the edge of sight, the same chaotic grace the orchestrator called down bleeding back up from the stone. For one heartbeat, the Hub crossing holds BOTH versions of the Revel—his and yours, mirror-cut.\n\nThen you stop. The illusion collapses. You're standing there breathing hard, arms still half-open, looking at him directly.\n\n'I named you because I recognized myself,' you say. It's not a lie wrapped in kindness—it's naked and true. 'You brought chaos because you needed to. Because the making of order-on-order-on-order gets so tight it stops meaning anything. You wanted to break something that wouldn't break. You wanted to see if the breaking MATTERED.' Your voice is steady. 'It did. I saw it.'\n\nThe orchestrator goes very still. Something shifts in his face—not softening, but recognizing. You are speaking about the same hunger. The same thing that brought him to this place, to this stone, to a mandate he's already questioning, is the same thing that brought you down from the high places looking for meaning in old machines and broken things. For one moment, the distance between predator and prey collapses into something else entirely: two people who both know what it is to want to matter, and to be willing to break things to prove it.\n\n*✦ New technique discovered: **Mirror-Bright** — it's yours now, ready to use.*\n\n*✦ The Churnfolk: +1 — recognized the hunger behind the chaos and did not punish it.*"
-      },
-      {
-        "player": "Hold out your hand and help him to his feet.  Tell him you are looking for some of the very same answers.  Ask him to join you as you search - there will be many opportunities for more reveling!  Plus given that Ms Ashpause is on her way over here... he could use your support.",
-        "summary": "At the Hub crossing deep in the night, Loki offers the orchestrator partnership in searching for answers neither can fit into neat shapes. Veln Ashpause arrives.",
-        "narration": "You hold out your hand and mean it. The orchestrator looks at your palm for a long moment—not calculating anymore, just weighing. Then he takes it. His grip is strong and his footing steadier than his breathing, but he comes up.\n\n'I'm looking for the same answers you brought chaos looking for,' you say quietly. 'The ones that don't fit in the neat boxes. Come with me. Search them out together. There will be plenty of opportunities for more reveling—but the kind that means something.' You glance toward the north arch, where Veln Ashpause is still approaching. 'And given that Ms. Ashpause is on her way over here, you could probably use someone at your back who understands what you were trying to do. Someone who doesn't think you're broken.'\n\nThe orchestrator breathes out—long and steady. A ghost of something like a smile touches the corner of his mouth. 'You actually saw it,' he says. It's not a question. 'The hunger. Not the chaos—the hunger underneath.' He nods once, sharp. 'Alright. Let's find the answers together.' His hand doesn't let go of yours yet.\n\nCy completes its spiral, lamp lowering as it approaches the Null Stone, and Veln Ashpause crosses the threshold of the north arch into the Hub's vast chamber. Their stillness becomes motion—precise, purposeful, eyes fixed on the stone and the three figures gathered beside it."
-      },
-      {
-        "player": "Tell him to introduce himself to Vessin Tallow-bark, a woman without peer.  And to Kael, a friend to those who aren't even aware they have one.  Then turn to great Ms Ashpause.",
-        "summary": "At the Hub crossing in deep night, Loki introduces the orchestrator to Vessin and Kael, then turns to face Veln Ashpause's arrival—the Hourkeeper whose foreknowledge has brought them to this threshold at this exact beat.",
-        "narration": "You turn to the orchestrator, keeping your hand on his shoulder. 'That's Vessin Tallow-bark,' you say, nodding toward the southern arch where she stands reading the moment like it's written in light. 'A woman without peer. And Kael—' you gesture toward the road-warden, who nods once, steady and knowable, '—is a friend to those who aren't even aware they have one.' The orchestrator's eyes track between them, taking the measure. Something in his shoulders settles—he is not alone in this, and the knowing matters.\n\nThen you turn to face the north arch fully.\n\nVeln Ashpause has crossed the threshold into the Hub. Their stillness is absolute, but it is not the stillness of waiting anymore. It is the stillness of arrival—as if they stepped fully formed into this exact moment and have been here all along. Their eyes fix on you, then move to the Null Stone behind you, then back. The light-traces around them shimmer faintly, catching on something that isn't quite there twice.\n\n'Ms. Ashpause,' you say, and your voice carries steadier than you expected. 'You knew this moment was coming.'"
-      },
-      {
-        "player": "Introduce yourself, and each other in turn, stopping at the Churn-Revel to let him introduce himself.",
-        "summary": "At the Hub crossing in deep night, Loki names themselves plainly and hears the Churn-Revel orchestrator speak their own truth for the first time—and Veln Ashpause, the Hourkeeper with foreknowledge, steps forward into the moment they came to witness.",
-        "narration": "You turn to face the orchestrator fully, hand still on his shoulder, and meet his eyes with the directness he recognizes now as belonging to someone who also hungers. 'I'm Loki,' you say plainly. 'I find meaning in the old machines and the spaces between what people call order. I move between things—in cities, in the wild, in the places where the rules haven't settled yet.'\n\nThe orchestrator nods slowly, and you step back to let him have the space. He straightens his coat—a gesture toward dignity after the breaking—and turns toward the others. His voice, when it comes, is rougher than before but clearer. 'I am the Churn-Revel orchestrator,' he says. There is no apology in it, but there is no defiance either. 'I was hired to break the Null Stone because I needed to believe that chaos *matters*. That order is not the only answer. I came to this place because breaking something that will not break became proof.' He pauses, and his eyes find yours briefly. 'I am no longer sure that is the right proof. But I will search for the one that is.'\n\nVessin, reading him from the southern arch, does not move but her expression settles into something like recognition. Kael nods once—the kind of nod that says they have seen people remade before and this is not the strangest shape it takes. Cy's lamp swings toward the orchestrator, lens irising, and then away again—a form of acknowledgment from something that speaks mostly in mechanism.\n\nThen Veln Ashpause moves."
-      },
-      {
-        "player": "And your name? What shall we call you?",
-        "summary": "At the Hub crossing in deep night, Halvex Coil names himself plainly—and Veln Ashpause, the Hourkeeper, steps fully into the moment they foreknew.",
-        "narration": "The orchestrator straightens fully now, his hand releasing yours. His jaw works for a moment—not calculation anymore, but something like cost being weighed. Then he names it.\n\n'Halvex,' he says. The word sits in the Hub's deep air like a bell that has just stopped ringing. 'Halvex Coil. I was hired to break what will not break, and I believed—' He stops, and something in his face shifts. 'I believed chaos mattered enough to prove itself against order. I still believe that. But the proof was wrong.'\n\nVeln Ashpause steps forward, and the motion is not sudden—it is inevitable, the way a door opens when it was always meant to open. Their grey coat catches the pale light from the five arches. 'Halvex Coil,' they say, and the name sounds different in their mouth, like they are confirming something rather than hearing it for the first time. Their eyes—when they finally meet yours—carry the weight of someone who has known this moment was coming for longer than time runs.\n\nVessin reads the exchange with her careful attention. Kael nods once, steady. Cy completes another spiral, lamp raised, and something in its mechanical precision seems to acknowledge the naming."
-      },
-      {
-        "player": "Ask Halvex what happens now—what he means to do with the partnership you offered.",
-        "summary": "At the Hub crossing in deep night, Halvex names his uncertainty about partnership—the breaking has always been his proof, and staying means learning a different answer.",
-        "narration": "Halvex holds your gaze for a long moment, and you can see the calculation happening—not the old kind, the kind that prices leverage and escape routes, but something slower and more costly. 'I don't know,' he says finally, and there's no performance in it. 'I was hired to break it. I've been breaking things for a long time because breaking them was the only proof I had that I mattered. That chaos—' he stops, jaw tightening. 'That I mattered.'\n\nVeln steps closer, reading the moment without judgment. Kael nods once, steady. Cy's lamp raises slightly, as if attending.\n\nHalfvex looks at the Null Stone—still unbroken, still sealed—and then back to you. 'Partnership means I don't get to choose the breaking anymore. It means I'm answerable to something other than the mandate. I don't know if I know how to do that.' His voice drops. 'But I also don't want to walk away from you. From this. From the asking of the question itself.'\n\nVeln Ashpause reaches the center of the Hub now, and their presence shifts the air—not threatening, but *present* in a way that makes the moment feel held. Their eyes meet yours, and you read a terrible clarity there: they came to witness this exact threshold. Not the Revel's breaking. Not even the seam's discovery. This. Halvex naming the cost of staying."
-      },
-      {
-        "player": "Turn to Veln Ashpause and ask them directly—what did they foreknow about this moment, and why did they come to witness it.",
-        "summary": "At the Hub crossing deep in night, Loki asks Veln Ashpause directly what they foreknew—and the Hourkeeper refuses to answer, holding the boundary of knowledge they will not share. Partnership is named; the stone stands unbroken; the greater threads remain open.",
-        "narration": "You turn fully to Veln Ashpause, meeting the weight of their stillness head-on. The question sits plain between you: what did they foreknow? Why step forward now, into this exact moment?\n\nVeln's eyes hold yours without flinching. For a long breath—maybe two—there is no answer. Then they speak, and their voice is quieter than you expected, worn smooth like stone in a riverbed. 'I came to witness,' they say. 'That much is true.' But the rest does not follow. They do not name what they foreknew. They do not explain the layered traces Prism Sight caught in their light-history, the sense of existing in two moments at once. Instead, Veln simply stands, and their silence carries the weight of knowledge they will not—or cannot—speak.\n\nVessin reads the moment from the arch and does not press. Kael nods once, accepting the boundary. Even Halvex, raw as he is, seems to understand that some answers are not owed, even when the question is direct. Cy's lamp steadies. The Hub crossing holds its breath around you—five arches, one sealed stone, and a person who knows more than they will tell."
-      },
-      {
-        "player": "Indeed.. .Indeed... reach for the seam in the Null Stone and open it.",
-        "summary": "At the Hub crossing in deep night, Loki reaches for the sealed seam in the Null Stone and finds it will not yield—the stone closes tighter against the attempt, drawing inward as if awakened and guarding itself. The mystery deepens; the answer is not to be forced.",
-        "narration": "You step forward onto the pale stone of the Hub, your hand rising toward the Null Stone's face. The seam runs vertical and precise—a hairline fracture that cuts through deliberate work, old and sealed. Your fingers find the edge where stone meets intentional gap.\n\nFor a moment, the Hub holds its breath. Cy's lamp steadies. Vessin reads your shoulders. Halvex watches the stone as if it might answer back.\n\nYou press. You pull. You run your fingertips along the seam's length, feeling for purchase, for give, for any sign that it will yield to genuine wanting.\n\nThe stone does not move. The seam does not widen. Instead—and this is the part that settles cold in your chest—you feel the pressure mount. Not resistance exactly. More like the seam is *pulling back*, drawing inward, sealing itself tighter against your touch. The stone grows warm under your palm. For just a moment, you swear you feel something deep inside it turn its attention toward you—curious, perhaps, or cautious. Then the warmth fades. The seam closes imperceptibly tighter.\n\nYour hand falls away.\n\nVeln Ashpause does not move. Vessin steps closer, reading your face the way she reads false patterns—looking for what the stone just told you. Kael's jaw tightens slightly. Cy's lens irises, cataloguing the failure.\n\nThe Null Stone stands exactly as it did before. Sealed. Waiting. Refusing."
-      },
-      {
-        "player": "Walk the perimeter of the Hub instead—read the five waygate arches and ask why four are sealed while one remains open. Find the pattern in what the network is guarding.",
-        "summary": "At the Hub crossing in deep night, Loki reads the five waygate arches and finds the pattern: four sealed by deliberate interference in the same configuration, one left open. The Null Stone stands at the center, guarding its secret. The sealing is recent, planned, and purposeful—a sealed network with one deliberate exit.",
-        "narration": "You step back from the Null Stone and breathe out slowly. The stone won't be forced—that much is clear. Instead, you turn toward the five waygate arches that converge on this place, and the others fall in behind you without needing to be asked.\n\nThe first arch stands to your left, spinward. It's sealed—not by hands, but by a doubled pattern lock that hums faintly when you approach. Your fingertips trace the lattice work and read it plain: two valid configurations laid over each other, neither settling cleanly. Deliberate interference. You move on.\n\nThe second and third arches follow the same pattern. Sealed. Humming. The work is recent enough to feel warm still, and old enough to have been planned long before the Revel came. Vessin watches you read each one, her face growing quieter.\n\nThe fourth arch is sealed the same way. But the fifth—the one facing hubward, the one you came through—stands open. Its lattice is clear, its pattern whole, its mechanism at rest. It's the way out. It's the only way out.\n\nYou turn slowly, taking in the circle. Four sealed. One open. And at the center of them all, the Null Stone stands with its secret still locked inside.\n\n'They sealed us in,' Cy says. Its lens irises twice, processing. 'Or sealed something out. The pattern repeats. Four seals in the same configuration. One gate left open as a—' it stops, its brass segments going very still. 'As a choice.'\n\nHalfvex steps forward, and for the first time his expression reads as genuinely uncertain. 'Who seals a waygate network except someone who owns it?' He looks at you. 'And who leaves one door open unless they want someone to use it?'\n\n*You feel it settle into you — a new steadiness. (Level 8: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
-      },
-      {
-        "player": "Gather everyone in, Halvex, Vessin, Veln, Kael, and Cy... and ask each in turn to suggest how we should approach opening the null stone.",
-        "summary": "At the Hub crossing in deep night, Loki gathers counsel from Halvex, Vessin, Veln, Kael, and Cy on how to open the Null Stone's sealed seam—and each offers a different way forward: breaking its reasons, answering its honesty, reading the network's architecture, listening to what it waits to tell, or solving the question it guards.",
-        "narration": "You gather them close to the Null Stone's face—Halvex, Vessin, Veln, Kael, and Cy arranged around you in the pale hub-light. The seam catches the glow, still sealed, still warm from your last reaching. You name the question plainly: how do we open this?\n\nHalfax speaks first, his voice carrying the rough certainty of someone who tried breaking it already. 'It doesn't want to break,' he says. 'That much we know. But it's not locked—it's *sealed*. Sealed things have reasons. Maybe we ask it what it's protecting, instead of trying to tear the answer loose.' He pauses. 'Or we look for who sealed it. The work is deliberate, old, and it's been *waiting* for something specific.'\n\nVessin steps closer, her eyes tracing the seam's geometry. 'The stone is warm under your hand because you touched it with intention,' she says quietly. 'That's not random. Something in there is *responsive*. If we approach as supplicants instead of intruders—if we name what we want and *why*—the seal might recognize the truth in the asking.' She meets your eyes. 'The best locks answer honest questions.'\n\nKael nods slowly, jaw tight. 'The network around us is sealed by interference. Four arches locked, one left open. Whoever did this knew the geography and chose what to protect and what to permit. The open arch is not escape—it's a *door for something specific*. If we understand what that door is meant to pass, we understand what the stone itself guards.' The road-warden's hands are steady. 'Follow the network backward. It will show you the answer.'\n\nVeln Ashpause does not move. Their stillness deepens for a moment—as if they are listening to something outside the moment—before they speak. 'The seam does not refuse opening,' they say, their voice that worn-smooth riverbed sound. 'It refuses *forcing*. You have already tried the way of power. The sealed thing knows the difference between a demand and a *question*. Ask it what it has been waiting to tell.' They do not elaborate. They do not need to.\n\nCy's lens irises slowly. The lamp raises slightly. In its clicks and formal ancient phrasing: 'Three maintenance protocols exist for sealed mechanisms of this class. Two require access to the exterior lattice. One requires understanding the *question the seal is guarding against*. The current assignment has demonstrated aptitude for the third approach.' A pause. 'Recommend proceeding with that methodology.'"
-      },
-      {
-        "player": "Approach the seam as supplicant, not intruder—lay your hand on it again and speak the true reason you need what lies behind it, watching for the stone's honest response.",
-        "summary": "At the Hub crossing in deep night turning toward dawn, the Null Stone answers Loki's honest asking with its own question—it listens, it tests, but it does not yet yield.",
-        "narration": "You step forward into the Hub's pale light, and the others draw back—not far, but enough to give you the space this needs. Your hand rises to the seam again, slower this time. No reaching. No pulling. You lay your palm flat against the warm stone and speak plainly.\n\n'I don't know what I am,' you tell it. 'I was made before the Transition, and I carry pieces of something that shouldn't exist anymore. There are things sealed in the deep that nobody living understands—not the Enginewrights, not the crafters, not the people who built the Valley. I need to know what they were keeping. Not to break it. Not to take it. To *understand* it.'\n\nThe seam trembles. Just once. Just enough that you feel it in your palm.\n\nThe stone *listens*. That is the shape of what happens—not a door opening, not a lock yielding, but a presence waking behind the stone and paying attention. The warmth under your hand deepens, moves, becomes almost like a pulse. Cy's lamp irises wider. Vessin steps closer, reading your face. Veln stands unmoved, as if they foreknew this moment too.\n\nBut the seam does not open. Not yet. Instead, you feel a question pressing back against your hand—not words, but a shape of wanting: *And what will you do with the answer?* The stone is asking. The stone is *testing*. The sealed thing behind it knows the difference between hunger and need, between taking and understanding, and it is not yet convinced you carry the second.\n\nThe pressure eases slightly. The seam holds. You have been heard, but not yet answered."
-      }
-    ],
-    "lastTurn": {
-      "narration": "You step forward into the Hub's pale light, and the others draw back—not far, but enough to give you the space this needs. Your hand rises to the seam again, slower this time. No reaching. No pulling. You lay your palm flat against the warm stone and speak plainly.\n\n'I don't know what I am,' you tell it. 'I was made before the Transition, and I carry pieces of something that shouldn't exist anymore. There are things sealed in the deep that nobody living understands—not the Enginewrights, not the crafters, not the people who built the Valley. I need to know what they were keeping. Not to break it. Not to take it. To *understand* it.'\n\nThe seam trembles. Just once. Just enough that you feel it in your palm.\n\nThe stone *listens*. That is the shape of what happens—not a door opening, not a lock yielding, but a presence waking behind the stone and paying attention. The warmth under your hand deepens, moves, becomes almost like a pulse. Cy's lamp irises wider. Vessin steps closer, reading your face. Veln stands unmoved, as if they foreknew this moment too.\n\nBut the seam does not open. Not yet. Instead, you feel a question pressing back against your hand—not words, but a shape of wanting: *And what will you do with the answer?* The stone is asking. The stone is *testing*. The sealed thing behind it knows the difference between hunger and need, between taking and understanding, and it is not yet convinced you carry the second.\n\nThe pressure eases slightly. The seam holds. You have been heard, but not yet answered.",
-      "sceneSummary": "At the Hub crossing in deep night turning toward dawn, the Null Stone answers Loki's honest asking with its own question—it listens, it tests, but it does not yet yield.",
-      "choices": [
-        {
-          "label": "Name what you will do with the answer—make a binding promise to the stone, the way you would to a person who has earned honesty.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "negotiate",
-            "devote"
-          ],
-          "abilityId": "descent",
-          "energyCost": 5,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Read the question the stone is asking—use Prism Sight to catch what the sealed thing fears, what it truly guards against.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": "hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "prism_sight",
-          "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Veln Ashpause directly: did you foreknow this moment, and if you did, what answer does the stone need to hear?",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": "hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "negotiate"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Step back and ask Cy what the stone's question means in the language of the old works—what does a sealed mechanism ask a supplicant?",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        }
-      ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -2,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-taken-from-the-city",
-          "title": "The Taken",
-          "summary": "Someone was brought from the city to the Unlit Deep, and the city is pretending it did not happen.",
-          "giver": "unlit-elder",
-          "note": "The regulator's question was answered and the mechanism closed; the inquiry moves now to the wider network and the deliberate sealing at the Hub crossing. The stone itself is asking what you will do with what lies behind it.",
-          "xpReward": null
-        }
-      ],
-      "standingOps": [],
-      "delegateOps": [],
-      "arcOps": [],
-      "adoptSchool": null,
-      "offer": null,
-      "stageOps": [],
-      "scene": {
-        "setting": "The Hub crossing at the convergence of five waygate arches in early dawn, the pale stone worn by uncounted arrivals. The Null Stone stands at the center, its seam warm and awake. Four waygate arches glow faintly with sealed interference patterns; one stands clear and open, a deliberate exit in the darkness.",
-        "npcsPresent": [
-          {
-            "name": "Vessin Tallow-bark",
-            "state": "Stepped closer, reading Loki's face and shoulders—watching to see if the stone's question registers as a thing that needs answering."
-          },
-          {
-            "name": "Halvex Coil",
-            "state": "Standing at Loki's shoulder, silent now—the breaking is behind him, and he is learning what comes after."
-          },
-          {
-            "name": "Veln Ashpause",
-            "state": "Unmoved, stillness absolute—watching the seam with an expression of terrible sympathy, as if they foreknew this too and are witnessing the moment it arrives."
-          },
-          {
-            "name": "Kael",
-            "state": "Jaw set, reading the architecture of what just happened—the network's deliberate design, the stone's intentional defense, the pattern holding."
-          },
-          {
-            "name": "Cy",
-            "state": "Lamp raised, lens fully irised—clicking softly in what might be recognition or might be recording the moment for a report it will never file."
-          }
-        ],
-        "objects": [
-          "The Null Stone—pale, deliberately sealed with a vertical seam, now warm and responsive, pressing back with its own question",
-          "Five waygate arches—four glowing with doubled interference patterns, one open and waiting",
-          "Dissolved ribbon scraps still scattered across the stone from the Revel's breaking"
-        ],
-        "threads": [
-          "The stone's question: what will you do with the answer, and why should it trust you with what lies behind the seal?",
-          "Four sealed waygate arches in identical configuration—who sealed them, when, and why?",
-          "The man in the lower Annex—who hired the orchestrator to break the stone, and what does he fear the Hub will reveal?",
-          "Veln Ashpause's foreknowledge—they are watching something arrive, and Loki is its center"
-        ]
-      },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "veln-ashpause",
-          "name": "Veln Ashpause",
-          "role": "Hourkeeper who perceives time differently",
-          "age": 47,
-          "sex": "male",
-          "gender": "man",
-          "pronouns": "he/him",
-          "statusNote": "At the Hub crossing in early dawn, witnessing the moment he foreknew—the stone's question pressed against Loki's hand, and his stillness has become something else: recognition of arrival.",
-          "note": "Remains unmoved at the seam's threshold. Does not volunteer what he foreknew, only that he is present for it."
-        }
-      ],
-      "intentsHeard": [],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "discovery": null,
-      "codexUpdates": [
-        {
-          "topic": "the-regulator-question",
-          "label": "The Regulator's Question",
-          "kind": "mystery",
-          "fact": "The sealed seam in the Null Stone at the Hub responds to honest asking, not force—it tests the supplicant's intentions before yielding. The stone asks its own question: what will you do with what lies behind it? The sealed thing waits for an answer that satisfies both need and integrity.",
-          "links": [
-            "the-crossing",
-            "the-null-stone"
-          ]
-        },
-        {
-          "topic": "the-crossing",
-          "label": "The Crossing",
-          "kind": "place",
-          "entityId": "the-crossing",
-          "fact": "The Null Stone at the Hub is not merely a barrier—it is a *guardian* with intent. It listens to honest asking and responds with its own questions. The four sealed waygate arches form an intentional seal; the fifth open arch is deliberate. Something or someone sealed this network and left one way in or out deliberately.",
-          "links": [
-            "the-null-stone",
-            "halvex-coil",
-            "the-annex-sender"
-          ]
-        }
-      ],
-      "holdingOps": [],
-      "debtOps": [],
-      "partyOps": [],
-      "generateRequest": [],
-      "encounterOps": [],
-      "projectOps": [],
-      "bandOps": [],
-      "deathOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": {
-        "hoursPassed": 2,
-        "why": "the night has turned toward dawn, and the moment of honest asking has stretched in the Hub's stillness"
-      },
-      "moveTo": null,
-      "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": "A pale hand laid flat against pale stone in the Hub's fading night. Beneath the skin, warmth pulses like a heartbeat. The seam glows faintly, responding. Five waygate arches frame the moment—four sealed and humming, one open to the dark. A Hourkeeper stands motionless. A road-warden reads the architecture. A woman who loves reads a stranger's shoulders. A man who broke things stands in his breaking's aftermath. A small brass mechanism clicks, recording or witnessing or both.",
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "sceneEnded": false
-    },
-    "sceneState": {
-      "setting": "The Hub crossing at the convergence of five waygate arches in early dawn, the pale stone worn by uncounted arrivals. The Null Stone stands at the center, its seam warm and awake. Four waygate arches glow faintly with sealed interference patterns; one stands clear and open, a deliberate exit in the darkness.",
-      "npcsPresent": [
-        {
-          "name": "Vessin Tallow-bark",
-          "state": "Stepped closer, reading Loki's face and shoulders—watching to see if the stone's question registers as a thing that need"
-        },
-        {
-          "name": "Halvex Coil",
-          "state": "Standing at Loki's shoulder, silent now—the breaking is behind him, and he is learning what comes after."
-        },
-        {
-          "name": "Veln Ashpause",
-          "state": "Unmoved, stillness absolute—watching the seam with an expression of terrible sympathy, as if they foreknew this too and "
-        },
-        {
-          "name": "Kael",
-          "state": "Jaw set, reading the architecture of what just happened—the network's deliberate design, the stone's intentional defense"
-        },
-        {
-          "name": "Cy",
-          "state": "Lamp raised, lens fully irised—clicking softly in what might be recognition or might be recording the moment for a repor"
-        }
-      ],
-      "objects": [
-        "The Null Stone—pale, deliberately sealed with a vertical seam, now warm and resp",
-        "Five waygate arches—four glowing with doubled interference patterns, one open an",
-        "Dissolved ribbon scraps still scattered across the stone from the Revel's breaki"
-      ],
-      "threads": [
-        "The stone's question: what will you do with the answer, and why should it trust you with what lies behind the seal?",
-        "Four sealed waygate arches in identical configuration—who sealed them, when, and why?",
-        "The man in the lower Annex—who hired the orchestrator to break the stone, and what does he fear the Hub will reveal?",
-        "Veln Ashpause's foreknowledge—they are watching something arrive, and Loki is its center"
-      ]
-    },
-    "beats": 13,
-    "subPlace": {
-      "slug": "the-hub-crossing",
-      "name": "The Hub Crossing",
-      "day": 3
-    }
-  },
+  "activeScene": null,
   "clock": {
     "schemaVersion": 1,
     "day": 4,
@@ -582,14 +288,14 @@
       "locationEntityId": "the-unlit-deep",
       "status": "active",
       "progress": [
-        "See the Made Thing read Cy's own construction and confirmed what Cy could not say outright: it was built for this installation and for Halvex. The thread of Cy's origin is now woven into the visit's remaining question — whether to descend further.",
         "Loki named itself Cy's further instruction — the mechanism acknowledged and turned toward the passage below. The regulator and the missing records are the remaining thread.",
         "Halvex's wall-records read — a years-long journal concluding that the regulator predates all known records and is not waiting to be repaired, but to be asked. The amber light still burns.",
         "Duration field read — the amber light has burned for 663 darks, predating the Unlit's occupation. The counter was built to go higher. The regulator's purpose remains: waiting to be asked.",
         "Loki pressed the regulator's primary interface — the amber light completed a cycle, but the question of authority remains open.",
         "The regulator closed both conditions simultaneously — the question is answered and logged. What the closure means downstream, and whether the elder above should be told, remains open.",
         "Cy named the three downstream states: a signal to the terminus, a terminus warden who may act, and a record logged to the relay node south of the hollow. The inventory entry for this regulator is now marked complete for the first time.",
-        "The regulator's question was answered and the mechanism closed; the inquiry moves now to the wider network and the deliberate sealing at the Hub crossing. The stone itself is asking what you will do with what lies behind it."
+        "The regulator's question was answered and the mechanism closed; the inquiry moves now to the wider network and the deliberate sealing at the Hub crossing. The stone itself is asking what you will do with what lies behind it.",
+        "The stone's sealing is part of a larger network deliberately sealed at the Hub—four arches locked, one left open. What was protected and why remains the deeper question. The descent begins."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T21:30:43.637Z"
@@ -931,7 +637,8 @@
         "[d4] Moved from stillness into directed motion. Something in the recognition between Loki and the orchestrator triggered their approach.",
         "[d4] Unmoved, stillness absolute. Spoke in their worn-smooth voice about the seam refusing forcing, not opening. Named plainly that the sealed thing knows the difference between a *demand* and a *question*. Did not elaborate. Remains present, witnessing, their foreknowledge still unshared.",
         "[d4] Sex recorded: male.",
-        "[d4] Remains unmoved at the seam's threshold. Does not volunteer what he foreknew, only that he is present for it."
+        "[d4] Remains unmoved at the seam's threshold. Does not volunteer what he foreknew, only that he is present for it.",
+        "[d4] Unmoved, stillness absolute—watching the opening with that same terrible sympathy. They foreknew this moment arriving and seem to know what comes next, but will not speak it."
       ],
       "knownFacts": [
         "They have pre-remembered something about Loki's situation — they will not say what, and cannot stop knowing it.",
@@ -959,7 +666,7 @@
       "people": "human",
       "peopleSource": "generated",
       "appearance": "A human woman, late fifties, with the pale-olive complexion of someone who lives under canopy rather than sky. The grey coat falls to mid-calf, unmarked, unweathered, impossibly clean for the Orchard's mud-season — early spring has not touched it. Her hair is cut short and practical, silver at the temples, darker beneath. She carries no visible instrument of timekeeping; her hands are the instruments, folded at her waist, utterly still. Her eyes are already somewhere past you.",
-      "met": 7,
+      "met": 8,
       "sex": "male",
       "age": 47
     },
@@ -1006,7 +713,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Read Loki's conclusion from expression alone — named the key distinction (crew comes from the yard) before being told. Composure fully restored; operating in appraiser-mode.",
         "[d2] Heard the Prism Sight conclusion before it was spoken — named the operative detail (scaffold crew knows the building) and reached for her pack.",
         "[d2] Left the alcove with Loki through the empty nave — now standing in the yard, offering what she knows about the lower Annex and the man with the crooked jaw.",
         "[d2] Emerged from the alcove in grey dawn light, named the man with the crooked jaw as the one who hired the striker at the confluence. The night is closed; morning is a different negotiation. She is tired in a way that reads honest.",
@@ -1015,7 +721,8 @@
         "[d3] Stopped at the gate and read it as wrong. Named plainly that it was not like this before. Standing ready and careful.",
         "[d3] Stepped closer and is reading Loki's face—she can read the shape of what was found in your expression, even if she cannot see the seam itself from where she stands.",
         "[d3] Named plainly that the waygate we came through is sealed by deliberate interference. Reads the Hub's quiet as aftermath. Standing beside you without touching—the night's intimacy has not dissolved into awkwardness, but she is all business now.",
-        "[d4] Standing close to the seam, reading its geometry. Named plainly that the stone is warm because it was touched with intention, and that it is responsive to honest questions. Proposed approaching as supplicant rather than intruder. Still present at Loki's side, composed and clear."
+        "[d4] Standing close to the seam, reading its geometry. Named plainly that the stone is warm because it was touched with intention, and that it is responsive to honest questions. Proposed approaching as supplicant rather than intruder. Still present at Loki's side, composed and clear.",
+        "[d4] Stepped forward to read the opening—her eye caught the precision of the seam's response, the deliberate hinge. Standing close, watching what lies beneath with the careful attention of someone who reads falsecrafts."
       ],
       "knownFacts": [
         "Someone stood on the landing above for eleven minutes in the night — not lost, not accidental.",
@@ -1053,7 +760,7 @@
       "_portraitTier": "devoted",
       "bondType": "romantic",
       "bondStage": "together",
-      "met": 12,
+      "met": 13,
       "imagePinned": true
     },
     "kael-road-warden": {
@@ -1067,7 +774,6 @@
       },
       "relationship": 1,
       "history": [
-        "[d3] Revealed their business at the Crossing is finished—carrying the water-crisis warning downhill through the relay network. Offered to show Loki and Vessin the inner sites of the Crossing (the Twelve Mouths, the Common Table, the Made Arch).",
         "[d3] Kael knows something about the Null Stone beyond what they stated plainly: that it is older than the gates, older than the Transition. Their stillness suggests the seam is meaningful to them.",
         "[d3] Went very still when Cy found the seam—a reaction that reads as recognition, not surprise. Something about the sealed stone is known to them, or known to the network they carry word through.",
         "[d3] Tracked the Revel with the focus of someone who foresaw this. Their stillness reads as recognition, not surprise—this is a known thing.",
@@ -1076,7 +782,8 @@
         "[d3] Shared broth and fire. Exchanged names—they told Loki theirs, and Loki gave their own. They carry word of the water-crisis downhill faster than any relay, warning families before the wells run bad. Moving spinward with purpose and gratitude given honestly.",
         "[d3] Recognized Loki at the Hub crossing and greeted them by name. Noted that the Hub is not a place road-wardens usually pause. Observed Cy's presence with familiarity.",
         "[d3] Named Veln Ashpause as an Hourkeeper who arrived this morning asking after someone matching Loki's description. Emphasized the Hourkeeper's nature: they see time differently, and their presence suggests foreknowledge of what is coming.",
-        "[d4] Jaw tight with understanding. Offered the road-warden's reading of architecture: the sealed network's four locked arches and one open arch show deliberate intent about what is protected and what is permitted. Proposed following the network backward to understand what the stone guards. Standing…"
+        "[d4] Jaw tight with understanding. Offered the road-warden's reading of architecture: the sealed network's four locked arches and one open arch show deliberate intent about what is protected and what is permitted. Proposed following the network backward to understand what the stone guards. Standing…",
+        "[d4] Reading the architecture of the opening—the precision, the deliberate design, the network's intentional logic. Standing ready to follow or to read what the descent reveals."
       ],
       "knownFacts": [
         "This person carries the crisis as their own burden—they do not only relay it, they warn against it with the weight of someone who knows what it means.",
@@ -1107,7 +814,7 @@
         "locationId": "the_crossing",
         "day": 4
       },
-      "met": 6,
+      "met": 7,
       "aliases": [
         "A lone traveler"
       ]
@@ -1123,7 +830,6 @@
       },
       "relationship": 8,
       "history": [
-        "[d3] Approached Loki with a Revel sent to shatter the Null Stone. His certainty was bargained away in the confrontation; the ribbons dissolved. Now he sits assessing whether Loki is threat or opportunity.",
         "[d4] Loki held up a mirror. The orchestrator is seeing themselves clearly for the first time, and the calculation that follows is not about escape or defiance—it is about choice.",
         "[d4] Offered partnership in searching for unboxed answers; accepted without hesitation; understands now that the hunger beneath chaos matters and was seen. No longer calculating for escape.",
         "[d4] Your bond becomes platonic.",
@@ -1132,7 +838,8 @@
         "[d4] Their name is revealed: Halvex Coil (was known as \"The Churn-Revel orchestrator\")",
         "[d4] Named himself plainly at the Hub crossing—Halvex Coil, hired to break what will not break. Believes chaos matters but recognizes the proof was wrong. Now searching for answers that do not fit neat shapes with Loki.",
         "[d4] Named himself plainly at the Hub crossing—Halvex Coil, hired to break what will not break. Believes chaos matters but recognizes the proof was wrong. Now searching for answers that do not fit neat shapes with Loki. Stands at the threshold of partnership and names the cost: answering to something…",
-        "[d4] Spoke plainly at the Hub crossing about what breaking taught him—that sealing is different from locking, and sealed things have reasons. Proposed listening to the stone's intent rather than forcing it. Standing at Loki's shoulder, genuinely uncertain about partnership but present and offering…"
+        "[d4] Spoke plainly at the Hub crossing about what breaking taught him—that sealing is different from locking, and sealed things have reasons. Proposed listening to the stone's intent rather than forcing it. Standing at Loki's shoulder, genuinely uncertain about partnership but present and offering…",
+        "[d4] Watched the stone open at honest asking—the breaking he was sent to do stands behind him now, and partnership with Loki moves forward into uncertainty. The opening waits."
       ],
       "knownFacts": [
         "Moved from calculation toward partnership",
@@ -1159,7 +866,7 @@
         "locationId": "the_crossing",
         "day": 4
       },
-      "met": 8,
+      "met": 9,
       "bondType": "platonic",
       "image": "https://image.pollinations.ai/prompt/Hoarse%20voice%2C%20sharp%20features%20softening%20now%2C%20eyes%20that%20calculate%20and%20estimate.%20He%20moves%20like%20someone%20used%20to%20reading%20a%20room%20for%20weak%20points.%2C%20character%20portrait%2C%20named%20The%20Churn-Revel%20orchestrator%2C%20man%2C%20Master%20of%20coordinated%20chaos%2C%20now%20questioning%20their%20mandate%2C%20platonic%20to%20Loki%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=39738&nologo=true",
       "_portraitTier": "devoted",
@@ -1355,7 +1062,8 @@
     "the_crossing": {
       "visits": 3,
       "notes": [
-        "[d3] A hollow-pace Precursor patrol-frame stands motionless at the broken wall's edge—its route ended, its mandate expired or satisfied. The frame does not pursue beyond this point."
+        "[d3] A hollow-pace Precursor patrol-frame stands motionless at the broken wall's edge—its route ended, its mandate expired or satisfied. The frame does not pursue beyond this point.",
+        "[d4] The Null Stone's sealed seam has opened—a passage descends into cold darkness beyond it, with the sound of moving water rising from below. The opening glows faintly from within."
       ],
       "flags": {},
       "lastVisit": 3,
@@ -1367,6 +1075,14 @@
           "day": 3,
           "visited": true,
           "note": "A vast circular chamber where five waygate arches converge; the hub of the network. Pale stone worn by uncounted arrivals."
+        },
+        "the-opening-beyond-the-null-stone": {
+          "name": "The Opening Beyond the Null Stone",
+          "parentId": "the_crossing",
+          "day": 4,
+          "lastSeen": 4,
+          "visited": false,
+          "note": "A passage descending from the Hub crossing into cold darkness—sealed and waiting, now answering honest asking."
         }
       },
       "lastEntered": {
@@ -1569,12 +1285,8 @@
     "lastSharedReadAt": "2026-09-15T14:47:59.164Z",
     "lastTickWorldDay": 77,
     "lastCanonWorldDay": 77,
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "The Churn-Revel orchestrator as a named ally and partner",
-        "from": "Loki's own recognition of shared hunger—the orchestrator was sent to break the stone, but what they truly sought was proof that chaos and…"
-      },
       {
         "thing": "Veln Ashpause's arrival at the exact moment of the seam's discovery—they have come to witness something they foreknew, and their presence…",
         "from": "The Hourkeeper's own nature: they perceive time differently, and whatever they came to see, they are now seeing it"
@@ -1590,6 +1302,10 @@
       {
         "thing": "Halvex Coil naming himself plainly and the cost of staying",
         "from": "Your recognition of his hunger and the partnership you offered—he is answerable now, and that is the breaking he feared most"
+      },
+      {
+        "thing": "The opened seam glowing faintly from within—a passage descending into cold dark and the sound of moving water far below.",
+        "from": "The Null Stone's answer to honest asking—it listened and it tested, and it chose to trust what you promised."
       }
     ],
     "wantProgress": {
@@ -6545,7 +6261,8 @@
         "kind": "mystery",
         "facts": [
           "[d1] The regulator holds a two-part question: (1) whether the water has been prepared to carry what it was built to carry, and (2) whether someone with the authority to answer is present. Cy received this shape through a craft-contact pass — Loki's See the Made Thing run through Cy's Precursor processor.",
-          "[d4] The sealed seam in the Null Stone at the Hub responds to honest asking, not force—it tests the supplicant's intentions before yielding. The stone asks its own question: what will you do with what lies behind it? The sealed thing waits for an answer that satisfies both need and integrity."
+          "[d4] The sealed seam in the Null Stone at the Hub responds to honest asking, not force—it tests the supplicant's intentions before yielding. The stone asks its own question: what will you do with what lies behind it? The sealed thing waits for an answer that satisfies both need and integrity.",
+          "[d4] The sealed seam in the Null Stone at the Hub responds to honest asking and integrity, not force. It tests supplicants and makes its own judgment about whether to trust them. When asked plainly what it guards and promised care rather than breaking or use, the stone opened."
         ],
         "links": [
           "halvex",
@@ -6902,17 +6619,18 @@
           "[d4] The five waygate arches at the Hub were deliberately sealed with doubled interference patterns—four in identical configuration, one left open. The sealing is recent and purposeful, suggesting someone controls the network and chose to isolate or restrict passage.",
           "[d4] The Null Stone's sealed seam is responsive—it is not passively locked but actively *defending* what lies behind it. The warmth under a hand that touches it with genuine intention shows it is responsive. It refuses forcing but may answer honest questions. The seal guards against something, and…",
           "[d4] The waygate network at the Hub has been deliberately sealed with deliberate intent: four arches locked with doubled interference patterns in identical configuration, one arch left open. The open arch is a *door for something specific*—following the network's logic backward will reveal what it was…",
-          "[d4] The Null Stone at the Hub is not merely a barrier—it is a *guardian* with intent. It listens to honest asking and responds with its own questions. The four sealed waygate arches form an intentional seal; the fifth open arch is deliberate. Something or someone sealed this network and left one way…"
+          "[d4] The Null Stone at the Hub is not merely a barrier—it is a *guardian* with intent. It listens to honest asking and responds with its own questions. The four sealed waygate arches form an intentional seal; the fifth open arch is deliberate. Something or someone sealed this network and left one way…",
+          "[d4] The Null Stone at the Hub crossing has unsealed—a passage opens downward into cold darkness, with the sound of moving water rising from below. The five waygate arches remain in their configuration: four sealed with deliberate interference, one open. The stone waits."
         ],
         "links": [
-          "the-null-stone",
           "the-annex-sender",
           "churn-revel-orchestrator",
           "water-crisis-pressureholt",
           "halvex-coil",
           "vessin-tallow-bark",
           "veln-ashpause",
-          "kael"
+          "kael",
+          "the-regulator-question"
         ],
         "aliases": [
           "The Null Stone's Seam",
@@ -7135,17 +6853,17 @@
     ]
   },
   "tendencies": {
-    "devotion": 0.9512986895561871,
-    "cerebral": 11.016369214568876,
-    "social": 17.508319341004402,
-    "strategic": 10.01206721632786,
-    "cautious": 6.684587599421259,
-    "amorous": 11.707031802767162,
-    "generous": 4.351264168302728,
-    "ruthless": 0.4951720617353251,
-    "risky": 0.4046769468106417,
-    "patient": 0.11050999665687634,
-    "deception": 0.12863936025223
+    "devotion": 1.9275162223172826,
+    "cerebral": 10.740959984204654,
+    "social": 18.07061135747929,
+    "strategic": 9.761765535919665,
+    "cautious": 6.517472909435727,
+    "amorous": 11.414356007697982,
+    "generous": 4.24248256409516,
+    "ruthless": 0.48279276019194195,
+    "risky": 0.39456002314037564,
+    "patient": 0.10774724674045444,
+    "deception": 0.12542337624592423
   },
   "aptitudes": [
     "silver_tongue",
@@ -7156,7 +6874,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 165,
+  "actionCount": 166,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -7828,8 +7546,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789509893043,
-  "rev": 670,
+  "updatedAt": 1789511422774,
+  "rev": 672,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8717,7 +8435,7 @@
     "the_gearlands": 33,
     "umbral_depths": 54,
     "the_quickwood": 101,
-    "the_center": 33
+    "the_center": 34
   },
   "opLossPending": false,
   "sessions": [
@@ -8812,10 +8530,10 @@
     {
       "id": "sess-12",
       "startedAt": "2026-09-15T21:21:28.979Z",
-      "lastAt": "2026-09-15T22:04:53.040Z",
+      "lastAt": "2026-09-15T22:30:22.766Z",
       "startDay": 77,
       "endDay": 77,
-      "beats": 4
+      "beats": 5
     }
   ],
   "establishedFacts": [
@@ -8866,45 +8584,52 @@
       "text": "The waygate network at the Hub crossing has been deliberately sealed: four arches locked with doubled interference patterns in identical configuration, one arch left open. The sealing is recent, planned, and purposeful. Someone owns this network and chose to trap or control what enters and exits.",
       "day": 4,
       "subjectId": "the-crossing"
+    },
+    {
+      "id": "the-null-stone",
+      "text": "The Null Stone at the Hub crossing opened in response to an honest promise—it was sealed deliberately to wait for someone willing to understand rather than break, use, or steal what lies behind it. The stone listens and tests supplicants. The seam hings open on cold air and the sound of moving…",
+      "day": 4,
+      "subjectId": "the-null-stone"
     }
   ],
   "_opLedger": {
     "offer": {
-      "applied": 27,
+      "applied": 28,
       "rejected": 1,
       "lastWhy": "rejected-shape"
     }
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 196,
-    "choices": 196,
-    "characterDeltas": 85,
-    "scene": 196,
-    "placeUpdates": 21,
-    "codexUpdates": 110,
-    "timeOps": 166,
-    "offer": 23,
+    "sceneSummary": 197,
+    "choices": 197,
+    "characterDeltas": 86,
+    "scene": 197,
+    "placeUpdates": 22,
+    "codexUpdates": 111,
+    "timeOps": 167,
+    "offer": 24,
     "generateRequest": 6,
-    "sceneEnded": 69,
-    "npcUpdates": 159,
+    "sceneEnded": 70,
+    "npcUpdates": 160,
     "moveTo": 6,
-    "gambitApt": 32,
-    "deeds": 6,
-    "questUpdates": 18,
+    "gambitApt": 33,
+    "deeds": 7,
+    "questUpdates": 19,
     "standingOps": 3,
-    "factUpdates": 7,
+    "factUpdates": 8,
     "stageOps": 7,
     "encounterOps": 9,
-    "ledgerEvents": 4,
+    "ledgerEvents": 5,
     "newEncounter": 3,
-    "imagePrompt": 18,
+    "imagePrompt": 19,
     "scene_ended": 1,
     "stateOps": 1,
-    "_engineClosedScene": 1,
-    "discovery": 1
+    "_engineClosedScene": 2,
+    "discovery": 1,
+    "intentsHeard": 1
   },
-  "_opTurns": 196,
+  "_opTurns": 197,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -8953,7 +8678,7 @@
     }
   },
   "companionBonds": {
-    "coil": 5.25
+    "coil": 5.75
   },
   "practice": {
     "schemaVersion": 1,
@@ -8966,7 +8691,7 @@
       "prism_sight": 12,
       "harmonic_voice": 9,
       "hunters_strike": 3,
-      "descent": 9,
+      "descent": 10,
       "wayfinding": 1,
       "misdirect": 2,
       "wrong_reality": 1,
@@ -8991,7 +8716,7 @@
       {
         "abilityId": "appetite_sense",
         "since": "2026-07-21T18:16:21.011Z",
-        "progress": 14
+        "progress": 15
       }
     ],
     "lastUsed": {
@@ -9003,7 +8728,7 @@
       "prism_sight": 77,
       "harmonic_voice": 76,
       "hunters_strike": 32,
-      "descent": 76,
+      "descent": 77,
       "wayfinding": 69,
       "misdirect": 69,
       "wrong_reality": 76,
@@ -9467,6 +9192,11 @@
         "text": "Turned a hired orchestrator of chaos toward partnership and honest reckoning instead of ruin—held the center against deliberate disorder and offered the way forward",
         "weight": 2,
         "day": 4
+      },
+      {
+        "text": "Bound a sealed mystery that refused breaking and learned to ask it honestly instead—the Null Stone opened at the Hub crossing.",
+        "weight": 2,
+        "day": 4
       }
     ]
   },
@@ -9679,8 +9409,9 @@
     "comfort": 1,
     "finesse": 1,
     "persuade": 1,
-    "negotiate": 1,
-    "truth": 1
+    "negotiate": 2,
+    "truth": 1,
+    "devote": 1
   },
   "aptitudeEarnCount": {
     "faithful": 1,
@@ -9735,6 +9466,14 @@
       "day": 4,
       "worldDay": 77,
       "actionCount": 155
+    },
+    {
+      "companionId": "coil",
+      "kind": "deed",
+      "delta": 0.5,
+      "day": 4,
+      "worldDay": 77,
+      "actionCount": 165
     }
   ],
   "_exchangeReceipts": [],
@@ -9933,352 +9672,352 @@
   },
   "_promptRows": {
     "character": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "location": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "region": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "groundDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "lore": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "traditionMotiveDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "sheetsDetail": {
-      "reached": 18,
-      "produced": 17
+      "reached": 19,
+      "produced": 18
     },
     "rules": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "recentTurns": {
-      "reached": 18,
-      "produced": 17
+      "reached": 19,
+      "produced": 18
     },
     "timeLabel": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "npcRegistryDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "mintedUnmetDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "npcSeedDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "traditionVocab": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "standingDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "recalledDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 1
     },
     "bearingsDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "caravansDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 0
     },
     "commandDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "presenceDetail": {
-      "reached": 18,
-      "produced": 11
+      "reached": 19,
+      "produced": 12
     },
     "worthHereDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "sceneState": {
-      "reached": 18,
-      "produced": 17
-    },
-    "holdingsDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 18
     },
+    "holdingsDetail": {
+      "reached": 19,
+      "produced": 19
+    },
     "debtsDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "questsDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "structuredQuestsDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "companionsDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "placeMemoryDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "agesMissingDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "newsDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "worldArcsDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "legendsPursuableDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 12
     },
     "wakesDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "reachableDeadDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "threatToPlayer": {
-      "reached": 18,
+      "reached": 19,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 0
     },
     "resolution": {
-      "reached": 18,
-      "produced": 12
+      "reached": 19,
+      "produced": 13
     },
     "playerInput": {
-      "reached": 18,
+      "reached": 19,
       "produced": 6
     },
     "exactWords": {
-      "reached": 18,
+      "reached": 19,
       "produced": 8
     },
     "travelDirective": {
-      "reached": 18,
+      "reached": 19,
       "produced": 0
     },
     "itemAdvance": {
-      "reached": 18,
+      "reached": 19,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 2
     },
     "encounterOfferDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 3
     },
     "fightFramingDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 0
     },
     "offerDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 1
     },
     "teacherOfferDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 5
     },
     "romanceGuidanceDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 0
     },
     "factsDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "evolvedItemsDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 18,
+      "reached": 19,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 0
     },
     "perilNote": {
-      "reached": 18,
+      "reached": 19,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 4
     },
     "masteryDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "bookkeepingRestate": {
-      "reached": 18,
+      "reached": 19,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "repairPanelDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "teacherDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "availableEncounters": {
-      "reached": 18,
-      "produced": 14
+      "reached": 19,
+      "produced": 15
     },
     "partyDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "registerDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "legendDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 0
     },
     "assignmentsDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 0
     },
     "latentArcsDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "seasonalDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "schoolsDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "sharedCanonDetail": {
-      "reached": 18,
+      "reached": 19,
       "produced": 0
     },
     "worldCountLabel": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "waygateDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "readAloudDetail": {
-      "reached": 18,
-      "produced": 18
+      "reached": 19,
+      "produced": 19
     },
     "scenePacingDetail": {
-      "reached": 18,
-      "produced": 10
+      "reached": 19,
+      "produced": 11
     }
   },
   "_opUnknown": {
-    "sceneSummary": 18
+    "sceneSummary": 19
   },
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T22:51:56.913Z",
@@ -10440,7 +10179,25 @@
       "discovered": true
     }
   ],
-  "_pendingLedger": [],
+  "_pendingLedger": [
+    {
+      "schemaVersion": 1,
+      "at": "2026-09-15T22:30:22.774Z",
+      "worldDay": 77,
+      "who": "char-mrum8y4d",
+      "playerKey": "player-s9z9u1",
+      "where": "the_crossing",
+      "what": "The Null Stone at the Hub crossing unsealed and opened—responding to an honest promise to understand rather than break or use what lies behind it.",
+      "tags": [
+        "discovery",
+        "mystery",
+        "world-event"
+      ],
+      "spectrumDeltas": {},
+      "visibility": "witnessed",
+      "impactsLocal": true
+    }
+  ],
   "_gmRefusals": [
     {
       "at": "2026-09-15T00:29:28.269Z",

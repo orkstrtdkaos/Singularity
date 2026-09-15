@@ -27,7 +27,7 @@ import { critFor } from "./engine/craftmechanics.js"; // CCODE-76: a craft's own
 import { authoredBlock } from "./engine/craftmechanics.js";                 // CCODE-311: the rank-walking reader a guard block needs
 import { protectionFromCraft, tickProtections } from "./engine/intercept.js"; // CCODE-311: the writer state.protections never had
 import { receiptLine, roundVerdict } from "./engine/roundreceipt.js"; // the round receipt, extracted so it can be simulated (it shipped a permanent "it's even" because nothing could test it)   // SNG-250 §4: the born-whole gate + which types it covers
-import { mintableBraidsFor, buildBraidDef, mintBraid, braidKey, registerDiscoveryAbility } from "./engine/braids.js"; // SNG-197 p2: in-play braid mint + the moment; SNG-226: a discovery becomes a usable craft
+import { mintableBraidsFor, buildBraidDef, mintBraid, braidKey, registerDiscoveryAbility, braidsAwaitingMoment } from "./engine/braids.js"; // SNG-197 p2: in-play braid mint + the moment; SNG-226: a discovery becomes a usable craft; SNG-592: whose moment a ledger row is
 import { ensureRecipeStore, buildRecipeRecord, recipeFor, recipeToAuthored, mergeRecipes, firstFinderName } from "./engine/recipes.js"; // SNG-201: shared braid recipes
 import { braidPlacement, compositionAngle, leanOffset, wheelRejects, inTraditions, matchesFunction, creationPool } from "./engine/wheelgeom.js"; // SNG-202: place a craft on the wheel by its composition
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, pushOwnedFile, ghList, fetchRepoJSON, raceTimeout } from "./engine/sync.js";
@@ -145,7 +145,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.12";
+const APP_VERSION = "2.0.13";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3933,7 +3933,23 @@ function migrate(c) {
   }
   // SNG-197 p2: braids backfilled as stubs (before the moment existed) get the moment they never got —
   // enriched in place + re-presented, one per load. Best-effort, non-blocking.
-  if ((c.braids || []).some(b => c.customAbilities?.[b.id]?.minted && c.customAbilities[b.id].minted.presented !== true)) presentBackfilledBraids(c);
+  // ⛔ SNG-592 (ERIK, IN PLAY) — "made a new discovery… and now it's saying a braid has formed when i reloaded."
+  // ONE MINTING ANNOUNCED ITSELF TWICE, because `braids[]` is a provenance ledger that holds BOTH braids and
+  // DISCOVERIES (registerDiscoveryAbility writes a row with `discovered: true`), and the two announcement
+  // paths gate on flags in DIFFERENT STORES that neither one writes for the other:
+  //
+  //     the discovery moment stamps  discoveries[]._momentShown
+  //     this backfill reads          customAbilities[id].minted.presented
+  //
+  // So the discovery said its piece, stamped its own flag, and left this gate wide open on the row it had
+  // just written. ⚠️ AND THE ARITY IS A RED HERRING: measured across Erik's three saves, SIX of seven
+  // discoveries got a ledger row and ALL SIX carry this backfill's `presented` fingerprint (Silas's have two
+  // and three parents); the ONE that never got a row — Cellaceron's, which took registerDiscoveryAbility's
+  // already-braided early return — was announced exactly once. THE ROW IS THE TRIGGER, not the parent count.
+  // ⛑ SO THE FIX IS OWNERSHIP, NOT A THIRD FLAG: a discovery is announced by the discovery path, and this
+  // backfill does not announce discoveries. The rule lives ONCE, in `braidsAwaitingMoment` — this gate and the
+  // backfill's own pick were two hand-kept copies of one condition, which is the shape the defect came in.
+  if (braidsAwaitingMoment(c).length) presentBackfilledBraids(c);
   // SNG-226: a discovery recorded before it was made USABLE (Erik's Marrow's Wings) gets registered as a
   // usable craft on load — so the intent-parser/wheel/resolver (all read abilities[]) can finally see it.
   // Idempotent; runs before the moment backfill so a re-presented discovery is already castable. Live layer.
@@ -7104,17 +7120,29 @@ function showBraidMoment(def) {
   document.getElementById("help-pop")?.remove();
   // SNG-222: the ceremony now serves DISCOVERIES too — the most braid-shaped event there is (a capability
   // neither parent had, earned in play). Same beat, adapted copy; a discovery also carries an image (§5).
-  const isDiscovery = def.kind === "discovery";
+  // ⛔ SNG-592 — TWO PLACES CARRIED THE KIND AND THIS READ ONLY ONE. `queueDiscoveryMoment` pushes a synthetic
+  // object with a top-level `kind`; every other path pushes the DEF, which carries it at `minted.kind`. So the
+  // re-presented discovery that started this ticket rendered the BRAID ceremony — "✦ A BRAID FORMS ✦", the
+  // wrong aria-label, and a rename button wired to `renameBraid`, which writes the ledger row and NOT the
+  // `discoveries[]` record the player is actually looking at. Read both; the def is the more authoritative half.
+  const isDiscovery = def.kind === "discovery" || def.minted?.kind === "discovery";
   // SNG-222 (Erik): credit the real TWO OR MORE skills, joined naturally — "A and B", "A, B and C", etc.
   const strongJoin = arr => { const a = (arr || []).map(esc); return a.length <= 1 ? (a[0] || "") : a.length === 2 ? `${a[0]}</strong> and <strong>${a[1]}` : `${a.slice(0, -1).join("</strong>, <strong>")}</strong> and <strong>${a[a.length - 1]}`; };
-  const parents = strongJoin(def.minted?.sourceNames || def._parentNames || []);
+  const parentList = def.minted?.sourceNames || def._parentNames || [];
+  const parents = strongJoin(parentList);
   // SNG-201 §2: a braid the world already knows is a RECOGNITION beat, not a CREATION beat — a different
   // kind of cool. The player still earned it through their own play; someone found it first.
   const finder = def._recognition?.firstFinder || (def.minted?.adoptedFrom ? def.minted.adoptedFrom.characterName : null);
   const isRecognition = !isDiscovery && !!(def._recognition || def.minted?.adoptedFrom);
   const isBondGift = def.kind === "bondGift";
   const kicker = isBondGift ? "A BOND DEEPENS" : isDiscovery ? "A TECHNIQUE DISCOVERED" : isRecognition ? "A BRAID RECOGNISED" : "A BRAID FORMS";
-  const arrow = isBondGift ? `taught to you by ${esc(def._teacherName || "your companion")} — what the bond was always for` : isDiscovery ? "found in the doing — a thing neither could do apart" : isRecognition ? "you have earned, together" : "braided together into";
+  // ⛔ SNG-592 (ERIK, on the same reload) — "a thing neither could do apart" IS A CLAIM ABOUT TWO CRAFTS, and
+  // Mirror-Bright has ONE parent. ⚠️ A DISCOVERY IS NOT ALWAYS A JOINING: sometimes it is a single craft
+  // reaching past its own edge, which is why `registerDiscoveryAbility` has a one-parent fallback at all.
+  // The ceremony may not assert an arity the record does not have — say the true thing for what is in front of us.
+  const arrow = isBondGift ? `taught to you by ${esc(def._teacherName || "your companion")} — what the bond was always for`
+    : isDiscovery ? (parentList.length >= 2 ? "found in the doing — a thing neither could do apart" : "found in the doing — further than the craft alone reaches")
+    : isRecognition ? "you have earned, together" : "braided together into";
   const pop = document.createElement("div");
   pop.id = "help-pop"; pop.className = "help-overlay";
   // CCODE-26: dismissing the moment — "Hold it close", tap-away, OR after "Make it mine" (all route through
@@ -7180,6 +7208,14 @@ function queueDiscoveryMoment(disc, c = character) {
     }
   } catch (err) { console.warn("[art] discovery art skipped:", err?.message); }
   disc._momentShown = true;
+  // ⛑ SNG-592: STAMP BOTH STORES AT THE ONE ANNOUNCEMENT. The queued object below is synthetic — it has no
+  // `minted`, so the modal's own close() handler (`if (def?.minted && !def.minted.presented)`) has never been
+  // able to reach the def's flag for a discovery, and it sat `undefined` forever. The gate in migrate() no
+  // longer reads it for discoveries, so this is not what fixes the double modal; it is what stops the SAVE
+  // from lying about whether this craft has had its moment. A state that does not describe itself is how the
+  // next reader inherits this bug.
+  const ownDef = c?.customAbilities?.[disc.id];
+  if (ownDef?.minted) ownDef.minted.presented = true;
   saveCharacter(c);
   pendingBraidMoments.push({ kind: "discovery", id: disc.id, name: disc.name, description: disc.description, _parentNames: parentNames, _discovery: disc, image: disc.image || null });
 }
@@ -7340,11 +7376,16 @@ async function syncBraidRecipes({ character, profile } = {}) {
 
 /** SNG-197 p2 (ROUND 2 answer 4): braids backfilled before this existed (Silas's two) arrived as stubs and
  *  never got a moment. On load, enrich the stub in place and RE-PRESENT it — the moment it never got, not a
- *  silent upgrade. One per load, best-effort, non-blocking (mirrors enrichPersonalArc). */
+ *  silent upgrade. One per load, best-effort, non-blocking (mirrors enrichPersonalArc).
+ *  ⛔ SNG-592: BRAIDS ONLY, via the SAME `braidsAwaitingMoment` the load gate uses. The `braids[]` ledger also
+ *  holds discovery provenance rows, and a discovery is announced by `queueDiscoveryMoment` against its own
+ *  flag. ⚠️ ONE RULE, NOT TWO COPIES: the gate decides whether to call and this decides what to SHOW, so a
+ *  filter that drifted from the gate would still hand a discovery to the braid ceremony via `pending[0]` on a
+ *  save that also holds one genuinely-unpresented stub braid. */
 async function presentBackfilledBraids(c) {
   try {
     const catalog = { ...CONTENT.abilities, ...(c.customAbilities || {}) };
-    const pending = (c.braids || []).map(b => c.customAbilities?.[b.id]).filter(d => d && d.minted && d.minted.presented !== true);
+    const pending = braidsAwaitingMoment(c);
     if (!pending.length) return;
     let shown = pending[0];
     if (!shown.minted.enriched && shown.minted.namedBy !== "player") {

@@ -16951,6 +16951,172 @@ console.log("\n── §241 · who is near, what they are doing, and what a meet
     /LEGENDARY TEACHERS you could seek/.test(LGSRC241));
 }
 
+/* ══════════ §242 — SNG-592 · ONE MINTING, ONE ANNOUNCEMENT (Erik, in play: "now it's saying a braid has formed when i reloaded") ══════════ */
+console.log("\n── §242 · a craft is announced once, by one owner, and a reload does not announce it again ──");
+{
+  const BR242 = await import("../engine/braids.js");
+  const PR242 = await import("../engine/progression.js");
+  // ⚠️ NORMALISED, BECAUSE app.js IS CRLF AND THE FIRST FORM OF THE ARROW GATE BELOW NEVER FIRED: `;\n  const pop =`
+  // cannot match `;\r\n  const pop =`, so the extraction came back empty and the check read green-shaped while
+  // asserting nothing. A gate that cannot see what it is measuring is worse than no gate.
+  const APP242 = rd("app.js").replace(/\r\n/g, "\n");
+  const cat242 = {};
+  for (const a of abilities) cat242[a.id] = a;
+
+  /* ---- 1 · ⛔ THE EVIDENCE, IN ERIK'S OWN THREE SAVES ---- */
+  // ⛔ WHAT HE SAW: "✦ A TECHNIQUE DISCOVERED ✦" when Mirror-Bright minted, then "✦ A BRAID FORMS ✦" for the SAME craft
+  // after a reload — same name, same prose, same two buttons. ⚠️ THE CAUSE IS A LEDGER THAT HOLDS TWO KINDS OF THING:
+  // `registerDiscoveryAbility` writes a `braids[]` provenance row for every discovery, and the braid backfill read that row
+  // as an unannounced braid. The two paths gated on flags in DIFFERENT STORES that neither wrote for the other —
+  // `discoveries[]._momentShown` against `customAbilities[id].minted.presented`.
+  //
+  // ⚠️ AND THE ARITY IS A RED HERRING, WHICH I MEASURED BEFORE BUILDING ON IT. Mirror-Bright has ONE parent, so the
+  // obvious story was "a one-source braid". It is not: Silas's five discoveries have two and three parents and every one
+  // of them carries the same fingerprint. The NATURAL CONTROL is Cellaceron — his discovery took
+  // `registerDiscoveryAbility`'s already-braided early return, so it never got a ledger row, and it is the only one of the
+  // seven that was announced once. ⛔ THE ROW IS THE TRIGGER, NOT THE PARENT COUNT.
+  const saves242 = ["char-mrhs8286.json", "char-mrum8y4d.json", "char-mr4ejo8c.json"]
+    .map(f => { try { return JSON.parse(rd(`characters/player-s9z9u1/${f}`)); } catch { return null; } }).filter(Boolean);
+  const discRows242 = saves242.flatMap(c => (c.discoveries || []).map(d => ({
+    id: d.id, shown: d._momentShown === true,
+    inLedger: (c.braids || []).some(b => b.id === d.id),
+    // the braid backfill is the ONLY writer that can reach a discovery def's `presented` — so this flag ON a
+    // discovery is that backfill's fingerprint: proof it fired on a craft that had already said its piece.
+    fingerprint: c.customAbilities?.[d.id]?.minted?.presented === true })));
+  // ⛔ THE FLAG STOPS BEING A FINGERPRINT THE MOMENT THIS SHIPS, so it must not be what the gate asks about.
+  // `presented` on a discovery WAS the backfill's signature, because nothing else could reach it; from this
+  // commit `queueDiscoveryMoment` stamps it at the announcement, and it means only "this has had its moment".
+  // ⚠️ MY FIRST FORM OF THIS SECTION ASSERTED EXACTLY THAT FLAG AND I PROVED IT WORTHLESS BEFORE SHIPPING IT:
+  // with the `kind` filter deleted from `braidsAwaitingMoment` — the whole fix reverted — all fifteen checks
+  // stayed green, because every real save (and my own simulated mint) already carried `presented: true`, so
+  // the broken rule and the fixed rule returned the same nothing. A GATE THAT CANNOT SEE THE DEFECT IT NAMES
+  // IS DECORATION.
+  //
+  // ⛑ SO ROLL THE REAL SAVES BACK INSTEAD. Strip `presented` from each discovery def and you have, byte for
+  // byte, the state Erik's three saves were ACTUALLY in when this happened — and the state every save in the
+  // wild that minted a discovery before today is in right now. The claim is that the braid backfill announces
+  // NONE of them: the fix is the ownership rule, not the stamp, and it must hold with the stamp absent.
+  // ⚠️ THE STAMP COMES OFF EVERY DEF, braid and discovery alike, so the question the backfill is asked is the
+  // one it was asked on Erik's machine: of everything in this ledger, what have you not yet announced? The two
+  // halves of the answer are the whole claim — none of the discoveries, all of the braids.
+  const rolledBack242 = saves242.map(c => JSON.parse(JSON.stringify({ braids: c.braids || [], discoveries: c.discoveries || [], customAbilities: c.customAbilities || {} })));
+  for (const c of rolledBack242) for (const def of Object.values(c.customAbilities)) if (def?.minted) delete def.minted.presented;
+  const wouldAnnounce242 = rolledBack242.flatMap(c => BR242.braidsAwaitingMoment(c).filter(x => c.discoveries.some(d => d.id === x.id)).map(x => x.id));
+  check(`§242: ⛔ rolled back to the state they were ACTUALLY in — ${discRows242.filter(d => d.inLedger).length} discoveries with a ledger row and no presented-stamp — Erik's real saves announce NOT ONE of them a second time`,
+    discRows242.length >= 6 && wouldAnnounce242.length === 0,
+    wouldAnnounce242.length ? `would re-announce: ${wouldAnnounce242.join(", ")}` : JSON.stringify(discRows242));
+  // ⛑ AND THE BRAIDS IN THOSE SAME ROLLED-BACK SAVES STILL GET THEIRS — the fix removes an announcement that was
+  // never the backfill's to make, and not the backfill. Silas holds three real braids behind his five discoveries.
+  const realBraids242 = rolledBack242.flatMap(c => BR242.braidsAwaitingMoment(c).map(x => x.id));
+  check(`§242: ⛑ …while all ${realBraids242.length} genuine braid(s) in those same saves still would be — this narrows the backfill, it does not disable it`,
+    realBraids242.length > 0 && realBraids242.every(id => !discRows242.some(d => d.id === id)), JSON.stringify(realBraids242));
+  // ⛑ AND THE CONTROL IS STRUCTURAL, NOT A COUNT: a discovery with no ledger row cannot reach the braid
+  // backfill at all — which is why Cellaceron's, alone of the seven, was only ever announced once.
+  check("§242: ⛑ …and a discovery that never got a ledger row was unreachable by the backfill even then — the control, in his own save",
+    discRows242.some(d => !d.inLedger)
+    && discRows242.filter(d => !d.inLedger).every(d => !rolledBack242.some(c => BR242.braidsAwaitingMoment(c).some(x => x.id === d.id))),
+    JSON.stringify(discRows242.filter(d => !d.inLedger)));
+
+  /* ---- 2 · ⛔ THE CLAIM: ONE MINTING, ONE ANNOUNCEMENT, STABLE ACROSS RELOADS ---- */
+  // ⚠️ THIS COUNTS ANNOUNCEMENTS, not fields. It drives the REAL mint path and the REAL ownership rule
+  // (`braidsAwaitingMoment`, the one both app.js callers now use), so a future rename of any flag cannot make it
+  // green by accident — only a craft that genuinely announces itself twice can turn it red.
+  //
+  // ⛔ AND IT RUNS TWICE, WITH AND WITHOUT THE STAMP, because the two halves of this fix can hide each other.
+  // `stampsBothStores: false` is the PRE-FIX mint, which is what actually happened to Erik: the moment stamped
+  // `_momentShown` and nothing else, leaving `presented` absent on the def for the braid backfill to find. That
+  // arm is the one that fails when the ownership rule is reverted; the `true` arm alone reported all-green
+  // against a deliberately broken `braidsAwaitingMoment`, which is why it is not allowed to stand by itself.
+  const veil242 = abilities.find(a => a.id === "maintained_veil") ? "maintained_veil" : abilities[0].id;
+  const mintAndReload242 = ({ stampsBothStores }) => {
+    const c = { id: "loki", level: 8, abilities: [{ abilityId: veil242, level: 2 }], discoveries: [], braids: [], customAbilities: {}, practice: {} };
+    const minted = PR242.recordDiscovery(c, { name: "Mirror-Bright", description: "An illusion of the target's own work, reflected back with perfect clarity.", abilityIds: [veil242], noveltyHint: "illusion as emotional mi", day: 4 });
+    BR242.registerDiscoveryAbility(c, minted, cat242, { at: 4 });
+    const said = [];
+    const announce = (d) => {
+      d._momentShown = true;                                     // SNG-222's flag, stamped by both eras
+      if (stampsBothStores) { const own = c.customAbilities?.[d.id]; if (own?.minted) own.minted.presented = true; }
+      said.push(`DISCOVERY:${d.id}`);
+    };
+    announce(minted);
+    // …and now RELOAD, five times: each load runs the same two owners app.js's migrate() runs, in the same order.
+    for (let load = 1; load <= 5; load++) {
+      for (const braidDef of BR242.braidsAwaitingMoment(c).slice(0, 1)) said.push(`BRAID:${braidDef.id}`);
+      for (const d of (c.discoveries || []).filter(x => x && !x._momentShown).slice(0, 1)) announce(d);
+    }
+    return { c, said };
+  };
+  const legacy242 = mintAndReload242({ stampsBothStores: false });
+  const today242 = mintAndReload242({ stampsBothStores: true });
+  check("§242: ⛔ ONE MINTING, ONE ANNOUNCEMENT — with the moment stamping ONLY its own store, as it did when this bit Erik, and five reloads after",
+    legacy242.said.length === 1 && legacy242.said[0] === "DISCOVERY:mirror-bright",
+    `announced ${legacy242.said.length}×: ${legacy242.said.join(" → ")}`);
+  check("§242: ⛔ …and once more with the moment stamping both, which is what it does now",
+    today242.said.length === 1 && today242.said[0] === "DISCOVERY:mirror-bright",
+    `announced ${today242.said.length}×: ${today242.said.join(" → ")}`);
+  const loki242 = today242.c;
+  check("§242: ⛑ …and the save says so in BOTH stores, so neither owner can be told the moment never happened",
+    loki242.discoveries[0]._momentShown === true && loki242.customAbilities["mirror-bright"].minted.presented === true);
+  // ⚠️ THE LEDGER ROW STAYS. It is by-id provenance with real readers (the rename path, the held-braid lookup), and the
+  // two arity-sensitive readers already refuse it on their own terms — SNG-370 taught `mintableBraidsFor` and
+  // `buildRecipeRecord` the two-is-the-floor rule. The announcement gate is the reader that never learned it.
+  check("§242: ⛑ the provenance row survives the fix — the duplicate stopped being READ, not written",
+    (loki242.braids || []).some(b => b.id === "mirror-bright" && b.discovered === true));
+  check("§242: …and a one-parent row still reaches neither the mintable pairings nor the world's recipe store",
+    BR242.mintableBraidsFor(loki242, { catalog: cat242 }).length === 0
+    && (await import("../engine/recipes.js")).buildRecipeRecord(loki242.customAbilities["mirror-bright"], {}) === null);
+
+  /* ---- 3 · ⛑ AND SNG-197's OWN BACKFILL IS KEPT WHOLE ---- */
+  // ⛔ THE FAILURE MODE OF THIS FIX would be silencing the moment a real stub braid has been waiting for.
+  const silas242 = { id: "s", level: 9, abilities: [{ abilityId: veil242, level: 2 }], braids: [], customAbilities: {}, discoveries: [], practice: {} };
+  const pair242 = abilities.map(a => a.id).find(id => id !== veil242);
+  silas242.abilities.push({ abilityId: pair242, level: 2 });
+  const bdef242 = BR242.buildBraidDef(silas242, [veil242, pair242], cat242, {});
+  BR242.mintBraid(silas242, bdef242, { at: 5 });
+  check("§242: ⛑ a real braid that never got its moment still gets it", BR242.braidsAwaitingMoment(silas242).length === 1);
+  bdef242.minted.presented = true;
+  check("§242: …and goes quiet once it has had it", BR242.braidsAwaitingMoment(silas242).length === 0);
+  // ⚠️ THE DIRECTION THAT MATTERS: an OLD stub carries no `minted.kind` at all, and those stubs are the entire
+  // reason the backfill exists. Absent must read as "not a discovery", never as one.
+  check("§242: ⛑ an old stub with no kind recorded still backfills — absent is not 'discovery'",
+    BR242.braidsAwaitingMoment({ braids: [{ id: "braid_x_y", from: ["x", "y"] }], customAbilities: { braid_x_y: { id: "braid_x_y", minted: { from: ["x", "y"] } } } }).length === 1);
+  check("§242: ⛑ …and a discovery that was never announced still gets the moment it never got (SNG-222 kept whole)",
+    /\(c\.discoveries \|\| \[\]\)\.filter\(d => d && !d\._momentShown\)/.test(APP242));
+  // ⛔ ONE RULE, NOT TWO COPIES. The gate that decides whether to backfill and the pick of what to SHOW were two
+  // hand-kept spellings of one condition — the shape this defect arrived in. Both now call the engine.
+  check("§242: ⛔ both callers ask the ENGINE whose moment a ledger row is, rather than each spelling the rule again",
+    (APP242.match(/braidsAwaitingMoment\(c\)/g) || []).length === 2
+    && !/\(c\.braids \|\| \[\]\)\.map\(b => c\.customAbilities\?\.\[b\.id\]\)\.filter\(/.test(APP242));
+
+  /* ---- 4 · ⛔ AND THE CEREMONY NAMES WHAT IT IS ---- */
+  // ⛔ THE SECOND MODAL WAS ALSO MISLABELLED, and for a reason that outlives this ticket: the kind is carried in TWO
+  // places — a top-level `kind` on the object `queueDiscoveryMoment` synthesises, and `minted.kind` on the def every
+  // other path pushes — and the modal read only the first. So a re-presented discovery got the braid kicker, the wrong
+  // aria-label, AND a rename button wired to `renameBraid`, which writes the ledger row and not the `discoveries[]`
+  // record the player is reading. Any future path that presents a def would have inherited all three.
+  // ⛑ AN EXTRACTION THAT MISSES MUST GO RED, NEVER THROW. These two gates lift a live expression out of app.js and
+  // run it; a rename that makes the lift fail has to fail LOUDLY here, not take the whole suite down with a
+  // SyntaxError (which is what the CRLF miss above did) and not pass because "" evaluated to nothing.
+  const lift242 = (src, argNames, args) => { try { return src ? eval(`((${argNames}) => ${src})`)(...args) : Symbol("no-match"); } catch { return Symbol("threw"); } };
+  const isDiscSrc242 = (APP242.match(/const isDiscovery = (.*?);/) || [])[1] || "";
+  const isDiscovery242 = (def) => lift242(isDiscSrc242, "def", [def]);
+  check("§242: ⛔ the ceremony reads the kind from BOTH places it is carried, so a def-shaped discovery is not called a braid",
+    isDiscovery242({ kind: "discovery" }) === true
+    && isDiscovery242({ minted: { kind: "discovery" } }) === true
+    && isDiscovery242({ minted: { kind: "braid" } }) === false, isDiscSrc242 || "⛔ COULD NOT FIND `const isDiscovery =` IN app.js");
+  // ⛔ ERIK, ON THE SAME RELOAD: the subtitle read "a thing neither could do apart" — a claim about TWO crafts, over a
+  // craft with ONE parent. ⚠️ A DISCOVERY IS NOT ALWAYS A JOINING; `registerDiscoveryAbility` has a one-parent fallback
+  // precisely because a single craft can reach past its own edge. The ceremony may not assert an arity the record lacks.
+  const arrowSrc242 = (APP242.match(/const arrow = ([\s\S]*?);\n\s*const pop =/) || [])[1] || "";
+  const arrowFor242 = (parentList) => lift242(arrowSrc242, "parentList, isBondGift, isDiscovery, isRecognition, def, esc",
+    [parentList, false, true, false, {}, String]);
+  check("§242: ⛔ a ONE-parent discovery is not told that 'neither' craft could do it apart",
+    typeof arrowFor242(["Maintained Veil"]) === "string" && !/neither/.test(arrowFor242(["Maintained Veil"])),
+    String(arrowFor242(["Maintained Veil"])));
+  check("§242: ⛑ …while a TWO-parent discovery still gets the line that is true of it",
+    /neither could do apart/.test(String(arrowFor242(["A", "B"]))), String(arrowFor242(["A", "B"])));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

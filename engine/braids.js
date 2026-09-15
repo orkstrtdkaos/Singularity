@@ -372,3 +372,22 @@ export function registerDiscoveryAbility(character, discovery, catalog = {}, { a
   if (!character.braids.some(b => b.id === def.id)) character.braids.push({ id: def.id, from: [...(def.minted.from || [])], name: def.name, tier: def.minted.tier || null, mintedAt: at, discovered: true });
   return def;
 }
+
+/** ⛔ SNG-592 — WHOSE MOMENT IS THIS? (ERIK, IN PLAY: "made a new discovery… and now it's saying a braid has
+ *  formed when i reloaded.")
+ *
+ *  `braids[]` is a PROVENANCE LEDGER, not a list of braids: `registerDiscoveryAbility` above writes a row for
+ *  every discovery too, marked `discovered: true`. A discovery is announced by its own path against its own
+ *  flag (`discoveries[]._momentShown`), so the braid backfill's share of that ledger is only the rows whose
+ *  def is actually a BRAID and has not yet been presented. ⚠️ The two callers in app.js — the load-time gate
+ *  that decides whether to backfill at all, and the backfill's own pick of what to SHOW — must agree exactly;
+ *  they were two hand-kept copies of one rule, which is the shape the original defect came in.
+ *
+ *  ⚠️ A DEF WITH NO `minted.kind` IS AN OLD STUB AND STILL BELONGS HERE. Absent is not "discovery", and those
+ *  stubs are the entire reason SNG-197's backfill exists — the filter must fail toward announcing them.
+ *  Pure; reads only the ledger and the defs it points at. */
+export function braidsAwaitingMoment(character) {
+  return (character?.braids || [])
+    .map(b => character?.customAbilities?.[b.id])
+    .filter(d => d && d.minted && d.minted.kind !== "discovery" && d.minted.presented !== true);
+}

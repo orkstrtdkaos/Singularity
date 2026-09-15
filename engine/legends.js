@@ -58,10 +58,46 @@ export function loadLegends(file = {}) {
 
 /** The power tier appropriate to a character's arc (level). Low arc meets regional/riffraff
  *  powers; a legendary figure is earned by a developed character. Villains scale the same. */
-export function tierForArc(level = 1) {
-  if (level >= 7) return "legendary";
-  if (level >= 4) return "regional";
-  return "riffraff";
+/** ⛔ SNG-590 — THIS RETURNED "legendary" FOR EVERY LEVEL FROM 7 TO 100.
+ *
+ *  ⚑ ERIK FOUND IT IN PLAY: "It makes me suspicious that I'm finding so many legendaries right now… I have
+ *  to ask how likely that is." Measured: at level 7 and above, as likely as the engine could make it. The
+ *  candidate filter allows one rung ABOVE the arc tier as "a glimpse of the legendary" — and at `legendary`
+ *  the ceiling exceeded the whole roster, so every figure qualified and the sort took the strongest. Forced
+ *  across all four beat types it deployed 3 legendary + 1 epic and ZERO heroic, while heroic was the largest
+ *  group on the roster. A level-7 character met exactly the figures a level-61 one did.
+ *
+ *  ⚠️ AND SNG-260 §B SAID SO IN ADVANCE — "The old tierForArc (legendary at L7) assumed a short game" — with
+ *  the band layer assigned to me and never built. These three hardcoded cuts were what stood in for it.
+ *
+ *  ⛑ SEVEN RUNGS NOW, AUTHORED (Aevi + Erik, `rules/power_bands.json`): one vocabulary, one rung per tier, a
+ *  band per rung, contiguous 1–100. The engine reasons in `band`; the tier name is what a person is called.
+ *  `DEFAULT_RUNGS` is the fallback for a caller with no content — and §240 holds it against the file, so the
+ *  two cannot drift the way a second copy of a table always eventually does. */
+export const DEFAULT_RUNGS = [
+  { band: 0, tier: "riffraff", levels: [1, 4] },
+  { band: 1, tier: "notable", levels: [5, 11] },
+  { band: 2, tier: "regional", levels: [12, 24] },
+  { band: 3, tier: "heroic", levels: [25, 39] },
+  { band: 4, tier: "epic", levels: [40, 59] },
+  { band: 5, tier: "legendary", levels: [60, 84] },
+  { band: 6, tier: "mythic", levels: [85, 100] },
+];
+
+/** The rungs in force: the authored table when a caller has content, else the defaults. */
+export function rungsFrom(bands) {
+  const rows = Array.isArray(bands?.bands) ? bands.bands : Array.isArray(bands) ? bands : null;
+  return (rows && rows.length) ? rows : DEFAULT_RUNGS;
+}
+
+/** What a character of this level IS — the rung's own name. */
+export function tierForArc(level = 1, bands = null) {
+  const rungs = rungsFrom(bands);
+  const L = Number(level) || 1;
+  for (const r of rungs) if (L >= r.levels[0] && L <= r.levels[1]) return r.tier;
+  // ⚠️ ABOVE THE TOP RUNG IS THE TOP RUNG, never a fall-through to the bottom: a level-120 character is not
+  // riffraff, and the table's ceiling is a ceiling rather than an edge to walk off.
+  return rungs[rungs.length - 1]?.tier || "riffraff";
 }
 
 /** Which alignment fits a beat: villain_escalation is the menace ladder; the rest are heroic
@@ -80,7 +116,7 @@ function alignmentForBeat(beatType, prefer = null) {
  *     rarity-weighted); otherwise a generate-at-tier is signalled for a fresh mid/low figure.
  *  Pure (rng injected). Returns { deploy:false } or
  *  { deploy:true, beatType, alignment, tier, figure?|generate:true, birthWeight }. */
-export function legendSurfacing({ beatType, roster = [], governor = {}, arcLevel = 1, worldDay = 0, prefer = null, minGapDays = 6, baseRate = 0.5, rng = Math.random } = {}) {
+export function legendSurfacing({ beatType, roster = [], governor = {}, arcLevel = 1, worldDay = 0, prefer = null, minGapDays = 6, baseRate = 0.5, rng = Math.random, bands = null } = {}) {
   if (!beatType || !LEGEND_BEATS.includes(beatType)) return { deploy: false };
   // cooldown: greatness stays rare
   const last = governor.lastDeployDay;
@@ -89,7 +125,7 @@ export function legendSurfacing({ beatType, roster = [], governor = {}, arcLevel
   if (rng() > baseRate) return { deploy: false };
 
   const alignment = alignmentForBeat(beatType, prefer);
-  const tier = tierForArc(arcLevel);
+  const tier = tierForArc(arcLevel, bands);
   const allowedBeats = alignment === "villain" ? VILLAIN_BEATS : HERO_BEATS;
   if (!allowedBeats.has(beatType)) return { deploy: false };
 
@@ -97,11 +133,12 @@ export function legendSurfacing({ beatType, roster = [], governor = {}, arcLevel
   const candidates = roster.filter(r =>
     r.legend?.alignment === alignment &&
     (r.legend?.presencePattern?.beats || []).includes(beatType) &&
-    tierRank(r.legend?.tier) <= tierRank(tier) + 1 // an anchor may exceed the arc tier by one (a glimpse of the legendary)
+    // ⛑ AND NOW THE "+1 GLIMPSE" IS ONE RUNG OF SEVEN rather than a ceiling above the whole roster.
+    tierRank(r.legend?.tier, bands) <= tierRank(tier, bands) + 1 // an anchor may exceed the arc tier by one (a glimpse of the legendary)
   );
   if (candidates.length) {
     // deterministic pick weighted toward the strongest apt figure, varied by worldDay
-    const sorted = candidates.sort((a, b) => tierRank(b.legend.tier) - tierRank(a.legend.tier));
+    const sorted = candidates.sort((a, b) => tierRank(b.legend.tier, bands) - tierRank(a.legend.tier, bands));
     const figure = sorted[worldDay % sorted.length] || sorted[0];
     return { deploy: true, beatType, alignment, tier: figure.legend.tier, figure, birthWeight: figure.legend.weight };
   }
@@ -111,7 +148,14 @@ export function legendSurfacing({ beatType, roster = [], governor = {}, arcLevel
 
 // Six rungs, and `regional` shares `heroic`'s. An unknown tier lands at the FLOOR, not the middle: a figure
 // whose tier nobody wrote should not out-rank an authored notable by accident.
-export function tierRank(tier) { return { riffraff: 0, notable: 1, heroic: 2, regional: 2, epic: 3, legendary: 4, mythic: 5 }[tier] ?? 0; }
+/** ⛔ SNG-590 — THIS GAVE `heroic` AND `regional` THE SAME RUNG (2), one word from each of the two old
+ *  vocabularies flattened into one ladder — so a "regional" threat and a "heroic" one compared as equals and
+ *  neither could ever be the other's "+1". ⛑ Rank is the BAND now, one rung per tier, read from the same
+ *  table `tierForArc` reads. ⚑ `mythic` has a home instead of a rename out from under 5 authored NPCs. */
+export function tierRank(tier, bands = null) {
+  const r = rungsFrom(bands).find(x => x.tier === tier);
+  return r ? Number(r.band) || 0 : 0;
+}
 
 /** The GM directive for a surfaced legend — names the beat + figure + register, RATING-AWARE
  *  (a legend's brutality respects the ceiling). Pure. */
@@ -139,16 +183,40 @@ const clampSig = s => smartClamp(String(s || "").replace(/\s+/g, " ").trim(), 22
 export function legendsForGM(character, content, opts = {}) {
   const roster = content?.legends?.roster || [];
   if (!roster.length) return null;
+  // the table the whole ladder reads; a caller with no content falls to DEFAULT_RUNGS
+  const bands = opts.bands || content?.rules?.powerBands || null;
   const practiced = opts.practiced instanceof Set ? opts.practiced : new Set();
   const dead = opts.deadIds instanceof Set ? opts.deadIds : new Set();
   const here = character?.currentLocationId;
+  // ⛔ SNG-590 — THIS PUT UP TO SEVEN PROPER NOUNS IN EVERY PROMPT, gated only by practised tradition: no
+  // level, no tier, no cooldown. ⚑ For Silas the four teachers were literally Sister Alder, HALVEX COIL,
+  // Overseer Grael and MAREN OSSITIDE — the two figures Erik then met. As he put it: "we should really
+  // balance what names the gm has all the time."
+  //
+  // ⛑ AEVI'S RULING (SNG-590 §3), and her reason is the diagnosis itself — "a name in the context is a name
+  // the model can reach for. Seven proper nouns per prompt, every prompt, filtered only by tradition, is not
+  // an aspiration layer — it is a hand of cards." So: THE CHARACTER'S BAND AND ONE ABOVE, and at most ONE
+  // from that band above. That is the "+1 glimpse" the source has always promised and never delivered.
+  //
+  // ⚠️ AND THE REACH STAYS LEGIBLE, which is the rider she attached and the half that matters: "A level-7
+  // character being shown Halvex Coil is fine. Being shown him as REACHABLE is the bug." A figure from the
+  // band above is marked as far off, in the line the GM reads.
+  const myBand = tierRank(tierForArc(character?.level || 1, bands), bands);
+  const bandOf = (f) => tierRank(f?.legend?.tier || f?.tier, bands);
+  let glimpses = 0;
   const teachers = [], forces = [];
   for (const f of roster) {
     if (dead.has(f.id)) continue;
+    const fb = bandOf(f);
+    // ⛔ ABOVE THE GLIMPSE IS OUT OF SIGHT ENTIRELY — not shown dimmer, not shown at all. A name the model
+    // cannot see is a name it cannot hand out.
+    if (fb > myBand + 1) continue;
+    const beyond = fb > myBand;
+    if (beyond) { if (glimpses >= 1) continue; glimpses++; }
     const atHome = !!(here && f.homeLocation && f.homeLocation === here);
     if (f.tradition && practiced.has(f.tradition) && teachers.length < 4) {
       const role = f.role || (f.alignment === "villain" ? "dark master" : "master");
-      teachers.push(`- ${f.name} — the legendary ${role} of the ${f.tradition} craft${f.signature ? `: ${clampSig(f.signature)}` : ""}${atHome ? " — and a presence HERE" : ""}. Seeking them is the deep-teacher arc (SNG-203 Finding beat); the pursuit is the quest, woven in the fiction, never a menu.`);
+      teachers.push(`- ${f.name} — the legendary ${role} of the ${f.tradition} craft${f.signature ? `: ${clampSig(f.signature)}` : ""}${atHome ? " — and a presence HERE" : ""}${beyond ? " — ⛔ FAR BEYOND THIS CHARACTER: a rumour, a road that would take an arc to walk, never someone who simply turns up" : ""}. Seeking them is the deep-teacher arc (SNG-203 Finding beat); the pursuit is the quest, woven in the fiction, never a menu.`);
     } else if (atHome && forces.length < 3) {
       forces.push(`- ${f.name}${f.role ? ` (${f.role})` : ""} — ${f.alignment === "villain" ? "a great adversary" : "a great figure"} whose presence touches this place. They want: ${clampSig(f.wants) || "their own ends"}. Aiding or opposing that want is a quest waiting — offer it in the fiction.`);
     }

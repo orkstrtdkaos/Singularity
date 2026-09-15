@@ -145,7 +145,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.10";
+const APP_VERSION = "2.0.11";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4233,7 +4233,9 @@ function maybeLegendDetail() {
   if (!beatType) return null;
   const dep = legendSurfacing({
     beatType, roster: CONTENT.legends.roster,
-    governor: character.legendGovernor || {}, arcLevel: character.level, worldDay: absoluteWorldDay()
+    governor: character.legendGovernor || {}, arcLevel: character.level, worldDay: absoluteWorldDay(),
+    // SNG-590: the seven rungs, so the "+1 glimpse" is one rung of seven instead of a ceiling above the roster
+    bands: CONTENT.rules?.powerBands || null
   });
   if (!dep.deploy) return null;
   character.legendGovernor = { lastDeployDay: absoluteWorldDay(), lastBeat: beatType };

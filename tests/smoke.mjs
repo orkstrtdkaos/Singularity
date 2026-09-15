@@ -3220,7 +3220,16 @@ check("SNG-126/355: parting stops the benefits (trainerFor/liaison empty) AND KE
 
   // power-tier weights + arc scaling
   check("SNG-042: legendary is born far heavier than riffraff", tierBirthWeight("legendary") > tierBirthWeight("regional") && tierBirthWeight("regional") > tierBirthWeight("riffraff"));
-  check("SNG-042: the tier scales to the character's arc", tierForArc(1) === "riffraff" && tierForArc(5) === "regional" && tierForArc(8) === "legendary");
+  // ⛔ SNG-590 — THIS PINNED THE BUG. `tierForArc(8) === "legendary"` was the old three-cut ladder that topped
+  // out at level 7, which is the defect Erik found in play: a level-7 character met the same figures as a
+  // level-61 one. ⚠️ A gate asserting the broken values held them in place — seventeenth pin this week.
+  // ⛑ THE CLAIM IS THAT IT SCALES: distinct rungs across the range, low levels nowhere near the top, and the
+  // ceiling a ceiling rather than an edge. Whatever the authored cuts are, those three must hold.
+  check("SNG-042: the tier scales to the character's arc", (() => {
+    const seen = [1, 8, 20, 35, 55, 75, 95].map(l => tierForArc(l));
+    return new Set(seen).size >= 5 && tierForArc(1) !== tierForArc(95) && tierForArc(8) !== "legendary"
+      && tierForArc(9999) === tierForArc(95);
+  })());
 
   // governed surfacing: the cooldown holds greatness rare
   const alwaysFire = () => 0; // rng that always passes the rarity gate

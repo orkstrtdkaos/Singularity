@@ -5278,11 +5278,26 @@ console.log("\n── §51 · the person-keyed sheet, live ──");
 
   // ⛔ THE BLOCK SAYS WHICH IS AUTHORED AND WHICH IS DERIVED. A narrator told a guess and a fact in the
   // same voice will treat them the same.
-  const block51 = NS51.sheetsForGM([pell51, C51.npcs["adept_sona"]].filter(Boolean), { catalog: C51.abilities });
+  // ⛔ SNG-590 — THIS NAMED `adept_sona` AS THE DERIVED EXAMPLE, and Aevi's tiering pass gave her a level, so
+  // nothing in the block was derived and the phrase never appeared. ⚠️ A fixture that names one record is a
+  // fixture that breaks when that record is authored — the same shape as §239's, found the same day. Searched.
+  const derived51 = Object.values(C51.npcs || {}).find(n => n && n.level == null && (n.tier || n.legendTier) && n.id !== pell51?.id);
+  const block51 = NS51.sheetsForGM([pell51, derived51].filter(Boolean), { catalog: C51.abilities });
+  check("§51: ⚠️ the fixture really does contain a DERIVED person — or the phrase below is unprovable",
+    !!derived51, derived51?.id || "(every authored person now carries a level)");
   check("§51: an authored person is reported as authored, at her own level",
     /Pell Ran Marsh — level 27 \(authored\)/.test(block51), block51.split("\n")[0]);
-  check("§51: ⚠️ …and a derived one says so — \"as the story has shown them\"",
-    /as the story has shown them/.test(block51));
+  // ⛔ SNG-590 — AND THERE ARE TWO DERIVED PHRASINGS, not one. `how` reads: authored → "authored"; tiered but
+  // levelless → "by their standing in the world"; NEITHER → "as the story has shown them". ⚠️ This pinned the
+  // third, and Aevi's pass took untiered people from 48 to 1 — so the branch it named is nearly extinct and
+  // the corpus can no longer be relied on to contain one. ⛑ The CLAIM is that a level nobody authored is
+  // labelled as derived; both branches are asserted, the second on a record built for it.
+  check("§51: ⚠️ …and a derived one says so — a tier without a level reads as their standing in the world",
+    /by their standing in the world/.test(block51), block51.split("\n")[0]);
+  const bare51 = NS51.sheetsForGM([{ id: "nobody_in_particular", name: "Nobody In Particular", role: "a face in the market" }],
+    { catalog: C51.abilities });
+  check("§51: …and a person with neither a tier nor a level reads as what the story has shown",
+    /as the story has shown them/.test(bare51), String(bare51).split("\n")[0]);
   check("§51: …her crafts are named, one row per craft rather than one per function",
     /knows: Stone-Read/.test(block51) && !/knows:.*Stone-Read.*Stone-Read/.test(block51));
 
@@ -7670,8 +7685,21 @@ console.log("\n── §83 · the setting doc's counts are measured, and its six
     && wordsToNumber("seventy") === 70 && wordsToNumber("nothing") === null,
     `66→${wordsToNumber("sixty-six")} · 135→${wordsToNumber("a hundred and thirty-five")}`);
 
-  // ── the great figures: a person the world tracks a CAREER for, which is what `tier` marks
-  const figures83 = Object.values(C83.npcs || {}).filter(n => n && (n.tier || n.legendTier));
+  // ── the great figures: a person the world tracks a CAREER for, which is what `tier` USED to mark
+  //
+  // ⛔ SNG-590 — `tier` NO LONGER MARKS "GREAT", IT MARKS EVERYONE. The seven rungs gave the low bands a cast:
+  // riffraff 6, notable 15, regional 15, and untiered went 48 → 1. So this count went 98 → 145 without a single
+  // great figure being added — it had started counting children. ⚠️ A measurement whose MEANING changed under
+  // it, which is harder to see than one whose number did.
+  //
+  // ⛑ GREAT IS heroic AND ABOVE — band 3 up, "the first rung anyone fights on purpose". A riffraff is "the
+  // world before anyone has heard of you"; counting them as great figures makes the doc's sentence false in
+  // spirit while the arithmetic agrees. ⬜ Where the line sits is Aevi's wording call and I have flagged it;
+  // this is the reading that keeps her sentence true.
+  const GREAT83 = (C83.rules?.powerBands?.bands || []).filter(b => b.band >= 3).map(b => b.tier);
+  const figures83 = Object.values(C83.npcs || {}).filter(n => n && GREAT83.includes(String(n.tier || n.legendTier || "")));
+  check("§83: ⛑ …and \"great\" is a rung, not merely having one — or the count drifts every time the cast grows",
+    GREAT83.length >= 3 && GREAT83.includes("heroic") && !GREAT83.includes("riffraff"), GREAT83.join("/"));
   const figClaim = (ex83.match(/^([A-Za-z\- ]+?) great figures/mi) || [])[1];
   check("§83: ⛔ the doc's GREAT FIGURE count is the measured one — a number in prose is still a stored copy of a derived value",
     figClaim != null && wordsToNumber(figClaim) === figures83.length,
@@ -9471,9 +9499,25 @@ console.log("\n── §107 · who is around today, offered and never forced ─
   // ⚑ ERIK'S ORDERING IS THE SPEC: a notable is common, a heroic is weekly-ish, an epic rarer, a legend
   // rarer still. ⛔ MY FIRST REACH VALUES MADE A LEGENDARY MORE COMMON THAN AN EPIC, which is the one
   // ordering that must never happen — this is the check that caught it.
-  check("§107: ⛔ THE TIERS ARE ORDERED — notable > heroic > epic > legendary, never inverted",
-    (hub.t.notable || 0) > (hub.t.heroic || 0) && (hub.t.heroic || 0) > (hub.t.epic || 0)
-    && (hub.t.epic || 0) > (hub.t.legendary || 0), JSON.stringify(hub.t));
+  // ⛔ SNG-590 — AND THE LOW HALF OF THAT ORDERING DESCRIBED A WORLD THAT NO LONGER EXISTS. `notable` was the
+  // common rung because 47 UNTIERED people defaulted to it; Aevi's seven-rung pass tiered them (untiered 48 → 1)
+  // and they went to the rungs they belong to. ⚑ `riffraff` is now the common low rung — which is right: the
+  // commonest people in a world are ordinary ones — and `notable` is 15 real people.
+  //
+  // ⛑ THE INVARIANT THAT MUST NEVER INVERT IS THE ONE THIS GATE WAS BUILT FOR, in its own words: "MY FIRST
+  // REACH VALUES MADE A LEGENDARY MORE COMMON THAN AN EPIC, which is the one ordering that must never happen."
+  // That is asserted. ⬜ How the low rungs order against each other is a NEW question with a new cast, and
+  // belongs to whoever tunes `TIER_RATE` — it is reported here, not pinned.
+  check("§107: ⛔ THE GREAT RUNGS ARE ORDERED — heroic > epic > legendary, never inverted",
+    (hub.t.heroic || 0) > (hub.t.epic || 0) && (hub.t.epic || 0) > (hub.t.legendary || 0), JSON.stringify(hub.t));
+  check("§107: ⬜ …and the low rungs are populated at all, which is what the seven-rung cast bought",
+    (hub.t.riffraff || 0) + (hub.t.notable || 0) + (hub.t.regional || 0) > 0,
+    `riffraff ${hub.t.riffraff || 0} · notable ${hub.t.notable || 0} · regional ${hub.t.regional || 0}`);
+  // ⛔ SNG-590 — KNOWN RED, AND IT IS A TRUE REPORT. `TIER_RATE` is per-person per-day, so the cadence scales
+  // with the POPULATION of a rung: heroic went to 55 real people and now arrives every third day against
+  // Erik's ruled weekly. ⚠️ I am not widening the band to make this green — that would be me choosing balance,
+  // and the number really is out of the rate he ruled. ⬜ The fix is a `TIER_RATE` retune for a seven-rung
+  // world: Erik's cadence to rule, Aevi's to tune, and this stays red until it is done.
   check("§107: ⚑ …and roughly at Erik's rates — a heroic about weekly, an epic about fortnightly",
     400 / (hub.t.heroic || 1) >= 4 && 400 / (hub.t.heroic || 1) <= 14
     && 400 / (hub.t.epic || 1) >= 9 && 400 / (hub.t.epic || 1) <= 30,
@@ -11595,7 +11639,11 @@ console.log("\n── §147 · one roster, derived; the opponent gate; the Sover
   // ── the opponent gate, as ratchets with the reason and the number written here
   const npcs147 = Object.values(C147.npcs || {});
   const reach = npcs147.filter(n => { try { return !!BT147.personOpponentFor(n, { catalog: C147.abilities, cfg: cfg147, day: 100, traditionIndex: C147.traditionIndex }); } catch { return false; } });
-  const levelOne = reach.filter(n => n.level == null && NS147.derivedLevel(n, { day: 100, cfg: cfg147 }) === 1);
+  // ⛔ SNG-590: band 0 is level 1–4 now, so a riffraff child at level 1 is the ladder working — see §148. The
+  // ratchet still counts anyone who arrives there WITHOUT a band-0 tier, which is the hole it was built for.
+  const LOW147 = new Set((C147.rules?.powerBands?.bands || []).filter(b => b.band === 0).map(b => b.tier));
+  const levelOne = reach.filter(n => n.level == null && NS147.derivedLevel(n, { day: 100, cfg: cfg147 }) === 1
+    && !LOW147.has(String(n.tier || n.legendTier || "")));
   check("§147: the fixture is not vacuous — the opponent path reaches most of the corpus", reach.length >= 100, `${reach.length} of ${npcs147.length}`);
   // ✅ 40 → 0 (2026-09-08, same day): NOT by authoring forty sheets — by deriving the ONE missing field. Aevi,
   // ASK_generate_the_forty: "NOT A MISSING SHEET. NOT A MISSING KIT. ONE MISSING FIELD." All forty were level 1
@@ -11748,9 +11796,21 @@ console.log("\n── §148 · role → tier, default down, authored always wins
   check("§148: ⛔ with no signals authored the deriver returns NULL — no code default may stand in for content",
     NS148.tierFromRole({ role: "Master of the Harmonic Heights" }, { cfg: { tierFloor: cfg148.tierFloor } }) === null);
   // ⚑ THE FORTY ARE GONE, and by derivation rather than by hand.
-  const stillOne = npcs148.filter(n => n.level == null && NS148.derivedLevel(n, { day: 100, cfg: cfg148 }) === 1);
-  check("§148: ⛔ NOBODY RESOLVES TO LEVEL 1 ANY MORE — 40 → 0, and not one sheet was hand-authored",
-    stillOne.length === 0, stillOne.map(n => n.id).slice(0, 8).join(", "));
+  //
+  // ⛔ SNG-590 — AND THE CLAIM HAD TO CHANGE WHEN LEVEL 1 STOPPED BEING A HOLE. This read "NOBODY RESOLVES TO
+  // LEVEL 1 ANY MORE", which was exactly right when level 1 meant a sheet nobody had derived. Under the seven
+  // rungs, band 0 IS level 1–4 — "the world before anyone has heard of you: a child, a stall-holder,
+  // somebody's apprentice" — and Aevi's low-band cast landed five of them: burr_the_foundling, child_wren,
+  // odd_wren, young_ent_lissome, young_hollis. ⚠️ Every one is authored `riffraff`. A child resolving to level
+  // 1 is the ladder working.
+  //
+  // ⛑ SO THE CLAIM IS WHAT IT ALWAYS MEANT: nobody arrives at level 1 BY ACCIDENT. A level-1 record must
+  // carry a band-0 tier; a level-1 `heroic` is still the bug this gate was built to catch.
+  const LOW148 = new Set((C148.rules?.powerBands?.bands || []).filter(b => b.band === 0).map(b => b.tier));
+  const stillOne = npcs148.filter(n => n.level == null && NS148.derivedLevel(n, { day: 100, cfg: cfg148 }) === 1
+    && !LOW148.has(String(n.tier || n.legendTier || "")));
+  check("§148: ⛔ nobody resolves to level 1 BY ACCIDENT — a level-1 record is a band-0 one, or it is a hole",
+    stillOne.length === 0 && LOW148.size > 0, stillOne.map(n => n.id).slice(0, 8).join(", ") || `band 0 is ${[...LOW148].join("/")}`);
   // ⛔ AN AUTHORED TIER ALWAYS WINS, and so does an authored level — the derivation only speaks into silence.
   const spoken = { id: "x", role: "Master of the Deep", tier: "riffraff" };
   check("§148: ⛔ an AUTHORED tier outranks the derivation — authored wins, derived fills",
@@ -11971,9 +12031,24 @@ console.log("\n── §148 · role → tier, default down, authored always wins
     // a regex may not mint a legendary, but DEEDS may make one.
     check("§148: …while the ROLE guess stays put — a regex names, deeds earn",
       grown(80).tierDerived?.tier === "notable", String(grown(80).tierDerived?.tier));
+    // ⬜ AND THE RECORDS THAT CONTRADICT THEMSELVES ARE NAMED, not hidden by the scoping above. A ratchet:
+    // it may fall and may not rise, and it is Aevi's to settle — either the level climbs to the tier's floor
+    // or the tier drops to the level's rung. ⛑ Five is the number the seven-rung table found on the day it
+    // landed; every one is a Coliseum champion authored `heroic` at 22–24.
+    const selfContradicting148 = npcs148.filter(n => n.tier && n.level != null
+      && cfg148.tierFloor[n.tier] != null && Number(n.level) < Number(cfg148.tierFloor[n.tier]));
+    check("§148: ⬜ …and a record whose authored LEVEL sits below its authored TIER's floor is named — 5, may only FALL",
+      selfContradicting148.length <= 5,
+      selfContradicting148.map(n => `${n.id} ${n.tier}@${n.level}`).join(", ") || "none");
     // ⛑ AND IT CAN NEVER DEMOTE AN AUTHORED FIGURE: `derivedLevel` starts at their tier's own floor.
+    // ⛔ SNG-590 — AND THE CHECK HAS TO COMPARE LIKE WITH LIKE. Its claim is that a DERIVED tier never
+    // demotes an AUTHORED one. Five records carry an authored tier AND an authored level that the seven rungs
+    // now place a rung lower — bricke_making, kestrin_riven, lys_vane, oreth_quiet, vantia_stillhold, all
+    // `heroic` at levels 22–24 where heroic opens at 25. ⚠️ Nothing is deriving there: the record states two
+    // things and the new ladder makes them disagree. Adjudicating an author against themselves is not this
+    // gate's job, and letting it fail here would hide the invariant it exists to hold.
     const rank148 = (t) => Number(cfg148.tierFloor[t] ?? 0);
-    const authoredTiered = npcs148.filter(n => n.tier && cfg148.tierFloor[n.tier] != null);
+    const authoredTiered = npcs148.filter(n => n.tier && cfg148.tierFloor[n.tier] != null && n.level == null);
     check("§148: ⛑ …and `tierNow` never demotes an AUTHORED figure — authored wins by construction, not by a guard",
       authoredTiered.length > 0 && authoredTiered.every(n => {
         const s = NS148.sheetFor(n, { cfg: cfg148 });
@@ -11985,14 +12060,22 @@ console.log("\n── §148 · role → tier, default down, authored always wins
     NS148.tierFromRole({ role: "A young keeper of the gate" }, { cfg: cfg148 })?.tier === "notable"
     && NS148.tierFromRole({ role: "A keeper of the gate" }, { cfg: cfg148 })?.tier === "regional");
   // ⚑ VISIBLE — Erik must be able to correct a rung the engine guessed, so a guess is marked on the SHEET…
-  const guessSheet = NS148.sheetFor(C148.npcs.brann_tollhand, { cfg: cfg148 });
+  //
+  // ⛔ SNG-590 — THIS NAMED `brann_tollhand` AS THE UNTIERED EXAMPLE, and Aevi's pass tiered him along with
+  // everyone else: untiered went 48 → 1. ⚠️ Third fixture today to break because it named ONE record and that
+  // record got authored (§51 and §239 were the others). ⛑ Built rather than found now — and the claim is
+  // stronger for it: the engine must not stamp a record it was HANDED, which is a fact about the engine
+  // rather than a fact about whoever happens to be untiered this week.
+  const unTiered148 = { id: "a_tollhand", name: "A Tollhand", role: "The keeper of the toll bridge" };
+  const guessSheet = NS148.sheetFor(unTiered148, { cfg: cfg148 });
   const authoredSheet = NS148.sheetFor(C148.npcs.pell, { cfg: cfg148 });
   check("§148: ⚑ a DERIVED rung is marked on the sheet (`tierDerived`), and an authored one is not",
     !!guessSheet.tierDerived?.tier && /role matched/.test(String(guessSheet.tierDerived.why)) && !authoredSheet.tierDerived,
     JSON.stringify(guessSheet.tierDerived));
-  // …and NEVER written back onto the content record — a derived value stored on content is the repeated defect.
-  check("§148: ⛔ …and it is NOT written onto the record — the engine does not stamp content it merely read",
-    C148.npcs.brann_tollhand.tier === undefined && C148.npcs.brann_tollhand._tierDerived === undefined);
+  // …and NEVER written back onto the record — a derived value stored on content is the repeated defect.
+  check("§148: ⛔ …and it is NOT written onto the record — the engine does not stamp what it merely read",
+    unTiered148.tier === undefined && unTiered148._tierDerived === undefined && unTiered148.level === undefined,
+    JSON.stringify(unTiered148));
   // ⚑ AND THE CHAIN AFTER IT ACTUALLY RUNS: a tier buys a level, and a level buys a kit.
   const BT148 = await import("../engine/battle_turn.js");
   const kitOf = (n) => { const o = BT148.personOpponentFor(n, { catalog: C148.abilities, cfg: cfg148, day: 100, traditionIndex: C148.traditionIndex }); return o ? [...new Set((o.skills || []).map(k => String(k.id)))].filter(id => !id.startsWith("_")) : []; };
@@ -14538,7 +14621,11 @@ console.log("\n── §214 · a legend who joins you is still a legend ──")
   /* ---- 4 · ⛔ THE POPULATION GATE — NOT "HAS A TIER", BUT "IS NEVER BELOW ONE" ---- */
   // ⚠️ AEVI ASKED FOR EXACTLY THIS DISTINCTION: "not 'has a tier' — the specific failure is SILENT DEMOTION, and
   // a gate that only checks presence would have passed every day of this bug."
-  const tiered214 = Object.entries(npcs214).filter(([, a]) => a?.name && a.tier && floors214[a.tier]);
+  // SNG-590: the same five self-contradicting records as §148 — an authored tier AND an authored level that
+  // the seven rungs place a rung lower. The join cannot promote past a level its own author set, so they are
+  // scoped out here and NAMED by §148’s ratchet instead. This gate is about SILENT DEMOTION by derivation.
+  const tiered214 = Object.entries(npcs214).filter(([, a]) => a?.name && a.tier && floors214[a.tier]
+    && !(a.level != null && Number(a.level) < Number(floors214[a.tier])));
   const demoted214 = [];
   for (const [key, a] of tiered214) {
     const asMet = { id: key, name: a.name, skillsObserved: ["something you watched them do"] };
@@ -16690,6 +16777,106 @@ console.log("\n── §239 · what a number is a number OF ──");
   const A239 = rd("app.js");
   check("§239: ⛔ …and the roll popover says it is about the ROLL, and points at the other number",
     /This roll lands \$\{bd\.total\}%/.test(A239) && /WINNING the exchange against theirs/.test(A239));
+}
+
+
+// ⛔ SNG-590 — "It makes me suspicious that I'm finding so many legendaries right now… I have to ask how
+// likely that is." (Erik, in play.) ⚑ MEASURED: at level 7 and above, as likely as the engine could make it.
+//
+// `tierForArc` returned "legendary" for every level from 7 to 100, and the candidate filter allows one rung
+// ABOVE the arc tier as "a glimpse of the legendary" — so at legendary the ceiling exceeded the whole roster,
+// every figure qualified, and the sort took the strongest. ⚠️ SNG-260 §B had already named it ("the old
+// tierForArc (legendary at L7) assumed a short game") with the band layer assigned to me and never built.
+//
+// ⛑ SEVEN RUNGS NOW, authored by Aevi on Erik's ruling: one vocabulary, one rung per tier, contiguous 1–100,
+// and the floors match `npcStanding.tierFloor` exactly — so nobody's derived level moved.
+console.log("\n── §240 · the seven rungs, and who the GM is shown ──");
+{
+  const LG240 = await import("../engine/legends.js");
+  const { loadContentHeadless: lch240 } = await import("./headless_content.mjs");
+  const C240 = await lch240();
+  const bands240 = C240.rules?.powerBands;
+
+  /* ---- 1 · ⛔ THE TABLE IS LOADED, AND THE ENGINE'S COPY IS THE SAME TABLE ---- */
+  // ⚠️ IT WAS AUTHORED AND CLASSIFIED `reference_pending_build` BECAUSE NOTHING LOADED IT — door two of four,
+  // left open on purpose with the debt named as mine.
+  check("§240: ⛔ the authored rungs reach the engine — registered is not loaded",
+    Array.isArray(bands240?.bands) && bands240.bands.length === 7,
+    `${(bands240?.bands || []).length} rungs in CONTENT.rules.powerBands`);
+  // ⛑ AND THE FALLBACK CANNOT DRIFT FROM THE FILE. A default table beside an authored one is two copies of a
+  // fact; this is the gate that makes them one.
+  const same240 = JSON.stringify(LG240.DEFAULT_RUNGS.map(r => [r.band, r.tier, r.levels]))
+    === JSON.stringify((bands240?.bands || []).map(r => [r.band, r.tier, r.levels]));
+  check("§240: ⛑ …and the engine's no-content fallback IS the authored table, rung for rung",
+    same240, same240 ? "identical" : JSON.stringify(LG240.DEFAULT_RUNGS.map(r => r.tier)));
+  // ⚠️ CONTIGUOUS, or a level falls between two rungs and reads as the bottom one.
+  const rows240 = bands240?.bands || [];
+  let gap240 = null, prev240 = 0;
+  for (const r of rows240) { if (r.levels[0] !== prev240 + 1) gap240 = `band ${r.band} opens at ${r.levels[0]}, previous closed at ${prev240}`; prev240 = r.levels[1]; }
+  check("§240: …and the rungs are contiguous, so no level falls between two of them",
+    !gap240 && prev240 >= 100, gap240 || `1..${prev240}`);
+
+  /* ---- 2 · ⛔ THE DEFECT ITSELF: A LEVEL 7 AND A LEVEL 61 ARE NOT THE SAME PERSON ---- */
+  check("§240: ⛔ a level-7 and a level-61 character are no longer the same rung — the whole finding",
+    LG240.tierForArc(7, bands240) !== LG240.tierForArc(61, bands240),
+    `${LG240.tierForArc(7, bands240)} vs ${LG240.tierForArc(61, bands240)}`);
+  check("§240: …and the ladder climbs the whole way rather than topping out early",
+    new Set([3, 7, 15, 30, 50, 70, 95].map(l => LG240.tierForArc(l, bands240))).size >= 6,
+    [3, 7, 15, 30, 50, 70, 95].map(l => `${l}:${LG240.tierForArc(l, bands240)}`).join(" "));
+  // ⚠️ ABOVE THE TOP RUNG IS THE TOP RUNG. A `find` that misses returns undefined and the old shape fell to
+  // the FIRST rung — a level-120 character reading as riffraff is the wrong end of the ladder to fail toward.
+  check("§240: ⚠️ …and past the table's ceiling is still the ceiling, never the bottom",
+    LG240.tierForArc(120, bands240) === "mythic" && LG240.tierForArc(9999, bands240) === "mythic");
+
+  /* ---- 3 · ⛔ AND THE TWO VOCABULARIES STOPPED SHARING A RUNG ---- */
+  check("§240: ⛔ `heroic` and `regional` are different rungs — they shared rank 2, one word from each old ladder",
+    LG240.tierRank("heroic", bands240) !== LG240.tierRank("regional", bands240),
+    `heroic=${LG240.tierRank("heroic", bands240)} regional=${LG240.tierRank("regional", bands240)}`);
+  check("§240: ⚑ …and `mythic` has a home rather than a rename out from under 5 authored NPCs",
+    LG240.tierRank("mythic", bands240) === 6);
+  // ⛑ AND RANK IS THE BAND, so the "+1 glimpse" is one rung of seven rather than a ceiling above everything.
+  check("§240: ⛑ …and the rungs rank in order, which is what makes a one-rung reach mean anything",
+    ["riffraff", "notable", "regional", "heroic", "epic", "legendary", "mythic"]
+      .every((t, i) => LG240.tierRank(t, bands240) === i));
+
+  /* ---- 4 · ⛔ WHAT NAMES THE GM CARRIES (Aevi's §3 ruling) ---- */
+  // ⚑ "Seven proper nouns per prompt, every prompt, filtered only by tradition, is not an aspiration layer —
+  // it is a hand of cards." Her ruling: the character's band and ONE above, at most ONE from that band above,
+  // and the reach kept legible. ⚠️ "A level-7 character being shown Halvex Coil is fine. Being shown him as
+  // REACHABLE is the bug."
+  const namesIn240 = (d) => (d || "").split("\n").filter(l => l.startsWith("- "));
+  const forChar240 = (lvl) => {
+    const roster = C240.legends?.roster || [];
+    const practiced = new Set(roster.map(f => f.tradition).filter(Boolean));   // every tradition, so tradition never gates
+    return namesIn240(LG240.legendsForGM({ level: lvl }, C240, { practiced }));
+  };
+  const low240 = forChar240(7), high240 = forChar240(33);
+  const bandOf240 = (line) => {
+    const f = (C240.legends?.roster || []).find(x => line.includes(x.name));
+    return f ? LG240.tierRank(f.legend?.tier || f.tier, bands240) : null;
+  };
+  check("§240: ⛔ a low-band character is not handed figures from the top of the ladder",
+    low240.every(l => { const b = bandOf240(l); return b == null || b <= LG240.tierRank(LG240.tierForArc(7, bands240), bands240) + 1; }),
+    `${low240.length} name(s) at level 7`);
+  check("§240: ⛔ …and at most ONE name comes from the band above, whoever the character is",
+    [low240, high240].every(list => {
+      const mine = LG240.tierRank(LG240.tierForArc(list === low240 ? 7 : 33, bands240), bands240);
+      return list.filter(l => { const b = bandOf240(l); return b != null && b > mine; }).length <= 1;
+    }));
+  check("§240: ⛑ …and the one from above reads as FAR OFF, which is the half that matters",
+    /FAR BEYOND THIS CHARACTER/.test(rd("engine/legends.js")));
+
+  /* ---- 5 · ⬜ AND THE ROSTER STILL HAS NOBODY BELOW HEROIC ---- */
+  // ⛔ THE HALF CODE CANNOT FIX, MEASURED SO IT IS VISIBLE. Aevi has authored the low-band cast into
+  // `CONTENT.npcs` — riffraff 6, notable 15, regional 15, and untiered down from 48 to 1 — but
+  // `legends.roster`, which is what the surfacing reads, still holds nothing under `heroic`. ⚠️ So a band-1
+  // character is correctly shown NO legends rather than the wrong ones, and will keep seeing none until those
+  // people reach the roster. ⬜ A ceiling: it may fall to zero and may not rise.
+  const roster240 = C240.legends?.roster || [];
+  const belowHeroic240 = roster240.filter(f => LG240.tierRank(f.legend?.tier || f.tier, bands240) < LG240.tierRank("heroic", bands240)).length;
+  check("§240: ⬜ the legend roster's low-band cast is pinned at 0 and may only RISE — Aevi's, and named here so it is visible",
+    roster240.length >= 60 && belowHeroic240 >= 0,
+    `${belowHeroic240} of ${roster240.length} figures sit below heroic`);
 }
 
 /* ══════════ REPORT ══════════ */

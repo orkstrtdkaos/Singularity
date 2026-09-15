@@ -268,7 +268,7 @@ export async function loadContent() {
   // its own misses; only the base `rules` is fatal, as before). Load them as ONE wave instead of ~12
   // serial round-trips. rankProgression comments retained on the consumers below.
   const [rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks,
-         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, titlesRule, arcResponseRule, encountersRule, coliseumGrid, economyRule, chargesRule, threatRule, incapRule, tiesRule, questStructureRule, martialRule, ladderRule, mintedNamesRule, newsTemplatesRule, firstGiftTemplate, damageFamilies, abilityRenameMap, combinationRecipes] = await Promise.all([
+         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, titlesRule, arcResponseRule, encountersRule, coliseumGrid, economyRule, chargesRule, threatRule, incapRule, tiesRule, questStructureRule, martialRule, ladderRule, mintedNamesRule, newsTemplatesRule, firstGiftTemplate, damageFamilies, abilityRenameMap, combinationRecipes, powerBandsRule] = await Promise.all([
     fetchJSON(resPath),
     loadRule("emergence", { recipes: [], branchTemplates: [] }),
     loadRule("attribute_gates", { gates: {} }),
@@ -332,7 +332,15 @@ export async function loadContent() {
     // ⛔ SNG-369 §2a — SIXTY-THREE AUTHORED BRAIDS, REGISTERED IN THE MANIFEST AND READ BY NOTHING. The
     // file said so itself: "Until a consumer exists, anything authored here is documentation."
     // ⚠️ REGISTRATION IS NOT ARRIVAL (SNG-342) — being in the manifest only means it COULD be fetched.
-    loadRule("combination_recipes", { recipes: [] })
+    loadRule("combination_recipes", { recipes: [] }),
+    // ⛔ SNG-590 — THE SEVEN RUNGS, AND THE DOOR THAT WAS SHUT. Aevi authored `power_bands.json` and classified
+    // it `reference_pending_build` because it was registered and LOADED BY NOBODY — door two of four, left open
+    // on purpose with the debt named as mine.
+    // ⚠️ AND IT GOES LAST, BECAUSE THE DESTRUCTURING IS POSITIONAL. My first attempt put this beside `threat`
+    // in the middle while `powerBandsRule` sat at the end of the name list — so every rule after it shifted by
+    // one and `incapRule` silently received the bands. That is the exact failure the comments above describe
+    // and the one this file already lost `economy` to. The name and the call are at the same index or neither.
+    loadRule("power_bands", null),
   ]);
   // SNG-101b: the native-grant table merges INTO the rules bag so nativeGrantIdsFor reads it directly.
   // SNG-271/1a — THE XP TABLE. `resolution.json` already carried an inline `encounters` block, so duels,
@@ -400,6 +408,10 @@ export async function loadContent() {
   if (chargesRule) rules.charges = chargesRule;
   if (threatRule) rules.threat = threatRule;
   if (incapRule) rules.incapacitation = incapRule;
+  // ⛑ SNG-590 — MERGED, NOT MERELY FETCHED. A loaded-but-unread value is the same bug one layer up, and
+  // this file says so about three other rules. `bands` is the whole table; the tier→band map is DERIVED from
+  // it rather than authored twice, because one rung per tier makes a second mapping a thing that can drift.
+  if (powerBandsRule?.bands) rules.powerBands = powerBandsRule;
   if (tiesRule) rules.ties = tiesRule;   // SNG-328   // SNG-323   // SNG-322: the threat ladder   // SNG-316: the charge-condition vocabulary
   if (questStructureRule) rules.questStructure = questStructureRule;   // SNG-341b
   if (martialRule) rules.martialPaths = martialRule;   // SNG-345

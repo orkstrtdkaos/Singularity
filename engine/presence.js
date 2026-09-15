@@ -90,7 +90,16 @@ export function presentToday(character, content = {}, { day = 0, hereId = null, 
     if (!n || skip.has(id)) continue;
     if (n.status === "dead") continue;
     // ⚠️ AN UNTIERED AUTHORED PERSON IS LOCAL TEXTURE — the riffraff/notable layer, which is the baseline
-    // Erik wants "pretty much every day". 47 of the 117 are exactly this and none of them carry a tier.
+    // Erik wants "pretty much every day". 47 of the 117 were exactly this and none of them carried a tier.
+    //
+    // ⛔ SNG-590 — THAT SENTENCE IS NOW FALSE, AND ITS FALSENESS MOVED THE WHOLE DISTRIBUTION. Aevi's seven-rung
+    // pass tiered the corpus: untiered went 48 → 1, and those 47 borrowed bodies left `notable` for the rungs
+    // they actually belong to. ⚑ So `notable` fell from ~62 to 15 and stopped being the common rung, while
+    // `heroic` rose to 55 real people and started arriving every third day against a ruled weekly.
+    //
+    // ⛑ THE DEFAULT STAYS, because one untiered record is still one, and a person with no rung is still local
+    // texture. But it is no longer load-bearing, and `TIER_RATE` below was tuned when it was — §107 reports the
+    // cadence honestly and it is out of Erik's band. That is a tuning ruling, not a code fix.
     const tier = String(n.tier || "notable");
     const rate = TIER_RATE[tier];
     if (!rate) continue;                       // mythic and anything unknown: an event's business, not a day's

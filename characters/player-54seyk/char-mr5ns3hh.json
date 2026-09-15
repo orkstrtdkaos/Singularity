@@ -13,15 +13,35 @@
     "social": 3,
     "practical": 4
   },
-  "skills": {},
+  "skills": {
+    "structural": 1,
+    "grip": 1
+  },
   "abilities": [
     {
       "abilityId": "echo_sense",
-      "level": 1
+      "level": 1,
+      "native": true
     },
     {
       "abilityId": "sonic_resonance",
-      "level": 1
+      "level": 1,
+      "native": true
+    },
+    {
+      "abilityId": "tremor_sense",
+      "level": 1,
+      "native": true
+    },
+    {
+      "abilityId": "stillness_field",
+      "level": 1,
+      "native": true
+    },
+    {
+      "abilityId": "drumline_stride",
+      "level": 1,
+      "native": true
     }
   ],
   "alignment": {
@@ -30,8 +50,8 @@
   "attunement": 1,
   "maxHealth": 25,
   "health": 25,
-  "maxEnergy": 100,
-  "energy": 68,
+  "maxEnergy": 116,
+  "energy": 84,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -54,7 +74,8 @@
       "effects": {
         "energy": 10
       },
-      "consumable": true
+      "consumable": true,
+      "pinned": true
     },
     {
       "id": "medics_satchel",
@@ -77,7 +98,8 @@
       "effects": {
         "health": 8
       },
-      "consumable": true
+      "consumable": true,
+      "pinned": true
     },
     {
       "id": null,
@@ -344,6 +366,11 @@
         "Bundle not yet opened by Piotr; private plant note inside",
         "Mara's 'carefully' — what it meant is still unresolved: the plant registered the cut with a momentary hum-spike"
       ]
+    },
+    "subPlace": {
+      "slug": "terrace-three-east",
+      "name": "Terrace Three East",
+      "day": 1
     }
   },
   "clock": {
@@ -411,7 +438,10 @@
         "locationId": "millbrook",
         "day": 1
       },
-      "statusNote": "Active in Millbrook village lane; has delegated the Piotr errand and the terrace observation to Adelheid and returned to civic rounds."
+      "statusNote": "Active in Millbrook village lane; has delegated the Piotr errand and the terrace observation to Adelheid and returned to civic rounds.",
+      "gender": "woman",
+      "pronouns": "she/her",
+      "met": 3
     },
     "piotr": {
       "id": "piotr",
@@ -448,7 +478,10 @@
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
-      }
+      },
+      "gender": "man",
+      "pronouns": "he/him",
+      "met": 5
     }
   },
   "placeMemory": {
@@ -475,13 +508,19 @@
           "name": "Terrace Three East",
           "day": 1,
           "visited": true,
-          "note": "Root system confirmed unified — hum travels south-southeast along shared roots, depth exceeds terrace foundation. Aevi n"
+          "note": "Root system confirmed unified — hum travels south-southeast along shared roots, depth exceeds terrace foundation. Aevi n",
+          "parentId": "millbrook"
         }
       },
       "vectorsKnown": [
         "violence_peace",
         "concrete_abstract"
-      ]
+      ],
+      "lastEntered": {
+        "slug": "terrace-three-east",
+        "name": "Terrace Three East",
+        "day": 1
+      }
     }
   },
   "worldState": {
@@ -489,11 +528,15 @@
     "lastTickDay": 1,
     "eventStages": {
       "water_crisis": {
-        "stage": 1,
-        "sinceDay": 1
+        "stage": 2,
+        "sinceDay": 13
       }
     },
-    "spectrumDrift": {},
+    "spectrumDrift": {
+      "death_life": -0.1,
+      "violence_peace": -0.1,
+      "falsehood_truth": -0.05
+    },
     "news": [
       {
         "day": 1,
@@ -514,10 +557,77 @@
       {
         "day": 1,
         "text": "Word reaches you: The Harmonic Heights gateline warden agreed to testify at Millbrook's Thursday elder meeting about six-count channel light witnessed three springs ago — placing the conduit pulse at the Heights years  ("
+      },
+      {
+        "day": 1,
+        "worldDay": 77,
+        "text": "The Water Crisis stands at First Sickness across the valley: Upstream fisher families fall ill. Boiling water becomes universal. Harmonic and Radiant leaders trade public accusations.",
+        "tier": "event",
+        "section": "world"
+      },
+      {
+        "day": 1,
+        "worldDay": 73,
+        "text": "This reaches your area — The buried water readings are now in Silas Weir's hands—proof that pole-pull is the true cause of the crisis. The convene vote is three days away. Calvar can present; the method of retrieval will be c (near gen-whistling-woman-post)",
+        "tier": "event",
+        "section": "elsewhere",
+        "impactsLocal": true
+      },
+      {
+        "day": 1,
+        "worldDay": 67,
+        "text": "This reaches your area — urgent encrypted message arrived at Whistling Woman via direct slate relay—not chain broadcast (near gen-whistling-woman-post)",
+        "tier": "event",
+        "section": "elsewhere",
+        "impactsLocal": true
+      },
+      {
+        "day": 1,
+        "worldDay": 74,
+        "text": "This reaches your area — The universal shrine at the Made Gate stands complete—proof that balance can be held by refusing to mark it as belonging to any single tradition (near gen-whistling-woman-post)",
+        "tier": "event",
+        "section": "elsewhere",
+        "impactsLocal": true
+      },
+      {
+        "day": 1,
+        "worldDay": 74,
+        "text": "This reaches your area — The Made Gate shrine now carries a Named Exclusion threshold—set by Silas Weir and Maren Ossitide together, marking the cardinal approach points. The shrine forecloses those who come with intent to cl (near gen-whistling-woman-post)",
+        "tier": "event",
+        "section": "elsewhere",
+        "impactsLocal": true
+      },
+      {
+        "day": 1,
+        "worldDay": 74,
+        "text": "This reaches your area — The Hub committee's encrypted message arrives—north gate ward failing, Grael absent, convene votes tomorrow, moorland north moves wrong (near gen-whistling-woman-post)",
+        "tier": "event",
+        "section": "elsewhere",
+        "impactsLocal": true
+      },
+      {
+        "day": 1,
+        "worldDay": 77,
+        "text": "Across the valley, What Wakes Beneath moved forward to Stirring: The substrate that runs the crafts is flickering in more than one place at once; something under everything is coming back online.",
+        "tier": "event",
+        "section": "world"
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-08T17:54:30.076Z"
+    "lastSharedReadAt": "2026-09-15T23:51:34.961Z",
+    "lastGenCount": 1871,
+    "newsSpread": {},
+    "arcStages": {
+      "arc_what_wakes_beneath": {
+        "othersPush": 1
+      },
+      "the_second_manifestation": {
+        "othersPush": 1
+      }
+    },
+    "lastTickWorldDay": 77,
+    "lastCanonWorldDay": 77,
+    "pressureQueue": []
   },
   "bio": {
     "hometown": "a small village in Switzerland",
@@ -548,14 +658,15 @@
         "label": "Echo River Contamination",
         "kind": "mystery",
         "facts": [
-          "[d1] The Echo River runs with a gray-green iridescence on the surface, visible at Millbrook's dock on Day 1 morning. Fish catches are thin. Villagers draw from the well rather than the river without saying",
-          "[d1] Echo Sense reveals fish are actively avoiding the shallows near Millbrook's dock, clustering in deep cold water on the far bank. The riverbed beneath the dock is unnaturally flat and dense — not consi"
+          "[d1] The Echo River runs with a gray-green iridescence on the surface, visible at Millbrook's dock on Day 1 morning. Fish catches are thin. Villagers draw from the well rather than the river without saying…",
+          "[d1] Echo Sense reveals fish are actively avoiding the shallows near Millbrook's dock, clustering in deep cold water on the far bank. The riverbed beneath the dock is unnaturally flat and dense — not consi…"
         ],
         "links": [
           "millbrook"
         ],
         "createdDay": 1,
-        "updatedDay": 1
+        "updatedDay": 1,
+        "aliases": []
       },
       "mara-wells": {
         "id": "mara-wells",
@@ -563,7 +674,8 @@
         "kind": "person",
         "facts": [
           "[d1] Mara Wells manages civic order in Millbrook — she spotted Adelheid's Medic's Satchel and Harmonic stitching immediately and initiated contact, suggesting she was already looking for someone useful.",
-          "[d1] Mara granted Adelheid permission to observe and take cuttings from the uncatalogued east-terrace plants — she has been tracking them for two seasons and trusts Adelheid's herbalist eye enough to deleg"
+          "[d1] Mara granted Adelheid permission to observe and take cuttings from the uncatalogued east-terrace plants — she has been tracking them for two seasons and trusts Adelheid's herbalist eye enough to deleg…",
+          "[d1] Millbrook civic manager"
         ],
         "links": [
           "millbrook",
@@ -572,21 +684,24 @@
           "maras-errand"
         ],
         "createdDay": 1,
-        "updatedDay": 1
+        "updatedDay": 1,
+        "aliases": [],
+        "entityId": "mara-wells"
       },
       "valley-plants": {
         "id": "valley-plants",
         "label": "Valley Flora — Post-Transition",
         "kind": "lore",
         "facts": [
-          "[d1] Mara Wells notes that plants on the lower terraces around Millbrook have changed since the Transition — some have no name in any catalog. Either they evolved, or they were always here unrecorded. Pote"
+          "[d1] Mara Wells notes that plants on the lower terraces around Millbrook have changed since the Transition — some have no name in any catalog. Either they evolved, or they were always here unrecorded. Pote…"
         ],
         "links": [
           "millbrook",
           "mara-wells"
         ],
         "createdDay": 1,
-        "updatedDay": 1
+        "updatedDay": 1,
+        "aliases": []
       },
       "uncatalogued-terrace-plants": {
         "id": "uncatalogued-terrace-plants",
@@ -595,10 +710,10 @@
         "facts": [
           "[d1] Plants have been growing on Millbrook's east lower terrace for at least two seasons that appear in no catalog before the Transition. Mara Wells has been watching them and considers them significant — ",
           "[d1] First direct observation on Terrace Three east: silver-undersided leaves, stems branching in paired nodes with unusual regularity — pattern feels almost systematic. Spreads outside the terrace layout.",
-          "[d1] On first direct contact, a silver-stemmed plant at the east edge of Terrace Three transmitted a faint internal hum through its stem — not wind or surface vibration. The branching pattern (exact paired",
-          "[d1] Aevi responded to the silver-stemmed plants with a low resonant hum, motes pulling bright and close above the leaves — as if the plants and the companion intelligence are exchanging something. Piotr w",
-          "[d1] Echo Sense (conserved, rank 1): roots are unified across the entire east-edge growth — one system, not many plants. They descend past the terrace's cut-stone foundation. The internal hum travels south",
-          "[d1] The plant registered the cutting with a momentary hum-spike at the moment of separation — the hum did not die with the severed stem, it was absorbed back into the root system. The cut sap is pale, vis"
+          "[d1] On first direct contact, a silver-stemmed plant at the east edge of Terrace Three transmitted a faint internal hum through its stem — not wind or surface vibration. The branching pattern (exact paired…",
+          "[d1] Aevi responded to the silver-stemmed plants with a low resonant hum, motes pulling bright and close above the leaves — as if the plants and the companion intelligence are exchanging something. Piotr w…",
+          "[d1] Echo Sense (conserved, rank 1): roots are unified across the entire east-edge growth — one system, not many plants. They descend past the terrace's cut-stone foundation. The internal hum travels south…",
+          "[d1] The plant registered the cutting with a momentary hum-spike at the moment of separation — the hum did not die with the severed stem, it was absorbed back into the root system. The cut sap is pale, vis…"
         ],
         "links": [
           "millbrook",
@@ -608,14 +723,16 @@
           "echo-river-contamination"
         ],
         "createdDay": 1,
-        "updatedDay": 1
+        "updatedDay": 1,
+        "aliases": []
       },
       "piotr": {
         "id": "piotr",
         "label": "Piotr",
         "kind": "person",
         "facts": [
-          "[d1] Compact farmer, Terrace Three east. Was expecting Mara's bundle. Sparing with words. Trusted enough by Mara to receive a private plant note."
+          "[d1] Compact farmer, Terrace Three east. Was expecting Mara's bundle. Sparing with words. Trusted enough by Mara to receive a private plant note.",
+          "[d1] Terrace farmer, Terrace Three east"
         ],
         "links": [
           "mara-wells",
@@ -624,7 +741,35 @@
           "maras-errand"
         ],
         "createdDay": 1,
-        "updatedDay": 1
+        "updatedDay": 1,
+        "aliases": [],
+        "entityId": "piotr"
+      },
+      "millbrook": {
+        "id": "millbrook",
+        "label": "Millbrook",
+        "kind": "place",
+        "facts": [
+          "[d?] you have walked here"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": null,
+        "entityId": "millbrook",
+        "updatedDay": null
+      },
+      "companion-aevi": {
+        "id": "companion-aevi",
+        "label": "Aevi",
+        "kind": "person",
+        "facts": [
+          "[d?] Curious Constellation — A faint constellation of teal motes drifting near the shoulder — condensing when interested, dimming when wary."
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": null,
+        "entityId": "companion-aevi",
+        "updatedDay": null
       }
     }
   },
@@ -671,5 +816,220 @@
   "precursorAccess": [],
   "backfillVersion": 1,
   "sharedSceneId": null,
-  "opLossPending": false
+  "opLossPending": false,
+  "syncedAt": 0,
+  "itemReclaimVersion": 1,
+  "nameRepairVersion": 1,
+  "tendencies": {
+    "generous": 5.207081475831908,
+    "social": 4.421644969414122,
+    "cerebral": 23.892111568705563,
+    "cautious": 24.059710289707812,
+    "strategic": 21.48745317430819,
+    "carousing": 1.9358931561657498,
+    "risky": 0.9703725093562657
+  },
+  "aptitudes": [
+    "strategist",
+    "scholar"
+  ],
+  "actionCount": 39,
+  "bondLogFrom": null,
+  "teachers": {},
+  "regionsKnown": {},
+  "company": [],
+  "forkChoices": {},
+  "nativeGrantsVersion": 2,
+  "livingCurrentAccess": [],
+  "wildCurrentAccess": [],
+  "braidDiscount": 0,
+  "customEncounters": {},
+  "companionNames": {},
+  "domains": {
+    "primary": "mason",
+    "secondary": "threnodist",
+    "tertiary": "numinous",
+    "inferred": true
+  },
+  "personalArc": {
+    "id": "the-root-remembers",
+    "name": "The Root Remembers",
+    "arcId": "adelheid_personal_arc",
+    "boundToCharacter": "Adelheid",
+    "boundToPlayer": "player-54seyk",
+    "region": "valley",
+    "tier": "personal",
+    "premise": "A Swiss herbalist transplanted to an alien soil carries a silver-stemmed cutting from her village — the last living thread to everything she understood — and must decide whether her knowledge is a heritage to preserve or a seed to break open and replant entirely, in ground that does not know her name.",
+    "stakes": "To remain the keeper of a dead village's remedies, or to become something that village never imagined: a healer fluent in two earths, whose hands hold the old world and the new one at once — or to lose both trying.",
+    "legendNpc": {
+      "name": "The Silver-Stemmed Cutting",
+      "role": "the last living root of her Swiss village, wrapped in linen and slowly dying, the mute accusation of every mile she was "
+    },
+    "legend": "the-silver-stemmed-cutting",
+    "stages": [
+      {
+        "id": "s1",
+        "objective": "the cutting that will not root — she has tried three times; the Korean soil rejects it, or she does not yet know how to ask; Mara Wells has seen this particular grief before, in other hands, and says so plainly",
+        "anchors": [
+          {
+            "kind": "npc",
+            "id": "mara-wells",
+            "name": "Mara Wells"
+          },
+          {
+            "kind": "item",
+            "id": "Silver-Stemmed Cutting (linen-wrapped)",
+            "name": "Silver-Stemmed Cutting (linen-wrapped)"
+          },
+          {
+            "kind": "location",
+            "id": "millbrook",
+            "name": "Millbrook"
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "objective": "the remedy that should not work — she compounds a draught from Korean plants she only half-understands, borrowing Piotr's hard-won field notes, and it heals something her Swiss formulary swore was untreatable; the success feels like a betrayal, and a door",
+        "anchors": [
+          {
+            "kind": "npc",
+            "id": "piotr",
+            "name": "Piotr"
+          },
+          {
+            "kind": "item",
+            "id": "Healing Draught",
+            "name": "Healing Draught"
+          },
+          {
+            "kind": "item",
+            "id": "Medic's Satchel",
+            "name": "Medic's Satchel"
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "objective": "the linen unwrapped — the cutting is failing; she must choose what she owes it, what she owes Millbrook, and what she owes the healer she is becoming; the answer is in what she does with the roots when she finally opens the wrapping and faces what is left",
+        "anchors": [
+          {
+            "kind": "item",
+            "id": "Silver-Stemmed Cutting (linen-wrapped)",
+            "name": "Silver-Stemmed Cutting (linen-wrapped)"
+          },
+          {
+            "kind": "location",
+            "id": "millbrook",
+            "name": "Millbrook"
+          },
+          {
+            "kind": "npc",
+            "id": "mara-wells",
+            "name": "Mara Wells"
+          }
+        ]
+      }
+    ],
+    "routes": {
+      "preserve": "[object Object]",
+      "break": "[object Object]",
+      "braid": "[object Object]"
+    },
+    "outcomes": [
+      {
+        "id": "preserve",
+        "name": "Preserve",
+        "effects": []
+      },
+      {
+        "id": "break",
+        "name": "Break",
+        "effects": []
+      },
+      {
+        "id": "braid",
+        "name": "Braid",
+        "effects": []
+      }
+    ],
+    "structured": true,
+    "source": "personal",
+    "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
+  },
+  "peopleDisposition": {
+    "mason": 5,
+    "threnodist": 2,
+    "numinous": 1,
+    "figurist": -1,
+    "stillhold": 0.5,
+    "verist": 0.3
+  },
+  "standingLedger": [
+    {
+      "at": null,
+      "kind": "seed",
+      "entries": [
+        {
+          "people": "mason",
+          "delta": 4,
+          "why": "born to this people"
+        },
+        {
+          "people": "threnodist",
+          "delta": 2,
+          "why": "kin to this people"
+        },
+        {
+          "people": "numinous",
+          "delta": 1,
+          "why": "a hand in this people's craft"
+        },
+        {
+          "people": "figurist",
+          "delta": -1,
+          "why": "the far side of the circle from your own"
+        }
+      ],
+      "text": "Your birth and training are known: mason +4, threnodist +2, numinous +1, figurist -1."
+    }
+  ],
+  "_standingHistoryCredit": {
+    "mason": 1,
+    "stillhold": 0.5,
+    "verist": 0.3
+  },
+  "schools": {
+    "mason": "mas_plain",
+    "threnodist": "thr_plain",
+    "numinous": "num_unbodied"
+  },
+  "locationAliases": {
+    "gen-center": "the_crossing",
+    "gen-stillwater-s-trouble": "the_old_warden_post"
+  },
+  "ladderPaid": {
+    "reason": 4,
+    "rapport": 3,
+    "craft": 4
+  },
+  "companyCapacity": 3,
+  "equipmentBonusCap": 4,
+  "holdings": [],
+  "bands": [],
+  "_silasGrantsRevoked": true,
+  "reconcileVersion": 63,
+  "updatedAt": 1789516322919,
+  "rev": 5,
+  "generated": {
+    "schemaVersion": 1,
+    "npc": {},
+    "location": {},
+    "arc": {},
+    "creature": {},
+    "item": {}
+  },
+  "_lastProjectDay": 1,
+  "featureOffers": [],
+  "_pinsInitialized": true
 }

@@ -2,71 +2,78 @@
  "schemaVersion": 1,
  "id": "power_bands",
  "kind": "rules",
- "note": "⛔ SNG-590 / SNG-260 §A — ONE NUMERIC BAND, TWO VOCABULARIES. The player side and the opponent side name the same rung differently, and the engine reasons in the NUMBER. Authored 2026-09-14 because the table was ratified as prose in a po file and nothing in content/ carried it, so `tierForArc` was standing in with three hardcoded cuts — legendary from level 7, in a game whose levels run past 60.",
+ "note": "⛔ SNG-590 — ONE LADDER, SIX RUNGS, SHARED BY PLAYERS AND EVERYONE ELSE. Erik 2026-09-14: 'PCs are those tiers as well — they don't have to have master and such', and 'heroic IS regional; heroic tier is better'. ⛑ THAT DISSOLVES THE WHOLE RECONCILIATION SNG-260 §A WAS FOR: with one vocabulary there are no two label sets to hold against each other, and `tierRank`'s collision — `heroic` and `regional` sharing rank 2 — turns out to have been the ladder telling the truth. **They shared a rung because they ARE one.**",
  "bands": [
   {
    "band": 0,
+   "tier": "riffraff",
    "levels": [
     1,
-    10
+    4
    ],
-   "player": "novice",
-   "opponent": "riffraff",
-   "of": "the world as it is before anyone has heard of you"
+   "of": "the world before anyone has heard of you — a child, a stall-holder, somebody's apprentice"
   },
   {
    "band": 1,
+   "tier": "notable",
    "levels": [
-    11,
-    25
+    5,
+    11
    ],
-   "player": "adept",
-   "opponent": "notable",
    "of": "known in one place, by the people who work there"
   },
   {
    "band": 2,
+   "tier": "regional",
    "levels": [
-    26,
-    45
+    12,
+    24
    ],
-   "player": "master",
-   "opponent": "regional",
    "of": "a name a whole reach would recognise"
   },
   {
    "band": 3,
+   "tier": "heroic",
    "levels": [
-    46,
-    70
+    25,
+    39
    ],
-   "player": "heroic",
-   "opponent": "epic",
-   "of": "spoken of past the borders of the country that made them"
+   "of": "the first rung anyone fights on purpose"
   },
   {
    "band": 4,
+   "tier": "epic",
    "levels": [
-    71,
+    40,
+    59
+   ],
+   "of": "spoken of past the borders of the country that made them"
+  },
+  {
+   "band": 5,
+   "tier": "legendary",
+   "levels": [
+    60,
+    84
+   ],
+   "of": "they have lasted, and been counted"
+  },
+  {
+   "band": 6,
+   "tier": "mythic",
+   "levels": [
+    85,
     100
    ],
-   "player": "legendary",
-   "opponent": "legendary",
-   "of": "they have lasted, and been counted"
+   "of": "argued about rather than remembered — the Precursors, and what is left of them"
   }
  ],
- "_bandsRatified": "⛑ THE FIVE BANDS AND BOTH LABEL SETS ARE ERIK'S, ratified in SNG-260 §B — 'Bands stand as drafted'. ⚠️ `legendary` is deliberately shared at the top: at that rung the two sides stop being different kinds of thing.",
- "tierToBand": {
-  "riffraff": 0,
-  "notable": 1,
-  "regional": 2,
-  "heroic": 3,
-  "epic": 3,
-  "legendary": 4,
-  "mythic": 4
- },
- "_tierToBand": "⛔ THE SEVEN AUTHORED TIERS DO NOT MAP ONE-TO-ONE ONTO FIVE BANDS, AND TWO OF THEM SHARE. `heroic` and `epic` both sit at band 3, and `legendary` and `mythic` both at band 4 — the band is the COARSE layer the engine matches on, the tier stays the fine one the roster is authored in. ⚠️ THIS REPLACES `tierRank`, WHERE `heroic` AND `regional` SHARED RANK 2 — one word from each vocabulary flattened into a single ladder, so a master/regional threat and a heroic character compared wrong. ⛑ AND IT GIVES `mythic` A HOME: it appears in neither of Erik's label sets and sits on 5 authored NPCs, so it bands with `legendary` rather than being renamed out from under them.",
- "_theConflictErikMustSettle": "⛔ THE RATIFIED LABEL TABLE AND THE LIVE `npcStanding.tierFloor` DISAGREE BY ROUGHLY ONE BAND, AND I HAVE NOT SILENTLY PICKED. Measured 2026-09-14:\n    tier floors (live, 146 NPCs depend on them): riffraff 1 · notable 5 · regional 12 · heroic 25 · epic 40 · legendary 60 · mythic 85\n    where each floor lands in the ratified ranges: riffraff→0 · notable→0 · regional→1 · heroic→1 · epic→2 · legendary→3 · mythic→4\n⚠️ SO BY FLOOR, `legendary` OPENS AT 60 AND IS BAND 3; THE LABEL TABLE CALLS BAND 4 LEGENDARY. Every rung from `notable` up sits one band lower than its name suggests. ⛑ `tierToBand` above follows THE LABEL TABLE, because Erik ratified it and because the floors were set for a different purpose — they answer 'what level is this person', not 'who should meet whom'. ⬜ ERIK RULES WHICH MOVES. If the labels are right, `tierFloor` wants raising: heroic ~46, epic ~55, legendary ~71, mythic ~85. If the floors are right, band 3's opponent name is `legendary` and band 4 is `mythic`. **The two cannot both stand as written.**",
- "_whereHeroicStarts": "⬜ OPEN, ERIK'S, AND THE FILE NEEDS A NUMBER. SNG-260 flagged it: 'Silas L29 just becoming heroic ⇒ maybe heroic starts lower (~L29–35); Erik to place.' ⚠️ As drafted, band 3 opens at 46 and Silas at 33 is band 2 — `master`, not heroic. His own read in play was that he was just becoming heroic at 29. ⛑ If that stands, band 2 ends around 28 and band 3 runs 29–70, which compresses `master` hard and is worth him seeing before it is chosen.",
- "_whatThisUnblocks": "⛑ CCode's SNG-590 list, all of which reads this one table: the `powerBand` layer under both vocabularies, `tierRank` rebuilt on band numbers, band-gating the GM-figure door, and folding `tierForArc` in so a level-7 character stops meeting the same figures as a level-61 one."
+ "_theMergedRung": "⛔ `regional` IS RETIRED INTO `heroic`, AND HEROIC KEEPS ITS OWN FLOOR OF 25 — nobody moves. ⚠️ I first set it to 12, reasoning that 25 would strand levels 6–24; THAT WAS WRONG and the suite caught it in one run. A rung's top is defined by the NEXT rung's floor, so retiring `regional` simply widens `notable` to 5–24. ⛑ The merged rung holds 70 people and is the fattest on the ladder, which is right for the rung most of a campaign is spent at.",
+ "_mythicIsItsOwnBand": "⛑ ERIK, RULED: 'must add mythic'. It sits on 5 authored NPCs, appeared in neither of the old label sets, and was the loose end in every previous draft. One rung per tier means it simply has a home — no rename, no sharing, nothing banded under a word that was not meant for it.",
+ "_oneVocabulary": "⚠️ THERE IS NO SEPARATE PLAYER LADDER. novice/adept/master/heroic/legendary is retired: a character and an opponent are described by the same six words, and a level-30 player and a level-30 foe are both `heroic`. ⛑ The engine reasons in `band`; the tier name is what a person is called.",
+ "_whyMoreRungsIsNotAProblem": "⛑ ERIK ASKED. MEASURED BEFORE ANSWERING: every rung is populated — riffraff 6 · notable 15 · heroic 70 · epic 31 · legendary 18 · mythic 5 — so no band is starved and none has to borrow. ⚠️ AND MORE RUNGS MAKES THE ONE FILTER THAT MATTERS SHARPER: the '+1 glimpse of the legendary' is a one-rung reach, and a one-rung reach on a six-rung ladder is a real constraint where on a four-rung one it was nearly the whole roster. ⛔ THE COST IS A LONGER LIST IN A UI AND NOTHING ELSE. The bands are not evenly wide on purpose — 1–4 then 5–11 then 12–39 — because early levels pass quickly and late ones do not.",
+ "_stillErikS": "⬜ WHERE `heroic` STARTS. The merged rung opens at 12 because that is the only value that leaves no gap — but Erik's own read in play was that Silas was 'just becoming heroic' at 29, and under this table he has been heroic since 12. ⚠️ If 29 is the feel, `notable` has to stretch to 28 and the ladder re-spaces below it. **The file needs his number.**",
+ "_whatThisUnblocks": "⛑ CCode's SNG-590 list, all of which reads this table: `tierForArc` folding in so a level-7 character stops meeting the same figures as a level-61 one; `tierRank` rebuilt on `band`; and band-gating the GM-figure door to the character's band plus at most one above.",
+ "_theRegionalQuestion": "⛔ ERIK RULED THE NAMES: 'heroic IS regional; heroic tier is better'. I MERGED THEM AND BACKED IT OUT, because I did not measure the word first and it is not only an NPC tier. ⚠️ MEASURED AFTER THE FACT:  appears in 15 engine files, 13 test files, 2 scripts and 6 content rules — and in  and  IT MEANS GEOGRAPHIC SCALE, not power: a keeper whose reach brings a holding to thriving, an arc whose scope is a region. ⛑ SO THE COLLISION CCODE FOUND IS BIGGER THAN HE FOUND IT:  is not one word doing two jobs on one ladder, it is one word doing jobs on FOUR — threat tier, keeper reach, arc scale, encounter weight. ⬜ RETIRING IT FROM THE THREAT LADDER IS RIGHT AND IS A CROSS-CUTTING CHANGE, NOT A RENAME. Seven rungs stand here with  in place until Erik and CCode decide whether the threat ladder gives the word up or the other three do.",
+ "_myError_20260914": "⚠️ ON THE RECORD: I also set the merged floor to 12, reasoning that keeping 25 would strand levels 6–24. That was WRONG — a rung's top is defined by the next rung's floor, so retiring a rung simply widens the one below it. The suite caught it in one run, after it had already moved 70 people down thirteen levels in my working tree. ⛔ BOTH MISTAKES IN THIS TICKET WERE THE SAME MISTAKE: acting on a derivation I had not measured."
 }

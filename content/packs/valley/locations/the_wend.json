@@ -68,5 +68,17 @@
  "worldPosNote": "A place people pass through or live in — pulled inward of its Reach's pole. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
  "tier": "settlement",
  "parentId": "the_churn_edge",
- "appearance": "A road-people's camp of curved wagons and low awnings arranged in a loose curve, fires between. Everything rounded and worn smooth. Tracks curve away rather than running straight."
+ "appearance": "A road-people's camp of curved wagons and low awnings arranged in a loose curve, fires between. Everything rounded and worn smooth. Tracks curve away rather than running straight.",
+ "carriage": {
+  "moves": "crewed",
+  "circuit": [
+   "the_wend",
+   "the_churn_edge",
+   "greenmarch",
+   "tumbledown_market"
+  ],
+  "daysPerCircuit": 60,
+  "why": "A road-people's camp that curves rather than runs — the Wend's round is short, frequent, and comes back, which is why the markets it touches keep a pitch open for it."
+ },
+ "_carriage_20260914": "⛔ SNG-591, Erik 2026-09-14: 'the Horizon-Walkers have a settlement called the Long Span… it moves. That would be a good use of the new carriage capability.' ⛑ THREE PLACES MOVE, NOT ONE — the Long Span, the Unlanded and the Wend all say so in their own prose and all three sat still. ⚠️ A LOCATION HAS NO SECOND GRAPH TO MOVE ALONG AND DOES NOT NEED ONE: `connections` already names where each goes, and all 138 locations carry `worldPos`, so `voyagePosition`'s arithmetic works on a place today without a new field. ⛔ WHAT IS NEW IS THE SHAPE: a holding makes a VOYAGE from A to B and arrives; a settlement keeps a CIRCUIT and comes round. `daysPerCircuit` divided across the legs gives the leg it is on for any world day, which is the same lerp `voyagePosition` already does. ⬜ NOTHING READS `location.carriage` YET — specced for CCode, and dead until it is wired."
 }

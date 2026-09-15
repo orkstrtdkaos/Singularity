@@ -67,5 +67,19 @@
  "worldPosNote": "A place people pass through or live in — pulled inward of its Reach's pole. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
  "tier": "region",
  "parentId": null,
- "appearance": "A moving settlement of tents and awnings pitched in loose rows along a broad track, with carts and pack animals drawn up between them. Nothing permanent. Ruts in the ground behind it, open country ahead."
+ "appearance": "A moving settlement of tents and awnings pitched in loose rows along a broad track, with carts and pack animals drawn up between them. Nothing permanent. Ruts in the ground behind it, open country ahead.",
+ "carriage": {
+  "moves": "crewed",
+  "circuit": [
+   "the_long_span",
+   "the_wayhouse",
+   "the_unlanded",
+   "longshore",
+   "waystone",
+   "the_measured_engine"
+  ],
+  "daysPerCircuit": 120,
+  "why": "The Horizon-Walkers strike camp and move it themselves — no apparatus, no beast, no drift. The round is 414 miles and takes a season and a half at the pace of people who are not hurrying, because arriving is not what the walk is for."
+ },
+ "_carriage_20260914": "⛔ SNG-591, Erik 2026-09-14: 'the Horizon-Walkers have a settlement called the Long Span… it moves. That would be a good use of the new carriage capability.' ⛑ THREE PLACES MOVE, NOT ONE — the Long Span, the Unlanded and the Wend all say so in their own prose and all three sat still. ⚠️ A LOCATION HAS NO SECOND GRAPH TO MOVE ALONG AND DOES NOT NEED ONE: `connections` already names where each goes, and all 138 locations carry `worldPos`, so `voyagePosition`'s arithmetic works on a place today without a new field. ⛔ WHAT IS NEW IS THE SHAPE: a holding makes a VOYAGE from A to B and arrives; a settlement keeps a CIRCUIT and comes round. `daysPerCircuit` divided across the legs gives the leg it is on for any world day, which is the same lerp `voyagePosition` already does. ⬜ NOTHING READS `location.carriage` YET — specced for CCode, and dead until it is wired."
 }

@@ -264,11 +264,142 @@
     "At the Hub crossing in early spring dawn, Loki speaks an honest promise to the Null Stone, and the sealed seam opens—revealing a passage descending into cold darkness and the sound of deep water."
   ],
   "currentLocationId": "the_crossing",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "the_crossing",
+    "turns": [
+      {
+        "player": null,
+        "summary": "Loki descends through the Null Stone's opening into a vast sealed chamber carved deep beneath the Hub crossing. A swift river runs through its center, feeding from upstream and disappearing into a tunnel beyond. Nine sealed apertures line the chamber walls. The basin waits empty. Cy reads the architecture and names it: not maintenance, but *waiting* — something deliberately sealed until a condition is met.",
+        "narration": "The passage beyond the Null Stone descends steeply into cold dark, and the sound of water grows louder with each step downward. Your lamp — the one Cy carries — catches the glint of stone worn smooth by centuries of flow. The air tastes metallic. The steps are cut deliberately, old work, and they do not slip.\n\nAt the bottom, the passage opens into a vast chamber. The water fills most of it — a river running through solid stone, moving fast from some upstream source and vanishing into a tunnel on the far wall. The chamber itself is circular, carved with precision that speaks of Precursor hand and intention. Above the waterline, carved into the stone at regular intervals, are nine sealed apertures — doors, or vents, or something else entirely. They are still closed. At the chamber's near edge, a platform of worked stone juts into the air, level and dry, with a single carved basin set into its surface. The basin is empty. The water below moves dark and swift, and you can hear it breathing like a living thing.\n\nCy pauses at the platform's edge, lamp raised. Its lens irises twice — a sound like flint-strike. When it speaks, its voice carries an odd weight in the enclosed space. \"The current assignment,\" it says, \"this chamber is not in any record I hold. The water's temperature suggests upstream source is significant distance. The apertures were sealed deliberately and recently enough that the seal-marks have not yet begun to fail. The basin has never held what it was made to hold.\" Cy's many legs click against stone. \"This is not Precursor maintenance work. This is Precursor *waiting* work. Someone built this to hold something back until something specific happened.\""
+      }
+    ],
+    "lastTurn": {
+      "narration": "The passage beyond the Null Stone descends steeply into cold dark, and the sound of water grows louder with each step downward. Your lamp — the one Cy carries — catches the glint of stone worn smooth by centuries of flow. The air tastes metallic. The steps are cut deliberately, old work, and they do not slip.\n\nAt the bottom, the passage opens into a vast chamber. The water fills most of it — a river running through solid stone, moving fast from some upstream source and vanishing into a tunnel on the far wall. The chamber itself is circular, carved with precision that speaks of Precursor hand and intention. Above the waterline, carved into the stone at regular intervals, are nine sealed apertures — doors, or vents, or something else entirely. They are still closed. At the chamber's near edge, a platform of worked stone juts into the air, level and dry, with a single carved basin set into its surface. The basin is empty. The water below moves dark and swift, and you can hear it breathing like a living thing.\n\nCy pauses at the platform's edge, lamp raised. Its lens irises twice — a sound like flint-strike. When it speaks, its voice carries an odd weight in the enclosed space. \"The current assignment,\" it says, \"this chamber is not in any record I hold. The water's temperature suggests upstream source is significant distance. The apertures were sealed deliberately and recently enough that the seal-marks have not yet begun to fail. The basin has never held what it was made to hold.\" Cy's many legs click against stone. \"This is not Precursor maintenance work. This is Precursor *waiting* work. Someone built this to hold something back until something specific happened.\"",
+      "sceneSummary": "Loki descends through the Null Stone's opening into a vast sealed chamber carved deep beneath the Hub crossing. A swift river runs through its center, feeding from upstream and disappearing into a tunnel beyond. Nine sealed apertures line the chamber walls. The basin waits empty. Cy reads the architecture and names it: not maintenance, but *waiting* — something deliberately sealed until a condition is met.",
+      "scene": {
+        "setting": "A vast circular chamber carved deep beneath the Hub crossing, with a swift river running through its center. The platform where Loki stands is dry stone, worked smooth. Nine sealed apertures mark the walls above the waterline. Morning light does not reach here — Cy's lamp is the only illumination, catching the river's dark flow.",
+        "npcsPresent": [
+          {
+            "name": "Cy",
+            "state": "Standing at the platform edge with lamp raised, lens irising as it reads the architecture. Speaks with unusual weight and precision about the chamber's construction."
+          }
+        ],
+        "objects": [
+          "The empty carved basin, set into the platform's surface",
+          "Nine sealed apertures arranged regularly around the chamber walls",
+          "The swift dark river, moving with audible force through the chamber"
+        ],
+        "threads": [
+          "What purpose does the empty basin serve, and what was it made to hold?",
+          "Why are the nine apertures sealed, and what do they conceal?",
+          "Where does the upstream water originate, and what is feeding this river?",
+          "What condition was this chamber built to wait for — and has it now been met?"
+        ]
+      },
+      "choices": [
+        {
+          "label": "Ask Cy to examine the sealed apertures more closely — it may recognize the seal-marks or the mechanism.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Approach the basin and examine it closely — run your hand along its interior, check for residue, markings, or a mechanism that might reveal what it held.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "see_the_made_thing",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Follow the river's current downstream — trace where it emerges and where the tunnel leads. The source of this water is the deeper question.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {},
+          "difficulty": "hard",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "travel",
+            "careful"
+          ],
+          "abilityId": "wayfinding",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Examine the chamber's walls and floor for any marks, writing, or pattern that might explain this place's purpose — read the stone's own history.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "A vast circular chamber carved deep beneath the Hub crossing, with a swift river running through its center. The platform where Loki stands is dry stone, worked smooth. Nine sealed apertures mark the walls above the waterline. Morning light does not reach here — Cy's lamp is the only illumination, catching the river's dark flow.",
+      "npcsPresent": [
+        {
+          "name": "Cy",
+          "state": "Standing at the platform edge with lamp raised, lens irising as it reads the architecture. Speaks with unusual weight an"
+        }
+      ],
+      "objects": [
+        "The empty carved basin, set into the platform's surface",
+        "Nine sealed apertures arranged regularly around the chamber walls",
+        "The swift dark river, moving with audible force through the chamber"
+      ],
+      "threads": [
+        "What purpose does the empty basin serve, and what was it made to hold?",
+        "Why are the nine apertures sealed, and what do they conceal?",
+        "Where does the upstream water originate, and what is feeding this river?",
+        "What condition was this chamber built to wait for — and has it now been met?"
+      ]
+    },
+    "beats": 1,
+    "subPlace": {
+      "slug": "the-hub-crossing",
+      "name": "The Hub Crossing",
+      "day": 3
+    }
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 4,
-    "hour": 10,
+    "hour": 11,
     "realAnchor": null
   },
   "companions": [
@@ -1281,11 +1412,11 @@
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 1862,
-    "lastSharedReadAt": "2026-09-15T14:47:59.164Z",
+    "lastGenCount": 1870,
+    "lastSharedReadAt": "2026-09-15T22:36:13.353Z",
     "lastTickWorldDay": 77,
     "lastCanonWorldDay": 77,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Veln Ashpause's arrival at the exact moment of the seam's discovery—they have come to witness something they foreknew, and their presence…",
@@ -1383,7 +1514,7 @@
         "kind": "shortage",
         "premise": "The shallow wells that sustain the scattered settlements are dropping faster each season than anyone has yet admitted aloud.",
         "cause": "The Palelands' sparse, chalky soil has always demanded more water to work than it naturally holds, and the settlements were founded at the margins of what the…",
-        "stage": 51,
+        "stage": 52,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1396,7 +1527,7 @@
         "kind": "rot",
         "premise": "A slow fungal bloom is working through the oldest grain stores, and the steward responsible has been quietly discarding the worst sacks rather than reporting the loss.",
         "cause": "The valley's mild, damp winters make its granaries prone to moisture, and the current steward was appointed for loyalty rather than knowledge of grain-keeping.",
-        "stage": 51,
+        "stage": 52,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1421,7 +1552,7 @@
         "kind": "rot",
         "premise": "A key sequence in the primary record is being quietly re-threaded by someone who made an error years ago and cannot bear to have it discovered.",
         "cause": "Unspooling's knowledge is stored in physical cordage whose integrity depends entirely on the honesty of the hands that maintain it.",
-        "stage": 46,
+        "stage": 47,
         "seededAtCount": 758,
         "surfaced": true,
         "fate": "growing",
@@ -1458,7 +1589,7 @@
         "kind": "shortage",
         "premise": "Certain materials or substances needed for whatever work the Unmade does are being quietly stockpiled by one practitioner at the expense of communal supply, because she no longer trusts the…",
         "cause": "The Unmade is a place where things are taken apart, and grief for what is lost has no formal channel — it is expected to simply disperse, as everything else…",
-        "stage": 14,
+        "stage": 15,
         "seededAtCount": 1675,
         "surfaced": true,
         "fate": "growing",
@@ -1471,7 +1602,7 @@
         "kind": "rot",
         "premise": "A run of subtle flaws has begun appearing in work passing through one bench — small enough to escape immediate notice, deep enough to fail later — and the cause is a senior apprentice who has been…",
         "cause": "The two workshops already contesting the shared tool have each told their apprentices, in different words, that the other side cannot be trusted — and one…",
-        "stage": 14,
+        "stage": 15,
         "seededAtCount": 1675,
         "surfaced": true,
         "fate": "growing",
@@ -1484,7 +1615,7 @@
         "kind": "shortage",
         "premise": "A foundational material used in the Making's core work has quietly been substituted with an inferior source for several production cycles, and nothing built from it has yet been tested under real…",
         "cause": "The two workshops already deadlocked over the shared tool have each independently begun sourcing their own materials rather than drawing from the common…",
-        "stage": 7,
+        "stage": 8,
         "seededAtCount": 1826,
         "surfaced": true,
         "fate": "growing",
@@ -7546,8 +7677,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789511438667,
-  "rev": 673,
+  "updatedAt": 1789511791563,
+  "rev": 676,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8435,7 +8566,7 @@
     "the_gearlands": 33,
     "umbral_depths": 54,
     "the_quickwood": 101,
-    "the_center": 34
+    "the_center": 35
   },
   "opLossPending": false,
   "sessions": [
@@ -8530,10 +8661,10 @@
     {
       "id": "sess-12",
       "startedAt": "2026-09-15T21:21:28.979Z",
-      "lastAt": "2026-09-15T22:30:22.766Z",
+      "lastAt": "2026-09-15T22:36:31.561Z",
       "startDay": 77,
       "endDay": 77,
-      "beats": 5
+      "beats": 6
     }
   ],
   "establishedFacts": [
@@ -8601,16 +8732,16 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 197,
-    "choices": 197,
-    "characterDeltas": 86,
-    "scene": 197,
+    "sceneSummary": 198,
+    "choices": 198,
+    "characterDeltas": 87,
+    "scene": 198,
     "placeUpdates": 22,
     "codexUpdates": 111,
     "timeOps": 167,
     "offer": 24,
     "generateRequest": 6,
-    "sceneEnded": 70,
+    "sceneEnded": 71,
     "npcUpdates": 160,
     "moveTo": 6,
     "gambitApt": 33,
@@ -8629,7 +8760,7 @@
     "discovery": 1,
     "intentsHeard": 1
   },
-  "_opTurns": 197,
+  "_opTurns": 198,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -9672,352 +9803,352 @@
   },
   "_promptRows": {
     "character": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "location": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "region": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "groundDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "lore": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "traditionMotiveDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "sheetsDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 18
     },
     "rules": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "recentTurns": {
-      "reached": 19,
+      "reached": 20,
       "produced": 18
     },
     "timeLabel": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "npcRegistryDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "mintedUnmetDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "npcSeedDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "traditionVocab": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "standingDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "recalledDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 1
     },
     "bearingsDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "caravansDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 0
     },
     "commandDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "presenceDetail": {
-      "reached": 19,
-      "produced": 12
+      "reached": 20,
+      "produced": 13
     },
     "worthHereDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "sceneState": {
-      "reached": 19,
+      "reached": 20,
       "produced": 18
     },
     "holdingsDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "debtsDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "questsDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "structuredQuestsDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "companionsDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "placeMemoryDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "agesMissingDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "newsDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "worldArcsDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "legendsPursuableDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 12
     },
     "wakesDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "reachableDeadDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "threatToPlayer": {
-      "reached": 19,
+      "reached": 20,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 0
     },
     "resolution": {
-      "reached": 19,
+      "reached": 20,
       "produced": 13
     },
     "playerInput": {
-      "reached": 19,
-      "produced": 6
+      "reached": 20,
+      "produced": 7
     },
     "exactWords": {
-      "reached": 19,
+      "reached": 20,
       "produced": 8
     },
     "travelDirective": {
-      "reached": 19,
+      "reached": 20,
       "produced": 0
     },
     "itemAdvance": {
-      "reached": 19,
+      "reached": 20,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 2
     },
     "encounterOfferDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 3
     },
     "fightFramingDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 0
     },
     "offerDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 1
     },
     "teacherOfferDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 5
     },
     "romanceGuidanceDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 0
     },
     "factsDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "evolvedItemsDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 19,
+      "reached": 20,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 0
     },
     "perilNote": {
-      "reached": 19,
+      "reached": 20,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 4
     },
     "masteryDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "bookkeepingRestate": {
-      "reached": 19,
+      "reached": 20,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "repairPanelDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "teacherDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "availableEncounters": {
-      "reached": 19,
-      "produced": 15
+      "reached": 20,
+      "produced": 16
     },
     "partyDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "registerDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "legendDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 0
     },
     "assignmentsDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 0
     },
     "latentArcsDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "seasonalDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "schoolsDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "sharedCanonDetail": {
-      "reached": 19,
+      "reached": 20,
       "produced": 0
     },
     "worldCountLabel": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "waygateDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "readAloudDetail": {
-      "reached": 19,
-      "produced": 19
+      "reached": 20,
+      "produced": 20
     },
     "scenePacingDetail": {
-      "reached": 19,
-      "produced": 11
+      "reached": 20,
+      "produced": 12
     }
   },
   "_opUnknown": {
-    "sceneSummary": 19
+    "sceneSummary": 20
   },
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T22:51:56.913Z",

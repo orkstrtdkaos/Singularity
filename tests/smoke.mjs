@@ -14998,7 +14998,11 @@ await (async () => {
     check("370: the gender repair list is not capped — a cap on a repair tool is a repair you cannot perform",
       start > 0 && !/npcRegistry\)\.slice\(0,\s*\d+\)/.test(block));
     check("370: …and the people with NO gender are listed first, because they are who the control is for",
-      /const unset = all\.filter\(n => !n\.gender && !n\.pronouns\)/.test(block) && /\[\.\.\.unset,/.test(block));
+      // ⛔ SNG-594: this pinned `!n.gender && !n.pronouns`, and "unknown" is a TRUTHY string — so Veln
+      // Ashpause, carrying `gender: "unknown"` with a defaulted they/them, was filed with the already-set
+      // people and never appeared in the one control Erik could have corrected her with. ⛑ The predicate is
+      // shared with the deriver now, so the two readers cannot disagree again; this asserts the ORDERING.
+      /const unset = all\.filter\(n => genderUnsaid\(n\)\)/.test(block) && /\[\.\.\.unset,/.test(block));
     check("370: …and the screen SAYS how many are unrecorded rather than leaving it to be noticed",
       /have no gender recorded/.test(block));
   }

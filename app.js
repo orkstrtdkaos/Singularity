@@ -83,7 +83,7 @@ import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, 
 import { routeBetween, routeLine } from "./engine/journey.js";
 import { sendCaravan, caravansOf } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./engine/entityDetail.js";
-import { collapseScenePresence, canonicalPersonId, personArtSeed, applyNpcUpdates, findExistingNpc, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM, repairUnnamedPeople } from "./engine/npcs.js";   // SNG-431 §1: the pre-namer saves get their names
+import { collapseScenePresence, canonicalPersonId, personArtSeed, applyNpcUpdates, findExistingNpc, genderUnsaid, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM, repairUnnamedPeople } from "./engine/npcs.js";   // SNG-431 §1: the pre-namer saves get their names
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent, lastEnteredSubPlace } from "./engine/places.js";
 import { activeArcEffects, craftCostNote, encounterBias, effectsInPlainWords, npcMoodLines, travelCostFactor } from "./engine/arceffects.js";   // SNG-273: an advanced arc is something you FEEL
 import { knownIndex, whoIs, figureArtRecord } from "./engine/whois.js";   // SNG-299: who is that, and where do I read more
@@ -145,7 +145,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.14";
+const APP_VERSION = "2.0.15";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -13206,11 +13206,15 @@ function renderRepairScreen(note = "") {
         // ⚠️ ORDERED BY WHO NEEDS IT. 35 of the 110 people across the live saves carry neither gender nor
         // pronouns, so their portrait gender is a coin toss — SNG-143, the Pell-rendered-male fix, from the
         // other end. Those go first; the already-set ones follow, because correcting a wrong value matters.
+        // ⛔ SNG-594 (Erik) — THIS ASKED `!n.gender`, AND "unknown" IS TRUTHY. Veln Ashpause carries
+        // `gender: "unknown"` with a defaulted `they/them`, so she was filed with the ALREADY-SET people and
+        // never appeared in the warning list — the one place he could have told the game she is a woman.
+        // ⚠️ The engine would not decide and would not let him decide either, which is the worst of both.
         const all = Object.values(character.npcRegistry);
-        const unset = all.filter(n => !n.gender && !n.pronouns);
+        const unset = all.filter(n => genderUnsaid(n));
         const head = unset.length
           ? `<p class="hint" style="margin-bottom:6px">⚠️ ${unset.length} of ${all.length} have no gender recorded — those are listed first, and their portraits are guessing.</p>` : "";
-        return head + [...unset, ...all.filter(n => n.gender || n.pronouns)].map(n => `
+        return head + [...unset, ...all.filter(n => !genderUnsaid(n))].map(n => `
         <div class="cs-attr"><span class="cs-attr-name" style="width:auto; flex:1">${esc(n.name || n.id)} <span class="hint">${esc(n.gender || n.pronouns || "— unset —")}</span></span>
           <input data-npcgender="${esc(n.id)}" placeholder="woman / man / …" value="" style="max-width:160px"></div>`).join("");
       })()}

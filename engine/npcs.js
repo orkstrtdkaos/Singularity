@@ -920,11 +920,41 @@ export function mergeDuplicateNpcs(character, dropTokens = []) {
  *  count, and leaves genuinely mixed/ambiguous records UNSET (never guesses). Clears a baked portrait `image`
  *  when it stamps, so the next SNG-136 mint regenerates with the gender in the seed. Never overwrites an
  *  already-set gender. Pure over the registry; returns the names it set. */
+/** ⛔ SNG-594 (Erik, in play) — "Veln showed up as female in my first images… so to me she's female, but the
+ *  GM still uses They/Them. I addressed her as Ms. Is the sex/gender allocation broken?"
+ *
+ *  ⚑ HER RECORD DISAGREES WITH ITSELF: `sex: "male"`, `gender: "unknown"`, `pronouns: "they/them"`. The GM
+ *  says they/them because `pronouns` says so, and `pronouns` says so because nobody ever answered the gender
+ *  question. ⛑ THAT PART IS RIGHT — pronouns follow gender, never sex, and an engine that inferred "he" from
+ *  a `sex` field would be wrong far more often than it was right.
+ *
+ *  ⛔ WHAT IS BROKEN IS THAT "unknown" READS AS AN ANSWER. `backfillNpcGender` skips anyone who has a `gender`
+ *  — and "unknown" is a truthy string, so a person the world has never decided about is treated as decided and
+ *  skipped FOREVER. The same truthiness sits in the character sheet's corrector, which lists "people with no
+ *  gender recorded" as `!n.gender && !n.pronouns`: Veln has both, so she never appears in the one place Erik
+ *  could have fixed her. ⚠️ The engine would not decide, and would not let him decide either.
+ *
+ *  ⬜ AND HE IS NOT WRONG ABOUT THE FICTION EITHER. The chronicle carries the GM's own "Ms Ashpause is on HER
+ *  way over here" — the prose settled on she/her two turns before the record was consulted. */
+export function genderUnsaid(n) {
+  const g = String(n?.gender || "").trim().toLowerCase();
+  return !g || g === "unknown" || g === "unclear" || g === "unspecified";
+}
+
 export function backfillNpcGender(character) {
   const reg = character?.npcRegistry || {};
   const stamped = [];
   for (const [id, n] of Object.entries(reg)) {
-    if (!n || n.gender) continue; // never overwrite an explicit value
+    // ⛔ SNG-594: "unknown" is the ABSENCE of an answer, not one — it used to be truthy here and lock a person
+    // out of this pass permanently.
+    if (!n || !genderUnsaid(n)) continue; // never overwrite an explicit value
+    // ⛑ AND IF SOMEBODY HAS ALREADY SAID HOW THEY ARE ADDRESSED, THAT IS THE ANSWER. Unblocking "unknown"
+    // without this would have let Veln's own history decide her — and her one piece of evidence is a GM SLIP:
+    // "[d4] Does not volunteer what he foreknew, only that he is present for it", two "he"s written in the
+    // record while the chronicle two turns later says "Ms Ashpause is on HER way". ⚠️ Counting pronouns in a
+    // record that contradicts itself is not inference, it is a coin toss with a citation — so a person whose
+    // pronouns are set is left to the one reader who actually knows: the player, in the sheet's corrector.
+    if (n.pronouns) continue;
     const text = [n.description, n.role, ...(n.history || []), ...(n.knownFacts || []), ...(n.aliases || [])].filter(Boolean).join(" ");
     const f = (text.match(/\b(she|her|hers|herself)\b/gi) || []).length;
     const m = (text.match(/\b(he|him|his|himself)\b/gi) || []).length;

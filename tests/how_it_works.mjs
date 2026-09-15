@@ -16740,11 +16740,27 @@ console.log("\n── §239 · what a number is a number OF ──");
   /* ---- 1 · ⛔ THE CAP IS ON THE BOUGHT KIT, NOT ON WHAT YOU EARNED ---- */
   // ⚠️ ON ERIK'S REAL SAVE, AT REAL CAPACITY. A synthetic character at a made-up cap would prove the branch and
   // nothing about the ladder he is actually standing on — he is level 7 with 8 of 8 non-native crafts.
-  const loki239 = JSON.parse(rd("characters/player-s9z9u1/char-mrum8y4d.json"));
+  // ⛔ SNG-594 — A LIVE SAVE IS NOT A FIXTURE. This read Erik's own file and asserted he was AT CAPACITY,
+  // which he was when it was written and was not by morning: he levelled to 8 overnight, the cap went to 9,
+  // and the section's whole premise evaporated. ⚠️ Same shape as a fixture that names one record, one level up
+  // — the fixture here is a file the player edits by playing.
+  //
+  // ⛑ THE SAVE STAYS, FOR ITS SHAPE — a real kit, real natives, a real level — and the CAPACITY is made true
+  // rather than hoped for, by holding the level where his abilities actually fill the cap. That is the state
+  // the claim is about, and it cannot drift out from under it again.
   const ST239 = await import("../engine/skilltree.js");
+  const live239 = JSON.parse(rd("characters/player-s9z9u1/char-mrum8y4d.json"));
+  const loki239 = (() => {
+    const c = JSON.parse(JSON.stringify(live239));
+    // his own non-native crafts set the bar; the table maps a level to a cap, so walk down to the level that
+    // this many crafts genuinely fills.
+    const used = ST239.breadthUsed(c);
+    for (let lvl = 1; lvl <= 40; lvl++) { c.level = lvl; if (ST239.breadthCap(c, C239.skillCapacity) >= used) break; }
+    return c;
+  })();
   check("§239: ⚠️ the fixture is a character who really is at capacity — or this section proves nothing",
     ST239.atCapacity(loki239, C239.skillCapacity),
-    `${ST239.breadthUsed(loki239)} of ${ST239.breadthCap(loki239, C239.skillCapacity)} at level ${loki239.level}`);
+    `${ST239.breadthUsed(loki239)} of ${ST239.breadthCap(loki239, C239.skillCapacity)} at level ${loki239.level} (live save is level ${live239.level})`);
   const cat239 = C239.abilities || {};
   const opts239 = { attributeGates: C239.attributeGates, skillCapacity: C239.skillCapacity, traditionIndex: C239.traditionIndex };
   // ⛔ THE FIXTURE HAS TO REACH THE GATE UNDER TEST. My first form took the first craft he does not own — and
@@ -17178,7 +17194,18 @@ console.log("\n── §243 · one person, one stack ──");
   const step242 = R242.CHARACTER_STEPS.find(x => x.version === 63);
   check("§243: ⛑ the repair step is registered at its own version",
     !!step242 && step242.id === "one-person-one-stack" && step242.playerFacing === true);
+  // ⛔ SNG-594 — AND THIS ONE WORKED TOO WELL TO KEEP TESTING ITSELF. The step shipped, ran in Erik's game
+  // overnight (`reconcileVersion: 63`, ten tiles re-keyed), and the gate that proved it then had nothing left
+  // to join. ⚠️ A repair gate cannot use a save the repair has already run on — it measures its own success
+  // and then fails for it.
+  //
+  // ⛑ SO THE FIXTURE IS HIS GALLERY WITH THE REPAIR TAKEN BACK OFF: the same 60 tiles, the same captions, the
+  // same registry, and the subject keys the file carried before the step touched it. The claim is about what
+  // the step DOES, and that is now true whatever his save has since become.
   const stacksOf = (c) => new Set((c.gallery || []).map(e => e.subjectId ? `${e.subjectKind}:${e.subjectId}` : `solo:${e.url}`)).size;
+  for (const e of (save242.gallery || [])) {
+    if (e.subjectKind === "npc" && save242.npcRegistry?.[e.subjectId]) { delete e.subjectKind; delete e.subjectId; }
+  }
   const before242 = stacksOf(save242);
   const out242 = step242.apply(save242);
   const after242 = stacksOf(save242);
@@ -17195,6 +17222,71 @@ console.log("\n── §243 · one person, one stack ──");
   const second242 = step242.apply(save242);
   check("§243: ⛑ …and running it again does nothing and says nothing",
     !second242.notes && stacksOf(save242) === after242);
+}
+
+
+// ⛔ SNG-594 (Erik, in play) — "Veln showed up as female in my first images… so to me she's female, but the
+// GM still uses They/Them. I addressed her as Ms. Is the sex/gender allocation broken?"
+//
+// ⚑ HER RECORD DISAGREES WITH ITSELF: `sex: "male"`, `gender: "unknown"`, `pronouns: "they/them"`.
+//
+// ⛑ ONE PART OF THAT IS RIGHT AND SHOULD STAY: pronouns follow GENDER, never `sex`. An engine that inferred
+// "he" from a sex field would be wrong far more often than it was right, and it is not the engine's question.
+//
+// ⛔ WHAT IS BROKEN IS THAT "unknown" READS AS AN ANSWER, in two places, for the same reason — it is a truthy
+// string. `backfillNpcGender` skips anyone who "has a gender", so a person the world never decided about is
+// treated as decided and skipped forever. And the character sheet's corrector lists the undecided as
+// `!n.gender && !n.pronouns`, so Veln — who has both — never appeared in the ONE PLACE Erik could have told
+// the game she is a woman. ⚠️ The engine would not decide, and would not let him decide either.
+console.log("\n── §244 · an unknown gender is the absence of an answer, not an answer ──");
+{
+  const N244 = await import("../engine/npcs.js");
+  const A244 = rd("app.js");
+  const save244 = JSON.parse(rd("characters/player-s9z9u1/char-mrum8y4d.json"));
+  const veln244 = save244.npcRegistry?.["hourkeeper-confluence"];
+
+  /* ---- 1 · ⛔ THE PREDICATE, AND THE RECORD THAT PROVES IT WAS NEEDED ---- */
+  check("§244: ⚠️ the fixture is the contradictory record Erik was looking at",
+    veln244 && veln244.sex === "male" && veln244.gender === "unknown" && veln244.pronouns === "they/them",
+    JSON.stringify({ sex: veln244?.sex, gender: veln244?.gender, pronouns: veln244?.pronouns }));
+  check("§244: ⛔ an UNKNOWN gender is unsaid, not said — the truthiness that locked her out of both readers",
+    N244.genderUnsaid({ gender: "unknown" }) && N244.genderUnsaid({}) && N244.genderUnsaid({ gender: "" })
+    && !N244.genderUnsaid({ gender: "woman" }) && !N244.genderUnsaid({ gender: "man" }));
+
+  /* ---- 2 · ⛑ AND UNBLOCKING IT MUST NOT MAKE THE ENGINE GUESS ---- */
+  // ⛔ HER ONE PIECE OF EVIDENCE IS A GM SLIP. Her own history reads "[d4] Does not volunteer what HE foreknew,
+  // only that HE is present for it" — two "he"s — while the chronicle two turns later carries the GM's own "Ms
+  // Ashpause is on HER way over here". ⚠️ Counting pronouns in a record that contradicts itself is a coin toss
+  // with a citation. A person whose pronouns are already set is left to the reader who actually knows.
+  const before244 = JSON.stringify({ g: veln244.gender, p: veln244.pronouns });
+  const stamped244 = N244.backfillNpcGender(save244);
+  check("§244: ⛔ …and the backfill still does not decide her — her own record contradicts itself",
+    !stamped244.includes(veln244.name) && JSON.stringify({ g: veln244.gender, p: veln244.pronouns }) === before244,
+    stamped244.join(", ") || "stamped nobody");
+  // ⛑ AND IT STILL WORKS WHERE THE EVIDENCE IS CLEAN AND NOBODY HAS ANSWERED — or the guard has disabled it.
+  const clear244 = { npcRegistry: { x: { id: "x", name: "A Clear Case",
+    history: ["She walked in.", "Her coat was wet.", "She said nothing."] } } };
+  check("§244: ⛑ …while an unanswered person with clean evidence is still read",
+    N244.backfillNpcGender(clear244).length === 1
+    && clear244.npcRegistry.x.gender === "woman" && clear244.npcRegistry.x.pronouns === "she/her");
+  check("§244: …and a stated answer is never overwritten, which was always the rule",
+    N244.backfillNpcGender({ npcRegistry: { y: { id: "y", gender: "man",
+      history: ["She walked in.", "Her coat was wet.", "She said nothing."] } } }).length === 0);
+
+  /* ---- 3 · ⛔ AND THE ONE PLACE HE CAN ANSWER NOW LISTS HER ---- */
+  // ⚑ SNG-143's corrector exists precisely because "their portrait gender is a coin toss" — and the people
+  // most in need of it were the ones it filtered out.
+  const unsaid244 = Object.values(save244.npcRegistry || {}).filter(N244.genderUnsaid);
+  check("§244: ⛔ the sheet's corrector lists everyone nobody has decided about, Veln among them",
+    unsaid244.some(n => n.id === "hourkeeper-confluence") && unsaid244.length >= 3,
+    `${unsaid244.length} of ${Object.keys(save244.npcRegistry || {}).length} unsaid`);
+  check("§244: ⛑ …and app.js asks the same predicate, so the two readers cannot disagree again",
+    /const unset = all\.filter\(n => genderUnsaid\(n\)\);/.test(A244)
+    && /all\.filter\(n => !genderUnsaid\(n\)\)/.test(A244));
+  // ⬜ AND `sex` IS STILL NOT PRONOUNS. Veln keeps `sex: "male"` and `they/them`, and that is not a
+  // contradiction the engine may resolve — only the person playing can say how she is addressed.
+  check("§244: ⬜ …and nothing anywhere derives a pronoun from `sex`",
+    !/pronouns\s*=\s*[^;\n]*\bsex\b/.test(rd("engine/npcs.js")));
 }
 
 /* ══════════ REPORT ══════════ */

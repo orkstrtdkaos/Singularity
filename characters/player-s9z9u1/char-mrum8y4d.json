@@ -294,11 +294,12 @@
     "lastTurn": {
       "narration": "",
       "choices": [],
-      "offerPromotion": {
-        "npcId": "tessvel-cairn",
-        "to": "senior hand",
-        "why": "fire test"
-      },
+      "unlockSubstrate": [
+        {
+          "source": "nanite",
+          "why": "fire test"
+        }
+      ],
       "sceneSummary": null
     },
     "sceneState": {
@@ -7601,7 +7602,7 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789493117342,
+  "updatedAt": 1789493117322,
   "rev": 666,
   "generated": {
     "schemaVersion": 1,
@@ -8577,7 +8578,7 @@
     {
       "id": "sess-11",
       "startedAt": "2026-09-15T17:25:17.198Z",
-      "lastAt": "2026-09-15T17:25:17.342Z",
+      "lastAt": "2026-09-15T17:25:17.322Z",
       "startDay": 77,
       "endDay": 77,
       "beats": 2

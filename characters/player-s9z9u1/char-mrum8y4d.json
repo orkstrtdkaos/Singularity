@@ -7163,6 +7163,16 @@
   "reconcileVersion": 62,
   "gallery": [
     {
+      "kind": "battle",
+      "prompt": "Two figures — an open-faced investigator in plain clothes, and a heat-scarred zealot in fire-blackened cloth — face each other at The Blaze; the investigator speaks the unbearable truth while the zeal",
+      "url": "https://image.pollinations.ai/prompt/Two%20figures%20%E2%80%94%20an%20open-faced%20investigator%20in%20plain%20clothes%2C%20and%20a%20heat-scarred%20zealot%20in%20fire-blackened%20cloth%20%E2%80%94%20face%20each%20other%20at%20The%20Blaze%3B%20the%20investigator%20speaks%20the%20unbearable%20truth%20while%20the%20zealot%20reels%20backward%2C%20still%20standing%E2%80%A6%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=54433&nologo=true",
+      "caption": "Seraphine the Unbending Witness bested Valen Sunwrack, Who Left No Shadow Standing",
+      "worldDay": 77,
+      "at": "2026-09-15T12:57:01.535Z",
+      "subjectKind": "battle",
+      "subjectId": "sunwrack_valen|the_unbending_witness|unbearable_word|77|woun"
+    },
+    {
       "kind": "portrait",
       "prompt": "Hoarse voice, sharp features softening now, eyes that calculate and estimate. He moves like someone used to reading a room for weak points., character portrait, named The Churn-Revel orchestrator, man",
       "url": "https://image.pollinations.ai/prompt/Hoarse%20voice%2C%20sharp%20features%20softening%20now%2C%20eyes%20that%20calculate%20and%20estimate.%20He%20moves%20like%20someone%20used%20to%20reading%20a%20room%20for%20weak%20points.%2C%20character%20portrait%2C%20named%20The%20Churn-Revel%20orchestrator%2C%20man%2C%20Master%20of%20coordinated%20chaos%2C%20now%20questioning%20their%20mandate%2C%20platonic%20to%20Loki%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=39738&nologo=true",
@@ -7724,8 +7734,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789476870523,
-  "rev": 653,
+  "updatedAt": 1789477021535,
+  "rev": 654,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9675,7 +9685,9 @@
     }
   ],
   "sharedSceneId": null,
-  "promptCompositions": {},
+  "promptCompositions": {
+    "cp1wxmy81": "Two figures — an open-faced investigator in plain clothes, and a heat-scarred zealot in fire-blackened cloth — face each other at The Blaze; the investigator speaks the unbearable truth while the zealot reels backward, still standing…"
+  },
   "likeness": {
     "moment:solo:cap:vessin of the long bough": {
       "keeps": [
@@ -10275,5 +10287,12 @@
       "asked": "What is the Revel's name?",
       "locationId": "the_crossing"
     }
-  ]
+  ],
+  "battleImages": {
+    "sunwrack_valen|the_unbending_witness|unbearable_word|77|wounded": {
+      "url": "https://image.pollinations.ai/prompt/Two%20figures%20%E2%80%94%20an%20open-faced%20investigator%20in%20plain%20clothes%2C%20and%20a%20heat-scarred%20zealot%20in%20fire-blackened%20cloth%20%E2%80%94%20face%20each%20other%20at%20The%20Blaze%3B%20the%20investigator%20speaks%20the%20unbearable%20truth%20while%20the%20zealot%20reels%20backward%2C%20still%20standing%E2%80%A6%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=54433&nologo=true",
+      "prompt": "Two figures — an open-faced investigator in plain clothes, and a heat-scarred zealot in fire-blackened cloth — face each other at The Blaze; the investigator speaks the unbearable truth while the zealot reels backward, still standing…",
+      "kind": "battle"
+    }
+  }
 }

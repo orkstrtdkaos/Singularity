@@ -292,200 +292,14 @@
       }
     ],
     "lastTurn": {
-      "narration": "Halvex holds your gaze for a long moment, and you can see the calculation happening—not the old kind, the kind that prices leverage and escape routes, but something slower and more costly. 'I don't know,' he says finally, and there's no performance in it. 'I was hired to break it. I've been breaking things for a long time because breaking them was the only proof I had that I mattered. That chaos—' he stops, jaw tightening. 'That I mattered.'\n\nVeln steps closer, reading the moment without judgment. Kael nods once, steady. Cy's lamp raises slightly, as if attending.\n\nHalfvex looks at the Null Stone—still unbroken, still sealed—and then back to you. 'Partnership means I don't get to choose the breaking anymore. It means I'm answerable to something other than the mandate. I don't know if I know how to do that.' His voice drops. 'But I also don't want to walk away from you. From this. From the asking of the question itself.'\n\nVeln Ashpause reaches the center of the Hub now, and their presence shifts the air—not threatening, but *present* in a way that makes the moment feel held. Their eyes meet yours, and you read a terrible clarity there: they came to witness this exact threshold. Not the Revel's breaking. Not even the seam's discovery. This. Halvex naming the cost of staying.",
-      "sceneSummary": "At the Hub crossing in deep night, Halvex names his uncertainty about partnership—the breaking has always been his proof, and staying means learning a different answer.",
-      "choices": [
-        {
-          "label": "Ask Halvex what he needs from you to try—what would make the partnership real and not just words.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "negotiate",
-            "woo",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Turn to Veln Ashpause and ask them directly—what did they foreknow about this moment, and why did they come to witness it.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": "hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study",
-            "careful",
-            "plan"
-          ],
-          "abilityId": "prism_sight",
-          "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Offer Halvex a concrete first step—something that moves the partnership from naming into action, tonight or tomorrow.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "lead",
-            "plan",
-            "craft"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Stay silent and let Veln speak—they are here for a reason, and the Hourkeeper's words may carry weight yours cannot yet reach.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "wait",
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        }
-      ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
+      "narration": "",
+      "choices": [],
+      "offerIntent": {
+        "npcId": "tessvel-cairn",
+        "intent": "to walk the east rim before dark",
+        "why": "fire test"
       },
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "standingOps": [],
-      "delegateOps": [],
-      "arcOps": [],
-      "adoptSchool": null,
-      "offer": {
-        "thing": "Halvex Coil naming himself plainly and the cost of staying",
-        "from": "Your recognition of his hunger and the partnership you offered—he is answerable now, and that is the breaking he feared most"
-      },
-      "stageOps": [],
-      "scene": {
-        "setting": "The Hub crossing deep in the night—five waygate arches converging on pale stone worn by countless arrivals. The Null Stone stands sealed and unbroken at the center. The Revel's ribbons have dissolved to nothing. The air tastes of ash and fading ozone, and carries the weight of a moment held.",
-        "npcsPresent": [
-          {
-            "name": "Halvex Coil",
-            "state": "Standing at the center with his hand at his side, facing the unbroken stone—the cost of staying plainly written in the set of his shoulders"
-          },
-          {
-            "name": "Veln Ashpause",
-            "state": "Walking toward the Hub's center, stillness transformed into presence—eyes fixed on you with the weight of foreknowledge fulfilled"
-          },
-          {
-            "name": "Vessin Tallow-bark",
-            "state": "Reading the exchange from the southern arch with steady, careful attention"
-          },
-          {
-            "name": "Kael",
-            "state": "Standing at the crossing, nodding once—present and steady, tracking the moment's weight"
-          },
-          {
-            "name": "Cy",
-            "state": "Lamp raised, completing another perimeter spiral—acknowledging the naming and the moment's significance"
-          }
-        ],
-        "objects": [
-          "The Null Stone—pale, deliberately sealed with a vertical seam running through it",
-          "Five waygate arches—four sealed by deliberate interference, one the way you entered",
-          "Dissolved ribbon scraps scattered across the stone from the Revel's breaking",
-          "Cy's raised lamp"
-        ],
-        "threads": [
-          "What Halvex will become now that partnership is real and the breaking is no longer the answer",
-          "What Veln Ashpause foreknew about this moment and why they stepped forward to witness it",
-          "Who hired Halvex Coil to break the Null Stone and what they meant by sending him",
-          "What lies behind the seam in the Null Stone—still sealed, still unbroken, still unknown",
-          "The deliberate interference sealing the waygate network—four arches locked, the pattern deliberate"
-        ]
-      },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "halvex-coil",
-          "name": "Halvex Coil",
-          "note": "Named himself plainly at the Hub crossing—Halvex Coil, hired to break what will not break. Believes chaos matters but recognizes the proof was wrong. Now searching for answers that do not fit neat shapes with Loki. Stands at the threshold of partnership and names the cost: answering to something other than the breaking mandate.",
-          "learned": [
-            "Was hired to break the Null Stone because he believed chaos mattered enough to prove itself against order",
-            "The breaking has always been his proof—that he matters, that chaos matters",
-            "Partnership means accountability beyond the mandate; he does not yet know if he can answer that call"
-          ],
-          "relationshipDelta": 1
-        }
-      ],
-      "intentsHeard": [],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "discovery": null,
-      "codexUpdates": [
-        {
-          "topic": "churn-revel-orchestrator",
-          "label": "Halvex Coil",
-          "kind": "person",
-          "entityId": "halvex-coil",
-          "fact": "Named himself at the Hub crossing deep in night: Halvex Coil, hired to break the Null Stone. Offered partnership in searching for answers that do not fit neat shapes. Stands at the threshold now—knows the breaking was wrong proof, but does not yet know if he can answer to partnership instead.",
-          "links": [
-            "the-crossing",
-            "the-null-stone",
-            "the-annex-sender"
-          ]
-        }
-      ],
-      "holdingOps": [],
-      "debtOps": [],
-      "partyOps": [],
-      "generateRequest": [],
-      "encounterOps": [],
-      "projectOps": [],
-      "bandOps": [],
-      "deathOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "the moment held at the Hub crossing, the naming and the recognition"
-      },
-      "moveTo": null,
-      "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": "Halvex Coil stands at the Hub crossing in deep night, face turned toward the unbroken Null Stone—the calculation gone from his eyes, replaced by the terrible clarity of a person who has just named the cost of staying. Behind him, Veln Ashpause steps forward into the pale light from the five arches, their presence inevitable as a door opening. The Revel's ribbons have dissolved to ash on the pale stone. The moment is held.",
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
-      "sceneEnded": false,
-      "momentArt": "https://image.pollinations.ai/prompt/Halvex%20Coil%20stands%20at%20the%20Hub%20crossing%20in%20deep%20night%2C%20face%20turned%20toward%20the%20unbroken%20Null%20Stone%E2%80%94the%20calculation%20gone%20from%20his%20eyes%2C%20replaced%20by%20the%20terrible%20clarity%20of%20a%20person%20who%20has%20just%20named%20the%20cost%20of%20staying.%20Behind%20him%2C%20Veln%20Ashpause%20steps%20forward%20into%20the%20pale%20light%20from%20the%20five%20arches%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=94406&nologo=true"
+      "sceneSummary": null
     },
     "sceneState": {
       "setting": "The Hub crossing deep in the night—five waygate arches converging on pale stone worn by countless arrivals. The Null Stone stands sealed and unbroken at the center. The Revel's ribbons have dissolved to nothing. The air tastes of ash and fading ozone, and carries the weight of a moment held.",
@@ -535,7 +349,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 4,
-    "hour": 4,
+    "hour": 5,
     "realAnchor": null
   },
   "companions": [
@@ -1542,7 +1356,7 @@
     "lastSharedReadAt": "2026-09-15T14:47:59.164Z",
     "lastTickWorldDay": 77,
     "lastCanonWorldDay": 77,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "The Churn-Revel orchestrator as a named ally and partner",
@@ -7787,8 +7601,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789493117209,
-  "rev": 665,
+  "updatedAt": 1789493117361,
+  "rev": 666,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8763,10 +8577,10 @@
     {
       "id": "sess-11",
       "startedAt": "2026-09-15T17:25:17.198Z",
-      "lastAt": "2026-09-15T17:25:17.198Z",
+      "lastAt": "2026-09-15T17:25:17.360Z",
       "startDay": 77,
       "endDay": 77,
-      "beats": 1
+      "beats": 2
     }
   ],
   "establishedFacts": [
@@ -10226,8 +10040,8 @@
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T22:51:56.913Z",
   "_fireTests": {
-    "at": "2026-09-15T17:25:17.401Z",
-    "build": "2.0.14",
+    "at": "2026-09-14T22:51:57.121Z",
+    "build": "2.0.7",
     "results": [
       {
         "op": "debtOps",

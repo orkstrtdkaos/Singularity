@@ -43,7 +43,7 @@ import { buildRegionView, newsForGM, worldArcsForGM } from "./worldtick.js";
 import { inventoryForGM } from "./inventory.js";
 import { companionsForGM, activeCompanions } from "./companions.js";
 import { questsForGM, structuredQuestsForGM, traditionArcForGM, npcQuestsForGM, practicedTraditions } from "./quests.js";
-import { legendsForGM } from "./legends.js"; // SNG-208 wiring: legends pursuable as teachers + wants-as-quests
+import { legendsForGM, tierForArc, tierRank } from "./legends.js"; // SNG-208 wiring: legends pursuable as teachers; SNG-591: the rung a meeting happens across
 import { wakesForGM } from "./wake.js"; // SNG-204: the aftermath waiting to become the next thread
 import { priceLine } from "./economy.js";   // SNG-302: what a thing fetches HERE, so the GM can be honest about it
 import { reachableDeadForGM } from "./death.js"; // SNG-209: the dead who are NOT gone — reachable in the death state, latent hooks
@@ -257,6 +257,11 @@ export const GM_CONTEXT = [
       hereId: env.location?.id || env.character?.currentLocationId || null,
       exclude: (env.sceneState?.npcsPresent || []).map(n => n && (n.id || n.npcId)).filter(Boolean),
       crowd: resolvePresence(env.profile?.presence).mult,   // §6: the player's own dial — how often, never who
+      // ⛑ SNG-591 (Erik) — "does the PC help them or do they ask for the PCs help? Does the PC get saved by a
+      // higher level NPC?" The rung gap answers it, so the ladder is INJECTED rather than learned: `presence`
+      // stays a module about who is near and what they are doing.
+      bandOf: (t) => tierRank(t, env.CONTENT?.rules?.powerBands || null),
+      myBand: tierRank(tierForArc(env.character?.level || 1, env.CONTENT?.rules?.powerBands || null), env.CONTENT?.rules?.powerBands || null),
     }) },
 
   // ---- shared by turn + ask + gambit ----

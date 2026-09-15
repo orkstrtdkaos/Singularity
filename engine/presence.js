@@ -79,7 +79,37 @@ function seedOf(str) {
  *  it is already talking to.
  *
  *  PURE over content + the character's own registry. */
-export function presentToday(character, content = {}, { day = 0, hereId = null, want = null, exclude = [], crowd = 1 } = {}) {
+/** ⛔ SNG-591 (Erik) — "What we should make sure the GM knows is who is (1) nearby and (2) doing things the
+ *  player would (3) likely run into… does the PC help them or do they ask for the PCs help? Does the PC get
+ *  saved by a higher level NPC? We fix this and we have it."
+ *
+ *  ⚑ THE FIRST TWO THIS MODULE ALREADY ANSWERED — nearby by reach-over-distance, doing by their own role. THE
+ *  THIRD IS THIS: what KIND of meeting two people of these rungs plausibly have. A notable and a heroic do not
+ *  run into each other as peers; one of them is having a day and the other is having an event.
+ *
+ *  ⚠️ AND IT IS THE FRAMING, WHICH AEVI ALREADY SAID IS THE PART THAT MATTERS: "the verb Erik used matters —
+ *  'helping or being helped by them'. Not encountering. Not fighting. A roster with no framing becomes a
+ *  threat table with names." A band distance without a verb is a number wearing the same problem.
+ *
+ *  ⛑ DERIVED FROM THE RUNG GAP, NEVER FROM THE NAMES. Same rung → peers, and the help runs both ways. Below
+ *  you → they are the ones who would ask. One above → the hand that reaches down. Two or more → being helped
+ *  by them is an EVENT, and the GM is told so rather than left to spend a legend on a Tuesday. Pure. */
+export function relationOf(myBand, theirBand) {
+  // ⛔ `== null` FIRST. `Number(null)` is 0 and 0 IS finite, so a missing band read as band ZERO and every
+  // unbanded person came back "far above you". ⚠️ FIFTH instance of that shape this week and my second —
+  // `championsFor` had it yesterday, with the same tell: a default that behaves like a value.
+  if (myBand == null || theirBand == null) return null;
+  const a = Number(myBand), b = Number(theirBand);
+  if (!Number.isFinite(a) || !Number.isFinite(b)) return null;
+  const gap = b - a;
+  if (gap <= -2) return { gap, kind: "beneath", say: "far under your reach — they would ask you, or never think to" };
+  if (gap === -1) return { gap, kind: "asks", say: "a rung under you — the kind of person who asks you for a hand" };
+  if (gap === 0) return { gap, kind: "peer", say: "your own rung — the same kinds of work, and help runs both ways" };
+  if (gap === 1) return { gap, kind: "lifts", say: "a rung above you — the hand that reaches down, if they choose to" };
+  return { gap, kind: "event", say: "far above you — being helped by them is an EVENT, not a favour" };
+}
+
+export function presentToday(character, content = {}, { day = 0, hereId = null, want = null, exclude = [], crowd = 1, bandOf = null, myBand = null } = {}) {
   const locs = content.locations || {};
   const here = locs[hereId || character?.currentLocationId] || null;
   const met = new Set(Object.keys(character?.npcRegistry || {}));
@@ -119,7 +149,11 @@ export function presentToday(character, content = {}, { day = 0, hereId = null, 
     const roll = seedOf(`${character?.id || "x"}|${day}|${id}`);
     if (roll >= chance) continue;              // not today
     pool.push({ id, name: n.name || id, tier, met: met.has(id), days: days == null ? null : Math.round(days * 10) / 10,
-      doing: String(n.role || "").slice(0, 90), score: roll / Math.max(1e-9, chance) });
+      doing: String(n.role || "").slice(0, 90), score: roll / Math.max(1e-9, chance),
+      // ⛑ SNG-591: the rung, and what a meeting between these two rungs IS. `bandOf` is injected so this
+      // module never learns the ladder — the same seam every other reader of it has.
+      band: bandOf ? bandOf(tier) : null,
+      relation: (bandOf && myBand != null) ? relationOf(myBand, bandOf(tier)) : null });
   }
 
   // ⛔ THE COUNT FALLS OUT OF WHO ACTUALLY TURNED UP; IT IS NOT A TARGET. A fixed "three to six" makes the
@@ -138,6 +172,8 @@ export function presenceForGM(character, content = {}, opts = {}) {
   if (!rows.length) return null;
   return rows.map(r => {
     const far = r.days == null ? "" : r.days <= 1 ? " · near" : r.days <= 5 ? ` · ${r.days}d away` : ` · ${r.days}d away, so being here is itself worth a line`;
-    return `- ${r.name} (${r.tier}${r.met ? ", you have met" : ", a stranger to you"})${far} — ${r.doing || "about their own business"}`;
+    // ⛑ SNG-591: the RELATION last and plainly, because it is the instruction — the rest is who and where.
+    const rel = r.relation ? ` — ${r.relation.say}` : "";
+    return `- ${r.name} (${r.tier}${r.met ? ", you have met" : ", a stranger to you"})${far} — ${r.doing || "about their own business"}${rel}`;
   }).join("\n");
 }

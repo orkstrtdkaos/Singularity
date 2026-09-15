@@ -9112,7 +9112,14 @@ await (async () => {
   check("208-wire: a legend of a PRACTICED tradition surfaces as a legendary teacher to seek", /LEGENDARY TEACHERS/.test(asTeacher) && /Neth/.test(asTeacher) && /Morvane/.test(asTeacher) && /deep-teacher arc/.test(asTeacher));
   check("208-wire: a legend of an UNpracticed tradition is not surfaced as this character's teacher", !/Cinder Vael/.test(asTeacher));
   const atHome = legendsForGM({ currentLocationId: "deep_works" }, content, { practiced: new Set() });
-  check("208-wire: a legend whose home is HERE surfaces as a great figure with a want-as-quest", /GREAT FIGURES near you/.test(atHome) && /Cinder Vael/.test(atHome) && /aid or oppose/i.test(atHome));
+  // ⛔ SNG-591 (Erik) — REVERSED, AND ON HIS RULING. This door used to answer "who great is near you" off
+  // `homeLocation === here` and nothing else — no cadence, no distance, no relation. `presence.js` answers
+  // it properly and now also says what a meeting across those two rungs WOULD BE. ⚠️ "there are SO many
+  // more that are far beyond that it's a waste": one name out of a whole rung is arbitrary.
+  // ⛑ What this door keeps is the PURSUIT — a legendary teacher of a craft you practise is a road you
+  // choose to walk, which is a different question from who is in the market today.
+  check("208-wire: a legend merely AT HOME here no longer comes through this door — presence owns who is near",
+    !/GREAT FIGURES near you/.test(atHome || "") && !/Cinder Vael/.test(atHome || ""));
   const withDead = legendsForGM({ currentLocationId: "e" }, content, { practiced: new Set(["ashwarden"]), deadIds: new Set(["neth"]) });
   check("208-wire: a DEAD legend is never surfaced as pursuable (SNG-208 §3b)", !/Neth/.test(withDead) && /Morvane/.test(withDead));
   check("208-wire: no practiced legend + none at hand → null (no dump)", legendsForGM({ currentLocationId: "nowhere" }, content, { practiced: new Set(["blazeborn"]) }) === null);

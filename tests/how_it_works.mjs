@@ -16879,6 +16879,78 @@ console.log("\n── §240 · the seven rungs, and who the GM is shown ──")
     `${belowHeroic240} of ${roster240.length} figures sit below heroic`);
 }
 
+
+// ⛔ SNG-591 (Erik, on the band-gate shipped an hour earlier) — "if a player is at notable, the far beyond is
+// Regional and they get 1 name… but there are SO many more that are far beyond that it's a waste. What we
+// should make sure the GM knows is who is (1) nearby and (2) doing things the player would (3) likely run
+// into… does the PC help them or do they ask for the PCs help? Does the PC get saved by a higher level NPC?"
+//
+// ⚑ HE IS RIGHT THAT THE +1 GATE WAS THE WRONG SELECTOR. It was defensible when the only thing above you was
+// a legend and the point was a glimpse; with seven rungs the thing above a notable is merely the next rung,
+// and picking one name out of dozens is arbitrary.
+//
+// ⛑ AND `presence.js` ALREADY ANSWERED (1) AND (2) PROPERLY — nearby by reach-over-distance, doing by their
+// own role. (3) IS THE PIECE THAT WAS MISSING: what KIND of meeting two people of these rungs plausibly have.
+// A notable and a heroic do not meet as peers; one of them is having a day and the other is having an event.
+console.log("\n── §241 · who is near, what they are doing, and what a meeting across those rungs IS ──");
+{
+  const PR241 = await import("../engine/presence.js");
+  const LG241 = await import("../engine/legends.js");
+  const { loadContentHeadless: lch241 } = await import("./headless_content.mjs");
+  const C241 = await lch241();
+  const b241 = C241.rules?.powerBands;
+
+  /* ---- 1 · ⛑ THE RELATION IS THE RUNG GAP, and it reads as a verb ---- */
+  // ⚠️ AEVI'S RULE ON THIS BLOCK IS THE REASON IT IS A SENTENCE AND NOT A NUMBER: "the verb Erik used matters
+  // — 'helping or being helped by them'. Not encountering. Not fighting. A roster with no framing becomes a
+  // threat table with names." A band distance without a verb wears the same problem.
+  const rel241 = (g) => PR241.relationOf(3, 3 + g);
+  check("§241: ⛑ the same rung reads as peers, and the help runs both ways",
+    rel241(0)?.kind === "peer" && /both ways/.test(rel241(0).say), rel241(0)?.say);
+  check("§241: ⛔ …a rung below you is the one who ASKS — Erik's first question, answered by the gap",
+    rel241(-1)?.kind === "asks" && /asks you/.test(rel241(-1).say), rel241(-1)?.say);
+  check("§241: ⛔ …a rung above is the hand that reaches down — his second",
+    rel241(1)?.kind === "lifts" && /reaches down/.test(rel241(1).say), rel241(1)?.say);
+  // ⬜ AND FAR ABOVE IS AN EVENT, said in those words, so a legend is not spent on a Tuesday.
+  check("§241: ⬜ …and far above you, being helped at all is an EVENT rather than a favour",
+    rel241(3)?.kind === "event" && /EVENT/.test(rel241(3).say), rel241(3)?.say);
+  check("§241: ⚠️ …and an unknown rung yields no relation rather than a wrong one",
+    PR241.relationOf(null, 2) === null && PR241.relationOf(2, undefined) === null);
+
+  /* ---- 2 · ⛔ AND IT RIDES THE ROSTER THE GM ACTUALLY READS ---- */
+  // ⚠️ ON A REAL SAVE AT A REAL PLACE. A synthetic roster would prove the sentence and nothing about whether
+  // the ladder reaches the block — which is the door that was shut on `power_bands.json` yesterday.
+  const loki241 = JSON.parse(rd("characters/player-s9z9u1/char-mrum8y4d.json"));
+  const bandOf241 = (t) => LG241.tierRank(t, b241);
+  const myBand241 = bandOf241(LG241.tierForArc(loki241.level, b241));
+  let sawRel241 = 0, sawAny241 = 0;
+  for (let d = 1; d <= 30; d++) {
+    const rows = PR241.presentToday(loki241, C241, { day: d, hereId: loki241.currentLocationId, bandOf: bandOf241, myBand: myBand241 });
+    for (const r of rows) { sawAny241++; if (r.relation?.kind) sawRel241++; }
+  }
+  check("§241: ⛔ every person the day offers carries what a meeting with them WOULD BE",
+    sawAny241 > 0 && sawRel241 === sawAny241, `${sawRel241} of ${sawAny241} rows over 30 days`);
+  const line241 = (() => { for (let d = 1; d <= 30; d++) {
+    const l = PR241.presenceForGM(loki241, C241, { day: d, hereId: loki241.currentLocationId, bandOf: bandOf241, myBand: myBand241 });
+    if (l) return l; } return ""; })();
+  check("§241: …and the GM's line says it, not merely the row",
+    /— .+(asks you|both ways|reaches down|EVENT|never think to)/.test(line241), line241.split("\n")[0].slice(0, 130));
+  // ⛑ INJECTED, NEVER LEARNED. `presence` is a module about who is near and what they are doing; the ladder
+  // arrives through the caller, the same seam every other reader of it has.
+  check("§241: ⛑ …and with no ladder injected there is no relation, rather than a guessed one",
+    PR241.presentToday(loki241, C241, { day: 4, hereId: loki241.currentLocationId }).every(r => !r.relation));
+
+  /* ---- 3 · ⛔ AND THE SECOND, WORSE ANSWER TO THE SAME QUESTION IS GONE ---- */
+  // ⚑ `legendsForGM` carried a "GREAT FIGURES near you" half that used `homeLocation === here` and nothing
+  // else — no cadence, no distance, no relation. Two readers of one question, and that one could not see how
+  // far away anybody was. ⬜ The PURSUIT stays: a legendary teacher is a road you choose to walk.
+  const LGSRC241 = rd("engine/legends.js");
+  check("§241: ⛔ the proximity half of the legend door is removed, not merely disabled",
+    !/forces/.test(LGSRC241) && !/GREAT FIGURES near you/.test(LGSRC241));
+  check("§241: ⛑ …and the teacher pursuit survives it — the half that was never about who is in the market",
+    /LEGENDARY TEACHERS you could seek/.test(LGSRC241));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

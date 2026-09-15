@@ -204,7 +204,7 @@ export function legendsForGM(character, content, opts = {}) {
   const myBand = tierRank(tierForArc(character?.level || 1, bands), bands);
   const bandOf = (f) => tierRank(f?.legend?.tier || f?.tier, bands);
   let glimpses = 0;
-  const teachers = [], forces = [];
+  const teachers = [];
   for (const f of roster) {
     if (dead.has(f.id)) continue;
     const fb = bandOf(f);
@@ -217,13 +217,25 @@ export function legendsForGM(character, content, opts = {}) {
     if (f.tradition && practiced.has(f.tradition) && teachers.length < 4) {
       const role = f.role || (f.alignment === "villain" ? "dark master" : "master");
       teachers.push(`- ${f.name} — the legendary ${role} of the ${f.tradition} craft${f.signature ? `: ${clampSig(f.signature)}` : ""}${atHome ? " — and a presence HERE" : ""}${beyond ? " — ⛔ FAR BEYOND THIS CHARACTER: a rumour, a road that would take an arc to walk, never someone who simply turns up" : ""}. Seeking them is the deep-teacher arc (SNG-203 Finding beat); the pursuit is the quest, woven in the fiction, never a menu.`);
-    } else if (atHome && forces.length < 3) {
-      forces.push(`- ${f.name}${f.role ? ` (${f.role})` : ""} — ${f.alignment === "villain" ? "a great adversary" : "a great figure"} whose presence touches this place. They want: ${clampSig(f.wants) || "their own ends"}. Aiding or opposing that want is a quest waiting — offer it in the fiction.`);
     }
   }
-  if (!teachers.length && !forces.length) return null;
+  if (!teachers.length) return null;
   const parts = [];
   if (teachers.length) parts.push(`LEGENDARY TEACHERS you could seek — the craft this character practices has great masters out there; pursuing one is an arc with the deepest teaching at its end (do not force it; offer the possibility when the fiction reaches for it):\n${teachers.join("\n")}`);
-  if (forces.length) parts.push(`GREAT FIGURES near you — a want you could aid or oppose, the seed of a quest (in the fiction, never a list):\n${forces.join("\n")}`);
+  // ⛔ SNG-591 (Erik) — THE "GREAT FIGURES NEAR YOU" HALF IS GONE, and he is right about why: "if a player is
+  // at notable, the far beyond is Regional and they get 1 name… but there are SO many more that are far beyond
+  // that it's a waste."
+  //
+  // ⚑ A ONE-RUNG GATE PICKING ONE NAME OUT OF A WHOLE RUNG IS ARBITRARY. It was defensible when the only thing
+  // above you was a legend and the point was a glimpse; with seven rungs the thing above a notable is merely
+  // the next rung, and there are dozens of them.
+  //
+  // ⛑ AND `presence.js` ALREADY ANSWERS THE QUESTION PROPERLY: who is near, weighted by reach over distance,
+  // what they are DOING, and — SNG-591 — what a meeting across those two rungs IS. This was a second, worse
+  // answer to the same question: `homeLocation === here` only, no cadence, no distance, no relation. ⚠️ Two
+  // readers of one question, and this one could not see how far away anybody was.
+  //
+  // ⬜ WHAT STAYS IS THE PURSUIT — a legendary TEACHER of a craft you practise is a road you choose to walk,
+  // which is a different thing from who is in the market today.
   return parts.join("\n\n");
 }

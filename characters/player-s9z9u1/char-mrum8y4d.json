@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 7,
-  "xp": 694,
+  "xp": 696,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -111,7 +111,7 @@
   "maxHealth": 68,
   "health": 68,
   "maxEnergy": 146,
-  "energy": 27,
+  "energy": 25,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -294,34 +294,23 @@
         "player": "Turn to Veln Ashpause and ask them directly—what did they foreknow about this moment, and why did they come to witness it.",
         "summary": "At the Hub crossing deep in night, Loki asks Veln Ashpause directly what they foreknew—and the Hourkeeper refuses to answer, holding the boundary of knowledge they will not share. Partnership is named; the stone stands unbroken; the greater threads remain open.",
         "narration": "You turn fully to Veln Ashpause, meeting the weight of their stillness head-on. The question sits plain between you: what did they foreknow? Why step forward now, into this exact moment?\n\nVeln's eyes hold yours without flinching. For a long breath—maybe two—there is no answer. Then they speak, and their voice is quieter than you expected, worn smooth like stone in a riverbed. 'I came to witness,' they say. 'That much is true.' But the rest does not follow. They do not name what they foreknew. They do not explain the layered traces Prism Sight caught in their light-history, the sense of existing in two moments at once. Instead, Veln simply stands, and their silence carries the weight of knowledge they will not—or cannot—speak.\n\nVessin reads the moment from the arch and does not press. Kael nods once, accepting the boundary. Even Halvex, raw as he is, seems to understand that some answers are not owed, even when the question is direct. Cy's lamp steadies. The Hub crossing holds its breath around you—five arches, one sealed stone, and a person who knows more than they will tell."
+      },
+      {
+        "player": "Indeed.. .Indeed... reach for the seam in the Null Stone and open it.",
+        "summary": "At the Hub crossing in deep night, Loki reaches for the sealed seam in the Null Stone and finds it will not yield—the stone closes tighter against the attempt, drawing inward as if awakened and guarding itself. The mystery deepens; the answer is not to be forced.",
+        "narration": "You step forward onto the pale stone of the Hub, your hand rising toward the Null Stone's face. The seam runs vertical and precise—a hairline fracture that cuts through deliberate work, old and sealed. Your fingers find the edge where stone meets intentional gap.\n\nFor a moment, the Hub holds its breath. Cy's lamp steadies. Vessin reads your shoulders. Halvex watches the stone as if it might answer back.\n\nYou press. You pull. You run your fingertips along the seam's length, feeling for purchase, for give, for any sign that it will yield to genuine wanting.\n\nThe stone does not move. The seam does not widen. Instead—and this is the part that settles cold in your chest—you feel the pressure mount. Not resistance exactly. More like the seam is *pulling back*, drawing inward, sealing itself tighter against your touch. The stone grows warm under your palm. For just a moment, you swear you feel something deep inside it turn its attention toward you—curious, perhaps, or cautious. Then the warmth fades. The seam closes imperceptibly tighter.\n\nYour hand falls away.\n\nVeln Ashpause does not move. Vessin steps closer, reading your face the way she reads false patterns—looking for what the stone just told you. Kael's jaw tightens slightly. Cy's lens irises, cataloguing the failure.\n\nThe Null Stone stands exactly as it did before. Sealed. Waiting. Refusing."
       }
     ],
     "lastTurn": {
-      "narration": "You turn fully to Veln Ashpause, meeting the weight of their stillness head-on. The question sits plain between you: what did they foreknow? Why step forward now, into this exact moment?\n\nVeln's eyes hold yours without flinching. For a long breath—maybe two—there is no answer. Then they speak, and their voice is quieter than you expected, worn smooth like stone in a riverbed. 'I came to witness,' they say. 'That much is true.' But the rest does not follow. They do not name what they foreknew. They do not explain the layered traces Prism Sight caught in their light-history, the sense of existing in two moments at once. Instead, Veln simply stands, and their silence carries the weight of knowledge they will not—or cannot—speak.\n\nVessin reads the moment from the arch and does not press. Kael nods once, accepting the boundary. Even Halvex, raw as he is, seems to understand that some answers are not owed, even when the question is direct. Cy's lamp steadies. The Hub crossing holds its breath around you—five arches, one sealed stone, and a person who knows more than they will tell.",
-      "sceneSummary": "At the Hub crossing deep in night, Loki asks Veln Ashpause directly what they foreknew—and the Hourkeeper refuses to answer, holding the boundary of knowledge they will not share. Partnership is named; the stone stands unbroken; the greater threads remain open.",
+      "narration": "You step forward onto the pale stone of the Hub, your hand rising toward the Null Stone's face. The seam runs vertical and precise—a hairline fracture that cuts through deliberate work, old and sealed. Your fingers find the edge where stone meets intentional gap.\n\nFor a moment, the Hub holds its breath. Cy's lamp steadies. Vessin reads your shoulders. Halvex watches the stone as if it might answer back.\n\nYou press. You pull. You run your fingertips along the seam's length, feeling for purchase, for give, for any sign that it will yield to genuine wanting.\n\nThe stone does not move. The seam does not widen. Instead—and this is the part that settles cold in your chest—you feel the pressure mount. Not resistance exactly. More like the seam is *pulling back*, drawing inward, sealing itself tighter against your touch. The stone grows warm under your palm. For just a moment, you swear you feel something deep inside it turn its attention toward you—curious, perhaps, or cautious. Then the warmth fades. The seam closes imperceptibly tighter.\n\nYour hand falls away.\n\nVeln Ashpause does not move. Vessin steps closer, reading your face the way she reads false patterns—looking for what the stone just told you. Kael's jaw tightens slightly. Cy's lens irises, cataloguing the failure.\n\nThe Null Stone stands exactly as it did before. Sealed. Waiting. Refusing.",
+      "sceneSummary": "At the Hub crossing in deep night, Loki reaches for the sealed seam in the Null Stone and finds it will not yield—the stone closes tighter against the attempt, drawing inward as if awakened and guarding itself. The mystery deepens; the answer is not to be forced.",
       "choices": [
         {
-          "label": "Accept the silence and ask Veln instead—what happens now? Where does partnership go from here?",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Ask Cy what it knows about seals this old—whether there's a mechanism, a pattern, a way to ask rather than demand.",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "axes": {},
           "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "negotiate"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Press the question differently—ask Veln if what they foreknew has already happened, or if it's still coming.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": "hard",
           "opposedDifficulty": null,
           "intentTags": [
             "study"
@@ -333,33 +322,50 @@
           "emergenceId": null
         },
         {
-          "label": "Step away from the question entirely. Turn to Halvex and Vessin—ask what they think comes next, what the partnership actually means in the shape of the road.",
+          "label": "Turn to Vessin and name what you felt—the stone's attention, the way it sealed tighter. Ask if she reads it the same way.",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Step back and use Prism Sight to read the light-history around the seam—what has touched it before, and what did the stone show them?",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {},
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "lead"
+            "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
+          "abilityId": "prism_sight",
+          "energyCost": 3,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Use Harmonic Voice to lace the Hub's air with patience—create the space where an Hourkeeper might find a way to speak what they have been holding.",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Walk the perimeter of the Hub instead—read the five waygate arches and ask why four are sealed while one remains open. Find the pattern in what the network is guarding.",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "axes": {},
-          "difficulty": "hard",
+          "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "coax"
+            "study",
+            "scout"
           ],
-          "abilityId": "harmonic_voice",
-          "energyCost": 5,
+          "abilityId": "see_the_made_thing",
+          "energyCost": 2,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
@@ -382,41 +388,41 @@
       "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "The Hub crossing deep in night—five waygate arches converging on pale stone worn by countless arrivals. The Null Stone stands sealed at the center, its seam catching faint light. The air tastes of ash and ozone, still weighted with the moment's significance.",
+        "setting": "The Hub crossing deep in night—five waygate arches converging on pale stone worn by countless arrivals. The Null Stone stands at the center, its sealed seam now warm from your touch and sealed tighter than before, as if it has just awakened to guard itself. The air tastes of ash and ozone.",
         "npcsPresent": [
           {
             "name": "Halvex Coil",
-            "state": "Standing at the center, coat straightened, jaw tight with the work of naming himself—raw and present"
+            "state": "Watching the stone intently, as if the seam's refusal to open has told him something about the nature of the breaking itself"
           },
           {
             "name": "Veln Ashpause",
-            "state": "Stepped forward into the foreknown moment, stillness transformed into presence—eyes fixed on Loki with the weight of knowledge they will not speak"
+            "state": "Unmoved, stillness absolute, reading Loki's face with the weight of foreknowledge held back"
           },
           {
             "name": "Vessin Tallow-bark",
-            "state": "Reading from the southern arch with steady, careful attention—respecting the boundary Veln has drawn"
+            "state": "Stepped closer, reading your shoulders and hands—working out what the stone just told you through your body's language"
           },
           {
             "name": "Kael",
-            "state": "Standing at the crossing, nodding once—present and steady, accepting what will not be answered"
+            "state": "Standing steady, jaw tightened slightly—present and steady, witnessing what cannot be forced"
           },
           {
             "name": "Cy",
-            "state": "Lamp raised, completing another perimeter spiral—acknowledging the naming, steady as stone"
+            "state": "Lamp raised, lens irising as it catalogues the stone's refusal—attending, recording, processing"
           }
         ],
         "objects": [
-          "The Null Stone—pale, deliberately sealed with a vertical seam running through it",
+          "The Null Stone—pale, deliberately sealed with a vertical seam, now warm and tighter than before",
           "Five waygate arches—four sealed by deliberate interference, one the way Loki entered",
           "Dissolved ribbon scraps scattered across the stone from the Revel's breaking",
           "Cy's raised lamp"
         ],
         "threads": [
-          "Veln Ashpause's foreknowledge—what did they foresee, and why will they not speak it?",
-          "Halvex Coil's uncertainty about partnership—what it means to stop breaking and start searching",
-          "Who hired Halvex Coil to break the Null Stone, and why does it matter now?",
-          "The seam in the Null Stone—still sealed, still unbroken, still unknown",
-          "The deliberate interference sealing the waygate network—four arches locked, the pattern still unexplained"
+          "The Null Stone's seam refuses to open and seals tighter when touched—it is guarded, conscious, or both",
+          "Veln Ashpause's foreknowledge remains unspoken—they came to witness, but will not name what they saw",
+          "The pattern of sealed waygate arches—why four are locked and one remains open",
+          "Who hired Halvex Coil to break the Null Stone, and why does the breaking matter now?",
+          "Halvex Coil's uncertainty about partnership—can he choose accountability over breaking?"
         ]
       },
       "npcUpdates": [],
@@ -424,7 +430,19 @@
       "factUpdates": [],
       "placeUpdates": [],
       "discovery": null,
-      "codexUpdates": [],
+      "codexUpdates": [
+        {
+          "topic": "the-null-stone",
+          "label": "The Null Stone",
+          "kind": "place",
+          "entityId": null,
+          "fact": "The seam in the Null Stone refuses to yield to direct force—when touched with full intent, it draws inward and seals tighter, as if the stone has awakened to guard itself. It is not passively sealed; it is actively defending what lies behind it.",
+          "links": [
+            "the-crossing",
+            "churn-revel-orchestrator"
+          ]
+        }
+      ],
       "holdingOps": [],
       "debtOps": [],
       "partyOps": [],
@@ -445,48 +463,52 @@
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
       "offerIntent": null,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Hub crossing deep in night—five waygate arches converging on pale stone worn by countless arrivals. The Null Stone stands sealed at the center, its seam catching faint light. The air tastes of ash and ozone, still weighted with the moment's significance.",
+      "setting": "The Hub crossing deep in night—five waygate arches converging on pale stone worn by countless arrivals. The Null Stone stands at the center, its sealed seam now warm from your touch and sealed tighter than before, as if it has just awakened to guard itself. The air tastes of ash and ozone.",
       "npcsPresent": [
         {
           "name": "Halvex Coil",
-          "state": "Standing at the center, coat straightened, jaw tight with the work of naming himself—raw and present"
+          "state": "Watching the stone intently, as if the seam's refusal to open has told him something about the nature of the breaking it"
         },
         {
           "name": "Veln Ashpause",
-          "state": "Stepped forward into the foreknown moment, stillness transformed into presence—eyes fixed on Loki with the weight of kno"
+          "state": "Unmoved, stillness absolute, reading Loki's face with the weight of foreknowledge held back"
         },
         {
           "name": "Vessin Tallow-bark",
-          "state": "Reading from the southern arch with steady, careful attention—respecting the boundary Veln has drawn"
+          "state": "Stepped closer, reading your shoulders and hands—working out what the stone just told you through your body's language"
         },
         {
           "name": "Kael",
-          "state": "Standing at the crossing, nodding once—present and steady, accepting what will not be answered"
+          "state": "Standing steady, jaw tightened slightly—present and steady, witnessing what cannot be forced"
         },
         {
           "name": "Cy",
-          "state": "Lamp raised, completing another perimeter spiral—acknowledging the naming, steady as stone"
+          "state": "Lamp raised, lens irising as it catalogues the stone's refusal—attending, recording, processing"
         }
       ],
       "objects": [
-        "The Null Stone—pale, deliberately sealed with a vertical seam running through it",
+        "The Null Stone—pale, deliberately sealed with a vertical seam, now warm and tigh",
         "Five waygate arches—four sealed by deliberate interference, one the way Loki ent",
         "Dissolved ribbon scraps scattered across the stone from the Revel's breaking",
         "Cy's raised lamp"
       ],
       "threads": [
-        "Veln Ashpause's foreknowledge—what did they foresee, and why will they not speak it?",
-        "Halvex Coil's uncertainty about partnership—what it means to stop breaking and start searching",
-        "Who hired Halvex Coil to break the Null Stone, and why does it matter now?",
-        "The seam in the Null Stone—still sealed, still unbroken, still unknown",
-        "The deliberate interference sealing the waygate network—four arches locked, the pattern still unexplained"
+        "The Null Stone's seam refuses to open and seals tighter when touched—it is guarded, conscious, or both",
+        "Veln Ashpause's foreknowledge remains unspoken—they came to witness, but will not name what they saw",
+        "The pattern of sealed waygate arches—why four are locked and one remains open",
+        "Who hired Halvex Coil to break the Null Stone, and why does the breaking matter now?",
+        "Halvex Coil's uncertainty about partnership—can he choose accountability over breaking?"
       ]
     },
-    "beats": 9,
+    "beats": 10,
     "subPlace": {
       "slug": "the-hub-crossing",
       "name": "The Hub Crossing",
@@ -496,7 +518,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 4,
-    "hour": 5,
+    "hour": 6,
     "realAnchor": null
   },
   "companions": [
@@ -1503,7 +1525,7 @@
     "lastSharedReadAt": "2026-09-15T14:47:59.164Z",
     "lastTickWorldDay": 77,
     "lastCanonWorldDay": 77,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "The Churn-Revel orchestrator as a named ally and partner",
@@ -6828,20 +6850,23 @@
           "[d3] you have walked here",
           "[d3] The Null Stone at the hub of the Crossing conceals a hairline seam running vertically through its face—too precise to be natural breakage. Cy detected it through direct contact; Prism Sight could not resolve it. The seam's placement and precision suggest deliberate construction or concealment.",
           "[d3] The Null Stone at the Hub was deliberately sealed with a hairline seam running vertically through its face—someone cut this to conceal or hold something. The work is old and precise, built to endure. What lies behind the seam is unknown. Cy detected it where Prism Sight could not.",
-          "[d3] A Churn-Revel erupted from the spinward waygate arch at late afternoon on day 3—deliberate chaos masking a coordinated attempt on the Null Stone. The seam's discovery triggered the arrival, or the Revel was already positioned to act the moment the seam was found."
+          "[d3] A Churn-Revel erupted from the spinward waygate arch at late afternoon on day 3—deliberate chaos masking a coordinated attempt on the Null Stone. The seam's discovery triggered the arrival, or the Revel was already positioned to act the moment the seam was found.",
+          "[d4] The seam in the Null Stone refuses to yield to direct force—when touched with full intent, it draws inward and seals tighter, as if the stone has awakened to guard itself. It is not passively sealed; it is actively defending what lies behind it."
         ],
         "links": [
           "cy-s-construction",
           "halfex",
           "the-null-stone",
-          "the-annex-sender"
+          "the-annex-sender",
+          "churn-revel-orchestrator"
         ],
         "aliases": [
-          "The Null Stone's Seam"
+          "The Null Stone's Seam",
+          "The Null Stone"
         ],
         "createdDay": 3,
         "entityId": "the-crossing",
-        "updatedDay": 3
+        "updatedDay": 4
       },
       "lone-traveler-eastfork-warning": {
         "id": "lone-traveler-eastfork-warning",
@@ -7055,17 +7080,17 @@
     ]
   },
   "tendencies": {
-    "devotion": 1.0526850026708436,
-    "cerebral": 10.11287739315432,
-    "social": 18.295386618016742,
-    "strategic": 7.922627840433069,
-    "cautious": 6.290432414104541,
-    "amorous": 12.954729087572987,
-    "generous": 4.815007718310077,
-    "ruthless": 0.5479458858222155,
-    "risky": 0.447806096561461,
-    "patient": 0.12228779183977612,
-    "deception": 0.14234932390569235
+    "devotion": 1.0263678776040726,
+    "cerebral": 10.860055458325462,
+    "social": 17.838001952566323,
+    "strategic": 8.724562144422244,
+    "cautious": 6.1331716037519275,
+    "amorous": 12.630860860383663,
+    "generous": 4.694632525352325,
+    "ruthless": 0.5342472386766601,
+    "risky": 0.43661094414742446,
+    "patient": 0.11923059704378171,
+    "deception": 0.13879059080805004
   },
   "aptitudes": [
     "silver_tongue",
@@ -7076,7 +7101,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 161,
+  "actionCount": 162,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -7748,8 +7773,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789493409832,
-  "rev": 666,
+  "updatedAt": 1789507288983,
+  "rev": 667,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8637,7 +8662,7 @@
     "the_gearlands": 33,
     "umbral_depths": 54,
     "the_quickwood": 101,
-    "the_center": 29
+    "the_center": 30
   },
   "opLossPending": false,
   "sessions": [
@@ -8728,6 +8753,14 @@
       "startDay": 77,
       "endDay": 77,
       "beats": 2
+    },
+    {
+      "id": "sess-12",
+      "startedAt": "2026-09-15T21:21:28.979Z",
+      "lastAt": "2026-09-15T21:21:28.979Z",
+      "startDay": 77,
+      "endDay": 77,
+      "beats": 1
     }
   ],
   "establishedFacts": [
@@ -8783,19 +8816,19 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 192,
-    "choices": 192,
-    "characterDeltas": 81,
-    "scene": 192,
+    "sceneSummary": 193,
+    "choices": 193,
+    "characterDeltas": 82,
+    "scene": 193,
     "placeUpdates": 21,
-    "codexUpdates": 106,
+    "codexUpdates": 107,
     "timeOps": 165,
     "offer": 23,
     "generateRequest": 6,
-    "sceneEnded": 65,
+    "sceneEnded": 66,
     "npcUpdates": 157,
     "moveTo": 6,
-    "gambitApt": 29,
+    "gambitApt": 30,
     "deeds": 6,
     "questUpdates": 17,
     "standingOps": 3,
@@ -8810,7 +8843,7 @@
     "_engineClosedScene": 1,
     "discovery": 1
   },
-  "_opTurns": 192,
+  "_opTurns": 193,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -8864,7 +8897,7 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "see_the_made_thing": 30,
+      "see_the_made_thing": 31,
       "falsecraft": 7,
       "the_wrong_reality": 5,
       "the_misdirect": 2,
@@ -8897,11 +8930,11 @@
       {
         "abilityId": "appetite_sense",
         "since": "2026-07-21T18:16:21.011Z",
-        "progress": 12
+        "progress": 13
       }
     ],
     "lastUsed": {
-      "see_the_made_thing": 76,
+      "see_the_made_thing": 77,
       "falsecraft": 69,
       "the_wrong_reality": 32,
       "the_misdirect": 31,
@@ -9572,7 +9605,7 @@
     "discuss": 1,
     "travel": 6,
     "scout": 2,
-    "prepare": 1,
+    "prepare": 2,
     "careful": 4,
     "woo": 1,
     "rapport": 8,
@@ -9580,7 +9613,7 @@
     "ask": 2,
     "help": 4,
     "study": 4,
-    "investigate": 1,
+    "investigate": 2,
     "charm": 1,
     "comfort": 1,
     "finesse": 1,
@@ -9837,352 +9870,352 @@
   },
   "_promptRows": {
     "character": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "location": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "region": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "groundDetail": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "lore": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "traditionMotiveDetail": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "sheetsDetail": {
-      "reached": 14,
-      "produced": 13
+      "reached": 15,
+      "produced": 14
     },
     "rules": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "recentTurns": {
-      "reached": 14,
-      "produced": 13
+      "reached": 15,
+      "produced": 14
     },
     "timeLabel": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "npcRegistryDetail": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "mintedUnmetDetail": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "npcSeedDetail": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "traditionVocab": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "standingDetail": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "recalledDetail": {
-      "reached": 14,
+      "reached": 15,
       "produced": 1
     },
     "bearingsDetail": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "caravansDetail": {
-      "reached": 14,
+      "reached": 15,
       "produced": 0
     },
     "commandDetail": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "presenceDetail": {
-      "reached": 14,
-      "produced": 7
+      "reached": 15,
+      "produced": 8
     },
     "worthHereDetail": {
-      "reached": 14,
+      "reached": 15,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "sceneState": {
-      "reached": 14,
-      "produced": 13
-    },
-    "holdingsDetail": {
-      "reached": 14,
+      "reached": 15,
       "produced": 14
     },
+    "holdingsDetail": {
+      "reached": 15,
+      "produced": 15
+    },
     "debtsDetail": {
-      "reached": 14,
+      "reached": 15,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 14,
+      "reached": 15,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "questsDetail": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "structuredQuestsDetail": {
-      "reached": 14,
+      "reached": 15,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 14,
+      "reached": 15,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 14,
+      "reached": 15,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "companionsDetail": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "placeMemoryDetail": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "agesMissingDetail": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "newsDetail": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "worldArcsDetail": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "legendsPursuableDetail": {
-      "reached": 14,
+      "reached": 15,
       "produced": 12
     },
     "wakesDetail": {
-      "reached": 14,
+      "reached": 15,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "reachableDeadDetail": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "threatToPlayer": {
-      "reached": 14,
+      "reached": 15,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 14,
+      "reached": 15,
       "produced": 0
     },
     "resolution": {
-      "reached": 14,
-      "produced": 8
+      "reached": 15,
+      "produced": 9
     },
     "playerInput": {
-      "reached": 14,
+      "reached": 15,
       "produced": 6
     },
     "exactWords": {
-      "reached": 14,
-      "produced": 6
+      "reached": 15,
+      "produced": 7
     },
     "travelDirective": {
-      "reached": 14,
+      "reached": 15,
       "produced": 0
     },
     "itemAdvance": {
-      "reached": 14,
+      "reached": 15,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 14,
+      "reached": 15,
       "produced": 1
     },
     "encounterOfferDetail": {
-      "reached": 14,
+      "reached": 15,
       "produced": 3
     },
     "fightFramingDetail": {
-      "reached": 14,
+      "reached": 15,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 14,
+      "reached": 15,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 14,
+      "reached": 15,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 14,
+      "reached": 15,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 14,
+      "reached": 15,
       "produced": 0
     },
     "offerDetail": {
-      "reached": 14,
+      "reached": 15,
       "produced": 1
     },
     "teacherOfferDetail": {
-      "reached": 14,
+      "reached": 15,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 14,
-      "produced": 3
+      "reached": 15,
+      "produced": 4
     },
     "romanceGuidanceDetail": {
-      "reached": 14,
+      "reached": 15,
       "produced": 0
     },
     "factsDetail": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "evolvedItemsDetail": {
-      "reached": 14,
+      "reached": 15,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 14,
+      "reached": 15,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 14,
+      "reached": 15,
       "produced": 0
     },
     "perilNote": {
-      "reached": 14,
+      "reached": 15,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 14,
+      "reached": 15,
       "produced": 4
     },
     "masteryDetail": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "bookkeepingRestate": {
-      "reached": 14,
+      "reached": 15,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "repairPanelDetail": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "teacherDetail": {
-      "reached": 14,
+      "reached": 15,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "availableEncounters": {
-      "reached": 14,
-      "produced": 10
+      "reached": 15,
+      "produced": 11
     },
     "partyDetail": {
-      "reached": 14,
+      "reached": 15,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "registerDetail": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "legendDetail": {
-      "reached": 14,
+      "reached": 15,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 14,
+      "reached": 15,
       "produced": 0
     },
     "assignmentsDetail": {
-      "reached": 14,
+      "reached": 15,
       "produced": 0
     },
     "latentArcsDetail": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "seasonalDetail": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "schoolsDetail": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "sharedCanonDetail": {
-      "reached": 14,
+      "reached": 15,
       "produced": 0
     },
     "worldCountLabel": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "waygateDetail": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "readAloudDetail": {
-      "reached": 14,
-      "produced": 14
+      "reached": 15,
+      "produced": 15
     },
     "scenePacingDetail": {
-      "reached": 14,
-      "produced": 6
+      "reached": 15,
+      "produced": 7
     }
   },
   "_opUnknown": {
-    "sceneSummary": 14
+    "sceneSummary": 15
   },
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T22:51:56.913Z",
@@ -10318,6 +10351,12 @@
       "key": "spectrumId",
       "value": 0,
       "why": "not a spectrum id"
+    },
+    {
+      "at": "2026-09-15T21:21:03.672Z",
+      "key": "spectrumId",
+      "value": "destruction_creation",
+      "why": "not a number"
     }
   ],
   "braids": [

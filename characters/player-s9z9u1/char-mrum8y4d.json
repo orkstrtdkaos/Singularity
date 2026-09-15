@@ -279,14 +279,19 @@
         "player": "Introduce yourself, and each other in turn, stopping at the Churn-Revel to let him introduce himself.",
         "summary": "At the Hub crossing in deep night, Loki names themselves plainly and hears the Churn-Revel orchestrator speak their own truth for the first time—and Veln Ashpause, the Hourkeeper with foreknowledge, steps forward into the moment they came to witness.",
         "narration": "You turn to face the orchestrator fully, hand still on his shoulder, and meet his eyes with the directness he recognizes now as belonging to someone who also hungers. 'I'm Loki,' you say plainly. 'I find meaning in the old machines and the spaces between what people call order. I move between things—in cities, in the wild, in the places where the rules haven't settled yet.'\n\nThe orchestrator nods slowly, and you step back to let him have the space. He straightens his coat—a gesture toward dignity after the breaking—and turns toward the others. His voice, when it comes, is rougher than before but clearer. 'I am the Churn-Revel orchestrator,' he says. There is no apology in it, but there is no defiance either. 'I was hired to break the Null Stone because I needed to believe that chaos *matters*. That order is not the only answer. I came to this place because breaking something that will not break became proof.' He pauses, and his eyes find yours briefly. 'I am no longer sure that is the right proof. But I will search for the one that is.'\n\nVessin, reading him from the southern arch, does not move but her expression settles into something like recognition. Kael nods once—the kind of nod that says they have seen people remade before and this is not the strangest shape it takes. Cy's lamp swings toward the orchestrator, lens irising, and then away again—a form of acknowledgment from something that speaks mostly in mechanism.\n\nThen Veln Ashpause moves."
+      },
+      {
+        "player": "And your name? What shall we call you?",
+        "summary": "At the Hub crossing in deep night, Halvex Coil names himself plainly—and Veln Ashpause, the Hourkeeper, steps fully into the moment they foreknew.",
+        "narration": "The orchestrator straightens fully now, his hand releasing yours. His jaw works for a moment—not calculation anymore, but something like cost being weighed. Then he names it.\n\n'Halvex,' he says. The word sits in the Hub's deep air like a bell that has just stopped ringing. 'Halvex Coil. I was hired to break what will not break, and I believed—' He stops, and something in his face shifts. 'I believed chaos mattered enough to prove itself against order. I still believe that. But the proof was wrong.'\n\nVeln Ashpause steps forward, and the motion is not sudden—it is inevitable, the way a door opens when it was always meant to open. Their grey coat catches the pale light from the five arches. 'Halvex Coil,' they say, and the name sounds different in their mouth, like they are confirming something rather than hearing it for the first time. Their eyes—when they finally meet yours—carry the weight of someone who has known this moment was coming for longer than time runs.\n\nVessin reads the exchange with her careful attention. Kael nods once, steady. Cy completes another spiral, lamp raised, and something in its mechanical precision seems to acknowledge the naming."
       }
     ],
     "lastTurn": {
-      "narration": "You turn to face the orchestrator fully, hand still on his shoulder, and meet his eyes with the directness he recognizes now as belonging to someone who also hungers. 'I'm Loki,' you say plainly. 'I find meaning in the old machines and the spaces between what people call order. I move between things—in cities, in the wild, in the places where the rules haven't settled yet.'\n\nThe orchestrator nods slowly, and you step back to let him have the space. He straightens his coat—a gesture toward dignity after the breaking—and turns toward the others. His voice, when it comes, is rougher than before but clearer. 'I am the Churn-Revel orchestrator,' he says. There is no apology in it, but there is no defiance either. 'I was hired to break the Null Stone because I needed to believe that chaos *matters*. That order is not the only answer. I came to this place because breaking something that will not break became proof.' He pauses, and his eyes find yours briefly. 'I am no longer sure that is the right proof. But I will search for the one that is.'\n\nVessin, reading him from the southern arch, does not move but her expression settles into something like recognition. Kael nods once—the kind of nod that says they have seen people remade before and this is not the strangest shape it takes. Cy's lamp swings toward the orchestrator, lens irising, and then away again—a form of acknowledgment from something that speaks mostly in mechanism.\n\nThen Veln Ashpause moves.",
-      "sceneSummary": "At the Hub crossing in deep night, Loki names themselves plainly and hears the Churn-Revel orchestrator speak their own truth for the first time—and Veln Ashpause, the Hourkeeper with foreknowledge, steps forward into the moment they came to witness.",
+      "narration": "The orchestrator straightens fully now, his hand releasing yours. His jaw works for a moment—not calculation anymore, but something like cost being weighed. Then he names it.\n\n'Halvex,' he says. The word sits in the Hub's deep air like a bell that has just stopped ringing. 'Halvex Coil. I was hired to break what will not break, and I believed—' He stops, and something in his face shifts. 'I believed chaos mattered enough to prove itself against order. I still believe that. But the proof was wrong.'\n\nVeln Ashpause steps forward, and the motion is not sudden—it is inevitable, the way a door opens when it was always meant to open. Their grey coat catches the pale light from the five arches. 'Halvex Coil,' they say, and the name sounds different in their mouth, like they are confirming something rather than hearing it for the first time. Their eyes—when they finally meet yours—carry the weight of someone who has known this moment was coming for longer than time runs.\n\nVessin reads the exchange with her careful attention. Kael nods once, steady. Cy completes another spiral, lamp raised, and something in its mechanical precision seems to acknowledge the naming.",
+      "sceneSummary": "At the Hub crossing in deep night, Halvex Coil names himself plainly—and Veln Ashpause, the Hourkeeper, steps fully into the moment they foreknew.",
       "choices": [
         {
-          "label": "Ask Veln Ashpause what they foreknew and why they've come.",
+          "label": "Ask Veln Ashpause what they foreknew—what brought them here at this exact moment.",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {},
@@ -302,9 +307,25 @@
           "emergenceId": null
         },
         {
-          "label": "Use Prism Sight to read the light-history around Veln—what does your own craft show you about how they arrived?",
+          "label": "Turn to Halvex and ask directly: who hired you to break the Null Stone?",
+          "attribute": "social",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Prism Sight to read Halvex's light-history—see what brought him to this place, this mandate.",
           "attribute": "mental",
-          "subAttribute": "reason",
+          "subAttribute": "insight",
           "axes": {},
           "difficulty": "normal",
           "opposedDifficulty": null,
@@ -318,34 +339,18 @@
           "emergenceId": null
         },
         {
-          "label": "Step toward Veln and acknowledge their stillness—ask them to tell you what comes next.",
+          "label": "Ask Halvex what happens now—what he means to do with the partnership you offered.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Turn to Cy—it read something in the light-traces before. Ask it what it found.",
-          "attribute": "practical",
-          "subAttribute": "craft",
           "axes": {},
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "study"
+            "plan"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
@@ -363,71 +368,86 @@
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
+      "adoptSchool": {},
       "offer": {
-        "thing": "The Churn-Revel orchestrator speaking their own truth plainly for the first time—hunger named without calculation or defense",
-        "from": "Loki's own act of recognition, reflected back and answered with honesty"
+        "thing": "Halvex Coil—the Churn-Revel orchestrator, now named, now searching for answers that do not fit neat shapes",
+        "from": "your own hunger recognized in another; the partnership you offered and he accepted"
       },
       "stageOps": [],
       "scene": {
-        "setting": "The Hub crossing at the heart of the waygate network—five vast arches converging on a chamber where the Null Stone sits pale and sealed. Deep night, vault shadows pooling high above. The air tastes of ash and fading ozone. The Revel is finished; the stone stands unbroken.",
+        "setting": "The Hub crossing at the heart of the waygate network—five vast arches converging on a pale stone chamber. Deep night, the vault shadows pooling high. The air tastes of ash and fading ozone. The Revel is finished; the stone stands unbroken.",
         "npcsPresent": [
           {
-            "name": "Veln Ashpause",
-            "state": "Crossing the threshold of the north arch now, stillness transformed into presence and direction—something in their movement suggests they have arrived at the moment they foreknew"
+            "name": "Halvex Coil",
+            "state": "Standing at your side, newly named, weighing what comes next"
           },
           {
-            "name": "The Churn-Revel orchestrator",
-            "state": "Standing at Loki's side, hand released, coat straightened, having just named himself and his hunger plainly for the first time—breathing steadied, certainty relinquished"
+            "name": "Veln Ashpause",
+            "state": "Stepped fully across the north arch threshold; stillness transformed into presence; eyes meeting yours with the weight of foreknowledge"
           },
           {
             "name": "Vessin Tallow-bark",
-            "state": "At the southern arch, reading the exchange with careful attention, expression settling into recognition"
+            "state": "At the southern arch, reading the exchange with careful attention"
           },
           {
             "name": "Kael",
-            "state": "At the hub crossing, tracking the scene with steady assessment, nodding at the orchestrator's truth-telling"
+            "state": "At the hub crossing, tracking the scene with steady assessment, nodding once"
           },
           {
             "name": "Cy",
-            "state": "Completing its perimeter spiral, lamp raised, lens irised toward the orchestrator and then away—a form of acknowledgment"
+            "state": "Completing another perimeter spiral, lamp raised, acknowledging the naming"
           }
         ],
         "objects": [
-          "The Null Stone—pale, unremarkable, deliberately sealed with a vertical seam running through its far face",
+          "The Null Stone—pale, deliberately sealed with a vertical seam running through its face",
           "Five waygate arches—four sealed by deliberate interference, one the way you entered",
           "Dissolved ribbon scraps scattered across the stone from the Revel's breaking",
           "Cy's raised lamp"
         ],
         "threads": [
-          "What Veln Ashpause foreknew and why their arrival matters at this exact moment",
+          "What Veln Ashpause foreknew and why they arrived at this exact moment",
+          "Who hired Halvex Coil to break the Null Stone and why",
           "What lies behind the seam in the Null Stone",
-          "Who hired the orchestrator to break the stone and why",
           "The deliberate interference sealing the waygate network",
-          "What the orchestrator will become now that certainty is relinquished"
+          "What Halvex will become now that partnership is real"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "churn-revel-orchestrator",
-          "name": "The Churn-Revel orchestrator",
-          "note": "Named themselves plainly for the first time—their hunger for proof that chaos matters, their uncertainty now that the proof has been offered and refused. Standing at Loki's side without calculation.",
+          "revealName": "Halvex Coil",
+          "note": "Named himself plainly at the Hub crossing—Halvex Coil, hired to break what will not break. Believes chaos matters but recognizes the proof was wrong. Now searching for answers that do not fit neat shapes with Loki.",
           "learned": [
-            "Named themselves and their hunger without defensiveness or performance",
-            "Speaks with clarity now that certainty is gone",
-            "Moved from calculation toward partnership"
-          ],
-          "skillsObserved": [
-            "Can speak plainly about desire without wrapping it in justification"
-          ],
-          "relationshipDelta": 1,
-          "statusNote": "At Loki's side, searching for answers that do not fit neat shapes—partnership accepted"
+            "His name is Halvex Coil",
+            "He was hired to break the Null Stone",
+            "He still believes chaos matters but questions whether the mandate was the right proof",
+            "He recognizes hunger in Loki that mirrors his own"
+          ]
+        },
+        {
+          "op": "update",
+          "npcId": "veln-ashpause",
+          "note": "Stepped fully across the north arch threshold into the Hub crossing—the moment they foreknew has arrived. Their presence is no longer stillness but inevitability. Eyes meeting Loki's with the weight of someone who has known this exact moment was coming."
         }
       ],
       "intentsHeard": [],
       "factUpdates": [],
       "placeUpdates": [],
-      "codexUpdates": [],
+      "discovery": {},
+      "codexUpdates": [
+        {
+          "topic": "churn-revel-orchestrator",
+          "label": "Halvex Coil",
+          "kind": "person",
+          "entityId": "churn-revel-orchestrator",
+          "fact": "His true name is Halvex Coil. He was hired to break the Null Stone because he believed—and still believes—that chaos matters enough to prove itself against order. The proof itself was wrong.",
+          "links": [
+            "the-crossing",
+            "the-null-stone"
+          ]
+        }
+      ],
       "holdingOps": [],
       "debtOps": [],
       "partyOps": [],
@@ -436,64 +456,64 @@
       "projectOps": [],
       "bandOps": [],
       "deathOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
+      "newEncounter": {},
+      "unlockPrecursor": {},
+      "unlockSubstrate": {},
       "timeOps": {},
-      "moveTo": null,
+      "moveTo": {},
       "stateOps": [],
       "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": "Deep night in the Hub crossing: the Null Stone pale and unbroken at the center of five converging arches. Loki stands with the Churn-Revel orchestrator, hand on his shoulder, as Veln Ashpause—motionless in grey robes—crosses the threshold of the north arch with the certainty of someone arriving at a moment they have already witnessed. Vessin watches from the south arch, Kael nods steady approval, and Cy's lamp raises and lowers like a benediction. The moment holds between what was breaking and what comes next.",
-      "newAbility": null,
-      "gambitOps": null,
+      "deriveItem": {},
+      "imagePrompt": "Halvex Coil stands in the pale light of the Hub crossing—coat straightened, jaw set, eyes clear of calculation for the first time. Behind him, Veln Ashpause steps forward through the north arch, their grey coat catching starlight from the vault above, their stillness transformed into the terrible certainty of someone who has always known this moment was coming. The Null Stone sits pale and unbroken between them.",
+      "newAbility": {},
+      "gambitOps": {},
       "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
+      "markDefiningMoment": {},
+      "markTeacher": {},
+      "offerPromotion": {},
+      "offerAcquisition": {},
+      "offerIntent": {},
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Hub crossing at the heart of the waygate network—five vast arches converging on a chamber where the Null Stone sits pale and sealed. Deep night, vault shadows pooling high above. The air tastes of ash and fading ozone. The Revel is finished; the stone stands unbroken.",
+      "setting": "The Hub crossing at the heart of the waygate network—five vast arches converging on a pale stone chamber. Deep night, the vault shadows pooling high. The air tastes of ash and fading ozone. The Revel is finished; the stone stands unbroken.",
       "npcsPresent": [
         {
-          "name": "Veln Ashpause",
-          "state": "Crossing the threshold of the north arch now, stillness transformed into presence and direction—something in their movem"
+          "name": "Halvex Coil",
+          "state": "Standing at your side, newly named, weighing what comes next"
         },
         {
-          "name": "The Churn-Revel orchestrator",
-          "state": "Standing at Loki's side, hand released, coat straightened, having just named himself and his hunger plainly for the firs"
+          "name": "Veln Ashpause",
+          "state": "Stepped fully across the north arch threshold; stillness transformed into presence; eyes meeting yours with the weight o"
         },
         {
           "name": "Vessin Tallow-bark",
-          "state": "At the southern arch, reading the exchange with careful attention, expression settling into recognition"
+          "state": "At the southern arch, reading the exchange with careful attention"
         },
         {
           "name": "Kael",
-          "state": "At the hub crossing, tracking the scene with steady assessment, nodding at the orchestrator's truth-telling"
+          "state": "At the hub crossing, tracking the scene with steady assessment, nodding once"
         },
         {
           "name": "Cy",
-          "state": "Completing its perimeter spiral, lamp raised, lens irised toward the orchestrator and then away—a form of acknowledgment"
+          "state": "Completing another perimeter spiral, lamp raised, acknowledging the naming"
         }
       ],
       "objects": [
-        "The Null Stone—pale, unremarkable, deliberately sealed with a vertical seam runn",
+        "The Null Stone—pale, deliberately sealed with a vertical seam running through it",
         "Five waygate arches—four sealed by deliberate interference, one the way you ente",
         "Dissolved ribbon scraps scattered across the stone from the Revel's breaking",
         "Cy's raised lamp"
       ],
       "threads": [
-        "What Veln Ashpause foreknew and why their arrival matters at this exact moment",
+        "What Veln Ashpause foreknew and why they arrived at this exact moment",
+        "Who hired Halvex Coil to break the Null Stone and why",
         "What lies behind the seam in the Null Stone",
-        "Who hired the orchestrator to break the stone and why",
         "The deliberate interference sealing the waygate network",
-        "What the orchestrator will become now that certainty is relinquished"
+        "What Halvex will become now that partnership is real"
       ]
     },
-    "beats": 6,
+    "beats": 7,
     "subPlace": {
       "slug": "the-hub-crossing",
       "name": "The Hub Crossing",
@@ -503,7 +523,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 4,
-    "hour": 3,
+    "hour": 4,
     "realAnchor": null
   },
   "companions": [
@@ -1055,7 +1075,7 @@
     },
     "churn-revel-orchestrator": {
       "id": "churn-revel-orchestrator",
-      "name": "The Churn-Revel orchestrator",
+      "name": "Halvex Coil",
       "role": "Master of coordinated chaos, now questioning their mandate",
       "description": "Hoarse voice, sharp features softening now, eyes that calculate and estimate. He moves like someone used to reading a room for weak points.",
       "firstMet": {
@@ -1069,17 +1089,19 @@
         "[d4] Offered partnership in searching for unboxed answers; accepted without hesitation; understands now that the hunger beneath chaos matters and was seen. No longer calculating for escape.",
         "[d4] Your bond becomes platonic.",
         "[d4] Loki named the partnership plainly—search for answers that do not fit neat shapes. The orchestrator accepted, gripping Loki's hand. Introduced to Vessin and Kael. Standing at Loki's side now, no longer calculating for escape but for the meaning underneath the chaos.",
-        "[d4] Named themselves plainly for the first time—their hunger for proof that chaos matters, their uncertainty now that the proof has been offered and refused. Standing at Loki's side without calculation."
+        "[d4] Named themselves plainly for the first time—their hunger for proof that chaos matters, their uncertainty now that the proof has been offered and refused. Standing at Loki's side without calculation.",
+        "[d4] Their name is revealed: Halvex Coil (was known as \"The Churn-Revel orchestrator\")",
+        "[d4] Named himself plainly at the Hub crossing—Halvex Coil, hired to break what will not break. Believes chaos matters but recognizes the proof was wrong. Now searching for answers that do not fit neat shapes with Loki."
       ],
       "knownFacts": [
-        "Recognizes themselves in Loki's own hunger for meaning underneath structure",
-        "The breaking of the Null Stone was about proving chaos matters, not about theft or destruction",
-        "Accepts that being seen—truly seen—changes the shape of the work",
         "Being seen—truly seen for the hunger beneath the work—changes the shape of what comes next",
         "Partnership in searching for unboxed answers matters more than the mandate to break",
         "Named themselves and their hunger without defensiveness or performance",
         "Speaks with clarity now that certainty is gone",
-        "Moved from calculation toward partnership"
+        "Moved from calculation toward partnership",
+        "His name is Halvex Coil",
+        "He was hired to break the Null Stone",
+        "He still believes chaos matters but questions whether the mandate was the right proof"
       ],
       "skillsObserved": [
         "Masters coordinated chaos—can weave multiple threads of a Revel into a single mandate",
@@ -1096,10 +1118,14 @@
         "locationId": "the_crossing",
         "day": 4
       },
-      "met": 5,
+      "met": 6,
       "bondType": "platonic",
       "image": "https://image.pollinations.ai/prompt/Hoarse%20voice%2C%20sharp%20features%20softening%20now%2C%20eyes%20that%20calculate%20and%20estimate.%20He%20moves%20like%20someone%20used%20to%20reading%20a%20room%20for%20weak%20points.%2C%20character%20portrait%2C%20named%20The%20Churn-Revel%20orchestrator%2C%20man%2C%20Master%20of%20coordinated%20chaos%2C%20now%20questioning%20their%20mandate%2C%20platonic%20to%20Loki%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=39738&nologo=true",
-      "_portraitTier": "devoted"
+      "_portraitTier": "devoted",
+      "aliases": [
+        "The Churn-Revel orchestrator"
+      ],
+      "nameRevealed": true
     }
   },
   "placeMemory": {
@@ -1506,10 +1532,6 @@
     "turnsSinceOffer": 0,
     "recentOffers": [
       {
-        "thing": "The Waygate network's five arches are in different states—only one reads as stable and ready. The others hum faintly or are silent…",
-        "from": "The deliberate sealing of the Quickwood gate and the Revel's attack on the Null Stone itself—the network is not simply blocked, it is…"
-      },
-      {
         "thing": "Veln Ashpause approaches from the northern arch—their stillness has changed, and they are moving with purpose for the first time since dawn.",
         "from": "The moment you named your own hunger and saw it reflected back. The Hourkeeper came to witness something; the mirror you just held up may…"
       },
@@ -1524,6 +1546,10 @@
       {
         "thing": "The Churn-Revel orchestrator speaking their own truth plainly for the first time—hunger named without calculation or defense",
         "from": "Loki's own act of recognition, reflected back and answered with honesty"
+      },
+      {
+        "thing": "Halvex Coil—the Churn-Revel orchestrator, now named, now searching for answers that do not fit neat shapes",
+        "from": "your own hunger recognized in another; the partnership you offered and he accepted"
       }
     ],
     "wantProgress": {
@@ -1718,23 +1744,7 @@
         "othersPush": 1
       }
     },
-    "pressureQueue": [
-      {
-        "source": "threat-attack",
-        "kind": "threat-attack",
-        "subjectId": "beast_rust_choir_gnats",
-        "aimedAtPlayer": true,
-        "urgency": 3,
-        "oneLineHook": "A rust-choir gnats has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
-        "becomes": {
-          "type": "encounter",
-          "encounterId": "beast_rust_choir_gnats",
-          "name": "rust-choir gnats"
-        },
-        "addedDay": 3,
-        "locationId": "the_crossing"
-      }
-    ],
+    "pressureQueue": [],
     "offscreenCursor": 12,
     "retrievalWanted": [],
     "arcRetrievals": [],
@@ -6560,7 +6570,8 @@
         "kind": "person",
         "facts": [
           "[d3] A person hired to break the Null Stone; a master of coordinated chaos",
-          "[d4] Was hired to break the Null Stone—not out of malice, but because breaking something that won't break became a mandate to prove that chaos MATTERS. Recognized in Loki a mirror of the same hunger. The certainty that drove them to this place is bargained away and something else is forming in its place."
+          "[d4] Was hired to break the Null Stone—not out of malice, but because breaking something that won't break became a mandate to prove that chaos MATTERS. Recognized in Loki a mirror of the same hunger. The certainty that drove them to this place is bargained away and something else is forming in its place.",
+          "[d4] His true name is Halvex Coil. He was hired to break the Null Stone because he believed—and still believes—that chaos matters enough to prove itself against order. The proof itself was wrong."
         ],
         "links": [
           "the-crossing",
@@ -6568,7 +6579,8 @@
           "the-annex-sender"
         ],
         "aliases": [
-          "The Orchestrator"
+          "The Orchestrator",
+          "Halvex Coil"
         ],
         "createdDay": 3,
         "entityId": "churn-revel-orchestrator",
@@ -6726,17 +6738,17 @@
     ]
   },
   "tendencies": {
-    "devotion": 1.1357548200565417,
-    "cerebral": 9.831995703937636,
-    "social": 19.73911804907486,
-    "strategic": 6.416968960834074,
-    "cautious": 5.707912717724349,
-    "amorous": 13.977016834482566,
-    "generous": 5.1949711554787665,
-    "ruthless": 0.5911855677375174,
-    "risky": 0.48314351523008653,
-    "patient": 0.13193780538690256,
-    "deception": 0.15358243952130535
+    "devotion": 1.1073609495551282,
+    "cerebral": 9.586195811339195,
+    "social": 19.24564009784799,
+    "strategic": 6.256544736813222,
+    "cautious": 5.56521489978124,
+    "amorous": 13.6275914136205,
+    "generous": 5.065096876591797,
+    "ruthless": 0.5764059285440795,
+    "risky": 0.47106492734933436,
+    "patient": 0.12863936025223,
+    "deception": 0.1497428785332727
   },
   "aptitudes": [
     "silver_tongue",
@@ -6747,7 +6759,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 158,
+  "actionCount": 159,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -7387,8 +7399,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789432243747,
-  "rev": 649,
+  "updatedAt": 1789432347884,
+  "rev": 650,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8266,7 +8278,7 @@
     "the_gearlands": 33,
     "umbral_depths": 54,
     "the_quickwood": 101,
-    "the_center": 26
+    "the_center": 27
   },
   "opLossPending": false,
   "sessions": [
@@ -8345,10 +8357,10 @@
     {
       "id": "sess-10",
       "startedAt": "2026-09-14T22:51:56.902Z",
-      "lastAt": "2026-09-15T00:30:43.743Z",
+      "lastAt": "2026-09-15T00:32:27.878Z",
       "startDay": 76,
       "endDay": 77,
-      "beats": 11
+      "beats": 12
     }
   ],
   "establishedFacts": [
@@ -8397,26 +8409,26 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 25,
+      "applied": 26,
       "rejected": 1,
       "lastWhy": "rejected-shape"
     }
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 190,
-    "choices": 190,
-    "characterDeltas": 79,
-    "scene": 190,
+    "sceneSummary": 191,
+    "choices": 191,
+    "characterDeltas": 80,
+    "scene": 191,
     "placeUpdates": 21,
-    "codexUpdates": 105,
+    "codexUpdates": 106,
     "timeOps": 164,
-    "offer": 22,
+    "offer": 23,
     "generateRequest": 6,
-    "sceneEnded": 63,
-    "npcUpdates": 156,
+    "sceneEnded": 64,
+    "npcUpdates": 157,
     "moveTo": 6,
-    "gambitApt": 27,
+    "gambitApt": 28,
     "deeds": 6,
     "questUpdates": 17,
     "standingOps": 3,
@@ -8425,13 +8437,13 @@
     "encounterOps": 9,
     "ledgerEvents": 4,
     "newEncounter": 3,
-    "imagePrompt": 15,
+    "imagePrompt": 16,
     "scene_ended": 1,
     "stateOps": 1,
     "_engineClosedScene": 1,
     "discovery": 1
   },
-  "_opTurns": 190,
+  "_opTurns": 191,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -9197,7 +9209,7 @@
     "woo": 1,
     "rapport": 8,
     "retreat": 1,
-    "ask": 1,
+    "ask": 2,
     "help": 4,
     "study": 3,
     "investigate": 1,
@@ -9421,352 +9433,352 @@
   },
   "_promptRows": {
     "character": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "location": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "region": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "groundDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "lore": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "traditionMotiveDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "sheetsDetail": {
-      "reached": 11,
-      "produced": 10
+      "reached": 12,
+      "produced": 11
     },
     "rules": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "recentTurns": {
-      "reached": 11,
-      "produced": 10
+      "reached": 12,
+      "produced": 11
     },
     "timeLabel": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "npcRegistryDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "mintedUnmetDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "npcSeedDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "traditionVocab": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "standingDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "recalledDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 1
     },
     "bearingsDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "caravansDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "commandDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "presenceDetail": {
-      "reached": 11,
-      "produced": 4
+      "reached": 12,
+      "produced": 5
     },
     "worthHereDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "sceneState": {
-      "reached": 11,
-      "produced": 10
-    },
-    "holdingsDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 11
     },
+    "holdingsDetail": {
+      "reached": 12,
+      "produced": 12
+    },
     "debtsDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "questsDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "structuredQuestsDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "companionsDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "placeMemoryDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "agesMissingDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "newsDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "worldArcsDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "legendsPursuableDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "wakesDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "reachableDeadDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "threatToPlayer": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "resolution": {
-      "reached": 11,
-      "produced": 5
+      "reached": 12,
+      "produced": 6
     },
     "playerInput": {
-      "reached": 11,
+      "reached": 12,
       "produced": 6
     },
     "exactWords": {
-      "reached": 11,
-      "produced": 5
+      "reached": 12,
+      "produced": 6
     },
     "travelDirective": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "itemAdvance": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "encounterOfferDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 2
     },
     "fightFramingDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "offerDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 1
     },
     "teacherOfferDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 2
     },
     "romanceGuidanceDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "factsDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "evolvedItemsDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "perilNote": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 4
     },
     "masteryDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "bookkeepingRestate": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "repairPanelDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "teacherDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "availableEncounters": {
-      "reached": 11,
-      "produced": 7
+      "reached": 12,
+      "produced": 8
     },
     "partyDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "registerDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "legendDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "assignmentsDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "latentArcsDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "seasonalDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "schoolsDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "sharedCanonDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 0
     },
     "worldCountLabel": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "waygateDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "readAloudDetail": {
-      "reached": 11,
-      "produced": 11
+      "reached": 12,
+      "produced": 12
     },
     "scenePacingDetail": {
-      "reached": 11,
+      "reached": 12,
       "produced": 5
     }
   },
   "_opUnknown": {
-    "sceneSummary": 11
+    "sceneSummary": 12
   },
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T22:51:56.913Z",

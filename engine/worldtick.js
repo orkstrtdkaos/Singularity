@@ -206,7 +206,8 @@ export function arcPeopleView(character, content = {}) {
       contest: ws.arcContests?.[arc.arcId] || null,
       vacancy: ws.arcVacancies?.[arc.arcId] || 0,
       casualties: onArc(ws.arcCasualties).map(c => ({ winner: who(c.winner), loser: who(c.loser), kind: c.kind })),
-      strikes: onArc(ws.arcStrikes).map(s => ({ target: who(s.target), sender: who(s.sender), outcome: s.outcome, guard: s.guard ? who(s.guard) : null })),
+      // CCODE-366: a strike that left no trace shows no sender here either — this tab carries only names the news has broadcast
+      strikes: onArc(ws.arcStrikes).map(s => ({ target: who(s.target), sender: s.trace === "none" ? null : who(s.sender), outcome: s.outcome, guard: s.guard ? who(s.guard) : null })),
       births: onArc(ws.arcBirths).map(b => ({ ...b, name: nameOf(b.id) })),
       retrievals: onArc(ws.arcRetrievals).map(r => ({ dead: who(r.deadId), by: who(r.byId), outcome: r.outcome, sealed: !!r.sealed })),
     };
@@ -441,8 +442,11 @@ export function stampNews(n, { day = null, worldDay = null, section = "world", c
  *  bare string (the ordinary outcomes) or as an object carrying who/whom (a death); both land as a proper
  *  news item, and a death keeps its ids. ⚠️ Without this each site wrapped `{ text: line }` — which turns
  *  an object INTO the string "[object Object]" the instant one is passed through it. */
-export function clashNewsItem(line, { worldDay = null, arcId = null, regionId = null, strike = null, text = null } = {}) {
+export function clashNewsItem(line, { worldDay = null, arcId = null, regionId = null, strike = null, text = null, unseen = false } = {}) {
   const base = typeof line === "string" ? { text: line } : { ...line };
+  // ⛔ CCODE-366: a strike nobody saw carries no name — not in its words, and not in its ids either, or the battle picture, the
+  // news link and the dormancy wake ("named in something that happened") would each say who it was.
+  if (unseen) { delete base.winnerId; delete base.killerId; }
   // SNG-596: a strike keeps the fight's own item — ids, place, power — and says what it was: its line, and which kind of strike.
   return { ...base, ...(text ? { text } : {}), worldDay, tier: "event", ...(arcId ? { arcId } : {}), ...(regionId ? { regionId } : {}),
     ...(strike ? { strike } : {}) };
@@ -1867,6 +1871,20 @@ export function signatureOf(winner, loser, abilitiesByTradition) {
 /** ⛔ SNG-596 — WHERE TWO PEOPLE MET: the second one's home, then the first's; a minted figure has only a `region` (see the note
  *  inside `resolveEpicClash`). One rule for a fight that happened and for a strike a guard turned aside before it could, so the
  *  news places both the same way. */
+/** ⛔ CCODE-366 — DOES A STRIKE THAT LANDS LEAVE A NAME BEHIND? Erik: "i'll let the flavor of the striker guide whether they let
+ *  it be known or steal away without a trace."
+ *  ⛑ The flavour is already authored, as METHOD: `kindByTradition` sorts every tradition into the ones that "conceal, erase,
+ *  collect, or end without announcement" and the declarers — "a quiet strike is DENIABLE and a crusade is DECLARED" (Aevi,
+ *  SNG-307), and an `either` tradition declares over the thing it wants most and goes quiet everywhere else. So a crusade is
+ *  known and a quiet strike that lands leaves no name. ⚠️ A quiet strike TURNED ASIDE is a different fact — the guard saw them,
+ *  which is what exposure is — and is not decided here.
+ *  ⚠️ A legend may carry its own `strikeTrace: "known" | "none"`, and it wins: the tradition is the default, the person the flavour. */
+export function strikeTraceOf(figure, kind) {
+  const own = figure?.strikeTrace ?? figure?.legend?.strikeTrace ?? null;
+  if (own === "known" || own === "none") return own;
+  return kind === "crusade" ? "known" : "none";
+}
+
 export function clashPlaceOf(a, b) {
   const homeOf = (f) => f?.homeLocation || f?.legend?.homeLocation || f?.region || null;
   return homeOf(b) || homeOf(a) || null;
@@ -3148,8 +3166,9 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
         const outcome = applyEpicClashOutcome(ws, sender.f, mark.f, clash.kind, currentWorldDay,
           { locationId: clash.locationId, abilitiesByTradition, content });
         if (outcome?.finalKind && outcome.finalKind !== "already_dead") {
+          const trace = strikeTraceOf(sender.f, kind);   // CCODE-366: known, or gone without a trace
           strikes.push({ arcId, kind, target: mark.f.id, sender: sender.f.id, outcome: outcome.finalKind,
-            targetTier: mark.f.tier ?? mark.f.legend?.tier ?? null });
+            targetTier: mark.f.tier ?? mark.f.legend?.tier ?? null, trace });
           creditDeed(ws, sender.f.id, "strikeLanded", { worldDay: currentWorldDay });
           // SNG-295 ruling 3 (Erik: "striking defenders is a good mechanic to credit"). Removing the people
           // who were holding a front IS turning it — by subtraction rather than by pushing. The nastiest
@@ -3159,8 +3178,9 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
           // ⛔ SNG-596: THE SAME ITEM — still a fight the player can open — but it says it was a strike, over which arc, and where.
           // Measured before this: every landed strike read as a duel, so none of them could be found as one.
           const struck = strikeLine({ templates: strikeVoice.templates, strike: kind, outcome: outcome.finalKind, sender: sender.f, target: mark.f,
-            place: strikeVoice.place(outcome.locationId), arc: strikeArc, flavor: strikeFlavor, power: strikeVoice.power(outcome.abilityId) });
-          for (const line of (outcome.news || [])) news.push(clashNewsItem(line, { worldDay: currentWorldDay, arcId, strike: kind, text: struck }));
+            place: strikeVoice.place(outcome.locationId), arc: strikeArc, flavor: strikeFlavor, power: strikeVoice.power(outcome.abilityId),
+            unseen: trace === "none" });
+          for (const line of (outcome.news || [])) news.push(clashNewsItem(line, { worldDay: currentWorldDay, arcId, strike: kind, text: struck, unseen: trace === "none" }));
         }
       }
 

@@ -11942,9 +11942,14 @@ await (async () => {
 
       check("431/3: a fight reaches the news AS a fight — a sentence and a tier is what 0-of-20 looked like",
         someFights, `${stored.length} news items, none of them a clash or a death`);
-      check("431/3: every fight names BOTH figures, so the item can be opened back into the battle",
-        someFights && fights.every(n => (n.winnerId || n.killerId) && (n.loserId || n.victimId)),
-        `${fights.filter(n => !((n.winnerId || n.killerId) && (n.loserId || n.victimId))).length} carry no ids`);
+      // ⛔ CCODE-366 — ONE KIND OF FIGHT NAMES ONE FIGURE, ON ERIK'S WORD: "i'll let the flavor of the striker guide whether they let
+      // it be known or steal away without a trace." A quiet strike that lands leaves no name — not in its words and not in its ids,
+      // or the picture, the link and the dormancy wake would each say who it was. It still names who was struck, and says it was
+      // a strike (`strike`); every other fight names both.
+      const unseenStrike = (n) => !!n.strike && !(n.winnerId || n.killerId) && !!(n.loserId || n.victimId);
+      check("431/3: every fight names BOTH figures, so the item can be opened back into the battle — except a strike nobody saw, which names who was struck",
+        someFights && fights.every(n => ((n.winnerId || n.killerId) && (n.loserId || n.victimId)) || unseenStrike(n)),
+        `${fights.filter(n => !(((n.winnerId || n.killerId) && (n.loserId || n.victimId)) || unseenStrike(n))).length} carry no ids`);
       // ⛔ WHERE AND WITH WHAT — the two fields that make the picture possible. `homeLocation` is on 70/70
       // roster figures and every one resolves; 26 of the roster's 29 traditions have an ability pool.
       check("431/3: …and WHERE it happened, resolving to a real place",

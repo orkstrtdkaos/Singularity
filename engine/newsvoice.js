@@ -154,6 +154,14 @@ export const STRIKE_FALLBACK = {
     guarded: "A strike[ over {arc}], turned aside: {S}[, {sWho},] came for {T}[, {sHow}] — and {G}[, {gWho},] stood in the way[, {gHow}][, with {gPower}]. {s} got away, but not unseen.",
     turned: "A strike[ over {arc}], turned aside: {S}[, {sWho},] came for {T}[, {sHow}], and did not reach them. {s} got away, but not unseen.",
   },
+  // ⛔ CCODE-366 — Erik: "i'll let the flavor of the striker guide whether they let it be known or steal away without a trace."
+  // A quiet strike that LANDS leaves no name (`strikeTraceOf`): the world knows the place, the manner and the power — never who.
+  unseen: {
+    killed: "A strike[ over {arc}]: someone came for {T}[ at {place}][, {sHow}][, with {power}] — and {t} is dead. Nobody saw who.",
+    wounded: "A strike[ over {arc}]: someone came for {T}[ at {place}][, {sHow}][, with {power}]. {t} lived, and is hurt — and nobody saw who.",
+    checked: "A strike[ over {arc}]: someone came for {T}[ at {place}][, {sHow}][, with {power}], checked {t}, and was gone without a trace.",
+    stalemate: "A strike[ over {arc}]: someone came for {T}[ at {place}][, {sHow}] — and {t} stood[, {tHow}]. Whoever it was left no trace.",
+  },
   crusade: {
     killed: "{S}[, {sWho},] came openly for {T}[ over {arc}][ at {place}][, {sHow}][, with {power}] — and {t} is dead.",
     wounded: "{S}[, {sWho},] came openly for {T}[ over {arc}][ at {place}][, {sHow}][, with {power}]. {t} lived, and is hurt.",
@@ -191,20 +199,21 @@ function fillStrike(tpl, slots) {
 }
 
 export function strikeLine({ templates, strike = "quiet", outcome, sender, target, guard = null, place = null, arc = null,
-                             power = null, guardPower = null, flavor = null } = {}) {
-  const k = strike === "crusade" ? "crusade" : "quiet";
+                             power = null, guardPower = null, flavor = null, unseen = false } = {}) {
   const key = outcome === "guarded" ? (guard ? "guarded" : "turned") : OUTCOME_TEMPLATE_KEY[outcome];
   if (!key) return null;
+  // a strike that landed and left no trace is told from the `unseen` shapes; a turned-aside one never is — the guard saw them
+  const k = (unseen && outcome !== "guarded") ? "unseen" : strike === "crusade" ? "crusade" : "quiet";
   const authored = templates?.strike?.[k]?.[key];
   const pool = (Array.isArray(authored) ? authored : [authored]).filter(t => typeof t === "string" && t.trim());
   const tpl = pool.length ? pool[pickIndex(`${sender?.id}|${target?.id}|${outcome}|${k}`, pool.length)] : STRIKE_FALLBACK[k][key];
   const fl = (f) => (f && typeof flavor === "function" ? (flavor(f) || {}) : {});
   const sf = fl(sender), tf = fl(target), gf = guard ? fl(guard) : {};
-  const S = sender?.name || "someone", T = target?.name || "someone", G = guard?.name || "";
+  const S = k === "unseen" ? "someone" : (sender?.name || "someone"), T = target?.name || "someone", G = guard?.name || "";
   const noId = (x) => (x && !isIdShaped(x) ? String(x).trim() : "");
   return fillStrike(tpl, {
     S, T, G, s: shortName(S), t: shortName(T), g: G ? shortName(G) : "",
-    sWho: sf.who, sHow: sf.how, tWho: tf.who, tHow: tf.how, gWho: gf.who, gHow: gf.how,
+    sWho: k === "unseen" ? "" : sf.who, sHow: sf.how, tWho: tf.who, tHow: tf.how, gWho: gf.who, gHow: gf.how,
     power: noId(power), gPower: noId(guardPower), place: noId(place),
     // an arc's name mid-sentence: "over the Green Schism", never "over The Green Schism"
     arc: noId(arc).replace(/^The\s+/, "the "),

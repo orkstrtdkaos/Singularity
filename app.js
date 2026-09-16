@@ -148,7 +148,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.27";
+const APP_VERSION = "2.0.28";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -13870,8 +13870,17 @@ function showInvitePicker(unitId) {
   const day = absoluteWorldDay();
   const unit = unitsOf(character).find(u => u.id === unitId);
   if (!unit) return;
-  const carriers = [...atSideRows(character, { content: CONTENT, worldDay: day }), ...poolRows(character, { content: CONTENT, worldDay: day })]
-    .filter(r => r.unitId === unitId && r.kind === "person" && r.id);
+  const bandCarriers = [...atSideRows(character, { content: CONTENT, worldDay: day }), ...poolRows(character, { content: CONTENT, worldDay: day })]
+    .filter(r => r.unitId === unitId && r.kind === "person" && r.id).map(r => ({ id: r.id, name: r.name }));
+  // ⛔ CCODE-366 — ANYONE YOU KNOW CAN CARRY WORD. Erik meant Edvar Crane: he works beside Silas in the story, Adelheid knows him,
+  // and he is not on the Fellowship's roster — the first picker offered band members only, a limit nobody asked for. The band is
+  // listed first; everyone else Silas has met, by name and alive, after it.
+  const inBand = new Set(bandCarriers.map(r => r.id));
+  const otherCarriers = Object.entries(character.npcRegistry || {})
+    .filter(([id, n]) => n?.name && !inBand.has(id) && n.nameUnknown !== true && n.nameRevealed !== false && !/dead|deceased/i.test(String(n.status || "")))
+    .map(([id, n]) => ({ id, name: n.name }))
+    .sort((x, y) => String(x.name).localeCompare(String(y.name)));
+  const carriers = [...bandCarriers, ...otherCarriers];
   const already = new Set([...unit.travelers.map(t => t.characterId),
     ...sentInvitations(sharedInvites, character).filter(i => i.bandId === unitId && i.answer !== "declined").map(i => i.toCharacterId)]);
   const travelers = Object.values(sharedTravelers.index?.travelers || {})
@@ -13882,11 +13891,11 @@ function showInvitePicker(unitId) {
   pop.innerHTML = `<div class="help-card" role="dialog" aria-label="Invite a fellow traveler" style="max-height:min(86vh,720px); overflow-y:auto">
     <div class="whois-head">Invite a fellow traveler into ${esc(bandPhrase(unit.name))}</div>
     ${!travelers.length ? `<div class="insight">No other traveler to ask — everyone the shared world knows is already in it, already asked, or not there yet.</div>`
-      : !carriers.length ? `<div class="insight">Nobody in ${esc(bandPhrase(unit.name))} can carry word — a band of hands has no one to send.</div>`
+      : !carriers.length ? `<div class="insight">There is nobody you know by name to carry word.</div>`
       : `<label class="hint" for="inv-to">Who</label>
       <select id="inv-to" style="width:100%;margin-bottom:8px">${travelers.map(t => `<option value="${esc(t.id)}">${esc(t.name)} — level ${esc(String(t.level || 1))}${t.where?.settlementName ? `, last in ${esc(t.where.settlementName)}` : ""}</option>`).join("")}</select>
       <label class="hint" for="inv-carrier">Carried by</label>
-      <select id="inv-carrier" style="width:100%;margin-bottom:8px">${carriers.map(r => `<option value="${esc(r.id)}">${esc(r.name)}</option>`).join("")}</select>
+      <select id="inv-carrier" style="width:100%;margin-bottom:8px">${bandCarriers.length ? `<optgroup label="In ${esc(bandPhrase(unit.name))}">${bandCarriers.map(r => `<option value="${esc(r.id)}">${esc(r.name)}</option>`).join("")}</optgroup>` : ""}${otherCarriers.length ? `<optgroup label="Others you know">${otherCarriers.map(r => `<option value="${esc(r.id)}">${esc(r.name)}</option>`).join("")}</optgroup>` : ""}</select>
       <label class="hint" for="inv-line">In your words (optional)</label>
       <textarea id="inv-line" rows="3" maxlength="280" style="width:100%;box-sizing:border-box" placeholder="What ${esc(character.name)} would want said"></textarea>
       <p class="hint">It reaches them through the one who carries it — if they have never met that person, it waits until they do. They answer yes or no; silence is not an answer.</p>`}

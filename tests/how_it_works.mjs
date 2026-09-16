@@ -18158,6 +18158,10 @@ console.log("\n── §252 · an invitation carried by someone you both know �
     /incomingInvitations\(sharedInvites, character\)\.slice\(0, 2\)/.test(A252) && /data-invite-yes="/.test(A252) && /data-invite-no="/.test(A252)
     && /sharedInvites = await answerInvitation\(id, answer, character\) \|\| sharedInvites; \}\n\s+catch \(err\) \{ alert\(syncErrorMessage\("Your answer did not go"\)\); b\.disabled = false; return; \}\n\s+if \(answer === "accepted"\) joinBandLocally\(/.test(A252)
     && /const iv = await syncInvitations\(\{ character \}\)/.test(A252) && /invitationsStore: \(\) => sharedInvites/.test(A252));
+  // ⛔ CCODE-366 — Erik meant Edvar Crane: he works beside Silas, Adelheid knows him, and he is not on the Fellowship's roster.
+  check("§252: ⛔ anyone Silas has met by name can carry word — the band listed first, everyone else he knows after it",
+    /const otherCarriers = Object\.entries\(character\.npcRegistry \|\| \{\}\)/.test(A252) && /<optgroup label="Others you know">/.test(A252)
+    && /const carriers = \[\.\.\.bandCarriers, \.\.\.otherCarriers\];/.test(A252));
   check("§252: ⛔ the Bands tab: a door per band, the picker, and what was sent and whether it was answered",
     /data-band-invite="\$\{esc\(u\.id\)\}"/.test(A252) && /function showInvitePicker\(unitId\)/.test(A252) && /sendInvitation\(inv\)/.test(A252) && /"no answer yet"/.test(A252));
 }
@@ -18231,6 +18235,21 @@ console.log("\n── §254 · a strike is news, and says it was one ──");
     N254.strikeLine({ templates: { strike: { quiet: { wounded: "{S}[, {sWho},] bled {t}[ at {place}]." } } }, strike: "quiet", outcome: "wounded", sender: S, target: T, place: "the_greenward", flavor: fl254 })
       === "The Starless One, a devourer of the Umbrals, bled Kesh Ardent."
     && N254.strikeLine({ strike: "quiet", outcome: "already_dead", sender: S, target: T }) === null);
+  // ⛔ CCODE-366 — Erik: "i'll let the flavor of the striker guide whether they let it be known or steal away without a trace."
+  check("§254: ⛔ a crusade is known and a quiet strike that lands leaves no name — the method is the tradition's, and a legend's own word wins",
+    W254.strikeTraceOf(S, "crusade") === "known" && W254.strikeTraceOf(S, "quiet") === "none"
+    && W254.strikeTraceOf({ ...S, strikeTrace: "known" }, "quiet") === "known" && W254.strikeTraceOf({ legend: { strikeTrace: "none" } }, "crusade") === "none");
+  const unseen254 = N254.strikeLine({ strike: "quiet", outcome: "wounded", sender: S, target: T, place: "The Greenward", arc: "The Green Schism", power: "Known In The Dark", flavor: fl254, unseen: true });
+  check("§254: ⛔ …and it is told by its manner and its power, never its name — while a strike turned aside still names who the guard saw",
+    unseen254 === "A strike over the Green Schism: someone came for Kesh Ardent, the Edge That Holds at The Greenward, fighting from the dark they brought, with Known In The Dark. Kesh Ardent lived, and is hurt — and nobody saw who."
+    && N254.strikeLine({ strike: "quiet", outcome: "guarded", sender: S, target: T, guard: G, place: "The Greenward", arc: "The Green Schism", guardPower: "Planted Years", flavor: fl254, unseen: true }) === guarded254, unseen254);
+  const item254 = W254.clashNewsItem({ text: "x", kind: "death", victimId: "t", killerId: "s" }, { worldDay: 9, strike: "quiet", text: "y", unseen: true });
+  const tabSrc254 = rd("engine/worldtab.js").replace(/\r\n/g, "\n");
+  check("§254: ⛔ a name nobody saw is not in the item's ids either — no picture, link or wake can say it — and the world tab says nobody saw by whom",
+    item254.victimId === "t" && !("killerId" in item254) && item254.text === "y" && item254.strike === "quiet"
+    && /s\.sender \? `\$\{person\(s\.target\)\} was struck at by \$\{person\(s\.sender\)\}’s people` : `\$\{person\(s\.target\)\} was struck at — and nobody saw by whom`/.test(tabSrc254)
+    && W254.arcPeopleView({ worldState: { arcStrikes: [{ arcId: "a1", target: "t", sender: "s", outcome: "wounded", trace: "none" }] } },
+         { greaterArcs: [{ id: "a1", name: "A", stages: [{ stage: 1, name: "S" }] }], legends: { roster: [{ id: "t", name: "T" }, { id: "s", name: "S" }] } })[0]?.strikes?.[0]?.sender === null);
 
   /* ---- 2 · ⛔ THROUGH THE REAL PASS ---- */
   const seeded254 = (seed) => { let x = seed >>> 0; return () => { x = (x * 1103515245 + 12345) & 0x7fffffff; return x / 0x7fffffff; }; };
@@ -18240,7 +18259,8 @@ console.log("\n── §254 · a strike is news, and says it was one ──");
   const stub254 = async ({ entities }) => ({ developments: entities.map(e => ({ entityId: e.id, note: "the world turned", outcome: "progress" })) });
   const t0254 = Date.now();
   let strikes254 = 0, told254 = 0, guardedN254 = 0, landedN254 = 0, mismatched254 = [], extra254 = 0, stampedKeeps254 = true;
-  const unflavoured254 = [], debris254 = [];
+  const unflavoured254 = [], debris254 = [], leaked254 = [], unnamed254 = [];
+  let unseenN254 = 0, crusadeN254 = 0;
   let lastStrikes254 = null;
   for (let d = 0; d < 728 && (guardedN254 < 1 || landedN254 < 1 || d < 364); d += 7) {
     const raw = await W254.advanceGeneratedOffscreen({ character: ch254, content: C254, evolveFn: stub254, rng: rng254, now: t0254 + d * 24 * 3600000 });
@@ -18252,15 +18272,20 @@ console.log("\n── §254 · a strike is news, and says it was one ──");
     strikes254 += offscreen.length;
     told254 += items.length;
     for (const s of offscreen) {
+      const unseen = s.outcome !== "guarded" && s.trace === "none";
       const hit = items.find(n => n.strike === s.kind && (s.outcome === "guarded"
         ? (n.kind === "strike" && n.outcome === "guarded" && n.loserId === s.sender && n.figureId === s.target)
-        : ((n.kind === "death" && n.killerId === s.sender && n.victimId === s.target) || (n.kind === "clash" && n.winnerId === s.sender && n.loserId === s.target))));
+        : unseen
+          ? ((n.kind === "death" && !n.killerId && n.victimId === s.target) || (n.kind === "clash" && !n.winnerId && n.loserId === s.target))
+          : ((n.kind === "death" && n.killerId === s.sender && n.victimId === s.target) || (n.kind === "clash" && n.winnerId === s.sender && n.loserId === s.target))));
       if (!hit || !/strike|came openly/.test(hit.text || "")) mismatched254.push(`${s.kind}/${s.outcome} ${s.sender}→${s.target}`);
       // ⛔ AND THE FLAVOUR RIDES THE REAL LINE: a striker with an authored manner is described by it, and no segment leaves debris
       const senderFig = W254.worldRoster(ch254.worldState, C254).find(f => f.id === s.sender);
       const how254 = N254.figureFlavor(senderFig, C254).how;
       if (hit && how254 && !hit.text.includes(how254)) unflavoured254.push(`${senderFig?.name}: ${hit.text.slice(0, 90)}`);
       if (hit && /[\[\]{}]|\s[,.]|,,/.test(hit.text)) debris254.push(hit.text.slice(0, 120));
+      if (hit && unseen) { unseenN254++; if (senderFig?.name && hit.text.includes(senderFig.name)) leaked254.push(hit.text.slice(0, 120)); }
+      if (hit && s.kind === "crusade") { crusadeN254++; if (senderFig?.name && !hit.text.includes(senderFig.name)) unnamed254.push(hit.text.slice(0, 120)); }
       if (s.outcome === "guarded") guardedN254++; else landedN254++;
     }
     if (items.length > offscreen.length) extra254 += items.length - offscreen.length;
@@ -18272,6 +18297,9 @@ console.log("\n── §254 · a strike is news, and says it was one ──");
     `${strikes254} strikes (${landedN254} landed, ${guardedN254} turned aside) · ${told254} told · unmatched ${mismatched254.slice(0, 3).join(" | ") || "none"}`);
   check("§254: ⛔ …every one of them describes its striker by their authored manner, and not one leaves a bracket, a brace or an empty comma",
     unflavoured254.length === 0 && debris254.length === 0, `unflavoured: ${unflavoured254.slice(0, 2).join(" | ") || "none"} · debris: ${debris254.slice(0, 2).join(" | ") || "none"}`);
+  check("§254: ⛔ …and through that same pass, no quiet strike that landed names its striker, and every crusade does",
+    unseenN254 > 0 && leaked254.length === 0 && unnamed254.length === 0,
+    `${unseenN254} unseen · ${crusadeN254} crusades · leaked: ${leaked254[0] || "none"} · unnamed: ${unnamed254[0] || "none"}`);
   check("§254: …and the fact survives stamping, so the feed and the GM keep which kind of strike it was",
     stampedKeeps254);
   const src254 = rd("engine/worldtick.js").replace(/\r\n/g, "\n");

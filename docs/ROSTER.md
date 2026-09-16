@@ -41,33 +41,33 @@
 
 | id | name | kind | file | tier | lvl | abil | dom | reach | kit | seeds | art |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| `adept_sona` | Sona of the Middle Way | person | `npcs/adept_sona.json` | regional | →12 | — | ✅ | ✅ | 6 | — | — |
+| `adept_sona` | Sona of the Middle Way | person | `npcs/adept_sona.json` | leader | →12 | — | ✅ | ✅ | 6 | — | — |
 | `aelith_first_shape` | Aelith of the First Shape | person | `npcs/aelith_first_shape.json` | legendary | 63 | 16 | ✅ | ✅ | 30 | 2 | — |
 | `aevi_the_watcher` | Aevi | person | `npcs/aevi_the_watcher.json` | legendary | 60 | 16 | ✅ | ✅ | 29 | 2 | — |
 | `akinetos` | Akinetos | person | `npcs/akinetos.json` | mythic | 85 | — | — | declared no | — | — | — |
-| `archive_guardian` | The Archive Guardian | person | `npcs/archive_guardian.json` | regional | →12 | — | ✅ | ✅ | 6 | — | — |
+| `archive_guardian` | The Archive Guardian | person | `npcs/archive_guardian.json` | leader | →12 | — | ✅ | ✅ | 6 | — | — |
 | `archivist_lom` | Archivist Lom | person | `npcs/archivist_lom.json` | notable | →5 | — | ✅ | ✅ | 3 | — | — |
 | `aro_horizon` | Aro of the Horizon Reach | person | `npcs/aro_horizon.json` | heroic | 26 | 8 | ✅ | ✅ | 13 | 2 | — |
 | `brann_tollhand` | Brann Tollhand | person | `npcs/brann_tollhand.json` | notable | →5 | — | ✅ | ✅ | 3 | — | — |
 | `bren-thalle` | Bren Thalle | person | `npcs/bren-thalle.json` | riffraff | 9 | 6 | ✅ | ✅ | 6 | 2 | — |
 | `bricke_making` | Bricke of the Making | person | `npcs/bricke_making.json` | heroic | 23 | 8 | ✅ | ✅ | 12 | 2 | — |
-| `broker_sain` | Sain of the Quiet House | person | `npcs/broker_sain.json` | regional | →12 | — | ✅ | ✅ | 6 | — | — |
+| `broker_sain` | Sain of the Quiet House | person | `npcs/broker_sain.json` | leader | →12 | — | ✅ | ✅ | 6 | — | — |
 | `burr_the_foundling` | Burr | person | `npcs/burr_the_foundling.json` | riffraff | →1 | — | ✅ | ✅ | 1 | — | — |
-| `calvar` | Calvar | person | `npcs/calvar.json` | regional | 22 | 8 | ✅ | ✅ | 11 | 2 | — |
+| `calvar` | Calvar | person | `npcs/calvar.json` | leader | 22 | 8 | ✅ | ✅ | 11 | 2 | — |
 | `cassa_redsail` | Cassa Redsail | person | `npcs/cassa_redsail.json` | heroic | 27 | 16 | ✅ | ✅ | 16 | 2 | — |
-| `ceriad` | Ceriad of the Harborward | person | `npcs/ceriad.json` | regional | →12 | — | ✅ | ✅ | 6 | — | — |
+| `ceriad` | Ceriad of the Harborward | person | `npcs/ceriad.json` | leader | →12 | — | ✅ | ✅ | 6 | — | — |
 | `champion_vael` | Vael of the Redline | person | `npcs/champion_vael.json` | heroic | →25 | — | ✅ | ✅ | 12 | — | — |
 | `child_wren` | Wren | person | `npcs/child_wren.json` | riffraff | →1 | — | ✅ | ✅ | 1 | — | — |
 | `cogitant_ninefold` | The Cogitant Ninefold | person | `npcs/cogitant_ninefold.json` | heroic | →25 | — | ✅ | ✅ | 12 | — | — |
 | `dame_iseult_hardline` | Iseult of the Kept Word | person | `npcs/dame_iseult_hardline.json` | epic | 42 | 16 | ✅ | ✅ | 21 | 2 | — |
 | `edvar-crane` | Edvar Crane | person | `npcs/edvar-crane.json` | notable | →5 | — | ✅ | ✅ | 3 | 2 | — |
 | `elder_resonance` | Elder Resonance | person | `npcs/elder_resonance.json` | heroic | →25 | — | ✅ | ✅ | 12 | — | — |
-| `fendt` | Fendt | person | `npcs/fendt.json` | regional | →12 | — | ✅ | ✅ | 6 | — | — |
+| `fendt` | Fendt | person | `npcs/fendt.json` | leader | →12 | — | ✅ | ✅ | 6 | — | — |
 | `greta_waystation` | Greta | person | `npcs/greta_waystation.json` | notable | →5 | — | ✅ | ✅ | 3 | — | — |
 | `hallis_pale` | Hallis of the Palelands | person | `npcs/hallis_pale.json` | heroic | 27 | 8 | ✅ | ✅ | 14 | 2 | — |
 | `harrow_the_hollowing` | Harrow, Who Makes People Into Mechanisms | person | `npcs/harrow_the_hollowing.json` | legendary | 66 | 16 | ✅ | ✅ | 31 | 2 | — |
 | `high_luminary` | High Luminary Sera | person | `npcs/high_luminary.json` | ~heroic | →25 | — | ✅ | ✅ | 12 | — | — |
-| `keeper_ilma` | Ilma, Keeper of the Board | person | `npcs/keeper_ilma.json` | regional | →12 | — | ✅ | ✅ | 6 | — | — |
+| `keeper_ilma` | Ilma, Keeper of the Board | person | `npcs/keeper_ilma.json` | leader | →12 | — | ✅ | ✅ | 6 | — | — |
 | `keeper_the_unsaid` | The Keeper of the Unsaid | person | `npcs/keeper_the_unsaid.json` | heroic | →25 | — | ✅ | ✅ | 12 | — | — |
 | `kenosis` | Kenosis | person | `npcs/kenosis.json` | mythic | 85 | — | — | declared no | — | — | — |
 | `kestrin_riven` | Kestrin of the Riven Marches | person | `npcs/kestrin_riven.json` | heroic | 24 | 8 | ✅ | ✅ | 12 | 2 | — |
@@ -77,8 +77,8 @@
 | `mara-wells` | Mara Wells | person | `npcs/mara-wells.json` | notable | 14 | 6 | ✅ | ✅ | 7 | 2 | — |
 | `marn_two_forms` | Marn of Two Forms | person | `npcs/marn_two_forms.json` | heroic | 28 | 16 | ✅ | ✅ | 16 | 2 | — |
 | `marshal_veyn` | Marshal Veyn | person | `npcs/marshal_veyn.json` | heroic | →25 | — | ✅ | ✅ | 12 | — | — |
-| `master_taro` | Master Taro | person | `npcs/master_taro.json` | regional | →12 | — | ✅ | ✅ | 6 | — | — |
-| `mediator_corran` | Corran of the Marchward | person | `npcs/mediator_corran.json` | regional | →12 | — | ✅ | ✅ | 6 | — | — |
+| `master_taro` | Master Taro | person | `npcs/master_taro.json` | leader | →12 | — | ✅ | ✅ | 6 | — | — |
+| `mediator_corran` | Corran of the Marchward | person | `npcs/mediator_corran.json` | leader | →12 | — | ✅ | ✅ | 6 | — | — |
 | `mountain_scout` | Kit Farrow, the Mountain Scout | person | `npcs/mountain_scout.json` | notable | →5 | — | ✅ | ✅ | 3 | — | — |
 | `odd_wren` | Wren | person | `npcs/odd_wren.json` | riffraff | →1 | — | ✅ | ✅ | 1 | — | — |
 | `old_choirmaster` | The Old Choirmaster | person | `npcs/old_choirmaster.json` | notable | →5 | — | ✅ | ✅ | 3 | — | — |
@@ -86,15 +86,15 @@
 | `orrun_shieldbreaker` | Orrun Shieldbreaker | person | `npcs/orrun_shieldbreaker.json` | heroic | 31 | 16 | ✅ | ✅ | 16 | 2 | — |
 | `parakletos` | Parakletos | person | `npcs/parakletos.json` | mythic | 85 | — | — | declared no | — | — | — |
 | `pell` | Pell Ran Marsh | person | `npcs/pell.json` | heroic | 27 | 27 | ✅ | ✅ | 27 | 2 | — |
-| `reed_mother_ossa` | Reed-Mother Ossa | person | `npcs/reed_mother_ossa.json` | regional | →12 | — | ✅ | ✅ | 6 | — | — |
+| `reed_mother_ossa` | Reed-Mother Ossa | person | `npcs/reed_mother_ossa.json` | leader | →12 | — | ✅ | ✅ | 6 | — | — |
 | `rootbound_vaskar` | Vaskar the Rootbound | person | `npcs/rootbound_vaskar.json` | heroic | →25 | — | ✅ | ✅ | 12 | — | — |
 | `sable_the_runner` | Sable | person | `npcs/sable_the_runner.json` | notable | →5 | — | ✅ | ✅ | 3 | — | — |
 | `sesh_the_quiet_blow` | Sesh of the Quiet Blow | person | `npcs/sesh_the_quiet_blow.json` | heroic | 30 | 16 | ✅ | ✅ | 16 | 2 | — |
 | `sethran_hold` | Sethran of the Reasoned Hold | person | `npcs/sethran_hold.json` | heroic | 25 | 8 | ✅ | ✅ | 13 | 2 | — |
 | `silas-mother` | Hesta Vorn | person | `npcs/silas-mother.json` | notable | 18 | 8 | ✅ | ✅ | 9 | 2 | — |
 | `siol` | Siol | person | `npcs/siol.json` | heroic | 26 | 9 | ✅ | ✅ | 13 | 2 | — |
-| `sister_vreni` | Sister Vreni | person | `npcs/sister_vreni.json` | regional | →12 | — | ✅ | ✅ | 6 | 2 | — |
-| `solvace` | Solvace of Glasshome | person | `npcs/solvace.json` | regional | →12 | — | ✅ | ✅ | 6 | — | — |
+| `sister_vreni` | Sister Vreni | person | `npcs/sister_vreni.json` | leader | →12 | — | ✅ | ✅ | 6 | 2 | — |
+| `solvace` | Solvace of Glasshome | person | `npcs/solvace.json` | leader | →12 | — | ✅ | ✅ | 6 | — | — |
 | `stonefast_urd` | Urd Stonefast | person | `npcs/stonefast_urd.json` | epic | 47 | 16 | ✅ | ✅ | 24 | 2 | — |
 | `sunwrack_valen` | Valen Sunwrack, Who Left No Shadow Standing | person | `npcs/sunwrack_valen.json` | legendary | 66 | 16 | ✅ | ✅ | 31 | 2 | — |
 | `tender_ovel` | Ovel | person | `npcs/tender_ovel.json` | notable | →5 | — | ✅ | ✅ | 3 | — | — |
@@ -104,7 +104,7 @@
 | `the_ferryman_tam` | Tam the Ferryman | person | `npcs/the_ferryman_tam.json` | notable | →5 | — | ✅ | ✅ | 3 | — | — |
 | `the_hollow_king` | The Hollow King of the Wild Half | person | `npcs/the_hollow_king.json` | mythic | 85 | 23 | ✅ | ✅ | 40 | — | — |
 | `the_keeper_of_small_debts` | The Keeper of Small Debts | person | `npcs/the_keeper_of_small_debts.json` | heroic | 32 | 16 | ✅ | ✅ | 16 | 2 | — |
-| `the_kestrel` | The Kestrel | person | `npcs/the_kestrel.json` | regional | →12 | — | ✅ | ✅ | 6 | — | — |
+| `the_kestrel` | The Kestrel | person | `npcs/the_kestrel.json` | leader | →12 | — | ✅ | ✅ | 6 | — | — |
 | `the_lightless_seraph` | Caelum Vaunt, the Lightless | person | `npcs/the_lightless_seraph.json` | legendary | 68 | 16 | ✅ | ✅ | 32 | — | — |
 | `the_ninefold_ascendant` | The Unbodied | person | `npcs/the_ninefold_ascendant.json` | legendary | 67 | 16 | ✅ | ✅ | 32 | 2 | — |
 | `the_old_stag` | The Old Stag | person | `npcs/the_old_stag.json` | heroic | →25 | — | ✅ | ✅ | 12 | — | — |
@@ -122,10 +122,10 @@
 | `vesper_the_listener` | Vesper | person | `npcs/vesper_the_listener.json` | notable | →5 | — | ✅ | ✅ | 3 | — | — |
 | `veth-ondra` | Veth (Stillwater) Ondra | person | `npcs/veth_ondra.json` | heroic | 33 | 24 | ✅ | ✅ | 24 | 2 | — |
 | `veyra_lance` | Veyra of the Levelled Lance | person | `npcs/veyra_lance.json` | heroic | 29 | 16 | ✅ | ✅ | 16 | 2 | — |
-| `walker_elder_thren` | Thren, Walker of the Thin Edge | person | `npcs/walker_elder_thren.json` | regional | →12 | — | ✅ | ✅ | 6 | — | — |
-| `warden_isolde` | Warden Isolde | person | `npcs/warden_isolde.json` | regional | →12 | — | ✅ | ✅ | 6 | — | — |
+| `walker_elder_thren` | Thren, Walker of the Thin Edge | person | `npcs/walker_elder_thren.json` | leader | →12 | — | ✅ | ✅ | 6 | — | — |
+| `warden_isolde` | Warden Isolde | person | `npcs/warden_isolde.json` | leader | →12 | — | ✅ | ✅ | 6 | — | — |
 | `water_keeper` | Mara Wells, the Water Keeper | person | `npcs/water_keeper.json` | notable | →5 | — | ✅ | ✅ | 3 | — | — |
-| `wend_elder_saba` | Saba of the Long Road | person | `npcs/wend_elder_saba.json` | regional | →12 | — | ✅ | ✅ | 6 | — | — |
+| `wend_elder_saba` | Saba of the Long Road | person | `npcs/wend_elder_saba.json` | leader | →12 | — | ✅ | ✅ | 6 | — | — |
 | `young_ent_lissome` | Lissome | person | `npcs/young_ent_lissome.json` | riffraff | →1 | — | ✅ | ✅ | 1 | — | — |
 | `young_hollis` | Hollis | person | `npcs/young_hollis.json` | riffraff | →1 | — | ✅ | ✅ | 1 | — | — |
 | `ysenkar` | Ysenkar, Who Wears the Smaller Door | person | `npcs/ysenkar.json` | legendary | 64 | 16 | ✅ | ✅ | 30 | 2 | — |

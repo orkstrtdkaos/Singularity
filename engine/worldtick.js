@@ -33,13 +33,8 @@ import { milestoneEffects } from "./ladder.js";
 import { personName, mintedWants, nameOf, asSpoken } from "./names.js";
 // SNG-433: the sentences a fight is reported in are AUTHORED. This holds only the decisions the prose
 // cannot make for itself — which variant, how a name shortens, and when to drop a slot.
-<<<<<<< HEAD
 import { newsVoiceOf, clashLine, fragmentLine, strikeLine, figureFlavor, newsNearness, pickIndex } from "./newsvoice.js";
-const KNOWN_TIERS = new Set(["mythic", "legendary", "epic", "heroic", "regional", "notable", "riffraff"]);   // SNG-269: ONE ladder — worldtick had its own copy and it drifted
-=======
-import { newsVoiceOf, clashLine, fragmentLine, strikeLine, figureFlavor, newsNearness } from "./newsvoice.js";
 const KNOWN_TIERS = new Set(["mythic", "legendary", "epic", "heroic", "leader", "notable", "riffraff"]);   // SNG-269: ONE ladder — worldtick had its own copy and it drifted
->>>>>>> 93b7a44 (v2.0.24 — regional becomes LEADER on the tier ladder, and only on the tier ladder)
 import { smartClamp } from "./namematch.js"; // SNG-076: word-boundary clamp for the away-digest/news
 import { generatedRecords } from "./generate.js";
 import { syncEnabled, fetchRepoJSON, fetchLedgerMonths, fetchLedgerAll, pushMergedFile } from "./sync.js";   // CCODE-354: no owned-file writes left here — the region file is shared

@@ -12,8 +12,4 @@
 //
 // ⛑ BUMP IT HERE AND NOWHERE ELSE. `scripts/module_map.mjs` stamps index.html from this value and its `--check` fails the ship
 // when they disagree.
-<<<<<<< HEAD
 export const APP_VERSION = "2.0.39";
-=======
-export const APP_VERSION = "2.0.34";
->>>>>>> 93b7a44 (v2.0.24 — regional becomes LEADER on the tier ladder, and only on the tier ladder)

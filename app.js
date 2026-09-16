@@ -88,8 +88,9 @@ import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent
 import { activeArcEffects, craftCostNote, encounterBias, effectsInPlainWords, npcMoodLines, travelCostFactor } from "./engine/arceffects.js";   // SNG-273: an advanced arc is something you FEEL
 import { knownIndex, whoIs, figureArtRecord } from "./engine/whois.js";   // SNG-299: who is that, and where do I read more
 import { worldTabHtml } from "./engine/worldtab.js";   // SNG-276: the tab's markup, testable
-import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, syncSharedFates, syncTravelers, syncInvitations, sendInvitation, answerInvitation, resolvePlayerStrike, strikeSceneSetup, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter, arcStageNow, worldRoster, NEWS_SECTIONS, pushCanonLook} from "./engine/worldtick.js";
+import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, syncSharedFates, syncHolds, syncTravelers, syncInvitations, sendInvitation, answerInvitation, resolvePlayerStrike, strikeSceneSetup, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter, arcStageNow, worldRoster, NEWS_SECTIONS, pushCanonLook} from "./engine/worldtick.js";
 import { noteWorldMovedOnShown } from "./engine/worldevents.js";
+import { holdsNear, holdNearLine } from "./engine/sharedholds.js";   // CCODE-383: a hold nearby is known
 import { travelersHere, travelerHereLine, whereOf } from "./engine/travelers.js";   // CCODE-359: another traveler is here   // CCODE-354: the world moved on, counted by beats
 import { makeInvitation, incomingInvitations, sentInvitations, joinBandLocally, bandPhrase } from "./engine/invitations.js";
 import { newsNearness, nearFirst } from "./engine/newsvoice.js";   // CCODE-367: nearby news stands out
@@ -150,7 +151,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.44";
+const APP_VERSION = "2.0.45";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -753,6 +754,7 @@ let lastPlayerAction = null;     // the last choice the player took
 let sceneGenCount = 0;   // SNG-BATCH-9: generative-mint counter for this scene (the governor cap)
 // ⛔ SNG-595: the travelers index and the WHOLE ledger, refreshed on the tick — the reader keyed by PERSON reads these.
 let sharedTravelers = { index: null, ledger: [] };
+let sharedHolds = null;   // CCODE-383: every traveler's holdings, as the road knows them (world/holds)
 let sharedInvites = null;   // ⛔ CCODE-360: world/invitations.json as of the last tick
 let sharedCanonView = []; // SNG-BATCH-9 Phase 3: this viewer's rating-lensed slice of shared canon
 // SNG-250 §7b: creatures OTHER players have grown, snapshotted from shared canon at a safe seam (never
@@ -5571,6 +5573,8 @@ async function maybeTick() {
   // ⛔ SNG-595: publish this traveler's card (only when it changed) and read the world's record of everyone. A failed read
   // keeps the last good copy — a GM that knew who Silas was a minute ago must not forget him on a flaky network.
   try {
+    // ⛔ CCODE-383: this character's holdings go up as the road knows them, and everyone's come back
+    try { const hs = await syncHolds({ character, content: CONTENT }); if (hs.synced && hs.store) sharedHolds = hs.store; } catch (err) { console.warn("[holds] tick skipped:", err?.message); }
     const tv = await syncTravelers({ character, profile, locations: CONTENT.locations });   // CCODE-359: and where they are
     // ⛔ CCODE-360: invitations — what has arrived for this character, and any answer come back to one they sent.
     try { const iv = await syncInvitations({ character }); if (iv.synced) sharedInvites = iv.store; } catch (err) { console.warn("[invitations] tick skipped:", err?.message); }
@@ -6673,7 +6677,7 @@ function gmEnv(extra = {}) {
     app: {
       fullCatalog, FN_INDEX: () => FN_INDEX, activeEnc, listAvailableEncounters,
       masteryReadyForGM, ratingLineForGM, maybeLegendDetail, sharedCanonForGM,
-      travelersIndex: () => sharedTravelers.index, sharedLedger: () => sharedTravelers.ledger, sharedCanonView: () => sharedCanonView,   // SNG-595
+      travelersIndex: () => sharedTravelers.index, sharedLedger: () => sharedTravelers.ledger, sharedCanonView: () => sharedCanonView, holdsStore: () => sharedHolds,   // SNG-595
       invitationsStore: () => sharedInvites,   // CCODE-360
       isPlaceKnown: (id) => isPlaceKnown(character, id, CONTENT.locations)   // SNG-176: recall only what the character KNOWS
     },
@@ -16906,6 +16910,14 @@ function renderPlay(turn, opts = {}) {
       try { here359 = travelersHere(sharedTravelers.index, { selfId: character.id, where: whereOf(character, CONTENT.locations || {}) }); } catch { here359 = []; }
       if (!here359.length) return "";
       return `<div class="traveler-here">${here359.slice(0, 2).map(c => `<span class="th-who">✦ ${esc(travelerHereLine(c))}</span>`).join("")}<button class="link-btn" id="traveler-meet" type="button">look for a shared scene</button></div>`;
+    })()}
+    ${(() => {
+      // ⛔ CCODE-383 — A HOLD NEARBY IS KNOWN (Erik: "PCs should hear about what it is and who's running it"). One quiet line.
+      if (sharedScene) return "";
+      let near383 = [];
+      try { near383 = holdsNear(sharedHolds, { selfId: character.id, here: positionedPlace(CONTENT.locations || {}, character.currentLocationId), max: 2 }); } catch { near383 = []; }
+      if (!near383.length) return "";
+      return `<div class="hold-near">${near383.map(n => `<span class="hn-what">⌂ ${esc(holdNearLine(n))}</span>`).join("")}</div>`;
     })()}
     <div class="location-tag loc-head" ${sceneState?.setting ? `title="${esc(sceneState.setting)}"` : ""}>${(() => {
       // ⛔ CCODE-356 (Erik) — "this area needs a cleanup. The location should be a good title size - not crammed inline with

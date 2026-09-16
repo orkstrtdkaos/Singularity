@@ -79,7 +79,8 @@ import { narrativeRegister } from "./gm.js";
 import { livingWorldForGM } from "./generate.js";
 import { standingForGM } from "./standing.js"; // BATCH-12 §3
 import { renderNamesDeep } from "./names.js"; // SNG-182
-import { worldCount, worldCountLabel } from "./worldtime.js";
+import { worldCount, worldCountLabel, positionedPlace } from "./worldtime.js";
+import { holdsNearForGM } from "./sharedholds.js";   // CCODE-383: a hold nearby is known
 import { encounterReceiptForGM } from "./encounters.js";
 import { waygateBlockForGM, waygateTruthForGM } from "./waygate.js";
 import { readAloudDirective } from "./narration_voice.js";
@@ -612,6 +613,12 @@ export const GM_CONTEXT = [
     reachedBy: "always (empty unless another traveler's card places them in this community recently)", spec: "CCODE-359", views: ["turn", "ask"],
     build: (env) => travelersHereForGM(env.app?.travelersIndex?.() || null, { character: env.character,
       where: whereOf(env.character, env.CONTENT?.locations || {}), origins: env.CONTENT?.origins || [] }) },
+  // ⛔ CCODE-383 (Erik: "if there is a hold nearby PCs should hear about what it is and who's running it. they can and should interact
+  // with it") — another traveler's holding within two walking days: what it is, who runs it, whether it thrives, what it has.
+  { key: "holdsNearDetail", builder: "sharedholds.holdsNearForGM (CCODE-383)", carries: ["another traveler's holding within two walking days", "what it is and who runs it", "its condition, what it has and who guards it"],
+    reachedBy: "always (empty unless another traveler's hold stands within two walking days)", spec: "CCODE-383", views: ["turn", "ask"],
+    build: (env) => holdsNearForGM(env.app?.holdsStore?.() || null, { selfId: env.character?.id || null,
+      here: positionedPlace(env.CONTENT?.locations || {}, env.location?.id || env.character?.currentLocationId) }) },
   { key: "travelersDetail", builder: "travelers.travelersForGM (SNG-595)", carries: ["another player's character the words named", "their public deeds, every ledger month", "who in this story was part of theirs"],
     reachedBy: "always (empty unless the words, or the last two beats, name another traveler)", spec: "SNG-595", views: ["turn", "ask"],
     build: (env) => travelersForGM(

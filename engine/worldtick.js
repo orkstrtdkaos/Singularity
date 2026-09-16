@@ -44,6 +44,7 @@ import { INVITES_PATH, mergeInvitation, answerInto, applyAnswers } from "./invit
 import { boundFigures } from "./companionlives.js";   // SNG-597 §3: a companion who is also a figure of the world
 import { decayWakes, wakeArcPush } from "./wake.js"; // SNG-204: wakes decay on the tick + lean on connected arcs
 import { FATES_PATH, WOUND_DAYS, STOP_DAYS, fatesOfWorld, foldFates, adoptFates, fateNews } from "./fates.js";   // CCODE-381: a legend's fate is the world's
+import { HOLDS_PATH, holdCardsOf, holdCardsChanged, mergeHoldCards } from "./sharedholds.js";   // CCODE-383: a hold nearby is known
 import { enterDeathState, deepenDeaths, deathDepth, isRetrievable, resolveRetrieval } from "./death.js"; // SNG-209: a killed figure ENTERS the death state; the clock sinks untended deaths toward sealed
 import { absoluteWorldDay, worldDayAt, worldCount, readClock, positionedPlace } from "./worldtime.js";
 import { voyageTick, whereaboutsOf } from "./carriage.js";   // ⛔ B6b: a voyage arrives on world time, and where she is now is where she can be raided
@@ -1091,6 +1092,34 @@ export async function syncTravelers({ character, profile = null, now = new Date(
   try { ledger = await fetchLedgerAll({ now, closed: closedLedgerMonths }); }
   catch (err) { console.warn("[travelers] ledger read skipped:", err?.message); }
   return { synced: true, index, ledger };
+}
+
+// ---------- CCODE-383: a hold nearby is known ----------
+
+/** ⛔ CCODE-383 — PUBLISH THIS CHARACTER'S HOLDINGS AS THE ROAD KNOWS THEM, AND READ EVERYONE'S. Erik: "if there is a hold nearby PCs
+ *  should hear about what it is and who's running it. they can and should interact with it." The owner's set is replaced whole and
+ *  written only when it changed; the store comes back for the GM row and the play screen. Best-effort, never throws. */
+export async function syncHolds({ character, content } = {}) {
+  let shared = false;
+  try { shared = syncEnabled(); } catch { shared = false; }
+  if (!shared || !character?.id) return { synced: false, store: null };
+  let store = null;
+  try {
+    const remote = await fetchRepoJSON(HOLDS_PATH);
+    store = remote;
+    const reg = character.npcRegistry || {};
+    const nameOf = (id) => reg[id]?.name || content?.npcs?.[id]?.name || null;
+    const cards = holdCardsOf(character, { locations: content?.locations || {}, nameOf });
+    const hadAny = Object.values(remote?.holds || {}).some(c => c?.ownerId === character.id);
+    if ((cards.length || hadAny) && holdCardsChanged(remote, character.id, cards)) {
+      let merged = null;
+      await pushMergedFile(HOLDS_PATH, (r) => (merged = mergeHoldCards(r, character.id, cards)), `holds: ${character.name || character.id}'s holdings, as the road knows them`);
+      store = merged || mergeHoldCards(remote, character.id, cards);
+    }
+  } catch (err) {
+    console.warn("[holds] sync skipped:", err?.message);
+  }
+  return { synced: true, store };
 }
 
 // ---------- CCODE-360: invitations between travelers ----------

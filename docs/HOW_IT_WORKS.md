@@ -486,8 +486,9 @@ working papers; **this is the answer.**
 | 09-16 | ✅ **A GROWN RECORD IS NEVER ITS OWN RIVAL (CCODE-380), and the self-variant repair APPLIED a second time** | The 08-28 repair's signature came back: on 09-11/12 four places (the Pale March Waygate, Threshold Post, Mara Wells Store, Whistling Woman Post) and Bryn Callowell were filed as rumours of THEMSELVES. ⚑ A second cause CCODE-04 never covered: the app hydrates a character's own grown records into `CONTENT.npcs`/`locations`, and promotion scanned that as the AUTHORED spine — 33 of Silas's 35 grown records and all 8 of Loki's collide with themselves there | `§265`; `scripts/repair_self_variants.mjs --write`, before/after counted: 15 canonical + 6 variants in → 20 canonical + 0 variants out (Stillwater's Trouble was a duplicate of its canonical copy and was dropped) | ⚠️ six records still carry `_canon.overtook` naming their own id — a label nothing reads, left as it is |
 | 09-16 | ✅ **A LEGEND'S FATE IS THE WORLD'S (CCODE-381)** | Erik: *"The world changes for everyone."* ⚑ 33 legends lived in two or more saves' worlds and the saves disagreed about 29 — the Undefeated stopped in two, active in one, wounded in two | `§266`, 18 checks, the sync driven against the fake GitHub; on the real saves every world folded in either order gives the same 44 fates and every save agrees after adopting | ⚠️ authored legends only (a minted id is its own world's); a save's first read is silent, because the first fold would have recited 14–20 clashes into a 20-item feed |
 | 09-16 | ✅ **WHO IS AROUND TODAY IS THE TOWN'S, AND NEVER THE BURIED (CCODE-382)** | ⚑ Seeded by the character, Silas and Adelheid in the same Millbrook square met different people on 58 of 60 world-days; and the One Called Zeus, dead in Silas's world, was offered as "around today" 20 times over 400 simulated days — presence read only the authored record | `§267`: the same town and day give the same people (square or store); a crowd dial changes how many, never which; the world's and the registry's dead never appear | ⚠️ `§107`'s cadence check was red before and is red after, by the same margin |
+| 09-16 | ✅ **A HOLD NEARBY IS KNOWN (CCODE-383)** | Erik: *"if there is a hold nearby PCs should hear about what it is and who's running it. they can and should interact with it.."* ⚑ 6 holdings across the saves (Silas 5, Loki 1), none visible outside their owner's game — Adelheid stood in Millbrook beside the Fell Pell | `§268`: the card carries what the road knows and never the store; an owner's set replaces itself whole; the sync through the fake GitHub; the GM row within two walking days and its instruction; the play-screen line | ⚠️ "interact" is the fiction's for now: a visit, the keeper, rest and talk. Trading out of another player's store, or a keeper acting for its absent owner, is not built |
 
-**Last verified: 2026-09-16 · v2.0.44 · 431 crafts.**
+**Last verified: 2026-09-16 · v2.0.45 · 431 crafts.**
 
 ---
 
@@ -2261,7 +2262,7 @@ reaches it** — and that gap has produced a specific, repeated defect described
 ### 12.1 · THE SHAPE — one document, one shell, 47 screens
 
 **Singularity is a single-page app with no build step and no framework.** `index.html` is 75 lines; the
-whole interface is **`app.js`, 17,884 lines**, and there are **51 `render*` functions** that paint into one
+whole interface is **`app.js`, 17,896 lines**, and there are **51 `render*` functions** that paint into one
 shell function, `chrome()`, called from **52 sites**. ⚠️ **THERE IS NO ROUTER AND NO SCREEN VARIABLE.**
 A screen does not "navigate" — it **calls the next render function directly**. `renderCompanionStep`'s
 done-button *is* the edge into `renderBioStep`.

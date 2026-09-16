@@ -19109,6 +19109,78 @@ console.log("\n── §267 · who is around today is the town's, and never the 
     && !/seedOf\(`\$\{character\?\.id/.test(rd("engine/presence.js")));
 }
 
+// ⛔ CCODE-383 — shared lives: A HOLD NEARBY IS KNOWN. Erik: "if there is a hold nearby PCs should hear about what it is and who's running
+// it. they can and should interact with it.." ⚑ MEASURED: 6 holdings across the saves, none visible outside their owner's game.
+console.log("\n── §268 · a hold nearby is known ──");
+{
+  const SH268 = await import("../engine/sharedholds.js");
+  const W268 = await import("../engine/worldtick.js");
+  const T268 = await import("../engine/worldtime.js");
+  const { fakeRemote: fr268 } = await import("./lib/fake_remote.mjs");
+  const { loadContentHeadless: lch268 } = await import("./headless_content.mjs");
+  const C268 = await lch268();
+  const L = C268.locations;
+  const owner = { id: "char-s268", name: "Silas Weir", currentLocationId: "the_crossing",
+    npcRegistry: { pell: { id: "pell", name: "Pell Ran Marsh" }, calvar: { id: "calvar", name: "Calvar" } },
+    holdings: [
+      { id: "h-pell", kind: "enterprise", name: "The Fell Pell", describedAs: "forge", locationId: "millbrook", steward: "pell", condition: "thriving",
+        obligation: "the fellowship's work", store: { raw_material: 7 }, arrears: 2, features: [{ kind: "forge", name: "a forge" }, { kind: "workshop", name: "a workshop" }], garrison: ["calvar"] },
+      { id: "h-far", kind: "post", name: "The Far Post", locationId: "the_blaze", steward: null, condition: "holding" } ] };
+  const nameOf = (id) => owner.npcRegistry[id]?.name || null;
+  const card = SH268.holdCard(owner, owner.holdings[0], { locations: L, nameOf });
+  check("§268: ⛔ a card says what the road knows — what it is, where, who runs it, whether it thrives, what it has, who guards it",
+    card.name === "The Fell Pell" && card.describedAs === "forge" && card.settlementName === "Millbrook" && card.keeperName === "Pell Ran Marsh"
+    && card.condition === "thriving" && card.has.join(",") === "a forge,a workshop" && card.guardedBy.join(",") === "Calvar" && !!card.worldPos, JSON.stringify(card));
+  check("§268: ⚠️ …and NEVER the owner's business — no store, no debts, no obligation",
+    !("store" in card) && !("arrears" in card) && !("obligation" in card) && !/raw_material|fellowship's work/.test(JSON.stringify(card)));
+
+  const cards = SH268.holdCardsOf(owner, { locations: L, nameOf });
+  const other = { key: "char-o:h1", id: "h1", ownerId: "char-o", ownerName: "Somebody Else", name: "Their Hold", worldPos: card.worldPos };
+  const store1 = SH268.mergeHoldCards({ holds: { [other.key]: other, "char-s268:h-gone": { key: "char-s268:h-gone", ownerId: "char-s268", name: "A Hold Let Go" } } }, owner.id, cards);
+  check("§268: an owner's set replaces itself whole — a hold let go is gone — and another owner's cards are kept",
+    !store1.holds["char-s268:h-gone"] && !!store1.holds["char-s268:h-pell"] && !!store1.holds[other.key]);
+  check("§268: …and a tick that changes nothing writes nothing",
+    SH268.holdCardsChanged(store1, owner.id, cards) === false && SH268.holdCardsChanged(store1, owner.id, cards.slice(0, 1)) === true);
+
+  const near = SH268.holdsNear(store1, { selfId: "char-a268", here: L.millbrook });
+  check("§268: ⛔ ADELHEID'S CASE — standing in Millbrook, another traveler hears of the Fell Pell, here; the post on the far side of the world is not near",
+    near.some(n => n.card.name === "The Fell Pell" && n.days <= 0.3) && !near.some(n => n.card.name === "The Far Post"),
+    JSON.stringify(near.map(n => [n.card.name, n.days])));
+  check("§268: …and the owner is not told of their own hold as if it were someone else's",
+    !SH268.holdsNear(store1, { selfId: owner.id, here: L.millbrook }).some(n => n.card.ownerId === owner.id));
+  const gm = SH268.holdsNearForGM(store1, { selfId: "char-a268", here: L.millbrook }) || "";
+  check("§268: the GM hears it in a sentence — whose it is, what it is, where, run by whom, thriving, what it has",
+    /The Fell Pell — Silas Weir's forge in Millbrook \(here\), run by Pell Ran Marsh; thriving; has a forge, a workshop; guarded by Calvar\./.test(gm), gm);
+
+  const remote = fr268();
+  const restore = remote.install();
+  try {
+    const content = { locations: L, npcs: {} };
+    const s1 = await W268.syncHolds({ character: owner, content });
+    check("§268: ⛔ the owner's tick publishes its holdings to the shared world",
+      s1.synced && Object.keys(remote.read(SH268.HOLDS_PATH)?.holds || {}).sort().join(",") === "char-s268:h-far,char-s268:h-pell");
+    const puts = remote.state.puts;
+    await W268.syncHolds({ character: owner, content });
+    check("§268: …and the next tick, with nothing changed, writes nothing", remote.state.puts === puts, `${remote.state.puts - puts} extra write(s)`);
+    const viewer = { id: "char-a268", name: "Adelheid", currentLocationId: "millbrook", holdings: [] };
+    const s2 = await W268.syncHolds({ character: viewer, content });
+    check("§268: a traveler with no holdings reads the world's and writes nothing",
+      s2.synced && remote.state.puts === puts && SH268.holdsNear(s2.store, { selfId: viewer.id, here: L.millbrook }).some(n => n.card.name === "The Fell Pell"));
+    owner.holdings = owner.holdings.filter(h => h.id !== "h-far");
+    await W268.syncHolds({ character: owner, content });
+    check("§268: …and a hold let go leaves the shared world with it",
+      Object.keys(remote.read(SH268.HOLDS_PATH)?.holds || {}).join(",") === "char-s268:h-pell");
+  } finally { restore(); }
+
+  const REG268 = rd("engine/gm_registry.js").replace(/\r\n/g, "\n"), GM268 = rd("engine/gm.js").replace(/\r\n/g, "\n"), A268 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§268: ⛔ the GM row reads the shared store where the character stands, and gm.js tells it the hold is another player's — never to seize, ruin or speak for",
+    /key: "holdsNearDetail"/.test(REG268) && /holdsNearForGM\(env\.app\?\.holdsStore\?\.\(\) \|\| null/.test(REG268)
+    && /if \(holdsNearDetail\) world\.push\(`## HOLDS NEAR HERE/.test(GM268) && /never seize it, ruin it, replace its keeper or speak for its owner/.test(GM268));
+  check("§268: the tick syncs holds, the GM's env can reach them, and the play screen says the line",
+    /const hs = await syncHolds\(\{ character, content: CONTENT \}\)/.test(A268) && /holdsStore: \(\) => sharedHolds/.test(A268)
+    && /<div class="hold-near">\$\{near383\.map\(n => `<span class="hn-what">⌂ \$\{esc\(holdNearLine\(n\)\)\}<\/span>`\)\.join\(""\)\}<\/div>/.test(A268));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

@@ -33,7 +33,7 @@ import { milestoneEffects } from "./ladder.js";
 import { personName, mintedWants, nameOf, asSpoken } from "./names.js";
 // SNG-433: the sentences a fight is reported in are AUTHORED. This holds only the decisions the prose
 // cannot make for itself — which variant, how a name shortens, and when to drop a slot.
-import { newsVoiceOf, clashLine, fragmentLine, strikeLine, figureFlavor, newsNearness } from "./newsvoice.js";
+import { newsVoiceOf, clashLine, fragmentLine, strikeLine, figureFlavor, newsNearness, pickIndex } from "./newsvoice.js";
 const KNOWN_TIERS = new Set(["mythic", "legendary", "epic", "heroic", "regional", "notable", "riffraff"]);   // SNG-269: ONE ladder — worldtick had its own copy and it drifted
 import { smartClamp } from "./namematch.js"; // SNG-076: word-boundary clamp for the away-digest/news
 import { generatedRecords } from "./generate.js";
@@ -1472,11 +1472,37 @@ export function planChallenge({ figure, pool = [], tierOf: tierFn = (f) => f?.ti
  *  promotion, none of which the offscreen world may decide for them. */
 export const PLAYER_MARK_ID = "__player__";
 
-export function threatToPlayer(ws) {
+/** ⛔ SNG-598 — HOW MANY OF THOSE SENT WOULD RATHER DIE THAN TALK. Aevi: "An assassin who always yields… Then it is a cutscene with a
+ *  dice roll in it. Some should die fighting and take the name with them — which is what makes the ones who talk worth something."
+ *  A knife in the dark is paid, and paid to keep quiet; a crusader is proud of it. ⬜ Dials for Aevi to author; not read from
+ *  rules until they are, so no phantom control. */
+const DIES_FIGHTING = { quiet: 40, crusade: 20 };
+
+/** Plant a strike on the player — the scene's seed. Deterministic, so the same strike is the same scene however often it is read. */
+export function plantPlayerStrike(ws, { arcId, kind, sender, guard = null, worldDay = null } = {}) {
+  if (!ws || !sender) return null;
+  const k = kind === "crusade" ? "crusade" : "quiet";
+  const t = { arcId, kind: k, sender: sender.id, senderName: sender.name || null,
+    // A CRUSADE IS DECLARED AND A KNIFE IS NOT — the player is told about one and not the other (SNG-310); a quiet one arrives
+    // without warning (SNG-598 §4: "If the feed pre-announces an ambush, there is no ambush").
+    announced: k === "crusade", worldDay, resolved: false,
+    ...(guard ? { guardId: guard.id, guardName: guard.name || null } : {}),
+    diesFighting: pickIndex(`${sender.id}|${arcId}|${worldDay}|dies`, 100) < DIES_FIGHTING[k] };
+  (ws.pendingStrikes ||= []).push(t);
+  return t;
+}
+
+export function threatToPlayer(ws, content = {}) {
   const pending = (ws?.pendingStrikes || []).filter(t => t && !t.resolved);
   if (!pending.length) return null;
   const declared = pending.filter(t => t.announced);
+  const arcName = (id) => (content?.greaterArcs || []).find(a => a?.id === id)?.name || id;
   return {
+    // ⛔ SNG-598 — EACH STRIKE AS THE SCENE IT WILL BE, for the GM alone: who will be there, and what the one sent knows if they live
+    // and break. The player is told none of this; the scene tells them what it tells them.
+    scenes: pending.map(t => ({ announced: !!t.announced, over: arcName(t.arcId), guard: t.guardName || null, sentBy: t.senderName || t.sender || null,
+      diesFighting: !!t.diesFighting, moreComing: pending.length - 1,
+      breaks: t.kind === "crusade" ? "readily — a declared strike is something they are proud of" : "hard — a quiet strike is paid for, and paid to stay quiet" })),
     marked: true,
     count: pending.length,
     // What the player may be TOLD. A quiet strike counts toward `unseen` and names nobody.
@@ -1491,6 +1517,37 @@ export function threatToPlayer(ws) {
         : "someone has been sent, and they did not announce it",
     },
   };
+}
+
+/** ⛔ SNG-598 — WHEN THE SCENE HAS COME TO A HEAD. The GM ran it — a paragraph or a fight — and says how it ended; the oldest strike
+ *  is the one resolved. What was owed happens now and not before: the guard's deed, and the player learning who it was that stood
+ *  in the way (Aevi, O4: "the one thing my news-line version got right… should survive as the aftermath, not the event"); and, only
+ *  if the one sent YIELDED and was made to talk, who sent them and over what — which exposes a quiet sender, as failing always has.
+ *  Writes the aftermath into the world's own news (so its cap holds) and returns it. */
+export function resolvePlayerStrike(character, op = {}, { worldDay = null, content = {} } = {}) {
+  const ws = character?.worldState;
+  const t = (ws?.pendingStrikes || []).find(x => x && !x.resolved);
+  if (!t) return { ok: false, why: "nobody has been sent" };
+  const outcome = ["killed", "yielded", "fled", "driven_off"].includes(op?.outcome) ? op.outcome : "driven_off";
+  const told = outcome === "yielded" && op?.told === true;
+  Object.assign(t, { resolved: true, outcome, told, resolvedDay: worldDay });
+  const arcName = (content?.greaterArcs || []).find(a => a?.id === t.arcId)?.name || t.arcId;
+  const news = [];
+  if (t.guardId) {
+    creditDeed(ws, t.guardId, "guardIntercept", { worldDay, playerInvolved: true });   // they stood over the PLAYER — a deed the player's story touched
+    news.push({ text: `It was ${t.guardName || "someone"} who stood between you and the blade.`, worldDay, tier: "event", section: "yours", figureId: t.guardId });
+  }
+  if (told) {
+    if (t.kind === "quiet") (ws.figureExposure ||= {})[t.sender] = { arcId: t.arcId, knownTo: PLAYER_MARK_ID, worldDay, untilDay: (Number(worldDay) || 0) + 180 };
+    news.push({ text: `The one sent for you talked: ${t.senderName || "someone"} sent them, over ${arcName}.`, worldDay, tier: "event", section: "yours", figureId: t.sender });
+  }
+  const stamped = news.map(n => stampNews(n, { day: ws.lastTickDay ?? null, worldDay }));
+  if (stamped.length) {
+    ws.news = ws.news || [];
+    ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);   // the one stamper, the one writer's shape (smoke 431/3)
+    ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
+  }
+  return { ok: true, outcome, told, news: stamped };
 }
 
 /** SNG-311 — AND SOMEONE MAY STAND OVER YOU. Erik: *"if you get marked for a strike, you can also be chosen
@@ -3214,6 +3271,18 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
           (ws.crusades ||= {})[sender.f.id] =
             { arcId, dir: sender.care.dir, target: mark.f.id, untilDay: currentWorldDay + days, since: currentWorldDay };
         }
+        // ⛔ SNG-598 — A STRIKE ON THE PLAYER IS A SCENE, NOT A NOTIFICATION. Erik: "that is AN EVENT and should be narrated in story
+        // when it occurs. Either a scene that resolves in one go, or even a fight that happens with you and your party — with the
+        // extra guard helping. Either way, if you win and the assailant isn't killed, you should then be able to interrogate them."
+        // Turned aside or not, it is planted for the GM with everything the scene needs — who was sent, over what, who will be there —
+        // and none of the guard's or the sender's bookkeeping happens until it has (`resolvePlayerStrike`).
+        if (mark.f.id === PLAYER_MARK_ID) {
+          plantPlayerStrike(ws, { arcId, kind, sender: sender.f, guard: guarded && guard?.f?.id !== PLAYER_MARK_ID ? guard.f : null, worldDay: currentWorldDay });
+          if (kind === "crusade") news.push({ text: `${sender.f.name || "Someone"} has declared against you over ${(content?.greaterArcs || []).find(a => a?.id === arcId)?.name || arcId}. They are not hiding it.`,
+            worldDay: currentWorldDay, tier: "event" });
+          if (!guarded) creditDeed(ws, sender.f.id, "strikeLanded", { worldDay: currentWorldDay });
+          continue;
+        }
         if (guarded) {
           // ⚠️ EXPOSURE IS THE QUIET WORK'S PRICE, AND ONLY THE QUIET WORK'S. Aevi: "a failed strike does not
           // wound the striker — it IDENTIFIES them." A crusader cannot be exposed; they announced it.
@@ -3233,44 +3302,21 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
           // they are. (A strike that LANDS on the player is still the GM's to tell — SNG-310, below.)
           // ⚠️ And a guard who is the player is never named: `planStrike` chose them from the pool; they did not choose to stand there.
           {
-            const onPlayer = mark.f.id === PLAYER_MARK_ID;
+            // ⚠️ SNG-598: the mark is never the player here — a strike on them was planted as a scene above, which REVERSED CCODE-368's
+            // news line ("that is AN EVENT and should be narrated in story when it occurs" — Erik).
             const byGuard = guard.f.id !== PLAYER_MARK_ID ? guard.f : null;
-            const placeId = onPlayer ? (character?.currentLocationId || clashPlaceOf(sender.f, mark.f)) : clashPlaceOf(sender.f, mark.f);
+            const placeId = clashPlaceOf(sender.f, mark.f);
             news.push({ text: strikeLine({ templates: strikeVoice.templates, strike: kind, outcome: "guarded", sender: sender.f, target: mark.f,
                 guard: byGuard, place: strikeVoice.place(placeId), arc: strikeArc, flavor: strikeFlavor,
                 // the guard WON this one, so the power is the guard's — the same deterministic pick every fight uses
                 guardPower: byGuard ? strikeVoice.power(signatureOf(byGuard, sender.f, abilitiesByTradition)) : null }),
-              kind: "strike", strike: kind, outcome: "guarded", winnerId: byGuard?.id || null, loserId: sender.f.id, figureId: onPlayer ? null : mark.f.id,
+              kind: "strike", strike: kind, outcome: "guarded", winnerId: byGuard?.id || null, loserId: sender.f.id, figureId: mark.f.id,
               locationId: placeId, arcId, worldDay: currentWorldDay, tier: "event" });
           }
           continue;
         }
         const clash = resolveEpicClash(sender.f, mark.f, rng, { abilitiesByTradition });
-        // SNG-310 — ⛔ IS THE MARK THE PLAYER? Then the engine MARKS and does not resolve.
-        //
-        // Erik: "yes the player can be struck, but that event is a GM narrated encounter. The fact that
-        // someone is out to get you triggers it though." Every other strike settles here because both
-        // parties are offscreen; this one cannot, because resolving it would decide a fight the player was
-        // never in. So it becomes a pending threat and the loop moves on.
-        //
-        // The player is reachable only when they are actually HOLDING this front — `playerOnArc` is the same
-        // test that decides whether a deed is player-touched. Standing on an arc is what makes you worth
-        // sending someone at, which is the whole logic of the mechanic applied evenly to the player.
-        if (mark.f.id === PLAYER_MARK_ID) {
-          (ws.pendingStrikes ||= []).push({
-            arcId, kind, sender: sender.f.id, senderName: sender.f.name || null,
-            // A CRUSADE IS DECLARED AND A KNIFE IS NOT — the player is told about one and not the other,
-            // which is the difference between the two kinds, not a rule written for the player's benefit.
-            announced: kind === "crusade",
-            worldDay: currentWorldDay, resolved: false,
-          });
-          news.push({ text: kind === "crusade"
-            ? `${sender.f.name || "Someone"} has declared against you over ${arcId}. They are not hiding it.`
-            : `Word reaches you that someone has been sent. No name, no face — only that it has been done.`,
-            worldDay: currentWorldDay, tier: "event" });
-          creditDeed(ws, sender.f.id, "strikeLanded", { worldDay: currentWorldDay });
-          continue;
-        }
+        // SNG-310 — the player is never resolved here: a strike on them was planted above as a scene (SNG-598).
         const outcome = applyEpicClashOutcome(ws, sender.f, mark.f, clash.kind, currentWorldDay,
           { locationId: clash.locationId, abilitiesByTradition, content });
         if (outcome?.finalKind && outcome.finalKind !== "already_dead") {

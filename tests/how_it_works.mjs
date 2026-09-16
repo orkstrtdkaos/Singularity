@@ -2016,8 +2016,10 @@ console.log("\n── §171 · the repair note measures the state ──");
     // rule, and the pattern is mine.
     /repairFingerprint\(character\)/.test(app171) && /repairNote\((firedKeys|Object\.keys\(result\.ops\))/.test(app171) && /failures: character\._applyFailures/.test(app171) && !/NOTHING MOVED/.test(app171));
   const fams171 = [...rd("app.js").matchAll(/applyStep\("([a-zA-Z_]+)"/g)].map(m => m[1]);
-  check("§171: …and the fingerprint covers what the op families write — every family app.js applies is one of the sixteen this gate knows",
-    fams171.length >= 16 && fams171.every(f => ["bandOps", "codexUpdates", "deathOps", "debtOps", "encounterOps", "exchangeOps", "factUpdates", "holdingOps", "newEncounter", "npcUpdates", "partyOps", "placeUpdates", "projectOps", "questUpdates", "refusalSignal", "relationshipDeltas"].includes(f)), fams171.join(","));
+  // ⚠️ SNG-598 adds `strikeOps` — forbidden to a question (`ASK_FORBIDDEN`), so the ask channel's repair note never has to measure it;
+  // it is on the list because the list is every family app.js applies, and a family nobody listed is the thing this catches.
+  check("§171: …and the fingerprint covers what the op families write — every family app.js applies is one this gate knows",
+    fams171.length >= 16 && fams171.every(f => ["bandOps", "codexUpdates", "deathOps", "debtOps", "encounterOps", "exchangeOps", "factUpdates", "holdingOps", "newEncounter", "npcUpdates", "partyOps", "placeUpdates", "projectOps", "questUpdates", "refusalSignal", "relationshipDeltas", "strikeOps"].includes(f)), fams171.join(","));
 }
 
 /* ══════════ §172 — A BEAT'S BOOKKEEPING THAT DID NOT LAND IS RESTATED, NOT LOST (Erik 2026-09-12: "make sure I don't lose anything") ══════════ */
@@ -18263,6 +18265,7 @@ console.log("\n── §254 · a strike is news, and says it was one ──");
   const t0254 = Date.now();
   let strikes254 = 0, told254 = 0, guardedN254 = 0, landedN254 = 0, mismatched254 = [], extra254 = 0, stampedKeeps254 = true;
   const unflavoured254 = [], debris254 = [], leaked254 = [], unnamed254 = [];
+  const intent254 = (C254.rules?.newsTemplates?.templates?.strike?._intentVocabulary || ["strike", "came openly"]).map(v => String(v).toLowerCase());
   let unseenN254 = 0, crusadeN254 = 0;
   let lastStrikes254 = null;
   for (let d = 0; d < 728 && (guardedN254 < 1 || landedN254 < 1 || d < 364); d += 7) {
@@ -18281,7 +18284,9 @@ console.log("\n── §254 · a strike is news, and says it was one ──");
         : unseen
           ? ((n.kind === "death" && !n.killerId && n.victimId === s.target) || (n.kind === "clash" && !n.winnerId && n.loserId === s.target))
           : ((n.kind === "death" && n.killerId === s.sender && n.victimId === s.target) || (n.kind === "clash" && n.winnerId === s.sender && n.loserId === s.target))));
-      if (!hit || !/strike|came openly/.test(hit.text || "")) mismatched254.push(`${s.kind}/${s.outcome} ${s.sender}→${s.target}`);
+      // ⛔ SNG-596/598 (Erik, via Aevi): "I didn't mean for you to use 'strike' every time — I mean for the wording to be OBVIOUS that the
+      // intent was to kill." The line must carry a member of the authored intent vocabulary, not one literal word.
+      if (!hit || !intent254.some(v => String(hit.text || "").toLowerCase().includes(v))) mismatched254.push(`${s.kind}/${s.outcome} ${s.sender}→${s.target}: ${String(hit?.text || "").slice(0, 60)}`);
       // ⛔ AND THE FLAVOUR RIDES THE REAL LINE: a striker with an authored manner is described by it, and no segment leaves debris
       const senderFig = W254.worldRoster(ch254.worldState, C254).find(f => f.id === s.sender);
       const how254 = N254.figureFlavor(senderFig, C254).how;
@@ -18306,11 +18311,11 @@ console.log("\n── §254 · a strike is news, and says it was one ──");
   check("§254: …and the fact survives stamping, so the feed and the GM keep which kind of strike it was",
     stampedKeeps254);
   const src254 = rd("engine/worldtick.js").replace(/\r\n/g, "\n");
-  // ⛔ CCODE-368 (Aevi, ruled): "a strike turned aside FROM THE PLAYER should arrive as news naming the guard, since the fight is already
-  // resolved and there is nothing for the GM to run."
-  check("§254: ⛔ a strike turned aside from the PLAYER is news, where they are; one that lands on them is still the GM's to tell; a player picked as guard is never named",
-    /const onPlayer = mark\.f\.id === PLAYER_MARK_ID;\n\s+const byGuard = guard\.f\.id !== PLAYER_MARK_ID \? guard\.f : null;\n\s+const placeId = onPlayer \? \(character\?\.currentLocationId \|\| clashPlaceOf\(sender\.f, mark\.f\)\)/.test(src254)
-    && /if \(mark\.f\.id === PLAYER_MARK_ID\) \{\n\s+\(ws\.pendingStrikes \|\|= \[\]\)\.push\(/.test(src254));
+  // ⛔ SNG-598 REVERSED CCODE-368 (Erik: "that is AN EVENT and should be narrated in story when it occurs"): a strike on the player —
+  // turned aside or not — is planted as a scene for the GM, and never told as news; a guard who is the player is never named.
+  check("§254: ⛔ a strike on the PLAYER, turned aside or not, is planted as a scene — never resolved here, never a news line — and a player picked as guard is never named",
+    /if \(mark\.f\.id === PLAYER_MARK_ID\) \{\n\s+plantPlayerStrike\(ws, \{ arcId, kind, sender: sender\.f, guard: guarded && guard\?\.f\?\.id !== PLAYER_MARK_ID \? guard\.f : null, worldDay: currentWorldDay \}\);/.test(src254)
+    && /const byGuard = guard\.f\.id !== PLAYER_MARK_ID \? guard\.f : null;/.test(src254) && !/const onPlayer = /.test(src254));
   const aevi254 = { strike: { quiet: { wounded: ["{S} hurt {T} at {place}.", "A strike hurt {T} from {place}[ — {S}][, {sWho}][, {sHow}]."] } } };
   check("§254: ⛔ an unseen strike is told in the author's own quiet lines when they keep the striker optional — and never in one that names them outright",
     N254.strikeLine({ templates: aevi254, strike: "quiet", outcome: "wounded", sender: S, target: T, place: "The Greenward", flavor: fl254, unseen: true })
@@ -18551,6 +18556,76 @@ console.log("\n── §258 · a companion who is also a figure of the world kee
   const tab258 = rd("engine/worldtab.js").replace(/\r\n/g, "\n");
   check("§258: ⛔ the world tab no longer says she is 'trying to reach' an Unmaker from across the valley — it says she wants it, travelling with you, as Marrow",
     foot258.wanted[0]?.withYou === "Marrow" && /travelling with you, as \$\{esc\(w\.withYou\)\}/.test(tab258) && /\(travelling with you, as \$\{esc\(m\.withYou\)\}\)/.test(tab258));
+}
+
+// ⛔ SNG-598 (Aevi's spec, GO from Erik 2026-09-16) — "On the strike turned aside from the player — that is AN EVENT and should be
+// narrated in story when it occurs. Either a scene that resolves in one go, or even a fight that happens with you and your party —
+// with the extra guard helping. Either way, if you win and the assailant isn't killed, you should then be able to interrogate them."
+// ⚑ MEASURED: nothing ever resolved a pending strike — the only code that touched `pendingStrikes` pushed to it, so a marked player
+// stayed marked forever; and a quiet strike on the player was pre-announced ("Word reaches you that someone has been sent").
+console.log("\n── §259 · a strike on the player is a scene, and the one sent may be made to talk ──");
+{
+  const W259 = await import("../engine/worldtick.js");
+  const GM259 = await import("../engine/gm.js");
+  const REG259 = await import("../engine/gm_registry.js");
+  const content259 = { greaterArcs: [{ id: "arc_green_schism", name: "The Green Schism", stages: [{ stage: 1, name: "S" }] }] };
+
+  /* ---- 1 · ⛔ THE SEED ---- */
+  const ws = { lastTickDay: 3, news: [], unseenNews: [] };
+  const quiet = W259.plantPlayerStrike(ws, { arcId: "arc_green_schism", kind: "quiet", sender: { id: "starless", name: "The Starless One" }, guard: { id: "walker", name: "The Last Walker" }, worldDay: 80 });
+  const loud = W259.plantPlayerStrike(ws, { arcId: "arc_green_schism", kind: "crusade", sender: { id: "saehara", name: "Saehara the Undefeated" }, worldDay: 81 });
+  const again = W259.plantPlayerStrike({}, { arcId: "arc_green_schism", kind: "quiet", sender: { id: "starless", name: "The Starless One" }, worldDay: 80 });
+  check("§259: ⛔ the seed carries who was sent, over what, and who will be there; a quiet one is unannounced; and whether they would die before talking is the same every time it is read",
+    quiet.announced === false && loud.announced === true && quiet.guardName === "The Last Walker" && !("guardId" in loud)
+    && typeof quiet.diesFighting === "boolean" && again.diesFighting === quiet.diesFighting);
+  // over many strikes, the share who die fighting follows how they were sent — a knife in the dark more often than a crusader
+  let qd = 0, cd = 0;
+  for (let i = 0; i < 400; i++) {
+    if (W259.plantPlayerStrike({}, { arcId: `a${i}`, kind: "quiet", sender: { id: `q${i}` }, worldDay: i }).diesFighting) qd++;
+    if (W259.plantPlayerStrike({}, { arcId: `a${i}`, kind: "crusade", sender: { id: `c${i}` }, worldDay: i }).diesFighting) cd++;
+  }
+  check("§259: ⛔ some die fighting and take the name with them — more of the quiet ones than the declared",
+    qd > cd && qd > 100 && qd < 220 && cd > 40 && cd < 130, `quiet ${qd}/400 · declared ${cd}/400`);
+
+  /* ---- 2 · ⛔ THE GM SEES THE SCENE ---- */
+  const threat = W259.threatToPlayer(ws, content259);
+  check("§259: ⛔ the GM gets each strike as its scene — the guard, the arc by name, what the one sent knows, and how readily they break",
+    threat.scenes.length === 2 && threat.scenes[0].guard === "The Last Walker" && threat.scenes[0].over === "The Green Schism"
+    && threat.scenes[0].sentBy === "The Starless One" && /^hard/.test(threat.scenes[0].breaks) && /^readily/.test(threat.scenes[1].breaks) && threat.scenes[0].moreComing === 1);
+  const bare259 = { character: { id: "t", name: "T", origin: "valley", background: "smith", level: 1, attributes: { physical: 3, mental: 3, social: 3, practical: 3 }, health: 10, maxHealth: 10, energy: 5, maxEnergy: 5, abilities: [], alignment: {}, inventory: [], quests: [] },
+    location: { id: "millbrook", name: "Millbrook", descriptionSeed: "a mill town", spectrum: {}, encounterFlavor: "quiet" }, region: { id: "valley", name: "The Valley" },
+    rules: {}, lore: "", timeLabel: "Day 1", recentTurns: [], sceneState: {}, resolution: null, playerInput: null };
+  const p259 = GM259.buildTurnContext({ ...bare259, threatToPlayer: threat });
+  check("§259: …READ as a scene with two shapes — one paragraph, or a fight with the guard ALONGSIDE — a yieldAt unless they die fighting, and strikeOps when it is over",
+    /IT IS A SCENE, NOT A NOTIFICATION/.test(p259) && /ONE PARAGRAPH/.test(p259) && /fights ALONGSIDE the player — an ally, not scenery/.test(p259)
+    && /give them a yieldAt/.test(p259) && /emit strikeOps/.test(p259) && /The Last Walker will be there and steps in/.test(p259)
+    && REG259.registryKeys("turn").includes("threatToPlayer"));
+
+  /* ---- 3 · ⛔ WHEN IT HAS COME TO A HEAD ---- */
+  const ch = { name: "Adelheid", worldState: ws };
+  const r1 = W259.resolvePlayerStrike(ch, { outcome: "yielded", told: true }, { worldDay: 84, content: content259 });
+  check("§259: ⛔ the oldest strike resolves; the guard's deed happens NOW, and the player learns who stood in the way — as the aftermath, not the event",
+    r1.ok && ws.pendingStrikes[0].resolved === true && ws.pendingStrikes[1].resolved === false
+    && (ws.figureTenure?.walker?.deedLog || []).some(d => d.by === "guardIntercept" && d.playerInvolved === true)
+    && r1.news.some(n => n.text === "It was The Last Walker who stood between you and the blade." && n.section === "yours"), JSON.stringify(r1.news.map(n => n.text)));
+  check("§259: ⛔ …and one who yielded and TALKED gives up who sent them — which exposes a quiet sender, as failing always has",
+    r1.told === true && r1.news.some(n => n.text === "The one sent for you talked: The Starless One sent them, over The Green Schism.")
+    && ws.figureExposure?.starless?.knownTo === W259.PLAYER_MARK_ID && ws.unseenNews.length === 2);
+  const r2 = W259.resolvePlayerStrike(ch, { outcome: "killed", told: true }, { worldDay: 90, content: content259 });
+  check("§259: …a dead assassin tells nobody anything, a threat resolved clears, and with nobody sent there is nothing to resolve",
+    r2.ok && r2.told === false && r2.news.length === 0 && W259.threatToPlayer(ws, content259) === null
+    && W259.resolvePlayerStrike(ch, { outcome: "killed" }).ok === false);
+
+  /* ---- 4 · ⛔ THE DOORS ---- */
+  const G259 = rd("engine/gm.js").replace(/\r\n/g, "\n");
+  const A259 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§259: ⛔ strikeOps is in the reply contract, salvaged, forbidden to a question, and read by the turn",
+    /"strikeOps": \[\{"outcome": "killed \| yielded \| fled \| driven_off/.test(G259) && GM259.SALVAGEABLE_OPS.includes("strikeOps") && GM259.ASK_FORBIDDEN.includes("strikeOps")
+    && /applyStep\("strikeOps", \(\) => \{[\s\S]{0,300}resolvePlayerStrike\(character, op, \{ worldDay: day, content: CONTENT \}\)/.test(A259));
+  const W259src = rd("engine/worldtick.js").replace(/\r\n/g, "\n");
+  check("§259: ⛔ a quiet strike on the player is never pre-announced — only a declared one tells them somebody is coming",
+    !/Word reaches you that someone has been sent/.test(W259src)
+    && /if \(kind === "crusade"\) news\.push\(\{ text: `\$\{sender\.f\.name \|\| "Someone"\} has declared against you over/.test(W259src));
 }
 
 /* ══════════ REPORT ══════════ */

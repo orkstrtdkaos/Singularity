@@ -420,7 +420,7 @@ export const GM_CONTEXT = [
     carries: ["that someone has been sent for the player", "who, WHEN THEY DECLARED IT", "how many have not"],
     reachedBy: "the offscreen world chose the player as a strike target while they held a contested front",
     spec: "SNG-310", views: ["turn", "ask"],
-    build: (env) => threatToPlayer(env.character?.worldState) },
+    build: (env) => threatToPlayer(env.character?.worldState, env.CONTENT || {}) },   // SNG-598: the scenes, with their arcs by name
 
   // SNG-311 — ⛔ AND WHO IS STANDING OVER THEM. The symmetric half of SNG-310: a marked FIGURE has always
   // been able to draw a guard, and the player was the one marked party nobody could stand over. Same rule as

@@ -12171,9 +12171,12 @@ await (async () => {
     // resolving it would decide a fight the player was never in. That is Design Law 1, and it is the whole
     // difference between "the world can reach you" and "the world plays you".
     const src310 = readFileSync(join(root, "engine/worldtick.js"), "utf8");
-    const block = src310.slice(src310.indexOf("if (mark.f.id === PLAYER_MARK_ID)"), src310.indexOf("const outcome = applyEpicClashOutcome(ws, sender.f, mark.f"));
+    // ⚠️ SNG-598 moved the player's branch ahead of the guard's, so a strike turned aside from the player is a scene too; the slice is
+    // now the branch itself — from its test to its `continue` — and the recorder is `plantPlayerStrike`.
+    const at310 = src310.indexOf("if (mark.f.id === PLAYER_MARK_ID) {");
+    const block = at310 < 0 ? "" : src310.slice(at310, src310.indexOf("continue;", at310));
     check("310: a strike aimed at the PLAYER is recorded, never resolved — the engine marks, the GM narrates",
-      block.length > 0 && /pendingStrikes/.test(block) && !/resolveEpicClash|applyEpicClashOutcome/.test(block));
+      block.length > 0 && /plantPlayerStrike\(ws,/.test(block) && !/resolveEpicClash|applyEpicClashOutcome/.test(block));
 
     check("310: an unmarked player has no threat at all — silence, not an empty object",
       wt.threatToPlayer({}) === null && wt.threatToPlayer({ pendingStrikes: [] }) === null);

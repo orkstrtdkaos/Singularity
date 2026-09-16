@@ -88,7 +88,7 @@ import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent
 import { activeArcEffects, craftCostNote, encounterBias, effectsInPlainWords, npcMoodLines, travelCostFactor } from "./engine/arceffects.js";   // SNG-273: an advanced arc is something you FEEL
 import { knownIndex, whoIs, figureArtRecord } from "./engine/whois.js";   // SNG-299: who is that, and where do I read more
 import { worldTabHtml } from "./engine/worldtab.js";   // SNG-276: the tab's markup, testable
-import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, syncTravelers, syncInvitations, sendInvitation, answerInvitation, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter, arcStageNow, worldRoster, NEWS_SECTIONS, pushCanonLook} from "./engine/worldtick.js";
+import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, syncTravelers, syncInvitations, sendInvitation, answerInvitation, resolvePlayerStrike, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter, arcStageNow, worldRoster, NEWS_SECTIONS, pushCanonLook} from "./engine/worldtick.js";
 import { noteWorldMovedOnShown } from "./engine/worldevents.js";
 import { travelersHere, travelerHereLine, whereOf } from "./engine/travelers.js";   // CCODE-359: another traveler is here   // CCODE-354: the world moved on, counted by beats
 import { makeInvitation, incomingInvitations, sentInvitations, joinBandLocally, bandPhrase } from "./engine/invitations.js";
@@ -150,7 +150,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.34";
+const APP_VERSION = "2.0.35";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7968,6 +7968,12 @@ function applyTurn(turn, resolution, playerWords = null) {
   // caller would have been the same mistake with the ink still wet.
   // ⚠️ TWO VERBS, because raising a following and marching it into something are different decisions taken
   // at different times — one is a season's work, the other is a moment.
+  // ⛔ SNG-598 — the strike on the player came to a head in the story (a paragraph or a fight), and the GM says how it ended. What
+  // was owed happens now: the guard's deed and name, and — if the one sent talked — who sent them.
+  applyStep("strikeOps", () => {
+    let day = null; try { day = absoluteWorldDay(); } catch { day = null; }
+    for (const op of (Array.isArray(turn.strikeOps) ? turn.strikeOps : []).slice(0, 2)) resolvePlayerStrike(character, op, { worldDay: day, content: CONTENT });
+  });
   applyStep("bandOps", () => {
     let day = 0; try { day = absoluteWorldDay(); } catch { day = character.clock?.day ?? 0; }
     for (const op of (Array.isArray(turn.bandOps) ? turn.bandOps : []).slice(0, 2)) {

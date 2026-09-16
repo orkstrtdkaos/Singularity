@@ -17235,13 +17235,15 @@ await (async () => {
     `in force ${cal195.seasons.length}×${cal195.daysPerSeason}, authored ${C195.worldClock?.calendar?.seasons?.length}×${C195.worldClock?.calendar?.daysPerSeason}`);
   // 2 · ⛔ AND IT IS REACHABLE, MEASURED RATHER THAN ASSERTED. A beat moves the clock ~1h and a scene end 2h;
   // the claim is that a season turns inside a campaign, not inside a lifetime. 600 turns was the old answer.
+  // ⛔ CCODE-376 (Erik: "i'm hoping the seasons are actually tied to the world clock and not the characters days") — the season is
+  // read from the WORLD day now, so it is reachable in REAL days, not turns: character clocks sat at Day 2–18 after weeks of play.
   {
-    const turnsPerSeason = Math.round(cal195.daysPerSeason * 24 / WT.ADVANCE.beat);
-    const turnsPerYear = turnsPerSeason * cal195.seasons.length;
-    console.log(`      season economy: ~${turnsPerSeason} turns per season, ~${turnsPerYear} per year (was 1080 / 8640)`);
-    check(`CCODE-195: a season is reachable in play (~${turnsPerSeason} turns, was ~1080)`,
-      turnsPerSeason > 40 && turnsPerSeason <= 400,
-      "under 40 and the season is weather; over 400 and no one arrives at the second one");
+    const rate = WT.getWorldEpoch().rate || 1;
+    const realDaysPerSeason = cal195.daysPerSeason / rate;
+    console.log(`      season economy: ~${realDaysPerSeason} real days per season, ~${realDaysPerSeason * cal195.seasons.length} per year`);
+    check(`CCODE-195: a season is reachable — ~${realDaysPerSeason} real days of the world clock`,
+      realDaysPerSeason >= 3 && realDaysPerSeason <= 45,
+      "under 3 and the season is weather; over 45 and a player waits a month and a half for the next one");
   }
   // 3 · ⛔ EVERY SEASON THE CLOCK CAN PRODUCE MUST HAVE A PRESSURE. The names live in two places now — the
   // authored calendar and latentarcs' SEASON_PRESSURE — and a season with no condition line reaches the GM as
@@ -17253,7 +17255,7 @@ await (async () => {
   }
   // 4 · IT ACTUALLY TURNS, and wraps rather than running off the end of the list.
   {
-    const at = (d) => WT.readClock({ day: d, hour: 12 }).season;
+    const at = (d) => WT.seasonOfWorldDay(d);   // CCODE-376: the season turns on the WORLD day
     const d = cal195.daysPerSeason;
     check("CCODE-195: the season turns on the boundary and the year wraps",
       at(1) === cal195.seasons[0] && at(d) === cal195.seasons[0] && at(d + 1) === cal195.seasons[1]

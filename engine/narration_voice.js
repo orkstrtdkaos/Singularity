@@ -98,12 +98,24 @@ function cleanForSpeech(text) {
  *  so raw asterisks never surface in a session read aloud at a table. Escapes FIRST (safety), THEN
  *  converts inline emphasis to tags; a paragraph led by an aside glyph (✦ ▲ ★ ◆ ◇ ⚖ ⏹ ◈) becomes a
  *  distinct `.beat-aside` with its outer italic markers consumed. Pure; no DOM. */
+/** ⛔ Erik: "the popup lists an SNG # in it... that shouldn't be player facing content. run a comprehensive sweep."
+ *  A ticket number is how the people building the game keep track of it; it is never something a player should read. The engine's
+ *  own strings were swept at the source; this is the net for prose the MODEL writes, which is shown here and can echo a ticket tag
+ *  from its instructions. Removes "(SNG-191)", "(CCODE-52 §3)", a leading "SNG-242: " or "SNG-186 §2f — ", and a bare "SNG-310". */
+export function stripTicketRefs(text) {
+  return String(text ?? "")
+    .replace(/\s*\((?:SNG|CCODE)-\d+[a-z]?(?:\s*§\s*\d+[a-z]?)?\)/g, "")
+    .replace(/\b(?:SNG|CCODE)-\d+[a-z]?(?:\s*§\s*\d+[a-z]?)?\s*[:—–]\s*/g, "")
+    .replace(/\b(?:SNG|CCODE)-\d+[a-z]?\b/g, "")
+    .replace(/[ \t]{2,}/g, " ").replace(/[ \t]+([,.;:)])/g, "$1");
+}
+
 export function renderProseHtml(paragraph) {
   const esc = (t) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   const md = (t) => esc(t)
     .replace(/\*\*([^*\n]+)\*\*/g, "<strong>$1</strong>")   // **bold** first, so a lone * can't cross it
     .replace(/\*([^*\n]+)\*/g, "<em>$1</em>");              // *emphasis* → italic (well-formed pairs only)
-  const s = String(paragraph || "").trim();
+  const s = stripTicketRefs(paragraph || "").trim();
   const m = s.match(/^\*?\s*([✦▲★◆◇⚖⏹◈])\s*/);
   if (m) {
     const body = s.replace(/^\*?\s*[✦▲★◆◇⚖⏹◈]\s*/, "").replace(/\s*\*$/, "");

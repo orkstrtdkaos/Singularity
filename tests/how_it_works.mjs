@@ -18686,6 +18686,74 @@ console.log("\n── §261 · when the strike is a fight, the guard fights besi
     && /"lethal": false, "strike": false, "opponent":/.test(G261));
 }
 
+// ⛔ CCODE-376 (Erik, 2026-09-16) — "perhaps fix the world clock and the lack of season progression? I've tried to have this fixed before
+// but my characters are all still sitting at Early-Spring... i'm hoping the seasons are actually tied to the world clock and not the
+// characters days. plus the popup lists an SNG # in it... that shouldn't be player facing content. run a comprehensive sweep."
+console.log("\n── §262 · the season is the world's, and no ticket number reaches a player ──");
+{
+  const T262 = await import("../engine/worldtime.js");
+  const N262 = await import("../engine/narration_voice.js");
+  const { stringsOf, TICKET_REF } = await import("./lib/strings_of.mjs");
+
+  /* ---- 1 · ⛔ THE SEASON ---- */
+  // ⚑ MEASURED: character clocks read Day 2, Day 4, Day 18 after weeks of play; the world clock reads world-day 78 on every device.
+  const a = T262.readClock({ day: 2, hour: 14 }, { mode: "story", ratio: 3 });
+  const b = T262.readClock({ day: 18, hour: 12 }, { mode: "story", ratio: 3 });
+  const cal = T262.seasonCalendar();
+  check("§262: ⛔ two travellers on different days of their own read ONE season — the world's, from the world clock",
+    a.season === b.season && a.season === T262.worldSeason() && a.season === T262.seasonOfWorldDay(T262.absoluteWorldDay()) && a.day === 2 && b.day === 18);
+  check("§262: …and it turns with the world: a season's length in world days later, it is the next one",
+    T262.seasonOfWorldDay(1) === cal.seasons[0] && T262.seasonOfWorldDay(cal.daysPerSeason + 1) === cal.seasons[1]
+    && T262.worldSeason(Date.now() + cal.daysPerSeason * 86400000 / (T262.getWorldEpoch().rate || 1)) !== T262.worldSeason());
+  const A262 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§262: ⛔ the clock's popup says the season is the world's, in words a player reads",
+    /title="Your own days on the road, and the time of day\. The season is the world's — the same for everyone\."/.test(A262));
+
+  /* ---- 2 · ⛔ THE SWEEP ---- */
+  // ⚑ MEASURED with `stringsOf`: 53 string literals in app.js and the engine (outside the GM registry's own metadata and the GM prompt)
+  // carried a ticket reference. Nine could reach a player — the clock's popup, two Settings hints, the party panel, an encounter
+  // tooltip, the rich-beat button, a romance refusal, a promotion error, a threat note — and are gone. What remains is the dev
+  // surfaces (Machine, Author, Balance dials, Legs), console lines, and prompt text the model reads: a RATCHET, so it only shrinks.
+  const count = (rel) => stringsOf(rd(rel)).filter(x => TICKET_REF.test(x.text)).length;
+  const engineFiles = readdirSync(join(root, "engine")).filter(f => f.endsWith(".js") && f !== "gm_registry.js" && f !== "gm.js");
+  const engineCount = engineFiles.reduce((n, f) => n + count(`engine/${f}`), 0);
+  check("§262: ⛔ none of the nine player-facing strings carries a ticket number any more",
+    !/time of day \(SNG-191\)/.test(A262) && !/SNG-242: which model tells each beat/.test(A262) && !/SNG-128 world-authorship/.test(A262)
+    && !/own sheet \(R36\)/.test(A262) && !/roll modifier, CCODE-38/.test(A262) && !/vivid telling \(SNG-242\)/.test(A262)
+    && !/R24 excludes/.test(rd("engine/npcs.js")) && !/SNG-101 Law 14/.test(rd("engine/progression.js")) && !/CCODE-52's ladder/.test(rd("engine/threat.js")));
+  check("§262: ⛔ …and what remains only shrinks — app.js 33 and the engine 10, every one of them a dev surface, a console line or prompt text",
+    count("app.js") <= 33 && engineCount <= 10, `app.js ${count("app.js")} · engine ${engineCount}`);
+
+  /* ---- 3 · ⛔ THE NET FOR WHAT THE MODEL WRITES ---- */
+  check("§262: ⛔ a ticket tag the GM echoes is stripped before a player sees it — and plain prose passes untouched",
+    N262.stripTicketRefs("The clock (SNG-191) turns.") === "The clock turns." && N262.stripTicketRefs("A seed (SNG-250 §3) planted — SNG-310 and more.") === "A seed planted — and more."
+    && N262.stripTicketRefs("Plain prose, untouched.") === "Plain prose, untouched." && N262.renderProseHtml("She said (SNG-310) nothing.") === "<p>She said nothing.</p>");
+
+  /* ---- 4 · ⛔ CONTENT A PLAYER READS ---- */
+  // ⚑ MEASURED: of 1,053 content strings carrying a reference outside `_` notes, 4 sat in a field a player reads. The generated location's
+  // description is fixed; three are Aevi's (a rules file's own description, a Veil rule's `how`, and the first season quest's stage
+  // condition, which the quest tracker shows) — handed to her, and held here so none is added.
+  const PLAYER262 = /^(?:name|title|label|text|line|lines|description|desc|descriptionSeed|appearance|flavor|setup|hint|help|helpText|copy|prose|summary|tooltip|body|ribbon|receipt|template|templates|win|lose|meter|exitRule|cue|caption|publicFace|condition|role|persona|voiceHints|signature|fightingStyle|wants|fears|short|long|what|how|blurb|tagline|intro|outro|narration|say|says|greeting)$/i;
+  const CT262 = /\b(?:SNG|CCODE)-\d+[a-z]?\b|§\s?\d+/;
+  let contentHits = 0;
+  const walk262 = (dir) => {
+    for (const f of readdirSync(dir, { withFileTypes: true })) {
+      const q = join(dir, f.name);
+      if (f.isDirectory()) { walk262(q); continue; }
+      if (!f.name.endsWith(".json")) continue;
+      let j; try { j = JSON.parse(readFileSync(q, "utf8")); } catch { continue; }
+      const visit = (o, at) => {
+        if (typeof o === "string") { const keys = at.split("."); const leaf = keys.filter(k => !/^\d+$/.test(k)).pop() || "";
+          if (CT262.test(o) && !keys.some(k => k.startsWith("_")) && PLAYER262.test(leaf)) contentHits++; return; }
+        if (o && typeof o === "object") for (const [k, v] of Object.entries(o)) visit(v, at ? `${at}.${k}` : k);
+      };
+      visit(j, "");
+    }
+  };
+  walk262(join(root, "content"));
+  check("§262: …and content fields a player reads carry at most the three handed to Aevi", contentHits <= 3, `${contentHits} content hits`);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

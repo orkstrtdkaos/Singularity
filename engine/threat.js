@@ -83,7 +83,7 @@ export function threatBand(power, threat, bands = null) {
   const rung = ladder.find(b => ratio >= (b.atRatio ?? 0)) || ladder[ladder.length - 1];
   return { ...rung, ratio: Math.round(ratio * 100) / 100, power: num(power), threat: num(threat),
     // ⛑ SO A READER CAN TELL "the content had no ratio ladder" from "the content said beneath notice".
-    ...(offered && !isRatioLadder ? { ladderIgnored: "the authored threatBands state `at` (absolute), not `atRatio` (relative to your power) — CCODE-52's ladder is not authored yet" } : {}) };
+    ...(offered && !isRatioLadder ? { ladderIgnored: "the authored threatBands state `at` (absolute), not `atRatio` (relative to your power) — a ladder relative to your power is not authored yet" } : {}) };
 }
 
 /** CCODE-52: is this foe worth being an encounter at all? Erik: "a boar at lvl 20 isn't really an encounter

@@ -95,9 +95,25 @@ export function advanceClock(clock, hours, settings = getTimeSettings()) {
 function fromTotalHours(total) {
   const day = Math.floor(total / 24);
   const hour = Math.floor(total % 24);
-  const season = seasonOf(day);
+  // ⛔ THE SEASON IS THE WORLD'S (see `worldSeason`): the same for every traveller at one moment, turning with the world clock.
+  const season = worldSeason();
   return { day, hour, phase: phaseOf(hour), season, label: `Day ${day}, ${phaseOf(hour)} (${season})` };
 }
+
+/** ⛔ ERIK 2026-09-16: "perhaps fix the world clock and the lack of season progression? I've tried to have this fixed before but my
+ *  characters are all still sitting at Early-Spring... i'm hoping the seasons are actually tied to the world clock and not the
+ *  characters days."
+ *
+ *  ⚑ MEASURED: after weeks of play the character clocks read Day 2 (Adelheid), Day 4 (Loki, Splarf, Brynjar), Day 18 (Silas) — a
+ *  beat moves one an hour or two — so every season past the first two was still out of reach. CCODE-195 shortened the season to 12
+ *  days and could not fix it, because the thing that did not move was the CHARACTER'S day. The world clock reads world-day 78 on every
+ *  device, one world day for each real day.
+ *
+ *  ⛑ SO THE SEASON IS READ FROM THE WORLD DAY: one season for everyone at one moment, turning with real time — 12 real days a season
+ *  on the authored calendar. ⚠️ This reverses CCODE-195's reading of `world_clock.json` ("a season is something a traveller lives
+ *  through") on Erik's word. The character's own "Day N" is still theirs: the days they have been on the road. */
+export function seasonOfWorldDay(worldDay) { return seasonOf(Math.max(1, Math.floor(Number(worldDay) || 1))); }
+export function worldSeason(nowMs = Date.now(), epoch = getWorldEpoch()) { return seasonOfWorldDay(absoluteWorldDay(nowMs, epoch)); }
 
 function phaseOf(hour) {
   if (hour < 5) return "deep night";

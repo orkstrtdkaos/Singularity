@@ -680,7 +680,7 @@ export function promote(character, domainKey, rules, opts = {}) {
   const newCeiling = to === "primary" ? 5 : 3;
   character.domainCeilings = character.domainCeilings || {};
   const cur = character.domainCeilings[trad] ?? (domainKey === "tertiary" ? 2 : 3);
-  if (newCeiling < cur) throw new Error("SNG-101 Law 14: promotion must never lower a ceiling");
+  if (newCeiling < cur) throw new Error("a promotion must never lower a ceiling");
   character.domainCeilings[trad] = Math.max(cur, newCeiling);
   // foreclose the antipode (directional — closes new native learning/ranking; owned ground & braids stay)
   const anti = opts.traditionIndex ? antipodeOf(trad, opts.traditionIndex) : null;

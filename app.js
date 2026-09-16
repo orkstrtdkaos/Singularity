@@ -150,7 +150,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.37";
+const APP_VERSION = "2.0.38";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3723,13 +3723,13 @@ function renderSettings(note = "") {
         <option value="standard" ${(!profile.narrationTier || profile.narrationTier === "standard") ? "selected" : ""}>Standard — Sonnet, the normal telling</option>
         <option value="rich" ${profile.narrationTier === "rich" ? "selected" : ""}>Rich — Sonnet, fuller + more vivid every beat</option>
       </select>
-      <div class="hint">SNG-242: which model tells each beat. <strong>Fast</strong> = Haiku (cheaper &amp; faster — try it and see if the telling holds up for you). <strong>Standard</strong> = Sonnet. <strong>Rich</strong> = Sonnet, told fuller. Whatever your default, you can arm just ONE beat richer with the <strong>✦ Rich</strong> toggle by the input, or tap <strong>✦ Tell it again, richer</strong> on any turn to re-tell that beat beautifully — same events, richer prose. So: cheap by default, beautiful where it matters.</div></div>
+      <div class="hint">Which model tells each beat. <strong>Fast</strong> = Haiku (cheaper &amp; faster — try it and see if the telling holds up for you). <strong>Standard</strong> = Sonnet. <strong>Rich</strong> = Sonnet, told fuller. Whatever your default, you can arm just ONE beat richer with the <strong>✦ Rich</strong> toggle by the input, or tap <strong>✦ Tell it again, richer</strong> on any turn to re-tell that beat beautifully — same events, richer prose. So: cheap by default, beautiful where it matters.</div></div>
     <div class="field"><label>Developer mode</label>
       <label class="rating-check"><input type="checkbox" id="set-dev" ${(() => { try { return localStorage.getItem("singularity.devPersist") === "1"; } catch { return false; } })() ? "checked" : ""}> Show developer tools (the 🧪 Legs panel, test-encounter buttons, the scenario runner)</label>
       <div class="hint">Off by default — normal play never shows dev tools. ${isDevMode() ? `<strong>Dev mode is currently ON</strong>${(() => { try { return new URLSearchParams(location.search).get("dev") === "1"; } catch { return false; } })() ? " for this URL (reload without <code>?dev=1</code> for a clean player view)" : /^(localhost|127\\.0\\.0\\.1)/.test(location.hostname) ? " because this is a local dev host" : ""}. ` : ""}Ticking this box is a deliberate, persistent opt-in on this browser; untick + Save to turn it fully off.</div></div>
     <div class="field"><label>World-authorship</label>
       <label class="rating-check"><input type="checkbox" id="set-contentgen" ${profile.contentGenerator ? "checked" : ""}> My play authors the world — what I create through play more readily becomes shared canon</label>
-      <div class="hint">When on, the people and places you bring into being carry more weight (SNG-128 world-authorship), so your play persists into the family's shared valley more readily. On for the family's storytellers.</div></div>
+      <div class="hint">When on, the people and places you bring into being carry more weight, so your play persists into the family's shared valley more readily. On for the family's storytellers.</div></div>
     <div class="field"><label>Saves on this device</label>
       <div style="display:flex; gap:8px; flex-wrap:wrap"><button class="btn secondary" id="export-save">Export saves</button><button class="btn secondary" id="import-save">Import a save file</button></div>
       <div class="hint">Rarely needed now: with sync set up, <em>Find my characters</em> brings a character to any device. Export writes a copy to a file you keep; Import reads one back.</div></div>
@@ -5285,7 +5285,7 @@ function renderPartyPanel() {
       <div class="opt-row" style="gap:6px;flex-wrap:wrap">
         <button class="opt pp-mini" data-pp-call="wait" title="Hold the round. Repeatable, and it is counted">Wait</button>
         <button class="opt pp-mini" data-pp-call="guard" title="They guard \u2014 still in the fight, still targetable, and not a strike nobody chose">Skip (they guard)</button>
-        <button class="opt pp-mini" data-pp-call="gm" title="Their character acts from their own sheet (R36)">Let the GM play them</button>
+        <button class="opt pp-mini" data-pp-call="gm" title="Their character acts from their own sheet">Let the GM play them</button>
       </div>
     </div>` : "";
 
@@ -15798,7 +15798,7 @@ function skillBattlePanel() {
       const mine = st.pressure?.player || 0, theirs = st.pressure?.opponent || 0;
       if (!mine && !theirs) return "";
       const pip = (n, max) => "◆".repeat(Math.min(n, max)) + "◇".repeat(Math.max(0, max - n));
-      return ` <span class="sb-pressure" title="A fight ends when one side is OVERWHELMED ${brk} times — not when the momentum meter fills (momentum is a roll modifier, CCODE-38). This is the real exit.">`
+      return ` <span class="sb-pressure" title="A fight ends when one side is OVERWHELMED ${brk} times — not when the momentum meter fills (momentum is a roll modifier). This is the real exit.">`
         + (theirs ? `driven back ${pip(theirs, brk)} ${theirs}/${brk}` : "")
         + (theirs && mine ? " · " : "")
         + (mine ? `you ${pip(mine, brk)} ${mine}/${brk}` : "") + `</span>`;
@@ -16889,7 +16889,7 @@ function renderPlay(turn, opts = {}) {
         ${rep ? `<button type="button" class="rep-band loc-standing ${esc(rep.band)}" data-standing="${esc(location.communityId || "")}" title="Your standing here — tap for what it means for you">${esc(rep.band)}</button>` : ""}
         ${isHome(character) ? `<span class="loc-home" title="Your home — your own place">⌂ home</span>` : `<button type="button" class="loc-home-btn" data-make-home="${esc(location.id)}" title="${homeOf(character, CONTENT.locations) ? `Make this place home instead of ${esc(homeOf(character, CONTENT.locations).name)}` : "Make this place your home"}" aria-label="Make this place your home">⌂</button>`}
         ${sub && !saysParent ? `<span class="loc-parent" title="A named spot inside ${esc(location.name)}. You are in it; a sub-place is not a destination.">in ${esc(location.name)}</span>` : ""}
-        <span class="time-tag" title="Your own clock — days, season, time of day (SNG-191). The world's count is a separate shared tally, not a date.">${esc(time.label)} <span class="world-day-tag" title="The Kept Count — the shared world tally; it only ever climbs and is not a date">· ⧗ ${worldCount()}</span></span>
+        <span class="time-tag" title="Your own days on the road, and the time of day. The season is the world's — the same for everyone.">${esc(time.label)} <span class="world-day-tag" title="The Kept Count — the shared world tally; it only ever climbs and is not a date">· ⧗ ${worldCount()}</span></span>
       </div>`;
     })()}${(() => {
       // ⛔ SNG-381 — THE GROUND YOU ARE STANDING ON. Erik: "the current ground's power sources should
@@ -17394,7 +17394,7 @@ function renderPlay(turn, opts = {}) {
       <input id="freeform-input" placeholder="${activeEnc() && !askMode ? "Describe your move — the encounter's rules bind it…" : askMode ? "Ask the GM anything — context, rules, what you'd know…" : "Or do something else — describe it…"}" ${busy ? "disabled" : ""}>
       <button id="freeform-go" ${busy ? "disabled" : ""}>${askMode ? "Ask" : "Act"}</button>
       ${activeEnc() && activeEnc().state?.mode !== "skill_battle" ? `<button id="moves-open" class="mode-toggle ${movesOpen ? "apt" : ""}" title="Encounter moves — grouped by family (ward / sense / strike …) + the ways out. Rules enforced." ${busy ? "disabled" : ""}>⚙ Moves</button>` : ""}
-      ${profile?.narrationTier !== "rich" ? `<button id="rich-toggle" class="mode-toggle ${_richNextTurn ? "apt" : ""}" title="Tell THIS next beat richly — a fuller, more vivid telling (SNG-242). One beat; set your default in Settings." ${busy ? "disabled" : ""}>✦ Rich</button>` : ""}
+      ${profile?.narrationTier !== "rich" ? `<button id="rich-toggle" class="mode-toggle ${_richNextTurn ? "apt" : ""}" title="Tell THIS next beat richly — a fuller, more vivid telling. One beat; set your default in Settings." ${busy ? "disabled" : ""}>✦ Rich</button>` : ""}
       <button id="gambit-open" class="mode-toggle ${apt ? "apt" : ""}" title="Plan a multi-step gambit" ${busy ? "disabled" : ""}>⚙ Plan</button></div>`;
   }
   if (isDev()) {

@@ -181,7 +181,7 @@ export function prettifyNpcName(name, dropTokens = []) {
 export function romanceable(person) {
   if (!person) return { ok: false, why: "no one" };
   const sex = person.sex == null ? null : String(person.sex).trim().toLowerCase();
-  if (!sex) return { ok: false, why: "their sex was never set — R24 excludes rather than guesses" };
+  if (!sex) return { ok: false, why: "their sex was never set — the game excludes rather than guesses" };
   if (sex === "none") return { ok: false, why: "they have no sex; this is an answer, not a blank" };
   // ⚠️ THE MINOR MARKER IS ALREADY WRITTEN AT GENERATION and is a REFUSAL, never a permission —
   // `_gen.romanceEligible === false` means minor. Its absence says nothing either way.

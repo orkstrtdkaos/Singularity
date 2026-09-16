@@ -71,17 +71,45 @@
  "partySync": "SNG-191 §3, Erik's ruling: forming a party syncs the members' CHARACTER clocks — not world time. From the join forward they advance together. Their PASTS stay different lengths, and that is biography, not an error. Nothing is retconned.",
  "calendar": {
   "note": "CCODE-195. Erik, from play: “It never ceases to be early-spring... even after over 1000 world ticks.” He was right. A season was 45 character-days = 1080 character-hours, and a beat moves the clock 1–2 hours — so one season cost ~600 turns and a year ~4,800, and his character was at Day 15 after weeks of play. Seven of the eight SEASON_PRESSURE entries in latentarcs.js had never been reachable by any player.",
-  "seasons": [
-   "early-spring",
-   "late-spring",
-   "early-summer",
-   "late-summer",
-   "harvest",
-   "early-winter",
-   "deep-winter",
-   "thaw"
+  "_ruling_20260916": "⛔ ERIK: 'an entire 4 seasons should pass in about 4 months of real time... the world is 1/3 the size so there's fuzzy math there.... early-mid-late can break those seasons down into 12 day portions, as you say.' And the same hour: 'it should be described differently based on how close to the ring a PC is... the ring would have fewer seasons.' ⛑ ONE YEAR for the whole world, read from the world day (CCODE-376): 144 world days, about 4¾ real months at one world day a real day. How many seasons a place divides it into depends on how far it stands from the ring — the equator of the world sphere, |colatitude − 90|. Every season is early, mid and late.",
+  "yearDays": 144,
+  "portions": [
+   "early",
+   "mid",
+   "late"
   ],
-  "daysPerSeason": 12,
-  "whyTwelve": "A 96-day year of eight 12-day seasons. At the measured pace this turns the season roughly every 160 turns and completes a year in a long campaign, so all eight authored pressures are reachable. THIS IS THE DIAL — raise it for a world where seasons are a backdrop, lower it for one where they drive play. Nothing derives a year-length from it: it changes only how fast the season word advances."
+  "defaultBand": "far",
+  "bands": [
+   {
+    "id": "far",
+    "fromRingDegrees": 45,
+    "seasons": [
+     "spring",
+     "summer",
+     "autumn",
+     "winter"
+    ],
+    "why": "Four seasons, each early, mid and late in 12-day portions — Erik's numbers. The valley (~70° from the ring) and the Crossing (90°) live here."
+   },
+   {
+    "id": "middle",
+    "fromRingDegrees": 15,
+    "seasons": [
+     "spring",
+     "summer",
+     "winter"
+    ],
+    "why": "Nearer the ring, fewer seasons: autumn is not a season of its own here. Three seasons, each early, mid and late, in 16-day portions of the same year."
+   },
+   {
+    "id": "ring",
+    "fromRingDegrees": 0,
+    "seasons": [
+     "rains",
+     "dry"
+    ],
+    "why": "On the ring the year is the rains and the dry — Erik: 'the ring would have fewer seasons'. Each early, mid and late, in 24-day portions of the same year."
+   }
+  ]
  }
 }

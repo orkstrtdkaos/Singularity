@@ -26,28 +26,86 @@ export const DEFAULT_RATIO = 3; // real mode default: 1 real hour = 1 game day
 // ⛔ AND THE NUMBER WAS NOT TURNABLE. Both the length and the names were engine constants, so the people who
 // own the world could not change its calendar without editing engine source. They are a dial now
 // (`rules.worldClock.calendar`); these stay as the fallback for a pack that does not carry one.
-const SEASONS = ["early-spring", "late-spring", "early-summer", "late-summer", "harvest", "early-winter", "deep-winter", "thaw"];
-const DAYS_PER_SEASON = 45;
+const PORTIONS = ["early", "mid", "late"];
 
-let _calendar = { seasons: SEASONS, daysPerSeason: DAYS_PER_SEASON };
+/** ⛔ ERIK 2026-09-16: "an entire 4 seasons should pass in about 4 months of real time... the world is 1/3 the size so there's fuzzy math
+ *  there.... early-mid-late can break those seasons down into 12 day portions, as you say." — and, the same hour: "it should be described
+ *  differently based on how close to the ring a PC is... the ring would have fewer seasons."
+ *
+ *  ⛑ ONE YEAR FOR THE WHOLE WORLD, and how many SEASONS a place divides it into depends on how far that place stands from the ring — the
+ *  equator of the world sphere, where the traditions' homelands sit (|colatitude − 90|: 0 on the ring, 90 at the Crossing). Every season
+ *  is early, mid and late. ⚑ MEASURED where people are: the valley sits ~70° from the ring (Millbrook 69.7, the Kindly Rest 68.7), sixty
+ *  places sit within 10° of it. The authored calendar (`rules.worldClock.calendar`) is in force; this is the fallback for a pack that
+ *  carries none, and it IS that calendar, so the two cannot tell different stories. */
+const DEFAULT_CALENDAR = {
+  yearDays: 144, portions: PORTIONS, defaultBand: "far",
+  bands: [
+    { id: "far", fromRingDegrees: 45, seasons: ["spring", "summer", "autumn", "winter"] },
+    { id: "middle", fromRingDegrees: 15, seasons: ["spring", "summer", "winter"] },
+    { id: "ring", fromRingDegrees: 0, seasons: ["rains", "dry"] },
+  ],
+};
+let _calendar = DEFAULT_CALENDAR;
 
-/** The season calendar in force. */
-export function seasonCalendar() { return _calendar; }
+/** A band's season names, in the order the year passes through them: "early-spring", "mid-spring", "late-spring", … An older flat
+ *  calendar's `names` are used as authored. */
+export function seasonNames(band, cal = _calendar) {
+  if (Array.isArray(band?.names) && band.names.length) return band.names;
+  const portions = Array.isArray(cal?.portions) && cal.portions.length ? cal.portions : PORTIONS;
+  return (band?.seasons || []).flatMap(s => portions.map(p => `${p}-${s}`));
+}
+const bandById = (id, cal = _calendar) => (cal?.bands || []).find(b => b.id === id) || null;
 
-/** CCODE-195: install the authored calendar. Called once from `loadContent`. A malformed block is REFUSED
- *  rather than half-applied — no seasons, or a season of zero days, is a division by nothing and a header
- *  that reads `undefined`. Returns the calendar actually in force, so the caller can report which one. */
-export function setSeasonCalendar(cal) {
-  const seasons = Array.isArray(cal?.seasons) ? cal.seasons.filter(s => typeof s === "string" && s.trim()) : [];
-  const days = Number(cal?.daysPerSeason);
-  if (seasons.length && Number.isFinite(days) && days > 0) _calendar = { seasons, daysPerSeason: days };
-  return _calendar;
+/** The season calendar in force — with the flat view of its default band (`seasons`, `daysPerSeason`) DERIVED for the readers that ask
+ *  for one, never stored beside it. */
+export function seasonCalendar() {
+  const band = bandById(_calendar.defaultBand) || _calendar.bands[0];
+  const seasons = seasonNames(band);
+  return { ..._calendar, seasons, daysPerSeason: _calendar.yearDays / seasons.length };
 }
 
-/** Which season a day falls in. ONE definition, so two readers cannot drift into two answers. */
-function seasonOf(day) {
-  const { seasons, daysPerSeason } = _calendar;
-  return seasons[Math.floor((day - 1) / daysPerSeason) % seasons.length];
+/** CCODE-195: install the authored calendar. Called once from `loadContent`. A malformed block is REFUSED rather than half-applied — no
+ *  bands, a band with no seasons, or a year a band cannot divide into whole days is a header that reads `undefined` or a portion of a
+ *  fraction of a day nobody chose. The older flat shape (`seasons` × `daysPerSeason`) is still read, as one band. Returns what is in force. */
+export function setSeasonCalendar(cal) {
+  const portions = Array.isArray(cal?.portions) && cal.portions.length && cal.portions.every(p => typeof p === "string" && p.trim()) ? cal.portions : PORTIONS;
+  const yearDays = Number(cal?.yearDays);
+  const bands = (Array.isArray(cal?.bands) ? cal.bands : []).filter(b => b && typeof b.id === "string" && Number.isFinite(Number(b.fromRingDegrees))
+    && Array.isArray(b.seasons) && b.seasons.length && b.seasons.every(s => typeof s === "string" && s.trim()));
+  if (bands.length && bands.length === (cal.bands || []).length && Number.isFinite(yearDays) && yearDays > 0
+    && bands.every(b => Number.isInteger(yearDays / seasonNames(b, { portions }).length))) {
+    _calendar = { yearDays, portions, defaultBand: bands.some(b => b.id === cal.defaultBand) ? cal.defaultBand : bands[0].id, bands };
+    return seasonCalendar();
+  }
+  const seasons = Array.isArray(cal?.seasons) ? cal.seasons.filter(s => typeof s === "string" && s.trim()) : [];
+  const days = Number(cal?.daysPerSeason);
+  if (!Array.isArray(cal?.bands) && seasons.length && Number.isFinite(days) && days > 0) {
+    _calendar = { yearDays: seasons.length * days, portions, defaultBand: "all", bands: [{ id: "all", fromRingDegrees: 0, names: seasons }] };
+  }
+  return seasonCalendar();
+}
+
+/** How far a place stands from the ring, in degrees: 0 on it, 90 at the Crossing. Null for a place with no position. */
+export function degreesFromRing(place) {
+  const c = Number(place?.worldPos?.colatitude ?? place?.colatitude);
+  return Number.isFinite(c) ? Math.abs(c - 90) : null;
+}
+
+/** Which band of the calendar a place lives in. ⚠️ A place with no position lives in the calendar's DECLARED default band — the authored
+ *  `defaultBand`, never a guess made here. */
+export function seasonBandFor(place, cal = _calendar) {
+  const d = degreesFromRing(place);
+  const fallback = bandById(cal.defaultBand, cal) || cal.bands[0];
+  if (d == null) return fallback;
+  return (cal.bands || []).filter(b => d >= Number(b.fromRingDegrees))
+    .sort((a, b) => Number(b.fromRingDegrees) - Number(a.fromRingDegrees))[0] || fallback;
+}
+
+/** The nearest place with a position — a spot inside a town has the town's sky. Climbs `parentId`; null when none has one. */
+export function positionedPlace(locations, id) {
+  let loc = id ? locations?.[id] : null, guard = 0;
+  while (loc && !Number.isFinite(Number(loc.worldPos?.colatitude)) && loc.parentId && guard++ < 8) loc = locations?.[loc.parentId] || null;
+  return loc && Number.isFinite(Number(loc.worldPos?.colatitude)) ? loc : null;
 }
 
 export const ADVANCE = { beat: 1, travel: 3, rest: 8, sceneEnd: 2 };
@@ -68,7 +126,7 @@ export function setTimeSettings({ mode, ratio }) {
 
 /** Current clock reading, honoring the mode. Real mode derives from the anchor;
  *  story mode returns stored values. Re-anchors lazily on mode entry. */
-export function readClock(clock, settings = getTimeSettings()) {
+export function readClock(clock, settings = getTimeSettings(), place = null) {
   if (settings.mode === "real") {
     if (!clock.realAnchor) {
       clock.realAnchor = { atMs: Date.now(), day: clock.day, hour: clock.hour };
@@ -76,10 +134,10 @@ export function readClock(clock, settings = getTimeSettings()) {
     const elapsedRealHours = (Date.now() - clock.realAnchor.atMs) / 3600000;
     const gameHours = elapsedRealHours * settings.ratio;
     const total = clock.realAnchor.day * 24 + clock.realAnchor.hour + gameHours;
-    return fromTotalHours(total);
+    return fromTotalHours(total, place);
   }
   clock.realAnchor = null; // story mode: drop the anchor so re-entering real mode re-anchors from here
-  return fromTotalHours(clock.day * 24 + clock.hour);
+  return fromTotalHours(clock.day * 24 + clock.hour, place);
 }
 
 /** Advance the clock by N game-hours (story mode only; real mode advances itself).
@@ -92,11 +150,12 @@ export function advanceClock(clock, hours, settings = getTimeSettings()) {
   return next;
 }
 
-function fromTotalHours(total) {
+function fromTotalHours(total, place = null) {
   const day = Math.floor(total / 24);
   const hour = Math.floor(total % 24);
-  // ⛔ THE SEASON IS THE WORLD'S (see `worldSeason`): the same for every traveller at one moment, turning with the world clock.
-  const season = worldSeason();
+  // ⛔ THE SEASON IS THE WORLD'S (see `worldSeason`): the same for every traveller in one band at one moment, turning with the world clock —
+  // and WHICH seasons a year holds depends on how far the place stands from the ring.
+  const season = worldSeason(Date.now(), getWorldEpoch(), place);
   return { day, hour, phase: phaseOf(hour), season, label: `Day ${day}, ${phaseOf(hour)} (${season})` };
 }
 
@@ -112,8 +171,13 @@ function fromTotalHours(total) {
  *  ⛑ SO THE SEASON IS READ FROM THE WORLD DAY: one season for everyone at one moment, turning with real time — 12 real days a season
  *  on the authored calendar. ⚠️ This reverses CCODE-195's reading of `world_clock.json` ("a season is something a traveller lives
  *  through") on Erik's word. The character's own "Day N" is still theirs: the days they have been on the road. */
-export function seasonOfWorldDay(worldDay) { return seasonOf(Math.max(1, Math.floor(Number(worldDay) || 1))); }
-export function worldSeason(nowMs = Date.now(), epoch = getWorldEpoch()) { return seasonOfWorldDay(absoluteWorldDay(nowMs, epoch)); }
+export function seasonOfWorldDay(worldDay, place = null) {
+  const names = seasonNames(seasonBandFor(place));
+  const day = Math.max(1, Math.floor(Number(worldDay) || 1));
+  const yearDay = (day - 1) % _calendar.yearDays;
+  return names[Math.floor(yearDay / (_calendar.yearDays / names.length))];
+}
+export function worldSeason(nowMs = Date.now(), epoch = getWorldEpoch(), place = null) { return seasonOfWorldDay(absoluteWorldDay(nowMs, epoch), place); }
 
 function phaseOf(hour) {
   if (hour < 5) return "deep night";

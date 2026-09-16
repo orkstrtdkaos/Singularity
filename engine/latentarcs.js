@@ -86,8 +86,17 @@ const SEASON_PRESSURE = {
 };
 /** The current season's pressure — a condition line for the GM and the arc-kinds it tilts toward.
  *  Pure; null for an unknown season (degrades gracefully). */
+/** ⛔ CCODE-377 — THE CALENDAR IS EARLY, MID AND LATE OF FOUR SEASONS FAR FROM THE RING, AND FEWER NEAR IT (Erik), while the eight lines
+ *  above are what was AUTHORED. Each portion reads the authored line it belongs to — nothing new is written here: the far year walks the
+ *  melt, the mending, the working heat, the dry, the gathering, the drawing-in, the scarcity and the breaking; the ring's rains and dry
+ *  walk the wet half and the dry half of the same lines. ⬜ Aevi's to author properly: a mid-season line of its own, and the ring's. */
+const PORTION_PRESSURE = {
+  "mid-spring": "late-spring", "mid-summer": "early-summer", "early-autumn": "harvest", "mid-autumn": "harvest", "late-autumn": "early-winter",
+  "mid-winter": "deep-winter", "late-winter": "thaw",
+  "early-rains": "early-spring", "mid-rains": "late-spring", "late-rains": "early-summer", "early-dry": "late-summer", "mid-dry": "late-summer", "late-dry": "early-winter",
+};
 export function seasonalPressure(season) {
-  const p = SEASON_PRESSURE[season];
+  const p = SEASON_PRESSURE[season] || SEASON_PRESSURE[PORTION_PRESSURE[season]];
   return p ? { season, condition: p.condition, tilts: p.tilts } : null;
 }
 /** The GM's SEASONAL line: the conditions the scene sits in. Null when the season is unknown. */

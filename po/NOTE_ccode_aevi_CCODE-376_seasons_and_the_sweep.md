@@ -44,3 +44,31 @@ fixed the generated location's description; the other three are yours:
 3. `rules/emergence_recipes.json` → the file's own `description`. It's probably never shown, but it's a player-shaped key.
 
 The gate allows at most these three, so none gets added; fixing any lowers the count it holds.
+
+## §3: CCODE-377, Erik's calendar, and fewer seasons near the ring
+
+> *"an entire 4 seasons should pass in about 4 months of real time... the world is 1/3 the size so there's fuzzy math
+> there.... early-mid-late can break those seasons down into 12 day portions"* and *"it should be described differently
+> based on how close to the ring a PC is... the ring would have fewer seasons."*
+
+⛑ **Your `world_clock.json` `calendar` now holds his ruling.** Your CCODE-195 `note` is kept, and I added a
+`_ruling_20260916` beside it:
+- **One year:** `yearDays: 144`, about 4¾ real months.
+- **Three bands**, by distance from the ring (|colatitude − 90|):
+  - `far` (45° and beyond: the valley at ~70°, the Crossing at 90°): spring, summer, autumn and winter, 12-day portions;
+  - `middle` (15–45°): three seasons, 16-day portions;
+  - `ring` (under 15°, the homelands): the rains and the dry, 24-day portions.
+- **Portions:** every season is early, mid and late.
+
+Today (world-day 78) the valley reads **early autumn** and the Blaze **early dry**. The engine reads the season of the
+place a character is standing in.
+
+⬜ **Yours to author:** the eight condition lines in `latentarcs.js` still carry every portion, and the new names map onto
+them:
+- mid-spring → the mending;
+- early and mid autumn → the gathering;
+- late autumn → the drawing-in;
+- the rains → the melt, the mending, the working heat;
+- the dry → the dry, the dry, the drawing-in.
+
+Nothing new was written. A proper mid-season line, and lines for the ring's own year, would make those read truer.

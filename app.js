@@ -38,7 +38,7 @@ import { buildFeedPost, appendFeedPost, feedForViewer, FEED_PATH } from "./engin
 import { composeImagePrompt } from "./engine/imageprompt.js";   // CCODE-190: code selects the parts, a model composes the line
 import { ITEM_KINDS, itemKindsIn, itemKindLabel, wieldBonusFor, usableCombatItems, normalizeInventory, reclaimEstablishedItems, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates, deriveItem, findItem, skillBonus, startingSkills } from "./engine/inventory.js"; // CCODE-161: reclaim items the story conferred but the ledger missed
 import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive } from "./engine/earnedpower.js"; // SNG-251 §2c/§4: the earned-power economy (ceiling = f(level, craft rank); ~1 evolution/day)
-import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
+import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch, positionedPlace } from "./engine/worldtime.js";
 import { smartClamp, playerText, normName } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { LIBRARY_INDEX, loreToHtml, libMdToHtml, circleRows } from "./engine/library.js";
 import { contributionsBy } from "./engine/canon.js";   // ⛔ SNG-584: who made the shared world — tallied since SNG-128, read by nobody until now   // SNG-538 §4: the Library's index and renderers — pure, gated by §181
@@ -150,7 +150,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.38";
+const APP_VERSION = "2.0.39";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4887,7 +4887,7 @@ async function handleGenerateRequests(turn) {
   ensureGenerated(character);
   const location = hereNow();
   // (genContractDeps below supplies the SNG-250 born-whole contract to every generate() call)
-  const time = readClock(character.clock);
+  const time = readClock(character.clock, undefined, positionedPlace(CONTENT.locations || {}, character.currentLocationId));   // CCODE-377: this place's season
   const memCtx = { locationId: location.id, day: time.day, entities: codexEntities(), rules: CONTENT.rules, affiliate: affiliateNpc };
   const notes = [];
   for (const req of reqs.slice(0, 3)) {
@@ -6663,7 +6663,7 @@ function gmEnv(extra = {}) {
     arcMoods: npcMoodLines(arcFx),             // SNG-273: an advanced arc changes how people carry themselves
     sceneBeats, rules: CONTENT.rules,          // SNG-266/1d: the pacing directive reads both — a builder
                                                // that reads an env key nobody puts here is the same dark wire.
-    time: readClock(character.clock),
+    time: readClock(character.clock, undefined, positionedPlace(CONTENT.locations || {}, character.currentLocationId)),   // CCODE-377: the season where they stand
     worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })(), // SNG-173: recency needs a clock
     app: {
       fullCatalog, FN_INDEX: () => FN_INDEX, activeEnc, listAvailableEncounters,
@@ -16859,7 +16859,7 @@ function renderPlay(turn, opts = {}) {
   </div>`;
 
   const banner = sceneImage(location, sceneState, { ratingLevel: viewerRatingLevel() });
-  const time = readClock(character.clock);
+  const time = readClock(character.clock, undefined, positionedPlace(CONTENT.locations || {}, character.currentLocationId));   // CCODE-377: near the ring, fewer seasons
   // SNG-247 Tier 0: the play surface carries the KIND of the bounded thing you are inside, so `--enc-hue` cascades
   // to the frame strip AND the contest panel from one place. Same encounterKind() the engine uses to pick the exit
   // rule — one source of truth for "what kind of thing is this", so the colour can never contradict the mechanics.

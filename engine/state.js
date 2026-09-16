@@ -386,8 +386,8 @@ export async function loadContent() {
     // differ — and the point of saying this out loud is to name the calendar the game is actually running,
     // which is the one the clock will answer with.
     const cal = seasonCalendar();
-    const authored = cal.daysPerSeason === Number(worldClock?.calendar?.daysPerSeason);
-    console.log(`[clock] season calendar: ${cal.seasons.length} seasons × ${cal.daysPerSeason} days` +
+    const authored = Array.isArray(worldClock?.calendar?.bands) && cal.yearDays === Number(worldClock.calendar.yearDays) && cal.bands.length === worldClock.calendar.bands.length;
+    console.log(`[clock] season calendar: a ${cal.yearDays}-day year — ${cal.bands.map(b => `${b.id} ${(b.seasons || b.names || []).length}`).join(" · ")}` +
       `${authored ? "" : " (engine fallback — this pack carries no usable authored calendar)"}`);
   }
   // ⚠️ SAID OUT LOUD AT LOAD, like the titles report above. Without the templates the tick falls back to the

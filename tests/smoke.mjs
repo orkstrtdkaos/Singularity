@@ -17228,11 +17228,12 @@ await (async () => {
   const cal195 = WT.seasonCalendar();
   // 1 · AUTHORED AND IN FORCE. Two engine constants meant the world's calendar could not be turned by the
   // people who own the world; a dial nothing loads is the same thing wearing a JSON file.
+  // ⚠️ CCODE-377: the authored calendar is a YEAR divided into BANDS by distance from the ring (Erik: "the ring would have fewer seasons").
   check("CCODE-195: the season calendar is AUTHORED and in force (not the engine fallback)",
-    !!C195.worldClock?.calendar?.daysPerSeason
-    && cal195.daysPerSeason === C195.worldClock.calendar.daysPerSeason
-    && cal195.seasons.length === C195.worldClock.calendar.seasons.length,
-    `in force ${cal195.seasons.length}×${cal195.daysPerSeason}, authored ${C195.worldClock?.calendar?.seasons?.length}×${C195.worldClock?.calendar?.daysPerSeason}`);
+    Array.isArray(C195.worldClock?.calendar?.bands) && cal195.yearDays === C195.worldClock.calendar.yearDays
+    && cal195.bands.length === C195.worldClock.calendar.bands.length
+    && cal195.bands.every((b, i) => b.id === C195.worldClock.calendar.bands[i].id),
+    `in force ${cal195.yearDays} days · ${cal195.bands.map(b => b.id).join("/")}, authored ${C195.worldClock?.calendar?.yearDays} · ${(C195.worldClock?.calendar?.bands || []).map(b => b.id).join("/")}`);
   // 2 · ⛔ AND IT IS REACHABLE, MEASURED RATHER THAN ASSERTED. A beat moves the clock ~1h and a scene end 2h;
   // the claim is that a season turns inside a campaign, not inside a lifetime. 600 turns was the old answer.
   // ⛔ CCODE-376 (Erik: "i'm hoping the seasons are actually tied to the world clock and not the characters days") — the season is
@@ -17249,8 +17250,10 @@ await (async () => {
   // authored calendar and latentarcs' SEASON_PRESSURE — and a season with no condition line reaches the GM as
   // silence. The whole point of making the calendar turnable is that someone WILL turn it.
   {
-    const dumb = cal195.seasons.filter(s => !LA.seasonalPressure(s));
-    check(`CCODE-195: every season on the calendar has an authored pressure (${cal195.seasons.length} seasons)`,
+    // ⚠️ CCODE-377: EVERY portion of EVERY band — near the ring a year is the rains and the dry, far from it four seasons, and each is early, mid, late
+    const all195 = [...new Set(cal195.bands.flatMap(b => WT.seasonNames(b)))];
+    const dumb = all195.filter(s => !LA.seasonalPressure(s));
+    check(`CCODE-195: every season on the calendar has an authored pressure (${all195.length} seasons)`,
       dumb.length === 0, `no condition line for: ${dumb.join(", ")}`);
   }
   // 4 · IT ACTUALLY TURNS, and wraps rather than running off the end of the list.

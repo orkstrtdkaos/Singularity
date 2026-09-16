@@ -44,7 +44,7 @@ import { INVITES_PATH, mergeInvitation, answerInto, applyAnswers } from "./invit
 import { boundFigures } from "./companionlives.js";   // SNG-597 §3: a companion who is also a figure of the world
 import { decayWakes, wakeArcPush } from "./wake.js"; // SNG-204: wakes decay on the tick + lean on connected arcs
 import { enterDeathState, deepenDeaths, deathDepth, isRetrievable, resolveRetrieval } from "./death.js"; // SNG-209: a killed figure ENTERS the death state; the clock sinks untended deaths toward sealed
-import { absoluteWorldDay, worldDayAt, worldCount, readClock } from "./worldtime.js";
+import { absoluteWorldDay, worldDayAt, worldCount, readClock, positionedPlace } from "./worldtime.js";
 import { voyageTick, whereaboutsOf } from "./carriage.js";   // ⛔ B6b: a voyage arrives on world time, and where she is now is where she can be raided
 import { advanceAssignment, progressAgainst, problemCost } from "./assignments.js"; // SNG-191 §4: the world advances delegated work
 import { seedArc, fomentArc, surfaceableArcs, markSurfaced, seasonalPressure } from "./latentarcs.js"; // SNG-191 §7: the world's own agenda
@@ -748,7 +748,7 @@ export async function runGenerationTurn({ character, content, now = Date.now(), 
 
   // §7.4 seasonal pressure — the conditions arcs happen in, and they recur. The season TILTS which
   // KINDS ferment (a shortage grows in deep-winter want, a feud in the working heat).
-  const season = (() => { try { return readClock(character.clock).season; } catch { return null; } })();
+  const season = (() => { try { return readClock(character.clock, undefined, positionedPlace(content?.locations || {}, character?.currentLocationId)).season; } catch { return null; } })();   // CCODE-377: this place's season
   const tilts = new Set(seasonalPressure(season)?.tilts || []);
   // 1. foment existing arcs — they grow (unguardrailed), or the world quietly resolves one itself (§7.3);
   //    a growing arc the season leans on ferments a touch faster.

@@ -18754,6 +18754,53 @@ console.log("\n── §262 · the season is the world's, and no ticket number r
   check("§262: …and content fields a player reads carry at most the three handed to Aevi", contentHits <= 3, `${contentHits} content hits`);
 }
 
+// ⛔ CCODE-377 (Erik, 2026-09-16) — "an entire 4 seasons should pass in about 4 months of real time... the world is 1/3 the size so there's
+// fuzzy math there.... early-mid-late can break those seasons down into 12 day portions, as you say." And: "it should be described
+// differently based on how close to the ring a PC is... the ring would have fewer seasons."
+console.log("\n── §263 · one year for the world; fewer seasons near the ring ──");
+{
+  const T263 = await import("../engine/worldtime.js");
+  const LA263 = await import("../engine/latentarcs.js");
+  const { loadContentHeadless: lch263 } = await import("./headless_content.mjs");
+  const C263 = await lch263();
+  const L = C263.locations;
+  const cal = T263.seasonCalendar();
+  const far = cal.bands.find(b => b.id === "far"), ring = cal.bands.find(b => b.id === "ring"), middle = cal.bands.find(b => b.id === "middle");
+  const rate = T263.getWorldEpoch().rate || 1;
+
+  check("§263: ⛔ four seasons, early, mid and late, in 12-day portions — a year of about four real months (the fuzzy math Erik allowed)",
+    far?.seasons?.length === 4 && T263.seasonNames(far).length === 12 && cal.yearDays / T263.seasonNames(far).length === 12
+    && cal.yearDays / rate >= 100 && cal.yearDays / rate <= 160
+    && T263.seasonNames(far).slice(0, 3).join(",") === "early-spring,mid-spring,late-spring", `${cal.yearDays / rate} real days a year`);
+  check("§263: ⛔ nearer the ring, fewer seasons — three in the middle latitudes, the rains and the dry on the ring — in the same year",
+    middle?.seasons?.length === 3 && ring?.seasons?.length === 2 && ring.seasons.join(",") === "rains,dry"
+    && [far, middle, ring].every(b => Number.isInteger(cal.yearDays / T263.seasonNames(b).length)));
+
+  // ⚑ MEASURED: the valley sits ~70° from the ring, the Crossing at 90°, the tradition homelands on it.
+  const at = (id) => T263.positionedPlace(L, id);
+  check("§263: ⛔ where a character stands decides which year they live — Millbrook and a shop inside it far from the ring, the Blaze on it",
+    T263.seasonBandFor(at("millbrook")).id === "far" && T263.seasonBandFor(at("gen-mara-wells-store")).id === "far"
+    && T263.seasonBandFor(at("the_crossing")).id === "far" && T263.seasonBandFor(at("the_blaze")).id === "ring"
+    && T263.seasonBandFor({ worldPos: { colatitude: 90 - 30 } }).id === "middle" && T263.seasonBandFor(null).id === cal.defaultBand);
+  const day263 = 78;
+  check("§263: …on one world day the valley and the ring read different seasons of the same year, and both say it to the GM in authored words",
+    T263.seasonOfWorldDay(day263, at("millbrook")) === "early-autumn" && T263.seasonOfWorldDay(day263, at("the_blaze")) === "early-dry"
+    && /^It is early autumn — the gathering/.test(LA263.seasonalDetailForGM("early-autumn") || "") && /^It is early dry — the dry/.test(LA263.seasonalDetailForGM("early-dry") || ""),
+    `${T263.seasonOfWorldDay(day263, at("millbrook"))} / ${T263.seasonOfWorldDay(day263, at("the_blaze"))}`);
+  check("§263: ⛔ every portion of every band has a condition line — nothing reaches the GM as silence",
+    [...new Set(cal.bands.flatMap(b => T263.seasonNames(b)))].every(n => !!LA263.seasonalPressure(n)));
+  const saved = T263.seasonCalendar();
+  const refused = [{ yearDays: 144, bands: [{ id: "x", fromRingDegrees: 0, seasons: [] }] }, { yearDays: 100, bands: [{ id: "x", fromRingDegrees: 0, seasons: ["a", "b", "c"] }] },
+    { yearDays: 0, bands: [{ id: "x", fromRingDegrees: 0, seasons: ["a"] }] }].every(bad => T263.setSeasonCalendar(bad).yearDays === saved.yearDays);
+  check("§263: …a band with no seasons, or a year a band cannot split into whole days, is refused — the calendar in force is kept", refused);
+
+  const A263 = rd("app.js").replace(/\r\n/g, "\n");
+  const W263 = rd("engine/worldtick.js").replace(/\r\n/g, "\n");
+  check("§263: ⛔ the header, the GM and the generation all read the season of the place the character stands in",
+    (A263.match(/readClock\(character\.clock, undefined, positionedPlace\(CONTENT\.locations \|\| \{\}, character\.currentLocationId\)\)/g) || []).length === 3
+    && /readClock\(character\.clock, undefined, positionedPlace\(content\?\.locations \|\| \{\}, character\?\.currentLocationId\)\)\.season/.test(W263));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

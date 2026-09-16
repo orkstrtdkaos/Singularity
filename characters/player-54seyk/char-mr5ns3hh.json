@@ -6,7 +6,7 @@
   "origin": "harmonic",
   "background": "medic",
   "level": 1,
-  "xp": 23,
+  "xp": 25,
   "attributes": {
     "physical": 2,
     "mental": 4,
@@ -52,7 +52,7 @@
   "maxHealth": 25,
   "health": 25,
   "maxEnergy": 116,
-  "energy": 84,
+  "energy": 79,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -172,21 +172,40 @@
         "player": "Look south-southeast from the terrace edge — try to place where that root angle would reach if it continues at the same pitch. Map it with your eyes and what you know of the valley floor below.",
         "summary": "Adelheid observes the root system's direction and realizes the silver-stemmed plants are rooted toward the contaminated Echo River below.",
         "narration": "You straighten from the terrace edge, the wrapped cutting secure in your lap, and turn your gaze south-southeast along the angle you've just measured and marked. The slope falls away in a series of stepped terraces—Piotr's irrigation channels catching the last of the afternoon light, the mill wheel turning below in the distance, its rotation steady and certain. Beyond the working terraces, the slope roughens. The Wet Meadows sprawl in the middle distance, greening with the melt-runoff. And beyond that, past the tree-line at the meadow's far edge, the Echo River itself cuts through the valley floor—the same river that runs gray-green at the Millbrook dock, the same one fish are avoiding.\n\nIf those roots continue at twenty degrees below horizontal, angled so precisely they might as well be engineered, they are headed directly for the river. Not for a spring, not for standing water. For the contaminated water that has no name yet and that everyone is careful not to talk about out loud.\n\nPiotr is still watching the cutting. He has not moved. He has not spoken. But his stillness has changed—it reads like confirmation now, like someone waiting to see if you understand what you are already holding."
+      },
+      {
+        "player": "Ask Piotr plainly what he knows about these plants and where the roots lead.",
+        "summary": "Adelheid asks Piotr directly about the plants and the river; Piotr refuses to speak, referring her back to Mara's written note.",
+        "narration": "You sit with the wrapped cutting in your lap, the charcoal notes still visible on the linen's margin. Piotr stands at the retaining wall, the cloth bundle held loose in both hands now. The afternoon is cooling into evening; the mill wheel's rotation sounds distant and patient.\n\nYou speak directly, your voice steady. \"Piotr. You know what these plants are, don't you? And you know where the roots go. South-southeast, toward the river. Toward the contaminated water.\" You hold his gaze. \"Tell me what you know.\"\n\nFor a long moment, nothing moves. Piotr's jaw tightens. His hands shift on the bundle—not loosening it further, but gripping it harder. He looks away from you, out toward the east edge where the silver-stemmed growth catches the last slant of light, and his shoulders settle into something that looks like refusal.\n\n\"I watch,\" he says finally, voice so low you almost miss it. \"That's what Mara asked. Watch and don't touch. That's what I do.\" He turns the bundle in his hands—a small, deliberate gesture. \"The note says what it says. Ask her.\"\n\nIt is not an answer. It is a door he is keeping closed. And in the tightness of his face and the way his eyes have gone back to the cutting in your lap—not to your eyes, but to the wrapped bundle itself—you read a man carrying something he will not name, not to a stranger, not in the evening light on a terrace overlooking a poisoned river."
       }
     ],
     "lastTurn": {
-      "narration": "You straighten from the terrace edge, the wrapped cutting secure in your lap, and turn your gaze south-southeast along the angle you've just measured and marked. The slope falls away in a series of stepped terraces—Piotr's irrigation channels catching the last of the afternoon light, the mill wheel turning below in the distance, its rotation steady and certain. Beyond the working terraces, the slope roughens. The Wet Meadows sprawl in the middle distance, greening with the melt-runoff. And beyond that, past the tree-line at the meadow's far edge, the Echo River itself cuts through the valley floor—the same river that runs gray-green at the Millbrook dock, the same one fish are avoiding.\n\nIf those roots continue at twenty degrees below horizontal, angled so precisely they might as well be engineered, they are headed directly for the river. Not for a spring, not for standing water. For the contaminated water that has no name yet and that everyone is careful not to talk about out loud.\n\nPiotr is still watching the cutting. He has not moved. He has not spoken. But his stillness has changed—it reads like confirmation now, like someone waiting to see if you understand what you are already holding.",
-      "sceneSummary": "Adelheid observes the root system's direction and realizes the silver-stemmed plants are rooted toward the contaminated Echo River below.",
+      "narration": "You sit with the wrapped cutting in your lap, the charcoal notes still visible on the linen's margin. Piotr stands at the retaining wall, the cloth bundle held loose in both hands now. The afternoon is cooling into evening; the mill wheel's rotation sounds distant and patient.\n\nYou speak directly, your voice steady. \"Piotr. You know what these plants are, don't you? And you know where the roots go. South-southeast, toward the river. Toward the contaminated water.\" You hold his gaze. \"Tell me what you know.\"\n\nFor a long moment, nothing moves. Piotr's jaw tightens. His hands shift on the bundle—not loosening it further, but gripping it harder. He looks away from you, out toward the east edge where the silver-stemmed growth catches the last slant of light, and his shoulders settle into something that looks like refusal.\n\n\"I watch,\" he says finally, voice so low you almost miss it. \"That's what Mara asked. Watch and don't touch. That's what I do.\" He turns the bundle in his hands—a small, deliberate gesture. \"The note says what it says. Ask her.\"\n\nIt is not an answer. It is a door he is keeping closed. And in the tightness of his face and the way his eyes have gone back to the cutting in your lap—not to your eyes, but to the wrapped bundle itself—you read a man carrying something he will not name, not to a stranger, not in the evening light on a terrace overlooking a poisoned river.",
+      "sceneSummary": "Adelheid asks Piotr directly about the plants and the river; Piotr refuses to speak, referring her back to Mara's written note.",
       "choices": [
         {
-          "label": "Ask Piotr plainly what he knows about these plants and where the roots lead.",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Open the cloth bundle and read Mara's note—whatever is in it, you need to understand what you're both protecting.",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {},
-          "difficulty": "normal",
+          "difficulty": "trivial",
+          "opposedDifficulty": null,
+          "intentTags": [],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Let the silence stand. Set down the cutting and ask Piotr a simpler question—how long has he been watching these plants? When did they first appear?",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "ask"
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -195,14 +214,15 @@
           "emergenceId": null
         },
         {
-          "label": "Use Tremor Sense to feel what lies beneath—whether the root system continues all the way to the river, and what else might be moving in the deep earth.",
+          "label": "Walk down the terrace with Aevi toward the Wet Meadows—follow the root angle yourself. What the river shows you may tell you more than Piotr ever will.",
           "attribute": "practical",
           "subAttribute": "craft",
           "axes": {},
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "study"
+            "travel",
+            "scout"
           ],
           "abilityId": "tremor_sense",
           "energyCost": 4,
@@ -211,31 +231,14 @@
           "emergenceId": null
         },
         {
-          "label": "Wrap the cutting carefully and carry it down to the mill—find Edvar Crane, the water-reader Mara mentioned. He already knew something was wrong with the river.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "travel",
-            "care"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Turn to Piotr and show him the wrapping—ask him to open Mara's note with you, right now, before you go any further.",
+          "label": "Tell Piotr you'll return the bundle unopened once you've read Mara's note, and head back to the village to find her before full dark—she'll explain what she set in motion when she gave you this errand.",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "presence",
           "axes": {},
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "ask"
+            "travel"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -245,17 +248,19 @@
         }
       ],
       "deeds": [],
-      "characterDeltas": {},
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
       "ledgerEvents": [],
       "questUpdates": [
         {
           "op": "progress",
           "questId": "maras-errand",
-          "title": "Mara's Errand",
-          "summary": "Deliver a cloth-wrapped bundle to Piotr on Terrace Three east, and quietly observe the uncatalogued plants growing along the untended stretch — with permission to take cuttings.",
-          "giver": "Mara Wells",
-          "note": "Cutting taken and wrapped. Root system traced south-southeast toward the Echo River—the contaminated water. The mystery deepens.",
-          "xpReward": null
+          "note": "Adelheid confronted Piotr directly about the plants and the river. Piotr refused to speak, citing Mara's private instructions and referring her to the unread note in the bundle."
         }
       ],
       "standingOps": [],
@@ -265,27 +270,27 @@
       "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "Terrace Three east, late afternoon light slanting across the slope. The Silver-stemmed plants at the east edge frame the view south-southeast toward the Wet Meadows and the Echo River beyond, visible as a ribbon of gray-green water in the distance. The terraces below are still lit; the mill wheel turns steadily. The air is cooling.",
+        "setting": "Terrace Three east, early evening. The light is slanting long and warm across the slope, but the air is cooling. The mill wheel turns below in the middle distance. The Wet Meadows stretch south-southeast toward the Echo River, visible as a ribbon of gray-green water past the tree-line.",
         "npcsPresent": [
           {
             "name": "Piotr",
-            "state": "Standing at the retaining wall, bundle still in both hands, watching the wrapped cutting in Adelheid's lap. His stillness reads like confirmation now—he knows something, and he is waiting to see if the medic understands what she is holding."
+            "state": "Standing at the retaining wall, holding the cloth bundle, having just refused to answer Adelheid's direct question. His attention is on the wrapped cutting in her lap, not on her face."
           }
         ],
         "objects": [
           "Cloth-wrapped bundle (in Piotr's hands, cord half-loosened)",
-          "Silver-stemmed cutting (linen-wrapped, in Adelheid's lap)",
+          "Silver-stemmed cutting (linen-wrapped, charcoal-marked root angle noted, in Adelheid's lap)",
           "Medic's Satchel (open, resting nearby)",
           "Charcoal stub (in hand)",
-          "East-edge plant growth (dense, silver-undersided leaves, dense paired branching)",
+          "East-edge plant growth (dense, silver-undersided leaves, continuous paired branching)",
           "Low stone retaining wall",
           "Piotr's tools (trowel, clay bucket, worn cloth cap set aside)"
         ],
         "threads": [
-          "The root system continues south-southeast toward the contaminated Echo River—but how deep, how far, and what it means, are still unresolved",
-          "Piotr's knowledge—he is waiting for Adelheid's realization",
-          "Mara's private note inside the bundle, still unread by Piotr",
-          "Aevi's brightness and silence—she knows more about this connection than she has named yet"
+          "Mara's private note, still unread inside the bundle",
+          "Piotr's knowledge of the plants and their connection to the contaminated river—withheld",
+          "Aevi's quiet brightness and attention to the plant connection—unnamed",
+          "The root system's continuation south-southeast toward the Echo River—untraced"
         ]
       },
       "npcUpdates": [
@@ -298,65 +303,40 @@
           "sex": "male",
           "gender": "man",
           "pronouns": "he/him",
-          "description": "A compact man in his fifties with gray-streaked hair and clay-stained hands; moves with the economy of someone who has spent decades on the same ground.",
-          "note": "Watching the wrapped cutting now, not Adelheid's face. His stillness has shifted from guarded to confirmatory—he is waiting to see if she understands where the roots lead. The bundle is still in both his hands, the cord half-loosened but not opened.",
-          "learned": [
-            "He knows the silver-stemmed plants are rooted toward the contaminated Echo River",
-            "He has chosen not to tell Adelheid directly—he is watching to see if she figures it out",
-            "He trusted Mara enough to accept this errand and receive a private note"
-          ],
-          "skillsObserved": [
-            "Patient observation—he has been watching these plants without approaching them",
-            "Economy of speech and motion",
-            "Knowledge of the terrace system and what grows where"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "On Terrace Three east, waiting, watching the cutting with the knowledge of what it means"
+          "note": "Adelheid asked him directly about the plants and the river. He refused to speak, citing Mara's instructions and the written note in the bundle. His refusal was firm—a boundary he will not cross with a stranger.",
+          "statusNote": "On Terrace Three east, holding the undelivered bundle, guarding what he knows about the silver-stemmed plants and their connection to the contaminated water."
         }
       ],
       "intentsHeard": [],
       "factUpdates": [],
-      "placeUpdates": [
-        {
-          "note": "The silver-stemmed plant roots angle south-southeast at approximately twenty degrees below horizontal, directed toward the Echo River—traced by Echo Sense and confirmed by careful observation. The root system is unified and deep, descending past the terrace foundation. The internal hum travels along these roots.",
-          "flag": {
-            "root_direction": "south-southeast",
-            "root_angle": "20-degrees-below-horizontal",
-            "target_water": "echo-river-contaminated"
-          }
-        }
-      ],
+      "placeUpdates": [],
       "discovery": null,
       "codexUpdates": [
         {
-          "topic": "uncatalogued-terrace-plants",
-          "kind": "mystery",
-          "fact": "The root system of the silver-stemmed plants angles south-southeast at roughly twenty degrees below horizontal—pointed directly toward the Echo River. The contaminated water and the mysterious plants are connected. The hum travels along the roots in that direction.",
+          "topic": "piotr",
+          "label": "Piotr",
+          "kind": "person",
+          "entityId": "piotr",
+          "fact": "Piotr refuses to speak about the silver-stemmed plants or their root system to anyone but Mara. He is bound by her private instructions and will not cross that boundary with a stranger, even when directly confronted.",
           "links": [
-            "echo-river-contamination",
             "mara-wells",
-            "millbrook"
+            "uncatalogued-terrace-plants",
+            "maras-errand"
           ]
         },
         {
-          "topic": "piotr",
-          "kind": "person",
-          "entityId": "piotr",
-          "fact": "Piotr knows that the silver-stemmed plants are rooted toward the contaminated Echo River. He is waiting to see if Adelheid will understand what she is holding.",
+          "topic": "maras-errand",
+          "label": "Mara's Errand",
+          "kind": "quest",
+          "entityId": "maras-errand",
+          "fact": "Mara's note is enclosed in the cloth bundle Piotr holds. He will not open it or reveal its contents; he is waiting for Adelheid to do so, or to return it unopened to Mara herself. The note contains the explanation Piotr himself is bound not to give.",
           "links": [
-            "uncatalogued-terrace-plants",
-            "echo-river-contamination",
-            "terrace-three-east"
+            "mara-wells",
+            "piotr",
+            "uncatalogued-terrace-plants"
           ]
         }
       ],
-      "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "The observation and measurement took a careful half-hour; the afternoon is deepening toward evening."
-      },
-      "moveTo": null,
-      "stateOps": [],
       "holdingOps": [],
       "debtOps": [],
       "partyOps": [],
@@ -368,40 +348,50 @@
       "newEncounter": null,
       "unlockPrecursor": null,
       "unlockSubstrate": null,
+      "timeOps": {
+        "hoursPassed": 1.5,
+        "why": "The afternoon has slanted into early evening; the work of observing the plants, taking the cutting, tracing the root system, and confronting Piotr has cost the better part of an hour and a half."
+      },
+      "moveTo": null,
+      "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": "Adelheid stands at the terrace edge in late afternoon light, the linen-wrapped cutting in her lap, eyes tracing a line south-southeast down the slope toward the ribbon of gray-green water cutting through the valley floor. Behind her, Piotr stands silent at the retaining wall, watching—not her, but the cutting—with the calm certainty of someone who has been waiting for this moment.",
+      "imagePrompt": null,
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
-      "sceneEnded": false,
-      "momentArt": "https://image.pollinations.ai/prompt/Adelheid%20stands%20at%20the%20terrace%20edge%20in%20late%20afternoon%20light%2C%20the%20linen-wrapped%20cutting%20in%20her%20lap%2C%20eyes%20tracing%20a%20line%20south-southeast%20down%20the%20slope%20toward%20the%20ribbon%20of%20gray-green%20water%20cutting%20through%20the%20valley%20floor.%20Behind%20her%2C%20Piotr%20stands%20silent%20at%20the%20retaining%20wall%2C%20watching%E2%80%94not%20her%2C%20but%20t%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=7301&nologo=true"
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Terrace Three east, late afternoon light slanting across the slope. The Silver-stemmed plants at the east edge frame the view south-southeast toward the Wet Meadows and the Echo River beyond, visible as a ribbon of gray-green water in the distance. The terraces below are still lit; the mill wheel turns steadily. The air is cooling.",
+      "setting": "Terrace Three east, early evening. The light is slanting long and warm across the slope, but the air is cooling. The mill wheel turns below in the middle distance. The Wet Meadows stretch south-southeast toward the Echo River, visible as a ribbon of gray-green water past the tree-line.",
       "npcsPresent": [
         {
           "name": "Piotr",
-          "state": "Standing at the retaining wall, bundle still in both hands, watching the wrapped cutting in Adelheid's lap. His stillnes"
+          "state": "Standing at the retaining wall, holding the cloth bundle, having just refused to answer Adelheid's direct question. His "
         }
       ],
       "objects": [
         "Cloth-wrapped bundle (in Piotr's hands, cord half-loosened)",
-        "Silver-stemmed cutting (linen-wrapped, in Adelheid's lap)",
+        "Silver-stemmed cutting (linen-wrapped, charcoal-marked root angle noted, in Adel",
         "Medic's Satchel (open, resting nearby)",
         "Charcoal stub (in hand)",
-        "East-edge plant growth (dense, silver-undersided leaves, dense paired branching)",
+        "East-edge plant growth (dense, silver-undersided leaves, continuous paired branc",
         "Low stone retaining wall",
         "Piotr's tools (trowel, clay bucket, worn cloth cap set aside)"
       ],
       "threads": [
-        "The root system continues south-southeast toward the contaminated Echo River—but how deep, how far, and what it means, are still unresolved",
-        "Piotr's knowledge—he is waiting for Adelheid's realization",
-        "Mara's private note inside the bundle, still unread by Piotr",
-        "Aevi's brightness and silence—she knows more about this connection than she has named yet"
+        "Mara's private note, still unread inside the bundle",
+        "Piotr's knowledge of the plants and their connection to the contaminated river—withheld",
+        "Aevi's quiet brightness and attention to the plant connection—unnamed",
+        "The root system's continuation south-southeast toward the Echo River—untraced"
       ]
     },
-    "beats": 1,
+    "beats": 2,
     "subPlace": {
       "slug": "terrace-three-east",
       "name": "Terrace Three East",
@@ -411,7 +401,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 20,
+    "hour": 21,
     "realAnchor": null
   },
   "companions": [
@@ -431,7 +421,8 @@
         "Bundle delivered. Adelheid has reached the uncatalogued east-edge plants and felt a hum through the stem on first contact — active observation now underway.",
         "Echo Sense confirms: roots are unified and deep — far past the terrace cut — and the internal hum travels south-southeast along a shared root system. Aevi calls it one system. Piotr is watching Adelhe",
         "Cutting taken carefully — node spacing and root angle (20° south-southeast) recorded in linen. Aevi went bright and silent at the moment of the cut. Piotr's eyes went to the cutting, not Adelheid's fa",
-        "Cutting taken and wrapped. Root system traced south-southeast toward the Echo River—the contaminated water. The mystery deepens."
+        "Cutting taken and wrapped. Root system traced south-southeast toward the Echo River—the contaminated water. The mystery deepens.",
+        "Adelheid confronted Piotr directly about the plants and the river. Piotr refused to speak, citing Mara's private instructions and referring her to the unread note in the bundle."
       ],
       "startedAt": "2026-07-08T18:17:05.695Z"
     }
@@ -496,7 +487,8 @@
         "[d1] Watched Adelheid's face during the Echo Sense pass — not the plant, her face. Still has not spoken. Cord still half-worked.",
         "[d1] Watched Adelheid take the cutting. His eyes moved to the linen-wrapped cutting the moment the blade came away — not to Adelheid's face. Still has not spoken. Still has not moved to",
         "[d1] Sex recorded: male.",
-        "[d1] Watching the wrapped cutting now, not Adelheid's face. His stillness has shifted from guarded to confirmatory—he is waiting to see if she understands where the roots lead. The bundle is still in both his hands, the cord half-loosened but not opened."
+        "[d1] Watching the wrapped cutting now, not Adelheid's face. His stillness has shifted from guarded to confirmatory—he is waiting to see if she understands where the roots lead. The bundle is still in both his hands, the cord half-loosened but not opened.",
+        "[d1] Adelheid asked him directly about the plants and the river. He refused to speak, citing Mara's instructions and the written note in the bundle. His refusal was firm—a boundary he will not cross with a stranger."
       ],
       "knownFacts": [
         "Works Terrace Three east himself; knows this land well",
@@ -516,14 +508,14 @@
         "Knowledge of the terrace system and what grows where"
       ],
       "status": "active",
-      "statusNote": "On Terrace Three east, waiting, watching the cutting with the knowledge of what it means",
+      "statusNote": "On Terrace Three east, holding the undelivered bundle, guarding what he knows about the silver-stemmed plants and their connection to the contaminated water.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
       },
       "gender": "man",
       "pronouns": "he/him",
-      "met": 6,
+      "met": 7,
       "sex": "male",
       "age": 52
     }
@@ -675,7 +667,7 @@
     "lastTickWorldDay": 77,
     "lastCanonWorldDay": 77,
     "pressureQueue": [],
-    "turnsSinceOffer": 1
+    "turnsSinceOffer": 2
   },
   "bio": {
     "hometown": "a small village in Switzerland",
@@ -782,7 +774,8 @@
         "facts": [
           "[d1] Compact farmer, Terrace Three east. Was expecting Mara's bundle. Sparing with words. Trusted enough by Mara to receive a private plant note.",
           "[d1] Terrace farmer, Terrace Three east",
-          "[d1] Piotr knows that the silver-stemmed plants are rooted toward the contaminated Echo River. He is waiting to see if Adelheid will understand what she is holding."
+          "[d1] Piotr knows that the silver-stemmed plants are rooted toward the contaminated Echo River. He is waiting to see if Adelheid will understand what she is holding.",
+          "[d1] Piotr refuses to speak about the silver-stemmed plants or their root system to anyone but Mara. He is bound by her private instructions and will not cross that boundary with a stranger, even when directly confronted."
         ],
         "links": [
           "mara-wells",
@@ -822,6 +815,23 @@
         "createdDay": null,
         "entityId": "companion-aevi",
         "updatedDay": null
+      },
+      "maras-errand": {
+        "id": "maras-errand",
+        "label": "Mara's Errand",
+        "kind": "lore",
+        "facts": [
+          "[d1] Mara's note is enclosed in the cloth bundle Piotr holds. He will not open it or reveal its contents; he is waiting for Adelheid to do so, or to return it unopened to Mara herself. The note contains the explanation Piotr himself is bound not to give."
+        ],
+        "links": [
+          "mara-wells",
+          "piotr",
+          "uncatalogued-terrace-plants"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "maras-errand",
+        "updatedDay": 1
       }
     }
   },
@@ -873,13 +883,13 @@
   "itemReclaimVersion": 1,
   "nameRepairVersion": 1,
   "tendencies": {
-    "generous": 5.0769044389361095,
-    "social": 4.311103845178769,
-    "cerebral": 24.294808779487923,
-    "cautious": 23.458217532465117,
-    "strategic": 21.950266844950484,
-    "carousing": 1.887495827261606,
-    "risky": 0.946113196622359
+    "generous": 4.949981827962707,
+    "social": 4.2033262490493,
+    "cerebral": 23.687438560000725,
+    "cautious": 22.87176209415349,
+    "strategic": 21.401510173826722,
+    "carousing": 1.8403084315800657,
+    "risky": 0.9224603667068001
   },
   "aptitudes": [
     "strategist",
@@ -888,11 +898,11 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 40,
+  "actionCount": 41,
   "bondLogFrom": null,
   "teachers": {},
   "regionsKnown": {
-    "valley": 1
+    "valley": 2
   },
   "company": [],
   "forkChoices": {},
@@ -1076,8 +1086,8 @@
   "bands": [],
   "_silasGrantsRevoked": true,
   "reconcileVersion": 63,
-  "updatedAt": 1789516728352,
-  "rev": 8,
+  "updatedAt": 1789516991358,
+  "rev": 9,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -1090,24 +1100,25 @@
   "featureOffers": [],
   "_pinsInitialized": true,
   "_opUnknown": {
-    "sceneSummary": 1
+    "sceneSummary": 2
   },
   "_applyFailures": null,
   "sessions": [
     {
       "id": "sess-1",
       "startedAt": "2026-09-15T23:58:48.323Z",
-      "lastAt": "2026-09-15T23:58:48.323Z",
+      "lastAt": "2026-09-16T00:03:11.339Z",
       "startDay": 77,
-      "endDay": 77,
-      "beats": 1
+      "endDay": 78,
+      "beats": 2
     }
   ],
   "_debtReceipts": [],
   "_bandNotes": null,
   "skillUses": {
     "scout": 1,
-    "study": 1
+    "study": 1,
+    "ask": 1
   },
   "aptitudeEarnCount": {
     "tactician": 1,
@@ -1116,19 +1127,20 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 1,
-    "choices": 1,
-    "questUpdates": 1,
-    "scene": 1,
-    "npcUpdates": 1,
+    "sceneSummary": 2,
+    "choices": 2,
+    "questUpdates": 2,
+    "scene": 2,
+    "npcUpdates": 2,
     "placeUpdates": 1,
-    "codexUpdates": 1,
-    "timeOps": 1,
+    "codexUpdates": 2,
+    "timeOps": 2,
     "imagePrompt": 1,
-    "gambitApt": 1,
-    "sceneEnded": 1
+    "gambitApt": 2,
+    "sceneEnded": 2,
+    "characterDeltas": 1
   },
-  "_opTurns": 1,
+  "_opTurns": 2,
   "_opCountingSince": "2026-09-15T23:58:48.348Z",
   "gallery": [
     {

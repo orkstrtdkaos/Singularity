@@ -18162,6 +18162,30 @@ console.log("\n── §252 · an invitation carried by someone you both know �
     /data-band-invite="\$\{esc\(u\.id\)\}"/.test(A252) && /function showInvitePicker\(unitId\)/.test(A252) && /sendInvitation\(inv\)/.test(A252) && /"no answer yet"/.test(A252));
 }
 
+// ⛔ CCODE-362 (Erik, 2026-09-16) — "Banner images are unrecognizable because of the aspect ratio... i suggest the image scrolls
+// somehow at that resulting zoom level so you can still at least tell what the image is."
+// ⚑ MEASURED: `cover` on the 68px bar shows under a fifth of a 1024×320 plate's height and ~6% of a square gallery picture.
+// ⛑ Each band plate travels top to bottom through the slot it is visible in. ⚠️ Two clocks must agree — the CSS keyframes and the
+// JS phase that keeps a re-render from restarting them — or every beat of play would jump the picture.
+console.log("\n── §253 · the banner's picture travels through its slot ──");
+{
+  const css253 = rd("style.css").replace(/\r\n/g, "\n");
+  const app253 = rd("app.js").replace(/\r\n/g, "\n");
+  const m253 = app253.match(/const BAND_CYCLE_S = (\d+), BAND_SLOT_S = (\d+);/);
+  const cycle253 = m253 ? Number(m253[1]) : NaN, slot253 = m253 ? Number(m253[2]) : NaN;
+  const anim253 = (css253.match(/\.topbar-band \.th-plate \{[^}]*animation: tb-cycle (\d+)s linear infinite, tb-pan (\d+)s linear infinite;/) || []).slice(1).map(Number);
+  check("§253: ⛔ the band's CSS cycle and its JS phase are ONE clock — six slots, and both animations on it",
+    cycle253 === 120 && slot253 * 6 === cycle253 && anim253.length === 2 && anim253.every(s => s === cycle253), JSON.stringify({ cycle253, slot253, anim253 }));
+  const slotPct253 = (100 / 6).toFixed(2);
+  check("§253: ⛔ the pan runs top to bottom across exactly one slot — the same slot the plate is visible in",
+    new RegExp(`@keyframes tb-pan \\{\\s*0%\\s*\\{ background-position: center 0% \\}\\s*${slotPct253}%\\s*\\{ background-position: center 100% \\}`).test(css253)
+    && new RegExp(`@keyframes tb-cycle \\{[^@]*${slotPct253}%\\s*\\{ opacity: 0 \\}`).test(css253));
+  check("§253: …the band phases its plates on that clock, and the landing band keeps its own",
+    /heroPlates\(plates, \{ cycleS: BAND_CYCLE_S, slotS: BAND_SLOT_S \}\)/.test(app253) && /function heroPlates\(urls = null, \{ cycleS = HERO_CYCLE_S, slotS = HERO_SLOT_S \} = \{\}\)/.test(app253));
+  check("§253: ⛔ and someone who asked the browser to stop moving things gets one still plate, centred",
+    /@media \(prefers-reduced-motion: reduce\) \{\s*\.topbar-band \.th-plate \{ display: none; \}\s*\.topbar-band \.th-plate-0 \{ display: block; opacity: 1; animation: none; background-position: center 50%; \}/.test(css253));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

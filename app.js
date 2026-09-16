@@ -148,7 +148,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.24";
+const APP_VERSION = "2.0.25";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1129,18 +1129,21 @@ const HERO_PLATES = ["echo_river_crossing", "harmonic_heights_terrace", "radiant
  *  redraws its chrome each beat; a CSS animation restarts with its element, so without a shared phase the band would snap
  *  to its first plate and fade up from black on every turn. A negative delay starts each plate where the cycle already is. */
 const HERO_CYCLE_S = 72, HERO_SLOT_S = 12;
+// ⛔ Erik: "Banner images are unrecognizable because of the aspect ratio... i suggest the image scrolls". The band's plates
+// travel top to bottom through their slot, so they get a slower one — these two MUST match `tb-cycle`/`tb-pan` in style.css.
+const BAND_CYCLE_S = 120, BAND_SLOT_S = 20;
 // A URL inside `url('…')` in an inline style: the characters that could close the string or the call are escaped.
 // ⚠️ PERCENT-ENCODED BY HAND, because `encodeURIComponent` leaves `'`, `(` and `)` alone (they are "unreserved") — and a
 // generated item prompt carries "Traveler's Pack", whose apostrophe closed the CSS string and blanked two plates in the bag.
 const cssUrl = (u) => String(u).replace(/['"()\\\s<>]/g, c => "%" + c.charCodeAt(0).toString(16).toUpperCase().padStart(2, "0"));
-function heroPlates(urls = null) {
-  const t = (Date.now() / 1000) % HERO_CYCLE_S;
+function heroPlates(urls = null, { cycleS = HERO_CYCLE_S, slotS = HERO_SLOT_S } = {}) {
+  const t = (Date.now() / 1000) % cycleS;
   const own = Array.isArray(urls) ? urls.filter(Boolean) : [];
   // ⚠️ SIX SLOTS, ALWAYS. The keyframes give each plate 12 seconds of a 72-second cycle, so fewer than six pictures would
   // leave the band dark for the rest of it — two gallery images take turns three times instead.
   const six = own.length ? Array.from({ length: 6 }, (_, i) => own[i % own.length]) : HERO_PLATES.map(p => `content/packs/valley/assets/${p}.jpg`);
   return `<div class="th-plates" aria-hidden="true">${six.map((u, i) => {
-    const phase = (((t - HERO_SLOT_S * i) % HERO_CYCLE_S) + HERO_CYCLE_S) % HERO_CYCLE_S;
+    const phase = (((t - slotS * i) % cycleS) + cycleS) % cycleS;
     return `<div class="th-plate th-plate-${i}" style="background-image:url('${cssUrl(u)}');animation-delay:-${phase.toFixed(2)}s"></div>`;
   }).join("")}</div>`;
 }
@@ -1199,7 +1202,7 @@ function chrome(inner, { hero = false } = {}) {
   const plates = _bannerPlates; _bannerPlates = null;   // CCODE-355: this screen's pictures, taken once
   app.innerHTML = `
     <div class="topbar${hero ? " topbar-hero" : " topbar-band"}">
-      ${hero ? "" : `${heroPlates(plates)}<div class="tb-veil" aria-hidden="true"></div>`}
+      ${hero ? "" : `${heroPlates(plates, { cycleS: BAND_CYCLE_S, slotS: BAND_SLOT_S })}<div class="tb-veil" aria-hidden="true"></div>`}
       <div class="tb-title">${hero ? "" : `<h1>${esc(GAME_MARK)}</h1><span class="sub">${esc(GAME_SUBTITLE)} — v${esc(APP_VERSION)}</span>${isDevMode() ? ` <span class="dev-badge" title="Developer mode is ON. Turn it off in Settings, or reload without ?dev=1.">DEV</span>` : ""}`}</div>
       <div class="actions">
         <button id="nav-roster">Characters</button>

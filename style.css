@@ -147,12 +147,39 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
   padding: 14px 16px; min-height: 68px;
   background: #0d0e11;
 }
-.topbar-band .th-plate { background-position: center 50%; filter: grayscale(0.3) sepia(0.22) contrast(1.05) brightness(0.55); }
+/* ⛔ Erik: "Banner images are unrecognizable because of the aspect ratio... i suggest the image scrolls somehow at that resulting
+   zoom level so you can still at least tell what the image is." ⚑ MEASURED: `cover` on a 68px bar shows under a fifth of a
+   1024×320 plate's height, and about 6% of a square gallery picture. ⛑ SO EACH PLATE TRAVELS, top to bottom, through exactly
+   the slot it is visible in — it fades in at the top and fades out at the bottom, and the next one starts at the top again.
+   ⚠️ ITS OWN, SLOWER CYCLE (6 × 20s): at the landing band's 12s a square picture would race across a desktop bar at ~94px a
+   second, which is a blur, not a picture. `heroPlates` phases the band on the same 120s, so a re-render never restarts it.
+   ⚠️ And a little less dark than first shipped (0.55 → 0.68, veil eased in the middle and right): the title sits on the left,
+   where the veil is unchanged, and every button carries its own ground. */
+.topbar-band .th-plate {
+  background-position: center 0%; filter: grayscale(0.28) sepia(0.2) contrast(1.05) brightness(0.68);
+  animation: tb-cycle 120s linear infinite, tb-pan 120s linear infinite;
+}
+@keyframes tb-cycle {
+  0%     { opacity: 0 }
+  1.67%  { opacity: 1 }
+  15%    { opacity: 1 }
+  16.67% { opacity: 0 }
+  100%   { opacity: 0 }
+}
+@keyframes tb-pan {
+  0%     { background-position: center 0% }
+  16.67% { background-position: center 100% }
+  100%   { background-position: center 100% }
+}
+@media (prefers-reduced-motion: reduce) {
+  .topbar-band .th-plate { display: none; }
+  .topbar-band .th-plate-0 { display: block; opacity: 1; animation: none; background-position: center 50%; }
+}
 .tb-veil {
   position: absolute; inset: 0; z-index: 1;
   background:
     radial-gradient(90% 170% at 9% 30%, rgba(212, 162, 74, 0.12), transparent 60%),
-    linear-gradient(90deg, rgba(13, 14, 17, 0.9) 0%, rgba(13, 14, 17, 0.62) 55%, rgba(13, 14, 17, 0.74) 100%);
+    linear-gradient(90deg, rgba(13, 14, 17, 0.9) 0%, rgba(13, 14, 17, 0.5) 55%, rgba(13, 14, 17, 0.58) 100%);
 }
 .topbar-band .tb-title, .topbar-band .actions { position: relative; z-index: 2; }
 .topbar-band h1 { font-size: 22px; letter-spacing: 0.3em; margin-right: -0.3em; text-shadow: 0 2px 0 rgba(0, 0, 0, 0.55), 0 0 22px rgba(212, 162, 74, 0.18); }

@@ -6,7 +6,7 @@
   "origin": "harmonic",
   "background": "medic",
   "level": 1,
-  "xp": 31,
+  "xp": 36,
   "attributes": {
     "physical": 2,
     "mental": 4,
@@ -52,7 +52,7 @@
   "maxHealth": 25,
   "health": 21,
   "maxEnergy": 116,
-  "energy": 58,
+  "energy": 50,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -111,7 +111,22 @@
       "consumable": false
     }
   ],
-  "deeds": [],
+  "deeds": [
+    {
+      "at": "2026-09-16T00:15:32.288Z",
+      "locationId": "millbrook",
+      "communityId": "valley.millbrook",
+      "description": "Traced a hidden Precursor work through the earth itself, connecting the contaminated river to the uncatalogued plants on the terraces",
+      "tags": [
+        "investigation",
+        "discovery"
+      ],
+      "weight": 1,
+      "spread": [],
+      "day": 2,
+      "worldDay": 78
+    }
+  ],
   "relationships": {},
   "chronicle": [],
   "currentLocationId": "millbrook",
@@ -192,39 +207,46 @@
         "player": "Go back down to the Wet Meadows alone—the river will speak to you if you listen carefully enough.",
         "summary": "Adelheid attempts a nighttime descent to the contaminated river; the Wet Meadows resist, the darkness obscures, and the water keeps its secrets.",
         "narration": "You slip away from the terrace as full dark settles, leaving Piotr to his silence and his bundle. Aevi dims to near-nothing at your shoulder—not disapproval, but worry. The night is cold enough that your breath mists; the melt-water sounds louder in the dark, echoing off stone and risen earth.\n\nThe path down is treacherous even in daylight. In darkness it becomes a thing that resists. Your foot finds a dropped step you missed before and the jar runs through your knee. The Wet Meadows themselves are worse—standing water has crept further up the slope with the evening chill, turning the lower reaches into a maze of mud and half-frozen channels. You wade through, your boots sinking, the linen bundle held high against your chest. The river is close; you can hear it now, a deep persistent sound somewhere beyond the tree-line.\n\nBut the ground won't yield. Every direction you pick leads to deeper water or a sinkhole that gives way the moment you trust it. The plants here are unfamiliar, twisted things that snag your sleeves. And the river—when you finally catch sight of it through the trees, it's too far, still fifty paces off at minimum, with a channel of black water between you and the near bank. The gray-green iridescence you saw from the dock is invisible in darkness. The water speaks, yes, but not in a language your careful listening can parse. It whispers. It murmurs. It says nothing plain.\n\nAevi hums a low, troubled frequency at your ear. Not words, but a note of caution. You are soaked to the thigh, the night is deepening, and you are no closer to an answer than when you started."
+      },
+      {
+        "player": "Use Tremor Sense to map what lies beneath the surface — the ground itself may tell you what the water won't.",
+        "summary": "Adelheid uses Tremor Sense to read the earth beneath the Wet Meadows; discovers a deep, rhythmic vibration running south-southeast toward the river—matching the hum of the silver-stemmed plants—and Aevi confirms it as Precursor origin.",
+        "narration": "You stop wading and plant your feet, pressing your palms flat against the ground. The cold seeps through immediately—real and immediate. You breathe slow, let your edges soften the way the tremor-sense demands, and listen.\n\nBeneath the standing water, the earth speaks in small languages. You feel the slow seep of melt-water moving downslope through clay and root-mass, the patient work of stones settling, the weight of the terraces above pressing their shape into the meadow's skin. And there—a different tone. A vibration not like water-flow or stone-shift. It runs south-southeast, parallel to the ground, humming at a frequency that makes your fingertips prickle.\n\nIt is the same hum the silver-stemmed plants carry. The earth here is alive with it—not natural seeping, not ordinary current. Something built, something working, something that wants to move from the terraces toward the river. The hum runs thin and deep, old enough that the meadow has almost forgotten it is there. Almost.\n\nAevi brightens suddenly at your shoulder, her motes pulling tight and close. She hums once, a single note that matches what you are feeling through the ground—recognition, old and careful. The sound is so quiet that the river's distant roar nearly swallows it.\n\n\"Yes,\" she says, still very quiet. \"That is Precursor-work. The plants are connected to it. And it is still running.\""
       }
     ],
     "lastTurn": {
-      "narration": "You slip away from the terrace as full dark settles, leaving Piotr to his silence and his bundle. Aevi dims to near-nothing at your shoulder—not disapproval, but worry. The night is cold enough that your breath mists; the melt-water sounds louder in the dark, echoing off stone and risen earth.\n\nThe path down is treacherous even in daylight. In darkness it becomes a thing that resists. Your foot finds a dropped step you missed before and the jar runs through your knee. The Wet Meadows themselves are worse—standing water has crept further up the slope with the evening chill, turning the lower reaches into a maze of mud and half-frozen channels. You wade through, your boots sinking, the linen bundle held high against your chest. The river is close; you can hear it now, a deep persistent sound somewhere beyond the tree-line.\n\nBut the ground won't yield. Every direction you pick leads to deeper water or a sinkhole that gives way the moment you trust it. The plants here are unfamiliar, twisted things that snag your sleeves. And the river—when you finally catch sight of it through the trees, it's too far, still fifty paces off at minimum, with a channel of black water between you and the near bank. The gray-green iridescence you saw from the dock is invisible in darkness. The water speaks, yes, but not in a language your careful listening can parse. It whispers. It murmurs. It says nothing plain.\n\nAevi hums a low, troubled frequency at your ear. Not words, but a note of caution. You are soaked to the thigh, the night is deepening, and you are no closer to an answer than when you started.",
-      "sceneSummary": "Adelheid attempts a nighttime descent to the contaminated river; the Wet Meadows resist, the darkness obscures, and the water keeps its secrets.",
+      "narration": "You stop wading and plant your feet, pressing your palms flat against the ground. The cold seeps through immediately—real and immediate. You breathe slow, let your edges soften the way the tremor-sense demands, and listen.\n\nBeneath the standing water, the earth speaks in small languages. You feel the slow seep of melt-water moving downslope through clay and root-mass, the patient work of stones settling, the weight of the terraces above pressing their shape into the meadow's skin. And there—a different tone. A vibration not like water-flow or stone-shift. It runs south-southeast, parallel to the ground, humming at a frequency that makes your fingertips prickle.\n\nIt is the same hum the silver-stemmed plants carry. The earth here is alive with it—not natural seeping, not ordinary current. Something built, something working, something that wants to move from the terraces toward the river. The hum runs thin and deep, old enough that the meadow has almost forgotten it is there. Almost.\n\nAevi brightens suddenly at your shoulder, her motes pulling tight and close. She hums once, a single note that matches what you are feeling through the ground—recognition, old and careful. The sound is so quiet that the river's distant roar nearly swallows it.\n\n\"Yes,\" she says, still very quiet. \"That is Precursor-work. The plants are connected to it. And it is still running.\"",
+      "sceneSummary": "Adelheid uses Tremor Sense to read the earth beneath the Wet Meadows; discovers a deep, rhythmic vibration running south-southeast toward the river—matching the hum of the silver-stemmed plants—and Aevi confirms it as Precursor origin.",
       "choices": [
         {
-          "label": "Retreat to higher ground and rest — you need daylight and dry clothes to think clearly.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": "very easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "careful",
-            "endure"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Tremor Sense to map what lies beneath the surface — the ground itself may tell you what the water won't.",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Return to the terrace before Piotr takes the bundle inside. Face him with what you now know and demand the note.",
+          "attribute": "social",
+          "subAttribute": "presence",
           "axes": {},
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "study",
-            "scout"
+            "confront",
+            "demand",
+            "risky"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Follow the hum deeper into the Wet Meadows, southeastward toward where the vibration originates, closer to the river.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": "hard",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "investigate",
+            "follow",
+            "careful"
           ],
           "abilityId": "tremor_sense",
           "energyCost": 4,
@@ -233,44 +255,55 @@
           "emergenceId": null
         },
         {
-          "label": "Return to the village and find Mara — ask her directly what she knows, why she sent you, and what the note says.",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Return to your rest spot and wait for morning—the daylight will let you move safely, and Piotr will be at the terrace. Take Mara's note then.",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {},
-          "difficulty": "easy",
+          "difficulty": "very easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "travel",
-            "negotiate"
+            "wait",
+            "careful",
+            "plan"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Follow the root angle by dead reckoning — wade south-southeast regardless of the obstacles, let the plant's own direction pull you toward whatever answers it leads to.",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Ask Aevi directly: What is that work? Who built it? How long has it been running?",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "axes": {},
-          "difficulty": "hard",
+          "difficulty": "very easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "risky",
-            "travel"
+            "study",
+            "ask"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         }
       ],
-      "deeds": [],
+      "deeds": [
+        {
+          "description": "Traced a hidden Precursor work through the earth itself, connecting the contaminated river to the uncatalogued plants on the terraces",
+          "tags": [
+            "investigation",
+            "discovery"
+          ],
+          "weight": 1,
+          "communityId": "valley.millbrook"
+        }
+      ],
       "characterDeltas": {
-        "health": -2,
-        "energy": -8,
+        "health": 0,
+        "energy": -4,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
@@ -280,7 +313,7 @@
         {
           "op": "progress",
           "questId": "maras-errand",
-          "note": "Adelheid attempted independent investigation of the river at night; the terrain and darkness defeated the approach. The water's connection to the plants remains unexplained."
+          "note": "Tremor Sense revealed a deep Precursor-origin vibration running from the terrace plants toward the contaminated Echo River. The connection is confirmed as artificial, not natural. Mara's note may explain the source and purpose."
         }
       ],
       "standingOps": [],
@@ -290,34 +323,66 @@
       "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "The Wet Meadows at deep night — a maze of standing water, mud, and half-frozen channels. Spring melt has risen the water-level; the tree-line and the Echo River are visible but unreachable through the dark. Cold air, the sound of the river distant and muffled. Adelheid is soaked to the thigh, fifty paces short of the near bank.",
+        "setting": "The Wet Meadows at deep night—standing water and mud channels in starlight. The Echo River is audible through the tree-line to the south-southeast, unseen. Adelheid stands with palms pressed to cold ground, Aevi condensed bright at her shoulder.",
         "npcsPresent": [],
         "objects": [
-          "Standing water and mud channels",
+          "Standing water and mud channels reflecting starlight",
+          "Half-frozen melt-water channels",
           "Twisted unfamiliar plants snagging at sleeves",
-          "Dark river glimpsed through the tree-line",
-          "Linen-wrapped silver-stemmed cutting (held high, still dry)"
+          "Distant sound of the Echo River",
+          "Linen-wrapped silver-stemmed cutting (held high)"
         ],
         "threads": [
-          "Piotr's sealed bundle and Mara's unread note remain at the terrace",
-          "The connection between the silver-stemmed plants and the river contamination is suspected but unconfirmed",
-          "Aevi's worry at the night and the futility — she is quiet and uncertain"
+          "The deep Precursor-origin vibration running south-southeast beneath the meadow",
+          "Mara's sealed note, still unread, waiting at Terrace Three east with Piotr",
+          "What the river's connection to this buried work means for Millbrook's contamination"
         ]
       },
       "npcUpdates": [],
       "intentsHeard": [],
-      "factUpdates": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "A deep, Precursor-origin vibration runs beneath the Wet Meadows and the terrace-field, traveling south-southeast toward the Echo River. It matches the hum emitted by the uncatalogued silver-stemmed plants. Aevi confirms it as Precursor workmanship, still active.",
+          "subjectId": null
+        }
+      ],
       "placeUpdates": [
         {
-          "note": "The Wet Meadows are impassable at night in early spring — melt water has risen past the terrace drops, standing channels block all southbound approaches. The river is audible but unreachable after dark.",
+          "note": "Deep Precursor-origin vibration confirmed running south-southeast through the soil—Tremor Sense audible, correlates to silver-stemmed plant hum. Still functioning. Connected to the Echo River contamination.",
           "flag": {
-            "night_impassable": true,
-            "melt_risen": true
+            "precursor_work_active": true,
+            "hum_direction": "south-southeast",
+            "connected_to_plants": true
           }
         }
       ],
       "discovery": null,
-      "codexUpdates": [],
+      "codexUpdates": [
+        {
+          "topic": "uncatalogued-terrace-plants",
+          "label": "Uncatalogued Terrace Plants",
+          "kind": "mystery",
+          "entityId": null,
+          "fact": "The silver-stemmed plants are NOT independent growths—they are the surface expression of a buried Precursor-origin work running beneath the terrace and the Wet Meadows. The work hums at a frequency matching the plants' own hum, travels south-southeast toward the Echo River, and is still active. Aevi confirms Precursor origin.",
+          "links": [
+            "echo-river-contamination",
+            "precursor-layer",
+            "maras-errand"
+          ]
+        },
+        {
+          "topic": "precursor-layer",
+          "label": "The Precursor Layer",
+          "kind": "lore",
+          "entityId": null,
+          "fact": "A Precursor-origin work—possibly ancient—remains active beneath the Wet Meadows and the terrace-field. It is still functioning and humming at a frequency that matches the uncatalogued plants. Purpose unknown. Connected to the Echo River contamination.",
+          "links": [
+            "uncatalogued-terrace-plants",
+            "echo-river-contamination"
+          ]
+        }
+      ],
       "holdingOps": [],
       "debtOps": [],
       "partyOps": [],
@@ -330,29 +395,14 @@
       "unlockPrecursor": null,
       "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 2,
-        "why": "descent to the Wet Meadows, failed approach to the river, climb back toward higher ground"
+        "hoursPassed": 1,
+        "why": "Investigation of the Wet Meadows, cold and careful work"
       },
       "moveTo": null,
-      "stateOps": [
-        {
-          "op": "correctEntityField",
-          "kind": "npc",
-          "id": "mara-wells",
-          "field": "age",
-          "to": 47
-        },
-        {
-          "op": "correctEntityField",
-          "kind": "npc",
-          "id": "mara-wells",
-          "field": "sex",
-          "to": "female"
-        }
-      ],
+      "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": null,
+      "imagePrompt": "Adelheid kneels in starlit mud, palms pressed to frozen earth, her breath misting. Aevi's teal motes brighten and tighten around her shoulder, matching the frequency of something deep underground—a vibration older than the terrace, still running, still humming its Precursor song toward the river below.",
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
@@ -364,21 +414,22 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Wet Meadows at deep night — a maze of standing water, mud, and half-frozen channels. Spring melt has risen the water-level; the tree-line and the Echo River are visible but unreachable through the dark. Cold air, the sound of the river distant and muffled. Adelheid is soaked to the thigh, fifty paces short of the near bank.",
+      "setting": "The Wet Meadows at deep night—standing water and mud channels in starlight. The Echo River is audible through the tree-line to the south-southeast, unseen. Adelheid stands with palms pressed to cold ground, Aevi condensed bright at her shoulder.",
       "npcsPresent": [],
       "objects": [
-        "Standing water and mud channels",
+        "Standing water and mud channels reflecting starlight",
+        "Half-frozen melt-water channels",
         "Twisted unfamiliar plants snagging at sleeves",
-        "Dark river glimpsed through the tree-line",
-        "Linen-wrapped silver-stemmed cutting (held high, still dry)"
+        "Distant sound of the Echo River",
+        "Linen-wrapped silver-stemmed cutting (held high)"
       ],
       "threads": [
-        "Piotr's sealed bundle and Mara's unread note remain at the terrace",
-        "The connection between the silver-stemmed plants and the river contamination is suspected but unconfirmed",
-        "Aevi's worry at the night and the futility — she is quiet and uncertain"
+        "The deep Precursor-origin vibration running south-southeast beneath the meadow",
+        "Mara's sealed note, still unread, waiting at Terrace Three east with Piotr",
+        "What the river's connection to this buried work means for Millbrook's contamination"
       ]
     },
-    "beats": 5,
+    "beats": 6,
     "subPlace": {
       "slug": "the-wet-meadows",
       "name": "The Wet Meadows",
@@ -388,7 +439,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 2,
-    "hour": 2,
+    "hour": 3,
     "realAnchor": null
   },
   "companions": [
@@ -403,14 +454,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Bundle delivered. Adelheid has reached the uncatalogued east-edge plants and felt a hum through the stem on first contact — active observation now underway.",
         "Echo Sense confirms: roots are unified and deep — far past the terrace cut — and the internal hum travels south-southeast along a shared root system. Aevi calls it one system. Piotr is watching Adelhe",
         "Cutting taken carefully — node spacing and root angle (20° south-southeast) recorded in linen. Aevi went bright and silent at the moment of the cut. Piotr's eyes went to the cutting, not Adelheid's fa",
         "Cutting taken and wrapped. Root system traced south-southeast toward the Echo River—the contaminated water. The mystery deepens.",
         "Adelheid confronted Piotr directly about the plants and the river. Piotr refused to speak, citing Mara's private instructions and referring her to the unread note in the bundle.",
         "Adelheid attempted to verify the root system's direction by following it to the Echo River. The spring melt made the Wet Meadows impassable. The note inside the bundle remains unread, and Piotr's silence still stands.",
         "Adelheid attempted to force Mara's note open from Piotr. He refused and will not be moved by pressure or proximity. The boundary is now clearly marked.",
-        "Adelheid attempted independent investigation of the river at night; the terrain and darkness defeated the approach. The water's connection to the plants remains unexplained."
+        "Adelheid attempted independent investigation of the river at night; the terrain and darkness defeated the approach. The water's connection to the plants remains unexplained.",
+        "Tremor Sense revealed a deep Precursor-origin vibration running from the terrace plants toward the contaminated Echo River. The connection is confirmed as artificial, not natural. Mara's note may explain the source and purpose."
       ],
       "startedAt": "2026-07-08T18:17:05.695Z"
     }
@@ -522,7 +573,8 @@
         "[d1] One stem cut cleanly two nodes up on Day 1 midday — pale sap bead at the wound. The plant registered the cut with a momentary hum-spike. The cutting is in Adelheid's possession.",
         "[d1] The silver-stemmed plant roots angle south-southeast at approximately twenty degrees below horizontal, directed toward the Echo River—traced by Echo Sense and confirmed by careful observation. The root system is unified and deep, descending past the terrace foundation. The internal hum travels…",
         "[d1] The Wet Meadows are impassable at dusk in early spring—melt runoff has created standing water and treacherous ground. The river is visible through the tree-line but cannot be reached without serious difficulty.",
-        "[d2] The Wet Meadows are impassable at night in early spring — melt water has risen past the terrace drops, standing channels block all southbound approaches. The river is audible but unreachable after dark."
+        "[d2] The Wet Meadows are impassable at night in early spring — melt water has risen past the terrace drops, standing channels block all southbound approaches. The river is audible but unreachable after dark.",
+        "[d2] Deep Precursor-origin vibration confirmed running south-southeast through the soil—Tremor Sense audible, correlates to silver-stemmed plant hum. Still functioning. Connected to the Echo River contamination."
       ],
       "flags": {
         "plant_hum_confirmed": "day1",
@@ -669,7 +721,7 @@
     "lastTickWorldDay": 77,
     "lastCanonWorldDay": 77,
     "pressureQueue": [],
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "Piotr's quiet, unyielding refusal—a person's boundary holding firm against pressure",
@@ -765,17 +817,19 @@
           "[d1] Aevi responded to the silver-stemmed plants with a low resonant hum, motes pulling bright and close above the leaves — as if the plants and the companion intelligence are exchanging something. Piotr w…",
           "[d1] Echo Sense (conserved, rank 1): roots are unified across the entire east-edge growth — one system, not many plants. They descend past the terrace's cut-stone foundation. The internal hum travels south…",
           "[d1] The plant registered the cutting with a momentary hum-spike at the moment of separation — the hum did not die with the severed stem, it was absorbed back into the root system. The cut sap is pale, vis…",
-          "[d1] The root system of the silver-stemmed plants angles south-southeast at roughly twenty degrees below horizontal—pointed directly toward the Echo River. The contaminated water and the mysterious plants are connected. The hum travels along the roots in that direction."
+          "[d1] The root system of the silver-stemmed plants angles south-southeast at roughly twenty degrees below horizontal—pointed directly toward the Echo River. The contaminated water and the mysterious plants are connected. The hum travels along the roots in that direction.",
+          "[d2] The silver-stemmed plants are NOT independent growths—they are the surface expression of a buried Precursor-origin work running beneath the terrace and the Wet Meadows. The work hums at a frequency matching the plants' own hum, travels south-southeast toward the Echo River, and is still active…"
         ],
         "links": [
           "millbrook",
           "mara-wells",
           "valley-flora-post-transition",
           "maras-errand",
-          "echo-river-contamination"
+          "echo-river-contamination",
+          "precursor-layer"
         ],
         "createdDay": 1,
-        "updatedDay": 1,
+        "updatedDay": 2,
         "aliases": []
       },
       "piotr": {
@@ -845,27 +899,42 @@
         "createdDay": 1,
         "entityId": "maras-errand",
         "updatedDay": 1
+      },
+      "precursor-layer": {
+        "id": "precursor-layer",
+        "label": "The Precursor Layer",
+        "kind": "lore",
+        "facts": [
+          "[d2] A Precursor-origin work—possibly ancient—remains active beneath the Wet Meadows and the terrace-field. It is still functioning and humming at a frequency that matches the uncatalogued plants. Purpose unknown. Connected to the Echo River contamination."
+        ],
+        "links": [
+          "uncatalogued-terrace-plants",
+          "echo-river-contamination"
+        ],
+        "aliases": [],
+        "createdDay": 2,
+        "updatedDay": 2
       }
     }
   },
   "grantsVersion": 1,
   "customAbilities": {},
   "companionBonds": {
-    "aevi": 0.75
+    "aevi": 1.5
   },
   "practice": {
     "schemaVersion": 1,
     "uses": {
       "echo_sense": 7,
       "sonic_resonance": 2,
-      "tremor_sense": 1
+      "tremor_sense": 2
     },
     "coActivations": {},
     "aspirations": [
       {
         "abilityId": "chord_of_mending",
         "since": "2026-07-08T17:56:44.256Z",
-        "progress": 2
+        "progress": 3
       }
     ],
     "lastUsed": {
@@ -891,6 +960,12 @@
       "text": "A cutting from the silver-stemmed east-edge plants was taken on Day 1 midday — the plant registered the cut with a momentary spike in its internal hum before settling. Pale, nameless sap at the wound.",
       "day": 1,
       "subjectId": "uncatalogued-terrace-plants"
+    },
+    {
+      "id": "f4",
+      "text": "A deep, Precursor-origin vibration runs beneath the Wet Meadows and the terrace-field, traveling south-southeast toward the Echo River. It matches the hum emitted by the uncatalogued silver-stemmed plants. Aevi confirms it as Precursor workmanship, still active.",
+      "day": 2,
+      "subjectId": null
     }
   ],
   "precursorAccess": [],
@@ -901,14 +976,14 @@
   "itemReclaimVersion": 1,
   "nameRepairVersion": 1,
   "tendencies": {
-    "generous": 4.587937063326871,
-    "social": 3.8958923401149286,
-    "cerebral": 22.95492449907317,
-    "cautious": 21.198907119735793,
-    "strategic": 21.786815343769174,
-    "carousing": 1.70570712270153,
-    "risky": 0.8549910389481354,
-    "ruthless": 1.95
+    "generous": 4.473238636743699,
+    "social": 3.798495031612055,
+    "cerebral": 23.38105138659634,
+    "cautious": 20.668934441742397,
+    "strategic": 22.242144960174944,
+    "carousing": 1.6630644446339917,
+    "risky": 0.833616262974432,
+    "ruthless": 1.9012499999999999
   },
   "aptitudes": [
     "strategist",
@@ -917,11 +992,11 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 44,
+  "actionCount": 45,
   "bondLogFrom": null,
   "teachers": {},
   "regionsKnown": {
-    "valley": 5
+    "valley": 6
   },
   "company": [],
   "forkChoices": {},
@@ -1105,8 +1180,8 @@
   "bands": [],
   "_silasGrantsRevoked": true,
   "reconcileVersion": 63,
-  "updatedAt": 1789517451239,
-  "rev": 12,
+  "updatedAt": 1789517732294,
+  "rev": 13,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -1119,24 +1194,24 @@
   "featureOffers": [],
   "_pinsInitialized": true,
   "_opUnknown": {
-    "sceneSummary": 5
+    "sceneSummary": 6
   },
   "_applyFailures": null,
   "sessions": [
     {
       "id": "sess-1",
       "startedAt": "2026-09-15T23:58:48.323Z",
-      "lastAt": "2026-09-16T00:10:51.234Z",
+      "lastAt": "2026-09-16T00:15:32.288Z",
       "startDay": 77,
       "endDay": 78,
-      "beats": 5
+      "beats": 6
     }
   ],
   "_debtReceipts": [],
   "_bandNotes": null,
   "skillUses": {
-    "scout": 3,
-    "study": 2,
+    "scout": 4,
+    "study": 3,
     "ask": 1,
     "travel": 2,
     "coerce": 1,
@@ -1149,22 +1224,24 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 5,
-    "choices": 5,
-    "questUpdates": 5,
-    "scene": 5,
+    "sceneSummary": 6,
+    "choices": 6,
+    "questUpdates": 6,
+    "scene": 6,
     "npcUpdates": 4,
-    "placeUpdates": 3,
-    "codexUpdates": 4,
-    "timeOps": 5,
-    "imagePrompt": 2,
-    "gambitApt": 5,
-    "sceneEnded": 5,
-    "characterDeltas": 4,
+    "placeUpdates": 4,
+    "codexUpdates": 5,
+    "timeOps": 6,
+    "imagePrompt": 3,
+    "gambitApt": 6,
+    "sceneEnded": 6,
+    "characterDeltas": 5,
     "offer": 1,
-    "stateOps": 2
+    "stateOps": 2,
+    "deeds": 1,
+    "factUpdates": 1
   },
-  "_opTurns": 5,
+  "_opTurns": 6,
   "_opCountingSince": "2026-09-15T23:58:48.348Z",
   "gallery": [
     {
@@ -1191,6 +1268,31 @@
       "day": 2,
       "worldDay": 78,
       "actionCount": 43
+    },
+    {
+      "companionId": "aevi",
+      "kind": "deed",
+      "delta": 0.5,
+      "day": 2,
+      "worldDay": 78,
+      "actionCount": 44
+    },
+    {
+      "companionId": "aevi",
+      "kind": "assist",
+      "delta": 0.25,
+      "day": 2,
+      "worldDay": 78,
+      "actionCount": 44
     }
-  ]
+  ],
+  "companionMemory": {
+    "aevi": [
+      {
+        "text": "Traced a hidden Precursor work through the earth itself, connecting the contaminated river to the uncatalogued plants on the terraces",
+        "weight": 1,
+        "day": 2
+      }
+    ]
+  }
 }

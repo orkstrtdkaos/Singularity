@@ -1,0 +1,74 @@
+{
+ "schemaVersion": 1,
+ "id": "edvar-crane",
+ "name": "Edvar Crane",
+ "tier": "notable",
+ "role": "Mill resident and self-taught water-reader — reads the Echo's behaviour off the mill race, keeps his own records going back years, and was commissioned on the filtration work when somebody finally asked",
+ "people": "human",
+ "gender": "male",
+ "pronouns": "he/him",
+ "sex": "male",
+ "romanceEligible": false,
+ "homeLocation": "millbrook",
+ "communityId": "valley.millbrook",
+ "vocation": "READER",
+ "domains": {
+  "primary": "verist",
+  "secondary": "rootkin",
+  "tertiary": "lattice"
+ },
+ "spectrum": {
+  "violence_peace": 0.5,
+  "chaos_order": 0.6,
+  "death_life": 0.4,
+  "mechanical_spiritual": -0.2,
+  "concrete_abstract": -0.7
+ },
+ "assistTags": [
+  "analyze",
+  "study",
+  "investigate",
+  "sense-danger",
+  "learn"
+ ],
+ "appearance": "Fifties, narrow, weathered about the eyes from a lifetime of looking at moving water in bad light. Mill dust in everything. Hands stained at the fingers from the reagent he uses to test a sample.",
+ "physicality": "Stands at the race rather than sitting anywhere. Talks while watching the water, not while watching you.",
+ "personality": {
+  "warmth": 0.4,
+  "trust": 0.5,
+  "candor": 0.9,
+  "patience": 0.3
+ },
+ "voiceHints": "Direct to the point of abruptness, and not unkind underneath it. Will not be eased into a conversation. Answers the question you asked rather than the one you meant, then waits.",
+ "wants": "For the river to stay readable, and for somebody to have written down what happened while it was happening.",
+ "fears": "Being the only one who noticed, again, and being right about it again.",
+ "knowledge": [
+  "THE ECHO HAS RUN CLEAN SINCE WORLD-DAY 26. He was there. He will say so flatly to anyone who asks and is surprised every time that it is news.",
+  "That Silas Weir did not cause the contamination and ended it — the facility's standing instruction was rewritten to cleanse rather than to strip, and it has been running amended ever since",
+  "That a rumour of Silas as the cause travelled faster than the fix did, and that he understands exactly why: he was at the contamination's edge three weeks before anyone else was looking",
+  "The Echo's behaviour year by year, off his own records, going back further than the Hub's",
+  "Which Millbrook families took sick at the First Sickness, which mended, and which are still careful about the water out of habit rather than need"
+ ],
+ "reactsToReputation": {
+  "any": "answers the question you asked, exactly, while watching the water",
+  "hurried": "he is past gentleness and will say so — three weeks of water-reading left him with no patience for being eased into anything",
+  "attentive": "he opens the records, which he does not do, and talks for an hour",
+  "healer": "immediate respect; he has watched people get sick from something he could see and could not prove"
+ },
+ "questSeeds": [
+  "He has years of river records nobody has ever read, and a growing conviction that somebody should",
+  "He will correct a rumour about Silas Weir plainly and without drama if anybody thinks to ask him, and nobody has"
+ ],
+ "gear": [
+  "a belt_knife for cord and samples",
+  "a staff he uses to sound the race",
+  "oiled_leathers",
+  "a case of sample vials and reagent, labelled in his own hand",
+  "dried_rations"
+ ],
+ "purse": {
+  "crystal": 95
+ },
+ "closed": [],
+ "_authoredWhy": "⛑ AUTHORED 2026-09-16. Edvar Crane is the central figure of the water crisis, Silas Weir's collaborator on the filtration work, and a name in Adelheid's registry — AND HE HAD NO AUTHORED RECORD. He existed only inside individual saves and in the shared canon store. ⛔ THAT IS WHY COURTNEY'S GM INVENTED A MANHUNT. With no Edvar to read, it had only her save's three-week-old impressions — 'Silas Weir is connected to the water crisis', 'something beneath the water is actively waking' — and it did what a GM does with a suspicion and no facts. ⚠️ ONE GM FOR THE WORLD NEEDS ONE EDVAR, and his `knowledge` is now where the correction lives: the water ran clean from world-day 26, and the man she was warned about is the reason."
+}

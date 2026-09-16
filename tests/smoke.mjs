@@ -17027,10 +17027,19 @@ await (async () => {
     const ch433 = { name: "P", level: 6, worldState: initWs433(1) };
     // 900 days, because the personal-beat path does not fire in the first 400: measured 0 murmurs at
     // day 400 and 19 by day 600. A gate over an empty list is green and proves nothing.
+    // ⚠️ THE WHOLE RUN, NOT THE LAST TWENTY (CCODE-364). This read `worldState.news`, which NEWS_CAP keeps at twenty — so it
+    // measured whatever one seed's final passes happened to say. SNG-596 made a strike turned aside name its people, and the
+    // dormancy wake reads names from the news ("the world named them in something that happened this pass"), so one figure
+    // woke on THIS seed and the world took another path. ⚑ Measured on three seeds over 900 days: 777 and 2026 identical to
+    // HEAD in every count (murmurs, templated, neglect, deaths, dormant); on 12345, 288 personal beats went through the
+    // templates, and the last twenty lines were all one repeated "has not been seen at home". The voice was fine; the window
+    // was the cap's. ⛑ Every line the run produced is read now — 1,294 of them, not 20 — so an id leaking anywhere fails.
+    const all433 = [];
     for (let d = 1; d <= 900; d++) {
-      await tick433({ character: ch433, content: C433, evolveFn: async () => ({}), rng: rng433, now: Date.UTC(2025, 0, 1) + d * 86400000 });
+      const raw433 = await tick433({ character: ch433, content: C433, evolveFn: async () => ({}), rng: rng433, now: Date.UTC(2025, 0, 1) + d * 86400000 });
+      if (Array.isArray(raw433)) all433.push(...raw433);
     }
-    const items = ch433.worldState.news || [];
+    const items = all433.filter(n => n && typeof n === "object");
     const murmurs = items.filter(n => n.tier === "murmur" && !n.kind);
     const templated = murmurs.filter(n => /is spoken of:|Word from/.test(n.text));
     const rawIds = items.filter(n => /\b[a-z0-9]+_[a-z0-9_]+\b/.test(String(n.text)));

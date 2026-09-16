@@ -18186,6 +18186,93 @@ console.log("\n── §253 · the banner's picture travels through its slot ─
     /@media \(prefers-reduced-motion: reduce\) \{\s*\.topbar-band \.th-plate \{ display: none; \}\s*\.topbar-band \.th-plate-0 \{ display: block; opacity: 1; animation: none; background-position: center 50%; \}/.test(css253));
 }
 
+// ⛔ SNG-596 (Aevi, from Erik reading the world tab) — "I see that certain people are being subject to Strikes — which is
+// fantastic… but I don't see those surfacing in the news?"
+// ⚑ MEASURED ON THE LIVE SAVES before a line changed: 14 strikes across 10 saves. The 9 that LANDED were in the news all along,
+// as a duel line that never says a strike happened; the 5 a guard TURNED ASIDE produced nothing. ⛑ One line per strike that
+// says it was one — driven here through the real world pass, seeded, not a fixture of what the pass would write.
+console.log("\n── §254 · a strike is news, and says it was one ──");
+{
+  const N254 = await import("../engine/newsvoice.js");
+  const W254 = await import("../engine/worldtick.js");
+  const { loadContentHeadless: lch254 } = await import("./headless_content.mjs");
+  const C254 = await lch254();
+
+  /* ---- 1 · ⛔ THE LINE — WHO CAME, HOW, WHO STOOD IN THE WAY, AND WHAT IT COST ---- */
+  // Erik: "dont' just say 'came quietly' — try to get the flavor of who was sent included... how did they escape or win, did they
+  // have help, who and how?" Every word of flavour below is AUTHORED on the figure or the tradition; nothing is invented.
+  const Cx = { traditionIndex: { byId: { umbral: { name: "The Umbrals" }, rootkin: { name: "The Rootkin" }, cogitant: { name: "The Cogitants" } } } };
+  const fl254 = (f) => N254.figureFlavor(f, Cx);
+  const S = { id: "s", name: "The Starless One", tradition: "umbral", fightingStyle: "devourer, fighting from the dark they brought" };
+  const T = { id: "t", name: "Kesh Ardent, the Edge That Holds" };
+  const G = { id: "g", name: "The Last Walker of the Sealed Wood", tradition: "rootkin", fightingStyle: "emissary, roots lifting where they plant a foot" };
+  check("§254: ⛔ who someone is and how they fight come from what is authored — and a half that is not authored stays empty",
+    JSON.stringify(fl254(S)) === JSON.stringify({ who: "a devourer of the Umbrals", how: "fighting from the dark they brought" })
+    && JSON.stringify(fl254(G)) === JSON.stringify({ who: "an emissary of the Rootkin", how: "roots lifting where they plant a foot" })
+    && fl254({ tradition: "cogitant" }).who === "of the Cogitants" && fl254(T).who === "" && fl254(T).how === "");
+  const guarded254 = N254.strikeLine({ strike: "quiet", outcome: "guarded", sender: S, target: T, guard: G, place: "The Greenward", arc: "The Green Schism", guardPower: "Planted Years", flavor: fl254 });
+  check("§254: ⛔ a strike turned aside says who came and how, who stood in the way and how, and that the striker got away — not unseen",
+    guarded254 === "A strike over the Green Schism, turned aside: The Starless One, a devourer of the Umbrals, came for Kesh Ardent, the Edge That Holds, fighting from the dark they brought — and The Last Walker of the Sealed Wood, an emissary of the Rootkin, stood in the way, roots lifting where they plant a foot, with Planted Years. The Starless One got away, but not unseen.", guarded254);
+  const landed254 = N254.strikeLine({ strike: "quiet", outcome: "stopped", sender: S, target: T, place: "The Greenward", arc: "The Green Schism", power: "Known In The Dark", flavor: fl254 });
+  check("§254: …a landed one says it was a strike, where, over what, how, and with what — the engine's 'stopped' is the author's 'checked'",
+    landed254 === "A strike over the Green Schism: The Starless One, a devourer of the Umbrals, came for Kesh Ardent, the Edge That Holds at The Greenward, fighting from the dark they brought, with Known In The Dark, and checked Kesh Ardent — that work is held for now.", landed254);
+  const bare254 = N254.strikeLine({ strike: "crusade", outcome: "killed", sender: { id: "m", name: "Brannoch" }, target: T, flavor: fl254 });
+  check("§254: ⛑ a minted figure with nothing authored reads cleanly — every optional segment drops, and no empty comma is left behind",
+    bare254 === "Brannoch came openly for Kesh Ardent, the Edge That Holds — and Kesh Ardent is dead."
+    && N254.strikeLine({ strike: "crusade", outcome: "guarded", sender: S, target: T, guard: null, arc: "What Wakes Beneath", flavor: fl254 })
+      === "The Starless One, a devourer of the Umbrals, came openly for Kesh Ardent, the Edge That Holds over What Wakes Beneath, fighting from the dark they brought, and was turned aside.", bare254);
+  check("§254: ⛔ the author's words win when they exist — with the same optional segments — and an id is never a place",
+    N254.strikeLine({ templates: { strike: { quiet: { wounded: "{S}[, {sWho},] bled {t}[ at {place}]." } } }, strike: "quiet", outcome: "wounded", sender: S, target: T, place: "the_greenward", flavor: fl254 })
+      === "The Starless One, a devourer of the Umbrals, bled Kesh Ardent."
+    && N254.strikeLine({ strike: "quiet", outcome: "already_dead", sender: S, target: T }) === null);
+
+  /* ---- 2 · ⛔ THROUGH THE REAL PASS ---- */
+  const seeded254 = (seed) => { let x = seed >>> 0; return () => { x = (x * 1103515245 + 12345) & 0x7fffffff; return x / 0x7fffffff; }; };
+  const rng254 = seeded254(596);
+  const ch254 = { name: "W596", level: 6, clock: { day: 1 }, actionCount: 0, npcRegistry: {}, quests: [], abilities: [], deeds: [], worldState: W254.initWorldState(1) };
+  delete ch254.worldState.lastTickWorldDay;
+  const stub254 = async ({ entities }) => ({ developments: entities.map(e => ({ entityId: e.id, note: "the world turned", outcome: "progress" })) });
+  const t0254 = Date.now();
+  let strikes254 = 0, told254 = 0, guardedN254 = 0, landedN254 = 0, mismatched254 = [], extra254 = 0, stampedKeeps254 = true;
+  const unflavoured254 = [], debris254 = [];
+  let lastStrikes254 = null;
+  for (let d = 0; d < 728 && (guardedN254 < 1 || landedN254 < 1 || d < 364); d += 7) {
+    const raw = await W254.advanceGeneratedOffscreen({ character: ch254, content: C254, evolveFn: stub254, rng: rng254, now: t0254 + d * 24 * 3600000 });
+    const ws = ch254.worldState;
+    if (!Array.isArray(ws.arcStrikes) || ws.arcStrikes === lastStrikes254) continue;   // the arc pass did not run this call
+    lastStrikes254 = ws.arcStrikes;
+    const items = (Array.isArray(raw) ? raw : []).filter(n => n && n.strike);
+    const offscreen = ws.arcStrikes.filter(s => s.target !== W254.PLAYER_MARK_ID);
+    strikes254 += offscreen.length;
+    told254 += items.length;
+    for (const s of offscreen) {
+      const hit = items.find(n => n.strike === s.kind && (s.outcome === "guarded"
+        ? (n.kind === "strike" && n.outcome === "guarded" && n.loserId === s.sender && n.figureId === s.target)
+        : ((n.kind === "death" && n.killerId === s.sender && n.victimId === s.target) || (n.kind === "clash" && n.winnerId === s.sender && n.loserId === s.target))));
+      if (!hit || !/strike|came openly/.test(hit.text || "")) mismatched254.push(`${s.kind}/${s.outcome} ${s.sender}→${s.target}`);
+      // ⛔ AND THE FLAVOUR RIDES THE REAL LINE: a striker with an authored manner is described by it, and no segment leaves debris
+      const senderFig = W254.worldRoster(ch254.worldState, C254).find(f => f.id === s.sender);
+      const how254 = N254.figureFlavor(senderFig, C254).how;
+      if (hit && how254 && !hit.text.includes(how254)) unflavoured254.push(`${senderFig?.name}: ${hit.text.slice(0, 90)}`);
+      if (hit && /[\[\]{}]|\s[,.]|,,/.test(hit.text)) debris254.push(hit.text.slice(0, 120));
+      if (s.outcome === "guarded") guardedN254++; else landedN254++;
+    }
+    if (items.length > offscreen.length) extra254 += items.length - offscreen.length;
+    const stamped = (ws.news || []).filter(n => n.strike);
+    if (items.length && !stamped.length) stampedKeeps254 = false;
+  }
+  check("§254: ⛔ through the real pass, EVERY strike is one news line that says it was a strike — landed and turned aside alike",
+    strikes254 > 0 && guardedN254 >= 1 && landedN254 >= 1 && mismatched254.length === 0 && told254 === strikes254 && extra254 === 0,
+    `${strikes254} strikes (${landedN254} landed, ${guardedN254} turned aside) · ${told254} told · unmatched ${mismatched254.slice(0, 3).join(" | ") || "none"}`);
+  check("§254: ⛔ …every one of them describes its striker by their authored manner, and not one leaves a bracket, a brace or an empty comma",
+    unflavoured254.length === 0 && debris254.length === 0, `unflavoured: ${unflavoured254.slice(0, 2).join(" | ") || "none"} · debris: ${debris254.slice(0, 2).join(" | ") || "none"}`);
+  check("§254: …and the fact survives stamping, so the feed and the GM keep which kind of strike it was",
+    stampedKeeps254);
+  const src254 = rd("engine/worldtick.js").replace(/\r\n/g, "\n");
+  check("§254: ⛔ a strike on the PLAYER is still the GM's to tell, and a player picked as the guard is never named as one",
+    /if \(mark\.f\.id !== PLAYER_MARK_ID\) \{\n\s+const byGuard = guard\.f\.id !== PLAYER_MARK_ID \? guard\.f : null;/.test(src254));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

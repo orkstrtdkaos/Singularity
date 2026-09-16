@@ -33,7 +33,7 @@ import { milestoneEffects } from "./ladder.js";
 import { personName, mintedWants, nameOf, asSpoken } from "./names.js";
 // SNG-433: the sentences a fight is reported in are AUTHORED. This holds only the decisions the prose
 // cannot make for itself — which variant, how a name shortens, and when to drop a slot.
-import { newsVoiceOf, clashLine, fragmentLine } from "./newsvoice.js";
+import { newsVoiceOf, clashLine, fragmentLine, strikeLine, figureFlavor } from "./newsvoice.js";
 const KNOWN_TIERS = new Set(["mythic", "legendary", "epic", "heroic", "regional", "notable", "riffraff"]);   // SNG-269: ONE ladder — worldtick had its own copy and it drifted
 import { smartClamp } from "./namematch.js"; // SNG-076: word-boundary clamp for the away-digest/news
 import { generatedRecords } from "./generate.js";
@@ -417,7 +417,7 @@ const SECTION_IDS = new Set(NEWS_SECTIONS.map(s => s.id));
 // SNG-400 §1 · SNG-431 §3 adds the clash trio: a fight the player can see and cannot open is the whole of
 // "0 of 20 news items carry ids", and `winnerId`/`loserId`/`outcome` are what make one openable.
 const NEWS_FACTS = ["kind", "victimId", "killerId", "winnerId", "loserId", "outcome", "figureId",
-                    "abilityId", "locationId", "regionId", "arcId"];
+                    "abilityId", "locationId", "regionId", "arcId", "strike"];   // SNG-596: `strike` = quiet | crusade
 
 /** Normalise one raw news entry — string or object — into a stamped record. ⚠️ `world` is the
  *  fallback because it is the section that is never empty: an unrouted line lands where the player is
@@ -441,9 +441,11 @@ export function stampNews(n, { day = null, worldDay = null, section = "world", c
  *  bare string (the ordinary outcomes) or as an object carrying who/whom (a death); both land as a proper
  *  news item, and a death keeps its ids. ⚠️ Without this each site wrapped `{ text: line }` — which turns
  *  an object INTO the string "[object Object]" the instant one is passed through it. */
-export function clashNewsItem(line, { worldDay = null, arcId = null, regionId = null } = {}) {
+export function clashNewsItem(line, { worldDay = null, arcId = null, regionId = null, strike = null, text = null } = {}) {
   const base = typeof line === "string" ? { text: line } : { ...line };
-  return { ...base, worldDay, tier: "event", ...(arcId ? { arcId } : {}), ...(regionId ? { regionId } : {}) };
+  // SNG-596: a strike keeps the fight's own item — ids, place, power — and says what it was: its line, and which kind of strike.
+  return { ...base, ...(text ? { text } : {}), worldDay, tier: "event", ...(arcId ? { arcId } : {}), ...(regionId ? { regionId } : {}),
+    ...(strike ? { strike } : {}) };
 }
 
 /** ⛔ SNG-356 — THE PRESENCE MILESTONES REACH THE DRIFT HERE, or they are three authored sentences with
@@ -1862,6 +1864,14 @@ export function signatureOf(winner, loser, abilitiesByTradition) {
  *  fallback for when the rival has none. WITH WHAT: an ability of the WINNER's tradition — the picture shows
  *  what was done, not what was done to. Drawn deterministically from the pair, so re-opening a fight from the
  *  news shows the same fight and not a new one every time. */
+/** ⛔ SNG-596 — WHERE TWO PEOPLE MET: the second one's home, then the first's; a minted figure has only a `region` (see the note
+ *  inside `resolveEpicClash`). One rule for a fight that happened and for a strike a guard turned aside before it could, so the
+ *  news places both the same way. */
+export function clashPlaceOf(a, b) {
+  const homeOf = (f) => f?.homeLocation || f?.legend?.homeLocation || f?.region || null;
+  return homeOf(b) || homeOf(a) || null;
+}
+
 export function resolveEpicClash(a, b, rng = Math.random, { abilitiesByTradition = null } = {}) {
   const wa = a?.legend?.weight ?? 5, wb = b?.legend?.weight ?? 5;
   const pA = wa / (wa + wb);
@@ -1898,8 +1908,7 @@ export function resolveEpicClash(a, b, rng = Math.random, { abilitiesByTradition
   // only `homeLocation` left every fight between two minted figures with no place at all. Measured: 3 of
   // 272. `homeland` is deliberately NOT in the chain: a tradition id would resolve to nothing and put the
   // machine's own vocabulary in a picture caption.
-  const homeOf = (f) => f?.homeLocation || f?.legend?.homeLocation || f?.region || null;
-  const locationId = homeOf(b) || homeOf(a) || null;
+  const locationId = clashPlaceOf(a, b);
   return { winnerId: winner.id, loserId: loser.id, winnerName: winner.name, loserName: loser.name,
            kind, margin, locationId, abilityId: signatureOf(winner, loser, abilitiesByTradition) };
 }
@@ -3053,6 +3062,10 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
       // at `arcResponse.kindByTradition` in a list-per-kind shape. Reading only `cfg.strikes.kindByTradition`
       // is what made 910 strikes produce 0 crusades against a fully authored table.
       const strikeKinds = normalizeStrikeKinds(cfg);
+      // ⛔ SNG-596: the voice a strike is told in, and the arc it was over, by name.
+      const strikeVoice = newsVoiceOf(content);
+      const strikeArc = (content?.greaterArcs || []).find(a => a?.id === arcId)?.name || null;
+      const strikeFlavor = (f) => figureFlavor(f, content);   // who they are and how they fight — authored, never guessed
       for (const [attackers, defenders] of [[P, Q], [Q, P]]) {
         // SNG-310 — ⚠️ THE PLAYER STANDS IN THE POOL, AND ONLY IN THIS POOL. They are added to the defending
         // side's WORKING list purely so `planStrike` can choose them as a mark; they are never in `living`,
@@ -3091,6 +3104,19 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
           // over someone and reaching past someone are both contested things won; nothing here ranks them.
           creditDeed(ws, guard.f.id, "guardIntercept", { worldDay: currentWorldDay });
           creditDeed(ws, mark.f.id, "strikeSurvived", { worldDay: currentWorldDay });
+          // ⛔ SNG-596 — A STRIKE TURNED ASIDE IS NEWS: Aevi's "better one", and until now the only strike that said nothing.
+          // ⚠️ NOT when the mark is the PLAYER — a strike on them is the GM's to tell (SNG-310). And a guard who is the player is
+          // never named: `planStrike` chose them from the pool; they did not choose to stand there.
+          if (mark.f.id !== PLAYER_MARK_ID) {
+            const byGuard = guard.f.id !== PLAYER_MARK_ID ? guard.f : null;
+            const placeId = clashPlaceOf(sender.f, mark.f);
+            news.push({ text: strikeLine({ templates: strikeVoice.templates, strike: kind, outcome: "guarded", sender: sender.f, target: mark.f,
+                guard: byGuard, place: strikeVoice.place(placeId), arc: strikeArc, flavor: strikeFlavor,
+                // the guard WON this one, so the power is the guard's — the same deterministic pick every fight uses
+                guardPower: byGuard ? strikeVoice.power(signatureOf(byGuard, sender.f, abilitiesByTradition)) : null }),
+              kind: "strike", strike: kind, outcome: "guarded", winnerId: byGuard?.id || null, loserId: sender.f.id, figureId: mark.f.id,
+              locationId: placeId, arcId, worldDay: currentWorldDay, tier: "event" });
+          }
           continue;
         }
         const clash = resolveEpicClash(sender.f, mark.f, rng, { abilitiesByTradition });
@@ -3130,7 +3156,11 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
           // route in the system: a campaign of strikes can turn an arc you never once contested.
           (removedDefender[arcId] ||= new Set()).add(sender.f.id);
           if (outcome.finalKind !== "killed") creditDeed(ws, mark.f.id, "strikeSurvived", { worldDay: currentWorldDay });
-          for (const line of (outcome.news || [])) news.push(clashNewsItem(line, { worldDay: currentWorldDay, arcId }));
+          // ⛔ SNG-596: THE SAME ITEM — still a fight the player can open — but it says it was a strike, over which arc, and where.
+          // Measured before this: every landed strike read as a duel, so none of them could be found as one.
+          const struck = strikeLine({ templates: strikeVoice.templates, strike: kind, outcome: outcome.finalKind, sender: sender.f, target: mark.f,
+            place: strikeVoice.place(outcome.locationId), arc: strikeArc, flavor: strikeFlavor, power: strikeVoice.power(outcome.abilityId) });
+          for (const line of (outcome.news || [])) news.push(clashNewsItem(line, { worldDay: currentWorldDay, arcId, strike: kind, text: struck }));
         }
       }
 

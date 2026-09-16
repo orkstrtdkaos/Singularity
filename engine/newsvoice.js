@@ -122,6 +122,95 @@ export function clashLine({ templates, outcome, winner, loser, place = null, pow
   return fillTemplate(tpl, { W: winner?.name || "someone", L: loser?.name || "someone", place, power });
 }
 
+/** ⛔ SNG-596 — A STRIKE IS NEWS, AND SAYS IT WAS ONE. Erik, reading the world tab: "I see that certain people are being subject
+ *  to Strikes — which is fantastic… but I don't see those surfacing in the news?"
+ *
+ *  ⚑ MEASURED ON THE LIVE SAVES, 14 strikes across 10: the 9 that LANDED were in the news all along — as a duel line ("The One
+ *  With a Hundred Faces turned Halvex Coil, the Rewriter back at The Service Ways") that never says a strike happened, so nobody
+ *  could find one; the 5 a GUARD turned aside produced nothing at all.
+ *
+ *  ⛔ AND THEN, ERIK AGAIN: "dont' just say 'came quietly' — try to get the flavor of who was sent included... was it an Umbral
+ *  Assassin who used darkness, a radiant sniper, a marcher who tried a direct assault? how did they escape or win, did they have
+ *  help, who and how?" ⛑ ALL OF IT IS ALREADY AUTHORED, and none of it was read here: 66 of 70 legends carry a `fightingStyle`
+ *  written as "role, how" ("devourer, fighting from the dark they brought"; "builder, ending it with mass"), every tradition
+ *  has its name, and the resolver already picks each side's signature power deterministically. So a strike says WHO came (a
+ *  devourer of the Umbrals), HOW (their authored manner, and the power), who STOOD IN THE WAY and how, and what it cost: a quiet
+ *  striker turned aside gets away but not unseen, which is exactly what exposure is. ⚠️ "Did they have help" is honest: the
+ *  world sim sends a striker ALONE — the only help in a strike is the guard, and the line names them. Nothing is invented.
+ *
+ *  ⚠️ THE WORDS ARE AEVI'S ("say which shapes you are emitting and I will write the lines"). An authored
+ *  `templates.strike.<quiet|crusade>.<killed|wounded|checked|stalemate|guarded|turned>` — a string or a list — wins; these are
+ *  the engine's fallback until then. Slots: {S} {T} {G} sender, target, guard · {s} {t} {g} short forms · {sWho} {tWho} {gWho}
+ *  ("a devourer of the Umbrals") · {sHow} {tHow} {gHow} (the authored manner) · {power} (the striker's) · {gPower} (the
+ *  guard's) · {place} · {arc}. ⛑ A segment in [square brackets] is kept only when every slot inside it has a value, so a
+ *  minted figure with no fighting style reads cleanly instead of printing an empty comma. `turned` is a strike turned aside
+ *  with no guard the news may name. */
+export const STRIKE_FALLBACK = {
+  quiet: {
+    killed: "A strike[ over {arc}]: {S}[, {sWho},] came for {T}[ at {place}][, {sHow}][, with {power}] — and {t} is dead.",
+    wounded: "A strike[ over {arc}]: {S}[, {sWho},] came for {T}[ at {place}][, {sHow}][, with {power}]. {t} lived, and is hurt.",
+    checked: "A strike[ over {arc}]: {S}[, {sWho},] came for {T}[ at {place}][, {sHow}][, with {power}], and checked {t} — that work is held for now.",
+    stalemate: "A strike[ over {arc}]: {S}[, {sWho},] came for {T}[ at {place}][, {sHow}] — and {t} stood[, {tHow}]. Neither broke.",
+    guarded: "A strike[ over {arc}], turned aside: {S}[, {sWho},] came for {T}[, {sHow}] — and {G}[, {gWho},] stood in the way[, {gHow}][, with {gPower}]. {s} got away, but not unseen.",
+    turned: "A strike[ over {arc}], turned aside: {S}[, {sWho},] came for {T}[, {sHow}], and did not reach them. {s} got away, but not unseen.",
+  },
+  crusade: {
+    killed: "{S}[, {sWho},] came openly for {T}[ over {arc}][ at {place}][, {sHow}][, with {power}] — and {t} is dead.",
+    wounded: "{S}[, {sWho},] came openly for {T}[ over {arc}][ at {place}][, {sHow}][, with {power}]. {t} lived, and is hurt.",
+    checked: "{S}[, {sWho},] came openly for {T}[ over {arc}][ at {place}][, {sHow}][, with {power}], and held {t}.",
+    stalemate: "{S}[, {sWho},] came openly for {T}[ over {arc}][ at {place}][, {sHow}] — and {t} stood[, {tHow}]. Neither broke.",
+    guarded: "{S}[, {sWho},] came openly for {T}[ over {arc}][, {sHow}] — and {G}[, {gWho},] stood in the way[, {gHow}][, with {gPower}].",
+    turned: "{S}[, {sWho},] came openly for {T}[ over {arc}][, {sHow}], and was turned aside.",
+  },
+};
+
+/** WHO SOMEONE IS AND HOW THEY FIGHT, from what is authored about them: `fightingStyle` is "role, how", and the tradition has a
+ *  name. "a devourer of the Umbrals" / "fighting from the dark they brought". Either half may be empty; nothing is guessed. */
+export function figureFlavor(f, content) {
+  const style = typeof f?.fightingStyle === "string" ? f.fightingStyle.trim() : "";
+  const comma = style.indexOf(",");
+  const role = comma > 0 ? style.slice(0, comma).trim() : "";
+  const how = comma > 0 ? style.slice(comma + 1).trim().replace(/[.\s]+$/, "") : "";
+  const trad = f?.tradition || f?.legend?.tradition || null;
+  const tname = trad ? (content?.traditionIndex?.byId?.[trad]?.name || null) : null;
+  const of = tname && !isIdShaped(tname) ? String(tname).trim().replace(/^The\s+/, "the ") : null;
+  const who = role && of ? `${/^[aeiou]/i.test(role) ? "an" : "a"} ${role} of ${of}` : (of ? `of ${of}` : "");
+  return { who, how };
+}
+
+/** Fill a strike template: [optional segments] first, then the slots, then the spacing a dropped segment leaves behind. */
+function fillStrike(tpl, slots) {
+  const val = (k) => { const v = slots[k]; return v == null ? "" : String(v).trim(); };
+  let out = String(tpl || "")
+    // an older authored shape without brackets still loses its phrase when the slot is empty
+    .replace(/ at \{place\}/g, (m) => (val("place") ? m : ""))
+    .replace(/ over \{arc\}/g, (m) => (val("arc") ? m : ""))
+    .replace(/\[([^\[\]]*)\]/g, (m, seg) => ([...seg.matchAll(/\{(\w+)\}/g)].every(x => val(x[1])) ? seg : ""));
+  out = out.replace(/\{(\w+)\}/g, (m, k) => val(k));
+  return out.replace(/\s{2,}/g, " ").replace(/\s+([,.;:])/g, "$1").trim();
+}
+
+export function strikeLine({ templates, strike = "quiet", outcome, sender, target, guard = null, place = null, arc = null,
+                             power = null, guardPower = null, flavor = null } = {}) {
+  const k = strike === "crusade" ? "crusade" : "quiet";
+  const key = outcome === "guarded" ? (guard ? "guarded" : "turned") : OUTCOME_TEMPLATE_KEY[outcome];
+  if (!key) return null;
+  const authored = templates?.strike?.[k]?.[key];
+  const pool = (Array.isArray(authored) ? authored : [authored]).filter(t => typeof t === "string" && t.trim());
+  const tpl = pool.length ? pool[pickIndex(`${sender?.id}|${target?.id}|${outcome}|${k}`, pool.length)] : STRIKE_FALLBACK[k][key];
+  const fl = (f) => (f && typeof flavor === "function" ? (flavor(f) || {}) : {});
+  const sf = fl(sender), tf = fl(target), gf = guard ? fl(guard) : {};
+  const S = sender?.name || "someone", T = target?.name || "someone", G = guard?.name || "";
+  const noId = (x) => (x && !isIdShaped(x) ? String(x).trim() : "");
+  return fillStrike(tpl, {
+    S, T, G, s: shortName(S), t: shortName(T), g: G ? shortName(G) : "",
+    sWho: sf.who, sHow: sf.how, tWho: tf.who, tHow: tf.how, gWho: gf.who, gHow: gf.how,
+    power: noId(power), gPower: noId(guardPower), place: noId(place),
+    // an arc's name mid-sentence: "over the Green Schism", never "over The Green Schism"
+    arc: noId(arc).replace(/^The\s+/, "the "),
+  });
+}
+
 /** SNG-433 §2.2 — WHICH GRAMMAR THE FRAGMENT IS.
  *
  *  ⛔ AEVI'S SHAPE TEST IS RIGHT AND HER FIELD HINT IS BACKWARDS, AND THE CONTENT SAYS SO. Her `_when` for

@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "id": "dev_report",
-  "at": "2026-09-14T17:12:35.198Z",
-  "build": "1.9.536",
+  "at": "2026-09-16T14:27:43.128Z",
+  "build": "2.0.20",
   "character": {
     "id": "char-mrhs8286",
     "name": "Silas Weir",
     "playerKey": "player-s9z9u1",
     "level": 33,
-    "rev": 2099,
+    "rev": 2102,
     "day": 18,
     "turns": 369,
     "countingSince": null,
@@ -16,7 +16,9 @@
   },
   "contract": {
     "axesDropped": [],
-    "axesDroppedN": 0
+    "axesDroppedN": 0,
+    "handoverRefused": [],
+    "handoverRefusedN": 0
   },
   "ops": {
     "emitted": {
@@ -127,6 +129,6 @@
   "world": {
     "locations": 142,
     "abilities": 440,
-    "npcs": 166
+    "npcs": 170
   }
 }

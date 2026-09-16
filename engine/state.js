@@ -4,6 +4,7 @@
 // configured. Content packs always load from the served repo files.
 
 import { APP_VERSION } from "./version.js";   // ⛔ every authored file carries the build, or a browser answers a new app.js from last release's cache
+import { answeredEventLine } from "./worldevents.js";   // CCODE-354: a crisis another traveler answered reads as answered
 import { walkingDays } from "./worldmap.js";   // resolveLocationId: the nearest of several same-name places
 import { martialAbilityRecords } from "./martial.js";
 import { reconcileContent } from "./reconcile.js";
@@ -1005,10 +1006,14 @@ export function loreRefStatus(location, loreMap) {
 }
 
 /** Active-event summaries for the GM, including the GM-eyes-only truth. */
-export function eventsForGM(region, eventMap) {
-  return (region.activeEvents || []).map(({ eventId, stage }) => {
+export function eventsForGM(region, eventMap, { quests = [], selfId = null } = {}) {
+  return (region.activeEvents || []).map(({ eventId, stage, resolved }) => {
     const ev = eventMap[eventId];
     if (!ev) return null;
+    // ⛔ CCODE-354: AN ANSWERED CRISIS READS AS ANSWERED — who, when, the damage it had done, and the world its authors
+    // wrote for after. ⚠️ WITHOUT `ev.truth`: that is the GM-eyes account of a danger still running, and handing it over
+    // beside "answered" is how the river starts waking again in the prose.
+    if (resolved) return { eventId, stage, resolved: true, summaryForGM: answeredEventLine(ev, { stage, resolved }, { quests, selfId }) };
     const st = ev.stages?.find(s => s.stage === stage);
     return { eventId, stage, summaryForGM: `${ev.name} — stage ${stage} (${st?.name}): ${st?.summary} ${ev.truth || ""}` };
   }).filter(Boolean);

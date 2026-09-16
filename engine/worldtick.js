@@ -37,8 +37,9 @@ import { newsVoiceOf, clashLine, fragmentLine } from "./newsvoice.js";
 const KNOWN_TIERS = new Set(["mythic", "legendary", "epic", "heroic", "regional", "notable", "riffraff"]);   // SNG-269: ONE ladder — worldtick had its own copy and it drifted
 import { smartClamp } from "./namematch.js"; // SNG-076: word-boundary clamp for the away-digest/news
 import { generatedRecords } from "./generate.js";
-import { syncEnabled, fetchRepoJSON, fetchLedgerMonths, fetchLedgerAll, pushOwnedFile, pushMergedFile } from "./sync.js";
+import { syncEnabled, fetchRepoJSON, fetchLedgerMonths, fetchLedgerAll, pushMergedFile } from "./sync.js";   // CCODE-354: no owned-file writes left here — the region file is shared
 import { travelerCard, cardChanged, mergeTravelerCard, ledgerMonthsSince } from "./travelers.js";   // SNG-595: a fellow traveler is a person the world has a record of
+import { stampEventChange, mergeEventStages, mergeQuestOutcomes, actorOf, questKey } from "./worldevents.js";   // CCODE-354: a crisis another traveler answered reads as answered
 import { decayWakes, wakeArcPush } from "./wake.js"; // SNG-204: wakes decay on the tick + lean on connected arcs
 import { enterDeathState, deepenDeaths, deathDepth, isRetrievable, resolveRetrieval } from "./death.js"; // SNG-209: a killed figure ENTERS the death state; the clock sinks untended deaths toward sealed
 import { absoluteWorldDay, worldDayAt, worldCount, readClock } from "./worldtime.js";
@@ -241,7 +242,9 @@ export function buildRegionView(content, character) {
   if (!region) return { activeEvents: [] };
   const activeEvents = (region.activeEvents || []).map(({ eventId, stage }) => ({
     eventId,
-    stage: ws?.eventStages?.[eventId]?.stage ?? stage
+    stage: ws?.eventStages?.[eventId]?.stage ?? stage,
+    // ⛔ CCODE-354: and whether it is over. Every reader of a stage number reads it from here.
+    ...(ws?.eventStages?.[eventId]?.resolved ? { resolved: ws.eventStages[eventId].resolved } : {})
   }));
   return { ...region, activeEvents };
 }
@@ -589,6 +592,12 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
     const ev = content?.events?.[eventId];
     if (!ev) continue;
     let st = ws.eventStages[eventId] || (ws.eventStages[eventId] = { stage, sinceDay: ws.lastTickDay });
+    // ⛔ CCODE-354: AN ANSWERED CRISIS DOES NOT WORSEN. Nothing could mark one answered before this, so the loop never had
+    // to ask — and a resolution adopted from another traveler would otherwise be ticked straight back up to The Brink.
+    if (st.resolved) continue;
+    // ⚑ every change below is STAMPED, because the shared merge now keeps the LATEST state rather than the worst one, and
+    // an unstamped change cannot win it. The actor is named only for easing: easing is somebody's work, worsening is neglect.
+    const wdNow354 = (() => { try { return absoluteWorldDay(); } catch { return null; } })();
     let guard = 0;
     while (guard++ < 10) {
       const def = ev.stages.find(s => s.stage === st.stage);
@@ -598,6 +607,7 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
       if (helped >= 2 && st.stage > 1) {
         // eased — strong, sustained delegated work pushes the crisis a stage back toward resolution.
         st.sinceDay += def.days; st.stage = st.stage - 1;
+        stampEventChange(st, { by: actorOf(character), worldDay: wdNow354 });
         for (const [ax, v] of Object.entries(def.spectrumShift || {})) ws.spectrumDrift[ax] = clampDrift((ws.spectrumDrift[ax] || 0) - v); // unwind this stage's pressure
         const now = ev.stages.find(s => s.stage === st.stage);
         news.push(`${ev.name} has EASED — the delegated work held and pushed it back${now ? ` to ${now.name}` : ""}.`);
@@ -614,6 +624,7 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
       if (!next) break;
       st.sinceDay += def.days;
       st.stage = next.stage;
+      stampEventChange(st, { by: null, worldDay: wdNow354 });
       for (const [ax, v] of Object.entries(next.spectrumShift || {})) ws.spectrumDrift[ax] = clampDrift((ws.spectrumDrift[ax] || 0) + v);
       news.push(`${ev.name} has worsened — ${next.name}: ${next.summary}`);
     }
@@ -861,19 +872,41 @@ export async function syncSharedWorld({ character, content }) {
   const ws = character.worldState;
   const news = [];
   try {
-    // 1. merge remote region state: the world is as far along as ANYONE has seen it
+    // 1. merge remote region state.
+    // ⛔ CCODE-354 — THIS WAS "the world is as far along as ANYONE has seen it": `if (!local || st.stage > local.stage)`.
+    // Escalation crossed because it is higher and easing was thrown away because it is lower, so a crisis could get
+    // worse for everyone and better for no one — and nothing could mark one answered at all. Silas answered the water
+    // crisis on world-day 26; every world still read First Sickness fifty days later. ⛑ Now the LATEST state wins (Aevi:
+    // "a state is overtaken by the most recent actor — never by the worst one"), an ANSWER beats any question, and the
+    // news says who.
     const remote = await fetchRepoJSON("world/regions/valley.json");
+    const localTickDay354 = Number(ws.lastTickDay) || 1;
     if (remote?.eventStages) {
-      for (const [eventId, st] of Object.entries(remote.eventStages)) {
-        const local = ws.eventStages[eventId];
-        if (!local || st.stage > local.stage) {
-          ws.eventStages[eventId] = { ...st };
-          const ev = content.events[eventId];
-          const def = ev?.stages.find(s => s.stage === st.stage);
-          if (ev && def) news.push({ text: `${ev.name} stands at ${def.name} across the valley: ${def.summary}`, worldDay: absoluteWorldDay() });
+      const { merged, adopted } = mergeEventStages(ws.eventStages, remote.eventStages);
+      for (const { eventId, before, after } of adopted) {
+        // ⚠️ `sinceDay` is a CHARACTER's clock, and the remote one is somebody else's — adopting it would start this save's
+        // timer at another player's day count. The adopted state starts its interval here.
+        merged[eventId] = { ...merged[eventId], sinceDay: localTickDay354 };
+        const ev = content.events?.[eventId];
+        if (!ev) continue;
+        if (after.resolved && !before?.resolved) {
+          const r = after.resolved;
+          const quest = (content.quests || []).find(q => questKey(q.id) === questKey(r.questId));
+          news.push({ text: `${ev.name} has been answered${r.by?.name ? ` — ${r.by.name} saw ${quest?.name || quest?.title || "it"} through` : ""}${r.outcomeName ? ` (${r.outcomeName})` : ""}.`,
+            worldDay: r.worldDay ?? absoluteWorldDay() });
+          continue;
         }
+        const def = ev.stages?.find(x => x.stage === after.stage);
+        if (!def) continue;
+        const eased = before && Number(after.stage) < Number(before.stage);
+        news.push({ text: eased
+            ? `${ev.name} has eased to ${def.name} across the valley${after.by?.name ? ` — word credits ${after.by.name}` : ""}.`
+            : `${ev.name} stands at ${def.name} across the valley: ${def.summary}`,
+          worldDay: after.atWorldDay ?? absoluteWorldDay() });
       }
+      ws.eventStages = merged;
     }
+    if (remote?.questOutcomes) ws.questOutcomes = mergeQuestOutcomes(ws.questOutcomes || {}, remote.questOutcomes);
     if (remote?.spectrumDrift) {
       for (const [ax, v] of Object.entries(remote.spectrumDrift)) {
         if (Math.abs(v) > Math.abs(ws.spectrumDrift[ax] || 0)) ws.spectrumDrift[ax] = v;
@@ -912,16 +945,30 @@ export async function syncSharedWorld({ character, content }) {
       impactsLocal: !!e.impactsLocal // SNG-041: a boundary-crossing distant event (far-world → local frame)
     });
     ws.lastSharedReadAt = new Date().toISOString();
-    // 3. push the consolidated region state back (SHA-retry inside pushOwnedFile)
-    await pushOwnedFile("world/regions/valley.json", {
-      schemaVersion: 1, regionId: "valley",
-      // ⛔ CCODE-195: THE `calendar` KEY IS GONE. It had ONE writer and ZERO readers, and what it wrote
-      // was invented: a hardcoded `season: "late-spring", year: 15` pushed into the file every other player
-      // reads. `remote?.calendar ||` then preserved the first invention forever. A fabricated fact in shared
-      // state is worse than a missing one — a missing field is obviously absent, and that one looked authored.
-      activeEvents: (content.region.activeEvents || []).map(({ eventId, stage }) => ({ eventId, stage: ws.eventStages[eventId]?.stage ?? stage })),
-      eventStages: ws.eventStages, spectrumDrift: ws.spectrumDrift,
-      worldFlags: remote?.worldFlags || {}, lastTick: new Date().toISOString()
+    // 3. push the consolidated region state back.
+    // ⛔ CCODE-354: THROUGH THE MERGE, NOT OVER IT. This was `pushOwnedFile` — an overwrite of a file EVERY client writes,
+    // which Law 7 reserves for files a client owns. A resolution another traveler landed between our read and this write
+    // was simply replaced. ⛑ The merge re-runs against the freshly-read remote on every attempt, and anything that won
+    // there is adopted locally too, so the file and this save agree when it lands.
+    await pushMergedFile("world/regions/valley.json", (fresh) => {
+      const { merged } = mergeEventStages(ws.eventStages, fresh?.eventStages || {});
+      for (const id of Object.keys(merged)) {
+        if (!ws.eventStages[id] || merged[id] !== ws.eventStages[id]) {
+          const keepSince = ws.eventStages[id]?.sinceDay ?? localTickDay354;
+          ws.eventStages[id] = { ...merged[id], sinceDay: keepSince };
+        }
+      }
+      ws.questOutcomes = mergeQuestOutcomes(ws.questOutcomes || {}, fresh?.questOutcomes || {});
+      return {
+        schemaVersion: 1, regionId: "valley",
+        // ⛔ CCODE-195: THE `calendar` KEY IS GONE. It had ONE writer and ZERO readers, and what it wrote
+        // was invented: a hardcoded `season: "late-spring", year: 15` pushed into the file every other player
+        // reads. `remote?.calendar ||` then preserved the first invention forever. A fabricated fact in shared
+        // state is worse than a missing one — a missing field is obviously absent, and that one looked authored.
+        activeEvents: (content.region.activeEvents || []).map(({ eventId, stage }) => ({ eventId, stage: ws.eventStages[eventId]?.stage ?? stage })),
+        eventStages: ws.eventStages, questOutcomes: ws.questOutcomes, spectrumDrift: ws.spectrumDrift,
+        worldFlags: fresh?.worldFlags || remote?.worldFlags || {}, lastTick: new Date().toISOString()
+      };
     }, `world-tick: consolidated by ${character.name}`);
     // SNG-203 Phase 2B: greater arcs are a NET VECTOR of per-actor pushes, in their own shared file. Each
     // actor owns byActor[characterId]; the canonical stage is base + Σ pushes, so an arc moves BOTH ways —
@@ -3735,6 +3782,7 @@ async function aiAssignmentAdvancement({ character, content, assignments, elapse
   const crises = (content.region.activeEvents || []).map(({ eventId }) => {
     const ev = content.events[eventId];
     const st = character.worldState.eventStages[eventId];
+    if (st?.resolved) return ev ? `- ${eventId}: ${ev.name} — ANSWERED (it is over; work set against it now bears on the aftermath)` : null;   // CCODE-354
     const def = ev?.stages.find(s => s.stage === (st?.stage ?? 1));
     return ev ? `- ${eventId}: ${ev.name} — ${def?.name}: ${def?.summary}` : null;
   }).filter(Boolean).join("\n");

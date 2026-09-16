@@ -10,7 +10,23 @@
   "eventStages": {
     "water_crisis": {
       "stage": 2,
-      "sinceDay": 13
+      "sinceDay": 13,
+      "rev": 1,
+      "atWorldDay": 26,
+      "by": {
+        "id": "char-mrhs8286",
+        "name": "Silas Weir"
+      },
+      "resolved": {
+        "outcome": "redirected",
+        "outcomeName": "The Instruction Rewritten",
+        "questId": "what-the-water-remembers",
+        "by": {
+          "id": "char-mrhs8286",
+          "name": "Silas Weir"
+        },
+        "worldDay": 26
+      }
     }
   },
   "spectrumDrift": {
@@ -19,5 +35,17 @@
     "falsehood_truth": -0.05
   },
   "worldFlags": {},
-  "lastTick": "2026-09-16T13:25:59.218Z"
+  "lastTick": "2026-09-16T13:25:59.218Z",
+  "questOutcomes": {
+    "what-the-water-remembers": {
+      "outcome": "redirected",
+      "outcomeName": "The Instruction Rewritten",
+      "by": {
+        "id": "char-mrhs8286",
+        "name": "Silas Weir"
+      },
+      "worldDay": 26,
+      "rev": 1
+    }
+  }
 }

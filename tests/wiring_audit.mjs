@@ -77,7 +77,12 @@ check("all registry rows declare their full chain (builder/carries/reachedBy/spe
 // ---------- 2. call-site discipline ----------
 const appSrc = read("app.js");
 const gmCalls = [...appSrc.matchAll(/gm(?:Turn|Ask)\(/g)].length;
-const assembled = [...appSrc.matchAll(/gm(?:Turn|Ask)\(assembleGMContext\(/g)].length;
+// ⚠️ CCODE-354: THIS PINNED A SPELLING. It counted only `gmTurn(assembleGMContext(` written inline, so binding the assembled
+// context to a variable — which the turn needs, to know which rows actually reached the GM — read as "hand-listed". The claim
+// is that the ctx COMES FROM the registry: inline, or through a `const` bound directly to `assembleGMContext(`.
+const assembledVars = new Set([...appSrc.matchAll(/const (\w+) = assembleGMContext\(/g)].map(m => m[1]));
+const assembled = [...appSrc.matchAll(/gm(?:Turn|Ask)\((assembleGMContext\(|(\w+)[,)])/g)]
+  .filter(m => m[1].startsWith("assembleGMContext(") || assembledVars.has(m[2])).length;
 check(`all ${gmCalls} play-loop gmTurn/gmAsk call sites assemble via the registry`, gmCalls > 0 && gmCalls === assembled,
   `${gmCalls - assembled} call site(s) hand-list their ctx`);
 const views = new Set([...appSrc.matchAll(/assembleGMContext\("(\w+)"/g)].map(m => m[1]));

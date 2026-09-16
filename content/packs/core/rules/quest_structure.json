@@ -33,6 +33,7 @@
     "disposition": "a PEOPLE's stance toward you (+/- integer)",
     "codex_fact": "a permanent, findable record; `secret:true` = yours alone",
     "world_event": "propagates on the shared clock; `delayDays` = when it reaches you",
+    "event_resolve": "a world EVENT is answered for everyone (`eventId`) — the shared record carries the outcome, who and when, and the event stops advancing (CCODE-354)",
     "location_state": "a place changes",
     "quest_seed": "this outcome opens the next thing",
     "ally": "an NPC becomes bound to you",

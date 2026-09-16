@@ -41,6 +41,7 @@ import { caravansForGM } from "./caravan.js";   // R49: loads on the road
 import { loreForLocation, eventsForGM, traditionMotivationsForGM } from "./state.js";
 import { buildRegionView, newsForGM, worldArcsForGM, collapseLedgerEvents } from "./worldtick.js";
 import { travelersForGM } from "./travelers.js";   // SNG-595: a name that belongs to another player
+import { worldMovedOnForGM } from "./worldevents.js";   // CCODE-354: the world moved on while this character believed otherwise
 import { SEXUAL_MARKERS, HARD_INTENSITY_MARKERS } from "./canon.js";   // SNG-595: the family floor, for rows with no rating
 import { isMinorProfile } from "./playerprofile.js";
 import { inventoryForGM } from "./inventory.js";
@@ -93,7 +94,8 @@ export const GM_CONTEXT = [
     build: (env) => env.location },
   { key: "region", builder: "worldtick.buildRegionView + state.eventsForGM", carries: ["region facts", "active events"],
     reachedBy: "always", spec: "§9", views: ALL,
-    build: (env) => ({ ...env.CONTENT.region, activeEvents: eventsForGM(buildRegionView(env.CONTENT, env.character), env.CONTENT.events) }) },
+    build: (env) => ({ ...env.CONTENT.region, activeEvents: eventsForGM(buildRegionView(env.CONTENT, env.character), env.CONTENT.events,
+      { quests: env.CONTENT.quests || [], selfId: env.character?.id || null }) }) },   // CCODE-354: an answered crisis names its aftermath
   // ⛔ R28 (ERIK 2026-09-02) — "Where a place is hand-authored, the authored ground is the truth."
   // ⚠️ 18 of 135 places have a layout; the other 117 send nothing, which is the dominant case and must
   // read as deliberate rather than broken. ⛔ THE FILE WAS AUTHORED IN AUGUST AND READ ONLY BY A TEST —
@@ -572,6 +574,12 @@ export const GM_CONTEXT = [
   // on the shared ledger and Edvar is in the shared world because of him; nothing read either BY PERSON, and nothing said
   // "Silas Weir" was a player at all — so the GM invented him. ⚠️ The words searched are this turn's AND the last two
   // beats', because a conversation about someone does not repeat their name every line.
+  // ⛔ CCODE-354 (Erik: "her particular quest needs to morph into discovering that the water coming down the watershed IS
+  // clean now") — for a few beats after a character's world first carries an answer somebody else made. Adelheid's codex
+  // still says the water is "actively waking"; this is the row that lets the story tell her otherwise.
+  { key: "worldMovedOnDetail", builder: "worldevents.worldMovedOnForGM (CCODE-354)", carries: ["a crisis another traveler answered, for the first beats after this world learns it"],
+    reachedBy: "always (empty unless an answered event this character did not make is still within its beats)", spec: "CCODE-354", views: ["turn", "ask"],
+    build: (env) => worldMovedOnForGM(env.character, { events: env.CONTENT?.events || {}, quests: env.CONTENT?.quests || [] }) },
   { key: "travelersDetail", builder: "travelers.travelersForGM (SNG-595)", carries: ["another player's character the words named", "their public deeds, every ledger month", "who in this story was part of theirs"],
     reachedBy: "always (empty unless the words, or the last two beats, name another traveler)", spec: "SNG-595", views: ["turn", "ask"],
     build: (env) => travelersForGM(

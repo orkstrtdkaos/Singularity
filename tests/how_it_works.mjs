@@ -17487,6 +17487,213 @@ console.log("\n── §245 · a fellow traveler is a person the world has a rec
     `${cards245.length} cards`);
 }
 
+
+// ⛔ CCODE-354 (Erik, 2026-09-16) — "IF the crisis somehow reset to that point, then I could see that... but the Intent is to
+// have the world living and breathing and changing for everyone. So - her particular quest needs to morph into discovering
+// that the water coming down the watershed IS clean now..."
+// ⛔ Aevi, SNG-595, the same morning: "A stage is a STATE, and a state is overtaken by the most recent actor — never by the
+// worst one." And: "THE MERGE MUST CARRY WHO."
+//
+// ⚑ MEASURED: the shared merge adopted a remote stage only when it was HIGHER, so escalation crossed and easing was thrown
+// away; no effect, op or tick could mark a crisis answered; and the region file was an OVERWRITE of a file every client
+// writes. Silas answered the water crisis on world-day 26 and every world still read First Sickness fifty days later.
+//
+// ⛑ FIXTURES ARE CONSTRUCTED. The live region file is rewritten by every client's tick — a gate that read it would be
+// measuring whoever synced last.
+console.log("\n── §246 · a crisis another traveler answered reads as answered, for everyone ──");
+{
+  const WE246 = await import("../engine/worldevents.js");
+  const W246 = await import("../engine/worldtick.js");
+  const ST246 = await import("../engine/state.js");
+  const Q246 = await import("../engine/quests.js");
+  const GM246 = await import("../engine/gm.js");
+  const REG246 = await import("../engine/gm_registry.js");
+  const { loadContentHeadless: lch246 } = await import("./headless_content.mjs");
+  const C246 = await lch246();
+  const silas246 = { id: "char-s", name: "Silas Weir" };
+
+  /* ---- 1 · ⛔ THE MERGE: LATEST, NOT WORST; AN ANSWER BEATS A QUESTION ---- */
+  const pick = (l, r) => WE246.latestEventState(l, r).from;
+  check("§246: ⚠️ two states nobody ever stamped keep the old rule exactly — the higher stage — because both were written under it",
+    pick({ stage: 2 }, { stage: 3 }) === "remote" && pick({ stage: 3 }, { stage: 2 }) === "local");
+  check("§246: ⛔ EASING CROSSES — a later, lower stage beats an earlier, higher one",
+    pick({ stage: 2, rev: 1 }, { stage: 1, rev: 2 }) === "remote");
+  check("§246: ⛔ AN ANSWER BEATS A QUESTION whatever the revisions say — an offline client ticking its own copy upward cannot un-answer the world",
+    pick({ stage: 4, rev: 9 }, { stage: 2, rev: 1, resolved: { outcome: "x" } }) === "remote"
+    && pick({ stage: 2, rev: 1, resolved: { outcome: "x" } }, { stage: 4, rev: 9 }) === "local");
+  const same246 = WE246.mergeEventStages({ w: { stage: 2, sinceDay: 3, rev: 1 } }, { w: { stage: 2, sinceDay: 40, rev: 1 } });
+  check("§246: …and a state that differs only by somebody else's day-count is not news",
+    same246.adopted.length === 0);
+
+  /* ---- 2 · ⛔ THE TICK: AN ANSWERED CRISIS DOES NOT WORSEN, AND EVERY CHANGE IS STAMPED ---- */
+  const ev246 = { id: "w", name: "The Test Crisis", truth: "GM-EYES ONLY: the thing beneath is waking", stages: [
+    { stage: 1, name: "One", summary: "first", days: 2, spectrumShift: {} }, { stage: 2, name: "Two", summary: "families fall ill", days: 2, spectrumShift: {} },
+    { stage: 3, name: "Three", summary: "rationing", days: 2, spectrumShift: {} }, { stage: 4, name: "Four", summary: "the brink", days: 999, spectrumShift: {} }] };
+  const tickContent246 = { locations: {}, rules: {}, npcs: {}, items: {}, abilities: {}, region: { activeEvents: [{ eventId: "w", stage: 2 }] }, events: { w: ev246 } };
+  const pc246 = (resolved) => ({ id: "pc246", name: "Tester", clock: { day: 40 }, holdings: [], company: [], npcRegistry: {}, deeds: [],
+    worldState: { lastTickDay: 1, news: [], unseenNews: [], spectrumDrift: {}, eventStages: { w: { stage: 2, sinceDay: 1,
+      ...(resolved ? { rev: 1, resolved: { outcome: "x", by: silas246, worldDay: 5 } } : {}) } } } });
+  const open246 = pc246(false), shut246 = pc246(true);
+  await W246.runWorldTick({ character: open246, content: tickContent246, currentDay: 40, advanceAssignments: async () => ({ advancements: [] }), rng: () => 0.5 });
+  await W246.runWorldTick({ character: shut246, content: tickContent246, currentDay: 40, advanceAssignments: async () => ({ advancements: [] }), rng: () => 0.5 });
+  check("§246: ⛑ the control — an UNANSWERED crisis left untended still worsens, and each worsening is STAMPED so the merge can see it",
+    open246.worldState.eventStages.w.stage === 4 && open246.worldState.eventStages.w.rev === 2,
+    JSON.stringify(open246.worldState.eventStages.w));
+  check("§246: ⛔ …and an ANSWERED one does not move at all, thirty-nine days on",
+    shut246.worldState.eventStages.w.stage === 2 && !!shut246.worldState.eventStages.w.resolved && shut246.worldState.eventStages.w.rev === 1,
+    JSON.stringify(shut246.worldState.eventStages.w));
+
+  /* ---- 3 · ⛔ THE SYNC, AGAINST A FAKE GITHUB, THROUGH THE FUNCTION THE GAME CALLS ---- */
+  const { fakeRemote: fr246 } = await import("./lib/fake_remote.mjs");
+  const remote246 = fr246();
+  const restore246 = remote246.install();
+  try {
+    const put246 = (p, obj) => remote246.files.set(p, { content: JSON.stringify(obj), sha: `seed-${p}` });
+    put246("world/regions/valley.json", { schemaVersion: 1, regionId: "valley", activeEvents: [{ eventId: "w", stage: 2 }],
+      eventStages: {
+        w: { stage: 2, sinceDay: 13, rev: 1, atWorldDay: 26, by: silas246,
+          resolved: { outcome: "redirected", outcomeName: "The Instruction Rewritten", questId: "what-the-water-remembers", by: silas246, worldDay: 26 } },
+        other: { stage: 3, sinceDay: 2, rev: 4 } },
+      questOutcomes: { "what-the-water-remembers": { outcome: "redirected", outcomeName: "The Instruction Rewritten", by: silas246, worldDay: 26, rev: 1 } },
+      spectrumDrift: {}, worldFlags: { keepMe: true } });
+    const syncContent246 = { events: { w: ev246 }, quests: [{ id: "what_the_water_remembers", name: "What the Water Remembers" }],
+      locations: { here: { communityId: "c.here", regionId: "r" } }, region: { activeEvents: [{ eventId: "w", stage: 2 }] } };
+    const adel246 = { id: "char-adel", name: "Adelheid", currentLocationId: "here",
+      worldState: { lastTickDay: 2, eventStages: { w: { stage: 2, sinceDay: 13 } }, spectrumDrift: {}, news: [], unseenNews: [], lastSharedReadAt: new Date().toISOString() } };
+    // ⛔ THE RACE THE MERGE EXISTS FOR: another client lands a change AFTER this one read the file and BEFORE it writes. The
+    // fake's transport is wrapped so the concurrent write happens exactly there — reading first and writing last proves
+    // nothing, because an overwrite also keeps whatever it read.
+    const inner246 = globalThis.fetch;
+    let regionGets246 = 0, raced246 = false;
+    globalThis.fetch = async (url, opts = {}) => {
+      const res = await inner246(url, opts);
+      if ((!opts.method || opts.method === "GET") && String(url).includes("world/regions/valley.json") && ++regionGets246 === 1 && !raced246) {
+        raced246 = true;
+        const cur = JSON.parse(remote246.files.get("world/regions/valley.json").content);
+        cur.eventStages.concurrent = { stage: 1, sinceDay: 4, rev: 7, atWorldDay: 77, by: { id: "char-x", name: "Somebody Else" } };
+        remote246.files.set("world/regions/valley.json", { content: JSON.stringify(cur), sha: "sha-concurrent" });
+      }
+      return res;
+    };
+    try { await W246.syncSharedWorld({ character: adel246, content: syncContent246 }); } finally { globalThis.fetch = inner246; }
+    const wA = adel246.worldState.eventStages.w;
+    check("§246: ⛔ ADELHEID'S CASE — a crisis Silas answered reaches a save that still reads it at stage 2, with who",
+      wA?.resolved?.by?.name === "Silas Weir" && wA.resolved.outcome === "redirected", JSON.stringify(wA));
+    check("§246: ⚠️ …and its timer starts HERE — `sinceDay` is a character's own clock, and Silas's thirteen is not hers",
+      wA?.sinceDay === 2, `sinceDay ${wA?.sinceDay}`);
+    const heard246 = (adel246.worldState.news || []).map(n => n.text).join(" | ");
+    check("§246: ⛔ …and the news says who ended it, and how",
+      /The Test Crisis has been answered — Silas Weir saw What the Water Remembers through \(The Instruction Rewritten\)/.test(heard246), heard246 || "(no news)");
+    check("§246: …and the quest's ending is on her record too, which is what the next board reads",
+      adel246.worldState.questOutcomes?.["what-the-water-remembers"]?.by?.name === "Silas Weir");
+    const after246 = remote246.read("world/regions/valley.json");
+    check("§246: ⛔ THE WRITE IS A MERGE, NOT AN OVERWRITE — a change another client landed between her read and her write survives it",
+      raced246 && after246?.eventStages?.concurrent?.rev === 7 && after246?.eventStages?.other?.rev === 4
+      && after246?.eventStages?.w?.resolved?.by?.name === "Silas Weir" && after246?.worldFlags?.keepMe === true,
+      JSON.stringify({ raced: raced246, concurrent: after246?.eventStages?.concurrent || null, other: after246?.eventStages?.other }));
+    check("§246: …and what won there is hers now too, so the file and her save agree when it lands",
+      adel246.worldState.eventStages.concurrent?.rev === 7);
+
+    // ⛔ EASING, which the old merge threw away every time
+    put246("world/regions/valley.json", { schemaVersion: 1, regionId: "valley", activeEvents: [{ eventId: "w", stage: 2 }],
+      eventStages: { w: { stage: 2, sinceDay: 5, rev: 1 } }, spectrumDrift: {}, worldFlags: {} });
+    const mender246 = { id: "char-m", name: "Mara's Crews", currentLocationId: "here",
+      worldState: { lastTickDay: 9, eventStages: { w: { stage: 1, sinceDay: 9, rev: 2, atWorldDay: 60, by: { id: "char-m", name: "Mara's Crews" } } }, spectrumDrift: {}, news: [], unseenNews: [], lastSharedReadAt: new Date().toISOString() } };
+    await W246.syncSharedWorld({ character: mender246, content: syncContent246 });
+    const eased246 = remote246.read("world/regions/valley.json")?.eventStages?.w;
+    check("§246: ⛔ EASING CROSSES — a save that pushed a crisis back leaves the shared file at the lower stage",
+      eased246?.stage === 1 && eased246?.rev === 2, JSON.stringify(eased246));
+    const late246 = { id: "char-l", name: "Latecomer", currentLocationId: "here",
+      worldState: { lastTickDay: 30, eventStages: { w: { stage: 2, sinceDay: 30 } }, spectrumDrift: {}, news: [], unseenNews: [], lastSharedReadAt: new Date().toISOString() } };
+    await W246.syncSharedWorld({ character: late246, content: syncContent246 });
+    const lateNews246 = (late246.worldState.news || []).map(n => n.text).join(" | ");
+    check("§246: …and the next traveler hears it eased, and whose work it was",
+      late246.worldState.eventStages.w.stage === 1 && /has eased to One across the valley — word credits Mara's Crews/.test(lateNews246), lateNews246 || "(no news)");
+  } finally { restore246(); }
+
+  /* ---- 4 · ⛔ THE READERS: ANSWERED, WITH ITS AFTERMATH, AND WITHOUT THE TRUTH OF A DANGER THAT IS OVER ---- */
+  const water246 = C246.events?.water_crisis;
+  const wtr246 = (C246.quests || []).find(q => WE246.questKey(q.id) === "what-the-water-remembers");
+  const worldNow246 = wtr246?.priorOutcomeBoards?.redirected?._theWorldNow || "";
+  const answered246 = { outcome: "redirected", outcomeName: "The Instruction Rewritten", questId: "what-the-water-remembers", by: { id: "char-mrhs8286", name: "Silas Weir" }, worldDay: 26 };
+  const lines246 = ST246.eventsForGM({ activeEvents: [{ eventId: "water_crisis", stage: 2, resolved: answered246 }] }, C246.events, { quests: C246.quests, selfId: "char-adel" });
+  const line246 = lines246[0]?.summaryForGM || "";
+  check("§246: ⛔ the GM reads the water crisis as ANSWERED — on what day, by whom, and that it was another traveler",
+    /The Water Crisis — ANSWERED on world-day 26, by Silas Weir — another traveler \(The Instruction Rewritten\)/.test(line246) && /never narrate it as active/.test(line246),
+    line246.slice(0, 120));
+  check("§246: ⛑ …with the aftermath Aevi wrote for exactly this reader, and the damage it had done before",
+    !!worldNow246 && line246.includes(worldNow246) && line246.includes(water246.stages.find(x => x.stage === 2).summary));
+  check("§246: ⚠️ …and WITHOUT the event's GM-eyes truth — that truth describes a danger still running",
+    !water246.truth || !line246.includes(String(water246.truth).slice(0, 60)));
+  const openLine246 = ST246.eventsForGM({ activeEvents: [{ eventId: "water_crisis", stage: 2 }] }, C246.events)[0]?.summaryForGM || "";
+  check("§246: …while an unanswered crisis reads exactly as it always did",
+    /The Water Crisis — stage 2 \(/.test(openLine246) && !/ANSWERED/.test(openLine246));
+  const view246 = W246.buildRegionView({ region: { activeEvents: [{ eventId: "water_crisis", stage: 1 }] } }, { worldState: { eventStages: { water_crisis: { stage: 2, resolved: answered246 } } } });
+  check("§246: …and the region view carries the answer to every reader downstream of it",
+    view246.activeEvents[0]?.resolved?.by?.name === "Silas Weir" && view246.activeEvents[0]?.stage === 2);
+
+  /* ---- 5 · ⛔ THE WORLD MOVED ON — FOR A FEW BEATS, NOT FOREVER ---- */
+  const moved246 = { id: "char-adel", name: "Adelheid", worldState: { eventStages: { water_crisis: { stage: 2, resolved: answered246 } } } };
+  const d1 = WE246.worldMovedOnForGM(moved246, { events: C246.events, quests: C246.quests });
+  check("§246: ⛔ a character whose world learned an answer she did not make is told it, plainly",
+    /ANSWERED on world-day 26, by Silas Weir/.test(d1 || ""), (d1 || "(null)").slice(0, 100));
+  for (let i = 0; i < WE246.WORLD_MOVED_ON_BEATS; i++) WE246.noteWorldMovedOnShown(moved246);
+  check("§246: ⚠️ …and after its beats it RESTS — a line that repeats every turn is a mechanism arguing with the story",
+    WE246.worldMovedOnForGM(moved246, { events: C246.events, quests: C246.quests }) === null);
+  const own246 = { id: "char-mrhs8286", name: "Silas Weir", worldState: { eventStages: { water_crisis: { stage: 2, resolved: answered246 } } } };
+  check("§246: …and the one who answered it is never told their own news",
+    WE246.worldMovedOnForGM(own246, { events: C246.events, quests: C246.quests }) === null);
+
+  /* ---- 6 · ⛔ QUESTS: A WORLD-TIER ENDING IS A WORLD FACT, AND THE NEXT TELLING GETS THE NEW BOARD ---- */
+  const ender246 = { id: "char-e", name: "Ender", level: 10, quests: [], worldState: { eventStages: {}, questOutcomes: {} }, npcRegistry: {}, chronicle: [], deeds: [], codex: { topics: {} } };
+  const def246 = { id: "a_test_world_quest", name: "A Test World Quest", tier: "world", axis: "x", premise: "p", stakes: "s",
+    stages: [{ id: "s1", objective: "o", condition: "c" }], routes: {},
+    outcomes: [{ id: "done", name: "Done For Good", summary: "it ends", narration: ["It ends."], effects: [{ type: "event_resolve", eventId: "w" }] }],
+    priorOutcomeBoards: { done: { _theWorldNow: "The test crisis is over and the river runs clear.", premiseShift: "The urgency is gone." } } };
+  Q246.startStructuredQuest(ender246, def246, {});
+  const rec246 = ender246.quests.find(q => WE246.questKey(q.id) === "a-test-world-quest");
+  if (rec246) { rec246.awaitingResolution = true; rec246.stageIndex = rec246.stages.length - 1; }
+  const res246 = Q246.resolveStructuredQuest(ender246, def246.id, "done", { worldDay: 31 });
+  check("§246: ⛔ a WORLD-TIER ending goes on the shared record — outcome, who, and when",
+    res246.ok && ender246.worldState.questOutcomes?.["a-test-world-quest"]?.by?.name === "Ender" && ender246.worldState.questOutcomes["a-test-world-quest"].worldDay === 31,
+    JSON.stringify(res246.ok ? ender246.worldState.questOutcomes : res246));
+  check("§246: ⛔ …and `event_resolve` ANSWERS the event it names — the vocabulary finally has a word that can end a crisis",
+    ender246.worldState.eventStages?.w?.resolved?.outcome === "done" && ender246.worldState.eventStages.w.resolved.by?.name === "Ender"
+    && typeof rj("content/packs/core/rules/quest_structure.json").effectVocabulary?.event_resolve === "string",
+    JSON.stringify(ender246.worldState.eventStages?.w || null));
+  const next246 = { id: "char-n", name: "Next", level: 5, quests: [], worldState: { eventStages: {}, questOutcomes: { ...ender246.worldState.questOutcomes } }, npcRegistry: {}, chronicle: [], deeds: [], codex: { topics: {} } };
+  Q246.startStructuredQuest(next246, def246, {});
+  const board246 = Q246.structuredQuestsForGM(next246, { defs: [def246], npcs: {} }) || "";
+  check("§246: ⛑ the NEXT traveler to take it up gets the board for the world as it now IS — Aevi's, read at last",
+    /THE WORLD HAS MOVED ON: Ender \(another traveler\) already ended this on world-day 31 — Done For Good/.test(board246)
+    && board246.includes("The test crisis is over and the river runs clear."), board246.split("\n").slice(0, 3).join(" / ").slice(0, 160));
+  const self246 = { ...next246, id: "char-e", name: "Ender" };
+  check("§246: …but never the one who ended it, reading their own ending back",
+    !/THE WORLD HAS MOVED ON/.test(Q246.structuredQuestsForGM(self246, { defs: [def246], npcs: {} }) || ""));
+
+  /* ---- 7 · ⛔ THE DOORS ---- */
+  const row246 = REG246.GM_CONTEXT.find(r => r.key === "worldMovedOnDetail");
+  check("§246: ⛔ the world-moved-on row is registered, and both the turn and the ask views reach it",
+    !!row246 && REG246.registryKeys("turn").includes("worldMovedOnDetail") && REG246.registryKeys("ask").includes("worldMovedOnDetail"));
+  const regionRow246 = REG246.GM_CONTEXT.find(r => r.key === "region");
+  const envRegion246 = { CONTENT: C246, character: { id: "char-adel", worldState: { eventStages: { water_crisis: { stage: 2, resolved: answered246 } } } } };
+  check("§246: ⛔ …and the REGION row the GM has read every turn since §9 now says answered, built from the env",
+    /ANSWERED on world-day 26/.test(regionRow246?.build(envRegion246)?.activeEvents?.[0]?.summaryForGM || ""));
+  const bare246 = { character: { id: "t", name: "T", origin: "valley", background: "smith", level: 1, attributes: { physical: 3, mental: 3, social: 3, practical: 3 }, health: 10, maxHealth: 10, energy: 5, maxEnergy: 5, abilities: [], alignment: {}, inventory: [], quests: [] },
+    location: { id: "millbrook", name: "Millbrook", descriptionSeed: "a mill town", spectrum: {}, encounterFlavor: "quiet" }, region: { id: "valley", name: "The Valley" },
+    rules: {}, lore: "", timeLabel: "Day 1", recentTurns: [], sceneState: {}, resolution: null, playerInput: null };
+  const p246 = GM246.buildTurnContext({ ...bare246, worldMovedOnDetail: d1 });
+  check("§246: ⛔ …and READ — the prompt carries it under a header that says reveal it in the story and never undo it",
+    /## THE WORLD MOVED ON/.test(p246) && p246.includes(d1) && /never undo what was answered/.test(p246) && !/## THE WORLD MOVED ON/.test(GM246.buildTurnContext(bare246)));
+  const APP246 = rd("app.js");
+  check("§246: …and the game counts the beats it actually reached the GM, and the map stops saying stage 2",
+    /if \(turnCtx354\.worldMovedOnDetail\) \{ try \{ noteWorldMovedOnShown\(character\);/.test(APP246) && /crisisAnswered354 \? "Water Crisis answered"/.test(APP246));
+  const BF246 = rd("scripts/backfill_answered_crises.mjs");
+  check("§246: ⬜ the one ending that already happened is written through the engine's own doors, with its pairing NAMED rather than guessed",
+    /recordQuestOutcome\(ws, q\.id/.test(BF246) && /resolveEvent\(ws, rule\.eventId/.test(BF246)
+    && /questId: "what_the_water_remembers", outcomes: \["redirected"\], eventId: "water_crisis"/.test(BF246));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

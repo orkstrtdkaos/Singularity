@@ -1,7 +1,7 @@
 # THE APPARATUS — every harness, what it is for, and whether it runs
 
 ⛔ **ERIK, 2026-08-29: *"I want this to be a well oiled factory."*** ⚠️ **A factory you cannot see is not
-well oiled.** 104 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
+well oiled.** 105 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
 were gates, which were reports, and which had quietly stopped being wired into anything.
 
 ```bash
@@ -10,7 +10,7 @@ node scripts/apparatus.mjs --md     # …as markdown for §5
 node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 ```
 
-**Last measured: 2026-09-16 · v2.0.16 · 104 files.**
+**Last measured: 2026-09-16 · v2.0.17 · 105 files.**
 
 ---
 
@@ -134,7 +134,7 @@ worthless.
 | harness | kind | assertions | purpose |
 |---|---|---|---|
 | `tests/smoke` | ✅ GATE | 3569 | — |
-| `tests/how_it_works` | ✅ GATE | 2595 | CCODE-285 |
+| `tests/how_it_works` | ✅ GATE | 2626 | CCODE-285 |
 | `tests/skill_battle_sim` | ✅ GATE | 217 | SNG-098: the two-sided contest + fog-of-war invariant |
 | `tests/content_ci` | ✅ GATE | 193 | SNG-BATCH-10 Phase 4 / SNG-040/064: the content integrity gate |
 | `tests/craft_crit` | ✅ GATE | 43 | miss // it and YOU HAVE ONLY MADE CHAOS |
@@ -207,6 +207,7 @@ worthless.
 | `scripts/audit_images` | 🔧 TOOL | — | — |
 | `scripts/authoring_checks` | 🔧 TOOL | — | THE AUTHORING RULES FOUR REGISTERED FILES CARRY, AS FUNCTIONS |
 | `scripts/axis_worklist` | 🔧 TOOL | — | THE GAIN-AXIS WORKLIST |
+| `scripts/backfill_answered_crises` | 🔧 TOOL | — | CCODE-354: put the endings that already happened on the shared record |
 | `scripts/battle_test_crafts` | 🔧 TOOL | — | CCODE-313 |
 | `scripts/bonus_dial` | 🔧 TOOL | — | CCODE-257 |
 | `scripts/casualty_sim` | 🔧 TOOL | — | CCODE-304 |

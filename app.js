@@ -89,6 +89,7 @@ import { activeArcEffects, craftCostNote, encounterBias, effectsInPlainWords, np
 import { knownIndex, whoIs, figureArtRecord } from "./engine/whois.js";   // SNG-299: who is that, and where do I read more
 import { worldTabHtml } from "./engine/worldtab.js";   // SNG-276: the tab's markup, testable
 import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, syncTravelers, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter, arcStageNow, worldRoster, NEWS_SECTIONS, pushCanonLook} from "./engine/worldtick.js";
+import { noteWorldMovedOnShown } from "./engine/worldevents.js";   // CCODE-354: the world moved on, counted by beats
 import { runWakeGeneration } from "./engine/wake.js"; // SNG-204 Phase 2: open wakes generate the next thread
 import { addAssignment, delegationRefusal, activeDelegates, MISSION_KINDS, MISSION_KIND_IDS, canSendOn, sayFamilies } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
 import { setArcFate } from "./engine/latentarcs.js"; // SNG-191 §7: the player closing a surfaced arc (the handled/resolved fate)
@@ -145,7 +146,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.16";
+const APP_VERSION = "2.0.17";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6646,9 +6647,12 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   // ⛑ SNG-559: the prompt-row tally rides IN on the env and `assembleGMContext` fills it at its one choke point,
   // so no builder reports itself and no row can be forgotten. Dev-only: a player build passes no tally and counts nothing.
   if (isDevMode()) env.tally = (character._promptRows = character._promptRows || {});
-  const result = await gmTurn(assembleGMContext("turn", env), { tier });
+  const turnCtx354 = assembleGMContext("turn", env);
+  const result = await gmTurn(turnCtx354, { tier });
   busy = false;
   if (!result.ok) { renderPlay(null, { error: result.error }); return null; }
+  // ⛔ CCODE-354: a beat on which "the world moved on" actually REACHED the GM is a beat counted — three, then it rests.
+  if (turnCtx354.worldMovedOnDetail) { try { noteWorldMovedOnShown(character); } catch { /* a count, never a blocker */ } }
   // SNG-009: track op loss so the next turn's GM restates missed updates
   if (result.opsLost) { character.opLossPending = true; character.opLossLog = [...(character.opLossLog || []), { at: new Date().toISOString() }].slice(-3); }
   else character.opLossPending = false;
@@ -10794,6 +10798,7 @@ function renderMap(selectedId = null) {
   // untested divergence the audit predicted from the duplicate existing at all.
   const edges = regionEdges;
   const stage = character.worldState?.eventStages?.water_crisis?.stage ?? 1;
+  const crisisAnswered354 = !!character.worldState?.eventStages?.water_crisis?.resolved;   // CCODE-354
   const isVisited = id => (character.placeMemory?.[id]?.visits || 0) > 0 || id === here;
   const isKnown = id => isPlaceKnown(character, id, CONTENT.locations); // SNG-117: heard-of / adjacent / en-route, not just visited
   // SNG-046 Layer 1: every location gets stable coords (authored kept; coordless + generated
@@ -10840,7 +10845,7 @@ function renderMap(selectedId = null) {
   const svg = `<svg id="skill-svg" viewBox="0 0 800 440" class="world-map" preserveAspectRatio="xMidYMid meet"><g class="graph-vp">
     <g class="map-terrain">${terrain}</g>${fieldLayer}
     <text x="20" y="30" class="map-title">THE VALLEY OF ECHOES</text>
-    <text x="20" y="50" class="map-sub">Day ${readClock(character.clock).day} · Water Crisis stage ${stage}${mapShowKG ? " · showing what you know" : ""}</text>
+    <text x="20" y="50" class="map-sub">Day ${readClock(character.clock).day} · ${crisisAnswered354 ? "Water Crisis answered" : `Water Crisis stage ${stage}`}${mapShowKG ? " · showing what you know" : ""}</text>
     ${edges.map(([a, b]) => { const A = pos[a], B = pos[b]; const spine = a === "the_axis_gate" || b === "the_axis_gate" || a === "the_crossing" || b === "the_crossing";
       return `<line x1="${A.x}" y1="${A.y}" x2="${B.x}" y2="${B.y}" class="map-edge ${a === here || b === here ? "active" : ""} ${spine ? "spine" : ""}"/>`; }).join("")}
     ${locs.map((l, li) => {

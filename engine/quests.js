@@ -10,6 +10,7 @@
 // existing quest doesn't fork a duplicate. Giver/location tie to codex entityIds.
 
 import { namesMatch, resolveByName, smartClamp } from "./namematch.js";
+import { recordQuestOutcome, resolveEvent, actorOf, priorBoardFor, questKey } from "./worldevents.js";   // CCODE-354: a world-tier ending is a world fact
 import { traditionOf } from "./traditions.js";
 import { createWake } from "./wake.js"; // SNG-204: a significant outcome leaves a wake the world continues from
 import { addHolding } from "./holdings.js";              // ⛔ SNG-579: an ending that says "you own a ship" has to hand one over
@@ -654,6 +655,16 @@ function applyQuestEffects(character, quest, effects, ctx = {}) {
         }
         break;
       }
+      // ⛔ CCODE-354: A WORLD EVENT ANSWERED — for everyone, on the shared record, with who and when. Until this there was no
+      // effect in the vocabulary that could end a crisis, so every authored ending that "fixes the river" fixed nothing.
+      case "event_resolve": {
+        if (e.eventId && character.worldState) {
+          resolveEvent(character.worldState, e.eventId, { outcome: quest.outcomeId || null, outcomeName: quest.outcomeName || null,
+            questId: quest.id, by: actorOf(character), worldDay: ctx.worldDay ?? null });
+          applied.push({ type: "event_resolve", eventId: e.eventId });
+        }
+        break;
+      }
       case "location_state": {
         // CCODE-25: a durable place-change → placeMemory (READ on return + fed to the GM via placeMemoryForGM),
         // not the write-only character.locationState store (nothing ever read it, so "a place changes" endings
@@ -942,6 +953,13 @@ export function resolveStructuredQuest(character, questId, outcomeId, ctx = {}) 
   creditQuestGiver(character, q);   // ⛔ R37a's sibling: the person who set you on it grew by it
   q.outcomeId = outcome.id; q.outcomeName = outcome.name;
   q.resolvedAt = ctx.nowISO || null; q.resolvedWorldDay = ctx.worldDay ?? null;
+  // ⛔ CCODE-354: A WORLD-TIER ENDING GOES ON THE SHARED RECORD. Silas ended What the Water Remembers on world-day 26 and it
+  // was recorded on his quest and nowhere else — so the next traveler to reach Mara's store got the crisis from the top.
+  // ⛑ Now the next one gets Aevi's board for the world as it now IS (`priorOutcomeBoards`), and knows who ended it.
+  if (q.tier === "world" && character.worldState) {
+    try { recordQuestOutcome(character.worldState, q.id, { outcome: outcome.id, outcomeName: outcome.name || null, by: actorOf(character), worldDay: ctx.worldDay ?? null }); }
+    catch { /* the record is additive — a quest must resolve even if it cannot be written */ }
+  }
 
   // SNG-282 (Erik) — "the player's deeds and quest resolutions spread just like NPCs."
   //
@@ -1093,6 +1111,19 @@ export function structuredQuestsForGM(character, opts = {}) {
     // leaving it to a panel the player may never open.
     if (q.awaitingResolution) {
       line += `\n  ⚑ AT ITS DECISION POINT — every stage is done. Bring the choice into the fiction THIS BEAT: put the moment in front of the character and let them choose how it ends. Do NOT pick an outcome, do NOT narrate a resolution, and do NOT emit stageOps for it — the player resolves it themselves.`;
+    }
+    // ⛔ CCODE-354: ANOTHER TRAVELER ALREADY ENDED THIS — the board for the world as it now IS, authored in advance by Aevi
+    // (SNG-552 O4, "retrieved rather than invented") and read by nothing until now.
+    {
+      const def354 = (opts.defs || []).find(d => d && questKey(d.id) === questKey(q.id)) || q;
+      const pb = priorBoardFor(def354, character);
+      if (pb) {
+        const r = pb.record;
+        line += `\n  ⛑ THE WORLD HAS MOVED ON: ${r.by?.name || "another traveler"} (another traveler) already ended this${r.worldDay != null ? ` on world-day ${r.worldDay}` : ""} — ${r.outcomeName || r.outcome}. Tell it as the world now IS, never as a replay.`;
+        if (pb.board._theWorldNow) line += `\n  THE WORLD NOW: ${pb.board._theWorldNow}`;
+        if (pb.board.premiseShift) line += `\n  WHAT THAT CHANGES: ${pb.board.premiseShift}`;
+        if (q.awaitingResolution && pb.board.options) line += `\n  THE CHOICES, AS THEY NOW STAND: ${Object.entries(pb.board.options).map(([k, v]) => `${k}: ${v}`).join(" | ")}`;
+      }
     }
     if ((q.legend || q.legendNpc) && (q.boundToCharacter || q.boundToPlayer)) {
       const leg = q.legendNpc || npcs[q.legend] || null; // SNG-133: a generated arc carries its legend inline

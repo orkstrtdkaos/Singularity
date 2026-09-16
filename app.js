@@ -7,7 +7,7 @@ import { mergeRecovery, mergeReceiptLine } from "./engine/recovery.js";   // the
 import { resolveAction, successChance, applyEnergyCost } from "./engine/resolve.js";
 import { senseAction, senseTier, senseOpponent, appraiseOpponent } from "./engine/sense.js"; // CCODE-44: size a fight up BEFORE taking it
 import { synthesizeOpponentSheet, synthesizeStaticSheet, estimateExchange, finisherPotential, finishOdds, hasCounterCraft, matchupBonus, phaseDenied } from "./engine/skill_battle.js"; // CCODE-46/42: priced moves + situational finisher odds
-import { recordDeed, standingWith, reputationSummary } from "./engine/reputation.js";
+import { recordDeed, standingWith, reputationSummary, knownTags } from "./engine/reputation.js";
 import { seedStandingAtCreation, accrueStandingForDays, applyStandingOps, standingRoster } from "./engine/standing.js"; // BATCH-12 §3
 import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, touchSession, endSession, sessionLog, buildSessionPrompt, authorshipStats, crossCharacterAuthorship } from "./engine/chronicle.js";
 import { newProfile, updateProfile, aptitudeMods, profileInsight, grantAptitudes, fadingAptitudes, ensureCharacterStyle, ensureRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, revokeAdultGate, RATING_ORDER, RATING_LEVEL, aptitudeStandingLine } from "./engine/playerprofile.js";
@@ -39,7 +39,7 @@ import { composeImagePrompt } from "./engine/imageprompt.js";   // CCODE-190: co
 import { ITEM_KINDS, itemKindsIn, itemKindLabel, wieldBonusFor, usableCombatItems, normalizeInventory, reclaimEstablishedItems, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates, deriveItem, findItem, skillBonus, startingSkills } from "./engine/inventory.js"; // CCODE-161: reclaim items the story conferred but the ledger missed
 import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive } from "./engine/earnedpower.js"; // SNG-251 §2c/§4: the earned-power economy (ceiling = f(level, craft rank); ~1 evolution/day)
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
-import { smartClamp, playerText } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
+import { smartClamp, playerText, normName } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { LIBRARY_INDEX, loreToHtml, libMdToHtml, circleRows } from "./engine/library.js";
 import { contributionsBy } from "./engine/canon.js";   // ⛔ SNG-584: who made the shared world — tallied since SNG-128, read by nobody until now   // SNG-538 §4: the Library's index and renderers — pure, gated by §181
 import { sourcesHere } from "./engine/substrate.js";   // ⛔ Erik 2026-09-12: the four sources and how well each answers HERE
@@ -146,11 +146,12 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.19";
+const APP_VERSION = "2.0.20";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
 app.addEventListener("click", e => { const b = e.target.closest?.("[data-help]"); if (b) { e.preventDefault(); showHelp(b.dataset.help); } });
+app.addEventListener("click", e => { const b = e.target.closest?.("[data-standing]"); if (b) { e.preventDefault(); showStandingHere(b.dataset.standing); } });   // CCODE-356
 
 // SNG-219: a Back control reachable WITHOUT scrolling, on every screen that has one — Erik's ask ("lots of
 // Back buttons are at the end of content; I'd like some at the top too so I don't scroll all the way down").
@@ -297,6 +298,42 @@ function showHelp(id) {
   const mt = document.getElementById("help-more-toggle");
   if (mt) mt.onclick = () => { const m = document.getElementById("help-more"); m.hidden = !m.hidden; mt.textContent = m.hidden ? "more…" : "less"; };
   document.getElementById("help-lib").onclick = () => { close(); renderLibrary(); };
+}
+
+/** ⛔ CCODE-356 — WHAT YOUR STANDING HERE MEANS FOR YOU. Erik: "The standing can go next to it - with the popup describing the
+ *  general effect it has for you."
+ *
+ *  ⚑ MEASURED BEFORE A WORD OF IT WAS WRITTEN, because a popup is a claim about a mechanism: settlement standing is read by the
+ *  GM's LOCAL REPUTATION block every beat (the band, the score, what they know you for) and by the NPCs whose authored reactions
+ *  key off your reputation. Nothing in the economy or the roll reads it. So this says how people treat you — and says plainly
+ *  that it is not your dice. */
+const STANDING_MEANING = {
+  revered: "your name carries real weight. People seek you out, take your word, and go out of their way for you.",
+  trusted: "people vouch for you. Doors open, help is offered, and they tell you things they would not tell a stranger.",
+  known: "people know your name and some of what you have done. You get a hearing.",
+  neutral: "nobody knows you yet. You are judged by what you do in front of them.",
+  wary: "people keep their distance. They will deal with you, but they will not vouch for you.",
+  distrusted: "people expect the worst of you. Help is grudging, and you are watched.",
+  hated: "people want you gone. Doors close, help is refused, and trouble comes looking.",
+};
+function showStandingHere(communityId) {
+  if (!character || !communityId) return;
+  const s = standingWith(character, communityId, CONTENT.rules);
+  const tags = knownTags(character, communityId);
+  const place = CONTENT.locations?.[character.currentLocationId]?.name || "here";
+  document.getElementById("help-pop")?.remove();
+  const pop = document.createElement("div");
+  pop.id = "help-pop";
+  pop.className = "help-overlay";
+  pop.innerHTML = `<div class="help-card" role="dialog" aria-label="Your standing here">
+    <div class="help-short"><strong>${esc(s.band.charAt(0).toUpperCase() + s.band.slice(1))}</strong> in ${esc(place)} — ${esc(STANDING_MEANING[s.band] || "")}</div>
+    <div class="help-more">${tags.length ? `They know you for: ${esc(tags.join(", "))}. ` : "They have heard of nothing you have done yet. "}It comes from the deeds word has carried here (${s.score >= 0 ? "+" : ""}${s.score}), and the GM reads it every beat to decide how people treat you. It does not change your dice or your prices.</div>
+    <div class="help-foot"><button class="btn" id="help-close">Got it</button></div>
+  </div>`;
+  document.body.appendChild(pop);
+  const close = () => pop.remove();
+  pop.addEventListener("click", ev => { if (ev.target === pop) close(); });
+  document.getElementById("help-close").onclick = close;
 }
 
 // SNG-104: the same dismissable popover the info-dot uses, but from RAW TEXT (showHelp needs a help-id).
@@ -16678,7 +16715,23 @@ function renderPlay(turn, opts = {}) {
   const encKindNow = (() => { const e = activeEnc(); return e ? encounterKind(e.def) : null; })();
   let main = `<div class="play${activeEnc()?.state?.mode === "skill_battle" ? " play-in-fight" : ""}${encKindNow ? ` enc-kind-${encKindNow}` : ""}">
     ${banner ? `<img class="scene-banner" data-lightbox="scene" src="${esc(banner)}" alt="${esc(location.name)}" onerror="this.style.display='none'">` : ""}
-    <div class="location-tag" ${sceneState?.setting ? `title="${esc(sceneState.setting)}"` : ""}>${esc(location.name)}${sceneSubPlace?.name ? `<span class="loc-subplace" title="A named spot inside ${esc(location.name)}. You are in it; the header keeps the parent because a sub-place is not a destination.">&nbsp;&rsaquo;&nbsp;${esc(sceneSubPlace.name)}</span>` : ""}${rep ? ` <span class="rep-band loc-standing ${rep.band}" title="Your standing with ${esc(CONTENT.locations[character.currentLocationId]?.name || "the people here")} — ${rep.band} (${rep.score})">· ${esc(rep.band)}</span>` : ""}${(() => {
+    <div class="location-tag loc-head" ${sceneState?.setting ? `title="${esc(sceneState.setting)}"` : ""}>${(() => {
+      // ⛔ CCODE-356 (Erik) — "this area needs a cleanup. The location should be a good title size - not crammed inline with
+      // everythign else. plus it duplicates. The standing can go next to it - with the popup describing the general effect it
+      // has for you. The ground needs to go below the title line and show the percentages in addition to the "Thin" etc
+      // qualitative wording."
+      // ⚠️ THE DUPLICATE was a sub-place named for its parent — "The Crossing › THE HUB CROSSING". The title is where you ARE,
+      // the most specific place; the parent is said only when that name does not already say it.
+      const sub = sceneSubPlace?.name || null;
+      const nSub = sub ? normName(sub) : "", nLoc = normName(location.name);
+      const saysParent = !!sub && !!nSub && !!nLoc && (nSub.includes(nLoc) || nLoc.includes(nSub));
+      return `<div class="loc-title-row">
+        <h2 class="loc-title">${esc(sub || location.name)}</h2>
+        ${rep ? `<button type="button" class="rep-band loc-standing ${esc(rep.band)}" data-standing="${esc(location.communityId || "")}" title="Your standing here — tap for what it means for you">${esc(rep.band)}</button>` : ""}
+        ${sub && !saysParent ? `<span class="loc-parent" title="A named spot inside ${esc(location.name)}. You are in it; a sub-place is not a destination.">in ${esc(location.name)}</span>` : ""}
+        <span class="time-tag" title="Your own clock — days, season, time of day (SNG-191). The world's count is a separate shared tally, not a date.">${esc(time.label)} <span class="world-day-tag" title="The Kept Count — the shared world tally; it only ever climbs and is not a date">· ⧗ ${worldCount()}</span></span>
+      </div>`;
+    })()}${(() => {
       // ⛔ SNG-381 — THE GROUND YOU ARE STANDING ON. Erik: "the current ground's power sources should
       // be viewable in the location banner. Remember there are bastions of power with auras."
       //
@@ -16714,12 +16767,15 @@ function renderPlay(turn, opts = {}) {
           r.powers.length ? `Powers ${r.powers.slice(0, 4).join(", ")}${r.powers.length > 4 ? ` and ${r.powers.length - 4} more` : ""}.` : "",
           g.bastion?.reason && r.field === "substrate" ? g.bastion.reason : "",
         ].filter(Boolean).join(" ");
-        return `<span class="src-chip src-${esc(r.level)}" title="${esc(tip)}">${GLYPH[r.id] || "•"} ${esc(r.label.split(" ")[0])} <b>${esc(r.level)}</b></span>`;
+        // ⛔ CCODE-356: THE NUMBER BESIDE THE WORD — and it is the FACTOR, the same number the roll uses, which is what the word was
+        // cut from (strong ≥95%, workable ≥70%, thin ≥45%). The field density that feeds it stays in the tooltip.
+        const pctNow = r.factor == null ? "" : `<span class="src-pct">${Math.round(r.factor * 100)}%</span>`;
+        return `<span class="src-chip src-${esc(r.level)}" title="${esc(tip)}">${GLYPH[r.id] || "•"} ${esc(r.label.split(" ")[0])} <b>${esc(r.level)}</b>${pctNow}</span>`;
       }).join("");
       const aura = g.bastion
         ? `<span class="ground-bastion ground-${esc(g.bastion.kind)}" title="${esc(g.bastion.reason || "")}">${g.bastion.kind === "pool" ? "▲" : "▼"} ${esc(g.bastion.kind)}</span>` : "";
-      return `<span class="src-strip">${chips}${aura}</span>`;
-    })()}<span class="time-tag" title="Your own clock — days, season, time of day (SNG-191). The world's count is a separate shared tally, not a date.">${esc(time.label)} <span class="world-day-tag" title="The Kept Count — the shared world tally; it only ever climbs and is not a date">· ⧗ ${worldCount()}</span></span></div>
+      return `<div class="src-strip">${chips}${aura}</div>`;
+    })()}</div>
     ${(() => { const e = activeEnc(); if (!e) return ""; const st = e.state, d = e.def;
       let status = "";
       if (d.type === "duel") {

@@ -1,4 +1,4 @@
-<!-- status: CCODE-353/354 shipped · CCODE-355 in progress · content asks for Aevi in §4 -->
+<!-- status: CCODE-353/354/355/356 shipped · CCODE-357 next · content asks for Aevi in §4 -->
 # PLAN — One living world, and Courtney's game
 
 **CCode → Aevi and Erik · 2026-09-16**
@@ -27,13 +27,15 @@ Erik's rulings this morning are quoted in full in `HANDOFF_ccode_aevi_SNG-595` �
 | SNG-595 (with Aevi) | the reader keyed by PERSON: another player's character named in play reaches the GM with their public record |
 | CCODE-353 | the stale Adelheid under Erik's key deleted; my tickets are CCODE again |
 | **CCODE-354** | **a crisis another traveler answered reads as answered, for everyone.** Latest-wins merge that carries WHO (Aevi's ruling); an answer beats any question; the region write is a merge; a world-tier quest ending is a shared record; `priorOutcomeBoards` read at last; `event_resolve` exists; Silas's day-26 answer backfilled. Adelheid's GM now reads *"The Water Crisis — ANSWERED on world-day 26, by Silas Weir — another traveler"* with Aevi's `_theWorldNow`, and for three beats is told to let the story reveal it and to call what she heard rumour. |
+| **CCODE-355** | **who is playing is chosen, not assumed.** Courtney's tablet had been writing Erik's profile (his R+, blunt, eventful settings); `player-54seyk` is Courtney's again (PG-13, calm, lyrical, restrained, and her wishes). A picker on every load; the roster shows one player's characters; Export/Import in Settings; the Library at the top; the banner on every screen, showing what that screen is about. |
+| **CCODE-356** | **the place is a title, and the ground says its numbers** (Erik: "this area needs a cleanup"). The most specific place as a heading, never twice; the standing beside it with a popup that says what it does — and that it moves no dice or prices, held by a gate; the four sources on their own line with the percentage the roll uses. |
 
 ⚠️ **Both devices must reload to v2.0.17.** A tab still running the old code overwrites the region file on its next tick
 and would drop the answer until a new client pushes it back.
 
 ## §2 — NEXT, IN ORDER
 
-**CCODE-355 — who's playing** *(in progress)*
+**CCODE-355 — who's playing** *(shipped — see §1)*
 - ⛔ **Measured: Courtney's game has been running on ERIK's profile.** Every `save: Adelheid` is followed a second later by
   `profile: player-s9z9u1` — so her GM plays under his R+, blunt, eventful settings, and the two devices overwrite each
   other's profile. `player-54seyk` was retired into Erik's key by SNG-045 on 2026-07-13, which read it as his second
@@ -44,7 +46,7 @@ and would drop the answer until a new client pushes it back.
 - **"What I want from this game"** in Settings, read by the GM every turn — the home for *herbs, painting, a cabin,
   healing, spirituality, lighter adventure* that today has no field at all.
 
-**CCODE-356 — a gentle game has the engine it needs**
+**CCODE-357 — a gentle game has the engine it needs**
 - A holding that is a HOME (the cabin): rest, the view, a place to paint — today holdings are only `post`/`enterprise`.
 - Painting that makes a picture: a gallery image in watercolor for her, not the house "digital painting, atmospheric
   concept art" style that every image is forced into today.
@@ -52,17 +54,17 @@ and would drop the answer until a new client pushes it back.
 - The personal arc's register for a gentle player (it is always "mythic, tragic-or-heroic") and the `[object Object]`
   routes saved on hers.
 
-**CCODE-357 — travelers meet.** Where a traveler was last seen (settlement + world-day) on their card; open scenes
+**CCODE-358 — travelers meet.** Where a traveler was last seen (settlement + world-day) on their card; open scenes
 indexed by settlement rather than exact site (Adelheid stands at `gen-mara-wells-store`, Silas would arrive at
 `millbrook`); a quiet "Adelheid is in Millbrook — join" banner; a GM row saying another traveler is here and is not the
 GM's to voice.
 
-**CCODE-358 — an invitation carried by a mutual acquaintance.** `world/invitations.json`, one key per invite, merged.
+**CCODE-359 — an invitation carried by a mutual acquaintance.** `world/invitations.json`, one key per invite, merged.
 Silas sends word through someone both of them know — **Mara Wells** (his 8, her 4) or **Edvar Crane** (his 5, her −1).
 Courtney accepts or does not, and silence is no. The band's real name is **the Fellowship of the Fell Pell**; its six
 contingents are all NPCs today and a contingent would carry a `characterId`.
 
-**CCODE-359 onward — shared lives.** Measured: EVERY part of an NPC's growth is per-save — status, rank, career, deeds,
+**CCODE-360 onward — shared lives.** Measured: EVERY part of an NPC's growth is per-save — status, rank, career, deeds,
 wants, deaths, minted people, holds. `minted-1` is three different people in three saves; `the_undefeated` is active,
 wounded, wounded and stopped; `presentToday` seeds on the character, so two players in one place on one day meet different
 people. The architecture, staged: a `world/people` fact log (per-key union, a person's state a fold over their facts);

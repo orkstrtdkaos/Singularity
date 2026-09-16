@@ -1701,6 +1701,21 @@ img[data-lightbox] { cursor: zoom-in; }
 /* ⛔ ERIK 2026-09-12: the four power sources on the location strip, each with how well it answers here. Replaces the two chips that
    said one word about the lattice and one about the nanite. The tone is the LEVEL, so a glance reads the place. */
 .src-strip { display: inline-flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+/* ⛔ CCODE-356 — the place is a TITLE; the standing sits beside it; the ground is its own line beneath, with its numbers. */
+.location-tag.loc-head { display: block; text-transform: none; letter-spacing: normal; margin-bottom: 14px; }
+.loc-title-row { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; }
+.loc-title { margin: 0; font-family: var(--font); font-weight: normal; font-size: 24px; line-height: 1.25; letter-spacing: 0.01em; color: var(--accent); text-wrap: balance; }
+.loc-title .whois { font: inherit; color: inherit; }
+.loc-head .loc-standing { font-family: var(--font-ui); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; background: none; cursor: pointer; align-self: center; }
+.loc-head .loc-standing:hover, .loc-head .loc-standing:focus-visible { background: rgba(255, 255, 255, 0.04); outline: none; }
+.loc-parent { font-family: var(--font-ui); font-size: 12px; color: var(--ink-dim); }
+.loc-head .time-tag { margin-left: auto; font-family: var(--font-ui); font-size: 12px; }
+.loc-head .src-strip { display: flex; margin-top: 8px; gap: 6px; }
+.src-pct { margin-left: 5px; font-variant-numeric: tabular-nums; color: var(--ink-dim); }
+@media (max-width: 600px) {
+  .loc-title { font-size: 20px; }
+  .loc-head .time-tag { margin-left: 0; flex-basis: 100%; }
+}
 .src-chip { font-size: 11px; padding: 1px 7px; border-radius: 999px; border: 1px solid var(--border); background: var(--panel2); color: var(--ink-dim); white-space: nowrap; cursor: help; }
 .src-chip b { font-weight: 600; color: var(--ink); }
 .src-answering { border-color: #7fc98a; color: #bfe6c6; } .src-answering b { color: #d8f5dd; }
@@ -1746,4 +1761,3 @@ img[data-lightbox] { cursor: zoom-in; }
 
 /* SNG-555: the named spot INSIDE the location. The header still shows the parent — a sub-place is deliberately not a
    destination — so the room reads as a continuation of it, quieter than the place name, never as a second place. */
-.loc-subplace { color: var(--ink-dim); font-weight: 400; }

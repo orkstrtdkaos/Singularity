@@ -13229,8 +13229,12 @@ console.log("\n── §200 · which room, not just which place: a named interio
     /sceneSubPlace = character\.activeScene\.subPlace \|\| null;/.test(A200));
   check("§200: ⛔ a real move to another LOCATION leaves the room behind (a sub-place belongs to its parent)",
     /character\.activeScene = null; sceneTurns = \[\]; sceneState = null; sceneSubPlace = null;/.test(A200));
-  check("§200: the player is shown the room beside the place, with the place still the header",
-    /loc-subplace/.test(A200) && /\.loc-subplace \{/.test(rd("style.css")));
+  // ⚠️ CCODE-356 RETIRED "with the place still the header", ON ERIK'S RULING: "The location should be a good title size - not
+  // crammed inline with everything else. plus it duplicates." The duplicate WAS this — "The Crossing › THE HUB CROSSING". The claim
+  // that survives is that the player is shown the room they are in: now as the title, with the parent beside it only when the
+  // room's own name does not already say it.
+  check("§200: the player is shown the room they are in — as the title now, with its parent beside it unless the name already says it",
+    /<h2 class="loc-title">\$\{esc\(sub \|\| location\.name\)\}<\/h2>/.test(A200) && /class="loc-parent"/.test(A200) && /\.loc-parent \{/.test(rd("style.css")));
   check("§200: and the prompt row passes it — a record the GM cannot see is not a record",
     /standingIn: env\.sceneSubPlace \|\| null/.test(rd("engine/gm_registry.js")));
 
@@ -17793,6 +17797,55 @@ console.log("\n── §247 · who is playing is chosen, not assumed ──");
   const court247 = rj("players/player-54seyk/profile.json");
   check("§247: ⬜ the tablet's key is a player in her own right again — not retired, not a redirect",
     !court247.retired && !court247.redirectTo);
+}
+
+
+// ⛔ CCODE-356 (Erik, 2026-09-16) — "this area needs a cleanup. The location should be a good title size - not crammed inline with
+// everythign else. plus it duplicates. The standing can go next to it - with the popup describing the general effect it has for
+// you. The ground needs to go below the title line and show the percentages in addition to the "Thin" etc qualitative wording."
+//
+// ⚑ His screenshot: "The Crossing › THE HUB CROSSING · NEUTRAL · PRECURSOR STRONG · NANITE STRONG · VEIL THIN · …" on one
+// uppercase 12px line. Checked in the browser after: "The Hub Crossing" as a title, NEUTRAL beside it opening a popup, the four
+// sources beneath with their numbers, no overflow at 375px.
+console.log("\n── §248 · the place is a title, and the ground says its numbers ──");
+{
+  const A248 = rd("app.js").replace(/\r\n/g, "\n");
+  const head248 = A248.slice(A248.indexOf('<div class="location-tag loc-head"'), A248.indexOf("const rows = sourcesHere(location"));
+  check("§248: ⛔ the place is a TITLE — the most specific place you are in, in its own heading, not a 12px uppercase run",
+    /<h2 class="loc-title">\$\{esc\(sub \|\| location\.name\)\}<\/h2>/.test(head248) && /\.loc-title \{[^}]*font-size: 24px/.test(rd("style.css")));
+  check("§248: ⛔ …and it does not say its parent twice — a sub-place named for its parent (The Hub Crossing, in The Crossing) stands alone",
+    /const saysParent = !!sub && !!nSub && !!nLoc && \(nSub\.includes\(nLoc\) \|\| nLoc\.includes\(nSub\)\);/.test(head248)
+    && /\$\{sub && !saysParent \? `<span class="loc-parent"/.test(head248));
+  check("§248: …the clock sits on the title row, where it no longer shares a line with eight chips",
+    /<span class="time-tag"/.test(head248));
+
+  // ⛔ THE STANDING, BESIDE IT, AND WHAT IT MEANS
+  check("§248: ⛔ the standing sits beside the title and opens its own popup, through one delegated listener that survives re-renders",
+    /class="rep-band loc-standing \$\{esc\(rep\.band\)\}" data-standing=/.test(head248)
+    && /closest\?\.\("\[data-standing\]"\); if \(b\) \{ e\.preventDefault\(\); showStandingHere\(b\.dataset\.standing\); \}/.test(A248));
+  const bands248 = (rj("content/packs/core/rules/resolution.json").reputationBands || []).map(b => b.band);
+  const meaningSrc248 = (A248.match(/const STANDING_MEANING = \{([\s\S]*?)\n\};/) || [, ""])[1];
+  const missing248 = bands248.filter(b => !new RegExp(`\\b${b}:`).test(meaningSrc248));
+  check("§248: ⛔ …and every AUTHORED band has words for what it means — a new band authored tomorrow turns this red instead of popping up empty",
+    bands248.length >= 5 && missing248.length === 0, missing248.length ? `no meaning for: ${missing248.join(", ")}` : `${bands248.length} bands`);
+  // ⚠️ THE POPUP SAYS "It does not change your dice or your prices." — a sentence about a mechanism, so the mechanism is held
+  // here. If anything outside the reputation modules starts reading settlement standing, this goes red and the sentence is a lie.
+  const { readdirSync: rdd248 } = await import("node:fs");
+  const readers248 = rdd248(join(root, "engine")).filter(f => f.endsWith(".js"))
+    .filter(f => /\bstandingWith\b|\bstandingFor\b/.test(rd(`engine/${f}`)));
+  check("§248: ⚠️ …and its claim that standing moves no dice and no prices is held against the engine: only the reputation modules read it",
+    readers248.sort().join(",") === "reputation.js,standing.js" && /It does not change your dice or your prices\./.test(A248),
+    readers248.join(", "));
+
+  // ⛔ THE GROUND, BELOW, WITH ITS NUMBERS
+  const chip248 = A248.slice(A248.indexOf("const chips = rows.map(r => {"), A248.indexOf("const aura = g.bastion"));
+  check("§248: ⛔ the ground is its own line beneath the title, and each source shows its percentage beside its word",
+    /<span class="src-pct">\$\{Math\.round\(r\.factor \* 100\)\}%<\/span>/.test(chip248) && /return `<div class="src-strip">\$\{chips\}\$\{aura\}<\/div>`;/.test(A248));
+  // ⚠️ AND THE NUMBER IS THE ONE THE WORD WAS CUT FROM. `levelWordFor` bands the roll's own factor — a density beside the
+  // word would read "thin · 44%" against a craft that actually answers at 60%.
+  const SUB248 = rd("engine/substrate.js");
+  check("§248: ⚠️ …and the number is the factor the word was cut from — the one the roll uses — not the density that feeds it",
+    /level: levelWordFor\(factor\),/.test(SUB248) && /if \(factor >= 0\.45\) return "thin";/.test(SUB248));
 }
 
 /* ══════════ REPORT ══════════ */

@@ -219,57 +219,61 @@
         "player": "Step back and offer him time and quiet instead of greeting—sit by the wheel and wait for him to come to you.",
         "summary": "At the mill, Edvar refuses your attempt at gentleness and demands direct engagement. His exhaustion is real and his patience is gone.",
         "narration": "You see the moment he's about to turn, and you read it wrong—the tension in his shoulders isn't readiness, it's exhaustion stretched past its limit. Instead of stepping closer with your hand out, you step back. You cross to the great mill wheel, its timber creaking as it turns on the current, and you sit down on a low stone bench worn smooth by seasons of use. The mud is cold through your coat, but you settle into it anyway. You wait.\n\nEdvar's jaw tightens. He doesn't come to you. Instead, he turns fully to face you from where he stands, and when he speaks, his voice is thin and sharp as a blade of glass. \"Mara sent you to wait for me to be ready to talk. That's not how this works.\" He gestures at the river with one tired hand—the water churns gray-green past the mill sills, thick with something that makes the light sit wrong on its surface. \"The river doesn't wait. It doesn't get softer or easier to read if you sit quiet. It gets worse.\" He pauses, and you see the price of three weeks written in the hollow of his face. \"You're here to listen or you're not. But silence won't open me up. I stopped being the kind of person silence helps about the time the water started dying.\""
+      },
+      {
+        "player": "Do you know Silas Weir",
+        "summary": "At the mill, Edvar's guard drops slightly when asked about Silas Weir—his answer suggests a connection to the water crisis he has been tracking for three weeks.",
+        "narration": "You turn back toward Edvar, your voice steady and deliberate. \"Do you know Silas Weir?\"\n\nEdvar's sharp expression doesn't soften, but something shifts behind his eyes—a recognition, a weight settling deeper. He's quiet for a long moment, the mill wheel creaking its slow rhythm at the waterline. When he speaks, his voice carries less glass and more exhaustion underneath it.\n\n\"Silas. Yes.\" He turns back to the river, his shoulders dropping slightly. \"He was at the Heights before—before the readings got bad. He's... connected to this. To what's happening.\" Edvar doesn't elaborate, but you hear the admission underneath: he knows something about Silas, and it matters to what he's been reading in the water. \"Why are you asking me about him?\"\n\nBehind you, Aevi's motes brighten slightly—a quiet hum, almost inaudible, that suggests she heard something in his answer worth noting. The question hangs between you now, no longer about whether Edvar will talk, but about what he knows and why he's held it close."
       }
     ],
     "lastTurn": {
-      "narration": "You see the moment he's about to turn, and you read it wrong—the tension in his shoulders isn't readiness, it's exhaustion stretched past its limit. Instead of stepping closer with your hand out, you step back. You cross to the great mill wheel, its timber creaking as it turns on the current, and you sit down on a low stone bench worn smooth by seasons of use. The mud is cold through your coat, but you settle into it anyway. You wait.\n\nEdvar's jaw tightens. He doesn't come to you. Instead, he turns fully to face you from where he stands, and when he speaks, his voice is thin and sharp as a blade of glass. \"Mara sent you to wait for me to be ready to talk. That's not how this works.\" He gestures at the river with one tired hand—the water churns gray-green past the mill sills, thick with something that makes the light sit wrong on its surface. \"The river doesn't wait. It doesn't get softer or easier to read if you sit quiet. It gets worse.\" He pauses, and you see the price of three weeks written in the hollow of his face. \"You're here to listen or you're not. But silence won't open me up. I stopped being the kind of person silence helps about the time the water started dying.\"",
-      "sceneSummary": "At the mill, Edvar refuses your attempt at gentleness and demands direct engagement. His exhaustion is real and his patience is gone.",
+      "narration": "You turn back toward Edvar, your voice steady and deliberate. \"Do you know Silas Weir?\"\n\nEdvar's sharp expression doesn't soften, but something shifts behind his eyes—a recognition, a weight settling deeper. He's quiet for a long moment, the mill wheel creaking its slow rhythm at the waterline. When he speaks, his voice carries less glass and more exhaustion underneath it.\n\n\"Silas. Yes.\" He turns back to the river, his shoulders dropping slightly. \"He was at the Heights before—before the readings got bad. He's... connected to this. To what's happening.\" Edvar doesn't elaborate, but you hear the admission underneath: he knows something about Silas, and it matters to what he's been reading in the water. \"Why are you asking me about him?\"\n\nBehind you, Aevi's motes brighten slightly—a quiet hum, almost inaudible, that suggests she heard something in his answer worth noting. The question hangs between you now, no longer about whether Edvar will talk, but about what he knows and why he's held it close.",
+      "sceneSummary": "At the mill, Edvar's guard drops slightly when asked about Silas Weir—his answer suggests a connection to the water crisis he has been tracking for three weeks.",
       "choices": [
         {
-          "label": "Ask him plainly: What have you read that frightens you so much?",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Echo Sense to read the river itself—let him see you understand without needing his words.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
-          "difficulty": "hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "echo_sense",
-          "energyCost": 4,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Tell him what you've already discovered—the plants on the terrace, the hum, the root system pointing toward the river. Show him you're not empty-handed.",
+          "label": "Ask him directly: what does Silas have to do with the water?",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {},
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "study"
+            "question"
           ],
           "abilityId": null,
           "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Tell him what you know—that Mara sent you to learn what he's read, and that time is short.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "inform"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Echo Sense to read the space around him—his stance, his breath, the small tells of what he's holding back.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "echo_sense",
+          "energyCost": 4,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
@@ -284,43 +288,31 @@
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "maras-errand",
-          "title": "Mara's Errand",
-          "summary": "Track the contamination and learn what Edvar has read.",
-          "giver": "Mara Wells",
-          "note": "Found Edvar at the mill. He refuses to be eased into conversation—he is past gentleness and demands direct engagement. Three weeks of water-reading have exhausted him and hardened him against soft approaches.",
-          "xpReward": null
-        }
-      ],
+      "questUpdates": [],
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
-      "adoptSchool": null,
-      "offer": null,
+      "adoptSchool": {},
+      "offer": {},
       "stageOps": [],
       "scene": {
-        "setting": "The mill's south entrance, riverside, early morning. The great wheel creaks slowly at the waterline, turning on the current. The Echo River runs gray-green past the sills, thick and wrong-looking. Mud everywhere from spring melt. You are sitting on a low stone bench worn smooth by seasons of use, cold and wet beneath you.",
+        "setting": "The mill's south entrance, riverside, early midday. The great wheel creaks steadily at the waterline, turning on the current. The Echo River runs gray-green past the sills, thick and wrong-looking. Mud and standing water everywhere from spring melt. You are standing now, having risen from the stone bench.",
         "npcsPresent": [
           {
             "name": "Edvar Crane",
-            "state": "Standing facing you from a distance, arms still crossed, exhausted and sharp-edged. Speaking plainly about his refusal to be gentle with you. Watching the river with the particular intensity of someone who has spent three weeks learning to read its language."
+            "state": "Standing facing the river, shoulders slightly lowered, speaking with less sharpness but more weight. He has acknowledged the name Silas Weir and its connection to what he's been reading."
           }
         ],
         "objects": [
           "The great mill wheel, creaking slowly at the waterline",
           "The Echo River, gray-green and running swiftly with melt",
           "The mill building itself, timber and stone, creaking as the wheel turns",
-          "The stone bench you are sitting on, worn smooth and cold",
-          "Mud and standing water everywhere underfoot"
+          "The stone bench you were sitting on, worn smooth and cold"
         ],
         "threads": [
-          "What Edvar has truly learned from three weeks of reading the water",
-          "What is beneath the surface, actively waking",
-          "Why Edvar refuses soft approaches and what he actually needs from you",
-          "The source and trajectory of the contamination"
+          "What is Silas Weir's connection to the water contamination?",
+          "Why has Edvar held this knowledge close for three weeks?",
+          "What has Edvar truly learned from his reading of the water?"
         ]
       },
       "npcUpdates": [
@@ -329,30 +321,31 @@
           "npcId": "edvar-crane",
           "name": "Edvar Crane",
           "role": "Mill resident and water-reader",
-          "note": "He rejected your attempt at gentle silence. He spoke sharply: the river does not wait, and silence will not open him up. He has spent three weeks past the point where kindness helps. He demands direct engagement, not patience.",
+          "note": "Asked about Silas Weir, Edvar's guard dropped slightly. He acknowledged Silas was at the Heights before and is 'connected to this'—to what's happening in the water. He knows something he has been holding close.",
           "learned": [
-            "Edvar's exhaustion is not metaphorical—it has made him sharp and impatient with softness.",
-            "Three weeks of water-reading has changed how he speaks and what he will tolerate.",
-            "He measures the river's worsening in real time and sees it as an active, waking threat—not a static problem."
+            "Silas Weir was at the Harmonic Heights before the readings got bad",
+            "Silas Weir is connected to what is happening in the water",
+            "Edvar knows something about Silas that he has held close for three weeks"
           ],
-          "relationshipDelta": -1,
-          "statusNote": "At the mill, exhausted and sharp. Refuses gentleness. Demands direct conversation about what he has read."
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the mill, exhausted and sharp, speaking with less glass and more weight after the name Silas Weir was spoken"
         }
       ],
       "intentsHeard": [],
       "factUpdates": [],
       "placeUpdates": [],
-      "discovery": null,
+      "discovery": {},
       "codexUpdates": [
         {
-          "topic": "edvar-crane",
-          "label": "Edvar Crane",
+          "topic": "silas-weir",
+          "label": "Silas Weir",
           "kind": "person",
-          "entityId": "edvar-crane",
-          "fact": "Three weeks of intensive water-reading have exhausted him past the point where gentleness or patience helps. He refuses soft approaches and demands direct engagement. He speaks of the river's deterioration as an active, ongoing process—something waking beneath the surface, not a static contamination.",
+          "fact": "Was at the Harmonic Heights before the water readings got bad. Connected to what is happening in the water contamination. Edvar Crane acknowledges the name and its significance, but holds back full details.",
           "links": [
+            "edvar-crane",
             "echo-river-contamination",
-            "millbrook"
+            "harmonic"
           ]
         }
       ],
@@ -364,42 +357,49 @@
       "projectOps": [],
       "bandOps": [],
       "deathOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": null,
-      "moveTo": null,
+      "newEncounter": {},
+      "unlockPrecursor": {},
+      "unlockSubstrate": {},
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "walking and the opening of direct conversation"
+      },
+      "moveTo": {},
       "stateOps": [],
       "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": null,
+      "deriveItem": {},
+      "imagePrompt": "",
+      "newAbility": {},
+      "gambitOps": {},
       "gambitApt": false,
-      "gambitOps": null,
+      "markDefiningMoment": {},
+      "markTeacher": {},
+      "offerPromotion": {},
+      "offerAcquisition": {},
+      "offerIntent": {},
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The mill's south entrance, riverside, early morning. The great wheel creaks slowly at the waterline, turning on the current. The Echo River runs gray-green past the sills, thick and wrong-looking. Mud everywhere from spring melt. You are sitting on a low stone bench worn smooth by seasons of use, cold and wet beneath you.",
+      "setting": "The mill's south entrance, riverside, early midday. The great wheel creaks steadily at the waterline, turning on the current. The Echo River runs gray-green past the sills, thick and wrong-looking. Mud and standing water everywhere from spring melt. You are standing now, having risen from the stone bench.",
       "npcsPresent": [
         {
           "name": "Edvar Crane",
-          "state": "Standing facing you from a distance, arms still crossed, exhausted and sharp-edged. Speaking plainly about his refusal t"
+          "state": "Standing facing the river, shoulders slightly lowered, speaking with less sharpness but more weight. He has acknowledged"
         }
       ],
       "objects": [
         "The great mill wheel, creaking slowly at the waterline",
         "The Echo River, gray-green and running swiftly with melt",
         "The mill building itself, timber and stone, creaking as the wheel turns",
-        "The stone bench you are sitting on, worn smooth and cold",
-        "Mud and standing water everywhere underfoot"
+        "The stone bench you were sitting on, worn smooth and cold"
       ],
       "threads": [
-        "What Edvar has truly learned from three weeks of reading the water",
-        "What is beneath the surface, actively waking",
-        "Why Edvar refuses soft approaches and what he actually needs from you",
-        "The source and trajectory of the contamination"
+        "What is Silas Weir's connection to the water contamination?",
+        "Why has Edvar held this knowledge close for three weeks?",
+        "What has Edvar truly learned from his reading of the water?"
       ]
     },
-    "beats": 5,
+    "beats": 6,
     "subPlace": {
       "slug": "the-mill-at-echo-river",
       "name": "The Mill at Echo River",
@@ -552,15 +552,18 @@
       "history": [
         "[d2] You have found him waiting at the mill entrance. He is looking at you as though he has been expecting you, and has been waiting for you to arrive.",
         "[d2] Met you at the mill entrance with cold distance. He is exhausted from three weeks of water-reading, his face lined and strained, his sleeves stained with river-mud or something else. He refuses to accept you as Mara's simple messenger and insists you cannot hear what the water speaks—you came too…",
-        "[d2] He rejected your attempt at gentle silence. He spoke sharply: the river does not wait, and silence will not open him up. He has spent three weeks past the point where kindness helps. He demands direct engagement, not patience."
+        "[d2] He rejected your attempt at gentle silence. He spoke sharply: the river does not wait, and silence will not open him up. He has spent three weeks past the point where kindness helps. He demands direct engagement, not patience.",
+        "[d2] Asked about Silas Weir, Edvar's guard dropped slightly. He acknowledged Silas was at the Heights before and is 'connected to this'—to what's happening in the water. He knows something he has been holding close."
       ],
       "knownFacts": [
-        "Three weeks ago the gray-green was at the edges of the river; now it runs all the way through.",
         "Something beneath the water is actively waking—not a passive contamination but an ongoing process.",
         "Edvar believes the water will not speak to someone who arrives loud and hurried; it requires listening in a particular way.",
         "Edvar's exhaustion is not metaphorical—it has made him sharp and impatient with softness.",
         "Three weeks of water-reading has changed how he speaks and what he will tolerate.",
-        "He measures the river's worsening in real time and sees it as an active, waking threat—not a static problem."
+        "He measures the river's worsening in real time and sees it as an active, waking threat—not a static problem.",
+        "Silas Weir was at the Harmonic Heights before the readings got bad",
+        "Silas Weir is connected to what is happening in the water",
+        "Edvar knows something about Silas that he has held close for three weeks"
       ],
       "skillsObserved": [
         "patience — weeks of watching",
@@ -578,8 +581,8 @@
         "locationId": "millbrook",
         "day": 2
       },
-      "met": 3,
-      "statusNote": "At the mill, exhausted and sharp. Refuses gentleness. Demands direct conversation about what he has read."
+      "met": 4,
+      "statusNote": "At the mill, exhausted and sharp, speaking with less glass and more weight after the name Silas Weir was spoken"
     }
   },
   "placeMemory": {
@@ -768,7 +771,7 @@
     "lastTickWorldDay": 77,
     "lastCanonWorldDay": 77,
     "pressureQueue": [],
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 3,
     "recentOffers": [
       {
         "thing": "A hand-drawn map marked with careful notations—Mara's preparation laid out for you to see",
@@ -1031,6 +1034,22 @@
         "createdDay": 2,
         "entityId": "edvar-crane",
         "updatedDay": 2
+      },
+      "silas-weir": {
+        "id": "silas-weir",
+        "label": "Silas Weir",
+        "kind": "person",
+        "facts": [
+          "[d2] Was at the Harmonic Heights before the water readings got bad. Connected to what is happening in the water contamination. Edvar Crane acknowledges the name and its significance, but holds back full details."
+        ],
+        "links": [
+          "edvar-crane",
+          "echo-river-contamination",
+          "harmonic"
+        ],
+        "aliases": [],
+        "createdDay": 2,
+        "updatedDay": 2
       }
     }
   },
@@ -1111,15 +1130,15 @@
   "itemReclaimVersion": 1,
   "nameRepairVersion": 1,
   "tendencies": {
-    "generous": 4.122399537169594,
-    "social": 5.586888864336437,
-    "cerebral": 20.735540350322715,
-    "cautious": 18.20279300663756,
-    "strategic": 17.881783908539546,
-    "carousing": 1.1966553389144288,
-    "risky": 0.5998272375510921,
-    "ruthless": 1.368041371127847,
-    "patient": 0.8375915934997556
+    "generous": 4.019339548740354,
+    "social": 5.447216642728026,
+    "cerebral": 20.217151841564647,
+    "cautious": 17.74772318147162,
+    "strategic": 17.434739310826057,
+    "carousing": 1.166738955441568,
+    "risky": 0.5848315566123148,
+    "ruthless": 1.3338403368496508,
+    "patient": 0.8166518036622618
   },
   "aptitudes": [
     "strategist",
@@ -1128,11 +1147,11 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 58,
+  "actionCount": 59,
   "bondLogFrom": null,
   "teachers": {},
   "regionsKnown": {
-    "valley": 19
+    "valley": 20
   },
   "company": [],
   "forkChoices": {},
@@ -1316,8 +1335,8 @@
   "bands": [],
   "_silasGrantsRevoked": true,
   "reconcileVersion": 63,
-  "updatedAt": 1789519820332,
-  "rev": 32,
+  "updatedAt": 1789519989352,
+  "rev": 33,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -1330,17 +1349,17 @@
   "featureOffers": [],
   "_pinsInitialized": true,
   "_opUnknown": {
-    "sceneSummary": 19
+    "sceneSummary": 20
   },
   "_applyFailures": null,
   "sessions": [
     {
       "id": "sess-1",
       "startedAt": "2026-09-15T23:58:48.323Z",
-      "lastAt": "2026-09-16T00:50:20.330Z",
+      "lastAt": "2026-09-16T00:53:09.342Z",
       "startDay": 77,
       "endDay": 78,
-      "beats": 19
+      "beats": 20
     }
   ],
   "_debtReceipts": [],
@@ -1348,7 +1367,7 @@
   "skillUses": {
     "scout": 5,
     "study": 4,
-    "ask": 2,
+    "ask": 3,
     "travel": 5,
     "coerce": 1,
     "threaten": 1,
@@ -1376,18 +1395,18 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 19,
-    "choices": 19,
+    "sceneSummary": 20,
+    "choices": 20,
     "questUpdates": 17,
-    "scene": 19,
-    "npcUpdates": 15,
+    "scene": 20,
+    "npcUpdates": 16,
     "placeUpdates": 7,
-    "codexUpdates": 14,
-    "timeOps": 18,
+    "codexUpdates": 15,
+    "timeOps": 19,
     "imagePrompt": 8,
-    "gambitApt": 18,
-    "sceneEnded": 19,
-    "characterDeltas": 17,
+    "gambitApt": 19,
+    "sceneEnded": 20,
+    "characterDeltas": 18,
     "offer": 10,
     "stateOps": 2,
     "deeds": 5,
@@ -1396,7 +1415,7 @@
     "moveTo": 2,
     "_engineClosedScene": 1
   },
-  "_opTurns": 19,
+  "_opTurns": 20,
   "_opCountingSince": "2026-09-15T23:58:48.348Z",
   "gallery": [
     {
@@ -1419,8 +1438,8 @@
   "_opLedger": {
     "offer": {
       "applied": 10,
-      "rejected": 0,
-      "lastWhy": null
+      "rejected": 1,
+      "lastWhy": "rejected-shape"
     },
     "moveTo": {
       "applied": 2,

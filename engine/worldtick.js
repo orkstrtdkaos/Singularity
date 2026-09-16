@@ -38,7 +38,7 @@ const KNOWN_TIERS = new Set(["mythic", "legendary", "epic", "heroic", "regional"
 import { smartClamp } from "./namematch.js"; // SNG-076: word-boundary clamp for the away-digest/news
 import { generatedRecords } from "./generate.js";
 import { syncEnabled, fetchRepoJSON, fetchLedgerMonths, fetchLedgerAll, pushMergedFile } from "./sync.js";   // CCODE-354: no owned-file writes left here — the region file is shared
-import { travelerCard, cardChanged, mergeTravelerCard, ledgerMonthsSince } from "./travelers.js";   // SNG-595: a fellow traveler is a person the world has a record of
+import { travelerCard, cardChanged, mergeTravelerCard, ledgerMonthsSince, whereOf, meetKey } from "./travelers.js";   // SNG-595: a fellow traveler is a person the world has a record of
 import { stampEventChange, mergeEventStages, mergeQuestOutcomes, actorOf, questKey } from "./worldevents.js";   // CCODE-354: a crisis another traveler answered reads as answered
 import { decayWakes, wakeArcPush } from "./wake.js"; // SNG-204: wakes decay on the tick + lean on connected arcs
 import { enterDeathState, deepenDeaths, deathDepth, isRetrievable, resolveRetrieval } from "./death.js"; // SNG-209: a killed figure ENTERS the death state; the clock sinks untended deaths toward sealed
@@ -1051,14 +1051,18 @@ const closedLedgerMonths = new Map();
  *  on one key per character, so two travelers publishing at once union rather than clobber (Law 7).
  *  ⛑ THE LEDGER comes back WHOLE, every month, because the reader it feeds is keyed by person and a person's record
  *  has no month boundary. Best-effort, never throws; a failed read returns null and the caller keeps its last copy. */
-export async function syncTravelers({ character, profile = null, now = new Date() } = {}) {
+export async function syncTravelers({ character, profile = null, now = new Date(), locations = null } = {}) {
   if (!syncEnabled() || !character?.id) return { synced: false, index: null, ledger: null };
   let index = null, ledger = null;
   try {
-    const card = travelerCard(character, { playerKey: profile?.playerKey || null, now: +new Date(now) });
     const remote = await fetchRepoJSON(TRAVELERS_PATH);
     index = remote;
-    if (card && cardChanged(remote?.travelers?.[card.id], card)) {
+    // ⛔ CCODE-359: where this traveler is — and "since" survives a move from the store to the square, because a town is one here.
+    let where = locations ? whereOf(character, locations, { worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })() }) : null;
+    const prevCard = remote?.travelers?.[character.id] || null;
+    if (where && prevCard?.where && meetKey(prevCard.where) === meetKey(where) && prevCard.where.sinceWorldDay != null) where = { ...where, sinceWorldDay: prevCard.where.sinceWorldDay };
+    const card = travelerCard(character, { playerKey: profile?.playerKey || null, now: +new Date(now), where });
+    if (card && cardChanged(prevCard, card, { now: +new Date(now) })) {
       let merged = null;
       await pushMergedFile(TRAVELERS_PATH, (r) => (merged = mergeTravelerCard(r, card)), `travelers: ${card.name}`);
       index = merged || mergeTravelerCard(remote, card);

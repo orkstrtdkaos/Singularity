@@ -38,7 +38,7 @@ import { relationOf } from "./presence.js";
  *  far along they are. ⚠️ NEVER where they are standing, what they carry, who they are bonded to, or anything
  *  else from the save. The save is theirs; the ledger is what the world saw; this card is only the key that
  *  joins a spoken name to the second. */
-export function travelerCard(character, { playerKey = null, now = Date.now() } = {}) {
+export function travelerCard(character, { playerKey = null, now = Date.now(), where = null } = {}) {
   if (!character?.id || !String(character?.name || "").trim()) return null;
   const card = {
     id: String(character.id),
@@ -50,15 +50,100 @@ export function travelerCard(character, { playerKey = null, now = Date.now() } =
   // ⛔ PRONOUNS ONLY WHEN SOMEONE SAID THEM. A player's character carries no pronoun field today, and the
   // SNG-594 rule stands: a person's pronouns are not the engine's to derive.
   if (character.pronouns) card.pronouns = String(character.pronouns);
+  // ⛔ CCODE-359 — AND WHERE THEY ARE, at the grain a meeting needs. Erik: "Silas is about to come back to Millbrook to check on
+  // everything - it would be great to have Adelheid and he meet." ⚠️ This reverses SNG-595's "no position" on his word: two
+  // people cannot meet if neither world knows the other is there. A community and a place — never coordinates, never a route.
+  if (where && (where.communityId || where.settlementId)) card.where = { ...where };
   card.updatedAt = new Date(Number(now) || Date.now()).toISOString();
   return card;
 }
 
+/** ⛔ CCODE-359 — WHERE A CHARACTER IS, AT THE GRAIN A MEETING NEEDS.
+ *
+ *  ⚑ Adelheid stands at `gen-mara-wells-store`; Silas would arrive at `millbrook`. Different ids — and the SAME community,
+ *  `valley.millbrook`, with the store's `parentId` pointing at the town. So the meeting key is the COMMUNITY, and the
+ *  settlement is the top-most ancestor that still shares it: a shop, a garden and a square in one town are one "here".
+ *  Pure — `locations` is the reader's own content, so a place only this character's world knows still resolves. */
+export function whereOf(character, locations = {}, { worldDay = null } = {}) {
+  const id = character?.currentLocationId;
+  if (!id) return null;
+  const loc = locations?.[id] || null;
+  // ⛑ A COMMUNITY IS NAMED FOR ITS TOWN — `valley.millbrook` is Millbrook — so when that place exists, it is the settlement.
+  // ⚠️ Measured before this: climbing the parents made Millbrook "The Disputed Zone — Fringe" (no community, so nothing
+  // stopped the climb) and then "Echo River Crossing" (Millbrook's parent, filed in the SAME community). Neither is what a
+  // person in the square would call where they are.
+  const town = loc?.communityId ? locations?.[String(loc.communityId).split(".").pop()] : null;
+  let top = town || loc, guard = 0;
+  // Failing a town of that name, climb — but only through ancestors of the SAME community.
+  while (!town && top?.parentId && locations?.[top.parentId] && guard++ < 8) {
+    const up = locations[top.parentId];
+    if (!loc?.communityId || up.communityId !== loc.communityId) break;
+    top = up;
+  }
+  return {
+    locationId: id, placeName: loc?.name || null, communityId: loc?.communityId || null,
+    settlementId: top?.id || id, settlementName: top?.name || loc?.name || null,
+    sinceWorldDay: Number.isFinite(Number(worldDay)) && worldDay !== null ? Number(worldDay) : null,
+  };
+}
+
+/** The key two travelers meet on: their community, or the settlement where a place belongs to none. */
+export function meetKey(where) {
+  return where?.communityId || where?.settlementId || null;
+}
+
+/** ⚠️ HOW OLD "LAST SEEN" MAY BE and still mean "here". Real time, because the card is stamped in real time and a player who
+ *  closed the game three days ago is not in Millbrook in any sense a meeting can use. */
+export const PRESENCE_FRESH_MS = 3 * 24 * 60 * 60 * 1000;
+/** A card is re-published this often while its player keeps playing in one place, so "last seen" stays true. */
+export const PRESENCE_REFRESH_MS = 6 * 60 * 60 * 1000;
+
+/** The OTHER travelers in the same community as `where`, seen recently — most recent first. */
+export function travelersHere(index, { selfId = null, where = null, now = Date.now(), withinMs = PRESENCE_FRESH_MS } = {}) {
+  const key = meetKey(where);
+  if (!key) return [];
+  const t = Number(now) || Date.now();
+  return Object.values(index?.travelers || {})
+    .filter(c => c?.id && c.id !== selfId && c.where && meetKey(c.where) === key && (t - (+new Date(c.updatedAt) || 0)) <= withinMs)
+    .sort((a, b) => (+new Date(b.updatedAt) || 0) - (+new Date(a.updatedAt) || 0));
+}
+
+/** "2 hours ago", in the words a person would use. */
+export function agoWords(ms) {
+  const m = Math.max(0, Math.round((Number(ms) || 0) / 60000));
+  if (m < 2) return "just now";
+  if (m < 60) return `${m} minutes ago`;
+  const h = Math.round(m / 60);
+  if (h < 36) return `${h} hour${h === 1 ? "" : "s"} ago`;
+  const d = Math.round(h / 24);
+  return `${d} day${d === 1 ? "" : "s"} ago`;
+}
+
+/** One line per traveler here, for the player and for the GM alike — what anyone in town could honestly say. */
+export function travelerHereLine(c, { now = Date.now() } = {}) {
+  const w = c?.where || {};
+  const at = w.placeName && w.placeName !== w.settlementName ? `at ${w.placeName}` : "about the place";
+  return `${c.name} is in ${w.settlementName || "this place"}${w.sinceWorldDay != null ? ` (since world-day ${w.sinceWorldDay})` : ""} — last seen ${at}, ${agoWords((Number(now) || Date.now()) - (+new Date(c.updatedAt) || 0))}`;
+}
+
+/** ⛔ CCODE-359 — ANOTHER TRAVELER IS HERE. Null when nobody is. */
+export function travelersHereForGM(index, { character = null, where = null, now = Date.now(), origins = [] } = {}) {
+  const here = travelersHere(index, { selfId: character?.id || null, where, now });
+  if (!here.length) return null;
+  return here.slice(0, 3).map(c => {
+    const origin = (origins || []).find(o => o?.id === c.origin)?.name;
+    return `- ${travelerHereLine(c, { now })}. Another traveler — a player's character, level ${c.level}${origin ? `, of ${origin}` : ""}.`;
+  }).join("\n");
+}
+
 /** ⚠️ A TICK THAT CHANGES NOTHING WRITES NOTHING. `updatedAt` is when the card was stamped, not a change. */
-export function cardChanged(prev, next) {
+export function cardChanged(prev, next, { now = Date.now(), refreshMs = PRESENCE_REFRESH_MS } = {}) {
   if (!next) return false;
   if (!prev) return true;
-  return ["name", "playerKey", "level", "origin", "pronouns"].some(k => (prev[k] ?? null) !== (next[k] ?? null));
+  if (["name", "playerKey", "level", "origin", "pronouns"].some(k => (prev[k] ?? null) !== (next[k] ?? null))) return true;
+  // ⛔ CCODE-359: a move is a change; so is a presence that has gone stale while its player is still here, playing.
+  if ((prev.where?.locationId ?? null) !== (next.where?.locationId ?? null) || meetKey(prev.where) !== meetKey(next.where)) return true;
+  return !!next.where && ((Number(now) || Date.now()) - (+new Date(prev.updatedAt) || 0)) > refreshMs;
 }
 
 /** The merge body for `pushMergedFile`: ONE KEY PER CHARACTER, the same union-safe shape as `arcs.byActor`, so

@@ -1713,6 +1713,10 @@ img[data-lightbox] { cursor: zoom-in; }
 .loc-head .src-strip { display: flex; margin-top: 8px; gap: 6px; }
 .src-pct { margin-left: 5px; font-variant-numeric: tabular-nums; color: var(--ink-dim); }
 .src-part { white-space: nowrap; }
+/* ⛔ CCODE-359 — another traveler is here: one quiet line above the place, and a door */
+.traveler-here { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin: 0 0 10px; padding: 8px 12px;
+  border: 1px solid rgba(90, 168, 160, 0.35); border-radius: 8px; background: rgba(90, 168, 160, 0.06); font-family: var(--font-ui); font-size: 13px; color: var(--ink); }
+.traveler-here .th-who { color: var(--accent2); }
 .src-sep { margin: 0 6px; color: var(--ink-dim); }
 @media (max-width: 600px) {
   .loc-title { font-size: 20px; }

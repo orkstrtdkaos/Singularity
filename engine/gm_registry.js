@@ -40,7 +40,7 @@ import { holdingsForGM, debtsForGM } from "./holdings.js";
 import { caravansForGM } from "./caravan.js";   // R49: loads on the road
 import { loreForLocation, eventsForGM, traditionMotivationsForGM } from "./state.js";
 import { buildRegionView, newsForGM, worldArcsForGM, collapseLedgerEvents } from "./worldtick.js";
-import { travelersForGM } from "./travelers.js";   // SNG-595: a name that belongs to another player
+import { travelersForGM, travelersHereForGM, whereOf } from "./travelers.js";   // SNG-595: a name that belongs to another player · CCODE-359: and who is here
 import { worldMovedOnForGM } from "./worldevents.js";   // CCODE-354: the world moved on while this character believed otherwise
 import { playerWishesForGM } from "./playerprofile.js";   // CCODE-355: what this player wants from the game
 import { SEXUAL_MARKERS, HARD_INTENSITY_MARKERS } from "./canon.js";   // SNG-595: the family floor, for rows with no rating
@@ -586,6 +586,12 @@ export const GM_CONTEXT = [
   { key: "worldMovedOnDetail", builder: "worldevents.worldMovedOnForGM (CCODE-354)", carries: ["a crisis another traveler answered, for the first beats after this world learns it"],
     reachedBy: "always (empty unless an answered event this character did not make is still within its beats)", spec: "CCODE-354", views: ["turn", "ask"],
     build: (env) => worldMovedOnForGM(env.character, { events: env.CONTENT?.events || {}, quests: env.CONTENT?.quests || [] }) },
+  // ⛔ CCODE-359 (Erik: "Silas is about to come back to Millbrook to check on everything - it would be great to have Adelheid and he
+  // meet") — another player's character is in this same town, seen recently.
+  { key: "travelersHereDetail", builder: "travelers.travelersHereForGM (CCODE-359)", carries: ["another player's character in this same community, seen in the last three days"],
+    reachedBy: "always (empty unless another traveler's card places them in this community recently)", spec: "CCODE-359", views: ["turn", "ask"],
+    build: (env) => travelersHereForGM(env.app?.travelersIndex?.() || null, { character: env.character,
+      where: whereOf(env.character, env.CONTENT?.locations || {}), origins: env.CONTENT?.origins || [] }) },
   { key: "travelersDetail", builder: "travelers.travelersForGM (SNG-595)", carries: ["another player's character the words named", "their public deeds, every ledger month", "who in this story was part of theirs"],
     reachedBy: "always (empty unless the words, or the last two beats, name another traveler)", spec: "SNG-595", views: ["turn", "ask"],
     build: (env) => travelersForGM(

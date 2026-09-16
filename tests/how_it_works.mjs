@@ -17384,8 +17384,10 @@ console.log("\n── §245 · a fellow traveler is a person the world has a rec
   const full245 = { id: "c1", name: "Silas Weir", level: 33, origin: "wright", currentLocationId: "gen-whistling-woman-post",
     inventory: [{ id: "spear" }], npcRegistry: { a: {} }, companions: [{ id: "pell" }], relationships: { x: 5 }, gender: "man" };
   const card245 = T245.travelerCard(full245, { playerKey: "pk", now: 1 });
-  const allowed245 = new Set(["id", "name", "playerKey", "level", "origin", "pronouns", "updatedAt"]);
-  check("§245: ⛔ the card carries nothing from the save but who they are — no position, no pack, no bonds",
+  // ⚠️ CCODE-359 ADDED `where`, ON ERIK'S WORD ("it would be great to have Adelheid and he meet"): a town and a place, published so
+  // two travelers can find each other. It is only ever what `whereOf` derives — never coordinates, a route, a pack or a bond.
+  const allowed245 = new Set(["id", "name", "playerKey", "level", "origin", "pronouns", "updatedAt", "where"]);
+  check("§245: ⛔ the card carries nothing from the save but who they are (and, with CCODE-359, which town) — no pack, no bonds",
     Object.keys(card245).every(k => allowed245.has(k)) && !("currentLocationId" in card245) && !("pronouns" in card245),
     Object.keys(card245).join(","));
   check("§245: …and a tick that changes nothing writes nothing — a stamp is not a change, a level is",
@@ -17482,7 +17484,7 @@ console.log("\n── §245 · a fellow traveler is a person the world has a rec
     && !/## FELLOW TRAVELERS/.test(GM245.buildTurnContext(bare245)));
   const APP245 = rd("app.js");
   check("§245: …and the game feeds it: the tick syncs travelers, the bag hands the reader all three stores",
-    /await syncTravelers\(\{ character, profile \}\)/.test(APP245)
+    /await syncTravelers\(\{ character, profile[ ,}]/.test(APP245)
     && /travelersIndex: \(\) => sharedTravelers\.index, sharedLedger: \(\) => sharedTravelers\.ledger, sharedCanonView: \(\) => sharedCanonView/.test(APP245));
   check("§245: ⚠️ …and a new ledger row is clamped on a word, not sliced mid-word — it is read back to other players now",
     /what: smartClamp\(String\(e\.what \|\| ""\)\.trim\(\), 200\)/.test(APP245));
@@ -17949,6 +17951,93 @@ console.log("\n── §250 · the nanite says both of its numbers ──");
   const A250 = rd("app.js").replace(/\r\n/g, "\n");
   check("§250: ⛔ the header renders both, each with its word and its percentage",
     /if \(Array\.isArray\(r\.parts\) && r\.parts\.length\) \{/.test(A250) && /\$\{esc\(p\.id\)\} <b>\$\{esc\(p\.level\)\}<\/b>\$\{p\.factor == null \? "" : `<span class="src-pct">\$\{Math\.round\(p\.factor \* 100\)\}%<\/span>`\}/.test(A250));
+}
+
+
+// ⛔ CCODE-359 (Erik, 2026-09-16) — "Silas is about to come back to Millbrook to check on everything - it would be great to have
+// Adelheid and he meet."
+// ⚑ MEASURED: nothing told either world the other traveler was there. The card deliberately carried no position (SNG-595), and an
+// open shared scene was found only by someone standing on the EXACT same id — Adelheid is at `gen-mara-wells-store`, Silas would
+// arrive at `millbrook`. ⛑ Both are `valley.millbrook`, so the community is the meeting key.
+console.log("\n── §251 · another traveler is here, and the town can find the scene ──");
+{
+  const T251 = await import("../engine/travelers.js");
+  const W251 = await import("../engine/worldtick.js");
+  const P251 = await import("../engine/party.js");
+  const { loadContentHeadless: lch251 } = await import("./headless_content.mjs");
+  const C251 = await lch251();
+
+  /* ---- 1 · ⛔ WHERE, AT THE GRAIN A MEETING NEEDS ---- */
+  const store251 = T251.whereOf({ currentLocationId: "gen-mara-wells-store" }, C251.locations, { worldDay: 78 });
+  const square251 = T251.whereOf({ currentLocationId: "millbrook" }, C251.locations, { worldDay: 80 });
+  const crossing251 = T251.whereOf({ currentLocationId: "the_crossing" }, C251.locations, {});
+  check("§251: ⛔ Mara Wells' Store and Millbrook's square are ONE here — the same town, the same key",
+    T251.meetKey(store251) === T251.meetKey(square251) && store251.settlementName === "Millbrook" && store251.placeName === "Mara Wells' Store",
+    JSON.stringify({ store: [store251.communityId, store251.settlementName], square: [square251.communityId, square251.settlementName] }));
+  check("§251: ⚠️ …named for the TOWN — not the zone its parent chain climbs to, nor the crossing filed beside it — and The Crossing is elsewhere",
+    square251.settlementId === "millbrook" && T251.meetKey(crossing251) !== T251.meetKey(square251));
+
+  /* ---- 2 · ⛔ WHO IS HERE: fresh, same town, not yourself ---- */
+  const now251 = Date.parse("2026-09-20T12:00:00Z");
+  const ago = (h) => new Date(now251 - h * 3600e3).toISOString();
+  const idx251 = { travelers: {
+    "c-adel": { id: "c-adel", name: "Adelheid", level: 1, origin: "harmonic", where: store251, updatedAt: ago(2) },
+    "c-gone": { id: "c-gone", name: "Longgone", level: 3, where: store251, updatedAt: ago(24 * 4) },
+    "c-far": { id: "c-far", name: "Faraway", level: 5, where: crossing251, updatedAt: ago(1) },
+    "c-silas": { id: "c-silas", name: "Silas Weir", level: 33, where: square251, updatedAt: ago(0) } } };
+  const here251 = T251.travelersHere(idx251, { selfId: "c-silas", where: square251, now: now251 }).map(c => c.name);
+  check("§251: ⛔ Silas in the square sees Adelheid at the store — and not himself, not someone gone four days, not someone in another town",
+    here251.join(",") === "Adelheid", here251.join(",") || "(nobody)");
+  const gm251 = T251.travelersHereForGM(idx251, { character: { id: "c-silas" }, where: square251, now: now251, origins: C251.origins });
+  check("§251: …and the GM is told it in words anyone in town could say — where she was last seen, and when",
+    /Adelheid is in Millbrook \(since world-day 78\) — last seen at Mara Wells' Store, 2 hours ago\. Another traveler — a player's character/.test(gm251 || ""), (gm251 || "(null)").slice(0, 120));
+
+  /* ---- 3 · ⛔ THE CARD MOVES WHEN SHE DOES, AND STAYS FRESH WHILE SHE PLAYS ---- */
+  const base251 = { id: "c-adel", name: "Adelheid", playerKey: "pk", level: 1, where: store251, updatedAt: ago(1) };
+  check("§251: ⛔ a move is a change, the same place an hour on is not, and a presence gone stale while she plays is refreshed",
+    T251.cardChanged(base251, { ...base251, where: square251 }, { now: now251 })
+    && !T251.cardChanged(base251, { ...base251 }, { now: now251 })
+    && T251.cardChanged({ ...base251, updatedAt: ago(7) }, { ...base251 }, { now: now251 }));
+
+  /* ---- 4 · ⛔ AGAINST A FAKE GITHUB ---- */
+  const { fakeRemote: fr251 } = await import("./lib/fake_remote.mjs");
+  const remote251 = fr251();
+  const restore251 = remote251.install();
+  try {
+    const put251 = (p, obj) => remote251.files.set(p, { content: JSON.stringify(obj), sha: `seed-${p}` });
+    put251("world/travelers.json", { schemaVersion: 1, travelers: { "c-adel": { ...base251, where: { ...store251, sinceWorldDay: 70 }, updatedAt: ago(9) } } });
+    await W251.syncTravelers({ character: { id: "c-adel", name: "Adelheid", level: 1, currentLocationId: "millbrook" }, profile: { playerKey: "pk" }, now: new Date(now251), locations: C251.locations });
+    const pub251 = remote251.read("world/travelers.json")?.travelers?.["c-adel"];
+    check("§251: ⛔ the tick publishes where she is — and a walk from the store to the square keeps the day she came to town",
+      pub251?.where?.locationId === "millbrook" && pub251.where.settlementName === "Millbrook" && pub251.where.sinceWorldDay === 70,
+      JSON.stringify(pub251?.where || null));
+
+    const fresh = new Date().toISOString();
+    put251("world/scenes/_open_index.json", { schemaVersion: 1, scenes: { "gen-mara-wells-store--x": { locationId: "gen-mara-wells-store", communityId: "valley.millbrook", updatedAt: fresh, party: 1 } } });
+    put251("world/scenes/gen-mara-wells-store--x.json", { schemaVersion: 1, sceneId: "gen-mara-wells-store--x", locationId: "gen-mara-wells-store", communityId: "valley.millbrook",
+      createdBy: "c-adel", party: [{ characterId: "c-adel", name: "Adelheid" }], beats: [], turn: "c-adel", encounters: {}, updatedAt: fresh, closedAt: null });
+    const found251 = await P251.listScenesAt("millbrook", { communityId: "valley.millbrook" });
+    const exact251 = await P251.listScenesAt("millbrook");
+    check("§251: ⛔ Silas in the square FINDS the scene she opened at the store — by town — where the exact-place search finds nothing",
+      found251.length === 1 && found251[0].sceneId === "gen-mara-wells-store--x" && exact251.length === 0, `by town ${found251.length} · by spot ${exact251.length}`);
+  } finally { restore251(); }
+
+  /* ---- 5 · ⛔ THE DOORS ---- */
+  const REG251 = await import("../engine/gm_registry.js");
+  const GM251 = await import("../engine/gm.js");
+  check("§251: ⛔ the row is registered for the turn and the ask",
+    REG251.registryKeys("turn").includes("travelersHereDetail") && REG251.registryKeys("ask").includes("travelersHereDetail"));
+  const bare251 = { character: { id: "t", name: "T", origin: "valley", background: "smith", level: 1, attributes: { physical: 3, mental: 3, social: 3, practical: 3 }, health: 10, maxHealth: 10, energy: 5, maxEnergy: 5, abilities: [], alignment: {}, inventory: [], quests: [] },
+    location: { id: "millbrook", name: "Millbrook", descriptionSeed: "a mill town", spectrum: {}, encounterFlavor: "quiet" }, region: { id: "valley", name: "The Valley" },
+    rules: {}, lore: "", timeLabel: "Day 1", recentTurns: [], sceneState: {}, resolution: null, playerInput: null };
+  const p251 = GM251.buildTurnContext({ ...bare251, travelersHereDetail: gm251 });
+  check("§251: …and READ, under a header that lets people speak OF her and never FOR her",
+    /## ANOTHER TRAVELER IS HERE/.test(p251) && p251.includes(gm251) && /NEVER voice them, move them/.test(p251));
+  const A251 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§251: ⛔ the play screen says who is here with a door to a shared scene, and a scene the player opens carries its town",
+    /here359 = travelersHere\(sharedTravelers\.index, \{ selfId: character\.id, where: whereOf\(character, CONTENT\.locations \|\| \{\}\) \}\);/.test(A251)
+    && /id="traveler-meet"/.test(A251) && /scene\.communityId = CONTENT\.locations\?\.\[character\.currentLocationId\]\?\.communityId \|\| null;/.test(A251)
+    && /syncTravelers\(\{ character, profile, locations: CONTENT\.locations \}\)/.test(A251));
 }
 
 /* ══════════ REPORT ══════════ */

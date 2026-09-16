@@ -89,7 +89,8 @@ import { activeArcEffects, craftCostNote, encounterBias, effectsInPlainWords, np
 import { knownIndex, whoIs, figureArtRecord } from "./engine/whois.js";   // SNG-299: who is that, and where do I read more
 import { worldTabHtml } from "./engine/worldtab.js";   // SNG-276: the tab's markup, testable
 import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, syncTravelers, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter, arcStageNow, worldRoster, NEWS_SECTIONS, pushCanonLook} from "./engine/worldtick.js";
-import { noteWorldMovedOnShown } from "./engine/worldevents.js";   // CCODE-354: the world moved on, counted by beats
+import { noteWorldMovedOnShown } from "./engine/worldevents.js";
+import { travelersHere, travelerHereLine, whereOf } from "./engine/travelers.js";   // CCODE-359: another traveler is here   // CCODE-354: the world moved on, counted by beats
 import { runWakeGeneration } from "./engine/wake.js"; // SNG-204 Phase 2: open wakes generate the next thread
 import { addAssignment, delegationRefusal, activeDelegates, MISSION_KINDS, MISSION_KIND_IDS, canSendOn, sayFamilies } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
 import { setArcFate } from "./engine/latentarcs.js"; // SNG-191 §7: the player closing a surfaced arc (the handled/resolved fate)
@@ -146,7 +147,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.22";
+const APP_VERSION = "2.0.23";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -5127,6 +5128,8 @@ function syncErrorMessage(prefix) {
 async function startPartyScene() {
   const stamp = new Date().toISOString().replace(/[:.]/g, "-");
   const scene = newSharedScene(character.currentLocationId, character, stamp);
+  // ⛔ CCODE-359: the scene carries its TOWN, so a traveler anywhere in it can find it — not only one standing on the same spot.
+  scene.communityId = CONTENT.locations?.[character.currentLocationId]?.communityId || null;
   const pushed = await pushSceneWithMerge(scene.sceneId, s => s, scene);
   if (!pushed) { alert(syncErrorMessage("Could not create the shared scene")); return; }
   enterPartyScene(pushed);
@@ -5525,7 +5528,7 @@ async function maybeTick() {
   // ⛔ SNG-595: publish this traveler's card (only when it changed) and read the world's record of everyone. A failed read
   // keeps the last good copy — a GM that knew who Silas was a minute ago must not forget him on a flaky network.
   try {
-    const tv = await syncTravelers({ character, profile });
+    const tv = await syncTravelers({ character, profile, locations: CONTENT.locations });   // CCODE-359: and where they are
     if (tv.synced) sharedTravelers = { index: tv.index || sharedTravelers.index, ledger: Array.isArray(tv.ledger) ? tv.ledger : sharedTravelers.ledger };
   } catch (err) { console.warn("[travelers] tick skipped:", err?.message); }
   // SNG-201: publish first-finder braids + adopt any the world found first; refresh the recipe cache.
@@ -16728,6 +16731,14 @@ function renderPlay(turn, opts = {}) {
   const encKindNow = (() => { const e = activeEnc(); return e ? encounterKind(e.def) : null; })();
   let main = `<div class="play${activeEnc()?.state?.mode === "skill_battle" ? " play-in-fight" : ""}${encKindNow ? ` enc-kind-${encKindNow}` : ""}">
     ${banner ? `<img class="scene-banner" data-lightbox="scene" src="${esc(banner)}" alt="${esc(location.name)}" onerror="this.style.display='none'">` : ""}
+    ${(() => {
+      // ⛔ CCODE-359 — ANOTHER TRAVELER IS HERE. Quiet, one line, and a door: the meeting is the players' to make.
+      if (sharedScene) return "";
+      let here359 = [];
+      try { here359 = travelersHere(sharedTravelers.index, { selfId: character.id, where: whereOf(character, CONTENT.locations || {}) }); } catch { here359 = []; }
+      if (!here359.length) return "";
+      return `<div class="traveler-here">${here359.slice(0, 2).map(c => `<span class="th-who">✦ ${esc(travelerHereLine(c))}</span>`).join("")}<button class="link-btn" id="traveler-meet" type="button">look for a shared scene</button></div>`;
+    })()}
     <div class="location-tag loc-head" ${sceneState?.setting ? `title="${esc(sceneState.setting)}"` : ""}>${(() => {
       // ⛔ CCODE-356 (Erik) — "this area needs a cleanup. The location should be a good title size - not crammed inline with
       // everythign else. plus it duplicates. The standing can go next to it - with the popup describing the general effect it
@@ -17524,11 +17535,21 @@ function renderPlay(turn, opts = {}) {
   const findBtn = document.getElementById("party-find");
   if (findBtn) findBtn.onclick = async () => {
     findBtn.textContent = "Looking…";
-    const scenes = await listScenesAt(character.currentLocationId);
+    const scenes = await listScenesAt(character.currentLocationId, { communityId: CONTENT.locations?.[character.currentLocationId]?.communityId || null });   // CCODE-359
     const open = scenes.find(sc => !sc.party.some(m => m.characterId === character.id));
     if (open && confirm(`Join ${open.party.map(m => m.name).join(", ")} in their scene?`)) joinPartyScene(open.sceneId);
     else if (confirm("No party found here. Start a shared scene others can join?")) startPartyScene();
     else renderPlay(character.activeScene?.lastTurn || null, {});
+  };
+  const meetBtn = document.getElementById("traveler-meet");   // CCODE-359: the same door as the party button, from the line that says who is here
+  // ⚠️ NOT `click() ?? fallback`: `click()` returns undefined, so the fallback would ALSO run and search twice.
+  if (meetBtn) meetBtn.onclick = async () => {
+    const partyFind = document.getElementById("party-find");
+    if (partyFind) { partyFind.click(); return; }
+    const scenes = await listScenesAt(character.currentLocationId, { communityId: CONTENT.locations?.[character.currentLocationId]?.communityId || null });
+    const open = scenes.find(sc => !sc.party.some(m => m.characterId === character.id));
+    if (open && confirm(`Join ${open.party.map(m => m.name).join(", ")} in their scene?`)) joinPartyScene(open.sceneId);
+    else if (confirm("No shared scene is open here yet. Start one they can join?")) startPartyScene();
   };
   const leaveBtn = document.getElementById("party-leave");
   if (leaveBtn) leaveBtn.onclick = () => leavePartyScene();

@@ -479,7 +479,9 @@ export async function fetchScene(sceneId) {
   try { return await fetchRepoJSON(scenePath(sceneId)); } catch { return null; }
 }
 
-export async function listScenesAt(locationId) {
+/** ⛔ CCODE-359: `communityId` finds a scene opened anywhere in the same town — Adelheid's at Mara Wells' Store from Silas in the
+ *  square. The exact-place match still stands for a scene whose index entry predates the community. */
+export async function listScenesAt(locationId, { communityId = null } = {}) {
   if (!syncEnabled()) return [];
   try {
     // 146c: the index is the join path — one small read, cost independent of how
@@ -490,7 +492,7 @@ export async function listScenesAt(locationId) {
     if (idx?.scenes && typeof idx.scenes === "object") {
       const now = new Date().toISOString();
       candidates = Object.entries(idx.scenes)
-        .filter(([, e]) => e && e.locationId === locationId && (e.party || 0) > 0)
+        .filter(([, e]) => e && (e.locationId === locationId || (communityId && e.communityId === communityId)) && (e.party || 0) > 0)
         .filter(([, e]) => sceneIsOpen({ party: [1], updatedAt: e.updatedAt }, now))
         .sort((a, b) => String(a[1].updatedAt || "").localeCompare(String(b[1].updatedAt || "")))
         .slice(-8)
@@ -524,7 +526,7 @@ async function updateOpenIndex(scene) {
     await pushMergedFile(OPEN_INDEX_PATH, (remote) => {
       const idx = (remote && typeof remote === "object" && remote.scenes) ? remote : { schemaVersion: 1, scenes: {} };
       if (sceneIsOpen(scene)) {
-        idx.scenes[scene.sceneId] = { locationId: scene.locationId, updatedAt: scene.updatedAt, party: scene.party.length };
+        idx.scenes[scene.sceneId] = { locationId: scene.locationId, ...(scene.communityId ? { communityId: scene.communityId } : {}), updatedAt: scene.updatedAt, party: scene.party.length };
       } else {
         delete idx.scenes[scene.sceneId];
       }

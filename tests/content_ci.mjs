@@ -947,8 +947,12 @@ for (const pack of PACKS) {
     // Her own standing ask names the number — `po/ASK_aevi_20260912_header_regen_foothills.md`: "the census reads 99 since the
     // Mountain Pass". ⛔ THE GATE STAYS A RATIFICATION RATHER THAN A MIRROR: it moves when an author says the world grew, with the
     // authoring named here, and not by reading the corpus back to itself.
-    check("SNG-392/398/396: the hierarchy matches the RATIFIED census — 25 regions, 99 settlements, 14 authored-in-play sites",
-      tiers.region === 25 && tiers.settlement === 99 && tiers.site === 14, JSON.stringify(tiers));
+    // ⚠️ 100 AND 15 SINCE 2026-09-16 (CCODE-361): Aevi minted THE KINDLY REST (a settlement — a house of healing 1.6 walking days
+    // south of Millbrook) and THE PAINTER'S SHELF (a site above it — a cabin over the valley), on Erik's brief for Courtney's
+    // Adelheid: "herbs, painting at a cabin overlooking the valley, spirituality, a monastery where she works as the healer she
+    // is". Her commit 01d21cb14 names both; it measured the suite by red SUITES, and these two landed inside one already red.
+    check("SNG-392/398/396: the hierarchy matches the RATIFIED census — 25 regions, 100 settlements, 15 authored-in-play sites",
+      tiers.region === 25 && tiers.settlement === 100 && tiers.site === 15, JSON.stringify(tiers));
     const ids = new Set(allLocs.map((l) => l.id));
     const badParent = allLocs.filter((l) => l.parentId !== null && !ids.has(l.parentId));
     check("SNG-392: every parentId resolves and every site HAS a parent",

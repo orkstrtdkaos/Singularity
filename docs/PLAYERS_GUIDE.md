@@ -492,7 +492,7 @@ leader when you meet again, and nobody arranged that — the world grew while yo
 
 # PART X · WHERE YOU BEGIN
 
-Exesa has a hundred and thirty-eight authored places across thirty-eight regions, and you do not all begin
+Exesa has a hundred and forty authored places across thirty-eight regions, and you do not all begin
 in the same one.** Where you start decides which of the world's troubles is *yours* — the water crisis
 belongs to the valley, and someone who begins in the Deepwood will meet a different quarrel entirely.
 

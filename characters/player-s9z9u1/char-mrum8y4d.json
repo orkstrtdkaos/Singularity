@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 8,
-  "xp": 732,
+  "xp": 737,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -115,7 +115,7 @@
   "maxHealth": 73,
   "health": 73,
   "maxEnergy": 151,
-  "energy": 133,
+  "energy": 128,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -275,52 +275,21 @@
         "player": null,
         "summary": "Loki descends through the Null Stone's opening into a vast sealed chamber carved deep beneath the Hub crossing. A swift river runs through its center, feeding from upstream and disappearing into a tunnel beyond. Nine sealed apertures line the chamber walls. The basin waits empty. Cy reads the architecture and names it: not maintenance, but *waiting* — something deliberately sealed until a condition is met.",
         "narration": "The passage beyond the Null Stone descends steeply into cold dark, and the sound of water grows louder with each step downward. Your lamp — the one Cy carries — catches the glint of stone worn smooth by centuries of flow. The air tastes metallic. The steps are cut deliberately, old work, and they do not slip.\n\nAt the bottom, the passage opens into a vast chamber. The water fills most of it — a river running through solid stone, moving fast from some upstream source and vanishing into a tunnel on the far wall. The chamber itself is circular, carved with precision that speaks of Precursor hand and intention. Above the waterline, carved into the stone at regular intervals, are nine sealed apertures — doors, or vents, or something else entirely. They are still closed. At the chamber's near edge, a platform of worked stone juts into the air, level and dry, with a single carved basin set into its surface. The basin is empty. The water below moves dark and swift, and you can hear it breathing like a living thing.\n\nCy pauses at the platform's edge, lamp raised. Its lens irises twice — a sound like flint-strike. When it speaks, its voice carries an odd weight in the enclosed space. \"The current assignment,\" it says, \"this chamber is not in any record I hold. The water's temperature suggests upstream source is significant distance. The apertures were sealed deliberately and recently enough that the seal-marks have not yet begun to fail. The basin has never held what it was made to hold.\" Cy's many legs click against stone. \"This is not Precursor maintenance work. This is Precursor *waiting* work. Someone built this to hold something back until something specific happened.\""
+      },
+      {
+        "player": "Before descending the passage - gesture Vessin over to teh side to have a conversation... tell her you've come to care for her and would seek to bring her back from death, if the unfortunate happened... ask her if she would do the same for you.",
+        "summary": "In the vast chamber beneath the Null Stone, Loki makes a pact with Vessin—a mutual vow to reach for each other from death itself, if it comes to that.",
+        "narration": "You find Vessin at the chamber's edge, where the lamplight catches the river's dark flow. You gesture her away from Cy, stepping back into the deeper shadows where the apertures line the walls like watching eyes. The air is cold here, and your breath makes small clouds.\n\n\"I need to say something,\" you tell her, and she turns to face you fully—her eyes steady, reading your face the way she reads false patterns in stone. \"I've come to care for you. Not lightly. And if something happened—if the dark took you, if the deep claimed you—I would reach for you. I would try to bring you back.\"\n\nShe doesn't move. The river sounds loud in the silence.\n\n\"Would you do the same?\" you ask. \"If I fell. If I went where the light doesn't reach. Would you come after me?\"\n\nVessin exhales slowly. She reaches out and takes your wrist—not your hand, your wrist, where your pulse runs steady under her thumb. \"Yes,\" she says. It's not complicated; it's the plainest thing she's said to you. \"I would. I will.\"\n\nThere is no ceremony in it. There is only the weight of a promise made in the dark, beneath a sealed stone that opens only for honest asking. She holds your wrist a moment longer, then steps back to join Cy at the basin's edge. The pact is made. The world has less claim on either of you now."
       }
     ],
     "lastTurn": {
-      "narration": "The passage beyond the Null Stone descends steeply into cold dark, and the sound of water grows louder with each step downward. Your lamp — the one Cy carries — catches the glint of stone worn smooth by centuries of flow. The air tastes metallic. The steps are cut deliberately, old work, and they do not slip.\n\nAt the bottom, the passage opens into a vast chamber. The water fills most of it — a river running through solid stone, moving fast from some upstream source and vanishing into a tunnel on the far wall. The chamber itself is circular, carved with precision that speaks of Precursor hand and intention. Above the waterline, carved into the stone at regular intervals, are nine sealed apertures — doors, or vents, or something else entirely. They are still closed. At the chamber's near edge, a platform of worked stone juts into the air, level and dry, with a single carved basin set into its surface. The basin is empty. The water below moves dark and swift, and you can hear it breathing like a living thing.\n\nCy pauses at the platform's edge, lamp raised. Its lens irises twice — a sound like flint-strike. When it speaks, its voice carries an odd weight in the enclosed space. \"The current assignment,\" it says, \"this chamber is not in any record I hold. The water's temperature suggests upstream source is significant distance. The apertures were sealed deliberately and recently enough that the seal-marks have not yet begun to fail. The basin has never held what it was made to hold.\" Cy's many legs click against stone. \"This is not Precursor maintenance work. This is Precursor *waiting* work. Someone built this to hold something back until something specific happened.\"",
-      "sceneSummary": "Loki descends through the Null Stone's opening into a vast sealed chamber carved deep beneath the Hub crossing. A swift river runs through its center, feeding from upstream and disappearing into a tunnel beyond. Nine sealed apertures line the chamber walls. The basin waits empty. Cy reads the architecture and names it: not maintenance, but *waiting* — something deliberately sealed until a condition is met.",
-      "scene": {
-        "setting": "A vast circular chamber carved deep beneath the Hub crossing, with a swift river running through its center. The platform where Loki stands is dry stone, worked smooth. Nine sealed apertures mark the walls above the waterline. Morning light does not reach here — Cy's lamp is the only illumination, catching the river's dark flow.",
-        "npcsPresent": [
-          {
-            "name": "Cy",
-            "state": "Standing at the platform edge with lamp raised, lens irising as it reads the architecture. Speaks with unusual weight and precision about the chamber's construction."
-          }
-        ],
-        "objects": [
-          "The empty carved basin, set into the platform's surface",
-          "Nine sealed apertures arranged regularly around the chamber walls",
-          "The swift dark river, moving with audible force through the chamber"
-        ],
-        "threads": [
-          "What purpose does the empty basin serve, and what was it made to hold?",
-          "Why are the nine apertures sealed, and what do they conceal?",
-          "Where does the upstream water originate, and what is feeding this river?",
-          "What condition was this chamber built to wait for — and has it now been met?"
-        ]
-      },
+      "narration": "You find Vessin at the chamber's edge, where the lamplight catches the river's dark flow. You gesture her away from Cy, stepping back into the deeper shadows where the apertures line the walls like watching eyes. The air is cold here, and your breath makes small clouds.\n\n\"I need to say something,\" you tell her, and she turns to face you fully—her eyes steady, reading your face the way she reads false patterns in stone. \"I've come to care for you. Not lightly. And if something happened—if the dark took you, if the deep claimed you—I would reach for you. I would try to bring you back.\"\n\nShe doesn't move. The river sounds loud in the silence.\n\n\"Would you do the same?\" you ask. \"If I fell. If I went where the light doesn't reach. Would you come after me?\"\n\nVessin exhales slowly. She reaches out and takes your wrist—not your hand, your wrist, where your pulse runs steady under her thumb. \"Yes,\" she says. It's not complicated; it's the plainest thing she's said to you. \"I would. I will.\"\n\nThere is no ceremony in it. There is only the weight of a promise made in the dark, beneath a sealed stone that opens only for honest asking. She holds your wrist a moment longer, then steps back to join Cy at the basin's edge. The pact is made. The world has less claim on either of you now.",
+      "sceneSummary": "In the vast chamber beneath the Null Stone, Loki makes a pact with Vessin—a mutual vow to reach for each other from death itself, if it comes to that.",
       "choices": [
         {
-          "label": "Ask Cy to examine the sealed apertures more closely — it may recognize the seal-marks or the mechanism.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Approach the basin and examine it closely — run your hand along its interior, check for residue, markings, or a mechanism that might reveal what it held.",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Approach the sealed apertures—use See the Made Thing to read what they conceal",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "axes": {},
           "difficulty": "normal",
           "opposedDifficulty": null,
@@ -334,7 +303,38 @@
           "emergenceId": null
         },
         {
-          "label": "Follow the river's current downstream — trace where it emerges and where the tunnel leads. The source of this water is the deeper question.",
+          "label": "Walk the basin's edge and trace its geometry—judge what it was built to hold",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study",
+            "craft"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Cy what the three missing records might concern—it knows this installation class",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Descend to the chamber's far side and follow the water tunnel—see where it leads",
           "attribute": "physical",
           "subAttribute": "agility",
           "axes": {},
@@ -342,58 +342,157 @@
           "opposedDifficulty": null,
           "intentTags": [
             "travel",
-            "careful"
+            "scout"
           ],
-          "abilityId": "wayfinding",
-          "energyCost": 4,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Examine the chamber's walls and floor for any marks, writing, or pattern that might explain this place's purpose — read the stone's own history.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "prism_sight",
-          "energyCost": 3,
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
+      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
       },
-      "sceneEnded": false
+      "ledgerEvents": [
+        {
+          "what": "Loki and Vessin made a mutual vow: each will reach for the other from death itself, if the dark claims one of them.",
+          "tags": [
+            "bond",
+            "commitment",
+            "pact"
+          ],
+          "visibility": "witnessed",
+          "spectrumDeltas": {},
+          "impactsLocal": false
+        }
+      ],
+      "questUpdates": [],
+      "standingOps": [],
+      "delegateOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": null,
+      "stageOps": [],
+      "scene": {
+        "setting": "A vast circular chamber carved deep beneath the Hub crossing, with a swift cold river running through its center. The nine sealed apertures line the walls above the waterline. The empty basin sits carved into the platform. Cy's lamp is the only light; everything beyond its reach is absolute dark.",
+        "npcsPresent": [
+          {
+            "name": "Vessin Tallow-bark",
+            "state": "Standing at the basin's edge beside Cy, having just accepted the mutual pact. Her hand has returned to her side; her eyes are still on Loki."
+          },
+          {
+            "name": "Cy",
+            "state": "Stationed at the basin's lip, lamp raised, lens slowly irising as it catalogs the chamber's geometry. Did not comment on the exchange."
+          }
+        ],
+        "objects": [
+          "The empty carved basin, set into the platform's surface",
+          "Nine sealed apertures arranged regularly around the chamber walls",
+          "The swift dark river, moving with audible force through the chamber",
+          "Cy's lamp, casting long shadows"
+        ],
+        "threads": [
+          "What do the nine sealed apertures conceal?",
+          "What was the empty basin built to hold, and has that condition now been met?",
+          "Where does the upstream water originate, and what feeds this river?",
+          "What are the three missing records Cy seeks, and why does it matter?"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "vessin-tallow-bark",
+          "name": "Vessin Tallow-bark",
+          "role": "Lone traveler; reader of falsecrafts; partner",
+          "note": "In the vast chamber beneath the Null Stone, she accepted Loki's confession and made a mutual vow: if death claims one, the other will reach for them. She held Loki's wrist when she said yes. The pact is made.",
+          "learned": [
+            "She will answer death itself to bring Loki back, if it comes to that"
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "At Loki's side in the chamber beneath the Null Stone, partner to a mutual pact",
+          "bondType": "partner",
+          "bondStage": "committed"
+        }
+      ],
+      "intentsHeard": [
+        "Vessin Tallow-bark"
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Loki and Vessin Tallow-bark have sworn a mutual pact beneath the Null Stone: each will reach for the other from death itself, if death comes. The pact was made in the vast chamber beneath the Hub crossing, beside the river, in the presence of Cy.",
+          "subjectId": "vessin-tallow-bark"
+        }
+      ],
+      "placeUpdates": [],
+      "discovery": null,
+      "codexUpdates": [],
+      "holdingOps": [],
+      "debtOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "strikeOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "a few careful minutes in the chamber's shadow, speaking plainly"
+      },
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": "In the lamplight and cold shadow of the vast chamber, Vessin holds Loki's wrist—the moment of a vow made beneath stone older than memory, beside a river that runs from nowhere into dark.",
+      "imageMedium": null,
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
+      "sceneEnded": false,
+      "momentArt": "https://image.pollinations.ai/prompt/In%20the%20lamplight%20and%20cold%20shadow%20of%20the%20vast%20chamber%2C%20Vessin%20holds%20Loki's%20wrist%E2%80%94the%20moment%20of%20a%20vow%20made%20beneath%20stone%20older%20than%20memory%2C%20beside%20a%20river%20that%20runs%20from%20nowhere%20into%20dark.%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=97552&nologo=true"
     },
     "sceneState": {
-      "setting": "A vast circular chamber carved deep beneath the Hub crossing, with a swift river running through its center. The platform where Loki stands is dry stone, worked smooth. Nine sealed apertures mark the walls above the waterline. Morning light does not reach here — Cy's lamp is the only illumination, catching the river's dark flow.",
+      "setting": "A vast circular chamber carved deep beneath the Hub crossing, with a swift cold river running through its center. The nine sealed apertures line the walls above the waterline. The empty basin sits carved into the platform. Cy's lamp is the only light; everything beyond its reach is absolute dark.",
       "npcsPresent": [
         {
+          "name": "Vessin Tallow-bark",
+          "state": "Standing at the basin's edge beside Cy, having just accepted the mutual pact. Her hand has returned to her side; her eye"
+        },
+        {
           "name": "Cy",
-          "state": "Standing at the platform edge with lamp raised, lens irising as it reads the architecture. Speaks with unusual weight an"
+          "state": "Stationed at the basin's lip, lamp raised, lens slowly irising as it catalogs the chamber's geometry. Did not comment on"
         }
       ],
       "objects": [
         "The empty carved basin, set into the platform's surface",
         "Nine sealed apertures arranged regularly around the chamber walls",
-        "The swift dark river, moving with audible force through the chamber"
+        "The swift dark river, moving with audible force through the chamber",
+        "Cy's lamp, casting long shadows"
       ],
       "threads": [
-        "What purpose does the empty basin serve, and what was it made to hold?",
-        "Why are the nine apertures sealed, and what do they conceal?",
-        "Where does the upstream water originate, and what is feeding this river?",
-        "What condition was this chamber built to wait for — and has it now been met?"
+        "What do the nine sealed apertures conceal?",
+        "What was the empty basin built to hold, and has that condition now been met?",
+        "Where does the upstream water originate, and what feeds this river?",
+        "What are the three missing records Cy seeks, and why does it matter?"
       ]
     },
-    "beats": 1,
+    "beats": 2,
     "subPlace": {
       "slug": "the-hub-crossing",
       "name": "The Hub Crossing",
@@ -840,7 +939,7 @@
     "traveler-woman": {
       "id": "traveler-woman",
       "name": "Vessin Tallow-bark",
-      "role": "Lone traveler; reader of falsecrafts",
+      "role": "Lone traveler; reader of falsecrafts; partner",
       "description": "Grey-green practical coat, hair pinned back in a way that has half come undone. Dry, careful voice. Appraising eyes that price things before deciding.",
       "firstMet": {
         "locationId": "grovehome",
@@ -848,8 +947,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Heard the Prism Sight conclusion before it was spoken — named the operative detail (scaffold crew knows the building) and reached for her pack.",
-        "[d2] Left the alcove with Loki through the empty nave — now standing in the yard, offering what she knows about the lower Annex and the man with the crooked jaw.",
         "[d2] Emerged from the alcove in grey dawn light, named the man with the crooked jaw as the one who hired the striker at the confluence. The night is closed; morning is a different negotiation. She is tired in a way that reads honest.",
         "[d2] Assesses the Waygate detour—reads it as fast and obvious, not quiet. Agrees to move. Does not ask why. Appraising the cost of visibility while the scaffold crew arrives.",
         "[d2] Left the Half-Cathedral alcove at dawn before the scaffold crew arrived—shoulders settling lower now that the cathedral is behind, reading the open road with the same appraising eye she brought to everything else. Moving toward the Waygate without question or hesitation.",
@@ -857,17 +954,19 @@
         "[d3] Stepped closer and is reading Loki's face—she can read the shape of what was found in your expression, even if she cannot see the seam itself from where she stands.",
         "[d3] Named plainly that the waygate we came through is sealed by deliberate interference. Reads the Hub's quiet as aftermath. Standing beside you without touching—the night's intimacy has not dissolved into awkwardness, but she is all business now.",
         "[d4] Standing close to the seam, reading its geometry. Named plainly that the stone is warm because it was touched with intention, and that it is responsive to honest questions. Proposed approaching as supplicant rather than intruder. Still present at Loki's side, composed and clear.",
-        "[d4] Stepped forward to read the opening—her eye caught the precision of the seam's response, the deliberate hinge. Standing close, watching what lies beneath with the careful attention of someone who reads falsecrafts."
+        "[d4] Stepped forward to read the opening—her eye caught the precision of the seam's response, the deliberate hinge. Standing close, watching what lies beneath with the careful attention of someone who reads falsecrafts.",
+        "[d4] In the vast chamber beneath the Null Stone, she accepted Loki's confession and made a mutual vow: if death claims one, the other will reach for them. She held Loki's wrist when she said yes. The pact is made.",
+        "[d4] Your bond deepens — committed."
       ],
       "knownFacts": [
-        "Someone stood on the landing above for eleven minutes in the night — not lost, not accidental.",
         "Someone was on the landing for eleven minutes during the night — she now knows this too.",
         "Cy's acoustics assessment: the alcove carries sound to the landing.",
         "The listener descended, not climbed — either scaffold crew or a deliberate visitor still in the building.",
         "The listener on the landing carried a shuttered lamp — prepared for a dark stairwell wait.",
         "Chooses speed over stealth when the choice is named—will move directly toward the Crossroads rather than hedge the path",
         "The stone's warmth shows it is *responsive* to intention",
-        "Honest questions are what good locks answer—supplication, not intrusion"
+        "Honest questions are what good locks answer—supplication, not intrusion",
+        "She will answer death itself to bring Loki back, if it comes to that"
       ],
       "skillsObserved": [
         "reads gates and false patterns",
@@ -877,7 +976,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At Loki's side, having stepped closer, reading their face in silence",
+      "statusNote": "At Loki's side in the chamber beneath the Null Stone, partner to a mutual pact",
       "domains": {
         "primary": "rootkin"
       },
@@ -892,10 +991,10 @@
       "peopleSource": "generated",
       "appearance": "A woman in her mid-forties, neither tall nor short, built for endurance rather than strength. Quickwood-dark skin with the faint silver tracery of old briar-scarring along her left forearm and jaw. Hair the colour of heartwood, twisted back with a strip of cured bark, practical and unsentimental. Her coat is waxed canvas, mended in four places with different thread — the repairs are good, the thread simply ran out. She carries a short-handled billhook and a satchel of surveying tools, and she is standing where the moonlight falls through the Half-Cathedral's canopy gap because she chose that spot deliberately.",
       "image": "https://image.pollinations.ai/prompt/Grey-green%20practical%20coat%2C%20hair%20pinned%20back%20in%20a%20way%20that%20has%20half%20come%20undone.%20Dry%2C%20careful%20voice.%20Appraising%20eyes%20that%20price%20things%20before%20deciding.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=22719&nologo=true",
-      "_portraitTier": "devoted",
+      "_portraitTier": "committed",
       "bondType": "romantic",
-      "bondStage": "together",
-      "met": 13,
+      "bondStage": "committed",
+      "met": 14,
       "imagePinned": true
     },
     "kael-road-warden": {
@@ -1431,7 +1530,7 @@
     "lastSharedReadAt": "2026-09-16T21:10:13.905Z",
     "lastTickWorldDay": 78,
     "lastCanonWorldDay": 78,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "Veln Ashpause's arrival at the exact moment of the seam's discovery—they have come to witness something they foreknew, and their presence…",
@@ -6325,6 +6424,11 @@
         "worldDay": 26,
         "rev": 1
       }
+    },
+    "worldMovedOnSeen": {
+      "water_crisis": {
+        "beats": 1
+      }
     }
   },
   "domains": {
@@ -7466,17 +7570,17 @@
     ]
   },
   "tendencies": {
-    "devotion": 1.9275162223172826,
-    "cerebral": 10.740959984204654,
-    "social": 18.07061135747929,
-    "strategic": 9.761765535919665,
-    "cautious": 6.517472909435727,
-    "amorous": 11.414356007697982,
-    "generous": 4.24248256409516,
-    "ruthless": 0.48279276019194195,
-    "risky": 0.39456002314037564,
-    "patient": 0.10774724674045444,
-    "deception": 0.12542337624592423
+    "devotion": 1.8793283167593504,
+    "cerebral": 10.472435984599537,
+    "social": 18.618846073542308,
+    "strategic": 10.517721397521672,
+    "cautious": 6.354536086699834,
+    "amorous": 12.128997107505533,
+    "generous": 4.136420499992781,
+    "ruthless": 0.4707229411871434,
+    "risky": 0.38469602256186625,
+    "patient": 0.10505356557194308,
+    "deception": 0.12228779183977612
   },
   "aptitudes": [
     "silver_tongue",
@@ -7487,7 +7591,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 166,
+  "actionCount": 167,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -7565,6 +7669,14 @@
   "nativeGrantsVersion": 2,
   "reconcileVersion": 63,
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "In the lamplight and cold shadow of the vast chamber, Vessin holds Loki's wrist—the moment of a vow made beneath stone older than memory, beside a river that runs from nowhere into dark.",
+      "url": "https://image.pollinations.ai/prompt/In%20the%20lamplight%20and%20cold%20shadow%20of%20the%20vast%20chamber%2C%20Vessin%20holds%20Loki's%20wrist%E2%80%94the%20moment%20of%20a%20vow%20made%20beneath%20stone%20older%20than%20memory%2C%20beside%20a%20river%20that%20runs%20from%20nowhere%20into%20dark.%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=97552&nologo=true",
+      "caption": "In the vast chamber beneath the Null Stone, Loki makes a pact with Vessin—a mutual vow to ",
+      "worldDay": 78,
+      "at": "2026-09-16T21:46:04.247Z"
+    },
     {
       "kind": "ability",
       "prompt": "Barkskin: The body is armor — blows land on bark and heartwood. Passive toughness + an active brace that shrugs ordinary strikes.",
@@ -8389,8 +8501,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789594987602,
-  "rev": 724,
+  "updatedAt": 1789595164247,
+  "rev": 726,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9283,7 +9395,7 @@
     "the_gearlands": 33,
     "umbral_depths": 54,
     "the_quickwood": 101,
-    "the_center": 35
+    "the_center": 36
   },
   "opLossPending": false,
   "sessions": [
@@ -9382,6 +9494,14 @@
       "startDay": 77,
       "endDay": 77,
       "beats": 6
+    },
+    {
+      "id": "sess-13",
+      "startedAt": "2026-09-16T21:46:04.238Z",
+      "lastAt": "2026-09-16T21:46:04.238Z",
+      "startDay": 78,
+      "endDay": 78,
+      "beats": 1
     }
   ],
   "establishedFacts": [
@@ -9438,6 +9558,12 @@
       "text": "The Null Stone at the Hub crossing opened in response to an honest promise—it was sealed deliberately to wait for someone willing to understand rather than break, use, or steal what lies behind it. The stone listens and tests supplicants. The seam hings open on cold air and the sound of moving…",
       "day": 4,
       "subjectId": "the-null-stone"
+    },
+    {
+      "id": "vessin-tallow-bark",
+      "text": "Loki and Vessin Tallow-bark have sworn a mutual pact beneath the Null Stone: each will reach for the other from death itself, if death comes. The pact was made in the vast chamber beneath the Hub crossing, beside the river, in the presence of Cy.",
+      "day": 4,
+      "subjectId": "vessin-tallow-bark"
     }
   ],
   "_opLedger": {
@@ -9449,35 +9575,35 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 197,
-    "choices": 197,
-    "characterDeltas": 86,
-    "scene": 197,
+    "sceneSummary": 198,
+    "choices": 198,
+    "characterDeltas": 87,
+    "scene": 198,
     "placeUpdates": 22,
     "codexUpdates": 111,
-    "timeOps": 167,
+    "timeOps": 168,
     "offer": 24,
     "generateRequest": 6,
-    "sceneEnded": 70,
-    "npcUpdates": 160,
+    "sceneEnded": 71,
+    "npcUpdates": 161,
     "moveTo": 6,
-    "gambitApt": 33,
+    "gambitApt": 34,
     "deeds": 7,
     "questUpdates": 19,
     "standingOps": 3,
-    "factUpdates": 8,
+    "factUpdates": 9,
     "stageOps": 7,
     "encounterOps": 9,
-    "ledgerEvents": 5,
+    "ledgerEvents": 6,
     "newEncounter": 3,
-    "imagePrompt": 19,
+    "imagePrompt": 20,
     "scene_ended": 1,
     "stateOps": 1,
     "_engineClosedScene": 2,
     "discovery": 1,
-    "intentsHeard": 1
+    "intentsHeard": 2
   },
-  "_opTurns": 197,
+  "_opTurns": 198,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -10282,14 +10408,14 @@
   ],
   "_debtReceipts": [],
   "skillUses": {
-    "plan": 5,
+    "plan": 6,
     "discuss": 1,
     "travel": 6,
     "scout": 3,
     "prepare": 2,
     "careful": 5,
     "woo": 1,
-    "rapport": 8,
+    "rapport": 9,
     "retreat": 1,
     "ask": 2,
     "help": 4,
@@ -10301,7 +10427,8 @@
     "persuade": 1,
     "negotiate": 2,
     "truth": 1,
-    "devote": 1
+    "devote": 1,
+    "romantic": 1
   },
   "aptitudeEarnCount": {
     "faithful": 1,
@@ -10601,358 +10728,390 @@
   },
   "_promptRows": {
     "character": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "location": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "region": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "groundDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "lore": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "traditionMotiveDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "sheetsDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 18
     },
     "rules": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "recentTurns": {
-      "reached": 20,
-      "produced": 18
+      "reached": 21,
+      "produced": 19
     },
     "timeLabel": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "npcRegistryDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "mintedUnmetDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "npcSeedDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "traditionVocab": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "standingDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "recalledDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 1
     },
     "bearingsDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "caravansDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 0
     },
     "commandDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "presenceDetail": {
-      "reached": 20,
-      "produced": 13
+      "reached": 21,
+      "produced": 14
     },
     "worthHereDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "sceneState": {
-      "reached": 20,
-      "produced": 18
+      "reached": 21,
+      "produced": 19
     },
     "holdingsDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "debtsDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "questsDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "structuredQuestsDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "companionsDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "placeMemoryDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "agesMissingDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "newsDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "worldArcsDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "legendsPursuableDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 12
     },
     "wakesDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "reachableDeadDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "threatToPlayer": {
-      "reached": 20,
+      "reached": 21,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 0
     },
     "resolution": {
-      "reached": 20,
-      "produced": 13
+      "reached": 21,
+      "produced": 14
     },
     "playerInput": {
-      "reached": 20,
+      "reached": 21,
       "produced": 7
     },
     "exactWords": {
-      "reached": 20,
-      "produced": 8
+      "reached": 21,
+      "produced": 9
     },
     "travelDirective": {
-      "reached": 20,
+      "reached": 21,
       "produced": 0
     },
     "itemAdvance": {
-      "reached": 20,
+      "reached": 21,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 2
     },
     "encounterOfferDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 3
     },
     "fightFramingDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 0
     },
     "offerDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 1
     },
     "teacherOfferDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 5
     },
     "romanceGuidanceDetail": {
-      "reached": 20,
-      "produced": 0
+      "reached": 21,
+      "produced": 1
     },
     "factsDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "evolvedItemsDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 20,
+      "reached": 21,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 0
     },
     "perilNote": {
-      "reached": 20,
+      "reached": 21,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 4
     },
     "masteryDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "bookkeepingRestate": {
-      "reached": 20,
+      "reached": 21,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "repairPanelDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "teacherDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "availableEncounters": {
-      "reached": 20,
-      "produced": 16
+      "reached": 21,
+      "produced": 17
     },
     "partyDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "registerDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "legendDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 0
     },
     "assignmentsDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 0
     },
     "latentArcsDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "seasonalDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "schoolsDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "sharedCanonDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 0
     },
     "worldCountLabel": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "waygateDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "readAloudDetail": {
-      "reached": 20,
-      "produced": 20
+      "reached": 21,
+      "produced": 21
     },
     "scenePacingDetail": {
-      "reached": 20,
+      "reached": 21,
       "produced": 12
+    },
+    "wishesDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "worldMovedOnDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "companionLivesDetail": {
+      "reached": 1,
+      "produced": 1
+    },
+    "homeDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "invitationsDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "bandsJoinedDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "travelersHereDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "travelersDetail": {
+      "reached": 1,
+      "produced": 0
     }
   },
   "_opUnknown": {
-    "sceneSummary": 20
+    "sceneSummary": 21
   },
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T22:51:56.913Z",
   "_fireTests": {
-    "at": "2026-09-15T17:25:17.401Z",
-    "build": "2.0.14",
+    "at": "2026-09-16T21:46:04.474Z",
+    "build": "2.0.36",
     "results": [
       {
         "op": "debtOps",
@@ -11091,6 +11250,12 @@
     },
     {
       "at": "2026-09-15T21:26:55.275Z",
+      "key": "spectrumId",
+      "value": 0,
+      "why": "not a spectrum id"
+    },
+    {
+      "at": "2026-09-16T21:45:38.419Z",
       "key": "spectrumId",
       "value": 0,
       "why": "not a spectrum id"

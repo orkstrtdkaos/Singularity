@@ -2535,6 +2535,177 @@
     }
    ],
    "image": null
+  },
+  {
+   "id": "the_patient_who_is_not_sick_enough",
+   "name": "The Patient Who Is Not Sick Enough",
+   "boundToCharacter": "Adelheid",
+   "giver": "sister_vreni",
+   "region": "valley",
+   "tier": "local",
+   "axis": "death_life",
+   "traditions": [
+    "rootkin",
+    "numinous",
+    "syllogist",
+    "stillhold"
+   ],
+   "premise": "A man came down off the Mountain Pass road eleven days ago with a wound in his thigh that had been cleaned properly by somebody who knew how. It closed. He eats, he walks the court, he thanks people. Sister Vreni cannot say what is wrong and will not say he is well, and she has stopped being able to sleep about it. She is asking you because she has read your hands and because the house has nobody else who was trained to look at a person rather than at a wound.",
+   "stakes": "He has perhaps four days of looking fine left. What treats him grows on the high terraces the house has not harvested in two seasons, beside something that looks very like it and will finish him faster than the thing in his blood. And he is not called what he says he is, which is the second reason two parties have come to the gate asking after him politely.",
+   "routes": {
+    "syllogist": "Work the sequence. Count what you can count, twice, six hours apart, and let the trend say what the snapshot will not.",
+    "rootkin": "Go up and read the ground. What grows where tells you what the terrace will give you and what it will not.",
+    "numinous": "Sit with him. A person who is frightened of being found tells you more by what he will not discuss than by any answer.",
+    "stillhold": "Do not hurry it. He is not in danger this hour, and the house has been hurrying for two years."
+   },
+   "stages": [
+    {
+     "id": "s1",
+     "title": "He looks well, and he is not",
+     "objective": "Assess him properly rather than looking at the wound. Count a resting pulse and count it again; watch the colour come back into a pressed nailbed; put the back of your hand on him. The wound is clean and closed and is not the problem, and the numbers are the only thing in the room that is telling the truth.",
+     "condition": "Take a full set of observations on Danic twice, at least six hours apart — or have Sister Vreni take the second set while you sleep.",
+     "change": "Codex: his pulse is fast and getting faster, his skin is warm and dry and then cool and damp, and the colour is slower back into the nailbed than it was this morning. His blood pressure has not moved, and that is the frightening part: a body this good at compensating is a body spending everything it has to look ordinary.",
+     "imagePrompt": "a healer's hands taking a pulse at a man's wrist in a stone-floored infirmary, morning light, herbs drying overhead"
+    },
+    {
+     "id": "s2",
+     "title": "Name what is actually wrong",
+     "objective": "The wound was cleaned well and closed over something. It is not the cut that is killing him; it is what the cut let in and what the closing shut away from the air. Find the real fault rather than the presenting one — and be able to say what you are treating before you treat it.",
+     "condition": "Reach the right answer: a deep infection walled in beneath a healed surface, spreading in the blood. Physician's Tome, a Rootkin's read of the flesh, or plain stubborn observation all get there.",
+     "change": "Codex: it has to be opened again, which is the thing nobody wants to do to a man who is finally walking. And it has to be opened with something to give him at the same time, or you will take away the only thing holding him up.",
+     "imagePrompt": "an infirmary table, clean linen, a lamp brought close, a healer's face working something out"
+    },
+    {
+     "id": "s3",
+     "title": "Go up and bring back the right one",
+     "objective": "Fever-root grows on the third and fourth terraces, which have not been properly harvested in two seasons. So does hush-leaf, in the same stony beds, at the same height, with the same grey underside — and hush-leaf slows a heart that is already working as hard as it can. Harvest what you actually need, and be certain, and come down before dark.",
+     "condition": "Reach the high terraces, identify fever-root correctly against its lookalike, and harvest enough for a full course.",
+     "change": "Codex: fever-root has a squared stem and hush-leaf's is round, which is the whole of the difference and is enough. You have four days' worth and the terraces have another season in them if somebody works them. The walk down in the dusk is the first time in a week you have not been thinking about him.",
+     "imagePrompt": "stone-edged herb terraces on a steep slope at evening, a basket, the valley far below"
+    },
+    {
+     "id": "s4",
+     "title": "Open it, and hear what he says",
+     "objective": "Treat him: open what was closed, carry him through the hours when he gets worse before he gets better, and stay. Somewhere in that night he will tell you what his name is, because people do, and because he has worked out that you already know he has been lying.",
+     "condition": "See the treatment through to morning.",
+     "change": "Codex: his name is not Danic. The two parties at the gate are not looking for the same man and only one of them means him harm — and you now know which, because he told you, at three in the morning, while you were holding a lamp.",
+     "imagePrompt": "a lamp on a stone sill before dawn, a chair pulled close to a bed, somebody awake and steady"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "treated_and_kept",
+     "name": "Treated, and Kept",
+     "summary": "He lives, and the house keeps his secret — and decides, having discussed it, that this is what it is for.",
+     "narration": [
+      "Danic mends over about nine days and is walking the court properly by the end of them. Sister Vreni asks you to stay on: the high terraces need someone who will actually climb them, and the house needs somebody who can look at a person.",
+      "The kinder of the two parties is told where he is. The other is told nothing, courteously, twice."
+     ],
+     "effects": [
+      {
+       "type": "npc_state",
+       "npc": "sister_vreni",
+       "state": "allied",
+       "why": "she asked you to stay on, which for her is the whole of a friendship"
+      },
+      {
+       "type": "location_state",
+       "location": "the_kindly_rest",
+       "change": "the high terraces are being worked again, and the house has a second pair of trained hands",
+       "permanent": true
+      },
+      {
+       "type": "standing",
+       "people": "rootkin",
+       "delta": 2,
+       "why": "you brought the right leaf down off a terrace nobody had worked in two seasons"
+      },
+      {
+       "type": "standing",
+       "people": "numinous",
+       "delta": 2,
+       "why": "you sat with a frightened man through the worst of it and did not ask him anything"
+      },
+      {
+       "type": "world_fact",
+       "kind": "deed",
+       "text": "A healer new to the valley opened a closed wound at the Kindly Rest, named the infection under it, and brought fever-root down off the high terraces to treat it. The man lived.",
+       "permanent": true
+      }
+     ]
+    },
+    {
+     "id": "treated_and_told",
+     "name": "Treated, and Told",
+     "summary": "He lives, and you tell the truth about who he is to whoever asks — including the party that means him harm.",
+     "narration": [
+      "Danic mends, and is gone within the week, and does not say goodbye. Sister Vreni does not reproach you; she says the house has to be able to answer honestly or it is not a sanctuary, it is a hiding place. She does not sound certain.",
+      "The harder party thanks you. You will find out later what for."
+     ],
+     "effects": [
+      {
+       "type": "npc_state",
+       "npc": "sister_vreni",
+       "state": "cordial",
+       "why": "she does not reproach you and she has not settled it either — she says the house has to be able to answer honestly or it is a hiding place, and she does not sound certain"
+      },
+      {
+       "type": "location_state",
+       "location": "the_kindly_rest",
+       "change": "the house is discussing what it is for, out loud, for the first time in years",
+       "permanent": true
+      },
+      {
+       "type": "standing",
+       "people": "verist",
+       "delta": 2,
+       "why": "you answered what you were asked, exactly, and did not decide on his behalf"
+      },
+      {
+       "type": "standing",
+       "people": "ashwarden",
+       "delta": 2,
+       "why": "you treated him fully and let the consequence be his own"
+      },
+      {
+       "type": "world_fact",
+       "kind": "deed",
+       "text": "A healer at the Kindly Rest treated a man under a false name and then answered plainly when he was asked after. The house is still discussing it.",
+       "permanent": true
+      }
+     ]
+    },
+    {
+     "id": "hush_leaf",
+     "name": "The Wrong Leaf",
+     "summary": "You harvested the lookalike. He does not die of it, and he does not recover on the schedule he had.",
+     "narration": [
+      "The round stem was the tell and you were tired and it was getting dark. Hush-leaf slows a heart; his was the only thing holding him up. He loses three days you did not have, and the house loses some of the margin it had with him.",
+      "Sister Vreni is kind about it and writes it down in the house book, which is worse."
+     ],
+     "effects": [
+      {
+       "type": "location_state",
+       "location": "the_kindly_rest",
+       "change": "the wrong leaf is written in the house book, in Sister Vreni's hand, kindly",
+       "permanent": true
+      },
+      {
+       "type": "standing",
+       "people": "rootkin",
+       "delta": -1,
+       "why": "a herbalist who takes the round stem home is a herbalist who hurried"
+      },
+      {
+       "type": "world_fact",
+       "kind": "deed",
+       "text": "Hush-leaf was brought down off the high terraces in place of fever-root at the Kindly Rest, and a man who was compensating well stopped compensating for three days.",
+       "permanent": true
+      }
+     ]
+    }
+   ],
+   "_authoredWhy": "⛑ AUTHORED 2026-09-16 for Courtney's Adelheid, on Erik's brief: 'Courtney is an EMT and studying to be a Paramedic in real life, so maybe work some of the technical medical stuff into her story', plus 'a quest step to go find and harvest some herbs to help heal someone'. ⛔ THE MEDICINE IS REAL AND IT IS THE PUZZLE. Danic is in COMPENSATED SHOCK from a deep infection walled in under a healed wound: tachycardia that climbs, delayed capillary refill, skin warm and dry then cool and damp — and a blood pressure that does not move, because pressure is the LAST thing to fail and a patient who looks fine on a snapshot is failing on a trend. ⚠️ Stage 1 is therefore two sets of observations six hours apart rather than one, which is the actual skill and is the thing a layperson does not know to do. ⛑ AND IT SITS ON A CRAFT THAT WAS ALREADY THERE: `physicians_tome` rank 1 is 'name what is actually Wrong — the real fault, not the presenting one — and treat it', authored long before we needed it and describing an EMT's primary assessment exactly. ⚠️ THE HERB STEP IS A REAL IDENTIFICATION UNDER PRESSURE: fever-root and hush-leaf share a height, a bed and a grey underside, and differ by a squared stem against a round one. Hush-leaf slows the heart — which is the one thing you must not do to a patient whose rate is the only thing keeping him perfused. The wrong-leaf outcome is a real setback and it is not a death: 'less heavy', per Erik. ⛔ NO GORE ANYWHERE. The frightening beat is a number that has not moved."
   }
  ]
 }

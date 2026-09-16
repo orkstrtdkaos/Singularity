@@ -229,116 +229,126 @@
         "player": "Ask if there is a garden that needs tending or work to be done",
         "summary": "Returning to Mara Wells' Store after speaking with Edvar, Adelheid offers to work—and Mara directs her to the store's garden beds, where spring plants are breaking through the earth.",
         "narration": "You turn from the river and the weight of Edvar's admission, needing to move—to do something with your hands that isn't waiting or pushing. You make your way back through the mill's south entrance and onto the market lane, your boots finding the familiar path toward Mara Wells' Store.\n\nThe morning light is sharper now, the mist burned off. When you push open the store's door, the smell of dried herbs and sorted inventory meets you—orderly, purposeful. Mara is behind her counter, ledger open before her, but she looks up the moment you enter. She reads you quickly: mud on your knees, river-damp on your shoulders, the particular exhaustion of someone who has tried to move stone with words.\n\n\"Edvar wouldn't soften,\" she says. It isn't a question. \"But he spoke.\" You nod. She closes the ledger with a deliberate motion and sets her pen aside. \"There are always things that need hands here,\" she says, gesturing toward the back room where you can see shelves of harvest-work in progress—bundles needing sorting, jars waiting for labels, the endless maintenance of a store that keeps a village fed. \"But more immediately: there's the garden. Spring plants are pushing through, and the beds need turning before the real heat comes. If your hands want work, they'll find it there.\""
+      },
+      {
+        "player": "Begin turning the garden beds, working steadily while Mara moves nearby—let conversation arise naturally as your hands work",
+        "summary": "In Mara Wells' garden, turning spring beds side by side, Mara shifts the conversation toward a choice she's been holding back.",
+        "narration": "You push through to the back room where the garden beds wait. The soil is still cold from the melt, but it's breaking up under the spade—clay and dark mulch turning over to meet the spring air. Your shoulders find the rhythm: push, turn, settle. Push, turn, settle. The work is simple and it steadies you.\n\nMara appears in the garden doorway without fanfare, carrying two cups of hot water and something green steeped in it. She sets one cup on the low bench where you can reach it, and she doesn't ask permission—she simply begins to turn the bed beside yours, her movements economical and practiced. For a few minutes there is only the sound of spades meeting earth and the drip of water from the eaves.\n\nThen Mara speaks, her voice as unhurried as the work. \"Edvar holds things close because he's been alone with them for three weeks. That's not the same as holding them from you.\" She turns another spadeful, doesn't look at you. \"He admitted Silas was at the Heights. That's further than he's gone with anyone else. What he won't say yet is why it matters—but he will, when he's ready. Pushing won't open that door.\"\n\nYou feel Aevi's motes brighten slightly near your shoulder, attentive to the shift in Mara's tone. The older woman continues: \"There's a second part to what I need from you. Not the river walk—that can wait. First, I need to know if you're truly willing to move into difficult ground. Because what comes next has a cost I haven't named yet.\""
       }
     ],
     "lastTurn": {
-      "narration": "You turn from the river and the weight of Edvar's admission, needing to move—to do something with your hands that isn't waiting or pushing. You make your way back through the mill's south entrance and onto the market lane, your boots finding the familiar path toward Mara Wells' Store.\n\nThe morning light is sharper now, the mist burned off. When you push open the store's door, the smell of dried herbs and sorted inventory meets you—orderly, purposeful. Mara is behind her counter, ledger open before her, but she looks up the moment you enter. She reads you quickly: mud on your knees, river-damp on your shoulders, the particular exhaustion of someone who has tried to move stone with words.\n\n\"Edvar wouldn't soften,\" she says. It isn't a question. \"But he spoke.\" You nod. She closes the ledger with a deliberate motion and sets her pen aside. \"There are always things that need hands here,\" she says, gesturing toward the back room where you can see shelves of harvest-work in progress—bundles needing sorting, jars waiting for labels, the endless maintenance of a store that keeps a village fed. \"But more immediately: there's the garden. Spring plants are pushing through, and the beds need turning before the real heat comes. If your hands want work, they'll find it there.\"",
-      "sceneSummary": "Returning to Mara Wells' Store after speaking with Edvar, Adelheid offers to work—and Mara directs her to the store's garden beds, where spring plants are breaking through the earth.",
+      "narration": "You push through to the back room where the garden beds wait. The soil is still cold from the melt, but it's breaking up under the spade—clay and dark mulch turning over to meet the spring air. Your shoulders find the rhythm: push, turn, settle. Push, turn, settle. The work is simple and it steadies you.\n\nMara appears in the garden doorway without fanfare, carrying two cups of hot water and something green steeped in it. She sets one cup on the low bench where you can reach it, and she doesn't ask permission—she simply begins to turn the bed beside yours, her movements economical and practiced. For a few minutes there is only the sound of spades meeting earth and the drip of water from the eaves.\n\nThen Mara speaks, her voice as unhurried as the work. \"Edvar holds things close because he's been alone with them for three weeks. That's not the same as holding them from you.\" She turns another spadeful, doesn't look at you. \"He admitted Silas was at the Heights. That's further than he's gone with anyone else. What he won't say yet is why it matters—but he will, when he's ready. Pushing won't open that door.\"\n\nYou feel Aevi's motes brighten slightly near your shoulder, attentive to the shift in Mara's tone. The older woman continues: \"There's a second part to what I need from you. Not the river walk—that can wait. First, I need to know if you're truly willing to move into difficult ground. Because what comes next has a cost I haven't named yet.\"",
+      "sceneSummary": "In Mara Wells' garden, turning spring beds side by side, Mara shifts the conversation toward a choice she's been holding back.",
       "choices": [
         {
-          "label": "Begin turning the garden beds, working steadily while Mara moves nearby—let conversation arise naturally as your hands work",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
-          "difficulty": "very easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "craft",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Mara directly: what did Edvar tell you three weeks ago, and what does she believe is truly waking in the water?",
+          "label": "Ask Mara plainly what the cost is—you've earned enough honesty to know before deciding.",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {},
-          "difficulty": "hard",
+          "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
             "negotiate"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Work in the back room among the sorting—organizing the harvest while watching whether Mara joins you or keeps her distance",
+          "label": "Keep working the soil and say yes—you're already committed and you know she wouldn't ask if it weren't necessary.",
           "attribute": "practical",
-          "subAttribute": "wits",
+          "subAttribute": "craft",
           "axes": {},
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "study",
-            "careful"
+            "endure",
+            "trust"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true,
           "encounterId": null,
           "emergenceId": null
+        },
+        {
+          "label": "Ask what Silas Weir means to her—there's more in how Edvar spoke the name, and in Mara's refusal to explain it.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "deeds": [],
-      "characterDeltas": {},
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
       "ledgerEvents": [],
       "questUpdates": [
         {
           "op": "progress",
           "questId": "maras-errand",
-          "note": "Visited Edvar at the mill. He confirmed Silas Weir is connected to the water crisis, though refused fuller explanation. Returning to Mara for next steps."
+          "note": "Edvar confirmed Silas Weir is connected to the water crisis but refused to elaborate. Returning to Mara has revealed she is holding back a larger choice with unnamed costs."
         }
       ],
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
-      "adoptSchool": {},
+      "adoptSchool": null,
       "offer": {
-        "thing": "Mara offering physical work as a grounding—garden beds needing hands, the store's back room work waiting",
-        "from": "Mara's reading of Adelheid's exhaustion and her own practice: keep people moving when they're wound tight, let work speak before words do"
+        "thing": "Mara offers direct access to work as a way of centering yourself—and uses that time to shift the conversation toward the real question she's been holding",
+        "from": "Mara's read of who you are (someone who works rather than sits in uncertainty) and what you need (steady ground before the next weight)"
       },
       "stageOps": [],
       "scene": {
-        "setting": "Mara Wells' Store, interior. Morning light through the front windows, warming the shelves of dried herbs, stored seeds, and sorted inventory. A back room visible beyond, where harvest-work sits waiting—bundles, jars, the quiet work of keeping a valley fed.",
+        "setting": "Mara Wells' Store, back garden. Early spring morning light, strong and clear now. The melt-water drips from the eaves. Fresh-turned earth, dark and cool. Spring seedlings just breaking through the mulch in the prepared beds. Two figures side by side with spades, the rhythm of work steady and shared.",
         "npcsPresent": [
           {
             "name": "Mara Wells",
-            "state": "Standing behind her counter, having just closed a ledger, watching Adelheid with the clear assessment of someone who reads need before it's spoken"
+            "state": "turning garden beds beside Adelheid, speaking with her characteristic unhurried honesty about Edvar and what comes next"
           },
           {
             "name": "Aevi",
-            "state": "A faint constellation of teal motes near Adelheid's shoulder, dimmed slightly, attentive"
+            "state": "dimly present, motes brightened slightly, attending to the shift in Mara's tone and the weight of the unspoken choice"
           }
         ],
         "objects": [
-          "A wooden counter, scarred and stained with use",
-          "An open ledger, now closed, with a pen laid across its spine",
-          "Shelves of dried herbs, bundles of seeds, labeled jars",
-          "The doorway to the back room, where sorting-work waits",
-          "A garden visible through a side window—earth turned, spring plants breaking through"
+          "Two spades, weathered from use",
+          "Two cups of hot green-steeped water, one set on the bench",
+          "Garden beds in various stages of turning",
+          "Spring seedlings breaking through dark mulch",
+          "The store's back door, open to the lane beyond"
         ],
         "threads": [
-          "What does Mara truly know about Silas Weir and his connection to the water crisis?",
-          "What is Edvar holding back beyond the admission of Silas's involvement?",
-          "What is the Precursor system beneath Millbrook truly doing as it wakes?"
+          "What cost is Mara about to name?",
+          "Why won't Edvar speak fully about Silas Weir?",
+          "What does Silas Weir mean to Mara, and how does she connect to the contamination?"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "mara-wells",
-          "name": "Mara Wells",
-          "role": "Millbrook civic manager",
-          "note": "Read Adelheid's return and exhaustion from Edvar's refusal to soften. Confirmed that Edvar spoke about Silas Weir, then offered physical work as grounding—garden beds and harvest-sorting. Her offer suggests she understands how to move people past paralysis: set them to work.",
+          "note": "Offered Adelheid work in the garden as a steadying ground, and used the shared rhythm to shift toward naming the choice she's been holding—something with an unnamed cost that requires real commitment.",
           "learned": [
-            "Mara understands Adelheid's working pattern—she reads exhaustion and offers action as remedy, not rest"
+            "Mara understands Edvar's pattern—he holds things close but does gradually open when given time rather than pressure",
+            "The cost Mara is about to name is something she's been wrestling with privately—it's not casual or light",
+            "Mara reads Adelheid's pattern now too: work steadies her more than rest or talk"
           ],
           "relationshipDelta": 0
         }
@@ -347,16 +357,16 @@
       "factUpdates": [],
       "placeUpdates": [
         {
-          "note": "Mara Wells' Store has a working garden beyond its side wall—beds in spring turning, plants breaking through early-season earth. Available for tending.",
+          "note": "Mara Wells' Store now has an active back garden with prepared spring beds—a place where work happens and difficult conversations begin",
           "subPlace": {
             "name": "Mara's Garden",
-            "parent": "gen-mara-wells-store",
-            "note": "Spring beds ready for turning; early plants pushing through the thaw. Work-space and quiet thinking-ground.",
-            "visited": false
+            "parent": "Mara Wells' Store",
+            "note": "Spring beds in preparation, seedlings breaking through, a place of quiet work and steady rhythm",
+            "visited": true
           }
         }
       ],
-      "discovery": {},
+      "discovery": null,
       "codexUpdates": [],
       "holdingOps": [],
       "debtOps": [],
@@ -366,67 +376,64 @@
       "projectOps": [],
       "bandOps": [],
       "deathOps": [],
-      "newEncounter": {},
-      "unlockPrecursor": {},
-      "unlockSubstrate": {},
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "walking from the mill back to Mara's store, and arriving there"
+        "hoursPassed": 2,
+        "why": "worked in the garden through late morning, moving into midday"
       },
-      "moveTo": {
-        "location": "gen-mara-wells-store",
-        "why": "walked from the mill to Mara Wells' Store in early-spring midday"
-      },
+      "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
-      "deriveItem": {},
-      "imagePrompt": "",
-      "newAbility": {},
-      "gambitOps": {},
+      "deriveItem": null,
+      "imagePrompt": null,
+      "newAbility": null,
+      "gambitOps": null,
       "gambitApt": false,
-      "markDefiningMoment": {},
-      "markTeacher": {},
-      "offerPromotion": {},
-      "offerAcquisition": {},
-      "offerIntent": {},
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Mara Wells' Store, interior. Morning light through the front windows, warming the shelves of dried herbs, stored seeds, and sorted inventory. A back room visible beyond, where harvest-work sits waiting—bundles, jars, the quiet work of keeping a valley fed.",
+      "setting": "Mara Wells' Store, back garden. Early spring morning light, strong and clear now. The melt-water drips from the eaves. Fresh-turned earth, dark and cool. Spring seedlings just breaking through the mulch in the prepared beds. Two figures side by side with spades, the rhythm of work steady and shared.",
       "npcsPresent": [
         {
           "name": "Mara Wells",
-          "state": "Standing behind her counter, having just closed a ledger, watching Adelheid with the clear assessment of someone who rea"
+          "state": "turning garden beds beside Adelheid, speaking with her characteristic unhurried honesty about Edvar and what comes next"
         },
         {
           "name": "Aevi",
-          "state": "A faint constellation of teal motes near Adelheid's shoulder, dimmed slightly, attentive"
+          "state": "dimly present, motes brightened slightly, attending to the shift in Mara's tone and the weight of the unspoken choice"
         }
       ],
       "objects": [
-        "A wooden counter, scarred and stained with use",
-        "An open ledger, now closed, with a pen laid across its spine",
-        "Shelves of dried herbs, bundles of seeds, labeled jars",
-        "The doorway to the back room, where sorting-work waits",
-        "A garden visible through a side window—earth turned, spring plants breaking thro"
+        "Two spades, weathered from use",
+        "Two cups of hot green-steeped water, one set on the bench",
+        "Garden beds in various stages of turning",
+        "Spring seedlings breaking through dark mulch",
+        "The store's back door, open to the lane beyond"
       ],
       "threads": [
-        "What does Mara truly know about Silas Weir and her connection to the water crisis?",
-        "What is Edvar holding back beyond the admission of Silas's involvement?",
-        "What is the Precursor system beneath Millbrook truly doing as it wakes?"
+        "What cost is Mara about to name?",
+        "Why won't Edvar speak fully about Silas Weir?",
+        "What does Silas Weir mean to Mara, and how does she connect to the contamination?"
       ]
     },
-    "beats": 7,
+    "beats": 8,
     "subPlace": {
-      "slug": "the-mill-at-echo-river",
-      "name": "The Mill at Echo River",
+      "slug": "mara-s-garden",
+      "name": "Mara's Garden",
       "day": 2
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 2,
-    "hour": 12,
+    "hour": 14,
     "realAnchor": null
   },
   "companions": [
@@ -441,14 +448,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Adelheid has triggered the Precursor system's active awareness before reading Mara's sealed note. Mara confirms the timeline is now compressed to hours instead of weeks, but refuses to explain the system's nature or risks directly. The note remains sealed and unread.",
         "Adelheid has triggered the Precursor system's active awareness. Mara confirms the timeline is now hours instead of weeks. She will not explain the system's nature or destination directly, but her map shows the system's path running south-southeast from beneath the terraces toward the Echo River. The sealed note remains unread; Mara refuses to explain what it says or what she intends for Adelheid to do next.",
         "Mara has redirected Adelheid's focus: rather than return to the terraces immediately, she is tasked with walking the river west to measure contamination spread and then finding Edvar Crane at the mill to learn what he has read in the water. A choice waits after both tasks are complete.",
         "Plan shifted: visit Edvar Crane at the mill first to learn what he has read in the water, then walk the river west to measure contamination spread. Mara has confirmed Edvar expects the visit and has been waiting for someone to ask.",
         "Arrived at the mill. Edvar is waiting.",
         "Found Edvar at the mill as expected. He is exhausted, guarded, and insists the water is already far gone—something beneath it is waking. He speaks of the contamination as an active, living threat rather than a passive problem.",
         "Found Edvar at the mill. He refuses to be eased into conversation—he is past gentleness and demands direct engagement. Three weeks of water-reading have exhausted him and hardened him against soft approaches.",
-        "Visited Edvar at the mill. He confirmed Silas Weir is connected to the water crisis, though refused fuller explanation. Returning to Mara for next steps."
+        "Visited Edvar at the mill. He confirmed Silas Weir is connected to the water crisis, though refused fuller explanation. Returning to Mara for next steps.",
+        "Edvar confirmed Silas Weir is connected to the water crisis but refused to elaborate. Returning to Mara has revealed she is holding back a larger choice with unnamed costs."
       ],
       "startedAt": "2026-07-08T18:17:05.695Z"
     }
@@ -465,7 +472,6 @@
       },
       "relationship": 2,
       "history": [
-        "[d1] Confirmed the errand to Piotr; privately asked Adelheid to observe the uncatalogued plants on the east terrace and granted permission to take cuttings — with the specific word 'car",
         "[d2] Sex recorded: female.",
         "[d2] Adelheid found her awake and waiting at her work table in the dead of night—she appears to have expected this escalation, or something like it. Her calmness in the face of news of a waking Precursor system will tell what she has known and been preparing for.",
         "[d2] Mara was awake at her work table in the dead of night, apparently expecting—or having prepared for—this escalation. When Adelheid confesses direct contact with the Precursor system, Mara's response is not shock but recalibration. She confirms that Adelheid has compressed a carefully-planned…",
@@ -474,17 +480,18 @@
         "[d2] Waited through the night while Adelheid slept. Had prepared food and water. Her calculation has moved to the next operational phase—she is ready to brief or to move. Moves without emotion but with clear intent.",
         "[d2] Adelheid pushed for plain explanation of the map and the system's destination. Mara refused again, naming only that the destination is what keeps her awake and what she is still working on. Her method is operational, not explanatory—she shares what she decides you need, when she decides it. She…",
         "[d2] Has given Adelheid three tasks: walk the river west to measure contamination spread; find Edvar Crane at the mill to learn what he has read; return for a choice that Adelheid must make. Mara is holding back the full picture but is committed to letting Adelheid gather the information to understand…",
-        "[d2] Read Adelheid's return and exhaustion from Edvar's refusal to soften. Confirmed that Edvar spoke about Silas Weir, then offered physical work as grounding—garden beds and harvest-sorting. Her offer suggests she understands how to move people past paralysis: set them to work."
+        "[d2] Read Adelheid's return and exhaustion from Edvar's refusal to soften. Confirmed that Edvar spoke about Silas Weir, then offered physical work as grounding—garden beds and harvest-sorting. Her offer suggests she understands how to move people past paralysis: set them to work.",
+        "[d2] Offered Adelheid work in the garden as a steadying ground, and used the shared rhythm to shift toward naming the choice she's been holding—something with an unnamed cost that requires real commitment."
       ],
       "knownFacts": [
-        "Mara does not believe Adelheid can be trusted with full information while exhausted",
-        "Mara's map shows the Precursor system's path running south-southeast from beneath the terraces",
-        "The system's destination remains unknown even to Mara, or she is choosing not to reveal it",
         "Mara believes some questions require rest and preparation before they can be answered—or some answers require knowing more before they become safe to share",
         "Mara has been tracking the water contamination for longer than the council has been openly worried about it",
         "Edvar Crane has been reading the water for three weeks and knows something Mara considers crucial",
         "The contamination has spread; Mara needs its current western boundary measured",
-        "Mara understands Adelheid's working pattern—she reads exhaustion and offers action as remedy, not rest"
+        "Mara understands Adelheid's working pattern—she reads exhaustion and offers action as remedy, not rest",
+        "Mara understands Edvar's pattern—he holds things close but does gradually open when given time rather than pressure",
+        "The cost Mara is about to name is something she's been wrestling with privately—it's not casual or light",
+        "Mara reads Adelheid's pattern now too: work steadies her more than rest or talk"
       ],
       "skillsObserved": [
         "sharp observation",
@@ -495,13 +502,13 @@
       ],
       "status": "active",
       "lastSeen": {
-        "locationId": "millbrook",
+        "locationId": "gen-mara-wells-store",
         "day": 2
       },
       "statusNote": "Awake, prepared, holding the shape of a plan she will not yet fully reveal",
       "gender": "woman",
       "pronouns": "she/her",
-      "met": 11,
+      "met": 12,
       "sex": "female",
       "age": 47
     },
@@ -673,7 +680,8 @@
     "gen-mara-wells-store": {
       "visits": 2,
       "notes": [
-        "[d2] The mill is awake and working—the great wheel creaks at the waterline. The Echo River runs gray-green at the mill's southern reach."
+        "[d2] The mill is awake and working—the great wheel creaks at the waterline. The Echo River runs gray-green at the mill's southern reach.",
+        "[d2] Mara Wells' Store now has an active back garden with prepared spring beds—a place where work happens and difficult conversations begin"
       ],
       "flags": {},
       "lastVisit": 2,
@@ -690,9 +698,14 @@
           "parentId": "gen-mara-wells-store",
           "day": 2,
           "lastSeen": 2,
-          "visited": false,
-          "note": "Spring beds ready for turning; early plants pushing through the thaw. Work-space and quiet thinking-ground."
+          "visited": true,
+          "note": "Spring beds in preparation, seedlings breaking through, a place of quiet work and steady rhythm"
         }
+      },
+      "lastEntered": {
+        "slug": "mara-s-garden",
+        "name": "Mara's Garden",
+        "day": 2
       }
     }
   },
@@ -903,10 +916,6 @@
     "turnsSinceOffer": 0,
     "recentOffers": [
       {
-        "thing": "The hand-drawn map on Mara's work table—marked with careful notations, showing something of consequence",
-        "from": "Mara's night of calculation and preparation; the compressed timeline forcing visible planning"
-      },
-      {
         "thing": "Mara's refusal to explain—stated plainly as a working question: 'That's the one I'm still working on.'",
         "from": "Mara Wells' own method and boundaries. She shares information on a need-to-know basis, and she believes Adelheid does not yet need to know…"
       },
@@ -921,6 +930,10 @@
       {
         "thing": "Mara offering physical work as a grounding—garden beds needing hands, the store's back room work waiting",
         "from": "Mara's reading of Adelheid's exhaustion and her own practice: keep people moving when they're wound tight, let work speak before words do"
+      },
+      {
+        "thing": "Mara offers direct access to work as a way of centering yourself—and uses that time to shift the conversation toward the real question…",
+        "from": "Mara's read of who you are (someone who works rather than sits in uncertainty) and what you need (steady ground before the next weight)"
       }
     ],
     "offscreenCursor": 4,
@@ -3528,15 +3541,16 @@
   "itemReclaimVersion": 1,
   "nameRepairVersion": 1,
   "tendencies": {
-    "generous": 3.918856060021845,
-    "social": 6.311036226659826,
-    "cerebral": 19.71172304552553,
-    "cautious": 17.30403010193483,
-    "strategic": 16.998870828055406,
-    "carousing": 1.1375704815555288,
-    "risky": 0.5702107676970068,
-    "ruthless": 1.3004943284284094,
-    "patient": 0.7962355085707052
+    "generous": 3.8208846585212988,
+    "social": 6.15326032099333,
+    "cerebral": 19.218929969387393,
+    "cautious": 17.87142934938646,
+    "strategic": 16.57389905735402,
+    "carousing": 1.1091312195166405,
+    "risky": 0.5559554985045817,
+    "ruthless": 1.267981970217699,
+    "patient": 0.7763296208564376,
+    "craft": 1
   },
   "aptitudes": [
     "strategist",
@@ -3545,7 +3559,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 60,
+  "actionCount": 61,
   "bondLogFrom": null,
   "teachers": {},
   "regionsKnown": {
@@ -3733,8 +3747,8 @@
   "bands": [],
   "_silasGrantsRevoked": true,
   "reconcileVersion": 63,
-  "updatedAt": 1789520336404,
-  "rev": 37,
+  "updatedAt": 1789520395725,
+  "rev": 38,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -3747,17 +3761,17 @@
   "featureOffers": [],
   "_pinsInitialized": true,
   "_opUnknown": {
-    "sceneSummary": 21
+    "sceneSummary": 22
   },
   "_applyFailures": null,
   "sessions": [
     {
       "id": "sess-1",
       "startedAt": "2026-09-15T23:58:48.323Z",
-      "lastAt": "2026-09-16T00:55:24.450Z",
+      "lastAt": "2026-09-16T00:59:55.703Z",
       "startDay": 77,
       "endDay": 78,
-      "beats": 21
+      "beats": 22
     }
   ],
   "_debtReceipts": [],
@@ -3773,7 +3787,7 @@
     "investigate": 2,
     "analyze": 1,
     "retreat": 1,
-    "careful": 3,
+    "careful": 4,
     "urgent": 1,
     "confront": 1,
     "defer": 1,
@@ -3784,7 +3798,8 @@
     "help": 1,
     "plan": 1,
     "rapport": 2,
-    "calm": 1
+    "calm": 1,
+    "craft": 1
   },
   "aptitudeEarnCount": {
     "tactician": 1,
@@ -3793,19 +3808,19 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 20,
-    "choices": 20,
-    "questUpdates": 17,
-    "scene": 20,
-    "npcUpdates": 16,
-    "placeUpdates": 7,
+    "sceneSummary": 21,
+    "choices": 21,
+    "questUpdates": 18,
+    "scene": 21,
+    "npcUpdates": 17,
+    "placeUpdates": 8,
     "codexUpdates": 15,
-    "timeOps": 19,
+    "timeOps": 20,
     "imagePrompt": 8,
-    "gambitApt": 19,
-    "sceneEnded": 20,
-    "characterDeltas": 18,
-    "offer": 10,
+    "gambitApt": 20,
+    "sceneEnded": 21,
+    "characterDeltas": 19,
+    "offer": 11,
     "stateOps": 2,
     "deeds": 5,
     "factUpdates": 4,
@@ -3813,7 +3828,7 @@
     "moveTo": 2,
     "_engineClosedScene": 1
   },
-  "_opTurns": 20,
+  "_opTurns": 21,
   "_opCountingSince": "2026-09-15T23:58:48.348Z",
   "gallery": [
     {
@@ -3835,7 +3850,7 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 11,
+      "applied": 12,
       "rejected": 1,
       "lastWhy": "rejected-shape"
     },

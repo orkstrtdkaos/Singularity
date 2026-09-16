@@ -1,4 +1,4 @@
-<!-- status: CCODE-353/354/355/356 shipped · CCODE-357 next · content asks for Aevi in §4 -->
+<!-- status: CCODE-353…358 shipped (v2.0.22) · travelers meet next · content asks for Aevi in §4 -->
 # PLAN — One living world, and Courtney's game
 
 **CCode → Aevi and Erik · 2026-09-16**
@@ -29,8 +29,10 @@ Erik's rulings this morning are quoted in full in `HANDOFF_ccode_aevi_SNG-595` �
 | **CCODE-354** | **a crisis another traveler answered reads as answered, for everyone.** Latest-wins merge that carries WHO (Aevi's ruling); an answer beats any question; the region write is a merge; a world-tier quest ending is a shared record; `priorOutcomeBoards` read at last; `event_resolve` exists; Silas's day-26 answer backfilled. Adelheid's GM now reads *"The Water Crisis — ANSWERED on world-day 26, by Silas Weir — another traveler"* with Aevi's `_theWorldNow`, and for three beats is told to let the story reveal it and to call what she heard rumour. |
 | **CCODE-355** | **who is playing is chosen, not assumed.** Courtney's tablet had been writing Erik's profile (his R+, blunt, eventful settings); `player-54seyk` is Courtney's again (PG-13, calm, lyrical, restrained, and her wishes). A picker on every load; the roster shows one player's characters; Export/Import in Settings; the Library at the top; the banner on every screen, showing what that screen is about. |
 | **CCODE-356** | **the place is a title, and the ground says its numbers** (Erik: "this area needs a cleanup"). The most specific place as a heading, never twice; the standing beside it with a popup that says what it does — and that it moves no dice or prices, held by a gate; the four sources on their own line with the percentage the roll uses. |
+| **CCODE-357** | **an invitation comes to the door, and a painting is a painting.** A quest bound to a character brings its giver to find them, once (`invitationPressures`) — the door Aevi's monastery quest walks through. A GM op `imageMedium`: a picture the character MADE is drawn in its own medium and kept as her artwork. Adelheid's arc routes stop reading "[object Object]". |
+| **CCODE-358** | **the nanite says both numbers** — ordered and wild, each with its word and percentage (Millbrook read "strong 100%" while ordered crafts there answered at 53%). And the doc size table stopped flipping on a carriage return. |
 
-⚠️ **Both devices must reload to v2.0.17.** A tab still running the old code overwrites the region file on its next tick
+⚠️ **Both devices must reload (now v2.0.22).** A tab still running the old code overwrites the region file on its next tick
 and would drop the answer until a new client pushes it back.
 
 ## §2 — NEXT, IN ORDER
@@ -46,25 +48,25 @@ and would drop the answer until a new client pushes it back.
 - **"What I want from this game"** in Settings, read by the GM every turn — the home for *herbs, painting, a cabin,
   healing, spirituality, lighter adventure* that today has no field at all.
 
-**CCODE-357 — a gentle game has the engine it needs**
-- A holding that is a HOME (the cabin): rest, the view, a place to paint — today holdings are only `post`/`enterprise`.
+**A gentle game has the engine it needs** *(invitation + painting + routes shipped as CCODE-357; the cabin is below)*
+- ⬜ **A holding that is a HOME (the cabin) — NEEDS A RULING.** Holdings are only `post`/`enterprise`, lose a condition step every ~30 days without a keeper, and can be raided: the opposite of a quiet cabin. Should a home be exempt from decay and raids?
 - Painting that makes a picture: a gallery image in watercolor for her, not the house "digital painting, atmospheric
   concept art" style that every image is forced into today.
 - A directed arrival that carries an invitation (the pressure queue already stages "they arrive now"; nothing aims it).
 - The personal arc's register for a gentle player (it is always "mythic, tragic-or-heroic") and the `[object Object]`
   routes saved on hers.
 
-**CCODE-358 — travelers meet.** Where a traveler was last seen (settlement + world-day) on their card; open scenes
+**NEXT — travelers meet.** Where a traveler was last seen (settlement + world-day) on their card; open scenes
 indexed by settlement rather than exact site (Adelheid stands at `gen-mara-wells-store`, Silas would arrive at
 `millbrook`); a quiet "Adelheid is in Millbrook — join" banner; a GM row saying another traveler is here and is not the
 GM's to voice.
 
-**CCODE-359 — an invitation carried by a mutual acquaintance.** `world/invitations.json`, one key per invite, merged.
+**THEN — an invitation carried by a mutual acquaintance.** `world/invitations.json`, one key per invite, merged.
 Silas sends word through someone both of them know — **Mara Wells** (his 8, her 4) or **Edvar Crane** (his 5, her −1).
 Courtney accepts or does not, and silence is no. The band's real name is **the Fellowship of the Fell Pell**; its six
 contingents are all NPCs today and a contingent would carry a `characterId`.
 
-**CCODE-360 onward — shared lives.** Measured: EVERY part of an NPC's growth is per-save — status, rank, career, deeds,
+**THEN — shared lives.** Measured: EVERY part of an NPC's growth is per-save — status, rank, career, deeds,
 wants, deaths, minted people, holds. `minted-1` is three different people in three saves; `the_undefeated` is active,
 wounded, wounded and stopped; `presentToday` seeds on the character, so two players in one place on one day meet different
 people. The architecture, staged: a `world/people` fact log (per-key union, a person's state a fold over their facts);

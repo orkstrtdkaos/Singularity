@@ -44,8 +44,8 @@ export const AUTHORED_CANON_WEIGHT = 100;
 // Content that CANNOT be dialed down to a lower ceiling: sexual framing has no in-ceiling analog
 // for a G/PG audience (you don't "gently" show sex to a child) — it FILTERS rather than adapts.
 // Violence / gore / dread / language CAN re-narrate softer, so they ADAPT.
-const SEXUAL_MARKERS = /\b(sexual|erotic|nude|naked|seduc\w*|lust\w*|carnal|aroused|fondl\w*|intimate|in bed|make love|bedded|orgy|brothel)\b/i;
-const HARD_INTENSITY_MARKERS = /\b(gore|gory|disembowel\w*|mutilat\w*|eviscerat\w*|torture|flay\w*|slaughter\w*|butcher\w*|blood(y|ied|bath)?|massacre|rape|savage\w*)\b/i;
+export const SEXUAL_MARKERS = /\b(sexual|erotic|nude|naked|seduc\w*|lust\w*|carnal|aroused|fondl\w*|intimate|in bed|make love|bedded|orgy|brothel)\b/i;
+export const HARD_INTENSITY_MARKERS = /\b(gore|gory|disembowel\w*|mutilat\w*|eviscerat\w*|torture|flay\w*|slaughter\w*|butcher\w*|blood(y|ied|bath)?|massacre|rape|savage\w*)\b/i;
 
 // ---------- the store ----------
 

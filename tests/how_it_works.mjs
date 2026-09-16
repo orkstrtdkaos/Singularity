@@ -13391,8 +13391,12 @@ console.log("\n── §201 · the age is the gate, the ops go on the turn, and 
 
   check("§201: …and says nothing when every gate nearby is already answered",
     NP201.agesMissingForGM({ npcRegistry: { x: { id: "x", name: "A", age: 30, sex: "male", status: "active" } } }) === null);
+  // ⚠️ SNG-595: THIS PINNED A POSITION, NOT A READ. `/agesMissingDetail \} = ctx;/` required the key to be the LAST name in
+  // the destructure, so the next row anyone registered turned it red while `agesMissingDetail` was read exactly as before.
+  // The claim is that gm.js takes the key out of ctx — so it asks the destructure, wherever in it the name sits.
+  const ctxKeys201 = [...rd("engine/gm.js").matchAll(/const \{([^}]*)\} = ctx;/g)].flatMap(m => m[1].split(",").map(x => x.trim()));
   check("§201: ⛔ and the row is READ — registered is not the same as reaching the prompt",
-    /agesMissingDetail \} = ctx;/.test(rd("engine/gm.js")) && /FACTS NOT YET RECORDED ABOUT PEOPLE YOU KNOW/.test(rd("engine/gm.js"))
+    ctxKeys201.includes("agesMissingDetail") && /FACTS NOT YET RECORDED ABOUT PEOPLE YOU KNOW/.test(rd("engine/gm.js"))
     && /key: "agesMissingDetail"/.test(rd("engine/gm_registry.js")));
 
   /* ---- 5 · ⛔ THE OPS WERE IN THE PROSE — recovered, from Erik's own reply ---- */
@@ -17287,6 +17291,200 @@ console.log("\n── §244 · an unknown gender is the absence of an answer, no
   // contradiction the engine may resolve — only the person playing can say how she is addressed.
   check("§244: ⬜ …and nothing anywhere derives a pronoun from `sex`",
     !/pronouns\s*=\s*[^;\n]*\bsex\b/.test(rd("engine/npcs.js")));
+}
+
+
+// ⛔ SNG-595 (Erik) — "Courtney's PC Adelheid asked Edvar Crane about Silas and the gm doesn't seem to be able to follow
+// the details of that story. How much crosses the worlds?"
+//
+// ⚑ MEASURED ON THE LIVE STORES AND HER SAVE. What crossed: crisis stages, one frozen canon card per person (clipped to 90
+// characters), and news headlines. What did not: RELATIONSHIPS — Edvar is +5 and met twelve times in Silas's save, −1 and
+// met once in hers. The ledger reader opened only THIS month's file, so 15 of Silas's 23 deeds (all of July — Millbrook,
+// Warden Coll, Edvar's commission, "downstream wells clear in a week or two") had not been read since August 1st. And
+// nothing told the GM that "Silas Weir" is a player at all.
+//
+// ⚠️ SO IT BUILT HIM FROM THE NEWS LINES IN FRONT OF IT — a Halvex Coil murmur ("tuning instruments he does not play")
+// became Silas "with tuning instruments at the sluice-turn", her own Harmonic terrace became "a Harmonic stationed at the
+// Heights", and a contamination his record says he helped CLOSE became one he may have CAUSED, in her codex, as fact.
+//
+// ⛑ FIXTURES: the July ledger is a CLOSED month (`appendLedger` only ever names the current month's file), so it is
+// history that cannot move under this gate. The scene, the index and the canon view are CONSTRUCTED — §239 and §243
+// taught what a live save does to a gate overnight.
+console.log("\n── §245 · a fellow traveler is a person the world has a record of ──");
+{
+  const T245 = await import("../engine/travelers.js");
+  const W245 = await import("../engine/worldtick.js");
+  const GM245 = await import("../engine/gm.js");
+  const REG245 = await import("../engine/gm_registry.js");
+  const S245 = await import("../engine/sync.js");
+  const { loadContentHeadless: lch245 } = await import("./headless_content.mjs");
+  const C245 = await lch245();
+  const july245 = rj("world/ledger/2026-07.json");
+
+  /* ---- 1 · ⚑ THE STORY SHE ASKED ABOUT IS ON THE PUBLIC RECORD ---- */
+  const silasJuly245 = july245.filter(e => e.who === "char-mrhs8286");
+  check("§245: ⚑ the story is on the record — a closed month holds Silas's deeds, Edvar's commission among them",
+    silasJuly245.length >= 10 && silasJuly245.some(e => /Edvar Crane/.test(e.what)) && silasJuly245.some(e => /wells clear/i.test(e.what)),
+    `${silasJuly245.length} July rows by char-mrhs8286`);
+
+  /* ---- 2 · ⛔ HER EXACT WORDS, IN A SCENE WITH EDVAR ---- */
+  const index245 = { travelers: {
+    "char-mrhs8286": { id: "char-mrhs8286", name: "Silas Weir", playerKey: "pk-erik", level: 33, origin: "wright" },
+    "char-adel": { id: "char-adel", name: "Adelheid", playerKey: "pk-courtney", level: 1, origin: "harmonic" } } };
+  const adel245 = { id: "char-adel", name: "Adelheid", level: 1, origin: "harmonic",
+    npcRegistry: { "edvar-crane": { id: "edvar-crane", name: "Edvar Crane" }, "mara-wells": { id: "mara-wells", name: "Mara Wells" } } };
+  const canon245 = [{ decision: "show", record: { id: "edvar-crane", name: "Edvar Crane",
+    _canon: { type: "npc", provenance: { playerKey: "pk-erik", characterId: "char-mrhs8286" } } } }];
+  const ledger245 = [...july245,
+    { who: "char-mrhs8286", at: "2026-07-30T00:00:00Z", worldDay: 30, where: "millbrook", visibility: "hidden", what: "A secret Silas Weir kept from everyone at the mill" },
+    { who: "char-mrhs8286", at: "2026-07-30T00:00:01Z", worldDay: 30, where: "millbrook", visibility: "unseen", what: "Something moved in the mill-race and nobody saw who did it" }];
+  const opts245 = { index: index245, ledger: ledger245, canon: canon245, character: adel245, sceneNames: ["Edvar Crane"],
+    locations: C245.locations, origins: C245.origins, bands: C245.rules?.powerBands, collapse: W245.collapseLedgerEvents };
+  const block245 = T245.travelersForGM("Do you know Silas Weir", opts245);
+  check("§245: ⛔ her exact words name him — and the GM is told he is ANOTHER PLAYER'S character, not one of its own",
+    /Silas Weir — ANOTHER TRAVELER: a player's character/.test(block245), block245.split("\n")[0] || "(empty)");
+  const wright245 = (C245.origins || []).find(o => o.id === "wright")?.name || "";
+  check("§245: …with the people he comes from, so the GM has no room to make him a Harmonic",
+    !!wright245 && block245.includes(`Of ${wright245}.`) && !/Of Harmonic/.test(block245), wright245 || "(no wright origin authored)");
+  check("§245: ⛔ Edvar is FIRST-HAND — in this scene, and in the wider world through Silas's story",
+    /Edvar Crane \[IN THIS SCENE — first-hand\][^\n]*through Silas Weir's story/.test(block245),
+    (block245.split("\n").find(l => /Edvar Crane \[/.test(l)) || "(no Edvar line)").trim());
+  check("§245: …and Mara, who is not in the scene, is known to be part of it",
+    /Mara Wells \[known to this character\]/.test(block245));
+  check("§245: ⛑ the record that CONTRADICTS the invention reaches the GM — the commission, and the wells clearing",
+    /Edvar Crane formally commissioned/.test(block245) && /wells clear/i.test(block245));
+  check("§245: ⛔ a hidden deed never crosses, and an UNSEEN one is never attributed to anyone",
+    !/A secret Silas Weir kept/.test(block245) && !/nobody saw who did it/.test(block245));
+  const deeds245 = T245.travelerDeeds(ledger245, "char-mrhs8286", { collapse: W245.collapseLedgerEvents });
+  check("§245: ⚠️ the view names what it left out — a windowed record must not read as a complete one",
+    deeds245.length <= 12 || new RegExp(`\\(${deeds245.length - 12} not shown\\)`).test(block245), `${deeds245.length} deeds`);
+
+  /* ---- 3 · THE WAY PEOPLE ACTUALLY TALK, AND THE WAYS A NAME LIES ---- */
+  check("§245: a given name alone finds him — nobody says the full name twice",
+    /Silas Weir — ANOTHER TRAVELER/.test(T245.travelersForGM("Ask where Silas was last seen", opts245)));
+  const withSilas245 = { ...adel245, npcRegistry: { ...adel245.npcRegistry, "silas-marsh": { id: "silas-marsh", name: "Silas Marsh" } } };
+  check("§245: ⚠️ …but not when she knows a Silas of her own — then she means HIM, and the full name still finds the traveler",
+    T245.travelersForGM("Ask where Silas was last seen", { ...opts245, character: withSilas245 }) === ""
+    && /ANOTHER TRAVELER/.test(T245.travelersForGM("Ask about Silas Weir", { ...opts245, character: withSilas245 })));
+  check("§245: …her own name, or no name, costs the prompt nothing",
+    T245.travelersForGM("I am Adelheid", opts245) === "" && T245.travelersForGM("I walk down to the mill", opts245) === "");
+  check("§245: …and a name is whole words — Mara is never inside Maren",
+    T245.namedTravelers("I ask Maren", { travelers: { m: { id: "m", name: "Mara" } } }).length === 0
+    && T245.namedTravelers("I ask Mara", { travelers: { m: { id: "m", name: "Mara" } } }).length === 1);
+
+  /* ---- 4 · ⛔ THE CARD IS SMALL, AND ONLY WRITES WHEN IT CHANGED ---- */
+  const full245 = { id: "c1", name: "Silas Weir", level: 33, origin: "wright", currentLocationId: "gen-whistling-woman-post",
+    inventory: [{ id: "spear" }], npcRegistry: { a: {} }, companions: [{ id: "pell" }], relationships: { x: 5 }, gender: "man" };
+  const card245 = T245.travelerCard(full245, { playerKey: "pk", now: 1 });
+  const allowed245 = new Set(["id", "name", "playerKey", "level", "origin", "pronouns", "updatedAt"]);
+  check("§245: ⛔ the card carries nothing from the save but who they are — no position, no pack, no bonds",
+    Object.keys(card245).every(k => allowed245.has(k)) && !("currentLocationId" in card245) && !("pronouns" in card245),
+    Object.keys(card245).join(","));
+  check("§245: …and a tick that changes nothing writes nothing — a stamp is not a change, a level is",
+    !T245.cardChanged(card245, { ...card245, updatedAt: "2099-01-01T00:00:00Z" }) && T245.cardChanged(card245, { ...card245, level: 34 }));
+
+  /* ---- 5 · ⛔ THE MONTH BOUNDARY ---- */
+  const now245 = new Date("2026-09-20T12:00:00Z");
+  check("§245: ⛔ a read since last month opens last month — and a character that never read keeps this month only",
+    JSON.stringify(T245.ledgerMonthsSince("2026-08-31T22:00:00Z", now245)) === JSON.stringify(["2026-08", "2026-09"])
+    && JSON.stringify(T245.ledgerMonthsSince("1970", now245)) === JSON.stringify(["2026-09"])
+    && T245.ledgerMonthsSince("2020-01-01T00:00:00Z", now245).length === 12,
+    JSON.stringify(T245.ledgerMonthsSince("2026-08-31T22:00:00Z", now245)));
+
+  /* ---- 6 · ⛔ AGAINST A FAKE GITHUB, THROUGH THE FUNCTIONS THE GAME CALLS ---- */
+  const { fakeRemote: fr245, settle: settle245 } = await import("./lib/fake_remote.mjs");
+  const remote245 = fr245();
+  const restore245 = remote245.install();
+  try {
+    const put245 = (p, obj) => remote245.files.set(p, { content: JSON.stringify(obj), sha: `seed-${p}` });
+    const row245 = (month, day, what, extra = {}) => ({ schemaVersion: 1, at: `${month}-${day}T23:00:00.000Z`, worldDay: 1, who: "char-other",
+      playerKey: "pk-other", where: "far-off", what, tags: [], spectrumDeltas: {}, visibility: "witnessed", impactsLocal: true, ...extra });
+    put245("world/ledger/2026-07.json", [row245("2026-07", "10", "July happened")]);
+    put245("world/ledger/2026-08.json", [row245("2026-08", "10", "August happened")]);
+    put245("world/ledger/2026-09.json", [row245("2026-09", "10", "September happened")]);
+    const closed245 = new Map();
+    const g0 = remote245.state.gets;
+    const all245 = await S245.fetchLedgerAll({ now: now245, closed: closed245 });
+    const g1 = remote245.state.gets;
+    const again245 = await S245.fetchLedgerAll({ now: now245, closed: closed245 });
+    const g2 = remote245.state.gets;
+    check("§245: ⛔ the person-keyed reader reads EVERY month the ledger has",
+      all245.map(e => e.what).join("|") === "July happened|August happened|September happened", all245.map(e => e.what).join("|"));
+    check("§245: ⛑ …and a closed month is read once a session — the second pass asks only for the listing and this month",
+      again245.length === 3 && (g2 - g1) === 2 && (g1 - g0) === 4, `first pass ${g1 - g0} GETs, second ${g2 - g1}`);
+
+    // ⛔ THE BOUNDARY ITSELF, through `syncSharedWorld`: a player who last read on the 31st hears the row written after it.
+    const realNow245 = new Date();
+    const cur245 = realNow245.toISOString().slice(0, 7);
+    const prevD245 = new Date(Date.UTC(realNow245.getUTCFullYear(), realNow245.getUTCMonth() - 1, 15));
+    const prev245 = prevD245.toISOString().slice(0, 7);
+    const lastDay245 = new Date(Date.UTC(realNow245.getUTCFullYear(), realNow245.getUTCMonth(), 0)).getUTCDate();
+    put245(`world/ledger/${prev245}.json`, [row245(prev245, String(lastDay245), "The bell at the ford rang itself at midnight")]);
+    put245(`world/ledger/${cur245}.json`, [row245(cur245, "01", "The ford froze over by morning")]);
+    const reader245 = { id: "char-reader", name: "Reader", currentLocationId: "here",
+      worldState: { eventStages: {}, spectrumDrift: {}, news: [], unseenNews: [], lastSharedReadAt: `${prev245}-${String(lastDay245).padStart(2, "0")}T22:00:00.000Z` } };
+    await W245.syncSharedWorld({ character: reader245, content: { events: {}, locations: { here: { communityId: "c.here", regionId: "r" } }, region: { activeEvents: [] } } });
+    const heard245 = (reader245.worldState.news || []).map(n => n.text).join(" | ");
+    check("§245: ⛔ THE BOUNDARY — a row written after her last read, in LAST month's file, reaches her as news",
+      /bell at the ford rang itself/.test(heard245) && /ford froze over/.test(heard245), heard245 || "(no news)");
+
+    // ⛔ THE CARD, published through the merge — once, and never over somebody else's.
+    put245("world/travelers.json", { schemaVersion: 1, travelers: { "char-b": { id: "char-b", name: "Someone Else", level: 4 } } });
+    const me245 = { id: "char-a", name: "Silas Weir", level: 33, origin: "wright" };
+    const p0 = remote245.state.puts;
+    const tv1 = await W245.syncTravelers({ character: me245, profile: { playerKey: "pk-a" }, now: now245 });
+    await settle245();
+    const p1 = remote245.state.puts;
+    const tv2 = await W245.syncTravelers({ character: me245, profile: { playerKey: "pk-a" }, now: new Date("2026-09-21T00:00:00Z") });
+    const p2 = remote245.state.puts;
+    const onRemote245 = remote245.read("world/travelers.json");
+    check("§245: ⛔ the tick publishes this traveler's card beside everyone else's — a union, not a clobber",
+      onRemote245?.travelers?.["char-a"]?.name === "Silas Weir" && onRemote245?.travelers?.["char-b"]?.name === "Someone Else"
+      && tv1.index?.travelers?.["char-a"]?.level === 33, JSON.stringify(Object.keys(onRemote245?.travelers || {})));
+    check("§245: ⛑ …writes once, not once per tick — an unchanged card is not a commit",
+      (p1 - p0) === 1 && (p2 - p1) === 0, `puts: first tick ${p1 - p0}, second ${p2 - p1}`);
+    check("§245: …and the same tick hands back the whole ledger for the reader",
+      Array.isArray(tv2.ledger) && tv2.ledger.some(e => /bell at the ford/.test(e.what)));
+  } finally { restore245(); }
+
+  /* ---- 7 · ⛔ THE FOUR DOORS: registered, reached, built from the env, READ ---- */
+  const row245r = REG245.GM_CONTEXT.find(r => r.key === "travelersDetail");
+  check("§245: ⛔ the row is registered, and both the turn and the ask views reach it",
+    !!row245r && REG245.registryKeys("turn").includes("travelersDetail") && REG245.registryKeys("ask").includes("travelersDetail"));
+  const env245 = { character: adel245, CONTENT: C245, profile: { rating: {} }, playerInput: "Ask if there is a garden that needs tending",
+    exactWords: "", sceneState: { npcsPresent: [{ name: "Mara Wells" }] },
+    sceneTurns: [{ player: "Ask what Silas Weir means to her", summary: "Mara names Silas Weir." }],
+    app: { travelersIndex: () => index245, sharedLedger: () => ledger245, sharedCanonView: () => canon245 } };
+  const built245 = row245r ? row245r.build(env245) : "";
+  check("§245: ⚠️ …built from the env — and the LAST BEATS count, because a conversation about someone does not repeat the name",
+    /Silas Weir — ANOTHER TRAVELER/.test(built245) && /Mara Wells \[IN THIS SCENE — first-hand\]/.test(built245),
+    (built245.split("\n")[0] || "(empty)").slice(0, 90));
+  const grim245 = [...ledger245, { who: "char-mrhs8286", at: "2026-07-31T00:00:00Z", worldDay: 31, where: "millbrook", visibility: "witnessed",
+    what: "A bloody reckoning at the ford, and Silas Weir walked away from it" }];
+  const envKid245 = { ...env245, profile: { rating: { isMinor: true } }, app: { ...env245.app, sharedLedger: () => grim245 } };
+  const envAdult245 = { ...env245, app: { ...env245.app, sharedLedger: () => grim245 } };
+  check("§245: ⛑ the family floor — a minor's GM never receives a row the canon lens would have kept from them",
+    row245r && !/bloody reckoning/.test(row245r.build(envKid245)) && /bloody reckoning/.test(row245r.build(envAdult245)));
+  const bare245 = { character: { id: "t", name: "T", origin: "valley", background: "smith", level: 1, attributes: { physical: 3, mental: 3, social: 3, practical: 3 }, health: 10, maxHealth: 10, energy: 5, maxEnergy: 5, abilities: [], alignment: {}, inventory: [], quests: [] },
+    location: { id: "millbrook", name: "Millbrook", descriptionSeed: "a mill town", spectrum: {}, encounterFlavor: "quiet" }, region: { id: "valley", name: "The Valley" },
+    rules: {}, lore: "", timeLabel: "Day 1", recentTurns: [], sceneState: {}, resolution: null, playerInput: null };
+  const prompt245 = GM245.buildTurnContext({ ...bare245, travelersDetail: block245 });
+  check("§245: ⛔ …and READ — the prompt the model receives carries the block under a header that forbids inventing him",
+    /## FELLOW TRAVELERS/.test(prompt245) && prompt245.includes(block245) && /NEVER invent/.test(prompt245)
+    && !/## FELLOW TRAVELERS/.test(GM245.buildTurnContext(bare245)));
+  const APP245 = rd("app.js");
+  check("§245: …and the game feeds it: the tick syncs travelers, the bag hands the reader all three stores",
+    /await syncTravelers\(\{ character, profile \}\)/.test(APP245)
+    && /travelersIndex: \(\) => sharedTravelers\.index, sharedLedger: \(\) => sharedTravelers\.ledger, sharedCanonView: \(\) => sharedCanonView/.test(APP245));
+  check("§245: ⚠️ …and a new ledger row is clamped on a word, not sliced mid-word — it is read back to other players now",
+    /what: smartClamp\(String\(e\.what \|\| ""\)\.trim\(\), 200\)/.test(APP245));
+
+  /* ---- 8 · THE SEEDED STORE IS WHAT A TICK WOULD HAVE PUBLISHED ---- */
+  const seeded245 = rj("world/travelers.json");
+  const cards245 = Object.entries(seeded245.travelers || {});
+  check("§245: ⬜ the seeded index holds cards only — each keyed by its own id, nothing else from any save",
+    cards245.length >= 2 && cards245.every(([k, c]) => c.id === k && typeof c.name === "string" && Object.keys(c).every(f => allowed245.has(f))),
+    `${cards245.length} cards`);
 }
 
 /* ══════════ REPORT ══════════ */

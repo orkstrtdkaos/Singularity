@@ -1,7 +1,7 @@
 # THE APPARATUS — every harness, what it is for, and whether it runs
 
 ⛔ **ERIK, 2026-08-29: *"I want this to be a well oiled factory."*** ⚠️ **A factory you cannot see is not
-well oiled.** 103 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
+well oiled.** 104 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
 were gates, which were reports, and which had quietly stopped being wired into anything.
 
 ```bash
@@ -10,7 +10,7 @@ node scripts/apparatus.mjs --md     # …as markdown for §5
 node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 ```
 
-**Last measured: 2026-09-15 · v2.0.15 · 103 files.**
+**Last measured: 2026-09-16 · v2.0.16 · 104 files.**
 
 ---
 
@@ -134,7 +134,7 @@ worthless.
 | harness | kind | assertions | purpose |
 |---|---|---|---|
 | `tests/smoke` | ✅ GATE | 3569 | — |
-| `tests/how_it_works` | ✅ GATE | 2567 | CCODE-285 |
+| `tests/how_it_works` | ✅ GATE | 2595 | CCODE-285 |
 | `tests/skill_battle_sim` | ✅ GATE | 217 | SNG-098: the two-sided contest + fog-of-war invariant |
 | `tests/content_ci` | ✅ GATE | 193 | SNG-BATCH-10 Phase 4 / SNG-040/064: the content integrity gate |
 | `tests/craft_crit` | ✅ GATE | 43 | miss // it and YOU HAVE ONLY MADE CHAOS |
@@ -228,6 +228,7 @@ worthless.
 | `scripts/rederive_site_tier` | 🔧 TOOL | — | SNG-398 §4 |
 | `scripts/repair_minted_transit` | 🔧 TOOL | — | CCODE-10 data repair |
 | `scripts/repair_self_variants` | 🔧 TOOL | — | CCODE-04 data repair |
+| `scripts/seed_travelers` | 🔧 TOOL | — | SNG-595: seed `world/travelers |
 | `scripts/silas_battle` | 🔧 TOOL | — | CCODE-259 |
 | `scripts/subject` | 🔧 TOOL | — | SPEC_associativity: ONE SUBJECT, EVERY LAYER, AND THE ABSENCES |
 | `scripts/targeting_ruling_sim` | 🔧 TOOL | — | CCODE-308 |

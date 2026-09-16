@@ -37,7 +37,8 @@ import { newsVoiceOf, clashLine, fragmentLine } from "./newsvoice.js";
 const KNOWN_TIERS = new Set(["mythic", "legendary", "epic", "heroic", "regional", "notable", "riffraff"]);   // SNG-269: ONE ladder — worldtick had its own copy and it drifted
 import { smartClamp } from "./namematch.js"; // SNG-076: word-boundary clamp for the away-digest/news
 import { generatedRecords } from "./generate.js";
-import { syncEnabled, fetchRepoJSON, fetchLedger, pushOwnedFile, pushMergedFile } from "./sync.js";
+import { syncEnabled, fetchRepoJSON, fetchLedgerMonths, fetchLedgerAll, pushOwnedFile, pushMergedFile } from "./sync.js";
+import { travelerCard, cardChanged, mergeTravelerCard, ledgerMonthsSince } from "./travelers.js";   // SNG-595: a fellow traveler is a person the world has a record of
 import { decayWakes, wakeArcPush } from "./wake.js"; // SNG-204: wakes decay on the tick + lean on connected arcs
 import { enterDeathState, deepenDeaths, deathDepth, isRetrievable, resolveRetrieval } from "./death.js"; // SNG-209: a killed figure ENTERS the death state; the clock sinks untended deaths toward sealed
 import { absoluteWorldDay, worldDayAt, worldCount, readClock } from "./worldtime.js";
@@ -880,7 +881,9 @@ export async function syncSharedWorld({ character, content }) {
     }
     // 2. other characters' consequences reach you as news
     const since = ws.lastSharedReadAt || "1970";
-    const ledger = await fetchLedger(0);
+    // ⛔ SNG-595: EVERY MONTH SINCE THE LAST READ, not only this one. A row newer than `since` that sat in last month's
+    // file used to be filtered as read and then passed forever. A character that has never read still reads this month.
+    const ledger = await fetchLedgerMonths(ledgerMonthsSince(since, new Date()));
     // SNG-363 (amended) — the same region map the deed-spread builds, because it is the same mechanism.
     const regionOfComm363 = {}, commsByRegion363 = {};
     for (const loc of Object.values(content.locations || {})) {
@@ -966,6 +969,40 @@ export async function syncSharedWorld({ character, content }) {
     ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
   }
   return { synced: true, news: news.map(n => n.text) };
+}
+
+// ---------- SNG-595: fellow travelers — the card, and the record keyed by person ----------
+
+export const TRAVELERS_PATH = "world/travelers.json";
+// a past month's ledger file is never written again, so it is read once per session (see fetchLedgerAll)
+const closedLedgerMonths = new Map();
+
+/** ⛔ SNG-595 — PUBLISH WHO I AM, AND READ WHAT THE WORLD SAW OF EVERYONE.
+ *
+ *  ⚑ Erik: "Courtney's PC Adelheid asked Edvar Crane about Silas and the gm doesn't seem to be able to follow the
+ *  details of that story. How much crosses the worlds?" — and the answer was: headlines, never people, and nothing
+ *  that said Silas Weir was a player at all.
+ *
+ *  ⛑ THE CARD is written only when it CHANGED (a name, a level) — never a commit per tick — through `pushMergedFile`
+ *  on one key per character, so two travelers publishing at once union rather than clobber (Law 7).
+ *  ⛑ THE LEDGER comes back WHOLE, every month, because the reader it feeds is keyed by person and a person's record
+ *  has no month boundary. Best-effort, never throws; a failed read returns null and the caller keeps its last copy. */
+export async function syncTravelers({ character, profile = null, now = new Date() } = {}) {
+  if (!syncEnabled() || !character?.id) return { synced: false, index: null, ledger: null };
+  let index = null, ledger = null;
+  try {
+    const card = travelerCard(character, { playerKey: profile?.playerKey || null, now: +new Date(now) });
+    const remote = await fetchRepoJSON(TRAVELERS_PATH);
+    index = remote;
+    if (card && cardChanged(remote?.travelers?.[card.id], card)) {
+      let merged = null;
+      await pushMergedFile(TRAVELERS_PATH, (r) => (merged = mergeTravelerCard(r, card)), `travelers: ${card.name}`);
+      index = merged || mergeTravelerCard(remote, card);
+    }
+  } catch (err) { console.warn("[travelers] card skipped:", err?.message); }
+  try { ledger = await fetchLedgerAll({ now, closed: closedLedgerMonths }); }
+  catch (err) { console.warn("[travelers] ledger read skipped:", err?.message); }
+  return { synced: true, index, ledger };
 }
 
 // ---------- SNG-BATCH-9 Phase 3: shared-world promotion + rating-lens ----------

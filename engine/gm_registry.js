@@ -26,7 +26,7 @@
 //   time, resolution, playerInput, exactWords, itemAdvance, travelDirective,
 //   focusQuest, recentTurnsWindow, ephemera{...}, app{ fullCatalog, FN_INDEX,
 //   activeEnc, listAvailableEncounters, masteryReadyForGM, ratingLineForGM,
-//   maybeLegendDetail, sharedCanonForGM }
+//   maybeLegendDetail, sharedCanonForGM, travelersIndex, sharedLedger, sharedCanonView }
 //
 // ADDING A BUILDER WITHOUT A ROW FAILS THE BUILD (tests/wiring_audit.mjs):
 // a key gm.js consumes that no row provides can never land — that is the exact
@@ -39,7 +39,10 @@ import { bearingsToKnown } from "./worldmap.js";   // SNG-386 §4.3: which way t
 import { holdingsForGM, debtsForGM } from "./holdings.js";
 import { caravansForGM } from "./caravan.js";   // R49: loads on the road
 import { loreForLocation, eventsForGM, traditionMotivationsForGM } from "./state.js";
-import { buildRegionView, newsForGM, worldArcsForGM } from "./worldtick.js";
+import { buildRegionView, newsForGM, worldArcsForGM, collapseLedgerEvents } from "./worldtick.js";
+import { travelersForGM } from "./travelers.js";   // SNG-595: a name that belongs to another player
+import { SEXUAL_MARKERS, HARD_INTENSITY_MARKERS } from "./canon.js";   // SNG-595: the family floor, for rows with no rating
+import { isMinorProfile } from "./playerprofile.js";
 import { inventoryForGM } from "./inventory.js";
 import { companionsForGM, activeCompanions } from "./companions.js";
 import { questsForGM, structuredQuestsForGM, traditionArcForGM, npcQuestsForGM, practicedTraditions } from "./quests.js";
@@ -564,6 +567,22 @@ export const GM_CONTEXT = [
   { key: "sharedCanonDetail", builder: "app.sharedCanonForGM", carries: ["other players' promoted canon"],
     reachedBy: "always (rating-lensed)", spec: "§18", views: ["turn"],
     build: (env) => env.app.sharedCanonForGM() },
+  // ⛔ SNG-595 (Erik: "Courtney's PC Adelheid asked Edvar Crane about Silas and the gm doesn't seem to be able to follow
+  // the details of that story. How much crosses the worlds?") — A NAME THAT BELONGS TO ANOTHER PLAYER. Silas's deeds were
+  // on the shared ledger and Edvar is in the shared world because of him; nothing read either BY PERSON, and nothing said
+  // "Silas Weir" was a player at all — so the GM invented him. ⚠️ The words searched are this turn's AND the last two
+  // beats', because a conversation about someone does not repeat their name every line.
+  { key: "travelersDetail", builder: "travelers.travelersForGM (SNG-595)", carries: ["another player's character the words named", "their public deeds, every ledger month", "who in this story was part of theirs"],
+    reachedBy: "always (empty unless the words, or the last two beats, name another traveler)", spec: "SNG-595", views: ["turn", "ask"],
+    build: (env) => travelersForGM(
+      [env.playerInput, env.exactWords, ...(env.sceneTurns || []).slice(-2).map(t => `${t?.player || ""} ${t?.summary || ""}`)].filter(Boolean).join(" \n "),
+      { index: env.app?.travelersIndex?.() || null, ledger: env.app?.sharedLedger?.() || [], canon: env.app?.sharedCanonView?.() || [],
+        character: env.character, sceneNames: (env.sceneState?.npcsPresent || []).map(n => n?.name).filter(Boolean),
+        locations: env.CONTENT?.locations || {}, origins: env.CONTENT?.origins || [], bands: env.CONTENT?.rules?.powerBands || null,
+        collapse: collapseLedgerEvents,
+        // ⛑ THE FAMILY FLOOR. Ledger rows carry no rating, so the canon lens cannot place them — a minor's GM simply
+        // never receives a row the canon lens would have kept from them.
+        withhold: isMinorProfile(env.profile) ? (t) => SEXUAL_MARKERS.test(t) || HARD_INTENSITY_MARKERS.test(t) : null }) },
   { key: "worldCountLabel", builder: "worldtime.worldCount + worldCountLabel (SNG-191)", carries: ["the world count in the LOCAL people's idiom — a shared ordering mark, never a date"],
     reachedBy: "always", spec: "§2/§10", views: ["turn"],
     build: (env) => {

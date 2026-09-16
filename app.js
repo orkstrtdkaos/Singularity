@@ -88,7 +88,7 @@ import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent
 import { activeArcEffects, craftCostNote, encounterBias, effectsInPlainWords, npcMoodLines, travelCostFactor } from "./engine/arceffects.js";   // SNG-273: an advanced arc is something you FEEL
 import { knownIndex, whoIs, figureArtRecord } from "./engine/whois.js";   // SNG-299: who is that, and where do I read more
 import { worldTabHtml } from "./engine/worldtab.js";   // SNG-276: the tab's markup, testable
-import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter, arcStageNow, worldRoster, NEWS_SECTIONS, pushCanonLook} from "./engine/worldtick.js";
+import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, syncTravelers, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter, arcStageNow, worldRoster, NEWS_SECTIONS, pushCanonLook} from "./engine/worldtick.js";
 import { runWakeGeneration } from "./engine/wake.js"; // SNG-204 Phase 2: open wakes generate the next thread
 import { addAssignment, delegationRefusal, activeDelegates, MISSION_KINDS, MISSION_KIND_IDS, canSendOn, sayFamilies } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
 import { setArcFate } from "./engine/latentarcs.js"; // SNG-191 §7: the player closing a surfaced arc (the handled/resolved fate)
@@ -145,7 +145,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.15";
+const APP_VERSION = "2.0.16";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -678,6 +678,8 @@ let gambitHintCooldown = 0;      // SNG-077: turns to stay quiet after a hint is
 let _capturedErrors = [];        // runtime errors since load (for a one-click pre-diagnosed report)
 let lastPlayerAction = null;     // the last choice the player took
 let sceneGenCount = 0;   // SNG-BATCH-9: generative-mint counter for this scene (the governor cap)
+// ⛔ SNG-595: the travelers index and the WHOLE ledger, refreshed on the tick — the reader keyed by PERSON reads these.
+let sharedTravelers = { index: null, ledger: [] };
 let sharedCanonView = []; // SNG-BATCH-9 Phase 3: this viewer's rating-lensed slice of shared canon
 // SNG-250 §7b: creatures OTHER players have grown, snapshotted from shared canon at a safe seam (never
 // mid-encounter — see hydrateCanonIntoContent). One valley, one bestiary.
@@ -5364,6 +5366,12 @@ async function maybeTick() {
     if ((canon.promoted || []).length) autoVerifyLeg("b9p3-promote", "an entity promoted into shared canon");
     if (sharedCanonView.some(v => v.decision === "adapt" || v.decision === "filter")) autoVerifyLeg("b9p3-lens", "shared canon dialed down/filtered by the rating-lens");
   } catch (err) { console.warn("[canon] tick skipped:", err?.message); }
+  // ⛔ SNG-595: publish this traveler's card (only when it changed) and read the world's record of everyone. A failed read
+  // keeps the last good copy — a GM that knew who Silas was a minute ago must not forget him on a flaky network.
+  try {
+    const tv = await syncTravelers({ character, profile });
+    if (tv.synced) sharedTravelers = { index: tv.index || sharedTravelers.index, ledger: Array.isArray(tv.ledger) ? tv.ledger : sharedTravelers.ledger };
+  } catch (err) { console.warn("[travelers] tick skipped:", err?.message); }
   // SNG-201: publish first-finder braids + adopt any the world found first; refresh the recipe cache.
   await syncBraidRecipes({ character, profile });
   try { runPressureProducers(); } catch (e) { console.warn("[pressure] producers skipped:", e?.message); } // SNG-245: feed the pressure queue from the agendas already in play
@@ -6461,6 +6469,7 @@ function gmEnv(extra = {}) {
     app: {
       fullCatalog, FN_INDEX: () => FN_INDEX, activeEnc, listAvailableEncounters,
       masteryReadyForGM, ratingLineForGM, maybeLegendDetail, sharedCanonForGM,
+      travelersIndex: () => sharedTravelers.index, sharedLedger: () => sharedTravelers.ledger, sharedCanonView: () => sharedCanonView,   // SNG-595
       isPlaceKnown: (id) => isPlaceKnown(character, id, CONTENT.locations)   // SNG-176: recall only what the character KNOWS
     },
     ...extra
@@ -8447,7 +8456,9 @@ function applyTurn(turn, resolution, playerWords = null) {
   if (syncEnabled()) {
     const events = (turn.ledgerEvents || []).map(e => ({
       schemaVersion: 1, at: new Date().toISOString(), worldDay: absoluteWorldDay(), who: character.id, playerKey: profile.playerKey,
-      where: location.id, what: String(e.what || "").slice(0, 200), tags: e.tags || [],
+      // ⚠️ SNG-595: CLAMPED, NOT SLICED. `.slice(0, 200)` cut the public record mid-word — "the method of retrieval will
+      // be c" — and this text is now read back to other players' GMs as the whole of what the world saw.
+      where: location.id, what: smartClamp(String(e.what || "").trim(), 200), tags: e.tags || [],
       spectrumDeltas: e.spectrumDeltas || {}, visibility: e.visibility || "witnessed",
       impactsLocal: !!e.impactsLocal // SNG-041: crosses the far-world/local boundary to whoever it affects
     }));

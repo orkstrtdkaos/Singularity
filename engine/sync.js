@@ -229,6 +229,37 @@ export async function fetchLedger(monthsBack = 0) {
   return (await fetchRepoJSON(`world/ledger/${month}.json`)) || [];
 }
 
+/** ⛔ SNG-595 — THE MONTHS A READ ACTUALLY NEEDS, not just this one. `fetchLedger(0)` opened a single file, so from
+ *  the first of every month the previous month's rows were unreadable by anything — 15 of Silas's 23 deeds, the whole
+ *  story another player asked about. A month with no file (404) is an empty month, never an error. */
+export async function fetchLedgerMonths(months = []) {
+  const out = [];
+  for (const m of months) {
+    if (!/^\d{4}-\d{2}$/.test(String(m))) continue;
+    const rows = await fetchRepoJSON(`world/ledger/${m}.json`);
+    if (Array.isArray(rows)) out.push(...rows);
+  }
+  return out;
+}
+
+/** ⛔ SNG-595 — EVERY MONTH THE LEDGER HAS, for the reader keyed by PERSON: a traveler's record is their whole public
+ *  history, and no deed of theirs is less theirs for being old.
+ *  ⛑ A PAST MONTH IS NEVER WRITTEN AGAIN — `appendLedger` only ever names the current month's file — so a caller may
+ *  pass a `closed` Map and each past month is fetched once per session instead of once per tick. */
+export async function fetchLedgerAll({ now = new Date(), closed = null } = {}) {
+  const cur = new Date(now).toISOString().slice(0, 7);
+  const months = (await ghList("world/ledger")).map(n => /^(\d{4}-\d{2})\.json$/.exec(n)?.[1]).filter(Boolean).sort();
+  const out = [];
+  for (const m of months) {
+    if (closed && m < cur && closed.has(m)) { out.push(...closed.get(m)); continue; }
+    const rows = await fetchRepoJSON(`world/ledger/${m}.json`);
+    const list = Array.isArray(rows) ? rows : [];
+    if (closed && m < cur) closed.set(m, list);
+    out.push(...list);
+  }
+  return out;
+}
+
 /** Write a file the caller EXCLUSIVELY OWNS (character/profile). Retries once on
  *  SHA conflict with a cold re-read — same 409/422 discipline as Tether. */
 export async function pushOwnedFile(path, obj, message) {

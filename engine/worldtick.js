@@ -41,6 +41,7 @@ import { syncEnabled, fetchRepoJSON, fetchLedgerMonths, fetchLedgerAll, pushMerg
 import { travelerCard, cardChanged, mergeTravelerCard, ledgerMonthsSince, whereOf, meetKey } from "./travelers.js";   // SNG-595: a fellow traveler is a person the world has a record of
 import { stampEventChange, mergeEventStages, mergeQuestOutcomes, actorOf, questKey } from "./worldevents.js";   // CCODE-354: a crisis another traveler answered reads as answered
 import { INVITES_PATH, mergeInvitation, answerInto, applyAnswers } from "./invitations.js";   // CCODE-360: an invitation carried by someone you both know
+import { boundFigures } from "./companionlives.js";   // SNG-597 §3: a companion who is also a figure of the world
 import { decayWakes, wakeArcPush } from "./wake.js"; // SNG-204: wakes decay on the tick + lean on connected arcs
 import { enterDeathState, deepenDeaths, deathDepth, isRetrievable, resolveRetrieval } from "./death.js"; // SNG-209: a killed figure ENTERS the death state; the clock sinks untended deaths toward sealed
 import { absoluteWorldDay, worldDayAt, worldCount, readClock } from "./worldtime.js";
@@ -149,13 +150,19 @@ export function worldArcsPublic(content, character) {
  *  "a name you have heard", which is the difference between a fact and a hook.
  *
  *  Pure. Reads world state, writes nothing. */
+/** The attention ladder, once: "aware of" < "attending to" < "focused on" < "consumed by" (Erik's structure, Aevi's words). */
+export function attentionWord(weight) {
+  const w = Number(weight) || 1;
+  return w >= 4 ? "consumed by" : w >= 3 ? "focused on" : w >= 2 ? "attending to" : "aware of";
+}
+
 export function arcPeopleView(character, content = {}) {
   const ws = character?.worldState || {};
   const roster = worldRoster(ws, content);
   const byId = new Map(roster.map(f => [f.id, f]));
   const nameOf = (id) => byId.get(id)?.name || id || "someone";
   const knows = (id) => !!(character?.npcRegistry?.[id] || character?.codex?.topics?.[id]);
-  const who = (id) => ({ id, name: nameOf(id), known: knows(id) });
+  const who = (id) => ({ id, name: nameOf(id), known: knows(id), ...(withYou?.has(id) ? { withYou: withYou.get(id) } : {}) });
 
   // "Show the state, not the machine" (Aevi). A push is a float; a reader wants a WEIGHT, not 2.351351.
   // ⚠️ BANDED AGAINST THE CAP, not against absolute numbers. Pushes ACCUMULATE toward `EPIC_PUSH_CAP`, so
@@ -186,10 +193,9 @@ export function arcPeopleView(character, content = {}) {
   // ⚠️ AND IT MATTERS MORE THAN ONE PHRASE USUALLY WOULD, because the panel prints this beside every name in
   // every arc — Erik's screen showed it six times in one block. A word that reads oddly once reads badly six
   // times in a column.
-  const careBand = (f, arcId) => {
-    const w = affinitiesOf(f).find(c => c.arcId === arcId)?.weight || 1;
-    return w >= 4 ? "consumed by it" : w >= 3 ? "focused on it" : w >= 2 ? "attending to it" : "aware of it";
-  };
+  const careBand = (f, arcId) => `${attentionWord(affinitiesOf(f).find(c => c.arcId === arcId)?.weight)} it`;
+  // ⛔ SNG-597 §3: someone travelling with the player is marked on this tab, so a line about them reads as a person you know
+  const withYou = new Map(boundFigures(character, { content, roster }).map(b => [b.figureId, b.companionName]));
 
   return worldArcsPublic(content, character).map(arc => {
     const raw = Object.entries(ws.epicArcPushes || {})
@@ -221,12 +227,16 @@ export function arcPeopleView(character, content = {}) {
 export function worldPeopleFooter(character, content = {}) {
   const ws = character?.worldState || {};
   const roster = worldRoster(ws, content);
+  const companions = new Map(boundFigures(character, { content, roster }).map(b => [b.figureId, b.companionName]));
   const byId = new Map(roster.map(f => [f.id, f]));
   const nameOf = (id) => byId.get(id)?.name || id || "someone";
   return {
     neglected: (ws.neglectedLives || []).map(n => ({ id: n.id, name: n.name || nameOf(n.id) })),
     living: (ws.personalBeats || []).map(b => ({ id: b.id, name: b.name || nameOf(b.id), pursuit: b.pursuit })),
-    wanted: (ws.retrievalWanted || []).map(w => ({ dead: w.deadName || nameOf(w.deadId), by: w.byName || nameOf(w.byId), depth: w.depth, waiting: !!w.waiting })),
+    // ⛔ SNG-597 §3: a companion who wants someone back is not "trying to reach" them from the far side of the valley — they are
+    // at your side, wanting it; the tab says so, by the name you know them by.
+    wanted: (ws.retrievalWanted || []).map(w => ({ dead: w.deadName || nameOf(w.deadId), by: w.byName || nameOf(w.byId), depth: w.depth, waiting: !!w.waiting,
+      ...(companions.has(w.byId) ? { withYou: companions.get(w.byId) } : {}) })),
     // ⛔ SNG-383 — THE SYMMETRIC HALF OF `wanted`, AND THE FIRST READER `returnedFromDeath` HAS EVER
     // HAD. `resolveRetrieval` has written it since SNG-209 §4 — { day, changed } — and nothing has read
     // it: not the who-is card, not the GM, not this tab. `wanted` says who is being gone after; there was
@@ -2535,6 +2545,49 @@ export function wakeFigure(ws, id, worldDay) {
  *  good. Trying is the risk; that is what makes leaving someone in the dark a real choice too.
  *
  *  Returns { attempts, retrievers } — retrievers is a Set of ids that owe a front to the dead this pass. */
+/** ⛔ SNG-597 §3 — "SHE DIDN'T MENTION IT TO SILAS." A new wish of a companion's reaches the player's own news, once: Aevi's line,
+ *  "Marrow has been asking after the Scouring Hand's resting place", is the shape. `ws.companionWishSeen` remembers what was said,
+ *  and forgets a wish that has ended so a new one is told again. Returns the news items. */
+export function companionWishNews(ws, wanted, bound, worldDay) {
+  if (!ws || !Array.isArray(bound) || !bound.length) return [];
+  const byFigure = new Map(bound.map(b => [b.figureId, b]));
+  const seen = ws.companionWishSeen || (ws.companionWishSeen = {});
+  const live = new Set();
+  const out = [];
+  for (const w of wanted || []) {
+    const b = byFigure.get(w?.byId);
+    if (!b) continue;
+    const key = `${w.byId}|${w.deadId}`;
+    live.add(key);
+    if (seen[key] != null) continue;
+    seen[key] = worldDay;
+    out.push({ text: `${b.companionName} has been asking after where ${w.deadName || "someone"} lies — wanting them back from the dark.`,
+      worldDay, tier: "event", section: "yours", figureId: w.byId });
+  }
+  for (const key of Object.keys(seen)) if (!live.has(key) && byFigure.has(key.split("|")[0])) delete seen[key];
+  return out;
+}
+
+/** ⛔ SNG-597 §3 — THE GM: what a companion who is also a figure of the world is carrying — how their attention is spent, and what
+ *  they want — so they can bring it up in their own voice. Null when nobody in the company is one. */
+export function companionLivesForGM(character, content = {}) {
+  const ws = character?.worldState || {};
+  const roster = worldRoster(ws, content);
+  const bound = boundFigures(character, { content, roster });
+  if (!bound.length) return null;
+  const arcName = (id) => (content?.greaterArcs || []).find(a => a?.id === id)?.name || String(id || "").replace(/^arc_/, "").replace(/_/g, " ");
+  const player = character?.name || "the player";
+  return bound.map(b => {
+    const f = roster.find(x => x.id === b.figureId);
+    const cares = currentCares(ws, f).filter(c => Math.sign(dirSign(c.dir)))
+      .slice().sort((x, y) => (Number(y.weight) || 1) - (Number(x.weight) || 1)).slice(0, 3)
+      .map(c => `${attentionWord(c.weight)} ${arcName(c.arcId)} (${dirSign(c.dir) > 0 ? "for it" : "against it"})`);
+    const wants = (ws.retrievalWanted || []).filter(x => x.byId === b.figureId).map(x => `wants ${x.deadName || x.deadId} back from the dark`);
+    return `- ${b.companionName} — in the wider world, ${b.figureName} — travelling with ${player}: ${[...cares, ...wants].join("; ") || "nothing of their own stirring right now"}.`
+      + (wants.length ? ` Going after it is something ${b.companionName} would ask ${player} for, not do alone.` : "");
+  }).join("\n");
+}
+
 /** ⛔ SNG-597 §2 — KIN IS THE SAME SIDE OF THE SAME THING, AND THE ONE WHO CARED MOST GOES.
  *  Aevi: "`dir` IS RIGHT THERE ON EVERY AFFINITY AND IS NEVER COMPARED. Two figures on opposite sides of the same arc are the
  *  *most* opposed people in the valley, and this reads them as kin." And: "The person who cared most should be reaching, not the
@@ -2561,7 +2614,7 @@ export function kinOf(ws, dead, living, worldDay) {
     .sort((a, b) => b.stake - a.stake || tierRank(tierOf(ws, b.f)) - tierRank(tierOf(ws, a.f)) || String(a.f.id).localeCompare(String(b.f.id)));
 }
 
-export function attemptRetrievals(ws, roster, living, worldDay, rules = {}, cfg = {}, rng = Math.random) {
+export function attemptRetrievals(ws, roster, living, worldDay, rules = {}, cfg = {}, rng = Math.random, { bound = null } = {}) {
   const attempts = [];
   const wanted = [];
   const retrievers = new Set();
@@ -2584,7 +2637,10 @@ export function attemptRetrievals(ws, roster, living, worldDay, rules = {}, cfg 
     // "go get them back for me" if it knows there is a someone doing the asking. Erik: "we should have
     // quests to retrieve for NPCs."
     wanted.push({ deadId: id, deadName: dead.name || null, byId: who.id, byName: who.name || null,
-      depth: deathDepth(st, worldDay, rules), waiting: !!onCooldown });
+      depth: deathDepth(st, worldDay, rules), waiting: !!onCooldown, ...(bound?.has(who.id) ? { withParty: true } : {}) });
+    // ⛔ SNG-597 §3: someone travelling with a player does not go into the dark from their side — the wanting is theirs to bring
+    // to the player, and the going is something they ask for.
+    if (bound?.has(who.id)) continue;
     if (onCooldown || rng() >= rate) continue;
     retrievers.add(who.id);
     (ws.retrievalTried ||= {})[id] = worldDay;
@@ -2804,9 +2860,15 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     // SNG-270 — SOMEBODY GOES AFTER THE DEAD, and pays a front to do it. Run BEFORE attention is spent,
     // because the whole point is that this competes with the arcs: an ally in the dark and a front that
     // needs holding draw on the same budget, and choosing one is choosing against the other.
-    const { attempts: retrievals, retrievers } =
-      attemptRetrievals(ws, worldRoster(ws, content), living, currentWorldDay, content.rules, cfg, rng);
+    // ⛔ SNG-597 §3 — A FIGURE TRAVELLING WITH THE PLAYER IS NOT FREE OFFSCREEN LABOUR (Aevi, O1), AND KEEPS HER OWN LIFE (O3):
+    // "Do not take the arc away from her. Take the silence away." While they travel, their CARES still lean on the world, and what
+    // they WANT is theirs to bring to the player — but nothing physical happens to or through them somewhere else: no duel, no strike
+    // sent or taken or stood over, no challenge, no going into the dark. Those would happen where the player is, and are the GM's.
+    const bound = new Set(boundFigures(character, { content, roster: worldRoster(ws, content) }).map(b => b.figureId));
+    const { attempts: retrievals, retrievers, wanted: wantedNow } =
+      attemptRetrievals(ws, worldRoster(ws, content), living, currentWorldDay, content.rules, cfg, rng, { bound });
     ws.arcRetrievals = retrievals;
+    for (const n of companionWishNews(ws, wantedNow, boundFigures(character, { content, roster: worldRoster(ws, content) }), currentWorldDay)) news.push(n);
     for (const r of retrievals) {
       if (r.outcome === "return") news.push({ text: `${r.byName || "Someone"} went into the dark and came back with them. The valley has one of its own again — changed, but back.`, worldDay: currentWorldDay, tier: "event" });
       else if (r.sealed) news.push({ text: `${r.byName || "Someone"} reached too deep and lost them for good. That road is closed now.`, worldDay: currentWorldDay, tier: "event" });
@@ -2969,6 +3031,9 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
         const byUrgency = list.slice().sort((a, b) => b.urgency - a.urgency);
         const engaged = [], working = [];
         for (const e of byUrgency) (rng() < engageOf(e.f) ? engaged : working).push(e);
+        // SNG-597 §3: a companion never steps into a melee elsewhere. The roll above is still drawn for them, so nobody else's dice
+        // move; they simply work instead of fighting.
+        if (bound.size) for (let i = engaged.length - 1; i >= 0; i--) if (bound.has(engaged[i].f?.id)) working.push(...engaged.splice(i, 1));
         return { engaged, working };
       };
       const P = split(sides.pro), Q = split(sides.con);
@@ -3135,7 +3200,9 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
                    weight: Math.max(1, Number(character?.level) || 1) },
               care: { arcId, dir: "pro" }, urgency: 1, share: 1 }] }
           : defenders;
-        const plan = planStrike({ attackers, defenders: dSide, arcId, strikeCfg, strikeKinds, strikeRate, rng, weightOf: wOf,
+        // SNG-597 §3: a companion is not sent, not struck and does not stand guard elsewhere while they travel
+        const free = (side) => (bound.size ? { ...side, working: side.working.filter(e => !bound.has(e.f?.id)), engaged: (side.engaged || []).filter(e => !bound.has(e.f?.id)) } : side);
+        const plan = planStrike({ attackers: free(attackers), defenders: free(dSide), arcId, strikeCfg, strikeKinds, strikeRate, rng, weightOf: wOf,
           exposure: ws.figureExposure || {},
           guardInterceptChance: Number.isFinite(cfg.guardInterceptChance) ? cfg.guardInterceptChance : 0.45 });
         if (!plan) continue;
@@ -3242,7 +3309,8 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     const challenges = [];
     {
       const cRate = cfg.challenges || {};
-      const field = living.filter(f => (ws.epicStatus?.[f.id]?.status || "active") === "active");
+      // SNG-597 §3: nobody challenges a companion elsewhere, and a companion challenges nobody from the player's side
+      const field = living.filter(f => (ws.epicStatus?.[f.id]?.status || "active") === "active" && !bound.has(f.id));
       for (const f of field) {
         const plan = planChallenge({ figure: f, pool: field, tierOf: (x) => tierOf(ws, x), cfg: cRate, rng });
         if (!plan) continue;

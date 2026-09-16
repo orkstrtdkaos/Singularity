@@ -39,7 +39,7 @@ import { bearingsToKnown } from "./worldmap.js";   // SNG-386 §4.3: which way t
 import { holdingsForGM, debtsForGM } from "./holdings.js";
 import { caravansForGM } from "./caravan.js";   // R49: loads on the road
 import { loreForLocation, eventsForGM, traditionMotivationsForGM } from "./state.js";
-import { buildRegionView, newsForGM, worldArcsForGM, collapseLedgerEvents } from "./worldtick.js";
+import { buildRegionView, newsForGM, worldArcsForGM, collapseLedgerEvents, companionLivesForGM } from "./worldtick.js";
 import { travelersForGM, travelersHereForGM, whereOf } from "./travelers.js";   // SNG-595: a name that belongs to another player · CCODE-359: and who is here
 import { worldMovedOnForGM } from "./worldevents.js";   // CCODE-354: the world moved on while this character believed otherwise
 import { invitationsForGM, bandsJoinedForGM } from "./invitations.js";   // CCODE-360: an invitation carried by someone you both know
@@ -590,6 +590,10 @@ export const GM_CONTEXT = [
     build: (env) => worldMovedOnForGM(env.character, { events: env.CONTENT?.events || {}, quests: env.CONTENT?.quests || [] }) },
   // ⛔ CCODE-360 (Erik: "I would like the opportunity to invite her to my Band of the Fell Pell - probably through mutual connections
   // when I recruit") — an invitation her own world's carrier brings, and the bands she chose to join.
+  // ⛔ SNG-597 §3 (Erik: "she didn't mention it to Silas — now that she's in his party"; "Go with Aevi's suggestion on Marrow").
+  { key: "companionLivesDetail", builder: "worldtick.companionLivesForGM (SNG-597)", carries: ["a companion who is also a figure of the world: their cares, and what they want"],
+    reachedBy: "always (empty unless someone in the company is also a figure of the world)", spec: "SNG-597", views: ["turn", "ask"],
+    build: (env) => companionLivesForGM(env.character, env.CONTENT || {}) },
   // ⛔ CCODE-369 (Erik: "a home is a different type than a hold... to start with it's a location") — where this character lives.
   { key: "homeDetail", builder: "home.homeForGM (CCODE-369)", carries: ["the place this character chose as home, and whether they are there"],
     reachedBy: "always (empty unless the character has made a place home)", spec: "CCODE-369", views: ["turn", "ask"],

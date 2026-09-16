@@ -18470,6 +18470,89 @@ console.log("\n── §257 · kin is the same side of the same thing, and the o
     guard257?.guardians?.map(x => x.id).join(",") === "yours", JSON.stringify(guard257?.guardians));
 }
 
+// ⛔ SNG-597 §3 (CCODE-372) — Erik: "she didn't mention it to Silas — now that she's in his party. We likely need to deconflict NPCs
+// from world arcs if they're travelling with a PC." → "Go with Aevi's suggestion on Marrow." Aevi: "Do not take the arc away from her.
+// Take the silence away." ⚑ MEASURED: no content field links companion `marrow` to legend `maren_ossitide`; Silas's save knows her as
+// "Maren (Marrow) Ossitide". ⛑ Her cares still lean on the world; nothing physical happens to or through her elsewhere; and what she
+// wants reaches Silas — his news, his GM, his world tab.
+console.log("\n── §258 · a companion who is also a figure of the world keeps her life, and is not silent about it ──");
+{
+  const W258 = await import("../engine/worldtick.js");
+  const B258 = await import("../engine/companionlives.js");
+  const { loadContentHeadless: lch258 } = await import("./headless_content.mjs");
+  const C258 = await lch258();
+
+  /* ---- 1 · ⛔ WHO IN THE COMPANY IS A FIGURE ---- */
+  const roster = W258.worldRoster({}, C258);
+  const silasLike = { name: "Silas Weir", company: [{ npcId: "marrow", joinedDay: 74 }, { npcId: "pell" }],
+    npcRegistry: { marrow: { id: "marrow", name: "Maren (Marrow) Ossitide", aliases: ["Huginn", "Marrow", "Maren Ossitide"] }, pell: { id: "pell", name: "Pell Ran Marsh" } } };
+  const b258 = B258.boundFigures(silasLike, { content: C258, roster });
+  check("§258: ⛔ Marrow is Maren Ossitide — by the name Silas's own save knows her by, epithet aside — and Pell is nobody's figure",
+    b258.length === 1 && b258[0].figureId === "maren_ossitide" && b258[0].companionName === "Marrow" && b258[0].basis === "known-as", JSON.stringify(b258));
+  check("§258: …an authored link wins, someone who has left the company is not bound, and a name that is merely similar binds nobody",
+    B258.boundFigures({ company: [{ npcId: "q" }] }, { content: { companions: { q: { name: "Quill", legendId: "sister_alder" } } }, roster })[0]?.basis === "authored"
+    && B258.boundFigures({ ...silasLike, company: [{ npcId: "marrow", leftDay: 80 }] }, { content: C258, roster }).length === 0
+    && B258.boundFigures({ company: [{ npcId: "m2" }], npcRegistry: { m2: { name: "Maren" } } }, { content: C258, roster }).length === 0);
+
+  /* ---- 2 · ⛔ SHE WANTS; SHE DOES NOT GO INTO THE DARK FROM SILAS'S SIDE ---- */
+  const wsR = { epicStatus: { d1: { status: "dead" } } };
+  const { enterDeathState } = await import("../engine/death.js");
+  enterDeathState(wsR.epicStatus.d1, { diedDay: 0, cause: "killed" });
+  const rosterR = [{ id: "d1", name: "The Fallen", arcAffinities: [{ arcId: "A", dir: 1 }] }, { id: "maren_ossitide", name: "Maren Ossitide, Who Buried the Drowned Year", tier: "legendary", arcAffinities: [{ arcId: "A", dir: 1, weight: 2 }] }];
+  const rR = W258.attemptRetrievals(wsR, rosterR, rosterR.slice(1), 5, {}, { retrievalRate: 1 }, () => 0.01, { bound: new Set(["maren_ossitide"]) });
+  check("§258: ⛔ a companion who wants the dead back is recorded as wanting it — and makes no attempt offscreen",
+    rR.wanted[0]?.byId === "maren_ossitide" && rR.wanted[0]?.withParty === true && rR.attempts.length === 0 && !rR.retrievers.has("maren_ossitide"));
+  const news1 = W258.companionWishNews(wsR, rR.wanted, b258, 80);
+  const news2 = W258.companionWishNews(wsR, rR.wanted, b258, 81);
+  check("§258: ⛔ …and Silas is TOLD, once, in his own section — 'Marrow has been asking after where The Fallen lies'",
+    news1.length === 1 && news2.length === 0 && news1[0].section === "yours"
+    && news1[0].text === "Marrow has been asking after where The Fallen lies — wanting them back from the dark.", JSON.stringify(news1));
+
+  /* ---- 3 · ⛔ THROUGH THE REAL PASS: HER CARES LEAN; NOTHING PHYSICAL HAPPENS ELSEWHERE ---- */
+  const seeded = (seed) => { let x = seed >>> 0; return () => { x = (x * 1103515245 + 12345) & 0x7fffffff; return x / 0x7fffffff; }; };
+  const rng258 = seeded(597);
+  const ch258 = { name: "Silas Weir", level: 30, clock: { day: 1 }, actionCount: 0, quests: [], abilities: [], deeds: [],
+    company: silasLike.company, npcRegistry: silasLike.npcRegistry, worldState: W258.initWorldState(1) };
+  delete ch258.worldState.lastTickWorldDay;
+  const stub258 = async ({ entities }) => ({ developments: entities.map(e => ({ entityId: e.id, note: "the world turned", outcome: "progress" })) });
+  const t0 = Date.now();
+  const M = "maren_ossitide";
+  let physical = [], pushed = false, passes = 0;
+  for (let d = 0; d < 728; d += 7) {
+    await W258.advanceGeneratedOffscreen({ character: ch258, content: C258, evolveFn: stub258, rng: rng258, now: t0 + d * 24 * 3600000 });
+    const ws = ch258.worldState;
+    passes++;
+    for (const s of ws.arcStrikes || []) if (s.sender === M || s.target === M || s.guard === M) physical.push(`strike ${s.sender}→${s.target}`);
+    for (const c of ws.arcCasualties || []) if (c.winner === M || c.loser === M) physical.push(`casualty ${c.winner}/${c.loser}`);
+    for (const c of ws.arcChallenges || []) if (c.defender === M || c.challenger === M) physical.push(`challenge ${c.challenger}→${c.defender}`);
+    for (const r of ws.arcRetrievals || []) if (r.byId === M) physical.push(`retrieval ${r.deadId}`);
+    if (Number(ws.epicArcPushes?.[M]?.push)) pushed = true;
+  }
+  check("§258: ⛔ through two world-years of the real pass, Maren is never in a strike, a melee, a challenge or a retrieval — and her cares still move the world",
+    passes > 50 && physical.length === 0 && pushed, `${physical.length} physical: ${physical.slice(0, 3).join(" | ") || "none"} · pushed ${pushed}`);
+
+  /* ---- 4 · ⛔ THE GM, AND THE TAB ---- */
+  const chG = { name: "Silas Weir", company: silasLike.company, npcRegistry: silasLike.npcRegistry,
+    worldState: { retrievalWanted: [{ deadId: "the_scouring_hand", deadName: "The Scouring Hand", byId: M, byName: "Maren Ossitide", depth: 1 }] } };
+  const gm258 = W258.companionLivesForGM(chG, C258) || "";
+  check("§258: ⛔ the GM hears who she is in the world, how her attention is spent, and what she wants — and that going after it is something she would ASK for",
+    /^- Marrow — in the wider world, Maren Ossitide, Who Buried the Drowned Year — travelling with Silas Weir: attending to What Wakes Beneath \(against it\)/.test(gm258)
+    && /wants The Scouring Hand back from the dark/.test(gm258) && /something Marrow would ask Silas Weir for, not do alone/.test(gm258), gm258);
+  const REG258 = await import("../engine/gm_registry.js");
+  const GM258 = await import("../engine/gm.js");
+  const bare258 = { character: { id: "t", name: "T", origin: "valley", background: "smith", level: 1, attributes: { physical: 3, mental: 3, social: 3, practical: 3 }, health: 10, maxHealth: 10, energy: 5, maxEnergy: 5, abilities: [], alignment: {}, inventory: [], quests: [] },
+    location: { id: "millbrook", name: "Millbrook", descriptionSeed: "a mill town", spectrum: {}, encounterFlavor: "quiet" }, region: { id: "valley", name: "The Valley" },
+    rules: {}, lore: "", timeLabel: "Day 1", recentTurns: [], sceneState: {}, resolution: null, playerInput: null };
+  const p258 = GM258.buildTurnContext({ ...bare258, companionLivesDetail: gm258 });
+  check("§258: …registered for the turn and the ask, and READ under a header that says bring it up — never hide it, never let it take over",
+    REG258.registryKeys("turn").includes("companionLivesDetail") && REG258.registryKeys("ask").includes("companionLivesDetail")
+    && /## YOUR COMPANIONS' OWN LIVES/.test(p258) && /Never hide it, and never let it take over the scene\./.test(p258) && p258.includes(gm258));
+  const foot258 = W258.worldPeopleFooter(chG, C258);
+  const tab258 = rd("engine/worldtab.js").replace(/\r\n/g, "\n");
+  check("§258: ⛔ the world tab no longer says she is 'trying to reach' an Unmaker from across the valley — it says she wants it, travelling with you, as Marrow",
+    foot258.wanted[0]?.withYou === "Marrow" && /travelling with you, as \$\{esc\(w\.withYou\)\}/.test(tab258) && /\(travelling with you, as \$\{esc\(m\.withYou\)\}\)/.test(tab258));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

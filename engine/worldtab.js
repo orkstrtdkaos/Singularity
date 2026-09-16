@@ -20,7 +20,7 @@ export function worldTabHtml({ arcs = [], foot = {}, effects = [], name = "", ta
     : `<span class="hint">holding</span>`;
   // A person you have MET is a hook; a name you have merely heard is a fact. The sheet should not pretend
   // those are the same thing — it is the difference between "go find her" and "someone is out there".
-  const person = m => `<span class="wt-who${m.known ? " wt-known" : ""}"${m.known ? ' title="you have met them"' : ''}>${esc(m.name)}</span>`;
+  const person = m => `<span class="wt-who${m.known ? " wt-known" : ""}"${m.known ? ' title="you have met them"' : ''}>${esc(m.name)}</span>${m.withYou ? ` <span class="hint">(travelling with you, as ${esc(m.withYou)})</span>` : ""}`;
   const side = (list, label) => list.length
     ? `<div class="wt-side"><span class="wt-side-label">${label}</span> ${list.slice(0, 3).map(m => `${person(m)} <span class="hint">· ${esc(m.lean)}</span>`).join(", ")}${list.length > 3 ? ` <span class="hint">and ${list.length - 3} others</span>` : ""}</div>`
     : "";
@@ -51,7 +51,9 @@ export function worldTabHtml({ arcs = [], foot = {}, effects = [], name = "", ta
     ${returned.slice(0, 6).map(r => `<div class="wt-line">${esc(r.name)} was brought back${r.day != null ? ` on day ${r.day}` : ""}${r.changed ? ` — ${esc(r.changed)}` : " — changed, but back"}</div>`).join("")}
     <div class="hint">The roads back are not all closed. Someone walked one.</div></div>` : "";
   const wantedBack = wanted.length ? `<div class="cs-block"><h3 class="codex-title">↺ Wanted back from the dark</h3>
-    ${wanted.slice(0, 6).map(w => `<div class="wt-line">${esc(w.by)} is trying to reach ${esc(w.dead)}${w.waiting ? " — and has already failed once" : ""}</div>`).join("")}
+    ${wanted.slice(0, 6).map(w => (w.withYou
+      ? `<div class="wt-line">${esc(w.by)} wants ${esc(w.dead)} back — <span class="wt-who wt-known">travelling with you, as ${esc(w.withYou)}</span></div>`
+      : `<div class="wt-line">${esc(w.by)} is trying to reach ${esc(w.dead)}${w.waiting ? " — and has already failed once" : ""}</div>`)).join("")}
     <div class="hint">Someone is doing the asking. That makes it a thing you could help with.</div></div>` : "";
 
   const home = (neglected.length || living.length) ? `<div class="cs-block"><h3 class="codex-title">☉ Lives, away from all this</h3>

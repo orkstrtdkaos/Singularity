@@ -715,7 +715,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `interceptDamage` | 11 | `tree`×11 | ✅ READ | `battle_turn.js`, `intercept.js` |
 | `powerMix` | 10 | `root`×10 | ⛔ DARK | — |
 | `companionTaught` | 9 | `root`×9 | ⛔ DARK | — |
-| `companionId` | 9 | `root`×9 | ✅ READ | `companions.js`, `evolution.js`, `app.js` |
+| `companionId` | 9 | `root`×9 | ✅ READ | `companionlives.js`, `companions.js`, `evolution.js` |
 | `antisoakImposed` | 8 | `mechanic`×2 `tree`×6 | ✅ READ | `capabilities.js`, `skill_battle.js` |
 | `namedCurrent` | 7 | `root`×7 | ⛔ DARK | — |
 | `evasion` | 7 | `mechanic`×7 | ✅ READ | `craftmechanics.js`, `skill_battle.js`, `app.js` |

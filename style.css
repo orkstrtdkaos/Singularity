@@ -217,6 +217,9 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .ability { margin-bottom: 6px; }
 .ability .name { color: var(--accent2); }
 .ability .cost { color: var(--ink-dim); font-size: 11px; }
+/* CCODE-379: what a craft rolls, beside its cost — a sub the table chose reads quieter than one its author set */
+.roll-chip { white-space: nowrap; }
+.roll-chip.derived { font-style: italic; opacity: 0.85; }
 .sys-group { margin-bottom: 8px; }
 .sys-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--accent2); margin-bottom: 4px; }
 .cs-block { margin-top: 14px; border-top: 1px solid var(--border); padding-top: 10px; }

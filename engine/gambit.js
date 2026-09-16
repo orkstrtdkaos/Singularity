@@ -9,9 +9,11 @@ import { normalizeDifficulty } from "./resolve.js";
 import { callClaudeJSON } from "./claude.js";
 import { resolveAction, successChance } from "./resolve.js";
 import { senseAction } from "./sense.js";
+import { rollForChoice } from "./progression.js";   // CCODE-379: a step that uses a craft rolls what the craft rolls
 
-/** Parse all step texts into action specs in ONE cheap call. */
-export async function parseGambitSteps(stepTexts, character, location) {
+/** Parse all step texts into action specs in ONE cheap call. `catalog` and `table` (rules.craftSubAttributes) let a step that uses a
+ *  craft roll the craft's own sub (CCODE-379, `rollForChoice`); without them the parser's pick stands, as before. */
+export async function parseGambitSteps(stepTexts, character, location, { catalog = null, table = null } = {}) {
   const sys = `Classify each step of an RPG player's declared plan into an action spec. Reply ONLY JSON:
 {"steps": [{"label": "short restatement", "attribute": "physical|mental|social|practical", "subAttribute": "strength|agility|reason|insight|presence|rapport|craft|wits", "axes": {"spectrumId": -1..1}, "difficulty": "very easy|easy|normal|hard|very hard", "intentTags": ["..."], "abilityId": "id-or-null", "comboAbilities": ["ids if deliberately combining two abilities, else []"], "novelUse": false, "noveltyHint": "2-4 words, only if novelUse"}]}
 One entry per input step, same order. subAttribute picks the finest fit: strength (force) / agility (speed, balance, stealth) / reason (analysis) / insight (perception, reading people) / presence (command) / rapport (charm) / craft (tool work) / wits (improvisation).
@@ -29,7 +31,7 @@ abilityId must be one the character actually has, or null. novelUse=true when an
   return stepTexts.map((text, i) => {
     const owned = id => (character.abilities || []).some(a => a.abilityId === id);
     const combo = (Array.isArray(steps[i]?.comboAbilities) ? steps[i].comboAbilities : []).filter(owned);
-    return {
+    const step = {
       label: steps[i]?.label || text.slice(0, 60),
       attribute: ["physical", "mental", "social", "practical"].includes(steps[i]?.attribute) ? steps[i].attribute : "practical",
       subAttribute: SUBS.includes(steps[i]?.subAttribute) ? steps[i].subAttribute : null,
@@ -46,6 +48,9 @@ abilityId must be one the character actually has, or null. novelUse=true when an
       planned: true,
       tags: Array.isArray(steps[i]?.intentTags) ? steps[i].intentTags : []
     };
+    // ⛔ CCODE-379: a declared plan is the fourth door onto a roll — its crafts roll what they roll, as a single choice does
+    const crafts = [step.abilityId, ...step.comboAbilities].filter((id, j, a) => id && a.indexOf(id) === j).map(id => catalog?.[id]).filter(Boolean);
+    return crafts.length ? { ...step, ...rollForChoice(crafts, step, table) } : step;
   });
 }
 

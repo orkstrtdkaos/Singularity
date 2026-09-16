@@ -82,7 +82,7 @@ import { harmGateFor, harmTargetFor, departureGateFor, isConsequentialMove, isSp
 import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, gateHopCost } from "./engine/waygate.js";
 import { routeBetween, routeLine } from "./engine/journey.js";
 import { sendCaravan, caravansOf } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
-import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./engine/entityDetail.js";
+import { skillDetail, npcDetail, itemDetail, relationshipsParagraph, craftRollsLine, craftRollsShort } from "./engine/entityDetail.js";
 import { collapseScenePresence, canonicalPersonId, personArtSeed, applyNpcUpdates, findExistingNpc, genderUnsaid, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM, repairUnnamedPeople } from "./engine/npcs.js";   // SNG-431 §1: the pre-namer saves get their names
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent, lastEnteredSubPlace } from "./engine/places.js";
 import { activeArcEffects, craftCostNote, encounterBias, effectsInPlainWords, npcMoodLines, travelCostFactor } from "./engine/arceffects.js";   // SNG-273: an advanced arc is something you FEEL
@@ -98,7 +98,7 @@ import { runWakeGeneration } from "./engine/wake.js"; // SNG-204 Phase 2: open w
 import { addAssignment, delegationRefusal, activeDelegates, MISSION_KINDS, MISSION_KIND_IDS, canSendOn, sayFamilies } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
 import { setArcFate } from "./engine/latentarcs.js"; // SNG-191 §7: the player closing a surfaced arc (the handled/resolved fate)
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
-import { trainableTier, SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, canLearnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, retroNativeGrants, applyNativeGrants, nativeGrantIdsFor, seedInnateSubstrate, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility, autoAdvancePracticedRanks, markDefiningMoment, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy } from "./engine/progression.js";
+import { trainableTier, SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, canLearnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, retroNativeGrants, applyNativeGrants, nativeGrantIdsFor, seedInnateSubstrate, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility, autoAdvancePracticedRanks, markDefiningMoment, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy, craftRolls, rollForChoice } from "./engine/progression.js";
 import { topicsNeedingSummary, buildSummaryPrompt, applySummaries, topicReading, ensureCodex, applyCodexUpdates, codexForGM, searchCodex, mergeInto, mergeCodexTopics, suggestMerges, markNotSame, buildMergeAdjudicationPrompt, applyMergeVerdicts, mergeDigest, undoLastMerge } from "./engine/codex.js";
 import { reconcile, topReconcileVersion } from "./engine/reconcile.js";
 import { ensurePractice, recordUse, declareAspiration, dropAspiration, recordAspirationProgress, aspirationRipe, practiceRankReady, ripeCombos, ripeBranches, emergenceNoticeForGM, acceptCombo, acceptBranch, validEmergenceId } from "./engine/practice.js";
@@ -150,7 +150,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.40";
+const APP_VERSION = "2.0.41";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -246,6 +246,7 @@ function entityHover(spec) {
         effCost: (() => { try { return effectiveEnergyCost(ab, character, CONTENT.rules); } catch { return ab.energyCost ?? null; } })(),
         baseCost: ab.energyCost ?? null, families: familiesOfAbility(ab, FN_INDEX),
         chanceHere: craftChanceHere(ab, owned),   // ✅ ERIK 2026-09-11: the base chance here, ground included
+        rolls: craftRollsOf(ab),                  // ⛔ CCODE-379 (Erik): what it rolls, a derivation marked as one
         rankText: rp?.text, ripe: !!rp?.ripe || aspirationRipe(character, id, CONTENT.rules),
         ladder: (ab.tree || []).map(t => ({ rank: t.rank, name: t.name, grants: t.grants, cannot: t.cannot })) // CCODE-29: how it evolves rank-by-rank
       });
@@ -8763,6 +8764,30 @@ function subRaiseTip(s) {
 }
 
 
+/** ⛔ CCODE-379 (Erik 2026-09-16): "I want the attribute a skill uses to be obvious in the skill pop-up and description." What a craft
+ *  rolls (engine `craftRolls`), for the pop-up, the wheel's and the graph's detail panels, and a row's chip. Null for no craft. */
+function craftRollsOf(ab) {
+  try { return ab ? craftRolls(ab, CONTENT.rules?.craftSubAttributes) : null; } catch { return null; }
+}
+
+/** The chip a craft row carries beside its cost — the sub names, quieter when the table chose them, the full line on hover. */
+function rollChip(ab, cls = "cost") {
+  const r = craftRollsOf(ab);
+  if (!r) return "";
+  const derived = r.subs.length > 0 && !r.authored;
+  const tip = craftRollsLine(r).replace(/^🎲 /, "") + (derived ? " — worked out from the craft's attribute and what it does, not yet set by hand" : "");
+  return ` <span class="${cls} roll-chip${derived ? " derived" : ""}" title="${esc(tip)}">🎲 ${esc(craftRollsShort(r))}</span>`;
+}
+
+/** ⛔ CCODE-379: the attribute and sub a choice rolls — a held craft's own when the choice uses one (engine `rollForChoice`), the GM's
+ *  pick otherwise. The roll, the auto-intensity read and the "how hard" line all read this, so none of them disagrees with the card. */
+function choiceRoll(c = {}) {
+  const cat = fullCatalog();
+  const held = (id) => (character?.abilities || []).some(a => a.abilityId === id);
+  const crafts = [c.abilityId, ...(c.comboAbilities || [])].filter((id, i, a) => id && a.indexOf(id) === i && held(id)).map(id => cat[id]).filter(Boolean);
+  return rollForChoice(crafts, c, CONTENT.rules?.craftSubAttributes);
+}
+
 /** ✅ ERIK 2026-09-11: "I don't see the base chance skill success (per skill) based on ground yet." The chance this craft's first
  *  verb lands HERE, unopposed, through the same stack the resolve path pays — `successChance` with the character's aptitudes, gear,
  *  companions and affinity, and the ground's own penalty via `substrateForAction` (SNG-116: a preview that omits a term the roll pays
@@ -8770,9 +8795,9 @@ function subRaiseTip(s) {
 function craftChanceHere(ab, owned) {
   const location = CONTENT.locations?.[character.currentLocationId];
   if (!ab || !location) return null;
-  const fn = (ab.functions || [])[0] || null;
-  const sub = fn && SUBS.includes(ab.subAttributeByFunction?.[fn]) ? ab.subAttributeByFunction[fn] : null;
-  const action = { attribute: ab.attribute || "practical", subAttribute: sub, abilityId: ab.id, abilityLevel: owned?.level ?? 1, label: ab.name || ab.id, tags: [], axes: {} };
+  // ⛔ CCODE-379: the attribute and sub a choice using this craft rolls — `rollForChoice`, the same answer the roll itself gets
+  const roll = rollForChoice([ab], {}, CONTENT.rules?.craftSubAttributes);
+  const action = { attribute: roll.attribute, subAttribute: roll.subAttribute, abilityId: ab.id, abilityLevel: owned?.level ?? 1, label: ab.name || ab.id, tags: [], axes: {} };
   const rules = CONTENT.rules;
   const mods = aptitudeMods(character, rules.playerAptitudes);
   const equip = equipmentBonus(character, action.tags, rules);
@@ -8921,7 +8946,7 @@ async function onChoice(choice) {
   if (usesAbility) {
     intensity = INTENSITIES.includes(choice.intensity) ? choice.intensity : null;
     if (!intensity) {
-      const pAction = { label: choice.label, attribute: choice.attribute || "practical", subAttribute: SUBS.includes(choice.subAttribute) ? choice.subAttribute : null, axes: choice.axes || {}, difficulty: choice.difficulty || 0, tags: choice.intentTags || [], abilityLevel };
+      const pAction = { label: choice.label, ...choiceRoll(choice), axes: choice.axes || {}, difficulty: choice.difficulty || 0, tags: choice.intentTags || [], abilityLevel };
       const pe = equipmentBonus(character, pAction.tags, CONTENT.rules).bonus + companionBonus(activeCompanions(character, CONTENT.companions), pAction.tags, CONTENT.rules, character).bonus + affinityFor(pAction, location).bonus;
       const stdChance = successChance({ character, action: pAction, location, rules: CONTENT.rules, aptitudeMods: mods, equipmentBonus: pe, substratePenalty: substratePenaltyFor(choice, location) }); // SNG-116: AUTO-intensity must see the real (substrate-inclusive) chance
       intensity = autoIntensity(stdChance, CONTENT.intensity);
@@ -8953,9 +8978,11 @@ async function onChoice(choice) {
     renderPlay(character.activeScene?.lastTurn || null, { aside: `The lattice is too thin here — ${abName} barely stirs (${substrate.percent}% of its strength) and won't answer. Carry charge, or reach denser ground; steel and wit still work.` });
     return;
   }
+  // ⛔ CCODE-379: a choice that uses a craft rolls what the craft rolls — the card says it, so the roll is it (`choiceRoll`)
+  const rolled = choiceRoll(choice);
   const action = {
-    label: choice.label, attribute: choice.attribute || "practical",
-    subAttribute: SUBS.includes(choice.subAttribute) ? choice.subAttribute : null,
+    label: choice.label, attribute: rolled.attribute,
+    subAttribute: rolled.subAttribute,
     axes: choice.axes || {}, difficulty: choice.difficulty || 0, intentTags: choice.intentTags || [], abilityLevel,
     tags: choice.intentTags || [], planned: (choice.intentTags || []).some(t => ["plan", "prepare", "scout"].includes(t)),
     novel: !!choice.novel, abilityId: choice.abilityId || null, comboAbilities: choice.comboAbilities || [], noveltyHint: choice.noveltyHint || "", // CCODE-23: carry the primary abilityId — recordAspirationProgress reads action.abilityId; without it a SOLO same-tradition cast never fed an aspiration (only combos did)
@@ -11728,6 +11755,7 @@ function renderSkillWheel(selectedId = null, status = "") {
       ${sel.owned ? `<span class="rep-band trusted">owned</span>` : sealedSel ? `<span class="rep-band" style="border-color:var(--accent);color:var(--accent)">✦ sealed</span>` : ""}</div>
     ${selImg ? `<img class="craft-detail-art" src="${esc(selImg)}" alt="${esc(sel.name)}" data-lightbox="${esc(selImg)}" data-regen-kind="ability" data-regen-subject="${esc(sel.id)}">` : ""}
     <div class="hint">${sealedSel ? "✦ a precursor craft of the substrate — outside the poles" : esc(gateLine)}${!sealedSel && sel.effCost != null ? ` · ⚡${sel.effCost} energy${selAb?.energyCost && sel.effCost !== selAb.energyCost ? ` (base ${selAb.energyCost})` : ""}` : ""}</div>
+    ${selAb ? `<div class="hint craft-rolls">${esc(craftRollsLine(craftRollsOf(selAb)))}</div>` : ""}
     ${groundRow(selAb)}
     ${(selAb?.functions || []).length ? `<div style="margin:4px 0">${functionChips(selAb)}</div>` : ""}
     <p class="map-details-desc">${esc(selAb?.description || "")}</p>
@@ -11887,6 +11915,7 @@ function renderSkillGraph(selectedId = null, status = "") {
       <span class="rep-band" style="border-color:${traditionColor(sel.cls)};color:${traditionColor(sel.cls)}">${esc(traditionLabel(sel.cls))} · Tier ${sel.tier}</span>
       ${sel.owned ? `<span class="rep-band trusted">owned · rank ${sel.rank}</span>` : ""}</div>
     <div class="hint">Level requirement: ${sel.levelReq}${sel.gated ? ` · ${(() => { const g = gateFor(sel.id, CONTENT.attributeGates); return `needs ${g.subAttribute} ${g.learnMin} (rank 3: ${g.rank3Min})`; })()}` : ""}${sel.locked ? ` · 🔒 ${esc(sel.lockText)}` : ""}</div>
+    ${selAb ? `<div class="hint craft-rolls">${esc(craftRollsLine(craftRollsOf(selAb)))}</div>` : ""}
     <p class="map-details-desc">${esc(selAb?.description || "")}</p>
     ${sel.forks ? `<div class="codex-fact fork-note"><strong>⑂ Fork at rank ${sel.forkAt}:</strong> ${sel.forkChosen ? `specialized as <em>${esc(sel.forkChosen)}</em> — <span class="fp-cannot">${esc(sel.forkLocked)} locked forever</span>` : "a permanent A-or-B specialization when you rank into it — the path you don't take locks."}</div>` : ""}
     ${skillSelectionActions(selAb)}
@@ -12103,7 +12132,7 @@ function renderLevelUp(status = "") {
     const r1 = ab.tree?.find(t => t.rank === 1);
     const band = dv.band === "far" ? " · far" : dv.band === "adjacent" ? " · kin" : dv.band === "accord" ? " · open" : "";
     return `<div class="cs-ability ${blocked ? "locked" : ""}">
-      <div><span class="tier-badge">${tierOf(abilityTier(ab))}</span> <strong>${esc(ab.name)}</strong> <span class="hint">L${ab.levelReq || 1}${band}${cost > 1 ? ` · ${cost} pts` : ""}${ripe ? " · practiced (free)" : ""}</span></div>
+      <div><span class="tier-badge">${tierOf(abilityTier(ab))}</span> <strong>${esc(ab.name)}</strong> <span class="hint">L${ab.levelReq || 1}${band}${cost > 1 ? ` · ${cost} pts` : ""}${ripe ? " · practiced (free)" : ""}</span>${rollChip(ab, "hint")}</div>
       <div class="hint">${esc(smartClamp(playerText((r1 ? r1.grants : ab.description) || ""), 130))}</div>
       ${blocked
         ? `<span class="hint">🔒 ${!gate.ok ? esc(gate.why) : capBlock ? "at capacity — this waits until your next level widens it" : "need " + cost + " point" + (cost > 1 ? "s" : "")}</span>`
@@ -12120,7 +12149,7 @@ function renderLevelUp(status = "") {
   const reasonedPicksHTML = (picks, note) => `<h3 class="codex-title" style="font-size:15px">✨ Suggested for you <span class="hint" style="text-transform:none">— reasoned from how you actually play</span></h3>
     ${picks.map(p => { const ab = cat0[p.abilityId]; const c = suggCost(p.abilityId); const ec = (() => { try { return effectiveEnergyCost(ab, character, rules); } catch { return ab?.energyCost ?? null; } })();
       return `<div class="cs-ability sug-row">
-        <div><strong class="entity-hover" data-entity="skill:${esc(p.abilityId)}" title="Tap to see how this craft grows rank by rank">${esc(ab?.name || p.abilityId)}</strong> ${functionChips(ab)}${p.fit ? ` <span class="fit-tag fit-${esc(String(p.fit).replace(/[^a-z]/gi, ""))}">${esc(p.fit)}</span>` : ""}${ec != null ? ` <span class="hint" title="energy to use (effective)">⚡${ec}</span>` : ""}</div>
+        <div><strong class="entity-hover" data-entity="skill:${esc(p.abilityId)}" title="Tap to see how this craft grows rank by rank">${esc(ab?.name || p.abilityId)}</strong> ${functionChips(ab)}${p.fit ? ` <span class="fit-tag fit-${esc(String(p.fit).replace(/[^a-z]/gi, ""))}">${esc(p.fit)}</span>` : ""}${ec != null ? ` <span class="hint" title="energy to use (effective)">⚡${ec}</span>` : ""}${rollChip(ab, "hint")}</div>
         <div class="hint">✦ ${esc(p.why || "")}</div>
         <button class="btn" data-lvllearn="${esc(p.abilityId)}">Learn${c != null ? ` (${c} pt${c > 1 ? "s" : ""})` : ""}</button>
       </div>`; }).join("")}${note ? `<div class="hint" style="margin-top:6px">${esc(note)}</div>` : ""}`;
@@ -12149,7 +12178,7 @@ function renderLevelUp(status = "") {
       wheelRecommended = new Set(suggestions.map(s => s.abilityId)); // SNG-218 §3: the same picks light up ON the wheel
       const gap = cov.missing.length ? `Your kit has no <strong>${cov.missing.join(", ")}</strong> yet — gaps worth filling.` : `Your kit already touches all ${cov.covered.length} function families.`;
       const rows = suggestions.map(s => { const ab = fullCatalog()[s.abilityId]; const c = suggCost(s.abilityId); return `<div class="cs-ability sug-row">
-          <div><strong class="entity-hover" data-entity="skill:${esc(s.abilityId)}" title="Tap to see how this craft grows rank by rank">${esc(s.name)}</strong> ${functionChips(ab)}${s.cost != null ? ` <span class="hint" title="energy to use (effective)">⚡${s.cost}</span>` : ""}</div>
+          <div><strong class="entity-hover" data-entity="skill:${esc(s.abilityId)}" title="Tap to see how this craft grows rank by rank">${esc(s.name)}</strong> ${functionChips(ab)}${s.cost != null ? ` <span class="hint" title="energy to use (effective)">⚡${s.cost}</span>` : ""}${rollChip(ab, "hint")}</div>
           <div class="hint">✦ ${esc(s.why)}</div>
           <button class="btn" data-lvllearn="${esc(s.abilityId)}">Learn${c != null ? ` (${c} pt${c > 1 ? "s" : ""})` : ""}</button>
         </div>`; }).join("");
@@ -14924,7 +14953,7 @@ function renderGambitBuilder(status = "") {
     renderGambitBuilder("Reading the plan…");
     // SNG-093: try/catch/finally + timeout — a hang or a throw can never strand "Reading the plan…".
     try {
-      const actions = await withTimeout(parseGambitSteps(g.steps.map(s => s.text), character, hereNow()), 30000, "the plan reader");
+      const actions = await withTimeout(parseGambitSteps(g.steps.map(s => s.text), character, hereNow(), { catalog: fullCatalog(), table: CONTENT.rules?.craftSubAttributes }), 30000, "the plan reader");
       g.actions = actions;
       g.assessed = assessGambit(actions, gambitCtx());
     } catch (err) {
@@ -15034,7 +15063,7 @@ async function runGambit() {
     const fb = document.getElementById("c-fallback");
     if (fb) fb.onclick = async () => {
       run.fallbackUsed[failed.index] = true;
-      const [fbAction] = await parseGambitSteps([g.steps[failed.index].fallback], character, ctx.location);
+      const [fbAction] = await parseGambitSteps([g.steps[failed.index].fallback], character, ctx.location, { catalog: fullCatalog(), table: CONTENT.rules?.craftSubAttributes });
       const r = rerollStep(fbAction, ctx);
       if (r.degree === "failure" || r.degree === "crit_failure") {
         renderComplication({ ...r, index: failed.index });
@@ -16689,7 +16718,7 @@ function renderPlay(turn, opts = {}) {
           return `<div class="ability${on ? " boosted" : ""}" title="${esc(playerText(rank ? "CAN: " + rank.grants + " | CANNOT: " + rank.cannot : ab?.description || ""))}">
             <button class="craft-boost${on ? " on" : ""}" data-boost="${esc(a.abilityId)}" title="${on ? "Boosted — the GM leans toward suggesting this when it fits (tap to clear). A nudge, never a force." : "Boost — nudge the GM to surface this craft in your options when it fits. Never forces it, never changes a roll."}">✦</button>
             <span class="name entity-hover" data-entity="skill:${esc(a.abilityId)}">${esc(ab?.name || a.abilityId)}</span> <span class="tier-badge" title="Tier ${tierOf(abilityTier(ab))}">${tierOf(abilityTier(ab))}</span> rank ${a.level}${rank ? ` — <em>${esc(rank.name)}${rank.forked ? " ⑂" : ""}</em>` : ""}
-            <span class="cost">(${effectiveEnergyCost(ab, character, CONTENT.rules)} energy${effectiveEnergyCost(ab, character, CONTENT.rules) < ab.energyCost ? `, was ${ab.energyCost}` : ""})</span>${(() => { const ch = craftChanceHere(ab, a); return ch ? ` <span class="cost craft-chance" title="Base chance this craft lands here, unopposed${ch.ground ? ` — the ground ${ch.ground > 0 ? "costs it " : "lends it +"}${Math.abs(ch.ground)}` : ""}">${ch.off ? "will not answer here" : ch.chance + "% here"}</span>` : ""; })()}
+            <span class="cost">(${effectiveEnergyCost(ab, character, CONTENT.rules)} energy${effectiveEnergyCost(ab, character, CONTENT.rules) < ab.energyCost ? `, was ${ab.energyCost}` : ""})</span>${rollChip(ab)}${(() => { const ch = craftChanceHere(ab, a); return ch ? ` <span class="cost craft-chance" title="Base chance this craft lands here, unopposed${ch.ground ? ` — the ground ${ch.ground > 0 ? "costs it " : "lends it +"}${Math.abs(ch.ground)}` : ""}">${ch.off ? "will not answer here" : ch.chance + "% here"}</span>` : ""; })()}
             ${functionChips(ab)}${braidLine}
             <div class="hint ${p.ripe ? "practiced" : ""}">${esc(p.text)}</div>${trainLine(a, ab)}</div>`;
         };
@@ -17332,7 +17361,7 @@ function renderPlay(turn, opts = {}) {
         // ⚑ How hard they are is the appraisal panel's job, directly above; this says what the button DOES.
         senseHtml = `<span class="sense trivial-tag">no roll — this joins the contest, which is fought round by round</span>`;
       } else {
-        action.subAttribute = SUBS.includes(c.subAttribute) ? c.subAttribute : null;
+        Object.assign(action, choiceRoll(c));   // ⛔ CCODE-379: "how hard" prices the sub the roll will use
         const equip = equipmentBonus(character, action.tags, rules);
         const comp = companionBonus(activeCompanions(character, CONTENT.companions), action.tags, rules, character);
         const aff = affinityFor(action, location);

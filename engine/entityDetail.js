@@ -8,7 +8,7 @@ import { itemUses } from "./inventory.js";
 import { smartClamp, playerText } from "./namematch.js"; // CCODE-29: word-boundary clamp for the rank-ladder grant/cannot prose (not a raw .slice)
 
 /** A skill's detail block. `opts`: {tradition, tier, owned, level, maxRank, effCost, baseCost, families[],
- *  rankText, ripe}. Returns plain text (for the shared popover). Pure. */
+ *  rankText, ripe, chanceHere, rolls, ladder}. Returns plain text (for the shared popover). Pure. */
 export function skillDetail(ab = {}, opts = {}) {
   const lines = [];
   lines.push(`${ab.name || ab.id || "a craft"}${opts.tradition ? ` — ${opts.tradition}` : ""}${opts.tier ? ` · Tier ${opts.tier}` : ""}`);
@@ -17,7 +17,12 @@ export function skillDetail(ab = {}, opts = {}) {
   if (opts.ripe) lines.push("✦ ripe for mastery — a defining moment could raise it");
   // ✅ ERIK 2026-09-11: the base chance this craft lands where the character stands, the ground counted (the app computes it through
   // the same stack the roll pays; this only says it)
-  if (opts.chanceHere) lines.push(opts.chanceHere.off ? "Will not answer here — nothing for it to draw on." : `🎯 ${opts.chanceHere.chance}% base chance here${opts.chanceHere.ground ? ` (the ground ${opts.chanceHere.ground > 0 ? "costs it " : "lends it +"}${Math.abs(opts.chanceHere.ground)})` : ""}`);
+  // ⛔ CCODE-379 (Erik 2026-09-16): "I want the attribute a skill uses to be obvious in the skill pop-up and description." What it rolls,
+  // on the card head beside the chance and the cost — read off the record (`craftRolls`), a derivation marked as one.
+  if (opts.rolls) lines.push(craftRollsLine(opts.rolls));
+  // …and where a craft rolls a different sub per verb, the chance names the verb it was read for (the first, as the app reads it)
+  const chanceVerb = (opts.rolls?.subs || []).length > 1 ? opts.rolls.subs[0].verbs?.[0] : null;
+  if (opts.chanceHere) lines.push(opts.chanceHere.off ? "Will not answer here — nothing for it to draw on." : `🎯 ${opts.chanceHere.chance}% base chance${chanceVerb ? ` to ${chanceVerb}` : ""} here${opts.chanceHere.ground ? ` (the ground ${opts.chanceHere.ground > 0 ? "costs it " : "lends it +"}${Math.abs(opts.chanceHere.ground)})` : ""}`);
   if (opts.effCost != null) lines.push(`⚡ ${opts.effCost} energy to use${opts.baseCost != null && opts.baseCost !== opts.effCost ? ` (base ${opts.baseCost})` : ""}`);
   if ((opts.families || []).length) lines.push(`Function: ${opts.families.join(" · ")}`);
   // ⛔ Aevi 2026-09-11 (BUG_authoring_markup_in_player_text §3–§4): a word-boundary clamp, not a hard `slice` that ended Erik's
@@ -39,6 +44,30 @@ export function skillDetail(ab = {}, opts = {}) {
     }
   }
   return lines.filter(v => v != null).join("\n");
+}
+
+const capWord = (w) => String(w || "").charAt(0).toUpperCase() + String(w || "").slice(1);
+
+/** ⛔ CCODE-379: what a craft rolls, in words — `craftRolls` in, one line out. "🎲 Rolls Physical · Agility"; a sub per verb, "🎲 Rolls
+ *  Physical · Agility to strike, Strength to shield and resist"; the table's guess marked "(derived)", the way a guessed rung is marked
+ *  (Aevi: a guess shown as a fact is worse than nothing); no sub, the attribute alone. Pure. */
+export function craftRollsLine(rolls) {
+  if (!rolls) return "";
+  const subs = rolls.subs || [];
+  const and = (xs) => xs.length > 1 ? `${xs.slice(0, -1).join(", ")} and ${xs[xs.length - 1]}` : xs.join("");
+  const to = (x) => (x.verbs || []).length ? ` to ${and(x.verbs)}` : "";
+  const parents = [...new Set(subs.map(x => x.parent))];
+  const body = !subs.length ? capWord(rolls.attribute)
+    : subs.length === 1 ? `${capWord(subs[0].parent)} · ${capWord(subs[0].sub)}`
+    : parents.length === 1 ? `${capWord(parents[0])} · ${subs.map(x => `${capWord(x.sub)}${to(x)}`).join(", ")}`
+    : subs.map(x => `${capWord(x.sub)} (${capWord(x.parent)})${to(x)}`).join(", ");
+  return `🎲 Rolls ${body}${subs.length && !rolls.authored ? " (derived)" : ""}`;
+}
+
+/** …and the few words a row carries beside its cost: the subs ("Agility", "Agility/Strength"), or the attribute. Pure. */
+export function craftRollsShort(rolls) {
+  if (!rolls) return "";
+  return (rolls.subs || []).length ? rolls.subs.map(x => capWord(x.sub)).join("/") : capWord(rolls.attribute);
 }
 
 /** An NPC's detail block — current relationship, standing, last seen, where known from. `opts`: {locations}.

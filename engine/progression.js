@@ -144,6 +144,51 @@ export function stampCraftSubAttributes(abilities = {}, table = null) {
   return n;
 }
 
+/** ⛔ CCODE-379 (Erik 2026-09-16): "I want the attribute a skill uses to be obvious in the skill pop-up and description." WHAT A CRAFT
+ *  ROLLS, read off the record — never written into its description, which would be a stored copy of a derived value (Aevi). The sub
+ *  each verb rolls (`subAttributeByFunction`, or derived on the spot for a craft minted after load), grouped by sub in verb order.
+ *  ⚠️ `authored` is true only when the craft names its own `subAttribute`: most crafts take theirs from the power/finesse table, and a
+ *  guess shown as a fact is worse than nothing. ⚑ MEASURED: 164 of 440 crafts roll a different sub for different verbs, so one word
+ *  would be wrong for a third of the catalog. The dial off, or a craft with no verbs, `subs` is empty and the attribute rolls. Pure. */
+export function craftRolls(ability, table = null) {
+  if (!ability) return null;
+  const own = SUB_OF[ability.subAttribute] ? ability.subAttribute : null;
+  const attribute = ability.attribute || SUB_OF[own] || "practical";
+  const subs = [];
+  if (!(table && table.enabled === false)) {
+    for (const fn of Array.isArray(ability.functions) ? ability.functions : []) {
+      const sub = ability.subAttributeByFunction?.[fn] || craftSubAttribute(ability, fn, table);
+      if (!SUB_OF[sub]) continue;
+      const at = subs.find(x => x.sub === sub);
+      if (!at) subs.push({ sub, parent: SUB_OF[sub], verbs: [fn] });
+      else if (!at.verbs.includes(fn)) at.verbs.push(fn);
+    }
+    if (!subs.length && own) subs.push({ sub: own, parent: SUB_OF[own], verbs: [] });
+  }
+  return { attribute, subs, authored: !!own && subs.length > 0 };
+}
+
+/** ⛔ CCODE-379: A CHOICE THAT USES A CRAFT ROLLS WHAT THE CRAFT ROLLS. The eight stats (Erik 2026-09-11) reached every fight row and
+ *  never free play, where the GM names a sub on each option — ⚑ MEASURED across the live saves' last offered choices that carried a
+ *  craft: the GM's sub was the craft's own on 6 of 14 (Radiance was offered as physical/craft). The card now says what a craft rolls,
+ *  so the roll has to be it:
+ *  · one sub → that sub;
+ *  · a sub per verb → the GM's pick when the craft rolls it for one of its verbs (naming the sub named the verb), else the first verb's;
+ *  · two crafts braided into one choice → the GM's pick when either rolls it, else the first that rolls a sub;
+ *  · a craft with no verbs → the GM's pick when it sits under the craft's attribute, else the attribute itself;
+ *  · no craft, or the dial off → the GM's pick, exactly as before. Pure. */
+export function rollForChoice(crafts = [], picked = {}, table = null) {
+  const pickedSub = SUB_OF[picked?.subAttribute] ? picked.subAttribute : null;
+  const asPicked = { attribute: picked?.attribute || "practical", subAttribute: pickedSub };
+  const rolls = (Array.isArray(crafts) ? crafts : [crafts]).filter(Boolean).map(c => craftRolls(c, table));
+  if (!rolls.length || (table && table.enabled === false)) return asPicked;
+  if (pickedSub && rolls.some(r => r.subs.some(x => x.sub === pickedSub))) return { attribute: SUB_OF[pickedSub], subAttribute: pickedSub };
+  const lead = rolls.find(r => r.subs.length);
+  if (lead) return { attribute: lead.subs[0].parent, subAttribute: lead.subs[0].sub };
+  if (pickedSub && SUB_OF[pickedSub] === rolls[0].attribute) return { attribute: rolls[0].attribute, subAttribute: pickedSub };
+  return { attribute: rolls[0].attribute, subAttribute: null };
+}
+
 /** Level-up: bank growth choices instead of auto-spending them. Returns messages. */
 export function applyLevelUps(character, rules) {
   const per = rules.leveling?.xpPerLevel ?? 100;
@@ -1152,6 +1197,10 @@ export function abilitiesForGM(character, catalog, branchForks = null, rules = {
       // below the one held — the additive-ranks rule this project already runs on everywhere else.
       ((authoredBlock(ab, "harmRung", owned.level) ?? ab.harmRung)
         ? `\nHARM: ${harmRungGloss(authoredBlock(ab, "harmRung", owned.level) ?? ab.harmRung)}` : "") +
+      // ⛔ CCODE-379: what the craft ROLLS — a choice that uses it rolls this whatever sub the option names (`rollForChoice`), so the
+      // option the GM writes and the roll agree. Verb by verb where the craft rolls more than one.
+      (() => { const r = craftRolls(ab, rules?.craftSubAttributes);
+        return r?.subs.length ? `\nROLLS: ${r.subs.map(x => r.subs.length > 1 ? `${x.sub} (${x.verbs.join(", ")})` : x.sub).join(" · ")}` : ""; })() +
       // ⛔ THE WIELDER'S OWN SECT, next to the mechanic, every use. Silence when their sect has no entry.
       // ⚠️ THE WIELDER'S SECT, NOT THE CRAFT'S. My first pass resolved the ABILITY's tradition, which is
       // backwards — the whole point is that `known_price` reads differently in a Syllogist's hands than a

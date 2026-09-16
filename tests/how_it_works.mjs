@@ -18801,6 +18801,91 @@ console.log("\n── §263 · one year for the world; fewer seasons near the ri
     && /readClock\(character\.clock, undefined, positionedPlace\(content\?\.locations \|\| \{\}, character\?\.currentLocationId\)\)\.season/.test(W263));
 }
 
+// ⛔ CCODE-379 (Erik, 2026-09-16, through Aevi's queue) — "I want the attribute a skill uses to be obvious in the skill pop-up and
+// description." Aevi: the card reads the record, and a derivation is marked as one. ⚑ MEASURED: 164 of 440 crafts roll a different sub
+// for different verbs, and in free play the GM's sub was the craft's own on 6 of 14 offered choices — so the roll follows the card.
+console.log("\n── §264 · a skill says what it rolls, and a choice rolls it ──");
+{
+  const P264 = await import("../engine/progression.js");
+  const ED264 = await import("../engine/entityDetail.js");
+  const { loadContentHeadless: lch264 } = await import("./headless_content.mjs");
+  const C264 = await lch264();
+  const table = C264.rules?.craftSubAttributes;
+  const cat = C264.abilities || {};
+  const all = Object.values(cat).sort((a, b) => String(a.id).localeCompare(String(b.id)));
+  const cap = (w) => w.charAt(0).toUpperCase() + w.slice(1);
+  const and = (xs) => xs.length > 1 ? `${xs.slice(0, -1).join(", ")} and ${xs[xs.length - 1]}` : xs[0];
+  const rows = all.map(ab => { const r = P264.craftRolls(ab, table); return { ab, r, line: ED264.craftRollsLine(r) }; });
+  const bad = rows.filter(x => !/^🎲 Rolls [A-Z]/.test(x.line) || ((x.ab.functions || []).length && !x.r.subs.length));
+  check(`§264: ⛔ every craft says what it rolls — ${rows.length - bad.length} of ${rows.length}, and a sub on every craft that has a verb`,
+    rows.length >= 400 && bad.length === 0, bad.slice(0, 4).map(x => x.ab.id).join(", "));
+
+  // ⚠️ THE WORKED CASES ARE ASKED OF THE CORPUS, sorted for determinism — Aevi authoring a sub moves which craft is the example, not the claim
+  const authored = rows.find(x => x.r.authored && x.r.subs.length === 1);
+  const guessed = rows.find(x => !x.r.authored && x.r.subs.length > 1);
+  check("§264: the corpus carries an authored sub and a derived craft that rolls a sub per verb, to work through (floor)",
+    !!authored && !!guessed, `${authored?.ab.id} · ${guessed?.ab.id}`);
+  check("§264: ⛔ an authored sub reads plainly — the attribute and the sub, nothing marked",
+    !!authored && authored.line === `🎲 Rolls ${cap(authored.r.subs[0].parent)} · ${cap(authored.r.subs[0].sub)}`, authored?.line);
+  check("§264: ⛔ a guess is marked as one — the table's sub reads (derived), and a craft that rolls a sub per verb names the verbs of each",
+    !!guessed && / \(derived\)$/.test(guessed.line) && guessed.r.subs.every(x => guessed.line.includes(`${cap(x.sub)} to ${and(x.verbs)}`)), guessed?.line);
+  const off = guessed ? P264.craftRolls(guessed.ab, { ...table, enabled: false }) : null;
+  check("§264: …the dial off, no sub — the attribute alone, nothing marked",
+    !!off && off.subs.length === 0 && ED264.craftRollsLine(off) === `🎲 Rolls ${cap(guessed.ab.attribute)}`, off && ED264.craftRollsLine(off));
+
+  const card = ED264.skillDetail(authored?.ab || {}, { owned: true, level: 1, maxRank: 3, effCost: 5, rolls: authored?.r }).split("\n");
+  const at = card.indexOf(authored?.line);
+  check("§264: ⛔ the pop-up carries it on the card head, beside the energy cost",
+    at > 0 && at <= 3 && /^⚡ 5 energy/.test(card[at + 1] || ""), card.slice(0, 5).join(" | "));
+  const card2 = ED264.skillDetail(guessed?.ab || {}, { owned: true, level: 1, effCost: 5, rolls: guessed?.r, chanceHere: { chance: 40, ground: 0, off: false } });
+  check("§264: …and where a craft rolls a sub per verb, the chance shown names the verb it was read for",
+    !!guessed && card2.includes(`🎯 40% base chance to ${guessed.r.subs[0].verbs[0]} here`)
+    && ED264.skillDetail({ name: "X" }, { owned: true, chanceHere: { chance: 40, ground: 0, off: false } }).includes("🎯 40% base chance here"));
+
+  const A = authored?.ab, G = guessed?.ab;
+  const aSub = authored?.r.subs[0].sub;
+  const gSubs = (guessed?.r.subs || []).map(x => x.sub);
+  const foreign = P264.SUBS.find(x => P264.SUB_OF[x] !== P264.SUB_OF[aSub]);
+  const stray = P264.SUBS.find(x => x !== aSub && !gSubs.includes(x));
+  const R = (crafts, picked, t = table) => P264.rollForChoice(crafts, picked, t);
+  const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+  check("§264: ⛔ a choice that uses a craft rolls what the craft rolls, whatever sub the GM named — and the attribute follows the sub",
+    !!A && same(R([A], { attribute: P264.SUB_OF[foreign], subAttribute: foreign }), { attribute: P264.SUB_OF[aSub], subAttribute: aSub }));
+  check("§264: …a craft that rolls a sub per verb keeps the GM's pick when it rolls it for one of its verbs, else its first verb's",
+    !!G && R([G], { subAttribute: gSubs[1] }).subAttribute === gSubs[1] && R([G], { attribute: P264.SUB_OF[stray], subAttribute: stray }).subAttribute === gSubs[0]);
+  check("§264: …two crafts in one choice: the GM's pick when either rolls it, else the first craft's",
+    !!A && !!G && R([A, G], { subAttribute: gSubs[1] }).subAttribute === gSubs[1] && R([A, G], { subAttribute: stray }).subAttribute === aSub);
+  const bare = all.find(ab => !(ab.functions || []).length && !P264.SUB_OF[ab.subAttribute]);
+  const under = bare && P264.SUBS.find(x => P264.SUB_OF[x] === bare.attribute);
+  const elsewhere = bare && P264.SUBS.find(x => P264.SUB_OF[x] !== bare.attribute);
+  check("§264: …a craft with no verbs keeps a pick under its own attribute, and rolls the attribute itself for any other",
+    !!bare && R([bare], { attribute: bare.attribute, subAttribute: under }).subAttribute === under
+    && same(R([bare], { attribute: P264.SUB_OF[elsewhere], subAttribute: elsewhere }), { attribute: bare.attribute, subAttribute: null }), bare?.id);
+  check("§264: ⛔ no craft, or the dial off — the GM's pick, exactly as before",
+    same(R([], { attribute: "social", subAttribute: "rapport" }), { attribute: "social", subAttribute: "rapport" })
+    && same(R([A], { attribute: "social", subAttribute: "rapport" }, { ...table, enabled: false }), { attribute: "social", subAttribute: "rapport" })
+    && same(R([], { attribute: "physical", subAttribute: "nonsense" }), { attribute: "physical", subAttribute: null }));
+
+  const gmBlock = G ? (P264.abilitiesForGM({ level: 5, domains: {}, attributes: {}, subAttributes: {}, abilities: [{ abilityId: G.id, level: 1 }], discoveries: [] }, cat, null, C264.rules) || "") : "";
+  check("§264: the GM is told what a craft rolls, verb by verb, so the option it writes and the roll agree",
+    !!G && guessed.r.subs.every(x => gmBlock.includes(`${x.sub} (${x.verbs.join(", ")})`)) && /\nROLLS: /.test(gmBlock), (gmBlock.match(/ROLLS: [^\n]*/) || [""])[0]);
+
+  const A264 = rd("app.js").replace(/\r\n/g, "\n");
+  const GB264 = rd("engine/gambit.js").replace(/\r\n/g, "\n");
+  check("§264: ⛔ the roll, the auto-intensity read and the \"how hard\" line all read the one choiceRoll — no path keeps the GM's sub for a craft",
+    /const rolled = choiceRoll\(choice\);\n  const action = \{\n    label: choice\.label, attribute: rolled\.attribute,\n    subAttribute: rolled\.subAttribute,/.test(A264)
+    && /const pAction = \{ label: choice\.label, \.\.\.choiceRoll\(choice\),/.test(A264)
+    && /Object\.assign\(action, choiceRoll\(c\)\);/.test(A264)
+    && !/SUBS\.includes\((?:choice|c)\.subAttribute\)/.test(A264));
+  check("§264: …the chance shown for a craft reads the same rule, and both doors into a declared plan pass the catalog through",
+    /const roll = rollForChoice\(\[ab\], \{\}, CONTENT\.rules\?\.craftSubAttributes\);/.test(A264)
+    && (A264.match(/parseGambitSteps\([^;]*\{ catalog: fullCatalog\(\), table: CONTENT\.rules\?\.craftSubAttributes \}\)/g) || []).length === 2
+    && /return crafts\.length \? \{ \.\.\.step, \.\.\.rollForChoice\(crafts, step, table\) \} : step;/.test(GB264));
+  check("§264: ⛔ the wheel's and the graph's detail panels say it, a craft's row and the level-up rows carry it beside the cost, and the pop-up is handed it",
+    (A264.match(/craftRollsLine\(craftRollsOf\(selAb\)\)/g) || []).length === 2 && /rolls: craftRollsOf\(ab\)/.test(A264)
+    && (A264.match(/\$\{rollChip\(ab(?:, "hint")?\)\}/g) || []).length === 4);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

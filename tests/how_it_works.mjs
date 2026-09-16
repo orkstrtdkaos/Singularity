@@ -17694,6 +17694,107 @@ console.log("\n── §246 · a crisis another traveler answered reads as answe
     && /questId: "what_the_water_remembers", outcomes: \["redirected"\], eventId: "water_crisis"/.test(BF246));
 }
 
+
+// ⛔ CCODE-355 (Erik, 2026-09-16) — "we may want to consider a profile selection on the load screen - instead of defaulting to
+// the assumed profile and characters." And: "i play this on two devices. my phone and this computer. Courtney has a tablet."
+//
+// ⚑ MEASURED: every `save: Adelheid` was followed a second later by `profile: player-s9z9u1` — Courtney's tablet wrote ERIK's
+// profile, so her game ran on his R+, blunt, eventful settings and the two devices overwrote each other. The cause was
+// SNG-045's boot-time merge BY NAME. Reproduced in a browser with the two profiles her tablet would hold: it deleted the
+// second "Erik", wrote a redirect, and re-keyed Adelheid onto his folder.
+//
+// ⛑ FIXTURES ARE CONSTRUCTED — a localStorage shim and made-up keys, never a live device's state.
+console.log("\n── §247 · who is playing is chosen, not assumed ──");
+{
+  const { fakeRemote: fr247 } = await import("./lib/fake_remote.mjs");
+  const remote247 = fr247();
+  const restore247 = remote247.install();   // for its localStorage shim — state.js reads the global at call time
+  try {
+    const ST247 = await import("../engine/state.js");
+    const PP247 = await import("../engine/playerprofile.js");
+    const put = (k, v) => localStorage.setItem(k, typeof v === "string" ? v : JSON.stringify(v));
+    // THE TABLET, AS THE NAME-MERGE LEFT IT: both profiles present, a redirect from hers to his, the device keyed to his
+    put("singularity.profile.pk-erik", { playerKey: "pk-erik", displayName: "Erik" });
+    put("singularity.profile.pk-court", { playerKey: "pk-court", displayName: "Courtney" });
+    put("singularity.profileRedirect.pk-court", "pk-erik");
+    put("singularity.playerKey", "pk-erik");
+    ST247.saveCharacter({ id: "c-adel", name: "Adelheid", level: 1, origin: "harmonic", playerKey: "pk-court" }, { stamp: false });
+    ST247.saveCharacter({ id: "c-loki", name: "Loki", level: 8, origin: "enginewright", playerKey: "pk-erik" }, { stamp: false });
+
+    check("§247: ⛔ the character index now carries WHOSE character it is — no full save parsed to list a roster",
+      ST247.listCharacters().find(e => e.id === "c-adel")?.playerKey === "pk-court");
+    const names = (k) => ST247.charactersForPlayer(k).map(c => c.name).sort().join(",");
+    check("§247: ⛔ two players who each have a profile stay TWO, whatever a stale redirect says — measured in the browser, both listed both",
+      names("pk-court") === "Adelheid" && names("pk-erik") === "Loki", `Courtney: ${names("pk-court")} · Erik: ${names("pk-erik")}`);
+    put("singularity.profileRedirect.pk-oldphone", "pk-erik");
+    ST247.saveCharacter({ id: "c-cell", name: "Cellaceron", level: 9, origin: "valley", playerKey: "pk-oldphone" }, { stamp: false });
+    check("§247: ⛑ …while a GENUINELY retired key — a redirect and no profile of its own — still counts as the person it folded into",
+      names("pk-erik") === "Cellaceron,Loki", names("pk-erik"));
+
+    check("§247: ⛔ an explicit choice clears the redirect FROM the chosen key and stores it exactly as chosen",
+      ST247.choosePlayer("pk-court") === "pk-court" && localStorage.getItem("singularity.profileRedirect.pk-court") === null
+      && localStorage.getItem("singularity.playerKey") === "pk-court" && ST247.getPlayerKey() === "pk-court");
+    check("§247: …and the picker's highlight reads the stored key without minting or redirecting anything",
+      ST247.lastPlayerKey() === "pk-court");
+
+    // THE REPO FOLDER IS THE OWNERSHIP RECORD
+    ST247.saveCharacter({ id: "c-adel", name: "Adelheid", level: 1, origin: "harmonic", playerKey: "pk-erik" }, { stamp: false });   // as the merge re-keyed her
+    const fixed247 = ST247.repairOwnership("pk-court", ["c-adel"]);
+    check("§247: ⛔ a copy re-keyed to someone else is handed back to the player whose folder its save lives in",
+      fixed247.join(",") === "Adelheid" && ST247.loadCharacter("c-adel").playerKey === "pk-court" && names("pk-court") === "Adelheid");
+    check("§247: …and only those — Loki is not in her folder and is not touched, and a second pass changes nothing",
+      ST247.loadCharacter("c-loki").playerKey === "pk-erik" && ST247.repairOwnership("pk-court", ["c-adel"]).length === 0);
+
+    // WHAT THIS PLAYER WANTS FROM THE GAME
+    check("§247: ⛔ a player's own words reach the GM, clamped, and an empty field says nothing at all",
+      PP247.playerWishesForGM({ wishes: "  herbs,   painting  " }) === "herbs, painting" && PP247.playerWishesForGM({}) === null
+      && PP247.playerWishesForGM({ wishes: "x ".repeat(900) }).length <= PP247.WISHES_MAX);
+  } finally { restore247(); }
+
+  const REG247 = await import("../engine/gm_registry.js");
+  const GM247 = await import("../engine/gm.js");
+  check("§247: ⛔ the wishes row is registered for the turn and the ask, built from the profile",
+    REG247.registryKeys("turn").includes("wishesDetail") && REG247.registryKeys("ask").includes("wishesDetail")
+    && REG247.GM_CONTEXT.find(r => r.key === "wishesDetail").build({ profile: { wishes: "tea with the villagers" } }) === "tea with the villagers");
+  const bare247 = { character: { id: "t", name: "T", origin: "valley", background: "smith", level: 1, attributes: { physical: 3, mental: 3, social: 3, practical: 3 }, health: 10, maxHealth: 10, energy: 5, maxEnergy: 5, abilities: [], alignment: {}, inventory: [], quests: [] },
+    location: { id: "millbrook", name: "Millbrook", descriptionSeed: "a mill town", spectrum: {}, encounterFlavor: "quiet" }, region: { id: "valley", name: "The Valley" },
+    rules: {}, lore: "", timeLabel: "Day 1", recentTurns: [], sceneState: {}, resolution: null, playerInput: null };
+  const p247 = GM247.buildTurnContext({ ...bare247, wishesDetail: "gathering herbs, painting at a cabin" });
+  check("§247: …and READ, under a header that says it steers what the world offers and never moves the rating",
+    /## WHAT THIS PLAYER WANTS FROM THE GAME/.test(p247) && p247.includes("gathering herbs, painting at a cabin") && /never raises or lowers the content rating/.test(p247));
+
+  // THE LOAD SCREEN
+  const APP247 = rd("app.js");
+  const boot247 = APP247.slice(APP247.indexOf("reportContractCoverage();"), APP247.indexOf("/** Resolve the active profile"));
+  check("§247: ⛔ the boot ASKS who is playing, every load — and the name-merge no longer runs behind anyone's back",
+    /\r?\n  renderPlayerPick\(\);\r?\n\}\)\(\);/.test(boot247) && !/dedupePlayers\(\)/.test(APP247), boot247.slice(-160).replace(/\s+/g, " "));
+  check("§247: ⚠️ a profile RETIRED into another key is not offered as a second person — on the picker and in discovery",
+    /if \(rp\.retired && rp\.redirectTo\)/.test(APP247) && /if \(p\?\.retired && p\?\.redirectTo\) continue;/.test(APP247));
+  const roster247 = APP247.slice(APP247.indexOf("function renderRoster() {"), APP247.indexOf("// ---------- SNG-087: cross-device DISCOVERY"));
+  check("§247: ⛔ the roster lists THIS player's characters, and Library, Export and Import have left its bottom row",
+    /const chars = charactersForPlayer\(profile\.playerKey\);/.test(roster247) && !/id="open-library"|id="export-save"|id="import-save"/.test(roster247));
+  const settings247 = APP247.slice(APP247.indexOf("function renderSettings(note = \"\") {"), APP247.indexOf("// ---------- roster ----------"));
+  check("§247: …Export and Import live in Settings now, beside the player's own words",
+    /id="export-save"/.test(settings247) && /id="import-save"/.test(settings247) && /id="set-wishes"/.test(settings247) && /profile\.wishes = /.test(settings247));
+  check("§247: …and the Library is one door at the top, on every screen",
+    /<button id="nav-library"/.test(APP247) && /getElementById\("nav-library"\)\.onclick = \(\) => renderLibrary\(\);/.test(APP247));
+
+  // THE BANNER, ON EVERY SCREEN, SHOWING WHAT THE SCREEN IS ABOUT
+  const cssUrlSrc247 = (APP247.match(/const cssUrl = \(u\) => [^\n]+;/) || [""])[0];
+  const cssUrl247 = cssUrlSrc247 ? new Function(`${cssUrlSrc247} return cssUrl;`)() : null;
+  check("§247: ⛔ a picture's URL cannot close the style it sits in — the generated \"Traveler's Pack\" blanked two plates, because encodeURIComponent leaves ' ( ) alone",
+    !!cssUrl247 && cssUrl247("https://x/Traveler's (Pack)") === "https://x/Traveler%27s%20%28Pack%29", cssUrl247 ? cssUrl247("a'b(c)") : "(no cssUrl)");
+  check("§247: ⛑ the topbar IS the banner on every screen, and a screen's own pictures are taken once and never inherited",
+    /topbar-band/.test(APP247) && /const plates = _bannerPlates; _bannerPlates = null;/.test(APP247)
+    // ⚠️ `\r?\n`: a checkout on Windows writes CRLF, and a gate that pins "\n" goes red on a rebase that changed nothing
+    && /function renderWorldTab\(\) \{\r?\n  bannerFrom\("events"\);/.test(APP247) && /function renderInventoryScreen\(openName = null\) \{\r?\n  bannerFromGear\(\);/.test(APP247));
+  check("§247: …six slots always, so two pictures take turns instead of leaving the band dark for most of its cycle",
+    /Array\.from\(\{ length: 6 \}, \(_, i\) => own\[i % own\.length\]\)/.test(APP247));
+  const court247 = rj("players/player-54seyk/profile.json");
+  check("§247: ⬜ the tablet's key is a player in her own right again — not retired, not a redirect",
+    !court247.retired && !court247.redirectTo);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

@@ -2,7 +2,7 @@
 // Engine does the math (resolve/sense/reputation/profile); GM model does the words.
 
 import { grantMartialKit } from "./engine/martial.js";
-import { loadRecovery, recoveryKeys, loadContent, loreForLocation, eventsForGM, getPlayerKey, setPlayerKey, hasChosenPlayer, listPlayers, listCharacters, saveCharacter as persistCharacter, loadCharacter, deleteCharacter, saveProfile, loadProfile, exportSave, importSave, adoptRemoteCharacter, preserveRecovery, dedupePlayers, findProfileByName, resolveLocationId, canTravelBetween, locationRefToString, isCoercedObjectName } from "./engine/state.js";
+import { loadRecovery, recoveryKeys, loadContent, loreForLocation, eventsForGM, getPlayerKey, listPlayers, listCharacters, saveCharacter as persistCharacter, loadCharacter, deleteCharacter, saveProfile, loadProfile, exportSave, importSave, adoptRemoteCharacter, preserveRecovery, findProfileByName, choosePlayer, charactersForPlayer, repairOwnership, lastPlayerKey, resolveLocationId, canTravelBetween, locationRefToString, isCoercedObjectName } from "./engine/state.js";
 import { mergeRecovery, mergeReceiptLine } from "./engine/recovery.js";   // the door to the snapshots the sync kept and nobody could reach
 import { resolveAction, successChance, applyEnergyCost } from "./engine/resolve.js";
 import { senseAction, senseTier, senseOpponent, appraiseOpponent } from "./engine/sense.js"; // CCODE-44: size a fight up BEFORE taking it
@@ -146,7 +146,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.18";
+const APP_VERSION = "2.0.19";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -788,15 +788,13 @@ const RECIPES_PATH = "world/braid_recipes.json"; // SNG-201: a NEW shared store 
     app.innerHTML = `<div class="boot">Failed to load content packs: ${esc(err.message)}<br>Serve this folder over HTTP (packs load via fetch).</div>`;
     return;
   }
-  // SNG-045: collapse same-name duplicate profiles (one person fragmented across devices into
-  // multiple per-device keys) into one canonical profile owning all their characters. Idempotent.
-  try { dedupePlayers(); } catch (err) { console.warn("[identity] dedup skipped:", err?.message); }
-  // SNG-BATCH-7 Phase 1: identity first. If this device hasn't chosen a player but
-  // knows more than one, ask who's playing (path-a family devices); otherwise proceed.
-  if (!hasChosenPlayer() && listPlayers().length > 1) { renderPlayerPick(); return; }
-  loadIdentity();
-  if (!getApiKey()) renderSettings("Welcome. Add your Anthropic API key to begin.");
-  else renderRoster();
+  // ⛔ CCODE-355 — WHO IS PLAYING IS ASKED, ON EVERY LOAD. Erik: "we may want to consider a profile selection on the load
+  // screen - instead of defaulting to the assumed profile and characters."
+  // ⚠️ AND SNG-045's BOOT-TIME MERGE BY NAME NO LONGER RUNS HERE. It folded Courtney's tablet into Erik because two
+  // profiles both said "Erik" — reproduced in a browser, it deleted her profile, wrote a redirect, and re-keyed Adelheid
+  // onto his folder. A person saying who they are is the answer that heuristic was guessing at. `dedupePlayers` still
+  // exists and is still tested; nothing runs it behind anyone's back.
+  renderPlayerPick();
 })();
 
 /** Resolve the active profile from the chosen (or auto-created) player key. */
@@ -968,41 +966,92 @@ if (typeof document !== "undefined") {
 }
 
 /** "Who's playing?" — pick an existing player on this device, or start a new one. */
-function renderPlayerPick(msg = "") {
-  const players = listPlayers();
-  app.innerHTML = `<div class="app-boot"><div class="screen" style="max-width:460px;margin:40px auto">
-    <h2>Who's playing?</h2>
-    ${msg ? `<p class="hint">${esc(msg)}</p>` : ""}
-    <div class="player-pick">
-      ${players.map(p => `<button class="btn player-choice" data-player="${esc(p.playerKey)}">${esc(p.displayName)}</button>`).join("")}
-      ${syncEnabled() ? `<button class="btn secondary" id="player-discover" style="margin-top:8px">☁ Find me in the shared world</button>` : ""}
-      <button class="btn secondary" id="player-new" style="margin-top:8px">+ New player</button>
-    </div>
-    ${!players.length && !syncEnabled() ? `<p class="hint" style="margin-top:10px">Playing across devices? Add your sync settings in a new player's Settings, then your characters follow you here.</p>` : ""}
-  </div>`;
-  const pdisc = document.getElementById("player-discover");
-  if (pdisc) pdisc.onclick = () => renderDiscover();
-  for (const b of app.querySelectorAll("[data-player]")) b.onclick = () => {
-    setPlayerKey(b.dataset.player);
-    loadIdentity();
-    if (!getApiKey()) renderSettings("Welcome. Add your Anthropic API key to begin.");
-    else renderRoster();
-  };
-  document.getElementById("player-new").onclick = () => {
-    const name = prompt("New player name:");
-    if (name === null) return;
-    // SNG-045 Part B: entering an EXISTING name attaches to that person, never mints a duplicate.
-    const existing = findProfileByName(name.trim());
-    if (existing) { setPlayerKey(existing.playerKey); loadIdentity(); }
-    else {
+/** ⛔ CCODE-355 — WHO'S PLAYING, ON EVERY LOAD.
+ *
+ *  Erik: "we may want to consider a profile selection on the load screen - instead of defaulting to the assumed profile
+ *  and characters." And: "i play this on two devices. my phone and this computer. Courtney has a tablet."
+ *
+ *  ⛑ The players this device knows, joined by the players the shared world knows (when sync is set up), each with the
+ *  characters of theirs this device holds. The last one who played here is highlighted and first — one tap to go on —
+ *  and nothing is decided until someone taps.
+ *  ⚠️ A remote profile that is RETIRED into another key is another name for someone already listed, never a second
+ *  person, so it is not offered. */
+async function renderPlayerPick(msg = "") {
+  const last = lastPlayerKey();
+  const players = new Map();
+  for (const p of listPlayers()) players.set(p.playerKey, { playerKey: p.playerKey, displayName: p.displayName, local: true, remoteProfile: null });
+  const draw = (lookingRemote) => {
+    const list = [...players.values()].filter(p => !p.hidden)
+      .sort((a, b) => (b.playerKey === last) - (a.playerKey === last) || String(a.displayName).localeCompare(String(b.displayName)));
+    app.innerHTML = `<div class="screen pick-screen">${titleHero()}
+      <div class="pick-card">
+        <h2>Who's playing?</h2>
+        ${msg ? `<p class="hint">${esc(msg)}</p>` : ""}
+        <div class="player-pick">${list.map(p => {
+          const mine = charactersForPlayer(p.playerKey);
+          const who = mine.length ? mine.map(c => c.name).join(" · ") : (p.local ? "no characters on this device yet" : "plays on another device");
+          return `<button class="player-choice${p.playerKey === last ? " is-last" : ""}" data-player="${esc(p.playerKey)}">
+            <span class="pc-name">${esc(p.displayName)}</span>${p.playerKey === last ? `<span class="pc-badge">last played here</span>` : ""}
+            <span class="pc-chars">${esc(who)}</span></button>`;
+        }).join("") || `<p class="hint">Nobody has played on this device yet.</p>`}</div>
+        ${lookingRemote ? `<p class="hint pick-looking">Looking for the rest of the family in the shared world…</p>` : ""}
+        <div class="pick-actions"><button class="btn secondary" id="player-new">+ New player</button></div>
+      </div>
+    </div>`;
+    for (const b of app.querySelectorAll("[data-player]")) b.onclick = () => selectPlayer(players.get(b.dataset.player));
+    document.getElementById("player-new").onclick = () => {
+      const name = prompt("New player name:");
+      if (name === null || !name.trim()) return;
+      // SNG-045 Part B: entering an EXISTING name attaches to that person, never mints a duplicate.
+      const existing = findProfileByName(name.trim()) || [...players.values()].find(p => String(p.displayName).trim().toLowerCase() === name.trim().toLowerCase());
+      if (existing) { selectPlayer(players.get(existing.playerKey) || { playerKey: existing.playerKey, displayName: existing.displayName, local: true }); return; }
       const key = "player-" + Math.random().toString(36).slice(2, 8);
-      setPlayerKey(key);
+      choosePlayer(key);
       profile = newProfile(key, name.trim());
       saveProfile(profile);
-    }
-    if (!getApiKey()) renderSettings("Welcome. Add your Anthropic API key to begin.");
-    else renderRoster();
+      loadIdentity();
+      if (!getApiKey()) renderSettings("Welcome. Add your Anthropic API key to begin.");
+      else renderRoster();
+    };
   };
+  const syncing = syncEnabled();
+  draw(syncing);
+  if (!syncing) return;
+  try {
+    const keys = (await ghList("players/")).filter(k => /^player-/.test(k));
+    const remote = await Promise.all(keys.map(async (pk) => { try { return [pk, await fetchRepoJSON(`players/${pk}/profile.json`)]; } catch { return [pk, null]; } }));
+    for (const [pk, rp] of remote) {
+      if (!rp) continue;
+      if (rp.retired && rp.redirectTo) { const cur = players.get(pk); if (cur && !charactersForPlayer(pk).length) cur.hidden = true; continue; }
+      const cur = players.get(pk) || { playerKey: pk, local: false };
+      players.set(pk, { ...cur, displayName: rp.displayName || cur.displayName || pk, remoteProfile: rp, hidden: false });
+    }
+  } catch { /* the players this device knows still stand */ }
+  if (app.querySelector(".pick-screen")) draw(false);
+}
+
+/** ⛔ CCODE-355 — BECOME THIS PLAYER, ON THIS DEVICE.
+ *  ⚠️ The shared repo says who is who: a remote profile under a DIFFERENT NAME than this device's copy is an identity
+ *  change made on purpose (Courtney's profile used to say "Erik"), so it replaces the local copy. Otherwise the device's
+ *  own copy stands — it holds whatever this device has not sent up yet.
+ *  ⛑ And any copy of one of this player's characters that a device re-keyed to someone else is handed back, because the
+ *  folder a save lives in is the ownership record. */
+async function selectPlayer(entry) {
+  if (!entry?.playerKey) return;
+  const local = loadProfile(entry.playerKey);
+  const rp = entry.remoteProfile;
+  if (rp && (!local || String(local.displayName || "") !== String(rp.displayName || "") || local.retired)) saveProfile(rp);
+  choosePlayer(entry.playerKey);
+  loadIdentity();
+  if (syncEnabled()) {
+    try {
+      const files = await ghList(`characters/${entry.playerKey}/`);
+      const fixed = repairOwnership(entry.playerKey, files.filter(f => f.endsWith(".json")).map(f => f.replace(/\.json$/, "")));
+      if (fixed.length) console.log(`[identity] handed back to ${entry.displayName}: ${fixed.join(", ")}`);
+    } catch { /* the roster still shows what the saves say */ }
+  }
+  if (!getApiKey()) renderSettings("Welcome. Add your Anthropic API key to begin.");
+  else renderRoster();
 }
 
 // ---------- shared chrome ----------
@@ -1036,12 +1085,65 @@ const WORLD_LINE = "A third the size it was — spent by its own people, one wor
 const HERO_PLATES = ["echo_river_crossing", "harmonic_heights_terrace", "radiant_plateau_edge",
   "archive_hollow", "millbrook", "disputed_zone_fringe"];
 
-/** The landing band. Pure string — no state, no clock, nothing to tear down. */
+/** ⛑ CCODE-355 — ONE CLOCK FOR THE PLATES, ACROSS EVERY RENDER. The banner now sits on every screen, and the play screen
+ *  redraws its chrome each beat; a CSS animation restarts with its element, so without a shared phase the band would snap
+ *  to its first plate and fade up from black on every turn. A negative delay starts each plate where the cycle already is. */
+const HERO_CYCLE_S = 72, HERO_SLOT_S = 12;
+// A URL inside `url('…')` in an inline style: the characters that could close the string or the call are escaped.
+// ⚠️ PERCENT-ENCODED BY HAND, because `encodeURIComponent` leaves `'`, `(` and `)` alone (they are "unreserved") — and a
+// generated item prompt carries "Traveler's Pack", whose apostrophe closed the CSS string and blanked two plates in the bag.
+const cssUrl = (u) => String(u).replace(/['"()\\\s<>]/g, c => "%" + c.charCodeAt(0).toString(16).toUpperCase().padStart(2, "0"));
+function heroPlates(urls = null) {
+  const t = (Date.now() / 1000) % HERO_CYCLE_S;
+  const own = Array.isArray(urls) ? urls.filter(Boolean) : [];
+  // ⚠️ SIX SLOTS, ALWAYS. The keyframes give each plate 12 seconds of a 72-second cycle, so fewer than six pictures would
+  // leave the band dark for the rest of it — two gallery images take turns three times instead.
+  const six = own.length ? Array.from({ length: 6 }, (_, i) => own[i % own.length]) : HERO_PLATES.map(p => `content/packs/valley/assets/${p}.jpg`);
+  return `<div class="th-plates" aria-hidden="true">${six.map((u, i) => {
+    const phase = (((t - HERO_SLOT_S * i) % HERO_CYCLE_S) + HERO_CYCLE_S) % HERO_CYCLE_S;
+    return `<div class="th-plate th-plate-${i}" style="background-image:url('${cssUrl(u)}');animation-delay:-${phase.toFixed(2)}s"></div>`;
+  }).join("")}</div>`;
+}
+
+/** ⛔ CCODE-355 — THE BANNER SHOWS WHAT THE SCREEN IS ABOUT. Erik: "for the plate images... those could change depending on
+ *  which screen you're on. in the character sheet world tab, it should show events from the gallery. in the backpack, it
+ *  should show your gear, etc."
+ *
+ *  ⛑ A screen names its pictures just before it draws, and `chrome()` takes them and clears them — so a screen that names
+ *  nothing gets the six plates of the world, and no screen can inherit the last one's. The gallery is read newest first. */
+let _bannerPlates = null;
+const BANNER_KINDS = {
+  events: ["moment", "battle", "discovery", "scene"],
+  people: ["npc", "figure", "portrait", "beast"],
+  places: ["location"],
+  holds: ["holding"],
+  crafts: ["ability"],
+  story: null,
+};
+function bannerFrom(kind) {
+  const want = BANNER_KINDS[kind];
+  const urls = [...(character?.gallery || [])].reverse().filter(g => g?.url && (!want || want.includes(g.kind))).map(g => g.url);
+  _bannerPlates = [...new Set(urls)].slice(0, 6);
+}
+/** The backpack: what the character carries — equipped first, then pinned. ⚠️ Items have no stored art, so these are the
+ *  generated images the backpack itself shows, and only when the player has art set to Generate. */
+function bannerFromGear() {
+  _bannerPlates = null;
+  if (!imagesEnabled()) return;
+  const weight = (it) => (it?.equipped ? 2 : 0) + (it?.pinned ? 1 : 0);
+  const urls = [];
+  for (const it of [...(character?.inventory || [])].sort((a, b) => weight(b) - weight(a))) {
+    try { const u = itemImage(it, { ratingLevel: viewerRatingLevel() }); if (u && !urls.includes(u)) urls.push(u); } catch { /* no picture is not an error */ }
+    if (urls.length >= 6) break;
+  }
+  _bannerPlates = urls;
+}
+
+/** The landing band. Pure string — the only state it reads is the clock the plates share. */
 function titleHero() {
   return `
     <div class="title-hero">
-      <div class="th-plates" aria-hidden="true">${HERO_PLATES.map((p, i) =>
-        `<div class="th-plate th-plate-${i}" style="background-image:url('content/packs/valley/assets/${p}.jpg')"></div>`).join("")}</div>
+      ${heroPlates()}
       <div class="th-veil" aria-hidden="true"></div>
       <div class="th-text">
         <h1 class="th-mark">${esc(GAME_MARK)}</h1>
@@ -1054,11 +1156,14 @@ function titleHero() {
 }
 
 function chrome(inner, { hero = false } = {}) {
+  const plates = _bannerPlates; _bannerPlates = null;   // CCODE-355: this screen's pictures, taken once
   app.innerHTML = `
-    <div class="topbar${hero ? " topbar-hero" : ""}">
-      <div>${hero ? "" : `<h1>${esc(GAME_MARK)}</h1><span class="sub">${esc(GAME_SUBTITLE)} — v${esc(APP_VERSION)}</span>${isDevMode() ? ` <span class="dev-badge" title="Developer mode is ON. Turn it off in Settings, or reload without ?dev=1.">DEV</span>` : ""}`}</div>
+    <div class="topbar${hero ? " topbar-hero" : " topbar-band"}">
+      ${hero ? "" : `${heroPlates(plates)}<div class="tb-veil" aria-hidden="true"></div>`}
+      <div class="tb-title">${hero ? "" : `<h1>${esc(GAME_MARK)}</h1><span class="sub">${esc(GAME_SUBTITLE)} — v${esc(APP_VERSION)}</span>${isDevMode() ? ` <span class="dev-badge" title="Developer mode is ON. Turn it off in Settings, or reload without ?dev=1.">DEV</span>` : ""}`}</div>
       <div class="actions">
         <button id="nav-roster">Characters</button>
+        <button id="nav-library" title="The world's guide — Exesa, its peoples, its powers, the valley">📖 Library</button>
         <button id="nav-settings">Settings</button>
         <button id="nav-feedback" title="Feedback / bug report — your version, location, character and last turn attach automatically">⚑ Feedback</button>
         ${devEnabled() ? `<button id="nav-dev" title="Dev preview-legs checklist">🧪 Legs</button>` : ""}
@@ -1069,6 +1174,9 @@ function chrome(inner, { hero = false } = {}) {
     ${hero ? titleHero() : ""}
     ${inner}`;
   document.getElementById("nav-roster").onclick = () => renderRoster();
+  // ⛔ CCODE-355 (Erik: "the library is likely redundant at the bottom of the screen and should move to the top and be an
+  // entry into the lore and world pages") — one door, at the top, on every screen.
+  document.getElementById("nav-library").onclick = () => renderLibrary();
   document.getElementById("nav-settings").onclick = () => renderSettings();
   const fbBtn = document.getElementById("nav-feedback");
   if (fbBtn) fbBtn.onclick = () => { _feedbackType = "bug"; openFeedback(); };
@@ -3470,6 +3578,9 @@ function renderSettings(note = "") {
     ${note ? `<p class="hint" style="margin-bottom:12px">${esc(note)}</p>` : ""}
     <div class="field"><label>Your name (player, not character)</label>
       <input id="set-player" value="${esc(profile.displayName || "")}" placeholder="e.g. Erik"></div>
+    <div class="field"><label>What I want from this game</label>
+      <textarea id="set-wishes" rows="4" maxlength="600" placeholder="e.g. gathering herbs and making remedies, painting at a cabin with a view, tea with the villagers, a little gentle adventure — nothing grim">${esc(profile.wishes || "")}</textarea>
+      <div class="hint">In your own words. The GM reads it every turn, the way a table agrees what kind of game it wants before anyone rolls: it shapes what the world offers you and how heavy things get. It never changes your content rating, and it never takes a choice away from you.</div></div>
     <div class="field"><label>Anthropic API key</label>
       <input id="set-key" type="password" value="${esc(getApiKey())}" placeholder="sk-ant-...">
       <div class="hint">Stored in this browser's localStorage only. Never written to any file or repo.</div></div>
@@ -3544,8 +3655,11 @@ function renderSettings(note = "") {
     <div class="field"><label>World-authorship</label>
       <label class="rating-check"><input type="checkbox" id="set-contentgen" ${profile.contentGenerator ? "checked" : ""}> My play authors the world — what I create through play more readily becomes shared canon</label>
       <div class="hint">When on, the people and places you bring into being carry more weight (SNG-128 world-authorship), so your play persists into the family's shared valley more readily. On for the family's storytellers.</div></div>
+    <div class="field"><label>Saves on this device</label>
+      <div style="display:flex; gap:8px; flex-wrap:wrap"><button class="btn secondary" id="export-save">Export saves</button><button class="btn secondary" id="import-save">Import a save file</button></div>
+      <div class="hint">Rarely needed now: with sync set up, <em>Find my characters</em> brings a character to any device. Export writes a copy to a file you keep; Import reads one back.</div></div>
     <button class="btn" id="set-save">Save</button>
-    <div class="footer-note">Save data is in this browser. Use Export on the Characters screen to move it.</div>
+    <div class="footer-note">Save data is in this browser — Export above writes a copy to a file.</div>
   </div>`);
   // SNG-155: hear the picked voice before committing to it — the whole point of §1 is that this is
   // an AUDIBLE difference, so it has to be auditionable without leaving Settings.
@@ -3567,8 +3681,26 @@ function renderSettings(note = "") {
     saveCharacter(character);
     renderSettings(mergeReceiptLine(r) || "Nothing in that copy was missing from your save.");
   };
+  // ⛔ CCODE-355 (Erik: "i think we can move export and import saves buttons to the setting screen - those are likely never
+  // needed now that find by characters is working") — the same two doors, one screen over.
+  document.getElementById("export-save").onclick = () => {
+    const mine = charactersForPlayer(profile.playerKey);
+    const blob = new Blob([exportSave(mine[0]?.id, profile.playerKey)], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob); a.download = "singularity-save.json"; a.click();
+  };
+  document.getElementById("import-save").onclick = () => {
+    const input = document.createElement("input");
+    input.type = "file"; input.accept = ".json";
+    input.onchange = async () => {
+      const text = await input.files[0].text();
+      try { importSave(text); renderRoster(); } catch (e) { alert("Import failed: " + e.message); }
+    };
+    input.click();
+  };
   document.getElementById("set-save").onclick = () => {
     profile.displayName = document.getElementById("set-player").value.trim();
+    profile.wishes = smartClamp(String(document.getElementById("set-wishes")?.value || "").trim(), 600) || null;   // CCODE-355: clamped on a word, like every other prose store
     profile.pacing = document.getElementById("set-pacing").value; // SNG-127: world-liveliness preference
     profile.presence = document.getElementById("set-presence").value; // SPEC_npc_presence §6: how crowded — a sibling dial, never a share of pacing
     // SNG-155: per-profile voice + the read-aloud prose signal
@@ -3609,15 +3741,17 @@ function renderSettings(note = "") {
 
 function renderRoster() {
   if (!profile) { renderPlayerPick(); return; } // SNG-087: a fresh device may reach chrome (nav) before choosing a player
-  const chars = listCharacters();
-  const players = listPlayers();
+  // ⛔ CCODE-355: THIS PLAYER'S characters — not every save on the device. Erik's phone does not need Courtney's healer
+  // listed under "Your Characters", and her tablet should never offer her his.
+  const chars = charactersForPlayer(profile.playerKey);
+  const othersHere = listCharacters().length - chars.length;
   // SNG-087: on a device that has sync configured but no local characters, DISCOVER them from the
   // repo automatically — sync config is the only setup a new device should need (no export/import).
   // Guarded by a once-per-session flag so "Back" from discovery lands on the roster without bouncing.
-  if (chars.length === 0 && syncEnabled() && !_discoverAutoRan) { _discoverAutoRan = true; renderDiscover(); return; }
+  if (chars.length === 0 && syncEnabled() && !_discoverAutoRan) { _discoverAutoRan = true; renderDiscoverCharacters({ playerKey: profile.playerKey, displayName: profile.displayName || profile.playerKey, profile: null }); return; }
   chrome(`<div class="screen">
     <div class="roster-head"><h2>Your Characters</h2>
-      <span class="roster-player">Playing as <strong>${esc(profile.displayName || profile.playerKey)}</strong>${players.length > 1 ? ` <button class="link-btn" id="switch-player">switch</button>` : ""}</span></div>
+      <span class="roster-player">Playing as <strong>${esc(profile.displayName || profile.playerKey)}</strong> <button class="link-btn" id="switch-player">switch</button></span></div>
     ${chars.length === 0 ? `<p class="hint" style="margin-bottom:14px">No characters on this device yet. ${syncEnabled() ? "Find the ones you've played elsewhere, or make a new one." : "Make one — or set up sync in Settings to bring in characters from another device."}</p>` : ""}
     <div id="roster">${chars.map(c => `
       <div class="roster-item">
@@ -3641,32 +3775,13 @@ function renderRoster() {
     <div style="margin-top:16px; display:flex; gap:8px; flex-wrap:wrap;">
       <button class="btn" id="new-char">New Character</button>
       ${syncEnabled() ? `<button class="btn secondary" id="discover-chars">☁ Find my characters</button>` : ""}
-      <button class="btn secondary" id="open-library">📖 The Library</button>
-      <button class="btn secondary" id="export-save">Export saves</button>
-      <button class="btn secondary" id="import-save">Import</button>
     </div>
+    ${othersHere > 0 ? `<p class="hint" style="margin-top:12px">${othersHere} more character${othersHere === 1 ? "" : "s"} on this device belong${othersHere === 1 ? "s" : ""} to other players — <button class="link-btn" id="switch-player-2">switch player</button></p>` : ""}
   </div>`, { hero: true });   // ⛔ SNG-585: the roster IS the title page — the one screen a player sees before a world exists
   const discBtn = document.getElementById("discover-chars");
   if (discBtn) discBtn.onclick = () => renderDiscover();
-  const sw = document.getElementById("switch-player");
-  if (sw) sw.onclick = () => renderPlayerPick();
+  for (const id of ["switch-player", "switch-player-2"]) { const sw = document.getElementById(id); if (sw) sw.onclick = () => renderPlayerPick(); }
   document.getElementById("new-char").onclick = () => renderCreate();
-  document.getElementById("open-library").onclick = () => renderLibrary();
-  document.getElementById("export-save").onclick = () => {
-    const chars2 = listCharacters();
-    const blob = new Blob([exportSave(chars2[0]?.id, profile.playerKey)], { type: "application/json" });
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob); a.download = "singularity-save.json"; a.click();
-  };
-  document.getElementById("import-save").onclick = () => {
-    const input = document.createElement("input");
-    input.type = "file"; input.accept = ".json";
-    input.onchange = async () => {
-      const text = await input.files[0].text();
-      try { importSave(text); renderRoster(); } catch (e) { alert("Import failed: " + e.message); }
-    };
-    input.click();
-  };
   for (const btn of app.querySelectorAll("[data-play]")) {
     btn.onclick = async () => {
       btn.disabled = true; btn.textContent = "Loading…";
@@ -3728,6 +3843,8 @@ async function renderDiscover(note = "") {
   for (const pk of keys) {
     let p = null;
     try { p = await fetchRepoJSON(`players/${pk}/profile.json`); } catch { /* keep going */ }
+    // ⚠️ CCODE-355: a profile RETIRED into another key is another name for someone already listed, not a second person.
+    if (p?.retired && p?.redirectTo) continue;
     profiles.push({ playerKey: pk, displayName: p?.displayName || pk, profile: p });
   }
   // auto-resolve: if exactly one player, or one whose name matches this device's current profile, skip the pick
@@ -3742,9 +3859,10 @@ async function renderDiscover(note = "") {
  *  play any of them. Adoption uses the stale-overwrite guard in BOTH directions — a newer local copy
  *  is never clobbered, a newer remote is always taken. */
 async function renderDiscoverCharacters(entry) {
-  // become that player on this device (store the profile, set the active key)
-  if (entry.profile) saveProfile(entry.profile);
-  setPlayerKey(entry.playerKey);
+  // become that player on this device — CCODE-355: by CHOICE, so a redirect a name-match wrote cannot turn it into someone
+  // else, and a remote copy replaces the local one only when it is a different identity
+  if (entry.profile) { const lp = loadProfile(entry.playerKey); if (!lp || String(lp.displayName || "") !== String(entry.profile.displayName || "") || lp.retired) saveProfile(entry.profile); }
+  choosePlayer(entry.playerKey);
   loadIdentity();
   chrome(`<div class="screen" style="max-width:640px">
     <h2>${esc(entry.displayName)}'s characters</h2>
@@ -11328,6 +11446,7 @@ function wheelNodeShape(kind, cx, cy, r, { fill, stroke, sw = 1.5, cls = "" } = 
 }
 
 function renderSkillWheel(selectedId = null, status = "") {
+  bannerFrom("crafts");   // CCODE-355
   const idx = CONTENT.traditionIndex;
   if (!idx) { renderSkillGraph(selectedId); return; } // no ring loaded → fall back to the list graph
   const m = buildWheelModel();
@@ -11613,6 +11732,7 @@ function renderSkillWheel(selectedId = null, status = "") {
 }
 
 function renderSkillGraph(selectedId = null, status = "") {
+  bannerFrom("crafts");   // CCODE-355
   const model = skillGraphModel(fullCatalog(), CONTENT.emergence, character, {
     attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, branchForks: CONTENT.branchForks,
     preds: {
@@ -11811,6 +11931,7 @@ function wireSkillGraphViewport() {
  *  had no button for either in a long time. The DEEPEN section here is a READOUT — what you hold, how close
  *  the next rank is — not a shop. A stale docstring is the version of the rule a future reader believes. */
 function renderLevelUp(status = "") {
+  bannerFrom("crafts");   // CCODE-355
   const rules = CONTENT.rules;
   const sp = character.skillPoints || 0;
   const cap = atCapacity(character, CONTENT.skillCapacity);
@@ -12346,6 +12467,7 @@ function holdCfgNow() {
 // every control that CHANGES the place lives behind one button, because the two were interleaved and
 // neither could be used.
 function renderHoldingsTab(manageId = null) {
+  bannerFrom("holds");   // CCODE-355
   const rules = CONTENT.rules;
   const ladder = rules.subAttributeLadder;
   const hs = character.holdings || [];
@@ -13004,6 +13126,7 @@ function galleryStacks(entries) {
 }
 
 function renderGallery() {
+  bannerFrom("story");   // CCODE-355
   const gallery = character.gallery || [];
   // CCODE-31: bucket every image by category so the chips can show counts + the grid can filter (Erik: skill
   // images were flooding the portrait gallery uncategorized).
@@ -13302,6 +13425,7 @@ const itemKindIcon = it => ITEM_KIND_ICON[it?.kind] || "◌";
 // actions). Icons in the grid (fast, no quota); the image generates only for the item you actually open
 // (Erik's call). Reuses itemCard (image + mechanics + actions) inside the modal, and the ONE shared binding.
 function renderInventoryScreen(openName = null) {
+  bannerFromGear();   // CCODE-355: the backpack shows the gear
   const kinds = itemKindsIn(character.inventory || []);   // CCODE-168: what is IN the bag, not what a list remembered
   const inv = character.inventory || [];
   const openIt = openName ? inv.find(i => i.name === openName) : null;
@@ -13828,6 +13952,7 @@ function renderBandsTab() {
 }
 
 function renderWorldTab() {
+  bannerFrom("events");   // CCODE-355: the world tab shows what happened in it
   chrome(worldTabHtml({
     arcs: arcPeopleView(character, CONTENT),
     foot: worldPeopleFooter(character, CONTENT),
@@ -13840,6 +13965,7 @@ function renderWorldTab() {
   wireCharacterTabs();
 }
 function renderChronicle() {
+  bannerFrom("events");   // CCODE-355
   const cache = character.chronicleCache;
   const stale = chronicleIsStale(character);
   const deeds = majorDeeds(character, 8);
@@ -14316,6 +14442,7 @@ function mintedLocationGen(provenance = {}) {
 }
 
 function renderCodexScreen(query = "", openTopicId = null, mergeMode = false) {
+  bannerFrom("people");   // CCODE-355: the people you know
   const results = searchCodex(character, query);
   const open = openTopicId ? character.codex?.topics?.[openTopicId] : null;
   // SNG-199 §6: search filters EVERYTHING it is displayed above — the NOTABLE row and the merge
@@ -16263,6 +16390,7 @@ async function beginFightFromChase(chaseDef) {
 // ---------- play rendering ----------
 
 function renderPlay(turn, opts = {}) {
+  bannerFrom("events");   // CCODE-355: the story so far rides above the scene
   // SNG-252b §2b (Erik: "move the narration to a good place INSIDE the encounter… I'm lost with everything
   // it's showing"). The scene prose rendered as a separate block BELOW the whole ribbon, so the thing you are
   // acting IN sat after the controls for acting in it. It is built HERE, once, and the ribbon claims it when

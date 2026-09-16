@@ -1,4 +1,5 @@
 import { practiceSkill } from "./inventory.js"; // SNG-339 §3: training grows by doing, at the one place every action is recorded
+import { smartClamp } from "./namematch.js";    // CCODE-355: a player's words are clamped on a word, never sliced
 // playerprofile.js — play-style accrual + player identity.
 // SNG-BATCH-7 Phase 1: the profile is now IDENTITY (playerKey/displayName/
 // charactersPlayed); the earned STYLE (tendencies/aptitudes/actionCount) lives on
@@ -98,6 +99,25 @@ export function setMinorFlag(profile, isMinor) {
 /** Identity-only now (SNG-BATCH-7); SNG-BATCH-9 adds the content-rating ceiling. */
 export function newProfile(playerKey, displayName = "") {
   return { schemaVersion: 2, playerKey, displayName, charactersPlayed: [], history: [], rating: defaultRating() };
+}
+
+export const WISHES_MAX = 600;
+
+/** ⛔ CCODE-355 — WHAT THIS PLAYER WANTS FROM THE GAME.
+ *
+ *  ⛔ ERIK, 2026-09-16: "Courtney would like to spend her time in the game collecting herbs and painting at a cabin
+ *  overlooking the valley... she isn't the type of person who typically plays RPGs - so let's make this really engaging
+ *  and beautiful for her. She likes spirituality... She wouldn't mind some adventure and intrigue - but it needs to be
+ *  less heavy."
+ *
+ *  ⚑ THERE WAS NO FIELD FOR THIS ANYWHERE. Tone had dials (rating, bluntness, plainness, pacing, presence); interests had
+ *  nothing — the bio reads as backstory and is fixed at creation, aspirations are two craft ids, and the personal arc is
+ *  generated "mythic, tragic-or-heroic". A tabletop table settles this at session zero; this is that note, on the profile,
+ *  so it follows the PLAYER to every character and every device. Returns null when unset. */
+export function playerWishesForGM(profile) {
+  const raw = String(profile?.wishes ?? "").replace(/\s+/g, " ").trim();
+  if (!raw) return null;
+  return smartClamp(raw, WISHES_MAX);
 }
 
 /** Backfill the rating ceiling onto a pre-BATCH-9 profile (safe default). */

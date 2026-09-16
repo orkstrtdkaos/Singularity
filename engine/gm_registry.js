@@ -42,6 +42,7 @@ import { loreForLocation, eventsForGM, traditionMotivationsForGM } from "./state
 import { buildRegionView, newsForGM, worldArcsForGM, collapseLedgerEvents } from "./worldtick.js";
 import { travelersForGM } from "./travelers.js";   // SNG-595: a name that belongs to another player
 import { worldMovedOnForGM } from "./worldevents.js";   // CCODE-354: the world moved on while this character believed otherwise
+import { playerWishesForGM } from "./playerprofile.js";   // CCODE-355: what this player wants from the game
 import { SEXUAL_MARKERS, HARD_INTENSITY_MARKERS } from "./canon.js";   // SNG-595: the family floor, for rows with no rating
 import { isMinorProfile } from "./playerprofile.js";
 import { inventoryForGM } from "./inventory.js";
@@ -574,6 +575,11 @@ export const GM_CONTEXT = [
   // on the shared ledger and Edvar is in the shared world because of him; nothing read either BY PERSON, and nothing said
   // "Silas Weir" was a player at all — so the GM invented him. ⚠️ The words searched are this turn's AND the last two
   // beats', because a conversation about someone does not repeat their name every line.
+  // ⛔ CCODE-355 (Erik: "Courtney would like to spend her time in the game collecting herbs and painting at a cabin
+  // overlooking the valley... let's make this really engaging and beautiful for her") — the player's own session-zero note.
+  { key: "wishesDetail", builder: "playerprofile.playerWishesForGM (CCODE-355)", carries: ["what this player wants from the game — interests and tone, in their own words"],
+    reachedBy: "Settings → What I want from this game (on the player's profile, so it follows them to every character and device)", spec: "CCODE-355", views: ["turn", "ask"],
+    build: (env) => playerWishesForGM(env.profile) },
   // ⛔ CCODE-354 (Erik: "her particular quest needs to morph into discovering that the water coming down the watershed IS
   // clean now") — for a few beats after a character's world first carries an answer somebody else made. Adelheid's codex
   // still says the water is "actively waking"; this is the row that lets the story tell her otherwise.

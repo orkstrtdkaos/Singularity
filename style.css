@@ -136,6 +136,36 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
   .th-rule { max-width: 200px; margin: 10px 0 9px; }
 }
 
+/* ---------- CCODE-355: the banner on every screen ----------
+   ⛔ Erik: "I like the new banner at the top - let's bring that into the other areas of the game" — and "those could change
+   depending on which screen you're on". ⛑ THE TOPBAR IS THE BAND: the same plates and the same gold, at the height of a
+   bar, so the nav a returning player reaches for stays exactly where it was. The landing screen keeps the full band. */
+.topbar-band {
+  position: relative; overflow: hidden; isolation: isolate;
+  align-items: center; flex-wrap: wrap; gap: 8px 14px;
+  border: 1px solid var(--border); border-radius: 10px;
+  padding: 14px 16px; min-height: 68px;
+  background: #0d0e11;
+}
+.topbar-band .th-plate { background-position: center 50%; filter: grayscale(0.3) sepia(0.22) contrast(1.05) brightness(0.55); }
+.tb-veil {
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    radial-gradient(90% 170% at 9% 30%, rgba(212, 162, 74, 0.12), transparent 60%),
+    linear-gradient(90deg, rgba(13, 14, 17, 0.9) 0%, rgba(13, 14, 17, 0.62) 55%, rgba(13, 14, 17, 0.74) 100%);
+}
+.topbar-band .tb-title, .topbar-band .actions { position: relative; z-index: 2; }
+.topbar-band h1 { font-size: 22px; letter-spacing: 0.3em; margin-right: -0.3em; text-shadow: 0 2px 0 rgba(0, 0, 0, 0.55), 0 0 22px rgba(212, 162, 74, 0.18); }
+.topbar-band .sub { color: var(--ink); opacity: 0.8; margin-left: 2px; }
+.topbar-band .actions { display: flex; flex-wrap: wrap; gap: 6px; }
+.topbar-band .actions button { margin-left: 0; background: rgba(13, 14, 17, 0.55); border-color: rgba(212, 162, 74, 0.28); color: var(--ink); }
+.topbar-band .actions button:hover, .topbar-band .actions button:focus-visible { border-color: var(--accent); outline: none; }
+@media (max-width: 600px) {
+  .topbar-band { padding: 10px 12px; min-height: 0; }
+  .topbar-band h1 { font-size: 17px; letter-spacing: 0.22em; margin-right: -0.22em; }
+  .topbar-band .sub { display: block; font-size: 11px; margin-left: 0; }
+}
+
 /* ---------- sidebar / sheet ---------- */
 .sheet { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px; font-family: var(--font-ui); font-size: 13px; position: sticky; top: 12px; }
 .sheet h2 { font-family: var(--font); font-size: 17px; color: var(--accent); font-weight: normal; margin-bottom: 2px; }
@@ -927,6 +957,8 @@ img[data-lightbox] { cursor: zoom-in; }
 .screen .field { margin-bottom: 14px; }
 .screen label { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--ink-dim); margin-bottom: 4px; }
 .screen .hint { font-size: 12px; color: var(--ink-dim); margin-top: 3px; }
+/* CCODE-355: the player's own words need room to be written in — a note, not a code field */
+#set-wishes { display: block; width: 100%; box-sizing: border-box; min-height: 96px; resize: vertical; font-family: var(--font); font-size: 14px; line-height: 1.5; }
 .opt-row { display: flex; gap: 8px; flex-wrap: wrap; }
 .opt { background: var(--panel2); border: 1px solid var(--border); color: var(--ink); border-radius: 8px; padding: 8px 14px; font-size: 13px; }
 .opt.selected { border-color: var(--accent); color: var(--accent); }
@@ -1049,8 +1081,23 @@ img[data-lightbox] { cursor: zoom-in; }
 .roster-player { font-size: 12px; color: #a08b6f; }
 .roster-player strong { color: #d4a24a; }
 .link-btn { background: none; border: none; color: #5aa8a0; cursor: pointer; font-size: 12px; text-decoration: underline; padding: 0 2px; }
-.player-pick { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
-.player-choice { text-align: center; }
+/* ⛔ CCODE-355 — WHO'S PLAYING, every load: one row per player, the characters they have here, the last one first. */
+.pick-screen { background: none; border: none; padding: 0; max-width: 760px; }
+.pick-card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 22px 24px; max-width: 540px; margin: 0 auto; }
+.player-pick { display: flex; flex-direction: column; gap: 8px; margin: 10px 0 14px; }
+.player-choice {
+  display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 2px 12px;
+  width: 100%; text-align: left; cursor: pointer;
+  background: var(--panel2); color: var(--ink);
+  border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px;
+}
+.player-choice:hover, .player-choice:focus-visible { border-color: var(--accent); outline: none; }
+.player-choice.is-last { border-color: rgba(212, 162, 74, 0.6); background: linear-gradient(180deg, rgba(212, 162, 74, 0.07), transparent 70%), var(--panel2); }
+.pc-name { font-family: var(--font); font-size: 18px; color: var(--accent); letter-spacing: 0.02em; }
+.pc-badge { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent2); }
+.pc-chars { grid-column: 1 / -1; font-size: 13px; color: var(--ink-dim); overflow-wrap: anywhere; }
+.pick-actions { display: flex; justify-content: flex-end; }
+@media (max-width: 600px) { .pick-card { padding: 16px; } }
 
 /* SNG-031 gambit surfacing — the plan-apt hint chip + prominent Plan button */
 .gambit-hint { display: flex; align-items: center; gap: 8px; margin: 8px 0 4px; padding: 7px 10px; border: 1px solid #5aa8a0; border-radius: 20px; background: rgba(90,168,160,0.08); font-size: 13px; color: #cdbfa8; }

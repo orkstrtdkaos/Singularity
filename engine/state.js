@@ -1128,6 +1128,65 @@ export function findProfileByName(displayName) {
 /** SNG-BATCH-7 Phase 1: has THIS device chosen a player yet? (non-creating). */
 export function hasChosenPlayer() { return !!localStorage.getItem(LS.playerKey); }
 
+/** The key this device last played as, EXACTLY as stored — never minted, never redirected. The picker highlights it;
+ *  it does not decide anything. */
+export function lastPlayerKey() { return localStorage.getItem(LS.playerKey) || null; }
+
+/** ⛔ CCODE-355 — WHO IS PLAYING IS CHOSEN, NOT ASSUMED.
+ *
+ *  ⛔ ERIK, 2026-09-16: "we may want to consider a profile selection on the load screen - instead of defaulting to the
+ *  assumed profile and characters." And: "i play this on two devices. my phone and this computer. Courtney has a tablet."
+ *
+ *  ⚑ MEASURED: Courtney's tablet wrote ERIK's profile after every save of hers — `save: Adelheid`, then a second later
+ *  `profile: player-s9z9u1` — so her game ran on his R+, blunt, eventful settings and the two devices overwrote each
+ *  other's profile all evening. The cause is SNG-045's boot-time merge BY DISPLAY NAME: Adelheid was made under a key
+ *  whose profile said "Erik", so the device folded it into Erik — and, reproduced in a browser with the same two
+ *  profiles, it DELETED that profile, wrote a redirect, and re-keyed Adelheid onto Erik's folder.
+ *
+ *  ⛑ An explicit choice is the answer a name-match was guessing at: it clears any redirect FROM the chosen key (a
+ *  heuristic wrote that; the person has now said otherwise) and stores the key exactly as chosen. */
+export function choosePlayer(key) {
+  const k = String(key ?? "").trim();
+  if (!k) return null;
+  localStorage.removeItem(LS.redirect(k));
+  localStorage.setItem(LS.playerKey, k);
+  return k;
+}
+
+/** The characters on this device that belong to a player — by the key their own save carries. A save from before player
+ *  keys existed belongs to whoever is playing.
+ *
+ *  ⚠️ A REDIRECT IS FOLLOWED ONLY FOR A KEY THAT HAS NO PROFILE OF ITS OWN. That is what a genuinely retired key looks like
+ *  (SNG-045 removes the duplicate's profile). A key that still has a profile is a player in their own right, whatever a
+ *  name-match wrote — measured in the browser: with Courtney's profile present and the old redirect still standing, both
+ *  "Erik" and "Courtney" listed Adelheid and Loki, because every key collapsed into Erik's. */
+export function charactersForPlayer(key) {
+  const effective = (pk) => (loadProfile(pk) ? pk : resolvePlayerKey(pk));
+  const want = effective(key);
+  return listCharacters().filter(e => {
+    let pk = e.playerKey;
+    if (pk === undefined) { try { pk = loadCharacter(e.id)?.playerKey ?? null; } catch { pk = null; } }
+    return !pk || effective(pk) === want;
+  });
+}
+
+/** ⛔ THE REPO FOLDER IS THE OWNERSHIP RECORD. A save lives at `characters/<player>/<id>.json`; when this device holds a
+ *  copy of one of those ids keyed to someone else — the name-merge re-keyed Adelheid onto Erik — the copy is handed back
+ *  to the player whose folder it lives in. Returns the names repaired. Pure but for localStorage. */
+export function repairOwnership(key, remoteIds = []) {
+  const ids = new Set((remoteIds || []).map(String));
+  const fixed = [];
+  for (const e of listCharacters()) {
+    if (!ids.has(String(e.id))) continue;
+    const c = loadCharacter(e.id);
+    if (!c || c.playerKey === key) continue;
+    c.playerKey = key;
+    saveCharacter(c, { stamp: false });
+    fixed.push(c.name || c.id);
+  }
+  return fixed;
+}
+
 /** All players known on this device — every stored profile. (Phase 2 syncs more down.) */
 export function listPlayers() {
   const out = [];
@@ -1188,7 +1247,9 @@ export function saveCharacter(c, { stamp = true } = {}) {
     localStorage.setItem(LS.character(c.id), payload); // still throws if genuinely out of room — the caller must see that
   }
   const idx = listCharacters().filter(e => e.id !== c.id);
-  idx.push({ id: c.id, name: c.name, level: c.level, origin: c.origin });
+  // ⛑ CCODE-355: the index carries WHOSE character it is, so the roster can show one player's characters without
+  // parsing every save on the device (Silas's alone is over a megabyte).
+  idx.push({ id: c.id, name: c.name, level: c.level, origin: c.origin, playerKey: c.playerKey || null });
   localStorage.setItem(LS.characterIndex, JSON.stringify(idx));
 }
 

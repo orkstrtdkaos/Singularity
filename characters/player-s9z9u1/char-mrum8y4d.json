@@ -7697,8 +7697,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789515404462,
-  "rev": 684,
+  "updatedAt": 1789517834115,
+  "rev": 685,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9360,30 +9360,30 @@
     "the-taken-from-the-city: no-such-quest"
   ],
   "_suggestCache": {
-    "level": 7,
+    "level": 8,
     "picks": [
       {
         "abilityId": "appetite_sense",
-        "why": "This is the craft they declared they were building toward, now at 9/10 progress and fully reachable — it reads the true want under the presented want, which is the exact gap between their current social/cerebral kit (See the Made Thing, Descent, Prism Sight) and the deeper layer of every room they walk into. The aspiration is done; this completes it.",
+        "why": "This is the aspiration they declared complete at 15/10 — it is the exact craft they said they wanted, a KNOW that reads true want beneath performed want, and for a character whose whole kit is social manipulation and illusion-weaving, sensing the hidden hunger before they pitch a Better Story or run a Misdirect is the missing first move in every influence sequence they already play.",
         "fit": "aspiration"
       },
       {
         "abilityId": "the_read_want",
-        "why": "If they split their two points, Read Want pairs with Appetite-Sense to give them a layered want-reading suite — Appetite-Sense for the deep hunger, Read Want for the surface request in active conversation. For a charmer-orator whose highest-use crafts are all about reading situations (See the Made Thing 28, Prism Sight 10), this deepens the signature they actually play.",
+        "why": "Where Appetite-Sense reads the deep want, Read Want is the conversational version — look at a person mid-scene and see what the request is actually concealing; for someone social 18 who runs Better Story and Harmonic Voice constantly, this turns every conversation they're already in into an intelligence operation, and it directly feeds the the_ended_threat aspiration's likely need to read adversaries under pressure.",
+        "fit": "synergy"
+      },
+      {
+        "abilityId": "made_truth",
+        "why": "Their three boosted crafts — Veil Stroke, Better Story, Wrong Reality — are all about making false things land as real; Made Truth is the logical apex of that orientation, constructing a working alternative reality rather than a sustained illusion, and fills the gap between their strong INFLUENCE/HARM and INFLUENCE/MOVE kit and a missing INFLUENCE/SHAPE that can create rather than only obscure.",
         "fit": "strength"
       },
       {
-        "abilityId": "calm_word",
-        "why": "This character has no de-escalation tool — they can misdirect, veil, and story their way through rooms, but when a moment tips toward violence they have nothing to pull it back. Calm Word fills that gap cleanly, and for someone this amorous and social it will come up constantly.",
-        "fit": "gap"
-      },
-      {
         "abilityId": "ordinary_face",
-        "why": "They run a deep illusion/influence kit (Misdirect, Falsecraft, Maintained Veil, False Target) but have no way to simply become the person a place wouldn't remark on — Ordinary Face is the missing entry-craft in that family, cheap at 1pt, and a natural reach for a cautious social operator who prefers not to be the most interesting person in the room.",
+        "why": "They have Maintained Veil and Veil Stroke for covering themselves in constructed unreality, but no cheap, low-cost way to simply become unremarkable — Ordinary Face is a 1pt craft that lets this highly social, misdirection-focused character walk into any space unquestioned before the bigger illusions ever need to deploy, closing a practical infiltration gap their current kit leaves open.",
         "fit": "gap"
       }
     ],
-    "note": "With exactly 2pt, the clearest path is Appetite-Sense alone (fulfilling the stated aspiration outright) — or a 1+1 split if Appetite-Sense can wait one more level. Either way, the aspiration should come first."
+    "note": "Appetite-Sense is essentially already earned — take it first; the rest of the picks sharpen the social-manipulation engine that defines how this character actually plays."
   },
   "worldEvents": [],
   "authorEdits": [

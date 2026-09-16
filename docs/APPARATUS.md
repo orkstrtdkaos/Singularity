@@ -10,7 +10,7 @@ node scripts/apparatus.mjs --md     # …as markdown for §5
 node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 ```
 
-**Last measured: 2026-09-16 · v2.0.39 · 105 files.**
+**Last measured: 2026-09-16 · v2.0.40 · 105 files.**
 
 ---
 
@@ -152,8 +152,8 @@ worthless.
 | `tests/breadth_currency_sweep` | ✅ GATE | 8 | SNG-260 §C+§D / SNG-261 §A |
 | `tests/endgame_scaling` | ✅ GATE | 5 | — |
 | `tests/dev_world` | ✅ GATE | 4 | CCODE-94: a DEV WORLD |
+| `tests/import_integrity` | ✅ GATE | 4 | SNG-353b |
 | `tests/world_drive_audit` | ✅ GATE | 4 | — |
-| `tests/import_integrity` | ✅ GATE | 3 | SNG-353b |
 | `tests/staged_crafts_check` | ✅ GATE | 3 | — |
 | `tests/parse_probe` | ✅ GATE | 1 | — |
 | `tests/playthrough_sim` | ✅ GATE | 1 | SNG-236: THE PLAYTHROUGH AUDITOR |

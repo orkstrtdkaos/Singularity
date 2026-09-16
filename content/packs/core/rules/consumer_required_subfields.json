@@ -212,7 +212,7 @@
      "enum": [
       "riffraff",
       "notable",
-      "regional",
+      "leader",
       "epic"
      ],
      "note": "the single most load-bearing creature field: it IS the fight's difficulty. Missing or off-vocab silently resolves to `notable` (threat 38), so a riffraff and an epic both fight as mid-tier. Because the fallback is silent, the ENUM is the real gate — see concrete.tier-in-vocab."

@@ -137,5 +137,24 @@ try {
 } catch (e) { parses = false; why = e.message; }
 check("353b: app.js parses — a syntax error there renders NOTHING and no engine test would see it", parses, why);
 
+// ⛔ CCODE-378 — A MERGE CONFLICT COMMITTED WITH ITS MARKERS IN. 6f9370fb3 (2026-09-16) carried `<<<<<<< HEAD` blocks into app.js,
+// engine/version.js, engine/worldtick.js and index.html. The check above named app.js ("Unexpected token '<<'"), which is the symptom
+// and one file of four: index.html is parsed by no test at all, and a marker in a content file or a doc would read as data. So every
+// tracked text file is scanned for the two unambiguous markers at the start of a line (a bare `=======` is also a Markdown heading rule,
+// so it is not one of them). Saves are skipped: they are the players' own writes, not code.
+{
+  const { execFileSync } = await import("node:child_process");
+  let hits = [], ran = true;
+  try {
+    hits = execFileSync("git", ["grep", "-n", "-I", "-E", "^(<{7} |>{7} )", "--", ".", ":!characters"],
+      { cwd: root, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).split(LF).filter(Boolean);
+  } catch (e) {
+    // git grep exits 1 when NOTHING matches — the passing case; anything else means the scan did not run
+    if (e?.status !== 1) { ran = false; hits = [String(e?.message || e).split(LF)[0]]; }
+  }
+  check(`CCODE-378: no tracked file carries a merge-conflict marker (${ran ? (hits.length ? hits.length + " — " + hits.slice(0, 4).join(" · ") : "none") : "the scan could not run: " + hits[0]})`,
+    ran && hits.length === 0, hits.slice(0, 8).join(" · "));
+}
+
 console.log(failures ? `\nIMPORT INTEGRITY: ${failures} failure(s)` : "\nImport integrity: all checks passed.");
 process.exit(failures ? 1 : 0);

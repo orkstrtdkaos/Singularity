@@ -27,9 +27,75 @@
    "mutual": "{W} and {L} met at {place} and stopped, both standing. It is not the first time, and nobody is betting on it any more.",
    "stranger": "{W} and {L} met at {place} and neither could break the other. They will both be thinking about it.",
    "_power": "{W} and {L} met at {place}; {power} was not enough, and neither was anything {l} had."
+  },
+  "strike": {
+   "_note": "⛔ SNG-596 / CCODE-364. A strike is a named sender going after a named target, and Erik's correction is the whole brief: 'don't just say came quietly — try to get the flavor of who was sent… was it an Umbral Assassin who used darkness, a radiant sniper, a marcher who tried a direct assault? how did they escape or win, did they have help, who and how?' ⛑ So every line here is built to carry {sWho} and {sHow} — who was sent and how they work — and to lose them cleanly in [brackets] when a minted figure has neither. ⛔ AND EVERY LINE MUST CARRY THE WORD 'strike', or 'came openly' for a crusade — §254 enforces it, and it is the point: the feed already carried landed strikes as ordinary duel lines, which is exactly why Erik could not find one.",
+   "quiet": {
+    "killed": [
+     "{T} is dead at {place}, and it was a strike[ — {sWho}][, {sHow}]. No warning, and no witness who will say so.",
+     "A quiet strike found {T} at {place}[ — {sWho}][, {sHow}]. No struggle, nothing taken[, and {S} has not been seen since].",
+     "{T} did not come back from {place}. It was a strike[, and {S} was sent][, {sWho}][, {sHow}] — that is all anyone can put together."
+    ],
+    "wounded": [
+     "A strike very nearly finished {T} at {place}[ — {sWho}][, {sHow}]. {t} is alive and is not walking yet.",
+     "{T} was hurt badly at {place} by a quiet strike from somebody who knew the work[ — {S}][, {sWho}][, {sHow}]."
+    ],
+    "checked": [
+     "A strike on {T} at {place} got close enough to be sure of it and no further[ — {S}][, {sWho}][, {sHow}]. {s} did not stay to try twice.",
+     "There was a strike on {T} at {place}[. {S} made it][, {sWho}][, {sHow}]. It did not land."
+    ],
+    "stopped": [
+     "A strike on {T} at {place} was stopped short of them[ — {S}][, {sWho}][, {sHow}]. {t} did not have to lift a hand.",
+     "The strike on {T} at {place} was over before it was properly started[ — {S}][, {sWho}][, {sHow}]."
+    ],
+    "stalemate": [
+     "{S} and {T} met at {place} without a word between them — a strike that became neither[, {sWho}][, {sHow}] — and both walked away.",
+     "Something happened to {T} at {place} and {t} will not discuss it. It was a strike[. {S} was there][, {sWho}][, {sHow}]."
+    ],
+    "guarded": [
+     "A strike on {T} at {place}[ — {S}][, {sWho}][, {sHow}] — and {G} stood in the way[, {gWho}][, {gHow}][, with {gPower}]. {s} got away, but not unseen.",
+     "The strike meant for {T} at {place} found {G} first[. {S} sent it][, {sWho}][, {sHow}][ — {G} was {gWho}][, {gHow}]. Somebody in the valley knows the face.",
+     "{G} was between {S} and {T} at {place} when the strike came[, {gHow}][, with {gPower}], which was not an accident[. {s} is {sWho}][, {sHow}], and left without finishing it."
+    ],
+    "turned": [
+     "A strike on {T} at {place} did not get there[. {S} was the hand][, {sWho}][, {sHow}]. Whoever stopped it has not said so.",
+     "The strike on {T} at {place} failed[ — {sWho}][, {sHow}]. {t} is alive, somebody else is the reason, and neither is naming the other."
+    ]
+   },
+   "crusade": {
+    "killed": [
+     "{S} came openly for {T} at {place}[ — {sWho}][, {sHow}] — and {T} is dead. Nobody is pretending it was anything else.",
+     "{S} declared the strike and carried it. {T} fell at {place}[, {sWho}][, {sHow}], in front of enough people that the telling will be the same everywhere."
+    ],
+    "wounded": [
+     "{S} came openly for {T} at {place}[, {sWho}][, {sHow}]. {t} lived. It was close, and everyone present saw how close.",
+     "{T} was put down at {place} by an open strike from {S}[, {sWho}][, {sHow}] and got back up. That is being talked about more than the attempt."
+    ],
+    "checked": [
+     "{S} came openly for {T} at {place}[ — {sWho}][, {sHow}] and was turned back in front of witnesses. That costs something.",
+     "{S} made the strike on {T} at {place} in the open[, {sWho}][, {sHow}] and did not carry it."
+    ],
+    "stopped": [
+     "{S} came openly for {T} at {place}[, {sWho}][, {sHow}] and was stopped before it was a fight. In the open, that is the expensive way to fail.",
+     "The declared strike on {T} at {place} ended early[ — {S}][, {sWho}][, {sHow}]."
+    ],
+    "stalemate": [
+     "{S} came openly for {T} at {place}[, {sWho}][, {sHow}] and they fought to nothing. Both are claiming it and neither is convincing.",
+     "The open strike on {T} at {place} ended where it started[ — {S}][, {sHow}]. The only thing settled is that it is not settled."
+    ],
+    "guarded": [
+     "{S} came openly for {T} over {arc} at {place}[ — {sWho}][, {sHow}] — and {G} stood in the way[, {gWho}][, {gHow}][, with {gPower}].",
+     "{S} declared the strike on {T} at {place}[, {sWho}][, {sHow}] and got {G} instead[, {gHow}][, with {gPower}]. It was short and it was public.",
+     "Everyone at {place} saw {G} put themselves between {S} and {T} when the open strike came[ — {gHow}][. {s} is {sWho}][, {sHow}]. Nobody is sure yet what that costs {g}."
+    ],
+    "turned": [
+     "{S} came openly for {T} at {place}[, {sWho}][, {sHow}] and was stopped. Whoever did the stopping is not taking credit.",
+     "The open strike on {T} at {place} failed[ — {S}][, {sWho}][, {sHow}], which is worse for {s} than losing quietly would have been."
+    ]
+   }
   }
  },
- "_placeholders": "{W} full winner name (first mention) · {w} short winner · {L} full loser · {l} short loser · {place} location DISPLAY NAME, never an id · {power} the ability's short description.\n⚠️ IF `place` IS NULL, DROP ' at {place}' RATHER THAN PRINTING 'at null'. If `power` is null use the non-`_power` variant. ⛔ NEVER PRINT A RAW ID — that is the 'the the_ceaseless' fault again.",
+ "_placeholders": "{W} full winner name (first mention) · {w} short winner · {L} full loser · {l} short loser · {place} location DISPLAY NAME, never an id · {power} the ability's short description.\n⚠️ IF `place` IS NULL, DROP ' at {place}' RATHER THAN PRINTING 'at null'. If `power` is null use the non-`_power` variant. ⛔ NEVER PRINT A RAW ID — that is the 'the the_ceaseless' fault again.\n⛑ SNG-596 STRIKE SLOTS: {S}{T}{G} sender/target/guard · {s}{t}{g} short forms · {sWho}{tWho}{gWho} 'a devourer of the Umbrals' · {sHow}{tHow}{gHow} the authored manner · {power}/{gPower} · {arc} lowercased mid-sentence. ⛔ [SQUARE BRACKETS] ARE DROPPED WHOLE when any slot inside them is empty — that is how a minted figure with no fighting style reads cleanly instead of trailing a comma.",
  "_pick": "⛔ CHOOSE BY RELATIONSHIP FIRST, THEN POWER. If the two are mutual rivals use `mutual`; else if either lists the other use `rival`; else `stranger`. ⚠️ Use `_power` in place of the chosen variant roughly one time in three when an abilityId exists — the power should feel like a detail the teller happened to know, not a stat line on every entry.",
  "fragments": {
   "_note": "⛔ THE VERBLESS LINES, AND WHY ONE TEMPLATE COULD NOT FIX THEM. Testing revealed the fragments come in TWO GRAMMATICAL FORMS and my single template broke on the second:\n   THIRD-PERSON VERB — 'pulls a novice back from dissolving', 'sells a secret that wasn't his'\n   GERUND/NOUN — 'learning a faster road', 'a daughter who thinks he is a clerk'\n⚠️ 'Overseer Grael WAS SEEN a daughter who thinks he is a clerk' is still not a sentence. ⛔ TWO TEMPLATES, CHOSEN BY THE FRAGMENT'S OWN SHAPE.",

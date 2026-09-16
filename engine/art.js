@@ -65,6 +65,20 @@ export function houseStyleFor(aesthetic = null) {
 
 export const IMAGE_STYLE = houseStyleFor(null);   // the default, for anything with no tradition to speak for it
 
+/** ⛔ CCODE-357 — A PICTURE THE CHARACTER MADE IS IN ITS OWN MEDIUM.
+ *
+ *  Erik, of Courtney: "she would like to spend her time in the game collecting herbs and painting at a cabin overlooking the
+ *  valley." Her character paints in watercolor. ⚠️ Every image the game makes is forced into ONE medium — "digital painting,
+ *  atmospheric concept art, painterly" (CCODE-179 kept the medium constant on purpose, so the game looks like one game) — and
+ *  that is right for the WORLD and wrong for a thing a person painted: her watercolor would come back as concept art.
+ *  ⛑ So the medium is replaced ONLY for artwork the character made, named by the GM beat that made it. Letters, spaces,
+ *  commas and hyphens only; clamped. Returns null for nothing usable, so the house style stands. PURE. */
+export function artworkStyle(medium) {
+  const m = String(medium ?? "").toLowerCase().replace(/[^a-z ,'-]/g, " ").replace(/\s+/g, " ").trim();
+  if (m.length < 3) return null;
+  return `${smartClamp(m, 60)}, hand-made artwork, visible texture of the medium, no text, no watermark`;
+}
+
 // CCODE-193 §2: module-private. It was exported and imported by app.js, which never used it — the
 // "live code, needless public surface" third of the importedNeverCalled list. Nothing outside reads it.
 const ART_MODES = ["off", "static", "generate"];
@@ -104,8 +118,8 @@ function pollinationsURL(prompt, { width = 1024, height = 320, seed = 42, style 
  *
  *  ⚠️ `raw` IS THE PRE-FLOOR LINE and `safe` is what the URL is built from. Compose before the floors,
  *  never after — the oldest law in this pipeline. */
-function mintURL(kind, { raw, safe, seed, record = null, field = null, ratingLevel = 2, isMinor = false, aesthetic = null }) {
-  const url = imageURLFor(kind, safe, seed, { aesthetic });
+function mintURL(kind, { raw, safe, seed, record = null, field = null, ratingLevel = 2, isMinor = false, aesthetic = null, medium = null }) {
+  const url = imageURLFor(kind, safe, seed, { aesthetic, medium });
   if (!url) return url;
   const already = _composedFor ? _composedFor(url) : null;
   if (already) return already;
@@ -708,10 +722,11 @@ export function assembleImagePrompt(kind, subject = {}, ctx = {}) {
 }
 
 /** Build the endpoint URL for a floors-sanitized prompt at a kind's size, seeded stably. Pure. */
-export function imageURLFor(kind, safePrompt, seedKey = "", { aesthetic = null } = {}) {
+export function imageURLFor(kind, safePrompt, seedKey = "", { aesthetic = null, medium = null } = {}) {
   const size = IMG_SIZES[kind] || IMG_SIZES.moment;
-  // CCODE-179: the wrapper follows the PEOPLE when we know them; the medium never moves.
-  return pollinationsURL(safePrompt, { ...size, seed: seedFrom(String(seedKey) || safePrompt), style: houseStyleFor(aesthetic) });
+  // CCODE-179: the wrapper follows the PEOPLE when we know them; the medium never moves —
+  // ⛔ CCODE-357: except for a picture a CHARACTER made, which is in the medium they made it in.
+  return pollinationsURL(safePrompt, { ...size, seed: seedFrom(String(seedKey) || safePrompt), style: artworkStyle(medium) || houseStyleFor(aesthetic) });
 }
 
 // ---------- SNG-035: persist-once (born-with-image) ----------
@@ -735,7 +750,7 @@ export function ensureImage(record, kind, { ratingLevel = 2, isMinor = null, see
   const safe = sanitizeImagePrompt(looked, { ratingLevel, isMinor: minor, kind }); // THE FLOORS run AFTER every addition
   const usedSeed = seedKey || likenessSeed(promptOpts.keeps || []) || record.id || record.name || raw;
   const url = mintURL(kind, { raw: looked, safe, seed: usedSeed, record, field: key, ratingLevel, isMinor: minor,
-                              aesthetic: promptOpts.aesthetic || null });
+                              aesthetic: promptOpts.aesthetic || null, medium: promptOpts.medium || null });
   record[key] = url;
   // ⛔ CCODE-193 — THE COMPOSER REACHES EVERY PICTURE, ONE BEAT LATE. Erik: "do this for every image
   // because i think it will be hugely valuable" — and it reached two paths out of fourteen, because

@@ -11,9 +11,9 @@
 //   becomes: { type: "encounter", encounterId, name }  → teeth: the SNG-236 hard-frame presents a defend-encounter
 //          | { type: "scene", who }                     → teeth: a real driven scene beat (the NPC arrives)
 
-import { smartClamp } from "./namematch.js"; // SNG-245: word-boundary clamp for the want/name in a hook (not a raw .slice)
+import { smartClamp, namesMatch } from "./namematch.js"; // SNG-245: word-boundary clamp for the want/name in a hook (not a raw .slice)
 
-export const PRESSURE_KINDS = ["villain-move", "npc-want", "arc-stir", "treasure-rumor", "threat-attack"];
+export const PRESSURE_KINDS = ["villain-move", "npc-want", "arc-stir", "treasure-rumor", "threat-attack", "invitation"];
 export const PRESSURE_CAP = 6; // registry:internal — the queue never hoards; keep only the most-urgent handful
 
 /** Ensure the queue array exists on a worldState (lazy — old saves predate it). Returns the array. */
@@ -79,6 +79,40 @@ export function npcWantPressures({ npcs = [], wantFor = () => null, bandOf = () 
       source: "npc-want", kind: "npc-want", subjectId: n.id, aimedAtPlayer: true, urgency,
       oneLineHook: `${n.name}, unseen for ${absent} days, has come looking for you — driven by an unmet want: ${smartClamp(String(want), 160)}. They arrive now, not content to keep waiting.`,
       becomes: { type: "scene", who: n.id }, addedDay: nowDay
+    });
+  }
+  return out;
+}
+
+// ---------- Producer: an invitation — a quest bound to THIS character brings its giver to the door (CCODE-357) ----------
+
+/** ⛔ CCODE-357 — AN INVITATION IS A PERSON AT THE DOOR.
+ *
+ *  Erik: "She likes spirituality - perhaps send someone who invites her to help attend a monastery and work as the healer
+ *  she is?"
+ *
+ *  ⚑ A quest BOUND to a character (`boundToCharacter` / `boundToPlayer`) surfaced as one line under "Available here" in a
+ *  quest log a new player may never open — nobody ever came. So its giver comes looking, through the SAME driven arrival
+ *  the queue already stages for a bonded NPC's want, and says it in person; taking it up stays the player's choice.
+ *
+ *  ⚠️ ONCE. An invitation a player heard and let pass is not nagged at them every few quiet turns: the caller says which
+ *  have been delivered (`delivered(id)`), and the quest itself stays in the log either way. Pure. */
+export function invitationPressures({ quests = [], character = null, nowDay = 0, nameOf = () => null, delivered = () => false } = {}) {
+  const out = [];
+  if (!character) return out;
+  const key = (id) => String(id ?? "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "").slice(0, 40);
+  const held = new Set((character.quests || []).map(q => key(q?.id)));
+  for (const def of quests || []) {
+    if (!def?.id || !def.giver) continue;
+    const mine = (def.boundToCharacter && character.name && namesMatch(character.name, def.boundToCharacter))
+      || (def.boundToPlayer && character.playerKey && character.playerKey === def.boundToPlayer);
+    if (!mine || held.has(key(def.id)) || delivered(def.id)) continue;
+    const who = nameOf(def.giver) || String(def.giver);
+    const what = smartClamp(String(def.premise || def.name || "").trim(), 220);
+    out.push({
+      source: "invitation", kind: "invitation", subjectId: def.id, aimedAtPlayer: true, urgency: 3,
+      oneLineHook: `${who} has come looking for ${character.name} with an invitation: ${what} They ask in person, warmly — whether to take it up is the player's choice, and saying no is a real answer.`,
+      becomes: { type: "scene", who: def.giver }, addedDay: nowDay,
     });
   }
   return out;

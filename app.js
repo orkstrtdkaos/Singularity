@@ -44,7 +44,7 @@ import { LIBRARY_INDEX, loreToHtml, libMdToHtml, circleRows } from "./engine/lib
 import { contributionsBy } from "./engine/canon.js";   // ⛔ SNG-584: who made the shared world — tallied since SNG-128, read by nobody until now   // SNG-538 §4: the Library's index and renderers — pure, gated by §181
 import { sourcesHere } from "./engine/substrate.js";   // ⛔ Erik 2026-09-12: the four sources and how well each answers HERE
 import { groundForDecl, groundTag, substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor, peoplePresentAt } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
-import { sceneImage, itemImage, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor, lookFor} from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
+import { sceneImage, itemImage, artworkStyle, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor, lookFor} from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
 import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, regionExtent, bendRoad, roadNetwork, clipToFrame } from "./engine/worldglobe.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, milesFor, worldPosForGenerated, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha } from "./engine/worldmap.js";
@@ -111,7 +111,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarrativeKind, canIncapacitate, resolvePacing, beatHours, deriveDangerLevel, eligibleEncountersFor, generatedCreatureEncounters, synthesizeDuelDef, synthesizeChallengeDef, synthesizeStandoffDef, synthesizePuzzleDef } from "./engine/random_encounters.js"; // SNG-225: mint/backfill a real dangerLevel so the encounter pool isn't starved; SNG-231: eligibleEncountersFor = the offerable pool the GM can invite
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "./engine/recurrence.js";
 import { isEventfulTurn, pressureTier, pressureDirective, drivenPressureDirective, roomForAnOffer, roomForATeacherOffer } from "./engine/pacing.js";
-import { ensurePressureQueue, enqueuePressure, pullTopPressure, npcWantPressures, threatAttackPressure } from "./engine/pressure.js"; // SNG-245: the pressure queue — the world DRIVES
+import { ensurePressureQueue, enqueuePressure, pullTopPressure, npcWantPressures, threatAttackPressure, invitationPressures } from "./engine/pressure.js"; // SNG-245: the pressure queue — the world DRIVES
 import { lethalOfferClamp, isLethalEncounter, sanitizeNewEncounter, encounterArrival, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps, contestSheetFor as engineContestSheetFor, withKind } from "./engine/encounters.js";
 // ⛔ CCODE-227 (Erik backlog 7, step 1): conditions.js was built, gated, shipped — and imported by NOTHING.
 // Six exports reachable only from smoke.mjs. A rest cleared nothing because the module that decides what a
@@ -146,7 +146,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.20";
+const APP_VERSION = "2.0.21";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1150,7 +1150,7 @@ function heroPlates(urls = null) {
  *  nothing gets the six plates of the world, and no screen can inherit the last one's. The gallery is read newest first. */
 let _bannerPlates = null;
 const BANNER_KINDS = {
-  events: ["moment", "battle", "discovery", "scene"],
+  events: ["moment", "artwork", "battle", "discovery", "scene"],
   people: ["npc", "figure", "portrait", "beast"],
   places: ["location"],
   holds: ["holding"],
@@ -6962,14 +6962,17 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   if (result.turn.imagePrompt && imagesEnabled() && sceneArtCount < 1) {
     try {
       const moment = { id: `moment-${character.id}-${Date.now().toString(36)}`, prompt: String(result.turn.imagePrompt).slice(0, 300) };
-      const url = ensureImage(moment, "moment", { ratingLevel: viewerRatingLevel(), isMinor: false, field: "image" });
+      // ⛔ CCODE-357: a picture the character MADE is drawn in its own medium, and kept as their artwork.
+      const medium357 = artworkStyle(result.turn.imageMedium) ? String(result.turn.imageMedium) : null;
+      const url = ensureImage(moment, "moment", { ratingLevel: viewerRatingLevel(), isMinor: false, field: "image", promptOpts: medium357 ? { medium: medium357 } : {} });
       if (url) {
         result.turn.momentArt = url;
         sceneArtCount++;
         // SNG-401 §1: a moment has no record to re-read, so its prompt IS its provenance — held in the
         // url-keyed lookup rather than a DOM attribute, because it is the GM's own words about a beat.
         notePromptFor(url, moment.prompt);
-        addGalleryImage(character, { kind: "moment", prompt: moment.prompt, url, caption: (result.turn.sceneSummary || "").slice(0, 90), worldDay: absoluteWorldDay() });
+        addGalleryImage(character, { kind: medium357 ? "artwork" : "moment", ...(medium357 ? { medium: medium357 } : {}), prompt: moment.prompt, url,
+          caption: medium357 ? `${character.name}'s ${medium357}` : (result.turn.sceneSummary || "").slice(0, 90), worldDay: absoluteWorldDay() });
         saveCharacter(character);
       }
     } catch (err) { console.warn("[art] moment art skipped:", err?.message); }
@@ -9559,6 +9562,14 @@ function runPressureProducers() {
   const pool = (() => { try { return eligibleEncountersFor(encounterTable(), loc, { cap: 8 }); } catch { return []; } })();
   const threat = threatAttackPressure({ pool, danger: Number(loc?.dangerLevel) || 0, hereId: here, nowDay, pacingMult, rng: Math.random });
   if (threat) enqueuePressure(queue, threat);
+
+  // Producer C — ⛔ CCODE-357: an INVITATION. A quest bound to this character brings its giver to the door, once.
+  const deliveredInv = character.worldState.invitationsDelivered || {};
+  for (const inv of invitationPressures({ quests: CONTENT.quests || [], character, nowDay,
+      nameOf: (id) => CONTENT.npcs?.[id]?.name || character.npcRegistry?.[id]?.name || null,
+      delivered: (id) => !!deliveredInv[id] })) {
+    enqueuePressure(queue, inv);
+  }
 }
 
 /** SNG-080 + SNG-245: the world must PUSH. Count quiet turns; past the threshold, hand the NEXT GM turn a
@@ -9592,6 +9603,8 @@ function maybeWorldPressure(turn, resolution) {
     } else {
       pendingPressure = drivenPressureDirective(entry.oneLineHook); // a driven scene beat (the NPC arrives, the want reaches out)
     }
+    // ⛔ CCODE-357: an invitation is said ONCE — the quest stays in the log, but nobody knocks again.
+    if (entry.kind === "invitation") { character.worldState.invitationsDelivered = { ...(character.worldState.invitationsDelivered || {}), [entry.subjectId]: readClock(character.clock).day }; }
     console.log(`[pressure] the world DRIVES: ${entry.kind} → ${entry.subjectId} (urgency ${entry.urgency})`);
     pressureStreak++; quietTurns = 0;
     return;

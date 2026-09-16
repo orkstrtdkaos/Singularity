@@ -20,7 +20,7 @@
 // ⛑ SO THE TABLE IS GENERATED FROM DISK, between markers, with `--check` for the ship. The PROSE around it is
 // untouched: which files are unread, and why that matters, is a judgement and stays hers. Only the numbers move.
 
-import { readFileSync, writeFileSync, readdirSync, statSync } from "node:fs";
+import { readFileSync, writeFileSync, readdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -47,7 +47,11 @@ function sizesOnDisk() {
         const base = e.name.replace(/\.json$/, "");
         // ⚠️ LARGEST WINS when a name appears twice in the tree: the table is an argument about WEIGHT, and
         // quietly measuring the smaller copy would understate exactly the thing it exists to show.
-        if (FILES.includes(base)) found[base] = Math.max(found[base] || 0, statSync(p).size);
+        // ⛔ CCODE-357 — MEASURED WITH LF LINE ENDINGS, NOT RAW DISK BYTES. A Windows checkout writes CRLF, so the same file is
+        // ~2.6% bigger on one machine than the other: every rebase on this one flipped the table (60.1 KB ↔ 61.7 KB), every push
+        // from an LF client flipped it back, and the pre-push ratchet blocked a ship over a line ending twice in one hour.
+        // The table is an argument about WEIGHT, and a carriage return is not weight.
+        if (FILES.includes(base)) found[base] = Math.max(found[base] || 0, Buffer.byteLength(readFileSync(p, "utf8").replace(/\r\n/g, "\n"), "utf8"));
       }
     }
   })(join(ROOT, "content"));

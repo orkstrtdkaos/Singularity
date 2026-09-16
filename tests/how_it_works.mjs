@@ -17848,6 +17848,78 @@ console.log("\n── §248 · the place is a title, and the ground says its num
     /level: levelWordFor\(factor\),/.test(SUB248) && /if \(factor >= 0\.45\) return "thin";/.test(SUB248));
 }
 
+
+// ⛔ CCODE-357 (Erik, 2026-09-16, of Courtney) — "collecting herbs and painting at a cabin overlooking the valley... let's make this
+// really engaging and beautiful for her. She likes spirituality - perhaps send someone who invites her to help attend a monastery
+// and work as the healer she is?"
+//
+// ⚑ MEASURED: a quest bound to a character surfaced as one line in a quest log nobody had to open — no one ever came; every
+// picture the game draws is forced into ONE medium ("digital painting, atmospheric concept art"), so her watercolor would come
+// back as concept art; and all three routes of her personal arc were saved as "[object Object]".
+console.log("\n── §249 · an invitation comes to the door, and a painting is a painting ──");
+{
+  const PR249 = await import("../engine/pressure.js");
+  const ART249 = await import("../engine/art.js");
+  const Q249 = await import("../engine/quests.js");
+  const PA249 = await import("../engine/personalArc.js");
+
+  /* ---- 1 · ⛔ AN INVITATION IS A PERSON AT THE DOOR — ONCE ---- */
+  const adel249 = { id: "c-adel", name: "Adelheid", playerKey: "pk-court", quests: [] };
+  const bound249 = { id: "the_mending_house", name: "The Mending House", giver: "sister_wren", boundToCharacter: "Adelheid",
+    premise: "The sisters of a hill house need a healer's hands through the spring sickness." };
+  const theirs249 = { ...bound249, id: "someone_elses", boundToCharacter: "Silas Weir" };
+  const nameOf249 = (id) => (id === "sister_wren" ? "Sister Wren" : null);
+  const inv249 = PR249.invitationPressures({ quests: [bound249, theirs249], character: adel249, nowDay: 4, nameOf: nameOf249 });
+  check("§249: ⛔ a quest BOUND to her brings its giver to find her — in person, aimed at her, as a driven scene",
+    inv249.length === 1 && inv249[0].kind === "invitation" && inv249[0].subjectId === "the_mending_house" && inv249[0].becomes?.type === "scene"
+    && inv249[0].becomes.who === "sister_wren" && /^Sister Wren has come looking for Adelheid with an invitation: The sisters of a hill house/.test(inv249[0].oneLineHook),
+    (inv249[0]?.oneLineHook || "(none)").slice(0, 110));
+  check("§249: …and the choice stays hers — the hook says no is a real answer",
+    /saying no is a real answer/.test(inv249[0]?.oneLineHook || ""));
+  check("§249: ⚠️ …never someone else's invitation, never one she has already taken up, and never TWICE",
+    PR249.invitationPressures({ quests: [theirs249], character: adel249, nameOf: nameOf249 }).length === 0
+    && PR249.invitationPressures({ quests: [bound249], character: { ...adel249, quests: [{ id: "the-mending-house" }] }, nameOf: nameOf249 }).length === 0
+    && PR249.invitationPressures({ quests: [bound249], character: adel249, nameOf: nameOf249, delivered: (id) => id === "the_mending_house" }).length === 0);
+  const q249 = [];
+  PR249.enqueuePressure(q249, inv249[0]);
+  // ⚠️ BEHAVIOUR, NOT THE LIST: the pressure module's list of kinds is read by nothing in play, and asserting on it here made it an export only a
+  // test can reach — the wiring audit's testOnlyExports ratchet caught that on the first run.
+  check("§249: …and the queue takes it, and pulls it like any other driven arrival",
+    q249.length === 1 && PR249.pullTopPressure(q249)?.kind === "invitation" && q249.length === 0);
+  const APP249 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§249: ⛔ the game produces it on the tick and marks it DELIVERED the moment it fires, so nobody knocks again",
+    /for \(const inv of invitationPressures\(\{ quests: CONTENT\.quests \|\| \[\], character, nowDay,/.test(APP249)
+    && /if \(entry\.kind === "invitation"\) \{ character\.worldState\.invitationsDelivered = /.test(APP249));
+
+  /* ---- 2 · ⛔ A PICTURE SHE MADE IS IN HER MEDIUM ---- */
+  const water249 = ART249.imageURLFor("moment", "a garden at dusk", "seed-249", { medium: "watercolor" });
+  const house249 = ART249.imageURLFor("moment", "a garden at dusk", "seed-249", {});
+  check("§249: ⛔ her watercolor is drawn as watercolor — and the world's own pictures keep the house medium",
+    /watercolor/.test(decodeURIComponent(water249)) && !/atmospheric concept art/.test(decodeURIComponent(water249))
+    && /atmospheric concept art/.test(decodeURIComponent(house249)));
+  check("§249: ⚠️ …and a medium with nothing usable in it changes nothing — the house style stands",
+    ART249.artworkStyle("12 $$ ##") === null && ART249.artworkStyle("") === null && ART249.artworkStyle("ink and wash").startsWith("ink and wash"));
+  const GM249 = rd("engine/gm.js");
+  const GMM249 = await import("../engine/gm.js");
+  check("§249: ⛔ the GM has the op and the rule that says when to use it, and the ask channel cannot paint",
+    /"imageMedium": "ONLY when that picture IS something the character made/.test(GM249) && /set "imageMedium" to its medium/.test(GM249)
+    && GMM249.SALVAGEABLE_OPS.includes("imageMedium") && !GMM249.ASK_OPS.includes("imageMedium"));
+  check("§249: …and the game mints it in that medium and keeps it in her gallery as HER artwork",
+    /promptOpts: medium357 \? \{ medium: medium357 \} : \{\}/.test(APP249) && /kind: medium357 \? "artwork" : "moment"/.test(APP249)
+    && /medium: promptOpts\.medium \|\| null/.test(rd("engine/art.js")));
+
+  /* ---- 3 · ⛔ THE ROUTES THAT WERE SAVED AS [object Object] ---- */
+  const arc249 = PA249.sanitizePersonalArc({ name: "The Root Remembers", premise: "p", stakes: "s",
+    stages: [{ objective: "o" }], routes: { preserve: { text: "keep the old remedies alive" }, break: "cut it and replant", braid: { nothing: 3 } } },
+    { name: "Adelheid", playerKey: "pk", origin: "harmonic", domains: { primary: "harmonic" } }, {});
+  check("§249: ⛔ a route that comes back as an object keeps its WORDS, and one with no words is not written at all",
+    arc249.routes?.preserve === "keep the old remedies alive" && arc249.routes?.break === "cut it and replant" && !("braid" in (arc249.routes || {})),
+    JSON.stringify(arc249.routes));
+  const saved249 = Q249.routesForCharacter({ routes: { preserve: "[object Object]", break: "[object Object]", tend: "tend the sick" } }, { domains: { primary: "tend" } });
+  check("§249: ⚠️ …and the three already SAVED that way on her arc are dropped at the reader, never handed to the GM as nonsense",
+    saved249.length === 1 && saved249[0].text === "tend the sick", JSON.stringify(saved249));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

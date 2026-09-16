@@ -1063,7 +1063,12 @@ export function routesForCharacter(quest, character) {
   const domains = [character?.domains?.primary, character?.domains?.secondary, character?.domains?.tertiary].filter(Boolean);
   const routes = quest.routes || {};
   const open = [], other = [];
-  for (const [trad, text] of Object.entries(routes)) (domains.includes(trad) ? open : other).push({ trad, text, open: domains.includes(trad) });
+  // ⚠️ CCODE-357: a route already SAVED as "[object Object]" (the personal-arc writer's old String(v)) is not a route — it is
+  // dropped here rather than handed to the GM or the player as three identical nonsense strings.
+  for (const [trad, text] of Object.entries(routes)) {
+    if (typeof text !== "string" || text.trim() === "[object Object]") continue;
+    (domains.includes(trad) ? open : other).push({ trad, text, open: domains.includes(trad) });
+  }
   return [...open, ...other];
 }
 

@@ -154,7 +154,10 @@ export function sanitizePersonalArc(raw, character, ctx = {}) {
   });
   const routes = {};
   // SNG-343 — ⛔ NO CAP, same reason: a route is player-facing prose and this cut it mid-word into the save.
-  if (raw.routes && typeof raw.routes === "object") for (const [k, v] of Object.entries(raw.routes).slice(0, 3)) routes[slug(k) || k] = String(v);
+  // ⛔ CCODE-357: A ROUTE CAN COME BACK AS AN OBJECT, and `String(v)` wrote "[object Object]" into Adelheid's arc — all three of
+  // them. The words are taken from the object; a route with no words in it is not written at all.
+  const routeText = (v) => typeof v === "string" ? v : (v && typeof v === "object" ? (v.text || v.description || v.approach || v.route || Object.values(v).find(x => typeof x === "string") || "") : "");
+  if (raw.routes && typeof raw.routes === "object") for (const [k, v] of Object.entries(raw.routes).slice(0, 3)) { const t = String(routeText(v)).trim(); if (t) routes[slug(k) || k] = t; }
   if (!Object.keys(routes).length && s.primary) routes[s.primary] = "walk it as your people would";
   const legend = raw.legend && (raw.legend.name || typeof raw.legend === "string")
     ? { name: String(raw.legend.name || raw.legend).slice(0, 60), role: String(raw.legend.role || "the force your story is about").slice(0, 120) } : null;

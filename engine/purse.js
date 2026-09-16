@@ -188,6 +188,20 @@ export function convert(amountIn, fromCur, toCur, { economy, spread = null, at =
     bite: Number((raw / (1 - spr) - raw).toFixed(2)) });
 }
 
+/** ⛔ CCODE-374 (SNG-597 §4) — HOW WEALTHY, IN WORDS, BESIDE THE NUMBER. Erik: "I want the wealth level to show on the player's purse
+ *  area — I have no idea how wealthy Silas or anyone is." Aevi authored `purseBands` against what money actually buys here
+ *  (`worthBands` and hold upkeep), and ruled the shape: "The band is a label beside 1,436, never instead of it." The highest rung
+ *  the total in crystal reaches; null when the ladder is not authored, never a guessed one. */
+export function purseBand(totalInCrystal, economy) {
+  const bands = (Array.isArray(economy?.purseBands) ? economy.purseBands : []).filter(b => b && Number.isFinite(Number(b.at)) && b.name)
+    .slice().sort((a, b) => Number(a.at) - Number(b.at));
+  if (!bands.length) return null;
+  const t = Math.max(0, Number(totalInCrystal) || 0);
+  let hit = null;
+  for (const b of bands) if (t >= Number(b.at)) hit = b;
+  return hit ? { name: String(hit.name), of: hit.of ? String(hit.of) : "", at: Number(hit.at) } : null;
+}
+
 /** A one-line purse readout. ⚠️ Erik's visibility rule: the interface says the number; the trader says
  *  "ten for those, and I'm being generous". This is the interface half. */
 export function purseLine(purse, { regionId = null } = {}) {

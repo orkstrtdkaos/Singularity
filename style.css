@@ -1792,6 +1792,8 @@ img[data-lightbox] { cursor: zoom-in; }
 /* ⛔ ERIK 2026-09-12 — THE PURSE NAMES EVERY CURRENCY, not only the ones you hold: a purse that lists what you have cannot teach
    a player that marks exist, or that the scrip in their pocket belongs to another Reach. Zero balances are dim, never missing. */
 .purse-table { margin-top: 6px; display: grid; grid-template-columns: minmax(90px, auto) 3.5em 1fr; gap: 1px 10px; align-items: baseline; font-variant-numeric: tabular-nums; }
+/* ⛔ CCODE-374 — the wealth level, a word beside the number */
+.purse-band { font-family: var(--font-ui); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); cursor: help; }
 .purse-row { display: contents; cursor: help; }
 .purse-cur { color: var(--ink); }
 .purse-n { text-align: right; color: var(--accent); }

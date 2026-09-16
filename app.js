@@ -125,7 +125,7 @@ import { clearOnRest, applyCondition, activeConditions } from "./engine/conditio
 // "show the purse as a PERMANENT ROW, show a price as a number when a trade is on the table… The trader
 // SAYS 'ten for those, and I'm being generous'; the interface SAYS 10. Both." A purse the player cannot
 // see is the same failure as one that does not exist.
-import { ensurePurse, purseLine, worthOf, applyExchangeOps } from "./engine/purse.js";
+import { ensurePurse, purseLine, worthOf, applyExchangeOps, purseBand } from "./engine/purse.js";
 import { bargainOutcome } from "./engine/economy.js";
 import { capabilityMenu, resolveTier } from "./engine/capabilities.js";
 // ⛔ CCODE-239 — PROJECTS TICK. `engine/projects.js` shipped green with all six exports reachable only
@@ -150,7 +150,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.35";
+const APP_VERSION = "2.0.36";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -12857,7 +12857,11 @@ function renderCharacterScreen() {
       }), { made: 0, sells: 0, fees: 0, upkeep: 0, net: 0, store: 0 });
       const cars = caravansOf(character).filter(c => c && !c.arrivedDay);
       return `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Purse</h3>
-        <div class="hint" style="font-variant-numeric:tabular-nums">${esc(line)}${w.totalInCrystal ? ` · <strong>${w.totalInCrystal.toFixed(1)}</strong> in crystal` : ""}</div>
+        <div class="hint" style="font-variant-numeric:tabular-nums">${esc(line)}${w.totalInCrystal ? ` · <strong>${w.totalInCrystal.toFixed(1)}</strong> in crystal` : ""}${(() => {
+          // ⛔ CCODE-374 — the wealth level BESIDE the number, never instead of it (Aevi's ruling on Erik's "I have no idea how wealthy Silas is")
+          const band = purseBand(w.totalInCrystal, CONTENT.rules?.economy);
+          return band ? ` · <span class="purse-band" title="${esc(band.of)}">${esc(band.name)}</span>` : "";
+        })()}</div>
         <div class="purse-table">${curDefs.map(curRow).join("")}</div>
         ${estate.length ? `<div class="purse-trade">
           <div class="craft-tier-label">What your holdings are doing</div>

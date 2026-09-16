@@ -18628,6 +18628,24 @@ console.log("\n── §259 · a strike on the player is a scene, and the one se
     && /if \(kind === "crusade"\) news\.push\(\{ text: `\$\{sender\.f\.name \|\| "Someone"\} has declared against you over/.test(W259src));
 }
 
+// ⛔ CCODE-374 (SNG-597 §4) — Erik: "I want the wealth level to show on the player's purse area — I have no idea how wealthy Silas or anyone
+// is." Aevi authored `purseBands` and ruled: "The band is a label beside 1,436, never instead of it."
+console.log("\n── §260 · how wealthy, in words, beside the number ──");
+{
+  const PU260 = await import("../engine/purse.js");
+  const { loadContentHeadless: lch260 } = await import("./headless_content.mjs");
+  const C260 = await lch260();
+  const eco = C260.rules?.economy;
+  const at = (n) => PU260.purseBand(n, eco)?.name;
+  check("§260: ⛔ the authored ladder reads the total in crystal — Silas's 1,436 is moneyed; nothing at all is 'nothing on you'",
+    at(0) === "nothing on you" && at(1) === "hand to mouth" && at(14.9) === "hand to mouth" && at(15) === "provided for"
+    && at(1436) === "moneyed" && at(5000) === "rich" && PU260.purseBand(1436, eco).of.length > 0);
+  check("§260: …and with no ladder authored there is no band — never a guessed one", PU260.purseBand(1436, {}) === null && PU260.purseBand(1436, null) === null);
+  const A260 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§260: ⛔ the band sits BESIDE the number on the purse row — the number stays, precise",
+    /<strong>\$\{w\.totalInCrystal\.toFixed\(1\)\}<\/strong> in crystal` : ""\}\$\{\(\(\) => \{[\s\S]{0,260}const band = purseBand\(w\.totalInCrystal, CONTENT\.rules\?\.economy\);[\s\S]{0,120}<span class="purse-band" title="\$\{esc\(band\.of\)\}">\$\{esc\(band\.name\)\}<\/span>/.test(A260));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

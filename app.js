@@ -88,9 +88,10 @@ import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent
 import { activeArcEffects, craftCostNote, encounterBias, effectsInPlainWords, npcMoodLines, travelCostFactor } from "./engine/arceffects.js";   // SNG-273: an advanced arc is something you FEEL
 import { knownIndex, whoIs, figureArtRecord } from "./engine/whois.js";   // SNG-299: who is that, and where do I read more
 import { worldTabHtml } from "./engine/worldtab.js";   // SNG-276: the tab's markup, testable
-import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, syncTravelers, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter, arcStageNow, worldRoster, NEWS_SECTIONS, pushCanonLook} from "./engine/worldtick.js";
+import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, syncTravelers, syncInvitations, sendInvitation, answerInvitation, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter, arcStageNow, worldRoster, NEWS_SECTIONS, pushCanonLook} from "./engine/worldtick.js";
 import { noteWorldMovedOnShown } from "./engine/worldevents.js";
 import { travelersHere, travelerHereLine, whereOf } from "./engine/travelers.js";   // CCODE-359: another traveler is here   // CCODE-354: the world moved on, counted by beats
+import { makeInvitation, incomingInvitations, sentInvitations, joinBandLocally, bandPhrase } from "./engine/invitations.js";   // CCODE-360: an invitation carried by someone you both know
 import { runWakeGeneration } from "./engine/wake.js"; // SNG-204 Phase 2: open wakes generate the next thread
 import { addAssignment, delegationRefusal, activeDelegates, MISSION_KINDS, MISSION_KIND_IDS, canSendOn, sayFamilies } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
 import { setArcFate } from "./engine/latentarcs.js"; // SNG-191 §7: the player closing a surfaced arc (the handled/resolved fate)
@@ -147,7 +148,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.23";
+const APP_VERSION = "2.0.24";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -719,6 +720,7 @@ let lastPlayerAction = null;     // the last choice the player took
 let sceneGenCount = 0;   // SNG-BATCH-9: generative-mint counter for this scene (the governor cap)
 // ⛔ SNG-595: the travelers index and the WHOLE ledger, refreshed on the tick — the reader keyed by PERSON reads these.
 let sharedTravelers = { index: null, ledger: [] };
+let sharedInvites = null;   // ⛔ CCODE-360: world/invitations.json as of the last tick
 let sharedCanonView = []; // SNG-BATCH-9 Phase 3: this viewer's rating-lensed slice of shared canon
 // SNG-250 §7b: creatures OTHER players have grown, snapshotted from shared canon at a safe seam (never
 // mid-encounter — see hydrateCanonIntoContent). One valley, one bestiary.
@@ -5529,6 +5531,8 @@ async function maybeTick() {
   // keeps the last good copy — a GM that knew who Silas was a minute ago must not forget him on a flaky network.
   try {
     const tv = await syncTravelers({ character, profile, locations: CONTENT.locations });   // CCODE-359: and where they are
+    // ⛔ CCODE-360: invitations — what has arrived for this character, and any answer come back to one they sent.
+    try { const iv = await syncInvitations({ character }); if (iv.synced) sharedInvites = iv.store; } catch (err) { console.warn("[invitations] tick skipped:", err?.message); }
     if (tv.synced) sharedTravelers = { index: tv.index || sharedTravelers.index, ledger: Array.isArray(tv.ledger) ? tv.ledger : sharedTravelers.ledger };
   } catch (err) { console.warn("[travelers] tick skipped:", err?.message); }
   // SNG-201: publish first-finder braids + adopt any the world found first; refresh the recipe cache.
@@ -6629,6 +6633,7 @@ function gmEnv(extra = {}) {
       fullCatalog, FN_INDEX: () => FN_INDEX, activeEnc, listAvailableEncounters,
       masteryReadyForGM, ratingLineForGM, maybeLegendDetail, sharedCanonForGM,
       travelersIndex: () => sharedTravelers.index, sharedLedger: () => sharedTravelers.ledger, sharedCanonView: () => sharedCanonView,   // SNG-595
+      invitationsStore: () => sharedInvites,   // CCODE-360
       isPlaceKnown: (id) => isPlaceKnown(character, id, CONTENT.locations)   // SNG-176: recall only what the character KNOWS
     },
     ...extra
@@ -13853,6 +13858,58 @@ function arcEffectsNow() {
  *  ⛔ NOBODY MAY BE SENT WHO IS IN THE PARTY TODAY — "not a rule about consent, a rule about physics. They are
  *  here." ⛑ So it is ONE GESTURE: sending someone at your side parts them from the company first, and the
  *  panel SAYS SO rather than refusing. */
+/** ⛔ CCODE-360 — INVITE A FELLOW TRAVELER, THROUGH SOMEONE IN THIS BAND.
+ *  Erik: "I would like the opportunity to invite her to my Band of the Fell Pell - probably through mutual connections when I
+ *  recruit." ⚠️ THE CARRIER IS CHOSEN HERE AND KNOWN THERE: this device can see who is in the band, and only her own save can say
+ *  whether she knows them — so the note says plainly that it waits until she has met the one who carries it. */
+function showInvitePicker(unitId) {
+  document.getElementById("help-pop")?.remove();
+  const day = absoluteWorldDay();
+  const unit = unitsOf(character).find(u => u.id === unitId);
+  if (!unit) return;
+  const carriers = [...atSideRows(character, { content: CONTENT, worldDay: day }), ...poolRows(character, { content: CONTENT, worldDay: day })]
+    .filter(r => r.unitId === unitId && r.kind === "person" && r.id);
+  const already = new Set([...unit.travelers.map(t => t.characterId),
+    ...sentInvitations(sharedInvites, character).filter(i => i.bandId === unitId && i.answer !== "declined").map(i => i.toCharacterId)]);
+  const travelers = Object.values(sharedTravelers.index?.travelers || {})
+    .filter(t => t?.id && t.id !== character.id && !already.has(t.id))
+    .sort((a, b) => String(a.name).localeCompare(String(b.name)));
+  const pop = document.createElement("div");
+  pop.id = "help-pop"; pop.className = "help-overlay";
+  pop.innerHTML = `<div class="help-card" role="dialog" aria-label="Invite a fellow traveler" style="max-height:min(86vh,720px); overflow-y:auto">
+    <div class="whois-head">Invite a fellow traveler into ${esc(bandPhrase(unit.name))}</div>
+    ${!travelers.length ? `<div class="insight">No other traveler to ask — everyone the shared world knows is already in it, already asked, or not there yet.</div>`
+      : !carriers.length ? `<div class="insight">Nobody in ${esc(bandPhrase(unit.name))} can carry word — a band of hands has no one to send.</div>`
+      : `<label class="hint" for="inv-to">Who</label>
+      <select id="inv-to" style="width:100%;margin-bottom:8px">${travelers.map(t => `<option value="${esc(t.id)}">${esc(t.name)} — level ${esc(String(t.level || 1))}${t.where?.settlementName ? `, last in ${esc(t.where.settlementName)}` : ""}</option>`).join("")}</select>
+      <label class="hint" for="inv-carrier">Carried by</label>
+      <select id="inv-carrier" style="width:100%;margin-bottom:8px">${carriers.map(r => `<option value="${esc(r.id)}">${esc(r.name)}</option>`).join("")}</select>
+      <label class="hint" for="inv-line">In your words (optional)</label>
+      <textarea id="inv-line" rows="3" maxlength="280" style="width:100%;box-sizing:border-box" placeholder="What ${esc(character.name)} would want said"></textarea>
+      <p class="hint">It reaches them through the one who carries it — if they have never met that person, it waits until they do. They answer yes or no; silence is not an answer.</p>`}
+    <div class="help-foot">${travelers.length && carriers.length ? `<button class="btn" id="inv-send">Send word</button>` : ""}<button class="btn secondary" id="help-close">Close</button></div>
+  </div>`;
+  document.body.appendChild(pop);
+  const close = () => pop.remove();
+  pop.addEventListener("click", ev => { if (ev.target === pop) close(); });
+  document.getElementById("help-close").onclick = close;
+  const send = document.getElementById("inv-send");
+  if (send) send.onclick = async () => {
+    const to = travelers.find(t => t.id === document.getElementById("inv-to").value);
+    const carrierRow = carriers.find(r => r.id === document.getElementById("inv-carrier").value);
+    const inv = makeInvitation({ from: { id: character.id, name: character.name, playerKey: profile?.playerKey || null },
+      band: { id: unit.id, name: unit.name }, to, carrier: { id: carrierRow?.id, name: carrierRow?.name },
+      worldDay: day, line: document.getElementById("inv-line").value });
+    if (!inv) return;
+    send.disabled = true; send.textContent = "Sending…";
+    try { sharedInvites = await sendInvitation(inv) || sharedInvites; }
+    catch (err) { send.disabled = false; send.textContent = "Send word"; alert(syncErrorMessage("The invitation did not go")); return; }
+    close();
+    renderBandsTab();
+    alert(`${inv.carrierName} will carry word to ${inv.toName}.`);
+  };
+}
+
 function showErrandPicker(npcId) {
   document.getElementById("help-pop")?.remove();
   const ladder = CONTENT.rules.subAttributeLadder;
@@ -13974,6 +14031,9 @@ function renderBandsTab() {
           ? `<div class="hint">${esc(unitLine(u))}</div>`
           : `<div><strong>${esc(u.name)}</strong> <span class="hint">— ${esc(unitLine(u))}</span></div>`}
         ${[...here.filter(r => r.unitId === u.id), ...pool.filter(r => r.unitId === u.id)].map(rowFor).join("") || `<div class="hint">nobody stands in it</div>`}
+        ${u.travelers.map(t => `<div class="codex-f" style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap"><strong style="min-width:130px">${esc(t.name)}</strong><span class="hint">another traveler, who chose to join${t.via ? ` — word came through ${esc(t.via)}` : ""}</span></div>`).join("")}
+        ${sentInvitations(sharedInvites, character).filter(i => i.bandId === u.id && i.answer !== "accepted").map(i => `<div class="codex-f hint">Word sent to ${esc(i.toName)} through ${esc(i.carrierName)} — ${i.answer === "declined" ? "the answer came back: not now" : "no answer yet"}</div>`).join("")}
+        ${syncEnabled() ? `<div class="opt-row" style="margin-top:6px"><button class="opt" data-band-invite="${esc(u.id)}" title="Send word to another player's character through someone in this band">Invite a fellow traveler…</button></div>` : ""}
       </div>`).join("") : `<p class="hint">Nobody has thrown in with you yet. A band is raised in play — and someone who has sworn to you stands in it whether or not they walk at your side.</p>`}
     </div>
     ${units.length ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">At your side</h3>
@@ -13983,6 +14043,9 @@ function renderBandsTab() {
         ${side.length >= places ? `<span class="hint" style="color:var(--warn,#e0b25a)">full</span>` : ""}
         <span class="hint" style="width:100%">Three by level ten, six not long after. ${here.length ? esc(here.map(r => r.name).join(" · ")) + (here.length === 1 ? " walks" : " walk") + " with you" : "None of your sworn walk with you today"}.${side.length > here.length ? ` ${side.length - here.length} more at your side ${side.length - here.length === 1 ? "stands" : "stand"} in no band.` : ""}</span></div>
       <p class="hint">Sending someone back does not unswear them. They are in the band because they threw in with you; being at your side is a posture, and it is the only half this screen changes.</p></div>` : ""}
+    ${(character.bandsJoined || []).length ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Bands you chose to join</h3>
+      ${character.bandsJoined.map(bj => `<div class="codex-f"><strong>${esc(bandPhrase(bj.bandName, { capital: true }))}</strong> <span class="hint">— led by ${esc(bj.leaderName)}, another traveler${bj.via ? `; the word came through ${esc(bj.via)}` : ""}</span></div>`).join("")}
+      <p class="hint">A member, not a subordinate: nobody in it can command you, and you do not speak for them.</p></div>` : ""}
     <button class="btn secondary" id="cs-back" style="margin-top:10px">Back</button>
   </div>`);
   wireCharacterTabs();
@@ -14001,6 +14064,7 @@ function renderBandsTab() {
     saveCharacter(character); renderBandsTab();
   };
   for (const b of app.querySelectorAll("[data-band-send]")) b.onclick = () => showErrandPicker(b.dataset.bandSend);
+  for (const b of app.querySelectorAll("[data-band-invite]")) b.onclick = () => showInvitePicker(b.dataset.bandInvite);   // CCODE-360
   const back = document.getElementById("cs-back"); if (back) back.onclick = () => renderCharacterScreen();
 }
 
@@ -17111,6 +17175,12 @@ function renderPlay(turn, opts = {}) {
   // Teva reached the registry with the right age and `company: []`, because the seat was offered into a void.
   // ⚠️ PROPOSING IS THE RIGHT DESIGN — who walks beside you is the player's call, the same rule travel has — so this
   // renders the offer rather than forcing the seat. Same one-tap shape as the arrival above.
+  // ⛔ CCODE-360 — AN INVITATION HAS ARRIVED, carried by someone this character knows. Her choice, one tap, either way.
+  for (const inv of incomingInvitations(sharedInvites, character).slice(0, 2)) {
+    main += `<div class="arrive-banner invite-banner"><strong>${esc(inv.carrierName)}</strong> carries word from <strong>${esc(inv.fromName)}</strong> — another traveler — who would welcome you into <em>${esc(bandPhrase(inv.bandName))}</em>.${inv.line ? ` <span class="hint">"${esc(inv.line)}"</span>` : ""} `
+      + `<button class="btn arrive-btn" data-invite-yes="${esc(inv.id)}">Accept</button> `
+      + `<button class="btn secondary" data-invite-no="${esc(inv.id)}">Decline</button></div>`;
+  }
   if (character?.pendingCompanyOffers?.length) {
     for (const off of character.pendingCompanyOffers.slice(0, 3)) {
       const who = esc(off.name || off.npcId);
@@ -17452,6 +17522,21 @@ function renderPlay(turn, opts = {}) {
     character.pendingCompanyOffers = (character.pendingCompanyOffers || []).filter(o => o.npcId !== id);
     if (!got) { alert("There is no place at your side for them today — rapport is what widens that."); }
     saveCharacter(character); renderPlay(character.activeScene?.lastTurn, {});
+  };
+  // ⛔ CCODE-360: her answer goes to the shared file first; a yes is only recorded on her save once it has gone.
+  for (const b of document.querySelectorAll("[data-invite-yes], [data-invite-no]")) b.onclick = async () => {
+    const id = b.dataset.inviteYes || b.dataset.inviteNo;
+    const answer = b.dataset.inviteYes ? "accepted" : "declined";
+    const inv = incomingInvitations(sharedInvites, character).find(i => i.id === id);
+    if (!inv) return;
+    b.disabled = true;
+    try { sharedInvites = await answerInvitation(id, answer, character) || sharedInvites; }
+    catch (err) { alert(syncErrorMessage("Your answer did not go")); b.disabled = false; return; }
+    if (answer === "accepted") joinBandLocally(character, inv, { worldDay: absoluteWorldDay() });
+    saveCharacter(character);
+    renderPlay(character.activeScene?.lastTurn || null, { aside: answer === "accepted"
+      ? `You send word back through ${inv.carrierName}: yes. You are one of ${bandPhrase(inv.bandName)} now.`
+      : `You send word back through ${inv.carrierName}: not now.` });
   };
   for (const b of document.querySelectorAll("[data-seat-no]")) b.onclick = () => {
     const id = b.getAttribute("data-seat-no");

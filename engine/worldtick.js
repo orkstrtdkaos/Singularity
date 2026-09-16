@@ -40,6 +40,7 @@ import { generatedRecords } from "./generate.js";
 import { syncEnabled, fetchRepoJSON, fetchLedgerMonths, fetchLedgerAll, pushMergedFile } from "./sync.js";   // CCODE-354: no owned-file writes left here — the region file is shared
 import { travelerCard, cardChanged, mergeTravelerCard, ledgerMonthsSince, whereOf, meetKey } from "./travelers.js";   // SNG-595: a fellow traveler is a person the world has a record of
 import { stampEventChange, mergeEventStages, mergeQuestOutcomes, actorOf, questKey } from "./worldevents.js";   // CCODE-354: a crisis another traveler answered reads as answered
+import { INVITES_PATH, mergeInvitation, answerInto, applyAnswers } from "./invitations.js";   // CCODE-360: an invitation carried by someone you both know
 import { decayWakes, wakeArcPush } from "./wake.js"; // SNG-204: wakes decay on the tick + lean on connected arcs
 import { enterDeathState, deepenDeaths, deathDepth, isRetrievable, resolveRetrieval } from "./death.js"; // SNG-209: a killed figure ENTERS the death state; the clock sinks untended deaths toward sealed
 import { absoluteWorldDay, worldDayAt, worldCount, readClock } from "./worldtime.js";
@@ -1071,6 +1072,45 @@ export async function syncTravelers({ character, profile = null, now = new Date(
   try { ledger = await fetchLedgerAll({ now, closed: closedLedgerMonths }); }
   catch (err) { console.warn("[travelers] ledger read skipped:", err?.message); }
   return { synced: true, index, ledger };
+}
+
+// ---------- CCODE-360: invitations between travelers ----------
+
+/** ⛔ CCODE-360 — READ THE INVITATIONS, AND APPLY ANY ANSWER THAT HAS COME BACK TO THIS LEADER. Best-effort, never throws;
+ *  the store is returned so the caller can show what has arrived. Answers become this character's news, once each. */
+export async function syncInvitations({ character } = {}) {
+  if (!syncEnabled() || !character?.id) return { synced: false, store: null };
+  try {
+    const store = await fetchRepoJSON(INVITES_PATH);
+    const wd = (() => { try { return absoluteWorldDay(); } catch { return null; } })();
+    const lines = applyAnswers(character, store, { worldDay: wd });
+    const ws = character.worldState;
+    if (lines.length && ws) {
+      const stamped = lines.map(text => stampNews({ text, worldDay: wd }, { day: ws.lastTickDay, worldDay: wd, section: "elsewhere" }));
+      ws.news = [...(ws.news || []), ...stamped].slice(-NEWS_CAP);
+      ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
+    }
+    return { synced: true, store, news: lines };
+  } catch (err) {
+    console.warn("[invitations] read skipped:", err?.message);
+    return { synced: false, store: null };
+  }
+}
+
+/** Send one (merged — Law 7). Throws on failure so the sender is told it did not go. */
+export async function sendInvitation(inv) {
+  if (!syncEnabled()) throw new Error("shared-world sync isn't set up");
+  let merged = null;
+  await pushMergedFile(INVITES_PATH, (remote) => (merged = mergeInvitation(remote, inv)), `invitation: ${inv.fromName} → ${inv.toName} (${inv.bandName})`);
+  return merged;
+}
+
+/** Answer one — only the addressee's answer lands, and only once. Throws on failure. */
+export async function answerInvitation(id, answer, character) {
+  if (!syncEnabled()) throw new Error("shared-world sync isn't set up");
+  let merged = null;
+  await pushMergedFile(INVITES_PATH, (remote) => (merged = answerInto(remote, id, answer, { byCharacterId: character?.id })), `invitation answered: ${character?.name} — ${answer}`);
+  return merged;
 }
 
 // ---------- SNG-BATCH-9 Phase 3: shared-world promotion + rating-lens ----------

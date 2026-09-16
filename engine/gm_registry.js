@@ -42,6 +42,7 @@ import { loreForLocation, eventsForGM, traditionMotivationsForGM } from "./state
 import { buildRegionView, newsForGM, worldArcsForGM, collapseLedgerEvents } from "./worldtick.js";
 import { travelersForGM, travelersHereForGM, whereOf } from "./travelers.js";   // SNG-595: a name that belongs to another player · CCODE-359: and who is here
 import { worldMovedOnForGM } from "./worldevents.js";   // CCODE-354: the world moved on while this character believed otherwise
+import { invitationsForGM, bandsJoinedForGM } from "./invitations.js";   // CCODE-360: an invitation carried by someone you both know
 import { playerWishesForGM } from "./playerprofile.js";   // CCODE-355: what this player wants from the game
 import { SEXUAL_MARKERS, HARD_INTENSITY_MARKERS } from "./canon.js";   // SNG-595: the family floor, for rows with no rating
 import { isMinorProfile } from "./playerprofile.js";
@@ -586,6 +587,14 @@ export const GM_CONTEXT = [
   { key: "worldMovedOnDetail", builder: "worldevents.worldMovedOnForGM (CCODE-354)", carries: ["a crisis another traveler answered, for the first beats after this world learns it"],
     reachedBy: "always (empty unless an answered event this character did not make is still within its beats)", spec: "CCODE-354", views: ["turn", "ask"],
     build: (env) => worldMovedOnForGM(env.character, { events: env.CONTENT?.events || {}, quests: env.CONTENT?.quests || [] }) },
+  // ⛔ CCODE-360 (Erik: "I would like the opportunity to invite her to my Band of the Fell Pell - probably through mutual connections
+  // when I recruit") — an invitation her own world's carrier brings, and the bands she chose to join.
+  { key: "invitationsDetail", builder: "invitations.invitationsForGM (CCODE-360)", carries: ["an invitation from another traveler, carried by someone this character knows"],
+    reachedBy: "always (empty unless an unanswered invitation's carrier is someone this character's own save knows)", spec: "CCODE-360", views: ["turn", "ask"],
+    build: (env) => invitationsForGM(env.character, env.app?.invitationsStore?.() || null) },
+  { key: "bandsJoinedDetail", builder: "invitations.bandsJoinedForGM (CCODE-360)", carries: ["bands this character chose to join, led by another traveler"],
+    reachedBy: "always (empty unless the character accepted an invitation)", spec: "CCODE-360", views: ["turn", "ask"],
+    build: (env) => bandsJoinedForGM(env.character) },
   // ⛔ CCODE-359 (Erik: "Silas is about to come back to Millbrook to check on everything - it would be great to have Adelheid and he
   // meet") — another player's character is in this same town, seen recently.
   { key: "travelersHereDetail", builder: "travelers.travelersHereForGM (CCODE-359)", carries: ["another player's character in this same community, seen in the last three days"],

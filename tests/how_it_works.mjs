@@ -18040,6 +18040,128 @@ console.log("\n── §251 · another traveler is here, and the town can find t
     && /syncTravelers\(\{ character, profile, locations: CONTENT\.locations \}\)/.test(A251));
 }
 
+// ⛔ CCODE-360 (Erik, 2026-09-16) — "I would like the opportunity to invite her to my Band of the Fell Pell - probably through mutual
+// connections when I recruit."
+// ⚑ MEASURED: a band's members are contingents keyed by `npcId` in the leader's own save; nothing let one player's character invite
+// another's, or carried an answer back; and only the receiver's own save can say whether she knows a given person. On the real saves,
+// six people stand in the Fellowship of the Fell Pell and Mara Wells is the one Adelheid's save knows. ⚠️ Every fixture here is
+// constructed — live saves move when people play.
+console.log("\n── §252 · an invitation carried by someone you both know ──");
+{
+  const I252 = await import("../engine/invitations.js");
+  const W252 = await import("../engine/worldtick.js");
+  const F252 = await import("../engine/fellowship.js");
+  const M252 = await import("../engine/melee.js");
+  const band252 = { id: "fellowship-of-the-fell-pell", name: "The Fellowship of the Fell Pell", quality: 2, condition: "fresh", contingents: [
+    { n: 1, quality: 3, npcId: "mara-wells", what: "shopkeeper", does: ["TRADE"] },
+    { n: 1, quality: 3, npcId: "calvar", what: "scout", does: ["SCOUT"] },
+    { n: 6, quality: 1, what: "hands", does: ["LABOR"] }] };
+  const silas252 = { id: "c-silas", name: "Silas Weir", bands: [band252], worldState: { lastTickDay: 5, news: [], unseenNews: [] },
+    npcRegistry: { "mara-wells": { id: "mara-wells", name: "Mara Wells" }, calvar: { id: "calvar", name: "Calvar" } } };
+  const adel252 = { id: "c-adel", name: "Adelheid", npcRegistry: { "mara-wells": { id: "mara-wells", name: "Mara Wells" }, "edvar-crane": { id: "edvar-crane", name: "Edvar Crane" } } };
+  const stranger252 = { id: "c-adel", name: "Adelheid", npcRegistry: { "edvar-crane": { id: "edvar-crane", name: "Edvar Crane" } } };
+  const byName252 = { id: "c-adel", name: "Adelheid", npcRegistry: { "gen-mara-7": { id: "gen-mara-7", name: "Mara Wells" } } };
+
+  /* ---- 1 · ⛔ THE RECORD ---- */
+  const inv252 = I252.makeInvitation({ from: { id: "c-silas", name: "Silas Weir", playerKey: "pk-erik" }, band: band252, to: { id: "c-adel", name: "Adelheid" },
+    carrier: { id: "mara-wells", name: "Mara Wells" }, worldDay: 80, now: Date.parse("2026-09-20T12:00:00Z"), line: "  The valley could use a healer who listens.  " });
+  check("§252: ⛔ one record per sender, addressee and band — the carrier named, the sender's own words kept, and no answer until she gives one",
+    inv252?.id === "inv-c-silas-c-adel-fellowship-of-the-fell-pell" && inv252.carrierName === "Mara Wells" && inv252.line === "The valley could use a healer who listens."
+    && inv252.answer === null && inv252.sentWorldDay === 80, JSON.stringify(inv252));
+  check("§252: …and nothing is sent without a carrier, or to yourself",
+    I252.makeInvitation({ from: { id: "c-silas" }, band: band252, to: { id: "c-adel" }, carrier: {} }) === null
+    && I252.makeInvitation({ from: { id: "c-silas" }, band: band252, to: { id: "c-silas" }, carrier: { name: "Mara Wells" } }) === null);
+  check("§252: ⚠️ a band's name mid-sentence — 'The Fellowship of the Fell Pell' is never 'the The Fellowship…', and a possessive name takes no article",
+    I252.bandPhrase("The Fellowship of the Fell Pell") === "the Fellowship of the Fell Pell" && I252.bandPhrase("Crows") === "the Crows"
+    && I252.bandPhrase("Silas's Company") === "Silas's Company" && I252.bandPhrase("the Fellowship of the Fell Pell", { capital: true }) === "The Fellowship of the Fell Pell");
+
+  /* ---- 2 · ⛔ IT ARRIVES ONLY WHERE HER OWN WORLD KNOWS THE CARRIER ---- */
+  const store252 = { invitations: { [inv252.id]: inv252 } };
+  check("§252: ⛔ an Adelheid who knows Mara Wells has it; an Adelheid who has only met Edvar Crane does not — the record stays, said to nobody",
+    I252.incomingInvitations(store252, adel252).length === 1 && I252.incomingInvitations(store252, stranger252).length === 0
+    && I252.invitationsForGM(stranger252, store252) === null && store252.invitations[inv252.id].answer === null);
+  check("§252: …and someone she met under another id is still the same Mara Wells",
+    I252.incomingInvitations(store252, byName252).length === 1);
+  const gm252 = I252.invitationsForGM(adel252, store252) || "";
+  check("§252: ⛔ the GM is told who carries it, from whom — a player's character — and the sender's own words",
+    gm252 === `- Mara Wells carries word from Silas Weir (another traveler — a player's character): Silas Weir would welcome Adelheid into the Fellowship of the Fell Pell. In Silas Weir's words: "The valley could use a healer who listens."`,
+    gm252);
+
+  /* ---- 3 · ⛔ AGAINST A FAKE GITHUB: send, answer, and the answer comes home ---- */
+  const { fakeRemote: fr252 } = await import("./lib/fake_remote.mjs");
+  const remote252 = fr252();
+  const restore252 = remote252.install();
+  try {
+    const onFile = () => remote252.read("world/invitations.json")?.invitations || {};
+    await W252.sendInvitation(inv252);
+    check("§252: ⛔ sent — one record on the shared file, unanswered", Object.keys(onFile()).length === 1 && onFile()[inv252.id]?.answer === null);
+    await W252.answerInvitation(inv252.id, "accepted", { id: "c-someone", name: "Someone" });
+    const wrong252 = onFile()[inv252.id].answer;
+    await W252.answerInvitation(inv252.id, "accepted", adel252);
+    await W252.answerInvitation(inv252.id, "declined", adel252);
+    check("§252: ⛔ only the addressee answers, and only once — a second tap cannot turn a yes into a no",
+      wrong252 === null && onFile()[inv252.id].answer === "accepted" && !!onFile()[inv252.id].answeredAt, JSON.stringify({ wrong252, now: onFile()[inv252.id].answer }));
+    await W252.sendInvitation({ ...inv252, sentAt: "2026-09-21T00:00:00.000Z" });
+    check("§252: …and a re-send never un-answers a yes", onFile()[inv252.id].answer === "accepted");
+
+    const strength252 = JSON.stringify(M252.bandStrength(band252));
+    const s1 = await W252.syncInvitations({ character: silas252 });
+    const s2 = await W252.syncInvitations({ character: silas252 });
+    const tr252 = band252.travelers || [];
+    check("§252: ⛔ the answer comes back to Silas's own save — Adelheid on the band as a TRAVELER, once, however often the tick runs",
+      s1.synced && tr252.length === 1 && tr252[0].characterId === "c-adel" && tr252[0].via === "Mara Wells" && s2.news.length === 0, JSON.stringify(tr252));
+    check("§252: ⛔ …and NEVER a contingent: the band's strength is exactly what it was, so no clash ever counts another player's character",
+      JSON.stringify(M252.bandStrength(band252)) === strength252 && M252.contingentsOf(band252).length === 3);
+    const news252 = silas252.worldState.unseenNews;
+    check("§252: …told once, as word from elsewhere",
+      news252.length === 1 && news252[0].section === "elsewhere"
+      && news252[0].text === "Word came back through Mara Wells: Adelheid said yes, and is one of the Fellowship of the Fell Pell now.", JSON.stringify(news252));
+
+    const inv2 = I252.makeInvitation({ from: { id: "c-silas", name: "Silas Weir" }, band: band252, to: { id: "c-bram", name: "Bram" }, carrier: { id: "calvar", name: "Calvar" } });
+    await W252.sendInvitation(inv2);
+    const quiet = await W252.syncInvitations({ character: silas252 });
+    check("§252: ⛔ silence is not an answer — an unanswered invitation changes nothing on the leader's save",
+      quiet.news.length === 0 && (band252.travelers || []).length === 1 && news252.length === 1);
+    await W252.answerInvitation(inv2.id, "declined", { id: "c-bram", name: "Bram" });
+    const no252 = await W252.syncInvitations({ character: silas252 });
+    await W252.sendInvitation({ ...inv2, sentAt: "2026-09-22T00:00:00.000Z" });
+    check("§252: ⛔ a no comes back as a no, nobody added — and asking again later reopens the same question rather than stacking a second",
+      no252.news[0] === "Word came back through Calvar: Bram will not join the Fellowship of the Fell Pell — not now."
+      && (band252.travelers || []).length === 1 && onFile()[inv2.id].answer === null && Object.keys(onFile()).length === 2, JSON.stringify(no252.news));
+  } finally { restore252(); }
+
+  /* ---- 4 · ⛔ HER SIDE, AND THE ROSTER ---- */
+  const adelJ = { ...adel252 };
+  const j1 = I252.joinBandLocally(adelJ, inv252, { worldDay: 81 }), j2 = I252.joinBandLocally(adelJ, inv252, { worldDay: 82 });
+  const bj252 = I252.bandsJoinedForGM(adelJ) || "";
+  check("§252: ⛔ on her save, a membership she chose — recorded once — and her GM hears she is a member, not a subordinate",
+    j1 && !j2 && adelJ.bandsJoined.length === 1
+    && bj252 === "- Adelheid is one of the Fellowship of the Fell Pell, led by Silas Weir (another traveler — a player's character), by Adelheid's own choice; the word came through Mara Wells.", bj252);
+  const roster252 = F252.rosterForGM(silas252, { content: { npcs: {} } }).join("\n");
+  check("§252: …and Silas's GM sees her on the roster as a traveler who chose to join — never someone to voice or command",
+    /travelers who chose to join: Adelheid \(players' characters — never voice or command them\)/.test(roster252), roster252.slice(0, 240));
+
+  /* ---- 5 · ⛔ THE DOORS ---- */
+  const REG252 = await import("../engine/gm_registry.js");
+  const GM252 = await import("../engine/gm.js");
+  check("§252: ⛔ both rows are registered for the turn and the ask",
+    ["invitationsDetail", "bandsJoinedDetail"].every(k => REG252.registryKeys("turn").includes(k) && REG252.registryKeys("ask").includes(k)));
+  const bare252 = { character: { id: "t", name: "T", origin: "valley", background: "smith", level: 1, attributes: { physical: 3, mental: 3, social: 3, practical: 3 }, health: 10, maxHealth: 10, energy: 5, maxEnergy: 5, abilities: [], alignment: {}, inventory: [], quests: [] },
+    location: { id: "millbrook", name: "Millbrook", descriptionSeed: "a mill town", spectrum: {}, encounterFlavor: "quiet" }, region: { id: "valley", name: "The Valley" },
+    rules: {}, lore: "", timeLabel: "Day 1", recentTurns: [], sceneState: {}, resolution: null, playerInput: null };
+  const p252 = GM252.buildTurnContext({ ...bare252, invitationsDetail: gm252, bandsJoinedDetail: bj252 });
+  check("§252: …and READ — the carrier delivers it in their own voice, or by note or runner, and the answer is the player's",
+    /## AN INVITATION TO DELIVER/.test(p252) && p252.includes(gm252) && /never accept or decline for them/.test(p252) && /a note, a runner/.test(p252)
+    && /## BANDS THIS CHARACTER CHOSE TO JOIN/.test(p252) && p252.includes(bj252));
+  const A252 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§252: ⛔ the play screen offers the choice in one tap; her answer reaches the shared file BEFORE her save records a yes; the tick reads the file",
+    /incomingInvitations\(sharedInvites, character\)\.slice\(0, 2\)/.test(A252) && /data-invite-yes="/.test(A252) && /data-invite-no="/.test(A252)
+    && /sharedInvites = await answerInvitation\(id, answer, character\) \|\| sharedInvites; \}\n\s+catch \(err\) \{ alert\(syncErrorMessage\("Your answer did not go"\)\); b\.disabled = false; return; \}\n\s+if \(answer === "accepted"\) joinBandLocally\(/.test(A252)
+    && /const iv = await syncInvitations\(\{ character \}\)/.test(A252) && /invitationsStore: \(\) => sharedInvites/.test(A252));
+  check("§252: ⛔ the Bands tab: a door per band, the picker, and what was sent and whether it was answered",
+    /data-band-invite="\$\{esc\(u\.id\)\}"/.test(A252) && /function showInvitePicker\(unitId\)/.test(A252) && /sendInvitation\(inv\)/.test(A252) && /"no answer yet"/.test(A252));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

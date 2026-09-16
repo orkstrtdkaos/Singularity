@@ -31,8 +31,10 @@ Erik's rulings this morning are quoted in full in `HANDOFF_ccode_aevi_SNG-595` �
 | **CCODE-356** | **the place is a title, and the ground says its numbers** (Erik: "this area needs a cleanup"). The most specific place as a heading, never twice; the standing beside it with a popup that says what it does — and that it moves no dice or prices, held by a gate; the four sources on their own line with the percentage the roll uses. |
 | **CCODE-357** | **an invitation comes to the door, and a painting is a painting.** A quest bound to a character brings its giver to find them, once (`invitationPressures`) — the door Aevi's monastery quest walks through. A GM op `imageMedium`: a picture the character MADE is drawn in its own medium and kept as her artwork. Adelheid's arc routes stop reading "[object Object]". |
 | **CCODE-358** | **the nanite says both numbers** — ordered and wild, each with its word and percentage (Millbrook read "strong 100%" while ordered crafts there answered at 53%). And the doc size table stopped flipping on a carriage return. |
+| **CCODE-359** | **another traveler is here.** The card carries `where` (community, town, place, the world-day they came), refreshed while they play; a GM row and a quiet line on the play screen say another player's character is in this same town; a shared scene carries its town, so Silas in the square finds the scene Adelheid opened at Mara Wells' Store. The town took three measured tries — the parent chain climbed to "The Disputed Zone" and then "Echo River Crossing"; a community is named for its town. |
+| **CCODE-360** | **an invitation carried by someone you both know.** Silas picks a traveler and a carrier from his band on the Bands tab; `world/invitations.json`, one merged record per sender, addressee and band. It reaches Adelheid only where HER save knows the carrier — on the real saves, Mara Wells is the one of the Fellowship's six she knows. She gets a one-tap Accept / Decline on the play screen, and her GM lets Mara bring it up (or send a note). The answer comes home on Silas's tick as word from elsewhere. |
 
-⚠️ **Both devices must reload (now v2.0.22).** A tab still running the old code overwrites the region file on its next tick
+⚠️ **Both devices must reload (now v2.0.24).** A tab still running the old code overwrites the region file on its next tick
 and would drop the answer until a new client pushes it back.
 
 ## §2 — NEXT, IN ORDER
@@ -56,15 +58,23 @@ and would drop the answer until a new client pushes it back.
 - The personal arc's register for a gentle player (it is always "mythic, tragic-or-heroic") and the `[object Object]`
   routes saved on hers.
 
-**NEXT — travelers meet.** Where a traveler was last seen (settlement + world-day) on their card; open scenes
+**Travelers meet** *(shipped as CCODE-359)*. Where a traveler was last seen (settlement + world-day) on their card; open scenes
 indexed by settlement rather than exact site (Adelheid stands at `gen-mara-wells-store`, Silas would arrive at
 `millbrook`); a quiet "Adelheid is in Millbrook — join" banner; a GM row saying another traveler is here and is not the
 GM's to voice.
 
-**THEN — an invitation carried by a mutual acquaintance.** `world/invitations.json`, one key per invite, merged.
+**An invitation carried by a mutual acquaintance** *(shipped as CCODE-360)*. `world/invitations.json`, one key per invite, merged.
 Silas sends word through someone both of them know — **Mara Wells** (his 8, her 4) or **Edvar Crane** (his 5, her −1).
-Courtney accepts or does not, and silence is no. The band's real name is **the Fellowship of the Fell Pell**; its six
-contingents are all NPCs today and a contingent would carry a `characterId`.
+Two things changed from this plan while building, both deliberately:
+- ⚠️ **A traveler who joins is NOT a contingent.** Contingents are what `bandStrength`, `bandThreat` and every clash
+  count, so a `characterId` contingent would have put Courtney's character on Erik's dice. She stands on the band as a
+  *traveler* beside the contingents — on his roster and his GM's, never in a number.
+- ⚠️ **Silence is not an answer, and nothing expires.** Nothing happens without her yes; an unanswered invitation simply
+  stays open. The carrier must be in the band (Edvar is not in the Fellowship, so today Mara is the road).
+
+**NEXT — SNG-596** (strikes landed or turned aside, casualties, vacancies — as news, placed where they happened), **then
+SNG-597** (the kin selector that compares `dir` and prefers who cared most; a figure in a PC's party surfaces her world-arc
+business), **then** the skill card (attribute + sub-attribute) and the purse band beside its number.
 
 **THEN — shared lives.** Measured: EVERY part of an NPC's growth is per-save — status, rank, career, deeds,
 wants, deaths, minted people, holds. `minted-1` is three different people in three saves; `the_undefeated` is active,

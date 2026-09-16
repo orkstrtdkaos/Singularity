@@ -63,6 +63,9 @@ export function unitsOf(character) {
     can: bandCan(b),
     worth: bandStrength(b, {}),
     formedFrom: arr(b.formedFrom).map(String),   // ⛔ EMPTY TODAY. A legion is a unit formed FROM units; see the header.
+    // ⛔ CCODE-360: OTHER PLAYERS' CHARACTERS WHO CHOSE TO JOIN — beside the contingents, never among them, so no strength,
+    // threat or clash ever counts them.
+    travelers: arr(b.travelers).filter(t => t && t.characterId),
     unit: b,
   }));
 }
@@ -234,6 +237,7 @@ export function rosterForGM(character, opts = {}) {
     const can = u.can.length ? u.can.map(f => FAMILY_VERBS[f] || String(f).toLowerCase()).join(", ") : "nothing named";
     return `${u.name} — ${wordFor(u.head)} strong, ${u.condition}; it ${can}`
       + (named.length ? ` · ${named.map(r => `${r.name}${r.atSide ? " (with you)" : ""}`).join(", ")}` : "")
-      + (here.length ? "" : " · none of them at your side");
+      + (here.length ? "" : " · none of them at your side")
+      + (u.travelers.length ? ` · travelers who chose to join: ${u.travelers.map(t => t.name).join(", ")} (players' characters — never voice or command them)` : "");
   });
 }

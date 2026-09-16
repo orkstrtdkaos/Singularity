@@ -168,9 +168,19 @@ export function arcPeopleView(character, content = {}) {
   //
   // What DOES differ, and is authored rather than derived, is how much the figure CARES: `arcAffinity.weight`
   // is Aevi's statement of what this arc is to this person. That is the honest thing to print beside a name.
+  // ⛔ ERIK 2026-09-16, reading the world tab: "this 'close to the bone' type wording doesn't really work."
+  // ⚠️ HE IS RIGHT AND THE PROBLEM IS THE IDIOM, NOT THE BAND. "Close to the bone" means UNCOMFORTABLY NEAR A
+  // PAINFUL TRUTH — it is what you say about a joke that landed too near someone's grief. It does not mean
+  // "cares deeply", which is what this band is for. ⛑ AND IT BROKE THE PARALLEL: the other two are noun
+  // phrases naming what the arc IS to a person — "a stake in it", "their life's work" — and the middle one was
+  // an adjectival idiom about how it FEELS to a listener. Three rungs of one ladder now read as one ladder:
+  //     a stake in it  <  a personal matter  <  their life's work
+  // ⚠️ AND IT MATTERS MORE THAN ONE PHRASE USUALLY WOULD, because the panel prints this beside every name in
+  // every arc — Erik's screen showed it six times in one block. A word that reads oddly once reads badly six
+  // times in a column.
   const careBand = (f, arcId) => {
     const w = affinitiesOf(f).find(c => c.arcId === arcId)?.weight || 1;
-    return w >= 3 ? "their life’s work" : w >= 2 ? "close to the bone" : "a stake in it";
+    return w >= 3 ? "their life’s work" : w >= 2 ? "a personal matter" : "a stake in it";
   };
 
   return worldArcsPublic(content, character).map(arc => {

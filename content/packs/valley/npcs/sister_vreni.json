@@ -1,0 +1,75 @@
+{
+ "schemaVersion": 1,
+ "id": "sister_vreni",
+ "name": "Sister Vreni",
+ "tier": "regional",
+ "role": "Senior of the Kindly Rest — she runs the house, the terraces and the drying lofts, and has not had enough hands in two years",
+ "people": "human",
+ "gender": "female",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": false,
+ "homeLocation": "the_kindly_rest",
+ "communityId": "valley.the_kindly_rest",
+ "domains": {
+  "primary": "rootkin",
+  "secondary": "numinous",
+  "tertiary": "stillhold"
+ },
+ "vocation": "healer",
+ "spectrum": {
+  "violence_peace": 0.9,
+  "chaos_order": 0.5,
+  "death_life": 0.8,
+  "mechanical_spiritual": 0.7,
+  "concrete_abstract": 0.2
+ },
+ "assistTags": [
+  "mend",
+  "tend",
+  "comfort",
+  "grow",
+  "warm",
+  "talk",
+  "learn"
+ ],
+ "appearance": "Sixty-odd, weathered, grey hair cut short because it is practical. Forearms marked with old burn scars from the drying lofts. Wears the house's undyed wool with the sleeves pushed up, always, and a harvesting knife on a cord at her hip.",
+ "voiceHints": "Plain, unhurried, and funnier than people expect. Asks a real question and then waits through the whole silence for the answer. Says 'good' when something is good and nothing at all when it is not.",
+ "wants": "Enough trained hands that the high terraces stop going unharvested, and for the house to keep being the kind of place a person can arrive at.",
+ "fears": "That she will have to start asking who somebody is before she takes them in.",
+ "knowledge": [
+  "Every herb that grows on the south shoulder, what it is for, and which three of them nobody has managed to cultivate",
+  "That someone in the house is living under a name that is not theirs, and that she decided not to ask",
+  "Which families down in Millbrook took sick at the First Sickness and which of them mended",
+  "That the Echo has been running clean since around world-day 26, because the house's water stopped needing to be boiled"
+ ],
+ "reactsToReputation": {
+  "any": "she looks at your hands before your face, and decides most of it there",
+  "healer": "immediate, unsentimental welcome — she will have you working within the hour and thank you afterwards",
+  "cruel": "the welcome does not close, and it goes very quiet",
+  "renowned": "unimpressed in a way that is not rudeness; the house has had famous people in it and they still had to wash"
+ },
+ "questSeeds": [
+  "She is short-handed and asking — the high terraces have not been properly harvested in two seasons",
+  "Two separate parties have come asking politely after somebody sheltering here, and she has answered neither"
+ ],
+ "personality": {
+  "warmth": 0.7,
+  "trust": 0.8,
+  "candor": 0.9,
+  "patience": 0.9
+ },
+ "physicality": "Sixty-odd and weathered. Moves like someone who has carried things all her life — sits down heavily, gets up slowly. Forearms marked with old burn scars from the drying lofts, sleeves pushed up in any weather. Grey hair cut short because it is practical.",
+ "closed": [],
+ "gear": [
+  "a harvesting knife on a cord, honed weekly",
+  "a pruning hook on a long haft",
+  "oiled_leathers under the wool",
+  "healers_draught",
+  "a case of prepared remedies, labelled in her own hand"
+ ],
+ "purse": {
+  "crystal": 310
+ },
+ "_authoredWhy": "⛑ AUTHORED 2026-09-16 for Courtney's Adelheid. Erik's brief: a monastery where she works as the healer she is, herbs, painting, spirituality, and intrigue that is 'less heavy'. ⛔ VRENI IS THE DOOR — CCODE-357 built `invitationPressures` so a quest bound to a character sends its giver to find them once, and Vreni is who walks through it. ⚠️ SHE IS NOT A QUEST-GIVER WHO HAPPENS TO BE KIND: she is short-handed, she has read Adelheid's work, and she is asking for help because she needs it. An invitation that is really a favour being asked is the one a healer would accept."
+}

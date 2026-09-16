@@ -32,34 +32,34 @@
    "_note": "⛔ SNG-596 / CCODE-364. A strike is a named sender going after a named target, and Erik's correction is the whole brief: 'don't just say came quietly — try to get the flavor of who was sent… was it an Umbral Assassin who used darkness, a radiant sniper, a marcher who tried a direct assault? how did they escape or win, did they have help, who and how?' ⛑ So every line here is built to carry {sWho} and {sHow} — who was sent and how they work — and to lose them cleanly in [brackets] when a minted figure has neither. ⛔ AND EVERY LINE MUST CARRY THE WORD 'strike', or 'came openly' for a crusade — §254 enforces it, and it is the point: the feed already carried landed strikes as ordinary duel lines, which is exactly why Erik could not find one.",
    "quiet": {
     "killed": [
-     "{T} is dead at {place}, and it was a strike[ — {sWho}][, {sHow}]. No warning, and no witness who will say so.",
-     "A quiet strike found {T} at {place}[ — {sWho}][, {sHow}]. No struggle, nothing taken[, and {S} has not been seen since].",
-     "{T} did not come back from {place}. It was a strike[, and {S} was sent][, {sWho}][, {sHow}] — that is all anyone can put together."
+     "{T} is dead at {place}, and it was murder[ — {sWho}][, {sHow}]. No warning, and no witness who will say so.",
+     "A knife in the dark found {T} at {place}[ — {sWho}][, {sHow}]. No struggle, nothing taken[, and {S} has not been seen since].",
+     "{T} did not come back from {place}. Somebody was sent to kill them[, and it was {S}][, {sWho}][, {sHow}] — that is all anyone can put together."
     ],
     "wounded": [
-     "A strike very nearly finished {T} at {place}[ — {sWho}][, {sHow}]. {t} is alive and is not walking yet.",
-     "{T} was hurt badly at {place} by a quiet strike from somebody who knew the work[ — {S}][, {sWho}][, {sHow}]."
+     "An assassination attempt very nearly finished {T} at {place}[ — {sWho}][, {sHow}]. {t} is alive and is not walking yet.",
+     "{T} was ambushed at {place} by somebody who knew the work and meant to kill[ — {S}][, {sWho}][, {sHow}]."
     ],
     "checked": [
-     "A strike on {T} at {place} got close enough to be sure of it and no further[ — {S}][, {sWho}][, {sHow}]. {s} did not stay to try twice.",
-     "There was a strike on {T} at {place}[. {S} made it][, {sWho}][, {sHow}]. It did not land."
+     "Somebody came to kill {T} at {place}, got close enough to be sure of it, and went no further[ — {S}][, {sWho}][, {sHow}]. {s} did not stay to try twice.",
+     "There was an attempt on {T}'s life at {place}[. {S} made it][, {sWho}][, {sHow}]. It did not land."
     ],
     "stopped": [
-     "A strike on {T} at {place} was stopped short of them[ — {S}][, {sWho}][, {sHow}]. {t} did not have to lift a hand.",
-     "The strike on {T} at {place} was over before it was properly started[ — {S}][, {sWho}][, {sHow}]."
+     "Somebody was sent to kill {T} at {place} and was stopped short of them[ — {S}][, {sWho}][, {sHow}]. {t} did not have to lift a hand.",
+     "The attempt on {T}'s life at {place} was over before it was properly started[ — {S}][, {sWho}][, {sHow}]."
     ],
     "stalemate": [
-     "{S} and {T} met at {place} without a word between them — a strike that became neither[, {sWho}][, {sHow}] — and both walked away.",
-     "Something happened to {T} at {place} and {t} will not discuss it. It was a strike[. {S} was there][, {sWho}][, {sHow}]."
+     "{S} came for {T} at {place} without a word between them, meaning to kill[, {sWho}][, {sHow}] — and both walked away from it.",
+     "Something happened to {T} at {place} and {t} will not discuss it. Somebody came to kill them[. {S} was there][, {sWho}][, {sHow}]."
     ],
     "guarded": [
-     "A strike on {T} at {place}[ — {S}][, {sWho}][, {sHow}] — and {G} stood in the way[, {gWho}][, {gHow}][, with {gPower}]. {s} got away, but not unseen.",
-     "The strike meant for {T} at {place} found {G} first[. {S} sent it][, {sWho}][, {sHow}][ — {G} was {gWho}][, {gHow}]. Somebody in the valley knows the face.",
-     "{G} was between {S} and {T} at {place} when the strike came[, {gHow}][, with {gPower}], which was not an accident[. {s} is {sWho}][, {sHow}], and left without finishing it."
+     "{T} was ambushed at {place}[ — {S}][, {sWho}][, {sHow}] — and {G} stood in the way[, {gWho}][, {gHow}][, with {gPower}]. {s} got away, but not unseen.",
+     "The knife meant for {T} at {place} found {G} first[. {S} sent it][, {sWho}][, {sHow}][ — {G} was {gWho}][, {gHow}]. Somebody in the valley knows the face.",
+     "{G} was between {S} and {T} at {place} when the knife came[, {gHow}][, with {gPower}], which was not an accident[. {s} is {sWho}][, {sHow}], and left without finishing the murder."
     ],
     "turned": [
-     "A strike on {T} at {place} did not get there[. {S} was the hand][, {sWho}][, {sHow}]. Whoever stopped it has not said so.",
-     "The strike on {T} at {place} failed[ — {sWho}][, {sHow}]. {t} is alive, somebody else is the reason, and neither is naming the other."
+     "An assassination attempt on {T} at {place} did not get there[. {S} was the hand][, {sWho}][, {sHow}]. Whoever stopped it has not said so.",
+     "Somebody came to kill {T} at {place} and failed[ — {sWho}][, {sHow}]. {t} is alive, somebody else is the reason, and neither is naming the other."
     ]
    },
    "crusade": {
@@ -92,7 +92,33 @@
      "{S} came openly for {T} at {place}[, {sWho}][, {sHow}] and was stopped. Whoever did the stopping is not taking credit.",
      "The open strike on {T} at {place} failed[ — {S}][, {sWho}][, {sHow}], which is worse for {s} than losing quietly would have been."
     ]
-   }
+   },
+   "_intentVocabulary": [
+    "ambush",
+    "ambushed",
+    "an attempt on",
+    "assassination attempt",
+    "attempt on",
+    "came for",
+    "came openly",
+    "came to kill",
+    "cut down",
+    "declared for",
+    "knife in the dark",
+    "knife meant for",
+    "meant to kill",
+    "murder",
+    "murdered",
+    "put a blade",
+    "sent to kill",
+    "set on",
+    "strike",
+    "the blade came",
+    "the knife came",
+    "waylaid",
+    "without finishing the murder"
+   ],
+   "_intentWhy": "⛔ ERIK 2026-09-16: 'I didn't mean for you to use strike every time — I mean for the wording to be OBVIOUS that the intent was to kill you or the target. So assassination attempt, or a knife in the dark, or ambushed would all roughly do the same thing.' ⚠️ §254 TESTS FOR THE LITERAL WORD `strike` OR `came openly`, WHICH MADE EVERY LINE SAY IT THE SAME WAY — a correct gate testing too narrow a thing, which is the same shape as a hand-typed table standing in for a derived one. ⛑ THIS LIST IS THE GATE'S REAL SUBJECT: a strike line must make the INTENT unmistakable, and there are a dozen ways to do that. CCode: test membership of this list rather than one string, and it stays extensible as the prose grows."
   }
  },
  "_placeholders": "{W} full winner name (first mention) · {w} short winner · {L} full loser · {l} short loser · {place} location DISPLAY NAME, never an id · {power} the ability's short description.\n⚠️ IF `place` IS NULL, DROP ' at {place}' RATHER THAN PRINTING 'at null'. If `power` is null use the non-`_power` variant. ⛔ NEVER PRINT A RAW ID — that is the 'the the_ceaseless' fault again.\n⛑ SNG-596 STRIKE SLOTS: {S}{T}{G} sender/target/guard · {s}{t}{g} short forms · {sWho}{tWho}{gWho} 'a devourer of the Umbrals' · {sHow}{tHow}{gHow} the authored manner · {power}/{gPower} · {arc} lowercased mid-sentence. ⛔ [SQUARE BRACKETS] ARE DROPPED WHOLE when any slot inside them is empty — that is how a minted figure with no fighting style reads cleanly instead of trailing a comma.",

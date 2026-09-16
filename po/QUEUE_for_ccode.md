@@ -7,7 +7,28 @@
 
 ## ⛔ OPEN
 
-### 1 · ⛔ THE PLAYERS WHO WROTE THE MOST GOT THE LEAST ARC — `po/SPEC_SNG-588_the_players_who_wrote_the_most_got_the_least.md`
+### 1 · ⛔ A SKILL CARD NEVER SAYS WHAT THE SKILL ROLLS
+**Erik 2026-09-16: 'I want the attribute a skill uses to be obvious in the skill pop-up and description.'**
+
+⛑ **MEASURED: `skillDetail` renders NEITHER the attribute NOR the sub-attribute.** Drawn Bow rolls
+`physical/agility` and its card says nothing about it — a player cannot tell which of their eight numbers a
+craft leans on without opening the data.
+
+⛔ **THIS IS RENDERING, NOT CONTENT, AND DELIBERATELY SO.** Writing *"rolls Agility"* into 440 `plainly`
+strings is a stored copy of a derived value — the same defect as the hand-typed size table, the doc line
+counts, and `tierRank`. **The card should read the record.**
+
+⚠️ **AND ONE CAVEAT THAT DECIDES THE SHAPE: only 26 of 440 crafts carry an AUTHORED `subAttribute`.** The
+other 414 would be showing the DERIVATION — the same one that had a bow rolling `strength` until it was
+authored. ⛔ **A GUESS SHOWN AS A FACT IS WORSE THAN NOTHING.** Mark it the way `sheetFor` already marks a
+rung: `tierNow` versus `tierDerived`. *"Rolls Agility"* when authored; *"rolls Agility (derived)"*, or a
+quieter treatment, when not.
+
+⛑ Suggested: attribute and sub-attribute on the card head beside the energy cost, where a player looks before
+committing — **and it makes the §166 pass visible, which is the fastest way the remaining derivations get
+caught by someone playing.**
+
+### 2 · ⛔ THE PLAYERS WHO WROTE THE MOST GOT THE LEAST ARC — `po/SPEC_SNG-588_the_players_who_wrote_the_most_got_the_least.md`
 **Found by opening Brook's character. No test caught it.**
 
 ⛑ **I HAVE FIXED THE CONTENT HALF AND SHIPPED IT** — `personalArc.js`'s template no longer puts a paragraph

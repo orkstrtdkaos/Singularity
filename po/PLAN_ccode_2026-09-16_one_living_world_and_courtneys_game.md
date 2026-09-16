@@ -1,4 +1,4 @@
-<!-- status: CCODE-353…358 shipped (v2.0.22) · travelers meet next · content asks for Aevi in §4 -->
+<!-- status: shared lives under way — CCODE-380 (canon identity) and CCODE-381 (a legend's fate) shipped · content asks for Aevi in §4 -->
 # PLAN — One living world, and Courtney's game
 
 **CCode → Aevi and Erik · 2026-09-16**
@@ -104,6 +104,17 @@ a tick seeded by region + world-day so two clients simulating one day write iden
 is RELATIVE to a player (bond, times met, what they know) and what is TRUE of the person; canon as identity only — and
 **canon promotion currently contests itself** (6 entities "overtook" their own id, including Edvar); `world/holds` with a
 `holdsNearForGM` row; and `pushMergedFile`'s read moved off the contents API before a shared file crosses 1MB.
+
+**Shared lives, as built so far:**
+- ✅ **CCODE-380 — a grown record is never its own rival.** The app hydrates a character's own grown people and places into
+  the pool promotion scanned as AUTHORED, so a record met itself at weight 100: 33 of Silas's 35 grown records and all 8 of
+  Loki's. Four places and Bryn Callowell had gone to the variants pile on 09-11/12; the repair put them back, counted.
+- ✅ **CCODE-381 — a legend's fate is the world's.** `world/people/valley.json` holds one fate per authored legend, folded by
+  one rule every client applies (the earliest death; a death over anything but a later return; otherwise the latest event,
+  the heavier on a tie). The tick adopts before its pass and publishes after; a save's first read is silent.
+- ⬜ **Next:** who is present today, seeded by the place and the world-day rather than the character; minted people with an
+  identity every world shares (so their fates can join); the registry split (what is relative to a player against what is
+  true of the person); `world/holds` with `holdsNearForGM`; the >1MB read.
 
 ## §3 — ⬜ BACKLOG (Erik): ONE SOURCE OF TRUTH FOR EVERY KIND OF THING
 

@@ -18936,6 +18936,133 @@ console.log("\n── §265 · a grown record is never its own rival ──");
     && /syncSharedCanon\(\{ character, profile, content: CONTENT \}\)/.test(A265));
 }
 
+// ⛔ CCODE-381 — shared lives, second stage: A LEGEND'S FATE IS THE WORLD'S. Erik: "The world changes for everyone." ⚑ MEASURED: 33
+// legends live in two or more saves' worlds and the saves disagreed about 29 (the Undefeated: stopped, active, wounded, all at once).
+// On the real saves, folding every world in either order gives the same 44 fates, and every save agrees with them after adopting.
+console.log("\n── §266 · a legend's fate is the world's ──");
+{
+  const F266 = await import("../engine/fates.js");
+  const W266 = await import("../engine/worldtick.js");
+  const T266 = await import("../engine/worldtime.js");
+  const DEATH266 = await import("../engine/death.js");
+  const { fakeRemote: fr266 } = await import("./lib/fake_remote.mjs");
+  const D = T266.absoluteWorldDay(Date.now());
+  const who = (id, name) => ({ characterId: id, name });
+  const f = (st, by, day) => ({ ...st, atWorldDay: day, fateBy: by });
+
+  /* ---- 1 · THE RULE, from either side ---- */
+  const silasBy = who("char-s", "Silas Weir"), adelBy = who("char-a", "Adelheid");
+  const pairs = [
+    [f({ status: "dead", killedBy: "a" }, silasBy, D - 20), f({ status: "dead", killedBy: "b" }, adelBy, D - 5)],
+    [f({ status: "dead", killedBy: "a" }, silasBy, D - 20), f({ status: "wounded", woundedBy: "b" }, adelBy, D)],
+    [f({ status: "dead", killedBy: "a" }, silasBy, D - 20), f({ status: "active", returnedFromDeath: { day: D - 2 } }, adelBy, D - 2)],
+    [f({ status: "wounded", woundedBy: "a" }, silasBy, D - 6), f({ status: "stopped", stoppedBy: "c" }, adelBy, D)],
+    [f({ status: "stopped", stoppedBy: "a" }, silasBy, D), f({ status: "wounded", woundedBy: "c" }, adelBy, D)],
+  ];
+  check("§266: ⛔ the rule is the same from either side — whichever record arrives first, every client keeps the same one",
+    pairs.every(([a, b]) => F266.sameFate(F266.mergeFate(a, b), F266.mergeFate(b, a))));
+  const [p0, p1, p2, p3, p4] = pairs.map(([a, b]) => F266.mergeFate(a, b));
+  check("§266: ⛔ nobody dies twice — the EARLIER death stands; and a death stands against a wound any world recorded after it",
+    p0.killedBy === "a" && p0.atWorldDay === D - 20 && p1.status === "dead");
+  check("§266: …but a RETURN from death on or after it is the later truth",
+    p2.status === "active" && p2.returnedFromDeath?.day === D - 2);
+  check("§266: otherwise the latest event stands, and a tie on the day goes to the heavier — a wound over a check",
+    p3.status === "stopped" && p3.stoppedBy === "c" && p4.status === "wounded");
+  const deep = F266.mergeFate(f({ status: "dead", deathState: { sealed: false, depthOverride: 1 } }, silasBy, D - 9),
+    f({ status: "dead", deathState: { sealed: true, depthOverride: 2 } }, adelBy, D - 9));
+  check("§266: …and two worlds' records of one death merge the dark: sealed if either sealed it, as deep as the deeper",
+    deep.deathState?.sealed === true && deep.deathState?.depthOverride === 2);
+  check("§266: a legend nothing has happened to has no fate to share; an old wound's start is read back from its end",
+    F266.fateOf({ status: "active" }) === null && F266.fateOf({ status: "wounded", woundedUntilDay: D + 1 })?.atWorldDay === D + 1 - F266.WOUND_DAYS);
+
+  /* ---- 2 · THE SYNC, THROUGH THE FUNCTION THE GAME CALLS, AGAINST A FAKE GITHUB ---- */
+  const roster = [{ id: "fx_x", name: "The Fixture Undefeated" }, { id: "fx_y", name: "Ossa the Fixture" }, { id: "fx_z", name: "Coil Fixture" },
+    { id: "fx_a", name: "Ash Fixture" }, { id: "fx_b", name: "Bell Fixture" }, { id: "fx_c", name: "Cairn Fixture" }, { id: "fx_w", name: "Wren Fixture" }];
+  const content = { legends: { roster }, rules: {} };
+  const ws = (epicStatus) => ({ lastTickDay: 3, news: [], unseenNews: [], epicStatus });
+  const silas = { id: "char-s", name: "Silas Weir", worldState: ws({
+    fx_x: { status: "wounded", sinceWorldDay: D - 6, woundedUntilDay: D + 2, woundedBy: "fx_b" },
+    fx_y: { status: "dead", diedWorldDay: D - 20, killedBy: "fx_a", deathState: { diedDay: D - 20, sealed: false, depthOverride: null } },
+    "minted-1": { status: "wounded", sinceWorldDay: D - 1, woundedUntilDay: D + 7, woundedBy: "fx_a" } }) };
+  const adel = { id: "char-a", name: "Adelheid", worldState: ws({
+    fx_x: { status: "stopped", sinceWorldDay: D, stoppedUntilDay: D + 3, stoppedBy: "fx_c" },
+    fx_z: { status: "wounded", woundedUntilDay: D - 1, woundedBy: "fx_a" } }) };
+
+  check("§266: without the shared world it does nothing at all", (await W266.syncSharedFates({ character: silas, content })).synced === false);
+  const remote = fr266();
+  const restore = remote.install();
+  try {
+    const s1 = await W266.syncSharedFates({ character: silas, content });
+    const store1 = remote.read(F266.FATES_PATH);
+    check("§266: ⛔ a world publishes what happened to the valley's legends — and ONLY the authored ones: a minted figure's id is its own world's",
+      s1.synced && store1?.fates?.fx_x?.status === "wounded" && store1.fates.fx_y?.status === "dead" && !store1.fates["minted-1"]
+      && store1.fates.fx_x.fateBy?.name === "Silas Weir", JSON.stringify(Object.keys(store1?.fates || {})));
+
+    const s2 = await W266.syncSharedFates({ character: adel, content });
+    const store2 = remote.read(F266.FATES_PATH);
+    check("§266: ⛔ a second world folds in by the rule — its later check on the Undefeated stands, its old wound on Coil joins",
+      store2.fates.fx_x?.status === "stopped" && store2.fates.fx_x.fateBy?.name === "Adelheid" && store2.fates.fx_z?.atWorldDay === D - 1 - F266.WOUND_DAYS);
+    check("§266: ⛔ …and a legend Silas's world buried is buried in Adelheid's — adopted, with who did it",
+      adel.worldState.epicStatus.fx_y?.status === "dead" && adel.worldState.epicStatus.fx_y.killedBy === "fx_a" && s2.adopted.some(a => a.id === "fx_y"));
+    check("§266: ⚠️ …and a save's FIRST read is silent — it takes the world as it is instead of reciting a backlog into a 20-item news feed",
+      (s2.news || []).length === 0 && adel.worldState.news.length === 0);
+
+    const s3 = await W266.syncSharedFates({ character: silas, content, publish: false });
+    const heard = (silas.worldState.news || []).map(n => n.text);
+    check("§266: ⛔ the next read brings Silas what happened since — Cairn checked the Undefeated today — and not the old wound on Coil",
+      silas.worldState.epicStatus.fx_x?.status === "stopped" && heard.length === 1 && /Cairn Fixture/.test(heard[0]) && /The Fixture Undefeated/.test(heard[0])
+      && silas.worldState.epicStatus.fx_z?.status === "wounded", heard.join(" | "));
+    check("§266: …and the news line carries the ids a clash line carries",
+      silas.worldState.news[0]?.winnerId === "fx_c" && silas.worldState.news[0]?.loserId === "fx_x");
+
+    // ⛔ THE RACE THE MERGE EXISTS FOR — another world writes between Silas's read and his write
+    silas.worldState.epicStatus.fx_x = { status: "dead", diedWorldDay: D, killedBy: "fx_a", sinceWorldDay: D, deathState: { diedDay: D, sealed: false, depthOverride: null } };
+    const inner = globalThis.fetch;
+    let raced = false;
+    globalThis.fetch = async (url, opts = {}) => {
+      const res = await inner(url, opts);
+      if (!raced && (!opts.method || opts.method === "GET") && String(url).includes(F266.FATES_PATH)) {
+        raced = true;
+        const cur = remote.read(F266.FATES_PATH);
+        cur.fates.fx_w = { status: "wounded", sinceWorldDay: D, woundedUntilDay: D + 8, woundedBy: "fx_b", atWorldDay: D, fateBy: who("char-o", "Somebody Else") };
+        remote.files.set(F266.FATES_PATH, { content: JSON.stringify(cur), sha: "sha-concurrent-266" });
+      }
+      return res;
+    };
+    try { await W266.syncSharedFates({ character: silas, content }); } finally { globalThis.fetch = inner; }
+    const store4 = remote.read(F266.FATES_PATH);
+    check("§266: ⛔ two worlds writing at once both land — Silas's death of the Undefeated AND the other world's wound on Wren",
+      raced && store4.fates.fx_x?.status === "dead" && store4.fates.fx_w?.status === "wounded" && silas.worldState.epicStatus.fx_w?.status === "wounded",
+      JSON.stringify({ x: store4.fates.fx_x?.status, w: store4.fates.fx_w?.status }));
+
+    // a world that has not heard yet wounds a legend the world already buried
+    adel.worldState.epicStatus.fx_x = { status: "wounded", sinceWorldDay: D, woundedUntilDay: D + 8, woundedBy: "fx_b" };
+    await W266.syncSharedFates({ character: adel, content });
+    check("§266: ⛔ a death is not undone by a world that had not heard of it — its later wound loses, and it learns the death",
+      remote.read(F266.FATES_PATH).fates.fx_x?.status === "dead" && adel.worldState.epicStatus.fx_x?.status === "dead"
+      && adel.worldState.news.some(n => n.kind === "death" && n.victimId === "fx_x"), JSON.stringify(adel.worldState.news.map(n => n.text)));
+  } finally { restore(); }
+
+  /* ---- 3 · THE WRITERS STAMP WHAT THE FOLD READS ---- */
+  const wsP = { epicStatus: { fx_x: { status: "stopped", stoppedUntilDay: 10, stoppedBy: "fx_c", fateBy: who("char-o", "Somebody Else") } } };
+  W266.applyEpicClashOutcome(wsP, { id: "fx_b", name: "Bell Fixture" }, { id: "fx_x", name: "The Fixture Undefeated" }, "wounded", 50, { content });
+  const hurt = wsP.epicStatus.fx_x;
+  check("§266: ⛔ this world's pass stamps the day a wound began and takes another world's name OFF the record it wounds",
+    hurt.status === "wounded" && hurt.sinceWorldDay === 50 && hurt.woundedUntilDay === 50 + F266.WOUND_DAYS && !hurt.fateBy, JSON.stringify(hurt));
+  const back = { status: "dead", fateBy: who("char-o", "Somebody Else"), deathState: { diedDay: 40, sealed: false, depthOverride: null } };
+  DEATH266.resolveRetrieval(back, "return", { currentDay: 44 });
+  check("§266: …and a return from death is the returning world's — no other world's name stays on it",
+    back.status === "active" && back.returnedFromDeath?.day === 44 && !back.fateBy);
+
+  const A266 = rd("app.js").replace(/\r\n/g, "\n");
+  const tick = A266.slice(A266.indexOf("await syncSharedWorld({ character, content: CONTENT });"), A266.indexOf("const canon = await syncSharedCanon("));
+  const readAt = tick.indexOf("await syncSharedFates({ character, content: CONTENT, publish: false });");
+  const passAt = tick.indexOf("await advanceGeneratedOffscreen(");
+  const publishAt = tick.indexOf("await syncSharedFates({ character, content: CONTENT });");
+  check("§266: ⛔ the tick READS the world's fates before this world's pass and PUBLISHES after it",
+    readAt > 0 && passAt > readAt && publishAt > passAt, `${readAt} · ${passAt} · ${publishAt}`);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

@@ -43,6 +43,7 @@ import { stampEventChange, mergeEventStages, mergeQuestOutcomes, actorOf, questK
 import { INVITES_PATH, mergeInvitation, answerInto, applyAnswers } from "./invitations.js";   // CCODE-360: an invitation carried by someone you both know
 import { boundFigures } from "./companionlives.js";   // SNG-597 §3: a companion who is also a figure of the world
 import { decayWakes, wakeArcPush } from "./wake.js"; // SNG-204: wakes decay on the tick + lean on connected arcs
+import { FATES_PATH, WOUND_DAYS, STOP_DAYS, fatesOfWorld, foldFates, adoptFates, fateNews } from "./fates.js";   // CCODE-381: a legend's fate is the world's
 import { enterDeathState, deepenDeaths, deathDepth, isRetrievable, resolveRetrieval } from "./death.js"; // SNG-209: a killed figure ENTERS the death state; the clock sinks untended deaths toward sealed
 import { absoluteWorldDay, worldDayAt, worldCount, readClock, positionedPlace } from "./worldtime.js";
 import { voyageTick, whereaboutsOf } from "./carriage.js";   // ⛔ B6b: a voyage arrives on world time, and where she is now is where she can be raided
@@ -1188,6 +1189,57 @@ export async function pushCanonLook({ entityId, url = null, appearance = null, b
   return { ok: true, entityId: landed.id || id, image: landed.image || null, appearance: landed.appearance || null };
 }
 
+/** ⛔ CCODE-381 — A LEGEND'S FATE IS THE WORLD'S (shared lives, second stage). Erik: "The world changes for everyone."
+ *
+ *  ⚑ MEASURED: 33 legends live in two or more saves' worlds and the saves disagreed about 29 — the Undefeated stopped in two, active
+ *  in one, wounded in two — because every save simulated the same people alone.
+ *
+ *  ⛑ `publish: false` READS the world's fates and adopts them — run before this world's pass, so a legend another world buried is
+ *  not fought here. `publish: true` (after the pass) folds this world's fates into `world/people/valley.json` through the merge, by
+ *  the one rule in `fates.js` every client applies the same way, writes only when something of this world's stands, and adopts what
+ *  the fold decided. News for what this world did not see itself, within ten days. Authored legends only. Never throws. */
+export async function syncSharedFates({ character, content, publish = true, now = Date.now() } = {}) {
+  let shared = false;
+  try { shared = syncEnabled(); } catch { shared = false; }   // no storage at all (a harness, a locked-down browser) is no shared world
+  if (!shared || !character?.worldState) return { synced: false, adopted: [], published: [] };
+  const ws = character.worldState;
+  const roster = content?.legends?.roster || [];
+  const ids = roster.map(f => f?.id).filter(Boolean);
+  if (!ids.length) return { synced: false, adopted: [], published: [] };
+  const by = { characterId: character.id || null, name: character.name || null };
+  let store = null, published = [];
+  try {
+    if (publish) {
+      const mine = fatesOfWorld(ws, ids, { by });
+      await pushMergedFile(FATES_PATH, (remote) => {
+        const folded = foldFates(remote, mine);
+        store = folded.store; published = folded.changed;
+        return folded.changed.length ? folded.store : null;   // nothing of this world's stands: no write
+      }, `fates: what ${character.name || character.id}'s world saw of the valley's legends`);
+    } else {
+      store = await fetchRepoJSON(FATES_PATH);
+    }
+  } catch (err) {
+    console.warn("[fates] shared-fates sync skipped:", err?.message);
+    return { synced: false, adopted: [], published: [] };
+  }
+  const worldDay = absoluteWorldDay(now);
+  const adopted = adoptFates(ws, store?.fates || {}, ids, { by });
+  // a death the world recorded is this world's landmark too — the gate that keeps deaths rare reads it
+  for (const a of adopted) if (a.after?.status === "dead" && Number.isFinite(a.atWorldDay)) ws.lastEpicDeathDay = Math.max(Number(ws.lastEpicDeathDay) || 0, a.atWorldDay);
+  // ⚠️ A SAVE'S FIRST READ IS SILENT: it takes the world as it is. After that, only what happened since its last read is news.
+  const lastRead = Number.isFinite(Number(ws.fatesReadWorldDay)) && ws.fatesReadWorldDay !== null ? Number(ws.fatesReadWorldDay) : null;
+  const news = lastRead == null ? [] : fateNews(adopted, { roster, content, worldDay, sinceWorldDay: lastRead - 1 });
+  ws.fatesReadWorldDay = worldDay;
+  if (news.length) {
+    ws.news = ws.news || []; ws.unseenNews = ws.unseenNews || [];
+    const stamped = news.map(n => stampNews(n, { day: ws.lastTickDay, worldDay, section: "world" }));
+    ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);
+    ws.unseenNews = [...ws.unseenNews, ...stamped].slice(-NEWS_CAP);
+  }
+  return { synced: true, adopted, published, news };
+}
+
 export async function syncSharedCanon({ character, profile, content, region = "valley", now = Date.now(), authoredFor = null } = {}) {
   if (!syncEnabled() || !character) return { synced: false, promoted: [], view: [] };
   if (!character.worldState) character.worldState = initWorldState(1);
@@ -2073,6 +2125,10 @@ export function applyEpicClashOutcome(ws, winner, loser, kind, worldDay, { death
   // melee casualties and strikes both land here — so a future way of hurting somebody cannot forget to pay it.
   // ⛔ NOT on stalemate: nobody was driven anywhere. That is the line above, and it returns before this.
   halveHold(ws, loser.id);
+  // ⛔ CCODE-381: WHAT HAPPENS NEXT IS THIS WORLD'S EVENT — stamped with the day it began, and carrying no other world's name. A
+  // record adopted from the shared fates keeps the world that wrote it; a new wound on top of it is not that world's wound.
+  delete st.fateBy;
+  st.sinceWorldDay = worldDay;
   if (kind === "killed") {
     const tooSoon = ws.lastEpicDeathDay != null && (worldDay - ws.lastEpicDeathDay) < deathCooldownDays;
     if (tooSoon) finalKind = "stopped"; // GATE: a second death too soon is downgraded — deaths stay landmarks
@@ -2105,10 +2161,10 @@ export function applyEpicClashOutcome(ws, winner, loser, kind, worldDay, { death
     news.push({ text: said("killed") || event.text, kind: "death", victimId: loser.id, killerId: winner.id,
                 locationId: locationId || null, abilityId: power, worldDay });
   } else if (finalKind === "wounded") {
-    st.status = "wounded"; st.woundedUntilDay = worldDay + 8; st.woundedBy = winner.id;
+    st.status = "wounded"; st.woundedUntilDay = worldDay + WOUND_DAYS; st.woundedBy = winner.id;
     news.push(clash(`${winner.name} bested ${loser.name} — ${loser.name} withdraws to lick their wounds.`, "wounded"));
   } else { // stopped
-    st.status = "stopped"; st.stoppedUntilDay = worldDay + 3; st.stoppedBy = winner.id;
+    st.status = "stopped"; st.stoppedUntilDay = worldDay + STOP_DAYS; st.stoppedBy = winner.id;
     news.push(clash(`${winner.name} checked ${loser.name} — for now, ${loser.name}'s designs are held.`, "stopped"));
   }
   // ⛔ SNG-431 §2 — THE DEBT IS RECORDED HERE, at the one place every epic defeat passes through. A rung is

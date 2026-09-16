@@ -173,6 +173,7 @@ export function resolveRetrieval(entity, outcome, { currentDay = null, changed =
   if (outcome === "return") {
     entity.status = "active";
     entity.returnedFromDeath = { day: currentDay, changed: changed || null }; // §4: return can change them
+    delete entity.fateBy;   // ⛔ CCODE-381: the return is the world that made it — not the one whose record of the death this was
     delete entity.deathState;
     return { ok: true, outcome: "return", changed: changed || null };
   }

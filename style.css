@@ -1749,6 +1749,10 @@ img[data-lightbox] { cursor: zoom-in; }
 .loc-head .loc-standing { font-family: var(--font-ui); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; background: none; cursor: pointer; align-self: center; }
 .loc-head .loc-standing:hover, .loc-head .loc-standing:focus-visible { background: rgba(255, 255, 255, 0.04); outline: none; }
 .loc-parent { font-family: var(--font-ui); font-size: 12px; color: var(--ink-dim); }
+/* ⛔ CCODE-369 — home: a quiet mark when you are in it, and a small door to make a place home when you are not */
+.loc-home { font-family: var(--font-ui); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); align-self: center; }
+.loc-home-btn { font-size: 13px; line-height: 1; padding: 2px 6px; background: none; border: 1px solid var(--border); border-radius: 6px; color: var(--ink-dim); cursor: pointer; align-self: center; }
+.loc-home-btn:hover, .loc-home-btn:focus-visible { color: var(--accent); border-color: var(--accent); outline: none; }
 .loc-head .time-tag { margin-left: auto; font-family: var(--font-ui); font-size: 12px; }
 .loc-head .src-strip { display: flex; margin-top: 8px; gap: 6px; }
 .src-pct { margin-left: 5px; font-variant-numeric: tabular-nums; color: var(--ink-dim); }

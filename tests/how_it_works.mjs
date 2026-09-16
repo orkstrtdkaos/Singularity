@@ -18377,6 +18377,48 @@ console.log("\n── §255 · near news stands out, and a community is not a to
     && /tier: "murmur", locationId: b\.locationId \|\| null \}\)/.test(src255) && /tier: "murmur", locationId: n\.locationId \|\| null \}\)/.test(src255));
 }
 
+// ⛔ CCODE-369 (Erik, 2026-09-16) — "Yes, a home is a different type than a hold... but it could BECOME a hold. to start with it's a
+// location." ⚑ MEASURED: nothing let a character call a place home; the nearest thing was a holding, which decays without a keeper
+// and can be raided — the opposite of the cabin Courtney asked for, which Aevi authored as The Painter's Shelf.
+console.log("\n── §256 · a home is a place that is yours ──");
+{
+  const H256 = await import("../engine/home.js");
+  const { loadContentHeadless: lch256 } = await import("./headless_content.mjs");
+  const C256 = await lch256();
+  const L = C256.locations;
+  const ch = { name: "Adelheid", currentLocationId: "the_painters_shelf" };
+  const r1 = H256.makeHome(ch, "the_painters_shelf", { locations: L, worldDay: 90 });
+  check("§256: ⛔ a place becomes home by the player's choice — once, with the day it happened",
+    r1.ok && H256.isHome(ch) && JSON.stringify(H256.homeOf(ch, L)) === JSON.stringify({ locationId: "the_painters_shelf", name: "The Painter's Shelf", sinceWorldDay: 90, exists: true })
+    && H256.makeHome(ch, "the_painters_shelf", { locations: L }).ok === false && H256.makeHome(ch, "nowhere_at_all", { locations: L }).ok === false);
+  const gmHome = H256.homeForGM(ch, L);
+  ch.currentLocationId = "the_kindly_rest";
+  const gmAway = H256.homeForGM(ch, L);
+  const r2 = H256.makeHome(ch, "the_kindly_rest", { locations: L, worldDay: 95 });
+  check("§256: …the GM hears where they live, and that they are home when they are — and moving home says where from",
+    gmHome === "- Adelheid's home is The Painter's Shelf (since world-day 90) — their own place, chosen by them. Adelheid is home now: let it feel like home — their things where they left them, the quiet they came back for."
+    && gmAway === "- Adelheid's home is The Painter's Shelf (since world-day 90) — their own place, chosen by them."
+    && r2.ok && r2.was === "The Painter's Shelf" && H256.homeForGM({ name: "Nobody" }, L) === null, gmAway);
+  const REG256 = await import("../engine/gm_registry.js");
+  const GM256 = await import("../engine/gm.js");
+  const bare256 = { character: { id: "t", name: "T", origin: "valley", background: "smith", level: 1, attributes: { physical: 3, mental: 3, social: 3, practical: 3 }, health: 10, maxHealth: 10, energy: 5, maxEnergy: 5, abilities: [], alignment: {}, inventory: [], quests: [] },
+    location: { id: "millbrook", name: "Millbrook", descriptionSeed: "a mill town", spectrum: {}, encounterFlavor: "quiet" }, region: { id: "valley", name: "The Valley" },
+    rules: {}, lore: "", timeLabel: "Day 1", recentTurns: [], sceneState: {}, resolution: null, playerInput: null };
+  const p256 = GM256.buildTurnContext({ ...bare256, homeDetail: gmHome });
+  check("§256: ⛔ registered for the turn and the ask, and READ under a header that says a home is a place, not a holding",
+    REG256.registryKeys("turn").includes("homeDetail") && REG256.registryKeys("ask").includes("homeDetail")
+    && /## HOME — the place this character chose to live\. It is a place, not a holding: nobody keeps it for them, nothing wears it down, and nobody raids it\./.test(p256) && p256.includes(gmHome));
+  const hold256 = [rd("engine/holdings.js"), rd("engine/worldtick.js"), rd("engine/caravan.js")].join("\n");
+  check("§256: ⛔ …and nothing in the holdings machinery reads it — no condition, keeper, decay or raid can reach a home",
+    !/character\??\.home\b/.test(hold256) && !/from "\.\/home\.js"/.test(hold256));
+  const A256 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§256: ⛔ the place header offers the door and marks home; the sheet says where home is and goes there only by the map's own road test",
+    /data-make-home="\$\{esc\(location\.id\)\}"/.test(A256) && /<span class="loc-home" title="Your home — your own place">⌂ home<\/span>/.test(A256)
+    && /function showMakeHome\(locationId\)/.test(A256) && /const r = makeHome\(character, locationId, \{ locations: CONTENT\.locations, worldDay: absoluteWorldDay\(\) \}\);/.test(A256)
+    && /const reach = !atHome && h\.exists && canTravelBetween\(character\.currentLocationId, h\.locationId, CONTENT\.locations, character\.placeEdges\);/.test(A256)
+    && /if \(homeB\) homeB\.onclick = \(\) => travelTo\(homeB\.dataset\.home\);/.test(A256));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

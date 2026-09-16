@@ -33,8 +33,15 @@ Erik's rulings this morning are quoted in full in `HANDOFF_ccode_aevi_SNG-595` �
 | **CCODE-358** | **the nanite says both numbers** — ordered and wild, each with its word and percentage (Millbrook read "strong 100%" while ordered crafts there answered at 53%). And the doc size table stopped flipping on a carriage return. |
 | **CCODE-359** | **another traveler is here.** The card carries `where` (community, town, place, the world-day they came), refreshed while they play; a GM row and a quiet line on the play screen say another player's character is in this same town; a shared scene carries its town, so Silas in the square finds the scene Adelheid opened at Mara Wells' Store. The town took three measured tries — the parent chain climbed to "The Disputed Zone" and then "Echo River Crossing"; a community is named for its town. |
 | **CCODE-360** | **an invitation carried by someone you both know.** Silas picks a traveler and a carrier from his band on the Bands tab; `world/invitations.json`, one merged record per sender, addressee and band. It reaches Adelheid only where HER save knows the carrier — on the real saves, Mara Wells is the one of the Fellowship's six she knows. She gets a one-tap Accept / Decline on the play screen, and her GM lets Mara bring it up (or send a note). The answer comes home on Silas's tick as word from elsewhere. |
+| CCODE-361 | Aevi's Kindly Rest and Painter's Shelf had raised two counts inside suites that were already red; the census was ratified, the Kindly Rest got an explicit `parentId: null`, and the prose place counts were fixed. |
+| **CCODE-362 / 365** | **the banner's pictures travel, in the right half, brighter** (Erik: "unrecognizable because of the aspect ratio" → "limit them to the right half… brighter across the board"). |
+| CCODE-363 | Sister Vreni's `vocation: "healer"` → ATTENDANT, from the game's own vocabulary ("an ATTENDANT mends"). |
+| **CCODE-364 / 366 / 368** | **a strike is news: who came, how, who stood in the way, what it cost.** Authored flavour only (fighting style, tradition, signature power); Aevi's 31 lines are live. A crusade is known; a quiet strike that lands leaves no name, in the words, the ids or the tab (Erik: "let the flavor of the striker guide"). A strike turned aside from the player is news naming the guard (Aevi). |
+| **CCODE-366** | anyone Silas has met can carry an invitation (Erik meant Edvar Crane, who is not on the Fellowship's roster). |
+| **CCODE-367** | **near news stands out** — near first, with a chip, and kept for the GM — **and a community is not a town**: `valley.millbrook` holds Archive Hollow nine days off, so "here" is now decided by walking distance, for news and for travelers alike. |
+| **CCODE-369** | **a home is a place that is yours** (Erik: "a home is a different type than a hold… to start with it's a location"): a ⌂ door in the place header, a Home line with "Go home", and a GM row. No decay, keeper or raid. |
 
-⚠️ **Both devices must reload (now v2.0.24).** A tab still running the old code overwrites the region file on its next tick
+⚠️ **Every device must reload (now v2.0.31).** A tab still running the old code overwrites the region file on its next tick
 and would drop the answer until a new client pushes it back.
 
 ## §2 — NEXT, IN ORDER
@@ -51,7 +58,7 @@ and would drop the answer until a new client pushes it back.
   healing, spirituality, lighter adventure* that today has no field at all.
 
 **A gentle game has the engine it needs** *(invitation + painting + routes shipped as CCODE-357; the cabin is below)*
-- ⬜ **A holding that is a HOME (the cabin) — NEEDS A RULING.** Holdings are only `post`/`enterprise`, lose a condition step every ~30 days without a keeper, and can be raided: the opposite of a quiet cabin. Should a home be exempt from decay and raids?
+- ✅ **A HOME (the cabin): RULED and shipped as CCODE-369.** Erik: *"a home is a different type than a hold... but it could BECOME a hold. to start with it's a location."* The Painter's Shelf can be Adelheid's home the day she stands in it.
 - Painting that makes a picture: a gallery image in watercolor for her, not the house "digital painting, atmospheric
   concept art" style that every image is forced into today.
 - A directed arrival that carries an invitation (the pressure queue already stages "they arrive now"; nothing aims it).
@@ -72,9 +79,22 @@ Two things changed from this plan while building, both deliberately:
 - ⚠️ **Silence is not an answer, and nothing expires.** Nothing happens without her yes; an unanswered invitation simply
   stays open. The carrier must be in the band (Edvar is not in the Fellowship, so today Mara is the road).
 
-**NEXT — SNG-596** (strikes landed or turned aside, casualties, vacancies — as news, placed where they happened), **then
-SNG-597** (the kin selector that compares `dir` and prefers who cared most; a figure in a PC's party surfaces her world-arc
-business), **then** the skill card (attribute + sub-attribute) and the purse band beside its number.
+**SNG-596** *(shipped: CCODE-364, 366, 368 — see §1)*.
+
+**NEXT — SNG-597** (the kin selector that compares `dir` and prefers who cared most; a figure in a PC's party surfaces her
+world-arc business), **then** the skill card (attribute + sub-attribute) and the purse band beside its number.
+
+**⬜ BACKLOG, from Erik's answers today:**
+- **Accomplices in a strike:** later. Aevi thinks they aren't worth it (three proper nouns is the most a line can carry);
+  that's Erik's call when it comes up.
+- **A revamp pass on the world news, "soon":** give every kind of news its place. Only 4 of 20 items carry one on
+  Adelheid's save, so near-news can only mark what the engine already placed. Also the five joins in Aevi's strike lines
+  (po/REPLY_ccode_SNG-596b).
+- **A home becoming a hold:** the upgrade path from CCODE-369's location to a holding.
+- **Recruiting into a band:** nothing in play adds a person to a band's roster. Edvar works beside Silas in the story and
+  isn't on the Fellowship's list.
+- **The world tab and an unseen striker:** Erik's "without a trace" hides the striker there; Aevi would keep them on the
+  tab as the player's own intelligence. One line either way.
 
 **THEN — shared lives.** Measured: EVERY part of an NPC's growth is per-save — status, rank, career, deeds,
 wants, deaths, minted people, holds. `minted-1` is three different people in three saves; `the_undefeated` is active,

@@ -43,6 +43,7 @@ import { buildRegionView, newsForGM, worldArcsForGM, collapseLedgerEvents } from
 import { travelersForGM, travelersHereForGM, whereOf } from "./travelers.js";   // SNG-595: a name that belongs to another player · CCODE-359: and who is here
 import { worldMovedOnForGM } from "./worldevents.js";   // CCODE-354: the world moved on while this character believed otherwise
 import { invitationsForGM, bandsJoinedForGM } from "./invitations.js";   // CCODE-360: an invitation carried by someone you both know
+import { homeForGM } from "./home.js";   // CCODE-369: a home is a place that is yours
 import { playerWishesForGM } from "./playerprofile.js";   // CCODE-355: what this player wants from the game
 import { SEXUAL_MARKERS, HARD_INTENSITY_MARKERS } from "./canon.js";   // SNG-595: the family floor, for rows with no rating
 import { isMinorProfile } from "./playerprofile.js";
@@ -589,6 +590,10 @@ export const GM_CONTEXT = [
     build: (env) => worldMovedOnForGM(env.character, { events: env.CONTENT?.events || {}, quests: env.CONTENT?.quests || [] }) },
   // ⛔ CCODE-360 (Erik: "I would like the opportunity to invite her to my Band of the Fell Pell - probably through mutual connections
   // when I recruit") — an invitation her own world's carrier brings, and the bands she chose to join.
+  // ⛔ CCODE-369 (Erik: "a home is a different type than a hold... to start with it's a location") — where this character lives.
+  { key: "homeDetail", builder: "home.homeForGM (CCODE-369)", carries: ["the place this character chose as home, and whether they are there"],
+    reachedBy: "always (empty unless the character has made a place home)", spec: "CCODE-369", views: ["turn", "ask"],
+    build: (env) => homeForGM(env.character, env.CONTENT?.locations || {}) },
   { key: "invitationsDetail", builder: "invitations.invitationsForGM (CCODE-360)", carries: ["an invitation from another traveler, carried by someone this character knows"],
     reachedBy: "always (empty unless an unanswered invitation's carrier is someone this character's own save knows)", spec: "CCODE-360", views: ["turn", "ask"],
     build: (env) => invitationsForGM(env.character, env.app?.invitationsStore?.() || null) },

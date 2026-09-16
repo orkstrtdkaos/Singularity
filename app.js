@@ -92,7 +92,8 @@ import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advan
 import { noteWorldMovedOnShown } from "./engine/worldevents.js";
 import { travelersHere, travelerHereLine, whereOf } from "./engine/travelers.js";   // CCODE-359: another traveler is here   // CCODE-354: the world moved on, counted by beats
 import { makeInvitation, incomingInvitations, sentInvitations, joinBandLocally, bandPhrase } from "./engine/invitations.js";
-import { newsNearness, nearFirst } from "./engine/newsvoice.js";   // CCODE-367: nearby news stands out   // CCODE-360: an invitation carried by someone you both know
+import { newsNearness, nearFirst } from "./engine/newsvoice.js";   // CCODE-367: nearby news stands out
+import { homeOf, isHome, makeHome } from "./engine/home.js";   // CCODE-369: a home is a place that is yours   // CCODE-360: an invitation carried by someone you both know
 import { runWakeGeneration } from "./engine/wake.js"; // SNG-204 Phase 2: open wakes generate the next thread
 import { addAssignment, delegationRefusal, activeDelegates, MISSION_KINDS, MISSION_KIND_IDS, canSendOn, sayFamilies } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
 import { setArcFate } from "./engine/latentarcs.js"; // SNG-191 §7: the player closing a surfaced arc (the handled/resolved fate)
@@ -149,12 +150,13 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.30";
+const APP_VERSION = "2.0.31";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
 app.addEventListener("click", e => { const b = e.target.closest?.("[data-help]"); if (b) { e.preventDefault(); showHelp(b.dataset.help); } });
 app.addEventListener("click", e => { const b = e.target.closest?.("[data-standing]"); if (b) { e.preventDefault(); showStandingHere(b.dataset.standing); } });   // CCODE-356
+app.addEventListener("click", e => { const b = e.target.closest?.("[data-make-home]"); if (b) { e.preventDefault(); showMakeHome(b.dataset.makeHome); } });   // CCODE-369
 
 // SNG-219: a Back control reachable WITHOUT scrolling, on every screen that has one — Erik's ask ("lots of
 // Back buttons are at the end of content; I'd like some at the top too so I don't scroll all the way down").
@@ -319,6 +321,35 @@ const STANDING_MEANING = {
   distrusted: "people expect the worst of you. Help is grudging, and you are watched.",
   hated: "people want you gone. Doors close, help is refused, and trouble comes looking.",
 };
+/** ⛔ CCODE-369 — MAKE THIS PLACE HOME. Erik: "a home is a different type than a hold... but it could BECOME a hold. to start with
+ *  it's a location." The player's choice, asked once, in plain words about what a home is and is not. */
+function showMakeHome(locationId) {
+  if (!character || !locationId) return;
+  const place = CONTENT.locations?.[locationId];
+  if (!place) return;
+  const cur = homeOf(character, CONTENT.locations);
+  document.getElementById("help-pop")?.remove();
+  const pop = document.createElement("div");
+  pop.id = "help-pop";
+  pop.className = "help-overlay";
+  pop.innerHTML = `<div class="help-card" role="dialog" aria-label="Make this place home">
+    <div class="help-short"><strong>Make ${esc(place.name)} home?</strong></div>
+    <div class="help-more">A home is your own place — somewhere to come back to. It is not a holding: nobody keeps it for you, nothing wears it down, and nobody raids it.${cur ? ` Your home is ${esc(cur.name)} now; this would make ${esc(place.name)} home instead.` : ""}</div>
+    <div class="help-foot"><button class="btn" id="home-yes">Make it home</button><button class="btn secondary" id="help-close">Not now</button></div>
+  </div>`;
+  document.body.appendChild(pop);
+  const close = () => pop.remove();
+  pop.addEventListener("click", ev => { if (ev.target === pop) close(); });
+  document.getElementById("help-close").onclick = close;
+  document.getElementById("home-yes").onclick = () => {
+    const r = makeHome(character, locationId, { locations: CONTENT.locations, worldDay: absoluteWorldDay() });
+    close();
+    if (!r.ok) return;
+    saveCharacter(character);
+    renderPlay(character.activeScene?.lastTurn || null, { aside: `${r.name} is home now.` });
+  };
+}
+
 function showStandingHere(communityId) {
   if (!character || !communityId) return;
   const s = standingWith(character, communityId, CONTENT.rules);
@@ -12761,6 +12792,13 @@ function renderCharacterScreen() {
       <div class="cs-header-text">
         <h2 style="margin:0">${esc(character.name)}</h2>
         <div class="hint"><span class="trait-tap" data-trait="origin:${esc(character.origin)}" title="tap: lore + mechanics">${esc(character.origin)}</span> · <span class="trait-tap" data-trait="background:${esc(character.background)}" title="tap: lore + mechanics">${esc(character.background)}</span> · level ${character.level} — ${character.xp}/${xpNeed} xp ${infoDot("growth.level")}${character.pendingSubPoints ? ` · <span class="grow-badge">+${character.pendingSubPoints} attribute</span>` : ""}${character.skillPoints ? ` · <span class="grow-badge">${character.skillPoints} skill</span>` : ""}</div>
+        ${(() => {   // ⛔ CCODE-369: where they live, and the way back — by the same road test the map uses
+          const h = homeOf(character, CONTENT.locations);
+          if (!h) return "";
+          const atHome = isHome(character);
+          const reach = !atHome && h.exists && canTravelBetween(character.currentLocationId, h.locationId, CONTENT.locations, character.placeEdges);
+          return `<div class="hint" style="margin-top:4px">⌂ Home: <strong>${esc(h.name)}</strong>${atHome ? " — you are home" : reach ? ` <button class="opt" id="cs-go-home" data-home="${esc(h.locationId)}">Go home (+${ADVANCE.travel}h)</button>` : " — find the road there on the map"}</div>`;
+        })()}
         ${character.form ? `<div class="hint" style="margin-top:4px"><em>Form:</em> <span class="trait-tap" data-trait="form:self" title="tap: lore + mechanics">${esc(character.form)}</span></div>` : ""}
         <div style="margin-top:6px; display:flex; gap:8px; flex-wrap:wrap">
           <button class="opt" id="cs-form" title="Describe this character's physical form / species so the portrait renders it (e.g. an Ent, a construct)">✎ Appearance</button>
@@ -13136,6 +13174,8 @@ function renderCharacterScreen() {
   if (regenP) regenP.onclick = () => regeneratePortraitFlow();
   const galB = document.getElementById("cs-gallery");
   if (galB) galB.onclick = () => renderGallery();
+  const homeB = document.getElementById("cs-go-home");   // CCODE-369
+  if (homeB) homeB.onclick = () => travelTo(homeB.dataset.home);
   document.getElementById("cs-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
 }
 
@@ -16830,6 +16870,7 @@ function renderPlay(turn, opts = {}) {
       return `<div class="loc-title-row">
         <h2 class="loc-title">${esc(sub || location.name)}</h2>
         ${rep ? `<button type="button" class="rep-band loc-standing ${esc(rep.band)}" data-standing="${esc(location.communityId || "")}" title="Your standing here — tap for what it means for you">${esc(rep.band)}</button>` : ""}
+        ${isHome(character) ? `<span class="loc-home" title="Your home — your own place">⌂ home</span>` : `<button type="button" class="loc-home-btn" data-make-home="${esc(location.id)}" title="${homeOf(character, CONTENT.locations) ? `Make this place home instead of ${esc(homeOf(character, CONTENT.locations).name)}` : "Make this place your home"}" aria-label="Make this place your home">⌂</button>`}
         ${sub && !saysParent ? `<span class="loc-parent" title="A named spot inside ${esc(location.name)}. You are in it; a sub-place is not a destination.">in ${esc(location.name)}</span>` : ""}
         <span class="time-tag" title="Your own clock — days, season, time of day (SNG-191). The world's count is a separate shared tally, not a date.">${esc(time.label)} <span class="world-day-tag" title="The Kept Count — the shared world tally; it only ever climbs and is not a date">· ⧗ ${worldCount()}</span></span>
       </div>`;

@@ -74,9 +74,9 @@ function seedOf(str) {
 /** ⚑ WHO THE DAY COULD OFFER. Returns rows of `{ id, name, tier, met, days, doing, why }`, nearest-weighted
  *  and drawn against the cadence — three to six, or fewer when the world genuinely has nobody near.
  *
- *  ⛔ IT IS DETERMINISTIC PER (CHARACTER, DAY) so the same day offers the same people however many turns it
- *  takes. ⚠️ And it EXCLUDES whoever is already in the scene: the GM does not need to be told about someone
- *  it is already talking to.
+ *  ⛔ IT IS DETERMINISTIC PER (PLACE, DAY) so the same day offers the same people however many turns it takes — and, since
+ *  CCODE-382, to EVERYONE in that town that day: `placeKey` is the settlement (`travelers.whereOf`), and `day` the world's.
+ *  ⚠️ And it EXCLUDES whoever is already in the scene: the GM does not need to be told about someone it is already talking to.
  *
  *  PURE over content + the character's own registry. */
 /** ⛔ SNG-591 (Erik) — "What we should make sure the GM knows is who is (1) nearby and (2) doing things the
@@ -109,16 +109,25 @@ export function relationOf(myBand, theirBand) {
   return { gap, kind: "event", say: "far above you — being helped by them is an EVENT, not a favour" };
 }
 
-export function presentToday(character, content = {}, { day = 0, hereId = null, want = null, exclude = [], crowd = 1, bandOf = null, myBand = null } = {}) {
+export function presentToday(character, content = {}, { day = 0, hereId = null, placeKey = null, want = null, exclude = [], crowd = 1, bandOf = null, myBand = null } = {}) {
   const locs = content.locations || {};
   const here = locs[hereId || character?.currentLocationId] || null;
   const met = new Set(Object.keys(character?.npcRegistry || {}));
   const skip = new Set([...(exclude || []), ...(character?.company || []).map(m => m && m.npcId)].filter(Boolean));
+  // ⛔ CCODE-382 — THE DAY'S ROLL IS THE TOWN'S, NOT THE TRAVELER'S. It was seeded by the character's id, so ⚑ Silas and Adelheid in the
+  // same Millbrook square met a different set of people on 58 of 60 world-days — two players, one place, one day, two crowds. Seeded by
+  // the settlement and the world-day, everyone standing there meets the same people; what differs is only what is theirs (who they
+  // have met, who travels with them, how crowded they like the world — a thronged setting sees MORE of the same people, never others).
+  const where = placeKey || here?.id || hereId || "x";
 
   const pool = [];
   for (const [id, n] of Object.entries(content.npcs || {})) {
     if (!n || skip.has(id)) continue;
     if (n.status === "dead") continue;
+    // ⛔ CCODE-382 — …AND NEVER SOMEONE THE WORLD BURIED. This read only the authored record, so ⚑ a legend dead in Silas's world (the One
+    // Called Zeus) was offered to his GM as "around today" 20 times across 400 simulated days. The world's fate (CCODE-381) and the
+    // player's own record of a death both count.
+    if (character?.worldState?.epicStatus?.[id]?.status === "dead" || character?.npcRegistry?.[id]?.status === "dead") continue;
     // ⚠️ AN UNTIERED AUTHORED PERSON IS LOCAL TEXTURE — the riffraff/notable layer, which is the baseline
     // Erik wants "pretty much every day". 47 of the 117 were exactly this and none of them carried a tier.
     //
@@ -146,7 +155,7 @@ export function presentToday(character, content = {}, { day = 0, hereId = null, 
     // person on this day so the roster does not flicker between turns.
     // ⚑ the dial lands HERE and nowhere else — on how often, never on who
     const chance = Math.min(0.9, weight * Math.max(0, Number(crowd) || 1));
-    const roll = seedOf(`${character?.id || "x"}|${day}|${id}`);
+    const roll = seedOf(`${where}|${day}|${id}`);
     if (roll >= chance) continue;              // not today
     pool.push({ id, name: n.name || id, tier, met: met.has(id), days: days == null ? null : Math.round(days * 10) / 10,
       doing: String(n.role || "").slice(0, 90), score: roll / Math.max(1e-9, chance),

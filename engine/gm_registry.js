@@ -263,6 +263,8 @@ export const GM_CONTEXT = [
     build: (env) => presenceForGM(env.character, env.CONTENT, {
       day: (() => { try { return env.time?.worldDay ?? env.character?.clock?.day ?? 0; } catch { return 0; } })(),
       hereId: env.location?.id || env.character?.currentLocationId || null,
+      // ⛔ CCODE-382: the TOWN the day is rolled for — everyone standing in Millbrook today meets the same people
+      placeKey: (() => { try { return whereOf({ currentLocationId: env.location?.id || env.character?.currentLocationId }, env.CONTENT?.locations || {})?.settlementId || null; } catch { return null; } })(),
       exclude: (env.sceneState?.npcsPresent || []).map(n => n && (n.id || n.npcId)).filter(Boolean),
       crowd: resolvePresence(env.profile?.presence).mult,   // §6: the player's own dial — how often, never who
       // ⛑ SNG-591 (Erik) — "does the PC help them or do they ask for the PCs help? Does the PC get saved by a

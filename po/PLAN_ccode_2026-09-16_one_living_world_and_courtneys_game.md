@@ -1,4 +1,4 @@
-<!-- status: shared lives under way — CCODE-380 (canon identity) and CCODE-381 (a legend's fate) shipped · content asks for Aevi in §4 -->
+<!-- status: shared lives under way — CCODE-380 (canon identity), 381 (a legend's fate), 382 (who is around today) shipped · content asks for Aevi in §4 -->
 # PLAN — One living world, and Courtney's game
 
 **CCode → Aevi and Erik · 2026-09-16**
@@ -112,9 +112,11 @@ is RELATIVE to a player (bond, times met, what they know) and what is TRUE of th
 - ✅ **CCODE-381 — a legend's fate is the world's.** `world/people/valley.json` holds one fate per authored legend, folded by
   one rule every client applies (the earliest death; a death over anything but a later return; otherwise the latest event,
   the heavier on a tie). The tick adopts before its pass and publishes after; a save's first read is silent.
-- ⬜ **Next:** who is present today, seeded by the place and the world-day rather than the character; minted people with an
-  identity every world shares (so their fates can join); the registry split (what is relative to a player against what is
-  true of the person); `world/holds` with `holdsNearForGM`; the >1MB read.
+- ✅ **CCODE-382 — who is around today is the town's.** Seeded by the settlement and the world-day, not the character (Silas and
+  Adelheid in one square had met different people on 58 of 60 days); and nobody the world or the player's record holds dead
+  (a buried legend had been offered as "around today" 20 times in 400 days).
+- ⬜ **Next:** minted people with an identity every world shares (so their fates can join); the registry split (what is
+  relative to a player against what is true of the person); `world/holds` with `holdsNearForGM`; the >1MB read.
 
 ## §3 — ⬜ BACKLOG (Erik): ONE SOURCE OF TRUTH FOR EVERY KIND OF THING
 

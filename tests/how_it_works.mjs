@@ -19063,6 +19063,52 @@ console.log("\n── §266 · a legend's fate is the world's ──");
     readAt > 0 && passAt > readAt && publishAt > passAt, `${readAt} · ${passAt} · ${publishAt}`);
 }
 
+// ⛔ CCODE-382 — shared lives, third stage: WHO IS AROUND TODAY IS THE TOWN'S. ⚑ MEASURED: seeded by the character, Silas and Adelheid in
+// the same Millbrook square met different people on 58 of 60 world-days; and a legend dead in Silas's world was offered as "around today"
+// 20 times over 400 simulated days, because presence read only the authored record.
+console.log("\n── §267 · who is around today is the town's, and never the buried ──");
+{
+  const PR267 = await import("../engine/presence.js");
+  const TR267 = await import("../engine/travelers.js");
+  const { loadContentHeadless: lch267 } = await import("./headless_content.mjs");
+  const C267 = await lch267();
+  const L = C267.locations;
+  const silasLike = { id: "char-s267", currentLocationId: "millbrook", npcRegistry: {}, company: [], worldState: { epicStatus: {} } };
+  const adelLike = { id: "char-a267", currentLocationId: "gen-mara-wells-store", npcRegistry: {}, company: [], worldState: { epicStatus: {} } };
+  const keyOf = (c) => TR267.whereOf(c, L)?.settlementId;
+  const ids = (c, d, extra = {}) => PR267.presentToday(c, C267, { day: d, hereId: c.currentLocationId, placeKey: keyOf(c), ...extra }).map(r => r.id).sort().join(",");
+  let same = 0, busy = 0;
+  for (let d = 60; d < 120; d++) { const a = ids(silasLike, d), b = ids(adelLike, d); if (a) busy++; if (a === b) same++; }
+  check("§267: ⛔ two travelers in the same town on the same world-day meet the SAME people — one in the square, one in Mara Wells' store",
+    keyOf(silasLike) === "millbrook" && keyOf(adelLike) === "millbrook" && busy >= 30 && same === 60, `${same} of 60 days the same, ${busy} with anyone`);
+  let differs = 0;
+  for (let d = 60; d < 120; d++) if (ids(silasLike, d) !== PR267.presentToday(silasLike, C267, { day: d, hereId: "millbrook", placeKey: "the_blaze" }).map(r => r.id).sort().join(",")) differs++;
+  check("§267: …while another town's day is its own roll", differs >= 30, `${differs} of 60 days differ`);
+  const thin = new Set(), thick = new Set();
+  let subset = true;
+  for (let d = 60; d < 120; d++) {
+    const a = ids(silasLike, d, { crowd: 0.35 }).split(",").filter(Boolean), b = new Set(ids(adelLike, d, { crowd: 1.6 }).split(",").filter(Boolean));
+    a.forEach(x => thin.add(x)); b.forEach(x => thick.add(x));
+    if (a.length && b.size < 6 && !a.every(x => b.has(x))) subset = false;
+  }
+  check("§267: …and a player's crowd dial changes HOW MANY of that day's people they see, never WHICH (a thinner day is a subset of a fuller one)",
+    subset && thin.size < thick.size, `${thin.size} people seen at solitary, ${thick.size} at thronged`);
+
+  // the buried
+  const findDay = (c) => { for (let d = 0; d < 400; d++) { const r = PR267.presentToday(c, C267, { day: d, hereId: "millbrook", placeKey: "millbrook", crowd: 1.6 }); if (r.length) return { d, id: r[0].id }; } return null; };
+  const probe = findDay(silasLike);
+  const buried = { ...silasLike, worldState: { epicStatus: { [probe?.id]: { status: "dead", diedWorldDay: 1 } } } };
+  const mourned = { ...silasLike, npcRegistry: { [probe?.id]: { id: probe?.id, name: "x", status: "dead" } } };
+  const around = (c) => PR267.presentToday(c, C267, { day: probe.d, hereId: "millbrook", placeKey: "millbrook", crowd: 1.6 }).map(r => r.id);
+  check("§267: ⛔ someone the WORLD buried is never around today — and nor is someone the player's own record holds dead",
+    !!probe && around(silasLike).includes(probe.id) && !around(buried).includes(probe.id) && !around(mourned).includes(probe.id), probe?.id);
+
+  const REG267 = rd("engine/gm_registry.js").replace(/\r\n/g, "\n");
+  check("§267: the GM row rolls the day for the town the character is in, through the one resolver travelers meet by",
+    /placeKey: \(\(\) => \{ try \{ return whereOf\(\{ currentLocationId: env\.location\?\.id \|\| env\.character\?\.currentLocationId \}, env\.CONTENT\?\.locations \|\| \{\}\)\?\.settlementId \|\| null; \} catch \{ return null; \} \}\)\(\),/.test(REG267)
+    && !/seedOf\(`\$\{character\?\.id/.test(rd("engine/presence.js")));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

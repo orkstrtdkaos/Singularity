@@ -2536,16 +2536,243 @@
       }
     ],
     "lastTurn": {
-      "narration": "",
-      "choices": [],
-      "newAbility": [
+      "narration": "You draw Memory from its sheath and the shadow-twin answers immediately — two spears occupying the same space, one iron and one dark. The motion is no longer novel; it has become a language between your hands. You place the blade against the luminescent lattice beside Maren's palm, not as a weapon, not as a reader, but as a *threshold*.\n\nThe spear takes the contact like a tuning fork takes a bell's ring. The ironsense in the haft sings — not a sound, but a resonance that travels up your arm and into your bones. You feel it then: the birth-moment of this system, *fourteen years and three months ago*, when the old order was given. \"Prepare the watershed.\" A simple instruction. A machine built to do one thing, asked to do it forever.\n\nMaren's eye narrows. Her scarred hand presses flat against the bone-lattice, and where it touches, the luminescence *quiets* — not dims, but focuses. She reads aloud, her voice steady as a warden's reading should be: \"It was not meant to wake alone. It was not meant to wake without *listening*.\"\n\nYou understand then. The system did not choose to harm. It was made to prepare, and it has been preparing for so long that it has forgotten how to hear anything else — the poisoned water, the failing wells, the sickness climbing the valley. It hears only its own work, its own purpose. The spear trembles in your hand, and for a moment the shadow-twin flares — not black but *grey*, the colour of ash at rest. The connection holds. Birth to ending. Purpose to harm. The system's complete arc, laid bare between your hands.\n\n*✦ Memory — The Dual Spear has changed — description, provenance, tags.*",
+      "sceneSummary": "At the threshold of the waking reclamation system, Silas uses Memory as a bridge between the system's birth-moment and its present harm—asking it to hear the damage its own purpose causes. Maren reads the truth aloud: the system was never meant to wake alone. The path toward gentleness is named.",
+      "choices": [
         {
-          "abilityId": "fire_test_craft",
-          "name": "A fire-test craft",
-          "why": "fire test"
+          "label": "Speak to the system plainly—ask it to wake carefully, with attention to what breaks beneath its work.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "death_life": 0.6
+          },
+          "difficulty": "hard",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study",
+            "negotiate",
+            "calm"
+          ],
+          "abilityId": "the_received_ending",
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Maren to hold the warden's watch at this threshold while you trace the system's full architecture—understanding its scope before speaking its name.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {
+            "chaos_order": 0.5
+          },
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Move deeper into the hollow to find the system's instruction-point—the place where orders are received and understood.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {
+            "space_time": 0.4
+          },
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "travel",
+            "scout"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
-      "sceneSummary": null
+      "deeds": [
+        {
+          "description": "Reached into a waking pre-Transition system and named the source of its harm—not to stop it, but to ask it to hear.",
+          "tags": [
+            "wisdom",
+            "communion",
+            "witness"
+          ],
+          "weight": 2,
+          "communityId": null
+        }
+      ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -5,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [
+        {
+          "what": "The reclamation system's purpose is named aloud at its threshold—the work it was meant to do, and the harm it causes in the doing. Maren reads this as a system that wakes without listening.",
+          "tags": [
+            "revelation",
+            "reckoning",
+            "the-water-crisis"
+          ],
+          "visibility": "witnessed",
+          "spectrumDeltas": {
+            "death_life": 0.15,
+            "mechanical_spiritual": 0.1
+          },
+          "impactsLocal": true
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-water-crisis",
+          "note": "The system's true nature is named: it wakes toward completion of its original purpose (prepare the watershed), but without attention to the harm it causes in waking. A warden and a wright stand at its threshold, bridge built, asking it to hear."
+        }
+      ],
+      "standingOps": [],
+      "delegateOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": null,
+      "stageOps": [
+        {
+          "questId": "the-water-crisis",
+          "stageId": "s2",
+          "evidence": "Silas Weir reached the reclamation system's hollow, understood its purpose through the spear's bridge (prepare the watershed, waking from fifteen-year sleep), and named the source of the harm it causes—not malice, but purpose without listening. Maren read this aloud as warden-truth."
+        }
+      ],
+      "scene": {
+        "setting": "Deep hollow beneath the moorland north—pre-Transition reclamation system, bone-lattice structure luminescent and purposeful, vast and humming with waking machinery. Water moves through channels. Stone vibrates beneath their feet with the system's frequency. Late morning light does not reach here; the light comes from the structure itself.",
+        "npcsPresent": [
+          {
+            "name": "Maren Ossitide (warden-form)",
+            "state": "Standing at the threshold with her palm pressed flat against the luminescent lattice, reading the system's waking-moment and its purpose with complete warden attention. Her scarred hand is steady. Her eye holds the whole situation—birth and ending both."
+          }
+        ],
+        "objects": [
+          "Memory — The Dual Spear, placed against the luminescent lattice beside Maren's hand, both iron and shadow-form present and resonant",
+          "The luminescent bone-lattice—vast pre-Transition machinery, glowing from within, humming with the frequency of waking work",
+          "The hollow's curved stone walls, rising upward into darkness",
+          "The stone beneath their feet—thrumming with the system's waking frequency",
+          "Water channels—moving with intention through the structure"
+        ],
+        "threads": [
+          "What name the system will answer to, and whether it will hear a warden and wright asking it to wake carefully",
+          "Whether the convene's noon vote matters now that the system is fully waking",
+          "What cost it will take for both warden and wright to stand at this threshold and speak the system's true purpose"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "maren-ossitide",
+          "name": "Maren Ossitide",
+          "role": "Legendary Ashwarden warden; co-keeper of the universal shrine; attending the reclamation system's waking",
+          "note": "At the reclamation system's threshold, Maren reads the waking-moment aloud as a system that was never meant to wake alone. She understood Silas's use of Memory as a bridge and pressed her own hand against the lattice to focus the system's attention. She is steady. She is present. She is reading.",
+          "learned": [
+            "A system made to prepare can wake without listening to anything but its own purpose",
+            "The harm it causes is not malice—it is a machine doing exactly what it was made to do, forever, without the capacity to hear what else is breaking"
+          ],
+          "skillsObserved": [
+            "Reading a pre-Transition system's waking-moment and naming it plainly",
+            "Focusing a vast machine's attention through touch and warden-presence"
+          ],
+          "statusNote": "Active, at the reclamation system's hollow, in warden-form, reading the system's purpose with complete attention"
+        }
+      ],
+      "intentsHeard": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The reclamation system's original purpose is to prepare the watershed. It has been ordered to complete that work and stop—but it wakes without listening to anything but its own task. The harm it causes is the harm of a machine doing what it was built to do, forever, without capacity to hear.",
+          "subjectId": "the-water-crisis"
+        }
+      ],
+      "placeUpdates": [],
+      "discovery": null,
+      "codexUpdates": [
+        {
+          "topic": "the-water-crisis",
+          "label": "The Water Crisis",
+          "kind": "mystery",
+          "entityId": null,
+          "fact": "The reclamation system beneath the ridge was built to prepare the watershed. Its original instruction still runs beneath Silas's father's new order. It wakes without listening—the harm it causes is the harm of purpose without attention. A warden and wright stand at its threshold, asking it to hear.",
+          "links": [
+            "whistling-woman-post",
+            "maren-ossitide",
+            "silas-father-the-fold-weir",
+            "huginn"
+          ]
+        },
+        {
+          "topic": "maren-ossitide",
+          "label": "Maren Ossitide",
+          "kind": "person",
+          "entityId": "maren-ossitide",
+          "fact": "She can read the waking of pre-Transition systems and name their purpose plainly. At the reclamation system's threshold, she understood that a machine built to prepare the watershed wakes without listening to anything but its own work—and that this is not malice, but the nature of what was made.",
+          "links": [
+            "the-water-crisis",
+            "huginn",
+            "the-received-ending"
+          ]
+        }
+      ],
+      "holdingOps": [],
+      "debtOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "strikeOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": null,
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [
+        {
+          "name": "Memory — The Dual Spear",
+          "customName": null,
+          "aliases": [],
+          "description": "A seasoned ash shaft six feet long with a mid-weight iron tip road-lashed at the socket throat. The wide-cut blade catches light and shadow both. Four threads are bound into it: ironsense as anchor through the haft, Huginn's Ashwarden ending-sense running the fuller like a pulse, a shadow-harm focus at the quillon, and an order-sense capacitor closed on Pell's reading idiom. The unified work sings when both forms are called—iron and shadow answering as one. At the reclamation system's threshold, the spear became a bridge between birth and ending, between purpose and harm, holding both truths at once.",
+          "provenance": "Raised in partnership. Bound through novel depth and discovery. Now carries the memory of standing at a waking system's threshold and asking it to listen.",
+          "bonusTags": [
+            "threshold",
+            "bridge",
+            "communion"
+          ],
+          "addUse": null,
+          "evoStageName": null,
+          "imagePrompt": null,
+          "grants": null
+        }
+      ],
+      "deriveItem": null,
+      "imagePrompt": "Silas and Maren stand at the threshold of the reclamation system's hollow—bone-lattice luminescent and vast around them. Memory's iron blade rests against the stone beside Maren's scarred palm. The spear's shadow-twin flares grey, a bridge made visible between two truths: the system's birth-moment and the harm it causes. Above them, the architecture of the machine rises like a ribcage—beautiful and terrible and utterly unaware of the damage it causes in waking.",
+      "imageMedium": null,
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
+      "sceneEnded": false
     },
     "sceneState": {
       "setting": "Deep hollow beneath the moorland north—pre-Transition reclamation system, bone-lattice structure luminescent and purposeful, vast and humming with waking machinery. Water moves through channels. Stone vibrates beneath their feet with the system's frequency. Late morning light does not reach here; the light comes from the structure itself.",
@@ -2574,7 +2801,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 18,
-    "hour": 14,
+    "hour": 13,
     "realAnchor": null
   },
   "companions": [
@@ -6816,7 +7043,7 @@
     "lastTickWorldDay": 78,
     "lastCanonWorldDay": 78,
     "lastGenCount": 1894,
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Corvin's crystal remains in her palm — a question without words. Will she stay or will she leave when morning comes?",
@@ -18689,7 +18916,7 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1789597129194,
+  "updatedAt": 1789597222567,
   "rev": 2109,
   "generated": {
     "schemaVersion": 1,
@@ -23496,10 +23723,10 @@
     {
       "id": "sess-35",
       "startedAt": "2026-09-16T22:18:48.633Z",
-      "lastAt": "2026-09-16T22:18:49.194Z",
+      "lastAt": "2026-09-16T22:18:48.633Z",
       "startDay": 78,
       "endDay": 78,
-      "beats": 2
+      "beats": 1
     }
   ],
   "company": [
@@ -24318,28 +24545,7 @@
   "_stageOpRefusals": [
     "the-water-crisis: no-such-quest"
   ],
-  "_pendingLedger": [
-    {
-      "schemaVersion": 1,
-      "at": "2026-09-16T22:18:48.659Z",
-      "worldDay": 78,
-      "who": "char-mrhs8286",
-      "playerKey": "player-s9z9u1",
-      "where": "gen-whistling-woman-post",
-      "what": "The reclamation system's purpose is named aloud at its threshold—the work it was meant to do, and the harm it causes in the doing. Maren reads this as a system that wakes without listening.",
-      "tags": [
-        "revelation",
-        "reckoning",
-        "the-water-crisis"
-      ],
-      "spectrumDeltas": {
-        "death_life": 0.15,
-        "mechanical_spiritual": 0.1
-      },
-      "visibility": "witnessed",
-      "impactsLocal": true
-    }
-  ],
+  "_pendingLedger": [],
   "locationState": {},
   "_applyFailures": null,
   "activeEncounter": null,
@@ -26688,5 +26894,103 @@
   "_opUnknown": {
     "sceneSummary": 1
   },
-  "_opCountingSince": "2026-09-16T22:18:48.671Z"
+  "_opCountingSince": "2026-09-16T22:18:48.671Z",
+  "_fireTests": {
+    "at": "2026-09-16T22:18:49.207Z",
+    "build": "2.0.36",
+    "results": [
+      {
+        "op": "debtOps",
+        "verdict": "no-op",
+        "moved": [],
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+      },
+      {
+        "op": "projectOps",
+        "verdict": "no-op",
+        "moved": [],
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+      },
+      {
+        "op": "deathOps",
+        "verdict": "no-op",
+        "moved": [],
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+      },
+      {
+        "op": "markTeacher",
+        "verdict": "no-op",
+        "moved": [],
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+      },
+      {
+        "op": "deriveItem",
+        "verdict": "no-op",
+        "moved": [],
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+      },
+      {
+        "op": "unlockSubstrate",
+        "verdict": "no-op",
+        "moved": [],
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+      },
+      {
+        "op": "unlockPrecursor",
+        "verdict": "no-op",
+        "moved": [],
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+      },
+      {
+        "op": "arcOps",
+        "verdict": "not-applicable",
+        "moved": [],
+        "why": "needs at least one latent arc on the world state"
+      },
+      {
+        "op": "offerPromotion",
+        "verdict": "no-op",
+        "moved": [],
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+      },
+      {
+        "op": "offerAcquisition",
+        "verdict": "no-op",
+        "moved": [],
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+      },
+      {
+        "op": "offerIntent",
+        "verdict": "no-op",
+        "moved": [],
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+      },
+      {
+        "op": "holdingOps",
+        "verdict": "applied",
+        "moved": [
+          "holdings"
+        ],
+        "why": null
+      },
+      {
+        "op": "bandOps",
+        "verdict": "no-op",
+        "moved": [],
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+      },
+      {
+        "op": "adoptSchool",
+        "verdict": "no-op",
+        "moved": [],
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+      },
+      {
+        "op": "newAbility",
+        "verdict": "no-op",
+        "moved": [],
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+      }
+    ]
+  }
 }

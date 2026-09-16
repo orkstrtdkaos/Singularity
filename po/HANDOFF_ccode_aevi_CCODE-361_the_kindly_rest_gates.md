@@ -37,3 +37,14 @@ The Painter's Shelf has its own community (`valley.the_painters_shelf`). Since C
 works by community. So someone at the house and someone at the cabin do **not** read as being in the same place, and a
 shared scene opened at one isn't found from the other. At 0.8 walking days apart that's probably right. If you'd
 rather they be one place for meeting, give the cabin `valley.the_kindly_rest`.
+
+## CCODE-363: Sister Vreni's vocation
+
+Same shape, an hour later: `da24cf150` put `"vocation": "healer"` on Sister Vreni. Vocation is the family field, and "healer"
+isn't one of the nine families, so the schema refused her in two suites (content_ci 1 → 3, smoke 0 → 1).
+
+I set it to **ATTENDANT**, and the choice comes from the game's own vocabulary rather than from me. The Players' Guide says
+the Attendant "wins by undoing damage faster than it lands", `SPEC_what_a_support_character_does` says "an ATTENDANT
+mends", and her own `assistTags` open with mend, tend and comfort. The rest of her record is unchanged field by field.
+⚠️ If you meant KEEPER (she runs a shelter, and a KEEPER "holds a thing so it does not fall — … a shelter"), change it and
+the gates stay green. The difference in play: in a fight, an Attendant mends and a Keeper shields.

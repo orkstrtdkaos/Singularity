@@ -51,9 +51,9 @@
   },
   "attunement": 1,
   "maxHealth": 25,
-  "health": 8,
+  "health": 11,
   "maxEnergy": 116,
-  "energy": 0,
+  "energy": 40,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -283,208 +283,132 @@
         "player": "Ask Mara if she can speak directly and plainly about what then energy is, and what risks it holds. That way I can avoid trouble.",
         "summary": "Adelheid reaches Mara Wells at her store in the dead of night with news of the waking Precursor system. Aevi reveals it is a *reclamation work*—executing a directive, not newly awakening. Adelheid asks Mara to speak plainly about what the system is and what it risks; Mara refuses, naming only that the timeline has collapsed and that rest is necessary. The gate holds.",
         "narration": "You steady yourself against the doorframe, your breath still ragged, and force the question out. \"Mara, I need you to speak plainly. What is that energy beneath Millbrook? What risks does it hold?\" Your voice cracks slightly on the last word—exhaustion and fear bleeding through.\n\nMara's expression does not change. She sets down her pen with deliberate care, the nib scraping against the inkwell's rim, and she looks at you for a long moment without answering. When she does speak, her voice is even, careful, and utterly devoid of the clarity you asked for. \"What I can tell you is this: the timeline we were working with has collapsed. Hours matter now instead of weeks. And you need to sleep before you fall where you stand.\"\n\nThat is not an answer. It is a gate. You can feel it—the moment she decided not to cross a line, not to hand you the full picture. Aevi's motes dim slightly, noticing what you noticed. Mara's regard shifts, measuring something in your exhaustion and your directness and the mud still streaming from your sleeves. She is reading whether you can be trusted with the whole thing, and whatever calculation she is running, it is not yet complete."
+      },
+      {
+        "player": "Sleep here at the store—accept Mara's refusal for now and let exhaustion release. When you wake, ask again, and read what has changed while you rested.",
+        "summary": "Adelheid collapses into sleep at Mara's Store after triggering the Precursor system's waking. She wakes to early morning, rested, and finds Mara at a marked map—the night's waiting has yielded to preparation.",
+        "narration": "You nod, though every part of you wants to push back, and let your shoulders drop. The exhaustion is real—a physical weight that has been holding you upright only through will and fear. When you stop fighting it, the weight becomes unbearable.\n\nMara gestures to a back room, small and spare: a cot with a folded blanket, a pitcher of water, a stand for your wet clothes. She says nothing more, but her movements are efficient, kind in the way of someone who knows you will not hear warmth right now. You shed the mud-soaked layers and collapse onto the cot. Aevi dims her motes to a gentle glow, settling on the shelf above your head—a small constellation keeping watch.\n\nSleep comes fast and deep, the kind that closes everything out. Dreams run beneath it—the hum of the Precursor system becomes the hum of your own heartbeat, becomes the hum of the plants, becomes something you cannot name. When you surface again, the window shows first gray, then pale gold. Early morning. The store beyond the closed door is already alive with small sounds: Mara moving, water heating, the deliberate clink of cups.\n\nYou dress in clothes that have been dried by the stove—a small mercy—and step out into the main room. Mara stands at her work table again, but this time it is not ledgers laid open. A map is spread there, hand-drawn, marked with notations in careful script. She looks up as you enter, and her expression has shifted: not warmer, but more settled. The calculation has moved to the next step."
       }
     ],
     "lastTurn": {
-      "narration": "You steady yourself against the doorframe, your breath still ragged, and force the question out. \"Mara, I need you to speak plainly. What is that energy beneath Millbrook? What risks does it hold?\" Your voice cracks slightly on the last word—exhaustion and fear bleeding through.\n\nMara's expression does not change. She sets down her pen with deliberate care, the nib scraping against the inkwell's rim, and she looks at you for a long moment without answering. When she does speak, her voice is even, careful, and utterly devoid of the clarity you asked for. \"What I can tell you is this: the timeline we were working with has collapsed. Hours matter now instead of weeks. And you need to sleep before you fall where you stand.\"\n\nThat is not an answer. It is a gate. You can feel it—the moment she decided not to cross a line, not to hand you the full picture. Aevi's motes dim slightly, noticing what you noticed. Mara's regard shifts, measuring something in your exhaustion and your directness and the mud still streaming from your sleeves. She is reading whether you can be trusted with the whole thing, and whatever calculation she is running, it is not yet complete.",
-      "sceneSummary": "Adelheid reaches Mara Wells at her store in the dead of night with news of the waking Precursor system. Aevi reveals it is a *reclamation work*—executing a directive, not newly awakening. Adelheid asks Mara to speak plainly about what the system is and what it risks; Mara refuses, naming only that the timeline has collapsed and that rest is necessary. The gate holds.",
+      "narration": "You nod, though every part of you wants to push back, and let your shoulders drop. The exhaustion is real—a physical weight that has been holding you upright only through will and fear. When you stop fighting it, the weight becomes unbearable.\n\nMara gestures to a back room, small and spare: a cot with a folded blanket, a pitcher of water, a stand for your wet clothes. She says nothing more, but her movements are efficient, kind in the way of someone who knows you will not hear warmth right now. You shed the mud-soaked layers and collapse onto the cot. Aevi dims her motes to a gentle glow, settling on the shelf above your head—a small constellation keeping watch.\n\nSleep comes fast and deep, the kind that closes everything out. Dreams run beneath it—the hum of the Precursor system becomes the hum of your own heartbeat, becomes the hum of the plants, becomes something you cannot name. When you surface again, the window shows first gray, then pale gold. Early morning. The store beyond the closed door is already alive with small sounds: Mara moving, water heating, the deliberate clink of cups.\n\nYou dress in clothes that have been dried by the stove—a small mercy—and step out into the main room. Mara stands at her work table again, but this time it is not ledgers laid open. A map is spread there, hand-drawn, marked with notations in careful script. She looks up as you enter, and her expression has shifted: not warmer, but more settled. The calculation has moved to the next step.",
+      "sceneSummary": "Adelheid collapses into sleep at Mara's Store after triggering the Precursor system's waking. She wakes to early morning, rested, and finds Mara at a marked map—the night's waiting has yielded to preparation.",
       "choices": [
         {
-          "label": "\"Then tell me what I need to do RIGHT NOW to protect Millbrook. Not the whole picture—just what matters in the next hours.\"",
+          "label": "Look at the map before speaking—read what Mara has prepared while you slept.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": "very easy",
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask Mara directly: 'What changed while I was sleeping? What do you know now that you didn't tell me last night?'",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {},
           "difficulty": "normal",
-          "opposedDifficulty": null,
           "intentTags": [
             "negotiate"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         },
         {
-          "label": "Sleep here at the store—accept Mara's refusal for now and let exhaustion release. When you wake, ask again, and read what has changed while you rested.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
-          "difficulty": "very easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "endure"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Turn to Aevi. \"You know what a reclamation system does. What does this one do when it finishes waking—what does 'preparing ground' mean?\"",
+          "label": "Use Echo Sense to map the space around the store—check if the Precursor vibration has moved closer or changed while you rested.",
           "attribute": "mental",
-          "subAttribute": "reason",
+          "subAttribute": "insight",
           "axes": {},
           "difficulty": "easy",
-          "opposedDifficulty": null,
+          "abilityId": "echo_sense",
+          "energyCost": 4,
           "intentTags": [
-            "study"
+            "scout"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         },
         {
-          "label": "Open Mara's note to Piotr yourself—read what the sealed instruction actually says, since Mara will not speak it aloud.",
+          "label": "Ask for water and food before anything else—you are rested but not restored, and a clear head needs a full belly.",
           "attribute": "practical",
           "subAttribute": "wits",
           "axes": {},
-          "difficulty": "hard",
-          "opposedDifficulty": null,
+          "difficulty": "very easy",
           "intentTags": [
-            "steal"
+            "practical"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         }
       ],
-      "deeds": [],
       "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
+        "energy": 40,
+        "health": 3
       },
-      "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "maras-errand",
-          "note": "Adelheid has triggered the Precursor system's active awareness before reading Mara's sealed note. Mara confirms the timeline is now compressed to hours instead of weeks, but refuses to explain the system's nature or risks directly. The note remains sealed and unread."
-        }
-      ],
-      "standingOps": [],
-      "delegateOps": [],
-      "arcOps": [],
-      "adoptSchool": null,
-      "offer": null,
-      "stageOps": [],
+      "timeOps": {
+        "hoursPassed": 8,
+        "why": "a full night's sleep, from deep night to early morning"
+      },
       "scene": {
-        "setting": "Mara Wells' Store, deep night, early spring. A solid stone structure north of Millbrook village proper. Lamplight burns steady. Adelheid stands dripping in the doorway, mud streaming from sleeves and clothes. Mara stands at her work table, pen set down beside closed ledgers, watching with sharp composure.",
+        "setting": "Mara Wells' Store, early morning, pale gold light through the eastern window. A solid stone structure with workshop annex. Inside: a work table spread with a hand-drawn map marked in careful script, a cot in the back room (now empty), a stove cooling from night-heating, the smell of woodsmoke and dried herbs.",
         "npcsPresent": [
           {
             "name": "Mara Wells",
-            "state": "Standing at her work table. She has set down her pen and closed her ledgers. She is watching Adelheid with focused, calculating attention—reading her exhaustion, her fear, her directness, and whatever decision she is reaching about how much truth to hand over."
+            "state": "Standing at her work table, watching the map, looking up as Adelheid emerges from the back room. Her expression is settled, calculation moved to the next phase."
           }
         ],
         "objects": [
-          "Work table with closed ledgers (the open one has been shut)",
-          "Lamplight burning steady",
-          "A cooling cup of tea, untouched",
-          "Adelheid's mud-soaked clothes streaming water onto the floor",
-          "The silver-stemmed cutting (linen-wrapped, still held in Adelheid's grip)"
+          "A hand-drawn map spread on the work table, marked with notations",
+          "A folded blanket on the cot",
+          "A pitcher of water on the stand",
+          "Dried clothes folded and waiting",
+          "The closed ledgers from the night before"
         ],
         "threads": [
-          "What Piotr's sealed note actually contains—the explanation Piotr was forbidden to speak",
-          "What Mara's original plan was, and how many weeks it should have taken before Adelheid forced the timeline forward",
-          "Whether Mara will hand over the full picture, or continue to meter out information in pieces",
-          "What happens when the Precursor system finishes waking—what 'preparing ground' means in practical terms for Millbrook",
-          "How much time there is before the system's work reaches the river, or the village, or something irreversible"
+          "What the hand-drawn map shows and where it points",
+          "Whether Mara will finally speak plainly about the Precursor system's nature and risks",
+          "How much time remains before the system's 'preparation' reaches the village or the river",
+          "What new information or changes occurred in the night while Adelheid slept"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "mara-wells",
-          "note": "Mara was awake in the store in the dead of night, ledgers open, when Adelheid arrived muddy and shaken from direct contact with the Precursor system. When asked to speak plainly about the system's nature and risks, Mara refused—she named only that the timeline has collapsed to hours instead of weeks, and that Adelheid must sleep. She is measuring whether Adelheid can be trusted with the full truth.",
-          "learned": [
-            "Mara has known for at least two seasons that the Precursor system beneath Millbrook exists",
-            "Mara's original plan involved weeks of careful observation, not hours of active crisis",
-            "Mara does not believe Adelheid can be trusted with full information while exhausted",
-            "Mara is calculating something—whether to keep information gated, and from whom"
-          ],
-          "relationshipDelta": 0,
-          "statusNote": "Active at her store, awake in the deep night, controlling information flow about the Precursor system"
+          "note": "Waited through the night while Adelheid slept. Prepared a hand-drawn map with careful notations. Her calculation has moved to the next operational phase—she is ready to brief or to move.",
+          "statusNote": "Active at her store, awake and prepared, calculation advanced to the next phase"
         }
       ],
-      "intentsHeard": [],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "discovery": null,
-      "codexUpdates": [
-        {
-          "topic": "precursor-layer",
-          "label": "The Precursor Layer",
-          "kind": "lore",
-          "fact": "A reclamation system beneath Millbrook is not newly waking—it is actively executing a directive, continuously executing, and has been executing since before Adelheid touched it. It is not a dormant relic awakening; it is infrastructure that never stopped working and is now entering a more active phase.",
-          "links": [
-            "uncatalogued-terrace-plants",
-            "echo-river-contamination",
-            "mara-wells"
-          ]
-        }
-      ],
-      "holdingOps": [],
-      "debtOps": [],
-      "partyOps": [],
-      "generateRequest": [],
-      "encounterOps": [],
-      "projectOps": [],
-      "bandOps": [],
-      "deathOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "a brief, tense exchange in Mara's store—no time has truly passed, only the weight of refusal"
+      "offer": {
+        "thing": "A hand-drawn map marked with careful notations—Mara's preparation laid out for you to see",
+        "from": "Mara's own understanding of the crisis and the timeline collapse; she has been working while you slept and is now ready to share the next layer of information"
       },
-      "moveTo": null,
-      "stateOps": [],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": null,
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Mara Wells' Store, deep night, early spring. A solid stone structure north of Millbrook village proper. Lamplight burns steady. Adelheid stands dripping in the doorway, mud streaming from sleeves and clothes. Mara stands at her work table, pen set down beside closed ledgers, watching with sharp composure.",
+      "setting": "Mara Wells' Store, early morning, pale gold light through the eastern window. A solid stone structure with workshop annex. Inside: a work table spread with a hand-drawn map marked in careful script, a cot in the back room (now empty), a stove cooling from night-heating, the smell of woodsmoke and dried herbs.",
       "npcsPresent": [
         {
           "name": "Mara Wells",
-          "state": "Standing at her work table. She has set down her pen and closed her ledgers. She is watching Adelheid with focused, calc"
+          "state": "Standing at her work table, watching the map, looking up as Adelheid emerges from the back room. Her expression is settl"
         }
       ],
       "objects": [
-        "Work table with closed ledgers (the open one has been shut)",
-        "Lamplight burning steady",
-        "A cooling cup of tea, untouched",
-        "Adelheid's mud-soaked clothes streaming water onto the floor",
-        "The silver-stemmed cutting (linen-wrapped, still held in Adelheid's grip)"
+        "A hand-drawn map spread on the work table, marked with notations",
+        "A folded blanket on the cot",
+        "A pitcher of water on the stand",
+        "Dried clothes folded and waiting",
+        "The closed ledgers from the night before"
       ],
       "threads": [
-        "What Piotr's sealed note actually contains—the explanation Piotr was forbidden to speak",
-        "What Mara's original plan was, and how many weeks it should have taken before Adelheid forced the timeline forward",
-        "Whether Mara will hand over the full picture, or continue to meter out information in pieces",
-        "What happens when the Precursor system finishes waking—what 'preparing ground' means in practical terms for Millbrook",
-        "How much time there is before the system's work reaches the river, or the village, or something irreversible"
+        "What the hand-drawn map shows and where it points",
+        "Whether Mara will finally speak plainly about the Precursor system's nature and risks",
+        "How much time remains before the system's 'preparation' reaches the village or the river",
+        "What new information or changes occurred in the night while Adelheid slept"
       ]
     },
-    "beats": 11,
+    "beats": 12,
     "subPlace": {
       "slug": "the-wet-meadows",
       "name": "The Wet Meadows",
@@ -494,7 +418,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 2,
-    "hour": 3,
+    "hour": 11,
     "realAnchor": null
   },
   "companions": [
@@ -539,7 +463,8 @@
         "[d2] Sex recorded: female.",
         "[d2] Adelheid found her awake and waiting at her work table in the dead of night—she appears to have expected this escalation, or something like it. Her calmness in the face of news of a waking Precursor system will tell what she has known and been preparing for.",
         "[d2] Mara was awake at her work table in the dead of night, apparently expecting—or having prepared for—this escalation. When Adelheid confesses direct contact with the Precursor system, Mara's response is not shock but recalibration. She confirms that Adelheid has compressed a carefully-planned…",
-        "[d2] Mara was awake in the store in the dead of night, ledgers open, when Adelheid arrived muddy and shaken from direct contact with the Precursor system. When asked to speak plainly about the system's nature and risks, Mara refused—she named only that the timeline has collapsed to hours instead of…"
+        "[d2] Mara was awake in the store in the dead of night, ledgers open, when Adelheid arrived muddy and shaken from direct contact with the Precursor system. When asked to speak plainly about the system's nature and risks, Mara refused—she named only that the timeline has collapsed to hours instead of…",
+        "[d2] Waited through the night while Adelheid slept. Prepared a hand-drawn map with careful notations. Her calculation has moved to the next operational phase—she is ready to brief or to move."
       ],
       "knownFacts": [
         "She considers them significant enough to task a stranger with observing them on a first meeting",
@@ -563,10 +488,10 @@
         "locationId": "gen-mara-wells-store",
         "day": 2
       },
-      "statusNote": "Active at her store, awake in the deep night, controlling information flow about the Precursor system",
+      "statusNote": "Active at her store, awake and prepared, calculation advanced to the next phase",
       "gender": "woman",
       "pronouns": "she/her",
-      "met": 6,
+      "met": 7,
       "sex": "female",
       "age": 47
     },
@@ -794,12 +719,8 @@
     "lastTickWorldDay": 77,
     "lastCanonWorldDay": 77,
     "pressureQueue": [],
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "Piotr's quiet, unyielding refusal—a person's boundary holding firm against pressure",
-        "from": "Piotr's loyalty to Mara and her written instruction; his understanding that Adelheid is a stranger despite her competence"
-      },
       {
         "thing": "Aevi's direct warning and refusal to allow further contact—she knows more than she has said, and her fear is real",
         "from": "her presence at your side and her own ancient connection to the Precursor layer"
@@ -815,6 +736,10 @@
       {
         "thing": "Aevi's memory of Precursor reclamation systems—a fragment of old knowledge surfacing",
         "from": "Adelheid's direct contact with the waking system, forcing Aevi's recognition of the pattern and her need to name what she knows"
+      },
+      {
+        "thing": "A hand-drawn map marked with careful notations—Mara's preparation laid out for you to see",
+        "from": "Mara's own understanding of the crisis and the timeline collapse; she has been working while you slept and is now ready to share the next…"
       }
     ]
   },
@@ -1111,14 +1036,15 @@
   "itemReclaimVersion": 1,
   "nameRepairVersion": 1,
   "tendencies": {
-    "generous": 3.9413512982036347,
-    "social": 3.3468376136003646,
-    "cerebral": 24.312007354819276,
-    "cautious": 21.065027872946484,
-    "strategic": 19.59745813548507,
-    "carousing": 1.4653189199461107,
-    "risky": 0.7344956992211081,
-    "ruthless": 1.6751831869995113
+    "generous": 3.8428175157485436,
+    "social": 3.2631666732603555,
+    "cerebral": 23.704207170948795,
+    "cautious": 20.538402176122823,
+    "strategic": 19.107521682097943,
+    "carousing": 1.428685946947458,
+    "risky": 0.7161333067405804,
+    "ruthless": 1.6333036073245235,
+    "patient": 1
   },
   "aptitudes": [
     "strategist",
@@ -1127,11 +1053,11 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 50,
+  "actionCount": 51,
   "bondLogFrom": null,
   "teachers": {},
   "regionsKnown": {
-    "valley": 11
+    "valley": 12
   },
   "company": [],
   "forkChoices": {},
@@ -1315,8 +1241,8 @@
   "bands": [],
   "_silasGrantsRevoked": true,
   "reconcileVersion": 63,
-  "updatedAt": 1789518668552,
-  "rev": 24,
+  "updatedAt": 1789518743709,
+  "rev": 25,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -1329,17 +1255,17 @@
   "featureOffers": [],
   "_pinsInitialized": true,
   "_opUnknown": {
-    "sceneSummary": 11
+    "sceneSummary": 12
   },
   "_applyFailures": null,
   "sessions": [
     {
       "id": "sess-1",
       "startedAt": "2026-09-15T23:58:48.323Z",
-      "lastAt": "2026-09-16T00:31:08.544Z",
+      "lastAt": "2026-09-16T00:32:23.705Z",
       "startDay": 77,
       "endDay": 78,
-      "beats": 11
+      "beats": 12
     }
   ],
   "_debtReceipts": [],
@@ -1359,7 +1285,8 @@
     "urgent": 1,
     "confront": 1,
     "defer": 1,
-    "trust": 1
+    "trust": 1,
+    "endure": 1
   },
   "aptitudeEarnCount": {
     "tactician": 1,
@@ -1368,26 +1295,26 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 11,
-    "choices": 11,
+    "sceneSummary": 12,
+    "choices": 12,
     "questUpdates": 11,
-    "scene": 11,
-    "npcUpdates": 8,
+    "scene": 12,
+    "npcUpdates": 9,
     "placeUpdates": 6,
     "codexUpdates": 10,
-    "timeOps": 11,
+    "timeOps": 12,
     "imagePrompt": 7,
     "gambitApt": 11,
-    "sceneEnded": 11,
-    "characterDeltas": 10,
-    "offer": 5,
+    "sceneEnded": 12,
+    "characterDeltas": 11,
+    "offer": 6,
     "stateOps": 2,
     "deeds": 4,
     "factUpdates": 4,
     "ledgerEvents": 3,
     "moveTo": 1
   },
-  "_opTurns": 11,
+  "_opTurns": 12,
   "_opCountingSince": "2026-09-15T23:58:48.348Z",
   "gallery": [
     {
@@ -1409,7 +1336,7 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 5,
+      "applied": 6,
       "rejected": 0,
       "lastWhy": null
     },

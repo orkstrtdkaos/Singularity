@@ -65,7 +65,7 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .th-plate {
   position: absolute; inset: 0; opacity: 0;
   background-size: cover; background-position: center 58%;
-  filter: grayscale(0.34) sepia(0.26) contrast(1.08) brightness(0.6);
+  filter: grayscale(0.16) sepia(0.14) contrast(1.05) brightness(0.84);   /* CCODE-365: "make them brighter across the board" */
   animation: th-cycle 72s linear infinite;
   will-change: opacity;
 }
@@ -88,7 +88,7 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
   position: absolute; inset: 0; z-index: 1;
   background:
     radial-gradient(115% 130% at 16% 26%, rgba(212, 162, 74, 0.13), transparent 58%),
-    linear-gradient(90deg, rgba(13, 14, 17, 0.93) 0%, rgba(13, 14, 17, 0.66) 48%, rgba(13, 14, 17, 0.34) 100%),
+    linear-gradient(90deg, rgba(13, 14, 17, 0.9) 0%, rgba(13, 14, 17, 0.5) 48%, rgba(13, 14, 17, 0.12) 100%),
     linear-gradient(0deg, var(--bg) 1%, rgba(19, 20, 23, 0.25) 46%, transparent 76%);
 }
 .th-text { position: relative; z-index: 2; padding: 26px 28px 22px; --ls: clamp(7px, 1.7vw, 17px); }
@@ -155,8 +155,18 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
    second, which is a blur, not a picture. `heroPlates` phases the band on the same 120s, so a re-render never restarts it.
    ⚠️ And a little less dark than first shipped (0.55 → 0.68, veil eased in the middle and right): the title sits on the left,
    where the veil is unchanged, and every button carries its own ground. */
+/* ⛔ CCODE-365 — Erik, on the pan: "it's still hard to tell what the pictures are... what if we limit them to the right half of the
+   banner? and make them brighter across the board. it's hard to make them out." ⛑ The plates stand in the RIGHT HALF, fading in
+   from its left edge: half the width is half the crop, so a square gallery picture shows about twice as much of itself at any
+   moment, and the title keeps its dark ground on the left without a veil laid over the picture. ⚠️ The buttons that sit over
+   the picture carry a firmer ground of their own. */
+.topbar-band .th-plates {
+  left: 50%;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 30%);
+          mask-image: linear-gradient(90deg, transparent 0%, #000 30%);
+}
 .topbar-band .th-plate {
-  background-position: center 0%; filter: grayscale(0.28) sepia(0.2) contrast(1.05) brightness(0.68);
+  background-position: center 0%; filter: grayscale(0.06) sepia(0.08) contrast(1.04) brightness(0.96);
   animation: tb-cycle 120s linear infinite, tb-pan 120s linear infinite;
 }
 @keyframes tb-cycle {
@@ -179,13 +189,13 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
   position: absolute; inset: 0; z-index: 1;
   background:
     radial-gradient(90% 170% at 9% 30%, rgba(212, 162, 74, 0.12), transparent 60%),
-    linear-gradient(90deg, rgba(13, 14, 17, 0.9) 0%, rgba(13, 14, 17, 0.5) 55%, rgba(13, 14, 17, 0.58) 100%);
+    linear-gradient(90deg, rgba(13, 14, 17, 0.92) 0%, rgba(13, 14, 17, 0.86) 44%, rgba(13, 14, 17, 0.26) 64%, rgba(13, 14, 17, 0.08) 100%);
 }
 .topbar-band .tb-title, .topbar-band .actions { position: relative; z-index: 2; }
 .topbar-band h1 { font-size: 22px; letter-spacing: 0.3em; margin-right: -0.3em; text-shadow: 0 2px 0 rgba(0, 0, 0, 0.55), 0 0 22px rgba(212, 162, 74, 0.18); }
 .topbar-band .sub { color: var(--ink); opacity: 0.8; margin-left: 2px; }
 .topbar-band .actions { display: flex; flex-wrap: wrap; gap: 6px; }
-.topbar-band .actions button { margin-left: 0; background: rgba(13, 14, 17, 0.55); border-color: rgba(212, 162, 74, 0.28); color: var(--ink); }
+.topbar-band .actions button { margin-left: 0; background: rgba(13, 14, 17, 0.76); border-color: rgba(212, 162, 74, 0.32); color: var(--ink); }
 .topbar-band .actions button:hover, .topbar-band .actions button:focus-visible { border-color: var(--accent); outline: none; }
 @media (max-width: 600px) {
   .topbar-band { padding: 10px 12px; min-height: 0; }

@@ -18182,6 +18182,12 @@ console.log("\n── §253 · the banner's picture travels through its slot ─
     && new RegExp(`@keyframes tb-cycle \\{[^@]*${slotPct253}%\\s*\\{ opacity: 0 \\}`).test(css253));
   check("§253: …the band phases its plates on that clock, and the landing band keeps its own",
     /heroPlates\(plates, \{ cycleS: BAND_CYCLE_S, slotS: BAND_SLOT_S \}\)/.test(app253) && /function heroPlates\(urls = null, \{ cycleS = HERO_CYCLE_S, slotS = HERO_SLOT_S \} = \{\}\)/.test(app253));
+  // ⛔ CCODE-365 (Erik): "what if we limit them to the right half of the banner? and make them brighter across the board."
+  const bright253 = [...css253.matchAll(/brightness\((0?\.\d+|1(?:\.0+)?)\)/g)].map(m => Number(m[1]));
+  const plateRules253 = [css253.match(/\.th-plate \{[^}]*filter:[^;]*brightness\(([\d.]+)\)/), css253.match(/\.topbar-band \.th-plate \{[^}]*filter:[^;]*brightness\(([\d.]+)\)/)].map(m => (m ? Number(m[1]) : NaN));
+  check("§253: ⛔ the band's pictures stand in its right half, fading in from that edge — and every plate is bright enough to make out",
+    /\.topbar-band \.th-plates \{\s*left: 50%;[\s\S]{0,160}mask-image: linear-gradient\(90deg, transparent 0%, #000 30%\);/.test(css253)
+    && plateRules253.every(b => b >= 0.8) && bright253.length > 0, JSON.stringify(plateRules253));
   check("§253: ⛔ and someone who asked the browser to stop moving things gets one still plate, centred",
     /@media \(prefers-reduced-motion: reduce\) \{\s*\.topbar-band \.th-plate \{ display: none; \}\s*\.topbar-band \.th-plate-0 \{ display: block; opacity: 1; animation: none; background-position: center 50%; \}/.test(css253));
 }

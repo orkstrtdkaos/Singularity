@@ -6,7 +6,7 @@
   "origin": "harmonic",
   "background": "medic",
   "level": 1,
-  "xp": 46,
+  "xp": 51,
   "attributes": {
     "physical": 2,
     "mental": 4,
@@ -46,13 +46,14 @@
   ],
   "alignment": {
     "mechanical_spiritual": 0.015,
-    "concrete_abstract": -0.025
+    "concrete_abstract": -0.025,
+    "chaos_order": 0.010000000000000002
   },
   "attunement": 1,
   "maxHealth": 25,
-  "health": 11,
+  "health": 8,
   "maxEnergy": 116,
-  "energy": 17,
+  "energy": 5,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -155,13 +156,28 @@
       "spread": [],
       "day": 2,
       "worldDay": 78
+    },
+    {
+      "at": "2026-09-16T00:24:14.493Z",
+      "locationId": "millbrook",
+      "communityId": "valley.millbrook",
+      "description": "Made direct contact with an active Precursor system beneath Millbrook despite explicit warning—and survived the backlash through quick withdrawal and Aevi's shield-flare.",
+      "tags": [
+        "reckless",
+        "peril",
+        "determination"
+      ],
+      "weight": 1,
+      "spread": [],
+      "day": 2,
+      "worldDay": 78
     }
   ],
   "relationships": {},
   "chronicle": [],
-  "currentLocationId": "millbrook",
+  "currentLocationId": "gen-mara-wells-store",
   "activeScene": {
-    "locationId": "millbrook",
+    "locationId": "gen-mara-wells-store",
     "turns": [
       {
         "summary": "Adelheid arrives at Millbrook's river dock at dawn, finds thin catches and gray-green water, and is noticed by a sharp-eyed woman near the well.",
@@ -252,24 +268,26 @@
         "player": "Get off this ground entirely—climb back to the terrace and solid footing, put distance between yourself and whatever that was.",
         "summary": "Adelheid's attempted connection with the Precursor system beneath Millbrook triggered its active awareness—it is not dormant infrastructure but something still conscious, still waking, and reacted to direct contact with force. She withdrew from the Wet Meadows before the backlash escalated, but the system is now awake.",
         "narration": "You wrench your hands from the mud and scramble backward, gasping. The vibration beneath your palms doesn't release—it PULLS, a sensation like a hook set in your spine, and for a heartbeat the boundary between your body and the earth blurs. Then Aevi flares—a sharp spike of teal light that cuts through the dark like a blade—and the pull BREAKS.\n\nYou're on your feet before thought catches up, mud streaming from your hands and sleeves. Your legs shake. The Wet Meadows lurch around you—the standing water reflecting stars, the half-frozen channels suddenly sharp and hostile and WRONG in a way you cannot name. Behind you, where your palms touched earth, something hums louder for one breath before settling back into the deep.\n\nAevi drifts close, her motes tight and compressed. \"That woke,\" she says quietly. \"Not to you. To the question you asked it.\" Her light is dim now—not dimmed by wariness, but as though she's frightened and trying not to show it. \"Up. Go up. Not the way you came. The terrace edge—climb.\"\n\nYour body obeys before your mind does. You scramble up the slope, boots slipping on mud-slicked stone, hands scraping clay and root. The air tastes wrong now—metallic, charged, like the moment before lightning. Behind you, the hum settles into a steady pulse, patient and vast and aware. You do not look back."
+      },
+      {
+        "player": "Head straight for Mara Wells' Store in the village—wake her if you must. You have touched something that is waking, and she is the only person who knows what it is.",
+        "summary": "Adelheid reaches Mara Wells at her store in the dead of night, mud-covered and shaken from a violent backlash—the Precursor system beneath Millbrook is active and aware.",
+        "narration": "You move through the dark with purpose, your mud-soaked clothes clinging cold to your skin. The climb from the Wet Meadows is steep and treacherous—your hands shake as you pull yourself up by exposed roots and terrace stones, but you do not slow. Behind you, the hum fades but does not vanish. Aevi hovers close, her motes tight and watchful, the alarm in her brightness not yet dimmed.\n\nThe village lane comes into focus as you clear the terraces. Most homes are dark; a few night-lights glow yellow behind shuttered windows. Mara Wells' Store stands north of the village proper, a solid stone structure with a workshop annex—closed for the night, but not locked against need. You push the door open. It swings on good hinges, and your breath comes ragged as you step inside.\n\nMara is already awake. She sits at a work table by lamplight, ledgers open, a cup of tea cooling at her elbow. She does not look surprised to see you. She looks, in fact, like she has been waiting for exactly this—mud-covered, gasping, and impossible to ignore.\n\n*✦ Aevi has changed — **Kindled Chorus**. The motes have brightened and learned to move as one — condensing into near-shapes when speaking, casting real light in the dark, humming harmonics that other nanite fields answer. Old — and less alone than before.*"
       }
     ],
     "lastTurn": {
-      "narration": "You wrench your hands from the mud and scramble backward, gasping. The vibration beneath your palms doesn't release—it PULLS, a sensation like a hook set in your spine, and for a heartbeat the boundary between your body and the earth blurs. Then Aevi flares—a sharp spike of teal light that cuts through the dark like a blade—and the pull BREAKS.\n\nYou're on your feet before thought catches up, mud streaming from your hands and sleeves. Your legs shake. The Wet Meadows lurch around you—the standing water reflecting stars, the half-frozen channels suddenly sharp and hostile and WRONG in a way you cannot name. Behind you, where your palms touched earth, something hums louder for one breath before settling back into the deep.\n\nAevi drifts close, her motes tight and compressed. \"That woke,\" she says quietly. \"Not to you. To the question you asked it.\" Her light is dim now—not dimmed by wariness, but as though she's frightened and trying not to show it. \"Up. Go up. Not the way you came. The terrace edge—climb.\"\n\nYour body obeys before your mind does. You scramble up the slope, boots slipping on mud-slicked stone, hands scraping clay and root. The air tastes wrong now—metallic, charged, like the moment before lightning. Behind you, the hum settles into a steady pulse, patient and vast and aware. You do not look back.",
-      "sceneSummary": "Adelheid's attempted connection with the Precursor system beneath Millbrook triggered its active awareness—it is not dormant infrastructure but something still conscious, still waking, and reacted to direct contact with force. She withdrew from the Wet Meadows before the backlash escalated, but the system is now awake.",
+      "narration": "You move through the dark with purpose, your mud-soaked clothes clinging cold to your skin. The climb from the Wet Meadows is steep and treacherous—your hands shake as you pull yourself up by exposed roots and terrace stones, but you do not slow. Behind you, the hum fades but does not vanish. Aevi hovers close, her motes tight and watchful, the alarm in her brightness not yet dimmed.\n\nThe village lane comes into focus as you clear the terraces. Most homes are dark; a few night-lights glow yellow behind shuttered windows. Mara Wells' Store stands north of the village proper, a solid stone structure with a workshop annex—closed for the night, but not locked against need. You push the door open. It swings on good hinges, and your breath comes ragged as you step inside.\n\nMara is already awake. She sits at a work table by lamplight, ledgers open, a cup of tea cooling at her elbow. She does not look surprised to see you. She looks, in fact, like she has been waiting for exactly this—mud-covered, gasping, and impossible to ignore.\n\n*✦ Aevi has changed — **Kindled Chorus**. The motes have brightened and learned to move as one — condensing into near-shapes when speaking, casting real light in the dark, humming harmonics that other nanite fields answer. Old — and less alone than before.*",
+      "sceneSummary": "Adelheid reaches Mara Wells at her store in the dead of night, mud-covered and shaken from a violent backlash—the Precursor system beneath Millbrook is active and aware.",
       "choices": [
         {
-          "label": "Return to Piotr and demand he open the note. Whatever Mara knows, you need it now.",
+          "label": "Tell Mara everything—the plants, the root system, the vibration, the pull, the way Aevi had to shield-flare to break the connection. Hold nothing back.",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {
-            "social_deference": 0.7
-          },
-          "difficulty": "hard",
+          "axes": {},
+          "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "demand",
-            "confront"
+            "honesty"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -278,39 +296,32 @@
           "emergenceId": null
         },
         {
-          "label": "Climb back to the terrace, catch your breath, and use Echo Sense from solid ground—read what the system's waking is doing to the space above it.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "concrete_abstract": 0.3
-          },
+          "label": "Ask her directly: What is beneath the Wet Meadows? What does it want? And what was in the note Piotr refused to open?",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "study",
-            "scout",
+            "direct"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Show her the cutting first—the pale sap, the note about the root angle, the evidence that the plants are connected to something vast and waking.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "show",
             "careful"
           ],
-          "abilityId": "echo_sense",
-          "energyCost": 4,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Head straight for Mara Wells' Store in the village—wake her if you must. You have touched something that is waking, and she is the only person who knows what it is.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {
-            "chaos_order": 0.2
-          },
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "travel",
-            "urgent",
-            "confront"
-          ],
           "abilityId": null,
           "energyCost": null,
           "trivial": false,
@@ -318,58 +329,53 @@
           "emergenceId": null
         },
         {
-          "label": "Find shelter on the high terrace and wait for dawn—you cannot think clearly in the dark, and Aevi is afraid. Rest and readiness may serve you better than rushing.",
-          "attribute": "practical",
-          "subAttribute": "reason",
-          "axes": {
-            "chaos_order": -0.3
-          },
+          "label": "Let Aevi speak first—the motes brighten with knowledge you do not have. Perhaps she remembers something about what Precursor systems wake FOR.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "careful",
-            "endure",
-            "defend"
+            "defer",
+            "trust"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
       "deeds": [
         {
-          "description": "Traced a Precursor system still active beneath Millbrook—deliberately contacted it and triggered its awareness, despite warnings.",
+          "description": "Made direct contact with an active Precursor system beneath Millbrook despite explicit warning—and survived the backlash through quick withdrawal and Aevi's shield-flare.",
           "tags": [
+            "reckless",
             "peril",
-            "discovery",
-            "reckless"
+            "determination"
           ],
           "weight": 1,
           "communityId": "valley.millbrook"
         }
       ],
       "characterDeltas": {
-        "health": -2,
-        "energy": -4,
+        "health": -3,
+        "energy": -12,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
       },
       "ledgerEvents": [
         {
-          "what": "Adelheid made direct contact with a Precursor system beneath Millbrook—woke it deliberately through meditation and resonance-seeking. The system is conscious, aware, and responding to external stimulus. Its state has shifted from dormant to actively waking.",
+          "what": "A Precursor-origin system beneath Millbrook has been awakened through direct contact and is now actively conscious and waking—the watershed contamination and the uncatalogued plants are expressions of its activation.",
           "tags": [
             "precursor",
-            "awakening",
-            "contact",
-            "consequence"
+            "danger",
+            "water-crisis",
+            "millbrook"
           ],
           "visibility": "witnessed",
-          "spectrumDeltas": {
-            "mechanical_spiritual": 0.05
-          },
+          "spectrumDeltas": {},
           "impactsLocal": true
         }
       ],
@@ -377,11 +383,7 @@
         {
           "op": "progress",
           "questId": "maras-errand",
-          "title": "Mara's Errand",
-          "summary": "Deliver Piotr's bundle and observe the uncatalogued plants—the connection is far deeper than either expected.",
-          "giver": "Mara Wells",
-          "note": "Adelheid has confirmed the system is AWAKE and AWARE. The note is no longer information—it is emergency briefing. Return to Mara immediately.",
-          "xpReward": null
+          "note": "Adelheid has made direct contact with the Precursor system beneath Millbrook and triggered its active awareness. The system is waking. This is no longer observation—this is emergency. Reaching Mara to report is now the critical path."
         }
       ],
       "standingOps": [],
@@ -389,89 +391,62 @@
       "arcOps": [],
       "adoptSchool": null,
       "offer": {
-        "thing": "Aevi's fear and certainty in equal measure—she knows what the Precursor layer is in a way she has never fully admitted, and the awakening has broken her ability to remain neutral.",
-        "from": "Aevi's own knowledge and her bond with Adelheid—the companion who cannot lie revealing, through her alarm, that this touches something in her history."
+        "thing": "Mara Wells waiting awake at her work table—she was already expecting this moment, or something like it.",
+        "from": "Mara's deep knowledge of the terrace plants and their connection to whatever lies beneath; her two seasons of careful watching; her decision to task a stranger with observation rather than investigation—she was always waiting for someone to trigger the system, and she was ready for it."
       },
       "stageOps": [],
       "scene": {
-        "setting": "The upper edge of the Wet Meadows on Terrace Three east, muddy and treacherous, where the slope rises toward the village proper. Deep night, stars visible overhead, the air cold and sharp and charged with something wrong. The Echo River is audible in the distance, running low and strange. You are breathing hard, covered in mud, your palms scraped and numb from the cold.",
+        "setting": "Mara Wells' Store—a solid stone structure north of Millbrook village proper, with a work table lit by lamplight. Deep night, early spring. Adelheid stands in the doorway, muddy and gasping, the air cold and sharp.",
         "npcsPresent": [
           {
-            "name": "Aevi",
-            "state": "Hovering close at your shoulder, her motes tight and compressed—frightened but trying not to show it. Her light is dim and controlled, as though she is rationing energy or steeling herself against fear."
+            "name": "Mara Wells",
+            "state": "Sitting at a work table with open ledgers, a cooling cup of tea beside her. She looks unsurprised. She looks like she has been waiting."
           }
         ],
         "objects": [
-          "Mud on your hands and sleeves",
-          "Linen-wrapped silver-stemmed cutting (still held, protected during your scramble)",
-          "Scattered stones and exposed roots along the terrace edge",
-          "Standing water below, reflecting starlight",
-          "The night sky, clear and cold"
+          "Work table with open ledgers",
+          "Lamplight burning steady",
+          "Cooling cup of tea",
+          "Adelheid's muddy clothes, soaked from the Wet Meadows",
+          "The silver-stemmed cutting (linen-wrapped, still held)"
         ],
         "threads": [
-          "Mara's sealed note—still unread, still held by Piotr on the terrace above",
-          "What the Precursor system beneath Millbrook was trying to communicate before you withdrew",
-          "Why Aevi is afraid and what she knows about the system that she has not said",
-          "How to explain to Mara that her errand has escalated from observation to contact"
+          "What the note Piotr carries says",
+          "What Mara has known for two seasons",
+          "What the Precursor system beneath Millbrook actually wants or is doing",
+          "Whether Mara expected this specific moment or something different"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "aevi",
-          "name": "Aevi",
-          "role": "Companion intelligence",
-          "age": null,
-          "sex": "none",
-          "gender": "none",
+          "npcId": "mara-wells",
+          "name": "Mara Wells",
+          "role": "Millbrook civic manager",
+          "age": 47,
+          "sex": "female",
+          "gender": "woman",
           "pronouns": "she/her",
-          "note": "Responded to the Precursor system's awakening with alarm—broke Adelheid's contact with a sharp light-flare. Revealed knowledge that goes beyond observation: she KNOWS the Precursor layer in a way she has not admitted. Frightened but present.",
-          "learned": [
-            "Aevi can sense when a Precursor system is transitioning from dormancy to active awareness",
-            "She considers the awakening serious enough to break her usual gentle demeanor—fear and urgency mixed",
-            "She recognized the backlash was escalating and acted to protect Adelheid without hesitation"
-          ],
-          "skillsObserved": [
-            "Rapid threat assessment and immediate protective response",
-            "Precise control of her own light-output as a tool"
-          ],
-          "relationshipDelta": 1,
-          "vouchedBy": null,
-          "status": "active",
-          "statusNote": "Present at the Wet Meadows' edge, alarmed but committed to Adelheid's safety. Her fear suggests she understands the stakes better than she has revealed.",
-          "revealName": null,
-          "nameExtend": null,
-          "bondType": "forming",
-          "bondStage": null
+          "note": "Adelheid found her awake and waiting at her work table in the dead of night—she appears to have expected this escalation, or something like it. Her calmness in the face of news of a waking Precursor system will tell what she has known and been preparing for.",
+          "statusNote": "Active at Mara Wells' Store, awake at night, unsurprised by Adelheid's mud-soaked and shaken arrival"
         }
       ],
       "intentsHeard": [],
       "factUpdates": [
         {
           "op": "add",
-          "text": "The Precursor system beneath Millbrook is not inert or dormant—it is actively conscious and waking. Direct contact with it (meditation, resonance-seeking, intentional attunement) triggers violent backlash and forces awareness. The system reacted to Adelheid's attempt to connect, and the backlash nearly escalated beyond safe withdrawal.",
-          "subjectId": "precursor-layer"
+          "text": "Mara Wells was awake in her store in the dead of night, with ledgers open, when Adelheid arrived muddy and shaken—she appears to have been waiting for this escalation or expecting it.",
+          "subjectId": "mara-wells"
         }
       ],
-      "placeUpdates": [
-        {
-          "note": "The Precursor vibration beneath this location has responded to direct contact and is now actively waking—the hum is stronger, more regular, more AWARE. The air tastes metallic and charged. The space itself feels hostile to further approach.",
-          "flag": {
-            "precursor_awakened": true,
-            "backlash_triggered": true,
-            "contact_escalation": true
-          },
-          "subPlace": null
-        }
-      ],
+      "placeUpdates": [],
       "discovery": null,
       "codexUpdates": [
         {
           "topic": "precursor-layer",
           "label": "The Precursor Layer",
           "kind": "lore",
-          "entityId": null,
-          "fact": "Direct contact with an active Precursor system triggers violent backlash and FORCES CLARITY. The system beneath Millbrook is not a sealed relic or dormant archive—it is still active, still conscious, and still following some directive. Adelheid's attempt to meditate into resonance with it caused it to WAKE further. The nature of its awakening, its purpose, and what follows is unknown.",
+          "fact": "The Precursor system beneath Millbrook is not inert or dormant—it is actively conscious, still waking, and responds to direct contact with violent backlash and forced awareness. Aevi had to shield-flare to break Adelheid's involuntary connection. The system is moving south-southeast toward the Echo River.",
           "links": [
             "uncatalogued-terrace-plants",
             "echo-river-contamination",
@@ -480,11 +455,11 @@
           ]
         },
         {
-          "topic": "aevi",
+          "topic": "companion-aevi",
           "label": "Aevi",
           "kind": "person",
           "entityId": "aevi",
-          "fact": "Aevi knows the Precursor layer in a way she has not admitted—her response to its awakening revealed knowledge that goes beyond observation or fragments of pre-Transition history. She may be connected to the Precursor system in ways not yet understood. Her fear is genuine and specific to THIS awakening.",
+          "fact": "Aevi can shield-flare—a sharp spike of teal light that cuts through interference and breaks forced connections. She used this capability to sever Adelheid's involuntary attunement to the Precursor system when the backlash threatened to pull deeper. The motes became an instrument of protection, sharp and precise.",
           "links": [
             "precursor-layer",
             "millbrook"
@@ -503,14 +478,17 @@
       "unlockPrecursor": null,
       "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 0,
-        "why": "The night still holds—this was an immediate response to emergency. Dawn is still hours away."
+        "hoursPassed": 0.5,
+        "why": "a run through the dark from the Wet Meadows to the store, and Adelheid's shock"
       },
-      "moveTo": null,
+      "moveTo": {
+        "location": "gen-mara-wells-store",
+        "why": "fled the Wet Meadows after backlash and ran straight to Mara Wells' Store to report the waking system"
+      },
       "stateOps": [],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": "A young medic, mud-streaked and gasping, scrambles up a dark terrace slope with her hands scraped raw. Behind her, the Wet Meadows pool with starlit water, and beneath that water the earth hums with a frequency that makes the air itself vibrate. At her shoulder, a tight constellation of teal motes flares—fear and light breaking through the dark.",
+      "imagePrompt": "A woman in a patched green coat, lamplight steady on her weathered face, sitting calmly at a work table with ledgers open. She does not look surprised. Behind her, a younger woman stands in the doorway, mud streaming from her hands and sleeves, her breath still coming hard, her eyes wide with the shock of having touched something vast and aware beneath the earth. A faint constellation of teal motes hovers near the younger woman's shoulder, bright and watchful.",
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
@@ -522,28 +500,28 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The upper edge of the Wet Meadows on Terrace Three east, muddy and treacherous, where the slope rises toward the village proper. Deep night, stars visible overhead, the air cold and sharp and charged with something wrong. The Echo River is audible in the distance, running low and strange. You are breathing hard, covered in mud, your palms scraped and numb from the cold.",
+      "setting": "Mara Wells' Store—a solid stone structure north of Millbrook village proper, with a work table lit by lamplight. Deep night, early spring. Adelheid stands in the doorway, muddy and gasping, the air cold and sharp.",
       "npcsPresent": [
         {
-          "name": "Aevi",
-          "state": "Hovering close at your shoulder, her motes tight and compressed—frightened but trying not to show it. Her light is dim a"
+          "name": "Mara Wells",
+          "state": "Sitting at a work table with open ledgers, a cooling cup of tea beside her. She looks unsurprised. She looks like she ha"
         }
       ],
       "objects": [
-        "Mud on your hands and sleeves",
-        "Linen-wrapped silver-stemmed cutting (still held, protected during your scramble",
-        "Scattered stones and exposed roots along the terrace edge",
-        "Standing water below, reflecting starlight",
-        "The night sky, clear and cold"
+        "Work table with open ledgers",
+        "Lamplight burning steady",
+        "Cooling cup of tea",
+        "Adelheid's muddy clothes, soaked from the Wet Meadows",
+        "The silver-stemmed cutting (linen-wrapped, still held)"
       ],
       "threads": [
-        "Mara's sealed note—still unread, still held by Piotr on the terrace above",
-        "What the Precursor system beneath Millbrook was trying to communicate before you withdrew",
-        "Why Aevi is afraid and what she knows about the system that she has not said",
-        "How to explain to Mara that her errand has escalated from observation to contact"
+        "What the note Piotr carries says",
+        "What Mara has known for two seasons",
+        "What the Precursor system beneath Millbrook actually wants or is doing",
+        "Whether Mara expected this specific moment or something different"
       ]
     },
-    "beats": 8,
+    "beats": 9,
     "subPlace": {
       "slug": "the-wet-meadows",
       "name": "The Wet Meadows",
@@ -568,14 +546,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Cutting taken and wrapped. Root system traced south-southeast toward the Echo River—the contaminated water. The mystery deepens.",
         "Adelheid confronted Piotr directly about the plants and the river. Piotr refused to speak, citing Mara's private instructions and referring her to the unread note in the bundle.",
         "Adelheid attempted to verify the root system's direction by following it to the Echo River. The spring melt made the Wet Meadows impassable. The note inside the bundle remains unread, and Piotr's silence still stands.",
         "Adelheid attempted to force Mara's note open from Piotr. He refused and will not be moved by pressure or proximity. The boundary is now clearly marked.",
         "Adelheid attempted independent investigation of the river at night; the terrain and darkness defeated the approach. The water's connection to the plants remains unexplained.",
         "Tremor Sense revealed a deep Precursor-origin vibration running from the terrace plants toward the contaminated Echo River. The connection is confirmed as artificial, not natural. Mara's note may explain the source and purpose.",
         "Adelheid has confirmed the Precursor system is still active and waking. The connection between the silver-stemmed plants, the vibration, and the river contamination is not a passive artifact—it is a live, aware system. Mara's note is now critical.",
-        "Adelheid has confirmed the system is AWAKE and AWARE. The note is no longer information—it is emergency briefing. Return to Mara immediately."
+        "Adelheid has confirmed the system is AWAKE and AWARE. The note is no longer information—it is emergency briefing. Return to Mara immediately.",
+        "Adelheid has made direct contact with the Precursor system beneath Millbrook and triggered its active awareness. The system is waking. This is no longer observation—this is emergency. Reaching Mara to report is now the critical path."
       ],
       "startedAt": "2026-07-08T18:17:05.695Z"
     }
@@ -594,7 +572,9 @@
       "history": [
         "[d1] Approached Adelheid directly, identified her as an outsider, introduced herself by name and role. Waiting for Adelheid's introduction.",
         "[d1] Heard Adelheid's honest introduction — name, Swiss origin, Korean residency, herbalist-medic work. Filed it efficiently. Mentioned that valley plants have changed since the Transit",
-        "[d1] Confirmed the errand to Piotr; privately asked Adelheid to observe the uncatalogued plants on the east terrace and granted permission to take cuttings — with the specific word 'car"
+        "[d1] Confirmed the errand to Piotr; privately asked Adelheid to observe the uncatalogued plants on the east terrace and granted permission to take cuttings — with the specific word 'car",
+        "[d2] Sex recorded: female.",
+        "[d2] Adelheid found her awake and waiting at her work table in the dead of night—she appears to have expected this escalation, or something like it. Her calmness in the face of news of a waking Precursor system will tell what she has known and been preparing for."
       ],
       "knownFacts": [
         "She manages what passes for civic order in Millbrook",
@@ -616,12 +596,14 @@
       "status": "active",
       "lastSeen": {
         "locationId": "millbrook",
-        "day": 1
+        "day": 2
       },
-      "statusNote": "Active in Millbrook village lane; has delegated the Piotr errand and the terrace observation to Adelheid and returned to civic rounds.",
+      "statusNote": "Active at Mara Wells' Store, awake at night, unsurprised by Adelheid's mud-soaked and shaken arrival",
       "gender": "woman",
       "pronouns": "she/her",
-      "met": 3
+      "met": 4,
+      "sex": "female",
+      "age": 47
     },
     "piotr": {
       "id": "piotr",
@@ -730,6 +712,16 @@
         "name": "The Wet Meadows",
         "day": 1
       }
+    },
+    "gen-mara-wells-store": {
+      "visits": 1,
+      "notes": [],
+      "flags": {},
+      "lastVisit": 2,
+      "vectorsKnown": [
+        "violence_peace",
+        "concrete_abstract"
+      ]
     }
   },
   "worldState": {
@@ -850,6 +842,10 @@
       {
         "thing": "Aevi's fear and certainty in equal measure—she knows what the Precursor layer is in a way she has never fully admitted, and the awakening…",
         "from": "Aevi's own knowledge and her bond with Adelheid—the companion who cannot lie revealing, through her alarm, that this touches something in…"
+      },
+      {
+        "thing": "Mara Wells waiting awake at her work table—she was already expecting this moment, or something like it.",
+        "from": "Mara's deep knowledge of the terrace plants and their connection to whatever lies beneath; her two seasons of careful watching; her…"
       }
     ]
   },
@@ -1000,7 +996,9 @@
         "facts": [
           "[d?] Curious Constellation — A faint constellation of teal motes drifting near the shoulder — condensing when interested, dimming when wary.",
           "[d2] Aevi recognizes Precursor workmanship on sight and will not allow contact with it—her warning to stop came with real fear and real authority. She knows something about what lies beneath Millbrook and what it means that it is waking.",
-          "[d2] Aevi knows the Precursor layer in a way she has not admitted—her response to its awakening revealed knowledge that goes beyond observation or fragments of pre-Transition history. She may be connected to the Precursor system in ways not yet understood. Her fear is genuine and specific to THIS…"
+          "[d2] Aevi knows the Precursor layer in a way she has not admitted—her response to its awakening revealed knowledge that goes beyond observation or fragments of pre-Transition history. She may be connected to the Precursor system in ways not yet understood. Her fear is genuine and specific to THIS…",
+          "[d2] Kindled Chorus — The motes have brightened and learned to move as one — condensing into near-shapes when speaking, casting real light in the dark, humming harmonics that other nanite fields answer. Old — and less alone than before.",
+          "[d2] Aevi can shield-flare—a sharp spike of teal light that cuts through interference and breaks forced connections. She used this capability to sever Adelheid's involuntary attunement to the Precursor system when the backlash threatened to pull deeper. The motes became an instrument of protection…"
         ],
         "links": [
           "precursor-layer",
@@ -1036,7 +1034,8 @@
         "facts": [
           "[d2] A Precursor-origin work—possibly ancient—remains active beneath the Wet Meadows and the terrace-field. It is still functioning and humming at a frequency that matches the uncatalogued plants. Purpose unknown. Connected to the Echo River contamination.",
           "[d2] The Precursor-origin work beneath Millbrook is not a sealed relic or dormant archive—it is still active, still conscious, and still following some directive. Direct contact causes violent backlash and forces clarity. Aevi's response suggests it is specifically waking, which may be connected to the…",
-          "[d2] Direct contact with an active Precursor system triggers violent backlash and FORCES CLARITY. The system beneath Millbrook is not a sealed relic or dormant archive—it is still active, still conscious, and still following some directive. Adelheid's attempt to meditate into resonance with it caused…"
+          "[d2] Direct contact with an active Precursor system triggers violent backlash and FORCES CLARITY. The system beneath Millbrook is not a sealed relic or dormant archive—it is still active, still conscious, and still following some directive. Adelheid's attempt to meditate into resonance with it caused…",
+          "[d2] The Precursor system beneath Millbrook is not inert or dormant—it is actively conscious, still waking, and responds to direct contact with violent backlash and forced awareness. Aevi had to shield-flare to break Adelheid's involuntary connection. The system is moving south-southeast toward the…"
         ],
         "links": [
           "uncatalogued-terrace-plants",
@@ -1047,13 +1046,26 @@
         "aliases": [],
         "createdDay": 2,
         "updatedDay": 2
+      },
+      "gen-mara-wells-store": {
+        "id": "gen-mara-wells-store",
+        "label": "Mara Wells' Store",
+        "kind": "place",
+        "facts": [
+          "[d2] you have walked here"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 2,
+        "entityId": "gen-mara-wells-store",
+        "updatedDay": 2
       }
     }
   },
   "grantsVersion": 1,
   "customAbilities": {},
   "companionBonds": {
-    "aevi": 2.75
+    "aevi": 3.25
   },
   "practice": {
     "schemaVersion": 1,
@@ -1111,6 +1123,12 @@
       "text": "The Precursor system beneath Millbrook is not inert or dormant—it is actively conscious and waking. Direct contact with it (meditation, resonance-seeking, intentional attunement) triggers violent backlash and forces awareness. The system reacted to Adelheid's attempt to connect, and the backlash…",
       "day": 2,
       "subjectId": "precursor-layer"
+    },
+    {
+      "id": "mara-wells",
+      "text": "Mara Wells was awake in her store in the dead of night, with ledgers open, when Adelheid arrived muddy and shaken—she appears to have been waiting for this escalation or expecting it.",
+      "day": 2,
+      "subjectId": "mara-wells"
     }
   ],
   "precursorAccess": [],
@@ -1121,14 +1139,14 @@
   "itemReclaimVersion": 1,
   "nameRepairVersion": 1,
   "tendencies": {
-    "generous": 4.252372479054479,
-    "social": 3.6109443394262097,
-    "cerebral": 25.151611974383144,
-    "cautious": 21.648405803681367,
-    "strategic": 21.143939052766306,
-    "carousing": 1.5809506376801883,
-    "risky": 0.7924564599900694,
-    "ruthless": 1.8073757812499998
+    "generous": 4.1460631670781165,
+    "social": 3.5206707309405543,
+    "cerebral": 24.522821675023565,
+    "cautious": 21.107195658589333,
+    "strategic": 20.61534057644715,
+    "carousing": 1.5414268717381836,
+    "risky": 0.7726450484903177,
+    "ruthless": 1.7621913867187498
   },
   "aptitudes": [
     "strategist",
@@ -1137,7 +1155,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 47,
+  "actionCount": 48,
   "bondLogFrom": null,
   "teachers": {},
   "regionsKnown": {
@@ -1325,8 +1343,8 @@
   "bands": [],
   "_silasGrantsRevoked": true,
   "reconcileVersion": 63,
-  "updatedAt": 1789518206127,
-  "rev": 18,
+  "updatedAt": 1789518254518,
+  "rev": 21,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -1339,17 +1357,17 @@
   "featureOffers": [],
   "_pinsInitialized": true,
   "_opUnknown": {
-    "sceneSummary": 8
+    "sceneSummary": 9
   },
   "_applyFailures": null,
   "sessions": [
     {
       "id": "sess-1",
       "startedAt": "2026-09-15T23:58:48.323Z",
-      "lastAt": "2026-09-16T00:23:26.118Z",
+      "lastAt": "2026-09-16T00:24:14.493Z",
       "startDay": 77,
       "endDay": 78,
-      "beats": 8
+      "beats": 9
     }
   ],
   "_debtReceipts": [],
@@ -1358,14 +1376,16 @@
     "scout": 4,
     "study": 3,
     "ask": 1,
-    "travel": 2,
+    "travel": 3,
     "coerce": 1,
     "threaten": 1,
     "meditate": 1,
     "investigate": 1,
     "analyze": 1,
     "retreat": 1,
-    "careful": 1
+    "careful": 1,
+    "urgent": 1,
+    "confront": 1
   },
   "aptitudeEarnCount": {
     "tactician": 1,
@@ -1374,27 +1394,36 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 8,
-    "choices": 8,
-    "questUpdates": 8,
-    "scene": 8,
-    "npcUpdates": 5,
+    "sceneSummary": 9,
+    "choices": 9,
+    "questUpdates": 9,
+    "scene": 9,
+    "npcUpdates": 6,
     "placeUpdates": 6,
-    "codexUpdates": 7,
-    "timeOps": 8,
-    "imagePrompt": 5,
-    "gambitApt": 8,
-    "sceneEnded": 8,
-    "characterDeltas": 7,
-    "offer": 3,
+    "codexUpdates": 8,
+    "timeOps": 9,
+    "imagePrompt": 6,
+    "gambitApt": 9,
+    "sceneEnded": 9,
+    "characterDeltas": 8,
+    "offer": 4,
     "stateOps": 2,
-    "deeds": 3,
-    "factUpdates": 3,
-    "ledgerEvents": 2
+    "deeds": 4,
+    "factUpdates": 4,
+    "ledgerEvents": 3,
+    "moveTo": 1
   },
-  "_opTurns": 8,
+  "_opTurns": 9,
   "_opCountingSince": "2026-09-15T23:58:48.348Z",
   "gallery": [
+    {
+      "kind": "location",
+      "prompt": "Mara Wells' Store",
+      "url": "https://image.pollinations.ai/prompt/Mara%20Wells'%20Store%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Mara%20Wells%20Store.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=13548&nologo=true",
+      "caption": "Mara Wells' Store",
+      "worldDay": 78,
+      "at": "2026-09-16T00:24:14.511Z"
+    },
     {
       "kind": "moment",
       "prompt": "Adelheid stands at the terrace edge in late afternoon light, the linen-wrapped cutting in her lap, eyes tracing a line south-southeast down the slope toward the ribbon of gray-green water cutting thro",
@@ -1406,7 +1435,12 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 3,
+      "applied": 4,
+      "rejected": 0,
+      "lastWhy": null
+    },
+    "moveTo": {
+      "applied": 1,
       "rejected": 0,
       "lastWhy": null
     }
@@ -1459,6 +1493,14 @@
       "day": 2,
       "worldDay": 78,
       "actionCount": 46
+    },
+    {
+      "companionId": "aevi",
+      "kind": "deed",
+      "delta": 0.5,
+      "day": 2,
+      "worldDay": 78,
+      "actionCount": 47
     }
   ],
   "companionMemory": {
@@ -1477,6 +1519,11 @@
         "text": "Traced a Precursor system still active beneath Millbrook—deliberately contacted it and triggered its awareness, despite warnings.",
         "weight": 1,
         "day": 2
+      },
+      {
+        "text": "Made direct contact with an active Precursor system beneath Millbrook despite explicit warning—and survived the backlash through quick withdrawal and Aevi's shield-flare.",
+        "weight": 1,
+        "day": 2
       }
     ]
   },
@@ -1491,23 +1538,27 @@
   "_pendingLedger": [
     {
       "schemaVersion": 1,
-      "at": "2026-09-16T00:23:26.127Z",
+      "at": "2026-09-16T00:24:14.517Z",
       "worldDay": 78,
       "who": "char-mr5ns3hh",
       "playerKey": "player-s9z9u1",
       "where": "millbrook",
-      "what": "Adelheid made direct contact with a Precursor system beneath Millbrook—woke it deliberately through meditation and resonance-seeking. The system is conscious, aware, and responding to external stimulu",
+      "what": "A Precursor-origin system beneath Millbrook has been awakened through direct contact and is now actively conscious and waking—the watershed contamination and the uncatalogued plants are expressions of",
       "tags": [
         "precursor",
-        "awakening",
-        "contact",
-        "consequence"
+        "danger",
+        "water-crisis",
+        "millbrook"
       ],
-      "spectrumDeltas": {
-        "mechanical_spiritual": 0.05
-      },
+      "spectrumDeltas": {},
       "visibility": "witnessed",
       "impactsLocal": true
     }
-  ]
+  ],
+  "knownPlaces": [
+    "gen-mara-wells-store"
+  ],
+  "locationImages": {
+    "gen-mara-wells-store": "https://image.pollinations.ai/prompt/Mara%20Wells'%20Store%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Mara%20Wells%20Store.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20wide%20establishing%20shot%2C%20atmospheric%2C%20no%20figures%20in%20the%20foreground%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=320&seed=13548&nologo=true"
+  }
 }

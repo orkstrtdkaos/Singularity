@@ -1550,6 +1550,32 @@ export function resolvePlayerStrike(character, op = {}, { worldDay = null, conte
   return { ok: true, outcome, told, news: stamped };
 }
 
+/** ⛔ SNG-598 part two — WHEN THE STRIKE IS A FIGHT. Erik: "a fight that happens with you and your party — with the extra guard helping.
+ *  Either way, if you win and the assailant isn't killed, you should then be able to interrogate them."
+ *  The GM marks the fight (`newEncounter.strike`); this seats the guard on the player's side as a real combatant — sheeted exactly as
+ *  `contestArc` sheets a legend, so there is one model of what a legend is in a fight — and decides whether the one sent can yield:
+ *  never if they are marked to die fighting; otherwise at a share of their own pool unless the GM gave one (Aevi: "the encounter
+ *  wants a yieldAtFraction rather than a fight to the death"). Pure; null when this is not the strike or nobody has been sent. */
+export const STRIKE_YIELD_FRACTION = 0.3;
+export function strikeSceneSetup(def, character, { content = {}, sb = null } = {}) {
+  if (!def?.strike) return null;
+  const ws = character?.worldState || {};
+  const t = (ws.pendingStrikes || []).find(x => x && !x.resolved);
+  if (!t) return null;
+  const { yieldAtFraction, ...rest } = def.opponent || {};
+  const gaveYield = Number(rest.yieldAt) > 0 || Number(yieldAtFraction) > 0;
+  const opponent = t.diesFighting ? { ...rest, yieldAt: 0 }
+    : gaveYield ? { ...rest, ...(Number(yieldAtFraction) > 0 ? { yieldAtFraction } : {}) }
+    : { ...rest, yieldAtFraction: STRIKE_YIELD_FRACTION };
+  const summons = [];
+  const f = t.guardId ? worldRoster(ws, content).find(x => x.id === t.guardId) : null;
+  if (f && sb) {
+    const sheet = synthesizeOpponentSheet({ name: f.name || f.id, threat: 30 + (Number(f.legend?.weight ?? f.weight) || 5) * 8, tacticTags: f.tacticTags || [] }, sb);
+    summons.push({ ...sheet, id: `guard-${f.id}`, name: f.name || f.id, figureId: f.id, guest: true, count: 1, contributions: ["MARTIAL"] });
+  }
+  return { def: { ...def, opponent }, summons, scene: { arcId: t.arcId, sender: t.sender, guardId: t.guardId || null, diesFighting: !!t.diesFighting } };
+}
+
 /** SNG-311 — AND SOMEONE MAY STAND OVER YOU. Erik: *"if you get marked for a strike, you can also be chosen
  *  as warranting a guardian, or several… plus it gives a lot of use of the various hiding and warding
  *  skills. Feels very VIP and end game, but could be mid game too."*

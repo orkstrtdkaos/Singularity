@@ -268,9 +268,11 @@ export function enrichDecl(decl, abilities) {
  *  Read into the roster as a folded ally with the contributions the craft's block declares. Pure. */
 export function summonedAllies(state) {
   return (Array.isArray(state?.summons) ? state.summons : []).map(s => ({
-    id: s.id, name: s.name, kind: "summon", present: true, canAct: true,
+    // ⛔ SNG-598: a GUEST is someone who came to this fight on their own — the guard who stood between the player and the blade — and
+    // fights in the same seat a summon does; they were not called in by a craft.
+    id: s.id, name: s.name, kind: s.guest ? "guest" : "summon", present: true, canAct: true,
     contributions: Array.isArray(s.contributions) && s.contributions.length ? s.contributions : ["MARTIAL"],
-    record: s, sheet: s, downed: null, summoned: true, count: s.count || 1, level: s.level,
+    record: s, sheet: s, downed: null, summoned: !s.guest, count: s.count || 1, level: s.level,
   }));
 }
 
@@ -906,6 +908,8 @@ export function sanitizeNewEncounter(raw) {
     // with no exit rule, which is worse than being a fight.
     ...(["standoff", "chase"].includes(String(raw.flavor || "")) ? { flavor: String(raw.flavor) } : {}),
     lethal: !!raw.lethal,
+    // ⛔ SNG-598: THIS FIGHT IS THE STRIKE ON THE PLAYER — only ever `true`, never a string a prompt can bend.
+    ...(raw.strike === true ? { strike: true } : {}),
     opponent: { name: String(o.name).slice(0, 60), health: Math.max(2, Math.min(8, o.health | 0 || 4)),
       threat: Math.max(10, o.threat | 0 || 35), yieldAt: Math.max(0, Math.min(3, o.yieldAt | 0)),   // SNG-249: no 70 ceiling
       // ⚠️ THE RATIO IS SANITISED TOO, and as a ratio: 0–0.9 of the pool. An unsanitised field on a

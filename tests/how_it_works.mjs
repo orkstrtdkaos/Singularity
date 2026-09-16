@@ -18597,8 +18597,8 @@ console.log("\n── §259 · a strike on the player is a scene, and the one se
     rules: {}, lore: "", timeLabel: "Day 1", recentTurns: [], sceneState: {}, resolution: null, playerInput: null };
   const p259 = GM259.buildTurnContext({ ...bare259, threatToPlayer: threat });
   check("§259: …READ as a scene with two shapes — one paragraph, or a fight with the guard ALONGSIDE — a yieldAt unless they die fighting, and strikeOps when it is over",
-    /IT IS A SCENE, NOT A NOTIFICATION/.test(p259) && /ONE PARAGRAPH/.test(p259) && /fights ALONGSIDE the player — an ally, not scenery/.test(p259)
-    && /give them a yieldAt/.test(p259) && /emit strikeOps/.test(p259) && /The Last Walker will be there and steps in/.test(p259)
+    /IT IS A SCENE, NOT A NOTIFICATION/.test(p259) && /ONE PARAGRAPH/.test(p259) && /a newEncounter with "strike": true/.test(p259)
+    && /BESIDE the player as a real combatant \(an ally, not scenery\)/.test(p259) && /emit strikeOps/.test(p259) && /The Last Walker will be there and steps in/.test(p259)
     && REG259.registryKeys("turn").includes("threatToPlayer"));
 
   /* ---- 3 · ⛔ WHEN IT HAS COME TO A HEAD ---- */
@@ -18644,6 +18644,46 @@ console.log("\n── §260 · how wealthy, in words, beside the number ──")
   const A260 = rd("app.js").replace(/\r\n/g, "\n");
   check("§260: ⛔ the band sits BESIDE the number on the purse row — the number stays, precise",
     /<strong>\$\{w\.totalInCrystal\.toFixed\(1\)\}<\/strong> in crystal` : ""\}\$\{\(\(\) => \{[\s\S]{0,260}const band = purseBand\(w\.totalInCrystal, CONTENT\.rules\?\.economy\);[\s\S]{0,120}<span class="purse-band" title="\$\{esc\(band\.of\)\}">\$\{esc\(band\.name\)\}<\/span>/.test(A260));
+}
+
+// ⛔ SNG-598 part two (CCODE-375) — "a fight that happens with you and your party — with the extra guard helping." The guard was a figure
+// the GM narrated; now they sit in the same seat a summon does, sheeted as the world sheets any legend in a fight.
+console.log("\n── §261 · when the strike is a fight, the guard fights beside you, and the one sent may yield ──");
+{
+  const W261 = await import("../engine/worldtick.js");
+  const E261 = await import("../engine/encounters.js");
+  const { loadContentHeadless: lch261 } = await import("./headless_content.mjs");
+  const C261 = await lch261();
+  const sb261 = C261.skillBattle?.engine || null;
+
+  const raw = { type: "duel", name: "The knife at the ford", setup: "…", lethal: true, strike: true, opponent: { name: "The one sent", threat: 60 } };
+  const nd = E261.sanitizeNewEncounter(raw);
+  check("§261: ⛔ the GM marks the fight as the strike — only a real `true` survives the sanitiser",
+    nd?.strike === true && !("strike" in E261.sanitizeNewEncounter({ ...raw, strike: "yes" })) && E261.sanitizeNewEncounter({ ...raw, strike: undefined }).strike === undefined);
+
+  const mk = (dies, guard = "the_last_walker") => ({ worldState: { pendingStrikes: [{ arcId: "arc_green_schism", kind: "quiet", sender: "the_starless_one", senderName: "The Starless One",
+    announced: false, resolved: false, ...(guard ? { guardId: guard, guardName: "The Last Walker" } : {}), diesFighting: dies }] } });
+  const s1 = W261.strikeSceneSetup(nd, mk(false), { content: C261, sb: sb261 });
+  check("§261: ⛔ the guard is seated as a real combatant — a guest, not a summon — sheeted as the world sheets a legend in a fight",
+    s1?.summons?.length === 1 && s1.summons[0].guest === true && s1.summons[0].figureId === "the_last_walker" && Number(s1.summons[0].health) > 0
+    && E261.summonedAllies({ summons: s1.summons })[0]?.kind === "guest" && E261.summonedAllies({ summons: s1.summons })[0]?.canAct === true
+    && E261.summonedAllies({ summons: s1.summons })[0]?.summoned === false, JSON.stringify(s1?.summons?.[0] ? { id: s1.summons[0].id, health: s1.summons[0].health } : null));
+  const st1 = E261.startEncounter(s1.def, { oppSheet: { health: 40 } });
+  check("§261: ⛔ one who is not marked to die fighting can YIELD — at a share of their pool the GM did not have to remember to give",
+    s1.def.opponent.yieldAtFraction === W261.STRIKE_YIELD_FRACTION && st1.opponentYieldAt > 0, JSON.stringify({ frac: s1.def.opponent.yieldAtFraction, at: st1.opponentYieldAt }));
+  const s2 = W261.strikeSceneSetup({ ...nd, opponent: { ...nd.opponent, yieldAtFraction: 0.5 } }, mk(true, null), { content: C261, sb: sb261 });
+  const st2 = E261.startEncounter(s2.def, { oppSheet: { health: 40 } });
+  check("§261: ⛔ …and one marked to die fighting cannot yield whatever the GM wrote — and with nobody standing over the player, nobody is seated",
+    s2.def.opponent.yieldAt === 0 && !("yieldAtFraction" in s2.def.opponent) && st2.opponentYieldAt === 0 && s2.summons.length === 0 && s2.scene.diesFighting === true);
+  check("§261: …a fight that is not the strike, or a strike with nobody sent, changes nothing",
+    W261.strikeSceneSetup({ ...nd, strike: undefined }, mk(false), { content: C261, sb: sb261 }) === null
+    && W261.strikeSceneSetup(nd, { worldState: { pendingStrikes: [] } }, { content: C261, sb: sb261 }) === null);
+  const A261 = rd("app.js").replace(/\r\n/g, "\n");
+  const G261 = rd("engine/gm.js").replace(/\r\n/g, "\n");
+  check("§261: ⛔ the fight opens through it — before its state is made — and the guard takes their seat; the contract names the mark",
+    /const scene598 = strikeSceneSetup\(def0, character, \{ content: CONTENT, sb: CONTENT\.skillBattle\?\.engine \|\| null \}\);\n\s+const def = scene598 \? scene598\.def : def0;/.test(A261)
+    && /summons: \[\.\.\.\(character\.activeEncounter\.state\.summons \|\| \[\]\), \.\.\.scene598\.summons\], strikeScene: scene598\.scene/.test(A261)
+    && /"lethal": false, "strike": false, "opponent":/.test(G261));
 }
 
 /* ══════════ REPORT ══════════ */

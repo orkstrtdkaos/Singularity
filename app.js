@@ -88,7 +88,7 @@ import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent
 import { activeArcEffects, craftCostNote, encounterBias, effectsInPlainWords, npcMoodLines, travelCostFactor } from "./engine/arceffects.js";   // SNG-273: an advanced arc is something you FEEL
 import { knownIndex, whoIs, figureArtRecord } from "./engine/whois.js";   // SNG-299: who is that, and where do I read more
 import { worldTabHtml } from "./engine/worldtab.js";   // SNG-276: the tab's markup, testable
-import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, syncTravelers, syncInvitations, sendInvitation, answerInvitation, resolvePlayerStrike, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter, arcStageNow, worldRoster, NEWS_SECTIONS, pushCanonLook} from "./engine/worldtick.js";
+import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, syncTravelers, syncInvitations, sendInvitation, answerInvitation, resolvePlayerStrike, strikeSceneSetup, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter, arcStageNow, worldRoster, NEWS_SECTIONS, pushCanonLook} from "./engine/worldtick.js";
 import { noteWorldMovedOnShown } from "./engine/worldevents.js";
 import { travelersHere, travelerHereLine, whereOf } from "./engine/travelers.js";   // CCODE-359: another traveler is here   // CCODE-354: the world moved on, counted by beats
 import { makeInvitation, incomingInvitations, sentInvitations, joinBandLocally, bandPhrase } from "./engine/invitations.js";
@@ -150,7 +150,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.36";
+const APP_VERSION = "2.0.37";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -9035,12 +9035,19 @@ async function onChoice(choice) {
   }
   // starting an encounter (GM-offered choice carrying a real encounterId)
   if (choice.encounterId && (CONTENT.encounters?.[choice.encounterId] || character.customEncounters?.[choice.encounterId]) && !character.activeEncounter) {
-    const def = CONTENT.encounters?.[choice.encounterId] || character.customEncounters[choice.encounterId];
+    const def0 = CONTENT.encounters?.[choice.encounterId] || character.customEncounters[choice.encounterId];
+    // ⛔ SNG-598 part two — THE STRIKE ON THE PLAYER, AS A FIGHT: the guard beside them, and whether the one sent can yield, decided
+    // before the fight's state is made (the yield threshold is read at the start).
+    const scene598 = strikeSceneSetup(def0, character, { content: CONTENT, sb: CONTENT.skillBattle?.engine || null });
+    const def = scene598 ? scene598.def : def0;
+    if (scene598 && character.customEncounters?.[def.id]) character.customEncounters[def.id] = def;
     // SNG-098 C: a duel runs as a two-sided SKILL BATTLE (the contest panel) when the engine is loaded and
     // the def doesn't opt out; the classic single-margins duel stays the fallback (skillBattle:false).
     const oppSheet = contestSheetFor(def);   // SNG-247: one place decides the other side (duel -> foe, puzzle -> static)
     const isSB = !!oppSheet;
     character.activeEncounter = { defId: def.id, state: startEncounter(def, { oppSheet }) };
+    if (scene598 && character.activeEncounter.state) Object.assign(character.activeEncounter.state, {
+      summons: [...(character.activeEncounter.state.summons || []), ...scene598.summons], strikeScene: scene598.scene });
     // SNG-149 / CCODE-89 — A COLISEUM BOUT IS FOUGHT ON THE BLIND GRID. Aevi authored the whole design and it
     // sat as a rules file nothing read, with these three champion encounters already written against it.
     // Both axes are drawn HERE, at the moment the bout opens, because the draw is part of the fiction: the

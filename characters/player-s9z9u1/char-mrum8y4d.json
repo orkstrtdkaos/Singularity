@@ -97,6 +97,10 @@
       "level": 1,
       "braided": false,
       "discovered": true
+    },
+    {
+      "abilityId": "appetite_sense",
+      "level": 1
     }
   ],
   "alignment": {
@@ -8264,8 +8268,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789593016887,
-  "rev": 707,
+  "updatedAt": 1789593415400,
+  "rev": 708,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9419,7 +9423,8 @@
       "misdirect": 2,
       "wrong_reality": 1,
       "better_story": 1,
-      "maintained_veil": 1
+      "maintained_veil": 1,
+      "appetite_sense": 15
     },
     "coActivations": {
       "falsecraft+the_wrong_reality": 1,
@@ -9435,11 +9440,6 @@
         "abilityId": "the_ended_threat",
         "since": "2026-07-21T18:13:23.924Z",
         "progress": 0
-      },
-      {
-        "abilityId": "appetite_sense",
-        "since": "2026-07-21T18:16:21.011Z",
-        "progress": 15
       }
     ],
     "lastUsed": {

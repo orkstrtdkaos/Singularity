@@ -285,6 +285,13 @@
     "lastTurn": {
       "narration": "",
       "choices": [],
+      "newAbility": [
+        {
+          "abilityId": "fire_test_craft",
+          "name": "A fire-test craft",
+          "why": "fire test"
+        }
+      ],
       "sceneSummary": null
     },
     "sceneState": {
@@ -8321,7 +8328,7 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789595164333,
+  "updatedAt": 1789595164470,
   "rev": 727,
   "generated": {
     "schemaVersion": 1,
@@ -9318,7 +9325,7 @@
     {
       "id": "sess-13",
       "startedAt": "2026-09-16T21:46:04.238Z",
-      "lastAt": "2026-09-16T21:46:04.332Z",
+      "lastAt": "2026-09-16T21:46:04.469Z",
       "startDay": 78,
       "endDay": 78,
       "beats": 2

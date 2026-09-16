@@ -1243,7 +1243,23 @@
     "eventStages": {
       "water_crisis": {
         "stage": 2,
-        "sinceDay": 13
+        "sinceDay": 4,
+        "rev": 1,
+        "atWorldDay": 26,
+        "by": {
+          "id": "char-mrhs8286",
+          "name": "Silas Weir"
+        },
+        "resolved": {
+          "outcome": "redirected",
+          "outcomeName": "The Instruction Rewritten",
+          "questId": "what-the-water-remembers",
+          "by": {
+            "id": "char-mrhs8286",
+            "name": "Silas Weir"
+          },
+          "worldDay": 26
+        }
       }
     },
     "spectrumDrift": {
@@ -1252,19 +1268,6 @@
       "falsehood_truth": -0.05
     },
     "news": [
-      {
-        "day": 4,
-        "worldDay": 77,
-        "text": "Seraphine the Unbending Witness broke Valen Sunwrack, Who Left No Shadow Standing at The Blaze with Unbearable Word. Valen Sunwrack is out of the reckoning while the wound holds.",
-        "tier": "event",
-        "section": "world",
-        "kind": "clash",
-        "winnerId": "the_unbending_witness",
-        "loserId": "sunwrack_valen",
-        "outcome": "wounded",
-        "abilityId": "unbearable_word",
-        "locationId": "the_blaze"
-      },
       {
         "day": 4,
         "worldDay": 77,
@@ -1410,11 +1413,18 @@
         "text": "Veln Ashpause: Veln has quietly positioned herself closer to the place she knows the moment will arrive, sitting with the stillness of someone who is not waiting but simply already there.",
         "tier": "ambient",
         "section": "world"
+      },
+      {
+        "day": 4,
+        "worldDay": 26,
+        "text": "The Water Crisis has been answered — Silas Weir saw What the Water Remembers through (The Instruction Rewritten).",
+        "tier": "event",
+        "section": "world"
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 1885,
-    "lastSharedReadAt": "2026-09-16T13:25:59.218Z",
+    "lastGenCount": 1890,
+    "lastSharedReadAt": "2026-09-16T18:17:54.300Z",
     "lastTickWorldDay": 78,
     "lastCanonWorldDay": 78,
     "turnsSinceOffer": 1,
@@ -1515,7 +1525,7 @@
         "kind": "shortage",
         "premise": "The shallow wells that sustain the scattered settlements are dropping faster each season than anyone has yet admitted aloud.",
         "cause": "The Palelands' sparse, chalky soil has always demanded more water to work than it naturally holds, and the settlements were founded at the margins of what the…",
-        "stage": 54,
+        "stage": 55,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1528,7 +1538,7 @@
         "kind": "rot",
         "premise": "A slow fungal bloom is working through the oldest grain stores, and the steward responsible has been quietly discarding the worst sacks rather than reporting the loss.",
         "cause": "The valley's mild, damp winters make its granaries prone to moisture, and the current steward was appointed for loyalty rather than knowledge of grain-keeping.",
-        "stage": 54,
+        "stage": 55,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1553,7 +1563,7 @@
         "kind": "rot",
         "premise": "A key sequence in the primary record is being quietly re-threaded by someone who made an error years ago and cannot bear to have it discovered.",
         "cause": "Unspooling's knowledge is stored in physical cordage whose integrity depends entirely on the honesty of the hands that maintain it.",
-        "stage": 49,
+        "stage": 50,
         "seededAtCount": 758,
         "surfaced": true,
         "fate": "growing",
@@ -1590,7 +1600,7 @@
         "kind": "shortage",
         "premise": "Certain materials or substances needed for whatever work the Unmade does are being quietly stockpiled by one practitioner at the expense of communal supply, because she no longer trusts the…",
         "cause": "The Unmade is a place where things are taken apart, and grief for what is lost has no formal channel — it is expected to simply disperse, as everything else…",
-        "stage": 17,
+        "stage": 18,
         "seededAtCount": 1675,
         "surfaced": true,
         "fate": "growing",
@@ -1603,7 +1613,7 @@
         "kind": "rot",
         "premise": "A run of subtle flaws has begun appearing in work passing through one bench — small enough to escape immediate notice, deep enough to fail later — and the cause is a senior apprentice who has been…",
         "cause": "The two workshops already contesting the shared tool have each told their apprentices, in different words, that the other side cannot be trusted — and one…",
-        "stage": 17,
+        "stage": 18,
         "seededAtCount": 1675,
         "surfaced": true,
         "fate": "growing",
@@ -1616,7 +1626,7 @@
         "kind": "shortage",
         "premise": "A foundational material used in the Making's core work has quietly been substituted with an inferior source for several production cycles, and nothing built from it has yet been tested under real…",
         "cause": "The two workshops already deadlocked over the shared tool have each independently begun sourcing their own materials rather than drawing from the common…",
-        "stage": 10,
+        "stage": 11,
         "seededAtCount": 1826,
         "surfaced": true,
         "fate": "growing",
@@ -1644,6 +1654,21 @@
           "type": "encounter",
           "encounterId": "beast_cinder_mote_drift",
           "name": "a cinder-mote drift"
+        },
+        "addedDay": 4,
+        "locationId": "the_crossing"
+      },
+      {
+        "source": "threat-attack",
+        "kind": "threat-attack",
+        "subjectId": "beast_warpling_hare",
+        "aimedAtPlayer": true,
+        "urgency": 3,
+        "oneLineHook": "A a warpling has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
+        "becomes": {
+          "type": "encounter",
+          "encounterId": "beast_warpling_hare",
+          "name": "a warpling"
         },
         "addedDay": 4,
         "locationId": "the_crossing"
@@ -6284,6 +6309,18 @@
         "sunwrack_valen"
       ],
       "woke": []
+    },
+    "questOutcomes": {
+      "what-the-water-remembers": {
+        "outcome": "redirected",
+        "outcomeName": "The Instruction Rewritten",
+        "by": {
+          "id": "char-mrhs8286",
+          "name": "Silas Weir"
+        },
+        "worldDay": 26,
+        "rev": 1
+      }
     }
   },
   "domains": {
@@ -8227,8 +8264,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789565224651,
-  "rev": 700,
+  "updatedAt": 1789582677013,
+  "rev": 702,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10918,5 +10955,6 @@
   },
   "composedImages": {
     "https://image.pollinations.ai/prompt/Unlit%20Elder%2C%20character%20portrait%2C%20named%20Unlit%20Elder%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=63786&nologo=true": "https://image.pollinations.ai/prompt/Unlit%20Elder%2C%20character%20portrait%2C%20named%20Unlit%20Elder%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=63786&nologo=true&_cb=1_1"
-  }
+  },
+  "invitationsSeen": {}
 }

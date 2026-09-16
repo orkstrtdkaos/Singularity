@@ -18303,8 +18303,17 @@ console.log("\n── §254 · a strike is news, and says it was one ──");
   check("§254: …and the fact survives stamping, so the feed and the GM keep which kind of strike it was",
     stampedKeeps254);
   const src254 = rd("engine/worldtick.js").replace(/\r\n/g, "\n");
-  check("§254: ⛔ a strike on the PLAYER is still the GM's to tell, and a player picked as the guard is never named as one",
-    /if \(mark\.f\.id !== PLAYER_MARK_ID\) \{\n\s+const byGuard = guard\.f\.id !== PLAYER_MARK_ID \? guard\.f : null;/.test(src254));
+  // ⛔ CCODE-368 (Aevi, ruled): "a strike turned aside FROM THE PLAYER should arrive as news naming the guard, since the fight is already
+  // resolved and there is nothing for the GM to run."
+  check("§254: ⛔ a strike turned aside from the PLAYER is news, where they are; one that lands on them is still the GM's to tell; a player picked as guard is never named",
+    /const onPlayer = mark\.f\.id === PLAYER_MARK_ID;\n\s+const byGuard = guard\.f\.id !== PLAYER_MARK_ID \? guard\.f : null;\n\s+const placeId = onPlayer \? \(character\?\.currentLocationId \|\| clashPlaceOf\(sender\.f, mark\.f\)\)/.test(src254)
+    && /if \(mark\.f\.id === PLAYER_MARK_ID\) \{\n\s+\(ws\.pendingStrikes \|\|= \[\]\)\.push\(/.test(src254));
+  const aevi254 = { strike: { quiet: { wounded: ["{S} hurt {T} at {place}.", "A strike hurt {T} from {place}[ — {S}][, {sWho}][, {sHow}]."] } } };
+  check("§254: ⛔ an unseen strike is told in the author's own quiet lines when they keep the striker optional — and never in one that names them outright",
+    N254.strikeLine({ templates: aevi254, strike: "quiet", outcome: "wounded", sender: S, target: T, place: "The Greenward", flavor: fl254, unseen: true })
+      === "A strike hurt Kesh Ardent, the Edge That Holds from The Greenward, fighting from the dark they brought."
+    && N254.strikeLine({ templates: aevi254, strike: "quiet", outcome: "wounded", sender: S, target: T, place: null, flavor: fl254, unseen: true })
+      === "A strike hurt Kesh Ardent, the Edge That Holds, fighting from the dark they brought.");
 }
 
 // ⛔ CCODE-367 (Erik, 2026-09-16) — "Nearby events should stand out more. we might want a revamp pass on the world news soon."

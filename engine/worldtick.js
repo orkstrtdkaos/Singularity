@@ -3123,16 +3123,19 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
           creditDeed(ws, guard.f.id, "guardIntercept", { worldDay: currentWorldDay });
           creditDeed(ws, mark.f.id, "strikeSurvived", { worldDay: currentWorldDay });
           // ⛔ SNG-596 — A STRIKE TURNED ASIDE IS NEWS: Aevi's "better one", and until now the only strike that said nothing.
-          // ⚠️ NOT when the mark is the PLAYER — a strike on them is the GM's to tell (SNG-310). And a guard who is the player is
-          // never named: `planStrike` chose them from the pool; they did not choose to stand there.
-          if (mark.f.id !== PLAYER_MARK_ID) {
+          // ⛔ CCODE-368 — INCLUDING ONE TURNED ASIDE FROM THE PLAYER. Aevi, ruled: "a strike turned aside FROM THE PLAYER should arrive
+          // as news naming the guard, since the fight is already resolved and there is nothing for the GM to run." It happened where
+          // they are. (A strike that LANDS on the player is still the GM's to tell — SNG-310, below.)
+          // ⚠️ And a guard who is the player is never named: `planStrike` chose them from the pool; they did not choose to stand there.
+          {
+            const onPlayer = mark.f.id === PLAYER_MARK_ID;
             const byGuard = guard.f.id !== PLAYER_MARK_ID ? guard.f : null;
-            const placeId = clashPlaceOf(sender.f, mark.f);
+            const placeId = onPlayer ? (character?.currentLocationId || clashPlaceOf(sender.f, mark.f)) : clashPlaceOf(sender.f, mark.f);
             news.push({ text: strikeLine({ templates: strikeVoice.templates, strike: kind, outcome: "guarded", sender: sender.f, target: mark.f,
                 guard: byGuard, place: strikeVoice.place(placeId), arc: strikeArc, flavor: strikeFlavor,
                 // the guard WON this one, so the power is the guard's — the same deterministic pick every fight uses
                 guardPower: byGuard ? strikeVoice.power(signatureOf(byGuard, sender.f, abilitiesByTradition)) : null }),
-              kind: "strike", strike: kind, outcome: "guarded", winnerId: byGuard?.id || null, loserId: sender.f.id, figureId: mark.f.id,
+              kind: "strike", strike: kind, outcome: "guarded", winnerId: byGuard?.id || null, loserId: sender.f.id, figureId: onPlayer ? null : mark.f.id,
               locationId: placeId, arcId, worldDay: currentWorldDay, tier: "event" });
           }
           continue;

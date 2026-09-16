@@ -16893,10 +16893,19 @@ await (async () => {
   // falls silently back to the hardcoded line — the exact way a wired file stays unwired.
   {
     const missing = Object.entries(NV.OUTCOME_TEMPLATE_KEY).filter(([, k]) => !T433?.templates?.[k]);
-    const thin = Object.entries(T433?.templates || {}).filter(([, b]) => !b.rival || !b.mutual || !b.stranger);
+    // ⚠️ CCODE-368: `strike` is keyed by MODE (quiet | crusade), not by relationship — Aevi's SNG-596 block, which this walked
+    // expecting rival/mutual/stranger. It is checked below for what it is.
+    const thin = Object.entries(T433?.templates || {}).filter(([k, b]) => k !== "strike" && (!b.rival || !b.mutual || !b.stranger));
     check("433: every outcome the engine can produce names a template block that exists, with all three relationships",
       missing.length === 0 && thin.length === 0 && Object.keys(NV.OUTCOME_TEMPLATE_KEY).length === 4,
       `unmapped=${missing.map(m => m[0])} thin=${thin.map(t => t[0])}`);
+  }
+  {
+    const S433 = T433?.templates?.strike || {};
+    const need433 = ["killed", "wounded", "checked", "stalemate", "guarded", "turned"];
+    const gaps433 = ["quiet", "crusade"].flatMap(mode => need433.filter(k => !S433[mode]?.[k]).map(k => `${mode}.${k}`));
+    check("433/596: the strike block covers every outcome a strike can have, in both modes — keyed by mode, not relationship",
+      gaps433.length === 0, gaps433.join(" "));
   }
 
   // 3 · THE TEXT COMES FROM THE FILE. Not "the function exists" — the sentence a player reads is hers.

@@ -218,7 +218,8 @@ function fillStrike(tpl, slots) {
   const val = (k) => { const v = slots[k]; return v == null ? "" : String(v).trim(); };
   let out = String(tpl || "")
     // an older authored shape without brackets still loses its phrase when the slot is empty
-    .replace(/ at \{place\}/g, (m) => (val("place") ? m : ""))
+    // an authored line's own preposition goes with an empty place ("did not come back from {place}" → "did not come back")
+    .replace(/ (?:at|from|in|near|by) \{place\}/g, (m) => (val("place") ? m : ""))
     .replace(/ over \{arc\}/g, (m) => (val("arc") ? m : ""))
     .replace(/\[([^\[\]]*)\]/g, (m, seg) => ([...seg.matchAll(/\{(\w+)\}/g)].every(x => val(x[1])) ? seg : ""));
   out = out.replace(/\{(\w+)\}/g, (m, k) => val(k));
@@ -231,15 +232,20 @@ export function strikeLine({ templates, strike = "quiet", outcome, sender, targe
   if (!key) return null;
   // a strike that landed and left no trace is told from the `unseen` shapes; a turned-aside one never is — the guard saw them
   const k = (unseen && outcome !== "guarded") ? "unseen" : strike === "crusade" ? "crusade" : "quiet";
-  const authored = templates?.strike?.[k]?.[key];
-  const pool = (Array.isArray(authored) ? authored : [authored]).filter(t => typeof t === "string" && t.trim());
+  const poolOf = (x) => (Array.isArray(x) ? x : [x]).filter(t => typeof t === "string" && t.trim());
+  let pool = poolOf(templates?.strike?.[k]?.[key]);
+  // ⛔ CCODE-368 — AEVI'S QUIET LINES ALREADY TELL IT BOTH WAYS: most keep the striker in [optional segments] ("…by a quiet strike from
+  // somebody who knew the work[ — {S}][, {sWho}]"), so with no name the same line reads unsigned. An unseen strike uses her
+  // `unseen` lines if she writes them, else those quiet lines that name the striker ONLY inside a segment; a line that names them
+  // outside one ("{S} and {T} met…") is kept for a known striker.
+  if (k === "unseen" && !pool.length) pool = poolOf(templates?.strike?.quiet?.[key]).filter(t => !/\{(?:S|s|sWho)\}/.test(t.replace(/\[[^\[\]]*\]/g, "")));
   const tpl = pool.length ? pool[pickIndex(`${sender?.id}|${target?.id}|${outcome}|${k}`, pool.length)] : STRIKE_FALLBACK[k][key];
   const fl = (f) => (f && typeof flavor === "function" ? (flavor(f) || {}) : {});
   const sf = fl(sender), tf = fl(target), gf = guard ? fl(guard) : {};
-  const S = k === "unseen" ? "someone" : (sender?.name || "someone"), T = target?.name || "someone", G = guard?.name || "";
+  const S = k === "unseen" ? "" : (sender?.name || "someone"), T = target?.name || "someone", G = guard?.name || "";
   const noId = (x) => (x && !isIdShaped(x) ? String(x).trim() : "");
   return fillStrike(tpl, {
-    S, T, G, s: shortName(S), t: shortName(T), g: G ? shortName(G) : "",
+    S, T, G, s: S ? shortName(S) : "", t: shortName(T), g: G ? shortName(G) : "",
     sWho: k === "unseen" ? "" : sf.who, sHow: sf.how, tWho: tf.who, tHow: tf.how, gWho: gf.who, gHow: gf.how,
     power: noId(power), gPower: noId(guardPower), place: noId(place),
     // an arc's name mid-sentence: "over the Green Schism", never "over The Green Schism"

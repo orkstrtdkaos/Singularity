@@ -2280,5 +2280,43 @@
    "willed": []
   },
   "_needsTagsWhy": "⚠️ `crewed` wants water and `living` wants ground it can walk; `powered`, `drifting` and `willed` care about nothing (an airship ignores terrain, a floating city goes where it goes, and a dragon lands where it likes)."
- }
+ },
+ "purseBands": [
+  {
+   "at": 0,
+   "name": "nothing on you",
+   "of": "not a shard. You are asking, or going without."
+  },
+  {
+   "at": 1,
+   "name": "hand to mouth",
+   "of": "a meal and a bed, not a tool. Anything that lasts is out of reach."
+  },
+  {
+   "at": 15,
+   "name": "provided for",
+   "of": "a valuable thing is affordable once. You can replace what breaks."
+  },
+  {
+   "at": 60,
+   "name": "well-found",
+   "of": "a precious thing, or a season of upkeep on a small hold."
+  },
+  {
+   "at": 250,
+   "name": "comfortable",
+   "of": "a holding runs without you counting. You buy what is needed."
+  },
+  {
+   "at": 1000,
+   "name": "moneyed",
+   "of": "you buy what is WANTED. Price stops deciding, and people notice."
+  },
+  {
+   "at": 5000,
+   "name": "rich",
+   "of": "money is no longer the constraint on anything you are doing."
+  }
+ ],
+ "_purseBands_20260916": "⛔ ERIK 2026-09-16: 'I want the wealth level to show on the player's purse area — I have no idea how wealthy Silas or anyone is.' ⚠️ HE REMEMBERED BANDS FROM THE LORE AND THEY ARE `worthBands`, WHICH PRICE AN ITEM, NOT A PERSON. There was no ladder for a purse anywhere. ⛑ AUTHORED AGAINST WHAT MONEY ACTUALLY BUYS IN THIS ECONOMY, not invented: `worthBands` (trivial 1 · useful 4 · valuable 15 · precious 50) and `holdFeatures` upkeep (2–4 per feature per pass). So the rungs are the real thresholds — 15 is the first valuable thing, 60 is a precious one or a season of upkeep, 250 is a hold that runs without being counted. ⚠️ MEASURED AGAINST THE LIVE WORLD AND IT DISCRIMINATES: Silas at 1,436 reads MONEYED; every other player character holds 0 and reads NOTHING ON YOU; of the NPCs I have pursed, Hollis has 3 (hand to mouth), Vesper 18 (provided for), Mara Wells 260 (comfortable), the Hour-Hoarder 4,000 (moneyed) and Ysenkar 60,000 (rich, and has never counted it). ⛔ THE BAND IS A LABEL BESIDE THE NUMBER, NEVER INSTEAD OF IT — economy `visibility` is explicit: 'THE NUMBERS ARE VISIBLE AND PRECISE; the narration does not recite them.' The purse still reads 1,436."
 }

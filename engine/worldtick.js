@@ -174,13 +174,20 @@ export function arcPeopleView(character, content = {}) {
   // "cares deeply", which is what this band is for. ⛑ AND IT BROKE THE PARALLEL: the other two are noun
   // phrases naming what the arc IS to a person — "a stake in it", "their life's work" — and the middle one was
   // an adjectival idiom about how it FEELS to a listener. Three rungs of one ladder now read as one ladder:
-  //     a stake in it  <  a personal matter  <  their life's work
+  //     aware of it  <  attending to it  <  focused on it  <  consumed by it
+  // ⛑ ERIK 2026-09-16, ON THE SECOND ATTEMPT: "the arc idioms are supposed to be descriptors of how invested
+  // they are in the arc. Saying 'Silas — a stake in it' reads clunky. Calling it a personal matter is worse.
+  // Perhaps we structure it simply and say something like Silas' Attention Level — aware/attending/focused/
+  // consumed." ⛔ HE IS RIGHT AND MY FIRST FIX WAS THE SAME MISTAKE IN A NEW COAT: both my ladders were
+  // FIGURES OF SPEECH about the arc, and what the column actually wants is ONE SCALE with one dimension —
+  // how much of this person is pointed at it. An attention ladder reads the same beside every name, which a
+  // metaphor never does, and it grades cleanly: aware < attending < focused < consumed.
   // ⚠️ AND IT MATTERS MORE THAN ONE PHRASE USUALLY WOULD, because the panel prints this beside every name in
   // every arc — Erik's screen showed it six times in one block. A word that reads oddly once reads badly six
   // times in a column.
   const careBand = (f, arcId) => {
     const w = affinitiesOf(f).find(c => c.arcId === arcId)?.weight || 1;
-    return w >= 3 ? "their life’s work" : w >= 2 ? "a personal matter" : "a stake in it";
+    return w >= 4 ? "consumed by it" : w >= 3 ? "focused on it" : w >= 2 ? "attending to it" : "aware of it";
   };
 
   return worldArcsPublic(content, character).map(arc => {

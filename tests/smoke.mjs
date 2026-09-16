@@ -14292,7 +14292,7 @@ await (async () => {
   // holds the same number and any banding of it prints one phrase beside every name — which is what the
   // first three versions did. The band reads AUTHORED care weight, which actually varies.
   check("272/276: the phrase beside a name reads authored CARE, not the saturated push",
-    typeof a.forIt[0]?.lean === "string" && /life’s work|bone|stake/.test(a.forIt[0].lean));
+    typeof a.forIt[0]?.lean === "string" && /aware|attending|focused|consumed/.test(a.forIt[0].lean));
   check("272/276: …and it DISCRIMINATES — different care weights read differently", (() => {
     const c2 = JSON.parse(JSON.stringify(content));
     c2.legends.roster[0].arcAffinity = { arcId: "a1", dir: 1, weight: 3 };

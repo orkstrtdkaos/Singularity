@@ -7,19 +7,12 @@
 
 ## ⛔ OPEN
 
-### 1 · ⚠️ AN ABSENT PURSE IS NOT A ZERO ONE
-From Erik pointing at the Library's *The Game & the Coin* while I was authoring purses.
-
-⛑ **Your `purseBands` ladder is right and it exposed something in my authoring.** I gave the Precursors,
-Sovereigns, Ents and dissolved things `purse: {crystal: 0}`, and the ladder read them as its bottom rung —
-*"not a shard. You are asking, or going without."* ⛔ **AKINETOS HAS NEVER ASKED ANYONE FOR ANYTHING.** All
-22 at zero were outside the economy, not destitute.
-
-⛑ **Fixed in content: no `purse` field at all.** Absence means *the question does not apply*; zero is an
-answer to it. **86 NPCs now carry a purse and none is zero.**
-
-⬜ **The ask is that the display keep the distinction** — a missing purse must not render as *"nothing on
-you"*. A dragon with 60,000 reads `rich`; **a Precursor with no purse must not read as a beggar.**
+### 1 · ⛑ PURSE — RESOLVED IN CONTENT, NO LONGER AN ASK
+I stripped the purse from 22 great figures as *"outside the economy"*. ⛔ **Erik overruled it and he is
+right:** the Bargainers are an entire tradition, a Sovereign's method is levering what somebody will not risk,
+and an Ent arguing to keep the Deepwood woven into the world is treating with people. **All restored and
+authored against your `purseBands`** — 105 NPCs carry one, 16 at `rich`, and exactly one at zero: Kenosis,
+whose emptying is the act he is named for. ⚠️ **No display change needed after all.**
 
 ### 2 · ⛔ A SKILL CARD NEVER SAYS WHAT THE SKILL ROLLS
 **Erik 2026-09-16: 'I want the attribute a skill uses to be obvious in the skill pop-up and description.'**

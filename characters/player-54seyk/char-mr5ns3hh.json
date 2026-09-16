@@ -51,9 +51,9 @@
   },
   "attunement": 1,
   "maxHealth": 25,
-  "health": 11,
+  "health": 14,
   "maxEnergy": 116,
-  "energy": 40,
+  "energy": 55,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -288,127 +288,177 @@
         "player": "Sleep here at the store—accept Mara's refusal for now and let exhaustion release. When you wake, ask again, and read what has changed while you rested.",
         "summary": "Adelheid collapses into sleep at Mara's Store after triggering the Precursor system's waking. She wakes to early morning, rested, and finds Mara at a marked map—the night's waiting has yielded to preparation.",
         "narration": "You nod, though every part of you wants to push back, and let your shoulders drop. The exhaustion is real—a physical weight that has been holding you upright only through will and fear. When you stop fighting it, the weight becomes unbearable.\n\nMara gestures to a back room, small and spare: a cot with a folded blanket, a pitcher of water, a stand for your wet clothes. She says nothing more, but her movements are efficient, kind in the way of someone who knows you will not hear warmth right now. You shed the mud-soaked layers and collapse onto the cot. Aevi dims her motes to a gentle glow, settling on the shelf above your head—a small constellation keeping watch.\n\nSleep comes fast and deep, the kind that closes everything out. Dreams run beneath it—the hum of the Precursor system becomes the hum of your own heartbeat, becomes the hum of the plants, becomes something you cannot name. When you surface again, the window shows first gray, then pale gold. Early morning. The store beyond the closed door is already alive with small sounds: Mara moving, water heating, the deliberate clink of cups.\n\nYou dress in clothes that have been dried by the stove—a small mercy—and step out into the main room. Mara stands at her work table again, but this time it is not ledgers laid open. A map is spread there, hand-drawn, marked with notations in careful script. She looks up as you enter, and her expression has shifted: not warmer, but more settled. The calculation has moved to the next step."
+      },
+      {
+        "player": "Ask for water and food before anything else—you are rested but not restored, and a clear head needs a full belly.",
+        "summary": "Adelheid wakes rested at Mara Wells' Store and eats before returning to the map and the waiting conversation.",
+        "narration": "You push yourself up on your elbows, testing the weight in your limbs. The cot has held you well—your shoulders don't ache the way they did when you fell into it, and the knot in your chest has loosened slightly. Your mouth is dry, your stomach hollow. The pitcher stands on the stand where Mara left it, and through the doorway you hear her moving in the main room, the soft clink of ceramic.\n\nYou dress in the clothes she folded—still damp but wearable—and step out into the pale morning light. Mara looks up from her work table, where the hand-drawn map still lies spread under her hands. She takes in your face in one sharp glance and nods as though confirming something.\n\n\"Water first,\" she says, not a question, and moves to the stove. There is a pot warming there already—she pours into a cup and hands it to you, and you see she has already broken bread, set out cheese, and left a bowl of yesterday's porridge covered to keep the chill off. \"Eat. You slept like someone who needed it, but rest without food is half a measure.\"\n\nAevi dims her motes as you settle at the table, condensing into a small blue-green spark that hovers near the bread. She has been keeping watch all night—you can read that in how she settles now, in the dimming. The water is clean and cool. The bread is dense. The cheese tastes of salt and time. For a few minutes, nothing exists but the work of filling the hollow place."
       }
     ],
     "lastTurn": {
-      "narration": "You nod, though every part of you wants to push back, and let your shoulders drop. The exhaustion is real—a physical weight that has been holding you upright only through will and fear. When you stop fighting it, the weight becomes unbearable.\n\nMara gestures to a back room, small and spare: a cot with a folded blanket, a pitcher of water, a stand for your wet clothes. She says nothing more, but her movements are efficient, kind in the way of someone who knows you will not hear warmth right now. You shed the mud-soaked layers and collapse onto the cot. Aevi dims her motes to a gentle glow, settling on the shelf above your head—a small constellation keeping watch.\n\nSleep comes fast and deep, the kind that closes everything out. Dreams run beneath it—the hum of the Precursor system becomes the hum of your own heartbeat, becomes the hum of the plants, becomes something you cannot name. When you surface again, the window shows first gray, then pale gold. Early morning. The store beyond the closed door is already alive with small sounds: Mara moving, water heating, the deliberate clink of cups.\n\nYou dress in clothes that have been dried by the stove—a small mercy—and step out into the main room. Mara stands at her work table again, but this time it is not ledgers laid open. A map is spread there, hand-drawn, marked with notations in careful script. She looks up as you enter, and her expression has shifted: not warmer, but more settled. The calculation has moved to the next step.",
-      "sceneSummary": "Adelheid collapses into sleep at Mara's Store after triggering the Precursor system's waking. She wakes to early morning, rested, and finds Mara at a marked map—the night's waiting has yielded to preparation.",
+      "narration": "You push yourself up on your elbows, testing the weight in your limbs. The cot has held you well—your shoulders don't ache the way they did when you fell into it, and the knot in your chest has loosened slightly. Your mouth is dry, your stomach hollow. The pitcher stands on the stand where Mara left it, and through the doorway you hear her moving in the main room, the soft clink of ceramic.\n\nYou dress in the clothes she folded—still damp but wearable—and step out into the pale morning light. Mara looks up from her work table, where the hand-drawn map still lies spread under her hands. She takes in your face in one sharp glance and nods as though confirming something.\n\n\"Water first,\" she says, not a question, and moves to the stove. There is a pot warming there already—she pours into a cup and hands it to you, and you see she has already broken bread, set out cheese, and left a bowl of yesterday's porridge covered to keep the chill off. \"Eat. You slept like someone who needed it, but rest without food is half a measure.\"\n\nAevi dims her motes as you settle at the table, condensing into a small blue-green spark that hovers near the bread. She has been keeping watch all night—you can read that in how she settles now, in the dimming. The water is clean and cool. The bread is dense. The cheese tastes of salt and time. For a few minutes, nothing exists but the work of filling the hollow place.",
+      "sceneSummary": "Adelheid wakes rested at Mara Wells' Store and eats before returning to the map and the waiting conversation.",
       "choices": [
         {
-          "label": "Look at the map before speaking—read what Mara has prepared while you slept.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
-          "difficulty": "very easy",
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask Mara directly: 'What changed while I was sleeping? What do you know now that you didn't tell me last night?'",
+          "label": "Once you have eaten, turn to the map on the table and ask Mara directly what it shows—where the system travels, where it leads.",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {},
           "difficulty": "normal",
+          "opposedDifficulty": null,
           "intentTags": [
-            "negotiate"
+            "study",
+            "ask"
           ],
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Use Echo Sense to map the space around the store—check if the Precursor vibration has moved closer or changed while you rested.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": "easy",
-          "abilityId": "echo_sense",
-          "energyCost": 4,
-          "intentTags": [
-            "scout"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Ask for water and food before anything else—you are rested but not restored, and a clear head needs a full belly.",
+          "label": "Read the note from Piotr's bundle—the sealed letter Mara gave you—before asking anything else. You have a right to the plain knowledge it holds.",
           "attribute": "practical",
           "subAttribute": "wits",
           "axes": {},
           "difficulty": "very easy",
+          "opposedDifficulty": null,
           "intentTags": [
-            "practical"
+            "study"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Echo Sense while eating—map the interior of the store and the street beyond, listening for who else is awake this early and what the village is doing.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "scout",
+            "study"
+          ],
+          "abilityId": "echo_sense",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "deeds": [],
       "characterDeltas": {
-        "energy": 40,
-        "health": 3
+        "health": 3,
+        "energy": 15,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
       },
-      "timeOps": {
-        "hoursPassed": 8,
-        "why": "a full night's sleep, from deep night to early morning"
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
+      "delegateOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": {
+        "thing": "The hand-drawn map on Mara's work table—marked with careful notations, showing something of consequence",
+        "from": "Mara's night of calculation and preparation; the compressed timeline forcing visible planning"
       },
+      "stageOps": [],
       "scene": {
-        "setting": "Mara Wells' Store, early morning, pale gold light through the eastern window. A solid stone structure with workshop annex. Inside: a work table spread with a hand-drawn map marked in careful script, a cot in the back room (now empty), a stove cooling from night-heating, the smell of woodsmoke and dried herbs.",
+        "setting": "Mara Wells' Store, early morning, pale gold light slanting through the eastern window. The interior is warm from a stove kept banked through the night. A work table holds a spread map marked in careful script. A small back room holds a cot now empty and folded clothes set aside.",
         "npcsPresent": [
           {
             "name": "Mara Wells",
-            "state": "Standing at her work table, watching the map, looking up as Adelheid emerges from the back room. Her expression is settled, calculation moved to the next phase."
+            "state": "Standing at her work table, watching the map. Looks up as you emerge from the back room, takes in your appearance, and moves to pour water without being asked. Her expression is settled, operational—the face of someone who has been awake through the night doing calculations and is ready for the next phase."
           }
         ],
         "objects": [
-          "A hand-drawn map spread on the work table, marked with notations",
-          "A folded blanket on the cot",
-          "A pitcher of water on the stand",
-          "Dried clothes folded and waiting",
-          "The closed ledgers from the night before"
+          "A hand-drawn map spread on the work table, marked with careful notations in Mara's steady script",
+          "A cup of water, just poured",
+          "Bread, cheese, and a covered bowl of porridge on the table",
+          "A stove cooling from night-heating, the smell of woodsmoke still in the air",
+          "Folded clothes set on the back room stand, now displaced"
         ],
         "threads": [
-          "What the hand-drawn map shows and where it points",
-          "Whether Mara will finally speak plainly about the Precursor system's nature and risks",
-          "How much time remains before the system's 'preparation' reaches the village or the river",
-          "What new information or changes occurred in the night while Adelheid slept"
+          "What the hand-drawn map shows—its notations, its markings, where it points",
+          "The sealed note from Piotr's bundle, still unread, holding Mara's original plan and explanation",
+          "How much time remains before the Precursor system's 'preparation' reaches the village or the river",
+          "Whether Mara will finally speak plainly now that rest has been taken"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "mara-wells",
-          "note": "Waited through the night while Adelheid slept. Prepared a hand-drawn map with careful notations. Her calculation has moved to the next operational phase—she is ready to brief or to move.",
-          "statusNote": "Active at her store, awake and prepared, calculation advanced to the next phase"
+          "name": "Mara Wells",
+          "role": "Millbrook civic manager",
+          "note": "Waited through the night while Adelheid slept. Had prepared food and water. Her calculation has moved to the next operational phase—she is ready to brief or to move. Moves without emotion but with clear intent.",
+          "statusNote": "Active at her store, awake through the night, prepared for the next phase of action"
         }
       ],
-      "offer": {
-        "thing": "A hand-drawn map marked with careful notations—Mara's preparation laid out for you to see",
-        "from": "Mara's own understanding of the crisis and the timeline collapse; she has been working while you slept and is now ready to share the next layer of information"
+      "intentsHeard": [],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "discovery": null,
+      "codexUpdates": [],
+      "holdingOps": [],
+      "debtOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "eating and settling before the next conversation"
       },
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": null,
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Mara Wells' Store, early morning, pale gold light through the eastern window. A solid stone structure with workshop annex. Inside: a work table spread with a hand-drawn map marked in careful script, a cot in the back room (now empty), a stove cooling from night-heating, the smell of woodsmoke and dried herbs.",
+      "setting": "Mara Wells' Store, early morning, pale gold light slanting through the eastern window. The interior is warm from a stove kept banked through the night. A work table holds a spread map marked in careful script. A small back room holds a cot now empty and folded clothes set aside.",
       "npcsPresent": [
         {
           "name": "Mara Wells",
-          "state": "Standing at her work table, watching the map, looking up as Adelheid emerges from the back room. Her expression is settl"
+          "state": "Standing at her work table, watching the map. Looks up as you emerge from the back room, takes in your appearance, and m"
         }
       ],
       "objects": [
-        "A hand-drawn map spread on the work table, marked with notations",
-        "A folded blanket on the cot",
-        "A pitcher of water on the stand",
-        "Dried clothes folded and waiting",
-        "The closed ledgers from the night before"
+        "A hand-drawn map spread on the work table, marked with careful notations in Mara",
+        "A cup of water, just poured",
+        "Bread, cheese, and a covered bowl of porridge on the table",
+        "A stove cooling from night-heating, the smell of woodsmoke still in the air",
+        "Folded clothes set on the back room stand, now displaced"
       ],
       "threads": [
-        "What the hand-drawn map shows and where it points",
-        "Whether Mara will finally speak plainly about the Precursor system's nature and risks",
-        "How much time remains before the system's 'preparation' reaches the village or the river",
-        "What new information or changes occurred in the night while Adelheid slept"
+        "What the hand-drawn map shows—its notations, its markings, where it points",
+        "The sealed note from Piotr's bundle, still unread, holding Mara's original plan and explanation",
+        "How much time remains before the Precursor system's 'preparation' reaches the village or the river",
+        "Whether Mara will finally speak plainly now that rest has been taken"
       ]
     },
-    "beats": 12,
+    "beats": 13,
     "subPlace": {
       "slug": "the-wet-meadows",
       "name": "The Wet Meadows",
@@ -464,7 +514,8 @@
         "[d2] Adelheid found her awake and waiting at her work table in the dead of night—she appears to have expected this escalation, or something like it. Her calmness in the face of news of a waking Precursor system will tell what she has known and been preparing for.",
         "[d2] Mara was awake at her work table in the dead of night, apparently expecting—or having prepared for—this escalation. When Adelheid confesses direct contact with the Precursor system, Mara's response is not shock but recalibration. She confirms that Adelheid has compressed a carefully-planned…",
         "[d2] Mara was awake in the store in the dead of night, ledgers open, when Adelheid arrived muddy and shaken from direct contact with the Precursor system. When asked to speak plainly about the system's nature and risks, Mara refused—she named only that the timeline has collapsed to hours instead of…",
-        "[d2] Waited through the night while Adelheid slept. Prepared a hand-drawn map with careful notations. Her calculation has moved to the next operational phase—she is ready to brief or to move."
+        "[d2] Waited through the night while Adelheid slept. Prepared a hand-drawn map with careful notations. Her calculation has moved to the next operational phase—she is ready to brief or to move.",
+        "[d2] Waited through the night while Adelheid slept. Had prepared food and water. Her calculation has moved to the next operational phase—she is ready to brief or to move. Moves without emotion but with clear intent."
       ],
       "knownFacts": [
         "She considers them significant enough to task a stranger with observing them on a first meeting",
@@ -488,10 +539,10 @@
         "locationId": "gen-mara-wells-store",
         "day": 2
       },
-      "statusNote": "Active at her store, awake and prepared, calculation advanced to the next phase",
+      "statusNote": "Active at her store, awake through the night, prepared for the next phase of action",
       "gender": "woman",
       "pronouns": "she/her",
-      "met": 7,
+      "met": 8,
       "sex": "female",
       "age": 47
     },
@@ -722,10 +773,6 @@
     "turnsSinceOffer": 0,
     "recentOffers": [
       {
-        "thing": "Aevi's direct warning and refusal to allow further contact—she knows more than she has said, and her fear is real",
-        "from": "her presence at your side and her own ancient connection to the Precursor layer"
-      },
-      {
         "thing": "Aevi's fear and certainty in equal measure—she knows what the Precursor layer is in a way she has never fully admitted, and the awakening…",
         "from": "Aevi's own knowledge and her bond with Adelheid—the companion who cannot lie revealing, through her alarm, that this touches something in…"
       },
@@ -740,6 +787,10 @@
       {
         "thing": "A hand-drawn map marked with careful notations—Mara's preparation laid out for you to see",
         "from": "Mara's own understanding of the crisis and the timeline collapse; she has been working while you slept and is now ready to share the next…"
+      },
+      {
+        "thing": "The hand-drawn map on Mara's work table—marked with careful notations, showing something of consequence",
+        "from": "Mara's night of calculation and preparation; the compressed timeline forcing visible planning"
       }
     ]
   },
@@ -1036,15 +1087,15 @@
   "itemReclaimVersion": 1,
   "nameRepairVersion": 1,
   "tendencies": {
-    "generous": 3.8428175157485436,
-    "social": 3.2631666732603555,
-    "cerebral": 23.704207170948795,
-    "cautious": 20.538402176122823,
-    "strategic": 19.107521682097943,
-    "carousing": 1.428685946947458,
-    "risky": 0.7161333067405804,
-    "ruthless": 1.6333036073245235,
-    "patient": 1
+    "generous": 3.7467470778548297,
+    "social": 3.1815875064288464,
+    "cerebral": 23.111601991675073,
+    "cautious": 20.02494212171975,
+    "strategic": 18.629833640045494,
+    "carousing": 1.3929687982737715,
+    "risky": 0.6982299740720659,
+    "ruthless": 1.5924710171414105,
+    "patient": 0.975
   },
   "aptitudes": [
     "strategist",
@@ -1053,11 +1104,11 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 51,
+  "actionCount": 52,
   "bondLogFrom": null,
   "teachers": {},
   "regionsKnown": {
-    "valley": 12
+    "valley": 13
   },
   "company": [],
   "forkChoices": {},
@@ -1241,8 +1292,8 @@
   "bands": [],
   "_silasGrantsRevoked": true,
   "reconcileVersion": 63,
-  "updatedAt": 1789518743709,
-  "rev": 25,
+  "updatedAt": 1789518904064,
+  "rev": 26,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -1255,17 +1306,17 @@
   "featureOffers": [],
   "_pinsInitialized": true,
   "_opUnknown": {
-    "sceneSummary": 12
+    "sceneSummary": 13
   },
   "_applyFailures": null,
   "sessions": [
     {
       "id": "sess-1",
       "startedAt": "2026-09-15T23:58:48.323Z",
-      "lastAt": "2026-09-16T00:32:23.705Z",
+      "lastAt": "2026-09-16T00:35:04.061Z",
       "startDay": 77,
       "endDay": 78,
-      "beats": 12
+      "beats": 13
     }
   ],
   "_debtReceipts": [],
@@ -1286,7 +1337,8 @@
     "confront": 1,
     "defer": 1,
     "trust": 1,
-    "endure": 1
+    "endure": 1,
+    "practical": 1
   },
   "aptitudeEarnCount": {
     "tactician": 1,
@@ -1295,26 +1347,26 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 12,
-    "choices": 12,
+    "sceneSummary": 13,
+    "choices": 13,
     "questUpdates": 11,
-    "scene": 12,
-    "npcUpdates": 9,
+    "scene": 13,
+    "npcUpdates": 10,
     "placeUpdates": 6,
     "codexUpdates": 10,
-    "timeOps": 12,
+    "timeOps": 13,
     "imagePrompt": 7,
-    "gambitApt": 11,
-    "sceneEnded": 12,
-    "characterDeltas": 11,
-    "offer": 6,
+    "gambitApt": 12,
+    "sceneEnded": 13,
+    "characterDeltas": 12,
+    "offer": 7,
     "stateOps": 2,
     "deeds": 4,
     "factUpdates": 4,
     "ledgerEvents": 3,
     "moveTo": 1
   },
-  "_opTurns": 12,
+  "_opTurns": 13,
   "_opCountingSince": "2026-09-15T23:58:48.348Z",
   "gallery": [
     {
@@ -1336,7 +1388,7 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 6,
+      "applied": 7,
       "rejected": 0,
       "lastWhy": null
     },

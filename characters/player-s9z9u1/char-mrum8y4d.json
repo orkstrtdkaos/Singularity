@@ -267,7 +267,7 @@
     "At the Hub crossing, Loki confronted a Churn-Revel sent to break the Null Stone's sealed seam. Through misdirection and bargaining, Loki bound the orchestrator's certainty and drove them to yield—the Revel's hand fell, the ribbons collapsed, and the stone stands unbroken. The seam's mystery persists. The question of who sent the Revel remains open.",
     "At the Hub crossing in early spring dawn, Loki speaks an honest promise to the Null Stone, and the sealed seam opens—revealing a passage descending into cold darkness and the sound of deep water."
   ],
-  "currentLocationId": "the_crossing",
+  "currentLocationId": "gen-the-made-gate",
   "activeScene": {
     "locationId": "the_crossing",
     "turns": [
@@ -283,16 +283,189 @@
       }
     ],
     "lastTurn": {
-      "narration": "",
-      "choices": [],
-      "newAbility": [
+      "narration": "You find Vessin at the chamber's edge, where the lamplight catches the river's dark flow. You gesture her away from Cy, stepping back into the deeper shadows where the apertures line the walls like watching eyes. The air is cold here, and your breath makes small clouds.\n\n\"I need to say something,\" you tell her, and she turns to face you fully—her eyes steady, reading your face the way she reads false patterns in stone. \"I've come to care for you. Not lightly. And if something happened—if the dark took you, if the deep claimed you—I would reach for you. I would try to bring you back.\"\n\nShe doesn't move. The river sounds loud in the silence.\n\n\"Would you do the same?\" you ask. \"If I fell. If I went where the light doesn't reach. Would you come after me?\"\n\nVessin exhales slowly. She reaches out and takes your wrist—not your hand, your wrist, where your pulse runs steady under her thumb. \"Yes,\" she says. It's not complicated; it's the plainest thing she's said to you. \"I would. I will.\"\n\nThere is no ceremony in it. There is only the weight of a promise made in the dark, beneath a sealed stone that opens only for honest asking. She holds your wrist a moment longer, then steps back to join Cy at the basin's edge. The pact is made. The world has less claim on either of you now.",
+      "sceneSummary": "In the vast chamber beneath the Null Stone, Loki makes a pact with Vessin—a mutual vow to reach for each other from death itself, if it comes to that.",
+      "choices": [
         {
-          "abilityId": "fire_test_craft",
-          "name": "A fire-test craft",
-          "why": "fire test"
+          "label": "Approach the sealed apertures—use See the Made Thing to read what they conceal",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "see_the_made_thing",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Walk the basin's edge and trace its geometry—judge what it was built to hold",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study",
+            "craft"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Cy what the three missing records might concern—it knows this installation class",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Descend to the chamber's far side and follow the water tunnel—see where it leads",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {},
+          "difficulty": "hard",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "travel",
+            "scout"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
-      "sceneSummary": null
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [
+        {
+          "what": "Loki and Vessin made a mutual vow: each will reach for the other from death itself, if the dark claims one of them.",
+          "tags": [
+            "bond",
+            "commitment",
+            "pact"
+          ],
+          "visibility": "witnessed",
+          "spectrumDeltas": {},
+          "impactsLocal": false
+        }
+      ],
+      "questUpdates": [],
+      "standingOps": [],
+      "delegateOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": null,
+      "stageOps": [],
+      "scene": {
+        "setting": "A vast circular chamber carved deep beneath the Hub crossing, with a swift cold river running through its center. The nine sealed apertures line the walls above the waterline. The empty basin sits carved into the platform. Cy's lamp is the only light; everything beyond its reach is absolute dark.",
+        "npcsPresent": [
+          {
+            "name": "Vessin Tallow-bark",
+            "state": "Standing at the basin's edge beside Cy, having just accepted the mutual pact. Her hand has returned to her side; her eyes are still on Loki."
+          },
+          {
+            "name": "Cy",
+            "state": "Stationed at the basin's lip, lamp raised, lens slowly irising as it catalogs the chamber's geometry. Did not comment on the exchange."
+          }
+        ],
+        "objects": [
+          "The empty carved basin, set into the platform's surface",
+          "Nine sealed apertures arranged regularly around the chamber walls",
+          "The swift dark river, moving with audible force through the chamber",
+          "Cy's lamp, casting long shadows"
+        ],
+        "threads": [
+          "What do the nine sealed apertures conceal?",
+          "What was the empty basin built to hold, and has that condition now been met?",
+          "Where does the upstream water originate, and what feeds this river?",
+          "What are the three missing records Cy seeks, and why does it matter?"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "vessin-tallow-bark",
+          "name": "Vessin Tallow-bark",
+          "role": "Lone traveler; reader of falsecrafts; partner",
+          "note": "In the vast chamber beneath the Null Stone, she accepted Loki's confession and made a mutual vow: if death claims one, the other will reach for them. She held Loki's wrist when she said yes. The pact is made.",
+          "learned": [
+            "She will answer death itself to bring Loki back, if it comes to that"
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "At Loki's side in the chamber beneath the Null Stone, partner to a mutual pact",
+          "bondType": "partner",
+          "bondStage": "committed"
+        }
+      ],
+      "intentsHeard": [
+        "Vessin Tallow-bark"
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Loki and Vessin Tallow-bark have sworn a mutual pact beneath the Null Stone: each will reach for the other from death itself, if death comes. The pact was made in the vast chamber beneath the Hub crossing, beside the river, in the presence of Cy.",
+          "subjectId": "vessin-tallow-bark"
+        }
+      ],
+      "placeUpdates": [],
+      "discovery": null,
+      "codexUpdates": [],
+      "holdingOps": [],
+      "debtOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "strikeOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "a few careful minutes in the chamber's shadow, speaking plainly"
+      },
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": "In the lamplight and cold shadow of the vast chamber, Vessin holds Loki's wrist—the moment of a vow made beneath stone older than memory, beside a river that runs from nowhere into dark.",
+      "imageMedium": null,
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
+      "sceneEnded": false,
+      "momentArt": "https://image.pollinations.ai/prompt/In%20the%20lamplight%20and%20cold%20shadow%20of%20the%20vast%20chamber%2C%20Vessin%20holds%20Loki's%20wrist%E2%80%94the%20moment%20of%20a%20vow%20made%20beneath%20stone%20older%20than%20memory%2C%20beside%20a%20river%20that%20runs%20from%20nowhere%20into%20dark.%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=97552&nologo=true"
     },
     "sceneState": {
       "setting": "A vast circular chamber carved deep beneath the Hub crossing, with a swift cold river running through its center. The nine sealed apertures line the walls above the waterline. The empty basin sits carved into the platform. Cy's lamp is the only light; everything beyond its reach is absolute dark.",
@@ -329,7 +502,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 4,
-    "hour": 12,
+    "hour": 14,
     "realAnchor": null
   },
   "companions": [
@@ -1357,7 +1530,7 @@
     "lastSharedReadAt": "2026-09-16T21:10:13.905Z",
     "lastTickWorldDay": 78,
     "lastCanonWorldDay": 78,
-    "turnsSinceOffer": 3,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "Veln Ashpause's arrival at the exact moment of the seam's discovery—they have come to witness something they foreknew, and their presence…",
@@ -8328,7 +8501,7 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789595164470,
+  "updatedAt": 1789595617945,
   "rev": 727,
   "generated": {
     "schemaVersion": 1,
@@ -9325,10 +9498,10 @@
     {
       "id": "sess-13",
       "startedAt": "2026-09-16T21:46:04.238Z",
-      "lastAt": "2026-09-16T21:46:04.469Z",
+      "lastAt": "2026-09-16T21:46:04.238Z",
       "startDay": 78,
       "endDay": 78,
-      "beats": 2
+      "beats": 1
     }
   ],
   "establishedFacts": [
@@ -10121,7 +10294,7 @@
       "id": "the_standing_annex",
       "kind": "enterprise",
       "name": "The Standing Annex",
-      "locationId": "the_crossing",
+      "locationId": "gen-the-made-gate",
       "steward": "traveler-woman",
       "obligation": null,
       "condition": "thriving",
@@ -10169,11 +10342,13 @@
           "from": "thriving",
           "to": "thriving",
           "note": "hands: Tessvel Cairn"
-        }
+        },
+        "[d78] sailed from the_crossing to gen-the-made-gate, 0.0 days, with you aboard"
       ],
       "carriage": {
         "moves": "powered",
-        "speed": 0.8
+        "speed": 0.8,
+        "voyage": null
       },
       "describedAs": "floating tower",
       "neglectPasses": 1,
@@ -10937,8 +11112,8 @@
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T22:51:56.913Z",
   "_fireTests": {
-    "at": "2026-09-15T17:25:17.401Z",
-    "build": "2.0.14",
+    "at": "2026-09-16T21:46:04.474Z",
+    "build": "2.0.36",
     "results": [
       {
         "op": "debtOps",

@@ -42,7 +42,7 @@ const PLAYER_MOVES = [
   { id: "p_bind",   name: "Sonic Resonance", function: "bind",   tier: 1, attribute: "social",   energyCost: 6, intensity: "standard" },
   { id: "p_mend",   name: "The Better Story", function: "mend",  tier: 2, attribute: "social",   energyCost: 1, intensity: "standard" }
 ];
-const THREAT_BANDS = [{ name: "riffraff", threat: 22 }, { name: "notable", threat: 38 }, { name: "regional", threat: 55 }, { name: "epic", threat: 78 }];
+const THREAT_BANDS = [{ name: "riffraff", threat: 22 }, { name: "notable", threat: 38 }, { name: "leader", threat: 55 }, { name: "epic", threat: 78 }];
 const playerSheet = (level = 5) => ({
   name: "the player", level,
   attributes: { physical: 4, mental: 4, social: 4, practical: 4 },

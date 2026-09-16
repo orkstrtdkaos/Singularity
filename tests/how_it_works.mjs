@@ -3201,13 +3201,13 @@ console.log("\n── §24 · command lifts a line above itself ──");
 
 /* ══════════ §25 — SEVEN RUNGS, AND KILLING A COMMANDER NEVER STEADIES A LINE ══════════ */
 // ⛔ ERIK 2026-08-30, two rulings:
-//   "notable · regional · heroic need to be split out — they are INCREASING CAPABILITIES."
+//   "notable · leader · heroic need to be split out — they are INCREASING CAPABILITIES."
 //   "make sure that killing a LOSING unit's commander doesn't give it a cohesion BOOST to 0.8. Probably
 //    want to set a CEILING of 0.8 with a 50% MORALE LOSS to cohesion otherwise."
 //
 // ⚠️ AND THE SPLIT NEEDED A SECOND TABLE, WHICH IS NORMALLY WHAT THIS PROJECT FORBIDS. attentionByTier is
 // read by worldtick as an ARC-ATTENTION BUDGET, and its three-way tie at 0.5 is CORRECT there — a notable,
-// a regional and a heroic figure can draw equal notice while differing in what they can DO. ⛔ MOVING THE
+// a leader and a heroic figure can draw equal notice while differing in what they can DO. ⛔ MOVING THE
 // ARC BUDGET TO FIX A COMBAT LADDER WOULD HAVE CHANGED HOW ARCS SPEND ATTENTION, SILENTLY. Two facts, two
 // tables — and the rung names are asserted identical below so they cannot drift apart.
 console.log("\n── §25 · seven rungs, and a dead commander never steadies a line ──");
@@ -3217,7 +3217,7 @@ console.log("\n── §25 · seven rungs, and a dead commander never steadies a
   const cap = rulesE.capabilityByTier || {};
   const arcE = rj("content/packs/core/rules/arc_response.json");
   const att = (function find(o) { if (!o || typeof o !== "object") return null; if (o.attentionByTier) return o.attentionByTier; for (const v of Object.values(o)) { const r = find(v); if (r) return r; } return null; })(arcE);
-  const LADDER = ["riffraff", "notable", "regional", "heroic", "epic", "legendary", "mythic"];
+  const LADDER = ["riffraff", "notable", "leader", "heroic", "epic", "legendary", "mythic"];
 
   check("§25: the capability ladder carries all SEVEN rungs",
     LADDER.every(t => typeof cap[t] === "number"), LADDER.filter(t => typeof cap[t] !== "number").join(", "));
@@ -6923,13 +6923,13 @@ console.log("\n── §74 · a hold grows — the keeper's ceiling, a craft app
     npcRegistry: steward ? { [steward]: { id: steward, name: "Keeper", status: "active", level: keeperLevel } } : {},
     holdings: [{ id: "mine", kind: "enterprise", name: "the mine", locationId: null, steward, condition: "holding", history: [], lastMovedWorldCount: 0, ...extra }] });
   // ── the keeper's ceiling, on the schedule
-  const regional = mk74("k", 15), notable = mk74("k", 6), unkept = mk74(null, 0);
+  const leader = mk74("k", 15), notable = mk74("k", 6), unkept = mk74(null, 0);
   const passes = (c, n) => { let last = null; for (let i = 0; i < n; i++) last = H74.growHolding(c, c.holdings[0], { cfg: cfgS, npcs: {}, npcCfg, worldCount: 100 + i, nameOf: (x) => "Keeper" }); return last; };
-  const r3 = passes(regional, 3);
-  check("§74: ⛔ a kept hold does not climb before the schedule (3 passes: still holding)", r3 === null && regional.holdings[0].condition === "holding" && regional.holdings[0].growthPasses === 3);
-  const r4 = passes(regional, 1);
-  check("§74: ⛔ …on the 4th pass a REGIONAL keeper brings it up to thriving, with history naming the keeper and the tier",
-    r4 && r4.to === "thriving" && regional.holdings[0].condition === "thriving" && regional.holdings[0].growthPasses === 0 && /grew under Keeper \(regional\)/.test(regional.holdings[0].history.slice(-1)[0]?.note || ""), JSON.stringify(r4));
+  const r3 = passes(leader, 3);
+  check("§74: ⛔ a kept hold does not climb before the schedule (3 passes: still holding)", r3 === null && leader.holdings[0].condition === "holding" && leader.holdings[0].growthPasses === 3);
+  const r4 = passes(leader, 1);
+  check("§74: ⛔ …on the 4th pass a LEADER keeper brings it up to thriving, with history naming the keeper and the tier",
+    r4 && r4.to === "thriving" && leader.holdings[0].condition === "thriving" && leader.holdings[0].growthPasses === 0 && /grew under Keeper \(leader\)/.test(leader.holdings[0].history.slice(-1)[0]?.note || ""), JSON.stringify(r4));
   // ⛔ v2 §1 — FLOORS, NOT CEILINGS. This pinned "a notable keeper cannot bring it past holding"; Erik: "poor Deni might
   // just be keeping it, but the place might be thriving anyway." A kept hold climbs whoever keeps it; the tier is the floor.
   check("§74: …a NOTABLE keeper's hold CLIMBS too — floors, not ceilings (v2 §1); an unkept hold never climbs (R25 stands)",
@@ -7690,7 +7690,7 @@ console.log("\n── §83 · the setting doc's counts are measured, and its six
   // ── the great figures: a person the world tracks a CAREER for, which is what `tier` USED to mark
   //
   // ⛔ SNG-590 — `tier` NO LONGER MARKS "GREAT", IT MARKS EVERYONE. The seven rungs gave the low bands a cast:
-  // riffraff 6, notable 15, regional 15, and untiered went 48 → 1. So this count went 98 → 145 without a single
+  // riffraff 6, notable 15, leader 15, and untiered went 48 → 1. So this count went 98 → 145 without a single
   // great figure being added — it had started counting children. ⚠️ A measurement whose MEANING changed under
   // it, which is harder to see than one whose number did.
   //
@@ -7723,7 +7723,7 @@ console.log("\n── §83 · the setting doc's counts are measured, and its six
     namedInDoc.length === arcs83.length,
     arcs83.filter(a => !namedInDoc.includes(a)).map(a => a.name).join(" · ") || `all ${arcs83.length} named`);
   // ⚠️ AND AT THE RIGHT SCALE. The doc italicises a scale beside each arc's heading; a cosmic arc sold as
-  // regional is a promise about how fast the world moves.
+  // leader is a promise about how fast the world moves.
   const wrongScale = arcs83.filter(a => {
     const m = ex83.match(new RegExp("###[^\\n]*" + String(a.name).replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "[^\\n]*\\*(.*?)\\*", "i"));
     return m ? !String(m[1]).toLowerCase().includes(String(a.scale || "").toLowerCase()) : false;
@@ -9513,8 +9513,8 @@ console.log("\n── §107 · who is around today, offered and never forced ─
   check("§107: ⛔ THE GREAT RUNGS ARE ORDERED — heroic > epic > legendary, never inverted",
     (hub.t.heroic || 0) > (hub.t.epic || 0) && (hub.t.epic || 0) > (hub.t.legendary || 0), JSON.stringify(hub.t));
   check("§107: ⬜ …and the low rungs are populated at all, which is what the seven-rung cast bought",
-    (hub.t.riffraff || 0) + (hub.t.notable || 0) + (hub.t.regional || 0) > 0,
-    `riffraff ${hub.t.riffraff || 0} · notable ${hub.t.notable || 0} · regional ${hub.t.regional || 0}`);
+    (hub.t.riffraff || 0) + (hub.t.notable || 0) + (hub.t.leader || 0) > 0,
+    `riffraff ${hub.t.riffraff || 0} · notable ${hub.t.notable || 0} · leader ${hub.t.leader || 0}`);
   // ⛔ SNG-590 — KNOWN RED, AND IT IS A TRUE REPORT. `TIER_RATE` is per-person per-day, so the cadence scales
   // with the POPULATION of a rung: heroic went to 55 real people and now arrives every third day against
   // Erik's ruled weekly. ⚠️ I am not widening the band to make this green — that would be me choosing balance,
@@ -10204,7 +10204,7 @@ console.log("\n── §120 · Deni keeps it, the place thrives anyway, and the 
   const eco = C.rules.economy, cfgS = eco.holdStore, g = cfgS.growth, npcCfg = C.rules.npcStanding;
   check("§120: ⛔ THE DIALS ARE CONTENT — a floor by tier, the keeper's multiplier on a raid, the terms of a vouch",
     !g.ceilingByKeeperTier && g.floorByKeeperTier?.riffraff === "strained" && g.floorByKeeperTier?.notable === "holding" && g.floorByKeeperTier?.epic === "thriving"
-    && cfgS.raid.keeperMult?._none > 1 && cfgS.raid.keeperMult?._default === 1 && cfgS.raid.keeperMult?.regional < 1 && cfgS.delegates?.vouchMinStanding >= 1 && cfgS.delegates?.vouchFallCost >= 1);
+    && cfgS.raid.keeperMult?._none > 1 && cfgS.raid.keeperMult?._default === 1 && cfgS.raid.keeperMult?.leader < 1 && cfgS.delegates?.vouchMinStanding >= 1 && cfgS.delegates?.vouchFallCost >= 1);
   check("§120: …and keeperFloorFor reads it — riffraff strained, notable holding, an unknown tier the default",
     H.keeperFloorFor("riffraff", g) === "strained" && H.keeperFloorFor("notable", g) === "holding" && H.keeperFloorFor(null, g) === "strained" && H.keeperFloorFor("notable", null) === null);
   // ── the floor holds a KEPT hold through a problem; it is the keeper's, not the name's
@@ -10221,9 +10221,9 @@ console.log("\n── §120 · Deni keeps it, the place thrives anyway, and the 
   const r1 = H.resolveRaid(c1, hold, { cfg: cfgS, dangerLevel: 4, rng: () => 0.5, day: 1, keeperFloor: "holding" });
   check("§120: ⛔ A RAID CANNOT DROP A KEPT HOLD BELOW ITS KEEPER'S FLOOR — the goods still go, the condition holds",
     r1.detected === false && Object.keys(r1.taken).length > 0 && hold.condition === "holding", JSON.stringify({ taken: r1.taken, c: hold.condition }));
-  // ── the keeper in the product: at the same roll, an unkept or riffraff-kept full store is raided; a regional keeper's is not
+  // ── the keeper in the product: at the same roll, an unkept or riffraff-kept full store is raided; a leader keeper's is not
   const st = (steward, level, roll) => H.tickStore(mk(steward, level), { id: "m", kind: "enterprise", condition: "thriving", steward, store: { raw_material: 40 } }, { cfg: cfgS, economy: eco, dangerLevel: 4, rng: () => roll, day: 1, npcCfg });
-  check("§120: ⛔ A THRIVING HOLD WITH A WEAK KEEPER IS THE TARGET — at one roll: unkept raided, riffraff-kept raided, regional-kept not",
+  check("§120: ⛔ A THRIVING HOLD WITH A WEAK KEEPER IS THE TARGET — at one roll: unkept raided, riffraff-kept raided, leader-kept not",
     !!st(null, 0, 0.13).raid && !!st("k", 1, 0.13).raid && !st("k", 15, 0.13).raid);
   // ── the vouch is an ACT, and it has terms
   const c2 = mk("cassiel", 6, 5);
@@ -11775,7 +11775,7 @@ console.log("\n── §147 · one roster, derived; the opponent gate; the Sover
 // ⚑ AEVI, ASK_generate_the_forty, correcting her own spec: she wrote that generation was the answer and then
 // hand-authored nineteen sheets. "AUTHORING FORTY MORE BY HAND IS THE WRONG RESPONSE TO THAT NUMBER."
 // ⚠️ MEASURED, AND SHE IS RIGHT: 40 of 40 level-1 records were level 1 for ONE reason — no `tier`. `tierFloor`
-// (riffraff 1 · notable 5 · regional 12 · heroic 25 · epic 40 · legendary 60 · mythic 85) already fired for the
+// (riffraff 1 · notable 5 · leader 12 · heroic 25 · epic 40 · legendary 60 · mythic 85) already fired for the
 // 64 who had one. So the fix is a field, and every link after it already worked:
 //     role → TIER → tierFloor → LEVEL → kitFor → a kit → growthFor → it grows
 // ⛔ AND THE TABLE IS CONTENT (`rules/tier_signals.json`), NOT A MAP IN THE ENGINE. Which rung a role sits on is
@@ -11846,7 +11846,7 @@ console.log("\n── §148 · role → tier, default down, authored always wins
   }
   // ⛔ §2.1 — RARITY BY POPULATION SHAPE. Erik chose 'gentler than halving'; the dial is ONE ratio and every
   // share is derived from it, because a table of shares drifts from the intuition it encodes (which is
-  // exactly what `attentionByTier` did — it weights notable/regional/heroic identically, so inverting it
+  // exactly what `attentionByTier` did — it weights notable/leader/heroic identically, so inverting it
   // gives a pyramid with a flat middle). ⚠️ THE CENSUS IS SAVE STATE, so every check here drives a FIXTURE
   // census and never a live save's — a gate anchored to running state rots, three times in one week.
   {
@@ -11870,7 +11870,7 @@ console.log("\n── §148 · role → tier, default down, authored always wins
     // NEVER — and he is right that a zero weight is a wall wearing arithmetic, which is the thing this spec
     // exists to remove. ⛑ So: the empty rungs still dominate, AND no allowed rung is ever impossible.
     check("§148: §2.1 the draw POURS INTO THE EMPTY RUNGS — the bottom fills faster than the top grows",
-      drawn.riffraff > drawn.heroic && drawn.notable > drawn.heroic && drawn.regional > drawn.heroic,
+      drawn.riffraff > drawn.heroic && drawn.notable > drawn.heroic && drawn.leader > drawn.heroic,
       JSON.stringify(drawn));
     // ⛔ ERIK'S FLOOR, 2026-09-08: "it can be half of the goal, but i don't want a 0 chance." ⚠️ THIS CHECK
     // USED TO ASSERT THE OPPOSITE — that an over-filled rung is drawn NEVER — and he is right that a zero
@@ -12060,7 +12060,7 @@ console.log("\n── §148 · role → tier, default down, authored always wins
   // ⚠️ THE DEMOTION ORDERING IS THE DESIGN: youth is listed first so a young keeper is not yet a keeper.
   check("§148: ⚠️ a demoting word outranks a promoting one — \"young\" beats \"keeper\", which is why order matters",
     NS148.tierFromRole({ role: "A young keeper of the gate" }, { cfg: cfg148 })?.tier === "notable"
-    && NS148.tierFromRole({ role: "A keeper of the gate" }, { cfg: cfg148 })?.tier === "regional");
+    && NS148.tierFromRole({ role: "A keeper of the gate" }, { cfg: cfg148 })?.tier === "leader");
   // ⚑ VISIBLE — Erik must be able to correct a rung the engine guessed, so a guess is marked on the SHEET…
   //
   // ⛔ SNG-590 — THIS NAMED `brann_tollhand` AS THE UNTIERED EXAMPLE, and Aevi's pass tiered him along with
@@ -14332,7 +14332,7 @@ console.log("\n── §211 · death is a state, and the player can finally read
 // SMALLER AND LIVE:
 //   · Maren Ossitide ("Marrow") is authored a tier with NO authored level, so she derives to that rung's floor.
 //   · WITH the cfg she lands exactly on it. BARE she derives to level 1. That is the whole defect.
-//   · `tier_signals` DOES carry patterns — "Warden" matches /keeper|warden|guardian|steward|custodian/ → regional —
+//   · `tier_signals` DOES carry patterns — "Warden" matches /keeper|warden|guardian|steward|custodian/ → leader —
 //     but `tierFromRole` only runs for a record with NO authored tier or level, so it never touches her. Also correct.
 //   · `sheetFor` does not "drop the tier": it returns `tierDerived` (what the engine guessed, marked as a guess) and
 //     `tierNow` (the rung the level has REACHED), deliberately named apart so an authored tier is never overwritten.
@@ -14363,11 +14363,11 @@ console.log("\n── §212 · the sheet was right and the call was bare ──"
     !!cfg212.tierFloor && Array.isArray(cfg212.tierSignals?.rules) && cfg212.tierSignals.rules.length > 0,
     `tierFloor:${!!cfg212.tierFloor} tierSignals:${(cfg212.tierSignals?.rules || []).length} rule(s)`);
   check("§212: …and the role table DOES fire when it is handed that bag",
-    NS212.tierFromRole({ role: "Warden" }, { cfg: cfg212 })?.tier === "regional"
+    NS212.tierFromRole({ role: "Warden" }, { cfg: cfg212 })?.tier === "leader"
     && NS212.tierFromRole({ role: "Warden" }, { cfg: {} }) === null);
 
   /* ---- 2 · ⛔ AN AUTHORED TIER IS NEVER OVERWRITTEN BY A ROLE GUESS ---- */
-  // Maren is authored `epic`. A role reading "Warden" guesses `regional`, which would DEMOTE her — and it does not
+  // Maren is authored `epic`. A role reading "Warden" guesses `leader`, which would DEMOTE her — and it does not
   // run, because `tierFromRole` is a fallback for records that have neither a tier nor a level.
   const maren = C212.npcs?.maren_ossitide;
   // ⚠️ HER RUNG IS READ, NEVER NAMED. It is a ruling, and rulings move: this gate pinned "epic" and 40 as literals
@@ -14443,7 +14443,7 @@ console.log("\n── §213 · a person's sheet, as much of it as you have witne
   const watched = { id: "pell", name: "Pell", role: "Blacksmith", relationship: 8,
     skillsObserved: ["Reading novel craft-strain through ironsense", "Steadying a making through partnership"],
     knownFacts: ["She dropped her own roof rather than yield the forge"], history: ["[d12] you worked her bellows"],
-    tier: "regional" };
+    tier: "leader" };
   const s213 = of213(watched);
   check("§213: ⛑ a person you have watched leads with what you SAW — prose in the GM's words, not a craft list",
     s213.witnessed.length === 2 && /ironsense/.test(s213.witnessed[0]) && s213.learned.length === 1);
@@ -14490,7 +14490,7 @@ console.log("\n── §213 · a person's sheet, as much of it as you have witne
   // ⚠️ SNG-572: a rung a ROLE STRING suggested must never read as the same kind of fact as one somebody authored.
   const guessed213 = of213({ name: "C", role: "Warden", skillsObserved: ["seen something"] });
   check("§213: ⚠️ a rung guessed from a role string is carried as a guess and rendered as one",
-    guessed213.numbers?.tierGuessed === "regional" && /rung guessed from their role/.test(rd("app.js")),
+    guessed213.numbers?.tierGuessed === "leader" && /rung guessed from their role/.test(rd("app.js")),
     `guessed ${guessed213.numbers?.tierGuessed}`);
 
   /* ---- 5 · ⛑ AND IT REACHES THE PLAYER — the two zeroes, closed ---- */
@@ -16865,14 +16865,14 @@ console.log("\n── §240 · the seven rungs, and who the GM is shown ──")
     LG240.tierForArc(120, bands240) === "mythic" && LG240.tierForArc(9999, bands240) === "mythic");
 
   /* ---- 3 · ⛔ AND THE TWO VOCABULARIES STOPPED SHARING A RUNG ---- */
-  check("§240: ⛔ `heroic` and `regional` are different rungs — they shared rank 2, one word from each old ladder",
-    LG240.tierRank("heroic", bands240) !== LG240.tierRank("regional", bands240),
-    `heroic=${LG240.tierRank("heroic", bands240)} regional=${LG240.tierRank("regional", bands240)}`);
+  check("§240: ⛔ `heroic` and `leader` are different rungs — they shared rank 2, one word from each old ladder",
+    LG240.tierRank("heroic", bands240) !== LG240.tierRank("leader", bands240),
+    `heroic=${LG240.tierRank("heroic", bands240)} leader=${LG240.tierRank("leader", bands240)}`);
   check("§240: ⚑ …and `mythic` has a home rather than a rename out from under 5 authored NPCs",
     LG240.tierRank("mythic", bands240) === 6);
   // ⛑ AND RANK IS THE BAND, so the "+1 glimpse" is one rung of seven rather than a ceiling above everything.
   check("§240: ⛑ …and the rungs rank in order, which is what makes a one-rung reach mean anything",
-    ["riffraff", "notable", "regional", "heroic", "epic", "legendary", "mythic"]
+    ["riffraff", "notable", "leader", "heroic", "epic", "legendary", "mythic"]
       .every((t, i) => LG240.tierRank(t, bands240) === i));
 
   /* ---- 4 · ⛔ WHAT NAMES THE GM CARRIES (Aevi's §3 ruling) ---- */
@@ -16904,7 +16904,7 @@ console.log("\n── §240 · the seven rungs, and who the GM is shown ──")
 
   /* ---- 5 · ⬜ AND THE ROSTER STILL HAS NOBODY BELOW HEROIC ---- */
   // ⛔ THE HALF CODE CANNOT FIX, MEASURED SO IT IS VISIBLE. Aevi has authored the low-band cast into
-  // `CONTENT.npcs` — riffraff 6, notable 15, regional 15, and untiered down from 48 to 1 — but
+  // `CONTENT.npcs` — riffraff 6, notable 15, leader 15, and untiered down from 48 to 1 — but
   // `legends.roster`, which is what the surfacing reads, still holds nothing under `heroic`. ⚠️ So a band-1
   // character is correctly shown NO legends rather than the wrong ones, and will keep seeing none until those
   // people reach the roster. ⬜ A ceiling: it may fall to zero and may not rise.

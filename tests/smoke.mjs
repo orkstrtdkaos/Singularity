@@ -2270,7 +2270,7 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
     return m.includes("role") && m.includes("spectrum") && m.includes("fears") && !m.includes("id");
   })());
   check("defaultFor yields a schema-valid stub per type", defaultFor({ type: "array" }).length === 0 && defaultFor({ type: "string" }) === "" && defaultFor({ type: "integer" }) === 0);
-  check("defaultFor(enum) picks the most-permissive (last) option", defaultFor({ type: "string", enum: ["world", "regional", "local"] }) === "local");
+  check("defaultFor(enum) picks the most-permissive (last) option", defaultFor({ type: "string", enum: ["world", "leader", "local"] }) === "local");
 }
 
 // --- SNG-BATCH-9 Phase 1b: generate(type,context) core + promotable store ---
@@ -3219,7 +3219,7 @@ check("SNG-126/355: parting stops the benefits (trainerFor/liaison empty) AND KE
   check("SNG-042: an epic villain (Halvex) is a high-weight legendary figure", (() => { const h = roster.find(r => /halvex/i.test(r.id)); return h && h.legend.alignment === "villain" && h.legend.weight === LEGEND_TIER_WEIGHT.legendary; })());
 
   // power-tier weights + arc scaling
-  check("SNG-042: legendary is born far heavier than riffraff", tierBirthWeight("legendary") > tierBirthWeight("regional") && tierBirthWeight("regional") > tierBirthWeight("riffraff"));
+  check("SNG-042: legendary is born far heavier than riffraff", tierBirthWeight("legendary") > tierBirthWeight("leader") && tierBirthWeight("leader") > tierBirthWeight("riffraff"));
   // ⛔ SNG-590 — THIS PINNED THE BUG. `tierForArc(8) === "legendary"` was the old three-cut ladder that topped
   // out at level 7, which is the defect Erik found in play: a level-7 character met the same figures as a
   // level-61 one. ⚠️ A gate asserting the broken values held them in place — seventeenth pin this week.
@@ -6957,7 +6957,7 @@ await (async () => {
   check("191 §7.3: a resolved arc is not surfaceable", la.surfaceableArcs(ws2).length === 0);
   la.markSurfaced(arc, 400);
   check("191 §7.4: surfacing is first contact — it leaves the surfaceable set and goes live for the GM", arc.surfaced && la.surfaceableArcs(ws).length === 0 && /rot is spreading/.test(la.arcsForGM(ws) || ""));
-  // the generation-turn wiring: foments, surfaces, seeds from regional disposition, and runs on return.
+  // the generation-turn wiring: foments, surfaces, seeds from leader disposition, and runs on return.
   const wtSrcE = readFileSync(new URL('../engine/worldtick.js', import.meta.url), 'utf8');
   check("191 §7: runGenerationTurn foments, surfaces, and seeds from the known regions' disposition",
     /export async function runGenerationTurn/.test(wtSrcE) && /fomentArc\(arc, elapsed/.test(wtSrcE) && /surfaceableArcs\(ws\)/.test(wtSrcE) && /seedArc\(ws, s/.test(wtSrcE));
@@ -7550,7 +7550,7 @@ await (async () => {
   // ══ SNG-402 — THE ZOOM RENDERS THE GENERATOR, AND THE WATER I BUILT FINALLY DRAWS.
   // Erik, comparing Aevi's prototype: "it has more capability than what you've built so far… one thing
   // is that the zoom would render more detail." Both halves were already in the repo with no reader:
-  // scripts/world/terrain.mjs has said "VIEW CULLING — what makes a regional zoom affordable" since
+  // scripts/world/terrain.mjs has said "VIEW CULLING — what makes a leader zoom affordable" since
   // SNG-391 and the globe never called it, and the asset's 113 rivers / 17 lakes / 38 marshes returned
   // ZERO hits for `grep hydrology engine/worldglobe.js app.js`.
   {
@@ -7670,7 +7670,7 @@ await (async () => {
 
     // ⛔ SNG-403 — THE CONTOURS ARE A LEVEL SET, SO THE FIELD UNDER THEM MUST BE CONTINUOUS. Erik: "the
     // topo lines are scrambled now." `elevOf` returns the NEAREST 0.5° cell — a staircase ~14 screen
-    // pixels wide at regional zoom — and the topographic layer draws a contour wherever tone lands within
+    // pixels wide at leader zoom — and the topographic layer draws a contour wherever tone lands within
     // 0.055 of a band edge. Testing a thin band against a staircase lights WHOLE RECTANGULAR CELLS, which
     // is exactly the grid of blobs in his screenshot. A contour cannot be drawn from a quantised field at
     // any resolution; bilinear reading is what makes the isoline exist.
@@ -7688,7 +7688,7 @@ await (async () => {
       `${smooth} of ${stepped} within-cell probes move under the smooth read`);
 
     // ⛔ SNG-405 — A CLICK STAYS ON THE MAP. Erik: "clicking a dot right now jumps you to the old
-    // regional maps — which are no longer that useful. I would like to bring regions onto the world map."
+    // leader maps — which are no longer that useful. I would like to bring regions onto the world map."
     // The card grid existed because the globe could not resolve a region; it can, so a region is a ZOOM
     // LEVEL of the world rather than a separate screen. ⚠️ The old drill-down is not deleted — it moves
     // to double-click and the breadcrumb, because a list is still the fastest way to find a place by name.
@@ -7720,7 +7720,7 @@ await (async () => {
       covers);
 
     // ⛔ SNG-403 — THE CONTOUR INTERVAL FOLLOWS THE ZOOM, and without it the layer was nearly mute where
-    // it matters most: twelve bands across the world's 126-unit range is ~10 units a band, so a regional
+    // it matters most: twelve bands across the world's 126-unit range is ~10 units a band, so a leader
     // view crossed TWO lines. Measured on the live canvas after the level-set fix: 284 contour pixels in
     // a whole frame; with the interval stepping, 4,928 — and still thin (longest horizontal run 2px).
     // ⚠️ POWERS OF TWO ONLY, so lines APPEAR between levels instead of sliding across the ground: a
@@ -7747,7 +7747,7 @@ await (async () => {
     check("413: …and the viewer uses the constant, never the interval-scaled threshold",
       !/0\.055\s*\*\s*\(o\.contourStep/.test(wgSrc413) && /<\s*0\.055\)/.test(wgSrc413));
 
-    check("403: the contour interval FOLLOWS the zoom — a regional map carries regional relief",
+    check("403: the contour interval FOLLOWS the zoom — a leader map carries leader relief",
       steps403[0] === 1 && steps403.every((v, i) => i === 0 || v >= steps403[i - 1])
       && steps403.every((v) => Number.isInteger(Math.log2(v))) && steps403[4] > steps403[0],
       steps403.join(" → "));
@@ -7805,7 +7805,7 @@ await (async () => {
     // the LOD control variable, and the fade Aevi measured
     const wide = { yaw: 0, pitch: -52, r: 300, cx: 350, cy: 270 };
     const close = { yaw: 0, pitch: -52, r: 1600, cx: 350, cy: 270 };
-    check("402: span drives the level of detail — a hemisphere reads 180°, a regional view reads under 30°",
+    check("402: span drives the level of detail — a hemisphere reads 180°, a leader view reads under 30°",
       WG2.spanDeg(wide, 700) > 170 && WG2.spanDeg(close, 700) < 30);
     check("402: water fades IN as the view narrows and is absent when the whole world is on screen",
       WG2.hydrologyPaths(t402, wide, 700).fade === 0 && WG2.hydrologyPaths(t402, close, 700).fade > 0.9);
@@ -10312,8 +10312,8 @@ await (async () => {
   }
 
   // Phase 1b (OQ1 = size by tier): weighty → takeover, small → banner
-  check("230 P1b: frameSize routes by tier — regional/epic → takeover, riffraff/notable → banner",
-    frameSize({ tier: "epic" }) === "takeover" && frameSize({ tier: "regional" }) === "takeover" &&
+  check("230 P1b: frameSize routes by tier — leader/epic → takeover, riffraff/notable → banner",
+    frameSize({ tier: "epic" }) === "takeover" && frameSize({ tier: "leader" }) === "takeover" &&
     frameSize({ tier: "riffraff" }) === "banner" && frameSize({ tier: "notable" }) === "banner");
   check("230 P1b: frameSize routes by danger when no tier — danger ≥ 3 → takeover, else banner",
     frameSize({ danger: 3 }) === "takeover" && frameSize({ danger: 4 }) === "takeover" && frameSize({ danger: 2 }) === "banner" && frameSize({ minDanger: 1 }) === "banner");
@@ -10369,16 +10369,16 @@ await (async () => {
     /character\.activeEncounter = \{ defId: chase\.id, state: \{ \.\.\.startEncounter\(chase, \{ oppSheet: chaseSheet \}\)/.test(appSrc230) && /_morphedFrom: \{ kind: "fight"/.test(appSrc230) && /Do NOT resolve the chase — it plays out in its own frame/.test(appSrc230));
 
   // §6b/§7a: a SKILL can COLLAPSE (or morph) the frame — resolved along the degree bands, gated by collapsibility.
-  check("230 §6b: frameCollapsible — riffraff/notable/regional + low danger can be one-beat-ended (regional only on a demolishing crit); an EPIC/danger-4 cannot",
-    frameCollapsible({ tier: "riffraff" }) === true && frameCollapsible({ tier: "notable" }) === true && frameCollapsible({ tier: "regional" }) === true && frameCollapsible({ danger: 2 }) === true &&
+  check("230 §6b: frameCollapsible — riffraff/notable/leader + low danger can be one-beat-ended (leader only on a demolishing crit); an EPIC/danger-4 cannot",
+    frameCollapsible({ tier: "riffraff" }) === true && frameCollapsible({ tier: "notable" }) === true && frameCollapsible({ tier: "leader" }) === true && frameCollapsible({ danger: 2 }) === true &&
     frameCollapsible({ tier: "epic" }) === false && frameCollapsible({ danger: 4 }) === false);
   check("230 §6c: collapseMode is FAMILY-driven — HARM finishes a fight/hazard, MOVE slips a chase, KNOW cracks a puzzle; wrong family → null",
     collapseMode(["HARM"], "fight") === "finish" && collapseMode(["MOVE"], "chase") === "escape" && collapseMode(["KNOW"], "puzzle") === "solve" &&
     collapseMode(["MOVE"], "fight") === null && collapseMode(["HARM"], "chase") === null && collapseMode([], "fight") === null);
   // Erik: EASIER vs weaker foes + MITIGATED below a finish — a tier-scaled floor, graded by degree.
-  check("230 §7a: collapseFloor scales by foe — riffraff drops on 'success', notable/regional need a crit, an EPIC never collapses; Aevi's collapseEligibility layer wins when supplied",
-    collapseFloor({ tier: "riffraff" }) === "success" && collapseFloor({ tier: "notable" }) === "crit_success" && collapseFloor({ tier: "regional" }) === "crit_success" && collapseFloor({ tier: "epic" }) === null && collapseFloor({ danger: 4 }) === null &&
-    collapseFloor({ tier: "regional" }, { regional: { collapsible: false } }) === null && collapseFloor({ tier: "notable" }, { notable: { collapsible: true } }) === "crit_success");
+  check("230 §7a: collapseFloor scales by foe — riffraff drops on 'success', notable/leader need a crit, an EPIC never collapses; Aevi's collapseEligibility layer wins when supplied",
+    collapseFloor({ tier: "riffraff" }) === "success" && collapseFloor({ tier: "notable" }) === "crit_success" && collapseFloor({ tier: "leader" }) === "crit_success" && collapseFloor({ tier: "epic" }) === null && collapseFloor({ danger: 4 }) === null &&
+    collapseFloor({ tier: "leader" }, { leader: { collapsible: false } }) === null && collapseFloor({ tier: "notable" }, { notable: { collapsible: true } }) === "crit_success");
   check("230 §7a: collapseResult COLLAPSES at/above the floor, MITIGATES below it (hard/partial), MORPHS on a whiff",
     collapseResult("success", { floor: "success" }) === "collapse" && collapseResult("success", { floor: "crit_success" }) === "hard" &&
     collapseResult("crit_success", { floor: null }) === "hard" && collapseResult("partial", { floor: "success" }) === "partial" &&
@@ -14236,7 +14236,7 @@ await (async () => {
   check("272/275: the tier table carries BOTH names for the same rung (one name drops 28 figures)", (() => {
     const doc = JSON.parse(readFileSync(join(root, "content/packs/core/rules/arc_response.json"), "utf8"));
     const t = doc.arcResponse.attentionByTier;
-    return t.heroic === t.regional && t.heroic !== undefined;
+    return t.heroic === t.leader && t.heroic !== undefined;
   })());
 }
 
@@ -14560,9 +14560,9 @@ await (async () => {
   check("272/302: priceShift now HAS a consumer, and the register says so",
     typeof AE.EFFECT_CONSUMERS.priceShift === "string" && /economy/.test(AE.EFFECT_CONSUMERS.priceShift));
 
-  // ⛔ ERIK: "I want regional and local arcs as well." ⚠️ `scale` was authored on all six greater arcs and
+  // ⛔ ERIK: "I want leader and local arcs as well." ⚠️ `scale` was authored on all six greater arcs and
   // read by NOBODY on the effects path: `activeArcEffects` iterated every arc and applied every stage
-  // effect everywhere. Measured at stage 3, `arc_block_bleed` — scale `regional`, "the Blocklands / the
+  // effect everywhere. Measured at stage 3, `arc_block_bleed` — scale `leader`, "the Blocklands / the
   // Gearlands" — put craftCost ×1.9 on lattice, figurist and hourkeeper IN THE DEEPWOOD. An effect carried
   // no place at all; `match` supports `traditions` and nothing else.
   {
@@ -14584,13 +14584,13 @@ await (async () => {
 
     // ⛔ AND THE CAPABILITY WORKS, on a scoped copy rather than on content that must not change.
     const scoped = JSON.parse(JSON.stringify(CT.greaterArcs || []));
-    const bleed = scoped.find(a => String(a.scale).toLowerCase() === "regional" && (a.stages || []).length);
+    const bleed = scoped.find(a => String(a.scale).toLowerCase() === "leader" && (a.stages || []).length);
     if (bleed) {
       const home = REGIONS[0], away = REGIONS.find(r => r !== home);
       bleed.regions = [home];
       const cnt = (r) => AE273.activeArcEffects({ ...CT, greaterArcs: scoped }, {}, at3, { regionId: r })
         .filter(e => e.arcId === bleed.id).length;
-      check("272/273: ⛔ a REGIONAL arc scoped to a region is in force THERE", cnt(home) > 0, `${cnt(home)} effects`);
+      check("272/273: ⛔ a LEADER arc scoped to a region is in force THERE", cnt(home) > 0, `${cnt(home)} effects`);
       check("272/273: …and is NOT in force in a region it does not name", cnt(away) === 0, `${cnt(away)} in ${away}`);
       // ⚠️ A WORLD ARC LISTING EXAMPLE REGIONS MUST NOT SHRINK TO THEM. Aevi writes places on world arcs
       // as illustration ("the Gearlands/Numen"), and reading that as a boundary would strand the arc.

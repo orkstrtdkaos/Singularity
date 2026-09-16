@@ -27,7 +27,7 @@ import { smartClamp } from "./namematch.js"; // SNG-208 wiring: legendsForGM cla
 //
 // ⚠️ `regional` is ALIASED to `heroic`, never deleted — `encounterFrame.js:109` branches on the literal
 // string, and authored content still carries it. Both names must land on the same rung forever.
-export const LEGEND_TIER_WEIGHT = { mythic: 72, legendary: 50, epic: 34, heroic: 22, regional: 22, notable: 10, riffraff: 3 };
+export const LEGEND_TIER_WEIGHT = { mythic: 72, legendary: 50, epic: 34, heroic: 22, leader: 16, notable: 10, riffraff: 3 };
 export function tierBirthWeight(tier) { return LEGEND_TIER_WEIGHT[tier] ?? 5; }
 
 /** The four deployment beats a great figure lands on. */
@@ -44,7 +44,7 @@ export function loadLegends(file = {}) {
     return {
       ...rest,
       legend: {
-        tier: f.tier || "regional",
+        tier: f.tier || "leader",
         alignment: f.alignment || "hero",
         presencePattern: presencePattern || { beats: [], rarity: "rare" },
         signature: signature || "",
@@ -77,7 +77,7 @@ export function loadLegends(file = {}) {
 export const DEFAULT_RUNGS = [
   { band: 0, tier: "riffraff", levels: [1, 4] },
   { band: 1, tier: "notable", levels: [5, 11] },
-  { band: 2, tier: "regional", levels: [12, 24] },
+  { band: 2, tier: "leader", levels: [12, 24] },
   { band: 3, tier: "heroic", levels: [25, 39] },
   { band: 4, tier: "epic", levels: [40, 59] },
   { band: 5, tier: "legendary", levels: [60, 84] },

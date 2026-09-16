@@ -165,7 +165,7 @@ console.log("GROWTH SIM — the rate at which the world grows\n");
   for (let p = 0; p < PLAYERS; p++) {
     for (let d = 0; d < DAYS; d += 10 / PER_PLAYER_PER_10_DAYS) {
       const id = `gen-thing-${p}-${Math.round(d)}`;
-      generated[id] = { id, name: `a grown thing ${p}-${Math.round(d)}`, tier: ["riffraff", "notable", "regional", "epic"][Math.floor(rng() * 4)],
+      generated[id] = { id, name: `a grown thing ${p}-${Math.round(d)}`, tier: ["riffraff", "notable", "leader", "epic"][Math.floor(rng() * 4)],
         class: "beast", look: "l", danger: "d", pressures: ["HARM"] };
     }
   }

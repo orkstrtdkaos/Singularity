@@ -27,7 +27,7 @@ const num = (v, d = 0) => (Number.isFinite(Number(v)) ? Number(v) : d);
 
 /** ⚑ ERIK'S CADENCE, AS RATES PER DAY. `mythic` is deliberately absent: Aevi — *"a mythic appearing IS the
  *  event"*, so it is triggered by an occasion and never by elapsed time. */
-export const TIER_RATE = { riffraff: 1, notable: 1, regional: 0.5, heroic: 1 / 7, epic: 1 / 14, legendary: 1 / 30 };
+export const TIER_RATE = { riffraff: 1, notable: 1, leader: 0.5, heroic: 1 / 7, epic: 1 / 14, legendary: 1 / 30 };
 
 /** ⚑ HOW FAR A PERSON'S LIFE REACHES, in multiples of their own doorstep. ⛔ Erik's "a heroic probably
  *  weekly" is a rate for the PLAYER, not a property of the village — and the way a heroic becomes weekly is
@@ -48,7 +48,7 @@ export function resolvePresence(key) {
   return { key: k, mult: PRESENCE_MODES[k] };
 }
 
-export const TIER_REACH = { riffraff: 1, notable: 1, regional: 3, heroic: 11, epic: 17, legendary: 24 };
+export const TIER_REACH = { riffraff: 1, notable: 1, leader: 3, heroic: 11, epic: 17, legendary: 24 };
 
 /** ⚠️ HOW MUCH BEING FAR AWAY COSTS. A day or two is nothing — people travel. Eighty days is another world,
  *  and the falloff has to say so or the roster becomes a lottery over the whole map.

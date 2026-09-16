@@ -1188,7 +1188,7 @@ for (const pack of PACKS) {
   }
 
   // ══ SNG-414 TIER 2 — EVERY REGION HAS A MAP THAT IS SHAPED LIKE A MAP.
-  // Erik: "we start to lose meaningful information, so we should switch to the regional map." That only
+  // Erik: "we start to lose meaningful information, so we should switch to the leader map." That only
   // works if a region HAS a sensible window, and three separate things had to be true for that.
   {
     const WGR = await import("../engine/worldglobe.js");

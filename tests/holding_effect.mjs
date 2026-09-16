@@ -35,7 +35,7 @@ const ROSTER = (CONTENT.legends?.roster || []).filter(f => f?.id);
 const byId = new Map(ROSTER.map(f => [f.id, f]));
 const tradOf = id => byId.get(id)?.tradition || byId.get(id)?.legend?.tradition || "(minted)";
 const LADDER = ["riffraff", "notable", "heroic", "epic", "legendary", "mythic"];
-const rungOf = t => LADDER.indexOf(t === "regional" ? "heroic" : t);
+const rungOf = t => LADDER.indexOf(t === "leader" ? "heroic" : t);
 
 function seeded(seed) { let s = seed >>> 0; return () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; }; }
 

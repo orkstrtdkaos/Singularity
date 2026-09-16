@@ -24,12 +24,12 @@
   },
   {
    "band": 2,
-   "tier": "regional",
+   "tier": "leader",
    "levels": [
     12,
     24
    ],
-   "of": "a name a whole reach would recognise"
+   "of": "a name a whole reach would recognise — a keeper, a harbour-master, somebody a place actually runs on"
   },
   {
    "band": 3,
@@ -74,6 +74,6 @@
  "_whyMoreRungsIsNotAProblem": "⛑ ERIK ASKED. MEASURED BEFORE ANSWERING: every rung is populated — riffraff 6 · notable 15 · heroic 70 · epic 31 · legendary 18 · mythic 5 — so no band is starved and none has to borrow. ⚠️ AND MORE RUNGS MAKES THE ONE FILTER THAT MATTERS SHARPER: the '+1 glimpse of the legendary' is a one-rung reach, and a one-rung reach on a six-rung ladder is a real constraint where on a four-rung one it was nearly the whole roster. ⛔ THE COST IS A LONGER LIST IN A UI AND NOTHING ELSE. The bands are not evenly wide on purpose — 1–4 then 5–11 then 12–39 — because early levels pass quickly and late ones do not.",
  "_stillErikS": "⬜ WHERE `heroic` STARTS. The merged rung opens at 12 because that is the only value that leaves no gap — but Erik's own read in play was that Silas was 'just becoming heroic' at 29, and under this table he has been heroic since 12. ⚠️ If 29 is the feel, `notable` has to stretch to 28 and the ladder re-spaces below it. **The file needs his number.**",
  "_whatThisUnblocks": "⛑ CCode's SNG-590 list, all of which reads this table: `tierForArc` folding in so a level-7 character stops meeting the same figures as a level-61 one; `tierRank` rebuilt on `band`; and band-gating the GM-figure door to the character's band plus at most one above.",
- "_theRegionalQuestion": "⛔ ERIK RULED THE NAMES: 'heroic IS regional; heroic tier is better'. I MERGED THEM AND BACKED IT OUT, because I did not measure the word first and it is not only an NPC tier. ⚠️ MEASURED AFTER THE FACT:  appears in 15 engine files, 13 test files, 2 scripts and 6 content rules — and in  and  IT MEANS GEOGRAPHIC SCALE, not power: a keeper whose reach brings a holding to thriving, an arc whose scope is a region. ⛑ SO THE COLLISION CCODE FOUND IS BIGGER THAN HE FOUND IT:  is not one word doing two jobs on one ladder, it is one word doing jobs on FOUR — threat tier, keeper reach, arc scale, encounter weight. ⬜ RETIRING IT FROM THE THREAT LADDER IS RIGHT AND IS A CROSS-CUTTING CHANGE, NOT A RENAME. Seven rungs stand here with  in place until Erik and CCode decide whether the threat ladder gives the word up or the other three do.",
- "_myError_20260914": "⚠️ ON THE RECORD: I also set the merged floor to 12, reasoning that keeping 25 would strand levels 6–24. That was WRONG — a rung's top is defined by the next rung's floor, so retiring a rung simply widens the one below it. The suite caught it in one run, after it had already moved 70 people down thirteen levels in my working tree. ⛔ BOTH MISTAKES IN THIS TICKET WERE THE SAME MISTAKE: acting on a derivation I had not measured."
+ "_myError_20260914": "⚠️ ON THE RECORD: I also set the merged floor to 12, reasoning that keeping 25 would strand levels 6–24. That was WRONG — a rung's top is defined by the next rung's floor, so retiring a rung simply widens the one below it. The suite caught it in one run, after it had already moved 70 people down thirteen levels in my working tree. ⛔ BOTH MISTAKES IN THIS TICKET WERE THE SAME MISTAKE: acting on a derivation I had not measured.",
+ "_tierRenamed_20260916": "⛔ ERIK 2026-09-16: 'what if we change regional on the tier ladder to Leader?' ⛑ RENAMED, and it solves the collision without a cross-cutting rename.  was doing two jobs — a person's RUNG on the threat ladder, and GEOGRAPHIC SCALE in holdings, arcs and  (world/tradition/regional). Those are different claims that shared a word, which is exactly why  had  and  on the same rank. ⚠️  is the rung's own word: the sixteen people at band 2 are a keeper, a harbour-master, a reed-mother, a wend elder, a mediator, a broker and a repair lead. ⛑  keeps its scale meaning everywhere it actually meant scale, and only  still uses it — correctly, for world/tradition/regional scope. ⚠️ AND THE REASONING LIVES HERE RATHER THAN IN  BECAUSE A NOTE INSIDE A RULES BAG COUNTS AS AN UNREAD CONSTANT: the wiring ratchet walks every leaf and does not care that a key starts with an underscore. It caught mine at 27 against a baseline of 26."
 }

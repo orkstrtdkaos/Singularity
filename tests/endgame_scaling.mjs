@@ -38,11 +38,11 @@ const pad = (v, n) => String(v).padStart(n);
 // needed too." Right on both counts. These are the REAL 26 creatures a player can meet, converted to a threat
 // by the SAME table the encounter pool uses (random_encounters BEAST_TIER), so this measures the fights that
 // actually happen rather than a synthetic ladder — and it immediately surfaced the finding below.
-const BEAST_TIER = { riffraff: 22, notable: 38, regional: 55, epic: 78 };
+const BEAST_TIER = { riffraff: 22, notable: 38, leader: 55, epic: 78 };
 const ROSTER = (rj("content/packs/valley/bestiary.json").roster || [])
   .map(c => ({ id: c.id, name: c.name, tier: c.tier, threat: BEAST_TIER[c.tier] ?? 38,
                authoredThreat: c.threat ?? null, authoredHealth: c.health ?? null, authoredSoak: c.soak ?? null }));
-const BANDS = ["riffraff", "notable", "regional", "epic"].map(t => [t, BEAST_TIER[t]]);
+const BANDS = ["riffraff", "notable", "leader", "epic"].map(t => [t, BEAST_TIER[t]]);
 const ROUND_CAP = 60;   // past this a fight is not a fight; it is a war of attrition nobody would sit through
 
 const rngFor = k => { let s = k * 7919 + 13; return () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; }; };

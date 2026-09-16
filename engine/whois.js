@@ -24,7 +24,7 @@ const TIER_MEANING = {
   legendary: "legendary — they have lasted, and been counted",
   epic: "epic — known well beyond where they started",
   heroic: "heroic — a name in their own country",
-  regional: "heroic — a name in their own country",
+  leader: "a name in their own country — somebody a place runs on",
   notable: "notable — someone is beginning to say their name",
   riffraff: "riffraff — not yet anybody, which is where everybody starts",
 };

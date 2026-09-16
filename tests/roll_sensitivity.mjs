@@ -64,7 +64,7 @@ const CAST = [
 // unopposed task, which is where the ceiling problem shows most plainly.
 const DIFFICULTIES = [
   { name: "unopposed", d: 0 }, { name: "riffraff", d: 22 }, { name: "notable", d: 38 },
-  { name: "regional", d: 55 }, { name: "epic", d: 78 }
+  { name: "leader", d: 55 }, { name: "epic", d: 78 }
 ];
 
 /** One cell of the grid, through the real engine. Spectral fit is left NEUTRAL on purpose: it is its own

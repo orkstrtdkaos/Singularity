@@ -61,7 +61,7 @@ function fight({ tier = 1, threat = 22, level = 20, attr = 9, sb, cm, res, trial
 
 /** Aevi's three criteria, evaluated at one configuration. */
 function criteria(sb, cm, res) {
-  const bands = [["riffraff", 22], ["notable", 38], ["regional", 55], ["epic", 78]];
+  const bands = [["riffraff", 22], ["notable", 38], ["leader", 55], ["epic", 78]];
   const rows = bands.map(([name, threat]) => {
     const t1 = fight({ tier: 1, threat, sb, cm, res, trials: 120 });
     const t3 = fight({ tier: 3, threat, sb, cm, res, trials: 120 });

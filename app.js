@@ -150,7 +150,11 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
+<<<<<<< HEAD
 const APP_VERSION = "2.0.39";
+=======
+const APP_VERSION = "2.0.34";
+>>>>>>> 93b7a44 (v2.0.24 — regional becomes LEADER on the tier ladder, and only on the tier ladder)
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.

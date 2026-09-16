@@ -815,8 +815,17 @@ export function sourcesHere(location, substrateData, { present = 0, aura = 0, ca
     const banded = eff == null || !entry?.band ? null : bandFactor(entry.band, eff);
     // ⛔ MEANING SETS A CEILING, NOT A PENALTY (R38a/b) — `min(ceiling, band)` is the authored shape, never a product.
     const factor = appliesTo.has(s.id) && ceiling != null && banded != null ? Math.min(ceiling, banded) : banded;
+    // ⛔ CCODE-358 (Erik: "For the Nanite label - there is ordered and wild %s. It needs to show both.") — ONE FIELD, TWO BANDS.
+    // An ordered-nanite craft reads this field through the `nanite` band and a wild one through `wild`, so one place can be
+    // strong for the first and thin for the second at the same moment. The single word showed only the band of the STATE the
+    // field is in; `parts` is what each kind of practitioner actually gets here, off the same `bandFactor` the roll uses.
+    const parts = s.id === "nanite" && eff != null ? [["ordered", "nanite"], ["wild", "wild"]].map(([id, key]) => {
+      const b = substrateData?.sourceBands?.sources?.[key]?.band;
+      const f = b ? bandFactor(b, eff) : null;
+      return { id, factor: f, level: levelWordFor(f) };
+    }) : null;
     return {
-      id: s.id, label: s.label, field: fieldId,
+      id: s.id, label: s.label, field: fieldId, ...(parts ? { parts } : {}),
       fieldValue: appliesTo.has(s.id) ? meaning : raw,
       substrateValue: raw, factor,
       level: levelWordFor(factor),

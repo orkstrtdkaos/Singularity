@@ -146,7 +146,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.21";
+const APP_VERSION = "2.0.22";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -16783,6 +16783,11 @@ function renderPlay(turn, opts = {}) {
         // ⛔ CCODE-356: THE NUMBER BESIDE THE WORD — and it is the FACTOR, the same number the roll uses, which is what the word was
         // cut from (strong ≥95%, workable ≥70%, thin ≥45%). The field density that feeds it stays in the tooltip.
         const pctNow = r.factor == null ? "" : `<span class="src-pct">${Math.round(r.factor * 100)}%</span>`;
+        // ⛔ CCODE-358: the nanite shows BOTH bands — ordered and wild — each with its word and its number.
+        if (Array.isArray(r.parts) && r.parts.length) {
+          const both = r.parts.map(p => `<span class="src-part">${esc(p.id)} <b>${esc(p.level)}</b>${p.factor == null ? "" : `<span class="src-pct">${Math.round(p.factor * 100)}%</span>`}</span>`).join(`<span class="src-sep">·</span>`);
+          return `<span class="src-chip src-${esc(r.level)}" title="${esc(tip)}">${GLYPH[r.id] || "•"} ${esc(r.label.split(" ")[0])} ${both}</span>`;
+        }
         return `<span class="src-chip src-${esc(r.level)}" title="${esc(tip)}">${GLYPH[r.id] || "•"} ${esc(r.label.split(" ")[0])} <b>${esc(r.level)}</b>${pctNow}</span>`;
       }).join("");
       const aura = g.bastion

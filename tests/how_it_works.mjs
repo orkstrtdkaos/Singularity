@@ -12984,14 +12984,18 @@ console.log("\n── §196 · a guard that cannot see must refuse, and the game
   // ⛔ WHAT THE OVERWRITE COST, from the two copies in git: level 33→31, xp 3200→3032, day 18→16, 61 established facts→48,
   // 51 deeds→37, 39 crafts→36, 1436 crystal→1182. ⛑ Restored BYTE-EXACT from the copy the app itself wrote at 21:24, so every
   // byte in this save is still the game's own — no field of it was authored by hand, which is the rule this repair had to keep.
-  check("§196: ⛑ Silas is restored — level 33 at day 18, with every fact, deed and craft the overwrite took",
-    silas196.level === 33 && silas196.xp === 3200 && silas196.clock?.day === 18
-    && (silas196.establishedFacts || []).length === 61 && (silas196.deeds || []).length === 51
+  // ⛔ CCODE-358 — AND THE REST OF THIS LINE PINNED NUMBERS WHOSE WHOLE PURPOSE IS TO MOVE, the same lesson SNG-556 wrote down
+  // two lines further on and applied only to `rev`. Erik played Silas on 2026-09-16 and earned crystal (1436 → 1696), and the
+  // gate went red BECAUSE he played. ⛑ The claim is that the restore held and never went BACKWARDS: a floor for everything that
+  // only accumulates, and no pin at all on crystal, which is money and is meant to be spent.
+  check("§196: ⛑ Silas is restored, and has never fallen back below it — level 33, day 18, every fact, deed and craft the overwrite took",
+    silas196.level >= 33 && silas196.xp >= 3200 && (silas196.clock?.day || 0) >= 18
+    && (silas196.establishedFacts || []).length >= 61 && (silas196.deeds || []).length >= 51
     // ⛔ SNG-556: `rev === 2080` PINNED A NUMBER WHOSE WHOLE PURPOSE IS TO MOVE. It was the rev at the moment of the
     // restore; the save then stopped going up for sixteen hours (SNG-554), and the first thing the fix did was advance it
     // to 2090 — breaking this gate BECAUSE the repair worked. What must hold is that the restore's CONTENT survived and
     // that the rev never goes BACKWARDS, which is the actual claim: a rev that fell is the overwrite happening again.
-    && (silas196.abilities || []).length === 39 && silas196.purse?.crystal === 1436 && (silas196.rev || 0) >= 2080,
+    && (silas196.abilities || []).length >= 39 && (silas196.rev || 0) >= 2080,
     `lvl ${silas196.level} · xp ${silas196.xp} · day ${silas196.clock?.day} · ${(silas196.establishedFacts || []).length} facts · ${(silas196.deeds || []).length} deeds`);
 }
 
@@ -17918,6 +17922,33 @@ console.log("\n── §249 · an invitation comes to the door, and a painting i
   const saved249 = Q249.routesForCharacter({ routes: { preserve: "[object Object]", break: "[object Object]", tend: "tend the sick" } }, { domains: { primary: "tend" } });
   check("§249: ⚠️ …and the three already SAVED that way on her arc are dropped at the reader, never handed to the GM as nonsense",
     saved249.length === 1 && saved249[0].text === "tend the sick", JSON.stringify(saved249));
+}
+
+
+// ⛔ CCODE-358 (Erik, 2026-09-16) — "For the Nanite label - there is ordered and wild %s. It needs to show both."
+// ⚑ ONE FIELD, TWO BANDS: an ordered-nanite craft reads the nanite field through the `nanite` band and a wild one through `wild`.
+// The chip showed only the band of the state the field is IN — so Millbrook read "Nanite strong 100%" (its field is wild) while
+// every ordered-nanite craft there answered at 53%.
+console.log("\n── §250 · the nanite says both of its numbers ──");
+{
+  const S250 = await import("../engine/substrate.js");
+  const { loadContentHeadless: lch250 } = await import("./headless_content.mjs");
+  const C250 = await lch250();
+  // CONSTRUCTED: the field is pinned on the location, so the claim does not ride on how the region's field is authored today
+  const wild250 = { id: "t250", name: "Test Ground", regionId: "valley", naniteDensity: 0.3, naniteState: "wild" };
+  const n250 = S250.sourcesHere(wild250, C250.substrateModel, { powerSources: C250.powerSources }).find(r => r.id === "nanite");
+  const bands250 = C250.substrateModel?.sourceBands?.sources || {};
+  const ordered250 = n250?.parts?.find(p => p.id === "ordered"), wildPart250 = n250?.parts?.find(p => p.id === "wild");
+  check("§250: ⛔ the nanite carries BOTH bands — ordered and wild — each its own factor and its own word",
+    !!ordered250 && !!wildPart250 && ordered250.factor !== wildPart250.factor && ordered250.level !== wildPart250.level,
+    JSON.stringify(n250?.parts));
+  check("§250: ⚠️ …off the same authored bands the roll reads: ordered through `nanite`, wild through `wild`",
+    !!bands250.nanite?.band && !!bands250.wild?.band && n250.level === wildPart250.level && Math.abs(n250.factor - wildPart250.factor) < 1e-9);
+  check("§250: …and the other three sources are unchanged — one number each",
+    S250.sourcesHere(wild250, C250.substrateModel, { powerSources: C250.powerSources }).filter(r => r.id !== "nanite").every(r => !("parts" in r)));
+  const A250 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§250: ⛔ the header renders both, each with its word and its percentage",
+    /if \(Array\.isArray\(r\.parts\) && r\.parts\.length\) \{/.test(A250) && /\$\{esc\(p\.id\)\} <b>\$\{esc\(p\.level\)\}<\/b>\$\{p\.factor == null \? "" : `<span class="src-pct">\$\{Math\.round\(p\.factor \* 100\)\}%<\/span>`\}/.test(A250));
 }
 
 /* ══════════ REPORT ══════════ */

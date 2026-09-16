@@ -1712,6 +1712,8 @@ img[data-lightbox] { cursor: zoom-in; }
 .loc-head .time-tag { margin-left: auto; font-family: var(--font-ui); font-size: 12px; }
 .loc-head .src-strip { display: flex; margin-top: 8px; gap: 6px; }
 .src-pct { margin-left: 5px; font-variant-numeric: tabular-nums; color: var(--ink-dim); }
+.src-part { white-space: nowrap; }
+.src-sep { margin: 0 6px; color: var(--ink-dim); }
 @media (max-width: 600px) {
   .loc-title { font-size: 20px; }
   .loc-head .time-tag { margin-left: 0; flex-basis: 100%; }

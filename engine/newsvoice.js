@@ -41,6 +41,8 @@ const bare = (w) => String(w || "").replace(/[^A-Za-z']/g, "");
  *       "The Starless One") and Aevi's ruling is that this is fine.
  *
  *  ⚠️ Measured across the shipped roster of 73: 0 cut on a stopword, 32 do not shorten. */
+import { walkingDays } from "./worldmap.js";   // CCODE-367: how near a piece of news happened
+
 export function shortName(full) {
   const s = String(full || "").trim().replace(/\s+/g, " ");
   if (!s) return "";
@@ -171,6 +173,31 @@ export const STRIKE_FALLBACK = {
     turned: "{S}[, {sWho},] came openly for {T}[ over {arc}][, {sHow}], and was turned aside.",
   },
 };
+
+/** ⛔ CCODE-367 — NEARBY NEWS STANDS OUT. Erik: "Nearby events should stand out more. we might want a revamp pass on the world news
+ *  soon." ⚑ MEASURED: only 4 of Adelheid's 20 news items carry a place, and 1 of Silas's — nearness can only be said of what the
+ *  engine placed, so the two murmurs that knew where they were and dropped it are placed too (the revamp is where the rest go).
+ *  ⚠️ "NEAR" is a few days' walk (Millbrook to the Kindly Rest is 1.6, to Waystone 2) and "HERE" is under half a day's.
+ *  ⛔ DISTANCE, NOT COMMUNITY — measured while building this: `valley.millbrook` holds Archive Hollow, NINE days from the square,
+ *  and `domain.deepwood` spans twenty-three, so a community match called both "here". A shared community is trusted only where
+ *  a place has no position to measure. Returns null when either end has no place. */
+export const NEWS_NEAR_DAYS = 3;
+export const NEWS_HERE_DAYS = 0.5;
+export function newsNearness(item, { here = null, locations = {} } = {}) {
+  const at = item?.locationId ? locations?.[item.locationId] : null;
+  if (!at || !here) return null;
+  const place = at.name || null;
+  if (at.id === here.id) return { near: true, here: true, days: 0, place };
+  const d = walkingDays(here, at);
+  if (d == null) return (at.communityId && at.communityId === here.communityId) ? { near: true, here: true, days: null, place } : null;
+  const days = Math.round(d * 10) / 10;
+  return { near: d <= NEWS_NEAR_DAYS, here: d <= NEWS_HERE_DAYS, days, place };
+}
+/** Near first; otherwise exactly the order the world told it in. */
+export function nearFirst(items, opts = {}) {
+  return (items || []).map((n, i) => ({ n, i, near: newsNearness(n, opts)?.near ? 1 : 0 }))
+    .sort((a, b) => b.near - a.near || a.i - b.i).map(x => x.n);
+}
 
 /** WHO SOMEONE IS AND HOW THEY FIGHT, from what is authored about them: `fightingStyle` is "role, how", and the tradition has a
  *  name. "a devourer of the Umbrals" / "fighting from the dark they brought". Either half may be empty; nothing is guessed. */

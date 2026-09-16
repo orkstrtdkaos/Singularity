@@ -31,6 +31,7 @@
 import { normName, givenName, smartClamp } from "./namematch.js";
 import { tierForArc, tierRank } from "./legends.js";
 import { relationOf } from "./presence.js";
+import { walkingDays } from "./worldmap.js";   // CCODE-367: a community is not a town
 
 /** ⛔ WHAT A TRAVELER PUBLISHES ABOUT THEMSELVES — and it is deliberately small.
  *
@@ -64,20 +65,29 @@ export function travelerCard(character, { playerKey = null, now = Date.now(), wh
  *  `valley.millbrook`, with the store's `parentId` pointing at the town. So the meeting key is the COMMUNITY, and the
  *  settlement is the top-most ancestor that still shares it: a shop, a garden and a square in one town are one "here".
  *  Pure — `locations` is the reader's own content, so a place only this character's world knows still resolves. */
+/** ⛔ CCODE-367 — HOW FAR "THE SAME TOWN" REACHES. Measured: `valley.millbrook` holds Archive Hollow, nine days' walk from the square,
+ *  and Echo River Crossing, 0.9; `domain.deepwood` spans twenty-three. A community is a web of places, not a town. */
+export const TOWN_WALK_DAYS = 0.5;
+
 export function whereOf(character, locations = {}, { worldDay = null } = {}) {
   const id = character?.currentLocationId;
   if (!id) return null;
   const loc = locations?.[id] || null;
+  // a place with no position to measure trusts its community, as it did before
+  const within = (a, b) => { const d = (a && b) ? walkingDays(a, b) : null; return d == null || d <= TOWN_WALK_DAYS; };
   // ⛑ A COMMUNITY IS NAMED FOR ITS TOWN — `valley.millbrook` is Millbrook — so when that place exists, it is the settlement.
   // ⚠️ Measured before this: climbing the parents made Millbrook "The Disputed Zone — Fringe" (no community, so nothing
   // stopped the climb) and then "Echo River Crossing" (Millbrook's parent, filed in the SAME community). Neither is what a
   // person in the square would call where they are.
-  const town = loc?.communityId ? locations?.[String(loc.communityId).split(".").pop()] : null;
+  // ⛔ CCODE-367: …but only when that town is within a short walk. Before this, Archive Hollow was "in Millbrook" and a traveler
+  // there was "here" to one in the square.
+  let town = loc?.communityId ? locations?.[String(loc.communityId).split(".").pop()] : null;
+  if (town && !within(loc, town)) town = null;
   let top = town || loc, guard = 0;
-  // Failing a town of that name, climb — but only through ancestors of the SAME community.
+  // Failing a town of that name, climb — but only through ancestors of the SAME community, and only as far as a short walk.
   while (!town && top?.parentId && locations?.[top.parentId] && guard++ < 8) {
     const up = locations[top.parentId];
-    if (!loc?.communityId || up.communityId !== loc.communityId) break;
+    if (!loc?.communityId || up.communityId !== loc.communityId || !within(loc, up)) break;
     top = up;
   }
   return {
@@ -87,9 +97,10 @@ export function whereOf(character, locations = {}, { worldDay = null } = {}) {
   };
 }
 
-/** The key two travelers meet on: their community, or the settlement where a place belongs to none. */
+/** The key two travelers meet on: the settlement (CCODE-367 — a community can span days of walking), or the community of a card
+ *  that predates it. */
 export function meetKey(where) {
-  return where?.communityId || where?.settlementId || null;
+  return where?.settlementId || where?.communityId || null;
 }
 
 /** ⚠️ HOW OLD "LAST SEEN" MAY BE and still mean "here". Real time, because the card is stamped in real time and a player who

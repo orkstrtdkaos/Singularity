@@ -33,7 +33,7 @@ import { milestoneEffects } from "./ladder.js";
 import { personName, mintedWants, nameOf, asSpoken } from "./names.js";
 // SNG-433: the sentences a fight is reported in are AUTHORED. This holds only the decisions the prose
 // cannot make for itself — which variant, how a name shortens, and when to drop a slot.
-import { newsVoiceOf, clashLine, fragmentLine, strikeLine, figureFlavor } from "./newsvoice.js";
+import { newsVoiceOf, clashLine, fragmentLine, strikeLine, figureFlavor, newsNearness } from "./newsvoice.js";
 const KNOWN_TIERS = new Set(["mythic", "legendary", "epic", "heroic", "regional", "notable", "riffraff"]);   // SNG-269: ONE ladder — worldtick had its own copy and it drifted
 import { smartClamp } from "./namematch.js"; // SNG-076: word-boundary clamp for the away-digest/news
 import { generatedRecords } from "./generate.js";
@@ -2831,7 +2831,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
         if (pursuit) { livesOnThePage++; personalBeats.push({ id: f.id, name: f.name, pursuit, locationId: f.homeLocation || f.legend?.homeLocation || f.region || null }); }
       } else if (neglected) {
         // the care they are spending themselves on is the one they actually took this pass
-        neglectedLives.push({ id: f.id, name: f.name, arcId: spent[0]?.care?.arcId ?? null });
+        neglectedLives.push({ id: f.id, name: f.name, arcId: spent[0]?.care?.arcId ?? null, locationId: f.homeLocation || f.legend?.homeLocation || null });
         // SNG-279: holding a front on a pass that cost you your own life is a deed. Weight 1 — it is real
         // but it is not a contest; scale and risk are lower, which is the only reason it scores less.
         creditDeed(ws, f.id, "heldThroughCrisis", { worldDay: currentWorldDay });
@@ -3318,11 +3318,11 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
       const voice = newsVoiceOf(content);
       for (const b of personalBeats.slice(0, 3)) {
         const line = fragmentLine({ templates: voice.fragments, name: b.name, frag: b.pursuit, place: voice.place(b.locationId) });
-        news.push({ text: line || `${b.name} ${b.pursuit}`, worldDay: currentWorldDay, tier: "murmur" });
+        news.push({ text: line || `${b.name} ${b.pursuit}`, worldDay: currentWorldDay, tier: "murmur", locationId: b.locationId || null });   // CCODE-367: placed
       }
     }
     for (const n of neglectedLives.slice(0, 2)) {
-      news.push({ text: `${n.name} has not been seen at home in a long while — whatever is happening has all of them.`, worldDay: currentWorldDay, tier: "murmur" });
+      news.push({ text: `${n.name} has not been seen at home in a long while — whatever is happening has all of them.`, worldDay: currentWorldDay, tier: "murmur", locationId: n.locationId || null });   // CCODE-367: at the home they left
     }
 
     // SNG-269/2c — WHO ROSE. Erik: "the ones that stay the longest are the true legends." Run after the
@@ -3874,12 +3874,24 @@ export function takeUnseenNews(character, opts = {}) {
 }
 
 /** Recent news block for the GM prompt — rumors NPCs might repeat. */
-export function newsForGM(character) {
+export function newsForGM(character, { locations = null } = {}) {
   const news = character.worldState?.news || [];
   if (!news.length) return null;
+  // ⛔ CCODE-367 — NEAR NEWS IS WHAT A LOCAL REPEATS (Erik: "Nearby events should stand out more"). The last eight as before,
+  // plus up to three older ones that happened within a few days' walk, and every near line says so. Without `locations` the
+  // block is exactly what it was.
+  const here = locations?.[character.currentLocationId] || null;
+  const nearOf = (n) => (here ? newsNearness(n, { here, locations }) : null);
+  const recent = news.slice(-8);
+  const olderNear = here ? news.slice(0, -8).filter(n => nearOf(n)?.near).slice(-3) : [];
+  const shown = news.filter(n => recent.includes(n) || olderNear.includes(n));
   // SNG-041: date on the SHARED absolute world-day when known (so cross-character news lines up);
   // fall back to the local journey-day for pre-SNG-041 items (derives-never-fabricates).
-  return news.slice(-8).map(n => `- [${Number.isFinite(n.worldDay) ? `world-day ${n.worldDay}` : `day ${n.day}`}] ${n.text}`).join("\n");
+  return shown.map(n => {
+    const nm = nearOf(n);
+    const tag = nm?.near ? (nm.here ? " (here, in this town)" : ` (near here — ${nm.place}, ${nm.days} ${nm.days === 1 ? "day" : "days"}' walk)`) : "";
+    return `- [${Number.isFinite(n.worldDay) ? `world-day ${n.worldDay}` : `day ${n.day}`}] ${n.text}${tag}`;
+  }).join("\n");
 }
 
 /** SNG-191 §4 — the AI pass, inverted. NOT "what happened to a person" (which writes colour) but "what

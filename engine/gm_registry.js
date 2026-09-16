@@ -360,7 +360,7 @@ export const GM_CONTEXT = [
     build: (env) => agesMissingForGM(env.character, { sceneNpcNames: (env.sceneState?.npcsPresent || []).map(n => n?.name).filter(Boolean) }) },
   { key: "newsDetail", builder: "worldtick.newsForGM", carries: ["world-tick news"],
     reachedBy: "always", spec: "§19", views: ["turn", "ask"],
-    build: (env) => newsForGM(env.character) },
+    build: (env) => newsForGM(env.character, { locations: env.CONTENT?.locations || null }) },   // CCODE-367: near news marked, and kept
   // SNG-203 §3: the shared, public state of the valley's greater arcs (truth sealed) — so the GM weaves the moving world.
   // ⛔ SNG-448 — THE VEIL, AS THE WORLD KNOWS IT. Registered 08-15, loaded by nothing until 09-08, while the Void
   // work was authored against it. The four-cell table is the whole mechanic ("the act does not determine the

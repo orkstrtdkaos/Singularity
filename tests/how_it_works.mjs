@@ -18307,6 +18307,67 @@ console.log("\n── §254 · a strike is news, and says it was one ──");
     /if \(mark\.f\.id !== PLAYER_MARK_ID\) \{\n\s+const byGuard = guard\.f\.id !== PLAYER_MARK_ID \? guard\.f : null;/.test(src254));
 }
 
+// ⛔ CCODE-367 (Erik, 2026-09-16) — "Nearby events should stand out more. we might want a revamp pass on the world news soon."
+// ⚑ MEASURED: 4 of Adelheid's 20 news items carry a place, 1 of Silas's. And while building it: `valley.millbrook` holds Archive
+// Hollow, NINE days' walk from the square, and `domain.deepwood` spans twenty-three — so "same community" called both "here", in
+// the news AND in CCODE-359's "another traveler is here". ⛑ Distance decides: here is under half a day's walk, near within three.
+console.log("\n── §255 · near news stands out, and a community is not a town ──");
+{
+  const N255 = await import("../engine/newsvoice.js");
+  const W255 = await import("../engine/worldtick.js");
+  const T255 = await import("../engine/travelers.js");
+  const { loadContentHeadless: lch255 } = await import("./headless_content.mjs");
+  const C255 = await lch255();
+  const L = C255.locations;
+  const store = L["gen-mara-wells-store"];
+  const nm = (id) => N255.newsNearness({ locationId: id }, { here: store, locations: L });
+
+  /* ---- 1 · ⛔ NEAR, BY DISTANCE ---- */
+  check("§255: ⛔ from Mara Wells' Store, Millbrook is here, the Kindly Rest is near (1.6 days) — and Archive Hollow, in the same community, is neither",
+    nm("millbrook")?.here === true && nm("the_kindly_rest")?.near === true && nm("the_kindly_rest")?.here === false && nm("the_kindly_rest")?.days === 1.6
+    && nm("archive_hollow")?.here === false && nm("archive_hollow")?.near === false && nm("the_greenward")?.near === false,
+    JSON.stringify({ mb: nm("millbrook"), kr: nm("the_kindly_rest"), ah: nm("archive_hollow") }));
+  check("§255: …a place with no position trusts its community, a line with no place is not placed, and near comes first in the world's own order otherwise",
+    N255.newsNearness({ locationId: "x" }, { here: { id: "h", communityId: "c" }, locations: { x: { id: "x", communityId: "c" } } })?.here === true
+    && N255.newsNearness({ text: "no place" }, { here: store, locations: L }) === null
+    && N255.nearFirst([{ t: 1, locationId: "the_greenward" }, { t: 2 }, { t: 3, locationId: "the_kindly_rest" }, { t: 4, locationId: "millbrook" }], { here: store, locations: L }).map(n => n.t).join(",") === "3,4,1,2");
+
+  /* ---- 2 · ⛔ THE GM HEARS WHAT HAPPENED DOWN THE ROAD ---- */
+  const news255 = [{ worldDay: 60, text: "Old news at the Kindly Rest.", locationId: "the_kindly_rest" },
+    ...Array.from({ length: 9 }, (_, i) => ({ worldDay: 70 + i, text: `Far news ${i}.`, locationId: "the_greenward" }))];
+  const ch255 = { currentLocationId: "gen-mara-wells-store", worldState: { news: news255 } };
+  const gm255 = W255.newsForGM(ch255, { locations: L }) || "";
+  const plain255 = W255.newsForGM(ch255) || "";
+  check("§255: ⛔ the GM's news keeps an older line from a few days' walk, and says how near — and without places the block is exactly what it was",
+    /Old news at the Kindly Rest\. \(near here — The Kindly Rest, 1\.6 days' walk\)/.test(gm255) && gm255.split("\n").length === 9
+    && !/Old news/.test(plain255) && plain255.split("\n").length === 8 && !/near here/.test(plain255), gm255.split("\n")[0]);
+
+  /* ---- 3 · ⛔ A COMMUNITY IS NOT A TOWN ---- */
+  const at = (id) => T255.whereOf({ currentLocationId: id }, L, {});
+  check("§255: ⛔ Archive Hollow is its own place, not Millbrook nine days off; Echo River Crossing is its own; the store is still Millbrook",
+    at("archive_hollow")?.settlementId === "archive_hollow" && at("echo_river_crossing")?.settlementId === "echo_river_crossing"
+    && at("gen-mara-wells-store")?.settlementName === "Millbrook" && T255.meetKey(at("archive_hollow")) !== T255.meetKey(at("millbrook"))
+    && T255.meetKey(at("gen-mara-wells-store")) === T255.meetKey(at("millbrook")),
+    JSON.stringify({ ah: at("archive_hollow")?.settlementName, erc: at("echo_river_crossing")?.settlementName }));
+  const fresh255 = new Date().toISOString();
+  const idx255 = { travelers: { a: { id: "a", name: "At Archive Hollow", where: at("archive_hollow"), updatedAt: fresh255 },
+    b: { id: "b", name: "At the store", where: at("gen-mara-wells-store"), updatedAt: fresh255 } } };
+  check("§255: ⛔ …so a traveler at Archive Hollow is not 'here' to someone in the square, and one at the store still is",
+    T255.travelersHere(idx255, { selfId: "me", where: at("millbrook") }).map(c => c.id).join(",") === "b");
+  const A255 = rd("app.js").replace(/\r\n/g, "\n");
+  const P255 = rd("engine/party.js").replace(/\r\n/g, "\n");
+  check("§255: ⛔ a shared scene carries its settlement and is found by it — an index entry written before keeps its community",
+    /scene\.settlementId = whereOf\(character, CONTENT\.locations \|\| \{\}\)\?\.settlementId \|\| null;/.test(A255)
+    && (A255.match(/settlementId: whereOf\(character, CONTENT\.locations \|\| \{\}\)\?\.settlementId \|\| null \}\)/g) || []).length === 2
+    && /\(settlementId && e\.settlementId && e\.settlementId === settlementId\)\s*\|\| \(communityId && !e\.settlementId && e\.communityId === communityId\)/.test(P255));
+
+  /* ---- 4 · ⛔ THE SCREEN ---- */
+  const src255 = rd("engine/worldtick.js").replace(/\r\n/g, "\n");
+  check("§255: ⛔ the play screen puts near news first in each section with a chip saying how near, and the murmurs that knew their place keep it",
+    /const items = \(list\) => nearFirst\(list, nearOpts367\)/.test(A255) && /news-near-chip/.test(A255)
+    && /tier: "murmur", locationId: b\.locationId \|\| null \}\)/.test(src255) && /tier: "murmur", locationId: n\.locationId \|\| null \}\)/.test(src255));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

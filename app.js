@@ -91,7 +91,8 @@ import { worldTabHtml } from "./engine/worldtab.js";   // SNG-276: the tab's mar
 import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, syncTravelers, syncInvitations, sendInvitation, answerInvitation, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter, arcStageNow, worldRoster, NEWS_SECTIONS, pushCanonLook} from "./engine/worldtick.js";
 import { noteWorldMovedOnShown } from "./engine/worldevents.js";
 import { travelersHere, travelerHereLine, whereOf } from "./engine/travelers.js";   // CCODE-359: another traveler is here   // CCODE-354: the world moved on, counted by beats
-import { makeInvitation, incomingInvitations, sentInvitations, joinBandLocally, bandPhrase } from "./engine/invitations.js";   // CCODE-360: an invitation carried by someone you both know
+import { makeInvitation, incomingInvitations, sentInvitations, joinBandLocally, bandPhrase } from "./engine/invitations.js";
+import { newsNearness, nearFirst } from "./engine/newsvoice.js";   // CCODE-367: nearby news stands out   // CCODE-360: an invitation carried by someone you both know
 import { runWakeGeneration } from "./engine/wake.js"; // SNG-204 Phase 2: open wakes generate the next thread
 import { addAssignment, delegationRefusal, activeDelegates, MISSION_KINDS, MISSION_KIND_IDS, canSendOn, sayFamilies } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
 import { setArcFate } from "./engine/latentarcs.js"; // SNG-191 §7: the player closing a surfaced arc (the handled/resolved fate)
@@ -148,7 +149,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.28";
+const APP_VERSION = "2.0.29";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -5135,6 +5136,7 @@ async function startPartyScene() {
   const scene = newSharedScene(character.currentLocationId, character, stamp);
   // ⛔ CCODE-359: the scene carries its TOWN, so a traveler anywhere in it can find it — not only one standing on the same spot.
   scene.communityId = CONTENT.locations?.[character.currentLocationId]?.communityId || null;
+  scene.settlementId = whereOf(character, CONTENT.locations || {})?.settlementId || null;   // CCODE-367: the town, by walking distance
   const pushed = await pushSceneWithMerge(scene.sceneId, s => s, scene);
   if (!pushed) { alert(syncErrorMessage("Could not create the shared scene")); return; }
   enterPartyScene(pushed);
@@ -17084,9 +17086,13 @@ function renderPlay(turn, opts = {}) {
       (n?.kind === "clash" && known(n.winnerId) && known(n.loserId)));
     const cue = (n) => n.kind === "death" ? (n.killerId ? "⚔ see the battle" : "☠ see the end")
       : n.outcome === "stalemate" ? "⚔ see where they met" : "⚔ see the fight";
-    const items = (list) => list.map(raw => { const n = raw?.kind ? raw : (recovered(raw) || raw); return canSee(n)
-      ? `<div class="news-item news-${n.kind === "death" ? "death" : "clash"}"><button class="news-open" data-battlenews="${attrJson({ kind: n.kind, outcome: n.outcome || null, victimId: n.victimId || n.loserId || null, killerId: n.killerId || n.winnerId || null, winnerId: n.winnerId || n.killerId || null, loserId: n.loserId || n.victimId || null, abilityId: n.abilityId || null, locationId: n.locationId || null, regionId: n.regionId || null, arcId: n.arcId || null, worldDay: n.worldDay ?? null })}" title="${n.kind === "death" ? (n.killerId ? "See the fight that ended them" : "See how it ended") : "See this fight"}">◈ ${esc(n.text)} <span class="news-open-cue">${cue(n)}</span></button></div>`
-      : `<div class="news-item">◈ ${esc(n.text)}</div>`; }).join("");
+    // ⛔ CCODE-367 — Erik: "Nearby events should stand out more." Within each section the near ones come first, each marked with
+    // how near: "here" is this town, "near" a few days' walk. A line with no place is left exactly as it was.
+    const nearOpts367 = { here: CONTENT.locations?.[character?.currentLocationId] || null, locations: CONTENT.locations || {} };
+    const chip367 = (nm) => (nm?.near ? `<span class="news-near-chip">${nm.here ? "here" : `near · ${nm.days} ${nm.days === 1 ? "day" : "days"}`}</span>` : "");
+    const items = (list) => nearFirst(list, nearOpts367).map(raw => { const n = raw?.kind ? raw : (recovered(raw) || raw); const nm = newsNearness(n, nearOpts367); const nearCls = nm?.near ? " news-near" : ""; return canSee(n)
+      ? `<div class="news-item news-${n.kind === "death" ? "death" : "clash"}${nearCls}"><button class="news-open" data-battlenews="${attrJson({ kind: n.kind, outcome: n.outcome || null, victimId: n.victimId || n.loserId || null, killerId: n.killerId || n.winnerId || null, winnerId: n.winnerId || n.killerId || null, loserId: n.loserId || n.victimId || null, abilityId: n.abilityId || null, locationId: n.locationId || null, regionId: n.regionId || null, arcId: n.arcId || null, worldDay: n.worldDay ?? null })}" title="${n.kind === "death" ? (n.killerId ? "See the fight that ended them" : "See how it ended") : "See this fight"}">${chip367(nm)}◈ ${esc(n.text)} <span class="news-open-cue">${cue(n)}</span></button></div>`
+      : `<div class="news-item${nearCls}">${chip367(nm)}◈ ${esc(n.text)}</div>`; }).join("");
     const body = populated.length > 1
       ? populated.map(s => `<div class="news-section"><div class="news-section-title">${esc(s.title)}</div>${items(bySection.get(s.id))}</div>`).join("")
       : items(opts.newsFlash);
@@ -17632,7 +17638,7 @@ function renderPlay(turn, opts = {}) {
   const findBtn = document.getElementById("party-find");
   if (findBtn) findBtn.onclick = async () => {
     findBtn.textContent = "Looking…";
-    const scenes = await listScenesAt(character.currentLocationId, { communityId: CONTENT.locations?.[character.currentLocationId]?.communityId || null });   // CCODE-359
+    const scenes = await listScenesAt(character.currentLocationId, { communityId: CONTENT.locations?.[character.currentLocationId]?.communityId || null, settlementId: whereOf(character, CONTENT.locations || {})?.settlementId || null });   // CCODE-359
     const open = scenes.find(sc => !sc.party.some(m => m.characterId === character.id));
     if (open && confirm(`Join ${open.party.map(m => m.name).join(", ")} in their scene?`)) joinPartyScene(open.sceneId);
     else if (confirm("No party found here. Start a shared scene others can join?")) startPartyScene();
@@ -17643,7 +17649,7 @@ function renderPlay(turn, opts = {}) {
   if (meetBtn) meetBtn.onclick = async () => {
     const partyFind = document.getElementById("party-find");
     if (partyFind) { partyFind.click(); return; }
-    const scenes = await listScenesAt(character.currentLocationId, { communityId: CONTENT.locations?.[character.currentLocationId]?.communityId || null });
+    const scenes = await listScenesAt(character.currentLocationId, { communityId: CONTENT.locations?.[character.currentLocationId]?.communityId || null, settlementId: whereOf(character, CONTENT.locations || {})?.settlementId || null });
     const open = scenes.find(sc => !sc.party.some(m => m.characterId === character.id));
     if (open && confirm(`Join ${open.party.map(m => m.name).join(", ")} in their scene?`)) joinPartyScene(open.sceneId);
     else if (confirm("No shared scene is open here yet. Start one they can join?")) startPartyScene();

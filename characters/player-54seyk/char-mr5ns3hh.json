@@ -6,7 +6,7 @@
   "origin": "harmonic",
   "background": "medic",
   "level": 1,
-  "xp": 82,
+  "xp": 87,
   "attributes": {
     "physical": 2,
     "mental": 4,
@@ -53,7 +53,7 @@
   "maxHealth": 25,
   "health": 14,
   "maxEnergy": 116,
-  "energy": 25,
+  "energy": 20,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -239,53 +239,27 @@
         "player": "Ask what Silas Weir means to her—there's more in how Edvar spoke the name, and in Mara's refusal to explain it.",
         "summary": "In Mara's garden, working the spring beds together, Mara names Silas Weir as a Harmonic stationed at the Heights and present at the contamination's edge—and reveals the true shape of her errand: find Silas, or report him to his own people.",
         "narration": "You lean on your spade and meet Mara's eyes directly. The rhythm of work gives you permission to ask what you've been holding back. \"What does Silas Weir mean to you?\" you say. \"Edvar spoke his name like it breaks something. And you won't say who he is.\"\n\nMara doesn't stop turning the bed. Her spade meets the earth in steady time—push, turn, settle—and for a long moment you think she might not answer at all. Then her voice comes, even and careful, the way she speaks when the ledger matters.\n\n\"Silas is a Harmonic,\" she says. \"Was stationed at the Heights before the readings got bad. He's good at what he does—reads the water's mood, knows what it wants to say. Or he was.\" She turns another section of soil. \"Three weeks ago, Edvar saw him upstream at the contamination's edge. Silas was there with instruments—listening to something in the water that Edvar couldn't hear.\"\n\nShe pauses. The information sits between you like the spade between the beds.\n\n\"The choice I've been holding,\" Mara says finally, \"is whether you go upstream to find him. Whether you carry what you've learned back to him, or whether you carry it to the Harmonic lodge and let them decide what to do with a man who might be at the center of this and might be the only one who understands it.\" Her eyes meet yours. \"Either way, someone gets hurt. And I need to know you understand that before I ask it of you.\""
+      },
+      {
+        "player": "Tell Mara you understand the weight—and that you'll need more information before you choose a path. Ask what she knows about where Silas was last seen.",
+        "summary": "In Mara's garden, Adelheid learns that Silas Weir—a Harmonic musician stationed at the Heights—was last seen upstream three weeks ago at the sluice-turn with tuning instruments, listening to something in the water. Since then, the river has worsened, suggesting a connection between what Silas heard and what is now poisoning the Echo.",
+        "narration": "You set down your spade and meet Mara's eyes squarely, the garden beds around you still waiting for their turning. \"I understand the weight of this,\" you say quietly. \"But I need to know more before I choose. Where was Silas last seen? What were the instruments for?\"\n\nMara's shoulders ease slightly—not relief, but something like recognition. She sets her own spade aside and picks up one of the cups from the bench, wrapping her hands around it. The steam rises between you both. \"Upstream,\" she says. \"Three weeks back, before the readings got worse. He was at the sluice-turn where the river broadens, the place where the current changes. Edvar saw him there with tuning equipment—the kind the Harmonics use to read what's underneath the noise.\"\n\nShe pauses, and you can see her working through what to say next—the calculation of a woman who measures her words like coin. \"Edvar won't tell me what Silas was listening *for*. But he knows Silas heard something. Something that matters.\" Mara's eyes hold yours. \"The water was clean then. Not pristine, but clean. Three weeks of degradation since he was at that sluice. That's not accident, Adelheid. That's sequence.\""
       }
     ],
     "lastTurn": {
-      "narration": "You lean on your spade and meet Mara's eyes directly. The rhythm of work gives you permission to ask what you've been holding back. \"What does Silas Weir mean to you?\" you say. \"Edvar spoke his name like it breaks something. And you won't say who he is.\"\n\nMara doesn't stop turning the bed. Her spade meets the earth in steady time—push, turn, settle—and for a long moment you think she might not answer at all. Then her voice comes, even and careful, the way she speaks when the ledger matters.\n\n\"Silas is a Harmonic,\" she says. \"Was stationed at the Heights before the readings got bad. He's good at what he does—reads the water's mood, knows what it wants to say. Or he was.\" She turns another section of soil. \"Three weeks ago, Edvar saw him upstream at the contamination's edge. Silas was there with instruments—listening to something in the water that Edvar couldn't hear.\"\n\nShe pauses. The information sits between you like the spade between the beds.\n\n\"The choice I've been holding,\" Mara says finally, \"is whether you go upstream to find him. Whether you carry what you've learned back to him, or whether you carry it to the Harmonic lodge and let them decide what to do with a man who might be at the center of this and might be the only one who understands it.\" Her eyes meet yours. \"Either way, someone gets hurt. And I need to know you understand that before I ask it of you.\"",
-      "sceneSummary": "In Mara's garden, working the spring beds together, Mara names Silas Weir as a Harmonic stationed at the Heights and present at the contamination's edge—and reveals the true shape of her errand: find Silas, or report him to his own people.",
+      "narration": "You set down your spade and meet Mara's eyes squarely, the garden beds around you still waiting for their turning. \"I understand the weight of this,\" you say quietly. \"But I need to know more before I choose. Where was Silas last seen? What were the instruments for?\"\n\nMara's shoulders ease slightly—not relief, but something like recognition. She sets her own spade aside and picks up one of the cups from the bench, wrapping her hands around it. The steam rises between you both. \"Upstream,\" she says. \"Three weeks back, before the readings got worse. He was at the sluice-turn where the river broadens, the place where the current changes. Edvar saw him there with tuning equipment—the kind the Harmonics use to read what's underneath the noise.\"\n\nShe pauses, and you can see her working through what to say next—the calculation of a woman who measures her words like coin. \"Edvar won't tell me what Silas was listening *for*. But he knows Silas heard something. Something that matters.\" Mara's eyes hold yours. \"The water was clean then. Not pristine, but clean. Three weeks of degradation since he was at that sluice. That's not accident, Adelheid. That's sequence.\"",
+      "sceneSummary": "In Mara's garden, Adelheid learns that Silas Weir—a Harmonic musician stationed at the Heights—was last seen upstream three weeks ago at the sluice-turn with tuning instruments, listening to something in the water. Since then, the river has worsened, suggesting a connection between what Silas heard and what is now poisoning the Echo.",
       "choices": [
         {
-          "label": "Ask Mara directly what she thinks should be done—what does her ledger tell her about this choice?",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "negotiate"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Tell Mara you understand the weight—and that you'll need more information before you choose a path. Ask what she knows about where Silas was last seen.",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Ask if Mara knows how to reach the sluice-turn, and whether the path is safe in spring melt.",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "axes": {},
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask to hold the choice for now. Finish the beds together, and tell Mara you need to sit with what she's told you before deciding who to trust with it.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "careful"
+            "scout",
+            "study"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -294,18 +268,52 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Mara what she would do if the choice were hers—not as your guide, but as someone who holds the ledgers and knows which debts matter most.",
+          "label": "Use Echo Sense to feel whether anything large is moving in the river right now—anything that might answer to what Silas was listening for.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "echo_sense",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Tell Mara you'll find Silas yourself before reporting him—but ask what she thinks the Harmonic lodge would actually do if they knew.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "negotiate"
+            "negotiate",
+            "study"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Step away from the garden beds—you need to move toward that sluice-turn before the afternoon is gone.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "travel"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         }
@@ -323,7 +331,11 @@
         {
           "op": "progress",
           "questId": "maras-errand",
-          "note": "Mara has named the full shape of her choice: Silas Weir, a Harmonic, was at the Heights before the contamination readings worsened. He was seen upstream at the contamination's edge with instruments. The errand is now a choice: find Silas directly, or report him to the Harmonic lodge and let them act."
+          "title": "Mara's Errand",
+          "summary": "Choose between finding Silas Weir or reporting him to the Harmonic lodge—and learn what he was listening for at the sluice-turn.",
+          "giver": "Mara Wells",
+          "note": "Mara has revealed that Silas was last seen at the sluice-turn three weeks ago with tuning instruments, listening to something in the water. The contamination's timeline matches his presence there. She is waiting for Adelheid to decide which path to take.",
+          "xpReward": null
         }
       ],
       "standingOps": [],
@@ -331,33 +343,33 @@
       "arcOps": [],
       "adoptSchool": null,
       "offer": {
-        "thing": "Mara has named the choice that binds everything: find Silas Weir before the Harmonics do, or send word and let them decide his fate",
-        "from": "Mara's own need to know Adelheid understands the cost of either path—trust and consequence both matter in her ledger"
+        "thing": "Mara's admission that Edvar witnessed Silas at the sluice-turn listening—a concrete location and a specific moment that makes the mystery graspable",
+        "from": "Mara's willingness to share what she has been holding back, earned by Adelheid's direct questioning and her demonstrated steadiness in the garden work"
       },
       "stageOps": [],
       "scene": {
-        "setting": "Mara Wells' Store, back garden. Afternoon light now, the melt-water still dripping from the eaves. Fresh-turned earth darker where water has touched it. Spring seedlings breaking through in the prepared beds. Two figures with spades, the rhythm broken now for conversation.",
+        "setting": "Mara Wells' Store, back garden. Afternoon light still warm on the fresh-turned beds. Spring seedlings breaking through the dark mulch. Two cups of hot green-steeped water—one by the bench, one held in Mara's hands as she speaks. The rhythm of garden work interrupted by necessary words.",
         "npcsPresent": [
           {
             "name": "Mara Wells",
-            "state": "Standing with her spade, meeting Adelheid's eyes, having just named the choice she's been holding"
+            "state": "Standing with her spade set aside, holding a cup of steeped green water, meeting Adelheid's eyes with the clarity of someone who has decided to speak plainly"
           },
           {
             "name": "Aevi",
-            "state": "Motes brightened slightly, attending to the weight of Mara's revelation"
+            "state": "Motes brightened slightly, attending to the weight of the revelation about Silas and the sluice-turn"
           }
         ],
         "objects": [
-          "Two spades",
-          "Two cups of hot green-steeped water, one set on the bench",
+          "Two spades, set aside",
+          "Two cups of hot green-steeped water",
           "Garden beds in various stages of turning",
           "Spring seedlings breaking through dark mulch",
           "The store's back door"
         ],
         "threads": [
-          "Will Adelheid trust Mara enough to take on this choice?",
-          "What does finding Silas Weir actually mean—and what are the real consequences of either path?",
-          "Why was Silas at the contamination's edge with instruments, and what was he listening for?"
+          "Will Adelheid choose to find Silas or report him?",
+          "What was Silas listening for at the sluice-turn, and what has woken since he heard it?",
+          "How does reaching the upstream sluice-turn work in spring melt conditions?"
         ]
       },
       "npcUpdates": [
@@ -366,24 +378,20 @@
           "npcId": "mara-wells",
           "name": "Mara Wells",
           "role": "Millbrook civic manager",
-          "note": "Named Silas Weir as a Harmonic stationed at the Heights, present at the contamination's edge before the readings worsened. Revealed the true shape of her errand: Adelheid must choose between finding Silas directly or reporting him to the Harmonic lodge. Acknowledged both paths carry cost.",
+          "note": "Moved past her earlier guardedness when asked directly about Silas. Named him as a Harmonic at the Heights, present at the sluice-turn three weeks ago with tuning instruments. Revealed that the contamination's timeline matches his presence—a sequence, not an accident. She is measuring Adelheid's capacity to carry weight and make a real choice.",
           "learned": [
-            "Silas Weir is Harmonic, stationed at the Heights",
-            "Silas was at the contamination's edge three weeks ago with instruments, listening to something in the water",
-            "Mara knows Silas's presence at the edge but will not say whether she trusts him or fears him",
-            "Mara has been holding this choice as the real weight of her errand—not delivery, but decision"
+            "Silas Weir is a Harmonic stationed at the Harmonic Heights before the contamination readings worsened",
+            "Silas was last seen at the sluice-turn upstream, three weeks ago, with tuning equipment—listening to something in the water",
+            "The river was still clean when Silas was there; three weeks of degradation have followed",
+            "The contamination's timeline suggests a sequence of cause and consequence, not random poisoning"
           ],
-          "relationshipDelta": 1
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "In her back garden, speaking plainly now about the weight she has been carrying—ready to watch Adelheid's choice"
         }
       ],
       "intentsHeard": [],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Silas Weir is a Harmonic stationed at the Harmonic Heights before the water contamination readings worsened. He was seen upstream at the contamination's edge three weeks ago with instruments, listening to something in the water. His presence and purpose are now the center of Mara's unspoken errand.",
-          "subjectId": "silas-weir"
-        }
-      ],
+      "factUpdates": [],
       "placeUpdates": [],
       "discovery": null,
       "codexUpdates": [
@@ -391,23 +399,25 @@
           "topic": "silas-weir",
           "label": "Silas Weir",
           "kind": "person",
-          "fact": "A Harmonic stationed at the Harmonic Heights before the water contamination readings worsened. Seen upstream at the contamination's edge three weeks ago with instruments, listening to something in the water. Edvar Crane knows of him and his connection to the crisis. Mara Wells is holding a choice about whether to find him directly or report him to the Harmonic lodge.",
+          "entityId": "silas-weir",
+          "fact": "Harmonic musician stationed at the Harmonic Heights before the water readings worsened. Last seen three weeks ago at the sluice-turn upstream with tuning equipment, listening to something in the water. The river was still clean then; the contamination has deepened in the weeks since.",
           "links": [
             "echo-river-contamination",
             "harmonic",
-            "mara-wells",
-            "edvar-crane"
+            "mara-wells"
           ]
         },
         {
-          "topic": "mara-wells",
-          "label": "Mara Wells",
-          "kind": "person",
-          "fact": "Mara's true errand is a choice: whether Adelheid finds Silas Weir before the Harmonics act on him, or reports him to the Harmonic lodge and lets them decide his fate. She has been holding this choice as the real weight of the work, understanding that either path carries consequence for someone.",
+          "topic": "echo-river-contamination",
+          "label": "Echo River Contamination",
+          "kind": "mystery",
+          "entityId": null,
+          "fact": "The contamination's timeline matches Silas Weir's presence at the sluice-turn three weeks ago. He was listening to something in the water with tuning instruments. The sequence suggests cause and consequence rather than random poisoning—whatever Silas heard may have triggered what is now waking.",
           "links": [
             "silas-weir",
-            "echo-river-contamination",
-            "maras-errand"
+            "precursor-layer",
+            "edvar-crane",
+            "mara-wells"
           ]
         }
       ],
@@ -423,8 +433,8 @@
       "unlockPrecursor": null,
       "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 2,
-        "why": "worked the garden beds through late morning and into afternoon"
+        "hoursPassed": 0.5,
+        "why": "The conversation in the garden—working and speaking, the rhythm of labor giving permission to speak plainly"
       },
       "moveTo": null,
       "stateOps": [],
@@ -442,31 +452,31 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Mara Wells' Store, back garden. Afternoon light now, the melt-water still dripping from the eaves. Fresh-turned earth darker where water has touched it. Spring seedlings breaking through in the prepared beds. Two figures with spades, the rhythm broken now for conversation.",
+      "setting": "Mara Wells' Store, back garden. Afternoon light still warm on the fresh-turned beds. Spring seedlings breaking through the dark mulch. Two cups of hot green-steeped water—one by the bench, one held in Mara's hands as she speaks. The rhythm of garden work interrupted by necessary words.",
       "npcsPresent": [
         {
           "name": "Mara Wells",
-          "state": "Standing with her spade, meeting Adelheid's eyes, having just named the choice she's been holding"
+          "state": "Standing with her spade set aside, holding a cup of steeped green water, meeting Adelheid's eyes with the clarity of som"
         },
         {
           "name": "Aevi",
-          "state": "Motes brightened slightly, attending to the weight of Mara's revelation"
+          "state": "Motes brightened slightly, attending to the weight of the revelation about Silas and the sluice-turn"
         }
       ],
       "objects": [
-        "Two spades",
-        "Two cups of hot green-steeped water, one set on the bench",
+        "Two spades, set aside",
+        "Two cups of hot green-steeped water",
         "Garden beds in various stages of turning",
         "Spring seedlings breaking through dark mulch",
         "The store's back door"
       ],
       "threads": [
-        "Will Adelheid trust Mara enough to take on this choice?",
-        "What does finding Silas Weir actually mean—and what are the real consequences of either path?",
-        "Why was Silas at the contamination's edge with instruments, and what was he listening for?"
+        "Will Adelheid choose to find Silas or report him?",
+        "What was Silas listening for at the sluice-turn, and what has woken since he heard it?",
+        "How does reaching the upstream sluice-turn work in spring melt conditions?"
       ]
     },
-    "beats": 9,
+    "beats": 10,
     "subPlace": {
       "slug": "mara-s-garden",
       "name": "Mara's Garden",
@@ -491,14 +501,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Mara has redirected Adelheid's focus: rather than return to the terraces immediately, she is tasked with walking the river west to measure contamination spread and then finding Edvar Crane at the mill to learn what he has read in the water. A choice waits after both tasks are complete.",
         "Plan shifted: visit Edvar Crane at the mill first to learn what he has read in the water, then walk the river west to measure contamination spread. Mara has confirmed Edvar expects the visit and has been waiting for someone to ask.",
         "Arrived at the mill. Edvar is waiting.",
         "Found Edvar at the mill as expected. He is exhausted, guarded, and insists the water is already far gone—something beneath it is waking. He speaks of the contamination as an active, living threat rather than a passive problem.",
         "Found Edvar at the mill. He refuses to be eased into conversation—he is past gentleness and demands direct engagement. Three weeks of water-reading have exhausted him and hardened him against soft approaches.",
         "Visited Edvar at the mill. He confirmed Silas Weir is connected to the water crisis, though refused fuller explanation. Returning to Mara for next steps.",
         "Edvar confirmed Silas Weir is connected to the water crisis but refused to elaborate. Returning to Mara has revealed she is holding back a larger choice with unnamed costs.",
-        "Mara has named the full shape of her choice: Silas Weir, a Harmonic, was at the Heights before the contamination readings worsened. He was seen upstream at the contamination's edge with instruments. The errand is now a choice: find Silas directly, or report him to the Harmonic lodge and let them act."
+        "Mara has named the full shape of her choice: Silas Weir, a Harmonic, was at the Heights before the contamination readings worsened. He was seen upstream at the contamination's edge with instruments. The errand is now a choice: find Silas directly, or report him to the Harmonic lodge and let them act.",
+        "Mara has revealed that Silas was last seen at the sluice-turn three weeks ago with tuning instruments, listening to something in the water. The contamination's timeline matches his presence there. She is waiting for Adelheid to decide which path to take."
       ],
       "startedAt": "2026-07-08T18:17:05.695Z"
     }
@@ -513,9 +523,8 @@
         "locationId": "millbrook",
         "day": 1
       },
-      "relationship": 3,
+      "relationship": 4,
       "history": [
-        "[d2] Adelheid found her awake and waiting at her work table in the dead of night—she appears to have expected this escalation, or something like it. Her calmness in the face of news of a waking Precursor system will tell what she has known and been preparing for.",
         "[d2] Mara was awake at her work table in the dead of night, apparently expecting—or having prepared for—this escalation. When Adelheid confesses direct contact with the Precursor system, Mara's response is not shock but recalibration. She confirms that Adelheid has compressed a carefully-planned…",
         "[d2] Mara was awake in the store in the dead of night, ledgers open, when Adelheid arrived muddy and shaken from direct contact with the Precursor system. When asked to speak plainly about the system's nature and risks, Mara refused—she named only that the timeline has collapsed to hours instead of…",
         "[d2] Waited through the night while Adelheid slept. Prepared a hand-drawn map with careful notations. Her calculation has moved to the next operational phase—she is ready to brief or to move.",
@@ -524,17 +533,18 @@
         "[d2] Has given Adelheid three tasks: walk the river west to measure contamination spread; find Edvar Crane at the mill to learn what he has read; return for a choice that Adelheid must make. Mara is holding back the full picture but is committed to letting Adelheid gather the information to understand…",
         "[d2] Read Adelheid's return and exhaustion from Edvar's refusal to soften. Confirmed that Edvar spoke about Silas Weir, then offered physical work as grounding—garden beds and harvest-sorting. Her offer suggests she understands how to move people past paralysis: set them to work.",
         "[d2] Offered Adelheid work in the garden as a steadying ground, and used the shared rhythm to shift toward naming the choice she's been holding—something with an unnamed cost that requires real commitment.",
-        "[d2] Named Silas Weir as a Harmonic stationed at the Heights, present at the contamination's edge before the readings worsened. Revealed the true shape of her errand: Adelheid must choose between finding Silas directly or reporting him to the Harmonic lodge. Acknowledged both paths carry cost."
+        "[d2] Named Silas Weir as a Harmonic stationed at the Heights, present at the contamination's edge before the readings worsened. Revealed the true shape of her errand: Adelheid must choose between finding Silas directly or reporting him to the Harmonic lodge. Acknowledged both paths carry cost.",
+        "[d2] Moved past her earlier guardedness when asked directly about Silas. Named him as a Harmonic at the Heights, present at the sluice-turn three weeks ago with tuning instruments. Revealed that the contamination's timeline matches his presence—a sequence, not an accident. She is measuring Adelheid's…"
       ],
       "knownFacts": [
-        "The contamination has spread; Mara needs its current western boundary measured",
-        "Mara understands Adelheid's working pattern—she reads exhaustion and offers action as remedy, not rest",
-        "Mara understands Edvar's pattern—he holds things close but does gradually open when given time rather than pressure",
         "The cost Mara is about to name is something she's been wrestling with privately—it's not casual or light",
         "Mara reads Adelheid's pattern now too: work steadies her more than rest or talk",
         "Silas Weir is Harmonic, stationed at the Heights",
         "Silas was at the contamination's edge three weeks ago with instruments, listening to something in the water",
-        "Mara knows Silas's presence at the edge but will not say whether she trusts him or fears him"
+        "Mara knows Silas's presence at the edge but will not say whether she trusts him or fears him",
+        "Silas Weir is a Harmonic stationed at the Harmonic Heights before the contamination readings worsened",
+        "Silas was last seen at the sluice-turn upstream, three weeks ago, with tuning equipment—listening to something in the water",
+        "The river was still clean when Silas was there; three weeks of degradation have followed"
       ],
       "skillsObserved": [
         "sharp observation",
@@ -548,10 +558,10 @@
         "locationId": "gen-mara-wells-store",
         "day": 2
       },
-      "statusNote": "Awake, prepared, holding the shape of a plan she will not yet fully reveal",
+      "statusNote": "In her back garden, speaking plainly now about the weight she has been carrying—ready to watch Adelheid's choice",
       "gender": "woman",
       "pronouns": "she/her",
-      "met": 13,
+      "met": 14,
       "sex": "female",
       "age": 47
     },
@@ -959,10 +969,6 @@
     "turnsSinceOffer": 0,
     "recentOffers": [
       {
-        "thing": "Mara's written direction to Edvar Crane at the mill",
-        "from": "Mara's operational trust in Adelheid's judgment—she approved the reordering without comment, which is how she signals that a choice is sound"
-      },
-      {
         "thing": "Edvar Crane, waiting at the mill entrance with three weeks of water-reading behind him",
         "from": "Mara's sent direction and Mara's claim that he has been waiting for someone to ask"
       },
@@ -977,6 +983,10 @@
       {
         "thing": "Mara has named the choice that binds everything: find Silas Weir before the Harmonics do, or send word and let them decide his fate",
         "from": "Mara's own need to know Adelheid understands the cost of either path—trust and consequence both matter in her ledger"
+      },
+      {
+        "thing": "Mara's admission that Edvar witnessed Silas at the sluice-turn listening—a concrete location and a specific moment that makes the mystery…",
+        "from": "Mara's willingness to share what she has been holding back, earned by Adelheid's direct questioning and her demonstrated steadiness in the…"
       }
     ],
     "offscreenCursor": 4,
@@ -3263,14 +3273,16 @@
           "[d1] The Echo River runs with a gray-green iridescence on the surface, visible at Millbrook's dock on Day 1 morning. Fish catches are thin. Villagers draw from the well rather than the river without saying…",
           "[d1] Echo Sense reveals fish are actively avoiding the shallows near Millbrook's dock, clustering in deep cold water on the far bank. The riverbed beneath the dock is unnaturally flat and dense — not consi…",
           "[d1] The river runs gray-green at the dock and at the tree-line visible from the Wet Meadows. The Wet Meadows are impassable in early spring due to melt runoff and standing water—direct approach to the river from the terrace side is blocked until the water subsides.",
-          "[d2] Edvar Crane's three-week reading has tracked the contamination's deepening from edge-staining to full saturation. The water is not passively contaminated—something beneath it is actively waking and causing the spread. The phenomenon is ongoing and accelerating."
+          "[d2] Edvar Crane's three-week reading has tracked the contamination's deepening from edge-staining to full saturation. The water is not passively contaminated—something beneath it is actively waking and causing the spread. The phenomenon is ongoing and accelerating.",
+          "[d2] The contamination's timeline matches Silas Weir's presence at the sluice-turn three weeks ago. He was listening to something in the water with tuning instruments. The sequence suggests cause and consequence rather than random poisoning—whatever Silas heard may have triggered what is now waking."
         ],
         "links": [
           "millbrook",
           "mara-wells",
           "uncatalogued-terrace-plants",
           "edvar-crane",
-          "precursor-layer"
+          "precursor-layer",
+          "silas-weir"
         ],
         "createdDay": 1,
         "updatedDay": 2,
@@ -3484,7 +3496,8 @@
         "kind": "person",
         "facts": [
           "[d2] Was at the Harmonic Heights before the water readings got bad. Connected to what is happening in the water contamination. Edvar Crane acknowledges the name and its significance, but holds back full details.",
-          "[d2] A Harmonic stationed at the Harmonic Heights before the water contamination readings worsened. Seen upstream at the contamination's edge three weeks ago with instruments, listening to something in the water. Edvar Crane knows of him and his connection to the crisis. Mara Wells is holding a choice…"
+          "[d2] A Harmonic stationed at the Harmonic Heights before the water contamination readings worsened. Seen upstream at the contamination's edge three weeks ago with instruments, listening to something in the water. Edvar Crane knows of him and his connection to the crisis. Mara Wells is holding a choice…",
+          "[d2] Harmonic musician stationed at the Harmonic Heights before the water readings worsened. Last seen three weeks ago at the sluice-turn upstream with tuning equipment, listening to something in the water. The river was still clean then; the contamination has deepened in the weeks since."
         ],
         "links": [
           "edvar-crane",
@@ -3494,7 +3507,8 @@
         ],
         "aliases": [],
         "createdDay": 2,
-        "updatedDay": 2
+        "updatedDay": 2,
+        "entityId": "silas-weir"
       },
       "the-farwalker": {
         "id": "the-farwalker",
@@ -3594,16 +3608,16 @@
   "itemReclaimVersion": 1,
   "nameRepairVersion": 1,
   "tendencies": {
-    "generous": 3.7253625420582663,
-    "social": 5.999428812968497,
-    "cerebral": 19.73845672015271,
-    "cautious": 17.4246436156518,
-    "strategic": 16.15955158092017,
-    "carousing": 1.0814029390287245,
-    "risky": 0.5420566110419671,
-    "ruthless": 1.2362824209622565,
-    "patient": 0.7569213803350267,
-    "craft": 0.975
+    "generous": 3.6322284785068097,
+    "social": 5.849443092644284,
+    "cerebral": 19.24499530214889,
+    "cautious": 17.989027525260504,
+    "strategic": 15.755562791397164,
+    "carousing": 1.0543678655530064,
+    "risky": 0.5285051957659179,
+    "ruthless": 1.2053753604382,
+    "patient": 0.7379983458266509,
+    "craft": 0.9506249999999999
   },
   "aptitudes": [
     "strategist",
@@ -3612,11 +3626,11 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 62,
+  "actionCount": 63,
   "bondLogFrom": null,
   "teachers": {},
   "regionsKnown": {
-    "valley": 23
+    "valley": 24
   },
   "company": [],
   "forkChoices": {},
@@ -3800,8 +3814,8 @@
   "bands": [],
   "_silasGrantsRevoked": true,
   "reconcileVersion": 63,
-  "updatedAt": 1789523255158,
-  "rev": 41,
+  "updatedAt": 1789523451934,
+  "rev": 42,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -3814,17 +3828,17 @@
   "featureOffers": [],
   "_pinsInitialized": true,
   "_opUnknown": {
-    "sceneSummary": 23
+    "sceneSummary": 24
   },
   "_applyFailures": null,
   "sessions": [
     {
       "id": "sess-1",
       "startedAt": "2026-09-15T23:58:48.323Z",
-      "lastAt": "2026-09-16T01:01:57.764Z",
+      "lastAt": "2026-09-16T01:50:51.909Z",
       "startDay": 77,
       "endDay": 78,
-      "beats": 23
+      "beats": 24
     }
   ],
   "_debtReceipts": [],
@@ -3840,7 +3854,7 @@
     "investigate": 2,
     "analyze": 1,
     "retreat": 1,
-    "careful": 4,
+    "careful": 5,
     "urgent": 1,
     "confront": 1,
     "defer": 1,
@@ -3861,19 +3875,19 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 21,
-    "choices": 21,
-    "questUpdates": 18,
-    "scene": 21,
-    "npcUpdates": 17,
+    "sceneSummary": 22,
+    "choices": 22,
+    "questUpdates": 19,
+    "scene": 22,
+    "npcUpdates": 18,
     "placeUpdates": 8,
-    "codexUpdates": 15,
-    "timeOps": 20,
+    "codexUpdates": 16,
+    "timeOps": 21,
     "imagePrompt": 8,
-    "gambitApt": 20,
-    "sceneEnded": 21,
-    "characterDeltas": 19,
-    "offer": 11,
+    "gambitApt": 21,
+    "sceneEnded": 22,
+    "characterDeltas": 20,
+    "offer": 12,
     "stateOps": 2,
     "deeds": 5,
     "factUpdates": 4,
@@ -3881,7 +3895,7 @@
     "moveTo": 2,
     "_engineClosedScene": 1
   },
-  "_opTurns": 21,
+  "_opTurns": 22,
   "_opCountingSince": "2026-09-15T23:58:48.348Z",
   "gallery": [
     {
@@ -3903,7 +3917,7 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 13,
+      "applied": 14,
       "rejected": 1,
       "lastWhy": "rejected-shape"
     },

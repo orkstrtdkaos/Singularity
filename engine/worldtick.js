@@ -206,8 +206,10 @@ export function arcPeopleView(character, content = {}) {
       contest: ws.arcContests?.[arc.arcId] || null,
       vacancy: ws.arcVacancies?.[arc.arcId] || 0,
       casualties: onArc(ws.arcCasualties).map(c => ({ winner: who(c.winner), loser: who(c.loser), kind: c.kind })),
-      // CCODE-366: a strike that left no trace shows no sender here either — this tab carries only names the news has broadcast
-      strikes: onArc(ws.arcStrikes).map(s => ({ target: who(s.target), sender: s.trace === "none" ? null : who(s.sender), outcome: s.outcome, guard: s.guard ? who(s.guard) : null })),
+      // ⛔ CCODE-370 — Erik: "show the striker but in () you could add (escaped undetected) or something." The tab is the player's own
+      // intelligence (Aevi); the NEWS is what people say, and it stays unsigned (CCODE-366). So the tab names who it was, and says
+      // the valley does not know.
+      strikes: onArc(ws.arcStrikes).map(s => ({ target: who(s.target), sender: who(s.sender), unseen: s.trace === "none", outcome: s.outcome, guard: s.guard ? who(s.guard) : null })),
       births: onArc(ws.arcBirths).map(b => ({ ...b, name: nameOf(b.id) })),
       retrievals: onArc(ws.arcRetrievals).map(r => ({ dead: who(r.deadId), by: who(r.byId), outcome: r.outcome, sealed: !!r.sealed })),
     };

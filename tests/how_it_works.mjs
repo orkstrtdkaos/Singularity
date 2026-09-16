@@ -18245,11 +18245,14 @@ console.log("\n── §254 · a strike is news, and says it was one ──");
     && N254.strikeLine({ strike: "quiet", outcome: "guarded", sender: S, target: T, guard: G, place: "The Greenward", arc: "The Green Schism", guardPower: "Planted Years", flavor: fl254, unseen: true }) === guarded254, unseen254);
   const item254 = W254.clashNewsItem({ text: "x", kind: "death", victimId: "t", killerId: "s" }, { worldDay: 9, strike: "quiet", text: "y", unseen: true });
   const tabSrc254 = rd("engine/worldtab.js").replace(/\r\n/g, "\n");
-  check("§254: ⛔ a name nobody saw is not in the item's ids either — no picture, link or wake can say it — and the world tab says nobody saw by whom",
+  // ⛔ CCODE-370 — Erik: "show the striker but in () you could add (escaped undetected) or something." The news stays unsigned; the
+  // world tab — the player's own intelligence — names the striker and says the valley does not know.
+  const view254 = W254.arcPeopleView({ worldState: { arcStrikes: [{ arcId: "a1", target: "t", sender: "s", outcome: "wounded", trace: "none" }] } },
+    { greaterArcs: [{ id: "a1", name: "A", stages: [{ stage: 1, name: "S" }] }], legends: { roster: [{ id: "t", name: "T" }, { id: "s", name: "S" }] } })[0]?.strikes?.[0];
+  check("§254: ⛔ a name nobody saw is not in the news item's ids either — and the world tab names the striker, marked (escaped undetected)",
     item254.victimId === "t" && !("killerId" in item254) && item254.text === "y" && item254.strike === "quiet"
-    && /s\.sender \? `\$\{person\(s\.target\)\} was struck at by \$\{person\(s\.sender\)\}’s people` : `\$\{person\(s\.target\)\} was struck at — and nobody saw by whom`/.test(tabSrc254)
-    && W254.arcPeopleView({ worldState: { arcStrikes: [{ arcId: "a1", target: "t", sender: "s", outcome: "wounded", trace: "none" }] } },
-         { greaterArcs: [{ id: "a1", name: "A", stages: [{ stage: 1, name: "S" }] }], legends: { roster: [{ id: "t", name: "T" }, { id: "s", name: "S" }] } })[0]?.strikes?.[0]?.sender === null);
+    && /`\$\{person\(s\.target\)\} was struck at by \$\{person\(s\.sender\)\}’s people\$\{s\.unseen \? ` <span class="hint">\(escaped undetected\)<\/span>` : ""\}`/.test(tabSrc254)
+    && view254?.sender?.name === "S" && view254?.unseen === true, JSON.stringify(view254));
 
   /* ---- 2 · ⛔ THROUGH THE REAL PASS ---- */
   const seeded254 = (seed) => { let x = seed >>> 0; return () => { x = (x * 1103515245 + 12345) & 0x7fffffff; return x / 0x7fffffff; }; };

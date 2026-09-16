@@ -1503,13 +1503,25 @@ export function threatToPlayer(ws) {
  *  warding skills" lives exactly there, in a scene the player plays rather than a roll the world makes. */
 export function guardiansFor(ws, roster = [], worldDay = 0, cfg = {}) {
   if (!threatToPlayer(ws)) return null;                    // nobody stands over an unmarked person
-  const arcs = new Set((ws.pendingStrikes || []).filter(t => t && !t.resolved).map(t => t.arcId).filter(Boolean));
+  const threats = (ws.pendingStrikes || []).filter(t => t && !t.resolved && t.arcId);
+  const arcs = new Set(threats.map(t => t.arcId));
   if (!arcs.size) return null;
 
   // Someone who stood on the same side of something — the retrieval rule, pointed at the living.
-  const able = (roster || []).filter(f => f?.id && f.id !== PLAYER_MARK_ID
+  // ⛔ SNG-597 §2: AND THE SAME SIDE, not merely the same arc — someone on the sender's own side of it is the last person to stand
+  // over the one they sent at. The player's side is the other side of the sender's own care on that arc; where the sender's care
+  // cannot be read, the arc alone decides, as before. The sender never guards against their own strike.
+  const byId = new Map((roster || []).filter(f => f?.id).map(f => [f.id, f]));
+  const playerSide = new Map();
+  for (const t of threats) {
+    const s = byId.get(t.sender);
+    const sd = s ? Math.sign(dirSign(currentCares(ws, s).find(c => c.arcId === t.arcId)?.dir)) : 0;
+    if (sd) playerSide.set(t.arcId, -sd);
+  }
+  const senders = new Set(threats.map(t => t.sender).filter(Boolean));
+  const able = (roster || []).filter(f => f?.id && f.id !== PLAYER_MARK_ID && !senders.has(f.id)
     && effectiveEpicStatus(ws, f.id, worldDay) === "active"
-    && currentCares(ws, f).some(c => arcs.has(c.arcId)));
+    && currentCares(ws, f).some(c => arcs.has(c.arcId) && (!playerSide.has(c.arcId) || Math.sign(dirSign(c.dir)) === playerSide.get(c.arcId))));
   if (!able.length) return { marked: true, guardians: [], note: "nobody who shares this fight is free to stand over you" };
 
   // ⚠️ HIGHEST RUNG FIRST, AND THAT IS WHERE "VERY VIP" COMES FROM — it is arithmetic, not flavour. A legend
@@ -2523,6 +2535,32 @@ export function wakeFigure(ws, id, worldDay) {
  *  good. Trying is the risk; that is what makes leaving someone in the dark a real choice too.
  *
  *  Returns { attempts, retrievers } — retrievers is a Set of ids that owe a front to the dead this pass. */
+/** ⛔ SNG-597 §2 — KIN IS THE SAME SIDE OF THE SAME THING, AND THE ONE WHO CARED MOST GOES.
+ *  Aevi: "`dir` IS RIGHT THERE ON EVERY AFFINITY AND IS NEVER COMPARED. Two figures on opposite sides of the same arc are the
+ *  *most* opposed people in the valley, and this reads them as kin." And: "The person who cared most should be reaching, not the
+ *  person who ranks highest."
+ *  ⚑ MEASURED on Loki's save (Erik: "Ossitide is trying to bring someone back… it was a nasty character"): the Scouring Hand's
+ *  loaded record cares about THREE arcs, and Maren Ossitide about two of them — on the OTHER side of both. The arc-only rule found
+ *  68 living "kin" for an Unmaker and took the highest rung among them. The row was not stale; the rule was wrong.
+ *  ⛑ Kin share an arc AND its side; a rival of the dead (either way round) is never kin; and they are ranked by STAKE — the
+ *  weight of their own care in what they shared — with rank only breaking a tie. Returns [{ f, stake, shared }], best first. */
+export function kinOf(ws, dead, living, worldDay) {
+  const sideOf = new Map();
+  for (const c of currentCares(ws, dead)) { const s = Math.sign(dirSign(c.dir)); if (s) sideOf.set(c.arcId, s); }
+  if (!sideOf.size) return [];
+  const rivalsOf = (f) => new Set((f?.rivals || f?.legend?.rivals || []).map(String));
+  const deadRivals = rivalsOf(dead);
+  return (living || [])
+    .filter(f => f?.id && f.id !== dead?.id && effectiveEpicStatus(ws, f.id, worldDay) === "active"
+      && !deadRivals.has(f.id) && !rivalsOf(f).has(String(dead?.id)))
+    .map(f => {
+      const shared = currentCares(ws, f).filter(c => sideOf.has(c.arcId) && Math.sign(dirSign(c.dir)) === sideOf.get(c.arcId));
+      return { f, shared, stake: shared.reduce((a, c) => a + Math.max(1, Math.abs(Number(c.weight)) || 1), 0) };
+    })
+    .filter(x => x.stake > 0)
+    .sort((a, b) => b.stake - a.stake || tierRank(tierOf(ws, b.f)) - tierRank(tierOf(ws, a.f)) || String(a.f.id).localeCompare(String(b.f.id)));
+}
+
 export function attemptRetrievals(ws, roster, living, worldDay, rules = {}, cfg = {}, rng = Math.random) {
   const attempts = [];
   const wanted = [];
@@ -2537,12 +2575,10 @@ export function attemptRetrievals(ws, roster, living, worldDay, rules = {}, cfg 
     // retrieval was ever attempted. Searching for a dead person in the list of the living: it returns
     // nothing, forever, and never once errors.
     const dead = roster.find(f => f.id === id) || { id };
-    const cares = new Set(currentCares(ws, dead).map(c => c.arcId));   // SNG-298: as they are NOW
-    // Someone who stood on the same side of something. Failing that, nobody comes.
-    const kin = living.filter(f => f.id !== id && effectiveEpicStatus(ws, f.id, worldDay) === "active"
-      && currentCares(ws, f).some(c => cares.has(c.arcId)));
+    // Someone who stood on the same SIDE of something, and cared most about it (SNG-597 §2 — `kinOf`). Failing that, nobody comes.
+    const kin = kinOf(ws, dead, living, worldDay);   // SNG-298: cares as they are NOW, through `currentCares`
     if (!kin.length) continue;
-    const who = kin.sort((a, b) => tierRank(tierOf(ws, b)) - tierRank(tierOf(ws, a)))[0];
+    const who = kin[0].f;
     // WHO WANTS THEM BACK — recorded for EVERY reachable dead with living kin, not only the ones somebody
     // reaches for this pass. That is the difference between a corpse and a QUEST: the GM can only offer
     // "go get them back for me" if it knows there is a someone doing the asking. Erik: "we should have

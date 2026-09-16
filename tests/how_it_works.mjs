@@ -18422,6 +18422,54 @@ console.log("\n── §256 · a home is a place that is yours ──");
     && /if \(homeB\) homeB\.onclick = \(\) => travelTo\(homeB\.dataset\.home\);/.test(A256));
 }
 
+// ⛔ SNG-597 §2 (Aevi, from Erik reading the world tab: "Ossitide is trying to bring someone back… but when I looked, it was a nasty
+// character, and I wonder why she would do that.")
+// ⚑ MEASURED on Loki's save: not stale. The Scouring Hand's loaded record cares about three arcs; Maren Ossitide about two of
+// them, on the OTHER side of both. The arc-only selector found 68 living "kin" and took the highest rung.
+console.log("\n── §257 · kin is the same side of the same thing, and the one who cared most goes ──");
+{
+  const W257 = await import("../engine/worldtick.js");
+  const { loadContentHeadless: lch257 } = await import("./headless_content.mjs");
+  const C257 = await lch257();
+
+  /* ---- 1 · ⛔ THE RULE ---- */
+  const dead = { id: "d", name: "The Fallen", arcAffinities: [{ arcId: "A", dir: 1, weight: 1 }, { arcId: "B", dir: -1, weight: 3 }] };
+  const living = [
+    { id: "x", name: "Ally on A", tier: "heroic", arcAffinities: [{ arcId: "A", dir: "pro", weight: 3 }] },
+    { id: "y", name: "Ally on B", tier: "legendary", arcAffinities: [{ arcId: "B", dir: "-", weight: 1 }] },
+    { id: "z", name: "Enemy on A", tier: "mythic", arcAffinities: [{ arcId: "A", dir: -1, weight: 5 }] },
+    { id: "r", name: "A Rival", tier: "legendary", rivals: ["d"], arcAffinities: [{ arcId: "A", dir: 1, weight: 4 }] },
+    { id: "s", name: "Stranger", tier: "epic", arcAffinities: [{ arcId: "C", dir: 1, weight: 5 }] },
+  ];
+  const kin257 = W257.kinOf({ epicStatus: {} }, dead, living, 5);
+  check("§257: ⛔ the other side of the same arc is not kin, a rival is not kin, a stranger is not kin — and the one with the greater stake goes first, not the higher rung",
+    kin257.map(k => k.f.id).join(",") === "x,y" && kin257[0].stake === 3 && kin257[0].shared[0].arcId === "A", kin257.map(k => `${k.f.id}:${k.stake}`).join(" "));
+
+  /* ---- 2 · ⛔ THE REAL CASE ---- */
+  const roster257 = W257.worldRoster({}, C257);
+  const hand = roster257.find(f => f.id === "the_scouring_hand");
+  const maren = roster257.find(f => f.id === "maren_ossitide");
+  const ws257 = { epicStatus: { the_scouring_hand: { status: "dead" } } };
+  const livingReal = roster257.filter(f => f.id !== "the_scouring_hand");
+  const realKin = W257.kinOf(ws257, hand, livingReal, 78);
+  const opposite = (W257.currentCares(ws257, maren) || []).filter(c => (W257.currentCares(ws257, hand) || []).some(h => h.arcId === c.arcId && Math.sign(W257.dirSign(h.dir)) === -Math.sign(W257.dirSign(c.dir))));
+  check("§257: ⛔ Maren Ossitide — on the other side of both arcs she shares with the Scouring Hand — no longer reaches into the dark for an Unmaker",
+    !!hand && !!maren && opposite.length === 2 && !realKin.some(k => k.f.id === "maren_ossitide")
+    && realKin.every(k => k.shared.every(c => (W257.currentCares(ws257, hand) || []).some(h => h.arcId === c.arcId && Math.sign(W257.dirSign(h.dir)) === Math.sign(W257.dirSign(c.dir))))),
+    `${realKin.length} kin; first: ${realKin[0]?.f?.name || "none"}`);
+
+  /* ---- 3 · ⛔ THE SAME SENTENCE, POINTED AT THE LIVING ---- */
+  const wsG = { pendingStrikes: [{ arcId: "A", sender: "snd", kind: "quiet", resolved: false }], epicStatus: {} };
+  const rosterG = [
+    { id: "snd", name: "The Sender", tier: "legendary", arcAffinities: [{ arcId: "A", dir: -1 }] },
+    { id: "hisside", name: "On the Sender's Side", tier: "mythic", arcAffinities: [{ arcId: "A", dir: -1 }] },
+    { id: "yours", name: "On Your Side", tier: "epic", arcAffinities: [{ arcId: "A", dir: 1 }] },
+  ];
+  const guard257 = W257.guardiansFor(wsG, rosterG, 0);
+  check("§257: ⛔ a guardian stands on the player's side of the fight — never the sender, never someone on the sender's own side",
+    guard257?.guardians?.map(x => x.id).join(",") === "yours", JSON.stringify(guard257?.guardians));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

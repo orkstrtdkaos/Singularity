@@ -7526,6 +7526,16 @@
   "gallery": [
     {
       "kind": "ability",
+      "prompt": "bark and branches twigs covering the skin and body armor",
+      "url": "https://image.pollinations.ai/prompt/bark%20and%20branches%20twigs%20covering%20the%20skin%20and%20body%20armor%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=37297&nologo=true",
+      "caption": "Barkskin",
+      "worldDay": 78,
+      "at": "2026-09-16T21:22:56.952Z",
+      "subjectKind": "ability",
+      "subjectId": "barkskin"
+    },
+    {
+      "kind": "ability",
       "prompt": "Unbearable Word",
       "url": "https://image.pollinations.ai/prompt/Unbearable%20Word%3A%20Speak%20one%20true%20thing%20the%20target%20cannot%20bear%2C%20to%20their%20face%2C%20and%20they%20lose%20the%20thread%20%E2%80%94%20the%20argument%2C%20the%20composure%2C%20the%20readiness%2C%20the%20lie%20they%20were%20maintaining.%20Nothing%20blocks%20it.%20The%20Verists'%20first%20offense%2C%20and%20it%20cannot%20be%20withdrawn%20or%20forgotten%20by%20anyone%20w%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20verist%20tradition%3A%20raw%20stone-grey%2C%20no%20ornament%2C%20honest%20brown%3B%20unadorned%20stone%2C%20plain%20wood%2C%20nothing%20decorative%3B%20flat%20honest%20daylight%2C%20no%20flattering%20angle%3B%20a%20truth%20that%20doesn't%20care%20whether%20you%20can%20bear%20it%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20raw%20stone-grey%2C%20no%20ornament%2C%20honest%20brown%2C%20flat%20honest%20daylight%2C%20no%20flattering%20angle%2C%20a%20truth%20that%20doesn't%20care%20whether%20you%20can%20bear%20it?width=1024&height=512&seed=34207&nologo=true",
       "caption": "Unbearable Word",
@@ -8328,8 +8338,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789593654754,
-  "rev": 715,
+  "updatedAt": 1789593776952,
+  "rev": 716,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10456,6 +10466,17 @@
           "note": "animal paths through the woods",
           "seedKey": "wayfinding#r1",
           "at": 77
+        }
+      ]
+    },
+    "ability:barkskin": {
+      "keeps": [
+        {
+          "url": "https://image.pollinations.ai/prompt/bark%20and%20branches%20twigs%20covering%20the%20skin%20and%20body%20armor%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=37297&nologo=true",
+          "prompt": "treebark as skin, bark and branches twigs covering the skin and body armor",
+          "note": "treebark as skin",
+          "seedKey": "barkskin#r3",
+          "at": 78
         }
       ]
     }

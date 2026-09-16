@@ -6,7 +6,7 @@
   "origin": "harmonic",
   "background": "medic",
   "level": 1,
-  "xp": 63,
+  "xp": 68,
   "attributes": {
     "physical": 2,
     "mental": 4,
@@ -53,7 +53,7 @@
   "maxHealth": 25,
   "health": 14,
   "maxEnergy": 116,
-  "energy": 50,
+  "energy": 45,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -185,23 +185,59 @@
         "player": "Accept that Mara has her reasons and her method. Ask her what you SHOULD do right now—what does she need from you, here, today?",
         "summary": "At Mara Wells' Store in early morning, Adelheid learns her task: walk the river west to track how far the contamination has spread, then find Edvar Crane at the mill to learn what he has read in the water these past three weeks. Mara refuses direct explanation but is clear that time is short and that Adelheid's observations—and her choice—will be crucial to what comes next.",
         "narration": "You set down your cup and meet Mara's eyes across the table. The store around you is still quiet—the light coming through the front windows is pale and thin, that particular spring gray that says the sun is still thinking about rising.\n\n\"You're not going to tell me where that system is headed,\" you say. It's not a question. \"And you're not going to tell me why it matters that it's waking hours instead of weeks.\"\n\nMara doesn't look away. She nods, once.\n\n\"Then tell me what I should do right now. What does today need from me?\"\n\nShe sets her own cup down with deliberate care. Her hands are steady, but there's something held in the line of her shoulders—not fear, but readiness. The kind of readiness that comes from making decisions in the dark and committing to them.\n\n\"Three things,\" Mara says. \"First: do not go back to the terraces alone. Not today. Not until you understand what you're walking into.\"\n\nAevi dims slightly at your shoulder, her motes clustering tighter. She hums a low, questioning note.\n\n\"Second: the river is worse. You felt it yourself—the water moves wrong, reads wrong. I need you to walk the bank west from here, past where the gray-green breaks into ordinary green. I need to know how far the contamination has spread since yesterday. You can see things others miss. You'll notice what I cannot.\"\n\nShe leans forward slightly, and now her voice drops.\n\n\"Third, and this is the one that matters: Edvar Crane is at the mill. He's been reading the water for three weeks now—before the council knew to worry about it, before the Harmonic and Radiant started their public argument. He knows something. And he'll talk to you in a way he won't talk to me. Go to him after the river walk. Ask him what he's seen.\"\n\nMara pauses, and you feel the weight of what she's not saying yet.\n\n\"And Adelheid—when you've done those two things, come back here. There's a choice you'll need to make, and you'll understand it better once you've seen the water and heard what Edvar knows. But it needs to be your choice, not mine. That's how this works.\""
+      },
+      {
+        "player": "Go to the mill first, before the river walk. Edvar might be more willing to talk early, before the day's work demands his attention—and what he tells you might guide what to look for on the bank.",
+        "summary": "At Mara Wells' Store, you choose to visit Edvar Crane at the mill first, reading the water-signs before the river walk. Mara confirms the plan with quiet approval and gives you written direction.",
+        "narration": "You nod slowly, thinking it through. The river walk can wait—you need to know what Edvar has seen before you step out into the field to look for yourself. He'll be more himself now, before the mill's work swallows the morning, and what he's read in the water these past three weeks might be the thing that shapes what you're actually hunting for on the western bank.\n\nMara watches you work it out, and something in her expression settles—approval, quiet and operational. She reaches across the table and slides a small folded paper toward you. \"His name and the mill's location, written plain. He knows you're coming. He's been waiting for someone to ask.\" Her voice carries no inflection, but the precision of it—*he's been waiting*—lands like confirmation that this errand has been threading through more than just her ledgers.\n\nYou tuck the paper into your satchel and stand. The store around you is beginning to stir—the pale morning light strengthening by degrees, a customer's footstep on the wooden walk outside. Aevi's motes brighten slightly at your shoulder, sensing the shift toward motion. The river work and whatever Edvar has learned are still ahead; but the day's weight is settling on your shoulders now, and you feel the shape of it—small choices making lines that might matter."
       }
     ],
     "lastTurn": {
-      "narration": "You set down your cup and meet Mara's eyes across the table. The store around you is still quiet—the light coming through the front windows is pale and thin, that particular spring gray that says the sun is still thinking about rising.\n\n\"You're not going to tell me where that system is headed,\" you say. It's not a question. \"And you're not going to tell me why it matters that it's waking hours instead of weeks.\"\n\nMara doesn't look away. She nods, once.\n\n\"Then tell me what I should do right now. What does today need from me?\"\n\nShe sets her own cup down with deliberate care. Her hands are steady, but there's something held in the line of her shoulders—not fear, but readiness. The kind of readiness that comes from making decisions in the dark and committing to them.\n\n\"Three things,\" Mara says. \"First: do not go back to the terraces alone. Not today. Not until you understand what you're walking into.\"\n\nAevi dims slightly at your shoulder, her motes clustering tighter. She hums a low, questioning note.\n\n\"Second: the river is worse. You felt it yourself—the water moves wrong, reads wrong. I need you to walk the bank west from here, past where the gray-green breaks into ordinary green. I need to know how far the contamination has spread since yesterday. You can see things others miss. You'll notice what I cannot.\"\n\nShe leans forward slightly, and now her voice drops.\n\n\"Third, and this is the one that matters: Edvar Crane is at the mill. He's been reading the water for three weeks now—before the council knew to worry about it, before the Harmonic and Radiant started their public argument. He knows something. And he'll talk to you in a way he won't talk to me. Go to him after the river walk. Ask him what he's seen.\"\n\nMara pauses, and you feel the weight of what she's not saying yet.\n\n\"And Adelheid—when you've done those two things, come back here. There's a choice you'll need to make, and you'll understand it better once you've seen the water and heard what Edvar knows. But it needs to be your choice, not mine. That's how this works.\"",
-      "sceneSummary": "At Mara Wells' Store in early morning, Adelheid learns her task: walk the river west to track how far the contamination has spread, then find Edvar Crane at the mill to learn what he has read in the water these past three weeks. Mara refuses direct explanation but is clear that time is short and that Adelheid's observations—and her choice—will be crucial to what comes next.",
+      "narration": "You nod slowly, thinking it through. The river walk can wait—you need to know what Edvar has seen before you step out into the field to look for yourself. He'll be more himself now, before the mill's work swallows the morning, and what he's read in the water these past three weeks might be the thing that shapes what you're actually hunting for on the western bank.\n\nMara watches you work it out, and something in her expression settles—approval, quiet and operational. She reaches across the table and slides a small folded paper toward you. \"His name and the mill's location, written plain. He knows you're coming. He's been waiting for someone to ask.\" Her voice carries no inflection, but the precision of it—*he's been waiting*—lands like confirmation that this errand has been threading through more than just her ledgers.\n\nYou tuck the paper into your satchel and stand. The store around you is beginning to stir—the pale morning light strengthening by degrees, a customer's footstep on the wooden walk outside. Aevi's motes brighten slightly at your shoulder, sensing the shift toward motion. The river work and whatever Edvar has learned are still ahead; but the day's weight is settling on your shoulders now, and you feel the shape of it—small choices making lines that might matter.",
+      "sceneSummary": "At Mara Wells' Store, you choose to visit Edvar Crane at the mill first, reading the water-signs before the river walk. Mara confirms the plan with quiet approval and gives you written direction.",
       "choices": [
         {
-          "label": "Head west along the river bank now, while the light is still dim and early. Use Echo Sense to read what lives and what has fled.",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "label": "Head to the mill now, moving fast through the early-morning streets.",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {},
-          "difficulty": "normal",
+          "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "scout",
-            "study",
-            "careful"
+            "travel",
+            "scout"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Mara if there's anything else she needs you to know about Edvar before you meet him—what kind of man he is, what he's careful about.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Echo Sense to sweep the store and the street beyond before you leave—get a sense of who is moving this early, what the day's shape looks like.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": "very easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "scout"
           ],
           "abilityId": "echo_sense",
           "energyCost": 4,
@@ -210,42 +246,9 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Mara one more direct question before you go—something specific about what she expects you to find, or what Edvar already knows that she doesn't.",
+          "label": "Thank Mara and leave the store quietly—you have enough, and lingering will only invite more questions you won't get clear answers to.",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "negotiate"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Go to the mill first, before the river walk. Edvar might be more willing to talk early, before the day's work demands his attention—and what he tells you might guide what to look for on the bank.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "travel",
-            "plan"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Mara if it's safe to bring Aevi with you—or if the nanite-motes might draw attention to what they are.",
-          "attribute": "social",
-          "subAttribute": "rapport",
           "axes": {},
           "difficulty": "very easy",
           "opposedDifficulty": null,
@@ -271,9 +274,9 @@
           "op": "progress",
           "questId": "maras-errand",
           "title": "Mara's Errand",
-          "summary": "Deliver a cloth-wrapped bundle to Piotr on Terrace Three east, and quietly observe the uncatalogued plants growing along the untended stretch — with permission to take cuttings.",
+          "summary": "Track the contamination, learn from Edvar, then choose.",
           "giver": "Mara Wells",
-          "note": "Mara has redirected Adelheid's focus: rather than return to the terraces immediately, she is tasked with walking the river west to measure contamination spread and then finding Edvar Crane at the mill to learn what he has read in the water. A choice waits after both tasks are complete.",
+          "note": "Plan shifted: visit Edvar Crane at the mill first to learn what he has read in the water, then walk the river west to measure contamination spread. Mara has confirmed Edvar expects the visit and has been waiting for someone to ask.",
           "xpReward": null
         }
       ],
@@ -281,50 +284,50 @@
       "delegateOps": [],
       "arcOps": [],
       "adoptSchool": null,
-      "offer": null,
+      "offer": {
+        "thing": "Mara's written direction to Edvar Crane at the mill",
+        "from": "Mara's operational trust in Adelheid's judgment—she approved the reordering without comment, which is how she signals that a choice is sound"
+      },
       "stageOps": [],
       "scene": {
-        "setting": "Mara Wells' Store, interior — early morning light, pale and thin through the front windows. Early spring gray. Quiet before the day's work begins.",
+        "setting": "Mara Wells' Store, interior — early morning light strengthening now, pale spring gray. The quiet is beginning to thin as the day stirs.",
         "npcsPresent": [
           {
             "name": "Mara Wells",
-            "state": "seated across the table from Adelheid, her ledgers still open, her hands steady; she has just laid out three tasks and is waiting for Adelheid to move"
+            "state": "Seated across the table, having just handed over written direction to the mill. Her ledgers still lie open. She is watching Adelheid with quiet approval, the kind that reads as operational confidence rather than warmth."
           }
         ],
         "objects": [
-          "Two cups of tea, cooling",
+          "Two cups of tea, grown cool",
           "Mara's open ledgers",
-          "The counter beyond, with its neat shelves of goods and records"
+          "The folded paper with Edvar's name and the mill's location",
+          "The counter beyond, with its neat shelves of goods and records",
+          "The front windows, light beginning to strengthen"
         ],
         "threads": [
-          "What Mara is not saying about the Precursor system's destination",
-          "What choice Adelheid will need to make after the river walk and Edvar's account",
-          "Whether the contamination has spread further west along the river"
+          "What Edvar has learned from three weeks of reading the water",
+          "How far west the contamination has spread along the river",
+          "What choice Mara will present after both tasks are complete"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "mara-wells",
-          "name": "Mara Wells",
-          "role": "Millbrook civic manager",
-          "note": "Has given Adelheid three tasks: walk the river west to measure contamination spread; find Edvar Crane at the mill to learn what he has read; return for a choice that Adelheid must make. Mara is holding back the full picture but is committed to letting Adelheid gather the information to understand it. Her readiness is palpable—this escalation with the Precursor system has moved her from planning into action.",
-          "learned": [
-            "Mara has been tracking the water contamination for longer than the council has been openly worried about it",
-            "Edvar Crane has been reading the water for three weeks and knows something Mara considers crucial",
-            "The contamination has spread; Mara needs its current western boundary measured",
-            "A choice is coming that must be Adelheid's own, not Mara's—and understanding it requires seeing the water and hearing Edvar first"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Awake, prepared, holding the shape of a plan she will not yet fully reveal"
-        }
-      ],
+      "npcUpdates": [],
       "intentsHeard": [],
       "factUpdates": [],
       "placeUpdates": [],
       "discovery": null,
-      "codexUpdates": [],
+      "codexUpdates": [
+        {
+          "topic": "edvar-crane",
+          "label": "Edvar Crane",
+          "kind": "person",
+          "entityId": null,
+          "fact": "Mill resident and self-taught water-reader who has been monitoring the contamination for three weeks. Mara Wells says he has been waiting for someone to ask him what he has learned. He expects Adelheid's visit.",
+          "links": [
+            "echo-river-contamination",
+            "millbrook"
+          ]
+        }
+      ],
       "holdingOps": [],
       "debtOps": [],
       "partyOps": [],
@@ -338,7 +341,7 @@
       "unlockSubstrate": null,
       "timeOps": {
         "hoursPassed": 0.5,
-        "why": "conversation and breakfast; dawn is still breaking"
+        "why": "the morning conversation and decision took about thirty minutes; you are now preparing to leave as the day begins to fully wake"
       },
       "moveTo": null,
       "stateOps": [],
@@ -348,33 +351,30 @@
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Mara Wells' Store, interior — early morning light, pale and thin through the front windows. Early spring gray. Quiet before the day's work begins.",
+      "setting": "Mara Wells' Store, interior — early morning light strengthening now, pale spring gray. The quiet is beginning to thin as the day stirs.",
       "npcsPresent": [
         {
           "name": "Mara Wells",
-          "state": "seated across the table from Adelheid, her ledgers still open, her hands steady; she has just laid out three tasks and i"
+          "state": "Seated across the table, having just handed over written direction to the mill. Her ledgers still lie open. She is watch"
         }
       ],
       "objects": [
-        "Two cups of tea, cooling",
+        "Two cups of tea, grown cool",
         "Mara's open ledgers",
-        "The counter beyond, with its neat shelves of goods and records"
+        "The folded paper with Edvar's name and the mill's location",
+        "The counter beyond, with its neat shelves of goods and records",
+        "The front windows, light beginning to strengthen"
       ],
       "threads": [
-        "What Mara is not saying about the Precursor system's destination",
-        "What choice Adelheid will need to make after the river walk and Edvar's account",
-        "Whether the contamination has spread further west along the river"
+        "What Edvar has learned from three weeks of reading the water",
+        "How far west the contamination has spread along the river",
+        "What choice Mara will present after both tasks are complete"
       ]
     },
-    "beats": 1,
+    "beats": 2,
     "subPlace": null
   },
   "clock": {
@@ -395,14 +395,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Tremor Sense revealed a deep Precursor-origin vibration running from the terrace plants toward the contaminated Echo River. The connection is confirmed as artificial, not natural. Mara's note may explain the source and purpose.",
         "Adelheid has confirmed the Precursor system is still active and waking. The connection between the silver-stemmed plants, the vibration, and the river contamination is not a passive artifact—it is a live, aware system. Mara's note is now critical.",
         "Adelheid has confirmed the system is AWAKE and AWARE. The note is no longer information—it is emergency briefing. Return to Mara immediately.",
         "Adelheid has made direct contact with the Precursor system beneath Millbrook and triggered its active awareness. The system is waking. This is no longer observation—this is emergency. Reaching Mara to report is now the critical path.",
         "Adelheid has made direct contact with the Precursor system beneath Millbrook and triggered its active awareness before reading Mara's note. The system is not dormant—it is executing a reclamation directive. Mara confirms the timeline has been compressed from careful weeks to hours or days. The note's contents and Mara's original plan are still unknown.",
         "Adelheid has triggered the Precursor system's active awareness before reading Mara's sealed note. Mara confirms the timeline is now compressed to hours instead of weeks, but refuses to explain the system's nature or risks directly. The note remains sealed and unread.",
         "Adelheid has triggered the Precursor system's active awareness. Mara confirms the timeline is now hours instead of weeks. She will not explain the system's nature or destination directly, but her map shows the system's path running south-southeast from beneath the terraces toward the Echo River. The sealed note remains unread; Mara refuses to explain what it says or what she intends for Adelheid to do next.",
-        "Mara has redirected Adelheid's focus: rather than return to the terraces immediately, she is tasked with walking the river west to measure contamination spread and then finding Edvar Crane at the mill to learn what he has read in the water. A choice waits after both tasks are complete."
+        "Mara has redirected Adelheid's focus: rather than return to the terraces immediately, she is tasked with walking the river west to measure contamination spread and then finding Edvar Crane at the mill to learn what he has read in the water. A choice waits after both tasks are complete.",
+        "Plan shifted: visit Edvar Crane at the mill first to learn what he has read in the water, then walk the river west to measure contamination spread. Mara has confirmed Edvar expects the visit and has been waiting for someone to ask."
       ],
       "startedAt": "2026-07-08T18:17:05.695Z"
     }
@@ -683,12 +683,8 @@
     "lastTickWorldDay": 77,
     "lastCanonWorldDay": 77,
     "pressureQueue": [],
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "Mara Wells waiting awake at her work table—she was already expecting this moment, or something like it.",
-        "from": "Mara's deep knowledge of the terrace plants and their connection to whatever lies beneath; her two seasons of careful watching; her…"
-      },
       {
         "thing": "Aevi's memory of Precursor reclamation systems—a fragment of old knowledge surfacing",
         "from": "Adelheid's direct contact with the waking system, forcing Aevi's recognition of the pattern and her need to name what she knows"
@@ -704,6 +700,10 @@
       {
         "thing": "Mara's refusal to explain—stated plainly as a working question: 'That's the one I'm still working on.'",
         "from": "Mara Wells' own method and boundaries. She shares information on a need-to-know basis, and she believes Adelheid does not yet need to know…"
+      },
+      {
+        "thing": "Mara's written direction to Edvar Crane at the mill",
+        "from": "Mara's operational trust in Adelheid's judgment—she approved the reordering without comment, which is how she signals that a choice is sound"
       }
     ]
   },
@@ -923,6 +923,22 @@
         "createdDay": 2,
         "entityId": "gen-mara-wells-store",
         "updatedDay": 2
+      },
+      "edvar-crane": {
+        "id": "edvar-crane",
+        "label": "Edvar Crane",
+        "kind": "person",
+        "facts": [
+          "[d2] Mill resident and self-taught water-reader who has been monitoring the contamination for three weeks. Mara Wells says he has been waiting for someone to ask him what he has learned. He expects Adelheid's visit."
+        ],
+        "links": [
+          "echo-river-contamination",
+          "millbrook"
+        ],
+        "aliases": [],
+        "createdDay": 2,
+        "entityId": "edvar-crane",
+        "updatedDay": 2
       }
     }
   },
@@ -1003,15 +1019,15 @@
   "itemReclaimVersion": 1,
   "nameRepairVersion": 1,
   "tendencies": {
-    "generous": 4.561751440885747,
-    "social": 4.024496623298922,
-    "cerebral": 22.94546664333612,
-    "cautious": 19.036210604459836,
-    "strategic": 17.709985604068248,
-    "carousing": 1.3241909638590041,
-    "risky": 0.6637548691022577,
-    "ruthless": 1.5138427606700533,
-    "patient": 0.9268593749999999
+    "generous": 4.447707654863603,
+    "social": 3.9238842077164486,
+    "cerebral": 22.371829977252716,
+    "cautious": 18.56030533934834,
+    "strategic": 18.26723596396654,
+    "carousing": 1.291086189762529,
+    "risky": 0.6471609973747012,
+    "ruthless": 1.4759966916533018,
+    "patient": 0.9036878906249999
   },
   "aptitudes": [
     "strategist",
@@ -1020,11 +1036,11 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 54,
+  "actionCount": 55,
   "bondLogFrom": null,
   "teachers": {},
   "regionsKnown": {
-    "valley": 15
+    "valley": 16
   },
   "company": [],
   "forkChoices": {},
@@ -1208,8 +1224,8 @@
   "bands": [],
   "_silasGrantsRevoked": true,
   "reconcileVersion": 63,
-  "updatedAt": 1789519178351,
-  "rev": 28,
+  "updatedAt": 1789519283255,
+  "rev": 29,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -1222,17 +1238,17 @@
   "featureOffers": [],
   "_pinsInitialized": true,
   "_opUnknown": {
-    "sceneSummary": 15
+    "sceneSummary": 16
   },
   "_applyFailures": null,
   "sessions": [
     {
       "id": "sess-1",
       "startedAt": "2026-09-15T23:58:48.323Z",
-      "lastAt": "2026-09-16T00:39:38.348Z",
+      "lastAt": "2026-09-16T00:41:23.245Z",
       "startDay": 77,
       "endDay": 78,
-      "beats": 15
+      "beats": 16
     }
   ],
   "_debtReceipts": [],
@@ -1241,7 +1257,7 @@
     "scout": 4,
     "study": 4,
     "ask": 2,
-    "travel": 3,
+    "travel": 4,
     "coerce": 1,
     "threaten": 1,
     "meditate": 1,
@@ -1256,7 +1272,8 @@
     "endure": 1,
     "practical": 1,
     "negotiate": 1,
-    "help": 1
+    "help": 1,
+    "plan": 1
   },
   "aptitudeEarnCount": {
     "tactician": 1,
@@ -1265,19 +1282,19 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 15,
-    "choices": 15,
-    "questUpdates": 13,
-    "scene": 15,
+    "sceneSummary": 16,
+    "choices": 16,
+    "questUpdates": 14,
+    "scene": 16,
     "npcUpdates": 12,
     "placeUpdates": 6,
-    "codexUpdates": 11,
-    "timeOps": 15,
+    "codexUpdates": 12,
+    "timeOps": 16,
     "imagePrompt": 7,
-    "gambitApt": 14,
-    "sceneEnded": 15,
-    "characterDeltas": 14,
-    "offer": 8,
+    "gambitApt": 15,
+    "sceneEnded": 16,
+    "characterDeltas": 15,
+    "offer": 9,
     "stateOps": 2,
     "deeds": 4,
     "factUpdates": 4,
@@ -1285,7 +1302,7 @@
     "moveTo": 1,
     "_engineClosedScene": 1
   },
-  "_opTurns": 15,
+  "_opTurns": 16,
   "_opCountingSince": "2026-09-15T23:58:48.348Z",
   "gallery": [
     {
@@ -1307,7 +1324,7 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 8,
+      "applied": 9,
       "rejected": 0,
       "lastWhy": null
     },

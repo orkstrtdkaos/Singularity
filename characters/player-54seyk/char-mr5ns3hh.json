@@ -6,7 +6,7 @@
   "origin": "harmonic",
   "background": "medic",
   "level": 1,
-  "xp": 27,
+  "xp": 29,
   "attributes": {
     "physical": 2,
     "mental": 4,
@@ -52,7 +52,7 @@
   "maxHealth": 25,
   "health": 23,
   "maxEnergy": 116,
-  "energy": 75,
+  "energy": 70,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -182,56 +182,44 @@
         "player": "Walk down the terrace with Aevi toward the Wet Meadows—follow the root angle yourself. What the river shows you may tell you more than Piotr ever will.",
         "summary": "Adelheid attempts to follow the root angle to the Echo River through the Wet Meadows at dusk; the spring melt turns the ground treacherous and halts her approach short of the water.",
         "narration": "You stand, the wrapped cutting secure under one arm, and turn toward the downslope path without waiting for an answer Piotr will not give. Aevi brightens at your shoulder—a small constellation of teal motes condensing tight, following your movement. The evening light is already slanting long across the terraces, and the air carries the particular cold of early spring nights, the kind that settles fast once the sun tips toward the ridge.\n\nThe path down from Terrace Three east is worn but uneven—old stone steps, some of them cracked, others sunk an inch or two from the seasons of melt and settling. Your boots find the rhythm of descent, and the valley floor rises to meet you in pieces: the Wet Meadows first, still sodden from the spring runoff, their grass dark and slick. Then the tree-line where the Echo River cuts its ribbon through the land.\n\nBut the meadows themselves are worse than you expected. What should be navigable ground has turned to something between mud and water—the melt has come early and hard this year, and the drainage channels that usually carry it away are backing up. Your first real step into the open ground sinks past your ankle. The second breaks through a skin of half-frozen turf into cold water underneath. The wrapped cutting stays dry in your grip, but forward progress becomes a negotiation with every step—the ground deciding whether to hold you or let you slide.\n\nAevi dims slightly, her motes clustering closer, wary. You press on toward the tree-line anyway, toward where you can see the gray-green ribbon of the river through the trunks. But the meadow is not done with you. A hidden channel—one of the old irrigation runs gone to standing water—opens beneath your boot without warning. You catch yourself on one knee, mud coating your leg from hip to calf, the cold shocking your skin. The wrapped cutting is safe, held high, but the moment is lost. The light is fading faster now. The river is still a hundred paces away, and the ground between here and there is a maze of water and mud and half-solid earth that will take you twice as long to cross, if you cross it at all."
+      },
+      {
+        "player": "Turn back to Piotr and read Mara's note aloud—force the bundle open if he won't.",
+        "summary": "Adelheid returns to Piotr and attempts to force the note open; Piotr refuses with quiet firmness and turns away.",
+        "narration": "You turn back up the slope, your boots slipping once on the wet stone. Piotr hasn't moved—he's still at the retaining wall, the bundle held against his chest now, his shoulders rigid. Aevi dims slightly at your shoulder, a small sign of her own unease.\n\n\"Piotr,\" you call, climbing back toward him. \"I need to read what Mara wrote. Open the bundle, or I will.\"\n\nHe steps back. Not far—just one pace, but deliberate. His voice, when it comes, is quieter than before and harder. \"No.\"\n\nYou reach for the bundle. His hand closes on it tighter, and when you pull, he doesn't yield—he turns his body away, shielding it. The cord holding the cloth doesn't tear; your grip finds nothing but linen and his refusal. \"Mara said to wait,\" he says, each word distinct. \"For her to tell you. Not for you to take it.\"\n\nThe light is failing fast now. The meadows below have gone from gold to gray, and the river beyond the tree-line is no longer visible at all—just a sound, distant and patient. Piotr's silence settles back in, but this time it carries weight. He will not open that bundle for you, and he will not be forced by someone who has known him for half a day."
       }
     ],
     "lastTurn": {
-      "narration": "You stand, the wrapped cutting secure under one arm, and turn toward the downslope path without waiting for an answer Piotr will not give. Aevi brightens at your shoulder—a small constellation of teal motes condensing tight, following your movement. The evening light is already slanting long across the terraces, and the air carries the particular cold of early spring nights, the kind that settles fast once the sun tips toward the ridge.\n\nThe path down from Terrace Three east is worn but uneven—old stone steps, some of them cracked, others sunk an inch or two from the seasons of melt and settling. Your boots find the rhythm of descent, and the valley floor rises to meet you in pieces: the Wet Meadows first, still sodden from the spring runoff, their grass dark and slick. Then the tree-line where the Echo River cuts its ribbon through the land.\n\nBut the meadows themselves are worse than you expected. What should be navigable ground has turned to something between mud and water—the melt has come early and hard this year, and the drainage channels that usually carry it away are backing up. Your first real step into the open ground sinks past your ankle. The second breaks through a skin of half-frozen turf into cold water underneath. The wrapped cutting stays dry in your grip, but forward progress becomes a negotiation with every step—the ground deciding whether to hold you or let you slide.\n\nAevi dims slightly, her motes clustering closer, wary. You press on toward the tree-line anyway, toward where you can see the gray-green ribbon of the river through the trunks. But the meadow is not done with you. A hidden channel—one of the old irrigation runs gone to standing water—opens beneath your boot without warning. You catch yourself on one knee, mud coating your leg from hip to calf, the cold shocking your skin. The wrapped cutting is safe, held high, but the moment is lost. The light is fading faster now. The river is still a hundred paces away, and the ground between here and there is a maze of water and mud and half-solid earth that will take you twice as long to cross, if you cross it at all.",
-      "sceneSummary": "Adelheid attempts to follow the root angle to the Echo River through the Wet Meadows at dusk; the spring melt turns the ground treacherous and halts her approach short of the water.",
+      "narration": "You turn back up the slope, your boots slipping once on the wet stone. Piotr hasn't moved—he's still at the retaining wall, the bundle held against his chest now, his shoulders rigid. Aevi dims slightly at your shoulder, a small sign of her own unease.\n\n\"Piotr,\" you call, climbing back toward him. \"I need to read what Mara wrote. Open the bundle, or I will.\"\n\nHe steps back. Not far—just one pace, but deliberate. His voice, when it comes, is quieter than before and harder. \"No.\"\n\nYou reach for the bundle. His hand closes on it tighter, and when you pull, he doesn't yield—he turns his body away, shielding it. The cord holding the cloth doesn't tear; your grip finds nothing but linen and his refusal. \"Mara said to wait,\" he says, each word distinct. \"For her to tell you. Not for you to take it.\"\n\nThe light is failing fast now. The meadows below have gone from gold to gray, and the river beyond the tree-line is no longer visible at all—just a sound, distant and patient. Piotr's silence settles back in, but this time it carries weight. He will not open that bundle for you, and he will not be forced by someone who has known him for half a day.",
+      "sceneSummary": "Adelheid returns to Piotr and attempts to force the note open; Piotr refuses with quiet firmness and turns away.",
       "choices": [
         {
-          "label": "Turn back to Piotr and read Mara's note aloud—force the bundle open if he won't.",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Go back down to the Wet Meadows alone—the river will speak to you if you listen carefully enough.",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "axes": {},
           "difficulty": "hard",
           "opposedDifficulty": null,
           "intentTags": [
-            "coerce",
-            "threaten"
+            "travel",
+            "scout",
+            "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
+          "abilityId": "echo_sense",
+          "energyCost": 4,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Steady yourself and push on toward the river—there is still light enough if you move fast.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
-          "difficulty": "very hard",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "risky",
-            "endure"
-          ],
-          "abilityId": "drumline_stride",
-          "energyCost": 7,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Climb back up to the terrace and ask Piotr plainly what is in the note—appeal to his care for the valley.",
+          "label": "Walk back to Millbrook village proper and find Mara—confront her directly about what she's hiding and why she won't tell you plainly.",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "presence",
           "axes": {},
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "negotiate",
-            "calm"
+            "travel"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -240,15 +228,14 @@
           "emergenceId": null
         },
         {
-          "label": "Return to the terrace and camp there for the night—read the note by firelight with Piotr if he allows it.",
+          "label": "Accept the boundary Piotr has set and return to the village for shelter and rest—you'll need both before you do anything else.",
           "attribute": "practical",
-          "subAttribute": "craft",
+          "subAttribute": "wits",
           "axes": {},
-          "difficulty": "easy",
+          "difficulty": "very easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "careful",
-            "plan"
+            "travel"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -259,7 +246,7 @@
       ],
       "deeds": [],
       "characterDeltas": {
-        "health": -2,
+        "health": 0,
         "energy": 0,
         "inventoryAdd": [],
         "inventoryRemove": [],
@@ -270,91 +257,63 @@
         {
           "op": "progress",
           "questId": "maras-errand",
-          "title": "Mara's Errand",
-          "summary": "Deliver a cloth-wrapped bundle to Piotr on Terrace Three east, and quietly observe the uncatalogued plants growing along the untended stretch — with permission to take cuttings.",
-          "giver": "Mara Wells",
-          "note": "Adelheid attempted to verify the root system's direction by following it to the Echo River. The spring melt made the Wet Meadows impassable. The note inside the bundle remains unread, and Piotr's silence still stands.",
-          "xpReward": null
+          "note": "Adelheid attempted to force Mara's note open from Piotr. He refused and will not be moved by pressure or proximity. The boundary is now clearly marked."
         }
       ],
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
-      "adoptSchool": null,
-      "offer": null,
+      "adoptSchool": {},
+      "offer": {
+        "thing": "Piotr's quiet, unyielding refusal—a person's boundary holding firm against pressure",
+        "from": "Piotr's loyalty to Mara and her written instruction; his understanding that Adelheid is a stranger despite her competence"
+      },
       "stageOps": [],
       "scene": {
-        "setting": "Wet Meadows, early evening. The spring melt has transformed the ground into a treacherous maze of mud, standing water, and half-frozen turf. The Echo River is visible through the tree-line a hundred paces south-southeast, a gray-green ribbon in the fading light. The temperature is dropping fast.",
+        "setting": "Terrace Three east, at the retaining wall overlooking the Wet Meadows. Early evening, light failing fast. The air is cold and still. The river is no longer visible beyond the tree-line, only audible in the distance.",
         "npcsPresent": [
           {
             "name": "Piotr",
-            "state": "Still on Terrace Three east above, holding the cloth bundle, waiting"
+            "state": "Standing at the retaining wall, the cloth bundle held against his chest, having just refused Adelheid's attempt to take it. His body language is closed; his refusal is complete."
           }
         ],
         "objects": [
-          "Silver-stemmed cutting (linen-wrapped, in Adelheid's grip)",
+          "Cloth bundle (Mara's note inside, held by Piotr)",
+          "Silver-stemmed cutting (wrapped in linen, in Adelheid's grip)",
           "Medic's Satchel (carried)",
           "Traveler's Pack (carried)",
-          "Mud and slick grass underfoot",
-          "Tree-line separating the meadows from the river"
+          "Stone retaining wall"
         ],
         "threads": [
-          "Mara's private note, still sealed inside the cloth bundle on the terrace",
-          "The Echo River's true condition—visible but unreached",
-          "Piotr's knowledge and his refusal to speak",
-          "Aevi's quiet unease about the contaminated water"
+          "Mara's written note remains sealed and unread",
+          "Piotr's knowledge remains withheld",
+          "The Echo River's true condition is still unreached",
+          "The connection between the silver-stemmed plants and the contaminated water is confirmed but unexplained"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "piotr",
-          "name": "Piotr",
-          "role": "Terrace farmer, Terrace Three east",
-          "age": 54,
-          "sex": "male",
-          "gender": "man",
-          "pronouns": "he/him",
-          "note": "Adelheid attempted to follow the root system to the river without his help. He remains on the terrace, holding the bundle, his silence unbroken.",
-          "statusNote": "Active on Terrace Three east, holding the cloth bundle with Mara's unread note, waiting"
+          "note": "Adelheid attempted to force the bundle open. Piotr refused with quiet firmness, stepping back and shielding the bundle against his chest. His refusal is not angry but absolute—he is bound by Mara's instruction and will not break it for coercion or proximity. The boundary between stranger and trusted is now clearly marked in his body language.",
+          "learned": [
+            "Piotr can be pressured but will not yield to force from someone he does not trust",
+            "Piotr's loyalty to Mara overrides his willingness to help a competent stranger",
+            "Piotr understands that the note must come from Mara herself, not be taken by the recipient"
+          ],
+          "relationshipDelta": -1
         }
       ],
       "intentsHeard": [],
       "factUpdates": [],
-      "placeUpdates": [
-        {
-          "note": "The Wet Meadows are impassable at dusk in early spring—melt runoff has created standing water and treacherous ground. The river is visible through the tree-line but cannot be reached without serious difficulty.",
-          "subPlace": {
-            "name": "The Wet Meadows",
-            "parent": "Millbrook",
-            "note": "Standing water and mud from spring melt; old irrigation channels backing up; difficult passage south-southeast toward the Echo River",
-            "visited": true
-          }
-        }
-      ],
-      "discovery": null,
+      "placeUpdates": [],
+      "discovery": {},
       "codexUpdates": [
         {
-          "topic": "echo-river-contamination",
-          "label": "Echo River Contamination",
-          "kind": "mystery",
-          "fact": "The river runs gray-green at the dock and at the tree-line visible from the Wet Meadows. The Wet Meadows are impassable in early spring due to melt runoff and standing water—direct approach to the river from the terrace side is blocked until the water subsides.",
-          "links": [
-            "millbrook",
-            "mara-wells",
-            "uncatalogued-terrace-plants"
-          ]
-        },
-        {
-          "topic": "maras-errand",
-          "label": "Mara's Errand",
-          "kind": "event",
-          "fact": "Mara's written instructions to Piotr remain sealed inside the cloth bundle. Piotr will not open it or share its contents until Adelheid either reads it herself or returns it unopened to Mara.",
-          "links": [
-            "mara-wells",
-            "piotr",
-            "uncatalogued-terrace-plants"
-          ]
+          "topic": "piotr",
+          "kind": "person",
+          "entityId": "piotr",
+          "fact": "Piotr will not yield the bundle or reveal Mara's note to someone who attempts to take it by force. His loyalty to Mara's written instruction is absolute, and he understands the boundary between a stranger and a trusted person—he will not cross it even under pressure."
         }
       ],
       "holdingOps": [],
@@ -365,51 +324,66 @@
       "projectOps": [],
       "bandOps": [],
       "deathOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
+      "newEncounter": {},
+      "unlockPrecursor": {},
+      "unlockSubstrate": {},
       "timeOps": {
-        "hoursPassed": 2,
-        "why": "Descended the terrace and traversed the Wet Meadows in failing light"
+        "hoursPassed": 1,
+        "why": "A long attempt to pressure information, the failed confrontation, and the approach of true darkness—the character is now standing on the terrace at dusk."
       },
-      "moveTo": null,
-      "stateOps": [],
+      "moveTo": {},
+      "stateOps": [
+        {
+          "op": "correctEntityField",
+          "kind": "npc",
+          "id": "piotr",
+          "field": "age",
+          "to": 51
+        },
+        {
+          "op": "correctEntityField",
+          "kind": "npc",
+          "id": "piotr",
+          "field": "sex",
+          "to": "male"
+        }
+      ],
       "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": null,
-      "newAbility": null,
-      "gambitOps": null,
+      "deriveItem": {},
+      "imagePrompt": "Piotr at the retaining wall in the fading evening light, the cloth bundle pressed against his chest, his body angled away from Adelheid—a man whose loyalty to an unread instruction holds firmer than any stranger's demand. Behind him, the meadows fall away into shadow.",
+      "newAbility": {},
+      "gambitOps": {},
       "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
+      "markDefiningMoment": {},
+      "markTeacher": {},
+      "offerPromotion": {},
+      "offerAcquisition": {},
+      "offerIntent": {},
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Wet Meadows, early evening. The spring melt has transformed the ground into a treacherous maze of mud, standing water, and half-frozen turf. The Echo River is visible through the tree-line a hundred paces south-southeast, a gray-green ribbon in the fading light. The temperature is dropping fast.",
+      "setting": "Terrace Three east, at the retaining wall overlooking the Wet Meadows. Early evening, light failing fast. The air is cold and still. The river is no longer visible beyond the tree-line, only audible in the distance.",
       "npcsPresent": [
         {
           "name": "Piotr",
-          "state": "Still on Terrace Three east above, holding the cloth bundle, waiting"
+          "state": "Standing at the retaining wall, the cloth bundle held against his chest, having just refused Adelheid's attempt to take "
         }
       ],
       "objects": [
-        "Silver-stemmed cutting (linen-wrapped, in Adelheid's grip)",
+        "Cloth bundle (Mara's note inside, held by Piotr)",
+        "Silver-stemmed cutting (wrapped in linen, in Adelheid's grip)",
         "Medic's Satchel (carried)",
         "Traveler's Pack (carried)",
-        "Mud and slick grass underfoot",
-        "Tree-line separating the meadows from the river"
+        "Stone retaining wall"
       ],
       "threads": [
-        "Mara's private note, still sealed inside the cloth bundle on the terrace",
-        "The Echo River's true condition—visible but unreached",
-        "Piotr's knowledge and his refusal to speak",
-        "Aevi's quiet unease about the contaminated water"
+        "Mara's written note remains sealed and unread",
+        "Piotr's knowledge remains withheld",
+        "The Echo River's true condition is still unreached",
+        "The connection between the silver-stemmed plants and the contaminated water is confirmed but unexplained"
       ]
     },
-    "beats": 3,
+    "beats": 4,
     "subPlace": {
       "slug": "the-wet-meadows",
       "name": "The Wet Meadows",
@@ -418,8 +392,8 @@
   },
   "clock": {
     "schemaVersion": 1,
-    "day": 1,
-    "hour": 23,
+    "day": 2,
+    "hour": 0,
     "realAnchor": null
   },
   "companions": [
@@ -434,14 +408,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Bundle in hand. Mara specified the plant note inside is between Adelheid and Piotr only.",
         "Bundle delivered to Piotr on Terrace Three east. Note left private. Uncatalogued plants observed at the east edge — study pending.",
         "Bundle delivered. Adelheid has reached the uncatalogued east-edge plants and felt a hum through the stem on first contact — active observation now underway.",
         "Echo Sense confirms: roots are unified and deep — far past the terrace cut — and the internal hum travels south-southeast along a shared root system. Aevi calls it one system. Piotr is watching Adelhe",
         "Cutting taken carefully — node spacing and root angle (20° south-southeast) recorded in linen. Aevi went bright and silent at the moment of the cut. Piotr's eyes went to the cutting, not Adelheid's fa",
         "Cutting taken and wrapped. Root system traced south-southeast toward the Echo River—the contaminated water. The mystery deepens.",
         "Adelheid confronted Piotr directly about the plants and the river. Piotr refused to speak, citing Mara's private instructions and referring her to the unread note in the bundle.",
-        "Adelheid attempted to verify the root system's direction by following it to the Echo River. The spring melt made the Wet Meadows impassable. The note inside the bundle remains unread, and Piotr's silence still stands."
+        "Adelheid attempted to verify the root system's direction by following it to the Echo River. The spring melt made the Wet Meadows impassable. The note inside the bundle remains unread, and Piotr's silence still stands.",
+        "Adelheid attempted to force Mara's note open from Piotr. He refused and will not be moved by pressure or proximity. The boundary is now clearly marked."
       ],
       "startedAt": "2026-07-08T18:17:05.695Z"
     }
@@ -498,7 +472,7 @@
         "locationId": "millbrook",
         "day": 1
       },
-      "relationship": 1,
+      "relationship": 0,
       "history": [
         "[d1] Received the bundle from Adelheid without questions. Confirmed the note is inside; stopped himself from opening it in front of her. Manner suggests he was expecting this delivery.",
         "[d1] Watched Adelheid move toward the silver-stemmed plants. Did not stop her. Did not look away. Holding the bundle still.",
@@ -508,17 +482,18 @@
         "[d1] Sex recorded: male.",
         "[d1] Watching the wrapped cutting now, not Adelheid's face. His stillness has shifted from guarded to confirmatory—he is waiting to see if she understands where the roots lead. The bundle is still in both his hands, the cord half-loosened but not opened.",
         "[d1] Adelheid asked him directly about the plants and the river. He refused to speak, citing Mara's instructions and the written note in the bundle. His refusal was firm—a boundary he will not cross with a stranger.",
-        "[d1] Adelheid attempted to follow the root system to the river without his help. He remains on the terrace, holding the bundle, his silence unbroken."
+        "[d1] Adelheid attempted to follow the root system to the river without his help. He remains on the terrace, holding the bundle, his silence unbroken.",
+        "[d1] Adelheid attempted to force the bundle open. Piotr refused with quiet firmness, stepping back and shielding the bundle against his chest. His refusal is not angry but absolute—he is bound by Mara's instruction and will not break it for coercion or proximity. The boundary between stranger and…"
       ],
       "knownFacts": [
-        "Works Terrace Three east himself; knows this land well",
-        "He watches the east-edge plants without approaching them — possible familiarity or wariness",
-        "He watches the east-edge plants without approaching — pattern suggests he has made a conscious choice not to touch them",
         "He watches Adelheid's expression during her ability use — suggesting he is waiting to see what she finds, not whether she uses an ability",
         "His attention moved to the cutting the instant it was separated — suggesting the plant or its removal means something specific to him",
         "He knows the silver-stemmed plants are rooted toward the contaminated Echo River",
         "He has chosen not to tell Adelheid directly—he is watching to see if she figures it out",
-        "He trusted Mara enough to accept this errand and receive a private note"
+        "He trusted Mara enough to accept this errand and receive a private note",
+        "Piotr can be pressured but will not yield to force from someone he does not trust",
+        "Piotr's loyalty to Mara overrides his willingness to help a competent stranger",
+        "Piotr understands that the note must come from Mara herself, not be taken by the recipient"
       ],
       "skillsObserved": [
         "careful handling of fragile goods",
@@ -535,7 +510,7 @@
       },
       "gender": "man",
       "pronouns": "he/him",
-      "met": 8,
+      "met": 9,
       "sex": "male",
       "age": 54
     }
@@ -696,7 +671,13 @@
     "lastTickWorldDay": 77,
     "lastCanonWorldDay": 77,
     "pressureQueue": [],
-    "turnsSinceOffer": 3
+    "turnsSinceOffer": 0,
+    "recentOffers": [
+      {
+        "thing": "Piotr's quiet, unyielding refusal—a person's boundary holding firm against pressure",
+        "from": "Piotr's loyalty to Mara and her written instruction; his understanding that Adelheid is a stranger despite her competence"
+      }
+    ]
   },
   "bio": {
     "hometown": "a small village in Switzerland",
@@ -807,7 +788,8 @@
           "[d1] Compact farmer, Terrace Three east. Was expecting Mara's bundle. Sparing with words. Trusted enough by Mara to receive a private plant note.",
           "[d1] Terrace farmer, Terrace Three east",
           "[d1] Piotr knows that the silver-stemmed plants are rooted toward the contaminated Echo River. He is waiting to see if Adelheid will understand what she is holding.",
-          "[d1] Piotr refuses to speak about the silver-stemmed plants or their root system to anyone but Mara. He is bound by her private instructions and will not cross that boundary with a stranger, even when directly confronted."
+          "[d1] Piotr refuses to speak about the silver-stemmed plants or their root system to anyone but Mara. He is bound by her private instructions and will not cross that boundary with a stranger, even when directly confronted.",
+          "[d1] Piotr will not yield the bundle or reveal Mara's note to someone who attempts to take it by force. His loyalty to Mara's written instruction is absolute, and he understands the boundary between a stranger and a trusted person—he will not cross it even under pressure."
         ],
         "links": [
           "mara-wells",
@@ -920,13 +902,14 @@
   "itemReclaimVersion": 1,
   "nameRepairVersion": 1,
   "tendencies": {
-    "generous": 4.826232282263639,
-    "social": 4.0982430928230675,
-    "cerebral": 23.095252596000705,
-    "cautious": 22.29996804179965,
-    "strategic": 21.866472419481052,
-    "carousing": 1.7943007207905641,
-    "risky": 0.8993988575391301
+    "generous": 4.705576475207048,
+    "social": 3.995787015502491,
+    "cerebral": 22.517871281100685,
+    "cautious": 21.74246884075466,
+    "strategic": 21.319810608994025,
+    "carousing": 1.7494432027708,
+    "risky": 0.8769138861006518,
+    "ruthless": 2
   },
   "aptitudes": [
     "strategist",
@@ -935,11 +918,11 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 42,
+  "actionCount": 43,
   "bondLogFrom": null,
   "teachers": {},
   "regionsKnown": {
-    "valley": 3
+    "valley": 4
   },
   "company": [],
   "forkChoices": {},
@@ -1123,8 +1106,8 @@
   "bands": [],
   "_silasGrantsRevoked": true,
   "reconcileVersion": 63,
-  "updatedAt": 1789517179159,
-  "rev": 10,
+  "updatedAt": 1789517350955,
+  "rev": 11,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -1137,17 +1120,17 @@
   "featureOffers": [],
   "_pinsInitialized": true,
   "_opUnknown": {
-    "sceneSummary": 3
+    "sceneSummary": 4
   },
   "_applyFailures": null,
   "sessions": [
     {
       "id": "sess-1",
       "startedAt": "2026-09-15T23:58:48.323Z",
-      "lastAt": "2026-09-16T00:06:19.153Z",
+      "lastAt": "2026-09-16T00:09:10.947Z",
       "startDay": 77,
       "endDay": 78,
-      "beats": 3
+      "beats": 4
     }
   ],
   "_debtReceipts": [],
@@ -1156,7 +1139,9 @@
     "scout": 2,
     "study": 1,
     "ask": 1,
-    "travel": 1
+    "travel": 1,
+    "coerce": 1,
+    "threaten": 1
   },
   "aptitudeEarnCount": {
     "tactician": 1,
@@ -1165,20 +1150,22 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 3,
-    "choices": 3,
-    "questUpdates": 3,
-    "scene": 3,
-    "npcUpdates": 3,
+    "sceneSummary": 4,
+    "choices": 4,
+    "questUpdates": 4,
+    "scene": 4,
+    "npcUpdates": 4,
     "placeUpdates": 2,
-    "codexUpdates": 3,
-    "timeOps": 3,
-    "imagePrompt": 1,
-    "gambitApt": 3,
-    "sceneEnded": 3,
-    "characterDeltas": 2
+    "codexUpdates": 4,
+    "timeOps": 4,
+    "imagePrompt": 2,
+    "gambitApt": 4,
+    "sceneEnded": 4,
+    "characterDeltas": 3,
+    "offer": 1,
+    "stateOps": 1
   },
-  "_opTurns": 3,
+  "_opTurns": 4,
   "_opCountingSince": "2026-09-15T23:58:48.348Z",
   "gallery": [
     {
@@ -1189,5 +1176,12 @@
       "worldDay": 77,
       "at": "2026-09-15T23:58:48.351Z"
     }
-  ]
+  ],
+  "_opLedger": {
+    "offer": {
+      "applied": 1,
+      "rejected": 0,
+      "lastWhy": null
+    }
+  }
 }

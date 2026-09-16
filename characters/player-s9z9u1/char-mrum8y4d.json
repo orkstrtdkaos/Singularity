@@ -285,11 +285,15 @@
     "lastTurn": {
       "narration": "",
       "choices": [],
-      "offerPromotion": {
-        "npcId": "tessvel-cairn",
-        "to": "senior hand",
-        "why": "fire test"
-      },
+      "holdingOps": [
+        {
+          "op": "claim",
+          "kind": "post",
+          "name": "A fire-test post",
+          "locationId": null,
+          "why": "fire test"
+        }
+      ],
       "sceneSummary": null
     },
     "sceneState": {
@@ -8326,7 +8330,7 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789595164415,
+  "updatedAt": 1789595164441,
   "rev": 727,
   "generated": {
     "schemaVersion": 1,
@@ -9323,7 +9327,7 @@
     {
       "id": "sess-13",
       "startedAt": "2026-09-16T21:46:04.238Z",
-      "lastAt": "2026-09-16T21:46:04.415Z",
+      "lastAt": "2026-09-16T21:46:04.441Z",
       "startDay": 78,
       "endDay": 78,
       "beats": 2
@@ -10219,6 +10223,18 @@
       "crew": [
         "tessvel-cairn"
       ]
+    },
+    {
+      "id": "a-fire-test-post",
+      "kind": "post",
+      "name": "A fire-test post",
+      "locationId": "the_crossing",
+      "steward": null,
+      "obligation": null,
+      "condition": "holding",
+      "claimedDay": 78,
+      "lastMovedWorldCount": null,
+      "history": []
     }
   ],
   "_lastProjectDay": 4,

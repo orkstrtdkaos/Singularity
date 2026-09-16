@@ -13,8 +13,10 @@
 //   node scripts/repair_self_variants.mjs --write         # rewrite the local file
 //   node scripts/repair_self_variants.mjs --write --region valley
 //
-// The engine-side fix (canon.js isSameEntity) prevents new occurrences; this heals what already
-// landed. Re-runnable: a repaired store yields "nothing to repair".
+// ⚠️ TWO CAUSES, NOT ONE. canon.js `isSameEntity` (CCODE-04) stopped the retry case — and the signature came back on 2026-09-11/12
+// (four places and Bryn Callowell) from a second cause: the app hydrates a character's own grown records into the pool promotion
+// treats as AUTHORED, so a record met itself there at weight 100. `findCanonCollision` skips grown and shared records in that pool
+// since CCODE-380. This heals what already landed. Re-runnable: a repaired store yields "nothing to repair".
 
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 
@@ -24,7 +26,13 @@ const region = (args[args.indexOf("--region") + 1] && !args[args.indexOf("--regi
 const path = `world/canon/${region}.json`;
 
 if (!existsSync(path)) { console.error(`no canon store at ${path}`); process.exit(2); }
-const store = JSON.parse(readFileSync(path, "utf8"));
+const raw = readFileSync(path, "utf8");
+const store = JSON.parse(raw);
+// ⚠️ WRITE IT BACK IN ITS OWN SHAPE. The store is 1-space JSON (the clients and Aevi's rewrites both leave it that way) and this wrote
+// 2-space, so the 2026-09-16 repair of six records came out as a 2,600-line diff of the whole file. Indent and final newline are read.
+const indent = (/\n( +)"/.exec(raw) || [null, "  "])[1].length;
+const eol = raw.includes("\r\n") ? "\r\n" : "\n";
+const finalNewline = /\n$/.test(raw);
 store.entities = store.entities || {};
 store.variants = Array.isArray(store.variants) ? store.variants : [];
 
@@ -58,7 +66,8 @@ store.variants = store.variants.filter(v => !restored.includes(v));
 
 console.log(`\n${write ? "WRITING" : "DRY RUN"}: ${restored.length} record(s) restored to canonical; ${store.variants.length} genuine variant(s) untouched.`);
 if (write) {
-  writeFileSync(path, JSON.stringify(store, null, 2) + "\n");
+  const text = JSON.stringify(store, null, indent).replace(/\n/g, eol);
+  writeFileSync(path, finalNewline ? text + eol : text);
   console.log(`wrote ${path} — commit it to publish the repair to the family.`);
 } else {
   console.log("re-run with --write to apply.");

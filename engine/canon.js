@@ -150,15 +150,23 @@ export function weightOf(record, { authored = false } = {}) { // registry:intern
 export function findCanonCollision(type, name, { canon = {}, authored = {} } = {}) {
   const raw = String(name || "").trim();
   if (!raw) return null;
-  const scan = (pool, sameType) => {
+  const scan = (pool, sameType, { spineOnly = false } = {}) => {
     for (const [id, rec] of Object.entries(pool || {})) {
+      // ⛔ CCODE-380 — THE "AUTHORED" POOL THE APP HANDS IN IS NOT ALL AUTHORED. `hydrateGeneratedIntoContent` puts the character's
+      // own grown people and places into CONTENT.npcs/locations for play, and `hydrateCanonIntoContent` puts other players' shared
+      // records there too. So a record being promoted met ITSELF here, at the spine's weight (100), and lost — filed as a rumour of
+      // itself. ⚑ MEASURED on the real saves: 33 of Silas's 35 grown people and places, and all 8 of Loki's, collide with themselves
+      // this way. CCODE-04's guard only knew the retry case, and on 2026-09-11/12 four places and Bryn Callowell went to the variants
+      // pile. A record carrying `_gen` (grown) or `_canon` (shared) is not the spine: the grown one is the candidate's own world, and
+      // the shared one is contested at its real weight through the canon store below.
+      if (spineOnly && (rec?._gen || rec?._canon)) continue;
       if (sameType && rec?._canon && rec._canon.type && type && rec._canon.type !== type) continue;
       const label = rec?.name || rec?.label || id.replace(/-/g, " ");
       if (namesMatch(raw, label) || namesMatch(raw, id.replace(/-/g, " "))) return { id, rec };
     }
     return null;
   };
-  const inAuthored = scan(authored, false);
+  const inAuthored = scan(authored, false, { spineOnly: true });
   if (inAuthored) return { where: "authored", id: inAuthored.id, weight: AUTHORED_CANON_WEIGHT, record: inAuthored.rec };
   const inCanon = scan(canon, true);
   if (inCanon) return { where: "canon", id: inCanon.id, weight: weightOf(inCanon.rec), record: inCanon.rec };

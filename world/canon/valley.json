@@ -1044,48 +1044,8 @@
     "birthWeight": 6
    },
    "_roleRepaired_20260916": "⛔ SNG-595, Erik 2026-09-16: 'make sure this is a living world where things that PCs are doing and the NPCs they interact with are known — ONE GM for the world.' ⚠️ A SHARED ROLE IS THE ONE GM'S STANDING MEMORY OF A PERSON, AND EIGHT OF FIFTEEN WERE A TUESDAY. Edvar read 'has been waiting for someone to finally ask' — he was asked on Silas's day 13, commissioned, and met twelve times; Deni Cors was 'stopped at the Left Branch entrance', which was one afternoon; Ossivyn was planting a tree 'today'. Two roles were EMPTY and one was 'someone of Waygate'. ⛑ REWRITTEN AS STANDING FACTS. What a person DID belongs to the ledger, which CCode's traveler reader now composes with this; what they ARE belongs here, and it has to survive fifty days."
-  }
- },
- "variants": [
-  {
-   "id": "gen-stillwater-s-trouble",
-   "name": "Stillwater'S Trouble",
-   "regionId": "valley",
-   "parentId": "gen-ashwarden-march-road",
-   "_promotedFromSubPlace": true,
-   "descriptionSeed": "A place the road led to — Stillwater'S Trouble. The fiction brought you here before the map knew its name.",
-   "tags": [
-    "transitional"
-   ],
-   "connections": [
-    "gen-ashwarden-march-road"
-   ],
-   "_mintedAs": "transit",
-   "map": {
-    "x": 297.8908972987956,
-    "y": 384.4108727502462
-   },
-   "supersededBy": "the_old_warden_post",
-   "dangerLevel": 2,
-   "_canon": {
-    "entityId": "gen-stillwater-s-trouble",
-    "type": "location",
-    "weight": 6,
-    "rating": null,
-    "tier": "variant",
-    "provenance": {
-     "healed": "sng-216-backfill"
-    },
-    "contributedBy": {
-     "playerKey": null,
-     "characterId": null
-    },
-    "promotedWorldDay": 67,
-    "birthWeight": 1,
-    "rivalId": "gen-stillwater-s-trouble"
-   }
   },
-  {
+  "gen-waygate": {
    "id": "gen-waygate",
    "name": "The Pale March Waygate",
    "regionId": "valley",
@@ -1121,7 +1081,7 @@
     "type": "location",
     "weight": 5,
     "rating": null,
-    "tier": "variant",
+    "tier": "canonical",
     "provenance": {
      "healed": "sng-216-backfill"
     },
@@ -1130,11 +1090,10 @@
      "characterId": null
     },
     "promotedWorldDay": 73,
-    "birthWeight": 1,
-    "rivalId": "gen-waygate"
+    "birthWeight": 1
    }
   },
-  {
+  "gen-threshold-post": {
    "id": "gen-threshold-post",
    "name": "Threshold Post",
    "regionId": "the_center",
@@ -1160,7 +1119,7 @@
     "type": "location",
     "weight": 5,
     "rating": null,
-    "tier": "variant",
+    "tier": "canonical",
     "provenance": {
      "locationId": "the_crossing",
      "day": 14,
@@ -1171,11 +1130,10 @@
      "characterId": null
     },
     "promotedWorldDay": 73,
-    "birthWeight": 1,
-    "rivalId": "gen-threshold-post"
+    "birthWeight": 1
    }
   },
-  {
+  "gen-mara-wells-store": {
    "id": "gen-mara-wells-store",
    "name": "Mara Wells Store",
    "regionId": "valley",
@@ -1202,7 +1160,7 @@
     "type": "location",
     "weight": 6,
     "rating": null,
-    "tier": "variant",
+    "tier": "canonical",
     "provenance": {
      "locationId": "millbrook",
      "day": null,
@@ -1213,11 +1171,10 @@
      "characterId": null
     },
     "promotedWorldDay": 74,
-    "birthWeight": 1,
-    "rivalId": "gen-mara-wells-store"
+    "birthWeight": 1
    }
   },
-  {
+  "gen-whistling-woman-post": {
    "id": "gen-whistling-woman-post",
    "name": "Whistling Woman Post",
    "regionId": "valley",
@@ -1246,7 +1203,7 @@
     "type": "location",
     "weight": 5,
     "rating": null,
-    "tier": "variant",
+    "tier": "canonical",
     "provenance": {
      "locationId": "gen-the-made-gate",
      "day": null,
@@ -1257,11 +1214,10 @@
      "characterId": null
     },
     "promotedWorldDay": 74,
-    "birthWeight": 1,
-    "rivalId": "gen-whistling-woman-post"
+    "birthWeight": 1
    }
   },
-  {
+  "bryn-callowell": {
    "schemaVersion": 1,
    "id": "bryn-callowell",
    "name": "Bryn Callowell",
@@ -1347,7 +1303,7 @@
     "type": "npc",
     "weight": 40,
     "rating": "R+",
-    "tier": "variant",
+    "tier": "canonical",
     "provenance": {
      "playerKey": "player-s9z9u1",
      "characterId": "char-mrhs8286",
@@ -1362,10 +1318,10 @@
      "characterId": "char-mrhs8286"
     },
     "promotedWorldDay": 74,
-    "birthWeight": 36,
-    "rivalId": "bryn-callowell"
+    "birthWeight": 36
    }
   }
- ],
+ },
+ "variants": [],
  "_rolesRepaired_20260916": "⛔ SNG-595, Erik 2026-09-16: 'make sure this is a living world where things that PCs are doing and the NPCs they interact with are known — ONE GM for the world.' ⚠️ A SHARED ROLE IS THE ONE GM'S STANDING MEMORY OF A PERSON, AND EIGHT OF FIFTEEN WERE A TUESDAY. Edvar read 'has been waiting for someone to finally ask' — he was asked on Silas's day 13, commissioned, and met twelve times; Deni Cors was 'stopped at the Left Branch entrance', which was one afternoon; Ossivyn was planting a tree 'today'. Two roles were EMPTY and one was 'someone of Waygate'. ⛑ REWRITTEN AS STANDING FACTS. What a person DID belongs to the ledger, which CCode's traveler reader now composes with this; what they ARE belongs here, and it has to survive fifty days."
 }

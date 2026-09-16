@@ -18886,6 +18886,56 @@ console.log("\n── §264 · a skill says what it rolls, and a choice rolls it
     && (A264.match(/\$\{rollChip\(ab(?:, "hint")?\)\}/g) || []).length === 4);
 }
 
+// ⛔ CCODE-380 — shared lives, first stage: canon promotion contested a record against ITSELF. The app hydrates a character's grown
+// people and places into CONTENT for play, and promotion scanned CONTENT as the authored spine, so a record met its own copy at
+// weight 100 and became a rumour of itself (measured: 33 of Silas's 35 grown records, all 8 of Loki's; five went to the variants
+// pile on 2026-09-11/12). The fixture here is built, not read off a live save, so a player's evening cannot move the gate.
+console.log("\n── §265 · a grown record is never its own rival ──");
+{
+  const CN265 = await import("../engine/canon.js");
+  const GN265 = await import("../engine/generate.js");
+  const grownNpc = { id: "bryn-fixture", name: "Bryn Fixture", role: "a ditch-mother of the lower fields",
+    _gen: { type: "npc", tier: "nominated", birthWeight: 6, engagementScore: 30, rating: "PG", provenance: { playerKey: "p-a", characterId: "c-a" } } };
+  const grownPlace = { id: "gen-fixture-post", name: "Fixture Post", descriptionSeed: "a waystation",
+    _gen: { type: "location", tier: "nominated", birthWeight: 5, engagementScore: 20, rating: "G", provenance: {} } };
+  const character = { id: "c-a", generated: { npc: { [grownNpc.id]: grownNpc }, location: { [grownPlace.id]: grownPlace } } };
+  const shared = { id: "tessvel-fixture", name: "Tessvel Fixture", role: "a cartographer",
+    _canon: { entityId: "tessvel-fixture", type: "npc", weight: 7, tier: "canonical", contributedBy: { playerKey: "p-b", characterId: "c-b" } } };
+  const spine = { id: "warden-fixture", name: "Warden Fixture", role: "the authored gatekeeper" };
+  // the pools exactly as the app leaves them: authored content, then the character's grown world, then shared canon (app.js
+  // hydrateGeneratedIntoContent / hydrateCanonIntoContent — "authored wins a clash", so neither overwrites an authored id)
+  const npcs = { [spine.id]: spine }, locations = {};
+  for (const rec of GN265.generatedRecords(character, "npc")) if (!npcs[rec.id]) npcs[rec.id] = rec;
+  for (const rec of GN265.generatedRecords(character, "location")) if (!locations[rec.id]) locations[rec.id] = rec;
+  if (!npcs[shared.id]) npcs[shared.id] = shared;
+  const authoredFor = (type) => type === "npc" ? npcs : type === "location" ? locations : {};
+
+  const store = CN265.ensureCanonStore({}, "valley");
+  const { results } = CN265.promoteInto(store, CN265.promotionCandidates(character), { authored: authoredFor, worldDay: 80, rng: () => 0.99 });
+  check("§265: ⛔ a grown person and a grown place, hydrated into the pools for play, LAND when promoted — neither meets itself",
+    results.length === 2 && results.every(r => r.outcome === "landed") && store.variants.length === 0
+    && !!store.entities[grownNpc.id] && !!store.entities[grownPlace.id], JSON.stringify(results));
+  check("§265: …and no record in the store names itself as its rival or as what it overtook",
+    [...Object.values(store.entities), ...store.variants].every(r => r._canon?.rivalId !== r.id && r._canon?.overtook !== r.id));
+
+  const impostor = { id: "warden-imp", name: "Warden Fixture", _gen: { type: "npc", tier: "nominated", birthWeight: 2, engagementScore: 8, rating: "PG", provenance: {} } };
+  const hit = CN265.findCanonCollision("npc", impostor.name, { canon: {}, authored: npcs });
+  check("§265: the authored spine still holds against a grown record that takes its name — found as authored, at the spine's weight",
+    hit?.where === "authored" && hit.id === spine.id && hit.weight === CN265.AUTHORED_CANON_WEIGHT);
+
+  const store2 = CN265.ensureCanonStore({}, "valley"); store2.entities[shared.id] = shared;
+  const rival = CN265.findCanonCollision("npc", "Tessvel Fixture", { canon: store2.entities, authored: npcs });
+  check("§265: ⛔ a record another player shared is contested at its OWN weight through the canon store — never as the authored spine",
+    rival?.where === "canon" && rival.id === shared.id && rival.weight === 7, JSON.stringify(rival && { where: rival.where, weight: rival.weight }));
+
+  // the precondition the fix answers — if the app stops hydrating grown records into CONTENT, this gate should be re-read, not trusted
+  const A265 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§265: the app still hydrates grown records and shared canon into CONTENT, and still hands CONTENT to promotion",
+    /for \(const rec of generatedRecords\(c, "npc"\)\) if \(!CONTENT\.npcs\[rec\.id\]\) CONTENT\.npcs\[rec\.id\] = rec;/.test(A265)
+    && /else if \(type === "npc" && !CONTENT\.npcs\[record\.id\]\) CONTENT\.npcs\[record\.id\] = record;/.test(A265)
+    && /syncSharedCanon\(\{ character, profile, content: CONTENT \}\)/.test(A265));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

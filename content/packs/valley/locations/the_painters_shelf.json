@@ -1,0 +1,70 @@
+{
+ "schemaVersion": 1,
+ "id": "the_painters_shelf",
+ "name": "The Painter's Shelf",
+ "regionId": "valley",
+ "communityId": "valley.the_painters_shelf",
+ "spectrum": {
+  "violence_peace": 1.0,
+  "chaos_order": 0.2,
+  "death_life": 0.6,
+  "mechanical_spiritual": 0.6,
+  "concrete_abstract": 0.3
+ },
+ "tags": [
+  "dwelling",
+  "home",
+  "quiet",
+  "overlook",
+  "unaligned"
+ ],
+ "connections": [
+  "the_kindly_rest"
+ ],
+ "loreRefs": [
+  "valley_primer"
+ ],
+ "npcsPresent": [],
+ "descriptionSeed": "A single cabin on a rock shelf above the Kindly Rest, where the whole valley opens out below — the Echo running silver through the middle of it, Millbrook's smoke, and on a clear day the pass at the far lip. It is a morning's walk down to the house and a harder one back. Nobody comes up here who was not already going to.",
+ "appearance": "A one-room cabin of silvered timber on a flat shelf of rock, with a stone chimney at the gable end and a plank porch facing out over the drop. Shutters and no glass. A rail along the shelf edge, a wood-store under the eaves, and a bench worn pale where somebody sits.",
+ "encounterFlavor": "Wind, and the valley doing whatever it is doing far below. Weather arrives here before it arrives down there, which is worth knowing.",
+ "_minted_20260916": "⛑ MINTED 2026-09-16 for Courtney's Adelheid. Erik: 'herbs, painting at a cabin overlooking the valley, spirituality, a monastery where she works as the healer she is… let's make this really engaging and beautiful for her.' ⚠️ NOTHING AUTHORED SERVED — the nearest spiritual place was The Quiet House at 24 walking days and the Mercy-House at 121, and the Harmonic Heights terraces the brief named are 61 days from Millbrook, so a cabin there and a monastery here would have been two months apart. ⛔ BOTH SIT IN THE NINE-DAY GAP SOUTH OF MILLBROOK, which held nothing at all: the house 1.6 days out so Silas can call on his way back to the water work, and the cabin 0.8 days above it — down for a shift, up to paint.",
+ "worldPos": {
+  "colatitude": 21.74,
+  "longitude": 251.38,
+  "depth": 0
+ },
+ "worldPosNote": "⛑ Sited 2026-09-16 into the nine-day gap south of Millbrook, which held nothing: the house 1.6 walking days out and the cabin 0.8 days above it. Verified with `walkingDays` before minting.",
+ "axisVector": [
+  0,
+  0,
+  0,
+  1.0,
+  0.3,
+  0.6,
+  0.2,
+  0,
+  0.6,
+  0,
+  0,
+  0
+ ],
+ "axisVectorNote": "⛑ Derived from `spectrum` on the millbrook pattern — peace, concrete, spiritual, order, life.",
+ "tier": "site",
+ "parentId": "the_kindly_rest",
+ "map": {
+  "x": 386,
+  "y": 346
+ },
+ "poleIntensity": {
+  "peace": 1.0,
+  "order": 0.2,
+  "life": 0.6,
+  "spiritual": 0.6,
+  "concrete": 0.3
+ },
+ "questSeeds": [
+  "The cabin was somebody's before it was empty, and what they left in it was not packed in a hurry",
+  "From the shelf you can see the whole valley, which means you can see what is happening in it before anyone below does"
+ ]
+}

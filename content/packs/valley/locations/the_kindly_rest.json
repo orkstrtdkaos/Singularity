@@ -1,0 +1,76 @@
+{
+ "schemaVersion": 1,
+ "id": "the_kindly_rest",
+ "name": "The Kindly Rest",
+ "regionId": "valley",
+ "communityId": "valley.the_kindly_rest",
+ "spectrum": {
+  "violence_peace": 0.9,
+  "chaos_order": 0.4,
+  "death_life": 0.8,
+  "mechanical_spiritual": 0.8,
+  "concrete_abstract": 0.1
+ },
+ "tags": [
+  "sanctuary",
+  "healing",
+  "herbs",
+  "sacred",
+  "quiet",
+  "unaligned"
+ ],
+ "connections": [
+  "millbrook",
+  "echo_river_crossing",
+  "the_painters_shelf"
+ ],
+ "loreRefs": [
+  "valley_primer"
+ ],
+ "npcsPresent": [
+  "sister_vreni",
+  "tender_ovel"
+ ],
+ "descriptionSeed": "A house of healing on the valley's south shoulder, kept by an order that has never named itself and has no argument with anyone. They take in whoever arrives and ask nothing, and they are careful about what they are owed. The herb work is the whole economy of the place — the terraces are planted to it, the drying lofts run the length of the roof, and what they cannot grow they trade for at cost. The intrigue here is the quiet kind: who is being sheltered, who is asking after them, and which of those questions the house answers.",
+ "appearance": "Low buildings of pale stone around three sides of a planted court, roofed in weathered shingle with deep eaves. Drying lofts stand open under the roofline, hung with cut herbs in bunches. Terraced beds step down the slope in stone-edged rows, a covered walk runs the inner faces, and water is led through the court in an open stone channel. The doors stand open and there is no gate.",
+ "encounterFlavor": "Someone is always arriving and someone is always leaving, and the house does not comment on either. A bell is rung for meals and for nothing else.",
+ "_minted_20260916": "⛑ MINTED 2026-09-16 for Courtney's Adelheid. Erik: 'herbs, painting at a cabin overlooking the valley, spirituality, a monastery where she works as the healer she is… let's make this really engaging and beautiful for her.' ⚠️ NOTHING AUTHORED SERVED — the nearest spiritual place was The Quiet House at 24 walking days and the Mercy-House at 121, and the Harmonic Heights terraces the brief named are 61 days from Millbrook, so a cabin there and a monastery here would have been two months apart. ⛔ BOTH SIT IN THE NINE-DAY GAP SOUTH OF MILLBROOK, which held nothing at all: the house 1.6 days out so Silas can call on his way back to the water work, and the cabin 0.8 days above it — down for a shift, up to paint.",
+ "worldPos": {
+  "colatitude": 21.28,
+  "longitude": 251.62,
+  "depth": 0
+ },
+ "worldPosNote": "⛑ Sited 2026-09-16 into the nine-day gap south of Millbrook, which held nothing: the house 1.6 walking days out and the cabin 0.8 days above it. Verified with `walkingDays` before minting.",
+ "axisVector": [
+  0,
+  0,
+  0,
+  0.9,
+  0.1,
+  0.8,
+  0.4,
+  0,
+  0.8,
+  0,
+  0,
+  0
+ ],
+ "axisVectorNote": "⛑ Derived from `spectrum` on the millbrook pattern — peace, concrete, spiritual, order, life.",
+ "tier": "settlement",
+ "map": {
+  "x": 392,
+  "y": 338
+ },
+ "poleIntensity": {
+  "peace": 0.9,
+  "order": 0.4,
+  "life": 0.8,
+  "spiritual": 0.8,
+  "concrete": 0.1
+ },
+ "questSeeds": [
+  "Sister Vreni is short-handed and will take on anyone who can actually treat a wound — the work is real, and it is how the house decides whether it trusts you",
+  "Somebody is being sheltered here under a name that is not theirs, and two separate parties have come asking after them politely",
+  "The high terraces have stopped yielding the one herb the house cannot trade for, and nobody can say why"
+ ]
+}

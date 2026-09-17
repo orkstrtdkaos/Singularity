@@ -288,73 +288,15 @@
       }
     ],
     "lastTurn": {
-      "narration": "You step back from the seam's threshold, the cold air rising from below mixing with the spring warmth at your back. Vessin is still beside you, one hand settled at her side where yours has just left it. Cy's lamp swings slightly as it turns to face you—the lens irising in what you have learned to read as attention.\n\n\"Before we go down,\" you say, addressing all three of them clearly, \"I need to ask: should we proceed together? All of us, into this.\"\n\nVessin doesn't hesitate. \"Yes,\" she says simply. It is not a question for her.\n\nCy's clicks sound like consideration—a quick sequence of lens-focus and articulation-adjustment. When it speaks, the voice is formal and precise: \"The descent requires documentation. The current assignment requires witness. Proceeding together serves both.\"\n\nYou turn toward the opening. The seam stands wide, revealing stone steps cut into descending dark, and the sound of moving water rises from far below—steady, patient, and very old.",
-      "sceneSummary": "At the threshold of the Null Stone's opened seam, Loki asks whether the group should descend together. Vessin affirms without doubt. Cy acknowledges the logical necessity. The descent begins.",
-      "choices": [
+      "stateOps": [
         {
-          "label": "Step into the passage and lead them down into the dark.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
-          "difficulty": "very easy",
-          "trivial": true
-        },
-        {
-          "label": "Ask Vessin what she senses about the opening before you descend.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "very easy",
-          "trivial": true
-        },
-        {
-          "label": "Use See the Made Thing to read the seam's architecture before committing to the descent.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "abilityId": "see_the_made_thing",
-          "energyCost": 2,
-          "difficulty": "easy"
+          "op": "set",
+          "key": "annex_location",
+          "value": "the_made_gate"
         }
       ],
-      "deeds": [],
-      "characterDeltas": {},
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "standingOps": [],
-      "scene": {
-        "setting": "The Null Stone at the Hub crossing, late afternoon spring light. Behind you: the crossing itself, the road outward, the ordinary world. Before you: the sealed seam now open, revealing a passage descending steeply into worked stone and cold dark. The sound of water rises from below—steady and old.",
-        "npcsPresent": [
-          {
-            "name": "Vessin Tallow-bark",
-            "state": "Standing at your side, hand at her side, eyes steady. She has said yes and means it."
-          },
-          {
-            "name": "Cy",
-            "state": "Lamp raised, lens irised in attention, waiting for the descent to begin. Clicks softly as it processes the architecture."
-          }
-        ],
-        "objects": [
-          "The open seam in the Null Stone",
-          "The descending stone steps, cut with precision",
-          "Cold air rising from below",
-          "Cy's lamp, the only light source"
-        ],
-        "threads": [
-          "What lies in the vast sealed chamber below",
-          "Why the stone waited for an honest question",
-          "What the nine sealed apertures conceal",
-          "Whether the regulator still functions, and what it guards"
-        ]
-      },
-      "npcUpdates": [],
-      "intentsHeard": [],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "codexUpdates": [],
-      "offer": {
-        "thing": "The consensus—all three of your companions affirm the descent without hesitation or doubt, each for their own reason.",
-        "from": "The trust already built between you: Vessin's committed bond, Cy's assigned purpose, and the clear stakes of what waits below."
-      }
+      "narration": "",
+      "sceneSummary": null
     },
     "sceneState": {
       "setting": "The Null Stone at the Hub crossing, late afternoon spring light. Behind you: the crossing itself, the road outward, the ordinary world. Before you: the sealed seam now open, revealing a passage descending steeply into worked stone and cold dark. The sound of water rises from below—steady and old.",
@@ -391,7 +333,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 4,
-    "hour": 15,
+    "hour": 16,
     "realAnchor": null
   },
   "companions": [
@@ -1437,7 +1379,7 @@
     "lastSharedReadAt": "2026-09-17T21:20:04.409Z",
     "lastTickWorldDay": 79,
     "lastCanonWorldDay": 79,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "The Churn-Revel orchestrator speaking their own truth plainly for the first time—hunger named without calculation or defense",
@@ -8913,8 +8855,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789680008462,
-  "rev": 740,
+  "updatedAt": 1789680346413,
+  "rev": 742,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9921,6 +9863,14 @@
       "startDay": 78,
       "endDay": 78,
       "beats": 2
+    },
+    {
+      "id": "sess-14",
+      "startedAt": "2026-09-17T21:25:46.391Z",
+      "lastAt": "2026-09-17T21:25:46.391Z",
+      "startDay": 79,
+      "endDay": 79,
+      "beats": 1
     }
   ],
   "establishedFacts": [

@@ -81,6 +81,7 @@ import { standingForGM } from "./standing.js"; // BATCH-12 §3
 import { renderNamesDeep } from "./names.js"; // SNG-182
 import { worldCount, worldCountLabel, positionedPlace } from "./worldtime.js";
 import { holdsNearForGM } from "./sharedholds.js";   // CCODE-383: a hold nearby is known
+import { journeyForGM } from "./journeyplan.js";   // CCODE-387: a journey agreed and not yet walked
 import { encounterReceiptForGM } from "./encounters.js";
 import { waygateBlockForGM, waygateTruthForGM } from "./waygate.js";
 import { readAloudDirective } from "./narration_voice.js";
@@ -615,6 +616,11 @@ export const GM_CONTEXT = [
       where: whereOf(env.character, env.CONTENT?.locations || {}), origins: env.CONTENT?.origins || [] }) },
   // ⛔ CCODE-383 (Erik: "if there is a hold nearby PCs should hear about what it is and who's running it. they can and should interact
   // with it") — another traveler's holding within two walking days: what it is, who runs it, whether it thrives, what it has.
+  // ⛔ CCODE-387 (Erik: "agree to go on a journey and it logs it as a task... that gives you time to stock up, collect your people,
+  // organize the trip, then begin the journey") — a journey planned and not yet begun.
+  { key: "journeyDetail", builder: "journeyplan.journeyForGM (CCODE-387)", carries: ["a journey the character agreed to and has not begun", "its way, days, rations, nights and company"],
+    reachedBy: "always (empty unless a journey is planned)", spec: "CCODE-387", views: ["turn", "ask"],
+    build: (env) => journeyForGM(env.character) },
   { key: "holdsNearDetail", builder: "sharedholds.holdsNearForGM (CCODE-383)", carries: ["another traveler's holding within two walking days", "what it is and who runs it", "its condition, what it has and who guards it"],
     reachedBy: "always (empty unless another traveler's hold stands within two walking days)", spec: "CCODE-383", views: ["turn", "ask"],
     build: (env) => holdsNearForGM(env.app?.holdsStore?.() || null, { selfId: env.character?.id || null,

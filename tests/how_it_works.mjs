@@ -8972,7 +8972,7 @@ console.log("\n── §99 · four days through the Wend, or seven around it ─
   const app99 = rd("app.js");
   check("§99: ⛔ THE GM IS HANDED THE REAL WAYS THERE — wired where travel actually happens",
     /import \{[^}]*routeBetween[^}]*\} from "\.\/engine\/journey\.js"/.test(app99)
-    && /function buildTravelDirective[\s\S]{0,1200}?routeBetween\(/.test(app99));
+    && /function buildTravelDirective[\s\S]{0,2400}?routeBetween\(/.test(app99));   // CCODE-387: a journey's early return now sits above it
   check("§99: …with the TRAVELLER passed, so it never offers a gate this character has not found",
     /routeBetween\(character\.currentLocationId, ti\.destId, CONTENT\.locations, \{ traveller: character \}\)/.test(app99));
   check("§99: …and the directive tells the GM not to invent a different duration",
@@ -19403,6 +19403,78 @@ console.log("\n── §271 · a shared file's merge never reads blind ──");
   check("§271: no merge in the module still turns an unreadable body into an empty one",
     !/catch \{ remote = null; \}/.test(SRC271) && !/catch \{ arr = \[\]; \}/.test(SRC271)
     && (SRC271.match(/await readForMerge\(path\)/g) || []).length === 2);
+}
+
+// ⛔ CCODE-387 (Erik, 2026-09-16) — "setting up a journey, or agreeing to travel somewhere needs to not be instantaneous all the time - it should be
+// that you can agree to go on a journey and it logs it as a task... like a one step quest... that gives you time to stock up, collect your
+// people, organize the trip, then begin the journey." And: "hunger damage is a good idea.... there are travel and gathering skills that would
+// be more useful with it." ⚑ MEASURED: every trip cost three hours, whatever the distance — a 74-day road included.
+console.log("\n── §272 · a journey is agreed, then readied, then walked ──");
+{
+  const JP = await import("../engine/journeyplan.js");
+  const { loadContentHeadless: lch272 } = await import("./headless_content.mjs");
+  const C272 = await lch272();
+  const L = C272.locations;
+  const walker = (extra = {}) => ({ id: "c272", currentLocationId: "millbrook", maxHealth: 60, health: 60, maxEnergy: 120, energy: 120,
+    subAttributes: { wits: 4 }, inventory: [], abilities: [], ...extra });
+  const plan = JP.planJourney({ character: walker(), destId: "archive_hollow", locations: L, rules: C272.rules, catalog: C272.items, abilities: C272.abilities,
+    worldDay: 80, companyNames: ["Pell Ran Marsh", "Calvar"] });
+  const w = JP.chosenWay(plan);
+  check("§272: ⛔ a road of a day's walk or more is a JOURNEY: a plan with the measured way, the days, the rations it needs, its nights and its worst stretch",
+    !!plan && w.days > 10 && w.days < 11 && plan.rations.needed === Math.ceil(w.days / 2) && w.nights === 10 && w.worst?.name === "Archive Hollow"
+    && /about 10\.7 days on foot, by way of Echo River Crossing · 6 rations for the road — you carry 0 \(6 short\)/.test(JP.journeyLine(plan))
+    && /with Pell Ran Marsh and Calvar/.test(JP.journeyLine(plan)), plan && JP.journeyLine(plan));
+  check("§272: …and a step across the valley is not one — Millbrook to Echo River Crossing still simply goes",
+    JP.planJourney({ character: walker(), destId: "echo_river_crossing", locations: L, rules: C272.rules }) === null);
+  const q = JP.journeyQuest(plan, { nowISO: "2026-09-16T00:00:00Z", day: 4 });
+  const holder = { quests: [{ id: "journey-old", kind: "journey", status: "active" }, { id: "other", status: "active" }] };
+  JP.logJourneyOn(holder, plan, { day: 4 });
+  const logged = holder.quests.map(x => x.id).join(",");
+  JP.completeJourneyOn(holder, plan, "arrived");
+  check("§272: …a new plan replaces the old one in the log, and arriving completes it and spends the plan",
+    logged === `other,${plan.id}` && holder.quests.find(x => x.id === plan.id)?.status === "completed" && holder.journey === null, logged);
+  check("§272: ⛔ agreeing to it logs a ONE-STEP QUEST — active, in the log, saying what the road asks and that the character sets out when ready",
+    q.kind === "journey" && q.status === "active" && q.structured === false && q.title === "Journey to Archive Hollow" && /set out when you are ready\.$/.test(q.summary));
+
+  const fed = JP.journeyOutcome(plan, walker({ inventory: [{ id: "dried_rations", name: "Dried Rations", qty: 6 }] }), { rules: C272.rules, catalog: C272.items, rng: () => 0.99 });
+  const starved = JP.journeyOutcome(plan, walker(), { rules: C272.rules, catalog: C272.items, rng: () => 0.99 });
+  const lucky = JP.journeyOutcome(plan, walker(), { rules: C272.rules, catalog: C272.items, rng: () => 0 });
+  check("§272: ⛔ SETTING OUT SPENDS THE ROAD — the days on the clock, the rations eaten; fed, nobody arrives hungry",
+    fed.hours === Math.round(w.days * 24) && fed.rationsEaten === 6 && fed.hungryDays === 0 && fed.energyShare === 1 && fed.healthLoss === 0);
+  check("§272: ⛔ …and HUNGER COSTS: a road walked without rations takes energy and health on arrival — never more than a share of the body",
+    starved.rationsShort === 6 && starved.hungryDays === 11 && starved.energyShare < 1 && starved.healthLoss > 0 && starved.healthLoss <= Math.floor(60 * 0.3));
+  check("§272: …and foraging finds food — a walker whose every roll lands does not go hungry", lucky.hungryDays === 0 && lucky.foraged === 11);
+
+  const skilled = walker({ abilities: [{ abilityId: "greenlore", level: 2 }, { abilityId: "long_road", level: 2 }, { abilityId: "staunch", level: 1 }] });
+  const plan2 = JP.planJourney({ character: skilled, destId: "archive_hollow", locations: L, rules: C272.rules, catalog: C272.items, abilities: C272.abilities, worldDay: 80 });
+  const o2 = JP.journeyOutcome(plan2, skilled, { rules: C272.rules, catalog: C272.items, abilities: C272.abilities, rng: () => 0.5 });
+  const o1 = JP.journeyOutcome(plan, walker(), { rules: C272.rules, catalog: C272.items, abilities: C272.abilities, rng: () => 0.5 });
+  check("§272: ⛔ THE TRAVEL AND GATHERING CRAFTS CARRY IT — a marcher's road is shorter and eats fewer rations, a forager's roll is better, and staunch bears what hunger takes",
+    JP.chosenWay(plan2).days < w.days && plan2.rations.needed < plan.rations.needed && o2.forageChance > o1.forageChance && o2.hungryDays < o1.hungryDays
+    && o2.healthLoss < o1.healthLoss, JSON.stringify({ days: [w.days, JP.chosenWay(plan2).days], chance: [o1.forageChance, o2.forageChance], hungry: [o1.hungryDays, o2.hungryDays], loss: [o1.healthLoss, o2.healthLoss] }));
+  check("§272: …and the plan names who carries the road, in the craft's own name",
+    /Hard Mile shortens the road; Greenlore forages on the move; Staunch bears the hunger/.test(JP.journeyLine(plan2)), JP.journeyLine(plan2));
+
+  const two = { ...plan, options: [...plan.options, { ...w, key: "road-9", label: "a way of fourteen days", days: 14 }] };
+  JP.chooseWay(two, "road-9", C272.rules);
+  check("§272: choosing another way changes what the road asks — and the road to Archive Hollow really has two",
+    two.chosenKey === "road-9" && two.rations.needed === 7 && plan.options.length >= 2, `${plan.options.length} ways`);
+
+  const A272 = rd("app.js").replace(/\r\n/g, "\n");
+  const GM272 = rd("engine/gm.js").replace(/\r\n/g, "\n");
+  check("§272: ⛔ EVERY DOOR THAT MOVED A TRAVELER NOW PLANS A JOURNEY — the GM's move, the departure question, the one-tap arrival, the map",
+    /const plan387 = journeyPlanFor\(destId\);[\s\S]{0,200}logOpOutcome\("moveTo", "journey-planned"\)/.test(A272)
+    && /depGate\.options = \[\{ id: "plan", label: `Plan the journey to \$\{plan387\.destName\}` \}, \{ id: "go", label: "Set out now" \}, \{ id: "stay", label: "Stay here" \}\];/.test(A272)
+    && /if \(g\.kind === "departure" && g\.journeyDestId && optionId === "plan"\)/.test(A272)
+    && /if \(planJourneyTo\(destId\)\) return;/.test(A272)
+    && /if \(!planJourneyTo\(travelBtn\.dataset\.dest\)\) travelTo\(travelBtn\.dataset\.dest\);/.test(A272));
+  check("§272: ⛔ …and setting out walks the ROAD'S hours, eats the rations, completes the quest, and asks what the road held — never a step's three hours",
+    /advanceClock\(character\.clock, hours\);/.test(A272) && /removeItem\(character, it\.name, n\);/.test(A272)
+    && /completeJourneyOn\(character, plan, `Set out from/.test(A272) && /if \(await maybeRandomEncounter\("onTravel", news\)\) return;[\s\S]{0,120}startScene\(prompt, news\);/.test(A272));
+  check("§272: the card says it and holds the door; the GM is told the character is still here, readying it, and never to walk the road for them",
+    /<button class="btn" id="journey-go">Set out for \$\{esc\(j\.destName\)\}<\/button>/.test(A272)
+    && /if \(journeyDetail\) world\.push\(`## A JOURNEY IS PLANNED/.test(GM272) && /Never move them and never narrate the departure or the road/.test(GM272)
+    && /do NOT narrate the departure, the road or the arrival, and do NOT emit moveTo/.test(A272));
 }
 
 /* ══════════ REPORT ══════════ */

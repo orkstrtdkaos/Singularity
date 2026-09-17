@@ -1768,6 +1768,13 @@ img[data-lightbox] { cursor: zoom-in; }
 .hold-near { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin: 0 0 10px; padding: 6px 12px;
   border: 1px dashed rgba(90, 168, 160, 0.30); border-radius: 8px; font-family: var(--font-ui); font-size: 13px; color: var(--ink-dim); }
 .hold-near .hn-what { color: var(--ink); }
+/* CCODE-387: a journey agreed and not yet walked */
+.journey-card { margin: 8px 0; padding: 10px 12px; border: 1px solid var(--accent, #c9a227); border-radius: 8px; font-family: var(--font-ui); font-size: 13px; }
+.journey-card .jc-head { margin-bottom: 4px; }
+.journey-card .jc-line { color: var(--ink); line-height: 1.45; }
+.journey-card .jc-ways { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.journey-card .jc-ways .opt.on { border-color: var(--accent, #c9a227); }
+.journey-card .jc-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
 .src-sep { margin: 0 6px; color: var(--ink-dim); }
 @media (max-width: 600px) {
   .loc-title { font-size: 20px; }

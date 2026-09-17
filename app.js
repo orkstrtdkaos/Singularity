@@ -92,6 +92,7 @@ import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advan
 import { noteWorldMovedOnShown } from "./engine/worldevents.js";
 import { holdsNear, holdNearLine } from "./engine/sharedholds.js";   // CCODE-383: a hold nearby is known
 import { scopeLegacyMintedIds } from "./engine/fates.js";   // CCODE-384: the people the world makes are shared
+import { planJourney, journeyOutcome, journeyLine, chosenWay, chooseWay, journeyArrivalPrompt, isProvision, provisionsCarried, logJourneyOn, refreshJourneyOn, dropJourneyOn, completeJourneyOn } from "./engine/journeyplan.js";   // CCODE-387: a journey is agreed, readied, then walked
 import { travelersHere, travelerHereLine, whereOf } from "./engine/travelers.js";   // CCODE-359: another traveler is here   // CCODE-354: the world moved on, counted by beats
 import { makeInvitation, incomingInvitations, sentInvitations, joinBandLocally, bandPhrase } from "./engine/invitations.js";
 import { newsNearness, nearFirst } from "./engine/newsvoice.js";   // CCODE-367: nearby news stands out
@@ -152,7 +153,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.48";
+const APP_VERSION = "2.0.49";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8555,6 +8556,20 @@ function applyTurn(turn, resolution, playerWords = null) {
         .filter(Boolean).join(" ");
       destId = null;
     }
+    // ⛔ CCODE-387 — A FAR TRIP IS A JOURNEY, AND THE BEAT THAT AGREES TO IT DOES NOT ALSO ARRIVE. Not a known sub-place, not a gate the
+    // player stepped through: a road of a day's walk or more is logged, readied, and walked from the journey card.
+    if (destId && destId !== character.currentLocationId && !subParentId && !wgRoute) {
+      const plan387 = journeyPlanFor(destId);
+      if (plan387) {
+        refusedMove = true;
+        logOpOutcome("moveTo", "journey-planned");
+        if (character.journey?.destId !== destId) logJourney(plan387);
+        character._correctionAside = [character._correctionAside,
+          `The road to ${plan387.destName} is about ${chosenWay(plan387).days} days — the journey is in your quest log. Ready yourself, then set out.`]
+          .filter(Boolean).join(" ");
+        destId = null;
+      }
+    }
     if (destId && destId !== character.currentLocationId) {
       character.currentLocationId = destId;
       // ⛔ SNG-551: THE HALF-INSTRUMENTED OP. CCODE-158 added moveTo to the Machine panel's outcome set so a
@@ -8580,7 +8595,7 @@ function applyTurn(turn, resolution, playerWords = null) {
   const ti = travelIntentOf(resolution?.action);
   if (ti) {
     const arrived = (ti.destId && character.currentLocationId === ti.destId) || (!ti.destId && !!moveRef);
-    character._pendingArrival = arrived ? null : { ref: ti.ref, name: ti.name, destId: ti.destId || null };
+    character._pendingArrival = (arrived || (ti.destId && character.journey?.destId === ti.destId)) ? null : { ref: ti.ref, name: ti.name, destId: ti.destId || null };   // CCODE-387: a planned journey is its own card
   } else if (!refusedMove) {
     character._pendingArrival = null;
   }
@@ -9133,6 +9148,16 @@ async function onChoice(choice) {
     const ownedLevels = Object.fromEntries((character.abilities || []).map(a => [a.abilityId, a.level]));
     const harmGate = harmGateFor(abilityIds, fullCatalog(), askedKey, character._intentAsked, ownedLevels);
     const depGate = harmGate ? null : departureGateFor(travelIntentOf(action), character, CONTENT.locations);
+    // ⛔ CCODE-387: a departure that is a JOURNEY is offered as one — plan it (logged, and nobody moves), or set out now
+    const ti387 = depGate ? travelIntentOf(action) : null;
+    const plan387 = ti387?.destId ? journeyPlanFor(ti387.destId) : null;
+    if (depGate && plan387) {
+      depGate.act = `${plan387.destName} is about ${chosenWay(plan387).days} days away: ${journeyLine(plan387, { carried: provisionsCarried(character, CONTENT.rules, CONTENT.items || {}) })}.`;
+      depGate.cost = "A journey is readied before it is walked — plan it, gather rations and your people, and set out when you are ready.";
+      depGate.options = [{ id: "plan", label: `Plan the journey to ${plan387.destName}` }, { id: "go", label: "Set out now" }, { id: "stay", label: "Stay here" }];
+      depGate.default = "plan";
+      depGate.journeyDestId = ti387.destId;
+    }
     const gate = harmGate || depGate;
     if (gate) {
       character._pendingIntent = { ...gate, resume: { choice } };
@@ -9793,6 +9818,9 @@ function travelIntentOf(action) {
 /** SNG-122: the per-turn directive that FORCES the GM to emit moveTo for a travel intent, and enumerates
  *  the real/known places reachable from here so its moveTo target resolves (Q2). */
 function buildTravelDirective(ti) {
+  // ⛔ CCODE-387: a journey is logged by the engine and walked from the journey card — the GM narrates the decision, never the road
+  const plan387 = ti.destId && ti.destId !== character.currentLocationId ? journeyPlanFor(ti.destId) : null;
+  if (plan387) return `THE PLAYER MEANS TO JOURNEY to ${plan387.destName} — about ${chosenWay(plan387).days} days (${journeyLine(plan387)}). A journey is READIED before it is walked: the engine logs it and the player sets out from the journey card. Narrate the decision and whatever readying this beat holds — do NOT narrate the departure, the road or the arrival, and do NOT emit moveTo.`;
   const here = CONTENT.locations[character.currentLocationId];
   const adj = (here?.connections || []).map(id => CONTENT.locations[id]).filter(Boolean)
     .filter(l => isPlaceKnown(character, l.id, CONTENT.locations)).map(l => `${l.name} (${l.id})`);
@@ -9825,6 +9853,12 @@ async function answerIntent(optionId) {
   if (g.resume?.choice) {
     // mark the ask so this encounter/scene never gates twice (spec §2: rare or it's noise)
     if (g.askedKey) character._intentAsked = { ...(character._intentAsked || {}), [g.askedKey]: true };
+    // ⛔ CCODE-387: the journey's answers — plan it, or plan it and walk it now
+    if (g.kind === "departure" && g.journeyDestId && optionId === "plan") { saveCharacter(character); planJourneyTo(g.journeyDestId); return; }
+    if (g.kind === "departure" && g.journeyDestId && optionId === "go") {
+      const plan = (character.journey?.destId === g.journeyDestId && character.journey) || journeyPlanFor(g.journeyDestId);
+      if (plan) { logJourney(plan); saveCharacter(character); await setOutOnJourney(); return; }
+    }
     if (g.kind === "departure" && optionId !== "go") {
       saveCharacter(character);
       renderPlay(character.activeScene?.lastTurn || null, { aside: "You hold at the boundary — the road will keep." });
@@ -9923,6 +9957,7 @@ async function arriveAtPending() {
   const p = character._pendingArrival; if (!p || busy) return;
   character._pendingArrival = null;
   const destId = (p.destId && CONTENT.locations[p.destId] ? p.destId : null) || resolveLocationId(p.ref, CONTENT.locations, { here: CONTENT.locations?.[character?.currentLocationId] || null }) || mintTransitLocation(p.ref);
+  if (planJourneyTo(destId)) return;   // ⛔ CCODE-387: a far arrival is a journey to ready, not a tap away
   await travelTo(destId);
 }
 
@@ -10080,6 +10115,101 @@ function mintWaygate({ id, gateId, name, description, connectsTo, connects, at, 
   addKnownPlace(gid);
   console.log(`[made-waygate] "${rec.name}" (${gid}) minted + discovered → connections ${targets.join(", ") || "(nowhere yet)"}${networkCapable ? " · networkCapable" : ""}${defaultTo ? ` · default→${defaultTo}` : ""}`);
   return gid;
+}
+
+// ---------- ⛔ CCODE-387: A JOURNEY IS AGREED, THEN READIED, THEN WALKED ----------
+// Erik: "you can agree to go on a journey and it logs it as a task... like a one step quest... that gives you time to stock up, collect
+// your people, organize the trip, then begin the journey." The plan and the road's costs are `engine/journeyplan.js`; these are the doors.
+
+/** The plan for a trip from where the character stands — null when the trip is a step rather than a journey. */
+function journeyPlanFor(destId) {
+  try {
+    const reg = character?.npcRegistry || {};
+    const nameOf = (id) => reg[id]?.name || CONTENT.npcs?.[id]?.name || null;
+    return planJourney({ character, destId, locations: CONTENT.locations, rules: CONTENT.rules, catalog: CONTENT.items || {}, abilities: fullCatalog(),
+      worldDay: absoluteWorldDay(), companyNames: activeCompany(character).map(m => nameOf(m?.npcId)).filter(Boolean) });
+  } catch (err) { console.warn("[journey] plan skipped:", err?.message); return null; }
+}
+
+/** Log a journey — the plan on the character, its one-step quest in the log (engine `logJourneyOn`). A new plan replaces the one before. */
+function logJourney(plan) {
+  return logJourneyOn(character, plan, { nowISO: new Date().toISOString(), day: readClock(character.clock).day,
+    carried: provisionsCarried(character, CONTENT.rules, CONTENT.items || {}) });
+}
+
+/** The quest's line follows the plan: a way chosen, rations bought. */
+function refreshJourneyQuest() {
+  refreshJourneyOn(character, { carried: provisionsCarried(character, CONTENT.rules, CONTENT.items || {}) });
+}
+
+/** Agree to a journey: logged, shown, and nobody moves. False when the trip is a step. */
+function planJourneyTo(destId, { aside = null } = {}) {
+  const plan = journeyPlanFor(destId);
+  if (!plan) return false;
+  logJourney(plan);
+  saveCharacter(character);
+  renderPlay(character.activeScene?.lastTurn || null, { aside: aside || `The journey to ${plan.destName} is in your quest log — about ${chosenWay(plan).days} days. Ready yourself, then set out.` });
+  return true;
+}
+
+/** Stay: the plan and its quest go. */
+function cancelJourney() {
+  const plan = dropJourneyOn(character);
+  if (!plan) return;
+  saveCharacter(character);
+  renderPlay(character.activeScene?.lastTurn || null, { aside: `You stay. The road to ${plan.destName} will keep.` });
+}
+
+/** ⛔ SETTING OUT — the road is walked: its days on the character's own clock, its rations, its hunger, a gate's toll; every place on the
+ *  path becomes known; then the arrival, by the same steps `travelTo` takes. */
+async function setOutOnJourney() {
+  if (busy) return;
+  const plan = character?.journey;
+  if (!plan || !CONTENT.locations[plan.destId]) return;
+  if (activeEnc()) { renderPlay(character.activeScene?.lastTurn || null, { aside: "Not while this is still happening — finish it, then set out." }); return; }
+  if (character.currentLocationId !== plan.fromId) {
+    // they have moved since the plan was made: the road from here is another road, and it is theirs to look over first
+    const again = journeyPlanFor(plan.destId);
+    if (!again) { dropJourneyOn(character); saveCharacter(character); await travelTo(plan.destId); return; }
+    logJourney(again); saveCharacter(character);
+    renderPlay(character.activeScene?.lastTurn || null, { aside: `You are not where you planned from — the road to ${again.destName} from here is about ${chosenWay(again).days} days. Look it over, then set out.` });
+    return;
+  }
+  const out = journeyOutcome(plan, character, { rules: CONTENT.rules, catalog: CONTENT.items || {}, abilities: fullCatalog() });
+  if (!out) return;
+  let toEat = out.rationsEaten;
+  for (const it of [...(character.inventory || [])]) {
+    if (toEat <= 0) break;
+    if (!isProvision(it, CONTENT.rules, CONTENT.items || {})) continue;
+    const n = Math.min(toEat, Math.max(1, Number(it.qty) || 1));
+    removeItem(character, it.name, n);
+    toEat -= n;
+  }
+  // SNG-273: a closing world makes the roads cost more — the same factor a step pays
+  const factor = travelCostFactor(arcEffectsNow());
+  const hours = Math.max(1, Math.round(out.hours * (factor?.mult || 1)));
+  completeJourneyOn(character, plan, `Set out from ${plan.fromName}; arrived at ${plan.destName} after ${out.days} days on the road.`);
+  const names = Object.fromEntries((out.path || []).map(id => [id, CONTENT.locations[id]?.name || null]));
+  const prompt = journeyArrivalPrompt(plan, out, { names });
+  // the arrival — the steps `travelTo` takes, with the road's own costs in place of a step's three hours
+  const locId = plan.destId;
+  for (const id of out.path || []) addKnownPlace(id);
+  noteGeneratedAttention(locId, "revisit", readClock(character.clock).day);
+  character.currentLocationId = locId;
+  character.activeScene = null;
+  sceneTurns = [];
+  sceneState = null;
+  advanceClock(character.clock, hours);
+  character.energy = Math.max(0, Math.round((Number(character.maxEnergy) || Number(character.energy) || 0) * out.energyShare) - (out.gateEnergy || 0));
+  if (out.healthLoss) character.health = Math.max(1, (Number(character.health) || 1) - out.healthLoss);
+  notePlaceVisit(character, locId, readClock(character.clock).day, CONTENT.locations[locId]?.name);
+  notePerception(character, locId, CONTENT.locations[locId], { visited: true, usedAbilityIds: [] }, CONTENT.rules);
+  try { ensureLocationImage(locId); } catch { /* art is a convenience; never block a journey */ }
+  saveCharacter(character);
+  const news = await maybeTick();
+  if (await maybeRandomEncounter("onTravel", news)) return;
+  if (await maybeRandomEncounter("onEnterLocation", news)) return;
+  startScene(prompt, news);
 }
 
 async function travelTo(locId, { cost } = {}) {
@@ -11178,7 +11308,7 @@ function renderMap(selectedId = null) {
            ${Object.keys(pm?.subPlaces || {}).length ? `<div class="sub-places"><span class="hint">Places within: </span>${Object.entries(pm.subPlaces).map(([slug, sp]) => `<button class="codex-link ${sp.visited ? "" : "dead"}" data-subgo="${esc(slug)}" data-subloc="${esc(l.id)}" title="${esc(sp.note || (sp.visited ? "you have been here" : "heard of only"))}">${esc(sp.name)}</button>`).join(" ")}</div>` : ""}`
         : `<p class="map-details-desc">You've heard travelers mention it, nothing more. Someone would have to go and see.</p>`}
       ${l.id !== here ? (reachable
-        ? `<button class="btn" id="map-travel" data-dest="${esc(l.id)}" style="margin-top:8px">Travel here (+${ADVANCE.travel}h)</button>${(() => {
+        ? `<button class="btn" id="map-travel" data-dest="${esc(l.id)}" style="margin-top:8px">${(() => { const jp = journeyPlanFor(l.id); return jp ? `Plan the journey (about ${chosenWay(jp).days} days)` : `Travel here (+${ADVANCE.travel}h)`; })()}</button>${(() => {
             // SNG-180: how far this actually is, in the world's own geometry. Erik's year-to-walk
             // scale makes the number mean something — a neighbouring Reach is weeks and your
             // antipode is most of a year, which is what turns waygates into infrastructure.
@@ -11264,7 +11394,7 @@ function renderMap(selectedId = null) {
   const insideBtn = document.getElementById("map-lookinside");
   if (insideBtn) insideBtn.onclick = () => { mapTier = "location"; mapFocus = insideBtn.dataset.inside; renderMap(); };
   const travelBtn = document.getElementById("map-travel");
-  if (travelBtn) travelBtn.onclick = () => travelTo(travelBtn.dataset.dest);
+  if (travelBtn) travelBtn.onclick = () => { if (!planJourneyTo(travelBtn.dataset.dest)) travelTo(travelBtn.dataset.dest); };   // CCODE-387: far is a journey
   const wgBtn = document.getElementById("map-waygate");
   if (wgBtn) wgBtn.onclick = () => travelTo(wgBtn.dataset.wgdest); // SNG-148: the click IS the confirmed intent; transit is real travel
   // SNG-243 §4: a network hop — fold to a known gate across the network, paying the gate-hop cost (not the flat travel hours).
@@ -13633,6 +13763,7 @@ function renderQuestDetail(questId, guidance = null, loading = false) {
     <div class="codex-kind">${esc(q.status)}</div>
     <h2 style="margin-top:4px">${esc(q.title)}</h2>
     <p class="map-details-desc">${esc(q.summary)}</p>
+    ${q.kind === "journey" && q.status === "active" && character.journey?.id === q.id ? `<div style="margin:8px 0"><button class="btn" id="quest-journey-go">Set out for ${esc(character.journey.destName)}</button> <button class="btn secondary" id="quest-journey-stay">Stay</button></div>` : ""}
     <div class="hint">${q.giver ? `From ${esc(q.giver)} · ` : ""}started ${q.startedAt ? "day " + esc(String(q.startedAtDay ?? "").trim() || new Date(q.startedAt).toLocaleDateString()) : "a while back"}</div>
     ${q.giverEntityId && character.codex?.topics?.[q.giverEntityId] ? `<button class="codex-link" data-questgiver="${esc(q.giverEntityId)}" style="margin-top:6px">◈ ${esc(character.codex.topics[q.giverEntityId].label)} in Codex</button>` : ""}
     ${q.progress?.length ? `<div style="margin-top:12px"><h3 class="codex-title" style="font-size:15px">The story so far</h3>${q.progress.map(p => `<div class="codex-fact">${esc(p)}</div>`).join("")}</div>` : ""}
@@ -13645,6 +13776,8 @@ function renderQuestDetail(questId, guidance = null, loading = false) {
     <button class="btn secondary" id="quest-back" style="margin-top:14px">Back</button>
   </div>`);
   document.getElementById("quest-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
+  const qjGo = document.getElementById("quest-journey-go"); if (qjGo) qjGo.onclick = () => setOutOnJourney();   // CCODE-387
+  const qjStay = document.getElementById("quest-journey-stay"); if (qjStay) qjStay.onclick = () => cancelJourney();
   const gv = document.getElementById("quest-back")?.parentElement?.querySelector("[data-questgiver]") || app.querySelector("[data-questgiver]");
   if (gv) gv.onclick = () => renderCodexScreen("", gv.dataset.questgiver);
   const rBtn = document.getElementById("quest-resolve");
@@ -17293,6 +17426,17 @@ function renderPlay(turn, opts = {}) {
       <div style="margin-top:6px;display:flex;gap:8px"><button class="btn" id="ledger-send">Let it travel</button>
       <button class="btn secondary" id="ledger-hold">Keep it local ·</button></div></div>`;
   }
+  // ⛔ CCODE-387 — A JOURNEY IS PLANNED: what it is, the ways, and the door out. The character has not left.
+  if (character?.journey && !activeEnc()) {
+    const j = character.journey;
+    const carried387 = provisionsCarried(character, CONTENT.rules, CONTENT.items || {});
+    main += `<div class="journey-card">
+      <div class="jc-head">🧭 <strong>Journey to ${esc(j.destName)}</strong> <span class="hint">— planned; you have not left ${esc(j.fromName)}</span></div>
+      <div class="jc-line">${esc(journeyLine(j, { carried: carried387 }))}</div>
+      ${(j.options || []).length > 1 ? `<div class="jc-ways">${j.options.map(o => `<button class="opt${o.key === j.chosenKey ? " on" : ""}" data-journey-way="${esc(o.key)}">${esc(`${o.days} days ${o.label}`)}</button>`).join("")}</div>` : ""}
+      <div class="jc-actions"><button class="btn" id="journey-go">Set out for ${esc(j.destName)}</button> <button class="btn secondary" id="journey-cancel">Stay</button></div>
+    </div>`;
+  }
   if (character?._pendingArrival) {
     const p = character._pendingArrival;
     main += `<div class="arrive-banner">You're on your way to <strong>${esc(p.name)}</strong>. <button class="btn arrive-btn" id="do-arrive">→ Arrive at ${esc(p.name)}</button></div>`;
@@ -17641,6 +17785,12 @@ function renderPlay(turn, opts = {}) {
   const breatherBtn = document.getElementById("do-breather"); if (breatherBtn) breatherBtn.onclick = () => rest("breather");
   const mapBtn = document.getElementById("open-map"); if (mapBtn) mapBtn.onclick = () => renderMap();
   const arriveBtn = document.getElementById("do-arrive"); if (arriveBtn) arriveBtn.onclick = () => arriveAtPending(); // SNG-122
+  const journeyGo = document.getElementById("journey-go"); if (journeyGo) journeyGo.onclick = () => setOutOnJourney();   // CCODE-387
+  const journeyStay = document.getElementById("journey-cancel"); if (journeyStay) journeyStay.onclick = () => cancelJourney();
+  for (const b of app.querySelectorAll("[data-journey-way]")) b.onclick = () => {
+    chooseWay(character.journey, b.dataset.journeyWay, CONTENT.rules); refreshJourneyQuest(); saveCharacter(character);
+    renderPlay(character.activeScene?.lastTurn || null, {});
+  };
   // ⛑ SNG-558: the accept goes through `recruit()` — the SAME door the Character-screen button uses — so the cap, the
   // rejoin rule and the role defaults are the ones already proven, not a second implementation beside them.
   for (const b of document.querySelectorAll("[data-seat]")) b.onclick = () => {

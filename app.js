@@ -156,7 +156,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.51";
+const APP_VERSION = "2.0.52";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1569,8 +1569,10 @@ function codexTopImage(open) {
     const fig = rosterFigureOf(artSeed);
     const isPlace = open.kind === "place";
     const url = chosen || ensureImage(
-      { id: artSeed, name: open.label, role: fig?.role || "", appearance: fig?.imagePrompt || fig?.appearance || "", gender: fig?.gender || undefined,
-        descriptionSeed: isPlace ? (open.facts || [])[0] || open.label : undefined },
+      // ⛔ CCODE-391: a PLACE's picture is drawn from the place's own authored look, not from the first fact the codex happens to hold
+      { id: artSeed, name: open.label, role: fig?.role || "", gender: fig?.gender || undefined,
+        appearance: (isPlace ? CONTENT.locations?.[artSeed]?.appearance : null) || fig?.imagePrompt || fig?.appearance || "",
+        descriptionSeed: isPlace ? (CONTENT.locations?.[artSeed]?.descriptionSeed || (open.facts || [])[0] || open.label) : undefined },
       isPlace ? "location" : "npc",
       { ratingLevel: viewerRatingLevel(), seedKey: artSeed, isMinor: false,
         promptOpts: { aesthetic: aestheticFor(fig, CONTENT.visualAesthetics), keeps: keepsForSubject("figure", artSeed) } });   // SNG-435 §C3
@@ -4602,7 +4604,13 @@ function ensureLocationImage(locId) {
   if (loc.image) return loc.image;                          // authored or born-with-image
   character.locationImages = character.locationImages || {};
   if (character.locationImages[locId]) return character.locationImages[locId]; // cached — never regen
-  const url = ensureImage({ id: loc.id, name: loc.name, descriptionSeed: loc.descriptionSeed, poleIntensity: loc.poleIntensity },
+  // ⛔ CCODE-391 — AND THE FIELD HAS TO REACH IT. This subset is everything the art layer sees of a place, and `appearance` was never
+  // in it: Aevi's 141 authored looks would have stayed dead behind the one-line fix in `assembleImagePrompt`. ⚠️ IT STAYS A SUBSET, and
+  // deliberately: `ensureImage` writes the minted url onto the record it is handed, and the record here is the LIVE one — a grown place's
+  // is the character's own, so handing it over would persist a generated url into `image`, the field that means "authored or born with
+  // one". The whole fallback chain the art branch reads is carried instead.
+  const url = ensureImage({ id: loc.id, name: loc.name, appearance: loc.appearance, descriptionSeed: loc.descriptionSeed,
+    encounterFlavor: loc.encounterFlavor, poleIntensity: loc.poleIntensity },
     "location", { ratingLevel: viewerRatingLevel(), field: "image" });
   if (url) {
     character.locationImages[locId] = url;

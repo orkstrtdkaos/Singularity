@@ -695,7 +695,13 @@ export function assembleImagePrompt(kind, subject = {}, ctx = {}) {
     const seat = h.kind === "enterprise" ? "a working enterprise" : "a standing post";
     return `${h.name || "a place held"}: ${seat}, ${cond}${h.charge ? `. ${smartClamp(String(h.charge), 160)}` : ""}${h.stewardName ? `. Kept by ${h.stewardName}` : ""}`;
   }
-  if (kind === "location") return `${subject.name || "a place"}: ${(subject.descriptionSeed || subject.encounterFlavor || "").slice(0, 300)}`;
+  // ⛔ CCODE-391 (Aevi, queue item 6): THE LOOK LEADS, exactly as the npc path above orders it — `appearance` is what somebody wrote
+  // about this BODY, split from its manner on purpose. ⚑ She measured `descriptionSeed` across all the places: 25% mixes look with
+  // CHARACTER inside the 300 chars the generator receives, and 59% carry NO CONCRETE VISUAL NOUN in their first sentence — "and a
+  // generator spends prompt on the invisible half in proportion". Bedrock was handed "a deep suspicion of anything that cannot be
+  // weighed"; it now leads with "A city of massive dressed stone blocks laid in deep courses". The seed stays as the FALLBACK, for a
+  // place minted before anyone wrote its look (SNG-582's mint standard is the other half of that).
+  if (kind === "location") return `${subject.name || "a place"}: ${String(subject.appearance || subject.descriptionSeed || subject.encounterFlavor || "").slice(0, 300)}`;
   // SNG-251 §2b: an evolved item may carry an authored `imagePrompt` naming what the story put ON it (the
   // seated rune-threads, the maker's mark); it wins over the plain description so the re-mint SHOWS the
   // change rather than re-drawing the same spear.

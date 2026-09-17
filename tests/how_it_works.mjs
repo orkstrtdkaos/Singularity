@@ -19767,6 +19767,38 @@ console.log("\n── §274 · the road, walked leg by leg: a perilous leg is a 
     && /key: "journeyUnderwayDetail"/.test(rd("engine/gm_registry.js")));
 }
 
+// ⛔ CCODE-391 — Aevi's queue item 6, and Erik put it first: A PLACE IS DRAWN FROM WHAT IT LOOKS LIKE. She authored `appearance` for
+// every place — look only, split from manner — and measured the field the generator was actually reading: `descriptionSeed` mixes look
+// with CHARACTER in 25% of them and has no concrete visual noun in its first sentence in 59%. ⚠️ AND THE ONE-LINE FIX WOULD NOT HAVE
+// WORKED ALONE: `ensureLocationImage` built its own subset of the record and `appearance` was not in it, so the field could not reach
+// the prompt builder at all. Three doors, one field.
+console.log("\n── §275 · a place is drawn from its own look, at every door ──");
+{
+  const AR = await import("../engine/art.js");
+  const { loadContentHeadless: lch275 } = await import("./headless_content.mjs");
+  const C275 = await lch275();
+  const L275 = C275.locations;
+  const seedOf = (l) => String(l.descriptionSeed || l.encounterFlavor || "").slice(0, 300);
+  const p = (subject) => AR.assembleImagePrompt("location", subject, {});
+  check("§275: ⛔ THE LOOK LEADS, and the seed is only the fallback — a place with no authored look still draws from what it has, never from nothing",
+    p({ name: "Bedrock", appearance: "A city of massive dressed stone blocks", descriptionSeed: "a deep suspicion of anything that cannot be weighed" }) === "Bedrock: A city of massive dressed stone blocks"
+    && p({ name: "Nowhere", descriptionSeed: "a seed" }) === "Nowhere: a seed"
+    && p({ name: "Nowhere", encounterFlavor: "a flavour" }) === "Nowhere: a flavour"
+    && p({ name: "Nowhere" }) === "Nowhere: ");
+  const ids275 = Object.keys(L275);
+  const looks = ids275.filter(id => L275[id]?.appearance);
+  const leads = looks.filter(id => p(L275[id]) === `${L275[id].name}: ${String(L275[id].appearance).slice(0, 300)}`);
+  const moved = looks.filter(id => p(L275[id]) !== `${L275[id].name}: ${seedOf(L275[id])}`);
+  check("§275: ⛑ …and it reaches the corpus: every authored look leads its own place's prompt, and most of them are a different picture than the seed drew",
+    looks.length === ids275.length && leads.length === looks.length && moved.length > 100,
+    `${looks.length} of ${ids275.length} places carry a look · ${leads.length} lead their prompt · ${moved.length} draw a different picture than the seed did`);
+  const A275 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§275: ⛔ THE FIELD REACHES EVERY DOOR — the first-visit banner carries it (and stays a subset, so a minted url is never written into `image`), the codex's place art reads the place's own look, and Draw-again hands over the whole record",
+    /const url = ensureImage\(\{ id: loc\.id, name: loc\.name, appearance: loc\.appearance, descriptionSeed: loc\.descriptionSeed,\n    encounterFlavor: loc\.encounterFlavor, poleIntensity: loc\.poleIntensity \},/.test(A275)
+    && /appearance: \(isPlace \? CONTENT\.locations\?\.\[artSeed\]\?\.appearance : null\) \|\| fig\?\.imagePrompt/.test(A275)
+    && /location: \{\n    needsId: true,\n    label: id => CONTENT\.locations\?\.\[id\]\?\.name \|\| "this place",\n    find: id => CONTENT\.locations\?\.\[id\] \|\| null,/.test(A275));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

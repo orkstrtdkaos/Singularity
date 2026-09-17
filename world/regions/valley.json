@@ -10,7 +10,7 @@
   "eventStages": {
     "water_crisis": {
       "stage": 2,
-      "sinceDay": 13,
+      "sinceDay": 4,
       "rev": 1,
       "atWorldDay": 26,
       "by": {
@@ -29,13 +29,6 @@
       }
     }
   },
-  "spectrumDrift": {
-    "death_life": -0.1,
-    "violence_peace": -0.1,
-    "falsehood_truth": -0.05
-  },
-  "worldFlags": {},
-  "lastTick": "2026-09-16T13:25:59.218Z",
   "questOutcomes": {
     "what-the-water-remembers": {
       "outcome": "redirected",
@@ -47,5 +40,12 @@
       "worldDay": 26,
       "rev": 1
     }
-  }
+  },
+  "spectrumDrift": {
+    "death_life": -0.1,
+    "violence_peace": -0.1,
+    "falsehood_truth": -0.05
+  },
+  "worldFlags": {},
+  "lastTick": "2026-09-17T21:05:09.720Z"
 }

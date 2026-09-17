@@ -951,8 +951,14 @@ for (const pack of PACKS) {
     // south of Millbrook) and THE PAINTER'S SHELF (a site above it — a cabin over the valley), on Erik's brief for Courtney's
     // Adelheid: "herbs, painting at a cabin overlooking the valley, spirituality, a monastery where she works as the healer she
     // is". Her commit 01d21cb14 names both; it measured the suite by red SUITES, and these two landed inside one already red.
-    check("SNG-392/398/396: the hierarchy matches the RATIFIED census — 25 regions, 100 settlements, 15 authored-in-play sites",
-      tiers.region === 25 && tiers.settlement === 100 && tiers.site === 15, JSON.stringify(tiers));
+    // ⚠️ 16 SINCE 2026-09-16 (SNG-600): Aevi minted THE RECLAMATION SITE — the pre-Transition water facility below
+    // Millbrook that `what_the_water_remembers` has pointed four outcomes at since it was written, WITH NO RECORD BEHIND
+    // THEM. Erik was standing at the awakened choice in play when we found it: a `location_state` on a place that did not
+    // exist and an `npc_state` on a being that did not either. Both are authored now. ⛔ AND THIS GATE CAUGHT THE FIRST
+    // SITING AT 1.018 DAYS FROM ITS PARENT, which SNG-398 forbids — a site is somewhere you walk to from the place it
+    // belongs to, not a separate journey. It sits 0.58 days below Millbrook now.
+    check("SNG-392/398/396: the hierarchy matches the RATIFIED census — 25 regions, 100 settlements, 16 authored-in-play sites",
+      tiers.region === 25 && tiers.settlement === 100 && tiers.site === 16, JSON.stringify(tiers));
     const ids = new Set(allLocs.map((l) => l.id));
     const badParent = allLocs.filter((l) => l.parentId !== null && !ids.has(l.parentId));
     check("SNG-392: every parentId resolves and every site HAS a parent",

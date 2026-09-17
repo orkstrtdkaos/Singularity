@@ -45,13 +45,13 @@ derivations of the same count is the defect that put `certify_counts` at 125 aga
 
 ⛔ **DOOR 5 IS THE ONLY UNEVEN ONE, AND IT IS UNEVEN BY PLACE RATHER THAN BROKEN.** ⚠️ **I first reported it as simply BROKEN, and that was a claim about my harness:** this file drove stubEntity → enforceFloors and stopped, while the real mint path also runs affiliationFor (generate.js:453). ⛑ Driving a PARTIAL path and calling it the production path is the exact defect this file exists to catch — committed by the file itself.
 
-⚑ **`readDomains` WALKS FOUR RUNGS** — model-authored · the ROLE string naming a tradition · `skillsObserved` · the REGION’S home tradition. ⛑ The last rung is the safety net, and it does not cover the whole map: **21 of 38 regions** have a home tradition, so **55 of 140 locations** fall through it — including `valley`, which is where play STARTS, and `the_center`, which is the Crossing.
+⚑ **`readDomains` WALKS FOUR RUNGS** — model-authored · the ROLE string naming a tradition · `skillsObserved` · the REGION’S home tradition. ⛑ The last rung is the safety net, and it does not cover the whole map: **21 of 38 regions** have a home tradition, so **56 of 141 locations** fall through it — including `valley`, which is where play STARTS, and `the_center`, which is the Crossing.
 
 ➡️ **So a person minted in the Maw practises `abyssal` and fields a kit; the same person minted in Millbrook fields nothing.** ⚠️ Not a missing mechanism — a missing HOME TRADITION on the regions the player actually walks, which is content rather than code.
 
 ⚠️ **The generation schema still asks for none of abilities, domains, tradition** — so every kit a minted person gets is DERIVED by affiliationFor, never authored by the model. ⛔ And reconcileGeneratedNpcWithMeet copies domains only when the record already has them, which is true once affiliation has run and false before it — so the ORDER of those two steps is load-bearing.
 
-⬜ **The authored side proves the doors themselves work:** **88 of 145** reachable authored people field at least one real craft through the same two functions. ⚠️ **The authored CENSUS is `docs/ROSTER.md` and is not recomputed here** — one ladder, deliberately.
+⬜ **The authored side proves the doors themselves work:** **89 of 146** reachable authored people field at least one real craft through the same two functions. ⚠️ **The authored CENSUS is `docs/ROSTER.md` and is not recomputed here** — one ladder, deliberately.
 
 <!-- END npc-pipeline-generated -->
 

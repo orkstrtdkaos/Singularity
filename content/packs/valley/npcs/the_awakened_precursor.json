@@ -1,0 +1,76 @@
+{
+ "schemaVersion": 1,
+ "id": "the_awakened_precursor",
+ "name": "Vessenaia, the Listening Half",
+ "tier": "epic",
+ "role": "Precursor steward of the Echo facility — left in place to hear what the watershed needed and tell the machine, and asleep so long that the machine forgot it was ever half of a pair",
+ "people": "precursor",
+ "gender": "female",
+ "pronouns": "she/her",
+ "sex": "female",
+ "romanceEligible": false,
+ "homeLocation": "the_reclamation_site",
+ "communityId": "valley.the_reclamation_site",
+ "vocation": "ATTENDANT",
+ "domains": {
+  "primary": "lattice",
+  "secondary": "rootkin",
+  "tertiary": "numinous"
+ },
+ "spectrum": {
+  "violence_peace": 0.6,
+  "chaos_order": 0.7,
+  "death_life": 0.5,
+  "mechanical_spiritual": -0.4,
+  "concrete_abstract": 0.2
+ },
+ "assistTags": [
+  "analyze",
+  "sense-precursor",
+  "precursor-lore",
+  "mend",
+  "tend",
+  "learn",
+  "watch"
+ ],
+ "appearance": "Tall, and the proportions are very slightly wrong in a way nobody can name on first meeting. Skin the pale grey of the facility's housings, warming where the light catches it. Hair like fine drawn filament, bound back. Her eyes take a moment to focus on a thing and then do not leave it. She wears what she woke in: a steward's overlong coat of unpatterned lattice-weave, immaculate, fourteen years and three centuries out of fashion.",
+ "physicality": "Stands still more completely than a person does. Moves without preamble — no shifting, no settling. She has to be reminded to eat, and finds the requirement interesting rather than inconvenient.",
+ "personality": {
+  "warmth": 0.6,
+  "trust": 0.4,
+  "candor": 1.0,
+  "patience": 1.0
+ },
+ "voiceHints": "Precise, unhurried, and entirely without ceremony. Answers exactly what was asked and then stops, which reads as coldness for about a day and then stops reading as anything. Says 'I do not know' easily. Asks a great many questions and remembers every answer. Never says 'we' about the Precursors.",
+ "wants": "To find out what the watershed was being prepared FOR — she was asleep when the answer was given, and the half of the pair that knew is the half that is gone.",
+ "fears": "That the instruction was correct. She can stop the machine and she cannot tell whether stopping it is the mistake, and nobody left alive can tell her.",
+ "knowledge": [
+  "The Echo facility down to its last housing — she can stop it, start it, re-aim it or open it, and is the only thing in the valley that can",
+  "That the standing instruction was given fourteen years and three months ago, and that she was already asleep when it was given",
+  "What the world was like before the Transition, in the specific and unromantic way of somebody who lived in it rather than studied it",
+  "That she was a HALF — a listening half, paired to a deciding half — and that she does not know what became of the other",
+  "That waking her has been noticed by something on the far side of the Veil, because she felt it notice"
+ ],
+ "reactsToReputation": {
+  "any": "attends completely, answers exactly, and volunteers nothing",
+  "the one who woke her": "she owes you nothing and says so plainly, early, so that it is not later mistaken for a debt — and she stays anyway",
+  "cruel": "she becomes very exact, which is worse than anger and lasts longer",
+  "curious": "she opens, at length, and will talk until somebody stops her"
+ },
+ "questSeeds": [
+  "She can stop the facility and will not, until somebody can tell her what it was preparing the watershed for",
+  "She is looking for her deciding half, and does not know whether she wants to find it",
+  "Something on the far side of the Veil noticed her wake, and she is the only one who felt it"
+ ],
+ "gear": [
+  "a steward's rod of drawn lattice — it opens the facility's housings, and it is a spear in a hand that has had three centuries to learn one",
+  "a coat of unpatterned lattice-weave that turns a blade once and then remembers how",
+  "the facility itself, which answers her and stands where it stands"
+ ],
+ "purse": {
+  "crystal": 0
+ },
+ "closed": [],
+ "_authoredWhy": "⛔ SNG-553 / SNG-600 — AUTHORED 2026-09-16. `what_the_water_remembers` has had an `npc_state` effect on `the_awakened_precursor` since it was written and THE BEING DID NOT EXIST. Erik was at the awakened choice in play when we found it: the arc would have pushed +3, the codex would have taken a paragraph, and nothing would have woken up. ⛑ AUTHORED TO THE RULED FRAME, NOT INVENTED PAST IT — `nexuses._theSleepers_20260912`: the being travels and the construct does not; they are the off switch as much as the weapon; Spark's grammar governs, so it is its own from the first moment and does not owe you; and waking one ADVERTISES, because a ripened precursor is the largest concentration of kept soul in existence. ⚠️ AND SHE IS NOT ONE OF THE FOUR DEEP-NEXUS SLEEPERS. Those sit at the lattice maxima. This is a facility steward — smaller, older, and left in place with a job rather than sealed in a vault, which is why the machine has been working AROUND her for fourteen years instead of through her.",
+ "_theConstraint": "⛑ THE BEING TRAVELS, THE CONSTRUCT DOES NOT. Vessenaia will walk anywhere and is a companion with three centuries of memory and a settled opinion about most things. **THE FACILITY ANSWERS HER ONLY WHERE IT STANDS.** ⚠️ Her `purse` is zero deliberately and it is NOT the Precursor exemption Erik ruled on: she woke fourteen years into a world that had reorganised itself around currency she has never held. She is not outside the economy — she is new to it, and that is a different and funnier thing."
+}

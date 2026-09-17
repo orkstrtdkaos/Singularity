@@ -1,0 +1,74 @@
+{
+ "schemaVersion": 1,
+ "id": "the_reclamation_site",
+ "name": "The Reclamation Site",
+ "regionId": "valley",
+ "communityId": "valley.the_reclamation_site",
+ "spectrum": {
+  "violence_peace": 0.2,
+  "chaos_order": 0.7,
+  "death_life": -0.3,
+  "mechanical_spiritual": -0.8,
+  "concrete_abstract": -0.6
+ },
+ "tags": [
+  "precursor",
+  "facility",
+  "water",
+  "contamination-visible",
+  "restricted",
+  "underplace"
+ ],
+ "connections": [
+  "millbrook",
+  "echo_river_crossing",
+  "gen-stillwater-s-trouble"
+ ],
+ "loreRefs": [
+  "valley_primer",
+  "the_coordinate_world"
+ ],
+ "npcsPresent": [],
+ "descriptionSeed": "A pre-Transition water facility set into the riverbed below Millbrook, still running the instruction it was given fourteen years and three months ago: prepare the watershed. Nobody now living knows what it was preparing the watershed FOR. The intake grilles are original, the housings are unopened, and the machine has never once stopped. What changed is only what the instruction now means to a river with people living on it.",
+ "appearance": "A low concrete-and-lattice structure half-sunk in the riverbed, its upper deck standing a few feet above the water and green to the waterline. Intake grilles run its whole river face. Inside, pale seamless housings in ordered ranks, lit from within at a steady dim, with the water led through them in open channels. Everything is clean in the way a thing is clean when nobody has ever been in it.",
+ "encounterFlavor": "The machine is audible from the bank as a low even note that does not change. Standing on the deck, the thing you notice is that nothing is broken.",
+ "questSeeds": [
+  "The instruction has been running since before anyone here was born, and the facility keeps a record of every hour of it",
+  "Something is dormant beneath the housings, and the machine has been working around it rather than through it"
+ ],
+ "map": {
+  "x": 404,
+  "y": 330
+ },
+ "poleIntensity": {
+  "peace": 0.2,
+  "order": 0.7,
+  "life": -0.3,
+  "spiritual": -0.8,
+  "concrete": 0.6
+ },
+ "axisVector": [
+  0,
+  0,
+  0,
+  0.2,
+  -0.6,
+  -0.8,
+  0.7,
+  0,
+  -0.3,
+  0,
+  0,
+  0
+ ],
+ "axisVectorNote": "⛑ Derived from `spectrum` on the millbrook pattern.",
+ "worldPos": {
+  "colatitude": 20.66,
+  "longitude": 251.945,
+  "depth": 0
+ },
+ "worldPosNote": "⛑ 0.6 walking days below Millbrook on the Echo, downstream of the mill race — which is where Edvar reads the river from, and why he noticed first. ⚠️ SNG-398 requires a SITE to sit within one day of its parent and my first siting was 1.018 days out, which the gate caught: a site is somewhere you walk to from the place it belongs to, not a separate journey.",
+ "tier": "site",
+ "parentId": "millbrook",
+ "_minted_20260916": "⛔ SNG-552 / SNG-600 — AUTHORED 2026-09-16, AND LATE. `what_the_water_remembers` has pointed four outcomes at `the_reclamation_site` since it was written, and the location did not exist: a `location_state` effect on a place with no record. ⚠️ Erik was standing at the awakened choice in play when we found it. ⛑ Sited 1.2 walking days below Millbrook on the Echo, downstream of the mill race, which is where Edvar Crane reads the river from and why he was the first to notice."
+}

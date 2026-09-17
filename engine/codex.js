@@ -6,7 +6,7 @@
 // back the topics RELEVANT to where the character is and what they're pursuing.
 
 import { slugify } from "./quests.js";
-import { normName, namesMatch, smartClamp } from "./namematch.js"; // SNG-152
+import { normName, namesMatch, smartClamp, givenName } from "./namematch.js"; // SNG-152 · CCODE-400: a mystery named after somebody
 export { namesMatch }; // back-compat: callers/tests import namesMatch from codex.js
 
 const KINDS = ["mystery", "faction", "lore", "event", "person", "place"];
@@ -53,6 +53,24 @@ export function resolveTopic(character, u, ctx = {}) {
   const raw = String(u.label || u.topic || "").slice(0, 60);
   let entityId = u.entityId ? slugify(u.entityId) : null;
 
+  // ⛔ CCODE-400 (Erik: "why Loki's save still has 'Halvex' as a mystery person, 'Halvex Coil' as the legend and orchestrator") —
+  // A MYSTERY WHOSE LABEL IS SOMEBODY'S NAME IS ABOUT THAT SOMEBODY. ⚑ The chain, measured on his save: the guard below excluded
+  // `mystery` from the entity lookup, so the topic got no `entityId`; `kindFromEntity` needs one and could never correct the kind;
+  // and `compatibleKinds` then made the wrong kind — as the note on it says — a PERMANENT barrier to tidying. One man, two cards,
+  // and clicking his name opened a mystery. ⚠️ `namesMatch` was always capable of it: "Halvex" ↔ "Halvex Coil" is true.
+  //
+  // ⚠️ A MYSTERY TAKES THE STRICT MATCH, NOT `namesMatch`. A mystery's label is usually a PHRASE, and `namesMatch` accepts whole-word
+  // containment: "The Long Bough" would have bound itself to "Vessin of the Long Bough" — a mystery about a place filed under a
+  // person. So a mystery anchors only where its label IS the person's name or their given name.
+  if (!entityId && raw && u.kind === "mystery") {
+    const want = normName(raw);
+    // ⛑ AND IT PREFERS THE MAN THEY MET. The people pool holds the content record AND the registry one — `halvex_coil` the legend and
+    // `churn-revel-orchestrator` the man — so taking the first match anchors the new page to the legend and reopens the very split
+    // this closes. The registry is the record with the meetings on it. (My own gate caught this taking `halvex-coil`.)
+    const named = want ? Object.entries(ctx.entities?.people || {}).filter(([, name]) => normName(name) === want || givenName(name) === want) : [];
+    const pick = named.find(([id]) => character?.npcRegistry?.[id]) || named[0];
+    if (pick) entityId = slugify(pick[0]);
+  }
   // anchor a person/place label to a KNOWN entity id when the GM didn't pass one
   if (!entityId && raw && (!u.kind || u.kind === "person" || u.kind === "place")) {
     const pools = u.kind === "person" ? ["people"] : u.kind === "place" ? ["places"] : ["people", "places"];
@@ -485,6 +503,41 @@ export function foldTopicsByIdPrefix(character, prefix, parentId) {
 export function mergeCodexTopics(character, { entities = null } = {}) {
   ensureCodex(character);
   const topics = character.codex.topics;
+  // ⛔ CCODE-400 (Erik: "why Loki's save still has 'Halvex' as a mystery person, 'Halvex Coil' as the legend and orchstrater") —
+  // A PAGE ABOUT SOMEBODY YOU KNOW IS BOUND TO THEM, AND THAT IS WHAT MAKES IT MERGEABLE. ⚑ Measured on his save: Halvex has TWO
+  // pages — `churn-revel-orchestrator`, anchored, kind `person`, 4 facts, and `halvex`, anchored to NOTHING, kind `mystery`, with
+  // TEN. Most of what he knows about the man sits on the page that cannot point at him. Silas's Mara Wells is the same shape.
+  //
+  // ⚠️ THE CHAIN, AND EVERY LINK OF IT WAS ALREADY HERE. `resolveTopic` never looked an entity up for a `mystery`, so no `entityId`
+  // was set; `kindFromEntity` needs one, so the kind stayed `mystery`; and `compatibleKinds` then made that — as its own note says —
+  // a PERMANENT barrier to tidying. Binding is the one missing link: the repair loop below corrects the kind, and the merger folds
+  // the pair on `sameEntity` without needing the kinds to agree at all.
+  //
+  // ⛔ IT BINDS ONLY ON AN EXACT NAME, NEVER `namesMatch`'s containment, and never where two people could answer. A label is often a
+  // PHRASE — "The Long Bough" would have bound itself to "Vessin of the Long Bough", filing a mystery about a place under a person —
+  // so the label must BE the person's name or their given name, and exactly one person may hold it. ⚠️ Nothing is folded here: this
+  // states who a page is about, and the sweep that follows does what that implies. Without `entities` it does nothing at all.
+  //
+  // ⛔ AND ONE MAN UNDER TWO IDS IS THE COMMON CASE, NOT THE EXCEPTION — this is the rest of what Erik reported. Halvex is THREE
+  // records: the mystery page, `halvex_coil` "Halvex Coil, the Rewriter" in the content pool (the legend), and
+  // `churn-revel-orchestrator` "Halvex Coil" in the registry (the man he has met ten times). A count of candidates therefore refuses
+  // his case for the wrong reason, so the test is whether the candidates are the SAME PERSON: they must all match one another, which
+  // "Halvex Coil" and "Halvex Coil, the Rewriter" do — a title suffix is not a different man. ⚠️ Vessin is why this is not loosened
+  // further: "Vessin Tallow-bark" and "Vessin of the Long Bough" share a given name, do NOT match each other, and are two people.
+  // ⛑ The binding goes to the record the PLAYER'S OWN REGISTRY holds — that is the one with the meetings on it, the one the who-is
+  // card answers for, and the one every other page in their codex is keyed by.
+  const registry = character.npcRegistry || {};
+  for (const t of Object.values(topics)) {
+    if (!t || t.entityId || !t.label) continue;
+    const want = normName(t.label);
+    if (!want) continue;
+    const hits = Object.entries(entities?.people || {}).filter(([, name]) => normName(name) === want || givenName(name) === want);
+    if (!hits.length) continue;
+    const onePerson = hits.every(([, a]) => hits.every(([, b]) => namesMatch(a, b)));
+    if (!onePerson) continue;                                  // two people could answer to it: only the player can say which
+    const pick = hits.find(([id]) => registry[id]) || hits[0];
+    t.entityId = slugify(pick[0]);
+  }
   // ⚑ REPAIR BEFORE MERGE, AND ON EVERY PASS. This runs at every load, so the five misfiled topics on a real
   // save heal here with no reconcile step — and a wrong kind stops being a permanent barrier. ⚠️ Not counted
   // in `merged`: a re-key is a rename, and smoke pins a second pass as returning nothing.

@@ -72,6 +72,36 @@ export function givenName(full) {
   return normName(first);
 }
 
+/** ⛔ CCODE-400 (Erik) — "When the GM narrates first name only, but the context tells you who it is fully, there should still be an
+ *  underline." ⚑ MEASURED across the 16 saves: 1,184 people are in the click index and 1,160 of them are known by a multi-word name —
+ *  "Halvex Coil, the Rewriter", "Vessin Tallow-bark" — so a narrator writing *Halvex* or *Vessin* wrote a name the index does not hold.
+ *
+ *  ⚠️ THIS IS NOT `givenName`, WHICH TAKES THE FIRST WORD AND IS RIGHT TO. A LINK is a claim that a word IS somebody, and three classes
+ *  of first word are not names — the measurement found all three rather than my guessing at them:
+ *    · an HONORIFIC: "Sister Alder" and "Overseer Grael" are Alder and Grael, so the honorific is stepped over, not linked.
+ *    · what is left may be a CONNECTIVE — "Seeker of the Lost Chord" has no given name at all, and gets no alias.
+ *    · a LOWERCASE word is not a name: "Unknown (east bank traveler)" would otherwise have handed a link to the word *east*.
+ *  ⛔ And a single-word name needs no alias: it is already the whole name. Returns "" when there is nothing safe to link. Pure. */
+// ⚠️ AN ARTICLE IS NOT AN HONORIFIC, and my own gate caught me treating it as one: stepping over "the" in "the Starless One" produced
+// *Starless*, which is half an epithet and not a name anybody is called. A name that OPENS with an article is an epithet all the way
+// through — "The Unravelled Mind", "The Starless One" — and has no first name inside it to offer.
+const ALIAS_EPITHET_OPENER = new Set(["the", "a", "an", "unknown", "someone", "somebody"]);
+const ALIAS_HONORIFIC = new Set(["sister", "brother", "elder", "overseer", "warden", "keeper", "master", "mistress",
+                                 "seeker", "lady", "lord", "sir", "captain", "old", "young"]);
+const ALIAS_CONNECTIVE = new Set(["of", "the", "who", "whom", "she", "he", "they", "that", "and", "in", "at", "from", "which", "with"]);
+export function givenNameAlias(full) {
+  const words = String(full || "").trim().split(/[\s,(—–-]+/).filter(Boolean);
+  if (ALIAS_EPITHET_OPENER.has((words[0] || "").toLowerCase())) return "";
+  let i = 0;
+  while (i < words.length && ALIAS_HONORIFIC.has(words[i].toLowerCase())) i++;
+  const w = words[i] || "";
+  if (words.length <= i + 1) return "";                    // nothing after it: the whole name, not an alias
+  if (w.length < 4) return "";                             // a short word matches too much ordinary prose
+  if (ALIAS_CONNECTIVE.has(w.toLowerCase())) return "";
+  if (w[0] !== w[0].toUpperCase() || w[0] === w[0].toLowerCase()) return "";   // a name is capitalised where a narrator writes it
+  return w;
+}
+
 /** Every given name any character on this device has already met. Pure over the saves passed in —
  *  the caller supplies them, so this stays testable and storage-agnostic. */
 export function usedGivenNames(characters = []) {

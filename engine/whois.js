@@ -18,6 +18,7 @@ import { isDescriptiveNotName } from "./state.js";
 // Pure. Reads content + world state + the character's own codex; writes nothing, touches no DOM.
 
 import { tierRank } from "./legends.js";
+import { givenNameAlias } from "./namematch.js";   // CCODE-400: the first name a narrator writes
 
 const TIER_MEANING = {
   mythic: "mythic — the world has a story about them, and only a handful ever get one",
@@ -104,6 +105,44 @@ export function knownIndex({ roster = [], arcs = [], codexTopics = {}, titles = 
   for (const c of creatures) if (c?.name && !shortEnough(c.name)) push(c.name, c.id, "creature");
   for (const o of objects) if (o?.name && !shortEnough(o.name)) push(o.name, o.id, "thing");
   for (const rung of Object.keys(TIER_MEANING)) push(rung, rung, "tier");
+
+  // ⛔ CCODE-400 (Erik) — AND THE FIRST NAME ON ITS OWN, WHICH IS WHAT THE GM ACTUALLY WRITES. He reported *Halvex* and *Vessin* plain in
+  // his own prose while "Halvex Coil, the Rewriter" and "Vessin Tallow-bark" were both in this index. ⚑ Measured: 334 of the 1,160
+  // multi-word people across the saves gain a first name here; the rest are refused by the rules below, which is the point of them.
+  //
+  // ⚠️ ONLY PEOPLE. A place is not called by its first word — "Harmonic Heights — Lower Terrace" is not *Harmonic* — and neither is a
+  // codex topic: the measurement turned up "Mirror-Bright (Maintained Veil Discovery)", "Terminus Regulators Beneath the Valley" and
+  // "Ring-Form Residue at Eastern Intake", whose first words are common nouns that would have taken links on ordinary prose.
+  //
+  // ⛔ AND ACQUAINTANCE SETTLES A CLASH, WHICH IS ERIK'S "the context tells you who it is". Vessin is the case that taught this: Loki
+  // knows *two* — "Vessin Tallow-bark", met fourteen times, his partner, and "Vessin of the Long Bough", a courier the world generated
+  // and he has never met. They are NOT one person and must not be merged. But the first name is not ambiguous in any sentence he will
+  // read: it means the one he knows. So a clash resolves to the single person with a meeting on the record, and a clash between two
+  // people he has BOTH met gets no link at all — there the name really is ambiguous and a link would be a guess.
+  const metOf = (rec) => Number(rec?.met || 0);
+  const people = [
+    ...roster.map(f => ({ name: f?.name, id: f?.id, kind: "figure", met: 0 })),
+    ...npcs.map(n => ({ name: n?.name, id: n?.id, kind: "npc", met: metOf(n), self: `${n?.role || ""} ${n?.description || ""}` })),
+  ].filter(p => p.name && p.id);
+  const byAlias = new Map();
+  for (const p of people) {
+    const alias = givenNameAlias(p.name);
+    if (!alias || taken.has(alias)) continue;
+    // ⚠️ THE EXISTING RULE, GENERALISED: a word inside their own role or description is what they DO, not who they are. It caught
+    // "Common house apprentice", "Rounder woman" and "Heights Waystation Runner" — five of the eleven refusals came this way.
+    if (p.self && p.self.toLowerCase().includes(alias.toLowerCase())) continue;
+    (byAlias.get(alias) || byAlias.set(alias, []).get(alias)).push(p);
+  }
+  for (const [alias, claimants] of byAlias) {
+    const distinct = [...new Set(claimants.map(c => c.name))];
+    let who = claimants[0];
+    if (distinct.length > 1) {
+      const met = claimants.filter(c => c.met > 0);
+      if ([...new Set(met.map(c => c.name))].length !== 1) continue;   // ambiguous between people they know: no link
+      who = met[0];
+    }
+    push(alias, who.id, who.kind);
+  }
   entries.sort((a, b) => b.name.length - a.name.length);
   return entries;
 }

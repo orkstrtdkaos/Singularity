@@ -20248,6 +20248,102 @@ console.log("\n── §280 · every kind of news carries its place ──");
     && /\.news-place-chip \{ color: var\(--muted/.test(rd("style.css")));
 }
 
+// ⛔ CCODE-400 (Erik) — "why Loki's save still has 'Halvex' as a mystery person, 'Halvex Coil' as the legend and orchstrater, and a
+// Halfvex name that has no underline at all.. plus Vessin has no underline. When the GM narrates first name only, but the context tells
+// you who it is fully, there should still be an underline."
+// ⚑ MEASURED: 1,184 people are in the click index across the 16 saves and 1,160 are known by a MULTI-WORD name, so a narrator writing
+// *Halvex* or *Vessin* writes a name it does not hold — 334 of them gain their first name here. And Halvex was THREE records: a
+// `mystery` page with ten facts anchored to nothing, `halvex_coil` the legend in the content pool, and `churn-revel-orchestrator` the
+// man in the registry with four. Most of what Loki knew about him sat on the page that could not point at him.
+console.log("\n── §281 · a first name the context settles, and one man one page ──");
+{
+  const NM281 = await import("../engine/namematch.js");
+  const WI281 = await import("../engine/whois.js");
+  const CX281 = await import("../engine/codex.js");
+
+  // ⛔ 1 · WHAT A NARRATOR WOULD ACTUALLY CALL THEM — three classes of first word that are not names
+  const ga = NM281.givenNameAlias;
+  check("§281: ⛔ AN HONORIFIC IS STEPPED OVER, NOT LINKED — 'Sister Alder' and 'Overseer Grael' are Alder and Grael; a link is a claim that a word IS somebody",
+    ga("Sister Alder, the Ward That Does Not Break") === "Alder" && ga("Overseer Grael of the Edge District") === "Grael",
+    JSON.stringify([ga("Sister Alder, the Ward That Does Not Break"), ga("Overseer Grael of the Edge District")]));
+  check("§281: ⛔ …AND WHAT IS LEFT MAY BE NO NAME AT ALL — 'Seeker of the Lost Chord' has none, and a LOWERCASE word is not a name: 'Unknown (east bank traveler)' would otherwise have handed a link to the word *east*",
+    ga("Seeker of the Lost Chord") === "" && ga("Unknown (east bank traveler)") === "" && ga("the Starless One") === "",
+    JSON.stringify([ga("Seeker of the Lost Chord"), ga("Unknown (east bank traveler)"), ga("the Starless One")]));
+  check("§281: …a single-word name needs no alias (it is already the whole name), a short one matches too much prose, and an ordinary two-part name gives its first",
+    ga("Harrow") === "" && ga("Ing Vale") === "" && ga("Halvex Coil, the Rewriter") === "Halvex" && ga("Vessin Tallow-bark") === "Vessin",
+    JSON.stringify([ga("Harrow"), ga("Ing Vale"), ga("Halvex Coil, the Rewriter")]));
+
+  // ⛔ 2 · THE INDEX GAINS IT FOR PEOPLE ONLY
+  const idx281 = (over = {}) => WI281.knownIndex({
+    roster: [], arcs: [], codexTopics: {}, titles: {},
+    npcs: [], places: [], creatures: [], objects: [], ...over,
+  });
+  const withPerson = idx281({ npcs: [{ id: "n1", name: "Halvex Coil", met: 3, role: "orchestrator", description: "hoarse" }] });
+  check("§281: ⛔ A PERSON KNOWN BY TWO NAMES IS REACHABLE BY THE FIRST — the whole of Erik's report, and the full name still wins the match because the index is longest-first",
+    withPerson.some(e => e.name === "Halvex" && e.kind === "npc" && e.id === "n1")
+    && withPerson.findIndex(e => e.name === "Halvex Coil") < withPerson.findIndex(e => e.name === "Halvex"),
+    JSON.stringify(withPerson.map(e => e.name)));
+  const withPlace = idx281({ places: [{ id: "p1", name: "Harmonic Heights — Lower Terrace" }], codexTopics: { t: { id: "t", label: "Ring-Form Residue at Eastern Intake" } } });
+  check("§281: ⛔ …AND ONLY FOR PEOPLE. A place is not called by its first word, and neither is a codex topic — 'Harmonic', 'Ring' and 'Terminus' are common nouns that would take links on ordinary prose",
+    !withPlace.some(e => e.name === "Harmonic") && !withPlace.some(e => e.name === "Ring"),
+    JSON.stringify(withPlace.map(e => e.name)));
+
+  // ⛔ 3 · ACQUAINTANCE SETTLES A CLASH — which is what Erik means by "the context tells you who it is"
+  const twoVessin = [
+    { id: "met", name: "Vessin Tallow-bark", met: 14, role: "assessor of salvage", description: "grey-green coat" },
+    { id: "unmet", name: "Vessin of the Long Bough", met: 0, role: "courier-scout", description: "carries messages" },
+  ];
+  const resolved = idx281({ npcs: twoVessin });
+  check("§281: ⛔ TWO PEOPLE SHARE A FIRST NAME AND THE ONE YOU KNOW TAKES IT — Loki knows Vessin Tallow-bark (met 14) and a Vessin of the Long Bough he has never met; they are NOT one person and are never merged, but *Vessin* in a sentence he reads means the one he knows",
+    resolved.some(e => e.name === "Vessin" && e.id === "met"), JSON.stringify(resolved.filter(e => e.name === "Vessin")));
+  const bothMet = idx281({ npcs: twoVessin.map(n => ({ ...n, met: 9 })) });
+  check("§281: ⛔ …AND WHERE THEY HAVE MET BOTH, NO LINK AT ALL — there the name really is ambiguous, and a link would be a guess dressed as a fact",
+    !bothMet.some(e => e.name === "Vessin"), JSON.stringify(bothMet.map(e => e.name)));
+  const inRole = idx281({ npcs: [{ id: "r1", name: "Rounder woman", met: 2, role: "a rounder of the south lane", description: "" }] });
+  check("§281: …and the existing rule still holds, generalised — a first word inside their own role is what they DO, not who they are ('Common house apprentice', 'Heights Waystation Runner')",
+    !inRole.some(e => e.name === "Rounder"), JSON.stringify(inRole.map(e => e.name)));
+
+  // ⛔ 4 · A PAGE ABOUT SOMEBODY IS BOUND TO THEM, AND THE STANDING SWEEP DOES IT AT EVERY LOAD
+  const makeSave = () => ({
+    npcRegistry: { "churn-revel-orchestrator": { name: "Halvex Coil", met: 10 } },
+    codex: { topics: {
+      halvex: { id: "halvex", label: "Halvex", kind: "mystery", facts: ["[d3] he was at the wall"], aliases: [], links: [], archive: [] },
+      "churn-revel-orchestrator": { id: "churn-revel-orchestrator", label: "The Churn-Revel orchestrator", kind: "person", entityId: "churn-revel-orchestrator", facts: ["[d3] he runs the churn"], aliases: [], links: [], archive: [] },
+    } },
+  });
+  // ⚠️ the people pool is the app's own: the content pool AND the registry, which is where the duplicate id lives
+  const ents281 = { people: { halvex_coil: "Halvex Coil, the Rewriter", "churn-revel-orchestrator": "Halvex Coil" }, places: {} };
+  const save281 = makeSave();
+  const merged281 = CX281.mergeCodexTopics(save281, { entities: ents281 });
+  const pages = Object.values(save281.codex.topics).filter(t => /halvex|churn/i.test(`${t.id} ${t.label}`));
+  check("§281: ⛔ ONE MAN, ONE PAGE — an unbound page whose label is his given name is bound to him, the kind repair then corrects `mystery` to `person`, and the merger folds the pair on the shared entity without the kinds ever having to agree",
+    pages.length === 1 && pages[0].entityId === "churn-revel-orchestrator" && pages[0].kind === "person" && pages[0].facts.length === 2
+    && merged281.length === 1,
+    JSON.stringify(pages.map(p => ({ id: p.id, kind: p.kind, entity: p.entityId, facts: p.facts.length }))));
+  check("§281: ⛔ …AND THE BINDING GOES TO THE RECORD THE PLAYER'S REGISTRY HOLDS, not the content pool's copy of the same man — `halvex_coil` is the legend, `churn-revel-orchestrator` is who he has met, and a count of candidates would have refused his case for the wrong reason",
+    pages[0].entityId === "churn-revel-orchestrator", pages[0].entityId);
+  // ⛑ and it is the SAME-PERSON test, not a given-name test: Vessin must stay unbound
+  const vSave = { npcRegistry: {}, codex: { topics: { v: { id: "v", label: "Vessin", kind: "mystery", facts: ["[d1] someone asked after her"], aliases: [], links: [], archive: [] } } } };
+  CX281.mergeCodexTopics(vSave, { entities: { people: { a: "Vessin Tallow-bark", b: "Vessin of the Long Bough" }, places: {} } });
+  check("§281: ⛑ …and where the candidates are NOT the same person it stays unbound — 'Vessin Tallow-bark' and 'Vessin of the Long Bough' share a given name and do not match each other; only the player can say, and the merge tool is how they say it",
+    vSave.codex.topics.v?.entityId == null, JSON.stringify(vSave.codex.topics.v?.entityId ?? null));
+  const again281 = CX281.mergeCodexTopics(save281, { entities: ents281 });
+  check("§281: …and a second pass finds nothing — the sweep runs at every load, so it must be idempotent",
+    again281.length === 0, `${again281.length} merges on the second pass`);
+
+  // ⛔ 5 · AND THE UPSTREAM, so a new mystery does not recreate the split
+  // the character carries a registry, as every live one does: it is what decides WHICH of the two ids for one man the page anchors to
+  const anchored = CX281.resolveTopic({ npcRegistry: { "churn-revel-orchestrator": { name: "Halvex Coil", met: 10 } }, codex: { topics: {} } },
+    { label: "Halvex", kind: "mystery", fact: "x" }, { entities: ents281 });
+  const notAnchored = CX281.resolveTopic({ codex: { topics: {} } }, { label: "The Long Bough", kind: "mystery", fact: "x" }, { entities: { people: { b: "Vessin of the Long Bough" }, places: {} } });
+  check("§281: ⛔ THE CHAIN IS CUT AT THE SOURCE TOO — a `mystery` was never looked up against the known people at all, which is why no `entityId` was set, why the kind was never corrected, and why `compatibleKinds` made it (as its own note says) a PERMANENT barrier to tidying",
+    anchored.entityId === "churn-revel-orchestrator" && notAnchored.entityId == null,
+    JSON.stringify({ anchored: anchored.entityId, phrase: notAnchored.entityId }));
+  check("§281: ⛑ …and a mystery takes the STRICT match, never `namesMatch`'s containment — a label is usually a phrase, and 'The Long Bough' would have filed a mystery about a place under a person",
+    notAnchored.entityId == null && NM281.namesMatch("The Long Bough", "Vessin of the Long Bough") === true,
+    "containment matches, and is refused here on purpose");
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

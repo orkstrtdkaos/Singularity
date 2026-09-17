@@ -1668,8 +1668,8 @@
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 1917,
-    "lastSharedReadAt": "2026-09-17T21:29:59.590Z",
+    "lastGenCount": 1919,
+    "lastSharedReadAt": "2026-09-17T23:11:39.519Z",
     "lastTickWorldDay": 79,
     "lastCanonWorldDay": 79,
     "turnsSinceOffer": 0,
@@ -1896,7 +1896,7 @@
         "kind": "decision",
         "premise": "Someone who keeps the count of what has been unmade has begun rounding down, telling themselves the difference is noise — but the rounding has a direction, and it has been consistent for long enough…",
         "cause": "The act of counting the unmade requires a decision about what constitutes a thing distinct enough to be counted, and that threshold has always been left to…",
-        "stage": 0,
+        "stage": 1,
         "seededAtCount": 1917,
         "surfaced": false,
         "fate": "growing",
@@ -1941,6 +1941,21 @@
         },
         "addedDay": 4,
         "locationId": "the_crossing"
+      },
+      {
+        "source": "threat-attack",
+        "kind": "threat-attack",
+        "subjectId": "beast_mire_gulper",
+        "aimedAtPlayer": true,
+        "urgency": 3,
+        "oneLineHook": "A a mire-gulper has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
+        "becomes": {
+          "type": "encounter",
+          "encounterId": "beast_mire_gulper",
+          "name": "a mire-gulper"
+        },
+        "addedDay": 4,
+        "locationId": "gen-the-made-gate"
       }
     ],
     "offscreenCursor": 10,
@@ -9175,8 +9190,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789681617309,
-  "rev": 754,
+  "updatedAt": 1789686704005,
+  "rev": 757,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10826,7 +10841,7 @@
     "lastDeployDay": 76,
     "lastBeat": "witness_power"
   },
-  "syncedAt": 1789595699117,
+  "syncedAt": 1789681617309,
   "_applyFailures": null,
   "companionMemory": {
     "coil": [

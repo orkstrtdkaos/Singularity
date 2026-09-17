@@ -957,8 +957,8 @@ for (const pack of PACKS) {
     // exist and an `npc_state` on a being that did not either. Both are authored now. ⛔ AND THIS GATE CAUGHT THE FIRST
     // SITING AT 1.018 DAYS FROM ITS PARENT, which SNG-398 forbids — a site is somewhere you walk to from the place it
     // belongs to, not a separate journey. It sits 0.58 days below Millbrook now.
-    check("SNG-392/398/396: the hierarchy matches the RATIFIED census — 25 regions, 100 settlements, 16 authored-in-play sites",
-      tiers.region === 25 && tiers.settlement === 100 && tiers.site === 16, JSON.stringify(tiers));
+    check("SNG-392/398/396: the hierarchy matches the RATIFIED census — 25 regions, 101 settlements, 17 authored-in-play sites",
+      tiers.region === 25 && tiers.settlement === 101 && tiers.site === 17, JSON.stringify(tiers));
     const ids = new Set(allLocs.map((l) => l.id));
     const badParent = allLocs.filter((l) => l.parentId !== null && !ids.has(l.parentId));
     check("SNG-392: every parentId resolves and every site HAS a parent",

@@ -1,0 +1,74 @@
+{
+ "schemaVersion": 1,
+ "id": "the_null_stone",
+ "name": "The Null Stone",
+ "regionId": "the_center",
+ "communityId": "the_center.the_null_stone",
+ "spectrum": {
+  "violence_peace": 0.4,
+  "chaos_order": 0.8,
+  "death_life": 0.2,
+  "mechanical_spiritual": -0.5,
+  "concrete_abstract": -0.4
+ },
+ "tags": [
+  "precursor",
+  "sealed",
+  "waygate",
+  "hub",
+  "restricted",
+  "guardian"
+ ],
+ "connections": [
+  "the_crossing",
+  "the_regulator_chamber"
+ ],
+ "loreRefs": [
+  "the_coordinate_world"
+ ],
+ "npcsPresent": [],
+ "descriptionSeed": "The unmarked stone at the hub of the Crossing, around which five waygate arches stand — four sealed with deliberate interference, one open. A hairline seam runs vertically through its far face, too precise to be breakage. It is not passively sealed: forced, it draws inward and seals tighter; asked honestly, it asks back. It was cut to wait for somebody willing to understand rather than break, use or steal what lies behind it.",
+ "appearance": "A block of unmarked grey stone, waist-high and wider than a cart, standing at the centre of the Crossing's hub where five arches ring it. No carving, no inscription, no wear on its upper face. The seam is visible only in raking light and runs floor to top in a single line. It is warm under a hand that touches it meaning something.",
+ "encounterFlavor": "People walk past it all day without looking at it, which is the thing to notice about it.",
+ "questSeeds": [
+  "It opened once, to an honest promise, and nobody has established whether it will open again or for whom",
+  "Four of the five arches around it are sealed with deliberate interference and the fifth is deliberately not"
+ ],
+ "map": {
+  "x": 300,
+  "y": 300
+ },
+ "poleIntensity": {
+  "peace": 0.4,
+  "order": 0.8,
+  "life": 0.2,
+  "spiritual": -0.5,
+  "concrete": 0.4
+ },
+ "axisVector": [
+  0,
+  0,
+  0,
+  0.4,
+  -0.4,
+  -0.5,
+  0.8,
+  0,
+  0.2,
+  0,
+  0,
+  0
+ ],
+ "axisVectorNote": "⛑ Derived from `spectrum` on the millbrook pattern.",
+ "worldPos": {
+  "colatitude": 0.34,
+  "longitude": 0.22,
+  "depth": 0
+ },
+ "worldPosNote": "⛑ At the Crossing's own hub — a site of its parent, within a day of it as SNG-398 requires.",
+ "tier": "site",
+ "parentId": "the_crossing",
+ "truth": "⛔ GM-EYES-ONLY. The Null Stone is the LID, and it is a guardian rather than a lock — it was left keyed to intent because the thing below is not dangerous, it is UNANSWERED, and whoever came down was meant to be somebody who would answer rather than take. ⚠️ It tests honesty because the question below cannot be answered dishonestly and still count.",
+ "_minted_20260917": "⛔ SNG-614 — AUTHORED FROM PLAY, 2026-09-17. Erik: 'Loki opened the Null Stone. Make sure the generator can actually know what is down there and why, to be concrete.' ⚠️ NONE OF IT WAS AUTHORED: no Null Stone, no chamber, no regulator. The GM improvised it across four days and improvised WELL — 'a pre-Transition water-works built not to contain but to ASK something of the river', a regulator whose question is 'whether the water is prepared, and whether the right person is present'. ⛑ AND IT WALKED INTO THE AUTHORED COSMOLOGY FROM THE OTHER END. `the_reclamation_site` below Millbrook has been running one standing instruction for fourteen years — PREPARE THE WATERSHED. This chamber is where that instruction is ASKED rather than executed. ⛔ AND THE SECOND HALF OF THE REGULATOR'S QUESTION IS THE HOLE IN VESSENAIA: she is authored as 'a LISTENING half, paired to a DECIDING half, and she does not know what became of it'. **The chamber is where the deciding half was supposed to stand. Nobody has stood there in fourteen years, which is why the question has never been answered and the preparation has never stopped.**",
+ "_regionFix": "⛑ `regionId: the_center`, not the `crossing` I invented — The Crossing is a SETTLEMENT-tier place whose region is `the_center`. content_ci caught it in one run: 'no density, region not in the_substrate.json'."
+}

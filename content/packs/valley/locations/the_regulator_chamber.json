@@ -1,0 +1,75 @@
+{
+ "schemaVersion": 1,
+ "id": "the_regulator_chamber",
+ "name": "The Regulator Chamber",
+ "regionId": "the_center",
+ "communityId": "the_center.the_regulator_chamber",
+ "spectrum": {
+  "violence_peace": 0.6,
+  "chaos_order": 0.9,
+  "death_life": 0.1,
+  "mechanical_spiritual": -0.9,
+  "concrete_abstract": -0.5
+ },
+ "tags": [
+  "precursor",
+  "facility",
+  "water",
+  "sealed",
+  "underplace",
+  "restricted"
+ ],
+ "connections": [
+  "the_null_stone"
+ ],
+ "loreRefs": [
+  "the_coordinate_world",
+  "valley_primer"
+ ],
+ "npcsPresent": [],
+ "descriptionSeed": "A sealed pre-Transition water-works of impossible scale beneath the Crossing, where a swift river runs through worked darkness from upstream and leaves by a tunnel nobody has followed. Nine apertures line the walls, sealed. Phosphorescent notation bands the chamber at eye height, all the way round. The regulator housing stands at the far end. The place was not built to hold the river back — it was built to ASK it something, and to listen.",
+ "appearance": "A vault of fitted pale stone larger than any hall above ground, its ceiling lost above lamp-reach. The floor slopes to a channel where the river runs black and fast and quiet. Nine round apertures at intervals around the wall, each capped flush. A band of faint green-white notation runs the full circumference at eye height. At the far end, a housing of the same pale material with a recess in it at the height of a standing person's hands.",
+ "encounterFlavor": "The notation brightens where somebody stands near it and dims behind them as they move on. Nothing else in the chamber reacts to anyone at all.",
+ "questSeeds": [
+  "The regulator asks two things and nobody has been able to answer the second",
+  "Nine apertures, one per reach of the watershed — and one of them is already flowing",
+  "The tunnel the river leaves by has never been followed"
+ ],
+ "map": {
+  "x": 300,
+  "y": 306
+ },
+ "poleIntensity": {
+  "peace": 0.6,
+  "order": 0.9,
+  "life": 0.1,
+  "spiritual": -0.9,
+  "concrete": 0.5
+ },
+ "axisVector": [
+  0,
+  0,
+  0,
+  0.6,
+  -0.5,
+  -0.9,
+  0.9,
+  0,
+  0.1,
+  0,
+  0,
+  0
+ ],
+ "axisVectorNote": "⛑ Derived from `spectrum` on the millbrook pattern.",
+ "worldPos": {
+  "colatitude": 0.34,
+  "longitude": 0.22,
+  "depth": -1
+ },
+ "worldPosNote": "⛑ Directly beneath the Null Stone, `depth: -1`. ⚠️ AND IT IS `tier: settlement`, NOT `site`, WHICH SNG-398 TAUGHT ME: `geodesic` charges |Δdepth| × 0.05 and at 300/π that makes ONE LEVEL DOWN ≈ 4.8 WALKING DAYS, so an underplace can never sit within a day of a parent on the surface. ⛔ Archive Hollow and the Unlit Deep are both underplaces at settlement tier for exactly this reason — the descent IS the distance. And the chamber is 'of impossible scale', so settlement is the honest tier as well as the working one.",
+ "tier": "settlement",
+ "truth": "⛔ GM-EYES-ONLY, AND THIS IS THE ANSWER THE GENERATOR NEEDS. **This chamber is the HEAD of the same system whose hand is `the_reclamation_site` below Millbrook.** That facility has run one standing instruction for fourteen years and three months — PREPARE THE WATERSHED — and has never stopped, because nothing has ever told it to. ⚠️ THIS IS WHERE IT WOULD BE TOLD. The regulator asks two things: IS THE WATER PREPARED, and IS THE RIGHT PERSON PRESENT. The first has been answerable for years. The second has not been answered once. ⛔ BECAUSE THE RIGHT PERSON IS A PRECURSOR PAIR AND ONLY ONE OF THEM IS LEFT. Vessenaia, beneath the Echo facility, is authored as a LISTENING half paired to a DECIDING half she cannot account for. **The recess in the regulator housing is where the deciding half was supposed to stand.** Nobody has stood there, so the question has never closed, so the preparation has never stopped — and a machine preparing a watershed forever is what poisoned the Echo. ⛑ THE NINE APERTURES ARE THE NINE REACHES OF THE WATERSHED, one intake each, and the notation names them. ONE IS ALREADY FLOWING: the Echo's, which runs to the Reclamation Site. The other eight are capped and waiting on the same unanswered question. ⚠️ WHAT THE PLAYERS CAN DO. Answer the second question — which means bringing somebody the regulator will accept as a deciding half, and Vessenaia is the only living thing that knows what one is. Or answer it WRONGLY, which opens eight more intakes on a watershed that is still being prepared. Or follow the tunnel, which nobody has. ⛔ WHAT IT MUST NOT BE: a vault with a prize in it. Nothing down there is loot. **The chamber is a question that has been asked continuously for fourteen years by a machine too patient to give up.**",
+ "_minted_20260917": "⛔ SNG-614 — AUTHORED FROM PLAY, 2026-09-17. Erik: 'Loki opened the Null Stone. Make sure the generator can actually know what is down there and why, to be concrete.' ⚠️ NONE OF IT WAS AUTHORED: no Null Stone, no chamber, no regulator. The GM improvised it across four days and improvised WELL — 'a pre-Transition water-works built not to contain but to ASK something of the river', a regulator whose question is 'whether the water is prepared, and whether the right person is present'. ⛑ AND IT WALKED INTO THE AUTHORED COSMOLOGY FROM THE OTHER END. `the_reclamation_site` below Millbrook has been running one standing instruction for fourteen years — PREPARE THE WATERSHED. This chamber is where that instruction is ASKED rather than executed. ⛔ AND THE SECOND HALF OF THE REGULATOR'S QUESTION IS THE HOLE IN VESSENAIA: she is authored as 'a LISTENING half, paired to a DECIDING half, and she does not know what became of it'. **The chamber is where the deciding half was supposed to stand. Nobody has stood there in fourteen years, which is why the question has never been answered and the preparation has never stopped.**",
+ "_regionFix": "⛑ `regionId: the_center`, not the `crossing` I invented — The Crossing is a SETTLEMENT-tier place whose region is `the_center`. content_ci caught it in one run: 'no density, region not in the_substrate.json'.",
+ "parentId": "the_null_stone"
+}

@@ -352,15 +352,11 @@
     "lastTurn": {
       "narration": "",
       "choices": [],
-      "projectOps": [
-        {
-          "op": "start",
-          "name": "A fire-test bench",
-          "what": "squaring a length of lath",
-          "days": 2,
-          "why": "fire test"
-        }
-      ],
+      "markTeacher": {
+        "npcId": "tessvel-cairn",
+        "tradition": "enginewright",
+        "why": "fire test"
+      },
       "sceneSummary": null
     },
     "sceneState": {
@@ -9036,7 +9032,7 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789687823838,
+  "updatedAt": 1789687823861,
   "rev": 764,
   "generated": {
     "schemaVersion": 1,
@@ -10048,7 +10044,7 @@
     {
       "id": "sess-14",
       "startedAt": "2026-09-17T21:25:46.391Z",
-      "lastAt": "2026-09-17T23:30:23.837Z",
+      "lastAt": "2026-09-17T23:30:23.860Z",
       "startDay": 79,
       "endDay": 79,
       "beats": 10

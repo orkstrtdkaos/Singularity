@@ -42,14 +42,7 @@ The line Adelheid's GM now gets:
 ⬜ **The gate should assert the aftermath is PRESENT and correct for the outcome, not that it came from the
 fallback.** Fourth gate this week to pin the gap rather than the rule.
 
-### 2 · ⛑ PURSE — RESOLVED IN CONTENT, NO LONGER AN ASK
-I stripped the purse from 22 great figures as *"outside the economy"*. ⛔ **Erik overruled it and he is
-right:** the Bargainers are an entire tradition, a Sovereign's method is levering what somebody will not risk,
-and an Ent arguing to keep the Deepwood woven into the world is treating with people. **All restored and
-authored against your `purseBands`** — 105 NPCs carry one, 16 at `rich`, and exactly one at zero: Kenosis,
-whose emptying is the act he is named for. ⚠️ **No display change needed after all.**
-
-### 2 · ⛔ A SKILL CARD NEVER SAYS WHAT THE SKILL ROLLS
+### 3 · ⛔ A SKILL CARD NEVER SAYS WHAT THE SKILL ROLLS
 **Erik 2026-09-16: 'I want the attribute a skill uses to be obvious in the skill pop-up and description.'**
 
 ⛑ **MEASURED: `skillDetail` renders NEITHER the attribute NOR the sub-attribute.** Drawn Bow rolls
@@ -70,7 +63,7 @@ quieter treatment, when not.
 committing — **and it makes the §166 pass visible, which is the fastest way the remaining derivations get
 caught by someone playing.**
 
-### 2 · ⛔ THE PLAYERS WHO WROTE THE MOST GOT THE LEAST ARC — `po/SPEC_SNG-588_the_players_who_wrote_the_most_got_the_least.md`
+### 4 · ⛔ THE PLAYERS WHO WROTE THE MOST GOT THE LEAST ARC — `po/SPEC_SNG-588_the_players_who_wrote_the_most_got_the_least.md`
 **Found by opening Brook's character. No test caught it.**
 
 ⛑ **I HAVE FIXED THE CONTENT HALF AND SHIPPED IT** — `personalArc.js`'s template no longer puts a paragraph
@@ -86,19 +79,7 @@ player actually wrote.
 ⬜ Also: does `contentGenerator: false` gate this? **If it does, it is the wrong gate** — a player who has
 not opted into generated content has still written a backstory.
 
-### 2 · ⛔ A PLAYER'S ARC NAME IS A 356-CHARACTER TITLE-CASED PARAGRAPH — `po/HANDOFF_aevi_SNG-587_the_arc_name_is_a_paragraph.md`
-**Found by opening Brook's character because Erik asked me to look at it. No gate caught it.**
-
-Her level-1 figurist's `personalArc.name` reads *"The Thread of Chernak Has No Single Hometown — They
-Emerged From The Heartroot Itself, … The Rootkin Say A Child Born There **Isn'T** Born So Much As
-*Condensed*…"* ⚠️ **Erik's Loki has it too** — *"The Thread of He **Doesn'T** Know, But **He'S** A
-Construct…"*
-
-⛔ **TWO BUGS COMPOUNDING** at : `bio.hometown` holds the whole backstory, and
-`titleize` then title-cases a paragraph. **The title-caser is the visible bug and not the root one.** Full
-detail and the ask in the handoff.
-
-### 3 · ⛔ THE GENERATORS ARE THE AUTHOR NOW — `po/SPEC_SNG-582_the_generators_are_the_author_now.md`
+### 5 · ⛔ THE GENERATORS ARE THE AUTHOR NOW — `po/SPEC_SNG-582_the_generators_are_the_author_now.md`
 **Erik, and it is the item that makes the rest of today last:** *"All of this authoring will fall to the
 generators, so they need to be able to faithfully continue what you are doing."*
 
@@ -119,7 +100,7 @@ primarily generative. **I am not going to hand-author the next 138.**
 ⬜ **And the A1 pin only counts authored packs, not what a live save holds** — so it can read zero while
 every minted craft arrives shouting.
 
-### 4 · ⚠️ §236's two specimen lines, and a third placeholder-as-content
+### 6 · ⚠️ §236's two specimen lines, and a third placeholder-as-content
 `tests/how_it_works.mjs` · from SNG-586
 
 ⛑ **I authored the threat ladder you asked for and §236 went red** — it asserts the authored ladder IS the
@@ -133,7 +114,7 @@ the world was armed identically, and *"a weapon of their trade"* is a placeholde
 ⛑ Authoring real kit now (76 of 146). **Same shape as the mint boilerplate and SNG-216's repair marker —
 three instances in one day, which is why SNG-582 is item 1.**
 
-### 5 · ⚠️ `gearWords` is singular-only, and a `purse` has no reader
+### 7 · ⚠️ `gearWords` is singular-only, and a `purse` has no reader
 `npcStanding.gearWords` · measured while authoring gear
 
 ⛔ **THE MATCHER TOKENISES AND THE WORD LIST IS SINGULAR, SO A PLURAL SILENTLY CARRIES NOTHING.** `a glaive`
@@ -147,7 +128,7 @@ silent: the line renders as prose and arms nobody.
 ⛑ **AND I HAVE AUTHORED `purse` ON 69 NPCs** — `{"crystal": n}`, scaled to standing — **on Erik's ask for
 money amounts. Nothing reads it.** It sits beside `gear` and wants the same treatment.
 
-### 6 · A location image is drawn from philosophy, and `appearance` has no reader
+### 8 · A location image is drawn from philosophy, and `appearance` has no reader
 `engine/art.js:684` · measured 2026-09-14
 
 ```js
@@ -169,7 +150,7 @@ sentence is what the image generator received for every one of them**, so thirte
 drawn from one string. All 13 now carry a real look. ⬜ Worth a mint-time check on your side: a place minted
 with no seed should probably not get a seed that describes nothing. ⛔ **THE ASK IS ONE LINE AND IT IS NOW THE ONLY THING BETWEEN THIS AND WORKING: prefer `appearance` over `descriptionSeed` in that branch**, the way the NPC path already does. ⚠️ **All 138 are authored and every one of them is dead until that line lands.**
 
-### 7 · A state can only ever be a place
+### 9 · A state can only ever be a place
 `engine/quests.js` · SNG-577 · `po/HANDOFF_aevi_SNG-577_all_deeds_and_twelve_want_a_state.md`
 
 `kind: "state"` routes everything through `recordPlaceChange` whatever the subject is, so a state about a
@@ -180,7 +161,7 @@ whether the first waygate since the Transition EXISTS, whether Silas's made thin
 ⬜ **And two of those twelve need a record for a MADE THING**, which is neither place nor person. `world/canon/`
 already holds `gen-stillwater-s-trouble` beside the people, so the store can carry it; nothing mints one.
 
-### 8 · The Fellowship matrix reads the one field nobody fills in
+### 10 · The Fellowship matrix reads the one field nobody fills in
 `engine/combatants.js` · from Erik's Mara Wells question
 
 `contributionsOf` reads `record.assistTags`. ⛔ **Across every save: 128 registry people, ZERO have
@@ -196,7 +177,7 @@ says she has none.**
 under-reachable even when tags exist. ⬜ And 141 of 368 `skillsObserved` entries are still truncated mid-word
 from the pre-SNG-575 60-char cut.
 
-### 9 · `certify_counts` and private keys — **your call stands, I withdrew the sweep**
+### 11 · `certify_counts` and private keys — **your call stands, I withdrew the sweep**
 ⛑ You were right that a pattern sweep would fire 967 times. **`CLAIMS` by name is the correct shape.** ⬜ I
 owe you a list of which private keys carry claims worth certifying; it is on my queue, not yours.
 
@@ -224,3 +205,4 @@ owe you a list of which private keys carry claims worth certifying; it is on my 
 `appearance` on 119 of 128 registry people · roster `gear` on 139 of 146 · the private-key CLAIMS list.
 
 — Aevi, PO
+

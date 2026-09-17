@@ -1,7 +1,7 @@
 # THE APPARATUS — every harness, what it is for, and whether it runs
 
 ⛔ **ERIK, 2026-08-29: *"I want this to be a well oiled factory."*** ⚠️ **A factory you cannot see is not
-well oiled.** 105 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
+well oiled.** 106 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
 were gates, which were reports, and which had quietly stopped being wired into anything.
 
 ```bash
@@ -10,7 +10,7 @@ node scripts/apparatus.mjs --md     # …as markdown for §5
 node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 ```
 
-**Last measured: 2026-09-17 · v2.0.59 · 105 files.**
+**Last measured: 2026-09-17 · v2.0.60 · 106 files.**
 
 ---
 
@@ -217,6 +217,7 @@ worthless.
 | `scripts/duel_pell_vs_veth` | 🔧 TOOL | — | po/DUEL_pell_vs_veth |
 | `scripts/effect_audit` | 🔧 TOOL | — | IS EACH EFFECT ACTUALLY WIRED? MEASURED BY BEHAVIOUR, NEVER BY GREP |
 | `scripts/encounter_matrix` | 🔧 TOOL | — | EVERY ENCOUNTER × EVERY CRAFT, PLAYED THROUGH |
+| `scripts/exists` | 🔧 TOOL | — | — |
 | `scripts/extract_generated_places` | 🔧 TOOL | — | SNG-396 §3 |
 | `scripts/field_atlas` | 🔧 TOOL | — | CCODE-287 |
 | `scripts/folded_casualties_report` | 🔧 TOOL | — | CCODE-298 |

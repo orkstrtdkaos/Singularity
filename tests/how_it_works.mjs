@@ -20344,6 +20344,47 @@ console.log("\n── §281 · a first name the context settles, and one man one
     "containment matches, and is refused here on purpose");
 }
 
+// ⛔ CCODE-401 (Erik, in play, watching it happen) — "i think the surge and backlash is broken. it's not supposed to fire unless i fail."
+// ⚑ HIS SCREEN: `d100: 54 vs 89 — success · surge (5 energy)`, and under it `⚡ surge backlash: -4 health, -10 energy`. 54 ≤ 89 is a
+// clean success, and a clean success carried a 0.3 multiplier — 0.25 × 0.3 = a 7.5% chance of being bitten for doing everything right.
+// ⚠️ THE TRIGGER IS CALLED `surgedSlip`, the call site says "a Surge that SLIPS can bite", and the function's own docstring said
+// "near-nil on a clean success". Three statements of the rule; the arithmetic was the fourth line and it disagreed.
+console.log("\n── §282 · a surge that lands cannot bite ──");
+{
+  const IN282 = await import("../engine/intensity.js");
+  const rules282 = (chance) => ({ steps: { surge: { backlashChance: chance } } });
+  const rate = (degree, chance = 0.25, n = 40000) => {
+    let hits = 0;
+    for (let i = 0; i < n; i++) if (IN282.shouldBacklash("surge", degree, rules282(chance), Math.random)) hits++;
+    return hits / n;
+  };
+  // ⛔ THE RULE, AT ANY AUTHORED CHANCE — not "rarely at 0.25", never at all, even if the dial were turned to certainty
+  check("§282: ⛔ A SURGE THAT LANDS CANNOT BITE — a clean success and a critical success never backlash, and it holds at `backlashChance: 1.0`, so this is the RULE and not a small number that happened to round down",
+    rate("success", 0.25) === 0 && rate("crit_success", 0.25) === 0
+    && rate("success", 1) === 0 && rate("crit_success", 1) === 0,
+    JSON.stringify({ success: rate("success", 1), crit: rate("crit_success", 1) }));
+  // ⚠️ AND IT MAY NOT EVEN ASK. A landed surge that consults the dice is a landed surge that can be unlucky.
+  let asked = 0;
+  const counting = () => { asked++; return 0; };
+  IN282.shouldBacklash("surge", "success", rules282(1), counting);
+  IN282.shouldBacklash("surge", "crit_success", rules282(1), counting);
+  const askedOnLand = asked;
+  IN282.shouldBacklash("surge", "failure", rules282(1), counting);
+  check("§282: ⛔ …AND IT NEVER ASKS THE DICE ON A LANDED SURGE — a roll consulted is a roll that can go against you; the slip path still asks",
+    askedOnLand === 0 && asked === 1, `asked ${askedOnLand} times on a landed surge, ${asked - askedOnLand} on a slip`);
+  // ⛔ WHAT REMAINS IS A SLIP, IN THREE ASCENDING GRADES — the fiction the whole system is named for
+  const p = rate("partial"), f = rate("failure"), cf = rate("crit_failure");
+  check("§282: ⛔ A SLIP STILL BITES, HARDER THE WORSE IT WENT — a partial landed short, a failure missed, a critical failure turned on you; ascending, and none of them zero",
+    p > 0 && p < f && f < cf && cf <= 1, JSON.stringify({ partial: +p.toFixed(3), failure: +f.toFixed(3), crit_failure: +cf.toFixed(3) }));
+  check("§282: …and no other intensity backlashes at all, at any degree — surge is what carries the risk, which is the whole reason to hesitate over it",
+    ["conserve", "standard"].every(k => ["success", "partial", "failure", "crit_failure"].every(d => IN282.shouldBacklash(k, d, rules282(1), () => 0) === false)));
+  // ⛑ AND THE VOCABULARY AGREES WITH THE ARITHMETIC NOW, which is the part that was wrong for so long
+  const A282 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§282: ⛑ the name and the number say the same thing — the trigger the engine pays is still `surgedSlip`, and nothing but a slip now reaches it",
+    /trigger: "surgedSlip"/.test(A282) && /shouldBacklash\("surge", resolution\.degree, CONTENT\.intensity/.test(A282)
+    && /degree === "partial" \? 1 : 0;/.test(rd("engine/intensity.js")));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

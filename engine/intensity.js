@@ -47,12 +47,24 @@ export function autoIntensity(standardChance, rules = {}) {
 
 
 
-/** Does a surge backlash fire? Base chance rises on a marginal/failed roll, near-nil on a
- *  clean success — a surge that lands clean is mostly safe; one that slips bites. */
+/** ⛔ CCODE-401 (ERIK, IN PLAY, LOOKING AT IT HAPPEN) — "i think the surge and backlash is broken. it's not supposed to fire unless i
+ *  fail." ⚑ HIS SCREEN: `d100: 54 vs 89 — success · surge (5 energy)` and under it `⚡ surge backlash: -4 health, -10 energy`. 54 ≤ 89
+ *  is a clean `success`, and a clean success took a **0.3** multiplier — 0.25 × 0.3 = a **7.5% chance of being bitten for doing
+ *  everything right**, once every thirteen surges.
+ *
+ *  ⚠️ AND EVERY NAME AROUND IT ALREADY SAID SO. The trigger this fires is called `surgedSlip`; the call site in app.js says "a Surge
+ *  that SLIPS can bite"; the docstring on this very function said "near-nil on a clean success — a surge that lands clean is mostly
+ *  safe; one that SLIPS bites". Three statements of the rule, and the fourth line — the arithmetic — did something else. A comment is a
+ *  claim about a mechanism, and when the claim and the number disagree it is the number that the player feels.
+ *
+ *  ⛔ SO A CLEAN SUCCESS NEVER BACKLASHES: not "near-nil", zero. What remains is a slip, in three grades — a partial landed short, a
+ *  failure missed, a critical failure turned on you — and that is the fiction the whole system is named for. `backlashChance` (0.25,
+ *  authored) still decides IF, and `progression.applyBacklash` still decides how much. */
 export function shouldBacklash(intensity, degree, rules = {}, rng = Math.random) {
   if (intensity !== "surge") return false;
   const base = intensityStep(rules, "surge").backlashChance ?? 0;
-  const mult = degree === "crit_failure" ? 2 : degree === "failure" ? 1.5 : degree === "partial" ? 1 : 0.3;
+  const mult = degree === "crit_failure" ? 2 : degree === "failure" ? 1.5 : degree === "partial" ? 1 : 0;
+  if (!mult) return false;                      // ⚠️ and never ask the rng at all, so a surge that lands cannot be unlucky
   return rng() < Math.min(1, base * mult);
 }
 

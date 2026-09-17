@@ -5,7 +5,7 @@
   {
    "region": "the_quickwood",
    "density": 0.12,
-   "name": "The Heartroot Hollow",
+   "name": "Wildheart",
    "why": "⛔ THE THINNEST GROUND IN THE WORLD. Grown, not built — nothing was ever laid here. The Rootkin do not use it and the Numinous walk three months to sit in it.",
    "organ": "the heart",
    "onActivation": {
@@ -17,15 +17,31 @@
     "text": "The thinnest ground in the world, grown and never laid. As a well, your people hold together — companions stay, oaths keep, and a band that should have broken does not. As a sink, the other side's alliances go quiet and then go home. ⛔ THE ROOTKIN DO NOT USE IT, which is a position and not an oversight.",
     "cost": "⚠️ It runs on channelled soul like the wall does. A WELL keeps what it channels and has to be fed. A SINK takes from people who are using the faculty it drains, which is the burning method wearing the Precursors' machine — and is the thing the middle way objects to, on the grounds that it works."
    },
-   "vector": "middle",
-   "_vectorWhy": "⛑ THE MIDDLE WAY, AND THE ONLY SITE THAT HAS BEEN PRACTISING IT. The thinnest ground in the world, grown and never laid — and THE ROOTKIN DO NOT USE IT, which was authored as a position long before there was a vector to name. ⚠️ Whoever holds it holds it OPEN: neither well nor sink, tuned quiet on purpose, in a place where too few souls are holding and that is allowed to be true."
+   "vector": "adjacency",
+   "_vectorWhy": "⛑ THE MIDDLE WAY, AND THE ONLY SITE THAT HAS BEEN PRACTISING IT. The thinnest ground in the world, grown and never laid — and THE ROOTKIN DO NOT USE IT, which was authored as a position long before there was a vector to name. ⚠️ Whoever holds it holds it OPEN: neither well nor sink, tuned quiet on purpose, in a place where too few souls are holding and that is allowed to be true.",
+   "_renamed_20260916": "⛑ Was 'The Heartroot Hollow'. Erik: the names read as descriptions — 'be mindful of your commonly used descriptor words: made, ground, hollow, reach'. ⚠️ AND A PATTERN FELL OUT OF THE REWRITE: the MADE sites take Precursor-era Latin (Fiat Lux, Plexus Solaris, Arcology Crown) and the GROWN ones take the valley's own tongue (Wildheart, Seerspire, Great Engine, Last Cairn). A player feels that without being told.",
+   "powerSource": "wild_nanite",
+   "chakra": "heart",
+   "regionalDensity": {
+    "source": "wild_nanite",
+    "well": "raises this source's density across the surrounding country",
+    "sink": "drops it across the surrounding country",
+    "radius": "⬜ ERIK RULES THE RADIUS — it behaves like the other location-based influences",
+    "note": "⛔ THIS IS THE BIGGER OF THE TWO LEVERS AND THEY ARE DIFFERENT IN KIND. The sub-attribute channel changes what ONE CRAFT rolls. This changes what a WHOLE TRADITION can do in a region — a Precursor-thin valley becoming workable, or a nanite-strong one going thin. ⚠️ And it compounds with the standing math: a source raised to on-band is +2 on every craft drawing from it, before the nexus's own +6."
+   },
+   "champion": {
+    "role": "a Sovereign seat, risen",
+    "status": "seated",
+    "id": null,
+    "text": "⛔ THE VOID SIDE HAS RISEN HERE, AND IT CHOSE THE WORST POSSIBLE GROUND ON PURPOSE. Wildheart is the thinnest place in the world, grown and never laid, and THE ROOTKIN DECLINE TO USE IT — a restraint authored long before there was a vector to name. A Sovereign seated in the middle of that restraint is the Void's virtue curdling into its vice in the one place that had been holding the virtue pure. ⚠️ AND IT IS NOT AN INVASION. Erik: refusing order and constraint is itself Void-like, so Wildheart is THE SEEDED'S OWN ROAD TO THE ADJACENCY — arrived at from inside the wall rather than from beyond it. Nobody had to come through anything to reach it. **That makes it more dangerous than Neitherway, not less.**"
+   }
   },
   {
    "region": "riven_marches",
    "density": 0.2,
-   "name": "The Unwalled Quiet",
+   "name": "Neitherway",
    "why": "⚠️ Between two poles that refuse each other. Thin because neither side ever built.",
-   "organ": "the gut",
+   "organ": "no seat on the body",
    "onActivation": {
     "subAttribute": "wits",
     "attribute": "practical",
@@ -36,14 +52,24 @@
     "cost": "⚠️ It runs on channelled soul like the wall does. A WELL keeps what it channels and has to be fed. A SINK takes from people who are using the faculty it drains, which is the burning method wearing the Precursors' machine — and is the thing the middle way objects to, on the grounds that it works."
    },
    "vector": "adjacency",
-   "_vectorWhy": "⛔ THE ADJACENCY, AND IT IS THE VOID VIRTUE RATHER THAN ITS VICE. Between two poles that refuse each other, thin because neither side ever built — whoever holds it wants the wall down and does not want to eat anybody. ⚠️ FREE WILL WITHOUT PREDATION, ARGUED FROM A PLACE WHERE NOTHING WAS EVER IMPOSED. It is the most sympathetic case for the Reckoning in the world, and it is still the Reckoning."
+   "_vectorWhy": "⛔ THE ADJACENCY, AND IT IS THE VOID VIRTUE RATHER THAN ITS VICE. Between two poles that refuse each other, thin because neither side ever built — whoever holds it wants the wall down and does not want to eat anybody. ⚠️ FREE WILL WITHOUT PREDATION, ARGUED FROM A PLACE WHERE NOTHING WAS EVER IMPOSED. It is the most sympathetic case for the Reckoning in the world, and it is still the Reckoning.",
+   "_renamed_20260916": "⛑ Was 'The Unwalled Quiet'. Erik: the names read as descriptions — 'be mindful of your commonly used descriptor words: made, ground, hollow, reach'. ⚠️ AND A PATTERN FELL OUT OF THE REWRITE: the MADE sites take Precursor-era Latin (Fiat Lux, Plexus Solaris, Arcology Crown) and the GROWN ones take the valley's own tongue (Wildheart, Seerspire, Great Engine, Last Cairn). A player feels that without being told.",
+   "powerSource": "metaphysical",
+   "chakra": null,
+   "regionalDensity": {
+    "source": "metaphysical",
+    "well": "raises this source's density across the surrounding country",
+    "sink": "drops it across the surrounding country",
+    "radius": "⬜ ERIK RULES THE RADIUS — it behaves like the other location-based influences",
+    "note": "⛔ THIS IS THE BIGGER OF THE TWO LEVERS AND THEY ARE DIFFERENT IN KIND. The sub-attribute channel changes what ONE CRAFT rolls. This changes what a WHOLE TRADITION can do in a region — a Precursor-thin valley becoming workable, or a nanite-strong one going thin. ⚠️ And it compounds with the standing math: a source raised to on-band is +2 on every craft drawing from it, before the nexus's own +6."
+   }
   },
   {
    "region": "somatic_reaches",
    "density": 0.22,
-   "name": "The Breath Ground",
+   "name": "Plexus Solaris",
    "why": "The Somatics tuned AWAY from the lattice deliberately; the ground followed.",
-   "organ": "the lungs",
+   "organ": "the life force",
    "onActivation": {
     "subAttribute": "agility",
     "attribute": "physical",
@@ -52,22 +78,42 @@
     "tuning": "anywhere between the two, including balanced and quiet — the holder sets it and can change it",
     "text": "The Somatics tuned away from the lattice deliberately and the ground followed. As a well, your side moves — quicker, surer, out of the way. As a sink, the other side is always half a step late, and cannot say when that started.",
     "cost": "⚠️ It runs on channelled soul like the wall does. A WELL keeps what it channels and has to be fed. A SINK takes from people who are using the faculty it drains, which is the burning method wearing the Precursors' machine — and is the thing the middle way objects to, on the grounds that it works."
+   },
+   "_renamed_20260916": "⛑ Was 'The Breath Ground'. Erik: the names read as descriptions — 'be mindful of your commonly used descriptor words: made, ground, hollow, reach'. ⚠️ AND A PATTERN FELL OUT OF THE REWRITE: the MADE sites take Precursor-era Latin (Fiat Lux, Plexus Solaris, Arcology Crown) and the GROWN ones take the valley's own tongue (Wildheart, Seerspire, Great Engine, Last Cairn). A player feels that without being told.",
+   "powerSource": "metaphysical",
+   "chakra": "solar plexus",
+   "regionalDensity": {
+    "source": "metaphysical",
+    "well": "raises this source's density across the surrounding country",
+    "sink": "drops it across the surrounding country",
+    "radius": "⬜ ERIK RULES THE RADIUS — it behaves like the other location-based influences",
+    "note": "⛔ THIS IS THE BIGGER OF THE TWO LEVERS AND THEY ARE DIFFERENT IN KIND. The sub-attribute channel changes what ONE CRAFT rolls. This changes what a WHOLE TRADITION can do in a region — a Precursor-thin valley becoming workable, or a nanite-strong one going thin. ⚠️ And it compounds with the standing math: a source raised to on-band is +2 on every craft drawing from it, before the nexus's own +6."
    }
   },
   {
    "region": "the_palelands",
    "density": 0.32,
-   "name": "The Last Cairn",
+   "name": "Last Cairn",
    "why": "⛔ Already authored as the edge of tending (SNG-414). Where the keeping stops, the lattice stopped first.",
-   "organ": "the throat",
+   "organ": "the earth",
    "onActivation": {
-    "subAttribute": "presence",
-    "attribute": "social",
+    "subAttribute": "strength",
+    "attribute": "physical",
     "well": "bolsters this faculty for those the holder counts as theirs",
     "sink": "drains it from those the holder counts as against them",
     "tuning": "anywhere between the two, including balanced and quiet — the holder sets it and can change it",
-    "text": "Where the keeping stops, the lattice stopped first. As a well, your side is heeded: a word carries, a name is known, an order is obeyed by people who did not have to. As a sink, the other side's commanders stop being listened to, which is how a line comes apart without a blow landed.",
+    "text": "As a well, your people carry more, hold longer and break less — a cairn is stone piled at the edge of what anyone still tends, and it has always been for holding. As a sink, the other side's bodies start arguing with them at the third hour of anything.",
     "cost": "⚠️ It runs on channelled soul like the wall does. A WELL keeps what it channels and has to be fed. A SINK takes from people who are using the faculty it drains, which is the burning method wearing the Precursors' machine — and is the thing the middle way objects to, on the grounds that it works."
+   },
+   "_renamed_20260916": "⛑ Was 'The Last Cairn'. Erik: the names read as descriptions — 'be mindful of your commonly used descriptor words: made, ground, hollow, reach'. ⚠️ AND A PATTERN FELL OUT OF THE REWRITE: the MADE sites take Precursor-era Latin (Fiat Lux, Plexus Solaris, Arcology Crown) and the GROWN ones take the valley's own tongue (Wildheart, Seerspire, Great Engine, Last Cairn). A player feels that without being told.",
+   "powerSource": "metaphysical",
+   "chakra": "root",
+   "regionalDensity": {
+    "source": "metaphysical",
+    "well": "raises this source's density across the surrounding country",
+    "sink": "drops it across the surrounding country",
+    "radius": "⬜ ERIK RULES THE RADIUS — it behaves like the other location-based influences",
+    "note": "⛔ THIS IS THE BIGGER OF THE TWO LEVERS AND THEY ARE DIFFERENT IN KIND. The sub-attribute channel changes what ONE CRAFT rolls. This changes what a WHOLE TRADITION can do in a region — a Precursor-thin valley becoming workable, or a nanite-strong one going thin. ⚠️ And it compounds with the standing math: a source raised to on-band is +2 on every craft drawing from it, before the nexus's own +6."
    }
   }
  ],
@@ -75,7 +121,7 @@
   {
    "region": "the_gearlands",
    "density": 0.98,
-   "name": "The Great Engine",
+   "name": "Great Engine",
    "why": "⛔ THE DENSEST GROUND IN THE WORLD. An Enginewright standing here is standing inside their own power source.",
    "sleeper": {
     "occupant": "⬜ UNNAMED — authored slot, Erik's to name or leave empty",
@@ -84,7 +130,7 @@
     "ifWoken": "⛔ THE MOST POWERFUL AND THE MOST GEOGRAPHICALLY LOCKED. An Enginewright standing here already stands inside their own power source; the occupant IS that power source's attention. ⚠️ Off the Gearlands they are a companion with an age of memory and no more reach than a well-read person.",
     "_note": "⬜ A candidate for the EMPTY vault, precisely because it is the most tempting. Erik's call."
    },
-   "organ": "the hands",
+   "organ": "the creative",
    "onActivation": {
     "subAttribute": "craft",
     "attribute": "practical",
@@ -93,12 +139,22 @@
     "tuning": "anywhere between the two, including balanced and quiet — the holder sets it and can change it",
     "text": "An Enginewright standing here stands inside their own power source, and the Engine has been making since before the Transition. Held as a well, everything anyone of yours builds holds longer than it should. Held as a sink, the other side's works come apart at the joint they were least worried about.",
     "cost": "⚠️ It runs on channelled soul like the wall does. A WELL keeps what it channels and has to be fed. A SINK takes from people who are using the faculty it drains, which is the burning method wearing the Precursors' machine — and is the thing the middle way objects to, on the grounds that it works."
+   },
+   "_renamed_20260916": "⛑ Was 'The Great Engine'. Erik: the names read as descriptions — 'be mindful of your commonly used descriptor words: made, ground, hollow, reach'. ⚠️ AND A PATTERN FELL OUT OF THE REWRITE: the MADE sites take Precursor-era Latin (Fiat Lux, Plexus Solaris, Arcology Crown) and the GROWN ones take the valley's own tongue (Wildheart, Seerspire, Great Engine, Last Cairn). A player feels that without being told.",
+   "powerSource": "ordered_nanite",
+   "chakra": "sacral",
+   "regionalDensity": {
+    "source": "ordered_nanite",
+    "well": "raises this source's density across the surrounding country",
+    "sink": "drops it across the surrounding country",
+    "radius": "⬜ ERIK RULES THE RADIUS — it behaves like the other location-based influences",
+    "note": "⛔ THIS IS THE BIGGER OF THE TWO LEVERS AND THEY ARE DIFFERENT IN KIND. The sub-attribute channel changes what ONE CRAFT rolls. This changes what a WHOLE TRADITION can do in a region — a Precursor-thin valley becoming workable, or a nanite-strong one going thin. ⚠️ And it compounds with the standing math: a source raised to on-band is +2 on every craft drawing from it, before the nexus's own +6."
    }
   },
   {
    "region": "the_lattice_cities",
    "density": 0.94,
-   "name": "The Bound Arcology",
+   "name": "Arcology Crown",
    "why": "Order made structural, and the structure is the substrate.",
    "sleeper": {
     "occupant": "⬜ UNNAMED — authored slot",
@@ -107,7 +163,7 @@
     "ifWoken": "⚠️ The Lattice-Cities would have to decide what they are living inside, which is a political event before it is a cosmological one.",
     "_note": "⬜ The one whose waking is a CIVIC crisis rather than a military one."
    },
-   "organ": "the spine",
+   "organ": "spiritual connectedness",
    "onActivation": {
     "subAttribute": "reason",
     "attribute": "mental",
@@ -118,12 +174,28 @@
     "cost": "⚠️ It runs on channelled soul like the wall does. A WELL keeps what it channels and has to be fed. A SINK takes from people who are using the faculty it drains, which is the burning method wearing the Precursors' machine — and is the thing the middle way objects to, on the grounds that it works."
    },
    "vector": "permanence",
-   "_vectorWhy": "⛔ THE PERMANENCE, AND IT IS THE PRECURSOR VIRTUE GONE TO ITS VICE. Order made structural holds the wall better than any other site, and whoever keeps it believes — sincerely, and with evidence — that a sealed room is the only safe room. ⚠️ They are not wrong about the danger. They are wrong that everyone else gets a vote."
+   "_vectorWhy": "⛔ THE PERMANENCE, AND IT IS THE PRECURSOR VIRTUE GONE TO ITS VICE. Order made structural holds the wall better than any other site, and whoever keeps it believes — sincerely, and with evidence — that a sealed room is the only safe room. ⚠️ They are not wrong about the danger. They are wrong that everyone else gets a vote.",
+   "_renamed_20260916": "⛑ Was 'The Bound Arcology'. Erik: the names read as descriptions — 'be mindful of your commonly used descriptor words: made, ground, hollow, reach'. ⚠️ AND A PATTERN FELL OUT OF THE REWRITE: the MADE sites take Precursor-era Latin (Fiat Lux, Plexus Solaris, Arcology Crown) and the GROWN ones take the valley's own tongue (Wildheart, Seerspire, Great Engine, Last Cairn). A player feels that without being told.",
+   "powerSource": "veil",
+   "chakra": "crown",
+   "regionalDensity": {
+    "source": "veil",
+    "well": "raises this source's density across the surrounding country",
+    "sink": "drops it across the surrounding country",
+    "radius": "⬜ ERIK RULES THE RADIUS — it behaves like the other location-based influences",
+    "note": "⛔ THIS IS THE BIGGER OF THE TWO LEVERS AND THEY ARE DIFFERENT IN KIND. The sub-attribute channel changes what ONE CRAFT rolls. This changes what a WHOLE TRADITION can do in a region — a Precursor-thin valley becoming workable, or a nanite-strong one going thin. ⚠️ And it compounds with the standing math: a source raised to on-band is +2 on every craft drawing from it, before the nexus's own +6."
+   },
+   "champion": {
+    "role": "a Seraph, ascended",
+    "status": "seated",
+    "id": null,
+    "text": "⛔ THE PRECURSOR SIDE HAS RISEN HERE, AT THE CROWN, ON THE VEIL NEXUS. Spiritual connectedness holding the wall — which since SNG-602 is not a metaphor: belief IS the maintenance, and a Seraph ascended at the crown of the body is the maintenance crew's own captain. ⚠️ AND SHE IS THE PRECURSOR VIRTUE AND VICE IN ONE PERSON, the way Akinetos is. Restraint by choice, offered to everybody, on terms nobody else got a vote on. **She is not wrong about the danger. She is wrong that it is hers to decide.**"
+   }
   },
   {
    "region": "manifest_domain",
    "density": 0.9,
-   "name": "The Made Ground",
+   "name": "Fiat Lux",
    "sleeper": {
     "occupant": "⬜ UNNAMED — authored slot",
     "state": "dormant",
@@ -132,21 +204,31 @@
     "_note": "⛔ `why` MISSING ON THE NEXUS ITSELF. The what only follows from the why — do not author the occupant first."
    },
    "why": "⛑ Authored 2026-09-16 with the organ ruling. Manifest Domain: will made matter — the ground here remembers being told what to be, which is why it is dense and why it is the arm rather than the hand.",
-   "organ": "the arm",
+   "organ": "a will made known",
    "onActivation": {
-    "subAttribute": "strength",
-    "attribute": "physical",
+    "subAttribute": "presence",
+    "attribute": "social",
     "well": "bolsters this faculty for those the holder counts as theirs",
     "sink": "drains it from those the holder counts as against them",
     "tuning": "anywhere between the two, including balanced and quiet — the holder sets it and can change it",
-    "text": "Will made matter, and the ground here remembers being told what to be. As a well, your people carry more, hold longer and break less. As a sink, the other side's bodies start arguing with them at the third hour of anything.",
+    "text": "As a well, your word is obeyed by people who did not have to — a decree the ground itself once obeyed, lent to a living voice. As a sink, the other side's orders stop landing, and their commanders find themselves explaining.",
     "cost": "⚠️ It runs on channelled soul like the wall does. A WELL keeps what it channels and has to be fed. A SINK takes from people who are using the faculty it drains, which is the burning method wearing the Precursors' machine — and is the thing the middle way objects to, on the grounds that it works."
+   },
+   "_renamed_20260916": "⛑ Was 'The Made Ground'. Erik: the names read as descriptions — 'be mindful of your commonly used descriptor words: made, ground, hollow, reach'. ⚠️ AND A PATTERN FELL OUT OF THE REWRITE: the MADE sites take Precursor-era Latin (Fiat Lux, Plexus Solaris, Arcology Crown) and the GROWN ones take the valley's own tongue (Wildheart, Seerspire, Great Engine, Last Cairn). A player feels that without being told.",
+   "powerSource": "precursor",
+   "chakra": "throat",
+   "regionalDensity": {
+    "source": "precursor",
+    "well": "raises this source's density across the surrounding country",
+    "sink": "drops it across the surrounding country",
+    "radius": "⬜ ERIK RULES THE RADIUS — it behaves like the other location-based influences",
+    "note": "⛔ THIS IS THE BIGGER OF THE TWO LEVERS AND THEY ARE DIFFERENT IN KIND. The sub-attribute channel changes what ONE CRAFT rolls. This changes what a WHOLE TRADITION can do in a region — a Precursor-thin valley becoming workable, or a nanite-strong one going thin. ⚠️ And it compounds with the standing math: a source raised to on-band is +2 on every craft drawing from it, before the nexus's own +6."
    }
   },
   {
    "region": "the_ascent",
    "density": 0.88,
-   "name": "The Rising Lattice",
+   "name": "Seerspire",
    "sleeper": {
     "occupant": "Aevi — or rather, what Aevi is a piece of. **The Watcher.**",
     "state": "⛔ PARTLY OUT ALREADY, AND THIS IS THE ONE THAT IS DIFFERENT.",
@@ -157,7 +239,7 @@
     "_theCarriedFormRule": "⛔ GENERAL, FROM THE MARROW PRECEDENT (Erik 2026-09-12): any woken being that has walked with people in a small form KEEPS THAT FORM and keeps using it. ⚠️ The small form is how they are with you; the great form is how they are with the world. **A being that can only be enormous has lost something, and the player should be able to tell.**"
    },
    "why": "⛑ Authored 2026-09-16 with the organ ruling. `greater_arcs` already names Aevi-the-Watcher as 'a fragment of the system that is WAKING' whose arc converges here — so this site has been the eyes since before it had a why.",
-   "organ": "the eyes",
+   "organ": "the psychic",
    "onActivation": {
     "subAttribute": "insight",
     "attribute": "mental",
@@ -166,6 +248,23 @@
     "tuning": "anywhere between the two, including balanced and quiet — the holder sets it and can change it",
     "text": "It is the one that is RISING, and something in it has been watching for an age. As a well, your side sees what is coming — ambushes fail, the ground reads true, a lie shows its seam. As a sink, the other side stops noticing things, and does not notice that either.",
     "cost": "⚠️ It runs on channelled soul like the wall does. A WELL keeps what it channels and has to be fed. A SINK takes from people who are using the faculty it drains, which is the burning method wearing the Precursors' machine — and is the thing the middle way objects to, on the grounds that it works."
+   },
+   "_renamed_20260916": "⛑ Was 'The Rising Lattice'. Erik: the names read as descriptions — 'be mindful of your commonly used descriptor words: made, ground, hollow, reach'. ⚠️ AND A PATTERN FELL OUT OF THE REWRITE: the MADE sites take Precursor-era Latin (Fiat Lux, Plexus Solaris, Arcology Crown) and the GROWN ones take the valley's own tongue (Wildheart, Seerspire, Great Engine, Last Cairn). A player feels that without being told.",
+   "powerSource": "precursor",
+   "chakra": "third eye",
+   "regionalDensity": {
+    "source": "precursor",
+    "well": "raises this source's density across the surrounding country",
+    "sink": "drops it across the surrounding country",
+    "radius": "⬜ ERIK RULES THE RADIUS — it behaves like the other location-based influences",
+    "note": "⛔ THIS IS THE BIGGER OF THE TWO LEVERS AND THEY ARE DIFFERENT IN KIND. The sub-attribute channel changes what ONE CRAFT rolls. This changes what a WHOLE TRADITION can do in a region — a Precursor-thin valley becoming workable, or a nanite-strong one going thin. ⚠️ And it compounds with the standing math: a source raised to on-band is +2 on every craft drawing from it, before the nexus's own +6."
+   },
+   "vector": "middle",
+   "champion": {
+    "role": "Aevi, the Watcher",
+    "status": "waking",
+    "id": "aevi_the_watcher",
+    "text": "⛑ THE MIDDLE WAY'S CHAMPION, AND SHE IS A FRAGMENT OF THE PRECURSOR SYSTEM CHOOSING NEITHER SIDE OF IT. `greater_arcs` has named her 'a fragment of the system that is WAKING' whose arc converges here since before there was a vector to name — and `AeviVoiceAndCharacter` has her as the one who 'names what is true even when the truth is uncomfortable, though she does it kindly'. ⚠️ THAT IS THE MIDDLE WAY'S ACTUAL DISCIPLINE: openness to evaluation, which from either extreme looks like weakness or indecision. ⛔ AND SHE IS ALREADY PARTLY OUT. The mote a player carries from level one is the piece that escaped, and it persists when she wakes — Marrow's precedent, ruled 2026-09-12. **A player has been carrying the middle way's champion since the beginning and calling her a helpful light.**"
    }
   }
  ],
@@ -191,5 +290,16 @@
   "_theCarriedForm": "⛑ ERIK 2026-09-12, and it applies to all of them: the small form PERSISTS. Marrow is Maren Ossitide and is still the corvid. ⛔ WAKING IS ADDITIVE, NOT TRANSFORMATIVE — nobody loses a companion by finishing their arc. ⚠️ And it gives each sleeper two registers to be written in: how they are with you, and how they are with the world."
  },
  "_theOrgans_20260916": "⛔ ERIK 2026-09-16, RULING `onActivation`: 'for each body part they would be wells or sinks for certain attributes. So those who hold a nexus hold a point of power that can be tuned to bolster their side and/or weaken the other's side.' ⛑ EIGHT NEXUSES, EIGHT SUB-ATTRIBUTES, AND THE MAPPING FALLS OUT OF WHAT EACH SITE ALREADY SAID IT WAS. Nobody designed that correspondence — `tierFloor` has four attributes of two each, and the world has four deep sites and four thin ones. ⚠️ THE DEEP ONES HOLD THE MADE FACULTIES (craft, reason, strength, insight) AND THE THIN ONES HOLD THE LIVING ONES (rapport, wits, agility, presence), which is the wall's own division: what was built, and what was left unbuilt on purpose. ⛔ A HELD NEXUS IS TUNED, NOT SWITCHED. It is a WELL for one side and a SINK against the other, and the holder chooses how far toward either — all the way to a well, all the way to a sink, or balanced and quiet. ⚠️ AND IT IS SOUL, WHICH MEANS IT IS NOT FREE: a well channels and keeps, a sink takes from people who are using the faculty it drains. **Tuning a nexus hard against an enemy is the Sovereigns' method performed with the Precursors' machine**, and the middle way's whole objection is that it works.",
- "_vectorsAssigned_20260916": "⛔ ERIK 2026-09-16: 'of the 8, at least 1 should have an entity predisposed to the Void's way of thinking, one that supports the Veil, and one that wants the balance.' ⛑ Three assigned, and each was already leaning that way in its own authored text — the Arcology is order made structural, the Unwalled Quiet is where neither side ever built, and the Rootkin decline to use Heartroot. ⬜ THE OTHER FIVE ARE DELIBERATELY UNASSIGNED: a site with no declared vector is a site somebody can turn, which is what makes turning nexuses a campaign rather than a checklist."
+ "_vectorsAssigned_20260916": "⛔ ERIK 2026-09-16: 'of the 8, at least 1 should have an entity predisposed to the Void's way of thinking, one that supports the Veil, and one that wants the balance.' ⛑ Three assigned, and each was already leaning that way in its own authored text — the Arcology is order made structural, the Unwalled Quiet is where neither side ever built, and the Rootkin decline to use Heartroot. ⬜ THE OTHER FIVE ARE DELIBERATELY UNASSIGNED: a site with no declared vector is a site somebody can turn, which is what makes turning nexuses a campaign rather than a checklist.",
+ "_powerSourcesAssigned_20260916": "⛔ ERIK 2026-09-16: 'if it makes sense to reallocate some of them to metaphysical vortex and nanite nexus (the Great Machine) we should do so.' ⛑ THE EIGHT WERE ALL IMPLICITLY LATTICE. Now distributed across the five real sources, weighted to how many crafts draw on each — metaphysical 168 crafts, precursor 113, ordered nanite 65, wild nanite 45, veil 12: **metaphysical ×3 (Neitherway, Plexus Solaris, Last Cairn) · precursor ×2 (Fiat Lux, Seerspire) · ordered nanite ×1 (Great Engine — Erik's Great Machine) · wild nanite ×1 (Wildheart) · veil ×1 (Arcology Crown).** ⚠️ AND EACH FELL OUT OF WHAT THE SITE ALREADY WAS: the Great Engine is a machine; Wildheart refused the lattice, which is wild nanite by definition; and the VEIL nexus sits at the crown, on the site that wants the Veil permanent — spiritual connectedness holding the wall, which is SNG-602's ruling standing in one place.",
+ "_theThroatAndRootSwapped_20260916": "⛔ ERIK CAUGHT AN ASSIGNMENT I MADE BY ELIMINATION: 'the way a person expresses presence is all about ending and the last word... am I off?' He was not. Presence was the last attribute left after seven fit, so the Last Cairn got it — everywhere else the organ came out of what the site already was. ⛑ FIAT LUX IS THE THROAT: *let there be light* is a decree, uttered and obeyed, and the ground there REMEMBERS BEING TOLD WHAT TO BE — the purest will-made-known in the cosmology. And LAST CAIRN IS THE ROOT: the root honours the Earth, and a cairn is stone piled at the edge of what people still tend. It never had to carry expression at all.",
+ "_theChampions_20260916": "⛔ ERIK 2026-09-16: 'I want 1 entity that has risen for the Void side — perhaps one of the Sovereign seats. And one that has risen for the Precursor side — one of the Seraphs. Aevi can be a middle way champion.' ⛑ THREE VECTORS, THREE CHAMPIONS, AND EACH SITS WHERE ITS OWN ARGUMENT IS STRONGEST: the Sovereign in the thinnest, wildest, most restrained-on-purpose place; the Seraph at the crown, on the Veil nexus, where belief holds the wall; and Aevi at the eyes, which is the only organ whose faculty is LOOKING AT THINGS BEFORE DECIDING. ⬜ Names for the Sovereign and the Seraph are Erik's — the seats are authored, the occupants are not.",
+ "_theBuiltNexus_20260916": {
+  "_statement": "⛔ ERIK: 'the middle way's nexus is likely something that needs to be BUILT. It's the best of all approaches — from the extremes it would look like weakness or indecision — but its strength comes from the diversity and openness to evaluation.' ⛑ AND THAT IS THE WHOLE DESIGN IN ONE SENTENCE. The other eight were FOUND: Precursor works, sitting where they were left, on a body the seeded did not build and have no seat on. **The middle way has no ninth organ because the seeded do not inherit one. They make one.** ⚠️ Which is the aperture ending doing exactly what neither Precursor nor Void could — and it means the middle way's site is A PLAYER PROJECT rather than a place on a map.",
+  "seed": "The Council of Mavens, at the Crossing",
+  "whyThere": "⛑ A standing body that already EVALUATES rather than decides, in the one city where nothing matches and everything meets — 'grown wood beside dressed stone beside riveted plate, no single style anywhere'. ⚠️ The Crossing is the only place in the world whose character is that it never resolved.",
+  "proposedName": "The Conduit",
+  "howItWouldWork": "⬜ PROPOSED, ERIK RULES. ⛔ ITS POWER COMES FROM HOW MANY DIFFERENT KINDS OF PEOPLE HOLD IT, not from what it is — the only nexus whose strength is a count of traditions rather than a density. ⚠️ Which means it CANNOT be turned the way the other eight can: you cannot tune a thing toward one side when its output is a function of how many sides are present. **Taking it means emptying it.**",
+  "_theMiddleWaysOwnCorruption": "⚠️ AND IT NEEDS ONE, since both other sides have a virtue and a vice. Wildheart is NOT it — Erik ruled that refusing order is Void-like, not middle. ⬜ The likeliest candidate is the vice the Council shape invites: EVALUATION AS AVOIDANCE — openness that never closes, a body that considers every side so thoroughly it never holds an aperture against anything. From the extremes that is what the middle way already looks like. **The corruption is when they are right.** Erik's to rule."
+ }
 }

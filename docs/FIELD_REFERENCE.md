@@ -342,8 +342,8 @@ but cited by its own note, extended by its `rankDeltas`, and named in its player
 | file | size | | file | size |
 |---|---|---|---|---|
 | ~~`ability_rename_map`~~ ✅ **WIRED** | 60.1 KB | | `ability_distribution_target` | 7.8 KB |
-| `power_cosmology` | 36.7 KB | | `the_veil` | 7.6 KB |
-| `nexuses` | 25.3 KB | | `healing_intent` | 4.8 KB |
+| `nexuses` | 41.4 KB | | `the_veil` | 7.6 KB |
+| `power_cosmology` | 36.7 KB | | `healing_intent` | 4.8 KB |
 | `mechanic_effects` | 15.9 KB | | `death_domain` | 4.6 KB |
 | `tempo` | 14.6 KB | | `companion_template` | 4.0 KB |
 | ⛔ `damage_types` | 13.0 KB | | `energy_costs` | 2.3 KB |

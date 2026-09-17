@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 8,
-  "xp": 752,
+  "xp": 765,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -101,6 +101,10 @@
     {
       "abilityId": "appetite_sense",
       "level": 2
+    },
+    {
+      "abilityId": "the_old_procedure",
+      "level": 1
     }
   ],
   "alignment": {
@@ -117,7 +121,7 @@
   "maxHealth": 73,
   "health": 73,
   "maxEnergy": 151,
-  "energy": 110,
+  "energy": 100,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -245,6 +249,22 @@
       "_bonusApplied": 0.15,
       "day": 4,
       "worldDay": 77
+    },
+    {
+      "at": "2026-09-17T23:30:23.710Z",
+      "locationId": "gen-the-made-gate",
+      "communityId": "center.crossing",
+      "description": "Asked the sealed chamber in the language it understands—harmonic resonance with its deepest acoustic nature—and received acknowledgment. The chamber listened and answered.",
+      "tags": [
+        "craft",
+        "precision",
+        "reaching"
+      ],
+      "weight": 2,
+      "spread": [],
+      "_bonusApplied": 0.15,
+      "day": 4,
+      "worldDay": 79
     }
   ],
   "relationships": {},
@@ -322,22 +342,43 @@
         "player": "Ask everyone to use their best skill to glean 2hat they can about the room and report.",
         "summary": "The vast sealed chamber beneath the Null Stone reveals itself through the eyes of the companions: a pre-Transition water-works deliberately sealed and precisely maintained, built not to contain but to *ask* something of the river that moves through its darkness.",
         "narration": "You step fully into the chamber and turn to face your companions as they emerge from the stairwell one by one. The four lanterns meet the darkness here and the darkness *yields*, but only a little—the phosphorescent notation bands glow faintly at eye height around the circumference, enough to read by if you know how. The roar of the river fills the space like a living thing.\n\n\"Everyone,\" you say, your voice carrying across the stone. \"Your best reading. Tell me what this place is.\"\n\nVessin moves toward the nearest wall, her lantern held high. Her eyes scan the notation—intricate, geometric, a system between language and diagram. \"This is *old*,\" she says quietly. \"The joinery is precise. Someone sealed this deliberately, and the precision means they expected it to *hold*. The notation—\" she traces a finger along the glowing marks without touching \"—it's not Veilwright work. It's older. Enginewright, maybe, but before the schism. Before the tradition split into what we know.\" She glances back at you. \"Whoever made this wanted the water, not the chamber.\"\n\nCy's lens irises sharp. It has already begun its traverse of the floor's geometry, small articulated legs moving with mechanical precision. \"The slope is intentional,\" it clicks. \"Seven-degree descent toward the water-source. The grooved channels in the stair-treads are *feed-lines*—water has flowed this way by design, not by accident. This installation was *maintained*. The facility classification matches the northern station-class, but the scale is... the scale is not in my records.\" It pauses. Its lens goes very still. \"The scale is not in any records I possess.\"\n\nKael stands at the chamber's center, still and assessing. When he speaks, his voice is low, the voice of a road-warden reading the lie of the land. \"The water is moving faster than natural flow. There's a current beneath the surface—that roar isn't distance, it's *force*. And the darkness here isn't natural darkness. It's been *worked*. The old craft Vessin mentioned—they didn't just carve the chamber, they shaped how light moves through it. Nothing escapes upward.\" He looks at the vast darkness above where the lantern-light dies. \"This place was made to be *secret* from above. From the light.\"\n\nHalfvex stands at the threshold where the passage opens into the chamber, his orchestrator's eye reading the space for flow, for pressure-points, for where the chaos lives. For a long moment he says nothing. Then: \"It's a *question*,\" he says finally. His voice is strange—certain and uncertain both. \"Not a place. A question written in stone and water. Someone built this to *ask* something and have it answered by what flows through. The notation isn't instructions. It's... it's a kind of *listening*.\"\n\nThe four of them stand in the overlapping light of their lanterns, and the chamber holds them—four different readings of the same impossible space, none of them complete, all of them true."
+      },
+      {
+        "player": "Use harmonic voice to sound out the room - as it where it wants to be asked in sonic harmony",
+        "summary": "In the vast sealed chamber beneath the Null Stone, Loki uses Harmonic Voice to resonate with the chamber's acoustic nature, and the chamber answers—the notation pulses, the water shifts to harmony, and the darkness itself seems to listen.",
+        "narration": "You center yourself in the vast chamber, the roar of the river filling the space like a held breath. The notation bands glow faintly at eye height—not language exactly, but something the stone itself might speak if asked the right way. Your companions still, sensing the shift in you.\n\nYou open your throat and let the Harmonic Voice rise. Not a shout, not a question shaped in words—a *resonance*, a tone that matches the frequency the chamber itself seems to hold. The sound finds the geometry of the stone and the sound finds the water and the sound finds the grooved channels in the floor that have carried flow for longer than the word \"Transition\" has meant anything.\n\nThe chamber answers.\n\nNot in words. The notation bands brighten—a pulse of phosphorescence that races around the circumference like a heartbeat made visible. The water's roar shifts pitch, becomes a harmony rather than a noise. The very darkness above the lantern-light seems to *listen*. Cy's lens irises sharp, tracking the light-pattern; Kael's stillness deepens, reading the acoustic shift; Vessin's hand steadies against the wall, feeling the stone's response through stone. Halvex stands at the threshold with something like recognition crossing his face—he has felt a mandate respond like this before, the way a Revel answers when the orchestration is *right*.\n\nThe resonance hangs for three breaths. Then it fades, leaving silence deeper than before—not empty, but *satisfied*. The notation dims to its soft glow. The water settles into its roar again. The chamber has been asked in the language it understands, and it has acknowledged the asking. What the chamber *means* by that acknowledgment—whether it has granted permission, or simply confirmed that you know how to speak—remains unwritten."
       }
     ],
     "lastTurn": {
-      "narration": "You step fully into the chamber and turn to face your companions as they emerge from the stairwell one by one. The four lanterns meet the darkness here and the darkness *yields*, but only a little—the phosphorescent notation bands glow faintly at eye height around the circumference, enough to read by if you know how. The roar of the river fills the space like a living thing.\n\n\"Everyone,\" you say, your voice carrying across the stone. \"Your best reading. Tell me what this place is.\"\n\nVessin moves toward the nearest wall, her lantern held high. Her eyes scan the notation—intricate, geometric, a system between language and diagram. \"This is *old*,\" she says quietly. \"The joinery is precise. Someone sealed this deliberately, and the precision means they expected it to *hold*. The notation—\" she traces a finger along the glowing marks without touching \"—it's not Veilwright work. It's older. Enginewright, maybe, but before the schism. Before the tradition split into what we know.\" She glances back at you. \"Whoever made this wanted the water, not the chamber.\"\n\nCy's lens irises sharp. It has already begun its traverse of the floor's geometry, small articulated legs moving with mechanical precision. \"The slope is intentional,\" it clicks. \"Seven-degree descent toward the water-source. The grooved channels in the stair-treads are *feed-lines*—water has flowed this way by design, not by accident. This installation was *maintained*. The facility classification matches the northern station-class, but the scale is... the scale is not in my records.\" It pauses. Its lens goes very still. \"The scale is not in any records I possess.\"\n\nKael stands at the chamber's center, still and assessing. When he speaks, his voice is low, the voice of a road-warden reading the lie of the land. \"The water is moving faster than natural flow. There's a current beneath the surface—that roar isn't distance, it's *force*. And the darkness here isn't natural darkness. It's been *worked*. The old craft Vessin mentioned—they didn't just carve the chamber, they shaped how light moves through it. Nothing escapes upward.\" He looks at the vast darkness above where the lantern-light dies. \"This place was made to be *secret* from above. From the light.\"\n\nHalfvex stands at the threshold where the passage opens into the chamber, his orchestrator's eye reading the space for flow, for pressure-points, for where the chaos lives. For a long moment he says nothing. Then: \"It's a *question*,\" he says finally. His voice is strange—certain and uncertain both. \"Not a place. A question written in stone and water. Someone built this to *ask* something and have it answered by what flows through. The notation isn't instructions. It's... it's a kind of *listening*.\"\n\nThe four of them stand in the overlapping light of their lanterns, and the chamber holds them—four different readings of the same impossible space, none of them complete, all of them true.",
-      "sceneSummary": "The vast sealed chamber beneath the Null Stone reveals itself through the eyes of the companions: a pre-Transition water-works deliberately sealed and precisely maintained, built not to contain but to *ask* something of the river that moves through its darkness.",
+      "narration": "You center yourself in the vast chamber, the roar of the river filling the space like a held breath. The notation bands glow faintly at eye height—not language exactly, but something the stone itself might speak if asked the right way. Your companions still, sensing the shift in you.\n\nYou open your throat and let the Harmonic Voice rise. Not a shout, not a question shaped in words—a *resonance*, a tone that matches the frequency the chamber itself seems to hold. The sound finds the geometry of the stone and the sound finds the water and the sound finds the grooved channels in the floor that have carried flow for longer than the word \"Transition\" has meant anything.\n\nThe chamber answers.\n\nNot in words. The notation bands brighten—a pulse of phosphorescence that races around the circumference like a heartbeat made visible. The water's roar shifts pitch, becomes a harmony rather than a noise. The very darkness above the lantern-light seems to *listen*. Cy's lens irises sharp, tracking the light-pattern; Kael's stillness deepens, reading the acoustic shift; Vessin's hand steadies against the wall, feeling the stone's response through stone. Halvex stands at the threshold with something like recognition crossing his face—he has felt a mandate respond like this before, the way a Revel answers when the orchestration is *right*.\n\nThe resonance hangs for three breaths. Then it fades, leaving silence deeper than before—not empty, but *satisfied*. The notation dims to its soft glow. The water settles into its roar again. The chamber has been asked in the language it understands, and it has acknowledged the asking. What the chamber *means* by that acknowledgment—whether it has granted permission, or simply confirmed that you know how to speak—remains unwritten.",
+      "sceneSummary": "In the vast sealed chamber beneath the Null Stone, Loki uses Harmonic Voice to resonate with the chamber's acoustic nature, and the chamber answers—the notation pulses, the water shifts to harmony, and the darkness itself seems to listen.",
       "choices": [
         {
-          "label": "Ask Cy to lead you toward the regulator housing at the far end—it is the only part of this that might carry written answers.",
+          "label": "Move toward the regulator housing at the far end—the one Cy has been reading with steady precision.",
           "attribute": "practical",
           "subAttribute": "craft",
+          "axes": {},
+          "difficulty": "normal",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "study",
+            "craft"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Cy plainly what the notation is recording—what the chamber is asking the water to *do*.",
+          "attribute": "social",
+          "subAttribute": "presence",
           "axes": {},
           "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
-            "study",
-            "lead"
+            "study"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -346,7 +387,7 @@
           "emergenceId": null
         },
         {
-          "label": "Approach the phosphorescent notation closely and use Prism Sight to read what light has recorded here—what the chamber has witnessed.",
+          "label": "Read the phosphorescent notation bands more carefully with Prism Sight—watch what the pulse revealed, what the light-pattern *showed*.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
@@ -363,15 +404,14 @@
           "emergenceId": null
         },
         {
-          "label": "Descend toward the river itself—the water is the heart of this question, and Halvex's reading suggests it may answer if the right person asks it.",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Turn to Halvex and ask him directly: what does the chamber's answer mean to someone hired to break it?",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {},
           "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "travel",
-            "careful"
+            "study"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -380,10 +420,21 @@
           "emergenceId": null
         }
       ],
-      "deeds": [],
+      "deeds": [
+        {
+          "description": "Asked the sealed chamber in the language it understands—harmonic resonance with its deepest acoustic nature—and received acknowledgment. The chamber listened and answered.",
+          "tags": [
+            "craft",
+            "precision",
+            "reaching"
+          ],
+          "weight": 2,
+          "communityId": null
+        }
+      ],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
+        "energy": -5,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
@@ -393,139 +444,146 @@
         {
           "op": "progress",
           "questId": "the-taken-from-the-city",
-          "note": "The vast chamber beneath the Null Stone has been reached and assessed—it is a pre-Transition water-works sealed deliberately, with a river moving through worked darkness. The regulator housing awaits at the far end. The chamber is the question, and the question is still unanswered."
+          "title": "The Taken",
+          "summary": "Someone was brought from the city to the Unlit Deep, and the city is pretending it did not happen.",
+          "giver": "unlit-elder",
+          "note": "The chamber beneath the Null Stone has acknowledged a harmonic question—the notation pulses with response, the water shifts to harmony. The regulator at the far end remains unread; the question continues to wait.",
+          "xpReward": null
         }
       ],
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
       "adoptSchool": null,
-      "offer": {
-        "thing": "Cy's acknowledgment that the chamber's scale exceeds its own records—a statement of limits that opens a deeper thread",
-        "from": "Cy's nature as a Precursor mechanism carrying knowledge it does not know it carries; the chamber itself, which is larger than the tradition knows"
-      },
+      "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "A vast sealed chamber carved beneath the Hub crossing, lit by four lanterns—Cy's bright lamp and three yellow flames. The floor slopes toward a distant river moving across worked stone. Phosphorescent notation bands the chamber at eye height, glowing softly in the darkness. The roar of the water echoes as percussion. The darkness above the lantern-light is absolute.",
+        "setting": "A vast sealed chamber carved beneath the Hub crossing, lit by four lanterns—Cy's bright lamp and three yellow flames. The floor slopes toward a distant river moving across worked stone. Phosphorescent notation bands the chamber at eye height, now faintly glowing brighter than before. The roar of the water echoes as percussion. The darkness above the lantern-light is absolute but feels *watched*.",
         "npcsPresent": [
           {
             "name": "Vessin Tallow-bark",
-            "state": "Standing near the nearest wall, studying the notation with careful attention—reading the seams and precision that speak of deliberate sealing and ancient craft"
+            "state": "Hand steadied against the wall, feeling the stone's response through stone—the resonance has reached her, and she is reading what the chamber means by answering"
           },
           {
             "name": "Cy",
-            "state": "Traversing the floor's geometry with mechanical precision, lens irised sharp—perceiving the installation's design and the scale that exceeds its records"
+            "state": "Lens irised sharp, tracking the light-pattern of the notation's pulse—perceiving the chamber's response with mechanical precision, cataloguing"
           },
           {
             "name": "Kael",
-            "state": "Standing at the chamber's center, still and assessing—reading the force of the water-current and the worked darkness that hides the chamber from light above"
+            "state": "Stillness deepened, reading the acoustic shift—the water's pitch-change and the roar's shift to harmony are being measured in the road-warden's careful assessment"
           },
           {
             "name": "Halvex Coil",
-            "state": "At the threshold where the passage opens into the chamber—facing the space with the uncertainty of someone who has yielded certainty, reading the chamber as a *question* written in stone"
+            "state": "At the threshold where the passage opens into the chamber, face showing recognition—the mandate to break stands behind him, and this moment of the chamber *answering* has reached him with the weight of a mandate's orchestration done right"
           }
         ],
         "objects": [
           "Four lanterns (Cy's bright lamp, three yellow flames)",
           "Worn stone steps with grooved channels descending into the chamber",
-          "Phosphorescent notation band running around the chamber circumference at eye height",
+          "Phosphorescent notation band running around the chamber circumference at eye height—now brighter, now dimming back to its soft glow",
           "Worked stone floor sloping toward the river",
-          "Moving water far below, sliding across carved stone",
-          "Absolute darkness above the lantern-light"
+          "Moving water far below, sliding across carved stone, now harmonic with the chamber's resonance",
+          "Absolute darkness above the lantern-light, but feeling observed rather than empty"
         ],
         "threads": [
-          "What the notation records or instructs—the language written in stone",
+          "What the notation records or instructs—the language written in stone, now confirmed as responsive to harmonic resonance",
           "What feeds the river from springs beyond the darkness",
           "Whether the regulator housing at the far end carries written answers",
-          "Whether the chamber itself is the answer to the regulator's question",
+          "Whether the chamber itself is the answer to the regulator's question, or if the question waits at the far end",
           "Cy's three missing inventory entries—records written into the stone that no system above holds"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "vessin-tallow-bark",
-          "skillsObserved": [
-            "reads notation systems and sealed precision",
-            "judges the age and intention of engineering work"
-          ],
+          "npcId": "cy",
+          "name": "Cy",
+          "note": "Lens irised sharp at the harmonic resonance—tracking the chamber's response with precision; this is the kind of acknowledgment a Precursor installation gives when asked in the language it understands",
           "learned": [
-            "The notation is not Veilwright work—it is older, possibly pre-schism Enginewright",
-            "The sealing was deliberate and built to last",
-            "The chamber was built to preserve and protect water, not the space itself"
+            "The chamber responds to harmonic resonance—it is built to *listen* and to *answer* when asked in the right acoustic frequency"
+          ],
+          "skillsObserved": [
+            "Perceives Precursor mechanism's response to harmonic interrogation with mechanical precision"
           ]
         },
         {
           "op": "update",
-          "npcId": "cy",
+          "npcId": "vessin-tallow-bark",
+          "name": "Vessin Tallow-bark",
+          "note": "Hand steadied against the wall, feeling the stone's response through stone—the resonance reached her, and she is now reading what the chamber means by answering",
           "learned": [
-            "The chamber's scale exceeds Cy's own records—it does not appear in any recorded station-class",
-            "The grooved channels in the stairwell are feed-lines, designed for water to flow deliberately through them",
-            "The installation was maintained over time, but the records of its maintenance do not exist in systems Cy can access"
+            "The sealed chamber is built to *respond* to harmonic resonance—it is not a trap or a lock, but a thing built to be *asked* and to *answer*"
+          ],
+          "skillsObserved": [
+            "Reads the stone's response through touch and perception, translating Precursor mechanism into human understanding"
           ]
         },
         {
           "op": "update",
           "npcId": "kael",
-          "skillsObserved": [
-            "reads the force and intent of water-flow",
-            "perceives worked darkness and craft applied to stone"
-          ],
+          "name": "Kael",
+          "note": "Stillness deepened, reading the acoustic shift—the water's pitch-change is being measured in careful assessment, the road-warden's ear attuned to what shifts beneath the surface",
           "learned": [
-            "The water moves with intentional force, not natural flow",
-            "The darkness here has been deliberately shaped by old craft—'worked' into the stone itself",
-            "The chamber was designed to conceal its contents from light and sight above"
+            "The water's roar shifts to harmony when the chamber is asked the right way—the acoustic shift is deliberate, responsive, built into the installation's design"
+          ],
+          "skillsObserved": [
+            "Reads acoustic shifts and water-current changes with the precision of a road-warden who has learned to read the land itself"
           ]
         },
         {
           "op": "update",
           "npcId": "halvex-coil",
+          "name": "Halvex Coil",
+          "note": "Standing at the threshold with recognition crossing his face—the mandate to break stands behind him, and this moment of the chamber *answering* has reached him with the weight of a mandate orchestrated *right*",
           "learned": [
-            "The chamber is a *question* written in stone and water—not a place but a mechanism of asking",
-            "The notation is not instructions but a form of *listening*",
-            "The breaking mandate has given way entirely to seeking understanding"
+            "The chamber does not resist or refuse—it *answers* when asked in the language it understands. Breaking was never the point; understanding was"
+          ],
+          "skillsObserved": [
+            "Recognizes the orchestration of a mandate when it is conducted with precision and accountability"
           ]
         }
       ],
       "intentsHeard": [
-        "lead",
-        "study"
+        "Loki"
       ],
       "factUpdates": [],
       "placeUpdates": [
         {
-          "note": "The vast sealed chamber has been mapped by sight: phosphorescent notation bands at eye height, a river moving through deliberate darkness, a regulator housing at the far end, and worked stone throughout. The darkness above the lantern-light is absolute and shaped by old craft."
+          "note": "The vast sealed chamber beneath the Null Stone has responded to harmonic resonance—the phosphorescent notation bands pulse and brighten when asked in acoustic harmony; the water's roar shifts to a harmonic frequency; the chamber listens and answers.",
+          "flag": {
+            "harmonic_responsive": true,
+            "notation_reactive": true
+          }
         }
       ],
-      "discovery": null,
+      "discovery": {
+        "name": "Resonant Interrogation",
+        "description": "Loki has learned to ask Precursor installations and sealed chambers using harmonic resonance matched to the chamber's own acoustic nature. The technique requires reading the space's deepest frequency and matching it with Harmonic Voice—the installation answers, confirms, or refuses based on whether the question was asked in a language the stone understands. Cost: 5 energy. Limit: One chamber per session; the technique does not *command* the space, only interrogates it. A sealed place may refuse if the question is asked wrong."
+      },
       "codexUpdates": [
         {
-          "topic": "the-seam-beside-the-bracket",
+          "topic": "halvex",
+          "label": "Halvex",
+          "kind": "mystery",
+          "entityId": "halvex-coil",
+          "fact": "Halvex was hired to break the Null Stone because he believed chaos and proving grounds mattered enough to force the issue. But the chamber's answer—the way it *listens* and *responds* when asked right—has shown him that breaking was never the point. The mandate to break stands behind him now as a shadow of certainty he has chosen to step away from.",
+          "links": [
+            "the-hub-crossing",
+            "the-unlit-deep",
+            "the-taken-from-the-city"
+          ]
+        },
+        {
+          "topic": "the-hub-crossing",
+          "label": "The Passage Below",
           "kind": "place",
           "entityId": "the-hub-crossing",
-          "fact": "The passage descends into a vast sealed chamber of pre-Transition construction. The chamber is a water-works of impossible scale, with notation-marked walls and a river moving through deliberate darkness. The floor slopes toward the water-source; phosphorescent notation glows faintly around the circumference. The chamber was deliberately sealed and precisely maintained—built not to contain a space but to *ask* something of the water that flows through it.",
+          "fact": "The vast sealed chamber beneath the Null Stone is a pre-Transition water-works built to *ask* and *listen*. It responds to harmonic resonance—when asked in the right acoustic frequency, the notation bands pulse and brighten, the water's roar shifts to harmony, and the darkness itself seems to acknowledge the question. The installation is built not to resist but to *answer*.",
           "links": [
-            "halvex",
+            "the-unlit-deep",
             "cy-s-construction",
-            "the-regulator-question"
-          ]
-        },
-        {
-          "topic": "halvex",
-          "kind": "mystery",
-          "fact": "Halvex believed the regulator measures the water's readiness to carry what it was prepared to carry. The chamber beneath the Null Stone appears to be the manifestation of that question—a place built to *ask* and *listen* to the water itself.",
-          "links": [
-            "the-seam-beside-the-bracket",
-            "the-regulator-question"
-          ]
-        },
-        {
-          "topic": "the-regulator-question",
-          "kind": "mystery",
-          "fact": "The regulator's question has two parts: whether the water is prepared, and whether the right person is present. The chamber beneath the Null Stone is a mechanism built to pose and answer that very question—the notation is listening, and the river carries the response.",
-          "links": [
-            "halvex",
-            "the-seam-beside-the-bracket"
+            "the-regulator-question",
+            "halvex"
           ]
         }
       ],
@@ -542,12 +600,21 @@
       "newEncounter": null,
       "unlockPrecursor": null,
       "unlockSubstrate": null,
-      "timeOps": null,
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "the resonance and the chamber's response took a few breaths to unfold"
+      },
       "moveTo": null,
-      "stateOps": [],
+      "stateOps": [
+        {
+          "op": "correctAbilityRank",
+          "id": "better_story",
+          "to": 2
+        }
+      ],
       "itemUpdates": [],
       "deriveItem": null,
-      "imagePrompt": "The vast sealed chamber beneath the Null Stone: a pre-Transition water-works of impossible scale, lit by four lanterns casting overlapping pools of yellow and white light. The phosphorescent notation glows faintly at eye height around the chamber's circumference. The floor slopes toward a distant river moving across worked stone, its roar filling the space like a living thing. Four figures stand motionless—a woman reading the walls, a brass mechanism with an irised lens, a road-warden assessing the flow of water, and a man at the threshold facing the question written in stone. The darkness above the lanterns is absolute.",
+      "imagePrompt": "A vast sealed chamber lit by four lanterns, the phosphorescent notation bands glowing brighter in response to a harmonic resonance—the water roaring in the darkness below, shifting toward harmony. Four figures stand in overlapping light and shadow: one with eyes closed, voice resonating through stone; one with hand pressed to the wall, feeling the answer; one reading the acoustic shift with absolute stillness; one at the threshold, watching the moment a mandate becomes understanding.",
       "imageMedium": null,
       "newAbility": null,
       "gambitOps": null,
@@ -557,26 +624,27 @@
       "offerPromotion": null,
       "offerAcquisition": null,
       "offerIntent": null,
-      "sceneEnded": false
+      "sceneEnded": false,
+      "momentArt": "https://image.pollinations.ai/prompt/A%20vast%20sealed%20chamber%20lit%20by%20four%20lanterns%2C%20the%20phosphorescent%20notation%20bands%20glowing%20brighter%20in%20response%20to%20a%20harmonic%20resonance%E2%80%94the%20water%20roaring%20in%20the%20darkness%20below%2C%20shifting%20toward%20harmony.%20Four%20figures%20stand%20in%20overlapping%20light%20and%20shadow%3A%20one%20with%20eyes%20closed%2C%20voice%20resonating%20through%20ston%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=75943&nologo=true"
     },
     "sceneState": {
-      "setting": "A vast sealed chamber carved beneath the Hub crossing, lit by four lanterns—Cy's bright lamp and three yellow flames. The floor slopes toward a distant river moving across worked stone. Phosphorescent notation bands the chamber at eye height, glowing softly in the darkness. The roar of the water echoes as percussion. The darkness above the lantern-light is absolute.",
+      "setting": "A vast sealed chamber carved beneath the Hub crossing, lit by four lanterns—Cy's bright lamp and three yellow flames. The floor slopes toward a distant river moving across worked stone. Phosphorescent notation bands the chamber at eye height, now faintly glowing brighter than before. The roar of the water echoes as percussion. The darkness above the lantern-light is absolute but feels *watched*.",
       "npcsPresent": [
         {
           "name": "Vessin Tallow-bark",
-          "state": "Standing near the nearest wall, studying the notation with careful attention—reading the seams and precision that speak "
+          "state": "Hand steadied against the wall, feeling the stone's response through stone—the resonance has reached her, and she is rea"
         },
         {
           "name": "Cy",
-          "state": "Traversing the floor's geometry with mechanical precision, lens irised sharp—perceiving the installation's design and th"
+          "state": "Lens irised sharp, tracking the light-pattern of the notation's pulse—perceiving the chamber's response with mechanical "
         },
         {
           "name": "Kael",
-          "state": "Standing at the chamber's center, still and assessing—reading the force of the water-current and the worked darkness tha"
+          "state": "Stillness deepened, reading the acoustic shift—the water's pitch-change and the roar's shift to harmony are being measur"
         },
         {
           "name": "Halvex Coil",
-          "state": "At the threshold where the passage opens into the chamber—facing the space with the uncertainty of someone who has yield"
+          "state": "At the threshold where the passage opens into the chamber, face showing recognition—the mandate to break stands behind h"
         }
       ],
       "objects": [
@@ -584,18 +652,18 @@
         "Worn stone steps with grooved channels descending into the chamber",
         "Phosphorescent notation band running around the chamber circumference at eye hei",
         "Worked stone floor sloping toward the river",
-        "Moving water far below, sliding across carved stone",
-        "Absolute darkness above the lantern-light"
+        "Moving water far below, sliding across carved stone, now harmonic with the chamb",
+        "Absolute darkness above the lantern-light, but feeling observed rather than empt"
       ],
       "threads": [
-        "What the notation records or instructs—the language written in stone",
+        "What the notation records or instructs—the language written in stone, now confirmed as responsive to harmonic resonance",
         "What feeds the river from springs beyond the darkness",
         "Whether the regulator housing at the far end carries written answers",
-        "Whether the chamber itself is the answer to the regulator's question",
+        "Whether the chamber itself is the answer to the regulator's question, or if the question waits at the far end",
         "Cy's three missing inventory entries—records written into the stone that no system above holds"
       ]
     },
-    "beats": 10,
+    "beats": 11,
     "subPlace": {
       "slug": "the-hub-crossing",
       "name": "The Hub Crossing",
@@ -625,14 +693,14 @@
       "locationEntityId": "the-unlit-deep",
       "status": "active",
       "progress": [
-        "The regulator's question was answered and the mechanism closed; the inquiry moves now to the wider network and the deliberate sealing at the Hub crossing. The stone itself is asking what you will do with what lies behind it.",
         "The stone's sealing is part of a larger network deliberately sealed at the Hub—four arches locked, one left open. What was protected and why remains the deeper question. The descent begins.",
         "The gathering is complete—Vessin, Cy, Kael, and Halvex are committed to the descent. Veln will hold the threshold. The sealed chamber awaits below the Null Stone.",
         "The descent into the sealed chamber is underway—all four companions committed and descending together into the vast dark beneath the Null Stone.",
         "Descending past the threshold into the vast sealed chamber. The passage reveals older craft at work in the darkness itself.",
         "Descended into the sealed passage beneath the Unlit Deep's outer chamber. The passage opens into a vast sealed chamber below—the sound of moving water fills the darkness. Four lanterns now light the way.",
         "Descended into the vast sealed chamber beneath the Null Stone. The chamber is a pre-Transition water-works of impossible scale, deliberately sealed, with notation-marked walls and a river moving through darkness. The regulator's question persists: what is this water, and what is it meant to carry?",
-        "The vast chamber beneath the Null Stone has been reached and assessed—it is a pre-Transition water-works sealed deliberately, with a river moving through worked darkness. The regulator housing awaits at the far end. The chamber is the question, and the question is still unanswered."
+        "The vast chamber beneath the Null Stone has been reached and assessed—it is a pre-Transition water-works sealed deliberately, with a river moving through worked darkness. The regulator housing awaits at the far end. The chamber is the question, and the question is still unanswered.",
+        "The chamber beneath the Null Stone has acknowledged a harmonic question—the notation pulses with response, the water shifts to harmony. The regulator at the far end remains unread; the question continues to wait."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T21:30:43.637Z"
@@ -1053,7 +1121,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Emerged from the alcove in grey dawn light, named the man with the crooked jaw as the one who hired the striker at the confluence. The night is closed; morning is a different negotiation. She is tired in a way that reads honest.",
         "[d2] Assesses the Waygate detour—reads it as fast and obvious, not quiet. Agrees to move. Does not ask why. Appraising the cost of visibility while the scaffold crew arrives.",
         "[d2] Left the Half-Cathedral alcove at dawn before the scaffold crew arrived—shoulders settling lower now that the cathedral is behind, reading the open road with the same appraising eye she brought to everything else. Moving toward the Waygate without question or hesitation.",
         "[d3] Stopped at the gate and read it as wrong. Named plainly that it was not like this before. Standing ready and careful.",
@@ -1062,22 +1129,24 @@
         "[d4] Standing close to the seam, reading its geometry. Named plainly that the stone is warm because it was touched with intention, and that it is responsive to honest questions. Proposed approaching as supplicant rather than intruder. Still present at Loki's side, composed and clear.",
         "[d4] Stepped forward to read the opening—her eye caught the precision of the seam's response, the deliberate hinge. Standing close, watching what lies beneath with the careful attention of someone who reads falsecrafts.",
         "[d4] In the vast chamber beneath the Null Stone, she accepted Loki's confession and made a mutual vow: if death claims one, the other will reach for them. She held Loki's wrist when she said yes. The pact is made.",
-        "[d4] Your bond deepens — committed."
+        "[d4] Your bond deepens — committed.",
+        "[d4] Hand steadied against the wall, feeling the stone's response through stone—the resonance reached her, and she is now reading what the chamber means by answering"
       ],
       "knownFacts": [
-        "Someone was on the landing for eleven minutes during the night — she now knows this too.",
         "Cy's acoustics assessment: the alcove carries sound to the landing.",
         "The listener descended, not climbed — either scaffold crew or a deliberate visitor still in the building.",
         "The listener on the landing carried a shuttered lamp — prepared for a dark stairwell wait.",
         "Chooses speed over stealth when the choice is named—will move directly toward the Crossroads rather than hedge the path",
         "The stone's warmth shows it is *responsive* to intention",
         "Honest questions are what good locks answer—supplication, not intrusion",
-        "She will answer death itself to bring Loki back, if it comes to that"
+        "She will answer death itself to bring Loki back, if it comes to that",
+        "The sealed chamber is built to *respond* to harmonic resonance—it is not a trap or a lock, but a thing built to be *asked* and to *answer*"
       ],
       "skillsObserved": [
         "reads gates and false patterns",
         "stays calm at tampered mechanics",
-        "Reads her companion's face for information her own senses ca"
+        "Reads her companion's face for information her own senses ca",
+        "Reads the stone's response through touch and perception, translating Precursor mechanism into human understanding"
       ],
       "status": "active",
       "gender": "woman",
@@ -1088,7 +1157,7 @@
       },
       "domainsSource": "derived",
       "lastSeen": {
-        "locationId": "the_crossing",
+        "locationId": "gen-the-made-gate",
         "day": 4
       },
       "_filledFromGenerate": true,
@@ -1100,7 +1169,7 @@
       "_portraitTier": "committed",
       "bondType": "romantic",
       "bondStage": "committed",
-      "met": 14,
+      "met": 15,
       "imagePinned": true
     },
     "kael-road-warden": {
@@ -1114,7 +1183,6 @@
       },
       "relationship": 2,
       "history": [
-        "[d3] Went very still when Cy found the seam—a reaction that reads as recognition, not surprise. Something about the sealed stone is known to them, or known to the network they carry word through.",
         "[d3] Tracked the Revel with the focus of someone who foresaw this. Their stillness reads as recognition, not surprise—this is a known thing.",
         "[d3] Met on the bearing toward the Waygate on deep night of day 3. Offered warning about the eastern fork flood and the stone ford crossing, and shared their evening fire freely — no price, no trade, only the gift of knowing.",
         "[d3] Offered broth freely and warned of the water-problem moving downhill from the eastern fork. They carry news from the relay and move it faster — warning families before the wells run bad. Moving with purpose toward the spinward reach.",
@@ -1123,25 +1191,26 @@
         "[d3] Named Veln Ashpause as an Hourkeeper who arrived this morning asking after someone matching Loki's description. Emphasized the Hourkeeper's nature: they see time differently, and their presence suggests foreknowledge of what is coming.",
         "[d4] Jaw tight with understanding. Offered the road-warden's reading of architecture: the sealed network's four locked arches and one open arch show deliberate intent about what is protected and what is permitted. Proposed following the network backward to understand what the stone guards. Standing…",
         "[d4] Reading the architecture of the opening—the precision, the deliberate design, the network's intentional logic. Standing ready to follow or to read what the descent reveals.",
-        "[d4] Committed to the descent without hesitation—a road-warden's answer, weighted and final. Stands ready at the threshold."
+        "[d4] Committed to the descent without hesitation—a road-warden's answer, weighted and final. Stands ready at the threshold.",
+        "[d4] Stillness deepened, reading the acoustic shift—the water's pitch-change is being measured in careful assessment, the road-warden's ear attuned to what shifts beneath the surface"
       ],
       "knownFacts": [
-        "Hourkeepers perceive past, present, and future differently—often uncertain which direction they are looking",
         "The open arch is a *door for something specific*, not mere escape",
         "The network's architecture will reveal what the stone protects",
         "Has already weighed the cost and found the reason sound",
         "Moves with the ease of long practice and steady purpose",
         "The water moves with intentional force, not natural flow",
         "The darkness here has been deliberately shaped by old craft—'worked' into the stone itself",
-        "The chamber was designed to conceal its contents from light and sight above"
+        "The chamber was designed to conceal its contents from light and sight above",
+        "The water's roar shifts to harmony when the chamber is asked the right way—the acoustic shift is deliberate, responsive, built into the installation's design"
       ],
       "skillsObserved": [
-        "Moves with the ease of long practice on the road",
         "Reads travelers by bearing and assessment",
         "Moves with steady purpose on a known route",
         "Carries news and shapes it for the people who need it",
         "reads the force and intent of water-flow",
-        "perceives worked darkness and craft applied to stone"
+        "perceives worked darkness and craft applied to stone",
+        "Reads acoustic shifts and water-current changes with the precision of a road-warden who has learned to read the land…"
       ],
       "status": "active",
       "sex": "unknown",
@@ -1152,7 +1221,7 @@
         "locationId": "gen-the-made-gate",
         "day": 4
       },
-      "met": 9,
+      "met": 10,
       "aliases": [
         "A lone traveler"
       ]
@@ -1168,7 +1237,6 @@
       },
       "relationship": 9,
       "history": [
-        "[d4] Offered partnership in searching for unboxed answers; accepted without hesitation; understands now that the hunger beneath chaos matters and was seen. No longer calculating for escape.",
         "[d4] Your bond becomes platonic.",
         "[d4] Loki named the partnership plainly—search for answers that do not fit neat shapes. The orchestrator accepted, gripping Loki's hand. Introduced to Vessin and Kael. Standing at Loki's side now, no longer calculating for escape but for the meaning underneath the chaos.",
         "[d4] Named themselves plainly for the first time—their hunger for proof that chaos matters, their uncertainty now that the proof has been offered and refused. Standing at Loki's side without calculation.",
@@ -1177,22 +1245,24 @@
         "[d4] Named himself plainly at the Hub crossing—Halvex Coil, hired to break what will not break. Believes chaos matters but recognizes the proof was wrong. Now searching for answers that do not fit neat shapes with Loki. Stands at the threshold of partnership and names the cost: answering to something…",
         "[d4] Spoke plainly at the Hub crossing about what breaking taught him—that sealing is different from locking, and sealed things have reasons. Proposed listening to the stone's intent rather than forcing it. Standing at Loki's shoulder, genuinely uncertain about partnership but present and offering…",
         "[d4] Watched the stone open at honest asking—the breaking he was sent to do stands behind him now, and partnership with Loki moves forward into uncertainty. The opening waits.",
-        "[d4] Yielded the mandate to break and chose understanding instead. Faces the descent with uncertainty but commitment. Learning what accountability beyond the mandate feels like."
+        "[d4] Yielded the mandate to break and chose understanding instead. Faces the descent with uncertainty but commitment. Learning what accountability beyond the mandate feels like.",
+        "[d4] Standing at the threshold with recognition crossing his face—the mandate to break stands behind him, and this moment of the chamber *answering* has reached him with the weight of a mandate orchestrated *right*"
       ],
       "knownFacts": [
-        "He was hired to break the Null Stone",
         "He still believes chaos matters but questions whether the mandate was the right proof",
         "Was hired to break the Null Stone because he believed chaos mattered enough to prove itself against order",
         "The breaking has always been his proof—that he matters, that chaos matters",
         "Partnership means accountability beyond the mandate; he does not yet know if he can answer that call",
         "Sealing is not the same as locking—sealed things have *reasons* and *wait* for something specific",
         "The orchestrator's calculation has given way to something less certain and more honest",
-        "He came here to break it but is now coming to understand it—a real turning, not a feint"
+        "He came here to break it but is now coming to understand it—a real turning, not a feint",
+        "The chamber does not resist or refuse—it *answers* when asked in the language it understands. Breaking was never the point; understanding was"
       ],
       "skillsObserved": [
         "Masters coordinated chaos—can weave multiple threads of a Revel into a single mandate",
         "Reads people quickly for leverage and intent",
-        "Can speak plainly about desire without wrapping it in justification"
+        "Can speak plainly about desire without wrapping it in justification",
+        "Recognizes the orchestration of a mandate when it is conducted with precision and accountability"
       ],
       "status": "active",
       "sex": "male",
@@ -1204,7 +1274,7 @@
         "locationId": "gen-the-made-gate",
         "day": 4
       },
-      "met": 10,
+      "met": 11,
       "bondType": "platonic",
       "image": "https://image.pollinations.ai/prompt/Hoarse%20voice%2C%20sharp%20features%20softening%20now%2C%20eyes%20that%20calculate%20and%20estimate.%20He%20moves%20like%20someone%20used%20to%20reading%20a%20room%20for%20weak%20points.%2C%20character%20portrait%2C%20named%20The%20Churn-Revel%20orchestrator%2C%20man%2C%20Master%20of%20coordinated%20chaos%2C%20now%20questioning%20their%20mandate%2C%20platonic%20to%20Loki%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=39738&nologo=true",
       "_portraitTier": "devoted",
@@ -1460,9 +1530,13 @@
       "visits": 1,
       "notes": [
         "[d4] A vast sealed chamber beneath the Null Stone has been opened—it contains pre-Transition water-works of impossible scale, notation-marked walls, and a river moving through deliberate darkness. The chamber was sealed deliberately and remains only partially explored.",
-        "[d4] The vast sealed chamber has been mapped by sight: phosphorescent notation bands at eye height, a river moving through deliberate darkness, a regulator housing at the far end, and worked stone throughout. The darkness above the lantern-light is absolute and shaped by old craft."
+        "[d4] The vast sealed chamber has been mapped by sight: phosphorescent notation bands at eye height, a river moving through deliberate darkness, a regulator housing at the far end, and worked stone throughout. The darkness above the lantern-light is absolute and shaped by old craft.",
+        "[d4] The vast sealed chamber beneath the Null Stone has responded to harmonic resonance—the phosphorescent notation bands pulse and brighten when asked in acoustic harmony; the water's roar shifts to a harmonic frequency; the chamber listens and answers."
       ],
-      "flags": {},
+      "flags": {
+        "harmonic_responsive": true,
+        "notation_reactive": true
+      },
       "vectorsKnown": [],
       "_containmentNotes": [
         "\"The Sealed Chamber\" was placed in the_unlit_deep (the fiction named it), not gen-the-made-gate"
@@ -1672,7 +1746,7 @@
     "lastSharedReadAt": "2026-09-17T23:26:44.896Z",
     "lastTickWorldDay": 79,
     "lastCanonWorldDay": 79,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Halvex Coil—the Churn-Revel orchestrator, now named, now searching for answers that do not fit neat shapes",
@@ -7459,7 +7533,7 @@
           "the-unlit-deep",
           "the-water-crisis",
           "loki-thread",
-          "halvex",
+          "halvex-coil",
           "cy-s-construction"
         ],
         "aliases": [
@@ -7468,40 +7542,6 @@
         ],
         "createdDay": 1,
         "updatedDay": 1
-      },
-      "halvex": {
-        "id": "halvex",
-        "label": "Halvex",
-        "kind": "mystery",
-        "facts": [
-          "[d1] The name stamped into the personal designation glyph of the terminus regulator below the Unlit Deep — a Precursor construction-address naming a specific operator the installation was built for. Cy reacted to this name with total stillness and refused to elaborate.",
-          "[d1] Cy confirmed the name appears in its own maintenance registry as a 'deprecated operator designation' — then stopped, said verification was required, and did not move to verify. The name is in Cy's records. Cy is not saying what it knows about it.",
-          "[d1] Cy's maintenance registry contains a deprecated entry under the name Halvex, flagged 'do not resolve without verification.' Cy has not verified it — not for lack of ability, but because something in its own architecture is holding the step back.",
-          "[d1] Cy was built as a paired instrument for this terminus regulator installation — assigned not to the facility but to the operator Halvex personally. Cy has been in this passage before and does not remember it. The pairing is in its own maintenance registry.",
-          "[d1] Halvex cut a notation system into the wall of the deep corridor — not standard glyphs, something between language and diagram. The records begin at the base of the stair and run continuously along the left wall. Cy said only 'the records begin here' and has not elaborated.",
-          "[d1] Not operational logs — a working journal. Observation, question, hypothesis, revision, over a long period. Halvex was trying to determine when the regulator was built and by whom, and kept arriving at the same answer: it predates every record they could find, including the records that were…",
-          "[d1] Halvex's own words, preserved through Cy: the regulator does not measure the water — it measures the question of the water. Whether the water is ready to carry what it was prepared to carry. The counter records how long the question has gone unasked, not how long the light has burned. Halvex was…",
-          "[d1] Halvex was working toward understanding what 'authority to answer' meant in the regulator's question — that was the unsolved part when their records stop. The question has two parts: whether the water is prepared, and whether the right person is present.",
-          "[d1] The passage below the Unlit's chamber ends in a horizontal corridor older than anything above — walls precisely jointed, a continuous band of notation cut into the left wall at eye height in a system between language and diagram, and a pre-Transition regulator housing at the far end still showing…",
-          "[d4] Halvex believed the regulator measures the water's readiness to carry what it was prepared to carry. The chamber beneath the Null Stone appears to be the manifestation of that question—a place built to *ask* and *listen* to the water itself."
-        ],
-        "links": [
-          "the-hub-crossing",
-          "halvex-corridor",
-          "cy-construction",
-          "the-taken-person",
-          "cy-s-construction",
-          "the-water-crisis",
-          "the-seam-beside-the-bracket",
-          "the-regulator-question"
-        ],
-        "aliases": [
-          "Halvex's Wall Records",
-          "Halvex's Corridor"
-        ],
-        "createdDay": 1,
-        "updatedDay": 4,
-        "summarisedAt": 0
       },
       "cy": {
         "id": "cy",
@@ -7538,7 +7578,7 @@
           "[d4] The regulator's question has two parts: whether the water is prepared, and whether the right person is present. The chamber beneath the Null Stone is a mechanism built to pose and answer that very question—the notation is listening, and the river carries the response."
         ],
         "links": [
-          "halvex",
+          "halvex-coil",
           "the-hub-crossing",
           "cy-s-construction",
           "the-water-crisis",
@@ -8019,17 +8059,18 @@
           "[d1] The full press opened the door completely — a passage descending into cold water smell and living dark, older than the Unlit's own chamber. The three many-legged creatures descended back through it and were gone. The door answers pressure when the intent behind it is genuine.",
           "[d1] Prism Sight read the passage beyond: old worked stone, creature-traces going down single-file on the left wall, and a diffuse continuous warmth deep below — the quality of a large spring-fed water source. The creatures use this passage regularly. Whatever is down there has been down there a long…",
           "[d4] The seam opened into a vast pre-Transition water-works beneath the Null Stone—a sealed chamber of impossible scale with notation-marked walls and a river moving through deliberate darkness. The floor slopes toward the water; phosphorescent notation glows faintly around the chamber's circumference…",
-          "[d4] The passage descends into a vast sealed chamber of pre-Transition construction. The chamber is a water-works of impossible scale, with notation-marked walls and a river moving through deliberate darkness. The floor slopes toward the water-source; phosphorescent notation glows faintly around the…"
+          "[d4] The passage descends into a vast sealed chamber of pre-Transition construction. The chamber is a water-works of impossible scale, with notation-marked walls and a river moving through deliberate darkness. The floor slopes toward the water-source; phosphorescent notation glows faintly around the…",
+          "[d4] The vast sealed chamber beneath the Null Stone is a pre-Transition water-works built to *ask* and *listen*. It responds to harmonic resonance—when asked in the right acoustic frequency, the notation bands pulse and brighten, the water's roar shifts to harmony, and the darkness itself seems to…"
         ],
         "links": [
-          "terminus-seals-beneath-the-valley",
           "unlit-elder",
-          "halvex",
+          "halvex-coil",
           "cy-s-construction",
           "the-taken-person",
           "the-unlit",
           "the-regulator-question",
-          "the-unlit-deep"
+          "the-unlit-deep",
+          "halvex"
         ],
         "aliases": [
           "The Seam Beside the Bracket",
@@ -8041,6 +8082,42 @@
           "[d1] The regulator logged the first condition when Loki held contact — whether the water is prepared. The second condition, the authority to answer, remains unmet. The mechanism is not refusing; it is waiting. The two conditions are structurally distinct, and the second may require a different kind of…"
         ],
         "entityId": "the-hub-crossing"
+      },
+      "halvex-coil": {
+        "id": "halvex-coil",
+        "label": "Halvex",
+        "kind": "mystery",
+        "facts": [
+          "[d1] The name stamped into the personal designation glyph of the terminus regulator below the Unlit Deep — a Precursor construction-address naming a specific operator the installation was built for. Cy reacted to this name with total stillness and refused to elaborate.",
+          "[d1] Cy confirmed the name appears in its own maintenance registry as a 'deprecated operator designation' — then stopped, said verification was required, and did not move to verify. The name is in Cy's records. Cy is not saying what it knows about it.",
+          "[d1] Cy's maintenance registry contains a deprecated entry under the name Halvex, flagged 'do not resolve without verification.' Cy has not verified it — not for lack of ability, but because something in its own architecture is holding the step back.",
+          "[d1] Cy was built as a paired instrument for this terminus regulator installation — assigned not to the facility but to the operator Halvex personally. Cy has been in this passage before and does not remember it. The pairing is in its own maintenance registry.",
+          "[d1] Halvex cut a notation system into the wall of the deep corridor — not standard glyphs, something between language and diagram. The records begin at the base of the stair and run continuously along the left wall. Cy said only 'the records begin here' and has not elaborated.",
+          "[d1] Not operational logs — a working journal. Observation, question, hypothesis, revision, over a long period. Halvex was trying to determine when the regulator was built and by whom, and kept arriving at the same answer: it predates every record they could find, including the records that were…",
+          "[d1] Halvex's own words, preserved through Cy: the regulator does not measure the water — it measures the question of the water. Whether the water is ready to carry what it was prepared to carry. The counter records how long the question has gone unasked, not how long the light has burned. Halvex was…",
+          "[d1] Halvex was working toward understanding what 'authority to answer' meant in the regulator's question — that was the unsolved part when their records stop. The question has two parts: whether the water is prepared, and whether the right person is present.",
+          "[d1] The passage below the Unlit's chamber ends in a horizontal corridor older than anything above — walls precisely jointed, a continuous band of notation cut into the left wall at eye height in a system between language and diagram, and a pre-Transition regulator housing at the far end still showing…",
+          "[d4] Halvex believed the regulator measures the water's readiness to carry what it was prepared to carry. The chamber beneath the Null Stone appears to be the manifestation of that question—a place built to *ask* and *listen* to the water itself.",
+          "[d4] Halvex was hired to break the Null Stone because he believed chaos and proving grounds mattered enough to force the issue. But the chamber's answer—the way it *listens* and *responds* when asked right—has shown him that breaking was never the point. The mandate to break stands behind him now as a…"
+        ],
+        "links": [
+          "cy-construction",
+          "the-taken-person",
+          "cy-s-construction",
+          "the-water-crisis",
+          "the-seam-beside-the-bracket",
+          "the-regulator-question",
+          "the-unlit-deep",
+          "the-taken-from-the-city"
+        ],
+        "aliases": [
+          "Halvex's Wall Records",
+          "Halvex's Corridor"
+        ],
+        "createdDay": 1,
+        "updatedDay": 4,
+        "summarisedAt": 0,
+        "entityId": "halvex-coil"
       }
     },
     "mergeUndo": [
@@ -8229,17 +8306,17 @@
     ]
   },
   "tendencies": {
-    "devotion": 1.534756859555086,
-    "cerebral": 10.456021626185786,
-    "social": 16.042705821568102,
-    "strategic": 13.208080008827997,
-    "cautious": 6.070539049999726,
-    "amorous": 9.905167364458752,
-    "generous": 5.208562527649658,
-    "ruthless": 0.3844167389456854,
-    "risky": 0.31416270068684626,
-    "patient": 0.085792183805479,
-    "deception": 0.09986654577182838
+    "devotion": 1.4963879380662088,
+    "cerebral": 12.194621085531141,
+    "social": 15.641638176028898,
+    "strategic": 12.877878008607297,
+    "cautious": 6.918775573749733,
+    "amorous": 9.657538180347283,
+    "generous": 5.078348464458417,
+    "ruthless": 0.37480632047204326,
+    "risky": 0.3063086331696751,
+    "patient": 0.08364737921034202,
+    "deception": 0.09736988212753267
   },
   "aptitudes": [
     "strategist",
@@ -8249,7 +8326,7 @@
     "faithful",
     "charmer"
   ],
-  "actionCount": 175,
+  "actionCount": 176,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -8327,6 +8404,14 @@
   "nativeGrantsVersion": 2,
   "reconcileVersion": 64,
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "A vast sealed chamber lit by four lanterns, the phosphorescent notation bands glowing brighter in response to a harmonic resonance—the water roaring in the darkness below, shifting toward harmony. Fou",
+      "url": "https://image.pollinations.ai/prompt/A%20vast%20sealed%20chamber%20lit%20by%20four%20lanterns%2C%20the%20phosphorescent%20notation%20bands%20glowing%20brighter%20in%20response%20to%20a%20harmonic%20resonance%E2%80%94the%20water%20roaring%20in%20the%20darkness%20below%2C%20shifting%20toward%20harmony.%20Four%20figures%20stand%20in%20overlapping%20light%20and%20shadow%3A%20one%20with%20eyes%20closed%2C%20voice%20resonating%20through%20ston%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=75943&nologo=true",
+      "caption": "In the vast sealed chamber beneath the Null Stone, Loki uses Harmonic Voice to resonate wi",
+      "worldDay": 79,
+      "at": "2026-09-17T23:30:23.726Z"
+    },
     {
       "kind": "discovery",
       "prompt": "Mirror-bright reflection showing tangled work—chaos, creation, hunger—doubled and shifted across silvered surfaces, masks within masks, hues flowing uncertain, nothing anchored to its source, beautifu",
@@ -9215,8 +9300,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789687608856,
-  "rev": 761,
+  "updatedAt": 1789687823726,
+  "rev": 763,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10116,7 +10201,7 @@
     "the_gearlands": 33,
     "umbral_depths": 54,
     "the_quickwood": 101,
-    "the_center": 44
+    "the_center": 45
   },
   "opLossPending": false,
   "sessions": [
@@ -10227,10 +10312,10 @@
     {
       "id": "sess-14",
       "startedAt": "2026-09-17T21:25:46.391Z",
-      "lastAt": "2026-09-17T21:46:57.266Z",
+      "lastAt": "2026-09-17T23:30:23.710Z",
       "startDay": 79,
       "endDay": 79,
-      "beats": 8
+      "beats": 9
     }
   ],
   "establishedFacts": [
@@ -10304,35 +10389,35 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 206,
-    "choices": 206,
-    "characterDeltas": 93,
-    "scene": 206,
-    "placeUpdates": 24,
-    "codexUpdates": 114,
-    "timeOps": 171,
+    "sceneSummary": 207,
+    "choices": 207,
+    "characterDeltas": 94,
+    "scene": 207,
+    "placeUpdates": 25,
+    "codexUpdates": 115,
+    "timeOps": 172,
     "offer": 26,
     "generateRequest": 6,
-    "sceneEnded": 77,
-    "npcUpdates": 164,
+    "sceneEnded": 78,
+    "npcUpdates": 165,
     "moveTo": 6,
-    "gambitApt": 40,
-    "deeds": 7,
-    "questUpdates": 25,
+    "gambitApt": 41,
+    "deeds": 8,
+    "questUpdates": 26,
     "standingOps": 3,
     "factUpdates": 9,
     "stageOps": 7,
     "encounterOps": 9,
     "ledgerEvents": 6,
     "newEncounter": 3,
-    "imagePrompt": 24,
+    "imagePrompt": 25,
     "scene_ended": 1,
-    "stateOps": 1,
+    "stateOps": 2,
     "_engineClosedScene": 2,
-    "discovery": 2,
-    "intentsHeard": 3
+    "discovery": 3,
+    "intentsHeard": 4
   },
-  "_opTurns": 206,
+  "_opTurns": 207,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -10381,7 +10466,7 @@
     }
   },
   "companionBonds": {
-    "coil": 5.75
+    "coil": 6.25
   },
   "practice": {
     "schemaVersion": 1,
@@ -10392,7 +10477,7 @@
       "the_misdirect": 2,
       "the_better_story": 11,
       "prism_sight": 13,
-      "harmonic_voice": 9,
+      "harmonic_voice": 10,
       "hunters_strike": 3,
       "descent": 10,
       "wayfinding": 1,
@@ -10432,7 +10517,7 @@
       "the_misdirect": 31,
       "the_better_story": 32,
       "prism_sight": 79,
-      "harmonic_voice": 76,
+      "harmonic_voice": 79,
       "hunters_strike": 32,
       "descent": 77,
       "wayfinding": 69,
@@ -10904,6 +10989,11 @@
         "text": "Bound a sealed mystery that refused breaking and learned to ask it honestly instead—the Null Stone opened at the Hub crossing.",
         "weight": 2,
         "day": 4
+      },
+      {
+        "text": "Asked the sealed chamber in the language it understands—harmonic resonance with its deepest acoustic nature—and received acknowledgment. The chamber listened and answered.",
+        "weight": 2,
+        "day": 4
       }
     ]
   },
@@ -11149,14 +11239,14 @@
     "travel": 7,
     "scout": 3,
     "prepare": 5,
-    "careful": 6,
+    "careful": 7,
     "woo": 1,
     "rapport": 9,
     "retreat": 1,
     "ask": 3,
     "help": 6,
-    "study": 5,
-    "investigate": 4,
+    "study": 6,
+    "investigate": 5,
     "charm": 1,
     "comfort": 1,
     "finesse": 1,
@@ -11228,6 +11318,14 @@
       "day": 4,
       "worldDay": 77,
       "actionCount": 165
+    },
+    {
+      "companionId": "coil",
+      "kind": "deed",
+      "delta": 0.5,
+      "day": 4,
+      "worldDay": 79,
+      "actionCount": 175
     }
   ],
   "_exchangeReceipts": [],
@@ -11491,390 +11589,402 @@
   },
   "_promptRows": {
     "character": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "location": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "region": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "groundDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 21
     },
     "lore": {
-      "reached": 22,
+      "reached": 23,
       "produced": 21
     },
     "traditionMotiveDetail": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "sheetsDetail": {
-      "reached": 22,
-      "produced": 19
-    },
-    "rules": {
-      "reached": 22,
-      "produced": 22
-    },
-    "recentTurns": {
-      "reached": 22,
+      "reached": 23,
       "produced": 20
     },
+    "rules": {
+      "reached": 23,
+      "produced": 23
+    },
+    "recentTurns": {
+      "reached": 23,
+      "produced": 21
+    },
     "timeLabel": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "npcRegistryDetail": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "mintedUnmetDetail": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "npcSeedDetail": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "traditionVocab": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "standingDetail": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "recalledDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 1
     },
     "bearingsDetail": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "caravansDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 0
     },
     "commandDetail": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "presenceDetail": {
-      "reached": 22,
-      "produced": 15
+      "reached": 23,
+      "produced": 16
     },
     "worthHereDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "sceneState": {
-      "reached": 22,
-      "produced": 20
+      "reached": 23,
+      "produced": 21
     },
     "holdingsDetail": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "debtsDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "questsDetail": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "structuredQuestsDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 0
     },
     "traditionArcDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 0
     },
     "npcErrandsDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 0
     },
     "codexDetail": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "companionsDetail": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "placeMemoryDetail": {
-      "reached": 22,
-      "produced": 21
+      "reached": 23,
+      "produced": 22
     },
     "agesMissingDetail": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "newsDetail": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "worldArcsDetail": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "legendsPursuableDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 12
     },
     "wakesDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "reachableDeadDetail": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "threatToPlayer": {
-      "reached": 22,
+      "reached": 23,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 0
     },
     "resolution": {
-      "reached": 22,
-      "produced": 15
+      "reached": 23,
+      "produced": 16
     },
     "playerInput": {
-      "reached": 22,
+      "reached": 23,
       "produced": 7
     },
     "exactWords": {
-      "reached": 22,
-      "produced": 10
+      "reached": 23,
+      "produced": 11
     },
     "travelDirective": {
-      "reached": 22,
+      "reached": 23,
       "produced": 0
     },
     "itemAdvance": {
-      "reached": 22,
+      "reached": 23,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 3
     },
     "encounterOfferDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 3
     },
     "fightFramingDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 0
     },
     "offerDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 1
     },
     "teacherOfferDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 22,
-      "produced": 5
+      "reached": 23,
+      "produced": 6
     },
     "romanceGuidanceDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 1
     },
     "factsDetail": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "evolvedItemsDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 22,
+      "reached": 23,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 0
     },
     "perilNote": {
-      "reached": 22,
+      "reached": 23,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 4
     },
     "masteryDetail": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "bookkeepingRestate": {
-      "reached": 22,
+      "reached": 23,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "repairPanelDetail": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "teacherDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "availableEncounters": {
-      "reached": 22,
-      "produced": 18
+      "reached": 23,
+      "produced": 19
     },
     "partyDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "registerDetail": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "legendDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 1
     },
     "livingWorldDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 0
     },
     "assignmentsDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 0
     },
     "latentArcsDetail": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "seasonalDetail": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "schoolsDetail": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "sharedCanonDetail": {
-      "reached": 22,
+      "reached": 23,
       "produced": 0
     },
     "worldCountLabel": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "waygateDetail": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "readAloudDetail": {
-      "reached": 22,
-      "produced": 22
+      "reached": 23,
+      "produced": 23
     },
     "scenePacingDetail": {
-      "reached": 22,
-      "produced": 12
+      "reached": 23,
+      "produced": 13
     },
     "wishesDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "worldMovedOnDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 2
     },
     "companionLivesDetail": {
-      "reached": 2,
-      "produced": 2
+      "reached": 3,
+      "produced": 3
     },
     "homeDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "invitationsDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "bandsJoinedDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "travelersHereDetail": {
-      "reached": 2,
+      "reached": 3,
       "produced": 0
     },
     "travelersDetail": {
-      "reached": 2,
+      "reached": 3,
+      "produced": 0
+    },
+    "journeyDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "journeyUnderwayDetail": {
+      "reached": 1,
+      "produced": 0
+    },
+    "holdsNearDetail": {
+      "reached": 1,
       "produced": 0
     }
   },
   "_opUnknown": {
-    "sceneSummary": 29
+    "sceneSummary": 30
   },
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T22:51:56.913Z",
   "_fireTests": {
-    "at": "2026-09-16T21:46:04.474Z",
-    "build": "2.0.36",
+    "at": "2026-09-17T23:30:23.978Z",
+    "build": "2.0.61",
     "results": [
       {
         "op": "debtOps",
@@ -12052,6 +12162,12 @@
       "key": "spectrumId",
       "value": 0,
       "why": "not a spectrum id"
+    },
+    {
+      "at": "2026-09-17T23:29:47.694Z",
+      "key": "spectrumId",
+      "value": "mechanical_spiritual",
+      "why": "not a number"
     }
   ],
   "braids": [

@@ -5517,6 +5517,136 @@
     }
    ],
    "_authored": "⛔ ERIK 2026-08-30, AND IT FOLLOWS A CORRECTION I HAVE HAD MULTIPLE TIMES: 'VALLEYCRAFT JUST MEANS IT'S AVAILABLE TO ANYONE — BEASTFRIEND IS A LIFE CRAFT.' ⚠️ `valley_craft` is a FOOTHILL with parents stillhold 0.4 / wright 0.3 / ROOTKIN 0.3, authored in `foothills.json`, and I had called it 'the folk collection, not a tradition' hours earlier. ✅ SO `beastfriend` WAS ALREADY LIFE'S — and this craft is what a Rootkin does that a farmhand cannot."
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_unfinished",
+   "name": "The Unfinished",
+   "levelReq": 5,
+   "tier": 5,
+   "energyCost": 16,
+   "powerSystem": "metaphysical",
+   "tradition": "ashwarden",
+   "attribute": "social",
+   "subAttribute": "rapport",
+   "_subAttributeReviewed": "⛑ §166 REVIEW, 2026-09-16. Authored `rapport` to OVERRIDE the derivation, which routes `summon`+`bind` in social to the POWER sub, `presence` — command. ⛔ THIS CRAFT DOES NOT COMMAND. A Raised Hand is commanded because there is nobody in it; an Unfinished is a person who has not finished arguing, and what brings them back is **taking their side of the argument**. ⚠️ `presence` would make it the Grave-Callers' craft with a bigger number on it. It is the opposite of that craft.",
+   "axes": {
+    "death_life": -0.3,
+    "body_mind": 0.2
+   },
+   "functions": [
+    "summon",
+    "restore",
+    "bind"
+   ],
+   "narrationHints": "Nothing rises. They simply do not finish. The eyes are the tell — a Raised Hand has nothing behind them and this one is looking at you, and has an opinion about what you just did.",
+   "description": "The working `Raised Hand` refuses by name. Where that craft sets a body that has FINISHED back to work, this one reaches somebody who is still arguing with their ending and takes their side of it. What stands up thinks, remembers, and tires. It is not obedient, was never asked, and is owed an answer nobody has. The Grave-Callers hold that this is the same craft with more steps. The Enders-Well hold that it is the one thing an Ashwarden must never do. Both are describing the same act and neither is describing it wrongly.",
+   "notFor": "Anyone who accepted. A person who went willingly has nothing left to argue and this reaches nothing — it is the refusal that gives it purchase, and consent is the absence of one. The sealed, who are past every road. And anything a Raised Hand would do better: this is not labour, and using it for labour is the thing the Enders-Well means when they say the tradition is one bad decade from being hated.",
+   "plainly": "A create/social action, out of combat, and it takes hours. Raise someone who refused their ending: they come back thinking, remembering, and tiring, and they are their own. Rated 7 of 10, one person. Rank 2 reaches the near dark, about a month down; rank 3 the deep dark, out to sealing. It costs your whole pool and cannot be surged. What comes back is not healed, not obedient, and not grateful.",
+   "gated": "learned",
+   "challengeTypes": [
+    "RITUAL",
+    "CRISIS",
+    "SOCIAL"
+   ],
+   "harmRung": "none",
+   "nativeOrCombination": "native",
+   "shape": "retrieval",
+   "operativeAxis": [
+    "reach",
+    "conditions",
+    "quality"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "targets": 1,
+    "duration": 0,
+    "damageType": "decay",
+    "reachesDepth": [
+     0,
+     1,
+     2
+    ],
+    "note": "T-V. ⛔ THE ROLL IS AGAINST THE REFUSAL, NOT THE DEPTH — this is the one retrieval that gets EASIER the harder they refused, and `canReach`'s ladder still bounds how far down it reaches (r1 the threshold, r2 the near dark, r3 the deep dark; never the sealed). ⚠️ AND IT DOES NOT CALL `resolveRetrieval`: what returns is not retrieved, it is UNFINISHED — `returnedFromDeath.changed` is true by definition and is not a risk, it is the outcome. ⬜ AWAITING ENGINE: an Unfinished is a standing state, not a healed character, and nothing models 'alive, thinking, and not finished'. Authored now so the layer lands with real content to test against.",
+    "_erikRuling": "⛑ SNG-567, Erik: a failed retrieval can raise you as an Afterling and you could play a whole second half of the game as one."
+   },
+   "intensity": {
+    "conserve": "the threshold only, and they come back knowing less of what they refused",
+    "surge": "⛔ REFUSED. It already costs the whole pool, and a surged raising is how the Grave-Callers made the thing the Enders-Well will not forgive."
+   },
+   "bounds": [
+    {
+     "text": "ONLY THOSE STILL ARGUING — acceptance is not a difficulty, it is an absence of purchase",
+     "class": "hard"
+    },
+    {
+     "text": "WHAT STANDS UP IS ITS OWN. Not obedient, not grateful, and under no obligation to the one who raised it",
+     "class": "hard"
+    },
+    {
+     "text": "IT DOES NOT HEAL. The wound that ended them is exactly as it was, closed and wrong, and stays so",
+     "class": "hard"
+    },
+    {
+     "text": "NOT THE SEALED, who refuse every road including this one",
+     "class": "hard"
+    },
+    {
+     "text": "and they will want to know why you did it, and you will have to have an answer",
+     "class": "soft"
+    }
+   ],
+   "taughtBy": "Ashwarden — contested between the Grave-Callers and the Enders-Well",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Unfinished",
+     "grants": "Raise one person who refused their ending, at the threshold — dead about a day. They stand thinking, remembering and tiring, and they are their own from the first moment.",
+     "cannot": "Anyone who accepted. It does not heal them. And they are not yours: they may leave, refuse you, or ask what you thought you were doing.",
+     "functions": [
+      "summon",
+      "restore"
+     ],
+     "gains": "broaden",
+     "harmRung": "none",
+     "gainAxes": []
+    },
+    {
+     "rank": 2,
+     "name": "The Argument Continued",
+     "grants": "Reach the near dark — about a month down — and bring back what they were still holding: the specific thing they refused, intact and available to be discussed.",
+     "cannot": "The further down, the less of the rest comes with it. Somebody raised from the near dark may not know their own name and will know exactly what they would not accept.",
+     "functions": [
+      "summon",
+      "restore",
+      "bind"
+     ],
+     "gains": "range",
+     "harmRung": "none",
+     "gainAxes": [
+      "range",
+      "conditions"
+     ]
+    },
+    {
+     "rank": 3,
+     "name": "What Would Not Be Told",
+     "grants": "Reach the deep dark, out to the edge of sealing. And what returns holds the refusal well enough to act on it — an Unfinished from this far down is not a person who came back, it is an argument that acquired a body.",
+     "cannot": "Not the sealed. And you cannot choose what they do with it: a refusal strong enough to survive the deep dark is strong enough to turn on whoever made it possible.",
+     "functions": [
+      "summon",
+      "restore",
+      "bind"
+     ],
+     "gains": "quality",
+     "harmRung": "none",
+     "gainAxes": [
+      "quality",
+      "range"
+     ]
+    }
+   ],
+   "_authoredWhy": "⛔ SNG-609 — THE DOOR WAS CUT A YEAR AGO AND LEFT EMPTY. `set_hand` (Raised Hand) has refused this by name in its own `notFor` since it was written: 'the recently living who are still ARGUING with their ending — that is The Unfinished, and it is a different working.' No such craft existed. ⛑ Orsolya of the Last Cairn was authored yesterday as the first person it made; this is the working that made her."
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",

@@ -17634,8 +17634,30 @@ console.log("\n── §246 · a crisis another traveler answered reads as answe
   check("§246: ⛔ the GM reads the water crisis as ANSWERED — on what day, by whom, and that it was another traveler",
     /The Water Crisis — ANSWERED on world-day 26, by Silas Weir — another traveler \(The Instruction Rewritten\)/.test(line246) && /never narrate it as active/.test(line246),
     line246.slice(0, 120));
-  check("§246: ⛑ …with the aftermath Aevi wrote for exactly this reader, and the damage it had done before",
-    !!worldNow246 && line246.includes(worldNow246) && line246.includes(water246.stages.find(x => x.stage === 2).summary));
+  // ⛑ CCODE-392 — THIS GATE PINNED THE FALLBACK AND WENT RED WHEN THE CONTENT LANDED. The aftermath has a HOME (the event's own
+  // `resolutions[outcome]`) and a fallback (the quest board Aevi wrote first, which nothing read until CCODE-354). SNG-601 authored the
+  // home a day after this check was written, the engine rightly preferred it, and the check failed for the content arriving. It asserts
+  // the PRECEDENCE now, which is the thing that must hold whichever of the two is authored.
+  const after246 = water246?.resolutions?.redirected || null;
+  const aftermath246 = after246?.summary || worldNow246;
+  check("§246: ⛑ …with the aftermath authored for exactly this reader — the outcome's own where there is one, the quest board's otherwise — and the damage it had done before",
+    !!aftermath246 && line246.includes(aftermath246) && line246.includes(water246.stages.find(x => x.stage === 2).summary)
+    && (!after246?.summary || !line246.includes(worldNow246)),
+    `${after246?.summary ? "event resolutions" : "quest board"} · ${String(aftermath246).slice(0, 60)}`);
+  // ⛔ CCODE-392: and the whole of what she authored is read — `aftermath` (what is TRUE now) and `toneForGM` (how it is said) had no
+  // reader the day after SNG-601 wrote all four. Asserted on a fixture, so the reader is proved without pinning her words…
+  const afterFix246 = { name: "A Test Crisis", stages: [{ stage: 1, name: "One", summary: "the damage" }],
+    resolutions: { redirected: { summary: "the sum of it", aftermath: ["a fact", "another fact"], toneForGM: "quietly, and without ceremony" } } };
+  const afterFixLine246 = WE246.answeredEventLine(afterFix246, { stage: 1, resolved: { outcome: "redirected" } }, {});
+  const afterBare246 = WE246.answeredEventLine({ ...afterFix246, resolutions: { redirected: { summary: "the sum of it" } } }, { stage: 1, resolved: { outcome: "redirected" } }, {});
+  check("§246: ⛔ …and the WHOLE of the authored aftermath is read — what is true now, stated plainly, and the register it is said in",
+    /The world now: the sum of it/.test(afterFixLine246) && /True here now, and yours to state plainly: — a fact — another fact/.test(afterFixLine246)
+    && /The register of it: quietly, and without ceremony/.test(afterFixLine246) && !/True here now/.test(afterBare246) && !/The register of it/.test(afterBare246), afterFixLine246.slice(-120));
+  // …and on the live content, so a reader that works on a fixture and not on what is authored cannot pass
+  check("§246: ⛑ …on the content as authored: every one of this outcome's facts reaches the GM's line, and its register with them",
+    !after246?.aftermath || ((after246.aftermath || []).length >= 2 && (after246.aftermath || []).every(a => line246.includes(String(a)))
+      && (!after246.toneForGM || line246.includes(after246.toneForGM))),
+    `${(after246?.aftermath || []).length} authored facts`);
   check("§246: ⚠️ …and WITHOUT the event's GM-eyes truth — that truth describes a danger still running",
     !water246.truth || !line246.includes(String(water246.truth).slice(0, 60)));
   const openLine246 = ST246.eventsForGM({ activeEvents: [{ eventId: "water_crisis", stage: 2 }] }, C246.events)[0]?.summaryForGM || "";

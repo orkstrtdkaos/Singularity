@@ -138,17 +138,24 @@ export function mergeQuestOutcomes(local = {}, remote = {}) {
 
 /** ⛔ WHAT THE WORLD LOOKS LIKE AFTER — AUTHORED, NEVER INVENTED.
  *
- *  Read in this order: the event's own `resolutions[outcome]` (the home for it — not yet authored for `water_crisis`), then
- *  the resolving quest's `priorOutcomeBoards[outcome]._theWorldNow`, which Aevi wrote in advance for exactly this reader
- *  (SNG-552 O4: "authored in advance so it is retrieved rather than invented") and which nothing had ever read. */
+ *  Read in this order: the event's own `resolutions[outcome]`, which is the home for it, then the resolving quest's
+ *  `priorOutcomeBoards[outcome]._theWorldNow`, which Aevi wrote in advance for exactly this reader (SNG-552 O4: "authored in
+ *  advance so it is retrieved rather than invented") and which nothing had ever read.
+ *
+ *  ⛔ CCODE-392 — AND THE EVENT'S HOME CARRIES THREE THINGS, NOT ONE. SNG-601 authored all four of the water crisis's
+ *  aftermaths a day after `summary` became readable, and `aftermath` (the concrete changes: the rationing ended, the guards
+ *  not posted one morning) and `toneForGM` (the register: "relief with an open end… the valley has already half-forgotten
+ *  how close it was") had no reader — the same shape as the 141 place looks CCODE-391 just connected. `changes` is what is
+ *  TRUE now and may be stated as fact; `tone` is how it is said. */
 export function aftermathOf(ev, resolved, { quests = [] } = {}) {
   const o = resolved?.outcome || null;
-  const fromEvent = ev?.resolutions?.[o]?.summary || ev?.resolutions?.default?.summary || null;
-  if (fromEvent) return { text: fromEvent, source: "event" };
+  const res = ev?.resolutions?.[o] || ev?.resolutions?.default || null;
+  const list = (v) => (Array.isArray(v) ? v : v ? [String(v)] : []).map(x => String(x).trim()).filter(Boolean);
+  if (res?.summary) return { text: String(res.summary), source: "event", changes: list(res.aftermath), tone: res.toneForGM ? String(res.toneForGM) : null };
   const def = (Array.isArray(quests) ? quests : []).find(q => q && questKey(q.id) === questKey(resolved?.questId));
   const board = o ? def?.priorOutcomeBoards?.[o] : null;
-  if (board?._theWorldNow) return { text: String(board._theWorldNow), source: "quest", board };
-  return { text: null, source: null };
+  if (board?._theWorldNow) return { text: String(board._theWorldNow), source: "quest", board, changes: [], tone: null };
+  return { text: null, source: null, changes: [], tone: null };
 }
 
 /** ⛔ THE GM'S LINE FOR ONE ANSWERED EVENT.
@@ -163,10 +170,13 @@ export function answeredEventLine(ev, st, { quests = [], selfId = null } = {}) {
   const who = r.by?.name ? `, by ${r.by.name}${r.by.id && r.by.id === selfId ? " — this character" : " — another traveler"}` : "";
   const when = r.worldDay != null ? ` on world-day ${r.worldDay}` : "";
   const reached = (ev?.stages || []).find(s => s.stage === Number(st.stage));
-  const { text } = aftermathOf(ev, r, { quests });
+  const { text, changes, tone } = aftermathOf(ev, r, { quests });
   return `${name} — ANSWERED${when}${who}${r.outcomeName ? ` (${r.outcomeName})` : ""}. It is OVER: never narrate it as active, spreading or waking.`
     + `${reached ? ` Before it was answered it had reached ${reached.name}: ${reached.summary}` : ""}`
-    + `${text ? ` The world now: ${text}` : " What remains is its aftermath — repair, recovery, and the people who lived through it."}`;
+    + `${text ? ` The world now: ${text}` : " What remains is its aftermath — repair, recovery, and the people who lived through it."}`
+    // ⛔ CCODE-392: the authored consequences are FACTS about the valley now — a GM may state them, and should not invent around them
+    + `${(changes || []).length ? ` True here now, and yours to state plainly: ${changes.map(c => `— ${c}`).join(" ")}` : ""}`
+    + `${tone ? ` The register of it: ${tone}` : ""}`;
 }
 
 /** ⛔ THE WORLD MOVED ON WHILE THIS CHARACTER WAS NOT LOOKING.

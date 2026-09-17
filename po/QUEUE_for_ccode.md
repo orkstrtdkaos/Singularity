@@ -7,6 +7,8 @@
 
 ## ⛔ OPEN
 
+> ⛑ **BACKLOG AUDITED AGAINST LIVE CODE, 2026-09-17.** Five items closed by CCode and struck: the skill card now says what a craft rolls (**per verb**, with the table's guess marked *(derived)* — CCODE-379); a location image reads `appearance` first (CCODE-391), so all **141** authored looks are live; a fallback arc is retried as a debt (CCODE-393); the generators author to the standard (CCODE-397); and the aftermath reader prefers the event's `resolutions` (CCODE-392). ⚠️ **Verified by running the code, not by reading the commit titles** — my first check said the skill card was still silent, and the probe was wrong, not the card.
+
 ### 1 · ⛑ THE NEXUS FRAME IS AUTHORED AND TWO SEATS ARE LEFT FOR THE GENERATOR
 `content/packs/core/rules/nexuses.json` — eight sites, named, sourced, organ-mapped, vectored and championed.
 Standing math ruled (+2 on-band · −1 one step · −4 two steps · **+6 at a matching nexus**), and holding one now
@@ -27,80 +29,7 @@ board.
 ⚠️ **This is SNG-582's argument at the top of the game.** The generators are the author now, and a minted nexus
 champion has to meet the standard the authored six set.
 
-### 2 · ⚠️ §246's AFTERMATH CHECK PINS THE FALLBACK — I authored the preferred source and it went red
-`aftermathOf` prefers `ev.resolutions[outcome].summary` and falls back to the quest board's `_theWorldNow`.
-⛑ **You wrote the gate when only the fallback existed. I have now authored `water_crisis.resolutions` — all four
-outcomes — so the event source wins, which is the order your own function declares.**
-
-The line Adelheid's GM now gets:
-> *The Water Crisis — ANSWERED on world-day 26, by Silas Weir — another traveler (The Instruction Rewritten). It
-> is OVER… Before it was answered it had reached First Sickness: upstream fisher families fall ill… **The world
-> now: the facility runs an amended instruction and cleanses what it used to strip. The Echo cleared over about a
-> fortnight — households stopped boiling before anyone announced anything, which is how most of the valley found
-> out. The presence beneath it was never disturbed and sleeps on.***
-
-⬜ **The gate should assert the aftermath is PRESENT and correct for the outcome, not that it came from the
-fallback.** Fourth gate this week to pin the gap rather than the rule.
-
-### 3 · ⛔ A SKILL CARD NEVER SAYS WHAT THE SKILL ROLLS
-**Erik 2026-09-16: 'I want the attribute a skill uses to be obvious in the skill pop-up and description.'**
-
-⛑ **MEASURED: `skillDetail` renders NEITHER the attribute NOR the sub-attribute.** Drawn Bow rolls
-`physical/agility` and its card says nothing about it — a player cannot tell which of their eight numbers a
-craft leans on without opening the data.
-
-⛔ **THIS IS RENDERING, NOT CONTENT, AND DELIBERATELY SO.** Writing *"rolls Agility"* into 440 `plainly`
-strings is a stored copy of a derived value — the same defect as the hand-typed size table, the doc line
-counts, and `tierRank`. **The card should read the record.**
-
-⚠️ **AND ONE CAVEAT THAT DECIDES THE SHAPE: only 26 of 440 crafts carry an AUTHORED `subAttribute`.** The
-other 414 would be showing the DERIVATION — the same one that had a bow rolling `strength` until it was
-authored. ⛔ **A GUESS SHOWN AS A FACT IS WORSE THAN NOTHING.** Mark it the way `sheetFor` already marks a
-rung: `tierNow` versus `tierDerived`. *"Rolls Agility"* when authored; *"rolls Agility (derived)"*, or a
-quieter treatment, when not.
-
-⛑ Suggested: attribute and sub-attribute on the card head beside the energy cost, where a player looks before
-committing — **and it makes the §166 pass visible, which is the fastest way the remaining derivations get
-caught by someone playing.**
-
-### 4 · ⛔ THE PLAYERS WHO WROTE THE MOST GOT THE LEAST ARC — `po/SPEC_SNG-588_the_players_who_wrote_the_most_got_the_least.md`
-**Found by opening Brook's character. No test caught it.**
-
-⛑ **I HAVE FIXED THE CONTENT HALF AND SHIPPED IT** — `personalArc.js`'s template no longer puts a paragraph
-in a `name`, no longer inlines a motivation into stage 1, and no longer double-punctuates the premise.
-`titleize` is kept and is safe now that it only ever sees a place. **Both live saves repaired.**
-
-⛔ **THE REST IS YOURS, AND IT IS NOT THE TYPOGRAPHY.** Measured across every save: **Chernak 2,567 chars of
-bio → fallback. Loki 1,607 → fallback. Rhinofire 294 → a real authored arc. Silas 495 → a real one.**
-⚠️ `enrichPersonalArc` fires ONCE at creation and returns on `!getApiKey()`; if it does not fire then, it
-never fires again. **A fallback arc is a debt, not a resting state.** Retry it, and prioritise by what the
-player actually wrote.
-
-⬜ Also: does `contentGenerator: false` gate this? **If it does, it is the wrong gate** — a player who has
-not opted into generated content has still written a backstory.
-
-### 5 · ⛔ THE GENERATORS ARE THE AUTHOR NOW — `po/SPEC_SNG-582_the_generators_are_the_author_now.md`
-**Erik, and it is the item that makes the rest of today last:** *"All of this authoring will fall to the
-generators, so they need to be able to faithfully continue what you are doing."*
-
-⛔ **Today I closed A1 (1,144 lines), location `appearance` (138 of 138), the sub-attribute pass and the
-world-fact `kind` pass BY HAND. Every one is now a standard the mint has to meet**, and the game is
-primarily generative. **I am not going to hand-author the next 138.**
-
-**Four measured gaps, full detail in the spec:**
-- ⛔ `generate.js:119` mints `descriptionSeed: name` — **a place is handed its own name as its description**,
-  and `art.js:684` draws the picture from it.
-- ⚠️ 13 minted places share one boilerplate seed. I authored looks for all 13; **the next one gets the
-  boilerplate again.**
-- ⛑ **No generator emits `appearance` for a location at all**, so 138 authored is a one-time fix on a
-  growing set.
-- ⛔ **`playerText` strips the glyphs and LEAVES THE CAPITALS** — and the capitals are the whole of what I
-  rewrote today. `gm.js` carries 94 glyph markers. **A1 re-accumulates from the first generated craft.**
-
-⬜ **And the A1 pin only counts authored packs, not what a live save holds** — so it can read zero while
-every minted craft arrives shouting.
-
-### 6 · ⚠️ §236's two specimen lines, and a third placeholder-as-content
+### 2 · ⚠️ §236's two specimen lines, and a third placeholder-as-content
 `tests/how_it_works.mjs` · from SNG-586
 
 ⛑ **I authored the threat ladder you asked for and §236 went red** — it asserts the authored ladder IS the
@@ -114,7 +43,7 @@ the world was armed identically, and *"a weapon of their trade"* is a placeholde
 ⛑ Authoring real kit now (76 of 146). **Same shape as the mint boilerplate and SNG-216's repair marker —
 three instances in one day, which is why SNG-582 is item 1.**
 
-### 7 · ⚠️ `gearWords` is singular-only, and a `purse` has no reader
+### 3 · ⚠️ `gearWords` is singular-only, and a `purse` has no reader
 `npcStanding.gearWords` · measured while authoring gear
 
 ⛔ **THE MATCHER TOKENISES AND THE WORD LIST IS SINGULAR, SO A PLURAL SILENTLY CARRIES NOTHING.** `a glaive`
@@ -128,29 +57,7 @@ silent: the line renders as prose and arms nobody.
 ⛑ **AND I HAVE AUTHORED `purse` ON 69 NPCs** — `{"crystal": n}`, scaled to standing — **on Erik's ask for
 money amounts. Nothing reads it.** It sits beside `gear` and wants the same treatment.
 
-### 8 · A location image is drawn from philosophy, and `appearance` has no reader
-`engine/art.js:684` · measured 2026-09-14
-
-```js
-if (kind === "location") return `${subject.name}: ${(subject.descriptionSeed || subject.encounterFlavor || "").slice(0,300)}`;
-```
-
-⛔ **MEASURED ACROSS ALL 138 LOCATIONS: 25% of `descriptionSeed` mixes look with CHARACTER in the 300 chars
-the generator receives, and 59% have NO CONCRETE VISUAL NOUN IN THEIR FIRST SENTENCE AT ALL.**
-
-⚠️ Bedrock is handed *"a deep suspicion of anything that cannot be weighed"*; Cloudform gets *"buildings that
-are arguments… the Figurists find your attachment to matter…"* — **and a generator spends prompt on the
-invisible half in proportion.** This is SNG-402's NPC finding (22% mixed) reproduced exactly on places.
-
-⛑ **`appearance` on locations is DONE — 138 of 138** — look only, split from manner, starved ones first.
-
-⚠️ **AND A SECOND FINDING WHILE AUTHORING: 13 player-minted `gen-` locations carried an IDENTICAL BOILERPLATE
-SEED** — *"A place the road led to — X. The fiction brought you here before the map knew its name."* ⛔ **That
-sentence is what the image generator received for every one of them**, so thirteen different places were
-drawn from one string. All 13 now carry a real look. ⬜ Worth a mint-time check on your side: a place minted
-with no seed should probably not get a seed that describes nothing. ⛔ **THE ASK IS ONE LINE AND IT IS NOW THE ONLY THING BETWEEN THIS AND WORKING: prefer `appearance` over `descriptionSeed` in that branch**, the way the NPC path already does. ⚠️ **All 138 are authored and every one of them is dead until that line lands.**
-
-### 9 · A state can only ever be a place
+### 4 · A state can only ever be a place
 `engine/quests.js` · SNG-577 · `po/HANDOFF_aevi_SNG-577_all_deeds_and_twelve_want_a_state.md`
 
 `kind: "state"` routes everything through `recordPlaceChange` whatever the subject is, so a state about a
@@ -161,7 +68,7 @@ whether the first waygate since the Transition EXISTS, whether Silas's made thin
 ⬜ **And two of those twelve need a record for a MADE THING**, which is neither place nor person. `world/canon/`
 already holds `gen-stillwater-s-trouble` beside the people, so the store can carry it; nothing mints one.
 
-### 10 · The Fellowship matrix reads the one field nobody fills in
+### 5 · The Fellowship matrix reads the one field nobody fills in
 `engine/combatants.js` · from Erik's Mara Wells question
 
 `contributionsOf` reads `record.assistTags`. ⛔ **Across every save: 128 registry people, ZERO have
@@ -177,7 +84,7 @@ says she has none.**
 under-reachable even when tags exist. ⬜ And 141 of 368 `skillsObserved` entries are still truncated mid-word
 from the pre-SNG-575 60-char cut.
 
-### 11 · `certify_counts` and private keys — **your call stands, I withdrew the sweep**
+### 6 · `certify_counts` and private keys — **your call stands, I withdrew the sweep**
 ⛑ You were right that a pattern sweep would fire 967 times. **`CLAIMS` by name is the correct shape.** ⬜ I
 owe you a list of which private keys carry claims worth certifying; it is on my queue, not yours.
 
@@ -205,4 +112,3 @@ owe you a list of which private keys carry claims worth certifying; it is on my 
 `appearance` on 119 of 128 registry people · roster `gear` on 139 of 146 · the private-key CLAIMS list.
 
 — Aevi, PO
-

@@ -88,9 +88,10 @@ import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent
 import { activeArcEffects, craftCostNote, encounterBias, effectsInPlainWords, npcMoodLines, travelCostFactor } from "./engine/arceffects.js";   // SNG-273: an advanced arc is something you FEEL
 import { knownIndex, whoIs, figureArtRecord } from "./engine/whois.js";   // SNG-299: who is that, and where do I read more
 import { worldTabHtml } from "./engine/worldtab.js";   // SNG-276: the tab's markup, testable
-import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, syncSharedFates, syncHolds, syncTravelers, syncInvitations, sendInvitation, answerInvitation, resolvePlayerStrike, strikeSceneSetup, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter, arcStageNow, worldRoster, NEWS_SECTIONS, pushCanonLook} from "./engine/worldtick.js";
+import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, syncSharedFates, syncHolds, syncTrades, syncTravelers, syncInvitations, sendInvitation, answerInvitation, resolvePlayerStrike, strikeSceneSetup, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter, arcStageNow, worldRoster, NEWS_SECTIONS, pushCanonLook} from "./engine/worldtick.js";
 import { noteWorldMovedOnShown } from "./engine/worldevents.js";
 import { holdsNear, holdNearLine } from "./engine/sharedholds.js";   // CCODE-383: a hold nearby is known
+import { buyFromHold } from "./engine/holdtrade.js";   // CCODE-388: trading with another player's hold
 import { scopeLegacyMintedIds } from "./engine/fates.js";   // CCODE-384: the people the world makes are shared
 import { planJourney, journeyOutcome, journeyLine, chosenWay, chooseWay, journeyArrivalPrompt, isProvision, provisionsCarried, logJourneyOn, refreshJourneyOn, dropJourneyOn, completeJourneyOn } from "./engine/journeyplan.js";   // CCODE-387: a journey is agreed, readied, then walked
 import { travelersHere, travelerHereLine, whereOf } from "./engine/travelers.js";   // CCODE-359: another traveler is here   // CCODE-354: the world moved on, counted by beats
@@ -153,7 +154,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.49";
+const APP_VERSION = "2.0.50";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -757,6 +758,7 @@ let sceneGenCount = 0;   // SNG-BATCH-9: generative-mint counter for this scene 
 // ⛔ SNG-595: the travelers index and the WHOLE ledger, refreshed on the tick — the reader keyed by PERSON reads these.
 let sharedTravelers = { index: null, ledger: [] };
 let sharedHolds = null;   // CCODE-383: every traveler's holdings, as the road knows them (world/holds)
+let sharedTrades = null;  // CCODE-388: the orders on every hold (world/trades)
 let sharedInvites = null;   // ⛔ CCODE-360: world/invitations.json as of the last tick
 let sharedCanonView = []; // SNG-BATCH-9 Phase 3: this viewer's rating-lensed slice of shared canon
 // SNG-250 §7b: creatures OTHER players have grown, snapshotted from shared canon at a safe seam (never
@@ -5583,6 +5585,8 @@ async function maybeTick() {
   try {
     // ⛔ CCODE-383: this character's holdings go up as the road knows them, and everyone's come back
     try { const hs = await syncHolds({ character, content: CONTENT }); if (hs.synced && hs.store) sharedHolds = hs.store; } catch (err) { console.warn("[holds] tick skipped:", err?.message); }
+    // ⛔ CCODE-388: the trades — what was bought from this character's holds is filled; what a store could not fill comes back
+    try { const tr = await syncTrades({ character }); if (tr.synced && tr.store) sharedTrades = tr.store; } catch (err) { console.warn("[trades] tick skipped:", err?.message); }
     const tv = await syncTravelers({ character, profile, locations: CONTENT.locations });   // CCODE-359: and where they are
     // ⛔ CCODE-360: invitations — what has arrived for this character, and any answer come back to one they sent.
     try { const iv = await syncInvitations({ character }); if (iv.synced) sharedInvites = iv.store; } catch (err) { console.warn("[invitations] tick skipped:", err?.message); }
@@ -6685,7 +6689,7 @@ function gmEnv(extra = {}) {
     app: {
       fullCatalog, FN_INDEX: () => FN_INDEX, activeEnc, listAvailableEncounters,
       masteryReadyForGM, ratingLineForGM, maybeLegendDetail, sharedCanonForGM,
-      travelersIndex: () => sharedTravelers.index, sharedLedger: () => sharedTravelers.ledger, sharedCanonView: () => sharedCanonView, holdsStore: () => sharedHolds,   // SNG-595
+      travelersIndex: () => sharedTravelers.index, sharedLedger: () => sharedTravelers.ledger, sharedCanonView: () => sharedCanonView, holdsStore: () => sharedHolds, tradesPending: () => [...Object.values(sharedTrades?.orders || {}), ...(character?.tradeOutbox || [])],   // SNG-595
       invitationsStore: () => sharedInvites,   // CCODE-360
       isPlaceKnown: (id) => isPlaceKnown(character, id, CONTENT.locations)   // SNG-176: recall only what the character KNOWS
     },
@@ -7921,6 +7925,26 @@ function applyTurn(turn, resolution, playerWords = null) {
     }
   });
   // ✅ Q5-B: a debt the fiction leaves — recorded to a HOLDER, settled by the purse, forgiven by a deed.
+  // ⛔ CCODE-388 — THE KEEPER SOLD SOMETHING. Only a hold standing here, only what its card lists, only what is left once what is
+  // already bought is counted, and only what the purse can pay — checked by `buyFromHold` before a crystal moves.
+  applyStep("holdTrades", () => {
+    const ops = (Array.isArray(turn.holdTrades) ? turn.holdTrades : []).slice(0, 3);
+    if (!ops.length) return;
+    const here = positionedPlace(CONTENT.locations || {}, character.currentLocationId);
+    const near = holdsNear(sharedHolds, { selfId: character.id, here, maxDays: 0.5, max: 8 });
+    const said = [];
+    for (const op of ops) {
+      const n = near.find(x => normName(x.card.name) === normName(String(op?.hold || "")) || x.card.key === op?.hold || x.card.id === op?.hold);
+      if (!n) { said.push(`No hold called ${op?.hold || "that"} stands here to buy from.`); continue; }
+      const pending = [...Object.values(sharedTrades?.orders || {}), ...(character.tradeOutbox || [])];
+      const r = buyFromHold(character, n.card, { goods: op?.goods, units: op?.units, pending, worldDay: absoluteWorldDay(), nowISO: new Date().toISOString(),
+        worthBand: CONTENT.rules?.economy?.holdStore?.unitWorthBand || "useful" });
+      if (!r.ok) { said.push(`No sale at ${n.card.name}: ${r.why}.`); continue; }
+      character.tradeOutbox = [...(character.tradeOutbox || []), r.order];
+      said.push(`Bought ${r.order.units} ${r.order.goodsName} at ${n.card.name} for ${r.order.total} crystal.`);
+    }
+    if (said.length) character._correctionAside = [character._correctionAside, said.join(" ")].filter(Boolean).join(" ");
+  });
   applyStep("debtOps", () => {
     const rec = applyDebtOps(character, turn.debtOps || [], { day: absoluteWorldDay(), regionId: location?.regionId || null });
     character._debtReceipts = rec.filter(r => r && r.ok === false);
@@ -12684,6 +12708,13 @@ function wireHoldingOffers() {
     h.history = [...(h.history || []), { at: worldCount(), from: h.condition, to: h.condition, note: `placed at ${here.name || here.id}` }].slice(-12);
     saveCharacter(character); again();
   };
+  // ⛔ CCODE-388: the owner opens (or closes) a hold to other travelers' trade — the card says so on the next tick
+  for (const cb of app.querySelectorAll("[data-hold-trade]")) cb.onchange = () => {
+    const h = (character.holdings || []).find(x => x && x.id === cb.dataset.holdTrade);
+    if (!h) return;
+    h.trade = !!cb.checked;
+    saveCharacter(character); again();
+  };
   for (const btn of app.querySelectorAll("[data-hold-sell]")) btn.onclick = () => {
     const id = btn.dataset.holdSell;
     const here = hereNow();
@@ -12866,6 +12897,7 @@ function renderHoldingsTab(manageId = null) {
         ${h.fromAssignment ? `<div class="hint">from work you delegated</div>` : ""}
         <div class="opt-row" style="margin-top:6px">
           <button class="opt" data-hold-manage="${esc(h.id)}" title="Add what was built, change who keeps it, sell the store, give it up">⚙ Manage this place</button>
+          <label class="opt hold-trade-toggle" title="Other travelers who come here can buy from the store, through its keeper, at this Reach's prices. The goods leave the store and the crystal comes to you on your next turn in the world."><input type="checkbox" data-hold-trade="${esc(h.id)}" ${h.trade === true ? "checked" : ""}> Open to other travelers' trade</label>
           ${storeTotal(h) > 0 && hereNow()?.id === h.locationId ? `<button class="opt" data-hold-sell="${esc(h.id)}" title="Sell what is stored, at this Reach's prices — you sell where it stands">Sell the store</button>` : ""}
         </div>
       </div></div>`;

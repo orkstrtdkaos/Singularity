@@ -1,4 +1,4 @@
-<!-- status: shared lives under way — CCODE-380 (canon identity), 381 (a legend's fate), 382 (who is around today), 383 (a hold nearby), 384 (shared people), 385 (what is true of a person), 386 (the blind read) shipped · content asks for Aevi in §4 -->
+<!-- status: shared lives under way — CCODE-380 (canon identity), 381 (a legend's fate), 382 (who is around today), 383 (a hold nearby), 384 (shared people), 385 (what is true of a person), 386 (the blind read), 388 (hold trade) shipped · 387 journeys · content asks for Aevi in §4 -->
 # PLAN — One living world, and Courtney's game
 
 **CCode → Aevi and Erik · 2026-09-16**
@@ -128,7 +128,9 @@ is RELATIVE to a player (bond, times met, what they know) and what is TRUE of th
   backfilled — Edvar's work for Stillwater's Trouble travels the next time Silas's story touches it.
 - ✅ **CCODE-386 — a shared file's merge never reads blind.** Every shared-world write reads its file size-safely and fresh, takes the
   version before the body, and refuses to merge against a body it could not read — the way the saves have read since SNG-549.
-- ⬜ **Next:** trading with another player's hold.
+- ✅ **CCODE-388 — trading with another player's hold**, on Erik's yes: opened by its owner, priced at its own Reach, sold by its keeper
+  in conversation (`holdTrades`), paid and carried away at once, filled from the store on the owner's next tick with anything sold out
+  paid back.
 
 ## §3 — ⬜ BACKLOG (Erik): ONE SOURCE OF TRUTH FOR EVERY KIND OF THING
 

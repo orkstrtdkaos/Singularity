@@ -47,6 +47,7 @@ import { FATES_PATH, WOUND_DAYS, STOP_DAYS, fatesOfWorld, foldFates, adoptFates,
   personIdFor, mintKey, sharedPeopleOf, foldPeople, adoptPeople, birthNews,   // CCODE-384: and the people it makes
   sharedPersonIds, livesOfWorld, foldLives, adoptLives, lifeNews } from "./fates.js";   // CCODE-385: and what is true of the people it holds
 import { HOLDS_PATH, holdCardsOf, holdCardsChanged, mergeHoldCards } from "./sharedholds.js";   // CCODE-383: a hold nearby is known
+import { TRADES_PATH, settleOrders, refundOrders, mergeOrders } from "./holdtrade.js";   // CCODE-388: trading with another player's hold
 import { enterDeathState, deepenDeaths, deathDepth, isRetrievable, resolveRetrieval } from "./death.js"; // SNG-209: a killed figure ENTERS the death state; the clock sinks untended deaths toward sealed
 import { absoluteWorldDay, worldDayAt, worldCount, readClock, positionedPlace } from "./worldtime.js";
 import { voyageTick, whereaboutsOf } from "./carriage.js";   // ⛔ B6b: a voyage arrives on world time, and where she is now is where she can be raided
@@ -1111,7 +1112,7 @@ export async function syncHolds({ character, content } = {}) {
     store = remote;
     const reg = character.npcRegistry || {};
     const nameOf = (id) => reg[id]?.name || content?.npcs?.[id]?.name || null;
-    const cards = holdCardsOf(character, { locations: content?.locations || {}, nameOf });
+    const cards = holdCardsOf(character, { locations: content?.locations || {}, nameOf, economy: content?.rules?.economy || null, cfg: content?.rules?.economy?.holdStore || null });
     const hadAny = Object.values(remote?.holds || {}).some(c => c?.ownerId === character.id);
     if ((cards.length || hadAny) && holdCardsChanged(remote, character.id, cards)) {
       let merged = null;
@@ -1122,6 +1123,45 @@ export async function syncHolds({ character, content } = {}) {
     console.warn("[holds] sync skipped:", err?.message);
   }
   return { synced: true, store };
+}
+
+/** ⛔ CCODE-388 — THE TRADES, SETTLED WHERE THEY BELONG. Read the world's orders; as an OWNER, fill what was bought from your holds out of
+ *  their stores and take the crystal; as a BUYER, take back what a store could not fill. Each is written on the character first
+ *  (`settleOrders`/`refundOrders`), then this character's new purchases and every status it moved go up through one merge whose
+ *  statuses only move forward. Best-effort, never throws. */
+export async function syncTrades({ character, now = Date.now() } = {}) {
+  let shared = false;
+  try { shared = syncEnabled(); } catch { shared = false; }
+  if (!shared || !character?.id) return { synced: false, store: null, news: [] };
+  const worldDay = absoluteWorldDay(now);
+  let store = null;
+  const news = [];
+  try {
+    const remote = await fetchRepoJSON(TRADES_PATH);
+    store = remote;
+    const all = Object.values(remote?.orders || {});
+    const settled = settleOrders(character, all, { worldDay });
+    const refunded = refundOrders(character, all, { worldDay });
+    news.push(...settled.news, ...refunded.news);
+    const outbox = Array.isArray(character.tradeOutbox) ? character.tradeOutbox : [];
+    const toPublish = [...outbox, ...settled.moved, ...refunded.moved];
+    if (toPublish.length) {
+      let merged = null;
+      await pushMergedFile(TRADES_PATH, (r) => (merged = mergeOrders(r, toPublish)), `trades: ${character.name || character.id}`);
+      store = merged || mergeOrders(remote, toPublish);
+      character.tradeOutbox = outbox.filter(o => !store?.orders?.[o.id]);
+    }
+  } catch (err) {
+    console.warn("[trades] sync skipped:", err?.message);
+  }
+  const ws = character.worldState;
+  if (ws && news.length) {
+    ws.news = ws.news || []; ws.unseenNews = ws.unseenNews || [];
+    const stamped = news.map(n => stampNews(n, { day: ws.lastTickDay, worldDay, section: "yours" }));
+    ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);
+    ws.unseenNews = [...ws.unseenNews, ...stamped].slice(-NEWS_CAP);
+  }
+  return { synced: true, store, news };
 }
 
 // ---------- CCODE-360: invitations between travelers ----------

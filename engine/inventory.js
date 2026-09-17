@@ -215,6 +215,10 @@ export function addItem(character, incoming, catalog = {}, opts = {}) {
       // an ungated field would be silently dropped — which is how a grant becomes an item that promises
       // a craft and confers nothing.
       grants: normalizeGrants(incoming.grants),
+      // ⛔ CCODE-388: GOODS KEEP WHAT KIND OF GOODS THEY ARE, and a worth band — `priceOf` reads both, so a load bought at one Reach can be
+      // sold at another's price. Validated: an id-shaped goods kind, and only a band a trader can price.
+      goods: /^[a-z][a-z0-9_]{1,39}$/.test(String(incoming.goods || "")) ? String(incoming.goods) : undefined,
+      worth: ["trivial", "useful", "valuable", "precious"].includes(incoming.worth) ? incoming.worth : undefined,
       image: incoming.image
     };
   }

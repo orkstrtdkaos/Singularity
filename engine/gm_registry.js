@@ -624,7 +624,8 @@ export const GM_CONTEXT = [
   { key: "holdsNearDetail", builder: "sharedholds.holdsNearForGM (CCODE-383)", carries: ["another traveler's holding within two walking days", "what it is and who runs it", "its condition, what it has and who guards it"],
     reachedBy: "always (empty unless another traveler's hold stands within two walking days)", spec: "CCODE-383", views: ["turn", "ask"],
     build: (env) => holdsNearForGM(env.app?.holdsStore?.() || null, { selfId: env.character?.id || null,
-      here: positionedPlace(env.CONTENT?.locations || {}, env.location?.id || env.character?.currentLocationId) }) },
+      here: positionedPlace(env.CONTENT?.locations || {}, env.location?.id || env.character?.currentLocationId),
+      pending: env.app?.tradesPending?.() || [] }) },   // CCODE-388: what is already bought and not yet filled
   { key: "travelersDetail", builder: "travelers.travelersForGM (SNG-595)", carries: ["another player's character the words named", "their public deeds, every ledger month", "who in this story was part of theirs"],
     reachedBy: "always (empty unless the words, or the last two beats, name another traveler)", spec: "SNG-595", views: ["turn", "ask"],
     build: (env) => travelersForGM(

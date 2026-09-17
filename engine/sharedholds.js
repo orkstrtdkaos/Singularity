@@ -16,6 +16,7 @@ import { positionedPlace } from "./worldtime.js";
 import { walkingDays } from "./worldmap.js";
 import { whereOf } from "./travelers.js";
 import { smartClamp } from "./namematch.js";
+import { tradeOffer, goodsNamesOf, tradeLine } from "./holdtrade.js";   // CCODE-388: what an opened hold trades
 
 export const HOLDS_PATH = "world/holds/valley.json";
 /** How near a hold must be to be known from where a character stands, in walking days. */
@@ -23,7 +24,7 @@ export const HOLD_NEAR_DAYS = 2;
 
 /** One holding as the road knows it. Null for nothing to publish. `nameOf` resolves a person's id to their name (the owner's world
  *  knows its own people). Pure. */
-export function holdCard(character, h, { locations = {}, nameOf = null } = {}) {
+export function holdCard(character, h, { locations = {}, nameOf = null, economy = null, cfg = null } = {}) {
   if (!character?.id || !h?.id) return null;
   const loc = h.locationId ? (locations?.[h.locationId] || null) : null;
   const pos = h.locationId ? positionedPlace(locations || {}, h.locationId)?.worldPos : null;
@@ -40,6 +41,8 @@ export function holdCard(character, h, { locations = {}, nameOf = null } = {}) {
     condition: h.condition || null,
     has: (h.features || []).map(f => f?.name || f?.kind).filter(Boolean).slice(0, 5),
     guardedBy: (h.garrison || []).map(nm).filter(Boolean).slice(0, 3),
+    // ⛔ CCODE-388: only a hold its owner OPENED to trade says what it sells — its goods, how many, and the price at its own Reach
+    ...(() => { const t = tradeOffer(h, { economy, cfg, regionId: loc?.regionId || loc?.region || null, goodsNames: goodsNamesOf(economy) }); return t ? { trades: t } : {}; })(),
   };
 }
 
@@ -85,7 +88,7 @@ export function holdNearLine(n) {
   if (!c) return "";
   const what = c.describedAs || c.kind || "hold";
   const where = c.settlementName ? ` in ${c.settlementName}` : c.placeName ? ` at ${c.placeName}` : "";
-  return `${c.name} — ${c.ownerName ? `${c.ownerName}'s ${what}` : `a ${what}`}${where} (${distanceWords(n.days)})${c.keeperName ? `, run by ${c.keeperName}` : ""}`;
+  return `${c.name} — ${c.ownerName ? `${c.ownerName}'s ${what}` : `a ${what}`}${where} (${distanceWords(n.days)})${c.keeperName ? `, run by ${c.keeperName}` : ""}${c.trades ? " · open to trade" : ""}`;
 }
 
 /** ⛔ WHAT THE GM IS TOLD: each near hold, what it is, who runs it, whether it thrives, what it has. Null when none is near. Pure. */
@@ -95,7 +98,8 @@ export function holdsNearForGM(store, opts = {}) {
   return near.map(n => {
     const c = n.card;
     const bits = [c.condition || null, (c.has || []).length ? `has ${c.has.join(", ")}` : null,
-      (c.guardedBy || []).length ? `guarded by ${c.guardedBy.join(", ")}` : null].filter(Boolean).join("; ");
+      (c.guardedBy || []).length ? `guarded by ${c.guardedBy.join(", ")}` : null,
+      c.trades ? tradeLine(c, opts.pending || []) : null].filter(Boolean).join("; ");
     return `- ${holdNearLine(n)}${bits ? `; ${bits}` : ""}.`;
   }).join("\n");
 }

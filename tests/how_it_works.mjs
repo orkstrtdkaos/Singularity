@@ -2018,8 +2018,9 @@ console.log("\n── §171 · the repair note measures the state ──");
   const fams171 = [...rd("app.js").matchAll(/applyStep\("([a-zA-Z_]+)"/g)].map(m => m[1]);
   // ⚠️ SNG-598 adds `strikeOps` — forbidden to a question (`ASK_FORBIDDEN`), so the ask channel's repair note never has to measure it;
   // it is on the list because the list is every family app.js applies, and a family nobody listed is the thing this catches.
+  // ⚠️ CCODE-388 adds `holdTrades` on the same terms: a sale is made in a turn, never from a question (`ASK_FORBIDDEN`).
   check("§171: …and the fingerprint covers what the op families write — every family app.js applies is one this gate knows",
-    fams171.length >= 16 && fams171.every(f => ["bandOps", "codexUpdates", "deathOps", "debtOps", "encounterOps", "exchangeOps", "factUpdates", "holdingOps", "newEncounter", "npcUpdates", "partyOps", "placeUpdates", "projectOps", "questUpdates", "refusalSignal", "relationshipDeltas", "strikeOps"].includes(f)), fams171.join(","));
+    fams171.length >= 16 && fams171.every(f => ["bandOps", "codexUpdates", "deathOps", "debtOps", "encounterOps", "exchangeOps", "factUpdates", "holdingOps", "newEncounter", "npcUpdates", "partyOps", "placeUpdates", "projectOps", "questUpdates", "refusalSignal", "relationshipDeltas", "strikeOps", "holdTrades"].includes(f)), fams171.join(","));
 }
 
 /* ══════════ §172 — A BEAT'S BOOKKEEPING THAT DID NOT LAND IS RESTATED, NOT LOST (Erik 2026-09-12: "make sure I don't lose anything") ══════════ */
@@ -19475,6 +19476,101 @@ console.log("\n── §272 · a journey is agreed, then readied, then walked �
     /<button class="btn" id="journey-go">Set out for \$\{esc\(j\.destName\)\}<\/button>/.test(A272)
     && /if \(journeyDetail\) world\.push\(`## A JOURNEY IS PLANNED/.test(GM272) && /Never move them and never narrate the departure or the road/.test(GM272)
     && /do NOT narrate the departure, the road or the arrival, and do NOT emit moveTo/.test(A272));
+}
+
+// ⛔ CCODE-388 — shared lives: TRADING WITH ANOTHER PLAYER'S HOLD, on the rules Erik said yes to — the owner opens a hold; goods sell at its own
+// Reach's price; the visitor pays and carries them away; the owner's next tick fills the order from the store, and anything the store had
+// sold out of is paid back. ⛔ Not a shop (economy.json, tradersNotShops): the keeper sells in conversation and a `holdTrades` op records it.
+console.log("\n── §273 · trading with another player's hold ──");
+{
+  const HT = await import("../engine/holdtrade.js");
+  const SH273 = await import("../engine/sharedholds.js");
+  const PU = await import("../engine/purse.js");
+  const EC = await import("../engine/economy.js");
+  const W273 = await import("../engine/worldtick.js");
+  const { fakeRemote: fr273 } = await import("./lib/fake_remote.mjs");
+  const { loadContentHeadless: lch273 } = await import("./headless_content.mjs");
+  const C = await lch273();
+  const econ = C.rules.economy, cfg = C.rules.economy.holdStore;
+  const pell = { id: "h-pell", kind: "enterprise", name: "The Fell Pell", describedAs: "forge", locationId: "millbrook", steward: "pell", condition: "thriving",
+    store: { raw_material: 7, mech_parts: 7 } };
+  const owner = { id: "char-s273", name: "Silas Weir", npcRegistry: { pell: { name: "Pell Ran Marsh" } }, holdings: [pell], purse: { crystal: 5 }, worldState: { news: [], unseenNews: [], lastTickDay: 1 } };
+  const opts = { locations: C.locations, nameOf: (id) => owner.npcRegistry[id]?.name || null, economy: econ, cfg };
+  check("§273: ⛔ NOTHING IS FOR SALE BY DEFAULT — a hold its owner has not opened carries no trades on its card",
+    !("trades" in SH273.holdCard(owner, pell, opts)) && HT.tradeOffer(pell, { economy: econ, cfg }) === null);
+  pell.trade = true;
+  const card = SH273.holdCard(owner, pell, opts);
+  const atMillbrook = HT.tradeOffer(pell, { economy: econ, cfg, regionId: C.locations.millbrook.regionId || C.locations.millbrook.region || null, goodsNames: HT.goodsNamesOf(econ) });
+  check("§273: ⛔ OPENED, the card says what the keeper sells — each good, how many, and the price at the hold's own Reach",
+    card.trades?.goods?.length === 2 && card.trades.goods.every(g => g.units === 7 && g.each >= 1)
+    && JSON.stringify(card.trades) === JSON.stringify(atMillbrook), JSON.stringify(card.trades));
+  const gm = SH273.holdsNearForGM({ holds: { [card.key]: card } }, { selfId: "char-a273", here: C.locations.millbrook }) || "";
+  check("§273: …and the GM reads it with the ids a sale is recorded by — and is told how a sale is spoken, not read out",
+    /open to trade/.test(gm) && /trades — 7 hide, sinew, timber, ore \(raw_material\) at \d+ crystal each; 7 working parts \(mech_parts\) at \d+ crystal each/.test(gm)
+    && /A hold that TRADES sells through its keeper, in conversation — never a list read aloud/.test(rd("engine/gm.js")), gm);
+
+  const buyer = () => ({ id: "char-a273", name: "Adelheid", inventory: [], purse: { crystal: 60 } });
+  const b = buyer();
+  const price = card.trades.goods.find(g => g.goods === "mech_parts").each;
+  const refusals = [
+    HT.buyFromHold(b, { ...card, trades: null }, { goods: "mech_parts", units: 1 }).ok === false,
+    HT.buyFromHold({ ...b, id: owner.id }, card, { goods: "mech_parts", units: 1 }).ok === false,
+    HT.buyFromHold(b, card, { goods: "medicines", units: 1 }).ok === false,
+    HT.buyFromHold(b, card, { goods: "mech_parts", units: 11 }).ok === false,
+    HT.buyFromHold(b, card, { goods: "mech_parts", units: 3, pending: [{ holdKey: card.key, goods: "mech_parts", units: 5, status: "paid" }] }).ok === false,
+    HT.buyFromHold({ ...buyer(), purse: { crystal: 1 } }, card, { goods: "mech_parts", units: 3 }).ok === false,
+  ];
+  check("§273: ⛔ a sale is refused for a closed hold, your own hold, a good it does not stock, more than a keeper sells at once, more than is left once what is already bought is counted, and a purse that cannot pay",
+    refusals.every(Boolean) && b.purse.crystal === 60 && b.inventory.length === 0, JSON.stringify(refusals));
+  const sale = HT.buyFromHold(b, card, { goods: "mech_parts", units: 3, worldDay: 80, nowISO: "2026-09-16T12:00:00Z" });
+  const carried = b.inventory.find(it => it.goods === "mech_parts");
+  check("§273: ⛔ THE VISITOR PAYS AND CARRIES THEM AWAY — the crystal leaves the purse, the goods arrive as goods a trader elsewhere can price, and a paid order is written",
+    sale.ok && b.purse.crystal === 60 - 3 * price && carried?.qty === 3 && carried.worth === (cfg.unitWorthBand || "useful")
+    && EC.priceOf(carried, "valley", { economy: econ })?.price >= 0 && sale.order.status === "paid" && sale.order.total === 3 * price, JSON.stringify(sale.order));
+
+  // the owner's store shrinks to 2 of the 3 by another sale landing first
+  pell.store.mech_parts = 2;
+  const first = HT.settleOrders(owner, [sale.order], { worldDay: 81 });
+  const again = HT.settleOrders(owner, [sale.order], { worldDay: 82 });
+  check("§273: ⛔ THE OWNER'S NEXT TICK FILLS IT FROM THE STORE — two of three there, two taken out, their price paid in; the third goes back; and a second pass pays nothing twice",
+    pell.store.mech_parts === 0 && owner.purse.crystal === 5 + 2 * price && first.moved[0]?.status === "short" && first.moved[0].filled === 2 && first.moved[0].refund === price
+    && again.moved[0]?.status === "short" && owner.purse.crystal === 5 + 2 * price && first.news.length === 2, JSON.stringify(first.moved[0]));
+  const shortOrder = first.moved[0];
+  const r1 = HT.refundOrders(b, [shortOrder], { worldDay: 83 });
+  const r2 = HT.refundOrders(b, [shortOrder], { worldDay: 84 });
+  check("§273: ⛔ …AND THE BUYER IS PAID BACK for what the store could not fill, and the good that was never there is taken back — once",
+    b.purse.crystal === 60 - 3 * price + price && b.inventory.find(it => it.goods === "mech_parts")?.qty === 2 && r1.moved[0]?.status === "refunded"
+    && r2.news.length === 0 && b.purse.crystal === 60 - 3 * price + price);
+  check("§273: ⛔ THE MONEY IS MOVED, NEVER MADE — what the buyer paid is exactly what the owner took plus what came back",
+    3 * price === (owner.purse.crystal - 5) + (b.purse.crystal - (60 - 3 * price)));
+  const merged = HT.mergeOrders({ orders: { [sale.order.id]: { ...sale.order, status: "refunded" } } }, [sale.order, shortOrder]);
+  check("§273: …and an order's status only moves forward, whichever world writes last", merged.orders[sale.order.id].status === "refunded");
+
+  // through the sync, against the fake GitHub: the buyer's order goes up, the owner's tick fills it
+  const remote = fr273();
+  const restore = remote.install();
+  try {
+    const owner2 = { id: "char-s273b", name: "Silas Weir", holdings: [{ ...pell, id: "h-pell2", store: { raw_material: 7 } }], purse: { crystal: 0 }, worldState: { news: [], unseenNews: [], lastTickDay: 1 } };
+    const card2 = SH273.holdCard(owner2, owner2.holdings[0], opts);
+    const buyer2 = { id: "char-a273b", name: "Adelheid", inventory: [], purse: { crystal: 50 }, worldState: { news: [], unseenNews: [], lastTickDay: 1 } };
+    const s2 = HT.buyFromHold(buyer2, card2, { goods: "raw_material", units: 4, worldDay: 80, nowISO: "2026-09-16T13:00:00Z" });
+    buyer2.tradeOutbox = [s2.order];
+    await W273.syncTrades({ character: buyer2 });
+    const posted = remote.read("world/trades/valley.json");
+    await W273.syncTrades({ character: owner2 });
+    const after = remote.read("world/trades/valley.json");
+    check("§273: ⛔ THROUGH THE SYNC — the buyer's order goes up, the owner's tick takes the goods out of the store and the crystal in, says so, and the world's record reads settled",
+      posted?.orders?.[s2.order.id]?.status === "paid" && buyer2.tradeOutbox.length === 0 && owner2.holdings[0].store.raw_material === 3
+      && owner2.purse.crystal === 4 * s2.order.each && after.orders[s2.order.id].status === "settled"
+      && owner2.worldState.news.some(n => /Adelheid bought 4 hide, sinew, timber, ore at The Fell Pell/.test(n.text)), JSON.stringify(after?.orders?.[s2.order.id]));
+  } finally { restore(); }
+
+  const A273 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§273: the op is applied through buyFromHold with what is already bought counted; the owner's toggle writes `trade`; the tick settles; the GM may not sell from the ask channel",
+    /applyStep\("holdTrades"/.test(A273) && /const r = buyFromHold\(character, n\.card, \{ goods: op\?\.goods, units: op\?\.units, pending,/.test(A273)
+    && /data-hold-trade="\$\{esc\(h\.id\)\}"/.test(A273) && /h\.trade = !!cb\.checked;/.test(A273)
+    && /const tr = await syncTrades\(\{ character \}\)/.test(A273)
+    && /"holdTrades"/.test(rd("engine/gm.js")) && (await import("../engine/gm.js")).ASK_FORBIDDEN.includes("holdTrades"));
 }
 
 /* ══════════ REPORT ══════════ */

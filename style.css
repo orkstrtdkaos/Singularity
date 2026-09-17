@@ -1768,6 +1768,9 @@ img[data-lightbox] { cursor: zoom-in; }
 .hold-near { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin: 0 0 10px; padding: 6px 12px;
   border: 1px dashed rgba(90, 168, 160, 0.30); border-radius: 8px; font-family: var(--font-ui); font-size: 13px; color: var(--ink-dim); }
 .hold-near .hn-what { color: var(--ink); }
+/* CCODE-388: a hold opened to other travelers' trade */
+.hold-trade-toggle { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+.hold-trade-toggle input { margin: 0; }
 /* CCODE-387: a journey agreed and not yet walked */
 .journey-card { margin: 8px 0; padding: 10px 12px; border: 1px solid var(--accent, #c9a227); border-radius: 8px; font-family: var(--font-ui); font-size: 13px; }
 .journey-card .jc-head { margin-bottom: 4px; }

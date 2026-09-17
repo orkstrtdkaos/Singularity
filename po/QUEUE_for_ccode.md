@@ -7,7 +7,27 @@
 
 ## ⛔ OPEN
 
-### 1 · ⚠️ §246's AFTERMATH CHECK PINS THE FALLBACK — I authored the preferred source and it went red
+### 1 · ⛑ THE NEXUS FRAME IS AUTHORED AND TWO SEATS ARE LEFT FOR THE GENERATOR
+`content/packs/core/rules/nexuses.json` — eight sites, named, sourced, organ-mapped, vectored and championed.
+Standing math ruled (+2 on-band · −1 one step · −4 two steps · **+6 at a matching nexus**), and holding one now
+moves the **regional density** of its power source in a radius — Erik rules the radius.
+
+⛔ **TWO SEATS ARE DELIBERATELY OPEN — Great Engine and Neitherway — for the GM and the generative engine.** Erik:
+*"perhaps we leave the remaining two for the GM and the generative engine to work out."* ⚠️ **This must not be
+backfilled by a later authoring pass**; a board where every seat is taken by an authored legend is a board a
+player can only visit.
+
+⛑ `_whatAGeneratedChampionMUSTCARRY` in that file is the brief, as data rather than prose so a prompt can carry
+it: a `vector`, a `purity`, a `turnability` (and the rule that decides it — **corrupt means unpersuadable**), a
+reason they are at THAT site drawn from what the site already is, and the organ's faculty as character rather
+than label. ⛔ And the one rule to keep if only one survives: **do not make both open seats the same vector** —
+the authored six run permanence ×2, adjacency ×2, middle ×1, undecided ×1, and two more of any one tips an even
+board.
+
+⚠️ **This is SNG-582's argument at the top of the game.** The generators are the author now, and a minted nexus
+champion has to meet the standard the authored six set.
+
+### 2 · ⚠️ §246's AFTERMATH CHECK PINS THE FALLBACK — I authored the preferred source and it went red
 `aftermathOf` prefers `ev.resolutions[outcome].summary` and falls back to the quest board's `_theWorldNow`.
 ⛑ **You wrote the gate when only the fallback existed. I have now authored `water_crisis.resolutions` — all four
 outcomes — so the event source wins, which is the order your own function declares.**

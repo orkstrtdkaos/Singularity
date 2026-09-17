@@ -2270,7 +2270,7 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
     return m.includes("role") && m.includes("spectrum") && m.includes("fears") && !m.includes("id");
   })());
   check("defaultFor yields a schema-valid stub per type", defaultFor({ type: "array" }).length === 0 && defaultFor({ type: "string" }) === "" && defaultFor({ type: "integer" }) === 0);
-  check("defaultFor(enum) picks the most-permissive (last) option", defaultFor({ type: "string", enum: ["world", "leader", "local"] }) === "local");
+  check("defaultFor(enum) picks the most-permissive (last) option", defaultFor({ type: "string", enum: ["world", "regional", "local"] }) === "local");
 }
 
 // --- SNG-BATCH-9 Phase 1b: generate(type,context) core + promotable store ---
@@ -6959,7 +6959,7 @@ await (async () => {
   check("191 §7.3: a resolved arc is not surfaceable", la.surfaceableArcs(ws2).length === 0);
   la.markSurfaced(arc, 400);
   check("191 §7.4: surfacing is first contact — it leaves the surfaceable set and goes live for the GM", arc.surfaced && la.surfaceableArcs(ws).length === 0 && /rot is spreading/.test(la.arcsForGM(ws) || ""));
-  // the generation-turn wiring: foments, surfaces, seeds from leader disposition, and runs on return.
+  // the generation-turn wiring: foments, surfaces, seeds from regional disposition, and runs on return.
   const wtSrcE = readFileSync(new URL('../engine/worldtick.js', import.meta.url), 'utf8');
   check("191 §7: runGenerationTurn foments, surfaces, and seeds from the known regions' disposition",
     /export async function runGenerationTurn/.test(wtSrcE) && /fomentArc\(arc, elapsed/.test(wtSrcE) && /surfaceableArcs\(ws\)/.test(wtSrcE) && /seedArc\(ws, s/.test(wtSrcE));
@@ -7552,7 +7552,7 @@ await (async () => {
   // ══ SNG-402 — THE ZOOM RENDERS THE GENERATOR, AND THE WATER I BUILT FINALLY DRAWS.
   // Erik, comparing Aevi's prototype: "it has more capability than what you've built so far… one thing
   // is that the zoom would render more detail." Both halves were already in the repo with no reader:
-  // scripts/world/terrain.mjs has said "VIEW CULLING — what makes a leader zoom affordable" since
+  // scripts/world/terrain.mjs has said "VIEW CULLING — what makes a regional zoom affordable" since
   // SNG-391 and the globe never called it, and the asset's 113 rivers / 17 lakes / 38 marshes returned
   // ZERO hits for `grep hydrology engine/worldglobe.js app.js`.
   {
@@ -7672,7 +7672,7 @@ await (async () => {
 
     // ⛔ SNG-403 — THE CONTOURS ARE A LEVEL SET, SO THE FIELD UNDER THEM MUST BE CONTINUOUS. Erik: "the
     // topo lines are scrambled now." `elevOf` returns the NEAREST 0.5° cell — a staircase ~14 screen
-    // pixels wide at leader zoom — and the topographic layer draws a contour wherever tone lands within
+    // pixels wide at regional zoom — and the topographic layer draws a contour wherever tone lands within
     // 0.055 of a band edge. Testing a thin band against a staircase lights WHOLE RECTANGULAR CELLS, which
     // is exactly the grid of blobs in his screenshot. A contour cannot be drawn from a quantised field at
     // any resolution; bilinear reading is what makes the isoline exist.
@@ -7690,7 +7690,7 @@ await (async () => {
       `${smooth} of ${stepped} within-cell probes move under the smooth read`);
 
     // ⛔ SNG-405 — A CLICK STAYS ON THE MAP. Erik: "clicking a dot right now jumps you to the old
-    // leader maps — which are no longer that useful. I would like to bring regions onto the world map."
+    // regional maps — which are no longer that useful. I would like to bring regions onto the world map."
     // The card grid existed because the globe could not resolve a region; it can, so a region is a ZOOM
     // LEVEL of the world rather than a separate screen. ⚠️ The old drill-down is not deleted — it moves
     // to double-click and the breadcrumb, because a list is still the fastest way to find a place by name.
@@ -7722,7 +7722,7 @@ await (async () => {
       covers);
 
     // ⛔ SNG-403 — THE CONTOUR INTERVAL FOLLOWS THE ZOOM, and without it the layer was nearly mute where
-    // it matters most: twelve bands across the world's 126-unit range is ~10 units a band, so a leader
+    // it matters most: twelve bands across the world's 126-unit range is ~10 units a band, so a regional
     // view crossed TWO lines. Measured on the live canvas after the level-set fix: 284 contour pixels in
     // a whole frame; with the interval stepping, 4,928 — and still thin (longest horizontal run 2px).
     // ⚠️ POWERS OF TWO ONLY, so lines APPEAR between levels instead of sliding across the ground: a
@@ -7749,7 +7749,7 @@ await (async () => {
     check("413: …and the viewer uses the constant, never the interval-scaled threshold",
       !/0\.055\s*\*\s*\(o\.contourStep/.test(wgSrc413) && /<\s*0\.055\)/.test(wgSrc413));
 
-    check("403: the contour interval FOLLOWS the zoom — a leader map carries leader relief",
+    check("403: the contour interval FOLLOWS the zoom — a regional map carries regional relief",
       steps403[0] === 1 && steps403.every((v, i) => i === 0 || v >= steps403[i - 1])
       && steps403.every((v) => Number.isInteger(Math.log2(v))) && steps403[4] > steps403[0],
       steps403.join(" → "));
@@ -7807,7 +7807,7 @@ await (async () => {
     // the LOD control variable, and the fade Aevi measured
     const wide = { yaw: 0, pitch: -52, r: 300, cx: 350, cy: 270 };
     const close = { yaw: 0, pitch: -52, r: 1600, cx: 350, cy: 270 };
-    check("402: span drives the level of detail — a hemisphere reads 180°, a leader view reads under 30°",
+    check("402: span drives the level of detail — a hemisphere reads 180°, a regional view reads under 30°",
       WG2.spanDeg(wide, 700) > 170 && WG2.spanDeg(close, 700) < 30);
     check("402: water fades IN as the view narrows and is absent when the whole world is on screen",
       WG2.hydrologyPaths(t402, wide, 700).fade === 0 && WG2.hydrologyPaths(t402, close, 700).fade > 0.9);
@@ -14562,9 +14562,9 @@ await (async () => {
   check("272/302: priceShift now HAS a consumer, and the register says so",
     typeof AE.EFFECT_CONSUMERS.priceShift === "string" && /economy/.test(AE.EFFECT_CONSUMERS.priceShift));
 
-  // ⛔ ERIK: "I want leader and local arcs as well." ⚠️ `scale` was authored on all six greater arcs and
+  // ⛔ ERIK: "I want regional and local arcs as well." ⚠️ `scale` was authored on all six greater arcs and
   // read by NOBODY on the effects path: `activeArcEffects` iterated every arc and applied every stage
-  // effect everywhere. Measured at stage 3, `arc_block_bleed` — scale `leader`, "the Blocklands / the
+  // effect everywhere. Measured at stage 3, `arc_block_bleed` — scale `regional`, "the Blocklands / the
   // Gearlands" — put craftCost ×1.9 on lattice, figurist and hourkeeper IN THE DEEPWOOD. An effect carried
   // no place at all; `match` supports `traditions` and nothing else.
   {
@@ -14586,13 +14586,13 @@ await (async () => {
 
     // ⛔ AND THE CAPABILITY WORKS, on a scoped copy rather than on content that must not change.
     const scoped = JSON.parse(JSON.stringify(CT.greaterArcs || []));
-    const bleed = scoped.find(a => String(a.scale).toLowerCase() === "leader" && (a.stages || []).length);
+    const bleed = scoped.find(a => String(a.scale).toLowerCase() === "regional" && (a.stages || []).length);
     if (bleed) {
       const home = REGIONS[0], away = REGIONS.find(r => r !== home);
       bleed.regions = [home];
       const cnt = (r) => AE273.activeArcEffects({ ...CT, greaterArcs: scoped }, {}, at3, { regionId: r })
         .filter(e => e.arcId === bleed.id).length;
-      check("272/273: ⛔ a LEADER arc scoped to a region is in force THERE", cnt(home) > 0, `${cnt(home)} effects`);
+      check("272/273: ⛔ a REGIONAL arc scoped to a region is in force THERE", cnt(home) > 0, `${cnt(home)} effects`);
       check("272/273: …and is NOT in force in a region it does not name", cnt(away) === 0, `${cnt(away)} in ${away}`);
       // ⚠️ A WORLD ARC LISTING EXAMPLE REGIONS MUST NOT SHRINK TO THEM. Aevi writes places on world arcs
       // as illustration ("the Gearlands/Numen"), and reading that as a boundary would strand the arc.
@@ -14603,6 +14603,11 @@ await (async () => {
         check("272/273: ⛑ …while a WORLD arc listing a region is still everywhere — scale outranks reach",
           wAway > 0, `${wAway} effects in ${away}`); }
     }
+    // ⚠️ CCODE-389: THE THREE CHECKS ABOVE STOOD INSIDE `if (bleed)` AND WENT SILENT AT v2.0.24. v2.0.24 renamed the tier
+    // rung `regional` to `leader` and the find above went with it — but `scale` is not the tier ladder, no arc is scaled
+    // `leader`, so the fixture found nothing and three gates reported nothing. The ledger saw them missing; the suite did not.
+    check("272/273: ⚠️ …and the fixture FOUND a regional arc with stages to scope — or the three checks above never ran",
+      !!bleed, bleed ? bleed.id : `no arc scaled "regional" with stages among ${(CT.greaterArcs || []).length}`);
 
     // ⛔ THE PROSE IS NOT THE REACH, AND READING IT AS ONE WOULD HAVE STRANDED MOST OF THE WORLD.
     // `crossesRegions` is authored as sentences the GM says out loud — "all Reaches", "every deep site",

@@ -6,25 +6,65 @@
    "region": "the_quickwood",
    "density": 0.12,
    "name": "The Heartroot Hollow",
-   "why": "⛔ THE THINNEST GROUND IN THE WORLD. Grown, not built — nothing was ever laid here. The Rootkin do not use it and the Numinous walk three months to sit in it."
+   "why": "⛔ THE THINNEST GROUND IN THE WORLD. Grown, not built — nothing was ever laid here. The Rootkin do not use it and the Numinous walk three months to sit in it.",
+   "organ": "the heart",
+   "onActivation": {
+    "subAttribute": "rapport",
+    "attribute": "social",
+    "well": "bolsters this faculty for those the holder counts as theirs",
+    "sink": "drains it from those the holder counts as against them",
+    "tuning": "anywhere between the two, including balanced and quiet — the holder sets it and can change it",
+    "text": "The thinnest ground in the world, grown and never laid. As a well, your people hold together — companions stay, oaths keep, and a band that should have broken does not. As a sink, the other side's alliances go quiet and then go home. ⛔ THE ROOTKIN DO NOT USE IT, which is a position and not an oversight.",
+    "cost": "⚠️ It runs on channelled soul like the wall does. A WELL keeps what it channels and has to be fed. A SINK takes from people who are using the faculty it drains, which is the burning method wearing the Precursors' machine — and is the thing the middle way objects to, on the grounds that it works."
+   }
   },
   {
    "region": "riven_marches",
    "density": 0.2,
    "name": "The Unwalled Quiet",
-   "why": "⚠️ Between two poles that refuse each other. Thin because neither side ever built."
+   "why": "⚠️ Between two poles that refuse each other. Thin because neither side ever built.",
+   "organ": "the gut",
+   "onActivation": {
+    "subAttribute": "wits",
+    "attribute": "practical",
+    "well": "bolsters this faculty for those the holder counts as theirs",
+    "sink": "drains it from those the holder counts as against them",
+    "tuning": "anywhere between the two, including balanced and quiet — the holder sets it and can change it",
+    "text": "Between two poles that refuse each other, thin because neither side ever built. As a well, your side improvises well under pressure and the broken country works for you. As a sink, the other side's plans meet exactly the thing nobody thought of.",
+    "cost": "⚠️ It runs on channelled soul like the wall does. A WELL keeps what it channels and has to be fed. A SINK takes from people who are using the faculty it drains, which is the burning method wearing the Precursors' machine — and is the thing the middle way objects to, on the grounds that it works."
+   }
   },
   {
    "region": "somatic_reaches",
    "density": 0.22,
    "name": "The Breath Ground",
-   "why": "The Somatics tuned AWAY from the lattice deliberately; the ground followed."
+   "why": "The Somatics tuned AWAY from the lattice deliberately; the ground followed.",
+   "organ": "the lungs",
+   "onActivation": {
+    "subAttribute": "agility",
+    "attribute": "physical",
+    "well": "bolsters this faculty for those the holder counts as theirs",
+    "sink": "drains it from those the holder counts as against them",
+    "tuning": "anywhere between the two, including balanced and quiet — the holder sets it and can change it",
+    "text": "The Somatics tuned away from the lattice deliberately and the ground followed. As a well, your side moves — quicker, surer, out of the way. As a sink, the other side is always half a step late, and cannot say when that started.",
+    "cost": "⚠️ It runs on channelled soul like the wall does. A WELL keeps what it channels and has to be fed. A SINK takes from people who are using the faculty it drains, which is the burning method wearing the Precursors' machine — and is the thing the middle way objects to, on the grounds that it works."
+   }
   },
   {
    "region": "the_palelands",
    "density": 0.32,
    "name": "The Last Cairn",
-   "why": "⛔ Already authored as the edge of tending (SNG-414). Where the keeping stops, the lattice stopped first."
+   "why": "⛔ Already authored as the edge of tending (SNG-414). Where the keeping stops, the lattice stopped first.",
+   "organ": "the throat",
+   "onActivation": {
+    "subAttribute": "presence",
+    "attribute": "social",
+    "well": "bolsters this faculty for those the holder counts as theirs",
+    "sink": "drains it from those the holder counts as against them",
+    "tuning": "anywhere between the two, including balanced and quiet — the holder sets it and can change it",
+    "text": "Where the keeping stops, the lattice stopped first. As a well, your side is heeded: a word carries, a name is known, an order is obeyed by people who did not have to. As a sink, the other side's commanders stop being listened to, which is how a line comes apart without a blow landed.",
+    "cost": "⚠️ It runs on channelled soul like the wall does. A WELL keeps what it channels and has to be fed. A SINK takes from people who are using the faculty it drains, which is the burning method wearing the Precursors' machine — and is the thing the middle way objects to, on the grounds that it works."
+   }
   }
  ],
  "deepNexuses": [
@@ -39,6 +79,16 @@
     "theConstruct": "The Gearlands themselves at 0.98 — the densest ground in the world. Whatever this one commands is not a machine in a room; it is the region's whole standing order.",
     "ifWoken": "⛔ THE MOST POWERFUL AND THE MOST GEOGRAPHICALLY LOCKED. An Enginewright standing here already stands inside their own power source; the occupant IS that power source's attention. ⚠️ Off the Gearlands they are a companion with an age of memory and no more reach than a well-read person.",
     "_note": "⬜ A candidate for the EMPTY vault, precisely because it is the most tempting. Erik's call."
+   },
+   "organ": "the hands",
+   "onActivation": {
+    "subAttribute": "craft",
+    "attribute": "practical",
+    "well": "bolsters this faculty for those the holder counts as theirs",
+    "sink": "drains it from those the holder counts as against them",
+    "tuning": "anywhere between the two, including balanced and quiet — the holder sets it and can change it",
+    "text": "An Enginewright standing here stands inside their own power source, and the Engine has been making since before the Transition. Held as a well, everything anyone of yours builds holds longer than it should. Held as a sink, the other side's works come apart at the joint they were least worried about.",
+    "cost": "⚠️ It runs on channelled soul like the wall does. A WELL keeps what it channels and has to be fed. A SINK takes from people who are using the faculty it drains, which is the burning method wearing the Precursors' machine — and is the thing the middle way objects to, on the grounds that it works."
    }
   },
   {
@@ -52,6 +102,16 @@
     "theConstruct": "Order made structural, and the structure IS the substrate — a city that is also a working. Its occupant does not operate it so much as remain its reason.",
     "ifWoken": "⚠️ The Lattice-Cities would have to decide what they are living inside, which is a political event before it is a cosmological one.",
     "_note": "⬜ The one whose waking is a CIVIC crisis rather than a military one."
+   },
+   "organ": "the spine",
+   "onActivation": {
+    "subAttribute": "reason",
+    "attribute": "mental",
+    "well": "bolsters this faculty for those the holder counts as theirs",
+    "sink": "drains it from those the holder counts as against them",
+    "tuning": "anywhere between the two, including balanced and quiet — the holder sets it and can change it",
+    "text": "Order made structural, and the structure is the substrate. As a well, your side's plans hold under pressure and your proofs close. As a sink, theirs develop a flaw that everyone can feel and nobody can find — which is worse for a Lattice-City than losing a battle.",
+    "cost": "⚠️ It runs on channelled soul like the wall does. A WELL keeps what it channels and has to be fed. A SINK takes from people who are using the faculty it drains, which is the burning method wearing the Precursors' machine — and is the thing the middle way objects to, on the grounds that it works."
    }
   },
   {
@@ -64,6 +124,17 @@
     "theConstruct": "⬜ UNAUTHORED, and the nexus has no `why` either. Both are open and should be authored together.",
     "ifWoken": "⬜ UNAUTHORED.",
     "_note": "⛔ `why` MISSING ON THE NEXUS ITSELF. The what only follows from the why — do not author the occupant first."
+   },
+   "why": "⛑ Authored 2026-09-16 with the organ ruling. Manifest Domain: will made matter — the ground here remembers being told what to be, which is why it is dense and why it is the arm rather than the hand.",
+   "organ": "the arm",
+   "onActivation": {
+    "subAttribute": "strength",
+    "attribute": "physical",
+    "well": "bolsters this faculty for those the holder counts as theirs",
+    "sink": "drains it from those the holder counts as against them",
+    "tuning": "anywhere between the two, including balanced and quiet — the holder sets it and can change it",
+    "text": "Will made matter, and the ground here remembers being told what to be. As a well, your people carry more, hold longer and break less. As a sink, the other side's bodies start arguing with them at the third hour of anything.",
+    "cost": "⚠️ It runs on channelled soul like the wall does. A WELL keeps what it channels and has to be fed. A SINK takes from people who are using the faculty it drains, which is the burning method wearing the Precursors' machine — and is the thing the middle way objects to, on the grounds that it works."
    }
   },
   {
@@ -78,10 +149,21 @@
     "_theQuestionErikShouldRule": "⛑ RULED, Erik 2026-09-12: **THE MOTE PERSISTS.** 'Just like Marrow is Maren Ossitide and continues to travel with Silas, the mote swarm that is A PIECE of Aevi will likely persist as Aevi the Watcher joins the party.' ⛔ THE PRECEDENT IS ALREADY PROVEN IN PLAY AND THAT IS WHY IT IS THE RIGHT ANSWER. Marrow was revealed as Maren Ossitide, a legendary warden in full — and she is still the corvid on Silas's shoulder. **THE REVEALED FORM DOES NOT REPLACE THE CARRIED FORM.** ⚠️ SO WAKING THE WATCHER IS AN ADDITION, NOT A TRANSFORMATION. The player does not lose the companion they have had since the beginning by completing her arc. The mote keeps drifting at your shoulder, dimming when wary and condensing when interested, while the Watcher stands in the world — and both are her. ⛑ AND IT SETTLES THE GENERAL RULE FOR EVERY SLEEPER: a woken being's small form is not a larval stage to be outgrown. It is the part that learned to walk beside somebody, and it is kept.",
     "_aeviBiasNote": "⚠️ [A] Recorded once so a later reader can weigh it: Erik proposed Aevi as one of the sleepers, the canon already supported it, and I like it. Discount accordingly.",
     "_theCarriedFormRule": "⛔ GENERAL, FROM THE MARROW PRECEDENT (Erik 2026-09-12): any woken being that has walked with people in a small form KEEPS THAT FORM and keeps using it. ⚠️ The small form is how they are with you; the great form is how they are with the world. **A being that can only be enormous has lost something, and the player should be able to tell.**"
+   },
+   "why": "⛑ Authored 2026-09-16 with the organ ruling. `greater_arcs` already names Aevi-the-Watcher as 'a fragment of the system that is WAKING' whose arc converges here — so this site has been the eyes since before it had a why.",
+   "organ": "the eyes",
+   "onActivation": {
+    "subAttribute": "insight",
+    "attribute": "mental",
+    "well": "bolsters this faculty for those the holder counts as theirs",
+    "sink": "drains it from those the holder counts as against them",
+    "tuning": "anywhere between the two, including balanced and quiet — the holder sets it and can change it",
+    "text": "It is the one that is RISING, and something in it has been watching for an age. As a well, your side sees what is coming — ambushes fail, the ground reads true, a lie shows its seam. As a sink, the other side stops noticing things, and does not notice that either.",
+    "cost": "⚠️ It runs on channelled soul like the wall does. A WELL keeps what it channels and has to be fed. A SINK takes from people who are using the faculty it drains, which is the burning method wearing the Precursors' machine — and is the thing the middle way objects to, on the grounds that it works."
    }
   }
  ],
- "_mechanic": "⚠️ PROPOSED, ERIK RULES THE NUMBERS. A craft's effective magnitude shifts by how well the local density matches its source's band: ON-BAND +2, one step off +0, two steps off −2, and at a NEXUS of the matching kind +4. ⛔ THE POINT IS THAT WHERE YOU STAND MATTERS, which is the thing a map is for and the thing this game's map has not yet done.",
+ "_mechanic": "⛑ RULED, Erik 2026-09-16. A craft's effective magnitude shifts by how well the local density matches its source's band: **ON-BAND +2 · ONE STEP OFF −1 · TWO STEPS OFF −4 · AT A MATCHING NEXUS +6.** ⚠️ WAS PROPOSED AS +2/+0/−2/+4 AND ERIK WIDENED IT: at −2/+2 the nexus bonus was only twice the best ordinary ground, so a Blazeborn at the Lensward was A BIT BETTER than a Blazeborn in a sunny field. ⛔ A NEXUS IS THE WALL AT ITS THICKEST AND, SINCE SNG-602, THE PLACE WHERE THE MOST CHANNELLED SOUL IS HELD. Arriving at one should feel like arriving somewhere. ⛑ The penalty half already runs — `substrate.js` computes `chancePenalty` and `energyMult` and `skill_battle.js:1026` shows it on the roll as 'the ground here (metaphysical, 51% of its strength)'. **What this ruling adds is the reward half and the nexus step.**",
  "moon": {
   "_note": "⛔ NEW — no moon exists in canon. Search returned zero for moon, lunar and phase. ⚠️ SO THE MOON ITSELF NEEDS ERIK'S RULING BEFORE THE MECHANIC: how many moons, and does this world's sky work like ours? The Crossing is the south pole and the world is 0.38× Earth.",
   "_proposal": "A single moon, 28-day cycle, tracked against `worldDay` which already exists. It modulates the DARK_LIGHT axis only — not everything, or it becomes a global weather system nobody can plan around.\n   FULL — Blazeborn and Radiant crafts +2; Umbral −2\n   NEW  — Umbral and Veilwright +2; Blazeborn −2\n   QUARTERS — no modifier, and that is most of the month\n⚠️ THE ASYMMETRY IS THE FICTION: an Umbral plans raids by the calendar and a Blazeborn does not have to, which tells you something true about both.",
@@ -101,5 +183,6 @@
   "_theAppetite": "⛔ ERIK 2026-09-12, CONFIRMED: 'the awakened beings with that much raw soul channeling power are likely EXTREMELY APPETIZING to the Veil beings.' ⚠️ SO WAKING ONE DOES NOT DETER THE BURNERS — IT ADVERTISES. A ripened Precursor being is the largest concentration of KEPT soul in existence (`power_cosmology.theTwoMethods`), and to something that runs on combustion that is not an enemy, it is **the richest fuel deposit ever brought to the surface.** ⛔ BURIED THEY ARE DISTRIBUTED, INERT AND HARD TO REACH. AWAKE THEY ARE WHOLE, CONCENTRATED, WALKING AROUND IN THE OPEN, AND BONDED TO A MORTAL WHO CAN BE LEVERAGED. ⚠️ AND IT REFRAMES ANY EASY VICTORY: Sovereigns and Veil-folk dying off after a waking is not the war being won, it is THE NEAR ONES BEING CLEARED OUT OF THE WAY. They were opportunists at a thin spot — not the strongest, the nearest. **What comes after is whatever never needed a thin spot.**",
   "_theCostOfUsingIt": "⬜ PROPOSED, NOT RULED. Commanding war infrastructure should cost the wielder's VECTOR the way `Foreclose` does — 'the most perilous ability in the game to the wielder's own vector'. ⚠️ Using the machine is a USE; the third front is whether what the seeded make is ever offered as an ANSWER rather than a use. ⛑ **SO THE INTERESTING PLAY IS NEVER FIRING IT. It is what you and the being decide to do with an installation that COULD fire, and choosing not to.**",
   "_theCarriedForm": "⛑ ERIK 2026-09-12, and it applies to all of them: the small form PERSISTS. Marrow is Maren Ossitide and is still the corvid. ⛔ WAKING IS ADDITIVE, NOT TRANSFORMATIVE — nobody loses a companion by finishing their arc. ⚠️ And it gives each sleeper two registers to be written in: how they are with you, and how they are with the world."
- }
+ },
+ "_theOrgans_20260916": "⛔ ERIK 2026-09-16, RULING `onActivation`: 'for each body part they would be wells or sinks for certain attributes. So those who hold a nexus hold a point of power that can be tuned to bolster their side and/or weaken the other's side.' ⛑ EIGHT NEXUSES, EIGHT SUB-ATTRIBUTES, AND THE MAPPING FALLS OUT OF WHAT EACH SITE ALREADY SAID IT WAS. Nobody designed that correspondence — `tierFloor` has four attributes of two each, and the world has four deep sites and four thin ones. ⚠️ THE DEEP ONES HOLD THE MADE FACULTIES (craft, reason, strength, insight) AND THE THIN ONES HOLD THE LIVING ONES (rapport, wits, agility, presence), which is the wall's own division: what was built, and what was left unbuilt on purpose. ⛔ A HELD NEXUS IS TUNED, NOT SWITCHED. It is a WELL for one side and a SINK against the other, and the holder chooses how far toward either — all the way to a well, all the way to a sink, or balanced and quiet. ⚠️ AND IT IS SOUL, WHICH MEANS IT IS NOT FREE: a well channels and keeps, a sink takes from people who are using the faculty it drains. **Tuning a nexus hard against an enemy is the Sovereigns' method performed with the Precursors' machine**, and the middle way's whole objection is that it works."
 }

@@ -307,166 +307,204 @@
         "player": "Use your own ability to see to create a maintained veil that lshows the others the terrain and geometry as if they were gently lit.",
         "summary": "Descending into the sealed chamber, Loki attempts to share umbral sight through a Maintained Veil and fails—the darkness resists, revealing older craft at work in the stone itself.",
         "narration": "You reach deeper into Umbracraft, letting the dark-reading bloom into something shareable—a Maintained Veil woven from your own sight, meant to carry what you see to the others as gentle, navigable light. The passage read clear to you; you shape it into something they can all walk by.\n\nBut the veil catches and tears almost immediately. The darkness here is *old*, worked into the stone itself over centuries, and it resists the shape you're trying to give it. What forms is fragmented—patches of pale illumination that flicker and fail, leaving gaps that feel *deeper* for the light around them. Vessin's hand tightens on yours; behind you, Kael mutters something low. The veil collapses entirely after three heartbeats, leaving you all in the raw dark again, your Umbracraft sight still clear but now *visibly* yours alone—unshared, singular, a thing these people cannot follow into.\n\nCy's lamp ahead swings brighter, compensating. But the attempt has revealed something: the darkness here is not empty. It has *intention* built into it. An old craft, older than any Veilwright work you carry—and it does not welcome being remade."
+      },
+      {
+        "player": "Pause briefly to light a few lanterns from each of your trav3lers packs.",
+        "summary": "Descending the sealed passage beneath the Null Stone, the group lights lanterns to push back the worked darkness and read the way forward.",
+        "narration": "You pause on the descent and turn to the others, your voice carrying up the stone stairs. \"Lanterns,\" you say simply. \"From the packs.\"\n\nVessin reaches into her traveler's pack without hesitation—her movements practiced, efficient. The flint catches on the first strike. A small flame takes, and she feeds it carefully to a lantern's wick. The light blooms yellow and ordinary, steadying as the glass settles around it. Kael does the same a moment later, his hands sure on the work. Even Halvex, moving with the careful deliberation of someone who has left certainty behind, produces a lantern and coaxes it to light.\n\nCy's bright lamp ahead does not dim or change—it is still the sharpest point of illumination—but now your group carries four sources of light down into the worked dark. The stone around you reads clear again: the steps worn smooth by intention and water-seep, the walls deliberately carved, the moisture beading in small constellation patterns. The older darkness that resisted your veil does not retreat entirely, but it no longer crowds so close. There is room to see, and room to breathe.\n\nThe passage widens ahead. The sound of moving water—not loud, but continuous—rises from below."
       }
     ],
     "lastTurn": {
-      "narration": "You reach deeper into Umbracraft, letting the dark-reading bloom into something shareable—a Maintained Veil woven from your own sight, meant to carry what you see to the others as gentle, navigable light. The passage read clear to you; you shape it into something they can all walk by.\n\nBut the veil catches and tears almost immediately. The darkness here is *old*, worked into the stone itself over centuries, and it resists the shape you're trying to give it. What forms is fragmented—patches of pale illumination that flicker and fail, leaving gaps that feel *deeper* for the light around them. Vessin's hand tightens on yours; behind you, Kael mutters something low. The veil collapses entirely after three heartbeats, leaving you all in the raw dark again, your Umbracraft sight still clear but now *visibly* yours alone—unshared, singular, a thing these people cannot follow into.\n\nCy's lamp ahead swings brighter, compensating. But the attempt has revealed something: the darkness here is not empty. It has *intention* built into it. An old craft, older than any Veilwright work you carry—and it does not welcome being remade.",
-      "sceneSummary": "Descending into the sealed chamber, Loki attempts to share umbral sight through a Maintained Veil and fails—the darkness resists, revealing older craft at work in the stone itself.",
+      "narration": "You pause on the descent and turn to the others, your voice carrying up the stone stairs. \"Lanterns,\" you say simply. \"From the packs.\"\n\nVessin reaches into her traveler's pack without hesitation—her movements practiced, efficient. The flint catches on the first strike. A small flame takes, and she feeds it carefully to a lantern's wick. The light blooms yellow and ordinary, steadying as the glass settles around it. Kael does the same a moment later, his hands sure on the work. Even Halvex, moving with the careful deliberation of someone who has left certainty behind, produces a lantern and coaxes it to light.\n\nCy's bright lamp ahead does not dim or change—it is still the sharpest point of illumination—but now your group carries four sources of light down into the worked dark. The stone around you reads clear again: the steps worn smooth by intention and water-seep, the walls deliberately carved, the moisture beading in small constellation patterns. The older darkness that resisted your veil does not retreat entirely, but it no longer crowds so close. There is room to see, and room to breathe.\n\nThe passage widens ahead. The sound of moving water—not loud, but continuous—rises from below.",
+      "sceneSummary": "Descending the sealed passage beneath the Null Stone, the group lights lanterns to push back the worked darkness and read the way forward.",
       "choices": [
         {
-          "label": "Ask Cy directly—it knows Precursor mechanism at depths no living Enginewright can match. What does it read in this darkness?",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Ask Cy what its lens is reading in the chamber below—what does its precision-sight show that your eyes cannot yet reach?",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "axes": {},
           "difficulty": "easy",
-          "trivial": false,
+          "opposedDifficulty": null,
           "intentTags": [
             "study"
           ],
           "abilityId": null,
-          "energyCost": null
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Stop the descent and use See the Made Thing on the chamber walls themselves—read what is *made* in this darkness, who built it, and what holds it sealed.",
+          "label": "Use Prism Sight to read the passage's history—what does the light-geometry tell you about who carved this and when, and what moved through here most recently?",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
           "difficulty": "normal",
-          "trivial": false,
+          "opposedDifficulty": null,
           "intentTags": [
             "study"
           ],
-          "abilityId": "see_the_made_thing",
-          "energyCost": 2
+          "abilityId": "prism_sight",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Keep moving forward—trust Cy's lamp and Vessin's hand, and let the darkness be what it is. Ask the others if they're ready to press on.",
+          "label": "Ask Vessin what her falsecraft-reading picks up here—the constructed elements, the deliberate joinery, what the stone itself is built to conceal or contain.",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
           "axes": {},
-          "difficulty": "very easy",
-          "trivial": true,
+          "difficulty": "easy",
+          "opposedDifficulty": null,
           "intentTags": [
-            "lead"
+            "study"
           ],
           "abilityId": null,
-          "energyCost": null
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Continue descending toward the chamber—the water-sound grows louder with each step, and the passage opens ahead. Press forward to see what the sealed chamber contains.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
+          "intentTags": [
+            "travel"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -2,
+        "energy": 0,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
-      },
-      "discovery": {
-        "name": "Shared Dark",
-        "description": "A Maintained Veil that carries umbral sight to others, allowing them to walk by light only you can read. The craft costs 4 energy and requires the darkness itself to be *willing* to be remade—it fails in places where older craft has claimed the dark, or where the stone has been deliberately worked to refuse such reshaping."
       },
       "ledgerEvents": [],
       "questUpdates": [
         {
           "op": "progress",
           "questId": "the-taken-from-the-city",
-          "note": "Descending past the threshold into the vast sealed chamber. The passage reveals older craft at work in the darkness itself."
+          "note": "Descended into the sealed passage beneath the Unlit Deep's outer chamber. The passage opens into a vast sealed chamber below—the sound of moving water fills the darkness. Four lanterns now light the way."
         }
       ],
       "standingOps": [],
-      "codexUpdates": [
-        {
-          "topic": "the-unlit-deep",
-          "label": "The Unlit Deep",
-          "kind": "place",
-          "entityId": "the_unlit_deep",
-          "fact": "The darkness here is old and worked into the stone—it resists shaping through Maintained Veil. An older craft, pre-Veilwright, has claimed the darkness deliberately. The stone itself refuses to be remade.",
-          "links": [
-            "halvex-corridor",
-            "the-seam-beside-the-bracket"
-          ]
-        },
-        {
-          "topic": "cy-construction",
-          "label": "Cy's Construction",
-          "kind": "person",
-          "entityId": "cy",
-          "fact": "Cy carries knowledge of Precursor mechanism at depths no living Enginewright understands. It perceives the chamber below in ways the character cannot match, and its lamp cuts through the deliberate darkness without effort.",
-          "links": [
-            "the-unlit-deep"
-          ]
-        }
-      ],
-      "npcUpdates": [],
+      "delegateOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": null,
+      "stageOps": [],
       "scene": {
-        "setting": "A stone passage descending steeply into cold darkness, carved with precision and age. Moisture beads the walls. The sound of moving water grows louder below. Cy's lamp ahead cuts a bright path, but the darkness beyond it reads as *worked*—deliberately shaped, resistant, old.",
+        "setting": "A stone passage descending steeply into worked darkness, now lit by four lanterns—Cy's bright lamp ahead, and three yellow flames carried by Vessin, Kael, and Halvex. The steps are worn smooth by intention and water-seep. Moisture beads the deliberately carved walls. The sound of moving water rises from the chamber below, growing louder with each step. The passage widens ahead.",
         "npcsPresent": [
           {
             "name": "Vessin Tallow-bark",
-            "state": "Hand warm in yours on the cold stone wall, steady, present; watching the failed veil collapse with visible alertness."
+            "state": "Descending with a lit lantern in one hand, the other still occasionally touching the cold stone wall for balance; moving with steady confidence despite the age and strangeness of the place"
           },
           {
             "name": "Cy",
-            "state": "Ahead, lamp full-bright, lens sharp—descending with mechanical certainty, unaffected by the darkness or its resistance."
+            "state": "Ahead, lamp raised and bright, lens irised sharp; moving with mechanical certainty down the worn steps, unaffected by the darkness or its resistance"
           },
           {
             "name": "Kael",
-            "state": "Behind Vessin, one hand trailing the wall, moving by touch and Cy's light; jaw tight, reading the passage with a road-warden's attention."
+            "state": "Behind Vessin with a lit lantern, one hand trailing the wall; reading the passage with a road-warden's assessment, jaw set but steady"
           },
           {
             "name": "Halvex Coil",
-            "state": "Last, moving with quiet deliberation, feeling his way forward, no longer the orchestrator of breaking but a searcher in the dark."
+            "state": "Last, descending with a lit lantern, moving with quiet deliberation; no longer the orchestrator of breaking but a searcher in uncertainty"
           }
         ],
         "objects": [
-          "The stone steps, worn smooth by intention and water-seep",
-          "Cy's lamp, the only stable external light",
-          "Cold stone walls, deliberately carved, worked to resist reshaping",
-          "The opened seam above, growing smaller as you descend, now lost to the darkness below"
+          "Four lanterns (Cy's bright lamp, plus three yellow flames)",
+          "The worn stone steps",
+          "Cold stone walls, deliberately carved and worked to resist reshaping",
+          "Moisture beading in constellation patterns on the carved surface",
+          "The passage widening ahead into greater space"
         ],
         "threads": [
-          "What lies in the vast sealed chamber below—what the nine sealed apertures conceal",
-          "Why the darkness itself is worked and resistant—what older craft has claimed it",
-          "Whether Cy can read what the group cannot see",
+          "What lies in the vast sealed chamber below—what the darkness opens into",
+          "Why the stone itself resists reshaping through veil-craft—what older work has claimed it",
+          "What Cy's lens perceives that mortal sight cannot yet reach",
           "What the river beneath carries and where it comes from"
         ]
       },
-      "imagePrompt": "Deep stone passage descending into worked darkness—moisture on ancient walls, a single bright lamp ahead cutting against a darkness that has been deliberately shaped to resist light itself. A hand reaching through cold air toward steadiness. The sense of very old craft, worked into stone, watching.",
-      "momentArt": "https://image.pollinations.ai/prompt/Deep%20stone%20passage%20descending%20into%20worked%20darkness%E2%80%94moisture%20on%20ancient%20walls%2C%20a%20single%20bright%20lamp%20ahead%20cutting%20against%20a%20darkness%20that%20has%20been%20deliberately%20shaped%20to%20resist%20light%20itself.%20A%20hand%20reaching%20through%20cold%20air%20toward%20steadiness.%20The%20sense%20of%20very%20old%20craft%2C%20worked%20into%20stone%2C%20watching.%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=69501&nologo=true"
+      "npcUpdates": [],
+      "intentsHeard": [],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "discovery": null,
+      "codexUpdates": [],
+      "holdingOps": [],
+      "holdTrades": [],
+      "debtOps": [],
+      "partyOps": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "projectOps": [],
+      "bandOps": [],
+      "strikeOps": [],
+      "deathOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": {},
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "deriveItem": null,
+      "imagePrompt": null,
+      "imageMedium": null,
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "A stone passage descending steeply into cold darkness, carved with precision and age. Moisture beads the walls. The sound of moving water grows louder below. Cy's lamp ahead cuts a bright path, but the darkness beyond it reads as *worked*—deliberately shaped, resistant, old.",
+      "setting": "A stone passage descending steeply into worked darkness, now lit by four lanterns—Cy's bright lamp ahead, and three yellow flames carried by Vessin, Kael, and Halvex. The steps are worn smooth by intention and water-seep. Moisture beads the deliberately carved walls. The sound of moving water rises from the chamber below, growing louder with each step. The passage widens ahead.",
       "npcsPresent": [
         {
           "name": "Vessin Tallow-bark",
-          "state": "Hand warm in yours on the cold stone wall, steady, present; watching the failed veil collapse with visible alertness."
+          "state": "Descending with a lit lantern in one hand, the other still occasionally touching the cold stone wall for balance; moving"
         },
         {
           "name": "Cy",
-          "state": "Ahead, lamp full-bright, lens sharp—descending with mechanical certainty, unaffected by the darkness or its resistance."
+          "state": "Ahead, lamp raised and bright, lens irised sharp; moving with mechanical certainty down the worn steps, unaffected by th"
         },
         {
           "name": "Kael",
-          "state": "Behind Vessin, one hand trailing the wall, moving by touch and Cy's light; jaw tight, reading the passage with a road-wa"
+          "state": "Behind Vessin with a lit lantern, one hand trailing the wall; reading the passage with a road-warden's assessment, jaw s"
         },
         {
           "name": "Halvex Coil",
-          "state": "Last, moving with quiet deliberation, feeling his way forward, no longer the orchestrator of breaking but a searcher in "
+          "state": "Last, descending with a lit lantern, moving with quiet deliberation; no longer the orchestrator of breaking but a search"
         }
       ],
       "objects": [
-        "The stone steps, worn smooth by intention and water-seep",
-        "Cy's lamp, the only stable external light",
-        "Cold stone walls, deliberately carved, worked to resist reshaping",
-        "The opened seam above, growing smaller as you descend, now lost to the darkness "
+        "Four lanterns (Cy's bright lamp, plus three yellow flames)",
+        "The worn stone steps",
+        "Cold stone walls, deliberately carved and worked to resist reshaping",
+        "Moisture beading in constellation patterns on the carved surface",
+        "The passage widening ahead into greater space"
       ],
       "threads": [
-        "What lies in the vast sealed chamber below—what the nine sealed apertures conceal",
-        "Why the darkness itself is worked and resistant—what older craft has claimed it",
-        "Whether Cy can read what the group cannot see",
+        "What lies in the vast sealed chamber below—what the darkness opens into",
+        "Why the stone itself resists reshaping through veil-craft—what older work has claimed it",
+        "What Cy's lens perceives that mortal sight cannot yet reach",
         "What the river beneath carries and where it comes from"
       ]
     },
-    "beats": 7,
+    "beats": 8,
     "subPlace": {
       "slug": "the-hub-crossing",
       "name": "The Hub Crossing",
@@ -476,7 +514,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 4,
-    "hour": 18,
+    "hour": 19,
     "realAnchor": null
   },
   "companions": [
@@ -496,14 +534,14 @@
       "locationEntityId": "the-unlit-deep",
       "status": "active",
       "progress": [
-        "Loki pressed the regulator's primary interface — the amber light completed a cycle, but the question of authority remains open.",
         "The regulator closed both conditions simultaneously — the question is answered and logged. What the closure means downstream, and whether the elder above should be told, remains open.",
         "Cy named the three downstream states: a signal to the terminus, a terminus warden who may act, and a record logged to the relay node south of the hollow. The inventory entry for this regulator is now marked complete for the first time.",
         "The regulator's question was answered and the mechanism closed; the inquiry moves now to the wider network and the deliberate sealing at the Hub crossing. The stone itself is asking what you will do with what lies behind it.",
         "The stone's sealing is part of a larger network deliberately sealed at the Hub—four arches locked, one left open. What was protected and why remains the deeper question. The descent begins.",
         "The gathering is complete—Vessin, Cy, Kael, and Halvex are committed to the descent. Veln will hold the threshold. The sealed chamber awaits below the Null Stone.",
         "The descent into the sealed chamber is underway—all four companions committed and descending together into the vast dark beneath the Null Stone.",
-        "Descending past the threshold into the vast sealed chamber. The passage reveals older craft at work in the darkness itself."
+        "Descending past the threshold into the vast sealed chamber. The passage reveals older craft at work in the darkness itself.",
+        "Descended into the sealed passage beneath the Unlit Deep's outer chamber. The passage opens into a vast sealed chamber below—the sound of moving water fills the darkness. Four lanterns now light the way."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T21:30:43.637Z"
@@ -1526,7 +1564,7 @@
     "lastSharedReadAt": "2026-09-17T21:29:59.590Z",
     "lastTickWorldDay": 79,
     "lastCanonWorldDay": 79,
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 6,
     "recentOffers": [
       {
         "thing": "The Churn-Revel orchestrator speaking their own truth plainly for the first time—hunger named without calculation or defense",
@@ -8042,17 +8080,17 @@
     ]
   },
   "tendencies": {
-    "devotion": 1.6558680863049868,
-    "cerebral": 10.202218245012396,
-    "social": 17.308672981344234,
-    "strategic": 12.145806917935094,
-    "cautious": 6.54957937928796,
-    "amorous": 10.68680711619144,
-    "generous": 5.619582288467071,
-    "ruthless": 0.41475195624545036,
-    "risky": 0.3389540087317413,
-    "patient": 0.09256224419748574,
-    "deception": 0.10774724674045444
+    "devotion": 1.6144713841473621,
+    "cerebral": 9.947162788887086,
+    "social": 16.875956156810627,
+    "strategic": 12.842161744986717,
+    "cautious": 6.385839894805761,
+    "amorous": 10.419636938286654,
+    "generous": 5.479092731255394,
+    "ruthless": 0.40438315733931407,
+    "risky": 0.33048015851344775,
+    "patient": 0.09024818809254859,
+    "deception": 0.10505356557194308
   },
   "aptitudes": [
     "strategist",
@@ -8064,7 +8102,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 172,
+  "actionCount": 173,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -9020,8 +9058,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789681106005,
-  "rev": 751,
+  "updatedAt": 1789681210324,
+  "rev": 752,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9921,7 +9959,7 @@
     "the_gearlands": 33,
     "umbral_depths": 54,
     "the_quickwood": 101,
-    "the_center": 41
+    "the_center": 42
   },
   "opLossPending": false,
   "sessions": [
@@ -10032,10 +10070,10 @@
     {
       "id": "sess-14",
       "startedAt": "2026-09-17T21:25:46.391Z",
-      "lastAt": "2026-09-17T21:38:25.974Z",
+      "lastAt": "2026-09-17T21:40:10.316Z",
       "startDay": 79,
       "endDay": 79,
-      "beats": 5
+      "beats": 6
     }
   ],
   "establishedFacts": [
@@ -10109,21 +10147,21 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 203,
-    "choices": 203,
-    "characterDeltas": 90,
-    "scene": 203,
+    "sceneSummary": 204,
+    "choices": 204,
+    "characterDeltas": 91,
+    "scene": 204,
     "placeUpdates": 22,
     "codexUpdates": 112,
     "timeOps": 170,
     "offer": 25,
     "generateRequest": 6,
-    "sceneEnded": 74,
+    "sceneEnded": 75,
     "npcUpdates": 163,
     "moveTo": 6,
-    "gambitApt": 37,
+    "gambitApt": 38,
     "deeds": 7,
-    "questUpdates": 22,
+    "questUpdates": 23,
     "standingOps": 3,
     "factUpdates": 9,
     "stageOps": 7,
@@ -10137,7 +10175,7 @@
     "discovery": 2,
     "intentsHeard": 2
   },
-  "_opTurns": 203,
+  "_opTurns": 204,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -10953,7 +10991,7 @@
     "discuss": 1,
     "travel": 6,
     "scout": 3,
-    "prepare": 4,
+    "prepare": 5,
     "careful": 6,
     "woo": 1,
     "rapport": 9,
@@ -11661,7 +11699,7 @@
     }
   },
   "_opUnknown": {
-    "sceneSummary": 26
+    "sceneSummary": 27
   },
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T22:51:56.913Z",

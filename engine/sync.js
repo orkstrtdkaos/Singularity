@@ -8,6 +8,11 @@
 // (b) APPEND-ONLY ledger files, retried on SHA conflict with a fresh read.
 // Region state is written by the world-tick only. Nobody edits shared files in place.
 
+// ⛔ CCODE-394: THE ONE IMPORT THIS FILE HAS, and it is here rather than injected on purpose — a guard the app has to remember to
+// install is a guard that will one day not be installed (the four doors, every time). `build.js` is a leaf: a version constant and a
+// fetch that answers "not stale" whenever it cannot ask.
+import { staleBuild } from "./build.js";
+
 const API = "https://api.github.com";
 const GH_TIMEOUT_MS = 12000; // SNG-115: per-request deadline — a stalled GitHub write must never hang the caller forever
 const GH_UPLOAD_MS_PER_MB = 20000; // SNG-552: …plus this much per MB of request body — see deadlineFor
@@ -116,7 +121,17 @@ async function ghErrorText(res) {
   } catch { return ""; }
 }
 
+/** ⛔ CCODE-394 — A TAB RUNNING AN OLD BUILD DOES NOT WRITE. Both write paths pass through here, so nothing can write around it.
+ *  The refusal is a THROW: every caller already treats a failed push as "not written" and retries or reports, which is exactly the
+ *  outcome wanted — the write happens again on the player's next action, with the new code. `engine/build.js` tells the app, which
+ *  reloads at a safe moment. ⚠️ An unreachable `version.json` is not a verdict: `staleBuild` answers false and the write proceeds. */
+async function refuseIfStale(path) {
+  const s = await staleBuild();
+  if (s.stale) throw new Error(`GH_STALE_BUILD_${path}: this tab runs ${s.running} and ${s.deployed} is deployed — it must reload before it writes`);
+}
+
 async function ghPut(path, contentStr, message, sha = null) {
+  await refuseIfStale(path);
   const { owner, repo, pat } = getSyncConfig();
   const body = { message, content: btoa(unescape(encodeURIComponent(contentStr))) };
   if (sha) body.sha = sha;
@@ -144,6 +159,7 @@ async function ghPut(path, contentStr, message, sha = null) {
  *  discard whatever landed in the gap, which is the same clobber SNG-549 spent a day undoing. Never force this.
  */
 async function ghPutViaGitData(path, contentStr, message) {
+  await refuseIfStale(path);   // CCODE-394: the fallback write is a write
   const { owner, repo, pat } = getSyncConfig();
   const base = `${API}/repos/${owner}/${repo}`;
   const h = { authorization: `Bearer ${pat}`, accept: "application/vnd.github+json", "content-type": "application/json" };

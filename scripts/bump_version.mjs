@@ -72,5 +72,12 @@ writeFileSync(INDEX, idxSrc.replace(/\?v=[0-9.]+/g, `?v=${next}`), "utf8");
 const VERSION_MOD = join(root, "engine", "version.js");
 writeFileSync(VERSION_MOD, read(VERSION_MOD).replace(/export const APP_VERSION = "[^"]+"/, `export const APP_VERSION = "${next}"`), "utf8");
 
-console.log(`${now} → ${next}   (app.js + engine/version.js + ${stamps.length} cache stamp${stamps.length === 1 ? "" : "s"} in index.html)`);
+// ⛔ CCODE-394 (Erik: "any browser running the game would have an auto reload on next action… minimize the risk of having an old
+// version written") — AND THE FOURTH FILE, the only one a RUNNING TAB can read: `version.json`. A tab knows its own build from
+// `engine/version.js`, baked in when it loaded; it cannot know what is deployed without asking, and this is what it asks.
+// ⚠️ Written by the bump and nowhere else, so it cannot drift from the three files above.
+const BUILD_JSON = join(root, "version.json");
+writeFileSync(BUILD_JSON, `${JSON.stringify({ version: next, at: new Date().toISOString().slice(0, 10) }, null, 2)}\n`, "utf8");
+
+console.log(`${now} → ${next}   (app.js + engine/version.js + version.json + ${stamps.length} cache stamp${stamps.length === 1 ? "" : "s"} in index.html)`);
 console.log(`  run: node scripts/module_map.mjs   (it re-pins the ${stamps.length > 1 ? "import map" : "modules"} and fails if the three disagree)`);

@@ -19386,9 +19386,11 @@ console.log("\n── §271 · a shared file's merge never reads blind ──");
     for (let i = 0; i < 40; i++) big.fates[`legend_${i}`] = { status: "wounded", atWorldDay: 70 + (i % 5), woundedBy: "someone", note: "x".repeat(40) };
     remote.files.set(P, { content: JSON.stringify(big), sha: "sha-big" });
     remote.state.hideShaAboveBytes = 1000;   // the megabyte line, moved to where a test can cross it
+    // ⚠️ CCODE-394: RECORD THE URL WITH THE MODE. This collected every GET in the window and asserted they were all `no-cache`, so the
+    // build check's own ask (`version.json`, `no-store` — stronger, and not a read the merge rests on) failed a gate about merges.
     const seenCache = [];
     const inner = globalThis.fetch;
-    globalThis.fetch = async (url, opts = {}) => { if (!opts.method || opts.method === "GET") seenCache.push(opts.cache || null); return inner(url, opts); };
+    globalThis.fetch = async (url, opts = {}) => { if (!opts.method || opts.method === "GET") seenCache.push({ url: String(url), cache: opts.cache || null }); return inner(url, opts); };
     let wrote;
     try { wrote = await S271.pushMergedFile(P, (r) => ({ ...(r || {}), fates: { ...(r?.fates || {}), fresh_one: { status: "dead", atWorldDay: 80 } } }), "t"); }
     finally { globalThis.fetch = inner; }
@@ -19396,8 +19398,12 @@ console.log("\n── §271 · a shared file's merge never reads blind ──");
     check("§271: ⛔ OVER THE LINE, A MERGE STILL READS THE REAL FILE — all forty fates kept, the new one added, nothing written over",
       !!wrote && Object.keys(after?.fates || {}).length === 41 && after.fates.legend_7?.woundedBy === "someone" && after.fates.fresh_one?.status === "dead",
       `${Object.keys(after?.fates || {}).length} fates after`);
+    const mergeReads271 = seenCache.filter(r => /api\.github\.com/.test(r.url));
+    const buildAsk271 = seenCache.filter(r => /version\.json/.test(r.url));
     check("§271: …and every read a merge rests on revalidates rather than trusting a cached answer",
-      seenCache.length > 0 && seenCache.every(c => c === "no-cache"), JSON.stringify(seenCache));
+      mergeReads271.length > 0 && mergeReads271.every(r => r.cache === "no-cache")
+      && buildAsk271.every(r => r.cache === "no-store"),   // CCODE-394's ask rides along and is stronger still
+      JSON.stringify(seenCache.map(r => `${r.url.slice(-28)}:${r.cache}`)));
 
     remote.state.hideShaAboveBytes = 0;
     remote.files.set(P, { content: "{ this is not json", sha: "sha-broken" });
@@ -19883,6 +19889,89 @@ console.log("\n── §276 · a placeholder arc is a debt, a lived one is not, 
     /const debt = arcDebtOf\(c\);/.test(A276) && /if \(debt\.owed && getApiKey\(\) && \(Number\(c\._arcRetries\) \|\| 0\) < 3\)/.test(A276)
     && /enrichPersonalArc\(c\);/.test(A276) && !/contentGenerator[\s\S]{0,200}arcDebtOf/.test(A276)
     && /if \(!char \|\| !getApiKey\(\)\) return;/.test(A276));
+}
+
+// ⛔ CCODE-394 — Erik, 2026-09-17: "instead of requiring a manual reload before some of these updates take effect… is there any way to
+// make it so that any browser running the game would have an auto reload on next action? would that minimize the risk of having an old
+// version written?" ⚑ IT WOULD, AND THE HAZARD IS ONE THIS PROJECT HAS BEEN BITTEN BY TWICE: the shared region file overwritten by a tab
+// still running the old code (PLAN 2026-09-16: "Every device must reload"), and SNG-549's day spent undoing three pushes that carried
+// LOWER revs than the copy they landed on. A player cannot know which of their devices is current; the build can ask, and refuse.
+console.log("\n── §277 · a tab running an old build does not write to the world ──");
+{
+  const BD = await import("../engine/build.js");
+  const SY277 = await import("../engine/sync.js");
+  const { fakeRemote: fr277 } = await import("./lib/fake_remote.mjs");
+  const { APP_VERSION: V277 } = await import("../engine/version.js");
+
+  check("§277: ⛔ NEWER IS COMPARED AS NUMBERS — 2.0.10 is newer than 2.0.9, which a string compare gets wrong; equal is not newer, older is not newer, and nothing unparseable is",
+    BD.isNewerBuild("2.0.10", "2.0.9") && BD.isNewerBuild("2.1.0", "2.0.54") && BD.isNewerBuild("2.0.55", "2.0.54")
+    && !BD.isNewerBuild("2.0.54", "2.0.54") && !BD.isNewerBuild("2.0.53", "2.0.54")
+    && !BD.isNewerBuild("dev", "2.0.54") && !BD.isNewerBuild(null, "2.0.54") && !BD.isNewerBuild("2.0.55", "") && !BD.isNewerBuild(undefined, undefined));
+
+  // the ask itself: cache-proof by construction, and never a verdict when it cannot be made
+  const asked = [];
+  const answer = (v) => async (url, opts) => { asked.push({ url: String(url), opts }); return { ok: true, json: async () => ({ version: v }) }; };
+  const got277 = await BD.deployedBuild({ fetchImpl: answer("9.9.9"), force: true });
+  const bad277 = await BD.deployedBuild({ fetchImpl: async () => ({ ok: false, status: 404, json: async () => ({}) }), force: true });
+  const threw277 = await BD.deployedBuild({ fetchImpl: async () => { throw new Error("offline"); }, force: true });
+  const shapeless277 = await BD.deployedBuild({ fetchImpl: async () => ({ ok: true, json: async () => ({ notAVersion: 1 }) }), force: true });
+  check("§277: ⛔ …AND THE ASK READS PAST THE CACHE THAT IS SERVING THE OLD CODE — a stamped query and `no-store` — while an unreachable, refused or shapeless answer is NOT a verdict: the game plays on",
+    got277 === "9.9.9" && /^version\.json\?t=\d+$/.test(asked[0].url) && asked[0].opts?.cache === "no-store"
+    && bad277 === null && threw277 === null && shapeless277 === null,
+    `${asked[0]?.url} · ${JSON.stringify(asked[0]?.opts)}`);
+
+  let told277 = null;
+  const off277 = BD.onStaleBuild(info => { told277 = info; });
+  const stale277 = await BD.staleBuild({ fetchImpl: answer("99.0.0"), force: true });
+  const rolled277 = await BD.staleBuild({ fetchImpl: answer("0.0.1"), force: true });
+  const same277 = await BD.staleBuild({ fetchImpl: answer(V277), force: true });
+  off277();
+  check("§277: ⛔ …a NEWER deployed build is stale and the app is told; a ROLLBACK is not (or every open tab would reload in a loop), and the same build is not",
+    stale277.stale && stale277.running === V277 && stale277.deployed === "99.0.0" && told277?.deployed === "99.0.0"
+    && rolled277.stale === false && same277.stale === false, JSON.stringify(stale277));
+
+  // ⛔ THE REFUSAL, THROUGH THE REAL WRITE PATH — the one chokepoint both writes pass
+  const remote277 = fr277();
+  const restore277 = remote277.install();
+  try {
+    // ⛑ THE CONTROL FIRST, because what this tab remembers is steered the way the game steers it — by asking. The line above left the
+    // memory holding the running build, so a write now is a write from a current tab.
+    const wrote = await SY277.pushMergedFile("world/regions/valley.json", () => ({ schemaVersion: 1, regionId: "valley" }), "a write from a current tab");
+    check("§277: ⛑ …and the control — a current tab writes exactly as it always did",
+      !!wrote && remote277.state.puts === 1 && !!remote277.read("world/regions/valley.json"), `puts ${remote277.state.puts}`);
+    await BD.deployedBuild({ fetchImpl: answer("99.0.0"), force: true });   // and now this tab knows a newer build is out
+    let refused = null;
+    try { await SY277.pushMergedFile("world/regions/valley.json", () => ({ schemaVersion: 1, regionId: "valley" }), "a write from a stale tab"); }
+    catch (e) { refused = e; }
+    const putsWhileStale = remote277.state.puts;
+    let refusedOwned = null;
+    try { await SY277.pushOwnedFile("characters/p/c.json", { id: "c" }, "a save from a stale tab"); } catch (e) { refusedOwned = e; }
+    check("§277: ⛔ A STALE TAB DOES NOT WRITE — the shared merge and the owned save both refuse before the request, and NOTHING is PUT beyond the one the current tab made",
+      /GH_STALE_BUILD/.test(String(refused?.message)) && /GH_STALE_BUILD/.test(String(refusedOwned?.message))
+      && putsWhileStale === 1 && remote277.state.puts === 1, `${String(refused?.message).slice(0, 90)} · puts ${remote277.state.puts}`);
+  } finally {
+    restore277();
+    // and leave nothing remembered for the suites that follow: ask again, as the game would, and get no answer
+    await BD.deployedBuild({ fetchImpl: async () => { throw new Error("done"); }, force: true });
+  }
+
+  // the file a running tab reads, written by the bump and nowhere else
+  const vj277 = JSON.parse(rd("version.json"));
+  check("§277: ⛔ `version.json` IS WRITTEN BY THE BUMP AND AGREES WITH THE CODE — the deployed answer cannot drift from the build it describes",
+    vj277.version === V277 && /^\d{4}-\d{2}-\d{2}$/.test(String(vj277.at))
+    && /writeFileSync\(BUILD_JSON, `\$\{JSON\.stringify\(\{ version: next, at:/.test(rd("scripts/bump_version.mjs")),
+    `version.json ${vj277.version} · code ${V277}`);
+
+  const A277 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§277: ⛔ …AND THE TAB COMES BACK CURRENT BY ITSELF — armed at boot, told by the refusal, asked again on a cadence; it waits for the turn and the encounter to clear, and reloads through a FRESH URL so the old code is not served again",
+    /armBuildWatch\(\);   \/\/ ⛔ CCODE-394/.test(A277) && /onStaleBuild\(reloadForNewBuild\);/.test(A277)
+    && /setInterval\(ask, Math\.max\(60000, BUILD_CHECK_MS \* 15\)\);/.test(A277)
+    && /if \(busy \|\| activeEnc\(\)\) \{ setTimeout\(go, 1500\); return; \}/.test(A277)
+    && /location\.replace\(`\$\{location\.pathname\}\?v=\$\{encodeURIComponent\(_newBuild\)\}`\)/.test(A277)
+    // ⛔ and ONCE PER BUILD: verified in the browser that a stale tab reloads in about eight seconds, so a `version.json` sitting
+    // AHEAD of the code it names would reload every tab forever. One per deployed version, remembered for the session.
+    && /sessionStorage\.getItem\(key\) === v\) \{ console\.log\(`\[build\] already reloaded for/.test(A277)
+    && /if \(v\) sessionStorage\.setItem\(key, v\);/.test(A277));
 }
 
 /* ══════════ REPORT ══════════ */

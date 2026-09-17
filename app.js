@@ -76,6 +76,7 @@ import { unitsOf, unitLine, poolRows, atSideRows, wherePerson, canBringForward, 
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, suggestForCreation, archetypeFamilies, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
 import { toolkitForGM } from "./engine/toolkit.js";
 import { fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc, arcDebtOf } from "./engine/personalArc.js";   // CCODE-393: a fallback arc is a debt
+import { staleBuild, onStaleBuild, BUILD_CHECK_MS } from "./engine/build.js";   // CCODE-394: a tab running an old build does not write to the world
 import { assembleGMContext } from "./engine/gm_registry.js"; // BATCH-11 §23: the GM context is a DECLARED registry, iterated — never hand-listed
 import { rankVoices, pickVoice, speakableText, chunkForSpeech, renderProseHtml } from "./engine/narration_voice.js"; // SNG-155: read aloud at the table; SNG-190 §4: render engine asides, never raw asterisks
 import { harmGateFor, harmTargetFor, departureGateFor, isConsequentialMove, isSpeechAct, isRemoteContact, personDestination, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop); SNG-188: speech-act guard; SNG-228: person-as-place guard; CCODE-158: one departure definition for both doors; CCODE-159: remote contact is not travel
@@ -156,7 +157,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.54";
+const APP_VERSION = "2.0.55";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -859,6 +860,7 @@ const RECIPES_PATH = "world/braid_recipes.json"; // SNG-201: a NEW shared store 
   // called, so the capture stays null and inert (§3.4: no dev path the normal turn can reach).
   try { if (isDevMode()) { armDevCapture(true); setCallObserver(recordCall); } } catch { /* ignore */ }
   wireLightbox(); // SNG-053: click any image → larger view
+  armBuildWatch();   // ⛔ CCODE-394: a newer build is out → this tab reloads rather than writing with old code
   try {
     CONTENT = await loadContent();
     applyDevDials();   // SNG-263 r4: dev-only live balance overrides, applied over the loaded content
@@ -5531,6 +5533,47 @@ function publishPartyBeat(label, degree, summary) {
 /** World-tick choke point: run whenever the character (re)enters play or the
  *  clock jumps. Returns fresh news to show the player once. */
 let _projectNews = [];
+// ---------- ⛔ CCODE-394: A NEWER BUILD IS OUT, SO THIS TAB RELOADS ----------
+// Erik: "any browser running the game would have an auto reload on next action… would that minimize the risk of having an old version
+// written?" It would, and `engine/sync.js` refuses the write outright — this is the other half: the tab comes back current by itself.
+let _newBuild = null;   // the build that is out there, once we know
+
+/** ⛔ RELOAD, BUT NEVER MID-TURN. A reload during a GM call loses the beat the player is waiting on, and during an encounter it drops
+ *  the surface they are standing in — so it waits for both to clear. Nothing else is lost: the save is written continuously to local
+ *  storage and the scene resumes where it was. ⚠️ THROUGH A FRESH URL, because the point is to stop being served the old code: a bare
+ *  `reload()` can come back from the same cache that handed this tab its stale modules. */
+function reloadForNewBuild(info) {
+  if (_newBuild) return;                                  // already on its way
+  // ⛔ ONCE PER BUILD, AND THAT IS NOT A DETAIL. Verified in the browser: a tab told a newer build is out reloads in about eight
+  // seconds — so if `version.json` ever sits AHEAD of the code it names (committed without its build, or a cache serving the new
+  // stamp beside the old modules), an unguarded tab reloads forever. One reload per deployed version, remembered for the session:
+  // a real deploy gets its reload, a stamp that lies gets exactly one and then says so.
+  const v = String(info?.deployed || "");
+  try {
+    const key = "singularity.buildReloadedFor";
+    if (v && sessionStorage.getItem(key) === v) { console.log(`[build] already reloaded for ${v} and this tab still runs ${APP_VERSION} — the stamp is ahead of the code; not reloading again`); return; }
+    if (v) sessionStorage.setItem(key, v);
+  } catch { /* no sessionStorage: one reload is still better than none */ }
+  _newBuild = info?.deployed || "a newer build";
+  const said = `A newer build is out (v${_newBuild}) — reloading, so nothing of yours is written by the old one.`;
+  try { if (character) renderPlay(character.activeScene?.lastTurn || null, { aside: said }); else console.log(`[build] ${said}`); } catch { /* the reload matters, the notice does not */ }
+  const go = () => {
+    try { if (busy || activeEnc()) { setTimeout(go, 1500); return; } } catch { /* if we cannot tell, go */ }
+    try { location.replace(`${location.pathname}?v=${encodeURIComponent(_newBuild)}`); } catch { location.reload(); }
+  };
+  setTimeout(go, 1200);
+}
+
+/** The watch: told by the write guard the moment a write is refused, and asking on its own while the tab sits open. */
+function armBuildWatch() {
+  try {
+    onStaleBuild(reloadForNewBuild);
+    const ask = () => { staleBuild().then(s => { if (s.stale) reloadForNewBuild(s); }).catch(() => { /* never a verdict */ }); };
+    setInterval(ask, Math.max(60000, BUILD_CHECK_MS * 15));   // quietly, about every five minutes
+    setTimeout(ask, 8000);                                     // and once shortly after the load, for a tab left open overnight
+  } catch { /* a browser without intervals plays exactly as before */ }
+}
+
 async function maybeTick() {
   const currentDay = readClock(character.clock).day;
   // ⛔ CCODE-239 — BANKED WORK ADVANCES WITH THE DAYS, at the one choke point the clock passes through.

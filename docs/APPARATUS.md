@@ -10,7 +10,7 @@ node scripts/apparatus.mjs --md     # …as markdown for §5
 node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 ```
 
-**Last measured: 2026-09-17 · v2.0.58 · 105 files.**
+**Last measured: 2026-09-17 · v2.0.59 · 105 files.**
 
 ---
 

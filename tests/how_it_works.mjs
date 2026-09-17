@@ -19976,15 +19976,19 @@ console.log("\n── §277 · a tab running an old build does not write to the 
   // So a quiet check OFFERS, and the forced reload is kept for the one moment it is not a nuisance: a write the guard refused, where the
   // save cannot go up until the tab reloads. ⚠️ The cadence therefore asks `deployedBuild` for itself rather than going through
   // `staleBuild`, which is what tells sync's listeners — a quiet check finding a new build must not reload anybody.
-  check("§277: ⛔ …AND THE RELOAD IS THE PLAYER'S, except when a write was refused — the banner says what waiting costs, 'Reload now' takes it, 'Not yet' keeps playing, and only the refusal forces it",
+  check("§277: ⛔ …AND THE RELOAD IS ALWAYS THE PLAYER'S (CCODE-399) — the banner says what waiting costs, on the play screen and on the roster; 'Reload now' takes it, 'Not yet' keeps playing, and NOTHING forces it, because almost no write is a player's action",
     /id="build-reload">Reload now<\/button>/.test(A277) && /id="build-later">Not yet<\/button>/.test(A277)
     && /nothing it writes will go up<\/strong> until it reloads/.test(A277)
     && /buildGo\.onclick = \(\) => \{ const v = _buildOffer; _buildOffer = null; reloadForNewBuild\(\{ deployed: v \}\); \};/.test(A277)
     && /main \+= newBuildBannerHtml\(\);/.test(A277)
     && /deployedBuild\(\)\.then\(v => \{ if \(v && isNewerBuild\(v, runningBuild\(\)\)\) offerNewBuild/.test(A277)
-    && !/staleBuild\(\)\.then/.test(A277));
+    && !/staleBuild\(\)\.then/.test(A277)
+    // ⛔ CCODE-399: the refusal OFFERS as well. Erik was reloaded mid-scene by a background backup sixty seconds after a tick wrote
+    // his save — "I was in the middle of reading" — and a refused write is almost never the player's own action.
+    && /onStaleBuild\(offerNewBuild\);/.test(A277) && !/onStaleBuild\(reloadForNewBuild\)/.test(A277)
+    && /\$\{newBuildBannerHtml\(\)\}[\s\S]{0,40}<div class="roster-head">/.test(A277));
   check("§277: ⛔ …AND THE TAB COMES BACK CURRENT BY ITSELF — armed at boot, told by the refusal, asked again on a cadence; it waits for the turn and the encounter to clear, and reloads through a FRESH URL so the old code is not served again",
-    /armBuildWatch\(\);   \/\/ ⛔ CCODE-394/.test(A277) && /onStaleBuild\(reloadForNewBuild\);/.test(A277)
+    /armBuildWatch\(\);   \/\/ ⛔ CCODE-394/.test(A277) && /onStaleBuild\(offerNewBuild\);/.test(A277)
     && /setInterval\(ask, Math\.max\(60000, BUILD_CHECK_MS \* 15\)\);/.test(A277)
     && /if \(busy \|\| activeEnc\(\)\) \{ setTimeout\(go, 1500\); return; \}/.test(A277)
     && /location\.replace\(`\$\{location\.pathname\}\?v=\$\{encodeURIComponent\(_newBuild\)\}`\)/.test(A277)

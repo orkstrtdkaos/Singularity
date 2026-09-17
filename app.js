@@ -3867,6 +3867,7 @@ function renderRoster() {
   // Guarded by a once-per-session flag so "Back" from discovery lands on the roster without bouncing.
   if (chars.length === 0 && syncEnabled() && !_discoverAutoRan) { _discoverAutoRan = true; renderDiscoverCharacters({ playerKey: profile.playerKey, displayName: profile.displayName || profile.playerKey, profile: null }); return; }
   chrome(`<div class="screen">
+    ${newBuildBannerHtml()}
     <div class="roster-head"><h2>Your Characters</h2>
       <span class="roster-player">Playing as <strong>${esc(profile.displayName || profile.playerKey)}</strong> <button class="link-btn" id="switch-player">switch</button></span></div>
     ${chars.length === 0 ? `<p class="hint" style="margin-bottom:14px">No characters on this device yet. ${syncEnabled() ? "Find the ones you've played elsewhere, or make a new one." : "Make one — or set up sync in Settings to bring in characters from another device."}</p>` : ""}
@@ -3895,6 +3896,11 @@ function renderRoster() {
     </div>
     ${othersHere > 0 ? `<p class="hint" style="margin-top:12px">${othersHere} more character${othersHere === 1 ? "" : "s"} on this device belong${othersHere === 1 ? "s" : ""} to other players — <button class="link-btn" id="switch-player-2">switch player</button></p>` : ""}
   </div>`, { hero: true });   // ⛔ SNG-585: the roster IS the title page — the one screen a player sees before a world exists
+  // ⛔ CCODE-399: the roster carries the offer too — it is the screen a player lands on, and the one where the refusal is explained
+  const rosterBuild = document.getElementById("build-reload");
+  if (rosterBuild) rosterBuild.onclick = () => { const v = _buildOffer; _buildOffer = null; reloadForNewBuild({ deployed: v }); };
+  const rosterLater = document.getElementById("build-later");
+  if (rosterLater) rosterLater.onclick = () => { _buildOffer = null; renderRoster(); };
   const discBtn = document.getElementById("discover-chars");
   if (discBtn) discBtn.onclick = () => renderDiscover();
   for (const id of ["switch-player", "switch-player-2"]) { const sw = document.getElementById(id); if (sw) sw.onclick = () => renderPlayerPick(); }
@@ -5665,7 +5671,15 @@ function newBuildBannerHtml() {
 /** The watch: told by the write guard the moment a write is refused, and asking on its own while the tab sits open. */
 function armBuildWatch() {
   try {
-    onStaleBuild(reloadForNewBuild);   // a REFUSED write reloads: the save cannot go up until it does
+    // ⛔ CCODE-399 — ERIK, MID-SCENE, ON THE FORCED PATH: "2.0.58 landed and it reloaded the game… I was in the middle of reading. I
+    // thought I'd have a button… if it was due to a save, why was a save being sent up when I hadn't taken an action worth saving?"
+    // ⚑ HE IS RIGHT AND MY REASONING WAS WRONG. I kept the forced reload for a REFUSED WRITE on the argument that the player's own
+    // action had just failed — but almost no write is a player's action: `saveCharacter` queues a push sixty seconds later, and the
+    // tick that runs when a tab OPENS is enough to write. So a man reading was reloaded by a background backup.
+    // ⛑ NOTHING FORCES NOW. The refusal offers, exactly as the quiet check does, and the save-status line already says why it is not
+    // going up ("this tab runs 2.0.57 and 2.0.58 is deployed — it must reload before it writes"). Nothing is lost while he waits: the
+    // save is written locally, the guard protects the copy in the cloud, and the push happens after the reload.
+    onStaleBuild(offerNewBuild);
     // ⚠️ THE CADENCE ASKS FOR ITSELF rather than through `staleBuild`, because that is what tells `sync.js`'s listeners — and a quiet
     // check finding a new build is not a refused write and must not reload anybody.
     const ask = () => {

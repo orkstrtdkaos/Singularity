@@ -157,7 +157,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.55";
+const APP_VERSION = "2.0.56";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -383,7 +383,8 @@ function showStandingHere(communityId) {
 // SNG-299 — everything the lookup is allowed to know, gathered once.
 function whoIsCtx() {
   const ws = character?.worldState || {};
-  return { ws, content: CONTENT, character, roster: worldRoster(ws, CONTENT) };
+  // CCODE-395: `faced` is what a creature's card rests on — this character's own encounter records, and nothing else
+  return { ws, content: CONTENT, character, roster: worldRoster(ws, CONTENT), faced: creaturesFaced() };
 }
 
 /** The popup itself. Deliberately shaped like the roll breakdown: what it is, what is known, and a way
@@ -459,6 +460,11 @@ function showMergePicker(fromId) {
   };
 }
 
+/** ⛔ CCODE-395: the creatures this character's OWN encounter records show them facing — the only record of it there is. */
+function creaturesFaced() {
+  return [...new Set(Object.values(character?.customEncounters || {}).map(d => d?.creatureId).filter(Boolean))];
+}
+
 function showWhoIs(known) {
   document.getElementById("help-pop")?.remove();
   const pop = document.createElement("div");
@@ -515,6 +521,21 @@ function showWhoIs(known) {
       // tick digest, so this card is their entire presence.
       if (url) whoPortrait = `<img class="whois-portrait" src="${esc(url)}" alt="${esc(known.label)}" data-lightbox="figure" data-regen-kind="figure" data-regen-subject="${esc(artSeed)}" loading="lazy" title="Open it — and draw them again if this is not them" style="width:100%; max-height:240px; object-fit:cover; object-position:center 18%; border-radius:6px; margin-bottom:8px; cursor:zoom-in">`;
     }
+    // ⛔ CCODE-395: and the three new kinds get the picture their own record already draws — a place its authored look (CCODE-391), a
+    // creature its bestiary look, a thing its own description. Same seeds as everywhere else, so the card and the banner agree.
+    if (!whoPortrait && (known.kind === "place" || known.kind === "creature" || known.kind === "thing")) {
+      const rec = known.kind === "place" ? (() => { const l = CONTENT.locations?.[known.id]; return l ? { id: l.id, name: l.name, appearance: l.appearance, descriptionSeed: l.descriptionSeed, encounterFlavor: l.encounterFlavor } : null; })()
+        : known.kind === "creature" ? ((CONTENT.bestiary?.roster) || (Array.isArray(CONTENT.bestiary) ? CONTENT.bestiary : [])).find(b => b?.id === known.id) || null
+        : (character?.inventory || []).find(x => x && (x.customName === known.label || x.name === known.label)) || null;
+      const kind = known.kind === "place" ? "location" : known.kind === "creature" ? "beast" : "item";
+      // ⚠️ NO SEED OF ITS OWN. The record's own id is the seed everywhere else this subject is drawn, so the card shows the SAME
+      // picture as the place's banner, the creature's frame and the item's tile rather than a second one of the same thing.
+      // ⛔ AND IT CARRIES ITS PROVENANCE (CCODE-169: "a face you cannot redraw is the whole complaint") — the three kinds are already
+      // in `REGEN_KINDS`, so Draw-again works from this card with no new plumbing; the subject is the id each one's `find` resolves.
+      const subject = known.kind === "thing" ? (rec?.customName || rec?.name || known.label) : (known.id || known.label);
+      const url = rec ? ensureImage({ ...rec }, kind, { ratingLevel: viewerRatingLevel(), isMinor: false }) : null;
+      if (url) whoPortrait = `<img class="whois-portrait" src="${esc(url)}" alt="${esc(known.label)}" data-lightbox="${esc(known.kind)}" data-regen-kind="${esc(kind)}" data-regen-subject="${esc(subject)}" loading="lazy">`;
+    }
   } catch { /* a face is never worth breaking the card for */ }
   pop.innerHTML = `<div class="help-card" role="dialog" aria-label="${esc(known.label)}" style="max-height:min(86vh,760px); display:flex; flex-direction:column; overflow:hidden">
     <div class="whois-head" style="flex:0 0 auto">${esc(known.label)} <span class="hint">· ${esc(known.kind)}</span></div>
@@ -561,6 +582,14 @@ function linkifyKnown(root) {
       // Sorel earned a CODEX TOPIC and Teva did not, and the registry — the actual record of who you know
       // — was never a source here at all. 51 of the 110 people across the live saves were unclickable.
       npcs: Object.entries(character.npcRegistry || {}).map(([id, n]) => ({ ...n, id })),
+      // ⛔ CCODE-395 (Erik's §3) — THE THREE KINDS THAT HAD NO SOURCE. A place, a creature and a thing could never be asked about:
+      // `Pressureholt`, `Harmonic Heights — Lower Terrace` and `The Service Ways` are names the world put in his own news.
+      // ⚠️ Places are offered from the whole corpus BECAUSE THE MATCH IS THE EVIDENCE: a name only links where the prose in front of
+      // the player already says it, and the card then answers only what the record holds — and says plainly whether they have been.
+      // Creatures are the ones their OWN encounters recorded them facing; things are what they are carrying.
+      places: Object.values(CONTENT.locations || {}).map(l => ({ id: l.id, name: l.name })),
+      creatures: ((CONTENT.bestiary?.roster) || (Array.isArray(CONTENT.bestiary) ? CONTENT.bestiary : [])).map(b => ({ id: b?.id, name: b?.name })),
+      objects: (character.inventory || []).flatMap(it => [{ id: it.customName || it.name, name: it.customName || null }, { id: it.name, name: it.name }]).filter(x => x.name),
     });
   } catch { return; }
   if (!index.length) return;
@@ -17641,7 +17670,12 @@ function renderPlay(turn, opts = {}) {
     const nearOpts367 = { here: CONTENT.locations?.[character?.currentLocationId] || null, locations: CONTENT.locations || {} };
     const chip367 = (nm) => (nm?.near ? `<span class="news-near-chip">${nm.here ? "here" : `near · ${nm.days} ${nm.days === 1 ? "day" : "days"}`}</span>` : "");
     const items = (list) => nearFirst(list, nearOpts367).map(raw => { const n = raw?.kind ? raw : (recovered(raw) || raw); const nm = newsNearness(n, nearOpts367); const nearCls = nm?.near ? " news-near" : ""; return canSee(n)
-      ? `<div class="news-item news-${n.kind === "death" ? "death" : "clash"}${nearCls}"><button class="news-open" data-battlenews="${attrJson({ kind: n.kind, outcome: n.outcome || null, victimId: n.victimId || n.loserId || null, killerId: n.killerId || n.winnerId || null, winnerId: n.winnerId || n.killerId || null, loserId: n.loserId || n.victimId || null, abilityId: n.abilityId || null, locationId: n.locationId || null, regionId: n.regionId || null, arcId: n.arcId || null, worldDay: n.worldDay ?? null })}" title="${n.kind === "death" ? (n.killerId ? "See the fight that ended them" : "See how it ended") : "See this fight"}">${chip367(nm)}◈ ${esc(n.text)} <span class="news-open-cue">${cue(n)}</span></button></div>`
+      // ⛔ CCODE-395 (Erik's §3, measured on his own screenshot) — THE PROSE IS NOT INSIDE THE BUTTON ANY MORE. Every fight line
+      // rendered its whole sentence inside `<button class="news-open">`, and `linkifyKnown` refuses text inside a BUTTON — correctly,
+      // because a link inside a button is invalid HTML and a trap for a thumb. So no name in a fight line could EVER be clicked: *The
+      // Starless One*, *Ateph of the First Flame*, *Harrow*. ⛑ The sentence is a sibling now and the cue is the control, so the line
+      // reads with its names live and the fight is still one tap away.
+      ? `<div class="news-item news-${n.kind === "death" ? "death" : "clash"}${nearCls}">${chip367(nm)}◈ <span class="news-text">${esc(n.text)}</span> <button class="news-open" data-battlenews="${attrJson({ kind: n.kind, outcome: n.outcome || null, victimId: n.victimId || n.loserId || null, killerId: n.killerId || n.winnerId || null, winnerId: n.winnerId || n.killerId || null, loserId: n.loserId || n.victimId || null, abilityId: n.abilityId || null, locationId: n.locationId || null, regionId: n.regionId || null, arcId: n.arcId || null, worldDay: n.worldDay ?? null })}" title="${n.kind === "death" ? (n.killerId ? "See the fight that ended them" : "See how it ended") : "See this fight"}"><span class="news-open-cue">${cue(n)}</span></button></div>`
       : `<div class="news-item${nearCls}">${chip367(nm)}◈ ${esc(n.text)}</div>`; }).join("");
     const body = populated.length > 1
       ? populated.map(s => `<div class="news-section"><div class="news-section-title">${esc(s.title)}</div>${items(bySection.get(s.id))}</div>`).join("")

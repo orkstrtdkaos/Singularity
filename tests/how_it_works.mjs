@@ -19974,6 +19974,77 @@ console.log("\n── §277 · a tab running an old build does not write to the 
     && /if \(v\) sessionStorage\.setItem\(key, v\);/.test(A277));
 }
 
+// ⛔ CCODE-395 — Erik's §3 backlog, in his words: "It should all be added to and pulled from a single source — viewable as a codex, and
+// the popups, etc... as you learn who a person is, but the TRUTH needs to be known and documented somewhere." ⚑ MEASURED FROM HIS OWN
+// SCREENSHOT AND THEN ACROSS THE SAVES: `knownIndex` had sources for people, arcs, codex topics, titles and rungs and NONE for places,
+// creatures or things — of the place names in a player's own news and codex, 6 of 7 were unclickable on Silas's save, 4 of 6 on Loki's,
+// 7 of 8 on Adelheid's. And no name in a FIGHT line could ever be clicked, because the whole sentence rendered inside its button.
+console.log("\n── §278 · a place, a creature and a thing can be asked about ──");
+{
+  const WI = await import("../engine/whois.js");
+  const { loadContentHeadless: lch278 } = await import("./headless_content.mjs");
+  const C278 = await lch278();
+  const L278 = C278.locations;
+  const places278 = Object.values(L278).map(l => ({ id: l.id, name: l.name }));
+  const beasts278 = (C278.bestiary?.roster) || (Array.isArray(C278.bestiary) ? C278.bestiary : []);
+  const walker278 = {
+    id: "c278", name: "A Walker", inventory: [{ name: "Medic's Satchel", description: "A shoulder bag of tinctures and clean linen.", worth: "useful" }],
+    placeMemory: { millbrook: { visits: 5, lastVisit: 14 } }, knownPlaces: ["millbrook"],
+    codex: { topics: { millbrook: { id: "millbrook", entityId: "millbrook", label: "Millbrook", kind: "place", facts: ["you have walked here"] } } },
+    customEncounters: { e1: { id: "e1", name: "A Warpling", creatureId: beasts278[0]?.id } },
+  };
+  const idx278 = WI.knownIndex({ roster: [], arcs: [], codexTopics: walker278.codex.topics, titles: {}, npcs: [],
+    places: places278, creatures: beasts278.map(b => ({ id: b.id, name: b.name })),
+    objects: (walker278.inventory || []).map(it => ({ id: it.name, name: it.name })) });
+  const byName278 = (nm) => idx278.find(e => e.name === nm) || null;
+  const first = byName278("Pressureholt");
+  check("§278: ⛔ THE THREE KINDS THAT HAD NO SOURCE ARE IN THE INDEX — a place, a creature and a thing the character carries; a bare short word still is not a name; and a codex topic still wins its own name",
+    first?.kind === "place" && first.id === "pressureholt" && byName278("Medic's Satchel")?.kind === "thing"
+    && idx278.some(e => e.kind === "creature") && byName278("Millbrook")?.kind === "codex"
+    && !idx278.some(e => !/\s/.test(e.name) && e.name.length < 4),
+    `${idx278.length} names · ${idx278.filter(e => e.kind === "place").length} places · ${idx278.filter(e => e.kind === "creature").length} creatures · ${idx278.filter(e => e.kind === "thing").length} things`);
+
+  const been278 = WI.placeIs("millbrook", { content: C278, character: walker278 });
+  const heard278 = WI.placeIs("pressureholt", { content: C278, character: walker278 });
+  const nowhere278 = WI.placeIs("no_such_place", { content: C278, character: walker278 });
+  const bare278 = WI.placeIs("bare_place", { content: { locations: { bare_place: { id: "bare_place", name: "Bare" } } }, character: {} });
+  check("§278: ⛔ A PLACE ANSWERS FROM THE RECORD AND SAYS WHETHER THEY HAVE BEEN — where it sits, the look Aevi authored, the days they stood in it; a place only heard of says so plainly, and its DANGER is not told to someone who has never been (that is learned by going)",
+    /You have stood in it — last on day 14, 5 times in all\./.test(been278.lines.join(" "))
+    && /A riverside village/.test(been278.lines.join(" ")) && been278.codexId === "millbrook"
+    && /You know of it; you have not been\./.test(heard278.lines.join(" ")) && /In The Gearlands\./.test(heard278.lines[0])
+    && !/country\./.test(heard278.lines.join(" ")) && nowhere278 === null && bare278 === null,
+    JSON.stringify(heard278.lines));
+
+  const beast278 = beasts278[0];
+  const facedCard = WI.creatureIs(beast278.id, { content: C278, faced: [beast278.id] });
+  const unfacedCard = WI.creatureIs(beast278.id, { content: C278, faced: [] });
+  check("§278: ⛔ A CREATURE ANSWERS FROM THE BESTIARY, and 'you have faced one' only when this character's own encounters say so",
+    !!facedCard && /You have faced one\./.test(facedCard.lines.join(" ")) && facedCard.kind === "creature"
+    && !!unfacedCard && !/You have faced one\./.test(unfacedCard.lines.join(" ")) && WI.creatureIs("no_such_beast", { content: C278 }) === null,
+    JSON.stringify(facedCard.lines).slice(0, 140));
+
+  const thing278 = WI.thingIs("Medic's Satchel", { character: walker278 });
+  check("§278: ⛔ A THING ANSWERS FROM WHAT THEY ARE CARRYING — and nothing answers for what they are not",
+    !!thing278 && /A shoulder bag of tinctures/.test(thing278.lines[0]) && /Worth: useful\./.test(thing278.lines.join(" "))
+    && WI.thingIs("A Sword They Do Not Have", { character: walker278 }) === null
+    && WI.whoIs("millbrook", "place", { content: C278, character: walker278 })?.kind === "place"
+    && WI.whoIs(beast278.id, "creature", { content: C278, faced: [beast278.id] })?.kind === "creature"
+    && WI.whoIs("Medic's Satchel", "thing", { character: walker278 })?.kind === "thing",
+    JSON.stringify(thing278.lines));
+
+  const A278 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§278: ⛔ THE APP FEEDS ALL THREE, and a creature's card rests on the character's OWN encounter records",
+    /places: Object\.values\(CONTENT\.locations \|\| \{\}\)\.map\(l => \(\{ id: l\.id, name: l\.name \}\)\),/.test(A278)
+    && /creatures: \(\(CONTENT\.bestiary\?\.roster\)/.test(A278) && /objects: \(character\.inventory \|\| \[\]\)\.flatMap/.test(A278)
+    && /function creaturesFaced\(\) \{[\s\S]{0,200}customEncounters[\s\S]{0,80}creatureId/.test(A278)
+    && /roster: worldRoster\(ws, CONTENT\), faced: creaturesFaced\(\)/.test(A278));
+  check("§278: ⛔ AND A FIGHT LINE'S PROSE IS OUT OF THE BUTTON, so the names in it can be clicked at last — the cue is the control now, and the linker still refuses to write a link inside a button",
+    /◈ <span class="news-text">\$\{esc\(n\.text\)\}<\/span> <button class="news-open"/.test(A278)
+    && /<button class="news-open"[\s\S]{0,700}><span class="news-open-cue">\$\{cue\(n\)\}<\/span><\/button>/.test(A278)
+    && /const SKIP = new Set\(\["BUTTON", "A", "INPUT", "TEXTAREA", "SCRIPT", "STYLE", "SELECT", "OPTION"\]\);/.test(A278)
+    && /\.news-open \{ display: inline;/.test(rd("style.css")));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

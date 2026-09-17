@@ -1604,7 +1604,8 @@ img[data-lightbox] { cursor: zoom-in; }
    extended every time a kind is added is precisely what just broke. The button now carries a plain
    `.news-item`'s own metrics — no padding of its own — so an openable line sits exactly like the lines
    around it and only the cue says there is something behind it. */
-.news-open { display: block; width: 100%; text-align: left; background: none; border: none;
+/* CCODE-395: the sentence is a sibling of this button now (its names must be clickable), so the control sits inline with the line */
+.news-open { display: inline; width: auto; text-align: left; background: none; border: none;
   font: inherit; color: inherit; cursor: pointer; padding: 0; margin: 0; }
 .news-open:hover .news-open-cue,
 .news-open:focus-visible .news-open-cue { opacity: 1; }

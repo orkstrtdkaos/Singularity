@@ -31,7 +31,7 @@ const TIER_MEANING = {
 
 /** Build the lookup index once per render: every name the world can answer for → its id and kind.
  *  Longest names first, so "Neth, Who Has Buried More Than She Has Known" wins over "Neth". */
-export function knownIndex({ roster = [], arcs = [], codexTopics = {}, titles = {}, npcs = [] } = {}) {
+export function knownIndex({ roster = [], arcs = [], codexTopics = {}, titles = {}, npcs = [], places = [], creatures = [], objects = [] } = {}) {
   const entries = [];
   // ⚠️ DEDUPED BY NAME, FIRST SOURCE WINS. The same person legitimately appears in more than one
   // source — a roster figure who also has a codex page, a met NPC who earned one — and two entries with
@@ -89,13 +89,94 @@ export function knownIndex({ roster = [], arcs = [], codexTopics = {}, titles = 
     }
     push(nm, n.id, "npc");
   }
+  // ⛔ CCODE-395 (Erik's §3: "ONE source of truth for every kind of thing… the TRUTH needs to be known and documented somewhere") — AND
+  // THE THREE KINDS THAT HAD NO SOURCE AT ALL. This index answered for people, arcs, codex topics, titles and rungs; a PLACE, a
+  // CREATURE and a THING could never be asked about. ⚑ Measured across the live saves: of the place names that appear in a player's own
+  // news and codex, 6 of 7 were unclickable on Silas's save, 4 of 6 on Loki's, 7 of 8 on Adelheid's — "Pressureholt", "Harmonic
+  // Heights — Lower Terrace", "The Service Ways", "Stillwater's Trouble".
+  //
+  // ⚠️ THE SAME RULE AS EVERY OTHER SOURCE: only what the world recorded and the character HAS. The app passes the places they know,
+  // the creatures their own encounters recorded them facing, and the things they are carrying — never the whole corpus, or the popup
+  // would promise a lookup for a place they have never heard of. People come first above, so a person and a place sharing a name keeps
+  // the person's card.
+  const shortEnough = (nm) => !/\s/.test(nm) && nm.length < 4;
+  for (const p of places) if (p?.name && !shortEnough(p.name)) push(p.name, p.id, "place");
+  for (const c of creatures) if (c?.name && !shortEnough(c.name)) push(c.name, c.id, "creature");
+  for (const o of objects) if (o?.name && !shortEnough(o.name)) push(o.name, o.id, "thing");
   for (const rung of Object.keys(TIER_MEANING)) push(rung, rung, "tier");
   entries.sort((a, b) => b.name.length - a.name.length);
   return entries;
 }
 
+/** A first sentence, for a card that must not be a wall of authored prose. Pure. */
+function firstSentence(v, max = 220) {
+  const t = String(v || "").trim();
+  if (!t) return "";
+  const stop = t.search(/[.!?](\s|$)/);
+  const cut = stop > 0 && stop < max ? t.slice(0, stop + 1) : t.slice(0, max);
+  return cut.length < t.length && !/[.!?]$/.test(cut) ? `${cut.replace(/\s+\S*$/, "")}…` : cut;
+}
+
+const DANGER_WORD = { 5: "deadly country", 4: "deadly country", 3: "perilous country", 2: "dangerous country", 1: "uneasy country" };
+
+/** ⛔ CCODE-395 — WHAT THIS CHARACTER KNOWS ABOUT A PLACE, and nothing else: where it is, whether they have stood in it, what it looks
+ *  like (the authored look CCODE-391 connected), and how dangerous it is — that last only once they have been, because a rung of danger
+ *  is something you learn by going. Null when the world has nothing to say. Pure. */
+export function placeIs(id, { content = {}, character = {} } = {}) {
+  const loc = content.locations?.[id];
+  if (!loc) return null;
+  const lines = [];
+  const region = (content.regions || []).find(r => (r.regionId || r.id) === (loc.regionId || loc.region));
+  const parent = loc.parentId ? content.locations?.[loc.parentId] : null;
+  const where = [parent?.name, region?.name].filter(Boolean)[0];
+  if (where && where !== loc.name) lines.push(`In ${where}.`);
+  // ⚠️ THE RECORD IS `placeMemory`, which `notePlaceVisit` writes on every arrival — `visits` and `lastVisit`. (I reached for a
+  // `placeVisits` that does not exist; the save says otherwise, and the save is the record.)
+  const visit = character?.placeMemory?.[id] || null;
+  const been = Number(visit?.visits) > 0;
+  if (been && visit.lastVisit != null) lines.push(`You have stood in it — last on day ${visit.lastVisit}${Number(visit.visits) > 1 ? `, ${visit.visits} times in all` : ""}.`);
+  else if (been) lines.push("You have stood in it.");
+  else lines.push("You know of it; you have not been.");
+  const look = firstSentence(loc.appearance || loc.descriptionSeed || loc.encounterFlavor);
+  if (look) lines.push(look);
+  const danger = DANGER_WORD[Number(loc.dangerLevel) || 0];
+  if (danger && been) lines.push(danger.charAt(0).toUpperCase() + danger.slice(1) + ".");
+  const topic = Object.values(character?.codex?.topics || {}).find(t => t && (t.entityId === id || t.id === id));
+  return lines.length > 1 ? { label: loc.name || id, kind: "place", lines, codexId: topic?.id || null } : null;
+}
+
+/** ⛔ A CREATURE THEY HAVE FACED — from the bestiary's own record, which is the only place the truth of it lives. Null otherwise. Pure. */
+export function creatureIs(id, { content = {}, faced = [] } = {}) {
+  const roster = content.bestiary?.roster || (Array.isArray(content.bestiary) ? content.bestiary : []);
+  const def = roster.find(b => b && (b.id === id || b.creatureId === id));
+  if (!def) return null;
+  const lines = [];
+  const look = firstSentence(def.look || def.description || def.flavor);
+  if (look) lines.push(look);
+  if (def.tier) lines.push(TIER_MEANING[def.tier] || String(def.tier));
+  if ((faced || []).includes(def.id)) lines.push("You have faced one.");
+  return lines.length ? { label: def.name || id, kind: "creature", lines, codexId: null } : null;
+}
+
+/** ⛔ A THING THEY ARE CARRYING — what it is, what it is worth, and what the story has put on it. Null when it says nothing. Pure. */
+export function thingIs(id, { character = {} } = {}) {
+  const it = (character?.inventory || []).find(x => x && (x.id === id || x.name === id || x.customName === id));
+  if (!it) return null;
+  const lines = [];
+  const desc = firstSentence(it.description);
+  if (desc) lines.push(desc);
+  if (it.customName && it.name && it.customName !== it.name) lines.push(`A ${it.name}, and this one is yours.`);
+  if (it.worth) lines.push(`Worth: ${String(it.worth)}.`);
+  if (it.provenance) lines.push(firstSentence(it.provenance));
+  return lines.length ? { label: it.customName || it.name || id, kind: "thing", lines, codexId: null } : null;
+}
+
 /** Answer for one id. Returns { label, kind, lines[], codexId } or NULL when the world knows nothing. */
-export function whoIs(id, kind, { ws = {}, content = {}, character = {}, roster = [] } = {}) {
+export function whoIs(id, kind, { ws = {}, content = {}, character = {}, roster = [], faced = [] } = {}) {
+  // ⛔ CCODE-395: the three kinds that had no answer — asked of the same records the rest of this module reads
+  if (kind === "place") return placeIs(id, { content, character });
+  if (kind === "creature") return creatureIs(id, { content, faced });
+  if (kind === "thing") return thingIs(id, { character });
   if (kind === "tier") {
     const meaning = TIER_MEANING[id];
     return meaning ? { label: id, kind: "tier", lines: [meaning], codexId: null } : null;

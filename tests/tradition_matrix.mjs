@@ -61,7 +61,7 @@ const CONTROL = [...FOLK_KINDS].filter(t => (byTradition[t] || []).length).sort(
 const UNDER_TEST = Object.keys(byTradition).filter(t => !["valley_craft", "precursor", "cross_pole_braid"].includes(t)).sort();
 
 const LEVELS = [5, 12, 20];
-const BANDS = [{ name: "riffraff", threat: 22 }, { name: "notable", threat: 38 }, { name: "regional", threat: 55 }, { name: "epic", threat: 78 }];
+const BANDS = [{ name: "riffraff", threat: 22 }, { name: "notable", threat: 38 }, { name: "leader", threat: 55 }, { name: "epic", threat: 78 }];
 const TRIALS = 40;
 
 // SITUATIONS — Erik: "the marchers probably have an edge in physical fighting, but who wins the skill

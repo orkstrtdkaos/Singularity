@@ -1,61 +1,108 @@
 {
-  "schemaVersion": 1,
-  "id": "water_crisis",
-  "name": "The Water Crisis",
-  "regionId": "valley",
-  "status": "active",
-  "stage": 1,
-  "stages": [
-    {
-      "stage": 1,
-      "name": "Discoloration",
-      "summary": "The Echo River runs gray-green on bad mornings. Fish catches are down. Communities murmur but cooperate.",
-      "spectrumShift": {
-        "death_life": -0.05,
-        "violence_peace": -0.05
-      },
-      "days": 12
-    },
-    {
-      "stage": 2,
-      "name": "First Sickness",
-      "summary": "Upstream fisher families fall ill. Boiling water becomes universal. Harmonic and Radiant leaders trade public accusations.",
-      "spectrumShift": {
-        "death_life": -0.1,
-        "violence_peace": -0.1,
-        "falsehood_truth": -0.05
-      },
-      "days": 15
-    },
-    {
-      "stage": 3,
-      "name": "Rationing",
-      "summary": "Millbrook posts guards at the clean springs. Water becomes currency. Explorer factions push to open the Archive for pre-Transition purification tech.",
-      "spectrumShift": {
-        "death_life": -0.1,
-        "violence_peace": -0.15,
-        "chaos_order": -0.1
-      },
-      "days": 18
-    },
-    {
-      "stage": 4,
-      "name": "The Brink",
-      "summary": "An armed standoff at the filtration arrays. One spark from open conflict. The true source, still unfound, accelerates.",
-      "spectrumShift": {
-        "violence_peace": -0.25,
-        "demonic_angelic": -0.1
-      },
-      "days": 999
-    }
-  ],
-  "hooks": [
-    "Trace the contamination upstream past the Disputed Zone fringe",
-    "Investigate the Radiant filtration arrays and the falsified purity reports",
-    "Win Mara Wells' trust to learn what pattern she recognized",
-    "Ask the Archive Guardian what pre-Transition industry existed upstream",
-    "Follow Kit Farrow's account of survey-grid lights in the Zone at night"
-  ],
-  "truth": "GM-EYES-ONLY: The source is a pre-Transition nanite reclamation site in the upper Disputed Zone, disturbed and partially reactivated. It is not malfunctioning \u2014 it is following its last instruction: 'prepare the watershed.' Who or what reactivated it, and for whom the preparation is intended, is the campaign's deeper mystery and connects to the Precursor layer. Reveal in fragments; never state plainly before stage 3.",
-  "notes": "days = in-game days a stage lasts before advancing on its own (player action can matter later; stage 4 holds until resolved in play)."
+ "schemaVersion": 1,
+ "id": "water_crisis",
+ "name": "The Water Crisis",
+ "regionId": "valley",
+ "status": "active",
+ "stage": 1,
+ "stages": [
+  {
+   "stage": 1,
+   "name": "Discoloration",
+   "summary": "The Echo River runs gray-green on bad mornings. Fish catches are down. Communities murmur but cooperate.",
+   "spectrumShift": {
+    "death_life": -0.05,
+    "violence_peace": -0.05
+   },
+   "days": 12
+  },
+  {
+   "stage": 2,
+   "name": "First Sickness",
+   "summary": "Upstream fisher families fall ill. Boiling water becomes universal. Harmonic and Radiant leaders trade public accusations.",
+   "spectrumShift": {
+    "death_life": -0.1,
+    "violence_peace": -0.1,
+    "falsehood_truth": -0.05
+   },
+   "days": 15
+  },
+  {
+   "stage": 3,
+   "name": "Rationing",
+   "summary": "Millbrook posts guards at the clean springs. Water becomes currency. Explorer factions push to open the Archive for pre-Transition purification tech.",
+   "spectrumShift": {
+    "death_life": -0.1,
+    "violence_peace": -0.15,
+    "chaos_order": -0.1
+   },
+   "days": 18
+  },
+  {
+   "stage": 4,
+   "name": "The Brink",
+   "summary": "An armed standoff at the filtration arrays. One spark from open conflict. The true source, still unfound, accelerates.",
+   "spectrumShift": {
+    "violence_peace": -0.25,
+    "demonic_angelic": -0.1
+   },
+   "days": 999
+  }
+ ],
+ "hooks": [
+  "Trace the contamination upstream past the Disputed Zone fringe",
+  "Investigate the Radiant filtration arrays and the falsified purity reports",
+  "Win Mara Wells' trust to learn what pattern she recognized",
+  "Ask the Archive Guardian what pre-Transition industry existed upstream",
+  "Follow Kit Farrow's account of survey-grid lights in the Zone at night"
+ ],
+ "truth": "GM-EYES-ONLY: The source is a pre-Transition nanite reclamation site in the upper Disputed Zone, disturbed and partially reactivated. It is not malfunctioning — it is following its last instruction: 'prepare the watershed.' Who or what reactivated it, and for whom the preparation is intended, is the campaign's deeper mystery and connects to the Precursor layer. Reveal in fragments; never state plainly before stage 3.",
+ "notes": "days = in-game days a stage lasts before advancing on its own (player action can matter later; stage 4 holds until resolved in play).",
+ "resolutions": {
+  "_note": "⛔ SNG-601 — WHAT 'ANSWERED' ACTUALLY LOOKS LIKE. CCode's CCODE-354 made a crisis resolvable and told the GM *'ANSWERED (it is over; work set against it now bears on the aftermath)'* — a correct line with no aftermath behind it. ⚠️ THE FOUR PATHS LEAVE FOUR DIFFERENT VALLEYS and the GM had no way to know which one it was standing in. ⛑ Keyed to `what_the_water_remembers`'s outcome ids so the resolution the world carries is the one somebody actually chose.",
+  "redirected": {
+   "name": "The Instruction Rewritten",
+   "summary": "The facility runs an amended instruction and cleanses what it used to strip. The Echo cleared over about a fortnight — households stopped boiling before anyone announced anything, which is how most of the valley found out. The presence beneath it was never disturbed and sleeps on.",
+   "aftermath": [
+    "Water is water again. The rationing at Millbrook's springs ended without ceremony and the guards were simply not posted one morning.",
+    "The Harmonic and Radiant accusations did not resolve so much as lose their subject, and both sides are quietly relieved and neither will say so.",
+    "Edvar Crane's river records now have a clean stretch in them for the first time in fourteen years, and he has not stopped taking readings.",
+    "⚠️ AND THE QUESTION IS STILL DOWN THERE. The machine was re-aimed rather than answered: something dormant beneath it was not touched, and a rewritten instruction running unattended is a thing somebody should be watching."
+   ],
+   "toneForGM": "Relief with an open end. Nobody is celebrating; they are getting on with it, and the valley has already half-forgotten how close it was."
+  },
+  "sealed": {
+   "name": "Sealed Back Into Sleep",
+   "summary": "The facility is inert and the presence forced back to dormancy. The Echo clears slowly, by the river's own work rather than the machine's, over a season rather than a fortnight.",
+   "aftermath": [
+    "The water came back in its own time. People who were sick stayed sick longer than they needed to, and some families remember that.",
+    "The site is sealed and somebody knows where the seal is. That knowledge is worth something and is not widely held.",
+    "The Lattice-Cities regard the outcome as correct and say so at length.",
+    "⚠️ A DEFERRAL HOLDS UNTIL SOMEBODY ENDS IT. What was sealed can be unsealed, and the valley now contains a door."
+   ],
+   "toneForGM": "Safety with a cost nobody itemised. The correct answer, arrived at slowly, by people who are not sure it was the brave one."
+  },
+  "let_it_finish": {
+   "name": "The Work Completed",
+   "summary": "The instruction ran to its end. The presence died with it. A stretch of the Echo below the site is sterile where the work reached, and clean everywhere else — which is worse to look at than contamination, because nothing is wrong with it.",
+   "aftermath": [
+    "The water is safe and a length of the river is empty. No fish, no weed, nothing on the stones. Fishers work around it.",
+    "Nobody can say what the watershed was being prepared FOR, and now nobody ever will. The Ashwardens count that an honest ending; the Verists do not.",
+    "The sickness stopped. That is the part people say out loud.",
+    "⚠️ AND THE VALLEY WONDERS WHAT WAS LOST. Not with grief — with the specific unease of a thing ended before it was understood."
+   ],
+   "toneForGM": "Resolution that does not feel like one. Clean water and a dead stretch, and an argument that will run for years."
+  },
+  "awakened": {
+   "name": "The Listening Half Woke",
+   "summary": "The presence beneath the facility woke, and it is a person: Vessenaia, the Listening Half, steward of a machine that has been working around her for fourteen years. She cleansed the river as her first living act. She walks the valley now, and she remembers who woke her.",
+   "aftermath": [
+    "The Echo ran clean within days, faster than any rewriting could have managed, because the thing that built the instruction re-read it.",
+    "There is a precursor in the valley. Word of that travels faster and less accurately than word of the water did, and most versions are wrong.",
+    "She can stop the facility and has not, because she wants to know what the watershed was being prepared for — and she is asking people, which is not what anyone expected.",
+    "⛔ AND SOMETHING ON THE FAR SIDE OF THE VEIL NOTICED HER WAKE. She felt it notice. Nobody else did, and she has told exactly one person."
+   ],
+   "toneForGM": "The largest thing that has happened in the valley in a generation, arriving quietly. Water first, consequences later."
+  }
+ }
 }

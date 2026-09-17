@@ -350,282 +350,18 @@
       }
     ],
     "lastTurn": {
-      "narration": "You center yourself in the vast chamber, the roar of the river filling the space like a held breath. The notation bands glow faintly at eye height—not language exactly, but something the stone itself might speak if asked the right way. Your companions still, sensing the shift in you.\n\nYou open your throat and let the Harmonic Voice rise. Not a shout, not a question shaped in words—a *resonance*, a tone that matches the frequency the chamber itself seems to hold. The sound finds the geometry of the stone and the sound finds the water and the sound finds the grooved channels in the floor that have carried flow for longer than the word \"Transition\" has meant anything.\n\nThe chamber answers.\n\nNot in words. The notation bands brighten—a pulse of phosphorescence that races around the circumference like a heartbeat made visible. The water's roar shifts pitch, becomes a harmony rather than a noise. The very darkness above the lantern-light seems to *listen*. Cy's lens irises sharp, tracking the light-pattern; Kael's stillness deepens, reading the acoustic shift; Vessin's hand steadies against the wall, feeling the stone's response through stone. Halvex stands at the threshold with something like recognition crossing his face—he has felt a mandate respond like this before, the way a Revel answers when the orchestration is *right*.\n\nThe resonance hangs for three breaths. Then it fades, leaving silence deeper than before—not empty, but *satisfied*. The notation dims to its soft glow. The water settles into its roar again. The chamber has been asked in the language it understands, and it has acknowledged the asking. What the chamber *means* by that acknowledgment—whether it has granted permission, or simply confirmed that you know how to speak—remains unwritten.",
-      "sceneSummary": "In the vast sealed chamber beneath the Null Stone, Loki uses Harmonic Voice to resonate with the chamber's acoustic nature, and the chamber answers—the notation pulses, the water shifts to harmony, and the darkness itself seems to listen.",
-      "choices": [
+      "narration": "",
+      "choices": [],
+      "projectOps": [
         {
-          "label": "Move toward the regulator housing at the far end—the one Cy has been reading with steady precision.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study",
-            "craft"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Cy plainly what the notation is recording—what the chamber is asking the water to *do*.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": "easy",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Read the phosphorescent notation bands more carefully with Prism Sight—watch what the pulse revealed, what the light-pattern *showed*.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "prism_sight",
-          "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Turn to Halvex and ask him directly: what does the chamber's answer mean to someone hired to break it?",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": "normal",
-          "opposedDifficulty": null,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "op": "start",
+          "name": "A fire-test bench",
+          "what": "squaring a length of lath",
+          "days": 2,
+          "why": "fire test"
         }
       ],
-      "deeds": [
-        {
-          "description": "Asked the sealed chamber in the language it understands—harmonic resonance with its deepest acoustic nature—and received acknowledgment. The chamber listened and answered.",
-          "tags": [
-            "craft",
-            "precision",
-            "reaching"
-          ],
-          "weight": 2,
-          "communityId": null
-        }
-      ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -5,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-taken-from-the-city",
-          "title": "The Taken",
-          "summary": "Someone was brought from the city to the Unlit Deep, and the city is pretending it did not happen.",
-          "giver": "unlit-elder",
-          "note": "The chamber beneath the Null Stone has acknowledged a harmonic question—the notation pulses with response, the water shifts to harmony. The regulator at the far end remains unread; the question continues to wait.",
-          "xpReward": null
-        }
-      ],
-      "standingOps": [],
-      "delegateOps": [],
-      "arcOps": [],
-      "adoptSchool": null,
-      "offer": null,
-      "stageOps": [],
-      "scene": {
-        "setting": "A vast sealed chamber carved beneath the Hub crossing, lit by four lanterns—Cy's bright lamp and three yellow flames. The floor slopes toward a distant river moving across worked stone. Phosphorescent notation bands the chamber at eye height, now faintly glowing brighter than before. The roar of the water echoes as percussion. The darkness above the lantern-light is absolute but feels *watched*.",
-        "npcsPresent": [
-          {
-            "name": "Vessin Tallow-bark",
-            "state": "Hand steadied against the wall, feeling the stone's response through stone—the resonance has reached her, and she is reading what the chamber means by answering"
-          },
-          {
-            "name": "Cy",
-            "state": "Lens irised sharp, tracking the light-pattern of the notation's pulse—perceiving the chamber's response with mechanical precision, cataloguing"
-          },
-          {
-            "name": "Kael",
-            "state": "Stillness deepened, reading the acoustic shift—the water's pitch-change and the roar's shift to harmony are being measured in the road-warden's careful assessment"
-          },
-          {
-            "name": "Halvex Coil",
-            "state": "At the threshold where the passage opens into the chamber, face showing recognition—the mandate to break stands behind him, and this moment of the chamber *answering* has reached him with the weight of a mandate's orchestration done right"
-          }
-        ],
-        "objects": [
-          "Four lanterns (Cy's bright lamp, three yellow flames)",
-          "Worn stone steps with grooved channels descending into the chamber",
-          "Phosphorescent notation band running around the chamber circumference at eye height—now brighter, now dimming back to its soft glow",
-          "Worked stone floor sloping toward the river",
-          "Moving water far below, sliding across carved stone, now harmonic with the chamber's resonance",
-          "Absolute darkness above the lantern-light, but feeling observed rather than empty"
-        ],
-        "threads": [
-          "What the notation records or instructs—the language written in stone, now confirmed as responsive to harmonic resonance",
-          "What feeds the river from springs beyond the darkness",
-          "Whether the regulator housing at the far end carries written answers",
-          "Whether the chamber itself is the answer to the regulator's question, or if the question waits at the far end",
-          "Cy's three missing inventory entries—records written into the stone that no system above holds"
-        ]
-      },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "cy",
-          "name": "Cy",
-          "note": "Lens irised sharp at the harmonic resonance—tracking the chamber's response with precision; this is the kind of acknowledgment a Precursor installation gives when asked in the language it understands",
-          "learned": [
-            "The chamber responds to harmonic resonance—it is built to *listen* and to *answer* when asked in the right acoustic frequency"
-          ],
-          "skillsObserved": [
-            "Perceives Precursor mechanism's response to harmonic interrogation with mechanical precision"
-          ]
-        },
-        {
-          "op": "update",
-          "npcId": "vessin-tallow-bark",
-          "name": "Vessin Tallow-bark",
-          "note": "Hand steadied against the wall, feeling the stone's response through stone—the resonance reached her, and she is now reading what the chamber means by answering",
-          "learned": [
-            "The sealed chamber is built to *respond* to harmonic resonance—it is not a trap or a lock, but a thing built to be *asked* and to *answer*"
-          ],
-          "skillsObserved": [
-            "Reads the stone's response through touch and perception, translating Precursor mechanism into human understanding"
-          ]
-        },
-        {
-          "op": "update",
-          "npcId": "kael",
-          "name": "Kael",
-          "note": "Stillness deepened, reading the acoustic shift—the water's pitch-change is being measured in careful assessment, the road-warden's ear attuned to what shifts beneath the surface",
-          "learned": [
-            "The water's roar shifts to harmony when the chamber is asked the right way—the acoustic shift is deliberate, responsive, built into the installation's design"
-          ],
-          "skillsObserved": [
-            "Reads acoustic shifts and water-current changes with the precision of a road-warden who has learned to read the land itself"
-          ]
-        },
-        {
-          "op": "update",
-          "npcId": "halvex-coil",
-          "name": "Halvex Coil",
-          "note": "Standing at the threshold with recognition crossing his face—the mandate to break stands behind him, and this moment of the chamber *answering* has reached him with the weight of a mandate orchestrated *right*",
-          "learned": [
-            "The chamber does not resist or refuse—it *answers* when asked in the language it understands. Breaking was never the point; understanding was"
-          ],
-          "skillsObserved": [
-            "Recognizes the orchestration of a mandate when it is conducted with precision and accountability"
-          ]
-        }
-      ],
-      "intentsHeard": [
-        "Loki"
-      ],
-      "factUpdates": [],
-      "placeUpdates": [
-        {
-          "note": "The vast sealed chamber beneath the Null Stone has responded to harmonic resonance—the phosphorescent notation bands pulse and brighten when asked in acoustic harmony; the water's roar shifts to a harmonic frequency; the chamber listens and answers.",
-          "flag": {
-            "harmonic_responsive": true,
-            "notation_reactive": true
-          }
-        }
-      ],
-      "discovery": {
-        "name": "Resonant Interrogation",
-        "description": "Loki has learned to ask Precursor installations and sealed chambers using harmonic resonance matched to the chamber's own acoustic nature. The technique requires reading the space's deepest frequency and matching it with Harmonic Voice—the installation answers, confirms, or refuses based on whether the question was asked in a language the stone understands. Cost: 5 energy. Limit: One chamber per session; the technique does not *command* the space, only interrogates it. A sealed place may refuse if the question is asked wrong."
-      },
-      "codexUpdates": [
-        {
-          "topic": "halvex",
-          "label": "Halvex",
-          "kind": "mystery",
-          "entityId": "halvex-coil",
-          "fact": "Halvex was hired to break the Null Stone because he believed chaos and proving grounds mattered enough to force the issue. But the chamber's answer—the way it *listens* and *responds* when asked right—has shown him that breaking was never the point. The mandate to break stands behind him now as a shadow of certainty he has chosen to step away from.",
-          "links": [
-            "the-hub-crossing",
-            "the-unlit-deep",
-            "the-taken-from-the-city"
-          ]
-        },
-        {
-          "topic": "the-hub-crossing",
-          "label": "The Passage Below",
-          "kind": "place",
-          "entityId": "the-hub-crossing",
-          "fact": "The vast sealed chamber beneath the Null Stone is a pre-Transition water-works built to *ask* and *listen*. It responds to harmonic resonance—when asked in the right acoustic frequency, the notation bands pulse and brighten, the water's roar shifts to harmony, and the darkness itself seems to acknowledge the question. The installation is built not to resist but to *answer*.",
-          "links": [
-            "the-unlit-deep",
-            "cy-s-construction",
-            "the-regulator-question",
-            "halvex"
-          ]
-        }
-      ],
-      "holdingOps": [],
-      "holdTrades": [],
-      "debtOps": [],
-      "partyOps": [],
-      "generateRequest": [],
-      "encounterOps": [],
-      "projectOps": [],
-      "bandOps": [],
-      "strikeOps": [],
-      "deathOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "the resonance and the chamber's response took a few breaths to unfold"
-      },
-      "moveTo": null,
-      "stateOps": [
-        {
-          "op": "correctAbilityRank",
-          "id": "better_story",
-          "to": 2
-        }
-      ],
-      "itemUpdates": [],
-      "deriveItem": null,
-      "imagePrompt": "A vast sealed chamber lit by four lanterns, the phosphorescent notation bands glowing brighter in response to a harmonic resonance—the water roaring in the darkness below, shifting toward harmony. Four figures stand in overlapping light and shadow: one with eyes closed, voice resonating through stone; one with hand pressed to the wall, feeling the answer; one reading the acoustic shift with absolute stillness; one at the threshold, watching the moment a mandate becomes understanding.",
-      "imageMedium": null,
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
-      "sceneEnded": false,
-      "momentArt": "https://image.pollinations.ai/prompt/A%20vast%20sealed%20chamber%20lit%20by%20four%20lanterns%2C%20the%20phosphorescent%20notation%20bands%20glowing%20brighter%20in%20response%20to%20a%20harmonic%20resonance%E2%80%94the%20water%20roaring%20in%20the%20darkness%20below%2C%20shifting%20toward%20harmony.%20Four%20figures%20stand%20in%20overlapping%20light%20and%20shadow%3A%20one%20with%20eyes%20closed%2C%20voice%20resonating%20through%20ston%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=75943&nologo=true"
+      "sceneSummary": null
     },
     "sceneState": {
       "setting": "A vast sealed chamber carved beneath the Hub crossing, lit by four lanterns—Cy's bright lamp and three yellow flames. The floor slopes toward a distant river moving across worked stone. Phosphorescent notation bands the chamber at eye height, now faintly glowing brighter than before. The roar of the water echoes as percussion. The darkness above the lantern-light is absolute but feels *watched*.",
@@ -673,7 +409,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 4,
-    "hour": 20,
+    "hour": 21,
     "realAnchor": null
   },
   "companions": [
@@ -1746,7 +1482,7 @@
     "lastSharedReadAt": "2026-09-17T23:26:44.896Z",
     "lastTickWorldDay": 79,
     "lastCanonWorldDay": 79,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "Halvex Coil—the Churn-Revel orchestrator, now named, now searching for answers that do not fit neat shapes",
@@ -9300,8 +9036,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789687823726,
-  "rev": 763,
+  "updatedAt": 1789687823838,
+  "rev": 764,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10312,10 +10048,10 @@
     {
       "id": "sess-14",
       "startedAt": "2026-09-17T21:25:46.391Z",
-      "lastAt": "2026-09-17T23:30:23.710Z",
+      "lastAt": "2026-09-17T23:30:23.837Z",
       "startDay": 79,
       "endDay": 79,
-      "beats": 9
+      "beats": 10
     }
   ],
   "establishedFacts": [
@@ -11983,8 +11719,8 @@
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T22:51:56.913Z",
   "_fireTests": {
-    "at": "2026-09-17T23:30:23.978Z",
-    "build": "2.0.61",
+    "at": "2026-09-16T21:46:04.474Z",
+    "build": "2.0.36",
     "results": [
       {
         "op": "debtOps",

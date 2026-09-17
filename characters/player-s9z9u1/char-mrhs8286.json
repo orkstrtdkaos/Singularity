@@ -5590,43 +5590,17 @@
         "locationId": "gen-whistling-woman-post",
         "day": 16
       },
-      "relationship": 0,
+      "relationship": 1,
       "history": [
         "[d16] Arrived at the Whistling Woman waystation with cracked ribs from a fall. Tended by Silas Weir with Dawn Surgery. Grateful and resting.",
         "[d16] Still asleep on the cot, mending. Unaware of what just transpired. The encrypted message that brought her here is now partially answered.",
         "[d17] She wakes speaking plainly, asking for water. The fever is broken and the body is mending. The urgency remains.",
         "[d17] Woke fever-clear at the Whistling Woman post and named herself. Broke relay protocol to carry an encrypted message marked urgent-to-hand from the Hub to warden. She knows the shape of the crisis but not the plaintext.",
         "[d18] You know this person's name now: Corvin Teth (Runner) (was \"Corvin\")",
-        "[d18] Offered a place at the Whistling Woman post running the runner-side operations alongside Deni Cors. Accepted crystal payment. Fever clear. Listening."
-      ],
-      "knownFacts": [],
-      "skillsObserved": [],
-      "status": "active",
-      "sex": "female",
-      "gender": "woman",
-      "pronouns": "she/her",
-      "statusNote": "Awake and fever-clear at the Whistling Woman post. Offered work as runner-coordinator. Carrying urgent encrypted message from the Hub about moorland stirring.",
-      "lastSeen": {
-        "locationId": "gen-whistling-woman-post",
-        "day": 18
-      },
-      "met": 6,
-      "aliases": [
-        "The Runner"
-      ],
-      "nameRevealed": true
-    },
-    "courier-whistling-woman": {
-      "id": "courier-whistling-woman",
-      "name": "—",
-      "role": "Runner on the relay network, arriving with urgent news",
-      "description": "A lone rider on horseback, approaching from the south at dawn with a fractured pattern about them",
-      "firstMet": {
-        "locationId": "gen-whistling-woman-post",
-        "day": 16
-      },
-      "relationship": 0,
-      "history": [
+        "[d18] Offered a place at the Whistling Woman post running the runner-side operations alongside Deni Cors. Accepted crystal payment. Fever clear. Listening.",
+        "[d16] Arrived at Whistling Woman at dawn carrying an encrypted slate message from the Hub—direct relay, not chain. Her death-thread is fractured; she may not reach her destination if the message is not delivered first.",
+        "[d16] Arrived at dawn carrying an encrypted slate message marked urgent-to-hand. Her death-thread reads fractured — three diverging paths through the next hours. Pell and Silas brought her inside; Kept Breath steadied the spiral.",
+        "[d16] Failed surgery left her raw but stabilized. The cautery burned wrong—Kept Breath holding, but she's in real pain. Still urgent about delivering the message despite her body's fracture.",
         "[d16] Arriving at Whistling Woman post at dawn with news that could not wait for the relay network's chain",
         "[d16] Silas read her death-thread and learned she chose the direct route knowing it would fracture her path—she knew the cost and ran hot anyway because the message could not wait. Her grip on the saddlebag has not unclenched.",
         "[d16] The message she carried was encrypted, urgent, and breaks normal relay protocol. She knew its weight before she left the Hub. She is resting now, her fever holding steady, her three diverging paths still braiding.",
@@ -5639,6 +5613,14 @@
         "[d17] Held the warden's watch through the night at the Whistling Woman post. Attentive to Corvin's arrival and the shape of the urgency."
       ],
       "knownFacts": [
+        "The message came through encrypted slate network marked urgent-to-hand, breaking normal relay protocol",
+        "She was ordered to carry it directly to the warden, no intermediaries",
+        "She broke relay protocol to carry this message directly",
+        "The message came encrypted, not open — highest security",
+        "She was ordered to carry it to the warden, no intermediaries",
+        "She broke relay protocol to carry this message—it came encrypted, not open chain",
+        "She was ordered direct to the warden, no intermediaries",
+        "She knew her death-thread was fractured before she left, but came anyway",
         "The moorland changes and the old watchers notice first",
         "Silas is not stepping between shadows now—he is pulling through them, and that is a different work entirely",
         "She was sent direct from the Hub with an encrypted message, breaking relay protocol",
@@ -5649,68 +5631,30 @@
         "The system will either accept warden authority or reject it—there is no middle ground"
       ],
       "skillsObserved": [
+        "Professional horsemanship under strain",
+        "Moorland navigation in poor light",
+        "Moorland navigation in difficult conditions",
         "Professional horsemanship",
         "Moorland navigation",
         "Knowledge of Ashwarden network movements",
         "Understanding of watcher patterns and reporting chains",
         "Familiarity with the Archive's physical layout"
       ],
-      "status": "injured",
-      "sex": "unknown",
-      "gender": "unknown",
-      "pronouns": "—",
-      "statusNote": "Airborne over the moorland north with Silas Weir at dawn, attempting to reach the reclamation system directly. Commits to the reach from warden authority.",
+      "status": "active",
+      "sex": "female",
+      "gender": "woman",
+      "pronouns": "she/her",
+      "statusNote": "Awake and fever-clear at the Whistling Woman post. Offered work as runner-coordinator. Carrying urgent encrypted message from the Hub about moorland stirring.",
       "lastSeen": {
         "locationId": "gen-whistling-woman-post",
         "day": 18
       },
-      "met": 11,
-      "domains": {
-        "primary": "ashwarden"
-      },
-      "domainsSource": "observed"
-    },
-    "urgent-courier-whistling-woman": {
-      "id": "urgent-courier-whistling-woman",
-      "name": "Courier",
-      "nameUnknown": true,
-      "role": "Hub relay runner carrying urgent direct message",
-      "description": "A rider broken by urgency—fever-warm, gripping hard, running on the last of her strength",
-      "firstMet": {
-        "locationId": "gen-whistling-woman-post",
-        "day": 16
-      },
-      "relationship": 1,
-      "history": [
-        "[d16] Arrived at Whistling Woman at dawn carrying an encrypted slate message from the Hub—direct relay, not chain. Her death-thread is fractured; she may not reach her destination if the message is not delivered first.",
-        "[d16] Arrived at dawn carrying an encrypted slate message marked urgent-to-hand. Her death-thread reads fractured — three diverging paths through the next hours. Pell and Silas brought her inside; Kept Breath steadied the spiral.",
-        "[d16] Failed surgery left her raw but stabilized. The cautery burned wrong—Kept Breath holding, but she's in real pain. Still urgent about delivering the message despite her body's fracture."
+      "met": 6,
+      "aliases": [
+        "The Runner",
+        "Courier"
       ],
-      "knownFacts": [
-        "The message came through encrypted slate network marked urgent-to-hand, breaking normal relay protocol",
-        "She was ordered to carry it directly to the warden, no intermediaries",
-        "She broke relay protocol to carry this message directly",
-        "The message came encrypted, not open — highest security",
-        "She was ordered to carry it to the warden, no intermediaries",
-        "She broke relay protocol to carry this message—it came encrypted, not open chain",
-        "She was ordered direct to the warden, no intermediaries",
-        "She knew her death-thread was fractured before she left, but came anyway"
-      ],
-      "skillsObserved": [
-        "Professional horsemanship under strain",
-        "Moorland navigation in poor light",
-        "Moorland navigation in difficult conditions"
-      ],
-      "status": "injured",
-      "sex": "female",
-      "gender": "woman",
-      "pronouns": "she/her",
-      "statusNote": "Fever-warm, stabilized by Kept Breath after failed surgical mending, in pain from the raw cautery. Three diverging death-paths still braiding through the coming hours.",
-      "lastSeen": {
-        "locationId": "gen-whistling-woman-post",
-        "day": 16
-      },
-      "met": 3
+      "nameRevealed": true
     },
     "marrow": {
       "id": "marrow",
@@ -18916,8 +18860,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1789597222567,
-  "rev": 2109,
+  "updatedAt": 1789610804247,
+  "rev": 2111,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -23393,6 +23337,22 @@
       "why": "a correction",
       "worldDay": 74,
       "at": "2026-09-12T02:44:59.509Z"
+    },
+    {
+      "kind": "merge",
+      "id": "courier-whistling-woman",
+      "into": "urgent-courier-whistling-woman",
+      "why": "player: same person (— → Courier)",
+      "worldDay": 79,
+      "at": "2026-09-17T02:05:59.445Z"
+    },
+    {
+      "kind": "merge",
+      "id": "urgent-courier-whistling-woman",
+      "into": "runner-whistling-woman-d16",
+      "why": "player: same person (Courier → Corvin Teth)",
+      "worldDay": 79,
+      "at": "2026-09-17T02:06:44.247Z"
     }
   ],
   "syncedAt": 1788658062664,

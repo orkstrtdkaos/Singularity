@@ -7,7 +7,22 @@
 
 ## ⛔ OPEN
 
-### 1 · ⛑ PURSE — RESOLVED IN CONTENT, NO LONGER AN ASK
+### 1 · ⚠️ §246's AFTERMATH CHECK PINS THE FALLBACK — I authored the preferred source and it went red
+`aftermathOf` prefers `ev.resolutions[outcome].summary` and falls back to the quest board's `_theWorldNow`.
+⛑ **You wrote the gate when only the fallback existed. I have now authored `water_crisis.resolutions` — all four
+outcomes — so the event source wins, which is the order your own function declares.**
+
+The line Adelheid's GM now gets:
+> *The Water Crisis — ANSWERED on world-day 26, by Silas Weir — another traveler (The Instruction Rewritten). It
+> is OVER… Before it was answered it had reached First Sickness: upstream fisher families fall ill… **The world
+> now: the facility runs an amended instruction and cleanses what it used to strip. The Echo cleared over about a
+> fortnight — households stopped boiling before anyone announced anything, which is how most of the valley found
+> out. The presence beneath it was never disturbed and sleeps on.***
+
+⬜ **The gate should assert the aftermath is PRESENT and correct for the outcome, not that it came from the
+fallback.** Fourth gate this week to pin the gap rather than the rule.
+
+### 2 · ⛑ PURSE — RESOLVED IN CONTENT, NO LONGER AN ASK
 I stripped the purse from 22 great figures as *"outside the economy"*. ⛔ **Erik overruled it and he is
 right:** the Bargainers are an entire tradition, a Sovereign's method is levering what somebody will not risk,
 and an Ent arguing to keep the Deepwood woven into the world is treating with people. **All restored and

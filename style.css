@@ -1779,6 +1779,9 @@ img[data-lightbox] { cursor: zoom-in; }
 .journey-card .jc-ways { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .journey-card .jc-ways .opt.on { border-color: var(--accent, #c9a227); }
 .journey-card .jc-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+/* CCODE-396: a newer build is out — the offer, not a surprise reload */
+.build-banner { border-style: dashed; }
+.build-banner .btn { margin-left: 6px; }
 /* CCODE-390: a journey on the road, and the plan for a leg into perilous country */
 .journey-card.on-road { border-style: dashed; }
 .journey-card .leg-plan { margin-top: 8px; padding: 8px 10px; border-left: 3px solid var(--danger); background: color-mix(in srgb, var(--danger) 7%, transparent); border-radius: 0 6px 6px 0; }

@@ -19969,6 +19969,17 @@ console.log("\n── §277 · a tab running an old build does not write to the 
     `version.json ${vj277.version} · code ${V277}`);
 
   const A277 = rd("app.js").replace(/\r\n/g, "\n");
+  // ⛔ CCODE-396 — ERIK, AFTER WATCHING THE FIRST VERSION RELOAD A TAB OUT FROM UNDER HIM: "I do want a 'new build, reload now' button."
+  // So a quiet check OFFERS, and the forced reload is kept for the one moment it is not a nuisance: a write the guard refused, where the
+  // save cannot go up until the tab reloads. ⚠️ The cadence therefore asks `deployedBuild` for itself rather than going through
+  // `staleBuild`, which is what tells sync's listeners — a quiet check finding a new build must not reload anybody.
+  check("§277: ⛔ …AND THE RELOAD IS THE PLAYER'S, except when a write was refused — the banner says what waiting costs, 'Reload now' takes it, 'Not yet' keeps playing, and only the refusal forces it",
+    /id="build-reload">Reload now<\/button>/.test(A277) && /id="build-later">Not yet<\/button>/.test(A277)
+    && /nothing it writes will go up<\/strong> until it reloads/.test(A277)
+    && /buildGo\.onclick = \(\) => \{ const v = _buildOffer; _buildOffer = null; reloadForNewBuild\(\{ deployed: v \}\); \};/.test(A277)
+    && /main \+= newBuildBannerHtml\(\);/.test(A277)
+    && /deployedBuild\(\)\.then\(v => \{ if \(v && isNewerBuild\(v, runningBuild\(\)\)\) offerNewBuild/.test(A277)
+    && !/staleBuild\(\)\.then/.test(A277));
   check("§277: ⛔ …AND THE TAB COMES BACK CURRENT BY ITSELF — armed at boot, told by the refusal, asked again on a cadence; it waits for the turn and the encounter to clear, and reloads through a FRESH URL so the old code is not served again",
     /armBuildWatch\(\);   \/\/ ⛔ CCODE-394/.test(A277) && /onStaleBuild\(reloadForNewBuild\);/.test(A277)
     && /setInterval\(ask, Math\.max\(60000, BUILD_CHECK_MS \* 15\)\);/.test(A277)

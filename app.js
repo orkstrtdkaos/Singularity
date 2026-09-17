@@ -76,7 +76,7 @@ import { unitsOf, unitLine, poolRows, atSideRows, wherePerson, canBringForward, 
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, suggestForCreation, archetypeFamilies, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
 import { toolkitForGM } from "./engine/toolkit.js";
 import { fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc, arcDebtOf } from "./engine/personalArc.js";   // CCODE-393: a fallback arc is a debt
-import { staleBuild, onStaleBuild, BUILD_CHECK_MS } from "./engine/build.js";   // CCODE-394: a tab running an old build does not write to the world
+import { staleBuild, onStaleBuild, deployedBuild, isNewerBuild, runningBuild, BUILD_CHECK_MS } from "./engine/build.js";   // CCODE-394/396: an old build does not write, and the reload is offered
 import { assembleGMContext } from "./engine/gm_registry.js"; // BATCH-11 §23: the GM context is a DECLARED registry, iterated — never hand-listed
 import { rankVoices, pickVoice, speakableText, chunkForSpeech, renderProseHtml } from "./engine/narration_voice.js"; // SNG-155: read aloud at the table; SNG-190 §4: render engine asides, never raw asterisks
 import { harmGateFor, harmTargetFor, departureGateFor, isConsequentialMove, isSpeechAct, isRemoteContact, personDestination, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop); SNG-188: speech-act guard; SNG-228: person-as-place guard; CCODE-158: one departure definition for both doors; CCODE-159: remote contact is not travel
@@ -157,7 +157,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.56";
+const APP_VERSION = "2.0.57";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -5565,7 +5565,8 @@ let _projectNews = [];
 // ---------- ⛔ CCODE-394: A NEWER BUILD IS OUT, SO THIS TAB RELOADS ----------
 // Erik: "any browser running the game would have an auto reload on next action… would that minimize the risk of having an old version
 // written?" It would, and `engine/sync.js` refuses the write outright — this is the other half: the tab comes back current by itself.
-let _newBuild = null;   // the build that is out there, once we know
+let _newBuild = null;    // the build we are reloading for, once that is decided
+let _buildOffer = null;  // ⛔ CCODE-396 (Erik: "I do want a 'new build, reload now' button") — the build that is out, waiting on the player
 
 /** ⛔ RELOAD, BUT NEVER MID-TURN. A reload during a GM call loses the beat the player is waiting on, and during an encounter it drops
  *  the surface they are standing in — so it waits for both to clear. Nothing else is lost: the save is written continuously to local
@@ -5593,11 +5594,34 @@ function reloadForNewBuild(info) {
   setTimeout(go, 1200);
 }
 
+/** ⛔ CCODE-396 — THE OFFER, which is what a player reading a scene should get. Erik, after watching the first version reload a tab out
+ *  from under him: "I do want a 'new build, reload now' button." ⚠️ THE FORCED RELOAD STAYS FOR THE ONE MOMENT IT IS NOT A NUISANCE —
+ *  a write REFUSED by `sync.js` — because there the player's save has just failed to go up and reloading is the only thing that lets it.
+ *  Everywhere else the tab keeps playing and says so. */
+function offerNewBuild(info) {
+  const v = String(info?.deployed || "");
+  if (!v || _newBuild || _buildOffer === v) return;
+  _buildOffer = v;
+  try { if (character) renderPlay(character.activeScene?.lastTurn || null, {}); else console.log(`[build] v${v} is out — reload when you like`); } catch { /* the banner is a courtesy */ }
+}
+
+/** The banner that carries it: what is out, what it costs to wait, and the button. */
+function newBuildBannerHtml() {
+  if (!_buildOffer) return "";
+  return `<div class="arrive-banner build-banner">⟳ A newer build is out (<strong>v${esc(_buildOffer)}</strong>). This tab keeps playing, but
+    <strong>nothing it writes will go up</strong> until it reloads. <button class="btn arrive-btn" id="build-reload">Reload now</button>
+    <button class="btn secondary" id="build-later">Not yet</button></div>`;
+}
+
 /** The watch: told by the write guard the moment a write is refused, and asking on its own while the tab sits open. */
 function armBuildWatch() {
   try {
-    onStaleBuild(reloadForNewBuild);
-    const ask = () => { staleBuild().then(s => { if (s.stale) reloadForNewBuild(s); }).catch(() => { /* never a verdict */ }); };
+    onStaleBuild(reloadForNewBuild);   // a REFUSED write reloads: the save cannot go up until it does
+    // ⚠️ THE CADENCE ASKS FOR ITSELF rather than through `staleBuild`, because that is what tells `sync.js`'s listeners — and a quiet
+    // check finding a new build is not a refused write and must not reload anybody.
+    const ask = () => {
+      deployedBuild().then(v => { if (v && isNewerBuild(v, runningBuild())) offerNewBuild({ deployed: v }); }).catch(() => { /* never a verdict */ });
+    };
     setInterval(ask, Math.max(60000, BUILD_CHECK_MS * 15));   // quietly, about every five minutes
     setTimeout(ask, 8000);                                     // and once shortly after the load, for a tab left open overnight
   } catch { /* a browser without intervals plays exactly as before */ }
@@ -17795,6 +17819,7 @@ function renderPlay(turn, opts = {}) {
       <div class="jc-actions"><button class="btn" id="journey-go">Set out for ${esc(j.destName)}</button> <button class="btn secondary" id="journey-cancel">Stay</button></div>
     </div>`;
   }
+  main += newBuildBannerHtml();   // ⛔ CCODE-396: a newer build is out, and the reload is the player's to take
   if (character?._pendingArrival) {
     const p = character._pendingArrival;
     main += `<div class="arrive-banner">You're on your way to <strong>${esc(p.name)}</strong>. <button class="btn arrive-btn" id="do-arrive">→ Arrive at ${esc(p.name)}</button></div>`;
@@ -18145,6 +18170,11 @@ function renderPlay(turn, opts = {}) {
   const arriveBtn = document.getElementById("do-arrive"); if (arriveBtn) arriveBtn.onclick = () => arriveAtPending(); // SNG-122
   const journeyGo = document.getElementById("journey-go"); if (journeyGo) journeyGo.onclick = () => setOutOnJourney();   // CCODE-387
   const journeyStay = document.getElementById("journey-cancel"); if (journeyStay) journeyStay.onclick = () => cancelJourney();
+  // ⛔ CCODE-396: the reload is a button, and "not yet" is an answer — the tab keeps playing and the offer comes back on the next check
+  const buildGo = document.getElementById("build-reload");
+  if (buildGo) buildGo.onclick = () => { const v = _buildOffer; _buildOffer = null; reloadForNewBuild({ deployed: v }); };
+  const buildLater = document.getElementById("build-later");
+  if (buildLater) buildLater.onclick = () => { _buildOffer = null; renderPlay(character?.activeScene?.lastTurn || null, { aside: "Kept playing on this build. Nothing it writes will go up until you reload." }); };
   const journeyTake = document.getElementById("journey-take-leg"); if (journeyTake) journeyTake.onclick = () => takeDangerousLeg();   // CCODE-390
   const journeyFace = document.getElementById("journey-face-leg"); if (journeyFace) journeyFace.onclick = () => faceLegPlan();
   const journeyAround = document.getElementById("journey-around"); if (journeyAround) journeyAround.onclick = () => goAroundDanger();

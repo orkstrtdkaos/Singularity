@@ -30,11 +30,14 @@
     "note": "⛔ THIS IS THE BIGGER OF THE TWO LEVERS AND THEY ARE DIFFERENT IN KIND. The sub-attribute channel changes what ONE CRAFT rolls. This changes what a WHOLE TRADITION can do in a region — a Precursor-thin valley becoming workable, or a nanite-strong one going thin. ⚠️ And it compounds with the standing math: a source raised to on-band is +2 on every craft drawing from it, before the nexus's own +6."
    },
    "champion": {
-    "role": "a Sovereign seat, risen",
-    "status": "seated",
     "id": null,
-    "text": "⛔ THE VOID SIDE HAS RISEN HERE, AND IT CHOSE THE WORST POSSIBLE GROUND ON PURPOSE. Wildheart is the thinnest place in the world, grown and never laid, and THE ROOTKIN DECLINE TO USE IT — a restraint authored long before there was a vector to name. A Sovereign seated in the middle of that restraint is the Void's virtue curdling into its vice in the one place that had been holding the virtue pure. ⚠️ AND IT IS NOT AN INVASION. Erik: refusing order and constraint is itself Void-like, so Wildheart is THE SEEDED'S OWN ROAD TO THE ADJACENCY — arrived at from inside the wall rather than from beyond it. Nobody had to come through anything to reach it. **That makes it more dangerous than Neitherway, not less.**"
-   }
+    "role": "whoever holds Wildheart open",
+    "status": "held open",
+    "text": "⛑ THE VOID'S PURE FORM: FREE WILL WITHOUT PREDATION, in the thinnest ground in the world, held by people who refuse the lattice and do not eat anyone to do it. ⛔ AND 'THE ROOTKIN DO NOT USE IT' STOPS BEING RESTRAINT AND BECOMES THE POSITION — they hold it open and take nothing from it, which is the entire Void virtue in one authored sentence written before there was a vector to name. ⚠️ Erik: refusing order and constraint is Void-like, so this is the seeded's own road to the Adjacency, reached from INSIDE the wall."
+   },
+   "purity": "pure",
+   "turnability": "turnable",
+   "difficulty": "moderate"
   },
   {
    "region": "riven_marches",
@@ -62,6 +65,14 @@
     "sink": "drops it across the surrounding country",
     "radius": "⬜ ERIK RULES THE RADIUS — it behaves like the other location-based influences",
     "note": "⛔ THIS IS THE BIGGER OF THE TWO LEVERS AND THEY ARE DIFFERENT IN KIND. The sub-attribute channel changes what ONE CRAFT rolls. This changes what a WHOLE TRADITION can do in a region — a Precursor-thin valley becoming workable, or a nanite-strong one going thin. ⚠️ And it compounds with the standing math: a source raised to on-band is +2 on every craft drawing from it, before the nexus's own +6."
+   },
+   "purity": "corrupt",
+   "turnability": "stoppable_only",
+   "champion": {
+    "id": null,
+    "role": "a Sovereign seat, risen",
+    "status": "seated",
+    "text": "⛔ THE VOID'S VICE ARRIVING AT THE MOST SYMPATHETIC CASE FOR THE ADJACENCY, TO SPOIL IT. Neitherway is where neither side ever built and nothing was ever imposed — the best argument in the world for taking the wall down. A Sovereign sits down in it and begins explaining why choosing is overrated. ⚠️ HUNGER WEARING THE LANGUAGE OF FREEDOM, which is the only way that argument ever gets made."
    }
   },
   {
@@ -88,6 +99,16 @@
     "sink": "drops it across the surrounding country",
     "radius": "⬜ ERIK RULES THE RADIUS — it behaves like the other location-based influences",
     "note": "⛔ THIS IS THE BIGGER OF THE TWO LEVERS AND THEY ARE DIFFERENT IN KIND. The sub-attribute channel changes what ONE CRAFT rolls. This changes what a WHOLE TRADITION can do in a region — a Precursor-thin valley becoming workable, or a nanite-strong one going thin. ⚠️ And it compounds with the standing math: a source raised to on-band is +2 on every craft drawing from it, before the nexus's own +6."
+   },
+   "vector": "permanence",
+   "purity": "pure",
+   "turnability": "turnable",
+   "difficulty": "hard",
+   "champion": {
+    "id": "the_last_seraph",
+    "role": "The Last Seraph of the Pre-Transition Choir",
+    "status": "ascended",
+    "text": "⛑ THE PRECURSOR'S PURE FORM, AT THE SITE THAT IS ALREADY PRACTISING IT. Erik: the Seraph was meant to be 'the more pure kind of the Precursor — something like an archangel', and he guessed this site before I did. ⛔ PLEXUS SOLARIS IS WHERE 'THE SOMATICS TUNED AWAY FROM THE LATTICE DELIBERATELY AND THE GROUND FOLLOWED' — restraint by choice, performed on the earth itself. An archangel who could impose and does not, standing where a whole people made the same decision. ⚠️ Pre-Transition, so old enough to remember what the restraint was FOR, which is why she is turnable and the Thornmother is not."
    }
   },
   {
@@ -114,7 +135,11 @@
     "sink": "drops it across the surrounding country",
     "radius": "⬜ ERIK RULES THE RADIUS — it behaves like the other location-based influences",
     "note": "⛔ THIS IS THE BIGGER OF THE TWO LEVERS AND THEY ARE DIFFERENT IN KIND. The sub-attribute channel changes what ONE CRAFT rolls. This changes what a WHOLE TRADITION can do in a region — a Precursor-thin valley becoming workable, or a nanite-strong one going thin. ⚠️ And it compounds with the standing math: a source raised to on-band is +2 on every craft drawing from it, before the nexus's own +6."
-   }
+   },
+   "vector": null,
+   "turnability": "turnable",
+   "difficulty": "open",
+   "_unclaimed": "⬜ NO CHAMPION AND NO DECLARED VECTOR. Whoever takes it sets it — which is what makes turning nexuses a campaign rather than a checklist."
   }
  ],
  "deepNexuses": [
@@ -149,7 +174,11 @@
     "sink": "drops it across the surrounding country",
     "radius": "⬜ ERIK RULES THE RADIUS — it behaves like the other location-based influences",
     "note": "⛔ THIS IS THE BIGGER OF THE TWO LEVERS AND THEY ARE DIFFERENT IN KIND. The sub-attribute channel changes what ONE CRAFT rolls. This changes what a WHOLE TRADITION can do in a region — a Precursor-thin valley becoming workable, or a nanite-strong one going thin. ⚠️ And it compounds with the standing math: a source raised to on-band is +2 on every craft drawing from it, before the nexus's own +6."
-   }
+   },
+   "vector": null,
+   "turnability": "turnable",
+   "difficulty": "open",
+   "_unclaimed": "⬜ NO CHAMPION AND NO DECLARED VECTOR. Whoever takes it sets it — which is what makes turning nexuses a campaign rather than a checklist."
   },
   {
    "region": "the_lattice_cities",
@@ -186,11 +215,13 @@
     "note": "⛔ THIS IS THE BIGGER OF THE TWO LEVERS AND THEY ARE DIFFERENT IN KIND. The sub-attribute channel changes what ONE CRAFT rolls. This changes what a WHOLE TRADITION can do in a region — a Precursor-thin valley becoming workable, or a nanite-strong one going thin. ⚠️ And it compounds with the standing math: a source raised to on-band is +2 on every craft drawing from it, before the nexus's own +6."
    },
    "champion": {
-    "role": "a Seraph, ascended",
+    "id": "thornmother_sealed",
+    "role": "The Thornmother of the Closing Wood",
     "status": "seated",
-    "id": null,
-    "text": "⛔ THE PRECURSOR SIDE HAS RISEN HERE, AT THE CROWN, ON THE VEIL NEXUS. Spiritual connectedness holding the wall — which since SNG-602 is not a metaphor: belief IS the maintenance, and a Seraph ascended at the crown of the body is the maintenance crew's own captain. ⚠️ AND SHE IS THE PRECURSOR VIRTUE AND VICE IN ONE PERSON, the way Akinetos is. Restraint by choice, offered to everybody, on terms nobody else got a vote on. **She is not wrong about the danger. She is wrong that it is hers to decide.**"
-   }
+    "text": "⛔ THE PRECURSOR'S VICE IN A BODY NOBODY EXPECTS IT IN. Authored a year ago as 'life curdled into a wall; she would seal the wood so nothing mortal could enter' — and her fear is the line that settles it: **'That sealing it kills it. She has thought about this and continued.'** ⚠️ She is not Void because her body is wild nanite. **A VECTOR IS WHAT YOU WOULD DO WITH THE WALL, NOT WHAT YOU ARE MADE OF** — and she is Akinetos's answer performed by a tree. ⛑ Better here than another Lattice official saying the same thing."
+   },
+   "purity": "corrupt",
+   "turnability": "stoppable_only"
   },
   {
    "region": "manifest_domain",
@@ -223,7 +254,11 @@
     "sink": "drops it across the surrounding country",
     "radius": "⬜ ERIK RULES THE RADIUS — it behaves like the other location-based influences",
     "note": "⛔ THIS IS THE BIGGER OF THE TWO LEVERS AND THEY ARE DIFFERENT IN KIND. The sub-attribute channel changes what ONE CRAFT rolls. This changes what a WHOLE TRADITION can do in a region — a Precursor-thin valley becoming workable, or a nanite-strong one going thin. ⚠️ And it compounds with the standing math: a source raised to on-band is +2 on every craft drawing from it, before the nexus's own +6."
-   }
+   },
+   "vector": null,
+   "turnability": "turnable",
+   "difficulty": "open",
+   "_unclaimed": "⬜ NO CHAMPION AND NO DECLARED VECTOR. Whoever takes it sets it — which is what makes turning nexuses a campaign rather than a checklist."
   },
   {
    "region": "the_ascent",
@@ -261,11 +296,14 @@
    },
    "vector": "middle",
    "champion": {
+    "id": "aevi_the_watcher",
     "role": "Aevi, the Watcher",
     "status": "waking",
-    "id": "aevi_the_watcher",
-    "text": "⛑ THE MIDDLE WAY'S CHAMPION, AND SHE IS A FRAGMENT OF THE PRECURSOR SYSTEM CHOOSING NEITHER SIDE OF IT. `greater_arcs` has named her 'a fragment of the system that is WAKING' whose arc converges here since before there was a vector to name — and `AeviVoiceAndCharacter` has her as the one who 'names what is true even when the truth is uncomfortable, though she does it kindly'. ⚠️ THAT IS THE MIDDLE WAY'S ACTUAL DISCIPLINE: openness to evaluation, which from either extreme looks like weakness or indecision. ⛔ AND SHE IS ALREADY PARTLY OUT. The mote a player carries from level one is the piece that escaped, and it persists when she wakes — Marrow's precedent, ruled 2026-09-12. **A player has been carrying the middle way's champion since the beginning and calling her a helpful light.**"
-   }
+    "text": "⛑ THE MIDDLE WAY'S CHAMPION, at the only organ whose faculty is LOOKING AT THINGS BEFORE DECIDING. ⚠️ AND SHE IS TURNABLE, WHICH IS THE TRAGEDY AVAILABLE HERE: a PC on either extreme can work on her, and she is persuadable precisely because openness to evaluation is her discipline. **The thing that makes her the middle way's champion is the thing that makes her reachable.**"
+   },
+   "purity": "pure",
+   "turnability": "turnable",
+   "difficulty": "hard"
   }
  ],
  "_mechanic": "⛑ RULED, Erik 2026-09-16. A craft's effective magnitude shifts by how well the local density matches its source's band: **ON-BAND +2 · ONE STEP OFF −1 · TWO STEPS OFF −4 · AT A MATCHING NEXUS +6.** ⚠️ WAS PROPOSED AS +2/+0/−2/+4 AND ERIK WIDENED IT: at −2/+2 the nexus bonus was only twice the best ordinary ground, so a Blazeborn at the Lensward was A BIT BETTER than a Blazeborn in a sunny field. ⛔ A NEXUS IS THE WALL AT ITS THICKEST AND, SINCE SNG-602, THE PLACE WHERE THE MOST CHANNELLED SOUL IS HELD. Arriving at one should feel like arriving somewhere. ⛑ The penalty half already runs — `substrate.js` computes `chancePenalty` and `energyMult` and `skill_battle.js:1026` shows it on the roll as 'the ground here (metaphysical, 51% of its strength)'. **What this ruling adds is the reward half and the nexus step.**",
@@ -301,5 +339,18 @@
   "proposedName": "The Conduit",
   "howItWouldWork": "⬜ PROPOSED, ERIK RULES. ⛔ ITS POWER COMES FROM HOW MANY DIFFERENT KINDS OF PEOPLE HOLD IT, not from what it is — the only nexus whose strength is a count of traditions rather than a density. ⚠️ Which means it CANNOT be turned the way the other eight can: you cannot tune a thing toward one side when its output is a function of how many sides are present. **Taking it means emptying it.**",
   "_theMiddleWaysOwnCorruption": "⚠️ AND IT NEEDS ONE, since both other sides have a virtue and a vice. Wildheart is NOT it — Erik ruled that refusing order is Void-like, not middle. ⬜ The likeliest candidate is the vice the Council shape invites: EVALUATION AS AVOIDANCE — openness that never closes, a body that considers every side so thoroughly it never holds an aperture against anything. From the extremes that is what the middle way already looks like. **The corruption is when they are right.** Erik's to rule."
+ },
+ "_turnability_20260916": {
+  "_statement": "⛔ ERIK 2026-09-16: 'every site vector can be turned, or at least stopped. Perhaps the two that are most corrupt void and corrupt precursor can only be stopped, but the rest, in various difficulties, can be turned/tuned toward the middle path. Their entities can be persuaded through play.' ⛑ SO A NEXUS IS NOT TAKEN BY FORCE ALONE. **The default route is the entity**, and the fight is what is left when persuasion has failed or was never tried.",
+  "turned": "The site's vector changes and its champion stays. ⚠️ A turned nexus is worth more than a captured one, because the person who was holding it is now holding it for you — and they will argue your case to the next person, which no captured site does.",
+  "stopped": "The site stops pushing its vector. The champion is deposed, sealed, killed or spent. ⛔ IT IS NOT YOURS AFTERWARD: a stopped nexus goes quiet and unclaimed, and somebody else can come for it.",
+  "stoppable_only": "⛔ THE TWO MOST CORRUPT CANNOT BE TURNED — the Thornmother and the Sovereign at Neitherway. ⚠️ NOT BECAUSE THEY ARE EVIL. Because each has already had the argument and proceeded: the Thornmother's own authored fear is 'that sealing it kills it — she has thought about this and continued', and a Sovereign's position is that the seeded count as fuel, which is not a view you talk somebody out of. **The corruption IS the unpersuadability.**",
+  "_andTheMiddleIsTurnableToo": "⚠️ ERIK, AND IT IS THE PART THAT MAKES THIS A GAME RATHER THAN A MORAL: 'if your PC wants the precursor path to win they can try to turn the middle path and stop the Voids, and vice versa.' ⛔ THE MIDDLE WAY IS NOT THE PROTECTED ANSWER. Seerspire is turnable at hard difficulty, and Aevi is persuadable for exactly the reason she is the middle way's champion — openness to evaluation is her discipline and her exposure. ⛑ **A campaign that turns the middle toward an extreme is a legitimate ending, and it should hurt.**",
+  "difficulties": {
+   "open": "no champion; whoever takes it sets it",
+   "moderate": "a champion who can be persuaded by someone who does the work",
+   "hard": "a champion whose position IS their virtue — turning them means giving them a better version of their own argument",
+   "stoppable_only": "no persuasion exists; the only question is whether you stop them"
+  }
  }
 }

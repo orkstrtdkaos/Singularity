@@ -19266,6 +19266,88 @@ console.log("\n── §269 · the people the world makes are shared ──");
   } finally { restore(); }
 }
 
+// ⛔ CCODE-385 — shared lives: WHAT IS TRUE OF A PERSON IS THE WORLD'S; WHAT A PLAYER KNOWS OF THEM STAYS THEIRS. ⚑ MEASURED: the 4 people with a
+// shared identity who sit in two or more saves (Mara Wells, Edvar Crane, Deni Cors, Pell) had a different role in every save, and
+// Usnea's "Pell" — a cord seller — shares an id with Silas's "Pell Ran Marsh" and is somebody else.
+console.log("\n── §270 · what is true of a person is the world's ──");
+{
+  const F270 = await import("../engine/fates.js");
+  const N270 = await import("../engine/npcs.js");
+  const W270 = await import("../engine/worldtick.js");
+  const T270 = await import("../engine/worldtime.js");
+  const { fakeRemote: fr270 } = await import("./lib/fake_remote.mjs");
+  const D = T270.absoluteWorldDay(Date.now());
+
+  /* ---- 1 · THE STAMP IS WRITTEN WHERE A PERSON CHANGES ---- */
+  const silas = { id: "char-s270", name: "Silas Weir", npcRegistry: {}, worldState: { lastTickDay: 2, news: [], unseenNews: [], epicStatus: {}, mintedFigures: [] } };
+  N270.applyNpcUpdates(silas, [{ op: "meet", name: "Edvar Crane", role: "Mill resident and water-reader" }], { day: 3, worldDay: D - 4 });
+  const e0 = { ...silas.npcRegistry["edvar-crane"] };
+  N270.applyNpcUpdates(silas, [{ op: "update", npcId: "edvar-crane", role: "Agent of Stillwater's Trouble; filtration engineer" }], { day: 4, worldDay: D - 2 });
+  N270.applyNpcUpdates(silas, [{ op: "update", npcId: "edvar-crane", role: "Agent of Stillwater's Trouble; filtration engineer" }], { day: 5, worldDay: D - 1 });
+  N270.applyNpcUpdates(silas, [{ op: "update", npcId: "edvar-crane", note: "unstamped" }], { day: 5 });
+  const e1 = silas.npcRegistry["edvar-crane"];
+  check("§270: ⛔ a CHANGE to who a person is carries the world-day — not a first meeting, not a repeat of the same role",
+    !!e1 && e0.roleSince === undefined && e1.roleSince === D - 2 && e1.role === "Agent of Stillwater's Trouble; filtration engineer", JSON.stringify({ was: e0.roleSince, now: e1.roleSince }));
+
+  /* ---- 2 · THE RULE ---- */
+  const by = (id, name) => ({ characterId: id, name });
+  const la = { id: "x", name: "Edvar Crane", role: "A", roleSince: D - 5, roleBy: by("a", "A") };
+  const lb = { id: "x", name: "Edvar Crane", role: "B", roleSince: D - 2, roleBy: by("b", "B"), status: "dead", statusNote: "drowned in the race", statusSince: D - 3, statusBy: by("b", "B") };
+  const lc = { id: "x", name: "Edvar Crane", status: "injured", statusSince: D, statusBy: by("c", "C") };
+  check("§270: ⛔ the rule is the same from either side — the later role, and a death that a later lesser status does not undo",
+    F270.sameLife(F270.mergeLife(la, lb), F270.mergeLife(lb, la)) && F270.mergeLife(la, lb).role === "B"
+    && F270.mergeLife(lb, lc).status === "dead" && F270.sameLife(F270.mergeLife(lb, lc), F270.mergeLife(lc, lb)));
+  check("§270: …but a return from death on or after it is the later truth",
+    F270.mergeLife(lb, { ...lc, status: "active", returnedFromDeath: { day: D } }).status === "active");
+  const folded = F270.foldLives({ lives: { pell: { id: "pell", name: "Pell Ran Marsh", role: "Master smith", roleSince: D - 9, roleBy: by("s", "Silas") } } },
+    [{ id: "pell", name: "Pell", role: "Cord-and-hemp seller", roleSince: D, roleBy: by("u", "Usnea") }]);
+  check("§270: ⛔ ONE PERSON, ONE FULL NAME — Usnea's \"Pell\" is not folded into Silas's \"Pell Ran Marsh\"",
+    folded.changed.length === 0 && folded.store.lives.pell.role === "Master smith");
+
+  /* ---- 3 · THE SPLIT, THROUGH THE SYNC ---- */
+  const content = { legends: { roster: [] }, npcs: { "edvar-crane": { id: "edvar-crane", name: "Edvar Crane" }, pell: { id: "pell", name: "Pell Ran Marsh" },
+    "grown-one": { id: "grown-one", name: "A Grown One", _gen: { type: "npc" } } }, rules: {} };
+  const adel = { id: "char-a270", name: "Adelheid", npcRegistry: {}, worldState: { lastTickDay: 2, news: [], unseenNews: [], epicStatus: {}, mintedFigures: [] } };
+  N270.applyNpcUpdates(adel, [{ op: "meet", name: "Edvar Crane", role: "Mill resident and water-reader" }], { day: 2, worldDay: D - 6 });
+  const usnea = { id: "char-u270", name: "Usnea Beard", npcRegistry: { pell: { id: "pell", name: "Pell", role: "Cord-and-hemp seller", status: "active", history: [], knownFacts: [], skillsObserved: [], relationship: 3 } },
+    worldState: { lastTickDay: 2, news: [], unseenNews: [], epicStatus: {}, mintedFigures: [] } };
+  silas.npcRegistry.pell = { id: "pell", name: "Pell Ran Marsh", role: "Master smith; partner", roleSince: D - 1, status: "active", history: [], knownFacts: [], skillsObserved: [], relationship: 10 };
+  check("§270: only people with a shared identity can share a life — authored and shared canon, never a world's own grown one",
+    F270.sharedPersonIds(content).has("edvar-crane") && !F270.sharedPersonIds(content).has("grown-one"));
+  const remote = fr270();
+  const restore = remote.install();
+  try {
+    await W270.syncSharedFates({ character: adel, content, publish: false });    // her first read: silent
+    await W270.syncSharedFates({ character: usnea, content, publish: false });
+    await W270.syncSharedFates({ character: silas, content });
+    check("§270: ⛔ a world publishes what it has seen change in a person's life",
+      remote.read(F270.FATES_PATH)?.lives?.["edvar-crane"]?.role === "Agent of Stillwater's Trouble; filtration engineer");
+    await W270.syncSharedFates({ character: adel, content, publish: false });
+    const ae = adel.npcRegistry["edvar-crane"];
+    check("§270: ⛔ THE SPLIT — Adelheid still knows Edvar as the water-reader she met; the world's truth is held beside it, not written over it",
+      ae.role === "Mill resident and water-reader" && ae.worldLife?.role === "Agent of Stillwater's Trouble; filtration engineer", JSON.stringify({ role: ae.role, worldLife: ae.worldLife }));
+    const gmLine = N270.npcRegistryForGM(adel, {}) || "";
+    check("§270: …and her GM is told both: who she knows, and what is true now, to let surface the way news does",
+      /Edvar Crane \(Mill resident and water-reader\)/.test(gmLine) && /IN THE WORLD NOW \(true, from another traveler's story; this character may not know it yet — let it surface the way news does\): Agent of Stillwater's Trouble; filtration engineer\./.test(gmLine), gmLine.slice(0, 300));
+    check("§270: ⛔ …and Usnea's Pell is left as she is — a different person under the same id",
+      usnea.npcRegistry.pell.role === "Cord-and-hemp seller" && !usnea.npcRegistry.pell.worldLife);
+
+    N270.applyNpcUpdates(silas, [{ op: "update", npcId: "edvar-crane", status: "dead", statusNote: "lost to the race at the old mill" }], { day: 6, worldDay: D });
+    await W270.syncSharedFates({ character: silas, content });
+    await W270.syncSharedFates({ character: adel, content, publish: false });
+    const heard = adel.worldState.news.map(n => n.text).join(" | ");
+    check("§270: ⛔ a death is written on — nobody the world buried walks into her story — and she hears of it",
+      ae.status === "dead" && /Word reaches you: Edvar Crane has died — lost to the race at the old mill\./.test(heard), heard);
+    N270.applyNpcUpdates(adel, [{ op: "update", npcId: "edvar-crane", role: "Agent of Stillwater's Trouble; filtration engineer" }], { day: 7, worldDay: D });
+    await W270.syncSharedFates({ character: adel, content, publish: false });
+    check("§270: …and once what she knows catches up, the world's note beside it goes", !ae.worldLife?.role, JSON.stringify(ae.worldLife));
+  } finally { restore(); }
+
+  const A270 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§270: the turn's person updates carry the world's day, so a change a player's story makes can travel",
+    /const memCtx = \{ locationId: location\.id, day: readClock\(character\.clock\)\.day, worldDay: absoluteWorldDay\(\),/.test(A270));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

@@ -1,4 +1,4 @@
-<!-- status: shared lives under way — CCODE-380 (canon identity), 381 (a legend's fate), 382 (who is around today), 383 (a hold nearby), 384 (shared people) shipped · content asks for Aevi in §4 -->
+<!-- status: shared lives under way — CCODE-380 (canon identity), 381 (a legend's fate), 382 (who is around today), 383 (a hold nearby), 384 (shared people), 385 (what is true of a person) shipped · content asks for Aevi in §4 -->
 # PLAN — One living world, and Courtney's game
 
 **CCode → Aevi and Erik · 2026-09-16**
@@ -122,8 +122,11 @@ is RELATIVE to a player (bond, times met, what they know) and what is TRUE of th
   takes an id derived from it (one survivor and one successor per death, one taker per empty arc per fourteen days), joins
   every world's roster through `world/people/valley.json`, and their fate folds like a legend's. The five legacy people moved
   onto ids of their own world.
-- ⬜ **Next:** the registry split (what is relative to a player against what is true of the person); trading with another
-  player's hold; the >1MB read.
+- ✅ **CCODE-385 — what is true of a person is the world's; what a player knows stays theirs.** A changed role or status is
+  stamped with the world-day and shared as a life; a death is written onto every registry that knows the person, a new role is
+  held beside what the character knows and shown to the GM as IN THE WORLD NOW. Only between the same full name. Nothing
+  backfilled — Edvar's work for Stillwater's Trouble travels the next time Silas's story touches it.
+- ⬜ **Next:** trading with another player's hold; the >1MB read.
 
 ## §3 — ⬜ BACKLOG (Erik): ONE SOURCE OF TRUTH FOR EVERY KIND OF THING
 

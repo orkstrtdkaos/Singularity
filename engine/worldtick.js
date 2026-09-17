@@ -44,7 +44,8 @@ import { INVITES_PATH, mergeInvitation, answerInto, applyAnswers } from "./invit
 import { boundFigures } from "./companionlives.js";   // SNG-597 §3: a companion who is also a figure of the world
 import { decayWakes, wakeArcPush } from "./wake.js"; // SNG-204: wakes decay on the tick + lean on connected arcs
 import { FATES_PATH, WOUND_DAYS, STOP_DAYS, fatesOfWorld, foldFates, adoptFates, fateNews,   // CCODE-381: a legend's fate is the world's
-  personIdFor, mintKey, sharedPeopleOf, foldPeople, adoptPeople, birthNews } from "./fates.js";   // CCODE-384: and the people it makes
+  personIdFor, mintKey, sharedPeopleOf, foldPeople, adoptPeople, birthNews,   // CCODE-384: and the people it makes
+  sharedPersonIds, livesOfWorld, foldLives, adoptLives, lifeNews } from "./fates.js";   // CCODE-385: and what is true of the people it holds
 import { HOLDS_PATH, holdCardsOf, holdCardsChanged, mergeHoldCards } from "./sharedholds.js";   // CCODE-383: a hold nearby is known
 import { enterDeathState, deepenDeaths, deathDepth, isRetrievable, resolveRetrieval } from "./death.js"; // SNG-209: a killed figure ENTERS the death state; the clock sinks untended deaths toward sealed
 import { absoluteWorldDay, worldDayAt, worldCount, readClock, positionedPlace } from "./worldtime.js";
@@ -388,7 +389,7 @@ export async function advanceDelegatedWork({ character, content, advanceAssignme
         else if (m.outcome === "done") news.push(`${m.a.npcName} has finished ${m.a.charge}.`);
       }
     }
-    if (statusUpdates.length) applyNpcUpdates(character, statusUpdates, { day: currentDay });
+    if (statusUpdates.length) applyNpcUpdates(character, statusUpdates, { day: currentDay, worldDay: absoluteWorldDay(now) });   // CCODE-385: stamped
     // ⚠️ RETURN WHAT MOVED, NOT WHAT WAS WORTH SAYING. Inferring "did anything happen" from "was there
     // news" reads a QUIET SUCCESS as nothing happening — a plain `progress` prints no line by design.
     return { news: news.map(t => ({ text: t, section: "yours" })), moved: moved.length };
@@ -1234,7 +1235,7 @@ export async function syncSharedFates({ character, content, publish = true, now 
   if (!shared || !character?.worldState) return { synced: false, adopted: [], published: [] };
   const ws = character.worldState;
   const authoredIds = (content?.legends?.roster || []).map(f => f?.id).filter(Boolean);
-  if (!authoredIds.length && !sharedPeopleOf(ws).length) return { synced: false, adopted: [], published: [] };
+  if (!authoredIds.length && !sharedPeopleOf(ws).length && !Object.keys(character.npcRegistry || {}).length) return { synced: false, adopted: [], published: [] };
   const by = { characterId: character.id || null, name: character.name || null };
   const cap = Number.isFinite(Number(content?.rules?.arcResponse?.mintCap)) ? Number(content.rules.arcResponse.mintCap) : 140;
   let store = null, published = [], peopleAdded = [];
@@ -1243,11 +1244,14 @@ export async function syncSharedFates({ character, content, publish = true, now 
       // ⛔ CCODE-384: the people this world made go up with the fates — a person already in the store keeps who they are
       const minePeople = sharedPeopleOf(ws);
       const mine = fatesOfWorld(ws, [...authoredIds, ...minePeople.map(f => f.id)], { by });
+      // ⛔ CCODE-385: the lives this world has seen change go up with them
+      const myLives = livesOfWorld(character, sharedPersonIds(content, character), { by });
       await pushMergedFile(FATES_PATH, (remote) => {
         const people = foldPeople(remote, minePeople);
-        const folded = foldFates(people.store, mine);
+        const lives = foldLives(people.store, myLives);
+        const folded = foldFates(lives.store, mine);
         store = folded.store; published = folded.changed; peopleAdded = people.added;
-        return (folded.changed.length || people.added.length) ? folded.store : null;   // nothing of this world's stands: no write
+        return (folded.changed.length || people.added.length || lives.changed.length) ? folded.store : null;   // nothing of this world's stands: no write
       }, `people: who ${character.name || character.id}'s world saw come into the story, and what became of the valley's legends`);
     } else {
       store = await fetchRepoJSON(FATES_PATH);
@@ -1262,12 +1266,15 @@ export async function syncSharedFates({ character, content, publish = true, now 
   const ids = [...authoredIds, ...sharedPeopleOf(ws).map(f => f.id)];
   const roster = worldRoster(ws, content);
   const adopted = adoptFates(ws, store?.fates || {}, ids, { by });
+  // ⛔ CCODE-385: and what is true of the people this character knows — a death written on, a new role held beside what they know
+  const lived = adoptLives(character, store?.lives || {}, { ids: sharedPersonIds(content, character), by });
   // a death the world recorded is this world's landmark too — the gate that keeps deaths rare reads it
   for (const a of adopted) if (a.after?.status === "dead" && Number.isFinite(a.atWorldDay)) ws.lastEpicDeathDay = Math.max(Number(ws.lastEpicDeathDay) || 0, a.atWorldDay);
   // ⚠️ A SAVE'S FIRST READ IS SILENT: it takes the world as it is. After that, only what happened since its last read is news.
   const lastRead = Number.isFinite(Number(ws.fatesReadWorldDay)) && ws.fatesReadWorldDay !== null ? Number(ws.fatesReadWorldDay) : null;
   const news = lastRead == null ? [] : [...birthNews(joined, { worldDay, sinceWorldDay: lastRead - 1 }),
-    ...fateNews(adopted, { roster, content, worldDay, sinceWorldDay: lastRead - 1 })];
+    ...fateNews(adopted, { roster, content, worldDay, sinceWorldDay: lastRead - 1 }),
+    ...lifeNews(lived, { sinceWorldDay: lastRead - 1 })];
   ws.fatesReadWorldDay = worldDay;
   if (news.length) {
     ws.news = ws.news || []; ws.unseenNews = ws.unseenNews || [];
@@ -1275,7 +1282,7 @@ export async function syncSharedFates({ character, content, publish = true, now 
     ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);
     ws.unseenNews = [...ws.unseenNews, ...stamped].slice(-NEWS_CAP);
   }
-  return { synced: true, adopted, published, joined, peopleAdded, news };
+  return { synced: true, adopted, published, joined, peopleAdded, lived, news };
 }
 
 export async function syncSharedCanon({ character, profile, content, region = "valley", now = Date.now(), authoredFor = null } = {}) {

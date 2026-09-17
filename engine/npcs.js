@@ -323,7 +323,12 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
       n.name = late.name;
       if (late.nameUnknown) n.nameUnknown = true;
     }
-    if (u.role) n.role = String(u.role).slice(0, 100);
+    if (u.role) {
+      const role = String(u.role).slice(0, 100);
+      // ⛔ CCODE-385: a CHANGE to who a person is carries the world-day it happened, and is this world's (another world's name comes off)
+      if (role !== n.role && ctx.worldDay != null) { n.roleSince = ctx.worldDay; delete n.roleBy; }
+      n.role = role;
+    }
     // ⛔ SNG-556 — THE UPDATE PATH MUST WRITE THE AGE THE PROMPT ASKS FOR. It did not, and I found it by driving the
     // exact loop the new prompt row requests: emit {"op":"update", age:19} and the record still read null. A writer with
     // no reader, one minute old — the defect this project keeps finding, committed while fixing an instance of it.
@@ -452,7 +457,10 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
       const kf = kinFact(n);
       if (kf) pinFact(character, kf, { day: ctx.day ?? null, subjectId: n.id });
     }
-    if (u.status && ["active", "injured", "missing", "dead", "departed"].includes(u.status)) n.status = u.status;
+    if (u.status && ["active", "injured", "missing", "dead", "departed"].includes(u.status)) {
+      if (u.status !== n.status && ctx.worldDay != null) { n.statusSince = ctx.worldDay; delete n.statusBy; }   // ⛔ CCODE-385: …and so does a status
+      n.status = u.status;
+    }
     if (u.statusNote) n.statusNote = smartClamp(String(u.statusNote), 240); // SNG-152
     // CCODE-85 (Erik: "NPCs should have deeds too"). reputation.js was never character-specific — every
     // function in it reads only `X.deeds` — but nothing ever passed it an NPC and nothing read one back, so
@@ -865,6 +873,12 @@ export function npcRegistryForGM(character, { locationId = null, sceneNpcNames =
         : ` ⟡ DRIVEN: ${d.driveSummary || (d.wants || [])[0] || "has their own wants"}`;
     }
     return `- ${n.name}${Array.isArray(n.aliases) && n.aliases.length ? ` (also called ${n.aliases.slice(-3).join(", ")})` : ""}${n.role ? ` (${n.role})` : ""}${n.gender || n.pronouns ? ` [${[n.gender, n.pronouns].filter(Boolean).join(", ")} — use these pronouns]` : ""} — ${relationshipBand(n.relationship)} (${n.relationship}), status: ${n.status}.` +
+      // ⛔ CCODE-385: what is TRUE of them now, from another traveler's story, beside what this character knows — for the GM to let surface
+      (n.worldLife && ((n.worldLife.role && n.worldLife.role !== n.role) || (n.worldLife.status && n.worldLife.status !== n.status))
+        ? ` IN THE WORLD NOW (true, from another traveler's story; this character may not know it yet — let it surface the way news does): ${[
+            n.worldLife.role && n.worldLife.role !== n.role ? n.worldLife.role : null,
+            n.worldLife.status && n.worldLife.status !== n.status ? `${n.worldLife.status}${n.worldLife.statusNote ? ` — ${smartClamp(n.worldLife.statusNote, 140)}` : ""}` : null,
+          ].filter(Boolean).join("; ")}.` : "") +
       (n.bondType && n.bondType !== "platonic" ? ` BOND: ${relationshipLabel(n)} — established fact; honor the KIND of this relationship.` : "") +
       (desc ? ` ${desc}` : "") +
       (note ? ` CURRENT SITUATION: ${note}.` : "") +

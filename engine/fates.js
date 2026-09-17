@@ -22,6 +22,7 @@
 // ⚠️ THE STATE, NOT THE STORY. A career, a deed log, a crusade stay each world's own; what is shared is what a person IS now.
 
 import { clashLine, newsVoiceOf } from "./newsvoice.js";
+import { normName } from "./namematch.js";   // CCODE-385: one person, one full name
 
 export const FATES_PATH = "world/people/valley.json";
 /** How long a wound keeps a legend off the board, and a check — `applyEpicClashOutcome` writes both from here. */
@@ -316,6 +317,175 @@ export function birthNews(adopted = [], { worldDay = null, sinceWorldDay = null,
         ? `Someone new is being spoken of${origin ? ` — they ${origin}` : ""}.`
         : `A new name is being spoken of — ${f.name}${origin ? `, ${origin}` : ""}.`,
       worldDay: day ?? worldDay, tier: "murmur", kind: "birth", figureId: f.id });
+  }
+  return out;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+// ⛔ CCODE-385 — WHAT IS TRUE OF A PERSON IS THE WORLD'S; WHAT A PLAYER KNOWS OF THEM STAYS THEIRS
+// ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+//
+// Erik (SNG-595 §6): people "grow, have careers, do deeds, and die" — and a shared person frozen where one world last saw them is a
+// defect. ⚑ MEASURED: 21 people sit in two or more saves' registries; the 4 with a shared identity (Mara Wells, Edvar Crane, Deni
+// Cors, Pell) have a different role in EVERY save — Edvar is a "mill resident and water-reader" to Adelheid and an "agent of
+// Stillwater's Trouble; filtration engineer" to Silas.
+//
+// ⛑ THE SPLIT. A registry entry keeps what THIS character knows — their relationship, their history, the role they know the person
+// by. What happened TO the person — a new role, a death, a return — is stamped with the world-day when a world records it (`roleSince`,
+// `statusSince`, written by `applyNpcUpdates`), published as a LIFE in `world/people/valley.json`, and folded by the latest day.
+//   · a death is adopted into every registry that knows them (nobody the world buried walks into a story), with a line of news;
+//   · a new role, or a lesser status, is held beside what the character knows (`worldLife`), for the GM to let surface — it is not
+//     written over the character's knowledge, because they have not learned it yet.
+// ⚠️ ONE PERSON, ONE FULL NAME. A life is shared only between records with the same full name: Usnea's "Pell", a cord seller, shares an
+// id with Silas's "Pell Ran Marsh" and is somebody else. The first world to publish an id's life holds it.
+// ⚠️ NOTHING IS BACKFILLED. A role written before the stamp stays that save's own; lives travel from the next change on.
+
+const personKey = (who) => String(who?.characterId ?? "");
+/** The same person, by full name — never by a given name or an alias. */
+export function sameName(a, b) {
+  const x = normName(String(a || "")), y = normName(String(b || ""));
+  return !!x && x === y;
+}
+
+/** The ids whose lives can be shared: authored people and shared canon (a grown record this world has not promoted is its own), and
+ *  the people the world made. Pure. */
+export function sharedPersonIds(content = {}, character = null) {
+  const ids = new Set();
+  for (const [id, r] of Object.entries(content?.npcs || {})) if (r && (!r._gen || r._gen.promotedWorldDay != null)) ids.add(id);
+  for (const f of character?.worldState?.mintedFigures || []) if (String(f?.id || "").startsWith("person-")) ids.add(f.id);
+  return ids;
+}
+
+/** What this world has seen change in a person's life, stamped. Null when nothing is stamped. Pure. */
+export function lifeOf(n, { by = null } = {}) {
+  if (!n?.id) return null;
+  const rs = num(n.roleSince), ss = num(n.statusSince);
+  if (rs == null && ss == null) return null;
+  const who = (x) => (x ? { characterId: x.characterId ?? null, name: x.name ?? null } : null);
+  return { id: n.id, name: n.name || null,
+    ...(rs != null ? { role: n.role || null, roleSince: rs, roleBy: who(n.roleBy || by) } : {}),
+    ...(ss != null ? { status: n.status || "active", statusNote: n.statusNote || null, statusSince: ss, statusBy: who(n.statusBy || by),
+      ...(n.returnedFromDeath ? { returnedFromDeath: { day: num(n.returnedFromDeath.day) } } : {}) } : {}) };
+}
+
+const ROLE_FIELDS = ["role", "roleSince", "roleBy"];
+const STATUS_FIELDS = ["status", "statusNote", "statusSince", "statusBy", "returnedFromDeath"];
+const pickFields = (x, fields) => { const o = {}; for (const f of fields) if (x?.[f] !== undefined) o[f] = x[f]; return o; };
+
+/** Which account of one aspect of a life stands: the later day; on a day, a death; then the world that recorded it. A death stands against
+ *  a later status unless that status is a return from it. Pure, symmetric. */
+function laterAspect(a, b, since, by, fields, { dies = false } = {}) {
+  const ha = num(a?.[since]) != null, hb = num(b?.[since]) != null;
+  if (!ha && !hb) return {};
+  if (!hb) return pickFields(a, fields);
+  if (!ha) return pickFields(b, fields);
+  if (dies) {
+    const deadA = a.status === "dead", deadB = b.status === "dead";
+    if (deadA !== deadB) {
+      const dead = deadA ? a : b, other = deadA ? b : a;
+      const back = num(other.returnedFromDeath?.day);
+      return pickFields(back != null && back >= num(dead[since]) ? other : dead, fields);
+    }
+  }
+  const order = (num(b[since]) - num(a[since])) || cmp(personKey(a[by]), personKey(b[by])) * -1 || cmp(JSON.stringify(pickFields(b, fields)), JSON.stringify(pickFields(a, fields)));
+  return pickFields(order > 0 ? b : a, fields);
+}
+
+/** Two accounts of one person's life, folded aspect by aspect. Pure, symmetric. */
+export function mergeLife(a, b) {
+  if (!a) return b || null;
+  if (!b) return a;
+  return { id: a.id || b.id, name: a.name || b.name,
+    ...laterAspect(a, b, "roleSince", "roleBy", ROLE_FIELDS),
+    ...laterAspect(a, b, "statusSince", "statusBy", STATUS_FIELDS, { dies: true }) };
+}
+
+/** Whether two lives say the same thing. Pure. */
+export function sameLife(a, b) {
+  if (!a || !b) return !a && !b;
+  const key = (x) => JSON.stringify([normName(String(x.name || "")), x.role ?? null, num(x.roleSince), personKey(x.roleBy), x.status ?? null,
+    x.statusNote ?? null, num(x.statusSince), personKey(x.statusBy), num(x.returnedFromDeath?.day)]);
+  return key(a) === key(b);
+}
+
+/** The store after folding a world's lives in. A life under an id already held by a different full name is somebody else's, and is not
+ *  folded. Returns the ids that moved. Pure. */
+export function foldLives(store, lives = [], { regionId = "valley" } = {}) {
+  const next = { schemaVersion: 1, regionId, ...(store && typeof store === "object" ? store : {}), lives: { ...(store?.lives || {}) } };
+  const changed = [];
+  for (const l of lives || []) {
+    if (!l?.id) continue;
+    const cur = next.lives[l.id] || null;
+    if (cur && !sameName(cur.name, l.name)) continue;
+    const merged = mergeLife(cur, l);
+    if (!sameLife(merged, cur)) { next.lives[l.id] = merged; changed.push(l.id); }
+  }
+  return { store: next, changed };
+}
+
+/** Every stamped life this world holds, for the people whose lives can be shared. Pure. */
+export function livesOfWorld(character, ids = new Set(), { by = null } = {}) {
+  const out = [];
+  for (const [id, n] of Object.entries(character?.npcRegistry || {})) {
+    if (!ids.has(id)) continue;
+    const l = lifeOf(n, { by });
+    if (l) out.push(l);
+  }
+  return out;
+}
+
+/** Adopt the world's lives into a character's registry: a death or a return is written onto the record; a new role or a lesser status
+ *  is held beside what the character knows, as `worldLife`, and cleared once what they know has caught up. Only the same full name.
+ *  Mutates. Returns [{ id, kind: "died"|"returned"|"role"|"status", name, note }]. */
+export function adoptLives(character, lives = {}, { ids = new Set(), by = null } = {}) {
+  const reg = character?.npcRegistry || {};
+  const out = [];
+  for (const [id, life] of Object.entries(lives || {})) {
+    const n = reg[id];
+    if (!n || !life || !ids.has(id) || !sameName(n.name, life.name)) continue;
+    const mine = lifeOf(n, { by });
+    const merged = mergeLife(mine, life);
+    // the status: a death or a return is the person's, and every world holds it
+    const statusWon = num(merged.statusSince) != null && JSON.stringify(pickFields(merged, STATUS_FIELDS)) !== JSON.stringify(pickFields(mine, STATUS_FIELDS));
+    if (statusWon) {
+      if (merged.status === "dead" && n.status !== "dead") {
+        n.status = "dead"; n.statusNote = merged.statusNote || n.statusNote || null; n.statusSince = merged.statusSince; n.statusBy = merged.statusBy || null;
+        if (n.worldLife) { delete n.worldLife.status; delete n.worldLife.statusNote; delete n.worldLife.statusSince; }
+        out.push({ id, kind: "died", name: n.name, note: merged.statusNote || null, worldDay: merged.statusSince });
+      } else if (n.status === "dead" && merged.status !== "dead" && merged.returnedFromDeath) {
+        n.status = merged.status; n.statusNote = merged.statusNote || null; n.statusSince = merged.statusSince; n.statusBy = merged.statusBy || null;
+        n.returnedFromDeath = { ...(n.returnedFromDeath || {}), day: merged.returnedFromDeath.day };
+        out.push({ id, kind: "returned", name: n.name, worldDay: merged.statusSince });
+      } else if (merged.status !== n.status) {
+        n.worldLife = { ...(n.worldLife || {}), status: merged.status, statusNote: merged.statusNote || null, statusSince: merged.statusSince };
+        out.push({ id, kind: "status", name: n.name, worldDay: merged.statusSince });
+      }
+    }
+    // the role: held beside what the character knows, never over it
+    if (num(merged.roleSince) != null && merged.role && merged.role !== n.role && (num(mine?.roleSince) == null || num(merged.roleSince) > num(mine.roleSince))) {
+      if (n.worldLife?.role !== merged.role) {
+        n.worldLife = { ...(n.worldLife || {}), role: merged.role, roleSince: merged.roleSince };
+        out.push({ id, kind: "role", name: n.name, worldDay: merged.roleSince });
+      }
+    } else if (n.worldLife?.role && (n.worldLife.role === n.role || num(mine?.roleSince) >= num(n.worldLife.roleSince))) {
+      delete n.worldLife.role; delete n.worldLife.roleSince;   // what the character knows has caught up
+    }
+    if (n.worldLife && !Object.keys(n.worldLife).length) delete n.worldLife;
+  }
+  return out;
+}
+
+/** What a player hears of a life: a death or a return, since `sinceWorldDay`, at most `max`. A new role is not news — it surfaces in a
+ *  scene, when someone says it. Pure. */
+export function lifeNews(adopted = [], { sinceWorldDay = null, max = 2 } = {}) {
+  const out = [];
+  for (const a of adopted || []) {
+    if (out.length >= max) break;
+    if (a.kind !== "died" && a.kind !== "returned") continue;
+    if (sinceWorldDay != null && num(a.worldDay) != null && num(a.worldDay) < sinceWorldDay) continue;
+    out.push(a.kind === "died"
+      ? { text: `Word reaches you: ${a.name} has died${a.note ? ` — ${a.note}` : ""}.`, worldDay: a.worldDay, tier: "event", kind: "death", victimId: a.id }
+      : { text: `Word reaches you: ${a.name} is back among the living.`, worldDay: a.worldDay, tier: "event" });
   }
   return out;
 }

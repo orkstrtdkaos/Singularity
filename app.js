@@ -157,7 +157,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.57";
+const APP_VERSION = "2.0.58";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4797,10 +4797,59 @@ function noteGeneratedAttention(id, kind, day) {
       recordAttention(rec, kind, day);
       // SNG-178: the ladder measured investment and never spent it. A rung crossing is the moment a
       // record became owed more than it carries, so deepen it — lazily, once, and never blocking.
+      // ⛔ CCODE-397 (SNG-582): AND A PLACE, which this door has never opened for. ⚑ 24 of 24 grown places across the saves carry no
+      // look, because enrichment asked for a voice and a personality and was wired for people alone.
       if (rec._gen?.needsDepth && type === "npc") enrichNpcDepth(rec);
+      else if (rec._gen?.needsDepth && type === "location") enrichPlaceDepth(rec);
       return;
     }
   }
+}
+
+/** ⛔ CCODE-397 (SNG-582 O1/O3) — A PLACE THE PLAYER COMES BACK TO EARNS ITS LOOK. Same shape as `enrichNpcDepth`: best-effort,
+ *  non-blocking, one attempt per rung, additive only. ⚑ Aevi authored `appearance` on 138 places by hand and asked for the half that
+ *  keeps it true as the set grows — "I am not going to hand-author the next 138". The ask is her own register: the VISUAL only, and the
+ *  split between what a place looks like and what it is like.
+ *  ⚠️ IT ASKS FOR WHAT IS MISSING, NOT FOR EVERYTHING. `unearnedDepth(rec, "location")` names the owed fields, and a place minted before
+ *  the boilerplate was retired counts as owing a `descriptionSeed` too, because "" and a sentence that describes nothing are the same
+ *  debt. Nothing already written is overwritten. */
+async function enrichPlaceDepth(rec) {
+  const owed = unearnedDepth(rec, "location");
+  if (!owed.length || !getApiKey()) { if (rec._gen) delete rec._gen.needsDepth; return; }
+  if (rec._gen) delete rec._gen.needsDepth;             // one attempt per rung, success or not
+  try {
+    const system = [
+      `You deepen an EXISTING place in a narrative RPG. The player has come back to it, so it needs what a place that is returned to has.`,
+      `Keep every established fact — you are ADDING what is missing, never rewriting what play has already made true.`,
+      `- "appearance": what it LOOKS like, and only that — the VISUAL only (subject, setting, mood), with concrete visual nouns in the FIRST sentence. No dialogue, no mechanics, no history, no temperament.`,
+      `- "descriptionSeed": what it is LIKE — its character, what it is for, the temper of whoever is there. NEVER the picture, and never the place's own name.`,
+      `PLAYER REGISTER: plain sentences. No ⛔ ⚠️ ⛑ ⚑ marks, and never a shouted clause in capitals.`,
+      `Output ONE JSON object with exactly these keys: ${owed.map(f => `"${f}"`).join(", ")}. Nothing else.`,
+    ].join("\n");
+    const here = CONTENT.locations[rec.parentId || ""] || null;
+    const user = [
+      `THE PLACE SO FAR:\n${JSON.stringify({ name: rec.name, regionId: rec.regionId, tags: rec.tags, dangerLevel: rec.dangerLevel, descriptionSeed: rec.descriptionSeed || null, appearance: rec.appearance || null }, null, 1)}`,
+      here ? `IT SITS INSIDE: ${here.name}${here.appearance ? ` — which looks like: ${smartClamp(String(here.appearance), 200)}` : ""}` : "",
+      `WHAT THE PLAYER HAS DONE HERE: ${(rec._gen?.attentionHistory || []).map(a => a.kind).join(", ") || "come back to it"}`,
+      `Return ONLY the JSON object.`,
+    ].filter(Boolean).join("\n\n");
+    const raw = await callClaudeJSON([{ role: "user", content: user }], { task: "generate", system });
+    if (!raw || typeof raw !== "object") return;
+    let filled = 0;
+    for (const f of owed) {
+      const v = raw[f];
+      if (typeof v !== "string" || !v.trim()) continue;
+      if (String(rec[f] || "").trim()) continue;         // additive only
+      rec[f] = smartClamp(playerText(v.trim()), 600);    // the register is enforced, not merely asked for
+      filled++;
+    }
+    if (filled) {
+      const gen = generatedRecords(character, "location").find(x => x && x.id === rec.id);
+      if (gen && gen !== rec) for (const f of owed) if (rec[f] && !gen[f]) gen[f] = rec[f];
+      saveCharacter(character);
+      console.log(`[generation] ${rec.name} earned ${filled} field(s): ${owed.filter(f => rec[f]).join(", ")}`);
+    }
+  } catch (err) { console.warn("[generation] a place's depth was not written:", err?.message); }
 }
 
 /** SNG-178: author the fields this NPC has EARNED. Best-effort and non-blocking, the same shape as
@@ -10172,7 +10221,11 @@ function mintTransitLocation(moveRef) {
   const rec = {
     id, name, regionId: here?.regionId || here?.region || null,
     ...(promotedFrom ? { parentId: promotedFrom.parentId, _promotedFromSubPlace: true } : {}),
-    descriptionSeed: `A place the road led to — ${name}. The fiction brought you here before the map knew its name.`,
+    // ⛔ SNG-582 O2 (Aevi) — THE BOILERPLATE IS RETIRED. This one sentence was the `descriptionSeed` of THIRTEEN different places, and
+    // `art.js` drew every one of them from it. ⚑ Measured on the 16 saves: 20 of 24 grown places still carry it. "A place minted with
+    // nothing to say should carry nothing, not a sentence that describes nothing — an empty field is findable; a filled one that says
+    // nothing is not." The place earns its look when the player comes back to it (`enrichPlaceDepth`).
+    descriptionSeed: "", appearance: "",
     // SNG-216: `_gen` MUST be the tracking OBJECT (stampGenerated's shape), not a boolean flag — a boolean
     // here is what made recordAttention throw on arrival + abort the location commit (the SNG-210 desync).
     tags: ["transitional"], connections: here ? [here.id] : [], _mintedAs: "transit",

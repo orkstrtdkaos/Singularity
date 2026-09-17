@@ -13683,8 +13683,11 @@ console.log("\n── §204 · the mint is asked for what it gates: sex and age,
   check("§204: …and keeps gender/pronouns separate from sex, which is what gates",
     /"gender" and "pronouns"/.test(npcPrompt) && /they gate nothing/.test(npcPrompt));
   // ⚠️ A location has no sex. A block asked of every type would be noise, and noise in a prompt is how directives get dropped.
+  // ⛑ CCODE-397: THIS ASKED ABOUT THE PHRASE AND MEANT THE FIELDS. It matched "ALSO REQUIRED", so giving a LOCATION its own gated block
+  // (SNG-582: it is asked for a look, and told the split) failed a check about sex. It asks about sex now, which is its own question.
   check("§204: ⛔ and no other type is asked — a location has no sex",
-    !/ALSO REQUIRED/.test(GEN204.buildGeneratePrompt("location", { location: {} }, { schema: sch }).system));
+    (() => { const locSys = GEN204.buildGeneratePrompt("location", { location: {} }, { schema: sch }).system;
+      return !/"sex"/.test(locSys) && !/ADULT IS 18/.test(locSys) && !/can NEVER be romanced/.test(locSys) && !/"gender" and "pronouns"/.test(locSys); })());
 
   /* ---- 2 · ⛔ THREE DEFINITIONS OF `sex` DISAGREED, AND THE SCHEMA WAS THE ODD ONE ---- */
   // The GM contract says male|female|none; applyNpcUpdates accepts [male, female, none]; the generation schema admitted
@@ -20060,6 +20063,61 @@ console.log("\n── §278 · a place, a creature and a thing can be asked abou
     && /<button class="news-open"[\s\S]{0,700}><span class="news-open-cue">\$\{cue\(n\)\}<\/span><\/button>/.test(A278)
     && /const SKIP = new Set\(\["BUTTON", "A", "INPUT", "TEXTAREA", "SCRIPT", "STYLE", "SELECT", "OPTION"\]\);/.test(A278)
     && /\.news-open \{ display: inline;/.test(rd("style.css")));
+}
+
+// ⛔ CCODE-397 — SNG-582 (Aevi), on Erik's point: "All of this authoring will fall to the generators, so they need to be able to
+// faithfully continue what you are doing." She closed four standards by hand in a day — 1,144 glyph-bearing lines to zero, `appearance`
+// on 138 of 138 places, the sub-attribute pass, `kind` on 24 world facts — and "a corpus brought to a standard by hand and a generator
+// that does not know the standard is a corpus that decays one minted place at a time."
+// ⚑ MEASURED ON THE 16 SAVES: 24 of 24 grown places carry NO look, and 20 of them share one boilerplate sentence — the sentence every
+// picture of them was drawn from. And the mint handed a place its own name as its description.
+console.log("\n── §279 · the generators author to the standard ──");
+{
+  const GEN = await import("../engine/generate.js");
+  const { loadContentHeadless: lch279 } = await import("./headless_content.mjs");
+  const C279 = await lch279();
+  const ctx279 = { location: { id: "millbrook", name: "Millbrook", regionId: "valley" }, hint: "a mill on the far bank", rating: "PG-13" };
+  const locPrompt = GEN.buildGeneratePrompt("location", ctx279, { schema: C279.genSchemas?.location || {}, examples: [] });
+  const npcPrompt = GEN.buildGeneratePrompt("npc", ctx279, { schema: C279.genSchemas?.npc || {}, examples: [] });
+  check("§279: ⛔ A MINTED PLACE IS ASKED FOR A LOOK, AND THE SPLIT IS TAUGHT — `appearance` is what it looks like (the visual only, a concrete noun in the first sentence), `descriptionSeed` is what it is like and never the picture",
+    /"appearance": what it LOOKS like, and only that/.test(locPrompt.system)
+    && /Concrete visual nouns in the FIRST sentence/.test(locPrompt.system)
+    && /"descriptionSeed": what it is LIKE/.test(locPrompt.system) && /NEVER the picture, and never its own name/.test(locPrompt.system)
+    && !/"appearance": what it LOOKS like/.test(npcPrompt.system),   // a person's prompt keeps its own gated fields
+    locPrompt.system.slice(-200));
+  check("§279: ⛔ …AND EVERY MINT IS ASKED FOR PLAYER REGISTER — Aevi's half was rewriting 1,144 shouted lines, and `playerText` strips the glyphs but LEAVES the capitals, so a generator that shouts undoes it one record at a time",
+    /PLAYER REGISTER/.test(locPrompt.system) && /PLAYER REGISTER/.test(npcPrompt.system)
+    && /NEVER A SHOUTED CLAUSE IN CAPITALS/.test(npcPrompt.system) && /no ⛔ ⚠️ ⛑ ⚑ ⬜ ✅ marks/.test(npcPrompt.system));
+  const stub279 = GEN.stubEntity("location", ctx279, C279.genSchemas?.location || {});
+  check("§279: ⛔ AND THE STUB CARRIES NOTHING RATHER THAN ITS OWN NAME — `descriptionSeed: name` was what the mint wrote, and the picture was drawn from it; an empty field is findable, a filled one that says nothing is not",
+    stub279.descriptionSeed === "" && stub279.appearance === "" && stub279.name !== "",
+    JSON.stringify({ name: stub279.name, seed: stub279.descriptionSeed, look: stub279.appearance }));
+  check("§279: ⛔ …and the one-sentence boilerplate is retired from the transit mint, where 20 of the 24 grown places on the saves got theirs",
+    !/A place the road led to — \$\{name\}\. The fiction brought you here/.test(rd("app.js"))
+    && /descriptionSeed: "", appearance: "",/.test(rd("app.js")));
+  // ⛔ what a grown thing is OWED depends on what it is
+  const place279 = { id: "gen-x", name: "A Place", _gen: { type: "location", tier: "established" } };
+  const person279 = { id: "gen-p", name: "A Person", _gen: { type: "npc", tier: "established" } };
+  check("§279: ⛔ A PLACE IS OWED WHAT A PLACE HAS — a look and what it is like, never a voice and a personality; a person's list is unchanged",
+    JSON.stringify(GEN.unearnedDepth(place279, "location")) === JSON.stringify(["appearance", "descriptionSeed"])
+    && JSON.stringify(GEN.unearnedDepth(place279)) === JSON.stringify(["appearance", "descriptionSeed"])   // the record says what it is
+    && GEN.unearnedDepth(person279).includes("voiceHints") && GEN.unearnedDepth(person279).includes("appearance")
+    && GEN.unearnedDepth({ ...place279, appearance: "pale stone", descriptionSeed: "orderly" }, "location").length === 0,
+    JSON.stringify(GEN.unearnedDepth(place279, "location")));
+  const A279 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§279: ⛔ …AND THE DOOR OPENS FOR A PLACE AT LAST — enrichment fired for people alone, which is why 24 of 24 grown places have no look; a place the player returns to earns one, additive only, in the register enforced rather than merely asked for",
+    /else if \(rec\._gen\?\.needsDepth && type === "location"\) enrichPlaceDepth\(rec\);/.test(A279)
+    && /async function enrichPlaceDepth\(rec\) \{/.test(A279)
+    && /const owed = unearnedDepth\(rec, "location"\);/.test(A279)
+    && /if \(String\(rec\[f\] \|\| ""\)\.trim\(\)\) continue;/.test(A279)
+    && /rec\[f\] = smartClamp\(playerText\(v\.trim\(\)\), 600\);/.test(A279)
+    && /if \(!owed\.length \|\| !getApiKey\(\)\) \{ if \(rec\._gen\) delete rec\._gen\.needsDepth; return; \}/.test(A279));
+  // ⛑ AND THE SCHEMA SAYS WHAT EACH FIELD IS FOR, because the generator reads the schema's own words back
+  const schema279 = JSON.parse(rd("schemas/location.schema.json"));
+  check("§279: ⛑ the schema documents both fields and keeps `appearance` out of `required` — promoting it would red-line every place minted before it existed",
+    /what the place LOOKS like, and only that/.test(schema279.properties.appearance.description)
+    && /NOT the picture and never its own name/.test(schema279.properties.descriptionSeed.description)
+    && !(schema279.required || []).includes("appearance"));
 }
 
 /* ══════════ REPORT ══════════ */

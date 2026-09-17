@@ -116,7 +116,11 @@ export function stubEntity(type, context = {}, schema = {}) {
     Object.assign(base, {
       regionId: region, communityId: loc.communityId || null,
       spectrum: loc.spectrum ? { ...loc.spectrum } : {}, poleIntensity: loc.poleIntensity ? { ...loc.poleIntensity } : {},
-      tags: [], connections: loc.id ? [loc.id] : [], descriptionSeed: name,
+      // ⛔ SNG-582 O1/O2 (Aevi) — NOT `descriptionSeed: name`, WHICH IS WHAT THIS LINE USED TO SAY. A place was handed its own name as
+      // its description, and `art.js` drew the picture from it: "Mara Wells' Store" and nothing else. ⚠️ And an empty field is FINDABLE
+      // while a filled one that says nothing is not — "a place minted with nothing to say should carry nothing" — so the stub carries
+      // the fields empty and the ask below fills them.
+      tags: [], connections: loc.id ? [loc.id] : [], descriptionSeed: "", appearance: "",
       loreRefs: loc.loreRefs ? [...loc.loreRefs] : [], encounterFlavor: "",
       questSeeds: [], map: nearMap(loc.map)
     });
@@ -645,11 +649,24 @@ export const TIER_SCHEMA = {
               "wants", "fears", "knowledge", "questSeeds", "arcId", "boundaries", "stages"]
 };
 
+/** ⛔ CCODE-397 (SNG-582 §2.3) — WHAT A GROWN THING IS OWED DEPENDS ON WHAT IT IS, and until now the answer was a person's list for
+ *  everything. ⚑ Measured on the 16 saves: 24 of 24 grown PLACES carry no `appearance` and 20 of them share one boilerplate sentence,
+ *  because enrichment asked for a voice and a personality and was only ever wired for people. A place owes what a place has: what it
+ *  looks like, what it is like, and what turns up there. */
+export const TIER_SCHEMA_BY_TYPE = {
+  location: {
+    fresh: [],
+    established: ["appearance", "descriptionSeed"],
+    nominated: ["appearance", "descriptionSeed", "encounterFlavor", "questSeeds"],
+  },
+};
+
 /** Which fields this entity has EARNED but does not yet carry. Empty when it is as deep as its
  *  standing warrants — which is the common case, and why this is cheap to ask on every turn. */
-export function unearnedDepth(entity) {
+export function unearnedDepth(entity, type = null) {
   const tier = entity?._gen?.tier || "fresh";
-  const owed = TIER_SCHEMA[tier] || [];
+  const kind = type || entity?._gen?.type || null;   // a grown record carries what it is; `type` is for a caller that knows better
+  const owed = (kind && TIER_SCHEMA_BY_TYPE[kind]?.[tier]) || TIER_SCHEMA[tier] || [];
   return owed.filter(f => {
     const v = entity[f];
     return v == null || v === "" || (Array.isArray(v) && !v.length) || (typeof v === "object" && !Array.isArray(v) && !Object.keys(v).length);
@@ -794,6 +811,16 @@ export function buildGeneratePrompt(type, context = {}, { schema = {}, examples 
   // age — promoting it there would red-line the corpus at once, which is the exact mistake this schema's own note
   // records ("closing it would red-line 43 existing files"). The generator is asked for more than it is validated on,
   // which is what the schema description always said it did.
+  // ⛔ SNG-582 O1/O3 (Aevi, and Erik's point behind it: "All of this authoring will fall to the generators, so they need to be able to
+  // faithfully continue what you are doing") — A MINTED PLACE GETS A LOOK, AND THE SPLIT IS TAUGHT. ⚑ She measured the authored corpus
+  // before writing 138 looks by hand: 25% of `descriptionSeed` mixed look with CHARACTER, and 59% had no concrete visual noun in the
+  // first sentence — the sentence every picture of the place was drawn from. The register is her own, from the `imagePrompt` rule.
+  const LOCATION_FIELDS = type !== "location" ? "" :
+    `
+
+ALSO REQUIRED, AND THE FIRST OF THEM IS WHAT EVERY PICTURE OF THIS PLACE IS DRAWN FROM:
+- "appearance": what it LOOKS like, and only that — the VISUAL only: subject, setting, mood. Concrete visual nouns in the FIRST sentence (what is built, what is growing, the water, the stone, the light). No dialogue, no mechanics, no history, no temperament.
+- "descriptionSeed": what it is LIKE — its character, its people's temper, what it is for. NEVER the picture, and never its own name. A place's suspicion of anything that cannot be weighed belongs here; the dressed stone blocks belong in "appearance".`;
   const GATED_FIELDS = type !== "npc" ? "" :
     `
 
@@ -816,7 +843,12 @@ ALSO REQUIRED, AND EACH ONE GATES SOMETHING THE ENGINE WILL NOT GUESS:`
     grammar.inGrainGuarantee ? `IN-GRAIN LAW: ${grammar.inGrainGuarantee}` : "",
     grammar.asymmetry && type !== "npc" ? `ASYMMETRY: ${grammar.asymmetry}` : "",
     grammar.functionAwareness ? `FUNCTION-AWARENESS: ${grammar.functionAwareness}` : "",
-    `Output ONE JSON object and nothing else. REQUIRED fields: ${req}. Match the shape + voice of the examples exactly.${GATED_FIELDS}`,
+    `Output ONE JSON object and nothing else. REQUIRED fields: ${req}. Match the shape + voice of the examples exactly.${GATED_FIELDS}${LOCATION_FIELDS}`,
+    // ⛔ SNG-582 O4 — PLAYER REGISTER, and Aevi asked for the prompt half first: "a generator that never writes it beats a renderer that
+    // cleans up after it, and I have twice been burned mechanising the capitals." ⚠️ `playerText` strips the glyphs and LEAVES THE
+    // CAPITALS, and the capitals are the whole of what she rewrote out of 1,144 lines — so a minted craft or place that shouts undoes
+    // that work one record at a time.
+    `PLAYER REGISTER — every field a player reads (description, plainly, notFor, grants, cannot, appearance, descriptionSeed, and any prose about this thing) is written as PLAIN SENTENCES. Never this project's authoring notation: no ⛔ ⚠️ ⛑ ⚑ ⬜ ✅ marks, and NEVER A SHOUTED CLAUSE IN CAPITALS. Capitals are notes between authors; a card that shouts at a player is a defect.`,
     ratingLine
   ].filter(Boolean).join("\n\n");
 

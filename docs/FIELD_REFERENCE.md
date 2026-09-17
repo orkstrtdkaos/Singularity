@@ -663,7 +663,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `tradition` | 432 | `root`×432 | ✅ READ | `affiliation.js`, `arceffects.js`, `art.js` |
 | `operativeAxis` | 432 | `root`×432 | ✅ READ | `craftmechanics.js`, `progression.js` |
 | `intensity` | 432 | `root`×432 | ✅ READ | `battle_turn.js`, `canon.js`, `craftmechanics.js` |
-| `plainly` | 432 | `root`×432 | ✅ READ | `gm.js`, `narration_voice.js`, `recovery_snapshots.js` |
+| `plainly` | 432 | `root`×432 | ✅ READ | `generate.js`, `gm.js`, `narration_voice.js` |
 | `tree` | 432 | `root`×432 | ✅ READ | `backfill.js`, `braids.js`, `capabilities.js` |
 | `bounds` | 430 | `root`×430 | ✅ READ | `death.js`, `gm.js` |
 | `mechanic` | 425 | `root`×425 | ✅ READ | `battle_turn.js`, `braids.js`, `capabilities.js` |

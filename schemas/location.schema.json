@@ -69,7 +69,7 @@
     },
     "descriptionSeed": {
       "type": "string",
-      "description": "the sensory establishing text; the taste-carrier for place voice"
+      "description": "what the place is LIKE — its character, its people's temper, what it is for. ⛔ SNG-582: NOT the picture and never its own name; `appearance` is what it looks like. Measured before Aevi authored 138 looks: a quarter of these mixed look with character, and 59% had no concrete visual noun in their first sentence — the sentence every image was drawn from."
     },
     "loreRefs": {
       "type": "array",
@@ -162,6 +162,10 @@
     "waygateHub": {
       "type": "boolean",
       "description": "SNG-148: the network hub (the Crossing) — every unaimed transit lands here"
+    },
+    "appearance": {
+      "type": "string",
+      "description": "⛔ SNG-582 O1 — what the place LOOKS like, and only that: the VISUAL only (subject, setting, mood), with concrete visual nouns in the first sentence. Every picture of this place is drawn from it (art.js prefers it over `descriptionSeed`, CCODE-391). Asked for at mint and owed by a place the player returns to; not in `required`, because promoting it there would red-line the places minted before it existed."
     }
   }
 }

@@ -1669,7 +1669,7 @@
     ],
     "unseenNews": [],
     "lastGenCount": 1919,
-    "lastSharedReadAt": "2026-09-17T23:11:39.519Z",
+    "lastSharedReadAt": "2026-09-17T23:26:44.896Z",
     "lastTickWorldDay": 79,
     "lastCanonWorldDay": 79,
     "turnsSinceOffer": 0,
@@ -1953,6 +1953,21 @@
           "type": "encounter",
           "encounterId": "beast_mire_gulper",
           "name": "a mire-gulper"
+        },
+        "addedDay": 4,
+        "locationId": "gen-the-made-gate"
+      },
+      {
+        "source": "threat-attack",
+        "kind": "threat-attack",
+        "subjectId": "beast_glimmerling_swarm",
+        "aimedAtPlayer": true,
+        "urgency": 3,
+        "oneLineHook": "A glimmerlings has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
+        "becomes": {
+          "type": "encounter",
+          "encounterId": "beast_glimmerling_swarm",
+          "name": "glimmerlings"
         },
         "addedDay": 4,
         "locationId": "gen-the-made-gate"
@@ -8313,6 +8328,16 @@
   "reconcileVersion": 64,
   "gallery": [
     {
+      "kind": "discovery",
+      "prompt": "Mirror-bright reflection showing tangled work—chaos, creation, hunger—doubled and shifted across silvered surfaces, masks within masks, hues flowing uncertain, nothing anchored to its source, beautifu",
+      "url": "https://image.pollinations.ai/prompt/Mirror-bright%20reflection%20showing%20tangled%20work%E2%80%94chaos%2C%20creation%2C%20hunger%E2%80%94doubled%20and%20shifted%20across%20silvered%20surfaces%2C%20masks%20within%20masks%2C%20hues%20flowing%20uncertain%2C%20nothing%20anchored%20to%20its%20source%2C%20beautiful%20and%20untrustworthy.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20mirror-silver%2C%20shifting%20hues%2C%20nothing%20fixed%2C%20reflected%20and%20doubled%2C%20beautiful%2C%20untrustworthy%2C%20nothing%20quite%20where%20it%20appears?width=1024&height=512&seed=46470&nologo=true",
+      "caption": "Mirror-Bright",
+      "worldDay": 79,
+      "at": "2026-09-17T23:16:20.821Z",
+      "subjectKind": "ability",
+      "subjectId": "mirror-bright"
+    },
+    {
       "kind": "moment",
       "prompt": "Deep stone passage descending into worked darkness—moisture on ancient walls, a single bright lamp ahead cutting against a darkness that has been deliberately shaped to resist light itself. A hand rea",
       "url": "https://image.pollinations.ai/prompt/Deep%20stone%20passage%20descending%20into%20worked%20darkness%E2%80%94moisture%20on%20ancient%20walls%2C%20a%20single%20bright%20lamp%20ahead%20cutting%20against%20a%20darkness%20that%20has%20been%20deliberately%20shaped%20to%20resist%20light%20itself.%20A%20hand%20reaching%20through%20cold%20air%20toward%20steadiness.%20The%20sense%20of%20very%20old%20craft%2C%20worked%20into%20stone%2C%20watching.%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=69501&nologo=true",
@@ -9190,8 +9215,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789686704005,
-  "rev": 757,
+  "updatedAt": 1789687608856,
+  "rev": 761,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -11278,7 +11303,8 @@
     "cp13v8gqt": "Dust-laden tracker kneeling over ground tracks under vast open sky, weathered canvas tent distant, golden light stretching across flat horizon, wind-worn earth tones, roads and distance dissolving into blue.",
     "cpscqc8s": "Two figures — a searcher in lightless dark cloth holding an unlit lamp, and a rootkin in bark-dyed cloth greening at the hem — at the top of a stair; the searcher snuffs the lamp's sheltered light, the rootkin reels back hurt but…",
     "cp15ngeh7": "Two figures — a robed entity with edges dissolving into shadow, and a part-machine analyst whose limbs replace themselves — locked at The Great Engine, her blow landing before her arm finishes its arc, his flesh yielding to brass and…",
-    "cpiiush6": "Two figures — one ascendant in unsettled robes at the threshold's edge, only partly present, and one reeling in disbelief — the blow lands before the arm completes its arc, driving the heretic back, their song still trembling from lips…"
+    "cpiiush6": "Two figures — one ascendant in unsettled robes at the threshold's edge, only partly present, and one reeling in disbelief — the blow lands before the arm completes its arc, driving the heretic back, their song still trembling from lips…",
+    "cpz7g8gs": "Mirror-bright reflection showing tangled work—chaos, creation, hunger—doubled and shifted across silvered surfaces, masks within masks, hues flowing uncertain, nothing anchored to its source, beautiful and untrustworthy."
   },
   "likeness": {
     "moment:solo:cap:vessin of the long bough": {
@@ -11415,6 +11441,17 @@
           "prompt": "",
           "note": null,
           "seedKey": null,
+          "at": 79
+        }
+      ]
+    },
+    "ability:mirror-bright": {
+      "keeps": [
+        {
+          "url": "https://image.pollinations.ai/prompt/Mirror-bright%20reflection%20showing%20tangled%20work%E2%80%94chaos%2C%20creation%2C%20hunger%E2%80%94doubled%20and%20shifted%20across%20silvered%20surfaces%2C%20masks%20within%20masks%2C%20hues%20flowing%20uncertain%2C%20nothing%20anchored%20to%20its%20source%2C%20beautiful%20and%20untrustworthy.%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20mirror-silver%2C%20shifting%20hues%2C%20nothing%20fixed%2C%20reflected%20and%20doubled%2C%20beautiful%2C%20untrustworthy%2C%20nothing%20quite%20where%20it%20appears?width=1024&height=512&seed=46470&nologo=true",
+          "prompt": "Mirror-bright reflection showing tangled work—chaos, creation, hunger—doubled and shifted across silvered surfaces, masks within masks, hues flowing uncertain, nothing anchored to its source, beautiful and untrustworthy.",
+          "note": null,
+          "seedKey": "mirror-bright#r1",
           "at": 79
         }
       ]

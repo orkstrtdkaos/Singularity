@@ -290,21 +290,40 @@
         "player": "Next, ask Veln, Kael, and Halvex if we are all going down the null stone path together.",
         "summary": "At the Null Stone's opened seam, Loki gathers their companions—Vessin affirms, Cy acknowledges necessity, Kael commits without hesitation, Halvex yields his original mandate and chooses understanding over breaking. Veln Ashpause, the Hourkeeper, announces they will not descend but will hold the threshold open—their presence needed above, not below. The group is settled. The descent is ready to begin.",
         "narration": "You turn from Vessin to address the three figures who have gathered at the threshold—Veln Ashpause motionless in the morning light, Kael with his weathered readiness, Halvex Coil standing with the careful balance of someone learning to carry weight differently now.\n\n\"Are we all going down?\" you ask plainly. \"Together, into this.\"\n\nKael nods without hesitation—a road-warden's answer, the kind that comes from a person who has already weighed the cost and found the reason sound. \"I'm with you,\" he says, and there is finality in it.\n\nHalvex is quieter. He looks at the open seam, then back at you, and something in his face has shifted—the orchestrator's calculation giving way to something less certain and more honest. \"I came here to break it,\" he says. \"Now I'm coming to understand it. Yes. I'll go.\"\n\nVeln Ashpause does not move. You watch them for a long moment, and their grey coat seems to hold the morning light without reflecting it. When they speak, their voice is thin as winter air: \"I came knowing this moment would arrive. I am here for it.\" They pause, and there is something in that pause like sorrow or recognition. \"I will not descend. What waits below does not need my presence—it needs yours, and theirs.\" A gesture, faint, toward Vessin and Cy. \"I will watch the threshold. I will hold the opening. When you return, I will be here.\"\n\nIt is not a refusal. It is a reading of what the moment requires."
+      },
+      {
+        "player": "Thank Veln plainly for holding the threshold, and descend without asking what they see—trust the Hourkeeper's reading of what is needed.",
+        "summary": "The gathering is complete—Vessin, Cy, Kael, and Halvex descend with Loki into the vast sealed chamber beneath the Null Stone. Veln holds the threshold above, reading what is needed and refusing to go below. The descent begins.",
+        "narration": "You step to Veln Ashpause and place a hand briefly on their shoulder—the first gesture of contact either of you has made. \"Thank you,\" you say plainly. \"For reading what is needed and holding it.\"\n\nVeln does not move, does not acknowledge with word or glance. But their stillness shifts by a fraction—something in the set of their jaw, the way their grey coat settles. It is not a response a person who moves would make. It is the response of someone who has already seen this moment and is simply being present in it.\n\nYou turn from them to the seam. Cy's lamp swings ahead, lens irised sharp. Vessin steps to the threshold beside you, one hand finding the cold stone edge. Kael follows, his weathered jaw set with the certainty of someone reading a road and choosing it. Halvex comes last, no longer carrying the mandate to break—carrying only the weight of not knowing what understanding will cost.\n\nThe cold air rises. The river sounds far below, patient and ancient.\n\nYou descend."
       }
     ],
     "lastTurn": {
-      "narration": "You turn from Vessin to address the three figures who have gathered at the threshold—Veln Ashpause motionless in the morning light, Kael with his weathered readiness, Halvex Coil standing with the careful balance of someone learning to carry weight differently now.\n\n\"Are we all going down?\" you ask plainly. \"Together, into this.\"\n\nKael nods without hesitation—a road-warden's answer, the kind that comes from a person who has already weighed the cost and found the reason sound. \"I'm with you,\" he says, and there is finality in it.\n\nHalvex is quieter. He looks at the open seam, then back at you, and something in his face has shifted—the orchestrator's calculation giving way to something less certain and more honest. \"I came here to break it,\" he says. \"Now I'm coming to understand it. Yes. I'll go.\"\n\nVeln Ashpause does not move. You watch them for a long moment, and their grey coat seems to hold the morning light without reflecting it. When they speak, their voice is thin as winter air: \"I came knowing this moment would arrive. I am here for it.\" They pause, and there is something in that pause like sorrow or recognition. \"I will not descend. What waits below does not need my presence—it needs yours, and theirs.\" A gesture, faint, toward Vessin and Cy. \"I will watch the threshold. I will hold the opening. When you return, I will be here.\"\n\nIt is not a refusal. It is a reading of what the moment requires.",
-      "sceneSummary": "At the Null Stone's opened seam, Loki gathers their companions—Vessin affirms, Cy acknowledges necessity, Kael commits without hesitation, Halvex yields his original mandate and chooses understanding over breaking. Veln Ashpause, the Hourkeeper, announces they will not descend but will hold the threshold open—their presence needed above, not below. The group is settled. The descent is ready to begin.",
+      "narration": "You step to Veln Ashpause and place a hand briefly on their shoulder—the first gesture of contact either of you has made. \"Thank you,\" you say plainly. \"For reading what is needed and holding it.\"\n\nVeln does not move, does not acknowledge with word or glance. But their stillness shifts by a fraction—something in the set of their jaw, the way their grey coat settles. It is not a response a person who moves would make. It is the response of someone who has already seen this moment and is simply being present in it.\n\nYou turn from them to the seam. Cy's lamp swings ahead, lens irised sharp. Vessin steps to the threshold beside you, one hand finding the cold stone edge. Kael follows, his weathered jaw set with the certainty of someone reading a road and choosing it. Halvex comes last, no longer carrying the mandate to break—carrying only the weight of not knowing what understanding will cost.\n\nThe cold air rises. The river sounds far below, patient and ancient.\n\nYou descend.",
+      "sceneSummary": "The gathering is complete—Vessin, Cy, Kael, and Halvex descend with Loki into the vast sealed chamber beneath the Null Stone. Veln holds the threshold above, reading what is needed and refusing to go below. The descent begins.",
       "choices": [
         {
-          "label": "Descend the passage with Vessin, Cy, Kael, and Halvex—into the vast sealed chamber beneath the Null Stone.",
+          "label": "Follow Cy's lamp down the stone steps, trusting its reading of the architecture",
           "attribute": "practical",
           "subAttribute": "wits",
           "axes": {},
           "difficulty": "easy",
           "opposedDifficulty": null,
+          "intentTags": [],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Reach out to Vessin as you descend—a hand, a word, a check that she is still there",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": "easy",
+          "opposedDifficulty": null,
           "intentTags": [
-            "travel"
+            "romantic"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -313,133 +332,104 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Veln what they foresee waiting below—press the Hourkeeper for whatever sight they hold of this descent.",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Ask Cy what it reads in the architecture as you descend—what is this chamber waiting for?",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "axes": {},
-          "difficulty": "hard",
+          "difficulty": "easy",
           "opposedDifficulty": null,
           "intentTags": [
             "study"
           ],
-          "abilityId": null,
+          "abilityId": "see_the_made_thing",
           "energyCost": null,
-          "trivial": false,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Thank Veln plainly for holding the threshold, and descend without asking what they see—trust the Hourkeeper's reading of what is needed.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Use Prism Sight to read the light-traces on the chamber walls as you descend—what passed through this place last?",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {},
-          "difficulty": "very easy",
+          "difficulty": "normal",
           "opposedDifficulty": null,
           "intentTags": [
-            "careful"
+            "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
+          "abilityId": "prism_sight",
+          "energyCost": 3,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
       "deeds": [],
-      "characterDeltas": {},
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
       "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-taken-from-the-city",
-          "note": "The gathering is complete—Vessin, Cy, Kael, and Halvex are committed to the descent. Veln will hold the threshold. The sealed chamber awaits below the Null Stone."
-        }
-      ],
+      "questUpdates": [],
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
-      "adoptSchool": {},
-      "offer": {},
+      "adoptSchool": null,
+      "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "The sealed seam in the Null Stone at the Hub crossing, early autumn afternoon. The opening stands visible—cold air rising from the passage beyond, the stone's edge worn smooth by intention. Behind: the crossing itself, the ordinary world. Before: the descent into deep dark and the sound of water.",
+        "setting": "The stone steps descend steeply into cold darkness, carved with precision and age. Cy's lamp ahead is the only light, cutting a small bright path through the black. Behind: the opened seam in the Null Stone at the Hub crossing, Veln Ashpause standing motionless at the threshold. Before: the vast sealed chamber below, the sound of the river growing louder with each step downward.",
         "npcsPresent": [
           {
             "name": "Vessin Tallow-bark",
-            "state": "Standing at your side, steady and committed. Hand at her side. Eyes reading the threshold with the precision of someone who reads falsecrafts."
+            "state": "Descending at your side, steady, one hand on the stone wall—reading the architecture as you move"
           },
           {
             "name": "Cy",
-            "state": "Lamp raised, lens irised in attention. Clicks softly, waiting for the descent to begin."
+            "state": "Ahead, lamp raised, lens irised in sharp attention—descending with the certainty of a thing that has done this before"
           },
           {
             "name": "Kael",
-            "state": "Weathered, steady, jaw set with the certainty of someone who has read the road and chosen it. Hand resting easy at his side."
+            "state": "Behind Vessin, weathered and steady, following the road downward—jaw set with the finality of a choice made"
           },
           {
             "name": "Halvex Coil",
-            "state": "Standing with uncertain balance, no longer carrying the mandate to break. Eyes on the seam, then on you. Present, committed, learning to be something other than the orchestrator he was."
+            "state": "Last, carrying the uncertain weight of no longer knowing what he came for—following into understanding rather than breaking"
           },
           {
             "name": "Veln Ashpause",
-            "state": "Grey-coated, motionless, utterly still. Watching with the expression of someone carrying knowledge they cannot share. Will not descend. Will hold the threshold open."
+            "state": "Above at the threshold, motionless, holding the seam open—their presence needed here, not below"
           }
         ],
         "objects": [
-          "The open seam in the Null Stone",
-          "The descending stone steps, cut with precision",
+          "The stone steps, worn smooth by intention",
+          "Cy's lamp, the only source of light",
+          "The opened seam above, growing smaller as you descend",
           "Cold air rising from below",
-          "Cy's lamp, the only light source",
-          "The threshold between the ordinary world and the deep"
+          "The river's sound, growing clearer"
         ],
         "threads": [
           "What lies in the vast sealed chamber below",
-          "Why Veln refuses to descend but holds the threshold",
+          "Why the regulator closed and the veil thinned when it did",
           "What Halvex will discover when breaking is no longer the mandate",
-          "Whether the regulator still functions and what it guards",
-          "The nine sealed apertures and their purpose"
+          "Whether the nine sealed apertures are locked forever or waiting for something",
+          "What the regulator guards and whether it still functions"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "kael",
-          "name": "Kael",
-          "note": "Committed to the descent without hesitation—a road-warden's answer, weighted and final. Stands ready at the threshold.",
-          "relationshipDelta": 1,
-          "learned": [
-            "Has already weighed the cost and found the reason sound",
-            "Moves with the ease of long practice and steady purpose"
-          ]
-        },
-        {
-          "op": "update",
-          "npcId": "halvex-coil",
-          "name": "Halvex Coil",
-          "note": "Yielded the mandate to break and chose understanding instead. Faces the descent with uncertainty but commitment. Learning what accountability beyond the mandate feels like.",
-          "relationshipDelta": 1,
-          "learned": [
-            "The orchestrator's calculation has given way to something less certain and more honest",
-            "He came here to break it but is now coming to understand it—a real turning, not a feint"
-          ]
-        },
-        {
-          "op": "update",
           "npcId": "veln-ashpause",
-          "name": "Veln Ashpause",
-          "note": "Will not descend but will hold the threshold open. Reads that their presence is needed above, not below. Carries foreknowledge of what waits and has chosen their place in it.",
-          "relationshipDelta": 0,
-          "learned": [
-            "Does not descend when the descent begins—this is deliberate, not refusal",
-            "Reads what the moment requires and positions themselves accordingly",
-            "The Hourkeeper perceives past, present, and future—and knows which direction to stand in"
-          ]
+          "statusNote": "At the Hub crossing threshold, holding the seam open—present above, not below, reading what is needed and refusing to descend"
         }
       ],
       "intentsHeard": [],
       "factUpdates": [],
       "placeUpdates": [],
-      "discovery": {},
+      "discovery": null,
       "codexUpdates": [],
       "holdingOps": [],
       "holdTrades": [],
@@ -451,61 +441,70 @@
       "bandOps": [],
       "strikeOps": [],
       "deathOps": [],
-      "newEncounter": {},
-      "unlockPrecursor": {},
-      "unlockSubstrate": {},
-      "timeOps": {},
-      "moveTo": {},
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "the descent from the threshold into the chamber below"
+      },
+      "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
-      "deriveItem": {},
-      "imagePrompt": "",
-      "imageMedium": "",
-      "newAbility": {},
-      "gambitOps": {},
+      "deriveItem": null,
+      "imagePrompt": "The stone steps descend steeply into absolute darkness, lit only by the small bright circle of Cy's lamp ahead. Five figures move downward in single file—Cy's brass segments gleaming in its own light, Vessin's grey-green coat catching the edge of the glow, Kael's weathered shoulders steady, Halvex following with uncertain balance, and you moving down toward the river-sound and the cold. Above, the seam in the Null Stone shrinks to a star of grey spring-light, and at its edge stands Veln Ashpause, grey-coated and motionless, holding the threshold open behind you.",
+      "imageMedium": null,
+      "newAbility": null,
+      "gambitOps": null,
       "gambitApt": false,
-      "sceneEnded": false
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
+      "sceneEnded": false,
+      "momentArt": "https://image.pollinations.ai/prompt/The%20stone%20steps%20descend%20steeply%20into%20absolute%20darkness%2C%20lit%20only%20by%20the%20small%20bright%20circle%20of%20Cy's%20lamp%20ahead.%20Five%20figures%20move%20downward%20in%20single%20file%E2%80%94Cy's%20brass%20segments%20gleaming%20in%20its%20own%20light%2C%20Vessin's%20grey-green%20coat%20catching%20the%20edge%20of%20the%20glow%2C%20Kael's%20weathered%20shoulders%20steady%2C%20Halvex%20f%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=794&nologo=true"
     },
     "sceneState": {
-      "setting": "The sealed seam in the Null Stone at the Hub crossing, early autumn afternoon. The opening stands visible—cold air rising from the passage beyond, the stone's edge worn smooth by intention. Behind: the crossing itself, the ordinary world. Before: the descent into deep dark and the sound of water.",
+      "setting": "The stone steps descend steeply into cold darkness, carved with precision and age. Cy's lamp ahead is the only light, cutting a small bright path through the black. Behind: the opened seam in the Null Stone at the Hub crossing, Veln Ashpause standing motionless at the threshold. Before: the vast sealed chamber below, the sound of the river growing louder with each step downward.",
       "npcsPresent": [
         {
           "name": "Vessin Tallow-bark",
-          "state": "Standing at your side, steady and committed. Hand at her side. Eyes reading the threshold with the precision of someone "
+          "state": "Descending at your side, steady, one hand on the stone wall—reading the architecture as you move"
         },
         {
           "name": "Cy",
-          "state": "Lamp raised, lens irised in attention. Clicks softly, waiting for the descent to begin."
+          "state": "Ahead, lamp raised, lens irised in sharp attention—descending with the certainty of a thing that has done this before"
         },
         {
           "name": "Kael",
-          "state": "Weathered, steady, jaw set with the certainty of someone who has read the road and chosen it. Hand resting easy at his s"
+          "state": "Behind Vessin, weathered and steady, following the road downward—jaw set with the finality of a choice made"
         },
         {
           "name": "Halvex Coil",
-          "state": "Standing with uncertain balance, no longer carrying the mandate to break. Eyes on the seam, then on you. Present, commit"
+          "state": "Last, carrying the uncertain weight of no longer knowing what he came for—following into understanding rather than break"
         },
         {
           "name": "Veln Ashpause",
-          "state": "Grey-coated, motionless, utterly still. Watching with the expression of someone carrying knowledge they cannot share. Wi"
+          "state": "Above at the threshold, motionless, holding the seam open—their presence needed here, not below"
         }
       ],
       "objects": [
-        "The open seam in the Null Stone",
-        "The descending stone steps, cut with precision",
+        "The stone steps, worn smooth by intention",
+        "Cy's lamp, the only source of light",
+        "The opened seam above, growing smaller as you descend",
         "Cold air rising from below",
-        "Cy's lamp, the only light source",
-        "The threshold between the ordinary world and the deep"
+        "The river's sound, growing clearer"
       ],
       "threads": [
         "What lies in the vast sealed chamber below",
-        "Why Veln refuses to descend but holds the threshold",
+        "Why the regulator closed and the veil thinned when it did",
         "What Halvex will discover when breaking is no longer the mandate",
-        "Whether the regulator still functions and what it guards",
-        "The nine sealed apertures and their purpose"
+        "Whether the nine sealed apertures are locked forever or waiting for something",
+        "What the regulator guards and whether it still functions"
       ]
     },
-    "beats": 4,
+    "beats": 5,
     "subPlace": {
       "slug": "the-hub-crossing",
       "name": "The Hub Crossing",
@@ -1561,10 +1560,10 @@
     ],
     "unseenNews": [],
     "lastGenCount": 1917,
-    "lastSharedReadAt": "2026-09-17T21:20:04.409Z",
+    "lastSharedReadAt": "2026-09-17T21:29:59.590Z",
     "lastTickWorldDay": 79,
     "lastCanonWorldDay": 79,
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 3,
     "recentOffers": [
       {
         "thing": "The Churn-Revel orchestrator speaking their own truth plainly for the first time—hunger named without calculation or defense",
@@ -8078,17 +8077,17 @@
     ]
   },
   "tendencies": {
-    "devotion": 1.7865364811193574,
-    "cerebral": 9.955359457859934,
-    "social": 18.674540548661156,
-    "strategic": 10.97340890351904,
-    "cautious": 6.04078086741903,
-    "amorous": 11.530127875322448,
-    "generous": 3.932184737805637,
-    "ruthless": 0.4474809959660282,
-    "risky": 0.3657016564478741,
-    "patient": 0.09986654577182838,
-    "deception": 0.11624983211768716
+    "devotion": 1.7418730690913733,
+    "cerebral": 9.706475471413436,
+    "social": 18.207677034944627,
+    "strategic": 10.699073680931065,
+    "cautious": 6.889761345733554,
+    "amorous": 11.241874678439386,
+    "generous": 3.833880119360496,
+    "ruthless": 0.4362939710668775,
+    "risky": 0.35655911503667725,
+    "patient": 0.09736988212753267,
+    "deception": 0.11334358631474498
   },
   "aptitudes": [
     "strategist",
@@ -8100,7 +8099,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 169,
+  "actionCount": 170,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -8178,6 +8177,14 @@
   "nativeGrantsVersion": 2,
   "reconcileVersion": 64,
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "The stone steps descend steeply into absolute darkness, lit only by the small bright circle of Cy's lamp ahead. Five figures move downward in single file—Cy's brass segments gleaming in its own light,",
+      "url": "https://image.pollinations.ai/prompt/The%20stone%20steps%20descend%20steeply%20into%20absolute%20darkness%2C%20lit%20only%20by%20the%20small%20bright%20circle%20of%20Cy's%20lamp%20ahead.%20Five%20figures%20move%20downward%20in%20single%20file%E2%80%94Cy's%20brass%20segments%20gleaming%20in%20its%20own%20light%2C%20Vessin's%20grey-green%20coat%20catching%20the%20edge%20of%20the%20glow%2C%20Kael's%20weathered%20shoulders%20steady%2C%20Halvex%20f%2C%20cinematic%20still%2C%20a%20held%20beat%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=1024&height=512&seed=794&nologo=true",
+      "caption": "The gathering is complete—Vessin, Cy, Kael, and Halvex descend with Loki into the vast sea",
+      "worldDay": 79,
+      "at": "2026-09-17T21:29:47.947Z"
+    },
     {
       "kind": "figure",
       "prompt": "",
@@ -9040,8 +9047,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789680440198,
-  "rev": 743,
+  "updatedAt": 1789680603837,
+  "rev": 748,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9941,7 +9948,7 @@
     "the_gearlands": 33,
     "umbral_depths": 54,
     "the_quickwood": 101,
-    "the_center": 38
+    "the_center": 39
   },
   "opLossPending": false,
   "sessions": [
@@ -10052,10 +10059,10 @@
     {
       "id": "sess-14",
       "startedAt": "2026-09-17T21:25:46.391Z",
-      "lastAt": "2026-09-17T21:27:20.166Z",
+      "lastAt": "2026-09-17T21:29:47.922Z",
       "startDay": 79,
       "endDay": 79,
-      "beats": 2
+      "beats": 3
     }
   ],
   "establishedFacts": [
@@ -10129,19 +10136,19 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 200,
-    "choices": 200,
-    "characterDeltas": 87,
-    "scene": 200,
+    "sceneSummary": 201,
+    "choices": 201,
+    "characterDeltas": 88,
+    "scene": 201,
     "placeUpdates": 22,
     "codexUpdates": 111,
-    "timeOps": 168,
+    "timeOps": 169,
     "offer": 25,
     "generateRequest": 6,
-    "sceneEnded": 72,
-    "npcUpdates": 162,
+    "sceneEnded": 73,
+    "npcUpdates": 163,
     "moveTo": 6,
-    "gambitApt": 35,
+    "gambitApt": 36,
     "deeds": 7,
     "questUpdates": 20,
     "standingOps": 3,
@@ -10150,14 +10157,14 @@
     "encounterOps": 9,
     "ledgerEvents": 6,
     "newEncounter": 3,
-    "imagePrompt": 20,
+    "imagePrompt": 21,
     "scene_ended": 1,
     "stateOps": 1,
     "_engineClosedScene": 2,
     "discovery": 1,
     "intentsHeard": 2
   },
-  "_opTurns": 200,
+  "_opTurns": 201,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -10971,7 +10978,7 @@
     "travel": 6,
     "scout": 3,
     "prepare": 2,
-    "careful": 5,
+    "careful": 6,
     "woo": 1,
     "rapport": 9,
     "retreat": 1,
@@ -11678,7 +11685,7 @@
     }
   },
   "_opUnknown": {
-    "sceneSummary": 23
+    "sceneSummary": 24
   },
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T22:51:56.913Z",

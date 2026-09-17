@@ -5812,8 +5812,10 @@ await (async () => {
   // sync.js side of the contract: pushMergedFile re-reads inside the attempt loop and PUTs with that same read's sha
   const syncSrc = readFileSync(new URL('../engine/sync.js', import.meta.url), 'utf8');
   const pmf = syncSrc.slice(syncSrc.indexOf('export async function pushMergedFile'), syncSrc.indexOf('export async function appendLedger'));
-  check("146a: pushMergedFile ghGet sits INSIDE the attempt loop (fresh read per attempt)", /for \(let attempt[\s\S]*?const existing = await ghGet\(path\)/.test(pmf));
-  check("146a: pushMergedFile PUTs with the sha of the read the content came from", /ghPut\(path, JSON\.stringify\(merged, null, 2\), message, existing\?\.sha\)/.test(pmf));
+  // ⚠️ CCODE-386: the read is `readForMerge` now (size-safe, revalidated, throws on an unreadable body) — the same two claims, its shape.
+  check("146a: pushMergedFile ghGet sits INSIDE the attempt loop (fresh read per attempt)", /for \(let attempt[\s\S]*?const \{ remote, sha \} = await readForMerge\(path\)/.test(pmf));
+  check("146a: pushMergedFile PUTs with the sha of the read the content came from",
+    /const text = JSON\.stringify\(merged, null, 2\);/.test(pmf) && /ghPut\(path, text, message, sha\)/.test(pmf));
 }
 
 // --- BATCH-12 §3: STANDING (seed / drip / ops) ---

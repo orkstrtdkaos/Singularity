@@ -12933,7 +12933,7 @@ console.log("\n── §196 · a guard that cannot see must refuse, and the game
   check("§196: ⛔ so the read asks for the RAW body, which has no such limit, and falls back to `download_url` if a host ignores it",
     /accept: "application\/vnd\.github\.raw"/.test(S196)
     && /meta\.download_url/.test(S196)
-    && /async function ghGetRaw\(path\)/.test(S196));
+    && /async function ghGetRaw\(path(?:, \{ fresh = false \} = \{\})?\)/.test(S196));   // CCODE-386: and it can be asked to revalidate
   // ⛔ ONE NULL, ONE MEANING. `catch { return null }` made "I could not read it" and "it is not there" the same answer, and both
   // of this module's protections are built on telling those apart.
   check("§196: ⛔ `fetchRepoJSON` returns null ONLY for a 404 — an unreadable remote THROWS instead of reading as absent",
@@ -19346,6 +19346,63 @@ console.log("\n── §270 · what is true of a person is the world's ──");
   const A270 = rd("app.js").replace(/\r\n/g, "\n");
   check("§270: the turn's person updates carry the world's day, so a change a player's story makes can travel",
     /const memCtx = \{ locationId: location\.id, day: readClock\(character\.clock\)\.day, worldDay: absoluteWorldDay\(\),/.test(A270));
+}
+
+// ⛔ CCODE-386 — shared lives, last stage of the plan: A SHARED FILE'S MERGE NEVER READS BLIND. `pushMergedFile` and `appendLedger` still read the
+// envelope and turned an empty or unparseable body into "no remote" — the SNG-549 shape the saves were moved off — and every shared-world
+// file (regions, arcs, canon, fates and people, holds, travelers, invitations, the feed, the ledger) is written through them.
+console.log("\n── §271 · a shared file's merge never reads blind ──");
+{
+  const S271 = await import("../engine/sync.js");
+  const { fakeRemote: fr271 } = await import("./lib/fake_remote.mjs");
+  const remote = fr271();
+  const restore = remote.install();
+  try {
+    const P = "world/people/valley.json";
+    const big = { schemaVersion: 1, fates: {} };
+    for (let i = 0; i < 40; i++) big.fates[`legend_${i}`] = { status: "wounded", atWorldDay: 70 + (i % 5), woundedBy: "someone", note: "x".repeat(40) };
+    remote.files.set(P, { content: JSON.stringify(big), sha: "sha-big" });
+    remote.state.hideShaAboveBytes = 1000;   // the megabyte line, moved to where a test can cross it
+    const seenCache = [];
+    const inner = globalThis.fetch;
+    globalThis.fetch = async (url, opts = {}) => { if (!opts.method || opts.method === "GET") seenCache.push(opts.cache || null); return inner(url, opts); };
+    let wrote;
+    try { wrote = await S271.pushMergedFile(P, (r) => ({ ...(r || {}), fates: { ...(r?.fates || {}), fresh_one: { status: "dead", atWorldDay: 80 } } }), "t"); }
+    finally { globalThis.fetch = inner; }
+    const after = remote.read(P);
+    check("§271: ⛔ OVER THE LINE, A MERGE STILL READS THE REAL FILE — all forty fates kept, the new one added, nothing written over",
+      !!wrote && Object.keys(after?.fates || {}).length === 41 && after.fates.legend_7?.woundedBy === "someone" && after.fates.fresh_one?.status === "dead",
+      `${Object.keys(after?.fates || {}).length} fates after`);
+    check("§271: …and every read a merge rests on revalidates rather than trusting a cached answer",
+      seenCache.length > 0 && seenCache.every(c => c === "no-cache"), JSON.stringify(seenCache));
+
+    remote.state.hideShaAboveBytes = 0;
+    remote.files.set(P, { content: "{ this is not json", sha: "sha-broken" });
+    const puts = remote.state.puts;
+    let threw = null;
+    try { await S271.pushMergedFile(P, (r) => ({ fates: { only_mine: { status: "active" } }, sawRemote: r }), "t"); } catch (e) { threw = e; }
+    check("§271: ⛔ A BODY THAT WILL NOT PARSE IS AN ERROR, NEVER AN EMPTY REMOTE — the write is refused and the file is left as it was",
+      !!threw && /GH_MERGE_UNREADABLE/.test(threw.message) && remote.state.puts === puts && remote.files.get(P).content === "{ this is not json", threw?.message);
+
+    const month = new Date().toISOString().slice(0, 7);
+    const L = `world/ledger/${month}.json`;
+    const rows = Array.from({ length: 30 }, (_, i) => ({ who: `char-${i}`, what: `a deed worth remembering, number ${i}`, at: new Date().toISOString() }));
+    remote.files.set(L, { content: JSON.stringify(rows), sha: "sha-ledger" });
+    remote.state.hideShaAboveBytes = 500;
+    await S271.appendLedger([{ who: "char-new", what: "the newest deed", at: new Date().toISOString() }], "char-new");
+    const ledger = remote.read(L);
+    check("§271: ⛔ the month's ledger keeps every row when it is too big for the envelope — the append adds, it never replaces",
+      Array.isArray(ledger) && ledger.length === 31 && ledger[0].who === "char-0" && ledger[30].who === "char-new", `${ledger?.length} rows`);
+    remote.state.hideShaAboveBytes = 0;
+    remote.files.set(L, { content: "[ broken", sha: "sha-ledger-broken" });
+    let threwL = null;
+    try { await S271.appendLedger([{ who: "x", what: "y", at: new Date().toISOString() }], "x"); } catch (e) { threwL = e; }
+    check("§271: …and an unreadable month is not replaced by this pass's rows", !!threwL && remote.files.get(L).content === "[ broken");
+  } finally { restore(); }
+  const SRC271 = rd("engine/sync.js").replace(/\r\n/g, "\n");
+  check("§271: no merge in the module still turns an unreadable body into an empty one",
+    !/catch \{ remote = null; \}/.test(SRC271) && !/catch \{ arr = \[\]; \}/.test(SRC271)
+    && (SRC271.match(/await readForMerge\(path\)/g) || []).length === 2);
 }
 
 /* ══════════ REPORT ══════════ */

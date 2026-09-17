@@ -57,10 +57,12 @@ export function syncEnabled() {
   return !!(c.owner && c.repo && c.pat);
 }
 
-async function ghGet(path) {
+async function ghGet(path, { fresh = false } = {}) {
   const { owner, repo, pat } = getSyncConfig();
   const res = await ghFetch(`${API}/repos/${owner}/${repo}/contents/${path}`, {
-    headers: { authorization: `Bearer ${pat}`, accept: "application/vnd.github+json" }
+    headers: { authorization: `Bearer ${pat}`, accept: "application/vnd.github+json" },
+    // ⛔ CCODE-386: a read a MERGE rests on revalidates — the API marks answers cacheable for 60s, and a merge on a cached body is a clobber
+    ...(fresh ? { cache: "no-cache" } : {})
   });
   if (res.status === 404) return null;
   if (!res.ok) throw new Error(`GH_GET_${res.status}`);
@@ -82,16 +84,16 @@ async function ghGet(path) {
  *  ⛑ THE RAW MEDIA TYPE HAS NO SUCH LIMIT (100MB), so the read asks for the body itself instead of a base64 envelope, with
  *  `download_url` as the fallback for a host that ignores the accept header. ⚠️ AND IT THROWS RATHER THAN RETURNING NULL:
  *  "I could not read it" and "it is not there" must never again be the same answer. */
-async function ghGetRaw(path) {
+async function ghGetRaw(path, { fresh = false } = {}) {
   const { owner, repo, pat } = getSyncConfig();
   const url = `${API}/repos/${owner}/${repo}/contents/${path}`;
-  const res = await ghFetch(url, { headers: { authorization: `Bearer ${pat}`, accept: "application/vnd.github.raw" } });
+  const res = await ghFetch(url, { headers: { authorization: `Bearer ${pat}`, accept: "application/vnd.github.raw" }, ...(fresh ? { cache: "no-cache" } : {}) });
   if (res.status === 404) return null;                       // genuinely absent — the ONE null this is allowed to return
   if (!res.ok) throw new Error(`GH_GET_${res.status}`);
   const text = await res.text();
   if (text && text.trim()) return text;
   // the host answered in the metadata shape anyway: take the body from `download_url`, which is never truncated
-  const meta = await ghGet(path);
+  const meta = await ghGet(path, { fresh });
   if (!meta) return null;
   if (meta.content && meta.content.trim()) return decodeURIComponent(escape(atob(meta.content.replace(/\n/g, ""))));
   if (!meta.download_url) throw new Error("GH_GET_NO_BODY");
@@ -191,15 +193,15 @@ export async function ghList(path) {
  *  ⛑ THE DIRECTORY LISTING HAS NO SUCH LIMIT. `GET /contents/<dir>` returns every entry's sha whatever the file's size,
  *  because it never carries content. One extra call, only on the path where the cheap read came back shaless.
  */
-async function shaFor(path) {
-  const meta = await ghGet(path);
+async function shaFor(path, { fresh = false } = {}) {
+  const meta = await ghGet(path, { fresh });
   if (meta && meta.sha) return meta.sha;                       // the ordinary path — one call, unchanged
   if (meta == null) return null;                               // genuine 404: the file is new, and a create is CORRECT
   // ⚠️ 200 WITHOUT A SHA IS NOT "NO FILE". It is the API declining to describe a file it knows is there, and treating it as
   // absence is exactly what turned this into a create. Ask the parent directory, which answers for any size.
   const dir = path.includes("/") ? path.slice(0, path.lastIndexOf("/")) : "";
   const name = path.slice(path.lastIndexOf("/") + 1);
-  const listing = await ghGet(dir);
+  const listing = await ghGet(dir, { fresh });
   if (!Array.isArray(listing)) throw new Error(`GH_NO_SHA_${path}`);
   const entry = listing.find(f => f?.name === name);
   if (!entry) return null;                                     // really is not there
@@ -293,6 +295,35 @@ export async function pushOwnedFile(path, obj, message) {
   }
 }
 
+/** ⛔ CCODE-386 — THE READ A MERGE RESTS ON, AND IT MAY NOT READ BLIND. `pushMergedFile` and `appendLedger` were the last two readers
+ *  still on the shape SNG-549 retired: the envelope, base64, and `catch { remote = null }`. ⚑ Over a megabyte the envelope's content is
+ *  empty, and a body that will not parse became "there is no remote" — and a merge computed against "no remote" is written over every
+ *  player's file. Every shared-world file goes through here: the regions, the arcs, the canon, the fates and people, the holds, the
+ *  travelers, the invitations, the feed, the ledger.
+ *  ⛑ The VERSION FIRST, THEN THE BODY: the envelope when it carries both; over a megabyte, the sha from `shaFor` and then the raw body,
+ *  read AFTER it — so a body newer than its sha can only make the write fail and retry, never clobber. Both reads revalidate.
+ *  ⛔ AND A BODY THAT WILL NOT PARSE THROWS. An unreadable remote is an error, never an empty one. Returns { remote, sha }. */
+async function readForMerge(path) {
+  const parse = (text) => {
+    try { return JSON.parse(text); }
+    catch (err) { throw new Error(`GH_MERGE_UNREADABLE_${path}: ${err?.message || "bad JSON"}`); }
+  };
+  const meta = await ghGet(path, { fresh: true });
+  if (meta == null) return { remote: null, sha: null };                 // a genuine 404: the file is new, and a create is correct
+  if (meta.sha && meta.content && String(meta.content).trim()) {
+    return { remote: parse(decodeURIComponent(escape(atob(String(meta.content).replace(/\n/g, ""))))), sha: meta.sha };
+  }
+  const sha = meta.sha || await shaFor(path, { fresh: true });
+  if (!sha) throw new Error(`GH_NO_SHA_${path}`);
+  const body = await ghGetRaw(path, { fresh: true });
+  if (body == null) throw new Error(`GH_MERGE_VANISHED_${path}`);          // described a moment ago and gone now: retry, never create
+  return { remote: parse(body), sha };
+}
+
+/** How big a shared file may grow before the contents API will not take it whole. A merged write above this is refused out loud: the
+ *  git-data write `pushOwnedFile` falls back to is compare-and-swap on the BRANCH, not on the file, so it cannot guard a merge. */
+const SHARED_WRITE_LIMIT = 950000;
+
 /** Read-MERGE-write a SHARED file safely (region state, shared canon). Unlike pushOwnedFile
  *  (single-writer files), this re-runs mergeFn against the FRESHLY-read remote on every attempt,
  *  so two clients writing concurrently never clobber each other — the loser's write re-merges
@@ -300,15 +331,13 @@ export async function pushOwnedFile(path, obj, message) {
  *  or null if mergeFn yields null (nothing to write). Up to 3 attempts on SHA conflict. */
 export async function pushMergedFile(path, mergeFn, message) {
   for (let attempt = 0; attempt < 3; attempt++) {
-    const existing = await ghGet(path);
-    let remote = null;
-    if (existing) {
-      try { remote = JSON.parse(decodeURIComponent(escape(atob(existing.content.replace(/\n/g, ""))))); } catch { remote = null; }
-    }
+    const { remote, sha } = await readForMerge(path);   // ⛔ CCODE-386: never merged against a remote it could not read
     const merged = mergeFn(remote);
     if (merged == null) return null;
+    const text = JSON.stringify(merged, null, 2);
+    if (text.length > SHARED_WRITE_LIMIT) throw new Error(`GH_SHARED_TOO_LARGE_${path}: ${text.length} characters — a shared file this size needs a write that can compare its own version`);
     try {
-      return await ghPut(path, JSON.stringify(merged, null, 2), message, existing?.sha);
+      return await ghPut(path, text, message, sha);
     } catch (err) {
       if (!/409|422/.test(err.message) || attempt === 2) throw err;
     }
@@ -322,14 +351,14 @@ export async function appendLedger(events, characterId) {
   const month = new Date().toISOString().slice(0, 7);
   const path = `world/ledger/${month}.json`;
   for (let attempt = 0; attempt < 3; attempt++) {
-    const existing = await ghGet(path);
-    let arr = [];
-    if (existing) {
-      try { arr = JSON.parse(decodeURIComponent(escape(atob(existing.content.replace(/\n/g, ""))))); } catch { arr = []; }
-    }
+    // ⛔ CCODE-386: `catch { arr = [] }` WAS A MONTH OF EVERYONE'S DEEDS ONE UNREADABLE ANSWER FROM GONE — the empty list, plus this
+    // pass's rows, written over the file. The month is read the way every merge is now, or the append does not happen.
+    const { remote, sha } = await readForMerge(path);
+    if (remote != null && !Array.isArray(remote)) throw new Error(`GH_LEDGER_NOT_A_LIST_${path}`);
+    const arr = Array.isArray(remote) ? [...remote] : [];
     arr.push(...events);
     try {
-      return await ghPut(path, JSON.stringify(arr, null, 2), `ledger: ${events.length} event(s) from ${characterId}`, existing?.sha);
+      return await ghPut(path, JSON.stringify(arr, null, 2), `ledger: ${events.length} event(s) from ${characterId}`, sha);
     } catch (err) {
       if (!/409|422/.test(err.message) || attempt === 2) throw err;
     }

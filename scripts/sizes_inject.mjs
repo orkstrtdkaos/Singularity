@@ -75,6 +75,14 @@ function render() {
 }
 
 const check = process.argv.includes("--check");
+/* ⛔ CCODE-399b — A GENERATOR'S `--check` MAY NOT FAIL ON THE LINE ENDINGS GIT ITSELF CHOSE. This script writes `\n` and git checks
+ * the file out with `\r\n` on Windows, so a whole-file `===` reported DRIFT on a table whose every number was right — and the diagnostic
+ * loop underneath then printed nothing, because no number was off. ⚑ It has cost two ships: the red appears the moment anyone else
+ * commits this file (the rebase re-checks it out) and never in CI, where the checkout is `\n`. The comparison is about CONTENT; the
+ * endings are the checkout's business. ⚠️ And the writer keeps whatever the file already used, so a run does not dirty the tree. */
+const NL_ = (s) => String(s).replace(/\r\n/g, "\n");
+const keepEol_ = (s, like) => (/\r\n/.test(like) ? NL_(s).replace(/\n/g, "\r\n") : NL_(s));
+
 const src = readFileSync(DOC, "utf8");
 const { body, missing, sizes } = render();
 
@@ -92,7 +100,7 @@ const after = src.slice(src.indexOf(B));
 const next = `${before}\n${body}\n${after}`;
 
 if (check) {
-  if (next === src) { console.log(`  ok    sizes_inject: the size table matches disk (${FILES.length} files)`); process.exit(0); }
+  if (NL_(next) === NL_(src)) { console.log(`  ok    sizes_inject: the size table matches disk (${FILES.length} files)`); process.exit(0); }
   console.log("  FAIL  sizes_inject: the size table has drifted from disk — run `node scripts/sizes_inject.mjs`");
   const cur = src.slice(src.indexOf(A) + A.length, src.indexOf(B));
   for (const f of FILES) {
@@ -103,5 +111,5 @@ if (check) {
   }
   process.exit(1);
 }
-writeFileSync(DOC, next);
+writeFileSync(DOC, keepEol_(next, src));
 console.log(`  stamped sizes_inject: ${FILES.length} file sizes in docs/FIELD_REFERENCE.md, from disk`);

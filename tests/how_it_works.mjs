@@ -500,6 +500,20 @@ console.log("\n── FR · the field reference — measured claims stay measure
     // (the split char is built rather than escaped: a "\n" written through a heredoc has been eaten four times today)
     catch (err) { sizesOk = false; sizesWhy = String(err.stdout || err.message).split(String.fromCharCode(10)).slice(0, 3).join(" · ").trim(); }
     check("FR: ⛔ the unread-file size table is GENERATED from disk, not hand-typed", sizesOk, sizesWhy || "run: node scripts/sizes_inject.mjs");
+    // ⛔ CCODE-399b — AND A STAMPER'S `--check` MAY NOT FAIL ON THE LINE ENDINGS GIT CHOSE. Both stampers compared whole files with
+    // `===` while writing LF into a doc git checks out as CRLF on Windows: DRIFT reported on a table whose every number was right,
+    // and the diagnostic loop under it printed no drifted row, because there was none. ⚑ It goes red the moment anyone else commits
+    // the file (the rebase re-checks it out) and never in CI, whose checkout is LF — it cost two ships before it was read properly.
+    // ⚠️ Gated as the RULE on both scripts: the comparison is about CONTENT, and a run may not dirty the tree either.
+    for (const s of ["scripts/sizes_inject.mjs", "scripts/skills_inject.mjs"]) {
+      const src = rd(s);
+      check(`FR: ⛔ …and ${s.split("/").pop()} compares CONTENT, not the checkout's line endings`,
+        /const NL_ = \(s\) => String\(s\)\.replace\(/.test(src)
+        && /NL_\(next\) === NL_\((?:src|existing)\)/.test(src)
+        && !/[^_]next === (?:src|existing)/.test(src)
+        && /writeFileSync\(DOC, keepEol_\(next, (?:src|existing)\)\)/.test(src),
+        s);
+    }
   }
 
   // ⚠️ AND THE BUCKET COUNTS IN THE PROSE MUST MATCH THE TABLE, since a reader trusts the summary.

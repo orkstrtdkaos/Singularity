@@ -39,6 +39,14 @@
 //      foothill), those crafts fall out of that section and into their domain automatically, on the next
 //      run. NOTHING IN THIS FILE NEEDS TO CHANGE WHEN SHE DOES.
 
+/* ⛔ CCODE-399b — A GENERATOR'S `--check` MAY NOT FAIL ON THE LINE ENDINGS GIT ITSELF CHOSE. This script writes `\n` and git checks
+ * the file out with `\r\n` on Windows, so a whole-file `===` reported DRIFT on a table whose every number was right — and the diagnostic
+ * loop underneath then printed nothing, because no number was off. ⚑ It has cost two ships: the red appears the moment anyone else
+ * commits this file (the rebase re-checks it out) and never in CI, where the checkout is `\n`. The comparison is about CONTENT; the
+ * endings are the checkout's business. ⚠️ And the writer keeps whatever the file already used, so a run does not dirty the tree. */
+const NL_ = (s) => String(s).replace(/\r\n/g, "\n");
+const keepEol_ = (s, like) => (/\r\n/.test(like) ? NL_(s).replace(/\n/g, "\r\n") : NL_(s));
+
 import { readFileSync, writeFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -197,7 +205,7 @@ const summary = `${domains.length} domains · ${Object.keys(idx.ringPos || {}).l
   + (noTrad ? ` · ⚠️ ${noTrad} craft(s) carry no tradition and are not listed` : "");
 
 if (CHECK) {
-  const same = next === existing;
+  const same = NL_(next) === NL_(existing);
   console.log(same ? `✅ docs/SKILLS.md is fresh — ${summary}`
     : `⚠️ docs/SKILLS.md is STALE — ${summary}\n   run: node scripts/skills_inject.mjs --write`);
   process.exit(same ? 0 : 1);
@@ -212,5 +220,5 @@ if (!WRITE) {
   console.log("  pass --write to apply.");
   process.exit(0);
 }
-writeFileSync(DOC, next);
+writeFileSync(DOC, keepEol_(next, existing));
 console.log(`skills injected: ${summary}`);

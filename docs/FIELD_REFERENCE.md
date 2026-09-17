@@ -39,9 +39,9 @@ file is replaced.**
 
 | bucket | n | means |
 |---|---|---|
-| ✅ **READ** | **99** | a play-path file names it outside a comment |
+| ✅ **READ** | **100** | a play-path file names it outside a comment |
 | ⛔ **DARK** | **16** | **no literal reader anywhere** — see the four lies below |
-| ⚠️ **CI-ONLY** | **3** | the only consumer is a test. **That is a real consumer for correctness and not one for play** |
+| ⚠️ **CI-ONLY** | **2** | the only consumer is a test. **That is a real consumer for correctness and not one for play** |
 | ⚠️ **COLLISION** | **0** | the name is live, but on a *different owner* |
 
 ### ⛔ THE FOUR WAYS "UNREAD" LIES — all four produced a false finding here inside one day
@@ -667,7 +667,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `tree` | 431 | `root`×431 | ✅ READ | `backfill.js`, `braids.js`, `capabilities.js` |
 | `bounds` | 429 | `root`×429 | ✅ READ | `death.js`, `gm.js` |
 | `mechanic` | 424 | `root`×424 | ✅ READ | `battle_turn.js`, `braids.js`, `capabilities.js` |
-| `challengeTypes` | 416 | `root`×416 | ⚠️ CI-ONLY | _4 test/script only_ |
+| `challengeTypes` | 416 | `root`×416 | ✅ READ | `journeyroad.js` |
 | `energyCost` | 413 | `root`×413 | ✅ READ | `battle_turn.js`, `braids.js`, `capabilities.js` |
 | `levelReq` | 407 | `root`×407 | ✅ READ | `backfill.js`, `braids.js`, `company.js` |
 | `shape` | 404 | `root`×404 | ✅ READ | `battleprompt.js`, `capabilities.js`, `combatants.js` |

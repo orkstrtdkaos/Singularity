@@ -17,12 +17,16 @@
 //   · SETTING OUT (`journeyOutcome`) spends the road: the days pass on the character's own clock, the rations are eaten, a shortfall costs
 //     energy and health on arrival — a forage roll finds some of it, and running out costs, it never kills (SNG-331 §2) — a gate's toll
 //     is paid, and every place on the path becomes known.
-// A shorter walk stays a step, as it was. ⬜ A dangerous leg played as a gambit (SNG-333) is the next stage.
+// A shorter walk stays a step, as it was. ⛑ CCODE-390: the road is walked LEG BY LEG — a dangerous leg is a gambit, and a journey stopped on
+// the road is taken up again — in `engine/journeyroad.js`; every way here carries its legs, and the hunger below is counted a day at a time
+// so the whole road and each leg of it cost exactly the same.
 //
 // The dials sit in `rules.journey` when authored; the fallbacks below are the item's own words ("Two days if you're honest with
 // yourself") and SNG-331's rule that hunger is attrition.
 
 import { routeBetween } from "./journey.js";
+import { walkingDays } from "./worldmap.js";
+import { removeItem } from "./inventory.js";
 
 export const JOURNEY_DEFAULTS = Object.freeze({
   minDays: 1,                          // under a day's walk is a step, not a journey
@@ -40,7 +44,8 @@ export const JOURNEY_DEFAULTS = Object.freeze({
     march: { long_road: 0.08 },                                         // − a share of the road's days, per rank — "marches further per day"
     endureHealth: { staunch: 0.25 },                                    // − a share of what hunger takes from the body, per rank — "the road hurts you"
     endureEnergy: { second_wind: 0.25 },                                // − a share of what hunger takes from energy, per rank — "one more leg"
-    shelter: { wildcraft: 1, safe_ground: 1, the_laid_ground: 1 },      // a night in the open made into a camp worth the name — told, not yet counted
+    // ⚠️ `laid_ground`, not `the_laid_ground`: the staged list predates the rename (ability_rename_map), and the old id is a craft nobody can hold
+    shelter: { wildcraft: 1, safe_ground: 1, laid_ground: 1 },          // a night in the open made into a camp worth the name — told, not yet counted
   },
   craftCeiling: { forage: 0.9, march: 0.3, endureHealth: 0.75, endureEnergy: 0.75 },
 });
@@ -102,9 +107,24 @@ export function isJourneyRoute(route, rules = {}) {
   return !!quickest && Number(quickest.days) >= (Number(journeyRules(rules).minDays) || 1);
 }
 
+/** ⛔ A WAY'S LEGS — each stretch of its path between two places: the days it takes (a marcher's shorter, a gate's hop never), the danger of
+ *  the place it reaches, and whether people live there. The days are kept unrounded, so the legs of a way add up to the way. Pure. */
+export function legsOfWay(o, locations = {}, { march = 0 } = {}) {
+  const path = Array.isArray(o?.path) ? o.path : [];
+  const legs = [];
+  for (let k = 1; k < path.length; k++) {
+    const a = path[k - 1], b = path[k], la = locations?.[a], lb = locations?.[b];
+    const gate = o.kind === "gate" && o.gate && a === o.gate.from && b === o.gate.to;
+    const days = gate ? (Number(o.gate.hours) || 0) / 24 : (Number(walkingDays(la, lb)) || 0) * (1 - (Number(march) || 0));
+    legs.push({ i: k - 1, fromId: a, toId: b, fromName: la?.name || a, toName: lb?.name || b, days, danger: Number(lb?.dangerLevel) || 0,
+      roof: !!lb?.communityId, gate: gate ? { hours: Number(o.gate.hours) || 0, energy: Number(o.energy) || 0 } : null });
+  }
+  return legs;
+}
+
 /** A way there, as the plan shows it: the days, the worst danger on the path, and the nights — under a roof where a stop on the way is
  *  a place people live, in the open otherwise. Pure. */
-function wayOf(o, i, locations) {
+function wayOf(o, i, locations, march = 0) {
   const path = Array.isArray(o.path) ? o.path : [];
   let worst = null;
   for (const id of path.slice(1)) {
@@ -116,7 +136,7 @@ function wayOf(o, i, locations) {
   const stops = path.slice(1, -1).filter(id => !!locations?.[id]?.communityId).length;
   const roofs = Math.min(nights, stops);
   return { key: `${o.kind}-${i}`, kind: o.kind, label: o.label, days: round1(o.days), energy: Number(o.energy) || 0, path, gate: o.gate || null,
-    worst, nights, roofs, camps: nights - roofs };
+    worst, nights, roofs, camps: nights - roofs, legs: legsOfWay(o, locations, { march }) };
 }
 
 /** ⛔ AGREEING TO A JOURNEY: the plan it logs. Null when the way cannot be measured, or the trip is a step rather than a journey. Pure. */
@@ -130,7 +150,7 @@ export function planJourney({ character, destId, locations = {}, rules = {}, cat
   const march = crafts.march?.share || 0;
   const options = r.options.map((o, i) => wayOf(march ? { ...o, days: o.kind === "gate"
     ? (Number(o.walkIn || 0) + Number(o.walkOut || 0)) * (1 - march) + (Number(o.gate?.hours) || 0) / 24
-    : Number(o.days) * (1 - march) } : o, i, locations));
+    : Number(o.days) * (1 - march) } : o, i, locations, march));
   const chosen = options[0];
   return {
     id: `journey-${destId}-${worldDay ?? "x"}`, destId, destName: locations[destId]?.name || destId, fromId, fromName: locations[fromId]?.name || fromId,
@@ -187,6 +207,27 @@ export function journeyQuest(plan, { nowISO = null, day = null, carried = null }
 export function logJourneyOn(character, plan, { nowISO = null, day = null, carried = null } = {}) {
   if (!character || !plan) return null;
   const quests = Array.isArray(character.quests) ? character.quests : (character.quests = []);
+  // ⛔ CCODE-390: A JOURNEY ALREADY ON THE ROAD IS NOT THROWN AWAY BY A NEW PLAN. To the same place, the new plan is the road from where
+  // they stand, and what was walked stays walked; to somewhere else, the old journey is set down with the record of how far it got.
+  const prior = character.journey;
+  if (prior === plan) return plan;   // the journey already logged — nothing to re-plan, and its road is not walked again
+  if (prior?.underway) {
+    if (prior.destId === plan.destId) {
+      const u = prior.underway;
+      plan.id = prior.id;
+      plan.underway = { ...u, legIndex: 0, wayKey: plan.chosenKey, replanned: (Number(u.replanned) || 0) + 1 };
+      const q = quests.find(x => x && x.id === prior.id);
+      if (q) q.summary = journeyQuest(plan, { carried }).summary;
+      character.journey = plan;
+      character._pendingArrival = null;
+      return plan;
+    }
+    const q = quests.find(x => x && x.id === prior.id && x.status === "active");
+    if (q) {
+      q.status = "resolved";
+      q.progress = [...(q.progress || []), `Set down at ${plan.fromName} for a journey to ${plan.destName} — ${(prior.underway.legs || []).length} leg${(prior.underway.legs || []).length === 1 ? "" : "s"} walked, ${Math.round(Number(prior.underway.daysWalked) || 0)} days on the road.`].slice(-8);
+    }
+  }
   for (let i = quests.length - 1; i >= 0; i--) if (quests[i]?.kind === "journey" && quests[i].status === "active") quests.splice(i, 1);
   quests.push(journeyQuest(plan, { nowISO, day, carried }));
   character.journey = plan;
@@ -219,44 +260,96 @@ export function completeJourneyOn(character, plan, note = null) {
   return q || null;
 }
 
-/** ⛔ SETTING OUT: what the road costs. `rng` for the forage rolls. Pure. */
+/** The chance a hungry day's foraging finds food: the wits of the one who walks, and — above what wits alone can find — the gathering crafts
+ *  they hold. Pure. */
+export function forageChanceOf(character, rules = {}, crafts = null) {
+  const R = journeyRules(rules);
+  const wits = Number(character?.subAttributes?.wits ?? character?.attributes?.practical ?? 2) || 0;
+  const byWits = Math.min(Number(R.forageMax) || 0.6, (Number(R.forageBase) || 0) + (Number(R.foragePerWits) || 0) * wits);
+  return Math.max(0, Math.min(Number(R.craftCeiling?.forage) || 0.9, byWits + ((crafts || {}).forage?.share || 0)));
+}
+
+/** ⛔ THE ROAD'S DAYS, EATEN ONE AT A TIME — the one hunger model the whole road and each leg of it share. `state` carries from leg to leg:
+ *  `{ daysWalked, countedDays, foodDaysLeft, rationsEaten, foraged, hungryDays }`. A day is counted once, when the road first reaches into it;
+ *  it is fed from a ration already opened, then by opening another of the `rations` still carried, then by foraging — or it is walked
+ *  hungry. Mutates `state`; returns this stretch's share: `{ counted, rations, foraged, hungry }`. */
+export function walkRoadDays(state, days, { rations = 0, daysPerProvision = 2, forageChance = 0, rng = Math.random } = {}) {
+  const per = Math.max(0.1, Number(daysPerProvision) || 2);
+  const before = { counted: Number(state.countedDays) || 0, foraged: Number(state.foraged) || 0, hungry: Number(state.hungryDays) || 0 };
+  state.daysWalked = (Number(state.daysWalked) || 0) + Math.max(0, Number(days) || 0);
+  // float noise must never count a day twice: 3 legs of a third of a day are one day, not two
+  const counted = Math.max(before.counted, Math.ceil(Math.round(state.daysWalked * 1e6) / 1e6));
+  state.foodDaysLeft = Number(state.foodDaysLeft) || 0;
+  state.rationsEaten = Number(state.rationsEaten) || 0;
+  state.foraged = before.foraged; state.hungryDays = before.hungry;
+  let opened = 0;
+  for (let d = before.counted; d < counted; d++) {
+    if (state.foodDaysLeft >= 1) { state.foodDaysLeft -= 1; continue; }
+    if (opened < rations) { opened++; state.rationsEaten++; state.foodDaysLeft += per - 1; continue; }
+    if (rng() < forageChance) state.foraged++; else state.hungryDays++;
+  }
+  state.countedDays = counted;
+  return { counted: counted - before.counted, rations: opened, foraged: state.foraged - before.foraged, hungry: state.hungryDays - before.hungry };
+}
+
+/** What hunger has cost by now, over the whole road so far — the caps hold across every leg: the share of energy left to arrive with, and
+ *  the health taken. Running out COSTS; it never kills (SNG-331 §2). Pure. */
+export function hungerCost(hungryDays, character, rules = {}, crafts = null) {
+  const R = journeyRules(rules), c = crafts || {};
+  const h = Math.max(0, Number(hungryDays) || 0);
+  return {
+    energyShare: 1 - Math.min(Number(R.hungryEnergyMax) || 0.6, (Number(R.hungryEnergyPerDay) || 0) * h) * (1 - (c.endureEnergy?.share || 0)),
+    healthLoss: Math.floor(Math.min(Math.max(0, h - (Number(R.hungryHealthGraceDays) || 0)),
+      Number(character?.maxHealth) > 0 ? Math.floor(Number(character.maxHealth) * (Number(R.hungryHealthMaxShare) || 0.3)) : Infinity) * (1 - (c.endureHealth?.share || 0))),
+  };
+}
+
+/** Take `n` rations out of the pack, stack by stack. Mutates. Returns how many were taken. */
+export function eatProvisionsOn(character, n, rules = {}, catalog = {}) {
+  let left = Math.max(0, Math.floor(Number(n) || 0));
+  for (const it of [...(character?.inventory || [])]) {
+    if (left <= 0) break;
+    if (!isProvision(it, rules, catalog)) continue;
+    const k = Math.min(left, Math.max(1, Number(it.qty) || 1));
+    removeItem(character, it.name, k);
+    left -= k;
+  }
+  return Math.max(0, Math.floor(Number(n) || 0)) - left;
+}
+
+/** ⛔ SETTING OUT: what the whole road costs, walked without a stop — the same days, rations and hunger the legs cost one by one. `rng` for
+ *  the forage rolls. Pure. */
 export function journeyOutcome(plan, character, { rules = {}, catalog = {}, rng = Math.random, abilities = {} } = {}) {
   const w = chosenWay(plan);
   if (!w) return null;
   const R = journeyRules(rules);
   const crafts = journeyCraftsOf(character, rules, abilities);
-  const needed = rationsFor(w.days, rules);
-  const carried = provisionsCarried(character, rules, catalog);
-  const eaten = Math.min(needed, carried);
-  const shortDays = Math.min(Math.ceil(w.days), Math.max(0, (needed - eaten) * (Number(R.daysPerProvision) || 2)));
-  const wits = Number(character?.subAttributes?.wits ?? character?.attributes?.practical ?? 2) || 0;
-  // the wits of the one who walks, and — above what wits alone can find — the gathering crafts they hold
-  const byWits = Math.min(Number(R.forageMax) || 0.6, (Number(R.forageBase) || 0) + (Number(R.foragePerWits) || 0) * wits);
-  const chance = Math.max(0, Math.min(Number(R.craftCeiling?.forage) || 0.9, byWits + (crafts.forage?.share || 0)));
-  let foraged = 0;
-  for (let i = 0; i < shortDays; i++) if (rng() < chance) foraged++;
-  const hungryDays = shortDays - foraged;
+  const chance = forageChanceOf(character, rules, crafts);
+  const road = {};
+  walkRoadDays(road, w.days, { rations: provisionsCarried(character, rules, catalog), daysPerProvision: R.daysPerProvision, forageChance: chance, rng });
+  const cost = hungerCost(road.hungryDays, character, rules, crafts);
   return {
     destId: plan.destId, wayKey: w.key, days: w.days, hours: Math.round(w.days * 24), gateEnergy: w.energy || 0, path: w.path,
-    rationsEaten: eaten, rationsShort: needed - eaten, foraged, hungryDays,
-    energyShare: 1 - Math.min(Number(R.hungryEnergyMax) || 0.6, (Number(R.hungryEnergyPerDay) || 0) * hungryDays) * (1 - (crafts.endureEnergy?.share || 0)),
-    healthLoss: Math.floor(Math.min(Math.max(0, hungryDays - (Number(R.hungryHealthGraceDays) || 0)),
-      Number(character?.maxHealth) > 0 ? Math.floor(Number(character.maxHealth) * (Number(R.hungryHealthMaxShare) || 0.3)) : Infinity) * (1 - (crafts.endureHealth?.share || 0))),
+    rationsEaten: road.rationsEaten, rationsShort: Math.max(0, rationsFor(w.days, rules) - road.rationsEaten), foraged: road.foraged, hungryDays: road.hungryDays,
+    energyShare: cost.energyShare, healthLoss: cost.healthLoss,
     forageChance: Math.round(chance * 100) / 100,
     carriedBy: Object.fromEntries(Object.entries(crafts).filter(([, v]) => v.by.length).map(([k, v]) => [k, v.by.map(b => b.name)])),
   };
 }
 
-/** What the GM is told while a journey is planned and the character has not set out. Null with none. Pure. */
+/** What the GM is told while a journey is planned and the character has not set out. Null with none — and null once it is on the road,
+ *  which `journeyroad.journeyUnderwayForGM` tells instead. Pure. */
 export function journeyForGM(character) {
   const plan = character?.journey;
-  if (!plan?.destId) return null;
+  if (!plan?.destId || plan.underway) return null;
   return `- ${plan.fromName} → ${plan.destName}: ${journeyLine(plan)}.`;
 }
 
-/** The instruction that opens the arrival scene, with what the road was. Pure. */
+/** The instruction that opens the arrival scene, with what the road was — and, walked leg by leg (CCODE-390), the nights it really had,
+ *  how each perilous leg came through and where the road stopped. Pure. */
 export function journeyArrivalPrompt(plan, outcome, { names = [] } = {}) {
   const w = chosenWay(plan);
+  const nights = outcome?.nights ?? w?.nights, roofs = outcome?.roofs ?? w?.roofs, camps = outcome?.camps ?? w?.camps;
   const via = (outcome?.path || []).slice(1, -1).map(id => names[id] || null).filter(Boolean);
   const food = outcome?.rationsShort
     ? ` The rations ran short: ${outcome.foraged ? `foraging found ${outcome.foraged} day${outcome.foraged === 1 ? "" : "s"} of food, and ` : ""}${outcome.hungryDays} day${outcome.hungryDays === 1 ? " was" : "s were"} walked hungry — let it show in how they arrive; the engine has already taken its cost.`
@@ -264,5 +357,9 @@ export function journeyArrivalPrompt(plan, outcome, { names = [] } = {}) {
   const cb = outcome?.carriedBy || {};
   const crafts = [cb.march?.length ? `${listed(cb.march)} kept the pace` : null, cb.forage?.length && outcome?.foraged ? `${listed(cb.forage)} found food along the way` : null,
     cb.shelter?.length ? `${listed(cb.shelter)} made the camps` : null].filter(Boolean);
-  return `(The character has arrived at the end of a journey: ${outcome.days} days from ${plan.fromName} to ${plan.destName}, ${w?.label || "on foot"}${via.length ? `, through ${listed(via)}` : ""}${plan.company?.length ? `, with ${listed(plan.company)}` : ""}. ${w?.nights ? `${w.camps} night${w.camps === 1 ? "" : "s"} were spent in the open${w.roofs ? ` and ${w.roofs} under a roof` : ""}.` : ""}${food}${crafts.length ? ` Their crafts carried the road: ${crafts.join("; ")}.` : ""} Open the scene with the arrival; the road itself can be a short passage, never a new danger — the engine has already asked what the road held.)`;
+  const OUT = { clean: "came through as planned", rough: "came through, roughly" };
+  const perils = (outcome?.legGambits || []).filter(g => OUT[g.outcome]).map(g => `the way into ${g.toName} ${OUT[g.outcome]}`);
+  const stops = (outcome?.stops || []).filter(s => s.atName).map(s => s.atName);
+  const from = plan.underway?.fromName || plan.fromName;
+  return `(The character has arrived at the end of a journey: ${outcome.days} days from ${from} to ${plan.destName}, ${w?.label || "on foot"}${via.length ? `, through ${listed(via)}` : ""}${plan.company?.length ? `, with ${listed(plan.company)}` : ""}. ${nights ? `${camps} night${camps === 1 ? "" : "s"} were spent in the open${roofs ? ` and ${roofs} under a roof` : ""}.` : ""}${food}${crafts.length ? ` Their crafts carried the road: ${crafts.join("; ")}.` : ""}${perils.length ? ` Perilous country on the way: ${listed(perils)}.` : ""}${stops.length ? ` The road stopped at ${listed([...new Set(stops)])} and was taken up again.` : ""} Open the scene with the arrival; the road itself can be a short passage, never a new danger — the engine has already asked what the road held.)`;
 }

@@ -30,7 +30,9 @@ abilityId must be one the character actually has, or null. novelUse=true when an
   const SUBS = ["strength", "agility", "reason", "insight", "presence", "rapport", "craft", "wits"];
   return stepTexts.map((text, i) => {
     const owned = id => (character.abilities || []).some(a => a.abilityId === id);
+    const rankOf = id => (character.abilities || []).find(a => a.abilityId === id)?.level ?? 1;
     const combo = (Array.isArray(steps[i]?.comboAbilities) ? steps[i].comboAbilities : []).filter(owned);
+    const abilityId = owned(steps[i]?.abilityId) ? steps[i].abilityId : null;
     const step = {
       label: steps[i]?.label || text.slice(0, 60),
       attribute: ["physical", "mental", "social", "practical"].includes(steps[i]?.attribute) ? steps[i].attribute : "practical",
@@ -41,7 +43,10 @@ abilityId must be one the character actually has, or null. novelUse=true when an
       // the full ladder, and the two paths would quietly disagree about the same task.
       difficulty: normalizeDifficulty(steps[i]?.difficulty),
       intentTags: Array.isArray(steps[i]?.intentTags) ? steps[i].intentTags : [],
-      abilityId: owned(steps[i]?.abilityId) ? steps[i].abilityId : null,
+      abilityId,
+      // ⛔ CCODE-390: A STEP'S CRAFT COUNTS ITS RANK, as the same craft chosen alone does (app.js onChoice: the rank held, the lowest of a
+      // combination's). The declared plan was the one door where a rank-5 craft rolled like a rank-0 one.
+      abilityLevel: combo.length > 1 ? Math.min(...combo.map(rankOf)) : abilityId ? rankOf(abilityId) : 0,
       comboAbilities: combo,
       novel: !!steps[i]?.novelUse || combo.length > 1,
       noveltyHint: steps[i]?.noveltyHint || "",

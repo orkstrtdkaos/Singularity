@@ -82,6 +82,7 @@ import { renderNamesDeep } from "./names.js"; // SNG-182
 import { worldCount, worldCountLabel, positionedPlace } from "./worldtime.js";
 import { holdsNearForGM } from "./sharedholds.js";   // CCODE-383: a hold nearby is known
 import { journeyForGM } from "./journeyplan.js";   // CCODE-387: a journey agreed and not yet walked
+import { journeyUnderwayForGM } from "./journeyroad.js";   // CCODE-390: a journey on the road, stopped part-way
 import { encounterReceiptForGM } from "./encounters.js";
 import { waygateBlockForGM, waygateTruthForGM } from "./waygate.js";
 import { readAloudDirective } from "./narration_voice.js";
@@ -621,6 +622,10 @@ export const GM_CONTEXT = [
   { key: "journeyDetail", builder: "journeyplan.journeyForGM (CCODE-387)", carries: ["a journey the character agreed to and has not begun", "its way, days, rations, nights and company"],
     reachedBy: "always (empty unless a journey is planned)", spec: "CCODE-387", views: ["turn", "ask"],
     build: (env) => journeyForGM(env.character) },
+  // ⛔ CCODE-390 (Aevi's theQuestShape: "an encounter mid-leg does not cancel it") — a journey on the road, stopped where the character stands.
+  { key: "journeyUnderwayDetail", builder: "journeyroad.journeyUnderwayForGM (CCODE-390)", carries: ["a journey on the road and stopped part-way", "where it stands and why, and what is left of it"],
+    reachedBy: "always (empty unless a journey is on the road)", spec: "CCODE-390", views: ["turn", "ask"],
+    build: (env) => journeyUnderwayForGM(env.character, { rules: env.CONTENT?.rules || {} }) },
   { key: "holdsNearDetail", builder: "sharedholds.holdsNearForGM (CCODE-383)", carries: ["another traveler's holding within two walking days", "what it is and who runs it", "its condition, what it has and who guards it"],
     reachedBy: "always (empty unless another traveler's hold stands within two walking days)", spec: "CCODE-383", views: ["turn", "ask"],
     build: (env) => holdsNearForGM(env.app?.holdsStore?.() || null, { selfId: env.character?.id || null,

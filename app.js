@@ -93,7 +93,9 @@ import { noteWorldMovedOnShown } from "./engine/worldevents.js";
 import { holdsNear, holdNearLine } from "./engine/sharedholds.js";   // CCODE-383: a hold nearby is known
 import { buyFromHold } from "./engine/holdtrade.js";   // CCODE-388: trading with another player's hold
 import { scopeLegacyMintedIds } from "./engine/fates.js";   // CCODE-384: the people the world makes are shared
-import { planJourney, journeyOutcome, journeyLine, chosenWay, chooseWay, journeyArrivalPrompt, isProvision, provisionsCarried, logJourneyOn, refreshJourneyOn, dropJourneyOn, completeJourneyOn } from "./engine/journeyplan.js";   // CCODE-387: a journey is agreed, readied, then walked
+import { planJourney, journeyLine, chosenWay, chooseWay, journeyArrivalPrompt, provisionsCarried, logJourneyOn, refreshJourneyOn, dropJourneyOn, completeJourneyOn, journeyCraftsOf } from "./engine/journeyplan.js";   // CCODE-387: a journey is agreed, readied, then walked
+import { ensureLegsOn, beginRoadOn, currentLeg, roadStandsAt, legEarnsGambit, energyAfterLeg, walkLegOn, spendRoadOn, legGambitFor, aroundLeg, noteLegGambitOn, stopRoadOn,
+  roadLine, perilousLegsOf, noteRoadOn, endJourneyOn, roadOutcome, legFailurePrompt, roadRules, dangerWord as roadDangerWord } from "./engine/journeyroad.js";   // CCODE-390: the road, walked leg by leg
 import { travelersHere, travelerHereLine, whereOf } from "./engine/travelers.js";   // CCODE-359: another traveler is here   // CCODE-354: the world moved on, counted by beats
 import { makeInvitation, incomingInvitations, sentInvitations, joinBandLocally, bandPhrase } from "./engine/invitations.js";
 import { newsNearness, nearFirst } from "./engine/newsvoice.js";   // CCODE-367: nearby news stands out
@@ -154,7 +156,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.50";
+const APP_VERSION = "2.0.51";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8588,8 +8590,9 @@ function applyTurn(turn, resolution, playerWords = null) {
         refusedMove = true;
         logOpOutcome("moveTo", "journey-planned");
         if (character.journey?.destId !== destId) logJourney(plan387);
-        character._correctionAside = [character._correctionAside,
-          `The road to ${plan387.destName} is about ${chosenWay(plan387).days} days — the journey is in your quest log. Ready yourself, then set out.`]
+        character._correctionAside = [character._correctionAside, character.journey?.underway
+          ? `You are still at ${CONTENT.locations[character.currentLocationId]?.name || "where the road stopped"} — the rest of the road to ${plan387.destName} is taken up from the journey card.`
+          : `The road to ${plan387.destName} is about ${chosenWay(plan387).days} days — the journey is in your quest log. Ready yourself, then set out.`]
           .filter(Boolean).join(" ");
         destId = null;
       }
@@ -9842,6 +9845,9 @@ function travelIntentOf(action) {
 /** SNG-122: the per-turn directive that FORCES the GM to emit moveTo for a travel intent, and enumerates
  *  the real/known places reachable from here so its moveTo target resolves (Q2). */
 function buildTravelDirective(ti) {
+  // ⛔ CCODE-390: a journey already on the road is taken up again from the journey card, from where it stopped
+  const road390 = character.journey?.underway && ti.destId && ti.destId === character.journey.destId ? character.journey : null;
+  if (road390) return `THE PLAYER MEANS TO GO ON — the journey to ${road390.destName} is already on the road (${roadLine(road390, { rules: CONTENT.rules })}). It is taken up again from the journey card: narrate only the resolve to go on — do NOT narrate the road or the arrival, and do NOT emit moveTo.`;
   // ⛔ CCODE-387: a journey is logged by the engine and walked from the journey card — the GM narrates the decision, never the road
   const plan387 = ti.destId && ti.destId !== character.currentLocationId ? journeyPlanFor(ti.destId) : null;
   if (plan387) return `THE PLAYER MEANS TO JOURNEY to ${plan387.destName} — about ${chosenWay(plan387).days} days (${journeyLine(plan387)}). A journey is READIED before it is walked: the engine logs it and the player sets out from the journey card. Narrate the decision and whatever readying this beat holds — do NOT narrate the departure, the road or the arrival, and do NOT emit moveTo.`;
@@ -10170,70 +10176,272 @@ function refreshJourneyQuest() {
 function planJourneyTo(destId, { aside = null } = {}) {
   const plan = journeyPlanFor(destId);
   if (!plan) return false;
+  const onRoad = !!(character.journey?.underway && character.journey.destId === destId);   // CCODE-390: the road from here; what was walked stays walked
   logJourney(plan);
   saveCharacter(character);
-  renderPlay(character.activeScene?.lastTurn || null, { aside: aside || `The journey to ${plan.destName} is in your quest log — about ${chosenWay(plan).days} days. Ready yourself, then set out.` });
+  renderPlay(character.activeScene?.lastTurn || null, { aside: aside || (onRoad
+    ? `From here the rest of the road to ${plan.destName} is about ${chosenWay(plan).days} days — take it up from the journey card.`
+    : `The journey to ${plan.destName} is in your quest log — about ${chosenWay(plan).days} days. Ready yourself, then set out.`) });
   return true;
 }
 
-/** Stay: the plan and its quest go. */
+/** Stay: the plan and its quest go — or, once on the road, the journey ends where it stands, with its record. */
 function cancelJourney() {
+  if (character?.journey?.underway) { endJourneyHere(); return; }
   const plan = dropJourneyOn(character);
   if (!plan) return;
   saveCharacter(character);
   renderPlay(character.activeScene?.lastTurn || null, { aside: `You stay. The road to ${plan.destName} will keep.` });
 }
 
-/** ⛔ SETTING OUT — the road is walked: its days on the character's own clock, its rations, its hunger, a gate's toll; every place on the
- *  path becomes known; then the arrival, by the same steps `travelTo` takes. */
-async function setOutOnJourney() {
-  if (busy) return;
-  const plan = character?.journey;
-  if (!plan || !CONTENT.locations[plan.destId]) return;
-  if (activeEnc()) { renderPlay(character.activeScene?.lastTurn || null, { aside: "Not while this is still happening — finish it, then set out." }); return; }
-  if (character.currentLocationId !== plan.fromId) {
-    // they have moved since the plan was made: the road from here is another road, and it is theirs to look over first
-    const again = journeyPlanFor(plan.destId);
-    if (!again) { dropJourneyOn(character); saveCharacter(character); await travelTo(plan.destId); return; }
-    logJourney(again); saveCharacter(character);
-    renderPlay(character.activeScene?.lastTurn || null, { aside: `You are not where you planned from — the road to ${again.destName} from here is about ${chosenWay(again).days} days. Look it over, then set out.` });
-    return;
-  }
-  const out = journeyOutcome(plan, character, { rules: CONTENT.rules, catalog: CONTENT.items || {}, abilities: fullCatalog() });
-  if (!out) return;
-  let toEat = out.rationsEaten;
-  for (const it of [...(character.inventory || [])]) {
-    if (toEat <= 0) break;
-    if (!isProvision(it, CONTENT.rules, CONTENT.items || {})) continue;
-    const n = Math.min(toEat, Math.max(1, Number(it.qty) || 1));
-    removeItem(character, it.name, n);
-    toEat -= n;
-  }
+// ---------- ⛔ CCODE-390: THE ROAD, WALKED LEG BY LEG ----------
+// Aevi's SNG-333 ("you either play out of a failure or pass the way you intended") and her `theQuestShape` ("an encounter mid-leg does not
+// cancel it … a party that turns back has a record of how far they got"). The legs, the road's record, the perilous leg's plan and its
+// prompts are `engine/journeyroad.js`; these are the doors, and they take the steps `travelTo` takes.
+let roadWalking = false;   // one walk at a time: a second tap must never walk a leg twice
+
+/** The context a perilous leg's plan is assessed and run in — a declared gambit's own, at the leg's end. */
+function roadCtx(locId) {
+  return { ...gambitCtx(), location: CONTENT.locations[locId] || hereNow() };
+}
+
+/** What a line on the journey's quest is written with. */
+function roadNoteOpts() {
+  return { carried: provisionsCarried(character, CONTENT.rules, CONTENT.items || {}), rules: CONTENT.rules };
+}
+
+/** The traveller reaches a place on the road — the steps `travelTo` takes, with the road's own hours in place of a step's three. */
+function reachOnRoad(locId, roadHours, { halt = false } = {}) {
   // SNG-273: a closing world makes the roads cost more — the same factor a step pays
   const factor = travelCostFactor(arcEffectsNow());
-  const hours = Math.max(1, Math.round(out.hours * (factor?.mult || 1)));
-  completeJourneyOn(character, plan, `Set out from ${plan.fromName}; arrived at ${plan.destName} after ${out.days} days on the road.`);
-  const names = Object.fromEntries((out.path || []).map(id => [id, CONTENT.locations[id]?.name || null]));
-  const prompt = journeyArrivalPrompt(plan, out, { names });
-  // the arrival — the steps `travelTo` takes, with the road's own costs in place of a step's three hours
-  const locId = plan.destId;
-  for (const id of out.path || []) addKnownPlace(id);
+  const hours = Math.max(1, Math.round(roadHours * (factor?.mult || 1)));
+  addKnownPlace(locId);
   noteGeneratedAttention(locId, "revisit", readClock(character.clock).day);
   character.currentLocationId = locId;
   character.activeScene = null;
   sceneTurns = [];
   sceneState = null;
   advanceClock(character.clock, hours);
-  character.energy = Math.max(0, Math.round((Number(character.maxEnergy) || Number(character.energy) || 0) * out.energyShare) - (out.gateEnergy || 0));
-  if (out.healthLoss) character.health = Math.max(1, (Number(character.health) || 1) - out.healthLoss);
   notePlaceVisit(character, locId, readClock(character.clock).day, CONTENT.locations[locId]?.name);
   notePerception(character, locId, CONTENT.locations[locId], { visited: true, usedAbilityIds: [] }, CONTENT.rules);
-  try { ensureLocationImage(locId); } catch { /* art is a convenience; never block a journey */ }
+  if (halt) try { ensureLocationImage(locId); } catch { /* art is a convenience; never block a journey */ }
+}
+
+/** ⛔ SETTING OUT — and TAKING UP THE ROAD AGAIN. The road is walked from where it stands; a traveller who has moved since is shown the road
+ *  from where they are, with what was walked kept (`logJourneyOn`). */
+async function setOutOnJourney() {
+  if (busy || roadWalking) return;
+  const plan = character?.journey;
+  if (!plan || !CONTENT.locations[plan.destId]) return;
+  if (activeEnc()) { renderPlay(character.activeScene?.lastTurn || null, { aside: "Not while this is still happening — finish it, then take to the road." }); return; }
+  if (plan.underway?.inGambit) { faceLegPlan(); return; }
+  if (character.currentLocationId === plan.destId) {
+    completeJourneyOn(character, plan, `Reached ${plan.destName}.`);
+    saveCharacter(character);
+    renderPlay(character.activeScene?.lastTurn || null, { aside: `You are already at ${plan.destName} — the journey is done.` });
+    return;
+  }
+  if (character.currentLocationId !== roadStandsAt(plan)) {
+    // they have moved since the plan was made or the road stopped: the road from here is another road, and theirs to look over first
+    const again = journeyPlanFor(plan.destId);
+    if (!again) {
+      if (plan.underway) completeJourneyOn(character, plan, `Went the last of the way to ${plan.destName}.`); else dropJourneyOn(character);
+      saveCharacter(character); await travelTo(plan.destId); return;
+    }
+    logJourney(again); saveCharacter(character);
+    renderPlay(character.activeScene?.lastTurn || null, { aside: `You are not where the road stood — from here, ${again.destName} is about ${chosenWay(again).days} days. Look it over, then ${again.underway ? "take up the road" : "set out"}.` });
+    return;
+  }
+  ensureLegsOn(plan, { locations: CONTENT.locations, character, rules: CONTENT.rules, abilities: fullCatalog() });
+  beginRoadOn(plan, { worldDay: absoluteWorldDay() });
+  roadWalking = true;
+  try { await walkRoad(plan); } finally { roadWalking = false; }
+}
+
+/** ⛔ WALK THE ROAD until it arrives or stops. A leg into perilous country waits for the player with its plan; any other leg is walked, and the
+ *  road asks what it held — the authored `onTravel` roll, "per travel leg" — and an encounter stops the journey where it happened. */
+async function walkRoad(plan) {
+  for (;;) {
+    const leg = currentLeg(plan);
+    if (!leg) { await arriveByRoad(plan); return; }
+    if (legEarnsGambit(leg, CONTENT.rules)) {
+      const g = legGambitFor(leg, roadCtx(leg.toId), { abilities: fullCatalog(), energy: energyAfterLeg(character, plan, { rules: CONTENT.rules, abilities: fullCatalog() }) });
+      g.around = aroundLeg(plan, leg, CONTENT.locations, { march: journeyCraftsOf(character, CONTENT.rules, fullCatalog()).march?.share || 0 });
+      plan.underway.pending = g;
+      noteRoadOn(character, plan, null, roadNoteOpts());
+      saveCharacter(character);
+      renderPlay(character.activeScene?.lastTurn || null, { aside: `The road runs into ${leg.toName} — ${roadDangerWord(leg.danger)} country. Look over the leg, then take it${g.around ? " or go around" : ""}.` });
+      return;
+    }
+    const out = walkLegOn(character, plan, { rules: CONTENT.rules, catalog: CONTENT.items || {}, abilities: fullCatalog() });
+    reachOnRoad(leg.toId, out.hours, { halt: out.arrived });
+    noteRoadOn(character, plan, `Reached ${leg.toName} — day ${plan.underway.countedDays} of the road.`, roadNoteOpts());
+    if (out.arrived) { await arriveByRoad(plan); return; }
+    saveCharacter(character);
+    renderPlay(null, { thinking: `On the road to ${plan.destName} — ${leg.toName}, day ${plan.underway.countedDays}…` });
+    const news = await maybeTick();
+    if (await maybeRandomEncounter("onTravel", news)) {
+      // the road had something to say — the journey stops here, and waits
+      stopRoadOn(plan, { atId: leg.toId, atName: leg.toName, why: "encounter", worldDay: absoluteWorldDay() });
+      noteRoadOn(character, plan, `Stopped at ${leg.toName} — the road held something.`, roadNoteOpts());
+      try { ensureLocationImage(leg.toId); } catch { /* art is a convenience; never block a journey */ }
+      saveCharacter(character);
+      return;
+    }
+  }
+}
+
+/** Arrived: the quest completed with what the road was, and the arrival scene told it. */
+async function arriveByRoad(plan) {
+  const u = plan.underway;
+  const out = roadOutcome(plan, character, { rules: CONTENT.rules, abilities: fullCatalog() });
+  completeJourneyOn(character, plan, `Set out from ${u.fromName}; arrived at ${plan.destName} after ${out.days} days on the road.`);
+  const names = Object.fromEntries((out.path || []).map(id => [id, CONTENT.locations[id]?.name || null]));
+  const prompt = journeyArrivalPrompt(plan, out, { names });
   saveCharacter(character);
   const news = await maybeTick();
-  if (await maybeRandomEncounter("onTravel", news)) return;
-  if (await maybeRandomEncounter("onEnterLocation", news)) return;
+  if (await maybeRandomEncounter("onEnterLocation", news)) return;   // arrival itself had something waiting
   startScene(prompt, news);
+}
+
+/** ⛔ TAKE THE PERILOUS LEG (SNG-333): the leg is walked, and its plan is run where it ends — step by step, on the resolver a declared gambit
+ *  runs on. The plan is kept on the road until it is done, so a closed tab comes back to it rather than past it. */
+async function takeDangerousLeg() {
+  if (busy || roadWalking) return;
+  const plan = character?.journey, u = plan?.underway, g = u?.pending, leg = currentLeg(plan);
+  if (!g || !leg || g.legIndex !== leg.i || character.currentLocationId !== leg.fromId) { await setOutOnJourney(); return; }
+  const out = walkLegOn(character, plan, { rules: CONTENT.rules, catalog: CONTENT.items || {}, abilities: fullCatalog() });
+  u.inGambit = g;
+  reachOnRoad(leg.toId, out.hours, { halt: true });
+  noteRoadOn(character, plan, `Took the leg into ${leg.toName} — day ${u.countedDays} of the road.`, roadNoteOpts());
+  saveCharacter(character);
+  faceLegPlan();
+}
+
+/** Run the perilous leg's plan. A step that breaks offers its next fallback and the adaptation points; then it is faced. */
+function faceLegPlan() {
+  const plan = character?.journey, g = plan?.underway?.inGambit;
+  if (!g) return;
+  const ctx = roadCtx(g.toId);
+  const actions = g.steps.map(s => s.action);
+  const run = { receipts: [], adaptLeft: adaptationPointsFor(profile, CONTENT.rules), tried: {} };
+  let index = 0;
+  const broke = (r) => r.degree === "failure" || r.degree === "crit_failure";
+  const step = () => {
+    const res = executeGambit(actions, ctx, Math.random, index);
+    run.receipts.push(...res.receipts.filter(r => !broke(r)));
+    if (res.blockedAt === null) { finishLegPlan(plan, g, run, null); return; }
+    renderLegComplication(res.receipts[res.receipts.length - 1]);
+  };
+  const onward = (i) => { index = i + 1; if (index >= actions.length) finishLegPlan(plan, g, run, null); else step(); };
+  const renderLegComplication = (failed) => {
+    const s = g.steps[failed.index];
+    const a = failed.action || s.action;
+    const fb = (s.fallbacks || [])[run.tried[failed.index] || 0] || null;
+    chrome(`<div class="screen" style="max-width:640px">
+      <h2>The road turns on you</h2>
+      <p class="hint">The leg into ${esc(g.toName)} — step ${failed.index + 1} of ${actions.length}.</p>
+      <div class="roll-receipt" style="margin:10px 0">${esc(a.label)} — d100: ${failed.roll} vs ${failed.breakdown ? `<span class="roll-chance" data-breakdown="${attrJson({ ...failed.breakdown, roll: failed.roll, degree: failed.degree })}" tabindex="0" role="button" title="Why this number?">${failed.chance}</span>` : failed.chance} — <span class="${failed.degree}">${failed.degree.replace("_", " ")}</span></div>
+      <div style="display:flex; flex-direction:column; gap:8px; margin-top:14px;">
+        ${fb ? `<button class="choice" id="lc-fallback">Fall back: ${esc(fb.label)}</button>` : ""}
+        ${run.adaptLeft > 0 ? `<button class="choice" id="lc-adapt">Adapt — force another try (${run.adaptLeft} adaptation point${run.adaptLeft > 1 ? "s" : ""} left)</button>` : ""}
+        <button class="choice" id="lc-face">Face it — play out what went wrong</button>
+      </div>
+    </div>`);
+    const fbBtn = document.getElementById("lc-fallback");
+    if (fbBtn) fbBtn.onclick = () => {
+      run.tried[failed.index] = (run.tried[failed.index] || 0) + 1;
+      const r = rerollStep(fb, ctx);
+      if (broke(r)) renderLegComplication({ ...r, index: failed.index, action: fb });
+      else { run.receipts.push({ index: failed.index, ...r, action: fb, viaFallback: fb.label }); onward(failed.index); }
+    };
+    const adBtn = document.getElementById("lc-adapt");
+    if (adBtn) adBtn.onclick = () => {
+      run.adaptLeft--;
+      const r = rerollStep(a, ctx);
+      if (broke(r)) renderLegComplication({ ...r, index: failed.index, action: a });
+      else { run.receipts.push({ index: failed.index, ...r, action: a, rerolled: true }); onward(failed.index); }
+    };
+    document.getElementById("lc-face").onclick = () => { run.receipts.push({ ...failed, action: a }); finishLegPlan(plan, g, run, { ...failed, action: a }); };
+  };
+  step();
+}
+
+/** The perilous leg's plan is done: its steps paid for and practised, as a declared gambit's are. Through it, the road goes on; a step that
+ *  broke is played out where it happened, and the journey waits. */
+async function finishLegPlan(plan, g, run, failed) {
+  const u = plan.underway;
+  u.inGambit = null;
+  const per = CONTENT.rules.gambit?.stepEnergyCost ?? 4;
+  let cost = 0;
+  for (const r of run.receipts) {
+    const a = r.action || g.steps[r.index]?.action;
+    const ab = a?.abilityId ? fullCatalog()[a.abilityId] : null;
+    cost += ab ? effectiveEnergyCost(ab, character, CONTENT.rules) : per;
+    if (ab) { recordUse(character, [a.abilityId], { day: absoluteWorldDay() }); pendingRankAdvances.push(...autoAdvancePracticedRanks(character, CONTENT.rules, { branchForks: CONTENT.branchForks, catalog: fullCatalog(), traditionIndex: CONTENT.traditionIndex })); }
+  }
+  character.energy = Math.max(0, (Number(character.energy) || 0) - cost);
+  const outcome = failed ? "broke" : run.receipts.some(r => r.complication || r.viaFallback || r.rerolled) ? "rough" : "clean";
+  noteLegGambitOn(plan, g, run.receipts, outcome);
+  const arrived = g.toId === plan.destId || !currentLeg(plan);
+  if (!failed) {
+    noteRoadOn(character, plan, `Came through ${g.toName} ${outcome === "clean" ? "as planned" : "— roughly, but through"}.`, roadNoteOpts());
+    saveCharacter(character);
+    roadWalking = true;
+    try { if (arrived) await arriveByRoad(plan); else await walkRoad(plan); } finally { roadWalking = false; }
+    return;
+  }
+  // ⛔ A STEP THAT BREAKS DOES NOT END THE JOURNEY — a way lost costs days; then the failure is played out where it happened
+  const s = g.steps[failed.index];
+  if (s?.kind === "way") {
+    const lost = spendRoadOn(character, plan, (Number(g.days) || 0) * (Number(roadRules(CONTENT.rules).lostWayShare) || 0),
+      { rules: CONTENT.rules, catalog: CONTENT.items || {}, abilities: fullCatalog() });
+    if (lost?.days) advanceClock(character.clock, lost.hours);
+  }
+  const label = failed.action?.label || s?.action?.label;
+  stopRoadOn(plan, { atId: g.toId, atName: g.toName, why: "step", note: label, worldDay: absoluteWorldDay() });
+  noteRoadOn(character, plan, `At ${g.toName}: "${label}" broke.`, roadNoteOpts());
+  const prompt = legFailurePrompt(plan, g, s, failed, { rules: CONTENT.rules, arrived });
+  if (arrived) completeJourneyOn(character, plan, `Arrived at ${plan.destName} on day ${u.countedDays} of the road — into trouble.`);
+  saveCharacter(character);
+  const news = await maybeTick();
+  startScene(prompt, news);
+}
+
+/** ⛔ GO AROUND the perilous place — the road from here that does not pass through it; what was walked stays walked. */
+async function goAroundDanger() {
+  if (busy || roadWalking) return;
+  const plan = character?.journey, g = plan?.underway?.pending;
+  if (!g?.around) return;
+  const next = planJourney({ character, destId: plan.destId, locations: CONTENT.locations, rules: CONTENT.rules, catalog: CONTENT.items || {}, abilities: fullCatalog(),
+    worldDay: absoluteWorldDay(), route: { options: [g.around.option] }, companyNames: plan.company || [] });
+  if (!next) { renderPlay(character.activeScene?.lastTurn || null, { aside: `There is no way round ${g.toName} from here.` }); return; }
+  logJourney(next);
+  noteRoadOn(character, next, `Went around ${g.toName}.`, roadNoteOpts());
+  saveCharacter(character);
+  await setOutOnJourney();
+}
+
+/** ⛔ END THE JOURNEY HERE — its quest settled with how far it got. */
+function endJourneyHere() {
+  const line = endJourneyOn(character, { atName: CONTENT.locations[character.currentLocationId]?.name || null });
+  if (!line) return;
+  saveCharacter(character);
+  renderPlay(character.activeScene?.lastTurn || null, { aside: `You end the journey here. ${line}` });
+}
+
+/** The perilous leg's plan on the journey card: each step, how it is taken, the read, the weak link and what it falls back to. */
+function legPlanHtml(g) {
+  const rows = (g.steps || []).map((s, i) => {
+    const [what, ...how] = String(s.action?.label || "").split(" — ");
+    const fbs = (s.fallbacks || []).map(f => String(f.label || "").split(" — ").slice(1).join(" — ") || f.label);
+    return `<div class="lg-step${g.weakIndex === i ? " weak" : ""}">
+      <div class="lg-main"><span class="lg-n">${i + 1}</span> <span class="lg-what">${esc(what)}</span>${how.length ? ` <span class="lg-how">— ${esc(how.join(" — "))}</span>` : ""}${g.weakIndex === i ? ` <span class="g-weak">⚠ weakest link</span>` : ""}</div>
+      <div class="lg-read hint">${esc(s.sense?.text || "No read on this one.")}${fbs.length ? ` If it breaks: ${esc(fbs.join(", then "))}.` : ""}</div>
+    </div>`;
+  }).join("");
+  const shown = g.weakIndex != null && g.readBy && g.readBy !== "read" ? `<div class="hint">${esc(g.readBy)} shows you where it will break.</div>` : "";
+  return `<div class="leg-plan"><div class="lg-head">⚠ The next leg runs into <strong>${esc(g.toName)}</strong> — ${esc(roadDangerWord(g.danger))} country, about ${esc(String(g.days))} days. It is taken as a plan:</div>${rows}${shown}</div>`;
 }
 
 async function travelTo(locId, { cost } = {}) {
@@ -13795,7 +14003,7 @@ function renderQuestDetail(questId, guidance = null, loading = false) {
     <div class="codex-kind">${esc(q.status)}</div>
     <h2 style="margin-top:4px">${esc(q.title)}</h2>
     <p class="map-details-desc">${esc(q.summary)}</p>
-    ${q.kind === "journey" && q.status === "active" && character.journey?.id === q.id ? `<div style="margin:8px 0"><button class="btn" id="quest-journey-go">Set out for ${esc(character.journey.destName)}</button> <button class="btn secondary" id="quest-journey-stay">Stay</button></div>` : ""}
+    ${q.kind === "journey" && q.status === "active" && character.journey?.id === q.id ? `<div style="margin:8px 0"><button class="btn" id="quest-journey-go">${character.journey.underway ? "Take up the road to" : "Set out for"} ${esc(character.journey.destName)}</button> <button class="btn secondary" id="quest-journey-stay">${character.journey.underway ? "End the journey here" : "Stay"}</button></div>` : ""}
     <div class="hint">${q.giver ? `From ${esc(q.giver)} · ` : ""}started ${q.startedAt ? "day " + esc(String(q.startedAtDay ?? "").trim() || new Date(q.startedAt).toLocaleDateString()) : "a while back"}</div>
     ${q.giverEntityId && character.codex?.topics?.[q.giverEntityId] ? `<button class="codex-link" data-questgiver="${esc(q.giverEntityId)}" style="margin-top:6px">◈ ${esc(character.codex.topics[q.giverEntityId].label)} in Codex</button>` : ""}
     ${q.progress?.length ? `<div style="margin-top:12px"><h3 class="codex-title" style="font-size:15px">The story so far</h3>${q.progress.map(p => `<div class="codex-fact">${esc(p)}</div>`).join("")}</div>` : ""}
@@ -17458,13 +17666,30 @@ function renderPlay(turn, opts = {}) {
       <div style="margin-top:6px;display:flex;gap:8px"><button class="btn" id="ledger-send">Let it travel</button>
       <button class="btn secondary" id="ledger-hold">Keep it local ·</button></div></div>`;
   }
+  // ⛔ CCODE-390 — A JOURNEY ON THE ROAD: how far it has come, what is ahead, the perilous leg's plan when the road has reached one, and
+  // the doors — take the leg, go around, take up the road, or end it here.
+  if (character?.journey?.underway && !activeEnc()) {
+    const j = character.journey, u = j.underway, g = u.pending, run = u.inGambit;
+    main += `<div class="journey-card on-road">
+      <div class="jc-head">🧭 <strong>Journey to ${esc(j.destName)}</strong> <span class="hint">— on the road</span></div>
+      <div class="jc-line">${esc(roadLine(j, { carried: provisionsCarried(character, CONTENT.rules, CONTENT.items || {}), rules: CONTENT.rules }))}</div>
+      ${g && !run ? legPlanHtml(g) : ""}
+      <div class="jc-actions">${run
+        ? `<button class="btn" id="journey-face-leg">Face the leg into ${esc(run.toName)}</button>`
+        : g ? `<button class="btn" id="journey-take-leg">Take the leg into ${esc(g.toName)}</button>${g.around ? ` <button class="btn secondary" id="journey-around">Go around — about ${esc(String(g.around.days))} days</button>` : ""}`
+        : `<button class="btn" id="journey-go">Take up the road to ${esc(j.destName)}</button>`}${run ? "" : ` <button class="btn secondary" id="journey-end">End the journey here</button>`}</div>
+    </div>`;
+  }
   // ⛔ CCODE-387 — A JOURNEY IS PLANNED: what it is, the ways, and the door out. The character has not left.
-  if (character?.journey && !activeEnc()) {
+  if (character?.journey && !character.journey.underway && !activeEnc()) {
     const j = character.journey;
     const carried387 = provisionsCarried(character, CONTENT.rules, CONTENT.items || {});
+    ensureLegsOn(j, { locations: CONTENT.locations, character, rules: CONTENT.rules, abilities: fullCatalog() });
+    const peril390 = perilousLegsOf(j, CONTENT.rules);
     main += `<div class="journey-card">
       <div class="jc-head">🧭 <strong>Journey to ${esc(j.destName)}</strong> <span class="hint">— planned; you have not left ${esc(j.fromName)}</span></div>
       <div class="jc-line">${esc(journeyLine(j, { carried: carried387 }))}</div>
+      ${peril390.length ? `<div class="jc-line hint">⚠ ${peril390.length === 1 ? "One leg runs" : `${peril390.length} legs run`} into perilous country (${esc(peril390.map(p => p.toName).join(", "))}) — each is looked over when you reach it, and taken as a plan.</div>` : ""}
       ${(j.options || []).length > 1 ? `<div class="jc-ways">${j.options.map(o => `<button class="opt${o.key === j.chosenKey ? " on" : ""}" data-journey-way="${esc(o.key)}">${esc(`${o.days} days ${o.label}`)}</button>`).join("")}</div>` : ""}
       <div class="jc-actions"><button class="btn" id="journey-go">Set out for ${esc(j.destName)}</button> <button class="btn secondary" id="journey-cancel">Stay</button></div>
     </div>`;
@@ -17819,6 +18044,10 @@ function renderPlay(turn, opts = {}) {
   const arriveBtn = document.getElementById("do-arrive"); if (arriveBtn) arriveBtn.onclick = () => arriveAtPending(); // SNG-122
   const journeyGo = document.getElementById("journey-go"); if (journeyGo) journeyGo.onclick = () => setOutOnJourney();   // CCODE-387
   const journeyStay = document.getElementById("journey-cancel"); if (journeyStay) journeyStay.onclick = () => cancelJourney();
+  const journeyTake = document.getElementById("journey-take-leg"); if (journeyTake) journeyTake.onclick = () => takeDangerousLeg();   // CCODE-390
+  const journeyFace = document.getElementById("journey-face-leg"); if (journeyFace) journeyFace.onclick = () => faceLegPlan();
+  const journeyAround = document.getElementById("journey-around"); if (journeyAround) journeyAround.onclick = () => goAroundDanger();
+  const journeyEnd = document.getElementById("journey-end"); if (journeyEnd) journeyEnd.onclick = () => endJourneyHere();
   for (const b of app.querySelectorAll("[data-journey-way]")) b.onclick = () => {
     chooseWay(character.journey, b.dataset.journeyWay, CONTENT.rules); refreshJourneyQuest(); saveCharacter(character);
     renderPlay(character.activeScene?.lastTurn || null, {});

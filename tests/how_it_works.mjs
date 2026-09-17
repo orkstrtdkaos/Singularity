@@ -19469,9 +19469,12 @@ console.log("\n── §272 · a journey is agreed, then readied, then walked �
     && /if \(g\.kind === "departure" && g\.journeyDestId && optionId === "plan"\)/.test(A272)
     && /if \(planJourneyTo\(destId\)\) return;/.test(A272)
     && /if \(!planJourneyTo\(travelBtn\.dataset\.dest\)\) travelTo\(travelBtn\.dataset\.dest\);/.test(A272));
+  // ⛑ CCODE-390: the road is walked LEG BY LEG now — the rations go out of the pack in the engine as each leg is walked, and the road asks what
+  // it held after every leg, the arrival after that (§274 proves the legs; this still holds the door to them)
   check("§272: ⛔ …and setting out walks the ROAD'S hours, eats the rations, completes the quest, and asks what the road held — never a step's three hours",
-    /advanceClock\(character\.clock, hours\);/.test(A272) && /removeItem\(character, it\.name, n\);/.test(A272)
-    && /completeJourneyOn\(character, plan, `Set out from/.test(A272) && /if \(await maybeRandomEncounter\("onTravel", news\)\) return;[\s\S]{0,120}startScene\(prompt, news\);/.test(A272));
+    /advanceClock\(character\.clock, hours\);/.test(A272) && /const out = walkLegOn\(character, plan, /.test(A272) && /removeItem\(character, it\.name, k\);/.test(rd("engine/journeyplan.js"))
+    && /completeJourneyOn\(character, plan, `Set out from/.test(A272) && /if \(await maybeRandomEncounter\("onTravel", news\)\) \{/.test(A272)
+    && /if \(await maybeRandomEncounter\("onEnterLocation", news\)\) return;[\s\S]{0,120}startScene\(prompt, news\);/.test(A272));
   check("§272: the card says it and holds the door; the GM is told the character is still here, readying it, and never to walk the road for them",
     /<button class="btn" id="journey-go">Set out for \$\{esc\(j\.destName\)\}<\/button>/.test(A272)
     && /if \(journeyDetail\) world\.push\(`## A JOURNEY IS PLANNED/.test(GM272) && /Never move them and never narrate the departure or the road/.test(GM272)
@@ -19571,6 +19574,197 @@ console.log("\n── §273 · trading with another player's hold ──");
     && /data-hold-trade="\$\{esc\(h\.id\)\}"/.test(A273) && /h\.trade = !!cb\.checked;/.test(A273)
     && /const tr = await syncTrades\(\{ character \}\)/.test(A273)
     && /"holdTrades"/.test(rd("engine/gm.js")) && (await import("../engine/gm.js")).ASK_FORBIDDEN.includes("holdTrades"));
+}
+
+// ⛔ CCODE-390 — Erik's "Proceed" on the two stages CCODE-387 left open: THE ROAD, WALKED LEG BY LEG. Aevi's SNG-333: "navigating a leg or
+// passing through a dangerous area can include a gambit … you either play out of a failure or pass the way you intended." Her theQuestShape:
+// "An encounter mid-leg does not cancel it; a route that closes behind you re-plans it; and a party that turns back has a record of how far
+// they got." ⚑ MEASURED: a journey is 4.45 legs; at danger 2 or more, 66% of legs (and 97% of journeys) would be gambits.
+console.log("\n── §274 · the road, walked leg by leg: a perilous leg is a plan, and a stopped journey is taken up again ──");
+{
+  const JP = await import("../engine/journeyplan.js");
+  const JR = await import("../engine/journeyroad.js");
+  const GB = await import("../engine/gambit.js");
+  const PG274 = await import("../engine/progression.js");
+  const { walkingDays: wd274 } = await import("../engine/worldmap.js");
+  const { loadContentHeadless: lch274 } = await import("./headless_content.mjs");
+  const C = await lch274();
+  const L = C.locations, AB = C.abilities, RU = C.rules;
+  const walker = (extra = {}) => ({ id: "c274", level: 5, attunement: 0, currentLocationId: "millbrook", maxHealth: 60, health: 60, maxEnergy: 120, energy: 120,
+    attributes: { physical: 3, mental: 3, social: 3, practical: 3 }, subAttributes: { strength: 3, agility: 3, reason: 3, insight: 1, presence: 3, rapport: 3, craft: 3, wits: 4 },
+    inventory: [], abilities: [], quests: [], ...extra });
+  const planTo = (c, dest) => JP.planJourney({ character: c, destId: dest, locations: L, rules: RU, catalog: C.items, abilities: AB, worldDay: 80 });
+
+  // ── the legs
+  const hollow = planTo(walker(), "archive_hollow");
+  const way = JP.chosenWay(hollow);
+  const legSum = way.legs.reduce((n, l) => n + l.days, 0);
+  const gateLegs = JP.legsOfWay({ kind: "gate", path: ["millbrook", "echo_river_crossing", "archive_hollow"], gate: { from: "echo_river_crossing", to: "archive_hollow", hours: 12 }, energy: 9 }, L);
+  check("§274: ⛔ EVERY WAY CARRIES ITS LEGS — each stretch between two places, its days and the danger of the place it reaches; the legs add up to the way, and a gate's hop is its hours",
+    way.legs.length === 2 && way.legs[0].toId === "echo_river_crossing" && way.legs[1].toId === "archive_hollow" && Math.abs(legSum - way.days) < 0.06
+    && way.legs[1].danger === (Number(L.archive_hollow.dangerLevel) || 0)
+    && gateLegs[1].days === 0.5 && gateLegs[1].gate?.energy === 9 && gateLegs[0].gate === null && Math.abs(gateLegs[0].days - wd274(L.millbrook, L.echo_river_crossing)) < 1e-9,
+    way.legs.map(l => `${l.toName} ${l.days.toFixed(2)}d`).join(", "));
+
+  // ── one hunger model: the legs cost exactly what the road does
+  const same = (rng) => {
+    const a = walker({ inventory: [{ id: "dried_rations", name: "Dried Rations", qty: 3 }] }), b = walker({ inventory: [{ id: "dried_rations", name: "Dried Rations", qty: 3 }] });
+    const whole = JP.journeyOutcome(hollow, a, { rules: RU, catalog: C.items, abilities: AB, rng });
+    const p = JSON.parse(JSON.stringify(hollow));
+    JR.beginRoadOn(p, { worldDay: 80 });
+    while (JR.currentLeg(p)) JR.walkLegOn(b, p, { rules: RU, catalog: C.items, abilities: AB, rng });
+    return { whole, u: p.underway, b };
+  };
+  const dry = same(() => 0.99), lucky = same(() => 0);
+  check("§274: ⛔ ONE HUNGER MODEL — walked leg by leg, the road eats the same rations, finds the same food and costs the same health as the whole road is priced at; the rations leave the pack",
+    dry.u.rationsEaten === dry.whole.rationsEaten && dry.u.hungryDays === dry.whole.hungryDays && dry.u.healthTaken === dry.whole.healthLoss && dry.whole.hungryDays === 5
+    && dry.b.health === 60 - dry.whole.healthLoss && !dry.b.inventory.length && dry.b.energy === Math.round(120 * dry.whole.energyShare)
+    && lucky.u.foraged === lucky.whole.foraged && lucky.u.hungryDays === 0,
+    JSON.stringify({ whole: [dry.whole.rationsEaten, dry.whole.hungryDays, dry.whole.healthLoss], legs: [dry.u.rationsEaten, dry.u.hungryDays, dry.u.healthTaken] }));
+
+  // ── the line at 3, measured
+  let legs274 = 0, at2 = 0, at3 = 0;
+  const towns274 = Object.keys(L).filter(id => L[id]?.communityId).slice(0, 30);
+  for (const a of towns274) for (const b of towns274) {
+    const o = a !== b && JP.planJourney({ character: walker({ currentLocationId: a }), destId: b, locations: L, rules: RU });
+    for (const l of (o ? JP.chosenWay(o).legs : [])) { legs274++; if (l.danger >= 2) at2++; if (JR.legEarnsGambit(l, RU)) at3++; }
+  }
+  check("§274: ⛔ A LEG IS A GAMBIT WHEN IT EARNS IT — perilous country (danger 3+), never a gate's hop; and the line is measured: at danger 2 most legs would be gambits, and the gambit would stop meaning 'this one is dangerous'",
+    JR.legEarnsGambit({ danger: 3 }, RU) && !JR.legEarnsGambit({ danger: 2 }, RU) && !JR.legEarnsGambit({ danger: 5, gate: { hours: 12 } }, RU)
+    && legs274 > 100 && at2 / legs274 > 0.5 && at3 / legs274 < 0.35 && at3 > 0, `${legs274} legs · danger 2+: ${Math.round(100 * at2 / legs274)}% · gambits: ${Math.round(100 * at3 / legs274)}%`);
+
+  // ── a perilous leg as a plan
+  let peril = null;
+  for (const id of Object.keys(L)) {
+    const p = planTo(walker(), id);
+    const leg = p && JP.chosenWay(p).legs.find(l => JR.legEarnsGambit(l, RU));
+    if (leg) { peril = { plan: p, leg }; break; }
+  }
+  const ctx = (c) => ({ character: c, location: L[peril.leg.toId], rules: RU, aptitudeMods: {}, bonuses: () => 0 });
+  const plainW = walker();
+  const gPlain = JR.legGambitFor(peril.leg, ctx(plainW), { abilities: AB, energy: 120 });
+  check("§274: ⛔ A PERILOUS LEG IS A PLAN OF THREE STEPS — the way, the danger, the camp — and a traveller with no craft for them takes each the plain way, never a dead end",
+    gPlain.steps.map(s => s.kind).join() === "way,danger,camp" && gPlain.steps.every(s => s.action.plain && s.chance > 0 && s.action.planned)
+    && /^Get through .+ — keep your head down and push on through$/.test(gPlain.steps[1].action.label) && gPlain.steps[1].action.difficulty === "hard"
+    && gPlain.steps[0].action.difficulty === "normal", gPlain.steps.map(s => `${s.action.label} ${s.chance}`).join(" · "));
+  const skilled = walker({ abilities: [{ abilityId: "wayfinding", level: 3 }, { abilityId: "shroud", level: 2 }, { abilityId: "dim", level: 1 }, { abilityId: "second_wind", level: 1 }] });
+  const gSk = JR.legGambitFor(peril.leg, ctx(skilled), { abilities: AB, energy: 120 });
+  const wayStep = gSk.steps[0], dangerStep = gSk.steps[1];
+  const answers = (s) => JR.answersFor(JR.roadRules(RU).steps[s.kind], skilled, { abilities: AB, rules: RU });
+  const leadBy = dangerStep.action.approach;
+  const sameExists = answers(dangerStep).filter(a => a.by === leadBy && a.id !== dangerStep.action.abilityId).length > 0;
+  check("§274: ⛔ …EACH STEP IS TAKEN WITH A CRAFT THE CHARACTER HOLDS — one claiming the step's challenge, rolled as the craft rolls and at its rank, named by how it meets it, and better than the plain way",
+    wayStep.action.abilityId === "wayfinding" && wayStep.action.abilityLevel === 3 && wayStep.chance > gPlain.steps[0].chance
+    && wayStep.action.subAttribute === PG274.rollForChoice([AB.wayfinding], { attribute: "practical", subAttribute: "wits" }, RU.craftSubAttributes).subAttribute
+    && AB.wayfinding.challengeTypes.map(x => String(x).toUpperCase()).includes(wayStep.action.approach)
+    && ["STEALTH", "CHASE"].includes(leadBy) && (leadBy === "STEALTH" ? / unseen — /.test(dangerStep.action.label) : /^Outpace /.test(dangerStep.action.label)),
+    gSk.steps.map(s => `${s.action.label} [${s.action.approach}/${s.action.subAttribute}/rank ${s.action.abilityLevel}] ${s.chance}`).join(" · "));
+  check("§274: ⛔ …WITH THE FALLBACKS IT CAN ACTUALLY TAKE, in SNG-333's order — another craft of the same challenge, then another way at it, then the plain way through",
+    dangerStep.fallbacks.length >= 2 && dangerStep.fallbacks[dangerStep.fallbacks.length - 1].plain === true
+    && (!sameExists || dangerStep.fallbacks[0].approach === leadBy)
+    && dangerStep.fallbacks.slice(0, -1).some(f => f.approach && f.approach !== leadBy)
+    && JR.legGambitFor(peril.leg, ctx(skilled), { abilities: AB, energy: 0 }).steps.every(s => s.action.plain && s.fallbacks.length === 0),
+    dangerStep.fallbacks.map(f => `${f.label} [${f.approach}]`).join(" | "));
+  const rulesListed = { ...RU, journey: { ...(RU.journey || {}), legGambit: { steps: { camp: { crafts: ["wildcraft"] } } } } };
+  const camper = walker({ abilities: [{ abilityId: "wildcraft", level: 2 }] });
+  const gListed = JR.legGambitFor(peril.leg, { ...ctx(camper), rules: rulesListed }, { abilities: AB, energy: 120 });
+  check("§274: …and which crafts answer which step is Aevi's to author — a craft the step's `crafts` list names answers it, whatever its challenge types claim",
+    !(AB.wildcraft.challengeTypes || []).map(x => String(x).toUpperCase()).includes("SURVIVE") && gListed.steps[2].action.abilityId === "wildcraft"
+    && gListed.steps[2].action.approach === "LISTED" && /^Make camp beyond .+ — Wildcraft$/.test(gListed.steps[2].action.label)
+    && JR.legGambitFor(peril.leg, ctx(camper), { abilities: AB, energy: 120 }).steps[2].action.plain === true, gListed.steps[2].action.label);
+  const reassessed = GB.assessGambit(gSk.steps.map(s => s.action), ctx(skilled));
+  check("§274: ⛔ …ASSESSED EXACTLY AS A DECLARED GAMBIT IS — and the weak link shows at a real read, or to anyone holding a craft that reads the way (Aevi: that visibility IS wayfinding doing its job)",
+    JSON.stringify(reassessed.steps.map(s => s.chance)) === JSON.stringify(gSk.steps.map(s => s.chance))
+    && gPlain.weakIndex === null && gSk.weakIndex !== null && gSk.readBy === "Wayfinding"
+    && gSk.steps[gSk.weakIndex].chance === Math.min(...gSk.steps.map(s => s.chance)), `plain read ${gPlain.weakIndex} · with Wayfinding ${gSk.weakIndex} (${gSk.readBy})`);
+  check("§274: ⛔ …and a DECLARED gambit's craft now counts its rank, as the same craft chosen alone does — the plan was the one door where a rank-5 craft rolled like none",
+    /abilityLevel: combo\.length > 1 \? Math\.min\(\.\.\.combo\.map\(rankOf\)\) : abilityId \? rankOf\(abilityId\) : 0,/.test(rd("engine/gambit.js")));
+
+  // ── a step that breaks
+  const failing = JSON.parse(JSON.stringify(hollow));
+  JR.beginRoadOn(failing, { worldDay: 80 });
+  const fw = walker();
+  JR.walkLegOn(fw, failing, { rules: RU, catalog: C.items, abilities: AB, rng: () => 0.99 });
+  const before = failing.underway.daysWalked;
+  JR.spendRoadOn(fw, failing, 2.5, { rules: RU, catalog: C.items, abilities: AB, rng: () => 0.99 });
+  const fp = JR.legFailurePrompt(failing, { ...gPlain, toName: "The Scour" }, gPlain.steps[1], { degree: "failure", action: gPlain.steps[1].action }, { rules: RU });
+  const fpEnd = JR.legFailurePrompt(failing, { ...gPlain, toName: "The Scour" }, gPlain.steps[1], { degree: "crit_failure" }, { rules: RU, arrived: true });
+  check("§274: ⛔ A STEP THAT BREAKS DOES NOT END THE JOURNEY — the scene opens inside the failure where it happened, and the road waits; a way lost costs days on the road",
+    /Open the scene INSIDE that failure/.test(fp) && /The journey is not over and not lost — it waits/.test(fp) && /Never move them on/.test(fp)
+    && /they were noticed, and what noticed them is here now/.test(fp) && /they have arrived, into this/.test(fpEnd) && !/it waits/.test(fpEnd)
+    && Math.abs(failing.underway.daysWalked - before - 2.5) < 1e-9, fp);
+
+  // ── stopped, and taken up again
+  const road = walker({ quests: [] });
+  const r1 = planTo(road, "archive_hollow");
+  JP.logJourneyOn(road, r1, { day: 4 });
+  JR.beginRoadOn(road.journey, { worldDay: 80 });
+  const leg1 = JR.walkLegOn(road, road.journey, { rules: RU, catalog: C.items, abilities: AB, rng: () => 0.99 });
+  road.currentLocationId = leg1.leg.toId;
+  JR.stopRoadOn(road.journey, { atId: leg1.leg.toId, atName: leg1.leg.toName, why: "encounter", worldDay: 81 });
+  const walkedDays = road.journey.underway.daysWalked;
+  const gmLine = JR.journeyUnderwayForGM(road, { rules: RU }) || "";
+  JP.logJourneyOn(road, road.journey);
+  const sameIndex = road.journey.underway.legIndex;
+  const again = planTo(road, "archive_hollow");
+  JP.logJourneyOn(road, again, { day: 5 });
+  check("§274: ⛔ AN ENCOUNTER DOES NOT CANCEL IT — the road records where and why it stopped, the GM is told the character stands there and never to walk them on",
+    road.journey === again && /1 of 2 legs walked/.test(gmLine) && /stands at Echo River Crossing — what the road held stopped it there/.test(gmLine)
+    && JP.journeyForGM(road) === null && /## A JOURNEY IS ON THE ROAD — stopped part-way, and waiting/.test(rd("engine/gm.js"))
+    && /never walk the rest of the road for them/.test(rd("engine/gm.js")), gmLine);
+  check("§274: ⛔ …AND IT IS TAKEN UP AGAIN FROM WHERE THEY STAND — a new plan to the same place is the road from here, and what was walked stays walked; re-logging the same plan walks nothing again",
+    sameIndex === 1 && again.id === r1.id && again.fromId === "echo_river_crossing" && again.underway.daysWalked === walkedDays && again.underway.legIndex === 0
+    && again.underway.legs.length === 1 && road.quests.filter(q => q.kind === "journey").length === 1 && JR.currentLeg(again)?.toId === "archive_hollow",
+    JSON.stringify({ sameIndex, from: again.fromId, walked: again.underway.daysWalked, idx: again.underway.legIndex }));
+  const elsewhere = planTo(road, "cairnhold");   // a journey from Echo River Crossing (Millbrook, under a day away, is a step)
+  JP.logJourneyOn(road, elsewhere, { day: 6 });
+  const setDown = road.quests.find(q => q.id === r1.id);
+  const ender = walker({ quests: [] });
+  JP.logJourneyOn(ender, planTo(ender, "archive_hollow"), { day: 4 });
+  JR.beginRoadOn(ender.journey, {});
+  JR.walkLegOn(ender, ender.journey, { rules: RU, catalog: C.items, abilities: AB, rng: () => 0.99 });
+  const endId = ender.journey.id;
+  const endLine = JR.endJourneyOn(ender, { atName: "Echo River Crossing" });
+  check("§274: ⛔ A PARTY THAT TURNS BACK HAS A RECORD OF HOW FAR THEY GOT — ended here, or set down for a journey elsewhere, the quest is settled with the legs and the days",
+    setDown?.status === "resolved" && new RegExp(`^Set down at Echo River Crossing for a journey to ${L.cairnhold.name} — 1 leg walked`).test(setDown.progress.slice(-1)[0])
+    && ender.journey === null && ender.quests.find(q => q.id === endId)?.status === "resolved" && /^Ended at Echo River Crossing — 1 of 2 legs walked, \d+ days? on the road\.$/.test(endLine),
+    `${setDown?.progress?.slice(-1)[0]} · ${endLine}`);
+
+  // ── going around, and the arrival
+  const ah = planTo(walker(), "archive_hollow");
+  JR.beginRoadOn(ah, {});
+  const around = JR.aroundLeg(ah, JR.currentLeg(ah), L, {});
+  check("§274: ⛔ GO AROUND — a real way round the perilous place is offered (never a many-times-longer one, and never around the journey's own end)",
+    !!around && !around.option.path.includes("echo_river_crossing") && around.option.path[0] === "millbrook" && around.option.path.slice(-1)[0] === "archive_hollow"
+    && around.days <= 10.72 * 1.6 && JR.aroundLeg(ah, JP.chosenWay(ah).legs[1], L, {}) === null, around && `${around.days} days by ${around.option.path.join(" → ")}`);
+  const told = JSON.parse(JSON.stringify(hollow));
+  JR.beginRoadOn(told, {});
+  const tw = walker();
+  JR.walkLegOn(tw, told, { rules: RU, catalog: C.items, abilities: AB, rng: () => 0.99 });
+  JR.stopRoadOn(told, { atId: "echo_river_crossing", atName: "Echo River Crossing", why: "encounter" });
+  JR.walkLegOn(tw, told, { rules: RU, catalog: C.items, abilities: AB, rng: () => 0.99 });
+  JR.noteLegGambitOn(told, { toId: "archive_hollow", steps: gPlain.steps }, [{ index: 0, degree: "partial" }], "rough");
+  const arrival = JP.journeyArrivalPrompt(told, JR.roadOutcome(told, tw, { rules: RU, abilities: AB }), { names: {} });
+  check("§274: the arrival tells the road that was walked — its nights, how the perilous country came through, and where it stopped and was taken up again",
+    /10\.7 days from Millbrook to Archive Hollow/.test(arrival) && /Perilous country on the way: the way into Archive Hollow came through, roughly\./.test(arrival)
+    && /The road stopped at Echo River Crossing and was taken up again\./.test(arrival) && /nights? were spent in the open/.test(arrival), arrival);
+
+  // ── the doors
+  const A274 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§274: ⛔ THE APP WALKS THE ROAD LEG BY LEG — a perilous leg waits with its plan; any other is walked, and the road asks what it held after each one, and stops where it did",
+    /if \(legEarnsGambit\(leg, CONTENT\.rules\)\) \{[\s\S]{0,400}plan\.underway\.pending = g;[\s\S]{0,500}return;/.test(A274)
+    && /const out = walkLegOn\(character, plan, \{ rules: CONTENT\.rules, catalog: CONTENT\.items \|\| \{\}, abilities: fullCatalog\(\) \}\);\n    reachOnRoad\(leg\.toId, out\.hours/.test(A274)
+    && /if \(await maybeRandomEncounter\("onTravel", news\)\) \{[\s\S]{0,160}stopRoadOn\(plan, \{ atId: leg\.toId, atName: leg\.toName, why: "encounter"/.test(A274));
+  check("§274: ⛔ …THE PERILOUS LEG'S PLAN RUNS ON THE GAMBIT'S OWN RESOLVER — fallback, adapt, or face it; the crafts used are practised and paid for; a broken step opens its scene",
+    /u\.inGambit = g;/.test(A274) && /const res = executeGambit\(actions, ctx, Math\.random, index\);/.test(A274) && /const r = rerollStep\(fb, ctx\);/.test(A274)
+    && /const r = rerollStep\(a, ctx\);/.test(A274) && /id="lc-face">Face it — play out what went wrong/.test(A274)
+    && /recordUse\(character, \[a\.abilityId\], \{ day: absoluteWorldDay\(\) \}\)/.test(A274)
+    && /const prompt = legFailurePrompt\(plan, g, s, failed, \{ rules: CONTENT\.rules, arrived \}\);[\s\S]{0,300}startScene\(prompt, news\);/.test(A274));
+  check("§274: the card holds the doors — take the leg, go around, take up the road, end it here — and the GM hears a journey already on the road as one",
+    /id="journey-take-leg">Take the leg into/.test(A274) && /id="journey-around">Go around — about/.test(A274) && /id="journey-go">Take up the road to/.test(A274)
+    && /id="journey-end">End the journey here/.test(A274) && /journeyTake\.onclick = \(\) => takeDangerousLeg\(\)/.test(A274)
+    && /THE PLAYER MEANS TO GO ON — the journey to \$\{road390\.destName\} is already on the road/.test(A274)
+    && /key: "journeyUnderwayDetail"/.test(rd("engine/gm_registry.js")));
 }
 
 /* ══════════ REPORT ══════════ */

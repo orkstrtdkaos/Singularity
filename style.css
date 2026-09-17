@@ -1778,6 +1778,17 @@ img[data-lightbox] { cursor: zoom-in; }
 .journey-card .jc-ways { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .journey-card .jc-ways .opt.on { border-color: var(--accent, #c9a227); }
 .journey-card .jc-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+/* CCODE-390: a journey on the road, and the plan for a leg into perilous country */
+.journey-card.on-road { border-style: dashed; }
+.journey-card .leg-plan { margin-top: 8px; padding: 8px 10px; border-left: 3px solid var(--danger); background: color-mix(in srgb, var(--danger) 7%, transparent); border-radius: 0 6px 6px 0; }
+.journey-card .leg-plan .lg-head { margin-bottom: 6px; line-height: 1.4; }
+.journey-card .lg-step { padding: 4px 0; }
+.journey-card .lg-step + .lg-step { border-top: 1px solid color-mix(in srgb, var(--ink) 10%, transparent); }
+.journey-card .lg-step .lg-main { line-height: 1.4; }
+.journey-card .lg-step .lg-n { display: inline-block; min-width: 1.2em; font-variant-numeric: tabular-nums; opacity: .7; }
+.journey-card .lg-step .lg-how { opacity: .85; }
+.journey-card .lg-step.weak .lg-what { font-weight: 600; }
+.journey-card .lg-step .lg-read { margin-left: 1.2em; font-size: 12px; }
 .src-sep { margin: 0 6px; color: var(--ink-dim); }
 @media (max-width: 600px) {
   .loc-title { font-size: 20px; }

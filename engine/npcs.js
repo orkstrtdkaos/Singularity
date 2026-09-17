@@ -49,7 +49,7 @@ export function reconcileGeneratedNpcWithMeet(character, npcUpdates, req, rec) {
 // it is the number of people you meet in a long afternoon. The cap is now the one number anthropology
 // actually offers for "people you can hold a relationship with", which is a far better answer than a
 // round number picked to bound an array.
-export const REGISTRY_CAP = 150; // SNG-199/205: shared with the reconcile registry-backfill — one cap, one home
+export const REGISTRY_CAP = 1500;   // ⛑ ERIK 2026-09-17: 150 -> 1500. Measured before raising: 129 registry people across EVERY save combined, so nothing was being dropped yet — but a save that meets ten people a session reaches 150 in a campaign, and the cap silently forgets the earliest ones, who are the ones a player has known longest. // SNG-199/205: shared with the reconcile registry-backfill — one cap, one home
 const CAPS = { registry: REGISTRY_CAP, history: 10, knownFacts: 8, skills: 6 };
 
 export function kinFact(n) {

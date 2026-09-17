@@ -12514,7 +12514,13 @@ await (async () => {
   // interactions and keep the ones you meet more than once from dropping off."
   {
     const NP = await import("../engine/npcs.js");
-    check("333: the circle is Dunbar's number, not an array bound", NP.REGISTRY_CAP === 150);
+    // ⛔ RAISED TO 1500 BY ERIK, 2026-09-17, AND THE PRIOR RULING IS KEPT HERE RATHER THAN DELETED.
+    // SNG-333 set it at 150 as DUNBAR'S NUMBER — a claim about how many people a person can hold, not a
+    // storage bound — with an eviction rule that protects anyone met more than once. ⚠️ MEASURED AT THE TIME
+    // OF THE RAISE: 129 registry people across EVERY save combined, so nothing had ever been dropped; the cap
+    // was a design statement that had not yet bound anything. ⛑ The repeat-met protection below is UNCHANGED
+    // and still the thing that decides WHO goes first if 1500 is ever reached.
+    check("333: the registry cap is the authored one", NP.REGISTRY_CAP === 1500);
 
     // ⛔ ONE WRITER FOR `lastSeen` — the field `seekersAmong` reads as the seeking CLOCK. `seeking.js`
     // exported `noteSeen` to write it and nothing imported it, while `applyNpcUpdates` wrote the same

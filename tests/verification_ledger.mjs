@@ -135,7 +135,7 @@ const LEDGER = [
   {
     id: "SNG-333", ask: "use Dunbar's number — 150 known relationships. Insertion order as a default, but if you interface with the NPCs it should count those interactions and keep the ones you meet more than once from dropping off",
     how: "npcs.js:evictionCandidate — least-met first, oldest breaks the tie, kin never evicted",
-    gates: ["333: the circle is Dunbar's number, not an array bound",
+    gates: ["333: the registry cap is the authored one",
             "333: the least-met goes first, and the oldest breaks the tie",
             "333: someone you met twice outlives everyone you met once",
             "333: kin are never evicted, and a registry of only kin refuses rather than drops one",

@@ -43,7 +43,8 @@ import { stampEventChange, mergeEventStages, mergeQuestOutcomes, actorOf, questK
 import { INVITES_PATH, mergeInvitation, answerInto, applyAnswers } from "./invitations.js";   // CCODE-360: an invitation carried by someone you both know
 import { boundFigures } from "./companionlives.js";   // SNG-597 §3: a companion who is also a figure of the world
 import { decayWakes, wakeArcPush } from "./wake.js"; // SNG-204: wakes decay on the tick + lean on connected arcs
-import { FATES_PATH, WOUND_DAYS, STOP_DAYS, fatesOfWorld, foldFates, adoptFates, fateNews } from "./fates.js";   // CCODE-381: a legend's fate is the world's
+import { FATES_PATH, WOUND_DAYS, STOP_DAYS, fatesOfWorld, foldFates, adoptFates, fateNews,   // CCODE-381: a legend's fate is the world's
+  personIdFor, mintKey, sharedPeopleOf, foldPeople, adoptPeople, birthNews } from "./fates.js";   // CCODE-384: and the people it makes
 import { HOLDS_PATH, holdCardsOf, holdCardsChanged, mergeHoldCards } from "./sharedholds.js";   // CCODE-383: a hold nearby is known
 import { enterDeathState, deepenDeaths, deathDepth, isRetrievable, resolveRetrieval } from "./death.js"; // SNG-209: a killed figure ENTERS the death state; the clock sinks untended deaths toward sealed
 import { absoluteWorldDay, worldDayAt, worldCount, readClock, positionedPlace } from "./worldtime.js";
@@ -1232,19 +1233,22 @@ export async function syncSharedFates({ character, content, publish = true, now 
   try { shared = syncEnabled(); } catch { shared = false; }   // no storage at all (a harness, a locked-down browser) is no shared world
   if (!shared || !character?.worldState) return { synced: false, adopted: [], published: [] };
   const ws = character.worldState;
-  const roster = content?.legends?.roster || [];
-  const ids = roster.map(f => f?.id).filter(Boolean);
-  if (!ids.length) return { synced: false, adopted: [], published: [] };
+  const authoredIds = (content?.legends?.roster || []).map(f => f?.id).filter(Boolean);
+  if (!authoredIds.length && !sharedPeopleOf(ws).length) return { synced: false, adopted: [], published: [] };
   const by = { characterId: character.id || null, name: character.name || null };
-  let store = null, published = [];
+  const cap = Number.isFinite(Number(content?.rules?.arcResponse?.mintCap)) ? Number(content.rules.arcResponse.mintCap) : 140;
+  let store = null, published = [], peopleAdded = [];
   try {
     if (publish) {
-      const mine = fatesOfWorld(ws, ids, { by });
+      // ⛔ CCODE-384: the people this world made go up with the fates — a person already in the store keeps who they are
+      const minePeople = sharedPeopleOf(ws);
+      const mine = fatesOfWorld(ws, [...authoredIds, ...minePeople.map(f => f.id)], { by });
       await pushMergedFile(FATES_PATH, (remote) => {
-        const folded = foldFates(remote, mine);
-        store = folded.store; published = folded.changed;
-        return folded.changed.length ? folded.store : null;   // nothing of this world's stands: no write
-      }, `fates: what ${character.name || character.id}'s world saw of the valley's legends`);
+        const people = foldPeople(remote, minePeople);
+        const folded = foldFates(people.store, mine);
+        store = folded.store; published = folded.changed; peopleAdded = people.added;
+        return (folded.changed.length || people.added.length) ? folded.store : null;   // nothing of this world's stands: no write
+      }, `people: who ${character.name || character.id}'s world saw come into the story, and what became of the valley's legends`);
     } else {
       store = await fetchRepoJSON(FATES_PATH);
     }
@@ -1253,12 +1257,17 @@ export async function syncSharedFates({ character, content, publish = true, now 
     return { synced: false, adopted: [], published: [] };
   }
   const worldDay = absoluteWorldDay(now);
+  // ⛔ CCODE-384: people FIRST — someone another world brought into the story joins this roster before their fate is read
+  const joined = adoptPeople(ws, store?.people || {}, { cap });
+  const ids = [...authoredIds, ...sharedPeopleOf(ws).map(f => f.id)];
+  const roster = worldRoster(ws, content);
   const adopted = adoptFates(ws, store?.fates || {}, ids, { by });
   // a death the world recorded is this world's landmark too — the gate that keeps deaths rare reads it
   for (const a of adopted) if (a.after?.status === "dead" && Number.isFinite(a.atWorldDay)) ws.lastEpicDeathDay = Math.max(Number(ws.lastEpicDeathDay) || 0, a.atWorldDay);
   // ⚠️ A SAVE'S FIRST READ IS SILENT: it takes the world as it is. After that, only what happened since its last read is news.
   const lastRead = Number.isFinite(Number(ws.fatesReadWorldDay)) && ws.fatesReadWorldDay !== null ? Number(ws.fatesReadWorldDay) : null;
-  const news = lastRead == null ? [] : fateNews(adopted, { roster, content, worldDay, sinceWorldDay: lastRead - 1 });
+  const news = lastRead == null ? [] : [...birthNews(joined, { worldDay, sinceWorldDay: lastRead - 1 }),
+    ...fateNews(adopted, { roster, content, worldDay, sinceWorldDay: lastRead - 1 })];
   ws.fatesReadWorldDay = worldDay;
   if (news.length) {
     ws.news = ws.news || []; ws.unseenNews = ws.unseenNews || [];
@@ -1266,7 +1275,7 @@ export async function syncSharedFates({ character, content, publish = true, now 
     ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);
     ws.unseenNews = [...ws.unseenNews, ...stamped].slice(-NEWS_CAP);
   }
-  return { synced: true, adopted, published, news };
+  return { synced: true, adopted, published, joined, peopleAdded, news };
 }
 
 export async function syncSharedCanon({ character, profile, content, region = "valley", now = Date.now(), authoredFor = null } = {}) {
@@ -2254,10 +2263,15 @@ export function worldRoster(ws, content = {}) {
 export function mintFigure(ws, { tier = "notable", name = null, epithet = null, origin = "", originKind = "_default",
                                  region = null, arcAffinity = null, secondArc = null, worldDay = 0, weight = null,
                                  cap = 140, pools = null, namePools = null, tradition = null, taken = null,
-                                 rng = Math.random } = {}) {
+                                 rng = Math.random, key = null } = {}) {
   ws.mintedFigures = ws.mintedFigures || [];
+  // ⛔ CCODE-384 — ONE EVENT, ONE PERSON, IN EVERY WORLD. With a `key` (the event that makes them — `mintKey`), the id is derived from
+  // it, so the survivor of a death is the same person whichever world's pass saw the death. Already in this world — minted by an
+  // earlier pass, or adopted from another world — is nobody new: no second survivor, no second birth line.
+  const sharedId = key ? personIdFor(key) : null;
+  if (sharedId && ws.mintedFigures.some(f => f?.id === sharedId)) return null;
   if (ws.mintedFigures.length >= cap) return null;
-  const n = (ws.mintedCounter = (ws.mintedCounter || 0) + 1);
+  const n = sharedId ? null : (ws.mintedCounter = (ws.mintedCounter || 0) + 1);
   // SNG-431 §1 — THE NAMER, CALLED. The comment below was right for a year and nothing ever came back to
   // do the authoring, which is Aevi's whole finding. `namePools` is the authoring, so the engine no longer
   // has to choose between a null name (skipped by every `add()` in `offscreenPopulation`) and an epithet
@@ -2271,7 +2285,7 @@ export function mintFigure(ws, { tier = "notable", name = null, epithet = null, 
   const already = taken || ws.mintedFigures.map(f => f?.name).filter(Boolean);
   const named = personName({ proposed: name, pools: namePools, tradition, originKind, rng, taken: already });
   const fig = {
-    id: `minted-${n}`,
+    id: sharedId || `minted-${n}`,
     // ⚠️ THE NAME IS AN EPITHET, NOT A NAME. The engine mints the slot and the story; naming is authorship.
     // But it cannot be NULL — a figure with no name is skipped by every `add()` in `offscreenPopulation`,
     // and would be born into the roster and then never act. An epithet drawn from the event that made them
@@ -3869,6 +3883,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
       ws.arcUnheldStreak[arcId] = 0;   // the seat is taken; the clock restarts
       const f = mintFigure(ws, { tier: "notable", worldDay: currentWorldDay, arcAffinity: arcId,
         originKind: "vacancy_filled", secondArc: loudestArc(arcId), pools: mintPools, rng,
+        key: mintKey({ originKind: "vacancy_filled", arcId, worldDay: currentWorldDay }),   // CCODE-384: one taker per empty arc per window, across worlds
         namePools, taken: takenNames,
         epithet: `the one who took up ${nameOfArc(arcId)}`,
         origin: `stepped into ${nameOfArc(arcId)} after a long season when nobody was holding it`, cap: mintCap });
@@ -3949,6 +3964,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
         // first heard of them. They went home afterwards, and home is a place they already had.
         const f = mintFigure(ws, { tier: "riffraff", worldDay: currentWorldDay, arcAffinity: d.arcId ?? null,
           originKind: "casualty_survivor", secondArc: loudestArc(d.arcId), pools: mintPools, rng,
+          key: mintKey({ originKind: "casualty_survivor", deadId: d.id }),   // CCODE-384: one survivor of a death, whichever worlds saw it
           namePools, tradition: from.people || null, taken: takenNames,
           region: from.home || null,
           epithet: `the one who outlived ${d.who}`,
@@ -3962,6 +3978,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
         // THE ONE WHO TAKES THE CHAIR. Sent for, from the same place, because that is who sends a successor.
         const f = mintFigure(ws, { tier: "notable", worldDay: currentWorldDay, arcAffinity: d.arcId ?? null,
           originKind: "faction_leaderless", secondArc: loudestArc(d.arcId), pools: mintPools, rng,
+          key: mintKey({ originKind: "faction_leaderless", deadId: d.id }),   // CCODE-384: …and one successor
           namePools, tradition: from.people || null, taken: takenNames,
           region: from.home || null,
           epithet: `the one who took ${d.who}'s place`,

@@ -487,8 +487,9 @@ working papers; **this is the answer.**
 | 09-16 | ✅ **A LEGEND'S FATE IS THE WORLD'S (CCODE-381)** | Erik: *"The world changes for everyone."* ⚑ 33 legends lived in two or more saves' worlds and the saves disagreed about 29 — the Undefeated stopped in two, active in one, wounded in two | `§266`, 18 checks, the sync driven against the fake GitHub; on the real saves every world folded in either order gives the same 44 fates and every save agrees after adopting | ⚠️ authored legends only (a minted id is its own world's); a save's first read is silent, because the first fold would have recited 14–20 clashes into a 20-item feed |
 | 09-16 | ✅ **WHO IS AROUND TODAY IS THE TOWN'S, AND NEVER THE BURIED (CCODE-382)** | ⚑ Seeded by the character, Silas and Adelheid in the same Millbrook square met different people on 58 of 60 world-days; and the One Called Zeus, dead in Silas's world, was offered as "around today" 20 times over 400 simulated days — presence read only the authored record | `§267`: the same town and day give the same people (square or store); a crowd dial changes how many, never which; the world's and the registry's dead never appear | ⚠️ `§107`'s cadence check was red before and is red after, by the same margin |
 | 09-16 | ✅ **A HOLD NEARBY IS KNOWN (CCODE-383)** | Erik: *"if there is a hold nearby PCs should hear about what it is and who's running it. they can and should interact with it.."* ⚑ 6 holdings across the saves (Silas 5, Loki 1), none visible outside their owner's game — Adelheid stood in Millbrook beside the Fell Pell | `§268`: the card carries what the road knows and never the store; an owner's set replaces itself whole; the sync through the fake GitHub; the GM row within two walking days and its instruction; the play-screen line | ⚠️ "interact" is the fiction's for now: a visit, the keeper, rest and talk. Trading out of another player's store, or a keeper acting for its absent owner, is not built |
+| 09-16 | ✅ **THE PEOPLE THE WORLD MAKES ARE SHARED (CCODE-384)** | Erik: *"Yes people could be shared."* ⚑ `minted-1` was three different people in three saves. A person minted from an event takes an id derived from the event — one survivor and one successor per death, one taker per empty arc per fourteen days, whichever worlds saw it — so the population grows with what happens, not with how many play | `§269`; the five legacy people (Silas 2, Splarf 1, the dev hero 2) move onto ids of their own world at load — measured on copies, every reference moved (33 on Silas's, one inside a battle picture's key) and a second run moves nothing | ⚠️ a single world mints a little less: 10.0 people per 720 days where it minted 10.7, because a second death of the same legend no longer makes a second survivor |
 
-**Last verified: 2026-09-16 · v2.0.45 · 431 crafts.**
+**Last verified: 2026-09-17 · v2.0.46 · 431 crafts.**
 
 ---
 
@@ -2262,7 +2263,7 @@ reaches it** — and that gap has produced a specific, repeated defect described
 ### 12.1 · THE SHAPE — one document, one shell, 47 screens
 
 **Singularity is a single-page app with no build step and no framework.** `index.html` is 75 lines; the
-whole interface is **`app.js`, 17,896 lines**, and there are **51 `render*` functions** that paint into one
+whole interface is **`app.js`, 17,903 lines**, and there are **51 `render*` functions** that paint into one
 shell function, `chrome()`, called from **52 sites**. ⚠️ **THERE IS NO ROUTER AND NO SCREEN VARIABLE.**
 A screen does not "navigate" — it **calls the next render function directly**. `renderCompanionStep`'s
 done-button *is* the edge into `renderBioStep`.

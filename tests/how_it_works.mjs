@@ -19181,6 +19181,91 @@ console.log("\n── §268 · a hold nearby is known ──");
     && /<div class="hold-near">\$\{near383\.map\(n => `<span class="hn-what">⌂ \$\{esc\(holdNearLine\(n\)\)\}<\/span>`\)\.join\(""\)\}<\/div>/.test(A268));
 }
 
+// ⛔ CCODE-384 — shared lives: THE PEOPLE THE WORLD MAKES ARE SHARED. Erik: "Yes people could be shared." ⚑ MEASURED: `minted-1` was three
+// different people in three saves (Bram the Scarred, Sera Voight the Ashvow, Cinder the Unshadowed). A person minted from an event now
+// takes an id derived from the event, so one death makes one survivor in every world; the five legacy people move onto ids of their own
+// world. Over 6 simulated worlds × 720 days a world mints 10.0 people where it minted 10.7 (a second death of the same legend no longer
+// makes a second survivor).
+console.log("\n── §269 · the people the world makes are shared ──");
+{
+  const F269 = await import("../engine/fates.js");
+  const W269 = await import("../engine/worldtick.js");
+  const T269 = await import("../engine/worldtime.js");
+  const { fakeRemote: fr269 } = await import("./lib/fake_remote.mjs");
+  const D = T269.absoluteWorldDay(Date.now());
+
+  /* ---- 1 · ONE EVENT, ONE PERSON ---- */
+  const kS = F269.mintKey({ originKind: "casualty_survivor", deadId: "the_undefeated" });
+  const kH = F269.mintKey({ originKind: "faction_leaderless", deadId: "the_undefeated" });
+  check("§269: ⛔ a person's id is derived from the event that made them — the same in every world, different for a different event",
+    F269.personIdFor(kS) === F269.personIdFor(kS) && F269.personIdFor(kS) !== F269.personIdFor(kH) && /^person-[0-9a-f]{16}$/.test(F269.personIdFor(kS))
+    && F269.mintKey({ originKind: "vacancy_filled", arcId: "a", worldDay: 13 }) === F269.mintKey({ originKind: "vacancy_filled", arcId: "a", worldDay: 0 })
+    && F269.mintKey({ originKind: "vacancy_filled", arcId: "a", worldDay: 14 }) !== F269.mintKey({ originKind: "vacancy_filled", arcId: "a", worldDay: 13 }));
+  const wsA = { mintedFigures: [] }, wsB = { mintedFigures: [] };
+  const a1 = W269.mintFigure(wsA, { tier: "riffraff", originKind: "casualty_survivor", name: "Bram", origin: "outlived the Undefeated", key: kS, worldDay: D });
+  const a2 = W269.mintFigure(wsA, { tier: "riffraff", originKind: "casualty_survivor", name: "Sera", origin: "outlived the Undefeated again", key: kS, worldDay: D + 30 });
+  const b1 = W269.mintFigure(wsB, { tier: "riffraff", originKind: "casualty_survivor", name: "Oda", origin: "outlived the Undefeated", key: kS, worldDay: D + 1 });
+  check("§269: ⛔ two worlds that saw one death mint the SAME survivor — and a world never mints the same event's person twice",
+    !!a1 && a2 === null && wsA.mintedFigures.length === 1 && b1?.id === a1.id);
+  const legacy = W269.mintFigure({ mintedFigures: [] }, { name: "Old Way" });
+  check("§269: …and a mint with no event keeps the old per-world id, exactly as before", legacy?.id === "minted-1");
+  const WT269 = rd("engine/worldtick.js").replace(/\r\n/g, "\n");
+  check("§269: ⛔ every mint door in the world's pass names its event — the empty arc, the survivor, the successor",
+    /key: mintKey\(\{ originKind: "vacancy_filled", arcId, worldDay: currentWorldDay \}\)/.test(WT269)
+    && /key: mintKey\(\{ originKind: "casualty_survivor", deadId: d\.id \}\)/.test(WT269)
+    && /key: mintKey\(\{ originKind: "faction_leaderless", deadId: d\.id \}\)/.test(WT269));
+
+  /* ---- 2 · THE LEGACY PEOPLE MOVE ---- */
+  const save = { id: "char-s269", worldState: {
+      mintedFigures: [{ id: "minted-1", name: "Bram the Scarred" }, { id: "minted-12", name: "Ganna" }],
+      epicStatus: { "minted-1": { status: "wounded", woundedBy: "minted-12" } },
+      neglectedLives: [{ id: "minted-12" }] },
+    codex: { topics: { "minted-1": { id: "minted-1", entityId: "minted-1" } } },
+    battleImages: { "minted-1|prodigal_gearheart|mechanical_defense|74|stalemate": "url" } };
+  const moved = F269.scopeLegacyMintedIds(save);
+  const text = JSON.stringify(save);
+  const to1 = moved.find(m => m.from === "minted-1")?.to, to12 = moved.find(m => m.from === "minted-12")?.to;
+  check("§269: ⛔ a save's legacy people move onto ids of their own world EVERYWHERE the save names them — keys, values, the codex, a picture's key",
+    moved.length === 2 && !/\bminted-\d+\b/.test(text) && save.worldState.epicStatus[to1]?.woundedBy === to12 && save.codex.topics[to1]?.entityId === to1
+    && save.worldState.neglectedLives[0].id === to12 && !!save.battleImages[`${to1}|prodigal_gearheart|mechanical_defense|74|stalemate`], text.slice(0, 200));
+  check("§269: …`minted-12` is its own person, not `minted-1` with a digit; another world's `minted-1` is someone else; and a second run moves nothing",
+    to1 !== to12 && to1 !== F269.personIdFor("char-other|minted-1") && F269.scopeLegacyMintedIds(save).length === 0);
+  const A269 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§269: the move runs when a save is loaded, after the authored name repairs have read the old ids",
+    A269.indexOf("const scoped = scopeLegacyMintedIds(c);") > A269.indexOf("const renamed = repairUnnamedPeople(c,") && A269.indexOf("const renamed = repairUnnamedPeople(c,") > 0);
+
+  /* ---- 3 · THROUGH THE SYNC ---- */
+  const content = { legends: { roster: [{ id: "the_undefeated", name: "The Undefeated" }, { id: "fx_k", name: "Kestrel Fixture" }] }, rules: {} };
+  const silas = { id: "char-s269b", name: "Silas Weir", worldState: { lastTickDay: 2, news: [], unseenNews: [], epicStatus: {}, mintedFigures: [] } };
+  const adel = { id: "char-a269b", name: "Adelheid", worldState: { lastTickDay: 2, news: [], unseenNews: [], epicStatus: {}, mintedFigures: [] } };
+  const bram = W269.mintFigure(silas.worldState, { tier: "riffraff", originKind: "casualty_survivor", name: "Bram the Scarred", origin: "survived the fighting that killed the Undefeated", key: kS, worldDay: D });
+  const remote = fr269();
+  const restore = remote.install();
+  try {
+    await W269.syncSharedFates({ character: adel, content, publish: false });     // her first read: silent, and there is nobody yet
+    await W269.syncSharedFates({ character: silas, content });
+    check("§269: ⛔ a world publishes the people it brought into the story",
+      remote.read(F269.FATES_PATH)?.people?.[bram.id]?.name === "Bram the Scarred");
+    const oda = W269.mintFigure(adel.worldState, { tier: "riffraff", originKind: "casualty_survivor", name: "Oda", origin: "outlived the Undefeated", key: kS, worldDay: D + 1 });
+    const r2 = await W269.syncSharedFates({ character: adel, content, publish: false });
+    const hers = adel.worldState.mintedFigures.filter(f => f.id === bram.id);
+    check("§269: ⛔ …and a world that minted the same survivor takes the world's account of who they are — one Bram, not an Oda beside him",
+      oda?.id === bram.id && hers.length === 1 && hers[0].name === "Bram the Scarred", JSON.stringify(hers.map(f => f.name)));
+    silas.worldState.mintedFigures.push(...[W269.mintFigure({ mintedFigures: [] }, { tier: "notable", originKind: "faction_leaderless", name: "Ganna the Edgeholder", origin: "took up what the Undefeated left unfinished", key: kH, worldDay: D })]);
+    silas.worldState.epicStatus[bram.id] = { status: "wounded", sinceWorldDay: D, woundedUntilDay: D + 8, woundedBy: "fx_k" };
+    await W269.syncSharedFates({ character: silas, content });
+    const r3 = await W269.syncSharedFates({ character: adel, content, publish: false });
+    const heard = adel.worldState.news.map(n => n.text).join(" | ");
+    check("§269: ⛔ a person another world brought into the story JOINS this one's roster — and is spoken of",
+      adel.worldState.mintedFigures.some(f => f.name === "Ganna the Edgeholder") && /A new name is being spoken of — Ganna the Edgeholder, took up what the Undefeated left unfinished\./.test(heard), heard);
+    check("§269: …and a shared person's FATE folds like any legend's — Bram's wound in Silas's world is Bram's wound in hers, with who did it",
+      adel.worldState.epicStatus[bram.id]?.status === "wounded" && adel.worldState.epicStatus[bram.id]?.woundedBy === "fx_k" && /Kestrel Fixture/.test(heard), heard);
+    const puts = remote.state.puts;
+    await W269.syncSharedFates({ character: silas, content });
+    check("§269: …and a world with nothing new to say writes nothing", remote.state.puts === puts, `${remote.state.puts - puts} write(s)`);
+  } finally { restore(); }
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

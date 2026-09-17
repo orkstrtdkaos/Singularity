@@ -91,6 +91,7 @@ import { worldTabHtml } from "./engine/worldtab.js";   // SNG-276: the tab's mar
 import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, syncSharedFates, syncHolds, syncTravelers, syncInvitations, sendInvitation, answerInvitation, resolvePlayerStrike, strikeSceneSetup, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter, arcStageNow, worldRoster, NEWS_SECTIONS, pushCanonLook} from "./engine/worldtick.js";
 import { noteWorldMovedOnShown } from "./engine/worldevents.js";
 import { holdsNear, holdNearLine } from "./engine/sharedholds.js";   // CCODE-383: a hold nearby is known
+import { scopeLegacyMintedIds } from "./engine/fates.js";   // CCODE-384: the people the world makes are shared
 import { travelersHere, travelerHereLine, whereOf } from "./engine/travelers.js";   // CCODE-359: another traveler is here   // CCODE-354: the world moved on, counted by beats
 import { makeInvitation, incomingInvitations, sentInvitations, joinBandLocally, bandPhrase } from "./engine/invitations.js";
 import { newsNearness, nearFirst } from "./engine/newsvoice.js";   // CCODE-367: nearby news stands out
@@ -151,7 +152,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.45";
+const APP_VERSION = "2.0.46";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4024,6 +4025,12 @@ function migrate(c) {
   {
     const renamed = repairUnnamedPeople(c, CONTENT.rules?.mintedNames || null, CONTENT);
     if (renamed.length) console.warn(`[names] repaired ${renamed.length} unnamed person/people:`, renamed.map(r => `${r.was} → ${r.now}`).join(", "));
+  }
+  // ⛔ CCODE-384 (Erik: "Yes people could be shared"): the people this world minted under its own counter — `minted-1` was three
+  // different people in three saves — move onto ids of their own world, everywhere the save names them, so they can join the shared one.
+  {
+    const scoped = scopeLegacyMintedIds(c);
+    if (scoped.length) console.warn(`[people] ${scoped.length} person/people moved onto shareable ids:`, scoped.map(r => `${r.from} → ${r.to}`).join(", "));
   }
   if (!c.clock) c.clock = newClock();
   if (!c.companions) c.companions = [];

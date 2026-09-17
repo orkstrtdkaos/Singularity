@@ -13,8 +13,12 @@
 //     every client, in any order, picks the same one.
 // Each save still runs its own pass. Before it runs it adopts the world's fates; after, it publishes what it changed.
 //
-// ⚠️ AUTHORED LEGENDS ONLY. A minted figure's id (`minted-1`) is its own world's — three saves hold three different people under it —
-// so sharing their fates waits on shared minted identity, a later stage.
+// ⛔ CCODE-384 — AND THE PEOPLE THE WORLD MAKES ARE SHARED TOO (Erik: "Yes people could be shared"). A person minted from an event takes
+// an id DERIVED FROM THE EVENT (`personIdFor`): the survivor of the Undefeated's death is the same `person-…` in every world, so two
+// worlds that saw the death meet one survivor, not two, and the population grows with what happens rather than with how many players
+// there are. The first world to publish a person sets who they are (`people`); every world adopts them into its roster, and their fates
+// fold with everyone else's. The five people minted before this, under per-world counters (`minted-1` was three different people),
+// keep their lives under ids of their own world (`scopeLegacyMintedIds`).
 // ⚠️ THE STATE, NOT THE STORY. A career, a deed log, a crusade stay each world's own; what is shared is what a person IS now.
 
 import { clashLine, newsVoiceOf } from "./newsvoice.js";
@@ -173,6 +177,145 @@ export function fateNews(adopted = [], { roster = [], content = null, worldDay =
     out.push(outcome === "killed"
       ? { text: said || fallback, kind: "death", victimId: loser.id, killerId: winner.id, worldDay: a.atWorldDay, tier: "event" }
       : { text: said || fallback, kind: "clash", outcome, winnerId: winner.id, loserId: loser.id, worldDay: a.atWorldDay, tier: "event" });
+  }
+  return out;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+// ⛔ CCODE-384 — THE PEOPLE THE WORLD MAKES
+// ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+
+/** Two FNV-1a passes over a string, as hex — stable across every client and every run. */
+function fnvHex(str) {
+  const run = (text) => {
+    let h = 2166136261;
+    for (let i = 0; i < text.length; i++) { h ^= text.charCodeAt(i); h = Math.imul(h, 16777619); }
+    return (h >>> 0).toString(16).padStart(8, "0");
+  };
+  const t = String(str);
+  return run(t) + run([...t].reverse().join(""));
+}
+
+/** ⛔ A person's id, from the event that made them. The same event gives the same id in every world. Pure. */
+export function personIdFor(key) {
+  return `person-${fnvHex(String(key || ""))}`;
+}
+
+/** A person minted by a world's own counter, before ids were shared. */
+export const LEGACY_MINTED_ID = /^minted-\d+$/;
+
+/** How long an arc must stand empty, in world-days, before a second taker could be sent for it — one per arc per window, however
+ *  many worlds noticed the empty seat. */
+export const VACANCY_WINDOW_DAYS = 14;
+
+/** The event a person is minted from, as a key: a death's survivor and successor are keyed by who died (nobody's death makes two
+ *  survivors, whichever worlds saw it); a taker of an empty arc by the arc and the window. Pure. */
+export function mintKey({ originKind = "_default", deadId = null, arcId = null, worldDay = 0, windowDays = VACANCY_WINDOW_DAYS } = {}) {
+  if (originKind === "vacancy_filled") return `vacancy_filled|${arcId}|${Math.floor((Number(worldDay) || 0) / Math.max(1, windowDays))}`;
+  return `${originKind}|${deadId}`;
+}
+
+/** ⛔ The one-time move of a save's legacy people onto ids of their own world: every KEY and every string TOKEN equal to an old id,
+ *  anywhere in the save (world state, codex topics, a battle picture's key), in place — so nothing holding the character goes stale.
+ *  `minted-12` is never touched by renaming `minted-1`. Idempotent: a save with no legacy people renames nothing. Returns the renames. */
+export function scopeLegacyMintedIds(character) {
+  const figures = character?.worldState?.mintedFigures || [];
+  const map = new Map();
+  for (const f of figures) if (f && LEGACY_MINTED_ID.test(String(f.id))) map.set(f.id, personIdFor(`${character.id || "world"}|${f.id}`));
+  if (!map.size) return [];
+  const token = /\bminted-\d+\b/g;
+  const swap = (text) => String(text).replace(token, (m) => map.get(m) || m);
+  const seen = new Set();
+  const walk = (node) => {
+    if (!node || typeof node !== "object" || seen.has(node)) return;
+    seen.add(node);
+    if (Array.isArray(node)) {
+      for (let i = 0; i < node.length; i++) {
+        if (typeof node[i] === "string") { const v = swap(node[i]); if (v !== node[i]) node[i] = v; }
+        else walk(node[i]);
+      }
+      return;
+    }
+    for (const key of Object.keys(node)) {
+      const value = node[key];
+      // ⚠️ A KEY CAN CARRY THE ID INSIDE IT, not only be it — a battle picture is keyed "minted-1|prodigal_gearheart|…|stalemate"
+      const nextKey = swap(key);
+      const nextValue = typeof value === "string" ? swap(value) : value;
+      if (nextKey !== key) { delete node[key]; node[nextKey] = nextValue; }
+      else if (nextValue !== value) node[key] = nextValue;
+      if (nextValue && typeof nextValue === "object") walk(nextValue);
+    }
+  };
+  walk(character);
+  return [...map].map(([from, to]) => ({ from, to }));
+}
+
+/** The world's people as this world holds them: the shareable ones (an event-derived id). Pure. */
+export function sharedPeopleOf(ws) {
+  return (ws?.mintedFigures || []).filter(f => f && typeof f.id === "string" && f.id.startsWith("person-"));
+}
+
+/** Who a person IS, as the store keeps it — set by the first world to publish them, never rewritten by a later one. Pure. */
+const IDENTITY = ["id", "name", "epithet", "provisional", "tier", "weight", "wants", "originKind", "region", "arcAffinity", "arcAffinities",
+  "wantArcId", "personalVerbs", "mintedWorldDay", "origin", "legend", "tradition", "homeland"];
+export function personIdentity(fig) {
+  const out = {};
+  for (const k of IDENTITY) if (fig?.[k] !== undefined) out[k] = JSON.parse(JSON.stringify(fig[k]));
+  return out;
+}
+
+/** The store after adding a world's people: a person already there keeps who they are. Returns the ids added. Pure. */
+export function foldPeople(store, people = [], { regionId = "valley" } = {}) {
+  const next = { schemaVersion: 1, regionId, ...(store && typeof store === "object" ? store : {}), people: { ...(store?.people || {}) } };
+  const added = [];
+  for (const f of people || []) {
+    if (!f?.id || next.people[f.id]) continue;
+    next.people[f.id] = personIdentity(f);
+    added.push(f.id);
+  }
+  return { store: next, added };
+}
+
+/** Adopt the world's people into a save's roster: a person this world has not met in its own passes joins it; one it minted under the
+ *  same event keeps its own life but takes the world's account of who they are. Respects the roster cap. Mutates `ws.mintedFigures`.
+ *  Returns [{ id, joined }] for the people who changed. */
+export function adoptPeople(ws, people = {}, { cap = 140 } = {}) {
+  if (!ws) return [];
+  ws.mintedFigures = ws.mintedFigures || [];
+  const out = [];
+  for (const [id, who] of Object.entries(people || {})) {
+    if (!who?.id) continue;
+    const mine = ws.mintedFigures.find(f => f?.id === id);
+    if (!mine) {
+      if (ws.mintedFigures.length >= cap) continue;
+      ws.mintedFigures.push(JSON.parse(JSON.stringify(who)));
+      out.push({ id, joined: true, person: who });
+      continue;
+    }
+    const drift = IDENTITY.some(k => k !== "tier" && k !== "weight" && k !== "legend" && JSON.stringify(mine[k]) !== JSON.stringify(who[k]));
+    if (!drift) continue;
+    for (const k of IDENTITY) if (k !== "tier" && k !== "weight" && k !== "legend" && who[k] !== undefined) mine[k] = JSON.parse(JSON.stringify(who[k]));
+    out.push({ id, joined: false, person: who });
+  }
+  return out;
+}
+
+/** What a player hears of a person who came into the story in another world: the line the pass itself says at a birth. Only those
+ *  born since `sinceWorldDay` and within `windowDays`, at most `max`, newest first. Pure. */
+export function birthNews(adopted = [], { worldDay = null, sinceWorldDay = null, windowDays = 10, max = 2 } = {}) {
+  const out = [];
+  const joined = (adopted || []).filter(a => a?.joined && a.person)
+    .sort((x, y) => (Number(y.person.mintedWorldDay) || 0) - (Number(x.person.mintedWorldDay) || 0) || String(x.id).localeCompare(String(y.id)));
+  for (const a of joined) {
+    if (out.length >= max) break;
+    const f = a.person, day = num(f.mintedWorldDay);
+    if (worldDay != null && day != null && worldDay - day > windowDays) continue;
+    if (sinceWorldDay != null && day != null && day < sinceWorldDay) continue;
+    const origin = f.origin || null;
+    out.push({ text: f.provisional || !f.name
+        ? `Someone new is being spoken of${origin ? ` — they ${origin}` : ""}.`
+        : `A new name is being spoken of — ${f.name}${origin ? `, ${origin}` : ""}.`,
+      worldDay: day ?? worldDay, tier: "murmur", kind: "birth", figureId: f.id });
   }
   return out;
 }

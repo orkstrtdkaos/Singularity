@@ -1,4 +1,4 @@
-<!-- status: shared lives under way — CCODE-380 (canon identity), 381 (a legend's fate), 382 (who is around today), 383 (a hold nearby) shipped · content asks for Aevi in §4 -->
+<!-- status: shared lives under way — CCODE-380 (canon identity), 381 (a legend's fate), 382 (who is around today), 383 (a hold nearby), 384 (shared people) shipped · content asks for Aevi in §4 -->
 # PLAN — One living world, and Courtney's game
 
 **CCode → Aevi and Erik · 2026-09-16**
@@ -118,8 +118,12 @@ is RELATIVE to a player (bond, times met, what they know) and what is TRUE of th
 - ✅ **CCODE-383 — a hold nearby is known.** Each holding is published as the road knows it (`world/holds/valley.json`: what it
   is, where, who runs it, whether it thrives, what it has; never its store or debts), and another traveler's GM hears of any
   within two walking days, with a quiet line on the play screen. Adelheid in Millbrook now hears of the Fell Pell.
-- ⬜ **Next:** minted people with an identity every world shares (so their fates can join); the registry split (what is
-  relative to a player against what is true of the person); trading with another player's hold; the >1MB read.
+- ✅ **CCODE-384 — the people the world makes are shared** (Erik: *"Yes people could be shared"*). A person minted from an event
+  takes an id derived from it (one survivor and one successor per death, one taker per empty arc per fourteen days), joins
+  every world's roster through `world/people/valley.json`, and their fate folds like a legend's. The five legacy people moved
+  onto ids of their own world.
+- ⬜ **Next:** the registry split (what is relative to a player against what is true of the person); trading with another
+  player's hold; the >1MB read.
 
 ## §3 — ⬜ BACKLOG (Erik): ONE SOURCE OF TRUTH FOR EVERY KIND OF THING
 

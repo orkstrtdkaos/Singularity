@@ -27,7 +27,7 @@ import { dedupeQuests, normalizeProse, creditQuestGiver, slugify } from "./quest
 import { settleAspiration } from "./progression.js";   // ⛔ step 56: an aspiration for a craft already in hand   // ⛔ step 55: a quest its giver was never credited for
 import { dedupeInventory } from "./inventory.js";
 import { inferDomains } from "./traditions.js";
-import { fallbackPersonalArc } from "./personalArc.js";
+import { fallbackPersonalArc, repairArcNameOn } from "./personalArc.js";
 import { seedStandingAtCreation } from "./standing.js";
 import { namesMatch } from "./namematch.js";
 import { affiliationOf, regionHomeTradition, buildPeopleVocab } from "./affiliation.js";
@@ -86,6 +86,19 @@ function renameTargets(spec, entry, character, known) {
 // "has this entity seen this step yet" via entity.reconcileVersion.
 
 export const CHARACTER_STEPS = [
+  {
+    version: 64, id: "an-arc-name-is-a-name", playerFacing: false,
+    // ⛔ SNG-587 O3 (Aevi, from reading Brook's save) — THE SAVES WRITTEN BEFORE THE GUARD. `bio.hometown` holds a free-text answer to
+    // "where are you from", `titleize` ran over the lot, and an arc title came out 356 characters long containing `Isn'T`. The engine
+    // refuses it now (`arcTitle` → `looksLikeAPlace`), and Brook's Chernak was repaired by hand — ⚠️ BUT ERIK'S LOKI WAS NOT: his still
+    // reads "The Thread of He Doesn'T Know, But He'S A Construct From The Time Before The Transition. His Parents…", and the same 188
+    // characters are the TITLE OF THE QUEST in his log, because the quest record is made from the arc's name.
+    // ⛑ Silent, because it is a repair: the name it lands on is the one a character born today would have.
+    apply: (c) => {
+      const fixed = repairArcNameOn(c);
+      return fixed ? { notes: [`your thread's title reads as a title again — "${fixed.now}"`] } : {};
+    }
+  },
   {
     version: 63, id: "one-person-one-stack", playerFacing: true,
     // ⛔ ERIK, IN PLAY: "Vessin has so many duplicate stacks… sometimes it seems like the characters gallery

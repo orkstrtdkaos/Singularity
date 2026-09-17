@@ -19821,6 +19821,70 @@ console.log("\n── §275 · a place is drawn from its own look, at every door
     && /location: \{\n    needsId: true,\n    label: id => CONTENT\.locations\?\.\[id\]\?\.name \|\| "this place",\n    find: id => CONTENT\.locations\?\.\[id\] \|\| null,/.test(A275));
 }
 
+// ⛔ CCODE-393 — Aevi's SNG-588 ("the players who wrote the most got the least arc") and SNG-587 O3 (the saves written before the
+// name guard). ⚑ SHE MEASURED THE DEBT BY OPENING A REAL PLAYER'S CHARACTER: Chernak 2,567 chars of backstory → a fallback arc, Loki
+// 1,607 → a fallback, Rhinofire 294 → a real one. `enrichPersonalArc` fires once, at creation, and returns immediately without an API
+// key — so a character made before the key was entered keeps the placeholder forever. "A fallback arc is a debt, not a resting state."
+console.log("\n── §276 · a placeholder arc is a debt, a lived one is not, and a name is a name ──");
+{
+  const PA = await import("../engine/personalArc.js");
+  const RC = await import("../engine/reconcile.js");
+  const rich276 = () => ({ id: "c276", name: "Chernak the Blind", playerKey: "p", origin: "rootkin", domains: { primary: "figurist" },
+    bio: { story: "x".repeat(900), motivation: "to find what the Heartroot condensed him out of", hometown: "Chernak has no single hometown — they emerged from the Heartroot itself, the deep confluence beneath the valley floor." },
+    quests: [] });
+  const withFallback = (c) => { c.personalArc = PA.fallbackPersonalArc(c); return c; };
+  const fb276 = withFallback(rich276());
+  check("§276: ⛔ A FALLBACK ARC SAYS SO IN THE PROJECT'S OWN WORD — `personal_fallback`, which this module has written since SNG-133; a model arc says `personal`, and a save from before the field existed is known by the fallback's own stakes line",
+    PA.FALLBACK_SOURCE === "personal_fallback" && fb276.personalArc.source === "personal_fallback" && PA.isFallbackArc(fb276.personalArc)
+    && !PA.isFallbackArc({ source: "personal", stakes: PA.FALLBACK_STAKES })
+    && PA.isFallbackArc({ stakes: PA.FALLBACK_STAKES }) && !PA.isFallbackArc({ stakes: "something a model wrote" }) && !PA.isFallbackArc(null));
+  const debtRich = PA.arcDebtOf(fb276);
+  const thin276 = withFallback({ id: "c", name: "Grix", bio: { story: "" }, whyHere: "I wander.", quests: [] });
+  const lived276 = withFallback(rich276());
+  lived276.quests = [{ id: lived276.personalArc.id, arcId: lived276.personalArc.arcId, title: lived276.personalArc.name, status: "resolved", stageIndex: 3 }];
+  const real276 = rich276(); real276.personalArc = { source: "personal", stakes: "who he becomes when the Heartroot asks again" };
+  check("§276: ⛔ …AND THE DEBT IS WHAT THE PLAYER WROTE — owed for a placeholder standing on a real backstory, never for one already TAKEN UP (a lived arc is not a placeholder, and replacing it would strand the story they played), never for a character who wrote nothing, and never for a model arc",
+    debtRich.owed && debtRich.written > 900 && !debtRich.takenUp
+    && PA.arcDebtOf(lived276).owed === false && PA.arcDebtOf(lived276).takenUp === true
+    && PA.arcDebtOf(thin276).owed === false && PA.arcDebtOf(thin276).written < 120
+    && PA.arcDebtOf(real276).owed === false && PA.arcDebtOf(fb276, { minWritten: 99999 }).owed === false,
+    `rich ${debtRich.written} chars owed=${debtRich.owed} · lived takenUp=${PA.arcDebtOf(lived276).takenUp} · thin ${PA.arcDebtOf(thin276).written}`);
+  // ⛔ SNG-587 O3 — the shape of Erik's Loki, whose arc title is 188 characters AND is the title of the quest in his log
+  const loki276 = { id: "c-loki", name: "Loki", bio: { motivation: "The town, although not small, has become too small for him. ".repeat(3), hometown: "He doesn't know, but he's a construct from the time before the Transition. His parents are a question he has never been able to ask." },
+    personalArc: { id: "loki-thread", arcId: "loki_personal_arc", source: "personal_fallback", stakes: PA.FALLBACK_STAKES,
+      name: "The Thread of He Doesn'T Know, But He'S A Construct From The Time Before The Transition. His Parents Are A Question He Has Never Been Able To Ask." },
+    quests: [{ id: "loki-thread", arcId: "loki_personal_arc", status: "resolved", stageIndex: 3,
+      title: "The Thread of He Doesn'T Know, But He'S A Construct From The Time Before The Transition. His Parents Are A Question He Has Never Been Able To Ask." }] };
+  const fixed276 = PA.repairArcNameOn(loki276);
+  check("§276: ⛔ A NAME THAT IS A PARAGRAPH IS NOT A NAME — on the arc AND on the quest made from it, which carries the same string as its title; `Isn'T` is the tell that a title-caser ran over a sentence; and a real name is left alone",
+    fixed276?.now === "Loki's Question" && loki276.personalArc.name === "Loki's Question" && loki276.quests[0].title === "Loki's Question"
+    && PA.repairArcNameOn(loki276) === null
+    && PA.arcNameNeedsRepair("The Thread of the Heartroot") === false && PA.arcNameNeedsRepair("Doesn'T Know") === true
+    && PA.arcNameNeedsRepair("x".repeat(61)) === true && PA.arcNameNeedsRepair("A thread. And another.") === true,
+    JSON.stringify(fixed276));
+  // and the saves get it on their next load, through the versioned door
+  const old276 = { id: "c-old", name: "Loki", reconcileVersion: 63, bio: { hometown: "He doesn't know, but he's a construct from the time before the Transition." },
+    personalArc: { id: "loki-thread", arcId: "loki_personal_arc", source: "personal_fallback", stakes: PA.FALLBACK_STAKES, name: "The Thread of He Doesn'T Know, But He'S A Construct From The Time Before." },
+    quests: [{ id: "loki-thread", title: "The Thread of He Doesn'T Know, But He'S A Construct From The Time Before." }] };
+  RC.reconcile(old276, "character", { content: { rules: {}, locations: {} } });
+  check("§276: ⛑ …and every save gets it on its next load, through the versioned door — silently, because it is a repair",
+    old276.personalArc.name === "Loki's Question" && old276.quests[0].title === "Loki's Question" && Number(old276.reconcileVersion) >= 64,
+    `${old276.personalArc.name} · v${old276.reconcileVersion}`);
+  // ⚠️ and the same paragraph had been pasted into the premise
+  const prem276 = PA.fallbackPersonalArc({ name: "Loki", bio: { motivation: "The town, although not small, has become too small for him, and he has known that for a while, in the way you know a coat no longer fits. He means to find out what he is." } }).premise;
+  const noStops276 = PA.fallbackPersonalArc({ name: "Grix", bio: { motivation: "a".repeat(40) + " " + "b".repeat(200) } }).premise;
+  check("§276: ⚠️ …and a premise stops pasting the paragraph too — cut at a whole clause, never mid-word, and never the whole of an answer to a different question",
+    prem276.length <= 220 && prem276.startsWith("Loki carries an unfinished thing: The town, although not small, has become too small for him")
+    && !/He means to find out/.test(prem276) && /The valley will give them the chance to face it\.$/.test(prem276)
+    && noStops276.includes("…") && !/b{200}/.test(noStops276) && noStops276.length < 240,
+    `${prem276.length} chars · ${prem276.slice(-60)}`);
+  const A276 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§276: ⛔ THE RETRY IS WIRED AT THE LOAD, bounded, and `contentGenerator` does not gate it — a player who has not opted into generated content has still written a backstory",
+    /const debt = arcDebtOf\(c\);/.test(A276) && /if \(debt\.owed && getApiKey\(\) && \(Number\(c\._arcRetries\) \|\| 0\) < 3\)/.test(A276)
+    && /enrichPersonalArc\(c\);/.test(A276) && !/contentGenerator[\s\S]{0,200}arcDebtOf/.test(A276)
+    && /if \(!char \|\| !getApiKey\(\)\) return;/.test(A276));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

@@ -197,6 +197,16 @@ function arcTitle(s) {
  *  "a first sign of Callum's fall left a specific gap … surfaces in the valley". A motivation long enough
  *  to be prose is summarised to the thing it is ABOUT rather than pasted whole. */
 function trimEnd(v) { return String(v || "").trim().replace(/[.\s]+$/, ""); }
+/** ⚠️ CCODE-393 — AND THE PREMISE PASTED THE SAME PARAGRAPH. SNG-587 summarised the drive in stage 1 and left the premise reading
+ *  "Loki carries an unfinished thing: The town, although not small, has become too s…" — 174 characters of answer to a different
+ *  question. A drive long enough to be prose is cut at its first whole clause, never mid-word. */
+function oneClause(v, max = 160) {
+  const t = trimEnd(v);
+  if (t.length <= max) return t;
+  const cut = t.slice(0, max);
+  const stop = Math.max(cut.lastIndexOf(". "), cut.lastIndexOf("; "), cut.lastIndexOf(" — "), cut.lastIndexOf(", "));
+  return stop > 40 ? trimEnd(cut.slice(0, stop)) : `${trimEnd(cut.replace(/\s+\S*$/, ""))}…`;
+}
 function shortDrive(s, drive) {
   const d = trimEnd(drive);
   if (d.length <= 70) return d;
@@ -217,7 +227,7 @@ export function fallbackPersonalArc(character) {
     id: `${slug(s.name) || "traveler"}-thread`, name: arcTitle(s),
     arcId: `${slug(s.name) || "traveler"}_personal_arc`, boundToCharacter: s.name, boundToPlayer: s.playerKey,
     region: "valley", tier: "personal",
-    premise: `${s.name} carries an unfinished thing: ${trimEnd(drive)}. The valley will give them the chance to face it.`,
+    premise: `${s.name} carries an unfinished thing: ${oneClause(drive)}. The valley will give them the chance to face it.`,
     stakes: "who they become when the thing they left behind finally catches up",
     legendNpc: null, legend: null,
     stages: [
@@ -230,4 +240,57 @@ export function fallbackPersonalArc(character) {
     structured: true, source: "personal_fallback",
     notes_for_gm: "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   };
+}
+
+/** ⛔ CCODE-393 (Aevi, SNG-588) — A FALLBACK ARC IS A DEBT, NOT A RESTING STATE.
+ *
+ *  ⚠️ THE MARKER ALREADY EXISTED AND I ALMOST SHIPPED A SECOND ONE: this module has written `source: "personal_fallback"` (and
+ *  `"personal"` for a model arc) since SNG-133, and my first pass added `source: "fallback"` to the same object literal — a duplicate
+ *  key the language silently drops, and a parallel vocabulary for a question already answered. It reads the real one.
+ *  ⛑ The stakes line is the fallback's own and no model arc carries it, so a save from before `source` existed is still known. Pure. */
+export const FALLBACK_SOURCE = "personal_fallback";
+export const FALLBACK_STAKES = "who they become when the thing they left behind finally catches up";
+export function isFallbackArc(arc) {
+  if (!arc || typeof arc !== "object") return false;
+  if (arc.source) return arc.source === FALLBACK_SOURCE;
+  return trimEnd(arc.stakes) === trimEnd(FALLBACK_STAKES);
+}
+
+/** ⛔ WHAT THE PLAYER WROTE, AND WHETHER THEIR ARC IS STILL THE PLACEHOLDER. ⚑ Aevi measured the debt: "Chernak 2,567 chars of bio →
+ *  fallback. Loki 1,607 → fallback. Rhinofire 294 → a real authored arc." `written` IS the priority she asked for — the more a player
+ *  wrote, the worse a placeholder reads back at them.
+ *
+ *  ⚠️ AND AN ARC THAT HAS BEEN TAKEN UP IS NOT OWED ONE. Loki's fallback is a RESOLVED quest in his log: a lived arc is not a
+ *  placeholder however it was born, and replacing it would strand the story he actually played. Pure. */
+export function arcDebtOf(character, { minWritten = 120 } = {}) {
+  const arc = character?.personalArc || null;
+  const b = character?.bio || {};
+  const written = [b.story, b.motivation, b.hometown, b.residence, b.livelihood, character?.whyHere]
+    .reduce((n, v) => n + String(v || "").trim().length, 0);
+  const takenUp = (character?.quests || []).some(q => q && arc && (q.id === arc.id || (arc.arcId && q.arcId === arc.arcId)));
+  const fallback = isFallbackArc(arc);
+  return { owed: !!arc && fallback && !takenUp && written >= (Number(minWritten) || 0), written, takenUp, fallback };
+}
+
+/** ⛔ SNG-587 O3 — A NAME THAT IS A PARAGRAPH IS NOT A NAME, on the saves written before the guard. `Isn'T` is the tell: a title-caser
+ *  ran over a sentence. Pure. */
+export function arcNameNeedsRepair(name) {
+  const t = String(name || "").trim();
+  return !!t && (t.length > 60 || /[.!?;:*]/.test(t) || /[a-z]'[A-Z]/.test(t));
+}
+
+/** The name the guarded rule gives this character's arc — written onto the arc AND onto the quest made from it, which carries the same
+ *  string as its title (Erik's Loki: 188 characters, in his quest log). Mutates. Returns `{ was, now }`, or null when nothing needed it. */
+export function repairArcNameOn(character) {
+  const arc = character?.personalArc;
+  if (!arc || !arcNameNeedsRepair(arc.name)) return null;
+  const was = String(arc.name);
+  const now = arcTitle(arcSeed(character));
+  if (now === was) return null;
+  arc.name = now;
+  for (const q of character.quests || []) {
+    if (!q || (q.id !== arc.id && !(arc.arcId && q.arcId === arc.arcId))) continue;
+    if (String(q.title || "") === was) q.title = now;
+  }
+  return { was, now };
 }

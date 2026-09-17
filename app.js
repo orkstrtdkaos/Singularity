@@ -75,7 +75,7 @@ import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offe
 import { unitsOf, unitLine, poolRows, atSideRows, wherePerson, canBringForward, rosterLine } from "./engine/fellowship.js";   // SNG-541: the roster, the pool, and EVERY band rather than one
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, suggestForCreation, archetypeFamilies, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
 import { toolkitForGM } from "./engine/toolkit.js";
-import { fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc } from "./engine/personalArc.js";
+import { fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc, arcDebtOf } from "./engine/personalArc.js";   // CCODE-393: a fallback arc is a debt
 import { assembleGMContext } from "./engine/gm_registry.js"; // BATCH-11 §23: the GM context is a DECLARED registry, iterated — never hand-listed
 import { rankVoices, pickVoice, speakableText, chunkForSpeech, renderProseHtml } from "./engine/narration_voice.js"; // SNG-155: read aloud at the table; SNG-190 §4: render engine asides, never raw asterisks
 import { harmGateFor, harmTargetFor, departureGateFor, isConsequentialMove, isSpeechAct, isRemoteContact, personDestination, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop); SNG-188: speech-act guard; SNG-228: person-as-place guard; CCODE-158: one departure definition for both doors; CCODE-159: remote contact is not travel
@@ -156,7 +156,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.53";
+const APP_VERSION = "2.0.54";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4143,6 +4143,22 @@ function migrate(c) {
     delete c._personalArcNeedsEnrich;
     saveCharacter(c);
     enrichPersonalArc(c);
+  }
+  // ⛔ CCODE-393 (Aevi, SNG-588: "A fallback arc is a debt, not a resting state") — AND THE RETRY, because enrichment fired ONCE, at
+  // creation, and returns immediately without an API key: a character made before the key was entered keeps the placeholder forever.
+  // ⚑ She measured it: Chernak's 2,567 characters of backstory and Loki's 1,607 both produced fallbacks while Rhinofire's 294 got a
+  // real arc — "the players who wrote the most got the least arc". ⚠️ Never for an arc that has been TAKEN UP (Loki's fallback is a
+  // resolved quest in his log; replacing it would strand the story he played), and never for a character who wrote nothing, whose
+  // fallback is honest. ⛑ And `contentGenerator` does NOT gate it, which was her question: a player who has not opted into generated
+  // content has still written a backstory. Bounded to three attempts across all loads, so a bad key cannot spend forever.
+  {
+    const debt = arcDebtOf(c);
+    if (debt.owed && getApiKey() && (Number(c._arcRetries) || 0) < 3) {
+      c._arcRetries = (Number(c._arcRetries) || 0) + 1;
+      saveCharacter(c);
+      console.log(`[personal arc] retrying the model arc for ${c.name} — ${debt.written} characters written, attempt ${c._arcRetries}`);
+      enrichPersonalArc(c);
+    }
   }
   // SNG-197 p2: braids backfilled as stubs (before the moment existed) get the moment they never got —
   // enriched in place + re-presented, one per load. Best-effort, non-blocking.

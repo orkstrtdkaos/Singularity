@@ -184,19 +184,33 @@ export const STRIKE_FALLBACK = {
 export const NEWS_NEAR_DAYS = 3;
 export const NEWS_HERE_DAYS = 0.5;
 export function newsNearness(item, { here = null, locations = {} } = {}) {
+  if (!here) return null;
   const at = item?.locationId ? locations?.[item.locationId] : null;
-  if (!at || !here) return null;
-  const place = at.name || null;
-  if (at.id === here.id) return { near: true, here: true, days: 0, place };
-  const d = walkingDays(here, at);
-  if (d == null) return (at.communityId && at.communityId === here.communityId) ? { near: true, here: true, days: null, place } : null;
-  const days = Math.round(d * 10) / 10;
-  return { near: d <= NEWS_NEAR_DAYS, here: d <= NEWS_HERE_DAYS, days, place };
+  if (at) {
+    const place = at.name || null;
+    if (at.id === here.id) return { near: true, here: true, days: 0, place };
+    const d = walkingDays(here, at);
+    if (d == null) return (at.communityId && at.communityId === here.communityId) ? { near: true, here: true, days: null, place } : null;
+    const days = Math.round(d * 10) / 10;
+    return { near: d <= NEWS_NEAR_DAYS, here: d <= NEWS_HERE_DAYS, days, place };
+  }
+  // ⛔ CCODE-398 — THE TWO COARSER TIERS, AND NEITHER OF THEM MAY SAY "NEAR". The revamp gives a deed's spread the community word
+  // reached and an arc's news the region it crosses; both are real places and neither is a position. ⚠️ The rule above still holds —
+  // `valley.millbrook` holds Archive Hollow NINE days from the square — so a community or region match claims NO distance at all. It
+  // says only *whose* community and *whose* region, which is exactly what it knows, and it ranks such a line above one from nowhere.
+  if (item?.communityId && here.communityId && item.communityId === here.communityId)
+    return { near: false, here: false, days: null, place: null, tier: "community" };
+  const hereRegion = here.regionId || here.region || null;
+  if (item?.regionId && hereRegion && item.regionId === hereRegion)
+    return { near: false, here: false, days: null, place: null, tier: "region" };
+  return null;
 }
-/** Near first; otherwise exactly the order the world told it in. */
+/** ⛔ Near first, then what shares your community or region, then exactly the order the world told it in (CCODE-398: a line that knows
+ *  roughly where it happened outranks one that knows nothing, and still loses to a measured day's walk). */
 export function nearFirst(items, opts = {}) {
-  return (items || []).map((n, i) => ({ n, i, near: newsNearness(n, opts)?.near ? 1 : 0 }))
-    .sort((a, b) => b.near - a.near || a.i - b.i).map(x => x.n);
+  const rank = (n) => { const m = newsNearness(n, opts); return m?.near ? 2 : m?.tier ? 1 : 0; };
+  return (items || []).map((n, i) => ({ n, i, r: rank(n) }))
+    .sort((a, b) => b.r - a.r || a.i - b.i).map(x => x.n);
 }
 
 /** WHO SOMEONE IS AND HOW THEY FIGHT, from what is authored about them: `fightingStyle` is "role, how", and the tradition has a

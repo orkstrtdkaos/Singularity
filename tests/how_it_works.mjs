@@ -20124,6 +20124,116 @@ console.log("\n── §279 · the generators author to the standard ──");
     && !(schema279.required || []).includes("appearance"));
 }
 
+// ⛔ CCODE-398 (Erik, on the world-news revamp he asked for alongside CCODE-367: "give every kind of news its place").
+// ⚑ MEASURED at v2.0.60, driving both news passes headlessly over the 16 saves on this device: `runWorldTick` wrote 94 items and
+// placed NONE of them, and `advanceGeneratedOffscreen` placed 82 of 147 — 82 of 241 overall, and the reader could say something about
+// 70. The place was there to be had every time: the deed-spread model COMPUTES the community word reached and printed it into prose
+// before throwing it away, and a figure murmur names a person who has a home. After the pass: 173 of 249 placed, 116 readable.
+console.log("\n── §280 · every kind of news carries its place ──");
+{
+  const WT280 = await import("../engine/worldtick.js");
+  const NV280 = await import("../engine/newsvoice.js");
+  const { loadContentHeadless: lch280 } = await import("./headless_content.mjs");
+  const C280 = await lch280();
+  // a world of four places in two regions, so "what KIND of place is this id" has a real answer either way
+  // ⚠️ `worldPos: { colatitude, longitude, depth }` is the shape `geodesic` reads — a `position: {x,y}` fixture measures NOTHING and
+  // every distance comes back null, which quietly sends a measured item down the community branch. At 300/π days a radian, 1° ≈ 1.7 days.
+  const L280 = {
+    forge: { id: "forge", name: "The Forge", regionId: "valley", communityId: "valley.millbrook", worldPos: { colatitude: 20, longitude: 250, depth: 0 } },
+    far_hall: { id: "far_hall", name: "The Far Hall", regionId: "valley", communityId: "valley.millbrook", worldPos: { colatitude: 30, longitude: 250, depth: 0 } },
+    near_well: { id: "near_well", name: "The Near Well", regionId: "valley", communityId: "valley.millbrook", worldPos: { colatitude: 20.6, longitude: 250, depth: 0 } },
+    deep_seat: { id: "deep_seat", name: "The Deep Seat", regionId: "deepwood", communityId: "deepwood.thornwake", worldPos: { colatitude: 60, longitude: 200, depth: 0 } },
+  };
+  const bag280 = (over = {}) => ({ figures: {}, npcs: {}, arcs: [], events: {}, locations: L280, here: L280.forge, ...over });
+  const stamp = (n, bag) => WT280.stampNews(n, { day: 3, worldDay: 3, place: bag });
+
+  // ⛔ 1 · THE RULE: a line that names a person is placed where that person lives — and it happens at the STAMPER, which every one
+  //        of the seven tick passes goes through, so no pass can be the one that forgot.
+  const named = stamp({ text: "Halcyon is spoken of", figureId: "halcyon" },
+    bag280({ figures: { halcyon: { id: "halcyon", homeLocation: "deep_seat" } } }));
+  check("§280: ⛔ A LINE THAT NAMES SOMEBODY IS PLACED WHERE THEY LIVE, and the stamper does it — 30 of 30 ambient beats across the saves named a figure with a home and went out from nowhere",
+    named.locationId === "deep_seat" && named.placedBy === "figureId", JSON.stringify(named));
+  // and it reads the same from any of the who-fields a news line uses
+  const killed = stamp({ text: "someone ended someone", kind: "death", victimId: "halcyon" },
+    bag280({ figures: { halcyon: { id: "halcyon", homeLocation: "deep_seat" } } }));
+  check("§280: …from ANY of the fields a line names a person in, not `figureId` alone (a death names its victim, a clash its winner)",
+    killed.locationId === "deep_seat" && killed.placedBy === "victimId", JSON.stringify(killed));
+
+  // ⛔ 2 · THE WRITER WAS THERE AND THE DERIVATION WAS NOT
+  const own = stamp({ text: "a thing happened", locationId: "near_well", figureId: "halcyon" },
+    bag280({ figures: { halcyon: { id: "halcyon", homeLocation: "deep_seat" } } }));
+  check("§280: ⛔ A WRITER'S OWN PLACE ALWAYS WINS — the pass that knew where it was beats an inference from who it mentioned, and carries no `placedBy` to claim otherwise",
+    own.locationId === "near_well" && own.placedBy == null, JSON.stringify(own));
+
+  // ⛔ 3 · AN ID IS NOT A PLACE UNTIL THE BAG AGREES. ⚑ 8 of the roster's 84 `homeLocation` values name no location that exists.
+  const ghost = stamp({ text: "spoken of", figureId: "drifter" },
+    bag280({ figures: { drifter: { id: "drifter", homeLocation: "millbrook_south_lane" } } }));
+  check("§280: ⛔ AN ID IS NOT A PLACE UNTIL THE CONTENT BAG AGREES — 8 of 84 roster homes name rooms nobody authored, and a `locationId` the reader cannot resolve reads as placed while marking nothing",
+    ghost.locationId == null && ghost.regionId == null && ghost.placedBy == null, JSON.stringify(ghost));
+  // …and the bag decides the KIND of place, never the field's name: two figures, two fields, both crossed
+  const inRegion = stamp({ text: "spoken of", figureId: "a" }, bag280({ figures: { a: { id: "a", region: "deepwood" } } }));
+  const inPlace = stamp({ text: "spoken of", figureId: "b" }, bag280({ figures: { b: { id: "b", region: "deep_seat" } } }));
+  check("§280: ⛔ …AND THE BAG DECIDES WHICH KIND IT IS, not the field it came out of — a region in a home field is a region, a LOCATION in a `region` field is a location (two figures on the roster carry exactly that)",
+    inRegion.regionId === "deepwood" && inRegion.locationId == null
+    && inPlace.locationId === "deep_seat" && inPlace.regionId == null,
+    JSON.stringify({ inRegion: inRegion.regionId, inPlace: inPlace.locationId }));
+
+  // ⛔ 4 · AN ARC HAS NO PLACE OF ITS OWN — it is placed at the hinge the player would feel it through
+  const arcBag = bag280({
+    arcs: [{ id: "arc_x", hingeNpcs: ["far", "near"] }],
+    npcs: { far: { id: "far", homeLocation: "far_hall" }, near: { id: "near", homeLocation: "near_well" } },
+  });
+  const arcNear = stamp({ text: "the arc moved", arcId: "arc_x" }, arcBag);
+  const arcBlind = stamp({ text: "the arc moved", arcId: "arc_x" }, { ...arcBag, here: null });
+  check("§280: ⛔ AN ARC IS PLACED AT THE HINGE NEAREST THE PLAYER — it crosses 'all Reaches', so the useful truth is the hinge they would feel it through; with no position to measure, its first hinge",
+    arcNear.locationId === "near_well" && arcNear.placedBy === "arcHinge" && arcBlind.locationId === "far_hall",
+    JSON.stringify({ near: arcNear.locationId, blind: arcBlind.locationId }));
+  // ⛑ AND THE BRANCH IS ALIVE ON THE REAL CONTENT — the one it replaced read `arc.regions`, which NO authored arc has
+  const realBag = WT280.placeBagOf(WT280.initWorldState(1), { currentLocationId: "millbrook" }, C280);
+  const arcsReal = (C280.greaterArcs || []);
+  const placedArcs = arcsReal.filter(a => WT280.newsPlaceOf({ arcId: a.id }, realBag)?.locationId);
+  check("§280: ⛑ …and the branch is ALIVE on the authored arcs — every one of them places, where the `arc.regions` it replaced could never fire once (no arc carries a region, a location, or any place-bearing field)",
+    arcsReal.length >= 6 && placedArcs.length === arcsReal.length
+    && !/arc\?\.regions/.test(rd("engine/worldtick.js")),
+    `${placedArcs.length} of ${arcsReal.length} arcs place`);
+
+  // ⛔ 5 · THE DEED SPREAD KNEW EXACTLY WHERE WORD REACHED AND PRINTED IT INTO PROSE
+  const W280 = rd("engine/worldtick.js").replace(/\r\n/g, "\n");
+  check("§280: ⛔ THE DEED-SPREAD HOP CARRIES WHERE WORD REACHED — `spreadDeeds` computes the community and the line said it in prose ('As far as cairnhold'), which is a sentence, not a fact anything can read",
+    /communityId: h\.to \|\| null, regionId: regionOfComm\[h\.to\] \|\| null/.test(W280)
+    && /"eventId", "whoId", "placedBy", "communityId"\]/.test(W280));
+  const comm = stamp({ text: "As far as thornwake: something", communityId: "deepwood.thornwake" }, bag280());
+  check("§280: …and a community survives the stamper — a fact dropped by `NEWS_FACTS` is a fact the reader never sees",
+    comm.communityId === "deepwood.thornwake", JSON.stringify(comm));
+
+  // ⛔ 6 · ONE BAG, NOT SEVEN LITERALS
+  const bagSites = (W280.match(/placeBagOf\(ws, character, content\)/g) || []).length;
+  check("§280: ⛔ THE SEVEN PASSES SHARE ONE BAG — `locations` and `here` had to reach every stamping site, and the site that got missed would have been the one that looked fine",
+    bagSites === 7 && !/figures: newsFiguresOf\(ws, character, content\), arcs:/.test(W280)
+    && /here: locations\[character\?\.currentLocationId\] \|\| null/.test(W280), `${bagSites} sites`);
+
+  // ⛔ 7 · THE READER: THREE TIERS, AND ONLY ONE OF THEM IS A DISTANCE
+  const opts280 = { here: L280.forge, locations: L280 };
+  const mMeasured = NV280.newsNearness({ locationId: "near_well" }, opts280);
+  const mComm = NV280.newsNearness({ communityId: "valley.millbrook" }, opts280);
+  const mReg = NV280.newsNearness({ regionId: "valley" }, opts280);
+  const mElse = NV280.newsNearness({ regionId: "deepwood", communityId: "deepwood.thornwake" }, opts280);
+  check("§280: ⛔ A COMMUNITY OR A REGION IS A PLACE, NOT A POSITION — `valley.millbrook` holds Archive Hollow nine days from the square, so the coarse tiers claim NO distance: no `near`, no day count, and a tier that says which one it is",
+    mComm?.tier === "community" && mComm.near === false && mComm.days === null
+    && mReg?.tier === "region" && mReg.near === false && mReg.days === null
+    && mMeasured?.near === true && Number.isFinite(mMeasured.days)
+    && mElse === null,   // a community and region that are not the player's say nothing at all
+    JSON.stringify({ comm: mComm, reg: mReg, measured: mMeasured?.days, elsewhere: mElse }));
+  const order = NV280.nearFirst([{ id: "nowhere" }, { id: "region", regionId: "valley" }, { id: "measured", locationId: "near_well" }], opts280);
+  check("§280: …and the digest ranks them in that order — measured, then roughly where, then nowhere; a line that knows approximately outranks one that knows nothing and still loses to a day's walk",
+    order.map(x => x.id).join(",") === "measured,region,nowhere", order.map(x => x.id).join(","));
+  const A280 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§280: ⛑ …and the chip on the screen says which tier it is without borrowing the other's emphasis — 'your community' must not read like '1.6 days', or the pass bought its reach with a lie",
+    /nm\?\.tier \? `<span class="news-near-chip news-place-chip">\$\{nm\.tier === "community" \? "your community" : "your region"\}<\/span>`/.test(A280)
+    && /nm\?\.near \? " news-near" : nm\?\.tier \? " news-placed" : ""/.test(A280)
+    && /\.news-place-chip \{ color: var\(--muted/.test(rd("style.css")));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

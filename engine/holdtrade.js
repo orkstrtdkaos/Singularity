@@ -69,7 +69,8 @@ export function buyFromHold(buyer, card, { goods = null, units = 1, pending = []
   if (!paid.ok) return { ok: false, why: paid.why };
   addItem(buyer, { name: cap1(line.name), kind: "misc", qty: want, goods, worth: worthBand,
     description: `Bought at ${card.name}${card.keeperName ? ` from ${card.keeperName}` : ""}.` }, {}, { distinct: false });
-  const order = { id: `${card.key}|${buyer.id}|${nowISO || worldDay || Date.now()}|${goods}`, holdKey: card.key, holdId: card.id, holdName: card.name,
+  // CCODE-398: the order remembers WHERE, so the buyer's own refund news can be placed without the hold's record
+  const order = { id: `${card.key}|${buyer.id}|${nowISO || worldDay || Date.now()}|${goods}`, holdKey: card.key, holdId: card.id, holdName: card.name, holdLocationId: card.locationId || null,
     ownerId: card.ownerId, ownerName: card.ownerName || null, buyerId: buyer.id, buyerName: buyer.name || null, goods, goodsName: line.name,
     units: want, each: line.each, total, worldDay, status: "paid" };
   return { ok: true, order };
@@ -109,8 +110,9 @@ export function settleOrders(owner, orders = [], { worldDay = null } = {}) {
     const result = { status: short ? "short" : "settled", filled, refund: short * o.each, settledWorldDay: worldDay };
     owner.tradeSettled[o.id] = result;
     moved.push({ ...o, ...result });
-    if (filled) news.push({ text: `${o.buyerName || "Another traveler"} bought ${filled} ${o.goodsName} at ${o.holdName} — ${filled * o.each} crystal to you.`, worldDay, tier: "event", section: "yours" });
-    if (short) news.push({ text: `${o.holdName} could not fill ${short} of the ${o.goodsName} ${o.buyerName || "a traveler"} paid for — the store had sold out, and they are paid back.`, worldDay, tier: "event", section: "yours" });
+    // ⛔ CCODE-398: a sale happened somewhere — the hold's own place — and the news said so in prose while carrying nothing
+    if (filled) news.push({ text: `${o.buyerName || "Another traveler"} bought ${filled} ${o.goodsName} at ${o.holdName} — ${filled * o.each} crystal to you.`, worldDay, tier: "event", section: "yours", locationId: h?.locationId || null });
+    if (short) news.push({ text: `${o.holdName} could not fill ${short} of the ${o.goodsName} ${o.buyerName || "a traveler"} paid for — the store had sold out, and they are paid back.`, worldDay, tier: "event", section: "yours", locationId: h?.locationId || null });
   }
   return { moved, news };
 }
@@ -129,7 +131,7 @@ export function refundOrders(buyer, orders = [], { worldDay = null } = {}) {
     if (stack && short > 0) removeItem(buyer, stack.name, Math.min(short, Number(stack.qty) || 0));
     buyer.tradeRefunded[o.id] = { refundedWorldDay: worldDay };
     moved.push({ ...o, status: "refunded" });
-    news.push({ text: `${o.holdName} could not fill ${short} of your ${o.goodsName}: ${o.refund} crystal comes back to you.`, worldDay, tier: "event", section: "yours" });
+    news.push({ text: `${o.holdName} could not fill ${short} of your ${o.goodsName}: ${o.refund} crystal comes back to you.`, worldDay, tier: "event", section: "yours", locationId: o.holdLocationId || null });   // CCODE-398
   }
   return { moved, news };
 }

@@ -34,6 +34,7 @@ import { personName, mintedWants, nameOf, asSpoken } from "./names.js";
 // SNG-433: the sentences a fight is reported in are AUTHORED. This holds only the decisions the prose
 // cannot make for itself — which variant, how a name shortens, and when to drop a slot.
 import { newsVoiceOf, clashLine, fragmentLine, strikeLine, figureFlavor, newsNearness, pickIndex } from "./newsvoice.js";
+import { walkingDays } from "./worldmap.js";   // CCODE-398: which hinge of a world-crossing arc the player would feel it through
 const KNOWN_TIERS = new Set(["mythic", "legendary", "epic", "heroic", "leader", "notable", "riffraff"]);   // SNG-269: ONE ladder — worldtick had its own copy and it drifted
 import { smartClamp } from "./namematch.js"; // SNG-076: word-boundary clamp for the away-digest/news
 import { generatedRecords } from "./generate.js";
@@ -435,12 +436,85 @@ const SECTION_IDS = new Set(NEWS_SECTIONS.map(s => s.id));
 // SNG-400 §1 · SNG-431 §3 adds the clash trio: a fight the player can see and cannot open is the whole of
 // "0 of 20 news items carry ids", and `winnerId`/`loserId`/`outcome` are what make one openable.
 const NEWS_FACTS = ["kind", "victimId", "killerId", "winnerId", "loserId", "outcome", "figureId",
-                    "abilityId", "locationId", "regionId", "arcId", "strike"];   // SNG-596: `strike` = quiet | crusade
+                    "abilityId", "locationId", "regionId", "arcId", "strike",
+                    "eventId", "whoId", "placedBy", "communityId"];   // SNG-596: `strike` = quiet | crusade · CCODE-398: who/what it is about, and how it was placed
+
+/** ⛔ CCODE-398 (Erik: "a revamp pass on the world news — give every kind of news its place") — WHERE A LINE HAPPENED, FROM WHAT IT
+ *  ALREADY NAMES. ⚑ Measured across the 16 saves: 39 of 257 news items carry a place (15%), and the SAME 39 carry the only field the
+ *  reader can use — so 85% of the world's news arrives from nowhere and nothing can say it is near.
+ *
+ *  ⚠️ IT DERIVES, IT NEVER GUESSES, AND IT VALIDATES WHAT IT DERIVED. A figure the line names has a home; an arc has no place of its own
+ *  and is placed at the HINGE PERSON NEAREST THE PLAYER, because an arc is where the people it turns on are; an event has its region.
+ *  ⛔ AND AN ID IS NOT A PLACE UNTIL THE CONTENT BAG AGREES: measured on the roster, 8 of 84 `homeLocation` values name no location that
+ *  exists (`millbrook_south_lane`, `low_lamp_inn_valley` — grown records pointing at rooms nobody authored), and two figures carry a
+ *  LOCATION id in a `region` field. A `locationId` the reader cannot resolve is worse than none: it reads as placed and marks nothing.
+ *  ⛔ A PERSON'S HOME BEATS AN ARC'S HINGE: a line about somebody is where they are, not where the thing they care about is. Pure. */
+export function newsPlaceOf(n, { figures = {}, arcs = [], npcs = {}, events = {}, locations = {}, here = null } = {}) {
+  if (!n || typeof n !== "object") return null;
+  if (n.locationId || n.regionId || n.communityId) return null;      // the writer's own place always wins: it was there, we are inferring
+  const regions = new Set();
+  for (const l of Object.values(locations || {})) { const r = l?.regionId || l?.region; if (r) regions.add(r); }
+  const asPlace = (id) => {                                          // ⚠️ the bag decides what KIND of place an id is, never the field name
+    if (!id || typeof id !== "string") return null;
+    if (locations[id]) return { locationId: id };
+    if (regions.has(id)) return { regionId: id };
+    return null;
+  };
+  const placeOfFigure = (f) => asPlace(f?.homeLocation) || asPlace(f?.legend?.homeLocation) || asPlace(f?.regionId) || asPlace(f?.region);
+  for (const key of ["figureId", "winnerId", "killerId", "victimId", "loserId", "whoId"]) {
+    const p = n[key] ? placeOfFigure(figures[n[key]] || npcs[n[key]]) : null;
+    if (p) return { ...p, placedBy: key };
+  }
+  if (n.arcId) {
+    // ⛔ NOT `arc.regions` — MEASURED: all 6 greater arcs carry no region, no location and no place-bearing field of any kind, so the
+    // branch that read one could never fire. What they DO carry is `hingeNpcs`, and 19 of 20 of those resolve to a real home.
+    const arc = (arcs || []).find(a => a && (a.id === n.arcId || a.arcId === n.arcId));
+    const homes = (arc?.hingeNpcs || [])
+      .map(h => (typeof h === "string" ? h : h?.id || h?.npcId))
+      .map(id => (id ? placeOfFigure(npcs[id] || figures[id]) : null))
+      .filter(p => p && p.locationId);
+    // ⚠️ `crossesRegions` on these arcs reads "all Reaches" / "every deep site": the thing is genuinely everywhere, so the useful truth
+    // is the hinge the player would feel it through — the nearest one. With no position to measure, the arc's first hinge.
+    const pick = (homes.length > 1 && here)
+      ? homes.slice().sort((a, b) => (walkingDays(here, locations[a.locationId]) ?? 99) - (walkingDays(here, locations[b.locationId]) ?? 99))[0]
+      : homes[0];
+    if (pick) return { ...pick, placedBy: "arcHinge" };
+  }
+  if (n.eventId) {
+    const p = asPlace(events?.[n.eventId]?.regionId);
+    if (p) return { ...p, placedBy: "eventId" };
+  }
+  return null;
+}
+
+/** ⛔ CCODE-398 — WHAT THE STAMPER NEEDS TO PLACE A LINE, in one place. Seven tick passes stamp news and every one of them built this
+ *  literal itself; the `locations` and `here` the derivation needs would have had to be added to seven call sites, and the one that got
+ *  missed would have been the one that looked fine. ⚠️ `here` is the player's own place — the only reason the bag knows the player. */
+export function placeBagOf(ws, character = {}, content = {}) {
+  const locations = content.locations || {};
+  return {
+    figures: newsFiguresOf(ws, character, content),
+    npcs: content.npcs || {},
+    arcs: content.greaterArcs || [],
+    events: content.events || {},
+    locations,
+    here: locations[character?.currentLocationId] || null,
+  };
+}
+
+/** The lookup a tick pass hands the stamper: every figure it could be about, by id. Pure. */
+export function newsFiguresOf(ws, character = {}, content = {}) {
+  const by = {};
+  for (const f of worldRoster(ws, content)) if (f?.id) by[f.id] = f;
+  for (const [id, n] of Object.entries(character?.npcRegistry || {})) if (id && !by[id]) by[id] = n;
+  for (const [id, n] of Object.entries(character?.generated?.npc || {})) if (id && !by[id]) by[id] = n;
+  return by;
+}
 
 /** Normalise one raw news entry — string or object — into a stamped record. ⚠️ `world` is the
  *  fallback because it is the section that is never empty: an unrouted line lands where the player is
  *  already reading rather than under a heading that exists for one orphan. */
-export function stampNews(n, { day = null, worldDay = null, section = "world", clamp = 600 } = {}) {
+export function stampNews(n, { day = null, worldDay = null, section = "world", clamp = 600, place = null } = {}) {
   const text = typeof n === "string" ? n : String(n?.text ?? "");
   const sec = typeof n === "object" && n && SECTION_IDS.has(n.section) ? n.section : section;
   const rec = { day, worldDay: (typeof n === "object" && n && n.worldDay != null) ? n.worldDay : worldDay,
@@ -452,6 +526,8 @@ export function stampNews(n, { day = null, worldDay = null, section = "world", c
   // kept five fields and dropped everything else — so structuring the death sites upstream would have
   // achieved exactly nothing on its own. Carried only when PRESENT: every existing caller is untouched.
   if (typeof n === "object" && n) for (const f of NEWS_FACTS) if (n[f] != null) rec[f] = n[f];
+  // ⛔ CCODE-398: and if the writer knew WHO or WHAT but not WHERE, the record it named says where. Only a real record answers.
+  if (place) { const p = newsPlaceOf(rec, place); if (p) Object.assign(rec, p); }
   return rec;
 }
 
@@ -714,7 +790,11 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
     });
     const shown = Math.max(1, Number(content?.rules?.arcResponse?.deedSpreadLinesPerPass) || 2);
     for (const h of hops.slice(0, shown)) {
-      news.push({ text: `As far as ${String(h.to).split(".").pop()}: ${h.description}`, section: "elsewhere" });
+      // ⛔ CCODE-398: THE SENTENCE NAMES THE PLACE AND THE RECORD DROPPED IT. `h.to` is the community word reached — the strongest place
+      // in the whole pass, because the spread model computed it — and it was being printed into prose and thrown away. A community is
+      // several places, so it is carried AS a community (`newsNearness` will not claim a measured distance from one) plus its region.
+      news.push({ text: `As far as ${String(h.to).split(".").pop()}: ${h.description}`, section: "elsewhere",
+        communityId: h.to || null, regionId: regionOfComm[h.to] || null });
     }
     if (hops.length > shown) {
       const more = hops.length - shown;
@@ -727,7 +807,8 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
   if (news.length) {
     // SNG-041: stamp the absolute world-day (shared calendar) alongside the local journey-day.
     const wd = absoluteWorldDay();
-    const stamped = news.map(n => stampNews(n, { day: currentDay, worldDay: wd })); // SNG-211: delegated-work outcomes are real, not ambient · SNG-364: the source assigns the section
+    const place398 = placeBagOf(ws, character, content);   // CCODE-398
+    const stamped = news.map(n => stampNews(n, { day: currentDay, worldDay: wd, place: place398 })); // SNG-211: delegated-work outcomes are real, not ambient · SNG-364: the source assigns the section
     ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);
     ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
     return { ticked: true, news: stamped };
@@ -777,7 +858,8 @@ export async function runGenerationTurn({ character, content, now = Date.now(), 
   }
 
   if (news.length) {
-    const stamped = news.map(t => stampNews(t, { day: ws.lastTickDay ?? null, worldDay: absoluteWorldDay(now), section: "world", clamp: 400 })); // SNG-211: an arc surfacing/resolving is a real event
+    const place398 = placeBagOf(ws, character, content);   // CCODE-398
+    const stamped = news.map(t => stampNews(t, { day: ws.lastTickDay ?? null, worldDay: absoluteWorldDay(now), section: "world", clamp: 400, place: place398 })); // SNG-211: an arc surfacing/resolving is a real event
     ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);
     ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
   }
@@ -983,6 +1065,9 @@ export async function syncSharedWorld({ character, content }) {
       text: `${e.impactsLocal ? "This reaches your area — " : "Word reaches you: "}${e.what}${e.where ? ` (near ${e.where.replace(/_/g, " ")})` : ""}`,
       section: "elsewhere",   // ⚠️ another character's deed, arriving by the SNG-363 distance gate — not your valley turning
       worldDay: e.worldDay ?? worldDayAt(e.at),
+      // ⛔ CCODE-398: `where` is the ledger's own place and the line already says it in prose — it is carried as a FACT now, so the
+      // near-chip and the distance gate can read what the sentence has been telling the player all along.
+      locationId: (e.where && content?.locations?.[e.where]) ? e.where : null,
       impactsLocal: !!e.impactsLocal // SNG-041: a boundary-crossing distant event (far-world → local frame)
     });
     ws.lastSharedReadAt = new Date().toISOString();
@@ -1052,7 +1137,7 @@ export async function syncSharedWorld({ character, content }) {
   if (news.length) {
     // each item carries its OWN absolute world-day (a cross-character event keeps the date it
     // actually happened; a local merge stamps now) — so the shared calendar stays coherent.
-    const stamped = news.map(n => stampNews(n, { day: ws.lastTickDay, worldDay: absoluteWorldDay(), section: "world" })); // SNG-211: a cross-character arc move is a real event · SNG-364: sectioned at the source
+    const stamped = news.map(n => stampNews(n, { day: ws.lastTickDay, worldDay: absoluteWorldDay(), section: "world", place: placeBagOf(ws, character, content) }));   // CCODE-398: placed // SNG-211: a cross-character arc move is a real event · SNG-364: sectioned at the source
     ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);
     ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
   }
@@ -1318,7 +1403,7 @@ export async function syncSharedFates({ character, content, publish = true, now 
   ws.fatesReadWorldDay = worldDay;
   if (news.length) {
     ws.news = ws.news || []; ws.unseenNews = ws.unseenNews || [];
-    const stamped = news.map(n => stampNews(n, { day: ws.lastTickDay, worldDay, section: "world" }));
+    const stamped = news.map(n => stampNews(n, { day: ws.lastTickDay, worldDay, section: "world", place: placeBagOf(ws, character, content) }));   // CCODE-398: placed
     ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);
     ws.unseenNews = [...ws.unseenNews, ...stamped].slice(-NEWS_CAP);
   }
@@ -1678,7 +1763,7 @@ export function resolvePlayerStrike(character, op = {}, { worldDay = null, conte
     if (t.kind === "quiet") (ws.figureExposure ||= {})[t.sender] = { arcId: t.arcId, knownTo: PLAYER_MARK_ID, worldDay, untilDay: (Number(worldDay) || 0) + 180 };
     news.push({ text: `The one sent for you talked: ${t.senderName || "someone"} sent them, over ${arcName}.`, worldDay, tier: "event", section: "yours", figureId: t.sender });
   }
-  const stamped = news.map(n => stampNews(n, { day: ws.lastTickDay ?? null, worldDay }));
+  const stamped = news.map(n => stampNews(n, { day: ws.lastTickDay ?? null, worldDay, place: placeBagOf(ws, character, content) }));   // CCODE-398: placed
   if (stamped.length) {
     ws.news = ws.news || [];
     ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);   // the one stamper, the one writer's shape (smoke 431/3)
@@ -2976,7 +3061,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     // clash could be structured perfectly upstream and still arrive as a sentence and a tier. Both are the
     // path the world-tick actually takes, which is why Aevi measured 0 of 20.
     if (news.length) {
-      const stamped = news.map(n => stampNews(n, { day: ws.lastTickDay ?? null, worldDay: n.worldDay }));
+      const stamped = news.map(n => stampNews(n, { day: ws.lastTickDay ?? null, worldDay: n.worldDay, place: placeBagOf(ws, character, content) }));   // CCODE-398: placed
       ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);
       ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
     }
@@ -3841,7 +3926,8 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
         const line = got ? `${s.name || "Someone"} has taken an interest in ${nameOfArc(got.arcId)} — ${got.why}.`
           : hard ? `${s.name || "Someone"} has dug in over ${nameOfArc(hard.arcId)}.`
           : let_go ? `${s.name || "Someone"} has stopped spending themselves on ${nameOfArc(let_go.arcId)}.` : null;
-        if (line) news.push({ text: line, worldDay: currentWorldDay, tier: "murmur" });
+        // ⛔ CCODE-398: the figure is right here and the line went out unplaced — 3 of every tick's vacancy murmurs, on every save
+        if (line) news.push({ text: line, worldDay: currentWorldDay, tier: "murmur", figureId: s.id || null, arcId: (got || hard || let_go)?.arcId || null });
       }
     }
     ws.arcStandings = { risen, fallen };
@@ -4130,13 +4216,14 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
       // ("Vash re-grinds a lens") is AMBIENT texture — it fills the remainder of the surface, never crowds
       // the real event out of it (§2, GUARD: rank ambient, don't kill it).
       const tier = (fig.source === "legend" || resolved || outcome === "problem") ? "event" : "ambient";
-      if (moved || outcome === "problem") news.push({ text: headline, worldDay: currentWorldDay, tier });
+      // ⛔ CCODE-398: the ambient beats were the largest unplaced kind — 30 of 30 across the saves — and the figure is the loop's own
+      if (moved || outcome === "problem") news.push({ text: headline, worldDay: currentWorldDay, tier, figureId: fig.id || null });
     }
   } catch (err) { console.warn("[offscreen-gen] skipped:", err.message); return []; }
 
   if (news.length) {
     // SNG-431 §3: the second of the two — see the note at the early return above.
-    const stamped = news.map(n => stampNews(n, { day: ws.lastTickDay ?? null, worldDay: n.worldDay }));
+    const stamped = news.map(n => stampNews(n, { day: ws.lastTickDay ?? null, worldDay: n.worldDay, place: placeBagOf(ws, character, content) }));   // CCODE-398: placed
     ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);
     ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
   }

@@ -157,7 +157,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.60";
+const APP_VERSION = "2.0.61";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -17759,8 +17759,12 @@ function renderPlay(turn, opts = {}) {
     // ⛔ CCODE-367 — Erik: "Nearby events should stand out more." Within each section the near ones come first, each marked with
     // how near: "here" is this town, "near" a few days' walk. A line with no place is left exactly as it was.
     const nearOpts367 = { here: CONTENT.locations?.[character?.currentLocationId] || null, locations: CONTENT.locations || {} };
-    const chip367 = (nm) => (nm?.near ? `<span class="news-near-chip">${nm.here ? "here" : `near · ${nm.days} ${nm.days === 1 ? "day" : "days"}`}</span>` : "");
-    const items = (list) => nearFirst(list, nearOpts367).map(raw => { const n = raw?.kind ? raw : (recovered(raw) || raw); const nm = newsNearness(n, nearOpts367); const nearCls = nm?.near ? " news-near" : ""; return canSee(n)
+    // ⛔ CCODE-398 — AND THE TWO COARSER TIERS THE REVAMP ADDED SAY WHAT THEY ARE. A deed spreading carries the community word
+    // reached and an arc's news the region it crosses; neither is a position, so neither shows a day count. ⚠️ The quiet chip is a
+    // different class on purpose: "your community" must not read like "1.6 days", or the pass would have bought reach with a lie.
+    const chip367 = (nm) => nm?.near ? `<span class="news-near-chip">${nm.here ? "here" : `near · ${nm.days} ${nm.days === 1 ? "day" : "days"}`}</span>`
+      : nm?.tier ? `<span class="news-near-chip news-place-chip">${nm.tier === "community" ? "your community" : "your region"}</span>` : "";
+    const items = (list) => nearFirst(list, nearOpts367).map(raw => { const n = raw?.kind ? raw : (recovered(raw) || raw); const nm = newsNearness(n, nearOpts367); const nearCls = nm?.near ? " news-near" : nm?.tier ? " news-placed" : ""; return canSee(n)
       // ⛔ CCODE-395 (Erik's §3, measured on his own screenshot) — THE PROSE IS NOT INSIDE THE BUTTON ANY MORE. Every fight line
       // rendered its whole sentence inside `<button class="news-open">`, and `linkifyKnown` refuses text inside a BUTTON — correctly,
       // because a link inside a button is invalid HTML and a trap for a thumb. So no name in a fight line could EVER be clicked: *The

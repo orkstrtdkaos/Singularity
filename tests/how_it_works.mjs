@@ -11836,11 +11836,17 @@ console.log("\n── §148 · role → tier, default down, authored always wins
   // deeds) this check gains an evidence escape — it does NOT get deleted: a REGEX is still not entitled
   // to mint a legendary, and that is the whole of §2.2.
   {
-    const silent148 = npcs148.filter(n => !n.tier && n.level == null);
+    // ⛔ CCODE-395b — THIS MEASURED THE GAP AND THE GAP IS NOW CLOSED. It ran the derivation over the corpus's records that carry no
+    // `tier` and no `level`, and SNG-610 authored the last of them ("150/150 on every NPC field") — so "0 derived of 0 silent" went red
+    // for Aevi FINISHING, which is the fourteenth gate of mine this month to pin one instance of something general.
+    // ⛑ THE RULE IS ABOUT THE DERIVATION, so it is asked of records that are silent BY CONSTRUCTION — every authored ROLE STRING in the
+    // corpus, stripped of its rung — which keeps the corpus's own vocabulary in the fixture and cannot be emptied by authoring.
+    const roles148 = [...new Set(npcs148.map(n => n.role).filter(r => typeof r === "string" && r.trim()))];
+    const silent148 = roles148.map((role, i) => ({ id: `silent-${i}`, role }));
     const derived148 = silent148.map(n => NS148.tierFromRole(n, { cfg: cfg148 })).filter(Boolean);
     // ⛑ NON-VACUITY: "all of nothing is fine" is how this check would rot silently.
-    check("§148: ⚠️ the role derivation actually runs on silent records (else the rung check below is vacuous)",
-      silent148.length > 0 && derived148.length > 0, `${derived148.length} derived of ${silent148.length} silent`);
+    check("§148: ⚠️ the role derivation actually runs on the corpus's own role strings, stripped of their rungs (else the rung check below is vacuous)",
+      silent148.length > 20 && derived148.length > 0, `${derived148.length} derived of ${silent148.length} role strings`);
     check("§148: ⛔ …and a ROLE STRING ALONE never reaches above heroic — above it takes evidence, not a regex",
       derived148.every(t => Number(cfg148.tierFloor[t.tier]) <= Number(cfg148.tierFloor.heroic)),
       [...new Set(derived148.map(t => t.tier))].join(", "));

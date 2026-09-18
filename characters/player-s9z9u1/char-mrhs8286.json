@@ -6835,21 +6835,6 @@
     "news": [
       {
         "day": 18,
-        "worldDay": 77,
-        "text": "This reaches your area — A Churn-Revel orchestrator bound by bargain and turned from breaking the Null Stone; now seeks partnership in searching for answers that chaos alone cannot reach (near the crossing)",
-        "tier": "event",
-        "section": "elsewhere",
-        "impactsLocal": true
-      },
-      {
-        "day": 18,
-        "worldDay": 78,
-        "text": "Sister Alder, the Ward That Does Not Break is spoken of: not forgiving herself for the last one.",
-        "tier": "murmur",
-        "section": "world"
-      },
-      {
-        "day": 18,
         "worldDay": 78,
         "text": "Word from The Service Ways — Halvex Coil, the Rewriter: removing an inefficiency that was a person.",
         "tier": "murmur",
@@ -6980,13 +6965,27 @@
         "tier": "ambient",
         "section": "world",
         "figureId": "orvil"
+      },
+      {
+        "day": 18,
+        "worldDay": 80,
+        "text": "Something has been building in the center: A senior courier dispatcher has quietly begun rerouting the fastest riders away from the eastern Palelands run, prioritizing Center-to-valley traffic, and the eastern settlements' messages are…",
+        "tier": "event",
+        "section": "world"
+      },
+      {
+        "day": 18,
+        "worldDay": 80,
+        "text": "Something has been building in the center: A junior courier who runs documents between the lending house and its valley clients has begun holding certain receipts an extra day before delivery, giving herself time to read them — she has not…",
+        "tier": "event",
+        "section": "world"
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-09-18T02:37:43.456Z",
+    "lastSharedReadAt": "2026-09-18T13:29:21.225Z",
     "lastTickWorldDay": 80,
     "lastCanonWorldDay": 80,
-    "lastGenCount": 1922,
+    "lastGenCount": 1933,
     "turnsSinceOffer": 1,
     "recentOffers": [
       {
@@ -7512,7 +7511,7 @@
         "kind": "decision",
         "premise": "The valley's miller has been quietly shorting grain weights for two seasons to cover a debt owed to a creditor in the Center, and a farmer is beginning to suspect.",
         "cause": "The valley is agricultural and the mill sits at the heart of its trade, making the miller both trusted and positioned to deceive — and debts flow toward…",
-        "stage": 17,
+        "stage": 18,
         "seededAtCount": 673,
         "surfaced": true,
         "fate": "growing",
@@ -7538,7 +7537,7 @@
         "kind": "decision",
         "premise": "An elder in the Palelands has privately decided to abandon the eastern settlements and consolidate survivors westward, but has told no one, and is already quietly redirecting the communal seed-stores.",
         "cause": "The silting wells are not new to her — she recognized the pattern a season before anyone else, and has been watching it confirm her fear ever since.",
-        "stage": 15,
+        "stage": 16,
         "seededAtCount": 795,
         "surfaced": true,
         "fate": "growing",
@@ -7661,7 +7660,7 @@
         "kind": "decision",
         "premise": "The creditor whose debt the miller is covering has begun drafting a succession of his lending contracts to a junior associate — not from generosity, but because he is quietly preparing to disappear…",
         "cause": "The Center's lending house depends on the creditor's personal reputation as surety for a web of agreements; his private knowledge that the books are unsound…",
-        "stage": 2,
+        "stage": 3,
         "seededAtCount": 1721,
         "surfaced": true,
         "fate": "growing",
@@ -7698,11 +7697,12 @@
         "kind": "decision",
         "premise": "A senior courier dispatcher has quietly begun rerouting the fastest riders away from the eastern Palelands run, prioritizing Center-to-valley traffic, and the eastern settlements' messages are…",
         "cause": "The Center's commerce depends on the valley's grain flow, and with murmurs of trouble in the east, the dispatcher is protecting the routes that pay — a…",
-        "stage": 1,
+        "stage": 2,
         "seededAtCount": 1839,
-        "surfaced": false,
+        "surfaced": true,
         "fate": "growing",
-        "lastMovedCount": 1839
+        "lastMovedCount": 1839,
+        "surfacedAtCount": 1933
       },
       "center-courier-decision": {
         "id": "center-courier-decision",
@@ -7710,11 +7710,12 @@
         "kind": "decision",
         "premise": "A junior courier who runs documents between the lending house and its valley clients has begun holding certain receipts an extra day before delivery, giving herself time to read them — she has not…",
         "cause": "The Center's lending house routes sensitive financial correspondence through low-paid runners who are expected to be illiterate; this courier is not.",
-        "stage": 1,
+        "stage": 2,
         "seededAtCount": 1886,
-        "surfaced": false,
+        "surfaced": true,
         "fate": "growing",
-        "lastMovedCount": 1886
+        "lastMovedCount": 1886,
+        "surfacedAtCount": 1933
       },
       "echo-vale-silence-creep": {
         "id": "echo-vale-silence-creep",
@@ -18961,8 +18962,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1789699239405,
-  "rev": 2116,
+  "updatedAt": 1789738168123,
+  "rev": 2119,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -23456,7 +23457,7 @@
       "at": "2026-09-17T02:06:44.247Z"
     }
   ],
-  "syncedAt": 1789610804247,
+  "syncedAt": 1789699239405,
   "teachers": {},
   "regionsKnown": {
     "valley": 694,
@@ -26481,7 +26482,7 @@
     },
     {
       "text": "Pell Ran Marsh captains The Fellowship of the Fell Pell now.",
-      "announced": false
+      "announced": true
     }
   ],
   "sceneImages": {

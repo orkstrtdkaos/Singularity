@@ -159,7 +159,11 @@ console.log("\n── §3 · families, mixes, and healing ──");
     physics: ["physical", "force", "spatial", "temporal", "radiance", "shadow"],
     elemental: ["heat", "cold", "lightning", "corrosive"],
     vital: ["decay", "living", "vitality"],
-    intrinsic: ["feeling", "appetite", "judgement", "psychic", "abstraction", "truth", "deception"],
+    // ⛑ `meaning` ADDED 2026-09-18 (SNG-625): the family's own rule is "harm that requires a WILL to make it —
+    // a rockfall cannot do this", and nothing accidental strips significance from a symbol. ⚠️ AND NOTE WHAT
+    // THIS TABLE IS: a HAND-TYPED COPY of damage_families.json, which is the stored-copy-of-a-derived-value
+    // shape this suite catches everywhere else. It went red because the file moved and the copy did not.
+    intrinsic: ["feeling", "appetite", "judgement", "psychic", "abstraction", "truth", "deception", "meaning"],
   };
   for (const [name, types] of Object.entries(DOC_FAMILIES)) {
     const actual = (F[name]?.types || []).slice().sort();

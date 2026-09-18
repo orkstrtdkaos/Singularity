@@ -345,8 +345,8 @@ but cited by its own note, extended by its `rankDeltas`, and named in its player
 | ~~`ability_rename_map`~~ ✅ **WIRED** | 60.1 KB | | `the_veil` | 7.6 KB |
 | `power_cosmology` | 36.7 KB | | `healing_intent` | 4.8 KB |
 | `mechanic_effects` | 15.9 KB | | `death_domain` | 4.6 KB |
-| `tempo` | 14.6 KB | | `companion_template` | 4.0 KB |
-| ⛔ `damage_types` | 13.0 KB | | `energy_costs` | 2.3 KB |
+| ⛔ `damage_types` | 15.4 KB | | `companion_template` | 4.0 KB |
+| `tempo` | 14.6 KB | | `energy_costs` | 2.3 KB |
 <!-- SIZES:END -->
 
 ⛔ **`damage_types.json` sits in the same folder as the `damage_families.json` that IS loaded, on the same
@@ -680,7 +680,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `scope` | 155 | `mechanic`×155 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `recovery_snapshots.js` |
 | `targets` | 149 | `mechanic`×149 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `reconcile.js` |
 | `gated` | 113 | `root`×113 | ✅ READ | `borncontract.js`, `generate.js`, `gm_registry.js` |
-| `damageType` | 109 | `mechanic`×109 | ✅ READ | `craftmechanics.js`, `damagetypes.js`, `gm.js` |
+| `damageType` | 110 | `mechanic`×110 | ✅ READ | `craftmechanics.js`, `damagetypes.js`, `gm.js` |
 | `dice` | 105 | `mechanic`×105 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `gm.js` |
 | `crit` | 93 | `mechanic`×93 | ✅ READ | `craftmechanics.js`, `encounters.js`, `npcsheet.js` |
 | `range` | 81 | `mechanic`×81 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `reconcile.js` |

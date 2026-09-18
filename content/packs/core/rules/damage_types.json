@@ -94,6 +94,21 @@
    "_family": "intrinsic · mental axis, beside abstraction, truth and deception",
    "wardedBy": "another mind standing with yours — a companion who keeps speaking, an oath said aloud, a discipline practised until it holds without attention. ⛔ NO THICKNESS OF ANYTHING: there was never anything between you for armour to be. ⚠️ Being alone is the vulnerability, which makes this the one type a band answers better than a wall.",
    "_wardWhy": "⛑ AEVI 2026-09-12, closing the `_wardOwed` note. Written to `_wardRule`: a ward names what it answers and NOT what it does not, and the character is in what it cannot stop. Each of the five is deliberately answered by something DIFFERENT from `physical`'s armour-and-a-braced-stance — force punishes the brace, spatial ignores the body, radiance is answered by its own opposite, corrosive consumes the answer, and psychic has nothing to put in the way. ⛔ NONE OF THEM IS WARDED BY 'armour', because five new types that all resolve to armour would be one type with five names."
+  },
+  "heat": {
+   "what": "Fire, forge-scale, and the slow kind — anything that cooks rather than cuts.",
+   "wardedBy": "distance, wet cloth, worked stone, a tradition that has made its peace with fire",
+   "_note": "⛔ RESOLVED BY THE ENGINE SINCE `elemental` WAS WRITTEN AND DEFINED HERE ONLY NOW (CCODE-409). ⚠️ Its sibling is `cold`, never its opposite — the family's own rule."
+  },
+  "lightning": {
+   "what": "The sudden discharge — it arrives, it is over, and what it went through is changed.",
+   "wardedBy": "a path to ground, insulation, not being the tallest thing, ordered nanite that can take the charge",
+   "_note": "⛔ DEFINED ONLY NOW, with `heat` (CCODE-409). ⚠️ Alone among the elementals it does not linger: a ward that arrives a moment late has arrived after the whole of it."
+  },
+  "meaning": {
+   "what": "Significance stripped from a thing — a working, a symbol, a belief. What it was holding up falls, and nothing about the thing itself has changed.",
+   "wardedBy": "hallowed ground, a thing witnessed by enough people, a name somebody still says, a belief that is being kept rather than merely held",
+   "_note": "⛔ AUTHORED 2026-09-18 FROM AN ORPHANED WARD. `hallowed_ground` has warded `meaning` since it was written and `meaning` was a damage type in neither file, so that ward could never answer anything. ⚠️ IT IS NOT A TYPO. The tradition has a whole meaning-layer: `numenwork` PERCEIVES it, `hallowed_ground` LAYS it, and `dimmed_meaning` STRIPS it — 'when meaning departs, what it was holding falls'. **The harm existed, the type did not.** ⛑ AND SINCE SNG-602 IT IS LOAD-BEARING RATHER THAN FLAVOUR: belief is what sustains the Veil, so harm that strips meaning is harm to the wall. A faith that stops being kept thins it — and this is that, done to one thing at a time."
   }
  },
  "_wardRule": "⛔ A WARD NAMES WHAT IT ANSWERS. `mechanic.wardTypes: [\"physical\",\"light\"]` means the layer contributes its soak against those kinds and NOTHING against others.\n⚠️ A WARD THAT ANSWERS EVERYTHING IS A WARD WITH NO CHARACTER — and it is what all 65 ward-capable crafts currently are. ⛔ THE TRADITION'S IDENTITY IS IN WHAT IT CANNOT STOP.",
@@ -105,5 +120,6 @@
  },
  "_deadTypesRemoved_20260829": "⛔ `light` and `precursor` removed. ⚠️ `light` migrated to `radiance`; `precursor` was ruled a METHOD not a type and carried by 7 crafts that dealt no damage. **Both had been listed here after their rulings, which is how a dead vocabulary keeps looking alive.**",
  "_widened_20260912": "⛔ AEVI 2026-09-12, over my report that five declared types sat outside this enum: \"WIDEN THE ENUM. DO NOT RETYPE THE CRAFTS. I checked all five against damage_families.json and every one of them is already in the family canon… The crafts are right and the enum is the stale source.\" Two sources of truth and the gate was pointed at the narrower one, so 5 types were admitted here and content_ci now reads BOTH canons. ⚠️ Their wards are unwritten and named as owed — the sixth-new-type gate stays red for a type outside both. Also dropped 12 stored `n` counts under her energy_costs ruling (\"a stored copy of a derived number is a staleness generator\"); the live count is reported every run.",
- "_wardsWritten_20260912": "⛑ The five widened types carry `wardedBy` as of 2026-09-12 (Aevi). ⛔ SNG-512's defect was typed attacks nothing answers; five of eighteen types sat in exactly that state from the day the enum widened until now. ⚠️ The prose is the ward; the mechanical half is `mechanic.wardTypes` on the crafts, and 65 ward-capable crafts still answer everything, which `_wardRule` names and is the larger debt."
+ "_wardsWritten_20260912": "⛑ The five widened types carry `wardedBy` as of 2026-09-12 (Aevi). ⛔ SNG-512's defect was typed attacks nothing answers; five of eighteen types sat in exactly that state from the day the enum widened until now. ⚠️ The prose is the ward; the mechanical half is `mechanic.wardTypes` on the crafts, and 65 ward-capable crafts still answer everything, which `_wardRule` names and is the larger debt.",
+ "_widened_20260918": "⛔ SNG-625 — CCODE-409, and the finding is sharper than 'two lists disagree'. ⚠️ `damage_types.json` says WHAT A TYPE IS and what wards it; `damage_families.json` says HOW THEY GROUP. Neither is redundant and neither is a copy — so the 18-versus-20 gap is not a duplication that drifted, it is **TWO TYPES THE ENGINE RESOLVES THAT NOBODY EVER DEFINED.** `heat` and `lightning` have been in `elemental` since it was written, and a player hit by either has never had a sentence saying what it does or what turns it aside."
 }

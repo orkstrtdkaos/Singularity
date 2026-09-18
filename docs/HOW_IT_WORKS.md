@@ -859,7 +859,7 @@ the mix.**
 | **physics** | the fabric of the world — matter, space, time, and the two kinds of matter you see by | `physical` `force` `spatial` `temporal` `radiance` `shadow` |
 | **elemental** | the energies moving through it | `heat` `cold` `lightning` `corrosive` |
 | **vital** | life ended, grown, or moved | `decay` `living` `vitality` |
-| **intrinsic** | ⛔ harm that requires a WILL to make it — *a rockfall cannot do this* | `feeling` `appetite` `judgement` · `psychic` `abstraction` `truth` `deception` |
+| **intrinsic** | ⛔ harm that requires a WILL to make it — *a rockfall cannot do this* | `feeling` `appetite` `judgement` · `psychic` `abstraction` `truth` `deception` `meaning` |
 
 ⚠️ **Elemental types are SIBLINGS, not opposites.** A ward against fire is not a ward against ice.
 

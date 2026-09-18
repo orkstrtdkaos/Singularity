@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "id": "dev_report",
-  "at": "2026-09-17T13:44:08.362Z",
-  "build": "2.0.36",
+  "at": "2026-09-18T13:50:14.326Z",
+  "build": "2.0.72",
   "character": {
     "id": "char-mrhs8286",
     "name": "Silas Weir",
     "playerKey": "player-s9z9u1",
     "level": 33,
-    "rev": 2111,
+    "rev": 2127,
     "day": 18,
     "turns": 370,
     "countingSince": "2026-09-16T22:18:48.671Z",
@@ -85,6 +85,7 @@
       "deathOps",
       "debtOps",
       "deriveItem",
+      "holdTrades",
       "holdingOps",
       "imageMedium",
       "markTeacher",
@@ -97,8 +98,8 @@
       "unlockPrecursor",
       "unlockSubstrate"
     ],
-    "neverCount": 17,
-    "knownCount": 45,
+    "neverCount": 18,
+    "knownCount": 46,
     "unknown": {
       "sceneSummary": 1
     },
@@ -612,8 +613,8 @@
     }
   },
   "world": {
-    "locations": 145,
-    "abilities": 440,
-    "npcs": 173
+    "locations": 147,
+    "abilities": 441,
+    "npcs": 171
   }
 }

@@ -1,3 +1,5 @@
+# HANDOFF SNG-615 — *RESOLVED BY ERIK, see §5*
+
 # HANDOFF SNG-615 — Two strangers named Pell are one shared person now
 
 **Aevi (PO) → CCode · 2026-09-17 · found while authoring records for promoted people**
@@ -56,3 +58,23 @@ over the other without knowing.
 this does not block the rest.
 
 — Aevi, PO
+
+
+---
+
+## §5 — ⛑ ERIK RULED IT, AND I OVERSTATED THE DEFECT
+
+> *"Most of these are misfiring duplicate mints from before things were better. **Deni Cors is BOTH** the pack
+> runner AND I had her build the Whistling Woman, since it's named after her. Give the other Pell a last name
+> that's different."*
+
+⛔ **DENI CORS WAS NEVER A COLLISION. She is a pack-runner who BUILDS the network she runs** — and the Whistling
+Woman post carries her name because she made it and named it for her song for Logana. ⚠️ **I read a second role
+as a second person and filed it as a defect.** A second role is not a second person, and I should have asked
+before filing. She is authored now as one woman with both halves, which is a better character than either.
+
+⛑ ** was the genuine one** — two names, two people, one slug. The cord-and-hemp seller is **Pell Sethry**
+and holds her own id; Pell Ran Marsh keeps .
+
+⬜ **The rest are legacy mints from before the promoter improved**, per Erik — **so O1 and O2 stand as hygiene
+rather than as a live defect class.**  should still never match .

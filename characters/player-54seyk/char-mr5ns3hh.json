@@ -210,26 +210,31 @@
         "player": "Ask Mara directly what she thinks of this — she saw it coming; you want her read before you commit to the road",
         "summary": "Adelheid asked Mara directly for her read on the wayhouse invitation; Mara gave it plain — the road upstream needs someone with a reason to be on it. Aevi noted the distinction.",
         "narration": "The question turns you back toward Mara before Sister Vreni can fill the silence further. She is still at the step, arms folded, watching — not disapproving, not approving. Waiting, the way she waits for ledger columns to add themselves up.\n\n\"What do you think?\" you ask her directly. \"You saw her coming before I did. You see most things before anyone else does.\"\n\nA beat. Mara unfolds her arms, slowly, and lets them settle at her sides. It is the closest thing to relaxing you have seen from her.\n\n\"I think,\" she says, \"that the wayhouse is on the sluice-road.\" She says it the way she might say the accounts balance — plain, final, not an argument. \"I think Sister Vreni would not have come this far for a closed wound if the wayhouse did not need someone. And I think—\" a pause, shorter than the first — \"that the road upstream is going to need someone on it who has a reason to be there.\"\n\nShe is not telling you to go. She is telling you that going is a sound decision, and from Mara Wells that is the same thing as a blessing.\n\nAevi drifts close to your ear, a small warm brightening. \"She said the road upstream,\" the motes murmur, barely audible. \"Not the wayhouse. The road.\"\n\nSister Vreni has the grace to look at the seedling beds during this."
+      },
+      {
+        "player": "Ask Sister Vreni how soon she is heading back — and whether you might walk the first stretch of the road together tonight.",
+        "summary": "Adelheid asked Sister Vreni about her departure and received an open invitation to walk the sluice-road to the wayhouse together tonight by moonlight.",
+        "narration": "The question comes out easily, no ceremony in it. \"When are you heading back, Sister? Tonight, or do you wait for morning?\"\n\nSister Vreni turns from the seedling beds, where she has been studying something low in the soil with the quiet attention of a person who notices growing things. \"Tonight,\" she says. \"I came down on foot this afternoon. The road is sound enough by moonlight and I know the first stretch well.\" A small pause. \"You are welcome to walk it with me, if you are ready. The wayhouse is not far — an hour and a half, perhaps two if the dew has come early and made the stones slippery.\"\n\nMara says nothing from her step, but there is a quality in her silence that is not absence — she is listening, noting, committing something to her internal ledger. When you glance back at her she gives you a look that is almost a nod. Almost.\n\nAevi brightens slightly at your shoulder — not alarm, just attention. The motes rearrange into a loose question-mark shape, which is her way of asking whether you want to talk through what you are carrying before you go. *The cutting is wrapped,* she murmurs, just inside your ear. *The satchel is stocked. You are as ready as the road asks.* She dims back to her usual slow drift, content to let you decide.\n\nThere is nothing holding you here in the garden but the garden itself — the cool evening breath, the seedling beds, the last of the amber draining from the sky. Tomorrow's tasks will not start tonight. The road, though, starts now."
       }
     ],
     "lastTurn": {
-      "narration": "The question turns you back toward Mara before Sister Vreni can fill the silence further. She is still at the step, arms folded, watching — not disapproving, not approving. Waiting, the way she waits for ledger columns to add themselves up.\n\n\"What do you think?\" you ask her directly. \"You saw her coming before I did. You see most things before anyone else does.\"\n\nA beat. Mara unfolds her arms, slowly, and lets them settle at her sides. It is the closest thing to relaxing you have seen from her.\n\n\"I think,\" she says, \"that the wayhouse is on the sluice-road.\" She says it the way she might say the accounts balance — plain, final, not an argument. \"I think Sister Vreni would not have come this far for a closed wound if the wayhouse did not need someone. And I think—\" a pause, shorter than the first — \"that the road upstream is going to need someone on it who has a reason to be there.\"\n\nShe is not telling you to go. She is telling you that going is a sound decision, and from Mara Wells that is the same thing as a blessing.\n\nAevi drifts close to your ear, a small warm brightening. \"She said the road upstream,\" the motes murmur, barely audible. \"Not the wayhouse. The road.\"\n\nSister Vreni has the grace to look at the seedling beds during this.",
-      "sceneSummary": "Adelheid asked Mara directly for her read on the wayhouse invitation; Mara gave it plain — the road upstream needs someone with a reason to be on it. Aevi noted the distinction.",
+      "narration": "The question comes out easily, no ceremony in it. \"When are you heading back, Sister? Tonight, or do you wait for morning?\"\n\nSister Vreni turns from the seedling beds, where she has been studying something low in the soil with the quiet attention of a person who notices growing things. \"Tonight,\" she says. \"I came down on foot this afternoon. The road is sound enough by moonlight and I know the first stretch well.\" A small pause. \"You are welcome to walk it with me, if you are ready. The wayhouse is not far — an hour and a half, perhaps two if the dew has come early and made the stones slippery.\"\n\nMara says nothing from her step, but there is a quality in her silence that is not absence — she is listening, noting, committing something to her internal ledger. When you glance back at her she gives you a look that is almost a nod. Almost.\n\nAevi brightens slightly at your shoulder — not alarm, just attention. The motes rearrange into a loose question-mark shape, which is her way of asking whether you want to talk through what you are carrying before you go. *The cutting is wrapped,* she murmurs, just inside your ear. *The satchel is stocked. You are as ready as the road asks.* She dims back to her usual slow drift, content to let you decide.\n\nThere is nothing holding you here in the garden but the garden itself — the cool evening breath, the seedling beds, the last of the amber draining from the sky. Tomorrow's tasks will not start tonight. The road, though, starts now.",
+      "sceneSummary": "Adelheid asked Sister Vreni about her departure and received an open invitation to walk the sluice-road to the wayhouse together tonight by moonlight.",
       "choices": [
         {
-          "label": "Ask Mara if there is anything else she wants you to carry to the wayhouse — a message, a note, anything unsaid.",
+          "label": "Walk out with Sister Vreni now — settle the last word with Mara, sling your pack, and take the first stretch of the sluice-road by moonlight.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": "very easy",
           "intentTags": [
-            "negotiate"
+            "travel"
           ],
           "trivial": true
         },
         {
-          "label": "Ask Sister Vreni how soon she is heading back — and whether you might walk the first stretch of the road together tonight.",
+          "label": "Ask Mara if she has anything to send with you — a note, a word for whoever keeps the wayhouse, anything she would say before you go.",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
           "difficulty": "very easy",
           "intentTags": [
             "plan"
@@ -237,12 +242,12 @@
           "trivial": true
         },
         {
-          "label": "Tell them both you will leave at first light, then take your leave of the garden for the evening.",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Take a quiet moment before you leave — look at the seedling beds one last time, let the evening settle around you, and go when you are ready rather than now.",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": "very easy",
           "intentTags": [
-            "plan"
+            "careful"
           ],
           "trivial": true
         }
@@ -250,87 +255,67 @@
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "mara-wells",
-          "note": "When asked directly for her read, Mara gave it plain and without hedging — the road upstream needs someone on it with a reason to be there. The closest to a blessing she gives.",
-          "learned": [
-            "Mara sees Adelheid's acceptance of the wayhouse invitation as a strategically sound move, not merely a charitable one — she is thinking about what Adelheid will see on the sluice-road."
-          ],
-          "statusNote": "Standing at her back step, arms now at her sides, having given her read plainly and without ornamentation.",
-          "relationshipDelta": 1
+          "npcId": "sister-vreni",
+          "name": "Sister Vreni",
+          "note": "Named her departure time as tonight and extended the open invitation to walk the sluice-road together by moonlight — an hour and a half to two hours up to the wayhouse.",
+          "statusNote": "At Mara's garden gate, ready to depart tonight for the pass-road wayhouse."
         },
         {
           "op": "update",
-          "npcId": "sister-vreni",
-          "note": "Had the grace to look at the seedling beds while Mara gave her read — she understands she is in the middle of something larger and does not press.",
-          "statusNote": "Standing at the garden gate, waiting for departure timing to be settled.",
-          "learned": [
-            "She witnessed Mara Wells endorse Adelheid's departure — she now understands the invitation has a layer beyond the wayhouse's medical need."
-          ]
+          "npcId": "mara-wells",
+          "name": "Mara Wells",
+          "note": "Kept a listening silence as the departure logistics settled — gave a look that is almost a nod when Adelheid glanced back.",
+          "statusNote": "At her back step in the garden, watching the departure question settle."
         }
       ],
       "scene": {
-        "setting": "Mara's back garden, dusk — the amber light has faded to late blue, a cool evening breath coming in off the terrace. The seedling beds lie in soft shadow.",
+        "setting": "Mara's back garden, full dusk — the amber light has drained to deep blue, a cool evening breath coming in off the terrace. The seedling beds lie in soft shadow, the gate open behind Sister Vreni.",
         "npcsPresent": [
           {
             "name": "Mara Wells",
-            "state": "At the back step, arms now at her sides, having spoken her piece plainly."
+            "state": "At the back step, arms at her sides, watching with a listening quality — gave a near-nod when Adelheid glanced back."
           },
           {
             "name": "Sister Vreni",
-            "state": "At the garden gate, looking at the seedling beds, waiting for the departure question to settle."
+            "state": "At the garden gate, having named tonight as her departure — open invitation to walk the first stretch of the road together."
           }
         ],
         "objects": [
-          "seedling beds",
+          "seedling beds in soft shadow",
           "open garden gate",
-          "Mara's back step"
+          "Mara's back step",
+          "Adelheid's packed satchel and traveler's pack"
         ],
         "threads": [
-          "Departure timing not yet set — tonight or first light?",
-          "Whether Mara has anything more to send with Adelheid — a note, a word, anything unsaid.",
-          "Aevi's observation: Mara said 'the road upstream', not 'the wayhouse'."
+          "Whether Adelheid walks out tonight with Sister Vreni or takes a moment first.",
+          "Whether Mara has a last word, note, or anything to send along the sluice-road."
         ]
-      },
-      "codexUpdates": [
-        {
-          "topic": "mara-wells",
-          "label": "Mara Wells",
-          "kind": "person",
-          "entityId": "mara-wells",
-          "fact": "When asked directly for her read on the wayhouse invitation, Mara endorsed it plainly: the road upstream needs someone on it with a reason to be there. She said 'the road', not 'the wayhouse' — Aevi noted the distinction.",
-          "links": [
-            "maras-errand",
-            "silas-weir",
-            "echo-river-contamination",
-            "sister-vreni"
-          ]
-        }
-      ]
+      }
     },
     "sceneState": {
-      "setting": "Mara's back garden, dusk — the amber light has faded to late blue, a cool evening breath coming in off the terrace. The seedling beds lie in soft shadow.",
+      "setting": "Mara's back garden, full dusk — the amber light has drained to deep blue, a cool evening breath coming in off the terrace. The seedling beds lie in soft shadow, the gate open behind Sister Vreni.",
       "npcsPresent": [
         {
           "name": "Mara Wells",
-          "state": "At the back step, arms now at her sides, having spoken her piece plainly."
+          "state": "At the back step, arms at her sides, watching with a listening quality — gave a near-nod when Adelheid glanced back."
         },
         {
           "name": "Sister Vreni",
-          "state": "At the garden gate, looking at the seedling beds, waiting for the departure question to settle."
+          "state": "At the garden gate, having named tonight as her departure — open invitation to walk the first stretch of the road togeth"
         }
       ],
       "objects": [
-        "seedling beds",
+        "seedling beds in soft shadow",
         "open garden gate",
-        "Mara's back step"
+        "Mara's back step",
+        "Adelheid's packed satchel and traveler's pack"
       ],
       "threads": [
-        "Departure timing not yet set — tonight or first light?",
-        "Whether Mara has anything more to send with Adelheid — a note, a word, anything unsaid.",
-        "Aevi's observation: Mara said 'the road upstream', not 'the wayhouse'."
+        "Whether Adelheid walks out tonight with Sister Vreni or takes a moment first.",
+        "Whether Mara has a last word, note, or anything to send along the sluice-road."
       ]
     },
-    "beats": 3,
+    "beats": 4,
     "subPlace": {
       "slug": "mara-s-garden",
       "name": "Mara's Garden",
@@ -340,7 +325,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 2,
-    "hour": 21,
+    "hour": 22,
     "realAnchor": null
   },
   "companions": [
@@ -379,7 +364,6 @@
       },
       "relationship": 5,
       "history": [
-        "[d2] Adelheid pushed for plain explanation of the map and the system's destination. Mara refused again, naming only that the destination is what keeps her awake and what she is still working on. Her method is operational, not explanatory—she shares what she decides you need, when she decides it. She…",
         "[d2] Has given Adelheid three tasks: walk the river west to measure contamination spread; find Edvar Crane at the mill to learn what he has read; return for a choice that Adelheid must make. Mara is holding back the full picture but is committed to letting Adelheid gather the information to understand…",
         "[d2] Read Adelheid's return and exhaustion from Edvar's refusal to soften. Confirmed that Edvar spoke about Silas Weir, then offered physical work as grounding—garden beds and harvest-sorting. Her offer suggests she understands how to move people past paralysis: set them to work.",
         "[d2] Offered Adelheid work in the garden as a steadying ground, and used the shared rhythm to shift toward naming the choice she's been holding—something with an unnamed cost that requires real commitment.",
@@ -388,7 +372,8 @@
         "[d2] Named Silas's instrument as a small stringed listening device — built to receive resonance, not broadcast. Confirmed she has given Adelheid everything she knows. Closed the garden conversation with quiet finality.",
         "[d2] Went still and listening when Sister Vreni delivered her invitation — watching, not yet speaking.",
         "[d2] Went still and watchful as Adelheid accepted — noting it, not yet speaking. Asked when Adelheid will go. Her ledger is open.",
-        "[d2] When asked directly for her read, Mara gave it plain and without hedging — the road upstream needs someone on it with a reason to be there. The closest to a blessing she gives."
+        "[d2] When asked directly for her read, Mara gave it plain and without hedging — the road upstream needs someone on it with a reason to be there. The closest to a blessing she gives.",
+        "[d2] Kept a listening silence as the departure logistics settled — gave a look that is almost a nod when Adelheid glanced back."
       ],
       "knownFacts": [
         "Silas Weir is Harmonic, stationed at the Heights",
@@ -412,10 +397,10 @@
         "locationId": "gen-mara-wells-store",
         "day": 2
       },
-      "statusNote": "Standing at her back step, arms now at her sides, having given her read plainly and without ornamentation.",
+      "statusNote": "At her back step in the garden, watching the departure question settle.",
       "gender": "woman",
       "pronouns": "she/her",
-      "met": 18,
+      "met": 19,
       "sex": "female",
       "age": 47
     },
@@ -529,7 +514,8 @@
         "[d2] Arrived at Mara's garden gate seeking the healer who cleaned a traveler's thigh wound eleven days ago. Brought a warm invitation to the wayhouse above the pass road — genuine need, no obligation stated.",
         "[d2] Extended a clear, warm invitation to Adelheid to serve as resident healer at the pass-road wayhouse, now without one since the equinox. She named the traveler's healed thigh wound as the reason she sought her out.",
         "[d2] Accepted Adelheid's answer with quiet satisfaction. Named the wayhouse's position on the sluice-road above the Wet Meadows without prompting, and the fever-child case that showed the real need. The geography places her exactly where travelers heading upstream would pass through.",
-        "[d2] Had the grace to look at the seedling beds while Mara gave her read — she understands she is in the middle of something larger and does not press."
+        "[d2] Had the grace to look at the seedling beds while Mara gave her read — she understands she is in the middle of something larger and does not press.",
+        "[d2] Named her departure time as tonight and extended the open invitation to walk the sluice-road together by moonlight — an hour and a half to two hours up to the wayhouse."
       ],
       "knownFacts": [
         "A man arrived at the wayhouse eleven days ago with a properly cleaned thigh wound. It closed. He walks the court now.",
@@ -546,12 +532,12 @@
       "gender": "woman",
       "pronouns": "she/her",
       "age": 44,
-      "statusNote": "Standing at the garden gate, waiting for departure timing to be settled.",
+      "statusNote": "At Mara's garden gate, ready to depart tonight for the pass-road wayhouse.",
       "lastSeen": {
         "locationId": "gen-mara-wells-store",
         "day": 2
       },
-      "met": 4
+      "met": 5
     }
   },
   "placeMemory": {
@@ -889,7 +875,7 @@
         "locationId": "gen-mara-wells-store"
       }
     ],
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 6,
     "recentOffers": [
       {
         "thing": "Edvar Crane, waiting at the mill entrance with three weeks of water-reading behind him",
@@ -4888,16 +4874,16 @@
   "itemReclaimVersion": 1,
   "nameRepairVersion": 1,
   "tendencies": {
-    "generous": 4.175340869709625,
-    "social": 6.128919117479621,
-    "cerebral": 19.78722974506979,
-    "cautious": 15.850054680230283,
-    "strategic": 14.785846412578254,
-    "carousing": 0.9289989855552703,
-    "risky": 0.46566365190740355,
-    "ruthless": 1.0620510389636024,
-    "patient": 0.6502471642142047,
-    "craft": 0.8375915934997556
+    "generous": 4.070957347966884,
+    "social": 5.975696139542631,
+    "cerebral": 19.292549001443046,
+    "cautious": 15.453803313224526,
+    "strategic": 15.416200252263797,
+    "carousing": 0.9057740109163885,
+    "risky": 0.45402206060971845,
+    "ruthless": 1.0354997629895124,
+    "patient": 0.6339909851088495,
+    "craft": 0.8166518036622618
   },
   "aptitudes": [
     "strategist",
@@ -4906,11 +4892,11 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 68,
+  "actionCount": 69,
   "bondLogFrom": null,
   "teachers": {},
   "regionsKnown": {
-    "valley": 29
+    "valley": 30
   },
   "company": [],
   "forkChoices": {},
@@ -5094,8 +5080,8 @@
   "bands": [],
   "_silasGrantsRevoked": true,
   "reconcileVersion": 65,
-  "updatedAt": 1789749075226,
-  "rev": 53,
+  "updatedAt": 1789749258506,
+  "rev": 54,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -5108,7 +5094,7 @@
   "featureOffers": [],
   "_pinsInitialized": true,
   "_opUnknown": {
-    "sceneSummary": 29
+    "sceneSummary": 30
   },
   "_applyFailures": null,
   "sessions": [
@@ -5123,10 +5109,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-09-18T16:09:20.587Z",
-      "lastAt": "2026-09-18T16:31:15.210Z",
+      "lastAt": "2026-09-18T16:34:18.499Z",
       "startDay": 80,
       "endDay": 80,
-      "beats": 4
+      "beats": 5
     }
   ],
   "_debtReceipts": [],
@@ -5151,7 +5137,7 @@
     "practical": 1,
     "negotiate": 3,
     "help": 2,
-    "plan": 1,
+    "plan": 2,
     "rapport": 2,
     "calm": 2,
     "craft": 1
@@ -5163,11 +5149,11 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 26,
-    "choices": 26,
+    "sceneSummary": 27,
+    "choices": 27,
     "questUpdates": 20,
-    "scene": 26,
-    "npcUpdates": 22,
+    "scene": 27,
+    "npcUpdates": 23,
     "placeUpdates": 8,
     "codexUpdates": 20,
     "timeOps": 21,
@@ -5183,7 +5169,7 @@
     "moveTo": 2,
     "_engineClosedScene": 1
   },
-  "_opTurns": 26,
+  "_opTurns": 27,
   "_opCountingSince": "2026-09-15T23:58:48.348Z",
   "gallery": [
     {

@@ -20450,6 +20450,58 @@ console.log("\n── §283 · one person, one answer, every door ──");
     && /contributionsOf\(p, \{ evidence: true \}\)/.test(rd("engine/holdings.js")));
 }
 
+// ⛔ CCODE-403 — A CRAFT THE CONTENT CALLS COMPANION-TAUGHT RIDES THE BOND, AND EIGHT OF NINE DID NOT.
+// ⚑ `companionTaught: true` is authored on 9 crafts and sat on the field atlas's DARK list — no reader anywhere. The engine's
+// mechanism for exactly this (CCODE-199) keys on `progression: "stage"`, and only ONE of the nine says so. The other eight — whose own
+// descriptions are the companion DOING the thing: "Coil performs the correct procedure", "Bristle tells you what he can smell", "Aevi
+// spreads thin around your sleep" — were ordinary purchasable crafts, buyable with a skill point by somebody who does not travel with
+// them. ⚠️ AND THE EXISTING GATE COULD NOT SEE IT: `content_ci` asks whether a STAGE craft's teacher resolves, which only ever looks at
+// crafts already declaring `progression: "stage"`. The eight were outside the `if` and were never asked about — so this section asks
+// about the DECLARED population instead, and a tenth companion craft is covered the day it is authored.
+console.log("\n── §284 · a companion's craft rides the bond ──");
+{
+  const CO284 = await import("../engine/companions.js");
+  const PR284 = await import("../engine/progression.js");
+  const { loadContentHeadless: lch284 } = await import("./headless_content.mjs");
+  const C284 = await lch284();
+  const declared = Object.values(C284.abilities || {}).filter(a => a?.companionTaught);
+  const unresolved = declared.filter(a => { const cid = CO284.stageTaughtBy(a); return !(cid && (C284.companions || {})[cid]); });
+  check("§284: ⛔ EVERY CRAFT THE CONTENT DECLARES COMPANION-TAUGHT RESOLVES TO A REAL COMPANION — asked of the DECLARED population, not of the ones that already said `stage`, which is how eight of nine hid from the gate that existed",
+    declared.length >= 9 && unresolved.length === 0,
+    unresolved.map(a => a.id).join(", ") || `${declared.length} declared, all resolve`);
+  check("§284: ⛔ …AND A SKILL POINT CANNOT BUY ONE, for every one of them — the companion is a relationship, not a skill, so a point spent here would be a point burned in silence",
+    declared.every(a => {
+      const r = PR284.rankUpAbility({ abilities: [{ abilityId: a.id, level: 1 }], skillPoints: 9 }, a.id, C284.rules, { catalog: C284.abilities });
+      return r && r.ok === false && /bond/.test(String(r.why));
+    }), JSON.stringify(PR284.rankUpAbility({ abilities: [{ abilityId: declared[0]?.id, level: 1 }], skillPoints: 9 }, declared[0]?.id, C284.rules, { catalog: C284.abilities })));
+  // ⚠️ THE PACK'S OWN WORD IS NEVER OVERWRITTEN — the declaration only fills a gap
+  check("§284: ⚠️ an authored `progression` still wins — the declaration fills a gap, it does not overrule the pack (the one craft that always said `stage` still says it)",
+    C284.abilities?.the_attended_end?.progression === "stage"
+    && /\.\.\.\(a\.companionTaught && !a\.progression \? \{ progression: "stage" \} : \{\}\),/.test(rd("engine/state.js")));
+  // ⛔ AND THE RANK IS THE BOND'S, ON THE REAL SAVES — idempotent, because it runs at every load
+  const fs284 = await import("node:fs");
+  const moves284 = []; let passes = 0, idempotent = 0;
+  for (const dir of fs284.readdirSync(join(root, "characters"))) {
+    let inner = [];
+    try { inner = fs284.readdirSync(join(root, "characters", dir)); } catch { continue; }
+    for (const f of inner.filter(x => x.endsWith(".json"))) {
+      let c = null;
+      try { const j = JSON.parse(fs284.readFileSync(join(root, "characters", dir, f), "utf8")); c = j.character || j.data || j; } catch { continue; }
+      if (!(c.abilities || []).length) continue;
+      passes++;
+      const first = CO284.syncStageTaughtRanks(c, C284.abilities, C284.companions, C284.rules);   // on a COPY in memory
+      const second = CO284.syncStageTaughtRanks(c, C284.abilities, C284.companions, C284.rules);
+      if (!second.length) idempotent++;
+      for (const m of first) moves284.push(`${c.name}: ${m.name} ${m.from}→${m.to}`);
+    }
+  }
+  check("§284: ⛔ …AND THE RANK THE BOND HAS EARNED IS THE RANK THEY HOLD — synced on every real save and IDEMPOTENT, because this runs at every load and a repair that moves something twice is not a repair",
+    passes > 0 && idempotent === passes, `${idempotent} of ${passes} saves settle in one pass · moves: ${moves284.join(" · ") || "none"}`);
+  check("§284: ⛑ …and the sync still follows the bond BOTH ways — a relationship that cools takes the craft's depth with it, which is what 'the bird's craft, lent to you' means and is not softened here",
+    /IT FOLLOWS THE BOND BOTH WAYS/.test(rd("engine/companions.js"))
+    && /moved\.push\(\{ abilityId: owned\.abilityId, name: ab\.name, from: owned\.level, to: want \}\);/.test(rd("engine/companions.js")));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

@@ -581,6 +581,22 @@ export async function loadContent() {
     // it, so both are kept and each question asks the field that can answer it.
     ...(pack.powerSystem ? { packSystem: pack.powerSystem } : {}),
     rankProgression: a.rankProgression || "use",
+    // ⛔ CCODE-403 — A CRAFT THE CONTENT CALLS COMPANION-TAUGHT RIDES THE BOND, AND EIGHT OF NINE DID NOT.
+    //
+    // ⚑ MEASURED: `companionTaught: true` is authored on 9 crafts in `companion_taught.json` and was on the field atlas's DARK list —
+    // no reader anywhere. The engine's mechanism for exactly this (CCODE-199: `stageTaughtBy` → `stageTaughtRank` → `canRankUp`
+    // refusing to sell it) keys on `progression: "stage"`, and only ONE of the nine says that. So eight crafts whose own descriptions
+    // are the companion DOING the thing — "Coil performs the correct procedure", "Bristle tells you what he can smell", "Aevi spreads
+    // thin around your sleep" — were ordinary purchasable crafts, buyable with a skill point by somebody who does not travel with them.
+    //
+    // ⚠️ AND THE GATE COULD NOT SEE IT: `content_ci` checks that a stage craft's teacher resolves, which is a check that only ever
+    // looks at crafts already declaring `progression: "stage"`. The eight were outside the `if`, so they were never asked about.
+    //
+    // ⛔ WHY HERE AND NOT IN `stageTaughtBy`: six separate readers branch on `progression === "stage"` (companions ×3, progression.js,
+    // app.js ×2). Teaching one of them about `companionTaught` would leave the other five disagreeing, which is worse than the bug.
+    // The declaration becomes the mechanism once, at assembly, where every reader sees the same craft. ⚠️ An authored `progression`
+    // still wins — the pack's own word is never overwritten.
+    ...(a.companionTaught && !a.progression ? { progression: "stage" } : {}),
     nativeOrCombination: a.nativeOrCombination || null,
     combinationAxis: a.combinationAxis ?? null,
     rankThresholds: a.rankThresholds || { rank1: "given", rank2: "practiced_use", rank3: "defining_moment" }

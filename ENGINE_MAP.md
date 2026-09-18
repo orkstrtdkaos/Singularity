@@ -10,7 +10,7 @@
 
 - **depends on / depended on by** — static `import` statements. Complete: `app.js` has zero dynamic imports.
 - **reach** — transitive closure of *depended on by*. `app.js` counts once if reachable at all, directly or through a chain.
-- **content it reads** — literal `*.json`/`*.md` paths, `CONTENT.*` keys, and content-schema fields harvested from the real location and NPC corpus. **Excluded:** field names that collide with JS members (`map`, `name`, `id`, …) and fields ≥9 modules read, which discriminate nothing. 57 fields qualify.
+- **content it reads** — literal `*.json`/`*.md` paths, `CONTENT.*` keys, and content-schema fields harvested from the real location and NPC corpus. **Excluded:** field names that collide with JS members (`map`, `name`, `id`, …) and fields ≥9 modules read, which discriminate nothing. 58 fields qualify.
 - **GM verbs** — from `applyTurn`'s dispatch in `app.js`, *not* from imports: each `turn.<verb>` handler block is walked and the verb attributed to whichever module owns the functions called inside it.
 
 | module | purpose | player surface | what makes it fire | exports | depended on by | reach | content it reads | GM verbs |

@@ -39,8 +39,8 @@ file is replaced.**
 
 | bucket | n | means |
 |---|---|---|
-| ✅ **READ** | **100** | a play-path file names it outside a comment |
-| ⛔ **DARK** | **16** | **no literal reader anywhere** — see the four lies below |
+| ✅ **READ** | **101** | a play-path file names it outside a comment |
+| ⛔ **DARK** | **15** | **no literal reader anywhere** — see the four lies below |
 | ⚠️ **CI-ONLY** | **2** | the only consumer is a test. **That is a real consumer for correctness and not one for play** |
 | ⚠️ **COLLISION** | **0** | the name is live, but on a *different owner* |
 
@@ -714,7 +714,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `sectFlavour` | 12 | `root`×12 | ✅ READ | `progression.js` |
 | `interceptDamage` | 11 | `tree`×11 | ✅ READ | `battle_turn.js`, `intercept.js` |
 | `powerMix` | 10 | `root`×10 | ⛔ DARK | — |
-| `companionTaught` | 9 | `root`×9 | ⛔ DARK | — |
+| `companionTaught` | 9 | `root`×9 | ✅ READ | `state.js` |
 | `companionId` | 9 | `root`×9 | ✅ READ | `companionlives.js`, `companions.js`, `evolution.js` |
 | `antisoakImposed` | 8 | `mechanic`×2 `tree`×6 | ✅ READ | `capabilities.js`, `skill_battle.js` |
 | `namedCurrent` | 7 | `root`×7 | ⛔ DARK | — |

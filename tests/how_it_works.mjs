@@ -20566,9 +20566,14 @@ console.log("\n── §285 · recruiting into a unit ──");
 
   // ⛑ 6 · AND THE THREE READERS THAT HAD NO CALLER NOW HAVE ONE, at the WORK bar rather than the travelling one
   const A285 = rd("app.js").replace(/\r\n/g, "\n");
+  // ⚠️ AND ASSERTED AS THE RULE: the three figures are COMPUTED BY THE ENGINE, from a unit whose contingents have been RESOLVED.
+  // My first cut pinned `unitComposition(u.unit)` as a literal and went red the hour a legion needed `u.resolved` — the third gate of
+  // mine this session to measure the expression instead of the rule. What matters is that no figure is composed for the panel, and
+  // that a unit which owns no contingents of its own still reports its people (CCODE-405).
   check("§285: ⛑ the unit's worth, make-up and GAPS are on the screen — `unitComposition` and `bandGaps` had no caller outside these tests, and every figure shown is computed by the engine rather than composed for the panel",
-    /const comp = unitComposition\(u\.unit\);/.test(A285) && /const gaps = bandGaps\(u\.unit, \{ cfg \}\);/.test(A285)
-    && /const thr = bandThreat\(u\.unit, \{ cfg \}\);/.test(A285));
+    /const comp = unitComposition\(u\.\w+\);/.test(A285) && /const gaps = bandGaps\(u\.\w+, \{ cfg \}\);/.test(A285)
+    && /const thr = bandThreat\(u\.\w+, \{ cfg \}\);/.test(A285)
+    && !/unitComposition\(u\.unit\)/.test(A285));   // ⛔ never the STORED unit: a legion's people are in its parts
   check("§285: ⛔ …and the ask uses the WORK bar, not the travelling one — SPEC_hold_costs §5: 'Bren Thalle is two dry seasons behind with two children — she does not need to be devoted to you to take paid work'",
     /\.filter\(\(\[id, n\]\) => !standing\.has\(id\) && canBeAskedToWork\(\{ \.\.\.n, id \}\)\)/.test(A285)
     && /const does = contributionsOf\(\{ \.\.\.n, id \}, \{ evidence: true \}\);/.test(A285));
@@ -20576,6 +20581,119 @@ console.log("\n── §285 · recruiting into a unit ──");
     /function raiseABand\(\)/.test(A285) && /id="band-raise-new"/.test(A285)
     && /const rn404 = document\.getElementById\("band-raise-new"\)/.test(A285)
     && !/A band is raised in play/.test(A285));
+}
+
+// ⛔ CCODE-405 — THE LEGION, on Erik's ruling: "They keep their identity. And they gain a legion tag... which legion are they in.
+// Where is the legion located... is it camped or dispersed to forage in the region… Soldiers cost to call together for a campaign or
+// mission... but you should be able to build the legion (identify who and how many from where) without incurring the cost."
+// ⛑ The container was already decided by `fellowship.js`'s header and deliberately left unbuilt: a legion is a UNIT whose contingents
+// are its parts' contingents, with `formedFrom` naming them. `unitsOf` has carried `formedFrom` since, marked EMPTY TODAY.
+console.log("\n── §286 · the legion ──");
+{
+  const M286 = await import("../engine/melee.js");
+  const F286 = await import("../engine/fellowship.js");
+  const mk286 = () => [
+    { id: "six", name: "The Six", contingents: [{ n: 6, quality: 2, does: ["HARM", "PROTECT"], npcId: "pell", what: "Pell" }], condition: "fresh", losses: 0 },
+    { id: "hands", name: "The Hands", contingents: [{ n: 10, quality: 1, does: ["HARM", "MARTIAL"], what: "raised at the post" }], condition: "fresh", losses: 0 },
+    { id: "riders", name: "Outriders", contingents: [{ n: 4, quality: 2, does: ["MOVE", "KNOW"] }], condition: "fresh", losses: 0 },
+  ];
+  const formed = M286.formLegion(mk286(), { id: "first", name: "The First", from: ["six", "hands"], day: 20 });
+  const leg = formed.bands.find(b => b.id === "first");
+
+  // ⛔ 1 · THEY KEEP THEIR IDENTITY, AND THEY GAIN THE TAG
+  check("§286: ⛔ THE PARTS KEEP THEIR PEOPLE AND GAIN THE LEGION TAG — Erik's 'which legion are they in': the bands still hold their own contingents and the legion holds NONE of its own, because two copies of one contingent double-count every head in every clash",
+    formed.ok
+    && formed.bands.filter(b => b.inLegion === "first").map(b => b.id).join(",") === "six,hands"
+    && formed.bands.find(b => b.id === "six").contingents.length === 1
+    && !leg.contingents
+    && leg.formedFrom.join(",") === "six,hands",
+    JSON.stringify({ tagged: formed.bands.filter(b => b.inLegion).map(b => b.id), legionOwn: leg.contingents ?? null }));
+
+  // ⛔ 2 · AND IT READS THROUGH THEM — every strength reader, unchanged, which is what the design claimed
+  const res = M286.resolvedUnit(formed.bands, leg);
+  check("§286: ⛔ A LEGION READS THROUGH ITS PARTS — `bandStrength`, `bandCan` and `bandGaps` answer for it without one of them changing a line, which is exactly what `fellowship.js` claimed and is worth holding it to",
+    M286.bandStrength(res, {}).count === 16
+    && M286.bandCan(res).sort().join(",") === "HARM,MARTIAL,PROTECT"
+    && M286.bandGaps(res, {}).map(g => g.missing).sort().join(",") === "KNOW,RESTORE",
+    JSON.stringify({ head: M286.bandStrength(res, {}).count, can: M286.bandCan(res) }));
+  check("§286: ⛔ …AND ITS PEOPLE ARE NOT LISTED TWICE. The aggregate is resolved; the ROSTER still walks the stored contingents, so Pell stands under her band and not again under the legion she is in",
+    (() => { const c = { name: "T", bands: formed.bands };
+      const rows = [...F286.poolRows(c, {}), ...F286.atSideRows(c, {})];
+      return rows.length === 3 && !rows.some(r => r.unitId === "first"); })(),
+    JSON.stringify([...F286.poolRows({ name: "T", bands: formed.bands }, {})].map(r => `${r.name || r.what}@${r.unitId}`)));
+  check("§286: …and what you COMMAND is the top-level units — a legion of two bands beside one loose band is two commands, not four",
+    /^two commands/.test(F286.rosterLine({ name: "T", bands: formed.bands }, {})),
+    F286.rosterLine({ name: "T", bands: formed.bands }, {}));
+
+  // ⛔ 3 · THE REFUSALS, EACH SAID
+  check("§286: ⛔ a legion needs two or more bands, cannot take a band that already stands in one, and cannot be formed FROM a legion — each refused with a reason a player can act on",
+    /two or more/.test(String(M286.formLegion(formed.bands, { id: "x", from: ["riders"] }).why))
+    && /already stand/.test(String(M286.formLegion(formed.bands, { id: "y", from: ["six", "riders"] }).why))
+    && /cannot be formed from another legion/.test(String(M286.formLegion(formed.bands, { id: "z", from: ["first", "riders"] }).why)),
+    JSON.stringify([M286.formLegion(formed.bands, { id: "x", from: ["riders"] }).why,
+      M286.formLegion(formed.bands, { id: "z", from: ["first", "riders"] }).why]));
+
+  // ⛔ 4 · A UNIT ON PAPER IS NOWHERE AND FREE — Erik: "build the legion… without incurring the cost"
+  check("§286: ⛔ BUILDING IT COSTS NOTHING AND IT IS NOWHERE — a unit that has not been called is a plan: no place, no posture, nothing paid; and a posture cannot be given to a plan, because saying 'camped' of it would describe a mechanism that is not running",
+    leg.called === null && leg.posture === null && leg.locationId === null
+    && /not been called together/.test(String(M286.setUnitPosture(formed.bands, "first", "camped").why))
+    && /on paper/.test(F286.unitLine(F286.unitsOf({ bands: formed.bands }).find(u => u.id === "first"))),
+    F286.unitLine(F286.unitsOf({ bands: formed.bands }).find(u => u.id === "first")));
+
+  // ⛔ 5 · CALLING COSTS, AND THE PRICE SAYS WHERE IT CAME FROM
+  const fallback = M286.callCostOf(formed.bands, leg, { cfg: {}, wagePerHand: 3 });
+  const authored = M286.callCostOf(formed.bands, leg, { cfg: { callCostPerHead: 7 }, wagePerHand: 3 });
+  check("§286: ⛔ CALLING THEM TOGETHER COSTS PER HEAD, AND THE PRICE SAYS WHOSE NUMBER IT IS — Erik ruled that it costs and gave no number, so an unauthored dial falls back to the ALREADY AUTHORED `wagePerHand` and says so; a martial rule overrules it with one number",
+    fallback.heads === 16 && fallback.perHead === 3 && fallback.total === 48 && fallback.authored === false && /no martial rule/.test(fallback.why)
+    && authored.perHead === 7 && authored.total === 112 && authored.authored === true,
+    JSON.stringify({ fallback, authored }));
+  const called = M286.callUnit(formed.bands, "first", { day: 20, locationId: "millbrook", posture: "dispersed", paid: 48 });
+  check("§286: ⛔ …AND THE CALL IS WHERE THE PLACE AND THE POSTURE ARRIVE — Erik's 'where is the legion located… camped or dispersed to forage'; a posture the rules do not name is refused, and calling twice is refused",
+    called.ok && called.unit.posture === "dispersed" && called.unit.locationId === "millbrook" && called.unit.called.paid === 48
+    && /camped or dispersed/.test(String(M286.setUnitPosture(called.bands, "first", "entrenched").why))
+    && /already called/.test(String(M286.callUnit(called.bands, "first", {}).why))
+    && /dispersed to forage/.test(F286.unitLine(F286.unitsOf({ bands: called.bands }).find(u => u.id === "first"))),
+    F286.unitLine(F286.unitsOf({ bands: called.bands }).find(u => u.id === "first")));
+
+  // ⛔ 6 · LOSSES LAND ON THE PARTS, EACH UNDER ITS OWN GAPS
+  const bled = M286.bloodUnit(called.bands, "first", -0.5, { cfg: {} });
+  const six = bled.bands.find(b => b.id === "six"), hands = bled.bands.find(b => b.id === "hands");
+  const lostSix = 6 - M286.bandStrength(six, {}).count, lostHands = 10 - M286.bandStrength(hands, {}).count;
+  // ⛔ ERIK, MID-BUILD, CORRECTING ME: "a shield wall unit should be able to protect other units. Just like a band." My first cut
+  // handed the tide to each part separately, so a shield wall band protected nobody but itself and bringing one bought the legion
+  // nothing. THE FORMATION'S GAPS GOVERN — one roll for the legion, exactly as a band takes one roll for its contingents.
+  const wallOf = (hasWall) => {
+    const b = M286.formLegion([
+      { id: "wall", name: "Shieldwall", contingents: [{ n: 6, quality: 2, does: hasWall ? ["HARM", "PROTECT"] : ["HARM"] }], condition: "fresh", losses: 0 },
+      { id: "line", name: "The Hands", contingents: [{ n: 10, quality: 1, does: ["HARM", "MARTIAL"] }], condition: "fresh", losses: 0 },
+    ], { id: "L", name: "The Legion", from: ["wall", "line"], day: 1 }).bands;
+    return M286.bloodUnit(b, "L", -0.5, { cfg: {} });
+  };
+  const withWall = wallOf(true), without = wallOf(false);
+  const handsLoss = (r) => 10 - M286.bandStrength(r.bands.find(b => b.id === "line"), {}).count;
+  check("§286: ⛔ A SHIELD WALL UNIT PROTECTS THE OTHER UNITS — Erik's ruling, and the correction to my first cut: the loss rate is read ONCE from the resolved formation, so one part's PROTECT lifts the unwarded 1.4× off every band in the legion, and the band that has no shieldwall of its own bleeds less because another band brought one",
+    withWall.lost < without.lost && handsLoss(withWall) < handsLoss(without)
+    && without.gaps.some(g => g.missing === "PROTECT") && !withWall.gaps.some(g => g.missing === "PROTECT"),
+    JSON.stringify({ withWall: withWall.lost, without: without.lost, handsWith: handsLoss(withWall), handsWithout: handsLoss(without) }));
+  check("§286: ⛔ …AND THE PARTS STILL KEEP THEIR OWN CONDITION, which is the other half of 'they keep their identity' — the pooled loss is apportioned by head-count and each band's condition is read from its OWN cumulative losses, so it carries what it has been through out of the campaign",
+    bled.ok && lostSix > 0 && lostHands > 0 && bled.lost === lostSix + lostHands
+    && [six.condition, hands.condition].every(c => ["fresh", "blooded", "worn", "broken"].includes(c)),
+    JSON.stringify({ six: `${lostSix}/6 → ${six.condition}`, hands: `${lostHands}/10 → ${hands.condition}`, total: bled.lost }));
+  check("§286: ⛔ …AND A LEGION IS NEVER BROKEN ON CONTACT BY ITS OWN EMPTINESS — routed through `bloodUnit`, because `bloodBand` reads a head-count from the contingents and a legion has none of its own: CCODE-279's defect one scale up ('new representation, consumer still reading the old field')",
+    bled.bands.find(b => b.id === "first").condition !== "broken"
+    && /bloodUnit\(character\.bands \|\| \[\], band\.id, c\.tide/.test(rd("app.js")),
+    bled.bands.find(b => b.id === "first").condition);
+  check("§286: …and the legion's condition is the WORST of its parts, summarised rather than stored twice",
+    bled.bands.find(b => b.id === "first").condition === hands.condition,
+    `${bled.bands.find(b => b.id === "first").condition} vs parts ${six.condition}/${hands.condition}`);
+
+  // ⛔ 7 · AND TAKING IT APART RELEASES THEM EXACTLY AS THEY WERE
+  const apart = M286.disbandLegion(bled.bands, "first");
+  check("§286: ⛔ TAKING THE LEGION APART RELEASES THEM WHOLE — their people, losses and condition were never moved, so there is nothing to restore; the tag is cleared and the legion is gone",
+    apart.ok && !apart.bands.some(b => b.inLegion) && !apart.bands.some(b => b.id === "first")
+    && apart.bands.find(b => b.id === "hands").losses === hands.losses
+    && apart.bands.find(b => b.id === "hands").condition === hands.condition,
+    JSON.stringify(apart.bands.map(b => `${b.id}:${b.condition}/${b.losses}`)));
 }
 
 /* ══════════ REPORT ══════════ */

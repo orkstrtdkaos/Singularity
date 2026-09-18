@@ -136,7 +136,7 @@ import { clearOnRest, applyCondition, activeConditions } from "./engine/conditio
 // "show the purse as a PERMANENT ROW, show a price as a number when a trade is on the table… The trader
 // SAYS 'ten for those, and I'm being generous'; the interface SAYS 10. Both." A purse the player cannot
 // see is the same failure as one that does not exist.
-import { ensurePurse, purseLine, worthOf, applyExchangeOps, purseBand } from "./engine/purse.js";
+import { ensurePurse, purseLine, worthOf, applyExchangeOps, purseBand, debit, canSettle } from "./engine/purse.js";   // CCODE-405: calling a unit together is paid for
 import { bargainOutcome } from "./engine/economy.js";
 import { capabilityMenu, resolveTier } from "./engine/capabilities.js";
 // ⛔ CCODE-239 — PROJECTS TICK. `engine/projects.js` shipped green with all six exports reachable only
@@ -147,7 +147,9 @@ import { holdOpen, releaseHold, slowSink, canReach, resolveRetrieval } from "./e
 import { alliesOf } from "./engine/combatants.js"; // CCODE-276: the roster the party block renders
 import { championsFor, resolveChampion, creditChampion, championLine, sendingIsGrim } from "./engine/champion.js"; // SNG-587: somebody else takes the fight
 // ⛔ CCODE-404 (Erik) — `addContingent` and `musteredFrom` are new; `unitComposition` and `bandGaps` had NO caller outside the tests.
-import { commandSlots, bringForward, lineSplit, canRaiseBand, raiseBand, bandStrength, bandThreat, bloodBand, recoverBand, legionClash, addContingent, musteredFrom, unitComposition, bandGaps } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
+// ⛔ CCODE-405 (Erik's legion ruling): formed of bands that keep their identity, placed and postured once CALLED, and free until then.
+// ⚠️ ONE LINE ON PURPOSE — `import_integrity` reads an import statement per line, and a comment inside the braces hides what follows it.
+import { commandSlots, bringForward, lineSplit, canRaiseBand, raiseBand, bandStrength, bandThreat, bloodBand, recoverBand, legionClash, addContingent, musteredFrom, unitComposition, bandGaps, formLegion, disbandLegion, callCostOf, callUnit, standDown, setUnitPosture, bloodUnit, resolvedUnit, UNIT_POSTURES } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
 import { groupCapability, loadBearing } from "./engine/group.js";   // CCODE-317/322: what your line covers, and who holds it alone
 import { characterPower, threatBand } from "./engine/threat.js"; // CCODE-52: built power sets the mean the encounter pool revolves around
 import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine, FRAME_FREEFORM_CUE } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c). SNG-246 Fix D: playerReceiptLine = the mechanical receipt SHOWN to the player
@@ -162,7 +164,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.66";
+const APP_VERSION = "2.0.68";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8244,8 +8246,11 @@ function applyTurn(turn, resolution, playerWords = null) {
           { heroSwing: Math.max(-1, Math.min(1, Number(op.heroSwing) || 0)), cfg: meleeCfg() });
         // ⚠️ THE CLASH DECIDES THE BATTLE; `bloodBand` decides what it did to the people who fought it. Two
         // results, because a won battle that costs nobody anything is a number going up.
-        const b = bloodBand(band, c.tide, { cfg: meleeCfg() });
-        character.bands = (character.bands || []).map(x => x.id === band.id ? b.band : x);
+        // ⛔ CCODE-405 — ROUTED THROUGH `bloodUnit`, WHICH KNOWS WHO ACTUALLY HAS THE PEOPLE. A legion owns no contingents, so
+        // `bloodBand` on one would have found a head-count of zero and broken it on contact — the same defect CCODE-279's own comment
+        // records ("new representation, consumer still reading the old field"). Each PART bleeds under its own gaps instead.
+        const b = bloodUnit(character.bands || [], band.id, c.tide, { cfg: meleeCfg() });
+        if (b.ok) character.bands = b.bands;
         character._bandNotes = [...(character._bandNotes || []).slice(-2), `${c.outcome} — ${b.why}`];
       }
     }
@@ -14797,6 +14802,75 @@ function raiseABand() {
   saveCharacter(character); renderBandsTab();
 }
 
+/** ⛔ CCODE-405 (Erik) — "They keep their identity. And they gain a legion tag... which legion are they in." FORMING ONE, which
+ *  `fellowship.js` designed and deliberately did not build: "an engine export with no caller is a test-only export… and a panel that
+ *  offers to form a legion before the forming exists is exactly the message-claiming-a-mechanism defect this project keeps catching."
+ *  ⚑ It costs nothing, on his ruling — building the legion is identifying who and how many from where. */
+function showLegionFormPicker() {
+  document.getElementById("help-pop")?.remove();
+  const free = unitsOf(character).filter(u => !u.inLegion && !u.isLegion);
+  if (free.length < 2) { alert("A legion is formed from two or more bands standing on their own."); return; }
+  const pop = document.createElement("div");
+  pop.id = "help-pop"; pop.className = "help-overlay";
+  pop.innerHTML = `<div class="help-card" role="dialog" aria-label="Form a legion">
+    <div class="whois-head">Which bands form it?</div>
+    ${free.map(u => `<label class="codex-f" style="display:flex;gap:8px;align-items:baseline">
+      <input type="checkbox" class="legion-part" value="${esc(u.id)}">
+      <strong>${esc(u.name)}</strong> <span class="hint">${esc(unitLine(u))}</span></label>`).join("")}
+    <div class="codex-f"><label class="hint">Called <input type="text" id="legion-name" placeholder="the First Legion" style="width:60%"></label></div>
+    <div class="help-foot">
+      <span class="hint">They keep their own people, losses and condition — and each bleeds under its own gaps when the legion fights.</span>
+      <button class="btn" id="legion-go">Form it</button>
+      <button class="btn secondary" id="help-close">Cancel</button>
+    </div></div>`;
+  document.body.appendChild(pop);
+  const close = () => pop.remove();
+  pop.addEventListener("click", ev => { if (ev.target === pop) close(); });
+  document.getElementById("help-close").onclick = close;
+  document.getElementById("legion-go").onclick = () => {
+    const picked = [...pop.querySelectorAll(".legion-part")].filter(c => c.checked).map(c => c.value);
+    const name = (document.getElementById("legion-name").value || "").trim();
+    if (!name) { alert("It needs a name to be called by."); return; }
+    const id = `legion-${name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 32) || Date.now().toString(36)}`;
+    const r = formLegion(character.bands || [], { id, name: name.slice(0, 60), from: picked, day: absoluteWorldDay() });
+    if (!r.ok) { alert(r.why); return; }
+    close();
+    character.bands = r.bands;
+    queueHoldingEvent(character, `${name} is formed of ${picked.length} bands — they keep their own colours.`);
+    saveCharacter(character); renderBandsTab();
+  };
+}
+
+/** ⛔ CCODE-405 — "Soldiers cost to call together for a campaign or mission." THE MOMENT A PLAN BECOMES A UNIT IN THE FIELD: it is
+ *  paid for, it is somewhere, and it takes a posture. ⚠️ THE PRICE IS SAID BEFORE IT IS TAKEN, and where the price came from is said
+ *  too — Erik ruled that it costs and gave no number, so an unauthored dial must not pass itself off as a decision anybody made. */
+async function callUnitTogether(unitId) {
+  const u = unitsOf(character).find(x => x.id === unitId);
+  if (!u) return;
+  const wage = Number(CONTENT.rules?.economy?.holdStore?.growth?.wagePerHand) || 0;
+  const cur = CONTENT.rules?.economy?.holdStore?.upkeepCurrency || "crystal";
+  const cost = callCostOf(character.bands || [], u.unit, { cfg: meleeCfg(), wagePerHand: wage });
+  if (!cost.heads) { alert("Nobody stands in it yet."); return; }
+  ensurePurse(character);
+  const region = hereRegionId();
+  const can = canSettle(character, cost.total, { currency: cur, regionId: region, economy: CONTENT.rules?.economy || null, worldState: character.worldState || null });
+  if (cost.total > 0 && can && can.ok === false) { alert(`${cost.heads} heads at ${cost.perHead} is ${cost.total} ${cur}${can.why ? ` — ${can.why}` : ""}`); return; }
+  const where = character.currentLocationId || null;
+  const whereName = where ? (CONTENT.locations?.[where]?.name || character.generated?.location?.[where]?.name || where) : "where you stand";
+  // ⚠️ ASKED IN THE SAME BREATH AS THE PRICE, because the posture is the other half of what being called means.
+  const camped = confirm(`Call ${u.name} together at ${whereName}?\n\n${cost.heads} heads × ${cost.perHead} = ${cost.total} ${cur}.\n${cost.authored ? "" : `(${cost.why})\n`}\nOK = make camp · Cancel = disperse to forage the region`);
+  const posture = camped ? "camped" : "dispersed";
+  if (cost.total > 0) {
+    const paid = debit(character, cur, cost.total, { regionId: region });
+    if (paid && paid.ok === false) { alert(paid.why || "It could not be paid."); return; }
+  }
+  const r = callUnit(character.bands || [], unitId, { day: absoluteWorldDay(), locationId: where, posture, paid: cost.total });
+  if (!r.ok) { alert(r.why); return; }
+  character.bands = r.bands;
+  queueHoldingEvent(character, `${u.name} is called together at ${whereName} — ${posture === "dispersed" ? "dispersed to forage" : "camped"}, ${cost.total} ${cur} paid.`);
+  saveCharacter(character); renderBandsTab();
+}
+
 function renderBandsTab() {
   const ladder = CONTENT.rules.subAttributeLadder;
   const day = absoluteWorldDay();
@@ -14844,9 +14918,11 @@ function renderBandsTab() {
   // the rule the holds tab states and the reason that tab shows so little.
   const unitFacts = (u) => {
     const cfg = meleeCfg();
-    const comp = unitComposition(u.unit);
-    const thr = bandThreat(u.unit, { cfg });
-    const gaps = bandGaps(u.unit, { cfg });
+    // ⛔ CCODE-405: `u.resolved` and never `u.unit` — a LEGION owns no contingents of its own, so every one of these three reads the
+    // resolved unit (its own plus every part's). Handing them the stored object reported a legion of sixteen as empty.
+    const comp = unitComposition(u.resolved);
+    const thr = bandThreat(u.resolved, { cfg });
+    const gaps = bandGaps(u.resolved, { cfg });
     if (!comp.bodies) return `<div class="hint">It stands empty — ask someone to join, or raise hands at a place you hold.</div>`;
     return `<div class="codex-f" style="display:flex;gap:10px;align-items:baseline;flex-wrap:wrap">
       <span style="font-variant-numeric:tabular-nums"><strong>${comp.bodies}</strong> ${comp.bodies === 1 ? "stands" : "stand"} in it</span>
@@ -14861,18 +14937,56 @@ function renderBandsTab() {
   // following"), so a character who cannot raise one is told what would change that rather than shown nothing.
   const raise404 = canRaiseBand(character, { cfg: meleeCfg(), renownBand: character.renownBand || null });
 
+  // ⛔ CCODE-405 — WHAT CALLING THEM TOGETHER COSTS, and whether anybody has authored the price. Erik ruled that it costs and did not
+  // give a number, so `callCostOf` falls back to the ALREADY AUTHORED `wagePerHand` and says it is doing so — an unauthored dial that
+  // behaved like a free one is the defect this project keeps finding, and a screen that shows a price without saying where it came
+  // from is the same defect wearing a number.
+  const wagePerHand405 = Number(CONTENT.rules?.economy?.holdStore?.growth?.wagePerHand) || 0;
+  const costOf405 = (u) => callCostOf(character.bands || [], u.unit, { cfg: meleeCfg(), wagePerHand: wagePerHand405 });
+  const upkeepCur405 = CONTENT.rules?.economy?.holdStore?.upkeepCurrency || "crystal";
+  // ⛔ AND WHAT IT IS ALREADY DOING. A called unit stands somewhere in a posture; one on paper is a plan and is nowhere.
+  const standing405 = (u) => {
+    if (!u.called) {
+      const c = costOf405(u);
+      return `<div class="hint">On paper — nobody has been called together, and it costs nothing until they are.
+        ${c.heads ? `Calling them would take <strong>${c.total} ${esc(upkeepCur405)}</strong> (${c.heads} × ${c.perHead})${c.authored ? "" : ` <span class="hint">— ${esc(c.why)}</span>`}` : ""}</div>`;
+    }
+    const where = u.locationId ? (CONTENT.locations?.[u.locationId]?.name || character.generated?.location?.[u.locationId]?.name || u.locationId) : "nowhere named";
+    return `<div class="hint">Called on day ${u.called.day} and paid ${u.called.paid} ${esc(upkeepCur405)} — <strong>${u.posture === "dispersed" ? "dispersed to forage" : "camped"}</strong> at ${esc(where)}.
+      ${u.posture === "dispersed" ? "Spread out, they live off the region and are slower to bring together." : "Concentrated, and fed from what you carry."}</div>`;
+  };
+
   chrome(`<div class="screen" style="max-width:760px">
     ${characterTabBar("bands")}
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">${esc(rosterLine(character, opts))}</h3>
-      ${units.length ? units.map(u => `<div style="margin-top:10px">
-        ${units.length === 1
+      ${units.filter(u => !u.inLegion).length ? units.filter(u => !u.inLegion).map(u => `<div style="margin-top:10px">
+        ${units.filter(x => !x.inLegion).length === 1 && !u.isLegion
           ? `<div class="hint">${esc(unitLine(u))}</div>`
-          : `<div><strong>${esc(u.name)}</strong> <span class="hint">— ${esc(unitLine(u))}</span></div>`}
+          : `<div><strong>${esc(u.name)}</strong>${u.isLegion ? ` <span class="news-near-chip">legion</span>` : ""} <span class="hint">— ${esc(unitLine(u))}</span></div>`}
+        ${standing405(u)}
+        ${u.isLegion ? `<div class="codex-f hint">Formed from ${u.parts.map(p => `<strong>${esc(p.name)}</strong> <span class="hint">(${esc(p.condition)})</span>`).join(", ")} — they keep their own people, their own losses and their own condition.</div>` : ""}
         ${unitFacts(u)}
-        ${[...here.filter(r => r.unitId === u.id), ...pool.filter(r => r.unitId === u.id)].map(rowFor).join("") || `<div class="hint">nobody stands in it</div>`}
+        ${(() => {
+          // ⛔ CCODE-405 — A LEGION'S PEOPLE RENDER UNDER THEIR OWN BAND, INSIDE IT. Caught on the screen: filtering the parts out of
+          // the top-level list (so a legion of two bands would not read as three commands) had made every person in them render
+          // NOWHERE — Pell's row simply vanished. ⚠️ Nesting is also what "they keep their identity" should look like: each band
+          // named, with its own condition, and its own people under it.
+          const rowsFor = (id) => [...here.filter(r => r.unitId === id), ...pool.filter(r => r.unitId === id)].map(rowFor).join("");
+          if (!u.isLegion) return rowsFor(u.id) || `<div class="hint">nobody stands in it</div>`;
+          return u.parts.map(p => `<div style="margin:6px 0 6px 10px;border-left:2px solid var(--line,rgba(255,255,255,0.12));padding-left:8px">
+            <div class="hint"><strong>${esc(p.name)}</strong> — ${esc(p.condition)}</div>
+            ${rowsFor(p.id) || `<div class="hint">nobody stands in it</div>`}</div>`).join("")
+            || `<div class="hint">no bands stand in it</div>`;
+        })()}
         <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:4px">
+          ${u.isLegion ? `<span class="hint">People join its BANDS, not the legion — that is what keeping their identity means.</span>` : `
           <button class="opt" data-band-recruit="${esc(u.id)}" title="Ask someone you know to stand in it — a far lower bar than travelling with you">Ask someone to join…</button>
-          <button class="opt" data-band-muster="${esc(u.id)}" title="Raise hands at a place you hold, up to what it can feed">Raise hands at a hold…</button>
+          <button class="opt" data-band-muster="${esc(u.id)}" title="Raise hands at a place you hold, up to what it can feed">Raise hands at a hold…</button>`}
+          ${u.called
+            ? `${UNIT_POSTURES.filter(p => p !== u.posture).map(p => `<button class="opt" data-unit-posture="${esc(u.id)}" data-posture="${esc(p)}">${p === "dispersed" ? "Disperse to forage" : "Make camp"}</button>`).join("")}
+               <button class="opt" data-unit-stand-down="${esc(u.id)}" title="They go home. What was paid is paid.">Stand them down</button>`
+            : `<button class="opt" data-unit-call="${esc(u.id)}"${u.head ? "" : " disabled"} title="${esc(u.head ? `Gather them where you stand — ${costOf405(u).total} ${upkeepCur405}` : "Nobody stands in it yet")}">Call them together…</button>`}
+          ${u.isLegion ? `<button class="opt" data-legion-disband="${esc(u.id)}" title="The bands return to standing on their own, exactly as they were">Take the legion apart</button>` : ""}
         </div>
         ${u.travelers.map(t => `<div class="codex-f" style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap"><strong style="min-width:130px">${esc(t.name)}</strong><span class="hint">another traveler, who chose to join${t.via ? ` — word came through ${esc(t.via)}` : ""}</span></div>`).join("")}
         ${sentInvitations(sharedInvites, character).filter(i => i.bandId === u.id && i.answer !== "accepted").map(i => `<div class="codex-f hint">Word sent to ${esc(i.toName)} through ${esc(i.carrierName)} — ${i.answer === "declined" ? "the answer came back: not now" : "no answer yet"}</div>`).join("")}
@@ -14880,7 +14994,12 @@ function renderBandsTab() {
       </div>`).join("") : `<p class="hint">Nobody has thrown in with you yet. Someone who has sworn to you stands in a unit whether or not they walk at your side.</p>`}
       <div class="opt-row" style="margin-top:10px;gap:6px;flex-wrap:wrap">
         <button class="opt" id="band-raise-new"${raise404.ready ? "" : " disabled"} title="${esc(raise404.why)}">Raise a new band…</button>
-        <span class="hint">${esc(raise404.ready ? raise404.why : raise404.why)}</span>
+        ${(() => {
+          // ⛔ CCODE-405: two or more bands standing outside a legion is the whole requirement — forming one costs nothing.
+          const free = units.filter(u => !u.inLegion && !u.isLegion);
+          return `<button class="opt" id="legion-form"${free.length >= 2 ? "" : " disabled"} title="${esc(free.length >= 2 ? "Bands keep their own people and gain a legion tag" : "A legion is formed from two or more bands standing on their own")}">Form a legion…</button>`;
+        })()}
+        <span class="hint">${esc(raise404.why)}</span>
       </div>
     </div>
     ${units.length ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">At your side</h3>
@@ -14915,6 +15034,26 @@ function renderBandsTab() {
   for (const b of app.querySelectorAll("[data-band-recruit]")) b.onclick = () => showBandRecruitPicker(b.dataset.bandRecruit);
   for (const b of app.querySelectorAll("[data-band-muster]")) b.onclick = () => showBandMusterPicker(b.dataset.bandMuster);
   const rn404 = document.getElementById("band-raise-new"); if (rn404) rn404.onclick = raiseABand;
+  // ⛔ CCODE-405 — forming, calling, posturing and taking apart. Every refusal is SAID, which is this tab's own rule.
+  const lf405 = document.getElementById("legion-form"); if (lf405) lf405.onclick = showLegionFormPicker;
+  for (const b of app.querySelectorAll("[data-unit-call]")) b.onclick = () => callUnitTogether(b.dataset.unitCall);
+  for (const b of app.querySelectorAll("[data-unit-posture]")) b.onclick = () => {
+    const r = setUnitPosture(character.bands || [], b.dataset.unitPosture, b.dataset.posture);
+    if (!r.ok) { alert(r.why); return; }
+    character.bands = r.bands; saveCharacter(character); renderBandsTab();
+  };
+  for (const b of app.querySelectorAll("[data-unit-stand-down]")) b.onclick = () => {
+    const r = standDown(character.bands || [], b.dataset.unitStandDown);
+    if (!r.ok) { alert(r.why); return; }
+    queueHoldingEvent(character, `${r.unit.name} stands down.`);
+    character.bands = r.bands; saveCharacter(character); renderBandsTab();
+  };
+  for (const b of app.querySelectorAll("[data-legion-disband]")) b.onclick = () => {
+    const r = disbandLegion(character.bands || [], b.dataset.legionDisband);
+    if (!r.ok) { alert(r.why); return; }
+    queueHoldingEvent(character, r.why);
+    character.bands = r.bands; saveCharacter(character); renderBandsTab();
+  };
   for (const b of app.querySelectorAll("[data-band-invite]")) b.onclick = () => showInvitePicker(b.dataset.bandInvite);   // CCODE-360
   const back = document.getElementById("cs-back"); if (back) back.onclick = () => renderCharacterScreen();
 }

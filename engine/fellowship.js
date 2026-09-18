@@ -17,7 +17,7 @@
 // posture is being AT YOUR SIDE. The two are independent, which is why Silas's save read as broken: six sworn, nobody beside him.
 //
 // PURE. Every function reads the character and content and returns data; the writers stay `recruit`/`partCompany` in company.js.
-import { contingentsOf, bandCan, bandStrength } from "./melee.js";
+import { contingentsOf, bandCan, bandStrength, resolvedUnit, legionParts } from "./melee.js";   // CCODE-405: a legion reads through its parts
 import { activeCompany } from "./company.js";
 import { companyPlaces } from "./ladder.js";
 import { derivedLevel } from "./npcsheet.js";
@@ -51,7 +51,8 @@ function unitHead(unit) {
 
 /** Every unit you command, normalised and PLURAL. ⚠️ Returns [] for a character with no bands rather than a fabricated one. */
 export function unitsOf(character) {
-  return arr(character?.bands).filter(b => b && (b.id || b.name)).map(b => ({
+  const all = arr(character?.bands);
+  return all.filter(b => b && (b.id || b.name)).map(b => ({
     id: String(b.id || b.name),
     name: b.name || String(b.id),
     seatId: b.from || null,          // where the unit was raised, and its seat until something says otherwise
@@ -59,10 +60,22 @@ export function unitsOf(character) {
     condition: b.condition || "fresh",
     raisedDay: num(b.raisedDay, null),
     losses: num(b.losses, 0),
-    head: unitHead(b),
-    can: bandCan(b),
-    worth: bandStrength(b, {}),
-    formedFrom: arr(b.formedFrom).map(String),   // ⛔ EMPTY TODAY. A legion is a unit formed FROM units; see the header.
+    // ⛔ CCODE-405 — A LEGION OWNS NO CONTINGENTS, so every derived number here reads the RESOLVED unit: its own plus every part's.
+    // ⚠️ `memberRows` below still walks the STORED contingents, which is what keeps a legion's people from being listed twice — once
+    // under their band and once under the legion they stand in. The aggregate is resolved; the roster is not.
+    head: unitHead(resolvedUnit(all, b)),
+    can: bandCan(resolvedUnit(all, b)),
+    worth: bandStrength(resolvedUnit(all, b), {}),
+    resolved: resolvedUnit(all, b),              // the unit-shaped object a strength/gap reader must be handed
+    formedFrom: arr(b.formedFrom).map(String),   // ⛑ NO LONGER EMPTY: the bands this legion is formed from (CCODE-405)
+    parts: legionParts(all, b).map(p => ({ id: String(p.id), name: p.name || String(p.id), condition: p.condition || "fresh" })),
+    // ⛔ ERIK'S LEGION TAG — "they gain a legion tag... which legion are they in". Set on a band that stands in one, null otherwise.
+    inLegion: b.inLegion ? String(b.inLegion) : null,
+    isLegion: arr(b.formedFrom).length > 0,
+    // ⛔ AND WHERE IT STANDS, which is only a question once it has been CALLED: a unit on paper is a plan and is nowhere.
+    called: b.called || null,
+    posture: b.posture || null,
+    locationId: b.locationId || null,
     // ⛔ CCODE-360: OTHER PLAYERS' CHARACTERS WHO CHOSE TO JOIN — beside the contingents, never among them, so no strength,
     // threat or clash ever counts them.
     travelers: arr(b.travelers).filter(t => t && t.characterId),
@@ -206,7 +219,10 @@ export function rosterLine(character, opts = {}) {
   const people = rows.filter(r => r.kind === "person");
   const hands = rows.filter(r => r.kind === "hands").reduce((a, r) => a + r.n, 0);
   const here = people.filter(r => r.atSide).length;
-  const lead = units.length === 1 ? units[0].name : `${wordFor(units.length)} bands`;
+  // ⛔ CCODE-405: the things you COMMAND are the top-level units — a legion and a band that stands outside one. Counting the parts
+  // as well would report a legion of two bands as three commands.
+  const top = units.filter(u => !u.inLegion);
+  const lead = top.length === 1 ? top[0].name : `${wordFor(top.length)} ${top.some(u => u.isLegion) ? "commands" : "bands"}`;
   const withHands = hands > 0 ? ` and ${wordFor(hands)} hands` : "";
   return `${lead} — ${wordFor(people.length)} sworn${withHands}, ${here ? `${wordFor(here)} here` : "none of them here"}`;
 }
@@ -220,7 +236,10 @@ function wordFor(n) {
  *  from the contingents every render; the stored `count` is never read and never shown. */
 export function unitLine(u) {
   const can = arr(u?.can).length ? arr(u.can).map(f => FAMILY_VERBS[f] || String(f).toLowerCase()).join(", ") : "nothing named yet";
-  return `${wordFor(u?.head)} strong, ${u?.condition || "fresh"} — it ${can}`;
+  // ⛔ CCODE-405 — AND WHETHER IT IS REAL YET. Erik: "you should be able to build the legion… without incurring the cost", so a unit
+  // that has not been called is a PLAN: it is nowhere, it costs nothing, and saying "camped" of it would be a lie about a mechanism.
+  const standing = u?.called ? `${u.posture === "dispersed" ? "dispersed to forage" : "camped"}` : "on paper — not yet called together";
+  return `${wordFor(u?.head)} strong, ${u?.condition || "fresh"}, ${standing} — it ${can}`;
 }
 
 /** ⛔ THE GM'S VIEW, and the reason it lives here: `gm_registry` printed `${b.name} (${b.condition}, ${b.count})` — the stored copy

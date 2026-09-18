@@ -724,6 +724,187 @@ export function bandGaps(band, { cfg = {} } = {}) {
   return gaps;
 }
 
+/* ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+ * CCODE-405 — THE LEGION. Erik's ruling, in his own words: "They keep their identity. And they gain a legion tag... which legion are
+ * they in. Where is the legion located... is it camped or dispersed to forage in the region… Soldiers cost to call together for a
+ * campaign or mission... but you should be able to build the legion (identify who and how many from where) without incurring the cost."
+ *
+ * ⛑ AND THE CONTAINER WAS ALREADY DECIDED, by `fellowship.js`'s own header on his 2026-09-12 ruling: "A legion is a UNIT WHOSE
+ * CONTINGENTS ARE THE CONTINGENTS OF SEVERAL BANDS, with `formedFrom` naming them… I HAVE NOT BUILT THE FORMING." `unitsOf` has
+ * carried `formedFrom` since, marked EMPTY TODAY. So a legion lives in `character.bands` beside the bands — it IS a unit — and
+ * nothing needed a new home.
+ *
+ * ⛔ THE PARTS KEEP THEIR PEOPLE, WHICH IS WHAT "THEY KEEP THEIR IDENTITY" HAS TO MEAN MECHANICALLY. A legion owns NO contingents of
+ * its own; its strength, make-up and gaps are RESOLVED from its parts at read time. That is not a stylistic choice:
+ *   · two copies of one contingent would double-count every head in every clash;
+ *   · and `bloodBand` is pure — it returns a new unit — so losses stored on a legion would never reach the bands that took them.
+ * ⚠️ Therefore losses are apportioned to the PARTS (`bloodUnit`), and each part bleeds under ITS OWN gaps: a band with no shieldwall
+ * loses more inside the legion than the one standing beside it, which is the composition decision surviving at the larger scale.
+ *
+ * ⛔ AND A UNIT ON PAPER IS NOT A UNIT IN THE FIELD. "Build the legion without incurring the cost" makes that a state, not a policy:
+ * an uncalled unit is a plan — who and how many, from where — and it is nowhere, costs nothing and cannot be given a posture. Calling
+ * it is the moment it becomes real, and the moment it is paid for.
+ * ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════ */
+
+/** ⚑ WHERE A CALLED UNIT STANDS. Erik: "is it camped or dispersed to forage in the region." Two postures, because he named two, and
+ *  each is a real trade the engine can already express: concentrated and fed from the purse, or spread out and living off the ground. */
+export const UNIT_POSTURES = ["camped", "dispersed"];
+
+/** The bands a unit is formed from, in the order it names them. ⚠️ A missing part is skipped rather than faked — a legion whose band
+ *  was disbanded elsewhere is smaller, not broken. Pure. */
+export function legionParts(bands, unit) {
+  const from = Array.isArray(unit?.formedFrom) ? unit.formedFrom.map(String) : [];
+  if (!from.length) return [];
+  const by = new Map((bands || []).filter(b => b && b.id).map(b => [String(b.id), b]));
+  return from.map(id => by.get(id)).filter(Boolean);
+}
+
+/** ⛔ A UNIT'S CONTINGENTS, RESOLVED: its own, plus every part's. This is the one reader every consumer of strength, threat,
+ *  composition and gaps must go through for a legion, because the legion stores none of its own. Pure. */
+export function resolvedContingents(bands, unit) {
+  const parts = legionParts(bands, unit);
+  if (!parts.length) return contingentsOf(unit);
+  const own = Array.isArray(unit?.contingents) && unit.contingents.length ? contingentsOf(unit) : [];
+  return [...own, ...parts.flatMap(p => contingentsOf(p))];
+}
+
+/** ⛔ A UNIT-SHAPED OBJECT CARRYING THE RESOLVED CONTINGENTS, so `bandStrength`, `bandThreat`, `unitComposition` and `bandGaps` read a
+ *  legion without a single one of them changing — which is exactly what the design claimed and is worth holding it to. Pure. */
+export function resolvedUnit(bands, unit) {
+  return unit ? { ...unit, contingents: resolvedContingents(bands, unit) } : unit;
+}
+
+/** ⛔ FORM ONE. The parts stay in `character.bands` and gain `inLegion` — Erik's "legion tag... which legion are they in" — and the
+ *  legion is a unit with `formedFrom` and no contingents of its own.
+ *  ⚠️ IT COSTS NOTHING AND IT IS NOWHERE, on his ruling: building the legion is identifying who and how many from where. A place and
+ *  a posture arrive with the CALL. Refuses a band that already stands in another legion, and a legion of nothing. Pure over `bands`. */
+export function formLegion(bands, { id, name = null, from = [], day = 0 } = {}) {
+  const list = Array.isArray(bands) ? bands : [];
+  if (!id) return { ok: false, why: "a legion needs a name to be called by" };
+  if (list.some(b => b && String(b.id) === String(id))) return { ok: false, why: `${name || id} already stands` };
+  const want = [...new Set((from || []).map(String))];
+  const parts = want.map(w => list.find(b => b && String(b.id) === w)).filter(Boolean);
+  if (parts.length < 2) return { ok: false, why: "a legion is formed from two or more bands" };
+  const taken = parts.filter(p => p.inLegion);
+  if (taken.length) return { ok: false, why: `${taken.map(p => p.name || p.id).join(" and ")} already stand${taken.length === 1 ? "s" : ""} in a legion` };
+  const held = parts.filter(p => Array.isArray(p.formedFrom) && p.formedFrom.length);
+  if (held.length) return { ok: false, why: "a legion cannot be formed from another legion" };
+  const legion = { id: String(id), name: name || String(id), formedFrom: parts.map(p => String(p.id)),
+    condition: "fresh", raisedDay: num(day, 0), losses: 0, posture: null, locationId: null, called: null };
+  const next = list.map(b => (parts.includes(b) ? { ...b, inLegion: String(id) } : b));
+  return { ok: true, bands: [...next, legion], legion };
+}
+
+/** ⛔ AND TAKING IT APART RELEASES THEM WHOLE — their people, their condition and their losses were never moved, so there is nothing
+ *  to restore. That is the other half of "they keep their identity". Pure over `bands`. */
+export function disbandLegion(bands, id) {
+  const list = Array.isArray(bands) ? bands : [];
+  const legion = list.find(b => b && String(b.id) === String(id) && Array.isArray(b.formedFrom) && b.formedFrom.length);
+  if (!legion) return { ok: false, why: "no such legion" };
+  const parts = new Set(legion.formedFrom.map(String));
+  return { ok: true, why: `${legion.name} stands down — ${parts.size} bands, as they were`,
+    bands: list.filter(b => b !== legion).map(b => (parts.has(String(b.id)) ? (({ inLegion, ...rest }) => rest)(b) : b)) };
+}
+
+/** ⛔ WHAT CALLING THEM COSTS. Erik: "Soldiers cost to call together for a campaign or mission." ⚠️ HE DID NOT GIVE A NUMBER, so this
+ *  does not invent one: it reads `callCostPerHead` where a martial rule authors it, and otherwise falls back to the ALREADY AUTHORED
+ *  `wagePerHand` (3) on the stated reason that a soldier called for a campaign is paid what a hand asked to come and work is paid.
+ *  `authored` says which it used, so a screen can say so and Aevi can overrule it with one number. Pure. */
+export function callCostOf(bands, unit, { cfg = {}, wagePerHand = null } = {}) {
+  const heads = resolvedContingents(bands, unit).reduce((a, c) => a + Math.max(0, num(c.n, 0)), 0);
+  const authored = Number.isFinite(Number(cfg.callCostPerHead));
+  const perHead = authored ? Math.max(0, num(cfg.callCostPerHead, 0)) : Math.max(0, num(wagePerHand, 0));
+  return { heads, perHead, total: heads * perHead, authored,
+    why: authored ? "the martial rules set what a head costs to call"
+      : "no martial rule sets this yet — a called head is paid what a working hand is paid" };
+}
+
+/** ⛔ CALL THEM TOGETHER: the moment a plan becomes a unit in the field. It takes a PLACE and a POSTURE because that is what being in
+ *  the field means, and it refuses a posture the rules do not name. ⚠️ The cost is charged by the CALLER, which holds the purse — this
+ *  records what was paid so the receipt is on the unit and not only in a log. Pure over `bands`. */
+export function callUnit(bands, id, { day = 0, locationId = null, posture = "camped", paid = 0 } = {}) {
+  const list = Array.isArray(bands) ? bands : [];
+  const i = list.findIndex(b => b && String(b.id) === String(id));
+  if (i < 0) return { ok: false, why: "no such unit" };
+  if (list[i].called) return { ok: false, why: `${list[i].name || id} is already called` };
+  if (!UNIT_POSTURES.includes(String(posture))) return { ok: false, why: `a unit is ${UNIT_POSTURES.join(" or ")}, not ${posture}` };
+  const unit = { ...list[i], called: { day: num(day, 0), paid: Math.max(0, num(paid, 0)) },
+    locationId: locationId ? String(locationId) : null, posture: String(posture) };
+  return { ok: true, unit, bands: list.map((b, j) => (j === i ? unit : b)) };
+}
+
+/** Send them home: the plan survives, the place and the posture do not. Nothing is refunded — they were paid. Pure over `bands`. */
+export function standDown(bands, id) {
+  const list = Array.isArray(bands) ? bands : [];
+  const i = list.findIndex(b => b && String(b.id) === String(id));
+  if (i < 0) return { ok: false, why: "no such unit" };
+  if (!list[i].called) return { ok: false, why: `${list[i].name || id} was never called` };
+  const unit = { ...list[i], called: null, posture: null, locationId: null };
+  return { ok: true, unit, bands: list.map((b, j) => (j === i ? unit : b)) };
+}
+
+/** ⚑ AND THE POSTURE, once it is in the field. Refuses one the rules do not name, and refuses a unit still on paper — a plan cannot
+ *  be camped anywhere. Pure over `bands`. */
+export function setUnitPosture(bands, id, posture) {
+  const list = Array.isArray(bands) ? bands : [];
+  const i = list.findIndex(b => b && String(b.id) === String(id));
+  if (i < 0) return { ok: false, why: "no such unit" };
+  if (!list[i].called) return { ok: false, why: "it has not been called together yet" };
+  if (!UNIT_POSTURES.includes(String(posture))) return { ok: false, why: `a unit is ${UNIT_POSTURES.join(" or ")}, not ${posture}` };
+  const unit = { ...list[i], posture: String(posture) };
+  return { ok: true, unit, bands: list.map((b, j) => (j === i ? unit : b)) };
+}
+
+/** ⛔ WHAT A CLASH COSTS A UNIT, ROUTED TO WHOEVER ACTUALLY HAS THE PEOPLE. For a band it is `bloodBand`, unchanged.
+ *
+ *  ⛔ FOR A LEGION, ERIK RULED IT MID-BUILD AND CORRECTED ME: "a shield wall unit should be able to protect other units. Just like a
+ *  band." My first cut handed the tide to each part separately, so each bled under ITS OWN gaps — which meant a shield wall band
+ *  protected nobody but itself, and bringing one into a legion bought the legion nothing. ⚑ THE LEGION'S GAPS GOVERN: the loss rate is
+ *  computed once from the RESOLVED unit, exactly as a band's is computed once from its contingents, so one part's PROTECT covers the
+ *  whole formation and the 1.4× unwarded multiplier lifts off every band in it. A legion is a band one scale up, which is his phrase.
+ *
+ *  ⚠️ AND THE PARTS STILL KEEP THEIR IDENTITY, which is the earlier half of his ruling: the pooled loss is apportioned by head-count,
+ *  and each band's own CONDITION is then read from its own cumulative losses. So a small band inside a big legion can be worn while
+ *  the legion is merely blooded, and it carries that out of the campaign. The legion's condition is the worst of its parts.
+ *  ⚠️ `bloodBand` is pure and returns a NEW unit, which is why losses must be written to the parts here rather than onto the legion:
+ *  a legion that stored them would be the only record of people its bands still think they have. Pure over `bands`. */
+export function bloodUnit(bands, id, tide, { cfg = {} } = {}) {
+  const list = Array.isArray(bands) ? bands : [];
+  const unit = list.find(b => b && String(b.id) === String(id));
+  if (!unit) return { ok: false, why: "no such unit", bands: list };
+  const parts = legionParts(list, unit);
+  if (!parts.length) {
+    const r = bloodBand(unit, tide, { cfg });
+    return { ok: true, bands: list.map(b => (b === unit ? r.band : b)), lost: r.lost, results: [r], why: r.why };
+  }
+  // ⛔ ONE ROLL FOR THE FORMATION, under the formation's own gaps — this is the shield wall reaching the whole legion.
+  const whole = bloodBand(resolvedUnit(list, unit), tide, { cfg });
+  const lost = num(whole.lost, 0);
+  const heads = parts.map(p => contingentsOf(p).reduce((a, c) => a + Math.max(0, num(c.n, 0)), 0));
+  const total = Math.max(1, heads.reduce((a, n) => a + n, 0));
+  const worst = ["fresh", "blooded", "worn", "broken"];
+  const bled = parts.map((p, i) => {
+    const share = Math.min(heads[i], Math.round(lost * (heads[i] / total)));
+    const cs = contingentsOf(p);
+    const inPart = Math.max(1, cs.reduce((a, c) => a + c.n, 0));
+    const next = cs.map(c => ({ ...c, n: Math.max(0, c.n - Math.round(share * (c.n / inPart))) }));
+    const left = next.reduce((a, c) => a + c.n, 0);
+    const losses = num(p.losses, 0) + share;
+    // ⚠️ ITS OWN CONDITION, FROM ITS OWN HISTORY — the part's identity is what it has been through, not what the legion averaged.
+    const hurt = (heads[i] + num(p.losses, 0)) ? losses / (heads[i] + num(p.losses, 0)) : 0;
+    const condition = left === 0 || hurt > num(cfg.brokenAt, 0.5) ? "broken"
+      : hurt > num(cfg.wornAt, 0.25) ? "worn"
+      : share > 0 || p.condition !== "fresh" ? "blooded" : "fresh";
+    return { ...p, count: left, losses, condition, ...(p.contingents ? { contingents: next } : {}) };
+  });
+  const byId = new Map(bled.map(b => [String(b.id), b]));
+  const condition = bled.reduce((w, b) => (worst.indexOf(b.condition) > worst.indexOf(w) ? b.condition : w), "fresh");
+  const rolled = { ...unit, losses: num(unit.losses, 0) + lost, condition };
+  return { ok: true, lost, results: [whole], condition, gaps: whole.gaps,
+    bands: list.map(b => (byId.has(String(b.id)) ? byId.get(String(b.id)) : (b === unit ? rolled : b))),
+    why: lost === 0 ? `${unit.name} comes through it whole` : `${unit.name} loses ${lost} across ${parts.length} bands` };
+}
+
 /** ⚠️ WHAT A CLASH COSTS THEM. Erik's tide decides the battle; this decides what it did to the people who
  *  fought it. ⛔ AND A BAND CAN BREAK WITHOUT BEING DESTROYED — that is the difference between a unit and a
  *  health bar, and it is the state a commander actually has to manage. */

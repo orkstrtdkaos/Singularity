@@ -20932,6 +20932,91 @@ console.log("\n── §288 · the plan somebody else draws up ──");
     && /if \(refused\.length\) alert\(/.test(A288));
 }
 
+// ⛔ CCODE-408 — Erik, from the band screen: "I saw Marengo at a low level in the band screen." And on pricing what a unit holds:
+// "Let's sum the carried objects for now."
+console.log("\n── §289 · a companion's level, and what a unit carries ──");
+{
+  const F289 = await import("../engine/fellowship.js");
+  const S289 = await import("../engine/substrate.js");
+  const { loadContentHeadless: lch289 } = await import("./headless_content.mjs");
+  const C289 = await lch289();
+  const fs289 = await import("node:fs");
+  const saves289 = [];
+  for (const dir of fs289.readdirSync(join(root, "characters"))) {
+    let inner = [];
+    try { inner = fs289.readdirSync(join(root, "characters", dir)); } catch { continue; }
+    for (const f of inner.filter(x => x.endsWith(".json"))) {
+      try { const j = JSON.parse(fs289.readFileSync(join(root, "characters", dir, f), "utf8")); saves289.push(j.character || j.data || j); } catch {}
+    }
+  }
+  const o289 = { content: C289, worldDay: 80 };
+
+  // ⛔ 1 · A COMPANION STANDS AT THE LEVEL OF THE CHARACTER THEY TRAVEL WITH
+  const travellers = [];
+  for (const c of saves289) for (const x of (c.companions || [])) {
+    const id = String(x?.id || x);
+    travellers.push({ who: c.name, id, level: F289.levelOfPerson(c, id, o289), theirs: Number(c.level) || 0 });
+  }
+  check("§289: ⛔ A COMPANION STANDS AT THE LEVEL OF THE CHARACTER THEY TRAVEL WITH — ⚑ Erik saw it: Maren (Marrow) Ossitide, a legendary Ashwarden warden travelling with a level-33 Silas, priced at 15 on the band screen, and the other EIGHT companions priced at 0 because `content.companions` was never a source for a level at all",
+    travellers.length > 0 && travellers.every(t => t.level === t.theirs),
+    JSON.stringify(travellers.map(t => `${t.who}/${t.id}: ${t.level} vs ${t.theirs}`)));
+  check("§289: ⛔ …AND THE RULE IS NOT MINE — `presenceSheet` already states it where companions FIGHT: 'a modest floor that scales with the character they travel with, because a companion of a level-9 character is not a level-1 bystander.' This is that rule reaching the roster",
+    /a companion of a level-9 character is not a level-1 bystander/.test(rd("engine/combatants.js"))
+    // ⚠️ matched WITHIN a line: the phrase wraps across two comment lines in fellowship.js, and a regex spanning the break finds nothing.
+    && /A COMPANION STANDS AT THE LEVEL OF THE CHARACTER THEY/.test(rd("engine/fellowship.js"))
+    && /presenceSheet` already states it/.test(rd("engine/fellowship.js")));
+  // ⚠️ AND IT IS NARROW: it does not hand the player's level to anybody who is merely a companion in the content
+  const silas289 = saves289.find(c => (c.companions || []).some(x => String(x?.id || x) === "marrow"));
+  check("§289: ⚠️ …and it is NARROW — a companion who does not travel with them is not handed their level, and a plain registry person is untouched",
+    silas289 && F289.levelOfPerson(silas289, "coil", o289) === 0
+    && F289.levelOfPerson(silas289, "pell", o289) > 0
+    && F289.levelOfPerson(silas289, "marrow", o289) === Number(silas289.level),
+    JSON.stringify({ notTravelling: F289.levelOfPerson(silas289, "coil", o289), plainPerson: F289.levelOfPerson(silas289, "pell", o289) }));
+  check("§289: ⛑ …and an AUTHORED level on the companion would still win — none of the nine carries one today, and the day one does it is the author's",
+    /const own = num\(def\?\.level, 0\) \|\| num\(character\?\.npcRegistry\?\.\[id\]\?\.level, 0\) \|\| 0;/.test(rd("engine/fellowship.js"))
+    && Object.values(C289.companions || {}).every(d => d?.level == null));
+
+  // ⛔ 2 · WHAT A UNIT CARRIES: THE SUM OF ITS PEOPLE'S AURAS AND ITS ARTIFACTS
+  const itemWith = Object.entries(C289.items || {}).find(([, i]) => Number(i?.substrateCharge) > 0);
+  const suppressor = Object.entries(C289.items || {}).find(([, i]) => Number(i?.substrateCharge) < 0);
+  const band289 = { id: "b", name: "Test", artifacts: [itemWith[0], suppressor[0]],
+    contingents: [{ n: 1, quality: 2, does: ["HARM"], npcId: "aevi" }, { n: 1, quality: 2, does: ["KNOW"], npcId: "marrow" }, { n: 9, quality: 1, does: ["HARM"] }] };
+  const carried = S289.unitCarriedSubstrate(band289, { items: C289.items || {}, companions: C289.companions || {} });
+  const expect = Number(itemWith[1].substrateCharge) + Number(suppressor[1].substrateCharge)
+    + Number(C289.companions.aevi.substrateAura) + Number(C289.companions.marrow.substrateAura);
+  check("§289: ⛔ A UNIT CARRIES WHAT ITS PEOPLE AND ITS ARTIFACTS CARRY, SUMMED — Erik: 'Let's sum the carried objects for now.' ⚑ The model already existed: all nine companions author a `substrateAura` and fourteen items a `substrateCharge`, and this file's own note said it 'falls out of the band model rather than being bolted on'",
+    Math.abs(carried.total - expect) < 0.0005 && carried.sources.length === 4
+    && carried.sources.some(s => s.kind === "artifact") && carried.sources.some(s => s.kind === "companion"),
+    JSON.stringify({ total: carried.total, expected: Math.round(expect * 1000) / 1000, sources: carried.sources.length }));
+  check("§289: ⛔ …NEGATIVES COUNT — a suppressor carried by a column is a legitimate weapon, and this file's own BATCH-13 note records them being 'discarded twice over' before",
+    carried.sources.some(s => s.delta < 0) && carried.total < (Number(itemWith[1].substrateCharge) + Number(C289.companions.aevi.substrateAura)));
+  check("§289: …itemised strongest-first, on §9b invariant 5 — when a carried source is why the lattice reads differently, saying so is the difference between a mechanic and the cruellest possible bug",
+    carried.sources.every((s, i) => i === 0 || Math.abs(carried.sources[i - 1].delta) >= Math.abs(s.delta))
+    && carried.sources.every(s => s.name && s.kind));
+  check("§289: ⚠️ …and a number shown to a player carries no float noise — 0.2 + 0.18 − 0.05 − 0.1 arrives as 0.22999999999999998 in binary floating point",
+    String(carried.total).length <= 6, String(carried.total));
+  check("§289: ⛔ …AND A PERSON'S OWN KIT IS NOT INVENTED — a contingent records who somebody is, not what they are carrying, so a named person who is not a companion contributes nothing rather than a guessed inventory",
+    S289.unitCarriedSubstrate({ contingents: [{ n: 1, quality: 3, does: ["HARM"], npcId: "pell" }] },
+      { items: C289.items || {}, companions: C289.companions || {} }).sources.length === 0);
+  // ⛑ AND A LEGION IS PRICED OVER ITS PARTS, whose people it does not hold
+  const M289 = await import("../engine/melee.js");
+  const legionBands = M289.formLegion([
+    { id: "one", name: "One", contingents: [{ n: 1, quality: 2, does: ["HARM"], npcId: "aevi" }] },
+    { id: "two", name: "Two", contingents: [{ n: 1, quality: 2, does: ["HARM"], npcId: "marrow" }] },
+  ], { id: "L", name: "The Legion", from: ["one", "two"], day: 1 }).bands;
+  const leg289 = legionBands.find(b => b.id === "L");
+  const legCarried = S289.unitCarriedSubstrate(leg289, { items: C289.items || {}, companions: C289.companions || {},
+    contingents: M289.resolvedContingents(legionBands, leg289) });
+  check("§289: ⛑ …and a LEGION is priced over its resolved contingents, because its people live in its parts — handed its own (empty) list it would carry nothing while two companions stood in it",
+    legCarried.sources.length === 2
+    && S289.unitCarriedSubstrate(leg289, { items: C289.items || {}, companions: C289.companions || {} }).sources.length === 0,
+    JSON.stringify(legCarried.sources.map(s => s.name)));
+  const A289 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§289: ⛑ and the unit says what it carries and NAMES the causes, only when there is something to say",
+    /const k = u\.carried;/.test(A289) && /if \(!k \|\| !k\.sources\?\.length\) return "";/.test(A289)
+    && /carries <strong>\$\{sign\}\$\{k\.total\}<\/strong> to the ground where it stands/.test(A289));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

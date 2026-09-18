@@ -19,6 +19,7 @@
 // Do NOT eyeball them — re-run the sim after any change (CCode's Round-2 blocker, accepted).
 
 import { geodesic } from "./worldmap.js";   // SNG-180: the substrate field measures direct geodesic distance
+import { contingentsOf } from "./melee.js";   // CCODE-408: a unit carries what its people and its artifacts carry
 
 export const SUBSTRATE_TUNING = {
   starveExp: 1.15,      // below-band falloff steepness (Seraph@Quickwood → ≈13%)
@@ -305,6 +306,42 @@ export function carriedSubstrateSources(character, itemCatalog = {}, companions 
     if (Number.isFinite(a) && a !== 0) out.push({ name: comp?.name || comp?.id, delta: a, kind: "companion" });
   }
   return out.sort((x, y) => Math.abs(y.delta) - Math.abs(x.delta));
+}
+
+/** ⛔ CCODE-408 (Erik, asked what a legion has: "What special artifacts and abilities does it have? Carried power sources and auras?"
+ *  and then, on how to price it: "Let's sum the carried objects for now") — WHAT A UNIT CARRIES THAT MOVES THE GROUND.
+ *
+ *  ⚑ AND IT IS THE MODEL THAT ALREADY EXISTS, not a new one. All nine companions author a `substrateAura` (Aevi 0.2, Coil 0.14, Sprig
+ *  −0.08) and fourteen items author a `substrateCharge` (the Waystaff 0.18, the Stillhold Veil −0.1). This file's own note on the band
+ *  model says so outright: "carried into the Gearlands it shelters a Rootkin and cripples an Enginewright, and that falls out of the
+ *  band model rather than being bolted on." ⛑ So a unit's carried power is the sum of its people's auras and the artifacts it holds.
+ *
+ *  ⚠️ NEGATIVES COUNT, as they do for a character — a suppressor carried by a column is a legitimate weapon — and the ±1 clamp is this
+ *  file's existing rule for a carried shift, not a ceiling of mine: "it is a shift applied to density, not a density itself."
+ *  ⚠️ ITEMISED, on §9b invariant 5: when a carried source is why the lattice reads differently, saying so is the difference between a
+ *  mechanic and the cruellest possible bug. A legion is the largest such cause the game can field.
+ *
+ *  ⬜ A PERSON'S OWN KIT IS NOT COUNTED and cannot be: a contingent records who somebody is, not what they are carrying, and inventing
+ *  an inventory for them would be inventing the number. What a unit HOLDS is `unit.artifacts`, which is the player's to fill.
+ *  `contingents` may be passed to price a LEGION, whose people live in its parts. Pure. */
+export function unitCarriedSubstrate(unit, { items = {}, companions = {}, contingents = null } = {}) {
+  const sources = [];
+  for (const entry of (unit?.artifacts || [])) {
+    const id = (entry && typeof entry === "object") ? (entry.item || entry.id) : entry;
+    const def = (entry && typeof entry === "object" && entry.substrateCharge != null) ? entry : (items?.[id] || null);
+    const c = Number(def?.substrateCharge);
+    const qty = Math.max(1, Number((entry && typeof entry === "object" && entry.qty) || 1));
+    if (Number.isFinite(c) && c !== 0) sources.push({ name: def?.name || String(id), delta: c * qty, kind: "artifact" });
+  }
+  for (const cg of (Array.isArray(contingents) ? contingents : contingentsOf(unit))) {
+    const comp = cg?.npcId ? companions?.[cg.npcId] : null;
+    const a = Number(comp?.substrateAura);
+    if (Number.isFinite(a) && a !== 0) sources.push({ name: comp?.name || cg.npcId, delta: a, kind: "companion" });
+  }
+  const raw = sources.reduce((s, x) => s + x.delta, 0);
+  // ⚠️ ROUNDED, because this is shown to a player: 0.2 + 0.18 − 0.05 − 0.1 arrives as 0.22999999999999998 in binary floating point.
+  return { total: Math.round(Math.max(-1, Math.min(1, raw)) * 1000) / 1000, raw: Math.round(raw * 1000) / 1000, clamped: Math.abs(raw) > 1,
+    sources: sources.sort((x, y) => Math.abs(y.delta) - Math.abs(x.delta)) };
 }
 
 /** The effective substrate density at a location: a per-location override, else its region's density.

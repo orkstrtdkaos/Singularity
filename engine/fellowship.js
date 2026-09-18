@@ -18,6 +18,7 @@
 //
 // PURE. Every function reads the character and content and returns data; the writers stay `recruit`/`partCompany` in company.js.
 import { contingentsOf, bandCan, bandStrength, resolvedUnit, legionParts, leaderOf, leaderBonusOf } from "./melee.js";   // CCODE-405/406: a legion reads through its parts, and its leader is priced
+import { unitCarriedSubstrate } from "./substrate.js";   // CCODE-408: what it carries that moves the ground
 import { activeCompany } from "./company.js";
 import { companyPlaces } from "./ladder.js";
 import { derivedLevel } from "./npcsheet.js";
@@ -59,6 +60,19 @@ function unitHead(unit) {
 export function levelOfPerson(character, id, { content = {}, worldDay = null, cfg = null } = {}) {
   if (!id) return 0;
   if (String(id) === "player") return num(character?.level, 0) || 0;
+  // ⛔ CCODE-408 (Erik: "I saw Marengo at a low level in the band screen") — A COMPANION STANDS AT THE LEVEL OF THE CHARACTER THEY
+  // TRAVEL WITH. ⚑ Maren (Marrow) Ossitide — a legendary Ashwarden warden, travelling with a level-33 Silas — priced at 15 on the band
+  // screen, and the other EIGHT companions priced at 0: `content.companions` was never a source here, so a companion only had a level
+  // at all if they happened to also be a registry record, and that record carries no `level` or `tier` to derive one from.
+  // ⚠️ THE RULE IS NOT MINE. `presenceSheet` already states it where companions fight: "a modest floor that scales with the character
+  // they travel with, because a companion of a level-9 character is not a level-1 bystander." This is that rule, reaching the roster.
+  // ⚠️ An authored level on the companion still wins — none of the nine carries one today, and the day one does it is theirs.
+  const travels = (character?.companions || []).some(x => String(x?.id || x) === String(id));
+  if (travels) {
+    const def = content?.companions?.[id] || null;
+    const own = num(def?.level, 0) || num(character?.npcRegistry?.[id]?.level, 0) || 0;
+    return own || (num(character?.level, 0) || 0);
+  }
   const npcs = content?.npcs || {};
   const entry = character?.npcRegistry?.[id] || npcs[id] || character?.generated?.npc?.[id] || null;
   if (!entry) return 0;
@@ -91,6 +105,10 @@ export function unitsOf(character, { cfg = null, content = null, worldDay = null
     // ⛔ CCODE-406 (Erik): "Legions have commanders and unit captains. Those positions should grant bonuses... like a scaled up band."
     leader: (() => { const w = leaderOf(b); return w ? { ...w, level: levelOf(w.id) } : null; })(),
     leaderBonus: leaderBonusOf(b, lopts),        // ⚠️ the PART's own captain; a legion's commander is priced on the legion row
+    // ⛔ CCODE-408 — what it carries that moves the ground: its people's auras and the artifacts it holds, summed and itemised. A
+    // LEGION is priced over its resolved contingents, because its people are in its parts.
+    carried: unitCarriedSubstrate(b, { items: content?.items || {}, companions: content?.companions || {},
+      contingents: resolvedContingentsFor(all, b, lopts) }),
     formedFrom: arr(b.formedFrom).map(String),   // ⛑ NO LONGER EMPTY: the bands this legion is formed from (CCODE-405)
     parts: legionParts(all, b).map(p => ({ id: String(p.id), name: p.name || String(p.id), condition: p.condition || "fresh" })),
     // ⛔ ERIK'S LEGION TAG — "they gain a legion tag... which legion are they in". Set on a band that stands in one, null otherwise.
@@ -105,6 +123,11 @@ export function unitsOf(character, { cfg = null, content = null, worldDay = null
     travelers: arr(b.travelers).filter(t => t && t.characterId),
     unit: b,
   }));
+}
+
+/** The resolved contingent list a carried-power reading needs — a legion's people live in its parts. */
+function resolvedContingentsFor(all, b, lopts) {
+  return resolvedUnit(all, b, lopts)?.contingents || [];
 }
 
 /** ⛔ ONE ROW PER STANDING, ACROSS EVERY UNIT — the roster Erik asked for: "everyone listed with their level and primary functions."

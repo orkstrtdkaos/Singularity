@@ -166,7 +166,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.70";
+const APP_VERSION = "2.0.71";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -15072,6 +15072,15 @@ function renderBandsTab() {
       <span class="hint">${esc(u.condition)}</span>
       ${gaps.length ? gaps.map(g => `<span class="hint" style="width:100%;color:var(--warn,#e0b25a)">⚠️ no ${esc(String(g.missing).toLowerCase())} — ${esc(g.why)}${g.value ? ` (×${g.value})` : ""}</span>`).join("")
         : `<span class="hint" style="width:100%">Nothing it cannot cover — it mends, shields and reads the ground.</span>`}
+      ${(() => {
+        // ⛔ CCODE-408 (Erik) — WHAT IT CARRIES THAT MOVES THE GROUND, itemised. §9b invariant 5: when a carried source is why the
+        // lattice reads differently, saying so is the difference between a mechanic and the cruellest possible bug — and a legion is
+        // the largest such cause the game can field. ⚠️ Said only when there is something to say.
+        const k = u.carried;
+        if (!k || !k.sources?.length) return "";
+        const sign = k.total > 0 ? "+" : "";
+        return `<span class="hint" style="width:100%">◈ carries <strong>${sign}${k.total}</strong> to the ground where it stands${k.clamped ? " (clamped from " + k.raw + ")" : ""} — ${esc(k.sources.map(s => `${s.name} ${s.delta > 0 ? "+" : ""}${Math.round(s.delta * 1000) / 1000}`).join(", "))}</span>`;
+      })()}
     </div>`;
   };
   // ⚠️ THE GATE SPEAKS EITHER WAY. `canRaiseBand`'s `why` is written to be read by a player ("you lead 1 and hold 1 — not yet a

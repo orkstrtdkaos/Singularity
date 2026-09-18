@@ -175,12 +175,12 @@
     },
     "the_final_argument": {
       "status": "stopped",
-      "stoppedUntilDay": 72,
-      "stoppedBy": "the_one_called_loki",
-      "atWorldDay": 69,
+      "stoppedUntilDay": 81,
+      "stoppedBy": "the_unbodied_choir_master",
+      "atWorldDay": 78,
       "fateBy": {
-        "characterId": "char-mrum8y4d",
-        "name": "Loki"
+        "characterId": "char-mr5ns3hh",
+        "name": "Adelheid"
       }
     },
     "the_first_moot": {
@@ -327,12 +327,12 @@
     },
     "the_cornerstone": {
       "status": "stopped",
-      "stoppedUntilDay": 71,
-      "stoppedBy": "thornmother_sealed",
-      "atWorldDay": 68,
+      "stoppedUntilDay": 81,
+      "stoppedBy": "the_burning_certainty",
+      "atWorldDay": 78,
       "fateBy": {
-        "characterId": "char-mrhs8286",
-        "name": "Silas Weir"
+        "characterId": "char-mr5ns3hh",
+        "name": "Adelheid"
       }
     },
     "the_open_figure": {
@@ -402,20 +402,17 @@
       }
     },
     "the_one_called_zeus": {
-      "status": "dead",
+      "status": "active",
       "diedWorldDay": 76,
       "killedBy": "sunwrack_valen",
-      "deathState": {
-        "diedDay": 76,
-        "bodyStatus": "intact",
-        "sealed": false,
-        "depthOverride": null,
-        "cause": "killed by Valen Sunwrack, Who Left No Shadow Standing"
+      "returnedFromDeath": {
+        "day": 80,
+        "changed": "came back changed"
       },
-      "atWorldDay": 76,
+      "atWorldDay": 80,
       "fateBy": {
-        "characterId": "char-mrhs8286",
-        "name": "Silas Weir"
+        "characterId": "char-mr5ns3hh",
+        "name": "Adelheid"
       }
     },
     "the_one_called_loki": {
@@ -436,6 +433,16 @@
       "fateBy": {
         "characterId": "char-mrhs8286",
         "name": "Silas Weir"
+      }
+    },
+    "the_weeping_archive": {
+      "status": "stopped",
+      "stoppedUntilDay": 81,
+      "stoppedBy": "the_scouring_hand",
+      "atWorldDay": 78,
+      "fateBy": {
+        "characterId": "char-mr5ns3hh",
+        "name": "Adelheid"
       }
     }
   }

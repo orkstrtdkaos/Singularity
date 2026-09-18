@@ -21460,6 +21460,71 @@ console.log("\n── §294 · everyone you know practises something — one aff
     !threw6 && k6.crafts.length > 0 && Array.isArray(g6) && g6.length === 0 && typeof prose.abilities === "object" && !Array.isArray(prose.abilities) && prose.abilities.reveal);
 }
 
+// ══════════ §295 · CCODE-414 — THE FIVE WAYS A ROLL LANDS, ON EVERY SKILL ══════════
+// Erik, of the prototype's bar: "This little bar that visually shows the success and failure chance and degree is fantastic. I think we
+// should use it instead of just showing the % value on each skill. It can show crit success and failures as well as the partial band and
+// it would change based on location."
+console.log("\n── §295 · the odds bar is the dice's own grading, on every skill, and it moves with the ground ──");
+{
+  const R295 = await import("../engine/resolve.js");
+  const { loadContentHeadless: lch295 } = await import("./headless_content.mjs");
+  const C295 = await lch295();
+  const rules295 = C295.rules;
+  // every roll resolveAction can make: 100 first rolls, and — for a success or a failure — 100 second rolls
+  const exact = (ctx) => {
+    const n = { crit_success: 0, success: 0, partial: 0, failure: 0, crit_failure: 0 };
+    for (let r1 = 1; r1 <= 100; r1++) {
+      const first = (r1 - 0.5) / 100;
+      let calls = 0;
+      const probe = R295.resolveAction(ctx, () => (calls++ === 0 ? first : 0.999));
+      if (calls === 1) { n[probe.degree] += 100; continue; }   // a partial takes no second roll
+      for (let r2 = 1; r2 <= 100; r2++) {
+        let k = 0;
+        const rr = R295.resolveAction(ctx, () => (k++ === 0 ? first : (r2 - 0.5) / 100));
+        n[rr.degree] += 1;
+      }
+    }
+    for (const key of Object.keys(n)) n[key] /= 10000;
+    return n;
+  };
+  const character295 = { attributes: { physical: 5, mental: 6, social: 4, practical: 5 },
+    subAttributes: { strength: 5, agility: 6, reason: 7, insight: 6, presence: 4, rapport: 4, craft: 5, wits: 9 }, energy: 50, alignment: {} };
+  const cases295 = [
+    { attribute: "mental", subAttribute: "reason", abilityLevel: 1, difficulty: "normal", tags: [], axes: {} },
+    { attribute: "mental", subAttribute: "reason", abilityLevel: 3, difficulty: "hard", tags: [], axes: {} },
+    { attribute: "practical", subAttribute: "wits", abilityLevel: 3, difficulty: "easy", tags: [], axes: {}, wildVariance: true },
+    { attribute: "social", subAttribute: "presence", abilityLevel: 1, difficulty: "normal", tags: [], axes: {}, novel: true },
+    { attribute: "practical", subAttribute: "craft", abilityLevel: 3, difficulty: 0, opposedDifficulty: 80, tags: [], axes: {},
+      craftCrit: [{ name: "a test craft", success: { chance: 12 }, failure: { chance: 9 } }] },
+  ];
+  let worst295 = 0; const said295 = [];
+  for (const action of cases295) {
+    const ctx = { character: character295, action, location: null, rules: rules295, aptitudeMods: {} };
+    const want = exact(ctx);
+    const chance = R295.successChance({ ...ctx });
+    const crit = R295.critProfile(ctx);
+    const got = R295.outcomeOdds({ chance, critSuccess: crit.successChance, critFail: crit.failChance, partialBand: rules295.d100?.partialBand });
+    for (const k of Object.keys(want)) worst295 = Math.max(worst295, Math.abs(want[k] - got[k]));
+    said295.push(`${chance}% · crit ${crit.successChance}/${crit.failChance}`);
+  }
+  check("§295: ⛔ THE BAR IS THE DICE — across five rolls (a middling chance, a hard one, one clamped at the ceiling with a wild current, a novel use, one clamped at the floor with a craft's own critical), `outcomeOdds` equals what `resolveAction` produces over every one of its 100 × 100 rolls",
+    worst295 < 1e-9 && said295.some(s => s.startsWith("95%")) && said295.some(s => s.startsWith("5%")), `worst gap ${worst295} · ${said295.join(" | ")}`);
+  const z295 = R295.outcomeOdds({ chance: 60, critSuccess: 10, critFail: 5, partialBand: 15 });
+  check("§295: …and it sums to one, a partial never turns critical, and the chance itself rides along for the label",
+    Math.abs(Object.entries(z295).filter(([k]) => k !== "chance").reduce((a, [, v]) => a + v, 0) - 1) < 1e-12 && z295.partial === 0.15 && z295.chance === 60);
+
+  // ⛔ the game draws it on both surfaces, from a preview that pays what the roll pays
+  const A295 = rd("app.js").replace(/\r\n/g, "\n");
+  const at295 = A295.indexOf("function craftChanceHere(");
+  const here295 = A295.slice(at295, at295 + 3200);
+  check("§295: ⛔ the preview pays the crit terms the roll pays — a craft's own critical and a wild current's widening, as the choice path puts them on the action — and returns the five-way odds",
+    /critFor\(ab,/.test(here295) && /wildVariance:/.test(here295) && /critProfile\(\{ rules, action, character, aptitudeMods: mods \}\)/.test(here295)
+    && /outcomeOdds\(\{ chance, critSuccess: crit\.successChance, critFail: crit\.failChance/.test(here295));
+  check("§295: ⛔ …and both places a skill shows its chance draw the bar — every row of the skill list and the skill's hover card — with the numbers in the label for a screen reader, and the ground still named",
+    /oddsBarHtml\(ch\.odds\)\} \$\{ch\.chance\}% here/.test(A295) && /showPopoverText\(txt, \{ odds: entityOdds\(el\.dataset\.entity\) \}\)/.test(A295)
+    && /role="img" aria-label="\$\{esc\(oddsSaid\(odds\)\)\}"/.test(A295) && /the ground \$\{ch\.ground > 0/.test(A295));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

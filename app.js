@@ -4,7 +4,7 @@
 import { grantMartialKit } from "./engine/martial.js";
 import { loadRecovery, recoveryKeys, loadContent, loreForLocation, eventsForGM, getPlayerKey, listPlayers, listCharacters, saveCharacter as persistCharacter, loadCharacter, deleteCharacter, saveProfile, loadProfile, exportSave, importSave, adoptRemoteCharacter, preserveRecovery, findProfileByName, choosePlayer, charactersForPlayer, repairOwnership, lastPlayerKey, resolveLocationId, canTravelBetween, locationRefToString, isCoercedObjectName } from "./engine/state.js";
 import { mergeRecovery, mergeReceiptLine } from "./engine/recovery.js";   // the door to the snapshots the sync kept and nobody could reach
-import { resolveAction, successChance, applyEnergyCost } from "./engine/resolve.js";
+import { resolveAction, successChance, applyEnergyCost, critProfile, outcomeOdds } from "./engine/resolve.js";   // CCODE-414: the five ways a roll lands
 import { senseAction, senseTier, senseOpponent, appraiseOpponent } from "./engine/sense.js"; // CCODE-44: size a fight up BEFORE taking it
 import { synthesizeOpponentSheet, synthesizeStaticSheet, estimateExchange, finisherPotential, finishOdds, hasCounterCraft, matchupBonus, phaseDenied } from "./engine/skill_battle.js"; // CCODE-46/42: priced moves + situational finisher odds
 import { recordDeed, standingWith, reputationSummary, knownTags } from "./engine/reputation.js";
@@ -167,7 +167,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.77";
+const APP_VERSION = "2.0.78";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -223,7 +223,7 @@ app.addEventListener("click", e => { const el = e.target.closest?.("[data-breakd
 app.addEventListener("click", e => { const el = e.target.closest?.("[data-aptchip]"); if (el) { e.preventDefault(); showPopoverText(el.dataset.aptchip); } });
 // SNG-134 Part 2: ONE hover/tap detail for a skill / name / item, everywhere they appear (data-entity="kind:id").
 // Same entity → same detail, no matter the render site (the consistency ask). Reuses the one popover surface.
-app.addEventListener("click", e => { const el = e.target.closest?.("[data-entity]"); if (el) { e.preventDefault(); e.stopPropagation(); const txt = entityHover(el.dataset.entity); if (txt) showPopoverText(txt); } });
+app.addEventListener("click", e => { const el = e.target.closest?.("[data-entity]"); if (el) { e.preventDefault(); e.stopPropagation(); const txt = entityHover(el.dataset.entity); if (txt) showPopoverText(txt, { odds: entityOdds(el.dataset.entity) }); } });
 // CCODE-29 (Erik): a function pill → the verb's mechanics (definition / what it's NOT / an example).
 app.addEventListener("click", e => { const el = e.target.closest?.("[data-verb]"); if (el) { e.preventDefault(); e.stopPropagation(); const txt = verbDetail(el.dataset.verb); if (txt) showPopoverText(txt); } });
 // SNG-244: tap a road in the in-play quest DECISION strip → the shared resolve path (same ending-selection as the
@@ -647,11 +647,21 @@ function linkifyKnown(root) {
   }
 }
 
-function showPopoverText(text) {
+/** ⛔ CCODE-414: a skill's hover card carries the bar under its chance line (the line `skillDetail` writes with 🎯). */
+function entityOdds(spec) {
+  const m = /^skill:(.+)$/.exec(String(spec || ""));
+  if (!m || !character) return null;
+  const ab = fullCatalog()[m[1]];
+  const owned = (character.abilities || []).find(a => a.abilityId === m[1]);
+  try { const ch = craftChanceHere(ab, owned); return ch && !ch.off ? ch.odds : null; } catch { return null; }
+}
+
+function showPopoverText(text, { odds = null } = {}) {
   document.getElementById("help-pop")?.remove();
   const pop = document.createElement("div");
   pop.id = "help-pop"; pop.className = "help-overlay";
-  pop.innerHTML = `<div class="help-card" role="dialog" aria-label="Detail"><div class="help-short">${esc(text).replace(/\n/g, "<br>")}</div><div class="help-foot"><button class="btn" id="help-close">Got it</button></div></div>`;
+  const body = String(text).split("\n").map(l => esc(l) + (odds && l.startsWith("🎯") ? `${oddsBarHtml(odds, { wide: true })}<span class="odds-said">${esc(oddsSaid(odds))}</span>` : "")).join("<br>");
+  pop.innerHTML = `<div class="help-card" role="dialog" aria-label="Detail"><div class="help-short">${body}</div><div class="help-foot"><button class="btn" id="help-close">Got it</button></div></div>`;
   document.body.appendChild(pop);
   const close = () => pop.remove();
   pop.addEventListener("click", ev => { if (ev.target === pop) close(); });
@@ -9092,7 +9102,11 @@ function craftChanceHere(ab, owned) {
   if (!ab || !location) return null;
   // ⛔ CCODE-379: the attribute and sub a choice using this craft rolls — `rollForChoice`, the same answer the roll itself gets
   const roll = rollForChoice([ab], {}, CONTENT.rules?.craftSubAttributes);
-  const action = { attribute: roll.attribute, subAttribute: roll.subAttribute, abilityId: ab.id, abilityLevel: owned?.level ?? 1, label: ab.name || ab.id, tags: [], axes: {} };
+  const action = { attribute: roll.attribute, subAttribute: roll.subAttribute, abilityId: ab.id, abilityLevel: owned?.level ?? 1, label: ab.name || ab.id, tags: [], axes: {},
+    // ⛔ CCODE-414: the crit dials a real cast of this craft pays — its own authored critical (CCODE-76) and a wild current's widening
+    // (SNG-140), the same two terms the choice path puts on the action. A preview that omits a term the roll pays is a preview that lies.
+    wildVariance: !!(ab?.wildVariance || ab?.powerSystem === "wild_current"),
+    craftCrit: (() => { const c = critFor(ab, { cfg: CONTENT.craftMechanics, cap: CONTENT.rules?.crit?.perCraftCap }); return c ? [{ name: ab?.name || ab.id, ...c }] : []; })() };
   const rules = CONTENT.rules;
   const mods = aptitudeMods(character, rules.playerAptitudes);
   const equip = equipmentBonus(character, action.tags, rules);
@@ -9100,7 +9114,20 @@ function craftChanceHere(ab, owned) {
   const aff = affinityFor(action, location);
   const ground = substrateForAction({ abilityId: ab.id }, location);
   const chance = successChance({ character, action, location, rules, aptitudeMods: mods, equipmentBonus: (equip?.bonus || 0) + (comp?.bonus || 0) + (aff?.bonus || 0), substratePenalty: ground?.chancePenalty || 0 });
-  return { chance: Math.round(Number(chance) || 0), ground: Number(ground?.chancePenalty) || 0, off: !!ground?.off };
+  // ⛔ CCODE-414 — AND THE FIVE WAYS IT LANDS, graded exactly as `resolveAction` grades it (`outcomeOdds`), for the bar on every skill.
+  const crit = critProfile({ rules, action, character, aptitudeMods: mods });
+  const odds = outcomeOdds({ chance, critSuccess: crit.successChance, critFail: crit.failChance, partialBand: rules.d100?.partialBand });
+  return { chance: Math.round(Number(chance) || 0), ground: Number(ground?.chancePenalty) || 0, off: !!ground?.off, odds };
+}
+
+/** ⛔ CCODE-414 — THE BAR: five segments in the order a roll reads — a strong success, a success, a partial, a failure, a critical failure
+ *  — each as wide as its chance, with the numbers in its label for a screen reader and a tooltip for everyone else. */
+const ODDS_PARTS = [["crit_success", "strong success"], ["success", "success"], ["partial", "partial"], ["failure", "failure"], ["crit_failure", "critical failure"]];
+function oddsSaid(odds) { return ODDS_PARTS.map(([k, l]) => `${l} ${Math.round(100 * (odds?.[k] || 0))}%`).join(" · "); }
+function oddsBarHtml(odds, { wide = false } = {}) {
+  if (!odds) return "";
+  return `<span class="odds-bar${wide ? " wide" : ""}" role="img" aria-label="${esc(oddsSaid(odds))}">${ODDS_PARTS.map(([k]) =>
+    `<i class="o-${k}" style="width:${(100 * (odds[k] || 0)).toFixed(1)}%"></i>`).join("")}</span>`;
 }
 
 /** ⛔ AEVI's COPY_ground_tag_fight_menu — the chip a craft row carries: `groundTag`'s words, a tone class, her tooltip. Empty
@@ -17876,7 +17903,7 @@ function renderPlay(turn, opts = {}) {
           return `<div class="ability${on ? " boosted" : ""}" title="${esc(playerText(rank ? "CAN: " + rank.grants + " | CANNOT: " + rank.cannot : ab?.description || ""))}">
             <button class="craft-boost${on ? " on" : ""}" data-boost="${esc(a.abilityId)}" title="${on ? "Boosted — the GM leans toward suggesting this when it fits (tap to clear). A nudge, never a force." : "Boost — nudge the GM to surface this craft in your options when it fits. Never forces it, never changes a roll."}">✦</button>
             <span class="name entity-hover" data-entity="skill:${esc(a.abilityId)}">${esc(ab?.name || a.abilityId)}</span> <span class="tier-badge" title="Tier ${tierOf(abilityTier(ab))}">${tierOf(abilityTier(ab))}</span> rank ${a.level}${rank ? ` — <em>${esc(rank.name)}${rank.forked ? " ⑂" : ""}</em>` : ""}
-            <span class="cost">(${effectiveEnergyCost(ab, character, CONTENT.rules)} energy${effectiveEnergyCost(ab, character, CONTENT.rules) < ab.energyCost ? `, was ${ab.energyCost}` : ""})</span>${rollChip(ab)}${(() => { const ch = craftChanceHere(ab, a); return ch ? ` <span class="cost craft-chance" title="Base chance this craft lands here, unopposed${ch.ground ? ` — the ground ${ch.ground > 0 ? "costs it " : "lends it +"}${Math.abs(ch.ground)}` : ""}">${ch.off ? "will not answer here" : ch.chance + "% here"}</span>` : ""; })()}
+            <span class="cost">(${effectiveEnergyCost(ab, character, CONTENT.rules)} energy${effectiveEnergyCost(ab, character, CONTENT.rules) < ab.energyCost ? `, was ${ab.energyCost}` : ""})</span>${rollChip(ab)}${(() => { const ch = craftChanceHere(ab, a); return ch ? ` <span class="cost craft-chance" title="How this craft lands here, unopposed — ${esc(oddsSaid(ch.odds))}${ch.ground ? ` — the ground ${ch.ground > 0 ? "costs it " : "lends it +"}${Math.abs(ch.ground)}` : ""}">${ch.off ? "will not answer here" : `${oddsBarHtml(ch.odds)} ${ch.chance}% here`}</span>` : ""; })()}
             ${functionChips(ab)}${braidLine}
             <div class="hint ${p.ripe ? "practiced" : ""}">${esc(p.text)}</div>${trainLine(a, ab)}</div>`;
         };

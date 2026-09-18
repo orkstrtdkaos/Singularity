@@ -330,6 +330,19 @@ export function critProfile(ctx) {
     failClampedFrom: clamp(f) !== Math.round(f) ? Math.round(f) : null };
 }
 
+/** ⛔ CCODE-414 (Erik: "This little bar that visually shows the success and failure chance and degree is fantastic. I think we should
+ *  use it instead of just showing the % value on each skill. It can show crit success and failures as well as the partial band") —
+ *  THE FIVE WAYS A ROLL LANDS, AS PROBABILITIES, EXACTLY AS `resolveAction` BELOW GRADES IT: the first d100 at or under the chance is a
+ *  success, within `partialBand` above it a partial, beyond that a failure; then — for a success or a failure only, never a partial —
+ *  the second d100 at or under the crit dial turns it critical. Keys are the receipt's own degrees. They sum to 1. Pure. */
+export function outcomeOdds({ chance = 0, critSuccess = 0, critFail = 0, partialBand = 15 } = {}) {
+  const c = Math.max(0, Math.min(100, Math.round(Number(chance) || 0)));
+  const s = c / 100, p = Math.min(Math.max(0, Math.round(Number(partialBand) || 0)), 100 - c) / 100, f = Math.max(0, 1 - s - p);
+  const cs = Math.max(0, Math.min(100, Math.round(Number(critSuccess) || 0))) / 100;
+  const cf = Math.max(0, Math.min(100, Math.round(Number(critFail) || 0))) / 100;
+  return { crit_success: s * cs, success: s * (1 - cs), partial: p, failure: f * (1 - cf), crit_failure: f * cf, chance: c };
+}
+
 /** Roll and grade an action. Returns the full receipt so narration and telemetry both have everything.
  *  rng injectable for tests. Degrees: crit_success | success | partial | failure | crit_failure */
 export function resolveAction(ctx, rng = Math.random) {

@@ -20385,6 +20385,71 @@ console.log("\n── §282 · a surge that lands cannot bite ──");
     && /degree === "partial" \? 1 : 0;/.test(rd("engine/intensity.js")));
 }
 
+// ⛔ CCODE-402 — A PERSON'S FAMILIES ARE A FACT ABOUT THE PERSON, NOT ABOUT THE SCREEN. SNG-541c built the prose reader that turns
+// `role`, `description` and `skillsObserved` into contribution families, Erik ruled it in (2026-09-14: "these aren't just bodies that
+// can hit something — they have skills and abilities they can bring to bear"), and it was wired into the two FIGHT callers by hand.
+// ⚑ `alliesOf` — the party, the roster, the champions panel and the skill-battle seat — never passed it, so the same person answered
+// differently depending on which screen asked: Pell Ran Marsh brought SUSTAIN to a caravan escort and not to the party she stands in.
+console.log("\n── §283 · one person, one answer, every door ──");
+{
+  const CB283 = await import("../engine/combatants.js");
+  const { loadContentHeadless: lch283 } = await import("./headless_content.mjs");
+  const C283 = await lch283();
+  // a person whose TAGS say nothing and whose PROSE says plenty — the shape 87 of the 128 registry people are in
+  const prosePerson = {
+    id: "mara-wells", name: "Mara Wells", level: 6,
+    role: "Millbrook civic manager", description: "Calm authority; information economy — shares just enough to create interest",
+    skillsObserved: ["talked the south lane down from a fight", "keeps the ledger of who owes what"],
+  };
+  const tagsOnly = CB283.contributionsOf(prosePerson, {});
+  const withProse = CB283.contributionsOf(prosePerson, { evidence: true });
+  check("§283: ⛔ THE PROSE READER IS STILL ADDITIVE AND STILL FINDS MORE THAN THE TAGS — a person carrying no `assistTags` is not a person who does nothing; the tags' answer survives inside the fuller one",
+    withProse.length > tagsOnly.length && tagsOnly.every(f => withProse.includes(f)),
+    JSON.stringify({ tagsOnly, withProse }));
+
+  // ⛔ THE RULE: THE DOOR'S ANSWER IS THE RECORD'S ANSWER. Asserted over the real allies of the real saves, so a
+  // door added later that forgets to ask is caught by the population rather than by a fixture.
+  const fs283 = await import("node:fs");
+  const saves283 = [];
+  for (const dir of fs283.readdirSync(join(root, "characters"))) {
+    let inner = [];
+    try { inner = fs283.readdirSync(join(root, "characters", dir)); } catch { continue; }
+    for (const f of inner.filter(x => x.endsWith(".json"))) {
+      try { const j = JSON.parse(fs283.readFileSync(join(root, "characters", dir, f), "utf8")); saves283.push(j.character || j.data || j); } catch { /* a save we cannot read is not a finding */ }
+    }
+  }
+  let seen283 = 0, agreed283 = 0; const off283 = [];
+  for (const c of saves283) {
+    let allies = [];
+    try {
+      allies = CB283.alliesOf(c, { companions: C283.companions || {}, npcs: C283.npcs || {},
+        company: c.company || null, party: c.party || null, catalog: C283.abilities, fnIndex: C283.fnIndex });
+    } catch { continue; }
+    for (const a of allies) {
+      if (a.kind === "player") continue;
+      const rec = a.record || a;
+      if (!rec || typeof rec !== "object") continue;
+      seen283++;
+      const door = [...(a.contributions || [])].sort().join(",");
+      const own = CB283.contributionsOf(rec, { evidence: true }).slice().sort().join(",");
+      if (door === own) agreed283++; else off283.push(`${rec.name || a.id}: door [${door}] vs record [${own}]`);
+    }
+  }
+  check("§283: ⛔ WHAT THE PARTY SCREEN SAYS A PERSON BRINGS IS WHAT THEIR RECORD SAYS THEY BRING — every ally on every save, so a surface that forgets to ask the fuller question is caught by the population and not by one fixture",
+    seen283 > 0 && agreed283 === seen283, off283.slice(0, 4).join(" · ") || `${agreed283} of ${seen283} allies agree`);
+  check("§283: ⛑ …and it rides through `alliesOf`'s own options, the third time this exact defect has appeared one level up (CCODE-265 was `stageOf`)",
+    // ⚠️ and asserted as the RULE, not the literal: CCODE-265's version of this check pinned the whole object and went red the
+    // moment `evidence` joined it, which is the fifth gate of mine to measure the punctuation instead of the rule.
+    /opts = \{[^}]*\bevidence: true\b[^}]*\}/.test(rd("engine/combatants.js"))
+    && /contributionsOf\([^)]*opts/.test(rd("engine/combatants.js")));
+  // ⚠️ AND THE RESTRAINT IS STILL A RESTRAINT — the ruled default stays off, so the next caller still has to decide
+  check("§283: ⚠️ the DEFAULT is still off — Erik's restraint was that a new caller must decide rather than inherit, and this ships a decision at one door, not a change to the rule for all of them",
+    /evidence = false/.test(rd("engine/combatants.js"))
+    && /contingentsFromPeople\(escort, \{/.test(rd("engine/caravan.js"))
+    && /contributionsOf\(p, \{ evidence: true \}\)/.test(rd("engine/caravan.js"))
+    && /contributionsOf\(p, \{ evidence: true \}\)/.test(rd("engine/holdings.js")));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

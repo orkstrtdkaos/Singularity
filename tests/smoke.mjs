@@ -20530,8 +20530,13 @@ await (async () => {
     {
       const cbSrc = readFileSync(join(root, "engine/combatants.js"), "utf8").replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
       const encSrc = readFileSync(join(root, "engine/encounters.js"), "utf8").replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
+      // ⛔ CCODE-402b — THIS PINNED THE OBJECT LITERAL WHERE IT MEANT "THE FIELD RIDES THROUGH", and it went red the moment a
+      // SECOND field joined the same options object (`evidence`, CCODE-402) — a false red on a change that could not affect
+      // `stageOf` at all. The rule is that whatever `alliesOf` hands `contributionsOf` carries `stageOf`; the punctuation
+      // around it is not the rule.
       check("CCODE-265: alliesOf threads stageOf through to contributionsOf",
-        /stageOf/.test(cbSrc) && /opts = \{ tagFamilies, stageOf \}/.test(cbSrc));
+        /stageOf/.test(cbSrc) && /opts = \{[^}]*\bstageOf\b[^}]*\}/.test(cbSrc)
+        && /contributionsOf\([^)]*opts/.test(cbSrc));
       check("CCODE-265: …and the encounter wrapper SUPPLIES it from the real item evolution",
         /stageOf:/.test(encSrc) && /currentStage\(/.test(encSrc));
     }

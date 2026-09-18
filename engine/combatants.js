@@ -357,7 +357,18 @@ export function familiesOfKit(record, catalog = null, fnIndex = null) {
 export function alliesOf(character, { companions = {}, npcs = {}, tagFamilies = null, company = null, stageOf = null, catalog = null, fnIndex = null, party = null } = {}) {
   // ⚠️ CCODE-265: `stageOf` rides through to `contributionsOf` or the override is reader-only — the exact
   // defect the override exists to fix, reproduced one level up.
-  const opts = { tagFamilies, stageOf };
+  //
+  // ⛔ CCODE-402 — AND `evidence` RIDES THROUGH TOO, WHICH IS THE SAME DEFECT A THIRD TIME. SNG-541c built the prose reader, ruled it
+  // (Erik 2026-09-14: "these aren't just bodies that can hit something — they have skills and abilities they can bring to bear") and
+  // wired it into the two fight callers by hand. This door — the party, the roster, the champions panel and the skill-battle seat —
+  // never passed it, so THE SAME PERSON ANSWERED DIFFERENTLY DEPENDING ON WHICH SCREEN ASKED: Pell Ran Marsh brings SUSTAIN to a
+  // caravan escort and did not bring it to the party she is standing in.
+  //
+  // ⚑ MEASURED across the 21 allies on the 16 saves: none of them was HARM-only (the authored companions carry real `assistTags`), and
+  // TWO gain one family each — Pell + SUSTAIN, Veth (Stillwater) Ondra + SHAPE. Small, and additive by construction: the prose reader
+  // can only find a family, never take one away. ⚠️ THE DOCUMENTED RESTRAINT IS THAT A NEW CALLER MUST DECIDE RATHER THAN INHERIT, so
+  // this is decided here and named here: a person's families are a fact about the person, not about the screen.
+  const opts = { tagFamilies, stageOf, evidence: true };
   const out = [{
     id: character?.id || "player", name: character?.name || "you", kind: "player",
     // ⛔ CCODE-259 — THE PLAYER IS A COMBATANT BY DEFINITION AND THIS LINE SAID OTHERWISE. It listed only

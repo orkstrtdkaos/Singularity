@@ -20696,6 +20696,123 @@ console.log("\n── §286 · the legion ──");
     JSON.stringify(apart.bands.map(b => `${b.id}:${b.condition}/${b.losses}`)));
 }
 
+// ⛔ CCODE-406 (Erik) — "Legions have commanders and unit captains. Those positions should grant bonuses... like a scaled up band."
+// And, asked which ladder: "Build level based for now and crafts can add to it later... or decrease it if opposing."
+console.log("\n── §287 · commanders and captains ──");
+{
+  const M287 = await import("../engine/melee.js");
+  const F287 = await import("../engine/fellowship.js");
+  const levelOf287 = (id) => ({ veteran: 35, steady: 24, green: 9, player: 30 }[id] || 0);
+  const band287 = (over = {}) => ({ id: "b", name: "The Band", condition: "fresh", losses: 0,
+    contingents: [{ n: 6, quality: 2, does: ["HARM", "PROTECT"], npcId: "veteran", what: "a veteran" },
+      { n: 1, quality: 3, does: ["KNOW"], npcId: "steady", what: "the steady one" }], ...over });
+
+  // ⛔ 1 · HIS WORDS, STORED UNDER HIS WORDS
+  check("§287: ⛔ A BAND'S LEADER IS ITS CAPTAIN AND A LEGION'S IS ITS COMMANDER — Erik's two words, kept as two fields, so the GM narrates the position it actually is",
+    M287.leaderOf(band287({ captain: "veteran" }))?.role === "captain"
+    && M287.leaderOf({ formedFrom: ["a", "b"], commander: "veteran" })?.role === "commander"
+    && M287.leaderOf(band287())?.role === undefined === false || M287.leaderOf(band287()) === null,
+    JSON.stringify({ band: M287.leaderOf(band287({ captain: "veteran" })), legion: M287.leaderOf({ formedFrom: ["a"], commander: "veteran" }) }));
+
+  // ⛔ 2 · LEVEL-BASED, ON THE PROJECT'S OWN FLAT LADDER, AND A LOW-LEVEL LEADER IS WORTH NOTHING
+  const bonus = (leader, cfg = {}) => M287.leaderBonusOf(band287({ captain: leader }), { levelOf: levelOf287, cfg });
+  check("§287: ⛔ THE BONUS IS LEVEL-BASED AND IT IS NOT A NEW LADDER — `contingentsFromPeople` already rates a person at `1 + floor(level/10)`, 'DELIBERATELY FLAT', so a leader is that same step without the base: nothing at level 9, and the step is content-dialled so it is Erik's to move",
+    bonus("green") === 0 && bonus("steady") === 2 && bonus("veteran") === 2
+    && M287.leaderBonusOf(band287({ captain: "veteran" }), { levelOf: levelOf287, cfg: { leaderStep: 5 } }) === 2,
+    JSON.stringify({ green: bonus("green"), steady: bonus("steady"), veteran: bonus("veteran") }));
+  check("§287: ⛔ …AND A BONUS NOBODY CAN PRICE IS ZERO, never a guess — no leader, no level lookup, or a leader nobody has a level for all read 0",
+    M287.leaderBonusOf(band287(), { levelOf: levelOf287 }) === 0
+    && M287.leaderBonusOf(band287({ captain: "veteran" }), {}) === 0
+    && M287.leaderBonusOf(band287({ captain: "nobody-knows-them" }), { levelOf: levelOf287 }) === 0);
+
+  // ⛔ 3 · THE CEILING: A LEADER CAN AT MOST DOUBLE WHAT HE ALREADY HAS
+  const raw = { id: "h", name: "Hands", condition: "fresh", contingents: [{ n: 10, quality: 1, does: ["HARM"], npcId: "veteran" }] };
+  const effOf = (u, cap) => M287.bandStrength(M287.resolvedUnit([u], { ...u, captain: cap }, { levelOf: levelOf287 }), {}).effective;
+  check("§287: ⛔ A LEADER CAN AT MOST DOUBLE HIS UNIT — the ceiling is the unit's OWN quality and not a constant I picked: a commander makes the most of the troops he has and cannot make raw hands into veterans. ⚑ Uncapped, a level-35 captain took six at quality 2 from 12 effective to 30, a 2.5× swing where this file's largest multiplier is 1.4×",
+    effOf(raw, "veteran") === 2 * effOf(raw, null)
+    && M287.leaderBonusOf({ ...raw, captain: "veteran" }, { levelOf: levelOf287 }) === 1,
+    JSON.stringify({ rawAlone: effOf(raw, null), rawLed: effOf(raw, "veteran") }));
+
+  // ⛔ 4 · IT REACHES EVERY READER WITHOUT ONE OF THEM GAINING A PARAMETER
+  const led = band287({ captain: "veteran" });
+  const before = M287.resolvedUnit([led], { ...led, captain: null }, { levelOf: levelOf287 });
+  const after = M287.resolvedUnit([led], led, { levelOf: levelOf287 });
+  check("§287: ⛔ THE BONUS RIDES IN THE RESOLVED CONTINGENTS' QUALITY, so strength, threat and composition all pick it up without any of them gaining an argument somebody can forget to pass — four readers taking a new parameter is four chances to ship it half-wired, which is CCODE-402 one level up",
+    M287.bandStrength(after, {}).effective > M287.bandStrength(before, {}).effective
+    && M287.bandThreat(after, {}).power > M287.bandThreat(before, {}).power
+    && M287.unitComposition(after).bodies === M287.unitComposition(before).bodies,   // ⚠️ it lifts quality, never head-count
+    JSON.stringify({ before: M287.bandStrength(before, {}).effective, after: M287.bandStrength(after, {}).effective,
+      heads: M287.unitComposition(after).bodies }));
+
+  // ⛔ 5 · BOTH SCALES, WHICH IS "LIKE A SCALED UP BAND"
+  let bands287 = [band287({ id: "one", name: "One", captain: "veteran" }),
+    { id: "two", name: "Two", condition: "fresh", contingents: [{ n: 8, quality: 1, does: ["HARM"], npcId: "steady" }], captain: "steady" }];
+  bands287 = M287.formLegion(bands287, { id: "L", name: "The Legion", from: ["one", "two"], day: 1 }).bands;
+  const legNo = M287.bandStrength(M287.resolvedUnit(bands287, bands287.find(b => b.id === "L"), { levelOf: levelOf287 }), {}).effective;
+  const withCmd = M287.setUnitLeader(bands287, "L", "veteran");
+  const legCmd = M287.bandStrength(M287.resolvedUnit(withCmd.bands, withCmd.unit, { levelOf: levelOf287 }), {}).effective;
+  check("§287: ⛔ AND IT STACKS AT BOTH SCALES — each band is lifted by its OWN captain and the whole formation again by the legion's commander, so a legion of well-captained bands under a good commander is worth more than the same heads under nobody",
+    legCmd > legNo && withCmd.role === "commander",
+    JSON.stringify({ captainsOnly: legNo, andACommander: legCmd }));
+
+  // ⛔ 6 · A LEADER HAS TO BE THERE
+  check("§287: ⛔ A LEADER MUST BE SOMEBODY ACTUALLY STANDING IN IT (or the character) — a commander who is not with the formation is a bonus from nowhere, and the level lookup would be pricing a stranger",
+    /standing in it/.test(String(M287.setUnitLeader(bands287, "one", "a-stranger").why))
+    && M287.setUnitLeader(bands287, "one", "veteran").ok === true
+    && M287.setUnitLeader(bands287, "one", "player").ok === true
+    && M287.setUnitLeader(bands287, "one", null).ok === true,
+    String(M287.setUnitLeader(bands287, "one", "a-stranger").why));
+
+  // ⛑ 7 · AND IT REACHES THE SCREEN AND THE FIELD
+  const A287 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§287: ⛑ the roster prices it at the ONE door every surface goes through — `unitsOf` supplies the level lookup, because `melee.js` takes it injected and a caller that forgets it silently gets no bonus at all",
+    // ⚠️ the RULE, not the signature: my first cut pinned `unitsOf(character, { cfg = null } = {})` and went red the hour the
+    // options grew — the fourth gate of mine this session to measure an expression. What matters is that ONE door supplies the
+    // lookup, and that the screen hands it the content and the dials it needs to price a level at all.
+    /export function unitsOf\(character, \{[^)]*cfg[^)]*\}/.test(rd("engine/fellowship.js"))
+    && /leaderBonus: leaderBonusOf\(b, lopts\)/.test(rd("engine/fellowship.js"))
+    && /unitsOf\(character, \{[^}]*cfg: meleeCfg\(\)[^}]*content: CONTENT/.test(A287));
+  check("§287: ⛔ …and the CLASH and the THREAT read the resolved unit, or a legion fights at zero strength and no commander's bonus ever reaches the field — CCODE-279's 'consumer still reading the old field', twice more",
+    /legionClash\(\[bandStrength\(resolvedUnit\(character\.bands \|\| \[\], band, \{ levelOf: bandLevelOf/.test(A287)
+    && /const t = bandThreat\(resolvedUnit\(character\.bands \|\| \[\], band, \{ levelOf: bandLevelOf/.test(A287)
+    && !/const t = bandThreat\(band, \{ cfg: meleeCfg\(\) \}\);/.test(A287));
+  // ⛔ ONE PERSON, ONE LEVEL — asserted over the real saves, because this is where it went wrong on the screen
+  {
+    const { loadContentHeadless: lch287 } = await import("./headless_content.mjs");
+    const C287 = await lch287();
+    const fs287 = await import("node:fs");
+    let seen = 0, agreed = 0; const off = [];
+    for (const dir of fs287.readdirSync(join(root, "characters"))) {
+      let inner = [];
+      try { inner = fs287.readdirSync(join(root, "characters", dir)); } catch { continue; }
+      for (const f of inner.filter(x => x.endsWith(".json"))) {
+        let c = null;
+        try { const j = JSON.parse(fs287.readFileSync(join(root, "characters", dir, f), "utf8")); c = j.character || j.data || j; } catch { continue; }
+        if (!(c.bands || []).length) continue;
+        const o = { content: C287, worldDay: 80, cfg: C287.rules?.npcStanding || null };
+        for (const r of [...F287.poolRows(c, { content: C287, worldDay: 80 }), ...F287.atSideRows(c, { content: C287, worldDay: 80 })]) {
+          if (r.kind !== "person") continue;
+          seen++;
+          const one = F287.levelOfPerson(c, r.id, o);
+          if (one === r.level) agreed++; else off.push(`${r.name}: roster ${r.level} vs ${one}`);
+        }
+      }
+    }
+    check("§287: ⛔ ONE PERSON, ONE LEVEL, EVERY SURFACE — ⚑ caught on the screen: the leader picker offered 'Pell Ran Marsh level 9' while the roster two lines above said 35, because `derivedLevel` needs the day, the MERGED `npcStanding` bag and the authored record, and my new lookup passed none of it. `memberRows`'s own comment records that exact trap collapsing everyone to level 1",
+      seen > 0 && agreed === seen, off.slice(0, 3).join(" · ") || `${agreed} of ${seen} people agree`);
+    check("§287: ⛑ …and there is now ONE function they all ask, rather than three hand-rolled lookups that could drift apart again",
+      /export function levelOfPerson\(/.test(rd("engine/fellowship.js"))
+      && /level: levelOfPerson\(character, id,/.test(rd("engine/fellowship.js"))
+      && /return levelOfPerson\(character, id, \{ content: CONTENT/.test(rd("app.js"))
+      && !/try \{ return Number\(derivedLevel\(rec\)\) \|\| 0; \}/.test(rd("app.js")));
+  }
+
+  // ⬜ THE SEAM ERIK NAMED, LEFT OPEN AND NOT FAKED
+  check("§287: ⬜ …and the craft term he named is a SEAM, not a dead parameter — 'crafts can add to it later... or decrease it if opposing', and a parameter nothing fills reads to the next author as a built system",
+    /crafts add to this later, or subtract when the craft is an OPPOSING commander's/.test(rd("engine/melee.js"))
+    && !/craftBonus|craftTerm|opposingCraft/.test(rd("engine/melee.js")));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

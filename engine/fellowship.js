@@ -17,7 +17,7 @@
 // posture is being AT YOUR SIDE. The two are independent, which is why Silas's save read as broken: six sworn, nobody beside him.
 //
 // PURE. Every function reads the character and content and returns data; the writers stay `recruit`/`partCompany` in company.js.
-import { contingentsOf, bandCan, bandStrength, resolvedUnit, legionParts } from "./melee.js";   // CCODE-405: a legion reads through its parts
+import { contingentsOf, bandCan, bandStrength, resolvedUnit, legionParts, leaderOf, leaderBonusOf } from "./melee.js";   // CCODE-405/406: a legion reads through its parts, and its leader is priced
 import { activeCompany } from "./company.js";
 import { companyPlaces } from "./ladder.js";
 import { derivedLevel } from "./npcsheet.js";
@@ -50,8 +50,29 @@ function unitHead(unit) {
 }
 
 /** Every unit you command, normalised and PLURAL. ⚠️ Returns [] for a character with no bands rather than a fabricated one. */
-export function unitsOf(character) {
+/** ⛔ CCODE-406 — WHAT ONE PERSON'S LEVEL IS, ONCE. ⚑ Caught on the screen: the leader picker offered "Pell Ran Marsh level 9" while
+ *  the roster two lines above it said level 35, because `derivedLevel` needs its context — the day, the MERGED `rules.npcStanding`
+ *  bag, and the authored record beside the registry one — and my new lookup passed none of it.
+ *  ⚠️ `memberRows`'s own comment records this trap exactly: reading `rules.resolution.npcStanding` instead of the merged
+ *  `rules.npcStanding` makes `tierFromRole` return null and collapses everyone to level 1, and Erik caught that within an hour.
+ *  Passing NO cfg is the same trap in its worst form — so there is now one function, and every surface asks it. */
+export function levelOfPerson(character, id, { content = {}, worldDay = null, cfg = null } = {}) {
+  if (!id) return 0;
+  if (String(id) === "player") return num(character?.level, 0) || 0;
+  const npcs = content?.npcs || {};
+  const entry = character?.npcRegistry?.[id] || npcs[id] || character?.generated?.npc?.[id] || null;
+  if (!entry) return 0;
+  const sheetCfg = cfg || content?.rules?.npcStanding || content?.rules?.resolution?.npcStanding || {};
+  return num(derivedLevel(entry, { day: worldDay, cfg: sheetCfg, authored: npcs[id] || null }), 0) || 0;
+}
+
+export function unitsOf(character, { cfg = null, content = null, worldDay = null } = {}) {
   const all = arr(character?.bands);
+  // ⛔ CCODE-406 — THE LEVEL LOOKUP THE BONUS IS PRICED FROM, supplied HERE because this is the one reader every surface goes through.
+  // ⚠️ `melee.js` takes it injected (it has no imports and must not gain any), which means a caller that forgets it silently gets NO
+  // bonus — so it is wired at the single door rather than at each of the four readers that would have to remember.
+  const levelOf = (id) => levelOfPerson(character, id, { content: content || {}, worldDay, cfg: content?.rules?.npcStanding || null });
+  const lopts = { levelOf, cfg: cfg || {} };
   return all.filter(b => b && (b.id || b.name)).map(b => ({
     id: String(b.id || b.name),
     name: b.name || String(b.id),
@@ -63,10 +84,13 @@ export function unitsOf(character) {
     // ⛔ CCODE-405 — A LEGION OWNS NO CONTINGENTS, so every derived number here reads the RESOLVED unit: its own plus every part's.
     // ⚠️ `memberRows` below still walks the STORED contingents, which is what keeps a legion's people from being listed twice — once
     // under their band and once under the legion they stand in. The aggregate is resolved; the roster is not.
-    head: unitHead(resolvedUnit(all, b)),
-    can: bandCan(resolvedUnit(all, b)),
-    worth: bandStrength(resolvedUnit(all, b), {}),
-    resolved: resolvedUnit(all, b),              // the unit-shaped object a strength/gap reader must be handed
+    head: unitHead(resolvedUnit(all, b, lopts)),
+    can: bandCan(resolvedUnit(all, b, lopts)),
+    worth: bandStrength(resolvedUnit(all, b, lopts), {}),
+    resolved: resolvedUnit(all, b, lopts),       // the unit-shaped object a strength/gap reader must be handed
+    // ⛔ CCODE-406 (Erik): "Legions have commanders and unit captains. Those positions should grant bonuses... like a scaled up band."
+    leader: (() => { const w = leaderOf(b); return w ? { ...w, level: levelOf(w.id) } : null; })(),
+    leaderBonus: leaderBonusOf(b, lopts),        // ⚠️ the PART's own captain; a legion's commander is priced on the legion row
     formedFrom: arr(b.formedFrom).map(String),   // ⛑ NO LONGER EMPTY: the bands this legion is formed from (CCODE-405)
     parts: legionParts(all, b).map(p => ({ id: String(p.id), name: p.name || String(p.id), condition: p.condition || "fresh" })),
     // ⛔ ERIK'S LEGION TAG — "they gain a legion tag... which legion are they in". Set on a band that stands in one, null otherwise.
@@ -117,7 +141,7 @@ function memberRows(character, { content = {}, worldDay = null, cfg = null, incl
         name: entry.name || authored?.name || id,
         what: c.what || entry.role || null,
         does: arr(c.does), verbs: familyVerbs(c.does),
-        level: derivedLevel(entry, { day: worldDay, cfg: sheetCfg, authored }),
+        level: levelOfPerson(character, id, { content, worldDay, cfg: sheetCfg }),   // CCODE-406: the one answer, so no two surfaces disagree
         atSide: side.has(id),
         quality: num(c.quality, u.quality),
         entry, authored, seatId: u.seatId,
@@ -236,10 +260,11 @@ function wordFor(n) {
  *  from the contingents every render; the stored `count` is never read and never shown. */
 export function unitLine(u) {
   const can = arr(u?.can).length ? arr(u.can).map(f => FAMILY_VERBS[f] || String(f).toLowerCase()).join(", ") : "nothing named yet";
+  const led = u?.leader ? `, ${u.leader.role === "commander" ? "commanded" : "captained"}` : "";
   // ⛔ CCODE-405 — AND WHETHER IT IS REAL YET. Erik: "you should be able to build the legion… without incurring the cost", so a unit
   // that has not been called is a PLAN: it is nowhere, it costs nothing, and saying "camped" of it would be a lie about a mechanism.
   const standing = u?.called ? `${u.posture === "dispersed" ? "dispersed to forage" : "camped"}` : "on paper — not yet called together";
-  return `${wordFor(u?.head)} strong, ${u?.condition || "fresh"}, ${standing} — it ${can}`;
+  return `${wordFor(u?.head)} strong, ${u?.condition || "fresh"}${led}, ${standing} — it ${can}`;
 }
 
 /** ⛔ THE GM'S VIEW, and the reason it lives here: `gm_registry` printed `${b.name} (${b.condition}, ${b.count})` — the stored copy

@@ -72,7 +72,7 @@ import { featureCost, allFeatures, refreshImprovement, canBeAskedToWork, holding
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
 import { FIRE_TESTS, diffKeys } from "./engine/firetests.js";   // SNG-560: the parts that have never been used
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady, applyPartyOps, activeCompany, formerCompany } from "./engine/company.js";
-import { unitsOf, unitLine, poolRows, atSideRows, wherePerson, canBringForward, rosterLine } from "./engine/fellowship.js";   // SNG-541: the roster, the pool, and EVERY band rather than one
+import { unitsOf, unitLine, poolRows, atSideRows, wherePerson, canBringForward, rosterLine, levelOfPerson } from "./engine/fellowship.js";   // SNG-541: the roster, the pool, and EVERY band rather than one
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, suggestForCreation, archetypeFamilies, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
 import { toolkitForGM } from "./engine/toolkit.js";
 import { fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc, arcDebtOf } from "./engine/personalArc.js";   // CCODE-393: a fallback arc is a debt
@@ -149,7 +149,7 @@ import { championsFor, resolveChampion, creditChampion, championLine, sendingIsG
 // ⛔ CCODE-404 (Erik) — `addContingent` and `musteredFrom` are new; `unitComposition` and `bandGaps` had NO caller outside the tests.
 // ⛔ CCODE-405 (Erik's legion ruling): formed of bands that keep their identity, placed and postured once CALLED, and free until then.
 // ⚠️ ONE LINE ON PURPOSE — `import_integrity` reads an import statement per line, and a comment inside the braces hides what follows it.
-import { commandSlots, bringForward, lineSplit, canRaiseBand, raiseBand, bandStrength, bandThreat, bloodBand, recoverBand, legionClash, addContingent, musteredFrom, unitComposition, bandGaps, formLegion, disbandLegion, callCostOf, callUnit, standDown, setUnitPosture, bloodUnit, resolvedUnit, UNIT_POSTURES } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
+import { commandSlots, bringForward, lineSplit, canRaiseBand, raiseBand, bandStrength, bandThreat, bloodBand, recoverBand, legionClash, addContingent, musteredFrom, unitComposition, bandGaps, formLegion, disbandLegion, callCostOf, callUnit, standDown, setUnitPosture, bloodUnit, resolvedUnit, UNIT_POSTURES, setUnitLeader, leaderBonusOf } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
 import { groupCapability, loadBearing } from "./engine/group.js";   // CCODE-317/322: what your line covers, and who holds it alone
 import { characterPower, threatBand } from "./engine/threat.js"; // CCODE-52: built power sets the mean the encounter pool revolves around
 import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine, FRAME_FREEFORM_CUE } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c). SNG-246 Fix D: playerReceiptLine = the mechanical receipt SHOWN to the player
@@ -164,7 +164,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.68";
+const APP_VERSION = "2.0.69";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -749,6 +749,14 @@ function meleeCfg() {
       ? { attentionByTier: r.attentionByTier || r.arcResponse.attentionByTier } : {}),
   };
 }
+/** ⛔ CCODE-406 — WHAT A LEADER'S LEVEL IS, for pricing the position — through `levelOfPerson`, which is the ONE answer the roster
+ *  gives too. ⚑ My first version resolved it here by hand and offered "Pell Ran Marsh level 9" in the picker while the roster two
+ *  lines above said 35: `derivedLevel` needs the day, the merged `npcStanding` bag and the authored record, and this passed none. */
+function bandLevelOf(id) {
+  const day = (() => { try { return absoluteWorldDay(); } catch { return null; } })();
+  try { return levelOfPerson(character, id, { content: CONTENT, worldDay: day, cfg: CONTENT.rules?.npcStanding || null }); } catch { return 0; }
+}
+
 let FN_INDEX = { families: [], verbToFamily: {}, byFamily: {} }; // SNG-124: function-family index (built at load)
 let wheelFnFilter = new Set(); // SNG-124 Phase B: active function-family filter on the skill wheel
 let learnBuyableOnly = false;  // SNG-348 (Erik): show only crafts the current skill points actually reach
@@ -8226,7 +8234,11 @@ function applyTurn(turn, resolution, playerWords = null) {
         // narrator can say "these forty are above you" and mean the same thing it means anywhere else.
         const band = (character.bands || []).find(b => b.id === String(op.id || ""));
         if (!band) continue;
-        const t = bandThreat(band, { cfg: meleeCfg() });
+        // ⛔ CCODE-405/406 — THE RESOLVED UNIT. A legion owns no contingents, so the stored object reads as no threat at all, and a
+        // leader's bonus lives in the resolved contingents' quality. ⚠️ My first pass at this left a COMMENT here claiming `t` was
+        // already read from the resolved unit while the line below it still read `band` — a comment describing a mechanism that was
+        // not running, which is the defect I have recorded three times and walked into again in the same file.
+        const t = bandThreat(resolvedUnit(character.bands || [], band, { levelOf: bandLevelOf, cfg: meleeCfg() }), { cfg: meleeCfg() });
         const mine = characterPower(character, CONTENT.rules || {});
         // ⚠️ `null` RATHER THAN A READ OFF THE RULES BAG. Reading a key no pack provides is a phantom control
         // — my third this session — and `threatBand` already falls back to DEFAULT_BANDS by design. When
@@ -8242,7 +8254,9 @@ function applyTurn(turn, resolution, playerWords = null) {
         const band = (character.bands || []).find(b => b.id === String(op.id || ""));
         if (!band || band.condition === "broken") continue;
         const theirs = [{ count: Math.max(1, Math.min(2000, op.against | 0 || 20)), quality: Math.max(1, Math.min(3, op.quality | 0 || 1)) }];
-        const c = legionClash([bandStrength(band, { cfg: meleeCfg() })], theirs,
+        // ⛔ CCODE-405/406 — THE RESOLVED UNIT, or a legion clashes at zero strength (it owns no contingents) and its commander's
+        // bonus never reaches the field. Same defect as the `bloodBand` call below it, and the same fix.
+        const c = legionClash([bandStrength(resolvedUnit(character.bands || [], band, { levelOf: bandLevelOf, cfg: meleeCfg() }), { cfg: meleeCfg() })], theirs,
           { heroSwing: Math.max(-1, Math.min(1, Number(op.heroSwing) || 0)), cfg: meleeCfg() });
         // ⚠️ THE CLASH DECIDES THE BATTLE; `bloodBand` decides what it did to the people who fought it. Two
         // results, because a won battle that costs nobody anything is a number going up.
@@ -14871,11 +14885,54 @@ async function callUnitTogether(unitId) {
   saveCharacter(character); renderBandsTab();
 }
 
+/** ⛔ CCODE-406 — WHO LEADS IT. Erik: "Legions have commanders and unit captains." ⚠️ THE LIST IS THE UNIT'S OWN PEOPLE, plus the
+ *  character: `setUnitLeader` refuses anybody else, because a commander who is not with the formation is a bonus from nowhere. The
+ *  rows say what the appointment would be WORTH, since that is the whole decision. */
+function showLeaderPicker(unitId) {
+  document.getElementById("help-pop")?.remove();
+  const day406 = (() => { try { return absoluteWorldDay(); } catch { return null; } })();
+  const u = unitsOf(character, { cfg: meleeCfg(), content: CONTENT, worldDay: day406 }).find(x => x.id === unitId);
+  if (!u) return;
+  const role = u.isLegion ? "commander" : "captain";
+  const step = Math.max(1, Number(meleeCfg().leaderStep) || 10);
+  const inIt = [...new Set((u.resolved?.contingents || []).map(c => c.npcId).filter(Boolean).map(String))];
+  const rows = [{ id: "player", name: character.name, level: bandLevelOf("player") },
+    ...inIt.map(id => ({ id, name: character.npcRegistry?.[id]?.name || CONTENT.npcs?.[id]?.name || id, level: bandLevelOf(id) }))]
+    .filter(r => r.id !== (u.leader?.id || null))
+    .sort((a, b) => b.level - a.level);
+  const pop = document.createElement("div");
+  pop.id = "help-pop"; pop.className = "help-overlay";
+  pop.innerHTML = `<div class="help-card" role="dialog" aria-label="Appoint a ${esc(role)}">
+    <div class="whois-head">Who ${role === "commander" ? "commands" : "captains"} ${esc(u.name)}?</div>
+    ${rows.length ? rows.map(r => `<button class="opt" data-lead-take="${esc(r.id)}">${esc(r.name)}
+      <span class="cost">level ${r.level} · ${Math.floor(r.level / step) > 0 ? `+${Math.floor(r.level / step)} before the ceiling` : "not yet worth a step"}</span></button>`).join("")
+      : `<div class="hint">Nobody stands in it yet.</div>`}
+    ${u.leader ? `<button class="opt" data-lead-take="">Leave the position empty</button>` : ""}
+    <div class="help-foot">
+      <span class="hint">A ${esc(role)} is worth a step of quality per ${step} levels to every head under them — and can at most double what the unit already is. Crafts will reach past that ceiling when they exist.</span>
+      <button class="btn" id="help-close">Cancel</button>
+    </div></div>`;
+  document.body.appendChild(pop);
+  const close = () => pop.remove();
+  pop.addEventListener("click", ev => { if (ev.target === pop) close(); });
+  document.getElementById("help-close").onclick = close;
+  for (const el of pop.querySelectorAll("[data-lead-take]")) el.onclick = () => {
+    const who = el.dataset.leadTake || null;
+    close();
+    const r = setUnitLeader(character.bands || [], unitId, who);
+    if (!r.ok) { alert(r.why); return; }
+    character.bands = r.bands;
+    if (who) queueHoldingEvent(character, `${who === "player" ? character.name : (character.npcRegistry?.[who]?.name || who)} ${r.role === "commander" ? "commands" : "captains"} ${u.name} now.`);
+    saveCharacter(character); renderBandsTab();
+  };
+}
+
 function renderBandsTab() {
   const ladder = CONTENT.rules.subAttributeLadder;
   const day = absoluteWorldDay();
   const opts = { content: CONTENT, worldDay: day };
-  const units = unitsOf(character);
+  // ⛔ CCODE-406: content AND the day AND the dials — a leader priced without them reads as level 0 and the position looks worthless.
+  const units = unitsOf(character, { cfg: meleeCfg(), content: CONTENT, worldDay: day });
   const whereOpts = { locations: CONTENT.locations || {}, generated: character.generated?.location || {},
     holdings: character.holdings || [], hereId: character.currentLocationId, worldDay: day };
   const places = companyPlaces(ladder, character);
@@ -14964,6 +15021,18 @@ function renderBandsTab() {
           ? `<div class="hint">${esc(unitLine(u))}</div>`
           : `<div><strong>${esc(u.name)}</strong>${u.isLegion ? ` <span class="news-near-chip">legion</span>` : ""} <span class="hint">— ${esc(unitLine(u))}</span></div>`}
         ${standing405(u)}
+        ${(() => {
+          // ⛔ CCODE-406 — WHO LEADS IT, AND WHAT THE POSITION IS WORTH. Erik: "Those positions should grant bonuses... like a scaled
+          // up band." ⚠️ The bonus is SAID, with the level it came from, because a number that changes a unit's worth and does not
+          // explain itself is the thing this project keeps finding.
+          const role = u.isLegion ? "commander" : "captain";
+          const nm = (id) => (id === "player" ? character.name : (character.npcRegistry?.[id]?.name || CONTENT.npcs?.[id]?.name || id));
+          if (!u.leader) return `<div class="codex-f hint">No ${role}. <button class="opt" data-unit-lead="${esc(u.id)}">Appoint one…</button></div>`;
+          return `<div class="codex-f hint"><strong>${esc(nm(u.leader.id))}</strong> ${role === "commander" ? "commands" : "captains"} it
+            ${u.leaderBonus > 0 ? `— level ${u.leader.level}, worth <strong>+${u.leaderBonus}</strong> to every head under them`
+              : `— level ${u.leader.level}, not yet enough to be worth a step`}
+            <button class="opt" data-unit-lead="${esc(u.id)}">Change…</button></div>`;
+        })()}
         ${u.isLegion ? `<div class="codex-f hint">Formed from ${u.parts.map(p => `<strong>${esc(p.name)}</strong> <span class="hint">(${esc(p.condition)})</span>`).join(", ")} — they keep their own people, their own losses and their own condition.</div>` : ""}
         ${unitFacts(u)}
         ${(() => {
@@ -15036,6 +15105,7 @@ function renderBandsTab() {
   const rn404 = document.getElementById("band-raise-new"); if (rn404) rn404.onclick = raiseABand;
   // ⛔ CCODE-405 — forming, calling, posturing and taking apart. Every refusal is SAID, which is this tab's own rule.
   const lf405 = document.getElementById("legion-form"); if (lf405) lf405.onclick = showLegionFormPicker;
+  for (const b of app.querySelectorAll("[data-unit-lead]")) b.onclick = () => showLeaderPicker(b.dataset.unitLead);
   for (const b of app.querySelectorAll("[data-unit-call]")) b.onclick = () => callUnitTogether(b.dataset.unitCall);
   for (const b of app.querySelectorAll("[data-unit-posture]")) b.onclick = () => {
     const r = setUnitPosture(character.bands || [], b.dataset.unitPosture, b.dataset.posture);

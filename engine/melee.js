@@ -750,6 +750,49 @@ export function bandGaps(band, { cfg = {} } = {}) {
  *  each is a real trade the engine can already express: concentrated and fed from the purse, or spread out and living off the ground. */
 export const UNIT_POSTURES = ["camped", "dispersed"];
 
+/** ⛔ CCODE-406 (Erik) — "Legions have commanders and unit captains. Those positions should grant bonuses... like a scaled up band."
+ *  A band's leader is its CAPTAIN; a legion's is its COMMANDER. His words, and they are stored under his words so the GM narrates
+ *  them correctly. `"player"` means the character themself, who is the commander of most things they raise.
+ *
+ *  ⛔ AND THE BONUS IS LEVEL-BASED ON HIS RULING: "Build level based for now and crafts can add to it later... or decrease it if
+ *  opposing." ⚑ IT IS NOT A NEW LADDER: `contingentsFromPeople` already rates a person at `1 + floor(level/10)` — "DELIBERATELY FLAT.
+ *  A level-27 smith is worth three soldiers, not twenty-seven" — so a leader's bonus is that same step without the base, which makes a
+ *  level-35 captain +3 and a level-9 captain +0. ⚠️ Content-dialled (`leaderStep`), so it is Erik's to move without an engine change.
+ *
+ *  ⬜ THE SEAM HE NAMED, LEFT OPEN AND NOT FAKED: crafts add to this later, or subtract when the craft is an OPPOSING commander's.
+ *  There is no parameter for it yet, because a parameter nothing fills is a reader with no writer and reads to the next author as a
+ *  built system. When the commander line exists (`the_gathering`, `raise_banner`, `lead_the_line`, `command_field` — Aevi's request,
+ *  still unauthored), the craft term is added HERE and every consumer below picks it up unchanged.
+ *  ⚠️ AND OPPOSITION ALREADY BITES WITHOUT IT: both sides' bonuses ride in the strengths `legionClash` compares, so a commander facing
+ *  a better commander is already worse off — what the crafts will add is a bonus that reaches ACROSS, not the fact of opposition. */
+export const LEADER_ROLE = { legion: "commander", band: "captain" };
+export function leaderOf(unit) {
+  if (!unit) return null;
+  const isLegion = Array.isArray(unit.formedFrom) && unit.formedFrom.length > 0;
+  const id = isLegion ? unit.commander : unit.captain;
+  return id ? { id: String(id), role: isLegion ? "commander" : "captain" } : null;
+}
+
+/** What that position is worth, from the leader's level alone. Returns 0 with no leader, no level, or no lookup — a bonus nobody can
+ *  price is not a bonus. `levelOf` is INJECTED because this file has no imports and must not gain any. Pure. */
+export function leaderBonusOf(unit, { levelOf = null, cfg = {} } = {}) {
+  const who = leaderOf(unit);
+  if (!who || typeof levelOf !== "function") return 0;
+  const step = Math.max(1, num(cfg.leaderStep, 10));
+  const lvl = num(levelOf(who.id), 0);
+  const ladder = Math.max(0, Math.floor(lvl / step));
+  // ⛔ AND A LEADER CAN AT MOST DOUBLE WHAT HE ALREADY HAS. ⚑ MEASURED BEFORE CAPPING IT: an uncapped ladder took a band of six at
+  // quality 2 from 12 effective to 30 under a level-35 captain, and this file's own idiom for a LARGE effect is 1.4× (`unwardedLossMult`)
+  // — so a 2.5× swing from one appointment was out of scale with everything around it, and a bigger swing than the shield wall.
+  // ⚠️ THE CEILING IS THE UNIT'S OWN QUALITY, not a constant I picked: a commander makes the most of the troops he has and cannot make
+  // raw hands into veterans. It scales with the unit, needs no invented number, and states as one sentence.
+  // ⬜ The crafts Erik named are what will reach PAST this ceiling — which is what makes them worth authoring.
+  const cs = contingentsOf(unit);
+  const heads = cs.reduce((a, c) => a + Math.max(0, num(c.n, 0)), 0);
+  const base = heads ? Math.floor(cs.reduce((a, c) => a + Math.max(0, num(c.n, 0)) * Math.max(0, num(c.quality, 1)), 0) / heads) : 1;
+  return Math.max(0, Math.min(ladder, Math.max(1, base)));
+}
+
 /** The bands a unit is formed from, in the order it names them. ⚠️ A missing part is skipped rather than faked — a legion whose band
  *  was disbanded elsewhere is smaller, not broken. Pure. */
 export function legionParts(bands, unit) {
@@ -761,17 +804,26 @@ export function legionParts(bands, unit) {
 
 /** ⛔ A UNIT'S CONTINGENTS, RESOLVED: its own, plus every part's. This is the one reader every consumer of strength, threat,
  *  composition and gaps must go through for a legion, because the legion stores none of its own. Pure. */
-export function resolvedContingents(bands, unit) {
+export function resolvedContingents(bands, unit, { levelOf = null, cfg = {} } = {}) {
+  // ⛔ CCODE-406 — THE LEADER'S BONUS RIDES IN THE CONTINGENTS' QUALITY, and that is deliberate: `bandStrength`, `bandThreat`,
+  // `unitComposition` and `legionClash` all read contingents, so every one of them picks the bonus up without gaining a parameter
+  // somebody can forget to pass. ⚠️ A bonus delivered as a new argument to four readers is four chances to ship it half-wired, which
+  // is the defect this project finds most often (CCODE-402 was exactly that, one level up).
+  const lift = (cs, by) => (by > 0 ? cs.map(c => ({ ...c, quality: Math.max(0, num(c.quality, 1)) + by })) : cs);
   const parts = legionParts(bands, unit);
-  if (!parts.length) return contingentsOf(unit);
+  if (!parts.length) return lift(contingentsOf(unit), leaderBonusOf(unit, { levelOf, cfg }));
+  // ⚑ "LIKE A SCALED UP BAND": each part is lifted by its OWN captain, and the whole formation again by the legion's commander — so a
+  // legion of well-captained bands under a good commander is worth more than the same heads under nobody, at both scales.
+  const commander = leaderBonusOf(unit, { levelOf, cfg });
   const own = Array.isArray(unit?.contingents) && unit.contingents.length ? contingentsOf(unit) : [];
-  return [...own, ...parts.flatMap(p => contingentsOf(p))];
+  const fromParts = parts.flatMap(p => lift(contingentsOf(p), leaderBonusOf(p, { levelOf, cfg })));
+  return lift([...own, ...fromParts], commander);
 }
 
 /** ⛔ A UNIT-SHAPED OBJECT CARRYING THE RESOLVED CONTINGENTS, so `bandStrength`, `bandThreat`, `unitComposition` and `bandGaps` read a
  *  legion without a single one of them changing — which is exactly what the design claimed and is worth holding it to. Pure. */
-export function resolvedUnit(bands, unit) {
-  return unit ? { ...unit, contingents: resolvedContingents(bands, unit) } : unit;
+export function resolvedUnit(bands, unit, opts = {}) {
+  return unit ? { ...unit, contingents: resolvedContingents(bands, unit, opts) } : unit;
 }
 
 /** ⛔ FORM ONE. The parts stay in `character.bands` and gain `inLegion` — Erik's "legion tag... which legion are they in" — and the
@@ -793,6 +845,24 @@ export function formLegion(bands, { id, name = null, from = [], day = 0 } = {}) 
     condition: "fresh", raisedDay: num(day, 0), losses: 0, posture: null, locationId: null, called: null };
   const next = list.map(b => (parts.includes(b) ? { ...b, inLegion: String(id) } : b));
   return { ok: true, bands: [...next, legion], legion };
+}
+
+/** ⛔ CCODE-406 — APPOINT ONE. ⚠️ A LEADER MUST BE SOMEBODY WHO IS ACTUALLY THERE: the player, or a person standing in the unit (for a
+ *  legion, in any of its bands). A commander who is not with the formation is a bonus from nowhere, and `levelOf` would price a
+ *  stranger. `null` clears the position. Pure over `bands`. */
+export function setUnitLeader(bands, id, npcId) {
+  const list = Array.isArray(bands) ? bands : [];
+  const i = list.findIndex(b => b && String(b.id) === String(id));
+  if (i < 0) return { ok: false, why: "no such unit" };
+  const unit = list[i];
+  const isLegion = Array.isArray(unit.formedFrom) && unit.formedFrom.length > 0;
+  const field = isLegion ? "commander" : "captain";
+  if (npcId == null) return { ok: true, unit: { ...unit, [field]: null }, bands: list.map((b, j) => (j === i ? { ...b, [field]: null } : b)) };
+  const who = String(npcId);
+  const standing = new Set(resolvedContingents(list, unit).map(c => c.npcId).filter(Boolean).map(String));
+  if (who !== "player" && !standing.has(who)) return { ok: false, why: "a leader has to be one of the people standing in it" };
+  const next = { ...unit, [field]: who };
+  return { ok: true, unit: next, role: field, bands: list.map((b, j) => (j === i ? next : b)) };
 }
 
 /** ⛔ AND TAKING IT APART RELEASES THEM WHOLE — their people, their condition and their losses were never moved, so there is nothing

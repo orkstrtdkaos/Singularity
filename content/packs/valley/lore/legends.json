@@ -117,7 +117,15 @@
     "crystal": 900
    },
    "appearance": "Broad, weathered, seventy at least, with a warden's staff she leans on going uphill and not otherwise. Grey hair cropped to the ear. Her hands are scarred across the backs from forty years of standing between things. She wears the Orders' undyed wool and a great shield slung at her back that nobody has got past.",
-   "_appearanceWhy": "⛑ SNG-610 — the last five NPCs without an `appearance`, all of them legends in `legends.json` where the field was never part of the figure shape. ⚠️ `npcPromptSeed` reads `appearance` for the portrait and falls back to `description`, which on a legend is role and reputation — so the five most-described people in the world were being drawn from their CVs."
+   "_appearanceWhy": "⛑ SNG-610 — the last five NPCs without an `appearance`, all of them legends in `legends.json` where the field was never part of the figure shape. ⚠️ `npcPromptSeed` reads `appearance` for the portrait and falls back to `description`, which on a legend is role and reputation — so the five most-described people in the world were being drawn from their CVs.",
+   "assistTags": [
+    "comfort",
+    "guard",
+    "hold",
+    "mend",
+    "tend"
+   ],
+   "_assistTagsWhy": "⛑ SNG-619 — `assistTags` on the legends, which never carried the field. `scripts/coverage.mjs` put it at 61% the day it was written and named all 60. ⛔ THIS IS THE CONTENT HALF OF QUEUE ITEM 5: `contributionsOf` reads `assistTags` and the Fellowship matrix derives to HARM when a person has none — so Mara Wells came out as no INFLUENCE. I had been treating that as CCode's; sixty missing records were mine. ⚠️ CHOSEN FROM THE CLOSED VOCABULARY, never invented — §234 rejects a tag that reaches no family, which it did to `build`, `organize` and `sustain` two hours ago."
   },
   {
    "id": "halvex_coil",
@@ -208,7 +216,15 @@
     "crystal": 5000
    },
    "appearance": "Neat to the point of unease — every seam straight, every fastening done. Middle-aged and oddly unmarked, as though nothing has been allowed to leave a trace. He carries a stylus in his hand the way other people carry a knife. When he looks at a thing he looks at it too long, and you can see him deciding.",
-   "_appearanceWhy": "⛑ SNG-610 — the last five NPCs without an `appearance`, all of them legends in `legends.json` where the field was never part of the figure shape. ⚠️ `npcPromptSeed` reads `appearance` for the portrait and falls back to `description`, which on a legend is role and reputation — so the five most-described people in the world were being drawn from their CVs."
+   "_appearanceWhy": "⛑ SNG-610 — the last five NPCs without an `appearance`, all of them legends in `legends.json` where the field was never part of the figure shape. ⚠️ `npcPromptSeed` reads `appearance` for the portrait and falls back to `description`, which on a legend is role and reputation — so the five most-described people in the world were being drawn from their CVs.",
+   "assistTags": [
+    "analyze",
+    "craft",
+    "make",
+    "misdirect",
+    "reveal"
+   ],
+   "_assistTagsWhy": "⛑ SNG-619 — `assistTags` on the legends, which never carried the field. `scripts/coverage.mjs` put it at 61% the day it was written and named all 60. ⛔ THIS IS THE CONTENT HALF OF QUEUE ITEM 5: `contributionsOf` reads `assistTags` and the Fellowship matrix derives to HARM when a person has none — so Mara Wells came out as no INFLUENCE. I had been treating that as CCode's; sixty missing records were mine. ⚠️ CHOSEN FROM THE CLOSED VOCABULARY, never invented — §234 rejects a tag that reaches no family, which it did to `build`, `organize` and `sustain` two hours ago."
   },
   {
    "id": "overseer_grael",
@@ -298,7 +314,15 @@
     "crystal": 2200
    },
    "appearance": "Heavy, well-fed, immaculate in Edge District lamellar that has never been dented. A rod of office he uses as a walking stick and occasionally as a rod of office. The keys at his belt are more keys than any one post needs, and he knows you have counted them.",
-   "_appearanceWhy": "⛑ SNG-610 — the last five NPCs without an `appearance`, all of them legends in `legends.json` where the field was never part of the figure shape. ⚠️ `npcPromptSeed` reads `appearance` for the portrait and falls back to `description`, which on a legend is role and reputation — so the five most-described people in the world were being drawn from their CVs."
+   "_appearanceWhy": "⛑ SNG-610 — the last five NPCs without an `appearance`, all of them legends in `legends.json` where the field was never part of the figure shape. ⚠️ `npcPromptSeed` reads `appearance` for the portrait and falls back to `description`, which on a legend is role and reputation — so the five most-described people in the world were being drawn from their CVs.",
+   "assistTags": [
+    "bargain",
+    "conceal",
+    "intimidate",
+    "recall",
+    "study"
+   ],
+   "_assistTagsWhy": "⛑ SNG-619 — `assistTags` on the legends, which never carried the field. `scripts/coverage.mjs` put it at 61% the day it was written and named all 60. ⛔ THIS IS THE CONTENT HALF OF QUEUE ITEM 5: `contributionsOf` reads `assistTags` and the Fellowship matrix derives to HARM when a person has none — so Mara Wells came out as no INFLUENCE. I had been treating that as CCode's; sixty missing records were mine. ⚠️ CHOSEN FROM THE CLOSED VOCABULARY, never invented — §234 rejects a tag that reaches no family, which it did to `build`, `organize` and `sustain` two hours ago."
   },
   {
    "id": "maren_ossitide",
@@ -395,7 +419,15 @@
     "crystal": 1600
    },
    "appearance": "Ash-grey hair unbound, a weathered face lined at the eyes and mouth, steady hands scarred at the knuckles. Tall, built like somebody who has walked a great distance and hurried for none of it. Age unresolvable — could be forty or four hundred. The corvid form is the same grey and the same steadiness, smaller.",
-   "_appearanceWhy": "⛑ SNG-610 — the last five NPCs without an `appearance`, all of them legends in `legends.json` where the field was never part of the figure shape. ⚠️ `npcPromptSeed` reads `appearance` for the portrait and falls back to `description`, which on a legend is role and reputation — so the five most-described people in the world were being drawn from their CVs."
+   "_appearanceWhy": "⛑ SNG-610 — the last five NPCs without an `appearance`, all of them legends in `legends.json` where the field was never part of the figure shape. ⚠️ `npcPromptSeed` reads `appearance` for the portrait and falls back to `description`, which on a legend is role and reputation — so the five most-described people in the world were being drawn from their CVs.",
+   "assistTags": [
+    "deathsense",
+    "guard",
+    "navigate-wilds",
+    "tend",
+    "track"
+   ],
+   "_assistTagsWhy": "⛑ SNG-619 — `assistTags` on the legends, which never carried the field. `scripts/coverage.mjs` put it at 61% the day it was written and named all 60. ⛔ THIS IS THE CONTENT HALF OF QUEUE ITEM 5: `contributionsOf` reads `assistTags` and the Fellowship matrix derives to HARM when a person has none — so Mara Wells came out as no INFLUENCE. I had been treating that as CCode's; sixty missing records were mine. ⚠️ CHOSEN FROM THE CLOSED VOCABULARY, never invented — §234 rejects a tag that reaches no family, which it did to `build`, `organize` and `sustain` two hours ago."
   },
   {
    "id": "the_hollow_king",
@@ -583,7 +615,15 @@
    ],
    "purse": {
     "crystal": 1300
-   }
+   },
+   "assistTags": [
+    "craft",
+    "empower",
+    "light",
+    "make",
+    "warm"
+   ],
+   "_assistTagsWhy": "⛑ SNG-619 — `assistTags` on the legends, which never carried the field. `scripts/coverage.mjs` put it at 61% the day it was written and named all 60. ⛔ THIS IS THE CONTENT HALF OF QUEUE ITEM 5: `contributionsOf` reads `assistTags` and the Fellowship matrix derives to HARM when a person has none — so Mara Wells came out as no INFLUENCE. I had been treating that as CCode's; sixty missing records were mine. ⚠️ CHOSEN FROM THE CLOSED VOCABULARY, never invented — §234 rejects a tag that reaches no family, which it did to `build`, `organize` and `sustain` two hours ago."
   },
   {
    "id": "the_last_walker",
@@ -681,7 +721,15 @@
    ],
    "purse": {
     "crystal": 400
-   }
+   },
+   "assistTags": [
+    "guard",
+    "navigate-wilds",
+    "recall",
+    "talk",
+    "travel"
+   ],
+   "_assistTagsWhy": "⛑ SNG-619 — `assistTags` on the legends, which never carried the field. `scripts/coverage.mjs` put it at 61% the day it was written and named all 60. ⛔ THIS IS THE CONTENT HALF OF QUEUE ITEM 5: `contributionsOf` reads `assistTags` and the Fellowship matrix derives to HARM when a person has none — so Mara Wells came out as no INFLUENCE. I had been treating that as CCode's; sixty missing records were mine. ⚠️ CHOSEN FROM THE CLOSED VOCABULARY, never invented — §234 rejects a tag that reaches no family, which it did to `build`, `organize` and `sustain` two hours ago."
   }
  ],
  "_traditionFixNote": "⛔ SNG-432. THREE FIGURES CARRIED TRADITION IDS THAT DO NOT EXIST — `harmonic_radiant`, `precursor_nanite_cold_noesis`, `valley_craft_administration`. CCode flagged them as traditions needing name pools and abilities. ⚠️ THEY ARE NOT TRADITIONS AND NEVER WERE.\nThis file is MINE, dated 2026-07-11, and predates the canonical 26-tradition list in `traditions.json`. I wrote descriptors: a DISPOSITION PAIR (harmonic+radiant), a POWER-SOURCE STACK (precursor + nanite + cold noesis), and a JOB (valley craft administration). ⛔ NONE OF THE THREE IS A PEOPLE.\n⚠️ THE FIX IS MAPPING, NOT AUTHORING. Every one maps cleanly onto a real tradition once you read the signature instead of the label — and `noesis` was sitting inside one of the bad ids the whole time, which is the Cogitant craft-word.\n⛔ A GATE IS WORTH MORE THAN THIS FIX: every `tradition` in content must exist in traditions.json. These three would have failed it on the day I wrote them.",

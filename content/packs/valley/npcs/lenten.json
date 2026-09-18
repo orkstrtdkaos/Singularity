@@ -7,7 +7,7 @@
  "people": "human",
  "gender": "nonbinary",
  "pronouns": "they/them",
- "sex": "unstated",
+ "sex": null,
  "romanceEligible": false,
  "homeLocation": "waystone",
  "communityId": "valley.waystone",
@@ -68,6 +68,6 @@
  },
  "closed": [],
  "_authoredWhy": "⛑ SNG-616 — PROMOTED, THEREFORE RECORDED. Erik 2026-09-17: 'promoted people get a record, but it doesn't have to be manually authored. We want the game to be amazing at this — author some and make sure the generator does it just as well.' ⛔ AUTHORED FROM WHAT PLAY ESTABLISHED, NOT INVENTED OVER IT: every line below traces to a `knownFacts` or `skillsObserved` entry in a real save. The GM built these people; a record keeps them the same person in the next world that meets them.",
- "_genderNote": "⛑ The save records no gender and uses they/them throughout, so the record does too.  is a required STRING — null is rejected, which content_ci caught.",
+ "_genderNote": "⛑ The save records no gender and uses they/them throughout.  is a required STRING so it carries ;  is an ENUM of male|female|none|null, so null is the honest value — I first wrote \"unstated\", which is not in it. content_ci named the enum both times.",
  "_assistTagsNote": "⛑ §234 rejected `build`, `organize` and `sustain` — tags I invented that reach no family. Swapped to the established ones: make, lead, tend. **The tag vocabulary is closed and the gate is what says so.**"
 }

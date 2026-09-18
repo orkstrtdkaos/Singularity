@@ -89,12 +89,12 @@ export const CHARACTER_STEPS = [
   {
     version: 65, id: "a-calmer-valley-for-adelheid", playerFacing: false,
     // ⛔ CCODE-410 — ERIK, OF COURTNEY'S GAME: "remove the swarm attack for now." ⚑ Her queue held a glimmerling swarm, rolled at a
-    // store in a game set to calm pacing, right behind Sister Vreni's invitation. ⚠️ SCOPED TO HER CHARACTER BY ID: it is his decision
+    // store in a game set to calm pacing, right behind Sister Vreni's invitation. ⚠️ SCOPED TO ADELHEID BY ID: it is his decision
     // about one player's game, not a rule for anyone else's.
     // ⚠️ A PAUSE, NOT A DELETION, and additive like every step here: `threatsPaused` stops the producer (which re-rolls on every
     // refresh, so removing the one swarm would have lasted until the next roll) and makes a queued threat stop applying, so the next
-    // pull prunes it. Lifting it is removing the field. ⛑ A reconcile step rather than an edit to her file, because an edit to a save
-    // somebody is playing races their open tab and the lower revision loses; this runs in HER tab, on her next load. Silent: nobody is
+    // pull prunes it. Lifting it is removing the field. ⛑ A reconcile step rather than an edit to the save file, because an edit to a save
+    // somebody is playing races their open tab and the lower revision loses; this runs in the PLAYER'S OWN tab, on the next load. Silent: nobody is
     // told that a beast was taken off their road.
     apply: (c) => {
       if (String(c?.id) !== "char-mr5ns3hh") return {};

@@ -193,11 +193,153 @@
     "Adelheid learned that Silas Weir's instrument was built for listening, not transmission — and that he was at the sluice-turn three weeks before the contamination deepened, likely hearing the Precursor system's signal. The scene closed with the arrival of Sister Vreni, a wayhouse sister seeking the healer who closed a traveler's wound, bearing a warm invitation."
   ],
   "currentLocationId": "gen-mara-wells-store",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "gen-mara-wells-store",
+    "turns": [
+      {
+        "player": "Greet Sister Vreni warmly and hear her out fully before deciding anything",
+        "summary": "Sister Vreni arrived at Mara's garden gate seeking the healer who closed a traveler's wound; she extended a warm, plain invitation to serve at the pass-road wayhouse, which has no resident healer since the equinox.",
+        "narration": "The evening light has gone amber and low over Mara's back garden, the seedling beds throwing long shadows across the path. You turn toward the gate where Sister Vreni stands — the pale gray habit, the folded hands, the patient quality of someone who has learned to wait without pressing.\n\n\"Sister,\" you say, and the warmth in it is genuine. \"Please — come in, if you like. Or I can come to you.\"\n\nShe does not move from the gate, which is itself a kind of courtesy — she will not enter uninvited — but she unfolds her hands and lets something ease in her face. \"I came to find the healer who closed a wound on a traveler who arrived eleven days ago. A thigh wound, carefully cleaned. It closed without trouble.\" A brief pause, measuring. \"That is not common in wayhouse work. We notice when something is done well.\"\n\nShe tells you the rest plainly: the wayhouse above the pass road has no healer resident at present. The woman who kept that post through the summer returned to her family at the equinox. The sisters manage, but managing is not the same as knowing, and there are people on the road who need more than bandage linen and the will to apply it. The invitation is warm and direct — come and stay a while, help as you're able, see whether it suits.\n\nAevi drifts closer to your shoulder as Sister Vreni finishes, her motes brightening just a degree — the quiet attention she reserves for things she finds worth watching. Behind you, Mara has gone still in the way she does when she is listening and not yet deciding whether to speak."
+      }
+    ],
+    "lastTurn": {
+      "narration": "The evening light has gone amber and low over Mara's back garden, the seedling beds throwing long shadows across the path. You turn toward the gate where Sister Vreni stands — the pale gray habit, the folded hands, the patient quality of someone who has learned to wait without pressing.\n\n\"Sister,\" you say, and the warmth in it is genuine. \"Please — come in, if you like. Or I can come to you.\"\n\nShe does not move from the gate, which is itself a kind of courtesy — she will not enter uninvited — but she unfolds her hands and lets something ease in her face. \"I came to find the healer who closed a wound on a traveler who arrived eleven days ago. A thigh wound, carefully cleaned. It closed without trouble.\" A brief pause, measuring. \"That is not common in wayhouse work. We notice when something is done well.\"\n\nShe tells you the rest plainly: the wayhouse above the pass road has no healer resident at present. The woman who kept that post through the summer returned to her family at the equinox. The sisters manage, but managing is not the same as knowing, and there are people on the road who need more than bandage linen and the will to apply it. The invitation is warm and direct — come and stay a while, help as you're able, see whether it suits.\n\nAevi drifts closer to your shoulder as Sister Vreni finishes, her motes brightening just a degree — the quiet attention she reserves for things she finds worth watching. Behind you, Mara has gone still in the way she does when she is listening and not yet deciding whether to speak.",
+      "sceneSummary": "Sister Vreni arrived at Mara's garden gate seeking the healer who closed a traveler's wound; she extended a warm, plain invitation to serve at the pass-road wayhouse, which has no resident healer since the equinox.",
+      "choices": [
+        {
+          "label": "Walk with Sister Vreni to the wayhouse tonight — see it before committing to anything",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": "very easy",
+          "trivial": true,
+          "intentTags": [
+            "travel",
+            "careful"
+          ]
+        },
+        {
+          "label": "Thank her and ask what she knows of travelers through the pass recently — a wayhouse above the sluice-road would see everyone heading upstream",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": "easy",
+          "trivial": false,
+          "intentTags": [
+            "investigate",
+            "persuade"
+          ]
+        },
+        {
+          "label": "Accept the invitation openly — you are a healer and this is a place that needs one; tell her you will come and ask when she needs you",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": "very easy",
+          "trivial": true,
+          "intentTags": [
+            "help",
+            "negotiate"
+          ]
+        }
+      ],
+      "scene": {
+        "setting": "Mara's back garden at evening — amber light, long shadows from the seedling beds, Sister Vreni standing at the open gate in her pale gray habit.",
+        "npcsPresent": [
+          {
+            "name": "Sister Vreni",
+            "state": "Standing at the garden gate, hands now unfolded, having delivered her invitation and waiting for a reply."
+          },
+          {
+            "name": "Mara Wells",
+            "state": "Gone still just behind Adelheid — listening, not yet speaking."
+          }
+        ],
+        "objects": [
+          "seedling beds",
+          "open garden gate",
+          "Mara's back step"
+        ],
+        "threads": [
+          "Sister Vreni's invitation to the pass-road wayhouse is open and unanswered",
+          "Mara is listening — she may have a view on this"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "sister-vreni",
+          "note": "Extended a clear, warm invitation to Adelheid to serve as resident healer at the pass-road wayhouse, now without one since the equinox. She named the traveler's healed thigh wound as the reason she sought her out.",
+          "learned": [
+            "The wayhouse above the pass road has had no resident healer since the equinox — the previous healer returned to her family.",
+            "The wayhouse is on the sluice-road above Millbrook and sees all travelers heading upstream."
+          ],
+          "statusNote": "Standing at Mara's garden gate, invitation given, waiting for Adelheid's answer.",
+          "relationshipDelta": 1
+        },
+        {
+          "op": "update",
+          "npcId": "mara-wells",
+          "note": "Went still and listening when Sister Vreni delivered her invitation — watching, not yet speaking.",
+          "statusNote": "In her back garden at evening; the invitation from Sister Vreni now hangs in the air and Mara is watching how Adelheid receives it."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "sister-vreni",
+          "label": "Sister Vreni",
+          "kind": "person",
+          "entityId": "sister-vreni",
+          "fact": "The wayhouse she serves on the pass road above Millbrook has had no resident healer since the equinox; she tracked down Adelheid specifically because the traveler's wound was closed with unusual care. She extended a warm, direct invitation to come and serve.",
+          "links": [
+            "millbrook",
+            "maras-errand",
+            "silas-weir"
+          ]
+        },
+        {
+          "topic": "echo-river-contamination",
+          "label": "Echo River Contamination",
+          "kind": "mystery",
+          "fact": "The wayhouse above the pass road sits on the sluice-road and would have seen any travelers heading upstream — including anyone who passed through three weeks ago toward the sluice-turn where Silas Weir was last seen.",
+          "links": [
+            "silas-weir",
+            "millbrook",
+            "maras-errand"
+          ]
+        }
+      ]
+    },
+    "sceneState": {
+      "setting": "Mara's back garden at evening — amber light, long shadows from the seedling beds, Sister Vreni standing at the open gate in her pale gray habit.",
+      "npcsPresent": [
+        {
+          "name": "Sister Vreni",
+          "state": "Standing at the garden gate, hands now unfolded, having delivered her invitation and waiting for a reply."
+        },
+        {
+          "name": "Mara Wells",
+          "state": "Gone still just behind Adelheid — listening, not yet speaking."
+        }
+      ],
+      "objects": [
+        "seedling beds",
+        "open garden gate",
+        "Mara's back step"
+      ],
+      "threads": [
+        "Sister Vreni's invitation to the pass-road wayhouse is open and unanswered",
+        "Mara is listening — she may have a view on this"
+      ]
+    },
+    "beats": 1,
+    "subPlace": {
+      "slug": "mara-s-garden",
+      "name": "Mara's Garden",
+      "day": 2
+    }
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 2,
-    "hour": 18,
+    "hour": 19,
     "realAnchor": null
   },
   "companions": [
@@ -236,7 +378,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d2] Mara was awake in the store in the dead of night, ledgers open, when Adelheid arrived muddy and shaken from direct contact with the Precursor system. When asked to speak plainly about the system's nature and risks, Mara refused—she named only that the timeline has collapsed to hours instead of…",
         "[d2] Waited through the night while Adelheid slept. Prepared a hand-drawn map with careful notations. Her calculation has moved to the next operational phase—she is ready to brief or to move.",
         "[d2] Waited through the night while Adelheid slept. Had prepared food and water. Her calculation has moved to the next operational phase—she is ready to brief or to move. Moves without emotion but with clear intent.",
         "[d2] Adelheid pushed for plain explanation of the map and the system's destination. Mara refused again, naming only that the destination is what keeps her awake and what she is still working on. Her method is operational, not explanatory—she shares what she decides you need, when she decides it. She…",
@@ -245,7 +386,8 @@
         "[d2] Offered Adelheid work in the garden as a steadying ground, and used the shared rhythm to shift toward naming the choice she's been holding—something with an unnamed cost that requires real commitment.",
         "[d2] Named Silas Weir as a Harmonic stationed at the Heights, present at the contamination's edge before the readings worsened. Revealed the true shape of her errand: Adelheid must choose between finding Silas directly or reporting him to the Harmonic lodge. Acknowledged both paths carry cost.",
         "[d2] Moved past her earlier guardedness when asked directly about Silas. Named him as a Harmonic at the Heights, present at the sluice-turn three weeks ago with tuning instruments. Revealed that the contamination's timeline matches his presence—a sequence, not an accident. She is measuring Adelheid's…",
-        "[d2] Named Silas's instrument as a small stringed listening device — built to receive resonance, not broadcast. Confirmed she has given Adelheid everything she knows. Closed the garden conversation with quiet finality."
+        "[d2] Named Silas's instrument as a small stringed listening device — built to receive resonance, not broadcast. Confirmed she has given Adelheid everything she knows. Closed the garden conversation with quiet finality.",
+        "[d2] Went still and listening when Sister Vreni delivered her invitation — watching, not yet speaking."
       ],
       "knownFacts": [
         "Mara reads Adelheid's pattern now too: work steadies her more than rest or talk",
@@ -269,10 +411,10 @@
         "locationId": "gen-mara-wells-store",
         "day": 2
       },
-      "statusNote": "In her back garden; the conversation has reached its natural end — she has shared everything she knows.",
+      "statusNote": "In her back garden at evening; the invitation from Sister Vreni now hangs in the air and Mara is watching how Adelheid receives it.",
       "gender": "woman",
       "pronouns": "she/her",
-      "met": 15,
+      "met": 16,
       "sex": "female",
       "age": 47
     },
@@ -381,13 +523,16 @@
         "locationId": "gen-mara-wells-store",
         "day": 2
       },
-      "relationship": 0,
+      "relationship": 1,
       "history": [
-        "[d2] Arrived at Mara's garden gate seeking the healer who cleaned a traveler's thigh wound eleven days ago. Brought a warm invitation to the wayhouse above the pass road — genuine need, no obligation stated."
+        "[d2] Arrived at Mara's garden gate seeking the healer who cleaned a traveler's thigh wound eleven days ago. Brought a warm invitation to the wayhouse above the pass road — genuine need, no obligation stated.",
+        "[d2] Extended a clear, warm invitation to Adelheid to serve as resident healer at the pass-road wayhouse, now without one since the equinox. She named the traveler's healed thigh wound as the reason she sought her out."
       ],
       "knownFacts": [
         "A man arrived at the wayhouse eleven days ago with a properly cleaned thigh wound. It closed. He walks the court now.",
-        "Sister Vreni came to find the healer responsible and to extend an invitation — the wayhouse has need of a healer."
+        "Sister Vreni came to find the healer responsible and to extend an invitation — the wayhouse has need of a healer.",
+        "The wayhouse above the pass road has had no resident healer since the equinox — the previous healer returned to her family.",
+        "The wayhouse is on the sluice-road above Millbrook and sees all travelers heading upstream."
       ],
       "skillsObserved": [],
       "status": "active",
@@ -395,12 +540,12 @@
       "gender": "woman",
       "pronouns": "she/her",
       "age": 44,
-      "statusNote": "Standing at the garden gate, waiting politely for an answer.",
+      "statusNote": "Standing at Mara's garden gate, invitation given, waiting for Adelheid's answer.",
       "lastSeen": {
         "locationId": "gen-mara-wells-store",
         "day": 2
       },
-      "met": 1
+      "met": 2
     }
   },
   "placeMemory": {
@@ -738,7 +883,7 @@
         "locationId": "gen-mara-wells-store"
       }
     ],
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 3,
     "recentOffers": [
       {
         "thing": "Edvar Crane, waiting at the mill entrance with three weeks of water-reading behind him",
@@ -4316,7 +4461,7 @@
     },
     "worldMovedOnSeen": {
       "water_crisis": {
-        "beats": 1
+        "beats": 2
       }
     }
   },
@@ -4354,7 +4499,8 @@
           "[d1] The river runs gray-green at the dock and at the tree-line visible from the Wet Meadows. The Wet Meadows are impassable in early spring due to melt runoff and standing water—direct approach to the river from the terrace side is blocked until the water subsides.",
           "[d2] Edvar Crane's three-week reading has tracked the contamination's deepening from edge-staining to full saturation. The water is not passively contaminated—something beneath it is actively waking and causing the spread. The phenomenon is ongoing and accelerating.",
           "[d2] The contamination's timeline matches Silas Weir's presence at the sluice-turn three weeks ago. He was listening to something in the water with tuning instruments. The sequence suggests cause and consequence rather than random poisoning—whatever Silas heard may have triggered what is now waking.",
-          "[d2] The direct path to the sluice-turn (where Silas was last seen three weeks ago) lies through the Wet Meadows, which are impassable during spring melt. The higher route climbs through the terrace gardens and old stone-cuts, skirting the flood but adding significant time to the journey."
+          "[d2] The direct path to the sluice-turn (where Silas was last seen three weeks ago) lies through the Wet Meadows, which are impassable during spring melt. The higher route climbs through the terrace gardens and old stone-cuts, skirting the flood but adding significant time to the journey.",
+          "[d2] The wayhouse above the pass road sits on the sluice-road and would have seen any travelers heading upstream — including anyone who passed through three weeks ago toward the sluice-turn where Silas Weir was last seen."
         ],
         "links": [
           "millbrook",
@@ -4362,7 +4508,8 @@
           "uncatalogued-terrace-plants",
           "edvar-crane",
           "precursor-layer",
-          "silas-weir"
+          "silas-weir",
+          "maras-errand"
         ],
         "createdDay": 1,
         "updatedDay": 2,
@@ -4629,9 +4776,14 @@
         "label": "Sister Vreni",
         "kind": "person",
         "facts": [
-          "[d2] Wayhouse sister from the pass road wayhouse"
+          "[d2] Wayhouse sister from the pass road wayhouse",
+          "[d2] The wayhouse she serves on the pass road above Millbrook has had no resident healer since the equinox; she tracked down Adelheid specifically because the traveler's wound was closed with unusual care. She extended a warm, direct invitation to come and serve."
         ],
-        "links": [],
+        "links": [
+          "millbrook",
+          "maras-errand",
+          "silas-weir"
+        ],
         "aliases": [],
         "createdDay": 2,
         "entityId": "sister-vreni",
@@ -4722,16 +4874,16 @@
   "itemReclaimVersion": 1,
   "nameRepairVersion": 1,
   "tendencies": {
-    "generous": 3.452887197380536,
-    "social": 5.560626839944972,
-    "cerebral": 20.26977365910529,
-    "cautious": 17.100819291200768,
-    "strategic": 15.952631878571928,
-    "carousing": 1.0023084521913266,
-    "risky": 0.5024102517249757,
-    "ruthless": 1.145859952016564,
-    "patient": 0.70155967750146,
-    "craft": 0.9036878906249999
+    "generous": 3.3665650174460224,
+    "social": 5.421611168946348,
+    "cerebral": 19.76302931762766,
+    "cautious": 16.673298808920748,
+    "strategic": 15.55381608160763,
+    "carousing": 0.9772507408865434,
+    "risky": 0.48984999543185126,
+    "ruthless": 1.11721345321615,
+    "patient": 0.6840206855639235,
+    "craft": 0.8810956933593749
   },
   "aptitudes": [
     "strategist",
@@ -4740,11 +4892,11 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 65,
+  "actionCount": 66,
   "bondLogFrom": null,
   "teachers": {},
   "regionsKnown": {
-    "valley": 26
+    "valley": 27
   },
   "company": [],
   "forkChoices": {},
@@ -4928,8 +5080,8 @@
   "bands": [],
   "_silasGrantsRevoked": true,
   "reconcileVersion": 65,
-  "updatedAt": 1789747760615,
-  "rev": 50,
+  "updatedAt": 1789748071927,
+  "rev": 51,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -4942,7 +5094,7 @@
   "featureOffers": [],
   "_pinsInitialized": true,
   "_opUnknown": {
-    "sceneSummary": 26
+    "sceneSummary": 27
   },
   "_applyFailures": null,
   "sessions": [
@@ -4957,10 +5109,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-09-18T16:09:20.587Z",
-      "lastAt": "2026-09-18T16:09:20.587Z",
+      "lastAt": "2026-09-18T16:14:31.904Z",
       "startDay": 80,
       "endDay": 80,
-      "beats": 1
+      "beats": 2
     }
   ],
   "_debtReceipts": [],
@@ -4987,7 +5139,7 @@
     "help": 1,
     "plan": 1,
     "rapport": 2,
-    "calm": 1,
+    "calm": 2,
     "craft": 1
   },
   "aptitudeEarnCount": {
@@ -4997,13 +5149,13 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 23,
-    "choices": 23,
+    "sceneSummary": 24,
+    "choices": 24,
     "questUpdates": 19,
-    "scene": 23,
-    "npcUpdates": 19,
+    "scene": 24,
+    "npcUpdates": 20,
     "placeUpdates": 8,
-    "codexUpdates": 17,
+    "codexUpdates": 18,
     "timeOps": 21,
     "imagePrompt": 8,
     "gambitApt": 21,
@@ -5017,7 +5169,7 @@
     "moveTo": 2,
     "_engineClosedScene": 1
   },
-  "_opTurns": 23,
+  "_opTurns": 24,
   "_opCountingSince": "2026-09-15T23:58:48.348Z",
   "gallery": [
     {

@@ -1,7 +1,7 @@
 # THE APPARATUS — every harness, what it is for, and whether it runs
 
 ⛔ **ERIK, 2026-08-29: *"I want this to be a well oiled factory."*** ⚠️ **A factory you cannot see is not
-well oiled.** 106 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
+well oiled.** 107 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
 were gates, which were reports, and which had quietly stopped being wired into anything.
 
 ```bash
@@ -10,7 +10,7 @@ node scripts/apparatus.mjs --md     # …as markdown for §5
 node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 ```
 
-**Last measured: 2026-09-18 · v2.0.69 · 106 files.**
+**Last measured: 2026-09-18 · v2.0.69 · 107 files.**
 
 ---
 
@@ -134,7 +134,7 @@ worthless.
 | harness | kind | assertions | purpose |
 |---|---|---|---|
 | `tests/smoke` | ✅ GATE | 3570 | — |
-| `tests/how_it_works` | ✅ GATE | 2993 | CCODE-285 |
+| `tests/how_it_works` | ✅ GATE | 2995 | CCODE-285 |
 | `tests/skill_battle_sim` | ✅ GATE | 217 | SNG-098: the two-sided contest + fog-of-war invariant |
 | `tests/content_ci` | ✅ GATE | 193 | SNG-BATCH-10 Phase 4 / SNG-040/064: the content integrity gate |
 | `tests/craft_crit` | ✅ GATE | 43 | miss // it and YOU HAVE ONLY MADE CHAOS |
@@ -212,6 +212,7 @@ worthless.
 | `scripts/bonus_dial` | 🔧 TOOL | — | CCODE-257 |
 | `scripts/casualty_sim` | 🔧 TOOL | — | CCODE-304 |
 | `scripts/certify_claims` | 🔧 TOOL | — | HOW A CERTIFIED CLAIM IS MATCHED AND RESTAMPED |
+| `scripts/coverage` | 🔧 TOOL | — | WHICH FIELDS ARE FILLED IN, ACROSS A WHOLE TYPE |
 | `scripts/damage_map` | 🔧 TOOL | — | CCODE-280 / AEVI's SPEC_damage_type_system |
 | `scripts/derive_location_tiers` | 🔧 TOOL | — | SNG-383 §2 |
 | `scripts/duel_pell_vs_veth` | 🔧 TOOL | — | po/DUEL_pell_vs_veth |

@@ -206,156 +206,114 @@
         "player": "Stop to listen more carefully where the road crosses a runnel — press both hands to the stone and read the pulse beneath it with Echo Sense",
         "summary": "On the sluice-road above Millbrook, Adelheid pressed her hands to the stone at a drainage runnel and confirmed with Echo Sense that the Precursor pulse runs directly beneath the road — Aevi began unconsciously matching its rhythm.",
         "narration": "A thin runnel cuts across the road where the upper terrace drains — just wide enough to step over, the stone around it darker and cold. You pause there, crouch, and press both palms flat to the step.\n\nEcho Sense opens outward through the rock — not through air, through stone — and what comes back is layered. The runnel itself, tracing a shallow path under the step and out through a weep-hole in the terrace wall. The deeper water of the irrigation channel, heavier and slower, running alongside the road a pace to your left. And beneath all of it, beneath the foundation cuts and the packed earth and the old mortar, the pulse. The same one you touched in the terrace two days ago. It runs here too, south-southeast, steady as a heartbeat that has never once faltered. Stronger than you expected — not because it has grown, but because the road sits directly over its line. The stone carries it faithfully.\n\nAevi drifts down from your shoulder and hovers just above the runnel, her motes dimming until they are almost gone — then brightening in a slow, regular rhythm. Once. Pause. Once. Pause. She is matching the pulse. She does not do it deliberately, you think; she does it the way a person hums to something they half-remember.\n\nVreni has stopped two steps ahead. She is looking back at you, unhurried, her hands folded into her sleeves. She does not ask what you are doing. She simply waits, with the particular patience of someone who has learned to let a healer work."
+      },
+      {
+        "player": "Rise and walk on — save the questions for the wayhouse, where there's light and a hearth to sit beside",
+        "summary": "Adelheid rose from the runnel and walked on up the sluice-road with Vreni, the pulse left behind in the stone below — the wayhouse light waiting ahead.",
+        "narration": "You lift your palms from the cold stone, dry them on your coat, and stand. The pulse is still there beneath your feet — you don't need both hands pressed flat to know it. It will be there tomorrow, and the day after, running its quiet south-southeast line toward the river. The wayhouse is an hour up the road, and there is a hearth there.\n\nVreni hears you rise. She doesn't turn immediately — just shifts her weight, a small adjustment that says she was paying attention without performing it. Then she starts walking again, sandals soft on the worn steps, and you fall in beside her. Aevi drifts upward from the runnel, her motes settling into their usual loose scatter at your shoulder. They are steady now, not dimming and brightening in that slow borrowed rhythm. Whatever the pulse was doing to her, the road breaks it.\n\nThe thyme smell comes and goes as you climb — stronger where the steps have been cracked and the roots have gotten in underneath. Above you the hillside opens a little, the coppice thinning, and the moonlight comes down brighter on the cut stone. Somewhere in the dark a nightjar calls once and is answered by nothing.\n\n\"The wayhouse keeps a light in the window,\" Vreni says, not loudly, just conversational in the night quiet. \"You'll see it before you see the roof.\" She doesn't ask what you found at the runnel. She doesn't need to yet — there will be tea, and the kind of unhurried moment that a hearthside makes for speaking. The road climbs on, and the village lights are below you now, small and warm and far."
       }
     ],
     "lastTurn": {
-      "narration": "A thin runnel cuts across the road where the upper terrace drains — just wide enough to step over, the stone around it darker and cold. You pause there, crouch, and press both palms flat to the step.\n\nEcho Sense opens outward through the rock — not through air, through stone — and what comes back is layered. The runnel itself, tracing a shallow path under the step and out through a weep-hole in the terrace wall. The deeper water of the irrigation channel, heavier and slower, running alongside the road a pace to your left. And beneath all of it, beneath the foundation cuts and the packed earth and the old mortar, the pulse. The same one you touched in the terrace two days ago. It runs here too, south-southeast, steady as a heartbeat that has never once faltered. Stronger than you expected — not because it has grown, but because the road sits directly over its line. The stone carries it faithfully.\n\nAevi drifts down from your shoulder and hovers just above the runnel, her motes dimming until they are almost gone — then brightening in a slow, regular rhythm. Once. Pause. Once. Pause. She is matching the pulse. She does not do it deliberately, you think; she does it the way a person hums to something they half-remember.\n\nVreni has stopped two steps ahead. She is looking back at you, unhurried, her hands folded into her sleeves. She does not ask what you are doing. She simply waits, with the particular patience of someone who has learned to let a healer work.",
-      "sceneSummary": "On the sluice-road above Millbrook, Adelheid pressed her hands to the stone at a drainage runnel and confirmed with Echo Sense that the Precursor pulse runs directly beneath the road — Aevi began unconsciously matching its rhythm.",
+      "narration": "You lift your palms from the cold stone, dry them on your coat, and stand. The pulse is still there beneath your feet — you don't need both hands pressed flat to know it. It will be there tomorrow, and the day after, running its quiet south-southeast line toward the river. The wayhouse is an hour up the road, and there is a hearth there.\n\nVreni hears you rise. She doesn't turn immediately — just shifts her weight, a small adjustment that says she was paying attention without performing it. Then she starts walking again, sandals soft on the worn steps, and you fall in beside her. Aevi drifts upward from the runnel, her motes settling into their usual loose scatter at your shoulder. They are steady now, not dimming and brightening in that slow borrowed rhythm. Whatever the pulse was doing to her, the road breaks it.\n\nThe thyme smell comes and goes as you climb — stronger where the steps have been cracked and the roots have gotten in underneath. Above you the hillside opens a little, the coppice thinning, and the moonlight comes down brighter on the cut stone. Somewhere in the dark a nightjar calls once and is answered by nothing.\n\n\"The wayhouse keeps a light in the window,\" Vreni says, not loudly, just conversational in the night quiet. \"You'll see it before you see the roof.\" She doesn't ask what you found at the runnel. She doesn't need to yet — there will be tea, and the kind of unhurried moment that a hearthside makes for speaking. The road climbs on, and the village lights are below you now, small and warm and far.",
+      "sceneSummary": "Adelheid rose from the runnel and walked on up the sluice-road with Vreni, the pulse left behind in the stone below — the wayhouse light waiting ahead.",
       "choices": [
         {
-          "label": "Ask Vreni if she has ever felt the road hum here — does the wayhouse know what runs beneath it?",
+          "label": "Ask Vreni, as you walk, whether any travelers came through the wayhouse about three weeks ago — heading upstream, perhaps carrying instruments",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": "easy",
           "intentTags": [
             "investigate",
-            "ask"
+            "careful"
           ],
           "trivial": false
         },
         {
-          "label": "Watch Aevi match the pulse — ask her quietly what she remembers of it",
+          "label": "Walk in companionable quiet and let the road finish itself — save all questions for the hearth",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": "very easy",
+          "intentTags": [
+            "careful"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask Aevi quietly, while Vreni is a step ahead, what she was matching back there at the runnel — what that rhythm meant to her",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": "easy",
           "intentTags": [
-            "study",
-            "investigate"
+            "investigate",
+            "study"
           ],
           "trivial": false
-        },
-        {
-          "label": "Note the pulse in charcoal on the margin of the cutting's linen wrapping — the road's position over the signal line is worth recording",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "difficulty": "very easy",
-          "intentTags": [
-            "investigate",
-            "careful"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Rise and walk on — save the questions for the wayhouse, where there's light and a hearth to sit beside",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": "very easy",
-          "intentTags": [
-            "travel",
-            "careful"
-          ],
-          "trivial": true
         }
       ],
       "scene": {
-        "setting": "The sluice-road above Millbrook — moonlit stone-cut steps, a drainage runnel crossing the road at a terrace-outlet, the old irrigation channel running alongside. Night, clear early-autumn sky, thyme underfoot. The character is crouched at the runnel, both palms on the stone.",
+        "setting": "The sluice-road above Millbrook — moonlit stone-cut steps climbing through thinning coppice, thyme in the cracked stone, village lights small and warm below. Night, clear early-autumn sky. The runnel is behind them; the road climbs ahead toward the wayhouse.",
         "npcsPresent": [
           {
             "name": "Sister Vreni",
-            "state": "standing two steps ahead on the road, facing back, hands folded in her sleeves — waiting without pressing"
+            "state": "walking a half-step ahead, sandals soft on the worn steps, moving at an unhurried pace"
           },
           {
             "name": "Aevi",
-            "state": "hovering just above the runnel, motes dimming and brightening in slow rhythm, matching the Precursor pulse"
+            "state": "drifting at Adelheid's shoulder, motes settled and steady, no longer matching the pulse"
           }
         ],
         "objects": [
-          "drainage runnel crossing the road — stone around it darker and cold",
-          "irrigation channel alongside, running heavier and slower",
+          "worn stone steps smooth at centre",
+          "irrigation channel running alongside to the left",
           "silver-stemmed cutting (linen-wrapped) in pack",
-          "worn stone steps, smooth at centre"
+          "Medic's Satchel"
         ],
         "threads": [
-          "The Precursor pulse runs directly beneath the sluice-road — same line, same frequency, south-southeast",
-          "Aevi is matching the pulse unconsciously — she may know more than she has said",
-          "Vreni noticed and is waiting — she has not asked"
+          "The Precursor pulse confirmed running directly beneath the sluice-road — same line, same frequency, south-southeast",
+          "Aevi was unconsciously matching the pulse at the runnel — has not been asked about it",
+          "Vreni noticed and waited — has not asked",
+          "The wayhouse is an hour ahead; travelers heading upstream three weeks ago would have passed through it"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "sister-vreni",
-          "note": "Stopped when Adelheid crouched at the runnel — waited without pressing, hands folded, patient",
-          "statusNote": "Walking the sluice-road with Adelheid; paused at the drainage runnel, waiting for her to finish"
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "precursor-layer",
-          "label": "The Precursor Layer",
-          "kind": "mystery",
-          "fact": "The Precursor pulse runs directly beneath the sluice-road above Millbrook — not only under the terrace and Wet Meadows but along the road itself, which sits over its south-southeast line. Echo Sense through stone confirms it, steady and unfailing. The road may follow the signal, or be built over it deliberately.",
-          "links": [
-            "echo-river-contamination",
-            "millbrook",
-            "uncatalogued-terrace-plants",
-            "maras-errand",
-            "silas-weir",
-            "companion-aevi"
-          ]
-        },
-        {
-          "topic": "companion-aevi",
-          "label": "Aevi",
-          "kind": "person",
-          "fact": "Hovering above the sluice-road runnel, Aevi began matching the Precursor pulse rhythm unconsciously — dimming and brightening in time with it, as though half-remembering something. She did not appear aware she was doing it.",
-          "links": [
-            "precursor-layer",
-            "millbrook"
-          ]
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "The Precursor pulse runs directly beneath the sluice-road — confirmed by Echo Sense through the drainage runnel stone at the upper terrace outlet. The road sits over the signal's south-southeast line.",
-          "subPlace": {
-            "name": "The Sluice-Road Runnel",
-            "parent": "The Sluice-Road",
-            "note": "Drainage runnel crossing the road at an upper terrace outlet — stone darker and cold here; the Precursor pulse is directly beneath it, strongest on the road at this crossing point.",
-            "visited": true
-          }
+          "note": "Resumed walking when Adelheid rose from the runnel — mentioned the wayhouse keeps a light in the window; did not ask what was found at the stone",
+          "statusNote": "Walking the sluice-road toward the wayhouse with Adelheid; calm and unhurried"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief pause on the road to read the pulse through stone"
+        "why": "A short stretch of walking on the road — the runnel is behind them, the wayhouse still ahead"
       }
     },
     "sceneState": {
-      "setting": "The sluice-road above Millbrook — moonlit stone-cut steps, a drainage runnel crossing the road at a terrace-outlet, the old irrigation channel running alongside. Night, clear early-autumn sky, thyme underfoot. The character is crouched at the runnel, both palms on the stone.",
+      "setting": "The sluice-road above Millbrook — moonlit stone-cut steps climbing through thinning coppice, thyme in the cracked stone, village lights small and warm below. Night, clear early-autumn sky. The runnel is behind them; the road climbs ahead toward the wayhouse.",
       "npcsPresent": [
         {
           "name": "Sister Vreni",
-          "state": "standing two steps ahead on the road, facing back, hands folded in her sleeves — waiting without pressing"
+          "state": "walking a half-step ahead, sandals soft on the worn steps, moving at an unhurried pace"
         },
         {
           "name": "Aevi",
-          "state": "hovering just above the runnel, motes dimming and brightening in slow rhythm, matching the Precursor pulse"
+          "state": "drifting at Adelheid's shoulder, motes settled and steady, no longer matching the pulse"
         }
       ],
       "objects": [
-        "drainage runnel crossing the road — stone around it darker and cold",
-        "irrigation channel alongside, running heavier and slower",
+        "worn stone steps smooth at centre",
+        "irrigation channel running alongside to the left",
         "silver-stemmed cutting (linen-wrapped) in pack",
-        "worn stone steps, smooth at centre"
+        "Medic's Satchel"
       ],
       "threads": [
-        "The Precursor pulse runs directly beneath the sluice-road — same line, same frequency, south-southeast",
-        "Aevi is matching the pulse unconsciously — she may know more than she has said",
-        "Vreni noticed and is waiting — she has not asked"
+        "The Precursor pulse confirmed running directly beneath the sluice-road — same line, same frequency, south-southeast",
+        "Aevi was unconsciously matching the pulse at the runnel — has not been asked about it",
+        "Vreni noticed and waited — has not asked",
+        "The wayhouse is an hour ahead; travelers heading upstream three weeks ago would have passed through it"
       ]
     },
-    "beats": 2,
+    "beats": 3,
     "subPlace": {
       "slug": "the-sluice-road-runnel",
       "name": "The Sluice-Road Runnel",
@@ -570,7 +528,8 @@
         "[d2] Named her departure time as tonight and extended the open invitation to walk the sluice-road together by moonlight — an hour and a half to two hours up to the wayhouse.",
         "[d2] Fell in beside Adelheid at the garden gate and is walking the sluice-road back to the wayhouse with her, pace unhurried and sure.",
         "[d2] Noticed Aevi's teal motes flicker but chose not to ask — a considered silence, not ignorance",
-        "[d2] Stopped when Adelheid crouched at the runnel — waited without pressing, hands folded, patient"
+        "[d2] Stopped when Adelheid crouched at the runnel — waited without pressing, hands folded, patient",
+        "[d2] Resumed walking when Adelheid rose from the runnel — mentioned the wayhouse keeps a light in the window; did not ask what was found at the stone"
       ],
       "knownFacts": [
         "A man arrived at the wayhouse eleven days ago with a properly cleaned thigh wound. It closed. He walks the court now.",
@@ -588,12 +547,12 @@
       "gender": "woman",
       "pronouns": "she/her",
       "age": 44,
-      "statusNote": "Walking the sluice-road with Adelheid; paused at the drainage runnel, waiting for her to finish",
+      "statusNote": "Walking the sluice-road toward the wayhouse with Adelheid; calm and unhurried",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
       },
-      "met": 8,
+      "met": 9,
       "domains": {
         "primary": "mason"
       },
@@ -952,7 +911,7 @@
         "locationId": "gen-mara-wells-store"
       }
     ],
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 3,
     "recentOffers": [
       {
         "thing": "Mara offering physical work as a grounding—garden beds needing hands, the store's back room work waiting",
@@ -4964,16 +4923,16 @@
   "itemReclaimVersion": 1,
   "nameRepairVersion": 1,
   "tendencies": {
-    "generous": 3.773204983188243,
-    "social": 5.538629989086395,
-    "cerebral": 19.881479909634376,
-    "cautious": 15.298502480268212,
-    "strategic": 15.263649730688066,
-    "carousing": 0.839525133649207,
-    "risky": 0.42081460333293574,
-    "ruthless": 0.9597626631371076,
-    "patient": 0.5876204882136226,
-    "craft": 0.7569213803350267
+    "generous": 3.6788748586085367,
+    "social": 5.400164239359235,
+    "cerebral": 19.384442911893515,
+    "cautious": 15.916039918261506,
+    "strategic": 14.882058487420863,
+    "carousing": 0.8185370053079768,
+    "risky": 0.41029423824961236,
+    "ruthless": 0.9357685965586798,
+    "patient": 0.572929976008282,
+    "craft": 0.7379983458266509
   },
   "aptitudes": [
     "strategist",
@@ -4982,7 +4941,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 72,
+  "actionCount": 73,
   "bondLogFrom": null,
   "teachers": {},
   "regionsKnown": {
@@ -5170,8 +5129,8 @@
   "bands": [],
   "_silasGrantsRevoked": true,
   "reconcileVersion": 66,
-  "updatedAt": 1789762409038,
-  "rev": 60,
+  "updatedAt": 1789762966413,
+  "rev": 61,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -5184,7 +5143,7 @@
   "featureOffers": [],
   "_pinsInitialized": true,
   "_opUnknown": {
-    "sceneSummary": 33
+    "sceneSummary": 34
   },
   "_applyFailures": null,
   "sessions": [
@@ -5203,6 +5162,14 @@
       "startDay": 80,
       "endDay": 80,
       "beats": 8
+    },
+    {
+      "id": "sess-3",
+      "startedAt": "2026-09-18T20:22:46.361Z",
+      "lastAt": "2026-09-18T20:22:46.361Z",
+      "startDay": 80,
+      "endDay": 80,
+      "beats": 1
     }
   ],
   "_debtReceipts": [],
@@ -5211,14 +5178,14 @@
     "scout": 7,
     "study": 8,
     "ask": 3,
-    "travel": 6,
+    "travel": 7,
     "coerce": 1,
     "threaten": 1,
     "meditate": 1,
     "investigate": 4,
     "analyze": 1,
     "retreat": 1,
-    "careful": 6,
+    "careful": 7,
     "urgent": 1,
     "confront": 1,
     "defer": 1,
@@ -5237,16 +5204,20 @@
     "sage": 1,
     "stalwart": 1
   },
-  "_pendingArrival": null,
+  "_pendingArrival": {
+    "ref": "The Wayhouse",
+    "name": "The Wayhouse",
+    "destId": "the_wayhouse"
+  },
   "_opEmitted": {
-    "sceneSummary": 29,
-    "choices": 29,
+    "sceneSummary": 30,
+    "choices": 30,
     "questUpdates": 20,
-    "scene": 29,
-    "npcUpdates": 25,
+    "scene": 30,
+    "npcUpdates": 26,
     "placeUpdates": 9,
     "codexUpdates": 22,
-    "timeOps": 23,
+    "timeOps": 24,
     "imagePrompt": 8,
     "gambitApt": 21,
     "sceneEnded": 25,
@@ -5259,7 +5230,7 @@
     "moveTo": 3,
     "_engineClosedScene": 1
   },
-  "_opTurns": 29,
+  "_opTurns": 30,
   "_opCountingSince": "2026-09-15T23:58:48.348Z",
   "gallery": [
     {

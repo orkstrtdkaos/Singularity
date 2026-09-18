@@ -29,6 +29,156 @@
       "guardedBy": [
         "Kael"
       ]
+    },
+    "char-mrhs8286:hold-fendt::warden-of-the-threshold-post-at-the-ridg": {
+      "key": "char-mrhs8286:hold-fendt::warden-of-the-threshold-post-at-the-ridg",
+      "id": "hold-fendt::warden-of-the-threshold-post-at-the-ridg",
+      "ownerId": "char-mrhs8286",
+      "ownerName": "Silas Weir",
+      "name": "Threshold Post",
+      "kind": "post",
+      "describedAs": null,
+      "locationId": "gen-threshold-post",
+      "placeName": "Threshold Post",
+      "settlementId": "gen-threshold-post",
+      "settlementName": "Threshold Post",
+      "worldPos": {
+        "colatitude": 0.9,
+        "longitude": 30,
+        "depth": 0
+      },
+      "keeperId": "fendt",
+      "keeperName": "Fendt",
+      "condition": "thriving",
+      "has": [
+        "Threshold Iron Mine",
+        "Threshold Ashwarden Temple",
+        "Threshold Post Shrine of Endings",
+        "a Watch — people posted, and they SEE",
+        "a relay station — the network's node"
+      ],
+      "guardedBy": []
+    },
+    "char-mrhs8286:hold-cassiel-ord::full-reconstruction-of-the-raven-s-home-": {
+      "key": "char-mrhs8286:hold-cassiel-ord::full-reconstruction-of-the-raven-s-home-",
+      "id": "hold-cassiel-ord::full-reconstruction-of-the-raven-s-home-",
+      "ownerId": "char-mrhs8286",
+      "ownerName": "Silas Weir",
+      "name": "Stillwater's Trouble",
+      "kind": "post",
+      "describedAs": null,
+      "locationId": "the_old_warden_post",
+      "placeName": "Raven's Home (the Old Warden Post)",
+      "settlementId": "the_old_warden_post",
+      "settlementName": "Raven's Home (the Old Warden Post)",
+      "worldPos": {
+        "colatitude": 73,
+        "longitude": 71,
+        "depth": 0
+      },
+      "keeperId": "cassiel-ord",
+      "keeperName": "Cassiel Ord",
+      "condition": "thriving",
+      "has": [
+        "The Accumulation",
+        "Skeltal Animal Sentries",
+        "Stillwater's Lab",
+        "Shadow and Death Barrier",
+        "Warded Wall"
+      ],
+      "guardedBy": [
+        "Siol"
+      ]
+    },
+    "char-mrhs8286:the-fell-pell": {
+      "key": "char-mrhs8286:the-fell-pell",
+      "id": "the-fell-pell",
+      "ownerId": "char-mrhs8286",
+      "ownerName": "Silas Weir",
+      "name": "The Fell Pell",
+      "kind": "enterprise",
+      "describedAs": "forge",
+      "locationId": "millbrook",
+      "placeName": "Millbrook",
+      "settlementId": "millbrook",
+      "settlementName": "Millbrook",
+      "worldPos": {
+        "colatitude": 20.31,
+        "longitude": 251.895,
+        "depth": 0
+      },
+      "keeperId": "pell",
+      "keeperName": "Pell Ran Marsh",
+      "condition": "thriving",
+      "has": [
+        "a workshop",
+        "a forge",
+        "quarters — homes for the people who work it",
+        "a hearth nobody lets go out",
+        "a market day"
+      ],
+      "guardedBy": [
+        "Calvar"
+      ]
+    },
+    "char-mrhs8286:whistling-woman-post": {
+      "key": "char-mrhs8286:whistling-woman-post",
+      "id": "whistling-woman-post",
+      "ownerId": "char-mrhs8286",
+      "ownerName": "Silas Weir",
+      "name": "Whistling Woman Post",
+      "kind": "post",
+      "describedAs": "a warden-staffed waystation on the moorland relay network",
+      "locationId": "gen-whistling-woman-post",
+      "placeName": "Whistling Woman Post",
+      "settlementId": "gen-whistling-woman-post",
+      "settlementName": "Whistling Woman Post",
+      "worldPos": {
+        "colatitude": 20.36,
+        "longitude": 252.1,
+        "depth": 0
+      },
+      "keeperId": "deni-cors",
+      "keeperName": "Deni Cors",
+      "condition": "thriving",
+      "has": [
+        "a Watch — people posted, and they SEE",
+        "a relay station — the network's node",
+        "a keeper's hut",
+        "a shrine"
+      ],
+      "guardedBy": []
+    },
+    "char-mrhs8286:hold-made-gate": {
+      "key": "char-mrhs8286:hold-made-gate",
+      "id": "hold-made-gate",
+      "ownerId": "char-mrhs8286",
+      "ownerName": "Silas Weir",
+      "name": "The Made Gate",
+      "kind": "post",
+      "describedAs": "a gate that was made rather than found",
+      "locationId": "gen-the-made-gate",
+      "placeName": "The Made Gate",
+      "settlementId": "the_crossing",
+      "settlementName": "The Crossing",
+      "worldPos": {
+        "colatitude": 0,
+        "longitude": 0,
+        "depth": 0
+      },
+      "keeperId": "pell",
+      "keeperName": "Pell Ran Marsh",
+      "condition": "thriving",
+      "has": [
+        "a gate that closes",
+        "a standing ward-line",
+        "a waygate — made, not found",
+        "a memorial — names kept",
+        "a shrine"
+      ],
+      "guardedBy": [
+        "Bryn Calowell"
+      ]
     }
   }
 }

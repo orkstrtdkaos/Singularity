@@ -553,8 +553,11 @@ export function contingentsOf(band) {
     // ⛔ `npcId` RIDES THROUGH. It is the difference between "one of quality 2 who shapes" and "Pell Ran Marsh", and the
     // normaliser used to drop it — so a band composed of real people read back as anonymous bodies to every consumer, the
     // Fellowship roster included. ⚠️ The combat maths does not read it and does not have to; identity is not a modifier.
+    // ⛔ CCODE-404 — AND `from` RIDES THROUGH FOR THE SAME REASON `npcId` DOES, which my own first test of the muster caught: the
+    // bound on raising hands at a place is that place's authored capacity, so the heads must remember where they were raised or the
+    // bound can never be checked again. Dropping it here read every mustered head back as having come from nowhere.
     return list.map(c => ({ n: Math.max(0, num(c?.n, 0)), quality: Math.max(0, num(c?.quality, 1)),
-      does: (c?.does || ["MARTIAL"]).map(String), what: c?.what || null, npcId: c?.npcId || null }));
+      does: (c?.does || ["MARTIAL"]).map(String), what: c?.what || null, npcId: c?.npcId || null, from: c?.from || null }));
   }
   return [{ n: Math.max(0, num(band?.count, 0)), quality: Math.max(0, num(band?.quality, 1)),
     does: ["HARM", "MARTIAL"], what: band?.name || null }];
@@ -624,6 +627,55 @@ export function bandCan(band) {
   const out = new Set();
   for (const c of contingentsOf(band)) if (c.n > 0) for (const d of c.does) out.add(d);
   return [...out];
+}
+
+/** ⛔ CCODE-404 (Erik: "Recruiting into the band next please. I want to have a source of workers and guards as well as a way to raise
+ *  geneal troops… on the way to having a legion.") — PUTTING SOMEBODY IN A UNIT.
+ *
+ *  ⚑ MEASURED FIRST, and almost all of it was already here: `raiseBand`, `contingentsOf`, `unitComposition`, `bandStrength`,
+ *  `bandThreat`, `bandGaps`, `legionClash` and `bloodBand` are written and calibrated. What did not exist was any way for a PLAYER to
+ *  put a person or a body of hands into one — `raiseBand` had exactly one caller, a GM op, and `contingentsOf`, `unitComposition` and
+ *  `bandGaps` had NO caller outside the tests. Silas has commanded a band of six since day 16, with one gap costing him 1.4× losses,
+ *  and no screen has ever said either thing.
+ *
+ *  ⚠️ IT WRITES CONTINGENTS, NEVER `count`. A flat `{count, quality}` band reads as one martial contingent by `contingentsOf`'s own
+ *  fallback, so the first recruit into a flat band must MAKE that implicit contingent real before adding beside it — otherwise the
+ *  people already in it vanish the moment somebody joins. ⛔ That is the whole reason this lives here rather than in the caller.
+ *
+ *  ⚠️ AND A PERSON IS ONE PERSON. `n` is forced to 1 for a named recruit, and the same `npcId` cannot stand in one unit twice;
+ *  whether they stand in ANOTHER unit is the caller's question, because only the caller can see the other units. Pure. */
+export function addContingent(band, spec = {}) {
+  if (!band || typeof band !== "object") return { ok: false, why: "no such unit" };
+  const npcId = spec.npcId ? String(spec.npcId) : null;
+  const n = npcId ? 1 : Math.max(0, Math.round(num(spec.n, 0)));
+  if (!n) return { ok: false, why: "nobody to add" };
+  const quality = Math.max(1, Math.round(num(spec.quality, 1)));
+  const does = [...new Set((Array.isArray(spec.does) ? spec.does : ["HARM", "MARTIAL"]).map(String).filter(Boolean))];
+  if (!does.length) return { ok: false, why: "nothing they do" };
+  // ⛔ THE IMPLICIT CONTINGENT IS MADE REAL FIRST — see the note above.
+  if (!Array.isArray(band.contingents) || !band.contingents.length) {
+    const had = Math.max(0, Math.round(num(band.count, 0)));
+    band.contingents = had ? [{ n: had, quality: Math.max(1, Math.round(num(band.quality, 1))),
+      does: ["HARM", "MARTIAL"], what: band.name || null }] : [];
+  }
+  if (npcId && band.contingents.some(c => c && c.npcId === npcId)) return { ok: false, why: "they already stand in it" };
+  const c = { n, quality, does, ...(spec.what ? { what: String(spec.what).slice(0, 80) } : {}),
+    ...(npcId ? { npcId } : {}), ...(spec.from ? { from: String(spec.from) } : {}) };
+  band.contingents = [...band.contingents, c];
+  // ⚠️ `count` IS THE STORED COPY OF A DERIVED VALUE, and `unitsOf` already prefers the derived head for exactly that reason. It is
+  // kept in step here anyway, because `raiseBand` wrote it and an authored band may still carry it — a stale one would be read by
+  // anything that has not been moved over yet.
+  band.count = band.contingents.reduce((a, x) => a + Math.max(0, num(x?.n, 0)), 0);
+  return { ok: true, band, contingent: c };
+}
+
+/** ⛔ HOW MANY ANONYMOUS HEADS IN THIS UNIT WERE RAISED AT THAT PLACE. The bound on mustering is the place's own authored capacity, so
+ *  the bound has to be checkable again later — which means the heads must remember where they came from. ⚠️ Named people are not
+ *  counted: a person who works for you is not a head of capacity, they are a person who agreed. Pure. */
+export function musteredFrom(band, holdingId) {
+  if (!band || !holdingId) return 0;
+  const want = String(holdingId);
+  return contingentsOf(band).reduce((a, c) => a + (!c.npcId && String(c.from || "") === want ? Math.max(0, num(c.n, 0)) : 0), 0);
 }
 
 /** ⚠️ WHAT THEY ARE WORTH. Count × quality across the contingents, times the condition multiplier — a

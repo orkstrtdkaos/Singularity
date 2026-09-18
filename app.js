@@ -100,6 +100,10 @@ import { ensureLegsOn, beginRoadOn, currentLeg, roadStandsAt, legEarnsGambit, en
 import { travelersHere, travelerHereLine, whereOf } from "./engine/travelers.js";   // CCODE-359: another traveler is here   // CCODE-354: the world moved on, counted by beats
 import { makeInvitation, incomingInvitations, sentInvitations, joinBandLocally, bandPhrase } from "./engine/invitations.js";
 import { newsNearness, nearFirst } from "./engine/newsvoice.js";   // CCODE-367: nearby news stands out
+// ⛔ CCODE-404: what a person BRINGS to a unit is the same question the party screen asks of them (CCODE-402), answered the same way.
+import { contributionsOf } from "./engine/combatants.js";
+import { derivedLevel } from "./engine/npcsheet.js";
+import { musterCapacityOf, queueHoldingEvent } from "./engine/holdings.js";
 import { homeOf, isHome, makeHome } from "./engine/home.js";   // CCODE-369: a home is a place that is yours   // CCODE-360: an invitation carried by someone you both know
 import { runWakeGeneration } from "./engine/wake.js"; // SNG-204 Phase 2: open wakes generate the next thread
 import { addAssignment, delegationRefusal, activeDelegates, MISSION_KINDS, MISSION_KIND_IDS, canSendOn, sayFamilies } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
@@ -142,7 +146,8 @@ import { tickAllProjects, openProject, projectProgress, interruptProject, resume
 import { holdOpen, releaseHold, slowSink, canReach, resolveRetrieval } from "./engine/death.js"; // CCODE-270: the player's road back — the seven retrieval crafts had no door
 import { alliesOf } from "./engine/combatants.js"; // CCODE-276: the roster the party block renders
 import { championsFor, resolveChampion, creditChampion, championLine, sendingIsGrim } from "./engine/champion.js"; // SNG-587: somebody else takes the fight
-import { commandSlots, bringForward, lineSplit, canRaiseBand, raiseBand, bandStrength, bandThreat, bloodBand, recoverBand, legionClash } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
+// ⛔ CCODE-404 (Erik) — `addContingent` and `musteredFrom` are new; `unitComposition` and `bandGaps` had NO caller outside the tests.
+import { commandSlots, bringForward, lineSplit, canRaiseBand, raiseBand, bandStrength, bandThreat, bloodBand, recoverBand, legionClash, addContingent, musteredFrom, unitComposition, bandGaps } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
 import { groupCapability, loadBearing } from "./engine/group.js";   // CCODE-317/322: what your line covers, and who holds it alone
 import { characterPower, threatBand } from "./engine/threat.js"; // CCODE-52: built power sets the mean the encounter pool revolves around
 import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine, FRAME_FREEFORM_CUE } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c). SNG-246 Fix D: playerReceiptLine = the mechanical receipt SHOWN to the player
@@ -157,7 +162,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.65";
+const APP_VERSION = "2.0.66";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14657,6 +14662,141 @@ function nameOfPlace(id) {
   return CONTENT.locations?.[id]?.name || character?.generated?.location?.[id]?.name || String(id || "");
 }
 
+/** ⛔ CCODE-404 (Erik: "I want to have a source of workers and guards as well as a way to raise geneal troops") — THE SOURCE OF
+ *  WORKERS AND GUARDS IS THE PEOPLE HE ALREADY KNOWS, at the bar SPEC_hold_costs §5 ruled for work: known, here, and not hostile.
+ *  ⚑ Measured: that bar reaches 36 of the 39 people on Silas's save, where the TRAVELLING bar reaches 18 — "Bren Thalle is two dry
+ *  seasons behind with two children; she does not need to be devoted to you to take paid work."
+ *
+ *  ⚠️ AND WHAT THEY BRING IS NOT INVENTED EITHER: their families are `contributionsOf` with the evidence read (CCODE-402, the same
+ *  answer the party screen gives), and their quality is their derived level. A row says both, because "who do I recruit" is a
+ *  question about what the unit LACKS, and the gaps are on the screen behind this one. */
+function showBandRecruitPicker(unitId) {
+  document.getElementById("help-pop")?.remove();
+  const unit = unitsOf(character).find(u => u.id === unitId);
+  if (!unit) return;
+  const reg = character.npcRegistry || {};
+  const standing = new Set();
+  for (const u of unitsOf(character)) for (const c of (u.unit?.contingents || [])) if (c?.npcId) standing.add(String(c.npcId));
+  const gaps = new Set(bandGaps(unit.unit, { cfg: meleeCfg() }).map(g => g.missing));
+  const rows = Object.entries(reg)
+    .filter(([id, n]) => !standing.has(id) && canBeAskedToWork({ ...n, id }))
+    .map(([id, n]) => {
+      const does = contributionsOf({ ...n, id }, { evidence: true });
+      return { id, n, does, level: derivedLevel(n) || 1, fills: does.filter(d => gaps.has(d)) };
+    })
+    // ⚑ THE ONES WHO CLOSE A GAP FIRST, then the strongest — the screen sorts by the decision the player is making
+    .sort((a, b) => b.fills.length - a.fills.length || b.level - a.level || String(a.n.name || "").localeCompare(String(b.n.name || "")));
+  if (!rows.length) { alert("Everyone you know who could be asked is already standing in one of your units."); return; }
+  const pop = document.createElement("div");
+  pop.id = "help-pop"; pop.className = "help-overlay";
+  const line = (r) => `<button class="opt" data-band-take="${esc(r.id)}" data-hay="${esc(String(r.n.name || "").toLowerCase() + " " + String(r.n.role || "").toLowerCase())}">
+    ${esc(r.n.name || r.id)} <span class="cost">${esc(r.n.role || "")}${r.n.role ? " · " : ""}level ${r.level} · ${esc(r.does.map(d => d.toLowerCase()).join(", ") || "nothing named")}${r.fills.length ? ` · <strong>closes ${esc(r.fills.map(f => f.toLowerCase()).join(" and "))}</strong>` : ""}</span></button>`;
+  pop.innerHTML = `<div class="help-card" role="dialog" aria-label="Recruit into ${esc(unit.name)}" style="max-height:min(86vh,760px); display:flex; flex-direction:column; overflow:hidden">
+    <div class="whois-head" style="flex:0 0 auto">Who joins ${esc(unit.name)}?</div>
+    <div style="flex:0 0 auto; padding:6px 0">
+      <input id="band-filter" type="text" placeholder="Type to narrow — ${rows.length} you could ask" style="width:100%" autocomplete="off">
+    </div>
+    <div style="flex:1 1 auto; overflow-y:auto; -webkit-overflow-scrolling:touch">${rows.map(line).join("")}</div>
+    <div class="help-foot" style="flex:0 0 auto">
+      <span class="hint">Working for you is not travelling with you — standing in a unit does not put them at your side.</span>
+      <button class="btn" id="help-close">Cancel</button>
+    </div></div>`;
+  document.body.appendChild(pop);
+  const close = () => pop.remove();
+  pop.addEventListener("click", ev => { if (ev.target === pop) close(); });
+  document.getElementById("help-close").onclick = close;
+  const filter = document.getElementById("band-filter");
+  filter.oninput = () => { const q = filter.value.trim().toLowerCase();
+    for (const el of pop.querySelectorAll("[data-band-take]")) el.hidden = !!q && !el.dataset.hay.includes(q); };
+  filter.focus();
+  for (const el of pop.querySelectorAll("[data-band-take]")) el.onclick = () => {
+    const r = rows.find(x => x.id === el.dataset.bandTake);
+    close();
+    if (!r) return;
+    // ⛔ THE REFUSAL IS SAID, NEVER SWALLOWED — this tab's own rule, one screen up.
+    const res = addContingent(unit.unit, { npcId: r.id, quality: r.level, does: r.does.length ? r.does : ["HARM", "MARTIAL"],
+      what: `${r.n.name || r.id}${r.n.role ? ` — ${r.n.role}` : ""}` });
+    if (!res.ok) { alert(res.why); return; }
+    queueHoldingEvent(character, `${r.n.name || r.id} stands in ${unit.name} now.`);
+    saveCharacter(character); renderBandsTab();
+  };
+}
+
+/** ⛔ CCODE-404 — AND GENERAL TROOPS, WHICH ARE THE HALF THAT DID NOT EXIST. A body of hands has no name and no record; the model has
+ *  always supported them (`contingentsOf` normalises `{n, quality, does}` and `unitComposition` counts them as `simpleSoldiers`) and
+ *  nothing could create one.
+ *
+ *  ⛔ THE BOUND IS THE PLACE'S OWN AUTHORED CAPACITY and not a number of mine: `handsCap` — Aevi's `maxHands` plus each
+ *  `family: "people"` feature's `hands` — less the crew already working it and the heads already raised there. ⚠️ Soldiers and
+ *  workers draw on one capacity because they eat the same bread, which is what makes this a decision.
+ *  ⚑ Measured on Silas: five holds, 27 of capacity, 1 hand at work — so 26 could be put under arms today, which is a war band and
+ *  not yet a legion. The ceiling is his holdings, and that is the honest answer to "how do I get to a legion". */
+function showBandMusterPicker(unitId) {
+  document.getElementById("help-pop")?.remove();
+  const unit = unitsOf(character).find(u => u.id === unitId);
+  if (!unit) return;
+  const cfgS = holdCfgNow();
+  const rows = (character.holdings || []).map(h => ({
+    h, spare: musterCapacityOf(h, cfgS, { mustered: musteredFrom(unit.unit, h.id) }),
+    already: musteredFrom(unit.unit, h.id),
+  })).filter(r => r.spare > 0);
+  if (!rows.length) {
+    alert((character.holdings || []).length
+      ? "Every place you hold is already working or arming everyone it can feed. Build quarters, a longhouse or a keeper's hut and it will feed more."
+      : "Troops are raised at a place you hold. You do not hold one yet.");
+    return;
+  }
+  const pop = document.createElement("div");
+  pop.id = "help-pop"; pop.className = "help-overlay";
+  pop.innerHTML = `<div class="help-card" role="dialog" aria-label="Raise hands for ${esc(unit.name)}">
+    <div class="whois-head">Where do they come from?</div>
+    ${rows.map(r => `<div class="codex-f" style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap">
+      <strong style="min-width:150px">${esc(r.h.name || r.h.id)}</strong>
+      <span class="hint" style="flex:1 1 140px">${esc(r.h.condition || "")}${r.already ? ` · ${r.already} already under arms` : ""}</span>
+      <label class="hint">how many <input type="number" id="muster-n-${esc(r.h.id)}" value="${Math.min(r.spare, 5)}" min="1" max="${r.spare}" style="width:62px"></label>
+      <span class="hint">of ${r.spare} it can still feed</span>
+      <button class="opt" data-band-raise="${esc(r.h.id)}">Raise them</button>
+    </div>`).join("")}
+    <div class="help-foot">
+      <span class="hint">Hands, not names: they fight as a body and are counted, never invented into people. They draw on the same capacity your workers do.</span>
+      <button class="btn" id="help-close">Cancel</button>
+    </div></div>`;
+  document.body.appendChild(pop);
+  const close = () => pop.remove();
+  pop.addEventListener("click", ev => { if (ev.target === pop) close(); });
+  document.getElementById("help-close").onclick = close;
+  for (const el of pop.querySelectorAll("[data-band-raise]")) el.onclick = () => {
+    const hid = el.dataset.bandRaise;
+    const row = rows.find(r => r.h.id === hid);
+    const want = Math.max(1, Math.min(row?.spare || 0, Number(document.getElementById(`muster-n-${hid}`)?.value) || 0));
+    close();
+    if (!row || !want) return;
+    // ⚠️ THE LABEL DOES NOT SAY "HANDS": the roster row already prints "10 hands" and reads the label beside it, so a label that
+    // repeated the noun rendered "10 hands hands raised at Stillwater's Trouble". Caught on the screen, not in a test.
+    const res = addContingent(unit.unit, { n: want, quality: 1, does: ["HARM", "MARTIAL"], from: hid,
+      what: `raised at ${row.h.name || hid}` });
+    if (!res.ok) { alert(res.why); return; }
+    queueHoldingEvent(character, `${want} ${want === 1 ? "hand" : "hands"} raised at ${row.h.name || hid} for ${unit.name}.`);
+    saveCharacter(character); renderBandsTab();
+  };
+}
+
+/** ⛔ CCODE-404 — AND RAISING THE UNIT ITSELF. `canRaiseBand` has been answering since it was written and `raiseBand` had exactly one
+ *  caller: a GM op. So a player who qualified — Silas has for five holdings — had no way to ask, and the tab's own empty state said
+ *  "a band is raised in play", which is a sentence describing a mechanism the player cannot reach. */
+function raiseABand() {
+  const gate = canRaiseBand(character, { cfg: meleeCfg(), renownBand: character.renownBand || null });
+  if (!gate.ready) { alert(gate.why); return; }
+  const name = (prompt("What are they called?", "") || "").trim();
+  if (!name) return;
+  const id = `band-${name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 32) || Date.now().toString(36)}`;
+  const seat = (character.holdings || []).find(h => h && h.condition !== "failing") || null;
+  const r = raiseBand(character, { id, name: name.slice(0, 60), count: 0, quality: 1, from: seat?.id || null, day: absoluteWorldDay() });
+  if (!r.ok) { alert(r.why); return; }
+  queueHoldingEvent(character, `${name} is raised${seat ? ` at ${seat.name || seat.id}` : ""} — and stands empty until somebody joins it.`);
+  saveCharacter(character); renderBandsTab();
+}
+
 function renderBandsTab() {
   const ladder = CONTENT.rules.subAttributeLadder;
   const day = absoluteWorldDay();
@@ -14698,6 +14838,29 @@ function renderBandsTab() {
       </div></div>`;
   };
 
+  // ⛔ CCODE-404 — WHAT IT IS WORTH AND WHAT IT LACKS. `unitComposition` and `bandGaps` were written, calibrated and gated and had
+  // NO caller outside the tests: Silas has commanded six people since day 16 with nothing shielding them — 1.4× the losses, every
+  // clash — and no screen has ever said so. ⚠️ Every number here is computed by the engine; none is composed for the panel, which is
+  // the rule the holds tab states and the reason that tab shows so little.
+  const unitFacts = (u) => {
+    const cfg = meleeCfg();
+    const comp = unitComposition(u.unit);
+    const thr = bandThreat(u.unit, { cfg });
+    const gaps = bandGaps(u.unit, { cfg });
+    if (!comp.bodies) return `<div class="hint">It stands empty — ask someone to join, or raise hands at a place you hold.</div>`;
+    return `<div class="codex-f" style="display:flex;gap:10px;align-items:baseline;flex-wrap:wrap">
+      <span style="font-variant-numeric:tabular-nums"><strong>${comp.bodies}</strong> ${comp.bodies === 1 ? "stands" : "stand"} in it</span>
+      ${comp.simpleSoldiers ? `<span class="hint" style="font-variant-numeric:tabular-nums">${comp.withSkills} with a trade · ${comp.simpleSoldiers} hands</span>` : `<span class="hint">every one of them with a trade</span>`}
+      <span class="hint" style="font-variant-numeric:tabular-nums">threat ${thr.power}</span>
+      <span class="hint">${esc(u.condition)}</span>
+      ${gaps.length ? gaps.map(g => `<span class="hint" style="width:100%;color:var(--warn,#e0b25a)">⚠️ no ${esc(String(g.missing).toLowerCase())} — ${esc(g.why)}${g.value ? ` (×${g.value})` : ""}</span>`).join("")
+        : `<span class="hint" style="width:100%">Nothing it cannot cover — it mends, shields and reads the ground.</span>`}
+    </div>`;
+  };
+  // ⚠️ THE GATE SPEAKS EITHER WAY. `canRaiseBand`'s `why` is written to be read by a player ("you lead 1 and hold 1 — not yet a
+  // following"), so a character who cannot raise one is told what would change that rather than shown nothing.
+  const raise404 = canRaiseBand(character, { cfg: meleeCfg(), renownBand: character.renownBand || null });
+
   chrome(`<div class="screen" style="max-width:760px">
     ${characterTabBar("bands")}
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">${esc(rosterLine(character, opts))}</h3>
@@ -14705,11 +14868,20 @@ function renderBandsTab() {
         ${units.length === 1
           ? `<div class="hint">${esc(unitLine(u))}</div>`
           : `<div><strong>${esc(u.name)}</strong> <span class="hint">— ${esc(unitLine(u))}</span></div>`}
+        ${unitFacts(u)}
         ${[...here.filter(r => r.unitId === u.id), ...pool.filter(r => r.unitId === u.id)].map(rowFor).join("") || `<div class="hint">nobody stands in it</div>`}
+        <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:4px">
+          <button class="opt" data-band-recruit="${esc(u.id)}" title="Ask someone you know to stand in it — a far lower bar than travelling with you">Ask someone to join…</button>
+          <button class="opt" data-band-muster="${esc(u.id)}" title="Raise hands at a place you hold, up to what it can feed">Raise hands at a hold…</button>
+        </div>
         ${u.travelers.map(t => `<div class="codex-f" style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap"><strong style="min-width:130px">${esc(t.name)}</strong><span class="hint">another traveler, who chose to join${t.via ? ` — word came through ${esc(t.via)}` : ""}</span></div>`).join("")}
         ${sentInvitations(sharedInvites, character).filter(i => i.bandId === u.id && i.answer !== "accepted").map(i => `<div class="codex-f hint">Word sent to ${esc(i.toName)} through ${esc(i.carrierName)} — ${i.answer === "declined" ? "the answer came back: not now" : "no answer yet"}</div>`).join("")}
         ${syncEnabled() ? `<div class="opt-row" style="margin-top:6px"><button class="opt" data-band-invite="${esc(u.id)}" title="Send word to another player's character through someone in this band">Invite a fellow traveler…</button></div>` : ""}
-      </div>`).join("") : `<p class="hint">Nobody has thrown in with you yet. A band is raised in play — and someone who has sworn to you stands in it whether or not they walk at your side.</p>`}
+      </div>`).join("") : `<p class="hint">Nobody has thrown in with you yet. Someone who has sworn to you stands in a unit whether or not they walk at your side.</p>`}
+      <div class="opt-row" style="margin-top:10px;gap:6px;flex-wrap:wrap">
+        <button class="opt" id="band-raise-new"${raise404.ready ? "" : " disabled"} title="${esc(raise404.why)}">Raise a new band…</button>
+        <span class="hint">${esc(raise404.ready ? raise404.why : raise404.why)}</span>
+      </div>
     </div>
     ${units.length ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">At your side</h3>
       <div class="codex-f" style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap">
@@ -14739,6 +14911,10 @@ function renderBandsTab() {
     saveCharacter(character); renderBandsTab();
   };
   for (const b of app.querySelectorAll("[data-band-send]")) b.onclick = () => showErrandPicker(b.dataset.bandSend);
+  // ⛔ CCODE-404 — the three doors the player never had: join a unit, raise hands at a hold, raise the unit itself.
+  for (const b of app.querySelectorAll("[data-band-recruit]")) b.onclick = () => showBandRecruitPicker(b.dataset.bandRecruit);
+  for (const b of app.querySelectorAll("[data-band-muster]")) b.onclick = () => showBandMusterPicker(b.dataset.bandMuster);
+  const rn404 = document.getElementById("band-raise-new"); if (rn404) rn404.onclick = raiseABand;
   for (const b of app.querySelectorAll("[data-band-invite]")) b.onclick = () => showInvitePicker(b.dataset.bandInvite);   // CCODE-360
   const back = document.getElementById("cs-back"); if (back) back.onclick = () => renderCharacterScreen();
 }

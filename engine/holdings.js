@@ -224,7 +224,9 @@ export function keeperGone(character, stewardId, { registry = null, company = nu
 
 /** Queue a line the tick will say once. ⚠️ PERSISTED ON THE CHARACTER, not returned — a turn's apply-step has no
  *  news channel of its own, and the tick already owns “once, ever” for holding offers. */
-function queueHoldingEvent(character, text) {
+/** ⛔ CCODE-404: EXPORTED, because it now has a second caller. Raising hands at a hold and somebody joining a unit are both "a line
+ *  the tick says once", and `import_integrity` was right to refuse app.js calling a private helper as if it were global. */
+export function queueHoldingEvent(character, text) {
   character.holdingEvents = [...(character.holdingEvents || []), { text, announced: false }];
 }
 
@@ -1192,6 +1194,19 @@ export function handsCap(holding, cfg = null) {
   for (const f of featuresOf(holding)) { const def = featureDef(f.kind, cfg); if (def?.family === "people") cap += (Number(def.hands) || 0) * (Number(f.count) || 1); }
   return cap;
 }
+/** ⛔ CCODE-404 — HOW MANY MORE HANDS THIS PLACE CAN PUT UNDER ARMS, and the answer is the place's OWN authored capacity: the same
+ *  `handsCap` that bounds its crew, less the crew already on it and the heads already mustered out of it.
+ *
+ *  ⚠️ SOLDIERS AND WORKERS DRAW ON ONE CAPACITY BECAUSE THEY EAT THE SAME BREAD. A hold that feeds three can field three or work
+ *  three or split them, and that tension is the point — it is what makes "who can I afford" a question rather than a formality.
+ *  ⛔ AND NO NUMBER HERE IS MINE: `maxHands` (3) plus each `family: "people"` feature's `hands` is what Aevi authored. Pure. */
+export function musterCapacityOf(holding, cfg = null, { mustered = 0 } = {}) {
+  if (!holding) return 0;
+  const cap = handsCap(holding, cfg) || 0;
+  const crew = Array.isArray(holding.crew) ? holding.crew.length : 0;
+  return Math.max(0, cap - crew - Math.max(0, Number(mustered) || 0));
+}
+
 /** Who lives here: quarters' capacity, the people at work, the watch, the keeper. */
 export function residentsOf(holding, cfg = null) {
   let homes = 0;

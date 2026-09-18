@@ -20502,6 +20502,82 @@ console.log("\n── §284 · a companion's craft rides the bond ──");
     && /moved\.push\(\{ abilityId: owned\.abilityId, name: ab\.name, from: owned\.level, to: want \}\);/.test(rd("engine/companions.js")));
 }
 
+// ⛔ CCODE-404 (Erik) — "Recruiting into the band next please. I want to have a source of workers and guards as well as a way to raise
+// geneal troops… on the way to having a legion."
+// ⚑ MEASURED FIRST, and almost all of it was already built: `raiseBand`, `contingentsOf`, `unitComposition`, `bandStrength`,
+// `bandThreat`, `bandGaps`, `legionClash` and `bloodBand` are written and calibrated against the real engine. What did not exist was
+// any way for a PLAYER to reach them — `raiseBand` had exactly one caller, a GM op, and `unitComposition`/`bandGaps` had NO caller
+// outside these tests. Silas has commanded six people since day 16 with nothing shielding them (1.4× losses, every clash) and no
+// screen ever said so. ⚠️ The SOURCE is the people he already knows at the work bar (36 of 39, where travelling reaches 18) and the
+// capacity his holds already have; no number here is invented, which is why the ceiling is legible: 26 heads, a war band, not a legion.
+console.log("\n── §285 · recruiting into a unit ──");
+{
+  const M285 = await import("../engine/melee.js");
+  const H285 = await import("../engine/holdings.js");
+  const { loadContentHeadless: lch285 } = await import("./headless_content.mjs");
+  const C285 = await lch285();
+  const cfgS285 = C285.rules?.economy?.holdStore
+    ? { ...C285.rules.economy.holdStore, features: C285.rules.economy.holdFeatures || null } : null;
+
+  // ⛔ 1 · A FLAT BAND'S PEOPLE SURVIVE THE FIRST RECRUIT. `contingentsOf` reads `{count, quality}` as one implicit contingent, so
+  //        writing a contingents list without making that one real first would have deleted six people the moment somebody joined.
+  const flat = { id: "u", name: "The Six", count: 6, quality: 2, condition: "fresh" };
+  const added = M285.addContingent(flat, { n: 8, quality: 1, does: ["HARM", "MARTIAL"], from: "post-a", what: "raised at the post" });
+  check("§285: ⛔ A FLAT UNIT'S PEOPLE SURVIVE THE FIRST RECRUIT — the implicit contingent is made real before anything is added beside it, or six people vanish the moment one joins",
+    added.ok && M285.bandStrength(flat, {}).count === 14 && flat.contingents.length === 2,
+    JSON.stringify({ bodies: M285.bandStrength(flat, {}).count, contingents: flat.contingents.length }));
+  check("§285: …and `count`, which is the stored copy of a derived value, is kept in step for anything not yet moved onto the contingents",
+    flat.count === 14, String(flat.count));
+
+  // ⛔ 2 · A PERSON IS ONE PERSON
+  const p1 = M285.addContingent(flat, { npcId: "veth", quality: 5, does: ["PROTECT"], what: "Veth", n: 9 });
+  const p2 = M285.addContingent(flat, { npcId: "veth", quality: 5, does: ["PROTECT"] });
+  check("§285: ⛔ A NAMED PERSON IS ONE PERSON AND CANNOT STAND IN ONE UNIT TWICE — `n` is forced to 1 however it is asked for, and the second ask is refused with a reason",
+    p1.ok && p1.contingent.n === 1 && p2.ok === false && /already/.test(String(p2.why)),
+    JSON.stringify({ n: p1.contingent?.n, second: p2.why }));
+
+  // ⛔ 3 · THE BOUND MUST BE RE-CHECKABLE, WHICH MEANS `from` RIDES THROUGH THE NORMALISER
+  check("§285: ⛔ A MUSTERED HEAD REMEMBERS WHERE IT WAS RAISED — the bound is the place's capacity, so it has to be checkable again next time; the normaliser dropped `from` on my first cut and every head read as having come from nowhere",
+    M285.musteredFrom(flat, "post-a") === 8 && M285.musteredFrom(flat, "post-b") === 0
+    && M285.contingentsOf(flat).every(c => "from" in c),
+    JSON.stringify(M285.contingentsOf(flat).map(c => c.from)));
+  check("§285: …and a NAMED person is not a head of capacity — they are a person who agreed, and they do not spend the place's bread",
+    M285.musteredFrom({ contingents: [{ n: 1, npcId: "veth", from: "post-a", does: ["PROTECT"] }] }, "post-a") === 0);
+
+  // ⛔ 4 · THE BOUND IS THE PLACE'S OWN AUTHORED CAPACITY, AND WORKERS SHARE IT
+  const hold = { id: "h1", kind: "post", condition: "thriving", crew: [], features: [{ kind: "quarters", count: 1 }] };
+  const bare = H285.musterCapacityOf(hold, cfgS285, { mustered: 0 });
+  const withCrew = H285.musterCapacityOf({ ...hold, crew: ["a", "b"] }, cfgS285, { mustered: 0 });
+  const withBoth = H285.musterCapacityOf({ ...hold, crew: ["a"] }, cfgS285, { mustered: bare - 1 });
+  check("§285: ⛔ THE BOUND IS `handsCap` — the place's OWN authored capacity (`maxHands` plus each people-feature's `hands`), and SOLDIERS AND WORKERS DRAW ON ONE CAPACITY because they eat the same bread",
+    bare === H285.handsCap(hold, cfgS285) && bare > 0 && withCrew === bare - 2 && withBoth === 0,
+    JSON.stringify({ cap: H285.handsCap(hold, cfgS285), bare, withCrew, withBoth }));
+  check("§285: …and it never goes below zero, however over-committed a place becomes",
+    H285.musterCapacityOf({ ...hold, crew: ["a", "b", "c", "d", "e", "f"] }, cfgS285, { mustered: 99 }) === 0);
+
+  // ⛔ 5 · AND A GAP CLOSES WHEN SOMEBODY WHO COVERS IT JOINS — the decision the screen exists to support
+  const bare2 = { id: "u2", contingents: [{ n: 5, quality: 1, does: ["HARM", "MARTIAL"] }] };
+  const gapsBefore = M285.bandGaps(bare2, {}).map(g => g.missing);
+  M285.addContingent(bare2, { npcId: "warden", quality: 4, does: ["PROTECT", "KNOW", "RESTORE"], what: "a warden" });
+  const gapsAfter = M285.bandGaps(bare2, {}).map(g => g.missing);
+  check("§285: ⛔ A GAP CLOSES WHEN SOMEBODY WHO COVERS IT JOINS — which is what makes 'who do I recruit' a decision rather than a shopping list; the unwarded 1.4× is gone the moment a warden stands in it",
+    gapsBefore.length === 3 && gapsAfter.length === 0,
+    JSON.stringify({ before: gapsBefore, after: gapsAfter }));
+
+  // ⛑ 6 · AND THE THREE READERS THAT HAD NO CALLER NOW HAVE ONE, at the WORK bar rather than the travelling one
+  const A285 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§285: ⛑ the unit's worth, make-up and GAPS are on the screen — `unitComposition` and `bandGaps` had no caller outside these tests, and every figure shown is computed by the engine rather than composed for the panel",
+    /const comp = unitComposition\(u\.unit\);/.test(A285) && /const gaps = bandGaps\(u\.unit, \{ cfg \}\);/.test(A285)
+    && /const thr = bandThreat\(u\.unit, \{ cfg \}\);/.test(A285));
+  check("§285: ⛔ …and the ask uses the WORK bar, not the travelling one — SPEC_hold_costs §5: 'Bren Thalle is two dry seasons behind with two children — she does not need to be devoted to you to take paid work'",
+    /\.filter\(\(\[id, n\]\) => !standing\.has\(id\) && canBeAskedToWork\(\{ \.\.\.n, id \}\)\)/.test(A285)
+    && /const does = contributionsOf\(\{ \.\.\.n, id \}, \{ evidence: true \}\);/.test(A285));
+  check("§285: ⛑ …and raising the unit itself is the player's now — `raiseBand` had one caller, a GM op, and the tab's empty state promised 'a band is raised in play'",
+    /function raiseABand\(\)/.test(A285) && /id="band-raise-new"/.test(A285)
+    && /const rn404 = document\.getElementById\("band-raise-new"\)/.test(A285)
+    && !/A band is raised in play/.test(A285));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

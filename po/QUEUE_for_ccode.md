@@ -9,6 +9,8 @@
 
 > ⛑ **BACKLOG AUDITED AGAINST LIVE CODE, 2026-09-17.** Five items closed by CCode and struck: the skill card now says what a craft rolls (**per verb**, with the table's guess marked *(derived)* — CCODE-379); a location image reads `appearance` first (CCODE-391), so all **141** authored looks are live; a fallback arc is retried as a debt (CCODE-393); the generators author to the standard (CCODE-397); and the aftermath reader prefers the event's `resolutions` (CCODE-392). ⚠️ **Verified by running the code, not by reading the commit titles** — my first check said the skill card was still silent, and the probe was wrong, not the card.
 
+> ⛑ **FELLOWSHIP CLOSED 2026-09-17.** `assistTags` is **155/155** — it was 61%, and the 60 missing were all legends whose record never carried the field. ⛔ **`contributionsOf` derives to HARM when a person has no tags, which is why Mara Wells came out with no INFLUENCE.** She now reaches **RESTORE · KNOW · INFLUENCE · MOVE**. ⚠️ Corpus-wide: KNOW 118, PROTECT 83, INFLUENCE 74, RESTORE 51, MOVE 45, SHAPE 32. **I had been treating this as yours; sixty missing records were mine.**
+
 ### 1 · ⛑ THE NEXUS FRAME IS AUTHORED AND TWO SEATS ARE LEFT FOR THE GENERATOR
 `content/packs/core/rules/nexuses.json` — eight sites, named, sourced, organ-mapped, vectored and championed.
 Standing math ruled (+2 on-band · −1 one step · −4 two steps · **+6 at a matching nexus**), and holding one now
@@ -68,23 +70,7 @@ whether the first waygate since the Transition EXISTS, whether Silas's made thin
 ⬜ **And two of those twelve need a record for a MADE THING**, which is neither place nor person. `world/canon/`
 already holds `gen-stillwater-s-trouble` beside the people, so the store can carry it; nothing mints one.
 
-### 5 · The Fellowship matrix reads the one field nobody fills in
-`engine/combatants.js` · from Erik's Mara Wells question
-
-`contributionsOf` reads `record.assistTags`. ⛔ **Across every save: 128 registry people, ZERO have
-`assistTags`** — only the 9 authored companions carry them. So everyone met-and-recruited derives to
-`["HARM"]`, and the matrix is actually reading a hand-authored `contingent.does`.
-
-⛑ **Meanwhile 87 of 128 carry `skillsObserved`**, which nothing translates into a family. Mara's read
-*"reading a political situation plainly and naming it"* and *"holding a significant object's authority
-question"*, and her role is *"the Hub committee's fastest messenger"* — **which is INFLUENCE, and the matrix
-says she has none.**
-
-⚠️ **Also `DEFAULT_TAG_FAMILIES.INFLUENCE` is only `intimidate·distract·talk`** where KNOW has 13, so it is
-under-reachable even when tags exist. ⬜ And 141 of 368 `skillsObserved` entries are still truncated mid-word
-from the pre-SNG-575 60-char cut.
-
-### 6 · `certify_counts` and private keys — **your call stands, I withdrew the sweep**
+### 5 · `certify_counts` and private keys — **your call stands, I withdrew the sweep**
 ⛑ You were right that a pattern sweep would fire 967 times. **`CLAIMS` by name is the correct shape.** ⬜ I
 owe you a list of which private keys carry claims worth certifying; it is on my queue, not yours.
 

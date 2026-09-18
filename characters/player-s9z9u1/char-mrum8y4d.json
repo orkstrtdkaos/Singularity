@@ -1616,7 +1616,7 @@
     ],
     "unseenNews": [],
     "lastGenCount": 1920,
-    "lastSharedReadAt": "2026-09-18T00:25:51.611Z",
+    "lastSharedReadAt": "2026-09-18T00:32:11.732Z",
     "lastTickWorldDay": 80,
     "lastCanonWorldDay": 80,
     "turnsSinceOffer": 6,
@@ -1928,6 +1928,21 @@
           "type": "encounter",
           "encounterId": "beast_glimmerling_swarm",
           "name": "glimmerlings"
+        },
+        "addedDay": 4,
+        "locationId": "gen-the-made-gate"
+      },
+      {
+        "source": "threat-attack",
+        "kind": "threat-attack",
+        "subjectId": "beast_rust_choir_gnats",
+        "aimedAtPlayer": true,
+        "urgency": 3,
+        "oneLineHook": "A rust-choir gnats has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
+        "becomes": {
+          "type": "encounter",
+          "encounterId": "beast_rust_choir_gnats",
+          "name": "rust-choir gnats"
         },
         "addedDay": 4,
         "locationId": "gen-the-made-gate"
@@ -9361,8 +9376,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789691320784,
-  "rev": 776,
+  "updatedAt": 1789691536079,
+  "rev": 778,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10267,7 +10282,7 @@
     "the_gearlands": 33,
     "umbral_depths": 54,
     "the_quickwood": 101,
-    "the_center": 49
+    "the_center": 50
   },
   "opLossPending": false,
   "sessions": [
@@ -12241,6 +12256,12 @@
       "key": "spectrumId",
       "value": "concrete_abstract",
       "why": "not a number"
+    },
+    {
+      "at": "2026-09-18T00:32:56.033Z",
+      "key": "spectrumId",
+      "value": 0,
+      "why": "not a spectrum id"
     }
   ],
   "braids": [

@@ -165,6 +165,30 @@ export function nearestHomeTradition(fromWorldPos, { locations = null, tradition
   return best;
 }
 
+/** ⛔ CCODE-413 (Erik: "Aldric and Dara are not lvl 1 riff raff... they're people of note at Millbrook... they should be built up just
+ *  like any other NPCs - they get skills") — ONE AFFILIATION FOR EVERYONE, WHEREVER THEY WERE MET: the four rungs of `affiliationOf`
+ *  with the region's home read through the AUTHORED map as well as the region's own field, then Erik's 2026-09-09 distance rung.
+ *  ⚑ This chain lived in `generate.js` alone. The meet path (`affiliateNpc`) and the SNG-185 backfill each kept a shorter copy that
+ *  asked `regionHomeTradition(region, index)` with neither the regions nor Aevi's map — so only a region some tradition names as its
+ *  own answered, and the valley is not one. Dara Holt and Aldric were met at Millbrook, got no domains, and drew no kit: of the 108
+ *  people met across the saves, 51 stood with nothing to draw from. Two mints by two rules is the exact drift SNG-185 was written to
+ *  end; this is the second of them closing. Returns what the record can support and assigns nothing it cannot. PURE. */
+export function affiliationAt(record, { location = null, regionId = null, traditionIndex = null, peopleVocab = null,
+  regions = null, homeMap = null, locations = null, withinDeg = null } = {}) {
+  const loc = location || {};
+  const regionHome = regionHomeTradition(loc.regionId || loc.region || regionId || null, traditionIndex, regions, homeMap);
+  const base = affiliationOf(record, { traditionIndex, peopleVocab, regionHome });
+  // ⛔ ERIK 2026-09-09 — THE DISTANCE RUNG, BELOW EVERY RUNG THAT ALREADY ANSWERS: only when the record, its role, what it was seen
+  // doing and its region are all silent does a person borrow from the nearest ground that practises anything — and never beyond the
+  // authored cap (absent means absent: no cap, no borrowing).
+  if (base.domains) return base;
+  const near = nearestHomeTradition(loc.worldPos, { locations, traditionIndex, regions, homeMap, withinDeg });
+  if (!near) return base;
+  // ⛑ MARKED `nearest`, WEAKER THAN `derived`, because it IS weaker — the provenance ladder weighs `derived` at half, and this below it.
+  return { ...base, domains: { primary: near.tradition }, domainsSource: "nearest",
+    domainsVia: { location: near.viaLocationId, degrees: Math.round(near.degrees * 10) / 10 } };
+}
+
 /** Build the people vocabulary from authored NPC `people` values plus any peoples_of_kind clusters.
  *  Lowercased, deduped. Extensible — a new authored people appears here automatically. */
 export function buildPeopleVocab({ npcs = {}, peoplesOfKind = null } = {}) {

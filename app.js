@@ -14,7 +14,7 @@ import { newProfile, updateProfile, aptitudeMods, profileInsight, grantAptitudes
 import { gmTurn, refusalSignal, reNarrateRich, parseIntent, gmAsk, generateBio, suggestBuild, suggestNextCrafts, extractGambit, sanitizeScene, reconcileSceneIdentity, narrativeRegister, ratingRegister, bluntnessDirective, SALVAGEABLE_OPS, opsFromNarration, emptyClaim } from "./engine/gm.js";
 import { buildBattlePrompt, battleKey } from "./engine/battleprompt.js"; // SNG-400b: the battle image is a prompt BUILD, not a string join
 import { namesToAvoid, namesMatch } from "./engine/namematch.js"; // CCODE-166: the codebase already knew how to match a fuller name to a known one
-import { affiliationOf, regionHomeTradition, buildPeopleVocab } from "./engine/affiliation.js"; // SNG-185
+import { affiliationAt, buildPeopleVocab } from "./engine/affiliation.js"; // SNG-185 · CCODE-413: the whole chain, one implementation
 import { applyQuestUpdates, questsFor, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, slugify, advanceStructuredQuest } from "./engine/quests.js";
 import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM } from "./engine/corrections.js";
 import { applyAuthorOps, AUTHOR_OPS } from "./engine/authormode.js"; // SNG-207b: the author god-mode (dev-gated, separate surface)
@@ -167,7 +167,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.76";
+const APP_VERSION = "2.0.77";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4796,8 +4796,16 @@ function opsFiredIn(turn) {
 let _peopleVocab = null;
 function affiliateNpc(record) {
   if (!_peopleVocab) _peopleVocab = buildPeopleVocab({ npcs: CONTENT.npcs || {} });
-  const region = CONTENT.locations?.[record?.lastSeen?.locationId || record?.firstMet?.locationId || character.currentLocationId]?.regionId;
-  return affiliationOf(record, { traditionIndex: CONTENT.traditionIndex, peopleVocab: _peopleVocab, regionHome: regionHomeTradition(region, CONTENT.traditionIndex) });
+  // ⛔ CCODE-413 — THE SAME CHAIN THE MINT RUNS (`affiliationAt`): Aevi's region map, the regions, and the distance rung. This line asked
+  // for a region home with neither the map nor the regions, so a person met in the valley practised nothing. ⚠️ AND THE PLACE IS
+  // FOUND WHERE IT LIVES: a person met at a place the game grew has it in `generated.location`, which `CONTENT.locations` never held.
+  // ⚠️ HOME GROUND FIRST: where they are from, then where the story first put them, then where they were last seen. ⚑ Dara Holt, the
+  // Ditch-Mother of Millbrook, was last seen at the Crossing and would have practised the Centre's craft instead of her own valley's.
+  const at = record?.homeLocation || record?.firstMet?.locationId || record?.lastSeen?.locationId || character.currentLocationId;
+  return affiliationAt(record, { location: CONTENT.locations?.[at] || character.generated?.location?.[at] || null,
+    traditionIndex: CONTENT.traditionIndex, peopleVocab: _peopleVocab, regions: CONTENT.regions || null,
+    homeMap: CONTENT.substrateModel?.regionHomeTradition || null, locations: CONTENT.locations || null,
+    withinDeg: CONTENT.regionRules?.nearestTraditionWithinDeg ?? null });
 }
 
 /** SNG-166 §3: every save on this device, for the cross-character name guard. A per-character check

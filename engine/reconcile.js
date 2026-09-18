@@ -30,7 +30,7 @@ import { inferDomains } from "./traditions.js";
 import { fallbackPersonalArc, repairArcNameOn } from "./personalArc.js";
 import { seedStandingAtCreation } from "./standing.js";
 import { namesMatch } from "./namematch.js";
-import { affiliationOf, regionHomeTradition, buildPeopleVocab } from "./affiliation.js";
+import { affiliationOf, regionHomeTradition, buildPeopleVocab, affiliationAt } from "./affiliation.js";   // CCODE-413: step 66 runs the whole chain
 import { defaultSchoolsForDomains } from "./substrate.js"; // SNG-193b §3.2: seed a school per practised domain on old saves
 import { mintableBraidsFor, buildBraidDef, mintBraid, braidTreeFor } from "./braids.js"; // SNG-196: mint the braids a character already earned · ✅ 2026-09-12: braidTreeFor for the template-rank repair
 import { findExistingNpc, prettifyNpcName, REGISTRY_CAP, collapseScenePresence, subjectFromCaption, subjectFromSeed } from "./npcs.js"; // SNG-199/205: registry + codex backfill
@@ -86,6 +86,41 @@ function renameTargets(spec, entry, character, known) {
 // "has this entity seen this step yet" via entity.reconcileVersion.
 
 export const CHARACTER_STEPS = [
+  {
+    version: 66, id: "everyone-you-know-practises-something", playerFacing: false,
+    // ⛔ CCODE-413 — ERIK: "Aldric and Dara are not lvl 1 riff raff... they're people of note at Millbrook... they should be built up
+    // just like any other NPCs - they get skills. We probably want to take a look across the board at NPCs and see who has NOT been
+    // skilled up through the NPC sheet build process - find and address the gaps."
+    // ⚑ MEASURED: 51 of the 108 people met across the saves, and 5 of the 37 the game grew, had NO domains — so the kit draw had
+    // nothing to draw from and each fought with a plain strike. Step 11 was meant to affiliate them and ran a shorter copy of the
+    // chain (no region map, no regions, no distance rung), so the valley answered nothing; it is stamped done on every save and will
+    // never run again. This is the same fill with the whole chain (`affiliationAt`), found from wherever the person was met —
+    // including places the game grew, which step 11 could not see at all.
+    // ⛑ Additive and idempotent: only a record with no domains is touched; a people is never invented. Silent: it grants the player
+    // nothing — it makes the people they know able to do what their country does.
+    apply: (c, ctx) => {
+      const content = ctx?.content || {};
+      const idx = content.traditionIndex;
+      if (!idx?.byId) return {};
+      const opts = { traditionIndex: idx, peopleVocab: buildPeopleVocab({ npcs: content.npcs || {} }), regions: content.regions || null,
+        homeMap: content.substrateModel?.regionHomeTradition || null, locations: content.locations || null,
+        withinDeg: content.regionRules?.nearestTraditionWithinDeg ?? null };
+      const placeOf = (id) => (id && (content.locations?.[id] || c.generated?.location?.[id])) || null;
+      const fill = (rec) => {
+        if (!rec || typeof rec !== "object" || rec.domains) return;
+        // ⚠️ HOME GROUND FIRST — where they are from, then where the story first put them, then where they were last seen. ⚑ 13 of
+        // the 31 people with both places recorded were last seen somewhere else; Dara Holt, the Ditch-Mother of Millbrook, was last
+        // seen at the Crossing and would have practised the Centre's craft rather than her valley's.
+        const at = rec.homeLocation || rec.firstMet?.locationId || rec.lastSeen?.locationId || rec.locationId || null;
+        const a = affiliationAt(rec, { ...opts, location: placeOf(at) });
+        if (a.domains) { rec.domains = a.domains; rec.domainsSource = a.domainsSource; if (a.domainsVia) rec.domainsVia = a.domainsVia; }
+        if (a.people && !rec.people) { rec.people = a.people; rec.peopleSource = a.peopleSource; }
+      };
+      for (const rec of Object.values(c.npcRegistry || {})) fill(rec);
+      for (const rec of Object.values(c.generated?.npc || {})) fill(rec);
+      return {};
+    }
+  },
   {
     version: 65, id: "a-calmer-valley-for-adelheid", playerFacing: false,
     // ⛔ CCODE-410 — ERIK, OF COURTNEY'S GAME: "remove the swarm attack for now." ⚑ Her queue held a glimmerling swarm, rolled at a

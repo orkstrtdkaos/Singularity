@@ -575,6 +575,11 @@ function sheetFrom(entry, { day = null, cfg = {}, roleAttributes = null, levelOv
  *  the gap is visible rather than silently dropped. ⛔ `ironsense` matches nothing in the catalogue today,
  *  which is precisely why Pell has one thing to reach for: the observation was recorded and never became
  *  a craft anyone could resolve. */
+/** ⛔ CCODE-413 — `abilities` AS A LIST, OR AS NOTHING. A person the game grew can carry `abilities` as a map of verb → prose
+ *  ("reveal": "Calvar reads spectral signatures…"), which is a description, not a kit — and `.map` on it threw inside the fight's own
+ *  sheet build (measured: Silas's grown Calvar). A description is not read as craft ids here; it stays on the record untouched. */
+function abilityListOf(entry) { return Array.isArray(entry?.abilities) ? entry.abilities : []; }
+
 export function craftsOf(entry, catalog = {}, { limit = 8 } = {}) {
   // ⛔ SNG-486 — A READER WITH NO WRITER MET A WRITER WITH NO READER, AND THEY WERE THE SAME DEFECT.
   // `skillsObserved` is what this function has always read: names the PLAYER has seen someone use.
@@ -584,7 +589,7 @@ export function craftsOf(entry, catalog = {}, { limit = 8 } = {}) {
   // character carries, `{ abilityId, level }`. That is the better shape: it names crafts by ID rather
   // than by a string that has to be re-matched, and it carries the RANK. So both are read, and the
   // authored one is read FIRST — "an authored sheet always wins" is this file's own stated contract.
-  const authoredIds = (entry?.abilities || []).map(a => String(a?.abilityId || a || "").toLowerCase().trim()).filter(Boolean);
+  const authoredIds = abilityListOf(entry).map(a => String(a?.abilityId || a || "").toLowerCase().trim()).filter(Boolean);
   const seen = [...authoredIds, ...(entry?.skillsObserved || []).map(s => String(s).toLowerCase().trim()).filter(Boolean)];
   const byId = {}, byName = {};
   for (const [id, ab] of Object.entries(catalog || {})) {
@@ -624,8 +629,10 @@ export function craftsOf(entry, catalog = {}, { limit = 8 } = {}) {
  *  it gained so the world can say so — a gained craft is news. Idempotent: a craft already on the record is skipped. */
 export function commitGrowth(entry, catalog = {}, { day = null, cfg = {} } = {}) {
   if (!entry || typeof entry !== "object") return [];
+  // ⚠️ A prose map in `abilities` is not overwritten with a list (CCODE-413): growth waits rather than destroy what was written.
+  if (entry.abilities != null && !Array.isArray(entry.abilities)) return [];
   const g = growthFor(entry, catalog, { day, cfg });
-  const have = new Set((entry.abilities || []).map(a => String(a?.abilityId || a || "").toLowerCase()));
+  const have = new Set(abilityListOf(entry).map(a => String(a?.abilityId || a || "").toLowerCase()));
   const closed = new Set((g.closed || []).map(s => String(s).toLowerCase()));
   const gained = [];
   for (const c of g.crafts || []) {
@@ -777,7 +784,7 @@ export function kitFor(entry, { catalog = {}, traditionIndex = null, domainAcces
  *  is the same thing `playerBattleSkills` reads off a PC. */
 export function battleSkillsFor(entry, opts = {}) {
   const { crafts, level } = kitFor(entry, opts);
-  const rankOf = (id) => Math.max(1, Number((entry?.abilities || []).find(a => (a?.abilityId || a) === id)?.level) || 1);
+  const rankOf = (id) => Math.max(1, Number(abilityListOf(entry).find(a => (a?.abilityId || a) === id)?.level) || 1);
   const out = [];
   for (const ab of crafts) {
     for (const fn of (ab.functions || [])) {

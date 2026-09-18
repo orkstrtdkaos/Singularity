@@ -21359,6 +21359,107 @@ console.log("\n── §293 · a body leans toward what it rolls — the same po
     built >= 50 && capped === 0 && spiked === 0, `${built} built · ${capped} at the cap · ${spiked} one-sub spikes`);
 }
 
+// ══════════ §294 · CCODE-413 — EVERYONE YOU KNOW PRACTISES SOMETHING ══════════
+// Erik: "Aldric and Dara are not lvl 1 riff raff... they're people of note at Millbrook... they should be built up just like any other
+// NPCs - they get skills. We probably want to take a look across the board at NPCs and see who has NOT been skilled up through the NPC
+// sheet build process - find and address the gaps." ⚑ The census: 152 authored people all full; 5 of 37 grown and 52 of 108 met
+// short of what their level holds — 56 of them with NO domains, so the kit draw had nothing to draw from. The mint's affiliation chain
+// was whole; the meet path and the SNG-185 backfill each kept a shorter copy with neither Aevi's region map nor the regions.
+console.log("\n── §294 · everyone you know practises something — one affiliation, home ground first, a kit for all ──");
+{
+  const AF294 = await import("../engine/affiliation.js");
+  const GN294 = await import("../engine/generate.js");
+  const RC294 = await import("../engine/reconcile.js");
+  const NS294 = await import("../engine/npcsheet.js");
+  const TR294 = await import("../engine/traditions.js");
+  const { loadContentHeadless: lch294 } = await import("./headless_content.mjs");
+  const C294 = await lch294();
+  const idx = C294.traditionIndex;
+  const homeMap = C294.substrateModel?.regionHomeTradition || null;
+  const valleyHome = homeMap?.valley || null;
+  const full = { traditionIndex: idx, regions: C294.regions || null, homeMap, locations: C294.locations || null,
+    withinDeg: C294.regionRules?.nearestTraditionWithinDeg ?? null };
+
+  /* ---- 1 · ⛔ THE ONE CHAIN ---- */
+  const inValley = AF294.affiliationAt({ name: "An Irrigator", role: "an irrigator" }, { ...full, location: C294.locations?.millbrook });
+  const weak = AF294.affiliationOf({ name: "An Irrigator", role: "an irrigator" }, { traditionIndex: idx, regionHome: AF294.regionHomeTradition("valley", idx) });
+  check("§294: ⛔ THE ONE CHAIN READS AEVI'S MAP — a person met in the valley practises the valley's authored home, where the shorter copy (no map, no regions) gave them nothing",
+    !!valleyHome && inValley.domains?.primary === valleyHome && inValley.domainsSource === "derived" && !weak.domains,
+    JSON.stringify({ inValley, weak, valleyHome }));
+  const byRole = AF294.affiliationAt({ name: "B", role: "a Mason of the Making" }, { ...full, location: C294.locations?.millbrook });
+  const nowhere = AF294.affiliationAt({ name: "C", role: "a quiet traveler" }, { ...full, location: null });
+  check("§294: …the stronger rungs still win (a tradition written in the role beats the region), and a person with no place and no hook is given nothing rather than a guess",
+    byRole.domainsSource === "role" && !nowhere.domains, JSON.stringify({ byRole, nowhere }));
+
+  /* ---- 2 · ⛔ THE MINT IS UNCHANGED — IT CALLS THE SAME FUNCTION ---- */
+  const ctxs = [{ location: C294.locations?.millbrook }, { location: { regionId: "umbral_depths" } }, { location: { regionId: "nowhere" } }, {}];
+  const same = ctxs.every(ctx => {
+    const ctxFull = { ...ctx, regions: full.regions, regionHomeMap: homeMap, locations: full.locations, nearestTraditionWithinDeg: full.withinDeg };
+    return JSON.stringify(GN294.affiliationFor({ name: "D", role: "a local" }, ctxFull, idx))
+      === JSON.stringify(AF294.affiliationAt({ name: "D", role: "a local" }, { ...full, location: ctx.location || null }));
+  });
+  check("§294: ⛔ the mint (`affiliationFor`) returns exactly what the one chain returns, for the valley, a region with a home, a region with none and no place at all",
+    same);
+
+  /* ---- 3 · ⛔ THE MEET PATH RUNS IT, FROM WHEREVER THE PERSON IS FROM ---- */
+  const A294 = rd("app.js").replace(/\r\n/g, "\n");
+  const meet = A294.slice(A294.indexOf("function affiliateNpc("), A294.indexOf("function affiliateNpc(") + 1600);
+  check("§294: ⛔ the meet path runs `affiliationAt` with Aevi's map and the regions, finds a place the game GREW as well as an authored one, and reads home ground before where they were last seen",
+    /affiliationAt\(record,/.test(meet) && /substrateModel\?\.regionHomeTradition/.test(meet) && /generated\?\.location\?\.\[at\]/.test(meet)
+    && meet.indexOf("firstMet") < meet.indexOf("lastSeen") && !/regionHomeTradition\(region, CONTENT\.traditionIndex\)/.test(A294));
+
+  /* ---- 4 · ⛔ HOME GROUND FIRST, THROUGH THE RUNNER ---- */
+  const step66 = RC294.CHARACTER_STEPS.find(s => s.id === "everyone-you-know-practises-something");
+  const pc4 = { id: "pc-294", name: "Tester", reconcileVersion: step66.version - 1, npcRegistry: {
+    ditch: { id: "ditch", name: "A Ditch-Keeper", role: "keeps the east channel", firstMet: { locationId: "millbrook" }, lastSeen: { locationId: "the_crossing" } },
+    mine: { id: "mine", name: "Known One", domains: { primary: "umbral" }, domainsSource: "role" } } };
+  RC294.reconcile(pc4, "character", { content: C294 }, RC294.CHARACTER_STEPS.filter(s => s.version === step66.version));
+  const again4 = JSON.stringify(pc4.npcRegistry);
+  step66.apply(pc4, { content: C294 });
+  check("§294: ⛔ THROUGH THE RUNNER — a person first met in the valley and last seen at the Crossing practises the VALLEY's craft; one who already practises something is untouched; and a second run changes nothing",
+    pc4.npcRegistry.ditch.domains?.primary === valleyHome && pc4.npcRegistry.mine.domains.primary === "umbral" && pc4.npcRegistry.mine.domainsSource === "role"
+    && JSON.stringify(pc4.npcRegistry) === again4 && pc4.reconcileVersion === step66.version && step66.playerFacing === false,
+    JSON.stringify(pc4.npcRegistry.ditch));
+
+  /* ---- 5 · ⛔ THE POPULATION, ON EVERY REAL SAVE ---- */
+  const ts5 = (v) => typeof v === "number" ? v : (Date.parse(v) || 0);
+  const best5 = new Map();
+  for (const dir of readdirSync(join(root, "characters"))) for (const f of readdirSync(join(root, "characters", dir))) {
+    if (!f.endsWith(".json")) continue;
+    const c = JSON.parse(rd(`characters/${dir}/${f}`));
+    if (String(c.id).includes("devtest")) continue;
+    const had = best5.get(c.id);
+    if (!had || ts5(c.updatedAt) > ts5(had.updatedAt)) best5.set(c.id, c);
+  }
+  const kitOpts = { catalog: C294.abilities, cfg: { ...(C294.rules?.npcStanding || {}), ...(C294.rules?.leveling?.tierUnlockBands ? { tierUnlockBands: C294.rules.leveling.tierUnlockBands } : {}) },
+    day: 80, domainAccess: TR294.domainAccess, traditionIndex: idx };
+  let placed = 0, placedBare = 0, placedShort = 0, grown = 0, grownBare = 0; const bare5 = [];
+  for (const c0 of best5.values()) {
+    const c = JSON.parse(JSON.stringify(c0)); c.reconcileVersion = step66.version - 1;
+    RC294.reconcile(c, "character", { content: C294 }, RC294.CHARACTER_STEPS.filter(s => s.version === step66.version));
+    for (const [id, rec] of Object.entries(c.npcRegistry || {})) {
+      const hasPlace = !!(rec?.homeLocation || rec?.firstMet?.locationId || rec?.lastSeen?.locationId);
+      if (!hasPlace || rec?.notAnOpponent === true || rec?.canOppose === false) continue;
+      placed++;
+      const whole = NS294.personRecordFor({ ...rec, id }, { npcs: C294.npcs });
+      if (!whole.domains) { placedBare++; bare5.push(`${c.name}: ${rec.name}`); continue; }
+      const k = NS294.kitFor(whole, kitOpts);
+      if (k.needsDomains || !k.crafts.length) placedShort++;
+    }
+    for (const rec of Object.values(c.generated?.npc || {})) { grown++; if (!rec?.domains) grownBare++; }
+  }
+  check("§294: ⛔ ON EVERY REAL SAVE, THROUGH THE RUNNER — every person met at a recorded place now practises something and draws a kit from it, and every person the game grew does too (the census before: 51 met and 5 grown with nothing to draw from)",
+    placed >= 30 && placedBare === 0 && placedShort === 0 && grown >= 20 && grownBare === 0,
+    `${placed} placed · ${placedBare} bare · ${placedShort} with no kit · ${grown} grown · ${grownBare} bare${bare5.length ? " — " + bare5.slice(0, 4).join("; ") : ""}`);
+
+  /* ---- 6 · ⛑ A DESCRIPTION IS NOT A KIT, AND NOT A CRASH ---- */
+  const prose = { id: "p294", name: "Prose Person", level: 10, domains: { primary: valleyHome }, abilities: { reveal: "reads the water like handwriting" } };
+  let threw6 = false, k6 = null, g6 = null;
+  try { k6 = NS294.kitFor(prose, kitOpts); g6 = NS294.commitGrowth(prose, C294.abilities, { day: 80, cfg: kitOpts.cfg }); } catch { threw6 = true; }
+  check("§294: ⛑ a grown person whose `abilities` is a map of prose still gets their domain's kit — the prose is not read as craft ids, nothing throws, and growth never overwrites what was written",
+    !threw6 && k6.crafts.length > 0 && Array.isArray(g6) && g6.length === 0 && typeof prose.abilities === "object" && !Array.isArray(prose.abilities) && prose.abilities.reveal);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

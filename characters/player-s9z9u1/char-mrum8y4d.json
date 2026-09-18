@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 8,
-  "xp": 765,
+  "xp": 780,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -104,16 +104,16 @@
     },
     {
       "abilityId": "the_old_procedure",
-      "level": 1
+      "level": 2
     }
   ],
   "alignment": {
     "mechanical_spiritual": -0.034,
-    "falsehood_truth": 0.1518599062875,
+    "falsehood_truth": 0.2018599062875,
     "spectrumId": -0.1263017118375945,
     "value": -0.07300000000000001,
     "demonic_angelic": -0.020000000000000004,
-    "dark_light": 0.085,
+    "dark_light": 0.135,
     "concrete_abstract": 0.05,
     "chaos_order": -0.05
   },
@@ -121,7 +121,7 @@
   "maxHealth": 73,
   "health": 73,
   "maxEnergy": 151,
-  "energy": 100,
+  "energy": 91,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -287,127 +287,15 @@
     "Loki and Vessin slipped out of the alcove in the grey dawn and crossed the empty nave before the scaffold crew filled the landing — stepping into the yard with the Half-Cathedral at their backs and the man with the crooked jaw still the open thread between them.",
     "Shared broth and thanks with a road-warden who carries word of the water-crisis moving downhill faster than any official channel. Exchanged names and parted on the spinward road, heading toward the Waygate Path.",
     "At the Hub crossing, Loki confronted a Churn-Revel sent to break the Null Stone's sealed seam. Through misdirection and bargaining, Loki bound the orchestrator's certainty and drove them to yield—the Revel's hand fell, the ribbons collapsed, and the stone stands unbroken. The seam's mystery persists. The question of who sent the Revel remains open.",
-    "At the Hub crossing in early spring dawn, Loki speaks an honest promise to the Null Stone, and the sealed seam opens—revealing a passage descending into cold darkness and the sound of deep water."
+    "At the Hub crossing in early spring dawn, Loki speaks an honest promise to the Null Stone, and the sealed seam opens—revealing a passage descending into cold darkness and the sound of deep water.",
+    "Halvex reads the sealed chamber's true purpose: a mutual test between supplicant and stone, where the alcove serves as threshold for an exchange of readiness."
   ],
   "currentLocationId": "gen-the-made-gate",
-  "activeScene": {
-    "locationId": "gen-the-made-gate",
-    "turns": [
-      {
-        "player": null,
-        "summary": "Loki descends through the Null Stone's opening into a vast sealed chamber carved deep beneath the Hub crossing. A swift river runs through its center, feeding from upstream and disappearing into a tunnel beyond. Nine sealed apertures line the chamber walls. The basin waits empty. Cy reads the architecture and names it: not maintenance, but *waiting* — something deliberately sealed until a condition is met.",
-        "narration": "The passage beyond the Null Stone descends steeply into cold dark, and the sound of water grows louder with each step downward. Your lamp — the one Cy carries — catches the glint of stone worn smooth by centuries of flow. The air tastes metallic. The steps are cut deliberately, old work, and they do not slip.\n\nAt the bottom, the passage opens into a vast chamber. The water fills most of it — a river running through solid stone, moving fast from some upstream source and vanishing into a tunnel on the far wall. The chamber itself is circular, carved with precision that speaks of Precursor hand and intention. Above the waterline, carved into the stone at regular intervals, are nine sealed apertures — doors, or vents, or something else entirely. They are still closed. At the chamber's near edge, a platform of worked stone juts into the air, level and dry, with a single carved basin set into its surface. The basin is empty. The water below moves dark and swift, and you can hear it breathing like a living thing.\n\nCy pauses at the platform's edge, lamp raised. Its lens irises twice — a sound like flint-strike. When it speaks, its voice carries an odd weight in the enclosed space. \"The current assignment,\" it says, \"this chamber is not in any record I hold. The water's temperature suggests upstream source is significant distance. The apertures were sealed deliberately and recently enough that the seal-marks have not yet begun to fail. The basin has never held what it was made to hold.\" Cy's many legs click against stone. \"This is not Precursor maintenance work. This is Precursor *waiting* work. Someone built this to hold something back until something specific happened.\""
-      },
-      {
-        "player": "Before descending the passage - gesture Vessin over to teh side to have a conversation... tell her you've come to care for her and would seek to bring her back from death, if the unfortunate happened... ask her if she would do the same for you.",
-        "summary": "In the vast chamber beneath the Null Stone, Loki makes a pact with Vessin—a mutual vow to reach for each other from death itself, if it comes to that.",
-        "narration": "You find Vessin at the chamber's edge, where the lamplight catches the river's dark flow. You gesture her away from Cy, stepping back into the deeper shadows where the apertures line the walls like watching eyes. The air is cold here, and your breath makes small clouds.\n\n\"I need to say something,\" you tell her, and she turns to face you fully—her eyes steady, reading your face the way she reads false patterns in stone. \"I've come to care for you. Not lightly. And if something happened—if the dark took you, if the deep claimed you—I would reach for you. I would try to bring you back.\"\n\nShe doesn't move. The river sounds loud in the silence.\n\n\"Would you do the same?\" you ask. \"If I fell. If I went where the light doesn't reach. Would you come after me?\"\n\nVessin exhales slowly. She reaches out and takes your wrist—not your hand, your wrist, where your pulse runs steady under her thumb. \"Yes,\" she says. It's not complicated; it's the plainest thing she's said to you. \"I would. I will.\"\n\nThere is no ceremony in it. There is only the weight of a promise made in the dark, beneath a sealed stone that opens only for honest asking. She holds your wrist a moment longer, then steps back to join Cy at the basin's edge. The pact is made. The world has less claim on either of you now."
-      },
-      {
-        "player": "Before we descended... I speak to all those present at teh opening of the Null stone.  I ask all of them if we should proceed together.",
-        "summary": "At the threshold of the Null Stone's opened seam, Loki asks whether the group should descend together. Vessin affirms without doubt. Cy acknowledges the logical necessity. The descent begins.",
-        "narration": "You step back from the seam's threshold, the cold air rising from below mixing with the spring warmth at your back. Vessin is still beside you, one hand settled at her side where yours has just left it. Cy's lamp swings slightly as it turns to face you—the lens irising in what you have learned to read as attention.\n\n\"Before we go down,\" you say, addressing all three of them clearly, \"I need to ask: should we proceed together? All of us, into this.\"\n\nVessin doesn't hesitate. \"Yes,\" she says simply. It is not a question for her.\n\nCy's clicks sound like consideration—a quick sequence of lens-focus and articulation-adjustment. When it speaks, the voice is formal and precise: \"The descent requires documentation. The current assignment requires witness. Proceeding together serves both.\"\n\nYou turn toward the opening. The seam stands wide, revealing stone steps cut into descending dark, and the sound of moving water rises from far below—steady, patient, and very old."
-      },
-      {
-        "player": "Next, ask Veln, Kael, and Halvex if we are all going down the null stone path together.",
-        "summary": "At the Null Stone's opened seam, Loki gathers their companions—Vessin affirms, Cy acknowledges necessity, Kael commits without hesitation, Halvex yields his original mandate and chooses understanding over breaking. Veln Ashpause, the Hourkeeper, announces they will not descend but will hold the threshold open—their presence needed above, not below. The group is settled. The descent is ready to begin.",
-        "narration": "You turn from Vessin to address the three figures who have gathered at the threshold—Veln Ashpause motionless in the morning light, Kael with his weathered readiness, Halvex Coil standing with the careful balance of someone learning to carry weight differently now.\n\n\"Are we all going down?\" you ask plainly. \"Together, into this.\"\n\nKael nods without hesitation—a road-warden's answer, the kind that comes from a person who has already weighed the cost and found the reason sound. \"I'm with you,\" he says, and there is finality in it.\n\nHalvex is quieter. He looks at the open seam, then back at you, and something in his face has shifted—the orchestrator's calculation giving way to something less certain and more honest. \"I came here to break it,\" he says. \"Now I'm coming to understand it. Yes. I'll go.\"\n\nVeln Ashpause does not move. You watch them for a long moment, and their grey coat seems to hold the morning light without reflecting it. When they speak, their voice is thin as winter air: \"I came knowing this moment would arrive. I am here for it.\" They pause, and there is something in that pause like sorrow or recognition. \"I will not descend. What waits below does not need my presence—it needs yours, and theirs.\" A gesture, faint, toward Vessin and Cy. \"I will watch the threshold. I will hold the opening. When you return, I will be here.\"\n\nIt is not a refusal. It is a reading of what the moment requires."
-      },
-      {
-        "player": "Thank Veln plainly for holding the threshold, and descend without asking what they see—trust the Hourkeeper's reading of what is needed.",
-        "summary": "The gathering is complete—Vessin, Cy, Kael, and Halvex descend with Loki into the vast sealed chamber beneath the Null Stone. Veln holds the threshold above, reading what is needed and refusing to go below. The descent begins.",
-        "narration": "You step to Veln Ashpause and place a hand briefly on their shoulder—the first gesture of contact either of you has made. \"Thank you,\" you say plainly. \"For reading what is needed and holding it.\"\n\nVeln does not move, does not acknowledge with word or glance. But their stillness shifts by a fraction—something in the set of their jaw, the way their grey coat settles. It is not a response a person who moves would make. It is the response of someone who has already seen this moment and is simply being present in it.\n\nYou turn from them to the seam. Cy's lamp swings ahead, lens irised sharp. Vessin steps to the threshold beside you, one hand finding the cold stone edge. Kael follows, his weathered jaw set with the certainty of someone reading a road and choosing it. Halvex comes last, no longer carrying the mandate to break—carrying only the weight of not knowing what understanding will cost.\n\nThe cold air rises. The river sounds far below, patient and ancient.\n\nYou descend."
-      },
-      {
-        "player": "Reach out to Vessin as you descend to make sure she's proceeding fine.  Bring up umbra raft to see in the dark... then ask if everyone has some ability to see... letting g Cy light there way if not.",
-        "summary": "Descending the sealed passage beneath the Null Stone, Loki reaches for Vessin's steadiness, opens umbral sight to read the geometry of the darkness, and confirms the group's readiness to continue into the vast chamber below.",
-        "narration": "You reach for Vessin as the steps descend, your hand finding hers on the cold stone wall. She doesn't pull away—her grip is steady, deliberate, her breathing even as the darkness deepens around you both. The air grows colder with each step, and you let Umbracraft unfold: the darkness stops being a wall and becomes a geography. You see the steps in their true shapes, the moisture beading on the worked stone, the way the passage was cut with intention centuries ago. Vessin's hand in yours reads warm and present against the chill.\n\n\"I'm steady,\" she says quietly, as if answering a question you didn't voice aloud. \"How are you reading it?\"\n\nYou glance back at the figures behind you: Kael's pace is sure and measured, one hand trailing the wall as he descends—a road-warden's memory for terrain, dark or not. Halvex moves with less certainty but with commitment, each step deliberate. Cy's lamp swings ahead, bright and unwavering. You ask the question plainly: \"Can you all see in this?\"\n\nKael answers first. \"Dark's dark. I'm managing.\" A short answer; he is managing.\n\nHalfvex hesitates. \"I'm... feeling my way.\" Not afraid. Grounded.\n\nCy's clicks sound like agreement before it speaks. \"The current assignment perceives. The others proceed by touch-memory. The lamp will suffice for those who require light-spectrum input.\" It does not offer to brighten—it is already at full, and in the vastness of this descent, even its bright circle is small and local. \"Proceeding is optimal,\" Cy adds, and continues downward without changing pace."
-      },
-      {
-        "player": "Use your own ability to see to create a maintained veil that lshows the others the terrain and geometry as if they were gently lit.",
-        "summary": "Descending into the sealed chamber, Loki attempts to share umbral sight through a Maintained Veil and fails—the darkness resists, revealing older craft at work in the stone itself.",
-        "narration": "You reach deeper into Umbracraft, letting the dark-reading bloom into something shareable—a Maintained Veil woven from your own sight, meant to carry what you see to the others as gentle, navigable light. The passage read clear to you; you shape it into something they can all walk by.\n\nBut the veil catches and tears almost immediately. The darkness here is *old*, worked into the stone itself over centuries, and it resists the shape you're trying to give it. What forms is fragmented—patches of pale illumination that flicker and fail, leaving gaps that feel *deeper* for the light around them. Vessin's hand tightens on yours; behind you, Kael mutters something low. The veil collapses entirely after three heartbeats, leaving you all in the raw dark again, your Umbracraft sight still clear but now *visibly* yours alone—unshared, singular, a thing these people cannot follow into.\n\nCy's lamp ahead swings brighter, compensating. But the attempt has revealed something: the darkness here is not empty. It has *intention* built into it. An old craft, older than any Veilwright work you carry—and it does not welcome being remade."
-      },
-      {
-        "player": "Pause briefly to light a few lanterns from each of your trav3lers packs.",
-        "summary": "Descending the sealed passage beneath the Null Stone, the group lights lanterns to push back the worked darkness and read the way forward.",
-        "narration": "You pause on the descent and turn to the others, your voice carrying up the stone stairs. \"Lanterns,\" you say simply. \"From the packs.\"\n\nVessin reaches into her traveler's pack without hesitation—her movements practiced, efficient. The flint catches on the first strike. A small flame takes, and she feeds it carefully to a lantern's wick. The light blooms yellow and ordinary, steadying as the glass settles around it. Kael does the same a moment later, his hands sure on the work. Even Halvex, moving with the careful deliberation of someone who has left certainty behind, produces a lantern and coaxes it to light.\n\nCy's bright lamp ahead does not dim or change—it is still the sharpest point of illumination—but now your group carries four sources of light down into the worked dark. The stone around you reads clear again: the steps worn smooth by intention and water-seep, the walls deliberately carved, the moisture beading in small constellation patterns. The older darkness that resisted your veil does not retreat entirely, but it no longer crowds so close. There is room to see, and room to breathe.\n\nThe passage widens ahead. The sound of moving water—not loud, but continuous—rises from below."
-      },
-      {
-        "player": "Continue descending toward the chamber—the water-sound grows louder with each step, and the passage opens ahead. Press forward to see what the sealed chamber contains.",
-        "summary": "Descended into the vast sealed chamber beneath the Null Stone—a pre-Transition water-works of impossible scale, notation-marked and deliberately sealed, where the regulator's question still hangs unanswered.",
-        "narration": "The passage widens as you descend, the worked stone giving way to something older—the walls are still carved, but the tool marks belong to a precision beyond even Precursor hands. Four lanterns cast overlapping light: Cy's bright lamp painting detail twenty feet ahead, the three yellow flames from Vessin, Kael, and Halvex pooling warmth against the insistent cold. The water-sound becomes a roar. Your boots find purchase on steps worn smooth by something other than footfall—grooved channels run down the center of each tread, and water has moved this way for a very long time.\n\nThe passage opens. You step from the stairwell into a chamber so vast your lantern-light does not find its far wall. The space swallows sound whole and births it anew: the water-voice echoes as percussion, as rhythm, as something almost alive. Directly below, at a distance you cannot yet judge, a river moves—you hear it sliding across worked stone, fed by springs somewhere in the darkness beyond. The chamber itself is a geometry of intention: the floor slopes in a careful grade toward the water's edge, and the walls bear that same band of notation Cy's lens identified in the corridor above—symbols that hover between language and diagram, running unbroken around the chamber's entire circumference at eye height. Some of the notations glow faintly with their own light, a phosphorescence so old it barely qualifies as illumination.\n\nVessin steps up beside you, lantern held high, and her breath catches. Behind you, Kael is silent in the way a road-warden goes silent when they are reading a terrain that matters. Halvex stands at the threshold of the stairwell, his orchestrator's assessment of chaos and order suddenly useless in the face of something that predates both. Cy's lens irises sharp. The chamber waits. Water slides across stone far below. And in that waiting, you understand: this is where the valley's heart beats, and no one above has known it was beating at all."
-      },
-      {
-        "player": "Ask everyone to use their best skill to glean 2hat they can about the room and report.",
-        "summary": "The vast sealed chamber beneath the Null Stone reveals itself through the eyes of the companions: a pre-Transition water-works deliberately sealed and precisely maintained, built not to contain but to *ask* something of the river that moves through its darkness.",
-        "narration": "You step fully into the chamber and turn to face your companions as they emerge from the stairwell one by one. The four lanterns meet the darkness here and the darkness *yields*, but only a little—the phosphorescent notation bands glow faintly at eye height around the circumference, enough to read by if you know how. The roar of the river fills the space like a living thing.\n\n\"Everyone,\" you say, your voice carrying across the stone. \"Your best reading. Tell me what this place is.\"\n\nVessin moves toward the nearest wall, her lantern held high. Her eyes scan the notation—intricate, geometric, a system between language and diagram. \"This is *old*,\" she says quietly. \"The joinery is precise. Someone sealed this deliberately, and the precision means they expected it to *hold*. The notation—\" she traces a finger along the glowing marks without touching \"—it's not Veilwright work. It's older. Enginewright, maybe, but before the schism. Before the tradition split into what we know.\" She glances back at you. \"Whoever made this wanted the water, not the chamber.\"\n\nCy's lens irises sharp. It has already begun its traverse of the floor's geometry, small articulated legs moving with mechanical precision. \"The slope is intentional,\" it clicks. \"Seven-degree descent toward the water-source. The grooved channels in the stair-treads are *feed-lines*—water has flowed this way by design, not by accident. This installation was *maintained*. The facility classification matches the northern station-class, but the scale is... the scale is not in my records.\" It pauses. Its lens goes very still. \"The scale is not in any records I possess.\"\n\nKael stands at the chamber's center, still and assessing. When he speaks, his voice is low, the voice of a road-warden reading the lie of the land. \"The water is moving faster than natural flow. There's a current beneath the surface—that roar isn't distance, it's *force*. And the darkness here isn't natural darkness. It's been *worked*. The old craft Vessin mentioned—they didn't just carve the chamber, they shaped how light moves through it. Nothing escapes upward.\" He looks at the vast darkness above where the lantern-light dies. \"This place was made to be *secret* from above. From the light.\"\n\nHalfvex stands at the threshold where the passage opens into the chamber, his orchestrator's eye reading the space for flow, for pressure-points, for where the chaos lives. For a long moment he says nothing. Then: \"It's a *question*,\" he says finally. His voice is strange—certain and uncertain both. \"Not a place. A question written in stone and water. Someone built this to *ask* something and have it answered by what flows through. The notation isn't instructions. It's... it's a kind of *listening*.\"\n\nThe four of them stand in the overlapping light of their lanterns, and the chamber holds them—four different readings of the same impossible space, none of them complete, all of them true."
-      },
-      {
-        "player": "Use harmonic voice to sound out the room - as it where it wants to be asked in sonic harmony",
-        "summary": "In the vast sealed chamber beneath the Null Stone, Loki uses Harmonic Voice to resonate with the chamber's acoustic nature, and the chamber answers—the notation pulses, the water shifts to harmony, and the darkness itself seems to listen.",
-        "narration": "You center yourself in the vast chamber, the roar of the river filling the space like a held breath. The notation bands glow faintly at eye height—not language exactly, but something the stone itself might speak if asked the right way. Your companions still, sensing the shift in you.\n\nYou open your throat and let the Harmonic Voice rise. Not a shout, not a question shaped in words—a *resonance*, a tone that matches the frequency the chamber itself seems to hold. The sound finds the geometry of the stone and the sound finds the water and the sound finds the grooved channels in the floor that have carried flow for longer than the word \"Transition\" has meant anything.\n\nThe chamber answers.\n\nNot in words. The notation bands brighten—a pulse of phosphorescence that races around the circumference like a heartbeat made visible. The water's roar shifts pitch, becomes a harmony rather than a noise. The very darkness above the lantern-light seems to *listen*. Cy's lens irises sharp, tracking the light-pattern; Kael's stillness deepens, reading the acoustic shift; Vessin's hand steadies against the wall, feeling the stone's response through stone. Halvex stands at the threshold with something like recognition crossing his face—he has felt a mandate respond like this before, the way a Revel answers when the orchestration is *right*.\n\nThe resonance hangs for three breaths. Then it fades, leaving silence deeper than before—not empty, but *satisfied*. The notation dims to its soft glow. The water settles into its roar again. The chamber has been asked in the language it understands, and it has acknowledged the asking. What the chamber *means* by that acknowledgment—whether it has granted permission, or simply confirmed that you know how to speak—remains unwritten."
-      }
-    ],
-    "lastTurn": {
-      "narration": "",
-      "choices": [],
-      "newAbility": [
-        {
-          "abilityId": "fire_test_craft",
-          "name": "A fire-test craft",
-          "why": "fire test"
-        }
-      ],
-      "sceneSummary": null
-    },
-    "sceneState": {
-      "setting": "A vast sealed chamber carved beneath the Hub crossing, lit by four lanterns—Cy's bright lamp and three yellow flames. The floor slopes toward a distant river moving across worked stone. Phosphorescent notation bands the chamber at eye height, now faintly glowing brighter than before. The roar of the water echoes as percussion. The darkness above the lantern-light is absolute but feels *watched*.",
-      "npcsPresent": [
-        {
-          "name": "Vessin Tallow-bark",
-          "state": "Hand steadied against the wall, feeling the stone's response through stone—the resonance has reached her, and she is rea"
-        },
-        {
-          "name": "Cy",
-          "state": "Lens irised sharp, tracking the light-pattern of the notation's pulse—perceiving the chamber's response with mechanical "
-        },
-        {
-          "name": "Kael",
-          "state": "Stillness deepened, reading the acoustic shift—the water's pitch-change and the roar's shift to harmony are being measur"
-        },
-        {
-          "name": "Halvex Coil",
-          "state": "At the threshold where the passage opens into the chamber, face showing recognition—the mandate to break stands behind h"
-        }
-      ],
-      "objects": [
-        "Four lanterns (Cy's bright lamp, three yellow flames)",
-        "Worn stone steps with grooved channels descending into the chamber",
-        "Phosphorescent notation band running around the chamber circumference at eye hei",
-        "Worked stone floor sloping toward the river",
-        "Moving water far below, sliding across carved stone, now harmonic with the chamb",
-        "Absolute darkness above the lantern-light, but feeling observed rather than empt"
-      ],
-      "threads": [
-        "What the notation records or instructs—the language written in stone, now confirmed as responsive to harmonic resonance",
-        "What feeds the river from springs beyond the darkness",
-        "Whether the regulator housing at the far end carries written answers",
-        "Whether the chamber itself is the answer to the regulator's question, or if the question waits at the far end",
-        "Cy's three missing inventory entries—records written into the stone that no system above holds"
-      ]
-    },
-    "beats": 11,
-    "subPlace": {
-      "slug": "the-hub-crossing",
-      "name": "The Hub Crossing",
-      "day": 3
-    }
-  },
+  "activeScene": null,
   "clock": {
     "schemaVersion": 1,
     "day": 4,
-    "hour": 21,
+    "hour": 23,
     "realAnchor": null
   },
   "companions": [
@@ -427,14 +315,14 @@
       "locationEntityId": "the-unlit-deep",
       "status": "active",
       "progress": [
-        "The stone's sealing is part of a larger network deliberately sealed at the Hub—four arches locked, one left open. What was protected and why remains the deeper question. The descent begins.",
-        "The gathering is complete—Vessin, Cy, Kael, and Halvex are committed to the descent. Veln will hold the threshold. The sealed chamber awaits below the Null Stone.",
         "The descent into the sealed chamber is underway—all four companions committed and descending together into the vast dark beneath the Null Stone.",
         "Descending past the threshold into the vast sealed chamber. The passage reveals older craft at work in the darkness itself.",
         "Descended into the sealed passage beneath the Unlit Deep's outer chamber. The passage opens into a vast sealed chamber below—the sound of moving water fills the darkness. Four lanterns now light the way.",
         "Descended into the vast sealed chamber beneath the Null Stone. The chamber is a pre-Transition water-works of impossible scale, deliberately sealed, with notation-marked walls and a river moving through darkness. The regulator's question persists: what is this water, and what is it meant to carry?",
         "The vast chamber beneath the Null Stone has been reached and assessed—it is a pre-Transition water-works sealed deliberately, with a river moving through worked darkness. The regulator housing awaits at the far end. The chamber is the question, and the question is still unanswered.",
-        "The chamber beneath the Null Stone has acknowledged a harmonic question—the notation pulses with response, the water shifts to harmony. The regulator at the far end remains unread; the question continues to wait."
+        "The chamber beneath the Null Stone has acknowledged a harmonic question—the notation pulses with response, the water shifts to harmony. The regulator at the far end remains unread; the question continues to wait.",
+        "The chamber beneath the Null Stone is not a mechanism but a listener—it poses questions to the river and reads the answer through the notation. The threshold where questions are asked has been identified in the eastern alcove.",
+        "The sealed chamber beneath the Null Stone is the mechanism built to pose the regulator's question—both to the water's readiness and to the supplicant's integrity. Halvex reads it as a mutual test: the alcove is the threshold where the answer is shaped."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T21:30:43.637Z"
@@ -971,7 +859,6 @@
       },
       "relationship": 9,
       "history": [
-        "[d4] Your bond becomes platonic.",
         "[d4] Loki named the partnership plainly—search for answers that do not fit neat shapes. The orchestrator accepted, gripping Loki's hand. Introduced to Vessin and Kael. Standing at Loki's side now, no longer calculating for escape but for the meaning underneath the chaos.",
         "[d4] Named themselves plainly for the first time—their hunger for proof that chaos matters, their uncertainty now that the proof has been offered and refused. Standing at Loki's side without calculation.",
         "[d4] Their name is revealed: Halvex Coil (was known as \"The Churn-Revel orchestrator\")",
@@ -980,17 +867,18 @@
         "[d4] Spoke plainly at the Hub crossing about what breaking taught him—that sealing is different from locking, and sealed things have reasons. Proposed listening to the stone's intent rather than forcing it. Standing at Loki's shoulder, genuinely uncertain about partnership but present and offering…",
         "[d4] Watched the stone open at honest asking—the breaking he was sent to do stands behind him now, and partnership with Loki moves forward into uncertainty. The opening waits.",
         "[d4] Yielded the mandate to break and chose understanding instead. Faces the descent with uncertainty but commitment. Learning what accountability beyond the mandate feels like.",
-        "[d4] Standing at the threshold with recognition crossing his face—the mandate to break stands behind him, and this moment of the chamber *answering* has reached him with the weight of a mandate orchestrated *right*"
+        "[d4] Standing at the threshold with recognition crossing his face—the mandate to break stands behind him, and this moment of the chamber *answering* has reached him with the weight of a mandate orchestrated *right*",
+        "[d4] Read the sealed chamber's orchestration—it is a mutual test of readiness and integrity, not a one-way mechanism. The alcove is a threshold where the question is asked and answered in the same breath."
       ],
       "knownFacts": [
-        "He still believes chaos matters but questions whether the mandate was the right proof",
-        "Was hired to break the Null Stone because he believed chaos mattered enough to prove itself against order",
         "The breaking has always been his proof—that he matters, that chaos matters",
         "Partnership means accountability beyond the mandate; he does not yet know if he can answer that call",
         "Sealing is not the same as locking—sealed things have *reasons* and *wait* for something specific",
         "The orchestrator's calculation has given way to something less certain and more honest",
         "He came here to break it but is now coming to understand it—a real turning, not a feint",
-        "The chamber does not resist or refuse—it *answers* when asked in the language it understands. Breaking was never the point; understanding was"
+        "The chamber does not resist or refuse—it *answers* when asked in the language it understands. Breaking was never the point; understanding was",
+        "The chamber's alcove tests both the water's readiness to carry and the supplicant's integrity to ask—a mutual exchange, not a one-sided taking.",
+        "The regulator measures the water's preparation; the chamber measures the asker."
       ],
       "skillsObserved": [
         "Masters coordinated chaos—can weave multiple threads of a Revel into a single mandate",
@@ -1008,7 +896,7 @@
         "locationId": "gen-the-made-gate",
         "day": 4
       },
-      "met": 11,
+      "met": 12,
       "bondType": "platonic",
       "image": "https://image.pollinations.ai/prompt/Hoarse%20voice%2C%20sharp%20features%20softening%20now%2C%20eyes%20that%20calculate%20and%20estimate.%20He%20moves%20like%20someone%20used%20to%20reading%20a%20room%20for%20weak%20points.%2C%20character%20portrait%2C%20named%20The%20Churn-Revel%20orchestrator%2C%20man%2C%20Master%20of%20coordinated%20chaos%2C%20now%20questioning%20their%20mandate%2C%20platonic%20to%20Loki%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20painterly%2C%20no%20text%2C%20no%20watermark%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents?width=512&height=640&seed=39738&nologo=true",
       "_portraitTier": "devoted",
@@ -1479,10 +1367,10 @@
     ],
     "unseenNews": [],
     "lastGenCount": 1920,
-    "lastSharedReadAt": "2026-09-18T00:10:35.645Z",
+    "lastSharedReadAt": "2026-09-18T00:25:51.611Z",
     "lastTickWorldDay": 80,
     "lastCanonWorldDay": 80,
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 5,
     "recentOffers": [
       {
         "thing": "Halvex Coil—the Churn-Revel orchestrator, now named, now searching for answers that do not fit neat shapes",
@@ -7360,7 +7248,8 @@
           "[d1] The regulator holds a two-part question: (1) whether the water has been prepared to carry what it was built to carry, and (2) whether someone with the authority to answer is present. Cy received this shape through a craft-contact pass — Loki's See the Made Thing run through Cy's Precursor processor.",
           "[d4] The sealed seam in the Null Stone at the Hub responds to honest asking, not force—it tests the supplicant's intentions before yielding. The stone asks its own question: what will you do with what lies behind it? The sealed thing waits for an answer that satisfies both need and integrity.",
           "[d4] The sealed seam in the Null Stone at the Hub responds to honest asking and integrity, not force. It tests supplicants and makes its own judgment about whether to trust them. When asked plainly what it guards and promised care rather than breaking or use, the stone opened.",
-          "[d4] The regulator's question has two parts: whether the water is prepared, and whether the right person is present. The chamber beneath the Null Stone is a mechanism built to pose and answer that very question—the notation is listening, and the river carries the response."
+          "[d4] The regulator's question has two parts: whether the water is prepared, and whether the right person is present. The chamber beneath the Null Stone is a mechanism built to pose and answer that very question—the notation is listening, and the river carries the response.",
+          "[d4] The sealed chamber is built to ask two questions at once: whether the water is prepared to carry what it was made to carry, AND whether the supplicant is ready to carry what the water will give. The alcove is the threshold where this exchange happens. It is not a lock but a meeting-place."
         ],
         "links": [
           "halvex-coil",
@@ -7847,7 +7736,8 @@
           "[d1] Prism Sight read the passage beyond: old worked stone, creature-traces going down single-file on the left wall, and a diffuse continuous warmth deep below — the quality of a large spring-fed water source. The creatures use this passage regularly. Whatever is down there has been down there a long…",
           "[d4] The seam opened into a vast pre-Transition water-works beneath the Null Stone—a sealed chamber of impossible scale with notation-marked walls and a river moving through deliberate darkness. The floor slopes toward the water; phosphorescent notation glows faintly around the chamber's circumference…",
           "[d4] The passage descends into a vast sealed chamber of pre-Transition construction. The chamber is a water-works of impossible scale, with notation-marked walls and a river moving through deliberate darkness. The floor slopes toward the water-source; phosphorescent notation glows faintly around the…",
-          "[d4] The vast sealed chamber beneath the Null Stone is a pre-Transition water-works built to *ask* and *listen*. It responds to harmonic resonance—when asked in the right acoustic frequency, the notation bands pulse and brighten, the water's roar shifts to harmony, and the darkness itself seems to…"
+          "[d4] The vast sealed chamber beneath the Null Stone is a pre-Transition water-works built to *ask* and *listen*. It responds to harmonic resonance—when asked in the right acoustic frequency, the notation bands pulse and brighten, the water's roar shifts to harmony, and the darkness itself seems to…",
+          "[d4] The vast sealed chamber beneath the Null Stone is not a mechanism to be operated—it is a listener. The control alcove on the eastern wall is a threshold where questions are posed to the river, not where answers are dispensed. The notation bands emerge from the alcove like branches, radiating…"
         ],
         "links": [
           "standing-unlit",
@@ -7856,7 +7746,8 @@
           "the-taken-person",
           "the-regulator-question",
           "the-unlit-deep",
-          "halvex"
+          "halvex",
+          "the-water-crisis"
         ],
         "aliases": [
           "The Seam Beside the Bracket",
@@ -8208,17 +8099,17 @@
     ]
   },
   "tendencies": {
-    "devotion": 1.4963879380662088,
-    "cerebral": 12.194621085531141,
-    "social": 15.641638176028898,
-    "strategic": 12.877878008607297,
-    "cautious": 6.918775573749733,
-    "amorous": 9.657538180347283,
-    "generous": 5.078348464458417,
-    "ruthless": 0.37480632047204326,
-    "risky": 0.3063086331696751,
-    "patient": 0.08364737921034202,
-    "deception": 0.09736988212753267
+    "devotion": 1.386941189033585,
+    "cerebral": 14.228323877697214,
+    "social": 14.497598983810285,
+    "strategic": 12.886606962384002,
+    "cautious": 7.387732004050943,
+    "amorous": 8.95117980187532,
+    "generous": 4.706914883800137,
+    "ruthless": 0.34739275193876773,
+    "risky": 0.2839050282967493,
+    "patient": 0.0775293576152856,
+    "deception": 0.09024818809254859
   },
   "aptitudes": [
     "strategist",
@@ -8228,7 +8119,7 @@
     "faithful",
     "charmer"
   ],
-  "actionCount": 176,
+  "actionCount": 179,
   "grantsVersion": 1,
   "precursorAccess": [
     "address_sense"
@@ -9212,8 +9103,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1789690372564,
-  "rev": 768,
+  "updatedAt": 1789691211429,
+  "rev": 774,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10118,7 +10009,7 @@
     "the_gearlands": 33,
     "umbral_depths": 54,
     "the_quickwood": 101,
-    "the_center": 45
+    "the_center": 48
   },
   "opLossPending": false,
   "sessions": [
@@ -10229,10 +10120,10 @@
     {
       "id": "sess-14",
       "startedAt": "2026-09-17T21:25:46.391Z",
-      "lastAt": "2026-09-17T23:30:23.973Z",
+      "lastAt": "2026-09-18T00:26:51.405Z",
       "startDay": 79,
-      "endDay": 79,
-      "beats": 10
+      "endDay": 80,
+      "beats": 13
     }
   ],
   "establishedFacts": [
@@ -10306,21 +10197,21 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 207,
-    "choices": 207,
-    "characterDeltas": 94,
-    "scene": 207,
+    "sceneSummary": 209,
+    "choices": 209,
+    "characterDeltas": 96,
+    "scene": 209,
     "placeUpdates": 25,
-    "codexUpdates": 115,
-    "timeOps": 172,
+    "codexUpdates": 116,
+    "timeOps": 173,
     "offer": 26,
     "generateRequest": 6,
-    "sceneEnded": 78,
-    "npcUpdates": 165,
+    "sceneEnded": 79,
+    "npcUpdates": 166,
     "moveTo": 6,
-    "gambitApt": 41,
+    "gambitApt": 42,
     "deeds": 8,
-    "questUpdates": 26,
+    "questUpdates": 27,
     "standingOps": 3,
     "factUpdates": 9,
     "stageOps": 7,
@@ -10330,11 +10221,11 @@
     "imagePrompt": 25,
     "scene_ended": 1,
     "stateOps": 2,
-    "_engineClosedScene": 2,
+    "_engineClosedScene": 3,
     "discovery": 3,
     "intentsHeard": 4
   },
-  "_opTurns": 207,
+  "_opTurns": 209,
   "customAbilities": {
     "mirror-bright": {
       "id": "mirror-bright",
@@ -10388,12 +10279,12 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "see_the_made_thing": 32,
+      "see_the_made_thing": 33,
       "falsecraft": 7,
       "the_wrong_reality": 5,
       "the_misdirect": 2,
       "the_better_story": 11,
-      "prism_sight": 13,
+      "prism_sight": 14,
       "harmonic_voice": 10,
       "hunters_strike": 3,
       "descent": 10,
@@ -10424,16 +10315,16 @@
       {
         "abilityId": "unbearable_word",
         "since": "2026-09-16T21:20:54.754Z",
-        "progress": 1
+        "progress": 2
       }
     ],
     "lastUsed": {
-      "see_the_made_thing": 77,
+      "see_the_made_thing": 80,
       "falsecraft": 69,
       "the_wrong_reality": 32,
       "the_misdirect": 31,
       "the_better_story": 32,
-      "prism_sight": 79,
+      "prism_sight": 80,
       "harmonic_voice": 79,
       "hunters_strike": 32,
       "descent": 77,
@@ -11154,16 +11045,16 @@
     "plan": 8,
     "discuss": 1,
     "travel": 7,
-    "scout": 3,
+    "scout": 4,
     "prepare": 5,
-    "careful": 7,
+    "careful": 8,
     "woo": 1,
     "rapport": 9,
     "retreat": 1,
     "ask": 3,
     "help": 6,
-    "study": 6,
-    "investigate": 5,
+    "study": 8,
+    "investigate": 6,
     "charm": 1,
     "comfort": 1,
     "finesse": 1,
@@ -11896,7 +11787,7 @@
     }
   },
   "_opUnknown": {
-    "sceneSummary": 30
+    "sceneSummary": 33
   },
   "_bandNotes": null,
   "_opCountingSince": "2026-09-14T22:51:56.913Z",
@@ -12085,6 +11976,12 @@
       "at": "2026-09-17T23:29:47.694Z",
       "key": "spectrumId",
       "value": "mechanical_spiritual",
+      "why": "not a number"
+    },
+    {
+      "at": "2026-09-18T00:15:19.977Z",
+      "key": "spectrumId",
+      "value": "concrete_abstract",
       "why": "not a number"
     }
   ],

@@ -1644,15 +1644,18 @@ console.log("\n── §162 · one body rule ──");
   check("§162: ⛔ level 1 is CREATION — every attribute 3, both subs at the parent, creation's two points on the focus, health 15 + 5 × physical",
     b1.subAttributes.strength === 4 && b1.subAttributes.agility === 4 && b1.attributes.mental === 3 && b1.maxHealth === 30 && b1.maxEnergy === (rules162.energy?.max ?? 100), JSON.stringify(b1));
   const b30 = PR162.pcBodyAt(30, { rules: rules162, focusParents: ["physical"] });
+  // ⛔ CCODE-412: the 31 points no longer all land on the focus parent's two subs — they LEAN (§293). What this check holds is the count.
   check("§162: …each level adds a sub point (`subPointPerLevel`) and +5 to both reserves — 31 points by level 30, the parent the MEAN of its subs",
-    b30.subAttributes.strength + b30.subAttributes.agility === 6 + 31 && b30.attributes.physical === Math.round((b30.subAttributes.strength + b30.subAttributes.agility) / 2) && b30.maxHealth === 30 + 29 * 5, JSON.stringify(b30.attributes));
+    Object.values(b30.subAttributes).reduce((a, b) => a + b, 0) === 24 + 31 && b30.attributes.physical === Math.round((b30.subAttributes.strength + b30.subAttributes.agility) / 2) && b30.maxHealth === 30 + 29 * 5, JSON.stringify(b30.subAttributes));
   const b60 = PR162.pcBodyAt(60, { rules: rules162, focusParents: ["physical", "mental"] });
   check("§162: …no sub past `subAttributeCap`, and the points spill to the next focus when the first is full", Object.values(b60.subAttributes).every(v => v <= (rules162.leveling?.subAttributeCap ?? 20)) && b60.attributes.mental > 3, JSON.stringify(b60.subAttributes));
   const cfgP = { ...rules162.npcStanding, body: "player" }, cfgL = { ...rules162.npcStanding, body: "legacy" };
   const rec = { id: "b162", level: 30, role: "warden" };
   const sp = NS162.sheetFor(rec, { cfg: cfgP, day: 400 }), sl = NS162.sheetFor(rec, { cfg: cfgL, day: 400 });
   check("§162: ⛔ a PERSON'S sheet follows the player's rules under `body: \"player\"` — no flat 16 in every attribute, and soak from what they wear, not level/3",
-    sp.attributes.social <= 4 && Math.max(...Object.values(sp.attributes)) > 4 && sp.soak === 0 && Object.keys(sp.subAttributes).length === 8, JSON.stringify({ attrs: sp.attributes, soak: sp.soak }));
+    // ⛔ CCODE-412: `social <= 4` pinned the fill-first shape, where every point went to the leans and social kept creation's 3. The
+    // rule is that the body is a player's — not flat, never the legacy 16 — and a player's social rises too.
+    Math.max(...Object.values(sp.attributes)) > Math.min(...Object.values(sp.attributes)) && Object.values(sp.attributes).every(v => v < 16) && sp.soak === 0 && Object.keys(sp.subAttributes).length === 8, JSON.stringify({ attrs: sp.attributes, soak: sp.soak }));
   check("§162: …and the old rule is a DIAL, readable for comparison — `body: \"legacy\"` is round(level/2)+1 and soak level/3", sl.attributes.social === 16 && sl.soak === 10);
   check("§162: …the content says which — `npcStanding.body` is authored \"player\"", rules162.npcStanding?.body === "player");
   check("§162: …and the harness plays its PC on the same function (`pcBodyAt`), not a threat curve", rd("scripts/damage_sweep.mjs").includes("pcBodyAt(level, { rules: CONTENT.rules"));
@@ -1845,8 +1848,10 @@ console.log("\n── §166 · eight stats ──");
   const cap166 = C166.rules.leveling?.subAttributeCap ?? 20;
   const b166 = PR166.pcBodyAt(30, { rules: C166.rules, focusParents: ["physical"], focusSubs: ["agility"] });
   const p166 = PR166.pcBodyAt(30, { rules: C166.rules, focusParents: ["physical"] });
-  check("§166: …and a body builds toward the SUB it rolls — agility to the cap before strength rises; with no sub named, the parent's subs climb together as before",
-    b166.subAttributes.agility === cap166 && b166.subAttributes.agility > b166.subAttributes.strength && Math.abs(p166.subAttributes.agility - p166.subAttributes.strength) <= 1, JSON.stringify(b166.subAttributes));
+  check("§166: …and a body LEANS toward the SUB it rolls — agility highest, strength next, never poured to the cap (CCODE-412 corrects the fill-first order, §293); with no sub named, the parent's subs climb together as before",
+    b166.subAttributes.agility > b166.subAttributes.strength && b166.subAttributes.agility < cap166
+    && b166.subAttributes.strength >= Math.max(...["reason", "insight", "presence", "rapport", "craft", "wits"].map(s => b166.subAttributes[s]))
+    && Math.abs(p166.subAttributes.agility - p166.subAttributes.strength) <= 1, JSON.stringify(b166.subAttributes));
   // ⛔ …AND THE FOE'S SHEET KEEPS THEM. synthesizeOpponentSheet passed "the whole sheet" by naming its fields and left subAttributes out,
   // so every foe in the game rolled its averaged parent while the player rolled its sharpened sub — a fair peer tilted 46% → 56%. No foe
   // had rolled an authored sub-attribute before this.
@@ -21294,6 +21299,64 @@ console.log("\n── §292 · someone you have met fights as themselves — one
   }
   check("§292: ⛔ a hold's keeper is floored at the tier of the level the roster gives the same person — the keeper read the registry copy too, and priced Pell's two holds a rung below her",
     k4 >= 3 && kAgree4 === k4, `${kAgree4} of ${k4}${kOff4.length ? " — " + kOff4.join("; ") : ""}`);
+}
+
+// ══════════ §293 · CCODE-412 — A BODY LEANS; IT DOES NOT POUR A LEVEL INTO ONE STAT ══════════
+// Erik, of the band prototype's "how good": "fix the sheets and account for rank of skills." ⚑ This corrects his 09-11 ruling as it was
+// built ("a character who rolls a SUB builds toward that sub, one at a time, before the parents"), which filled each focus sub to the
+// cap before anything else rose: of the 138 bodies the builder made, 69 had a sub at 20 and 47 had every other sub at its floor —
+// Fendt, level 16, reason 20 and 3 in the other seven. A player does not build like that: Silas at 33 runs 4 to 10 across all eight.
+console.log("\n── §293 · a body leans toward what it rolls — the same points, spread the way a person spends them ──");
+{
+  const PR293 = await import("../engine/progression.js");
+  const BT293 = await import("../engine/battle_turn.js");
+  const { loadContentHeadless: lch293 } = await import("./headless_content.mjs");
+  const C293 = await lch293();
+  const rules293 = { leveling: { ...(C293.rules?.leveling || {}) } };
+  const cap293 = Number(rules293.leveling.subAttributeCap) || 20;
+  const OTHER = (focus) => ["strength", "agility", "reason", "insight", "presence", "rapport", "craft", "wits"].filter(s => !focus.includes(s));
+  const sum = (o) => Object.values(o).reduce((a, b) => a + b, 0);
+
+  /* ---- 1 · ⛔ THE SAME POINTS ---- */
+  const levels = [1, 8, 16, 33, 60];
+  const bodies = levels.map(L => PR293.pcBodyAt(L, { rules: rules293, focusParents: ["mental"], focusSubs: ["reason"] }));
+  check("§293: ⛔ THE SAME POINTS — at every level the eight subs hold exactly creation's 24, its two points and one a level; the lean moves where they go, never how many",
+    bodies.every((b, i) => sum(b.subAttributes) === 24 + 2 + (levels[i] - 1)), JSON.stringify(bodies.map(b => sum(b.subAttributes))));
+
+  /* ---- 2 · ⛔ THE LEAN ---- */
+  const f16 = bodies[2].subAttributes;
+  check("§293: ⛔ FENDT'S SHAPE, LEANING — at level 16 the sub his crafts roll is the highest and its sibling next, nothing reaches the cap, and NOTHING is left at the floor (it was reason 20 and 3 in the other seven)",
+    f16.reason >= Math.max(...OTHER(["reason"]).map(s => f16[s])) && f16.insight >= Math.max(...OTHER(["reason", "insight"]).map(s => f16[s]))
+    && f16.reason < cap293 && Math.min(...Object.values(f16)) > 3, JSON.stringify(f16));
+  const b33 = bodies[3].subAttributes;
+  const gainFocus = b33.reason - 3, gainRest = OTHER(["reason", "insight"]).map(s => b33[s] - 3);
+  const ratio = gainFocus / (gainRest.reduce((a, b) => a + b, 0) / gainRest.length);
+  check("§293: …in PROPORTION — at level 33 the focus sub has gained about three times what an unrelated sub has (the default lean 3 · 2 · 1), which is a player's shape rather than a specialist poured into one number",
+    ratio >= 2.4 && ratio <= 3.6, `ratio ${ratio.toFixed(2)} · ${JSON.stringify(b33)}`);
+  check("§293: …and a legend at 60 is formidable at what they roll with nothing else left near the floor",
+    bodies[4].subAttributes.reason >= 15 && bodies[4].subAttributes.reason <= cap293 && Math.min(...Object.values(bodies[4].subAttributes)) >= 7, JSON.stringify(bodies[4].subAttributes));
+
+  /* ---- 3 · ⛑ THE DIAL ---- */
+  const even = PR293.pcBodyAt(33, { rules: { leveling: { ...rules293.leveling, bodyLean: { focusSub: 1, focusParent: 1, rest: 1 } } }, focusParents: ["mental"], focusSubs: ["reason"] });
+  const spike = PR293.pcBodyAt(16, { rules: { leveling: { ...rules293.leveling, bodyLean: { focusSub: 1, focusParent: 0, rest: 0 } } }, focusParents: ["mental"], focusSubs: ["reason"] });
+  check("§293: ⛑ THE LEAN IS A DIAL (`leveling.bodyLean`) — equal weights spread evenly, and weighting only the focus sub pours into it as before, so the old shape is one authored line away if anyone wants it back",
+    Math.max(...Object.values(even.subAttributes)) - Math.min(...Object.values(even.subAttributes)) <= 1
+    && spike.subAttributes.reason === 20 && OTHER(["reason"]).every(s => spike.subAttributes[s] === 3), JSON.stringify({ even: even.subAttributes, spike: spike.subAttributes }));
+
+  /* ---- 4 · ⛔ THE POPULATION THE BUILDER MAKES ---- */
+  const opts293 = { catalog: C293.abilities, cfg: C293.rules?.npcStanding || {}, items: C293.items, leveling: C293.rules?.leveling || null, day: 80, traditionIndex: C293.traditionIndex };
+  let built = 0, capped = 0, spiked = 0;
+  for (const [id, rec] of Object.entries(C293.npcs || {})) {
+    if (rec?._gen || rec?._canon || (rec?.subAttributes && Object.keys(rec.subAttributes).length)) continue;   // an authored body is not the builder's
+    let s = null; try { s = BT293.personOpponentFor({ ...rec, id }, opts293); } catch { s = null; }
+    if (!s?.subAttributes || !Object.keys(s.subAttributes).length) continue;
+    built++;
+    const v = Object.values(s.subAttributes), lo = Math.min(...v);
+    if (Math.max(...v) >= cap293 && s.level < 40) capped++;   // a legend may reach the cap at what they roll; a level-16 warden may not
+    if (v.filter(x => x > lo).length === 1) spiked++;
+  }
+  check("§293: ⛔ ACROSS EVERY BODY THE BUILDER MAKES FOR THE AUTHORED CORPUS, through the fight's own call — nobody below level 40 at the cap, and nobody with one sub alone above its floor (measured before: 69 at the cap, 47 spikes)",
+    built >= 50 && capped === 0 && spiked === 0, `${built} built · ${capped} at the cap · ${spiked} one-sub spikes`);
 }
 
 /* ══════════ REPORT ══════════ */

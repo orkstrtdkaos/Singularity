@@ -72,8 +72,8 @@ export function syncParentAttributes(character) {
  *    · creation — every attribute 3 (`start.attributes`), both subs at the parent (`ensureSubAttributes`), two sub points
  *      to specialise (creation's `pendingSubPoints`), health 15 + 5 × physical, energy `rules.energy.max`
  *    · each level — `subPointPerLevel` sub points and +5 to both reserves (`applyLevelUps`)
- *    · the points go to the subs of `focusParents`, in order, round-robin, to `subAttributeCap`, then spill on — a person
- *      builds toward what they roll with; the parents are the mean of their subs (`syncParentAttributes`).
+ *    · the points LEAN toward what the person rolls with (CCODE-412, below) and never past `subAttributeCap`; the parents are
+ *      the mean of their subs (`syncParentAttributes`).
  *  One function for an NPC's sheet (`npcStanding.body: "player"`) and the harness's PC. Pure. */
 export function pcBodyAt(level, { rules = {}, focusParents = [], focusSubs = [], start = null } = {}) {
   const lv = rules?.leveling || {};
@@ -83,22 +83,32 @@ export function pcBodyAt(level, { rules = {}, focusParents = [], focusSubs = [],
   for (const [sub, parent] of Object.entries(SUB_OF)) subs[sub] = Number(base[parent]) || 2;
   const cap = Number(lv.subAttributeCap) || 20;
   let points = Number(start?.subPoints ?? 2) + (L - 1) * (Number(lv.subPointPerLevel) || 1);
-  const focus = [];
-  for (const p of (Array.isArray(focusParents) ? focusParents : [])) for (const s of SUBS) if (SUB_OF[s] === p && !focus.includes(s)) focus.push(s);
-  const rest = SUBS.filter(s => !focus.includes(s));
-  // the first focus parent's subs climb together; when both are full, the next parent's; then everything else, evenly
-  const groups = [];
-  // ✅ ERIK 2026-09-11 (the eight stats): a character who rolls a SUB builds toward that sub, one at a time, before the parents
-  for (const s of (Array.isArray(focusSubs) ? focusSubs : []).filter((x, i, a) => SUB_OF[x] && a.indexOf(x) === i)) groups.push([s]);
-  for (const p of (Array.isArray(focusParents) ? focusParents : [])) { const g = SUBS.filter(s => SUB_OF[s] === p); if (g.length) groups.push(g); }
-  groups.push(rest.length ? rest : SUBS);
-  for (const g of groups) {
-    while (points > 0) {
-      const open = g.filter(s => subs[s] < cap);
-      if (!open.length) break;
-      open.sort((a, b) => subs[a] - subs[b] || SUBS.indexOf(a) - SUBS.indexOf(b));
-      subs[open[0]]++; points--;
+  // ⛔ CCODE-412 — ERIK 2026-09-18, of the band prototype's "how good": "fix the sheets and account for rank of skills."
+  // ⚑ THIS CORRECTS HIS 09-11 RULING AS IT WAS BUILT — "a character who rolls a SUB builds toward that sub, one at a time, before the
+  // parents" — which filled each focus sub to the cap before anything else rose. Measured across the 138 bodies this makes: 69 had a
+  // sub at the cap of 20 and 47 had every other sub still at its floor. Fendt, level 16: reason 20, the other seven 3. A player does
+  // not build like that — Silas at 33 runs 4 to 10 across all eight, and Loki at 8 runs 3 to 5.
+  // ⛑ SO THE POINTS LEAN, IN PROPORTION: each goes to the open sub with the fewest points gained for its weight — a sub the person's
+  // crafts roll (`focusSubs`) weighs 3, the other subs of the parents they lean on (`focusParents`) 2, everything else 1. At level 16
+  // that is a best sub near 8 with nothing left at the floor; at 63 a best sub near 18. Ties go to the focus, in the order given.
+  // The weights are a dial: `rules.leveling.bodyLean` = { focusSub, focusParent, rest }. The total is untouched — the same points,
+  // spread the way a person spends them.
+  const lean = { focusSub: 3, focusParent: 2, rest: 1, ...(lv.bodyLean && typeof lv.bodyLean === "object" ? lv.bodyLean : {}) };
+  const fSubs = (Array.isArray(focusSubs) ? focusSubs : []).filter((x, i, a) => SUB_OF[x] && a.indexOf(x) === i);
+  const fParents = new Set(Array.isArray(focusParents) ? focusParents : []);
+  const weightOf = (s) => Math.max(0, Number(fSubs.includes(s) ? lean.focusSub : fParents.has(SUB_OF[s]) ? lean.focusParent : lean.rest) || 0);
+  const order = [...fSubs, ...SUBS.filter(s => !fSubs.includes(s) && fParents.has(SUB_OF[s])), ...SUBS.filter(s => !fSubs.includes(s) && !fParents.has(SUB_OF[s]))];
+  const gained = Object.fromEntries(SUBS.map(s => [s, 0]));
+  while (points > 0) {
+    let pick = null, best = Infinity;
+    for (const s of order) {
+      const w = weightOf(s);
+      if (!w || subs[s] >= cap) continue;
+      const q = (gained[s] + 1) / w;
+      if (q < best - 1e-9) { best = q; pick = s; }
     }
+    if (!pick) break;
+    subs[pick]++; gained[pick]++; points--;
   }
   const attributes = {};
   for (const parent of ["physical", "mental", "social", "practical"]) {

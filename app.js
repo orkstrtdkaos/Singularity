@@ -74,7 +74,8 @@ import { FIRE_TESTS, diffKeys } from "./engine/firetests.js";   // SNG-560: the 
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady, applyPartyOps, activeCompany, formerCompany } from "./engine/company.js";
 import { unitsOf, unitLine, poolRows, atSideRows, wherePerson, canBringForward, rosterLine, levelOfPerson } from "./engine/fellowship.js";
 // ⛔ CCODE-407 (Erik): "I want this to be easy on the PC so we can have a delegate (GM through a chosen npc) come up with the legion plan."
-import { draftLegionPlan, planDraftersFor } from "./engine/legionplan.js";   // SNG-541: the roster, the pool, and EVERY band rather than one
+import { draftLegionPlan, planDraftersFor } from "./engine/legionplan.js";
+import { familyMapOf, typesOfFamily } from "./engine/damagetypes.js";   // CCODE-409: the ward types a contingent may carry   // SNG-541: the roster, the pool, and EVERY band rather than one
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, suggestForCreation, archetypeFamilies, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
 import { toolkitForGM } from "./engine/toolkit.js";
 import { fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc, arcDebtOf } from "./engine/personalArc.js";   // CCODE-393: a fallback arc is a debt
@@ -151,7 +152,7 @@ import { championsFor, resolveChampion, creditChampion, championLine, sendingIsG
 // ⛔ CCODE-404 (Erik) — `addContingent` and `musteredFrom` are new; `unitComposition` and `bandGaps` had NO caller outside the tests.
 // ⛔ CCODE-405 (Erik's legion ruling): formed of bands that keep their identity, placed and postured once CALLED, and free until then.
 // ⚠️ ONE LINE ON PURPOSE — `import_integrity` reads an import statement per line, and a comment inside the braces hides what follows it.
-import { commandSlots, bringForward, lineSplit, canRaiseBand, raiseBand, bandStrength, bandThreat, bloodBand, recoverBand, legionClash, addContingent, musteredFrom, unitComposition, bandGaps, formLegion, disbandLegion, callCostOf, callUnit, standDown, setUnitPosture, bloodUnit, resolvedUnit, UNIT_POSTURES, setUnitLeader, leaderBonusOf } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
+import { commandSlots, bringForward, lineSplit, canRaiseBand, raiseBand, bandStrength, bandThreat, bloodBand, recoverBand, legionClash, addContingent, musteredFrom, unitComposition, bandGaps, formLegion, disbandLegion, callCostOf, callUnit, standDown, setUnitPosture, bloodUnit, resolvedUnit, UNIT_POSTURES, setUnitLeader, leaderBonusOf, editContingent } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
 import { groupCapability, loadBearing } from "./engine/group.js";   // CCODE-317/322: what your line covers, and who holds it alone
 import { characterPower, threatBand } from "./engine/threat.js"; // CCODE-52: built power sets the mean the encounter pool revolves around
 import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine, FRAME_FREEFORM_CUE } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c). SNG-246 Fix D: playerReceiptLine = the mechanical receipt SHOWN to the player
@@ -166,7 +167,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.71";
+const APP_VERSION = "2.0.72";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -741,8 +742,16 @@ let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs,
 // hand-synced melee configs is the SNG-344 crosswalk drift before it happens.
 function meleeCfg() {
   const r = CONTENT?.rules || {};
+  // ⛔ CCODE-409b — AND AEVI'S AUTHORED BAND DIALS, which this bag never carried. She authored `rules/martial.json` (SNG-623: "twelve
+  // band dials, each now a ruling with a reason") and `state.js` loads it as `rules.martial` — but only THREE readers asked for that key,
+  // while every other band caller went through here. ⚑ Observable the day it landed: her `callCostPerHead: 4` never reached the call,
+  // which kept charging the `wagePerHand` fallback of 3 — and the screen went on saying "no martial rule sets this yet" while one did.
+  // ⚠️ I flagged these two sources in CCODE-404 and declined to claim it, because every dial then equalled its default. It stopped being
+  // harmless the moment one dial was tuned, which is exactly when a second source always stops being harmless.
+  const martial = Object.fromEntries(Object.entries(r.martial || {}).filter(([k]) => !k.startsWith("_") && !["note", "id", "kind", "schemaVersion"].includes(k)));
   return {
     ...(CONTENT?.skillBattle?.engine?.melee || {}),
+    ...martial,
     // ⛔ THE LADDERS COME FROM `resolution.json`, WHICH IS WHERE ERIK RULED THEM. `melee.js` prefers
     // `capabilityByTier` and falls back to `attentionByTier`; both are handed over so that preference is a
     // real choice here rather than an accident of which one happened to be reachable.
@@ -14683,6 +14692,71 @@ function nameOfPlace(id) {
   return CONTENT.locations?.[id]?.name || character?.generated?.location?.[id]?.name || String(id || "");
 }
 
+/** ⛔ CCODE-409 — THE WARD TYPES A CONTINGENT MAY CARRY: the ones the engine can actually resolve, read through `typesOfFamily` over the
+ *  runtime `rules.damageFamilies` doc (20 types). ⚠️ NOT `damage_types.json`, which holds 18 and disagrees with it — two sources for one
+ *  vocabulary — and a ward outside the resolvable set is a ward nothing will ever answer. */
+function unitWardTypes() {
+  try {
+    const F = CONTENT.rules?.damageFamilies;
+    return [...new Set(Object.keys(familyMapOf(F)).flatMap(f => typesOfFamily(f, F) || []))];
+  } catch { return []; }
+}
+/** ⛔ CCODE-409 (Erik: "cavalry and archers... that type of thing... a dragon") — SUGGESTIONS, NOT RULES. On his choice a kind is a
+ *  LABEL over the parts, so picking "cavalry" only pre-fills the families the player then keeps or changes; the stored contingent
+ *  carries its families explicitly and nothing reads this table. ⚠️ It is a convenience for the easy path he asked for, and if it ever
+ *  started deciding anything it would be a second rules table nobody authored. */
+const UNIT_KIND_SUGGESTIONS = {
+  archers: ["HARM"], cavalry: ["MOVE", "HARM"], shieldwall: ["PROTECT", "MARTIAL"], pikes: ["MARTIAL", "PROTECT"],
+  skirmishers: ["MOVE", "KNOW"], scouts: ["KNOW", "MOVE"], "field surgeons": ["RESTORE"], sappers: ["SHAPE", "HARM"],
+};
+const UNIT_FAMILY_WORDS = { HARM: "harm", MARTIAL: "hold a line", PROTECT: "protect", RESTORE: "mend", KNOW: "read the ground",
+  MOVE: "move fast", SHAPE: "build and break", SUSTAIN: "keep supplied", INFLUENCE: "sway people" };
+
+/** ⛔ CCODE-409 — SAY WHAT A BODY OF HANDS IS. A kind, what they do, and a ward — and nothing that would make them more than they are:
+ *  `editContingent` refuses to change how many or how good, because relabelling is a description and resizing would be conjuring. */
+function showContingentEditor(unitId, index) {
+  document.getElementById("help-pop")?.remove();
+  const band = (character.bands || []).find(b => b.id === unitId);
+  const cg = band?.contingents?.[index];
+  if (!band || !cg) return;
+  const wards = unitWardTypes();
+  const does = new Set(cg.does || []);
+  const pop = document.createElement("div");
+  pop.id = "help-pop"; pop.className = "help-overlay";
+  pop.innerHTML = `<div class="help-card" role="dialog" aria-label="What are they?">
+    <div class="whois-head">What are these ${cg.n}?</div>
+    <div class="codex-f"><label class="hint">They are <input type="text" id="cg-kind" list="cg-kind-list" value="${esc(cg.kind || "")}" placeholder="archers, cavalry, shieldwall…" style="width:60%"></label>
+      <datalist id="cg-kind-list">${Object.keys(UNIT_KIND_SUGGESTIONS).map(k => `<option value="${esc(k)}">`).join("")}</datalist></div>
+    <div class="codex-f" style="display:flex;flex-wrap:wrap;gap:8px">${Object.entries(UNIT_FAMILY_WORDS).map(([f, w]) =>
+      `<label class="hint"><input type="checkbox" class="cg-fam" value="${esc(f)}"${does.has(f) ? " checked" : ""}> ${esc(w)}</label>`).join("")}</div>
+    <div class="codex-f"><label class="hint">Warded against <select id="cg-ward"><option value="">nothing</option>${wards.map(w =>
+      `<option value="${esc(w)}"${(cg.wards || [])[0] === w ? " selected" : ""}>${esc(w)}</option>`).join("")}</select></label></div>
+    <div class="help-foot">
+      <span class="hint">A name is only a name — what they can do comes from what you tick. A ward means they protect.</span>
+      <button class="btn" id="cg-save">Keep it</button>
+      <button class="btn secondary" id="help-close">Cancel</button>
+    </div></div>`;
+  document.body.appendChild(pop);
+  const close = () => pop.remove();
+  pop.addEventListener("click", ev => { if (ev.target === pop) close(); });
+  document.getElementById("help-close").onclick = close;
+  // ⚑ a suggestion pre-fills the families, and the player keeps or changes them
+  document.getElementById("cg-kind").oninput = (ev) => {
+    const fam = UNIT_KIND_SUGGESTIONS[String(ev.target.value || "").trim().toLowerCase()];
+    if (!fam) return;
+    for (const box of pop.querySelectorAll(".cg-fam")) box.checked = fam.includes(box.value);
+  };
+  document.getElementById("cg-save").onclick = () => {
+    const kind = document.getElementById("cg-kind").value;
+    const fams = [...pop.querySelectorAll(".cg-fam")].filter(b => b.checked).map(b => b.value);
+    const ward = document.getElementById("cg-ward").value;
+    const r = editContingent(band, index, { kind, does: fams, wards: ward ? [ward] : [] });
+    if (!r.ok) { alert(r.why); return; }
+    close();
+    saveCharacter(character); renderBandsTab();
+  };
+}
+
 /** ⛔ CCODE-404 (Erik: "I want to have a source of workers and guards as well as a way to raise geneal troops") — THE SOURCE OF
  *  WORKERS AND GUARDS IS THE PEOPLE HE ALREADY KNOWS, at the bar SPEC_hold_costs §5 ruled for work: known, here, and not hostile.
  *  ⚑ Measured: that bar reaches 36 of the 39 people on Silas's save, where the TRAVELLING bar reaches 18 — "Bren Thalle is two dry
@@ -15025,7 +15099,10 @@ function renderBandsTab() {
 
   const rowFor = (r) => {
     if (r.kind === "hands") {
-      return `<div class="codex-f"><strong>${r.n} hands</strong> <span class="hint">${esc(r.what || "no charge written")}${r.verbs ? " · " + esc(r.verbs) : ""}</span></div>`;
+      // ⛔ CCODE-409 — "10 archers", not "10 hands", once somebody has said what they are; and a ward is named beside them.
+      return `<div class="codex-f" style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap"><strong>${r.n} ${esc(r.unitKind || "hands")}</strong>
+        <span class="hint" style="flex:1 1 200px">${esc(r.what || "no charge written")}${r.verbs ? " · " + esc(r.verbs) : ""}${(r.wards || []).length ? ` · warded against ${esc(r.wards.join(", "))}` : ""}</span>
+        <button class="opt" data-cg-edit="${esc(r.unitId)}" data-cg-index="${r.contingentIndex}" title="Name them and say what they do">What are they?</button></div>`;
     }
     const w = wherePerson(r, whereOpts);
     const gate = r.atSide ? null : canBringForward(character, r, { ladder });
@@ -15069,6 +15146,8 @@ function renderBandsTab() {
       <span style="font-variant-numeric:tabular-nums"><strong>${comp.bodies}</strong> ${comp.bodies === 1 ? "stands" : "stand"} in it</span>
       ${comp.simpleSoldiers ? `<span class="hint" style="font-variant-numeric:tabular-nums">${comp.withSkills} with a trade · ${comp.simpleSoldiers} hands</span>` : `<span class="hint">every one of them with a trade</span>`}
       <span class="hint" style="font-variant-numeric:tabular-nums">threat ${thr.power}</span>
+      ${Object.keys(comp.kinds || {}).length ? `<span class="hint" style="width:100%">${esc(Object.entries(comp.kinds).map(([k, n]) => `${n} ${k}`).join(" · "))}</span>` : ""}
+      ${(comp.wards || []).length ? `<span class="hint" style="width:100%">warded against ${esc(comp.wards.join(", "))}</span>` : ""}
       <span class="hint">${esc(u.condition)}</span>
       ${gaps.length ? gaps.map(g => `<span class="hint" style="width:100%;color:var(--warn,#e0b25a)">⚠️ no ${esc(String(g.missing).toLowerCase())} — ${esc(g.why)}${g.value ? ` (×${g.value})` : ""}</span>`).join("")
         : `<span class="hint" style="width:100%">Nothing it cannot cover — it mends, shields and reads the ground.</span>`}
@@ -15201,6 +15280,7 @@ function renderBandsTab() {
   const lf405 = document.getElementById("legion-form"); if (lf405) lf405.onclick = showLegionFormPicker;
   const lp407 = document.getElementById("legion-plan"); if (lp407) lp407.onclick = () => showLegionPlan();
   for (const b of app.querySelectorAll("[data-unit-lead]")) b.onclick = () => showLeaderPicker(b.dataset.unitLead);
+  for (const b of app.querySelectorAll("[data-cg-edit]")) b.onclick = () => showContingentEditor(b.dataset.cgEdit, Number(b.dataset.cgIndex));   // CCODE-409
   for (const b of app.querySelectorAll("[data-unit-call]")) b.onclick = () => callUnitTogether(b.dataset.unitCall);
   for (const b of app.querySelectorAll("[data-unit-posture]")) b.onclick = () => {
     const r = setUnitPosture(character.bands || [], b.dataset.unitPosture, b.dataset.posture);

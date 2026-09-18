@@ -146,7 +146,7 @@ function memberRows(character, { content = {}, worldDay = null, cfg = null, incl
   const sheetCfg = cfg || content?.rules?.npcStanding || content?.rules?.resolution?.npcStanding || {};
   const rows = [];
   for (const u of unitsOf(character)) {
-    for (const c of contingentsOf(u.unit)) {
+    for (const [ci, c] of contingentsOf(u.unit).entries()) {
       const id = c.npcId ? String(c.npcId) : null;
       if (!id) {
         if (!includeHands || !(num(c.n, 0) > 0)) continue;
@@ -154,6 +154,9 @@ function memberRows(character, { content = {}, worldDay = null, cfg = null, incl
           kind: "hands", id: null, unitId: u.id, unitName: u.name, n: num(c.n, 0), name: null,
           what: c.what || null, does: arr(c.does), verbs: familyVerbs(c.does), level: null,
           atSide: false, quality: num(c.quality, u.quality),
+          // ⛔ CCODE-409 — WHAT THEY ARE, and WHICH contingent this is: a row that can be relabelled has to say where it lives, or an
+          // edit would land on whichever contingent happened to match first.
+          unitKind: c.kind || null, wards: arr(c.wards), crafts: arr(c.crafts), contingentIndex: ci,
         });
         continue;
       }

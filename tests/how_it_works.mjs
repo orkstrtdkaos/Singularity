@@ -21017,6 +21017,90 @@ console.log("\n── §289 · a companion's level, and what a unit carries ─�
     && /carries <strong>\$\{sign\}\$\{k\.total\}<\/strong> to the ground where it stands/.test(A289));
 }
 
+// ⛔ CCODE-409 (Erik) — "yes i mean cavalry and archers... that type of thing... a dragon. Remember - the legion will have a combination
+// of the things a band is built from. Wards skills etc." Offered two shapes, he chose the first: "proceed with 1" — a kind is a LABEL over
+// the parts, and everything mechanical comes from the families, wards and crafts it carries.
+console.log("\n── §290 · cavalry, archers, a dragon ──");
+{
+  const M290 = await import("../engine/melee.js");
+  const D290 = await import("../engine/damagetypes.js");
+  const { loadContentHeadless: lch290 } = await import("./headless_content.mjs");
+  const C290 = await lch290();
+
+  // ⛔ 1 · THE LABEL IS BOOKKEEPING: the same families under two names do the same thing
+  const a = { id: "a", contingents: [] }, b = { id: "b", contingents: [] };
+  M290.addContingent(a, { n: 10, quality: 1, kind: "archers", does: ["HARM"] });
+  M290.addContingent(b, { n: 10, quality: 1, kind: "a name nobody authored", does: ["HARM"] });
+  check("§290: ⛔ A KIND IS A LABEL OVER THE PARTS, on Erik's choice — the same families under two different names are worth exactly the same and can do exactly the same, so no word can buy a unit anything",
+    M290.bandStrength(a, {}).effective === M290.bandStrength(b, {}).effective
+    && JSON.stringify(M290.bandCan(a)) === JSON.stringify(M290.bandCan(b))
+    && JSON.stringify(M290.bandGaps(a, {})) === JSON.stringify(M290.bandGaps(b, {})),
+    JSON.stringify({ archers: M290.bandStrength(a, {}).effective, other: M290.bandStrength(b, {}).effective }));
+
+  // ⛔ 2 · A WARD IS PROTECTION, AND IT LIFTS THE GAP
+  const wall = { id: "w", contingents: [] };
+  M290.addContingent(wall, { n: 12, quality: 1, kind: "shieldwall", does: ["MARTIAL"], wards: ["physical"] });
+  check("§290: ⛔ A WARD IS PROTECTION — a contingent that brings one PROTECTS, written into what it does rather than inferred by every reader, and it is what lifts the unwarded 1.4× off a formation",
+    wall.contingents[0].does.includes("PROTECT") && !M290.bandGaps(wall, {}).some(g => g.missing === "PROTECT"),
+    JSON.stringify(wall.contingents[0].does));
+
+  // ⛔ 3 · THE LEGION CARRIES THE UNION — "a combination of the things a band is built from"
+  const bows = { id: "b2", name: "The Bows", contingents: [] };
+  M290.addContingent(bows, { n: 10, quality: 1, kind: "archers", does: ["HARM"] });
+  M290.addContingent(bows, { n: 1, quality: 6, kind: "dragon", does: ["HARM"], wards: ["heat"] });
+  const f290 = M290.formLegion([{ ...wall, name: "Shieldwall" }, bows], { id: "L", name: "The Legion", from: ["w", "b2"], day: 1 });
+  const comp290 = M290.unitComposition(M290.resolvedUnit(f290.bands, f290.bands.find(x => x.id === "L")));
+  check("§290: ⛔ A LEGION CARRIES THE UNION OF ITS PARTS' KINDS AND WARDS — Erik: 'the legion will have a combination of the things a band is built from. Wards skills etc.' — and it does so through `resolvedUnit`, with no legion-specific code at all",
+    comp290.kinds.shieldwall === 12 && comp290.kinds.archers === 10 && comp290.kinds.dragon === 1
+    && comp290.wards.includes("physical") && comp290.wards.includes("heat"),
+    JSON.stringify({ kinds: comp290.kinds, wards: comp290.wards }));
+  check("§290: …and a dragon is expressible tonight, as he asked — one contingent of quality 6 that harms and, warded, protects",
+    comp290.kinds.dragon === 1 && bows.contingents[1].quality === 6 && bows.contingents[1].does.includes("PROTECT"));
+
+  // ⛔ 4 · RELABELLING IS A DESCRIPTION, NEVER CONJURING
+  const e290 = M290.editContingent(bows, 0, { kind: "longbows", n: 999, quality: 99, npcId: "someone", from: "elsewhere" });
+  check("§290: ⛔ RELABELLING CANNOT MAKE A CONTINGENT BIGGER OR BETTER — `n`, `quality`, `npcId` and `from` are not editable however they are asked for, because relabelling hands is a description and resizing them would be conjuring",
+    e290.ok && bows.contingents[0].kind === "longbows" && bows.contingents[0].n === 10 && bows.contingents[0].quality === 1
+    && !bows.contingents[0].npcId && !bows.contingents[0].from,
+    JSON.stringify(bows.contingents[0]));
+  check("§290: …and a contingent that does nothing is refused, so no edit can leave hands standing in a unit with no purpose",
+    /something/.test(String(M290.editContingent(bows, 0, { does: [] }).why)));
+
+  // ⛔ 5 · THE NORMALISER CARRIES THEM — the lesson of `npcId` and `from`, applied before the bug instead of after
+  check("§290: ⛔ `contingentsOf` CARRIES kind, wards AND crafts — it dropped `npcId` once and `from` this morning, and each time every consumer read the unit as if the field did not exist",
+    M290.contingentsOf(bows).every(c => "kind" in c && Array.isArray(c.wards) && Array.isArray(c.crafts))
+    && M290.contingentsOf(bows)[1].wards[0] === "heat");
+
+  // ⛔ 6 · A WARD IS ONE THE ENGINE CAN RESOLVE
+  const F290 = C290.rules?.damageFamilies;
+  const resolvable = new Set(Object.keys(D290.familyMapOf(F290)).flatMap(f => D290.typesOfFamily(f, F290) || []));
+  check("§290: ⛔ THE WARDS OFFERED ARE THE ONES THE ENGINE CAN RESOLVE — read through `typesOfFamily` over the runtime `rules.damageFamilies` (20 types), NOT the 18 in `damage_types.json`, which disagrees with it. A ward outside the resolvable set is a ward nothing will ever answer",
+    resolvable.size >= 18 && resolvable.has("heat") && resolvable.has("physical")
+    && /typesOfFamily\(f, F\)/.test(rd("app.js")) && /function unitWardTypes\(\)/.test(rd("app.js")),
+    `${resolvable.size} resolvable types`);
+  // ⛔ 7 · EVERY DIAL AEVI AUTHORS REACHES THE BAND LAYER — asserted over her whole file, so the next one she tunes is covered too
+  {
+    const dials = Object.keys(C290.rules?.martial || {}).filter(k => !k.startsWith("_") && !["note", "id", "kind", "schemaVersion"].includes(k));
+    const A = rd("app.js").replace(/\r\n/g, "\n");
+    const body = (A.match(/function meleeCfg\(\) \{[\s\S]*?\n\}/) || [""])[0];
+    check("§290: ⛔ EVERY BAND DIAL AEVI AUTHORS REACHES `meleeCfg()` — she authored `rules/martial.json` (SNG-623) and only three readers asked for that key while every other band caller went through here, so her `callCostPerHead: 4` never reached the call and the screen kept saying 'no martial rule sets this yet' while one did. Asserted over her WHOLE file, so the next dial she tunes cannot fall through the same gap",
+      dials.length >= 12 && /Object\.entries\(r\.martial \|\| \{\}\)/.test(body) && /\.\.\.martial,/.test(body),
+      `${dials.length} authored dials · meleeCfg ${/\.\.\.martial,/.test(body) ? "spreads" : "DOES NOT spread"} them`);
+    const priced = M290.callCostOf([], { contingents: [{ n: 10, quality: 1, does: ["HARM"] }] },
+      { cfg: { ...(C290.rules?.martial || {}) }, wagePerHand: 3 });
+    check("§290: …and her number is the one charged, and the screen's sentence about it is TRUE — `authored` is what decides whether it says a rule sets the price or that none does",
+      priced.authored === true && priced.perHead === Number(C290.rules.martial.callCostPerHead) && /martial rules set/.test(priced.why),
+      JSON.stringify(priced));
+  }
+
+  // ⛑ 8 · AND THE SUGGESTIONS DECIDE NOTHING
+  const A290 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§290: ⛑ the kind SUGGESTIONS only pre-fill the families the player then keeps or changes — the stored contingent carries its families explicitly and no reader consults the suggestion table, or it would be a second rules table nobody authored",
+    /const UNIT_KIND_SUGGESTIONS = \{/.test(A290)
+    && (A290.match(/UNIT_KIND_SUGGESTIONS/g) || []).length <= 3
+    && !/melee\.js[\s\S]{0,40}UNIT_KIND_SUGGESTIONS/.test(A290));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

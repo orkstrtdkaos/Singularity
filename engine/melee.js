@@ -556,8 +556,13 @@ export function contingentsOf(band) {
     // ⛔ CCODE-404 — AND `from` RIDES THROUGH FOR THE SAME REASON `npcId` DOES, which my own first test of the muster caught: the
     // bound on raising hands at a place is that place's authored capacity, so the heads must remember where they were raised or the
     // bound can never be checked again. Dropping it here read every mustered head back as having come from nowhere.
+    // ⛔ CCODE-409 — AND `kind`, `wards` AND `crafts` RIDE THROUGH, carried here BEFORE anything reads them rather than after a reader
+    // found them missing: this normaliser dropped `npcId` once and `from` this morning, and each time every consumer read the unit
+    // as if the field did not exist.
     return list.map(c => ({ n: Math.max(0, num(c?.n, 0)), quality: Math.max(0, num(c?.quality, 1)),
-      does: (c?.does || ["MARTIAL"]).map(String), what: c?.what || null, npcId: c?.npcId || null, from: c?.from || null }));
+      does: (c?.does || ["MARTIAL"]).map(String), what: c?.what || null, npcId: c?.npcId || null, from: c?.from || null,
+      kind: c?.kind ? String(c.kind) : null, wards: Array.isArray(c?.wards) ? c.wards.map(String) : [],
+      crafts: Array.isArray(c?.crafts) ? c.crafts.map(String) : [] }));
   }
   return [{ n: Math.max(0, num(band?.count, 0)), quality: Math.max(0, num(band?.quality, 1)),
     does: ["HARM", "MARTIAL"], what: band?.name || null }];
@@ -614,12 +619,20 @@ export function unitComposition(band) {
   const bodies = cs.reduce((a, c) => a + c.n, 0);
   const families = {};
   for (const c of cs) if (c.n > 0) for (const d of c.does) families[d] = (families[d] || 0) + c.n;
+  // ⛔ CCODE-409 — "the legion will have a combination of the things a band is built from. Wards skills etc." Kinds, wards and crafts
+  // are unioned exactly as families are, and a LEGION reads its parts' through `resolvedUnit` like everything else — so a legion of a
+  // shieldwall band and an archer band reports both kinds and every ward either brings, without a line of legion-specific code.
+  const kinds = {};
+  for (const c of cs) if (c.n > 0 && c.kind) kinds[c.kind] = (kinds[c.kind] || 0) + c.n;
   return {
     bodies,
     withSkills: skilled.reduce((a, c) => a + c.n, 0),
     simpleSoldiers: bodies - skilled.reduce((a, c) => a + c.n, 0),
     families,
     named: cs.filter(c => c.n === 1 && c.what).map(c => c.what),
+    kinds,
+    wards: [...new Set(cs.filter(c => c.n > 0).flatMap(c => c.wards || []))],
+    crafts: [...new Set(cs.filter(c => c.n > 0).flatMap(c => c.crafts || []))],
   };
 }
 
@@ -650,7 +663,12 @@ export function addContingent(band, spec = {}) {
   const n = npcId ? 1 : Math.max(0, Math.round(num(spec.n, 0)));
   if (!n) return { ok: false, why: "nobody to add" };
   const quality = Math.max(1, Math.round(num(spec.quality, 1)));
-  const does = [...new Set((Array.isArray(spec.does) ? spec.does : ["HARM", "MARTIAL"]).map(String).filter(Boolean))];
+  const wards = [...new Set((Array.isArray(spec.wards) ? spec.wards : []).map(String).filter(Boolean))];
+  const crafts = [...new Set((Array.isArray(spec.crafts) ? spec.crafts : []).map(String).filter(Boolean))];
+  // ⛔ CCODE-409 — A WARD IS PROTECTION, so a contingent that brings one PROTECTS: that is the whole mechanical meaning a ward has at
+  // this scale, and it is what lifts `bandGaps`' unwarded 1.4× off a formation. ⚠️ Written into `does` explicitly rather than inferred
+  // by every reader, so the stored contingent says what it does and no reader has to remember to look at `wards` as well.
+  const does = [...new Set([...(Array.isArray(spec.does) ? spec.does : ["HARM", "MARTIAL"]).map(String), ...(wards.length ? ["PROTECT"] : [])].filter(Boolean))];
   if (!does.length) return { ok: false, why: "nothing they do" };
   // ⛔ THE IMPLICIT CONTINGENT IS MADE REAL FIRST — see the note above.
   if (!Array.isArray(band.contingents) || !band.contingents.length) {
@@ -660,13 +678,36 @@ export function addContingent(band, spec = {}) {
   }
   if (npcId && band.contingents.some(c => c && c.npcId === npcId)) return { ok: false, why: "they already stand in it" };
   const c = { n, quality, does, ...(spec.what ? { what: String(spec.what).slice(0, 80) } : {}),
-    ...(npcId ? { npcId } : {}), ...(spec.from ? { from: String(spec.from) } : {}) };
+    ...(npcId ? { npcId } : {}), ...(spec.from ? { from: String(spec.from) } : {}),
+    ...(spec.kind ? { kind: String(spec.kind).trim().slice(0, 32) } : {}),
+    ...(wards.length ? { wards } : {}), ...(crafts.length ? { crafts } : {}) };
   band.contingents = [...band.contingents, c];
   // ⚠️ `count` IS THE STORED COPY OF A DERIVED VALUE, and `unitsOf` already prefers the derived head for exactly that reason. It is
   // kept in step here anyway, because `raiseBand` wrote it and an authored band may still carry it — a stale one would be read by
   // anything that has not been moved over yet.
   band.count = band.contingents.reduce((a, x) => a + Math.max(0, num(x?.n, 0)), 0);
   return { ok: true, band, contingent: c };
+}
+
+/** ⛔ CCODE-409 (Erik: "cavalry and archers... that type of thing... a dragon") — SAY WHAT A CONTINGENT IS. A kind is a LABEL over the
+ *  parts, on his choice of the two shapes offered: `kind: "archers"` is bookkeeping, and everything mechanical comes from the families,
+ *  wards and crafts it carries. So "archers" is HARM at reach because their crafts reach, and "cavalry" is MOVE and HARM because they
+ *  carry both — never because of the word. ⚠️ Nothing here can make a contingent bigger or better: `n`, `quality`, `npcId` and `from`
+ *  are not editable, because relabelling hands is a description and resizing them would be conjuring. Pure over the band. */
+export function editContingent(band, index, patch = {}) {
+  if (!band || !Array.isArray(band.contingents)) return { ok: false, why: "no such unit" };
+  const i = Math.round(num(index, -1));
+  const cur = band.contingents[i];
+  if (!cur) return { ok: false, why: "no such contingent" };
+  const next = { ...cur };
+  if ("kind" in patch) { const k = String(patch.kind || "").trim().slice(0, 32); if (k) next.kind = k; else delete next.kind; }
+  if (Array.isArray(patch.wards)) { const w = [...new Set(patch.wards.map(String).filter(Boolean))]; if (w.length) next.wards = w; else delete next.wards; }
+  if (Array.isArray(patch.crafts)) { const k = [...new Set(patch.crafts.map(String).filter(Boolean))]; if (k.length) next.crafts = k; else delete next.crafts; }
+  if (Array.isArray(patch.does)) next.does = [...new Set(patch.does.map(String).filter(Boolean))];
+  if ((next.wards || []).length && !next.does.includes("PROTECT")) next.does = [...next.does, "PROTECT"];   // a ward is protection
+  if (!next.does.length) return { ok: false, why: "they have to do something" };
+  band.contingents = band.contingents.map((c, j) => (j === i ? next : c));
+  return { ok: true, band, contingent: next };
 }
 
 /** ⛔ HOW MANY ANONYMOUS HEADS IN THIS UNIT WERE RAISED AT THAT PLACE. The bound on mustering is the place's own authored capacity, so

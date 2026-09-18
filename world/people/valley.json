@@ -73,7 +73,7 @@
         "diedDay": 76,
         "bodyStatus": "intact",
         "sealed": false,
-        "depthOverride": null,
+        "depthOverride": 2,
         "cause": "killed by The Deep Lantern, Who Walks Where Light Won't"
       },
       "atWorldDay": 76,
@@ -119,6 +119,17 @@
       "woundedUntilDay": 87,
       "woundedBy": "the_unbodied_choir_master",
       "atWorldDay": 79,
+      "fateBy": {
+        "characterId": "char-mrum8y4d",
+        "name": "Loki"
+      }
+    },
+    "the_deep_lantern": {
+      "status": "stopped",
+      "sinceWorldDay": 80,
+      "stoppedUntilDay": 83,
+      "stoppedBy": "maren_ossitide",
+      "atWorldDay": 80,
       "fateBy": {
         "characterId": "char-mrum8y4d",
         "name": "Loki"

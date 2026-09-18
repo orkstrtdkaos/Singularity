@@ -16,6 +16,9 @@ import { smartClamp, namesMatch } from "./namematch.js"; // SNG-245: word-bounda
 export const PRESSURE_KINDS = ["villain-move", "npc-want", "arc-stir", "treasure-rumor", "threat-attack", "invitation"];
 export const PRESSURE_CAP = 6; // registry:internal — the queue never hoards; keep only the most-urgent handful
 
+// ⛔ CCODE-410: one spelling of "the same quest", shared by the producer and by the reader that asks whether it is still owed.
+const questKey = (id) => String(id ?? "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "").slice(0, 40);
+
 /** Ensure the queue array exists on a worldState (lazy — old saves predate it). Returns the array. */
 export function ensurePressureQueue(ws) {
   if (ws && !Array.isArray(ws.pressureQueue)) ws.pressureQueue = [];
@@ -38,13 +41,27 @@ export function enqueuePressure(queue, entry) {
 
 /** Pull the highest-urgency entry that STILL APPLIES (removes it, and prunes any stale entries in passing).
  *  `stillApplies(entry)` lets the caller drop location-bound entries the player has walked away from — a threat
- *  that was coming to a holding you've since left is moot. Returns the entry, or null when nothing applies. */
-export function pullTopPressure(queue, stillApplies = () => true) {
+ *  that was coming to a holding you've since left is moot. Returns the entry, or null when nothing applies.
+ *  ⛔ CCODE-410: `leave(entry)` names entries this pull neither TAKES nor PRUNES. An invitation is said through its own door
+ *  (`nextInvitation`, read by the GM call, then `invitationSaid`), and the quiet-turn push must never spend one. */
+export function pullTopPressure(queue, stillApplies = () => true, leave = () => false) {
   if (!Array.isArray(queue) || !queue.length) return null;
-  for (let i = queue.length - 1; i >= 0; i--) { if (!stillApplies(queue[i])) queue.splice(i, 1); }
+  for (let i = queue.length - 1; i >= 0; i--) { if (!leave(queue[i]) && !stillApplies(queue[i])) queue.splice(i, 1); }
   if (!queue.length) return null;
   queue.sort((a, b) => (b.urgency || 0) - (a.urgency || 0));
-  return queue.shift();
+  const at = queue.findIndex(e => !leave(e));
+  return at < 0 ? null : queue.splice(at, 1)[0];
+}
+
+/** ⛔ CCODE-410 — DOES A QUEUED ENTRY STILL APPLY where the character stands now? One rule for every reader of the queue. A
+ *  location-bound entry applies only where it was aimed (SNG-245: a threat coming to a place you have left is moot); and while
+ *  threats are PAUSED for this character (Erik, of Courtney's game: "remove the swarm attack for now"), no threat-attack does —
+ *  so a queued one cannot fire, and the pull prunes it. A person's want is not a threat and is untouched. Pure. */
+export function pressureApplies(e, character) {
+  if (!e) return false;
+  if (e.locationId && e.locationId !== character?.currentLocationId) return false;
+  if (e.kind === "threat-attack" && character?.worldState?.threatsPaused) return false;
+  return true;
 }
 
 // ---------- Producer: NPC unmet want (SNG-233) — a bonded NPC, long unseen, comes TO the player ----------
@@ -100,7 +117,7 @@ export function npcWantPressures({ npcs = [], wantFor = () => null, bandOf = () 
 export function invitationPressures({ quests = [], character = null, nowDay = 0, nameOf = () => null, delivered = () => false } = {}) {
   const out = [];
   if (!character) return out;
-  const key = (id) => String(id ?? "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "").slice(0, 40);
+  const key = questKey;
   const held = new Set((character.quests || []).map(q => key(q?.id)));
   for (const def of quests || []) {
     if (!def?.id || !def.giver) continue;
@@ -116,6 +133,35 @@ export function invitationPressures({ quests = [], character = null, nowDay = 0,
     });
   }
   return out;
+}
+
+/** ⛔ CCODE-410 (Erik, of Courtney's Adelheid: "ship it") — THE INVITATION WAITING FOR THIS CHARACTER, IF ONE IS, READ BY THE GM CALL.
+ *  ⚑ Measured on her save: Sister Vreni's invitation sat first in the queue from day 2 and never arrived. The quiet-turn push it
+ *  waited on needs three quiet beats IN A ROW; her GM filed a quest update on 19 of 22 beats and each one resets the count; and the
+ *  count is not saved, so every reload started it over.
+ *  Returns the first invitation that still applies WITHOUT removing it — it leaves the queue through `invitationSaid`, once a beat
+ *  that carried it has come back. ⚠️ Prunes in passing an invitation whose quest the character has since taken up from the log, or
+ *  one already said: neither is owed. Mutates only the queue. */
+export function nextInvitation(queue, character, stillApplies = () => true) {
+  if (!Array.isArray(queue)) return null;
+  const held = new Set((character?.quests || []).map(q => questKey(q?.id)));
+  const said = character?.worldState?.invitationsDelivered || {};
+  for (let i = queue.length - 1; i >= 0; i--) {
+    const e = queue[i];
+    if (e?.kind === "invitation" && (held.has(questKey(e.subjectId)) || Object.prototype.hasOwnProperty.call(said, e.subjectId))) queue.splice(i, 1);
+  }
+  return queue.find(e => e?.kind === "invitation" && stillApplies(e)) || null;
+}
+
+/** ⛔ CCODE-410 — THE BEAT THAT CARRIED IT CAME BACK: now it has been said, once. Out of the queue and onto `invitationsDelivered`,
+ *  which the producer reads, so nobody knocks again. ⚠️ Called only after a GM call returned — never when the directive is merely
+ *  SET, which is how CCODE-357's first version could lose one to a closed tab or a failed call. The day is recorded as a truthy
+ *  value even when it is 0, because the producer asks `!!delivered[id]` (a default that behaves like a value). */
+export function invitationSaid(ws, subjectId, day = null) {
+  if (!ws || !subjectId) return;
+  const q = ensurePressureQueue(ws);
+  for (let i = q.length - 1; i >= 0; i--) if (q[i]?.kind === "invitation" && q[i].subjectId === subjectId) q.splice(i, 1);
+  ws.invitationsDelivered = { ...(ws.invitationsDelivered || {}), [subjectId]: Number(day) > 0 ? Number(day) : true };
 }
 
 // ---------- Producer: threat-attack — a REAL beast/threat comes to the player, becomes a defend-encounter ----------

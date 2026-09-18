@@ -10,7 +10,7 @@ node scripts/apparatus.mjs --md     # …as markdown for §5
 node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 ```
 
-**Last measured: 2026-09-18 · v2.0.72 · 108 files.**
+**Last measured: 2026-09-18 · v2.0.73 · 108 files.**
 
 ---
 
@@ -134,7 +134,7 @@ worthless.
 | harness | kind | assertions | purpose |
 |---|---|---|---|
 | `tests/smoke` | ✅ GATE | 3570 | — |
-| `tests/how_it_works` | ✅ GATE | 3025 | CCODE-285 |
+| `tests/how_it_works` | ✅ GATE | 3040 | CCODE-285 |
 | `tests/skill_battle_sim` | ✅ GATE | 217 | SNG-098: the two-sided contest + fog-of-war invariant |
 | `tests/content_ci` | ✅ GATE | 193 | SNG-BATCH-10 Phase 4 / SNG-040/064: the content integrity gate |
 | `tests/craft_crit` | ✅ GATE | 43 | miss // it and YOU HAVE ONLY MADE CHAOS |
@@ -205,6 +205,7 @@ worthless.
 | `scripts/apply_promotion_SNG-396` | 🔧 TOOL | — | applies Aevi's two ratifications, and ONLY what they say |
 | `scripts/atlas_inject` | 🔧 TOOL | — | regenerate the §13 table inside docs/FIELD_REFERENCE |
 | `scripts/audit_images` | 🔧 TOOL | — | — |
+| `scripts/authoring` | 🔧 TOOL | — | HOW TO WRITE ONE OF THESE, READ OFF THE CORPUS RATHER THAN REMEMBERED |
 | `scripts/authoring_checks` | 🔧 TOOL | — | THE AUTHORING RULES FOUR REGISTERED FILES CARRY, AS FUNCTIONS |
 | `scripts/axis_worklist` | 🔧 TOOL | — | THE GAIN-AXIS WORKLIST |
 | `scripts/backfill_answered_crises` | 🔧 TOOL | — | CCODE-354: put the endings that already happened on the shared record |

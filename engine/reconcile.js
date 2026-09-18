@@ -87,6 +87,23 @@ function renameTargets(spec, entry, character, known) {
 
 export const CHARACTER_STEPS = [
   {
+    version: 65, id: "a-calmer-valley-for-adelheid", playerFacing: false,
+    // ⛔ CCODE-410 — ERIK, OF COURTNEY'S GAME: "remove the swarm attack for now." ⚑ Her queue held a glimmerling swarm, rolled at a
+    // store in a game set to calm pacing, right behind Sister Vreni's invitation. ⚠️ SCOPED TO HER CHARACTER BY ID: it is his decision
+    // about one player's game, not a rule for anyone else's.
+    // ⚠️ A PAUSE, NOT A DELETION, and additive like every step here: `threatsPaused` stops the producer (which re-rolls on every
+    // refresh, so removing the one swarm would have lasted until the next roll) and makes a queued threat stop applying, so the next
+    // pull prunes it. Lifting it is removing the field. ⛑ A reconcile step rather than an edit to her file, because an edit to a save
+    // somebody is playing races their open tab and the lower revision loses; this runs in HER tab, on her next load. Silent: nobody is
+    // told that a beast was taken off their road.
+    apply: (c) => {
+      if (String(c?.id) !== "char-mr5ns3hh") return {};
+      const ws = c.worldState || (c.worldState = {});
+      if (!ws.threatsPaused) ws.threatsPaused = { by: "erik", why: "Courtney's game, for now" };
+      return {};
+    }
+  },
+  {
     version: 64, id: "an-arc-name-is-a-name", playerFacing: false,
     // ⛔ SNG-587 O3 (Aevi, from reading Brook's save) — THE SAVES WRITTEN BEFORE THE GUARD. `bio.hometown` holds a free-text answer to
     // "where are you from", `titleize` ran over the lot, and an arc title came out 356 characters long containing `Isn'T`. The engine

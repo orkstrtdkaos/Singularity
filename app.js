@@ -128,8 +128,8 @@ import { noteCoUseAndRefresh, refreshEvolvingItems, evolvedItemsForGM, currentSt
 import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarrativeKind, canIncapacitate, resolvePacing, beatHours, deriveDangerLevel, eligibleEncountersFor, generatedCreatureEncounters, synthesizeDuelDef, synthesizeChallengeDef, synthesizeStandoffDef, synthesizePuzzleDef } from "./engine/random_encounters.js"; // SNG-225: mint/backfill a real dangerLevel so the encounter pool isn't starved; SNG-231: eligibleEncountersFor = the offerable pool the GM can invite
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "./engine/recurrence.js";
-import { isEventfulTurn, pressureTier, pressureDirective, drivenPressureDirective, roomForAnOffer, roomForATeacherOffer } from "./engine/pacing.js";
-import { ensurePressureQueue, enqueuePressure, pullTopPressure, npcWantPressures, threatAttackPressure, invitationPressures } from "./engine/pressure.js"; // SNG-245: the pressure queue — the world DRIVES
+import { isEventfulTurn, pressureTier, pressureDirective, drivenPressureDirective, roomForAnOffer, roomForATeacherOffer, tenderIntent, roomForAnInvitation, invitationDirective } from "./engine/pacing.js";
+import { ensurePressureQueue, enqueuePressure, pullTopPressure, npcWantPressures, threatAttackPressure, invitationPressures, pressureApplies, nextInvitation, invitationSaid } from "./engine/pressure.js"; // SNG-245: the pressure queue — the world DRIVES
 import { lethalOfferClamp, isLethalEncounter, sanitizeNewEncounter, encounterArrival, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps, contestSheetFor as engineContestSheetFor, withKind } from "./engine/encounters.js";
 // ⛔ CCODE-227 (Erik backlog 7, step 1): conditions.js was built, gated, shipped — and imported by NOTHING.
 // Six exports reachable only from smoke.mjs. A rest cleared nothing because the module that decides what a
@@ -167,7 +167,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.72";
+const APP_VERSION = "2.0.73";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7003,7 +7003,17 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
     const bandLine = bandKey ? ` GRANT STRENGTH AT THIS BAND (${bandKey}): ${bands[bandKey].reads_like}${bands[bandKey].example ? ` Example: ${bands[bandKey].example}` : ""}` : "";
     return `The player has just done real WORK upon "${it.customName || it.name}" — an item they are carrying — in their own words. This is an evolution beat, and it is the thing that has been silently failing: you MUST emit \`itemUpdates\` for it THIS TURN, not next time. Update its description to what it has become${it.customName ? "" : ", and give it a truer name if it has earned one"}, say what it now LOOKS like (\`imagePrompt\`) if its appearance changed, and — if the fiction genuinely earned power (a rune actually bound, a craft actually completed) — state that power EXPLICITLY as \`grants\`, each naming what it does and what it explicitly cannot do. ${budget.canEvolve ? `This item can take on new power today; the engine will clamp it to what is reasonable at ${ceiling.band} and refuse anything past ${ceiling.maxGrants} grants.` : `This item has already taken on all the power it can hold today — evolve its PROSE and its name, but grant no new mechanics this beat.`}${splitLine}${bandLine}`;
   })();
-  const worldPressureDetail = pendingPressure; pendingPressure = null; // SNG-080: a quiet-turn push
+  const pushed = pendingPressure; pendingPressure = null; // SNG-080: a quiet-turn push
+  // ⛔ CCODE-410 (Erik, of Courtney's Adelheid: "ship it") — AN INVITATION MEANT FOR THIS CHARACTER RIDES THE NEXT BEAT THAT HAS ROOM,
+  // and is counted SAID only when that beat comes back (below, after `result.ok`). ⚑ Sister Vreni's had waited since day 2 on the
+  // quiet-turn push, which her GM's quest updates reset on 19 of 22 beats; and the old line marked it delivered the moment it was SET,
+  // so a reload or a failed call on the next beat would have lost it for good. Room is the hard floor only (pacing.roomForAnInvitation).
+  const invitation410 = roomForAnInvitation({
+    encounterActive: !!activeEnc(), gambitOpen: !!gambitDraft, intentPending: !!character._pendingIntent,
+    framing: !!(encounterWeaveDetail || encounterOfferDetail || fightFramingDetail), reveal: !!stageRevealDetail, worldActing: !!pushed,
+    intense: !!sceneState?.intense, intimate: !!sceneState?.intimate, tender: tenderIntent(resolution)
+  }) ? nextInvitation(ensurePressureQueue(character.worldState), character, e => pressureApplies(e, character)) : null;
+  const worldPressureDetail = pushed || (invitation410 ? invitationDirective(invitation410.oneLineHook) : null) || null;
   const substrateDetail = pendingSubstrateNote; pendingSubstrateNote = null; // SNG-090: lattice thin/crowded here
   // SNG-194 §4b: the ENGINE decides whether an unprompted OFFER has room this beat — the model never
   // judges "gap vs grip." A grip (encounter/gambit/intent) or the world already pushing pressure is no
@@ -7082,6 +7092,8 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   const result = await gmTurn(turnCtx354, { tier });
   busy = false;
   if (!result.ok) { renderPlay(null, { error: result.error }); return null; }
+  // ⛔ CCODE-410: the beat that carried the invitation came back — NOW it has been said, once, and leaves the queue.
+  if (invitation410) { try { invitationSaid(character.worldState, invitation410.subjectId, readClock(character.clock).day); } catch { /* bookkeeping never blocks a beat */ } }
   // ⛔ CCODE-354: a beat on which "the world moved on" actually REACHED the GM is a beat counted — three, then it rests.
   if (turnCtx354.worldMovedOnDetail) { try { noteWorldMovedOnShown(character); } catch { /* a count, never a blocker */ } }
   // SNG-009: track op loss so the next turn's GM restates missed updates
@@ -9834,7 +9846,7 @@ function maybeNarrativeEncounter(turn, resolution) {
   const spacing = pace.cooldown + (sceneEncounterFired ? 2 : 0);
   if (turnsSinceEncounter <= spacing) return;
   const intentTags = resolution?.action?.intentTags || resolution?.intentTags || [];
-  if (intentTags.some(t => /intimate|climax|grief|vigil|mourn/.test(String(t).toLowerCase()))) return;
+  if (tenderIntent(resolution)) return;   // SNG-245's floor, read in one place (CCODE-410)
   // SNG-127 (Q2): an UNDECLARED beat (GM omits timeOps → 0h, yet the clock ticked +1h) is floored to
   // minHoursPerBeat so it still counts as "time passing" — otherwise classify returns "none" and the
   // whole narrative path never fires. A declared short beat keeps its real (quiet) hours.
@@ -9929,7 +9941,10 @@ function runPressureProducers() {
   // rarely troubled and a dangerous one often is.
   const loc = hereNow();
   const pool = (() => { try { return eligibleEncountersFor(encounterTable(), loc, { cap: 8 }); } catch { return []; } })();
-  const threat = threatAttackPressure({ pool, danger: Number(loc?.dangerLevel) || 0, hereId: here, nowDay, pacingMult, rng: Math.random });
+  // ⛔ CCODE-410 (Erik: "remove the swarm attack for now") — A PAUSE, NOT A DELETION. This producer re-rolls on every refresh, so
+  // removing one swarm would have lasted until the next roll. `threatsPaused` is set for one character by a reconcile step (v65).
+  const threat = character.worldState?.threatsPaused ? null
+    : threatAttackPressure({ pool, danger: Number(loc?.dangerLevel) || 0, hereId: here, nowDay, pacingMult, rng: Math.random });
   if (threat) enqueuePressure(queue, threat);
 
   // Producer C — ⛔ CCODE-357: an INVITATION. A quest bound to this character brings its giver to the door, once.
@@ -9956,14 +9971,15 @@ function maybeWorldPressure(turn, resolution) {
   // SNG-245 guard — the tender-moment floor the SNG-080 path never had: a driven push obeys the same "never break
   // an intimate/intense beat" rule the encounter path (SNG-075) does. Activity is not harassment.
   if (sceneState?.intense || sceneState?.intimate) return;
-  const intentTags = resolution?.action?.intentTags || resolution?.intentTags || [];
-  if (intentTags.some(t => /intimate|climax|grief|vigil|mourn/.test(String(t).toLowerCase()))) return;
+  if (tenderIntent(resolution)) return;
   quietTurns++;
   const tier = pressureTier(quietTurns, pressureStreak);
   if (tier <= 0) return;
   const loc = hereNow();
   // SNG-245: pull a DRIVEN entry aimed at where the player stands (drop a threat aimed at a place they've left).
-  const entry = pullTopPressure(ensurePressureQueue(character.worldState), e => !e.locationId || e.locationId === character.currentLocationId);
+  // ⛔ CCODE-410: the same `pressureApplies` rule every reader uses (a paused threat no longer applies, so it is pruned here), and
+  // invitations are LEFT for the GM call, which says them once a beat carrying one comes back.
+  const entry = pullTopPressure(ensurePressureQueue(character.worldState), e => pressureApplies(e, character), e => e.kind === "invitation");
   if (entry) {
     if (entry.becomes?.type === "encounter" && entry.becomes.encounterId) {
       // TEETH: route the threat through the SNG-236 hard-frame — a framed choice carrying this encounterId, so
@@ -9972,8 +9988,7 @@ function maybeWorldPressure(turn, resolution) {
     } else {
       pendingPressure = drivenPressureDirective(entry.oneLineHook); // a driven scene beat (the NPC arrives, the want reaches out)
     }
-    // ⛔ CCODE-357: an invitation is said ONCE — the quest stays in the log, but nobody knocks again.
-    if (entry.kind === "invitation") { character.worldState.invitationsDelivered = { ...(character.worldState.invitationsDelivered || {}), [entry.subjectId]: readClock(character.clock).day }; }
+    // ⛔ CCODE-357's "said ONCE" now lives with the GM call (CCODE-410) — this pull leaves invitations, so none comes out here.
     console.log(`[pressure] the world DRIVES: ${entry.kind} → ${entry.subjectId} (urgency ${entry.urgency})`);
     pressureStreak++; quietTurns = 0;
     return;

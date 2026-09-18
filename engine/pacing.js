@@ -4,7 +4,8 @@
 // place (a farming village gets a frightened neighbour, not a bandit ambush). Pure + headless-testable;
 // the GM narrates the pressure the engine decides to apply (Law 1).
 
-export const QUIET_THRESHOLD = 3; // registry:internal
+export const QUIET_THRESHOLD = 3;
+ // registry:internal
 
 /** A turn is "eventful" (it resets the quiet counter) when the world already acted this beat: an
  *  encounter is live or was just woven, a quest changed, a scene ended, or pressure was applied. */
@@ -52,6 +53,32 @@ export function drivenPressureDirective(oneLineHook) {
   const hook = String(oneLineHook || "").trim();
   if (!hook) return "";
   return `The scene has gone quiet, and the world MOVES — not with a random something, but with a specific thing that has been building toward the character. Weave it into the fiction now, never as a system announcement: ${hook} Let it land as a real beat with stakes the character must engage — a knock at the door, not a rumor of one.`;
+}
+
+/** SNG-245's floor, read in ONE place — a beat whose intent is tender (intimacy, a climax, grief, a vigil, mourning) is never broken
+ *  by the world arriving. Read by the quiet-turn push and by the invitation (CCODE-410). Pure. */
+export function tenderIntent(resolution) {
+  const tags = resolution?.action?.intentTags || resolution?.intentTags || [];
+  return tags.some(t => /intimate|climax|grief|vigil|mourn/.test(String(t).toLowerCase()));
+}
+
+/** ⛔ CCODE-410 (Erik, of Courtney's Adelheid: "i want to make sure she gets the quest for the monastery and healing house") — THE
+ *  ENGINE DECIDES WHETHER AN INVITATION HAS ROOM THIS BEAT, and only the hard floor refuses it: a fight on, an encounter or a fight
+ *  being framed this beat, a plan being drawn, an intent question waiting, an earned reveal to pay out, the world already pushing
+ *  this beat, or a tender, intense or intimate moment.
+ *  ⚠️ NOT "the world already acted this beat". That is SNG-080's reset for a generic push, and a quest update counts as the world
+ *  acting — ⚑ her GM filed one on 19 of her 22 beats, so an invitation waiting on three quiet beats in a row was never going to come.
+ *  An invitation is rare, bound to one character and said once; a quest moving is no reason for it to wait. Pure. */
+export function roomForAnInvitation({ encounterActive = false, gambitOpen = false, intentPending = false, framing = false, reveal = false, worldActing = false, intense = false, intimate = false, tender = false } = {}) {
+  return !(encounterActive || gambitOpen || intentPending || framing || reveal || worldActing || intense || intimate || tender);
+}
+
+/** ⛔ CCODE-410 — the GM directive for an invitation. NOT `drivenPressureDirective`, which opens "The scene has gone quiet": an
+ *  invitation now arrives on a busy beat too, and a claim to the narrator about why must be true. Pure. */
+export function invitationDirective(oneLineHook) {
+  const hook = String(oneLineHook || "").trim();
+  if (!hook) return "";
+  return `Someone has come for the character, this beat: ${hook} Bring them into the scene IN PERSON — a knock at the door, not a rumour of one — woven into whatever is already happening rather than replacing it, and leave the answer to the player.`;
 }
 
 // SNG-194: pressure PUSHES to fill dead air; an OFFER enriches a live beat — a gift, a person who simply

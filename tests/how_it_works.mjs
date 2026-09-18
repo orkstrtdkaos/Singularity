@@ -17945,9 +17945,11 @@ console.log("\n── §249 · an invitation comes to the door, and a painting i
   check("§249: …and the queue takes it, and pulls it like any other driven arrival",
     q249.length === 1 && PR249.pullTopPressure(q249)?.kind === "invitation" && q249.length === 0);
   const APP249 = rd("app.js").replace(/\r\n/g, "\n");
-  check("§249: ⛔ the game produces it on the tick and marks it DELIVERED the moment it fires, so nobody knocks again",
+  // ⛔ CCODE-410 MOVED WHEN it is recorded: once the beat that carried it came back, not the moment the directive was set — a reload
+  // or a failed call in between lost it for good. The rule this check holds is unchanged: produced on the tick, said once (§291).
+  check("§249: ⛔ the game produces it on the tick and records it SAID through one door, so nobody knocks again",
     /for \(const inv of invitationPressures\(\{ quests: CONTENT\.quests \|\| \[\], character, nowDay,/.test(APP249)
-    && /if \(entry\.kind === "invitation"\) \{ character\.worldState\.invitationsDelivered = /.test(APP249));
+    && /invitationSaid\(character\.worldState, /.test(APP249));
 
   /* ---- 2 · ⛔ A PICTURE SHE MADE IS IN HER MEDIUM ---- */
   const water249 = ART249.imageURLFor("moment", "a garden at dusk", "seed-249", { medium: "watercolor" });
@@ -21103,6 +21105,107 @@ console.log("\n── §290 · cavalry, archers, a dragon ──");
     /const UNIT_KIND_SUGGESTIONS = \{/.test(A290)
     && (A290.match(/UNIT_KIND_SUGGESTIONS/g) || []).length <= 3
     && !/melee\.js[\s\S]{0,40}UNIT_KIND_SUGGESTIONS/.test(A290));
+}
+
+// ══════════ §291 · CCODE-410 — AN INVITATION RIDES THE NEXT BEAT WITH ROOM; ONE PLAYER'S BEASTS ARE PAUSED ══════════
+// Erik, of Courtney's Adelheid: "i want to make sure she gets the quest for the monastery and healing house. did we still need to close
+// that loop?" — and on hearing it had never arrived: "ship it and remove the swarm attack for now."
+// ⚑ Sister Vreni's invitation had sat first in her queue since day 2. It waited on SNG-080's push, which needs three quiet beats IN A
+// ROW; her GM filed a quest update on 19 of her 22 beats, each one a reset; and the count is not saved, so a reload started it over.
+console.log("\n── §291 · an invitation rides the next beat with room and is said once the GM has it; one player's beasts are paused ──");
+{
+  const PR291 = await import("../engine/pressure.js");
+  const PC291 = await import("../engine/pacing.js");
+  const RC291 = await import("../engine/reconcile.js");
+  const A291 = rd("app.js").replace(/\r\n/g, "\n");
+  const inv291 = () => ({ source: "invitation", kind: "invitation", subjectId: "the_mending_house", urgency: 3, addedDay: 2,
+    oneLineHook: "Sister Wren has come looking for Adelheid with an invitation: the hill house needs a healer's hands.",
+    becomes: { type: "scene", who: "sister_wren" } });
+  const swarm291 = () => ({ source: "threat-attack", kind: "threat-attack", subjectId: "beast_glimmerling_swarm", urgency: 4, addedDay: 2,
+    locationId: "the-store", becomes: { type: "encounter", encounterId: "beast_glimmerling_swarm", name: "glimmerling swarm" } });
+  const her291 = (over = {}) => ({ id: "c-adel", name: "Adelheid", currentLocationId: "the-store", quests: [], worldState: {}, ...over });
+
+  /* ---- 1 · ⛔ FOUND WITHOUT BEING SPENT ---- */
+  const q1 = [swarm291(), inv291()];
+  const found1 = PR291.nextInvitation(q1, her291(), e => PR291.pressureApplies(e, her291()));
+  check("§291: ⛔ the waiting invitation is FOUND whatever stands above it in the queue — and NOT spent by being found: it leaves only when a beat that carried it comes back",
+    found1?.subjectId === "the_mending_house" && q1.length === 2, JSON.stringify(found1));
+
+  /* ---- 2 · ⛔ SAID ONCE, AND NEVER MADE AGAIN ---- */
+  const ws2 = { pressureQueue: [swarm291(), inv291()] };
+  PR291.invitationSaid(ws2, "the_mending_house", 0);
+  const again2 = PR291.invitationPressures({ quests: [{ id: "the_mending_house", giver: "sister_wren", boundToCharacter: "Adelheid", premise: "The hill house needs a healer." }],
+    character: her291(), nameOf: () => "Sister Wren", delivered: (id) => !!(ws2.invitationsDelivered || {})[id] });
+  check("§291: ⛔ once SAID it leaves the queue and goes on the record the producer reads, so nobody knocks twice — and a day-0 record is not a falsy nothing (a default that behaves like a value)",
+    ws2.pressureQueue.length === 1 && ws2.pressureQueue[0].kind === "threat-attack" && !!ws2.invitationsDelivered.the_mending_house && again2.length === 0,
+    JSON.stringify(ws2.invitationsDelivered));
+
+  /* ---- 3 · ⚠️ NOT OWED ANY MORE ---- */
+  const q3 = [inv291()], q3b = [inv291()];
+  const took3 = PR291.nextInvitation(q3, her291({ quests: [{ id: "the-mending-house" }] }));
+  const said3 = PR291.nextInvitation(q3b, her291({ worldState: { invitationsDelivered: { the_mending_house: 4 } } }));
+  check("§291: ⚠️ one she took up from the log meanwhile, or one already said, is not owed: nothing is found, and the stale entry is pruned",
+    took3 === null && q3.length === 0 && said3 === null && q3b.length === 0);
+
+  /* ---- 4 · ⛔ THE QUIET-TURN PUSH LEAVES IT ALONE ---- */
+  const q4 = [inv291(), { kind: "npc-want", subjectId: "pell", urgency: 2 }];
+  const pulled4 = PR291.pullTopPressure(q4, () => false, e => e.kind === "invitation");
+  const q4b = [{ kind: "npc-want", subjectId: "a", urgency: 1 }, { kind: "npc-want", subjectId: "b", urgency: 3 }];
+  check("§291: ⛔ the quiet-turn push LEAVES an invitation — neither takes it nor prunes it, even under a predicate that refuses everything — and without the new argument it pulls exactly as before",
+    pulled4 === null && q4.length === 1 && q4[0].kind === "invitation" && PR291.pullTopPressure(q4b)?.subjectId === "b" && q4b.length === 1);
+
+  /* ---- 5 · ⛔ ROOM IS THE HARD FLOOR ONLY ---- */
+  const R5 = PC291.roomForAnInvitation;
+  check("§291: ⛔ ROOM IS THE HARD FLOOR ONLY — a fight, a framing, a plan, an intent question, an earned reveal, the world already pushing, or a tender, intense or intimate beat each refuse it; an ordinary beat has room, and a quest having moved is not an input at all",
+    R5({}) === true && R5({ questChanged: true, sceneEnded: true }) === true
+    && ["encounterActive", "gambitOpen", "intentPending", "framing", "reveal", "worldActing", "intense", "intimate", "tender"].every(k => R5({ [k]: true }) === false));
+  check("§291: …and a tender intent is read in ONE place — the quiet-turn push, the encounter roll and the invitation alike",
+    PC291.tenderIntent({ action: { intentTags: ["Grief"] } }) === true && PC291.tenderIntent({ intentTags: ["vigil"] }) === true
+    && PC291.tenderIntent({ action: { intentTags: ["trade"] } }) === false && PC291.tenderIntent(null) === false
+    && (A291.match(/if \(tenderIntent\(resolution\)\) return;/g) || []).length >= 2 && !/intimate\|climax\|grief\|vigil\|mourn/.test(A291));
+
+  /* ---- 6 · ⚠️ THE DIRECTIVE MAKES NO FALSE CLAIM ---- */
+  const d6 = PC291.invitationDirective(inv291().oneLineHook);
+  check("§291: ⚠️ the invitation's directive names who has come and does NOT tell the GM the scene has gone quiet — it arrives on busy beats now, and neither it nor the slot's header may claim otherwise",
+    /Sister Wren has come looking for Adelheid/.test(d6) && !/quiet/i.test(d6) && !/quiet too long/.test(rd("engine/gm.js")) && PC291.invitationDirective("  ") === "",
+    d6.slice(0, 120));
+
+  /* ---- 7 · ⛔ IN PLAY: IT RIDES THE CALL, AND IS SAID AFTER THE CALL CAME BACK ---- */
+  const at7 = A291.indexOf("async function runGM(");
+  const run7 = A291.slice(at7, at7 + 60000);
+  const i7 = { room: run7.indexOf("roomForAnInvitation("), next: run7.indexOf("nextInvitation("), ok: run7.indexOf("if (!result.ok)"), said: run7.indexOf("invitationSaid(") };
+  check("§291: ⛔ IN PLAY the GM call asks for room, THEN finds the invitation, and records it said only AFTER the call came back ok — a reload, a closed tab or a failed call leaves it owed, where the old line spent it the moment it was set",
+    at7 > 0 && i7.room > 0 && i7.next > i7.room && i7.ok > i7.next && i7.said > i7.ok, JSON.stringify(i7));
+  check("§291: …and the quiet-turn pull reads the same `pressureApplies` rule and leaves invitations to the call — no second place marks one delivered",
+    /pullTopPressure\([^;]*pressureApplies\(e, character\)[^;]*e\.kind === "invitation"/.test(A291)
+    && !/invitationsDelivered = \{/.test(A291));
+
+  /* ---- 8 · ⛔ THE PAUSE HOLDS AT BOTH ENDS ---- */
+  const paused8 = her291({ worldState: { threatsPaused: { by: "erik" } } });
+  check("§291: ⛔ A PAUSE HOLDS AT BOTH ENDS — a queued threat stops applying (so the pull prunes it) while a person's want still applies, a threat aimed elsewhere still does not, and the producer that re-rolls on every refresh makes none",
+    PR291.pressureApplies(swarm291(), paused8) === false && PR291.pressureApplies(swarm291(), her291()) === true
+    && PR291.pressureApplies({ kind: "npc-want", subjectId: "pell" }, paused8) === true
+    && PR291.pressureApplies({ ...swarm291(), locationId: "elsewhere" }, her291()) === false
+    && /threatsPaused \? null\s*:\s*threatAttackPressure\(/.test(A291));
+
+  /* ---- 9 · ⛔ HER SAVE, THROUGH THE RUNNER ---- */
+  const real9 = JSON.parse(rd("characters/player-54seyk/char-mr5ns3hh.json"));
+  const step9 = RC291.CHARACTER_STEPS.find(s => s.id === "a-calmer-valley-for-adelheid");
+  check("§291: ⛔ the step is OWED to her save — its version is above the reconcileVersion her committed save carries, or her save already carries the pause (proving `apply` on a copy is not proving the gate)",
+    !!step9 && (step9.version > (Number(real9.reconcileVersion) || 0) || !!real9.worldState?.threatsPaused),
+    `step ${step9?.version} · her save at ${real9.reconcileVersion}`);
+  const copy9 = JSON.parse(JSON.stringify(real9)); copy9.reconcileVersion = step9.version - 1;
+  const queued9 = (copy9.worldState?.pressureQueue || []).length;
+  RC291.reconcile(copy9, "character", {}, RC291.CHARACTER_STEPS.filter(s => s.version === step9.version));
+  const loki9 = JSON.parse(rd("characters/player-s9z9u1/char-mrum8y4d.json")); loki9.reconcileVersion = step9.version - 1;
+  RC291.reconcile(loki9, "character", {}, RC291.CHARACTER_STEPS.filter(s => s.version === step9.version));
+  check("§291: ⛔ THROUGH THE RUNNER, on a copy of HER real save: the pause is set by Erik, the version is stamped, and nothing is removed (additive, like every step) — while another player's character is left without it",
+    copy9.worldState?.threatsPaused?.by === "erik" && copy9.reconcileVersion === step9.version && (copy9.worldState?.pressureQueue || []).length === queued9
+    && !loki9.worldState?.threatsPaused && step9.playerFacing === false,
+    JSON.stringify({ paused: copy9.worldState?.threatsPaused, rv: copy9.reconcileVersion, queued9, loki: !!loki9.worldState?.threatsPaused }));
+  const pulled9 = PR291.pullTopPressure([swarm291(), { kind: "npc-want", subjectId: "vreni", urgency: 1 }], e => PR291.pressureApplies(e, { ...copy9, currentLocationId: "the-store" }));
+  check("§291: …and with the pause set, her swarm can no longer come out of the queue: the pull prunes it and hands on what remains",
+    pulled9?.kind === "npc-want", JSON.stringify(pulled9));
 }
 
 /* ══════════ REPORT ══════════ */

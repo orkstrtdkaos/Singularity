@@ -46,18 +46,30 @@
  "loreRefs": [],
  "encounterFlavor": "",
  "questSeeds": [],
- "poleIntensity": {},
- "spectrum": {},
+ "poleIntensity": {
+  "peace": 0.7,
+  "order": 0.9,
+  "life": 0.2,
+  "spiritual": -0.6,
+  "concrete": 0.9
+ },
+ "spectrum": {
+  "violence_peace": 0.7,
+  "chaos_order": 0.9,
+  "death_life": 0.2,
+  "mechanical_spiritual": -0.6,
+  "concrete_abstract": -0.9
+ },
  "axisVector": [
   0,
   0,
   0,
+  0.7,
+  -0.9,
+  -0.6,
+  0.9,
   0,
-  0,
-  0,
-  0,
-  0,
-  0,
+  0.2,
   0,
   0,
   0
@@ -73,5 +85,6 @@
  "worldPosNote": "inherited from the_crossing — SNG-396: a room is at its building's coordinates",
  "worldPosInherited": true,
  "provenance": "SNG-396 — authored in play, promoted from the saves. ⚠️ Its sibling gen-hub-north-gate-district-street is the street outside it; both are Crossing interior.",
- "appearance": "A small office of dark panelled wood, walls lined floor to ceiling with ledger boxes. A heavy desk, a single tall window with small panes, a lamp, and stacked papers weighted with stones."
+ "appearance": "A small office of dark panelled wood, walls lined floor to ceiling with ledger boxes. A heavy desk, a single tall window with small panes, a lamp, and stacked papers weighted with stones.",
+ "_spectrumWhy": "⛑ SNG-622 — the last two with an empty spectrum, both player-minted at the Hub. ⚠️ Ossian's office is where Edvar Crane's files went — Warden Coll names it, 'the Deep Registry, Ossian annex, two streets north, green shutter' — so it is a record-keeping room and reads ordered and concrete. The street outside it is an ordinary busy street, which is a real answer and not a shrug."
 }

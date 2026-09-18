@@ -43,18 +43,30 @@
  "loreRefs": [],
  "encounterFlavor": "",
  "questSeeds": [],
- "poleIntensity": {},
- "spectrum": {},
+ "poleIntensity": {
+  "peace": 0.5,
+  "order": 0.8,
+  "life": 0.2,
+  "spiritual": -0.6,
+  "concrete": 0.7
+ },
+ "spectrum": {
+  "violence_peace": 0.5,
+  "chaos_order": 0.8,
+  "death_life": 0.2,
+  "mechanical_spiritual": -0.6,
+  "concrete_abstract": -0.7
+ },
  "axisVector": [
   0,
   0,
   0,
+  0.5,
+  -0.7,
+  -0.6,
+  0.8,
   0,
-  0,
-  0,
-  0,
-  0,
-  0,
+  0.2,
   0,
   0,
   0
@@ -71,5 +83,6 @@
  "worldPosNote": "inherited from the_crossing — SNG-396: a room is at its building's coordinates",
  "worldPosInherited": true,
  "provenance": "SNG-396 — authored in play, promoted from the saves. The 27th waygate and the FIRST BUILT — 'cut at the Crossing by a wright who tends endings'. Needs waygate:true, a tier, a lore line, and a place in the network. ⚠️ SNG-148 established the gates as INHERITED infrastructure. A player has broken that and the canon does not know. ⛔ SNG-148 established the waygate network as INHERITED infrastructure; this is the first gate BUILT, cut at the Crossing by a wright who tends endings. A player broke that premise and the canon now records it.",
- "appearance": "A cut stone archway standing alone on open ground at a river crossing, freshly worked, its edges still sharp. The opening holds a still dark plane that does not reflect. Tool marks are visible on the jambs."
+ "appearance": "A cut stone archway standing alone on open ground at a river crossing, freshly worked, its edges still sharp. The opening holds a still dark plane that does not reflect. Tool marks are visible on the jambs.",
+ "_spectrumWhy": "⛑ SNG-622 — CCode, reading `coverage.mjs`: '`poleIntensity` is missing on `the_crossing` and on `gen-the-made-gate`. Those are not obscure — the Crossing is the hub, and Erik walks Loki through the Made Gate. The substrate reads that field, so those two places answer differently from their neighbours for a reason nobody chose.' ⛔ AND THE SPECTRUM WAS EMPTY TOO, WHICH IS WHY: `poleIntensity` is derived from it. ⚠️ AUTHORED FROM WHAT EACH PLACE ALREADY SAYS IT IS, and the Crossing's own line makes it nearly unmissable — 'every axis crosses here at NOTHING, and the result is not grey, it is CROWDED. The Crossing leans toward no pole, which is precisely why it can hold them all.' **A place whose whole character is leaning toward no pole should read at or near zero on every axis, and that is a chosen answer rather than an absent one.** ⛑ ORDERED, CONCRETE AND MECHANICAL — 'the first waygate MADE rather than reached-for, cut by a wright who tends endings.' ⚠️ It is proof that a gate can be MADE, which is an argument about order over reaching, so it reads high on chaos_order and hard toward the concrete and the mechanical."
 }

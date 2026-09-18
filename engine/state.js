@@ -269,7 +269,7 @@ export async function loadContent() {
   // its own misses; only the base `rules` is fatal, as before). Load them as ONE wave instead of ~12
   // serial round-trips. rankProgression comments retained on the consumers below.
   const [rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks,
-         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, titlesRule, arcResponseRule, encountersRule, coliseumGrid, economyRule, chargesRule, threatRule, incapRule, tiesRule, questStructureRule, martialRule, ladderRule, mintedNamesRule, newsTemplatesRule, firstGiftTemplate, damageFamilies, abilityRenameMap, combinationRecipes, powerBandsRule] = await Promise.all([
+         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, titlesRule, arcResponseRule, encountersRule, coliseumGrid, economyRule, chargesRule, threatRule, incapRule, tiesRule, questStructureRule, martialRule, ladderRule, mintedNamesRule, newsTemplatesRule, firstGiftTemplate, damageFamilies, abilityRenameMap, combinationRecipes, powerBandsRule, martialDialsRule] = await Promise.all([
     fetchJSON(resPath),
     loadRule("emergence", { recipes: [], branchTemplates: [] }),
     loadRule("attribute_gates", { gates: {} }),
@@ -342,6 +342,12 @@ export async function loadContent() {
     // one and `incapRule` silently received the bands. That is the exact failure the comments above describe
     // and the one this file already lost `economy` to. The name and the call are at the same index or neither.
     loadRule("power_bands", null),
+    // ⛔ SNG-623 — DIRECTLY AFTER `power_bands`, BECAUSE THIS ARRAY IS POSITIONAL AND ITS SLOT IS THE NEXT ONE.
+    // I got this wrong twice: first beside `martial_paths`, which shifted every rule after it by one and took
+    // `powerBands` and `tierRarity` false in the same run; then at the tail of a DIFFERENT Promise.all, where
+    // it was simply never destructured. The file's own note says "in THIS array, beside the name that receives
+    // it" — and the name that receives it is the one after `powerBandsRule`.
+    loadRule("martial", null),
   ]);
   // SNG-101b: the native-grant table merges INTO the rules bag so nativeGrantIdsFor reads it directly.
   // SNG-271/1a — THE XP TABLE. `resolution.json` already carried an inline `encounters` block, so duels,
@@ -416,6 +422,7 @@ export async function loadContent() {
   if (tiesRule) rules.ties = tiesRule;   // SNG-328   // SNG-323   // SNG-322: the threat ladder   // SNG-316: the charge-condition vocabulary
   if (questStructureRule) rules.questStructure = questStructureRule;   // SNG-341b
   if (martialRule) rules.martialPaths = martialRule;   // SNG-345
+  if (martialDialsRule) rules.martial = martialDialsRule;   // SNG-623 — the band dials, distinct from the build structure above
   // SNG-356 — THE AUTHORED SUB-ATTRIBUTE LADDER, and it RETIRES `attributeSoftCap` into content.
   // Erik: "specify what each point up to 20 gets you so we can better control the impact and the player
   // can see it exactly." ⚠️ SNG-342'"'"'s lesson applies exactly here — this file was REGISTERED in the

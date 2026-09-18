@@ -17,17 +17,23 @@
   0,
   0,
   0,
+  0.1,
+  0.0,
+  0.0,
+  -0.1,
   0,
-  0,
-  0,
-  0,
-  0,
-  0,
+  0.1,
   0,
   0,
   0
  ],
- "spectrum": {},
+ "spectrum": {
+  "violence_peace": 0.1,
+  "chaos_order": -0.1,
+  "death_life": 0.1,
+  "mechanical_spiritual": 0.0,
+  "concrete_abstract": 0.0
+ },
  "tags": [
   "center",
   "cosmopolitan",
@@ -73,7 +79,13 @@
   "x": 340,
   "y": 290
  },
- "poleIntensity": {},
+ "poleIntensity": {
+  "peace": 0.1,
+  "order": -0.1,
+  "life": 0.1,
+  "spiritual": 0.0,
+  "concrete": 0.0
+ },
  "startingLocation": true,
  "waygate": true,
  "waygateHub": true,
@@ -86,5 +98,6 @@
  "worldPosNote": "The pole itself. Every axis crosses here and none of them dominates — colatitude 0 by definition. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)",
  "tier": "region",
  "parentId": null,
- "appearance": "A dense crossroads city where nothing matches — grown wood beside dressed stone beside riveted plate, roofs at every height, stairs and bridges linking upper floors. Crowded streets, hanging signs in many scripts, no single style anywhere."
+ "appearance": "A dense crossroads city where nothing matches — grown wood beside dressed stone beside riveted plate, roofs at every height, stairs and bridges linking upper floors. Crowded streets, hanging signs in many scripts, no single style anywhere.",
+ "_spectrumWhy": "⛑ SNG-622 — CCode, reading `coverage.mjs`: '`poleIntensity` is missing on `the_crossing` and on `gen-the-made-gate`. Those are not obscure — the Crossing is the hub, and Erik walks Loki through the Made Gate. The substrate reads that field, so those two places answer differently from their neighbours for a reason nobody chose.' ⛔ AND THE SPECTRUM WAS EMPTY TOO, WHICH IS WHY: `poleIntensity` is derived from it. ⚠️ AUTHORED FROM WHAT EACH PLACE ALREADY SAYS IT IS, and the Crossing's own line makes it nearly unmissable — 'every axis crosses here at NOTHING, and the result is not grey, it is CROWDED. The Crossing leans toward no pole, which is precisely why it can hold them all.' **A place whose whole character is leaning toward no pole should read at or near zero on every axis, and that is a chosen answer rather than an absent one.** ⛑ NEAR ZERO ON EVERY AXIS, DELIBERATELY. Not an absent value — the authored answer. The tiny offsets keep it from reading as unsurveyed: it leans a hair toward peace and life because people live there and drink at the same table, and a hair toward chaos because nothing matches."
 }

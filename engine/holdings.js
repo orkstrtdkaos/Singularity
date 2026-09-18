@@ -22,7 +22,7 @@
 import { debit, credit } from "./purse.js";        // Q8: upkeep leaves the purse, a sold store enters it · Q5-B: settling pays
 import { contributionsOf } from "./combatants.js";   // SNG-541c / Erik: a defender is what they can DO, not one more body
 import { regionDemand } from "./economy.js";       // Q8: a unit is worth what THIS Reach wants it for
-import { sheetFor as personSheetFor, tierOf as tierOfLevel } from "./npcsheet.js";   // Q18 → v2 §1: the keeper's tier sets the FLOOR
+import { sheetFor as personSheetFor, tierOf as tierOfLevel, personRecordFor } from "./npcsheet.js";   // Q18 → v2 §1: the keeper's tier sets the FLOOR
 import { locationDensity } from "./substrate.js";   // Q18: the ground scales an enterprise's yield
 import { legionClash, contingentsFromPeople } from "./melee.js";
 import { isMoored } from "./carriage.js";   // ⛔ SPEC_mobile_holdings §4: moored is raidable, moving is not   // R46a: a detected raid is a FIGHT, resolved unattended
@@ -818,8 +818,11 @@ export function reclaimHolding(character, id, { day = null, worldCount = null, n
 export function keeperTierOf(character, holding, { npcs = {}, npcCfg = {}, day = null } = {}) {
   const id = holding?.steward;
   if (!id) return null;
-  const rec = character?.npcRegistry?.[id] || npcs?.[id] || null;
-  if (!rec) return null;
+  const found = character?.npcRegistry?.[id] || npcs?.[id] || null;
+  if (!found) return null;
+  // ⛔ CCODE-411 — THE KEEPER IS THE WHOLE PERSON, as the fight's opponent now is: the registry copy alone carries no authored rung,
+  // so a hold kept by someone the player had met was floored as though a lesser person kept it.
+  const rec = personRecordFor(found, { npcs });
   try { const sheet = personSheetFor(rec, { day, cfg: npcCfg }); return tierOfLevel(sheet.level, { cfg: npcCfg }) || rec.tier || null; }
   catch { return rec.tier || null; }
 }

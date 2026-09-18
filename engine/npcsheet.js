@@ -456,6 +456,29 @@ export function authoredFor(entry, { npcs = null } = {}) {
   return hit;
 }
 
+/** ⛔ CCODE-411 (Erik: "Yes, fix it now") — THE PERSON, FOR ANYTHING THAT HAS TO ACT AS THEM. A registry entry is what the player
+ *  knows of someone: the name they use, the bond, whether they live, how long they have known them. The authored record is who that
+ *  someone IS: the rung, the kit, the domains, a declared refusal to fight. A fight built from the registry entry alone fought a
+ *  thinner copy — ⚑ measured on Silas's save, Pell Ran Marsh came to a fight at level 13 with 13 lines against level 35 with 64 on her
+ *  whole record, Calvar at 7 with 1 against 24 with 29, Mara Wells at 7 against 16. Meeting someone halved them, and nothing said so.
+ *  ⛑ Authored underneath, and the registry's NON-EMPTY fields on top: everything the player's own history says still wins, and an
+ *  empty field never blanks an authored one. The rung follows SNG-572's rule — the record's own where it has one, the authored one
+ *  where it is silent. The join is `authoredFor`'s, so its refusal of an ambiguous one-word name holds here too: two claimants, and
+ *  the entry comes back exactly as it was. PURE. */
+export function personRecordFor(entry, { npcs = null } = {}) {
+  if (!entry) return null;
+  const authored = authoredFor(entry, { npcs });
+  if (!authored || authored === entry) return entry;
+  const live = {};
+  for (const [k, v] of Object.entries(entry)) {
+    if (v == null || v === "") continue;
+    if (Array.isArray(v) && !v.length) continue;
+    if (typeof v === "object" && !Array.isArray(v) && !Object.keys(v).length) continue;
+    live[k] = v;
+  }
+  return { ...authored, ...live, tier: entry.tier || authored.tier || undefined, id: entry.id || authored.id };
+}
+
 export function sheetFor(entry, { day = null, cfg = {}, roleAttributes = null, authored = null, levelOverride = null } = {}) {
   if (authored) return { ...authored, id: entry?.id || authored.id, authored: true };
   // ⛔ SNG-486 — see sheetFrom: a record carrying its own sub-attributes IS an authored sheet.

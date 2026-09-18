@@ -21208,6 +21208,94 @@ console.log("\n── §291 · an invitation rides the next beat with room and i
     pulled9?.kind === "npc-want", JSON.stringify(pulled9));
 }
 
+// ══════════ §292 · CCODE-411 — SOMEONE YOU HAVE MET FIGHTS AS THEMSELVES ══════════
+// Erik, asked whether to fix it now: "Yes, fix it now." ⚑ The fight's lookup preferred the registry entry — what the player knows of
+// someone — and that entry carries neither the authored rung nor the kit. Pell Ran Marsh came to a fight at level 13 with 13 lines
+// against 35 and 64 on her whole record; Halvex Coil, on Loki's save, at 28 with one line against 63 and 59. The roster and a hold's
+// keeper had the same fault by a second route: they found the authored figure by the registry's id alone, and Halvex is filed there
+// as `churn-revel-orchestrator`.
+console.log("\n── §292 · someone you have met fights as themselves — one person at the fight, the roster and the hold ──");
+{
+  const NS292 = await import("../engine/npcsheet.js");
+  const BT292 = await import("../engine/battle_turn.js");
+  const F292 = await import("../engine/fellowship.js");
+  const H292 = await import("../engine/holdings.js");
+  const { loadContentHeadless: lch292 } = await import("./headless_content.mjs");
+  const C292 = await lch292();
+
+  /* ---- 1 · ⛔ THE RULE, ON RECORDS MADE FOR THE PURPOSE ---- */
+  const npcs1 = { hale_the_elder: { id: "hale_the_elder", name: "Hale the Elder", tier: "heroic", abilities: ["a", "b"], domains: { primary: "x" }, role: "elder" } };
+  const met1 = { id: "old-hale", name: "Hale the Elder", relationship: 3, status: "active", abilities: [], domains: {}, role: "", statusNote: null };
+  const p1 = NS292.personRecordFor(met1, { npcs: npcs1 });
+  check("§292: ⛔ AUTHORED UNDERNEATH, THE REGISTRY ON TOP — the kit, the domains and the rung come from who they are; the name, the bond, the status and the id from what the player knows; and an EMPTY registry field never blanks an authored one",
+    p1.abilities.length === 2 && p1.domains.primary === "x" && p1.role === "elder" && p1.tier === "heroic"
+    && p1.relationship === 3 && p1.status === "active" && p1.id === "old-hale" && p1.name === "Hale the Elder",
+    JSON.stringify(p1));
+  const own1 = NS292.personRecordFor({ ...met1, tier: "notable" }, { npcs: npcs1 });
+  const branch1 = { id: "branch-1", name: "Branch", abilities: [] };
+  const twoBranches = { b1: { id: "b1", name: "Branch", tier: "epic", abilities: ["z"] }, b2: { id: "b2", name: "Branch", tier: "heroic", abilities: ["y"] } };
+  const nobody1 = { id: "a-stranger", name: "Someone Else Entirely" };
+  check("§292: …the rung is the record's own where it has one (SNG-572's rule); an ambiguous one-word name joins NOBODY and comes back exactly as it was; and a person no author wrote is untouched",
+    own1.tier === "notable" && NS292.personRecordFor(branch1, { npcs: twoBranches }) === branch1
+    && NS292.personRecordFor(nobody1, { npcs: npcs1 }) === nobody1 && NS292.personRecordFor(null, { npcs: npcs1 }) === null);
+
+  /* ---- 2 · ⛔ AN AUTHORED REFUSAL NOW REACHES THE FIGHT ---- */
+  const refuser = { watcher_x: { id: "watcher_x", name: "The Quiet Watcher", canOppose: false, tier: "legendary", abilities: ["a"] } };
+  const pc2 = { id: "pc-2", name: "Tester", level: 5, npcRegistry: { "quiet-watcher": { id: "quiet-watcher", name: "The Quiet Watcher", relationship: 1 } } };
+  const refused2 = BT292.duelFromTarget(pc2, { id: "quiet-watcher" }, { npcs: refuser, catalog: C292.abilities, cfg: C292.rules?.npcStanding || {} });
+  check("§292: ⛔ a figure whose AUTHORED record declares they do not fight is refused even when the player met them — the registry copy never carried the declaration, so a fight could be built against them — and nothing is left half-written on the character",
+    refused2 === null && !pc2.activeEncounter && !Object.keys(pc2.customEncounters || {}).length);
+
+  /* ---- 3 · ⛔ ON EVERY REAL SAVE, THROUGH THE PRODUCTION CALL ---- */
+  const ts3 = (v) => typeof v === "number" ? v : (Date.parse(v) || 0);
+  const best3 = new Map();
+  for (const dir of readdirSync(join(root, "characters"))) for (const f of readdirSync(join(root, "characters", dir))) {
+    if (!f.endsWith(".json")) continue;
+    const c = JSON.parse(rd(`characters/${dir}/${f}`));
+    if (String(c.id).includes("devtest")) continue;
+    const had = best3.get(c.id);
+    if (!had || ts3(c.updatedAt) > ts3(had.updatedAt)) best3.set(c.id, c);
+  }
+  const day3 = 80, cfg3 = C292.rules?.npcStanding || {};
+  const opts3 = { catalog: C292.abilities, npcs: C292.npcs, cfg: cfg3, items: C292.items, leveling: C292.rules?.leveling || null, day: day3, sb: C292.skillBattle?.engine, traditionIndex: C292.traditionIndex };
+  let n3 = 0, agree3 = 0, never3 = 0, fuller3 = 0; const off3 = [];
+  for (const c of best3.values()) {
+    for (const [id, entry] of Object.entries(c.npcRegistry || {})) {
+      if (!NS292.authoredFor(entry, { npcs: C292.npcs })) continue;
+      if ((c.companions || []).some(x => String(x?.id || x) === id)) continue;   // a travelling companion stands at the PC's level on the roster, by rule
+      const duel = BT292.duelFromTarget(JSON.parse(JSON.stringify(c)), { id }, opts3);
+      if (!duel) continue;
+      n3++;
+      const roster = F292.levelOfPerson(c, id, { content: C292, worldDay: day3 });
+      if (duel.def.opponent.level === roster) agree3++; else off3.push(`${c.name}: ${entry.name} fights at ${duel.def.opponent.level}, roster ${roster}`);
+      const thin = BT292.personOpponentFor({ ...entry, id }, opts3);
+      const lines = (duel.def.opponent.skills || []).length, thinLines = (thin?.skills || []).length;
+      if (lines >= thinLines) never3++;
+      if (lines > thinLines) fuller3++;
+    }
+  }
+  check("§292: ⛔ ONE PERSON, ONE LEVEL — on every real save, everyone the player has met who is an authored figure comes to a fight at exactly the level the roster gives them (the measured population, not an example)",
+    n3 >= 10 && agree3 === n3, `${agree3} of ${n3} agree${off3.length ? " — " + off3.slice(0, 4).join("; ") : ""}`);
+  check("§292: …and the merge only ever ADDS: nobody fights with fewer lines than the registry copy alone gave them, and most fight with more",
+    n3 >= 10 && never3 === n3 && fuller3 * 2 > n3, `${fuller3} of ${n3} fuller, ${n3 - never3} thinner`);
+
+  /* ---- 4 · ⛔ AND THE HOLD'S KEEPER IS THE SAME PERSON ---- */
+  let k4 = 0, kAgree4 = 0; const kOff4 = [];
+  for (const c of best3.values()) {
+    for (const h of (c.holdings || [])) {
+      if (!h.steward || (c.companions || []).some(x => String(x?.id || x) === h.steward)) continue;
+      const found = c.npcRegistry?.[h.steward] || C292.npcs?.[h.steward] || null;
+      if (!found) continue;
+      k4++;
+      const tier = H292.keeperTierOf(c, h, { npcs: C292.npcs, npcCfg: cfg3, day: day3 });
+      const want = NS292.tierOf(F292.levelOfPerson(c, h.steward, { content: C292, worldDay: day3 }), { cfg: cfg3 });
+      if (!want || tier === want) kAgree4++; else kOff4.push(`${h.name}: keeper ${tier}, roster ${want}`);
+    }
+  }
+  check("§292: ⛔ a hold's keeper is floored at the tier of the level the roster gives the same person — the keeper read the registry copy too, and priced Pell's two holds a rung below her",
+    k4 >= 3 && kAgree4 === k4, `${kAgree4} of ${k4}${kOff4.length ? " — " + kOff4.join("; ") : ""}`);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

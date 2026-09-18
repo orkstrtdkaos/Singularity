@@ -36,7 +36,7 @@ import { protectionFromCraft, tickProtections } from "./intercept.js";
 import { authoredBlock } from "./craftmechanics.js";
 import { smartClamp } from "./namematch.js";
 import { slugify } from "./quests.js";
-import { sheetFor as personSheetFor, battleSkillsFor } from "./npcsheet.js";
+import { sheetFor as personSheetFor, battleSkillsFor, personRecordFor } from "./npcsheet.js";
 import { sovereignFormFor, sovereignFormLine } from "./sovereign.js";   // R41: one record, two forms, chosen by arc stage
 import { incapacitationOutcome, playerDeathState } from "./incapacitation.js";
 import { enterDeathState } from "./death.js";
@@ -279,9 +279,14 @@ export function personOpponentFor(rec, { catalog = {}, cfg = {}, day = null, tra
  *  Returns { def, oppSheet, state } and writes `character.customEncounters[def.id]` and `character.activeEncounter`. */
 export function duelFromTarget(character, target, { catalog = {}, npcs = {}, cfg = {}, day = null, sb = null, here = null, lethal = false, threat = null, traditionIndex = null, stageOf = null, items = null, leveling = null } = {}) {
   const id = target?.id || target?.npcId || null, name = target?.name || null;
-  const rec = (id && (character?.npcRegistry?.[id] || npcs?.[id]))
+  const found = (id && (character?.npcRegistry?.[id] || npcs?.[id]))
     || (name && (Object.values(character?.npcRegistry || {}).find(n => n?.name === name) || Object.values(npcs || {}).find(n => n?.name === name)))
     || null;
+  // ⛔ CCODE-411 — THE WHOLE PERSON, NOT THE REGISTRY'S NOTE OF THEM. The lookup prefers the registry entry (it is what the player
+  // knows), and that entry carries neither the authored rung nor the kit, so everyone the player had MET came to a fight as a thinner
+  // copy of themselves. `personRecordFor` puts the authored record back underneath. ⚠️ And an authored refusal to fight now reaches
+  // the check below, which the registry copy never carried.
+  const rec = found ? personRecordFor(found, { npcs }) : null;
   // ⛔ AND THE REFUSAL IS HONOURED HERE TOO, WHICH IS WHERE IT WAS MISSING. `personOpponentFor` refused a
   // declared non-opponent and this function then built the fight anyway out of a threat number — measured:
   // Akinetos, "appears? No, and its absence is the content", entered play at threat 36 with 5 health.

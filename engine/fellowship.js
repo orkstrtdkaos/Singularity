@@ -21,7 +21,7 @@ import { contingentsOf, bandCan, bandStrength, resolvedUnit, legionParts, leader
 import { unitCarriedSubstrate } from "./substrate.js";   // CCODE-408: what it carries that moves the ground
 import { activeCompany } from "./company.js";
 import { companyPlaces } from "./ladder.js";
-import { derivedLevel } from "./npcsheet.js";
+import { derivedLevel, authoredFor } from "./npcsheet.js";
 import { walkingDays, bearingBetween } from "./worldmap.js";
 
 const num = (v, d = null) => (Number.isFinite(Number(v)) ? Number(v) : d);
@@ -77,7 +77,10 @@ export function levelOfPerson(character, id, { content = {}, worldDay = null, cf
   const entry = character?.npcRegistry?.[id] || npcs[id] || character?.generated?.npc?.[id] || null;
   if (!entry) return 0;
   const sheetCfg = cfg || content?.rules?.npcStanding || content?.rules?.resolution?.npcStanding || {};
-  return num(derivedLevel(entry, { day: worldDay, cfg: sheetCfg, authored: npcs[id] || null }), 0) || 0;
+  // ⛔ CCODE-411 — THE AUTHORED FIGURE IS FOUND THE WAY THE FIGHT FINDS IT, by `authoredFor`, not by the registry's id alone. ⚑ Halvex
+  // Coil is filed on Loki's save as `churn-revel-orchestrator`, and Fendt on Usnea's as `fendt-filtration-engineer`: `npcs[id]` found
+  // no authored record for either, so the roster priced them from the registry copy while the fight priced the man.
+  return num(derivedLevel(entry, { day: worldDay, cfg: sheetCfg, authored: authoredFor(entry, { npcs }) || npcs[id] || null }), 0) || 0;
 }
 
 export function unitsOf(character, { cfg = null, content = null, worldDay = null } = {}) {

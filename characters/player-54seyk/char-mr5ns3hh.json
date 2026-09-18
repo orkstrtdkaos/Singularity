@@ -442,7 +442,11 @@
       "pronouns": "she/her",
       "met": 20,
       "sex": "female",
-      "age": 47
+      "age": 47,
+      "domains": {
+        "primary": "mason"
+      },
+      "domainsSource": "derived"
     },
     "piotr": {
       "id": "piotr",
@@ -493,7 +497,11 @@
       "pronouns": "he/him",
       "met": 9,
       "sex": "male",
-      "age": 54
+      "age": 54,
+      "domains": {
+        "primary": "mason"
+      },
+      "domainsSource": "derived"
     },
     "edvar-crane": {
       "id": "edvar-crane",
@@ -538,7 +546,11 @@
         "day": 2
       },
       "met": 4,
-      "statusNote": "At the mill, exhausted and sharp, speaking with less glass and more weight after the name Silas Weir was spoken"
+      "statusNote": "At the mill, exhausted and sharp, speaking with less glass and more weight after the name Silas Weir was spoken",
+      "domains": {
+        "primary": "mason"
+      },
+      "domainsSource": "derived"
     },
     "sister-vreni": {
       "id": "sister-vreni",
@@ -581,7 +593,11 @@
         "locationId": "millbrook",
         "day": 2
       },
-      "met": 8
+      "met": 8,
+      "domains": {
+        "primary": "mason"
+      },
+      "domainsSource": "derived"
     }
   },
   "placeMemory": {
@@ -906,8 +922,8 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-09-18T16:04:36.992Z",
-    "lastGenCount": 1936,
+    "lastSharedReadAt": "2026-09-18T20:13:22.229Z",
+    "lastGenCount": 1940,
     "newsSpread": {},
     "arcStages": {
       "arc_what_wakes_beneath": {
@@ -4595,7 +4611,10 @@
         "createdDay": 1,
         "updatedDay": 2,
         "aliases": [],
-        "entityId": "mara-wells"
+        "entityId": "mara-wells",
+        "summary": "Mara Wells manages civic order in Millbrook and spotted Adelheid's Medic's Satchel and Harmonic stitching immediately, suggesting she was already searching for someone useful. She has tracked the uncatalogued east-terrace plants for two seasons and granted Adelheid permission to observe and take cuttings. When asked directly where the Precursor system's south-southeast path leads, she named the question as one that keeps her awake and admitted uncertainty rather than refusing to answer. Her true errand involves a choice: whether Adelheid finds Silas Weir before the Harmonics act on him or reports him to the lodge—a weight she has been holding as the real work, understanding either path…",
+        "summarisedAt": 8,
+        "summaryDay": 2
       },
       "valley-plants": {
         "id": "valley-plants",
@@ -4728,7 +4747,6 @@
         "label": "The Precursor Layer",
         "kind": "lore",
         "facts": [
-          "[d2] A Precursor-origin work—possibly ancient—remains active beneath the Wet Meadows and the terrace-field. It is still functioning and humming at a frequency that matches the uncatalogued plants. Purpose unknown. Connected to the Echo River contamination.",
           "[d2] The Precursor-origin work beneath Millbrook is not a sealed relic or dormant archive—it is still active, still conscious, and still following some directive. Direct contact causes violent backlash and forces clarity. Aevi's response suggests it is specifically waking, which may be connected to the…",
           "[d2] Direct contact with an active Precursor system triggers violent backlash and FORCES CLARITY. The system beneath Millbrook is not a sealed relic or dormant archive—it is still active, still conscious, and still following some directive. Adelheid's attempt to meditate into resonance with it caused…",
           "[d2] The Precursor system beneath Millbrook is not inert or dormant—it is actively conscious, still waking, and responds to direct contact with violent backlash and forced awareness. Aevi had to shield-flare to break Adelheid's involuntary connection. The system is moving south-southeast toward the…",
@@ -4748,7 +4766,13 @@
         ],
         "aliases": [],
         "createdDay": 2,
-        "updatedDay": 2
+        "updatedDay": 2,
+        "summary": "A Precursor reclamation system lies active beneath Millbrook and the surrounding terraces, running continuously south-southeast toward the sluice-turn—not newly waking but executing an ongoing directive that may involve preparing ground for use. Direct contact with it triggers violent backlash and forced clarity; Aevi identified it as a reclamation system and notes the question is not what woke it but what it will do when execution completes. The system's pulse runs beneath the sluice-road itself, maintaining steady signal confirmed by Echo Sense through stone, with reach extending further than surface plant-expressions suggest. Its connection to the Echo River contamination and the…",
+        "summarisedAt": 8,
+        "summaryDay": 2,
+        "archive": [
+          "[d2] A Precursor-origin work—possibly ancient—remains active beneath the Wet Meadows and the terrace-field. It is still functioning and humming at a frequency that matches the uncatalogued plants. Purpose unknown. Connected to the Echo River contamination."
+        ]
       },
       "gen-mara-wells-store": {
         "id": "gen-mara-wells-store",
@@ -5145,9 +5169,9 @@
   "holdings": [],
   "bands": [],
   "_silasGrantsRevoked": true,
-  "reconcileVersion": 65,
-  "updatedAt": 1789749908602,
-  "rev": 57,
+  "reconcileVersion": 66,
+  "updatedAt": 1789762409038,
+  "rev": 60,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -5215,14 +5239,14 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 30,
-    "choices": 30,
+    "sceneSummary": 29,
+    "choices": 29,
     "questUpdates": 20,
-    "scene": 30,
-    "npcUpdates": 26,
-    "placeUpdates": 10,
-    "codexUpdates": 23,
-    "timeOps": 24,
+    "scene": 29,
+    "npcUpdates": 25,
+    "placeUpdates": 9,
+    "codexUpdates": 22,
+    "timeOps": 23,
     "imagePrompt": 8,
     "gambitApt": 21,
     "sceneEnded": 25,
@@ -5235,7 +5259,7 @@
     "moveTo": 3,
     "_engineClosedScene": 1
   },
-  "_opTurns": 30,
+  "_opTurns": 29,
   "_opCountingSince": "2026-09-15T23:58:48.348Z",
   "gallery": [
     {

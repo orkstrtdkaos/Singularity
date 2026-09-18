@@ -4156,7 +4156,11 @@ await (async () => {
 
   // raw-source + real content
   const appSrc = readFileSync(join(root, "app.js"), "utf8");
-  check("SNG-140: app.js flags an action wildVariance from a wild_current ability", /wildVariance: \[choice\.abilityId[\s\S]{0,140}powerSystem === "wild_current"/.test(appSrc));
+  // ⛔ CCODE-415: the flag moved into `choiceCritTerms`, the one answer the roll and every preview of it ask — the rule is unchanged:
+  // a wild_current craft in the cast flags the action, and the roll path takes the flag from there.
+  check("SNG-140: app.js flags an action wildVariance from a wild_current ability",
+    /function choiceCritTerms\(choice\)[\s\S]{0,400}wildVariance: ids\.some\([\s\S]{0,140}powerSystem === "wild_current"/.test(appSrc)
+    && /\.\.\.choiceCritTerms\(choice\),/.test(appSrc));
   const resJson = JSON.parse(readFileSync(join(root, "content/packs/core/rules/resolution.json"), "utf8"));
   check("SNG-140: the wild.critWiden knob is authored + upside-forward", (resJson.wild?.critSuccessWiden || 0) > (resJson.wild?.critFailWiden || 0));
   const wcPack = JSON.parse(readFileSync(join(root, "content/packs/core/abilities/wild_current.json"), "utf8"));

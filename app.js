@@ -5,7 +5,7 @@ import { grantMartialKit } from "./engine/martial.js";
 import { loadRecovery, recoveryKeys, loadContent, loreForLocation, eventsForGM, getPlayerKey, listPlayers, listCharacters, saveCharacter as persistCharacter, loadCharacter, deleteCharacter, saveProfile, loadProfile, exportSave, importSave, adoptRemoteCharacter, preserveRecovery, findProfileByName, choosePlayer, charactersForPlayer, repairOwnership, lastPlayerKey, resolveLocationId, canTravelBetween, locationRefToString, isCoercedObjectName } from "./engine/state.js";
 import { mergeRecovery, mergeReceiptLine } from "./engine/recovery.js";   // the door to the snapshots the sync kept and nobody could reach
 import { resolveAction, successChance, applyEnergyCost, critProfile, outcomeOdds } from "./engine/resolve.js";   // CCODE-414: the five ways a roll lands
-import { senseAction, senseTier, senseOpponent, appraiseOpponent } from "./engine/sense.js"; // CCODE-44: size a fight up BEFORE taking it
+import { senseAction, senseTier, senseOpponent, appraiseOpponent, sensedOdds } from "./engine/sense.js"; // CCODE-44: size a fight up BEFORE taking it · CCODE-415: the bar, as the character can read it
 import { synthesizeOpponentSheet, synthesizeStaticSheet, estimateExchange, finisherPotential, finishOdds, hasCounterCraft, matchupBonus, phaseDenied } from "./engine/skill_battle.js"; // CCODE-46/42: priced moves + situational finisher odds
 import { recordDeed, standingWith, reputationSummary, knownTags } from "./engine/reputation.js";
 import { seedStandingAtCreation, accrueStandingForDays, applyStandingOps, standingRoster } from "./engine/standing.js"; // BATCH-12 §3
@@ -167,7 +167,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.78";
+const APP_VERSION = "2.0.79";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -9086,6 +9086,27 @@ function rollChip(ab, cls = "cost") {
 
 /** ⛔ CCODE-379: the attribute and sub a choice rolls — a held craft's own when the choice uses one (engine `rollForChoice`), the GM's
  *  pick otherwise. The roll, the auto-intensity read and the "how hard" line all read this, so none of them disagrees with the card. */
+/** ⛔ CCODE-415 — THE CRIT TERMS A CAST OF THIS CHOICE CARRIES, for the roll and every preview of it: a wild current's widening
+ *  (SNG-140) and each craft's own authored critical (CCODE-76; critProfile takes the strongest per side, never the sum). A preview that
+ *  omits a term the roll pays is a preview that lies (SNG-116) — so there is one answer, and the roll asks it too. */
+function choiceCritTerms(choice) {
+  const ids = [choice?.abilityId, ...(choice?.comboAbilities || [])].filter(Boolean);
+  return {
+    wildVariance: ids.some(id => { const ab = fullCatalog()[id]; return !!(ab?.wildVariance || ab?.powerSystem === "wild_current"); }),
+    craftCrit: ids.map(id => { const ab = fullCatalog()[id]; const c = critFor(ab, { cfg: CONTENT.craftMechanics, cap: CONTENT.rules?.crit?.perCraftCap });
+      return c ? { name: ab?.name || id, ...c } : null; }).filter(Boolean),
+  };
+}
+
+/** ⛔ CCODE-415 — ONE ANSWER TO "IS THIS NOVEL, OR A TECHNIQUE ALREADY FOUND?", for the roll and the preview alike. ⚑ The preview never
+ *  asked: a novel choice's "how hard" was read without the novelty surcharge the roll pays (−15, and a wider critical failure) — and
+ *  with the bar drawing numbers now, the gap would have been a number on the button the dice then contradicted. */
+function noveltyOf(choice) {
+  if (!choice?.novel) return { novel: false };
+  const ids = [choice.abilityId, ...(choice.comboAbilities || [])].filter(Boolean);
+  return knownDiscovery(character, ids, choice.noveltyHint || "") ? { novel: false, discoveryBonus: CONTENT.rules.novel?.discoveryBonus ?? 10 } : { novel: true };
+}
+
 function choiceRoll(c = {}) {
   const cat = fullCatalog();
   const held = (id) => (character?.abilities || []).some(a => a.abilityId === id);
@@ -9105,8 +9126,7 @@ function craftChanceHere(ab, owned) {
   const action = { attribute: roll.attribute, subAttribute: roll.subAttribute, abilityId: ab.id, abilityLevel: owned?.level ?? 1, label: ab.name || ab.id, tags: [], axes: {},
     // ⛔ CCODE-414: the crit dials a real cast of this craft pays — its own authored critical (CCODE-76) and a wild current's widening
     // (SNG-140), the same two terms the choice path puts on the action. A preview that omits a term the roll pays is a preview that lies.
-    wildVariance: !!(ab?.wildVariance || ab?.powerSystem === "wild_current"),
-    craftCrit: (() => { const c = critFor(ab, { cfg: CONTENT.craftMechanics, cap: CONTENT.rules?.crit?.perCraftCap }); return c ? [{ name: ab?.name || ab.id, ...c }] : []; })() };
+    ...choiceCritTerms({ abilityId: ab.id }) };
   const rules = CONTENT.rules;
   const mods = aptitudeMods(character, rules.playerAptitudes);
   const equip = equipmentBonus(character, action.tags, rules);
@@ -9268,7 +9288,8 @@ async function onChoice(choice) {
   if (usesAbility) {
     intensity = INTENSITIES.includes(choice.intensity) ? choice.intensity : null;
     if (!intensity) {
-      const pAction = { label: choice.label, ...choiceRoll(choice), axes: choice.axes || {}, difficulty: choice.difficulty || 0, tags: choice.intentTags || [], abilityLevel };
+      // ⛔ CCODE-415: and the novelty the roll pays — auto-intensity read a novel choice 15 points easier than the dice would
+      const pAction = { label: choice.label, ...choiceRoll(choice), ...noveltyOf(choice), axes: choice.axes || {}, difficulty: choice.difficulty || 0, tags: choice.intentTags || [], abilityLevel };
       const pe = equipmentBonus(character, pAction.tags, CONTENT.rules).bonus + companionBonus(activeCompanions(character, CONTENT.companions), pAction.tags, CONTENT.rules, character).bonus + affinityFor(pAction, location).bonus;
       const stdChance = successChance({ character, action: pAction, location, rules: CONTENT.rules, aptitudeMods: mods, equipmentBonus: pe, substratePenalty: substratePenaltyFor(choice, location) }); // SNG-116: AUTO-intensity must see the real (substrate-inclusive) chance
       intensity = autoIntensity(stdChance, CONTENT.intensity);
@@ -9309,12 +9330,10 @@ async function onChoice(choice) {
     tags: choice.intentTags || [], planned: (choice.intentTags || []).some(t => ["plan", "prepare", "scout"].includes(t)),
     novel: !!choice.novel, abilityId: choice.abilityId || null, comboAbilities: choice.comboAbilities || [], noveltyHint: choice.noveltyHint || "", // CCODE-23: carry the primary abilityId — recordAspirationProgress reads action.abilityId; without it a SOLO same-tradition cast never fed an aspiration (only combos did)
     // SNG-140: a wild_current craft carries the tangled current's variance — the resolver widens both crit bands
-    wildVariance: [choice.abilityId, ...(choice.comboAbilities || [])].filter(Boolean).some(id => { const ab = fullCatalog()[id]; return !!(ab?.wildVariance || ab?.powerSystem === "wild_current"); }),
     // CCODE-76: every craft in this cast that authored what ITS critical looks like. critProfile takes the
     // strongest contributor per side (never the sum), and the receipt carries the sentence.
-    craftCrit: [choice.abilityId, ...(choice.comboAbilities || [])].filter(Boolean)
-      .map(id => { const ab = fullCatalog()[id]; const c = critFor(ab, { cfg: CONTENT.craftMechanics, cap: CONTENT.rules?.crit?.perCraftCap });
-                   return c ? { name: ab?.name || id, ...c } : null; }).filter(Boolean),
+    // ⛔ CCODE-415: both from `choiceCritTerms`, the one answer the preview asks too.
+    ...choiceCritTerms(choice),
     travelTo: choice.travelTo || null, exactWords: choice.exactWords || null // SNG-122: travel destination + literal words for travel-intent detection
   };
   // accepting ripe emergence (GM-offered choice carrying an engine-verified emergenceId)
@@ -9428,8 +9447,9 @@ async function onChoice(choice) {
   }
   // a technique already discovered isn't novel anymore — it's earned skill
   const abilityIds = [choice.abilityId, ...(choice.comboAbilities || [])].filter(Boolean);
-  const disc = action.novel ? knownDiscovery(character, abilityIds, action.noveltyHint) : null;
-  if (disc) { action.novel = false; action.discoveryBonus = CONTENT.rules.novel?.discoveryBonus ?? 10; }
+  // ⛔ CCODE-415: `noveltyOf`, the one answer the preview gives too
+  const nv = action.novel ? noveltyOf(choice) : { novel: false };
+  if (nv.discoveryBonus) { action.novel = false; action.discoveryBonus = nv.discoveryBonus; }
   // SNG-145: INTENT GATES fire HERE — before the dice roll, before energy is spent, before the GM
   // is called — so a decline commits nothing and the moveTo always-emit contract is never touched.
   // The resume is the CHOICE itself (plain JSON): the answer annotates it and re-enters onChoice.
@@ -18592,7 +18612,8 @@ function renderPlay(turn, opts = {}) {
         // ⚑ How hard they are is the appraisal panel's job, directly above; this says what the button DOES.
         senseHtml = `<span class="sense trivial-tag">no roll — this joins the contest, which is fought round by round</span>`;
       } else {
-        Object.assign(action, choiceRoll(c));   // ⛔ CCODE-379: "how hard" prices the sub the roll will use
+        // ⛔ CCODE-379: "how hard" prices the sub the roll will use · ⛔ CCODE-415: and the novelty and crit terms the roll will pay
+        Object.assign(action, choiceRoll(c), noveltyOf(c), choiceCritTerms(c));
         const equip = equipmentBonus(character, action.tags, rules);
         const comp = companionBonus(activeCompanions(character, CONTENT.companions), action.tags, rules, character);
         const aff = affinityFor(action, location);
@@ -18601,6 +18622,10 @@ function renderPlay(turn, opts = {}) {
         const chance = successChance({ character, action, location, rules, aptitudeMods: mods, equipmentBonus: equip.bonus + comp.bonus + aff.bonus, substratePenalty: substratePenaltyFor(c, location) });
         const sense = senseAction({ character, action, location, rules, aptitudeMods: mods }, chance);
         if (sense.text) senseHtml = `<span class="sense">${esc(sense.text)}</span>`;
+        // ⛔ CCODE-415 (Erik: "the choice buttons should show the bar when the sense is sharp enough") — at the precise tier, the five
+        // ways it lands, drawn from the same rounded chance the words give (`sensedOdds`); below it, nothing more than the words.
+        const sensed = sensedOdds(chance, sense.tier, { crit: critProfile({ rules, action, character, aptitudeMods: mods }), partialBand: rules.d100?.partialBand });
+        if (sensed) senseHtml += oddsBarHtml(sensed, { wide: true });
       }
       // SNG-015 Part B: fast tap = auto intensity + default ability; ⚙ expand-to-tune
       const canTune = !(c.trivial && !c.abilityId) && !c.encounterId && !c.emergenceId;

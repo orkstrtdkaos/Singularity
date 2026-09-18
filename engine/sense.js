@@ -2,7 +2,7 @@
 // The engine always knows the true odds; the CHARACTER only perceives what
 // their attunement earns them. Pure functions; no I/O.
 
-import { spectrumAlignment } from "./resolve.js";
+import { spectrumAlignment, outcomeOdds } from "./resolve.js";   // CCODE-415: the bar, as the character can read it
 import { characterPower, threatBand } from "./threat.js"; // CCODE-52: the band is RELATIVE — the same foe reads differently at level 5 and level 20
 
 /** Determine the character's sense tier for this action.
@@ -44,8 +44,22 @@ export function renderSense(trueChance, tier) {
     for (const [min, text] of bands) if (trueChance >= min) return { tier, text };
   }
   // tier 3: near-precise, with the confidence of mastery
-  const approx = Math.round(trueChance / 10) * 10;
+  const approx = sensedChance(trueChance);
   return { tier, text: `Your practiced sense reads this at roughly ${approx} in a hundred.` };
+}
+
+/** ⛔ CCODE-415 — the tier at which a character's sense reads NUMBERS (`senseTiers`: 3 is "precise — close numeric read plus reasons"),
+ *  and the number it reads: the true chance rounded to the nearest ten, "roughly 60 in a hundred". One rounding for the words and the bar. */
+export const PRECISE_SENSE_TIER = 3;
+export function sensedChance(trueChance) { return Math.round((Number(trueChance) || 0) / 10) * 10; }
+
+/** ⛔ CCODE-415 (Erik: "yes, the choice buttons should show the bar when the sense is sharp enough") — THE FIVE WAYS A CHOICE LANDS,
+ *  AS THE CHARACTER CAN READ THEM: nothing below the precise tier, and at it the bar is drawn from the SAME rounded chance the words
+ *  give, so the picture never tells more than the sense does. The crit dials are the character's own — rank, wits, the craft's own
+ *  critical — and ride as they are. Null when the sense does not reach. Pure. */
+export function sensedOdds(trueChance, tier, { crit = null, partialBand = 15 } = {}) {
+  if (!(Number(tier) >= PRECISE_SENSE_TIER)) return null;
+  return outcomeOdds({ chance: sensedChance(trueChance), critSuccess: crit?.successChance || 0, critFail: crit?.failChance || 0, partialBand });
 }
 
 /** Convenience: full sense pass in one call. */

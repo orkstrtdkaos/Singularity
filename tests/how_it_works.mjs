@@ -18932,7 +18932,9 @@ console.log("\n── §264 · a skill says what it rolls, and a choice rolls it
   check("§264: ⛔ the roll, the auto-intensity read and the \"how hard\" line all read the one choiceRoll — no path keeps the GM's sub for a craft",
     /const rolled = choiceRoll\(choice\);\n  const action = \{\n    label: choice\.label, attribute: rolled\.attribute,\n    subAttribute: rolled\.subAttribute,/.test(A264)
     && /const pAction = \{ label: choice\.label, \.\.\.choiceRoll\(choice\),/.test(A264)
-    && /Object\.assign\(action, choiceRoll\(c\)\);/.test(A264)
+    // ⛔ CCODE-415: the "how hard" line now also takes the novelty and crit terms the roll pays — the rule held here is only that its
+    // attribute and sub come from choiceRoll, so the pattern stops at choiceRoll(c) rather than pinning the whole line.
+    && /Object\.assign\(action, choiceRoll\(c\)[,)]/.test(A264)
     && !/SUBS\.includes\((?:choice|c)\.subAttribute\)/.test(A264));
   check("§264: …the chance shown for a craft reads the same rule, and both doors into a declared plan pass the catalog through",
     /const roll = rollForChoice\(\[ab\], \{\}, CONTENT\.rules\?\.craftSubAttributes\);/.test(A264)
@@ -21517,12 +21519,47 @@ console.log("\n── §295 · the odds bar is the dice's own grading, on every 
   const A295 = rd("app.js").replace(/\r\n/g, "\n");
   const at295 = A295.indexOf("function craftChanceHere(");
   const here295 = A295.slice(at295, at295 + 3200);
-  check("§295: ⛔ the preview pays the crit terms the roll pays — a craft's own critical and a wild current's widening, as the choice path puts them on the action — and returns the five-way odds",
-    /critFor\(ab,/.test(here295) && /wildVariance:/.test(here295) && /critProfile\(\{ rules, action, character, aptitudeMods: mods \}\)/.test(here295)
+  // ⛔ CCODE-415: the crit terms now come from `choiceCritTerms`, the one answer the roll path asks too — the rule held here is the same.
+  const terms295 = A295.slice(A295.indexOf("function choiceCritTerms("), A295.indexOf("function choiceCritTerms(") + 900);
+  check("§295: ⛔ the preview pays the crit terms the roll pays — a craft's own critical and a wild current's widening, from the same helper the roll path spreads — and returns the five-way odds",
+    /\.\.\.choiceCritTerms\(\{ abilityId: ab\.id \}\)/.test(here295) && /critFor\(ab,/.test(terms295) && /wildVariance:/.test(terms295)
+    && /critProfile\(\{ rules, action, character, aptitudeMods: mods \}\)/.test(here295)
     && /outcomeOdds\(\{ chance, critSuccess: crit\.successChance, critFail: crit\.failChance/.test(here295));
   check("§295: ⛔ …and both places a skill shows its chance draw the bar — every row of the skill list and the skill's hover card — with the numbers in the label for a screen reader, and the ground still named",
     /oddsBarHtml\(ch\.odds\)\} \$\{ch\.chance\}% here/.test(A295) && /showPopoverText\(txt, \{ odds: entityOdds\(el\.dataset\.entity\) \}\)/.test(A295)
     && /role="img" aria-label="\$\{esc\(oddsSaid\(odds\)\)\}"/.test(A295) && /the ground \$\{ch\.ground > 0/.test(A295));
+}
+
+// ══════════ §296 · CCODE-415 — A CHOICE DRAWS THE BAR ONCE THE SENSE READS NUMBERS ══════════
+// Erik: "yes, the choice buttons should show the bar when the sense is sharp enough." ⚑ The choice buttons speak through the character's
+// SENSE (SNG-098): nothing, then "feels doable", then five worded bands, then "roughly 60 in a hundred" at the precise tier. The bar
+// belongs to the last of those, and must say no more than it does.
+console.log("\n── §296 · a choice draws the bar once the sense reads numbers — the same rounded chance, and the terms the roll pays ──");
+{
+  const SE296 = await import("../engine/sense.js");
+  const R296 = await import("../engine/resolve.js");
+  const crit296 = { successChance: 12, failChance: 4 };
+
+  /* ---- 1 · ⛔ NOTHING BELOW THE PRECISE TIER ---- */
+  check("§296: ⛔ below the precise tier no bar is drawn at all — a character whose sense says 'this feels doable' is not handed five numbers",
+    [0, 1, 2].every(t => SE296.sensedOdds(64, t, { crit: crit296, partialBand: 15 }) === null));
+
+  /* ---- 2 · ⛔ AT IT, THE SAME ROUNDED CHANCE AS THE WORDS ---- */
+  const o296 = SE296.sensedOdds(64, SE296.PRECISE_SENSE_TIER, { crit: crit296, partialBand: 15 });
+  const words296 = SE296.renderSense(64, SE296.PRECISE_SENSE_TIER).text;
+  const want296 = R296.outcomeOdds({ chance: 60, critSuccess: 12, critFail: 4, partialBand: 15 });
+  check("§296: ⛔ at the precise tier the bar is drawn from the SAME rounded chance the words give — a true 64 reads 'roughly 60', and the bar is 60, never the exact 64",
+    !!o296 && o296.chance === 60 && /roughly 60 in a hundred/.test(words296) && JSON.stringify(o296) === JSON.stringify(want296), JSON.stringify(o296));
+  const tiers296 = rj("content/packs/core/rules/resolution.json").senseTiers || [];
+  check("§296: …and the precise tier is the one the rules themselves name as the close numeric read",
+    tiers296.find(t => t.label === "precise")?.tier === SE296.PRECISE_SENSE_TIER && Math.max(...tiers296.map(t => t.tier)) === SE296.PRECISE_SENSE_TIER);
+
+  /* ---- 3 · ⛔ THE PREVIEW PAYS WHAT THE ROLL PAYS ---- */
+  const A296 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§296: ⛔ the choice preview pays the novelty and crit terms the roll pays — the same `noveltyOf` and `choiceCritTerms` the roll path asks — and draws the bar only through `sensedOdds`",
+    A296.includes("Object.assign(action, choiceRoll(c), noveltyOf(c), choiceCritTerms(c));")
+    && /const nv = action\.novel \? noveltyOf\(choice\)/.test(A296) && /\.\.\.choiceCritTerms\(choice\),/.test(A296)
+    && /sensedOdds\(chance, sense\.tier,/.test(A296) && (A296.match(/oddsBarHtml\(sensed/g) || []).length === 1);
 }
 
 /* ══════════ REPORT ══════════ */

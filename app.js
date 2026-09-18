@@ -72,7 +72,9 @@ import { featureCost, allFeatures, refreshImprovement, canBeAskedToWork, holding
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
 import { FIRE_TESTS, diffKeys } from "./engine/firetests.js";   // SNG-560: the parts that have never been used
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady, applyPartyOps, activeCompany, formerCompany } from "./engine/company.js";
-import { unitsOf, unitLine, poolRows, atSideRows, wherePerson, canBringForward, rosterLine, levelOfPerson } from "./engine/fellowship.js";   // SNG-541: the roster, the pool, and EVERY band rather than one
+import { unitsOf, unitLine, poolRows, atSideRows, wherePerson, canBringForward, rosterLine, levelOfPerson } from "./engine/fellowship.js";
+// ⛔ CCODE-407 (Erik): "I want this to be easy on the PC so we can have a delegate (GM through a chosen npc) come up with the legion plan."
+import { draftLegionPlan, planDraftersFor } from "./engine/legionplan.js";   // SNG-541: the roster, the pool, and EVERY band rather than one
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, suggestForCreation, archetypeFamilies, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
 import { toolkitForGM } from "./engine/toolkit.js";
 import { fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc, arcDebtOf } from "./engine/personalArc.js";   // CCODE-393: a fallback arc is a debt
@@ -164,7 +166,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.69";
+const APP_VERSION = "2.0.70";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -14927,6 +14929,88 @@ function showLeaderPicker(unitId) {
   };
 }
 
+/** ⛔ CCODE-407 (Erik) — "I want this to be easy on the PC so we can have a delegate (GM through a chosen npc) come up with the legion
+ *  plan." ⛑ THE ARITHMETIC IS KNOWABLE, SO IT IS NOT GUESSED: `draftLegionPlan` reads the capacities, the gaps, the people the work
+ *  bar reaches and everybody's level, and returns the same plan for the same save every time. What the delegate adds is a voice and
+ *  the player's decision to trust somebody else with it.
+ *  ⚠️ IT SHOWS THE WHOLE PLAN BEFORE IT DOES ANY OF IT, and drafting costs nothing — on his ruling that building the legion happens
+ *  without incurring the cost. The only price named is what CALLING the result would come to, and that is a separate press. */
+function showLegionPlan(byId = null) {
+  document.getElementById("help-pop")?.remove();
+  const day = (() => { try { return absoluteWorldDay(); } catch { return null; } })();
+  const o = { content: CONTENT, worldDay: day, cfg: meleeCfg(), holdCfg: holdCfgNow(), byId };
+  let plan;
+  try { plan = draftLegionPlan(character, o); } catch (err) { alert(`The plan could not be drawn up: ${err?.message || err}`); return; }
+  const drafters = planDraftersFor(character, o);
+  const pop = document.createElement("div");
+  pop.id = "help-pop"; pop.className = "help-overlay";
+  const verb = { captain: "Captain", recruit: "Ask", muster: "Raise", form: "Form", commander: "Command" };
+  pop.innerHTML = `<div class="help-card" role="dialog" aria-label="The plan" style="max-height:min(86vh,760px); display:flex; flex-direction:column; overflow:hidden">
+    <div class="whois-head" style="flex:0 0 auto">${plan.by ? `${esc(plan.by.name)} draws it up` : "The order of battle"}</div>
+    <div style="flex:0 0 auto">
+      <p class="hint">${esc(plan.why)}</p>
+      ${plan.by ? `<p class="hint">Asked of ${esc(plan.by.name)} because they ${esc(plan.by.why)}.
+        ${drafters.length > 1 ? `<select id="plan-by" style="max-width:60%">${drafters.map(d => `<option value="${esc(d.id)}"${d.id === plan.by.id ? " selected" : ""}>${esc(d.name)} — level ${d.level}${d.reads ? ", reads ground" : ""}</option>`).join("")}</select>` : ""}</p>` : ""}
+    </div>
+    <div style="flex:1 1 auto; overflow-y:auto; -webkit-overflow-scrolling:touch">
+      ${plan.steps.length ? plan.steps.map(s => `<div class="codex-f" style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap">
+        <strong style="min-width:86px">${esc(verb[s.kind] || s.kind)}</strong>
+        <span style="flex:1 1 200px">${esc(s.kind === "muster" ? `${s.n} hands at ${s.holdName} → ${s.unitName}`
+          : s.kind === "form" ? `${s.fromNames.join(" + ")} as ${s.name}`
+          : s.kind === "commander" ? `${s.name} over ${s.unitName}`
+          : `${s.name} → ${s.unitName}`)}</span>
+        <span class="hint" style="width:100%">${esc(s.why)}</span></div>`).join("")
+        : `<p class="hint">Nothing to arrange.</p>`}
+    </div>
+    <div class="help-foot" style="flex:0 0 auto">
+      <span class="hint">${plan.after ? `${plan.after.heads} under arms when it is done. Drawing it up costs nothing; calling them would come to ${plan.after.wouldCost.total} ${esc(CONTENT.rules?.economy?.holdStore?.upkeepCurrency || "crystal")}.` : ""}</span>
+      ${plan.steps.length ? `<button class="btn" id="plan-do">Do all of it</button>` : ""}
+      <button class="btn secondary" id="help-close">Close</button>
+    </div></div>`;
+  document.body.appendChild(pop);
+  const close = () => pop.remove();
+  pop.addEventListener("click", ev => { if (ev.target === pop) close(); });
+  document.getElementById("help-close").onclick = close;
+  const sel = document.getElementById("plan-by");
+  if (sel) sel.onchange = () => showLegionPlan(sel.value);   // ⚑ ask somebody else and see their arrangement
+  const go = document.getElementById("plan-do");
+  if (go) go.onclick = () => { close(); applyLegionPlan(plan); };
+}
+
+/** ⛔ CCODE-407 — AND APPLYING IT RUNS THE EXISTING WRITERS, in the plan's own order. ⚠️ NOTHING NEW CAN WRITE STATE: every step names
+ *  the writer that performs it, so there is one way to put somebody in a unit and one way to form a legion, and a plan cannot drift
+ *  away from what a player does by hand. ⛑ A refused step is SAID and the rest still run — a plan that silently half-applied would be
+ *  worse than one that failed. */
+function applyLegionPlan(plan) {
+  const day = (() => { try { return absoluteWorldDay(); } catch { return null; } })();
+  const done = [], refused = [];
+  for (const s of plan.steps || []) {
+    const unit = () => (character.bands || []).find(b => b.id === s.unitId);
+    if (s.kind === "captain" || s.kind === "commander") {
+      const r = setUnitLeader(character.bands || [], s.unitId, s.npcId);
+      if (r.ok) { character.bands = r.bands; done.push(`${s.name} ${s.kind === "commander" ? "commands" : "captains"} ${s.unitName}`); }
+      else refused.push(`${s.name}: ${r.why}`);
+    } else if (s.kind === "recruit") {
+      const u = unit();
+      const r = u ? addContingent(u, { npcId: s.npcId, quality: s.level, does: s.does?.length ? s.does : ["HARM", "MARTIAL"],
+        what: `${s.name}${s.role ? ` — ${s.role}` : ""}` }) : { ok: false, why: "that band is gone" };
+      if (r.ok) done.push(`${s.name} stands in ${s.unitName}`); else refused.push(`${s.name}: ${r.why}`);
+    } else if (s.kind === "muster") {
+      const u = unit();
+      const r = u ? addContingent(u, { n: s.n, quality: 1, does: ["HARM", "MARTIAL"], from: s.holdingId,
+        what: `raised at ${s.holdName}` }) : { ok: false, why: "that band is gone" };
+      if (r.ok) done.push(`${s.n} raised at ${s.holdName}`); else refused.push(`${s.holdName}: ${r.why}`);
+    } else if (s.kind === "form") {
+      const r = formLegion(character.bands || [], { id: s.id, name: s.name, from: s.from, day });
+      if (r.ok) { character.bands = r.bands; done.push(`${s.name} is formed`); } else refused.push(`${s.name}: ${r.why}`);
+    }
+  }
+  if (done.length) queueHoldingEvent(character, `${plan.by ? `${plan.by.name}'s plan` : "The plan"} is carried out: ${done.join("; ")}.`);
+  saveCharacter(character);
+  renderBandsTab();
+  if (refused.length) alert(`Some of it could not be done:\n\n${refused.join("\n")}`);
+}
+
 function renderBandsTab() {
   const ladder = CONTENT.rules.subAttributeLadder;
   const day = absoluteWorldDay();
@@ -15062,6 +15146,7 @@ function renderBandsTab() {
         ${syncEnabled() ? `<div class="opt-row" style="margin-top:6px"><button class="opt" data-band-invite="${esc(u.id)}" title="Send word to another player's character through someone in this band">Invite a fellow traveler…</button></div>` : ""}
       </div>`).join("") : `<p class="hint">Nobody has thrown in with you yet. Someone who has sworn to you stands in a unit whether or not they walk at your side.</p>`}
       <div class="opt-row" style="margin-top:10px;gap:6px;flex-wrap:wrap">
+        <button class="opt" id="legion-plan"${units.filter(u => !u.inLegion).length ? "" : " disabled"} title="Somebody who reads the ground draws up the whole arrangement — who, how many, from where. It costs nothing.">Ask someone to draw up a plan…</button>
         <button class="opt" id="band-raise-new"${raise404.ready ? "" : " disabled"} title="${esc(raise404.why)}">Raise a new band…</button>
         ${(() => {
           // ⛔ CCODE-405: two or more bands standing outside a legion is the whole requirement — forming one costs nothing.
@@ -15105,6 +15190,7 @@ function renderBandsTab() {
   const rn404 = document.getElementById("band-raise-new"); if (rn404) rn404.onclick = raiseABand;
   // ⛔ CCODE-405 — forming, calling, posturing and taking apart. Every refusal is SAID, which is this tab's own rule.
   const lf405 = document.getElementById("legion-form"); if (lf405) lf405.onclick = showLegionFormPicker;
+  const lp407 = document.getElementById("legion-plan"); if (lp407) lp407.onclick = () => showLegionPlan();
   for (const b of app.querySelectorAll("[data-unit-lead]")) b.onclick = () => showLeaderPicker(b.dataset.unitLead);
   for (const b of app.querySelectorAll("[data-unit-call]")) b.onclick = () => callUnitTogether(b.dataset.unitCall);
   for (const b of app.querySelectorAll("[data-unit-posture]")) b.onclick = () => {

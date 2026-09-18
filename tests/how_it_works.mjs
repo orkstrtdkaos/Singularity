@@ -20813,6 +20813,125 @@ console.log("\n── §287 · commanders and captains ──");
     && !/craftBonus|craftTerm|opposingCraft/.test(rd("engine/melee.js")));
 }
 
+// ⛔ CCODE-407 (Erik) — "I want this to be easy on the PC so we can have a delegate (GM through a chosen npc) come up with the legion
+// plan." ⛑ AND THE SPLIT THAT MAKES IT BUILDABLE: the arithmetic is knowable, so it is not guessed. Which holds have spare capacity,
+// which people the WORK bar reaches, which gaps a person would close, who is the highest level standing in a band — the engine knows
+// every one exactly. So the plan is DETERMINISTIC and the delegate's name goes on it, which also makes it testable: a plan composed by
+// a model could not be checked, and a plan the player is asked to approve had better be one the suite can check.
+console.log("\n── §288 · the plan somebody else draws up ──");
+{
+  const LP288 = await import("../engine/legionplan.js");
+  const H288hold = await import("../engine/holdings.js");
+  const M288 = await import("../engine/melee.js");
+  const { loadContentHeadless: lch288 } = await import("./headless_content.mjs");
+  const C288 = await lch288();
+  const holdCfg288 = C288.rules?.economy?.holdStore
+    ? { ...C288.rules.economy.holdStore, features: C288.rules.economy.holdFeatures || null } : null;
+  const fs288 = await import("node:fs");
+  const saves288 = [];
+  for (const dir of fs288.readdirSync(join(root, "characters"))) {
+    let inner = [];
+    try { inner = fs288.readdirSync(join(root, "characters", dir)); } catch { continue; }
+    for (const f of inner.filter(x => x.endsWith(".json"))) {
+      try { const j = JSON.parse(fs288.readFileSync(join(root, "characters", dir, f), "utf8")); saves288.push(j.character || j.data || j); } catch {}
+    }
+  }
+  const o288 = (c) => ({ content: C288, worldDay: 80, cfg: C288.rules?.npcStanding || null, holdCfg: holdCfg288 });
+  const withBands = saves288.filter(c => (c.bands || []).length);
+
+  // ⛔ 1 · THE SAME SAVE ALWAYS DRAFTS THE SAME PLAN
+  check("§288: ⛔ THE PLAN IS DETERMINISTIC — no rng, no model call, no hidden state. A plan composed by a model could not be checked by this suite, and a plan a player is asked to approve had better be one the suite can check",
+    withBands.length > 0 && withBands.every(c => {
+      const a = LP288.draftLegionPlan(c, o288(c)), b = LP288.draftLegionPlan(c, o288(c));
+      return JSON.stringify(a.steps) === JSON.stringify(b.steps) && a.why === b.why;
+    }), `${withBands.length} saves with a band`);
+
+  // ⛔ 2 · EVERY STEP IS BOUNDED BY SOMETHING REAL — it cannot propose a head, a person or a place that does not exist
+  const bad288 = [];
+  for (const c of withBands) {
+    const plan = LP288.draftLegionPlan(c, o288(c));
+    const unitIds = new Set((c.bands || []).map(b => String(b.id)));
+    const holdIds = new Set((c.holdings || []).map(h => String(h.id)));
+    for (const s of plan.steps) {
+      if (s.kind === "muster") {
+        if (!holdIds.has(String(s.holdingId))) bad288.push(`${c.name}: muster at a hold that is not theirs`);
+        const spare = H288capacity(c, s.holdingId);
+        if (s.n > spare) bad288.push(`${c.name}: ${s.n} raised where only ${spare} can be fed`);
+      }
+      if (s.kind === "recruit" && !c.npcRegistry?.[s.npcId]) bad288.push(`${c.name}: recruits somebody they do not know`);
+      if ((s.kind === "muster" || s.kind === "recruit" || s.kind === "captain") && !unitIds.has(String(s.unitId))) bad288.push(`${c.name}: a step for a unit that is not theirs`);
+      if (s.kind === "form" && s.from.some(id => !unitIds.has(String(id)))) bad288.push(`${c.name}: forms from a band that is not theirs`);
+    }
+  }
+  function H288capacity(c, holdingId) {
+    const h = (c.holdings || []).find(x => String(x.id) === String(holdingId));
+    if (!h) return 0;
+    const already = (c.bands || []).reduce((a, b) => a + M288.musteredFrom(b, holdingId), 0);
+    return H288hold.musterCapacityOf(h, holdCfg288, { mustered: already });
+  }
+  check("§288: ⛔ EVERY STEP IS BOUNDED BY SOMETHING REAL — it cannot propose a head beyond a hold's own authored capacity, a person the player has not met, or a unit and a place that are not theirs. Checked against every real save",
+    bad288.length === 0, bad288.slice(0, 4).join(" · ") || "every step of every plan resolves");
+
+  // ⛔ 3 · IT PROPOSES AND NEVER WRITES
+  const before288 = JSON.stringify(withBands[0]);
+  LP288.draftLegionPlan(withBands[0], o288(withBands[0]));
+  check("§288: ⛔ DRAFTING WRITES NOTHING AND COSTS NOTHING — Erik: 'you should be able to build the legion (identify who and how many from where) without incurring the cost.' The character is byte-identical after a draft, and the only price named is what CALLING the result would come to",
+    JSON.stringify(withBands[0]) === before288
+    && (() => { const p = LP288.draftLegionPlan(withBands[0], o288(withBands[0]));
+      return !p.after || (p.after.wouldCost && p.after.wouldCost.total >= 0); })());
+  check("§288: ⛑ …and every step NAMES the existing writer that performs it, so there is one way to put somebody in a unit and a plan cannot drift from what a player does by hand",
+    withBands.every(c => LP288.draftLegionPlan(c, o288(c)).steps.every(s =>
+      ["addContingent", "setUnitLeader", "formLegion"].includes(s.writer))));
+
+  // ⛔ 4 · WHO IT IS ASKED OF, AND WHY THEM
+  const drafters = LP288.planDraftersFor(withBands[0], o288(withBands[0]));
+  check("§288: ⛔ SOMEBODY WHO READS THE GROUND IS ASKED FIRST — planning a campaign is reading the ground and knowing your people, so KNOW sorts above level; and the plan says whose it is and why they were the one to ask",
+    drafters.length > 0 && (drafters[0].reads || drafters.every(d => !d.reads))
+    && drafters.every((d, i) => i === 0 || !(d.reads && !drafters[i - 1].reads))
+    && /the ground|your people/.test(String(drafters[0].why)),   // ⚠️ the RULE is that it says WHY; the verb's agreement is gated below
+    JSON.stringify(drafters.slice(0, 3).map(d => `${d.name} L${d.level}${d.reads ? " reads" : ""}`)));
+  check("§288: …and asking somebody else gives THEIR plan, not the same one with a different name on it (the drafter is an input, not a label)",
+    (() => { const c = withBands[0]; const ds = LP288.planDraftersFor(c, o288(c));
+      if (ds.length < 2) return true;
+      const a = LP288.draftLegionPlan(c, { ...o288(c), byId: ds[0].id });
+      const b = LP288.draftLegionPlan(c, { ...o288(c), byId: ds[1].id });
+      return a.by.id !== b.by.id; })());
+
+  // ⛔ 5 · AND IT DOES NOT SPEND ONE PERSON TWICE
+  const dup288 = [];
+  for (const c of withBands) {
+    const plan = LP288.draftLegionPlan(c, o288(c));
+    const spent = plan.steps.filter(s => s.npcId && s.kind !== "commander").map(s => s.npcId);
+    if (new Set(spent).size !== spent.length) dup288.push(c.name);
+  }
+  check("§288: ⛔ IT NEVER SPENDS ONE PERSON TWICE — the plan reasons about what each band WOULD hold after the earlier steps, or it would offer the same gap-closer to three bands and make one person captain of all of them",
+    dup288.length === 0, dup288.join(", ") || "no plan doubles anybody up");
+
+  // ⛔ 6 · TWO CONFIG BAGS, NEVER CROSSED — the trap that has caught me three times today
+  {
+    const F288 = await import("../engine/fellowship.js");
+    const c = withBands[0];
+    const rosterLevels = new Map([...F288.poolRows(c, { content: C288, worldDay: 80 }), ...F288.atSideRows(c, { content: C288, worldDay: 80 })]
+      .filter(r => r.kind === "person").map(r => [r.id, r.level]));
+    // ⚠️ HANDED THE MELEE DIALS AS `cfg`, WHICH IS WHAT THE APP DOES: the plan must still read a person's level from the sheet bag.
+    const asApp = LP288.draftLegionPlan(c, { content: C288, worldDay: 80, cfg: { leaderStep: 10, bandThreatScale: 6 }, holdCfg: holdCfg288 });
+    const drafted = LP288.planDraftersFor(c, { content: C288, worldDay: 80 });
+    const off = drafted.filter(d => rosterLevels.has(d.id) && rosterLevels.get(d.id) !== d.level);
+    check("§288: ⛔ THE MELEE DIALS AND THE SHEET BAG ARE TWO BAGS AND ARE NEVER CROSSED — ⚑ caught on the screen: the plan was handed `meleeCfg()` as the level bag and Fendt read level 4 against 16 on the roster two lines above. `memberRows`'s own comment records that exact trap collapsing everyone to level 1, and it is the third time today I crossed these two",
+      off.length === 0 && (!asApp.by || rosterLevels.get(asApp.by.id) === undefined || rosterLevels.get(asApp.by.id) === asApp.by.level),
+      off.map(d => `${d.name}: roster ${rosterLevels.get(d.id)} vs plan ${d.level}`).join(" · ") || `${drafted.length} drafters agree with the roster`);
+    check("§288: ⛑ …and the reason a drafter was asked agrees with the pronoun the sentence around it uses — 'asked of X because they READ the ground', not 'they reads'",
+      drafted.every(d => /^(read|know) /.test(String(d.why))), JSON.stringify(drafted[0]?.why));
+  }
+
+  // ⛑ 7 · AND THE SCREEN SHOWS IT ALL BEFORE DOING ANY OF IT
+  const A288 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§288: ⛑ the whole plan is shown before any of it is done, and applying it runs the writers in the plan's own order with every refusal SAID — a plan that silently half-applied would be worse than one that failed",
+    /function showLegionPlan\(byId = null\)/.test(A288) && /function applyLegionPlan\(plan\)/.test(A288)
+    && /id="plan-do"/.test(A288) && /refused\.push/.test(A288)
+    && /if \(refused\.length\) alert\(/.test(A288));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

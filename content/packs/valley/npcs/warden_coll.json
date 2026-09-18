@@ -1,0 +1,73 @@
+{
+ "schemaVersion": 1,
+ "id": "warden-coll",
+ "name": "Warden Coll",
+ "tier": "leader",
+ "role": "Edge District Warden — the official who can be reached, and who moves on what he is told without needing it explained twice",
+ "people": "human",
+ "gender": "male",
+ "pronouns": "he/him",
+ "sex": "male",
+ "romanceEligible": false,
+ "homeLocation": "the_crossing",
+ "communityId": "the_center.the_crossing",
+ "vocation": "KEEPER",
+ "domains": {
+  "primary": "verist",
+  "secondary": "mason",
+  "tertiary": "marcher"
+ },
+ "spectrum": {
+  "violence_peace": 0.4,
+  "chaos_order": 0.7,
+  "death_life": 0.3,
+  "mechanical_spiritual": -0.4,
+  "concrete_abstract": -0.6
+ },
+ "assistTags": [
+  "guard",
+  "investigate",
+  "lead",
+  "learn",
+  "talk"
+ ],
+ "appearance": "Fifties, square, District greys kept correct rather than smart. A satchel of standing paperwork he actually reads. The kind of face that has been told bad news at a desk many times and has stopped reacting to the telling.",
+ "physicality": "Listens without interrupting and then moves, which people find abrupt because they expected discussion.",
+ "personality": {
+  "warmth": 0.4,
+  "trust": 0.6,
+  "candor": 0.9,
+  "patience": 0.6
+ },
+ "voiceHints": "Names exactly what he needs in order to act, without hedging, and does not explain why he needs it. Builds a decision out loud while you are still talking.",
+ "wants": "To be told the thing early enough to matter.",
+ "fears": "Being the last to know about something he had the authority to stop.",
+ "knowledge": [
+  "That Edvar Crane held a Wright's commission at the Crossing before the Accord — fold-work in the disputed corridor",
+  "That Crane's files went to the Deep Registry, Ossian annex, two streets north, green shutter — and that the committee's name opens the Zone Remediation index",
+  "Maren Ossitide by reputation: a legendary Ashwarden whose movements track toward the Zone, not summonable, who finds the work she is meant to find",
+  "That the water crisis connects to a larger pole-pull affecting the Radiant Reach"
+ ],
+ "reactsToReputation": {
+  "any": "hears you out without interrupting, then tells you what he will do",
+  "useful": "gives you the next name in the chain before you ask for it",
+  "evasive": "stops taking notes, which is how you know"
+ },
+ "questSeeds": [
+  "He has the authority to act and is usually told too late",
+  "The Deep Registry's Ossian annex holds what was filed and not destroyed"
+ ],
+ "gear": [
+  "a District warden's short blade, worn and unused",
+  "oiled_leathers under the greys",
+  "a satchel of standing paperwork",
+  "the Zone Remediation index key"
+ ],
+ "purse": {
+  "crystal": 420
+ },
+ "closed": [],
+ "_authoredWhy": "⛑ SNG-616 — PROMOTED, THEREFORE RECORDED. Erik 2026-09-17: 'promoted people get a record, but it doesn't have to be manually authored. We want the game to be amazing at this — author some and make sure the generator does it just as well.' ⛔ AUTHORED FROM WHAT PLAY ESTABLISHED, NOT INVENTED OVER IT: every line below traces to a `knownFacts` or `skillsObserved` entry in a real save. The GM built these people; a record keeps them the same person in the next world that meets them.",
+ "_correction": "⛔ I HAD THIS WRONG IN THE SHARED CANON. Yesterday I rewrote his role as 'Hub Council Member, water and infrastructure portfolio' — and the save that actually knows him says EDGE DISTRICT WARDEN. ⚠️ I was repairing a scene-beat ('the official who can act when acting is still possible') into a standing fact and ADDED A POST HE DOES NOT HOLD. Repairing a role is not licence to specify one.",
+ "_assistTagsNote": "⛑ §234 rejected `build`, `organize` and `sustain` — tags I invented that reach no family. Swapped to the established ones: make, lead, tend. **The tag vocabulary is closed and the gate is what says so.**"
+}

@@ -1,0 +1,73 @@
+{
+ "schemaVersion": 1,
+ "id": "cassiel-ord",
+ "name": "Cassiel Ord",
+ "tier": "notable",
+ "role": "Keeper of the threshold at Raven's Home — a former march-warden who walked away from the post, and has taken a different one",
+ "people": "human",
+ "gender": "male",
+ "pronouns": "he/him",
+ "sex": "male",
+ "romanceEligible": false,
+ "homeLocation": "the_crossing",
+ "communityId": "the_center.the_crossing",
+ "vocation": "KEEPER",
+ "domains": {
+  "primary": "marcher",
+  "secondary": "mason",
+  "tertiary": "stillhold"
+ },
+ "spectrum": {
+  "violence_peace": 0.6,
+  "chaos_order": 0.6,
+  "death_life": 0.4,
+  "mechanical_spiritual": 0.0,
+  "concrete_abstract": -0.7
+ },
+ "assistTags": [
+  "guard",
+  "lead",
+  "make",
+  "talk",
+  "tend"
+ ],
+ "appearance": "Weathered, unhurried, still wearing march-cut boots with everything else changed. Hands that have done two kinds of work. Sits down to talk rather than standing over you, which a warden would not.",
+ "physicality": "Reads a room's dimensions before its people, and can tell you all five without looking twice.",
+ "personality": {
+  "warmth": 0.5,
+  "trust": 0.7,
+  "candor": 1.0,
+  "patience": 0.8
+ },
+ "voiceHints": "Plain to the point of flatness. Takes a promise as a working statement rather than a pleasantry, and will hold you to it without ever raising it again.",
+ "wants": "To finish building the thing he walked away from a post in order to build.",
+ "fears": "Being asked, again, why he left — by somebody who deserves an answer.",
+ "knowledge": [
+  "Raven's Home down to its five named spaces — the laboratory on the east wall, the workshop in the north corner, the Watch, and the rest",
+  "That the main building is to be a gathering hall with the kitchen joined at the back: long table, proper hearth, seats ten",
+  "That Pell's forge flue wants widening before the anvil arrives, to dimensions he will send in writing",
+  "What was promised him and by whom, kept exactly, and never mentioned"
+ ],
+ "reactsToReputation": {
+  "any": "treats what you said as a commitment, because he has no other way of treating it",
+  "reliable": "puts you into the plan without asking whether you meant it",
+  "grandiose": "writes it down and waits"
+ },
+ "questSeeds": [
+  "Raven's Home is half-built and funded out of one man's travel reserve",
+  "He was promised helpers and a defensive strategist, plainly, and is keeping count"
+ ],
+ "gear": [
+  "a marcher's broad sword, kept though the post is not",
+  "a mason's rule and line",
+  "oiled_leathers",
+  "dried_rations"
+ ],
+ "purse": {
+  "crystal": 180
+ },
+ "closed": [],
+ "_authoredWhy": "⛑ SNG-616 — PROMOTED, THEREFORE RECORDED. Erik 2026-09-17: 'promoted people get a record, but it doesn't have to be manually authored. We want the game to be amazing at this — author some and make sure the generator does it just as well.' ⛔ AUTHORED FROM WHAT PLAY ESTABLISHED, NOT INVENTED OVER IT: every line below traces to a `knownFacts` or `skillsObserved` entry in a real save. The GM built these people; a record keeps them the same person in the next world that meets them.",
+ "_correction": "⚠️ THE SHARED-CANON ROLE IS ALREADY OUT OF DATE, WHICH IS THE POINT ERIK MADE ABOUT GROWTH. It reads 'walked away from the post and sat down in the bowl — still there, still asked about it, still not answering'. He has since been given a threshold to keep and is building it. **A promoted record that is never revisited is a person frozen on the day they were promoted.**",
+ "_assistTagsNote": "⛑ §234 rejected `build`, `organize` and `sustain` — tags I invented that reach no family. Swapped to the established ones: make, lead, tend. **The tag vocabulary is closed and the gate is what says so.**"
+}

@@ -1,0 +1,73 @@
+{
+ "schemaVersion": 1,
+ "id": "lenten",
+ "name": "Lenten",
+ "tier": "notable",
+ "role": "Builder at Waymarker — arranged the Cogitarium's supply line, and holds themselves to it",
+ "people": "human",
+ "gender": "nonbinary",
+ "pronouns": "they/them",
+ "sex": "unstated",
+ "romanceEligible": false,
+ "homeLocation": "waystone",
+ "communityId": "valley.waystone",
+ "vocation": "MAKER",
+ "domains": {
+  "primary": "mason",
+  "secondary": "verist",
+  "tertiary": "cogitant"
+ },
+ "spectrum": {
+  "violence_peace": 0.7,
+  "chaos_order": 0.7,
+  "death_life": 0.4,
+  "mechanical_spiritual": -0.5,
+  "concrete_abstract": -0.8
+ },
+ "assistTags": [
+  "lead",
+  "learn",
+  "make",
+  "talk",
+  "tend"
+ ],
+ "appearance": "Solid, plainly dressed, stone dust worked into the creases of everything. Carries a tally-slate on a cord and consults it mid-sentence.",
+ "physicality": "Stands while thinking and sits down only once the problem is settled.",
+ "personality": {
+  "warmth": 0.6,
+  "trust": 0.7,
+  "candor": 0.8,
+  "patience": 0.7
+ },
+ "voiceHints": "Practical, specific, and quietly hard on themselves. Will tell you the gap in their own arrangement before you find it.",
+ "wants": "A supply line that does not depend on anybody remembering to check it.",
+ "fears": "Assuming somebody recovered and went back to the route.",
+ "knowledge": [
+  "The Waymarker runs and who walks each one",
+  "That Brenn came back hurt about a fortnight ago — an ankle on the dry-stone wall-path, a kilometre out",
+  "That the runs stopped and nobody told them, and that they should have asked"
+ ],
+ "reactsToReputation": {
+  "any": "straight to the practical question",
+  "reliable": "hands you the route and the tally without ceremony",
+  "careless": "polite, and quietly reroutes around you"
+ },
+ "questSeeds": [
+  "The Cogitarium sent one person, and the supply line has a hole in it nobody reported",
+  "Brenn's route has been unwalked for a fortnight"
+ ],
+ "gear": [
+  "a mason's hammer",
+  "a tally-slate on a cord",
+  "oiled_leathers",
+  "dried_rations",
+  "waterskin"
+ ],
+ "purse": {
+  "crystal": 95
+ },
+ "closed": [],
+ "_authoredWhy": "⛑ SNG-616 — PROMOTED, THEREFORE RECORDED. Erik 2026-09-17: 'promoted people get a record, but it doesn't have to be manually authored. We want the game to be amazing at this — author some and make sure the generator does it just as well.' ⛔ AUTHORED FROM WHAT PLAY ESTABLISHED, NOT INVENTED OVER IT: every line below traces to a `knownFacts` or `skillsObserved` entry in a real save. The GM built these people; a record keeps them the same person in the next world that meets them.",
+ "_genderNote": "⛑ The save records no gender and uses they/them throughout, so the record does too.  is a required STRING — null is rejected, which content_ci caught.",
+ "_assistTagsNote": "⛑ §234 rejected `build`, `organize` and `sustain` — tags I invented that reach no family. Swapped to the established ones: make, lead, tend. **The tag vocabulary is closed and the gate is what says so.**"
+}

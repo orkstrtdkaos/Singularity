@@ -1288,6 +1288,18 @@ export function sanitizeIntent(raw, character, playerText = "", { spectrumIds = 
   // holding exactly as designed. ⚠️ BUT IT WAS DROPPED IN SILENCE: the action lost its entire axis contribution and the turn
   // read as clean. And the KEY was never checked, so a number under a misspelled id stored a real axis nothing would ever read
   // — the unread-content defect arriving through the model instead of through an author.
+  // ⛔ CCODE-426 — A CRAFT THE CHARACTER HOLDS, PUSHED PAST ITS ENVELOPE, IS NOVEL USE: NEVER A REFUSAL. The parser's own rule, in
+  // the prompt it is given: "novelUse=true when an ability is being pushed OUTSIDE its normal envelope … this is allowed and
+  // interesting, not infeasible." ⚑ Haiku broke it on Silas's save (2026-09-18): Open Material, turned on the reclamation system's
+  // failing heart, came back `feasible: false` — so the GM was never called, the last beat was redrawn under the parser's reason, and
+  // Erik read it as the GM refusing him. A refusal the prompt forbids is not the parser's to make: the dice price the push (the
+  // novelty surcharge and the wider critical failure) and the GM rules on what it does. It may still refuse an act that names no craft
+  // — walking through a mountain.
+  const named = (() => {
+    const abilityId = resolveAb(raw?.abilityId);
+    const combo = (Array.isArray(raw?.comboAbilities) ? raw.comboAbilities : []).map(resolveAb).filter(Boolean).slice(0, 3);
+    return { abilityId, combo, pushed: raw?.feasible === false && (!!abilityId || combo.length > 0) };
+  })();
   const axes = {};
   const axesDropped = [];
   if (raw?.axes && typeof raw.axes === "object") {
@@ -1330,13 +1342,15 @@ export function sanitizeIntent(raw, character, playerText = "", { spectrumIds = 
     })(),
     // SNG-122: the destination for a travel action (free text → a place name the engine resolves-or-mints).
     travelTo: raw?.travelTo && String(raw.travelTo).trim() && !/^(null|none|n\/a)$/i.test(String(raw.travelTo).trim()) ? String(raw.travelTo).trim().slice(0, 80) : null,
-    abilityId: resolveAb(raw?.abilityId),
-    comboAbilities: (Array.isArray(raw?.comboAbilities) ? raw.comboAbilities : []).map(resolveAb).filter(Boolean).slice(0, 3),
-    novelUse: !!raw?.novelUse,
+    abilityId: named.abilityId,
+    comboAbilities: named.combo,
+    // ⛔ CCODE-426: a craft they hold, pushed past what it usually does, IS novel use — the roll prices it and the GM narrates it
+    novelUse: !!raw?.novelUse || named.pushed,
     noveltyHint: String(raw?.noveltyHint || "").slice(0, 60),
     trivial: !!raw?.trivial && !raw?.abilityId && !raw?.novelUse,
-    feasible: raw?.feasible !== false,
-    infeasibleReason: raw?.infeasibleReason ? String(raw.infeasibleReason).slice(0, 200) : null,
+    feasible: raw?.feasible !== false || named.pushed,
+    // ⛔ CCODE-426: the reason is shown to the player, and a raw cut ended Erik's mid-word ("…material struct") — the SNG-181 rule
+    infeasibleReason: raw?.feasible === false && !named.pushed && raw?.infeasibleReason ? smartClamp(String(raw.infeasibleReason), 280) : null,
     // ⚠️ CARRIED, NOT LOGGED: a turn that lost its axis contribution looked exactly like a clean one. The caller counts it.
     axesDropped
   };

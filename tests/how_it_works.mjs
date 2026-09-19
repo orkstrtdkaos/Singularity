@@ -22087,6 +22087,31 @@ console.log("\n── §303 · a name the roll reads is a name the roll declared
     /const FIRE_TESTS_PAUSED = true;/.test(A303) && /function maybeAutoFireTests\(\) \{[\s\S]{0,1200}if \(FIRE_TESTS_PAUSED\) return;/.test(A303));
 }
 
+// ══════════ §304 · CCODE-426 — THE PARSER MAY NOT REFUSE A CRAFT YOU HOLD ══════════
+// Erik (2026-09-18): "I don't know that I've seen the GM do this kind of refusal before... and it cut itself off..." It was not the GM.
+// The intent parser returned `feasible: false` for Open Material — one of Silas's crafts, pushed past its envelope — which its own prompt
+// calls "allowed and interesting, not infeasible". The GM was never called; the last beat was redrawn under the parser's reason, cut at
+// 200 characters mid-word ("…Open Material reveals/clears material struct").
+console.log("\n── §304 · the parser may not refuse a craft you hold — and a refusal it may make ends on a word ──");
+{
+  const G304 = await import("../engine/gm.js");
+  const who304 = { abilities: [{ abilityId: "open_material", level: 2 }], customAbilities: {} };
+  const why304 = "The reclamation system is a vast waking mechanism with catastrophic structural failure at its core—a bearing or seal failure that deepens with every pulse. Open Material reveals/clears material structure; it does not rebuild a mechanism the size of a valley from the inside, and this asks it to";
+  const pushed304 = G304.sanitizeIntent({ label: "open the failing heart with Open Material", abilityId: "open_material", feasible: false, infeasibleReason: why304, difficulty: "hard" }, who304, "I use Open Material on the failure");
+  check("§304: ⛔ a craft the character holds, pushed past its envelope, comes back NOVEL USE — feasible, priced by the dice, ruled by the GM — never a refusal",
+    pushed304.feasible === true && pushed304.novelUse === true && pushed304.abilityId === "open_material" && pushed304.infeasibleReason === null, JSON.stringify(pushed304).slice(0, 240));
+  const combo304 = G304.sanitizeIntent({ comboAbilities: ["open_material"], feasible: false, infeasibleReason: "no" }, who304, "braid it");
+  check("§304: …and the same for a craft named in a braid",
+    combo304.feasible === true && combo304.novelUse === true);
+  const wall304 = G304.sanitizeIntent({ label: "walk through the mountain", feasible: false, infeasibleReason: why304 }, who304, "I walk through the mountain");
+  const r304 = wall304.infeasibleReason || "";
+  check("§304: ⛔ an act that names no craft may still be refused — and its reason ends on a whole word with the cut marked, never mid-word",
+    wall304.feasible === false && r304.length > 200 && r304.length <= 281 && /…$/.test(r304) && why304.startsWith(r304.slice(0, -1).trimEnd())
+    && /[\s,;:—–-]/.test(why304.charAt(r304.slice(0, -1).trimEnd().length) || " "), JSON.stringify(r304.slice(-40)));
+  check("§304: …and the rule the code keeps is still the prompt's own — the envelope law the parser is given",
+    /novelUse=true when an ability is being pushed OUTSIDE its normal envelope[^.]*this is allowed and interesting, not infeasible/.test(rd("engine/gm.js")));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

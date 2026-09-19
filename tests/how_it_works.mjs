@@ -21656,6 +21656,30 @@ console.log("\n── §297 · a gate leads to the hub through the network, and 
     paint297.length > 0 && /placeLabels\(marks416\.map/.test(paint297) && /l\.supersededBy \|\| aliased416\[id\]/.test(paint297));
 }
 
+// ══════════ §298 · CCODE-417 — A TRAINED HAND CAN STILL FAIL BADLY ══════════
+// Erik (2026-09-18): "I notice the crit failure bands are always VERY low… while the crit success can be higher. we might want to
+// tweak that a bit." — and, shown the proposal, "I'm good with proposed critical failure rate." The dials were base 5, −2 a rank,
+// −1 a level of practice, floored at 1: from rank 2 up every hand sat ON the floor, so a trained character's catastrophe was the
+// same 1 in 100 at every rank and the odds bar drew it as a hairline. The ruling is the SHAPE, asserted here on the live rules;
+// the numbers are his to turn (base 12, −1 a rank today).
+console.log("\n── §298 · a trained hand can still fail badly — the crit-failure dial above its floor, and still falling with rank ──");
+{
+  const R298 = await import("../engine/resolve.js");
+  const rules298 = rj("content/packs/core/rules/resolution.json");
+  const dial298 = (rank, practice) => R298.critProfile({ rules: rules298, action: { abilityLevel: rank, skillId: practice ? "s" : null },
+    character: { skills: { s: practice } } });
+  const floor298 = rules298.crit?.minChance ?? 0;
+  const top298 = dial298(5, 2);
+  check("§298: ⛔ a rank-5 hand with practice keeps a crit-failure dial ABOVE the floor — mastery softens catastrophe, it does not erase it",
+    top298.failChance > floor298, `rank 5 · practice 2 → ${top298.failChance}, floor ${floor298}`);
+  const byRank298 = [0, 1, 2, 3, 4, 5].map(r => dial298(r, 0).failChance);
+  check("§298: …and expertise still lowers it, rank by rank — no two ranks share a dial until the floor",
+    byRank298.every((v, i) => i === 0 || v < byRank298[i - 1] || v === floor298), JSON.stringify(byRank298));
+  const raw298 = dial298(0, 0);
+  check("§298: ⛔ an untrained hand fails badly at least as often as it triumphs — the tails no longer lean one way for everyone",
+    raw298.failChance >= raw298.successChance, `crit success ${raw298.successChance}, crit failure ${raw298.failChance}`);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

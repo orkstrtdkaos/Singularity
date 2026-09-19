@@ -169,7 +169,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.89";
+const APP_VERSION = "2.0.90";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1022,11 +1022,15 @@ function noteLastPush(id, info) {
   try { localStorage.setItem(LAST_PUSH_KEY(id), JSON.stringify({ ...info, lastOkAt: okAt, lastOkRev: okRev })); } catch { /* best-effort */ }
 }
 
+// ⛔ CCODE-427: above zero while a fire test applies a turn to a COPY — nothing it does is stored, pushed, or reported (runFireTests)
+let _fireTestDry = 0;
+
 /** ⛔ THE ONE WRITER every `saveCharacter(...)` in this file lands on. The local write happens FIRST and is
  *  never made to wait on a network; a throw from it still propagates, because a save that did not happen must
  *  never be reported as one that did. ⚠️ The pushed object is the one just saved rather than the module's
  *  `character`, so a save during creation — before `character` is assigned — still goes up. */
 function saveCharacter(c, opts) {
+  if (_fireTestDry) return;   // ⛔ CCODE-427: a fire test's copy is never stored, and never becomes what the push sends (`_syncTarget`)
   const r = persistCharacter(c, opts);
   _syncTarget = c || _syncTarget;
   queueSync();
@@ -2683,6 +2687,21 @@ async function runFireTests({ apply = false, only = null } = {}) {
   if (!isDevMode() || !character) return [];
   const real = character;
   const out = [];
+  // ⛔ CCODE-427 — SEALED, NOT MERELY SWAPPED. Swapping `character` closed one door, and applyTurn writes through others: the beat it
+  // pushes onto `sceneTurns` (this module's alias of the LIVE scene), the notes it leaves for the next GM turn, the party scene, the save,
+  // the profile, and the push — whose target the save sets. ⚑ On Silas's save (2026-09-18) a fire test's job offer became a beat of his
+  // scene and a fire test's copy went up as his save (CCODE-424 paused them). Now every copy's apply runs with the doors shut
+  // (`_fireTestDry`) and with its OWN copy of the turn's module state; the live state is put back after, whatever the op did.
+  // §306 holds `turnModuleState` to every module variable applyTurn can reach.
+  const live = turnModuleState();
+  const sealed = (fn) => {
+    setTurnModuleState({ ...live, sceneTurns: (live.sceneTurns || []).map(t => ({ ...t })),
+      sceneState: live.sceneState ? JSON.parse(JSON.stringify(live.sceneState)) : null,
+      pendingBraidMoments: [...(live.pendingBraidMoments || [])], sharedScene: null });
+    _fireTestDry++;
+    try { return fn(); }
+    finally { _fireTestDry--; setTurnModuleState(live); }
+  };
   // ⛔ SNG-563 — THE FIRST REAL REPORT CAME BACK A FALSE GREEN, AND IT CAUGHT ITSELF. Every one of the fourteen ops
   // read "applied — wrote activeScene, clock, rev, sessions, updatedAt, worldState", and not one of those is the op's
   // doing: `applyTurn` writes them on EVERY turn whatever it carries. ⚠️ SO `no-op` COULD NEVER FIRE, and `no-op` is the
@@ -2691,7 +2710,7 @@ async function runFireTests({ apply = false, only = null } = {}) {
   // op moves BEYOND it. The subtraction is the instrument — without it the diff measures applyTurn, not the op.
   const control = JSON.parse(JSON.stringify(real));
   let noise = [];
-  try { character = control; applyTurn({ narration: "", choices: [] }, null, null); }
+  try { sealed(() => { character = control; applyTurn({ narration: "", choices: [] }, null, null); }); }
   catch { /* a control that throws is itself worth seeing, and the ops below still run */ }
   finally { character = real; }
   noise = new Set(diffKeys(JSON.parse(JSON.stringify(real)), control));
@@ -2706,8 +2725,10 @@ async function runFireTests({ apply = false, only = null } = {}) {
     const before = JSON.parse(JSON.stringify(copy));
     let verdict = "applied", why = null;
     try {
-      character = copy;                       // the applier writes here, and only here
-      applyTurn({ narration: "", choices: [], ...frag }, null, null);
+      sealed(() => {
+        character = copy;                     // the applier writes here, and only here — ⛔ CCODE-427: and the seal holds the rest
+        applyTurn({ narration: "", choices: [], ...frag }, null, null);
+      });
     } catch (err) { verdict = "threw"; why = String(err?.message || err).slice(0, 200); }   // prose-cap-ok: an Error message, not model prose
     finally { character = real; }             // ⛔ ALWAYS — a harness that can strand the live character is worse than none
     // ⛑ WHAT THIS OP MOVED, MINUS WHAT ANY TURN MOVES. `clock`, `rev`, `sessions`, `updatedAt`, `activeScene` and
@@ -2728,17 +2749,27 @@ async function runFireTests({ apply = false, only = null } = {}) {
   return out;
 }
 
+/** ⛔ CCODE-427 — THE MODULE STATE A TURN WRITES BESIDES THE CHARACTER: the scene, the notes it leaves for the next GM turn, the party
+ *  scene. The fire tests' seal takes it and puts it back. ⚠️ §306 derives, from the call graph, every module variable applyTurn can
+ *  reach, and fails if one is neither here nor shut some other way — a list kept by hand is the list that goes stale. */
+function turnModuleState() {
+  return { sceneTurns, sceneBeats, sceneState, sceneSubPlace, gambitHintCooldown, pendingBraidMoments, pendingEncounterOffer,
+    pendingGambitProposal, pendingPressure, pendingStageReveal, pendingWeave, pressureStreak, quietTurns, sceneEncounterFired,
+    turnsSinceEncounter, sharedScene, seenBeats, _applyPhase };
+}
+function setTurnModuleState(s) {
+  ({ sceneTurns, sceneBeats, sceneState, sceneSubPlace, gambitHintCooldown, pendingBraidMoments, pendingEncounterOffer,
+    pendingGambitProposal, pendingPressure, pendingStageReveal, pendingWeave, pressureStreak, quietTurns, sceneEncounterFired,
+    turnsSinceEncounter, sharedScene, seenBeats, _applyPhase } = s);
+}
+
 /** SNG-564: the fire tests run themselves. Once per build per character, off the critical path, silent unless
  *  something is worth saying. ⚠️ The verdicts ride up in the dev report either way — the point is that nobody
  *  has to ask for them. */
 let _autoFiring = false;
-const FIRE_TESTS_PAUSED = true;   // ⛔ CCODE-424: see maybeAutoFireTests — lifted when `runFireTests` cannot reach the live scene or the push
 function maybeAutoFireTests() {
-  // ⛔ CCODE-424 — PAUSED UNTIL THE HARNESS IS SANDBOXED. On 2026-09-18 it ran on Silas's live save and wrote through two doors the
-  // swap of `character` does not close: `applyTurn` pushes its beat onto `sceneTurns`, this module's alias of the LIVE scene, so the
-  // job the fire test offered became a beat of his scene; and it saves the character it is handed, which points the push at each COPY —
-  // so the save that went up was a fire test's, whose last turn had no narration and no choices. The button still runs them on request.
-  if (FIRE_TESTS_PAUSED) return;
+  // ⛑ CCODE-427: running again — CCODE-424 paused them after a fire test wrote into Silas's live scene and its copy went up as his save;
+  // `runFireTests` now seals every copy's apply, so neither can happen.
   if (!isDevMode() || !character || _autoFiring) return;
   if (character._fireTests?.build === APP_VERSION) return;   // already answered for this build
   const idle = (fn) => (typeof requestIdleCallback === "function" ? requestIdleCallback(fn, { timeout: 8000 }) : setTimeout(fn, 1500));
@@ -2829,7 +2860,7 @@ async function reportLegStatus() {
 /** Auto-mark a preview leg verified when its pass-condition fires in real play. Dev-only; idempotent
  *  (won't downgrade a manual mark or re-mark a reported one); reports to Aevi when sync is on. */
 function autoVerifyLeg(legId, note) {
-  if (!devEnabled() || !legId) return;
+  if (!devEnabled() || !legId || _fireTestDry) return;   // ⛔ CCODE-427: a fire test's copy verifies nothing for Aevi
   const map = loadLegStatus();
   const cur = map[legId];
   if (cur?.status === "pass") { if (!cur.reported) reportLegStatus(); return; }
@@ -9074,10 +9105,10 @@ function applyTurn(turn, resolution, playerWords = null) {
     turn._engineClosedScene = sceneBeats;
   }
   character.activeScene = turn.sceneEnded ? null : { locationId: character.currentLocationId, turns: sceneTurns, lastTurn: turn, sceneState, beats: sceneBeats, subPlace: sceneSubPlace };
-  saveCharacter(character); saveProfile(profile);
+  saveCharacter(character); if (!_fireTestDry) saveProfile(profile);
 
-  // shared-world consequences (best-effort, never blocks play)
-  if (syncEnabled()) {
+  // shared-world consequences (best-effort, never blocks play) — ⛔ CCODE-427: never a fire test's (its `backupSaves` pushed the COPY)
+  if (syncEnabled() && !_fireTestDry) {
     const events = (turn.ledgerEvents || []).map(e => ({
       schemaVersion: 1, at: new Date().toISOString(), worldDay: absoluteWorldDay(), who: character.id, playerKey: profile.playerKey,
       // ⚠️ SNG-595: CLAMPED, NOT SLICED. `.slice(0, 200)` cut the public record mid-word — "the method of retrieval will
@@ -10428,6 +10459,7 @@ function commitGeneratedLocation(id, rec) {
 }
 
 function mintTransitLocation(moveRef) {
+  if (_fireTestDry) return null;   // ⛔ CCODE-427: a place minted for a fire test's copy would land in the LIVE content (`CONTENT`)
   // SNG-329 — ⛔ THE MINT IS A WRITE TO THE SAVE, SO IT IS THE STRICTEST GATE IN THIS PATH, NOT THE LOOSEST.
   // Aevi's framing, and it is right: this path is permissive ON PURPOSE ("a named-but-unrecorded destination
   // like 'the pass' becomes a real place"), and permissive input plus a PERSISTING write is exactly where a

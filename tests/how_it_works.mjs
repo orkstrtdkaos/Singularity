@@ -12377,7 +12377,8 @@ console.log("\n── §190 · the push rides on the save, a failure says so, an
   check(`§190: ⛔ every one of app.js's ${saveCalls} save sites passes through ONE local writer that queues a push — the import is aliased so none of them can reach past it`,
     /import \{[^}]*\bsaveCharacter as persistCharacter\b/.test(A190)
     && (A190.match(/^function saveCharacter\(c, opts\) \{$/gm) || []).length === 1
-    && /function saveCharacter\(c, opts\) \{\s*\n\s*const r = persistCharacter\(c, opts\);\s*\n\s*_syncTarget = c \|\| _syncTarget;\s*\n\s*queueSync\(\);/.test(A190)
+    // (CCODE-427: the one prefix allowed is the fire tests' dry return — a copy under test is neither stored nor pushed; §306)
+    && /function saveCharacter\(c, opts\) \{\s*\n(?:\s*if \(_fireTestDry\) return;[^\n]*\n)?\s*const r = persistCharacter\(c, opts\);\s*\n\s*_syncTarget = c \|\| _syncTarget;\s*\n\s*queueSync\(\);/.test(A190)
     && !/\bpersistCharacter\(/.test(A190.replace(/const r = persistCharacter\(c, opts\);/, "")),
     `${saveCalls} save sites`);
   check("§190: …and the local write happens FIRST and is never made to wait on the network — a save that did not happen must never be reported as one that did",
@@ -22084,8 +22085,9 @@ console.log("\n── §303 · a name the roll reads is a name the roll declared
   check("§303: ⛔ the roll path DECLARES the discovered technique before its receipt reads it — in the same function, from the same lookup the old block used",
     start303 >= 0 && decl303 > 0 && read303 > decl303 && /const disc = nv\.discoveryBonus \? knownDiscovery\(character, abilityIds, action\.noveltyHint\) : null;/.test(body303),
     JSON.stringify({ start303, decl303, read303 }));
-  check("§303: ⛔ the fire tests do not run themselves while they can reach the live scene and the push — paused, and the pause says why",
-    /const FIRE_TESTS_PAUSED = true;/.test(A303) && /function maybeAutoFireTests\(\) \{[\s\S]{0,1200}if \(FIRE_TESTS_PAUSED\) return;/.test(A303));
+  // ⛑ CCODE-427 lifted the pause this check held, by sealing the harness — so it now holds the rule the pause stood in for (§306 has the detail)
+  check("§303: ⛔ the fire tests never run where they can reach the live scene or the push — every copy's apply is sealed",
+    /const sealed = \(fn\) => \{/.test(A303) && /sealed\(\(\) => \{\n\s*character = copy;/.test(A303) && !/FIRE_TESTS_PAUSED/.test(A303));
 }
 
 // ══════════ §304 · CCODE-426 — THE PARSER MAY NOT REFUSE A CRAFT YOU HOLD ══════════
@@ -22190,6 +22192,70 @@ console.log("\n── §305 · the people Erik named — two joins by his word, 
   cas.tier = keep304.tier; if (keep304.level === undefined) delete cas.level; else cas.level = keep304.level;
   check("§305: ⚑ Cassiel's rung is the author's — and the one that reads Erik's 15 on Silas's save today is `leader`, not an authored `level: 15`",
     asLeader === 15 && asLevel15 === 18 && cas.pronouns === "he/him", JSON.stringify({ asLeader, asLevel15, now: cas.tier }));
+}
+
+// ══════════ §306 · CCODE-427 — THE FIRE TESTS, SEALED ══════════
+// CCODE-424 paused the fire tests that run themselves: on Silas's save a fire test's job offer became a beat of his scene, and a fire
+// test's COPY went up as his save. Swapping `character` had closed one door; applyTurn writes through others — the scene alias, the notes
+// for the next GM turn, the party scene, the save, the profile, the push, a preview leg's verification, the live content.
+console.log("\n── §306 · the fire tests, sealed — every door applyTurn can reach is shut or held, and the automatic run is back ──");
+{
+  const A306 = rd("app.js").replace(/\r\n/g, "\n");
+  const { execFileSync } = await import("node:child_process");
+  let reach306 = null, why306 = "";
+  try {
+    reach306 = JSON.parse(execFileSync(process.execPath, ["--expose-internals", "tests/scope_scan.mjs", "--writes", "applyTurn", "3", "app.js"],
+      { cwd: root, encoding: "utf8", maxBuffer: 64 * 1024 * 1024, stdio: ["ignore", "pipe", "pipe"] }));
+  } catch (e) { why306 = String(e?.message || e).split("\n")[0]; }
+  const keys306 = ((A306.match(/function turnModuleState\(\) \{\s*return \{([^}]*)\};/) || [])[1] || "").split(",").map(s => s.trim()).filter(Boolean);
+  // ⚠️ SHUT ANOTHER WAY — each with the reason it cannot leak, so a new name must be argued for rather than waved through
+  const ELSEWHERE306 = {
+    character: "the harness swaps it and puts the live one back in a finally",
+    _syncTarget: "set only by saveCharacter, which returns first while a fire test runs",
+    _syncDirty: "the push queue — reached only through saveCharacter", _syncTimer: "the push queue", _syncInFlight: "the push queue",
+    _pushRefusedSaid: "the shared-world block is shut while a fire test runs",
+    _devReportTimer: "the dev report reads the LIVE character", _devReportInFlight: "the dev report", _devReportLastAt: "the dev report",
+    _reportingLegs: "autoVerifyLeg returns first while a fire test runs",
+    CONTENT: "mintTransitLocation returns first while a fire test runs",
+  };
+  const reached306 = Object.keys(reach306?.written || {});
+  const open306 = reached306.filter(n => !keys306.includes(n) && !(n in ELSEWHERE306));
+  check(`§306: ⛔ every module variable applyTurn can reach (${reached306.length}, through ${reach306?.reachable ?? "?"} functions) is held by the seal or shut another way — none open`,
+    !!reach306 && reached306.length >= 20 && keys306.length >= 15 && open306.length === 0, why306 || open306.join(", "));
+  check("§306: …and the ones the seal holds are the scene, the notes for the next GM turn and the party scene — the three that leaked or could",
+    ["sceneTurns", "sceneBeats", "sceneState", "pendingWeave", "pendingPressure", "pendingEncounterOffer", "sharedScene"].every(k => keys306.includes(k)));
+  check("§306: ⛔ the doors are shut while a fire test applies — the one writer, the profile, the shared world and its push, a preview leg, a minted place",
+    /function saveCharacter\(c, opts\) \{\n  if \(_fireTestDry\) return;/.test(A306)
+    && /saveCharacter\(character\); if \(!_fireTestDry\) saveProfile\(profile\);/.test(A306)
+    && /if \(syncEnabled\(\) && !_fireTestDry\) \{\n    const events = \(turn\.ledgerEvents/.test(A306)
+    && /function autoVerifyLeg\(legId, note\) \{\n  if \(!devEnabled\(\) \|\| !legId \|\| _fireTestDry\) return;/.test(A306)
+    && /function mintTransitLocation\(moveRef\) \{\n  if \(_fireTestDry\) return null;/.test(A306));
+  const run306 = (A306.match(/async function runFireTests\([\s\S]*?\n\}\n/) || [""])[0];
+  check("§306: ⛔ the control and every copy's apply run inside the seal, which gives each its own scene and puts the live one back whatever happened",
+    /try \{ sealed\(\(\) => \{ character = control; applyTurn\(/.test(run306) && /sealed\(\(\) => \{\n\s*character = copy;/.test(run306)
+    && /_fireTestDry\+\+;\n\s*try \{ return fn\(\); \}\n\s*finally \{ _fireTestDry--; setTurnModuleState\(live\); \}/.test(run306)
+    && /sceneTurns: \(live\.sceneTurns \|\| \[\]\)\.map\(t => \(\{ \.\.\.t \}\)\)/.test(run306) && /sharedScene: null/.test(run306));
+  check("§306: …while the apply Erik asks for FOR REAL stays unsealed — it is meant to land",
+    /if \(apply && verdict === "applied"\) \{\n\s*try \{ applyTurn\(\{ narration: "", choices: \[\], \.\.\.frag \}, null, null\); saveCharacter\(character\); \}/.test(run306));
+  check("§306: ⛑ and they run themselves again — no pause left in the automatic run",
+    !/FIRE_TESTS_PAUSED/.test(A306) && /function maybeAutoFireTests\(\) \{[\s\S]{0,600}if \(character\._fireTests\?\.build === APP_VERSION\) return;/.test(A306));
+
+  /* ---- ⛑ WHAT THEY LEFT: a blank stored last beat, filled — on Cellaceron's copy under Erik's key ---- */
+  const RC306 = await import("../engine/reconcile.js");
+  const { loadContentHeadless: lch306 } = await import("./headless_content.mjs");
+  const CT306 = await lch306();
+  const cel306 = JSON.parse(rd("characters/player-s9z9u1/char-mr4ejo8c.json"));
+  const blank306 = !String(cel306.activeScene?.lastTurn?.narration || "").trim();
+  const last306 = [...(cel306.activeScene?.turns || [])].reverse().find(t => String(t?.narration || "").trim());
+  const o306 = RC306.reconcile(cel306, "character", { content: CT306, day: 30 }, RC306.CHARACTER_STEPS.filter(s => s.version === 69));
+  check("§306: ⛑ a stored last turn with no narration and no choices is filled from the scene's last narrated beat — additive, silent, once",
+    !blank306 || (cel306.activeScene.lastTurn.narration === last306?.narration && !(o306.notes || []).length
+      && JSON.stringify(RC306.reconcile(JSON.parse(JSON.stringify(cel306)), "character", { content: CT306, day: 30 }, RC306.CHARACTER_STEPS.filter(s => s.version === 69)).applied || []) === "[]"),
+    JSON.stringify({ blank306, filled: (cel306.activeScene?.lastTurn?.narration || "").slice(0, 40) }));
+  const said306 = { activeScene: { turns: [{ narration: "older" }], lastTurn: { narration: "what was said", choices: [] } } };
+  RC306.CHARACTER_STEPS.find(s => s.version === 69).apply(said306);
+  check("§306: …and a last turn that has its narration is never touched",
+    said306.activeScene.lastTurn.narration === "what was said");
 }
 
 /* ══════════ REPORT ══════════ */

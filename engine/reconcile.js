@@ -87,6 +87,22 @@ function renameTargets(spec, entry, character, known) {
 
 export const CHARACTER_STEPS = [
   {
+    version: 69, id: "a-blank-last-beat", playerFacing: false,
+    // ⛔ CCODE-427 — WHAT THE FIRE TESTS LEFT. Before they were sealed, every fire test saved its COPY, so the stored last turn became a
+    // fire test's — no narration, no choices — and a reload opened on a blank beat. ⚑ Cellaceron's copy under Erik's key has carried one
+    // since 2026-09-13. ⛑ Additive, like every step here: the empty narration is filled from the scene's last narrated beat, and nothing
+    // is removed. Silent — a player is owed the beat they last read, not an account of why it was missing.
+    apply: (c) => {
+      const sc = c?.activeScene, lt = sc?.lastTurn;
+      if (!lt || String(lt.narration || "").trim() || (Array.isArray(lt.choices) && lt.choices.length)) return {};
+      const beat = [...(sc.turns || [])].reverse().find(t => String(t?.narration || "").trim());
+      if (!beat) return {};
+      lt.narration = beat.narration;
+      if (!lt.sceneSummary && beat.summary) lt.sceneSummary = beat.summary;
+      return {};
+    }
+  },
+  {
     version: 68, id: "the-people-erik-named", playerFacing: true,
     // ⛔ CCODE-423 — ERIK 2026-09-18: "yes join Aevi and Fendt, Sable is not the legend... she is someone pursuing the deep dark for
     // loki's quest." Cellaceron's Aevi IS Aevi the Watcher (both copies of that save carry the id); Usnea's Fendt IS Fendt, the

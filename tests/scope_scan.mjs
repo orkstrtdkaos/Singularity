@@ -148,9 +148,59 @@ export function scanSource(src) {
   return free;
 }
 
-// CLI: node --expose-internals tests/scope_scan.mjs <file…>
+/** ⛔ CCODE-427 — WHICH MODULE-LEVEL `let`S CAN A FUNCTION WRITE, directly or through the top-level functions it calls, to `depth`
+ *  calls deep. A write is an assignment, an update, or a mutating call (`.push`, `.splice`, `.set`…) on the variable or anything under it.
+ *  ⚠️ Renderers are not followed (`skip`): a turn's path reaches the screen, and from the screen everything — the whole file is not the
+ *  population a turn writes. → { reachable, written: { name: [functions] } }. */
+export function writesFrom(src, root, depth = 3, { skip = /^(render|chrome|show|open|wire|draw|paint)/ } = {}) {
+  const ast = acorn.parse(src, { ecmaVersion: "latest", sourceType: "module", locations: true, allowHashBang: true });
+  const lets = new Set(), fns = new Map();
+  for (const s of ast.body) {
+    const d = s.type === "ExportNamedDeclaration" ? s.declaration : s;
+    if (d?.type === "VariableDeclaration" && d.kind === "let") for (const x of d.declarations) if (x.id.type === "Identifier") lets.add(x.id.name);
+    if (d?.type === "FunctionDeclaration" && d.id) fns.set(d.id.name, d);
+  }
+  const base = (t) => { while (t && t.type === "MemberExpression") t = t.object; return t?.type === "Identifier" ? t.name : null; };
+  const info = new Map();
+  for (const [name, fn] of fns) {
+    const writes = new Set(), calls = new Set();
+    const walk = (n) => {
+      if (!n || typeof n !== "object") return;
+      if (Array.isArray(n)) { n.forEach(walk); return; }
+      if (n.type === "AssignmentExpression") {
+        if (n.left.type === "ObjectPattern" || n.left.type === "ArrayPattern") patternNames(n.left).forEach(x => lets.has(x) && writes.add(x));
+        else { const b = base(n.left); if (b && lets.has(b)) writes.add(b); }
+      } else if (n.type === "UpdateExpression") { const b = base(n.argument); if (b && lets.has(b)) writes.add(b); }
+      else if (n.type === "CallExpression") {
+        if (n.callee.type === "Identifier" && fns.has(n.callee.name)) calls.add(n.callee.name);
+        if (n.callee.type === "MemberExpression" && !n.callee.computed && /^(push|splice|unshift|shift|pop|add|delete|clear|set|sort|reverse|fill)$/.test(n.callee.property.name)) {
+          const b = base(n.callee.object); if (b && lets.has(b)) writes.add(b);
+        }
+        for (const a of n.arguments) if (a.type === "Identifier" && fns.has(a.name)) calls.add(a.name);
+      }
+      for (const k in n) if (k !== "loc" && n[k] && typeof n[k] === "object") walk(n[k]);
+    };
+    walk(fn.body);
+    info.set(name, { writes, calls });
+  }
+  const seen = new Map([[root, 0]]), queue = [root];
+  while (queue.length) {
+    const f = queue.shift();
+    if (seen.get(f) >= depth) continue;
+    for (const c of info.get(f)?.calls || []) if (!seen.has(c) && !skip.test(c)) { seen.set(c, seen.get(f) + 1); queue.push(c); }
+  }
+  const written = {};
+  for (const f of seen.keys()) for (const w of info.get(f)?.writes || []) (written[w] = written[w] || []).push(f);
+  return { reachable: seen.size, written };
+}
+
+// CLI: node --expose-internals tests/scope_scan.mjs <file…>   ·   --writes <function> <depth> <file>
 if (process.argv[1] && import.meta.url.endsWith(process.argv[1].replace(/\\/g, "/").split("/").pop())) {
   const out = {};
+  if (process.argv[2] === "--writes") {
+    process.stdout.write(JSON.stringify(writesFrom(readFileSync(process.argv[5], "utf8"), process.argv[3], Number(process.argv[4]) || 3)));
+    process.exit(0);
+  }
   for (const f of process.argv.slice(2)) {
     try { out[f] = scanSource(readFileSync(f === "-" ? 0 : f, "utf8")); }   // "-" reads the source from stdin (the gate's fixture)
     catch (err) { out[f] = { parseError: String(err?.message || err) }; }

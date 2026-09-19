@@ -21757,6 +21757,164 @@ console.log("\n── §299 · a gate aimed open — a wayfarer good enough fold
     /r\.routed === "open"/.test(A299) && /data-wgopen="1"/.test(A299) && /wgBtn\.dataset\.wgopen/.test(A299));
 }
 
+// ══════════ §300 · CCODE-420 — JOBS: SENT, TIMED, AND DECIDED BY THE DICE THE PEOPLE SENT WOULD ROLL ══════════
+// Erik (2026-09-18): "Each task needs to come in with a level reference and a difficulty… feed into a roll to determine the outcome of
+// the task for the GM to narrate. the outcome should have concrete effects"; "select people instead of only taking the best… giving
+// someone a job needs to take time"; "We need to be very sensitive to and credit the crafts people have". Errands were decided by a model
+// that saw only a name; a job is decided by the resolver, from the people sent, and paid through the game's own doors.
+console.log("\n── §300 · jobs — sent, timed, and decided by the dice the people sent would roll ──");
+{
+  const JB = await import("../engine/jobs.js");
+  const JS = await import("../engine/jobstate.js");
+  const RS = await import("../engine/resolve.js");
+  const BT = await import("../engine/battle_turn.js");
+  const CB = await import("../engine/combatants.js");
+  const FN300 = await import("../engine/functions.js");
+  const { loadContentHeadless: lch300 } = await import("./headless_content.mjs");
+  const CT300 = await lch300();
+  const RU300 = CT300.rules;
+  const fnIndex300 = FN300.buildFunctionIndex(CT300.functionVocabulary);
+
+  /* ---- 1 · ⛔ ONE ROLL, THE FIGHT'S; ONE SCALE ---- */
+  const sheet300 = { attributes: { physical: 6, mental: 6, social: 6, practical: 6 }, subAttributes: { wits: 6, reason: 6, insight: 6, craft: 6 } };
+  const skill300 = { id: "x", name: "A Craft", function: "sense", attribute: "mental", subAttribute: "insight", rank: 3, tier: 2 };
+  const opp300 = JB.jobOpposition(20, RU300);
+  const got300 = JB.craftOdds(sheet300, skill300, { rules: RU300, opposed: opp300 });
+  const ctx300 = { character: { ...sheet300, energy: 100 }, action: { attribute: "mental", subAttribute: "insight", abilityLevel: 3, difficulty: opp300 }, location: null, rules: RU300, aptitudeMods: {} };
+  const want300 = RS.successChance(ctx300);
+  check("§300: ⛔ a craft's chance at a job IS the resolver's — `successChance` with the job's opposition as a numeric difficulty, the fight's own door",
+    got300.chance === want300 && Math.abs(Object.values(got300.odds).filter(v => typeof v === "number").reduce((a, b) => a + b, 0) - got300.chance - 1) < 1e-9,
+    `${got300.chance} vs ${want300}`);
+  check("§300: ⛔ …and a level-L job opposes you as a level-L person does in a fight — one threat for both, through the duel's threatToDifficulty",
+    BT.personThreatForLevel(20) === 40 && opp300 === Math.round(40 * (RU300.encounters?.duel?.threatToDifficulty ?? 0.3))
+    && /threat: personThreatForLevel\(sheet\.level\)/.test(rd("engine/battle_turn.js")));
+
+  /* ---- 2 · ⛔ THE JOB'S ODDS ARE EXACT ---- */
+  const job300 = { id: "j", label: "Find who gutted the array", where: "millbrook", level: 18, effort: 8,
+    needs: [{ family: "KNOW", weight: 2, what: "read the prints" }, { family: "MOVE", weight: 1, what: "follow" }, { family: "HARM", weight: 1, what: "take them" }],
+    stakes: { crystal: 30, xp: 40, deed: "Named the saboteur", items: ["two anchors"], harm: 10 } };
+  const sure300 = { crit_success: 0.2, success: 0.75, partial: 0.05, failure: 0, crit_failure: 0 };
+  const coverSure = job300.needs.map(n => ({ need: n, personId: "a", personName: "A", craft: { name: "c", chance: 95 }, odds: sure300 }));
+  const distSure = JB.jobDistribution(job300, coverSure, RU300);
+  const distNone = JB.jobDistribution(job300, [null, null, null], RU300);
+  const sum300 = (d) => JB.OUTCOMES.reduce((a, k) => a + d[k], 0);
+  check("§300: ⛔ the job's five outcomes are enumerated over every combination of its needs — they sum to one, a sure team lands, and a need nobody can do sinks it",
+    Math.abs(sum300(distSure) - 1) < 1e-9 && Math.abs(sum300(distNone) - 1) < 1e-9
+    && distSure.success + distSure.crit_success > 0.95 && distNone.failure + distNone.crit_failure > 0.95,
+    JSON.stringify({ sure: distSure, none: distNone }));
+
+  /* ---- 3 · ⛔ WORK CREDITS THE CRAFTS ---- */
+  const crafted = (tier, rank) => new Map([["a", [{ id: "k", name: "K", family: "KNOW", tier, rank, chance: 90, odds: sure300 }]]]);
+  const w1 = JB.workOf(job300, [{ id: "a" }], crafted(1, 1), RU300), w5 = JB.workOf(job300, [{ id: "a" }], crafted(5, 3), RU300);
+  const R300 = JB.jobRules(RU300);
+  check("§300: ⛔ work credits the crafts — each tier works tierRate× the one below and rank multiplies it, so a tier-5 master does in minutes what a tier-1 hand takes hours over",
+    Math.abs(w1.hours / w5.hours - Math.pow(R300.tierRate, 4) * R300.rankRate[2]) < 1e-6 && w5.hours < 1 && w1.family === "KNOW",
+    `${w1.hours.toFixed(2)}h vs ${w5.hours.toFixed(3)}h`);
+
+  /* ---- 4 · ⛔ THE ROAD: EACH PERSON'S OWN, AT THE SLOWEST'S PACE ---- */
+  const trip300 = JB.tripOf(job300, [{ id: "a" }, { id: "b" }, { id: "c" }], { routeOf: (p) => (p.id === "a" ? { days: 1 } : p.id === "b" ? { days: 3.5 } : null), rules: RU300 });
+  check("§300: ⛔ the team sets out at the pace of the farthest — and a road that cannot be measured is never a short one",
+    trip300.there === Math.max(3.5, R300.unmeasuredDays) && trip300.legs.find(l => l.id === "c").days === null, JSON.stringify(trip300));
+
+  /* ---- 5 · ⛔ A SUGGESTION NEVER TAKES SOMEONE WHO IS OUT; THE ROLL NEVER DRAWS AN IMPOSSIBLE OUTCOME ---- */
+  check("§300: ⛔ the roll never draws an outcome with no chance — the first die draws the first POSSIBLE outcome, the last the last",
+    JB.rollJob(distSure, () => 0) === "crit_success" && JB.rollJob({ crit_success: 0, success: 0.6, partial: 0.4, failure: 0, crit_failure: 0 }, () => 0) === "success"
+    && JB.rollJob({ crit_success: 0, success: 0.6, partial: 0.4, failure: 0, crit_failure: 0 }, () => 0.99999) === "partial");
+
+  /* ---- 6 · ⛔ WHAT IT PAYS, AND THROUGH WHICH DOORS ---- */
+  const fxWin = JB.jobEffects(job300, "success", RU300), fxBad = JB.jobEffects(job300, "crit_failure", RU300);
+  check("§300: ⛔ the outcome pays the stakes scaled by the degree — a success the whole purse and the deed, a disaster no deed and double the harm",
+    fxWin.crystal === 30 && fxWin.xp === 40 && fxWin.deed === "Named the saboteur" && fxWin.items.length === 1
+    && fxBad.deed === null && fxBad.harmEach === 20 && fxBad.standing < 0, JSON.stringify({ fxWin, fxBad }));
+  const costJob = { ...job300, stakes: { crystal: -15, xp: 10 } };
+  check("§300: ⛔ a job's COST is paid when it leaves — and only a disaster's overrun, half again, moves crystal on its return",
+    JB.jobCost(costJob) === 15 && JB.jobEffects(costJob, "success", RU300).crystal === 0 && JB.jobEffects(costJob, "crit_failure", RU300).crystal === -8);
+  const hero300 = { id: "c", name: "Hero", level: 5, xp: 0, health: 20, maxHealth: 20, purse: { crystal: 0, coin: 0, paper: 0, marks: 0, scrip: {} },
+    inventory: [], deeds: [], npcRegistry: { mara: { id: "mara", name: "Mara", completions: 0 } }, bands: [] };
+  const entry300 = { job: job300, team: ["player", "mara"], names: { mara: "Mara" } };
+  const lines300 = JB.applyJobEffects(hero300, entry300, fxWin, { content: CT300, itemCatalog: CT300.items });
+  check("§300: ⛔ applied through the game's doors — crystal into the purse, xp to the character who went, a completion to each person who went well, the items in the pack, and ONE deed at the job's place",
+    hero300.purse.crystal === 30 && hero300.xp === 40 && hero300.npcRegistry.mara.completions === 1
+    && hero300.inventory.some(i => /two anchors/i.test(i.name)) && hero300.deeds.length === 1 && hero300.deeds[0].locationId === "millbrook"
+    && hero300.deeds[0].weight === 1 && hero300.health === 20 - fxWin.harmEach, lines300.join(" · "));
+  const stay300 = { ...hero300, xp: 0, deeds: [], purse: { crystal: 0, coin: 0, paper: 0, marks: 0, scrip: {} }, inventory: [], npcRegistry: { mara: { id: "mara", completions: 0 } } };
+  JB.applyJobEffects(stay300, { ...entry300, team: ["mara"] }, fxWin, { content: CT300, itemCatalog: CT300.items });
+  check("§300: …and a character who SENT people and stayed gets the purse and the deed, never the xp — the experience is the people's who went",
+    stay300.xp === 0 && stay300.purse.crystal === 30 && stay300.npcRegistry.mara.completions === 1 && stay300.deeds.length === 1);
+  const full300 = { ...stay300, inventory: Array.from({ length: 30 }, (_, i) => ({ id: null, name: `thing ${i}`, qty: 1 })), deeds: [] };
+  const fullLines = JB.applyJobEffects(full300, { ...entry300, team: ["mara"] }, fxWin, { content: CT300, itemCatalog: CT300.items });
+  check("§300: ⚠️ …and a full pack is SAID, because `addItem` hands the item back whether or not it went in",
+    fullLines.some(l => /no room in your pack/.test(l)) && full300.inventory.length === 30, fullLines.join(" · "));
+
+  /* ---- 7 · ⛔ THE RECORD: POSTED CLAMPED, SENT, OUT, BACK, TOLD ---- */
+  const big = JS.normalizeJob({ label: "  A   task  ", where: "millbrook", level: 99, needs: [{ family: "know", weight: 9 }, { family: "nope" }], stakes: { crystal: 9999, harm: 500, xp: -3 } });
+  check("§300: ⛔ a posted job is clamped to what its level can honestly pay — level 60 at most, weights 1–3, unknown families dropped, crystal ≤ 4× level, harm ≤ level",
+    big.ok && big.job.level === 60 && big.job.needs.length === 1 && big.job.needs[0].weight === 3 && big.job.stakes.crystal === 240
+    && big.job.stakes.harm === 60 && !("xp" in big.job.stakes) && big.job.label === "A task", JSON.stringify(big.job));
+  const ch300 = { id: "c", name: "Hero", npcRegistry: {}, jobs: null };
+  JS.postJob(ch300, job300, { day: 3 });
+  const plan300 = { dist: distSure, cover: coverSure, backAtHours: 100, work: { family: "KNOW", hours: 1, days: 0.04 }, trip: { there: 2 } };
+  const refuse300 = JS.sendOnJob(ch300, "j", [], plan300);
+  const sent300 = JS.sendOnJob(ch300, "j", ["mara"], plan300, { nowHours: 50, day: 3, names: { mara: "Mara" } });
+  JS.postJob(ch300, { ...job300, id: "j2" }, { day: 3 });
+  const twice300 = JS.sendOnJob(ch300, "j2", ["mara"], plan300, { names: { mara: "Mara" } });
+  check("§300: ⛔ sending takes the job off the board and marks the team OUT — nobody is sent twice, and nobody is sent on nothing",
+    !refuse300.ok && sent300.ok && ch300.jobs.board.every(j => j.id !== "j") && JS.awayOnJob(ch300, "mara")?.job?.id === "j"
+    && !twice300.ok && /already out/.test(twice300.why), JSON.stringify({ refuse300, twice300 }));
+  check("§300: …and they come home only when their time is up — not a beat before",
+    JS.dueJobs(ch300, 99).length === 0 && JS.dueJobs(ch300, 100).length === 1);
+  const settled300 = JB.settleDueJobs(ch300, { nowHours: 100, rng: () => 0.5, content: CT300, day: 5 });
+  check("§300: ⛔ a team home is SETTLED — rolled from the odds they left with, applied, and waiting to be told",
+    settled300.length === 1 && ch300.jobs.out.length === 0 && ch300.jobs.back.length === 1 && JS.untoldJobs(ch300).length === 1
+    && /THE JOB CAME BACK/.test(settled300[0].directive) && JB.OUTCOMES.includes(settled300[0].degree));
+  check("§300: …and the GM's block carries the result first, says who is OUT, and forbids resolving what is merely offered",
+    /THE JOB CAME BACK/.test(JB.jobsForGM(ch300, { content: CT300 }) || "") && /never resolve one yourself/.test(JB.jobsForGM(ch300, { content: CT300 }) || ""));
+  JS.markJobsTold(ch300, JS.untoldJobs(ch300).map(e => e.id));
+  check("§300: …and once told, never told again", JS.untoldJobs(ch300).length === 0 && !/THE JOB CAME BACK/.test(JB.jobsForGM(ch300, { content: CT300 }) || ""));
+
+  /* ---- 8 · ⛔ SOMEONE OUT ON A JOB IS NOT AT THE FIGHT ---- */
+  const away300 = { id: "c", name: "Hero", level: 10, company: [{ npcId: "mara", roles: ["ally"] }], companions: [], npcRegistry: { mara: { id: "mara", name: "Mara" } },
+    jobs: { board: [], back: [], out: [{ id: "e", job: { label: "A job" }, team: ["mara"], backAtHours: 999 }] } };
+  const allies300 = CB.alliesOf(away300, { companions: {}, npcs: { mara: { id: "mara", name: "Mara" } }, company: away300.company, party: null, catalog: {}, fnIndex: fnIndex300 });
+  const mara300 = allies300.find(a => a.id === "mara");
+  check("§300: ⛔ an ally out on a job is NOT PRESENT in a fight — the one field every targeting and interception consumer already filters on",
+    !!mara300 && mara300.present === false && mara300.awayOn === "A job", JSON.stringify(mara300 && { present: mara300.present, awayOn: mara300.awayOn }));
+
+  /* ---- 9 · ⛔ THE GM OFFERS; THE APP POSTS, SETTLES ON THE CLOCK, AND MARKS TOLD AFTER THE CALL RETURNS ---- */
+  const G300 = rd("engine/gm.js"), A300 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§300: ⛔ the contract documents jobOps, the rule says when to offer one and forbids narrating its outcome, and it is salvageable and counts as a write",
+    /"jobOps": \[\{"op": "offer"/.test(G300) && /14D\. JOBS \(CCODE-420\)/.test(G300) && /NEVER narrate a job's outcome yourself/.test(G300)
+    && /SALVAGEABLE_OPS = \[[^\]]*"jobOps"/.test(G300));
+  check("§300: …the app posts an offered job through `postJob`, settles due teams right after the beat's clock moves and on every tick, and marks results told only AFTER the GM's call returns",
+    /if \(turn\.jobOps\?\.length\)[\s\S]{0,900}postJob\(character,/.test(A300)
+    && /advanceClock\(character\.clock, hours\);\n  settleJobsNow\(\);/.test(A300)
+    && /async function maybeTick\(\) \{\n  const currentDay = readClock\(character\.clock\)\.day;\n  settleJobsNow\(\);/.test(A300)
+    && A300.indexOf("markJobsTold(character, jobsTold420)") > A300.indexOf("if (!result.ok) { renderPlay(null, { error: result.error }); return null; }"));
+  check("§300: …and the Jobs tab is a tab, whose send refuses before it charges and runs the clock when you go yourself",
+    /id="tab-jobs"/.test(A300) && /go\("tab-jobs", \(\) => renderJobsTab\(\)\)/.test(A300)
+    && A300.indexOf("const r = sendOnJob(character, job.id") < A300.indexOf("if (cost > 0) debit(character, \"crystal\", cost);")
+    && /if \(team\.some\(p => p\.isYou\)\) \{ advanceClock\(character\.clock, plan\.backAtHours - nowHours\); settleJobsNow\(\); \}/.test(A300));
+  const whole300 = JB.planJob({ ...job300, effort: 0.01 }, [{ id: "a", skills: [] }], { rules: RU300, fnIndex: fnIndex300, routeOf: () => ({ days: 0 }), nowHours: 442 });
+  check("§300: ⚠️ …and a return is a WHOLE hour, at least one ahead — the clock floors its hour, so a job due at a fraction of one never comes home",
+    Number.isInteger(whole300.backAtHours) && whole300.backAtHours === 443, String(whole300.backAtHours));
+
+  /* ---- 10 · ON SILAS'S REAL SAVE ---- */
+  const disk300 = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const L300 = { ...CT300.locations };
+  for (const rec of Object.values(disk300.generated?.location || {})) if (rec?.id && !L300[rec.id]) L300[rec.id] = rec;
+  const pool300 = JB.jobPoolOf(disk300, { content: CT300, abilityCatalog: CT300.abilities, locations: L300 });
+  const keeper300 = (disk300.holdings || []).find(h => h?.steward && h.locationId && pool300.some(p => p.id === String(h.steward)));
+  check("§300: ⛑ on Silas's save the pool is the people he leads, from the records a fight reads — himself first, and a keeper stands at the hold they keep",
+    pool300[0]?.isYou === true && pool300.length >= 4 && pool300.every(p => p.skills.length > 0)
+    && (!keeper300 || pool300.find(p => p.id === String(keeper300.steward)).locationId === keeper300.locationId),
+    pool300.map(p => `${p.short}@${p.locationId}`).join(" · "));
+  const build300 = { id: "b", label: "Rebuild the array", where: "gen-threshold-post", level: 16, effort: 30, needs: [{ family: "SHAPE", weight: 3 }, { family: "KNOW", weight: 1 }], stakes: { xp: 30 } };
+  const best300 = JB.suggestTeam(build300, pool300.filter(p => !p.isYou), 1, { rules: RU300, fnIndex: fnIndex300, routeOf: JB.jobRouteOf(disk300, { locations: L300, rules: RU300, abilityCatalog: CT300.abilities }), location: L300["gen-threshold-post"] });
+  check("§300: ⛑ …and thirty hand-days of building, given to his best builder, is work of hours — the crafts are credited, as Erik asked",
+    !!best300 && best300.plan.work.hours < 8 && Math.abs(JB.OUTCOMES.reduce((a, k) => a + best300.plan.dist[k], 0) - 1) < 1e-9,
+    best300 ? `${best300.team.map(p => p.short).join(", ")}: ${best300.plan.work.hours.toFixed(2)}h of work` : "no suggestion");
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

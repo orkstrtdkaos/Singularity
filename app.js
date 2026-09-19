@@ -85,6 +85,8 @@ import { rankVoices, pickVoice, speakableText, chunkForSpeech, renderProseHtml }
 import { harmGateFor, harmTargetFor, departureGateFor, isConsequentialMove, isSpeechAct, isRemoteContact, personDestination, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop); SNG-188: speech-act guard; SNG-228: person-as-place guard; CCODE-158: one departure definition for both doors; CCODE-159: remote contact is not travel
 import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, gateHopCost, aimsOpen } from "./engine/waygate.js";
 import { routeBetween, routeLine, twoWayRoads } from "./engine/journey.js";
+import { planJob, suggestTeam, jobPoolOf, jobRouteOf, jobCost, jobEffects, sayEffects, settleDueJobs, degreeWord, jobOpposition, mainNeedOf, jobCraftsOf, bestCraftFor, OUTCOMES as JOB_OUTCOMES } from "./engine/jobs.js";   // CCODE-420
+import { ensureJobs, postJob, sendOnJob, awayOnJob, untoldJobs, markJobsTold, dropJob } from "./engine/jobstate.js";   // CCODE-420
 import { sendCaravan, caravansOf } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph, craftRollsLine, craftRollsShort } from "./engine/entityDetail.js";
 import { collapseScenePresence, canonicalPersonId, personArtSeed, applyNpcUpdates, findExistingNpc, genderUnsaid, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM, repairUnnamedPeople } from "./engine/npcs.js";   // SNG-431 §1: the pre-namer saves get their names
@@ -167,7 +169,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.82";
+const APP_VERSION = "2.0.83";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3372,7 +3374,7 @@ function renderMachine() {
   // wrote outcome data the panel never showed. A smoke test now pins this set to the logOpOutcome callers.
   // CCODE-158 adds moveTo: the applier now REFUSES an unearned relocation, and a refusal nobody can see
   // is the same invisible-outcome bug this set exists to prevent.
-  const OUTCOME_INSTRUMENTED = new Set(["markTeacher", "delegateOps", "arcOps", "adoptSchool", "offer", "moveTo"]);
+  const OUTCOME_INSTRUMENTED = new Set(["markTeacher", "delegateOps", "jobOps", "arcOps", "adoptSchool", "offer", "moveTo"]);
   const vocab = [...new Set([...SALVAGEABLE_OPS, "sceneEnded", "gambitApt", ...Object.keys(ledger), ...Object.keys(emitted)])];
   const firedOps = vocab.filter(isEmitted).sort((a, b) => (emitted[b] || 0) - (emitted[a] || 0));
   const neverOps = vocab.filter(op => !isEmitted(op)).sort();
@@ -5738,6 +5740,7 @@ function armBuildWatch() {
 
 async function maybeTick() {
   const currentDay = readClock(character.clock).day;
+  settleJobsNow();   // ⛔ CCODE-420: …and on a journey, a rest, or opening the game after the days went by
   // ⛔ CCODE-239 — BANKED WORK ADVANCES WITH THE DAYS, at the one choke point the clock passes through.
   // ⚠️ BY THE DELTA, NOT BY THE CALL. `maybeTick` fires on re-entry as well as on a clock jump, so
   // ticking one day per call would pay a project for opening the app. The last day paid is remembered on
@@ -7109,11 +7112,14 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   // so no builder reports itself and no row can be forgotten. Dev-only: a player build passes no tally and counts nothing.
   if (isDevMode()) env.tally = (character._promptRows = character._promptRows || {});
   const turnCtx354 = assembleGMContext("turn", env);
+  const jobsTold420 = turnCtx354.jobsDetail ? untoldJobs(character).map(e => e.id) : [];   // CCODE-420: what this beat carries
   const result = await gmTurn(turnCtx354, { tier });
   busy = false;
   if (!result.ok) { renderPlay(null, { error: result.error }); return null; }
   // ⛔ CCODE-410: the beat that carried the invitation came back — NOW it has been said, once, and leaves the queue.
   if (invitation410) { try { invitationSaid(character.worldState, invitation410.subjectId, readClock(character.clock).day); } catch { /* bookkeeping never blocks a beat */ } }
+  // ⛔ CCODE-420: a job's result is TOLD once the beat that carried it came back — never when it was merely queued
+  if (jobsTold420.length) { try { markJobsTold(character, jobsTold420); } catch { /* bookkeeping never blocks a beat */ } }
   // ⛔ CCODE-354: a beat on which "the world moved on" actually REACHED the GM is a beat counted — three, then it rests.
   if (turnCtx354.worldMovedOnDetail) { try { noteWorldMovedOnShown(character); } catch { /* a count, never a blocker */ } }
   // SNG-009: track op loss so the next turn's GM restates missed updates
@@ -8677,6 +8683,7 @@ function applyTurn(turn, resolution, playerWords = null) {
   // quarter-hour stays so a beat still ticks; there is no ceiling.
   const hours = declared ? Math.max(0.25, declaredHours) : beatDefault;
   advanceClock(character.clock, hours);
+  settleJobsNow();   // ⛔ CCODE-420: a team whose time is up comes home on the beat that passes it
   if (declared && hours >= 2) autoVerifyLeg("b8-time", `narrative time moved ${hours}h via timeOps`); // SNG-051 auto-verify
   // BATCH-12 §3c: the company you keep earns standing with their people, on the IN-GAME DAY. Erik's
   // Calvar case — a willing Radiant teacher travelling with him and zero Radiant standing, because
@@ -8738,6 +8745,19 @@ function applyTurn(turn, resolution, playerWords = null) {
     // ⚠️ ONE LINE, AND ONLY THE FIRST REASON — they are all the same reason, and repeating it would read
     // like the game arguing with the player.
     if (refusals.length) turn.narration = (turn.narration || "") + `\n\n*${refusals[0]}*`;
+  }
+  // ⛔ CCODE-420 — A JOB OFFERED IN THE FICTION LANDS ON THE BOARD, clamped to what its level can honestly pay. The GM prices it;
+  // the player chooses who goes; the dice decide it when they are back. Never resolved here.
+  if (turn.jobOps?.length) {
+    let n = 0;
+    for (const o of turn.jobOps.slice(0, 3)) {
+      if (!o || (o.op && o.op !== "offer")) { logOpOutcome("jobOps", "rejected-shape"); continue; }
+      const whereId = resolveLocationId(String(o.where || ""), CONTENT.locations, { here: CONTENT.locations?.[character.currentLocationId] || null })
+        || (CONTENT.locations?.[o.where] ? o.where : null) || character.currentLocationId;
+      const r = postJob(character, { ...o, where: whereId }, { day: readClock(character.clock).day });
+      if (r.ok) { n++; logOpOutcome("jobOps", "applied"); } else logOpOutcome("jobOps", "rejected-shape");
+    }
+    if (n) turn.narration = (turn.narration || "") + `\n\n*⚒ ${n === 1 ? "A job is" : `${n} jobs are`} on your board — choose who to send from the Jobs tab.*`;
   }
   // SNG-191 §7: the player closed a SURFACED latent arc — the third fate (handled), or it concluded
   // (resolved). Only a surfaced arc can be closed this way. The world stops carrying it as unfinished.
@@ -13078,6 +13098,7 @@ function wireCharacterTabs() {
   go("tab-chronicle", () => renderChronicle());
   go("tab-holdings", () => renderHoldingsTab());
   go("tab-bands", () => renderBandsTab());
+  go("tab-jobs", () => renderJobsTab());   // CCODE-420
   go("tab-world", () => renderWorldTab());
 }
 function characterTabBar(active) {
@@ -13086,6 +13107,7 @@ function characterTabBar(active) {
     <button class="char-tab${active === "chronicle" ? " on" : ""}" id="tab-chronicle">📜 Chronicle</button>
     <button class="char-tab${active === "holdings" ? " on" : ""}" id="tab-holdings">⌂ Holdings</button>
     <button class="char-tab${active === "bands" ? " on" : ""}" id="tab-bands">⚔ Bands</button>
+    <button class="char-tab${active === "jobs" ? " on" : ""}" id="tab-jobs">⚒ Jobs${(() => { const n = (character?.jobs?.board || []).length + (character?.jobs?.out || []).length; return n ? ` <span class="job-count">${n}</span>` : ""; })()}</button>
     <button class="char-tab${active === "world" ? " on" : ""}" id="tab-world">🌍 The World</button>
   </div>`;
 }
@@ -15179,6 +15201,214 @@ function applyLegionPlan(plan) {
   saveCharacter(character);
   renderBandsTab();
   if (refused.length) alert(`Some of it could not be done:\n\n${refused.join("\n")}`);
+}
+
+// ══════════ CCODE-420 — JOBS ══════════
+// Erik: "we should have the ability to select people instead of only taking the best. Plus giving someone a job or task needs to take
+// time for them to complete." And: "When you build this, make sure to take into account the use of images and styling." The board is a
+// shelf of the places the work is at (their pictures, as the hold shelf shows holds); the chosen job shows who could go with their odds for
+// its main need, the job's true odds as one bar, who covers what by craft, the work and the road, and when they are back.
+
+/** ⛔ EVERY TEAM WHOSE TIME IS UP COMES HOME — the roll, the doors, the directive — and the player hears it in the holding news. */
+function settleJobsNow() {
+  try {
+    if (!character?.jobs?.out?.length) return [];
+    const clk = readClock(character.clock);
+    const settled = settleDueJobs(character, { nowHours: clk.day * 24 + clk.hour, content: CONTENT, itemCatalog: CONTENT.items || {}, day: clk.day });
+    for (const e of settled) {
+      const who = (e.team || []).map(id => (id === "player" ? "You" : e.names?.[id] || id)).join(", ");
+      queueHoldingEvent(character, `⚒ ${who} — back from "${e.job?.label}": ${degreeWord(e.degree)}. ${(e.applied || []).join("; ") || "Nothing gained, nothing lost."}`);
+    }
+    return settled;
+  } catch (err) { console.warn("[jobs] settling failed:", err?.message); return []; }
+}
+
+let _jobsUi = { sel: null, pick: {} };
+const JOB_WORD = { HARM: "harm", PROTECT: "protect", RESTORE: "mend", KNOW: "know", SHAPE: "build and break", MOVE: "move", SUSTAIN: "sustain", INFLUENCE: "sway" };
+const JOB_WORK = { HARM: "fighting", PROTECT: "guarding", RESTORE: "mending", KNOW: "searching and reading", SHAPE: "building", MOVE: "travelling", SUSTAIN: "provisioning", INFLUENCE: "persuading" };
+const jobHours = (h) => (h < 1 ? "under an hour" : h < 24 ? `${Math.round(h)} hour${Math.round(h) === 1 ? "" : "s"}` : `${Math.round(h / 24 * 10) / 10} days`);
+const jobDays = (d) => (d < 1 / 24 ? "under an hour" : d < 1 ? `${Math.max(1, Math.round(d * 24))} hour${Math.round(d * 24) === 1 ? "" : "s"}` : `${Math.round(d * 10) / 10} days`);
+
+function renderJobsTab(selId = null) {
+  const J = ensureJobs(character);
+  if (selId) _jobsUi.sel = selId;
+  const clk = readClock(character.clock);
+  const nowHours = clk.day * 24 + clk.hour;
+  const worldDay = (() => { try { return absoluteWorldDay(); } catch { return null; } })();
+  const place = (id) => CONTENT.locations?.[id]?.name || character.generated?.location?.[id]?.name || id || "somewhere";
+  const art = (id) => { try { return locationImageFor(id); } catch { return null; } };
+  const job = J.board.find(j => j.id === _jobsUi.sel) || J.board[0] || null;
+  if (job) _jobsUi.sel = job.id;
+
+  let pool = [], routeOf = null;
+  try {
+    pool = jobPoolOf(character, { content: CONTENT, abilityCatalog: fullCatalog(), worldDay, locations: CONTENT.locations });
+    routeOf = jobRouteOf(character, { locations: CONTENT.locations, rules: CONTENT.rules, abilityCatalog: fullCatalog() });
+  } catch (err) { console.warn("[jobs] pool failed:", err?.message); }
+  const ctx = { rules: CONTENT.rules, fnIndex: FN_INDEX, routeOf, location: job ? (CONTENT.locations?.[job.where] || null) : null, nowHours };
+
+  // ── the board: a shelf of places ──
+  const tile = (j) => { const img = art(j.where);
+    return `<button class="job-tile${job && j.id === job.id ? " on" : ""}" data-job-sel="${esc(j.id)}" title="${esc(`${j.label} — level ${j.level}, at ${place(j.where)}`)}">
+      ${/* the place's picture as the tile's ground, not an <img>: the tile is a CONTROL (it chooses the job), and the chosen job's
+            banner below is the picture you open — one click, one meaning, as the hold shelf keeps it */""}
+      ${img ? `<span class="job-tile-art" style="background-image:url('${esc(img)}')" role="img" aria-label="${esc(place(j.where))}"></span>` : `<span class="job-tile-noart">⚒</span>`}
+      <span class="job-tile-name">${esc(j.label)}</span>
+      <span class="job-tile-sub hint">level ${j.level} · ${esc(place(j.where))}</span></button>`; };
+
+  // ── the chosen job ──
+  let panel = "";
+  if (job) {
+    const opposed = jobOpposition(job.level, CONTENT.rules);
+    const fam = mainNeedOf(job);
+    const cost = jobCost(job);
+    const pick = new Set((_jobsUi.pick[job.id] || []).map(String));
+    const team = pool.filter(p => pick.has(String(p.id)) && !awayOnJob(character, p.id));
+    const rowFor = (p) => {
+      const away = awayOnJob(character, p.id);
+      let best = null;
+      try { best = bestCraftFor(jobCraftsOf(p, { fnIndex: FN_INDEX, rules: CONTENT.rules, opposed, location: ctx.location }), fam, CONTENT.rules); } catch { best = null; }
+      return `<label class="job-row${away ? " away" : ""}">
+        <input type="checkbox" data-job-pick="${esc(p.id)}"${pick.has(String(p.id)) ? " checked" : ""}${away ? " disabled" : ""}>
+        <span class="job-row-name"><strong>${esc(p.isYou ? "You" : p.short)}</strong> <span class="hint">level ${p.level}</span></span>
+        <span class="job-row-where hint">${away ? `out on "${esc(away.job?.label)}" — back day ${Math.floor(away.backAtHours / 24)}` : esc(p.from || "")}</span>
+        <span class="job-row-odds">${best ? `${oddsBarHtml(best.odds)}<span class="hint">${esc(best.name)} ${best.chance}%</span>` : `<span class="hint">no craft to ${esc(JOB_WORD[fam] || "do this")}</span>`}</span>
+      </label>`;
+    };
+    let planHtml = `<p class="hint">Tick who goes, or let it suggest a team.</p>`;
+    let plan = null;
+    if (team.length) {
+      try { plan = planJob(job, team, ctx); } catch (err) { console.warn("[jobs] plan failed:", err?.message); }
+    }
+    if (plan) {
+      const slow = plan.trip.legs.slice().sort((a, b) => (b.days ?? 99) - (a.days ?? 99))[0];
+      const slowName = slow ? (slow.id === "player" ? "you" : pool.find(p => p.id === slow.id)?.short || slow.id) : null;
+      const fastest = plan.work.rates.slice().sort((a, b) => b.rate - a.rate)[0];
+      const fastName = fastest?.by ? `${fastest.id === "player" ? "your" : `${pool.find(p => p.id === fastest.id)?.short || fastest.id}'s`} ${fastest.by.name} (tier ${fastest.by.tier})` : null;
+      const youGo = team.some(p => p.isYou);
+      const purse = ensurePurse(character);
+      const short = cost > 0 && (Number(purse?.crystal) || 0) < cost;
+      planHtml = `<div class="job-plan">
+        <div class="job-odds">${oddsBarHtml(plan.dist, { wide: true })}<span class="odds-said">${esc(oddsSaid(plan.dist))}</span></div>
+        <div class="codex-f"><strong>Who does what</strong> <span>${job.needs.map((n, i) => { const c = plan.cover[i];
+          return c ? `${esc(n.what || JOB_WORD[n.family])}: <strong>${esc(c.personId === "player" ? "you" : c.personName)}</strong> with ${esc(c.craft.name)} (${c.craft.chance}%)`
+            : `${esc(n.what || JOB_WORD[n.family])}: <span class="bad">nobody can — near-certain to fail</span>`; }).join(" · ")}</span></div>
+        <div class="codex-f"><strong>The work</strong> <span>${esc(jobHours(plan.work.hours))} of ${esc(JOB_WORK[plan.work.family] || "work")}${fastName ? ` — ${esc(fastName)} carries it` : ""}</span></div>
+        <div class="codex-f"><strong>The road</strong> <span>${plan.trip.there > 0 ? `${esc(jobDays(plan.trip.there))} each way${slowName ? `, at ${esc(slowName)}'s pace` : ""}${slow?.way ? ` — ${esc(slow.way)}` : ""}` : "they are already there"}</span></div>
+        <div class="codex-f"><strong>Back</strong> <span>day ${Math.floor(plan.backAtHours / 24)} — ${esc(jobDays(plan.days))} from now${youGo ? ` <span class="hint">· you go yourself, so that time passes for you</span>` : ""}</span></div>
+        <table class="job-pays"><tbody>${JOB_OUTCOMES.map(k => `<tr><td><i class="o-${k}"></i>${esc(degreeWord(k).replace(/^an? /, ""))} <span class="hint">${Math.round(100 * (plan.dist[k] || 0))}%</span></td>
+          <td>${esc(sayEffects(jobEffects(job, k, CONTENT.rules), team).join("; "))}</td></tr>`).join("")}</tbody></table>
+        <button class="btn" id="job-send"${short ? " disabled" : ""}>Send ${esc(team.map(p => (p.isYou ? "yourself" : p.short)).join(", "))}${cost ? ` — ${cost} crystal` : ""}</button>
+        ${short ? `<span class="hint bad">You have ${Number(purse?.crystal) || 0} crystal; this costs ${cost}.</span>` : ""}
+      </div>`;
+    }
+    const img = art(job.where);
+    panel = `<div class="cs-block job-panel">
+      <div class="job-head">${img ? `<img class="job-banner" src="${esc(img)}" alt="${esc(place(job.where))}" data-lightbox="location" loading="lazy" onerror="this.style.display='none'">` : ""}
+        <div><h3 class="codex-title" style="font-size:16px;margin:0">${esc(job.label)}</h3>
+        <div class="hint">at ${esc(place(job.where))} · level ${job.level}, opposing at ${opposed}${job.from ? ` · for ${esc(job.from)}` : ""} · ${Math.round(job.effort * 10) / 10} hand-days of work${cost ? ` · costs ${cost} crystal to send` : ""}</div></div></div>
+      <div class="job-needs">${job.needs.map(n => `<span class="hold-chip">${esc(JOB_WORD[n.family] || n.family)}${n.weight > 1 ? ` ×${n.weight}` : ""}${n.what ? ` — ${esc(n.what)}` : ""}</span>`).join("")}</div>
+      <h4 class="job-sub">Who goes</h4>
+      <div class="job-team">${pool.map(rowFor).join("") || `<p class="hint">Nobody you lead can act on this yet.</p>`}</div>
+      <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:6px">
+        <button class="opt" data-job-suggest="1">Suggest one</button><button class="opt" data-job-suggest="2">Suggest two</button><button class="opt" data-job-suggest="3">Suggest three</button>
+        <button class="opt" data-job-clear>Clear</button><button class="opt" data-job-drop="${esc(job.id)}" title="Take it off the board">Turn it down</button></div>
+      ${planHtml}</div>`;
+  }
+
+  // ── out, and back ──
+  const outRows = J.out.map(e => `<div class="codex-f"><strong>${esc((e.team || []).map(id => (id === "player" ? "You" : e.names?.[id] || id)).join(", "))}</strong>
+    <span>"${esc(e.job?.label)}" at ${esc(place(e.job?.where))}</span> <span class="hint">back day ${Math.floor(e.backAtHours / 24)}</span></div>`).join("");
+  const backRows = J.back.slice().reverse().map(e => `<div class="codex-f job-back"><span class="rep-band job-deg job-deg-${esc(e.degree)}">${esc(degreeWord(e.degree).replace(/^an? /, ""))}</span>
+    <strong>"${esc(e.job?.label)}"</strong> <span class="hint">${esc((e.team || []).map(id => (id === "player" ? "you" : e.names?.[id] || id)).join(", "))}${e.backDay != null ? ` · day ${e.backDay}` : ""}${e.told ? "" : " · the GM tells it next"}</span>
+    <span style="width:100%">${esc((e.applied || []).join("; ") || "nothing gained, nothing lost")}</span></div>`).join("");
+
+  // ── post one yourself ──
+  // a place you HOLD is a place you know — Threshold Post stood in Silas's name and was not in his knownPlaces
+  const known = [...new Set([character.currentLocationId, ...(character.holdings || []).map(h => h?.locationId), ...(character.knownPlaces || [])])]
+    .filter(id => id && CONTENT.locations?.[id]);
+  const kinds = Object.entries(MISSION_KINDS);
+  const postForm = `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Post a job</h3>
+    <div class="job-form">
+      <input id="jp-label" placeholder="What is to be done — e.g. Scout the ridge road" maxlength="120">
+      <select id="jp-where">${known.map(id => `<option value="${esc(id)}"${id === character.currentLocationId ? " selected" : ""}>${esc(place(id))}</option>`).join("")}</select>
+      <select id="jp-kind">${kinds.map(([k, v]) => `<option value="${esc(k)}">${esc(v.label)} — ${esc(JOB_WORD[v.wants] || v.wants)}${v.also ? ` and ${esc(JOB_WORD[v.also] || v.also)}` : ""}</option>`).join("")}</select>
+      <label class="hint">level <input id="jp-level" type="number" min="1" max="60" value="10" style="width:64px"></label>
+      <label class="hint">hand-days <input id="jp-effort" type="number" min="0.5" max="200" step="0.5" value="4" style="width:72px"></label>
+      <button class="opt" id="jp-post">Post it</button></div>
+    <p class="hint">The level is how hard it is, on the scale of a person of that level — the place's danger sets where it starts.</p></div>`;
+
+  chrome(`<div class="screen" style="max-width:820px">
+    ${characterTabBar("jobs")}
+    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">The board</h3>
+      ${J.board.length ? `<div class="job-shelf">${J.board.map(tile).join("")}</div>` : `<p class="hint">Nothing offered. Work comes to the board when someone in the story asks for a thing done — or post one yourself, below.</p>`}</div>
+    ${panel}
+    ${J.out.length ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Out</h3>${outRows}</div>` : ""}
+    ${J.back.length ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Came back</h3>${backRows}</div>` : ""}
+    ${postForm}
+    <button class="btn secondary" id="jobs-back" style="margin-top:12px">Back</button>
+  </div>`);
+  wireCharacterTabs();
+
+  for (const b of document.querySelectorAll("[data-job-sel]")) b.onclick = () => renderJobsTab(b.dataset.jobSel);
+  for (const el of document.querySelectorAll("[data-job-pick]")) el.onchange = () => {
+    const list = (_jobsUi.pick[job.id] = _jobsUi.pick[job.id] || []);
+    const id = el.dataset.jobPick, at = list.indexOf(id);
+    if (el.checked && at < 0) list.push(id); else if (!el.checked && at >= 0) list.splice(at, 1);
+    renderJobsTab();
+  };
+  for (const b of document.querySelectorAll("[data-job-suggest]")) b.onclick = () => {
+    const free = pool.filter(p => !p.isYou && !awayOnJob(character, p.id));
+    const s = suggestTeam(job, free, Number(b.dataset.jobSuggest) || 1, ctx);
+    _jobsUi.pick[job.id] = s ? s.team.map(p => String(p.id)) : [];
+    renderJobsTab();
+  };
+  const clear = document.querySelector("[data-job-clear]");
+  if (clear) clear.onclick = () => { _jobsUi.pick[job.id] = []; renderJobsTab(); };
+  const drop = document.querySelector("[data-job-drop]");
+  if (drop) drop.onclick = () => { dropJob(character, drop.dataset.jobDrop); _jobsUi.sel = null; saveCharacter(character); renderJobsTab(); };
+  const send = document.getElementById("job-send");
+  if (send && job) send.onclick = () => {
+    const pick = new Set((_jobsUi.pick[job.id] || []).map(String));
+    const team = pool.filter(p => pick.has(String(p.id)) && !awayOnJob(character, p.id));
+    if (!team.length) return;
+    const plan = planJob(job, team, ctx);
+    const cost = jobCost(job);
+    if (cost > 0 && (Number(ensurePurse(character)?.crystal) || 0) < cost) { alert(`This costs ${cost} crystal.`); return; }
+    const r = sendOnJob(character, job.id, team.map(p => p.id), plan, { nowHours, day: clk.day, names: Object.fromEntries(team.map(p => [p.id, p.isYou ? character.name : p.short])) });
+    if (!r.ok) { alert(r.why); return; }
+    if (cost > 0) debit(character, "crystal", cost);
+    delete _jobsUi.pick[job.id];
+    _jobsUi.sel = null;
+    // ⛔ YOU GO YOURSELF: the time is yours — the clock runs the job's length and it is settled when you are back
+    if (team.some(p => p.isYou)) { advanceClock(character.clock, plan.backAtHours - nowHours); settleJobsNow(); }
+    saveCharacter(character);
+    renderJobsTab();
+  };
+  const kindSel = document.getElementById("jp-kind"), whereSel = document.getElementById("jp-where");
+  const levelIn = document.getElementById("jp-level"), effortIn = document.getElementById("jp-effort");
+  const KIND_EFFORT = { trade: 4, escort: 2, word: 1, watch: 6, seek: 5, work: 10, treat: 3 };
+  const setDefaults = () => {
+    const l = CONTENT.locations?.[whereSel?.value];
+    if (levelIn) levelIn.value = String(Math.max(1, Math.min(60, Math.max(10, Math.round((Number(l?.dangerLevel) || 0) * 6)))));
+    if (effortIn) effortIn.value = String(KIND_EFFORT[kindSel?.value] || 4);
+  };
+  if (whereSel) whereSel.onchange = setDefaults;
+  if (kindSel) kindSel.onchange = setDefaults;
+  setDefaults();
+  const postBtn = document.getElementById("jp-post");
+  if (postBtn) postBtn.onclick = () => {
+    const kind = MISSION_KINDS[kindSel?.value] || MISSION_KINDS.work;
+    const level = Number(levelIn?.value) || 10;
+    const r = postJob(character, { label: document.getElementById("jp-label")?.value || kind.label, where: whereSel?.value, level,
+      needs: [{ family: kind.wants, weight: 2, what: kind.label.toLowerCase() }, ...(kind.also ? [{ family: kind.also, weight: 1 }] : [])],
+      effort: Number(effortIn?.value) || 4, stakes: { xp: level }, from: "you" }, { day: clk.day });
+    if (!r.ok) { alert(r.why); return; }
+    _jobsUi.sel = r.job.id;
+    saveCharacter(character);
+    renderJobsTab();
+  };
+  document.getElementById("jobs-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
 }
 
 function renderBandsTab() {

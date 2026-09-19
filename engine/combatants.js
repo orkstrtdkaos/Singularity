@@ -24,6 +24,8 @@
 // R36 FOR A HUMAN: a party member's CRAFTS say what they bring to a contest. `familiesOfAbility` is the same
 // reader the ability system uses, so a warder reads as PROTECT here for exactly the reason it does everywhere else.
 import { familiesOfAbility } from "./functions.js";
+// ⛔ CCODE-420: someone OUT ON A JOB is not at the fight — asked of the leaf module, so the fight never imports the dice
+import { awayOnJob } from "./jobstate.js";
 
 const num = (v, d = 0) => (v == null || v === "" || !Number.isFinite(Number(v)) ? d : Number(v));
 
@@ -400,7 +402,9 @@ export function alliesOf(character, { companions = {}, npcs = {}, tagFamilies = 
       // `targetableAllies` and the interception chooser ALL already filter on `present` — so one field makes
       // every consumer honour it at once. A parallel `withdrawn` flag would have had to be added to each of
       // them, and the one that got missed would be the one that swung at someone in the air.
-      present: !(withdrawalOf(rec)?.auto === true) && rec.withdrawn !== true,
+      // ⛔ CCODE-420: and so does being OUT ON A JOB — the same one field, for the same reason
+      present: !(withdrawalOf(rec)?.auto === true) && rec.withdrawn !== true && !awayOnJob(character, def.id),
+      ...(awayOnJob(character, def.id) ? { awayOn: awayOnJob(character, def.id).job?.label || "a job" } : {}),
       ...(withdrawalOf(rec) ? { withdrawal: withdrawalOf(rec) } : {}),
       canAct: contrib.length > 0, contributions: contrib,
       record: rec, sheet: presenceSheet(rec, { level }), downed: rec.downed || null,
@@ -421,7 +425,9 @@ export function alliesOf(character, { companions = {}, npcs = {}, tagFamilies = 
       // `targetableAllies` and the interception chooser ALL already filter on `present` — so one field makes
       // every consumer honour it at once. A parallel `withdrawn` flag would have had to be added to each of
       // them, and the one that got missed would be the one that swung at someone in the air.
-      present: !(withdrawalOf(rec)?.auto === true) && rec.withdrawn !== true,
+      // ⛔ CCODE-420: and so does being OUT ON A JOB
+      present: !(withdrawalOf(rec)?.auto === true) && rec.withdrawn !== true && !awayOnJob(character, e.npcId),
+      ...(awayOnJob(character, e.npcId) ? { awayOn: awayOnJob(character, e.npcId).job?.label || "a job" } : {}),
       ...(withdrawalOf(rec) ? { withdrawal: withdrawalOf(rec) } : {}),
       canAct: contrib.length > 0, contributions: contrib,
       record: rec, sheet: presenceSheet(rec, { level }), downed: e.downed || null,

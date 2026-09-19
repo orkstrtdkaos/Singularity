@@ -604,7 +604,7 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .trait-tap { cursor: pointer; border-bottom: 1px dotted var(--accent2); }
 .trait-tap:hover { color: var(--accent); border-bottom-color: var(--accent); }
 /* SNG-215 §C-2: the Traits | Chronicle tab bar — the character surface is one screen with two tabs. */
-.char-tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); margin: 4px 0 12px; }
+.char-tabs { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--border); margin: 4px 0 12px; }   /* CCODE-420: six tabs wrap on a phone rather than run the page wide */
 .char-tab { background: none; border: none; border-bottom: 2px solid transparent; color: var(--ink-dim); font-family: var(--font-ui); font-size: 13px; padding: 6px 12px; cursor: pointer; margin-bottom: -1px; }
 .char-tab:hover { color: var(--ink); }
 .char-tab.on { color: var(--accent); border-bottom-color: var(--accent); }
@@ -1856,6 +1856,48 @@ img[data-lightbox] { cursor: zoom-in; }
 .hold-tile-noart { height: 64px; display: flex; align-items: center; justify-content: center; font-size: 22px; color: var(--ink-dim); background: var(--panel); border-radius: 5px; }
 .hold-tile-name { font-size: 12px; line-height: 1.2; }
 .hold-tile-sub { font-size: 10px; }
+
+/* CCODE-420 — JOBS. The board is a shelf of the places the work is at (their pictures, as the hold shelf shows holds); the chosen job
+   carries its place's picture, its needs as chips, who could go with their odds for its main need, and the job's true odds as one bar. */
+.job-count { display: inline-block; min-width: 16px; padding: 0 5px; border-radius: 8px; background: var(--accent); color: var(--bg); font-size: 10px; line-height: 16px; text-align: center; margin-left: 2px; }
+.job-shelf { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.job-tile { width: 150px; display: flex; flex-direction: column; gap: 2px; padding: 4px; background: var(--panel2); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; text-align: left; font-family: var(--font-ui); color: var(--ink); }
+.job-tile:hover, .job-tile.on { border-color: var(--accent); }
+.job-tile.on { box-shadow: inset 0 0 0 1px var(--accent); }
+.job-tile:focus-visible, .job-row:focus-within { outline: 1px solid var(--accent); outline-offset: 1px; }
+.job-tile-art { display: block; width: 100%; height: 80px; background-size: cover; background-position: center; border-radius: 5px; }
+.job-tile-noart { height: 80px; display: flex; align-items: center; justify-content: center; font-size: 26px; color: var(--ink-dim); background: var(--panel); border-radius: 5px; }
+.job-tile-name { font-size: 12px; line-height: 1.25; }
+.job-tile-sub { font-size: 10px; }
+.job-head { display: flex; gap: 12px; align-items: flex-start; flex-wrap: wrap; }
+.job-banner { width: 180px; max-width: 100%; height: 110px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border); cursor: zoom-in; }
+.job-head > div { flex: 1 1 220px; min-width: 0; }
+.job-needs { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 4px; }
+.job-sub { font-family: var(--font-ui); font-size: 11px; text-transform: uppercase; letter-spacing: .6px; color: var(--ink-dim); margin: 10px 0 4px; font-weight: normal; }
+.job-team { display: flex; flex-direction: column; gap: 2px; }
+/* ⚠️ the rows are <label>s so the whole row toggles, and `.screen label` (block, uppercase, spaced) out-ranks a bare class — hence the scope */
+.job-team .job-row { display: grid; grid-template-columns: 22px minmax(0, 1.1fr) minmax(0, 1.4fr) minmax(0, 1.5fr); gap: 6px; align-items: center; padding: 4px 6px; margin: 0; border-radius: 6px; font-size: 13px; text-transform: none; letter-spacing: normal; color: var(--ink); cursor: pointer; }
+.job-team .job-row:hover { background: var(--panel2); }
+.job-team .job-row.away { opacity: .55; cursor: default; }
+.job-row-odds { display: flex; align-items: center; gap: 4px; min-width: 0; }
+.job-row-odds .hint, .job-row-where { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+@media (max-width: 560px) { .job-team .job-row { grid-template-columns: 22px minmax(0, 1fr); } .job-row-where, .job-row-odds { grid-column: 2; } }
+.job-plan { margin-top: 10px; padding: 10px 12px; background: var(--panel2); border: 1px solid var(--border); border-radius: 8px; display: flex; flex-direction: column; gap: 4px; }
+.job-plan .codex-f { gap: 6px; }
+.job-plan .btn { align-self: flex-start; margin-top: 6px; }
+.job-pays { width: 100%; border-collapse: collapse; font-size: 12px; margin: 6px 0; }
+.job-pays td { padding: 3px 6px; border-top: 1px solid var(--border); vertical-align: top; }
+.job-pays td:first-child { white-space: nowrap; width: 1%; }
+.job-pays i { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 6px; vertical-align: middle; }
+.job-pays .o-crit_success { background: var(--o-crit); } .job-pays .o-success { background: var(--o-success); } .job-pays .o-partial { background: var(--o-partial); }
+.job-pays .o-failure { background: var(--o-failure); } .job-pays .o-crit_failure { background: var(--o-fumble); }
+.job-deg { font-size: 11px; }
+.job-deg-crit_success { color: var(--o-crit); } .job-deg-success { color: var(--o-success); }
+.job-deg-crit_failure, .job-plan .bad, .hint.bad { color: var(--o-fumble); }
+.job-back { flex-wrap: wrap; }
+.job-form { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.job-form #jp-label { flex: 1 1 260px; min-width: 0; }
+@media (prefers-reduced-motion: no-preference) { .job-tile { transition: border-color .15s ease; } }
 .cs-lately { margin-top: 10px; border-top: 1px solid var(--border); padding-top: 6px; }
 
 /* SNG-555: the named spot INSIDE the location. The header still shows the parent — a sub-place is deliberately not a

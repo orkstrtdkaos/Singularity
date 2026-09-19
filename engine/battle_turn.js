@@ -219,6 +219,12 @@ export function collapseIfFinished(rr, def, { swingBefore = 0, family = null, sb
 export function declaredNotAnOpponent(rec) {
   return rec?.notAnOpponent === true || rec?.canOppose === false;
 }
+
+/** ⛔ CCODE-420 — A PERSON'S THREAT FROM THEIR LEVEL, in one place: what a level-L person brings to a fight, and what a level-L job
+ *  opposes you with (engine/jobs.js), so the two can never price the same level differently. Pure. */
+export function personThreatForLevel(level) {
+  return Math.max(10, Math.round((Number(level) || 0) * 2));
+}
 /** A PERSON as a fight opponent: their whole sheet — attributes, health, energy, soak, level, kit. Was `personOpponent` in app.js. */
 export function personOpponentFor(rec, { catalog = {}, cfg = {}, day = null, traditionIndex = null, stageOf = null,
   // ✅ Erik 2026-09-11 (Q3): the item catalogue (their gear resolves to real items) and `rules.leveling` (their kit is
@@ -266,7 +272,7 @@ export function personOpponentFor(rec, { catalog = {}, cfg = {}, day = null, tra
     soak: (Number(sheet.soak) || 0) + (worn ? worn.soak : 0), skills, tacticTags: rec.tacticTags || [],
     ...(worn && worn.layers.length ? { soakLayers: worn.layers } : {}),
     inventory: gear,
-    threat: Math.max(10, Math.round(sheet.level * 2)),
+    threat: personThreatForLevel(sheet.level),
     _person: rec.id || null,
     ...(form?.form ? { _form: form.form, _formNote: form.note || null } : {}),   // R41: what the player is facing
   };

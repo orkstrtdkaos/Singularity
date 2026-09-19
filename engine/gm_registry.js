@@ -44,6 +44,7 @@ import { travelersForGM, travelersHereForGM, whereOf } from "./travelers.js";   
 import { worldMovedOnForGM } from "./worldevents.js";   // CCODE-354: the world moved on while this character believed otherwise
 import { invitationsForGM, bandsJoinedForGM } from "./invitations.js";   // CCODE-360: an invitation carried by someone you both know
 import { homeForGM } from "./home.js";   // CCODE-369: a home is a place that is yours
+import { jobsForGM } from "./jobs.js";   // CCODE-420: what came back, who is out, what is offered
 import { playerWishesForGM } from "./playerprofile.js";   // CCODE-355: what this player wants from the game
 import { SEXUAL_MARKERS, HARD_INTENSITY_MARKERS } from "./canon.js";   // SNG-595: the family floor, for rows with no rating
 import { isMinorProfile } from "./playerprofile.js";
@@ -657,6 +658,11 @@ export const GM_CONTEXT = [
   // contradicted the world — "they aren't a transit network", "it must be walked to" — and closed his goal. ⚠️ It is a
   // SEPARATE row, not a widening of the block below: smoke 148 rules that the turn only carries a gate paragraph when
   // the character is standing at one, and that ruling is right.
+  // ⛔ CCODE-420 — JOBS: what came back and is untold (decided and applied — the GM gives it a shape), who is OUT and so cannot walk
+  // into a scene, and what is offered and not yet taken. The app marks a result told only after the GM's call returns.
+  { key: "jobsDetail", builder: "jobs.jobsForGM (CCODE-420)", carries: ["results to tell", "who is out on a job", "jobs offered"],
+    reachedBy: "jobOps offers; the Jobs tab sends a team; a team coming back", spec: "CCODE-420", views: ["turn", "ask"],
+    build: (env) => jobsForGM(env.character, { content: env.CONTENT }) },
   { key: "waygateTruthDetail", builder: "waygate.waygateTruthForGM", carries: ["the gates ARE a network", "the hub", "the nearest gate they know"],
     reachedBy: "any question about travel", spec: "§9", views: ["ask"],
     build: (env) => waygateTruthForGM(env.character, env.CONTENT.locations) },

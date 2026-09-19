@@ -25,6 +25,12 @@
  *  applicable at all — a test that fires against a character with no holding is testing the refusal, not the op, and
  *  the harness must say which it did. `build(c)` returns the turn fragment, or null when the character cannot host it. */
 export const FIRE_TESTS = [
+  // ⛔ CCODE-420: the job offer is new, so it has never fired — a place that always exists, so any character can host it
+  { op: "jobOps", what: "someone asks for a thing to be done that takes hands and time",
+    need: "nothing — Millbrook always stands",
+    build: () => ({ jobOps: [{ op: "offer", label: "Clear the old well at Millbrook", where: "millbrook", level: 8,
+      needs: [{ family: "SHAPE", weight: 2, what: "dig it out" }, { family: "SUSTAIN", weight: 1, what: "keep the diggers fed" }],
+      effort: 6, stakes: { crystal: 12, xp: 10 }, from: "fire test" }] }) },
   { op: "debtOps", what: "owe someone something, in the fiction's own terms",
     need: "nothing — a debt can be incurred anywhere",
     build: () => ({ debtOps: [{ op: "incur", to: "the wayhouse", what: "a night's lodging and a meal", worth: 12, why: "fire test" }] }) },

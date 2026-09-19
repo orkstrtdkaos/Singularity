@@ -17,6 +17,7 @@ import { battleRound, synthesizeOpponentSheet } from "./skill_battle.js";   // C
 import { applyNpcUpdates } from "./npcs.js";
 import { activeCompany } from "./company.js";   // SNG-358: a holding's keeper must still be with you
 import { queueFeatureOffers, advanceHolding, holdingNews, unstewardedHoldings, takeHoldingEvents, CONDITIONS, tickStore, storeNews, advanceDebts, growHolding, holdingGround, holdingMeaningAura, healingAt, chargeQuartering } from "./holdings.js";
+import { tickArmory } from "./armory.js";   // CCODE-445: the forge works the order, a pass at a time
 import { tickCaravans } from "./caravan.js";   // R49: the road runs itself, and can be robbed
 import { meaningDensity, peoplePresentAt } from "./substrate.js";   // R46b: what the pilgrims come for   // SNG-358: holdings ride the same world-gated pass
 import { commitGrowth } from "./npcsheet.js";   // ✅ R37: growth writes, on the tick
@@ -651,6 +652,9 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null, co
         aura: holdingMeaningAura(character, loc.id, holdCfg) }) || 0) : 0 });
     if (st && grew) st.grew = grew;
     for (const t of storeNews(h, st)) news.push(t);
+    // ⛔ CCODE-445 — THE FORGE WORKS THE ORDER, from what the store has left after the pass; a stall is said once
+    const made = tickArmory(h, { cfg: holdCfg, armory: content?.rules?.economy?.armory || null });
+    if (made?.said) news.push(made.said);
     moved++;
   }
   // ⛔ CCODE-435 (SNG-627 `housing`): hands with no home hold sleep in your barracks, or are quartered at a cost — once a pass, its own counter
@@ -708,8 +712,20 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
   // while the normal path handed back stamped ones, so a caller reading `.news[0].section` got a section on
   // one path and `undefined` on the other — a difference that only shows up for a player whose character
   // clock has not moved, which is precisely the state SNG-366 found every live save parked in.
-  if (elapsed <= 0) return { ticked: delegated.moved + holdings358.moved + debtsPass.moved + grown.length > 0,
-    news: [...delegated.news, ...holdings358.news, ...extraNews].map(n => stampNews(n, { day: currentDay, worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })() })) };
+  if (elapsed <= 0) {
+    // ⛔ CCODE-446 — AND WRITE IT DOWN. This path only RETURNED its news, and the one caller (`app.js`) ignores the return — while this is
+    // the path live saves sit on (the character's day parked as world time moves). So a hold's pass — its sales, its upkeep, a raid, a
+    // forge's work — and delegated work that finished were applied and never said: Silas's five holds moved every pass, and not one of
+    // the 21 lines in his news log was theirs. The same two buffers the normal path below writes, with the same place stamp.
+    const early = [...delegated.news, ...holdings358.news, ...extraNews];
+    const place446 = early.length ? placeBagOf(ws, character, content) : null;
+    const stamped = early.map(n => stampNews(n, { day: currentDay, worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })(), place: place446 }));
+    if (stamped.length) {
+      ws.news = [...(ws.news || []), ...stamped].slice(-NEWS_CAP);
+      ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-UNSEEN_CAP);
+    }
+    return { ticked: delegated.moved + holdings358.moved + debtsPass.moved + grown.length > 0, news: stamped };
+  }
   const news = [...delegated.news, ...holdings358.news, ...extraNews];
   // ⛔ CCODE-222 — AND SOMEBODY COMES LOOKING. The driven-NPC directive has always fired for a person who
   // is already in the scene; this is the half that puts them there. Pressure builds while you are apart and

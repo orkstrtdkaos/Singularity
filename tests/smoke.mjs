@@ -13221,7 +13221,8 @@ await (async () => {
     // and turned it red without anything moving. ORDER is the invariant — the call comes BEFORE the gate.
     check("366: only the world-time passes were lifted above the early return — the rest keeps character cadence",
       (() => { const body = tickSrc.slice(tickSrc.indexOf("export async function runWorldTick"));
-        const call = body.indexOf("await advanceDelegatedWork("), gate = body.indexOf("if (elapsed <= 0) return { ticked:");
+        // CCODE-446: the gate became a block (it now WRITES its news before returning) — find the gate, not its old one-line form
+        const call = body.indexOf("await advanceDelegatedWork("), gate = body.indexOf("if (elapsed <= 0)");
         return call > -1 && gate > call && /for \(const \{ eventId, stage \}/.test(body.slice(gate)); })());
     // ⚠️ And it reports what MOVED, not what was worth SAYING — a quiet `progress` prints no line by design,
     // and inferring "nothing happened" from "no news" is the same error as reading absence as evidence.

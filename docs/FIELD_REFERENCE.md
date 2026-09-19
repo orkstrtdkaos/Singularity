@@ -641,7 +641,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | field | n | authored at | bucket | read by |
 |---|---|---|---|---|
 | `rank` | 1727 | `tree`×1216 `rankDeltas`×511 | ✅ READ | `battle_turn.js`, `braids.js`, `capabilities.js` |
-| `name` | 1648 | `root`×432 `tree`×1216 | ✅ READ | `affiliation.js`, `arceffects.js`, `art.js` |
+| `name` | 1648 | `root`×432 `tree`×1216 | ✅ READ | `affiliation.js`, `arceffects.js`, `armory.js` |
 | `functions` | 1648 | `root`×432 `tree`×1216 | ✅ READ | `battle_turn.js`, `braids.js`, `capabilities.js` |
 | `harmRung` | 1575 | `root`×432 `tree`×1143 | ✅ READ | `braids.js`, `gm_registry.js`, `intent.js` |
 | `grants` | 1216 | `tree`×1216 | ✅ READ | `braids.js`, `capabilities.js`, `earnedpower.js` |
@@ -650,12 +650,12 @@ contribute to authored dice without recreating the double-scaling bug.
 | `gainAxes` | 1127 | `tree`×1127 | ✅ READ | `capabilities.js` |
 | `axis` | 511 | `rankDeltas`×511 | ✅ READ | `coliseum.js`, `craftmechanics.js`, `gambit.js` |
 | `delta` | 511 | `rankDeltas`×511 | ✅ READ | `arceffects.js`, `companions.js`, `economy.js` |
-| `from` | 511 | `rankDeltas`×511 | ✅ READ | `affiliation.js`, `art.js`, `assignments.js` |
-| `kind` | 489 | `rankDeltas`×489 | ✅ READ | `arceffects.js`, `art.js`, `assignments.js` |
+| `from` | 511 | `rankDeltas`×511 | ✅ READ | `affiliation.js`, `armory.js`, `art.js` |
+| `kind` | 489 | `rankDeltas`×489 | ✅ READ | `arceffects.js`, `armory.js`, `art.js` |
 | `powerSystem` | 434 | `root`×432 `tree`×2 | ✅ READ | `art.js`, `backfill.js`, `braids.js` |
 | `id` | 432 | `root`×432 | ✅ READ | `affiliation.js`, `affinities.js`, `arceffects.js` |
 | `tier` | 432 | `root`×432 | ✅ READ | `backfill.js`, `battle_turn.js`, `borncontract.js` |
-| `axes` | 432 | `root`×432 | ✅ READ | `affinities.js`, `craftmechanics.js`, `encounters.js` |
+| `axes` | 432 | `root`×432 | ✅ READ | `affinities.js`, `armory.js`, `craftmechanics.js` |
 | `attribute` | 432 | `root`×432 | ✅ READ | `affinities.js`, `battle_turn.js`, `braids.js` |
 | `narrationHints` | 432 | `root`×432 | ✅ READ | `battleprompt.js`, `braids.js`, `companions.js` |
 | `description` | 432 | `root`×432 | ✅ READ | `affiliation.js`, `art.js`, `authormode.js` |
@@ -697,7 +697,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `sense` | 31 | `root`×31 | ✅ READ | `battle_turn.js`, `combatants.js`, `encounters.js` |
 | `stage` | 27 | `tree`×27 | ✅ READ | `arceffects.js`, `art.js`, `authormode.js` |
 | `subAttribute` | 27 | `root`×27 | ✅ READ | `affinities.js`, `battle_turn.js`, `encounters.js` |
-| `push` | 26 | `mechanic`×26 | ✅ READ | `affinities.js`, `arceffects.js`, `art.js` |
+| `push` | 26 | `mechanic`×26 | ✅ READ | `affinities.js`, `arceffects.js`, `armory.js` |
 | `backlash` | 23 | `root`×23 | ✅ READ | `gm.js`, `intensity.js`, `app.js` |
 | `conserveSuppresses` | 23 | `root`×23 | ✅ READ | `app.js` |
 | `traditionV2` | 21 | `root`×21 | ⛔ DARK | — |

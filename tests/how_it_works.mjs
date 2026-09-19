@@ -20252,8 +20252,10 @@ console.log("\n── §280 · every kind of news carries its place ──");
 
   // ⛔ 6 · ONE BAG, NOT SEVEN LITERALS
   const bagSites = (W280.match(/placeBagOf\(ws, character, content\)/g) || []).length;
-  check("§280: ⛔ THE SEVEN PASSES SHARE ONE BAG — `locations` and `here` had to reach every stamping site, and the site that got missed would have been the one that looked fine",
-    bagSites === 7 && !/figures: newsFiguresOf\(ws, character, content\), arcs:/.test(W280)
+  // ⚠️ CCODE-446 made the early return an EIGHTH stamping site. The rule is that every site takes the one bag and none builds its own —
+  // the literal-bag check below is what enforces it; the count is a floor, not the instance.
+  check("§280: ⛔ EVERY PASS SHARES ONE BAG — `locations` and `here` had to reach every stamping site (seven when written; the early return is the eighth), and the site that got missed would have been the one that looked fine",
+    bagSites >= 7 && !/figures: newsFiguresOf\(ws, character, content\), arcs:/.test(W280)
     && /here: locations\[character\?\.currentLocationId\] \|\| null/.test(W280), `${bagSites} sites`);
 
   // ⛔ 7 · THE READER: THREE TIERS, AND ONLY ONE OF THEM IS A DISTANCE
@@ -22969,7 +22971,7 @@ console.log("\n── §318 · the news, kept — every line taken to be shown g
   const S318 = rd("engine/worldtick.js").replace(/\r\n/g, "\n");
   const unseenWrites = S318.split("\n").filter(l => /unseenNews = \[\.\.\./.test(l));   // the writes that append — not the one that empties it
   check("§318: ⛔ nothing is dropped before it is shown — what waits has its own cap (60), not the GM's twenty; the log keeps the last 250",
-    unseenWrites.length === 9 && unseenWrites.every(l => /\.slice\(-UNSEEN_CAP\)/.test(l)) && /const UNSEEN_CAP = 60;/.test(S318)
+    unseenWrites.length >= 9 && unseenWrites.every(l => /\.slice\(-UNSEEN_CAP\)/.test(l)) && /const UNSEEN_CAP = 60;/.test(S318)   /* the RULE is every writer capped; CCODE-446's early return is the tenth */
     && WT318.NEWS_LOG_CAP === 250 && WT318.newsLogOf(big).length === 250 && WT318.newsLogOf(big)[0].text === "line 30");
   const A318 = rd("app.js").replace(/\r\n/g, "\n").split("\n").filter(l => !/^\s*\/\//.test(l)).join("\n");
   check("§318: ⛑ a 📰 News tab on the character: newest first by world-day, filtered by whose it is, rendered by the SAME function the flash uses, with a fight still opening",
@@ -23205,6 +23207,136 @@ console.log("\n── §323 · the vault, and the switch — a kept well works a
     && /verdict\.carriedBy = \[\.\.\.carriedSubstrateSources\(character, CONTENT\.items, comps\), \.\.\.holdingFieldSources\(/.test(A323)
     && /\[data-hold-vault\]"\)\) btn\.onclick = \(\) => showVaultDeposit\(/.test(A323) && /\[data-vault-take\]/.test(A323) && /\[data-vault-charge\]/.test(A323)
     && /\[data-item-charge\]"\)\) b\.onclick/.test(A323) && /\[data-aura-toggle\]"\)\) btn\.onclick/.test(A323));
+}
+
+// ══════════ §324 · CCODE-445 — THE ARMORY ══════════
+// Erik: "we need an armory to store the weapons and armor for different troop types. Without getting too in depth about it, I could see
+// swords, shields, axes, bows, crossbows, leather, plate, chain mail etc. These are probably something the hold can produce at the forge
+// smithy etc. And would allow you to outfit units up to the quantity you have. You could sell them and send them to other holds, etc."
+console.log("\n── §324 · the armory — the forge makes what the store can feed, hands are outfitted up to the stock, shields protect a lone band too, gear sells as arms ──");
+{
+  const AR = await import("../engine/armory.js");
+  const ML = await import("../engine/melee.js");
+  const FL = await import("../engine/fellowship.js");
+  const H324 = await import("../engine/holdings.js");
+  const { loadContentHeadless: lch324 } = await import("./headless_content.mjs");
+  const CT324 = await lch324();
+  const T = AR.armoryTable();
+  const over = AR.armoryTable({ gear: { sword: { quality: 0.2 }, spear: { slot: "weapon", one: "spear", many: "spears", quality: 0.09, materials: { raw_material: 1 } } } });
+  check("§324: ⚑ THE TABLE — Erik's eight (swords, axes, bows, crossbows, shields, leather, chain mail, plate) in three kinds of kit, every number a stand-in that an authored `economy.armory` overrides field by field",
+    Object.keys(T.gear).length === 8 && ["sword", "axe", "bow", "crossbow", "shield", "leather", "chain", "plate"].every(k => T.gear[k])
+    && new Set(Object.values(T.gear).map(g => g.slot)).size === 3 && /stand-in/.test(AR.ARMORY_DEFAULTS._standIn)
+    && over.gear.sword.quality === 0.2 && over.gear.sword.many === "swords" && over.gear.spear?.slot === "weapon" && T.gear.shield.gives === "PROTECT");
+
+  const hold = () => ({ id: "h324", name: "Fell Pell", locationId: "mill324", condition: "steady", store: { raw_material: 10 }, features: [{ kind: "forge" }, { kind: "smithy" }] });
+  const who = { holdings: [hold()], bands: [] };
+  const h = who.holdings[0];
+  const bare = { holdings: [{ id: "bare", name: "Bare Post", locationId: "x", features: [{ kind: "watch" }] }] };
+  const noForge = AR.setForgeOrder(bare, "bare", "sword", 5);
+  const building = AR.makersAt({ features: [{ kind: "forge", building: true }] });
+  const set = AR.setForgeOrder(who, "h324", "sword", 20);
+  const p1 = AR.tickArmory(h), p2 = AR.tickArmory(h), p3 = AR.tickArmory(h), p4 = AR.tickArmory(h);
+  check("§324: ⛔ THE FORGE — a forge and a smithy make 6 a pass from the store's raw material; the order and the store run down together; a stall is said ONCE; no forge, no order; a forge still being built makes nothing",
+    !noForge.ok && building.cap === 0 && set.ok && AR.makersAt(h).cap === 6
+    && p1.made === 6 && /Fell Pell made 6 swords — 14 to go\./.test(p1.said) && p2.made === 4 && h.store.raw_material === 0
+    && p3.made === 0 && /no raw material left for swords/.test(p3.said) && p4.said === null && AR.gearCount(h, "sword") === 10 && h.forgeOrder.left === 10,
+    JSON.stringify({ p1, p2, p3, p4, store: h.store, armory: h.armory }));
+  const xb = hold(); xb.store = { raw_material: 5 };
+  const whoX = { holdings: [xb] };
+  AR.setForgeOrder(whoX, "h324", "crossbow", 4);
+  const px = AR.tickArmory(xb);
+  check("§324: ⛑ …and a crossbow's lock takes a part — with raw material and no parts, the forge says it is the parts that ran out",
+    px.made === 0 && /no mech parts left for crossbows/.test(px.said || ""), JSON.stringify(px));
+
+  h.armory = { sword: 10, shield: 12 };
+  who.bands = [{ id: "b324", name: "Ridge Watch", condition: "fresh", contingents: [{ n: 20, quality: 1, does: ["HARM", "MARTIAL"] }, { n: 1, quality: 2, npcId: "pell", does: ["HARM"] }] }];
+  const before = ML.bandStrength(ML.resolvedUnit(who.bands, who.bands[0]), {}).effective;
+  const gapsBefore = ML.bandGaps(who.bands[0], {}).map(g => g.missing);
+  const away = AR.outfitContingent(who, { unitId: "b324", index: 0, slot: "weapon", gear: "sword", holdId: "h324", hereId: "elsewhere" });
+  const named = AR.outfitContingent(who, { unitId: "b324", index: 1, slot: "weapon", gear: "sword", holdId: "h324", hereId: "mill324" });
+  const swords = AR.outfitContingent(who, { unitId: "b324", index: 0, slot: "weapon", gear: "sword", holdId: "h324", hereId: "mill324" });
+  const nine = AR.outfitContingent(who, { unitId: "b324", index: 0, slot: "shield", gear: "shield", n: 9, holdId: "h324", hereId: "mill324" });
+  const canNine = ML.bandCan(who.bands[0]);
+  const ten = AR.outfitContingent(who, { unitId: "b324", index: 0, slot: "shield", gear: "shield", n: 10, holdId: "h324", hereId: "mill324" });
+  const canTen = ML.bandCan(who.bands[0]);
+  const gapsAfter = ML.bandGaps(who.bands[0], {}).map(g => g.missing);
+  const after = ML.bandStrength(ML.resolvedUnit(who.bands, who.bands[0]), {}).effective;
+  check("§324: ⛔ OUTFIT UP TO THE STOCK — where you stand, never a named person; 20 hands and 10 swords: 10 handed out, 10 short; shields returned and re-issued count toward the stock",
+    !away.ok && !named.ok && /carries their own kit/.test(named.why) && swords.ok && swords.given === 10 && swords.short === 10
+    && nine.ok && ten.ok && ten.given === 10 && AR.gearCount(h, "sword") === 0 && AR.gearCount(h, "shield") === 2 && !h.armory.sword,
+    JSON.stringify({ away, named, swords, nine, ten, armory: h.armory }));
+  check("§324: ⛔ SHIELDS ON HALF OF THEM PROTECT — read by `bandCan` itself, so a LONE band's losses hear it (bloodBand reads the raw unit): 9 of 20 is not half, 10 is; the 1.4× unwarded gap lifts",
+    !canNine.includes("PROTECT") && canTen.includes("PROTECT") && gapsBefore.includes("PROTECT") && !gapsAfter.includes("PROTECT"),
+    JSON.stringify({ canNine, canTen, gapsBefore, gapsAfter }));
+  const stored = who.bands[0].contingents[0].quality;
+  const again = ML.bandStrength(ML.resolvedUnit(who.bands, who.bands[0]), {}).effective;
+  check("§324: ⛔ WHAT THEY CARRY LIFTS THEIR QUALITY in the resolved unit (half of them a sword's 0.1, half a shield's 0.05 → +0.075 each, 20 heads → +1.5) and never in the stored contingent, so a lift cannot compound",
+    before === 22 && after === Math.round(22 + 20 * 0.075) && stored === 1 && again === after, JSON.stringify({ before, after, stored, again }));
+  const bled = ML.bloodUnit(who.bands, "b324", 0.2, { cfg: {} });
+  const kept = bled.bands[0].contingents[0].kit;
+  const axes = (() => { h.armory = { ...h.armory, axe: 20 }; return AR.outfitContingent(who, { unitId: "b324", index: 0, slot: "weapon", gear: "axe", holdId: "h324", hereId: "mill324" }); })();
+  const back = AR.outfitContingent(who, { unitId: "b324", index: 0, slot: "shield", gear: null, holdId: "h324", hereId: "mill324" });
+  check("§324: ⛑ THE KIT SURVIVES A CLASH (the normaliser carries it through); a different weapon sends the swords back to the armory; taking shields back returns them and the slot empties",
+    kept?.weapon?.gear === "sword" && axes.ok && axes.returned?.gear === "sword" && AR.gearCount(h, "sword") === 10
+    && back.ok && back.returned.n === 10 && AR.gearCount(h, "shield") === 12 && !who.bands[0].contingents[0].kit.shield,
+    JSON.stringify({ kept, axes, back, armory: h.armory }));
+
+  const eco = CT324.rules.economy;
+  const rid = "the_gearlands";
+  const each = AR.gearPrice("sword", rid, { economy: eco });
+  const purseBefore = JSON.stringify(who.purse || null);
+  const awaySell = AR.sellGear(who, "h324", { sword: 4 }, { hereId: "elsewhere", regionId: rid, economy: eco });
+  const sold = AR.sellGear(who, "h324", { sword: 4, shield: 0 }, { hereId: "mill324", regionId: rid, economy: eco });
+  check("§324: ⛔ GEAR SELLS AS ARMS, where the armory stands, at the place's price for arms, paid in its money",
+    !awaySell.ok && JSON.stringify(who.purse || null) !== purseBefore && sold.ok && sold.sold.length === 1 && sold.value === 4 * each && each > 0
+    && AR.gearCount(h, "sword") === 6 && typeof sold.said === "string" && sold.said.length > 0, JSON.stringify({ each, sold, purse: who.purse }));
+
+  who.holdings[0].forgeOrder = { gear: "plate", left: 3 };
+  const gm = H324.holdingsForGM(who, null, { hereId: "mill324", sayArmory: (x) => AR.armorySaid(x, AR.armoryTable()) }) || "";
+  const roster = (FL.rosterForGM(who, { content: CT324 }) || []).join("\n");
+  const W324 = rd("engine/worldtick.js").replace(/\r\n/g, "\n");
+  const G324 = rd("engine/gm_registry.js").replace(/\r\n/g, "\n");
+  check("§324: ⛔ THE GM IS TOLD — the hold's line says its armory and its forge's order (injected by the registry), the roster says what each unit carries; and the world tick works the forge each pass",
+    /its armory holds [^;]*\b6 swords\b/.test(gm) && /its armory holds [^;]*\b12 shields\b/.test(gm) && !/\baxes\b/.test(gm)   /* the twenty axes were handed out */
+    && /; its forge is making suits of plate, 3 to go/.test(gm) && /carrying 20 axes/.test(roster)
+    && /const made = tickArmory\(h, \{ cfg: holdCfg, armory: content\?\.rules\?\.economy\?\.armory \|\| null \}\);\n\s*if \(made\?\.said\) news\.push\(made\.said\);/.test(W324)
+    && /sayArmory: \(h\) => armorySaid\(h, armoryTable\(env\.CONTENT\?\.rules\?\.economy\?\.armory \|\| null\)\)/.test(G324),
+    JSON.stringify({ gm: gm.slice(-160), roster: roster.slice(0, 200) }));
+  const A324 = rd("app.js").replace(/\r\n/g, "\n").split("\n").filter(l => !/^\s*\/\//.test(l)).join("\n");
+  check("§324: ⛑ WHERE THE PLAYER DOES IT — the hold card's order and Sell gear, the Bands tab's Outfit, each bound to its handler",
+    /\[data-make-order\]"\)\) btn\.onclick/.test(A324) && /\[data-make-stop\]/.test(A324) && /\[data-sell-gear\]"\)\) btn\.onclick = \(\) => showSellGear\(/.test(A324)
+    && /\[data-cg-outfit\]"\)\) b\.onclick = \(\) => showOutfit\(/.test(A324) && /const r = outfitContingent\(character, \{ unitId, index, slot,/.test(A324)
+    && /const r = sellGear\(character, h\.id, counts\(\),/.test(A324));
+}
+
+// ══════════ §325 · CCODE-446 — THE EARLY RETURN SAID NOTHING ══════════
+// Found verifying the armory: the forge made six swords on a real pass and no line said so. `runWorldTick` returns early when the character's
+// day has not moved — the state live saves sit in — and on that path it only RETURNED its news, which its one caller ignores.
+console.log("\n── §325 · a hold's pass is said on the early-return path too — the news reaches the log and the GM, not only a return nobody reads ──");
+{
+  const { runWorldTick: rwt325 } = await import("../engine/worldtick.js");
+  const { worldCount: wc325 } = await import("../engine/worldtime.js");
+  const { loadContentHeadless: lch325 } = await import("./headless_content.mjs");
+  const C325 = await lch325();
+  const mk = () => ({ id: "c325", name: "Tester", clock: { day: 14 }, npcRegistry: {}, purse: { crystal: 50, coin: 0, paper: 0, marks: 0, scrip: {} },
+    worldState: { lastTickDay: 14, eventStages: {}, spectrumDrift: {}, news: [], unseenNews: [] },
+    holdings: [{ id: "h325", name: "Fell Pell", kind: "post", locationId: "millbrook", condition: "steady", steward: null,
+      lastMovedWorldCount: wc325() - 500, store: { raw_material: 9 }, features: [{ kind: "forge" }], forgeOrder: { gear: "sword", left: 3 } }] });
+  const c = mk();
+  const r = await rwt325({ character: c, content: C325, currentDay: 14, advanceAssignments: async () => ({ advancements: [] }) });
+  const said = (arr) => (arr || []).map(n => n?.text || "").filter(t => /Fell Pell made 3 swords — the order is filled\./.test(t));
+  check("§325: ⛔ ON THE EARLY RETURN (the character's day parked, world time moved) the hold's pass is WRITTEN — the forge's line reaches the news the flash and the log read, and the GM's buffer — not only the return value nobody reads",
+    r.ticked === true && c.holdings[0].armory?.sword === 3 && said(c.worldState.unseenNews).length === 1 && said(c.worldState.news).length === 1
+    && said(r.news).length === 1, JSON.stringify({ ticked: r.ticked, unseen: (c.worldState.unseenNews || []).map(n => n.text), armory: c.holdings[0].armory }));
+  const quiet = mk(); quiet.holdings = [];
+  const before = JSON.stringify(quiet.worldState);
+  await rwt325({ character: quiet, content: C325, currentDay: 14, advanceAssignments: async () => ({ advancements: [] }) });
+  check("§325: ⛑ …and a pass with nothing to say writes nothing", JSON.stringify(quiet.worldState.news) === JSON.stringify(JSON.parse(before).news)
+    && (quiet.worldState.unseenNews || []).length === 0);
+  const { storeNews: sn325 } = await import("../engine/holdings.js");
+  const kept = sn325({ name: "Fell Pell" }, { keeperSold: { by: "pell", goods: { raw_material: 5, mech_parts: 8 }, crystal: 52, said: "52 crystal" } });
+  check("§325: ⛔ …and the keeper's sale has a line — `keeperSold` was written every pass and read by nothing, so a hold's main income reached the purse unsaid while three crystal of alms were told",
+    kept.includes("Fell Pell's keeper sold 5 raw material, 8 mech parts for 52 crystal."), JSON.stringify(kept));
 }
 
 /* ══════════ REPORT ══════════ */

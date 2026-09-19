@@ -170,7 +170,7 @@ export function holdingNews(holding, before, effects = null) {
 /** ⛔ SNG-356 · PRESENCE 20 — THE OBLIGATION INVERTS. `— owes: X` becomes `— X draws standing from your
  *  holding of it`. ⚠️ NARRATIVE, NOT NUMERIC: nothing is discharged mechanically and no cost is removed.
  *  What changes is who is beholden, which is the whole of "the name is a power in the world". */
-export function holdingsForGM(character, effects = null, { hereId = null, nameOf = null, cfg = null, items = null } = {}) {
+export function holdingsForGM(character, effects = null, { hereId = null, nameOf = null, cfg = null, items = null, sayArmory = null } = {}) {
   // ⛔ SPEC_holding_attributes — the narrator is told when the character is STANDING IN a place they hold, and each
   // holding arrives as its sentence. A messenger from the post is one thing; being at the post is another.
   const here = new Set(holdingsAt(character, hereId).map(h => h.id));
@@ -188,6 +188,7 @@ export function holdingsForGM(character, effects = null, { hereId = null, nameOf
       : "")
     + roomSaid(h)
     + vaultSaid(h, items)   // ⛔ CCODE-444: what its vault keeps, and whether each well or sink is on
+    + (typeof sayArmory === "function" ? sayArmory(h) : "")   // ⛔ CCODE-445: its armory and its forge's order — injected, so no import cycle
   ).join("\n");
 }
 
@@ -921,6 +922,12 @@ export function storeNews(holding, st) {
   for (const n of (st.built || [])) lines.push(`${n} stands at ${where} now.`);
   for (const n of (st.lapsing || [])) lines.push(`${n} at ${where} will go quiet next pass unless it is refreshed.`);
   for (const n of (st.lapsed || [])) lines.push(`${n} at ${where} has gone quiet.`);
+  // ⛔ CCODE-446 — THE KEEPER'S SALE IS SAID. `keeperSold` was written every pass and read by nothing, so a hold's main income arrived in
+  // the purse with no line — while three crystal of alms had one.
+  if (st.keeperSold && Object.keys(st.keeperSold.goods || {}).length) {
+    const sold = Object.entries(st.keeperSold.goods).map(([g, n]) => `${n} ${String(g).replace(/_/g, " ")}`).join(", ");
+    lines.push(`${where}'s keeper sold ${sold} for ${st.keeperSold.said || `${st.keeperSold.crystal} crystal`}.`);
+  }
   if (st.pilgrims) lines.push(`${st.pilgrimsSaid || `${st.pilgrims} crystal`} left at ${where} by those who came to it.`);
   if (Array.isArray(st.yields) && st.yields.length > 1) { /* several goods — the store line on the tab says which */ }
   if (st.grew) lines.push(`${where} has come up to ${holding.condition}${st.grew.keeper ? ` under ${st.grew.keeper}` : ""}.`);

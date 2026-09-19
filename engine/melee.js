@@ -567,7 +567,10 @@ export function contingentsOf(band) {
     return list.map(c => ({ n: Math.max(0, num(c?.n, 0)), quality: Math.max(0, num(c?.quality, 1)),
       does: (c?.does || ["MARTIAL"]).map(String), what: c?.what || null, npcId: c?.npcId || null, from: c?.from || null,
       kind: c?.kind ? String(c.kind) : null, wards: Array.isArray(c?.wards) ? c.wards.map(String) : [],
-      crafts: Array.isArray(c?.crafts) ? c.crafts.map(String) : [] }));
+      crafts: Array.isArray(c?.crafts) ? c.crafts.map(String) : [],
+      // ⛔ CCODE-445 — AND `kit` RIDES THROUGH, before anything reads it, for the reason every field above had to: a writer that rebuilds
+      // contingents through this normaliser would otherwise strip every sword it handed out.
+      ...(c?.kit && typeof c.kit === "object" ? { kit: c.kit } : {}) }));
   }
   return [{ n: Math.max(0, num(band?.count, 0)), quality: Math.max(0, num(band?.quality, 1)),
     does: ["HARM", "MARTIAL"], what: band?.name || null }];
@@ -623,7 +626,7 @@ export function unitComposition(band) {
   const skilled = cs.filter(c => c.n > 0 && c.does.some(d => d !== "HARM" && d !== "MARTIAL"));
   const bodies = cs.reduce((a, c) => a + c.n, 0);
   const families = {};
-  for (const c of cs) if (c.n > 0) for (const d of c.does) families[d] = (families[d] || 0) + c.n;
+  for (const c of cs) if (c.n > 0) for (const d of new Set([...c.does, ...kitGives(c)])) families[d] = (families[d] || 0) + c.n;   // CCODE-445
   // ⛔ CCODE-409 — "the legion will have a combination of the things a band is built from. Wards skills etc." Kinds, wards and crafts
   // are unioned exactly as families are, and a LEGION reads its parts' through `resolvedUnit` like everything else — so a legion of a
   // shieldwall band and an archer band reports both kinds and every ward either brings, without a line of legion-specific code.
@@ -641,9 +644,48 @@ export function unitComposition(band) {
   };
 }
 
+/** ⛔ CCODE-445 — WHAT THEIR KIT GIVES THEM TO DO: shields on at least `givesAt` of the heads (stamped on the kit entry from the armory's
+ *  table when it was handed out — this file takes no imports) and they PROTECT. Read by `bandCan` itself, so a lone band's losses
+ *  (`bloodBand` reads the raw unit) and a legion's (the resolved one) hear the same shields. Pure. */
+export function kitGives(c) { // registry:internal — read by bandCan and unitComposition in this file
+  const heads = Math.max(0, num(c?.n, 0));
+  if (!heads || !c?.kit || typeof c.kit !== "object") return [];
+  const out = [];
+  for (const k of Object.values(c.kit)) {
+    if (!k?.gives) continue;
+    if (Math.min(heads, Math.max(0, num(k.n, 0))) / heads >= num(k.givesAt, 0.5)) out.push(String(k.gives));
+  }
+  return out;
+}
+
+/** ⛔ CCODE-445 — WHAT THEY CARRY, AS THEIR QUALITY: each kit entry lifts the body of hands by the share of heads it outfits times its
+ *  worth — twenty hands with twelve swords are lifted by 12/20 of a sword. ⚠️ It rides in `resolvedContingents` beside the leader's lift
+ *  (CCODE-406), so strength, threat and a clash read it with no new argument, and the STORED contingent is never changed — a lift
+ *  written back would compound. Pure. */
+export function kitLift(c) {
+  const heads = Math.max(0, num(c?.n, 0));
+  const kit = c?.kit && typeof c.kit === "object" ? Object.values(c.kit).filter(Boolean) : [];
+  if (!heads || !kit.length) return c;
+  const q = kit.reduce((a, k) => a + (Math.min(heads, Math.max(0, num(k.n, 0))) / heads) * Math.max(0, num(k.q, 0)), 0);
+  return { ...c, quality: Math.max(0, num(c.quality, 1)) + Math.round(q * 1000) / 1000 };
+}
+
+/** What a unit's hands carry, summed by kind across its contingents — never more of a kind than there are heads to carry it. Pure. */
+export function kitSummary(contingents) {
+  const by = new Map();
+  for (const c of contingents || []) for (const k of Object.values(c?.kit || {})) {
+    if (!k?.gear) continue;
+    const n = Math.min(Math.max(0, num(k.n, 0)), Math.max(0, num(c.n, 0)));
+    const cur = by.get(k.gear) || { gear: k.gear, one: k.one || k.gear, many: k.many || k.gear, n: 0 };
+    cur.n += n;
+    by.set(k.gear, cur);
+  }
+  return [...by.values()].filter(x => x.n > 0);
+}
+
 export function bandCan(band) {
   const out = new Set();
-  for (const c of contingentsOf(band)) if (c.n > 0) for (const d of c.does) out.add(d);
+  for (const c of contingentsOf(band)) if (c.n > 0) for (const d of [...c.does, ...kitGives(c)]) out.add(d);   // CCODE-445: and what their kit gives
   return [...out];
 }
 
@@ -857,12 +899,13 @@ export function resolvedContingents(bands, unit, { levelOf = null, cfg = {} } = 
   // is the defect this project finds most often (CCODE-402 was exactly that, one level up).
   const lift = (cs, by) => (by > 0 ? cs.map(c => ({ ...c, quality: Math.max(0, num(c.quality, 1)) + by })) : cs);
   const parts = legionParts(bands, unit);
-  if (!parts.length) return lift(contingentsOf(unit), leaderBonusOf(unit, { levelOf, cfg }));
+  const kitted = (cs) => cs.map(c => kitLift(c));   // ⛔ CCODE-445: what they carry rides the quality too, part by part, before any leader's lift
+  if (!parts.length) return lift(kitted(contingentsOf(unit)), leaderBonusOf(unit, { levelOf, cfg }));
   // ⚑ "LIKE A SCALED UP BAND": each part is lifted by its OWN captain, and the whole formation again by the legion's commander — so a
   // legion of well-captained bands under a good commander is worth more than the same heads under nobody, at both scales.
   const commander = leaderBonusOf(unit, { levelOf, cfg });
-  const own = Array.isArray(unit?.contingents) && unit.contingents.length ? contingentsOf(unit) : [];
-  const fromParts = parts.flatMap(p => lift(contingentsOf(p), leaderBonusOf(p, { levelOf, cfg })));
+  const own = Array.isArray(unit?.contingents) && unit.contingents.length ? kitted(contingentsOf(unit)) : [];
+  const fromParts = parts.flatMap(p => lift(kitted(contingentsOf(p)), leaderBonusOf(p, { levelOf, cfg })));
   return lift([...own, ...fromParts], commander);
 }
 

@@ -1964,3 +1964,12 @@ img.charge-face { cursor: zoom-in; }
 .vault-charge.on, .aura-toggle.on { color: var(--accent2); border-color: var(--accent2); }
 .item-charge { font-size: 12.5px; color: var(--ink-dim); margin: 6px 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
 .item-charge .opt { font-size: 11px; padding: 4px 8px; }
+
+/* ⛔ CCODE-445 — the armory: an order line on the hold card, and one row per kind of kit in the Outfit popup */
+.armory-make { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.armory-count { width: 4.5em; }
+.outfit-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.outfit-slot { min-width: 5.5em; font-weight: 600; }
+.outfit-now { flex: 1 1 140px; }
+.outfit-pick { display: inline-flex; align-items: center; gap: 6px; flex: 1 1 220px; }
+.outfit-pick select { min-width: 0; max-width: 100%; }

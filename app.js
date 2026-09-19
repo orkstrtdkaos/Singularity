@@ -110,6 +110,7 @@ import { newsNearness, nearFirst } from "./engine/newsvoice.js";   // CCODE-367:
 import { contributionsOf } from "./engine/combatants.js";
 import { derivedLevel, authoredFor } from "./engine/npcsheet.js";   // CCODE-422: an authored person is found behind a registry record
 import { musterCapacityOf, queueHoldingEvent } from "./engine/holdings.js";
+import { ARMORY_SLOTS, SLOT_WORDS, armoryTable, armoryOf, armoryLine, makersAt, setForgeOrder, outfitContingent, gearPrice, sellGear } from "./engine/armory.js";   // CCODE-445: the armory
 import { homeOf, isHome, makeHome } from "./engine/home.js";   // CCODE-369: a home is a place that is yours   // CCODE-360: an invitation carried by someone you both know
 import { runWakeGeneration } from "./engine/wake.js"; // SNG-204 Phase 2: open wakes generate the next thread
 import { addAssignment, delegationRefusal, activeDelegates, MISSION_KINDS, MISSION_KIND_IDS, canSendOn, sayFamilies } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
@@ -158,7 +159,7 @@ import { championsFor, resolveChampion, creditChampion, championLine, sendingIsG
 // ⛔ CCODE-404 (Erik) — `addContingent` and `musteredFrom` are new; `unitComposition` and `bandGaps` had NO caller outside the tests.
 // ⛔ CCODE-405 (Erik's legion ruling): formed of bands that keep their identity, placed and postured once CALLED, and free until then.
 // ⚠️ ONE LINE ON PURPOSE — `import_integrity` reads an import statement per line, and a comment inside the braces hides what follows it.
-import { commandSlots, bringForward, lineSplit, canRaiseBand, raiseBand, bandStrength, bandThreat, bloodBand, recoverBand, legionClash, addContingent, musteredFrom, unitComposition, bandGaps, formLegion, disbandLegion, callCostOf, callUnit, standDown, setUnitPosture, bloodUnit, resolvedUnit, UNIT_POSTURES, setUnitLeader, leaderBonusOf, editContingent } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
+import { commandSlots, bringForward, lineSplit, canRaiseBand, raiseBand, bandStrength, bandThreat, bloodBand, recoverBand, legionClash, addContingent, musteredFrom, unitComposition, bandGaps, formLegion, disbandLegion, callCostOf, callUnit, standDown, setUnitPosture, bloodUnit, resolvedUnit, UNIT_POSTURES, setUnitLeader, leaderBonusOf, editContingent, kitSummary } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
 import { groupCapability, loadBearing } from "./engine/group.js";   // CCODE-317/322: what your line covers, and who holds it alone
 import { characterPower, threatBand } from "./engine/threat.js"; // CCODE-52: built power sets the mean the encounter pool revolves around
 import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine, FRAME_FREEFORM_CUE } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c). SNG-246 Fix D: playerReceiptLine = the mechanical receipt SHOWN to the player
@@ -173,7 +174,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.2.1";
+const APP_VERSION = "2.2.2";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6074,6 +6075,52 @@ function showVaultDeposit(holdId, after = () => {}) {
     const r = depositToVault(character, h.id, picked().map(x => x.it.customName || x.it.name), { hereId: here.id });
     if (!r.ok) { alert(r.why); return; }
     h.history = [...(h.history || []), { at: null, from: h.condition, to: h.condition, note: `put in the vault — ${r.moved.join(", ")}` }].slice(-12);
+    saveCharacter(character);
+    close();
+    after();
+  };
+}
+/** ⛔ CCODE-445 — SELL GEAR from a hold's armory, where you stand (Erik: "You could sell them"): as arms, at this place's price for arms,
+ *  in its own money. The quote is shown before anything moves. */
+function showSellGear(holdId, after = () => {}) {
+  const h = (character?.holdings || []).find(x => x && x.id === holdId);
+  const here = hereNow();
+  if (!h || !here || here.id !== h.locationId) { alert("Gear is sold where the armory stands — at the hold itself."); return; }
+  const rid = here.regionId || null, eco = CONTENT.rules?.economy || null, authored = eco?.armory || null, A = armoryTable(authored);
+  const rows = Object.entries(armoryOf(h)).filter(([, n]) => n > 0).map(([gear, n]) => ({ gear, n, g: A.gear[gear], each: gearPrice(gear, rid, { economy: eco, armory: authored }) })).filter(r => r.g);
+  document.getElementById("help-pop")?.remove();
+  const pop = document.createElement("div");
+  pop.id = "help-pop";
+  pop.className = "help-overlay";
+  pop.innerHTML = `<div class="help-card sell-card" role="dialog" aria-label="Sell gear">
+    <h3 class="codex-title">Sell gear — at ${esc(h.name || "the hold")}</h3>
+    <p class="hint">Sold as arms, at this place's price for arms. ${esc(moneyLine(rid, eco))}</p>
+    <div class="sell-list">${rows.map(r => `<label class="sell-row"><span class="sell-name">${esc(r.g.many)} <span class="hint">— ${r.n} in the armory</span></span>
+      <input type="number" class="armory-count" min="0" max="${r.n}" step="1" value="0" data-gear-sell="${esc(r.gear)}" aria-label="How many ${esc(r.g.many)}">
+      <span class="sell-price">${r.each > 0 ? `${esc(incomeHere(r.each, rid, eco).label)} each` : "not wanted here"}</span></label>`).join("") || `<p class="hint">The armory is empty.</p>`}</div>
+    <div class="help-foot"><span class="hint" id="gear-total">Say how many of each.</span>
+      <span><button class="btn secondary" id="gear-cancel">Keep them</button> <button class="btn" id="gear-go" disabled>Sell</button></span></div>
+  </div>`;
+  document.body.appendChild(pop);
+  const close = () => pop.remove();
+  pop.addEventListener("click", ev => { if (ev.target === pop) close(); });
+  document.getElementById("gear-cancel").onclick = close;
+  const counts = () => Object.fromEntries([...pop.querySelectorAll("[data-gear-sell]")]
+    .map(i => [i.dataset.gearSell, Math.max(0, Math.min(Number(i.max) || 0, Math.floor(Number(i.value) || 0)))]).filter(([, n]) => n > 0));
+  const go = document.getElementById("gear-go"), said = document.getElementById("gear-total");
+  for (const i of pop.querySelectorAll("[data-gear-sell]")) i.oninput = () => {
+    const c = counts();
+    const n = Object.values(c).reduce((a, b) => a + b, 0);
+    const total = rows.reduce((a, r) => a + (c[r.gear] || 0) * r.each, 0);
+    go.disabled = !n || total <= 0;
+    said.textContent = n ? (total > 0 ? `${n} for ${incomeHere(total, rid, eco).label}` : "Nobody here buys what you picked.") : "Say how many of each.";
+  };
+  go.onclick = () => {
+    const r = sellGear(character, h.id, counts(), { hereId: here.id, regionId: rid, economy: eco, armory: authored });
+    if (!r.ok) { alert(r.why); return; }
+    const list = r.sold.map(s => `${s.n} ${s.n === 1 ? s.one : s.many}`).join(", ");
+    h.history = [...(h.history || []), { at: null, from: h.condition, to: h.condition, note: `sold from the armory — ${list}, for ${r.said}` }].slice(-12);
+    queueHoldingEvent(character, `At ${h.name || "the hold"} you sold ${list} from the armory for ${r.said}.`);
     saveCharacter(character);
     close();
     after();
@@ -13849,6 +13896,19 @@ function wireHoldingOffers() {
     if (it.active === false) delete it.active; else it.active = false;
     saveCharacter(character); again();
   };
+  // ⛔ CCODE-445: the armory — the forge's order (from anywhere: word reaches the keeper) and gear sold where you stand
+  for (const btn of app.querySelectorAll("[data-make-order]")) btn.onclick = () => {
+    const box = btn.closest(".armory-make");
+    const r = setForgeOrder(character, btn.dataset.makeOrder, box?.querySelector("[data-make-gear]")?.value, Number(box?.querySelector("[data-make-count]")?.value),
+      { cfg: holdCfgNow(), armory: CONTENT.rules?.economy?.armory || null });
+    if (!r.ok) { alert(r.why); return; }
+    saveCharacter(character); again();
+  };
+  for (const btn of app.querySelectorAll("[data-make-stop]")) btn.onclick = () => {
+    setForgeOrder(character, btn.dataset.makeStop, null, 0, { cfg: holdCfgNow(), armory: CONTENT.rules?.economy?.armory || null });
+    saveCharacter(character); again();
+  };
+  for (const btn of app.querySelectorAll("[data-sell-gear]")) btn.onclick = () => showSellGear(btn.dataset.sellGear, again);
   for (const btn of app.querySelectorAll("[data-hold-sell]")) btn.onclick = () => {
     const id = btn.dataset.holdSell;
     const here = hereNow();
@@ -14043,6 +14103,10 @@ function renderHoldingsTab(manageId = null) {
         ${(() => { const v = vaultOf(h); if (!v.length) return ""; const atHold = hereNow()?.id === h.locationId;   // ⛔ CCODE-444: what its vault keeps
           return `<div class="hint hold-has hold-vault"><span class="hold-ctl-label">vault</span>${v.map((it, i) => { const c = chargeOf(it, CONTENT.items || {}); const on = it.active !== false;
             return `<span class="hold-chip vault-chip">${esc(it.customName || it.name)}${it.qty > 1 ? ` ×${it.qty}` : ""}${c ? `<button class="vault-charge ${on ? "on" : ""}" data-vault-charge="${esc(h.id)}" data-index="${i}" aria-pressed="${on}" title="${c > 0 ? "A well: it thickens the ground" : "A sink: it thins the ground"} at this place by ${Math.abs(c)} while it is on. Tap to switch it ${on ? "off" : "on"}.">${c > 0 ? "well" : "sink"} ${on ? "on" : "off"}</button>` : ""}${atHold ? `<button class="hold-chip-x" data-vault-take="${esc(h.id)}" data-index="${i}" title="Take it back into your pack">↩</button>` : ""}</span>`; }).join("")}</div>`; })()}
+        ${(() => { const A = armoryTable(CONTENT.rules?.economy?.armory || null); const m = makersAt(h, holdCfgNow(), A); const line = armoryLine(h, A);   // ⛔ CCODE-445: the armory
+          if (!line && !m.cap) return "";
+          const atHold = hereNow()?.id === h.locationId;
+          return `<div class="hint hold-has hold-armory"><span class="hold-ctl-label">armory</span><span>${esc(line || "empty")}</span>${m.cap ? `<span class="armory-make"><select data-make-gear aria-label="What to make">${Object.entries(A.gear).map(([k, g]) => `<option value="${esc(k)}"${h.forgeOrder?.gear === k ? " selected" : ""}>${esc(g.many)}</option>`).join("")}</select><input type="number" class="armory-count" min="1" max="999" step="1" value="${h.forgeOrder?.left || 10}" data-make-count aria-label="How many"><button class="opt" data-make-order="${esc(h.id)}" title="${esc(`Makes ${m.cap} a pass (${m.by.join(", ")}), from the store's raw material`)}">${h.forgeOrder ? "Change the order" : "Make"}</button>${h.forgeOrder ? `<button class="opt" data-make-stop="${esc(h.id)}">Stop</button>` : ""}</span>` : ""}${atHold && Object.values(armoryOf(h)).some(n => n > 0) ? `<button class="opt" data-sell-gear="${esc(h.id)}" title="Sell gear from the armory, at this place's price for arms, in its own money">Sell gear</button>` : ""}</div>`; })()}
         ${h.fromAssignment ? `<div class="hint">from work you delegated</div>` : ""}
         <div class="opt-row" style="margin-top:6px">
           <button class="opt" data-hold-manage="${esc(h.id)}" title="Add what was built, change who keeps it, sell the store, give it up">⚙ Manage this place</button>
@@ -15495,6 +15559,62 @@ function showContingentEditor(unitId, index) {
   };
 }
 
+/** ⛔ CCODE-445 — OUTFIT THEM (Erik: "would allow you to outfit units up to the quantity you have"). From the armory of the hold you stand
+ *  in: one weapon, one shield and one armour a head, up to the stock. What they carried of a kind you change goes back to this armory. */
+function showOutfit(unitId, index) {
+  const band = (character.bands || []).find(b => b.id === unitId);
+  const cg = band?.contingents?.[index];
+  if (!band || !cg) return;
+  const here = hereNow();
+  const h = (character.holdings || []).find(x => x && here && x.locationId === here.id);
+  if (!h) { alert("Gear is handed out at a hold's armory — stand in one of your holds."); return; }
+  const authored = CONTENT.rules?.economy?.armory || null, A = armoryTable(authored), stock = armoryOf(h), kit = cg.kit || {};
+  const heads = Math.max(0, Math.floor(Number(cg.n) || 0));
+  const slotRow = (slot) => {
+    const had = kit[slot];
+    const kinds = Object.entries(A.gear).filter(([k, g]) => g.slot === slot && ((stock[k] || 0) > 0 || had?.gear === k));
+    return `<div class="codex-f outfit-row"><span class="outfit-slot">${esc(SLOT_WORDS[slot])}</span>
+      <span class="hint outfit-now">${had ? `carrying ${had.n} ${esc(had.n === 1 ? (had.one || had.gear) : (had.many || had.gear))}` : "carrying none"}</span>
+      <span class="outfit-pick"><select data-outfit-slot="${esc(slot)}" aria-label="${esc(SLOT_WORDS[slot])}"><option value="">keep as it is</option>${had ? `<option value="-">take them back</option>` : ""}${kinds.map(([k, g]) =>
+        `<option value="${esc(k)}">${esc(g.many)} — ${(stock[k] || 0) + (had?.gear === k ? had.n : 0)} to hand out</option>`).join("")}</select>
+      <input type="number" class="armory-count" min="1" max="${heads}" step="1" value="${heads}" data-outfit-n="${esc(slot)}" aria-label="How many of them" hidden></span></div>`;
+  };
+  document.getElementById("help-pop")?.remove();
+  const pop = document.createElement("div");
+  pop.id = "help-pop"; pop.className = "help-overlay";
+  pop.innerHTML = `<div class="help-card" role="dialog" aria-label="Outfit them">
+    <div class="whois-head">Outfit these ${heads} — from the armory at ${esc(h.name || "the hold")}</div>
+    ${ARMORY_SLOTS.map(slotRow).join("")}
+    <div class="help-foot">
+      <span class="hint">One of each a head, up to what the armory holds. Each piece makes them better; shields on half of them let them protect, and a unit that protects loses fewer.</span>
+      <button class="btn" id="outfit-go">Outfit them</button>
+      <button class="btn secondary" id="help-close">Cancel</button>
+    </div></div>`;
+  document.body.appendChild(pop);
+  const close = () => pop.remove();
+  pop.addEventListener("click", ev => { if (ev.target === pop) close(); });
+  document.getElementById("help-close").onclick = close;
+  // "how many" means something only once a kind of gear is picked
+  for (const sel of pop.querySelectorAll("[data-outfit-slot]")) sel.onchange = () => {
+    const n = pop.querySelector(`[data-outfit-n="${sel.dataset.outfitSlot}"]`);
+    if (n) n.hidden = !sel.value || sel.value === "-";
+  };
+  document.getElementById("outfit-go").onclick = () => {
+    const said = [];
+    for (const slot of ARMORY_SLOTS) {
+      const v = pop.querySelector(`[data-outfit-slot="${slot}"]`)?.value || "";
+      if (!v) continue;
+      const n = Number(pop.querySelector(`[data-outfit-n="${slot}"]`)?.value);
+      const r = outfitContingent(character, { unitId, index, slot, gear: v === "-" ? null : v, n, holdId: h.id, hereId: here.id, armory: authored });
+      if (!r.ok) said.push(r.why);
+      else if (r.short > 0) said.push(`Only ${r.given} ${A.gear[v]?.many || v} were in the armory.`);
+    }
+    if (said.length) alert(said.join("\n"));
+    close();
+    saveCharacter(character); renderBandsTab();
+  };
+}
+
 /** ⛔ CCODE-404 (Erik: "I want to have a source of workers and guards as well as a way to raise geneal troops") — THE SOURCE OF
  *  WORKERS AND GUARDS IS THE PEOPLE HE ALREADY KNOWS, at the bar SPEC_hold_costs §5 ruled for work: known, here, and not hostile.
  *  ⚑ Measured: that bar reaches 36 of the 39 people on Silas's save, where the TRAVELLING bar reaches 18 — "Bren Thalle is two dry
@@ -16107,9 +16227,14 @@ function renderBandsTab() {
   const rowFor = (r) => {
     if (r.kind === "hands") {
       // ⛔ CCODE-409 — "10 archers", not "10 hands", once somebody has said what they are; and a ward is named beside them.
+      // ⛔ CCODE-445 — and what the armory handed them, with the Outfit button where you stand in a hold of yours
+      const cgRec = (character.bands || []).find(b => b.id === r.unitId)?.contingents?.[r.contingentIndex] || null;
+      const kitWords = kitSummary(cgRec ? [cgRec] : []).map(k => `${k.n} ${k.n === 1 ? k.one : k.many}`).join(", ");
+      const atAHold = !!hereNow()?.id && (character.holdings || []).some(x => x && x.locationId === hereNow()?.id);
       return `<div class="codex-f" style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap"><strong>${r.n} ${esc(r.unitKind || "hands")}</strong>
-        <span class="hint" style="flex:1 1 200px">${esc(r.what || "no charge written")}${r.verbs ? " · " + esc(r.verbs) : ""}${(r.wards || []).length ? ` · warded against ${esc(r.wards.join(", "))}` : ""}</span>
-        <button class="opt" data-cg-edit="${esc(r.unitId)}" data-cg-index="${r.contingentIndex}" title="Name them and say what they do">What are they?</button></div>`;
+        <span class="hint" style="flex:1 1 200px">${esc(r.what || "no charge written")}${r.verbs ? " · " + esc(r.verbs) : ""}${(r.wards || []).length ? ` · warded against ${esc(r.wards.join(", "))}` : ""}${kitWords ? ` · carrying ${esc(kitWords)}` : ""}</span>
+        <button class="opt" data-cg-edit="${esc(r.unitId)}" data-cg-index="${r.contingentIndex}" title="Name them and say what they do">What are they?</button>${atAHold && cgRec && !cgRec.npcId ? `
+        <button class="opt" data-cg-outfit="${esc(r.unitId)}" data-cg-index="${r.contingentIndex}" title="Hand them weapons, shields and armour from this hold's armory">Outfit</button>` : ""}</div>`;
     }
     const w = wherePerson(r, whereOpts);
     const gate = r.atSide ? null : canBringForward(character, r, { ladder });
@@ -16305,6 +16430,7 @@ function renderBandsTab() {
   const lp407 = document.getElementById("legion-plan"); if (lp407) lp407.onclick = () => showLegionPlan();
   for (const b of app.querySelectorAll("[data-unit-lead]")) b.onclick = () => showLeaderPicker(b.dataset.unitLead);
   for (const b of app.querySelectorAll("[data-cg-edit]")) b.onclick = () => showContingentEditor(b.dataset.cgEdit, Number(b.dataset.cgIndex));   // CCODE-409
+  for (const b of app.querySelectorAll("[data-cg-outfit]")) b.onclick = () => showOutfit(b.dataset.cgOutfit, Number(b.dataset.cgIndex));   // CCODE-445
   for (const b of app.querySelectorAll("[data-unit-call]")) b.onclick = () => callUnitTogether(b.dataset.unitCall);
   for (const b of app.querySelectorAll("[data-unit-posture]")) b.onclick = () => {
     const r = setUnitPosture(character.bands || [], b.dataset.unitPosture, b.dataset.posture);

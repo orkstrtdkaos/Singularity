@@ -16,6 +16,24 @@
   "next": [],
   "releases": [
     {
+      "version": "2.2.2",
+      "date": "2026-09-19",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "An armory at your holds",
+          "summary": "A forge or smithy at your hold makes swords, axes, bows, crossbows, shields and armour, and your troops can be outfitted from it.",
+          "detail": "On a hold with a forge or smithy, order what it should make and how many; each pass it works the order from the store's raw material, and says so if the material runs out. Standing in the hold, open the Bands tab and choose Outfit on a body of hands: one weapon, one shield and one piece of armour each, up to what the armory holds. Each piece makes them better in a fight, and shields on at least half of them let them protect, so they lose fewer. You can also sell gear from the armory, at the place's price for arms."
+        },
+        {
+          "kind": "fix",
+          "title": "Your holds' news reaches you again",
+          "summary": "What your holds did while you were away (sales, upkeep, raids, work finished) is told to you again.",
+          "detail": "When you came back without your character's day having moved, your holds still worked (they sold, paid their keep, and finished what they were given) but the news of it was lost on the way to you. It now reaches the flash, the News tab and the story. Passes that already happened are not told again; everything from the next one on is."
+        }
+      ]
+    },
+    {
       "version": "2.2.1",
       "date": "2026-09-19",
       "entries": [

@@ -1,7 +1,7 @@
 # THE APPARATUS — every harness, what it is for, and whether it runs
 
 ⛔ **ERIK, 2026-08-29: *"I want this to be a well oiled factory."*** ⚠️ **A factory you cannot see is not
-well oiled.** 109 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
+well oiled.** 110 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
 were gates, which were reports, and which had quietly stopped being wired into anything.
 
 ```bash
@@ -10,7 +10,7 @@ node scripts/apparatus.mjs --md     # …as markdown for §5
 node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 ```
 
-**Last measured: 2026-09-19 · v2.0.100 · 109 files.**
+**Last measured: 2026-09-19 · v2.1.0 · 110 files.**
 
 ---
 
@@ -134,7 +134,7 @@ worthless.
 | harness | kind | assertions | purpose |
 |---|---|---|---|
 | `tests/smoke` | ✅ GATE | 3570 | — |
-| `tests/how_it_works` | ✅ GATE | 3245 | CCODE-285 |
+| `tests/how_it_works` | ✅ GATE | 3252 | CCODE-285 |
 | `tests/skill_battle_sim` | ✅ GATE | 217 | SNG-098: the two-sided contest + fog-of-war invariant |
 | `tests/content_ci` | ✅ GATE | 194 | SNG-BATCH-10 Phase 4 / SNG-040/064: the content integrity gate |
 | `tests/craft_crit` | ✅ GATE | 43 | miss // it and YOU HAVE ONLY MADE CHAOS |
@@ -181,8 +181,8 @@ worthless.
 | `tests/world_endgame` | ○ REPORT | — | — |
 | `tests/world_presets` | ○ REPORT | — | — |
 | `scripts/verify_scene_merge` | 🔧 TOOL+SELFTEST | 8 | BATCH-11 146a live acceptance test (Law 7) |
+| `scripts/bump_version` | 🔧 TOOL+SELFTEST | 6 | SNG-274: the version moves, and it moves in ONE step |
 | `scripts/safe_delete` | 🔧 TOOL+SELFTEST | 5 | CCODE-283 |
-| `scripts/bump_version` | 🔧 TOOL+SELFTEST | 3 | SNG-274: the version moves, and it moves in ONE step |
 | `scripts/roster` | 🔧 TOOL+SELFTEST | 3 | ONE ROSTER, DERIVED, ACROSS SIX FILES THAT MUST NOT BE MERGED |
 | `scripts/run_tests` | 🔧 TOOL+SELFTEST | 3 | EVERY SUITE RUNS, EVEN AFTER ONE GOES RED |
 | `scripts/sizes_inject` | 🔧 TOOL+SELFTEST | 3 | ⛔ THE THIRD INSTANCE OF A DEFECT THIS REPO HAS ALREADY NAMED TWICE |
@@ -238,6 +238,7 @@ worthless.
 | `scripts/subject` | 🔧 TOOL | — | SPEC_associativity: ONE SUBJECT, EVERY LAYER, AND THE ABSENCES |
 | `scripts/targeting_ruling_sim` | 🔧 TOOL | — | CCODE-308 |
 | `scripts/turn_flow` | 🔧 TOOL | — | CCODE-254 |
+| `scripts/version_rule` | 🔧 TOOL | — | — |
 | `scripts/vocab_sweep` | 🔧 TOOL | — | NEAR-DUPLICATE TERMS |
 | `scripts/world_projection` | 🔧 TOOL | — | project the authored 12D disposition space onto the plane |
 | `scripts/worldspace_audit` | 🔧 TOOL | — | — |

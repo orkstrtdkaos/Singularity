@@ -1251,6 +1251,21 @@ and each is specced, not yet built:
   SNG-137's repair working, not a bug — but *which write set a rank ahead of practice* is the upstream
   question.
 
+### 25.8 The version rule after 2.0 — code, not prose (Erik 2026-09-19, CCODE-438)
+Erik: *"so far we just keep racking up the smallest increment. Set something that will tell us when we go to 2.1.0 and 3.0.0 etc as the
+rule that we can follow."* §25.7 below named its trigger in prose and no script could read it. This one is `scripts/version_rule.mjs`,
+which `scripts/bump_version.mjs` applies and `tests/how_it_works.mjs` §317 checks:
+
+- **PATCH (x.y.Z)** — every update.
+- **MINOR (x.Y.0)** — the update that brings the **fifth new feature** since the minor last moved (`release_notes.json` → `rule.minorAt`).
+  The x.y.0 release's own features are the ones that made it; the count starts again after it.
+- **MAJOR (X.0.0)** — only by Erik's call, for a change that makes the game a different game for someone already playing: a save that
+  cannot carry forward, a change to how every roll, fight or advance works, or a new era of the world. `--major "<why>"`; refused bare.
+
+**Every update says what it did.** Its lines wait in `release_notes.json` → `next` (feature · fix · change · internal), written for
+players with no ticket number, and the bump moves them under the version it cuts. A player reads them after an update (a banner, and a
+popup whose lines open for detail) and at any time from the version stamp. **2.1.0 is where the notes begin**; 2.0 is summarised.
+
 ### 25.7 Version intent — the road to 2.0 (PM-approved 2026-07-22)
 The 1.8.x line carried ~180 point releases and no longer signals scale. **Two milestones, both PM-approved:**
 

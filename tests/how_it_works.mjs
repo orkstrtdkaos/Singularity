@@ -22898,6 +22898,50 @@ console.log("\n── §316 · money by place — what a place pays in, what it 
     && !/change money|changed here/.test(["the_center", "valley", "the_palelands"].map(r => M316.moneyLine(r, eco)).join(" ")));
 }
 
+// ══════════ §317 · CCODE-438 — THE VERSION FOLLOWS A RULE, AND EVERY UPDATE SAYS WHAT IT DID ══════════
+// Erik 2026-09-19: "so far we just keep racking up the smallest increment. Set something that will tell us when we go to 2.1.0 and 3.0.0
+// etc as the rule that we can follow. Also I want to start tracking the updates for the 2.x level with a summary for players to see…
+// keep it tidy and options to click on for more detail."
+console.log("\n── §317 · the version rule, the notes every update carries, and what a player reads after one ──");
+{
+  const VR = await import("../scripts/version_rule.mjs");
+  const feat = (n, t = "x") => Array.from({ length: n }, (_, i) => ({ kind: "feature", title: `${t}${i}`, summary: "s" }));
+  const fix = { kind: "fix", title: "f", summary: "s" };
+  const rule = { minorAt: 5 };
+  const four = { rule, releases: [{ version: "2.1.4", entries: feat(2, "a") }, { version: "2.1.2", entries: [fix, ...feat(2, "b")] }, { version: "2.1.0", entries: feat(5, "c") }], next: feat(1, "d") };
+  const three = { ...four, releases: four.releases.slice(1), next: feat(1, "d") };
+  const d4 = VR.decideBump("2.1.4", four), d3 = VR.decideBump("2.1.4", three);
+  check("§317: ⛔ THE RULE — the update that brings the FIFTH new feature since the minor last moved cuts the minor; the x.y.0 release's own features do not count; every other update is a patch",
+    d4.kind === "minor" && d4.version === "2.2.0" && d3.kind === "patch" && d3.version === "2.1.5" && /3 of 5 new features toward 2\.2\.0/.test(d3.why)
+    && VR.decideBump("2.2.0", { rule, releases: [{ version: "2.2.0", entries: feat(5) }], next: feat(1) }).version === "2.2.1",
+    JSON.stringify({ d4, d3 }));
+  check("§317: ⛔ …and a MAJOR is Erik's call, refused without the reason in words",
+    !!VR.decideBump("2.1.4", four, { major: "" }).error && VR.decideBump("2.1.4", four, { major: "a new era of the world" }).version === "3.0.0");
+  const BV = rd("scripts/bump_version.mjs").replace(/\r\n/g, "\n");
+  check("§317: …and the script that bumps reads that rule, refuses an update with nothing to say, and moves the notes under the version it cuts",
+    /import \{ decideBump, featuresSinceMinor, entryProblem \} from "\.\/version_rule\.mjs";/.test(BV)
+    && /release_notes\.json has nothing in `next`/.test(BV) && /notes\.releases\.unshift\(\{ version: next,/.test(BV)
+    && /the rule decides the bump now/.test(BV));
+  const RN = JSON.parse(rd("release_notes.json"));
+  const probs = [...(RN.releases || []).flatMap(r => (r.entries || []).map(VR.entryProblem).filter(Boolean).map(p => `${r.version}: ${p}`)),
+    ...(RN.summaries || []).flatMap(s => (s.entries || []).map(VR.entryProblem).filter(Boolean).map(p => `${s.line}: ${p}`))];
+  const APPV = rd("engine/version.js").match(/APP_VERSION = "([^"]+)"/)?.[1];
+  check("§317: ⛔ EVERY UPDATE SAYS WHAT IT DID — the running version has its notes, nothing waits unreleased, and every line is fit for a player: a known kind, a title, a summary, and never a ticket number",
+    (RN.releases || []).some(r => r.version === APPV && (r.entries || []).length) && (RN.next || []).length === 0 && probs.length === 0
+    && RN.rule?.minorAt === 5 && /five|fifth/.test(RN.rule?.minor || ""),
+    `${APPV} · ${probs.join(" | ")}`);
+  check("§317: …and the 2.x line is summarised for players from where it began, since the updates before the notes carried none",
+    (RN.summaries || []).some(s => s.line === "2.0" && (s.entries || []).filter(e => e.kind === "feature").length >= 5 && (s.entries || []).some(e => e.kind === "fix")));
+  const A317 = rd("app.js").replace(/\r\n/g, "\n").split("\n").filter(l => !/^\s*\/\//.test(l)).join("\n");
+  check("§317: ⛑ after an update a banner says how much arrived — on EVERY screen, from the shell they are all drawn in — and the popup groups New · Fixed · Changed, each line opening for more; internal work is never shown",
+    /\$\{hero \? titleHero\(\) : ""\}\n\s*<div class="wn-shell" id="wn-shell">\$\{whatsNewBannerHtml\(\)\}<\/div>\n\s*\$\{inner\}/.test(A317)
+    && /function shownEntries\(r\) \{ return \(Array\.isArray\(r\?\.entries\) \? r\.entries : \[\]\)\.filter\(e => e && e\.kind !== "internal" && e\.title\); \}/.test(A317)
+    && /<details class="wn-entry"><summary>/.test(A317) && /\["feature", "fix", "change"\]\.map\(k =>/.test(A317));
+  check("§317: …the version stamp opens the notes at any time, back through the whole line; and a device that played before the notes existed is told what arrived, while a new one is told nothing",
+    (A317.match(/class="link-btn wn-stamp" data-whats-new="all"/g) || []).length === 2 && /data-whats-new="all">Everything in/.test(A317)
+    && /if \(!played\) \{ markVersionSeen\(\); return \[\]; \}\n\s*seen = "2\.0\.100";/.test(A317));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

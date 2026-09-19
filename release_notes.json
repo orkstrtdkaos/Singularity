@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "_what": "What players read after an update, and the rule the version number follows. Written for players: plain words, no ticket numbers (a ticket number never reaches a player). `scripts/bump_version.mjs` moves `next` into `releases` under the version it cuts, and decides that version by the rule below.",
+  "rule": {
+    "patch": "The last number moves with every update.",
+    "minor": "The middle number moves on the update that brings the fifth new feature since the last time it moved.",
+    "major": "The first number moves only when the game becomes a different game for someone already playing — a save that cannot carry forward, a change to how every roll, fight or advance works, or a new era of the world — and only by Erik's call.",
+    "minorAt": 5
+  },
+  "kinds": {
+    "feature": "something a player can now do or see that they could not before",
+    "fix": "something that behaved wrong and now behaves right",
+    "change": "a rule or a number that moved",
+    "internal": "work a player never meets — recorded, never shown"
+  },
+  "next": [],
+  "releases": [
+    {
+      "version": "2.1.0",
+      "date": "2026-09-19",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "What's new",
+          "summary": "After an update, the game tells you what changed.",
+          "detail": "A banner after an update says how many new things and fixes arrived since you last played. Open it for the list, and open any line for the detail. The version number on the title screen and in the top bar opens these notes at any time, back through the whole 2.x line."
+        },
+        {
+          "kind": "change",
+          "title": "Version numbers mean something now",
+          "summary": "The last number moves with every update, the middle one when five new features have landed, and the first only when the game becomes a different game.",
+          "detail": "Until now every update moved only the last number, which is how the game reached 2.0.100. From 2.1.0 the middle number marks a real step: it moves on the update that brings the fifth new feature since it last moved. The first number moves only when the game changes what it is for someone already playing."
+        }
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "line": "2.0",
+      "range": "2.0.0 – 2.0.100",
+      "dates": "14 – 19 September",
+      "title": "What the 2.0 line brought",
+      "summary": "A world you share with other travellers, journeys and jobs, holds that grow, and money that depends on where you stand.",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "Other travellers share your world",
+          "summary": "Other players' characters are part of your world now.",
+          "detail": "You can meet another traveller in town, send word to them through someone you both know, and trade with their holds through their keepers. A crisis one of you answers reads as answered for everyone. The people the world makes, and what is true of them, are shared — what you know of them stays yours."
+        },
+        {
+          "kind": "feature",
+          "title": "Journeys you plan and walk",
+          "summary": "A journey is agreed, readied, then walked leg by leg.",
+          "detail": "A dangerous leg is planned before you take it, and a stopped journey can be taken up again. Your travel and gathering crafts carry the road. Where you keep mounts, you ride, and the road is shorter."
+        },
+        {
+          "kind": "feature",
+          "title": "Jobs and errands",
+          "summary": "Send your people — and your troops — to get things done.",
+          "detail": "A job has a place, a difficulty and a reward. The people you send roll their own dice for it, travel there on their own road, and come back when it is done. People in your charge work their errands by the same dice, and a band's hands or a hold's guards can be sent too."
+        },
+        {
+          "kind": "feature",
+          "title": "Holds that grow",
+          "summary": "A hold has room, and grows into a bigger place.",
+          "detail": "Building needs room. When a hold is full, thriving and has lasted a season, you are offered its next size. A training yard cuts the cost of calling troops, an infirmary heals the hurt and slows how fast the dead sink, and barracks house your soldiers — a band with no bed is quartered at a cost."
+        },
+        {
+          "kind": "feature",
+          "title": "Money depends on where you stand",
+          "summary": "The world's five kinds of money are in play.",
+          "detail": "Each place pays in its own money and takes the others at a worse rate. A hold in a Reach earns that Reach's scrip and pays its keep from it. Your purse says what money the place you stand in takes."
+        },
+        {
+          "kind": "feature",
+          "title": "Every roll says how it lands",
+          "summary": "Five ways a roll can land, on every skill, shown before you choose.",
+          "detail": "A critical success, a success, a partial, a failure or a critical failure, with the odds of each on the choice. A skill says what it rolls, a choice that uses a craft rolls that craft, and even a trained hand can fail badly."
+        },
+        {
+          "kind": "feature",
+          "title": "People who practise and fight as themselves",
+          "summary": "Everyone you know has crafts, and fights with them.",
+          "detail": "Someone you have met fights as themselves when a fight comes. The world's figures sit on seven rungs of power, so a new character meets people of their own scale."
+        },
+        {
+          "kind": "feature",
+          "title": "News that finds you",
+          "summary": "Near news stands out, and a strike against you is a scene.",
+          "detail": "What happens near you is marked as near. A strike aimed at you becomes a scene: a guard can fight beside you, and the one who came for you can be questioned. A fight in the news can be opened to see it."
+        },
+        {
+          "kind": "feature",
+          "title": "A year with seasons",
+          "summary": "The world keeps one year, with early, middle and late seasons.",
+          "detail": "The seasons belong to the world, not to your character, and they turn fewer times near the ring."
+        },
+        {
+          "kind": "feature",
+          "title": "Gates and roads",
+          "summary": "A made gate leads to the hub, and roads run both ways.",
+          "detail": "A gate you make joins the network and leads to the hub through it, and a road once found can be walked back."
+        },
+        {
+          "kind": "feature",
+          "title": "Reload when you choose",
+          "summary": "A newer build offers a Reload button instead of reloading under you.",
+          "detail": "While you play on an old build nothing it writes goes up, and the banner says so — but the reload is yours to take."
+        },
+        {
+          "kind": "fix",
+          "title": "Rolled actions work again",
+          "summary": "For about six hours on 18 September, every action that rolled dice failed.",
+          "detail": "It was fixed the same day, and every file is now checked on each update so a mistake of that kind cannot reach the game again."
+        },
+        {
+          "kind": "fix",
+          "title": "Your crafts, pushed, are yours to try",
+          "summary": "The game no longer refuses a craft you hold when you push it somewhere new.",
+          "detail": "Pushing a craft past its usual use is rolled as a push — harder, and riskier — and the Game Master decides what it does. It is never refused before the dice are thrown."
+        },
+        {
+          "kind": "fix",
+          "title": "A value that did not exist was tilting rolls",
+          "summary": "Most saves carried a spectrum value with no meaning, and it moved rolls by up to 15 points.",
+          "detail": "It came from a placeholder the Game Master copied into its choices. It is set aside, kept but no longer counted, and only the world's twelve spectrum axes can reach your character now."
+        },
+        {
+          "kind": "fix",
+          "title": "One person, one record",
+          "summary": "People the world had doubled are one person again, and people it had confused are two.",
+          "detail": "Halvex is one man again, and several people who had been mixed up with someone else are their own person."
+        },
+        {
+          "kind": "fix",
+          "title": "Test runs stay out of your save",
+          "summary": "The game's own checks can no longer write into a real character.",
+          "detail": ""
+        },
+        {
+          "kind": "fix",
+          "title": "Who is playing is chosen",
+          "summary": "A shared device asks who is playing instead of writing someone else's profile.",
+          "detail": ""
+        },
+        {
+          "kind": "fix",
+          "title": "A home is never raided",
+          "summary": "A place you make your home is not a hold, and raiders do not come for it.",
+          "detail": ""
+        },
+        {
+          "kind": "fix",
+          "title": "Asides say the whole sentence",
+          "summary": "A note from the game no longer cuts off mid-word.",
+          "detail": ""
+        }
+      ]
+    }
+  ]
+}

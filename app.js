@@ -172,7 +172,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.100";
+const APP_VERSION = "2.1.0";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -816,6 +816,16 @@ const compName = (c) => character.companionNames?.[c.id] || character.npcRegistr
 // ✅ SNG-537 §4 B6a (2026-09-12): the world's physical size — content/packs/core/world/scale.json, five constants with no reader since SNG-424 —
 // loaded once for the miles on the travel card (milesFor). A missing file leaves distances in days alone.
 let WORLD_SCALE = null;
+// ⛔ CCODE-438 — WHAT'S NEW. Erik: "when they reload due to out of date game code they can read the features that were added and fixes
+// made. keep it tidy and options to click on for more detail." The notes are `release_notes.json`, written for players and moved under
+// each version by the bump; a banner says how much arrived since this device last looked, and the version stamp opens them any time.
+let RELEASE_NOTES = null;
+fetch("release_notes.json?v=" + APP_VERSION).then((r) => (r.ok ? r.json() : null)).then((n) => { RELEASE_NOTES = n && typeof n === "object" ? n : null; whatsNewArrived(); }).catch(() => { RELEASE_NOTES = null; });
+document.addEventListener("click", (ev) => {
+  const open = ev.target?.closest?.("[data-whats-new]");
+  if (open) { ev.preventDefault(); showWhatsNew({ all: open.dataset.whatsNew === "all" }); return; }
+  if (ev.target?.closest?.("[data-whats-new-dismiss]")) { ev.preventDefault(); markVersionSeen(); }
+});
 fetch("content/packs/core/world/scale.json?v=" + APP_VERSION).then((r) => (r.ok ? r.json() : null)).then((s) => { WORLD_SCALE = s && typeof s === "object" ? s : null; }).catch(() => { WORLD_SCALE = null; });
 let busy = false;
 let _discoverAutoRan = false; // SNG-087: auto-run cross-device discovery at most once per session
@@ -1142,7 +1152,7 @@ async function renderPlayerPick(msg = "") {
   const draw = (lookingRemote) => {
     const list = [...players.values()].filter(p => !p.hidden)
       .sort((a, b) => (b.playerKey === last) - (a.playerKey === last) || String(a.displayName).localeCompare(String(b.displayName)));
-    app.innerHTML = `<div class="screen pick-screen">${titleHero()}
+    app.innerHTML = `<div class="screen pick-screen">${titleHero()}<div class="wn-shell" id="wn-shell">${whatsNewBannerHtml()}</div>
       <div class="pick-card">
         <h2>Who's playing?</h2>
         ${msg ? `<p class="hint">${esc(msg)}</p>` : ""}
@@ -1313,7 +1323,7 @@ function titleHero() {
         <div class="th-sub">${esc(GAME_SUBTITLE)}</div>
         <p class="th-line">${esc(WORLD_LINE)}</p>
       </div>
-      <div class="th-stamp">v${esc(APP_VERSION)}${isDevMode() ? ` <span class="dev-badge" title="Developer mode is ON. Turn it off in Settings, or reload without ?dev=1.">DEV</span>` : ""}</div>
+      <div class="th-stamp"><button class="link-btn wn-stamp" data-whats-new="all" title="What's new — the notes for every update">v${esc(APP_VERSION)}</button>${isDevMode() ? ` <span class="dev-badge" title="Developer mode is ON. Turn it off in Settings, or reload without ?dev=1.">DEV</span>` : ""}</div>
     </div>`;
 }
 
@@ -1322,7 +1332,7 @@ function chrome(inner, { hero = false } = {}) {
   app.innerHTML = `
     <div class="topbar${hero ? " topbar-hero" : " topbar-band"}">
       ${hero ? "" : `${heroPlates(plates, { cycleS: BAND_CYCLE_S, slotS: BAND_SLOT_S })}<div class="tb-veil" aria-hidden="true"></div>`}
-      <div class="tb-title">${hero ? "" : `<h1>${esc(GAME_MARK)}</h1><span class="sub">${esc(GAME_SUBTITLE)} — v${esc(APP_VERSION)}</span>${isDevMode() ? ` <span class="dev-badge" title="Developer mode is ON. Turn it off in Settings, or reload without ?dev=1.">DEV</span>` : ""}`}</div>
+      <div class="tb-title">${hero ? "" : `<h1>${esc(GAME_MARK)}</h1><span class="sub">${esc(GAME_SUBTITLE)} — <button class="link-btn wn-stamp" data-whats-new="all" title="What's new — the notes for every update">v${esc(APP_VERSION)}</button></span>${isDevMode() ? ` <span class="dev-badge" title="Developer mode is ON. Turn it off in Settings, or reload without ?dev=1.">DEV</span>` : ""}`}</div>
       <div class="actions">
         <button id="nav-roster">Characters</button>
         <button id="nav-library" title="The world's guide — Exesa, its peoples, its powers, the valley">📖 Library</button>
@@ -1334,7 +1344,8 @@ function chrome(inner, { hero = false } = {}) {
       </div>
     </div>
     ${hero ? titleHero() : ""}
-    ${inner}`;
+    <div class="wn-shell" id="wn-shell">${whatsNewBannerHtml()}</div>
+    ${inner}`;   // ⛔ CCODE-438: every screen carries it — a reload lands on "Who's playing?", Settings or the roster, not only in play
   document.getElementById("nav-roster").onclick = () => renderRoster();
   // ⛔ CCODE-355 (Erik: "the library is likely redundant at the bottom of the screen and should move to the top and be an
   // entry into the lore and world pages") — one door, at the top, on every screen.
@@ -5812,6 +5823,84 @@ function offerNewBuild(info) {
   if (!v || _newBuild || _buildOffer === v) return;
   _buildOffer = v;
   try { if (character) renderPlay(character.activeScene?.lastTurn || null, {}); else console.log(`[build] v${v} is out — reload when you like`); } catch { /* the banner is a courtesy */ }
+}
+
+/* ⛔ CCODE-438 — WHAT'S NEW ─────────────────────────────────────────────────────────────────────────────────────────── */
+const LAST_SEEN_KEY = "singularity.lastSeenVersion";
+/** −1, 0 or 1 between two MAJOR.MINOR.PATCH versions; an unparseable one sorts first. Pure. */
+function cmpVer(a, b) {
+  const p = (v) => (String(v || "").match(/^(\d+)\.(\d+)\.(\d+)$/) || []).slice(1).map(Number);
+  const x = p(a), y = p(b);
+  if (x.length !== 3 || y.length !== 3) return x.length === y.length ? 0 : x.length ? 1 : -1;
+  for (let i = 0; i < 3; i++) if (x[i] !== y[i]) return x[i] < y[i] ? -1 : 1;
+  return 0;
+}
+function lastSeenVersion() { try { return localStorage.getItem(LAST_SEEN_KEY); } catch { return null; } }
+function markVersionSeen() {
+  try { localStorage.setItem(LAST_SEEN_KEY, APP_VERSION); } catch { /* a banner that comes back once more is the worst of it */ }
+  document.querySelectorAll(".whats-new-banner").forEach(el => el.remove());
+}
+/** A release's lines a player reads — never the internal ones. Pure. */
+function shownEntries(r) { return (Array.isArray(r?.entries) ? r.entries : []).filter(e => e && e.kind !== "internal" && e.title); }
+/** ⛔ WHAT THIS DEVICE HAS NOT BEEN SHOWN, newest first. ⚠️ A device that played before the notes existed (it holds a character) starts
+ *  from the last build without them, so an existing player is told what arrived; a new device starts where it is, told nothing. */
+function unseenReleases() {
+  const rel = Array.isArray(RELEASE_NOTES?.releases) ? RELEASE_NOTES.releases : [];
+  let seen = lastSeenVersion();
+  if (!seen) {
+    const played = (() => { try { return (listCharacters() || []).length > 0; } catch { return false; } })();
+    if (!played) { markVersionSeen(); return []; }
+    seen = "2.0.100";
+  }
+  return rel.filter(r => cmpVer(r.version, seen) > 0 && cmpVer(r.version, APP_VERSION) <= 0 && shownEntries(r).length);
+}
+/** The banner after an update: how much arrived since this device last looked, and the door in. */
+function whatsNewBannerHtml() {
+  const un = unseenReleases();
+  if (!un.length) return "";
+  const all = un.flatMap(shownEntries);
+  const n = (k) => all.filter(e => e.kind === k).length;
+  const bits = [n("feature") ? `${n("feature")} new` : "", n("fix") ? `${n("fix")} fixed` : "", n("change") ? `${n("change")} changed` : ""].filter(Boolean).join(" · ");
+  return `<div class="arrive-banner whats-new-banner">✦ Updated to <strong>v${esc(APP_VERSION)}</strong>${bits ? ` — ${bits} since you last played` : ""}.
+    <button class="btn arrive-btn" data-whats-new="unseen">What's new</button> <button class="btn secondary" data-whats-new-dismiss>Dismiss</button></div>`;
+}
+/** The notes came after the first screen was drawn: put the banner on the screen that is up, without redrawing it. */
+function whatsNewArrived() {
+  try {
+    const host = document.getElementById("wn-shell");
+    if (host && !host.querySelector(".whats-new-banner")) host.innerHTML = whatsNewBannerHtml();
+  } catch { /* the stamp still opens the notes */ }
+}
+/** ⛔ THE NOTES — tidy: a line per change, grouped New · Fixed · Changed, and any line with more to say opens for it. `all` shows every
+ *  release in this major line, and the summary of what came before the notes began. */
+function showWhatsNew({ all = false } = {}) {
+  document.getElementById("help-pop")?.remove();
+  const major = String(APP_VERSION).split(".")[0];
+  const rels = !RELEASE_NOTES ? [] : all ? (RELEASE_NOTES.releases || []).filter(r => String(r.version).split(".")[0] === major && shownEntries(r).length) : unseenReleases();
+  const sums = all && RELEASE_NOTES ? (RELEASE_NOTES.summaries || []).filter(s => String(s.line || "").split(".")[0] === major) : [];
+  const said = { feature: "New", fix: "Fixed", change: "Changed" };
+  const line = (e) => e.detail
+    ? `<details class="wn-entry"><summary><strong>${esc(e.title)}</strong> — ${esc(e.summary || "")}</summary><p>${esc(e.detail)}</p></details>`
+    : `<div class="wn-entry wn-plain"><strong>${esc(e.title)}</strong> — ${esc(e.summary || "")}</div>`;
+  const group = (es) => ["feature", "fix", "change"].map(k => { const g = es.filter(e => e.kind === k); return g.length ? `<div class="wn-kind">${said[k]}</div>${g.map(line).join("")}` : ""; }).join("");
+  const day = (d) => { const m = String(d || "").match(/^(\d{4})-(\d{2})-(\d{2})$/); return m ? `${Number(m[3])} ${["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][Number(m[2]) - 1]}` : ""; };
+  const rel = (r) => `<section class="wn-release"><h4>v${esc(r.version)}${r.date ? `<span class="hint"> · ${esc(day(r.date))}</span>` : ""}</h4>${group(shownEntries(r))}</section>`;
+  const sum = (s) => `<section class="wn-release"><h4>${esc(s.title || "")}<span class="hint"> · ${esc(s.range || "")}${s.dates ? ` · ${esc(s.dates)}` : ""}</span></h4>${s.summary ? `<p class="hint">${esc(s.summary)}</p>` : ""}${group(Array.isArray(s.entries) ? s.entries : [])}</section>`;
+  const rule = RELEASE_NOTES?.rule ? `${RELEASE_NOTES.rule.patch} ${RELEASE_NOTES.rule.minor} ${String(RELEASE_NOTES.rule.major || "").split(" — ")[0]}.` : "";
+  const pop = document.createElement("div");
+  pop.id = "help-pop";
+  pop.className = "help-overlay";
+  pop.innerHTML = `<div class="help-card whats-new-card" role="dialog" aria-label="What's new">
+    <h3 class="codex-title">What's new${all ? ` in ${esc(major)}.x` : ""}</h3>
+    <div class="wn-body">${rels.map(rel).join("") || (!RELEASE_NOTES ? `<p class="hint">The notes could not be loaded just now.</p>` : !all ? `<p class="hint">Nothing new since you last looked.</p>` : "")}${sums.map(sum).join("")}</div>
+    ${rule ? `<p class="hint wn-rule">${esc(rule)}</p>` : ""}
+    <div class="help-foot">${all ? "<span></span>" : `<button class="link-btn" data-whats-new="all">Everything in ${esc(major)}.x</button>`}<button class="btn" id="wn-close">Got it</button></div>
+  </div>`;
+  document.body.appendChild(pop);
+  const close = () => pop.remove();
+  pop.addEventListener("click", ev => { if (ev.target === pop) close(); });
+  document.getElementById("wn-close").onclick = close;
+  markVersionSeen();
 }
 
 /** The banner that carries it: what is out, what it costs to wait, and the button. */

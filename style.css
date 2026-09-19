@@ -1190,6 +1190,21 @@ img[data-lightbox] { cursor: zoom-in; }
 .help-card .help-short { font-size:15px; color:var(--ink); line-height:1.5; }
 .help-card .help-more { margin-top:8px; color:var(--ink-dim); font-size:13.5px; line-height:1.55; }
 .help-card .help-foot { display:flex; gap:8px; justify-content:space-between; align-items:center; margin-top:14px; }
+/* ⛔ CCODE-438 — What's new: a line per change, grouped, any line with more to say opens for it */
+.whats-new-card { max-width:560px; max-height:82vh; display:flex; flex-direction:column; }
+.whats-new-card .wn-body { overflow-y:auto; margin-top:4px; padding-right:4px; }
+.wn-release { margin:12px 0 2px; }
+.wn-release h4 { margin:0 0 2px; font-size:14px; color:var(--ink); }
+.wn-release > p.hint { margin:2px 0 4px; font-size:13px; line-height:1.5; }
+.wn-kind { margin:8px 0 2px; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-dim); }
+.wn-entry { margin:3px 0; font-size:13.5px; line-height:1.5; color:var(--ink); }
+details.wn-entry > summary { cursor:pointer; }
+details.wn-entry > p { margin:4px 0 8px 16px; color:var(--ink-dim); }
+.wn-rule { margin-top:10px; font-size:12px; }
+.link-btn.wn-stamp { font:inherit; color:inherit; padding:0; text-decoration:underline dotted; cursor:pointer; }
+.wn-shell { max-width:640px; margin:0 auto; }
+.wn-shell:empty { display:none; }
+.wn-shell .whats-new-banner { margin:10px 0 12px; }
 
 /* SNG-197 p2: the braid MOMENT — an ULTIMATE-CREATION beat, not a system notification. */
 .help-card.braid-moment { max-width:460px; text-align:center; border-color:var(--accent);

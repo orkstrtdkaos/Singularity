@@ -310,7 +310,8 @@ export const GM_CONTEXT = [
     build: (env) => holdingsForGM(env.character,
       env.CONTENT?.rules?.subAttributeLadder ? milestoneEffects(env.CONTENT.rules.subAttributeLadder, env.character).live : null,
       // SPEC_holding_attributes: the join — the narrator knows when you are standing in a place you hold
-      { hereId: env.location?.id || env.character?.currentLocationId || null, nameOf: (id) => env.character?.npcRegistry?.[id]?.name || env.CONTENT?.npcs?.[id]?.name || id }) },
+      { hereId: env.location?.id || env.character?.currentLocationId || null, nameOf: (id) => env.character?.npcRegistry?.[id]?.name || env.CONTENT?.npcs?.[id]?.name || id,
+        cfg: env.CONTENT?.rules?.economy?.holdStore || null }) },   // ⛔ CCODE-429: and each hold's room
   // ✅ Q5-B (SPEC_debts_and_reception): what the character OWES, and who remembers it.
   { key: "debtsDetail", builder: "holdings.debtsForGM + debtRefusalAt (§177)", carries: ["debts", "heldBy", "escalation", "the refusal HERE"],
     reachedBy: "always", spec: "SPEC_debts_and_reception", views: ["turn", "ask"],

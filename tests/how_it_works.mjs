@@ -22343,6 +22343,94 @@ console.log("\n── §307 · errands by the job's roll — a charge is a one-n
     && /\$\{chargeBlock\}\n\s*\$\{postForm\}/.test(A307) && /\.charge-row \{/.test(rd("style.css")));
 }
 
+// ══════════ §308 · CCODE-429 — A HOLD HAS ROOM ══════════
+// SNG-628 / SNG-630 (Erik GO 2026-09-18): "sometimes there's just not the room." A rooted hold grows by RUNG, a moving one is limited by
+// its FRAME; a BUILD past its room is refused naming both ways out; a hold that filled its room and thrived is OFFERED the next rung.
+console.log("\n── §308 · a hold has room — its rung or its frame; a build past it is refused both ways out; the next rung is offered, never taken ──");
+{
+  const H308 = await import("../engine/holdings.js");
+  const { loadContentHeadless: lch308 } = await import("./headless_content.mjs");
+  const CT308 = await lch308();
+  const cfg308 = { ...CT308.rules.economy.holdStore, features: CT308.rules.economy.holdFeatures };
+  const ladder308 = cfg308.slots?.ladder || [];
+
+  /* ---- 1 · ⛑ THE LADDER RATIFIES WHAT THE WORLD BUILT ---- */
+  const holds308 = [];
+  for (const d of readdirSync(join(root, "characters"))) for (const f of readdirSync(join(root, "characters", d)).filter(x => x.endsWith(".json"))) {
+    try { for (const h of JSON.parse(rd(`characters/${d}/${f}`)).holdings || []) if (h) holds308.push(h); } catch { /* a save that does not parse is another gate's */ }
+  }
+  const rooms308 = holds308.map(h => ({ h, r: H308.roomOf(h, cfg308) }));
+  const smallest = (n) => ladder308.findIndex(x => Number(x.slots) >= n);
+  check(`§308: ⛑ every hold in play fits its room — its rung the smallest that fits what it has (or the one it was named), a moving one the lesser of rung and frame (${holds308.length} holds)`,
+    holds308.length >= 3 && ladder308.length >= 6 && rooms308.every(({ h, r }) => !!r && r.used <= r.slots
+      && r.rungIndex === Math.max(ladder308.findIndex(x => x.kind === h.rung), smallest(r.used))
+      && r.slots === (r.frameSlots != null ? Math.min(r.rungSlots, r.frameSlots) : r.rungSlots)),
+    rooms308.map(({ h, r }) => `${h.name}: ${r?.rung}${r?.frame ? "/" + r.frame : ""} ${r?.used}/${r?.slots}`).join(" · "));
+  check("§308: …and the largest hold in play, a `post` of Aevi's day carrying a keep's worth, reads as the rung it is — never a post",
+    rooms308.filter(({ h }) => (h.features || []).length >= 12).every(({ r }) => r.rungIndex >= 4));
+
+  /* ---- 2 · ⛔ A BUILD PAST THE ROOM IS REFUSED, BOTH WAYS OUT; WHAT THE FICTION ESTABLISHED IS NOT ---- */
+  const mk = (n, extra = {}) => ({ holdings: [{ id: "h", name: "The Test Hold", kind: "post", condition: "thriving",
+    features: Array.from({ length: n }, (_, i) => ({ kind: "shrine", name: `a shrine ${i + 1}` })), ...extra }] });
+  const full308 = mk(7);
+  const b308 = H308.addFeature(full308, "h", { kind: "forge", by: "you", cfg: cfg308, via: "built" });
+  check("§308: ⛔ a BUILD into a full hold is refused — and the refusal names what would have to come down AND what the hold would have to become",
+    b308.ok === false && b308.noRoom === true && full308.holdings[0].features.length === 7
+    && /would have to come down/.test(b308.why) && /would have to become a village, which has 4 more/.test(b308.why), b308.why);
+  const g308 = H308.addFeature(full308, "h", { kind: "shrine", name: "a shrine the chronicle names", by: "the fiction", cfg: cfg308, via: "granted" });
+  check("§308: …while a feature the fiction ESTABLISHED is recorded, and tells us the hold is bigger than it was — its rung rises to fit",
+    g308.ok === true && H308.roomOf(full308.holdings[0], cfg308).rung === "village");
+
+  /* ---- 3 · ⛔ THE FRAME ---- */
+  const legs308 = mk(2, { carriage: { moves: "powered", speed: 0.8 } });
+  const l308 = H308.addFeature(legs308, "h", { kind: "forge", by: "you", cfg: cfg308, via: "built" });
+  const lr308 = H308.roomOf(legs308.holdings[0], cfg308);
+  check("§308: ⛔ a hold that moves is bound by its FRAME — a post on legs holds two, the refusal names what raises the legs, and no rung is offered (a rung would add nothing)",
+    lr308.frame === "legs" && lr308.slots === 2 && lr308.boundBy === "frame" && l308.ok === false && /legs would have to carry more/.test(l308.why)
+    && H308.promotionOffer(legs308.holdings[0], cfg308, { worldCount: 1e9 }) === null, l308.why);
+  H308.addFeature(legs308, "h", { kind: "tower", by: "the fiction", cfg: cfg308, via: "granted" });
+  const lr2 = H308.roomOf(legs308.holdings[0], cfg308);
+  check("§308: …and when the fiction puts a third room aboard, the frame is what carries it — it rises to fit, as a rooted hold's rung does",
+    lr2.used === 3 && lr2.slots === 3 && Number(legs308.holdings[0].frameRaised) === 1);
+
+  /* ---- 4 · ⛔ THE NEXT RUNG IS OFFERED, NEVER TAKEN ---- */
+  const off = (h, wc) => H308.promotionOffer(h, cfg308, { worldCount: wc, seasonHours: 36 * 24 });
+  const ready308 = mk(7).holdings[0];
+  const young308 = mk(7, { conditionSince: 10000 }).holdings[0];
+  const strained308 = mk(7, { condition: "strained" }).holdings[0];
+  const room308 = mk(5).holdings[0];
+  check("§308: ⛔ a hold is offered the next rung when it has filled its room and thrived for a season — not before the season, not while strained, not with room to spare",
+    off(ready308, 20000)?.to === "village" && off(ready308, 20000)?.more === 4 && off(young308, 10000 + 36 * 24 - 1) === null && off(young308, 10000 + 36 * 24)?.to === "village"
+    && off(strained308, 20000) === null && off(room308, 20000) === null);
+  const who308 = mk(7);
+  const p308 = H308.promoteHolding(who308, "h", cfg308, { worldCount: 20000 });
+  check("§308: …and the player's answer names it — the rung is stored, the room grows, the change is said",
+    p308.ok === true && who308.holdings[0].rung === "village" && H308.roomOf(who308.holdings[0], cfg308).slots === 11
+    && (who308.holdingEvents || []).some(e => /is a village now — 4 more rooms/.test(e.text)));
+  const src308 = rd("engine/holdings.js");
+  check("§308: ⛔ nothing names a rung but the player's answer — `rung` is written in one place, inside promoteHolding",
+    (src308.match(/\.rung = /g) || []).length === 1 && /h\.rung = o\.to;/.test(src308));
+  const adv308 = { condition: "thriving" };
+  H308.advanceHolding(adv308, "problem", 777);
+  check("§308: …and a condition knows when it began — stamped the pass it changes, which is what \"thrived for a season\" reads",
+    adv308.condition !== "thriving" && adv308.conditionSince === 777, JSON.stringify(adv308));
+
+  /* ---- 5 · ⛔ THE GM IS TOLD, AND BOUND ---- */
+  const gm308 = H308.holdingsForGM(mk(7), null, { cfg: cfg308 }) || "";
+  const A308 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§308: ⛔ the GM is told each hold's room and that a full one refuses a build, its own build op is bound by it, and the refusal is SAID",
+    /a hamlet, 7 of 7 rooms, FULL: a build here is refused/.test(gm308) && /cfg: env\.CONTENT\?\.rules\?\.economy\?\.holdStore \|\| null \}\) \},/.test(rd("engine/gm_registry.js"))
+    && /A HOLD HAS ROOM \(CCODE-429\)/.test(rd("engine/gm.js"))
+    && /cfg: holdCfgNow\(\), bindRoom: true \}\);\n\s*\/\/ ⛔ CCODE-429[^\n]*\n\s*if \(!r\.ok\) \{ if \(r\.noRoom\) said\(r\.why\);/.test(A308));
+
+  /* ---- 6 · ⛑ WHERE THE PLAYER DOES IT ---- */
+  check("§308: ⛑ the hold's popup shows its room, offers the next rung with a button, says the refusal when full — and the Build verb asks the hull rule the GM's build asked",
+    /const room = roomOf\(h, cfgF\);/.test(A308) && /data-hold-promote="\$\{esc\(h\.id\)\}"/.test(A308)
+    && /const r = promoteHolding\(character, btn\.dataset\.holdPromote, holdCfgNow\(\)/.test(A308)
+    && /room\.full \? `<div class="hint hold-full">\$\{esc\(roomRefusal\(h, room\)\)\}<\/div>`/.test(A308)
+    && /const hull = h \? canBuildOn\(h, sel\.value, CONTENT\.rules\?\.economy\?\.holdFeatures\?\.kinds\) : \{ ok: true \};/.test(A308));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

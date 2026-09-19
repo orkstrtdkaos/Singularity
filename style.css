@@ -1895,6 +1895,13 @@ img[data-lightbox] { cursor: zoom-in; }
 .job-deg-crit_success { color: var(--o-crit); } .job-deg-success { color: var(--o-success); }
 .job-deg-crit_failure, .job-plan .bad, .hint.bad { color: var(--o-fumble); }
 .job-back { flex-wrap: wrap; }
+/* ⛔ CCODE-429 — a hold's room: one dot a room, the taken ones filled; the offer to grow; the refusal */
+.hold-room { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 4px; }
+.hold-room-dots { display: inline-flex; flex-wrap: wrap; gap: 3px; max-width: 100%; }
+.hold-room-dots i { width: 8px; height: 8px; border-radius: 50%; border: 1px solid var(--ink-dim); display: block; }
+.hold-room-dots i.on { background: var(--accent); border-color: var(--accent); }
+.hold-promo { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 6px; padding: 6px 8px; border: 1px solid var(--accent); border-radius: 6px; font-size: 13px; }
+.hold-full { margin-top: 4px; color: var(--ink); }
 /* ⛔ CCODE-428 — the charges in your name: a face, what they carry, and the dice each three days */
 .charge-row { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 10px; align-items: start; padding: 8px 0; border-top: 1px solid var(--border); }
 .charge-row:first-of-type { border-top: 0; }

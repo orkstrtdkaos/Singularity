@@ -38,7 +38,7 @@ import { buildFeedPost, appendFeedPost, feedForViewer, FEED_PATH } from "./engin
 import { composeImagePrompt } from "./engine/imageprompt.js";   // CCODE-190: code selects the parts, a model composes the line
 import { ITEM_KINDS, itemKindsIn, itemKindLabel, wieldBonusFor, usableCombatItems, normalizeInventory, reclaimEstablishedItems, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates, deriveItem, findItem, skillBonus, startingSkills } from "./engine/inventory.js"; // CCODE-161: reclaim items the story conferred but the ledger missed
 import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive } from "./engine/earnedpower.js"; // SNG-251 §2c/§4: the earned-power economy (ceiling = f(level, craft rank); ~1 evolution/day)
-import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch, positionedPlace } from "./engine/worldtime.js";
+import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch, positionedPlace, seasonCalendar } from "./engine/worldtime.js";
 import { smartClamp, playerText, normName } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { LIBRARY_INDEX, loreToHtml, libMdToHtml, circleRows } from "./engine/library.js";
 import { contributionsBy, lookKey } from "./engine/canon.js";   // CCODE-422: where a look is filed   // ⛔ SNG-584: who made the shared world — tallied since SNG-128, read by nobody until now   // SNG-538 §4: the Library's index and renderers — pure, gated by §181
@@ -67,7 +67,8 @@ import { enterDeathState } from "./engine/death.js";
 // second copy of the clock — the injury model, the tier ladder and the arc-stage lookup have each been
 // duplicated in this codebase, and each time the copies drifted before anyone noticed.
 wireDeathModel(DeathModel);
-import { carriageOf, voyageOf, isMoored, canSail, sailHolding, voyageLine, featureRuling, canBuildOn } from "./engine/carriage.js";   // B6b: the holding that moves
+import { carriageOf, voyageOf, isMoored, canSail, sailHolding, voyageLine, featureRuling, canBuildOn } from "./engine/carriage.js";
+import { roomOf, roomRefusal, promotionOffer, promoteHolding } from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room   // B6b: the holding that moves
 import { featureCost, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
 import { FIRE_TESTS, diffKeys } from "./engine/firetests.js";   // SNG-560: the parts that have never been used
@@ -169,7 +170,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.91";
+const APP_VERSION = "2.0.92";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8256,7 +8257,9 @@ function applyTurn(turn, resolution, playerWords = null) {
       // ✅ features and names — what a hold HAS, and what it is called
       else if (kind === "feature") { const hb = (character.holdings || []).find(x => x.id === id); const bld = hb ? canBuildOn(hb, op.kind, CONTENT.rules?.economy?.holdFeatures?.kinds) : { ok: true };
         if (!bld.ok) { said(`${hb.name}: ${bld.why}.`); continue; }   // ✅ B6b: a mine cannot be built aboard a ship, and the refusal is said
-        const r = addFeature(character, id, { kind: op.kind, name: op.name || null, by: op.by || null, craftIds: op.craftIds || (op.abilityId ? [op.abilityId] : []), count: op.count || 1, day: absoluteWorldDay(), worldCount: worldCount(), cfg: holdCfgNow() }); if (!r.ok) console.warn("[holdingOps] feature refused:", r.why); }
+        const r = addFeature(character, id, { kind: op.kind, name: op.name || null, by: op.by || null, craftIds: op.craftIds || (op.abilityId ? [op.abilityId] : []), count: op.count || 1, day: absoluteWorldDay(), worldCount: worldCount(), cfg: holdCfgNow(), bindRoom: true });
+        // ⛔ CCODE-429: a build into a full hold is refused, and — like a mine aboard a ship — the refusal is SAID, both ways out with it
+        if (!r.ok) { if (r.noRoom) said(r.why); else console.warn("[holdingOps] feature refused:", r.why); } }
       else if (kind === "rename") renameHolding(character, id, op.name, { worldCount: worldCount() });
       // ✅ B6b: the GM may give a place a carriage (a hull bought at a yard, a dragon that agrees) and may sail it. A `willed`
       // carriage records `steward: bearerId` — Aevi's Q3: you hold it WITH them, and a dragon must not read as property.
@@ -13287,8 +13290,17 @@ function wireHoldingOffers() {
     const id = btn.dataset.holdBuild, sel = app.querySelector(`[data-hold-kind="${id}"]`), nameEl = app.querySelector(`[data-hold-fname="${id}"]`);
     if (!sel?.value) return;
     const h = (character.holdings || []).find(x => x.id === id);
+    // ⛔ CCODE-429: the Build verb asks what the GM's build asks — a mine cannot go aboard something that moves (only the GM path asked)
+    const hull = h ? canBuildOn(h, sel.value, CONTENT.rules?.economy?.holdFeatures?.kinds) : { ok: true };
+    if (!hull.ok) { alert(`${h.name}: ${hull.why}.`); return; }
     const r = addFeature(character, id, { kind: sel.value, name: (nameEl?.value || "").trim() || null, by: "you", day: absoluteWorldDay(), worldCount: worldCount(), cfg: holdCfgNow(), via: "built",
       economy: CONTENT.rules?.economy || null, regionId: CONTENT.locations?.[h?.locationId]?.regionId || null });
+    if (!r.ok) { alert(r.why); return; }
+    saveCharacter(character); again();
+  };
+  // ⛔ CCODE-429: the player's answer to the offer — the hold is the next rung now, and has its room
+  for (const btn of app.querySelectorAll("[data-hold-promote]")) btn.onclick = () => {
+    const r = promoteHolding(character, btn.dataset.holdPromote, holdCfgNow(), { worldCount: worldCount(), seasonHours: holdSeasonHours() });
     if (!r.ok) { alert(r.why); return; }
     saveCharacter(character); again();
   };
@@ -13440,6 +13452,10 @@ function wireHoldingOffers() {
  *  DO — `canRaiseBand` has tied a following to holding two places since it was written, and no screen
  *  ever said so. ⬜ The other five are specced in po/SPEC_holdings_estate.md rather than mocked here. */
 /** The hold dials the engine reads, with the feature catalogue beside them (economy.holdStore + economy.holdFeatures). */
+/** ⛔ CCODE-429: a season in world hours, from the calendar in force — a rung is earned by "a season survived at thriving" */
+function holdSeasonHours() {
+  try { const cal = seasonCalendar(); return Math.max(24, Math.round((Number(cal?.daysPerSeason) || 36) * 24)); } catch { return 36 * 24; }
+}
 function holdCfgNow() {
   const hs = CONTENT.rules?.economy?.holdStore;
   return hs ? { ...hs, features: CONTENT.rules?.economy?.holdFeatures || null } : null;
@@ -13637,6 +13653,16 @@ function renderHoldingsTab(manageId = null) {
           ${handTo.length ? `<select data-hold-to="${esc(h.id)}">${handTo.map(id => `<option value="${esc(id)}"${id === h.steward ? " selected" : ""}>${esc(nameOf(id))}</option>`).join("")}</select><button class="opt" data-hold-keeper="${esc(h.id)}" title="Appoint them keeper \u2014 the place stays yours; they run it">Make them keeper</button><button class="opt" data-hold-transfer="${esc(h.id)}" title="Hand OWNERSHIP to them">Hand it over</button>` : ""}
         </div>
         ${head("What stands here")}
+        ${(() => { // ⛔ CCODE-429 (SNG-628/630): the room — its rung or frame, what is taken, and when it is full both ways out, or the next rung
+          const room = roomOf(h, cfgF);
+          if (!room) return "";
+          const offer = promotionOffer(h, cfgF, { worldCount: worldCount(), seasonHours: holdSeasonHours() });
+          const dots = `${"<i class='on'></i>".repeat(Math.min(room.used, room.slots))}${"<i></i>".repeat(room.free)}`;
+          return `<div class="hold-room"><span class="hold-room-dots" aria-hidden="true">${dots}</span>
+            <span class="hint">${room.used} of ${room.slots} rooms — ${/^[aeiou]/i.test(room.rung) ? "an" : "a"} ${esc(room.rung)}${room.frame ? ` on ${esc(room.frame)}` : ""}${room.full ? " · full" : ""}</span></div>
+            ${offer ? `<div class="hold-promo"><span>${esc(h.name || "It")} has filled its room and thrived — it could be ${/^[aeiou]/i.test(offer.to) ? "an" : "a"} ${esc(offer.to)}, with ${offer.more} more ${offer.more === 1 ? "room" : "rooms"}.</span>
+              <button class="opt" data-hold-promote="${esc(h.id)}">Name it ${/^[aeiou]/i.test(offer.to) ? "an" : "a"} ${esc(offer.to)}</button></div>`
+              : room.full ? `<div class="hint hold-full">${esc(roomRefusal(h, room))}</div>` : ""}`; })()}
         <div class="hint" style="margin-top:2px">${built || "nothing built yet"}</div>
         <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:4px">
           ${opts ? `<select data-hold-kind="${esc(h.id)}">${opts}</select><input data-hold-fname="${esc(h.id)}" placeholder="what it is called (optional)" style="max-width:200px"><button class="opt" data-hold-build="${esc(h.id)}" title="Pay the price — goods from the store, then the purse — and the work begins; it stands when its days have run">Build</button><button class="opt" data-hold-feature="${esc(h.id)}" title="The story built it, or the place came with it — free to record, and it still costs its keep">Record what the story built</button>` : ""}

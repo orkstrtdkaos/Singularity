@@ -25,7 +25,7 @@ import { regionDemand } from "./economy.js";       // Q8: a unit is worth what T
 import { sheetFor as personSheetFor, tierOf as tierOfLevel, personRecordFor } from "./npcsheet.js";   // Q18 → v2 §1: the keeper's tier sets the FLOOR
 import { locationDensity } from "./substrate.js";   // Q18: the ground scales an enterprise's yield
 import { legionClash, contingentsFromPeople } from "./melee.js";
-import { isMoored } from "./carriage.js";   // ⛔ SPEC_mobile_holdings §4: moored is raidable, moving is not   // R46a: a detected raid is a FIGHT, resolved unattended
+import { isMoored, carriageOf } from "./carriage.js";   // ⛔ SPEC_mobile_holdings §4: moored is raidable, moving is not   // R46a: a detected raid is a FIGHT, resolved unattended
 import { smartClamp } from "./namematch.js";   // an evidence quote is prose — cut at a word, never mid-word
 import { isNetworkGate } from "./waygate.js";   // runner fees: a NETWORK gate near a relay post brings traffic
 import { walkingDays } from "./worldmap.js";     // …within gateWithinDays of it
@@ -139,6 +139,8 @@ export function advanceHolding(holding, outcome, worldCount = null, note = null,
   const before = holding.condition;
   holding.condition = CONDITIONS[next];
   holding.lastMovedWorldCount = worldCount;
+  // ⛔ CCODE-429: WHEN IT BECAME WHAT IT IS — a rung is earned by "a season survived at thriving" (SNG-628), and nothing kept the date
+  if (before !== holding.condition) holding.conditionSince = worldCount;
   if (before !== holding.condition || note) {
     holding.history = [...(holding.history || []), { at: worldCount, from: before, to: holding.condition, note: note || null }].slice(-12);
   }
@@ -167,12 +169,15 @@ export function holdingNews(holding, before, effects = null) {
 /** ⛔ SNG-356 · PRESENCE 20 — THE OBLIGATION INVERTS. `— owes: X` becomes `— X draws standing from your
  *  holding of it`. ⚠️ NARRATIVE, NOT NUMERIC: nothing is discharged mechanically and no cost is removed.
  *  What changes is who is beholden, which is the whole of "the name is a power in the world". */
-export function holdingsForGM(character, effects = null, { hereId = null, nameOf = null } = {}) {
+export function holdingsForGM(character, effects = null, { hereId = null, nameOf = null, cfg = null } = {}) {
   // ⛔ SPEC_holding_attributes — the narrator is told when the character is STANDING IN a place they hold, and each
   // holding arrives as its sentence. A messenger from the post is one thing; being at the post is another.
   const here = new Set(holdingsAt(character, hereId).map(h => h.id));
   ensureHoldings(character);
   if (!character.holdings.length) return null;
+  // ⛔ CCODE-429: and each hold's ROOM, so a feature is never narrated into a hold that has none
+  const roomSaid = (h) => { const r = cfg ? roomOf(h, cfg) : null;
+    return r ? ` — ${a1(r.rung)} ${r.rung}${r.frame ? ` on ${r.frame}` : ""}, ${r.used} of ${r.slots} rooms${r.full ? ", FULL: a build here is refused" : ""}` : ""; };
   return character.holdings.map(h =>
     `- ${h.name} (${h.kind}, ${h.condition}${h.steward ? `, kept by ${h.steward} (${delegateScope(character, h.steward) === "charge" ? "in charge" : "keeping"}${character?.npcRegistry?.[h.steward]?.vouchedBy ? `, vouched by ${character.npcRegistry[h.steward].vouchedBy}` : ""})` : (effects?.unstewardedCeiling ? ", kept by your name" : ", UNKEPT")})${here.has(h.id) ? " — YOU ARE STANDING IN IT" : ""}${storeTotal(h) > 0 ? ` · store: ${Object.entries(h.store).filter(([, n]) => n > 0).map(([g, n]) => `${n} ${g}`).join(", ")}` : ""}${h.arrears ? ` · in arrears ${h.arrears}` : ""}${(h.crew || []).length ? ` · hands: ${h.crew.map(id => nameOf ? nameOf(id) : id).join(", ")}` : ""}${(h.garrison || []).length ? ` · guarded by ${h.garrison.map(id => nameOf ? nameOf(id) : id).join(", ")}` : ""}${(h.improvements || []).length ? ` · improved by ${h.improvements.map(i => i.name || i.abilityId).join(", ")}` : ""}${(h.features || []).length ? ` · has ${h.features.map(f => f.name || f.kind).join(", ")}` : ""}${h.watches ? ` · watches over ${(character?.holdings || []).find(o => o && o.id === h.watches)?.name || h.watches}` : ""} · ${holdingSentence(h, { nameOf })}`
     + (h.obligation
@@ -180,7 +185,82 @@ export function holdingsForGM(character, effects = null, { hereId = null, nameOf
         ? ` — ${h.obligation}: they draw standing from your holding of it, not the reverse`
         : ` — owes: ${h.obligation}`)
       : "")
+    + roomSaid(h)
   ).join("\n");
+}
+
+/** ⛔ CCODE-429 — SNG-628 / SNG-630 · A HOLD HAS ROOM, AND IT IS THE GROWTH AXIS THE HOLD LAYER DID NOT HAVE. Erik: "sometimes there's
+ *  just not the room." Aevi's ladder (`holdStore.slots.ladder`: post 2 … stronghold 32) and frames (`slots.frames`: hull 3 · legs 2 · lift 4
+ *  · grown 5 · borne 6).
+ *  ⛑ A ROOTED hold's room is its RUNG — the one it has been named (`rung`), or the SMALLEST that fits what it already has, whichever is
+ *  larger. "Read the other way it is a keep, and it fits": Stillwater's Trouble, nineteen features on a `post`, is a keep. ⚠️ So the
+ *  stored rung only moves on a promotion; a build cannot raise it, because a build is refused when the room is full.
+ *  ⛑ A MOVING hold's room is the LESSER of its rung and its FRAME ("a stronghold on legs is mostly a stronghold that had to leave things
+ *  behind"), and a frame is raised by engineering, not by growth (`frameRaised`). → null when no ladder is authored (today's behaviour). Pure. */
+export function roomOf(holding, cfg = null) {
+  const S = cfg?.slots || null;
+  const ladder = Array.isArray(S?.ladder) ? S.ladder.filter(r => r && r.kind && Number.isFinite(Number(r.slots))) : [];
+  if (!ladder.length) return null;
+  const used = allFeatures(holding).reduce((a, f) => a + Math.max(1, Number(f.count) || 1), 0);
+  const stored = ladder.findIndex(r => r.kind === holding?.rung);
+  let fits = ladder.findIndex(r => Number(r.slots) >= used);
+  if (fits < 0) fits = ladder.length - 1;
+  const i = Math.max(stored, fits);
+  const rungSlots = Number(ladder[i].slots);
+  const c = carriageOf(holding);
+  const frames = S?.frames?.kinds || {};
+  const frame = c ? Object.keys(frames).find(k => !k.startsWith("_") && String(frames[k]?.moves || "").toLowerCase() === c.moves) || null : null;
+  const frameSlots = frame ? Math.max(0, Number(frames[frame].slots) || 0) + Math.max(0, Number(holding?.frameRaised) || 0) : null;
+  const slots = frameSlots != null ? Math.min(rungSlots, frameSlots) : rungSlots;
+  const up = ladder[i + 1] || null;
+  const gain = up ? Math.min(Number(up.slots), frameSlots ?? Infinity) - slots : 0;
+  return { rung: ladder[i].kind, rungIndex: i, rungSlots, what: ladder[i].what || null, frame, frameSlots, raisedBy: frame ? frames[frame].raisedBy || null : null,
+    // ⚠️ AN EQUAL FRAME BINDS TOO — ⚑ the Standing Annex is a post (2) on legs (2), and a new rung would add nothing: its growth is the legs
+    slots, used, free: Math.max(0, slots - used), full: used >= slots, boundBy: frameSlots != null && frameSlots <= rungSlots ? "frame" : "rung",
+    next: up ? { rung: up.kind, slots: Number(up.slots), more: Math.max(0, gain) } : null };
+}
+const a1 = (w) => (/^[aeiou]/i.test(String(w || "")) ? "an" : "a");
+
+/** ⛔ THE REFUSAL IS THE FEATURE, AND IT NAMES BOTH WAYS OUT (Aevi: "'no room' is a dead end; 'no room — this is a hamlet, and a village
+ *  has four more' is a goal"): what would have to go, and what the hold would have to become — or, for a hold its frame binds, what would
+ *  have to be built into the frame. Pure. */
+export function roomRefusal(holding, room) {
+  const name = holding?.name || "this hold";
+  // a feature's NAME in a list, not its description — "a relay station — the network's node" is a relay station
+  const standing = allFeatures(holding).filter(f => !f.building).map(f => String(f.name || f.kind).split(" — ")[0]);
+  const some = standing.length ? ` (${standing.slice(-3).join(", ")}${standing.length > 3 ? "…" : ""})` : "";
+  const become = room.boundBy === "frame"
+    ? `or its ${room.frame} would have to carry more — ${room.raisedBy || "somebody would have to build it bigger"}`
+    : room.next && room.next.more > 0
+      ? `or it would have to become ${a1(room.next.rung)} ${room.next.rung}, which has ${room.next.more} more`
+      : "and it is as large as a hold can grow";
+  const taken = room.slots === 1 ? "its one room is taken" : room.slots === 2 ? "both its rooms are taken" : `all ${room.slots} of its rooms are taken`;
+  return `No room at ${name}: it is ${a1(room.rung)} ${room.rung}${room.frame ? ` on ${room.frame}` : ""}, and ${taken}. Something standing there would have to come down${some}, ${become}.`;
+}
+
+/** ⛔ A HOLD THAT HAS FILLED ITS ROOM AND EARNED THE NEXT RUNG IS OFFERED IT — never promoted by itself. Aevi: "a player naming their own
+ *  village a town is a beat, and it is theirs." Earned, not bought: full, THRIVING, and thriving for a season (`seasonHours`). ⚠️ A missing
+ *  `conditionSince` is "we do not know", not "never": the holds in play before the stamp have thrived as far back as their records go.
+ *  ⚠️ And never when the FRAME binds — a longship grows by building the hull, and a new rung would add no room. → { from, to, more } or null. Pure. */
+export function promotionOffer(holding, cfg = null, { worldCount = null, seasonHours = 36 * 24 } = {}) {
+  const room = roomOf(holding, cfg);
+  if (!room || !room.full || !room.next || room.next.more <= 0 || room.boundBy === "frame") return null;
+  if (holding?.condition !== "thriving") return null;
+  const since = Number(holding?.conditionSince);
+  if (Number.isFinite(since) && Number.isFinite(Number(worldCount)) && Number(worldCount) - since < Math.max(0, Number(seasonHours) || 0)) return null;
+  return { from: room.rung, to: room.next.rung, more: room.next.more };
+}
+
+/** The player's answer to the offer: the hold IS the next rung now, and has its room. */
+export function promoteHolding(character, id, cfg = null, { worldCount = null, seasonHours = 36 * 24 } = {}) {
+  const h = (character?.holdings || []).find(x => x && x.id === id);
+  if (!h) return { ok: false, why: "no such holding" };
+  const o = promotionOffer(h, cfg, { worldCount, seasonHours });
+  if (!o) return { ok: false, why: `${h.name || "It"} is not ready to grow — a hold grows when it has filled its room and thrived for a season` };
+  h.rung = o.to;
+  h.history = [...(h.history || []), { at: worldCount, from: h.condition, to: h.condition, note: `became ${a1(o.to)} ${o.to}` }].slice(-12);
+  queueHoldingEvent(character, `${h.name || h.id} is ${a1(o.to)} ${o.to} now — ${o.more} more ${o.more === 1 ? "room" : "rooms"}.`);
+  return { ok: true, rung: o.to, more: o.more };
 }
 
 /** ⚠️ A DEPARTED STEWARD LEAVES THE POST BEHIND. SNG-355 made departure a status rather than a deletion,
@@ -1015,12 +1095,19 @@ export function featureCost(kind, cfg) {
  *  days are passes (Q2). `via: "inherited"` (a place that already had it) and `via: "granted"` (the story built it) are
  *  free and stand at once; all three pay upkeep. Default `granted`, so no existing caller starts charging by accident —
  *  only the tab's Build verb says `built`. A kind with `build: null` (the waygate) cannot be built at all. */
-export function addFeature(character, id, { kind, name = null, by = null, craftIds = [], count = 1, day = null, worldCount = null, cfg = null, yields = null, via = "granted", economy = null, regionId = null } = {}) {
+export function addFeature(character, id, { kind, name = null, by = null, craftIds = [], count = 1, day = null, worldCount = null, cfg = null, yields = null, via = "granted", bindRoom = via === "built", economy = null, regionId = null } = {}) {
   ensureHoldings(character);
   const h = character.holdings.find(x => x && x.id === id);
   if (!h) return { ok: false, why: "no such holding" };
   const def = featureDef(kind, cfg);
   if (!def) return { ok: false, why: `"${kind}" is not a feature the catalogue knows — Aevi authors kinds in economy.holdStore.features` };
+  // ⛔ CCODE-429 (SNG-628): A BUILD NEEDS ROOM. What the fiction already established does not — a wall the chronicle names, a hold taken
+  // up with its keep standing — because that tells us the hold is BIGGER than recorded, and its rung rises to fit (`roomOf`). Only a build
+  // is refused, and the refusal names both ways out.
+  if (bindRoom) {
+    const room = roomOf(h, cfg);
+    if (room && room.full) return { ok: false, why: roomRefusal(h, room), noRoom: true, room };
+  }
   // ⚑ ERIK 2026-09-06: "a workshop can be for lots of finished goods" — a feature may OVERRIDE its kind's good (Aevi's
   // catalogue said so; nothing stored or read it). A laboratory post's workshop makes instruments; Pell's makes arms.
   const f = { kind: def.kind, family: def.family, name: name || def.label || def.kind, by: by || null, craftIds: (craftIds || []).filter(Boolean), count: Math.max(1, Number(count) || 1), day, via,
@@ -1052,6 +1139,9 @@ export function addFeature(character, id, { kind, name = null, by = null, craftI
     paid = { store: fromStore, coin, owed: still, passes };
   }
   h.features = [...allFeatures(h), f];
+  // ⛔ CCODE-429: a feature the fiction ESTABLISHED aboard a hold that moves tells us its frame carries it — the frame rises to fit, as a
+  // rooted hold's rung does (a build could not get here: it is refused when the room is full)
+  if (!bindRoom) { const r = roomOf(h, cfg); if (r?.frame && r.used > r.frameSlots) h.frameRaised = (Number(h.frameRaised) || 0) + (r.used - r.frameSlots); }
   const owes = f.building && Object.keys(f.building.owed).length ? ` — owes ${Object.entries(f.building.owed).map(([g, n]) => `${n} ${String(g).replace(/_/g, " ")}`).join(", ")}` : "";
   if (f.building) {
     h.history = [...(h.history || []), { at: worldCount, from: h.condition, to: h.condition, note: `began ${f.name} (${f.building.passesLeft} passes${owes})` }].slice(-12);

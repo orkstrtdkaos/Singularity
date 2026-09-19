@@ -37,6 +37,8 @@ import { commandSlots, canRaiseBand } from "./melee.js";   // the three scales o
 import { rosterForGM } from "./fellowship.js";   // SNG-541: the GM is told the roster, derived, instead of a stored count
 import { bearingsToKnown } from "./worldmap.js";   // SNG-386 §4.3: which way the road runs
 import { holdingsForGM, debtsForGM } from "./holdings.js";
+import { purseLine } from "./purse.js";     // ⛔ CCODE-441: the GM is shown the purse —
+import { moneyLine } from "./money.js";     // — and the money of the place it stands in
 import { caravansForGM } from "./caravan.js";   // R49: loads on the road
 import { loreForLocation, eventsForGM, traditionMotivationsForGM } from "./state.js";
 import { buildRegionView, newsForGM, worldArcsForGM, collapseLedgerEvents, companionLivesForGM } from "./worldtick.js";
@@ -312,6 +314,16 @@ export const GM_CONTEXT = [
       // SPEC_holding_attributes: the join — the narrator knows when you are standing in a place you hold
       { hereId: env.location?.id || env.character?.currentLocationId || null, nameOf: (id) => env.character?.npcRegistry?.[id]?.name || env.CONTENT?.npcs?.[id]?.name || id,
         cfg: env.CONTENT?.rules?.economy?.holdStore || null }) },   // ⛔ CCODE-429: and each hold's room
+  // ⛔ CCODE-441 — THE PURSE AND THE MONEY OF THE PLACE. The GM was never shown the purse, so it could not be honest about a price or
+  // know what the character could pay; and it had no op to move money. Both halves arrive together (exchangeOps in the contract).
+  { key: "moneyDetail", builder: "purse.purseLine + money.moneyLine", carries: ["purse", "the money of the place"],
+    reachedBy: "always", spec: "CCODE-441", views: ["turn", "ask"],
+    build: (env) => {
+      const purse = env.character?.purse;
+      if (!purse) return null;
+      const rid = env.location?.regionId || env.CONTENT?.locations?.[env.character?.currentLocationId]?.regionId || null;
+      return `MONEY — the purse holds: ${purseLine(purse, { regionId: rid })}. ${moneyLine(rid, env.CONTENT?.rules?.economy || null)} Money moves only through exchangeOps.`;
+    } },
   // ✅ Q5-B (SPEC_debts_and_reception): what the character OWES, and who remembers it.
   { key: "debtsDetail", builder: "holdings.debtsForGM + debtRefusalAt (§177)", carries: ["debts", "heldBy", "escalation", "the refusal HERE"],
     reachedBy: "always", spec: "SPEC_debts_and_reception", views: ["turn", "ask"],

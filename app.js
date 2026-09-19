@@ -143,9 +143,9 @@ import { clearOnRest, applyCondition, activeConditions } from "./engine/conditio
 // "show the purse as a PERMANENT ROW, show a price as a number when a trade is on the table… The trader
 // SAYS 'ten for those, and I'm being generous'; the interface SAYS 10. Both." A purse the player cannot
 // see is the same failure as one that does not exist.
-import { ensurePurse, purseLine, worthOf, applyExchangeOps, purseBand, held } from "./engine/purse.js";
+import { ensurePurse, purseLine, worthOf, purseBand, held } from "./engine/purse.js";   // CCODE-441: exchangeOps go through market.applyMoneyOps now
 import { payAt, priceHere, incomeHere, saidPaid, saidEarned, moneyLine, moneyLabel, moneyClassOf, placeName } from "./engine/money.js";
-import { sellQuote, sellFromPack, exchangeRatesHere, exchangeAt } from "./engine/market.js";   // ⛔ CCODE-440: a hold is a local market   // ⛔ CCODE-437: money by place   // CCODE-405: calling a unit together is paid for
+import { sellQuote, sellFromPack, exchangeRatesHere, exchangeAt, applyMoneyOps } from "./engine/market.js";   // ⛔ CCODE-440: a hold is a local market   // ⛔ CCODE-437: money by place   // CCODE-405: calling a unit together is paid for
 import { bargainOutcome } from "./engine/economy.js";
 import { capabilityMenu, resolveTier } from "./engine/capabilities.js";
 // ⛔ CCODE-239 — PROJECTS TICK. `engine/projects.js` shipped green with all six exports reachable only
@@ -173,7 +173,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.1.2";
+const APP_VERSION = "2.1.3";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8719,8 +8719,12 @@ function applyTurn(turn, resolution, playerWords = null) {
     // ⛔ CCODE-235 — THE EXCHANGE IS AN OP GROUP, not a screen. `economy.json`: "There is no shop screen and
   // there should not be one. A trader is an NPC with wants, and buying is a conversation."
   applyStep("exchangeOps", () => {
-    const rec = applyExchangeOps(character, turn.exchangeOps || [], {
-      economy: CONTENT.rules?.economy, worldState: character.worldState, bargainOutcome });
+    // ⛔ CCODE-441: settled BY PLACE — a value with no money named is paid here, local first — and a refusal is said under the beat, so a
+    // purchase the purse could not cover never stands in the story as if it happened
+    const rec = applyMoneyOps(character, turn.exchangeOps || [], {
+      regionId: hereRegionId(), economy: CONTENT.rules?.economy || null, worldState: character.worldState, bargainOutcome });
+    const refused441 = rec.filter(r => r && r.ok === false).map(r => r.why).filter(Boolean);
+    if (refused441.length) character._correctionAside = [character._correctionAside, `The purse did not move: ${refused441.join("; ")}.`].filter(Boolean).join(" ");
     // ⚠️ A REFUSED TRADE MUST REACH THE PLAYER. Silently dropping it lets the narration describe a purchase
     // that never happened, which turns a bookkeeping miss into a lie in the fiction. Kept on the sheet and
     // rendered in the Purse block, because a console warning is not "reaching the player".
@@ -14176,7 +14180,7 @@ function renderCharacterScreen() {
         </div>` : ""}
         ${w.lines.some(l => l.usableHere === false) ? `<p class="hint" style="margin-top:4px;color:var(--warn,#e0b25a)">Some of your scrip is another Reach's — it buys nothing here.</p>` : ""}
         ${(character._exchangeReceipts || []).filter(r => r.ok === false).map(r => `<p class="hint" style="margin-top:4px;color:var(--danger)">A trade did not go through — ${esc(r.why || "refused")}</p>`).join("")}
-        ${(character._exchangeReceipts || []).filter(r => r.settled).map(r => `<p class="hint" style="margin-top:4px">Paid ${r.paid} ${esc(r.currency)}${r.bargain?.ok ? ` — bargained down from ${r.bargain.price}` : ""}.</p>`).join("")}</div>`;
+        ${(character._exchangeReceipts || []).filter(r => r.settled).map(r => `<p class="hint" style="margin-top:4px">${esc(r.said || `Paid ${r.paid} ${r.currency}`)}${r.bargain?.ok ? ` — bargained down from ${r.bargain.price}` : ""}.</p>`).join("")}</div>`;
     })()}
     ${(() => {
       const { all, needMending } = activeConditions(character);

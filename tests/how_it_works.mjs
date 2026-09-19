@@ -23029,6 +23029,47 @@ console.log("\n── §319 · a hold is a local market — sell what you carry 
     && /exchangeAt\(character, \{ from: f, to: t, amount: Number\(amt\.value\) \}, rid, eco, \{ worldState: character\.worldState \|\| null, dry \}\)/.test(A319));
 }
 
+// ══════════ §320 · CCODE-441 — THE GM'S MONEY DOOR ══════════
+// The GM was never shown the purse and never given `exchangeOps` — in no contract, ever — so nothing bought in the story cost anything and
+// no payment ever arrived. Erik: "The world has several kinds and so far we've just been using crystal... let's fix that."
+console.log("\n── §320 · the GM's money door — shown the purse and the money of the place; every op settled by place, a refusal said ──");
+{
+  const K320 = await import("../engine/market.js");
+  const G320 = await import("../engine/gm.js");
+  const REG320 = await import("../engine/gm_registry.js");
+  const { loadContentHeadless: lch320 } = await import("./headless_content.mjs");
+  const CT320 = await lch320();
+  const eco = CT320.rules.economy;
+  const who = () => ({ purse: { crystal: 20, coin: 0, paper: 0, marks: 0, scrip: { the_palelands: 10 } }, inventory: [{ name: "Old Lamp", kind: "tool", qty: 1 }] });
+  const a = who(), ra = K320.applyMoneyOps(a, [{ op: "buy", price: 8, take: [{ name: "Rope", kind: "tool" }] }], { regionId: "the_palelands", economy: eco });
+  const b = who(), rb = K320.applyMoneyOps(b, [{ op: "buy", price: 80, take: [{ name: "Horse" }] }], { regionId: "valley", economy: eco });
+  check("§320: ⛔ a purchase is settled BY PLACE — local money first — and one the purse cannot cover moves NOTHING, the goods included",
+    ra[0].ok && a.purse.scrip.the_palelands === 0 && a.purse.crystal === 12.75 && a.inventory.some(i => i.name === "Rope")
+    && !rb[0].ok && b.purse.crystal === 20 && !b.inventory.some(i => i.name === "Horse") && /is owed/.test(rb[0].why), JSON.stringify({ ra, rb }));
+  const c = who(), rc = K320.applyMoneyOps(c, [{ op: "sell", price: 6, give: ["Old Lamp"] }, { op: "receive", amount: 15, origin: "reward" },
+    { op: "receive", amount: 5, currency: "coin", origin: "found" }, { op: "change", amount: 10, from: { currency: "crystal" }, into: { currency: "coin" } }], { regionId: "the_palelands", economy: eco });
+  const d = who(), rd320 = K320.applyMoneyOps(d, [{ op: "receive", amount: 3, currency: "coin" }], { regionId: "valley", economy: eco });
+  check("§320: …a sale and a reward are paid in the place's money; coin arrives as coin, and a receive is always money MOVED to the character (an unnamed origin is a trade); and money changes only where the place changes it — a Reach will not touch coin",
+    rc.slice(0, 3).every(r => r.ok) && c.inventory.length === 0 && c.purse.scrip.the_palelands === 10 + 20 + 50 && c.purse.coin === 5
+    && !rc[3].ok && rd320[0].ok === true && d.purse.coin === 3, JSON.stringify(rc.map(r => r.said || r.why)));
+  const blocks = Array.isArray(REG320.GM_CONTEXT) ? REG320.GM_CONTEXT : Object.values(REG320.GM_CONTEXT || {});
+  const mb = blocks.find(x => x && x.key === "moneyDetail");
+  const said = mb ? mb.build({ character: { purse: { crystal: 7, coin: 0, paper: 0, marks: 0, scrip: {} } }, CONTENT: CT320, location: { regionId: "the_palelands" } }) : "";
+  check("§320: ⛔ the GM is SHOWN the purse and the money of the place, on the turn and the ask alike",
+    !!mb && mb.reachedBy === "always" && mb.views.includes("turn") && mb.views.includes("ask")
+    && /^MONEY — the purse holds: 7 crystal\. Money in the Palelands: paid out in Palelands scrip/.test(said), said);
+  const GM320 = rd("engine/gm.js").replace(/\r\n/g, "\n");
+  check("§320: ⛔ …and GIVEN the door: exchangeOps is in the reply contract with its rule, salvaged from a truncated reply, and forbidden from a mere question",
+    /"exchangeOps": \[\{"op": "pay\|receive\|buy\|sell\|change"/.test(GM320) && /"exchangeOps": MONEY MOVES ONLY HERE/.test(GM320)
+    && G320.SALVAGEABLE_OPS.includes("exchangeOps") && G320.ASK_FORBIDDEN.includes("exchangeOps") && !G320.ASK_OPS.includes("exchangeOps")
+    // ⛔ and the block is READ by the prompt assembler — registered alone it reached nobody (the wiring audit caught it)
+    && /if \(moneyDetail\) world\.push\(`## MONEY/.test(GM320));
+  const A320 = rd("app.js").replace(/\r\n/g, "\n").split("\n").filter(l => !/^\s*\/\//.test(l)).join("\n");
+  check("§320: ⛑ the turn applies it by where the character stands, and a refusal is said under the beat — a purchase the purse could not cover never stands in the story",
+    /const rec = applyMoneyOps\(character, turn\.exchangeOps \|\| \[\], \{\n\s*regionId: hereRegionId\(\), economy: CONTENT\.rules\?\.economy \|\| null/.test(A320)
+    && /`The purse did not move: \$\{refused441\.join\("; "\)\}\.`/.test(A320));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

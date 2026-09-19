@@ -16,7 +16,7 @@
 // it does not want. ⚠️ Which money each Reach wants is Aevi's to author (`economy.regions[].money.wants`); crystal stands in.
 
 import { priceOf } from "./economy.js";
-import { earnAt, moneyClassOf, moneyLabel, placeName } from "./money.js";
+import { earnAt, payAt, saidPaid, saidEarned, moneyClassOf, moneyLabel, placeName } from "./money.js";
 import { ensurePurse, held, credit, debit, currencyDefs, baseValueOf } from "./purse.js";
 
 const num = (v, d = 0) => (Number.isFinite(Number(v)) ? Number(v) : d);
@@ -134,4 +134,66 @@ export function exchangeAt(character, { from, to, amount } = {}, regionId = null
   if (!c.ok) { credit(character, from.currency, a, { origin: "exchange", regionId: from.regionId }); return { ok: false, why: c.why }; }
   return { ok: true, spread: rate.spread, paid: { ...from, amount: a }, got: { ...to, amount: got },
     said: `${moneyLabel(a, from.currency, from.regionId)} for ${moneyLabel(got, to.currency, to.regionId)}` };
+}
+
+/** ⛔ CCODE-441 — THE GM'S DOOR INTO THE PURSE, BY PLACE. The GM was never shown the purse and never given these ops — in no contract, ever —
+ *  so nothing bought in the story cost anything and no payment ever arrived. Every op settles through the same doors as the rest of the
+ *  engine and returns a receipt, refusals included; a refused op moves nothing, goods included.
+ *    {op:"pay", amount, currency?, regionId?, to}          money out — with no money named, `amount` is a VALUE in shards paid here (local first)
+ *    {op:"receive", amount, currency?, regionId?, origin}  money in — with none named, a value paid in the place's money (coin: only found/traded)
+ *    {op:"buy"|"exchange", price, currency?, take, give, with, bargain}   a purchase — the goods move only if the price was paid
+ *    {op:"sell", price, give, with}                         a sale — the goods leave, the price comes in the place's money
+ *    {op:"change", amount, from:{currency, regionId}, into:{currency, regionId}}   changing money at the place's rates
+ *  → [{ op, ok, settled?, said?, why? }]. Mutates the character. */
+export function applyMoneyOps(character, ops = [], { regionId = null, economy = null, worldState = null, bargainOutcome = null } = {}) {
+  const out = [];
+  const inv = () => (character.inventory = Array.isArray(character.inventory) ? character.inventory : []);
+  const nameOf = (x) => String(x?.customName || x?.name || x || "").toLowerCase();
+  for (const o of (Array.isArray(ops) ? ops : []).slice(0, 6)) {
+    const op = String(o?.op || "").toLowerCase();
+    try {
+      if (op === "pay") {
+        if (o.currency) { const d = debit(character, o.currency, num(o.amount, 0), { regionId: o.regionId || regionId });
+          out.push({ op, ...d, settled: !!d.ok, said: d.ok ? `Paid ${moneyLabel(o.amount, o.currency, o.regionId || regionId)}${o.to ? ` to ${o.to}` : ""}` : undefined }); continue; }
+        const p = payAt(character, num(o.amount, 0), regionId, economy, { worldState });
+        out.push({ op, ok: p.ok, why: p.why, settled: p.ok, said: p.ok ? `Paid ${saidPaid(p)}${o.to ? ` to ${o.to}` : ""}` : undefined }); continue;
+      }
+      if (op === "receive") {
+        if (o.currency) { const c = credit(character, o.currency, num(o.amount, 0), { origin: o.origin || "traded", regionId: o.regionId || regionId });
+          out.push({ op, ...c, settled: !!c.ok, said: c.ok ? `Received ${moneyLabel(o.amount, o.currency, o.regionId || regionId)}` : undefined }); continue; }
+        const e = earnAt(character, num(o.amount, 0), regionId, economy, { origin: o.origin || "traded", worldState });
+        out.push({ op, ok: e.ok, why: e.why, settled: !!e.ok && e.amount > 0, said: e.ok && e.amount > 0 ? `Received ${saidEarned(e)}` : undefined }); continue;
+      }
+      if (op === "buy" || op === "exchange") {
+        let price = num(o.price, 0), haggled = null;
+        if (o.bargain && typeof bargainOutcome === "function") { haggled = bargainOutcome({ price, rank: o.bargain.rank, margin: o.bargain.margin, economy }); if (haggled?.ok) price = haggled.newPrice; }
+        const give = Array.isArray(o.give) ? o.give : [], take = Array.isArray(o.take) ? o.take : [];
+        const missing = give.filter(g => !inv().some(x => nameOf(x) === nameOf(g)));
+        if (missing.length) { out.push({ op, ok: false, why: `${missing.map(m => m?.name || m).join(", ")} is not in the pack` }); continue; }
+        let paidSaid = "";
+        if (price > 0) {
+          if (o.currency) { const d = debit(character, o.currency, price * 10 / (num(baseValueOf(o.currency, currencyDefs(economy), worldState), 0) || 10), { regionId: o.regionId || regionId });
+            if (!d.ok) { out.push({ op, ok: false, why: d.why }); continue; } paidSaid = moneyLabel(d.amount, o.currency, o.regionId || regionId); }
+          else { const p = payAt(character, price, regionId, economy, { worldState }); if (!p.ok) { out.push({ op, ok: false, why: p.why }); continue; } paidSaid = saidPaid(p); }
+        }
+        for (const g of give) { const i = inv().findIndex(x => nameOf(x) === nameOf(g)); if (i >= 0) inv().splice(i, 1); }
+        for (const t of take) if (t) inv().push(typeof t === "string" ? { name: t, kind: "misc", qty: 1 } : { qty: 1, kind: "misc", ...t });
+        out.push({ op, ok: true, settled: true, bargain: haggled, said: `Paid ${paidSaid || "nothing"}${take.length ? ` for ${take.map(t => t?.name || t).join(", ")}` : ""}${o.with ? ` (${o.with})` : ""}` }); continue;
+      }
+      if (op === "sell") {
+        const give = Array.isArray(o.give) ? o.give : [];
+        const missing = give.filter(g => !inv().some(x => nameOf(x) === nameOf(g)));
+        if (!give.length || missing.length) { out.push({ op, ok: false, why: missing.length ? `${missing.map(m => m?.name || m).join(", ")} is not in the pack` : "nothing named to sell" }); continue; }
+        for (const g of give) { const i = inv().findIndex(x => nameOf(x) === nameOf(g)); if (i >= 0) inv().splice(i, 1); }
+        const e = earnAt(character, num(o.price, 0), regionId, economy, { origin: "traded", worldState });
+        out.push({ op, ok: true, settled: true, said: `Sold ${give.map(g => g?.name || g).join(", ")} for ${e.amount > 0 ? saidEarned(e) : "nothing"}${o.with ? ` (${o.with})` : ""}` }); continue;
+      }
+      if (op === "change") {
+        const r = exchangeAt(character, { from: o.from, to: o.into || o.to, amount: o.amount }, regionId, economy, { worldState });
+        out.push({ op, ok: r.ok, why: r.why, settled: r.ok, said: r.ok ? `Changed ${r.said}` : undefined }); continue;
+      }
+      out.push({ op, ok: false, why: `"${op}" is not a money op` });
+    } catch (err) { out.push({ op, ok: false, why: String(err?.message || err).slice(0, 120) }); }
+  }
+  return out;
 }

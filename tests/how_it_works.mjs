@@ -21119,8 +21119,10 @@ console.log("\n── §290 · cavalry, archers, a dragon ──");
     const A = rd("app.js").replace(/\r\n/g, "\n");
     const body = (A.match(/function meleeCfg\(\) \{[\s\S]*?\n\}/) || [""])[0];
     check("§290: ⛔ EVERY BAND DIAL AEVI AUTHORS REACHES `meleeCfg()` — she authored `rules/martial.json` (SNG-623) and only three readers asked for that key while every other band caller went through here, so her `callCostPerHead: 4` never reached the call and the screen kept saying 'no martial rule sets this yet' while one did. Asserted over her WHOLE file, so the next dial she tunes cannot fall through the same gap",
-      dials.length >= 12 && /Object\.entries\(r\.martial \|\| \{\}\)/.test(body) && /\.\.\.martial,/.test(body),
-      `${dials.length} authored dials · meleeCfg ${/\.\.\.martial,/.test(body) ? "spreads" : "DOES NOT spread"} them`);
+      // ⛔ CCODE-453: the builder moved into the engine (`bandDialsOf`) so the world tick bleeds a band on the same dials — asserted on what
+      // it RETURNS for every dial she authored, and that `meleeCfg()` returns exactly that
+      dials.length >= 12 && dials.every(k => JSON.stringify(M290.bandDialsOf(C290)[k]) === JSON.stringify(C290.rules.martial[k])) && /return bandDialsOf\(CONTENT\);/.test(body),
+      `${dials.length} authored dials · ${dials.filter(k => JSON.stringify(M290.bandDialsOf(C290)[k]) === JSON.stringify(C290.rules.martial[k])).length} reach bandDialsOf · meleeCfg ${/return bandDialsOf\(CONTENT\);/.test(body) ? "returns it" : "DOES NOT return it"}`);
     const priced = M290.callCostOf([], { contingents: [{ n: 10, quality: 1, does: ["HARM"] }] },
       { cfg: { ...(C290.rules?.martial || {}) }, wagePerHand: 3 });
     check("§290: …and her number is the one charged, and the screen's sentence about it is TRUE — `authored` is what decides whether it says a rule sets the price or that none does",
@@ -23513,11 +23515,13 @@ console.log("\n── §330 · standing work — only the kinds whose effect is 
   const W330 = rd("engine/worldtick.js").replace(/\r\n/g, "\n");
   const J330 = rd("engine/jobs.js").replace(/\r\n/g, "\n");
   const A330 = rd("app.js").replace(/\r\n/g, "\n").split("\n").filter(l => !/^\s*\/\//.test(l)).join("\n");
+  const JBm330 = await import("../engine/jobs.js");
+  const away330 = (() => { const x = mk(); HW.assignWork(x, "h1", "forage", "unit:b1:0"); return [0, 1].map(i => JBm330.bandMemberAway(x, x.bands[0], x.bands[0].contingents[i], i)); })();
   check("§330: ⛔ PAID, ROLLED, AND NOBODY ELSE'S — the tick pays a hand's wage a head in the place's money before any day is rolled (unpaid, nobody works, and it is said); the days are the Jobs tab's dice; a hunted place's raid danger eases; the jobs pool and a band's turn leave the workers out; the Holdings tab puts people to work",
     /const paid = wage > 0 \? payAt\(character, wage, loc\?\.regionId \|\| null, content\?\.rules\?\.economy \|\| null,/.test(W330) && /was paid this pass, so nobody worked/.test(W330)
     && /goodDayOf: \(id, kind\) => workDayChance\(craftsOf\(id\), kind, wT\)/.test(W330) && /dangerLevel: Math\.max\(0, \(Number\(loc\?\.dangerLevel\) \|\| 0\) - workMods\(h\)\.dangerEase\)/.test(W330)
     && /if \(key !== "player" && workAt\(character, key\)\) \{ seen\.add\(key\); return; \}/.test(J330)
-    && /workAt\(character, c\.npcId\)\) return;/.test(A330) && /\[data-work-add\]"\)\) s\.onchange/.test(A330) && /\[data-work-drop\]"\)\) b\.onclick/.test(A330));
+    && away330[0] === "at work at Fell Pell" && away330[1] === null && /\[data-work-add\]"\)\) s\.onchange/.test(A330) && /\[data-work-drop\]"\)\) b\.onclick/.test(A330));
   const gm = HW.workSaid({ work: { forage: ["dara"], train: ["unit:b1:0"] } }, { nameOf: (id) => (id === "dara" ? "Dara Holt" : "the hands of Ridge") });
   check("§330: ⛑ THE GM IS TOLD who is at work at each hold", gm === " — at work: Dara Holt foraging, the hands of Ridge training", gm);
 }
@@ -23571,6 +23575,116 @@ console.log("\n── §331 · feature levels — each reader multiplies, a leve
     /\[data-hold-raise\]"\)\) btn\.onclick = \(\) => showRaise\(/.test(A331) && /const r = postRaise\(character, holdId, index,/.test(A331)
     && /if \(j\?\.stakes\?\.raise\) returnRaiseGoods\(character, j\.stakes\.raise\);/.test(A331)
     && /has a forge \(level 2\)/.test(H331.holdingFactsLine(who.holdings[0])), H331.holdingFactsLine(who.holdings[0]));
+}
+
+// ══════════ §332 · CCODE-453 — A BAND ON A MISSION ══════════
+// Erik (SNG-627): "Troops get fed and paid, but they can also be put to work and do jobs and missions." A band goes on one of the seven
+// errand kinds AS A BAND: rolled as a team on the Jobs tab's dice, away until it is done, bled when it goes wrong, and the GM is told.
+console.log("\n── §332 · a band on a mission — sent or refused with a reason, rolled as a team, away means away, a pass bleeds it or brings it home ──");
+{
+  const JB332 = await import("../engine/jobs.js");
+  const AS332 = await import("../engine/assignments.js");
+  const ML332 = await import("../engine/melee.js");
+  const FS332 = await import("../engine/fellowship.js");
+  const WT332 = await import("../engine/worldtick.js");
+  const HW332 = await import("../engine/holdwork.js");
+  const { loadContentHeadless: lch332 } = await import("./headless_content.mjs");
+  const C332 = await lch332();
+  const ctx = { content: C332, worldDay: 40 };
+  // two people the sheet can build — authored, so the roll has crafts to read (someone with none is left out, by jobPersonFor's own rule)
+  const [p1, p2] = Object.keys(C332.npcs).filter(id => { try { return !!JB332.jobPersonFor({ name: "x", npcRegistry: {} }, id, ctx); } catch { return false; } });
+  const dest = Object.keys(C332.locations)[0];
+  const mk = () => ({ name: "Tester", level: 20, currentLocationId: dest, clock: { day: 40 }, npcRegistry: {}, worldState: {},
+    company: [{ npcId: p1, roles: ["companion"], joinedDay: 10 }],
+    bands: [{ id: "b1", name: "Ridge Company", condition: "fresh", losses: 0,
+      contingents: [{ npcId: p1, n: 1, does: ["KNOW", "MOVE"] }, { npcId: p2, n: 1, does: ["PROTECT", "HARM"] }, { n: 12, quality: 2, does: ["PROTECT", "HARM"], kind: "spears" }] },
+      { id: "b2", name: "Empty", contingents: [] }] });
+  let w = mk();
+  const why = (id, o) => JB332.sendBandOnMission(w, id, o).why || "";
+  const refusals = [why("b1", { kind: "escort", charge: " " }), why("b1", { kind: "dance", charge: "x" }), why("b1", { kind: "treat", charge: "talk" }), why("b2", { kind: "escort", charge: "x" }),
+    why("b1", { kind: "seek", charge: "find the ford" })];   // the one who knows and moves walks at your side, so those who go cannot seek
+  w.bands[0].called = { day: 1 };
+  refusals.push(why("b1", { kind: "escort", charge: "x" }));
+  w = mk();
+  const s = JB332.sendBandOnMission(w, "b1", { kind: "escort", charge: "see the salt caravan home", destination: dest, stake: "eleven crystal", worldCount: 0, day: 40, placeName: "the Hollow" });
+  const again = why("b1", { kind: "escort", charge: "again" });
+  check("§332: ⛔ SENT AS A BAND, OR REFUSED WITH A REASON — no charge written, not a kind, a kind the families of THOSE WHO GO do not fit (the errand's own `canSendOn` — its knower walks at your side, so it is not sent to seek), an empty band, a band called into the field, a band already away: each says why; sent, the charge names the band and the band carries it — and nobody is parted from your side: who walks with you stays, and the party says so",
+    /the charge is yours to write/.test(refusals[0]) && /not a mission/.test(refusals[1]) && /will not take that on/.test(refusals[2]) && /stands empty/.test(refusals[3])
+    && /will not take that on\. What they do is protects and harms/.test(refusals[4]) && /stand them down first/.test(refusals[5])
+    && s.ok && s.assignment.bandId === "b1" && s.assignment.npcId === null && s.assignment.npcName === "Ridge Company" && w.bands[0].mission?.assignmentId === s.assignment.id
+    && s.said === "escorting to the Hollow — see the salt caravan home" && /already away/.test(again)
+    && !w.company[0].leftDay && s.party.stays.length === 1 && s.party.stays[0].why === "at your side" && s.party.goes.length === 2 && s.party.heads === 13,
+    JSON.stringify({ refusals, said: s.said, again, company: w.company[0], party: s.party }));
+  const odds = JB332.errandOdds(w, s.assignment, ctx);
+  const team = JB332.bandTeamOf(w, w.bands[0], ctx, { leaving: true });
+  const turn = JB332.bandTeamOf(w, w.bands[0], ctx);
+  const posted = mk(); posted.company = []; posted.holdings = [{ id: "h9", name: "the Gate", steward: p2 }];
+  posted.worldState.assignments = { x: { id: "x", npcId: p1, npcName: "p1", charge: "own business", status: "working" } };
+  const stay332 = [0, 1].map(i => JB332.bandMemberAway(posted, posted.bands[0], posted.bands[0].contingents[i], i, { leaving: true }));
+  const none332 = JB332.sendBandOnMission({ ...posted, bands: [{ ...posted.bands[0], contingents: posted.bands[0].contingents.slice(0, 2) }] }, "b1", { kind: "escort", charge: "x" }).why || "";
+  const plan = JB332.planJob({ id: s.assignment.id, level: odds.level, effort: 1, where: dest, needs: [{ family: "PROTECT", weight: 2 }, { family: "HARM", weight: 1 }] },
+    team, { rules: C332.rules, location: C332.locations[dest] || null });
+  w.holdings = [{ id: "h1", name: "Pell", locationId: dest }];
+  const put = HW332.assignWork(w, "h1", "forage", p2);
+  w.jobs = { out: [{ team: [p1] }] };
+  const thinned = JB332.bandTeamOf(w, w.bands[0], ctx).map(x => x.id);
+  delete w.holdings; delete w.jobs;
+  check("§332: ⛔ IT ROLLS AS A TEAM, ON THE JOBS TAB'S DICE — those of it who go, the kind's family weighted two and its second weighted one (`planJob`, exactly); who walks at your side, carries a charge of their own or keeps a post stays, and the band's TURN still counts who walks with you; whoever is out on a job or at standing work is in neither; nobody free, it is refused and says who stays and why",
+    odds.how === "band" && odds.family === "PROTECT" && team.map(x => x.id).join() === `${p2},unit:b1:2` && turn.map(x => x.id).join() === `${p1},${p2},unit:b1:2`
+    && stay332[0] === "on a charge of their own" && stay332[1] === "keeping their post at the Gate" && /nobody of Ridge Company is free to go — .* is on a charge of their own; .* is keeping their post at the Gate/.test(none332)
+    && JSON.stringify(odds.dist) === JSON.stringify(plan.dist)
+    && Math.abs(Object.values(odds.dist).reduce((a, b) => a + b, 0) - 1) < 1e-9 && put.ok && thinned.join() === "unit:b1:2",
+    JSON.stringify({ how: odds.how, family: odds.family, team: team.map(x => x.id), turn: turn.map(x => x.id), stay332, none332, thinned, put }));
+  const legionOf = [...w.bands, { id: "L1", name: "The Host", formedFrom: ["b1"], contingents: [] }];
+  const people = FS332.poolRows(w, ctx).filter(r => r.kind === "person");
+  const A332 = rd("app.js").replace(/\r\n/g, "\n").split("\n").filter(l => !/^\s*\/\//.test(l)).join("\n");
+  const w6 = mk(); w6.company = []; w6.holdings = [{ id: "h6", name: "the Gate", steward: p1 }];
+  const s6 = JB332.sendBandOnMission(w6, "b1", { kind: "escort", charge: "the south road", worldCount: 0 });
+  const p1row = FS332.poolRows(w6, ctx).find(r => r.id === p1);
+  const pool332 = JB332.jobPoolOf(w, ctx).map(x => x.id), pool6 = JB332.jobPoolOf(w6, ctx).map(x => x.id);
+  check("§332: ⛔ AWAY MEANS AWAY, FOR THOSE WHO WENT — the band cannot be called, nor a legion it stands in; whoever went cannot be brought to your side, sent on a job or on an errand of their own, and takes no turn; whoever STAYED (at your side, at their post) is exactly as free as before",
+    /away on a mission — recall them first/.test(ML332.callUnit(w.bands, "b1", { day: 40 }).why || "") && /one of its bands, is away on a mission/.test(ML332.callUnit(legionOf, "L1", { day: 40 }).why || "")
+    && people.length === 1 && people[0].id === p2 && /is away with Ridge Company on a mission/.test(FS332.canBringForward(w, people[0], {}).why || "")
+    && pool332.includes(p1) && !pool332.includes(p2) && !pool332.includes("unit:b1:2")
+    && s6.ok && s6.assignment && w6.bands[0].mission.went.join() === `${p2},unit:b1:2` && !/away with/.test(FS332.canBringForward(w6, p1row, {}).why || "") && pool6.includes(p1)
+    && ML332.onMissionWith(w6.bands, p2)?.id === "b1" && ML332.onMissionWith(w6.bands, p1) === null
+    && /bandTeamOf\(character, band, obCtx\(\)\)\.filter\(m => !onMissionWith\(\[band\], m\.id\)\)/.test(A332)
+    && /\$\{r\.kind === "person" && r\.id && !onMissionWith\(character\.bands, r\.id\) \?/.test(A332),
+    JSON.stringify({ pool332, pool6, bring: people.map(r => FS332.canBringForward(w, r, {}).why), went6: w6.bands[0].mission?.went }));
+  const heads = (who) => who.bands.find(b => b.id === "b1").contingents.reduce((a, c) => a + c.n, 0);
+  const pass = (o) => async ({ assignments }) => ({ advancements: assignments.map(a => ({ assignmentId: a.id, outcome: o, sequence: [o], rolled: true, note: "" })) });
+  const h0 = heads(w);
+  const r1 = await WT332.advanceDelegatedWork({ character: w, content: C332, currentDay: 41, now: Date.UTC(2030, 0, 1), advanceAssignments: pass("problem") });
+  const h1 = heads(w), a1 = w.worldState.assignments[s.assignment.id];
+  const n1 = r1.news.map(n => n.text);
+  const stillOut = !!w.bands.find(b => b.id === "b1").mission;
+  a1.lastMovedWorldCount = 0;
+  const r2 = await WT332.advanceDelegatedWork({ character: w, content: C332, currentDay: 45, now: Date.UTC(2030, 0, 1), advanceAssignments: pass("done") });
+  const w5 = { name: "T", npcRegistry: {}, company: [], worldState: {}, bands: [{ id: "b9", name: "Last Spear", condition: "fresh", losses: 0, contingents: [{ n: 1, quality: 1, does: ["HARM"] }] }] };
+  const s5 = JB332.sendBandOnMission(w5, "b9", { kind: "escort", charge: "alone", worldCount: 0 });
+  const hard = { ...C332, rules: { ...C332.rules, jobs: { ...(C332.rules.jobs || {}), errand: { ...(C332.rules.jobs?.errand || {}), bandTroubleTide: -2 } } } };
+  const l5 = JB332.bandMissionOutcome(w5, s5.assignment, "problem", { content: hard });
+  check("§332: ⛔ A PASS — TROUBLE BLEEDS IT AS A LOST CLASH DOES AND IT STAYS OUT (what went with it is lost once, and nobody says it is back); DONE BRINGS IT HOME; BLED TO NOBODY, THE CHARGE ENDS THERE",
+    h1 < h0 && stillOut && a1.stake === null && n1.some(x => /^Ridge Company lost eleven crystal on the way\. They are still out\.$/.test(x)) && !n1.some(x => /Ridge Company is back/.test(x))
+    && n1.some(x => new RegExp(`^Ridge Company lost ${h0 - h1} on it; ${h1} still out\\.$`).test(x))
+    && !w.bands.find(b => b.id === "b1").mission && r2.news.some(n => /Ridge Company has finished see the salt caravan home\./.test(n.text))
+    && s5.assignment.status === "done" && s5.assignment.endedBy === "lost" && !w5.bands[0].mission && l5.some(x => /Nobody of Last Spear is left to carry it/.test(x)),
+    JSON.stringify({ h0, h1, n1, n2: r2.news, l5 }));
+  const w3 = mk();
+  const s3 = JB332.sendBandOnMission(w3, "b1", { kind: "watch", charge: "watch the ford", worldCount: 5 });
+  const gmAway = AS332.assignmentsForGM(w3.worldState);
+  const roster = (FS332.rosterForGM(w3, ctx) || []).find(l => /^Ridge Company/.test(l)) || "";
+  const rc = AS332.endBandMission(w3, "b1");
+  check("⛑ §332: RECALLED, THE CHARGE ENDS WHERE IT STANDS — home, and the GM's list says it was recalled rather than finished; while it was out, the GM's roster said it was away and could not be called, and its delegated work named a band",
+    rc.ok && !w3.bands[0].mission && w3.worldState.assignments[s3.assignment.id].endedBy === "recalled" && !AS332.endBandMission(w3, "b1").ok
+    && /\(done, recalled\)/.test(AS332.assignmentsForGM(w3.worldState)) && /Ridge Company \(a band of yours, gone as a band\) — watch the ford \(working\)/.test(gmAway)
+    && /AWAY ON A MISSION: watching — watch the ford — gone: [^;]*12 hands, who are not here; the band cannot be called until they are back/.test(roster), JSON.stringify({ gmAway, roster }));
+  const W332 = rd("engine/worldtick.js").replace(/\r\n/g, "\n");
+  const dials = ML332.bandDialsOf(C332);
+  check("§332: ⛔ ONE SOURCE — the app sends through `sendBandOnMission`, the tick lands a pass through `bandMissionOutcome`, and the band dials the app bleeds a band on are the engine's `bandDialsOf` (Aevi's martial dials included), so the tick bleeds on the same",
+    /const r = sendBandOnMission\(character, bandId, \{/.test(A332) && /return bandDialsOf\(CONTENT\);/.test(A332)
+    && /if \(a\.bandId\) bandNews\.push\(\.\.\.bandMissionOutcome\(character, a, outcome, \{ content \}\)\);/.test(W332)
+    && (C332.rules.martial?.callCostPerHead == null || dials.callCostPerHead === C332.rules.martial.callCostPerHead), JSON.stringify({ callCostPerHead: dials.callCostPerHead }));
 }
 
 /* ══════════ REPORT ══════════ */

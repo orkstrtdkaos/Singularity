@@ -86,7 +86,7 @@ import { rankVoices, pickVoice, speakableText, chunkForSpeech, renderProseHtml }
 import { harmGateFor, harmTargetFor, departureGateFor, isConsequentialMove, isSpeechAct, isRemoteContact, personDestination, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop); SNG-188: speech-act guard; SNG-228: person-as-place guard; CCODE-158: one departure definition for both doors; CCODE-159: remote contact is not travel
 import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, gateHopCost, aimsOpen } from "./engine/waygate.js";
 import { routeBetween, routeLine, twoWayRoads } from "./engine/journey.js";
-import { planJob, suggestTeam, jobPoolOf, jobRouteOf, jobCost, jobWages, jobEffects, sayEffects, settleDueJobs, degreeWord, jobOpposition, mainNeedOf, jobCraftsOf, bestCraftFor, OUTCOMES as JOB_OUTCOMES, errandOdds, detachForJob, jobPersonFor, jobUnitFor, workCraftsOf, workDayChance, workHeads } from "./engine/jobs.js";   // CCODE-420 · CCODE-428 · CCODE-431
+import { planJob, suggestTeam, jobPoolOf, jobRouteOf, jobCost, jobWages, jobEffects, sayEffects, settleDueJobs, degreeWord, jobOpposition, mainNeedOf, jobCraftsOf, bestCraftFor, OUTCOMES as JOB_OUTCOMES, errandOdds, detachForJob, jobPersonFor, workCraftsOf, workDayChance, workHeads, bandTeamOf, sendBandOnMission, bandMissionParty } from "./engine/jobs.js";   // CCODE-420 · CCODE-428 · CCODE-431
 import { ensureJobs, postJob, sendOnJob, awayOnJob, untoldJobs, markJobsTold, dropJob, detachedFrom } from "./engine/jobstate.js";   // CCODE-420 · CCODE-431
 import { sendCaravan, caravansOf } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph, craftRollsLine, craftRollsShort } from "./engine/entityDetail.js";
@@ -112,11 +112,11 @@ import { derivedLevel, authoredFor } from "./engine/npcsheet.js";   // CCODE-422
 import { musterCapacityOf, queueHoldingEvent } from "./engine/holdings.js";
 import { ARMORY_SLOTS, SLOT_WORDS, armoryTable, armoryOf, armoryLine, makersAt, setForgeOrder, outfitContingent, gearPrice, sellGear } from "./engine/armory.js";   // CCODE-445: the armory
 import { STANCE_NAMES, FIGHT_FAMILIES, FAMILY_WORDS, FAMILY_LANDS, stanceTable, stanceOf, allocateTurn, allyChoice, partyRound } from "./engine/orderofbattle.js";   // CCODE-448: the order of battle
-import { workTable, workOf, workAt, workersAt, assignWork, unassignWork } from "./engine/holdwork.js";   // CCODE-450: standing work
+import { workTable, workOf, workersAt, assignWork, unassignWork } from "./engine/holdwork.js";   // CCODE-450: standing work
 import { featureLevel, levelEffectOf, raiseQuote, postRaise, returnRaiseGoods, featureDef as featureDefOf } from "./engine/holdings.js";   // CCODE-452: levels
 import { homeOf, isHome, makeHome } from "./engine/home.js";   // CCODE-369: a home is a place that is yours   // CCODE-360: an invitation carried by someone you both know
 import { runWakeGeneration } from "./engine/wake.js"; // SNG-204 Phase 2: open wakes generate the next thread
-import { addAssignment, delegationRefusal, activeDelegates, MISSION_KINDS, MISSION_KIND_IDS, canSendOn, sayFamilies } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
+import { addAssignment, delegationRefusal, activeDelegates, MISSION_KINDS, MISSION_KIND_IDS, canSendOn, sayFamilies, endBandMission } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
 import { setArcFate } from "./engine/latentarcs.js"; // SNG-191 §7: the player closing a surfaced arc (the handled/resolved fate)
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
 import { spectrumIdsOf, cleanAxes, driftAlignment } from "./engine/spectrum.js";   // CCODE-436: the twelve, and the one door into the fingerprint
@@ -162,7 +162,7 @@ import { championsFor, resolveChampion, creditChampion, championLine, sendingIsG
 // ⛔ CCODE-404 (Erik) — `addContingent` and `musteredFrom` are new; `unitComposition` and `bandGaps` had NO caller outside the tests.
 // ⛔ CCODE-405 (Erik's legion ruling): formed of bands that keep their identity, placed and postured once CALLED, and free until then.
 // ⚠️ ONE LINE ON PURPOSE — `import_integrity` reads an import statement per line, and a comment inside the braces hides what follows it.
-import { commandSlots, bringForward, lineSplit, canRaiseBand, raiseBand, bandStrength, bandThreat, bloodBand, recoverBand, legionClash, addContingent, musteredFrom, unitComposition, bandGaps, formLegion, disbandLegion, callCostOf, callUnit, standDown, setUnitPosture, bloodUnit, resolvedUnit, UNIT_POSTURES, setUnitLeader, leaderBonusOf, editContingent, kitSummary } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
+import { commandSlots, bringForward, lineSplit, canRaiseBand, raiseBand, bandStrength, bandThreat, bloodBand, recoverBand, legionClash, addContingent, musteredFrom, unitComposition, bandGaps, formLegion, disbandLegion, callCostOf, callUnit, standDown, setUnitPosture, bloodUnit, resolvedUnit, UNIT_POSTURES, setUnitLeader, leaderBonusOf, editContingent, kitSummary, bandDialsOf, onMissionWith } from "./engine/melee.js"; // CCODE-276: the forward pick is a UI control, per Erik's ruling
 import { groupCapability, loadBearing } from "./engine/group.js";   // CCODE-317/322: what your line covers, and who holds it alone
 import { characterPower, threatBand } from "./engine/threat.js"; // CCODE-52: built power sets the mean the encounter pool revolves around
 import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine, FRAME_FREEFORM_CUE } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c). SNG-246 Fix D: playerReceiptLine = the mechanical receipt SHOWN to the player
@@ -177,7 +177,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.3.3";
+const APP_VERSION = "2.3.4";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -761,24 +761,15 @@ let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs,
 // `foldedPoolPerHealth` already lives, so this JOINS that block rather than inventing a second one — two
 // hand-synced melee configs is the SNG-344 crosswalk drift before it happens.
 function meleeCfg() {
-  const r = CONTENT?.rules || {};
   // ⛔ CCODE-409b — AND AEVI'S AUTHORED BAND DIALS, which this bag never carried. She authored `rules/martial.json` (SNG-623: "twelve
   // band dials, each now a ruling with a reason") and `state.js` loads it as `rules.martial` — but only THREE readers asked for that key,
   // while every other band caller went through here. ⚑ Observable the day it landed: her `callCostPerHead: 4` never reached the call,
   // which kept charging the `wagePerHand` fallback of 3 — and the screen went on saying "no martial rule sets this yet" while one did.
   // ⚠️ I flagged these two sources in CCODE-404 and declined to claim it, because every dial then equalled its default. It stopped being
   // harmless the moment one dial was tuned, which is exactly when a second source always stops being harmless.
-  const martial = Object.fromEntries(Object.entries(r.martial || {}).filter(([k]) => !k.startsWith("_") && !["note", "id", "kind", "schemaVersion"].includes(k)));
-  return {
-    ...(CONTENT?.skillBattle?.engine?.melee || {}),
-    ...martial,
-    // ⛔ THE LADDERS COME FROM `resolution.json`, WHICH IS WHERE ERIK RULED THEM. `melee.js` prefers
-    // `capabilityByTier` and falls back to `attentionByTier`; both are handed over so that preference is a
-    // real choice here rather than an accident of which one happened to be reachable.
-    ...(r.capabilityByTier ? { capabilityByTier: r.capabilityByTier } : {}),
-    ...(r.attentionByTier || r.arcResponse?.attentionByTier
-      ? { attentionByTier: r.attentionByTier || r.arcResponse.attentionByTier } : {}),
-  };
+  // ⛔ THE LADDERS COME FROM `resolution.json`, WHICH IS WHERE ERIK RULED THEM (capabilityByTier, then attentionByTier).
+  // ⛔ CCODE-453: ONE BUILDER, IN THE ENGINE (`bandDialsOf`), so the world tick bleeds a band on a mission on exactly these dials.
+  return bandDialsOf(CONTENT);
 }
 /** ⛔ CCODE-406 — WHAT A LEADER'S LEVEL IS, for pricing the position — through `levelOfPerson`, which is the ONE answer the roster
  *  gives too. ⚑ My first version resolved it here by hand and offered "Pell Ran Marsh level 9" in the picker while the roster two
@@ -15543,6 +15534,59 @@ function showInvitePicker(unitId) {
   };
 }
 
+/** ⛔ CCODE-453 — SEND A BAND ON A MISSION (Erik, SNG-627: "Troops… can also be put to work and do jobs and missions"). One of the seven
+ *  errand kinds, as a band: its people and hands roll as a team, it is away until the charge is done, and a mission gone wrong costs heads. */
+function showBandMissionPicker(bandId) {
+  document.getElementById("help-pop")?.remove();
+  const band = (character.bands || []).find(b => b && b.id === bandId);
+  if (!band) return;
+  const day = absoluteWorldDay();
+  const nameOf = (id) => character.npcRegistry?.[id]?.name || CONTENT.npcs?.[id]?.name || id;
+  const party = bandMissionParty(character, band, { nameOf });   // ⛔ who goes and who stays, said before anyone is sent
+  const who = { npcName: band.name || bandId, does: party.does };   // ⛔ judged on those who GO — the engine's refusal reads the same list
+  const places = Object.entries({ ...(CONTENT.locations || {}), ...(character.generated?.location || {}) })
+    .filter(([id]) => id && id !== character.currentLocationId)
+    .map(([id, l]) => ({ id, name: l?.name || id })).sort((x, y) => x.name.localeCompare(y.name)).slice(0, 200);   // prose-cap-ok: a list of PLACES
+  const pop = document.createElement("div");
+  pop.id = "help-pop"; pop.className = "help-overlay";
+  pop.innerHTML = `<div class="help-card" role="dialog" aria-label="Send ${esc(who.npcName)} on a mission" style="max-height:min(86vh,760px); display:flex; flex-direction:column; overflow:hidden">
+    <div class="whois-head" style="flex:0 0 auto">Send ${esc(who.npcName)} on a mission <span class="hint">· ${party.heads} go · ${esc(sayFamilies(who.does))}</span></div>
+    <div style="flex:1 1 auto; overflow-y:auto; -webkit-overflow-scrolling:touch">
+      <div class="hint" style="margin-bottom:6px">They go as a band: whoever of them is best at each part of the work rolls it. They are away until it is done — nobody calls them, sends them on a job or puts them to work — and a mission that goes wrong costs heads.</div>
+      <div class="hint" style="margin:0 0 6px"><strong>Going:</strong> ${party.goes.length ? esc(party.goes.map(g => g.label).join(", ")) : "nobody — every one of them is needed elsewhere"}${party.stays.length ? `<br><strong>Staying:</strong> ${esc(party.stays.map(s => `${s.label} (${s.why})`).join(", "))}` : ""}</div>
+      <div class="hint" style="margin:0 0 4px">What are they to do</div>
+      ${MISSION_KIND_IDS.map(k => {
+        const fit = canSendOn(who, k);
+        return `<button class="opt codex-merge-target" data-bandmission="${esc(k)}"${fit.ok ? "" : " disabled"}>${esc(MISSION_KINDS[k].label)} <span class="cost">${esc(fit.why)}</span></button>`;
+      }).join("")}
+      <div class="hint" style="margin:10px 0 4px">Where</div>
+      <select id="bandmission-where" style="width:100%"><option value="">— nowhere in particular —</option>
+        ${places.map(p => `<option value="${esc(p.id)}">${esc(p.name)}</option>`).join("")}</select>
+      <div class="hint" style="margin:10px 0 4px">The charge — in your words</div>
+      <input id="bandmission-charge" type="text" placeholder="say what they are to do" style="width:100%" autocomplete="off">
+      <div class="hint" style="margin:10px 0 4px">What goes with them <span class="hint">(optional — and the first thing lost if it goes wrong)</span></div>
+      <input id="bandmission-stake" type="text" placeholder="eleven crystal, the sealed letter…" style="width:100%" autocomplete="off">
+    </div>
+    <div class="help-foot" style="flex:0 0 auto"><span class="hint" id="bandmission-hint">Pick what they are to do.</span><button class="btn" id="help-close">Cancel</button></div></div>`;
+  document.body.appendChild(pop);
+  const close = () => pop.remove();
+  pop.addEventListener("click", ev => { if (ev.target === pop) close(); });
+  document.getElementById("help-close").onclick = close;
+  for (const el of pop.querySelectorAll("[data-bandmission]")) el.onclick = () => {
+    const destination = document.getElementById("bandmission-where")?.value || null;
+    const stake = String(document.getElementById("bandmission-stake")?.value || "").trim() || null;
+    // ⛔ the engine sends them, and parts those of them at your side — the one function the tests drive too
+    const r = sendBandOnMission(character, bandId, { kind: el.dataset.bandmission, charge: document.getElementById("bandmission-charge")?.value || "",
+      destination, stake, worldCount: worldCount(), placeName: destination ? nameOfPlace(destination) : null, nameOf });
+    if (!r.ok) { const w = String(r.why || "that could not be sent"); document.getElementById("bandmission-hint").textContent = w.charAt(0).toUpperCase() + w.slice(1) + (/[.!?]$/.test(w) ? "" : "."); return; }
+    close();
+    saveCharacter(character);
+    renderBandsTab();
+    alert(`${band.name || "The band"} is ${r.said}. ${stake ? `${stake} goes with them.` : "They go empty-handed."}`);
+  };
+  document.getElementById("bandmission-charge")?.focus();
+}
+
 function showErrandPicker(npcId) {
   document.getElementById("help-pop")?.remove();
   const ladder = CONTENT.rules.subAttributeLadder;
@@ -16223,7 +16267,8 @@ function renderJobsTab(selId = null) {
     const pc = (x) => Math.round(100 * (Number(x) || 0));
     const st = { working: "working", stalled: "stalled", problem: "in trouble" }[a.status] || a.status || "working";
     const steps = o?.steps ? `${Math.min(a.progress || 0, o.steps)} of ${o.steps} steps` : `${a.progress || 0} step${(a.progress || 0) === 1 ? "" : "s"} of headway`;
-    const how = !o ? "" : o.how === "effort" ? "by plain effort — nothing of theirs is made for this"
+    const how = !o ? "" : o.how === "band" ? `those of the band who went, as a team, ${JOB_WORK[o.family] || o.family} above all`   // ⛔ CCODE-453
+      : o.how === "effort" ? "by plain effort — nothing of theirs is made for this"
       : o.how === "uncovered" ? `nothing of theirs can ${JOB_WORD[o.family] || "do this"}` : `${JOB_WORD[o.family] || o.family}${o.craft ? ` with ${o.craft}` : ""}`;
     return `<div class="charge-row">
       ${face ? `<img class="charge-face" src="${esc(face)}" alt="${esc(a.npcName || "")}" data-lightbox="figure" data-regen-kind="figure" data-regen-subject="${esc(`whois-${a.npcId}`)}" loading="lazy" title="Open it — draw again, or keep this look" onerror="this.style.visibility='hidden'">`
@@ -16435,20 +16480,9 @@ function renderPartyTab() {
 
 /** A band's people as the dice see them — the named with their sheets, the hands as one member each — and nobody out on a job. */
 function bandMembersOf(band) {
-  const ctx = obCtx();
-  const out = [];
-  (band?.contingents || []).forEach((c, i) => {
-    if (!c) return;
-    if (c.npcId) {
-      if (awayOnJob(character, c.npcId) || workAt(character, c.npcId)) return;   // CCODE-450: nor anyone at standing work
-      const p = jobPersonFor(character, c.npcId, ctx);
-      if (p) out.push({ ...p, roleFams: (c.does || []).map(String) });
-    } else {
-      const u = jobUnitFor(character, band.id, i, ctx);
-      if (u && !workAt(character, u.id)) out.push({ ...u, label: c.kind || "hands" });
-    }
-  });
-  return out;
+  // ⛔ CCODE-453: who is with a band is ONE rule, the engine's (the mission's roll reads it too) — and those who went on a mission are
+  // not here to take its turn; those who stayed are
+  return bandTeamOf(character, band, obCtx()).filter(m => !onMissionWith([band], m.id));
 }
 function bandTurn(band) {
   const members = bandMembersOf(band);
@@ -16460,6 +16494,7 @@ function bandTurn(band) {
 function bandTurnHtml(u) {
   const band = (character.bands || []).find(b => b && b.id === u.id);
   if (!band) return "";
+  const awayLine = band.mission ? `<p class="hint">Away on a mission: ${esc(band.mission.said || band.mission.kind)} — those who went take no turn here.</p>` : "";   // ⛔ CCODE-453
   const { turn: t } = bandTurn(band);
   const rows = FIGHT_FAMILIES.filter(f => (t.rows[f] || []).length).map(f => {
     const doers = t.rows[f];
@@ -16468,7 +16503,7 @@ function bandTurnHtml(u) {
       <div class="ob-doers">${doers.map(d => `<div class="ob-doer"><span class="ob-dn">${esc(d.unit ? `${d.n} ${d.name}` : d.name)}<small>${d.craft ? esc(d.craft) : "no craft for it"}${d.role ? " · their band role" : ""}</small></span>${oddsBarHtml(d.odds)}<span class="ob-pc">${d.chance != null ? d.chance + "%" : "—"}</span></div>`).join("")}</div>
       <div class="ob-expect"><b>${(t.expected[f] || 0).toFixed(1)}</b> of ${heads} ${esc(FAMILY_LANDS[f])}</div></div>`;
   }).join("");
-  return `<details class="ob-turn" open><summary>One turn of the band, by stance — <b>${esc(t.stance)}</b></summary>
+  return `<details class="ob-turn" open><summary>One turn of the band, by stance — <b>${esc(t.stance)}</b></summary>${awayLine}
     <div class="ob-controls">${stancePickHtml("data-band-stance", band.id, t.stance)}${obFoeSlider()}</div>
     <p class="hint">${esc(t.stance[0].toUpperCase() + t.stance.slice(1))}: the band ${esc(obTable()[t.stance].say)}. Everyone acts once; the stance decides how many do each thing, and each person takes what they are best at next to everyone else. The GM is told the stance.</p>
     <div class="ob-alloc">${rows || `<p class="hint">Nobody here can act this turn.</p>`}</div></details>`;
@@ -16493,7 +16528,7 @@ function renderLegionTab() {
   const rowOf = (band) => { const { members, turn } = bandTurn(band); return { band, t: turn, heads: members.reduce((a, m) => a + (m.isUnit ? m.n : 1), 0) }; };
   const cell = (v) => (v ? v.toFixed(1) : `<span class="ob-dot" aria-label="none"></span>`);
   const matrix = (rows, totalLabel) => `<div class="ob-matrix-wrap"><table class="ob-matrix"><thead><tr><th>Band</th><th>Heads</th><th>Stance</th>${FIGHT_FAMILIES.map(f => `<th class="c">${esc(FAMILY_LANDS[f])}</th>`).join("")}</tr></thead><tbody>
-    ${rows.map(r => `<tr><td>${esc(r.band.name || r.band.id)}</td><td>${r.heads}</td><td>${stancePickHtml("data-band-stance", r.band.id, r.t.stance)}</td>${FIGHT_FAMILIES.map(f => `<td class="c">${cell(r.t.expected[f])}</td>`).join("")}</tr>`).join("")}
+    ${rows.map(r => `<tr><td>${esc(r.band.name || r.band.id)}${r.band.mission ? ` <small class="hint">away</small>` : ""}</td><td>${r.heads}</td><td>${stancePickHtml("data-band-stance", r.band.id, r.t.stance)}</td>${FIGHT_FAMILIES.map(f => `<td class="c">${cell(r.t.expected[f])}</td>`).join("")}</tr>`).join("")}
     ${totalLabel ? `<tr class="total"><td>${esc(totalLabel)}</td><td>${rows.reduce((a, r) => a + r.heads, 0)}</td><td>—</td>${FIGHT_FAMILIES.map(f => `<td class="c">${rows.reduce((a, r) => a + (r.t.expected[f] || 0), 0).toFixed(1)}</td>`).join("")}</tr>` : ""}
     </tbody></table></div>`;
   const nm = (id) => (id === "player" ? character.name : (character.npcRegistry?.[id]?.name || CONTENT.npcs?.[id]?.name || id));
@@ -16555,7 +16590,7 @@ function renderBandsTab() {
       const atAHold = !!hereNow()?.id && (character.holdings || []).some(x => x && x.locationId === hereNow()?.id);
       return `<div class="codex-f" style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap"><strong>${r.n} ${esc(r.unitKind || "hands")}</strong>
         <span class="hint" style="flex:1 1 200px">${esc(r.what || "no charge written")}${r.verbs ? " · " + esc(r.verbs) : ""}${(r.wards || []).length ? ` · warded against ${esc(r.wards.join(", "))}` : ""}${kitWords ? ` · carrying ${esc(kitWords)}` : ""}</span>
-        <button class="opt" data-cg-edit="${esc(r.unitId)}" data-cg-index="${r.contingentIndex}" title="Name them and say what they do">What are they?</button>${atAHold && cgRec && !cgRec.npcId ? `
+        <button class="opt" data-cg-edit="${esc(r.unitId)}" data-cg-index="${r.contingentIndex}" title="Name them and say what they do">What are they?</button>${atAHold && cgRec && !cgRec.npcId && !onMissionWith(character.bands, `unit:${r.unitId}:${r.contingentIndex}`) ? `
         <button class="opt" data-cg-outfit="${esc(r.unitId)}" data-cg-index="${r.contingentIndex}" title="Hand them weapons, shields and armour from this hold's armory">Outfit</button>` : ""}</div>`;
     }
     const w = wherePerson(r, whereOpts);
@@ -16571,6 +16606,8 @@ function renderBandsTab() {
         // most useful thing this row can say, and it is the thing that stops a player sending them twice.
         const job = r.id ? awayOnJob(character, r.id) : null;   // ⛔ CCODE-431: out on a job says so, as an errand does
         if (job) return `<span class="hint" style="width:100%">out on a job: "${esc(job.job?.label || "a job")}" — back day ${Math.floor((Number(job.backAtHours) || 0) / 24)}</span>`;
+        const bm = onMissionWith(character.bands, r.id)?.mission;   // ⛔ CCODE-453: they went — not those who stayed
+        if (bm) return `<span class="hint" style="width:100%">away with the band: ${esc(bm.said || bm.kind)}</span>`;
         const out = Object.values(character.worldState?.assignments || {})
           .find(x => x && x.npcId === r.id && x.status !== "done");
         if (!out) return "";
@@ -16578,7 +16615,7 @@ function renderBandsTab() {
         return `<span class="hint" style="width:100%">out: ${esc(k ? k.verb : "working")}${out.destination ? ` to ${esc(nameOfPlace(out.destination))}` : ""}${out.status === "problem" ? " — <strong>in trouble</strong>" : out.status === "stalled" ? " — stuck" : ""}</span>`;
       })()}
       <div class="opt-row" style="gap:6px;flex-wrap:wrap;width:100%">
-        ${r.kind === "person" && r.id ? `<button class="opt" data-band-send="${esc(r.id)}" title="Give them a charge and a place to take it">Send on an errand…</button>` : ""}
+        ${r.kind === "person" && r.id && !onMissionWith(character.bands, r.id) ? `<button class="opt" data-band-send="${esc(r.id)}" title="Give them a charge and a place to take it">Send on an errand…</button>` : ""}
         ${r.atSide
           ? `<button class="opt" data-band-part="${esc(r.id)}" title="They stay sworn — they stop walking with you">Send back to the band</button>`
           : `<button class="opt" data-band-bring="${esc(r.id)}"${gate?.ok ? "" : " disabled"} title="${esc(gate?.ok ? "They walk with you from here" : gate?.why || "")}">Bring to your side</button>`}
@@ -16694,6 +16731,9 @@ function renderBandsTab() {
         <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:4px">
           ${u.isLegion ? `<span class="hint">People join its BANDS, not the legion — that is what keeping their identity means.</span>` : `
           <button class="opt" data-band-recruit="${esc(u.id)}" title="Ask someone you know to stand in it — a far lower bar than travelling with you">Ask someone to join…</button>
+          ${(() => { const b453 = (character.bands || []).find(x => x && x.id === u.id); return b453?.mission   // ⛔ CCODE-453: a band on a mission
+            ? `<span class="hint">away on a mission: ${esc(b453.mission.said || b453.mission.kind)}</span> <button class="opt" data-band-recall="${esc(u.id)}" title="Call them home — the charge ends where it stands">Recall them</button>`
+            : `<button class="opt" data-band-mission="${esc(u.id)}" title="They go as a band on one of the seven errands — whoever walks with you, keeps a post or carries a charge of their own stays">Send on a mission…</button>`; })()}
           <button class="opt" data-band-muster="${esc(u.id)}" title="Raise hands at a place you hold, up to what it can feed">Raise hands at a hold…</button>`}
           ${u.called
             ? `${UNIT_POSTURES.filter(p => p !== u.posture).map(p => `<button class="opt" data-unit-posture="${esc(u.id)}" data-posture="${esc(p)}">${p === "dispersed" ? "Disperse to forage" : "Make camp"}</button>`).join("")}
@@ -16744,6 +16784,13 @@ function renderBandsTab() {
     saveCharacter(character); renderBandsTab();
   };
   for (const b of app.querySelectorAll("[data-band-send]")) b.onclick = () => showErrandPicker(b.dataset.bandSend);
+  // ⛔ CCODE-453: a band on a mission, and home again
+  for (const b of app.querySelectorAll("[data-band-mission]")) b.onclick = () => showBandMissionPicker(b.dataset.bandMission);
+  for (const b of app.querySelectorAll("[data-band-recall]")) b.onclick = () => {
+    const r = endBandMission(character, b.dataset.bandRecall, { why: "recalled" });
+    if (!r.ok) { alert(r.why); return; }
+    saveCharacter(character); renderBandsTab();
+  };
   // ⛔ CCODE-404 — the three doors the player never had: join a unit, raise hands at a hold, raise the unit itself.
   for (const b of app.querySelectorAll("[data-band-recruit]")) b.onclick = () => showBandRecruitPicker(b.dataset.bandRecruit);
   for (const b of app.querySelectorAll("[data-band-muster]")) b.onclick = () => showBandMusterPicker(b.dataset.bandMuster);

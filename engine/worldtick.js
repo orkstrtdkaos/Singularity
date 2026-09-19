@@ -54,7 +54,7 @@ import { enterDeathState, deepenDeaths, deathDepth, isRetrievable, resolveRetrie
 import { absoluteWorldDay, worldDayAt, worldCount, readClock, positionedPlace } from "./worldtime.js";
 import { voyageTick, whereaboutsOf } from "./carriage.js";   // ⛔ B6b: a voyage arrives on world time, and where she is now is where she can be raided
 import { advanceAssignment, progressAgainst, problemCost } from "./assignments.js"; // SNG-191 §4: the world advances delegated work
-import { rollErrands, workCraftsOf, workDayChance, workHeads } from "./jobs.js";   // ⛔ CCODE-428: …by the job's own dice · CCODE-450: standing work
+import { rollErrands, workCraftsOf, workDayChance, workHeads, bandMissionOutcome } from "./jobs.js";   // ⛔ CCODE-428: …by the job's own dice · CCODE-450: standing work
 import { tickWork, workMods, workTable, workersAt } from "./holdwork.js";   // ⛔ CCODE-450
 import { payAt, saidPaid } from "./money.js";   // ⛔ CCODE-450: those at standing work are paid, in the money of the hold's place
 import { buildFunctionIndex } from "./functions.js";     // the verb → family index the dice read a person's crafts through
@@ -350,6 +350,7 @@ export async function advanceDelegatedWork({ character, content, advanceAssignme
       worldCount: count, intervalHours: ASSIGN_INTERVAL_HOURS, rng });
     const statusUpdates = [];
     const moved = [];
+    const bandNews = [];   // ⛔ CCODE-453: what a band's mission cost it, said after the charge's own line
     // ⛔ CCODE-428 — ONE STATUS LINE PER PERSON, the most telling of their charges this tick. Edvar Crane carries two of Silas's, and the
     // second line simply overwrote the first. What it cost outranks what the dice said; a pass that WROTE its own line (a model, a stub)
     // keeps it on top, as it always did.
@@ -391,6 +392,8 @@ export async function advanceDelegatedWork({ character, content, advanceAssignme
           noteOnce(a.npcId, cost.line, 5);
         }
       }
+      // ⛔ CCODE-453 — A BAND ON A MISSION: home when it is done; in trouble it bleeds, and stays out
+      if (a.bandId) bandNews.push(...bandMissionOutcome(character, a, outcome, { content }));
       moved.push({ a, outcome, note: adv.note, cost, rolled: !!adv.rolled });
       noteOnce(a.npcId, adv.note, adv.rolled ? (NOTE_RANK[outcome] || 1) : 6);
     }
@@ -413,6 +416,7 @@ export async function advanceDelegatedWork({ character, content, advanceAssignme
         else if (m.outcome === "done") news.push(`${m.a.npcName} has finished ${m.a.charge}.`);
       }
     }
+    news.push(...bandNews);
     for (const [npcId, n] of noteFor) statusUpdates.push({ op: "update", npcId, statusNote: smartClamp(n.text, 200) });
     if (statusUpdates.length) applyNpcUpdates(character, statusUpdates, { day: currentDay, worldDay: absoluteWorldDay(now) });   // CCODE-385: stamped
     // ⚠️ RETURN WHAT MOVED, NOT WHAT WAS WORTH SAYING. Inferring "did anything happen" from "was there

@@ -987,10 +987,41 @@ export function callCostOf(bands, unit, { cfg = {}, wagePerHand = null, trainedA
 /** ⛔ CALL THEM TOGETHER: the moment a plan becomes a unit in the field. It takes a PLACE and a POSTURE because that is what being in
  *  the field means, and it refuses a posture the rules do not name. ⚠️ The cost is charged by the CALLER, which holds the purse — this
  *  records what was paid so the receipt is on the unit and not only in a log. Pure over `bands`. */
+/** ⛔ CCODE-453 — THE BAND DIALS, ONE BUILDER FOR THE APP AND THE TICK: the skill battle's melee block, Aevi's authored `rules.martial`
+ *  (CCODE-409b: "twelve band dials, each now a ruling with a reason"), and the ladders Erik ruled in `resolution.json`. This was `meleeCfg`
+ *  in app.js alone — so a band bled in the world tick (a mission gone wrong) would have bled on the defaults while the app used hers. Pure. */
+export function bandDialsOf(content) {
+  const r = content?.rules || {};
+  const martial = Object.fromEntries(Object.entries(r.martial || {}).filter(([k]) => !k.startsWith("_") && !["note", "id", "kind", "schemaVersion"].includes(k)));
+  return {
+    ...(content?.skillBattle?.engine?.melee || {}),
+    ...martial,
+    ...(r.capabilityByTier ? { capabilityByTier: r.capabilityByTier } : {}),
+    ...(r.attentionByTier || r.arcResponse?.attentionByTier ? { attentionByTier: r.attentionByTier || r.arcResponse.attentionByTier } : {}),
+  };
+}
+
+/** ⛔ CCODE-453 — THE BAND SOMEONE WENT WITH ON A MISSION, or null: a person by id, a band's hands as `unit:<band>:<i>`. A mission names
+ *  who went (`mission.went`) — those who stayed (at your side, on a charge of their own, at their post) are not away; a mission that names
+ *  nobody is the whole band. Pure. */
+export function onMissionWith(bands, memberId) {
+  const key = String(memberId || "");
+  if (!key) return null;
+  for (const b of Array.isArray(bands) ? bands : []) {
+    if (!b?.mission) continue;
+    const went = Array.isArray(b.mission.went) ? b.mission.went.map(String) : contingentsOf(b).map((c, i) => (c.npcId ? String(c.npcId) : `unit:${b.id}:${i}`));
+    if (went.includes(key)) return b;
+  }
+  return null;
+}
+
 export function callUnit(bands, id, { day = 0, locationId = null, posture = "camped", paid = 0 } = {}) {
   const list = Array.isArray(bands) ? bands : [];
   const i = list.findIndex(b => b && String(b.id) === String(id));
   if (i < 0) return { ok: false, why: "no such unit" };
+  if (list[i].mission) return { ok: false, why: `${list[i].name || id} is away on a mission — recall them first` };   // CCODE-453
+  const awayPart = legionParts(list, list[i]).find(p => p && p.mission);   // …and a legion is not whole while one of its bands is away
+  if (awayPart) return { ok: false, why: `${awayPart.name || awayPart.id}, one of its bands, is away on a mission — recall them first` };
   if (list[i].called) return { ok: false, why: `${list[i].name || id} is already called` };
   if (!UNIT_POSTURES.includes(String(posture))) return { ok: false, why: `a unit is ${UNIT_POSTURES.join(" or ")}, not ${posture}` };
   const unit = { ...list[i], called: { day: num(day, 0), paid: Math.max(0, num(paid, 0)) },

@@ -20,13 +20,14 @@ export function ensureAssignments(worldState) {
 
 /** Record a delegation. Keyed by npcId + charge so re-delegating the same charge UPDATES rather than
  *  duplicating (idempotent). A charge with no person, or no charge, is not an assignment. */
-export function addAssignment(worldState, { npcId, npcName, charge, targetEventId = null, kind = null, destination = null, stake = null } = {}, worldCount = null) {
-  if (!npcId || !charge) return null;
+export function addAssignment(worldState, { npcId, npcName, charge, targetEventId = null, kind = null, destination = null, stake = null, bandId = null } = {}, worldCount = null) {
+  // ⛔ CCODE-453: a BAND may carry a charge as a band — the assignment names it instead of a person, and the dice roll its people as a team
+  if ((!npcId && !bandId) || !charge) return null;
   const a = ensureAssignments(worldState);
-  const id = `${npcId}::${slugCharge(charge)}`;
+  const id = `${npcId || `band:${bandId}`}::${slugCharge(charge)}`;
   const prev = a[id];
   a[id] = {
-    id, npcId, npcName: npcName || prev?.npcName || npcId,
+    id, npcId: npcId || null, ...(bandId ? { bandId: String(bandId) } : {}), npcName: npcName || prev?.npcName || npcId || bandId,
     charge: smartClamp(String(charge), 120),
     targetEventId: targetEventId || prev?.targetEventId || null,
     // ⛔ SNG-541 §2 — WHAT A MISSION NEEDS THAT AN ASSIGNMENT DOES NOT HAVE. `kind` is the mechanism (one of the
@@ -43,6 +44,17 @@ export function addAssignment(worldState, { npcId, npcName, charge, targetEventI
     lastMovedWorldCount: worldCount
   };
   return a[id];
+}
+
+/** ⛔ CCODE-453 — CALL A BAND BACK FROM ITS MISSION: the charge ends where it stands, and the band is home. Mutates. */
+export function endBandMission(character, bandId, { why = "recalled" } = {}) {
+  const band = (character?.bands || []).find(b => b && String(b.id) === String(bandId));
+  if (!band?.mission) return { ok: false, why: "they are not away on a mission" };
+  const ws = character.worldState || {};
+  const a = ws.assignments?.[band.mission.assignmentId];
+  if (a && a.status !== "done") { a.status = "done"; a.endedBy = why; }
+  delete band.mission;
+  return { ok: true };
 }
 
 /** ⛔ R25b — THE PEOPLE CURRENTLY CARRYING SOMETHING FOR YOU. ⚠️ DISTINCT PEOPLE, NOT CHARGES: Silas's
@@ -118,7 +130,7 @@ export function assignmentsForGM(worldState, { ladder = null, character = null }
   const list = Object.values(worldState?.assignments || {});
   if (!list.length) return null;
   const lines = list.map(a =>
-    `- ${a.npcName} — ${a.charge} (${a.status}${a.progress ? `, ${a.progress} step${a.progress === 1 ? "" : "s"} in` : ""})${a.targetEventId ? ` [working the ${String(a.targetEventId).replace(/_/g, " ")}]` : ""}`
+    `- ${a.npcName}${a.bandId ? " (a band of yours, gone as a band)" : ""} — ${a.charge} (${a.status}${a.endedBy ? `, ${a.endedBy}` : ""}${a.progress ? `, ${a.progress} step${a.progress === 1 ? "" : "s"} in` : ""})${a.targetEventId ? ` [working the ${String(a.targetEventId).replace(/_/g, " ")}]` : ""}`
   );
   // ⛔ R25c — THE STANDING THAT GOVERNS THE WORK, WHERE THE WORK IS. Rapport 18 and 20 are STATES, and a
   // state nobody is told about does nothing: these change how the GM narrates a delegate's absence, which
@@ -225,8 +237,10 @@ export function problemCost(assignment, { rng = Math.random } = {}) {
   const where = assignment?.destination || null;
   // ⛔ A STAKE THAT WENT OUT AND DID NOT COME BACK IS THE FIRST AND TRUEST COST, for any kind that carried one.
   if (stake) {
+    // ⛔ CCODE-453: a BAND in trouble stays out, so it is not "back" — the stake is what it lost
     return { kind: assignment.kind, lost: stake, standing: 0,
-      line: `${who} is back. ${stake} is not.${where ? ` They say it went at ${where}.` : ""}` };
+      line: assignment?.bandId ? `${who} lost ${stake} on the way. They are still out.`
+        : `${who} is back. ${stake} is not.${where ? ` They say it went at ${where}.` : ""}` };
   }
   // ⚠️ OTHERWISE THE COST IS THE ONE THE TABLE NAMES FOR THAT ERRAND — and each is a thing already tracked.
   switch (assignment.kind) {

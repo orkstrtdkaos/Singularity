@@ -36,6 +36,14 @@ export function workOf(holding) { return holding?.work && typeof holding.work ==
 export function workersAt(holding) { return Object.entries(workOf(holding)).flatMap(([k, ids]) => arr(ids).map(id => [k, String(id)])); }
 
 /** WHO IS BUSY: the hold and the work someone is put to, or null. A unit is `unit:<band>:<index>`, as the Jobs tab names hands. Pure. */
+/** ⛔ CCODE-453 — WHERE SOMEONE HAS A POST: the hold they keep, guard or crew, or null. Standing work refuses them, and a band's mission
+ *  leaves them at it. Pure. */
+export function postedAt(character, id) {
+  const key = String(id || "");
+  if (!key) return null;
+  return arr(character?.holdings).find(x => x && (String(x.steward || "") === key || arr(x.garrison).map(String).includes(key) || arr(x.crew).map(String).includes(key))) || null;
+}
+
 export function workAt(character, id) {
   const key = String(id || "");
   if (!key) return null;
@@ -65,7 +73,7 @@ export function assignWork(character, holdId, kind, id, { table = null } = {}) {
   const busy = workAt(character, id);
   if (busy) return { ok: false, why: `already ${String(T.kinds[busy.kind]?.label || busy.kind).toLowerCase()} at ${busy.holdName}` };
   // a keeper, a guard on a garrison and a crew hand already have their post
-  const posted = arr(character?.holdings).find(x => x && (String(x.steward || "") === String(id) || arr(x.garrison).map(String).includes(String(id)) || arr(x.crew).map(String).includes(String(id))));
+  const posted = postedAt(character, id);
   if (posted) return { ok: false, why: `already posted at ${posted.name || "a hold"} — a keeper, a guard or a hand has their post` };
   h.work = { ...workOf(h), [kind]: [...arr(workOf(h)[kind]).map(String), String(id)] };
   return { ok: true };

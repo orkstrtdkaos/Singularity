@@ -17,7 +17,7 @@
 // posture is being AT YOUR SIDE. The two are independent, which is why Silas's save read as broken: six sworn, nobody beside him.
 //
 // PURE. Every function reads the character and content and returns data; the writers stay `recruit`/`partCompany` in company.js.
-import { contingentsOf, bandCan, bandStrength, resolvedUnit, legionParts, leaderOf, leaderBonusOf, kitSummary } from "./melee.js";   // CCODE-405/406 · CCODE-445: a legion reads through its parts, and its leader is priced
+import { contingentsOf, bandCan, bandStrength, resolvedUnit, legionParts, leaderOf, leaderBonusOf, kitSummary, onMissionWith } from "./melee.js";   // CCODE-405/406 · CCODE-445: a legion reads through its parts, and its leader is priced
 import { unitCarriedSubstrate } from "./substrate.js";   // CCODE-408: what it carries that moves the ground
 import { activeCompany } from "./company.js";
 import { companyPlaces } from "./ladder.js";
@@ -122,6 +122,7 @@ export function unitsOf(character, { cfg = null, content = null, worldDay = null
       contingents: resolvedContingentsFor(all, b, lopts), aurasOff: character?.aurasOff || null }),
     formedFrom: arr(b.formedFrom).map(String),   // ⛑ NO LONGER EMPTY: the bands this legion is formed from (CCODE-405)
     stance: ["cautious", "balanced", "aggressive"].includes(String(b.stance)) ? String(b.stance) : "balanced",   // ⛔ CCODE-448: how its turn is cut
+    mission: b.mission && typeof b.mission === "object" ? { ...b.mission } : null,   // ⛔ CCODE-453: away, and on what
     parts: legionParts(all, b).map(p => ({ id: String(p.id), name: p.name || String(p.id), condition: p.condition || "fresh" })),
     // ⛔ ERIK'S LEGION TAG — "they gain a legion tag... which legion are they in". Set on a band that stands in one, null otherwise.
     inLegion: b.inLegion ? String(b.inLegion) : null,
@@ -263,6 +264,8 @@ function dayWord(days) {
 export function canBringForward(character, row, { ladder = null } = {}) {
   if (!row || row.kind !== "person") return { ok: false, why: "hands stay with their band" };
   if (row.atSide) return { ok: false, why: `${row.name} is already at your side` };
+  const away = onMissionWith(character?.bands, row.id);   // ⛔ CCODE-453: those who went — not those who stayed
+  if (away) return { ok: false, why: `${row.name} is away with ${away.name || "the band"} on a mission` };
   const places = ladder ? companyPlaces(ladder, character) : null;
   const taken = activeCompany(character).length;
   if (places != null && taken >= places) {
@@ -325,6 +328,14 @@ export function rosterForGM(character, opts = {}) {
       + (here.length ? "" : " · none of them at your side")
       + (kit.length ? ` · carrying ${kit.map(k => `${k.n} ${k.n === 1 ? k.one : k.many}`).join(", ")}` : "")
       + (stanceSaid ? ` · its stance: ${stanceSaid}` : "")
+      + (u.mission ? (() => {   // ⛔ CCODE-453: where it went, and who went
+        const went = new Set((u.mission.went || []).map(String));
+        const gone = [...named.filter(r => went.has(String(r.id))).map(r => r.name)];
+        const hands = mine.filter(r => r.kind === "hands" && went.has(`unit:${u.id}:${r.contingentIndex}`)).reduce((a, r) => a + r.n, 0);
+        if (hands) gone.push(`${hands} hands`);
+        // ⚠️ NOT "the band is not here": those who stayed stand where this same line places them. Only the ones who went are away.
+        return ` · AWAY ON A MISSION: ${u.mission.said || u.mission.kind}${gone.length ? ` — gone: ${gone.join(", ")}, who are not here` : ""}; the band cannot be called until they are back`;
+      })() : "")
       + (u.travelers.length ? ` · travelers who chose to join: ${u.travelers.map(t => t.name).join(", ")} (players' characters — never voice or command them)` : "");
   });
 }

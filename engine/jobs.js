@@ -30,12 +30,12 @@ import { payAt, earnAt, saidPaid, saidEarned, priceHere } from "./money.js";   /
 import { addItem } from "./inventory.js";
 import { recordDeed } from "./reputation.js";
 import { applyLevelUps } from "./progression.js";
-import { addContingent, contingentsOf, bloodBand } from "./melee.js";   // CCODE-431: a band's hands go, and come back fewer if it cost them
-import { ensureJobs, dueJobs, landJob, JOB_FAMILIES } from "./jobstate.js";
+import { addContingent, contingentsOf, bloodBand, bloodUnit, bandDialsOf, bandCan, onMissionWith } from "./melee.js";   // CCODE-431: a band's hands go, and come back fewer if it cost them · CCODE-453: a band's mission
+import { ensureJobs, dueJobs, landJob, JOB_FAMILIES, awayOnJob } from "./jobstate.js";
 import { smartClamp } from "./namematch.js";
-import { MISSION_KINDS } from "./assignments.js";   // ⛔ CCODE-428: an errand's kind names the family it wants
+import { MISSION_KINDS, addAssignment, canSendOn } from "./assignments.js";   // ⛔ CCODE-428: an errand's kind names the family it wants · CCODE-453: a band sent
 import { familiesFromEvidence } from "./combatants.js"; // …and a standing charge's own words name its family
-import { workAt, workTable } from "./holdwork.js";   // ⛔ CCODE-450: whoever is at standing work is nobody else's
+import { workAt, workTable, postedAt } from "./holdwork.js";   // ⛔ CCODE-450: whoever is at standing work is nobody else's
 import { applyRaise, returnRaiseGoods } from "./holdings.js";   // ⛔ CCODE-452: a raise done, or its materials back
 
 /** The five ways a roll lands, in the resolver's own words, best first. */
@@ -432,6 +432,8 @@ export function jobPoolOf(character, ctx = {}) {
   const opts = { content, worldDay };
   for (const r of atSideRows(character, opts)) if (r.id) add(r.id, here, "at your side");
   for (const r of poolRows(character, opts)) {
+    // ⛔ CCODE-453: whoever went with their band on a mission is not here to send — those who stayed are
+    if (onMissionWith(character?.bands, r.id || unitMemberId(r.unitId, r.contingentIndex))) continue;
     // ⛔ CCODE-431: a band's hands — one member of a team, `n` of them
     if (!r.id) { if (r.kind === "hands") { const u = jobUnitFor(character, r.unitId, r.contingentIndex, ctx); if (u && !seen.has(u.id) && !workAt(character, u.id)) { seen.add(u.id); out.push(u); } } continue; }
     // a keeper stands at the hold they keep — that is where a job would send them FROM
@@ -723,6 +725,7 @@ export const ERRAND_DEFAULTS = {
   level: 10, perStage: 5, maxRolls: 10,
   steps: { word: 1, escort: 2, trade: 2, treat: 2, watch: 3, seek: 3, work: 3 },
   outcome: { crit_success: "progress", success: "progress", partial: "progress", failure: "stall", crit_failure: "problem" },
+  bandTroubleTide: -0.5,   // ⛔ CCODE-453: a band whose mission goes wrong bleeds as after a clash lost by this much (melee's tide)
 };
 function errandRules(rules = {}) {
   const e = rules?.jobs?.errand;
@@ -746,12 +749,149 @@ function errandLevel(assignment, { worldState = null, rules = {} } = {}) {
   return Math.max(1, Math.round(num(E.level, 10) + stage * num(E.perStage, 5)));
 }
 
+/** ⛔ CCODE-453 — WHY ONE OF A BAND IS NOT WITH IT, or null when they are. A band's TURN asks what it always did: out on a job, or at
+ *  standing work (hands too). A MISSION (`leaving`) asks more, because the band goes somewhere: whoever walks at your side stays there
+ *  (send them back to the band first — nobody is parted from you in silence), whoever carries a charge of their own carries on, and a
+ *  keeper, a guard or a crew hand keeps their post. ⚑ Measured on Silas: of the Fell Pell's six, Pell keeps two holds and walks with
+ *  him, Calvar stands its garrison, Fendt keeps the Threshold Post and has his own charge — three go. Pure. */
+export function bandMemberAway(character, band, c, i, { leaving = false } = {}) {
+  if (!c) return "not there";
+  if (!c.npcId) { const w = workAt(character, unitMemberId(band?.id, i)); return w ? `at work at ${w.holdName}` : null; }
+  const id = String(c.npcId);
+  if (awayOnJob(character, id)) return "out on a job";
+  const w = workAt(character, id);
+  if (w) return `at work at ${w.holdName}`;
+  if (!leaving) return null;
+  if (activeCompany(character).some(m => String(m.npcId) === id) || (character?.companions || []).some(x => String(x?.id || x) === id)) return "at your side";
+  if (Object.values(character?.worldState?.assignments || {}).some(a => a && a.status !== "done" && String(a.npcId) === id)) return "on a charge of their own";
+  const post = postedAt(character, id);
+  return post ? `keeping their post at ${post.name || "a hold"}` : null;
+}
+
+/** ⛔ CCODE-453 — WHO OF A BAND IS WITH IT, as the Jobs tab's team members: `bandMemberAway` decides, so the band's turn on the Bands tab
+ *  and a mission's roll in the world tick read ONE rule (the mission with `leaving`). People carry the families their place in the band
+ *  names (`roleFams`); hands are labelled by what they are. Pure. */
+export function bandTeamOf(character, band, ctx = {}, { leaving = false, only = null } = {}) {
+  const out = [];
+  (band?.contingents || []).forEach((c, i) => {
+    if (!c) return;
+    // `only`: exactly these (a mission's `went`); otherwise whoever is not away by the rule
+    if (only ? !only.has(c.npcId ? String(c.npcId) : unitMemberId(band.id, i)) : bandMemberAway(character, band, c, i, { leaving })) return;
+    try {
+      if (c.npcId) {
+        const p = jobPersonFor(character, c.npcId, ctx);
+        if (p) out.push({ ...p, roleFams: (c.does || []).map(String) });
+      } else {
+        const u = jobUnitFor(character, band.id, i, ctx);
+        if (u) out.push({ ...u, label: c.kind || "hands" });
+      }
+    } catch (err) { console.warn("[jobs] a band member could not be read, and is not counted present:", err?.message); }
+  });
+  return out;
+}
+
+/** ⛔ CCODE-453 — WHO GOES ON A MISSION AND WHO STAYS, said before anyone is sent: `goes` [{ id, label, n }], `stays` [{ id, label, why }],
+ *  and `does` — what THOSE WHO GO can do (`bandCan` over their contingents, kit included), which is what the mission's kind is judged on:
+ *  a band whose only knower walks at your side is not sent to seek. The labels are the caller's (`nameOf` a person's id); hands are
+ *  "12 spears". Pure. */
+export function bandMissionParty(character, band, { nameOf = (id) => id } = {}) {
+  const goes = [], stays = [], going = [];
+  contingentsOf(band).forEach((c, i) => {
+    if (!(c.n > 0)) return;
+    const label = c.npcId ? nameOf(c.npcId) : `${c.n} ${c.kind || "hands"}`;
+    const id = c.npcId ? String(c.npcId) : unitMemberId(band.id, i);
+    const why = bandMemberAway(character, band, c, i, { leaving: true });
+    if (why) stays.push({ id, label, why }); else { goes.push({ id, label, n: c.n }); going.push(c); }
+  });
+  return { goes, stays, heads: goes.reduce((a, g) => a + g.n, 0), does: bandCan({ contingents: going }) };
+}
+
+/** ⛔ CCODE-453 — A BAND'S MISSION ROLLS AS A TEAM: its present people and its hands, on the mission kind's family (weighted two) and its
+ *  second (one) — `planJob`, the Jobs tab's own roll, so whoever in the band covers each need best is the one who rolls it. Pure. */
+export function bandMissionOdds(character, assignment, ctx = {}) {
+  const { content = {}, fnIndex = null, worldDay = null } = ctx;
+  const rules = content.rules || {};
+  const E = errandRules(rules);
+  const level = errandLevel(assignment, { worldState: character?.worldState, rules });
+  const kind = MISSION_KINDS[String(assignment?.kind || "").toLowerCase()] || MISSION_KINDS.work;
+  const steps = num(E.steps?.[assignment?.kind], 0) || null;
+  const location = assignment?.destination ? content.locations?.[assignment.destination] || null : null;
+  const band = (character?.bands || []).find(b => b && String(b.id) === String(assignment?.bandId));
+  // those who WENT roll it — named when they were sent; a mission that names nobody is whoever is free to leave
+  const went = Array.isArray(band?.mission?.went) ? new Set(band.mission.went.map(String)) : null;
+  const team = band ? bandTeamOf(character, band, { content, worldDay }, went ? { only: went } : { leaving: true }) : [];
+  if (!team.length) {
+    const d = craftOdds({}, { attribute: "practical", rank: 1, name: "plain effort" }, { rules, opposed: jobOpposition(level, rules), location, source: "the mission" }).odds;
+    return { dist: d, shares: sharesOf(d, E), level, family: kind.wants, craft: null, how: "effort", person: null, steps };
+  }
+  const job = { id: assignment?.id || null, level, effort: 1, where: assignment?.destination || null,
+    needs: [{ family: kind.wants, weight: 2 }, ...(kind.also ? [{ family: kind.also, weight: 1 }] : [])] };
+  const plan = planJob(job, team, { rules, fnIndex, location });
+  return { dist: plan.dist, shares: sharesOf(plan.dist, E), level, family: kind.wants, craft: null, how: "band", person: null, steps };
+}
+
+/** ⛔ CCODE-453 — SEND A BAND ON A MISSION: one of the seven errand kinds, as a band. Refused, and says why, when there is no such band,
+ *  it is already away, it is called into the field (stand it down first), it stands empty, nobody of it is free to go (`bandMissionParty`
+ *  says who stays and why), the charge is unwritten, or what it can do does not fit the kind — `canSendOn`, the errand's own rule, on the
+ *  families of those who GO (`bandMissionParty`'s `does`). Nobody is parted from your side: who walks with you stays with you. `placeName` is the
+ *  destination as the player reads it. Mutates `character`. → { ok, assignment, said, party } | { ok: false, why } */
+export function sendBandOnMission(character, bandId, { kind, charge, destination = null, stake = null, worldCount = null, placeName = null, nameOf = undefined } = {}) {
+  const band = (character?.bands || []).find(b => b && String(b.id) === String(bandId));
+  if (!band) return { ok: false, why: "there is no such band" };
+  const name = band.name || String(bandId);
+  if (band.mission) return { ok: false, why: `${name} is already away on a mission` };
+  if (band.called) return { ok: false, why: `${name} is called into the field — stand them down first` };
+  const kindId = String(kind || "").toLowerCase();
+  const k = MISSION_KINDS[kindId];
+  if (!k) return { ok: false, why: "that is not a mission anyone can be sent on" };
+  const words = String(charge || "").trim();
+  if (!words) return { ok: false, why: "say what they are to do — the charge is yours to write" };
+  if (!(contingentsOf(band).reduce((a, c) => a + c.n, 0) > 0)) return { ok: false, why: `${name} stands empty — there is nobody to send` };
+  const party = bandMissionParty(character, band, nameOf ? { nameOf } : {});
+  if (!party.goes.length) return { ok: false, why: `nobody of ${name} is free to go — ${party.stays.map(s => `${s.label} is ${s.why}`).join("; ")}` };
+  const fit = canSendOn({ npcName: name, does: party.does }, kindId);   // judged on those who go
+  if (!fit.ok) return { ok: false, why: fit.why };
+  character.worldState = character.worldState || {};
+  const a = addAssignment(character.worldState, { bandId: band.id, npcName: name, charge: words, kind: kindId, destination: destination || null, stake: stake || null }, worldCount);
+  if (!a) return { ok: false, why: "that could not be sent" };
+  const said = `${k.verb}${destination ? ` to ${placeName || destination}` : ""} — ${smartClamp(words, 120)}`;
+  band.mission = { assignmentId: a.id, kind: kindId, destination: destination || null, said, went: party.goes.map(g => g.id) };
+  return { ok: true, assignment: a, said, party };
+}
+
+/** ⛔ CCODE-453 — WHAT A PASS OF A BAND'S MISSION DOES TO THE BAND. Done, it is home. In trouble it bleeds as a band does after a lost clash
+ *  (`bandTroubleTide`, on the band dials the app uses) and stays out; what went with it is gone, once; bled to nobody, the mission ends
+ *  there. Mutates `character`. → the lines the news says after the charge's own. */
+export function bandMissionOutcome(character, assignment, outcome, { content = {} } = {}) {
+  const band = (character?.bands || []).find(b => b && String(b.id) === String(assignment?.bandId));
+  if (!band) return [];
+  if (outcome === "done") { delete band.mission; return []; }
+  if (outcome !== "problem") return [];
+  const E = errandRules(content.rules || {});
+  assignment.stake = null;   // the problem's cost line has said it is lost; it is not lost twice
+  const bled = bloodUnit(character.bands, band.id, num(E.bandTroubleTide, -0.5), { cfg: bandDialsOf(content) });
+  if (!bled.ok) return [];
+  character.bands = bled.bands;
+  const now = character.bands.find(b => b && String(b.id) === String(band.id)) || band;
+  const left = contingentsOf(now).reduce((a, c) => a + c.n, 0);
+  const name = band.name || "The band";
+  const lines = [];
+  if (num(bled.lost, 0) > 0) lines.push(`${name} lost ${bled.lost} on it${left > 0 ? `; ${left} still out` : ""}.`);
+  if (left <= 0) {
+    assignment.status = "done"; assignment.endedBy = "lost";
+    delete now.mission;
+    lines.push(`Nobody of ${name} is left to carry it. The charge ends there.`);
+  }
+  return lines;
+}
+
 /** ⛔ CCODE-428 — AN ERRAND IS A ONE-NEED JOB for the one person carrying it, rolled on the job's own dice (`planJob`). A MISSION's need
  *  is its kind's family, or the kind's second one; a STANDING charge's (most of them) is the family its own words name, read by the
  *  stems that tell what a person is good for. Someone with no craft for it — or whom the sheet cannot build — works by plain effort.
  *  → { dist, shares, level, family, craft, how: "craft"|"effort"|"uncovered", person, steps } — the five outcomes of ONE roll, which the
  *  tick makes once per three days away. Pure. */
 export function errandOdds(character, assignment, ctx = {}) {
+  if (assignment?.bandId) return bandMissionOdds(character, assignment, ctx);   // ⛔ CCODE-453: a band rolls as a band
   const { content = {}, fnIndex = null, worldDay = null } = ctx;
   const rules = content.rules || {};
   const E = errandRules(rules);

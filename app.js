@@ -68,7 +68,7 @@ import { enterDeathState } from "./engine/death.js";
 // duplicated in this codebase, and each time the copies drifted before anyone noticed.
 wireDeathModel(DeathModel);
 import { carriageOf, voyageOf, isMoored, canSail, sailHolding, voyageLine, featureRuling, canBuildOn } from "./engine/carriage.js";
-import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mountsAt, healingAt } from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room · CCODE-430: a yard trains   // B6b: the holding that moves
+import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mountsAt, healingAt, quarteringOf } from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room · CCODE-430: a yard trains   // B6b: the holding that moves
 import { featureCost, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
 import { FIRE_TESTS, diffKeys } from "./engine/firetests.js";   // SNG-560: the parts that have never been used
@@ -170,7 +170,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.97";
+const APP_VERSION = "2.0.98";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -15723,6 +15723,15 @@ function renderBandsTab() {
   chrome(`<div class="screen" style="max-width:760px">
     ${characterTabBar("bands")}
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">${esc(rosterLine(character, opts))}</h3>
+      ${(() => { // ⛔ CCODE-435: where the hands with no home hold sleep — the barracks, and what the rest cost to quarter
+        const q = quarteringOf(character, holdCfgNow(), { martial: CONTENT.rules?.martial || {} });
+        if (!q.homeless) return "";
+        const cur = CONTENT.rules?.economy?.holdStore?.upkeepCurrency || "crystal";
+        const slept = Math.min(q.beds, q.homeless);
+        return `<div class="codex-f hint" data-quartering>${q.homeless} ${q.homeless === 1 ? "hand has" : "hands have"} no hold to keep them — ${q.beds
+          ? (q.quartered ? `${slept} sleep in your barracks, ${q.quartered} ${q.quartered === 1 ? "is" : "are"} quartered` : `all of them sleep in your barracks`)
+          : `you keep no barracks, so ${q.homeless === 1 ? "they are" : "all are"} quartered`}${q.quartered ? ` at ${q.perHead} ${esc(cur)} a head a pass (${q.cost} ${esc(cur)})` : ""}.</div>`;
+      })()}
       ${units.filter(u => !u.inLegion).length ? units.filter(u => !u.inLegion).map(u => `<div style="margin-top:10px">
         ${units.filter(x => !x.inLegion).length === 1 && !u.isLegion
           ? `<div class="hint">${esc(unitLine(u))}</div>`

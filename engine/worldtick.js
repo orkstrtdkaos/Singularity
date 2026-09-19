@@ -16,7 +16,7 @@ import { advanceSeeking } from "./seeking.js"; // CCODE-222: a reason for the en
 import { battleRound, synthesizeOpponentSheet } from "./skill_battle.js";   // CCODE-113: an arc is CONTESTED with the same dice the player rolls
 import { applyNpcUpdates } from "./npcs.js";
 import { activeCompany } from "./company.js";   // SNG-358: a holding's keeper must still be with you
-import { queueFeatureOffers, advanceHolding, holdingNews, unstewardedHoldings, takeHoldingEvents, CONDITIONS, tickStore, storeNews, advanceDebts, growHolding, holdingGround, holdingMeaningAura, healingAt } from "./holdings.js";
+import { queueFeatureOffers, advanceHolding, holdingNews, unstewardedHoldings, takeHoldingEvents, CONDITIONS, tickStore, storeNews, advanceDebts, growHolding, holdingGround, holdingMeaningAura, healingAt, chargeQuartering } from "./holdings.js";
 import { tickCaravans } from "./caravan.js";   // R49: the road runs itself, and can be robbed
 import { meaningDensity, peoplePresentAt } from "./substrate.js";   // R46b: what the pilgrims come for   // SNG-358: holdings ride the same world-gated pass
 import { commitGrowth } from "./npcsheet.js";   // ✅ R37: growth writes, on the tick
@@ -648,6 +648,9 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null, co
     for (const t of storeNews(h, st)) news.push(t);
     moved++;
   }
+  // ⛔ CCODE-435 (SNG-627 `housing`): hands with no home hold sleep in your barracks, or are quartered at a cost — once a pass, its own counter
+  for (const line of chargeQuartering(character, { cfg: content?.rules?.economy?.holdStore ? { ...content.rules.economy.holdStore, features: content.rules.economy.holdFeatures || null } : null,
+    martial: content?.rules?.martial || {}, worldCount: count, currency: content?.rules?.economy?.holdStore?.upkeepCurrency || "crystal" })) news.push(line);
   // ⚑ SPEC_world_guesses — THE RECORD MAY BE MISSING SOMETHING THE FICTION ALREADY SAID. Offered, never
   // written; at most one per hold per pass; a No is remembered.
   for (const o of queueFeatureOffers(character, { locations: content?.locations || {},

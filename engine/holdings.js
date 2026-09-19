@@ -24,7 +24,7 @@ import { contributionsOf } from "./combatants.js";   // SNG-541c / Erik: a defen
 import { regionDemand } from "./economy.js";       // Q8: a unit is worth what THIS Reach wants it for
 import { sheetFor as personSheetFor, tierOf as tierOfLevel, personRecordFor } from "./npcsheet.js";   // Q18 → v2 §1: the keeper's tier sets the FLOOR
 import { locationDensity } from "./substrate.js";   // Q18: the ground scales an enterprise's yield
-import { legionClash, contingentsFromPeople } from "./melee.js";
+import { legionClash, contingentsFromPeople, contingentsOf } from "./melee.js";
 import { isMoored, carriageOf } from "./carriage.js";   // ⛔ SPEC_mobile_holdings §4: moored is raidable, moving is not   // R46a: a detected raid is a FIGHT, resolved unattended
 import { smartClamp } from "./namematch.js";   // an evidence quote is prose — cut at a word, never mid-word
 import { isNetworkGate } from "./waygate.js";   // runner fees: a NETWORK gate near a relay post brings traffic
@@ -214,6 +214,68 @@ export function propertyAt(character, locationId, property, cfg = null) {
 
 /** ⛔ CCODE-434 (SNG-627 `healing`; Aevi: "somebody hurt can be brought here and get better") — WHERE YOU KEEP AN INFIRMARY. Pure. */
 export function healingAt(character, locationId, cfg = null) { return propertyAt(character, locationId, "healing", cfg); }
+
+/** ⛔ CCODE-435 — DOES THIS RECORD HOUSE A BAND? Aevi's barracks: "quarters are for the people who work the hold, barracks are for the
+ *  people it can send." ⚠️ THE TAG CANNOT SAY SO (Erik 2026-09-18: "the tag is what the engine reads"): `property: "housing"` is carried by
+ *  quarters, a longhouse, a keeper's hut, deck space and the barracks alike, and `residents: true` by four of them — reading that gave Silas
+ *  eighty band beds from keepers' huts and a longhouse, and he has no barracks. The WHO lives only in the barracks' own words. So a record
+ *  that authors `bandBeds` (the field the engine reads, on any kind — Aevi's to author) houses a band; until one does, ⚠️ the stand-in
+ *  names the one record that says "where a band is housed", and its variants. `typeof`, not `Number()`: an absent dial is not a value. */
+function housesABand(def) { return !!def && (typeof def.bandBeds === "number" || def.kind === "barracks" || def.variantOf === "barracks"); }
+
+/** ⛔ CCODE-435 — THE BEDS A FEATURE GIVES A BAND: its authored `bandBeds`, else `barracksBeds` — ⚠️ UNAUTHORED, twenty stand in: a band,
+ *  as `raiseBand` raises one. Pure. */
+export function bandBedsOf(feature, cfg = null, { martial = {} } = {}) {
+  const def = featureDef(feature?.kind, cfg);
+  if (!housesABand(def)) return 0;
+  const each = typeof def.bandBeds === "number" ? def.bandBeds : Number(martial.barracksBeds ?? 20);
+  return Math.max(0, Number(each) || 0) * Math.max(1, Number(feature.count) || 1);
+}
+
+/** ⛔ CCODE-435 (SNG-627 `housing`) — WHERE A BAND'S HANDS SLEEP, AND WHAT IT COSTS WHEN THEY HAVE NOWHERE. Erik: "Barracks house troops."
+ *  ⛑ Hands raised at a hold of yours LIVE there, up to what it can feed — the SAME bound the muster keeps (`handsCap` less its crew;
+ *  CCODE-404: "soldiers and workers eat the same bread"). Hands with NO home hold — recruits a job brought in (`from: "job"`), a band the
+ *  fiction raised (the GM's `raise` names no place), a hold since lost — and a hold's overflow are housed in your barracks, and beyond them
+ *  are QUARTERED, at `quarterPerHead` a head a pass — ⚠️ UNAUTHORED, one crystal stands in. A head that never said where it was raised was
+ *  raised where its band was (`band.from`). ⚠️ Not counted: a unit called into the field (it camps where it stands, and its call was paid),
+ *  hands out on a job (they are the job's), and the named, who have lives of their own. → { homeless, beds, quartered, perHead, cost }. Pure. */
+export function quarteringOf(character, cfg = null, { martial = {} } = {}) {
+  const holdOf = new Map();   // a hold's id, or the place it stands, → the hold
+  for (const h of character?.holdings || []) if (h) { holdOf.set(String(h.id), h); if (h.locationId && !holdOf.has(String(h.locationId))) holdOf.set(String(h.locationId), h); }
+  const atHold = new Map();
+  let homeless = 0;
+  for (const b of character?.bands || []) {
+    if (!b || b.called) continue;
+    for (const c of contingentsOf(b)) {
+      if (c.npcId || !(c.n > 0)) continue;
+      const home = holdOf.get(String(c.from || b.from || ""));
+      if (home) atHold.set(home, (atHold.get(home) || 0) + c.n); else homeless += c.n;
+    }
+  }
+  for (const [h, n] of atHold) homeless += Math.max(0, n - Math.max(0, handsCap(h, cfg) - (Array.isArray(h.crew) ? h.crew.length : 0)));
+  let beds = 0;
+  for (const h of character?.holdings || []) for (const f of featuresOf(h)) beds += bandBedsOf(f, cfg, { martial });
+  const quartered = Math.max(0, homeless - beds);
+  const perHead = Math.max(0, Number(martial.quarterPerHead ?? 1) || 0);
+  return { homeless, beds, quartered, perHead, cost: quartered * perHead };
+}
+
+/** ⛔ CCODE-435 — THE QUARTERING, PAID EACH PASS through the purse's one door, on its own three-day counter (`worldState.quarteredAtCount`).
+ *  A pass nobody can pay is SAID, and nothing is invented about what unpaid soldiers do. Mutates; → the lines to say. */
+export function chargeQuartering(character, { cfg = null, martial = {}, worldCount = null, currency = "crystal", everyHours = 72 } = {}) {
+  const ws = character?.worldState;
+  if (!ws || !Number.isFinite(Number(worldCount))) return [];
+  const last = Number(ws.quarteredAtCount);
+  if (Number.isFinite(last) && Number(worldCount) - last < everyHours) return [];
+  ws.quarteredAtCount = Number(worldCount);
+  const q = quarteringOf(character, cfg, { martial });
+  if (!q.cost) return [];
+  const r = debit(character, currency, q.cost, {});
+  const why = q.beds ? "found no bed in your barracks" : "have no barracks to sleep in";
+  return [r?.ok
+    ? `${q.quartered} of your hands ${why} and are quartered — ${q.cost} ${currency} this pass.`
+    : `${q.quartered} of your hands ${why} and are quartered, and this pass's ${q.cost} ${currency} could not be paid.`];
+}
 
 /** ⛔ CCODE-432 (SNG-627; Erik: "Stables can shorten journeys but can also house the mounts for cavalry") — WHERE YOU KEEP MOUNTS. Pure. */
 export function mountsAt(character, locationId, cfg = null) { return propertyAt(character, locationId, "mounts", cfg); }
@@ -1332,7 +1394,10 @@ export function musterCapacityOf(holding, cfg = null, { mustered = 0 } = {}) {
 /** Who lives here: quarters' capacity, the people at work, the watch, the keeper. */
 export function residentsOf(holding, cfg = null) {
   let homes = 0;
-  for (const f of featuresOf(holding)) { const def = featureDef(f.kind, cfg); if (def?.family === "people") homes += (Number(def.residents) || 0) * (Number(f.count) || 1); }
+  // ⛔ CCODE-435: a barracks' beds are the band's, not homes for the hands — its `residents: true` read as Number(true) === 1, a home for one
+  // worker, in a building that houses twenty soldiers (`bandBedsOf` counts them). ⚠️ The other `residents: true` records (longhouse, keeper's
+  // hut, infirmary, deck space) still count one each, as they always have — what they house is Aevi's to count, and flagged to her.
+  for (const f of featuresOf(holding)) { const def = featureDef(f.kind, cfg); if (def?.family === "people" && !housesABand(def)) homes += (Number(def.residents) || 0) * (Number(f.count) || 1); }
   const people = [...new Set([holding?.steward, ...(holding?.crew || []), ...(holding?.garrison || [])].filter(Boolean))];
   return { homes, people };
 }

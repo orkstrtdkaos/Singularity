@@ -10,7 +10,7 @@ node scripts/apparatus.mjs --md     # …as markdown for §5
 node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 ```
 
-**Last measured: 2026-09-19 · v2.0.97 · 109 files.**
+**Last measured: 2026-09-19 · v2.0.98 · 109 files.**
 
 ---
 
@@ -134,9 +134,9 @@ worthless.
 | harness | kind | assertions | purpose |
 |---|---|---|---|
 | `tests/smoke` | ✅ GATE | 3570 | — |
-| `tests/how_it_works` | ✅ GATE | 3221 | CCODE-285 |
+| `tests/how_it_works` | ✅ GATE | 3229 | CCODE-285 |
 | `tests/skill_battle_sim` | ✅ GATE | 217 | SNG-098: the two-sided contest + fog-of-war invariant |
-| `tests/content_ci` | ✅ GATE | 193 | SNG-BATCH-10 Phase 4 / SNG-040/064: the content integrity gate |
+| `tests/content_ci` | ✅ GATE | 194 | SNG-BATCH-10 Phase 4 / SNG-040/064: the content integrity gate |
 | `tests/craft_crit` | ✅ GATE | 43 | miss // it and YOU HAVE ONLY MADE CHAOS |
 | `tests/wiring_audit` | ✅ GATE | 41 | BATCH-11 §23 |
 | `tests/group_capability` | ✅ GATE | 26 | CCODE-307 |

@@ -528,7 +528,9 @@ export function raiseBand(character, { id, name = null, count = 20, quality = 1,
   if (!id) return { ok: false, why: "a band needs a name to be called by" };
   const list = character.bands || (character.bands = []);
   if (list.some(b => b.id === id)) return { ok: false, why: `${name || id} is already yours` };
-  const band = { id, name: name || id, count: Math.max(1, num(count, 20)),
+  // ⛔ CCODE-435: an explicit 0 is honoured — the button raises a unit that "stands empty until somebody joins it", and Math.max(1, …)
+  // gave it one nobody, whom `addContingent` then made real beside the first person who joined (count 2: Pell, and a head called "The Test")
+  const band = { id, name: name || id, count: Math.max(0, num(count, 20)),
     quality: Math.max(1, num(quality, 1)), from, condition: "fresh", raisedDay: num(day, 0), losses: 0 };
   list.push(band);
   return { ok: true, band };

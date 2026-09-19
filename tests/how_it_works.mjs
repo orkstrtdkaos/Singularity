@@ -22670,7 +22670,7 @@ console.log("\n── §313 · an infirmary heals the hurt and tends the dead �
   const u = [body(false)], t = [body(true)];
   check("§313: …on the SAME divisor for the seal as for the depth — the untended seal at 130 days, the tended not until 240",
     D313.deepenDeaths(u, 130).length === 1 && D313.deepenDeaths(t, 130).length === 0 && D313.deepenDeaths(t, 240).length === 1);
-  const src313 = rd("engine/worldtick.js");
+  const src313 = rd("engine/worldtick.js").replace(/\r\n/g, "\n");   // CCODE-435: a CRLF checkout is what the hook reads
   check("§313: ⛔ the tick stamps who is tended each pass — where a body lies (the person last seen there; the player where they fell) — and clears it when the infirmary is gone",
     /const t = healingAt\(character, locId, holdCfg434\);\n\s*e\.deathState\.tendedBy = t \? \{/.test(src313)
     && /for \(const n of Object\.values\(character\.npcRegistry \|\| \{\}\)\) if \(n && n\.status === "dead"\) tend434\(n, n\.lastSeen\?\.locationId \|\| null\);/.test(src313)
@@ -22689,6 +22689,80 @@ console.log("\n── §313 · an infirmary heals the hurt and tends the dead �
     /const inf = bandAt \? healingAt\(character, bandAt, holdCfgNow\(\)\) : null;/.test(A313)
     && /const infirmary = kind !== "breather" \? healingAt\(character, character\.currentLocationId, holdCfgNow\(\)\) : null;/.test(A313)
     && /character\.health \+ r\.health \+ infirmaryHealth\)/.test(A313) && /They slept in the infirmary at /.test(A313));
+}
+
+// ══════════ §314 · CCODE-435 — A BAND WITH NO BARRACKS IS QUARTERED, AND THAT COSTS ══════════
+// SNG-627 `housing`. Erik: "Barracks house troops." Aevi, on the barracks record: "a band without barracks should be a band that has to be
+// quartered somewhere, and that should cost."
+console.log("\n── §314 · a band with no barracks is quartered — who needs a bed, what a barracks gives, what the pass takes ──");
+{
+  const H314 = await import("../engine/holdings.js");
+  const M314 = await import("../engine/melee.js");
+  const W314 = await import("../engine/worldtick.js");
+  const { loadContentHeadless: lch314 } = await import("./headless_content.mjs");
+  const CT314 = await lch314();
+  const cfg314 = { ...CT314.rules.economy.holdStore, features: CT314.rules.economy.holdFeatures };
+  const mar314 = CT314.rules.martial || {};
+  const kinds314 = cfg314.features.kinds || {};
+  const per314 = Math.max(0, Number(mar314.quarterPerHead ?? 1) || 0);
+  const bedsOf = (k) => H314.bandBedsOf({ kind: k }, cfg314, { martial: mar314 });
+  const barracksBeds = typeof kinds314.barracks?.bandBeds === "number" ? kinds314.barracks.bandBeds : Number(mar314.barracksBeds ?? 20);
+  // ⛔ the population the CONTENT declares: every housing record that says it has residents without counting them
+  const uncounted = Object.entries(kinds314).filter(([k, d]) => !k.startsWith("_") && d?.property === "housing" && d.residents === true && k !== "barracks" && d.variantOf !== "barracks" && typeof d.bandBeds !== "number").map(([k]) => k);
+  check("§314: ⛔ a barracks houses a band — and the tag alone cannot say so: every other housing record with uncounted residents houses no band",
+    barracksBeds > 0 && bedsOf("barracks") === barracksBeds && uncounted.length > 0 && uncounted.every(k => bedsOf(k) === 0)
+    && H314.bandBedsOf({ kind: "war_lodge" }, { features: { kinds: { war_lodge: { property: "housing", bandBeds: 7 } } } }, { martial: mar314 }) === 7,
+    `barracks ${bedsOf("barracks")} · ${uncounted.map(k => `${k} ${bedsOf(k)}`).join(", ")}`);
+  check("§314: …and a barracks' beds are the band's, not homes for the hands (Number(true) read a barracks as a home for one worker)",
+    H314.residentsOf({ features: [{ kind: "barracks" }] }, cfg314).homes === 0
+    && H314.residentsOf({ features: [{ kind: "quarters" }] }, cfg314).homes === Number(kinds314.quarters.residents));
+
+  // ---- who needs a bed ----
+  const hold = { id: "h1", name: "The Test Hold", locationId: "p1", crew: [], features: [] };
+  const room = H314.handsCap(hold, cfg314);
+  const mk = () => ({ name: "T", clock: { day: 1 }, worldState: {}, npcRegistry: {}, purse: { crystal: 100 }, holdings: [JSON.parse(JSON.stringify(hold))],
+    bands: [
+      { id: "a", name: "A", contingents: [
+        { n: 12, quality: 1, does: ["HARM", "MARTIAL"], from: "job" },           // recruits a job brought in: no home hold
+        { n: room + 3, quality: 1, does: ["HARM", "MARTIAL"], from: "h1" },      // raised at a hold of yours, three past its bread
+        { n: 1, quality: 2, does: ["HARM"], npcId: "pell" },                     // the named have lives of their own
+        { n: 0, quality: 1, does: ["HARM"], from: "job" } ] },                   // a slot out on a job
+      { id: "b", name: "B", count: 30, quality: 1, from: null },                 // a band the fiction raised names no place
+      { id: "c", name: "C", called: true, contingents: [{ n: 40, quality: 1, does: ["HARM"], from: "job" }] } ] });   // called: camps in the field
+  const q0 = H314.quarteringOf(mk(), cfg314, { martial: mar314 });
+  check("§314: ⛔ who needs a bed — recruits with no home hold, a band the fiction raised, and a hold's heads past what it can feed; never the named, a slot out on a job, or a unit called into the field",
+    q0.homeless === 12 + 3 + 30 && q0.beds === 0 && q0.quartered === 45 && q0.cost === 45 * per314, JSON.stringify(q0));
+  const c1 = mk();
+  c1.holdings[0].features.push({ kind: "barracks", name: "the barracks" }, { kind: "barracks", name: "half a barracks", building: { passesLeft: 2 } });
+  const q1 = H314.quarteringOf(c1, cfg314, { martial: mar314 });
+  check("§314: …a standing barracks beds them and one still being built does not",
+    q1.beds === barracksBeds && q1.quartered === Math.max(0, 45 - barracksBeds), JSON.stringify(q1));
+
+  // ---- what the pass takes ----
+  const c2 = mk();
+  const l1 = H314.chargeQuartering(c2, { cfg: cfg314, martial: mar314, worldCount: 1000 });
+  const p1 = c2.purse.crystal;
+  const l2 = H314.chargeQuartering(c2, { cfg: cfg314, martial: mar314, worldCount: 1040 });
+  c2.purse.crystal = 5;
+  const l3 = H314.chargeQuartering(c2, { cfg: cfg314, martial: mar314, worldCount: 1072 });
+  check("§314: ⛔ the quartering is paid once a pass through the purse, on its own counter — and a pass nobody can pay is SAID, the purse untouched",
+    /45 of your hands have no barracks to sleep in and are quartered/.test(l1[0] || "") && p1 === 100 - 45 * per314
+    && l2.length === 0 && /could not be paid/.test(l3[0] || "") && c2.purse.crystal === 5 && c2.worldState.quarteredAtCount === 1072,
+    JSON.stringify({ l1, p1, l2, l3 }));
+  const c3 = mk(); c3.holdings = []; c3.bands = [{ id: "a", name: "A", contingents: [{ n: 12, quality: 1, does: ["HARM"], from: "job" }] }]; c3.purse.crystal = 50;
+  const t3 = W314.advanceHoldings({ character: c3, now: Date.now(), content: CT314, rng: () => 0.5 });
+  check("§314: …on the world tick's hold pass, which runs whether or not you hold anywhere",
+    (t3.news || []).some(n => /12 of your hands have no barracks to sleep in/.test(typeof n === "string" ? n : n?.text || "")) && c3.purse.crystal === 50 - 12 * per314);
+
+  // ---- the empty band ----
+  const e = { bands: [] };
+  const r314 = M314.raiseBand(e, { id: "band-x", name: "The Test", count: 0, from: "h1", day: 1 });
+  M314.addContingent(r314.band, { npcId: "pell", quality: 3, does: ["HARM"] });
+  check("§314: ⛔ a band raised empty STANDS empty — Math.max(1, …) gave it one nobody, whom the first person to join made real beside them",
+    r314.band.count === 1 && r314.band.contingents.length === 1 && r314.band.contingents[0].npcId === "pell");
+  const A314 = rd("app.js").replace(/\r\n/g, "\n").split("\n").filter(l => !/^\s*\/\//.test(l)).join("\n");
+  check("§314: ⛑ the Bands tab says where they sleep and what the rest cost, from the same function the pass charges by",
+    /const q = quarteringOf\(character, holdCfgNow\(\), \{ martial: CONTENT\.rules\?\.martial \|\| \{\} \}\);/.test(A314) && /data-quartering/.test(A314));
 }
 
 /* ══════════ REPORT ══════════ */

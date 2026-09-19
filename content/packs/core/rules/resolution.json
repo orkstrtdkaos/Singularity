@@ -1360,5 +1360,41 @@
   "epic": 1,
   "legendary": 2,
   "mythic": 3
+ },
+ "stances": {
+  "note": "CCODE-448 — the order of battle's stances: the weights a side's turn is cut by (KNOW read · PROTECT guard · RESTORE mend · HARM strike · MOVE move · SHAPE break). CCode's stand-in: the Fell Pell prototype's weights, which Erik reviewed in rounds 3–6. Aevi's to change; engine/orderofbattle.js lays these over its own defaults, stance by stance.",
+  "cautious": {
+   "say": "reads and guards before it strikes",
+   "w": {
+    "KNOW": 3,
+    "PROTECT": 3,
+    "RESTORE": 2,
+    "HARM": 1,
+    "MOVE": 1,
+    "SHAPE": 0.5
+   }
+  },
+  "balanced": {
+   "say": "does a little of everything",
+   "w": {
+    "HARM": 2,
+    "PROTECT": 2,
+    "KNOW": 2,
+    "RESTORE": 1.5,
+    "MOVE": 1,
+    "SHAPE": 1
+   }
+  },
+  "aggressive": {
+   "say": "strikes and breaks first",
+   "w": {
+    "HARM": 4,
+    "SHAPE": 2,
+    "MOVE": 2,
+    "PROTECT": 1,
+    "KNOW": 1,
+    "RESTORE": 0.5
+   }
+  }
  }
 }

@@ -86,7 +86,7 @@ import { rankVoices, pickVoice, speakableText, chunkForSpeech, renderProseHtml }
 import { harmGateFor, harmTargetFor, departureGateFor, isConsequentialMove, isSpeechAct, isRemoteContact, personDestination, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop); SNG-188: speech-act guard; SNG-228: person-as-place guard; CCODE-158: one departure definition for both doors; CCODE-159: remote contact is not travel
 import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, gateHopCost, aimsOpen } from "./engine/waygate.js";
 import { routeBetween, routeLine, twoWayRoads } from "./engine/journey.js";
-import { planJob, suggestTeam, jobPoolOf, jobRouteOf, jobCost, jobWages, jobEffects, sayEffects, settleDueJobs, degreeWord, jobOpposition, mainNeedOf, jobCraftsOf, bestCraftFor, OUTCOMES as JOB_OUTCOMES, errandOdds, detachForJob } from "./engine/jobs.js";   // CCODE-420 · CCODE-428 · CCODE-431
+import { planJob, suggestTeam, jobPoolOf, jobRouteOf, jobCost, jobWages, jobEffects, sayEffects, settleDueJobs, degreeWord, jobOpposition, mainNeedOf, jobCraftsOf, bestCraftFor, OUTCOMES as JOB_OUTCOMES, errandOdds, detachForJob, jobPersonFor, jobUnitFor } from "./engine/jobs.js";   // CCODE-420 · CCODE-428 · CCODE-431
 import { ensureJobs, postJob, sendOnJob, awayOnJob, untoldJobs, markJobsTold, dropJob, detachedFrom } from "./engine/jobstate.js";   // CCODE-420 · CCODE-431
 import { sendCaravan, caravansOf } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph, craftRollsLine, craftRollsShort } from "./engine/entityDetail.js";
@@ -111,6 +111,7 @@ import { contributionsOf } from "./engine/combatants.js";
 import { derivedLevel, authoredFor } from "./engine/npcsheet.js";   // CCODE-422: an authored person is found behind a registry record
 import { musterCapacityOf, queueHoldingEvent } from "./engine/holdings.js";
 import { ARMORY_SLOTS, SLOT_WORDS, armoryTable, armoryOf, armoryLine, makersAt, setForgeOrder, outfitContingent, gearPrice, sellGear } from "./engine/armory.js";   // CCODE-445: the armory
+import { STANCE_NAMES, FIGHT_FAMILIES, FAMILY_WORDS, FAMILY_LANDS, stanceTable, stanceOf, allocateTurn, allyChoice, partyRound } from "./engine/orderofbattle.js";   // CCODE-448: the order of battle
 import { homeOf, isHome, makeHome } from "./engine/home.js";   // CCODE-369: a home is a place that is yours   // CCODE-360: an invitation carried by someone you both know
 import { runWakeGeneration } from "./engine/wake.js"; // SNG-204 Phase 2: open wakes generate the next thread
 import { addAssignment, delegationRefusal, activeDelegates, MISSION_KINDS, MISSION_KIND_IDS, canSendOn, sayFamilies } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
@@ -174,7 +175,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.2.3";
+const APP_VERSION = "2.3.0";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -13716,7 +13717,9 @@ function wireCharacterTabs() {
   go("tab-traits", () => renderCharacterScreen());
   go("tab-chronicle", () => renderChronicle());
   go("tab-holdings", () => renderHoldingsTab());
+  go("tab-party", () => renderPartyTab());   // CCODE-448
   go("tab-bands", () => renderBandsTab());
+  go("tab-legion", () => renderLegionTab());   // CCODE-448
   go("tab-jobs", () => renderJobsTab());   // CCODE-420
   go("tab-world", () => renderWorldTab());
   go("tab-news", () => renderNewsTab());   // CCODE-439
@@ -13726,7 +13729,9 @@ function characterTabBar(active) {
     <button class="char-tab${active === "traits" ? " on" : ""}" id="tab-traits">Traits</button>
     <button class="char-tab${active === "chronicle" ? " on" : ""}" id="tab-chronicle">📜 Chronicle</button>
     <button class="char-tab${active === "holdings" ? " on" : ""}" id="tab-holdings">⌂ Holdings</button>
+    <button class="char-tab${active === "party" ? " on" : ""}" id="tab-party">⚑ Party</button>
     <button class="char-tab${active === "bands" ? " on" : ""}" id="tab-bands">⚔ Bands</button>
+    <button class="char-tab${active === "legion" ? " on" : ""}" id="tab-legion">♜ Legion</button>
     <button class="char-tab${active === "jobs" ? " on" : ""}" id="tab-jobs">⚒ Jobs${(() => { const n = (character?.jobs?.board || []).length + (character?.jobs?.out || []).length; return n ? ` <span class="job-count">${n}</span>` : ""; })()}</button>
     <button class="char-tab${active === "world" ? " on" : ""}" id="tab-world">🌍 The World</button>
     <button class="char-tab${active === "news" ? " on" : ""}" id="tab-news">📰 News</button>
@@ -16232,6 +16237,202 @@ function renderJobsTab(selId = null) {
   document.getElementById("jobs-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
 }
 
+// ══════════ ⛔ CCODE-448 — THE ORDER OF BATTLE'S THREE READERS ══════════
+// Erik, of the Fell Pell prototype: "I don't see the party or the legion tabs nor the other updates from the prototype yet. I would
+// prioritize those." The model is `engine/orderofbattle.js` — a stance's weights, a band's turn by assignment, an ally's craft by stance and
+// preference — rolled with the Jobs tab's own dice. These are its readers: the Party tab, the band's turn on the Bands tab, the Legion tab.
+let _obFoe = 15;          // the foe level the three tabs read their odds against — a lens, not a setting
+let _partyRoll = null;    // the last "Roll a round" on the Party tab
+const obCtx = () => ({ content: CONTENT, abilityCatalog: fullCatalog(), worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })() });
+const obOpposed = () => jobOpposition(_obFoe, CONTENT.rules);
+const obTable = () => stanceTable(CONTENT.rules?.stances || null);
+const stancePickHtml = (attr, key, cur) => `<span class="ob-stance" role="group" aria-label="stance">${STANCE_NAMES.map(s =>
+  `<button class="${s === cur ? "on" : ""}" ${attr}="${esc(key)}" data-stance="${s}" aria-pressed="${s === cur}" title="${esc(obTable()[s].say)}">${s}</button>`).join("")}</span>`;
+const obFoeSlider = () => `<label class="ob-slider">facing a level <b>${_obFoe}</b> foe (−${obOpposed()})<input type="range" min="1" max="60" value="${_obFoe}" data-ob-foe aria-label="foe level"></label>`;
+function wireObFoe(again) { for (const el of app.querySelectorAll("[data-ob-foe]")) el.onchange = () => { _obFoe = Math.max(1, Math.min(60, Number(el.value) || 15)); again(); }; }
+
+/** The people at your side as the fight seats them, each with their sheet — and who is brought forward, by the fight's own count
+ *  (`lineSplit`, with the Party tab's pick as the default the fight also reads). */
+function partyNow() {
+  const all = alliesOf(character, { catalog: fullCatalog(), fnIndex: FN_INDEX, party: seatParty(), companions: CONTENT.companions || {},
+    npcs: { ...(CONTENT.npcs || {}), ...(character.npcRegistry || {}) }, company: character.company || null });
+  const lead = commandSlots(character, { cfg: meleeCfg() });
+  const present = all.filter(a => a.present !== false && !a.isPlayer && a.kind !== "player");
+  const split = lineSplit(all, { chosen: character.partyForward || null, lead, presentCount: present.length });
+  const ctx = obCtx();
+  const allies = present.map(a => ({ a, p: jobPersonFor(character, a.id, ctx) })).filter(x => x.p);
+  return { split, allies };
+}
+
+/** ⛔ AT YOUR SIDE — each ally's stance and the crafts they prefer decide what they reach for in a fight; who is brought forward is the
+ *  fight's own count. "Roll a round" shows what the GM is handed. */
+function renderPartyTab() {
+  const { split, allies } = partyNow();
+  const fwdAllies = split.forward.filter(a => !a.isPlayer && a.kind !== "player");
+  const fwd = new Set(fwdAllies.map(a => a.id));
+  const pickable = !split.everyoneActs && split.slots > 1;
+  const orders = character.allyOrders || {};
+  const opposed = obOpposed(), T = obTable();
+  const card = ({ a, p }) => {
+    const o = orders[a.id] || {};
+    const st = stanceOf(o.stance);
+    const c = allyChoice(p, { stance: st, prefer: o.prefer || [], table: T, rules: CONTENT.rules, fnIndex: FN_INDEX, opposed });
+    const crafts = [...new Map(jobCraftsOf(p, { rules: CONTENT.rules, fnIndex: FN_INDEX, opposed }).filter(k => FIGHT_FAMILIES.includes(k.family)).map(k => [String(k.id), k.name])).entries()].slice(0, 8);
+    const liked = new Set((o.prefer || []).map(String));
+    const isFwd = fwd.has(a.id);
+    return `<article class="ob-card">
+      <div class="ob-top"><span class="ob-nm">${esc(p.name)}</span><span class="hint">level ${esc(String(p.level))}</span></div>
+      <div class="ob-row">${stancePickHtml("data-ally-stance", a.id, st)}
+        <label class="ob-narr${pickable ? "" : " fixed"}" title="${esc(pickable ? (isFwd ? "told by name, first" : "bring them forward: told by name, first") : split.why)}"><input type="checkbox" data-ally-forward="${esc(a.id)}"${isFwd ? " checked" : ""}${pickable ? "" : " disabled"}> brought forward</label></div>
+      <div class="ob-now"><span class="hint">${isFwd ? "brought forward:" : "in the line:"}</span> ${c ? `${esc(c.name)}${c.verb ? ` — ${esc(c.verb)}` : ""} <span class="hint">(${esc(FAMILY_WORDS[c.family] || c.family)})</span>` : "nothing to fight with"}</div>
+      ${c ? `<div class="ob-odds">${oddsBarHtml(c.odds, { wide: true })}<span class="hint">${c.chance}% · ${Math.round(100 * (c.odds.crit_success || 0))}% strong</span></div>` : ""}
+      ${crafts.length ? `<div class="hint ob-pref-lbl">prefer — like your own boost</div><div class="ob-pref">${crafts.map(([id, nm]) =>
+        `<button class="${liked.has(id) ? "on" : ""}" data-ally-prefer="${esc(a.id)}" data-craft="${esc(id)}" aria-pressed="${liked.has(id)}">${liked.has(id) ? "★ " : ""}${esc(nm)}</button>`).join("")}</div>` : ""}
+    </article>`;
+  };
+  const r = _partyRoll;
+  const roundHtml = r ? `<div class="ob-round">${[...r.forward, ...r.folded].map(x => `<div class="ob-rline${r.folded.includes(x) ? " folded" : ""}"><span><b>${esc(x.name)}</b> — ${esc(x.craft)}${x.verb ? ` (${esc(x.verb)})` : ""}${r.folded.includes(x) ? ` <span class="hint">in the line</span>` : ""}</span><span class="ob-dg ${esc(x.degree)}">${esc(x.said)}</span></div>`).join("")}</div>
+      <pre class="ob-directive">${esc(r.directive)}</pre>` : `<p class="hint">Roll a round to see what the GM would be handed.</p>`;
+  chrome(`<div class="screen" style="max-width:980px">
+    ${characterTabBar("party")}
+    <h2 class="codex-title">At your side</h2>
+    <div class="ob-summary"><span><b>${esc(character.name)}</b> and <b>${allies.length}</b> more</span>${hereNow()?.name ? `<span>at <b>${esc(hereNow().name)}</b></span>` : ""}<span>${esc(split.why)}</span></div>
+    ${allies.length ? `<div class="ob-controls">${obFoeSlider()}<span class="hint">${split.everyoneActs ? "everyone acts" : `${fwdAllies.length} of ${Math.max(0, split.slots - 1)} brought forward`}</span></div>
+      <div class="ob-roster">${allies.map(card).join("")}</div>
+      <div class="ob-panel"><div class="ob-head"><h3 class="codex-title" style="margin:0">The next round, as the GM receives it</h3><button class="btn" id="party-roll">Roll a round</button></div>
+        ${roundHtml}<p class="hint">In a fight the GM is handed this every turn: each ally's craft, chosen by their stance and what you prefer, rolled by the engine, to be told as it fell. The fight's own numbers are unchanged.</p></div>`
+      : `<p class="hint">Nobody walks at your side. Bring someone forward from a band on the Bands tab, or travel with a companion.</p>`}
+  </div>`);
+  wireCharacterTabs();
+  const again = () => renderPartyTab();
+  wireObFoe(again);
+  const order = (id) => { character.allyOrders = { ...(character.allyOrders || {}) }; return (character.allyOrders[id] = { ...(character.allyOrders[id] || {}) }); };
+  for (const b of app.querySelectorAll("[data-ally-stance]")) b.onclick = () => { order(b.dataset.allyStance).stance = b.dataset.stance; _partyRoll = null; saveCharacter(character); again(); };
+  for (const b of app.querySelectorAll("[data-ally-prefer]")) b.onclick = () => {
+    const o = order(b.dataset.allyPrefer), id = String(b.dataset.craft);
+    const cur = new Set((o.prefer || []).map(String));
+    if (cur.has(id)) cur.delete(id); else cur.add(id);
+    o.prefer = [...cur];
+    _partyRoll = null; saveCharacter(character); again();
+  };
+  // the same toggle the fight's own pips make, on the pick the fight starts from
+  for (const b of app.querySelectorAll("[data-ally-forward]")) b.onchange = () => {
+    const id = b.dataset.allyForward;
+    const cur = new Set(character.partyForward || []);
+    if (b.checked) cur.add(id); else cur.delete(id);
+    character.partyForward = [...cur];
+    _partyRoll = null; saveCharacter(character); again();
+  };
+  const roll = document.getElementById("party-roll");
+  if (roll) roll.onclick = () => {
+    const now = partyNow();
+    _partyRoll = partyRound(now.allies.map(x => x.p), { orders: character.allyOrders || {}, rules: CONTENT.rules, fnIndex: FN_INDEX, opposed: obOpposed(),
+      forward: now.split.forward.filter(a => !a.isPlayer && a.kind !== "player").map(a => a.id) });
+    again();
+  };
+}
+
+/** A band's people as the dice see them — the named with their sheets, the hands as one member each — and nobody out on a job. */
+function bandMembersOf(band) {
+  const ctx = obCtx();
+  const out = [];
+  (band?.contingents || []).forEach((c, i) => {
+    if (!c) return;
+    if (c.npcId) {
+      if (awayOnJob(character, c.npcId)) return;
+      const p = jobPersonFor(character, c.npcId, ctx);
+      if (p) out.push({ ...p, roleFams: (c.does || []).map(String) });
+    } else {
+      const u = jobUnitFor(character, band.id, i, ctx);
+      if (u) out.push({ ...u, label: c.kind || "hands" });
+    }
+  });
+  return out;
+}
+function bandTurn(band) {
+  const members = bandMembersOf(band);
+  const roles = new Map(members.map(m => [m.id, m.roleFams || []]));
+  return { members, turn: allocateTurn(members, { stance: band.stance, table: obTable(), rules: CONTENT.rules, fnIndex: FN_INDEX, opposed: obOpposed(), roleOf: (id) => roles.get(id) || [] }) };
+}
+/** ⛔ ONE TURN OF THE BAND, BY STANCE — the prototype's Bands panel: everyone acts once, the stance decides how many do each thing, and
+ *  each person takes what they are best at next to everyone else; hands split by the same weights. */
+function bandTurnHtml(u) {
+  const band = (character.bands || []).find(b => b && b.id === u.id);
+  if (!band) return "";
+  const { turn: t } = bandTurn(band);
+  const rows = FIGHT_FAMILIES.filter(f => (t.rows[f] || []).length).map(f => {
+    const doers = t.rows[f];
+    const heads = doers.reduce((a, d) => a + (d.n || 1), 0);
+    return `<div class="ob-arow"><div class="ob-fam">${esc(f[0] + f.slice(1).toLowerCase())}<small>${esc(FAMILY_WORDS[f])}</small></div>
+      <div class="ob-doers">${doers.map(d => `<div class="ob-doer"><span class="ob-dn">${esc(d.unit ? `${d.n} ${d.name}` : d.name)}<small>${d.craft ? esc(d.craft) : "no craft for it"}${d.role ? " · their band role" : ""}</small></span>${oddsBarHtml(d.odds)}<span class="ob-pc">${d.chance != null ? d.chance + "%" : "—"}</span></div>`).join("")}</div>
+      <div class="ob-expect"><b>${(t.expected[f] || 0).toFixed(1)}</b> of ${heads} ${esc(FAMILY_LANDS[f])}</div></div>`;
+  }).join("");
+  return `<details class="ob-turn" open><summary>One turn of the band, by stance — <b>${esc(t.stance)}</b></summary>
+    <div class="ob-controls">${stancePickHtml("data-band-stance", band.id, t.stance)}${obFoeSlider()}</div>
+    <p class="hint">${esc(t.stance[0].toUpperCase() + t.stance.slice(1))}: the band ${esc(obTable()[t.stance].say)}. Everyone acts once; the stance decides how many do each thing, and each person takes what they are best at next to everyone else. The GM is told the stance.</p>
+    <div class="ob-alloc">${rows || `<p class="hint">Nobody here can act this turn.</p>`}</div></details>`;
+}
+function wireBandStance(again) {
+  for (const b of app.querySelectorAll("[data-band-stance]")) b.onclick = () => {
+    const band = (character.bands || []).find(x => x && x.id === b.dataset.bandStance);
+    if (!band) return;
+    band.stance = b.dataset.stance;
+    saveCharacter(character); again();
+  };
+}
+
+/** ⛔ THE LEGION — its turn is its bands' turns, each by its own stance, summed; and who commands it. With no legion yet, your bands side
+ *  by side, each by its stance, and how a legion is formed. */
+function renderLegionTab() {
+  const day = (() => { try { return absoluteWorldDay(); } catch { return null; } })();
+  const units = unitsOf(character, { cfg: meleeCfg(), content: CONTENT, worldDay: day });
+  const legions = units.filter(u => u.isLegion);
+  const free = units.filter(u => !u.isLegion && !u.inLegion);
+  const bandById = (id) => (character.bands || []).find(b => b && b.id === id) || null;
+  const rowOf = (band) => { const { members, turn } = bandTurn(band); return { band, t: turn, heads: members.reduce((a, m) => a + (m.isUnit ? m.n : 1), 0) }; };
+  const cell = (v) => (v ? v.toFixed(1) : `<span class="ob-dot" aria-label="none"></span>`);
+  const matrix = (rows, totalLabel) => `<div class="ob-matrix-wrap"><table class="ob-matrix"><thead><tr><th>Band</th><th>Heads</th><th>Stance</th>${FIGHT_FAMILIES.map(f => `<th class="c">${esc(FAMILY_LANDS[f])}</th>`).join("")}</tr></thead><tbody>
+    ${rows.map(r => `<tr><td>${esc(r.band.name || r.band.id)}</td><td>${r.heads}</td><td>${stancePickHtml("data-band-stance", r.band.id, r.t.stance)}</td>${FIGHT_FAMILIES.map(f => `<td class="c">${cell(r.t.expected[f])}</td>`).join("")}</tr>`).join("")}
+    ${totalLabel ? `<tr class="total"><td>${esc(totalLabel)}</td><td>${rows.reduce((a, r) => a + r.heads, 0)}</td><td>—</td>${FIGHT_FAMILIES.map(f => `<td class="c">${rows.reduce((a, r) => a + (r.t.expected[f] || 0), 0).toFixed(1)}</td>`).join("")}</tr>` : ""}
+    </tbody></table></div>`;
+  const nm = (id) => (id === "player" ? character.name : (character.npcRegistry?.[id]?.name || CONTENT.npcs?.[id]?.name || id));
+  const legionHtml = (u) => {
+    const parts = (u.formedFrom || []).map(bandById).filter(Boolean);
+    const rows = parts.map(rowOf);
+    const ctx = obCtx();
+    const standing = [...new Set(parts.flatMap(b => (b.contingents || []).filter(c => c && c.npcId && !awayOnJob(character, c.npcId)).map(c => String(c.npcId))))];
+    const eligible = [{ id: "player", name: character.name, level: character.level }, ...standing.map(id => ({ id, name: nm(id), level: jobPersonFor(character, id, ctx)?.level ?? "?" }))];
+    const cur = u.leader?.id || "";
+    return `<div class="ob-panel"><div class="ob-head"><h3 class="codex-title" style="margin:0">${esc(u.name)}</h3><span class="hint">${rows.reduce((a, r) => a + r.heads, 0)} under the banner · ${esc(u.condition || "")}</span></div>
+      <div class="ob-summary"><label class="ob-slider">commanded by <select data-legion-commander="${esc(u.id)}"><option value=""${cur ? "" : " selected"}>nobody</option>${eligible.map(e => `<option value="${esc(e.id)}"${e.id === cur ? " selected" : ""}>${esc(e.name)} · level ${esc(String(e.level))}</option>`).join("")}</select></label>
+        <span>${u.leaderBonus > 0 ? `worth <b>+${u.leaderBonus}</b> to every head under them` : "not yet worth a step"} <span class="hint">(a step of quality per 10 levels, at most doubling what a band already is)</span></span></div>
+      <h4 class="ob-sub">One turn of the legion — each band by its own stance</h4>
+      ${matrix(rows, "The legion")}
+      <p class="hint">A legion's turn is its bands' turns: each band cuts its own turn by its own stance, and the legion is the sum.</p></div>`;
+  };
+  chrome(`<div class="screen" style="max-width:980px">
+    ${characterTabBar("legion")}
+    <h2 class="codex-title">Legion</h2>
+    <div class="ob-controls">${obFoeSlider()}</div>
+    ${legions.length ? legions.map(legionHtml).join("")
+      : `<div class="ob-panel"><p class="hint">No legion stands yet. A legion is formed from two or more bands on the Bands tab — each band keeps its own people and its own stance, and the legion's turn is theirs, summed.</p>
+        ${free.length ? `<h4 class="ob-sub">Your ${free.length === 1 ? "band" : "bands"}, each by its own stance</h4>${matrix(free.map(u => bandById(u.id)).filter(Boolean).map(rowOf), free.length > 1 ? "Together" : null)}` : ""}</div>`}
+  </div>`);
+  wireCharacterTabs();
+  const again = () => renderLegionTab();
+  wireObFoe(again);
+  wireBandStance(again);
+  for (const s of app.querySelectorAll("[data-legion-commander]")) s.onchange = () => {
+    const id = s.dataset.legionCommander, who = s.value || null;
+    const r = setUnitLeader(character.bands || [], id, who);
+    if (!r.ok) { alert(r.why); again(); return; }
+    character.bands = r.bands;
+    const leg = (character.bands || []).find(b => b && b.id === id);
+    if (who) queueHoldingEvent(character, `${nm(who)} commands ${leg?.name || "the legion"} now.`);
+    saveCharacter(character); again();
+  };
+}
+
 function renderBandsTab() {
   const ladder = CONTENT.rules.subAttributeLadder;
   const day = absoluteWorldDay();
@@ -16376,6 +16577,7 @@ function renderBandsTab() {
         })()}
         ${u.isLegion ? `<div class="codex-f hint">Formed from ${u.parts.map(p => `<strong>${esc(p.name)}</strong> <span class="hint">(${esc(p.condition)})</span>`).join(", ")} — they keep their own people, their own losses and their own condition.</div>` : ""}
         ${unitFacts(u)}
+        ${u.isLegion ? "" : bandTurnHtml(u)}
         ${(() => {
           // ⛔ CCODE-405 — A LEGION'S PEOPLE RENDER UNDER THEIR OWN BAND, INSIDE IT. Caught on the screen: filtering the parts out of
           // the top-level list (so a legion of two bands would not read as three commands) had made every person in them render
@@ -16451,6 +16653,8 @@ function renderBandsTab() {
   for (const b of app.querySelectorAll("[data-unit-lead]")) b.onclick = () => showLeaderPicker(b.dataset.unitLead);
   for (const b of app.querySelectorAll("[data-cg-edit]")) b.onclick = () => showContingentEditor(b.dataset.cgEdit, Number(b.dataset.cgIndex));   // CCODE-409
   for (const b of app.querySelectorAll("[data-cg-outfit]")) b.onclick = () => showOutfit(b.dataset.cgOutfit, Number(b.dataset.cgIndex));   // CCODE-445
+  wireBandStance(() => renderBandsTab());   // CCODE-448: a band's stance
+  wireObFoe(() => renderBandsTab());
   for (const b of app.querySelectorAll("[data-unit-call]")) b.onclick = () => callUnitTogether(b.dataset.unitCall);
   for (const b of app.querySelectorAll("[data-unit-posture]")) b.onclick = () => {
     const r = setUnitPosture(character.bands || [], b.dataset.unitPosture, b.dataset.posture);
@@ -18005,7 +18209,7 @@ function skillBattlePanel() {
       // while `encounters.js` asked `actingSlots(resolutionTier(…))` — two readers of one question, and Erik saw
       // both halves of the disagreement: inert pips, and no contributions from a "folded" party that the engine
       // had never folded. ⚠️ The present count excludes the player, exactly as the engine's does.
-      const split = lineSplit(all, { chosen: st.broughtForward || null, lead,
+      const split = lineSplit(all, { chosen: st.broughtForward || character.partyForward || null, lead,   // CCODE-448: the Party tab's pick is the default
         presentCount: all.filter(a => a.present !== false && !a.isPlayer && a.kind !== "player").length });
       const fwd = new Set(split.forward.map(a => a.id));
       // ⛑ AND A PIP THAT CANNOT MOVE IS NOT OFFERED AS IF IT CAN. When everyone already acts there is nothing
@@ -18631,6 +18835,21 @@ async function sbExecuteTurn() {
     } catch { return ""; }
   })();
   if (foldedLine) beats.push(foldedLine);
+  // ⛔ CCODE-448 — THE PARTY'S ROUND: each ally rolls the craft their stance and preferred crafts choose (the Party tab), and the GM is told
+  // what fell, by name — the ones you brought forward first. The fight's own numbers are unchanged; the GM no longer invents an ally's move.
+  const partyLine = (() => {
+    try {
+      const fwdIds = (rr?.party?.forward || []).map(a => a.id).filter(id => id && id !== "player" && id !== character.id);
+      const ids = [...fwdIds, ...(rr?.party?.folded || []).map(a => a.id)].filter(Boolean);
+      if (!ids.length) return "";
+      const ctx = { content: CONTENT, abilityCatalog: fullCatalog(), worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })() };
+      const allies = ids.map(id => jobPersonFor(character, id, ctx)).filter(Boolean);
+      const foeLevel = Number(character.activeEncounter?.state?.oppSheet?.level) || Number(enc.def?.opponent?.level) || Number(character.level) || 1;
+      return partyRound(allies, { orders: character.allyOrders || {}, forward: fwdIds, rules: CONTENT.rules, fnIndex: FN_INDEX,
+        opposed: jobOpposition(foeLevel, CONTENT.rules) }).directive;
+    } catch { return ""; }
+  })();
+  if (partyLine) beats.push(partyLine);
   // GM call #2 — the WHOLE turn, in order.
   const shaped = ["sense", "action", "bonus"].filter(k => turn.text[k]).map(k => `${k}: "${turn.text[k]}"`).join("; ");
   try {

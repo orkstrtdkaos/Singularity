@@ -113,6 +113,7 @@ export function unitsOf(character, { cfg = null, content = null, worldDay = null
     carried: unitCarriedSubstrate(b, { items: content?.items || {}, companions: content?.companions || {},
       contingents: resolvedContingentsFor(all, b, lopts), aurasOff: character?.aurasOff || null }),
     formedFrom: arr(b.formedFrom).map(String),   // ⛑ NO LONGER EMPTY: the bands this legion is formed from (CCODE-405)
+    stance: ["cautious", "balanced", "aggressive"].includes(String(b.stance)) ? String(b.stance) : "balanced",   // ⛔ CCODE-448: how its turn is cut
     parts: legionParts(all, b).map(p => ({ id: String(p.id), name: p.name || String(p.id), condition: p.condition || "fresh" })),
     // ⛔ ERIK'S LEGION TAG — "they gain a legion tag... which legion are they in". Set on a band that stands in one, null otherwise.
     inLegion: b.inLegion ? String(b.inLegion) : null,
@@ -309,10 +310,13 @@ export function rosterForGM(character, opts = {}) {
     const here = named.filter(r => r.atSide);
     const can = u.can.length ? u.can.map(f => FAMILY_VERBS[f] || String(f).toLowerCase()).join(", ") : "nothing named";
     const kit = kitSummary(u.resolved?.contingents || []);   // ⛔ CCODE-445: what the armory handed them
+    // ⛔ CCODE-448: the stance decides who does what on its turn — the GM narrates a band by it
+    const stanceSaid = { cautious: "cautious — it reads and guards before it strikes", aggressive: "aggressive — it strikes and breaks first" }[u.stance] || null;
     return `${u.name} — ${wordFor(u.head)} strong, ${u.condition}; it ${can}`
       + (named.length ? ` · ${named.map(r => `${r.name}${r.atSide ? " (with you)" : ""}`).join(", ")}` : "")
       + (here.length ? "" : " · none of them at your side")
       + (kit.length ? ` · carrying ${kit.map(k => `${k.n} ${k.n === 1 ? k.one : k.many}`).join(", ")}` : "")
+      + (stanceSaid ? ` · its stance: ${stanceSaid}` : "")
       + (u.travelers.length ? ` · travelers who chose to join: ${u.travelers.map(t => t.name).join(", ")} (players' characters — never voice or command them)` : "");
   });
 }

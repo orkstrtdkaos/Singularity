@@ -16,6 +16,30 @@
   "next": [],
   "releases": [
     {
+      "version": "2.3.0",
+      "date": "2026-09-19",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "The Party tab",
+          "summary": "Set how each ally at your side fights: their stance, the crafts they prefer, and who is brought forward.",
+          "detail": "Each ally can be cautious, balanced or aggressive, which decides what they reach for in a fight, and you can star the crafts they should prefer, like your own boosts. Choose who is brought forward to be told by name, within how many you can lead. Roll a round to see exactly what the storyteller will be handed. In a fight, every turn now rolls each ally's chosen craft and tells what happened, instead of leaving it to invention."
+        },
+        {
+          "kind": "feature",
+          "title": "A band's turn by stance, and the Legion tab",
+          "summary": "Give each band a stance and see who does what on its turn; the new Legion tab adds its bands up.",
+          "detail": "On the Bands tab, each band shows one turn at the stance you choose: how many read the ground, guard, mend, strike, move or break, who takes each part (everyone doing what they are best at next to the rest), and how many are expected to land. The Legion tab shows a legion's turn as its bands' turns added together, each by its own stance, and lets you choose who commands it."
+        },
+        {
+          "kind": "fix",
+          "title": "Three allies all act, and nobody sits twice",
+          "summary": "With three allies at your side, all three now act in a fight, as the rule says; and a companion who is also in your company counts once.",
+          "detail": "The fight was counting you among your allies, so a party of three read as four and one of them was left to the line. And a companion who had also joined your company was seated twice, so an enemy could pick them twice. Both are fixed: three allies all take a real turn, and every person has one seat."
+        }
+      ]
+    },
+    {
       "version": "2.2.3",
       "date": "2026-09-19",
       "entries": [

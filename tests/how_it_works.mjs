@@ -23359,6 +23359,89 @@ console.log("\n── §326 · a refusing picture service is named, not retried 
     && ART326.mintAction("unknown", 0, 2) === "leave");
 }
 
+// ══════════ §327 · CCODE-448 — THE ORDER OF BATTLE: A TURN BY STANCE ══════════
+// Erik, of the Fell Pell prototype: "I don't see the party or the legion tabs nor the other updates from the prototype yet. I would
+// prioritize those." One model (engine/orderofbattle.js), rolled with the Jobs tab's dice, read by the Party tab, a band's turn and the Legion.
+console.log("\n── §327 · the order of battle — stances cut a turn into slots, each person takes what they are best at next to the rest, and the party's round is told ──");
+{
+  const OB = await import("../engine/orderofbattle.js");
+  const { buildFunctionIndex: bfi327 } = await import("../engine/functions.js");
+  const { loadContentHeadless: lch327 } = await import("./headless_content.mjs");
+  const C327 = await lch327();
+  const fnIndex = bfi327(C327.functionVocabulary);
+  const rules = C327.rules;
+  const T = OB.stanceTable();
+  check("§327: ⚑ THREE STANCES, the prototype's weights Erik reviewed; an authored rules.stances wins weight by weight; anything unknown is balanced",
+    OB.STANCE_NAMES.join() === "cautious,balanced,aggressive" && T.aggressive.w.HARM === 4 && T.cautious.w.KNOW === 3 && T.balanced.w.RESTORE === 1.5
+    && OB.stanceTable({ aggressive: { w: { HARM: 6 } } }).aggressive.w.HARM === 6 && OB.stanceTable({ aggressive: { w: { HARM: 6 } } }).aggressive.w.SHAPE === 2
+    && OB.stanceOf("reckless") === "balanced" && /prototype/.test(OB.STANCE_DEFAULTS._standIn));
+  const six = OB.slotsFor(6, T.cautious.w);
+  check("§327: ⛔ THE STANCE CUTS THE TURN INTO SLOTS — six people cautious read 2 · guard 2 · mend 1 · strike 1; the slots always sum to the heads",
+    six.KNOW === 2 && six.PROTECT === 2 && six.RESTORE === 1 && six.HARM === 1 && Object.values(six).reduce((a, b) => a + b, 0) === 6
+    && Object.values(OB.slotsFor(0, T.balanced.w)).every(v => v === 0) && Object.values(OB.slotsFor(13, T.aggressive.w)).reduce((a, b) => a + b, 0) === 13, JSON.stringify(six));
+  const pick = OB.hungarian([[4, 1, 3], [2, 0, 5], [3, 2, 2]]);
+  check("§327: ⛑ …and the assignment is the optimum, not a greedy pass (the classic 3×3: total 5)", pick.join() === "1,0,2", JSON.stringify(pick));
+  const sheet = { attributes: { physical: 6, mental: 6, social: 6, practical: 6 }, subAttributes: {} };
+  const striker = { id: "a", short: "Striker", level: 20, sheet, skills: [{ id: "blade", name: "Blade", function: "strike", attribute: "physical", rank: 3, tier: 1 }, { id: "wall", name: "Wall", function: "shield", attribute: "physical", rank: 1, tier: 1 }] };
+  const guard = { id: "b", short: "Guard", level: 20, sheet, skills: [{ id: "jab", name: "Jab", function: "strike", attribute: "physical", rank: 1, tier: 1 }, { id: "bulwark", name: "Bulwark", function: "shield", attribute: "physical", rank: 3, tier: 1 }] };
+  const hands = { id: "unit:b1:0", isUnit: true, n: 12, quality: 1, does: ["HARM", "PROTECT"], sheet, short: "12 spears", label: "spears" };
+  const t = OB.allocateTurn([striker, guard, hands], { stance: "balanced", rules, fnIndex, opposed: 5 });
+  const ta = OB.allocateTurn([hands], { stance: "aggressive", rules, fnIndex, opposed: 5 });
+  const harmHands = (ta.rows.HARM || []).find(r => r.unit)?.n, protHands = (ta.rows.PROTECT || []).find(r => r.unit)?.n;
+  check("§327: ⛔ EACH TAKES WHAT THEY ARE BEST AT NEXT TO THE REST — the striker strikes and the guard guards (not both the striker's best); twelve hands aggressive split 10 strike · 2 guard, each with the hands' own dice",
+    t.of.a === "HARM" && t.of.b === "PROTECT" && (t.rows.HARM || []).some(r => r.id === "a" && r.craft === "Blade") && (t.rows.PROTECT || []).some(r => r.id === "b" && r.craft === "Bulwark")
+    && harmHands === 10 && protHands === 2 && ta.expected.HARM > ta.expected.PROTECT && ta.expected.HARM > 0, JSON.stringify({ of: t.of, harmHands, protHands, exp: ta.expected }));
+  const seer = { id: "s", short: "Seer", level: 20, sheet, skills: [{ id: "sight", name: "Far Sight", function: "reveal", attribute: "mental", rank: 3, tier: 1 }, { id: "cut", name: "Cut", function: "strike", attribute: "physical", rank: 2, tier: 1 }] };
+  const cautious = OB.allyChoice(seer, { stance: "cautious", rules, fnIndex, opposed: 5 });
+  const aggressive = OB.allyChoice(seer, { stance: "aggressive", rules, fnIndex, opposed: 5 });
+  const preferred = OB.allyChoice(seer, { stance: "balanced", prefer: ["cut"], rules, fnIndex, opposed: 5 });
+  check("§327: ⛔ AN ALLY'S CRAFT FOLLOWS THEIR STANCE — cautious, the seer reads; aggressive, they cut; and a preferred craft (★) weighs half again",
+    cautious?.family === "KNOW" && aggressive?.name === "Cut" && preferred?.name === "Cut" && preferred.preferred === true,
+    JSON.stringify({ cautious: cautious?.name, aggressive: aggressive?.name, preferred: preferred?.name }));
+  let k = 0; const rng = () => [0.01, 0.99, 0.3][k++ % 3];
+  const round = OB.partyRound([striker, guard, seer], { orders: { s: { stance: "cautious" } }, forward: ["a"], rules, fnIndex, opposed: 5, rng });
+  check("§327: ⛔ THE PARTY'S ROUND — the ones brought forward are told first, by name and craft; the rest act for themselves in the line; the outcomes are decided and the GM tells them",
+    round.forward.length === 1 && round.forward[0].name === "Striker" && round.folded.length === 2
+    && /^THE PARTY'S ROUND/.test(round.directive) && /- Striker uses Blade \(strike\) — STRONG SUCCESS\. Say what it does, by name\./.test(round.directive)
+    && /In the line, acting for themselves: Guard uses/.test(round.directive) && /The outcomes are decided; tell them, do not change them\./.test(round.directive), round.directive);
+  const A327 = rd("app.js").replace(/\r\n/g, "\n").split("\n").filter(l => !/^\s*\/\//.test(l)).join("\n");
+  const E327 = rd("engine/encounters.js").replace(/\r\n/g, "\n");
+  const { rosterForGM: rgm327 } = await import("../engine/fellowship.js");
+  const who = { level: 20, bands: [{ id: "b1", name: "Ridge Watch", stance: "aggressive", condition: "fresh", contingents: [{ n: 12, quality: 1, does: ["HARM", "MARTIAL"] }] }], npcRegistry: {} };
+  const roster = (rgm327(who, { content: C327 }) || []).join("\n");
+  check("§327: ⛔ WHERE IT REACHES PLAY — the Party and Legion tabs are on the bar and wired; the Party tab's pick is the fight's default in the engine AND the panel; every fight turn hands the GM the party's round; the GM's roster says a band's stance",
+    /id="tab-party">⚑ Party</.test(A327) && /id="tab-legion">♜ Legion</.test(A327) && /go\("tab-party", \(\) => renderPartyTab\(\)\)/.test(A327) && /go\("tab-legion", \(\) => renderLegionTab\(\)\)/.test(A327)
+    && /chosen: state\.broughtForward \|\| character\?\.partyForward \|\| null/.test(E327) && /chosen: st\.broughtForward \|\| character\.partyForward \|\| null/.test(A327)
+    && /if \(partyLine\) beats\.push\(partyLine\);/.test(A327) && /partyRound\(allies, \{ orders: character\.allyOrders \|\| \{\}, forward: fwdIds/.test(A327)
+    && /its stance: aggressive — it strikes and breaks first/.test(roster) && /\$\{u\.isLegion \? "" : bandTurnHtml\(u\)\}/.test(A327), roster.slice(0, 200));
+}
+
+// ══════════ §328 · CCODE-449 — ONE PERSON, ONE SEAT; AND THE COUNT IS THE ALLIES ══════════
+// Found building the Party tab on Silas's save: Marrow sat twice (a companion AND on the company roster, one id), and the fight engine counted
+// the player into "allies present" — a party of three read as four and one was folded, against Erik's 2026-09-12 ruling.
+console.log("\n── §328 · a companion on the company roster is one person in a fight, and three allies all act — in the engine as on the panel ──");
+{
+  const CB328 = await import("../engine/combatants.js");
+  const ML328 = await import("../engine/melee.js");
+  const who = { id: "c328", name: "Tester", level: 20, companions: ["marrow"], company: [{ npcId: "marrow", roles: ["ally"] }, { npcId: "pell", roles: ["ally"] }, { npcId: "veth", roles: [] }] };
+  const seat = CB328.alliesOf(who, { companions: { marrow: { id: "marrow", name: "Marrow", assistTags: ["reveal"] } }, npcs: { pell: { name: "Pell" }, veth: { name: "Veth" } }, company: who.company });
+  const ids = seat.filter(a => !a.isPlayer).map(a => a.id);
+  const marrow = seat.find(a => a.id === "marrow");
+  check("§328: ⛔ ONE PERSON, ONE SEAT — a companion who is also on the company roster is seated once, carrying the roster's roles",
+    ids.length === 3 && ids.filter(x => x === "marrow").length === 1 && marrow.kind === "companion" && (marrow.roles || []).includes("ally"), JSON.stringify(ids));
+  const E328 = rd("engine/encounters.js").replace(/\r\n/g, "\n");
+  const present = seat.filter(a => a.present);   // what the engine's `partyPresent` holds — the player included
+  const engineCount = present.filter(a => a && !a.isPlayer && a.kind !== "player").length;
+  const lead = { slots: 3, why: "you lead 3" };
+  const engineSplit = ML328.lineSplit(seat, { chosen: null, lead, presentCount: engineCount });
+  const panelSplit = ML328.lineSplit(seat, { chosen: null, lead, presentCount: seat.filter(a => a.present !== false && !a.isPlayer && a.kind !== "player").length });
+  check("§328: ⛔ THE COUNT IS THE ALLIES — the engine passes allies present without the player, so three allies all act (Erik: \"3 or fewer … everyone acts and no one is folded\"), exactly as the panel says",
+    /presentCount: partyPresent\.filter\(a => a && !a\.isPlayer && a\.kind !== "player"\)\.length/.test(E328) && !/presentCount: partyPresent\.length/.test(E328)
+    && engineCount === 3 && engineSplit.everyoneActs && engineSplit.folded.length === 0 && panelSplit.everyoneActs
+    && ML328.lineSplit(seat, { chosen: null, lead, presentCount: present.length }).folded.length === 1,
+    JSON.stringify({ engineCount, engine: engineSplit.why, withPlayerCounted: ML328.lineSplit(seat, { chosen: null, lead, presentCount: present.length }).why }));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

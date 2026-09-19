@@ -416,6 +416,17 @@ export function alliesOf(character, { companions = {}, npcs = {}, tagFamilies = 
   // JOIN my party — THEY need to be able to fight with me." An entry carrying the `ally` role brings HARM.
   for (const e of (company || character?.company || [])) {
     if (!e || e.leftDay) continue;                       // the departed are not in the fight
+    // ⛔ CCODE-449 — ONE PERSON, ONE SEAT. A companion who is also on the company roster (Marrow, on Silas's save) was seated twice under
+    // one id: a foe's pick saw her twice, and the count read a party of three as four. The company entry's roles and what they bring join
+    // the seat she already has.
+    const seated = out.find(a => a && !a.isPlayer && e.npcId && String(a.id) === String(e.npcId));
+    if (seated) {
+      const npc0 = npcs?.[e.npcId] || {};
+      seated.roles = [...new Set([...(seated.roles || []), ...(e.roles || [])])];
+      seated.contributions = [...new Set([...(seated.contributions || []), ...contributionsOf({ ...npc0, ...e, roles: e.roles || [] }, opts)])];
+      seated.canAct = seated.contributions.length > 0;
+      continue;
+    }
     const npc = npcs?.[e.npcId] || {};
     const rec = { ...npc, ...e, roles: e.roles || [] };
     const contrib = contributionsOf(rec, opts);

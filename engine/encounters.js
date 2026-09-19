@@ -420,7 +420,10 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   // computed its own split from `lead.slots` and nothing else, so the picture and the fight disagreed about who
   // was folded: Erik's pips were inert and his "folded" party was never folded at all.
   const split = partyAll.length > 1
-    ? lineSplit(partyAll, { chosen: state.broughtForward || null, lead, presentCount: partyPresent.length })
+    // ⛔ CCODE-449 — THE COUNT IS THE ALLIES, as the ruling above says and this line did not: `partyPresent` includes the player, so a
+    // party of three read as four here while the panel (which counts allies) said everyone acts. Now both count the same people.
+    ? lineSplit(partyAll, { chosen: state.broughtForward || character?.partyForward || null, lead,   // CCODE-448: the Party tab's pick is the default
+      presentCount: partyPresent.filter(a => a && !a.isPlayer && a.kind !== "player").length })
     : null;
   // ⛔ SPEC_party_contributions, SHAPE B. A folded ally does the thing their family is FOR, once a fight each,
   // and it is named — Erik: "being IN the party must be beneficial", and a warder in slot 5 contributed exactly

@@ -475,5 +475,10 @@
     "purpose": "The armory: a hold's forge and smithy make the gear their order names from the store's raw material, the armory keeps it by count, and a body of hands is outfitted up to the stock — one weapon, one shield, one armour a head — which lifts its quality and, with shields on half of it, lets it protect. Gear sells as arms.",
     "playerVisibleSurface": "A hold's card: the 'armory' line, the Make order where a forge or smithy stands, and 'Sell gear' where you stand. The Bands tab: what each body of hands carries, and 'Outfit' where you stand in a hold of yours.",
     "whatMakesItFire": "A player ordering gear, outfitting a body of hands or selling gear at a hold; and every pass of the world tick, when a hold's forge works its order."
+  },
+  "orderofbattle.js": {
+    "purpose": "The order of battle: a stance (cautious, balanced, aggressive) cuts a side's turn into slots, each person takes the slot they are best at relative to the rest (an optimal assignment), hands split by the same weights; an ally's craft is chosen by their stance and preferred crafts; the party's round is rolled and told to the GM.",
+    "playerVisibleSurface": "The Party tab (stance, brought forward, preferred crafts, Roll a round), each band's 'One turn of the band, by stance' panel on the Bands tab, and the Legion tab's matrix and commander.",
+    "whatMakesItFire": "Opening those tabs, changing a stance or a preference, and every fight turn with allies, when the party's round is told to the GM."
   }
 }

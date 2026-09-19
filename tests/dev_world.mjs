@@ -66,10 +66,10 @@ const CONTENT = await loadContentHeadless();
 
 // ── force the clock ─────────────────────────────────────────────────────────────────────────────────────
 const character = devCharacter();
-// The tick is `runWorldTick`, and it is ASYNC with an AI-backed `advanceAssignments` default. That default is
-// itself a finding: a world tick that needs a model to advance assignments cannot advance them in a test, and
-// arguably not in ordinary play either. It is INJECTED here with a deterministic stub — the same seam every
-// other engine test uses, and the reason the parameter exists.
+// The tick is `runWorldTick`, and it is ASYNC with an `advanceAssignments` default. That default WAS a model call, and
+// that was itself a finding: a world tick that needs a model to advance assignments cannot advance them in a test, and
+// arguably not in ordinary play either. ⛑ CCODE-428 closed it — the default is the job's dice now. It is still INJECTED
+// here with a deterministic stub — the same seam every other engine test uses, and the reason the parameter exists.
 const { runWorldTick, initWorldState } = await import("../engine/worldtick.js");
 character.worldState = initWorldState(1);
 const stubAdvance = async (assignments = []) => assignments.map(a => ({ ...a, progressed: true }));

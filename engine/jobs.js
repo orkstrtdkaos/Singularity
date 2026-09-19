@@ -33,6 +33,8 @@ import { applyLevelUps } from "./progression.js";
 import { addContingent } from "./melee.js";
 import { ensureJobs, dueJobs, landJob } from "./jobstate.js";
 import { smartClamp } from "./namematch.js";
+import { MISSION_KINDS } from "./assignments.js";   // ⛔ CCODE-428: an errand's kind names the family it wants
+import { familiesFromEvidence } from "./combatants.js"; // …and a standing charge's own words name its family
 
 /** The five ways a roll lands, in the resolver's own words, best first. */
 export const OUTCOMES = ["crit_success", "success", "partial", "failure", "crit_failure"];
@@ -486,6 +488,122 @@ export function settleDueJobs(character, { nowHours = 0, rng = Math.random, cont
     if (back) settled.push(back);
   }
   return settled;
+}
+
+// ── ERRANDS, BY THE SAME ROLL (CCODE-428) ───────────────────────────────────────────────────────────────────────────────────
+
+/** ⛔ CCODE-428 — THE ERRAND DIALS, beside the job's, and overridable the same way (`rules.jobs.errand`). `level` is what a delegated
+ *  charge opposes you at on the job scale (a village chore 5, a dangerous hunt 20); a charge set against a crisis opposes at `perStage` more
+ *  for each stage the crisis has reached. `steps` is how many steps of headway finish a MISSION — ⚠️ a charge with no kind (a watch kept, the
+ *  accounts run, a post rebuilt) has none, because the dice cannot know when a standing duty is over; the fiction ends those. `maxRolls`
+ *  caps the rolls one tick makes for a long absence, and `outcome` is what each of the five degrees does to the charge. */
+export const ERRAND_DEFAULTS = {
+  level: 10, perStage: 5, maxRolls: 10,
+  steps: { word: 1, escort: 2, trade: 2, treat: 2, watch: 3, seek: 3, work: 3 },
+  outcome: { crit_success: "progress", success: "progress", partial: "progress", failure: "stall", crit_failure: "problem" },
+};
+function errandRules(rules = {}) {
+  const e = rules?.jobs?.errand;
+  if (!e || typeof e !== "object") return ERRAND_DEFAULTS;
+  return { ...ERRAND_DEFAULTS, ...e, steps: { ...ERRAND_DEFAULTS.steps, ...(e.steps || {}) }, outcome: { ...ERRAND_DEFAULTS.outcome, ...(e.outcome || {}) } };
+}
+/** What one roll does to a charge, as three shares — headway, a stall, trouble — by the dial's `outcome` map, so a card never says a
+ *  number the mapping does not pay. Pure. */
+function sharesOf(dist, E) {
+  const s = { headway: 0, stall: 0, trouble: 0 };
+  for (const k of OUTCOMES) {
+    const o = E.outcome?.[k];
+    s[o === "progress" ? "headway" : o === "problem" ? "trouble" : "stall"] += num(dist?.[k], 0);
+  }
+  return s;
+}
+function errandLevel(assignment, { worldState = null, rules = {} } = {}) {
+  const E = errandRules(rules);
+  const st = assignment?.targetEventId ? worldState?.eventStages?.[assignment.targetEventId] : null;
+  const stage = st && !st.resolved ? Math.max(1, num(st.stage, 1)) : 0;
+  return Math.max(1, Math.round(num(E.level, 10) + stage * num(E.perStage, 5)));
+}
+
+/** ⛔ CCODE-428 — AN ERRAND IS A ONE-NEED JOB for the one person carrying it, rolled on the job's own dice (`planJob`). A MISSION's need
+ *  is its kind's family, or the kind's second one; a STANDING charge's (most of them) is the family its own words name, read by the
+ *  stems that tell what a person is good for. Someone with no craft for it — or whom the sheet cannot build — works by plain effort.
+ *  → { dist, shares, level, family, craft, how: "craft"|"effort"|"uncovered", person, steps } — the five outcomes of ONE roll, which the
+ *  tick makes once per three days away. Pure. */
+export function errandOdds(character, assignment, ctx = {}) {
+  const { content = {}, fnIndex = null, worldDay = null } = ctx;
+  const rules = content.rules || {};
+  const E = errandRules(rules);
+  const level = errandLevel(assignment, { worldState: character?.worldState, rules });
+  const opposed = jobOpposition(level, rules);
+  const kind = MISSION_KINDS[String(assignment?.kind || "").toLowerCase()] || null;
+  const steps = kind ? (num(E.steps?.[assignment.kind], 0) || null) : null;
+  const location = assignment?.destination ? content.locations?.[assignment.destination] || null : null;
+  let person = null;
+  try { person = assignment?.npcId ? jobPersonFor(character, assignment.npcId, { content, worldDay }) : null; } catch { person = null; }
+  const effort = (sheet) => craftOdds(sheet || {}, { attribute: "practical", rank: 1, name: "plain effort" }, { rules, opposed, location, source: "the errand" }).odds;
+  const jobFor = (family) => ({ id: assignment?.id || null, level, needs: [{ family, weight: 1 }], effort: 1, where: assignment?.destination || null });
+  if (!person) { const d = effort(null); return { dist: d, shares: sharesOf(d, E), level, family: null, craft: null, how: "effort", person: null, steps }; }
+  const crafts = jobCraftsOf(person, { fnIndex, rules, opposed, location });
+  const bestOf = (fams) => fams.map(f => ({ f, c: bestCraftFor(crafts, f, rules) })).filter(x => x.c).sort((a, b) => b.c.w - a.c.w)[0] || null;
+  if (kind) {
+    // a MISSION: its kind's family or its second — and a kind they carry neither of is rolled as a need nobody covers (near-certain to fail)
+    const pick = bestOf([kind.wants, kind.also].filter(Boolean));
+    const plan = planJob(jobFor(pick?.f || kind.wants), [person], { rules, fnIndex, location });
+    return { dist: plan.dist, shares: sharesOf(plan.dist, E), level, family: pick?.f || kind.wants, craft: pick?.c?.name || null,
+      how: pick ? "craft" : "uncovered", person, steps };
+  }
+  // ⛔ A STANDING CHARGE ROLLS ON WHAT IT SAYS. "…forge…" is SHAPE, "warden" is PROTECT, "delegate to the committee" is INFLUENCE — ⚑ with
+  // the best-family rule alone every one of Silas's four charges rolled on HARM, a reconstruction included. ⚠️ Someone with no craft for
+  // what it names does it by PLAIN EFFORT: the stems are a heuristic, and a heuristic's miss must not doom a charge the GM gave them.
+  // Words that name nothing fall to the family they are best at.
+  const named = familiesFromEvidence({ role: assignment?.charge || "" });
+  const pick = bestOf(named.length ? named : [...new Set(crafts.map(c => c.family))]);
+  if (!pick) { const d = effort(person.sheet); return { dist: d, shares: sharesOf(d, E), level, family: named[0] || null, craft: null, how: "effort", person, steps }; }
+  const plan = planJob(jobFor(pick.f), [person], { rules, fnIndex, location });
+  return { dist: plan.dist, shares: sharesOf(plan.dist, E), level, family: pick.f, craft: pick.c.name || null, how: "craft", person, steps };
+}
+
+/** The line a person's record carries after the dice — what moved, true to the rolls, and nothing the dice did not decide. Pure. */
+function errandNote(a, sequence = []) {
+  const who = a?.npcName || "They";
+  const what = smartClamp(String(a?.charge || "the work"), 90);
+  const ahead = sequence.filter(o => o === "progress" || o === "done").length;
+  const last = sequence[sequence.length - 1];
+  if (last === "done") return `${who} has finished it: ${what}.`;
+  if (last === "problem") return `${who} ran into trouble${ahead ? " after making headway" : ""}: ${what}.`;
+  if (last === "stall") return ahead ? `${who} made headway, then stalled: ${what}.` : `${who} has stalled: ${what}.`;
+  return `${who} is making headway${ahead > 1 ? ` (${ahead} steps)` : ""}: ${what}.`;
+}
+
+/** ⛔ CCODE-428 — THE WORLD TICK'S DELEGATED WORK, BY THE DICE. It was a model call (`aiAssignmentAdvancement`) deciding each charge's
+ *  outcome and writing its line; the order of battle Erik approved puts errands on the job's roll. For each charge due, ONE roll per
+ *  interval since it last moved (`intervalHours`, at most `maxRolls`), each degree an outcome by `outcome`, stopping at trouble or at the
+ *  end of a mission — a mission is done on the step that reaches its kind's `steps`; a charge with no kind never is. → the shape the model
+ *  returned, so the tick applies it through the same doors: `{ advancements: [{ assignmentId, outcome, sequence, degrees, level,
+ *  family, note, rolled: true }] }`. Pure given `rng`. */
+export function rollErrands({ character, content = {}, assignments = [], worldCount = 0, intervalHours = 72, rng = Math.random, fnIndex = null, worldDay = null } = {}) {
+  const E = errandRules(content.rules || {});
+  const advancements = [];
+  for (const a of assignments || []) {
+    if (!a || a.status === "done") continue;
+    const since = num(a.lastMovedWorldCount ?? a.stampedAtWorldCount ?? 0, 0);
+    const intervals = Math.max(1, Math.min(num(E.maxRolls, 10), Math.floor((num(worldCount, 0) - since) / Math.max(1, num(intervalHours, 72)))));
+    const { dist, level, family, steps } = errandOdds(character, a, { content, fnIndex, worldDay });
+    let progress = num(a.progress, 0);
+    const sequence = [], degrees = [];
+    for (let i = 0; i < intervals; i++) {
+      const degree = rollJob(dist, rng);
+      let outcome = E.outcome?.[degree] || "stall";
+      if (outcome === "progress" && steps && progress + 1 >= steps) outcome = "done";
+      degrees.push(degree);
+      sequence.push(outcome);
+      if (outcome === "progress" || outcome === "done") progress++;
+      if (outcome === "done" || outcome === "problem") break;
+    }
+    advancements.push({ assignmentId: a.id, outcome: sequence[sequence.length - 1], sequence, degrees, level, family,
+      odds: dist, note: errandNote(a, sequence), rolled: true });
+  }
+  return { advancements };
 }
 
 /** ⛔ EACH PERSON'S OWN ROAD — the journey planner's, from where they stand, at their own wayfaring (their wits; the gates the character

@@ -53,6 +53,8 @@ import { enterDeathState, deepenDeaths, deathDepth, isRetrievable, resolveRetrie
 import { absoluteWorldDay, worldDayAt, worldCount, readClock, positionedPlace } from "./worldtime.js";
 import { voyageTick, whereaboutsOf } from "./carriage.js";   // ⛔ B6b: a voyage arrives on world time, and where she is now is where she can be raided
 import { advanceAssignment, progressAgainst, problemCost } from "./assignments.js"; // SNG-191 §4: the world advances delegated work
+import { rollErrands } from "./jobs.js";                 // ⛔ CCODE-428: …by the job's own dice
+import { buildFunctionIndex } from "./functions.js";     // the verb → family index the dice read a person's crafts through
 import { seedArc, fomentArc, surfaceableArcs, markSurfaced, seasonalPressure } from "./latentarcs.js"; // SNG-191 §7: the world's own agenda
 import { ensureCanonStore, promotionCandidates, promoteInto, canonForViewer, applyCanonLook } from "./canon.js";   // CCODE-422: where a look lands
 
@@ -321,7 +323,7 @@ export function effectiveLocation(location, worldState) {
  */
 const ASSIGN_INTERVAL_HOURS = 72;   // ~3 world days — the old semantic, on the clock that cannot be gamed
 
-export async function advanceDelegatedWork({ character, content, advanceAssignments, currentDay, now = Date.now() }) {
+export async function advanceDelegatedWork({ character, content, advanceAssignments, currentDay, now = Date.now(), rng = Math.random }) {
   const ws = character?.worldState;
   if (!ws || !advanceAssignments) return { news: [], moved: 0 };
   const count = worldCount(now);
@@ -336,15 +338,26 @@ export async function advanceDelegatedWork({ character, content, advanceAssignme
   const news = [];
   try {
     const elapsedWorldDays = Math.floor((count - Math.min(...due.map(a => a.lastMovedWorldCount ?? a.stampedAtWorldCount ?? 0))) / 24);
-    const result = await advanceAssignments({ character, content, assignments: due.slice(0, 6), elapsed: elapsedWorldDays, currentDay });
+    const result = await advanceAssignments({ character, content, assignments: due.slice(0, 6), elapsed: elapsedWorldDays, currentDay,
+      worldCount: count, intervalHours: ASSIGN_INTERVAL_HOURS, rng });
     const statusUpdates = [];
     const moved = [];
+    // ⛔ CCODE-428 — ONE STATUS LINE PER PERSON, the most telling of their charges this tick. Edvar Crane carries two of Silas's, and the
+    // second line simply overwrote the first. What it cost outranks what the dice said; a pass that WROTE its own line (a model, a stub)
+    // keeps it on top, as it always did.
+    const noteFor = new Map();
+    const NOTE_RANK = { problem: 4, done: 3, stall: 2, progress: 1 };
+    const noteOnce = (npcId, text, rank) => { if (!npcId || !text) return; const cur = noteFor.get(npcId); if (!cur || rank > cur.rank) noteFor.set(npcId, { text, rank }); };
     for (const adv of (result?.advancements || []).slice(0, 6)) {
       const a = ws.assignments[adv?.assignmentId];
       if (!a) continue;
-      advanceAssignment(a, adv.outcome, count);
+      // ⛔ CCODE-428: THE DICE ROLL ONCE PER INTERVAL AWAY, and each roll lands in order through the same door — a month away is several
+      // steps of headway, not one. A pass that returns a single outcome (a stub, an older pass) is a sequence of one.
+      const seq = Array.isArray(adv.sequence) && adv.sequence.length ? adv.sequence : [adv.outcome];
+      for (const o of seq) advanceAssignment(a, o, count);
+      const outcome = seq[seq.length - 1];
       // ✅ R37a: A COMPLETION IS WORTH ONE LEVEL — stamped on the person's record, read by `derivedLevel`.
-      if (adv.outcome === "done" && a.npcId && character?.npcRegistry?.[a.npcId]) {
+      if (outcome === "done" && a.npcId && character?.npcRegistry?.[a.npcId]) {
         const n = character.npcRegistry[a.npcId];
         n.completions = (Number(n.completions) || 0) + 1;
       }
@@ -357,7 +370,7 @@ export async function advanceDelegatedWork({ character, content, advanceAssignme
       // ⛑ THE COST LANDS ON WHAT THE PLAYER ALREADY TRACKS. `problemCost` is pure and returns the BILL; the
       // purse and the disposition store each have one door in, and they are paid through those doors here.
       let cost = null;
-      if (adv.outcome === "problem") {
+      if (outcome === "problem") {
         cost = problemCost(a);
         if (cost) {
           // ⚠️ STANDING IS THE ONE THAT LANDS MECHANICALLY TODAY. A lost stake, a hurt escort, a place that now
@@ -367,11 +380,11 @@ export async function advanceDelegatedWork({ character, content, advanceAssignme
             const n = character.npcRegistry[a.npcId];
             n.relationship = (Number(n.relationship) || 0) + cost.standing;
           }
-          if (a.npcId) statusUpdates.push({ op: "update", npcId: a.npcId, statusNote: smartClamp(cost.line, 200) });
+          noteOnce(a.npcId, cost.line, 5);
         }
       }
-      moved.push({ a, outcome: adv.outcome, note: adv.note, cost });
-      if (adv.note && a.npcId) statusUpdates.push({ op: "update", npcId: a.npcId, statusNote: smartClamp(adv.note, 200) });
+      moved.push({ a, outcome, note: adv.note, cost, rolled: !!adv.rolled });
+      noteOnce(a.npcId, adv.note, adv.rolled ? (NOTE_RANK[outcome] || 1) : 6);
     }
     // ⛔ CATCH-UP NEEDS A DIGEST, AND AEVI IS RIGHT THAT IT MATTERS: a month away is ~10 intervals, and ten
     // separate progress notices would feel WORSE than the silence they replace — a wall of small news is
@@ -387,10 +400,12 @@ export async function advanceDelegatedWork({ character, content, advanceAssignme
       news.push(`Word catches up on the work you set in motion: ${moved.length} charges moved${parts.length ? ` — ${parts.join("; ")}` : ""}.`);
     } else {
       for (const m of moved) {
-        if (m.outcome === "problem") news.push(`${m.a.npcName} has hit trouble with ${m.a.charge}${m.note ? ` — ${smartClamp(m.note, 200)}` : ""}.`);
+        // ⚠️ a rolled note restates the charge (it is the person's status line), so it is not appended to the news that already names it
+        if (m.outcome === "problem") news.push(`${m.a.npcName} has hit trouble with ${m.a.charge}${m.note && !m.rolled ? ` — ${smartClamp(m.note, 200)}` : ""}.`);
         else if (m.outcome === "done") news.push(`${m.a.npcName} has finished ${m.a.charge}.`);
       }
     }
+    for (const [npcId, n] of noteFor) statusUpdates.push({ op: "update", npcId, statusNote: smartClamp(n.text, 200) });
     if (statusUpdates.length) applyNpcUpdates(character, statusUpdates, { day: currentDay, worldDay: absoluteWorldDay(now) });   // CCODE-385: stamped
     // ⚠️ RETURN WHAT MOVED, NOT WHAT WAS WORTH SAYING. Inferring "did anything happen" from "was there
     // news" reads a QUIET SUCCESS as nothing happening — a plain `progress` prints no line by design.
@@ -652,13 +667,13 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null, co
   return { news: news.map(t => ({ text: t, section: "yours" })), moved };
 }
 
-export async function runWorldTick({ character, content, currentDay, advanceAssignments = aiAssignmentAdvancement, rng = Math.random }) {
+export async function runWorldTick({ character, content, currentDay, advanceAssignments = rollAssignmentAdvancement, rng = Math.random }) {
   if (!character.worldState) character.worldState = initWorldState(currentDay);
   const ws = character.worldState;
   const elapsed = currentDay - (ws.lastTickDay ?? currentDay);
   // SNG-366: the delegated-work pass runs on WORLD time and must not sit behind the character-day gate —
   // that early return is what Silas has been parked on for 915 actions. Only THIS block is lifted.
-  const delegated = await advanceDelegatedWork({ character, content, advanceAssignments, currentDay });
+  const delegated = await advanceDelegatedWork({ character, content, advanceAssignments, currentDay, rng });
   // ⛔ SNG-356 — the ladder rides in, or presence 14/18/20 are three sentences with nothing behind them.
   const holdings358 = advanceHoldings({ character, ladder: content?.rules?.subAttributeLadder, content, rng });
   // ✅ Q5-B (SPEC_debts_and_reception): a debt is held by a PERSON and escalation is THEIR decision — the same cadence as
@@ -4312,22 +4327,16 @@ export function newsForGM(character, { locations = null } = {}) {
   }).join("\n");
 }
 
-/** SNG-191 §4 — the AI pass, inverted. NOT "what happened to a person" (which writes colour) but "what
- *  PROGRESSED on the work they were delegated." Each assignment gets an OUTCOME (state) plus one line of
- *  what moved on the WORK — which becomes the person's status, never a news slot spent on a small day.
- *  Work set against a crisis should visibly bear on it. UNGUARDRAILED — no softening to keep things tidy. */
-async function aiAssignmentAdvancement({ character, content, assignments, elapsed, currentDay }) {
-  const list = assignments.map(a =>
-    `- ${a.id}: ${a.npcName} holds "${a.charge}"${a.targetEventId ? ` (against ${a.targetEventId})` : ""} — currently ${a.status}, ${a.progress} step(s) in`
-  ).join("\n");
-  const crises = (content.region.activeEvents || []).map(({ eventId }) => {
-    const ev = content.events[eventId];
-    const st = character.worldState.eventStages[eventId];
-    if (st?.resolved) return ev ? `- ${eventId}: ${ev.name} — ANSWERED (it is over; work set against it now bears on the aftermath)` : null;   // CCODE-354
-    const def = ev?.stages.find(s => s.stage === (st?.stage ?? 1));
-    return ev ? `- ${eventId}: ${ev.name} — ${def?.name}: ${def?.summary}` : null;
-  }).filter(Boolean).join("\n");
-  const sys = `You advance DELEGATED WORK in an RPG while the player was away — the WORK, not the workers' moods. ${elapsed} in-game days passed. For each assignment, decide what PROGRESSED: an OUTCOME (progress | stall | problem | done) and ONE grounded sentence of what actually MOVED on the work. Work against a crisis must visibly bear on that crisis. The world is UNGUARDRAILED — a problem may be serious, a success real; never soften an outcome to keep things tidy, and never invent work that was not delegated. Reply ONLY JSON: {"advancements":[{"assignmentId":"exact-id-from-the-list","outcome":"progress|stall|problem|done","note":"one sentence: what moved on the WORK (this becomes the person's current status)"}]}`;
-  const content2 = `Days passed: ${elapsed} (now day ${currentDay}).\n\nDELEGATED WORK (advance these):\n${list}\n\nCRISES IN THE REGION (work may bear on these):\n${crises || "none active"}`;
-  return callClaudeJSON([{ role: "user", content: content2 }], { task: "world-tick", system: sys, maxTokens: 1024 });
+/** ⛔ CCODE-428 — THE DEFAULT PASS IS THE DICE. SNG-191 §4's inversion stands — the tick asks what PROGRESSED on the work, and an
+ *  outcome lands on state — but the outcome is now the job's roll for the person carrying it (`rollErrands`), not a model's judgement
+ *  (the model pass, `aiAssignmentAdvancement`, is retired; git history keeps the prompt it sent). There is no model call in it. The
+ *  function-family index is built once per content object. */
+const _fnIndexByContent = new WeakMap();
+async function rollAssignmentAdvancement({ character, content, assignments, worldCount, intervalHours, rng }) {
+  let fnIndex = content && typeof content === "object" ? _fnIndexByContent.get(content) : null;
+  if (!fnIndex) {
+    fnIndex = buildFunctionIndex(content?.functionVocabulary);
+    if (content && typeof content === "object") _fnIndexByContent.set(content, fnIndex);
+  }
+  return rollErrands({ character, content, assignments, worldCount, intervalHours, rng, fnIndex });
 }

@@ -1895,6 +1895,20 @@ img[data-lightbox] { cursor: zoom-in; }
 .job-deg-crit_success { color: var(--o-crit); } .job-deg-success { color: var(--o-success); }
 .job-deg-crit_failure, .job-plan .bad, .hint.bad { color: var(--o-fumble); }
 .job-back { flex-wrap: wrap; }
+/* ⛔ CCODE-428 — the charges in your name: a face, what they carry, and the dice each three days */
+.charge-row { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 10px; align-items: start; padding: 8px 0; border-top: 1px solid var(--border); }
+.charge-row:first-of-type { border-top: 0; }
+.charge-face { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; object-position: center 20%; border: 1px solid var(--border); }
+img.charge-face { cursor: zoom-in; }
+.charge-face-none { display: grid; place-items: center; background: var(--panel2); color: var(--ink-dim); font-family: var(--font-ui); font-weight: 600; }
+.charge-body { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.charge-head { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-family: var(--font-ui); font-size: 13px; }
+.charge-what { font-size: 13px; color: var(--ink); overflow-wrap: anywhere; }
+.charge-odds { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.charge-odds .hint { font-size: 12px; }
+.charge-st { padding-right: 8px; }
+.charge-st-problem { color: var(--o-fumble); border-color: var(--o-fumble); }
+.charge-st-stalled { color: var(--ink-dim); }
 .job-form { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
 .job-form #jp-label { flex: 1 1 260px; min-width: 0; }
 @media (prefers-reduced-motion: no-preference) { .job-tile { transition: border-color .15s ease; } }

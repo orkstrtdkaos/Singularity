@@ -85,7 +85,7 @@ import { rankVoices, pickVoice, speakableText, chunkForSpeech, renderProseHtml }
 import { harmGateFor, harmTargetFor, departureGateFor, isConsequentialMove, isSpeechAct, isRemoteContact, personDestination, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop); SNG-188: speech-act guard; SNG-228: person-as-place guard; CCODE-158: one departure definition for both doors; CCODE-159: remote contact is not travel
 import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, gateHopCost, aimsOpen } from "./engine/waygate.js";
 import { routeBetween, routeLine, twoWayRoads } from "./engine/journey.js";
-import { planJob, suggestTeam, jobPoolOf, jobRouteOf, jobCost, jobEffects, sayEffects, settleDueJobs, degreeWord, jobOpposition, mainNeedOf, jobCraftsOf, bestCraftFor, OUTCOMES as JOB_OUTCOMES } from "./engine/jobs.js";   // CCODE-420
+import { planJob, suggestTeam, jobPoolOf, jobRouteOf, jobCost, jobEffects, sayEffects, settleDueJobs, degreeWord, jobOpposition, mainNeedOf, jobCraftsOf, bestCraftFor, OUTCOMES as JOB_OUTCOMES, errandOdds } from "./engine/jobs.js";   // CCODE-420 · CCODE-428
 import { ensureJobs, postJob, sendOnJob, awayOnJob, untoldJobs, markJobsTold, dropJob } from "./engine/jobstate.js";   // CCODE-420
 import { sendCaravan, caravansOf } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph, craftRollsLine, craftRollsShort } from "./engine/entityDetail.js";
@@ -169,7 +169,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.90";
+const APP_VERSION = "2.0.91";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -15444,6 +15444,31 @@ function renderJobsTab(selId = null) {
     <strong>"${esc(e.job?.label)}"</strong> <span class="hint">${esc((e.team || []).map(id => (id === "player" ? "you" : e.names?.[id] || id)).join(", "))}${e.backDay != null ? ` · day ${e.backDay}` : ""}${e.told ? "" : " · the GM tells it next"}</span>
     <span style="width:100%">${esc((e.applied || []).join("; ") || "nothing gained, nothing lost")}</span></div>`).join("");
 
+  // ── ⛔ CCODE-428: the charges in your name — delegated work, which the world now rolls every three days on this tab's own dice ──
+  const charges = Object.values(character.worldState?.assignments || {}).filter(a => a && a.status !== "done");
+  const chargeRow = (a) => {
+    let o = null;
+    try { o = errandOdds(character, a, { content: CONTENT, fnIndex: FN_INDEX, worldDay }); } catch (err) { console.warn("[jobs] errand odds failed:", err?.message); }
+    let face = null;
+    try { face = lookOf(a.npcId, { mine: character?.figureImages?.[`whois-${a.npcId}`] || null, authored: CONTENT.npcs?.[a.npcId] || null })?.url || null; } catch { face = null; }
+    const pc = (x) => Math.round(100 * (Number(x) || 0));
+    const st = { working: "working", stalled: "stalled", problem: "in trouble" }[a.status] || a.status || "working";
+    const steps = o?.steps ? `${Math.min(a.progress || 0, o.steps)} of ${o.steps} steps` : `${a.progress || 0} step${(a.progress || 0) === 1 ? "" : "s"} of headway`;
+    const how = !o ? "" : o.how === "effort" ? "by plain effort — nothing of theirs is made for this"
+      : o.how === "uncovered" ? `nothing of theirs can ${JOB_WORD[o.family] || "do this"}` : `${JOB_WORD[o.family] || o.family}${o.craft ? ` with ${o.craft}` : ""}`;
+    return `<div class="charge-row">
+      ${face ? `<img class="charge-face" src="${esc(face)}" alt="${esc(a.npcName || "")}" data-lightbox="figure" data-regen-kind="figure" data-regen-subject="${esc(`whois-${a.npcId}`)}" loading="lazy" title="Open it — draw again, or keep this look" onerror="this.style.visibility='hidden'">`
+        : `<span class="charge-face charge-face-none" aria-hidden="true">${esc(String(a.npcName || "?").charAt(0))}</span>`}
+      <div class="charge-body">
+        <div class="charge-head"><strong>${esc(a.npcName || a.npcId || "Someone")}</strong> <span class="hold-chip charge-st charge-st-${esc(a.status || "working")}">${esc(st)}</span> <span class="hint">${esc(steps)}</span></div>
+        <div class="charge-what">${esc(smartClamp(String(a.charge || ""), 140))}</div>
+        ${o ? `<div class="charge-odds">${oddsBarHtml(o.dist)}<span class="hint">each three days: headway ${pc(o.shares?.headway)}% · stall ${pc(o.shares?.stall)}% · trouble ${pc(o.shares?.trouble)}% — level ${o.level}, ${esc(how)}</span></div>` : ""}
+      </div></div>`;
+  };
+  const chargeBlock = charges.length ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Charges in your name</h3>
+    <p class="hint">Work you left in someone's hands. Every three days the same dice a job uses decide how it went — headway, a stall, or trouble.</p>
+    ${charges.map(chargeRow).join("")}</div>` : "";
+
   // ── post one yourself ──
   // a place you HOLD is a place you know — Threshold Post stood in Silas's name and was not in his knownPlaces
   const known = [...new Set([character.currentLocationId, ...(character.holdings || []).map(h => h?.locationId), ...(character.knownPlaces || [])])]
@@ -15466,6 +15491,7 @@ function renderJobsTab(selId = null) {
     ${panel}
     ${J.out.length ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Out</h3>${outRows}</div>` : ""}
     ${J.back.length ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Came back</h3>${backRows}</div>` : ""}
+    ${chargeBlock}
     ${postForm}
     <button class="btn secondary" id="jobs-back" style="margin-top:12px">Back</button>
   </div>`);

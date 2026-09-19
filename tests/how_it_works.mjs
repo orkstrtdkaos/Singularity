@@ -22258,6 +22258,91 @@ console.log("\n── §306 · the fire tests, sealed — every door applyTurn c
     said306.activeScene.lastTurn.narration === "what was said");
 }
 
+// ══════════ §307 · CCODE-428 — ERRANDS BY THE JOB'S ROLL ══════════
+// The order of battle Erik approved: errands decided by the job's roll instead of `aiAssignmentAdvancement`'s model call. A charge left
+// in someone's hands is a one-need job for the one person carrying it, rolled once per three days away on `planJob`'s dice.
+console.log("\n── §307 · errands by the job's roll — a charge is a one-need job, rolled every three days, and no model decides it ──");
+{
+  const J307 = await import("../engine/jobs.js");
+  const W307 = await import("../engine/worldtick.js");
+  const FN307 = await import("../engine/functions.js");
+  const CB307 = await import("../engine/combatants.js");
+  const { worldCount: wc307 } = await import("../engine/worldtime.js");
+  const { loadContentHeadless: lch307 } = await import("./headless_content.mjs");
+  const CT307 = await lch307();
+  const fn307 = FN307.buildFunctionIndex(CT307.functionVocabulary);
+  const silas307 = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const charges307 = Object.values(silas307.worldState?.assignments || {});
+  const odds307 = charges307.map(a => ({ a, o: J307.errandOdds(silas307, a, { content: CT307, fnIndex: fn307 }) }));
+
+  /* ---- 1 · ⛔ WHAT A CHARGE ROLLS ON ---- */
+  const named307 = (a) => CB307.familiesFromEvidence({ role: a.charge });
+  check("§307: ⛔ a standing charge rolls on what its own words name — on Silas's save every charge a person has a craft for rolls a family its words name (the rebuild on SHAPE)",
+    odds307.length >= 1 && odds307.every(({ a, o }) => o.how !== "craft" || !named307(a).length || named307(a).includes(o.family))
+    && odds307.some(({ a, o }) => /reconstruction/.test(a.charge) && o.family === "SHAPE" && !!o.craft),
+    odds307.map(({ a, o }) => `${a.npcName}: ${o.family}/${o.how}`).join(" · "));
+  const shares307 = odds307.every(({ o }) => Math.abs(o.shares.headway + o.shares.stall + o.shares.trouble - 1) < 1e-9
+    && Math.abs(Object.values(o.dist).reduce((x, y) => x + y, 0) - 1) < 1e-9);
+  check("§307: …each is one roll's five outcomes, and the three shares a card prints — headway, stall, trouble — are the dial's reading of them, summing to one",
+    shares307 && odds307.every(({ o }) => Math.abs(o.shares.headway - (o.dist.crit_success + o.dist.success + o.dist.partial)) < 1e-9));
+  const who307 = { worldState: {}, npcRegistry: {} };
+  const bare307 = J307.errandOdds(who307, { id: "x", npcId: "nobody-at-all", npcName: "X", charge: "keep the ledgers", status: "working" }, { content: CT307, fnIndex: fn307 });
+  const mission307 = odds307.find(({ o }) => o.person) ? J307.errandOdds(silas307, { ...odds307.find(({ o }) => o.person).a, kind: "word" }, { content: CT307, fnIndex: fn307 }) : null;
+  check("§307: …someone the sheet cannot build does it by plain effort, and a MISSION rolls on its kind's family — or, carrying neither, as a need nobody covers",
+    bare307.how === "effort" && bare307.person === null && !!mission307 && ["MOVE"].includes(mission307.family) && ["craft", "uncovered"].includes(mission307.how)
+    && mission307.steps === 1);
+  const crisis307 = J307.errandOdds({ worldState: { eventStages: { w: { stage: 3 } } }, npcRegistry: {} }, { id: "y", npcId: "n", npcName: "Y", charge: "hold the crews", targetEventId: "w" }, { content: CT307, fnIndex: fn307 });
+  check("§307: …at the errand level — ordinary work 10, and a charge set against a crisis opposes at five more per stage it has reached",
+    bare307.level === 10 && crisis307.level === 25);
+
+  /* ---- 2 · ⛔ THE DICE ---- */
+  const cyc = (xs) => { let i = 0; return () => xs[i++ % xs.length]; };
+  const base307 = { id: "s", npcId: "nobody", npcName: "S", charge: "keep the ledgers", progress: 0, status: "working", lastMovedWorldCount: 0 };
+  const standing307 = J307.rollErrands({ character: who307, content: CT307, assignments: [base307], worldCount: 72 * 4, intervalHours: 72, rng: () => 0.001, fnIndex: fn307 }).advancements[0];
+  check("§307: ⛔ one roll per interval away, and a STANDING charge is never finished by the dice — four intervals of headway are four steps, still working",
+    standing307.sequence.length === 4 && standing307.sequence.every(o => o === "progress") && standing307.outcome === "progress" && standing307.rolled === true);
+  const long307 = J307.rollErrands({ character: who307, content: CT307, assignments: [base307], worldCount: 72 * 40, intervalHours: 72, rng: () => 0.001, fnIndex: fn307 }).advancements[0];
+  check("§307: …a long absence rolls at most ten times in one tick", long307.sequence.length === 10);
+  const word307 = J307.rollErrands({ character: who307, content: CT307, assignments: [{ ...base307, kind: "word" }], worldCount: 72 * 4, intervalHours: 72, rng: () => 0.001, fnIndex: fn307 }).advancements[0];
+  const bad307 = J307.rollErrands({ character: who307, content: CT307, assignments: [base307], worldCount: 72 * 4, intervalHours: 72, rng: () => 0.99999, fnIndex: fn307 }).advancements[0];
+  check("§307: …a MISSION is done on the step that reaches its kind's steps, and trouble ends the rolls — nothing is rolled past a problem",
+    word307.sequence.length === 1 && word307.outcome === "done" && bad307.sequence.length === 1 && bad307.outcome === "problem" && bad307.degrees[0] === "crit_failure");
+
+  /* ---- 3 · ⛔ THE TICK: the dice by default, every roll applied, one line per person ---- */
+  const WT307 = rd("engine/worldtick.js");
+  check("§307: ⛔ the tick's default pass is the dice — no model decides delegated work any more, and the prompt that did is gone",
+    /export async function runWorldTick\(\{ character, content, currentDay, advanceAssignments = rollAssignmentAdvancement,/.test(WT307)
+    && /return rollErrands\(\{ character, content, assignments, worldCount, intervalHours, rng, fnIndex \}\);/.test(WT307)
+    && !/async function aiAssignmentAdvancement\(/.test(WT307) && !/You advance DELEGATED WORK/.test(WT307));
+  const nowFor = (count) => { let lo = 0, hi = Date.now() * 4; for (let i = 0; i < 80; i++) { const mid = (lo + hi) / 2; if (wc307(mid) < count) lo = mid; else hi = mid; } return hi; };
+  const copy307 = JSON.parse(JSON.stringify(silas307));
+  const last307 = Math.max(...charges307.map(a => a.lastMovedWorldCount ?? a.stampedAtWorldCount ?? 0));
+  const before307 = Object.fromEntries(charges307.map(a => [a.id, a.progress || 0]));
+  let seed = 7; const rng307 = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+  const seen307 = [];
+  const r307 = await W307.advanceDelegatedWork({ character: copy307, content: CT307, currentDay: 30, now: nowFor(last307 + 9 * 24), rng: rng307,
+    advanceAssignments: async (args) => { const out = J307.rollErrands({ ...args, fnIndex: fn307 }); seen307.push(...out.advancements); return out; } });
+  const rose307 = seen307.every(adv => (copy307.worldState.assignments[adv.assignmentId].progress || 0) - (before307[adv.assignmentId] || 0)
+    === adv.sequence.filter(o => o === "progress" || o === "done").length);
+  const people307 = [...new Set(seen307.map(adv => copy307.worldState.assignments[adv.assignmentId].npcId))];
+  check("§307: ⛑ on a copy of Silas's save, nine days on: every charge rolls its three intervals, each step of headway lands, and each person carries one line",
+    charges307.length === 0 || (r307.moved === seen307.length && seen307.length >= 1 && rose307 && seen307.every(adv => adv.sequence.length >= 1 && adv.sequence.length <= 3)
+      && people307.every(id => typeof copy307.npcRegistry?.[id]?.statusNote === "string")),
+    JSON.stringify(seen307.map(adv => [adv.assignmentId.split("::")[0], adv.sequence.join("/")])));
+  const stub307 = { worldState: { assignments: { "c::x": { id: "c::x", npcId: "c", npcName: "C", charge: "the crews", progress: 2, status: "working", lastMovedWorldCount: 0 } } }, npcRegistry: { c: { id: "c", name: "C", history: [] } } };
+  await W307.advanceDelegatedWork({ character: stub307, content: CT307, currentDay: 5, now: nowFor(24 * 9),
+    advanceAssignments: async () => ({ advancements: [{ assignmentId: "c::x", outcome: "progress", note: "the frame is up" }] }) });
+  check("§307: …and a pass that returns one outcome and its own line — a stub, an older pass — lands exactly as before, its line on top",
+    stub307.worldState.assignments["c::x"].progress === 3 && /the frame is up/.test(stub307.npcRegistry.c.statusNote || ""));
+
+  /* ---- 4 · ⛑ WHERE THE PLAYER SEES IT ---- */
+  const A307 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§307: ⛑ the Jobs tab shows the charges in your name — a face, the charge, and ONE roll's odds with the shares the dice use",
+    /try \{ o = errandOdds\(character, a, \{ content: CONTENT, fnIndex: FN_INDEX, worldDay \}\); \}/.test(A307)
+    && /headway \$\{pc\(o\.shares\?\.headway\)\}% · stall \$\{pc\(o\.shares\?\.stall\)\}% · trouble \$\{pc\(o\.shares\?\.trouble\)\}%/.test(A307)
+    && /\$\{chargeBlock\}\n\s*\$\{postForm\}/.test(A307) && /\.charge-row \{/.test(rd("style.css")));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

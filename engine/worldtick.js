@@ -59,6 +59,11 @@ import { seedArc, fomentArc, surfaceableArcs, markSurfaced, seasonalPressure } f
 import { ensureCanonStore, promotionCandidates, promoteInto, canonForViewer, applyCanonLook } from "./canon.js";   // CCODE-422: where a look lands
 
 const NEWS_CAP = 20;
+// ⛔ CCODE-439 — WHAT WAITS TO BE SHOWN is its own, larger cap: it shared the GM's twenty, so a week away dropped the oldest lines before
+// they were ever shown, and so before they could ever be kept. The GM's rumour buffer stays at twenty — it is a prompt, not a record.
+const UNSEEN_CAP = 60;
+/** ⛔ CCODE-439 — THE LOG THE PLAYER GOES BACK THROUGH: every line taken to be shown, kept, newest last. */
+export const NEWS_LOG_CAP = 250;
 const NEWS_TRAVEL_DAYS = 3;
 
 export function initWorldState(day = 1) {
@@ -829,7 +834,7 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
     const place398 = placeBagOf(ws, character, content);   // CCODE-398
     const stamped = news.map(n => stampNews(n, { day: currentDay, worldDay: wd, place: place398 })); // SNG-211: delegated-work outcomes are real, not ambient · SNG-364: the source assigns the section
     ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);
-    ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
+    ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-UNSEEN_CAP);
     return { ticked: true, news: stamped };
   }
   return { ticked: true, news: [] };
@@ -880,7 +885,7 @@ export async function runGenerationTurn({ character, content, now = Date.now(), 
     const place398 = placeBagOf(ws, character, content);   // CCODE-398
     const stamped = news.map(t => stampNews(t, { day: ws.lastTickDay ?? null, worldDay: absoluteWorldDay(now), section: "world", clamp: 400, place: place398 })); // SNG-211: an arc surfacing/resolving is a real event
     ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);
-    ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
+    ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-UNSEEN_CAP);
   }
   return { news };
 }
@@ -1158,7 +1163,7 @@ export async function syncSharedWorld({ character, content }) {
     // actually happened; a local merge stamps now) — so the shared calendar stays coherent.
     const stamped = news.map(n => stampNews(n, { day: ws.lastTickDay, worldDay: absoluteWorldDay(), section: "world", place: placeBagOf(ws, character, content) }));   // CCODE-398: placed // SNG-211: a cross-character arc move is a real event · SNG-364: sectioned at the source
     ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);
-    ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
+    ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-UNSEEN_CAP);
   }
   return { synced: true, news: news.map(n => n.text) };
 }
@@ -1263,7 +1268,7 @@ export async function syncTrades({ character, now = Date.now(), economy = null }
     ws.news = ws.news || []; ws.unseenNews = ws.unseenNews || [];
     const stamped = news.map(n => stampNews(n, { day: ws.lastTickDay, worldDay, section: "yours" }));
     ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);
-    ws.unseenNews = [...ws.unseenNews, ...stamped].slice(-NEWS_CAP);
+    ws.unseenNews = [...ws.unseenNews, ...stamped].slice(-UNSEEN_CAP);
   }
   return { synced: true, store, news };
 }
@@ -1282,7 +1287,7 @@ export async function syncInvitations({ character } = {}) {
     if (lines.length && ws) {
       const stamped = lines.map(text => stampNews({ text, worldDay: wd }, { day: ws.lastTickDay, worldDay: wd, section: "elsewhere" }));
       ws.news = [...(ws.news || []), ...stamped].slice(-NEWS_CAP);
-      ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
+      ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-UNSEEN_CAP);
     }
     return { synced: true, store, news: lines };
   } catch (err) {
@@ -1421,7 +1426,7 @@ export async function syncSharedFates({ character, content, publish = true, now 
     ws.news = ws.news || []; ws.unseenNews = ws.unseenNews || [];
     const stamped = news.map(n => stampNews(n, { day: ws.lastTickDay, worldDay, section: "world", place: placeBagOf(ws, character, content) }));   // CCODE-398: placed
     ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);
-    ws.unseenNews = [...ws.unseenNews, ...stamped].slice(-NEWS_CAP);
+    ws.unseenNews = [...ws.unseenNews, ...stamped].slice(-UNSEEN_CAP);
   }
   return { synced: true, adopted, published, joined, peopleAdded, lived, news };
 }
@@ -1787,7 +1792,7 @@ export function resolvePlayerStrike(character, op = {}, { worldDay = null, conte
   if (stamped.length) {
     ws.news = ws.news || [];
     ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);   // the one stamper, the one writer's shape (smoke 431/3)
-    ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
+    ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-UNSEEN_CAP);
   }
   return { ok: true, outcome, told, news: stamped };
 }
@@ -3096,7 +3101,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     if (news.length) {
       const stamped = news.map(n => stampNews(n, { day: ws.lastTickDay ?? null, worldDay: n.worldDay, place: placeBagOf(ws, character, content) }));   // CCODE-398: placed
       ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);
-      ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
+      ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-UNSEEN_CAP);
     }
     return news;
   }
@@ -4258,7 +4263,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     // SNG-431 §3: the second of the two — see the note at the early return above.
     const stamped = news.map(n => stampNews(n, { day: ws.lastTickDay ?? null, worldDay: n.worldDay, place: placeBagOf(ws, character, content) }));   // CCODE-398: placed
     ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);
-    ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
+    ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-UNSEEN_CAP);
   }
   return news;
 }
@@ -4319,8 +4324,45 @@ function rankNews(items = [], { maxAmbient = 2, maxTotal = 8 } = {}) {
 /** Pull (and clear) news the player hasn't seen — shown once on return to play, ranked by stakes (SNG-211). */
 export function takeUnseenNews(character, opts = {}) {
   const items = character.worldState?.unseenNews || [];
-  if (character.worldState) character.worldState.unseenNews = [];
+  if (character.worldState) {
+    newsLogOf(character);        // ⚠️ begun BEFORE the waiting list empties, or its seed cannot tell what still waited
+    character.worldState.unseenNews = [];
+    logNews(character, items);   // ⛔ CCODE-439: taken to be shown, and KEPT — the log is where a missed line is found again
+  }
   return rankNews(items, opts);
+}
+
+const newsKey = (n) => `${String(n?.text ?? n ?? "")}|${n?.worldDay ?? ""}`;
+/** ⛔ CCODE-439 — THE LOG, begun on first use from the recent news the world already held (the GM's twenty, less anything still waiting
+ *  to be shown), so a player opening it for the first time finds the last weeks rather than nothing. Mutates; → the log. */
+export function newsLogOf(character) {
+  const ws = character?.worldState;
+  if (!ws) return [];
+  if (!Array.isArray(ws.newsLog)) {
+    const waiting = new Set((ws.unseenNews || []).map(newsKey));
+    ws.newsLog = (ws.news || []).filter(n => n && !waiting.has(newsKey(n))).map(n => (typeof n === "string" ? { text: n } : { ...n }));
+  }
+  return ws.newsLog;
+}
+
+/** ⛔ CCODE-439 — KEEP THESE LINES: appended newest last, never twice (the same words on the same world-day are one line), capped at
+ *  NEWS_LOG_CAP. Mutates; → how many were kept. */
+export function logNews(character, items, { now = Date.now() } = {}) {
+  const ws = character?.worldState;
+  if (!ws || !Array.isArray(items) || !items.length) return 0;
+  const log = newsLogOf(character);
+  const have = new Set(log.slice(-120).map(newsKey));
+  const at = new Date(now).toISOString();
+  const add = [];
+  for (const n of items) {
+    if (!n || !(typeof n === "string" ? n : n.text)) continue;
+    const k = newsKey(n);
+    if (have.has(k)) continue;
+    have.add(k);
+    add.push(typeof n === "string" ? { text: n, loggedAt: at } : { ...n, loggedAt: n.loggedAt || at });
+  }
+  ws.newsLog = [...log, ...add].slice(-NEWS_LOG_CAP);
+  return add.length;
 }
 
 /** Recent news block for the GM prompt — rumors NPCs might repeat. */

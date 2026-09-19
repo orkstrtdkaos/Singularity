@@ -38,7 +38,7 @@ import { buildFeedPost, appendFeedPost, feedForViewer, FEED_PATH } from "./engin
 import { composeImagePrompt } from "./engine/imageprompt.js";   // CCODE-190: code selects the parts, a model composes the line
 import { ITEM_KINDS, itemKindsIn, itemKindLabel, wieldBonusFor, usableCombatItems, normalizeInventory, reclaimEstablishedItems, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates, deriveItem, findItem, skillBonus, startingSkills } from "./engine/inventory.js"; // CCODE-161: reclaim items the story conferred but the ledger missed
 import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive } from "./engine/earnedpower.js"; // SNG-251 §2c/§4: the earned-power economy (ceiling = f(level, craft rank); ~1 evolution/day)
-import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch, positionedPlace, seasonCalendar } from "./engine/worldtime.js";
+import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch, positionedPlace, seasonCalendar, seasonOfWorldDay } from "./engine/worldtime.js";
 import { smartClamp, playerText, normName } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { LIBRARY_INDEX, loreToHtml, libMdToHtml, circleRows } from "./engine/library.js";
 import { contributionsBy, lookKey } from "./engine/canon.js";   // CCODE-422: where a look is filed   // ⛔ SNG-584: who made the shared world — tallied since SNG-128, read by nobody until now   // SNG-538 §4: the Library's index and renderers — pure, gated by §181
@@ -95,7 +95,7 @@ import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent
 import { activeArcEffects, craftCostNote, encounterBias, effectsInPlainWords, npcMoodLines, travelCostFactor } from "./engine/arceffects.js";   // SNG-273: an advanced arc is something you FEEL
 import { knownIndex, whoIs, figureArtRecord } from "./engine/whois.js";   // SNG-299: who is that, and where do I read more
 import { worldTabHtml } from "./engine/worldtab.js";   // SNG-276: the tab's markup, testable
-import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, syncSharedFates, syncHolds, syncTrades, syncTravelers, syncInvitations, sendInvitation, answerInvitation, resolvePlayerStrike, strikeSceneSetup, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter, arcStageNow, worldRoster, NEWS_SECTIONS, pushCanonLook} from "./engine/worldtick.js";
+import { initWorldState, newsLogOf, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, syncSharedFates, syncHolds, syncTrades, syncTravelers, syncInvitations, sendInvitation, answerInvitation, resolvePlayerStrike, strikeSceneSetup, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, arcPeopleView, worldPeopleFooter, arcStageNow, worldRoster, NEWS_SECTIONS, pushCanonLook} from "./engine/worldtick.js";
 import { noteWorldMovedOnShown } from "./engine/worldevents.js";
 import { holdsNear, holdNearLine } from "./engine/sharedholds.js";   // CCODE-383: a hold nearby is known
 import { buyFromHold } from "./engine/holdtrade.js";   // CCODE-388: trading with another player's hold
@@ -172,7 +172,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.1.0";
+const APP_VERSION = "2.1.1";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2911,7 +2911,7 @@ function ensureTestCharacter() {
       deeds: [], relationships: {}, chronicle: [],
       currentLocationId: CONTENT.startingLocation, activeScene: null,
       clock: newClock(), companions: [], quests: [], npcRegistry: {}, placeMemory: {},
-      worldState: initWorldState(1), bio: null
+      worldState: { ...initWorldState(1), updatesToldTo: APP_VERSION }, bio: null
     };
     ensureSubAttributes(c);
     for (const s of SUBS) c.subAttributes[s] = Math.max(c.subAttributes[s] || 0, 6); // clear ability gates
@@ -5825,6 +5825,158 @@ function offerNewBuild(info) {
   try { if (character) renderPlay(character.activeScene?.lastTurn || null, {}); else console.log(`[build] v${v} is out — reload when you like`); } catch { /* the banner is a courtesy */ }
 }
 
+/** ⛔ CCODE-439 — AN UPDATE IS NEWS TOO (Erik, of the notes: "maybe a popup from a news item"). The first time a character comes into play
+ *  on a newer build, the update arrives as a line in the news with the notes one tap away — and, being news, it is kept in the log. Once
+ *  per build per character; a character made on this build is current (`updatesToldTo`) and told nothing. */
+function queueUpdateNotice(ch) {
+  try {
+    const ws = ch?.worldState;
+    if (!ws || !RELEASE_NOTES || ws.updatesToldTo === APP_VERSION) return;
+    const from = ws.updatesToldTo || "2.0.100";
+    const rel = (RELEASE_NOTES.releases || []).filter(r => cmpVer(r.version, from) > 0 && cmpVer(r.version, APP_VERSION) <= 0 && shownEntries(r).length);
+    ws.updatesToldTo = APP_VERSION;
+    if (!rel.length) return;
+    const all = rel.flatMap(shownEntries);
+    const n = (k) => all.filter(e => e.kind === k).length;
+    const bits = [n("feature") ? `${n("feature")} new` : "", n("fix") ? `${n("fix")} fixed` : "", n("change") ? `${n("change")} changed` : ""].filter(Boolean).join(", ");
+    const day = (() => { try { return absoluteWorldDay(); } catch { return null; } })();
+    ws.unseenNews = [...(ws.unseenNews || []), { kind: "update", section: "world", version: APP_VERSION, worldDay: day,
+      text: `The game was updated to v${APP_VERSION}${bits ? ` — ${bits}` : ""}.` }];
+  } catch { /* the banner and the stamp still carry the notes */ }
+}
+
+/** ⛔ CCODE-439 — THE NEWS, KEPT. Erik: "I'd like the news to be something that is saved and I can navigate to review... like a log. in case
+ *  I missed something or wanted to look back." Every line this character has been told, newest first by world-day, filtered by whose it
+ *  is, and rendered exactly as the flash renders it — a fight still opens, an update's notes still open. */
+const _newsUi = { filter: "all", shown: 60 };
+function renderNewsTab() {
+  const log = newsLogOf(character);
+  const NAMES = { world: "The world", yours: "Your work", elsewhere: "Elsewhere" };
+  const FILTERS = [{ id: "all", title: "All" }, ...NEWS_SECTIONS.map(s => ({ id: s.id, title: NAMES[s.id] || s.title })), { id: "update", title: "Updates" }];
+  const fits = (f, n) => f === "all" || (f === "update" ? n?.kind === "update" : n?.kind !== "update" && (n?.section || "world") === f);
+  const rows = log.filter(n => fits(_newsUi.filter, n)).slice().reverse();
+  const shown = rows.slice(0, _newsUi.shown);
+  const groups = [];
+  for (const n of shown) {
+    const d = Number.isFinite(Number(n?.worldDay)) ? Number(n.worldDay) : null;
+    const g = groups[groups.length - 1];
+    if (g && g.day === d) g.items.push(n); else groups.push({ day: d, items: [n] });
+  }
+  const dayHead = (d) => d == null ? "Undated" : `World-day ${d}${(() => { try { return ` · ${seasonOfWorldDay(d)}`; } catch { return ""; } })()}`;
+  chrome(`<div class="screen" style="max-width:680px">
+    <h2>${esc(character.name)}</h2>
+    ${characterTabBar("news")}
+    <div class="cs-block news-log">
+      <h3 class="codex-title" style="font-size:15px">News <span class="hint">— everything the world has told you, kept</span></h3>
+      <div class="news-log-filters">${FILTERS.map(f => { const c = log.filter(n => fits(f.id, n)).length;
+        return `<button class="news-chip${_newsUi.filter === f.id ? " on" : ""}" data-news-filter="${f.id}"${c ? "" : " disabled"}>${esc(f.title)} <span class="hint">${c}</span></button>`; }).join("")}</div>
+      ${groups.length ? groups.map(g => `<div class="news-log-day"><div class="news-section-title">${esc(dayHead(g.day))}</div>${newsBodyHtml(g.items, { sectioned: false, keepOrder: true })}</div>`).join("")
+        : `<p class="hint">Nothing here yet — what the world tells you from now on is kept here.</p>`}
+      ${rows.length > shown.length ? `<button class="btn secondary" id="news-more">Show older — ${rows.length - shown.length} more</button>` : ""}
+    </div>
+  </div>`);
+  wireCharacterTabs();
+  wireBattleNews(app);
+  for (const b of app.querySelectorAll("[data-news-filter]")) b.onclick = () => { _newsUi.filter = b.dataset.newsFilter; _newsUi.shown = 60; renderNewsTab(); };
+  const more = document.getElementById("news-more");
+  if (more) more.onclick = () => { _newsUi.shown += 60; renderNewsTab(); };
+}
+
+/** ⛔ CCODE-439 — ONE RENDERING OF THE NEWS, for the flash and the log alike, lifted whole out of `renderPlay`: sectioned when more than
+ *  one section speaks, near first (the log keeps its own order), a fight one tap away, and an update's notes one tap away. */
+function newsBodyHtml(list, { sectioned = true, keepOrder = false } = {}) {
+    const bySection = new Map(NEWS_SECTIONS.map(s => [s.id, []]));
+    for (const n of list) (bySection.get(n.section) || bySection.get("world")).push(n);
+    const populated = NEWS_SECTIONS.filter(s => bySection.get(s.id).length);
+    // SNG-400 §3.2: a DEATH is the one news line with something behind it. Aevi's blocker was that the
+    // item was a sentence and a tier — "there is nothing to click". It now carries who fell and to whom,
+    // so it gets an affordance. ⚠️ Only when it is genuinely openable: a victim the roster knows and
+    // generation on. A control that opens nothing is worse than a line of prose.
+    // ⛔ SNG-431 §3 — AND EVERY OTHER FIGHT TOO. Aevi: *"The death path is correct… the `wounded`, `checked`
+    // and `stalemate` paths push BARE STRINGS — and EVERY FIGHT ON ERIK'S SCREEN IS ONE OF THOSE THREE."*
+    // The engine now gives all four the same shape, so the affordance follows the shape rather than the one
+    // outcome that happened to have it. ⚠️ A stalemate is deliberately included: "neither could break the
+    // other" is a picture worth having, and it is the commonest thing two well-matched figures do.
+    const roster188 = worldRoster(character.worldState || {}, CONTENT) || [];
+    const known = (id) => !!id && roster188.some(f => f.id === id);
+    // ⛔ CCODE-188 (Erik): "there's no link to click on the 'bested' to see the scene where those two
+    // fought." The lines already in his log were written BEFORE the ids existed, so they carry none and
+    // never will — a fix that only helps future fights leaves every fight he can currently see dead on the
+    // page.
+    //
+    // ⚠️ RECOVERED FROM THE ENGINE'S OWN TEMPLATES, NOT BY FUZZY MATCHING. These four sentences are
+    // written by `applyEpicClashOutcome` and nothing else, so the split points are exact and the names
+    // between them are whole roster names compared with `===`. A miss returns null and the line stays prose;
+    // it never guesses at a person. Legacy only — a structured item is used as it stands.
+    const CLASH_SHAPES = [
+      [/^(.+?) bested (.+?) — .+ withdraws to lick their wounds\.$/, "wounded"],
+      [/^(.+?) checked (.+?) — for now, .+ designs are held\.$/, "stopped"],
+      [/^(.+?) and (.+?) met — and neither could break the other\.$/, "stalemate"],
+      [/^A legend has fallen: (.+?) has killed (.+?)\. The world is one great figure lighter/, "killed"],
+    ];
+    const byName = (nm) => roster188.find(f => f?.name === nm) || null;
+    const recovered = (n) => {
+      if (!n || n.kind || !n.text) return null;
+      for (const [re, outcome] of CLASH_SHAPES) {
+        const m = re.exec(String(n.text));
+        if (!m) continue;
+        const w = byName(m[1].trim()), l = byName(m[2].trim());
+        if (!w || !l) return null;                       // an unknown name is not a guessable one
+        return { ...n, kind: outcome === "killed" ? "death" : "clash", outcome,
+                 winnerId: w.id, loserId: l.id, killerId: w.id, victimId: l.id,
+                 locationId: l.homeLocation || l.legend?.homeLocation || w.homeLocation || null };
+      }
+      return null;
+    };
+    const canSee = (n) => imagesEnabled() && (
+      (n?.kind === "death" && known(n.victimId)) ||
+      (n?.kind === "clash" && known(n.winnerId) && known(n.loserId)));
+    const cue = (n) => n.kind === "death" ? (n.killerId ? "⚔ see the battle" : "☠ see the end")
+      : n.outcome === "stalemate" ? "⚔ see where they met" : "⚔ see the fight";
+    // ⛔ CCODE-367 — Erik: "Nearby events should stand out more." Within each section the near ones come first, each marked with
+    // how near: "here" is this town, "near" a few days' walk. A line with no place is left exactly as it was.
+    const nearOpts367 = { here: CONTENT.locations?.[character?.currentLocationId] || null, locations: CONTENT.locations || {} };
+    // ⛔ CCODE-398 — AND THE TWO COARSER TIERS THE REVAMP ADDED SAY WHAT THEY ARE. A deed spreading carries the community word
+    // reached and an arc's news the region it crosses; neither is a position, so neither shows a day count. ⚠️ The quiet chip is a
+    // different class on purpose: "your community" must not read like "1.6 days", or the pass would have bought reach with a lie.
+    const chip367 = (nm) => nm?.near ? `<span class="news-near-chip">${nm.here ? "here" : `near · ${nm.days} ${nm.days === 1 ? "day" : "days"}`}</span>`
+      : nm?.tier ? `<span class="news-near-chip news-place-chip">${nm.tier === "community" ? "your community" : "your region"}</span>` : "";
+    const items = (list) => (keepOrder ? list : nearFirst(list, nearOpts367)).map(raw => { const n = raw?.kind ? raw : (recovered(raw) || raw); const nm = newsNearness(n, nearOpts367); const nearCls = nm?.near ? " news-near" : nm?.tier ? " news-placed" : ""; return canSee(n)
+      // ⛔ CCODE-395 (Erik's §3, measured on his own screenshot) — THE PROSE IS NOT INSIDE THE BUTTON ANY MORE. Every fight line
+      // rendered its whole sentence inside `<button class="news-open">`, and `linkifyKnown` refuses text inside a BUTTON — correctly,
+      // because a link inside a button is invalid HTML and a trap for a thumb. So no name in a fight line could EVER be clicked: *The
+      // Starless One*, *Ateph of the First Flame*, *Harrow*. ⛑ The sentence is a sibling now and the cue is the control, so the line
+      // reads with its names live and the fight is still one tap away.
+      ? `<div class="news-item news-${n.kind === "death" ? "death" : "clash"}${nearCls}">${chip367(nm)}◈ <span class="news-text">${esc(n.text)}</span> <button class="news-open" data-battlenews="${attrJson({ kind: n.kind, outcome: n.outcome || null, victimId: n.victimId || n.loserId || null, killerId: n.killerId || n.winnerId || null, winnerId: n.winnerId || n.killerId || null, loserId: n.loserId || n.victimId || null, abilityId: n.abilityId || null, locationId: n.locationId || null, regionId: n.regionId || null, arcId: n.arcId || null, worldDay: n.worldDay ?? null })}" title="${n.kind === "death" ? (n.killerId ? "See the fight that ended them" : "See how it ended") : "See this fight"}"><span class="news-open-cue">${cue(n)}</span></button></div>`
+      : n.kind === "update" ? `<div class="news-item news-update">✦ <span class="news-text">${esc(n.text)}</span> <button class="link-btn" data-whats-new="all">What's new</button></div>`
+      : `<div class="news-item${nearCls}">${chip367(nm)}◈ ${esc(n.text)}</div>`; }).join("");
+    return sectioned && populated.length > 1
+      ? populated.map(s => `<div class="news-section"><div class="news-section-title">${esc(s.title)}</div>${items(bySection.get(s.id))}</div>`).join("")
+      : items(list);
+}
+
+/** ⛔ CCODE-439 — A FIGHT IN THE NEWS OPENS, wherever the line is shown: the flash in play and the log in the News tab. */
+function wireBattleNews(root) {
+  for (const b of root.querySelectorAll("[data-battlenews]")) b.onclick = async (e) => {
+    e.stopPropagation();
+    let item; try { item = JSON.parse(b.dataset.battlenews); } catch { return; }
+    // ⚠️ CCODE-190: the compose call sits in front of an image call that already costs more, but it is not
+    // free — say so, or a click looks dead for a second. The label is restored either way.
+    const was = b.title; b.title = "Drawing…";
+    const img = await battleImageFor(item);
+    b.title = was;
+    if (!img) { b.title = "There is no picture for this one — the figure is not on the roster."; return; }
+    const roster = worldRoster(character.worldState || {}, CONTENT) || [];
+    const victim = roster.find(f => f.id === (item.victimId || item.loserId));
+    const killer = (item.killerId || item.winnerId) ? roster.find(f => f.id === (item.killerId || item.winnerId)) : null;
+    openLightbox([{
+      url: img.url, prompt: img.prompt,
+      caption: battleCaption(victim, killer, item.kind === "death" ? "killed" : item.outcome),
+      regen: { kind: img.kind, subjectId: img.key, label: killer ? "this battle" : "this ending", prompt: img.prompt }
+    }]);
+  };
+}
+
 /* ⛔ CCODE-438 — WHAT'S NEW ─────────────────────────────────────────────────────────────────────────────────────────── */
 const LAST_SEEN_KEY = "singularity.lastSeenVersion";
 /** −1, 0 or 1 between two MAJOR.MINOR.PATCH versions; an unparseable one sorts first. Pure. */
@@ -6038,6 +6190,7 @@ async function maybeTick() {
   // order (save, THEN take) wrote the still-unread queue to storage and only cleared it in memory — so a hard
   // refresh before the next turn's own save reloaded the full queue and re-showed the same "while you were
   // away" digest every time. Taking first means this one save captures the tick's writes AND the empty queue.
+  queueUpdateNotice(character);   // ⛔ CCODE-439: an update is news too — and so it is kept in the log
   const freshNews = takeUnseenNews(character);
   saveCharacter(character);
   return freshNews;
@@ -6594,7 +6747,7 @@ function renderCreate() {
       quests: [],
       npcRegistry: {},
       placeMemory: {},
-      worldState: initWorldState(1),
+      worldState: { ...initWorldState(1), updatesToldTo: APP_VERSION },   // CCODE-439: a new character is current, and is not told of an update
       // SNG-055: the domains chosen on the great circle (what this character can ever learn)
       domains: (state.domains && state.domains.primary) ? { ...state.domains } : null,
       // SNG-193b: each practised domain starts at its tradition's pure/root school (the orthodoxy). A
@@ -13333,6 +13486,7 @@ function wireCharacterTabs() {
   go("tab-bands", () => renderBandsTab());
   go("tab-jobs", () => renderJobsTab());   // CCODE-420
   go("tab-world", () => renderWorldTab());
+  go("tab-news", () => renderNewsTab());   // CCODE-439
 }
 function characterTabBar(active) {
   return `<div class="char-tabs">
@@ -13342,6 +13496,7 @@ function characterTabBar(active) {
     <button class="char-tab${active === "bands" ? " on" : ""}" id="tab-bands">⚔ Bands</button>
     <button class="char-tab${active === "jobs" ? " on" : ""}" id="tab-jobs">⚒ Jobs${(() => { const n = (character?.jobs?.board || []).length + (character?.jobs?.out || []).length; return n ? ` <span class="job-count">${n}</span>` : ""; })()}</button>
     <button class="char-tab${active === "world" ? " on" : ""}" id="tab-world">🌍 The World</button>
+    <button class="char-tab${active === "news" ? " on" : ""}" id="tab-news">📰 News</button>
   </div>`;
 }
 
@@ -18936,73 +19091,7 @@ function renderPlay(turn, opts = {}) {
     // that it "shows an empty middle and a flooded third" — a heading over nothing is how a player learns
     // the heading means nothing. And a digest with only one populated section renders as it always did, with
     // no headings at all, because three labels over four lines is furniture.
-    const bySection = new Map(NEWS_SECTIONS.map(s => [s.id, []]));
-    for (const n of opts.newsFlash) (bySection.get(n.section) || bySection.get("world")).push(n);
-    const populated = NEWS_SECTIONS.filter(s => bySection.get(s.id).length);
-    // SNG-400 §3.2: a DEATH is the one news line with something behind it. Aevi's blocker was that the
-    // item was a sentence and a tier — "there is nothing to click". It now carries who fell and to whom,
-    // so it gets an affordance. ⚠️ Only when it is genuinely openable: a victim the roster knows and
-    // generation on. A control that opens nothing is worse than a line of prose.
-    // ⛔ SNG-431 §3 — AND EVERY OTHER FIGHT TOO. Aevi: *"The death path is correct… the `wounded`, `checked`
-    // and `stalemate` paths push BARE STRINGS — and EVERY FIGHT ON ERIK'S SCREEN IS ONE OF THOSE THREE."*
-    // The engine now gives all four the same shape, so the affordance follows the shape rather than the one
-    // outcome that happened to have it. ⚠️ A stalemate is deliberately included: "neither could break the
-    // other" is a picture worth having, and it is the commonest thing two well-matched figures do.
-    const roster188 = worldRoster(character.worldState || {}, CONTENT) || [];
-    const known = (id) => !!id && roster188.some(f => f.id === id);
-    // ⛔ CCODE-188 (Erik): "there's no link to click on the 'bested' to see the scene where those two
-    // fought." The lines already in his log were written BEFORE the ids existed, so they carry none and
-    // never will — a fix that only helps future fights leaves every fight he can currently see dead on the
-    // page.
-    //
-    // ⚠️ RECOVERED FROM THE ENGINE'S OWN TEMPLATES, NOT BY FUZZY MATCHING. These four sentences are
-    // written by `applyEpicClashOutcome` and nothing else, so the split points are exact and the names
-    // between them are whole roster names compared with `===`. A miss returns null and the line stays prose;
-    // it never guesses at a person. Legacy only — a structured item is used as it stands.
-    const CLASH_SHAPES = [
-      [/^(.+?) bested (.+?) — .+ withdraws to lick their wounds\.$/, "wounded"],
-      [/^(.+?) checked (.+?) — for now, .+ designs are held\.$/, "stopped"],
-      [/^(.+?) and (.+?) met — and neither could break the other\.$/, "stalemate"],
-      [/^A legend has fallen: (.+?) has killed (.+?)\. The world is one great figure lighter/, "killed"],
-    ];
-    const byName = (nm) => roster188.find(f => f?.name === nm) || null;
-    const recovered = (n) => {
-      if (!n || n.kind || !n.text) return null;
-      for (const [re, outcome] of CLASH_SHAPES) {
-        const m = re.exec(String(n.text));
-        if (!m) continue;
-        const w = byName(m[1].trim()), l = byName(m[2].trim());
-        if (!w || !l) return null;                       // an unknown name is not a guessable one
-        return { ...n, kind: outcome === "killed" ? "death" : "clash", outcome,
-                 winnerId: w.id, loserId: l.id, killerId: w.id, victimId: l.id,
-                 locationId: l.homeLocation || l.legend?.homeLocation || w.homeLocation || null };
-      }
-      return null;
-    };
-    const canSee = (n) => imagesEnabled() && (
-      (n?.kind === "death" && known(n.victimId)) ||
-      (n?.kind === "clash" && known(n.winnerId) && known(n.loserId)));
-    const cue = (n) => n.kind === "death" ? (n.killerId ? "⚔ see the battle" : "☠ see the end")
-      : n.outcome === "stalemate" ? "⚔ see where they met" : "⚔ see the fight";
-    // ⛔ CCODE-367 — Erik: "Nearby events should stand out more." Within each section the near ones come first, each marked with
-    // how near: "here" is this town, "near" a few days' walk. A line with no place is left exactly as it was.
-    const nearOpts367 = { here: CONTENT.locations?.[character?.currentLocationId] || null, locations: CONTENT.locations || {} };
-    // ⛔ CCODE-398 — AND THE TWO COARSER TIERS THE REVAMP ADDED SAY WHAT THEY ARE. A deed spreading carries the community word
-    // reached and an arc's news the region it crosses; neither is a position, so neither shows a day count. ⚠️ The quiet chip is a
-    // different class on purpose: "your community" must not read like "1.6 days", or the pass would have bought reach with a lie.
-    const chip367 = (nm) => nm?.near ? `<span class="news-near-chip">${nm.here ? "here" : `near · ${nm.days} ${nm.days === 1 ? "day" : "days"}`}</span>`
-      : nm?.tier ? `<span class="news-near-chip news-place-chip">${nm.tier === "community" ? "your community" : "your region"}</span>` : "";
-    const items = (list) => nearFirst(list, nearOpts367).map(raw => { const n = raw?.kind ? raw : (recovered(raw) || raw); const nm = newsNearness(n, nearOpts367); const nearCls = nm?.near ? " news-near" : nm?.tier ? " news-placed" : ""; return canSee(n)
-      // ⛔ CCODE-395 (Erik's §3, measured on his own screenshot) — THE PROSE IS NOT INSIDE THE BUTTON ANY MORE. Every fight line
-      // rendered its whole sentence inside `<button class="news-open">`, and `linkifyKnown` refuses text inside a BUTTON — correctly,
-      // because a link inside a button is invalid HTML and a trap for a thumb. So no name in a fight line could EVER be clicked: *The
-      // Starless One*, *Ateph of the First Flame*, *Harrow*. ⛑ The sentence is a sibling now and the cue is the control, so the line
-      // reads with its names live and the fight is still one tap away.
-      ? `<div class="news-item news-${n.kind === "death" ? "death" : "clash"}${nearCls}">${chip367(nm)}◈ <span class="news-text">${esc(n.text)}</span> <button class="news-open" data-battlenews="${attrJson({ kind: n.kind, outcome: n.outcome || null, victimId: n.victimId || n.loserId || null, killerId: n.killerId || n.winnerId || null, winnerId: n.winnerId || n.killerId || null, loserId: n.loserId || n.victimId || null, abilityId: n.abilityId || null, locationId: n.locationId || null, regionId: n.regionId || null, arcId: n.arcId || null, worldDay: n.worldDay ?? null })}" title="${n.kind === "death" ? (n.killerId ? "See the fight that ended them" : "See how it ended") : "See this fight"}"><span class="news-open-cue">${cue(n)}</span></button></div>`
-      : `<div class="news-item${nearCls}">${chip367(nm)}◈ ${esc(n.text)}</div>`; }).join("");
-    const body = populated.length > 1
-      ? populated.map(s => `<div class="news-section"><div class="news-section-title">${esc(s.title)}</div>${items(bySection.get(s.id))}</div>`).join("")
-      : items(opts.newsFlash);
+    const body = newsBodyHtml(opts.newsFlash);   // ⛔ CCODE-439: one rendering, the flash's and the log's
     // ⛔ BUG_news_rebroadcast §2 (Erik: "it cuts off instead of becoming a scrollable"). The panel had no height of its own,
     // so a long digest simply ran past whatever contained it and the rest was unreachable. ⚠️ The TITLE stays put and the
     // BODY scrolls, because a heading that scrolls away takes the only label the list has with it. ⚑ Fixing the flood (§1)
@@ -19413,24 +19502,7 @@ function renderPlay(turn, opts = {}) {
   };
   // SNG-400 §3.2: click the death, see the battle. Mints once, then opens it in the lightbox with the
   // SNG-401 controls live — so a composition the build got wrong is the player's to re-describe.
-  for (const b of app.querySelectorAll("[data-battlenews]")) b.onclick = async (e) => {
-    e.stopPropagation();
-    let item; try { item = JSON.parse(b.dataset.battlenews); } catch { return; }
-    // ⚠️ CCODE-190: the compose call sits in front of an image call that already costs more, but it is not
-    // free — say so, or a click looks dead for a second. The label is restored either way.
-    const was = b.title; b.title = "Drawing…";
-    const img = await battleImageFor(item);
-    b.title = was;
-    if (!img) { b.title = "There is no picture for this one — the figure is not on the roster."; return; }
-    const roster = worldRoster(character.worldState || {}, CONTENT) || [];
-    const victim = roster.find(f => f.id === (item.victimId || item.loserId));
-    const killer = (item.killerId || item.winnerId) ? roster.find(f => f.id === (item.killerId || item.winnerId)) : null;
-    openLightbox([{
-      url: img.url, prompt: img.prompt,
-      caption: battleCaption(victim, killer, item.kind === "death" ? "killed" : item.outcome),
-      regen: { kind: img.kind, subjectId: img.key, label: killer ? "this battle" : "this ending", prompt: img.prompt }
-    }]);
-  };
+  wireBattleNews(app);   // ⛔ CCODE-439: the same door from the flash and the log
   // SNG-401 §5: open this person's picture, with Draw again live on it. The lightbox is the whole UI —
   // this control only has to know WHO, which is exactly the provenance the spec said was missing.
   for (const b of app.querySelectorAll("[data-repic]")) b.onclick = (e) => {

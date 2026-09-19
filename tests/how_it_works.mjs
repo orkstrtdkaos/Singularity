@@ -18450,7 +18450,8 @@ console.log("\n── §255 · near news stands out, and a community is not a to
   /* ---- 4 · ⛔ THE SCREEN ---- */
   const src255 = rd("engine/worldtick.js").replace(/\r\n/g, "\n");
   check("§255: ⛔ the play screen puts near news first in each section with a chip saying how near, and the murmurs that knew their place keep it",
-    /const items = \(list\) => nearFirst\(list, nearOpts367\)/.test(A255) && /news-near-chip/.test(A255)
+    // CCODE-439: the renderer is shared with the log, which keeps its own order — the flash still puts the near first
+    /const items = \(list\) => \(keepOrder \? list : nearFirst\(list, nearOpts367\)\)/.test(A255) && /const body = newsBodyHtml\(opts\.newsFlash\);/.test(A255) && /news-near-chip/.test(A255)
     && /tier: "murmur", locationId: b\.locationId \|\| null \}\)/.test(src255) && /tier: "murmur", locationId: n\.locationId \|\| null \}\)/.test(src255));
 }
 
@@ -22940,6 +22941,44 @@ console.log("\n── §317 · the version rule, the notes every update carries,
   check("§317: …the version stamp opens the notes at any time, back through the whole line; and a device that played before the notes existed is told what arrived, while a new one is told nothing",
     (A317.match(/class="link-btn wn-stamp" data-whats-new="all"/g) || []).length === 2 && /data-whats-new="all">Everything in/.test(A317)
     && /if \(!played\) \{ markVersionSeen\(\); return \[\]; \}\n\s*seen = "2\.0\.100";/.test(A317));
+}
+
+// ══════════ §318 · CCODE-439 — THE NEWS, KEPT ══════════
+// Erik 2026-09-19: "I'd like the news to be something that is saved and I can navigate to review... like a log. in case I missed something
+// or wanted to look back." — and of the update notes, "maybe a popup from a news item".
+console.log("\n── §318 · the news, kept — every line taken to be shown goes into a log the player can go back through ──");
+{
+  const WT318 = await import("../engine/worldtick.js");
+  const mk = () => ({ worldState: { news: [{ text: "old rumour", worldDay: 3 }, { text: "still waiting", worldDay: 9 }],
+    unseenNews: [{ text: "still waiting", worldDay: 9 }, { text: "a hold was robbed", worldDay: 9, section: "yours" }] } });
+  const c1 = mk();
+  const shown = WT318.takeUnseenNews(c1);
+  const log1 = WT318.newsLogOf(c1).map(n => n.text);
+  check("§318: ⛔ what is taken to be shown is KEPT — and the log begins from the recent news the world already held, less what still waited",
+    shown.length === 2 && JSON.stringify(log1) === JSON.stringify(["old rumour", "still waiting", "a hold was robbed"])
+    && c1.worldState.unseenNews.length === 0 && WT318.newsLogOf(c1).slice(1).every(n => typeof n.loggedAt === "string"), JSON.stringify(log1));
+  c1.worldState.unseenNews = [{ text: "a hold was robbed", worldDay: 9 }, { text: "new today", worldDay: 10 }];
+  WT318.takeUnseenNews(c1);
+  check("§318: …never twice — the same words on the same world-day are one line",
+    WT318.newsLogOf(c1).filter(n => n.text === "a hold was robbed").length === 1 && WT318.newsLogOf(c1).at(-1).text === "new today");
+  const big = { worldState: { news: [], unseenNews: [] } };
+  WT318.logNews(big, Array.from({ length: WT318.NEWS_LOG_CAP + 30 }, (_, i) => ({ text: `line ${i}`, worldDay: i })));
+  const S318 = rd("engine/worldtick.js").replace(/\r\n/g, "\n");
+  const unseenWrites = S318.split("\n").filter(l => /unseenNews = \[\.\.\./.test(l));   // the writes that append — not the one that empties it
+  check("§318: ⛔ nothing is dropped before it is shown — what waits has its own cap (60), not the GM's twenty; the log keeps the last 250",
+    unseenWrites.length === 9 && unseenWrites.every(l => /\.slice\(-UNSEEN_CAP\)/.test(l)) && /const UNSEEN_CAP = 60;/.test(S318)
+    && WT318.NEWS_LOG_CAP === 250 && WT318.newsLogOf(big).length === 250 && WT318.newsLogOf(big)[0].text === "line 30");
+  const A318 = rd("app.js").replace(/\r\n/g, "\n").split("\n").filter(l => !/^\s*\/\//.test(l)).join("\n");
+  check("§318: ⛑ a 📰 News tab on the character: newest first by world-day, filtered by whose it is, rendered by the SAME function the flash uses, with a fight still opening",
+    /id="tab-news">📰 News<\/button>/.test(A318) && /go\("tab-news", \(\) => renderNewsTab\(\)\);/.test(A318)
+    && /const log = newsLogOf\(character\);/.test(A318) && /newsBodyHtml\(g\.items, \{ sectioned: false, keepOrder: true \}\)/.test(A318)
+    && /const body = newsBodyHtml\(opts\.newsFlash\);/.test(A318) && (A318.match(/wireBattleNews\(app\);/g) || []).length === 2
+    && /data-news-filter=/.test(A318) && /id="news-more"/.test(A318));
+  check("§318: …and an update is news too — once per build per character, its notes one tap from the line; a character made on this build is current",
+    /queueUpdateNotice\(character\);[^\n]*\n\s*const freshNews = takeUnseenNews\(character\);/.test(A318)
+    && /if \(!ws \|\| !RELEASE_NOTES \|\| ws\.updatesToldTo === APP_VERSION\) return;/.test(A318)
+    && /n\.kind === "update" \? `<div class="news-item news-update">/.test(A318) && /data-whats-new="all">What's new<\/button><\/div>`/.test(A318)
+    && (A318.match(/worldState: \{ \.\.\.initWorldState\(1\), updatesToldTo: APP_VERSION \}/g) || []).length === 2);
 }
 
 /* ══════════ REPORT ══════════ */

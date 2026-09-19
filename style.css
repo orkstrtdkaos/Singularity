@@ -1205,6 +1205,14 @@ details.wn-entry > p { margin:4px 0 8px 16px; color:var(--ink-dim); }
 .wn-shell { max-width:640px; margin:0 auto; }
 .wn-shell:empty { display:none; }
 .wn-shell .whats-new-banner { margin:10px 0 12px; }
+/* ⛔ CCODE-439 — the news, kept: filters by whose it is, newest first by world-day */
+.news-log-filters { display:flex; flex-wrap:wrap; gap:6px; margin:6px 0 10px; }
+.news-chip { font:inherit; font-size:12.5px; padding:4px 10px; border-radius:999px; border:1px solid var(--border); background:transparent; color:var(--ink); cursor:pointer; }
+.news-chip.on { border-color:var(--accent); color:var(--accent); }
+.news-chip:disabled { opacity:0.45; cursor:default; }
+.news-log-day { margin:10px 0 4px; }
+.news-log-day .news-section-title { margin-bottom:4px; }
+.news-item.news-update { color:var(--ink); }
 
 /* SNG-197 p2: the braid MOMENT — an ULTIMATE-CREATION beat, not a system notification. */
 .help-card.braid-moment { max-width:460px; text-align:center; border-color:var(--accent);

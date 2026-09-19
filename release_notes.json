@@ -16,6 +16,24 @@
   "next": [],
   "releases": [
     {
+      "version": "2.1.1",
+      "date": "2026-09-19",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "The news is kept",
+          "summary": "A News tab on your character holds everything the world has told you, so nothing you missed is lost.",
+          "detail": "Newest first, by world-day, with filters for the world, your own work, word from elsewhere, and updates. A fight in the log opens just as it does when it first arrives. When the game is updated, the news says so — with the notes one tap away — and that line is kept too."
+        },
+        {
+          "kind": "fix",
+          "title": "A long time away no longer drops news",
+          "summary": "News waiting for you is no longer cut to the last twenty lines before you see it.",
+          "detail": ""
+        }
+      ]
+    },
+    {
       "version": "2.1.0",
       "date": "2026-09-19",
       "entries": [

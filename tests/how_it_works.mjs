@@ -22621,6 +22621,28 @@ console.log("\n── §311 · where the mounts are kept, you ride — a journey
     && /does: ride \? \["HARM", "MARTIAL", "MOVE"\] : \["HARM", "MARTIAL"\]/.test(A311) && /\.\.\.\(ride \? \{ kind: "cavalry" \} : \{\}\)/.test(A311));
 }
 
+// ══════════ §312 · CCODE-433 — THE AXES ARE KEYED BY THEIR IDS ══════════
+// Aevi, SNG-632: "gm.js:1230 shows `"axes": {"spectrumId": -1..1}` — and EVERY OTHER CLOSED VOCABULARY ON THAT LINE IS ENUMERATED IN PLACE…
+// The model fills it as a field because it is written as one." Five of Erik's spectrum pushes on 2026-09-19 were dropped as "not a number".
+console.log("\n── §312 · the axes are keyed by their ids — the template says so, and the ids offered are the ids accepted ──");
+{
+  const G312 = rd("engine/gm.js").replace(/\r\n/g, "\n");
+  // ⚠️ CODE, NOT COMMENTARY — the note explaining the defect quotes the old template, and a check that read it would fail on the explanation
+  const body312 = G312.slice(G312.indexOf("export async function parseIntent("), G312.indexOf("export function sanitizeIntent("))
+    .split("\n").filter(l => !/^\s*\/\//.test(l)).join("\n");
+  check("§312: ⛔ the template no longer shows a field called `spectrumId` — the axis id IS the key, with a worked example",
+    !/"spectrumId"/.test(body312) && /"axes": \{"<spectrum id>": <number -1\.\.1>\}/.test(body312) && /"axes": \{"violence_peace": -0\.6, "dark_light": 0\.3\}/.test(body312));
+  check("§312: ⛔ …and the ids offered are the ids `sanitizeIntent` accepts — the content's own list, passed in, so a renamed axis reaches both at once",
+    /const axisIds = \(Array\.isArray\(spectrumIds\) && spectrumIds\.length \? spectrumIds : \[/.test(body312) && /\$\{axisIds\.join\(", "\)\}/.test(body312)
+    && !/Spectrum ids: emotional_logical, falsehood_truth/.test(body312));
+  const G = await import("../engine/gm.js");
+  const who = { abilities: [], customAbilities: {} };
+  const ok312 = G.sanitizeIntent({ axes: { violence_peace: -0.6, dark_light: 0.3 } }, who, "x", { spectrumIds: ["violence_peace", "dark_light"] });
+  const bad312 = G.sanitizeIntent({ axes: { spectrumId: "concrete_abstract" } }, who, "x", { spectrumIds: ["concrete_abstract"] });
+  check("§312: …the form the template asks for is kept whole, and the old misfilled form is still dropped AUDIBLY rather than read",
+    ok312.axes.violence_peace === -0.6 && ok312.axes.dark_light === 0.3 && !Object.keys(bad312.axes).length && bad312.axesDropped.length === 1);
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

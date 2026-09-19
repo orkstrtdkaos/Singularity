@@ -281,18 +281,63 @@
    "groundYieldWeight": 0.5
   },
   "slots": {
-   "_statement": "⛔ ERIK 2026-09-18: 'I want the holds themselves to need to grow. A brand new hold will start with a few features available, but one that has been built up, or started in an old fortress, would have plenty of open feature slots. **Sometimes there's just not the room.**' ⛑ ROOM IS THE GROWTH AXIS THE HOLD LAYER DID NOT HAVE. Nothing in `holdings.js` caps features today, so the only limit on a hold is what you can afford to keep — and **a hold that can hold everything is a hold with no shape.**",
-   "byKind": {
-    "post": 2,
-    "enterprise": 4,
-    "ruin": 8,
-    "longship": 3
+   "_statement": "⛔ ERIK 2026-09-18, CORRECTING ME TWICE. First: 'a post can have many features if they fit in the narrative and area — look at the posts Silas has. However, sometimes space is constrained: a ship, Loki's standing annex, a floating citadel. A brand new post might start with just a couple of feature slots, but they should be EXPANDABLE.' Then: **'the hold will grow into larger things — village, town, fortress, keep, stronghold.'** ⛑ SO THE KIND IS A RUNG, NOT A CATEGORY, and room comes with the rung. ⚠️ MY FIRST CUT CAPPED A POST AT 2 AND WOULD HAVE BROKEN THE LARGEST HOLD IN PLAY: **Stillwater's Trouble is a `post` carrying NINETEEN FEATURES** — a keep, a market, a longhouse, a muster yard, a ward-line. **It is not a post. Nothing ever promoted it, because there was no ladder to be promoted on.**",
+   "ladder": [
+    {
+     "kind": "post",
+     "slots": 2,
+     "what": "somewhere to stand. A roof, a fire, and whatever you carried in"
+    },
+    {
+     "kind": "steading",
+     "slots": 4,
+     "what": "people live here on purpose now, and something is being made"
+    },
+    {
+     "kind": "hamlet",
+     "slots": 7,
+     "what": "enough households that they argue about things"
+    },
+    {
+     "kind": "village",
+     "slots": 11,
+     "what": "a market day, a place of meaning, and somebody whose job is the place itself"
+    },
+    {
+     "kind": "town",
+     "slots": 16,
+     "what": "it appears on other people's maps and is worth taking"
+    },
+    {
+     "kind": "keep",
+     "slots": 20,
+     "what": "it is defended on purpose, and the defence is somebody's whole occupation"
+    },
+    {
+     "kind": "fortress",
+     "slots": 25,
+     "what": "built to be held against a thing that is coming"
+    },
+    {
+     "kind": "stronghold",
+     "slots": 32,
+     "what": "it decides what happens around it for a long way"
+    }
+   ],
+   "_ladder": "⚠️ ERIK RULES THE NUMBERS; this is the first cut, and it is checked against live play rather than invented: Threshold Post at 7 features is a hamlet; **Stillwater's Trouble at 19 is a keep**; The Fell Pell at 6 is a steading or a hamlet. ⛑ **The ladder should ratify what the world already built, not contradict it.**",
+   "promotion": "⛔ A HOLD ADVANCES WHEN IT HAS OUTGROWN ITS RUNG, not when it is bought up. ⛑ The honest trigger is the one the data already has: **when the features it carries reach the next rung's slots, the kind is wrong and should move.** ⚠️ A hold that has filled every slot is a hold asking to be promoted, and a hold sitting at half its room is not. ⬜ CCode: the promotion should be OFFERED rather than applied — a player naming their own village a town is a beat, and it is theirs.",
+   "bounded": {
+    "annex": 2,
+    "longship": 3,
+    "hull": 3,
+    "citadel": 5,
+    "tower_room": 1
    },
-   "_byKind": "⚠️ ERIK RULES THE NUMBERS; these are the first cut. A new post is somewhere to stand and almost nothing else. ⛔ THE RUIN IS THE INTERESTING ONE — it is the only way in the world to start with room you did not earn, and what you inherit is SPACE rather than walls, which is why a taken ruin is a project and not a prize.",
-   "earnedNotBought": "⛔ SLOTS ARE WON AND NEVER PURCHASED. Clearing more of a ruin, a Mason's craft spent on the GROUND rather than on a feature, a holding that survives a season at thriving. ⚠️ **If room can be bought the axis collapses back into money and the hold stops needing to grow.**",
-   "theRefusalIsTheFeature": "⛑ When there is no room the build is refused — and the refusal must NAME WHAT WOULD HAVE TO GO. ⚠️ A player choosing between a forge and an infirmary is playing the hold layer; a player who builds both is decorating. **A choice needs both sides visible or it reads as a bug.**"
+   "_bounded": "⛔ AND SOME HOLDS NEVER ADVANCE, WHICH IS THE OTHER HALF OF ERIK'S RULING: 'sometimes space is constrained — a ship, Loki's standing annex, a floating citadel.' ⚠️ **A bounded hold has a hard ceiling and no rung above it** — not because it is small, but because THE ROOM IS NOT THE HOLD'S TO TAKE. Loki's Standing Annex is two rooms inside somebody else's building; a hull is a hull; a floating citadel cannot annex the air. ⛑ **THE CONSTRAINT IS NOT A PENALTY AND MUST NOT READ AS ONE** — SNG-628: a longship trades room for movement, trade and landing a band, and each of those is worth more than a rung.",
+   "earnedNotBought": "⛔ ROOM IS WON, NEVER PURCHASED. A rung is reached by what the hold has become — people living there, work being done, a season survived at thriving, a Mason's craft spent on the GROUND rather than on a feature. ⚠️ **If a rung can be bought the ladder collapses into money and the hold stops needing to grow.**",
+   "theRefusalIsTheFeature": "⛑ When there is no room the build is refused, and the refusal must name BOTH ways out: what would have to go, and **what the hold would have to become.** ⚠️ 'No room' is a dead end; 'no room — this is a hamlet, and a village has four more' is a goal."
   },
-  "_theLongship_20260918": "⛔ ERIK: 'limited space on a longship for features — but a longship can MOVE and has unique advantages with trading and carrying troops.' ⛑ THREE SLOTS AND NINE FEATURES SHE CAN NEVER CARRY, against three things no fixed hold can do. ⚠️ AND TWO THIRDS OF IT IS ALREADY BUILT AND UNUSED: `hullable` is a BLOCKLIST that `carriage.js:214` already reads — mine, quarry, waygate, gate, keep, ward-line, muster yard, grave-ground and reclamation bowl declare `hullable: false`, so **the engine already knows you cannot put a mine on a boat** — and `producesWhileMoving` on 13 features already says what still works under way. SNG-591's carriage layer is authored and `moves: crewed` is exactly a longship. **What was missing was the count.** ⛔ THE THREE ADVANTAGES, AND EACH MUST BE REAL OR NOBODY SAILS ONE TWICE. **She arrives** — a hold that comes to you is worth what no fixed hold can be. **She arbitrages** — buy where a good is surplus, sell where it is short, which a fixed `market` can never do: a market sets a price, a longship carries one. **And she lands a band** — which is where SNG-627's `housing` property earns itself, because barracks on a hull is a band that arrives together, and 'troops can be put to work' is worth far more when the work is a coast away."
+  "_theLongship_20260918": "⛔ ERIK: 'limited space on a longship for features — but a longship can MOVE and has unique advantages with trading and carrying troops.' ⛑ SHE IS `bounded: hull`, cap 3 — and bounded is the SITE's property, not the kind's, which is the whole correction. ⚠️ TWO THIRDS OF HER IS ALREADY BUILT AND UNUSED: `hullable` is a BLOCKLIST `carriage.js:214` already reads — mine, quarry, waygate, gate, keep, ward-line, muster yard, grave-ground and reclamation bowl declare `hullable: false`, so **the engine already knows you cannot put a mine on a boat** — and `producesWhileMoving` on 13 features says what still works under way. SNG-591's carriage layer is authored and `moves: crewed` is exactly a longship. **What was missing was the count.** ⛔ HER THREE ADVANTAGES, EACH OF WHICH MUST BE REAL OR NOBODY SAILS ONE TWICE. **She arrives.** **She arbitrages** — buy where a good is surplus, sell where it is short, which a fixed `market` can never do: a market sets a price, a longship carries one. **And she lands a band**, which is where SNG-627's `housing` property earns itself: barracks on a hull is a band that arrives together, and 'troops can be put to work' is worth far more when the work is a coast away."
  },
  "debts": {
   "note": "✅ Q5-B (SPEC_debts_and_reception, Erik: option B — a PAYABLE debt, and 'tie in the local authority NPC… THEM that will remember what you did… depending on who they are'). worldState.debts[holderId] is held by a NAMED NPC; escalation is THEIR choice: only a holder whose reactsToReputation carries one of escalatingTags acts, one step per escalateAfterDays, up to maxEscalation (1: received colder · 2: refused — no trade, hire or shelter). 3 (a bounty) and 4 (a hit squad) are NOT built — they need an encounter and contingentsFromPeople, and are Aevi's and Erik's to shape. A debt clears three ways: paid (debtOps settle — the purse is debited), a deed (debtOps forgive — the GM says what outweighed it), or the holder dies or departs. Never in coin.",

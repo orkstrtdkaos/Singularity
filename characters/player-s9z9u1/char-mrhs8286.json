@@ -15355,7 +15355,188 @@
     },
     "fatesReadWorldDay": 81,
     "companionWishSeen": {},
-    "quarteredAtCount": 1962
+    "quarteredAtCount": 1962,
+    "updatesToldTo": "2.2.0",
+    "newsLog": [
+      {
+        "day": 18,
+        "worldDay": 80,
+        "text": "Word from The Quiet Ground — Maren Ossitide, Who Buried the Drowned Year: recording who she did not reach.",
+        "tier": "murmur",
+        "section": "world",
+        "locationId": "the_quiet_ground"
+      },
+      {
+        "day": 18,
+        "worldDay": 80,
+        "text": "Overseer Grael of the Edge District has not been seen at home in a long while — whatever is happening has all of them.",
+        "tier": "murmur",
+        "section": "world",
+        "locationId": "radiant_plateau_edge"
+      },
+      {
+        "day": 18,
+        "worldDay": 80,
+        "text": "The Hollow King of the Wild Half has not been seen at home in a long while — whatever is happening has all of them.",
+        "tier": "murmur",
+        "section": "world",
+        "locationId": "the_maw"
+      },
+      {
+        "day": 18,
+        "worldDay": 80,
+        "text": "The Deep Lantern, Who Walks Where Light Won't, Whom The Umbrals Named, is called heroic this season — winning what they contested.",
+        "tier": "event",
+        "section": "world"
+      },
+      {
+        "day": 18,
+        "worldDay": 80,
+        "text": "Ganna the Edgeholder, Whom The Marchers Named, is called heroic this season — holding a front at their own cost.",
+        "tier": "event",
+        "section": "world"
+      },
+      {
+        "day": 18,
+        "worldDay": 80,
+        "text": "Siol: Siol positioned himself closer to the working's center — not participating, only watching — and what he observed in those two days satisfied him that the hands involved are not yet performing: the hesitation is real, and he is quietly relieved.",
+        "tier": "ambient",
+        "section": "world",
+        "figureId": "siol"
+      },
+      {
+        "day": 18,
+        "worldDay": 80,
+        "text": "Orvil: Orvil was assigned a single trial morning slot as a secondary official, shadowing the senior referee — unglamorous, but his name is now written in the rotation ledger.",
+        "tier": "ambient",
+        "section": "world",
+        "figureId": "orvil"
+      },
+      {
+        "day": 18,
+        "worldDay": 80,
+        "text": "Something has been building in the center: A senior courier dispatcher has quietly begun rerouting the fastest riders away from the eastern Palelands run, prioritizing Center-to-valley traffic, and the eastern settlements' messages are…",
+        "tier": "event",
+        "section": "world"
+      },
+      {
+        "day": 18,
+        "worldDay": 80,
+        "text": "Something has been building in the center: A junior courier who runs documents between the lending house and its valley clients has begun holding certain receipts an extra day before delivery, giving herself time to read them — she has not…",
+        "tier": "event",
+        "section": "world"
+      },
+      {
+        "day": 18,
+        "worldDay": 80,
+        "text": "The One Called Zeus has come back from death. The valley has one of its own again.",
+        "tier": "event",
+        "section": "world"
+      },
+      {
+        "day": 18,
+        "worldDay": 81,
+        "text": "Valen Sunwrack, Who Left No Shadow Standing turned The One Called Zeus back at The Wayhouse. The One Called Zeus learned something, which is worse for everyone else.",
+        "tier": "event",
+        "section": "world",
+        "kind": "clash",
+        "winnerId": "sunwrack_valen",
+        "loserId": "the_one_called_zeus",
+        "outcome": "stopped",
+        "abilityId": "dawn_surgery",
+        "locationId": "the_wayhouse",
+        "arcId": "arc_the_poles_pull"
+      },
+      {
+        "day": 18,
+        "worldDay": 81,
+        "text": "An assassination attempt very nearly finished Saehara the Undefeated at The Great Coliseum, fighting from the dark they brought. Saehara the Undefeated is alive and is not walking yet.",
+        "tier": "event",
+        "section": "world",
+        "kind": "clash",
+        "loserId": "the_undefeated",
+        "outcome": "wounded",
+        "abilityId": "known_in_the_dark",
+        "locationId": "the_great_coliseum",
+        "arcId": "arc_the_poles_pull",
+        "strike": "quiet"
+      },
+      {
+        "day": 18,
+        "worldDay": 81,
+        "text": "Sister Alder, the Ward That Does Not Break is spoken of: the ones she did not reach in time, whose names she keeps.",
+        "tier": "murmur",
+        "section": "world",
+        "locationId": "harmonic_heights_terrace"
+      },
+      {
+        "day": 18,
+        "worldDay": 81,
+        "text": "Word from The Service Ways — Halvex Coil, the Rewriter: tuning instruments he does not play.",
+        "tier": "murmur",
+        "section": "world",
+        "locationId": "the_service_ways"
+      },
+      {
+        "day": 18,
+        "worldDay": 81,
+        "text": "Word from The Quiet Ground — Maren Ossitide, Who Buried the Drowned Year: keeping a garden that needs no attending.",
+        "tier": "murmur",
+        "section": "world",
+        "locationId": "the_quiet_ground"
+      },
+      {
+        "day": 18,
+        "worldDay": 81,
+        "text": "Overseer Grael of the Edge District has not been seen at home in a long while — whatever is happening has all of them.",
+        "tier": "murmur",
+        "section": "world",
+        "locationId": "radiant_plateau_edge"
+      },
+      {
+        "day": 18,
+        "worldDay": 81,
+        "text": "The Hollow King of the Wild Half has not been seen at home in a long while — whatever is happening has all of them.",
+        "tier": "murmur",
+        "section": "world",
+        "locationId": "the_maw"
+      },
+      {
+        "day": 18,
+        "worldDay": 81,
+        "text": "Saehara the Undefeated has dug in over The Poles Pull.",
+        "tier": "murmur",
+        "section": "world",
+        "figureId": "the_undefeated",
+        "arcId": "arc_the_poles_pull",
+        "locationId": "the_great_coliseum",
+        "placedBy": "figureId"
+      },
+      {
+        "day": 18,
+        "worldDay": 81,
+        "text": "Ossian: Ossian secured a brief audience with the deputy registrar at the North Gate Registry, leaving a formal letter of intent to be placed on record — a small bureaucratic foothold, but a real one.",
+        "tier": "ambient",
+        "section": "world",
+        "figureId": "ossian"
+      },
+      {
+        "day": 18,
+        "worldDay": 81,
+        "text": "Osten: Osten negotiated a handshake arrangement with a Crossing stable-keeper to store his water barrels in exchange for a cut of daily sales — his first fixed foothold at the marketplace.",
+        "tier": "ambient",
+        "section": "world",
+        "figureId": "osten"
+      },
+      {
+        "kind": "update",
+        "section": "world",
+        "version": "2.2.0",
+        "worldDay": 81,
+        "text": "The game was updated to v2.2.0 — 6 new, 3 fixed, 1 changed.",
+        "loggedAt": "2026-09-19T18:27:31.100Z"
+      }
+    ]
   },
   "domains": {
     "primary": "ashwarden",
@@ -19209,8 +19390,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1789842440563,
-  "rev": 2172,
+  "updatedAt": 1789842451100,
+  "rev": 2173,
   "generated": {
     "schemaVersion": 1,
     "npc": {

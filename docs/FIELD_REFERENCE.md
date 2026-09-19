@@ -648,7 +648,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `cannot` | 1216 | `tree`×1216 | ✅ READ | `assignments.js`, `authormode.js`, `braids.js` |
 | `gains` | 1186 | `tree`×1186 | ✅ READ | `encounters.js`, `gm.js`, `roundreceipt.js` |
 | `gainAxes` | 1127 | `tree`×1127 | ✅ READ | `capabilities.js` |
-| `axis` | 511 | `rankDeltas`×511 | ✅ READ | `coliseum.js`, `craftmechanics.js`, `gm.js` |
+| `axis` | 511 | `rankDeltas`×511 | ✅ READ | `coliseum.js`, `craftmechanics.js`, `gambit.js` |
 | `delta` | 511 | `rankDeltas`×511 | ✅ READ | `arceffects.js`, `companions.js`, `economy.js` |
 | `from` | 511 | `rankDeltas`×511 | ✅ READ | `affiliation.js`, `art.js`, `assignments.js` |
 | `kind` | 489 | `rankDeltas`×489 | ✅ READ | `arceffects.js`, `art.js`, `assignments.js` |
@@ -721,7 +721,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `evasion` | 7 | `mechanic`×7 | ✅ READ | `craftmechanics.js`, `skill_battle.js`, `app.js` |
 | `evasionRank` | 7 | `mechanic`×7 | ✅ READ | `skill_battle.js` |
 | `requiresSelf` | 6 | `mechanic`×6 | ✅ READ | `skill_battle.js` |
-| `peril` | 6 | `root`×6 | ✅ READ | `art.js`, `gm.js` |
+| `peril` | 6 | `root`×6 | ✅ READ | `art.js`, `gm.js`, `spectrum.js` |
 | `penetration` | 6 | `mechanic`×6 | ✅ READ | `capabilities.js`, `craftmechanics.js`, `skill_battle.js` |
 | `persistUntilHealed` | 6 | `tree`×6 | ✅ READ | `battle_turn.js`, `capabilities.js`, `conditions.js` |
 | `summon` | 5 | `root`×5 | ✅ READ | `combatants.js`, `encounters.js`, `gm.js` |

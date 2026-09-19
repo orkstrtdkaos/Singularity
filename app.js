@@ -115,6 +115,7 @@ import { runWakeGeneration } from "./engine/wake.js"; // SNG-204 Phase 2: open w
 import { addAssignment, delegationRefusal, activeDelegates, MISSION_KINDS, MISSION_KIND_IDS, canSendOn, sayFamilies } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
 import { setArcFate } from "./engine/latentarcs.js"; // SNG-191 §7: the player closing a surfaced arc (the handled/resolved fate)
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
+import { spectrumIdsOf, cleanAxes, driftAlignment } from "./engine/spectrum.js";   // CCODE-436: the twelve, and the one door into the fingerprint
 import { trainableTier, SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, canLearnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, retroNativeGrants, applyNativeGrants, nativeGrantIdsFor, seedInnateSubstrate, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility, autoAdvancePracticedRanks, markDefiningMoment, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy, craftRolls, rollForChoice } from "./engine/progression.js";
 import { topicsNeedingSummary, buildSummaryPrompt, applySummaries, topicReading, ensureCodex, applyCodexUpdates, codexForGM, searchCodex, mergeInto, mergeCodexTopics, suggestMerges, markNotSame, buildMergeAdjudicationPrompt, applyMergeVerdicts, mergeDigest, undoLastMerge } from "./engine/codex.js";
 import { reconcile, topReconcileVersion } from "./engine/reconcile.js";
@@ -170,7 +171,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.98";
+const APP_VERSION = "2.0.99";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7230,6 +7231,20 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   const result = await gmTurn(turnCtx354, { tier });
   busy = false;
   if (!result.ok) { renderPlay(null, { error: result.error }); return null; }
+  // ⛔ CCODE-436 — THE GM'S AXES ARE CLEANED HERE, ONCE, for every reader after: the button's chance, the preview, the action, the stored
+  // beat. Its choices returned the schema's placeholder literally (`"axes": {"spectrumId": 0.4}`) and 13 of 16 saves drifted into it.
+  // A drop is COUNTED where the intent parser's are, so the dev report can see the GM still doing it.
+  try {
+    const ids436 = spectrumIdsOf(CONTENT), drops436 = [];
+    for (const ch of (Array.isArray(result.turn?.choices) ? result.turn.choices : [])) {
+      if (ch && ch.axes !== undefined) { const r = cleanAxes(ch.axes, ids436); ch.axes = r.axes; drops436.push(...r.dropped.map(d => ({ ...d, from: "choice" }))); }
+    }
+    if (result.turn?.newAbility && result.turn.newAbility.axes !== undefined) {
+      const r = cleanAxes(result.turn.newAbility.axes, ids436, { max: 12 }); result.turn.newAbility.axes = r.axes; drops436.push(...r.dropped.map(d => ({ ...d, from: "newAbility" })));
+    }
+    if (drops436.length) character._axesDropped = [...(character._axesDropped || []).slice(-19),
+      ...drops436.map(d => ({ at: new Date().toISOString(), key: d.key, value: d.value, why: d.why, from: d.from }))].slice(-20);
+  } catch { /* cleaning never blocks a beat the player waited for */ }
   // ⛔ CCODE-410: the beat that carried the invitation came back — NOW it has been said, once, and leaves the queue.
   if (invitation410) { try { invitationSaid(character.worldState, invitation410.subjectId, readClock(character.clock).day); } catch { /* bookkeeping never blocks a beat */ } }
   // ⛔ CCODE-420: a job's result is TOLD once the beat that carried it came back — never when it was merely queued
@@ -8608,12 +8623,8 @@ function applyTurn(turn, resolution, playerWords = null) {
     }
   }
   // spectrum fingerprint drifts toward the axes of what you actually did (EWMA)
-  if (resolution?.action?.axes) {
-    for (const [ax, v] of Object.entries(resolution.action.axes)) {
-      const cur = character.alignment[ax] || 0;
-      character.alignment[ax] = Math.max(-1, Math.min(1, cur * 0.95 + v * 0.05));
-    }
-  }
+  // ⛔ CCODE-436: through the one door, which writes only the twelve
+  if (resolution?.action?.axes) driftAlignment(character, resolution.action.axes, { ids: spectrumIdsOf(CONTENT), mode: "toward", weight: 0.05 });
   // the HUMAN's profile learns from the intent tags of the chosen action
   if (resolution?.action?.intentTags?.length) {
     updateProfile(character, resolution.action.intentTags, CONTENT.rules.playerAptitudes, CONTENT.rules);
@@ -9751,10 +9762,9 @@ async function onChoice(choice) {
         const drift = CONTENT.rules.precursor?.perilDrift ?? 0.05;
         const band = CONTENT.rules.precursor?.bandNotice ?? 0.4;
         character.precursorAxes = character.precursorAxes || [];
-        for (const [ax, v] of Object.entries(ab.axes || {})) {
-          const cur = character.alignment[ax] || 0;
-          character.alignment[ax] = Math.max(-1, Math.min(1, cur + Math.sign(v) * drift));
-          if (Math.abs(character.alignment[ax]) >= band && !character.precursorAxes.includes(ax)) character.precursorAxes.push(ax);
+        // ⛔ CCODE-436: through the one door — a craft minted on the placeholder carried it into the fingerprint
+        for (const [ax, now] of Object.entries(driftAlignment(character, ab.axes || {}, { ids: spectrumIdsOf(CONTENT), mode: "peril", step: drift }))) {
+          if (Math.abs(now) >= band && !character.precursorAxes.includes(ax)) character.precursorAxes.push(ax);
         }
       }
     }
@@ -16638,7 +16648,8 @@ function renderGambitBuilder(status = "") {
     renderGambitBuilder("Reading the plan…");
     // SNG-093: try/catch/finally + timeout — a hang or a throw can never strand "Reading the plan…".
     try {
-      const actions = await withTimeout(parseGambitSteps(g.steps.map(s => s.text), character, hereNow(), { catalog: fullCatalog(), table: CONTENT.rules?.craftSubAttributes }), 30000, "the plan reader");
+      const actions = await withTimeout(parseGambitSteps(g.steps.map(s => s.text), character, hereNow(), { catalog: fullCatalog(), table: CONTENT.rules?.craftSubAttributes, spectrumIds: spectrumIdsOf(CONTENT) }), 30000, "the plan reader");
+      { const d436 = (actions || []).flatMap(a => a?.axesDropped || []); if (d436.length) character._axesDropped = [...(character._axesDropped || []).slice(-19), ...d436.map(d => ({ at: new Date().toISOString(), key: d.key, value: d.value, why: d.why, from: "gambit" }))].slice(-20); }
       g.actions = actions;
       g.assessed = assessGambit(actions, gambitCtx());
     } catch (err) {
@@ -16748,7 +16759,7 @@ async function runGambit() {
     const fb = document.getElementById("c-fallback");
     if (fb) fb.onclick = async () => {
       run.fallbackUsed[failed.index] = true;
-      const [fbAction] = await parseGambitSteps([g.steps[failed.index].fallback], character, ctx.location, { catalog: fullCatalog(), table: CONTENT.rules?.craftSubAttributes });
+      const [fbAction] = await parseGambitSteps([g.steps[failed.index].fallback], character, ctx.location, { catalog: fullCatalog(), table: CONTENT.rules?.craftSubAttributes, spectrumIds: spectrumIdsOf(CONTENT) });
       const r = rerollStep(fbAction, ctx);
       if (r.degree === "failure" || r.degree === "crit_failure") {
         renderComplication({ ...r, index: failed.index });

@@ -36,6 +36,7 @@ import { mintableBraidsFor, buildBraidDef, mintBraid, braidTreeFor } from "./bra
 import { findExistingNpc, prettifyNpcName, REGISTRY_CAP, collapseScenePresence, subjectFromCaption, subjectFromSeed, rekeyPerson } from "./npcs.js"; // SNG-199/205: registry + codex backfill
 import { bondOf, companionCodexUpdate, companionStageCount } from "./companions.js"; // SNG-200: stage + codex backfill
 import { isCoercedObjectArtefact, isDescriptiveNotName } from "./state.js"; // SNG-329: the artefact detector, shared with the mint that now refuses it
+import { spectrumIdsOf, retireOffAtlasAxes, cleanAxes } from "./spectrum.js";   // CCODE-436: step 70
 import { startingSkills } from "./inventory.js"; // SNG-339b: the training an existing character came with
 
 /* ═══ R27 (ERIK 2026-09-02) — A RENAME TARGET MAY BE CONDITIONED, AND ON TWO DIFFERENT THINGS.
@@ -86,6 +87,22 @@ function renameTargets(spec, entry, character, known) {
 // "has this entity seen this step yet" via entity.reconcileVersion.
 
 export const CHARACTER_STEPS = [
+  {
+    version: 70, id: "axes-off-the-atlas", playerFacing: false,
+    // ⛔ CCODE-436 — THE PHANTOM AXIS. 13 of 16 saves carried `alignment.spectrumId` — the GM schema's placeholder, returned literally on
+    // its choices and drifted into by every one the player took — and three carried `spectrum` and `value`. Every reader read them: the
+    // roll's self-fit is a cosine over the union of keys, and the GM is shown the whole fingerprint. ⛑ Additive in the only sense that
+    // matters here — nothing is lost: an off-atlas value moves to `_retiredAxes`, as Aevi kept SNG-633's ("every value is preserved…
+    // so nothing is lost if they are ever made real"). The beat on screen is the GM's offer, cleaned as a new one is at intake.
+    apply: (c, ctx) => {
+      const ids = spectrumIdsOf(ctx?.content);
+      retireOffAtlasAxes(c, ids);
+      for (const ch of (Array.isArray(c?.activeScene?.lastTurn?.choices) ? c.activeScene.lastTurn.choices : [])) {
+        if (ch && ch.axes && typeof ch.axes === "object") ch.axes = cleanAxes(ch.axes, ids).axes;
+      }
+      return {};
+    }
+  },
   {
     version: 69, id: "a-blank-last-beat", playerFacing: false,
     // ⛔ CCODE-427 — WHAT THE FIRE TESTS LEFT. Before they were sealed, every fire test saved its COPY, so the stored last turn became a

@@ -9,15 +9,16 @@ import { normalizeDifficulty } from "./resolve.js";
 import { callClaudeJSON } from "./claude.js";
 import { resolveAction, successChance } from "./resolve.js";
 import { senseAction } from "./sense.js";
-import { rollForChoice } from "./progression.js";   // CCODE-379: a step that uses a craft rolls what the craft rolls
+import { rollForChoice } from "./progression.js";
+import { cleanAxes } from "./spectrum.js";   // CCODE-436: a step's axes are the twelve, or nothing   // CCODE-379: a step that uses a craft rolls what the craft rolls
 
 /** Parse all step texts into action specs in ONE cheap call. `catalog` and `table` (rules.craftSubAttributes) let a step that uses a
  *  craft roll the craft's own sub (CCODE-379, `rollForChoice`); without them the parser's pick stands, as before. */
-export async function parseGambitSteps(stepTexts, character, location, { catalog = null, table = null } = {}) {
+export async function parseGambitSteps(stepTexts, character, location, { catalog = null, table = null, spectrumIds = null } = {}) {
   const sys = `Classify each step of an RPG player's declared plan into an action spec. Reply ONLY JSON:
-{"steps": [{"label": "short restatement", "attribute": "physical|mental|social|practical", "subAttribute": "strength|agility|reason|insight|presence|rapport|craft|wits", "axes": {"spectrumId": -1..1}, "difficulty": "very easy|easy|normal|hard|very hard", "intentTags": ["..."], "abilityId": "id-or-null", "comboAbilities": ["ids if deliberately combining two abilities, else []"], "novelUse": false, "noveltyHint": "2-4 words, only if novelUse"}]}
+{"steps": [{"label": "short restatement", "attribute": "physical|mental|social|practical", "subAttribute": "strength|agility|reason|insight|presence|rapport|craft|wits", "axes": {"<spectrum id>": <number -1..1>}, "difficulty": "very easy|easy|normal|hard|very hard", "intentTags": ["..."], "abilityId": "id-or-null", "comboAbilities": ["ids if deliberately combining two abilities, else []"], "novelUse": false, "noveltyHint": "2-4 words, only if novelUse"}]}
 One entry per input step, same order. subAttribute picks the finest fit: strength (force) / agility (speed, balance, stealth) / reason (analysis) / insight (perception, reading people) / presence (command) / rapport (charm) / craft (tool work) / wits (improvisation).
-Spectrum ids: emotional_logical, falsehood_truth, demonic_angelic, violence_peace, concrete_abstract, mechanical_spiritual, chaos_order, dark_light, death_life, space_time, body_mind, destruction_creation.
+Spectrum ids — each axis a step sets is KEYED BY ITS ID and valued -1..1 (e.g. "axes": {"violence_peace": -0.6, "dark_light": 0.3}); set only the axes the step truly leans on, or {}: emotional_logical, falsehood_truth, demonic_angelic, violence_peace, concrete_abstract, mechanical_spiritual, chaos_order, dark_light, death_life, space_time, body_mind, destruction_creation.
 Intent tags: plan, scout, prepare, attack, climb, force, persuade, charm, negotiate, comfort, study, investigate, analyze, gamble, drink, revel, risky, careful, retreat, help, give, rescue, heal, meditate, threaten, steal, rapport, finesse, discipline.
 abilityId must be one the character actually has, or null. novelUse=true when an ability is pushed outside its normal envelope or two are braided together. Later steps in a plan are typically harder (guards alerted, time pressure) — reflect that by moving DOWN the band ladder ("easy" → "normal" → "hard"), not by inventing numbers.`;
   const content = `Character abilities: ${(character.abilities || []).map(a => a.abilityId).join(", ") || "none"}. ` +
@@ -37,7 +38,8 @@ abilityId must be one the character actually has, or null. novelUse=true when an
       label: steps[i]?.label || text.slice(0, 60),
       attribute: ["physical", "mental", "social", "practical"].includes(steps[i]?.attribute) ? steps[i].attribute : "practical",
       subAttribute: SUBS.includes(steps[i]?.subAttribute) ? steps[i].subAttribute : null,
-      axes: steps[i]?.axes || {},
+      // ⛔ CCODE-436: the twelve, or nothing — the prompt showed the placeholder `{"spectrumId": -1..1}` here too; a drop rides out to be counted
+      ...(() => { const r = cleanAxes(steps[i]?.axes, spectrumIds || []); return { axes: r.axes, ...(r.dropped.length ? { axesDropped: r.dropped } : {}) }; })(),
       // SNG-346: the fourth door onto the same field. Left numeric-only, a gambit step could never be
       // "easy" — a multi-step plan would silently price every step at neutral while single actions used
       // the full ladder, and the two paths would quietly disagree about the same task.

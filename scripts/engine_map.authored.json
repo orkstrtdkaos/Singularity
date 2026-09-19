@@ -455,5 +455,10 @@
     "purpose": "R41 (2026-09-08): a Sovereign arrives TWICE — diminished at a mid arc stage, final at the last — and the shape is ONE record carrying `forms`, never two records for one being. The form in force is chosen by the arc's live stage, handed in as `stageOf` (worldtick owns it); `personOpponentFor` honours the form's level and kit, and the arrival is written on the duel def's `setup` because the arrival IS the event. No `forms` block resolves exactly as authored — reader before field.",
     "playerVisibleSurface": "The duel def's `setup` line when a person arrives in a form: 'X has ARRIVED DIMINISHED - arriving is diminishment; it can be fought, and it can be lost to survivably' / 'X stands in FINAL FORM'. Read by the fight panel and the narrator before anything else. NONE until a record carries `forms` (nobody authors it yet).",
     "whatMakesItFire": "A record with a `forms` block resolved as an opponent (personOpponentFor via escalateToFight -> duelFromTarget), with the arc's live stage handed in as `stageOf` (worldtick.arcStageNow); the stage at or past forms.diminished.atStage / forms.final.atStage selects the form. Content: Sovereign `forms` authored by Aevi; `atStage` per arc is Erik's (R41 open q1)."
+  },
+  "spectrum.js": {
+    "purpose": "The twelve spectrum axes and the one door into a character's fingerprint: every axis map is cleaned to the content's twelve and a real number before anything reads or writes it. Pure, but for the drift and the set-aside.",
+    "playerVisibleSurface": "Indirect: the success chance on every choice (a roll's self-fit reads the fingerprint against the action's axes) and the fingerprint the GM is shown each beat. No panel of its own.",
+    "whatMakesItFire": "Every GM turn as it arrives (its choices and a minted craft), every declared plan's steps, every resolved action's drift and a precursor craft's peril, and reconcile step 70 on load."
   }
 }

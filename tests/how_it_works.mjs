@@ -18943,7 +18943,8 @@ console.log("\n── §264 · a skill says what it rolls, and a choice rolls it
     && !/SUBS\.includes\((?:choice|c)\.subAttribute\)/.test(A264));
   check("§264: …the chance shown for a craft reads the same rule, and both doors into a declared plan pass the catalog through",
     /const roll = rollForChoice\(\[ab\], \{\}, CONTENT\.rules\?\.craftSubAttributes\);/.test(A264)
-    && (A264.match(/parseGambitSteps\([^;]*\{ catalog: fullCatalog\(\), table: CONTENT\.rules\?\.craftSubAttributes \}\)/g) || []).length === 2
+    // CCODE-436: the plan's doors now pass the twelve as well — the rule is that both pass the catalog and the table, whatever follows
+    && (A264.match(/parseGambitSteps\([^;]*\{ catalog: fullCatalog\(\), table: CONTENT\.rules\?\.craftSubAttributes[^}]*\}\)/g) || []).length === 2
     && /return crafts\.length \? \{ \.\.\.step, \.\.\.rollForChoice\(crafts, step, table\) \} : step;/.test(GB264));
   check("§264: ⛔ the wheel's and the graph's detail panels say it, a craft's row and the level-up rows carry it beside the cost, and the pop-up is handed it",
     (A264.match(/craftRollsLine\(craftRollsOf\(selAb\)\)/g) || []).length === 2 && /rolls: craftRollsOf\(ab\)/.test(A264)
@@ -22763,6 +22764,66 @@ console.log("\n── §314 · a band with no barracks is quartered — who need
   const A314 = rd("app.js").replace(/\r\n/g, "\n").split("\n").filter(l => !/^\s*\/\//.test(l)).join("\n");
   check("§314: ⛑ the Bands tab says where they sleep and what the rest cost, from the same function the pass charges by",
     /const q = quarteringOf\(character, holdCfgNow\(\), \{ martial: CONTENT\.rules\?\.martial \|\| \{\} \}\);/.test(A314) && /data-quartering/.test(A314));
+}
+
+// ══════════ §315 · CCODE-436 — THE PHANTOM AXIS: A CHARACTER'S FINGERPRINT IS THE TWELVE ══════════
+// 13 of 16 saves carried `alignment.spectrumId` — the GM schema's placeholder, returned literally on its choices and drifted into by every
+// one the player took — and every reader read it: a roll's self-fit is a cosine over the union of keys (a choice carrying only the
+// placeholder swung Splarf's roll by 15 points on a sign the GM made up), and the GM was shown the whole fingerprint each beat.
+console.log("\n── §315 · the phantom axis — one door into the fingerprint, clean axes at every intake, the twelve in every prompt ──");
+{
+  const S315 = await import("../engine/spectrum.js");
+  const { reconcile: rec315 } = await import("../engine/reconcile.js");
+  const { loadContentHeadless: lch315 } = await import("./headless_content.mjs");
+  const CT315 = await lch315();
+  const ids = S315.spectrumIdsOf(CT315);
+  const c1 = S315.cleanAxes({ spectrumId: 0.4, spectrum: -0.2, value: 0.1, violence_peace: -1.7, dark_light: "0.3", body_mind: null, death_life: true, tradition_innovation: 0.5 }, ids, { max: 12 });
+  check("§315: ⛔ an axis is one of the content's twelve, and a NUMBER — never a placeholder, never an off-atlas id, never null or true read as 0 or 1",
+    ids.length === 12 && JSON.stringify(c1.axes) === JSON.stringify({ violence_peace: -1, dark_light: 0.3 })
+    && ["spectrumId", "spectrum", "value", "tradition_innovation", "body_mind", "death_life"].every(k => c1.dropped.some(d => d.key === k)),
+    JSON.stringify(c1));
+  const ch = { alignment: { violence_peace: 0.2 } };
+  const w1 = S315.driftAlignment(ch, { spectrumId: 0.4, violence_peace: -1 }, { ids, mode: "toward", weight: 0.05 });
+  const w2 = S315.driftAlignment(ch, { dark_light: 0.7, value: 1 }, { ids, mode: "peril", step: 0.05 });
+  check("§315: ⛔ ONE DOOR into the fingerprint — it drifts toward what was done, or steps along a precursor craft's peril, and writes only the twelve",
+    Math.abs(ch.alignment.violence_peace - 0.14) < 1e-9 && ch.alignment.dark_light === 0.05 && !("spectrumId" in ch.alignment) && !("value" in ch.alignment)
+    && Object.keys(w1).join() === "violence_peace" && Object.keys(w2).join() === "dark_light", JSON.stringify(ch.alignment));
+  const A315 = rd("app.js").replace(/\r\n/g, "\n").split("\n").filter(l => !/^\s*\/\//.test(l)).join("\n");
+  check("§315: …and BOTH writers go through it: nothing in app.js writes `character.alignment[…]` any more",
+    !/character\.alignment\[[^\]]+\]\s*=/.test(A315)
+    && /driftAlignment\(character, resolution\.action\.axes, \{ ids: spectrumIdsOf\(CONTENT\), mode: "toward"/.test(A315)
+    && /driftAlignment\(character, ab\.axes \|\| \{\}, \{ ids: spectrumIdsOf\(CONTENT\), mode: "peril"/.test(A315));
+  check("§315: ⛔ every GM turn's choices and a craft it mints are cleaned where the turn arrives — before anything reads them — and a drop is COUNTED for the dev report",
+    /if \(!result\.ok\) \{ renderPlay\(null, \{ error: result\.error \}\); return null; \}\n[\s\S]{0,700}const ids436 = spectrumIdsOf\(CONTENT\)/.test(A315)
+    && /const r = cleanAxes\(ch\.axes, ids436\); ch\.axes = r\.axes;/.test(A315) && /result\.turn\.newAbility\.axes = r\.axes;/.test(A315)
+    && /character\._axesDropped = \[[\s\S]{0,160}drops436\.map\(d => \(\{ at: [^\n]*from: d\.from/.test(A315));
+  const G315 = rd("engine/gambit.js").replace(/\r\n/g, "\n");
+  check("§315: …and a declared plan's steps, whose two readers pass the twelve and hear the drops",
+    /const r = cleanAxes\(steps\[i\]\?\.axes, spectrumIds \|\| \[\]\);/.test(G315)
+    && (A315.match(/parseGambitSteps\([^\n]*spectrumIds: spectrumIdsOf\(CONTENT\)/g) || []).length === 2 && /from: "gambit"/.test(A315));
+  // ⛔ the prompts: no placeholder in an axes slot, and every list of ids IS the content's list
+  const code315 = (s) => s.split("\n").filter(l => !/^\s*\/\//.test(l)).join("\n");   // gm.js QUOTES the placeholder in two comments
+  const GM315 = code315(rd("engine/gm.js").replace(/\r\n/g, "\n"));
+  const listed = (src, re) => { const m = src.match(re); return m ? m[1].split(/,\s*/).map(s => s.trim()).filter(Boolean) : []; };
+  const gmList = listed(GM315, /Axes \(a choice's, a new craft's\): KEYED BY SPECTRUM ID — only these twelve: ([a-z_, ]+) — /);
+  const gbList = listed(G315, /set only the axes the step truly leans on, or \{\}: ([a-z_, ]+)\./);
+  const same = (l) => l.length === ids.length && l.every(x => ids.includes(x));
+  check("§315: ⛔ no prompt shows the placeholder in an axes slot, and each prompt's list of axes IS the content's twelve (a renamed axis turns this red)",
+    !/"axes":\s*\{"spectrumId"/.test(GM315) && !/"axes":\s*\{"spectrumId"/.test(code315(G315)) && same(gmList) && same(gbList),
+    `gm ${gmList.length} · gambit ${gbList.length}`);
+  // ⛔ step 70 — on a fixture, never a live save
+  const fx = () => ({ id: "fx", name: "Fx", reconcileVersion: 69, alignment: { violence_peace: 0.2, spectrumId: -0.5, value: 0.1, tradition_innovation: 0.3 },
+    activeScene: { lastTurn: { narration: "x", choices: [{ label: "a", axes: { spectrumId: 0.4, dark_light: 0.2 } }, { label: "b", axes: { spectrumId: -0.1 } }] } } });
+  const f1 = fx(); rec315(f1, "character", { content: CT315 });
+  const f2 = fx(); rec315(f2, "character", {});
+  check("§315: ⛔ step 70 sets an off-atlas value ASIDE, never erases it (`_retiredAxes`, as SNG-633 kept content's) — and cleans the beat on screen",
+    JSON.stringify(f1.alignment) === JSON.stringify({ violence_peace: 0.2 })
+    && f1._retiredAxes?.spectrumId === -0.5 && f1._retiredAxes?.value === 0.1 && f1._retiredAxes?.tradition_innovation === 0.3
+    && JSON.stringify(f1.activeScene.lastTurn.choices.map(c => c.axes)) === JSON.stringify([{ dark_light: 0.2 }, {}]) && f1.reconcileVersion >= 70,
+    JSON.stringify({ a: f1.alignment, r: f1._retiredAxes }));
+  check("§315: …and with no content in reach it moves only the placeholders, which are never an axis",
+    JSON.stringify(f2.alignment) === JSON.stringify({ violence_peace: 0.2, tradition_innovation: 0.3 }) && f2._retiredAxes?.spectrumId === -0.5,
+    JSON.stringify(f2.alignment));
 }
 
 /* ══════════ REPORT ══════════ */

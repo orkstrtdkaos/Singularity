@@ -24,7 +24,7 @@ import { personRecordFor } from "./npcsheet.js";
 import { levelOfPerson, poolRows, atSideRows, wherePerson } from "./fellowship.js";
 import { activeCompany } from "./company.js";
 import { routeBetween } from "./journey.js";
-import { journeyCraftsOf } from "./journeyplan.js";
+import { journeyCraftsOf, mountedFrom } from "./journeyplan.js";   // CCODE-432: a team setting out from a stable rides
 import { abilityTier } from "./skilltree.js";
 import { credit, debit } from "./purse.js";
 import { addItem } from "./inventory.js";
@@ -781,7 +781,9 @@ export function jobRouteOf(character, { locations = {}, rules = {}, abilityCatal
       abilities: person.abilities || [] };
     const r = routeBetween(from, whereId, locations, { traveller, rules });
     if (!r?.options?.length) return null;
-    const march = journeyCraftsOf({ abilities: person.abilities || [] }, rules, abilityCatalog).march?.share || 0;
+    // ⛔ CCODE-432: from where you keep mounts they ride — the better of the ride and a craft's march, never both
+    const march = Math.max(journeyCraftsOf({ abilities: person.abilities || [] }, rules, abilityCatalog).march?.share || 0,
+      mountedFrom(character, from, rules)?.share || 0);
     const ways = r.options.map(o => ({ label: o.label, days: o.kind === "gate"
       ? (num(o.walkIn, 0) + num(o.walkOut, 0)) * (1 - march) + num(o.gate?.hours, 0) / 24
       : num(o.days, 0) * (1 - march) }));

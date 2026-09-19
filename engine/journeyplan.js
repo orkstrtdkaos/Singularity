@@ -27,6 +27,7 @@
 import { routeBetween } from "./journey.js";
 import { walkingDays } from "./worldmap.js";
 import { removeItem } from "./inventory.js";
+import { mountsAt } from "./holdings.js";   // ⛔ CCODE-432: set out from where you keep mounts, and you ride
 
 export const JOURNEY_DEFAULTS = Object.freeze({
   minDays: 1,                          // under a day's walk is a step, not a journey
@@ -48,7 +49,21 @@ export const JOURNEY_DEFAULTS = Object.freeze({
     shelter: { wildcraft: 1, safe_ground: 1, laid_ground: 1 },          // a night in the open made into a camp worth the name — told, not yet counted
   },
   craftCeiling: { forage: 0.9, march: 0.3, endureHealth: 0.75, endureEnergy: 0.75 },
+  // ⛔ CCODE-432 (SNG-627 `mounts`): a journey set out from a place where you keep mounts is ridden, and the walked days shrink by this share.
+  // ⚠️ UNAUTHORED — a third stands in, and the plan SAYS it is riding; Erik said "stables can shorten journeys" and gave no number. It is
+  // the better of a craft's march and a mount, never both: you ride, or your craft carries the pace, whichever is faster.
+  mountShare: 0.33,
 });
+
+/** ⛔ CCODE-432 — THE SHARE A MOUNT TAKES OFF THE WALKED DAYS FROM THIS PLACE, and what carries it: a hold of yours here with a standing
+ *  `mounts` feature. `rules` is the whole rules bag (the feature kinds live in its economy). → { share, hold, feature } or null. Pure. */
+export function mountedFrom(character, locationId, rules = {}) {
+  const kinds = rules?.economy?.holdFeatures?.kinds || null;
+  const m = kinds ? mountsAt(character, locationId, { features: { kinds } }) : null;
+  if (!m) return null;
+  const share = Math.max(0, Math.min(0.9, Number(journeyRules(rules).mountShare) || 0));
+  return share > 0 ? { share, hold: m.hold.name || m.hold.id, feature: String(m.feature.name || m.feature.kind).split(" — ")[0] } : null;
+}
 
 /** The journey dials in force: authored `rules.journey` over the defaults. Pure. */
 export function journeyRules(rules = {}) {
@@ -147,7 +162,10 @@ export function planJourney({ character, destId, locations = {}, rules = {}, cat
   if (!isJourneyRoute(r, rules)) return null;
   // a marcher's road is shorter: the WALKED days shrink, a gate's hours do not
   const crafts = journeyCraftsOf(character, rules, abilities);
-  const march = crafts.march?.share || 0;
+  // ⛔ CCODE-432: and a rider's is — set out from where you keep mounts, and the better of the two carries the pace
+  const mount = mountedFrom(character, fromId, rules);
+  const riding = !!mount && mount.share > (crafts.march?.share || 0);
+  const march = Math.max(crafts.march?.share || 0, mount?.share || 0);
   const options = r.options.map((o, i) => wayOf(march ? { ...o, days: o.kind === "gate"
     ? (Number(o.walkIn || 0) + Number(o.walkOut || 0)) * (1 - march) + (Number(o.gate?.hours) || 0) / 24
     : Number(o.days) * (1 - march) } : o, i, locations, march));
@@ -158,7 +176,8 @@ export function planJourney({ character, destId, locations = {}, rules = {}, cat
     rations: { needed: rationsFor(chosen.days, rules), carried: provisionsCarried(character, rules, catalog) },
     company: (companyNames || []).filter(Boolean),
     // who carries the road, by name — the card and the arrival both say it
-    crafts: Object.fromEntries(Object.entries(crafts).filter(([, v]) => v.by.length).map(([k, v]) => [k, v.by.map(b => b.name)])),
+    crafts: Object.fromEntries(Object.entries(crafts).filter(([, v]) => v.by.length && !(riding && v === crafts.march)).map(([k, v]) => [k, v.by.map(b => b.name)])),
+    ...(riding ? { mounted: { hold: mount.hold, feature: mount.feature, share: mount.share } } : {}),   // ⛔ CCODE-432: the ride, said
   };
 }
 
@@ -191,6 +210,7 @@ export function journeyLine(plan, { carried = null } = {}) {
   const c = plan.crafts || {};
   const carriedBy = [c.march?.length ? `${listed(c.march)} shortens the road` : null, c.forage?.length ? `${listed(c.forage)} forages on the move` : null,
     c.shelter?.length ? `${listed(c.shelter)} makes camp` : null, c.endureHealth?.length || c.endureEnergy?.length ? `${listed([...(c.endureHealth || []), ...(c.endureEnergy || [])])} bears the hunger` : null].filter(Boolean);
+  if (plan.mounted) carriedBy.unshift(`riding from ${plan.mounted.hold} (${plan.mounted.feature})`);   // ⛔ CCODE-432
   if (carriedBy.length) bits.push(carriedBy.join("; "));
   return bits.join(" · ");
 }

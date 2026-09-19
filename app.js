@@ -68,7 +68,7 @@ import { enterDeathState } from "./engine/death.js";
 // duplicated in this codebase, and each time the copies drifted before anyone noticed.
 wireDeathModel(DeathModel);
 import { carriageOf, voyageOf, isMoored, canSail, sailHolding, voyageLine, featureRuling, canBuildOn } from "./engine/carriage.js";
-import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt } from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room · CCODE-430: a yard trains   // B6b: the holding that moves
+import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mountsAt } from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room · CCODE-430: a yard trains   // B6b: the holding that moves
 import { featureCost, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
 import { FIRE_TESTS, diffKeys } from "./engine/firetests.js";   // SNG-560: the parts that have never been used
@@ -170,7 +170,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.94";
+const APP_VERSION = "2.0.95";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -15107,6 +15107,7 @@ function showBandMusterPicker(unitId) {
   const rows = (character.holdings || []).map(h => ({
     h, spare: musterCapacityOf(h, cfgS, { mustered: raisedAt(h) }),
     already: musteredFrom(unit.unit, h.id),
+    mounts: mountsAt(character, h.locationId, cfgS),   // ⛔ CCODE-432: where the mounts are kept, the hands can be raised to ride
   })).filter(r => r.spare > 0);
   if (!rows.length) {
     alert((character.holdings || []).length
@@ -15123,6 +15124,7 @@ function showBandMusterPicker(unitId) {
       <span class="hint" style="flex:1 1 140px">${esc(r.h.condition || "")}${r.already ? ` · ${r.already} already under arms` : ""}</span>
       <label class="hint">how many <input type="number" id="muster-n-${esc(r.h.id)}" value="${Math.min(r.spare, 5)}" min="1" max="${r.spare}" style="width:62px"></label>
       <span class="hint">of ${r.spare} it can still feed</span>
+      ${r.mounts ? `<label class="hint"><input type="checkbox" id="muster-ride-${esc(r.h.id)}" checked> mounted — ${esc(String(r.mounts.feature.name || r.mounts.feature.kind).split(" — ")[0])}</label>` : ""}
       <button class="opt" data-band-raise="${esc(r.h.id)}">Raise them</button>
     </div>`).join("")}
     <div class="help-foot">
@@ -15137,12 +15139,15 @@ function showBandMusterPicker(unitId) {
     const hid = el.dataset.bandRaise;
     const row = rows.find(r => r.h.id === hid);
     const want = Math.max(1, Math.min(row?.spare || 0, Number(document.getElementById(`muster-n-${hid}`)?.value) || 0));
+    // ⛔ CCODE-432: raised where the mounts are kept, they can ride — read BEFORE the picker closes, or the box is already gone
+    const ride = !!row?.mounts && !!document.getElementById(`muster-ride-${hid}`)?.checked;
     close();
     if (!row || !want) return;
     // ⚠️ THE LABEL DOES NOT SAY "HANDS": the roster row already prints "10 hands" and reads the label beside it, so a label that
     // repeated the noun rendered "10 hands hands raised at Stillwater's Trouble". Caught on the screen, not in a test.
-    const res = addContingent(unit.unit, { n: want, quality: 1, does: ["HARM", "MARTIAL"], from: hid,
-      what: `raised at ${row.h.name || hid}` });
+    // cavalry MOVES as well as fights — and a band of nothing else still bleeds for its gaps
+    const res = addContingent(unit.unit, { n: want, quality: 1, does: ride ? ["HARM", "MARTIAL", "MOVE"] : ["HARM", "MARTIAL"], from: hid,
+      what: `raised at ${row.h.name || hid}`, ...(ride ? { kind: "cavalry" } : {}) });
     if (!res.ok) { alert(res.why); return; }
     queueHoldingEvent(character, `${want} ${want === 1 ? "hand" : "hands"} raised at ${row.h.name || hid} for ${unit.name}.`);
     saveCharacter(character); renderBandsTab();

@@ -198,14 +198,22 @@ export function featureProperty(feature, cfg = null) {
 /** ⛔ CCODE-430 — WHERE A BAND CAN BE RAISED CHEAPER: a hold you have at this place with a standing `training` feature (a muster yard, a
  *  drill ground). Erik: "the muster yard enable training and a place to raise troops to, perhaps at less cost." A yard still being built
  *  trains nobody. → { hold, feature } or null. Pure. */
-export function trainingAt(character, locationId, cfg = null) {
-  if (!locationId) return null;
+export function trainingAt(character, locationId, cfg = null) { return propertyAt(character, locationId, "training", cfg); }
+
+/** ⛔ CCODE-432 — THE ONE QUESTION EVERY PROPERTY HOOK ASKS: a hold of yours at this place with a STANDING feature of this property — a yard
+ *  for `training`, a stable (or a boat-house, a lizard den, a corvid loft) for `mounts`. One being built does nothing yet. → { hold, feature }
+ *  or null. Pure. */
+export function propertyAt(character, locationId, property, cfg = null) {
+  if (!locationId || !property) return null;
   for (const h of holdingsAt(character, locationId)) {
-    const f = featuresOf(h).find(x => featureProperty(x, cfg) === "training");
+    const f = featuresOf(h).find(x => featureProperty(x, cfg) === property);
     if (f) return { hold: h, feature: f };
   }
   return null;
 }
+
+/** ⛔ CCODE-432 (SNG-627; Erik: "Stables can shorten journeys but can also house the mounts for cavalry") — WHERE YOU KEEP MOUNTS. Pure. */
+export function mountsAt(character, locationId, cfg = null) { return propertyAt(character, locationId, "mounts", cfg); }
 
 /** ⛔ CCODE-429 — SNG-628 / SNG-630 · A HOLD HAS ROOM, AND IT IS THE GROWTH AXIS THE HOLD LAYER DID NOT HAVE. Erik: "sometimes there's
  *  just not the room." Aevi's ladder (`holdStore.slots.ladder`: post 2 … stronghold 32) and frames (`slots.frames`: hull 3 · legs 2 · lift 4

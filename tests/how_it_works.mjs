@@ -22567,6 +22567,60 @@ console.log("\n── §310 · troops are not furniture — a band's hands and a
     && !J310.sayEffects({ degree: "failure", harmEach: 4 }, [{ isUnit: true, short: "12 hands" }]).some(l => /health each/.test(l)));
 }
 
+// ══════════ §311 · CCODE-432 — WHERE THE MOUNTS ARE KEPT, YOU RIDE ══════════
+// SNG-627 `mounts`. Erik: "Stables can shorten journeys but can also house the mounts for cavalry." A journey set out from a place where
+// you keep mounts is ridden; a job team setting out from there rides; hands raised there can be raised mounted.
+console.log("\n── §311 · where the mounts are kept, you ride — a journey and a job team from a stable, and hands raised there as cavalry ──");
+{
+  const JP311 = await import("../engine/journeyplan.js");
+  const J311 = await import("../engine/jobs.js");
+  const H311 = await import("../engine/holdings.js");
+  const { loadContentHeadless: lch311 } = await import("./headless_content.mjs");
+  const CT311 = await lch311();
+  const cfg311 = { ...CT311.rules.economy.holdStore, features: CT311.rules.economy.holdFeatures };
+  const riders = Object.entries(cfg311.features.kinds || {}).filter(([k, d]) => !k.startsWith("_") && d?.property === "mounts").map(([k]) => k);
+  const who = () => ({ currentLocationId: "p1", abilities: [], holdings: [{ id: "h1", name: "The Stable Hold", locationId: "p1", features: [] }] });
+  const a311 = who(); H311.addFeature(a311, "h1", { kind: "stable", name: "the long stable", by: "the fiction", cfg: cfg311, via: "granted" });
+  const b311 = who(); b311.holdings[0].features = [{ kind: "stable", name: "half a stable", building: { passesLeft: 2 } }];
+  check("§311: ⛔ where you keep mounts is read from the feature's PROPERTY — a stable, or its variant the lizard den — standing, at that place, and nowhere else",
+    riders.includes("stable") && !!H311.mountsAt(a311, "p1", cfg311) && H311.mountsAt(a311, "p2", cfg311) === null && H311.mountsAt(b311, "p1", cfg311) === null
+    && H311.trainingAt(a311, "p1", cfg311) === null, riders.join(", "));
+
+  // ⚑ SILAS'S OWN ROAD: from Stillwater's Trouble to Millbrook, with and without a stable granted there on a copy
+  const s311 = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const still = (s311.holdings || []).find(h => /Stillwater/.test(h.name || ""));
+  s311.currentLocationId = still?.locationId;
+  const plan = (c) => JP311.planJourney({ character: c, destId: "millbrook", locations: CT311.locations, rules: CT311.rules, catalog: CT311.items, abilities: CT311.abilities, worldDay: 30 });
+  const on = plan(s311);
+  H311.addFeature(s311, still.id, { kind: "stable", name: "the long stable", by: "the fiction", cfg: cfg311, via: "granted" });
+  const ridden = plan(s311);
+  const byLabel = (p) => Object.fromEntries((p?.options || []).map(o => [o.label, o]));
+  const o0 = byLabel(on), o1 = byLabel(ridden);
+  const walked = Object.keys(o0).find(k => !/gate/.test(k)), gated = Object.keys(o0).find(k => /gate/.test(k));
+  check("§311: ⛔ set out from where you keep mounts and the WALKED days shrink by the mount's share — a stand-in third that the plan says it is riding",
+    !!walked && Math.abs(o1[walked].days - Math.round(o0[walked].days * (1 - 0.33) * 10) / 10) <= 0.2 && ridden?.mounted?.share === 0.33
+    && /riding from Stillwater's Trouble \(the long stable\)/.test(JP311.journeyLine(ridden)), JSON.stringify({ walked, before: o0[walked]?.days, after: o1[walked]?.days }));
+  check("§311: …a gate's own hours do not shrink — only the walk in and out does",
+    !gated || (o1[gated].days < o0[gated].days && o1[gated].days > o0[gated].days * (1 - 0.33) - 0.1));
+  const long = { ...s311, abilities: [...(s311.abilities || []), { abilityId: "long_road", level: 4 }] };
+  const marched = plan(long);
+  check("§311: ⛔ the better of a mount and a craft's march carries the pace, never both — a marcher faster than a horse walks, and says so",
+    (marched?.mounted == null) === (JP311.journeyCraftsOf(long, CT311.rules, CT311.abilities).march.share >= 0.33)
+    && Math.abs(byLabel(marched)[walked].days - Math.round(o0[walked].days * (1 - Math.max(0.33, JP311.journeyCraftsOf(long, CT311.rules, CT311.abilities).march.share)) * 10) / 10) <= 0.2);
+
+  const road = J311.jobRouteOf(s311, { locations: CT311.locations, rules: CT311.rules, abilityCatalog: CT311.abilities });
+  const road0 = J311.jobRouteOf(JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json")), { locations: CT311.locations, rules: CT311.rules, abilityCatalog: CT311.abilities });
+  const person = { locationId: still.locationId, abilities: [], wits: 3, regionsKnown: {} };
+  check("§311: ⛑ and a job team setting out from that hold rides as well — the same share, from the same stable",
+    road(person, "millbrook").days < road0(person, "millbrook").days);
+
+  const A311 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§311: ⛑ hands raised where the mounts are kept can be raised MOUNTED — cavalry, doing MOVE as well as fighting — and the box is read before the picker closes",
+    /mounts: mountsAt\(character, h\.locationId, cfgS\),/.test(A311) && /id="muster-ride-\$\{esc\(r\.h\.id\)\}" checked/.test(A311)
+    && /const ride = !!row\?\.mounts && !!document\.getElementById\(`muster-ride-\$\{hid\}`\)\?\.checked;\n\s*close\(\);/.test(A311)
+    && /does: ride \? \["HARM", "MARTIAL", "MOVE"\] : \["HARM", "MARTIAL"\]/.test(A311) && /\.\.\.\(ride \? \{ kind: "cavalry" \} : \{\}\)/.test(A311));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

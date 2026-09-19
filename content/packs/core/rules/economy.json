@@ -305,7 +305,9 @@
     "yields": "raw_material",
     "label": "a mine",
     "hullable": false,
-    "_hullableWhy": "Aevi §4"
+    "_hullableWhy": "Aevi §4",
+    "property": "production",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "quarry": {
     "build": {
@@ -319,7 +321,9 @@
     "yields": "cut_stone",
     "label": "a quarry",
     "hullable": false,
-    "_hullableWhy": "Aevi §4"
+    "_hullableWhy": "Aevi §4",
+    "property": "production",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "mill": {
     "build": {
@@ -331,7 +335,9 @@
     "upkeep": 2,
     "family": "material",
     "yields": "raw_material",
-    "label": "a mill"
+    "label": "a mill",
+    "property": "production",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "workshop": {
     "build": {
@@ -345,7 +351,9 @@
     "yields": "mech_parts",
     "label": "a workshop",
     "_yieldFix_20260906": "⛔ ERIK 2026-09-06: 'the workshop says WORKED LIGHT, but a workshop can be for lots of finished goods.' ⚠️ AEVI GAVE IT THE LENS-WORKS' OUTPUT — `worked_light` is what a lens-works makes, and a workshop is the general case. ✅ `mech_parts` is the honest default from the authored goods vocabulary (arms · cut_stone · documents · instruments · living_stock · luxuries · mech_parts · medicines · nanite_tech · precursor_salvage · raw_material · worked_light). ⚑ AND A WORKSHOP SHOULD BE ABLE TO SAY WHAT IT MAKES — see `_yieldOverride`.",
-    "producesWhileMoving": true
+    "producesWhileMoving": true,
+    "property": "production",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "herd": {
     "build": {
@@ -357,7 +365,9 @@
     "upkeep": 2,
     "family": "material",
     "yields": "living_stock",
-    "label": "a herd or a planting"
+    "label": "a herd or a planting",
+    "property": "production",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "wall": {
     "build": {
@@ -369,7 +379,9 @@
     "upkeep": 1,
     "family": "martial",
     "defence": 1,
-    "label": "a wall"
+    "label": "a wall",
+    "property": "defence",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "barrier": {
     "build": {
@@ -381,7 +393,9 @@
     "upkeep": 1,
     "family": "martial",
     "defence": 1,
-    "label": "a barrier or a ward-line"
+    "label": "a barrier or a ward-line",
+    "property": "defence",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "tower": {
     "build": {
@@ -393,7 +407,9 @@
     "upkeep": 2,
     "family": "martial",
     "defence": 2,
-    "label": "a watchtower"
+    "label": "a watchtower",
+    "property": "sense",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "sentries": {
     "build": {
@@ -406,7 +422,9 @@
     "family": "martial",
     "defence": 1,
     "watch": true,
-    "label": "sentries — raised, bound, or posted"
+    "label": "sentries — raised, bound, or posted",
+    "property": "sense",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "temple": {
     "build": {
@@ -423,7 +441,9 @@
     "substrateSource": {
      "kind": "pool",
      "delta": 0.05
-    }
+    },
+    "property": "meaning",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "shrine": {
     "build": {
@@ -436,7 +456,9 @@
     "family": "meaning",
     "aura": 0.1,
     "label": "a shrine",
-    "pilgrims": 1
+    "pilgrims": 1,
+    "property": "meaning",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "quarters": {
     "build": {
@@ -450,7 +472,9 @@
     "hands": 2,
     "residents": 4,
     "label": "quarters — homes for the people who work it",
-    "producesWhileMoving": true
+    "producesWhileMoving": true,
+    "property": "housing",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "forge": {
     "build": {
@@ -462,7 +486,9 @@
     "upkeep": 2,
     "family": "craft",
     "facility": "forge",
-    "label": "a forge"
+    "label": "a forge",
+    "property": "craft",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "laboratory": {
     "build": {
@@ -475,7 +501,9 @@
     "family": "craft",
     "facility": "laboratory",
     "label": "a laboratory",
-    "producesWhileMoving": true
+    "producesWhileMoving": true,
+    "property": "craft",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "scriptorium": {
     "build": {
@@ -488,7 +516,9 @@
     "family": "craft",
     "facility": "scriptorium",
     "label": "a scriptorium",
-    "producesWhileMoving": true
+    "producesWhileMoving": true,
+    "property": "craft",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "kiln": {
     "build": {
@@ -501,7 +531,9 @@
     "family": "material",
     "yields": "cut_stone",
     "label": "a kiln or a lime-burn",
-    "producesWhileMoving": true
+    "producesWhileMoving": true,
+    "property": "production",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "fishery": {
     "build": {
@@ -514,7 +546,9 @@
     "family": "material",
     "yields": "living_stock",
     "label": "a fishery or a weir",
-    "producesWhileMoving": true
+    "producesWhileMoving": true,
+    "property": "production",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "still": {
     "build": {
@@ -527,7 +561,9 @@
     "family": "material",
     "yields": "medicines",
     "label": "a still or a physic-garden",
-    "producesWhileMoving": true
+    "producesWhileMoving": true,
+    "property": "production",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "lens_works": {
     "build": {
@@ -539,7 +575,9 @@
     "upkeep": 6,
     "family": "material",
     "yields": "worked_light",
-    "label": "a lens-works"
+    "label": "a lens-works",
+    "property": "production",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "waygate": {
     "build": null,
@@ -551,7 +589,9 @@
     "_note": "⛔ ERIK 2026-09-06: 'A waygate is a huge deal. There aren't many in the world and they let you travel vast distances.' Twenty-seven in the world, and this one was MADE. The effect the engine reads is the PLACE's — journey.gatesUsableBy/routeBetween read `waygate: true` on the location — so the kind marks that the hold KEEPS a gate; nothing new is read. Aevi: the flavour is yours.",
     "_flavour_20260906": "⛑ THE FLAVOUR, AEVI'S, PER CCODE 2026-09-06: 'a `waygate` feature kind now exists — Erik ruled its weight; the flavour is yours.' ⚑ WHAT IT IS TO HOLD ONE: twenty-seven exist in the world and the Precursors made the rest. This one was made by a person, which is either the most reassuring fact in Exesa or the least. ⚠️ A HELD WAYGATE IS NOT A DOOR YOU OWN — IT IS A DOOR THAT OPENS ON YOUR GROUND. The traffic is not yours. People arrive who were not coming to see you, and leave from somewhere you are standing. ⛔ Trade is gated behind wayfaring (`docs/EXESA.md`), so a hold with a gate is not merely richer — it is CONNECTED, and connected places are where things happen to you. ⚑ AND THE KEEPING IS THE POINT, WHICH IS WHY THIS IS A FEATURE AND NOT A LOCATION FLAG: the gate belongs to the world and reads from the place; the FEATURE says somebody is responsible for it. ⛔ A gate nobody keeps is a hole in the world with weather coming through it. ⚠️ NARRATION: it does not hum, glow, or announce itself. The arch is there and the distance on the other side is wrong, and everyone who uses it stops noticing within a week — which is the strangest thing about it.",
     "hullable": false,
-    "_hullableWhy": "Aevi §4"
+    "_hullableWhy": "Aevi §4",
+    "property": "transit",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "gate": {
     "build": {
@@ -565,7 +605,9 @@
     "defence": 1,
     "label": "a gate that closes",
     "hullable": false,
-    "_hullableWhy": "CCode — a gate in a hull leads nowhere"
+    "_hullableWhy": "CCode — a gate in a hull leads nowhere",
+    "property": "defence",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "keep": {
     "build": {
@@ -579,7 +621,9 @@
     "defence": 3,
     "label": "a keep — the last room that holds",
     "hullable": false,
-    "_hullableWhy": "CCode — a keep is its ground"
+    "_hullableWhy": "CCode — a keep is its ground",
+    "property": "defence",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "ward_line": {
     "build": {
@@ -594,7 +638,9 @@
     "watch": true,
     "label": "a standing ward-line",
     "hullable": false,
-    "_hullableWhy": "Aevi §4"
+    "_hullableWhy": "Aevi §4",
+    "property": "defence",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "muster_yard": {
     "build": {
@@ -608,7 +654,9 @@
     "defence": 1,
     "label": "a muster yard — where a band forms",
     "hullable": false,
-    "_hullableWhy": "CCode — a yard is ground you muster on"
+    "_hullableWhy": "CCode — a yard is ground you muster on",
+    "property": "training",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "temple_to_attending": {
     "build": {
@@ -626,7 +674,9 @@
     "substrateSource": {
      "kind": "pool",
      "delta": 0.05
-    }
+    },
+    "property": "meaning",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "memorial": {
     "build": {
@@ -639,7 +689,9 @@
     "family": "meaning",
     "aura": 0.15,
     "label": "a memorial — names kept",
-    "pilgrims": 1
+    "pilgrims": 1,
+    "property": "meaning",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "grave_ground": {
     "build": {
@@ -655,7 +707,9 @@
     "label": "tended grave-ground",
     "pilgrims": 1,
     "hullable": false,
-    "_hullableWhy": "Aevi §4"
+    "_hullableWhy": "Aevi §4",
+    "property": "meaning",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "hearth": {
     "build": {
@@ -669,7 +723,9 @@
     "aura": 0.1,
     "label": "a hearth nobody lets go out",
     "pilgrims": 1,
-    "producesWhileMoving": true
+    "producesWhileMoving": true,
+    "property": "meaning",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "longhouse": {
     "build": {
@@ -683,7 +739,9 @@
     "hands": 3,
     "residents": true,
     "label": "a longhouse",
-    "producesWhileMoving": true
+    "producesWhileMoving": true,
+    "property": "housing",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "infirmary": {
     "build": {
@@ -697,7 +755,9 @@
     "hands": 1,
     "residents": true,
     "label": "an infirmary",
-    "producesWhileMoving": true
+    "producesWhileMoving": true,
+    "property": "healing",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "market": {
     "build": {
@@ -710,7 +770,9 @@
     "family": "people",
     "hands": 1,
     "trade": true,
-    "label": "a market day"
+    "label": "a market day",
+    "property": "trade",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "school_room": {
     "build": {
@@ -722,7 +784,9 @@
     "upkeep": 2,
     "family": "craft",
     "facility": "teach",
-    "label": "a school-room"
+    "label": "a school-room",
+    "property": "craft",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "smithy": {
     "build": {
@@ -735,7 +799,9 @@
     "family": "craft",
     "facility": "repair",
     "label": "a smithy",
-    "producesWhileMoving": true
+    "producesWhileMoving": true,
+    "property": "craft",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "stable": {
     "build": {
@@ -747,7 +813,9 @@
     "upkeep": 1,
     "family": "craft",
     "facility": "travel",
-    "label": "a stable or a boat-house"
+    "label": "a stable or a boat-house",
+    "property": "mounts",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "_yieldOverride_20260906": "⬜ A FEATURE MAY NAME ITS OWN GOOD. Erik: 'a workshop can be for lots of finished goods.' ⚑ `{kind: 'workshop', yields: 'instruments'}` on the HOLD overrides the kind's default — so Cassiel's workshop at a laboratory post makes instruments, and a wright's workshop makes mech_parts, without two feature kinds. ⚠️ Same shape for `still` (medicines vs luxuries) and `mill` (raw_material vs documents, if it is a paper mill). ⛔ CCode: needs a reader — the kind's `yields` is the default, the feature's own `yields` wins.",
    "watch": {
@@ -762,7 +830,9 @@
     "defence": 2,
     "watch": true,
     "label": "a Watch — people posted, and they SEE",
-    "producesWhileMoving": true
+    "producesWhileMoving": true,
+    "property": "sense",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "keepers_hut": {
     "build": {
@@ -776,7 +846,9 @@
     "hands": 1,
     "residents": true,
     "label": "a keeper's hut",
-    "producesWhileMoving": true
+    "producesWhileMoving": true,
+    "property": "housing",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "relay_station": {
     "build": {
@@ -789,7 +861,9 @@
     "family": "craft",
     "facility": "relay",
     "service": true,
-    "label": "a relay station — the network's node"
+    "label": "a relay station — the network's node",
+    "property": "transit",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
    },
    "reclamation_bowl": {
     "build": {
@@ -804,7 +878,88 @@
     "attends": true,
     "label": "a reclamation bowl — where endings are attended",
     "hullable": false,
-    "_hullableWhy": "CCode — the bowl is the place"
+    "_hullableWhy": "CCode — the bowl is the place",
+    "property": "meaning",
+    "_propertyWhy": "⛑ SNG-627 — PROPERTY-TAGGED. Erik 2026-09-18: a wall and a moat are both `defence`; a watchtower and scouts are both `sense`. The tag is what the engine reads; the name is what the player reads."
+   },
+   "moat": {
+    "build": {
+     "goods": {
+      "cut_stone": 6
+     },
+     "days": 14
+    },
+    "upkeep": 1,
+    "family": "martial",
+    "label": "a moat or a ditch-and-bank",
+    "defence": 1,
+    "property": "defence",
+    "variantOf": "wall",
+    "_why": "⛑ ERIK'S OWN EXAMPLE OF THE RULE: 'a wall or a moat are defence.' Same property, different picture, and a hold beside water can have one where a hold on rock cannot."
+   },
+   "barracks": {
+    "build": {
+     "goods": {
+      "cut_stone": 10,
+      "raw_material": 8
+     },
+     "days": 18
+    },
+    "upkeep": 3,
+    "family": "people",
+    "label": "barracks — where a band is housed",
+    "residents": true,
+    "hands": 0,
+    "property": "housing",
+    "variantOf": "quarters",
+    "_why": "⛔ ERIK: 'barracks house troops.' Distinct from `quarters` by WHO: quarters are for the people who work the hold, barracks are for the people it can send. ⬜ CCode — a band without barracks should be a band that has to be quartered somewhere, and that should cost."
+   },
+   "giant_lizard_den": {
+    "build": {
+     "goods": {
+      "raw_material": 14,
+      "living_stock": 4
+     },
+     "days": 22
+    },
+    "upkeep": 4,
+    "family": "craft",
+    "label": "a lizard-den",
+    "property": "mounts",
+    "variantOf": "stable",
+    "region": "the_gearlands",
+    "_why": "⛑ ERIK'S OWN EXAMPLE OF A VARIANT: 'giant lizard dens — flavour by region or people, but providing the same basics.' ⚠️ It is `mounts` and nothing else: it shortens a journey and it is what a mounted band rides. **The den costs more to keep than a stable because the things in it eat more**, which is the only number that should differ.",
+    "_regionFix": "⛑ , not  — I invented the id, exactly as I invented  for the Null Stone two days ago. CCODE-201 caught it in one run: a region reference in rules/ that names no real region. ⚠️ THE RULE IS THE SAME EVERY TIME: never type an id, read one."
+   },
+   "thorn_line": {
+    "build": {
+     "goods": {
+      "living_stock": 8
+     },
+     "days": 16
+    },
+    "upkeep": 1,
+    "family": "martial",
+    "label": "a grown thorn-line",
+    "defence": 1,
+    "property": "defence",
+    "variantOf": "wall",
+    "people": "rootkin",
+    "_why": "⛑ A SECOND VARIANT, TO SHOW THE RULE IS NOT ONE-OFF: the Rootkin do not build walls, they grow them. Same property, and it keeps growing back."
+   },
+   "drill_ground": {
+    "build": {
+     "goods": {
+      "cut_stone": 4
+     },
+     "days": 10
+    },
+    "upkeep": 1,
+    "family": "martial",
+    "label": "a drill ground — sanded, and someone who knows what to do with it",
+    "property": "training",
+    "variantOf": "muster_yard",
+    "_why": "⛑ A variant of the muster yard for a hold with no band yet: the same training property, and the yard is what a band forms ON."
    }
   },
   "_kindsExtended_20260905": "⚑ AEVI EXTENDED THE KINDS, per CCode: 'Aevi extends the kinds and their flavour; Erik turns the numbers.' +18 kinds, taking the catalogue to 33. ⛔ EVERY ONE NAMES ONE EFFECT THE ENGINE ALREADY READS — nothing here needs a new reader. ⚠️ THREE ADDITIONS CARRY A FLAG THAT DOES: `attends: true` on `temple_to_attending` and `grave_ground`. ⛔ R29 MADE ATTENDING THE MECHANISM AND `the_gathering` STARVES WHERE ENDINGS ARE ATTENDED — so a hold that attends its dead should starve it in its reach. That is the ONE new reader worth asking for, and it is a bestiary term, not an economy one. ⚑ `temple_to_attending` IS ERIK'S OWN EXAMPLE from the Threshold Post. `ward_line` and `sentries` are the Stillwater's Trouble pair — 'barriers, a wall, skeletal undead sentries.' ⚠️ `market` carries `trade: true` and `infirmary`/`longhouse` carry `residents: true`; both are flags for pass three, not readers yet. ⬜ `keep` at defence 3 is the ceiling on purpose — a hold should never be un-raidable, and `minTakeShare: 0.1` already guarantees a raid takes something.",
@@ -813,7 +968,74 @@
   "pilgrims": {
    "perPilgrim": 2,
    "perMeaning": 1
-  }
+  },
+  "_properties_20260918": {
+   "_statement": "⛔ ERIK 2026-09-18, ON A REALITY CHECK OF 38 FEATURES: 'we need both — collapses to features that provide BASIC PROPERTIES, such as a wall or a moat are defence, and a watchtower and scouts are SENSE — while also having the muster yard enable training and a place to raise troops to, perhaps at less cost. Barracks house troops. Troops get fed and paid, but they can also be put to work and do jobs and missions. Stables can shorten journeys but can also house the mounts for cavalry. And you can have VARIANTS, such as giant lizard dens — flavour by region or people, but providing the same basics.' ⛑ SO A PROPERTY IS THE MECHANISM AND A NAME IS THE FLAVOUR, and both survive. **A wall and a moat are one thing to the engine and two things to a player, and that is correct.**",
+   "_theMeasurement": "⚠️ WHAT PROMPTED IT: 38 feature kinds resolve to 28 distinct shapes — **ten are a second name for something already there.** Five are identical but for name and price; five more were held apart only by `facility` and `attends`, **two fields present on eleven features and read by the engine in ZERO places.** ⛔ A muster yard and a wall were the same object. A laboratory and a smithy were the same object.",
+   "properties": {
+    "defence": {
+     "what": "stops or slows what is coming in",
+     "carriedBy": "wall, moat, barrier, gate, keep, ward-line",
+     "reads": "defenceOf"
+    },
+    "sense": {
+     "what": "NOTICES what is coming, which is a different job from stopping it",
+     "carriedBy": "tower, sentries, scouts, a dog-run",
+     "reads": "watchOf",
+     "_why": "⛑ Erik: 'a watchtower and scouts are sense'. The engine already separates them — `watchOf`'s own comment says STONE DOES NOT SEE."
+    },
+    "housing": {
+     "what": "where people sleep, which is what lets a hold hold anyone",
+     "carriedBy": "quarters, longhouse, barracks, a keeper's hut",
+     "reads": "residents"
+    },
+    "training": {
+     "what": "a place a band can be formed and worked up, and raised to more cheaply",
+     "carriedBy": "muster yard, drill ground, a sanded floor",
+     "reads": "⬜ CCode — callCostPerHead reduction"
+    },
+    "mounts": {
+     "what": "beasts kept and fed — they shorten a journey, and they are what cavalry is",
+     "carriedBy": "stable, boat-house, giant-lizard den, a corvid loft",
+     "reads": "⬜ CCode — travel time and a mounted band"
+    },
+    "production": {
+     "what": "makes a good, on a clock",
+     "carriedBy": "mine, mill, quarry, kiln, workshop, herd, fishery, still, lens-works",
+     "reads": "yields"
+    },
+    "craft": {
+     "what": "work that needs a bench rather than a seam — and teaches",
+     "carriedBy": "forge, smithy, laboratory, scriptorium, school-room",
+     "reads": "teaches"
+    },
+    "meaning": {
+     "what": "the hold means something, and people come to it because of that",
+     "carriedBy": "temple, shrine, memorial, grave-ground, hearth",
+     "reads": "aura, pilgrims",
+     "_why": "⚠️ Load-bearing since SNG-602: belief is what sustains the Veil, so a hold with meaning is holding a piece of the wall."
+    },
+    "healing": {
+     "what": "somebody hurt can be brought here and get better",
+     "carriedBy": "infirmary, physic-garden, a mercy-house",
+     "reads": "⬜ CCode — death-ladder retrieval"
+    },
+    "trade": {
+     "what": "goods change hands here at a price the hold sets",
+     "carriedBy": "market, toll-house, a wharf",
+     "reads": "trade"
+    },
+    "transit": {
+     "what": "you leave from here faster than you arrived",
+     "carriedBy": "waygate, relay station, a ferry",
+     "reads": "transit"
+    }
+   },
+   "_theVariantRule": "⛔ A VARIANT IS A NAME, NOT A FEATURE. Erik: 'you can have variants, such as giant lizard dens — flavour by region or people, but providing the SAME BASICS.' ⛑ So `giant_lizard_den` is `mounts` with a `variantOf: stable`, and the Rootkin's `thorn_line` is `defence` with a `variantOf: wall`. **The engine reads the property; the player reads the name; the region decides which name is offered.** ⚠️ AND THIS IS WHAT STOPS THE LIST GROWING BACK TO 38 SHAPES: a new variant costs a label and nothing else, so there is never a reason to mint a near-duplicate property again.",
+   "_troopsAreNotFurniture": "⛔ ERIK, AND IT IS THE PART THAT CHANGES THE MOST: 'troops get fed and paid, but they can also be PUT TO WORK and do jobs and missions.' ⚠️ Today a garrison is a cost — `upkeepFor` charges `garrisonUpkeepPerHand` per head and that is the whole of their existence. ⛑ **A band standing in a hold should be able to earn, build, escort and be sent** — which makes a legion a thing you can afford rather than a thing you can only spend. ⬜ CCode's, and it is the difference between a standing force and a standing bill.",
+   "_whatIWouldNotCollapse": "⚠️ `memorial` AND `grave_ground` ARE NOT THE SAME and the data said they were — both `{meaning, aura 0.15, pilgrims 1}`. ⛑ One is NAMES KEPT and one is GROUND TENDED: a memorial is read, a grave-ground is worked, and an Ashwarden would tell you the second is the one that costs somebody something every week. **They want different numbers, not one entry.**"
+  },
+  "_variantsAuthored_20260918": "⛑ FIVE ADDED TO DEMONSTRATE THE RULE RATHER THAN ONLY DESCRIBE IT: `moat` and `thorn_line` are `defence` variants of `wall`; `giant_lizard_den` is a `mounts` variant of `stable`; `drill_ground` is a `training` variant of `muster_yard`; and `barracks` is `housing` distinguished from `quarters` by WHO IT HOUSES. ⚠️ **Each costs a label and no new property**, which is the thing that stops the list growing back to 38 shapes."
  },
  "regions": [
   {

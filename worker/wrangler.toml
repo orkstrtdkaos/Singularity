@@ -1,0 +1,20 @@
+# ⛔ THE GAME'S PICTURE SERVICE (CCODE-454). Deployed from Erik's Cloudflare account; no secret lives here, because
+# R2 and Workers AI are BINDINGS. `npx wrangler deploy` from this directory, or paste src/index.js into the
+# dashboard's editor and add the two bindings by hand (Settings → Bindings).
+name = "singularity-art"
+main = "src/index.js"
+compatibility_date = "2026-09-19"
+
+# The store. Every picture kept forever, keyed by what the picture IS (prompt|width|height|seed).
+[[r2_buckets]]
+binding = "PICTURES"
+bucket_name = "singularity-art"
+
+# The drawer, for pictures the old service no longer holds.
+[ai]
+binding = "AI"
+
+[vars]
+# Who may spend a DRAW: "game" (the origins below, plus the built-in list), "anyone", or "off".
+DRAW = "game"
+GAME_ORIGINS = "orkstrtdkaos.github.io,localhost,127.0.0.1"

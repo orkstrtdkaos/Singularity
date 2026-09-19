@@ -169,7 +169,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.86";
+const APP_VERSION = "2.0.87";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3335,6 +3335,7 @@ async function renderPreviewLegs() {
   document.getElementById("legs-copy").onclick = async () => {
     const map = loadLegStatus();
     const lines = legs.map(l => { const s = map[l.id] || {}; return `- [${(s.status || "untried").toUpperCase()}] ${l.batch} · ${l.title}${s.note ? ` — ${s.note}` : ""}`; });
+    const verified = legs.filter(l => map[l.id]?.status === "pass").length;   // ⛔ CCODE-425: read below and declared nowhere — the copy threw
     const summary = `Preview legs (${verified}/${legs.length} pass) — build data v${_previewLegsData.buildVersion || "?"}\n${lines.join("\n")}`;
     try { await navigator.clipboard.writeText(summary); document.getElementById("legs-copied").textContent = "Copied to clipboard."; }
     catch { document.getElementById("legs-copied").textContent = summary; }
@@ -8463,6 +8464,9 @@ function applyTurn(turn, resolution, playerWords = null) {
           // minute: the wrong-config-object mistake, made twenty minutes after documenting it.
           // but an unbounded op could still wipe a long work in one hallucinated number. The cap is a dial
           // defaulting to a third of the threshold: sabotage is a setback, not a delete key.
+          // ⛔ CCODE-425: `num` was read here and declared nowhere in app.js (it is projects.js's own), so every sabotage threw. And an
+          // absent dial is ABSENT — `Number(null)` is 0, which would have priced every sabotage at one.
+          const num = (v, d) => (v == null || v === "" || !Number.isFinite(Number(v)) ? d : Number(v));
           const cap = Math.max(1, Math.round(num(CONTENT.rules?.craftMechanics?.projects?.sabotageMax, Math.ceil(num(pj.threshold, 3) / 3))));
           pres = sabotageProject(pj, Math.min(cap, Math.max(0, Number(op.amount) || 1)), op.by ? String(op.by).slice(0, 60) : null);
         }
@@ -8479,7 +8483,9 @@ function applyTurn(turn, resolution, playerWords = null) {
       // author qualified.
       const owned = (character.abilities || []).find(x => x.abilityId === ab.id);
       if (!owned) continue;
-      const res = openProject(character, ab, { day: currentDay, name: op.name ? String(op.name).slice(0, 60) : null,
+      // ⛔ CCODE-425: `currentDay` is declared in the news reader, not here — every project the fiction opened threw. The story clock,
+      // as the job board stamps its offers.
+      const res = openProject(character, ab, { day: readClock(character.clock).day, name: op.name ? String(op.name).slice(0, 60) : null,
         opener: character.name, ownedRank: owned.level, cfg: {} });
       if (res?.ok === false && res.why) character._projectRefusals = [...(character._projectRefusals || []).slice(-2), res.why];
     }

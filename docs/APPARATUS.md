@@ -1,7 +1,7 @@
 # THE APPARATUS — every harness, what it is for, and whether it runs
 
 ⛔ **ERIK, 2026-08-29: *"I want this to be a well oiled factory."*** ⚠️ **A factory you cannot see is not
-well oiled.** 108 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
+well oiled.** 109 harnesses across `tests/` and `scripts/`, and before this document nobody could say which
 were gates, which were reports, and which had quietly stopped being wired into anything.
 
 ```bash
@@ -10,7 +10,7 @@ node scripts/apparatus.mjs --md     # …as markdown for §5
 node scripts/run_tests.mjs --ratchet    # the gates, blocking only on regression
 ```
 
-**Last measured: 2026-09-19 · v2.0.86 · 108 files.**
+**Last measured: 2026-09-19 · v2.0.87 · 109 files.**
 
 ---
 
@@ -150,9 +150,9 @@ worthless.
 | `tests/roll_sensitivity` | ✅ GATE | 9 | SNG-258 §SENSITIVITY |
 | `tests/tradition_matrix` | ✅ GATE | 9 | WHICH KITS PERFORM, AND WHERE? A tradition × level × threat matrix |
 | `tests/breadth_currency_sweep` | ✅ GATE | 8 | SNG-260 §C+§D / SNG-261 §A |
+| `tests/import_integrity` | ✅ GATE | 7 | SNG-353b |
 | `tests/endgame_scaling` | ✅ GATE | 5 | — |
 | `tests/dev_world` | ✅ GATE | 4 | CCODE-94: a DEV WORLD |
-| `tests/import_integrity` | ✅ GATE | 4 | SNG-353b |
 | `tests/world_drive_audit` | ✅ GATE | 4 | — |
 | `tests/staged_crafts_check` | ✅ GATE | 3 | — |
 | `tests/parse_probe` | ✅ GATE | 1 | — |
@@ -173,6 +173,7 @@ worthless.
 | `tests/player_lives` | ○ REPORT | — | SNG-308: run a lot of lives and see what happens to them |
 | `tests/promise_sweep` | ○ REPORT | — | CCODE-91: the GENERAL sweep behind every PromisedButUnread finding |
 | `tests/save_history_audit` | ○ REPORT | — | THE SAVES ARE IN THE TREE |
+| `tests/scope_scan` | ○ REPORT | — | ⛔ CCODE-425 |
 | `tests/strike_mix` | ○ REPORT | — | — |
 | `tests/success_curve` | ○ REPORT | — | A REPORT, NOT A GATE |
 | `tests/sunk_assay_run` | ○ REPORT | — | SNG-522 · PLAY THE ROOMS |

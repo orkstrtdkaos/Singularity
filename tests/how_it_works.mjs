@@ -12819,6 +12819,9 @@ console.log("\n── §194 · acquiring a craft you aspired to carries the prac
   const rewound = JSON.parse(JSON.stringify(silas194));
   rewound.reconcileVersion = 55;
   rewound.practice.uses.hunters_strike = 1;
+  // ⛔ CCODE-425: AND THE RANK — the same rule, one field over. On 2026-09-18 he ranked it to 2, which is exactly what this gate asked for,
+  // and the rewound copy inherited rank 2, so "rankable to 2" read false because the thing it tests had HAPPENED.
+  for (const a of rewound.abilities || []) if (a.abilityId === "hunters_strike") a.level = 1;
   // ⛔ SNG-556: THE FIXTURE MUST NOT INHERIT LIVE PLAY. This kept whatever aspirations the save happened to hold, so when
   // step 56 actually ran on Erik's save and emptied the list, the "one left afterwards" assertion failed — the gate broke
   // because the thing it tests WORKED. ⚠️ A fixture built from a moving record is a correlation against the wrong

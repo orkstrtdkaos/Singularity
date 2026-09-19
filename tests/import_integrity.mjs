@@ -156,5 +156,46 @@ check("353b: app.js parses — a syntax error there renders NOTHING and no engin
     ran && hits.length === 0, hits.slice(0, 8).join(" · "));
 }
 
+// ⛔ CCODE-425 — EVERY NAME A FILE READS IS A NAME IN SCOPE, OR A GLOBAL THE RUNTIME REALLY HAS. The checks above close the IMPORTED
+// half of the class; a name deleted from its own function was still invisible. CCODE-415 deleted the line declaring `disc` and left the
+// line reading it, and every rolled action threw between the intent parse and the GM call (CCODE-424: Erik, "The game seems to be having
+// trouble with the GM"). The fifth of its kind to reach play — `formerCompany`, `pinFact`, `companyPlaces`, `opts`, `disc`. ⚠️ A file-wide
+// list of names would not have caught it: `disc` IS declared in app.js, as `queueDiscoveryMoment`'s parameter. Only scope sees it.
+// ⚑ First run, 2026-09-18: three more, all live — `num` (every project sabotage threw), `currentDay` (every project the fiction opened
+// threw) and `verified` (the Legs copy button). ⛑ A real parser: tests/scope_scan.mjs borrows the acorn Node ships for its own REPL.
+{
+  const { execFileSync } = await import("node:child_process");
+  const scanFiles = ["app.js", ...readdirSync(join(root, "engine")).filter(f => f.endsWith(".js")).sort().map(f => "engine/" + f)];
+  const runScan = (args, input) => JSON.parse(execFileSync(process.execPath, ["--expose-internals", join(root, "tests", "scope_scan.mjs"), ...args],
+    { cwd: root, encoding: "utf8", input, maxBuffer: 256 * 1024 * 1024, stdio: [input == null ? "ignore" : "pipe", "pipe", "pipe"] }));
+  // ⚑ Each browser-only name checked present on a live `window` (2026-09-18). Node supplies the language's own globals; the names only
+  // Node has are REMOVED, because app.js runs in a browser and a `process` there is a ReferenceError.
+  const BROWSER_GLOBALS = ["window", "document", "localStorage", "sessionStorage", "location", "navigator", "history", "screen", "alert", "confirm",
+    "prompt", "open", "print", "requestAnimationFrame", "cancelAnimationFrame", "requestIdleCallback", "cancelIdleCallback", "MutationObserver",
+    "ResizeObserver", "IntersectionObserver", "NodeFilter", "Node", "Element", "HTMLElement", "Event", "CustomEvent", "KeyboardEvent", "DOMParser",
+    "Image", "Audio", "SpeechSynthesisUtterance", "speechSynthesis", "getComputedStyle", "getSelection", "matchMedia", "innerWidth", "innerHeight",
+    "devicePixelRatio", "scrollTo", "FileReader", "indexedDB", "caches", "WebSocket", "Worker", "FormData"];
+  const NODE_ONLY = new Set(["process", "Buffer", "global", "setImmediate", "clearImmediate", "require", "module", "exports", "__filename", "__dirname"]);
+  const allowed = new Set([...Object.getOwnPropertyNames(globalThis).filter(n => !NODE_ONLY.has(n)), ...BROWSER_GLOBALS]);
+  // ⚠️ A READ THAT IS SAFE ONLY BECAUSE OF A GUARD names the guard here, one site at a time.
+  const EXEMPT = [{ file: "engine/worldglobe.js", name: "Buffer", why: "b64() reaches it only when `atob` is absent — the Node path, behind a typeof test" }];
+  let scan = null, fixture = null, why = "";
+  try {
+    scan = runScan(scanFiles);
+    fixture = runScan(["-"], "function queueMoment(disc) { return disc.name; }\nasync function onChoice(choice) { const nv = choice.nv; if (typeof later === 'undefined') {} if (disc) return disc.name; return { nv }; }\n")["-"];
+  } catch (e) { why = String(e?.message || e).split(LF)[0]; }
+  check(`CCODE-425: the scope scan RAN — Node's own parser, ${scanFiles.length} files${why ? "" : ", every one parsed"}`,
+    !!scan && Object.values(scan).every(r => Array.isArray(r)), why || Object.entries(scan || {}).filter(([, r]) => !Array.isArray(r)).map(([f, r]) => `${f}: ${r.parseError}`).join(" · "));
+  check("CCODE-425: ⛔ it reads SCOPE, not a list of names — the CCODE-424 shape is caught though another function's parameter is called `disc`, and `typeof` of an absent name is not a read",
+    Array.isArray(fixture) && fixture.length === 2 && fixture.every(x => x.name === "disc" && x.line === 2), JSON.stringify(fixture));
+  const unresolved = [];
+  for (const [f, reads] of Object.entries(scan || {})) for (const r of Array.isArray(reads) ? reads : []) {
+    if (allowed.has(r.name) || EXEMPT.some(x => x.file === f && x.name === r.name)) continue;
+    unresolved.push(`${r.name} @ ${f}:${r.line}`);
+  }
+  check(`CCODE-425: ⛔ every name app.js and the engine read is declared in a scope that encloses the read, or is a global the runtime has (${unresolved.length ? unresolved.length + " not" : "all"})`,
+    !!scan && unresolved.length === 0, unresolved.slice(0, 12).join(" · "));
+}
+
 console.log(failures ? `\nIMPORT INTEGRITY: ${failures} failure(s)` : "\nImport integrity: all checks passed.");
 process.exit(failures ? 1 : 0);

@@ -144,7 +144,7 @@ import { clearOnRest, applyCondition, activeConditions } from "./engine/conditio
 // SAYS 'ten for those, and I'm being generous'; the interface SAYS 10. Both." A purse the player cannot
 // see is the same failure as one that does not exist.
 import { ensurePurse, purseLine, worthOf, purseBand, held } from "./engine/purse.js";   // CCODE-441: exchangeOps go through market.applyMoneyOps now
-import { payAt, priceHere, incomeHere, saidPaid, saidEarned, moneyLine, moneyLabel, moneyClassOf, placeName } from "./engine/money.js";
+import { payAt, earnAt, priceHere, incomeHere, saidPaid, saidEarned, moneyLine, moneyLabel, moneyClassOf, placeName, startingPurseFloor } from "./engine/money.js";
 import { sellQuote, sellFromPack, exchangeRatesHere, exchangeAt, applyMoneyOps } from "./engine/market.js";   // ⛔ CCODE-440: a hold is a local market   // ⛔ CCODE-437: money by place   // CCODE-405: calling a unit together is paid for
 import { bargainOutcome } from "./engine/economy.js";
 import { capabilityMenu, resolveTier } from "./engine/capabilities.js";
@@ -173,7 +173,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.1.4";
+const APP_VERSION = "2.2.0";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6911,6 +6911,12 @@ function renderCreate() {
     }
     character.nativeGrantsVersion = 1; // born with the starter kit — no retro native-grant owed
     character.reconcileVersion = topReconcileVersion("character"); // born current — no migration owed (no aggregate seed)
+    // ⛔ CCODE-443 (Aevi's starting purse, ruled by Erik): what the background carried out of its old life, in the money of where the
+    // character begins. Born current, so step 71 never runs here — the purse is paid at birth. An unnamed background is asked, not paid.
+    try {
+      const f443 = startingPurseFloor(character.background, CONTENT.rules?.economy || null);
+      if (f443 > 0) earnAt(character, f443, CONTENT.locations?.[character.currentLocationId]?.regionId || null, CONTENT.rules?.economy || null, { origin: "gift" });
+    } catch { /* a purse is never why a character cannot be made */ }
     character.pendingSubPoints = 2; // shape your edge from day one — specialize two subs
     if (!profile.charactersPlayed.includes(character.id)) profile.charactersPlayed.push(character.id);
     // SNG-068A: carry the prologue ability-reconcile note into the first scene so nothing is silent

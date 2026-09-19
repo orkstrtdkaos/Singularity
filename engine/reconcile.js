@@ -37,6 +37,8 @@ import { findExistingNpc, prettifyNpcName, REGISTRY_CAP, collapseScenePresence, 
 import { bondOf, companionCodexUpdate, companionStageCount } from "./companions.js"; // SNG-200: stage + codex backfill
 import { isCoercedObjectArtefact, isDescriptiveNotName } from "./state.js"; // SNG-329: the artefact detector, shared with the mint that now refuses it
 import { spectrumIdsOf, retireOffAtlasAxes, cleanAxes } from "./spectrum.js";   // CCODE-436: step 70
+import { earnAt, saidEarned, startingPurseFloor } from "./money.js";   // CCODE-443: step 71 — the owed purse, paid by place
+import { worthOf } from "./purse.js";
 import { startingSkills } from "./inventory.js"; // SNG-339b: the training an existing character came with
 
 /* ═══ R27 (ERIK 2026-09-02) — A RENAME TARGET MAY BE CONDITIONED, AND ON TWO DIFFERENT THINGS.
@@ -87,6 +89,36 @@ function renameTargets(spec, entry, character, known) {
 // "has this entity seen this step yet" via entity.reconcileVersion.
 
 export const CHARACTER_STEPS = [
+  {
+    version: 71, id: "the-owed-purse", playerFacing: true,
+    // ⛔ CCODE-443 — ERIK 2026-09-19: "backfill the saves to the floor and credit them like we did for silas for their deeds." Aevi's
+    // application (REPLY_aevi_purse_ruling_and_backfill §3), two payments that STACK: THE FLOOR — the start they were owed and never got,
+    // `max(worth, floor)`, never added on top — and THE SETTLEMENT — 8 a deed, R48's rate, FLAT, never weighted by what the deed was
+    // (DIRECTIVE_SNG-280). ⛑ Both through `earnAt`, in the money of where the character stands now — never a direct write, which would bring
+    // back the crystal hardcode CCODE-437 removed. Two lines: the floor as a backfill, the settlement as arrears. ⛔ SILAS IS UNTOUCHED: he
+    // was settled at R48 (step 36) and stands far above every floor. ⚠️ A background the table does not name is asked, never assigned —
+    // the settlement pays, the floor waits (`worldState.purseFloorAsked`).
+    apply: (c, ctx) => {
+      if (!c || c.id === "char-mrhs8286") return {};
+      const eco = ctx?.content?.rules?.economy || null;
+      const here = c.currentLocationId || null;
+      const rid = ctx?.content?.locations?.[here]?.regionId || c.generated?.location?.[here]?.regionId || c.customLocations?.[here]?.regionId || null;
+      const worth = Number(worthOf(c.purse || {}, eco)?.totalInCrystal) || 0;
+      const floor = startingPurseFloor(c.background, eco);
+      const deeds = Array.isArray(c.deeds) ? c.deeds.length : 0;
+      const notes = [];
+      if (floor != null && floor > worth) {
+        const e = earnAt(c, floor - worth, rid, eco, { origin: "backfill" });
+        if (e?.ok && e.amount > 0) notes.push(`The starting purse you were owed and never given: ${saidEarned(e)} — what your old life carried out with you.`);
+      }
+      if (floor == null && c.worldState) c.worldState.purseFloorAsked = String(c.background || "(none)");
+      if (deeds > 0) {
+        const e = earnAt(c, deeds * 8, rid, eco, { origin: "arrears" });
+        if (e?.ok && e.amount > 0) notes.push(`${saidEarned(e)} in arrears for ${deeds} deed${deeds === 1 ? "" : "s"} on your record — pay for work already done, which nobody had counted.`);
+      }
+      return notes.length ? { notes } : {};
+    }
+  },
   {
     version: 70, id: "axes-off-the-atlas", playerFacing: false,
     // ⛔ CCODE-436 — THE PHANTOM AXIS. 13 of 16 saves carried `alignment.spectrumId` — the GM schema's placeholder, returned literally on

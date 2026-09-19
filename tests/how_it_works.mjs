@@ -8623,9 +8623,12 @@ console.log("\n── §95 · the arrears reach the purse through the one door i
   // every character who loaded, and Brayden was handed 880 crystal for a debt the world never owed him.
   const stranger = { id: "char-someone-else", level: 30, purse: { crystal: 0, coin: 0, paper: 0, marks: 0, scrip: {} }, holdings: [{ id: "h", name: "their post", kind: "post", condition: "strained", history: [] }], deeds: [{ description: "their own" }] };
   const outStranger = RC95.reconcile(stranger, "character", { content: C95, rules: C95.rules, ...C95 });
-  check("§95: ⛔ …AND NOBODY ELSE IS PAID — not the arrears, not the deed ledger, and their hold is not silently promoted",
-    stranger.purse.crystal === 0 && stranger.holdings[0].condition === "strained" && !(outStranger.notes || []).some(n => /crystal/.test(n)),
-    `crystal ${stranger.purse.crystal} · ${stranger.holdings[0].condition}`);
+  // ⚠️ AND ERIK RULED AGAIN, 2026-09-19 (CCODE-443, step 71): "backfill the saves to the floor and credit them like we did for silas for their
+  // deeds." So a stranger IS now paid — their OWN deeds, once, 8 a deed, flat — and still never R48's 880, never R48's ledger, never a promotion.
+  check("§95: ⛔ …AND NOBODY ELSE IS PAID R48 — not its arrears, not its ledger, and their hold is not silently promoted; only the 09-19 settlement of their own deeds (step 71: one deed, 8, flat)",
+    stranger.purse.crystal === 8 && stranger.holdings[0].condition === "strained"
+    && !(outStranger.notes || []).some(n => /crystal/.test(n) && !/^8 crystal in arrears for 1 deed on your record/.test(n)),
+    `crystal ${stranger.purse.crystal} · ${stranger.holdings[0].condition} · ${(outStranger.notes || []).filter(n => /crystal/.test(n)).join(" | ")}`);
 }
 
 
@@ -23091,6 +23094,42 @@ console.log("\n── §321 · soldiers on a job are paid — a wage a head a pa
   const back = JB321.jobsForGM({ jobs: { back: [], board: [], out: [{ team: ["unit:band-a:0"], job: { label: "clear the road", where: "x" }, backAtHours: 300, wages: { heads: 12 } }] } }, { content: { locations: {} } });
   check("§321: ⛔ the GM is told they are paid and eat from it — never from a hold's store, which is for battles and journeys",
     /SOLDIERS ON JOBS ARE PAID — their wage covers the time away, and their food is bought out of it; they carry no rations from a hold's store\./.test(back || ""), String(back).slice(0, 200));
+}
+
+// ══════════ §322 · CCODE-443 — THE STARTING PURSE, AND WHAT WAS OWED ══════════
+// Aevi's SPEC_aevi_starting_purse (liquidity by background, the money by place) and Erik's ruling: "backfill the saves to the floor and
+// credit them like we did for silas for their deeds."
+console.log("\n── §322 · the starting purse — liquidity by background, money by place; the floor backfilled, the deeds settled, Silas untouched ──");
+{
+  const M322 = await import("../engine/money.js");
+  const { reconcile: rec322 } = await import("../engine/reconcile.js");
+  const { loadContentHeadless: lch322 } = await import("./headless_content.mjs");
+  const CT322 = await lch322();
+  const S = M322.STARTING_PURSE_SPEC;
+  const tiers = Object.values(S.byBackground);
+  check("§322: ⛔ LIQUIDITY, NOT APPROVAL — forty backgrounds on the four worthBands rungs (0 · 4 · 15 · 50), every one below well-found; the smuggler sits with the trader and the devotee with the orphan; an unnamed background is ASKED",
+    Object.keys(S.byBackground).length === 40 && tiers.filter(t => t === "L3").length === 3 && tiers.filter(t => t === "L0").length === 7
+    && M322.startingPurseFloor("smuggler") === M322.startingPurseFloor("trader") && M322.startingPurseFloor("devotee") === M322.startingPurseFloor("orphan")
+    && M322.startingPurseFloor("trader") === 50 && M322.startingPurseFloor("warden") === 4 && M322.startingPurseFloor("medic") === null
+    && Object.values(S.rungs).every(v => v < 60));
+  const mk = (o) => ({ id: "fx", name: "Fx", reconcileVersion: 70, worldState: {}, purse: { crystal: 0, coin: 0, paper: 0, marks: 0, scrip: {} }, deeds: [], ...o });
+  const deeds = (n) => Array.from({ length: n }, (_, i) => ({ what: `d${i}` }));
+  const a = mk({ background: "war_leader", deeds: deeds(2), currentLocationId: "the_crossing" }); const ra = rec322(a, "character", { content: CT322 });
+  const b = mk({ background: "precursor_marked", deeds: deeds(8), currentLocationId: "millbrook", purse: { crystal: 31, coin: 0, paper: 0, marks: 0, scrip: {} } }); rec322(b, "character", { content: CT322 });
+  const numinous = Object.values(CT322.locations).find(l => l.regionId === "the_numinous_reach");
+  const c = mk({ background: "orphan", deeds: deeds(11), currentLocationId: numinous?.id }); rec322(c, "character", { content: CT322 });
+  check("§322: ⛔ THE FLOOR IS max(), THE SETTLEMENT IS +, BOTH BY PLACE — two lines; a purse above its floor gets only the deeds; a Reach pays its scrip",
+    a.purse.crystal === 15 + 16 && (ra.notes || []).length === 2 && /starting purse you were owed/.test(ra.notes.join(" ")) && /arrears for 2 deeds/.test(ra.notes.join(" "))
+    && b.purse.crystal === 31 + 64 && c.purse.crystal === 0 && c.purse.scrip.the_numinous_reach === M322.incomeHere(88, "the_numinous_reach", CT322.rules.economy).amount,
+    JSON.stringify({ a: a.purse, b: b.purse, c: c.purse }));
+  const silas = mk({ id: "char-mrhs8286", background: "lineage_taught", deeds: deeds(52), currentLocationId: "millbrook" }); rec322(silas, "character", { content: CT322 });
+  const asked = mk({ background: "medic", deeds: deeds(5), currentLocationId: "millbrook" }); rec322(asked, "character", { content: CT322 });
+  const again = JSON.parse(JSON.stringify(a)); const before = again.purse.crystal; rec322(again, "character", { content: CT322 });
+  check("§322: ⛔ SILAS IS UNTOUCHED (settled at R48); a background the table does not name gets the deeds and is asked for the floor; and it runs ONCE",
+    silas.purse.crystal === 0 && asked.purse.crystal === 40 && asked.worldState.purseFloorAsked === "medic" && again.purse.crystal === before && again.reconcileVersion >= 71);
+  const A322 = rd("app.js").replace(/\r\n/g, "\n").split("\n").filter(l => !/^\s*\/\//.test(l)).join("\n");
+  check("§322: ⛑ a new character is born current, so the purse is paid at birth — what the background carried, in the money of where it begins",
+    /character\.reconcileVersion = topReconcileVersion\("character"\);[\s\S]{0,400}const f443 = startingPurseFloor\(character\.background, CONTENT\.rules\?\.economy \|\| null\);\n\s*if \(f443 > 0\) earnAt\(character, f443,/.test(A322));
 }
 
 /* ══════════ REPORT ══════════ */

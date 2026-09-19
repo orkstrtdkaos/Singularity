@@ -196,3 +196,30 @@ export function moneyLine(regionId, economy = null) {
   });
   return `Money in ${placeName(regionId)}: paid out in ${pays}${others.length ? `; also taken: ${others.join(", ")}` : ""}.`;
 }
+
+/** ⛔ CCODE-443 — THE STARTING PURSE BY BACKGROUND, as Aevi authored it (`po/SPEC_aevi_starting_purse.md` §2–§3, ruled by Erik 2026-09-19).
+ *  The quantity is LIQUIDITY — how much of a prior life converted to portable value when it was left — never approval (DIRECTIVE_SNG-280):
+ *  "contraband is portable by definition; a temple's wealth belongs to the temple." On the `worthBands` rungs: L0 0 · L1 4 · L2 15 · L3 50
+ *  shards, every one below `well-found`. ⚠️ This is her table transcribed; `economy.startingPurse` (her content, when she moves it there)
+ *  wins. The background sets HOW MUCH; the place sets WHICH MONEY (`earnAt`) — never summed. */
+export const STARTING_PURSE_SPEC = {
+  rungs: { L0: 0, L1: 4, L2: 15, L3: 50 },
+  byBackground: Object.fromEntries([
+    ...["trader", "broker", "smuggler"].map(b => [b, "L3"]),
+    ...["duelist", "arena_fighter", "bodyguard", "war_leader", "mechanist", "smith", "craftsman", "physician", "envoy", "performer", "spy",
+      "ruin_picker", "former_professional"].map(b => [b, "L2"]),
+    ...["line_soldier", "skirmisher", "warden", "hunter", "builder", "farmer", "river_runner", "survivalist", "cartographer", "lawspeaker",
+      "organizer", "self_taught", "battlefield_taught", "found_it_by_accident", "lineage_taught", "apprenticed_to_a_legend", "precursor_marked"].map(b => [b, "L1"]),
+    ...["orphan", "exile", "drifter", "devotee", "scholar", "archivist", "temple_trained"].map(b => [b, "L0"]),
+  ]),
+};
+
+/** The worth (shards) a background left its old life with — or null when the table does not name it: ⛔ a background is ASKED, never
+ *  assigned (`playerChooses`), so an unnamed one is paid nothing until it is placed. Pure. */
+export function startingPurseFloor(background, economy = null) {
+  const spec = economy?.startingPurse && typeof economy.startingPurse === "object" ? economy.startingPurse : STARTING_PURSE_SPEC;
+  const rung = spec.byBackground?.[String(background || "")];
+  if (!rung) return null;
+  const v = Number(spec.rungs?.[rung]);
+  return Number.isFinite(v) ? Math.max(0, v) : null;
+}

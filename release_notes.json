@@ -16,6 +16,24 @@
   "next": [],
   "releases": [
     {
+      "version": "2.2.0",
+      "date": "2026-09-19",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "A starting purse",
+          "summary": "A new character begins with money that fits their background, in the money of the place they start.",
+          "detail": "What you begin with is what your old life let you carry away: a trader's stock travels, a temple's wealth stays with the temple. It is never enough to decide which background to choose — at most enough for a few valuable things. Begin in a Reach and it is that Reach's scrip: more of it, and good only there until you change it."
+        },
+        {
+          "kind": "fix",
+          "title": "Money you were owed",
+          "summary": "Characters who were never given a starting purse have been paid one, and paid for the deeds already on their record.",
+          "detail": "Two payments, in the money of where you stand now: the starting purse you should have had, if you are below it, and eight shards' worth for every deed on your record — the same for every deed. The game tells you both the first time you open the character."
+        }
+      ]
+    },
+    {
       "version": "2.1.4",
       "date": "2026-09-19",
       "entries": [

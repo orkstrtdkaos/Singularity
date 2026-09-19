@@ -54,7 +54,7 @@ import { absoluteWorldDay, worldDayAt, worldCount, readClock, positionedPlace } 
 import { voyageTick, whereaboutsOf } from "./carriage.js";   // ⛔ B6b: a voyage arrives on world time, and where she is now is where she can be raided
 import { advanceAssignment, progressAgainst, problemCost } from "./assignments.js"; // SNG-191 §4: the world advances delegated work
 import { seedArc, fomentArc, surfaceableArcs, markSurfaced, seasonalPressure } from "./latentarcs.js"; // SNG-191 §7: the world's own agenda
-import { ensureCanonStore, promotionCandidates, promoteInto, canonForViewer } from "./canon.js";
+import { ensureCanonStore, promotionCandidates, promoteInto, canonForViewer, applyCanonLook } from "./canon.js";   // CCODE-422: where a look lands
 
 const NEWS_CAP = 20;
 const NEWS_TRAVEL_DAYS = 3;
@@ -1319,30 +1319,27 @@ const CANON_PATH = (region = "valley") => `world/canon/${region}.json`;
  *  in. A subject the store has never heard of returns `{ ok: false }` and says why.
  *
  *  ⛑ Best-effort and never throws: a picture is never worth breaking a turn for. */
-export async function pushCanonLook({ entityId, url = null, appearance = null, by = null, worldDay = null, region = "valley" } = {}) {
+export async function pushCanonLook({ entityId, url = null, appearance = null, by = null, worldDay = null, region = "valley", kind = null, authored = false } = {}) {
   if (!syncEnabled()) return { ok: false, why: "sync is off — a canon look needs the shared world" };
   const id = String(entityId || "").trim();
   if (!id) return { ok: false, why: "nothing named" };
-  let landed = null, missing = false;
+  let landed = null, missing = false, where = null;
   try {
     await pushMergedFile(CANON_PATH(region), (remote) => {
-      const store = ensureCanonStore(remote || {}, region);
-      const found = store.entities?.[id]
-        || Object.values(store.entities || {}).find(e => e && e.id === id);
-      if (!found) { missing = true; return null; }          // ⚠️ returning null aborts the write cleanly
-      const next = canonLookRecord(found, { url, appearance, by, worldDay });
-      if (!next) { missing = true; return null; }
-      store.entities[found.id || id] = next;
-      landed = next;
-      return store;
-    }, `canon look: ${id}${by ? ` by ${by}` : ""}`);
+      // ⛔ CCODE-422: the decision is `applyCanonLook`'s — an entity the world promoted, or an AUTHORED subject's look in `store.looks`
+      const r = applyCanonLook(ensureCanonStore(remote || {}, region), { entityId: id, kind, authored },
+        (base) => canonLookRecord(base, { url, appearance, by, worldDay }));
+      if (r.missing) { missing = true; return null; }          // ⚠️ returning null aborts the write cleanly
+      landed = r.landed; where = r.where;
+      return r.store;
+    }, `canon look: ${kind ? `${kind} ` : ""}${id}${by ? ` by ${by}` : ""}`);
   } catch (err) {
     return { ok: false, why: err?.message || "the shared world could not be reached" };
   }
   if (missing || !landed) {
-    return { ok: false, why: "that is not in the shared world yet — a look is a property of something already in it, and joining is earned" };
+    return { ok: false, why: "that is not in the shared world yet — something the game grew joins it when the world promotes it, and its look can go with it then" };
   }
-  return { ok: true, entityId: landed.id || id, image: landed.image || null, appearance: landed.appearance || null };
+  return { ok: true, entityId: landed.id || id, where, look: landed, image: landed.image || null, appearance: landed.appearance || null };
 }
 
 /** ⛔ CCODE-381 — A LEGEND'S FATE IS THE WORLD'S (shared lives, second stage). Erik: "The world changes for everyone."
@@ -1410,13 +1407,15 @@ export async function syncSharedFates({ character, content, publish = true, now 
   return { synced: true, adopted, published, joined, peopleAdded, lived, news };
 }
 
-export async function syncSharedCanon({ character, profile, content, region = "valley", now = Date.now(), authoredFor = null } = {}) {
+export async function syncSharedCanon({ character, profile, content, region = "valley", now = Date.now(), authoredFor = null, readNow = false } = {}) {
   if (!syncEnabled() || !character) return { synced: false, promoted: [], view: [] };
   if (!character.worldState) character.worldState = initWorldState(1);
   const ws = character.worldState;
   const worldDay = absoluteWorldDay(now);
   const candidates = promotionCandidates(character);
-  const dueForRead = ws.lastCanonWorldDay == null || (worldDay - ws.lastCanonWorldDay) >= 1;
+  // ⛔ CCODE-422: `readNow` — a page that has not read the shared world THIS SESSION reads it, whatever day the save last did. The day is
+  // stamped on the SAVE, so a reload the same day skipped the read and the page held no canon at all until tomorrow.
+  const dueForRead = readNow || ws.lastCanonWorldDay == null || (worldDay - ws.lastCanonWorldDay) >= 1;
   if (!candidates.length && !dueForRead) return { synced: false, promoted: [], view: [] };
 
   const authored = authoredFor || ((type) =>
@@ -1455,7 +1454,9 @@ export async function syncSharedCanon({ character, profile, content, region = "v
   }
   ws.lastCanonWorldDay = worldDay;
   const view = store ? canonForViewer(ensureCanonStore(store, region), profile) : [];
-  return { synced: true, promoted, view };
+  // ⛔ CCODE-422: and the world's looks for authored subjects, which are not entities and so are not in the view
+  const looks = store ? (ensureCanonStore(store, region).looks || {}) : {};
+  return { synced: true, promoted, view, looks };
 }
 
 // ---------- SNG-BATCH-9 Phase 2: living advancement (offscreen) ----------

@@ -58,7 +58,40 @@ export function ensureCanonStore(store, regionId = "valley") {
   if (!store.regionId) store.regionId = regionId;
   if (!store.entities || typeof store.entities !== "object") store.entities = {};
   if (!Array.isArray(store.variants)) store.variants = [];
+  // ⛔ CCODE-422: the world's looks for AUTHORED subjects — they are in every player's world already, so they are never `entities`
+  if (!store.looks || typeof store.looks !== "object" || Array.isArray(store.looks)) store.looks = {};
   return store;
+}
+
+/** ⛔ CCODE-422 — WHERE A LOOK IS FILED: by what kind of thing it is and its id, because ids are only unique within a kind (a craft
+ *  called `waygate` and a place called `waygate` are two subjects). Kinds: person · place · craft. Pure. */
+export function lookKey(kind, id) {
+  return `${String(kind || "thing")}:${String(id || "")}`;
+}
+
+/** ⛔ CCODE-422 — ERIK: "the canon look isn't working a lot of the time." Measured: the store accepted a look only for a record the game
+ *  GREW and the world PROMOTED — so every legend (The One Called Zeus, Halvex Coil), every authored place, every authored person and
+ *  every craft was refused, and those are most of what anyone looks at. ⛑ An AUTHORED subject is already in every player's world, so
+ *  its look is a property of something already shared — filed in `store.looks` under `lookKey`, never smuggled in as an entity. A grown
+ *  record the world has not promoted is still refused: joining stays earned. Pure over `store`; `makeLook(base)` builds the record (the
+ *  caller passes `canonLookRecord` with the url, words, who and when). → { store, landed, where: "entity"|"look" } or { store, missing }. */
+export function applyCanonLook(store, { entityId, kind = null, authored = false } = {}, makeLook) {
+  const s = ensureCanonStore(store || {});
+  const id = String(entityId || "").trim();
+  if (!id || typeof makeLook !== "function") return { store: s, missing: true };
+  const found = s.entities?.[id] || Object.values(s.entities || {}).find(e => e && e.id === id);
+  if (found) {
+    const next = makeLook(found);
+    if (!next) return { store: s, missing: true };
+    s.entities[found.id || id] = next;
+    return { store: s, landed: next, where: "entity" };
+  }
+  if (!authored) return { store: s, missing: true };
+  const key = lookKey(kind, id);
+  const next = makeLook(s.looks[key] || { id, kind: kind || null });
+  if (!next) return { store: s, missing: true };
+  s.looks[key] = next;
+  return { store: s, landed: next, where: "look" };
 }
 
 // ---------- promotion (pure) ----------

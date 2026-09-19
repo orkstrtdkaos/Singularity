@@ -986,7 +986,7 @@ export function isGeneratedImage(url) {
  *
  *  ⚠️ RETURNS THE REASON, NOT ONLY THE URL. A look a player cannot account for is one they cannot argue with,
  *  and "why am I seeing this face" is the question this whole ticket exists to answer. PURE. */
-export function lookFor(subjectId, { mine = null, canon = null, authored = null } = {}) {
+export function lookFor(subjectId, { mine = null, canon = null, authored = null, cached = null } = {}) {
   const url = (v) => (typeof v === "string" && v.trim() ? v.trim() : null);
   const own = url(mine);
   if (own) return { url: own, source: "yours", why: "you decided what this looks like" };
@@ -1001,6 +1001,10 @@ export function lookFor(subjectId, { mine = null, canon = null, authored = null 
   }
   const said = url(authored?.image);
   if (said) return { url: said, source: "authored", why: "this is the look it was written with" };
+  // ⛔ CCODE-422 — A PICTURE THE GAME CACHED IS NOT A CHOICE ANYBODY MADE. It stood ahead of the world's look (a place's generate-once
+  // image and a kept one share a field), so a canon look could never reach a player who had merely visited. Last, and only a default.
+  const drawn = url(cached);
+  if (drawn) return { url: drawn, source: "drawn", why: "a picture drawn for you when nobody had decided" };
   return { url: null, source: "none", why: "nobody has decided yet — a picture will be made" };
 }
 

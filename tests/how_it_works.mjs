@@ -15061,7 +15061,7 @@ console.log("\n── §219 · who made this world ──");
 
   /* ---- 1 · ⛑ THE TALLY HAS A READER, AND IT IS A PLACE A PLAYER GOES ---- */
   check("§219: ⛑ `contributionsBy` finally has a player-facing reader",
-    /import \{ contributionsBy \} from "\.\/engine\/canon\.js"/.test(A219)
+    /import \{[^}]*\bcontributionsBy\b[^}]*\} from "\.\/engine\/canon\.js"/.test(A219)   // (CCODE-422: the line imports `lookKey` too — the rule is that it is imported)
     && /tally = contributionsBy\(store\)/.test(A219));
   check("§219: …in the Library, which is where the world explains itself",
     /kind: "made"/.test(L219) && /Who made this world/.test(L219)
@@ -18993,7 +18993,7 @@ console.log("\n── §265 · a grown record is never its own rival ──");
   check("§265: the app still hydrates grown records and shared canon into CONTENT, and still hands CONTENT to promotion",
     /for \(const rec of generatedRecords\(c, "npc"\)\) if \(!CONTENT\.npcs\[rec\.id\]\) CONTENT\.npcs\[rec\.id\] = rec;/.test(A265)
     && /else if \(type === "npc" && !CONTENT\.npcs\[record\.id\]\) CONTENT\.npcs\[record\.id\] = record;/.test(A265)
-    && /syncSharedCanon\(\{ character, profile, content: CONTENT \}\)/.test(A265));
+    && /syncSharedCanon\(\{ character, profile, content: CONTENT[,\s}]/.test(A265));   // (CCODE-422: it also asks for a read once a session)
 }
 
 // ⛔ CCODE-381 — shared lives, second stage: A LEGEND'S FATE IS THE WORLD'S. Erik: "The world changes for everyone." ⚑ MEASURED: 33
@@ -22001,6 +22001,69 @@ console.log("\n── §301 · one person, one id — a name the world already h
   const silasBefore = JSON.stringify(silas301.npcRegistry);
   RC301.reconcile(silas301, "character", { content: CT301 }, RC301.CHARACTER_STEPS.filter(s => s.version === 67));
   check("§301: …and it is Loki's alone — Silas's registry is untouched", JSON.stringify(silas301.npcRegistry) === silasBefore);
+}
+
+// ══════════ §302 · CCODE-422 — A CANON LOOK FOR EVERYTHING THE WORLD ALREADY HAS ══════════
+// Erik (2026-09-18): "the canon look isnt' working a lot of the time" — with The One Called Zeus refusing: "that is not in the shared
+// world yet — a look is a property of something already in it, and joining is earned". Measured, two causes: the store took a look only
+// for a record the game GREW and the world PROMOTED, so every legend, authored place, authored person and craft was refused; and a page
+// that reloaded the same day never read the shared world at all (the day stamp lives on the save), then wiped what it held on every tick.
+console.log("\n── §302 · a canon look for everything the world already has — and a page that reads the world it shows ──");
+{
+  const CN = await import("../engine/canon.js");
+  const AR = await import("../engine/art.js");
+  const { loadContentHeadless: lch302 } = await import("./headless_content.mjs");
+  const CT302 = await lch302();
+
+  /* ---- 1 · ⛔ WHERE A LOOK LANDS ---- */
+  const mk302 = (b) => AR.canonLookRecord(b, { url: "https://img/1.png", appearance: "a small man with a crazy grin, spinning ribbons", by: "erik", worldDay: 80 });
+  const s302 = { entities: { "the-low-lamp-inn": { id: "the-low-lamp-inn", name: "The Low Lamp Inn" } } };
+  const ent302 = CN.applyCanonLook(s302, { entityId: "the-low-lamp-inn", kind: "place" }, mk302);
+  const zeus302 = CN.applyCanonLook(s302, { entityId: "the_one_called_zeus", kind: "person", authored: true }, mk302);
+  const grown302 = CN.applyCanonLook(s302, { entityId: "gen-some-grown-hollow", kind: "place" }, mk302);
+  check("§302: ⛔ a promoted entity takes its look on its own record, as it always did",
+    ent302.where === "entity" && s302.entities["the-low-lamp-inn"].image === "https://img/1.png");
+  check("§302: ⛔ an AUTHORED subject — The One Called Zeus — is filed under `looks` by kind and id, with the words, the picture, who and when; never smuggled in as an entity",
+    zeus302.where === "look" && s302.looks["person:the_one_called_zeus"]?.image === "https://img/1.png"
+    && /crazy grin/.test(s302.looks["person:the_one_called_zeus"].appearance) && s302.looks["person:the_one_called_zeus"]._canon?.lookBy === "erik"
+    && !s302.entities.the_one_called_zeus, JSON.stringify(s302.looks));
+  check("§302: …a grown record the world has not promoted is still refused — joining stays earned",
+    grown302.missing === true && !s302.looks["place:gen-some-grown-hollow"]);
+  CN.applyCanonLook(s302, { entityId: "waygate", kind: "craft", authored: true }, mk302);
+  CN.applyCanonLook(s302, { entityId: "waygate", kind: "place", authored: true }, (b) => AR.canonLookRecord(b, { url: "https://img/2.png" }));
+  check("§302: …and a craft and a place that share an id are two subjects with two looks",
+    s302.looks["craft:waygate"]?.image === "https://img/1.png" && s302.looks["place:waygate"]?.image === "https://img/2.png");
+
+  /* ---- 2 · ⛔ THE ORDER EVERY SURFACE KEEPS ---- */
+  const order302 = [
+    AR.lookFor("x", { mine: "m.png", canon: { image: "c.png" }, authored: { image: "a.png" }, cached: "d.png" }).source,
+    AR.lookFor("x", { canon: { image: "c.png" }, authored: { image: "a.png" }, cached: "d.png" }).source,
+    AR.lookFor("x", { authored: { image: "a.png" }, cached: "d.png" }).source,
+    AR.lookFor("x", { cached: "d.png" }).source];
+  check("§302: ⛔ what you chose, then the world's look, then the authored picture, then one the game drew — a cached draw no longer hides the world's look",
+    JSON.stringify(order302) === '["yours","canon","authored","drawn"]', JSON.stringify(order302));
+
+  /* ---- 3 · ⛑ THE POPULATION IT OPENS ---- */
+  const real302 = (r) => !!r && !r._gen && !r._canon;
+  check("§302: ⛑ the subjects Erik hit are authored and so now eligible — The One Called Zeus and Halvex Coil as people, Millbrook as a place, the Waygate as a craft",
+    real302(CT302.npcs?.the_one_called_zeus) && real302(CT302.npcs?.halvex_coil) && real302(CT302.locations?.millbrook) && !!CT302.abilities?.waygate);
+
+  /* ---- 4 · ⛔ THE WIRING: THE PUSH, THE READ, THE SURFACES, THE BUTTON ---- */
+  const W302 = rd("engine/worldtick.js"), A302 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§302: ⛔ the push decides through `applyCanonLook` inside the merge, and the refusal names what joining takes",
+    /applyCanonLook\(ensureCanonStore\(remote \|\| \{\}, region\), \{ entityId: id, kind, authored \}/.test(W302) && /joins it when the world promotes it/.test(W302));
+  check("§302: ⛔ a page reads the shared world once a session whatever day the save last did, and a tick that did not read keeps what the page holds",
+    /const dueForRead = readNow \|\| /.test(W302) && /return \{ synced: true, promoted, view, looks \};/.test(W302)
+    && /syncSharedCanon\(\{ character, profile, content: CONTENT, readNow: !sharedCanonRead \}\)/.test(A302)
+    && /if \(canon\.synced\) \{\n      sharedCanonView = canon\.view \|\| \[\];\n      sharedCanonLooks = canon\.looks \|\| \{\};/.test(A302));
+  check("§302: …a person, a figure and a place push as authored when they are, and the page adopts the look at once",
+    (A302.match(/kind: "person", authored: !!authoredId \}\), "person"\)/g) || []).length === 2 && /kind: "place", authored: !!authoredId \}\), "place"\)/.test(A302));
+  check("§302: …places and crafts SHOW it — both read through `lookFor` with the world's look and a pin, and the image makers ask them first",
+    /function locationImageFor\(locId\) \{[\s\S]{0,700}lookFor\(locId, \{ mine: pinned \? mine : null, canon: canonLookOf\("place", locId\)/.test(A302)
+    && /function abilityImageFor\(id\) \{[\s\S]{0,400}canonLookOf\("craft", id\)/.test(A302)
+    && /const shown = locationImageFor\(locId\); if \(shown\) return shown;/.test(A302) && /const shown = abilityImageFor\(ab\.id\); if \(shown\) return shown;/.test(A302));
+  check("§302: …and the button says a subject cannot carry a look BEFORE the click, instead of an alert after it",
+    /const canonOk = canCanon && canonEligible\(it\.regen\);/.test(A302) && /Canon look — not in the shared world yet/.test(A302));
 }
 
 /* ══════════ REPORT ══════════ */

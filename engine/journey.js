@@ -14,7 +14,7 @@
 // world honestly has only one way through, this SAYS SO rather than manufacturing a decision.
 
 import { walkingDays } from "./worldmap.js";
-import { isNetworkGate, waygateTierOf, wayfaringTier, hubWaygate, gateHopCost } from "./waygate.js";
+import { isNetworkGate, waygateTierOf, wayfaringTier, hubWaygate, gateHopCost, aimsOpen } from "./waygate.js";
 
 /** ⚑ THE ROAD GRAPH IS `connections`, WEIGHTED BY REAL DISTANCE. Measured on the shipped world: 135 places,
  *  182 undirected edges, ONE connected component, and not a single asymmetric edge — so a road always goes
@@ -126,6 +126,8 @@ const round1 = (n) => Math.round(n * 10) / 10;
 /** ⚠️ "through the The Crossing gate" — this world names a great many of its places "The something", so a
  *  label that prefixes its own article has to take the name's off first. */
 const bare = (name) => String(name || "").replace(/^the\s+/i, "");
+// ⚑ CCODE-418: "through the Made Gate gate" — a gate whose name already says gate is not called a gate twice
+const gateName = (name) => { const b = bare(name); return /\bgate$/i.test(b) ? `the ${b}` : `the ${b} gate`; };
 
 /** ⚑ THE ROUTE, AS A DECISION. Returns `{ from, to, options, soleOption, note }` — never a single "best" with
  *  the alternatives hidden, and never a fabricated second.
@@ -139,7 +141,7 @@ const bare = (name) => String(name || "").replace(/^the\s+/i, "");
  *  road here. ⛑ `soleOption` says so out loud, so a caller never has to infer it from the array's length.
  *
  *  PURE over locations + the traveller's own knowledge. */
-export function routeBetween(fromId, toId, locations = {}, { traveller = null, altFactor = 1.6, gateEnergy = true } = {}) {
+export function routeBetween(fromId, toId, locations = {}, { traveller = null, altFactor = 1.6, gateEnergy = true, rules = {} } = {}) {
   if (!locations[fromId] || !locations[toId]) return null;
   if (fromId === toId) return { from: fromId, to: toId, options: [], soleOption: false, note: "you are already there" };
 
@@ -179,16 +181,35 @@ export function routeBetween(fromId, toId, locations = {}, { traveller = null, a
     bestGate.out = back ? { days: back.days, path: [...back.path].reverse(), legs: back.legs }
       : { days: bestGate.outDays, path: [bestGate.g2, toId], legs: 1 };
   }
+  // ⛔ CCODE-418 — AIMED OPEN. A wayfarer good enough (`aimsOpen`) walks to a gate and folds STRAIGHT to the place: the far end needs
+  // no gate, so there is no walk out. Only to a place they know, and only when the place is not itself a gate (gate to gate is above).
+  // Priced like any hop, on the distance folded. When it is quicker than gate-to-gate it IS the gate way — one gate option, not two.
+  const dest = locations[toId];
+  if (traveller && !isNetworkGate(dest) && (traveller.knownPlaces || []).includes(toId) && aimsOpen(traveller, rules).ok) {
+    let open = null;
+    for (const g1 of gates) {
+      const inDays = fromAll.dist[g1];
+      if (inDays === undefined || g1 === toId) continue;
+      const hop = gateHopCost(walkingDays(locations[g1], dest) || 0);
+      const days = inDays + hop.hours / 24;
+      if (!open || days < open.days) open = { days, g1, g2: toId, hop, inDays, outDays: 0, open: true };
+    }
+    if (open && (!bestGate || open.days < bestGate.days)) {
+      open.in1 = pathFrom(fromAll, fromId, open.g1) || { days: open.inDays, path: [fromId, open.g1], legs: 1 };
+      open.out = { days: 0, path: [], legs: 0 };
+      bestGate = open;
+    }
+  }
   // ⚠️ A GATE THAT SAVES NOTHING IS NOT AN OPTION. It costs energy and it costs the fiction a journey;
   // offering it when the walk is shorter would be offering a worse road with a toll on it.
   if (bestGate && (!road || bestGate.days < road.days)) {
     options.push({
       kind: "gate",
-      label: `through the ${bare(locations[bestGate.g1]?.name || bestGate.g1)} gate`,
+      label: `through ${gateName(locations[bestGate.g1]?.name || bestGate.g1)}${bestGate.open ? ", folded straight there" : ""}`,
       days: round1(bestGate.days), energy: gateEnergy ? bestGate.hop.energy : 0,
-      legs: bestGate.in1.legs + bestGate.out.legs,
-      path: [...bestGate.in1.path, ...bestGate.out.path],
-      gate: { from: bestGate.g1, to: bestGate.g2, hours: bestGate.hop.hours, energy: bestGate.hop.energy },
+      legs: bestGate.in1.legs + (bestGate.open ? 1 : bestGate.out.legs),
+      path: bestGate.open ? [...bestGate.in1.path, toId] : [...bestGate.in1.path, ...bestGate.out.path],
+      gate: { from: bestGate.g1, to: bestGate.g2, hours: bestGate.hop.hours, energy: bestGate.hop.energy, ...(bestGate.open ? { open: true } : {}) },
       walkIn: round1(bestGate.in1.days), walkOut: round1(bestGate.out.days),
     });
   }
@@ -225,7 +246,7 @@ export function routeLine(route, locations = {}) {
   if (!route?.options?.length) return null;
   const name = (id) => locations[id]?.name || id;
   const parts = route.options.map(o => o.kind === "gate"
-    ? `${o.days} days ${o.label} (${o.walkIn} days to it, ${o.gate.hours}h through, ${o.walkOut} days on) — ${o.energy} energy`
+    ? `${o.days} days ${o.label} (${o.walkIn} days to it, ${o.gate.hours}h through, ${o.gate.open ? "straight there" : `${o.walkOut} days on`}) — ${o.energy} energy`
     : `${o.days} days ${o.label}`);
   const head = `${name(route.from)} → ${name(route.to)}: `;
   return head + parts.join(", or ") + (route.soleOption ? " — the world offers one way here" : "");

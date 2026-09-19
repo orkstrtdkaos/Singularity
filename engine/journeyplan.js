@@ -143,7 +143,7 @@ function wayOf(o, i, locations, march = 0) {
 export function planJourney({ character, destId, locations = {}, rules = {}, catalog = {}, worldDay = null, route = null, companyNames = [], abilities = {} } = {}) {
   const fromId = character?.currentLocationId;
   if (!fromId || !destId || fromId === destId || !locations[fromId] || !locations[destId]) return null;
-  const r = route || routeBetween(fromId, destId, locations, { traveller: character });
+  const r = route || routeBetween(fromId, destId, locations, { traveller: character, rules });
   if (!isJourneyRoute(r, rules)) return null;
   // a marcher's road is shorter: the WALKED days shrink, a gate's hours do not
   const crafts = journeyCraftsOf(character, rules, abilities);

@@ -83,7 +83,7 @@ import { staleBuild, onStaleBuild, deployedBuild, isNewerBuild, runningBuild, BU
 import { assembleGMContext } from "./engine/gm_registry.js"; // BATCH-11 §23: the GM context is a DECLARED registry, iterated — never hand-listed
 import { rankVoices, pickVoice, speakableText, chunkForSpeech, renderProseHtml } from "./engine/narration_voice.js"; // SNG-155: read aloud at the table; SNG-190 §4: render engine asides, never raw asterisks
 import { harmGateFor, harmTargetFor, departureGateFor, isConsequentialMove, isSpeechAct, isRemoteContact, personDestination, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop); SNG-188: speech-act guard; SNG-228: person-as-place guard; CCODE-158: one departure definition for both doors; CCODE-159: remote contact is not travel
-import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, gateHopCost } from "./engine/waygate.js";
+import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, gateHopCost, aimsOpen } from "./engine/waygate.js";
 import { routeBetween, routeLine, twoWayRoads } from "./engine/journey.js";
 import { sendCaravan, caravansOf } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph, craftRollsLine, craftRollsShort } from "./engine/entityDetail.js";
@@ -167,7 +167,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.81";
+const APP_VERSION = "2.0.82";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -10151,7 +10151,7 @@ function buildTravelDirective(ti) {
   // found — a route through a gate they have never heard of is a road that does not exist for them.
   const routeNote = (() => {
     if (!ti.destId || ti.destId === character.currentLocationId) return "";
-    const r = routeBetween(character.currentLocationId, ti.destId, CONTENT.locations, { traveller: character });
+    const r = routeBetween(character.currentLocationId, ti.destId, CONTENT.locations, { traveller: character, rules: CONTENT.rules });
     const line = r ? routeLine(r, CONTENT.locations) : null;
     return line ? ` THE WAYS THERE (engine-measured — use these durations and names; do not invent a different one, and do not offer a gate that is not listed): ${line}.` : "";
   })();
@@ -11870,8 +11870,13 @@ function renderMap(selectedId = null) {
             return via.length ? ` — go by way of ${via.join(" or ")}.` : " — travel via a connected place.";
           })()}</div>`) : ""}
       ${(() => { // SNG-148: standing at a gate, aiming at another gate — routing decides (named/hub); never a failure
-        const r = l.id !== here ? resolveWaygateTransit({ character, destId: l.id, locations: CONTENT.locations }) : null;
+        const r = l.id !== here ? resolveWaygateTransit({ character, destId: l.id, locations: CONTENT.locations, rules: CONTENT.rules }) : null;
         if (!r) return "";
+        // ⛔ CCODE-418: aimed open — the gate folds straight to this place, priced like any hop on the distance folded
+        if (r.routed === "open") {
+          const cost = gateHopCost(walkingDays(CONTENT.locations[here], l) || 0);
+          return `<button class="btn" id="map-waygate" data-wgdest="${esc(r.destId)}" data-wgopen="1" data-wghours="${cost.hours}" data-wgenergy="${cost.energy}" style="margin-top:6px">◈ Aim the gate straight at ${esc(l.name)} (+${cost.hours}h · ${cost.energy}⚡)</button>`;
+        }
         const destName = CONTENT.locations[r.destId]?.name || l.name;
         const note = r.routed === "hub" && r.destId !== l.id
           ? ` — the gate carries you to ${esc(destName)}, the hub (${!r.known ? "an undiscovered gate can't be aimed at" : "beyond your wayfaring to aim true"})` : ` to ${esc(destName)}`;
@@ -11886,7 +11891,7 @@ function renderMap(selectedId = null) {
   const netBlock = (isNetworkGate(CONTENT.locations[here]) && netGates.length) ? `
     <div class="net-panel">
       <div class="net-panel-title">◈ The gate network</div>
-      <div class="hint" style="margin:0 0 6px">You stand at ${esc(CONTENT.locations[here]?.name || "a gate")}, a networked waygate — fold direct to any gate you've reached. A hop costs a fraction of the road plus a wayfaring toll.</div>
+      <div class="hint" style="margin:0 0 6px">You stand at ${esc(CONTENT.locations[here]?.name || "a gate")}, a networked waygate — fold direct to any gate you've reached. A hop costs a fraction of the road plus a wayfaring toll.${aimsOpen(character, CONTENT.rules).ok ? " ⚑ You are wayfarer enough to aim it open — straight at any place you know: choose one on the map, or name it." : ""}</div>
       ${netGates.map(g => `<button class="net-hop" data-nethop="${esc(g.id)}" title="${g.overlandDays ? `about ${g.overlandDays} day${g.overlandDays === 1 ? "" : "s"} on foot — the gate makes it ${g.cost.hours}h` : "a short fold"}">
         <span class="net-hop-name">${esc(g.name)}${g.isHub ? ` <span class="net-tag">hub</span>` : ""}${g.isDefault ? ` <span class="net-tag net-tag-default">default</span>` : ""}</span>
         <span class="net-hop-cost">+${g.cost.hours}h · ${g.cost.energy}⚡</span></button>`).join("")}
@@ -11939,7 +11944,9 @@ function renderMap(selectedId = null) {
   const travelBtn = document.getElementById("map-travel");
   if (travelBtn) travelBtn.onclick = () => { if (!planJourneyTo(travelBtn.dataset.dest)) travelTo(travelBtn.dataset.dest); };   // CCODE-387: far is a journey
   const wgBtn = document.getElementById("map-waygate");
-  if (wgBtn) wgBtn.onclick = () => travelTo(wgBtn.dataset.wgdest); // SNG-148: the click IS the confirmed intent; transit is real travel
+  if (wgBtn) wgBtn.onclick = () => (wgBtn.dataset.wgopen   // CCODE-418: aimed open pays the hop, like a network fold
+    ? travelTo(wgBtn.dataset.wgdest, { cost: { hours: Number(wgBtn.dataset.wghours) || 0, energy: Number(wgBtn.dataset.wgenergy) || 0 } })
+    : travelTo(wgBtn.dataset.wgdest)); // SNG-148: the click IS the confirmed intent; transit is real travel
   // SNG-243 §4: a network hop — fold to a known gate across the network, paying the gate-hop cost (not the flat travel hours).
   for (const b of app.querySelectorAll("[data-nethop]")) b.onclick = () => {
     const g = netGates.find(x => x.id === b.dataset.nethop);

@@ -55,6 +55,31 @@ export function wayfaringTier(character) {
 // (SNG-243 §3) is the player's FIRST personal spoke: Silas made the first new gate, and it's his entry into
 // the network. Membership: authored gates ARE network nodes; a runtime (made) gate opts in via networkCapable.
 
+/** ⛔ CCODE-418 — A GATE AIMED OPEN. Erik (2026-09-18): *"It CAN also be used to travel directly to other gates, and if you're really
+ *  good, can take you to any location you want (any waygate can do that)."* Gate to gate is SNG-243 §4. This is the other half: at a
+ *  network gate, a wayfarer good enough folds straight to any place they KNOW — no gate at the far end, so no walk out of one.
+ *  ⚑ "Really good" is data, and there are two ways to be it: a wayfaring tier past every gate's (content gates run 1–3, so the bar
+ *  is 4 — wits 8, or wits 6 and five regions walked), or a craft whose whole art is the fold (`waygate`, the Numinous capstone:
+ *  "open a fold to a place you KNOW WELL… crossing any distance"). ⚠️ Still knowledge AND skill, as the PM ruling at the top of
+ *  this file composes them: the place must be one the traveller knows. `rules.waygate` overrides the defaults; Erik's to turn. */
+export const WAYGATE_DEFAULTS = { openAimTier: 4, openAimCrafts: ["waygate"] };
+export function waygateRules(rules = {}) {
+  return { ...WAYGATE_DEFAULTS, ...((rules && rules.waygate && typeof rules.waygate === "object") ? rules.waygate : {}) };
+}
+
+/** Can this traveller aim a gate at a place that is not a gate? → { ok, by } — `by` names what made them good enough (the tier, or the
+ *  craft), so a label can say it. Pure. */
+export function aimsOpen(traveller, rules = {}) {
+  if (!traveller) return { ok: false, by: null };
+  const w = waygateRules(rules);
+  const tier = wayfaringTier(traveller);
+  const bar = Number(w.openAimTier);
+  if (Number.isFinite(bar) && bar > 0 && tier >= bar) return { ok: true, by: `wayfaring ${tier}` };
+  const held = new Set((Array.isArray(traveller.abilities) ? traveller.abilities : []).map(a => a?.abilityId || a?.id).filter(Boolean));
+  const craft = (Array.isArray(w.openAimCrafts) ? w.openAimCrafts : []).find(id => held.has(id));
+  return craft ? { ok: true, by: craft } : { ok: false, by: null };
+}
+
 /** Is this gate a participant in the travel network? Authored gates are; a made/runtime gate opts in. */
 export function isNetworkGate(loc) {
   if (!loc?.waygate) return false;
@@ -97,17 +122,24 @@ export function networkGatesFrom(character, locations, { walkingDays } = {}) {
 }
 
 /** PURE routing. From a gate, aiming at destId:
- *  { destId, routed: "named"|"hub", known, skilled } — or null when the origin
+ *  { destId, routed: "named"|"hub"|"open", known, skilled } — or null when the origin
  *  isn't a gate / the network has no hub / no gates exist (standard travel).
  *  Discovery without skill → hub; skill without discovery → hub; both → named.
- *  Aiming at the hub itself is always "hub" (everyone can find the center). */
-export function resolveWaygateTransit({ character, destId, locations }) {
+ *  Aiming at the hub itself is always "hub" (everyone can find the center).
+ *  ⛔ CCODE-418: a place that is NOT a gate is "open" — from a network gate, a place they know, a wayfarer good enough (`aimsOpen`);
+ *  anyone else gets null, which is ordinary travel, exactly as before. */
+export function resolveWaygateTransit({ character, destId, locations, rules = {} }) {
   const origin = locations?.[character?.currentLocationId];
   if (!isWaygate(origin)) return null;
   const hub = hubWaygate(locations);
   if (!hub) return null;
   const dest = locations?.[destId];
-  if (!isWaygate(dest) || dest.id === origin.id) return null;
+  if (!dest || dest.id === origin.id) return null;
+  if (!isWaygate(dest)) {
+    if (!isNetworkGate(origin)) return null;
+    const known = (character?.knownPlaces || []).includes(dest.id);
+    return known && aimsOpen(character, rules).ok ? { destId: dest.id, routed: "open", known, skilled: true } : null;
+  }
   if (dest.id === hub.id) return { destId: hub.id, routed: "hub", known: true, skilled: true };
   const known = (character?.knownPlaces || []).includes(dest.id);
   const skilled = wayfaringTier(character) >= waygateTierOf(dest);
@@ -185,7 +217,7 @@ export function waygateTruthForGM(character, locations) {
     + ` If they want to reach a gate or travel through one, say so plainly and let the journey carry them — that is a direction, not a refusal.`;
 }
 
-export function waygateBlockForGM(character, locations) {
+export function waygateBlockForGM(character, locations, rules = {}) {
   const origin = locations?.[character?.currentLocationId];
   if (!isWaygate(origin)) return null;
   const hub = hubWaygate(locations);
@@ -207,6 +239,10 @@ export function waygateBlockForGM(character, locations) {
     (aimable.length
       ? `Gates they can aim true at: ${aimable.join(", ")}. Anywhere else through the gate lands at ${hub.name} — the hub; that is routing, not failure. `
       : `They cannot yet aim at a distant gate (undiscovered, or beyond their wayfaring) — the gate will carry them to ${hub.name}, the hub. `) +
+    // ⛔ CCODE-418: a wayfarer good enough aims a network gate at any place they know — the GM is told, or it will refuse what the engine allows
+    (net && aimsOpen(character, rules).ok
+      ? `⚑ They are wayfarer enough to AIM THIS GATE OPEN — straight to any place they know, not only to a gate. If they step through aimed at a place, your "moveTo" names that place. `
+      : "") +
     `You MAY surface the gate as a door woven into the fiction when travel is on the character's mind — never as a menu, never every beat. ` +
     `⛔ IF THE CHARACTER STEPS THROUGH, your "moveTo" MUST NAME THE DESTINATION GATE — one of the gates listed above${defaultName ? `, ${defaultName} (the default)` : ""}, or ${hub.name}. ` +
     `Never emit a moveTo of "the waygate", "the gate", "the centre" or any other generic word for the transit itself: those are not places, and naming one lands the character in a room that does not exist. Name where they COME OUT.`;

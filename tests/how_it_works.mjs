@@ -8997,8 +8997,9 @@ console.log("\n── §99 · four days through the Wend, or seven around it ─
   check("§99: ⛔ THE GM IS HANDED THE REAL WAYS THERE — wired where travel actually happens",
     /import \{[^}]*routeBetween[^}]*\} from "\.\/engine\/journey\.js"/.test(app99)
     && /function buildTravelDirective[\s\S]{0,2400}?routeBetween\(/.test(app99));   // CCODE-387: a journey's early return now sits above it
+  // (CCODE-418: the call also carries the rules now, for the open-aim dial — the rule here is only that the traveller rides along)
   check("§99: …with the TRAVELLER passed, so it never offers a gate this character has not found",
-    /routeBetween\(character\.currentLocationId, ti\.destId, CONTENT\.locations, \{ traveller: character \}\)/.test(app99));
+    /routeBetween\(character\.currentLocationId, ti\.destId, CONTENT\.locations, \{ traveller: character[,\s}]/.test(app99));
   check("§99: …and the directive tells the GM not to invent a different duration",
     /do not invent a different one/.test(app99) && /THE WAYS THERE/.test(app99));
 }
@@ -21678,6 +21679,82 @@ console.log("\n── §298 · a trained hand can still fail badly — the crit-
   const raw298 = dial298(0, 0);
   check("§298: ⛔ an untrained hand fails badly at least as often as it triumphs — the tails no longer lean one way for everyone",
     raw298.failChance >= raw298.successChance, `crit success ${raw298.successChance}, crit failure ${raw298.failChance}`);
+}
+
+// ══════════ §299 · CCODE-418 — A GATE AIMED OPEN ══════════
+// Erik (2026-09-18): "It CAN also be used to travel directly to other gates, and if you're really good, can take you to any location
+// you want (any waygate can do that)." Gate to gate was SNG-243 §4. This is the other half: at a network gate, a wayfarer good enough
+// folds straight to a place they KNOW — "really good" being a wayfaring tier past every gate's, or a craft whose art is the fold.
+console.log("\n── §299 · a gate aimed open — a wayfarer good enough folds a network gate straight to a place they know ──");
+{
+  const W299 = await import("../engine/waygate.js");
+  const J299 = await import("../engine/journey.js");
+  const JP299 = await import("../engine/journeyplan.js");
+  const { loadContentHeadless: lch299 } = await import("./headless_content.mjs");
+  const CT299 = await lch299();
+  const L299 = CT299.locations, RU299 = CT299.rules;
+
+  /* ---- 1 · ⛔ WHO IS GOOD ENOUGH ---- */
+  const walker299 = (wits, extra = {}) => ({ currentLocationId: "gen-the-made-gate", subAttributes: { wits }, abilities: [],
+    knownPlaces: ["gen-the-made-gate", "the_old_warden_post", "cairnhold", "millbrook"], ...extra });
+  const hardest299 = Math.max(...Object.values(L299).filter(l => l.waygate).map(l => W299.waygateTierOf(l)));
+  const rules299 = W299.waygateRules(RU299), bar299 = rules299.openAimTier;
+  check("§299: ⛔ 'really good' is a wayfaring tier PAST every gate's — aiming at a place is harder than aiming at the hardest gate in the world",
+    bar299 > hardest299, `bar ${bar299}, hardest gate ${hardest299}`);
+  check("§299: …one tier short aims at gates only; at the bar, at any place they know; and a craft whose art is the fold is enough on its own",
+    !W299.aimsOpen(walker299(2 * (bar299 - 1)), RU299).ok && W299.aimsOpen(walker299(2 * bar299), RU299).ok
+    && W299.aimsOpen(walker299(2, { abilities: [{ abilityId: rules299.openAimCrafts[0], level: 1 }] }), RU299).by === rules299.openAimCrafts[0]);
+  const cat299 = CT299.abilities || {};
+  const hasCraft299 = (id) => Array.isArray(cat299) ? cat299.some(a => a?.id === id) : !!cat299[id];
+  check("§299: …and every craft the rule names is a real craft in the catalog — a dial naming nothing is a door nobody can open",
+    rules299.openAimCrafts.length > 0 && rules299.openAimCrafts.every(hasCraft299), rules299.openAimCrafts.join(", "));
+
+  /* ---- 2 · ⛔ THE GATE ITSELF ---- */
+  const sharp299 = walker299(2 * bar299), dull299 = walker299(2);
+  const t299 = W299.resolveWaygateTransit({ character: sharp299, destId: "the_old_warden_post", locations: L299, rules: RU299 });
+  check("§299: ⛔ standing at the Made Gate, a wayfarer good enough aims it straight at Raven's Home — routed OPEN, not to the hub",
+    t299?.routed === "open" && t299.destId === "the_old_warden_post", JSON.stringify(t299));
+  check("§299: …one who is not gets ordinary travel, exactly as before; and nobody aims at a place they do not know",
+    W299.resolveWaygateTransit({ character: dull299, destId: "the_old_warden_post", locations: L299, rules: RU299 }) === null
+    && W299.resolveWaygateTransit({ character: { ...sharp299, knownPlaces: ["gen-the-made-gate"] }, destId: "the_old_warden_post", locations: L299, rules: RU299 }) === null);
+  const shut299 = { ...L299, "gen-the-made-gate": { ...L299["gen-the-made-gate"], networkCapable: false } };
+  check("§299: …and only from a NETWORK gate — a made gate that never joined the network cannot be aimed open",
+    W299.resolveWaygateTransit({ character: sharp299, destId: "the_old_warden_post", locations: shut299, rules: RU299 }) === null);
+
+  /* ---- 3 · ⛔ THE ROUTE: one gate way, and it ends at the place ---- */
+  const at299 = (c) => ({ ...c, currentLocationId: "millbrook" });
+  const open299 = J299.routeBetween("millbrook", "the_old_warden_post", L299, { traveller: at299(sharp299), rules: RU299 });
+  const gate299 = (open299?.options || []).find(o => o.kind === "gate");
+  const plain299 = J299.routeBetween("millbrook", "the_old_warden_post", L299, { traveller: at299(walker299(6)), rules: RU299 });
+  const plainGate299 = (plain299?.options || []).find(o => o.kind === "gate");
+  check("§299: ⛔ from Millbrook the good wayfarer's gate way ends AT Raven's Home — the hop's far end is the place, nothing walked out, one gate way offered",
+    gate299?.gate?.open === true && gate299.gate.to === "the_old_warden_post" && gate299.walkOut === 0
+    && gate299.path[gate299.path.length - 1] === "the_old_warden_post" && open299.options.filter(o => o.kind === "gate").length === 1,
+    JSON.stringify(gate299));
+  check("§299: …quicker than the way a plainer traveller gets, who must come out of Cairnhold's gate and walk on",
+    !!plainGate299 && !plainGate299.gate.open && gate299.days < plainGate299.days, `${gate299?.days} vs ${plainGate299?.days}`);
+  const line299 = J299.routeLine(open299, L299) || "";
+  check("§299: …and the line the GM reads says 'folded straight there', never 'the Made Gate gate'",
+    /folded straight there/.test(line299) && /straight there\)/.test(line299) && !/Gate gate/.test(line299), line299);
+
+  /* ---- 4 · ⛔ THE JOURNEY CARD WALKS IT ---- */
+  const plan299 = JP299.planJourney({ character: at299(sharp299), destId: "the_old_warden_post", locations: L299, rules: RU299 });
+  const legs299 = plan299?.options?.[0]?.legs || [];
+  const last299 = legs299[legs299.length - 1];
+  check("§299: ⛔ the journey plan walks to the gate and FOLDS the last leg — the fold costs the hop's hours, not a walk",
+    plan299?.options?.[0]?.gate?.open === true && legs299.length >= 2 && !!last299?.gate && last299.toId === "the_old_warden_post",
+    JSON.stringify(legs299.map(l => [l.fromId, l.toId, Math.round(l.days * 100) / 100, !!l.gate])));
+
+  /* ---- 5 · ⛔ THE GM IS TOLD, AND THE MAP OFFERS IT ---- */
+  check("§299: ⛔ the GM's gate block tells it a good wayfarer can aim open — and only for them, or it would promise what the engine refuses",
+    /AIM THIS GATE OPEN/.test(W299.waygateBlockForGM(sharp299, L299, RU299) || "") && !/AIM THIS GATE OPEN/.test(W299.waygateBlockForGM(dull299, L299, RU299) || ""));
+  const A299 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§299: …the registry hands that block the rules, and the travel directive and the journey plan ask for routes with them",
+    /waygateBlockForGM\(env\.character, env\.CONTENT\.locations, env\.CONTENT\.rules\)/.test(rd("engine/gm_registry.js"))
+    && /routeBetween\(character\.currentLocationId, ti\.destId, CONTENT\.locations, \{ traveller: character, rules: CONTENT\.rules \}\)/.test(A299)
+    && /routeBetween\(fromId, destId, locations, \{ traveller: character, rules \}\)/.test(rd("engine/journeyplan.js")));
+  check("§299: …and at a network gate the map's place panel offers the fold for a place they know, paid like any hop",
+    /r\.routed === "open"/.test(A299) && /data-wgopen="1"/.test(A299) && /wgBtn\.dataset\.wgopen/.test(A299));
 }
 
 /* ══════════ REPORT ══════════ */

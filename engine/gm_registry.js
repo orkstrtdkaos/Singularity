@@ -664,7 +664,7 @@ export const GM_CONTEXT = [
     // ⛔ "How do I get to the hub?" IS A QUESTION, and the ask channel had no waygate fact at all — so the GM invented
     // lore that contradicted the world and closed the player's goal (Erik 2026-09-07).
     reachedBy: "map ◈ Waygate control + GM offer", spec: "§9", views: ["turn", "ask"],
-    build: (env) => waygateBlockForGM(env.character, env.CONTENT.locations) },
+    build: (env) => waygateBlockForGM(env.character, env.CONTENT.locations, env.CONTENT.rules) },
   // CCODE-03: scenes were never closing (a real save ran 169 beats in ONE scene), so the chronicle
   // stayed thin and the save bloated. The contract now tells the GM when to close; this tells it
   // that THIS scene has run long. Silent until it matters — pressure, not nagging (the SNG-080 shape).

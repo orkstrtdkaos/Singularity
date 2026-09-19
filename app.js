@@ -169,7 +169,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.83";
+const APP_VERSION = "2.0.84";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -5061,7 +5061,8 @@ async function handleGenerateRequests(turn) {
   const location = hereNow();
   // (genContractDeps below supplies the SNG-250 born-whole contract to every generate() call)
   const time = readClock(character.clock, undefined, positionedPlace(CONTENT.locations || {}, character.currentLocationId));   // CCODE-377: this place's season
-  const memCtx = { locationId: location.id, day: time.day, worldDay: absoluteWorldDay(), entities: codexEntities(), rules: CONTENT.rules, affiliate: affiliateNpc };
+  const memCtx = { locationId: location.id, day: time.day, worldDay: absoluteWorldDay(), entities: codexEntities(), rules: CONTENT.rules, affiliate: affiliateNpc,
+    npcs: CONTENT.npcs || {} };   // CCODE-421: an authored person's name keys their authored id
   const notes = [];
   for (const req of reqs.slice(0, 3)) {
     const type = req?.type;
@@ -8067,6 +8068,7 @@ function applyTurn(turn, resolution, playerWords = null) {
   }
   // people & places remember (typed ops, clamped)
   const memCtx = { locationId: location.id, day: readClock(character.clock).day, worldDay: absoluteWorldDay(), entities: codexEntities(), rules: CONTENT.rules, affiliate: affiliateNpc,   // CCODE-385: a change to a person is stamped with the world's day
+    npcs: CONTENT.npcs || {},   // ⛔ CCODE-421: a person met or revealed under an authored person's name is that person — one id
     // R49: what counts as a story that already exists — the quests this character holds and the arcs the world has
     questIds: new Set((character.quests || []).map(q => q && q.id).filter(Boolean)),
     arcIds: new Set([...(CONTENT.greaterArcs || []).map(a => a && a.id), ...Object.keys(character.generated?.arc || {})].filter(Boolean)) };

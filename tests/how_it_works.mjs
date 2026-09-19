@@ -21278,13 +21278,18 @@ console.log("\n── §292 · someone you have met fights as themselves — one
       if (duel.def.opponent.level === roster) agree3++; else off3.push(`${c.name}: ${entry.name} fights at ${duel.def.opponent.level}, roster ${roster}`);
       const thin = BT292.personOpponentFor({ ...entry, id }, opts3);
       const lines = (duel.def.opponent.skills || []).length, thinLines = (thin?.skills || []).length;
-      if (lines >= thinLines) never3++;
+      // ⚠️ CCODE-421 — AN AUTHOR'S OWN RUNG IS A RULING, NOT A LOSS. The registry copy alone GUESSES a tier from the role's words; when the
+      // author has since authored the person lower, the merge prices them lower on purpose ("an authored tier always wins"). Measured
+      // 2026-09-18: Cassiel Ord, authored `notable` by SNG-616, reads 8 where her role — "Keeper of the… threshold" — guessed 15.
+      const au292 = NS292.authoredFor(entry, { npcs: C292.npcs }) || {};
+      const ruledLower = (au292.tier != null || au292.level != null) && Number(thin?.level) > Number(duel.def.opponent.level);
+      if (lines >= thinLines || ruledLower) never3++;
       if (lines > thinLines) fuller3++;
     }
   }
   check("§292: ⛔ ONE PERSON, ONE LEVEL — on every real save, everyone the player has met who is an authored figure comes to a fight at exactly the level the roster gives them (the measured population, not an example)",
     n3 >= 10 && agree3 === n3, `${agree3} of ${n3} agree${off3.length ? " — " + off3.slice(0, 4).join("; ") : ""}`);
-  check("§292: …and the merge only ever ADDS: nobody fights with fewer lines than the registry copy alone gave them, and most fight with more",
+  check("§292: …and the merge only ever ADDS: nobody fights with fewer lines than the registry copy alone gave them — unless an author's own tier prices them lower — and most fight with more",
     n3 >= 10 && never3 === n3 && fuller3 * 2 > n3, `${fuller3} of ${n3} fuller, ${n3 - never3} thinner`);
 
   /* ---- 4 · ⛔ AND THE HOLD'S KEEPER IS THE SAME PERSON ---- */
@@ -21913,6 +21918,89 @@ console.log("\n── §300 · jobs — sent, timed, and decided by the dice the
   check("§300: ⛑ …and thirty hand-days of building, given to his best builder, is work of hours — the crafts are credited, as Erik asked",
     !!best300 && best300.plan.work.hours < 8 && Math.abs(JB.OUTCOMES.reduce((a, k) => a + best300.plan.dist[k], 0) - 1) < 1e-9,
     best300 ? `${best300.team.map(p => p.short).join(", ")}: ${best300.plan.work.hours.toFixed(2)}h of work` : "no suggestion");
+}
+
+// ══════════ §301 · CCODE-421 — ONE PERSON, ONE ID: HALVEX IS ONE MAN ══════════
+// Erik (2026-09-18), on the Halvex who walks at Loki's side: "I like the one man hiding story... i thought of him as more of a chaos
+// agent - like a broken wright... Either way I want to keep Loki's play as canon AND adapt the authored legend to explain it."
+// Loki's GM revealed a stranger as "Halvex Coil" — the world's legend — and the engine kept TWO records for one man: the world's
+// (`halvex_coil`: wounded by The Appetite, his arcs) and Loki's (`churn-revel-orchestrator`: twelve meetings, the bond, the portraits).
+console.log("\n── §301 · one person, one id — a name the world already has is a person the world already has ──");
+{
+  const NP = await import("../engine/npcs.js");
+  const RC301 = await import("../engine/reconcile.js");
+  const F301 = await import("../engine/fellowship.js");
+  const { loadContentHeadless: lch301 } = await import("./headless_content.mjs");
+  const CT301 = await lch301();
+
+  /* ---- 1 · ⛔ EVERY REFERENCE MOVES, PROSE NEVER ---- */
+  const c301 = { id: "c", npcRegistry: { old: { id: "old", name: "Somebody", history: ["[d1] met old"] }, keep: { id: "keep", name: "Other" } },
+    company: [{ npcId: "old" }], bands: [{ id: "b", contingents: [{ n: 1, npcId: "old" }] }], jobs: { out: [{ team: ["old", "player"] }] },
+    codex: { topics: { old: { id: "old", entityId: "old", facts: ["a fact about old"] }, place: { links: ["old", "x"] } } },
+    gallery: [{ subjectId: "old", caption: "old stands" }], likeness: { "npc:old": { keeps: [{ seedKey: "whois-old#r1" }] }, "figure:whois-old": { keeps: [] } },
+    worldState: { backlog: { old: 1 } } };
+  const r301 = NP.rekeyPerson(c301, "old", "new_id");
+  check("§301: ⛔ `rekeyPerson` moves every EXACT reference — registry, company, bands, jobs, codex key and links, pictures, portrait keys of any kind, world maps — and keeps the old id",
+    r301.ok && !c301.npcRegistry.old && c301.npcRegistry.new_id.id === "new_id" && c301.company[0].npcId === "new_id"
+    && c301.bands[0].contingents[0].npcId === "new_id" && c301.jobs.out[0].team[0] === "new_id" && c301.codex.topics.new_id?.entityId === "new_id"
+    && c301.codex.topics.place.links[0] === "new_id" && c301.gallery[0].subjectId === "new_id" && c301.likeness["npc:new_id"] && c301.likeness["figure:whois-new_id"]
+    && c301.worldState.backlog.new_id === 1 && JSON.stringify(c301.npcRegistry.new_id.formerIds) === '["old"]', JSON.stringify(r301));
+  check("§301: …and never prose — a history line, a fact, a caption and a seed label that merely CONTAIN the old id are words, not references",
+    c301.npcRegistry.new_id.history[0] === "[d1] met old" && c301.codex.topics.new_id.facts[0] === "a fact about old" && c301.gallery[0].caption === "old stands"
+    && c301.likeness["npc:new_id"].keeps[0].seedKey === "whois-old#r1");
+  check("§301: …it refuses an id that is already somebody else's, and a person found by an id they used to have is still them",
+    NP.rekeyPerson(c301, "new_id", "keep").ok === false && NP.findExistingNpc(c301.npcRegistry, "old", "") === c301.npcRegistry.new_id);
+
+  /* ---- 2 · ⛔ STRICT: THE WHOLE NAME, OR THE NAME BEFORE ITS EPITHET ---- */
+  const npcs301 = CT301.npcs;
+  check("§301: ⛔ an authored person is found by their whole name or the name before their epithet — never a first name alone, never a grown record",
+    NP.authoredPersonNamed("Halvex Coil", npcs301)?.id === "halvex_coil" && NP.authoredPersonNamed("Halvex Coil, the Rewriter", npcs301)?.id === "halvex_coil"
+    && NP.authoredPersonNamed("Halvex", npcs301) === null
+    && NP.authoredPersonNamed("A Grown Fellow", { g: { name: "A Grown Fellow", _gen: { type: "npc" } } }) === null);
+
+  /* ---- 3 · ⛔ MET OR REVEALED UNDER AN AUTHORED NAME: ONE RECORD ---- */
+  const meet301 = { id: "c", npcRegistry: {} };
+  NP.applyNpcUpdates(meet301, [{ op: "meet", npcId: "the-orchestrator", name: "Halvex Coil", role: "master of coordinated chaos" }], { day: 2, npcs: npcs301 });
+  check("§301: ⛔ a person MET under an authored person's name is keyed by the authored id — never a second record for a person the world already keys",
+    !!meet301.npcRegistry.halvex_coil && !meet301.npcRegistry["the-orchestrator"], Object.keys(meet301.npcRegistry).join(","));
+  const twoWrens = { child_wren: { name: "Wren" }, odd_wren: { name: "Wren" } };
+  const wren301 = { id: "c", npcRegistry: {} };
+  NP.applyNpcUpdates(wren301, [{ op: "meet", npcId: "wren", name: "Wren" }], { day: 2, npcs: twoWrens });
+  check("§301: ⚠️ …and a name TWO authored records answer to is ambiguous — it joins nobody (content authors two Wrens, and holds Mara Wells twice)",
+    NP.authoredPersonNamed("Wren", twoWrens) === null && !!wren301.npcRegistry.wren && NP.authoredPersonNamed("Mara Wells", npcs301) === null);
+  const old301 = { id: "c", npcRegistry: {} };
+  NP.applyNpcUpdates(old301, [{ op: "meet", npcId: "mara-wells", name: "Mara Wells" }], { day: 2 });
+  check("§301: …and with no authored people handed in, a meet keys as it always did", !!old301.npcRegistry["mara-wells"]);
+  const rev301 = { id: "c", npcRegistry: {}, company: [] };
+  NP.applyNpcUpdates(rev301, [{ op: "meet", npcId: "churn-revel-orchestrator", name: "The Churn-Revel orchestrator", role: "master of coordinated chaos" }], { day: 3, npcs: npcs301 });
+  rev301.company.push({ npcId: "churn-revel-orchestrator" });
+  NP.applyNpcUpdates(rev301, [{ op: "update", npcId: "churn-revel-orchestrator", revealName: "Halvex Coil" }], { day: 4, npcs: npcs301 });
+  check("§301: ⛔ a stranger REVEALED as a legend becomes the legend's record — one id, the company follows, the author can find the link",
+    !!rev301.npcRegistry.halvex_coil && !rev301.npcRegistry["churn-revel-orchestrator"] && rev301.company[0].npcId === "halvex_coil"
+    && rev301.npcRegistry.halvex_coil.linkedByReveal?.fromId === "churn-revel-orchestrator", Object.keys(rev301.npcRegistry).join(","));
+  const plain301 = { id: "c", npcRegistry: {} };
+  NP.applyNpcUpdates(plain301, [{ op: "meet", npcId: "stranger", name: "A stranger" }], { day: 1, npcs: npcs301 });
+  NP.applyNpcUpdates(plain301, [{ op: "update", npcId: "stranger", revealName: "Tobren Ashlow" }], { day: 1, npcs: npcs301 });
+  check("§301: …and a reveal of a name nobody authored is only a reveal", plain301.npcRegistry.stranger?.name === "Tobren Ashlow" && !plain301.npcRegistry.stranger.linkedByReveal);
+  const A301 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§301: …and both turn paths hand the authored people to the person updates",
+    (A301.match(/npcs: CONTENT\.npcs \|\| \{\}/g) || []).length >= 2);
+
+  /* ---- 4 · ⛑ LOKI'S HALVEX, ON HIS REAL SAVE (a copy) ---- */
+  const loki301 = JSON.parse(rd("characters/player-s9z9u1/char-mrum8y4d.json"));
+  const had301 = !!loki301.npcRegistry?.["churn-revel-orchestrator"];
+  const levelBefore301 = had301 ? F301.levelOfPerson(loki301, "churn-revel-orchestrator", { content: CT301 }) : null;
+  const out301 = RC301.reconcile(loki301, "character", { content: CT301 }, RC301.CHARACTER_STEPS.filter(s => s.version === 67));
+  const h301 = loki301.npcRegistry?.halvex_coil;
+  check("§301: ⛑ on Loki's save the man at his side IS Halvex Coil — one record under the legend's id, in his company, his pictures and portraits following, the world's wound on the same id",
+    !had301 || (!!h301 && !loki301.npcRegistry["churn-revel-orchestrator"] && (loki301.company || []).some(m => m.npcId === "halvex_coil")
+      && Object.keys(loki301.likeness || {}).some(k => k === "figure:whois-halvex_coil") && !!loki301.worldState?.epicStatus?.halvex_coil
+      && F301.levelOfPerson(loki301, "halvex_coil", { content: CT301 }) === levelBefore301 && /one man/.test((out301?.notes || [])[0] || "")),
+    JSON.stringify({ had301, keys: Object.keys(loki301.npcRegistry || {}).filter(k => /halvex|churn/.test(k)) }));
+  const silas301 = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+  const silasBefore = JSON.stringify(silas301.npcRegistry);
+  RC301.reconcile(silas301, "character", { content: CT301 }, RC301.CHARACTER_STEPS.filter(s => s.version === 67));
+  check("§301: …and it is Loki's alone — Silas's registry is untouched", JSON.stringify(silas301.npcRegistry) === silasBefore);
 }
 
 /* ══════════ REPORT ══════════ */

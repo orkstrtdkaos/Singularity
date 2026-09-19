@@ -119,6 +119,8 @@ export function findExistingNpc(reg, id, name = "") {
     // registry already knew as an alias forked a second record. Match the alias ledger that was being
     // written all along. Exact slug-match only (an explicit prior name), never a lexical loosening.
     if (nameNorm && (n.aliases || []).some(a => slugify(a) === nameNorm)) return n;
+    // ⛔ CCODE-421: an id this person used to go by (`rekeyPerson` keeps it) is still them — an op written against the old id finds them
+    if (id && Array.isArray(n.formerIds) && n.formerIds.some(f => f === id || canonNpcId(f) === canonNpcId(id))) return n;
     // CCODE-24: bridge the `_` ↔ `-` id-convention gap. A quest/hunt-effect giver stub keys the registry by the
     // RAW content id (keeper_ilma — quests.js deliberately never slugifies content ids); a MEET keys by
     // slugify (keeper-ilma). Without a normalized compare the same person forks into two registry entries
@@ -219,11 +221,71 @@ export function agesMissingForGM(character, { sceneNpcNames = [], limit = 6 } = 
   return lines.length ? lines.join(String.fromCharCode(10)) : null;   // (a literal newline; an escape here has been eaten twice today)
 }
 
+/** ⛔ CCODE-421 — THE AUTHORED PERSON A NAME BELONGS TO: a figure the world already knows (a legend, an authored person), never a record
+ *  the game grew (`_gen`) or the shared world carried (`_canon`). STRICT: the whole name, or the name before its epithet — "Halvex Coil,
+ *  the Rewriter" answers to "Halvex Coil" — never a first name alone, which is how two real people named Vessin stay two. ⚠️ AND ONLY
+ *  WHEN ONE RECORD HOLDS THE NAME: content authors two Wrens (a child and an odd one) and holds Mara Wells twice, and a name two records
+ *  answer to is ambiguous — it joins nobody. → { id, record } or null. Pure. */
+export function authoredPersonNamed(name, npcs = {}) {
+  const want = normName(name);
+  if (!want) return null;
+  const hits = [];
+  for (const [id, r] of Object.entries(npcs || {})) {
+    if (!r || r._gen || r._canon || !r.name) continue;
+    if (want === normName(r.name) || want === normName(String(r.name).split(",")[0])) hits.push({ id, record: r });
+  }
+  return hits.length === 1 ? hits[0] : null;
+}
+
+/** ⛔ CCODE-421 — ONE PERSON, ONE ID. Erik (2026-09-18, on Loki's Halvex): "keep Loki's play as canon AND adapt the authored legend to
+ *  explain it" — the man at Loki's side IS Halvex Coil, so he must be ONE record: the world's (`halvex_coil` — his wound, his arcs, his
+ *  tenure) and Loki's (the meetings, the bond, the portraits) under one id. Moves every reference across the whole character — the
+ *  registry key and record, and anything that names them by EXACT id (company, bands, holds, codex, gallery, jobs, world-state maps), the
+ *  portrait keys (`npc:<id>`, `figure:whois-<id>` — any kind) and a picture's subject (`whois-<id>`) — and keeps the old id on `formerIds` so an op that still
+ *  says it finds them. ⚠️ Exact ids and keys only: prose is never rewritten, and a seed label that merely CONTAINS the id is a label.
+ *  Refuses when the new id is already somebody else's record. Mutates `character`. → { ok, moved } or { ok: false, why }. */
+export function rekeyPerson(character, fromId, toId) {
+  const reg = character?.npcRegistry || {};
+  if (!fromId || !toId || fromId === toId) return { ok: false, why: "nothing to move" };
+  if (!reg[fromId]) return { ok: false, why: "no such person" };
+  if (reg[toId] && reg[toId] !== reg[fromId]) return { ok: false, why: "that id is already someone else's record" };
+  const pairs = new Map([[fromId, toId], [`whois-${fromId}`, `whois-${toId}`]]);
+  // a portrait key is `<kind>:<subject>` — `npc:<id>`, `figure:whois-<id>` — whatever the kind, the subject is what moves
+  const keyFor = (k) => {
+    if (pairs.has(k)) return pairs.get(k);
+    const at = k.indexOf(":");
+    if (at > 0 && pairs.has(k.slice(at + 1))) return k.slice(0, at + 1) + pairs.get(k.slice(at + 1));
+    return null;
+  };
+  let moved = 0;
+  const walk = (o, depth = 0) => {
+    if (!o || typeof o !== "object" || depth > 14) return;
+    if (Array.isArray(o)) {
+      for (let i = 0; i < o.length; i++) {
+        if (typeof o[i] === "string" && pairs.has(o[i])) { o[i] = pairs.get(o[i]); moved++; } else walk(o[i], depth + 1);
+      }
+      return;
+    }
+    for (const k of Object.keys(o)) {
+      let key = k;
+      const to = keyFor(k);
+      if (to && !(to in o)) { key = to; o[key] = o[k]; delete o[k]; moved++; }
+      const v = o[key];
+      if (typeof v === "string" && pairs.has(v)) { o[key] = pairs.get(v); moved++; } else walk(v, depth + 1);
+    }
+  };
+  walk(character);
+  const n = character.npcRegistry[toId];
+  n.id = toId;
+  n.formerIds = [...new Set([...(Array.isArray(n.formerIds) ? n.formerIds : []), fromId])];
+  return { ok: true, moved };
+}
+
 export function applyNpcUpdates(character, updates = [], ctx = {}) {
   character.npcRegistry = character.npcRegistry || {};
   const reg = character.npcRegistry;
   for (const u of (updates || []).slice(0, 5)) {
-    const id = u.npcId ? slugify(u.npcId) : slugify(u.name || "");
+    let id = u.npcId ? slugify(u.npcId) : slugify(u.name || "");   // ⛔ CCODE-421: `let` — a met authored person takes the authored id
     if (!id) continue;
     let n = findExistingNpc(reg, id, u.name || "");
     if (!n) {
@@ -254,6 +316,10 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
       // SNG-111 and which nothing has ever written: a reader with no writer, closed here. `setNpcName`
       // still overwrites the label the moment the player learns the real name.
       const first = personName({ proposed: prettifyNpcName(String(u.name || id)), role: u.role, max: 60 });
+      // ⛔ CCODE-421: a person met under an AUTHORED person's name is that person — keyed by their authored id, so the world's record of
+      // them and yours are one. Four saves met Mara Wells as `mara-wells` while the world knew her as `water_keeper`.
+      const authoredMet = !first.nameUnknown && ctx.npcs ? authoredPersonNamed(first.name, ctx.npcs) : null;
+      if (authoredMet && !reg[authoredMet.id]) id = authoredMet.id;
       n = reg[id] = {
         id,
         name: first.name,
@@ -378,6 +444,17 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
         n.name = newName;
         n.nameRevealed = true;
         delete n.nameUnknown;   // SNG-431: the label was standing in for a name they now have
+        // ⛔ CCODE-421 — A NAME THE WORLD ALREADY HAS IS A PERSON THE WORLD ALREADY HAS. Erik's ruling on Loki's Halvex: the play is canon
+        // and the authored person is adapted to it — so a stranger revealed as a legend BECOMES that legend's record, one id, and
+        // `linkedByReveal` is what an author's review finds. (Never when the authored id is already someone else in this registry.)
+        const authoredRevealed = ctx.npcs ? authoredPersonNamed(newName, ctx.npcs) : null;
+        if (authoredRevealed && authoredRevealed.id !== n.id && !reg[authoredRevealed.id]) {
+          const was = n.id;
+          if (rekeyPerson(character, was, authoredRevealed.id).ok) {
+            n.linkedByReveal = { authoredId: authoredRevealed.id, fromId: was, day: ctx.day ?? null };
+            n.history = [...n.history, `[d${ctx.day ?? "?"}] ${newName} is the one the world knows — one person, one record`].slice(-CAPS.history);
+          }
+        }
       } else if (isExtension) {
         n.aliases = [...new Set([...(n.aliases || []), n.name])].slice(-4); // keep the given name for match continuity
         n.history = [...n.history, `[d${ctx.day ?? "?"}] You learn more of their name — ${newName}`].slice(-CAPS.history);

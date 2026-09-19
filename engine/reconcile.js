@@ -33,7 +33,7 @@ import { namesMatch } from "./namematch.js";
 import { affiliationOf, regionHomeTradition, buildPeopleVocab, affiliationAt } from "./affiliation.js";   // CCODE-413: step 66 runs the whole chain
 import { defaultSchoolsForDomains } from "./substrate.js"; // SNG-193b §3.2: seed a school per practised domain on old saves
 import { mintableBraidsFor, buildBraidDef, mintBraid, braidTreeFor } from "./braids.js"; // SNG-196: mint the braids a character already earned · ✅ 2026-09-12: braidTreeFor for the template-rank repair
-import { findExistingNpc, prettifyNpcName, REGISTRY_CAP, collapseScenePresence, subjectFromCaption, subjectFromSeed } from "./npcs.js"; // SNG-199/205: registry + codex backfill
+import { findExistingNpc, prettifyNpcName, REGISTRY_CAP, collapseScenePresence, subjectFromCaption, subjectFromSeed, rekeyPerson } from "./npcs.js"; // SNG-199/205: registry + codex backfill
 import { bondOf, companionCodexUpdate, companionStageCount } from "./companions.js"; // SNG-200: stage + codex backfill
 import { isCoercedObjectArtefact, isDescriptiveNotName } from "./state.js"; // SNG-329: the artefact detector, shared with the mint that now refuses it
 import { startingSkills } from "./inventory.js"; // SNG-339b: the training an existing character came with
@@ -86,6 +86,25 @@ function renameTargets(spec, entry, character, known) {
 // "has this entity seen this step yet" via entity.reconcileVersion.
 
 export const CHARACTER_STEPS = [
+  {
+    version: 67, id: "halvex-is-one-man", playerFacing: true,
+    // ⛔ CCODE-421 — ERIK 2026-09-18, on Loki's Halvex: "I like the one man hiding story... i thought of him as more of a chaos agent -
+    // like a broken wright... Either way I want to keep Loki's play as canon AND adapt the authored legend to explain it."
+    // ⚑ MEASURED: Loki's GM met "the Churn-Revel orchestrator" on d3 and revealed him as Halvex Coil on d4 — the name of the world's
+    // legend (`halvex_coil`), so ONE man had TWO records: the world's (wounded by The Appetite, his arcs, his tenure) and Loki's (twelve
+    // meetings, the bond, the portraits Erik redrew). Every reference moves to the legend's id through `rekeyPerson` (13 of them: the
+    // registry, the company, the codex page and a link to it, three pictures, a world-state backlog, the portrait keys); the old id stays
+    // on `formerIds`. ⚠️ His prose is untouched — the legend is what gets rewritten (Aevi, po/CCODE_20260918_halvex_is_one_man.md). Loki only.
+    apply: (c) => {
+      if (c?.id !== "char-mrum8y4d") return {};
+      const reg = c.npcRegistry || {};
+      if (!reg["churn-revel-orchestrator"] || reg.halvex_coil) return {};
+      const r = rekeyPerson(c, "churn-revel-orchestrator", "halvex_coil");
+      if (!r.ok) return {};
+      reg.halvex_coil.linkedByReveal = { authoredId: "halvex_coil", fromId: "churn-revel-orchestrator", day: 4, ruledBy: "erik-2026-09-18" };
+      return { notes: ["Halvex Coil is one man: the one at your side is the Halvex Coil the world knows — his page, his pictures and his place in your company carry his name now."] };
+    }
+  },
   {
     version: 66, id: "everyone-you-know-practises-something", playerFacing: false,
     // ⛔ CCODE-413 — ERIK: "Aldric and Dara are not lvl 1 riff raff... they're people of note at Millbrook... they should be built up

@@ -650,7 +650,8 @@ export function advanceHoldings({ character, now = Date.now(), ladder = null, co
   }
   // ⛔ CCODE-435 (SNG-627 `housing`): hands with no home hold sleep in your barracks, or are quartered at a cost — once a pass, its own counter
   for (const line of chargeQuartering(character, { cfg: content?.rules?.economy?.holdStore ? { ...content.rules.economy.holdStore, features: content.rules.economy.holdFeatures || null } : null,
-    martial: content?.rules?.martial || {}, worldCount: count, currency: content?.rules?.economy?.holdStore?.upkeepCurrency || "crystal" })) news.push(line);
+    martial: content?.rules?.martial || {}, worldCount: count,
+    regionId: content?.locations?.[character?.currentLocationId]?.regionId || null, economy: content?.rules?.economy || null })) news.push(line);   // CCODE-437
   // ⚑ SPEC_world_guesses — THE RECORD MAY BE MISSING SOMETHING THE FICTION ALREADY SAID. Offered, never
   // written; at most one per hold per pass; a No is remembered.
   for (const o of queueFeatureOffers(character, { locations: content?.locations || {},
@@ -1232,7 +1233,7 @@ export async function syncHolds({ character, content } = {}) {
  *  their stores and take the crystal; as a BUYER, take back what a store could not fill. Each is written on the character first
  *  (`settleOrders`/`refundOrders`), then this character's new purchases and every status it moved go up through one merge whose
  *  statuses only move forward. Best-effort, never throws. */
-export async function syncTrades({ character, now = Date.now() } = {}) {
+export async function syncTrades({ character, now = Date.now(), economy = null } = {}) {
   let shared = false;
   try { shared = syncEnabled(); } catch { shared = false; }
   if (!shared || !character?.id) return { synced: false, store: null, news: [] };
@@ -1243,7 +1244,7 @@ export async function syncTrades({ character, now = Date.now() } = {}) {
     const remote = await fetchRepoJSON(TRADES_PATH);
     store = remote;
     const all = Object.values(remote?.orders || {});
-    const settled = settleOrders(character, all, { worldDay });
+    const settled = settleOrders(character, all, { worldDay, economy });   // CCODE-437: the owner is paid in the hold's own money
     const refunded = refundOrders(character, all, { worldDay });
     news.push(...settled.news, ...refunded.news);
     const outbox = Array.isArray(character.tradeOutbox) ? character.tradeOutbox : [];

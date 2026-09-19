@@ -143,7 +143,8 @@ import { clearOnRest, applyCondition, activeConditions } from "./engine/conditio
 // "show the purse as a PERMANENT ROW, show a price as a number when a trade is on the table… The trader
 // SAYS 'ten for those, and I'm being generous'; the interface SAYS 10. Both." A purse the player cannot
 // see is the same failure as one that does not exist.
-import { ensurePurse, purseLine, worthOf, applyExchangeOps, purseBand, debit, canSettle } from "./engine/purse.js";   // CCODE-405: calling a unit together is paid for
+import { ensurePurse, purseLine, worthOf, applyExchangeOps, purseBand } from "./engine/purse.js";
+import { payAt, priceHere, incomeHere, saidPaid, moneyLine } from "./engine/money.js";   // ⛔ CCODE-437: money by place   // CCODE-405: calling a unit together is paid for
 import { bargainOutcome } from "./engine/economy.js";
 import { capabilityMenu, resolveTier } from "./engine/capabilities.js";
 // ⛔ CCODE-239 — PROJECTS TICK. `engine/projects.js` shipped green with all six exports reachable only
@@ -171,7 +172,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.99";
+const APP_VERSION = "2.0.100";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -5935,7 +5936,7 @@ async function maybeTick() {
     // ⛔ CCODE-383: this character's holdings go up as the road knows them, and everyone's come back
     try { const hs = await syncHolds({ character, content: CONTENT }); if (hs.synced && hs.store) sharedHolds = hs.store; } catch (err) { console.warn("[holds] tick skipped:", err?.message); }
     // ⛔ CCODE-388: the trades — what was bought from this character's holds is filled; what a store could not fill comes back
-    try { const tr = await syncTrades({ character }); if (tr.synced && tr.store) sharedTrades = tr.store; } catch (err) { console.warn("[trades] tick skipped:", err?.message); }
+    try { const tr = await syncTrades({ character, economy: CONTENT.rules?.economy || null }); if (tr.synced && tr.store) sharedTrades = tr.store; } catch (err) { console.warn("[trades] tick skipped:", err?.message); }
     const tv = await syncTravelers({ character, profile, locations: CONTENT.locations });   // CCODE-359: and where they are
     // ⛔ CCODE-360: invitations — what has arrived for this character, and any answer come back to one they sent.
     try { const iv = await syncInvitations({ character }); if (iv.synced) sharedInvites = iv.store; } catch (err) { console.warn("[invitations] tick skipped:", err?.message); }
@@ -8266,7 +8267,7 @@ function applyTurn(turn, resolution, playerWords = null) {
       else if (kind === "transfer") transferHolding(character, id, { toEntity: op.toEntity || op.steward || null, toName: op.toName || null, day: absoluteWorldDay(), worldCount: worldCount() });
       // ✅ Q8: sell what is stored, where the character stands, at this Reach's prices — refused elsewhere, and said so
       else if (kind === "sell") {
-        const r = sellStore(character, id, { economy: CONTENT.rules?.economy, cfg: CONTENT.rules?.economy?.holdStore, hereId: location.id, regionId: location.regionId || null, day: absoluteWorldDay() });
+        const r = sellStore(character, id, { economy: CONTENT.rules?.economy, cfg: CONTENT.rules?.economy?.holdStore, hereId: location.id, regionId: location.regionId || null, day: absoluteWorldDay() });   // CCODE-437: paid in this place's money
         if (!r.ok) console.warn("[holdingOps] sell refused:", r.why);
       }
       // ✅ Q18: a craft put to the place; the hands; the watch
@@ -8319,15 +8320,15 @@ function applyTurn(turn, resolution, playerWords = null) {
       if (!n) { said.push(`No hold called ${op?.hold || "that"} stands here to buy from.`); continue; }
       const pending = [...Object.values(sharedTrades?.orders || {}), ...(character.tradeOutbox || [])];
       const r = buyFromHold(character, n.card, { goods: op?.goods, units: op?.units, pending, worldDay: absoluteWorldDay(), nowISO: new Date().toISOString(),
-        worthBand: CONTENT.rules?.economy?.holdStore?.unitWorthBand || "useful" });
+        worthBand: CONTENT.rules?.economy?.holdStore?.unitWorthBand || "useful", regionId: hereRegionId(), economy: CONTENT.rules?.economy || null });   // CCODE-437
       if (!r.ok) { said.push(`No sale at ${n.card.name}: ${r.why}.`); continue; }
       character.tradeOutbox = [...(character.tradeOutbox || []), r.order];
-      said.push(`Bought ${r.order.units} ${r.order.goodsName} at ${n.card.name} for ${r.order.total} crystal.`);
+      said.push(`Bought ${r.order.units} ${r.order.goodsName} at ${n.card.name} for ${r.order.said || `${r.order.total} crystal`}.`);
     }
     if (said.length) character._correctionAside = [character._correctionAside, said.join(" ")].filter(Boolean).join(" ");
   });
   applyStep("debtOps", () => {
-    const rec = applyDebtOps(character, turn.debtOps || [], { day: absoluteWorldDay(), regionId: location?.regionId || null });
+    const rec = applyDebtOps(character, turn.debtOps || [], { day: absoluteWorldDay(), regionId: location?.regionId || null, economy: CONTENT.rules?.economy || null });
     character._debtReceipts = rec.filter(r => r && r.ok === false);
   });
   const partyResult = applyStep("partyOps", () => applyPartyOps(character, turn.partyOps || [], { day: absoluteWorldDay(), ladder: CONTENT.rules.subAttributeLadder })) || { departed: [], proposed: [], notes: [] };
@@ -13545,7 +13546,15 @@ function renderHoldingsTab(manageId = null) {
             ${cell("keeper", (L.keeper ? esc(L.keeper.name) : "<em>nobody — it will not climb</em>") + (h.owner ? ` <span class="hint">· ${esc(nameOf(h.owner))}'s own, paying your purse</span>` : ""))}
             ${cell("people", pop)}
             ${cell("per pass", `${benefit}${P.banks > 0 ? ` <span class="hint">· ${P.banks} banked</span>` : ""}`)}
-            ${cell("income vs keep", `<span class="${netCls}">${P.net >= 0 ? "+" : ""}${P.net}</span> <span class="hint">(${P.sells} in, ${P.upkeep} out)</span>`)}
+            ${cell("income vs keep", (() => {
+              // ⛔ CCODE-437: in the money the hold's place pays, as its keep line is — a Reach hold's ledger is its scrip, rounded as paid;
+              // and "in" counts the runner fees the net already counted
+              const rid437 = CONTENT.locations?.[h.locationId]?.regionId || null, eco437 = CONTENT.rules?.economy || null;
+              const inn = incomeHere((Number(P.sells) || 0) + (Number(P.fees) || 0), rid437, eco437), out = priceHere(Number(P.upkeep) || 0, rid437, eco437);
+              const net = Math.round((inn.amount - out.amount) * 100) / 100;
+              const unit = inn.currency === "crystal" ? "" : ` <span class="hint">${esc(inn.label.replace(/^[\d.]+ /, ""))}</span>`;
+              return `<span class="${netCls}">${net >= 0 ? "+" : ""}${net}</span> <span class="hint">(${inn.amount} in, ${out.amount} out)</span>${unit}`;
+            })())}
           </div>`; })()}
         ${(() => { // ✅ 2026-09-05 (Erik: "I can't open them to see what they produce and who is assigned, who lives there"): what is REAL, per hold
           const cfgS = holdCfgNow();
@@ -13564,7 +13573,7 @@ function renderHoldingsTab(manageId = null) {
           const crew = Object.values(character.worldState?.assignments || {}).filter(a => a && a.status !== "done" && (a.npcId === h.steward || a.id === h.fromAssignment)).map(a => `${esc(a.npcName || a.npcId)} — ${esc(String(a.charge || "").slice(0, 70))} (${esc(a.status || "working")})`);
           return `<div class="hint">where: ${where}</div>
         ${carLine}
-        <div class="hint">keeper: ${h.steward ? esc(nameOf(h.steward)) : "<em>nobody</em>"} · produces: ${esc(produces)}${up > 0 ? ` · keep: ${up} crystal per pass` : ""}</div>
+        <div class="hint">keeper: ${h.steward ? esc(nameOf(h.steward)) : "<em>nobody</em>"} · produces: ${esc(produces)}${up > 0 ? ` · keep: ${esc(priceHere(up, CONTENT.locations?.[h.locationId]?.regionId || null, CONTENT.rules?.economy || null).label)} per pass` : ""}</div>
         ${crew.length ? `<div class="hint">at work here: ${crew.join("; ")}</div>` : ""}
         <div class="hint">who lives here: ${(() => { const r = residentsOf(h, holdCfgNow()); return r.homes || r.people.length ? `${r.people.map(id => esc(nameOf(id))).join(", ") || "nobody named"}${r.homes ? ` · homes for ${r.homes}` : ""}` : "<em>nobody yet — quarters would house the people who work it</em>"; })()}</div>
         ${(() => { // ✅ Q18: the boosts — a craft put to the place, hands, a watch; and how it grows on its own
@@ -13795,6 +13804,7 @@ function renderCharacterScreen() {
           return band ? ` · <span class="purse-band" title="${esc(band.of)}">${esc(band.name)}</span>` : "";
         })()}</div>
         <div class="purse-table">${curDefs.map(curRow).join("")}</div>
+        <div class="hint" data-money-here>${esc(moneyLine(hereRegionId(), CONTENT.rules?.economy || null))}</div>
         ${estate.length ? `<div class="purse-trade">
           <div class="craft-tier-label">What your holdings are doing</div>
           <div class="hint" style="font-variant-numeric:tabular-nums" title="Every place you hold, summed over one pass: what the yields are worth, what a keeper turns into coin, runner fees, and the upkeep. The net is what the purse actually receives.">
@@ -15245,26 +15255,30 @@ async function callUnitTogether(unitId) {
   const u = unitsOf(character).find(x => x.id === unitId);
   if (!u) return;
   const wage = Number(CONTENT.rules?.economy?.holdStore?.growth?.wagePerHand) || 0;
-  const cur = CONTENT.rules?.economy?.holdStore?.upkeepCurrency || "crystal";
   const cost = callCostOf(character.bands || [], u.unit, { cfg: meleeCfg(), wagePerHand: wage, trainedAt: trainingHere() });
   if (!cost.heads) { alert("Nobody stands in it yet."); return; }
   ensurePurse(character);
-  const region = hereRegionId();
-  const can = canSettle(character, cost.total, { currency: cur, regionId: region, economy: CONTENT.rules?.economy || null, worldState: character.worldState || null });
-  if (cost.total > 0 && can && can.ok === false) { alert(`${cost.heads} heads at ${cost.perHead} is ${cost.total} ${cur}${can.why ? ` — ${can.why}` : ""}`); return; }
+  // ⛔ CCODE-437: they are paid where they are called, in that place's money — its own first, else what it takes at its worse rate
+  const region = hereRegionId(), eco437 = CONTENT.rules?.economy || null;
+  const cur = priceHere(cost.total, region, eco437).label;
+  const can = cost.total > 0 ? payAt(character, cost.total, region, eco437, { dry: true, worldState: character.worldState || null }) : null;
+  if (can && can.ok === false) { alert(`${cost.heads} heads at ${cost.perHead} is ${cur} — ${can.why}`); return; }
   const where = character.currentLocationId || null;
   const whereName = where ? (CONTENT.locations?.[where]?.name || character.generated?.location?.[where]?.name || where) : "where you stand";
   // ⚠️ ASKED IN THE SAME BREATH AS THE PRICE, because the posture is the other half of what being called means.
-  const camped = confirm(`Call ${u.name} together at ${whereName}?\n\n${cost.heads} heads × ${cost.perHead} = ${cost.total} ${cur}.\n${cost.trained ? `${trainedSaid(cost)}\n` : ""}${cost.authored ? "" : `(${cost.why})\n`}\nOK = make camp · Cancel = disperse to forage the region`);
+  const camped = confirm(`Call ${u.name} together at ${whereName}?\n\n${cost.heads} heads × ${cost.perHead} = ${cur}.\n${cost.trained ? `${trainedSaid(cost)}\n` : ""}${cost.authored ? "" : `(${cost.why})\n`}\nOK = make camp · Cancel = disperse to forage the region`);
   const posture = camped ? "camped" : "dispersed";
+  let paidSaid = null;
   if (cost.total > 0) {
-    const paid = debit(character, cur, cost.total, { regionId: region });
+    const paid = payAt(character, cost.total, region, eco437, { worldState: character.worldState || null });
     if (paid && paid.ok === false) { alert(paid.why || "It could not be paid."); return; }
+    paidSaid = saidPaid(paid);
   }
   const r = callUnit(character.bands || [], unitId, { day: absoluteWorldDay(), locationId: where, posture, paid: cost.total });
   if (!r.ok) { alert(r.why); return; }
   character.bands = r.bands;
-  queueHoldingEvent(character, `${u.name} is called together at ${whereName} — ${posture === "dispersed" ? "dispersed to forage" : "camped"}, ${cost.total} ${cur} paid.`);
+  { const cu = (character.bands || []).find(b => b && b.id === unitId); if (cu?.called && paidSaid) cu.called.paidSaid = paidSaid; }
+  queueHoldingEvent(character, `${u.name} is called together at ${whereName} — ${posture === "dispersed" ? "dispersed to forage" : "camped"}, ${paidSaid || "nothing"} paid.`);
   saveCharacter(character); renderBandsTab();
 }
 
@@ -15344,7 +15358,7 @@ function showLegionPlan(byId = null) {
         : `<p class="hint">Nothing to arrange.</p>`}
     </div>
     <div class="help-foot" style="flex:0 0 auto">
-      <span class="hint">${plan.after ? `${plan.after.heads} under arms when it is done. Drawing it up costs nothing; calling them would come to ${plan.after.wouldCost.total} ${esc(CONTENT.rules?.economy?.holdStore?.upkeepCurrency || "crystal")}.` : ""}</span>
+      <span class="hint">${plan.after ? `${plan.after.heads} under arms when it is done. Drawing it up costs nothing; calling them would come to ${esc(priceHere(plan.after.wouldCost.total, hereRegionId(), CONTENT.rules?.economy || null).label)}.` : ""}</span>
       ${plan.steps.length ? `<button class="btn" id="plan-do">Do all of it</button>` : ""}
       <button class="btn secondary" id="help-close">Close</button>
     </div></div>`;
@@ -15475,8 +15489,11 @@ function renderJobsTab(selId = null) {
       const fastest = plan.work.rates.slice().sort((a, b) => b.rate - a.rate)[0];
       const fastName = fastest?.by ? `${fastest.id === "player" ? "your" : `${pool.find(p => p.id === fastest.id)?.short || fastest.id}'s`} ${fastest.by.name} (tier ${fastest.by.tier})` : null;
       const youGo = team.some(p => p.isYou);
-      const purse = ensurePurse(character);
-      const short = cost > 0 && (Number(purse?.crystal) || 0) < cost;
+      // ⛔ CCODE-437: a job is paid for, and pays, in the money of the place it is done
+      const jobReg = CONTENT.locations?.[job.where]?.regionId || null, eco437 = CONTENT.rules?.economy || null;
+      const costDry = cost > 0 ? payAt(character, cost, jobReg, eco437, { dry: true }) : null;
+      const short = !!(costDry && !costDry.ok);
+      const moneyAt = (v, earned) => (earned ? incomeHere : priceHere)(v, jobReg, eco437).label;
       planHtml = `<div class="job-plan">
         <div class="job-odds">${oddsBarHtml(plan.dist, { wide: true })}<span class="odds-said">${esc(oddsSaid(plan.dist))}</span></div>
         <div class="codex-f"><strong>Who does what</strong> <span>${job.needs.map((n, i) => { const c = plan.cover[i];
@@ -15486,9 +15503,9 @@ function renderJobsTab(selId = null) {
         <div class="codex-f"><strong>The road</strong> <span>${plan.trip.there > 0 ? `${esc(jobDays(plan.trip.there))} each way${slowName ? `, at ${esc(slowName)}'s pace` : ""}${slow?.way ? ` — ${esc(slow.way)}` : ""}` : "they are already there"}</span></div>
         <div class="codex-f"><strong>Back</strong> <span>day ${Math.floor(plan.backAtHours / 24)} — ${esc(jobDays(plan.days))} from now${youGo ? ` <span class="hint">· you go yourself, so that time passes for you</span>` : ""}</span></div>
         <table class="job-pays"><tbody>${JOB_OUTCOMES.map(k => `<tr><td><i class="o-${k}"></i>${esc(degreeWord(k).replace(/^an? /, ""))} <span class="hint">${Math.round(100 * (plan.dist[k] || 0))}%</span></td>
-          <td>${esc(sayEffects(jobEffects(job, k, CONTENT.rules), team).join("; "))}</td></tr>`).join("")}</tbody></table>
-        <button class="btn" id="job-send"${short ? " disabled" : ""}>Send ${esc(team.map(p => (p.isYou ? "yourself" : p.short)).join(", "))}${cost ? ` — ${cost} crystal` : ""}</button>
-        ${short ? `<span class="hint bad">You have ${Number(purse?.crystal) || 0} crystal; this costs ${cost}.</span>` : ""}
+          <td>${esc(sayEffects(jobEffects(job, k, CONTENT.rules), team, { money: moneyAt }).join("; "))}</td></tr>`).join("")}</tbody></table>
+        <button class="btn" id="job-send"${short ? " disabled" : ""}>Send ${esc(team.map(p => (p.isYou ? "yourself" : p.short)).join(", "))}${cost ? ` — ${esc(priceHere(cost, jobReg, eco437).label)}` : ""}</button>
+        ${short ? `<span class="hint bad">${esc(costDry.why)}.</span>` : ""}
       </div>`;
     }
     const img = art(job.where);
@@ -15589,12 +15606,13 @@ function renderJobsTab(selId = null) {
     if (!team.length) return;
     const plan = planJob(job, team, ctx);
     const cost = jobCost(job);
-    if (cost > 0 && (Number(ensurePurse(character)?.crystal) || 0) < cost) { alert(`This costs ${cost} crystal.`); return; }
+    const jobReg2 = CONTENT.locations?.[job.where]?.regionId || null;
+    if (cost > 0) { const d = payAt(character, cost, jobReg2, CONTENT.rules?.economy || null, { dry: true }); if (!d.ok) { alert(d.why); return; } }
     const r = sendOnJob(character, job.id, team.map(p => p.id), plan, { nowHours, day: clk.day, names: Object.fromEntries(team.map(p => [p.id, p.isYou ? character.name : p.short])) });
     if (!r.ok) { alert(r.why); return; }
     // ⛔ CCODE-431: THEY LEAVE — the hands out of their band, a guard off the watch, until they are back
     detachForJob(character, r.entry);
-    if (cost > 0) debit(character, "crystal", cost);
+    if (cost > 0) payAt(character, cost, jobReg2, CONTENT.rules?.economy || null);   // CCODE-437
     delete _jobsUi.pick[job.id];
     _jobsUi.sel = null;
     // ⛔ YOU GO YOURSELF: the time is yours — the clock runs the job's length and it is settled when you are back
@@ -15723,10 +15741,10 @@ function renderBandsTab() {
     if (!u.called) {
       const c = costOf405(u);
       return `<div class="hint">On paper — nobody has been called together, and it costs nothing until they are.
-        ${c.heads ? `Calling them would take <strong>${c.total} ${esc(upkeepCur405)}</strong> (${c.heads} × ${c.perHead})${c.trained ? ` <span class="hint">— ${esc(trainedSaid(c))}</span>` : ""}${c.authored ? "" : ` <span class="hint">— ${esc(c.why)}</span>`}` : ""}</div>`;
+        ${c.heads ? `Calling them would take <strong>${esc(priceHere(c.total, hereRegionId(), CONTENT.rules?.economy || null).label)}</strong> (${c.heads} × ${c.perHead})${c.trained ? ` <span class="hint">— ${esc(trainedSaid(c))}</span>` : ""}${c.authored ? "" : ` <span class="hint">— ${esc(c.why)}</span>`}` : ""}</div>`;
     }
     const where = u.locationId ? (CONTENT.locations?.[u.locationId]?.name || character.generated?.location?.[u.locationId]?.name || u.locationId) : "nowhere named";
-    return `<div class="hint">Called on day ${u.called.day} and paid ${u.called.paid} ${esc(upkeepCur405)} — <strong>${u.posture === "dispersed" ? "dispersed to forage" : "camped"}</strong> at ${esc(where)}.
+    return `<div class="hint">Called on day ${u.called.day} and paid ${esc(u.called.paidSaid || `${u.called.paid} ${upkeepCur405}`)} — <strong>${u.posture === "dispersed" ? "dispersed to forage" : "camped"}</strong> at ${esc(where)}.
       ${u.posture === "dispersed" ? "Spread out, they live off the region and are slower to bring together." : "Concentrated, and fed from what you carry."}</div>`;
   };
 
@@ -15736,11 +15754,11 @@ function renderBandsTab() {
       ${(() => { // ⛔ CCODE-435: where the hands with no home hold sleep — the barracks, and what the rest cost to quarter
         const q = quarteringOf(character, holdCfgNow(), { martial: CONTENT.rules?.martial || {} });
         if (!q.homeless) return "";
-        const cur = CONTENT.rules?.economy?.holdStore?.upkeepCurrency || "crystal";
+        const at437 = (v) => esc(priceHere(v, hereRegionId(), CONTENT.rules?.economy || null).label);   // CCODE-437: where you are, in its money
         const slept = Math.min(q.beds, q.homeless);
         return `<div class="codex-f hint" data-quartering>${q.homeless} ${q.homeless === 1 ? "hand has" : "hands have"} no hold to keep them — ${q.beds
           ? (q.quartered ? `${slept} sleep in your barracks, ${q.quartered} ${q.quartered === 1 ? "is" : "are"} quartered` : `all of them sleep in your barracks`)
-          : `you keep no barracks, so ${q.homeless === 1 ? "they are" : "all are"} quartered`}${q.quartered ? ` at ${q.perHead} ${esc(cur)} a head a pass (${q.cost} ${esc(cur)})` : ""}.</div>`;
+          : `you keep no barracks, so ${q.homeless === 1 ? "they are" : "all are"} quartered`}${q.quartered ? ` at ${at437(q.perHead)} a head a pass (${at437(q.cost)})` : ""}.</div>`;
       })()}
       ${units.filter(u => !u.inLegion).length ? units.filter(u => !u.inLegion).map(u => `<div style="margin-top:10px">
         ${units.filter(x => !x.inLegion).length === 1 && !u.isLegion

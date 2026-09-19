@@ -29,7 +29,7 @@
 import { legionClash, contingentsFromPeople } from "./melee.js";
 import { contributionsOf } from "./combatants.js";   // SNG-541c / Erik: a defender is what they can DO, not one more body
 import { unitWorth } from "./holdings.js";
-import { credit } from "./purse.js";
+import { earnAt, saidEarned } from "./money.js";   // ⛔ CCODE-437: sold for the market's own money — `earnAt` goes through `credit`   // ⛔ CCODE-437: a load is sold for the money of the market it reaches
 import { enterDeathState } from "./death.js";
 import { routeBetween } from "./journey.js";
 
@@ -224,7 +224,7 @@ export const ROAD_HAZARD_PER_DANGER_DAY = 0.003;
  *  ⚠️ HAZARD IS PER DAY AND PER THE ROAD'S OWN DANGER, so a long road through bad country is genuinely worse
  *  than a short one — which is the whole reason `routeBetween` returns two options instead of one.
  *
- *  ⛔ ARRIVAL SELLS AT THE DESTINATION'S PRICES, through `credit` — the purse's ONE door in, so trade moves
+ *  ⛔ ARRIVAL SELLS AT THE DESTINATION'S PRICES, through `earnAt` and so `credit` — the purse's ONE door in, so trade moves
  *  coin and never mints it. Returns the receipts the news reads. */
 export function tickCaravans(character, {
   day = null, locations = {}, economy = null, cfg = null, rng = Math.random, people = {}, perDangerChance = ROAD_HAZARD_PER_DANGER_DAY,
@@ -288,10 +288,10 @@ export function arriveCaravan(character, car, { locations = {}, economy = null, 
     car.events.push({ at: day, what: `reached ${dest?.name || car.to} with nothing left to sell` });
     return { ok: false, why: "it arrived empty", sold: {}, crystal: 0, regionId };
   }
-  const cr = credit(character, "crystal", total, { origin: "traded", regionId });
+  const cr = earnAt(character, total, regionId, economy, { origin: "traded" });
   if (!cr.ok) { car.events.push({ at: day, what: `reached ${dest?.name || car.to}, but the coin would not settle` }); return { ok: false, why: cr.why, sold, crystal: 0, regionId }; }
-  car.events.push({ at: day, what: `reached ${dest?.name || car.to} — ${describe(Object.fromEntries(Object.entries(sold).map(([g, s]) => [g, s.units])))} sold for ${total} crystal` });
-  return { ok: true, sold, crystal: total, regionId };
+  car.events.push({ at: day, what: `reached ${dest?.name || car.to} — ${describe(Object.fromEntries(Object.entries(sold).map(([g, s]) => [g, s.units])))} sold for ${saidEarned(cr)}` });
+  return { ok: true, sold, crystal: total, said: saidEarned(cr), regionId };
 }
 
 /** ⚑ WHAT THE GM IS TOLD, so a caravan is something the world MENTIONS rather than a number in a panel. */

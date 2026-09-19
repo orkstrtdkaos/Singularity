@@ -6663,7 +6663,9 @@ console.log("\n── §69 · the five — roll=card, meaning ceiling, stacking 
     check("§69: …the narrator's holding line carries the store; the Holdings tab shows it and sells it where you stand", /store: 12 raw_material/.test(H69.holdingsForGM(c, null, { hereId: null, nameOf: id => id })) && /data-hold-sell=/.test(app69) && /storeWorth\(h, \{ economy: CONTENT\.rules\?\.economy/.test(app69)); }
   { const c = mk69(); c.holdings = [mine69("thriving")]; c.holdings[0].lastMovedWorldCount = 0; c.company = [{ npcId: "greta" }]; c.holdingOffers = [];
     const r = WT69.advanceHoldings({ character: c, content: C69, now: Date.now(), rng: () => 0.99 });
-    check("§69: ⛔ …and it runs on the TICK unattended — one pass yields into the store and SETTLES the money; a caller without content sees the old tick", r.moved === 1 && c.holdings[0].store?.raw_material > 0 && c.purse.crystal !== 100 && c.purse.crystal > 100   // ⚠️ was `< 100`, which pinned the DEFECT: a kept enterprise drained the purse every pass and credited nothing. Erik ruled otherwise on the Fell Pell (§103), and a keeper who sells is what a keeper IS — so the tick still settles, and a KEPT place now comes out ahead
+    check("§69: ⛔ …and it runs on the TICK unattended — one pass yields into the store and SETTLES the money; a caller without content sees the old tick", r.moved === 1 && c.holdings[0].store?.raw_material > 0
+      // CCODE-437: the mine stands in the Ascent, a Reach, so its keeper is paid Ascent scrip — the money settles, and its WORTH is what rose
+      && (await import("../engine/purse.js")).worthOf(c.purse, C69.rules.economy).totalInCrystal > 100   // ⚠️ was `< 100`, which pinned the DEFECT: a kept enterprise drained the purse every pass and credited nothing. Erik ruled otherwise on the Fell Pell (§103), and a keeper who sells is what a keeper IS — so the tick still settles, and a KEPT place now comes out ahead
       && (() => { const c0 = mk69(); c0.holdings = [mine69("thriving")]; c0.holdings[0].lastMovedWorldCount = 0; c0.company = [{ npcId: "greta" }]; WT69.advanceHoldings({ character: c0 }); return !c0.holdings[0].store && c0.purse.crystal === 100; })()); }
   // seeded rng helper for the raid share
   function mkRng69(seed) { let s = (seed + 1) * 2654435761; return () => { s |= 0; s = (s + 0x6D2B79F5) | 0; let t = Math.imul(s ^ (s >>> 15), 1 | s); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
@@ -9049,11 +9051,15 @@ console.log("\n── §100 · the numbers are read, and a load on the road can 
   CV100.arriveCaravan(near, sN.caravan, { locations: locs100, economy: econ100, cfg: cfg100, day: 5 });
   const far = mk(); const sF = CV100.sendCaravan(far, { holdingId: "h", toId: "the_gearlands_verge", carriers: ids(2), locations: locs100, cfg: cfg100, day: 0 });
   CV100.arriveCaravan(far, sF.caravan, { locations: locs100, economy: econ100, cfg: cfg100, day: 5 });
+  const P100 = await import("../engine/purse.js");
+  const W100 = (c) => Math.round(P100.worthOf(c.purse, econ100).totalInCrystal * 100) / 100;   // CCODE-437: what a purse is WORTH
   check("§100: ⛔ THE DIFFERENTIAL IS REACHED — the same 8 units fetch far more where they are wanted",
-    far.purse.crystal > near.purse.crystal * 2 && near.purse.crystal > 0,
-    `${near.purse.crystal} at the Crossing vs ${far.purse.crystal} in the Gearlands`);
-  check("§100: …and the coin comes through `credit`, the purse's one door in — trade MOVES coin, never mints it",
-    /import \{ credit \} from "\.\/purse\.js"/.test(rd("engine/caravan.js")));
+    // CCODE-437: the Gearlands is a Reach and pays its own scrip, so the differential is read by WORTH, never by one money's count
+    W100(far) > W100(near) * 2 && W100(near) > 0,
+    `${W100(near)} at the Crossing vs ${W100(far)} in the Gearlands, in worth`);
+  check("§100: …and the coin comes through `credit`, the purse's one door in — trade MOVES coin, never mints it (through `earnAt`, CCODE-437)",
+    /earnAt\(character, total, regionId, economy, \{ origin: "traded" \}\)/.test(rd("engine/caravan.js"))
+    && /credit\(character, here\.pays\.currency, amount, \{ origin, regionId: here\.pays\.regionId \}\)/.test(rd("engine/money.js")));
 
   // ⛔ ON THE ROAD OR AT THE HOLD, NEVER BOTH — a load left on the store could be sold twice.
   const dbl = mk();
@@ -9317,7 +9323,8 @@ console.log("\n── §103 · the person who runs the place while you are elsew
     `${unkept.purse.crystal - 500} and ${unkept.holdings[0].store.raw_material} stranded`);
 
   check("§103: …the coin comes through `credit`, so a keeper's sale MOVES coin and never mints it",
-    /credit\(character, cfg\?\.upkeepCurrency \|\| "crystal", earned/.test(rd("engine/holdings.js")));
+    /earnAt\(character, earned, regionId, economy, \{ origin: "traded" \}\)/.test(rd("engine/holdings.js"))   // CCODE-437: in the place's money
+    && /credit\(character, here\.pays\.currency, amount, \{ origin, regionId: here\.pays\.regionId \}\)/.test(rd("engine/money.js")));
   check("§103: …and the share is a NAMED dial, not a number buried in an expression",
     /cfg\?\.keeperSells \?\? 0\.5/.test(rd("engine/holdings.js")));
   check("§103: ⚑ …and the receipt says who sold what, so the world can speak of it",
@@ -19642,7 +19649,7 @@ console.log("\n── §273 · trading with another player's hold ──");
   check("§273: the op is applied through buyFromHold with what is already bought counted; the owner's toggle writes `trade`; the tick settles; the GM may not sell from the ask channel",
     /applyStep\("holdTrades"/.test(A273) && /const r = buyFromHold\(character, n\.card, \{ goods: op\?\.goods, units: op\?\.units, pending,/.test(A273)
     && /data-hold-trade="\$\{esc\(h\.id\)\}"/.test(A273) && /h\.trade = !!cb\.checked;/.test(A273)
-    && /const tr = await syncTrades\(\{ character \}\)/.test(A273)
+    && /const tr = await syncTrades\(\{ character[ ,}]/.test(A273)
     && /"holdTrades"/.test(rd("engine/gm.js")) && (await import("../engine/gm.js")).ASK_FORBIDDEN.includes("holdTrades"));
 }
 
@@ -21903,7 +21910,7 @@ console.log("\n── §300 · jobs — sent, timed, and decided by the dice the
     && A300.indexOf("markJobsTold(character, jobsTold420)") > A300.indexOf("if (!result.ok) { renderPlay(null, { error: result.error }); return null; }"));
   check("§300: …and the Jobs tab is a tab, whose send refuses before it charges and runs the clock when you go yourself",
     /id="tab-jobs"/.test(A300) && /go\("tab-jobs", \(\) => renderJobsTab\(\)\)/.test(A300)
-    && A300.indexOf("const r = sendOnJob(character, job.id") < A300.indexOf("if (cost > 0) debit(character, \"crystal\", cost);")
+    && A300.indexOf("const r = sendOnJob(character, job.id") < A300.indexOf("if (cost > 0) payAt(character, cost, jobReg2")
     && /if \(team\.some\(p => p\.isYou\)\) \{ advanceClock\(character\.clock, plan\.backAtHours - nowHours\); settleJobsNow\(\); \}/.test(A300));
   const whole300 = JB.planJob({ ...job300, effort: 0.01 }, [{ id: "a", skills: [] }], { rules: RU300, fnIndex: fnIndex300, routeOf: () => ({ days: 0 }), nowHours: 442 });
   check("§300: ⚠️ …and a return is a WHOLE hour, at least one ahead — the clock floors its hour, so a job due at a fraction of one never comes home",
@@ -22824,6 +22831,71 @@ console.log("\n── §315 · the phantom axis — one door into the fingerprin
   check("§315: …and with no content in reach it moves only the placeholders, which are never an axis",
     JSON.stringify(f2.alignment) === JSON.stringify({ violence_peace: 0.2, tradition_innovation: 0.3 }) && f2._retiredAxes?.spectrumId === -0.5,
     JSON.stringify(f2.alignment));
+}
+
+// ══════════ §316 · CCODE-437 — MONEY BY PLACE: LOCAL FIRST, ELSE A WORSE RATE ══════════
+// Erik 2026-09-19: "The world has several kinds and so far we've just been using crystal... let's fix that" — and his pick, LOCAL FIRST,
+// ELSE A WORSE RATE. Five currencies and an acceptance table were authored and nothing read the table: every flow was crystal.
+console.log("\n── §316 · money by place — what a place pays in, what it takes and how dear, and every flow through the two doors ──");
+{
+  const M316 = await import("../engine/money.js");
+  const W316 = await import("../engine/worldtick.js");
+  const { loadContentHeadless: lch316 } = await import("./headless_content.mjs");
+  const CT316 = await lch316();
+  const eco = CT316.rules.economy;
+  const who = (p) => ({ purse: { crystal: 0, coin: 0, paper: 0, marks: 0, scrip: {}, ...p } });
+  const authored = { ...eco, regions: [...(eco.regions || []), { regionId: "the_test_reach", money: { class: "foothills" } }] };
+  check("§316: ⛔ which of the three acceptance classes a place is in — the Crossing's own region, foothill money, or a Reach — and an authored class wins",
+    M316.moneyClassOf("the_center", eco) === "the_crossing" && ["valley", "the_echo_vale", "foothill_plainstead", null].every(r => M316.moneyClassOf(r, eco) === "foothills")
+    && M316.moneyClassOf("the_palelands", eco) === "reaches" && M316.moneyClassOf("the_test_reach", authored) === "foothills");
+  const a = who({ crystal: 100 }), a1 = M316.payAt(a, 14, "the_palelands", eco);
+  const b = who({ crystal: 100, scrip: { the_palelands: 30 } }), b1 = M316.payAt(b, 14, "the_palelands", eco);
+  const cr = eco.acceptance.acceptanceTable.the_crossing.spread;
+  check("§316: ⛔ LOCAL FIRST, ELSE A WORSE RATE — a Reach's keep is paid in its scrip, and what that does not cover in crystal at the Reach's rate",
+    a1.ok && a.purse.crystal === 100 - 14 / M316.MONEY_DEFAULTS.reachCrystalRate
+    && b1.ok && b.purse.scrip.the_palelands === 0 && b1.paid[0].currency === "scrip" && b1.paid[0].local === true && b1.paid[1].currency === "crystal" && b.purse.crystal === 92.75,
+    JSON.stringify({ a: a.purse, b: b.purse, cr }));
+  const c = who({ crystal: 5 }), c1 = M316.payAt(c, 14, "the_palelands", eco);
+  const d = who({ crystal: 3 }), d1 = M316.payAt(d, 2.1, "valley", eco, { dry: true });
+  const e = who({ coin: 40 }), e1 = M316.payAt(e, 10, "the_center", eco);
+  check("§316: ⛔ ALL OR NOTHING, in each money's authored piece — a keep nobody can meet moves nothing and says what is owed; a dry run moves nothing; old coin goes by the half",
+    !c1.ok && c.purse.crystal === 5 && /Palelands scrip is owed/.test(c1.why)
+    && d1.ok && d.purse.crystal === 3 && d1.paid[0].amount === 2.25
+    && e1.ok && e.purse.coin === 20 && e1.paid[0].amount === 20);
+  const f = who({}), f1 = M316.earnAt(f, 14, "the_palelands", eco, { origin: "traded" });
+  const g = who({}), g1 = M316.earnAt(g, 14, "valley", eco, { origin: "traded" });
+  check("§316: …and a place PAYS in its own money — a Reach its scrip, rounded down to the piece; everywhere else crystal",
+    f1.ok && f1.currency === "scrip" && f.purse.scrip.the_palelands === 46.66 && f.purse.crystal === 0 && g1.ok && g.purse.crystal === 14
+    && M316.priceHere(14, "the_palelands", eco).label === "46.67 Palelands scrip" && M316.incomeHere(14, "the_palelands", eco).amount === 46.66);
+  const code316 = (p) => rd(p).replace(/\r\n/g, "\n").split("\n").filter(l => !/^\s*(\/\/|\*)/.test(l)).join("\n");
+  const flows = ["engine/holdings.js", "engine/caravan.js", "engine/jobs.js", "engine/holdtrade.js", "app.js"].map(p => [p, code316(p)]);
+  const hard = flows.flatMap(([p, s]) => (s.match(/\b(?:credit|debit)\([^)\n]*"crystal"[^)\n]*\)/g) || []).filter(m => !/credit\(buyer, "crystal", Number\(o\.refund\)/.test(m)).map(m => `${p}: ${m}`));
+  check("§316: ⛔ NO FLOW HARDCODES CRYSTAL ANY MORE — the keep, a keeper's sale, runner fees, a build, a store sold, quartering, a caravan, a job, a call and a trade between holds all pay through `payAt` and are paid through `earnAt`",
+    hard.length === 0
+    && /const r = payAt\(character, up, regionId, economy\);/.test(flows[0][1]) && /earnAt\(character, earned, regionId, economy, \{ origin: "traded" \}\)/.test(flows[0][1])
+    && /const r = payAt\(character, q\.cost, regionId, economy\);/.test(flows[0][1]) && /earnAt\(character, total, regionId, economy, \{ origin: "traded" \}\)/.test(flows[1][1])
+    && /const e = earnAt\(character, fx\.crystal, reg437, eco437, \{ origin: "reward" \}\)/.test(flows[2][1]) && /const paid = payAt\(buyer, total, regionId, economy\);/.test(flows[3][1])
+    && /const paid = payAt\(character, cost\.total, region, eco437/.test(flows[4][1]) && /if \(cost > 0\) payAt\(character, cost, jobReg2/.test(flows[4][1]),
+    hard.join(" | "));
+  const HT316 = await import("../engine/holdtrade.js");
+  const buyer = { id: "b1", name: "B", purse: { crystal: 0, coin: 0, paper: 0, marks: 0, scrip: { the_palelands: 100 } }, inventory: [] };
+  const card = { key: "k", id: "h", name: "The Test Hold", ownerId: "o1", trades: { goods: [{ goods: "raw_material", name: "raw material", units: 10, each: 3 }] } };
+  const bought = HT316.buyFromHold(buyer, card, { goods: "raw_material", units: 4, regionId: "the_palelands", economy: eco });
+  const back = HT316.refundOrders(buyer, [{ ...bought.order, status: "short", filled: 2, refund: 6 }], { worldDay: 1 });
+  check("§316: ⛔ a trade between holds is paid in the money of the place the hold stands, and a refund comes back in the money it was paid in",
+    bought.ok && bought.order.paid[0].currency === "scrip" && bought.order.paid[0].amount === 40 && buyer.purse.scrip.the_palelands === 80
+    && /20 Palelands scrip comes back to you/.test(back.news[0]?.text || ""), JSON.stringify({ o: bought.order?.paid, n: back.news[0]?.text }));
+  const ch = { name: "T", clock: { day: 1 }, worldState: {}, npcRegistry: { k: { id: "k", name: "K", status: "active" } }, purse: { crystal: 100, coin: 0, paper: 0, marks: 0, scrip: {} },
+    holdings: [{ id: "h1", name: "The Reach Hold", kind: "post", locationId: "the_old_warden_post", condition: "thriving", steward: "k", store: { raw_material: 20 }, history: [], lastMovedWorldCount: 0 }] };
+  W316.advanceHoldings({ character: ch, now: Date.now(), content: CT316, rng: () => 0.5 });
+  check("§316: …and on the world tick's hold pass: a hold in a Reach is paid in that Reach's scrip and keeps itself from it",
+    CT316.locations.the_old_warden_post?.regionId === "the_palelands" && Number(ch.purse.scrip?.the_palelands) > 0 && ch.purse.crystal === 100,
+    JSON.stringify(ch.purse));
+  check("§316: ⛑ the purse says what money the place you stand in pays and takes",
+    /data-money-here>\$\{esc\(moneyLine\(hereRegionId\(\), CONTENT\.rules\?\.economy \|\| null\)\)\}/.test(code316("app.js"))
+    && /^Money in the Palelands: paid out in Palelands scrip; also taken: crystal \(70% of its worth\)\.$/.test(M316.moneyLine("the_palelands", eco))
+    // ⛔ and it claims no exchange: changing money is its own door (Erik: the Crossing universal, a Reach by what it wants), built next
+    && !/change money|changed here/.test(["the_center", "valley", "the_palelands"].map(r => M316.moneyLine(r, eco)).join(" ")));
 }
 
 /* ══════════ REPORT ══════════ */

@@ -26,7 +26,7 @@ import { activeCompany } from "./company.js";
 import { routeBetween } from "./journey.js";
 import { journeyCraftsOf, mountedFrom } from "./journeyplan.js";   // CCODE-432: a team setting out from a stable rides
 import { abilityTier } from "./skilltree.js";
-import { credit, debit } from "./purse.js";
+import { payAt, earnAt, saidPaid, saidEarned, priceHere } from "./money.js";   // ⛔ CCODE-437: a job pays in the money of where it is done
 import { addItem } from "./inventory.js";
 import { recordDeed } from "./reputation.js";
 import { applyLevelUps } from "./progression.js";
@@ -304,9 +304,10 @@ const DEGREE_WORD = { crit_success: "a strong success", success: "a success", pa
 export const degreeWord = (k) => DEGREE_WORD[k] || String(k || "");
 
 /** The effects as the lines a player and the GM read. Pure. */
-export function sayEffects(fx, team = []) {
+export function sayEffects(fx, team = [], { money = null } = {}) {
   const out = [];
-  if (fx.crystal) out.push(`${fx.crystal > 0 ? "+" : "−"}${Math.abs(fx.crystal)} crystal${fx.crystal < 0 ? " (an overrun)" : ""}`);
+  // ⛔ CCODE-437: `money(value, earned)` says a value in the place's own money, rounded as it will be paid
+  if (fx.crystal) out.push(`${fx.crystal > 0 ? "+" : "−"}${typeof money === "function" ? money(Math.abs(fx.crystal), fx.crystal > 0) : `${Math.abs(fx.crystal)} crystal`}${fx.crystal < 0 ? " (an overrun)" : ""}`);
   // xp is the character's only when they go; the people who went grow from a job done well instead (`applyJobEffects`)
   const youGo = !team.length || team.some(p => p.isYou);
   if (fx.xp && youGo) out.push(`+${fx.xp} xp`);
@@ -584,10 +585,12 @@ export function applyJobEffects(character, entry, fx, { content = {}, itemCatalo
   const team = (entry.team || []).map(String);
   const went = team.includes("player");
   const place = content.locations?.[entry.job?.where] || null;
-  if (fx.crystal > 0) { if (credit(character, "crystal", fx.crystal, { origin: "reward" }).ok) lines.push(`+${fx.crystal} crystal`); }
+  // ⛔ CCODE-437: a job pays, and an overrun is paid, in the money of the place it was done
+  const eco437 = rules.economy || null, reg437 = place?.regionId || null;
+  if (fx.crystal > 0) { const e = earnAt(character, fx.crystal, reg437, eco437, { origin: "reward" }); if (e.ok && e.amount > 0) lines.push(`+${saidEarned(e)}`); }
   else if (fx.crystal < 0) {
-    const r = debit(character, "crystal", -fx.crystal);
-    lines.push(r.ok ? `−${-fx.crystal} crystal (an overrun)` : `an overrun of ${-fx.crystal} crystal nobody could pay`);
+    const r = payAt(character, -fx.crystal, reg437, eco437);
+    lines.push(r.ok ? `−${saidPaid(r)} (an overrun)` : `an overrun of ${priceHere(-fx.crystal, reg437, eco437).label} nobody could pay`);
   }
   if (fx.xp > 0 && went) {
     character.xp = num(character.xp, 0) + fx.xp;

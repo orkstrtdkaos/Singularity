@@ -19,7 +19,8 @@
  *  never say. It is authored with Erik directly, separately, and it is not modelled here.
  */
 
-import { debit, credit } from "./purse.js";        // Q8: upkeep leaves the purse, a sold store enters it · Q5-B: settling pays
+import { debit } from "./purse.js";        // Q5-B: settling a debt pays · ⛔ CCODE-437: every other flow goes through money.js
+import { payAt, earnAt, saidPaid, saidEarned, priceHere, moneyHere } from "./money.js";   // ⛔ CCODE-437: money by place — local first, else a worse rate
 import { contributionsOf } from "./combatants.js";   // SNG-541c / Erik: a defender is what they can DO, not one more body
 import { regionDemand } from "./economy.js";       // Q8: a unit is worth what THIS Reach wants it for
 import { sheetFor as personSheetFor, tierOf as tierOfLevel, personRecordFor } from "./npcsheet.js";   // Q18 → v2 §1: the keeper's tier sets the FLOOR
@@ -262,7 +263,7 @@ export function quarteringOf(character, cfg = null, { martial = {} } = {}) {
 
 /** ⛔ CCODE-435 — THE QUARTERING, PAID EACH PASS through the purse's one door, on its own three-day counter (`worldState.quarteredAtCount`).
  *  A pass nobody can pay is SAID, and nothing is invented about what unpaid soldiers do. Mutates; → the lines to say. */
-export function chargeQuartering(character, { cfg = null, martial = {}, worldCount = null, currency = "crystal", everyHours = 72 } = {}) {
+export function chargeQuartering(character, { cfg = null, martial = {}, worldCount = null, regionId = null, economy = null, everyHours = 72 } = {}) {
   const ws = character?.worldState;
   if (!ws || !Number.isFinite(Number(worldCount))) return [];
   const last = Number(ws.quarteredAtCount);
@@ -270,11 +271,12 @@ export function chargeQuartering(character, { cfg = null, martial = {}, worldCou
   ws.quarteredAtCount = Number(worldCount);
   const q = quarteringOf(character, cfg, { martial });
   if (!q.cost) return [];
-  const r = debit(character, currency, q.cost, {});
+  // ⛔ CCODE-437: paid where you are, in that place's money — its own first, else what it takes at its worse rate
+  const r = payAt(character, q.cost, regionId, economy);
   const why = q.beds ? "found no bed in your barracks" : "have no barracks to sleep in";
   return [r?.ok
-    ? `${q.quartered} of your hands ${why} and are quartered — ${q.cost} ${currency} this pass.`
-    : `${q.quartered} of your hands ${why} and are quartered, and this pass's ${q.cost} ${currency} could not be paid.`];
+    ? `${q.quartered} of your hands ${why} and are quartered — ${saidPaid(r)} this pass.`
+    : `${q.quartered} of your hands ${why} and are quartered, and this pass's ${priceHere(q.cost, regionId, economy).label} could not be paid.`];
 }
 
 /** ⛔ CCODE-432 (SNG-627; Erik: "Stables can shorten journeys but can also house the mounts for cavalry") — WHERE YOU KEEP MOUNTS. Pure. */
@@ -509,7 +511,7 @@ export function ensureDebts(character) {
   return character.worldState.debts;
 }
 
-export function recordDebt(character, { holderId = null, kind = "unpaid-price", amount = null, currency = "crystal", reason = null, day = null, communityId = null, holdingId = null } = {}) {
+export function recordDebt(character, { holderId = null, kind = "unpaid-price", amount = null, currency = "crystal", reason = null, day = null, communityId = null, holdingId = null, regionId = null } = {}) {
   const debts = ensureDebts(character);
   if (!kind) return null;
   const cur = String(currency || "crystal");
@@ -522,7 +524,7 @@ export function recordDebt(character, { holderId = null, kind = "unpaid-price", 
     ? (prev && Number.isFinite(prev.amount) ? prev.amount + amt : amt)
     : (prev?.amount ?? null);
   const rec = {
-    kind, amount: nextAmount, currency: cur, reason: reason || prev?.reason || null,
+    kind, amount: nextAmount, currency: cur, ...(cur === "scrip" ? { regionId: regionId || prev?.regionId || null } : {}), reason: reason || prev?.reason || null,
     sinceDay: prev?.sinceDay ?? day ?? null, heldBy: holderId || null,
     communityId: communityId || prev?.communityId || null, holdingId: holdingId || prev?.holdingId || null,
     escalation: prev?.escalation || 0, lastMovedDay: prev?.lastMovedDay ?? day ?? null,
@@ -598,20 +600,22 @@ export function debtsForGM(character, { nameOf = null } = {}) {
 }
 
 /** The GM's ops: record · settle (the purse pays) · forgive (a deed outweighed it). Returns receipts, refusals said. */
-export function applyDebtOps(character, ops = [], { day = null, regionId = null } = {}) {
+export function applyDebtOps(character, ops = [], { day = null, regionId = null, economy = null } = {}) {
   const out = [];
   for (const op of (Array.isArray(ops) ? ops : []).slice(0, 4)) {
     const kind = String(op?.op || "").toLowerCase();
     const key = op?.holderId || op?.npcId || null;
     if (kind === "record") {
-      const r = recordDebt(character, { holderId: key, kind: op.kind || "unpaid-price", amount: op.amount ?? null, currency: op.currency || "crystal",
-        reason: op.reason || op.why || null, day, communityId: op.communityId || null });
+      // ⛔ CCODE-437: a debt the fiction names no money for is owed in the money of the place it was made — a Reach's is its scrip
+      const own = moneyHere(regionId, economy).pays;
+      const r = recordDebt(character, { holderId: key, kind: op.kind || "unpaid-price", amount: op.amount ?? null, currency: op.currency || own.currency,
+        reason: op.reason || op.why || null, day, communityId: op.communityId || null, regionId: op.regionId || (op.currency ? regionId : own.regionId) });
       out.push({ op: kind, ok: !!r, key, ...(r ? {} : { why: "a debt needs a holder and is never in coin" }) });
     } else if (kind === "settle") {
       const d = character?.worldState?.debts?.[key];
       if (!d) { out.push({ op: kind, ok: false, key, why: "no such debt" }); continue; }
       if (Number.isFinite(d.amount) && d.amount > 0) {
-        const paid = debit(character, d.currency || "crystal", d.amount, { regionId });
+        const paid = debit(character, d.currency, d.amount, { regionId: d.regionId || regionId });   // an obligation is paid in its own money
         if (!paid.ok) { out.push({ op: kind, ok: false, key, why: paid.why }); continue; }
       }
       settleDebt(character, key, { how: "paid", day });
@@ -825,12 +829,13 @@ export function tickStore(character, holding, { cfg = null, economy = null, regi
       sold[g] = units; earned += val;
     }
     if (earned > 0) {
-      const cr = credit(character, cfg?.upkeepCurrency || "crystal", earned, { origin: "traded", regionId });
-      if (cr.ok) out.keeperSold = { by: holding.steward, goods: sold, crystal: earned };
+      // ⛔ CCODE-437: the keeper is paid in the money of the place it sells — a Reach's scrip in a Reach
+      const cr = earnAt(character, earned, regionId, economy, { origin: "traded" });
+      if (cr.ok) out.keeperSold = { by: holding.steward, goods: sold, crystal: earned, said: saidEarned(cr) };
     }
   }
   const alms = pilgrimIncome(holding, { cfg, meaning });
-  if (alms > 0) { const c = credit(character, cfg.upkeepCurrency || "crystal", alms, { origin: "gift" }); if (c.ok) out.pilgrims = alms; }
+  if (alms > 0) { const c = earnAt(character, alms, regionId, economy, { origin: "gift" }); if (c.ok) { out.pilgrims = alms; out.pilgrimsSaid = saidEarned(c); } }
   // ⛔ RUNNER FEES, BEFORE THE KEEP — so a relay post pays for itself in the same pass (Erik: "maintain the post minimally").
   // ⛔ SPEC_hold_costs §3/Q1–Q2 — A BUILD IN PROGRESS pays itself off from the store each pass and finishes when its days have run.
   out.built = [];
@@ -853,17 +858,18 @@ export function tickStore(character, holding, { cfg = null, economy = null, regi
   if (svc) {
     if (svc.gate) holding.relayPasses = (Number(holding.relayPasses) || 0) + 1; else if (holding.relayPasses) delete holding.relayPasses;
     if (svc.crystal > 0) {
-      const c = credit(character, cfg.upkeepCurrency || "crystal", svc.crystal, { origin: "relay" });
+      const c = earnAt(character, svc.crystal, regionId, economy, { origin: "relay" });   // ⛔ CCODE-437: the fees are the place's money
       if (c.ok) {
-        out.relay = { crystal: svc.crystal, traffic: svc.traffic, gate: svc.gate, ramp: svc.ramp, first: !holding.relayAnnounced, wordOut: svc.ramp >= 1 && !holding.relayWordAnnounced };
+        out.relay = { crystal: svc.crystal, said: saidEarned(c), traffic: svc.traffic, gate: svc.gate, ramp: svc.ramp, first: !holding.relayAnnounced, wordOut: svc.ramp >= 1 && !holding.relayWordAnnounced };
         holding.relayAnnounced = true; if (svc.ramp >= 1) holding.relayWordAnnounced = true;
       }
     }
   }
   const up = upkeepFor(holding, cfg);
   if (up > 0) {
-    const r = debit(character, cfg.upkeepCurrency || "crystal", up, {});
-    if (r.ok) out.upkeep = up; else { out.short = up; holding.arrears = (Number(holding.arrears) || 0) + up; }
+    // ⛔ CCODE-437: the keep is paid where the hold stands — its own money first, else what that place takes at its worse rate
+    const r = payAt(character, up, regionId, economy);
+    if (r.ok) { out.upkeep = up; out.upkeepSaid = saidPaid(r); } else { out.short = up; out.shortWhy = r.why; holding.arrears = (Number(holding.arrears) || 0) + up; }
   }
   const total = storeTotal(holding);
   const fullAt = Math.max(1, Number(cfg.fullAt) || 40);
@@ -909,15 +915,15 @@ export function storeNews(holding, st) {
   }
   if (st.raid?.voucherCost) lines.push(`${st.raid.voucherCost.voucherName}'s word for ${st.raid.voucherCost.keeper} cost them — ${where} slipped on that watch.`);
   // ⚑ runner fees are news TWICE — when they begin, and when word of the gate has got out — never every pass
-  if (st.relay?.first) lines.push(`The relay at ${where} has begun to pay: ${st.relay.crystal} crystal in runner fees this pass${st.relay.gate ? ", and the gate nearby will bring more as word gets out" : ""}.`);
-  else if (st.relay?.wordOut) lines.push(`Word of the gate has got out — runner traffic at ${where} is at its height: ${st.relay.crystal} crystal in fees this pass.`);
+  if (st.relay?.first) lines.push(`The relay at ${where} has begun to pay: ${st.relay.said || `${st.relay.crystal} crystal`} in runner fees this pass${st.relay.gate ? ", and the gate nearby will bring more as word gets out" : ""}.`);
+  else if (st.relay?.wordOut) lines.push(`Word of the gate has got out — runner traffic at ${where} is at its height: ${st.relay.said || `${st.relay.crystal} crystal`} in fees this pass.`);
   for (const n of (st.built || [])) lines.push(`${n} stands at ${where} now.`);
   for (const n of (st.lapsing || [])) lines.push(`${n} at ${where} will go quiet next pass unless it is refreshed.`);
   for (const n of (st.lapsed || [])) lines.push(`${n} at ${where} has gone quiet.`);
-  if (st.pilgrims) lines.push(`${st.pilgrims} crystal left at ${where} by those who came to it.`);
+  if (st.pilgrims) lines.push(`${st.pilgrimsSaid || `${st.pilgrims} crystal`} left at ${where} by those who came to it.`);
   if (Array.isArray(st.yields) && st.yields.length > 1) { /* several goods — the store line on the tab says which */ }
   if (st.grew) lines.push(`${where} has come up to ${holding.condition}${st.grew.keeper ? ` under ${st.grew.keeper}` : ""}.`);
-  if (st.short) lines.push(`${where} could not pay its keep this pass (${st.short} owed) — the arrears sit on the place.`);
+  if (st.short) lines.push(`${where} could not pay its keep this pass${st.shortWhy ? ` — ${st.shortWhy}` : ` (${st.short} owed)`} — the arrears sit on the place.`);
   if (st.justFull) lines.push(`The store at ${where} is full — ${Object.entries(holding.store || {}).filter(([, n]) => n > 0).map(([g, n]) => `${n} ${g.replace(/_/g, " ")}`).join(", ")} sit waiting for a road, a buyer, or a thief.`);
   return lines;
 }
@@ -938,11 +944,11 @@ export function sellStore(character, holdingId, { economy = null, cfg = null, he
     total += val; delete h.store[g];
   }
   if (!total) return { ok: false, why: storeTotal(h) > 0 ? "nobody here wants what is stored — this Reach has no need of it" : "the store is empty" };
-  const cr = credit(character, "crystal", total, { origin: "traded", regionId });
+  const cr = earnAt(character, total, regionId, economy, { origin: "traded" });   // ⛔ CCODE-437: sold in the place's money
   if (!cr.ok) return { ok: false, why: cr.why };
   if (h.storeFullAnnounced && storeTotal(h) < Math.max(1, Number(cfg?.fullAt) || 40)) delete h.storeFullAnnounced;
-  h.history = [...(h.history || []), { at: null, from: h.condition, to: h.condition, note: `sold the store — ${total} crystal` }].slice(-12);
-  return { ok: true, crystal: total, sold, day };
+  h.history = [...(h.history || []), { at: null, from: h.condition, to: h.condition, note: `sold the store — ${saidEarned(cr)}` }].slice(-12);
+  return { ok: true, crystal: total, said: saidEarned(cr), sold, day };
 }
 
 /* ═══ 2026-09-05 — APPOINT A KEEPER; TAKE A HANDED-OVER HOLD BACK (Erik: "now it says I gave them to the stewards!") ═══
@@ -1214,20 +1220,20 @@ export function addFeature(character, id, { kind, name = null, by = null, craftI
     const fromStore = {};
     for (const g of Object.keys(owed)) { const have = Number(h.store[g]) || 0; const take = Math.min(have, owed[g]); if (take > 0) { h.store[g] = have - take; owed[g] -= take; fromStore[g] = take; } }
     // the PURSE second, at the region's own unit worth — never a new price
-    let coin = 0;
+    let coin = 0; const coinSaid = [];
     for (const g of Object.keys(owed)) {
       if (owed[g] <= 0) continue;
       const w = unitWorth(g, { economy, regionId, cfg });
       const each = Number(w?.each) || 0;
       if (each <= 0) continue;
       const price = Math.round(owed[g] * each);
-      const r = debit(character, cfg?.upkeepCurrency || "crystal", price, {});
-      if (r.ok) { coin += price; owed[g] = 0; }
+      const r = payAt(character, price, regionId, economy);   // ⛔ CCODE-437: bought where the hold stands, in that place's money
+      if (r.ok) { coin += price; coinSaid.push(saidPaid(r)); owed[g] = 0; }
     }
     const still = Object.fromEntries(Object.entries(owed).filter(([, n]) => n > 0));
     const passes = Math.ceil(cost.build.days / 3);   // Q2: a build IS a project — three world days a pass
     f.building = { owed: still, passesLeft: passes, paid: { store: fromStore, coin } };
-    paid = { store: fromStore, coin, owed: still, passes };
+    paid = { store: fromStore, coin, said: coinSaid.join(" and "), owed: still, passes };
   }
   h.features = [...allFeatures(h), f];
   // ⛔ CCODE-429: a feature the fiction ESTABLISHED aboard a hold that moves tells us its frame carries it — the frame rises to fit, as a
@@ -1236,7 +1242,7 @@ export function addFeature(character, id, { kind, name = null, by = null, craftI
   const owes = f.building && Object.keys(f.building.owed).length ? ` — owes ${Object.entries(f.building.owed).map(([g, n]) => `${n} ${String(g).replace(/_/g, " ")}`).join(", ")}` : "";
   if (f.building) {
     h.history = [...(h.history || []), { at: worldCount, from: h.condition, to: h.condition, note: `began ${f.name} (${f.building.passesLeft} passes${owes})` }].slice(-12);
-    queueHoldingEvent(character, `Work has begun on ${f.name} at ${h.name || h.id}${paid.coin ? ` — ${paid.coin} crystal from the purse` : ""}${owes}.`);
+    queueHoldingEvent(character, `Work has begun on ${f.name} at ${h.name || h.id}${paid.coin ? ` — ${paid.said || `${paid.coin} crystal`} from the purse` : ""}${owes}.`);
   } else {
     h.history = [...(h.history || []), { at: worldCount, from: h.condition, to: h.condition, note: `${via === "inherited" ? "came with" : "built"} ${f.name}${f.by ? ` (${f.by})` : ""}${f.craftIds.length ? ` with ${f.craftIds.join(", ")}` : ""}` }].slice(-12);
     queueHoldingEvent(character, `${h.name || h.id} has ${f.name} now${f.by && f.by !== "you" ? `, ${f.by}'s work` : ""}.`);

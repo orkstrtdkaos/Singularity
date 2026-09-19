@@ -15,7 +15,8 @@
 // before it is published, so a push that fails and retries — or a merge callback run twice — can never pay anyone twice.
 
 import { unitWorth } from "./holdings.js";
-import { debit, credit } from "./purse.js";
+import { credit, INDIVISIBLE } from "./purse.js";   // a refund returns the money it was paid in
+import { payAt, earnAt, saidPaid, saidEarned, moneyLabel } from "./money.js";   // ⛔ CCODE-437: a hold sells in its own place's money
 import { addItem, removeItem } from "./inventory.js";
 
 export const TRADES_PATH = "world/trades/valley.json";
@@ -53,7 +54,7 @@ export function pendingUnits(orders = [], holdKey, goods) {
 /** ⛔ A SALE, recorded when the keeper sells. Checked against the hold's card (does it trade in this, how many are left once what is
  *  already spoken for is counted), paid from the buyer's crystal, and delivered as goods the buyer can sell on at any Reach's price.
  *  Mutates the buyer on success only. Returns { ok, order, why }. */
-export function buyFromHold(buyer, card, { goods = null, units = 1, pending = [], worldDay = null, nowISO = null, worthBand = "useful" } = {}) {
+export function buyFromHold(buyer, card, { goods = null, units = 1, pending = [], worldDay = null, nowISO = null, worthBand = "useful", regionId = null, economy = null } = {}) {
   if (!buyer?.id) return { ok: false, why: "nobody to buy" };
   if (!card?.trades) return { ok: false, why: `${card?.name || "that hold"} is not open to trade` };
   if (card.ownerId === buyer.id) return { ok: false, why: "a hold of your own is not bought from — its store is yours" };
@@ -65,14 +66,15 @@ export function buyFromHold(buyer, card, { goods = null, units = 1, pending = []
   const left = line.units - pendingUnits(pending, card.key, goods);
   if (want > left) return { ok: false, why: left > 0 ? `only ${left} ${line.name} to be had at ${card.name}` : `${card.name} has no ${line.name} left to sell` };
   const total = want * line.each;
-  const paid = debit(buyer, "crystal", total);
+  // ⛔ CCODE-437: paid in the money of the place the hold stands — its own first, else what that place takes at its worse rate
+  const paid = payAt(buyer, total, regionId, economy);
   if (!paid.ok) return { ok: false, why: paid.why };
   addItem(buyer, { name: cap1(line.name), kind: "misc", qty: want, goods, worth: worthBand,
     description: `Bought at ${card.name}${card.keeperName ? ` from ${card.keeperName}` : ""}.` }, {}, { distinct: false });
   // CCODE-398: the order remembers WHERE, so the buyer's own refund news can be placed without the hold's record
   const order = { id: `${card.key}|${buyer.id}|${nowISO || worldDay || Date.now()}|${goods}`, holdKey: card.key, holdId: card.id, holdName: card.name, holdLocationId: card.locationId || null,
     ownerId: card.ownerId, ownerName: card.ownerName || null, buyerId: buyer.id, buyerName: buyer.name || null, goods, goodsName: line.name,
-    units: want, each: line.each, total, worldDay, status: "paid" };
+    units: want, each: line.each, total, worldDay, status: "paid", regionId: regionId || null, paid: paid.paid || [], said: saidPaid(paid) };
   return { ok: true, order };
 }
 
@@ -91,7 +93,7 @@ export function mergeOrders(remote, orders = [], { regionId = "valley" } = {}) {
 
 /** ⛔ THE OWNER'S SIDE — fill each paid order on their holds from the store; what the store cannot fill goes back to the buyer. Written on
  *  the owner (`tradeSettled`) before it is published, so it is never paid twice. Mutates the owner. Returns { moved, news }. */
-export function settleOrders(owner, orders = [], { worldDay = null } = {}) {
+export function settleOrders(owner, orders = [], { worldDay = null, economy = null } = {}) {
   const moved = [], news = [];
   owner.tradeSettled = owner.tradeSettled || {};
   for (const o of orders || []) {
@@ -102,16 +104,17 @@ export function settleOrders(owner, orders = [], { worldDay = null } = {}) {
     const h = (owner.holdings || []).find(x => x && x.id === o.holdId);
     const have = Math.floor(Number(h?.store?.[o.goods]) || 0);
     const filled = Math.min(have, Number(o.units) || 0);
+    let earned = null;
     if (filled > 0) {
       h.store[o.goods] = have - filled;
-      credit(owner, "crystal", filled * o.each, { origin: "traded" });
+      earned = earnAt(owner, filled * o.each, o.regionId || null, economy, { origin: "traded" });   // ⛔ CCODE-437: the hold's own money
     }
     const short = (Number(o.units) || 0) - filled;
     const result = { status: short ? "short" : "settled", filled, refund: short * o.each, settledWorldDay: worldDay };
     owner.tradeSettled[o.id] = result;
     moved.push({ ...o, ...result });
     // ⛔ CCODE-398: a sale happened somewhere — the hold's own place — and the news said so in prose while carrying nothing
-    if (filled) news.push({ text: `${o.buyerName || "Another traveler"} bought ${filled} ${o.goodsName} at ${o.holdName} — ${filled * o.each} crystal to you.`, worldDay, tier: "event", section: "yours", locationId: h?.locationId || null });
+    if (filled) news.push({ text: `${o.buyerName || "Another traveler"} bought ${filled} ${o.goodsName} at ${o.holdName} — ${earned ? saidEarned(earned) : `${filled * o.each} crystal`} to you.`, worldDay, tier: "event", section: "yours", locationId: h?.locationId || null });
     if (short) news.push({ text: `${o.holdName} could not fill ${short} of the ${o.goodsName} ${o.buyerName || "a traveler"} paid for — the store had sold out, and they are paid back.`, worldDay, tier: "event", section: "yours", locationId: h?.locationId || null });
   }
   return { moved, news };
@@ -126,12 +129,22 @@ export function refundOrders(buyer, orders = [], { worldDay = null } = {}) {
     if (!o || o.buyerId !== buyer.id || o.status !== "short") continue;
     if (buyer.tradeRefunded[o.id]) { moved.push({ ...o, status: "refunded" }); continue; }
     const short = (Number(o.units) || 0) - (Number(o.filled) || 0);
-    if (Number(o.refund) > 0) credit(buyer, "crystal", Number(o.refund), { origin: "traded" });
+    // ⛔ CCODE-437: paid back in the money it was paid in, in proportion — never a different money at a different rate
+    const back = [];
+    if (Number(o.refund) > 0) {
+      if (Array.isArray(o.paid) && o.paid.length && Number(o.units) > 0) {
+        const share = short / Number(o.units);
+        for (const p of o.paid) {
+          const amt = INDIVISIBLE.has(p.currency) ? Math.floor(Number(p.amount) * share) : Math.round(Number(p.amount) * share * 100) / 100;
+          if (amt > 0 && credit(buyer, p.currency, amt, { origin: "traded", regionId: p.regionId || null }).ok) back.push(moneyLabel(amt, p.currency, p.regionId || null));
+        }
+      } else if (credit(buyer, "crystal", Number(o.refund), { origin: "traded" }).ok) back.push(`${o.refund} crystal`);
+    }
     const stack = (buyer.inventory || []).find(it => it && it.goods === o.goods && String(it.name).toLowerCase() === cap1(o.goodsName).toLowerCase());
     if (stack && short > 0) removeItem(buyer, stack.name, Math.min(short, Number(stack.qty) || 0));
     buyer.tradeRefunded[o.id] = { refundedWorldDay: worldDay };
     moved.push({ ...o, status: "refunded" });
-    news.push({ text: `${o.holdName} could not fill ${short} of your ${o.goodsName}: ${o.refund} crystal comes back to you.`, worldDay, tier: "event", section: "yours", locationId: o.holdLocationId || null });   // CCODE-398
+    news.push({ text: `${o.holdName} could not fill ${short} of your ${o.goodsName}: ${back.join(" and ") || `${o.refund} crystal`} comes back to you.`, worldDay, tier: "event", section: "yours", locationId: o.holdLocationId || null });   // CCODE-398
   }
   return { moved, news };
 }

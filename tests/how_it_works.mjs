@@ -21283,7 +21283,8 @@ console.log("\n── §292 · someone you have met fights as themselves — one
       const lines = (duel.def.opponent.skills || []).length, thinLines = (thin?.skills || []).length;
       // ⚠️ CCODE-421 — AN AUTHOR'S OWN RUNG IS A RULING, NOT A LOSS. The registry copy alone GUESSES a tier from the role's words; when the
       // author has since authored the person lower, the merge prices them lower on purpose ("an authored tier always wins"). Measured
-      // 2026-09-18: Cassiel Ord, authored `notable` by SNG-616, reads 8 where her role — "Keeper of the… threshold" — guessed 15.
+      // 2026-09-18: Cassiel Ord, authored `notable` by SNG-616, reads 8 where his role — "Keeper of the… threshold" — guessed 15.
+      // (Erik: "Cassiel Ord is a man and is not lvl 8... he's lvl 15" — the rung is Aevi's to raise; this check stays honest either way.)
       const au292 = NS292.authoredFor(entry, { npcs: C292.npcs }) || {};
       const ruledLower = (au292.tier != null || au292.level != null) && Number(thin?.level) > Number(duel.def.opponent.level);
       if (lines >= thinLines || ruledLower) never3++;
@@ -22110,6 +22111,85 @@ console.log("\n── §304 · the parser may not refuse a craft you hold — an
     && /[\s,;:—–-]/.test(why304.charAt(r304.slice(0, -1).trimEnd().length) || " "), JSON.stringify(r304.slice(-40)));
   check("§304: …and the rule the code keeps is still the prompt's own — the envelope law the parser is given",
     /novelUse=true when an ability is being pushed OUTSIDE its normal envelope[^.]*this is allowed and interesting, not infeasible/.test(rd("engine/gm.js")));
+}
+
+// ══════════ §305 · CCODE-423 — THE PEOPLE ERIK NAMED ══════════
+// Erik (2026-09-18): "yes join Aevi and Fendt, Sable is not the legend... she is someone pursuing the deep dark for loki's quest. Cassiel
+// Ord is a man and is not lvl 8. he knew Veth for years as a warden. he's lvl 15." Two joins made by his word; one person kept apart
+// whom a shared name had merged; and the rule the Sable ruling teaches — one word is not identity.
+console.log("\n── §305 · the people Erik named — two joins by his word, one person kept apart, and one word is not identity ──");
+{
+  const NP = await import("../engine/npcs.js");
+  const NS304 = await import("../engine/npcsheet.js");
+  const RC304 = await import("../engine/reconcile.js");
+  const F304 = await import("../engine/fellowship.js");
+  const { loadContentHeadless: lch304 } = await import("./headless_content.mjs");
+  const CT304 = await lch304();
+  const npcs304 = CT304.npcs;
+  const step68 = RC304.CHARACTER_STEPS.filter(s => s.version === 68);
+
+  /* ---- 1 · ⛔ A PERSON THE STORY SAYS IS SOMEONE ELSE IS NEVER MERGED BY A SHARED NAME ---- */
+  const loose = { id: "taken-person", name: "Sable" };
+  const kept = { ...loose, distinctFrom: ["sable_the_runner"] };
+  check("§305: ⛔ the sheet merged Loki's Sable with the legend on a shared one-word name — and a person marked `distinctFrom` the legend is never merged",
+    npcs304.sable_the_runner?.name === "Sable" && NS304.authoredFor(loose, { npcs: npcs304 })?.id === "sable_the_runner"
+    && NS304.authoredFor(kept, { npcs: npcs304 }) === null);
+  const reg304 = { "taken-person": { ...kept } };
+  check("§305: ⛔ …and an op written for the legend does not land on her by name — the lookup skips a person distinct from the id asked for",
+    NP.findExistingNpc(reg304, "sable_the_runner", "Sable") === null && NP.findExistingNpc(reg304, "taken-person", "Sable") === reg304["taken-person"]);
+  // ⚠️ MET THROUGH THE PRODUCTION PATH, then marked: a hand-built entry lacks the `history` every met person has, and the reveal threw on it
+  const rv304 = { id: "c", npcRegistry: {}, company: [] };
+  NP.applyNpcUpdates(rv304, [{ op: "meet", npcId: "stranger", name: "A man in grey", role: "a stranger on the road" }], { day: 3, npcs: npcs304 });
+  rv304.npcRegistry.stranger.distinctFrom = ["halvex_coil"];
+  NP.applyNpcUpdates(rv304, [{ op: "update", npcId: "stranger", revealName: "Halvex Coil" }], { day: 4, npcs: npcs304 });
+  check("§305: …and neither does a reveal — a stranger marked distinct from a legend keeps his own record when revealed under the legend's name",
+    !!rv304.npcRegistry.stranger && !rv304.npcRegistry.halvex_coil && !rv304.npcRegistry.stranger.linkedByReveal, Object.keys(rv304.npcRegistry).join(","));
+
+  /* ---- 2 · ⛔ ONE WORD IS NOT IDENTITY ---- */
+  check("§305: ⛔ one word is not identity — \"Sable\", \"Aevi\" and \"Fendt\" join nobody by themselves; \"Halvex Coil\" and \"Cassiel Ord\" still do",
+    NP.authoredPersonNamed("Sable", npcs304) === null && NP.authoredPersonNamed("Aevi", npcs304) === null && NP.authoredPersonNamed("Fendt", npcs304) === null
+    && NP.authoredPersonNamed("Halvex Coil", npcs304)?.id === "halvex_coil" && NP.authoredPersonNamed("Cassiel Ord", npcs304)?.id === "cassiel-ord");
+  const met304 = { id: "c", npcRegistry: {} };
+  NP.applyNpcUpdates(met304, [{ op: "meet", npcId: "sable", name: "Sable", role: "a woman who came down from the city" }], { day: 2, npcs: npcs304 });
+  check("§305: …so a stranger MET under a one-word name the world also uses keeps the id the op gave her",
+    !!met304.npcRegistry.sable && !met304.npcRegistry.sable_the_runner, Object.keys(met304.npcRegistry).join(","));
+
+  /* ---- 3 · ⛑ ERIK'S WORD, ON THE REAL SAVES (copies) ---- */
+  const rd304 = (p) => JSON.parse(rd(p));
+  for (const [path, from, to, who] of [["characters/player-54seyk/char-mr4ejo8c.json", "aevi", "aevi_the_watcher", "Cellaceron's Aevi"],
+                                       ["characters/player-s9z9u1/char-mr6eq1a5.json", "fendt-filtration-engineer", "fendt", "Usnea's Fendt"]]) {
+    const c = rd304(path);
+    const had = !!c.npcRegistry?.[from];
+    const lv = had ? F304.levelOfPerson(c, from, { content: CT304 }) : null;
+    const out = RC304.reconcile(c, "character", { content: CT304, day: 30 }, step68);
+    const n = c.npcRegistry?.[to];
+    check(`§305: ⛑ ${who} IS the one the world knows — one record under the authored id, the old id kept, the join marked as Erik's, the level unchanged`,
+      !had || (!!n && !c.npcRegistry[from] && (n.formerIds || []).includes(from) && n.linkedByReveal?.ruledBy === "erik-2026-09-18"
+        && F304.levelOfPerson(c, to, { content: CT304 }) === lv && (out.notes || []).length === 1), JSON.stringify({ had, keys: Object.keys(c.npcRegistry || {}).filter(k => k === from || k === to) }));
+  }
+  const loki304 = rd304("characters/player-s9z9u1/char-mrum8y4d.json");
+  const hadSable = !!loki304.npcRegistry?.["taken-person"];
+  RC304.reconcile(loki304, "character", { content: CT304, day: 30 }, step68);
+  const s304 = loki304.npcRegistry?.["taken-person"];
+  check("§305: ⛑ Loki's Sable is her own person — distinct from the runner, she/her as Erik names her, and the sheet no longer reads her as the legend",
+    !hadSable || ((s304.distinctFrom || []).includes("sable_the_runner") && s304.pronouns === "she/her" && NS304.authoredFor(s304, { npcs: npcs304 }) === null));
+  const silas304 = rd304("characters/player-s9z9u1/char-mrhs8286.json");
+  const others304 = JSON.stringify(Object.entries(silas304.npcRegistry || {}).filter(([k]) => k !== "cassiel-ord" && k !== "veth-ondra"));
+  const o304 = RC304.reconcile(silas304, "character", { content: CT304, day: 30 }, step68);
+  const again304 = RC304.reconcile(silas304, "character", { content: CT304, day: 30 }, step68);
+  check("§305: ⛑ \"he knew Veth for years as a warden\" — on Silas's save a fact on both of them, in his words, once; nobody else in the registry touched",
+    !silas304.npcRegistry?.["cassiel-ord"] || ((silas304.npcRegistry["cassiel-ord"].knownFacts || []).filter(f => f === "Knew Veth for years as a warden.").length === 1
+      && (silas304.npcRegistry["veth-ondra"]?.knownFacts || []).includes("Cassiel Ord knew her for years as a warden.")
+      && (o304.notes || []).length === 1 && !(again304.notes || []).length
+      && JSON.stringify(Object.entries(silas304.npcRegistry).filter(([k]) => k !== "cassiel-ord" && k !== "veth-ondra")) === others304));
+  // ⚠️ HIS RUNG IS AEVI'S TO SET, and the arithmetic is recorded here so the note to her cannot drift from the engine: play adds growth
+  // on top of an authored rung, so `leader` (floor 12) reads 15 on Silas's save today where an authored `level: 15` would read 18.
+  const cas = npcs304["cassiel-ord"], keep304 = { tier: cas.tier, level: cas.level };
+  const at = (tier, level) => { cas.tier = tier; if (level === undefined) delete cas.level; else cas.level = level; return F304.levelOfPerson(silas304, "cassiel-ord", { content: CT304 }); };
+  const asLeader = at("leader"), asLevel15 = at("notable", 15);
+  cas.tier = keep304.tier; if (keep304.level === undefined) delete cas.level; else cas.level = keep304.level;
+  check("§305: ⚑ Cassiel's rung is the author's — and the one that reads Erik's 15 on Silas's save today is `leader`, not an authored `level: 15`",
+    asLeader === 15 && asLevel15 === 18 && cas.pronouns === "he/him", JSON.stringify({ asLeader, asLevel15, now: cas.tier }));
 }
 
 /* ══════════ REPORT ══════════ */

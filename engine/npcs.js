@@ -113,6 +113,8 @@ export function findExistingNpc(reg, id, name = "") {
   // starts with "corvin") before the runner, whose NAME is Corvin Teth, was ever reached: her reveal, her pronouns and her whole day
   // landed on him, and the scene record was "set right" to his pronouns every beat. A prefix is a guess; a name is a fact.
   for (const n of entries) {
+    // ⛔ CCODE-423: an op for the legend Sable must not land on Loki's Sable — a person marked distinct from that id is not them
+    if (id && Array.isArray(n.distinctFrom) && n.distinctFrom.some(d => canonNpcId(d) === canonNpcId(id))) continue;
     if (nameNorm && slugify(n.name) === nameNorm) return n;
     // SNG-199: this module MAINTAINS `aliases` across five write sites (a renamed or re-revealed person
     // keeps their prior names) — but the matcher never READ them, so a person met again under a name the
@@ -225,10 +227,12 @@ export function agesMissingForGM(character, { sceneNpcNames = [], limit = 6 } = 
  *  the game grew (`_gen`) or the shared world carried (`_canon`). STRICT: the whole name, or the name before its epithet — "Halvex Coil,
  *  the Rewriter" answers to "Halvex Coil" — never a first name alone, which is how two real people named Vessin stay two. ⚠️ AND ONLY
  *  WHEN ONE RECORD HOLDS THE NAME: content authors two Wrens (a child and an odd one) and holds Mara Wells twice, and a name two records
- *  answer to is ambiguous — it joins nobody. → { id, record } or null. Pure. */
+ *  answer to is ambiguous — it joins nobody. ⛔ CCODE-423 — AND ONE WORD IS NOT IDENTITY. Erik: Loki's Sable "is not the legend... she is
+ *  someone pursuing the deep dark" — so a single name joins nobody on its own; a full name ("Halvex Coil") is a person. The one-word joins
+ *  Erik did rule (Cellaceron's Aevi, Usnea's Fendt) were made by his word, in reconcile 68. → { id, record } or null. Pure. */
 export function authoredPersonNamed(name, npcs = {}) {
   const want = normName(name);
-  if (!want) return null;
+  if (!want || !want.includes(" ")) return null;
   const hits = [];
   for (const [id, r] of Object.entries(npcs || {})) {
     if (!r || r._gen || r._canon || !r.name) continue;
@@ -448,7 +452,8 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
         // and the authored person is adapted to it — so a stranger revealed as a legend BECOMES that legend's record, one id, and
         // `linkedByReveal` is what an author's review finds. (Never when the authored id is already someone else in this registry.)
         const authoredRevealed = ctx.npcs ? authoredPersonNamed(newName, ctx.npcs) : null;
-        if (authoredRevealed && authoredRevealed.id !== n.id && !reg[authoredRevealed.id]) {
+        const distinct421 = Array.isArray(n.distinctFrom) && authoredRevealed && n.distinctFrom.includes(authoredRevealed.id);   // CCODE-423
+        if (authoredRevealed && !distinct421 && authoredRevealed.id !== n.id && !reg[authoredRevealed.id]) {
           const was = n.id;
           if (rekeyPerson(character, was, authoredRevealed.id).ok) {
             n.linkedByReveal = { authoredId: authoredRevealed.id, fromId: was, day: ctx.day ?? null };

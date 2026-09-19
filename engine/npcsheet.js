@@ -451,6 +451,9 @@ export function authoredFor(entry, { npcs = null } = {}) {
   }
   if (hits.length !== 1) return null;                       // ⚠️ none, or more than one claimant — say nothing
   const hit = hits[0];
+  // ⛔ CCODE-423 (Erik: "Sable is not the legend... she is someone pursuing the deep dark for loki's quest") — A PERSON THE PLAYER'S
+  // STORY SAYS IS SOMEONE ELSE is never merged by a shared name: `distinctFrom` names the authored people they are not.
+  if (Array.isArray(entry.distinctFrom) && entry.distinctFrom.map(String).includes(String(hit.id || ""))) return null;
   // ⛔ ONE WORD IS ONLY ENOUGH WHEN IT IS UNIQUE, and `hits.length === 1` is exactly that test: the sweep above
   // ran over every authored figure, so a second "Branch" would already have disqualified this.
   return hit;

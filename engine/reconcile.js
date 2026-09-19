@@ -87,6 +87,42 @@ function renameTargets(spec, entry, character, known) {
 
 export const CHARACTER_STEPS = [
   {
+    version: 68, id: "the-people-erik-named", playerFacing: true,
+    // ⛔ CCODE-423 — ERIK 2026-09-18: "yes join Aevi and Fendt, Sable is not the legend... she is someone pursuing the deep dark for
+    // loki's quest." Cellaceron's Aevi IS Aevi the Watcher (both copies of that save carry the id); Usnea's Fendt IS Fendt, the
+    // filtration supervisor; Loki's Sable — "the person who came willingly from the city to the Unlit Deep" — is NOT Sable the runner,
+    // and Erik names her a woman (the record said gender unknown). And of Silas's Cassiel Ord: "he knew Veth for years as a warden" —
+    // carried as a fact on both of them, in his words, because a person already met is read from the registry, not from the authored
+    // record (his rung, 15, is Aevi's to set: `tier: "leader"`). ⚠️ Idempotent by the records themselves, not only by the version.
+    apply: (c) => {
+      const reg = c?.npcRegistry || {};
+      const notes = [];
+      const ruled = { authoredId: null, fromId: null, day: null, ruledBy: "erik-2026-09-18" };
+      if (c?.id === "char-mr4ejo8c" && reg.aevi && !reg.aevi_the_watcher && rekeyPerson(c, "aevi", "aevi_the_watcher").ok) {
+        reg.aevi_the_watcher.linkedByReveal = { ...ruled, authoredId: "aevi_the_watcher", fromId: "aevi" };
+        notes.push("Aevi is the Aevi the world knows — the watcher the whole valley has seen. One record now.");
+      }
+      if (c?.id === "char-mr6eq1a5" && reg["fendt-filtration-engineer"] && !reg.fendt && rekeyPerson(c, "fendt-filtration-engineer", "fendt").ok) {
+        reg.fendt.linkedByReveal = { ...ruled, authoredId: "fendt", fromId: "fendt-filtration-engineer" };
+        notes.push("Fendt, the filtration engineer, is the Fendt the world knows. One record now.");
+      }
+      const sable = c?.id === "char-mrum8y4d" ? reg["taken-person"] : null;
+      if (sable && !(Array.isArray(sable.distinctFrom) && sable.distinctFrom.includes("sable_the_runner"))) {
+        sable.distinctFrom = [...new Set([...(Array.isArray(sable.distinctFrom) ? sable.distinctFrom : []), "sable_the_runner"])];
+        if (!sable.gender || sable.gender === "unknown") { sable.gender = "woman"; sable.pronouns = "she/her"; }
+        notes.push("Sable, who came from the city to the Unlit Deep, is her own person — not the runner the stories tell of.");
+      }
+      const cassiel = c?.id === "char-mrhs8286" ? reg["cassiel-ord"] : null, veth = cassiel ? reg["veth-ondra"] : null;
+      const CASSIEL_FACT = "Knew Veth for years as a warden.", VETH_FACT = "Cassiel Ord knew her for years as a warden.";
+      if (cassiel && veth && !(cassiel.knownFacts || []).includes(CASSIEL_FACT)) {
+        cassiel.knownFacts = [...(cassiel.knownFacts || []), CASSIEL_FACT];
+        if (!(veth.knownFacts || []).includes(VETH_FACT)) veth.knownFacts = [...(veth.knownFacts || []), VETH_FACT];
+        notes.push("Cassiel Ord and Veth go back years — he knew her as a warden.");
+      }
+      return notes.length ? { notes } : {};
+    }
+  },
+  {
     version: 67, id: "halvex-is-one-man", playerFacing: true,
     // ⛔ CCODE-421 — ERIK 2026-09-18, on Loki's Halvex: "I like the one man hiding story... i thought of him as more of a chaos agent -
     // like a broken wright... Either way I want to keep Loki's play as canon AND adapt the authored legend to explain it."

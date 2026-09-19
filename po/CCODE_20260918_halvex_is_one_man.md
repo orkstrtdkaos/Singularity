@@ -55,10 +55,11 @@ wound is already in the world tick — and a broken wright breaks: he hires out 
 matters. Walking with Loki under a Churn-Revel name, he has begun to doubt the proof. The villain beats (`villain_escalation`, the patched
 and the Editors) can stay as what his past left loose in the world, which also gives Silas's game its Rewriter without a contradiction.
 
-## ⬜ Four more save records share the shape — Erik's word before I move them
+## ✅ Four more save records shared the shape — Erik has ruled (CCODE-423)
 
 Aevi in both copies of Cellaceron (`aevi` vs `aevi_the_watcher`), Usnea's Fendt (`fendt-filtration-engineer` vs `fendt`), and Loki's
-**Sable** (`taken-person`, revealed as Sable, vs `sable_the_runner`) — which may be the Halvex case again.
+**Sable** (`taken-person`, revealed as Sable, vs `sable_the_runner`). Erik: join Aevi and Fendt; Sable is not the legend. Done in
+reconcile 68 — see `po/CCODE_20260918_people_for_aevi.md`.
 
 ## ⬜ And two for you in content
 
@@ -69,6 +70,7 @@ Aevi in both copies of Cellaceron (`aevi` vs `aevi_the_watcher`), Usnea's Fendt 
 
 ## ⚠️ One more thing the suite caught
 
-Your SNG-616 record for **Cassiel Ord** is `notable`, so she reads level 8 where her role alone ("Keeper of the… threshold") guessed 15 —
-an authored tier always wins, so the lower rung is yours and it is honoured. §292 said the merge "only ever adds"; it now says so unless
-an author's own tier prices them lower. If 8 is lower than you meant for Silas's keeper of Stillwater's Trouble, raise her tier.
+Your SNG-616 record for **Cassiel Ord** is `notable`, so he reads level 8 where his role alone ("Keeper of the… threshold") guessed 15 —
+an authored tier always wins, so the lower rung is yours and it is honoured. ⛔ **Erik has since ruled: he is level 15** — see
+`po/CCODE_20260918_people_for_aevi.md`. (An earlier version of this note called Cassiel "she": that was my error. Your record has always
+said he is a man.)

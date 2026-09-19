@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
   "id": "dev_report",
-  "at": "2026-09-19T03:00:05.371Z",
-  "build": "2.0.87",
+  "at": "2026-09-19T11:33:51.828Z",
+  "build": "2.0.93",
   "character": {
     "id": "char-mrhs8286",
     "name": "Silas Weir",
     "playerKey": "player-s9z9u1",
     "level": 33,
-    "rev": 2167,
+    "rev": 2171,
     "day": 18,
-    "turns": 373,
+    "turns": 374,
     "countingSince": "2026-09-16T22:18:48.671Z",
     "countsCoverWholeLife": false
   },
@@ -53,7 +53,7 @@
         "why": "not a number"
       },
       {
-        "at": "2026-09-19T02:59:03.589Z",
+        "at": "2026-09-19T11:31:51.822Z",
         "key": "spectrumId",
         "value": "mechanical_spiritual",
         "why": "not a number"
@@ -65,19 +65,19 @@
   },
   "ops": {
     "emitted": {
-      "sceneSummary": 373,
-      "choices": 372,
-      "characterDeltas": 199,
-      "scene": 373,
-      "npcUpdates": 323,
+      "sceneSummary": 374,
+      "choices": 373,
+      "characterDeltas": 200,
+      "scene": 374,
+      "npcUpdates": 324,
       "factUpdates": 42,
       "placeUpdates": 80,
-      "codexUpdates": 222,
+      "codexUpdates": 223,
       "timeOps": 328,
       "imagePrompt": 44,
-      "sceneEnded": 146,
+      "sceneEnded": 147,
       "itemUpdates": 9,
-      "questUpdates": 51,
+      "questUpdates": 52,
       "offer": 58,
       "moveTo": 20,
       "delegateOps": 6,
@@ -92,7 +92,7 @@
       "_applyFailedOp": 8,
       "newEncounter": 3,
       "encounterOps": 1,
-      "gambitApt": 73,
+      "gambitApt": 74,
       "markDefiningMoment": 1,
       "_engineClosedScene": 6,
       "gambitOps": 1,
@@ -138,7 +138,7 @@
     "neverCount": 19,
     "knownCount": 47,
     "unknown": {
-      "sceneSummary": 5
+      "sceneSummary": 6
     },
     "inProse": {},
     "emptyClaims": 0
@@ -174,50 +174,58 @@
     }
   },
   "fireTests": {
-    "at": "2026-09-16T22:18:49.207Z",
-    "build": "2.0.36",
+    "at": "2026-09-19T11:32:12.047Z",
+    "build": "2.0.93",
     "results": [
+      {
+        "op": "jobOps",
+        "verdict": "applied",
+        "moved": [
+          "jobs"
+        ],
+        "why": null
+      },
       {
         "op": "debtOps",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
       },
       {
         "op": "projectOps",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
       },
       {
         "op": "deathOps",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
       },
       {
         "op": "markTeacher",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
       },
       {
         "op": "deriveItem",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
       },
       {
         "op": "unlockSubstrate",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
       },
       {
         "op": "unlockPrecursor",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
       },
       {
         "op": "arcOps",
@@ -229,19 +237,19 @@
         "op": "offerPromotion",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
       },
       {
         "op": "offerAcquisition",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
       },
       {
         "op": "offerIntent",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
       },
       {
         "op": "holdingOps",
@@ -255,413 +263,413 @@
         "op": "bandOps",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
       },
       {
         "op": "adoptSchool",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
       },
       {
         "op": "newAbility",
         "verdict": "no-op",
         "moved": [],
-        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, rev, sessions, updatedAt, worldState)"
+        "why": "applied without error and wrote nothing of its own (the turn moved activeScene, clock, sessions, worldState)"
       }
     ]
   },
   "promptRows": {
     "character": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "location": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "region": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "groundDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "lore": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "traditionMotiveDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "sheetsDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "rules": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "recentTurns": {
-      "reached": 5,
-      "produced": 4
+      "reached": 6,
+      "produced": 5
     },
     "timeLabel": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "npcRegistryDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "mintedUnmetDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "npcSeedDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "traditionVocab": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "standingDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "recalledDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "bearingsDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "caravansDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "commandDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "presenceDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "worthHereDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "inventoryDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "sceneState": {
-      "reached": 5,
-      "produced": 4
-    },
-    "holdingsDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 5
     },
+    "holdingsDetail": {
+      "reached": 6,
+      "produced": 6
+    },
     "debtsDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "carriedDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "abilityLawDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "questsDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "structuredQuestsDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "traditionArcDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "npcErrandsDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "codexDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "companionsDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "placeMemoryDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "agesMissingDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "newsDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "worldArcsDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "legendsPursuableDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "wakesDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "arcMoodDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "reachableDeadDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "threatToPlayer": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "guardiansDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "resolution": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "playerInput": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "exactWords": {
-      "reached": 5,
-      "produced": 4
+      "reached": 6,
+      "produced": 5
     },
     "travelDirective": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "itemAdvance": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "encounterWeaveDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "encounterOfferDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "fightFramingDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "abilityGrantDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "stageRevealDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "itemEvolveDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "worldPressureDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 1
     },
     "offerDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "teacherOfferDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "substrateDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 2
     },
     "romanceGuidanceDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "factsDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "evolvedItemsDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "opLossNote": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "emergenceDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "perilNote": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "encounterDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "masteryDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "bookkeepingRestate": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "anomalyDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "repairPanelDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "teacherDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "toolkitDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "availableEncounters": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "partyDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "ratingDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "registerDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "legendDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "livingWorldDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "assignmentsDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "latentArcsDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "seasonalDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "schoolsDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "sharedCanonDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "wishesDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "worldMovedOnDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "companionLivesDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "homeDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "invitationsDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "bandsJoinedDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "travelersHereDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "travelersDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "worldCountLabel": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "waygateDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 0
     },
     "readAloudDetail": {
-      "reached": 5,
-      "produced": 5
+      "reached": 6,
+      "produced": 6
     },
     "scenePacingDetail": {
-      "reached": 5,
+      "reached": 6,
       "produced": 3
     },
     "journeyDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "journeyUnderwayDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "holdsNearDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     },
     "jobsDetail": {
-      "reached": 4,
+      "reached": 5,
       "produced": 0
     }
   },

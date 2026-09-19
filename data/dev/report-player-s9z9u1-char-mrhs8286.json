@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "id": "dev_report",
-  "at": "2026-09-19T02:04:11.606Z",
-  "build": "2.0.84",
+  "at": "2026-09-19T02:15:57.826Z",
+  "build": "2.0.85",
   "character": {
     "id": "char-mrhs8286",
     "name": "Silas Weir",
     "playerKey": "player-s9z9u1",
     "level": 33,
-    "rev": 2134,
+    "rev": 2138,
     "day": 18,
     "turns": 370,
     "countingSince": "2026-09-16T22:18:48.671Z",
@@ -21,9 +21,15 @@
         "key": "spectrumId",
         "value": "death_life",
         "why": "not a number"
+      },
+      {
+        "at": "2026-09-19T02:14:02.198Z",
+        "key": "spectrumId",
+        "value": "concrete_abstract",
+        "why": "not a number"
       }
     ],
-    "axesDroppedN": 1,
+    "axesDroppedN": 2,
     "handoverRefused": [],
     "handoverRefusedN": 0
   },
@@ -138,9 +144,17 @@
     }
   },
   "fireTests": {
-    "at": "2026-09-16T22:18:49.207Z",
-    "build": "2.0.36",
+    "at": "2026-09-19T02:15:57.825Z",
+    "build": "2.0.85",
     "results": [
+      {
+        "op": "jobOps",
+        "verdict": "applied",
+        "moved": [
+          "jobs"
+        ],
+        "why": null
+      },
       {
         "op": "debtOps",
         "verdict": "no-op",

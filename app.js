@@ -169,7 +169,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.85";
+const APP_VERSION = "2.0.86";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2732,7 +2732,13 @@ async function runFireTests({ apply = false, only = null } = {}) {
  *  something is worth saying. ⚠️ The verdicts ride up in the dev report either way — the point is that nobody
  *  has to ask for them. */
 let _autoFiring = false;
+const FIRE_TESTS_PAUSED = true;   // ⛔ CCODE-424: see maybeAutoFireTests — lifted when `runFireTests` cannot reach the live scene or the push
 function maybeAutoFireTests() {
+  // ⛔ CCODE-424 — PAUSED UNTIL THE HARNESS IS SANDBOXED. On 2026-09-18 it ran on Silas's live save and wrote through two doors the
+  // swap of `character` does not close: `applyTurn` pushes its beat onto `sceneTurns`, this module's alias of the LIVE scene, so the
+  // job the fire test offered became a beat of his scene; and it saves the character it is handed, which points the push at each COPY —
+  // so the save that went up was a fire test's, whose last turn had no narration and no choices. The button still runs them on request.
+  if (FIRE_TESTS_PAUSED) return;
   if (!isDevMode() || !character || _autoFiring) return;
   if (character._fireTests?.build === APP_VERSION) return;   // already answered for this build
   const idle = (fn) => (typeof requestIdleCallback === "function" ? requestIdleCallback(fn, { timeout: 8000 }) : setTimeout(fn, 1500));
@@ -9544,6 +9550,11 @@ async function onChoice(choice) {
   // ⛔ CCODE-415: `noveltyOf`, the one answer the preview gives too
   const nv = action.novel ? noveltyOf(choice) : { novel: false };
   if (nv.discoveryBonus) { action.novel = false; action.discoveryBonus = nv.discoveryBonus; }
+  // ⛔ CCODE-424 — THE TECHNIQUE ITSELF, for the receipt below (`resolution.usedDiscovery`). CCODE-415 moved "is this novel?" into
+  // `noveltyOf` and took this declaration with the old block; its reader stayed, so EVERY rolled action threw "disc is not defined"
+  // after the intent parse and before the GM was called. Erik: "The game seems to be having trouble with the GM". `noveltyOf` answers
+  // whether the technique is known; this names which one it is.
+  const disc = nv.discoveryBonus ? knownDiscovery(character, abilityIds, action.noveltyHint) : null;
   // SNG-145: INTENT GATES fire HERE — before the dice roll, before energy is spent, before the GM
   // is called — so a decline commits nothing and the moveTo always-emit contract is never touched.
   // The resume is the CHOICE itself (plain JSON): the answer annotates it and re-enters onChoice.

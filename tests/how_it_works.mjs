@@ -22066,6 +22066,24 @@ console.log("\n── §302 · a canon look for everything the world already has
     /const canonOk = canCanon && canonEligible\(it\.regen\);/.test(A302) && /Canon look — not in the shared world yet/.test(A302));
 }
 
+// ══════════ §303 · CCODE-424 — A NAME THE ROLL READS IS A NAME THE ROLL DECLARED ══════════
+// Erik (2026-09-18): "The game seems to be having trouble with the GM" — and the intent parse he pasted had succeeded. What followed it
+// threw: `if (disc) resolution.usedDiscovery = disc.name` read a `disc` that CCODE-415 had deleted with the block that declared it, so
+// every rolled action died between the parse and the GM call. ⚑ Reproduced in the browser on his save with the model calls stubbed:
+// "disc is not defined", and no GM request ever built. `node --check` passes an undeclared name happily.
+console.log("\n── §303 · a name the roll reads is a name the roll declared — and the fire tests stay off the live scene ──");
+{
+  const A303 = rd("app.js").replace(/\r\n/g, "\n");
+  const start303 = A303.indexOf("async function onChoice(choice) {");
+  const body303 = start303 >= 0 ? A303.slice(start303, A303.indexOf("\n}\n", start303)) : "";
+  const decl303 = body303.search(/\bconst disc = /), read303 = body303.search(/if \(disc\) resolution\.usedDiscovery = disc\.name;/);
+  check("§303: ⛔ the roll path DECLARES the discovered technique before its receipt reads it — in the same function, from the same lookup the old block used",
+    start303 >= 0 && decl303 > 0 && read303 > decl303 && /const disc = nv\.discoveryBonus \? knownDiscovery\(character, abilityIds, action\.noveltyHint\) : null;/.test(body303),
+    JSON.stringify({ start303, decl303, read303 }));
+  check("§303: ⛔ the fire tests do not run themselves while they can reach the live scene and the push — paused, and the pause says why",
+    /const FIRE_TESTS_PAUSED = true;/.test(A303) && /function maybeAutoFireTests\(\) \{[\s\S]{0,1200}if \(FIRE_TESTS_PAUSED\) return;/.test(A303));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

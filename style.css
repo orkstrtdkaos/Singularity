@@ -1213,6 +1213,17 @@ details.wn-entry > p { margin:4px 0 8px 16px; color:var(--ink-dim); }
 .news-log-day { margin:10px 0 4px; }
 .news-log-day .news-section-title { margin-bottom:4px; }
 .news-item.news-update { color:var(--ink); }
+/* ⛔ CCODE-440 — a hold is a local market */
+.sell-card, .change-card { max-width:520px; max-height:84vh; display:flex; flex-direction:column; }
+.sell-card .sell-list { overflow-y:auto; margin:6px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+.sell-row { display:flex; align-items:center; gap:8px; padding:5px 2px; font-size:13.5px; cursor:pointer; }
+.sell-row .sell-name { flex:1; min-width:0; }
+.sell-row .sell-price { white-space:nowrap; font-variant-numeric:tabular-nums; color:var(--ink-dim); }
+.sell-kept { margin:4px 0; }
+.sell-card p.hint, .change-card p.hint, .sell-kept summary { font-size:12.5px; line-height:1.45; margin:4px 0; }
+.change-row { margin:8px 0; }
+.change-row label { display:flex; gap:8px; align-items:center; flex-wrap:wrap; font-size:13.5px; }
+.change-row select, .change-row input { font:inherit; max-width:100%; }
 
 /* SNG-197 p2: the braid MOMENT — an ULTIMATE-CREATION beat, not a system notification. */
 .help-card.braid-moment { max-width:460px; text-align:center; border-color:var(--accent);

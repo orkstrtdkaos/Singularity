@@ -143,8 +143,9 @@ import { clearOnRest, applyCondition, activeConditions } from "./engine/conditio
 // "show the purse as a PERMANENT ROW, show a price as a number when a trade is on the table… The trader
 // SAYS 'ten for those, and I'm being generous'; the interface SAYS 10. Both." A purse the player cannot
 // see is the same failure as one that does not exist.
-import { ensurePurse, purseLine, worthOf, applyExchangeOps, purseBand } from "./engine/purse.js";
-import { payAt, priceHere, incomeHere, saidPaid, moneyLine } from "./engine/money.js";   // ⛔ CCODE-437: money by place   // CCODE-405: calling a unit together is paid for
+import { ensurePurse, purseLine, worthOf, applyExchangeOps, purseBand, held } from "./engine/purse.js";
+import { payAt, priceHere, incomeHere, saidPaid, saidEarned, moneyLine, moneyLabel, moneyClassOf, placeName } from "./engine/money.js";
+import { sellQuote, sellFromPack, exchangeRatesHere, exchangeAt } from "./engine/market.js";   // ⛔ CCODE-440: a hold is a local market   // ⛔ CCODE-437: money by place   // CCODE-405: calling a unit together is paid for
 import { bargainOutcome } from "./engine/economy.js";
 import { capabilityMenu, resolveTier } from "./engine/capabilities.js";
 // ⛔ CCODE-239 — PROJECTS TICK. `engine/projects.js` shipped green with all six exports reachable only
@@ -172,7 +173,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.1.1";
+const APP_VERSION = "2.1.2";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -824,7 +825,8 @@ fetch("release_notes.json?v=" + APP_VERSION).then((r) => (r.ok ? r.json() : null
 document.addEventListener("click", (ev) => {
   const open = ev.target?.closest?.("[data-whats-new]");
   if (open) { ev.preventDefault(); showWhatsNew({ all: open.dataset.whatsNew === "all" }); return; }
-  if (ev.target?.closest?.("[data-whats-new-dismiss]")) { ev.preventDefault(); markVersionSeen(); }
+  if (ev.target?.closest?.("[data-whats-new-dismiss]")) { ev.preventDefault(); markVersionSeen(); return; }
+  if (ev.target?.closest?.("[data-change-money]")) { ev.preventDefault(); showChangeMoney(() => { try { renderCharacterScreen(); } catch { /* the purse is redrawn next time */ } }); }   // CCODE-440
 });
 fetch("content/packs/core/world/scale.json?v=" + APP_VERSION).then((r) => (r.ok ? r.json() : null)).then((s) => { WORLD_SCALE = s && typeof s === "object" ? s : null; }).catch(() => { WORLD_SCALE = null; });
 let busy = false;
@@ -5974,6 +5976,117 @@ function wireBattleNews(root) {
       caption: battleCaption(victim, killer, item.kind === "death" ? "killed" : item.outcome),
       regen: { kind: img.kind, subjectId: img.key, label: killer ? "this battle" : "this ending", prompt: img.prompt }
     }]);
+  };
+}
+
+/* ⛔ CCODE-440 — A HOLD IS A LOCAL MARKET ──────────────────────────────────────────────────────────────────────────── */
+/** Can money be changed where you stand? — at the Crossing, which changes anything, and at a hold of yours, which changes at its place's
+ *  rates (Erik: "A hold should transact and act as a local exchange as well"). */
+function canChangeMoneyHere() {
+  const here = hereNow();
+  if (!here) return false;
+  if (moneyClassOf(here.regionId || null, CONTENT.rules?.economy || null) === "the_crossing") return true;
+  return (character?.holdings || []).some(h => h && h.locationId === here.id);
+}
+/** ⛔ SELL FROM YOUR PACK, at a hold you stand in (Erik: "sell random items and cruft from my pack in at my holding for money... keep our
+ *  packs tidy"): every thing you carry with its price here in this place's money, a thing the story carries kept and said why. */
+function showSellFromPack(holdId, after = () => {}) {
+  const h = (character?.holdings || []).find(x => x && x.id === holdId);
+  const here = hereNow();
+  if (!h || !here || here.id !== h.locationId) { alert("You sell from your pack where you stand — at the hold itself."); return; }
+  const rid = here.regionId || null, eco = CONTENT.rules?.economy || null, cat = CONTENT.items || {};
+  const rows = (character.inventory || []).map((it, i) => ({ i, q: sellQuote(it, rid, { economy: eco, catalog: cat }) }));
+  const ok = rows.filter(r => r.q.sellable), not = rows.filter(r => !r.q.sellable);
+  document.getElementById("help-pop")?.remove();
+  const pop = document.createElement("div");
+  pop.id = "help-pop";
+  pop.className = "help-overlay";
+  pop.innerHTML = `<div class="help-card sell-card" role="dialog" aria-label="Sell from your pack">
+    <h3 class="codex-title">Sell from your pack — at ${esc(h.name || "the hold")}</h3>
+    <p class="hint">${esc(moneyLine(rid, eco))}</p>
+    <div class="sell-list">${ok.map(r => `<label class="sell-row"><input type="checkbox" data-sell-i="${r.i}">
+      <span class="sell-name">${esc(r.q.name)}${r.q.qty > 1 ? ` <span class="hint">×${r.q.qty}</span>` : ""}</span>
+      <span class="sell-price">${esc(incomeHere(r.q.value, rid, eco).label)}${r.q.guessed ? "*" : ""}</span></label>`).join("") || `<p class="hint">Nothing you carry is wanted here.</p>`}</div>
+    ${ok.some(r => r.q.guessed) ? `<p class="hint">* priced by what kind of thing it is — nobody has written down what it is worth.</p>` : ""}
+    ${not.length ? `<details class="sell-kept"><summary class="hint">${not.length} kept</summary>${not.map(r => `<div class="hint">${esc(r.q.name)} — ${esc(r.q.why)}</div>`).join("")}</details>` : ""}
+    <div class="help-foot"><span class="hint" id="sell-total">Pick what to sell.</span>
+      <span><button class="btn secondary" id="sell-cancel">Keep them</button> <button class="btn" id="sell-go" disabled>Sell</button></span></div>
+  </div>`;
+  document.body.appendChild(pop);
+  const close = () => pop.remove();
+  pop.addEventListener("click", ev => { if (ev.target === pop) close(); });
+  document.getElementById("sell-cancel").onclick = close;
+  const picked = () => [...pop.querySelectorAll("[data-sell-i]:checked")].map(b => rows.find(r => String(r.i) === b.dataset.sellI)).filter(Boolean);
+  const total = () => picked().reduce((a, r) => a + r.q.value, 0);
+  const go = document.getElementById("sell-go"), said = document.getElementById("sell-total");
+  for (const b of pop.querySelectorAll("[data-sell-i]")) b.onchange = () => {
+    const n = picked().length;
+    go.disabled = !n;
+    said.textContent = n ? `${n} ${n === 1 ? "thing" : "things"} for ${incomeHere(total(), rid, eco).label}` : "Pick what to sell.";
+  };
+  go.onclick = () => {
+    const r = sellFromPack(character, picked().map(x => x.q.name), { regionId: rid, economy: eco, catalog: cat });
+    if (!r.ok) { alert(r.why); return; }
+    const list = r.sold.map(s => `${s.name}${s.qty > 1 ? ` ×${s.qty}` : ""}`).join(", ");
+    h.history = [...(h.history || []), { at: null, from: h.condition, to: h.condition, note: `sold from the pack — ${saidEarned(r.earned)}` }].slice(-12);
+    queueHoldingEvent(character, `At ${h.name || "the hold"} you sold ${list} for ${saidEarned(r.earned)}.`);
+    saveCharacter(character);
+    close();
+    after();
+  };
+}
+/** ⛔ CHANGE MONEY, where you stand, by the place's rates — the Crossing anything for anything; a Reach its scrip against the money it
+ *  wants, better in than out; the foothills what they take. The quote is shown before anything moves. */
+function showChangeMoney(after = () => {}) {
+  const here = hereNow();
+  const rid = here?.regionId || null, eco = CONTENT.rules?.economy || null, purse = ensurePurse(character);
+  const rates = exchangeRatesHere(rid, eco, { purse });
+  const key = (m) => `${m.currency}|${m.regionId || ""}`;
+  const froms = [...new Map(rates.map(r => [key(r.from), r.from])).values()].filter(m => Number(held(purse, m.currency, m.regionId)) > 0);
+  document.getElementById("help-pop")?.remove();
+  const pop = document.createElement("div");
+  pop.id = "help-pop";
+  pop.className = "help-overlay";
+  const nameOf = (m) => moneyLabel(1, m.currency, m.regionId).replace(/^1 /, "");
+  pop.innerHTML = `<div class="help-card change-card" role="dialog" aria-label="Change money">
+    <h3 class="codex-title">Change money — ${esc(placeName(rid))}</h3>
+    ${froms.length ? `<div class="change-row"><label>Give <select id="cm-from">${froms.map(m => `<option value="${esc(key(m))}">${esc(nameOf(m))} (you hold ${esc(moneyLabel(held(purse, m.currency, m.regionId), m.currency, m.regionId))})</option>`).join("")}</select></label></div>
+      <div class="change-row"><label>Amount <input id="cm-amount" type="number" min="0" step="any" inputmode="decimal"></label></div>
+      <div class="change-row"><label>For <select id="cm-to"></select></label></div>
+      <p class="hint" id="cm-quote"></p>`
+      : `<p class="hint">Nobody here will change any money you hold.</p>`}
+    <div class="help-foot"><span></span><span><button class="btn secondary" id="cm-cancel">Not now</button>${froms.length ? ` <button class="btn" id="cm-go" disabled>Change</button>` : ""}</span></div>
+  </div>`;
+  document.body.appendChild(pop);
+  const close = () => pop.remove();
+  pop.addEventListener("click", ev => { if (ev.target === pop) close(); });
+  document.getElementById("cm-cancel").onclick = close;
+  if (!froms.length) return;
+  const selFrom = document.getElementById("cm-from"), selTo = document.getElementById("cm-to"), amt = document.getElementById("cm-amount");
+  const quote = document.getElementById("cm-quote"), go = document.getElementById("cm-go");
+  const fromNow = () => froms.find(m => key(m) === selFrom.value);
+  const fillTo = () => {
+    const f = fromNow();
+    const tos = rates.filter(r => key(r.from) === key(f));
+    selTo.innerHTML = tos.map(r => `<option value="${esc(key(r.to))}">${esc(nameOf(r.to))} — a ${Math.round(r.spread * 100)}% bite</option>`).join("");
+    amt.value = String(held(purse, f.currency, f.regionId));
+  };
+  const ask = (dry) => {
+    const f = fromNow(), t = rates.map(r => r.to).find(m => key(m) === selTo.value);
+    return exchangeAt(character, { from: f, to: t, amount: Number(amt.value) }, rid, eco, { worldState: character.worldState || null, dry });
+  };
+  const requote = () => { const q = ask(true); quote.textContent = q.ok ? `You would give ${q.said}.` : q.why; go.disabled = !q.ok; };
+  selFrom.onchange = () => { fillTo(); requote(); };
+  selTo.onchange = requote;
+  amt.oninput = requote;
+  fillTo(); requote();
+  go.onclick = () => {
+    const r = ask(false);
+    if (!r.ok) { quote.textContent = r.why; return; }
+    queueHoldingEvent(character, `At ${placeName(rid)} you changed ${r.said}.`);
+    saveCharacter(character);
+    close();
+    after();
   };
 }
 
@@ -13660,6 +13773,9 @@ function wireHoldingOffers() {
     h.trade = !!cb.checked;
     saveCharacter(character); again();
   };
+  // ⛔ CCODE-440: a hold is a local market — sell what you carry, and change money, where you stand
+  for (const btn of app.querySelectorAll("[data-hold-sellpack]")) btn.onclick = () => showSellFromPack(btn.dataset.holdSellpack, again);
+  for (const btn of app.querySelectorAll("[data-hold-exchange]")) btn.onclick = () => showChangeMoney(again);
   for (const btn of app.querySelectorAll("[data-hold-sell]")) btn.onclick = () => {
     const id = btn.dataset.holdSell;
     const here = hereNow();
@@ -13856,6 +13972,8 @@ function renderHoldingsTab(manageId = null) {
           <button class="opt" data-hold-manage="${esc(h.id)}" title="Add what was built, change who keeps it, sell the store, give it up">⚙ Manage this place</button>
           <label class="opt hold-trade-toggle" title="Other travelers who come here can buy from the store, through its keeper, at this Reach's prices. The goods leave the store and the crystal comes to you on your next turn in the world."><input type="checkbox" data-hold-trade="${esc(h.id)}" ${h.trade === true ? "checked" : ""}> Open to other travelers' trade</label>
           ${storeTotal(h) > 0 && hereNow()?.id === h.locationId ? `<button class="opt" data-hold-sell="${esc(h.id)}" title="Sell what is stored, at this Reach's prices — you sell where it stands">Sell the store</button>` : ""}
+          ${hereNow()?.id === h.locationId ? `<button class="opt" data-hold-sellpack="${esc(h.id)}" title="Sell what you carry, at this place's prices, in its own money">Sell from your pack</button>
+          <button class="opt" data-hold-exchange="${esc(h.id)}" title="Change money here, at this place's rates">Change money</button>` : ""}
         </div>
       </div></div>`;
   }).join("");
@@ -14048,7 +14166,7 @@ function renderCharacterScreen() {
           return band ? ` · <span class="purse-band" title="${esc(band.of)}">${esc(band.name)}</span>` : "";
         })()}</div>
         <div class="purse-table">${curDefs.map(curRow).join("")}</div>
-        <div class="hint" data-money-here>${esc(moneyLine(hereRegionId(), CONTENT.rules?.economy || null))}</div>
+        <div class="hint" data-money-here>${esc(moneyLine(hereRegionId(), CONTENT.rules?.economy || null))}${canChangeMoneyHere() ? ` <button class="link-btn" data-change-money>Change money here</button>` : ""}</div>
         ${estate.length ? `<div class="purse-trade">
           <div class="craft-tier-label">What your holdings are doing</div>
           <div class="hint" style="font-variant-numeric:tabular-nums" title="Every place you hold, summed over one pass: what the yields are worth, what a keeper turns into coin, runner fees, and the upkeep. The net is what the purse actually receives.">

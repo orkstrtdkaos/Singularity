@@ -22981,6 +22981,54 @@ console.log("\n── §318 · the news, kept — every line taken to be shown g
     && (A318.match(/worldState: \{ \.\.\.initWorldState\(1\), updatesToldTo: APP_VERSION \}/g) || []).length === 2);
 }
 
+// ══════════ §319 · CCODE-440 — A HOLD IS A LOCAL MARKET ══════════
+// Erik 2026-09-19: "I want to be able to trade/sell random items and cruft from my pack in at my holding for money... keep our packs tidy."
+// And: "A hold should transact and act as a local exchange as well." "The Crossing is obvious and likely the most universal and relatively
+// inexpensive. You can find better rates in the reaches but only for the money they want vs the ones they don't."
+console.log("\n── §319 · a hold is a local market — sell what you carry at the place's price, change money at the place's rates ──");
+{
+  const K319 = await import("../engine/market.js");
+  const { loadContentHeadless: lch319 } = await import("./headless_content.mjs");
+  const CT319 = await lch319();
+  const eco = CT319.rules.economy;
+  const knife = { name: "Old Knife", kind: "weapon", qty: 2 }, note = { name: "A Letter", kind: "quest" }, relic = { name: "The Seal", kind: "relic", worth: "irreplaceable" };
+  const qv = K319.sellQuote(knife, "valley", { economy: eco }), qp = K319.sellQuote(knife, "the_palelands", { economy: eco });
+  check("§319: ⛔ a thing fetches the price the GM is honest with — its worth × the place's need × its scarcity, the whole stack — priced by its KIND when nobody wrote its worth, and dearer where it is wanted",
+    qv.sellable && qv.guessed && qv.value === qv.each * 2 && qp.value > qv.value
+    && !K319.sellQuote(note, "valley", { economy: eco }).sellable && /story/.test(K319.sellQuote(note, "valley", { economy: eco }).why)
+    && !K319.sellQuote(relic, "valley", { economy: eco }).sellable, JSON.stringify({ qv, qp }));
+  const c = { inventory: [{ ...knife }, { ...note }, { name: "Rope", kind: "tool" }], purse: { crystal: 0, coin: 0, paper: 0, marks: 0, scrip: {} } };
+  const sold = K319.sellFromPack(c, ["Old Knife", "A Letter", "Rope"], { regionId: "the_palelands", economy: eco });
+  check("§319: ⛔ selling from the pack takes the whole stack of each, pays ONCE in the place's own money, and keeps what cannot be sold with the reason",
+    sold.ok && sold.sold.length === 2 && sold.kept.length === 1 && c.inventory.length === 1 && c.inventory[0].name === "A Letter"
+    && sold.earned.currency === "scrip" && sold.earned.regionId === "the_palelands" && c.purse.scrip.the_palelands === sold.earned.amount,
+    JSON.stringify(sold));
+  const who = (p) => ({ purse: { crystal: 0, coin: 0, paper: 0, marks: 0, scrip: {}, ...p } });
+  const X = (p, a, rid, o = {}) => { const ch = who(p); return { r: K319.exchangeAt(ch, a, rid, eco, o), ch }; };
+  const cr = X({ crystal: 100 }, { from: { currency: "crystal" }, to: { currency: "coin" }, amount: 100 }, "the_center");
+  const inR = X({ crystal: 30 }, { from: { currency: "crystal" }, to: { currency: "scrip", regionId: "the_palelands" }, amount: 30 }, "the_palelands");
+  const inC = X({ crystal: 30 }, { from: { currency: "crystal" }, to: { currency: "scrip", regionId: "the_palelands" }, amount: 30 }, "the_center");
+  const outR = X({ scrip: { the_palelands: 90 } }, { from: { currency: "scrip", regionId: "the_palelands" }, to: { currency: "crystal" }, amount: 90 }, "the_palelands");
+  const outC = X({ scrip: { the_palelands: 90 } }, { from: { currency: "scrip", regionId: "the_palelands" }, to: { currency: "crystal" }, amount: 90 }, "the_center");
+  const unwanted = X({ coin: 20 }, { from: { currency: "coin" }, to: { currency: "scrip", regionId: "the_palelands" }, amount: 20 }, "the_palelands");
+  const noScrip = X({ scrip: { the_palelands: 90 } }, { from: { currency: "scrip", regionId: "the_palelands" }, to: { currency: "crystal" }, amount: 90 }, "valley");
+  check("§319: ⛔ ERIK'S RATES — the Crossing changes anything at its bite; a Reach brings the money it wants in BETTER than the Crossing and lets it out WORSE, and will not touch money it does not want; the foothills never change scrip",
+    cr.r.ok && cr.r.spread === eco.acceptance.acceptanceTable.the_crossing.spread
+    && inR.r.ok && inC.r.ok && inR.r.got.amount > inC.r.got.amount && outR.r.ok && outC.r.ok && outR.r.got.amount < outC.r.got.amount
+    && !unwanted.r.ok && !noScrip.r.ok,
+    JSON.stringify({ inR: inR.r.said, inC: inC.r.said, outR: outR.r.said, outC: outC.r.said }));
+  const dry = X({ crystal: 30 }, { from: { currency: "crystal" }, to: { currency: "scrip", regionId: "the_palelands" }, amount: 30 }, "the_palelands", { dry: true });
+  check("§319: …a quote moves nothing, and the out is floored to the money's own piece (old coin by the half)",
+    dry.r.ok && dry.r.dry && dry.ch.purse.crystal === 30 && cr.r.got.amount % 0.5 === 0 && cr.ch.purse.crystal === 0 && cr.ch.purse.coin === cr.r.got.amount);
+  const A319 = rd("app.js").replace(/\r\n/g, "\n").split("\n").filter(l => !/^\s*\/\//.test(l)).join("\n");
+  check("§319: ⛑ the two doors stand on a hold's card only where you stand in it, and the purse offers the change where money can be changed — at the Crossing or at a hold of yours",
+    /\$\{hereNow\(\)\?\.id === h\.locationId \? `<button class="opt" data-hold-sellpack=/.test(A319) && /data-hold-exchange=/.test(A319)
+    && /showSellFromPack\(btn\.dataset\.holdSellpack, again\)/.test(A319) && /canChangeMoneyHere\(\) \? ` <button class="link-btn" data-change-money>/.test(A319)
+    && /if \(moneyClassOf\(here\.regionId \|\| null, CONTENT\.rules\?\.economy \|\| null\) === "the_crossing"\) return true;/.test(A319)
+    && /const r = sellFromPack\(character, picked\(\)\.map\(x => x\.q\.name\)/.test(A319) && /queueHoldingEvent\(character, `At \$\{h\.name \|\| "the hold"\} you sold/.test(A319)
+    && /exchangeAt\(character, \{ from: f, to: t, amount: Number\(amt\.value\) \}, rid, eco, \{ worldState: character\.worldState \|\| null, dry \}\)/.test(A319));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

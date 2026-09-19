@@ -16,7 +16,7 @@ import { advanceSeeking } from "./seeking.js"; // CCODE-222: a reason for the en
 import { battleRound, synthesizeOpponentSheet } from "./skill_battle.js";   // CCODE-113: an arc is CONTESTED with the same dice the player rolls
 import { applyNpcUpdates } from "./npcs.js";
 import { activeCompany } from "./company.js";   // SNG-358: a holding's keeper must still be with you
-import { queueFeatureOffers, advanceHolding, holdingNews, unstewardedHoldings, takeHoldingEvents, CONDITIONS, tickStore, storeNews, advanceDebts, growHolding, holdingGround, holdingMeaningAura } from "./holdings.js";
+import { queueFeatureOffers, advanceHolding, holdingNews, unstewardedHoldings, takeHoldingEvents, CONDITIONS, tickStore, storeNews, advanceDebts, growHolding, holdingGround, holdingMeaningAura, healingAt } from "./holdings.js";
 import { tickCaravans } from "./caravan.js";   // R49: the road runs itself, and can be robbed
 import { meaningDensity, peoplePresentAt } from "./substrate.js";   // R46b: what the pilgrims come for   // SNG-358: holdings ride the same world-gated pass
 import { commitGrowth } from "./npcsheet.js";   // ✅ R37: growth writes, on the tick
@@ -3066,6 +3066,19 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
   // retrievable. Putting the player on the death ladder is only half the job — the clock has to reach them
   // too, or "your party can still come for you" is not a race against anything.
   if (character?.status === "dead" && character.deathState) deathNames.set(character, character.name || "You");
+  // ⛔ CCODE-434 (SNG-627 `healing`): A BODY LYING WHERE YOU KEEP AN INFIRMARY IS TENDED — it sinks slower, on the depth and the seal alike
+  // (`death.js` reads one divisor). Where a body lies is where the person was last seen; the player's, where they fell. Stamped each pass,
+  // and cleared when the infirmary or the hold is gone — tending is a place, not a blessing.
+  {
+    const holdCfg434 = content.rules?.economy?.holdStore ? { ...content.rules.economy.holdStore, features: content.rules.economy.holdFeatures || null } : null;
+    const tend434 = (e, locId) => {
+      if (!e?.deathState || e.deathState.sealed || !holdCfg434) return;
+      const t = healingAt(character, locId, holdCfg434);
+      e.deathState.tendedBy = t ? { holdId: t.hold.id, hold: t.hold.name || t.hold.id, feature: String(t.feature.name || t.feature.kind).split(" — ")[0] } : null;
+    };
+    for (const n of Object.values(character.npcRegistry || {})) if (n && n.status === "dead") tend434(n, n.lastSeen?.locationId || null);
+    if (character?.status === "dead") tend434(character, character.currentLocationId || null);
+  }
   for (const e of deepenDeaths([...deathNames.keys()], currentWorldDay, content.rules || {})) {
     const name = deathNames.get(e);
     if (name) news.push({ text: `${name} has passed beyond the roads back — the dark has closed over them, and no return remains.`, worldDay: currentWorldDay, tier: "event" });

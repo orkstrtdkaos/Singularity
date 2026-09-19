@@ -212,6 +212,9 @@ export function propertyAt(character, locationId, property, cfg = null) {
   return null;
 }
 
+/** ⛔ CCODE-434 (SNG-627 `healing`; Aevi: "somebody hurt can be brought here and get better") — WHERE YOU KEEP AN INFIRMARY. Pure. */
+export function healingAt(character, locationId, cfg = null) { return propertyAt(character, locationId, "healing", cfg); }
+
 /** ⛔ CCODE-432 (SNG-627; Erik: "Stables can shorten journeys but can also house the mounts for cavalry") — WHERE YOU KEEP MOUNTS. Pure. */
 export function mountsAt(character, locationId, cfg = null) { return propertyAt(character, locationId, "mounts", cfg); }
 

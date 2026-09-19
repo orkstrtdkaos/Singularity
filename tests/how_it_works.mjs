@@ -22643,6 +22643,54 @@ console.log("\n── §312 · the axes are keyed by their ids — the template 
     ok312.axes.violence_peace === -0.6 && ok312.axes.dark_light === 0.3 && !Object.keys(bad312.axes).length && bad312.axesDropped.length === 1);
 }
 
+// ══════════ §313 · CCODE-434 — AN INFIRMARY HEALS THE HURT AND TENDS THE DEAD ══════════
+// SNG-627 `healing`. Aevi: "somebody hurt can be brought here and get better" — and "an infirmary should matter to a death-ladder retrieval.
+// SNG-566's depths are built and an infirmary touches none of them."
+console.log("\n── §313 · an infirmary heals the hurt and tends the dead — a night there, a band brought there, a body lying there ──");
+{
+  const D313 = await import("../engine/death.js");
+  const M313 = await import("../engine/melee.js");
+  const H313 = await import("../engine/holdings.js");
+  const W313 = await import("../engine/worldtick.js");
+  const { loadContentHeadless: lch313 } = await import("./headless_content.mjs");
+  const CT313 = await lch313();
+  const cfg313 = { ...CT313.rules.economy.holdStore, features: CT313.rules.economy.holdFeatures };
+  const healers = Object.entries(cfg313.features.kinds || {}).filter(([k, d]) => !k.startsWith("_") && d?.property === "healing").map(([k]) => k);
+  const who = { holdings: [{ id: "h1", name: "The Mercy Hold", locationId: "p1", features: [{ kind: "infirmary", name: "the infirmary" }] },
+                           { id: "h2", name: "The Unfinished", locationId: "p2", features: [{ kind: "infirmary", name: "half an infirmary", building: { passesLeft: 1 } }] }] };
+  check("§313: ⛔ where you keep an infirmary is read from the feature's PROPERTY, standing, at that place",
+    healers.includes("infirmary") && H313.healingAt(who, "p1", cfg313)?.hold?.id === "h1" && H313.healingAt(who, "p2", cfg313) === null && H313.healingAt(who, "p3", cfg313) === null,
+    healers.join(", "));
+
+  /* ---- 1 · THE DEAD ---- */
+  const body = (tended) => ({ name: "C", status: "dead", deathState: { diedDay: 0, bodyStatus: "intact", sealed: false, depthOverride: null,
+    ...(tended ? { tendedBy: { holdId: "h1", hold: "The Mercy Hold", feature: "the infirmary" } } : {}) } });
+  check("§313: ⛔ a body TENDED at an infirmary sinks slower — at forty days the untended are in the deep dark and the tended still in the near dark",
+    D313.deathDepth(body(false), 40) === 2 && D313.deathDepth(body(true), 40) === 1 && D313.deathDepth(body(true), 70) === 2);
+  const u = [body(false)], t = [body(true)];
+  check("§313: …on the SAME divisor for the seal as for the depth — the untended seal at 130 days, the tended not until 240",
+    D313.deepenDeaths(u, 130).length === 1 && D313.deepenDeaths(t, 130).length === 0 && D313.deepenDeaths(t, 240).length === 1);
+  const src313 = rd("engine/worldtick.js");
+  check("§313: ⛔ the tick stamps who is tended each pass — where a body lies (the person last seen there; the player where they fell) — and clears it when the infirmary is gone",
+    /const t = healingAt\(character, locId, holdCfg434\);\n\s*e\.deathState\.tendedBy = t \? \{/.test(src313)
+    && /for \(const n of Object\.values\(character\.npcRegistry \|\| \{\}\)\) if \(n && n\.status === "dead"\) tend434\(n, n\.lastSeen\?\.locationId \|\| null\);/.test(src313)
+    && /if \(character\?\.status === "dead"\) tend434\(character, character\.currentLocationId \|\| null\);/.test(src313));
+  const gm313 = D313.reachableDeadForGM({ npcRegistry: { c: { id: "c", ...body(true) } }, worldState: { lastTickWorldDay: 10 } }, {}, 10);
+  check("§313: …and the GM is told where the body is tended, and that it sinks slower for it",
+    gm313?.[0]?.tendedAt === "The Mercy Hold" && /their body lies in the infirmary at \$\{d\.tendedAt\}, tended, and sinks slower for it/.test(rd("engine/gm.js")));
+
+  /* ---- 2 · THE HURT ---- */
+  const band313 = { id: "b", name: "The Test Guard", condition: "blooded", losses: 6, contingents: [{ n: 10, quality: 1, does: ["HARM", "MARTIAL"] }] };
+  const none = M313.recoverBand(band313, { days: 3, cfg: {} }), inf = M313.recoverBand(band313, { days: 3, cfg: {}, infirmary: "The Mercy Hold" });
+  check("§313: ⛔ a band brought where you keep an infirmary is mended by it — one with no menders of its own was beyond help, and is not there",
+    none.back === 0 && inf.back === 3 && /the infirmary at The Mercy Hold among them/.test(inf.why));
+  const A313 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§313: ⛑ where the band stands is read — where it was called, else its seat — and a night slept where you keep an infirmary heals more, and says so",
+    /const inf = bandAt \? healingAt\(character, bandAt, holdCfgNow\(\)\) : null;/.test(A313)
+    && /const infirmary = kind !== "breather" \? healingAt\(character, character\.currentLocationId, holdCfgNow\(\)\) : null;/.test(A313)
+    && /character\.health \+ r\.health \+ infirmaryHealth\)/.test(A313) && /They slept in the infirmary at /.test(A313));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

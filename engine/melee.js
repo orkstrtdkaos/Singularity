@@ -272,12 +272,15 @@ export function distributeCasualties(side, pool, { rng = Math.random, maxSharePe
  *  ⛔ AND RECOVERY IS CAPPED BY WHO IS DOING THE MENDING. Four menders cannot put a hundred back on their
  *  feet, so the rate scales with the RESTORE contingent rather than with the band — otherwise a token
  *  healer would heal an army and composition would stop mattering again one layer down. */
-export function recoverBand(band, { days = 1, cfg = {} } = {}) {
+export function recoverBand(band, { days = 1, cfg = {}, infirmary = null } = {}) {
   if (!band || band.condition === "broken") {
     return { band, back: 0, why: band?.condition === "broken" ? "they are broken — nobody is coming back to this" : "nothing to recover" };
   }
   const cs = contingentsOf(band);
-  const menders = cs.filter(c => c.does.includes("RESTORE")).reduce((a, c) => a + c.n, 0);
+  // ⛔ CCODE-434 (SNG-627 `healing`): an infirmary where the band stands mends as `infirmaryMenders` of their own would — ⚠️ UNAUTHORED, two
+  // stand in — so a band with no menders of its own is no longer beyond help when it is brought somewhere that can help it
+  const fromInfirmary = infirmary ? Math.max(0, num(cfg.infirmaryMenders, 2)) : 0;
+  const menders = cs.filter(c => c.does.includes("RESTORE")).reduce((a, c) => a + c.n, 0) + fromInfirmary;
   if (!menders) return { band, back: 0, why: "nobody mends them — what this cost, it cost for good" };
   const lost = Math.max(0, num(band.losses, 0));
   if (!lost) return { band, back: 0, why: "nobody to bring back" };
@@ -294,7 +297,7 @@ export function recoverBand(band, { days = 1, cfg = {} } = {}) {
     band: { ...band, losses: lost - back, count: head, condition:
         hurt > num(cfg.wornAt, 0.25) ? "worn" : (lost - back) > 0 ? "blooded" : "fresh",
       ...(band.contingents ? { contingents: healed } : {}) },
-    back, why: `${back} come back to the line — ${menders} mending`,
+    back, why: `${back} come back to the line — ${menders} mending${fromInfirmary ? `, the infirmary at ${infirmary} among them` : ""}`,
   };
 }
 

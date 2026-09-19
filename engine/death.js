@@ -15,7 +15,17 @@
 // ⛑ 5 IS NOT A GUESS: it is the number that makes the spec's own worked example true. Aevi wrote "Marrow at
 // bond 10 reaches the deep dark" — two rungs at bond 10 — and "an alt who never met you is a stranger with a
 // craft, and reaches the threshold at best" — zero rungs at bond 0. Both hold at 5 and the first does not at 6.
-const DEFAULTS = { thresholdDays: 1, nearDarkDays: 30, sealAfterDays: 120, bondPerRung: 5, bondRungs: 2, botherAt: 5 };
+// ⛔ CCODE-434 (SNG-627 `healing`): `tendedSinkFactor` — a body lying where the player keeps an infirmary is TENDED, and sinks this many times
+// slower (the spans and the seal both). ⚠️ UNAUTHORED — twice stands in, and says so where the GM reads it. The tick stamps `tendedBy`.
+const DEFAULTS = { thresholdDays: 1, nearDarkDays: 30, sealAfterDays: 120, bondPerRung: 5, bondRungs: 2, botherAt: 5, tendedSinkFactor: 2 };
+
+/** ⛔ CCODE-434 — HOW MUCH SLOWER THIS DEATH SINKS: its own slowed sinking (`slowSink`), times the infirmary's tending while its body lies
+ *  in one. One divisor, read by the depth AND the seal, so a tended death cannot sink slower on one and faster on the other. Pure. */
+function sinkDivisor(ds, cfg) {
+  const own = Math.max(1, Number(ds?.sinkFactor) || 1);
+  const tend = ds?.tendedBy ? Math.max(1, Number(cfg?.tendedSinkFactor) || 1) : 1;
+  return own * tend;
+}
 export const DEATH_DEPTH_NAMES = ["the threshold", "the near dark", "the deep dark", "the sealed"];
 
 /** Put an entity INTO the death state — a STATUS extension, never a delete. Preserves an existing state
@@ -49,7 +59,7 @@ export function deathDepth(entity, currentDay = null, rules = {}) {
   // HERE rather than in `deepenDeaths`, because depth is COMPUTED — a hold honoured only by the sealing
   // pass would stop them being sealed while still letting them sink, which is not what holding means.
   if (ds.heldOpenBy) return Math.max(0, Math.min(3, ds.depthOverride ?? 0));
-  const days = rawDays / Math.max(1, Number(ds.sinkFactor) || 1);
+  const days = rawDays / sinkDivisor(ds, cfg);   // ⛔ CCODE-434: a slowed sinking, and a tended body
   let depth = days <= cfg.thresholdDays ? 0 : days <= cfg.nearDarkDays ? 1 : 2;
   if (ds.bodyStatus === "lost" || ds.bodyStatus === "unmade") depth = Math.max(depth, 2);
   return Math.min(3, depth);
@@ -127,7 +137,7 @@ export function deepenDeaths(entities = [], currentDay = null, rules = {}) {
     if (!ds || ds.sealed || e.status !== "dead" || ds.diedDay == null || currentDay == null) continue;
     // ⛔ CCODE-269: a way held open does not seal, and a slowed sinking takes proportionally longer to.
     if (ds.heldOpenBy) continue;
-    if (((currentDay - ds.diedDay) / Math.max(1, Number(ds.sinkFactor) || 1)) >= cfg.sealAfterDays) { ds.sealed = true; sealed.push(e); }
+    if (((currentDay - ds.diedDay) / sinkDivisor(ds, cfg)) >= cfg.sealAfterDays) { ds.sealed = true; sealed.push(e); }   // CCODE-434: the same divisor
   }
   return sealed;
 }
@@ -150,7 +160,8 @@ export function reachableDeadForGM(character, content = {}, currentDay = null) {
     const d = deathDepth(e, day);
     const w = id ? wantedBy[id] : null;
     out.push({ name, depth: d, wall: DEATH_DEPTH_NAMES[d], cause: e.deathState?.cause || null,
-      wantedBy: w?.byName || null, askerWaiting: w?.waiting || false });
+      wantedBy: w?.byName || null, askerWaiting: w?.waiting || false,
+      tendedAt: e.deathState?.tendedBy?.hold || null });   // ⛔ CCODE-434: where their body is tended, and so sinks slower
   };
   // SNG-269/2b: the LIVING roster — authored figures PLUS the ones the world has minted since. A minted
   // figure who dies must be mournable and retrievable like any other; reading only the authored roster

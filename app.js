@@ -68,7 +68,7 @@ import { enterDeathState } from "./engine/death.js";
 // duplicated in this codebase, and each time the copies drifted before anyone noticed.
 wireDeathModel(DeathModel);
 import { carriageOf, voyageOf, isMoored, canSail, sailHolding, voyageLine, featureRuling, canBuildOn } from "./engine/carriage.js";
-import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mountsAt } from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room · CCODE-430: a yard trains   // B6b: the holding that moves
+import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mountsAt, healingAt } from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room · CCODE-430: a yard trains   // B6b: the holding that moves
 import { featureCost, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
 import { FIRE_TESTS, diffKeys } from "./engine/firetests.js";   // SNG-560: the parts that have never been used
@@ -170,7 +170,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.96";
+const APP_VERSION = "2.0.97";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -5861,7 +5861,11 @@ async function maybeTick() {
       // ⚠️ RIDES THE PROJECT TICK DELIBERATELY: `_lastProjectDay` already guarantees a day is paid exactly
       // once, and a second day-counter would drift from it the first time one of them was reset.
       for (const b of (character.bands || [])) {
-        const r = recoverBand(b, { days, cfg: meleeCfg() });
+        // ⛔ CCODE-434: where the band stands — where it was called, else its seat — and whether you keep an infirmary there
+        const bandAt = (b.called && b.locationId) || (character.holdings || []).find(h => h && String(h.id) === String(b.from))?.locationId
+          || (CONTENT.locations?.[b.from] ? b.from : null);
+        const inf = bandAt ? healingAt(character, bandAt, holdCfgNow()) : null;
+        const r = recoverBand(b, { days, cfg: meleeCfg(), infirmary: inf ? (inf.hold.name || inf.hold.id) : null });
         if (r.back > 0) {
           character.bands = character.bands.map(x => x.id === b.id ? r.band : x);
           character._bandNotes = [...(character._bandNotes || []).slice(-2), `${b.name}: ${r.why}`];
@@ -10927,7 +10931,11 @@ async function rest(kind = "sleep") {
   // SNG-105: energy restore scales with the pool (a night is always ~a third of maxEnergy); health/hours flat.
   const gainE = recoveryEnergy(kind, character, CONTENT.rules);
   character.energy = Math.min(character.maxEnergy, character.energy + gainE);
-  character.health = Math.min(character.maxHealth, character.health + r.health);
+  // ⛔ CCODE-434 (SNG-627 `healing`): a night slept where you keep an infirmary heals more — `recovery.infirmaryHealth` more; ⚠️ UNAUTHORED, a
+  // night's own health again stands in. A breather is not a night, so an hour in the infirmary is only an hour.
+  const infirmary = kind !== "breather" ? healingAt(character, character.currentLocationId, holdCfgNow()) : null;
+  const infirmaryHealth = infirmary ? Math.max(0, Number(rec.infirmaryHealth ?? r.health) || 0) : 0;
+  character.health = Math.min(character.maxHealth, character.health + r.health + infirmaryHealth);
   if (kind === "breather") {
     advanceClock(character.clock, r.hours);
     // ⚠️ A BREATHER IS NOT A NIGHT, and the module says so — only `momentary` conditions lift here.
@@ -10952,7 +10960,8 @@ async function rest(kind = "sleep") {
   const persistNote = rested.persisted.length
     ? ` Still carried, and a night did not touch it: ${rested.persisted.map(c => c.name || c.id).join(", ")} — let it show in how they move and speak.`
     : "";
-  startScene(`(The character takes a real night's rest here — camp, inn, or quiet corner. Narrate the rest briefly, then present what's happening when they get up. ${r.hours} hours have passed; do not grant additional energy — the engine already restored them.${persistNote})`, news);
+  const infirmaryNote = infirmary ? ` They slept in the infirmary at ${infirmary.hold.name || "the hold"}, and are the better for it (+${infirmaryHealth} health beyond a night's).` : "";
+  startScene(`(The character takes a real night's rest here — camp, inn, or quiet corner.${infirmaryNote} Narrate the rest briefly, then present what's happening when they get up. ${r.hours} hours have passed; do not grant additional energy — the engine already restored them.${persistNote})`, news);
 }
 
 async function onAsk(text) {

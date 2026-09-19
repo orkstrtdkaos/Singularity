@@ -30,8 +30,8 @@ import { credit, debit } from "./purse.js";
 import { addItem } from "./inventory.js";
 import { recordDeed } from "./reputation.js";
 import { applyLevelUps } from "./progression.js";
-import { addContingent } from "./melee.js";
-import { ensureJobs, dueJobs, landJob } from "./jobstate.js";
+import { addContingent, contingentsOf, bloodBand } from "./melee.js";   // CCODE-431: a band's hands go, and come back fewer if it cost them
+import { ensureJobs, dueJobs, landJob, JOB_FAMILIES } from "./jobstate.js";
 import { smartClamp } from "./namematch.js";
 import { MISSION_KINDS } from "./assignments.js";   // ⛔ CCODE-428: an errand's kind names the family it wants
 import { familiesFromEvidence } from "./combatants.js"; // …and a standing charge's own words name its family
@@ -62,6 +62,11 @@ export const JOB_DEFAULTS = {
   unmeasuredDays: 20,
   // how a suggested team is weighed: its odds, its members' level and loyalty, and the days out
   suggest: { odds: 1, level: 0.3, loyalty: 1.5, distance: 1 },
+  // ⛔ CCODE-431 — TROOPS ON A JOB. A contingent of hands rolls as a person at the middle of the levels its quality stands for (quality is
+  // `1 + floor(level/10)`, so quality 1 is level 5), each family on the attribute it is done with; it works as `n` pairs of hands; and a
+  // job that carries harm costs it heads by the band's own blood formula (`bloodBand`) at this tide for the degree.
+  unitAttribute: { HARM: "physical", PROTECT: "physical", MOVE: "physical", SHAPE: "practical", SUSTAIN: "practical", RESTORE: "practical", KNOW: "mental", INFLUENCE: "social" },
+  unitTide: { crit_success: 1, success: 0.5, partial: 0, failure: -0.5, crit_failure: -1.5 },
 };
 
 /** The job dials: the defaults, with `rules.jobs` over them (nested tables merged by key). Pure. */
@@ -71,7 +76,8 @@ export function jobRules(rules = {}) {
   return { ...JOB_DEFAULTS, ...r,
     score: { ...JOB_DEFAULTS.score, ...(r.score || {}) }, worth: { ...JOB_DEFAULTS.worth, ...(r.worth || {}) },
     effect: { ...JOB_DEFAULTS.effect, ...(r.effect || {}) }, suggest: { ...JOB_DEFAULTS.suggest, ...(r.suggest || {}) },
-    uncovered: { ...JOB_DEFAULTS.uncovered, ...(r.uncovered || {}) } };
+    uncovered: { ...JOB_DEFAULTS.uncovered, ...(r.uncovered || {}) },
+    unitAttribute: { ...JOB_DEFAULTS.unitAttribute, ...(r.unitAttribute || {}) }, unitTide: { ...JOB_DEFAULTS.unitTide, ...(r.unitTide || {}) } };
 }
 
 const num = (v, d = 0) => (Number.isFinite(Number(v)) ? Number(v) : d);
@@ -98,6 +104,16 @@ export function craftOdds(sheet, skill, { rules = {}, opposed = 0, location = nu
 
 /** A person's crafts as a job sees them — each battle skill's family and its dice at this opposition. Pure. */
 export function jobCraftsOf(person, { fnIndex = null, rules = {}, opposed = 0, location = null } = {}) {
+  // ⛔ CCODE-431: a band's hands bring no named crafts — they bring what the contingent DOES, each family at their quality, on the attribute
+  // that family is done with. `tier: 0`, because a soldier digging is a pair of hands, not a Mason.
+  if (person?.isUnit) {
+    const R = jobRules(rules);
+    return (person.does || []).map(family => {
+      const { chance, odds } = craftOdds(person.sheet, { attribute: R.unitAttribute?.[family] || "practical", rank: person.quality, name: person.short },
+        { rules, opposed, location, source: "the job" });
+      return { id: `unit-${family}`, name: UNIT_CRAFT[family] || "their hands", verb: null, family, rank: Math.max(1, num(person.quality, 1)), tier: 0, chance, odds };
+    });
+  }
   const out = [];
   for (const s of person?.skills || []) {
     if (!s || s.id === "_strike") continue;
@@ -181,7 +197,7 @@ export function workOf(job, team, crafts, rules = {}) {
   const rates = (team || []).map(p => {
     const best = (crafts.get(p.id) || []).filter(c => c.family === family).sort((a, b) => b.tier - a.tier || b.rank - a.rank)[0] || null;
     const rankRate = R.rankRate[Math.min(R.rankRate.length - 1, Math.max(0, (best?.rank || 1) - 1))] || 1;
-    return { id: p.id, rate: best ? Math.pow(num(R.tierRate, 3), best.tier) * rankRate : 1,
+    return { id: p.id, rate: (best ? Math.pow(num(R.tierRate, 3), best.tier) * rankRate : 1) * (p.isUnit ? Math.max(1, num(p.n, 1)) : 1),   // CCODE-431: n pairs of hands
       by: best ? { id: best.id, name: best.name, tier: best.tier, rank: best.rank } : null };
   });
   const workDays = Math.max(0, num(job?.effort, 1)) / Math.max(1, rates.reduce((a, r) => a + r.rate, 0));
@@ -294,13 +310,20 @@ export function sayEffects(fx, team = []) {
   // xp is the character's only when they go; the people who went grow from a job done well instead (`applyJobEffects`)
   const youGo = !team.length || team.some(p => p.isYou);
   if (fx.xp && youGo) out.push(`+${fx.xp} xp`);
-  if ((fx.degree === "success" || fx.degree === "crit_success") && team.some(p => !p.isYou)) out.push(`growth for ${team.filter(p => !p.isYou).map(p => p.short || p.name).join(" and ")}`);
+  // ⛔ CCODE-431: growth is for PEOPLE — a band's hands have no record to grow, and the forecast must not promise what nothing pays
+  const growers = team.filter(p => !p.isYou && !p.isUnit);
+  if ((fx.degree === "success" || fx.degree === "crit_success") && growers.length) out.push(`growth for ${growers.map(p => p.short || p.name).join(" and ")}`);
   if (fx.recruits) out.push(`+${fx.recruits} recruit${fx.recruits === 1 ? "" : "s"}`);
   if (fx.items?.length) out.push(fx.items.join(", "));
   if (fx.hold) out.push(fx.hold);
   if (fx.deed) out.push(`deed: ${fx.deed}`);
   if (fx.standing) out.push(`standing ${fx.standing > 0 ? "+" : "−"}${Math.abs(fx.standing)}`);
-  if (fx.harmEach) out.push(`−${fx.harmEach} health each (${team.map(p => (p.isYou ? "you" : p.short || p.name)).join(", ") || "whoever went"})`);
+  if (fx.harmEach) {
+    // ⛔ CCODE-431: a person takes it as health; a band's hands take it as heads — what a fight would cost them at this degree
+    const people = team.filter(p => !p.isUnit), units = team.filter(p => p.isUnit);
+    if (people.length || !units.length) out.push(`−${fx.harmEach} health each (${people.map(p => (p.isYou ? "you" : p.short || p.name)).join(", ") || "whoever went"})`);
+    if (units.length) out.push(`the hands may not all come back`);
+  }
   if (fx.losses) out.push(`${fx.losses} lost`);
   return out.length ? out : ["nothing gained, nothing lost"];
 }
@@ -380,14 +403,149 @@ export function jobPoolOf(character, ctx = {}) {
   const opts = { content, worldDay };
   for (const r of atSideRows(character, opts)) if (r.id) add(r.id, here, "at your side");
   for (const r of poolRows(character, opts)) {
-    if (!r.id) continue;
+    // ⛔ CCODE-431: a band's hands — one member of a team, `n` of them
+    if (!r.id) { if (r.kind === "hands") { const u = jobUnitFor(character, r.unitId, r.contingentIndex, ctx); if (u && !seen.has(u.id)) { seen.add(u.id); out.push(u); } } continue; }
     // a keeper stands at the hold they keep — that is where a job would send them FROM
     const kept = (character?.holdings || []).find(h => h && String(h.steward) === String(r.id) && h.locationId);
     if (kept) { add(r.id, kept.locationId, `keeping ${kept.name || "a hold"}`); continue; }
     const w = wherePerson(r, { locations, generated: character?.generated?.location || {}, holdings: character?.holdings || [], hereId: here, worldDay });
     add(r.id, w.locationId || null, w.line);
   }
+  // ⛔ CCODE-431: and a hold's GUARDS — "troops are not furniture": a garrison that could only be paid can be sent, from where it stands
+  for (const h of character?.holdings || []) for (const g of (h && Array.isArray(h.garrison) ? h.garrison : [])) add(g, h.locationId || null, `on watch at ${h.name || "a hold"}`);
   return out;
+}
+
+const UNIT_CRAFT = { HARM: "their arms", PROTECT: "their shields", MOVE: "their legs", SHAPE: "their hands", SUSTAIN: "their stores",
+  RESTORE: "their field-craft", KNOW: "their eyes", INFLUENCE: "their word" };
+
+/** ⛔ CCODE-431 — A BAND'S HANDS AS ONE MEMBER OF A TEAM: `unit:<band id>:<contingent index>`. ⚠️ The index is stable: a contingent sent out
+ *  keeps its slot with no heads in it (every reader of a band already skips an empty contingent), so an id never comes to name anyone
+ *  else. */
+export function unitMemberId(bandId, index) { return `unit:${bandId}:${index}`; }
+export function parseUnitMemberId(id) {
+  const m = /^unit:(.+):(\d+)$/.exec(String(id || ""));
+  return m ? { bandId: m[1], index: Number(m[2]) } : null;
+}
+
+/** ⛔ CCODE-431 — TROOPS, NOT FURNITURE (SNG-627). Erik: "troops get fed and paid, but they can also be put to work and do jobs and
+ *  missions." One contingent of a band's hands as a job sees it: `n` of them, at the level their quality stands for, with a sheet built as a
+ *  person of that level is built, doing the families the contingent does. Where they stand: where the band was called, else the hold they
+ *  were raised at, else the band's seat. Null for a named person (they go as themselves) or an empty contingent. Pure. */
+export function jobUnitFor(character, bandId, index, ctx = {}) {
+  const { content = {}, abilityCatalog = content.abilities || {}, day = null, worldDay = null } = ctx;
+  const rules = content.rules || {};
+  const band = (character?.bands || []).find(b => b && String(b.id) === String(bandId));
+  const c = band ? contingentsOf(band)[index] : null;
+  if (!c || c.npcId || !(num(c.n, 0) > 0)) return null;
+  const quality = Math.max(1, num(c.quality, 1));
+  const level = 10 * (quality - 1) + 5;
+  const does = [...new Set((c.does || []).map(String).filter(f => JOB_FAMILIES.includes(f)))];
+  const label = c.kind || (c.what && String(c.what).length <= 24 ? c.what : "hands");
+  const sheetOf = typeof ctx.sheetOf === "function" ? ctx.sheetOf
+    : (r) => personOpponentFor(r, { catalog: abilityCatalog, cfg: rules.npcStanding || {}, day: worldDay ?? day, traditionIndex: content.traditionIndex || null,
+      items: content.items || null, leveling: rules.leveling || null });
+  let sheet = null;
+  try { sheet = sheetOf({ id: unitMemberId(bandId, index), name: label, level, role: label }); } catch { sheet = null; }
+  const holdAt = (id) => (character?.holdings || []).find(h => h && String(h.id) === String(id))?.locationId || null;
+  const locationId = (band.called && band.locationId) || holdAt(c.from) || holdAt(band.from) || (content.locations?.[band.from] ? band.from : null) || null;
+  const name = `${num(c.n, 0)} ${label} of ${band.name || band.id}`;
+  return { id: unitMemberId(bandId, index), isUnit: true, bandId: String(bandId), index, n: num(c.n, 0), quality, level, does, what: c.what || null,
+    name, short: name, isYou: false, sheet: { attributes: sheet?.attributes || {}, subAttributes: sheet?.subAttributes || {} },
+    skills: [], wits: num(sheet?.subAttributes?.wits, 2), regionsKnown: {}, abilities: [], loyalty: 0, locationId, from: `with ${band.name || "the band"}` };
+}
+
+/** ⛔ CCODE-431 — SENT OUT, THEY LEAVE. A band's hands on a job are not in the band: its strength, a fight and a call all see it without
+ *  them. And a guard on a job is not on the watch, so the hold sees with fewer eyes and a raid finds fewer defenders. ⚠️ BY LEAVING, not by a
+ *  flag every reader must learn: the heads come out of their contingent (the slot stays, empty) and the guard off the garrison, and the
+ *  entry keeps what left, so `returnFromJob` can bring back whoever comes back. A person who stands in a band leaves their place in it too.
+ *  Mutates `character` and `entry`; → what left. */
+export function detachForJob(character, entry) {
+  const out = { units: [], guards: [] };
+  if (!character || !entry) return out;
+  const bands = Array.isArray(character.bands) ? character.bands : [];
+  const takeSlot = (band, index) => {
+    // a flat band's implicit contingent is made real first, as `addContingent` makes it, or its people would vanish
+    if (!Array.isArray(band.contingents) || !band.contingents.length) band.contingents = contingentsOf(band).map(c => ({ ...c }));
+    const c = band.contingents[index];
+    if (!c || !(num(c.n, 0) > 0)) return null;
+    const took = { ...c };
+    band.contingents = band.contingents.map((x, i) => (i === index ? { ...x, n: 0 } : x));
+    band.count = band.contingents.reduce((a, x) => a + Math.max(0, num(x?.n, 0)), 0);
+    return took;
+  };
+  for (const id of (entry.team || []).map(String)) {
+    const u = parseUnitMemberId(id);
+    if (u) {
+      const band = bands.find(b => b && String(b.id) === u.bandId);
+      const took = band ? takeSlot(band, u.index) : null;
+      if (took && !took.npcId) out.units.push({ id, bandId: u.bandId, index: u.index, bandName: band.name || band.id, c: took });
+      continue;
+    }
+    if (id === "player") continue;
+    for (const band of bands) {
+      const i = contingentsOf(band).findIndex(c => c.npcId === id && c.n > 0);
+      if (i >= 0) { const took = takeSlot(band, i); if (took) out.units.push({ id, bandId: String(band.id), index: i, bandName: band.name || band.id, c: took, named: true }); }
+    }
+    for (const h of character.holdings || []) {
+      if (h && Array.isArray(h.garrison) && h.garrison.includes(id)) {
+        h.garrison = h.garrison.filter(x => x !== id);
+        out.guards.push({ npcId: id, holdId: h.id, holdName: h.name || h.id });
+      }
+    }
+  }
+  entry.detached = out;
+  return out;
+}
+
+/** ⛔ CCODE-431 — AND WHOEVER COMES BACK COMES BACK. The hands return to their slot — less what a job that carried harm cost them, by the
+ *  band's own blood formula at the degree's tide (`unitTide`), so a failed job bleeds them as a lost fight would and a success barely
+ *  does — and the band's losses and condition carry it, on `bloodBand`'s own thresholds. A guard goes back on the watch. A band that no
+ *  longer stands, or a hold no longer yours, is SAID rather than quietly absorbing them. Mutates `character`; → the lines to say. */
+export function returnFromJob(character, entry, fx, { rules = {}, cfg = {} } = {}) {
+  const lines = [];
+  const d = entry?.detached;
+  if (!character || !d || d.returned) return lines;
+  const R = jobRules(rules);
+  const tide = num(R.unitTide?.[fx?.degree], 0);
+  const harmful = num(fx?.harmEach, 0) > 0;
+  for (const u of d.units || []) {
+    const band = (character.bands || []).find(b => b && String(b.id) === String(u.bandId));
+    const n = Math.max(0, num(u.c?.n, 0));
+    const label = u.named ? (entry.names?.[u.id] || u.c?.what || "they") : (u.c?.kind || "hands");
+    let lost = 0;
+    if (harmful && !u.named && n > 0) {
+      const r = bloodBand({ id: "detachment", contingents: [{ ...u.c }], losses: 0, condition: "fresh" }, tide, { cfg });
+      lost = Math.min(n, Math.max(0, num(r?.lost, 0)));
+    }
+    const back = n - lost;
+    if (!band) {
+      lines.push(u.named ? `${label} came back to a band that no longer stands` : `${back} ${label} came back to find ${u.bandName} no longer stands, and went their own ways`);
+      continue;
+    }
+    const cs = Array.isArray(band.contingents) ? band.contingents : [];
+    const slot = cs[u.index];
+    const same = !!slot && !(num(slot.n, 0) > 0) && String(slot.npcId || "") === String(u.c?.npcId || "")
+      && String(slot.from || "") === String(u.c?.from || "") && String(slot.what || "") === String(u.c?.what || "");
+    if (back > 0) band.contingents = same ? cs.map((x, i) => (i === u.index ? { ...x, n: back } : x)) : [...cs, { ...u.c, n: back }];
+    band.count = (band.contingents || []).reduce((a, x) => a + Math.max(0, num(x?.n, 0)), 0);
+    if (lost > 0) {
+      band.losses = num(band.losses, 0) + lost;
+      const head = band.count, hurt = (head + band.losses) ? band.losses / (head + band.losses) : 0;
+      // ⚠️ `bloodBand`'s own thresholds, read from the same dials — a band that bled on a job is exactly as worn as one that bled in a fight
+      band.condition = head === 0 || hurt > num(cfg.brokenAt, 0.5) ? "broken" : hurt > num(cfg.wornAt, 0.25) ? "worn" : "blooded";
+      lines.push(`${lost} of the ${n} ${label} did not come back to ${u.bandName}`);
+    }
+  }
+  for (const g of d.guards || []) {
+    const h = (character.holdings || []).find(x => x && String(x.id) === String(g.holdId));
+    const who = entry.names?.[g.npcId] || g.npcId;
+    if (!h) { lines.push(`${who} came back, but ${g.holdName} is no longer yours to guard`); continue; }
+    if (!(h.garrison || []).includes(g.npcId)) h.garrison = [...(Array.isArray(h.garrison) ? h.garrison : []), g.npcId];
+    lines.push(`${who} is back on the watch at ${h.name || h.id}`);
+  }
+  entry.detached = { ...d, returned: true };
+  return lines;
 }
 
 // ── WHAT THE GM IS TOLD ──────────────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -474,16 +632,22 @@ export function applyJobEffects(character, entry, fx, { content = {}, itemCatalo
 
 /** ⛔ EVERY TEAM WHOSE TIME IS UP, SETTLED: the roll made from the odds they left with, what it brought applied through the doors, the
  *  GM's directive written, and the entry moved to `back` untold. Returns the settled entries. Mutates `character`. */
-export function settleDueJobs(character, { nowHours = 0, rng = Math.random, content = {}, itemCatalog = content.items || {}, day = null } = {}) {
+export function settleDueJobs(character, { nowHours = 0, rng = Math.random, content = {}, itemCatalog = content.items || {}, day = null, bandCfg = null } = {}) {
+  // ⚠️ THE BAND DIALS ARE THE CALLER'S BAG (app.js `meleeCfg`); this is the same two sources it merges, for a caller without one
+  const cfgBand = bandCfg || { ...(content.skillBattle?.engine?.melee || {}), ...(content.rules?.martial || {}) };
   const settled = [];
   ensureJobs(character);
   for (const e of dueJobs(character, nowHours)) {
     const degree = rollJob(e.dist, rng);
     const fx = jobEffects(e.job, degree, content.rules || {});
     const applied = applyJobEffects(character, e, fx, { content, itemCatalog, day });
-    const team = (e.team || []).map(id => ({ id, isYou: id === "player", short: id === "player" ? "you" : (e.names?.[id] || id) }));
+    // ⛔ CCODE-431: whoever was detached comes back — the hands to their band, less what a harmful job cost them; a guard to the watch
+    const returned = returnFromJob(character, e, fx, { rules: content.rules || {}, cfg: cfgBand });
+    applied.push(...returned);
+    const team = (e.team || []).map(id => ({ id, isYou: id === "player", isUnit: !!parseUnitMemberId(id), short: id === "player" ? "you" : (e.names?.[id] || id) }));
     const cover = (e.cover || []).map(c => (c ? { personName: c.personId === "player" ? "you" : c.personName, craft: c.craft } : null));
-    const directive = jobDirective(e.job, degree, fx, cover, team, { whereName: content.locations?.[e.job?.where]?.name || null });
+    const directive = jobDirective(e.job, degree, fx, cover, team, { whereName: content.locations?.[e.job?.where]?.name || null })
+      + (returned.length ? `\nWho came back: ${returned.join("; ")}.` : "");
     const back = landJob(character, e.id, { degree, fx, applied, directive, backDay: day });
     if (back) settled.push(back);
   }

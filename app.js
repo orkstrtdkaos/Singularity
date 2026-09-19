@@ -86,8 +86,8 @@ import { rankVoices, pickVoice, speakableText, chunkForSpeech, renderProseHtml }
 import { harmGateFor, harmTargetFor, departureGateFor, isConsequentialMove, isSpeechAct, isRemoteContact, personDestination, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop); SNG-188: speech-act guard; SNG-228: person-as-place guard; CCODE-158: one departure definition for both doors; CCODE-159: remote contact is not travel
 import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, gateHopCost, aimsOpen } from "./engine/waygate.js";
 import { routeBetween, routeLine, twoWayRoads } from "./engine/journey.js";
-import { planJob, suggestTeam, jobPoolOf, jobRouteOf, jobCost, jobEffects, sayEffects, settleDueJobs, degreeWord, jobOpposition, mainNeedOf, jobCraftsOf, bestCraftFor, OUTCOMES as JOB_OUTCOMES, errandOdds } from "./engine/jobs.js";   // CCODE-420 · CCODE-428
-import { ensureJobs, postJob, sendOnJob, awayOnJob, untoldJobs, markJobsTold, dropJob } from "./engine/jobstate.js";   // CCODE-420
+import { planJob, suggestTeam, jobPoolOf, jobRouteOf, jobCost, jobEffects, sayEffects, settleDueJobs, degreeWord, jobOpposition, mainNeedOf, jobCraftsOf, bestCraftFor, OUTCOMES as JOB_OUTCOMES, errandOdds, detachForJob } from "./engine/jobs.js";   // CCODE-420 · CCODE-428 · CCODE-431
+import { ensureJobs, postJob, sendOnJob, awayOnJob, untoldJobs, markJobsTold, dropJob, detachedFrom } from "./engine/jobstate.js";   // CCODE-420 · CCODE-431
 import { sendCaravan, caravansOf } from "./engine/caravan.js";   // R49: a caravan is a delegate + a route + a load   // SNG-331 §1 / SNG-386 §4.4: two named options over roads + gates // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph, craftRollsLine, craftRollsShort } from "./engine/entityDetail.js";
 import { collapseScenePresence, canonicalPersonId, personArtSeed, applyNpcUpdates, findExistingNpc, genderUnsaid, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM, repairUnnamedPeople } from "./engine/npcs.js";   // SNG-431 §1: the pre-namer saves get their names
@@ -170,7 +170,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.93";
+const APP_VERSION = "2.0.94";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -13646,6 +13646,11 @@ function renderHoldingsTab(manageId = null) {
         <div class="hint">${ownerOf(h)}${esc(h.kind || "post")} \u00b7 ${esc(h.condition || "holding")}${h.steward ? " \u00b7 kept by " + esc(nameOf(h.steward)) : " \u00b7 unkept"}</div>
         ${factsOf(h)}
         ${head("Who is here")}
+        ${(() => { // ⛔ CCODE-431: a guard out on a job is not on this watch until they are back
+          const outs = (character.jobs?.out || []).flatMap(e => (e?.detached && !e.detached.returned ? e.detached.guards || [] : [])
+            .filter(g => String(g.holdId) === String(h.id)).map(g => ({ g, e })));
+          return outs.length ? `<div class="hint" style="margin-top:2px">off the watch: ${outs.map(({ g, e }) => `${esc(e.names?.[g.npcId] || nameOf(g.npcId))} — out on "${esc(e.job?.label || "a job")}", back day ${Math.floor((Number(e.backAtHours) || 0) / 24)}`).join(" · ")}</div>` : "";
+        })()}
         <div class="opt-row" style="gap:6px;flex-wrap:wrap;margin-top:4px">
           ${folkOpts ? `<select data-hold-hand="${esc(h.id)}">${folkOpts}</select><button class="opt" data-hold-crew="${esc(h.id)}" title="Put them to work here \u2014 crew add to what it makes">Add hands</button><button class="opt" data-hold-guard="${esc(h.id)}" title="Post them on watch \u2014 a watch is what SEES a raid coming">Post a guard</button>` : ""}
         </div>
@@ -15096,8 +15101,11 @@ function showBandMusterPicker(unitId) {
   const unit = unitsOf(character).find(u => u.id === unitId);
   if (!unit) return;
   const cfgS = holdCfgNow();
+  // ⛔ CCODE-431: A HOLD FEEDS ONE COUNT, whichever band the heads stand in and wherever they are today — this counted only the band being
+  // mustered into, so two bands could each raise a hold's full count; and a head out on a job still eats its bread
+  const raisedAt = (h) => unitsOf(character).reduce((a, x) => a + musteredFrom(x.unit, h.id), 0) + detachedFrom(character, h.id);
   const rows = (character.holdings || []).map(h => ({
-    h, spare: musterCapacityOf(h, cfgS, { mustered: musteredFrom(unit.unit, h.id) }),
+    h, spare: musterCapacityOf(h, cfgS, { mustered: raisedAt(h) }),
     already: musteredFrom(unit.unit, h.id),
   })).filter(r => r.spare > 0);
   if (!rows.length) {
@@ -15371,7 +15379,7 @@ function settleJobsNow() {
   try {
     if (!character?.jobs?.out?.length) return [];
     const clk = readClock(character.clock);
-    const settled = settleDueJobs(character, { nowHours: clk.day * 24 + clk.hour, content: CONTENT, itemCatalog: CONTENT.items || {}, day: clk.day });
+    const settled = settleDueJobs(character, { nowHours: clk.day * 24 + clk.hour, content: CONTENT, itemCatalog: CONTENT.items || {}, day: clk.day, bandCfg: meleeCfg() });
     for (const e of settled) {
       const who = (e.team || []).map(id => (id === "player" ? "You" : e.names?.[id] || id)).join(", ");
       queueHoldingEvent(character, `⚒ ${who} — back from "${e.job?.label}": ${degreeWord(e.degree)}. ${(e.applied || []).join("; ") || "Nothing gained, nothing lost."}`);
@@ -15427,7 +15435,7 @@ function renderJobsTab(selId = null) {
       try { best = bestCraftFor(jobCraftsOf(p, { fnIndex: FN_INDEX, rules: CONTENT.rules, opposed, location: ctx.location }), fam, CONTENT.rules); } catch { best = null; }
       return `<label class="job-row${away ? " away" : ""}">
         <input type="checkbox" data-job-pick="${esc(p.id)}"${pick.has(String(p.id)) ? " checked" : ""}${away ? " disabled" : ""}>
-        <span class="job-row-name"><strong>${esc(p.isYou ? "You" : p.short)}</strong> <span class="hint">level ${p.level}</span></span>
+        <span class="job-row-name"><strong>${esc(p.isYou ? "You" : p.short)}</strong> <span class="hint">level ${p.level}${p.isUnit ? " each" : ""}</span></span>
         <span class="job-row-where hint">${away ? `out on "${esc(away.job?.label)}" — back day ${Math.floor(away.backAtHours / 24)}` : esc(p.from || "")}</span>
         <span class="job-row-odds">${best ? `${oddsBarHtml(best.odds)}<span class="hint">${esc(best.name)} ${best.chance}%</span>` : `<span class="hint">no craft to ${esc(JOB_WORD[fam] || "do this")}</span>`}</span>
       </label>`;
@@ -15560,6 +15568,8 @@ function renderJobsTab(selId = null) {
     if (cost > 0 && (Number(ensurePurse(character)?.crystal) || 0) < cost) { alert(`This costs ${cost} crystal.`); return; }
     const r = sendOnJob(character, job.id, team.map(p => p.id), plan, { nowHours, day: clk.day, names: Object.fromEntries(team.map(p => [p.id, p.isYou ? character.name : p.short])) });
     if (!r.ok) { alert(r.why); return; }
+    // ⛔ CCODE-431: THEY LEAVE — the hands out of their band, a guard off the watch, until they are back
+    detachForJob(character, r.entry);
     if (cost > 0) debit(character, "crystal", cost);
     delete _jobsUi.pick[job.id];
     _jobsUi.sel = null;
@@ -15624,6 +15634,8 @@ function renderBandsTab() {
       ${(() => {
         // ⛑ SNG-541 §4.4 — "out: carrying word to Hardline, back in six". An errand someone is ALREADY on is the
         // most useful thing this row can say, and it is the thing that stops a player sending them twice.
+        const job = r.id ? awayOnJob(character, r.id) : null;   // ⛔ CCODE-431: out on a job says so, as an errand does
+        if (job) return `<span class="hint" style="width:100%">out on a job: "${esc(job.job?.label || "a job")}" — back day ${Math.floor((Number(job.backAtHours) || 0) / 24)}</span>`;
         const out = Object.values(character.worldState?.assignments || {})
           .find(x => x && x.npcId === r.id && x.status !== "done");
         if (!out) return "";
@@ -15702,6 +15714,12 @@ function renderBandsTab() {
           ? `<div class="hint">${esc(unitLine(u))}</div>`
           : `<div><strong>${esc(u.name)}</strong>${u.isLegion ? ` <span class="news-near-chip">legion</span>` : ""} <span class="hint">— ${esc(unitLine(u))}</span></div>`}
         ${standing405(u)}
+        ${(() => { // ⛔ CCODE-431: who of this band is OUT ON A JOB — they are not in it until they are back, and the band reads smaller for it
+          const outs = (character.jobs?.out || []).flatMap(e => (e?.detached && !e.detached.returned ? e.detached.units || [] : [])
+            .filter(x => String(x.bandId) === String(u.id)).map(x => ({ x, e })));
+          if (!outs.length) return "";
+          return `<div class="codex-f hint">out on jobs: ${outs.map(({ x, e }) => `${x.named ? esc(e.names?.[x.id] || x.c?.what || "one of them") : `${x.c?.n || 0} ${esc(x.c?.kind || "hands")}`} on "${esc(e.job?.label || "a job")}", back day ${Math.floor((Number(e.backAtHours) || 0) / 24)}`).join(" · ")}</div>`;
+        })()}
         ${(() => {
           // ⛔ CCODE-406 — WHO LEADS IT, AND WHAT THE POSITION IS WORTH. Erik: "Those positions should grant bonuses... like a scaled
           // up band." ⚠️ The bonus is SAID, with the level it came from, because a number that changes a unit's worth and does not

@@ -35,6 +35,20 @@ export function awayOnJob(character, personId) {
   return null;
 }
 
+/** ⛔ CCODE-431 — HOW MANY OF A HOLD'S RAISED HANDS ARE OUT ON JOBS. Sent out, their contingent reads empty, so the capacity the hold feeds
+ *  would look free while they are gone and a player could raise its full count again — and be over it when they came home. A head out on a
+ *  job still eats that hold's bread. Pure. */
+export function detachedFrom(character, holdId) {
+  const want = String(holdId ?? "");
+  if (!want) return 0;
+  let n = 0;
+  for (const e of character?.jobs?.out || []) {
+    if (!e?.detached || e.detached.returned) continue;
+    for (const u of e.detached.units || []) if (!u.named && String(u.c?.from || "") === want) n += Math.max(0, num(u.c?.n, 0));
+  }
+  return n;
+}
+
 /** Everyone out on a job, as a Set of ids. Pure. */
 export function jobAwayIds(character) {
   const s = new Set();

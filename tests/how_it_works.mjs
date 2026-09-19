@@ -22176,6 +22176,11 @@ console.log("\n── §305 · the people Erik named — two joins by his word, 
   check("§305: ⛑ Loki's Sable is her own person — distinct from the runner, she/her as Erik names her, and the sheet no longer reads her as the legend",
     !hadSable || ((s304.distinctFrom || []).includes("sable_the_runner") && s304.pronouns === "she/her" && NS304.authoredFor(s304, { npcs: npcs304 }) === null));
   const silas304 = rd304("characters/player-s9z9u1/char-mrhs8286.json");
+  // ⚠️ THE FIXTURE MUST NOT INHERIT LIVE PLAY (SNG-556's rule, again): step 68 has since run in Erik's own tab — his save is past it with the
+  // fact on it once, which is the step WORKING — so the copy is rewound to before it, and the gate tests the step rather than its history.
+  for (const [id304, f304] of [["cassiel-ord", "Knew Veth for years as a warden."], ["veth-ondra", "Cassiel Ord knew her for years as a warden."]])
+    if (silas304.npcRegistry?.[id304]) silas304.npcRegistry[id304].knownFacts = (silas304.npcRegistry[id304].knownFacts || []).filter(x => x !== f304);
+  silas304.reconcileVersion = Math.min(Number(silas304.reconcileVersion) || 0, 67);
   const others304 = JSON.stringify(Object.entries(silas304.npcRegistry || {}).filter(([k]) => k !== "cassiel-ord" && k !== "veth-ondra"));
   const o304 = RC304.reconcile(silas304, "character", { content: CT304, day: 30 }, step68);
   const again304 = RC304.reconcile(silas304, "character", { content: CT304, day: 30 }, step68);
@@ -22461,6 +22466,105 @@ console.log("\n── §309 · a yard trains — the first feature property the 
   check("§309: ⛑ both places a price is shown ask where you stand — the call itself and the Bands tab's \"calling them would take\" — and each says the yard, not just the lower number",
     (A309.match(/trainedAt: trainingHere\(\)/g) || []).length === 2 && /\$\{cost\.trained \? `\$\{trainedSaid\(cost\)\}\\n` : ""\}/.test(A309)
     && /\$\{c\.trained \? ` <span class="hint">— \$\{esc\(trainedSaid\(c\)\)\}<\/span>` : ""\}/.test(A309));
+}
+
+// ══════════ §310 · CCODE-431 — TROOPS ARE NOT FURNITURE ══════════
+// SNG-627. Erik: "troops get fed and paid, but they can also be put to work and do jobs and missions." A garrison was only a bill. Now a
+// band's hands and a hold's guards can be sent on a job — and they LEAVE: the band is without them and the watch is without them until
+// whoever comes back comes back.
+console.log("\n── §310 · troops are not furniture — a band's hands and a hold's guards go on jobs, leave while they are out, and come back fewer if it cost them ──");
+{
+  const J310 = await import("../engine/jobs.js");
+  const JS310 = await import("../engine/jobstate.js");
+  const M310 = await import("../engine/melee.js");
+  const H310 = await import("../engine/holdings.js");
+  const FN310 = await import("../engine/functions.js");
+  const { loadContentHeadless: lch310 } = await import("./headless_content.mjs");
+  const CT310 = await lch310();
+  const fn310 = FN310.buildFunctionIndex(CT310.functionVocabulary);
+  const hcfg310 = { ...CT310.rules.economy.holdStore, features: CT310.rules.economy.holdFeatures };
+  // ⚑ SILAS'S OWN SAVE — his one band is six named people and no hands, so a contingent of twelve raised at the Fell Pell is added to a copy
+  const fresh = () => { const c = JSON.parse(rd("characters/player-s9z9u1/char-mrhs8286.json"));
+    M310.addContingent(c.bands[0], { n: 12, quality: 1, does: ["HARM", "MARTIAL"], what: "rank and file", from: "the-fell-pell" }); return c; };
+  const heads = (b) => M310.contingentsOf(b).reduce((a, x) => a + x.n, 0);
+  const s310 = fresh();
+  const pool310 = J310.jobPoolOf(s310, { content: CT310, abilityCatalog: CT310.abilities, worldDay: 30, locations: CT310.locations });
+  const unit310 = pool310.find(p => p.isUnit);
+  const guard310 = pool310.find(p => /^on watch at /.test(p.from || ""));
+  check("§310: ⛔ the pool offers a band's hands as ONE member of a team — twelve of them, at the level their quality stands for, where they were raised — and a hold's guard, from the hold",
+    !!unit310 && unit310.n === 12 && unit310.level === 5 && unit310.locationId === "millbrook" && /^12 rank and file of /.test(unit310.name)
+    && !!guard310 && (s310.holdings || []).some(h => (h.garrison || []).includes(guard310.id)), JSON.stringify({ unit: unit310?.name, guard: guard310?.name }));
+
+  /* ---- 2 · ⛔ WHAT THEY ARE ON A JOB ---- */
+  const crafts310 = J310.jobCraftsOf(unit310, { fnIndex: fn310, rules: CT310.rules, opposed: J310.jobOpposition(10, CT310.rules) });
+  const job310 = { id: "job-310", label: "Clear the bandits off the ridge road", where: "millbrook", level: 10, effort: 6,
+    needs: [{ family: "HARM", weight: 2 }, { family: "PROTECT", weight: 1 }], stakes: { crystal: 20, xp: 10, harm: 4 } };
+  const alone = J310.planJob(job310, [unit310], { rules: CT310.rules, fnIndex: fn310, location: CT310.locations.millbrook });
+  check("§310: ⛔ a unit rolls the families its contingent DOES, at its quality — HARM, not what it cannot — and works as twelve pairs of hands",
+    crafts310.map(c => c.family).join() === "HARM" && crafts310[0].tier === 0 && alone.cover[0]?.personId === unit310.id && alone.cover[1] === null
+    && alone.work.rates[0].rate === 12, JSON.stringify(alone.work.rates));
+
+  /* ---- 3 · ⛔ SENT, THEY LEAVE ---- */
+  const send = (c, degreeRng) => {
+    const p = J310.jobPoolOf(c, { content: CT310, abilityCatalog: CT310.abilities, worldDay: 30, locations: CT310.locations });
+    const team = [p.find(x => x.isUnit), p.find(x => /^on watch at /.test(x.from || ""))];
+    const plan = J310.planJob(job310, team, { rules: CT310.rules, fnIndex: fn310, location: CT310.locations.millbrook, nowHours: 0 });
+    JS310.postJob(c, job310, { day: 30 });
+    const s = JS310.sendOnJob(c, job310.id, team.map(x => x.id), plan, { nowHours: 0, day: 30, names: Object.fromEntries(team.map(x => [x.id, x.short])) });
+    return { team, plan, entry: s.entry };
+  };
+  const c310 = fresh();
+  const band310 = c310.bands[0];
+  const hold310 = (c310.holdings || []).find(h => (h.garrison || []).includes(guard310.id));
+  const before = { heads: heads(band310), strength: M310.bandStrength(band310, {}).effective, watch: H310.watchOf(hold310, hcfg310).length, capacity: JS310.detachedFrom(c310, "the-fell-pell") };
+  const sent = send(c310);
+  const det = J310.detachForJob(c310, sent.entry);
+  const during = { heads: heads(band310), strength: M310.bandStrength(band310, {}).effective, watch: H310.watchOf(hold310, hcfg310).length, capacity: JS310.detachedFrom(c310, "the-fell-pell") };
+  check("§310: ⛔ sent out, they LEAVE — the band reads twelve heads fewer and weaker, the guard is off the watch — and no reader of a band or a watch had to learn about jobs",
+    during.heads === before.heads - 12 && during.strength < before.strength && during.watch === before.watch - 1 && det.units.length === 1 && det.guards.length === 1
+    && band310.contingents.length === 7 && band310.contingents[6].n === 0, JSON.stringify({ before, during }));
+  check("§310: …and a hold's capacity still counts them — a head out on a job eats its bread, so the hold cannot raise its full count again while they are gone",
+    before.capacity === 0 && during.capacity === 12);
+
+  /* ---- 4 · ⛔ WHOEVER COMES BACK ---- */
+  const bad = J310.settleDueJobs(c310, { nowHours: sent.plan.backAtHours + 1, rng: () => 0.99999, content: CT310, day: 31 })[0];
+  const after = { heads: heads(band310), watch: H310.watchOf(hold310, hcfg310).length };
+  const c2 = fresh(); const sent2 = send(c2); J310.detachForJob(c2, sent2.entry);
+  const good = J310.settleDueJobs(c2, { nowHours: sent2.plan.backAtHours + 1, rng: () => 0.2, content: CT310, day: 31 })[0];
+  const c3 = fresh(); const safe = { ...job310, id: "job-310-safe", stakes: { crystal: 20 } };
+  const p3 = J310.jobPoolOf(c3, { content: CT310, abilityCatalog: CT310.abilities, worldDay: 30, locations: CT310.locations }).filter(x => x.isUnit);
+  const plan3 = J310.planJob(safe, p3, { rules: CT310.rules, fnIndex: fn310, location: CT310.locations.millbrook, nowHours: 0 });
+  JS310.postJob(c3, safe, { day: 30 }); const s3 = JS310.sendOnJob(c3, safe.id, p3.map(x => x.id), plan3, { nowHours: 0, day: 30, names: {} }); J310.detachForJob(c3, s3.entry);
+  J310.settleDueJobs(c3, { nowHours: plan3.backAtHours + 1, rng: () => 0.99999, content: CT310, day: 31 });
+  const lostBad = Number((/(\d+) of the 12 hands did not come back/.exec((bad?.applied || []).join(" ")) || [])[1] || 0);
+  const lostGood = Number((/(\d+) of the 12 hands did not come back/.exec((good?.applied || []).join(" ")) || [])[1] || 0);
+  check("§310: ⛔ a job that carries harm costs heads by the band's own blood formula — a critical failure bleeds them as a rout would, a success barely — and the band carries the losses",
+    bad?.degree === "crit_failure" && lostBad > lostGood && lostGood >= 0 && after.heads === before.heads - lostBad
+    && band310.losses === lostBad && ["worn", "broken"].includes(band310.condition) && good?.degree === "success", JSON.stringify({ lostBad, lostGood, cond: band310.condition }));
+  check("§310: …a job that carries no harm brings every one of them back, whatever the dice said",
+    heads(c3.bands[0]) === 18 && !(c3.bands[0].losses > 0));
+  check("§310: ⛑ and the guard is back on the watch, and the lines — and the GM's directive — say who came back",
+    after.watch === before.watch && (bad?.applied || []).some(l => /is back on the watch at /.test(l)) && /\nWho came back: /.test(bad?.directive || ""));
+
+  /* ---- 5 · ⚠️ NOTHING SILENTLY ABSORBED ---- */
+  const c4 = fresh(); const sent4 = send(c4); J310.detachForJob(c4, sent4.entry);
+  c4.bands = []; c4.holdings = (c4.holdings || []).filter(h => !(h.id === hold310.id));
+  const gone = J310.settleDueJobs(c4, { nowHours: sent4.plan.backAtHours + 1, rng: () => 0.2, content: CT310, day: 31 })[0];
+  check("§310: ⚠️ a band that no longer stands and a hold no longer yours are SAID, never quietly absorbed",
+    (gone?.applied || []).some(l => /no longer stands/.test(l)) && (gone?.applied || []).some(l => /no longer yours to guard/.test(l)));
+
+  /* ---- 6 · ⛑ WHERE IT IS DONE AND SEEN ---- */
+  const A310 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§310: ⛑ the Jobs tab sends them (detaching as they go) and settles on the band's own dials; the Bands tab, a person's row and the hold's popup say who is out; the muster picker counts every band and the hands out",
+    /if \(!r\.ok\) \{ alert\(r\.why\); return; \}\n\s*\/\/ ⛔ CCODE-431[^\n]*\n\s*detachForJob\(character, r\.entry\);/.test(A310)
+    && /day: clk\.day, bandCfg: meleeCfg\(\) \}\);/.test(A310) && /out on jobs: \$\{outs\.map/.test(A310) && /off the watch: \$\{outs\.map/.test(A310)
+    && /const job = r\.id \? awayOnJob\(character, r\.id\) : null;/.test(A310)
+    && /const raisedAt = \(h\) => unitsOf\(character\)\.reduce\(\(a, x\) => a \+ musteredFrom\(x\.unit, h\.id\), 0\) \+ detachedFrom\(character, h\.id\);/.test(A310)
+    && /\+ detachedFrom\(character, h\.id\);/.test(rd("engine/legionplan.js")));
+  check("§310: …and the forecast says it in their terms — health for people, heads for hands, and growth only for someone who can grow",
+    J310.sayEffects({ degree: "failure", harmEach: 4 }, [{ isUnit: true, short: "12 hands" }]).some(l => /the hands may not all come back/.test(l))
+    && J310.sayEffects({ degree: "success" }, [{ isUnit: true, short: "12 hands" }, { id: "siol", short: "Siol" }]).some(l => l === "growth for Siol")
+    && !J310.sayEffects({ degree: "failure", harmEach: 4 }, [{ isUnit: true, short: "12 hands" }]).some(l => /health each/.test(l)));
 }
 
 /* ══════════ REPORT ══════════ */

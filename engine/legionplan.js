@@ -20,6 +20,7 @@
 // PURE. Reads the character and content; returns data.
 
 import { canBeAskedToWork, musterCapacityOf } from "./holdings.js";
+import { detachedFrom } from "./jobstate.js";   // ⛔ CCODE-431: the hands out on jobs are still the hold's
 import { contributionsOf } from "./combatants.js";
 import { unitsOf, levelOfPerson } from "./fellowship.js";
 import { bandGaps, leaderBonusOf, callCostOf, contingentsOf } from "./melee.js";
@@ -127,7 +128,8 @@ export function draftLegionPlan(character, { content = {}, worldDay = null, cfg 
   for (const h of arr(character?.holdings)) {
     if (!h || h.condition === "failing") continue;
     const already = units.reduce((a, u) => a + contingentsOf(u.unit)
-      .reduce((s, c) => s + (!c.npcId && String(c.from || "") === String(h.id) ? num(c.n, 0) : 0), 0), 0);
+      .reduce((s, c) => s + (!c.npcId && String(c.from || "") === String(h.id) ? num(c.n, 0) : 0), 0), 0)
+      + detachedFrom(character, h.id);   // ⛔ CCODE-431: hands out on a job still eat this hold's bread
     const spare = musterCapacityOf(h, holdCfg, { mustered: already });
     if (spare <= 0) continue;
     const seated = bands.find(b => String(b.seatId || "") === String(h.id));

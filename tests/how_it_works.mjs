@@ -23339,6 +23339,26 @@ console.log("\n── §325 · a hold's pass is said on the early-return path to
     kept.includes("Fell Pell's keeper sold 5 raw material, 8 mech parts for 52 crystal."), JSON.stringify(kept));
 }
 
+// ══════════ §326 · CCODE-447 — THE PICTURE SERVICE'S REFUSAL, SAID ══════════
+// Erik, with a screenshot: "The image generation seems to be having issues" — the viewer said "this one didn't come through — try Draw
+// again". Measured: Pollinations answers every new picture, on every model, with 500 and "Insufficient balance … pollen". No retry helps.
+console.log("\n── §326 · a refusing picture service is named, not retried into — and a refusal deletes nothing ──");
+{
+  const ART326 = await import("../engine/art.js");
+  const body = `{"error":"Internal Server Error","message":"Gen Sana request failed with 402: {\"success\":false,\"error\":{\"message\":\"Insufficient balance. This request costs ~0.0001 pollen, but your available balance is 0.0000. Top up at https://enter.pollinations.ai/top-up.\",\"code\":\"INSUFFICIENT_BALANCE\"},\"status\":402}"}`;
+  check("§326: ⛔ THE REFUSAL IS READ — the service's real 500 body is 'unpaid'; any other failure, and any success, is not",
+    ART326.serviceRefusal(500, body) === "unpaid" && ART326.serviceRefusal(402, "Insufficient balance") === "unpaid"
+    && ART326.serviceRefusal(500, '{"error":"Internal Server Error"}') === null && ART326.serviceRefusal(200, body) === null && ART326.serviceRefusal(503, "") === null);
+  check("§326: ⛑ …and what the player is told says what happened and that what they have is safe — never 'try again'",
+    /charge for new pictures/.test(ART326.ART_REFUSED_SAID) && /the pictures you already have still show/.test(ART326.ART_REFUSED_SAID) && !/try/i.test(ART326.ART_REFUSED_SAID));
+  const A326 = rd("app.js").replace(/\r\n/g, "\n").split("\n").filter(l => !/^\s*\/\//.test(l)).join("\n");
+  check("§326: ⛔ A REFUSAL DELETES NOTHING — the probe reads the body on a failed response and STILL answers 'unknown', which `mintAction` leaves alone; the viewer and the gallery's retry ask before promising",
+    /if \(!res\.ok\) \{[\s\S]{0,300}const refused = serviceRefusal\(res\.status, body\);\n\s*if \(refused\) _artRefusal = \{ why: refused, at: Date\.now\(\) \};\n\s*return \{ verdict: "unknown",/.test(A326)
+    && /shownImg\.onerror = async \(\) => \{[\s\S]{0,200}const refused = await artRefusalOf\(it\.url\);/.test(A326)
+    && /\[data-galretry\]"\)\) b\.onclick = async \(\) => \{[\s\S]{0,200}if \(await artRefusalOf\(/.test(A326)
+    && ART326.mintAction("unknown", 0, 2) === "leave");
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

@@ -16,6 +16,18 @@
   "next": [],
   "releases": [
     {
+      "version": "2.2.3",
+      "date": "2026-09-19",
+      "entries": [
+        {
+          "kind": "fix",
+          "title": "Honest word when pictures can't be drawn",
+          "summary": "New pictures can't be drawn right now, and the game now says why instead of asking you to try again.",
+          "detail": "The service that draws the game's pictures has begun to charge for each new one, so none can be drawn at the moment. When a picture fails for that reason, the viewer and the gallery now say so plainly instead of offering another try that would fail the same way. Every picture you already have is safe and still shows."
+        }
+      ]
+    },
+    {
       "version": "2.2.2",
       "date": "2026-09-19",
       "entries": [

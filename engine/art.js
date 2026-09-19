@@ -160,6 +160,17 @@ export function onComposedLookup(fn) { _composedFor = typeof fn === "function" ?
 // NOTHING about the bytes, and must leave the save exactly as it found it. Deleting a player's gallery
 // because their train went into a tunnel would be a far worse bug than the one being fixed.
 
+/** ⛔ CCODE-447 — THE SERVICE'S REFUSAL, READ. Pollinations began charging for every new picture (2026-09): with no balance it answers
+ *  HTTP 500 with a JSON body whose message is "Insufficient balance … pollen" (code INSUFFICIENT_BALANCE), on every model. An `<img>` sees
+ *  only "error", so the viewer promised "try Draw again" — and a retry is a new request the service refuses too. This reads a failed
+ *  response: "unpaid" when it is that refusal, else null. ⚠️ It never makes a verdict: a refusal says nothing about stored bytes. Pure. */
+export function serviceRefusal(status, bodyText = "") {
+  if (!(Number(status) >= 400)) return null;
+  return /INSUFFICIENT_BALANCE|Insufficient balance/i.test(String(bodyText || "")) ? "unpaid" : null;
+}
+/** What a player is told when it is the refusal — what happened, and that what they have is safe. No "try again": it cannot help. */
+export const ART_REFUSED_SAID = "the picture service has begun to charge for new pictures, so none can be drawn right now — the pictures you already have still show";
+
 /** Smallest response that can be a real picture. Aevi's floor, with margin: the smallest healthy image she
  *  measured was ~18 KB, and the poisoned ones are 0. */
 export const IMAGE_MIN_BYTES = 1000;

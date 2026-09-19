@@ -746,7 +746,7 @@ contribute to authored dice without recreating the double-scaling bug.
 | `penetrationNote` | 1 | `mechanic`×1 | ⛔ DARK | — |
 | `uses` | 1 | `mechanic`×1 | ✅ READ | `backfill.js`, `corrections.js`, `craftmechanics.js` |
 | `type` | 1 | `mechanic`×1 | ✅ READ | `battle_turn.js`, `borncontract.js`, `canon.js` |
-| `status` | 1 | `root`×1 | ✅ READ | `assignments.js`, `authormode.js`, `backfill.js` |
+| `status` | 1 | `root`×1 | ✅ READ | `art.js`, `assignments.js`, `authormode.js` |
 | `trails` | 1 | `mechanic`×1 | ✅ READ | `gm.js`, `recovery_snapshots.js` |
 | `awaitingEngine` | 1 | `mechanic`×1 | ⛔ DARK | — |
 | `questions` | 1 | `mechanic`×1 | ✅ READ | `waygate.js`, `app.js` |

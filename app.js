@@ -44,7 +44,7 @@ import { LIBRARY_INDEX, loreToHtml, libMdToHtml, circleRows } from "./engine/lib
 import { contributionsBy, lookKey } from "./engine/canon.js";   // CCODE-422: where a look is filed   // ⛔ SNG-584: who made the shared world — tallied since SNG-128, read by nobody until now   // SNG-538 §4: the Library's index and renderers — pure, gated by §181
 import { sourcesHere } from "./engine/substrate.js";   // ⛔ Erik 2026-09-12: the four sources and how well each answers HERE
 import { groundForDecl, groundTag, substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace, groundHere, groundCardFor, naniteAt, bandFactor, peoplePresentAt } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
-import { sceneImage, itemImage, artworkStyle, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor, lookFor} from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
+import { sceneImage, itemImage, artworkStyle, getArtMode, setArtMode, imagesEnabled, ensureImage, aestheticFor, regenPromptFor, onImageMinted, onComposedLookup, swapImageUrl, forgetImageUrl, bustedURL, isBustedURL, mintAction, IMAGE_MIN_BYTES, regenerateImage, acceptImage, isGeneratedImage, toggleKeep, likenessClause, houseStyleFor, sanitizeImagePrompt, imageURLFor, isMinorSubject, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory, imageFileName, imageExtFor, lookFor, serviceRefusal, ART_REFUSED_SAID} from "./engine/art.js"; // SNG-401: draw it again without destroying the one they have
 import { decodeTerrain, sampleAt, colorAt, unproject, visiblePins, DEFAULT_VIEW, spanDeg, hydrologyPaths, makeFinePatch, MARKER_STYLE, contourStepFor, networkPaths, areaFieldAt, areaMembers, WORLD_TIER_FLOOR_DEG, floorRadius, makeRegionBase, regionExtent, bendRoad, roadNetwork, clipToFrame } from "./engine/worldglobe.js";
 import { glyphFor, drawGlyph } from "./engine/mapicons.mjs";   // SNG-409 §4: a pole must never read as a town   // SNG-390: the globe, read-only
 import { walkingDays, milesFor, worldPosForGenerated, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout, fieldBlobs, fieldAlpha, placeLabels } from "./engine/worldmap.js";
@@ -174,7 +174,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.2.2";
+const APP_VERSION = "2.2.3";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1513,16 +1513,33 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
  *  request never completed — offline, a dead hop, a cancelled navigation — and says NOTHING about the
  *  bytes. Nothing may be deleted on an `unknown`. Deleting a gallery because a train went into a tunnel
  *  would be a worse bug than the one this fixes. */
+let _artRefusal = null;   // ⛔ CCODE-447: once the service is known to refuse, every surface says so for the rest of the session
 async function imageBytesVerdict(url) {
   try {
     const res = await fetch(url, { cache: "reload" });
-    if (!res.ok) return { verdict: "unknown", why: `http ${res.status}` };
+    if (!res.ok) {
+      // ⛔ CCODE-447: read WHY — a refusal to draw is still "unknown" (it says nothing about stored bytes, so nothing is deleted)
+      let body = "";
+      try { body = await res.text(); } catch { /* an unreadable body is just an unexplained failure */ }
+      const refused = serviceRefusal(res.status, body);
+      if (refused) _artRefusal = { why: refused, at: Date.now() };
+      return { verdict: "unknown", why: `http ${res.status}${refused ? ` — the service refused: ${refused}` : ""}` };
+    }
     const blob = await res.blob();
     if (blob.size < IMAGE_MIN_BYTES) return { verdict: "empty", bytes: blob.size };
     return { verdict: "ok", bytes: blob.size };
   } catch (e) {
     return { verdict: "unknown", why: e?.message || "fetch failed" };
   }
+}
+
+/** ⛔ CCODE-447 — WHY A PICTURE DID NOT COME: the service's refusal, once known this session, or learned by asking it once. null when
+ *  it is not that (a flaky load, a dead hop) — and then the old words stand. Asks only a generated picture's own address. */
+async function artRefusalOf(url) {
+  if (_artRefusal) return _artRefusal;
+  if (!url || !isGeneratedImage(url)) return null;
+  await imageBytesVerdict(url);
+  return _artRefusal;
 }
 
 /** §A1 + §A2: prove the URL has an image behind it, and heal it with a cache-buster if it does not.
@@ -2388,9 +2405,10 @@ function openLightbox(items, start = 0, { onClose = null } = {}) {
     el.querySelector("[data-lbclose]").onclick = close;
     // §4: name the failure. A dead draw that just sits blank reads as "the button doesn't work".
     const shownImg = el.querySelector("[data-lbimg]");
-    if (shownImg) shownImg.onerror = () => {
+    if (shownImg) shownImg.onerror = async () => {
       const cap = el.querySelector(".lightbox-cap");
-      if (cap) cap.textContent = `${it.caption || ""} · this one didn't come through — try Draw again`;
+      const refused = await artRefusalOf(it.url);   // ⛔ CCODE-447: "try Draw again" is a promise a refusing service cannot keep
+      if (cap) cap.textContent = `${it.caption || ""} · ${refused ? ART_REFUSED_SAID : "this one didn't come through — try Draw again"}`;
     };
     const regenBtn = el.querySelector("[data-lbregen]");
     if (regenBtn) regenBtn.onclick = async (ev) => {
@@ -14728,8 +14746,10 @@ function renderGallery() {
   for (const b of app.querySelectorAll("[data-galcat]")) b.onclick = () => { galleryFilter = b.dataset.galcat; renderGallery(); };
   // CCODE-32: manually re-try a placeholder tile — cache-bust the src so pollinations serves it fresh (same seed
   // → same image, just re-fetched). Clears the broken state; the img's own auto-retry counter resets on success.
-  for (const b of app.querySelectorAll("[data-galretry]")) b.onclick = () => {
+  for (const b of app.querySelectorAll("[data-galretry]")) b.onclick = async () => {
     const fig = b.closest(".gallery-item"); const img = fig?.querySelector("img"); if (!img) return;
+    // ⛔ CCODE-447: a retry is a new request, and a refusing service refuses that too — say why rather than retry into it
+    if (await artRefusalOf(String(img.getAttribute("src") || ""))) { b.textContent = "✕ can't draw now"; b.title = ART_REFUSED_SAID; return; }
     fig.classList.remove("gallery-broken"); delete img.dataset.retried;
     const base = String(img.getAttribute("src") || "").split(/[?&]_r=/)[0];
     img.src = base + (base.includes("?") ? "&" : "?") + "_r=" + Date.now();

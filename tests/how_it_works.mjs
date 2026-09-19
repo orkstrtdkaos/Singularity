@@ -22431,6 +22431,38 @@ console.log("\n── §308 · a hold has room — its rung or its frame; a buil
     && /const hull = h \? canBuildOn\(h, sel\.value, CONTENT\.rules\?\.economy\?\.holdFeatures\?\.kinds\) : \{ ok: true \};/.test(A308));
 }
 
+// ══════════ §309 · CCODE-430 — A YARD TRAINS: A BAND CALLED WHERE IT CAN BE WORKED UP COSTS LESS ══════════
+// SNG-627's first hook. Erik: "the muster yard enable training and a place to raise troops to, perhaps at less cost." Aevi authored a
+// `property` on every feature kind; nothing read one. `training` is the first the engine reads.
+console.log("\n── §309 · a yard trains — the first feature property the engine reads, and a band called where it can be worked up costs less ──");
+{
+  const H309 = await import("../engine/holdings.js");
+  const M309 = await import("../engine/melee.js");
+  const { loadContentHeadless: lch309 } = await import("./headless_content.mjs");
+  const CT309 = await lch309();
+  const cfg309 = { ...CT309.rules.economy.holdStore, features: CT309.rules.economy.holdFeatures };
+  const kinds309 = cfg309.features?.kinds || {};
+  const trainers = Object.entries(kinds309).filter(([k, d]) => !k.startsWith("_") && d?.property === "training").map(([k]) => k);
+  check("§309: ⛔ a feature's PROPERTY is read — the kinds Aevi tagged `training` (the muster yard among them) are what a band is worked up at",
+    trainers.includes("muster_yard") && H309.featureProperty({ kind: "muster_yard" }, cfg309) === "training" && H309.featureProperty({ kind: "wall" }, cfg309) !== "training", trainers.join(", "));
+  const who309 = { holdings: [{ id: "a", name: "The Yard Hold", locationId: "p1", features: [{ kind: "muster_yard", name: "The Stand" }] },
+                              { id: "b", name: "The Unfinished", locationId: "p2", features: [{ kind: "muster_yard", name: "A yard", building: { passesLeft: 2 } }] }] };
+  const t309 = H309.trainingAt(who309, "p1", cfg309);
+  check("§309: …found where you stand, from a hold of yours with a STANDING training feature — a yard still being built trains nobody, and nowhere else counts",
+    t309?.hold?.id === "a" && t309?.feature?.name === "The Stand" && H309.trainingAt(who309, "p2", cfg309) === null && H309.trainingAt(who309, "elsewhere", cfg309) === null);
+  const unit309 = { contingents: [{ n: 10, quality: 1 }] };
+  const plain = M309.callCostOf([], unit309, { cfg: { callCostPerHead: 4 } });
+  const yard = M309.callCostOf([], unit309, { cfg: { callCostPerHead: 4 }, trainedAt: { where: "The Yard Hold", feature: "The Stand" } });
+  const set = M309.callCostOf([], unit309, { cfg: { callCostPerHead: 4, trainedCallMult: 0.5 }, trainedAt: { where: "X", feature: "Y" } });
+  check("§309: ⛔ called at a yard, a head costs less — a stand-in three-quarters that SAYS it is a stand-in, and the dial `trainedCallMult` once anybody sets it",
+    plain.perHead === 4 && plain.trained === null && yard.perHead === 3 && yard.total === 30 && yard.trained?.was === 4 && yard.trained?.multAuthored === false
+    && set.perHead === 2 && set.trained?.multAuthored === true);
+  const A309 = rd("app.js").replace(/\r\n/g, "\n");
+  check("§309: ⛑ both places a price is shown ask where you stand — the call itself and the Bands tab's \"calling them would take\" — and each says the yard, not just the lower number",
+    (A309.match(/trainedAt: trainingHere\(\)/g) || []).length === 2 && /\$\{cost\.trained \? `\$\{trainedSaid\(cost\)\}\\n` : ""\}/.test(A309)
+    && /\$\{c\.trained \? ` <span class="hint">— \$\{esc\(trainedSaid\(c\)\)\}<\/span>` : ""\}/.test(A309));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

@@ -68,7 +68,7 @@ import { enterDeathState } from "./engine/death.js";
 // duplicated in this codebase, and each time the copies drifted before anyone noticed.
 wireDeathModel(DeathModel);
 import { carriageOf, voyageOf, isMoored, canSail, sailHolding, voyageLine, featureRuling, canBuildOn } from "./engine/carriage.js";
-import { roomOf, roomRefusal, promotionOffer, promoteHolding } from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room   // B6b: the holding that moves
+import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt } from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room · CCODE-430: a yard trains   // B6b: the holding that moves
 import { featureCost, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
 import { FIRE_TESTS, diffKeys } from "./engine/firetests.js";   // SNG-560: the parts that have never been used
@@ -170,7 +170,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.0.92";
+const APP_VERSION = "2.0.93";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -15199,12 +15199,22 @@ function showLegionFormPicker() {
 /** ⛔ CCODE-405 — "Soldiers cost to call together for a campaign or mission." THE MOMENT A PLAN BECOMES A UNIT IN THE FIELD: it is
  *  paid for, it is somewhere, and it takes a posture. ⚠️ THE PRICE IS SAID BEFORE IT IS TAKEN, and where the price came from is said
  *  too — Erik ruled that it costs and gave no number, so an unauthored dial must not pass itself off as a decision anybody made. */
+/** ⛔ CCODE-430: a training feature of yours where you stand — what `callCostOf` reads to call a band cheaper */
+function trainingHere() {
+  const t = trainingAt(character, character?.currentLocationId || null, holdCfgNow());
+  return t ? { where: t.hold.name || t.hold.id, feature: String(t.feature.name || t.feature.kind).split(" — ")[0] } : null;
+}
+/** The line a price carries when a yard made it cheaper — where, what, and what it would have been. */
+function trainedSaid(c) {
+  if (!c?.trained) return "";
+  return `${c.trained.feature} at ${c.trained.where}: ${c.perHead} a head, not ${c.trained.was}${c.trained.multAuthored ? "" : " (a stand-in cut — nobody has set it yet)"}`;
+}
 async function callUnitTogether(unitId) {
   const u = unitsOf(character).find(x => x.id === unitId);
   if (!u) return;
   const wage = Number(CONTENT.rules?.economy?.holdStore?.growth?.wagePerHand) || 0;
   const cur = CONTENT.rules?.economy?.holdStore?.upkeepCurrency || "crystal";
-  const cost = callCostOf(character.bands || [], u.unit, { cfg: meleeCfg(), wagePerHand: wage });
+  const cost = callCostOf(character.bands || [], u.unit, { cfg: meleeCfg(), wagePerHand: wage, trainedAt: trainingHere() });
   if (!cost.heads) { alert("Nobody stands in it yet."); return; }
   ensurePurse(character);
   const region = hereRegionId();
@@ -15213,7 +15223,7 @@ async function callUnitTogether(unitId) {
   const where = character.currentLocationId || null;
   const whereName = where ? (CONTENT.locations?.[where]?.name || character.generated?.location?.[where]?.name || where) : "where you stand";
   // ⚠️ ASKED IN THE SAME BREATH AS THE PRICE, because the posture is the other half of what being called means.
-  const camped = confirm(`Call ${u.name} together at ${whereName}?\n\n${cost.heads} heads × ${cost.perHead} = ${cost.total} ${cur}.\n${cost.authored ? "" : `(${cost.why})\n`}\nOK = make camp · Cancel = disperse to forage the region`);
+  const camped = confirm(`Call ${u.name} together at ${whereName}?\n\n${cost.heads} heads × ${cost.perHead} = ${cost.total} ${cur}.\n${cost.trained ? `${trainedSaid(cost)}\n` : ""}${cost.authored ? "" : `(${cost.why})\n`}\nOK = make camp · Cancel = disperse to forage the region`);
   const posture = camped ? "camped" : "dispersed";
   if (cost.total > 0) {
     const paid = debit(character, cur, cost.total, { regionId: region });
@@ -15670,14 +15680,14 @@ function renderBandsTab() {
   // behaved like a free one is the defect this project keeps finding, and a screen that shows a price without saying where it came
   // from is the same defect wearing a number.
   const wagePerHand405 = Number(CONTENT.rules?.economy?.holdStore?.growth?.wagePerHand) || 0;
-  const costOf405 = (u) => callCostOf(character.bands || [], u.unit, { cfg: meleeCfg(), wagePerHand: wagePerHand405 });
+  const costOf405 = (u) => callCostOf(character.bands || [], u.unit, { cfg: meleeCfg(), wagePerHand: wagePerHand405, trainedAt: trainingHere() });   // ⛔ CCODE-430
   const upkeepCur405 = CONTENT.rules?.economy?.holdStore?.upkeepCurrency || "crystal";
   // ⛔ AND WHAT IT IS ALREADY DOING. A called unit stands somewhere in a posture; one on paper is a plan and is nowhere.
   const standing405 = (u) => {
     if (!u.called) {
       const c = costOf405(u);
       return `<div class="hint">On paper — nobody has been called together, and it costs nothing until they are.
-        ${c.heads ? `Calling them would take <strong>${c.total} ${esc(upkeepCur405)}</strong> (${c.heads} × ${c.perHead})${c.authored ? "" : ` <span class="hint">— ${esc(c.why)}</span>`}` : ""}</div>`;
+        ${c.heads ? `Calling them would take <strong>${c.total} ${esc(upkeepCur405)}</strong> (${c.heads} × ${c.perHead})${c.trained ? ` <span class="hint">— ${esc(trainedSaid(c))}</span>` : ""}${c.authored ? "" : ` <span class="hint">— ${esc(c.why)}</span>`}` : ""}</div>`;
     }
     const where = u.locationId ? (CONTENT.locations?.[u.locationId]?.name || character.generated?.location?.[u.locationId]?.name || u.locationId) : "nowhere named";
     return `<div class="hint">Called on day ${u.called.day} and paid ${u.called.paid} ${esc(upkeepCur405)} — <strong>${u.posture === "dispersed" ? "dispersed to forage" : "camped"}</strong> at ${esc(where)}.

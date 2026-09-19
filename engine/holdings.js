@@ -189,6 +189,24 @@ export function holdingsForGM(character, effects = null, { hereId = null, nameOf
   ).join("\n");
 }
 
+/** ⛔ CCODE-430 — SNG-627 · A FEATURE'S PROPERTY, the thing the engine reads (the name is what the player reads): `defence`, `sense`,
+ *  `housing`, `training`, `mounts`… Aevi authored one on every kind (`holdFeatures._properties_20260918`); nothing read it. Pure. */
+export function featureProperty(feature, cfg = null) {
+  return featureDef(feature?.kind, cfg)?.property || null;
+}
+
+/** ⛔ CCODE-430 — WHERE A BAND CAN BE RAISED CHEAPER: a hold you have at this place with a standing `training` feature (a muster yard, a
+ *  drill ground). Erik: "the muster yard enable training and a place to raise troops to, perhaps at less cost." A yard still being built
+ *  trains nobody. → { hold, feature } or null. Pure. */
+export function trainingAt(character, locationId, cfg = null) {
+  if (!locationId) return null;
+  for (const h of holdingsAt(character, locationId)) {
+    const f = featuresOf(h).find(x => featureProperty(x, cfg) === "training");
+    if (f) return { hold: h, feature: f };
+  }
+  return null;
+}
+
 /** ⛔ CCODE-429 — SNG-628 / SNG-630 · A HOLD HAS ROOM, AND IT IS THE GROWTH AXIS THE HOLD LAYER DID NOT HAVE. Erik: "sometimes there's
  *  just not the room." Aevi's ladder (`holdStore.slots.ladder`: post 2 … stronghold 32) and frames (`slots.frames`: hull 3 · legs 2 · lift 4
  *  · grown 5 · borne 6).

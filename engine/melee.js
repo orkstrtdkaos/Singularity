@@ -921,11 +921,17 @@ export function disbandLegion(bands, id) {
  *  does not invent one: it reads `callCostPerHead` where a martial rule authors it, and otherwise falls back to the ALREADY AUTHORED
  *  `wagePerHand` (3) on the stated reason that a soldier called for a campaign is paid what a hand asked to come and work is paid.
  *  `authored` says which it used, so a screen can say so and Aevi can overrule it with one number. Pure. */
-export function callCostOf(bands, unit, { cfg = {}, wagePerHand = null } = {}) {
+export function callCostOf(bands, unit, { cfg = {}, wagePerHand = null, trainedAt = null } = {}) {
   const heads = resolvedContingents(bands, unit).reduce((a, c) => a + Math.max(0, num(c.n, 0)), 0);
   const authored = Number.isFinite(Number(cfg.callCostPerHead));
-  const perHead = authored ? Math.max(0, num(cfg.callCostPerHead, 0)) : Math.max(0, num(wagePerHand, 0));
+  const base = authored ? Math.max(0, num(cfg.callCostPerHead, 0)) : Math.max(0, num(wagePerHand, 0));
+  // ⛔ CCODE-430 (SNG-627 `training`): CALLED WHERE THEY CAN BE WORKED UP, THEY COST LESS. `trainedCallMult` is the dial — ⚠️ UNAUTHORED, so
+  // three-quarters stands in and SAYS it stands in (4 a head becomes 3): Erik said "perhaps at less cost" and gave no number.
+  const multAuthored = Number.isFinite(Number(cfg.trainedCallMult));
+  const mult = multAuthored ? Math.max(0, Math.min(1, Number(cfg.trainedCallMult))) : 0.75;
+  const perHead = trainedAt ? Math.max(0, Math.round(base * mult)) : base;
   return { heads, perHead, total: heads * perHead, authored,
+    trained: trainedAt ? { where: trainedAt.where || null, feature: trainedAt.feature || null, was: base, mult, multAuthored } : null,
     why: authored ? "the martial rules set what a head costs to call"
       : "no martial rule sets this yet — a called head is paid what a working hand is paid" };
 }

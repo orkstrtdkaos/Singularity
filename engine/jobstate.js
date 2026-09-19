@@ -86,6 +86,10 @@ export function normalizeJob(spec = {}, { day = null } = {}) {
   if (harm) stakes.harm = harm;
   const recruits = clampInt(s.recruits, 0, 12, 0);
   if (recruits) stakes.recruits = recruits;
+  // ⛔ CCODE-452: a raise — the feature, the level it goes to, and the materials set aside for it
+  const rs = s.raise && typeof s.raise === "object" ? s.raise : null;
+  if (rs && text(rs.holdId, 80) && text(rs.kind, 40)) stakes.raise = { holdId: text(rs.holdId, 80), index: clampInt(rs.index, 0, 99, 0), kind: text(rs.kind, 40), level: clampInt(rs.level, 2, 3, 2),
+    goods: Object.fromEntries(Object.entries(rs.goods && typeof rs.goods === "object" ? rs.goods : {}).filter(([g]) => /^[a-z][a-z_]{1,39}$/.test(g)).map(([g, n]) => [g, clampInt(n, 0, 999, 0)]).filter(([, n]) => n > 0)) };
   const job = {
     id: text(spec.id, 80) || `job-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 48)}-${day ?? "x"}`,
     label, where, level,

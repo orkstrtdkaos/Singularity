@@ -30,7 +30,8 @@ import { isMoored, carriageOf } from "./carriage.js";   // ⛔ SPEC_mobile_holdi
 import { smartClamp } from "./namematch.js";   // an evidence quote is prose — cut at a word, never mid-word
 import { isNetworkGate } from "./waygate.js";   // runner fees: a NETWORK gate near a relay post brings traffic
 import { walkingDays } from "./worldmap.js";
-import { workMods } from "./holdwork.js";   // ⛔ CCODE-450: standing work — who joins the watch, the yields and the upkeep while it is done     // …within gateWithinDays of it
+import { workMods } from "./holdwork.js";   // ⛔ CCODE-450: standing work — who joins the watch, the yields and the upkeep while it is done
+import { postJob } from "./jobstate.js";   // ⛔ CCODE-452: a raise is a job on the board     // …within gateWithinDays of it
 
 export const HOLDING_KINDS = ["post", "enterprise"];
 /** ⚠️ WHICH SIDE AN UNKNOWN WORD FALLS ON. A holding that PRODUCES is an enterprise; everything else holds
@@ -481,7 +482,7 @@ export function holdingFactsLine(h, { nameOf = null, holdings = [] } = {}) {
   const parts = [];
   if ((h.crew || []).length) parts.push(`hands: ${h.crew.map(nm).join(", ")}`);
   if ((h.garrison || []).length) parts.push(`guarded by ${h.garrison.map(nm).join(", ")}`);
-  if ((h.features || []).length) parts.push(`has ${h.features.map(f => f.name || f.kind).join(", ")}`);
+  if ((h.features || []).length) parts.push(`has ${h.features.map(f => `${f.name || f.kind}${featureLevel(f) > 1 ? ` (level ${featureLevel(f)})` : ""}`).join(", ")}`);   // CCODE-452
   const store = Object.entries(h.store || {}).filter(([, n]) => Number(n) > 0);
   if (store.length) parts.push(`store: ${store.map(([g, n]) => `${n} ${String(g).replace(/_/g, " ")}`).join(", ")}`);
   if (Number(h.arrears) > 0) parts.push(`in arrears ${h.arrears}`);
@@ -754,7 +755,7 @@ export function upkeepFor(holding, cfg) {
   // ⛔ SPEC_hold_costs §2: every feature that STANDS costs its keep — inherited and granted included ("you can be given a keep
   // and still not afford to man it"). §5: a hand asked to come and work is paid (wagePerHand). A build in progress costs nothing yet.
   let feats = 0;
-  for (const f of featuresOf(holding)) { const def = featureDef(f.kind, cfg); feats += (Number(def?.upkeep) || 0) * (Number(f.count) || 1); }
+  for (const f of featuresOf(holding)) { const def = featureDef(f.kind, cfg); feats += (Number(def?.upkeep) || 0) * (Number(f.count) || 1) * levelMult(f, def, "upkeep"); }   // CCODE-452
   const hands = Array.isArray(holding.crew) ? holding.crew.length : 0;
   const wage = Number(cfg.growth?.wagePerHand) || 0;
   // ⛔ CCODE-450: a tenth less while someone keeps the accounts
@@ -1395,13 +1396,13 @@ export function renameHolding(character, id, name, { worldCount = null } = {}) {
 /** Defence points: every martial feature's `defence` × its count. */
 export function defenceOf(holding, cfg = null) {
   let d = 0;
-  for (const f of featuresOf(holding)) { const def = featureDef(f.kind, cfg); if (def?.family === "martial") d += (Number(def.defence) || 0) * (Number(f.count) || 1); }
+  for (const f of featuresOf(holding)) { const def = featureDef(f.kind, cfg); if (def?.family === "martial") d += (Number(def.defence) || 0) * (Number(f.count) || 1) * levelMult(f, def, "defence"); }   // CCODE-452
   return d;
 }
 /** The hands a hold can work: the growth cap plus what its quarters add. */
 export function handsCap(holding, cfg = null) {
   let cap = Number(cfg?.growth?.maxHands) || 0;
-  for (const f of featuresOf(holding)) { const def = featureDef(f.kind, cfg); if (def?.family === "people") cap += (Number(def.hands) || 0) * (Number(f.count) || 1); }
+  for (const f of featuresOf(holding)) { const def = featureDef(f.kind, cfg); if (def?.family === "people") cap += (Number(def.hands) || 0) * (Number(f.count) || 1) * levelMult(f, def, "hands"); }   // CCODE-452
   return cap;
 }
 /** ⛔ CCODE-404 — HOW MANY MORE HANDS THIS PLACE CAN PUT UNDER ARMS, and the answer is the place's OWN authored capacity: the same
@@ -1507,10 +1508,110 @@ export function yieldsFor(holding, cfg, { density = null } = {}) {
     if (def?.family !== "material" || !good) continue;
     const proto = { ...holding, kind: "enterprise", yields: good };
     const y = yieldFor(proto, cfg, { density });
-    if (y) out.push({ ...y, units: y.units * (Number(f.count) || 1), feature: f.name || f.kind });
+    if (y) out.push({ ...y, units: Math.round(y.units * (Number(f.count) || 1) * levelMult(f, def, "yield")), feature: f.name || f.kind });   // CCODE-452
   }
   return out;
 }
+/* ══════════ ⛔ CCODE-452 — A FEATURE HAS A LEVEL (1–3), RAISED AS A JOB ══════════
+ * The Fell Pell prototype's Holds tab ("Build or raise … Make it a job"), which Erik prioritised. A level multiplies what the feature DOES,
+ * family by family, and only where that is wired — so a level is offered only where it would change something (`levelEffectOf`):
+ *   martial: defence ×2 / ×3 · meaning: aura ×1.5 / ×2, and one / two more pilgrims where it draws them · people: room for ×2 / ×3 the
+ *   hands · material: yield ×1.5 / ×2 · craft (a forge, a smithy): a third / two-thirds more made a pass · and upkeep ×1.5 / ×2.
+ * ⚠️ The prototype's words for level 3 ("WARDED — a crafted attack on it is halved", "a blessing on those who keep it", "MASTERWORK — the
+ * finest a craft can make") are NOT offered: nothing in the game reads them yet, and a level that promised them would be a claim about a
+ * mechanism. ⚠️ THE NUMBERS ARE THE PROTOTYPE'S, in code (one table, every reader) until Aevi wants them in content. */
+export const LEVEL_DEFAULTS = {
+  martial: { defence: [1, 2, 3], upkeep: [1, 1.5, 2] },
+  meaning: { aura: [1, 1.5, 2], pilgrims: [0, 1, 2], upkeep: [1, 1.5, 2] },
+  people: { hands: [1, 2, 3], upkeep: [1, 1.5, 2] },
+  craft: { rate: [1, 4 / 3, 5 / 3], upkeep: [1, 1.5, 2] },
+  material: { yield: [1, 1.5, 2], upkeep: [1, 1.5, 2] },
+};
+export function featureLevel(f) { return Math.max(1, Math.min(3, Math.floor(Number(f?.level) || 1))); }
+/** What a feature's level multiplies `key` by (pilgrims: how many MORE). Pure. */
+export function levelMult(f, def, key) {
+  const row = LEVEL_DEFAULTS[def?.family]?.[key];
+  const floor = key === "pilgrims" ? 0 : 1;
+  if (!Array.isArray(row)) return floor;
+  const v = Number(row[featureLevel(f) - 1]);
+  return Number.isFinite(v) ? v : floor;
+}
+const MAKER_KINDS = ["forge", "smithy"];   // the armory's makers (armory.js ARMORY_DEFAULTS.makers) — a craft level speeds what they make
+/** What raising a kind WOULD change, as words for a level — or null when a level would change nothing wired. Pure. */
+export function levelEffectOf(def) {
+  if (!def) return null;
+  if (def.family === "martial" && Number(def.defence) > 0) return (L) => `defence ×${[1, 2, 3][L - 1]}`;
+  if (def.family === "meaning" && (Number(def.aura) > 0 || Number(def.pilgrims) > 0))
+    return (L) => `aura ×${[1, 1.5, 2][L - 1]}${Number(def.pilgrims) > 0 && L > 1 ? `, and ${L - 1 === 1 ? "one more pilgrim" : "two more pilgrims"}` : ""}`;
+  if (def.family === "people" && Number(def.hands) > 0) return (L) => `room for ${L === 1 ? "the" : `${L}×`} hands it houses`;
+  if (def.family === "material" && def.yields) return (L) => `yield ×${[1, 1.5, 2][L - 1]}`;
+  if (def.family === "craft" && (MAKER_KINDS.includes(def.kind) || MAKER_KINDS.includes(def.variantOf))) return (L) => (L === 1 ? "its work as built" : `${L === 2 ? "a third" : "two-thirds"} more made a pass`);
+  return null;
+}
+const RAISE_NEEDS = {
+  martial: [["SHAPE", 2, "raise it"], ["PROTECT", 1, "lay it out to be held"]],
+  meaning: [["SHAPE", 2, "raise it"], ["INFLUENCE", 1, "consecrate it"]],
+  people: [["SHAPE", 2, "raise it"], ["SUSTAIN", 1, "keep the builders fed"]],
+  craft: [["SHAPE", 2, "build it"], ["KNOW", 1, "fit it for the work"]],
+  material: [["SHAPE", 2, "open it"], ["SUSTAIN", 1, "stock it"]],
+};
+const goodsWords = (g) => Object.entries(g || {}).map(([k, n]) => `${n} ${String(k).replace(/_/g, " ")}`).join(", ");
+const theName = (s) => String(s || "it").replace(/^an? /i, "the ");
+/** ⛔ WHAT RAISING A FEATURE A LEVEL TAKES — the kind's build goods ×2 for level 2 and ×4 for level 3 (set aside from the hold's store when it
+ *  is posted), its build days ×3 hand-days ×2 / ×3, a job of level 8 + 6 × the level, and the upkeep it will cost after. Pure. */
+export function raiseQuote(holding, index, cfg = null) {
+  const f = (holding?.features || [])[Number(index)];
+  if (!f || f.building) return { ok: false, why: "nothing standing there to raise" };
+  const def = featureDef(f.kind, cfg);
+  const eff = levelEffectOf(def);
+  if (!eff) return { ok: false, why: "a level would change nothing it does yet" };
+  const L = featureLevel(f) + 1;
+  if (L > 3) return { ok: false, why: "it stands at its height" };
+  const goods = Object.fromEntries(Object.entries(def.build?.goods || {}).map(([g, q]) => [g, Math.max(1, Math.round((Number(q) || 0) * [1, 2, 4][L - 1]))]));
+  const short = Object.entries(goods).filter(([g, q]) => (Number(holding.store?.[g]) || 0) < q).map(([g, q]) => `${q - (Number(holding.store?.[g]) || 0)} more ${g.replace(/_/g, " ")}`);
+  const up = (lv) => Math.round((Number(def.upkeep) || 0) * (Number(f.count) || 1) * (LEVEL_DEFAULTS[def.family]?.upkeep?.[lv - 1] ?? 1) * 10) / 10;
+  return { ok: !short.length, why: short.length ? `the store needs ${short.join(" and ")}` : null, level: L, goods, label: String(f.name || def.label || f.kind),
+    effort: (Number(def.build?.days) || 8) * 3 * [1, 2, 3][L - 1], jobLevel: 8 + 6 * L, effect: eff(L), upkeepNow: up(L - 1), upkeepThen: up(L),
+    needs: (RAISE_NEEDS[def.family] || RAISE_NEEDS.craft).map(([family, weight, what]) => ({ family, weight, what })) };
+}
+/** Post the raise: the job goes on the board and its materials leave the store, set aside for the work. Mutates. */
+export function postRaise(character, holdId, index, { cfg = null, day = null } = {}) {
+  const h = (character?.holdings || []).find(x => x && String(x.id) === String(holdId));
+  if (!h) return { ok: false, why: "no such holding" };
+  if (!h.locationId) return { ok: false, why: "the hold has no place yet — a raise is done where it stands" };
+  const q = raiseQuote(h, index, cfg);
+  if (!q.ok) return q;
+  const f = h.features[Number(index)];
+  const spec = { id: `raise-${h.id}-${f.kind}-${q.level}`.slice(0, 80),   // prose-cap-ok: an identifier
+    label: smartClamp(`Raise ${theName(q.label)} at ${h.name || "the hold"} to level ${q.level}`, 120),
+    where: h.locationId, level: q.jobLevel, effort: q.effort, needs: q.needs, from: "a build",
+    stakes: { xp: 10 * q.level, ...(q.level === 3 ? { deed: `Raised ${theName(q.label)} to its height at ${h.name || "the hold"}` } : {}),
+      raise: { holdId: h.id, index: Number(index), kind: f.kind, level: q.level, goods: q.goods } } };
+  const r = postJob(character, spec, { day });
+  if (!r.ok) return r;
+  h.store = h.store && typeof h.store === "object" ? h.store : {};
+  for (const [g, n] of Object.entries(q.goods)) h.store[g] = (Number(h.store[g]) || 0) - n;
+  h.history = [...(h.history || []), { at: null, from: h.condition, to: h.condition, note: `set aside ${goodsWords(q.goods)} to raise ${theName(q.label)} to level ${q.level}` }].slice(-12);
+  return { ok: true, job: r.job, quote: q };
+}
+/** The materials set aside come back to the store — the job dropped, or the work not done. → { said }. Mutates. */
+export function returnRaiseGoods(character, raise) {
+  const h = (character?.holdings || []).find(x => x && String(x.id) === String(raise?.holdId));
+  if (!h || !raise?.goods) return { said: null };
+  h.store = h.store && typeof h.store === "object" ? h.store : {};
+  for (const [g, n] of Object.entries(raise.goods)) h.store[g] = (Number(h.store[g]) || 0) + (Number(n) || 0);
+  return { said: `${goodsWords(raise.goods)} back in the store at ${h.name || "the hold"}` };
+}
+/** A raise done: the feature stands at its new level — if it is still the same kind at that place in the list. → { said }. Mutates. */
+export function applyRaise(character, raise) {
+  const h = (character?.holdings || []).find(x => x && String(x.id) === String(raise?.holdId));
+  const f = h?.features?.[Number(raise?.index)];
+  if (!h || !f || String(f.kind) !== String(raise.kind)) return { said: raise ? `the raise found nothing to raise — ${goodsWords(raise.goods)} went into the work` : null };
+  f.level = Math.max(featureLevel(f), Math.min(3, Number(raise.level) || 1));
+  h.history = [...(h.history || []), { at: null, from: h.condition, to: h.condition, note: `${f.name || f.kind} raised to level ${f.level}` }].slice(-12);
+  return { said: `${theName(f.name || f.kind)} at ${h.name || "the hold"} stands at level ${f.level} now` };
+}
+
 /** The meaning a hold's temples and shrines add to the place it stands in (SPEC_meaning_density: a hold IS people living somewhere). */
 /** ✅ R46b: a meaning feature may carry a POWER-SOURCE FIELD — `substrateSource: {kind: "pool"|"sink", delta}` on the
  *  catalogue kind — and a hold is a STATIONARY aura (SPEC_holding_attributes §3c: "companions already carry substrateAura;
@@ -1631,7 +1732,7 @@ export function pilgrimIncome(holding, { cfg = null, meaning = 0 } = {}) {
   let heads = 0;
   for (const f of featuresOf(holding)) {
     const def = featureDef(f.kind, cfg);
-    heads += (Number(def?.pilgrims) || 0) * (Number(f.count) || 1);
+    heads += (Number(def?.pilgrims) || 0) * (Number(f.count) || 1) + (Number(def?.pilgrims) > 0 ? levelMult(f, def, "pilgrims") * (Number(f.count) || 1) : 0);   // CCODE-452
   }
   if (!heads) return 0;
   const draw = 1 + Math.max(0, Number(meaning) || 0) * (Number(p.perMeaning) || 0);
@@ -1640,6 +1741,6 @@ export function pilgrimIncome(holding, { cfg = null, meaning = 0 } = {}) {
 
 export function holdingMeaningAura(character, locationId, cfg = null) {
   let aura = 0;
-  for (const h of holdingsAt(character, locationId)) for (const f of featuresOf(h)) { const def = featureDef(f.kind, cfg); if (def?.family === "meaning") aura += (Number(def.aura) || 0) * (Number(f.count) || 1); }
+  for (const h of holdingsAt(character, locationId)) for (const f of featuresOf(h)) { const def = featureDef(f.kind, cfg); if (def?.family === "meaning") aura += (Number(def.aura) || 0) * (Number(f.count) || 1) * levelMult(f, def, "aura"); }
   return Math.round(aura * 1000) / 1000;
 }

@@ -23522,6 +23522,57 @@ console.log("\n── §330 · standing work — only the kinds whose effect is 
   check("§330: ⛑ THE GM IS TOLD who is at work at each hold", gm === " — at work: Dara Holt foraging, the hands of Ridge training", gm);
 }
 
+// ══════════ §331 · CCODE-452 — A FEATURE HAS A LEVEL, RAISED AS A JOB ══════════
+// The Fell Pell prototype's "Build or raise … Make it a job", which Erik prioritised: a level multiplies what a feature does — only where that
+// is wired — and a raise is a job on the board whose materials are set aside from the store.
+console.log("\n── §331 · feature levels — each reader multiplies, a level is offered only where it changes something, and a raise is a job ──");
+{
+  const H331 = await import("../engine/holdings.js");
+  const AR331 = await import("../engine/armory.js");
+  const JB331 = await import("../engine/jobs.js");
+  const JS331 = await import("../engine/jobstate.js");
+  const { loadContentHeadless: lch331 } = await import("./headless_content.mjs");
+  const C331 = await lch331();
+  const cfg = { ...C331.rules.economy.holdStore, features: C331.rules.economy.holdFeatures };
+  const at = (kind, level, extra = {}) => ({ id: "h", name: "Pell", kind: "post", condition: "thriving", locationId: "mill", store: {}, features: [{ kind, name: `a ${kind}`, level }], ...extra });
+  const defs = [1, 2, 3].map(L => H331.defenceOf(at("wall", L), cfg));
+  const hands = [1, 2, 3].map(L => H331.handsCap(at("quarters", L), cfg)), base = H331.handsCap(at("wall", 1), cfg);
+  const up1 = H331.upkeepFor(at("wall", 1), cfg), up2 = H331.upkeepFor(at("wall", 2), cfg);
+  const aura = [1, 3].map(L => H331.holdingMeaningAura({ holdings: [at("shrine", L)] }, "mill", cfg));
+  const pil = [1, 2].map(L => H331.pilgrimIncome(at("shrine", L), { cfg }));
+  const mineY = [1, 2].map(L => (H331.yieldsFor(at("mine", L, { kind: "post" }), cfg).find(y => y.feature)?.units) || 0);
+  const forge = [1, 2, 3].map(L => AR331.makersAt(at("forge", L), cfg).cap);
+  check("§331: ⛔ EACH READER MULTIPLIES BY THE LEVEL — a wall's defence 1 · 2 · 3; quarters' room +2 · +4 · +6; upkeep ×1.5 at level 2; a shrine's aura ×2 at level 3 and one more pilgrim at level 2; a mine's yield ×1.5; a forge makes 4 · 5 · 7 a pass",
+    defs.join() === "1,2,3" && hands[0] - base === 2 && hands[1] - base === 4 && hands[2] - base === 6 && Math.abs(up2 - base * 0 - (up1 + 0.5 * 1)) < 1e-9
+    && aura[0] === 0.1 && aura[1] === 0.2 && pil[1] === 2 * pil[0] && pil[0] > 0 && mineY[0] > 0 && mineY[1] === Math.round(mineY[0] * 1.5) && forge.join() === "4,5,7",
+    JSON.stringify({ defs, hands, base, up1, up2, aura, pil, mineY, forge }));
+  const offered = (k) => !!H331.levelEffectOf(H331.featureDef(k, cfg));
+  check("§331: ⚑ A LEVEL IS OFFERED ONLY WHERE IT CHANGES SOMETHING — a wall, a shrine, quarters, a mine, a forge and a smithy; not a laboratory (nothing reads what its level would do); and never a promise the game does not keep (no 'warded', no 'masterwork')",
+    ["wall", "shrine", "quarters", "mine", "forge", "smithy"].every(offered) && !offered("laboratory")
+    && !/warded|masterwork|blessing/i.test(["wall", "shrine", "quarters", "mine", "forge"].map(k => [2, 3].map(L => H331.levelEffectOf(H331.featureDef(k, cfg))(L)).join(" ")).join(" ")));
+  const who = { holdings: [at("forge", 1, { store: { mech_parts: 7 } })], jobs: null };
+  const short = H331.postRaise(who, "h", 0, { cfg, day: 5 });
+  who.holdings[0].store.mech_parts = 30;
+  const posted = H331.postRaise(who, "h", 0, { cfg, day: 5 });
+  const job = JS331.ensureJobs(who).board[0];
+  check("§331: ⛔ A RAISE IS A JOB — refused while the store is short (and says by how much); posted, the forge's materials (12 mech parts ×2 for level 2) leave the store, set aside, and the job carries them: level 20, 96 hand-days, shaping and fitting",
+    !short.ok && /the store needs 17 more mech parts/.test(short.why) && posted.ok && who.holdings[0].store.mech_parts === 6
+    && job?.stakes?.raise?.level === 2 && job.stakes.raise.goods.mech_parts === 24 && job.level === 20 && job.effort === 96
+    && job.needs.map(n => n.family).join() === "SHAPE,KNOW" && /Raise the forge at Pell to level 2/.test(job.label), JSON.stringify({ short, job }));
+  const fxOk = JB331.jobEffects(job, "success", C331.rules), fxPart = JB331.jobEffects(job, "partial", C331.rules), fxCrit = JB331.jobEffects(job, "crit_failure", C331.rules);
+  JB331.applyJobEffects(who, { team: [], job }, fxPart, { content: C331 });
+  const afterPart = who.holdings[0].store.mech_parts;
+  JB331.applyJobEffects(who, { team: [], job }, fxOk, { content: C331 });
+  check("§331: ⛔ …A SUCCESS RAISES IT; anything short of a critical failure puts the materials back; a critical failure spends them",
+    fxOk.raise?.level === 2 && !fxOk.refund && fxPart.refund && !fxPart.raise && !fxCrit.raise && !fxCrit.refund
+    && afterPart === 30 && H331.featureLevel(who.holdings[0].features[0]) === 2, JSON.stringify({ afterPart, level: who.holdings[0].features[0].level }));
+  const A331 = rd("app.js").replace(/\r\n/g, "\n").split("\n").filter(l => !/^\s*\/\//.test(l)).join("\n");
+  check("§331: ⛑ WHERE THE PLAYER DOES IT, AND THE GM KNOWS — ⇧ on a feature opens the quote and posts the job; a raise taken off the board puts its materials back; the hold's line says a feature's level",
+    /\[data-hold-raise\]"\)\) btn\.onclick = \(\) => showRaise\(/.test(A331) && /const r = postRaise\(character, holdId, index,/.test(A331)
+    && /if \(j\?\.stakes\?\.raise\) returnRaiseGoods\(character, j\.stakes\.raise\);/.test(A331)
+    && /has a forge \(level 2\)/.test(H331.holdingFactsLine(who.holdings[0])), H331.holdingFactsLine(who.holdings[0]));
+}
+
 /* ══════════ REPORT ══════════ */
 console.log("\n" + "═".repeat(96));
 console.log(`  ${pass} ok · ${fails.length} FAILURE(S) · ${gaps.length} GAP(S) CLOSED`);

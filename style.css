@@ -2044,3 +2044,8 @@ table.ob-matrix { border-collapse: collapse; width: 100%; min-width: 640px; font
 .hw-chip { background: rgba(212, 162, 74, 0.14); color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 1px 8px; font: 11px var(--font-ui); cursor: pointer; }
 .hw-gain { color: var(--ok); font-variant-numeric: tabular-nums; white-space: nowrap; }
 @media (max-width: 680px) { .hw-row { grid-template-columns: 1fr; } .hw-gain { white-space: normal; } }
+
+/* ⛔ CCODE-452 — a feature's level on its chip, and ⇧ to raise it */
+.hold-lv { font-size: 10px; color: var(--accent); border: 1px solid rgba(212, 162, 74, 0.5); border-radius: 4px; padding: 0 4px; margin-left: 3px; }
+.hold-chip-up { background: none; border: 0; color: var(--accent2); cursor: pointer; font-size: 12px; line-height: 1; padding: 0 3px; }
+.hold-chip-up:hover { color: var(--accent); }

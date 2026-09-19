@@ -113,6 +113,7 @@ import { musterCapacityOf, queueHoldingEvent } from "./engine/holdings.js";
 import { ARMORY_SLOTS, SLOT_WORDS, armoryTable, armoryOf, armoryLine, makersAt, setForgeOrder, outfitContingent, gearPrice, sellGear } from "./engine/armory.js";   // CCODE-445: the armory
 import { STANCE_NAMES, FIGHT_FAMILIES, FAMILY_WORDS, FAMILY_LANDS, stanceTable, stanceOf, allocateTurn, allyChoice, partyRound } from "./engine/orderofbattle.js";   // CCODE-448: the order of battle
 import { workTable, workOf, workAt, workersAt, assignWork, unassignWork } from "./engine/holdwork.js";   // CCODE-450: standing work
+import { featureLevel, levelEffectOf, raiseQuote, postRaise, returnRaiseGoods, featureDef as featureDefOf } from "./engine/holdings.js";   // CCODE-452: levels
 import { homeOf, isHome, makeHome } from "./engine/home.js";   // CCODE-369: a home is a place that is yours   // CCODE-360: an invitation carried by someone you both know
 import { runWakeGeneration } from "./engine/wake.js"; // SNG-204 Phase 2: open wakes generate the next thread
 import { addAssignment, delegationRefusal, activeDelegates, MISSION_KINDS, MISSION_KIND_IDS, canSendOn, sayFamilies } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
@@ -176,7 +177,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.3.2";
+const APP_VERSION = "2.3.3";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6146,6 +6147,37 @@ function showSellGear(holdId, after = () => {}) {
     after();
   };
 }
+/** ⛔ CCODE-452 — RAISE A FEATURE A LEVEL, AS A JOB (the prototype's "Make it a job"): the quote first — what it will do, what it costs from
+ *  the store, the work, the upkeep after — then the job on the board, its materials set aside. */
+function showRaise(holdId, index) {
+  const h = (character.holdings || []).find(x => x && x.id === holdId);
+  if (!h) return;
+  const q = raiseQuote(h, index, holdCfgNow());
+  if (!q.level) { alert(q.why || "It cannot be raised."); return; }
+  const have = (g) => Number(h.store?.[g]) || 0;
+  document.getElementById("help-pop")?.remove();
+  const pop = document.createElement("div");
+  pop.id = "help-pop"; pop.className = "help-overlay";
+  pop.innerHTML = `<div class="help-card" role="dialog" aria-label="Raise it a level">
+    <h3 class="codex-title">Raise ${esc(q.label)} to level ${q.level}</h3>
+    <p><strong>${esc(q.effect)}</strong></p>
+    <p class="hint">It takes ${Object.entries(q.goods).map(([g, n]) => `${n} ${esc(g.replace(/_/g, " "))} (the store holds ${have(g)})`).join(", ")} from the store, set aside when the job is posted; ${q.effort} hand-days of work, done as a job of level ${q.jobLevel}; and its upkeep goes from ${q.upkeepNow} to ${q.upkeepThen} a pass.</p>
+    <p class="hint">A success raises it. Anything short of a critical failure puts the materials back in the store, and so does taking the job off the board.</p>
+    <div class="help-foot"><span class="hint">${q.ok ? "" : esc(q.why || "")}</span>
+      <span><button class="btn secondary" id="raise-cancel">Not now</button> <button class="btn" id="raise-go"${q.ok ? "" : " disabled"}>Make it a job</button></span></div></div>`;
+  document.body.appendChild(pop);
+  const close = () => pop.remove();
+  pop.addEventListener("click", ev => { if (ev.target === pop) close(); });
+  document.getElementById("raise-cancel").onclick = close;
+  document.getElementById("raise-go").onclick = () => {
+    const r = postRaise(character, holdId, index, { cfg: holdCfgNow(), day: (() => { try { return absoluteWorldDay(); } catch { return null; } })() });
+    if (!r.ok) { alert(r.why); return; }
+    close();
+    saveCharacter(character);
+    renderJobsTab(r.job.id);
+  };
+}
+
 /** ⛔ CHANGE MONEY, where you stand, by the place's rates — the Crossing anything for anything; a Reach its scrip against the money it
  *  wants, better in than out; the foothills what they take. The quote is shown before anything moves. */
 function showChangeMoney(after = () => {}) {
@@ -13901,6 +13933,7 @@ function wireHoldingOffers() {
   };
   // ⛔ CCODE-440: a hold is a local market — sell what you carry, and change money, where you stand
   for (const btn of app.querySelectorAll("[data-hold-sellpack]")) btn.onclick = () => showSellFromPack(btn.dataset.holdSellpack, again);
+  for (const btn of app.querySelectorAll("[data-hold-raise]")) btn.onclick = () => showRaise(btn.dataset.holdRaise, Number(btn.dataset.index));   // CCODE-452
   // ⛔ CCODE-450: put someone to standing work, or take them off it
   for (const s of app.querySelectorAll("[data-work-add]")) s.onchange = () => {
     if (!s.value) return;
@@ -14160,7 +14193,11 @@ function renderHoldingsTab(manageId = null) {
         `; })()}
         ${(() => { // ✅ FEATURES — what the hold HAS (SPEC_holding_attributes pass two): built through play or here, read every pass
           const cfgF = holdCfgNow(); const kinds = featureKinds(cfgF);
-          const list = (h.features || []).map((f, i) => `<span class="hold-chip">${esc(f.name || f.kind)}${f.count > 1 ? ` ×${f.count}` : ""}${f.by && f.by !== "you" ? ` (${esc(nameOf(f.by))})` : ""}<button class="hold-chip-x" data-hold-unfeature="${esc(h.id)}" data-index="${i}" title="Tear it down">×</button></span>`).join("");
+          const list = (h.features || []).map((f, i) => {
+            // ⛔ CCODE-452: its level, and ⇧ to raise it — offered only where a level would change something
+            const eff = !f.building && featureLevel(f) < 3 ? levelEffectOf(featureDefOf(f.kind, holdCfgNow())) : null;
+            return `<span class="hold-chip">${esc(f.name || f.kind)}${f.count > 1 ? ` ×${f.count}` : ""}${featureLevel(f) > 1 ? `<span class="hold-lv">L${featureLevel(f)}</span>` : ""}${f.by && f.by !== "you" ? ` (${esc(nameOf(f.by))})` : ""}${eff ? `<button class="hold-chip-up" data-hold-raise="${esc(h.id)}" data-index="${i}" title="${esc(`Raise it to level ${featureLevel(f) + 1}: ${eff(featureLevel(f) + 1)} — as a job`)}">⇧</button>` : ""}<button class="hold-chip-x" data-hold-unfeature="${esc(h.id)}" data-index="${i}" title="Tear it down">×</button></span>`;
+          }).join("");
           const opts = Object.entries(kinds).map(([k, d]) => `<option value="${esc(k)}">${esc(d.label || k)}</option>`).join("");
           return `<div class="hint hold-has"><span class="hold-ctl-label">has</span>${list || "<em>nothing built yet</em>"}</div>
         `; })()}
@@ -16245,7 +16282,12 @@ function renderJobsTab(selId = null) {
   const clear = document.querySelector("[data-job-clear]");
   if (clear) clear.onclick = () => { _jobsUi.pick[job.id] = []; renderJobsTab(); };
   const drop = document.querySelector("[data-job-drop]");
-  if (drop) drop.onclick = () => { dropJob(character, drop.dataset.jobDrop); _jobsUi.sel = null; saveCharacter(character); renderJobsTab(); };
+  if (drop) drop.onclick = () => {
+    // ⛔ CCODE-452: a raise taken off the board puts its materials back
+    const j = (character.jobs?.board || []).find(x => x && x.id === drop.dataset.jobDrop);
+    if (j?.stakes?.raise) returnRaiseGoods(character, j.stakes.raise);
+    dropJob(character, drop.dataset.jobDrop); _jobsUi.sel = null; saveCharacter(character); renderJobsTab();
+  };
   const send = document.getElementById("job-send");
   if (send && job) send.onclick = () => {
     const pick = new Set((_jobsUi.pick[job.id] || []).map(String));

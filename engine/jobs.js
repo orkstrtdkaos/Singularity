@@ -36,6 +36,7 @@ import { smartClamp } from "./namematch.js";
 import { MISSION_KINDS } from "./assignments.js";   // ⛔ CCODE-428: an errand's kind names the family it wants
 import { familiesFromEvidence } from "./combatants.js"; // …and a standing charge's own words name its family
 import { workAt, workTable } from "./holdwork.js";   // ⛔ CCODE-450: whoever is at standing work is nobody else's
+import { applyRaise, returnRaiseGoods } from "./holdings.js";   // ⛔ CCODE-452: a raise done, or its materials back
 
 /** The five ways a roll lands, in the resolver's own words, best first. */
 export const OUTCOMES = ["crit_success", "success", "partial", "failure", "crit_failure"];
@@ -308,13 +309,15 @@ export function jobEffects(job, degree, rules = {}) {
   const R = jobRules(rules);
   const e = R.effect[degree] || R.effect.failure;
   const s = job?.stakes || {};
-  const out = { degree, crystal: 0, xp: 0, recruits: 0, items: [], deed: null, standing: 0, hold: null, harmEach: 0, losses: 0 };
+  const out = { degree, crystal: 0, xp: 0, recruits: 0, items: [], deed: null, standing: 0, hold: null, harmEach: 0, losses: 0, raise: null, refund: null };
   // ⚠️ an overrun rounds AWAY from zero — `Math.round(-7.5)` is −7, which would quietly shave the half a cost is owed
   if (num(s.crystal, 0)) out.crystal = s.crystal < 0 ? (degree === "crit_failure" ? -Math.round(-s.crystal * 0.5) : 0) : Math.round(s.crystal * e.gain);
   if (num(s.xp, 0) > 0) out.xp = Math.round(s.xp * Math.max(e.gain, degree === "failure" ? 0.25 : 0));
   if (num(s.recruits, 0) > 0) out.recruits = Math.max(0, Math.round(s.recruits * e.gain));
   if (Array.isArray(s.items) && e.gain >= 1) out.items = s.items.slice();
   if (s.hold && e.gain >= 1) out.hold = s.hold;
+  // ⛔ CCODE-452: a success raises it; anything short of a critical failure gives the materials back; a critical failure spends them
+  if (s.raise) { if (e.gain >= 1) out.raise = s.raise; else if (degree !== "crit_failure") out.refund = s.raise; }
   if (s.deed && e.deed) out.deed = s.deed;
   out.standing = (num(s.standing, 0) ? Math.round(s.standing * Math.max(0, e.gain)) : 0) + num(e.standing, 0);
   if (num(s.harm, 0) > 0 && e.harm) out.harmEach = Math.round(s.harm * e.harm);
@@ -339,6 +342,8 @@ export function sayEffects(fx, team = [], { money = null } = {}) {
   if (fx.recruits) out.push(`+${fx.recruits} recruit${fx.recruits === 1 ? "" : "s"}`);
   if (fx.items?.length) out.push(fx.items.join(", "));
   if (fx.hold) out.push(fx.hold);
+  if (fx.raise) out.push(`it stands at level ${fx.raise.level}`);   // CCODE-452
+  if (fx.refund) out.push("the materials go back to the store");
   if (fx.deed) out.push(`deed: ${fx.deed}`);
   if (fx.standing) out.push(`standing ${fx.standing > 0 ? "+" : "−"}${Math.abs(fx.standing)}`);
   if (fx.harmEach) {
@@ -656,6 +661,8 @@ export function applyJobEffects(character, entry, fx, { content = {}, itemCatalo
   }
   // ⚠️ `addItem` hands the item back even when a full pack (30) did not take it — so what is said is what the pack now holds
   if (grew.length) lines.push(`${grew.join(" and ")} grow${grew.length === 1 ? "s" : ""} from it`);
+  if (fx.raise) { const r = applyRaise(character, fx.raise); if (r.said) lines.push(r.said); }   // ⛔ CCODE-452
+  if (fx.refund) { const r = returnRaiseGoods(character, fx.refund); if (r.said) lines.push(r.said); }
   for (const it of fx.items || []) {
     if (!Array.isArray(character.inventory)) character.inventory = [];
     const r = addItem(character, it, itemCatalog);

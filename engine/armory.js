@@ -14,7 +14,7 @@
 //  · gear SELLS as arms, at the place's price for arms, in the place's money.
 //  · "send them to other holds" rides the trade routes, which wait on Erik's answers (po/CCODE_20260919_the_vault_and_the_route_questions.md).
 // ⚠️ EVERY NUMBER HERE IS A STAND-IN until Aevi authors `economy.armory`, which wins gear by gear and field by field.
-import { featuresOf, featureDef } from "./holdings.js";
+import { featuresOf, featureDef, levelMult } from "./holdings.js";
 import { earnAt, saidEarned } from "./money.js";
 import { priceOf } from "./economy.js";
 
@@ -69,7 +69,7 @@ export function makersAt(holding, cfg = null, A = armoryTable()) {
     const def = featureDef(f.kind, cfg);
     const k = A.makers[f.kind] != null ? f.kind : (def?.variantOf && A.makers[def.variantOf] != null ? def.variantOf : null);
     if (!k) continue;
-    const c = n0(A.makers[k]) * (Number(f.count) || 1);
+    const c = Math.round(n0(A.makers[k]) * (Number(f.count) || 1) * levelMult(f, def || { family: "craft" }, "rate"));   // CCODE-452: a raised forge makes more
     if (c > 0) { cap += c; by.push(f.name || f.kind); }
   }
   return { cap, by };

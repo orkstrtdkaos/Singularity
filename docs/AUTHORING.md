@@ -55,4 +55,70 @@ source so it cannot drift from what actually enforces it.
 not.** Everything here that is a fact rather than a habit is printed by `authoring.mjs` from the live schema, the
 live gates and a live record. If the two ever disagree, **the tool is right.**
 
+
+---
+
+## §4 — ⛔ WHAT ELSE WENT WRONG, 2026-09-14 → 19, AND WHAT EACH TAUGHT
+
+Every one of these was caught by a gate, by Erik, or by a later measurement of my own. **None was caught by
+being careful.** That is the point of the list.
+
+**1 · I ARGUED FROM RECALL ABOUT WHAT EXISTS.** Resumed intending to author a craft I had written **six minutes
+earlier**. Nothing was stale except my memory of it. → `scripts/exists.mjs`, and it is step one of §2 for a
+reason.
+
+**2 · I MEASURED THE WRONG THING AND REPORTED IT.** Six instrument errors in one week: counted per-craft when
+the engine stamps per-VERB (164 of 432 roll more than one); read `walkingDays` as miles; compared a truthy
+string to `true`; called `typeof null === "object"` a schema failure; looked for tag families at the wrong path
+and got zeros; read the rung a hold had FILLED rather than the one that FITS it, which showed three live holds
+over capacity. ⚠️ **A zero from the wrong path is not a finding. Check the probe before reporting the result.**
+
+**3 · I TREATED A SCOPE ERROR AS A LIST OF MISTAKES.** A too-permissive walk wrote `vocation` and `domains` into
+**164 files** — locations, rules, companions, crafts. I stripped abilities by hand, then companions by hand,
+while the gates kept finding more. ⛔ **A surgical fix is the wrong tool for a scope error.** Revert and redo
+scoped.
+
+**4 · I PUT A NOTE INSIDE A RULES BAG.** Twice. `unreadRuleConstants` counts every leaf and does not care about
+a leading underscore. **A note in a rules bag IS an unread constant.** Reasoning goes in a doc or a file whose
+leaves nothing reads.
+
+**5 · POSITION IS NOT PROXIMITY.** `loadRule` sits in a POSITIONAL `Promise.all`; I put a new rule beside the
+name that receives it and shifted every rule after it by one — `powerBands` and `tierRarity` both went false and
+the suite lost 34 checks. ⚠️ **The convention "beside the name that receives it" means *in this array*, not *at
+this line*.**
+
+**6 · I INVENTED IDS.** `crossing` for a region (`the_center`), `gearlands` for another (`the_gearlands`),
+`build`/`organize`/`sustain` for assist tags, `healer` for a vocation, `unstated` for a sex enum. ⛔ **NEVER TYPE
+AN ID. READ ONE.**
+
+**7 · A POLARITY IS CHECKED AGAINST WHAT THE THING IS.** Reversing an axis name and flipping the sign preserves
+the arithmetic and can invert the meaning — it read the **unmaker's capstone as strongly creative**. ⛑ I had
+done this correctly an hour before, by checking `order_chaos` against the place it described. **Check the record,
+never the sign it had.**
+
+**8 · A NEGATIVE FIXTURE HAS A SHELF LIFE.** §216 used `command_field` as its "unknown craft" — a plausible name
+chosen *because* it sounded like one that ought to exist. **I made it exist.** A negative fixture wants a name
+nothing will ever author.
+
+**9 · AND THE ONE NO GATE CAN SEE.** I quoted Erik by name inside a card a player reads, and put glyphs and
+shouted clauses into `description`, `notFor`, `plainly`, `grants` and `cannot` — **the day after driving that
+count to zero myself.** ⚠️ **Read your own player-facing text back, out loud if need be.** Nothing else will.
+
+## §5 — ⛑ THE THREE TOOLS, AND WHY EACH EXISTS
+
+- **`scripts/exists.mjs <name>`** — does it already exist, across every authored kind. *Because I duplicated my
+  own work inside one session.*
+- **`scripts/authoring.mjs <type> [id]`** — required fields, closed enums, **shapes that are not strings**,
+  fields the engine **stamps**, **vocabularies closed by a gate rather than by the schema**, and a live exemplar.
+  *Because nine errors on four crafts all had their answer in the corpus already.*
+- **`scripts/coverage.mjs [type]`** — which fields are filled, per type, per field. *Because every hole I closed
+  this week — five appearances, one tier, seventy gear, sixty assistTags, a hundred vocations — I had been
+  finding by hand, one field at a time.* ⛑ It found `assistTags` at 61% within an hour of being written, and
+  that closed a defect I had filed against **CCode** and which turned out to be **sixty missing records of
+  mine**.
+
+⛔ **AND THE RULE THEY ALL SERVE: the corpus is the specification.** Not this document — **this document goes
+stale and the tools do not.** If they ever disagree, the tools are right.
+
+
 — Aevi

@@ -68,7 +68,7 @@ import { enterDeathState } from "./engine/death.js";
 // duplicated in this codebase, and each time the copies drifted before anyone noticed.
 wireDeathModel(DeathModel);
 import { carriageOf, voyageOf, isMoored, canSail, sailHolding, voyageLine, featureRuling, canBuildOn } from "./engine/carriage.js";
-import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mountsAt, healingAt, quarteringOf } from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room · CCODE-430: a yard trains   // B6b: the holding that moves
+import { roomOf, roomRefusal, promotionOffer, promoteHolding, trainingAt, mountsAt, healingAt, quarteringOf, vaultOf, chargeOf, chargeWord, depositToVault, withdrawFromVault, holdingFieldSources } from "./engine/holdings.js";   // ⛔ CCODE-429: a hold has room · CCODE-430: a yard trains   // B6b: the holding that moves
 import { featureCost, allFeatures, refreshImprovement, canBeAskedToWork, holdingFactsLine, answerFeatureOffer, holdingLedger, addHolding, holdingsForGM, releaseHolding, transferHolding, applyDebtOps, sellStore, storeTotal, storeWorth, yieldFor, yieldsFor, upkeepFor, appointKeeper, reclaimHolding, improveHolding, setCrew, setGarrison, holdingGround, addFeature, removeFeature, renameHolding, featureKinds, residentsOf, holdingMeaningAura, holdingFieldDelta } from "./engine/holdings.js";   // SNG-358 · SPEC_holding_release_transfer
 import { buildDevReport, unknownOpsIn } from "./engine/devreport.js";   // SNG-559: the Play/Dev instrument
 import { FIRE_TESTS, diffKeys } from "./engine/firetests.js";   // SNG-560: the parts that have never been used
@@ -173,7 +173,7 @@ import { frameModel, frameSize, chaseFromFight, wouldPursue, encounterKind, coll
 // ⚠️ AND THIS COPY STAYS, GATED: six readers take the version from this line (bump_version, wiring_audit,
 // apparatus_inject, certify_counts and four doc checks), and `module_map --check` fails the ship if it and
 // `engine/version.js` ever disagree — the same bargain index.html's stamps have always had.
-const APP_VERSION = "2.2.0";
+const APP_VERSION = "2.2.1";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6035,6 +6035,50 @@ function showSellFromPack(holdId, after = () => {}) {
     after();
   };
 }
+/** ⛔ CCODE-444 — PUT THINGS IN THE VAULT, at a hold you stand in (Erik: "valuable items stored in a holding - I'm thinking about mobile energy
+ *  wells and sinks, valuable statues, artifacts"). Whole stacks from the pack; a thing the story carries stays with you. A well or sink put
+ *  away keeps working — on the ground at the hold — until it is switched off. */
+function showVaultDeposit(holdId, after = () => {}) {
+  const h = (character?.holdings || []).find(x => x && x.id === holdId);
+  const here = hereNow();
+  if (!h || !here || here.id !== h.locationId) { alert("You put things in the vault where it stands — at the hold itself."); return; }
+  const cat = CONTENT.items || {};
+  const rows = (character.inventory || []).map((it, i) => ({ i, it, c: chargeOf(it, cat), quest: String(it?.kind || "") === "quest" }));
+  const ok = rows.filter(r => !r.quest), kept = rows.filter(r => r.quest);
+  document.getElementById("help-pop")?.remove();
+  const pop = document.createElement("div");
+  pop.id = "help-pop";
+  pop.className = "help-overlay";
+  pop.innerHTML = `<div class="help-card sell-card" role="dialog" aria-label="Put things in the vault">
+    <h3 class="codex-title">The vault — at ${esc(h.name || "the hold")}</h3>
+    <p class="hint">What you put here stays here until you come back for it. A well or sink kept here works on the ground at this place while it is on.</p>
+    <div class="sell-list">${ok.map(r => `<label class="sell-row"><input type="checkbox" data-vault-i="${r.i}">
+      <span class="sell-name">${esc(displayName(r.it))}${r.it.qty > 1 ? ` <span class="hint">×${r.it.qty}</span>` : ""}</span>
+      <span class="sell-price">${r.c ? esc(chargeWord(r.it, cat)) : ""}</span></label>`).join("") || `<p class="hint">Your pack is empty.</p>`}</div>
+    ${kept.length ? `<details class="sell-kept"><summary class="hint">${kept.length} kept</summary>${kept.map(r => `<div class="hint">${esc(displayName(r.it))} — the story carries it, so it stays with you</div>`).join("")}</details>` : ""}
+    <div class="help-foot"><span class="hint" id="vault-said">Pick what to put away.</span>
+      <span><button class="btn secondary" id="vault-cancel">Keep them</button> <button class="btn" id="vault-go" disabled>Put away</button></span></div>
+  </div>`;
+  document.body.appendChild(pop);
+  const close = () => pop.remove();
+  pop.addEventListener("click", ev => { if (ev.target === pop) close(); });
+  document.getElementById("vault-cancel").onclick = close;
+  const picked = () => [...pop.querySelectorAll("[data-vault-i]:checked")].map(b => rows.find(r => String(r.i) === b.dataset.vaultI)).filter(Boolean);
+  const go = document.getElementById("vault-go"), said = document.getElementById("vault-said");
+  for (const b of pop.querySelectorAll("[data-vault-i]")) b.onchange = () => {
+    const n = picked().length;
+    go.disabled = !n;
+    said.textContent = n ? `${n} ${n === 1 ? "thing" : "things"} to put away` : "Pick what to put away.";
+  };
+  go.onclick = () => {
+    const r = depositToVault(character, h.id, picked().map(x => x.it.customName || x.it.name), { hereId: here.id });
+    if (!r.ok) { alert(r.why); return; }
+    h.history = [...(h.history || []), { at: null, from: h.condition, to: h.condition, note: `put in the vault — ${r.moved.join(", ")}` }].slice(-12);
+    saveCharacter(character);
+    close();
+    after();
+  };
+}
 /** ⛔ CHANGE MONEY, where you stand, by the place's rates — the Crossing anything for anything; a Reach its scrip against the money it
  *  wants, better in than out; the foothills what they take. The quote is shown before anything moves. */
 function showChangeMoney(after = () => {}) {
@@ -9540,7 +9584,7 @@ function substrateForAction(choice, location) {
   if (!ab) return null;
   const comps = activeCompanions(character, CONTENT.companions);
   // ✅ R46b: a hold's pool or sink is a STATIONARY aura — it rides the same term a carried charge does.
-  const carried = carriedSubstrate(character, CONTENT.items, comps) + holdingFieldDelta(character, location?.id, holdCfgNow());
+  const carried = carriedSubstrate(character, CONTENT.items, comps) + holdingFieldDelta(character, location?.id, holdCfgNow(), { items: CONTENT.items });
   // ✅ Q3 (GO_LIST_20260904 §2, Erik): THE ROLL READS THE CRAFT, NOT THE TRADITION. This used to build its own band from
   // the tradition (`substrateBand[tradition]`) while the wheel's card read the craft's SOURCE (`craftSource` → the
   // school's extension, the craft's `powerSystem`, the tradition's primary, a foothill's parents) — two answers to
@@ -9558,7 +9602,8 @@ function substrateForAction(choice, location) {
   // §9b invariant 5: when something CARRIED is why the ground reads differently, the receipt must
   // say which thing. A ward that quietly halves your craft — or a staff that quietly saves it — is
   // the "cruellest possible bug" the SNG-090 round-2 note names. Attribution rides the verdict.
-  if (carried !== 0) verdict.carriedBy = carriedSubstrateSources(character, CONTENT.items, comps);
+  // ⛔ CCODE-444: and a hold's own wells and sinks, and what its vault keeps switched on — they ride the same term, so they are named too
+  if (carried !== 0) verdict.carriedBy = [...carriedSubstrateSources(character, CONTENT.items, comps), ...holdingFieldSources(character, location?.id, holdCfgNow(), { items: CONTENT.items })];
   verdict.carried = carried;
   return verdict;
 }
@@ -9687,7 +9732,7 @@ function sbGround() {
   if (!location || !CONTENT.substrateModel) return null;
   const comps = activeCompanions(character, CONTENT.companions);
   return { location,
-    carried: carriedSubstrate(character, CONTENT.items, comps) + holdingFieldDelta(character, location?.id, holdCfgNow()),
+    carried: carriedSubstrate(character, CONTENT.items, comps) + holdingFieldDelta(character, location?.id, holdCfgNow(), { items: CONTENT.items }),
     present: peoplePresentAt(location?.id, { registry: character?.npcRegistry || {}, npcs: CONTENT.npcs || {} }),
     meaningAura: holdingMeaningAura(character, location?.id, holdCfgNow()) };
 }
@@ -13786,6 +13831,24 @@ function wireHoldingOffers() {
   // ⛔ CCODE-440: a hold is a local market — sell what you carry, and change money, where you stand
   for (const btn of app.querySelectorAll("[data-hold-sellpack]")) btn.onclick = () => showSellFromPack(btn.dataset.holdSellpack, again);
   for (const btn of app.querySelectorAll("[data-hold-exchange]")) btn.onclick = () => showChangeMoney(again);
+  // ⛔ CCODE-444: a hold keeps valuables — put in and taken out where you stand; a kept well or sink is switched on and off from its card
+  for (const btn of app.querySelectorAll("[data-hold-vault]")) btn.onclick = () => showVaultDeposit(btn.dataset.holdVault, again);
+  for (const btn of app.querySelectorAll("[data-vault-take]")) btn.onclick = () => {
+    const h = (character.holdings || []).find(x => x && x.id === btn.dataset.vaultTake);
+    const it = vaultOf(h)[Number(btn.dataset.index)];
+    if (!h || !it) return;
+    const r = withdrawFromVault(character, h.id, [it.customName || it.name], { hereId: hereNow()?.id || null });
+    if (!r.ok) { alert(r.why); return; }
+    h.history = [...(h.history || []), { at: null, from: h.condition, to: h.condition, note: `taken from the vault — ${r.moved.join(", ")}` }].slice(-12);
+    saveCharacter(character); again();
+  };
+  for (const btn of app.querySelectorAll("[data-vault-charge]")) btn.onclick = () => {
+    const h = (character.holdings || []).find(x => x && x.id === btn.dataset.vaultCharge);
+    const it = vaultOf(h)[Number(btn.dataset.index)];
+    if (!it) return;
+    if (it.active === false) delete it.active; else it.active = false;
+    saveCharacter(character); again();
+  };
   for (const btn of app.querySelectorAll("[data-hold-sell]")) btn.onclick = () => {
     const id = btn.dataset.holdSell;
     const here = hereNow();
@@ -13977,13 +14040,17 @@ function renderHoldingsTab(manageId = null) {
           return `<div class="hint hold-has"><span class="hold-ctl-label">has</span>${list || "<em>nothing built yet</em>"}</div>
         `; })()}
         ${storeTotal(h) > 0 ? `<div class="hint">store: ${esc(Object.entries(h.store).filter(([, n]) => n > 0).map(([g, n]) => `${n} ${String(g).replace(/_/g, " ")}`).join(", "))}${(() => { const w = storeWorth(h, { economy: CONTENT.rules?.economy, regionId: CONTENT.locations?.[h.locationId]?.regionId || null, cfg: CONTENT.rules?.economy?.holdStore }); return w ? ` · worth ~${w} crystal here` : ""; })()}${h.arrears ? ` · in arrears ${h.arrears}` : ""}</div>` : ""}
+        ${(() => { const v = vaultOf(h); if (!v.length) return ""; const atHold = hereNow()?.id === h.locationId;   // ⛔ CCODE-444: what its vault keeps
+          return `<div class="hint hold-has hold-vault"><span class="hold-ctl-label">vault</span>${v.map((it, i) => { const c = chargeOf(it, CONTENT.items || {}); const on = it.active !== false;
+            return `<span class="hold-chip vault-chip">${esc(it.customName || it.name)}${it.qty > 1 ? ` ×${it.qty}` : ""}${c ? `<button class="vault-charge ${on ? "on" : ""}" data-vault-charge="${esc(h.id)}" data-index="${i}" aria-pressed="${on}" title="${c > 0 ? "A well: it thickens the ground" : "A sink: it thins the ground"} at this place by ${Math.abs(c)} while it is on. Tap to switch it ${on ? "off" : "on"}.">${c > 0 ? "well" : "sink"} ${on ? "on" : "off"}</button>` : ""}${atHold ? `<button class="hold-chip-x" data-vault-take="${esc(h.id)}" data-index="${i}" title="Take it back into your pack">↩</button>` : ""}</span>`; }).join("")}</div>`; })()}
         ${h.fromAssignment ? `<div class="hint">from work you delegated</div>` : ""}
         <div class="opt-row" style="margin-top:6px">
           <button class="opt" data-hold-manage="${esc(h.id)}" title="Add what was built, change who keeps it, sell the store, give it up">⚙ Manage this place</button>
-          <label class="opt hold-trade-toggle" title="Other travelers who come here can buy from the store, through its keeper, at this Reach's prices. The goods leave the store and the crystal comes to you on your next turn in the world."><input type="checkbox" data-hold-trade="${esc(h.id)}" ${h.trade === true ? "checked" : ""}> Open to other travelers' trade</label>
+          <label class="opt hold-trade-toggle" title="Other travelers who come here can buy from the store, through its keeper, at this Reach's prices. The goods leave the store and the money — this place's own — comes to you on your next turn in the world."><input type="checkbox" data-hold-trade="${esc(h.id)}" ${h.trade === true ? "checked" : ""}> Open to other travelers' trade</label>
           ${storeTotal(h) > 0 && hereNow()?.id === h.locationId ? `<button class="opt" data-hold-sell="${esc(h.id)}" title="Sell what is stored, at this Reach's prices — you sell where it stands">Sell the store</button>` : ""}
           ${hereNow()?.id === h.locationId ? `<button class="opt" data-hold-sellpack="${esc(h.id)}" title="Sell what you carry, at this place's prices, in its own money">Sell from your pack</button>
-          <button class="opt" data-hold-exchange="${esc(h.id)}" title="Change money here, at this place's rates">Change money</button>` : ""}
+          <button class="opt" data-hold-exchange="${esc(h.id)}" title="Change money here, at this place's rates">Change money</button>
+          <button class="opt" data-hold-vault="${esc(h.id)}" title="Keep valuables here — a statue, an artifact, a well or sink that works on this place's ground while it is on">Put in the vault</button>` : ""}
         </div>
       </div></div>`;
   }).join("");
@@ -17262,7 +17329,7 @@ function useItem(name) {
 function itemCard(it, { open = false, toggleAttr = "data-item-toggle", showPin = false } = {}) {
   const img = open && imagesEnabled() ? itemImage(it, { ratingLevel: viewerRatingLevel() }) : null;
   return `<div class="item-card ${open ? "open" : ""}">
-    <button class="item-name" ${toggleAttr}="${esc(it.name)}">${esc(displayName(it))}${it.customName ? ` <span class="cost">(${esc(it.name)})</span>` : ""}${it.qty > 1 ? ` ×${it.qty}` : ""}</button>${showPin ? `<button class="item-pin ${it.pinned ? "on" : ""}" data-item-pin="${esc(it.name)}" title="${it.pinned ? "Pinned to the sidebar — tap to unpin" : "Pin to the sidebar for quick access"}">${it.pinned ? "📌" : "📍"}</button>` : ""}
+    <button class="item-name" ${toggleAttr}="${esc(it.name)}">${esc(displayName(it))}${it.customName ? ` <span class="cost">(${esc(it.name)})</span>` : ""}${it.qty > 1 ? ` ×${it.qty}` : ""}${it.active === false && chargeOf(it, CONTENT.items || {}) ? ` <span class="cost">(switched off)</span>` : ""}</button>${showPin ? `<button class="item-pin ${it.pinned ? "on" : ""}" data-item-pin="${esc(it.name)}" title="${it.pinned ? "Pinned to the sidebar — tap to unpin" : "Pin to the sidebar for quick access"}">${it.pinned ? "📌" : "📍"}</button>` : ""}
     ${open ? `<div class="item-detail">
       ${img ? `<img class="item-img" data-lightbox="item" data-regen-kind="item" data-regen-subject="${esc(it.name)}" src="${esc(img)}" alt="${esc(it.name)}" loading="lazy" onerror="this.style.display='none'">` : ""}
       <div class="item-desc">${esc(it.description || it.kind)}</div>
@@ -17281,6 +17348,8 @@ function itemCard(it, { open = false, toggleAttr = "data-item-toggle", showPin =
         </div>`).join("")}
       </div>` : ""}
       ${it.derived?.length ? `<div class="item-tags">split into: ${it.derived.map(esc).join(", ")}</div>` : ""}
+      ${(() => { const c = chargeOf(it, CONTENT.items || {}); if (!c) return ""; const on = it.active !== false;   // ⛔ CCODE-444: a well or sink, and its switch
+        return `<div class="item-charge">${c > 0 ? "A well" : "A sink"}: it ${c > 0 ? "thickens" : "thins"} the ground wherever you carry it, by ${Math.abs(c)}. <strong>${on ? "On" : "Off"}.</strong> <button class="opt" data-item-charge="${esc(it.name)}">${on ? "Switch it off" : "Switch it on"}</button></div>`; })()}
       <div class="item-actions">
         <button class="opt" data-item-use="${esc(it.name)}">${it.consumable ? "Consume" : "Use in scene"}</button>
         ${/* SNG-251 §2a: the PLAYER-INITIATED evolution. Erik should not have to beg the GM to notice that
@@ -17313,6 +17382,8 @@ function bindItemCardHandlers(afterChange) {
     if (cite == null || !String(cite).trim()) return;
     onFreeform(`I take up ${displayName(it)} and take stock of what it has become. ${String(cite).trim()} — reflect that in the item: its description, its name if it has earned one, and be explicit about what it now grants mechanically.`);
   };
+  // ⛔ CCODE-444 (Erik: "we also need to allow the sinks and wells to be active or deactivated"): the switch on a charged thing you carry
+  for (const b of app.querySelectorAll("[data-item-charge]")) b.onclick = () => { const it = findItem(character, b.dataset.itemCharge); if (!it) return; if (it.active === false) delete it.active; else it.active = false; saveCharacter(character); afterChange(b.dataset.itemCharge); };
   for (const b of app.querySelectorAll("[data-item-pin]")) b.onclick = (e) => { e.stopPropagation(); togglePin(character, b.dataset.itemPin); saveCharacter(character); afterChange(b.dataset.itemPin); }; // SNG-121
 }
 
@@ -18917,7 +18988,7 @@ function renderPlay(turn, opts = {}) {
         // ⛔ SNG-353 — THE WHOLE NAME IS THE TAP TARGET, because `title=` was the ONLY delivery for role
         // and appearance and hover does not exist on touch. And the badge reads as PROGRESS, not a score:
         // every number in it (`bond 4/10 · s2 · next at 7`) was already computed and never said.
-        return `<div class="company-row"><span class="company-name comp-open" data-companion="${esc(id)}" role="button" tabindex="0" title="Tap for who they are, what they know, and what they will not do">${esc(dn)}${dn !== c.name ? ` <span class="hint">(${esc(c.name)})</span>` : ""}</span><span class="company-badge ${b.bond >= 3 ? "on" : ""}" title="bond grows through shared deeds, assists, and encounters">bond ${b.bond}/${mx}${b.stage > 1 ? ` · s${b.stage}` : ""}${nx != null ? ` · next ${nx}` : ""}</span><span class="company-actions"><button class="company-action companion-rename" data-rename="${esc(id)}" title="Name them">✎</button><button class="company-action companion-part" data-part="${esc(id)}" title="Part ways">✕</button></span></div>`; }).join("")}</div>` : "";
+        return `<div class="company-row"><span class="company-name comp-open" data-companion="${esc(id)}" role="button" tabindex="0" title="Tap for who they are, what they know, and what they will not do">${esc(dn)}${dn !== c.name ? ` <span class="hint">(${esc(c.name)})</span>` : ""}</span><span class="company-badge ${b.bond >= 3 ? "on" : ""}" title="bond grows through shared deeds, assists, and encounters">bond ${b.bond}/${mx}${b.stage > 1 ? ` · s${b.stage}` : ""}${nx != null ? ` · next ${nx}` : ""}</span><span class="company-actions">${Number(c.substrateAura) ? `<button class="company-action aura-toggle ${character.aurasOff?.[id] ? "" : "on"}" data-aura-toggle="${esc(id)}" aria-pressed="${!character.aurasOff?.[id]}" title="${esc(dn)}'s aura ${Number(c.substrateAura) > 0 ? "thickens" : "thins"} the ground around you by ${Math.abs(Number(c.substrateAura))}. ${character.aurasOff?.[id] ? "Stilled — tap to let it work again." : "Working — tap to still it."}">aura ${character.aurasOff?.[id] ? "off" : "on"}</button>` : ""}<button class="company-action companion-rename" data-rename="${esc(id)}" title="Name them">✎</button><button class="company-action companion-part" data-part="${esc(id)}" title="Part ways">✕</button></span></div>`; }).join("")}</div>` : "";
       const allyBody = (roster.length || recruitable.length) ? `<div class="company-group"><div class="sys-label">Allies</div>${
         roster.map(r => `<div class="company-row" title="${esc(roleBadges(r.roles))}${r.teaches ? " · teaches " + traditionLabel(r.teaches) : ""}${r.liaisonFor ? " · liaison" : ""}"><span class="company-name">${esc(r.name)}</span><span class="company-badge" title="roles they hold in your company">${esc(roleBadges(r.roles))}</span>${r.teaches ? `<span class="company-badge on" title="a trainer — their presence lets you learn this people's capstones">⚔</span>` : ""}${r.liaisonFor ? `<span class="company-badge" title="a liaison — faster standing with their people">🤝</span>` : ""}<span class="company-actions">${r.recruited ? `<button class="company-action ally-part" data-partally="${esc(r.npcId)}" title="Part ways">✕</button>` : ""}</span></div>`).join("")
       }${recruitable.map(p => `<div class="company-row" title="${esc(p.label || "at your side")}"><span class="company-name">${esc(p.name)}</span><span class="company-badge hint">${esc(p.label || "at your side")}</span><span class="company-actions"><button class="company-action recruit" data-recruit="${esc(p.id)}" title="Ask them to travel with you">＋</button></span></div>`).join("")}</div>` : "";
@@ -19259,7 +19330,7 @@ function renderPlay(turn, opts = {}) {
       // BATCH-13 invariant 5: name the CARRIED cause. The ground reading differently because of what
       // you walked in with is unexplainable at exactly the moment it matters, unless the receipt says so.
       const carriedBit = (r.substrate?.carriedBy || []).length
-        ? ` <span class="cost" title="Carried substrate — a companion's aura or a charged item you're holding — shifts the effective lattice density here by this much. It helps a craft that wants denser ground and hurts one that wants thinner; the sign is the shift, not a verdict.">(${esc(r.substrate.carriedBy.map(c => `${c.name} ${c.delta > 0 ? "+" : ""}${c.delta}`).join(", "))})</span>` : "";
+        ? ` <span class="cost" title="Carried substrate — a companion's aura, a charged item you're holding, or a well or sink at a hold you stand in — shifts the effective lattice density here by this much. It helps a craft that wants denser ground and hurts one that wants thinner; the sign is the shift, not a verdict.">(${esc(r.substrate.carriedBy.map(c => `${c.name} ${c.delta > 0 ? "+" : ""}${c.delta}`).join(", "))})</span>` : "";
       // CCODE-30: this line is CRAFT STRENGTH (the % of full power the craft ran at, set by the lattice density),
       // NOT the success roll and NOT spectral fit — so it points to roll.substrate, its own explanation.
       const subBit = r.substrate ? `<div class="roll-affinity">${r.substrate.side === "starved" ? "the lattice is thin — your craft ran at" : "the lattice crowds your signal — your craft ran at"} ${r.substrate.percent}%${carriedBit} ${infoDot("roll.substrate")}</div>` : "";
@@ -19611,6 +19682,14 @@ function renderPlay(turn, opts = {}) {
     el.onclick = () => showCompanionPanel(el.dataset.companion);
     el.onkeydown = (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); showCompanionPanel(el.dataset.companion); } };
   }
+  // ⛔ CCODE-444 (Erik: "The same for companion sink and well effects"): a companion's aura is stilled, or let work, at the character's word
+  for (const btn of app.querySelectorAll("[data-aura-toggle]")) btn.onclick = () => {
+    const id = btn.dataset.auraToggle;
+    character.aurasOff = { ...(character.aurasOff || {}) };
+    if (character.aurasOff[id]) delete character.aurasOff[id]; else character.aurasOff[id] = true;
+    saveCharacter(character);
+    renderPlay(character.activeScene?.lastTurn || null, {});
+  };
   for (const btn of app.querySelectorAll("[data-rename]")) btn.onclick = () => {
     const id = btn.dataset.rename; const c = CONTENT.companions[id]; if (!c) return;
     const next = prompt(`What do you call ${c.name}?`, compName(c));

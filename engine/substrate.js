@@ -280,11 +280,15 @@ export function substrateVerdict({ tradition, school = null, root = null, densit
 export function carriedSubstrate(character, itemCatalog = {}, companions = []) {
   let carried = 0;
   for (const entry of (character?.inventory || [])) {
-    const def = (entry && typeof entry === "object") ? entry : (itemCatalog[entry] || null);
+    // ⛔ CCODE-444 — THROUGH THE CATALOGUE. `fromCatalog` copies nine fields into the pack and the charge is not one of them, so this read
+    // only the pack's copy and a carried Waystaff moved the ground by 0 since SNG-090. The catalogue by id, the pack's own fields winning.
+    const def = (entry && typeof entry === "object") ? { ...((entry.id && itemCatalog?.[entry.id]) || {}), ...entry } : (itemCatalog?.[entry] || null);
+    if (def?.active === false) continue;   // ⛔ CCODE-444 (Erik): a well or sink can be switched off — and then it moves nothing
     const c = Number(def?.substrateCharge);
     if (Number.isFinite(c)) carried += c;
   }
   for (const comp of (companions || [])) {
+    if (character?.aurasOff?.[comp?.id]) continue;   // ⛔ CCODE-444: "the same for companion sink and well effects"
     const a = Number(comp?.substrateAura);
     if (Number.isFinite(a)) carried += a;
   }
@@ -297,11 +301,13 @@ export function carriedSubstrate(character, itemCatalog = {}, companions = []) {
 export function carriedSubstrateSources(character, itemCatalog = {}, companions = []) {
   const out = [];
   for (const entry of (character?.inventory || [])) {
-    const def = (entry && typeof entry === "object") ? entry : (itemCatalog[entry] || null);
+    const def = (entry && typeof entry === "object") ? { ...((entry.id && itemCatalog?.[entry.id]) || {}), ...entry } : (itemCatalog?.[entry] || null);
+    if (def?.active === false) continue;   // CCODE-444: a switched-off charge is not why the ground reads differently
     const c = Number(def?.substrateCharge);
     if (Number.isFinite(c) && c !== 0) out.push({ name: def?.customName || def?.name || String(entry), delta: c, kind: "item" });
   }
   for (const comp of (companions || [])) {
+    if (character?.aurasOff?.[comp?.id]) continue;
     const a = Number(comp?.substrateAura);
     if (Number.isFinite(a) && a !== 0) out.push({ name: comp?.name || comp?.id, delta: a, kind: "companion" });
   }
@@ -324,9 +330,10 @@ export function carriedSubstrateSources(character, itemCatalog = {}, companions 
  *  ⬜ A PERSON'S OWN KIT IS NOT COUNTED and cannot be: a contingent records who somebody is, not what they are carrying, and inventing
  *  an inventory for them would be inventing the number. What a unit HOLDS is `unit.artifacts`, which is the player's to fill.
  *  `contingents` may be passed to price a LEGION, whose people live in its parts. Pure. */
-export function unitCarriedSubstrate(unit, { items = {}, companions = {}, contingents = null } = {}) {
+export function unitCarriedSubstrate(unit, { items = {}, companions = {}, contingents = null, aurasOff = null } = {}) {
   const sources = [];
   for (const entry of (unit?.artifacts || [])) {
+    if (entry && typeof entry === "object" && entry.active === false) continue;   // ⛔ CCODE-444: a switched-off artifact moves nothing here either
     const id = (entry && typeof entry === "object") ? (entry.item || entry.id) : entry;
     const def = (entry && typeof entry === "object" && entry.substrateCharge != null) ? entry : (items?.[id] || null);
     const c = Number(def?.substrateCharge);
@@ -335,6 +342,7 @@ export function unitCarriedSubstrate(unit, { items = {}, companions = {}, contin
   }
   for (const cg of (Array.isArray(contingents) ? contingents : contingentsOf(unit))) {
     const comp = cg?.npcId ? companions?.[cg.npcId] : null;
+    if (comp && aurasOff?.[cg.npcId]) continue;   // CCODE-444: a companion whose aura is stilled is stilled in a column too
     const a = Number(comp?.substrateAura);
     if (Number.isFinite(a) && a !== 0) sources.push({ name: comp?.name || cg.npcId, delta: a, kind: "companion" });
   }

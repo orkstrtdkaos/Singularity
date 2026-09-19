@@ -170,7 +170,7 @@ export function holdingNews(holding, before, effects = null) {
 /** ⛔ SNG-356 · PRESENCE 20 — THE OBLIGATION INVERTS. `— owes: X` becomes `— X draws standing from your
  *  holding of it`. ⚠️ NARRATIVE, NOT NUMERIC: nothing is discharged mechanically and no cost is removed.
  *  What changes is who is beholden, which is the whole of "the name is a power in the world". */
-export function holdingsForGM(character, effects = null, { hereId = null, nameOf = null, cfg = null } = {}) {
+export function holdingsForGM(character, effects = null, { hereId = null, nameOf = null, cfg = null, items = null } = {}) {
   // ⛔ SPEC_holding_attributes — the narrator is told when the character is STANDING IN a place they hold, and each
   // holding arrives as its sentence. A messenger from the post is one thing; being at the post is another.
   const here = new Set(holdingsAt(character, hereId).map(h => h.id));
@@ -187,6 +187,7 @@ export function holdingsForGM(character, effects = null, { hereId = null, nameOf
         : ` — owes: ${h.obligation}`)
       : "")
     + roomSaid(h)
+    + vaultSaid(h, items)   // ⛔ CCODE-444: what its vault keeps, and whether each well or sink is on
   ).join("\n");
 }
 
@@ -1497,7 +1498,7 @@ export function yieldsFor(holding, cfg, { density = null } = {}) {
  *  a hold is a stationary aura"). The delta rides the same term a carried charge does, so a temple thickens or thins the
  *  apparatus under it exactly as a Waystaff does in a hand. ⚠️ And a hold may be BOTH — dense in meaning, thin in
  *  apparatus — which is the Numinous's authored problem (R38: meaning is the ceiling, substrate the penalty). */
-export function holdingFieldDelta(character, locationId, cfg = null) {
+export function holdingFieldDelta(character, locationId, cfg = null, { items = null } = {}) {
   let d = 0;
   for (const h of holdingsAt(character, locationId)) for (const f of featuresOf(h)) {
     const def = featureDef(f.kind, cfg);
@@ -1506,8 +1507,99 @@ export function holdingFieldDelta(character, locationId, cfg = null) {
     const sign = String(src.kind) === "sink" ? -1 : 1;
     d += sign * Math.abs(Number(src.delta) || 0) * (Number(f.count) || 1);
   }
+  // ⛔ CCODE-444 — AND WHAT ITS VAULT KEEPS: a well or sink stored at a hold works where it is kept (Erik's pick), unless switched off
+  for (const h of holdingsAt(character, locationId)) for (const it of vaultOf(h)) {
+    if (!it || it.active === false) continue;
+    d += chargeOf(it, items || {});   // the catalogue by id — a kept Waystaff is 0.18 whether or not its pack copy said so
+  }
   return Math.round(d * 1000) / 1000;
 }
+
+/** What at a hold moves the ground where you stand, itemised — its built wells and sinks, and what its vault keeps switched on — so the
+ *  receipt can name the cause (§9b invariant 5), as `carriedSubstrateSources` does for the pack. Pure. */
+export function holdingFieldSources(character, locationId, cfg = null, { items = null } = {}) {
+  const out = [];
+  for (const h of holdingsAt(character, locationId)) {
+    for (const f of featuresOf(h)) {
+      const src = featureDef(f.kind, cfg)?.substrateSource;
+      if (!src) continue;
+      const delta = (String(src.kind) === "sink" ? -1 : 1) * Math.abs(Number(src.delta) || 0) * (Number(f.count) || 1);
+      if (delta) out.push({ name: `${f.name || f.kind} at ${h.name || "your hold"}`, delta: Math.round(delta * 1000) / 1000, kind: "hold" });
+    }
+    for (const it of vaultOf(h)) {
+      if (!it || it.active === false) continue;
+      const c = chargeOf(it, items || {});
+      if (c) out.push({ name: `${it.customName || it.name}, kept at ${h.name || "your hold"}`, delta: c, kind: "vault" });
+    }
+  }
+  return out;
+}
+
+/** ⛔ CCODE-444 — A HOLD KEEPS VALUABLES. Erik: "we should be able to have valuable items stored in a holding - I'm thinking about mobile
+ *  energy wells and sinks, valuable statues, artifacts, etc." The vault is the pack's own items, whole, moved while you stand in the hold.
+ *  ⛑ A well or sink kept there WORKS THERE (his pick): its charge joins `holdingFieldDelta`, so every craft worked at that place feels it —
+ *  unless it is switched off (`active === false`), which is his second ask. Pure readers; the movers mutate. */
+export function vaultOf(holding) { return Array.isArray(holding?.vault) ? holding.vault : []; }
+
+/** An item's field charge, its own or its catalogue's — 0 for a thing that moves no ground. Pure. */
+export function chargeOf(item, catalog = {}) {
+  const d = { ...((item?.id && catalog?.[item.id]) || {}), ...(item || {}) };
+  const c = Number(d.substrateCharge);
+  return Number.isFinite(c) && c !== 0 ? c : 0;
+}
+
+/** How a charge reads: "a well, +0.18, on". Pure. */
+export function chargeWord(item, catalog = {}) {
+  const c = chargeOf(item, catalog);
+  if (!c) return "";
+  return `${c > 0 ? "a well" : "a sink"}, ${c > 0 ? "+" : "−"}${Math.abs(c)}, ${item?.active === false ? "off" : "on"}`;
+}
+
+// ⚠️ STRICT: nowhere is not "here". An unplaced hold has no vault to stand in, and a character with no current place is at no hold.
+const vaultHere = (character, holdId, hereId) => {
+  const h = (character?.holdings || []).find(x => x && String(x.id) === String(holdId));
+  if (!h) return { why: "no such holding" };
+  if (!h.locationId) return { why: "this hold has no place yet — say where it stands first" };
+  if (String(hereId || "") !== String(h.locationId)) return { why: "the vault is at the hold — you put things in and take them out where it stands" };
+  return { h };
+};
+const PACK_HOLDS = 30;   // addItem's own cap — a withdrawal that would pass it is refused, not silently grown or dropped
+
+/** Put these things from the pack into the hold's vault, where you stand in it — whole stacks. → { ok, moved, why }. Mutates. */
+export function depositToVault(character, holdId, names = [], { hereId = null } = {}) {
+  const { h, why } = vaultHere(character, holdId, hereId);
+  if (!h) return { ok: false, why };
+  const want = new Set((Array.isArray(names) ? names : [names]).map(n => String(n || "").toLowerCase()).filter(Boolean));
+  const inv = Array.isArray(character.inventory) ? character.inventory : [];
+  const moving = inv.filter(it => it && want.has(String(it.customName || it.name || "").toLowerCase()) && String(it.kind || "") !== "quest");
+  if (!moving.length) return { ok: false, why: "nothing named that can be put away is in the pack" };
+  character.inventory = inv.filter(it => !moving.includes(it));
+  h.vault = [...vaultOf(h), ...moving];
+  return { ok: true, moved: moving.map(it => it.customName || it.name) };
+}
+
+/** Take these things out of the hold's vault into the pack, where you stand in it. → { ok, moved, why }. Mutates. */
+export function withdrawFromVault(character, holdId, names = [], { hereId = null } = {}) {
+  const { h, why } = vaultHere(character, holdId, hereId);
+  if (!h) return { ok: false, why };
+  const want = new Set((Array.isArray(names) ? names : [names]).map(n => String(n || "").toLowerCase()).filter(Boolean));
+  const moving = vaultOf(h).filter(it => it && want.has(String(it.customName || it.name || "").toLowerCase()));
+  if (!moving.length) return { ok: false, why: "nothing named is in the vault" };
+  const carried = Array.isArray(character.inventory) ? character.inventory.length : 0;
+  if (carried + moving.length > PACK_HOLDS) return { ok: false, why: `your pack holds ${PACK_HOLDS} things and has ${carried} — make room first` };
+  h.vault = vaultOf(h).filter(it => !moving.includes(it));
+  character.inventory = [...(Array.isArray(character.inventory) ? character.inventory : []), ...moving];
+  return { ok: true, moved: moving.map(it => it.customName || it.name) };
+}
+
+/** What a hold's vault says to the GM: " — its vault keeps the Waystaff (a well, +0.18, on), a marble saint". Pure. */
+function vaultSaid(h, items = null) {
+  const v = vaultOf(h);
+  if (!v.length) return "";
+  return ` — its vault keeps ${v.map(it => { const w = chargeWord(it, items || {}); return `${it.customName || it.name}${it.qty > 1 ? ` x${it.qty}` : ""}${w ? ` (${w})` : ""}`; }).join(", ")}`
+    + (v.some(it => chargeOf(it, items || {})) ? "; a well or sink kept there works on the ground at that place while it is on, and a switched-off one moves nothing" : "");
+}
+
 
 /** ✅ R46b: REVENUE FROM PILGRIMS — a hold that earns from ATTENDANCE rather than production. *"A temple yields because
  *  people come, not because it makes a good."* The take scales with the MEANING of the place, which is the thing they come

@@ -111,7 +111,7 @@ export function unitsOf(character, { cfg = null, content = null, worldDay = null
     // ⛔ CCODE-408 — what it carries that moves the ground: its people's auras and the artifacts it holds, summed and itemised. A
     // LEGION is priced over its resolved contingents, because its people are in its parts.
     carried: unitCarriedSubstrate(b, { items: content?.items || {}, companions: content?.companions || {},
-      contingents: resolvedContingentsFor(all, b, lopts) }),
+      contingents: resolvedContingentsFor(all, b, lopts), aurasOff: character?.aurasOff || null }),
     formedFrom: arr(b.formedFrom).map(String),   // ⛑ NO LONGER EMPTY: the bands this legion is formed from (CCODE-405)
     parts: legionParts(all, b).map(p => ({ id: String(p.id), name: p.name || String(p.id), condition: p.condition || "fresh" })),
     // ⛔ ERIK'S LEGION TAG — "they gain a legion tag... which legion are they in". Set on a band that stands in one, null otherwise.

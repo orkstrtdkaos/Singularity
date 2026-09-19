@@ -1957,3 +1957,10 @@ img.charge-face { cursor: zoom-in; }
 
 /* SNG-555: the named spot INSIDE the location. The header still shows the parent — a sub-place is deliberately not a
    destination — so the room reads as a continuation of it, quieter than the place name, never as a second place. */
+
+/* ⛔ CCODE-444 — the vault, and a well or sink that switches. The switch is a pressed/unpressed pill: on reads in the accent, off in ink-dim. */
+.hold-vault .vault-chip { gap: 5px; }
+.vault-charge, .aura-toggle { font-size: 11px; line-height: 1; padding: 2px 6px; border-radius: 8px; border: 1px solid var(--border); background: none; color: var(--ink-dim); cursor: pointer; white-space: nowrap; }
+.vault-charge.on, .aura-toggle.on { color: var(--accent2); border-color: var(--accent2); }
+.item-charge { font-size: 12.5px; color: var(--ink-dim); margin: 6px 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.item-charge .opt { font-size: 11px; padding: 4px 8px; }

@@ -313,7 +313,7 @@ export const GM_CONTEXT = [
       env.CONTENT?.rules?.subAttributeLadder ? milestoneEffects(env.CONTENT.rules.subAttributeLadder, env.character).live : null,
       // SPEC_holding_attributes: the join — the narrator knows when you are standing in a place you hold
       { hereId: env.location?.id || env.character?.currentLocationId || null, nameOf: (id) => env.character?.npcRegistry?.[id]?.name || env.CONTENT?.npcs?.[id]?.name || id,
-        cfg: env.CONTENT?.rules?.economy?.holdStore || null }) },   // ⛔ CCODE-429: and each hold's room
+        cfg: env.CONTENT?.rules?.economy?.holdStore || null, items: env.CONTENT?.items || null }) },   // ⛔ CCODE-429: and each hold's room · CCODE-444: its vault
   // ⛔ CCODE-441 — THE PURSE AND THE MONEY OF THE PLACE. The GM was never shown the purse, so it could not be honest about a price or
   // know what the character could pay; and it had no op to move money. Both halves arrive together (exchangeOps in the contract).
   { key: "moneyDetail", builder: "purse.purseLine + money.moneyLine", carries: ["purse", "the money of the place"],

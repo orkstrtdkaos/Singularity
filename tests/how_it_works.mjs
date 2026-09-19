@@ -22436,7 +22436,7 @@ console.log("\n── §308 · a hold has room — its rung or its frame; a buil
   const gm308 = H308.holdingsForGM(mk(7), null, { cfg: cfg308 }) || "";
   const A308 = rd("app.js").replace(/\r\n/g, "\n");
   check("§308: ⛔ the GM is told each hold's room and that a full one refuses a build, its own build op is bound by it, and the refusal is SAID",
-    /a hamlet, 7 of 7 rooms, FULL: a build here is refused/.test(gm308) && /cfg: env\.CONTENT\?\.rules\?\.economy\?\.holdStore \|\| null \}\) \},/.test(rd("engine/gm_registry.js"))
+    /a hamlet, 7 of 7 rooms, FULL: a build here is refused/.test(gm308) && /cfg: env\.CONTENT\?\.rules\?\.economy\?\.holdStore \|\| null[,}\s]/.test(rd("engine/gm_registry.js"))   /* the RULE: the block is handed the room config (CCODE-444 added its vault's catalogue after it) */
     && /A HOLD HAS ROOM \(CCODE-429\)/.test(rd("engine/gm.js"))
     && /cfg: holdCfgNow\(\), bindRoom: true \}\);\n\s*\/\/ ⛔ CCODE-429[^\n]*\n\s*if \(!r\.ok\) \{ if \(r\.noRoom\) said\(r\.why\);/.test(A308));
 
@@ -23130,6 +23130,81 @@ console.log("\n── §322 · the starting purse — liquidity by background, m
   const A322 = rd("app.js").replace(/\r\n/g, "\n").split("\n").filter(l => !/^\s*\/\//.test(l)).join("\n");
   check("§322: ⛑ a new character is born current, so the purse is paid at birth — what the background carried, in the money of where it begins",
     /character\.reconcileVersion = topReconcileVersion\("character"\);[\s\S]{0,400}const f443 = startingPurseFloor\(character\.background, CONTENT\.rules\?\.economy \|\| null\);\n\s*if \(f443 > 0\) earnAt\(character, f443,/.test(A322));
+}
+
+// ══════════ §323 · CCODE-444 — A HOLD KEEPS VALUABLES, AND EVERY WELL AND SINK CAN BE SWITCHED ══════════
+// Erik: "we should be able to have valuable items stored in a holding - I'm thinking about mobile energy wells and sinks, valuable statues,
+// artifacts, etc." — picking that a stored one works where it is kept — and "we also need to allow the sinks and wells to be active or
+// deactivated. The same for companion sink and well effects or other items."
+console.log("\n── §323 · the vault, and the switch — a kept well works at its hold, a switched-off one moves nothing, and the charge is read through the catalogue ──");
+{
+  const H323 = await import("../engine/holdings.js");
+  const SB323 = await import("../engine/substrate.js");
+  const INV323 = await import("../engine/inventory.js");
+  const CP323 = await import("../engine/companions.js");
+  const { loadContentHeadless: lch323 } = await import("./headless_content.mjs");
+  const CT323 = await lch323();
+  const cat = CT323.items || {};
+  const pc = { inventory: [] };
+  INV323.addItem(pc, "waystaff", cat);
+  const staff = pc.inventory[0];
+  const on = SB323.carriedSubstrate(pc, cat, []), named = SB323.carriedSubstrateSources(pc, cat, []);
+  staff.active = false;
+  const off = SB323.carriedSubstrate(pc, cat, []), offNamed = SB323.carriedSubstrateSources(pc, cat, []);
+  delete staff.active;
+  check("§323: ⛔ THE DOOR — a Waystaff picked up from the catalogue moves the ground by its 0.18 (the pack's copy never carried the charge, so it moved it by 0 since SNG-090); switched off, it moves nothing and is not named",
+    cat.waystaff?.substrateCharge === 0.18 && !("substrateCharge" in staff) && on === 0.18 && named.length === 1 && named[0].name === "Waystaff"
+    && off === 0 && offNamed.length === 0, JSON.stringify({ on, off, named }));
+  const aevi = CT323.companions?.aevi;
+  const chr = { companions: ["aevi"], aurasOff: {} };
+  const comps = CP323.activeCompanions(chr, CT323.companions);
+  const auraOn = SB323.carriedSubstrate(chr, cat, comps);
+  chr.aurasOff.aevi = true;
+  const auraOff = SB323.carriedSubstrate(chr, cat, comps);
+  const unit = { artifacts: [{ id: "waystaff", active: false }, { id: "prism_lens" }] };
+  const u = SB323.unitCarriedSubstrate(unit, { items: cat, companions: CT323.companions, contingents: [{ npcId: "aevi" }], aurasOff: { aevi: true } });
+  const gmStilled = CP323.companionsForGM(comps, chr, null) || "";
+  check("§323: ⛔ A COMPANION'S AURA SWITCHES — stilled at the character's word it moves nothing, in the pack's term and in a column; a switched-off artifact moves a unit's ground by nothing; the GM is told it is stilled",
+    Number(aevi?.substrateAura) === 0.2 && auraOn === 0.2 && auraOff === 0
+    && u.total === cat.prism_lens.substrateCharge && u.sources.length === 1 && /Its aura is STILLED at the character's word/.test(gmStilled),
+    JSON.stringify({ auraOn, auraOff, u: u.total }));
+  const hold = { id: "h323", name: "Whistle Post", locationId: "ridge323", condition: "steady", features: [] };
+  const who = { holdings: [hold], inventory: [] };
+  INV323.addItem(who, "waystaff", cat);
+  INV323.addItem(who, { name: "a marble saint", kind: "relic" }, cat);
+  who.inventory.push({ id: null, name: "the sealed letter", kind: "quest", qty: 1 });
+  const away = H323.depositToVault(who, "h323", ["Waystaff"], { hereId: "elsewhere" });
+  const nowhere = H323.depositToVault(who, "h323", ["Waystaff"], { hereId: null });
+  const put = H323.depositToVault(who, "h323", ["Waystaff", "a marble saint", "the sealed letter"], { hereId: "ridge323" });
+  check("§323: ⛔ WHERE YOU STAND — away from the hold, and nowhere at all, the vault refuses; at it, whole stacks move out of the pack and a thing the story carries stays with you",
+    !away.ok && !nowhere.ok && put.ok && put.moved.length === 2 && H323.vaultOf(hold).length === 2
+    && who.inventory.length === 1 && who.inventory[0].kind === "quest", JSON.stringify({ away, nowhere, put, pack: who.inventory.map(i => i.name) }));
+  const atHold = H323.holdingFieldDelta(who, "ridge323", null, { items: cat });
+  const blind = H323.holdingFieldDelta(who, "ridge323", null);
+  const src = H323.holdingFieldSources(who, "ridge323", null, { items: cat });
+  const gm = H323.holdingsForGM(who, null, { hereId: "ridge323", items: cat }) || "";
+  H323.vaultOf(hold)[0].active = false;
+  const atHoldOff = H323.holdingFieldDelta(who, "ridge323", null, { items: cat });
+  const gmOff = H323.holdingsForGM(who, null, { hereId: "ridge323", items: cat }) || "";
+  check("§323: ⛔ A KEPT WELL WORKS WHERE IT IS KEPT (Erik's pick) — at the hold the Waystaff adds its 0.18, named in the receipt as kept there; nowhere else; switched off, nothing. The GM is told what the vault keeps and whether it is on",
+    atHold === 0.18 && blind === 0 && H323.holdingFieldDelta(who, "elsewhere", null, { items: cat }) === 0 && atHoldOff === 0
+    && src.length === 1 && src[0].name === "Waystaff, kept at Whistle Post" && src[0].kind === "vault"
+    && /its vault keeps Waystaff \(a well, \+0\.18, on\), a marble saint/.test(gm) && /Waystaff \(a well, \+0\.18, off\)/.test(gmOff),
+    JSON.stringify({ atHold, blind, atHoldOff, src, gm: gm.slice(-220) }));
+  who.inventory = Array.from({ length: 30 }, (_, i) => ({ name: `pebble ${i}`, kind: "misc", qty: 1 }));
+  const full = H323.withdrawFromVault(who, "h323", ["a marble saint"], { hereId: "ridge323" });
+  who.inventory = [];
+  const back = H323.withdrawFromVault(who, "h323", ["Waystaff"], { hereId: "ridge323" });
+  const gmPack = INV323.inventoryForGM(who);
+  check("§323: ⛑ TAKEN BACK where you stand — a full pack refuses rather than growing past addItem's 30; the Waystaff returns still switched off, and the GM is told it is",
+    !full.ok && /your pack holds 30 things/.test(full.why) && back.ok && who.inventory.length === 1 && who.inventory[0].active === false
+    && H323.vaultOf(hold).length === 1 && /SWITCHED OFF at the character's word/.test(gmPack), JSON.stringify({ full, back }));
+  const A323 = rd("app.js").replace(/\r\n/g, "\n").split("\n").filter(l => !/^\s*\/\//.test(l)).join("\n");
+  check("§323: ⛑ THE SCREEN AND THE ROLL — both ground readers hand the catalogue to the hold's field; the receipt names a hold's wells, sinks and kept charges; the vault, the item switch and the aura switch are wired",
+    (A323.match(/holdingFieldDelta\(character, location\?\.id, holdCfgNow\(\), \{ items: CONTENT\.items \}\)/g) || []).length === 2
+    && /verdict\.carriedBy = \[\.\.\.carriedSubstrateSources\(character, CONTENT\.items, comps\), \.\.\.holdingFieldSources\(/.test(A323)
+    && /\[data-hold-vault\]"\)\) btn\.onclick = \(\) => showVaultDeposit\(/.test(A323) && /\[data-vault-take\]/.test(A323) && /\[data-vault-charge\]/.test(A323)
+    && /\[data-item-charge\]"\)\) b\.onclick/.test(A323) && /\[data-aura-toggle\]"\)\) btn\.onclick/.test(A323));
 }
 
 /* ══════════ REPORT ══════════ */

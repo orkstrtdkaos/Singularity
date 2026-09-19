@@ -199,7 +199,9 @@ export function companionsForGM(activeCompanions, character = null, rules = null
     // SNG-200B §2c: the companion's MEMORY — what it has been through with you, to speak to as shared history.
     const memory = character ? companionMemoryForGM(character, c.id) : null;
     const memLine = memory ? `\nWhat it has witnessed at your side (its memory — let it refer to this as shared history, in character; never as a list): ${memory}` : "";
-    return companionLine(c) + bondLine + memLine;
+    // ⛔ CCODE-444 (Erik: "the same for companion sink and well effects"): an aura the character has stilled moves no ground — say so
+    const stilled = character?.aurasOff?.[c.id] && Number(c.substrateAura) ? `\nIts aura is STILLED at the character's word: it moves no ground now. Narrate the quiet, not the field.` : "";
+    return companionLine(c) + bondLine + memLine + stilled;
   }).join("\n\n");
 }
 

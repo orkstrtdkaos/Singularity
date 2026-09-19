@@ -600,7 +600,7 @@ export function inventoryForGM(character) {
   // it does not know has a shadow-harm focus and an ending-sense — the mechanics would exist on the sheet
   // and be invisible to the one party that has to describe them in play.
   return character.inventory.map(i =>
-    `${i.customName ? `${i.customName} (their name for: ${i.name})` : i.name}${i.qty > 1 ? ` x${i.qty}` : ""} (${i.kind}${i.consumable ? ", consumable" : ""}${i.description ? ` — ${i.description}` : ""}${grantSummary(i) ? `; ${grantSummary(i)}` : ""})`
+    `${i.customName ? `${i.customName} (their name for: ${i.name})` : i.name}${i.qty > 1 ? ` x${i.qty}` : ""} (${i.kind}${i.consumable ? ", consumable" : ""}${i.description ? ` — ${i.description}` : ""}${grantSummary(i) ? `; ${grantSummary(i)}` : ""}${i.active === false ? "; SWITCHED OFF at the character's word — its well or sink moves no ground until they switch it on" : ""})`
   ).join("; ");
 }
 

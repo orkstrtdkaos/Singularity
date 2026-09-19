@@ -16,6 +16,30 @@
   "next": [],
   "releases": [
     {
+      "version": "2.2.1",
+      "date": "2026-09-19",
+      "entries": [
+        {
+          "kind": "feature",
+          "title": "A vault at your holds",
+          "summary": "Keep valuables at a hold you own: statues, artifacts, and wells and sinks that work on the ground there.",
+          "detail": "Stand in your hold and choose Put in the vault. Whole stacks move from your pack into the hold and wait there until you come back for them; a thing the story carries stays with you. A well or sink kept in the vault works on the ground at that place, so every craft worked there feels it, and the roll's note names it. Take things back the same way, where the hold stands; a full pack says so rather than losing anything."
+        },
+        {
+          "kind": "feature",
+          "title": "Switch wells and sinks on and off",
+          "summary": "Every charged thing you carry or keep, and every companion's aura, can be switched off and on again.",
+          "detail": "A well thickens the ground and a sink thins it, which helps some crafts and hurts others. Switch one off from its card in your pack, from its place in a hold's vault, or, for a companion's aura, from their row in your company. Switched off, it moves nothing until you switch it on, and the story knows it is quiet."
+        },
+        {
+          "kind": "fix",
+          "title": "Charged things you carry now count",
+          "summary": "A Waystaff, or any other charged thing in your pack, now changes the ground around you as it was always meant to.",
+          "detail": "These things lost their charge on the way into your pack, so carrying one changed nothing. They now count, and the note on a roll names what you carry that moved the ground."
+        }
+      ]
+    },
+    {
       "version": "2.2.0",
       "date": "2026-09-19",
       "entries": [

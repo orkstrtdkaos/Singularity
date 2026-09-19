@@ -133,17 +133,24 @@ will place each one. `playerChooses` is mandatory, so **a missing background is 
 
 ---
 
-## §6 — ⬜ ONE CALL THAT IS ERIK'S, NAMED AS ONE
+## ⛑ §6 — RULED BY ERIK, 2026-09-19
 
-Per DIRECTIVE §5, a value call gets handed over rather than smuggled in as a coefficient.
+> *"backfill the saves to the floor and credit them like we did for silas for their deeds."*
 
-**Does the backfill run at all?** The derivation above is neutral, but *whether a played world gets money minted
-into it retroactively* is a world call, not a maths call. Three honest answers:
+**Option 1, plus a second payment I had not scoped.** Two settlements, different in kind, and they **STACK**:
 
-1. **Backfill to the floor** — they were owed a start and never got it. *(My recommendation: the omission is ours,
-   and twelve of sixteen at zero is an engine gap showing through as a story about poverty that nobody wrote.)*
-2. **Nothing** — the world has moved; they earn or find it, and the empty purse is now canon.
-3. **Floor of L1 (4) for everyone** — no one is stranded, nobody is paid for a background they have already played
-   past.
+| | | |
+|---|---|---|
+| **the floor** | `max(current, TIER)` | the start they were owed — **predates play** |
+| **the deed settlement** | `deeds × 8`, per `R48 §2c` | pay for work already done — **earned during play** |
+
+⚑ **The 8-a-deed rate is CCode's, adopted unchanged** — two `useful` goods, what a valley pays for a service
+rendered. It reads off `worthBands` and needs no new mechanism.
+
+⚠️ **`DIRECTIVE_SNG-280` guard added: THE SETTLEMENT IS FLAT PER DEED, NEVER WEIGHTED BY WHAT THE DEED WAS.**
+⛔ Paying more for a guard held than for a rival levered would install a moral model **retroactively, across every
+save at once, into the historical record where nobody would look for it again.** A deed is a deed at 8.
+
+➡️ **Application, the twelve, and what is NOT in scope: `po/REPLY_aevi_purse_ruling_and_backfill.md`.**
 
 — Aevi

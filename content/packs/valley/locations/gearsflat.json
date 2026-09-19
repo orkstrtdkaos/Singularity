@@ -6,7 +6,7 @@
  "communityId": "gearsflat",
  "spectrum": {
   "mechanical_spiritual": -0.4,
-  "order_chaos": 0.25
+  "chaos_order": 0.25
  },
  "tags": [
   "settlement",
@@ -72,5 +72,6 @@
  "tier": "settlement",
  "parentId": null,
  "role": "waypoint",
- "appearance": "Low workshops and open-sided sheds of corrugated iron and timber, packed between salvage yards stacked with sorted machinery. Chimneys, chain-hoists and gantries overhead. Oil-stained ground, crates, and parts laid out on trestles under awnings."
+ "appearance": "Low workshops and open-sided sheds of corrugated iron and timber, packed between salvage yards stacked with sorted machinery. Chimneys, chain-hoists and gantries overhead. Oil-stained ground, crates, and parts laid out on trestles under awnings.",
+ "_axisRenamed_20260919": "⛔ SNG-632 — `order_chaos` WAS A REVERSED DUPLICATE OF `chaos_order`. Found in Erik's own dev report from this morning: seven spectrum pushes dropped, one of them on `order_chaos`, and I assumed the GM had constructed the name backwards. ⚠️ IT HAD NOT. The name is in the AUTHORED WORLD — five locations and a craft — and the GM read it off the corpus correctly. ⛑ `chaos_order` is canonical (67 locations, and the only one the GM prompt offers); `order_chaos` had ZERO readers in the engine, so every value written under it was inert. ⛔ THE SIGN IS PRESERVED, NOT FLIPPED: `poleIntensity` derives `order` from it directly, so Plainstead's `order_chaos: 0.25` already meant `order: 0.25` — a town of square stone on a swept grid, mildly ordered. The rename keeps the meaning and gives it a reader."
 }

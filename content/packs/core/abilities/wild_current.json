@@ -499,7 +499,7 @@
    "tradition": "churnfolk",
    "attribute": "physical",
    "axes": {
-    "order_chaos": -0.7
+    "chaos_order": -0.7
    },
    "functions": [
     "travel",
@@ -610,5 +610,6 @@
  ],
  "_namingSOP": "⛔ SNG-461 / SYSTEM_SPEC §31: article removed from craft and rank names except where it names a singular known thing or is the joke.",
  "_gainAxes": "⛔ SNG-468: `gainAxes` derived per rank from the rank's own text. ⚠️ MY MATRIX HAD BEEN READING UNPOPULATED RANKS AS 'ADDS NOTHING' — Erik caught it on Borrowed Form, whose ranks are an hour / a day plus a passenger / the whole party. THE SKILL WAS FINE; THE INSTRUMENT WAS BROKEN.",
- "_headerNote": "⚠️ SNG-535: this file's header still names `wild_current`, which is now a NAMED COMBINATION rather than a source. ⛔ Per CCODE-217 the ability wins, so the header is descriptive; kept because the file IS that current's crafts."
+ "_headerNote": "⚠️ SNG-535: this file's header still names `wild_current`, which is now a NAMED COMBINATION rather than a source. ⛔ Per CCODE-217 the ability wins, so the header is descriptive; kept because the file IS that current's crafts.",
+ "_axisRenamed_20260919": "⛔ SNG-632 — `order_chaos` WAS A REVERSED DUPLICATE OF `chaos_order`. Found in Erik's own dev report from this morning: seven spectrum pushes dropped, one of them on `order_chaos`, and I assumed the GM had constructed the name backwards. ⚠️ IT HAD NOT. The name is in the AUTHORED WORLD — five locations and a craft — and the GM read it off the corpus correctly. ⛑ `chaos_order` is canonical (67 locations, and the only one the GM prompt offers); `order_chaos` had ZERO readers in the engine, so every value written under it was inert. ⛔ THE SIGN IS PRESERVED, NOT FLIPPED: `poleIntensity` derives `order` from it directly, so Plainstead's `order_chaos: 0.25` already meant `order: 0.25` — a town of square stone on a swept grid, mildly ordered. The rename keeps the meaning and gives it a reader."
 }

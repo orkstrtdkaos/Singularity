@@ -6,8 +6,8 @@
  "communityId": "stair_hollow",
  "spectrum": {
   "demonic_angelic": 0.35,
-  "order_chaos": 0.3,
-  "falsehood_truth": 0.3
+  "falsehood_truth": 0.3,
+  "chaos_order": 0.3
  },
  "tags": [
   "settlement",
@@ -74,5 +74,6 @@
  "tier": "settlement",
  "parentId": null,
  "role": "waypoint",
- "appearance": "A hollow beneath a great rising stair, filled with low halls of dressed stone, their doorways deep-set and heavily lintelled. Registries and oath-halls open onto a paved court. Stacked record-boxes visible through open shutters."
+ "appearance": "A hollow beneath a great rising stair, filled with low halls of dressed stone, their doorways deep-set and heavily lintelled. Registries and oath-halls open onto a paved court. Stacked record-boxes visible through open shutters.",
+ "_axisRenamed_20260919": "⛔ SNG-632 — `order_chaos` WAS A REVERSED DUPLICATE OF `chaos_order`. Found in Erik's own dev report from this morning: seven spectrum pushes dropped, one of them on `order_chaos`, and I assumed the GM had constructed the name backwards. ⚠️ IT HAD NOT. The name is in the AUTHORED WORLD — five locations and a craft — and the GM read it off the corpus correctly. ⛑ `chaos_order` is canonical (67 locations, and the only one the GM prompt offers); `order_chaos` had ZERO readers in the engine, so every value written under it was inert. ⛔ THE SIGN IS PRESERVED, NOT FLIPPED: `poleIntensity` derives `order` from it directly, so Plainstead's `order_chaos: 0.25` already meant `order: 0.25` — a town of square stone on a swept grid, mildly ordered. The rename keeps the meaning and gives it a reader."
 }

@@ -326,16 +326,47 @@
    ],
    "_ladder": "⚠️ ERIK RULES THE NUMBERS; this is the first cut, and it is checked against live play rather than invented: Threshold Post at 7 features is a hamlet; **Stillwater's Trouble at 19 is a keep**; The Fell Pell at 6 is a steading or a hamlet. ⛑ **The ladder should ratify what the world already built, not contradict it.**",
    "promotion": "⛔ A HOLD ADVANCES WHEN IT HAS OUTGROWN ITS RUNG, not when it is bought up. ⛑ The honest trigger is the one the data already has: **when the features it carries reach the next rung's slots, the kind is wrong and should move.** ⚠️ A hold that has filled every slot is a hold asking to be promoted, and a hold sitting at half its room is not. ⬜ CCode: the promotion should be OFFERED rather than applied — a player naming their own village a town is a beat, and it is theirs.",
-   "bounded": {
-    "annex": 2,
-    "longship": 3,
-    "hull": 3,
-    "citadel": 5,
-    "tower_room": 1
-   },
-   "_bounded": "⛔ AND SOME HOLDS NEVER ADVANCE, WHICH IS THE OTHER HALF OF ERIK'S RULING: 'sometimes space is constrained — a ship, Loki's standing annex, a floating citadel.' ⚠️ **A bounded hold has a hard ceiling and no rung above it** — not because it is small, but because THE ROOM IS NOT THE HOLD'S TO TAKE. Loki's Standing Annex is two rooms inside somebody else's building; a hull is a hull; a floating citadel cannot annex the air. ⛑ **THE CONSTRAINT IS NOT A PENALTY AND MUST NOT READ AS ONE** — SNG-628: a longship trades room for movement, trade and landing a band, and each of those is worth more than a rung.",
    "earnedNotBought": "⛔ ROOM IS WON, NEVER PURCHASED. A rung is reached by what the hold has become — people living there, work being done, a season survived at thriving, a Mason's craft spent on the GROUND rather than on a feature. ⚠️ **If a rung can be bought the ladder collapses into money and the hold stops needing to grow.**",
-   "theRefusalIsTheFeature": "⛑ When there is no room the build is refused, and the refusal must name BOTH ways out: what would have to go, and **what the hold would have to become.** ⚠️ 'No room' is a dead end; 'no room — this is a hamlet, and a village has four more' is a goal."
+   "theRefusalIsTheFeature": "⛑ When there is no room the build is refused, and the refusal must name BOTH ways out: what would have to go, and **what the hold would have to become.** ⚠️ 'No room' is a dead end; 'no room — this is a hamlet, and a village has four more' is a goal.",
+   "_twoAxes_20260918": "⛔ ERIK, CORRECTING MY THIRD CUT: 'the Standing Annex is a MACHINE that has rooms. It travels — and it is EXPANDABLE WITH THE RIGHT TECH. Just like boats can sail, floating castles can fly, great machines can walk across the land… or many places really, if they're adaptable.' ⛑ SO THERE ARE TWO AXES AND I HAD COLLAPSED THEM INTO ONE. **A rooted hold grows by RUNG. A hold that moves is limited by its FRAME — and a frame is an engineering problem, not a category.** ⚠️ I had `bounded: {annex: 2}` and called it 'room that is not the hold's to take'. **The Standing Annex is `moves: powered`, `speed: 0.8`, described as a floating walking tower on legs.** Nobody else's building is involved. It is small because nobody has built it bigger yet.",
+   "frames": {
+    "_what": "⛑ WHAT CARRIES THE HOLD, AND HOW MUCH IT WILL BEAR. A frame is the mobile counterpart of a rung: it sets room, and it is RAISED BY ENGINEERING rather than by growth. ⚠️ `carriage.moves` already names five ways to move — crewed, powered, drifting, living, willed — and the frame is what each of them is moving.",
+    "kinds": {
+     "hull": {
+      "slots": 3,
+      "moves": "crewed",
+      "raisedBy": "a deeper draught, a second hull, a shipwright's craft spent on the frame",
+      "_why": "A longship. `hullable: false` on nine features is already the engine refusing to put a mine on a boat."
+     },
+     "legs": {
+      "slots": 2,
+      "moves": "powered",
+      "raisedBy": "ordered-nanite work on the frame, a Gearlands enginewright, a Precursor gait salvaged and fitted",
+      "_why": "⛔ THE STANDING ANNEX. Two rooms today and a walking machine underneath them — **its ceiling is what the legs will carry, and legs can be rebuilt.** ⚠️ This is the one that made Erik correct me: I read small and assumed borrowed."
+     },
+     "lift": {
+      "slots": 4,
+      "moves": "drifting",
+      "raisedBy": "more lift — worked light, a wider envelope, a second bearing surface",
+      "_why": "A floating citadel. It cannot annex the air, but it can carry more of it."
+     },
+     "grown": {
+      "slots": 5,
+      "moves": "living",
+      "raisedBy": "the thing itself growing, which takes seasons and cannot be hurried",
+      "_why": "⚠️ An Ent, a walking grove. The only frame that raises itself, on its own clock, and asks nobody."
+     },
+     "borne": {
+      "slots": 6,
+      "moves": "willed",
+      "raisedBy": "⛔ nothing you can build. The bearer decides, and may refuse, and may leave",
+      "_why": "A dragon. `carriage._willWhy` already rules that a willed carriage asks its bearer and can be refused."
+     }
+    },
+    "_raisingAFrame": "⛔ A FRAME IS RAISED BY TECH AND CRAFT, NOT BY RUNG. A hold that has walked for a season is not therefore bigger — somebody has to build it bigger. ⛑ **That is the whole difference between the two axes**: a village becomes a town by being lived in, and a walking machine becomes a larger walking machine by being worked on.",
+    "_andAnythingAdaptableCanMove": "⛑ ERIK: 'or many places really, if they're adaptable.' ⛔ **MOBILITY IS NOT A KIND OF HOLD — IT IS A FRAME FITTED TO ONE.** A steading that gets legs is a steading that walks, and it keeps its rung; what changes is that its room is now the lesser of the two. ⚠️ **A hold that moves is limited by whichever is smaller, its rung or its frame** — which is why a stronghold on legs is mostly a stronghold that had to leave things behind."
+   },
+   "_readingTheRung": "⛔ A HOLD'S RUNG IS THE SMALLEST ONE THAT FITS WHAT IT ALREADY HAS, not the largest one it has filled. ⚠️ I got this backwards on first reading and three live holds came out over capacity — Stillwater's Trouble showed as a town with 19 features against 16 slots. **Read the other way it is a keep, and it fits.** ⛑ Checked across every hold in play: Threshold Post and the Fell Pell and the Made Gate are hamlets, Whistling Woman is a steading, Stillwater's Trouble is a keep, and the Standing Annex is a post on legs. **Nothing is over its room, which is the test the ladder had to pass.**"
   },
   "_theLongship_20260918": "⛔ ERIK: 'limited space on a longship for features — but a longship can MOVE and has unique advantages with trading and carrying troops.' ⛑ SHE IS `bounded: hull`, cap 3 — and bounded is the SITE's property, not the kind's, which is the whole correction. ⚠️ TWO THIRDS OF HER IS ALREADY BUILT AND UNUSED: `hullable` is a BLOCKLIST `carriage.js:214` already reads — mine, quarry, waygate, gate, keep, ward-line, muster yard, grave-ground and reclamation bowl declare `hullable: false`, so **the engine already knows you cannot put a mine on a boat** — and `producesWhileMoving` on 13 features says what still works under way. SNG-591's carriage layer is authored and `moves: crewed` is exactly a longship. **What was missing was the count.** ⛔ HER THREE ADVANTAGES, EACH OF WHICH MUST BE REAL OR NOBODY SAILS ONE TWICE. **She arrives.** **She arbitrages** — buy where a good is surplus, sell where it is short, which a fixed `market` can never do: a market sets a price, a longship carries one. **And she lands a band**, which is where SNG-627's `housing` property earns itself: barracks on a hull is a band that arrives together, and 'troops can be put to work' is worth far more when the work is a coast away."
  },

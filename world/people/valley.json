@@ -373,9 +373,10 @@
         "day": 42,
         "changed": "came back changed"
       },
-      "woundedUntilDay": 54,
-      "woundedBy": "sunwrack_valen",
-      "atWorldDay": 46,
+      "woundedUntilDay": 89,
+      "woundedBy": "the_starless",
+      "sinceWorldDay": 81,
+      "atWorldDay": 81,
       "fateBy": {
         "characterId": "char-mrhs8286",
         "name": "Silas Weir"
@@ -402,17 +403,20 @@
       }
     },
     "the_one_called_zeus": {
-      "status": "active",
+      "status": "stopped",
       "diedWorldDay": 76,
       "killedBy": "sunwrack_valen",
       "returnedFromDeath": {
         "day": 80,
         "changed": "came back changed"
       },
-      "atWorldDay": 80,
+      "sinceWorldDay": 81,
+      "stoppedUntilDay": 84,
+      "stoppedBy": "sunwrack_valen",
+      "atWorldDay": 81,
       "fateBy": {
-        "characterId": "char-mr5ns3hh",
-        "name": "Adelheid"
+        "characterId": "char-mrhs8286",
+        "name": "Silas Weir"
       }
     },
     "the_one_called_loki": {

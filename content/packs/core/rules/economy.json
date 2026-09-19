@@ -189,7 +189,8 @@
   },
   "upkeepByKind": {
    "enterprise": 4,
-   "post": 0
+   "post": 0,
+   "longship": 6
   },
   "upkeepCurrency": "crystal",
   "unitWorthBand": "useful",
@@ -278,7 +279,20 @@
    "maxHands": 3,
    "garrisonUpkeepPerHand": 3,
    "groundYieldWeight": 0.5
-  }
+  },
+  "slots": {
+   "_statement": "⛔ ERIK 2026-09-18: 'I want the holds themselves to need to grow. A brand new hold will start with a few features available, but one that has been built up, or started in an old fortress, would have plenty of open feature slots. **Sometimes there's just not the room.**' ⛑ ROOM IS THE GROWTH AXIS THE HOLD LAYER DID NOT HAVE. Nothing in `holdings.js` caps features today, so the only limit on a hold is what you can afford to keep — and **a hold that can hold everything is a hold with no shape.**",
+   "byKind": {
+    "post": 2,
+    "enterprise": 4,
+    "ruin": 8,
+    "longship": 3
+   },
+   "_byKind": "⚠️ ERIK RULES THE NUMBERS; these are the first cut. A new post is somewhere to stand and almost nothing else. ⛔ THE RUIN IS THE INTERESTING ONE — it is the only way in the world to start with room you did not earn, and what you inherit is SPACE rather than walls, which is why a taken ruin is a project and not a prize.",
+   "earnedNotBought": "⛔ SLOTS ARE WON AND NEVER PURCHASED. Clearing more of a ruin, a Mason's craft spent on the GROUND rather than on a feature, a holding that survives a season at thriving. ⚠️ **If room can be bought the axis collapses back into money and the hold stops needing to grow.**",
+   "theRefusalIsTheFeature": "⛑ When there is no room the build is refused — and the refusal must NAME WHAT WOULD HAVE TO GO. ⚠️ A player choosing between a forge and an infirmary is playing the hold layer; a player who builds both is decorating. **A choice needs both sides visible or it reads as a bug.**"
+  },
+  "_theLongship_20260918": "⛔ ERIK: 'limited space on a longship for features — but a longship can MOVE and has unique advantages with trading and carrying troops.' ⛑ THREE SLOTS AND NINE FEATURES SHE CAN NEVER CARRY, against three things no fixed hold can do. ⚠️ AND TWO THIRDS OF IT IS ALREADY BUILT AND UNUSED: `hullable` is a BLOCKLIST that `carriage.js:214` already reads — mine, quarry, waygate, gate, keep, ward-line, muster yard, grave-ground and reclamation bowl declare `hullable: false`, so **the engine already knows you cannot put a mine on a boat** — and `producesWhileMoving` on 13 features already says what still works under way. SNG-591's carriage layer is authored and `moves: crewed` is exactly a longship. **What was missing was the count.** ⛔ THE THREE ADVANTAGES, AND EACH MUST BE REAL OR NOBODY SAILS ONE TWICE. **She arrives** — a hold that comes to you is worth what no fixed hold can be. **She arbitrages** — buy where a good is surplus, sell where it is short, which a fixed `market` can never do: a market sets a price, a longship carries one. **And she lands a band** — which is where SNG-627's `housing` property earns itself, because barracks on a hull is a band that arrives together, and 'troops can be put to work' is worth far more when the work is a coast away."
  },
  "debts": {
   "note": "✅ Q5-B (SPEC_debts_and_reception, Erik: option B — a PAYABLE debt, and 'tie in the local authority NPC… THEM that will remember what you did… depending on who they are'). worldState.debts[holderId] is held by a NAMED NPC; escalation is THEIR choice: only a holder whose reactsToReputation carries one of escalatingTags acts, one step per escalateAfterDays, up to maxEscalation (1: received colder · 2: refused — no trade, hire or shelter). 3 (a bounty) and 4 (a hit squad) are NOT built — they need an encounter and contingentsFromPeople, and are Aevi's and Erik's to shape. A debt clears three ways: paid (debtOps settle — the purse is debited), a deed (debtOps forgive — the GM says what outweighed it), or the holder dies or departs. Never in coin.",
@@ -960,6 +974,21 @@
     "property": "training",
     "variantOf": "muster_yard",
     "_why": "⛑ A variant of the muster yard for a hold with no band yet: the same training property, and the yard is what a band forms ON."
+   },
+   "longship_deck": {
+    "build": {
+     "goods": {
+      "raw_material": 10
+     },
+     "days": 12
+    },
+    "upkeep": 1,
+    "family": "people",
+    "label": "deck space — cleared, and worth more than it looks",
+    "property": "housing",
+    "residents": true,
+    "producesWhileMoving": true,
+    "_why": "⛑ SNG-628 — THE ONLY FEATURE THAT IS ROOM ITSELF. On a hull, cleared deck IS the resource, and this is the one build that buys a slot rather than filling one. ⚠️ It is the exception that proves `earnedNotBought`: you are not buying room, you are giving up the thing that was in it."
    }
   },
   "_kindsExtended_20260905": "⚑ AEVI EXTENDED THE KINDS, per CCode: 'Aevi extends the kinds and their flavour; Erik turns the numbers.' +18 kinds, taking the catalogue to 33. ⛔ EVERY ONE NAMES ONE EFFECT THE ENGINE ALREADY READS — nothing here needs a new reader. ⚠️ THREE ADDITIONS CARRY A FLAG THAT DOES: `attends: true` on `temple_to_attending` and `grave_ground`. ⛔ R29 MADE ATTENDING THE MECHANISM AND `the_gathering` STARVES WHERE ENDINGS ARE ATTENDED — so a hold that attends its dead should starve it in its reach. That is the ONE new reader worth asking for, and it is a bestiary term, not an economy one. ⚑ `temple_to_attending` IS ERIK'S OWN EXAMPLE from the Threshold Post. `ward_line` and `sentries` are the Stillwater's Trouble pair — 'barriers, a wall, skeletal undead sentries.' ⚠️ `market` carries `trade: true` and `infirmary`/`longhouse` carry `residents: true`; both are flags for pass three, not readers yet. ⬜ `keep` at defence 3 is the ceiling on purpose — a hold should never be un-raidable, and `minTakeShare: 0.1` already guarantees a raid takes something.",

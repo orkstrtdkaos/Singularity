@@ -20990,7 +20990,7 @@ console.log("\n── §289 · a companion's level, and what a unit carries ─�
     travellers.push({ who: c.name, id, level: F289.levelOfPerson(c, id, o289), theirs: Number(c.level) || 0 });
   }
   check("§289: ⛔ A COMPANION STANDS AT THE LEVEL OF THE CHARACTER THEY TRAVEL WITH — ⚑ Erik saw it: Maren (Marrow) Ossitide, a legendary Ashwarden warden travelling with a level-33 Silas, priced at 15 on the band screen, and the other EIGHT companions priced at 0 because `content.companions` was never a source for a level at all",
-    travellers.length > 0 && travellers.every(t => t.level === t.theirs),
+    travellers.length > 0 && travellers.every(t => t.level >= t.theirs),   /* ⚠️ CCODE-451: the RULE is a floor — a companion who is also a person stands at their own level when it is higher (Maren, 63 beside a level-33 Silas) */
     JSON.stringify(travellers.map(t => `${t.who}/${t.id}: ${t.level} vs ${t.theirs}`)));
   check("§289: ⛔ …AND THE RULE IS NOT MINE — `presenceSheet` already states it where companions FIGHT: 'a modest floor that scales with the character they travel with, because a companion of a level-9 character is not a level-1 bystander.' This is that rule reaching the roster",
     /a companion of a level-9 character is not a level-1 bystander/.test(rd("engine/combatants.js"))
@@ -23440,6 +23440,24 @@ console.log("\n── §328 · a companion on the company roster is one person i
     && engineCount === 3 && engineSplit.everyoneActs && engineSplit.folded.length === 0 && panelSplit.everyoneActs
     && ML328.lineSplit(seat, { chosen: null, lead, presentCount: present.length }).folded.length === 1,
     JSON.stringify({ engineCount, engine: engineSplit.why, withPlayerCounted: ML328.lineSplit(seat, { chosen: null, lead, presentCount: present.length }).why }));
+}
+
+// ══════════ §329 · CCODE-451 — A COMPANION WHO IS ALSO A PERSON IS AT LEAST THEMSELVES ══════════
+// Erik: "silas' save has Maren at lvl 33 but she's actually in the mid 60s". The companion branch returned the character's level (a floor)
+// before asking who she is — a legendary warden whose own derived level on world day 81 is 63.
+console.log("\n── §329 · a companion's level is the higher of the character's floor and who they are ──");
+{
+  const FL329 = await import("../engine/fellowship.js");
+  const { loadContentHeadless: lch329 } = await import("./headless_content.mjs");
+  const C329 = await lch329();
+  const who = { level: 33, companions: ["marrow", "aevi"], npcRegistry: { marrow: { name: "Maren (Marrow) Ossitide", aliases: ["Huginn", "Marrow", "Maren Ossitide"] } } };
+  const maren = FL329.levelOfPerson(who, "marrow", { content: C329, worldDay: 81 });
+  const aevi = FL329.levelOfPerson(who, "aevi", { content: C329, worldDay: 81 });
+  const young = FL329.levelOfPerson({ ...who, level: 70 }, "marrow", { content: C329, worldDay: 81 });
+  const F329 = rd("engine/fellowship.js").replace(/\r\n/g, "\n");
+  check("§329: ⛔ MAREN IS HERSELF — her record resolves to the legendary warden, and she stands at her own derived level (63 on world day 81), not Silas's 33; a companion who is nobody's record keeps the character's level as the floor; and the floor still lifts her beside a level-70 character",
+    maren >= 60 && maren < 70 && aevi === 33 && young === 70
+    && /return Math\.max\(entry \? derivedOf\(entry\) : 0, num\(character\?\.level, 0\) \|\| 0\);/.test(F329), JSON.stringify({ maren, aevi, young }));
 }
 
 /* ══════════ REPORT ══════════ */

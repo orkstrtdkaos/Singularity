@@ -67,20 +67,28 @@ export function levelOfPerson(character, id, { content = {}, worldDay = null, cf
   // ⚠️ THE RULE IS NOT MINE. `presenceSheet` already states it where companions fight: "a modest floor that scales with the character
   // they travel with, because a companion of a level-9 character is not a level-1 bystander." This is that rule, reaching the roster.
   // ⚠️ An authored level on the companion still wins — none of the nine carries one today, and the day one does it is theirs.
-  const travels = (character?.companions || []).some(x => String(x?.id || x) === String(id));
-  if (travels) {
-    const def = content?.companions?.[id] || null;
-    const own = num(def?.level, 0) || num(character?.npcRegistry?.[id]?.level, 0) || 0;
-    return own || (num(character?.level, 0) || 0);
-  }
   const npcs = content?.npcs || {};
-  const entry = character?.npcRegistry?.[id] || npcs[id] || character?.generated?.npc?.[id] || null;
-  if (!entry) return 0;
   const sheetCfg = cfg || content?.rules?.npcStanding || content?.rules?.resolution?.npcStanding || {};
   // ⛔ CCODE-411 — THE AUTHORED FIGURE IS FOUND THE WAY THE FIGHT FINDS IT, by `authoredFor`, not by the registry's id alone. ⚑ Halvex
   // Coil is filed on Loki's save as `churn-revel-orchestrator`, and Fendt on Usnea's as `fendt-filtration-engineer`: `npcs[id]` found
   // no authored record for either, so the roster priced them from the registry copy while the fight priced the man.
-  return num(derivedLevel(entry, { day: worldDay, cfg: sheetCfg, authored: authoredFor(entry, { npcs }) || npcs[id] || null }), 0) || 0;
+  const derivedOf = (entry) => num(derivedLevel(entry, { day: worldDay, cfg: sheetCfg, authored: authoredFor(entry, { npcs }) || npcs[id] || null }), 0) || 0;
+  const travels = (character?.companions || []).some(x => String(x?.id || x) === String(id));
+  if (travels) {
+    const def = content?.companions?.[id] || null;
+    const own = num(def?.level, 0) || num(character?.npcRegistry?.[id]?.level, 0) || 0;
+    if (own) return own;
+    // ⛔ CCODE-451 (Erik: "silas' save has Maren at lvl 33 but she's actually in the mid 60s") — A COMPANION WHO IS ALSO A PERSON IS AT
+    // LEAST THEMSELVES. The character's level is a FLOOR (CCODE-408: "a companion of a level-9 character is not a level-1 bystander"), and
+    // this branch returned the floor before asking who she is: her registry record resolves, by alias, to the authored legendary warden
+    // (`maren_ossitide`), whose own derived level on world day 81 is 63. The higher of the two, so the floor still holds for the eight
+    // companions who are nobody's record.
+    const entry = character?.npcRegistry?.[id] || null;
+    return Math.max(entry ? derivedOf(entry) : 0, num(character?.level, 0) || 0);
+  }
+  const entry = character?.npcRegistry?.[id] || npcs[id] || character?.generated?.npc?.[id] || null;
+  if (!entry) return 0;
+  return derivedOf(entry);
 }
 
 export function unitsOf(character, { cfg = null, content = null, worldDay = null } = {}) {
